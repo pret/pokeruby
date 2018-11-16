@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_TASKS_H
 #define GUARD_FIELD_TASKS_H
 
+#include "global.h"
+
 struct MetatileOffset {
     s8 x;
     s8 y;

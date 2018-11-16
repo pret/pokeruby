@@ -1,6 +1,8 @@
 #ifndef GUARD_DECORATION_INVENTORY_H
 #define GUARD_DECORATION_INVENTORY_H
 
+#include "global.h"
+
 void ClearDecorationInventories(void);
 s8 FindFreeDecorationInventorySlot(u8);
 u8 InventoryContainsDecoration(u8);

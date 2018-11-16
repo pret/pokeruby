@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_MENU_UTIL_H
 #define GUARD_SAVE_MENU_UTIL_H
 
+#include "global.h"
+
 void HandleDrawSaveWindowInfo(s16 left, s16 top);
 void HandleCloseSaveWindow(u16 left, u16 top);
 u8 IsResizeSaveWindowEnabled(void);

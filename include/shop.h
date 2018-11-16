@@ -1,6 +1,8 @@
 #ifndef GUARD_SHOP_H
 #define GUARD_SHOP_H
 
+#include "global.h"
+
 enum
 {
     MART_TYPE_0, // normal mart

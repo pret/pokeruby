@@ -1,6 +1,8 @@
 #ifndef GUARD_INTRO_CREDITS_GRAPHICS_H
 #define GUARD_INTRO_CREDITS_GRAPHICS_H
 
+#include "global.h"
+
 extern const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet[];
 extern const struct CompressedSpriteSheet gIntro2MaySpriteSheet[];
 extern const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet[];

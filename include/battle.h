@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
+#include "global.h"
+
 #include "sprite.h"
 #include "constants/battle_constants.h"
 #include "battle_setup.h"

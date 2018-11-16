@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
+#include "global.h"
+
 enum
 {
     PBLOCK_CLR_RED = 1,

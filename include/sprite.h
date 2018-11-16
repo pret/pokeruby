@@ -1,6 +1,8 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#include <gba/gba.h>
+
 #define MAX_SPRITES 64
 
 struct SpriteSheet

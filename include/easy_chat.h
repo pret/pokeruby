@@ -1,6 +1,8 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
+#include "global.h"
+
 struct Sprite;
 
 struct UnknownEasyChatStruct1

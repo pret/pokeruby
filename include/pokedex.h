@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 #define HOENN_DEX_COUNT 202

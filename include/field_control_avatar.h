@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDCONTROLAVATAR_H
 #define GUARD_FIELDCONTROLAVATAR_H
 
+#include "global.h"
+
 struct FieldInput
 {
     u8 pressedAButton:1;

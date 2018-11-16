@@ -1,6 +1,8 @@
 #ifndef GUARD_STRINGS_H
 #define GUARD_STRINGS_H
 
+#include "global.h"
+
 // placeholder strings
 extern const u8 gExpandedPlaceholder_Empty[];
 extern const u8 gExpandedPlaceholder_Kun[];

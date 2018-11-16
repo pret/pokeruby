@@ -1,6 +1,8 @@
 #ifndef GUARD_NEW_GAME_H
 #define GUARD_NEW_GAME_H
 
+#include "global.h"
+
 extern u8 gUnknown_020297ED;
 
 void write_word_to_mem(u32 var, u8 *dataPtr);

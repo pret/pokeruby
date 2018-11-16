@@ -1,6 +1,8 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
+#include "global.h"
+
 #include "task.h"
 
 enum DecorPerm {

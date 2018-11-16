@@ -1,6 +1,8 @@
 #ifndef GUARD_ROULETTE_UTIL_H
 #define GUARD_ROULETTE_UTIL_H
 
+#include "global.h"
+
 #include "roulette.h"
 
 void sub_8124918(struct UnkStruct0 *);

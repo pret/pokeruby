@@ -1,6 +1,8 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
+#include <gba/gba.h>
+
 enum
 {
     CONNECTION_SOUTH = 1,

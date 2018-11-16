@@ -1,5 +1,7 @@
 #ifndef GUARD_FIELDMAP2_H
 #define GUARD_FIELDMAP2_H
+
+#include "global.h"
 #include "event_object_movement.h"
 
 #define NUM_TILES_IN_PRIMARY 512

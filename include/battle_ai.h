@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLEAI_H
 #define GUARD_BATTLEAI_H
 
+#include "global.h"
+
 enum
 {
     TARGET,

@@ -1,6 +1,8 @@
 #ifndef GUARD_HEATED_ROCK_H
 #define GUARD_HEATED_ROCK_H
 
+#include "global.h"
+
 // heated_rock (moves heated rock sprites)
 // Used in Eruption.
 

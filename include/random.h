@@ -1,6 +1,8 @@
 #ifndef GUARD_RANDOM_H
 #define GUARD_RANDOM_H
 
+#include "global.h"
+
 extern u32 gRngValue;
 
 //Returns a 16-bit pseudorandom number

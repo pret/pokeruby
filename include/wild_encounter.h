@@ -1,6 +1,8 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
+#include "global.h"
+
 struct WildPokemon
 {
     u8 minLevel;

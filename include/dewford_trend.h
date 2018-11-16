@@ -1,6 +1,8 @@
 #ifndef GUARD_DEWFORDTREND_H
 #define GUARD_DEWFORDTREND_H
 
+#include "global.h"
+
 void InitDewfordTrend(void);
 bool8 sub_80FA364(u16 *a);
 void sub_80FA4E4(void *, u32, u8);

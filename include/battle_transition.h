@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
+#include "global.h"
+
 void BattleTransition_StartOnField(u8 transitionID);
 void BattleTransition_Start(u8 transitionID);
 bool8 IsBattleTransitionDone(void);

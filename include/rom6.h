@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM6_H
 #define GUARD_ROM6_H
 
+#include "global.h"
+
 extern struct MapPosition gPlayerFacingPosition;
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);

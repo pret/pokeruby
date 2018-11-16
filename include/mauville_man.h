@@ -1,6 +1,8 @@
 #ifndef GUARD_MAUVILLE_OLD_MAN_H
 #define GUARD_MAUVILLE_OLD_MAN_H
 
+#include "global.h"
+
 #include "constants/mauville_man.h"
 
 void SetupMauvilleOldMan(void);

@@ -1,6 +1,8 @@
 #ifndef GUARD_UTIL_H
 #define GUARD_UTIL_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 //Extracts the upper 16 bits of a 32-bit number

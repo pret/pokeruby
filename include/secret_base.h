@@ -1,6 +1,8 @@
 #ifndef GUARD_SECRET_BASE_H
 #define GUARD_SECRET_BASE_H
 
+#include "global.h"
+
 // Maximum number of secret bases the game can store. This include 1 for the player, and up to 19 others from linked players.
 #define MAX_SECRET_BASES 20
 

@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEM_H
 #define GUARD_ITEM_H
 
+#include "global.h"
+
 typedef void (*ItemUseFunc)(u8);
 
 struct BagPocket

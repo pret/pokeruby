@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
+#include "global.h"
+
 // Ruby/Sapphire's save data is Flash 128K, which is 32 save sectors.
 #define NUM_SECTORS 32 // defined in agb_flash but not in a header
 

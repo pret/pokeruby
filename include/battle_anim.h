@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLEANIM_H
 #define GUARD_BATTLEANIM_H
 
+#include "global.h"
+
 #include "constants/battle_anim.h"
 
 #include "sprite.h"

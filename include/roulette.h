@@ -1,6 +1,8 @@
 #ifndef GUARD_ROULETTE_H
 #define GUARD_ROULETTE_H
 
+#include "global.h"
+
 struct UnkStruct1
 {
 	u16 var00;

@@ -1,6 +1,8 @@
 #ifndef GUARD_DECOMPRESS_H
 #define GUARD_DECOMPRESS_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 void LZDecompressWram(const void *src, void *dest);

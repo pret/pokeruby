@@ -1,6 +1,8 @@
 #ifndef GUARD_MORI_DEBUG_MENU_H
 #define GUARD_MORI_DEBUG_MENU_H
 
+#include "global.h"
+
 bool8 sub_8083D4C(void);
 u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr);
 u8 MoriDebugMenu_Egg(void);

@@ -1,6 +1,8 @@
 #ifndef GUARD_MATSUDADEBUG_H
 #define GUARD_MATSUDADEBUG_H
 
+#include "global.h"
+
 #define BIT(n) (1 << (n))
 
 void sub_80AA280(u8);

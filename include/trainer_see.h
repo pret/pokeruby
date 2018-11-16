@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINER_SEE_H
 #define GUARD_TRAINER_SEE_H
 
+#include "global.h"
+
 #include "sprite.h"
 #include "task.h"
 

@@ -1,6 +1,8 @@
 #ifndef GUARD_EWRAM_H
 #define GUARD_EWRAM_H
 
+#include "global.h"
+
 extern u8 gSharedMem[];
 #define ewram_addr 0x02000000 // used in gSharedMem addr hacks
 

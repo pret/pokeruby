@@ -1,6 +1,8 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H
 
+#include "global.h"
+
 #define CHAR_SPACE          0x00
 #define CHAR_LV             0x34
 #define CHAR_SONG_WORD_SEPARATOR 0x37  // separates words in the bard song. Not sure if it's used for anything else

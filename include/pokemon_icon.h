@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_ICON_H
 #define GUARD_POKEMON_ICON_H
 
+#include "global.h"
+
 extern const u8 * const gMonIconTable[];
 extern const u8 gMonIconPaletteIndices[];
 

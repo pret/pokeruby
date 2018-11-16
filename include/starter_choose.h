@@ -1,6 +1,8 @@
 #ifndef GUARD_STARTER_CHOOSE_H
 #define GUARD_STARTER_CHOOSE_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 extern const u16 gBirchBagGrassPal[2][16];

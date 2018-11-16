@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_CAMERA_H
 #define GUARD_FIELD_CAMERA_H
 
+#include "global.h"
+
 struct FieldCamera
 {
     void (*callback)(struct FieldCamera *);

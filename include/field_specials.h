@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_SPECIALS_H
 #define GUARD_FIELD_SPECIALS_H
 
+#include "global.h"
+
 struct ElevatorMenu {
     u8 var0;
     s8 var1;

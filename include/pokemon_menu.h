@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_MENU_H
 #define GUARD_POKEMON_MENU_H
 
+#include "global.h"
+
 #include "menu.h"
 
 #define POKEMENU_FIRST_FIELD_MOVE_ID 10

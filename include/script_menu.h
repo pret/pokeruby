@@ -1,6 +1,8 @@
 #ifndef GUARD_SCRIPTMENU_H
 #define GUARD_SCRIPTMENU_H
 
+#include "global.h"
+
 struct MenuAction;
 
 extern const u8 *const gUnknown_083CE048[];

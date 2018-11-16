@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_STORAGE_SYSTEM_H
 #define GUARD_POKEMON_STORAGE_SYSTEM_H
 
+#include "global.h"
+
 #include "pc_screen_effect.h"
 #include "mon_markings.h"
 

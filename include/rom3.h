@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM3_H
 #define GUARD_ROM3_H
 
+#include "global.h"
+
 struct HpAndStatus
 {
     u16 hp;

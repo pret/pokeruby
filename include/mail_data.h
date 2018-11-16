@@ -1,6 +1,8 @@
 #ifndef GUARD_MAIL_DATA_H
 #define GUARD_MAIL_DATA_H
 
+#include "global.h"
+
 void ClearMailData(void);
 void ClearMailStruct(struct MailStruct *);
 void ClearMailStruct(struct MailStruct *);

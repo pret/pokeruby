@@ -1,6 +1,8 @@
 #ifndef GUARD_RECORD_MIXING_H
 #define GUARD_RECORD_MIXING_H
 
+#include "global.h"
+
 #include <stddef.h>
 
 void sub_80B929C(void);

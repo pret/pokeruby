@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_FADETRANSITION_H
 #define GUARD_FIELD_FADETRANSITION_H
 
+#include "global.h"
+
 void palette_bg_fill_white(void);
 void palette_bg_fill_black(void);
 void pal_fill_black(void);

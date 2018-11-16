@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEM_MENU_H
 #define GUARD_ITEM_MENU_H
 
+#include "global.h"
+
 #include "string_util.h"
 
 enum

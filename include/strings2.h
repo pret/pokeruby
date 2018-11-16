@@ -1,6 +1,8 @@
 #ifndef GUARD_STRINGS2_H
 #define GUARD_STRINGS2_H
 
+#include "global.h"
+
 // ???
 extern const u8 gOtherText_TopSpeed[];
 

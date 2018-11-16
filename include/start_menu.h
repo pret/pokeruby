@@ -1,6 +1,8 @@
 #ifndef GUARD_START_MENU_H
 #define GUARD_START_MENU_H
 
+#include "global.h"
+
 extern u8 (*gMenuCallback)(void);
 
 //Public functions

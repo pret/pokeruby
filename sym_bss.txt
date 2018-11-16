@@ -46,6 +46,7 @@ unk_debug_bss_3 = .;
 . = ALIGN(4); src/player_pc.o(.bss);
 . = ALIGN(4); src/debug/nakamura_debug_menu.o(.bss);
 . = ALIGN(4); *libm4a.a:m4a_1.o(.bss);
+. = ALIGN(4); *libm4a.a:m4a_2.o(.bss);
 . = ALIGN(4); *libagb_flash.a:agb_flash.o(.bss);
 . = ALIGN(4); *libsiirtc.a:siirtc.o(.bss);
 . = ALIGN(4); *libgcc.a:dp-bit.o(.bss);

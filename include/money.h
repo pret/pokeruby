@@ -1,6 +1,8 @@
 #ifndef GUARD_MONEY_H
 #define GUARD_MONEY_H
 
+#include "global.h"
+
 bool8 IsEnoughMoney(u32, u32);
 void AddMoney(u32 *, u32);
 void RemoveMoney(u32 *, u32);

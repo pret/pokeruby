@@ -1,6 +1,8 @@
 #ifndef GUARD_SCRIPTPOKE80C4_H
 #define GUARD_SCRIPTPOKE80C4_H
 
+#include "global.h"
+
 void sub_80C5190(u8);
 void sub_80C5580(void);
 void SetBattleTowerPlayerParty(void);

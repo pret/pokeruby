@@ -1,6 +1,8 @@
 #ifndef GUARD_CONTEST_LINK_80C2020_H
 #define GUARD_CONTEST_LINK_80C2020_H
 
+#include "global.h"
+
 void sub_80C2358(void);
 void sub_80C46EC(void);
 void sub_80C4740(void);

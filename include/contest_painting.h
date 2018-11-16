@@ -1,6 +1,8 @@
 #ifndef GUARD_CONTESTPAINTING_H
 #define GUARD_CONTESTPAINTING_H
 
+#include "global.h"
+
 #define MOSAIC_BIT_BG_HSIZE (0)
 #define MOSAIC_BIT_BG_VSIZE (4)
 #define MOSAIC_BIT_OBJ_HSIZE (8)

@@ -1,6 +1,8 @@
 #ifndef GUARD_TITLE_SCREEN_H
 #define GUARD_TITLE_SCREEN_H
 
+#include "global.h"
+
 void sub_8072E74(void);
 void cur_mapheader_run_tileset_funcs_after_some_cpuset(void);
 void sub_8072ED0(void);

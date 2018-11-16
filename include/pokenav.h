@@ -1,6 +1,8 @@
 #ifndef GUARD_POKENAV_H
 #define GUARD_POKENAV_H
 
+#include "global.h"
+
 #include "region_map.h"
 #include "mon_markings.h"
 

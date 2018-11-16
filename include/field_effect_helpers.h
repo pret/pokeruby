@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_EFFECT_HELPERS_H
 #define GUARD_FIELD_EFFECT_HELPERS_H
 
+#include "global.h"
+
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
 void sub_812869C(struct EventObject *);

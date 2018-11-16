@@ -1,6 +1,8 @@
 #ifndef GUARD_MYSTERY_EVENT_MSG_H
 #define GUARD_MYSTERY_EVENT_MSG_H
 
+#include "global.h"
+
 extern const u8 gOtherText_BerryObtainedDadHasIt[];
 extern const u8 gOtherText_BerryTransformed[];
 extern const u8 gOtherText_BerryAlreadyObtained[];

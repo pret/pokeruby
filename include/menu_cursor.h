@@ -1,6 +1,8 @@
 #ifndef GUARD_MENU_CURSOR_H
 #define GUARD_MENU_CURSOR_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 void sub_814A590(void);

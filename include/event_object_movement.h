@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENTOBJMV_H
 #define GUARD_EVENTOBJMV_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)

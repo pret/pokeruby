@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM_8077ABC_H
 #define GUARD_ROM_8077ABC_H
 
+#include "global.h"
+
 #include "sprite.h"
 #include "task.h"
 

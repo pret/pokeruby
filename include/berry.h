@@ -1,6 +1,8 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
+#include "global.h"
+
 #define BERRY_NAME_LENGTH 6
 #define BERRY_REGROW_LIMIT 10
 #define MAX_BERRY_TREES 128

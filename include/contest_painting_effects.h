@@ -1,6 +1,8 @@
 #ifndef GUARD_CUTE_SKETCH_H
 #define GUARD_CUTE_SKETCH_H
 
+#include "global.h"
+
 struct Unk03005E20
 {
     u8 var_0;

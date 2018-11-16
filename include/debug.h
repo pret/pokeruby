@@ -1,6 +1,8 @@
 #ifndef GUARD_DEBUG_H
 #define GUARD_DEBUG_H
 
+#include "global.h"
+
 struct UnkDebugMenu3Items {
     const u8 * text;
     size_t (*func)(u8 * dest);

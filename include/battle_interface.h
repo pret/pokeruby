@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_INTERFACE_H
 #define GUARD_BATTLE_INTERFACE_H
 
+#include "global.h"
+
 struct BattleInterfaceStruct1
 {
     s32 unk0;

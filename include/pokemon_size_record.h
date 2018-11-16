@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_SIZE_RECORD_H
 #define GUARD_POKEMON_SIZE_RECORD_H
 
+#include "global.h"
+
 void InitShroomishSizeRecord(void);
 void GetShroomishSizeRecordInfo(void);
 void CompareShroomishSize(void);

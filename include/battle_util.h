@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_UTIL_H
 #define GUARD_BATTLE_UTIL_H
 
+#include "global.h"
+
 #define BS_GET_TARGET                   0
 #define BS_GET_ATTACKER                 1
 #define BS_GET_EFFECT_BANK              2

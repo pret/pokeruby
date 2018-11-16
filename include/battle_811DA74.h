@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_811DA74_H
 #define GUARD_BATTLE_811DA74_H
 
+#include "global.h"
+
 void SetBankFuncToLinkPartnerBufferRunCommand(void);
 void LinkPartnerBufferRunCommand(void);
 void sub_811E0A0(void);

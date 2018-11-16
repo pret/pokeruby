@@ -1,6 +1,8 @@
 #ifndef GUARD_TASK_H
 #define GUARD_TASK_H
 
+#include "global.h"
+
 // general task defines
 #define TASK gTasks[taskId]
 #define FUNC func

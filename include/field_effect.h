@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_EFFECT_H
 #define GUARD_FIELD_EFFECT_H
 
+#include "global.h"
+
 #include "sprite.h"
 #include "task.h"
 

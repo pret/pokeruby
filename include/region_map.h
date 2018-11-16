@@ -1,6 +1,8 @@
 #ifndef GUARD_REGION_MAP_H
 #define GUARD_REGION_MAP_H
 
+#include "global.h"
+
 struct RegionMapLocation
 {
     u8 x, y;

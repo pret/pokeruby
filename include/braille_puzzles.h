@@ -1,6 +1,8 @@
 #ifndef GUARD_BRAILLEPUZZLES_H
 #define GUARD_BRAILLEPUZZLES_H
 
+#include "global.h"
+
 bool8 ShouldDoBrailleStrengthEffect(void);
 bool8 ShouldDoBrailleFlyEffect(void);
 void DoBrailleStrengthEffect(void);

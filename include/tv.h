@@ -1,6 +1,8 @@
 #ifndef GUARD_TV_H
 #define GUARD_TV_H
 
+#include "global.h"
+
 enum
 {
     TVSHOW_FAN_CLUB_LETTER = 1,

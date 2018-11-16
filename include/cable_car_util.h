@@ -1,6 +1,8 @@
 #ifndef GUARD_CABLE_CAR_UTIL_H
 #define GUARD_CABLE_CAR_UTIL_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

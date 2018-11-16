@@ -1,6 +1,8 @@
 #ifndef GUARD_HALL_OF_FAME_H
 #define GUARD_HALL_OF_FAME_H
 
+#include "global.h"
+
 void sub_8141F90(void);
 void sub_8143648(u16 paletteTag, u8 arg1);
 void sub_81428CC(void);

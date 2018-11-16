@@ -1,6 +1,8 @@
 #ifndef GUARD_SCRIPTPOKE80F9_H
 #define GUARD_SCRIPTPOKE80F9_H
 
+#include "global.h"
+
 struct UnknownStruct2018000
 {
     u8 filler0[0x8];

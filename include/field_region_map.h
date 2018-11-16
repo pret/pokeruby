@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_REGION_MAP_H
 #define GUARD_FIELD_REGION_MAP_H
 
+#include "global.h"
+
 void FieldInitRegionMap(void(void));
 void CB2_FieldInitRegionMap(void);
 void VBlankCB_FieldRegionMap(void);

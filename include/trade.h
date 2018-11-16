@@ -2,6 +2,8 @@
 #ifndef GUARD_TRADE_H
 #define GUARD_TRADE_H
 
+#include "global.h"
+
 struct TradeEwramSubstruct2 {
     /*0x0000*/ u8 filler_0000;
     /*0x0004*/ struct Window window;
