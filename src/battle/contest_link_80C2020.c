@@ -214,7 +214,7 @@ void sub_80C2144(void)
     u16 r6;
     u16 r3;
 
-    DmaFill32Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+    DmaFillLarge32(3, 0, VRAM, VRAM_SIZE, 0x1000);
     LZDecompressVram(gUnknown_08D1977C, BG_SCREEN_ADDR(0));
     LZDecompressVram(gUnknown_08D1A490, BG_SCREEN_ADDR(26));
     LZDecompressVram(gUnknown_08D1A364, BG_SCREEN_ADDR(28));

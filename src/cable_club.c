@@ -8,7 +8,7 @@
 #include "field_weather.h"
 #include "link.h"
 #include "load_save.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "palette.h"

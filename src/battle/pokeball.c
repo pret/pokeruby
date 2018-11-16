@@ -1,10 +1,10 @@
 #include "global.h"
-#include "gba/m4a_internal.h"
+#include <gba/m4a_internal.h>
 #include "battle.h"
 #include "battle_anim_813F0F4.h"
 #include "decompress.h"
 #include "graphics.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "pokeball.h"
 #include "pokemon.h"
@@ -17,7 +17,7 @@
 #include "util.h"
 #include "ewram.h"
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gBattleTypeFlags;
 extern u8 gBankTarget;
 extern u8 gActiveBattler;
@@ -732,11 +732,11 @@ static void sub_8046C78(struct Sprite *sprite)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 if (IsBGMPlaying())
-                    m4aMPlayStop(&gMPlay_BGM);
+                    m4aMPlayStop(&gMPlayInfo_BGM);
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
             }
         }
 

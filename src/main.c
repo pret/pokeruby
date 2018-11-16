@@ -1,17 +1,17 @@
 #include "global.h"
-#include "gba/flash_internal.h"
-#include "gba/m4a_internal.h"
+#include <gba/flash_internal.h>
+#include <gba/m4a_internal.h>
 #include "main.h"
 #include "intro.h"
 #include "link.h"
 #include "load_save.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "play_time.h"
 #include "random.h"
 #include "rom3.h"
 #include "overworld.h"
 #include "rtc.h"
-#include "siirtc.h"
+#include <siirtc.h>
 #include "sound.h"
 #include "scanline_effect.h"
 

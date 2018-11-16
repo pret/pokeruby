@@ -43,8 +43,8 @@
 #include "reset_rtc_screen.h"
 #include "pokeblock.h"
 #include "ewram.h"
-#include "gba/flash_internal.h"
-#include "gba/m4a_internal.h"
+#include <gba/flash_internal.h>
+#include <gba/m4a_internal.h>
 #include "berry_blender.h"
 
 extern void Debug_SetUpFieldMove_Cut(void);

@@ -7,7 +7,7 @@
 #include "battle_811DA74.h"
 #include "battle_anim_813F0F4.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "palette.h"
 #include "pokeball.h"

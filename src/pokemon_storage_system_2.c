@@ -1422,8 +1422,8 @@ void sub_8097DE0(void)
     gPokemonStorageSystemPtr->unk_0008 = 0;
     gPokemonStorageSystemPtr->unk_000a = 0;
     REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30);
-    DmaCopy16Defvars(3, gPokemonStorageScrollingBGTile, BG_SCREEN_ADDR(28), sizeof gPokemonStorageScrollingBGTile);
-    LZ77UnCompVram(gPokemonStorageScrollingBGTilemap, BG_SCREEN_ADDR(30));
+    DmaCopy16Defvars(3, gPokemonStorageScrollingBGTile, (void *)BG_SCREEN_ADDR(28), sizeof gPokemonStorageScrollingBGTile);
+    LZ77UnCompVram((const void *)gPokemonStorageScrollingBGTilemap, (void *)BG_SCREEN_ADDR(30));
     LoadPalette(gPokemonStorageScrollingBGPalette, 0xd0, 0x10);
 }
 
@@ -1439,9 +1439,9 @@ void sub_8097E44(void)
 
 void sub_8097E70(void)
 {
-    LZ77UnCompVram(gPSSMenuHeader_Gfx, BG_SCREEN_ADDR(10));
-    LZ77UnCompWram(gPSSMenuHeader_Tilemap, gUnknown_02039760);
-    sub_809D034(BG_SCREEN_ADDR(15), 0, 0, gUnknown_02039760, 0, 0, 10, 20);
+    LZ77UnCompVram((const void *)gPSSMenuHeader_Gfx, (void *)BG_SCREEN_ADDR(10));
+    LZ77UnCompWram((const void *)gPSSMenuHeader_Tilemap, gUnknown_02039760);
+    sub_809D034((void *)BG_SCREEN_ADDR(15), 0, 0, gUnknown_02039760, 0, 0, 10, 20);
     LoadPalette(gPSSMenu1_Pal, 0x10, 0x20);
     LoadPalette(gPSSMenu2_Pal, 0x00, 0x20);
     LoadPalette(gUnknown_083B6D74, 0xB0, 0x20);
@@ -1466,7 +1466,7 @@ void sub_8097F58(void)
     gPokemonStorageSystemPtr->unk_12ac->subpriority = 1;
     gPokemonStorageSystemPtr->unk_12ac->pos1.x = 0x28;
     gPokemonStorageSystemPtr->unk_12ac->pos1.y = 0x95;
-    gPokemonStorageSystemPtr->unk_12b8 = BG_CHAR_ADDR(4) + 32 * GetSpriteTileStartByTag(0x000d);
+    gPokemonStorageSystemPtr->unk_12b8 = (void *)BG_CHAR_ADDR(4) + 32 * GetSpriteTileStartByTag(0x000d);
 }
 
 const struct SpriteTemplate gSpriteTemplate_83B6EFC;
@@ -1707,7 +1707,7 @@ void sub_80981F0(u16 species, u32 pid)
         if (species != SPECIES_NONE)
         {
             HandleLoadSpecialPokePic(gMonFrontPicTable + species, gMonFrontPicCoords[species].coords, 1, (intptr_t)gPokemonStorageSystemPtr->unk_4784, gPokemonStorageSystemPtr->unk_2784, species, pid);
-            LZ77UnCompWram(gPokemonStorageSystemPtr->unk_11e8, gPokemonStorageSystemPtr->unk_2704);
+            LZ77UnCompWram((const void *)gPokemonStorageSystemPtr->unk_11e8, gPokemonStorageSystemPtr->unk_2704);
             CpuCopy32(gPokemonStorageSystemPtr->unk_2784, gPokemonStorageSystemPtr->unk_26fc, 0x800);
             LoadPalette(gPokemonStorageSystemPtr->unk_2704, gPokemonStorageSystemPtr->unk_26fa, 0x20);
             gPokemonStorageSystemPtr->unk_2700->invisible = FALSE;
@@ -1743,13 +1743,13 @@ void sub_8098350(void)
 
     if (gPokemonStorageSystemPtr->unk_11f0)
     {
-        sub_809D034(BG_SCREEN_ADDR(15), 1, 0, gUnknown_02039760, 1, 0, 8, 2);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 1, 0, gUnknown_02039760, 1, 0, 8, 2);
         for (i = 0; i < 2; i++)
             StartSpriteAnimIfDifferent(gPokemonStorageSystemPtr->unk_12b0[i], i * 2 + 1);
     }
     else
     {
-        sub_809D034(BG_SCREEN_ADDR(15), 1, 0, gUnknown_02039760, 10, 0, 8, 2);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 1, 0, gUnknown_02039760, 10, 0, 8, 2);
         for (i = 0; i < 2; i++)
             StartSpriteAnim(gPokemonStorageSystemPtr->unk_12b0[i], i * 2);
     }
@@ -1758,8 +1758,8 @@ void sub_8098350(void)
 void sub_8098400(void)
 {
     REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(15);
-    LZ77UnCompVram(gPSSMenuMisc_Gfx, BG_SCREEN_ADDR(13));
-    LZ77UnCompWram(gPSSMenuMisc_Tilemap, gPokemonStorageSystemPtr->unk_00a8);
+    LZ77UnCompVram((const void *)gPSSMenuMisc_Gfx, (void *)BG_SCREEN_ADDR(13));
+    LZ77UnCompWram((const void *)gPSSMenuMisc_Tilemap, gPokemonStorageSystemPtr->unk_00a8);
     LoadPalette(gPSSMenu3_Pal, 0x20, 0x20);
     LoadPalette(gPSSMenu4_Pal, 0x30, 0x20);
     DmaClear16(3, BG_SCREEN_ADDR(15), 0x800);
@@ -1768,11 +1768,11 @@ void sub_8098400(void)
     {
         sub_8098690(TRUE);
         sub_8099200(TRUE);
-        sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
     }
     else
     {
-        sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 20, 12, 2);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 20, 12, 2);
         sub_8098690(TRUE);
     }
     gPokemonStorageSystemPtr->unk_08af = 0;
@@ -1792,7 +1792,7 @@ bool8 sub_8098520(void)
         return FALSE;
     gPokemonStorageSystemPtr->unk_08a8--;
     gPokemonStorageSystemPtr->unk_08aa++;
-    sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, gPokemonStorageSystemPtr->unk_08a8, 12, gPokemonStorageSystemPtr->unk_08aa);
+    sub_809D034((void *)BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, gPokemonStorageSystemPtr->unk_08a8, 12, gPokemonStorageSystemPtr->unk_08aa);
     sub_80994A8(8);
     if (++gPokemonStorageSystemPtr->unk_08ad == 20)
     {
@@ -1815,15 +1815,15 @@ bool8 sub_80985CC(void)
         return FALSE;
     gPokemonStorageSystemPtr->unk_08a8++;
     gPokemonStorageSystemPtr->unk_08aa--;
-    sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, gPokemonStorageSystemPtr->unk_08a8, 12, gPokemonStorageSystemPtr->unk_08aa);
-    sub_809D16C(BG_SCREEN_ADDR(15), 10, gPokemonStorageSystemPtr->unk_08aa, 12, 1);
+    sub_809D034((void *)BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, gPokemonStorageSystemPtr->unk_08a8, 12, gPokemonStorageSystemPtr->unk_08aa);
+    sub_809D16C((void *)BG_SCREEN_ADDR(15), 10, gPokemonStorageSystemPtr->unk_08aa, 12, 1);
     sub_80994A8(-8);
     if (++gPokemonStorageSystemPtr->unk_08ad == 20)
     {
         gUnknown_0203847C = 0;
         sub_809954C();
         party_compaction();
-        sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 1, 2);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 1, 2);
         return FALSE;
     }
     return TRUE;
@@ -1832,9 +1832,9 @@ bool8 sub_80985CC(void)
 void sub_8098690(bool8 flag)
 {
     if (flag)
-        sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 9, 2);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 9, 2);
     else
-        sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 2, 9, 2);
+        sub_809D034((void *)BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 2, 9, 2);
 }
 
 void sub_80986E8(void)
@@ -1881,7 +1881,7 @@ void sub_8098780(void)
 void sub_80987DC(void)
 {
     sub_8098780();
-    sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
+    sub_809D034((void *)BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
 }
 
 void sub_809880C(void)

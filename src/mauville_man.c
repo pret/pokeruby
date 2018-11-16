@@ -5,7 +5,7 @@
 #include "constants/easy_chat.h"
 #include "event_data.h"
 #include "field_message_box.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "menu.h"
 #include "overworld.h"
 #include "random.h"
@@ -20,7 +20,7 @@
 
 #define MACRO1(a) (((a) % 4) + (((a) / 8) & 1))
 
-extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
 extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
@@ -651,8 +651,8 @@ static void BardSing(struct Task *task, struct BardSong *song)
                         song->pitch += 64;
                     else
                         song->pitch -= 64;
-                    m4aMPlayVolumeControl(&gMPlay_SE2, 0xFFFF, song->volume);
-                    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, song->pitch);
+                    m4aMPlayVolumeControl(&gMPlayInfo_SE2, 0xFFFF, song->volume);
+                    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, song->pitch);
                     song->voiceInflection++;
                 }
                 song->phonemeTimer--;
@@ -663,13 +663,13 @@ static void BardSing(struct Task *task, struct BardSong *song)
                 if (phoneme->sound <= 50)
                 {
                     song->volume = 0x100 + phoneme->volume * 16;
-                    m4aMPlayVolumeControl(&gMPlay_SE2, 0xFFFF, song->volume);
+                    m4aMPlayVolumeControl(&gMPlayInfo_SE2, 0xFFFF, song->volume);
                     song->pitch = 0x200 + phoneme->pitch;
-                    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, song->pitch);
+                    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, song->pitch);
                 }
                 break;
             case 0xFE:
-                m4aMPlayStop(&gMPlay_SE2);
+                m4aMPlayStop(&gMPlayInfo_SE2);
                 song->state = 0xFF;
                 break;
             }
@@ -746,7 +746,7 @@ static void Task_BardSong(u8 taskId)
         if (gStringVar4[task->tCharIndex] == EOS)
         {
             FadeInNewBGM(MUS_POKECEN, 6);
-            m4aMPlayFadeOutTemporarily(&gMPlay_SE2, 2);
+            m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
             EnableBothScriptContexts();
             DestroyTask(taskId);
         }

@@ -5,7 +5,7 @@
 #include "ewram.h"
 #include "item.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "menu_cursor.h"
@@ -180,8 +180,8 @@ s8 GetFirstFreePokeblockSlot(void);
 extern void de_sub_8073110();
 #endif
 
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_020297ED;
 extern u8 byte_3002A68;
@@ -778,7 +778,7 @@ static const u8 sNewLineString_2[] = _("\n");
 
 static void Blender_ControlHitPitch(void)
 {
-    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, (gBerryBlenderData->field_56 - 128) * 2);
+    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, (gBerryBlenderData->field_56 - 128) * 2);
 }
 
 static void VBlankCB0_BerryBlender(void)
@@ -1793,9 +1793,9 @@ static void sub_804FE70(void)
             if (gRecvCmds[2][i] == 0x2345 || gRecvCmds[2][i] == 0x4523 || gRecvCmds[2][i] == 0x5432)
             {
                 if (gBerryBlenderData->field_56 > 1500)
-                    m4aMPlayTempoControl(&gMPlay_BGM, ((gBerryBlenderData->field_56 - 750) / 20) + 256);
+                    m4aMPlayTempoControl(&gMPlayInfo_BGM, ((gBerryBlenderData->field_56 - 750) / 20) + 256);
                 else
-                    m4aMPlayTempoControl(&gMPlay_BGM, 256);
+                    m4aMPlayTempoControl(&gMPlayInfo_BGM, 256);
             }
         }
     }
@@ -2164,7 +2164,7 @@ static void sub_8050954(void)
     {
     case 1:
         ClearLinkCallback();
-        m4aMPlayTempoControl(&gMPlay_BGM, 256);
+        m4aMPlayTempoControl(&gMPlayInfo_BGM, 256);
         for (i = 0; i < gSpecialVar_0x8004; i++)
         {
             DestroyTask(gBerryBlenderData->field_148[i]);
@@ -2181,7 +2181,7 @@ static void sub_8050954(void)
             else
                 gBerryBlenderData->field_6F = 5;
             gBerryBlenderData->field_0 = 0;
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
         Blender_ControlHitPitch();
         break;

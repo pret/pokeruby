@@ -757,8 +757,8 @@ static void Task_NewGameSpeech1(u8 taskId)
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
     REG_BLDY = 0;
-    LZ77UnCompVram(gBirchIntroShadowGfx, (void *)BG_VRAM);
-    LZ77UnCompVram(gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
+    LZ77UnCompVram((const void *)gBirchIntroShadowGfx, (void *)BG_VRAM);
+    LZ77UnCompVram((const void *)gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
     LoadPalette(gUnknown_081E764C, 0, 0x40);
     LoadPalette(gUnknown_081E796C, 1, 0x10);
     ScanlineEffect_Stop();
@@ -1355,8 +1355,8 @@ void CB_ContinueNewGameSpeechPart2()
 
     ResetPaletteFade();
 
-    LZ77UnCompVram(gBirchIntroShadowGfx, (void *)BG_VRAM);
-    LZ77UnCompVram(gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
+    LZ77UnCompVram((const void *)gBirchIntroShadowGfx, (void *)BG_VRAM);
+    LZ77UnCompVram((const void *)gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
 
     LoadPalette(gUnknown_081E764C, 0, 0x40);
 

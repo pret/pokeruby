@@ -293,7 +293,7 @@ static void sub_80A9F50(void)
 static void sub_80A9FE4(void)
 {
     u8 ptr[] = _("{HIGHLIGHT WHITE2} ");
-    DmaFill32Large(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
+    DmaFillLarge32(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     sub_80034D4((void *)VRAM, ptr);
     LoadFontDefaultPalette(&gWindowTemplate_81E6C3C);
 }

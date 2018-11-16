@@ -59,8 +59,8 @@ void CB2_ShowDiploma(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
 
-    LZ77UnCompVram(gDiplomaTiles, (void *)VRAM);
-    LZ77UnCompVram(gDiplomaTilemap, (void *)(VRAM + 0x3000));
+    LZ77UnCompVram((const void *)gDiplomaTiles, (void *)VRAM);
+    LZ77UnCompVram((const void *)gDiplomaTilemap, (void *)(VRAM + 0x3000));
 
     ScanlineEffect_Stop();
     ResetTasks();

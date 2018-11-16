@@ -1,11 +1,11 @@
 #include "global.h"
-#include "gba/m4a_internal.h"
+#include <gba/m4a_internal.h>
 #include "title_screen.h"
 #include "clear_save_data_menu.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "intro.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "main_menu.h"
 #include "overworld.h"
@@ -41,7 +41,7 @@
 #endif
 
 extern u8 gReservedSpritePaletteCount;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG1_X;
 extern const u8 gUnknown_08E9D8CC[];
@@ -326,8 +326,6 @@ static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
     {sLogoShineTiles, 0x800, 1002},
     {NULL},
 };
-
-#define _RGB(r, g, b) ((((b) & 31) << 10) + (((g) & 31) << 5) + ((r) & 31))
 
 #ifdef SAPPHIRE
 //Red Kyogre markings
@@ -641,12 +639,12 @@ void CB2_InitTitleScreen(void)
         gMain.state = 1;
         break;
     case 1:
-        LZ77UnCompVram(gUnknown_08E9D8CC, (void *)VRAM);
-        LZ77UnCompVram(gUnknown_08E9F7E4, (void *)(VRAM + 0x4800));
+        LZ77UnCompVram((const void *)gUnknown_08E9D8CC, (void *)VRAM);
+        LZ77UnCompVram((const void *)gUnknown_08E9F7E4, (void *)(VRAM + 0x4800));
         LoadPalette(gUnknown_08E9F624, 0, 0x1C0);
-        LZ77UnCompVram(sLegendaryMonPixelData, (void *)(VRAM + 0x8000));
-        LZ77UnCompVram(sLegendaryMonTilemap, (void *)(VRAM + 0xC000));
-        LZ77UnCompVram(sBackdropTilemap, (void *)(VRAM + 0xC800));
+        LZ77UnCompVram((const void *)sLegendaryMonPixelData, (void *)(VRAM + 0x8000));
+        LZ77UnCompVram((const void *)sLegendaryMonTilemap, (void *)(VRAM + 0xC000));
+        LZ77UnCompVram((const void *)sBackdropTilemap, (void *)(VRAM + 0xC800));
         LoadPalette(sLegendaryMonPalettes, 0xE0, sizeof(sLegendaryMonPalettes));
         ScanlineEffect_Stop();
         ResetTasks();
@@ -851,7 +849,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
                 gBattle_BG1_X = 0;
             }
             UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
-            if ((gMPlay_BGM.status & 0xFFFF) == 0)
+            if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
             {
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);
                 SetMainCallback2(CB2_GoToCopyrightScreen);

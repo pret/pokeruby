@@ -4,7 +4,7 @@
 #include "battle.h"
 #include "trainer.h"
 #include "graphics.h"
-#include "gba/types.h"
+#include <gba/types.h>
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/items.h"

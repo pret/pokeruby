@@ -15,13 +15,13 @@
 #include "party_menu.h"
 #include "strings.h"
 #include "string_util.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "field_effect.h"
 #include "sound.h"
 #include "trig.h"
 #include "ewram.h"
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gPokeblockMonID;
 extern s16 gPokeblockGain;
 
@@ -743,7 +743,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, -1, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, -1, 256);
         SetMainCallback2(gMain.savedCallback);
         DestroyTask(taskID);
     }

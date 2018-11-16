@@ -12,7 +12,11 @@ endif
 
 SHELL     := /bin/bash -o pipefail
 AS        := $(PREFIX)as
+ifeq ($(MODERN), 1)
+CC1       := $(PREFIX)gcc -S -xc -
+else
 CC1       := tools/agbcc/bin/agbcc$(EXE)
+endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
@@ -27,8 +31,12 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
+ifeq ($(MODERN), 1)
+CC1FLAGS := -mthumb -mthumb-interwork -Wimplicit -Wparentheses -Wunused -O2 -mabi=apcs-gnu
+else
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG)
+endif
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
 
 
 #### Files ####
@@ -47,21 +55,12 @@ ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
 SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
 
-LIBC   := tools/agbcc/lib/libc.a
-LIBGCC := tools/agbcc/lib/libgcc.a
+LIBS := -L ../../tools/agbcc/lib -lc -lgcc -lm4a -lsiirtc -lagbsyscall -lagb_flash -lgcnmultiboot
+ifeq ($(NDEBUG),)
+LIBS += -lisagbprn
+endif
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
-
-# Special configurations required for lib files
-%src/libs/siirtc.o:       CC1FLAGS := -mthumb-interwork
-%src/libs/agb_flash.o:    CC1FLAGS := -O1 -mthumb-interwork
-%src/libs/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
-%src/libs/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
-%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-%src/libs/libisagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-%src/libs/libisagbprn.o: CC1FLAGS := -mthumb-interwork
-
 
 #### Main Rules ####
 
@@ -139,7 +138,7 @@ $(ROM): %.gba: %.elf
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) $(LIBS) -o ../../$@
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
@@ -169,6 +168,7 @@ sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
+modern:        ; @$(MAKE) GAME_VERSION=RUBY MODERN=1
 
 
 #### Graphics Rules ####

@@ -35,7 +35,7 @@ void Crash(u8 *text)
     ResetTasks();
     ResetSpriteData();
     SetMainCallback2(CB2_CrashIdle);
-    DmaFill32Large(3, 0, (void *)VRAM, 0x18000, 0x1000);
+    DmaFillLarge32(3, 0, (void *)VRAM, 0x18000, 0x1000);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
     LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);

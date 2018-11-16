@@ -509,8 +509,8 @@ const struct WindowTemplate gWindowTemplate_81E6C3C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6C58 =
@@ -530,8 +530,8 @@ const struct WindowTemplate gWindowTemplate_81E6C58 =
     0, // tilemap top coordinate
     26, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(24), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(24), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6C74 =
@@ -551,7 +551,7 @@ const struct WindowTemplate gWindowTemplate_81E6C74 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    OBJ_VRAM0, // tile data
+    (void *)OBJ_VRAM0, // tile data
     NULL, // tilemap
 };
 
@@ -572,8 +572,8 @@ const struct WindowTemplate gWindowTemplate_81E6C90 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(1), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(1), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6CAC =
@@ -593,7 +593,7 @@ const struct WindowTemplate gWindowTemplate_81E6CAC =
     0, // tilemap top coordinate
     8, // width
     60, // height
-    gTileBuffer, // tile data
+    (void *)gTileBuffer, // tile data
     NULL, // tilemap
 };
 
@@ -614,8 +614,8 @@ const struct WindowTemplate gWindowTemplate_81E6CC8 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(15), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(15), // tilemap
 };
 
 const struct WindowTemplate gMenuTextWindowTemplate =
@@ -635,8 +635,8 @@ const struct WindowTemplate gMenuTextWindowTemplate =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6D00 =
@@ -656,8 +656,8 @@ const struct WindowTemplate gWindowTemplate_81E6D00 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6D1C =
@@ -677,8 +677,8 @@ const struct WindowTemplate gWindowTemplate_81E6D1C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6D38 =
@@ -698,7 +698,7 @@ const struct WindowTemplate gWindowTemplate_81E6D38 =
     0, // tilemap top coordinate
     8, // width
     64, // height
-    gTileBuffer, // tile data
+    (void *)gTileBuffer, // tile data
     NULL, // tilemap
 };
 
@@ -719,8 +719,8 @@ const struct WindowTemplate gWindowTemplate_81E6D54 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(3), // tile data
-    BG_SCREEN_ADDR(15), // tilemap
+    (void *)BG_CHAR_ADDR(3), // tile data
+    (void *)BG_SCREEN_ADDR(15), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6D70 =
@@ -740,8 +740,8 @@ const struct WindowTemplate gWindowTemplate_81E6D70 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(3), // tile data
-    BG_SCREEN_ADDR(15), // tilemap
+    (void *)BG_CHAR_ADDR(3), // tile data
+    (void *)BG_SCREEN_ADDR(15), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6D8C =
@@ -761,8 +761,8 @@ const struct WindowTemplate gWindowTemplate_81E6D8C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(14), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(14), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6DA8 =
@@ -782,8 +782,8 @@ const struct WindowTemplate gWindowTemplate_81E6DA8 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(11), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(11), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_TrainerCard_Back_Values =
@@ -803,8 +803,8 @@ const struct WindowTemplate gWindowTemplate_TrainerCard_Back_Values =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_TrainerCard_Back_Labels =
@@ -824,8 +824,8 @@ const struct WindowTemplate gWindowTemplate_TrainerCard_Back_Labels =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6DFC =
@@ -845,8 +845,8 @@ const struct WindowTemplate gWindowTemplate_81E6DFC =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6E18 =
@@ -866,8 +866,8 @@ const struct WindowTemplate gWindowTemplate_81E6E18 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6E34 =
@@ -887,8 +887,8 @@ const struct WindowTemplate gWindowTemplate_81E6E34 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6E50 =
@@ -908,8 +908,8 @@ const struct WindowTemplate gWindowTemplate_81E6E50 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(28), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(28), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6E6C =
@@ -929,8 +929,8 @@ const struct WindowTemplate gWindowTemplate_81E6E6C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6E88 =
@@ -950,8 +950,8 @@ const struct WindowTemplate gWindowTemplate_81E6E88 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6EA4 =
@@ -971,8 +971,8 @@ const struct WindowTemplate gWindowTemplate_81E6EA4 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(28), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(28), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6EC0 =
@@ -992,8 +992,8 @@ const struct WindowTemplate gWindowTemplate_81E6EC0 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(29), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(29), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6EDC =
@@ -1013,8 +1013,8 @@ const struct WindowTemplate gWindowTemplate_81E6EDC =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(28), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(28), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6EF8 =
@@ -1034,8 +1034,8 @@ const struct WindowTemplate gWindowTemplate_81E6EF8 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(29), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(29), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6F14 =
@@ -1055,8 +1055,8 @@ const struct WindowTemplate gWindowTemplate_81E6F14 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(28), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(28), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6F30 =
@@ -1076,8 +1076,8 @@ const struct WindowTemplate gWindowTemplate_81E6F30 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(29), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(29), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6F4C =
@@ -1097,8 +1097,8 @@ const struct WindowTemplate gWindowTemplate_81E6F4C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6F68 =
@@ -1118,8 +1118,8 @@ const struct WindowTemplate gWindowTemplate_81E6F68 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(13), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(13), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6F84 =
@@ -1139,8 +1139,8 @@ const struct WindowTemplate gWindowTemplate_81E6F84 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6FA0 =
@@ -1160,8 +1160,8 @@ const struct WindowTemplate gWindowTemplate_81E6FA0 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(24), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(24), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6FBC =
@@ -1181,8 +1181,8 @@ const struct WindowTemplate gWindowTemplate_81E6FBC =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6FD8 =
@@ -1202,8 +1202,8 @@ const struct WindowTemplate gWindowTemplate_81E6FD8 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(24), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(24), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E6FF4 =
@@ -1223,8 +1223,8 @@ const struct WindowTemplate gWindowTemplate_81E6FF4 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(24), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(24), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7010 =
@@ -1244,8 +1244,8 @@ const struct WindowTemplate gWindowTemplate_81E7010 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E702C =
@@ -1265,8 +1265,8 @@ const struct WindowTemplate gWindowTemplate_81E702C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(15), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(15), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7048 =
@@ -1286,8 +1286,8 @@ const struct WindowTemplate gWindowTemplate_81E7048 =
     0, // tilemap top coordinate
     16, // width
     32, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(14), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(14), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7064 =
@@ -1307,8 +1307,8 @@ const struct WindowTemplate gWindowTemplate_81E7064 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(14), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(14), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7080 =
@@ -1328,8 +1328,8 @@ const struct WindowTemplate gWindowTemplate_81E7080 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E709C =
@@ -1349,8 +1349,8 @@ const struct WindowTemplate gWindowTemplate_81E709C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E70B8 =
@@ -1370,8 +1370,8 @@ const struct WindowTemplate gWindowTemplate_81E70B8 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E70D4 =
@@ -1391,8 +1391,8 @@ const struct WindowTemplate gWindowTemplate_81E70D4 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E70F0 =
@@ -1412,7 +1412,7 @@ const struct WindowTemplate gWindowTemplate_81E70F0 =
     0, // tilemap top coordinate
     32, // width
     32, // height
-    gTileBuffer, // tile data
+    (void *)gTileBuffer, // tile data
     NULL, // tilemap
 };
 
@@ -1433,8 +1433,8 @@ const struct WindowTemplate gWindowTemplate_81E710C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7128 =
@@ -1454,8 +1454,8 @@ const struct WindowTemplate gWindowTemplate_81E7128 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7144 =
@@ -1475,8 +1475,8 @@ const struct WindowTemplate gWindowTemplate_81E7144 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7160 =
@@ -1496,8 +1496,8 @@ const struct WindowTemplate gWindowTemplate_81E7160 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(1), // tile data
-    BG_SCREEN_ADDR(10), // tilemap
+    (void *)BG_CHAR_ADDR(1), // tile data
+    (void *)BG_SCREEN_ADDR(10), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E717C =
@@ -1517,8 +1517,8 @@ const struct WindowTemplate gWindowTemplate_81E717C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(3), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(3), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7198 =
@@ -1538,8 +1538,8 @@ const struct WindowTemplate gWindowTemplate_81E7198 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(15), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(15), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E71B4 =
@@ -1559,8 +1559,8 @@ const struct WindowTemplate gWindowTemplate_81E71B4 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(15), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(15), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E71D0 =
@@ -1580,8 +1580,8 @@ const struct WindowTemplate gWindowTemplate_81E71D0 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(1), // tile data
-    BG_SCREEN_ADDR(28), // tilemap
+    (void *)BG_CHAR_ADDR(1), // tile data
+    (void *)BG_SCREEN_ADDR(28), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E71EC =
@@ -1601,8 +1601,8 @@ const struct WindowTemplate gWindowTemplate_81E71EC =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(1), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(1), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7208 =
@@ -1622,8 +1622,8 @@ const struct WindowTemplate gWindowTemplate_81E7208 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(28), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(28), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E7224 =
@@ -1643,8 +1643,8 @@ const struct WindowTemplate gWindowTemplate_81E7224 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(0), // tile data
-    BG_SCREEN_ADDR(31), // tilemap
+    (void *)BG_CHAR_ADDR(0), // tile data
+    (void *)BG_SCREEN_ADDR(31), // tilemap
 };
 
 const struct WindowTemplate gMoveTutorMenuFramesWindowTemplate =
@@ -1664,8 +1664,8 @@ const struct WindowTemplate gMoveTutorMenuFramesWindowTemplate =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    BG_CHAR_ADDR(2), // tile data
-    BG_SCREEN_ADDR(30), // tilemap
+    (void *)BG_CHAR_ADDR(2), // tile data
+    (void *)BG_SCREEN_ADDR(30), // tilemap
 };
 
 const struct WindowTemplate gWindowTemplate_81E725C =
@@ -1685,7 +1685,7 @@ const struct WindowTemplate gWindowTemplate_81E725C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    OBJ_VRAM0, // tile data
+    (void *)OBJ_VRAM0, // tile data
     NULL, // tilemap
 };
 
@@ -1706,7 +1706,7 @@ const struct WindowTemplate gWindowTemplate_81E7278 =
     0, // tilemap top coordinate
     16, // width
     32, // height
-    gTileBuffer, // tile data
+    (void *)gTileBuffer, // tile data
     NULL, // tilemap
 };
 
@@ -1727,7 +1727,7 @@ const struct WindowTemplate gWindowTemplate_81E7294 =
     0, // tilemap top coordinate
     16, // width
     32, // height
-    gTileBuffer, // tile data
+    (void *)gTileBuffer, // tile data
     NULL, // tilemap
 };
 

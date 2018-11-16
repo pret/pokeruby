@@ -12,7 +12,7 @@
 #include "save.h"
 #include "constants/species.h"
 #include "overworld.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "data2.h"
 #include "decompress.h"
 #include "random.h"
@@ -27,7 +27,7 @@ static EWRAM_DATA u32 sUnknown_0203931C = 0;
 
 extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -983,7 +983,7 @@ static void sub_8142DF4(u8 taskID)
             if (IsCryPlayingOrClearCrySongs())
             {
                 StopCryAndClearCrySongs();
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
             }
             gTasks[taskID].func = sub_8142F78;
         }
@@ -993,7 +993,7 @@ static void sub_8142DF4(u8 taskID)
         if (IsCryPlayingOrClearCrySongs())
         {
             StopCryAndClearCrySongs();
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         }
         gTasks[taskID].func = sub_8142F78;
     }
@@ -1205,11 +1205,11 @@ static void sub_81433E0(void)
     REG_BG3HOFS = 0;
     REG_BG3VOFS = 0;
 
-    DmaFill16Large(3, 0, VRAM, 0x18000, 0x1000);
-    DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
-    DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
+    DmaFillLarge16(3, 0, (void *)VRAM, 0x18000, 0x1000);
+    DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
+    DmaFill16Defvars(3, 0, (void *)PLTT, PLTT_SIZE);
 
-    LZ77UnCompVram(gHallOfFame_Gfx, (void*)(VRAM));
+    LZ77UnCompVram((const void *)gHallOfFame_Gfx, (void*)(VRAM));
 
     for (i = 0; i < 64; i++)
     {
@@ -1224,7 +1224,7 @@ static void sub_81433E0(void)
         *((u16*)(VRAM + 0x3000) + i) = 2;
     }
 
-    DmaFill16Large(3, 0, ewram0_6, 0x4000, 0x1000);
+    DmaFillLarge16(3, 0, (void *)ewram0_6, 0x4000, 0x1000);
     ResetPaletteFade();
     LoadPalette(gHallOfFame_Pal, 0, 0x20);
 }

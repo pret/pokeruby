@@ -3,7 +3,7 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_specials.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "constants/maps.h"
 #include "menu.h"
@@ -224,19 +224,19 @@ bool8 sub_80FA940(void)
     switch (gRegionMap->initStep)
     {
     case 0:
-        LZ77UnCompVram(sRegionMapBkgnd_ImageLZ, (void *)(VRAM + 0x8000));
+        LZ77UnCompVram((const void *)sRegionMapBkgnd_ImageLZ, (void *)(VRAM + 0x8000));
         break;
     case 1:
-        LZ77UnCompVram(sRegionMapBkgnd_TilemapLZ, (void *)(VRAM + 0xE000));
+        LZ77UnCompVram((const void *)sRegionMapBkgnd_TilemapLZ, (void *)(VRAM + 0xE000));
         break;
     case 2:
         LoadPalette(sRegionMapBkgnd_Pal, 0x70, 0x60);  // Why isn't this the right size?
         break;
     case 3:
-        LZ77UnCompWram(sRegionMapCursorSmall_ImageLZ, gRegionMap->cursorSmallImage);
+        LZ77UnCompWram((const void *)sRegionMapCursorSmall_ImageLZ, gRegionMap->cursorSmallImage);
         break;
     case 4:
-        LZ77UnCompWram(sRegionMapCursorLarge_ImageLZ, gRegionMap->cursorLargeImage);
+        LZ77UnCompWram((const void *)sRegionMapCursorLarge_ImageLZ, gRegionMap->cursorLargeImage);
         break;
     case 5:
         InitializeCursorPosition();
@@ -1464,10 +1464,10 @@ void CB2_InitFlyRegionMap(void)
         PrintFlyTargetName();
         break;
     case 4:
-        LZ77UnCompVram(sFlyRegionMapFrame_ImageLZ, (void *)(VRAM + 0xC000));
+        LZ77UnCompVram((const void *)sFlyRegionMapFrame_ImageLZ, (void *)(VRAM + 0xC000));
         break;
     case 5:
-        LZ77UnCompVram(sFlyRegionMapFrame_TilemapLZ, (void *)(VRAM + 0xF000));
+        LZ77UnCompVram((const void *)sFlyRegionMapFrame_TilemapLZ, (void *)(VRAM + 0xF000));
         break;
     case 6:
         LoadPalette(sFlyRegionMapFrame_Pal, 16, 32);
@@ -1554,7 +1554,7 @@ static void CreateFlyTargetGraphics(void)
 {
     struct SpriteSheet spriteSheet;
 
-    LZ77UnCompWram(sFlyTargetIcons_ImageLZ, ewram888);
+    LZ77UnCompWram((const void *)sFlyTargetIcons_ImageLZ, ewram888);
     spriteSheet.data = ewram888;
     spriteSheet.size = 0x1C0;
     spriteSheet.tag = 2;

@@ -3,7 +3,7 @@
 #include "decompress.h"
 #include "ewram.h"
 #include "random.h"
-#include "gba/flash_internal.h"
+#include <gba/flash_internal.h>
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/moves.h"
@@ -198,7 +198,7 @@ void debug_80C35DC(void)
     REG_BG1VOFS = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
-    DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+    DmaFillLarge16(3, 0, VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
     DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();

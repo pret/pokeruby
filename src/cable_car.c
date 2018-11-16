@@ -307,11 +307,11 @@ static void CableCarMainCallback_Setup(void)
         default:
             SetVBlankCallback(NULL);
             ScanlineEffect_Stop();
-            DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+            DmaFillLarge16(3, 0, VRAM, VRAM_SIZE, 0x1000);
             DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
             DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
             sCableCarPtr = eCableCar1;
-            DmaFill16Large(3, 0, eCableCar1, 0x10FC, 0x1000);
+            DmaFillLarge16(3, 0, eCableCar1, 0x10FC, 0x1000);
             gMain.state++;
             break;
         case 1:
@@ -434,9 +434,9 @@ static void sub_8123740(void)
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
-    DmaFill32Large(3, 0, gSharedMem, 0x20000, 0x1000);
+    DmaFillLarge32(3, 0, gSharedMem, 0x20000, 0x1000);
     sCableCarPtr = NULL;
-    DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+    DmaFillLarge16(3, 0, VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
     DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
     WarpIntoMap();

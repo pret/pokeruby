@@ -1,7 +1,7 @@
 #include "global.h"
-#include "gba/flash_internal.h"
+#include <gba/flash_internal.h>
 #include "save_failed_screen.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -112,10 +112,10 @@ static void CB2_SaveFailedScreen(void)
         DmaFill16(3, 0, VRAM, VRAM_SIZE);
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
-        LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
-        LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
-        LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-        LZ77UnCompVram(&gSaveFailedClockGfx, (void *)(VRAM + 0x10020));
+        LZ77UnCompVram((const void *)&gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram((const void *)&gBirchBagTilemap, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram((const void *)&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+        LZ77UnCompVram((const void *)&gSaveFailedClockGfx, (void *)(VRAM + 0x10020));
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
@@ -275,7 +275,7 @@ static bool8 IsSectorNonEmpty(u16 sector)
     u32 *ptr = (u32 *)&gSharedMem;
     u16 i;
 
-    ReadFlash(sector, 0, ptr, 4096);
+    ReadFlash(sector, 0, (u8 *)ptr, 4096);
 
 #if DEBUG  // Don't verify the sector wipe?
     for (i = 0; i < 0x400; i++, ptr++)

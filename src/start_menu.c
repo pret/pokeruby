@@ -7,7 +7,7 @@
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "load_save.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "event_obj_lock.h"
 #include "menu.h"
@@ -856,7 +856,7 @@ static bool32 sub_80719FC(u8 *step)
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
-        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
+        DmaFillLarge16(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
         break;
     case 1:
         ResetSpriteData();

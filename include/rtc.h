@@ -1,7 +1,7 @@
 #ifndef GUARD_RTC_UTIL_H
 #define GUARD_RTC_UTIL_H
 
-#include "siirtc.h"
+#include <siirtc.h>
 
 #define RTC_INIT_ERROR         0x0001
 #define RTC_INIT_WARNING       0x0002

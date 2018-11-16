@@ -12,7 +12,7 @@
 #include "scanline_effect.h"
 #include "data2.h"
 #include "decompress.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "trade.h"
 #include "menu.h"
 #include "pokedex.h"

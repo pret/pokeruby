@@ -637,7 +637,7 @@ bool8 InitPartyMenu(void)
     {
     case 0:
         SetVBlankCallback(NULL);
-        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), VRAM_SIZE, 0x1000);
+        DmaFillLarge16(3, 0, (void *)(VRAM + 0x0), VRAM_SIZE, 0x1000);
         DmaClear32(3, OAM, OAM_SIZE);
         DmaClear16(3, PLTT, PLTT_SIZE);
         gPaletteFade.bufferTransferDisabled = 1;

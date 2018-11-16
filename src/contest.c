@@ -15,7 +15,7 @@
 #include "ewram.h"
 #include "graphics.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "menu_cursor.h"
@@ -40,7 +40,7 @@ extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
 
-extern struct MusicPlayerInfo gMPlay_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
@@ -3366,8 +3366,8 @@ void sub_80AFC74(u8 taskId)
         if (r1 > 0)
         {
             PlaySE(SE_C_GAJI);
-            m4aMPlayImmInit(&gMPlay_SE1);
-            m4aMPlayPitchControl(&gMPlay_SE1, 0xFFFF, r10 * 256);
+            m4aMPlayImmInit(&gMPlayInfo_SE1);
+            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
         }
         else
         {

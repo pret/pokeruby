@@ -254,7 +254,7 @@ static void NamingScreen_InitDisplayMode(void)
 
 static void NamingScreen_ClearVram(void)
 {
-    DmaFill16Large(3, 0, (void *)VRAM, 0x10000, 0x1000);
+    DmaFillLarge16(3, 0, (void *)VRAM, 0x10000, 0x1000);
 }
 
 static void NamingScreen_ClearOam(void)

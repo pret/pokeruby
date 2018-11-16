@@ -5,7 +5,7 @@
 #include "battle_interface.h"
 #include "data2.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "palette.h"
 #include "rom_8077ABC.h"
@@ -52,7 +52,7 @@ extern struct Window gUnknown_03004210;
 extern u8 gUnknown_0300434C[];
 extern u32 gBattleExecBuffer;
 extern MainCallback gPreBattleCallback1;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern u8 sub_8077F68();
 extern u8 GetBattlerSubpriority();
@@ -323,11 +323,11 @@ void sub_8037680(void)
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             if (GetBattlerPosition(gActiveBattler) == 1)
-                m4aMPlayContinue(&gMPlay_BGM);
+                m4aMPlayContinue(&gMPlayInfo_BGM);
         }
         else
         {
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         }
         ewram17810[gActiveBattler].unk9 = 3;
         gBattleBankFunc[gActiveBattler] = sub_8037644;

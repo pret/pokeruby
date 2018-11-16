@@ -6,6 +6,7 @@ GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
 COMPARE  ?= 1
+MODERN   ?= 0
 
 # For gbafix
 MAKER_CODE  := 01
@@ -58,3 +59,6 @@ ifeq ($(DEBUG), 1)
   BUILD_NAME := $(BUILD_NAME)_debug
 endif
 
+ifeq ($(MODERN), 1)
+  BUILD_NAME := $(BUILD_NAME)_modern
+endif

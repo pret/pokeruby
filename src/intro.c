@@ -1,13 +1,13 @@
 #include "global.h"
-#include "gba/m4a_internal.h"
+#include <gba/m4a_internal.h>
 #include "intro.h"
 #include "data2.h"
 #include "decompress.h"
 #include "hall_of_fame.h"
 #include "intro_credits_graphics.h"
-#include "libgncmultiboot.h"
+#include <libgcnmultiboot.h>
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "new_game.h"
 #include "palette.h"

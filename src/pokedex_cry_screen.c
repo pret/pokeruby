@@ -1,5 +1,5 @@
 #include "global.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "pokedex_cry_screen.h"
 #include "palette.h"
@@ -9,7 +9,7 @@
 #include "sound.h"
 
 extern struct SoundInfo gSoundInfo;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 struct Unk201C800 {
     s8 unk_0;
@@ -474,7 +474,7 @@ void sub_8119F88(u8 a0)
 
 void sub_811A050(u16 species)
 {
-    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
+    if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
     {
         if (!gPokedexCryScreenPtr->unk001B)
         {
@@ -833,7 +833,7 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
     switch (gUnknown_03005E98)
     {
     case 0:
-        LZ77UnCompVram(gUnknown_083FAF3C, (void *) (VRAM + cry->unk0));
+        LZ77UnCompVram((const void *)gUnknown_083FAF3C, (void *) (VRAM + cry->unk0));
         LoadPalette(&gUnknown_083FAF1C, cry->paletteNo * 16, 0x20);
         gUnknown_03005E98 += 1;
         break;
@@ -845,7 +845,7 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
         u32 r12;
         int x, y;
 
-        vram = BG_SCREEN_ADDR(cry->unk2);
+        vram = (void *)BG_SCREEN_ADDR(cry->unk2);
 
         r12 = (u32) (cry->unk0 << 18) >> 23;
 

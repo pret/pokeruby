@@ -309,7 +309,7 @@ void sub_80F9368(void)
     REG_BG1VOFS = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
-    DmaFill16Large(3, 0, (u8 *)VRAM, 0x18000, 0x1000);
+    DmaFillLarge16(3, 0, (u8 *)VRAM, 0x18000, 0x1000);
     DmaClear32(3, OAM, OAM_SIZE);
     DmaClear16(3, PLTT, PLTT_SIZE);
 }

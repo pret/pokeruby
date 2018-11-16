@@ -6,7 +6,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "gba/flash_internal.h"
+#include <gba/flash_internal.h>
 #include "battle.h"
 #include "battle_ai.h"
 #include "battle_interface.h"
@@ -21,7 +21,7 @@
 #include "item_menu.h"
 #include "link.h"
 #include "main.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "name_string_util.h"
 #include "overworld.h"
 #include "palette.h"

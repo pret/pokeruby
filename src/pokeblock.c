@@ -389,7 +389,7 @@ static bool8 sub_810B998(void)
     switch (ewram1FFFF)
     {
         case 0:
-            LZDecompressVram(gMenuPokeblock_Gfx, BG_CHAR_ADDR(2));
+            LZDecompressVram(gMenuPokeblock_Gfx, (void *)BG_CHAR_ADDR(2));
             ewram1FFFF++;
             break;
         case 1:

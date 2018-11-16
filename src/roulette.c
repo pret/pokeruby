@@ -3,7 +3,7 @@
 #include "ewram.h"
 #include "field_fadetransition.h"
 #include "constants/game_stat.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "menu_cursor.h"
@@ -302,9 +302,9 @@ extern const u8 gUnknown_083FA608[0x5];
 extern const struct SpriteSheet gUnknown_083FA42C;
 extern const struct SpriteTemplate gSpriteTemplate_83FA434;
 extern void (*gFieldCallback)(void);
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_SE3;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_SE3;
 extern const u16 gUnknown_083FA60E[0x2][0x2];
 extern const struct SpriteTemplate gSpriteTemplate_83FA50C;
 extern const struct SpriteTemplate gSpriteTemplate_83FA5C0[];
@@ -515,9 +515,9 @@ void sub_8115634(u8 unused)
     if (unk_203955C[0] != 0 && (gMain.newKeys & 8))
     {
         gTasks[eRoulette->varA4].func = sub_81157AC;
-        m4aMPlayStop(&gMPlay_SE1);
-        m4aMPlayStop(&gMPlay_SE2);
-        m4aMPlayStop(&gMPlay_SE3);
+        m4aMPlayStop(&gMPlayInfo_SE1);
+        m4aMPlayStop(&gMPlayInfo_SE2);
+        m4aMPlayStop(&gMPlayInfo_SE3);
     }
 #endif
 }
@@ -2187,8 +2187,8 @@ void sub_8118724(struct Sprite *sprite)
     sprite->pos2.y = -cos * sprite->data[0x4] >> 0xC;
     if (IsSEPlaying())
     {
-        m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, sprite->pos2.x);
-        m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, sprite->pos2.x);
     }
 }
 
@@ -3218,8 +3218,8 @@ void sub_8119BCC(struct Sprite *sprite)
         if (IsSEPlaying())
         {
             s8 u =  -((0x74 - sprite->pos1.x) / 0x2);
-            m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF,u);
-            m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, u);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF,u);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, u);
         }
     }
     else

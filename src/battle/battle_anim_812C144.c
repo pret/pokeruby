@@ -2453,7 +2453,7 @@ void sub_812DB84(u8 taskId)
         break;
     case 4:
         sub_8078914(&subStruct);
-        DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
+        DmaFillLarge32(3, 0, subStruct.field_0, 0x2000, 0x1000);
         DmaClear32(3, subStruct.field_4, 0x800);
 
         if (!IsContest())

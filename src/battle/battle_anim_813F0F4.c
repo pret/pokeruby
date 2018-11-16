@@ -6,7 +6,7 @@
 #include "blend_palette.h"
 #include "decompress.h"
 #include "ewram.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "palette.h"
 #include "pokeball.h"

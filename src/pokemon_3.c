@@ -8,7 +8,7 @@
 #include "event_data.h"
 #include "item.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "move_tutor_menu.h"
 #include "pokemon.h"

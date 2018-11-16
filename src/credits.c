@@ -4,7 +4,7 @@
 #include "event_data.h"
 #include "hall_of_fame.h"
 #include "intro_credits_graphics.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -606,8 +606,8 @@ void task_a_8143D04(u8 taskIdA)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
-        LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+        LZ77UnCompVram((const void *)&gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram((const void *)&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
         LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)
@@ -1305,7 +1305,7 @@ static void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
     u16 baseTile;
     u16 i;
 
-    LZ77UnCompVram(gCreditsCopyrightEnd_Gfx, (void *) (VRAM + arg0));
+    LZ77UnCompVram((const void *)gCreditsCopyrightEnd_Gfx, (void *) (VRAM + arg0));
     LoadPalette(gIntroCopyright_Pal, arg2, sizeof(gIntroCopyright_Pal));
 
     baseTile = (arg2 / 16) << 12;

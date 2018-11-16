@@ -23,7 +23,7 @@
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"
@@ -1774,7 +1774,7 @@ void sub_8054BA8(void)
     ScanlineEffect_Stop();
 
     DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
-    DmaFill16Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
+    DmaFillLarge16(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
     ResetOamRange(0, 128);
     LoadOam();
 }

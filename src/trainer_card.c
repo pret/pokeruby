@@ -5,7 +5,7 @@
 #include "field_effect.h"
 #include "graphics.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "money.h"
@@ -506,7 +506,7 @@ static void sub_8093550(void)
 
 void sub_8093598(void)
 {
-    DmaFill16Large(3, 0, (void *)VRAM, 0x10000, 0x1000);
+    DmaFillLarge16(3, 0, (void *)VRAM, 0x10000, 0x1000);
 }
 
 void sub_80935EC(void)
