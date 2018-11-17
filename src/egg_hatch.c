@@ -44,9 +44,6 @@ struct EggHatchData* gEggHatchData;
 extern const u32 gBattleTextboxTiles[];
 extern const u32 gBattleTextboxTilemap[];
 extern const u16 gBattleTextboxPalette[]; //palette
-extern const struct SpriteSheet sUnknown_0820A3B0;
-extern const struct SpriteSheet sUnknown_0820A3B8;
-extern const struct SpritePalette sUnknown_0820A3C0;
 
 bool8 GetSetPokedexFlag(u16 nationalNum, u8 caseID);
 u8 sav1_map_get_name(void);

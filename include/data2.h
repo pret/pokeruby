@@ -4,6 +4,7 @@
 #include "global.h"
 
 #include "sprite.h"
+#include "battle.h"
 
 struct ScanlineEffectParams;
 

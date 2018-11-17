@@ -2,6 +2,7 @@
 #define GUARD_GRAPHICS_H
 
 #include "global.h"
+#include "battle_anim.h"
 
 // data/graphics.s
 extern const u8 gInterfaceGfx_PokeBall[];

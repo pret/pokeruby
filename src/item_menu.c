@@ -39,37 +39,32 @@
 
 // External stuff
 extern void FreeAndReserveObjectSpritePalettes(void);
-extern void SetVerticalScrollIndicatorPriority();
 extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
-extern void PauseVerticalScrollIndicator();
 extern u8 sub_80F9284(void);
 extern void sub_808B5B4();
-extern u8 sub_80F92F4();
 extern void pal_fill_black(void);
 extern bool8 IsWeatherNotFadingIn(void);
-extern u8 sub_80F931C();
 extern void sub_808A3F8(u8);
 extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
-extern void sub_802E424(u8);
 extern void ScriptUnfreezeEventObjects(void);
 
-struct UnknownStruct2
+struct ItemMenu_UnknownStruct2
 {
     u8 unk0;
     u8 textLine;
     u8 unk2;
 };
 
-struct UnknownStruct3
+struct ItemMenu_UnknownStruct3
 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
 };
 
-struct UnknownStruct4
+struct ItemMenu_UnknownStruct4
 {
     u8 unk0;
     u8 unk1;
@@ -78,7 +73,7 @@ struct UnknownStruct4
     TaskFunc unk8;
 };
 
-struct UnknownStruct5
+struct ItemMenu_UnknownStruct5
 {
     u8 unk0;
     u8 unk1;
@@ -86,7 +81,7 @@ struct UnknownStruct5
     u8 unk3;
 };
 
-struct UnknownStruct6
+struct ItemMenu_UnknownStruct6
 {
     u8 unk0;
 };
@@ -127,11 +122,11 @@ enum
 };
 
 // ewram
-EWRAM_DATA static struct UnknownStruct2 gUnknown_0203853C = {0};
-EWRAM_DATA static struct UnknownStruct3 gUnknown_02038540 = {0};
-EWRAM_DATA static struct UnknownStruct4 gUnknown_02038544 = {0};
-EWRAM_DATA static struct UnknownStruct5 gUnknown_02038550 = {0};
-EWRAM_DATA static struct UnknownStruct6 gUnknown_02038554 = {0};  // There are 3 bytes of padding after this, so I assume it's a struct
+EWRAM_DATA static struct ItemMenu_UnknownStruct2 gUnknown_0203853C = {0};
+EWRAM_DATA static struct ItemMenu_UnknownStruct3 gUnknown_02038540 = {0};
+EWRAM_DATA static struct ItemMenu_UnknownStruct4 gUnknown_02038544 = {0};
+EWRAM_DATA static struct ItemMenu_UnknownStruct5 gUnknown_02038550 = {0};
+EWRAM_DATA static struct ItemMenu_UnknownStruct6 gUnknown_02038554 = {0};  // There are 3 bytes of padding after this, so I assume it's a struct
 EWRAM_DATA static u8 gUnknown_02038558 = 0;
 EWRAM_DATA static s8 sCurrentBagPocket = 0;
 EWRAM_DATA static u8 gUnknown_0203855A = 0;
@@ -1135,7 +1130,7 @@ static bool8 sub_80A42B0(u8 itemPos, int b)
 {
     u8 r5;
     u16 *ptr;
-    struct UnknownStruct3 *r8 = &gUnknown_02038540;
+    struct ItemMenu_UnknownStruct3 *r8 = &gUnknown_02038540;
 
     if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop + itemPos > gBagPocketScrollStates[sCurrentBagPocket].numSlots)
         return TRUE;
@@ -3405,7 +3400,7 @@ static void sub_80A740C(void)
 
 static void sub_80A7420(void)
 {
-    struct UnknownStruct2 *unkStruct = &gUnknown_0203853C;
+    struct ItemMenu_UnknownStruct2 *unkStruct = &gUnknown_0203853C;
     int index;
 
     switch (unkStruct->unk0)
@@ -3542,7 +3537,7 @@ static void sub_80A7630(void)
 
 static void sub_80A763C(void)
 {
-    struct UnknownStruct3 *r4 = &gUnknown_02038540;
+    struct ItemMenu_UnknownStruct3 *r4 = &gUnknown_02038540;
 
     switch (sub_80A78C4())
     {
@@ -3577,14 +3572,14 @@ static void sub_80A76A0(void)
 
 static bool32 sub_80A76B8(void)
 {
-    struct UnknownStruct3 *s = &gUnknown_02038540;
+    struct ItemMenu_UnknownStruct3 *s = &gUnknown_02038540;
 
     return (s->unk0 == 0);
 }
 
 static bool32 sub_80A76D0(void)
 {
-    struct UnknownStruct3 *s = &gUnknown_02038540;
+    struct ItemMenu_UnknownStruct3 *s = &gUnknown_02038540;
 
     return (s->unk1 > 5);
 }
@@ -3609,7 +3604,7 @@ static void sub_80A770C(void)
 
 static void DisplayCannotUseItemMessage(int a, const u8 *b, TaskFunc func, int d)
 {
-    struct UnknownStruct4 *r4 = &gUnknown_02038544;
+    struct ItemMenu_UnknownStruct4 *r4 = &gUnknown_02038544;
 
     switch (sub_80A7924())
     {
@@ -3628,7 +3623,7 @@ static void DisplayCannotUseItemMessage(int a, const u8 *b, TaskFunc func, int d
 
 static void sub_80A7768(void)
 {
-    struct UnknownStruct5 *r4 = &gUnknown_02038550;
+    struct ItemMenu_UnknownStruct5 *r4 = &gUnknown_02038550;
 
     if (r4->unk0 == 2)
     {
@@ -3670,7 +3665,7 @@ static void sub_80A7828(void)
 
 static void sub_80A7834(int a, int b)
 {
-    struct UnknownStruct5 *r4 = &gUnknown_02038550;
+    struct ItemMenu_UnknownStruct5 *r4 = &gUnknown_02038550;
 
     switch (sub_80A7958())
     {
@@ -3710,7 +3705,7 @@ static void sub_80A7880(void)
 
 static bool32 sub_80A78A0(void)
 {
-    struct UnknownStruct5 *r0 = &gUnknown_02038550;
+    struct ItemMenu_UnknownStruct5 *r0 = &gUnknown_02038550;
 
     return (r0->unk0 == 0);
 }

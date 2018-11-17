@@ -4,6 +4,8 @@
 #include "global.h"
 
 #include "task.h"
+#include "menu.h"
+#include "menu_helpers.h"
 
 enum DecorPerm {
     /*
