@@ -7,3 +7,4 @@ make -C tools/rsfont
 make -C tools/aif2pcm
 make -C tools/ramscrgen
 make -C tools/gbafix
+make -C tools/mid2agb

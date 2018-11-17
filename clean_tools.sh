@@ -7,3 +7,4 @@ make -C tools/rsfont clean
 make -C tools/aif2pcm clean
 make -C tools/ramscrgen clean
 make -C tools/gbafix clean
+make -C tools/mid2agb clean
