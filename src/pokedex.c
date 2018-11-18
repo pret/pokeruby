@@ -93,21 +93,21 @@ enum
     SIZE_SCREEN
 };
 
-struct UnknownStruct2
+struct Pokedex_UnknownStruct2
 {
     const u8 *text1;
     const u8 *text2;
 };
 
-struct UnknownStruct1
+struct Pokedex_UnknownStruct1
 {
-    const struct UnknownStruct2 *unk0;
+    const struct Pokedex_UnknownStruct2 *unk0;
     u8 unk4;
     u8 unk5;
     u16 unk6;
 };
 
-struct UnknownStruct3
+struct Pokedex_UnknownStruct3
 {
     const u8 *text;
     u8 unk4;
@@ -115,7 +115,7 @@ struct UnknownStruct3
     u8 unk6;
 };
 
-struct UnknownStruct4
+struct Pokedex_UnknownStruct4
 {
     const u8 *text;
     u8 unk4;
@@ -1052,13 +1052,13 @@ static const u8 gUnknown_083B57BC[][4] =
     {CHAR_V, 3, CHAR_v, 3},
     {CHAR_Y, 2, CHAR_y, 2},
 };
-static const struct UnknownStruct3 gUnknown_083B57E4[] =
+static const struct Pokedex_UnknownStruct3 gUnknown_083B57E4[] =
 {
     {DexText_SearchForPoke, 0,  0, 5},
     {DexText_SwitchDex,     6,  0, 5},
     {DexText_ReturnToDex,  12,  0, 5},
 };
-static const struct UnknownStruct4 gUnknown_083B57FC[] =
+static const struct Pokedex_UnknownStruct4 gUnknown_083B57FC[] =
 {
     {DexText_ListByABC,           0,  2,  5,  5,  2, 12},
     {DexText_ListByColor,         0,  4,  5,  5,  4, 12},
@@ -1108,13 +1108,13 @@ static const u8 gUnknown_083B58A4[][4] =
     {0xFF, 0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF,    4, 0xFF},
 };
-static const struct UnknownStruct2 gUnknown_083B58C0[] =
+static const struct Pokedex_UnknownStruct2 gUnknown_083B58C0[] =
 {
     {DexText_HoennDex2,    DexText_HoennDex},
     {DexText_NationalDex2, DexText_NationalDex},
     {NULL, NULL},
 };
-static const struct UnknownStruct2 gUnknown_083B58D8[] =
+static const struct Pokedex_UnknownStruct2 gUnknown_083B58D8[] =
 {
     {DexText_ListByNumber,          DexText_NumericalMode},
     {DexText_ListByABC2,            DexText_ABCMode},
@@ -1124,7 +1124,7 @@ static const struct UnknownStruct2 gUnknown_083B58D8[] =
     {DexText_ListBySmallToTallest,  DexText_SmallestMode},
     {NULL, NULL},
 };
-static const struct UnknownStruct2 gUnknown_083B5910[] =
+static const struct Pokedex_UnknownStruct2 gUnknown_083B5910[] =
 {
     {DexText_Terminator5, DexText_DontSpecify},
     {DexText_Terminator5, DexText_ABC},
@@ -1138,7 +1138,7 @@ static const struct UnknownStruct2 gUnknown_083B5910[] =
     {DexText_Terminator5, DexText_YZ},
     {NULL, NULL},
 };
-static const struct UnknownStruct2 gUnknown_083B5968[] =
+static const struct Pokedex_UnknownStruct2 gUnknown_083B5968[] =
 {
     {DexText_Terminator5, DexText_DontSpecify},
     {DexText_Terminator5, DexText_Red},
@@ -1153,7 +1153,7 @@ static const struct UnknownStruct2 gUnknown_083B5968[] =
     {DexText_Terminator5, DexText_Pink},
     {NULL, NULL},
 };
-static const struct UnknownStruct2 gUnknown_083B59C8[] =
+static const struct Pokedex_UnknownStruct2 gUnknown_083B59C8[] =
 {
     {DexText_Terminator5, DexText_None},
     {DexText_Terminator5, gTypeNames[TYPE_NORMAL]},
@@ -1178,7 +1178,7 @@ static const struct UnknownStruct2 gUnknown_083B59C8[] =
 static const u8 gUnknown_083B5A60[] = {0, 1};
 static const u8 gUnknown_083B5A62[] = {0, 1, 2, 3, 4, 5};
 static const u8 gUnknown_083B5A68[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
-static const struct UnknownStruct1 gUnknown_083B5A7C[] =
+static const struct Pokedex_UnknownStruct1 gUnknown_083B5A7C[] =
 {
     {gUnknown_083B5910,  6,  7, 10},
     {gUnknown_083B5968,  8,  9, 11},
@@ -4997,7 +4997,7 @@ static void sub_80925CC(u8 taskId)
 static void sub_8092644(u8 taskId)
 {
     u8 r1;
-    const struct UnknownStruct2 *r8;
+    const struct Pokedex_UnknownStruct2 *r8;
     u16 *p1;
     u16 *p2;
     u16 r2;
@@ -5344,7 +5344,7 @@ static void sub_8092C8C(u8 a)
 
 static void sub_8092D78(u8 taskId)
 {
-    const struct UnknownStruct2 *r6 = gUnknown_083B5A7C[gTasks[taskId].data[1]].unk0;
+    const struct Pokedex_UnknownStruct2 *r6 = gUnknown_083B5A7C[gTasks[taskId].data[1]].unk0;
     const u16 *r8 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk4];
     const u16 *r7 = &gTasks[taskId].data[gUnknown_083B5A7C[gTasks[taskId].data[1]].unk5];
     u16 i;
