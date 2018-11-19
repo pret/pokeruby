@@ -96,7 +96,7 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 
 #ifdef UNITS_IMPERIAL
     //Convert size from centimeters to inches
-#ifdef MODERN // for modern gcc, because libgcc does not define __floatunsidf
+#if MODERN // for modern gcc, because libgcc does not define __floatunsidf
     size = (s32)(size * 10) / (double)(CM_PER_INCH * 10);
 #else
     size = (double)(size * 10) / (CM_PER_INCH * 10);
