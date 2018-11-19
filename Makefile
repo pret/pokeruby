@@ -32,7 +32,7 @@ GBAFIX    := tools/gbafix/gbafix$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 ifeq ($(MODERN), 1)
-CC1FLAGS := -mthumb -mthumb-interwork -Wimplicit -Wparentheses -Wunused -O2 -mabi=apcs-gnu
+CC1FLAGS := -mthumb -mthumb-interwork -Wimplicit -Wparentheses -Wunused -O2 -mabi=apcs-gnu -fno-jump-tables
 else
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 endif
@@ -55,7 +55,7 @@ ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
 SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
 
-LIBS := -L ../../tools/agbcc/lib -lc -lgcc -lm4a -lsiirtc -lagbsyscall -lagb_flash -lgcnmultiboot
+LIBS := -nostdlib -L ../../tools/agbcc/lib -lc -lgcc -lm4a -lsiirtc -lagbsyscall -lagb_flash -lgcnmultiboot
 ifeq ($(NDEBUG),)
 LIBS += -lisagbprn
 endif
@@ -167,7 +167,7 @@ sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
-modern:        ; @$(MAKE) GAME_VERSION=RUBY MODERN=1
+modern:        ; @$(MAKE) GAME_VERSION=RUBY MODERN=1 COMPARE=0
 
 
 #### Graphics Rules ####

@@ -48,7 +48,7 @@ static const struct SpriteTemplate gInvisibleSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-static const u8 gSpriteDimensions[3][4][2] =
+/*static*/ const u8 gSpriteDimensions[3][4][2] =
 {
     // square
     {

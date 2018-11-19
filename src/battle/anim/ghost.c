@@ -1188,7 +1188,8 @@ static void sub_80DF0B8(struct Sprite *sprite)
 
         if (++coeffB > 16)
             coeffB = 16;
-        if (--(s16)coeffA < 0)
+        --coeffA;
+        if ((s16)coeffA < 0)
             coeffA = 0;
 
         REG_BLDALPHA = (coeffB << 8) | coeffA;

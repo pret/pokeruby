@@ -291,7 +291,7 @@ void sub_80CECE8(struct Sprite* sprite)
     if (GetBattlerSide(gAnimBankAttacker) == 1)
     {
         a = gBattleAnimArgs[1]; 
-        (u16)gBattleAnimArgs[1] = -a;
+        *(u16 *)&gBattleAnimArgs[1] = -a;
     }
 
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[1];

@@ -214,14 +214,14 @@ u16 gUnknown_03004840[10];
 struct BerryBlenderData* gBerryBlenderData;
 
 // iwram bss
-IWRAM_DATA s16 gUnknown_03000510[8];
-IWRAM_DATA s16 gUnknown_03000520[6];
-IWRAM_DATA s16 gUnknown_0300052C;
-IWRAM_DATA s16 gUnknown_0300052E;
-IWRAM_DATA s32 gUnknown_03000530[6];
-IWRAM_DATA s32 gUnknown_03000548[5];
-IWRAM_DATA u32 gUnknown_0300055C;
-IWRAM_DATA struct BlenderDebug sBlenderDebug;
+static s16 gUnknown_03000510[8];
+static s16 gUnknown_03000520[6];
+static s16 gUnknown_0300052C;
+static s16 gUnknown_0300052E;
+static s32 gUnknown_03000530[6];
+static s32 gUnknown_03000548[5];
+static u32 gUnknown_0300055C;
+static struct BlenderDebug sBlenderDebug;
 
 // this file's functions
 void Blender_SetBankBerryData(u8 bank, u16 itemID);

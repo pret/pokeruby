@@ -40,5 +40,9 @@ matrix:
         - make -j2 ruby_de
         - make -j2 sapphire_de
         - make -j2 ruby_de_debug
+    - os: linux
+      env: _="Build Modern"
+      script:
+        - make -j2 ruby MODERN=1 COMPARE=0
 after_success:
   - .travis/calcrom/webhook.sh pokeruby

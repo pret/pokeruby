@@ -40,7 +40,7 @@ static const u8 gUnknown_0840612C[] = {
     0, 4, 3, 2, 1
 };
 
-static const u8 *const sContextStatNames[] = {
+/*static*/ const u8 *const sContextStatNames[] = {
     OtherText_Coolness,
     OtherText_Toughness,
     OtherText_Smartness,

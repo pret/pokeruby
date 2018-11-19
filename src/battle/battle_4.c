@@ -188,7 +188,7 @@ void BattleScriptPush(const u8* BS_ptr);
 void BattleScriptPushCursor(void);
 void RecordAbilityBattle(u8 bank, u8 ability);
 void RecordItemBattle(u8 bank, u8 holdEffect);
-static bool8 IsTwoTurnsMove(u16 move);
+/*static*/ bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static void CheckWonderGuardAndLevitate(void);
 u8 GetBattlerPosition(u8 bank);
@@ -489,7 +489,7 @@ static void atk85_stockpile(void);
 static void atk86_stockpiletobasedamage(void);
 static void atk87_stockpiletohpheal(void);
 static void atk88_negativedamage(void);
-static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr);
+/*static*/ u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr);
 static void atk89_statbuffchange(void);
 static void atk8A_normalisebuffs(void);
 static void atk8B_setbide(void);
@@ -5912,7 +5912,7 @@ _08020B50: .4byte gBattlescriptCurrInstr\n\
 }
 #endif
 
-static void MoveValuesCleanUp(void)
+/*static*/ void MoveValuesCleanUp(void)
 {
     gMoveResultFlags = 0;
     gBattleStruct->dmgMultiplier = 1;
@@ -11496,7 +11496,7 @@ static void atk88_negativedamage(void)
     gBattlescriptCurrInstr++;
 }
 
-static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
+/*static*/ u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 {
     bool8 certain = FALSE;
     bool8 notProtectAffected = FALSE;
@@ -13407,7 +13407,7 @@ static void atkA8_copymovepermanently(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-static bool8 IsTwoTurnsMove(u16 move)
+/*static*/ bool8 IsTwoTurnsMove(u16 move)
 {
     u8 effect = gBattleMoves[move].effect;
     if (effect == EFFECT_SKULL_BASH || effect == EFFECT_RAZOR_WIND || effect == EFFECT_SKY_ATTACK || effect == EFFECT_SOLARBEAM || effect == EFFECT_FLY || effect == EFFECT_BIDE)
@@ -13416,7 +13416,7 @@ static bool8 IsTwoTurnsMove(u16 move)
         return 0;
 }
 
-static bool8 IsMoveUnchoosable(u16 move)
+/*static*/ bool8 IsMoveUnchoosable(u16 move)
 {
     if (move == 0 || move == MOVE_SLEEP_TALK || move == MOVE_ASSIST || move == MOVE_MIRROR_MOVE || move == MOVE_METRONOME)
         return 1;

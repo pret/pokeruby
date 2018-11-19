@@ -98,7 +98,7 @@ struct PokenavRibbonIconGfx {
     u8 paletteNum;
 };
 
-IWRAM_DATA void (*gUnknown_03000744)(void);
+static void (*gUnknown_03000744)(void);
 
 extern const u8 gUnknown_083E0314[];
 extern const u16 gUnknown_08E9F9E8[];

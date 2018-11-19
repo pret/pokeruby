@@ -94,9 +94,7 @@ const struct SpritePalette gUnknown_0820A4D4[] =
 };
 
 extern void c3_0802FDF4(u8);
-extern void sub_80440EC();
 extern void sub_804777C();
-extern u8 GetBattlerSpriteCoord();
 extern u8 IsBankSpritePresent(u8);
 extern u8 sub_8077F68(u8);
 extern u8 sub_8077F7C(u8);

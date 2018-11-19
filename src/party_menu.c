@@ -88,7 +88,7 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
 static void UpdateMonIconFrame_806DA0C(struct Sprite *sprite);
 static void UpdateMonIconFrame_806DA38(struct Sprite *sprite);
 static void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c);
-static u8 sub_806CA00(u8 taskId);
+/*static*/ u8 sub_806CA00(u8 taskId);
 static void SpriteCB_sub_806D37C(struct Sprite *sprite);
 static u8 GetMonIconSpriteId(u8 taskId, u8 monIndex);
 void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);

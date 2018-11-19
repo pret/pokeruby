@@ -241,10 +241,10 @@ void sub_8119D80(struct Sprite *);
 
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
-extern struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
-extern u8 gUnknown_083F8EC4;
-extern u8 gUnknown_083F8DF0[];
-extern u8 gUnknown_083F8E34[];
+extern const struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
+extern const u16 gUnknown_083F8EC4[3];
+extern const u8 gUnknown_083F8DF0[];
+extern const u8 gUnknown_083F8E34[];
 extern const u8 gUnknown_08E8096C[];
 extern const u8 gRouletteWheelTiles[];
 extern const u8 gRouletteCenter_Gfx[];
@@ -368,7 +368,7 @@ void sub_8115238(void)
 {
     u8 i;
     u32 temp;
-    struct StructgUnknown_083F8DF4 *s0;
+    const struct StructgUnknown_083F8DF4 *s0;
     u16 arr[0x3]; // the third is never used ?
 
     memcpy(arr, &gUnknown_083F8EC4, 0x6);
@@ -793,18 +793,18 @@ u8 sub_8115F58(u16 r0, u16 r1)
                 return 0x1;
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
         }
         else if (!(r1 & 0x3))
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02 / 2;
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02;
         }
         break;
@@ -815,7 +815,7 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (r0 < 0x6 || (r1 & 0x1))
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
             else
@@ -825,12 +825,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
         }
         else if ((r1 & 0x1) && !(r0 < 0x7))
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02 / 4;
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02 / 2;
         }
         break;
@@ -846,7 +846,7 @@ u8 sub_8115F58(u16 r0, u16 r1)
             }
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
         }
@@ -854,12 +854,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (!(r0 < 0xD))
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02;
             }
         }
@@ -867,18 +867,18 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (!(r0 < 0xD))
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02;
             }
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var01;
             }
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var01 * 2;
         }
     }
@@ -2255,7 +2255,7 @@ void sub_811889C(struct Sprite *sprite)
 void sub_81189A8(struct Sprite *sprite)
 {
     float f0, f1, f2;
-    struct StructgUnknown_083F8DF4 *p;
+    const struct StructgUnknown_083F8DF4 *p;
     sub_8118724(sprite);
     switch (sprite->data[0x3])
     {
@@ -2472,15 +2472,13 @@ void sub_8118DE4(struct Sprite *sprite)
         m4aSongNumStart(SE_KON);
         if ((z = (Random() & 0x1)))
         {
-            u32 o;
             eRoulette->var8C = 0.0f;
-            o = (eRoulette->var7E + 0x1) % 0xC;
-            t = o;
-            eRoulette->var7F = o;
+            eRoulette->var7F = t = (eRoulette->var7E + 0x1) % 0xC;
         }
         else
         {
-            eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2; // couldn't replicate loads
+            float r1;
+            eRoulette->var8C = (r1 = gUnknown_083F8DF4[eRoulette->var04_0].var1C) * 2; // couldn't replicate loads
             t = (eRoulette->var7E + 0xB) % 0xC;
             eRoulette->var7F = eRoulette->var7E;
         }
@@ -2523,10 +2521,15 @@ void sub_8118F8C(struct Sprite *sprite)
         sub_81186B8(sprite);
         if (!sub_81186E8(sprite))
         {
-            struct StructgUnknown_083F8DF4 *p;
+            const struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
             p = &gUnknown_083F8DF4[0];
-            eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
+            eRoulette->var8C -=
+#if MODERN
+                    ((float)(*(s8 *)&p[eRoulette->var04_0].var03))
+#else
+                    ((float)p[eRoulette->var04_0].var03)
+#endif // MODERN
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
 #if DEBUG
@@ -2556,8 +2559,13 @@ void sub_8119088(struct Sprite *sprite)
     sub_8118724(sprite);
     if (!(eRoulette->var94 > 40.f))
     {
+#if MODERN
+        eRoulette->var98 = - (        4.0f / (float)eRoulette->var86);
+        eRoulette->var90 = - (eRoulette->var8C / (float)eRoulette->var86);
+#else
         eRoulette->var98 = - (        4.0f / (float)(u16)eRoulette->var86);
         eRoulette->var90 = - (eRoulette->var8C / (float)(u16)eRoulette->var86);
+#endif // MODERN
         sprite->animNum       = 0x2;
         sprite->animBeginning = TRUE;
         sprite->animEnded     = FALSE;
@@ -2572,8 +2580,13 @@ void sub_8119134(struct Sprite *sprite)
     if (!(eRoulette->var94 > 60.0f))
     {
         m4aSongNumStartOrChange(0x5D);
+#if MODERN
+        eRoulette->var98 = - (                20.0f / (float)eRoulette->var84);
+        eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)eRoulette->var84);
+#else
         eRoulette->var98 = - (                20.0f / (float)(u16)eRoulette->var84);
         eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)(u16)eRoulette->var84);
+#endif // MODERN
         sprite->animNum       = 0x1;
         sprite->animBeginning = TRUE;
         sprite->animEnded     = FALSE;
@@ -2626,7 +2639,7 @@ void sub_81193D4(struct Sprite *sprite)
     u8 i = 0;
     s16 t;
     s16 s[0x2][0x2];
-    struct StructgUnknown_083F8DF4 *p;
+    const struct StructgUnknown_083F8DF4 *p;
     memcpy(s, &gUnknown_083FA616, 0x8);
     t = sprite->data[0x7] - 0x2;
     eRoulette->var3C[0x37] = CreateSprite(&gSpriteTemplate_83FA524, s[sprite->data[0x0]][0x0], s[sprite->data[0x0]][0x1], 0x32);

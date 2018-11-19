@@ -442,7 +442,7 @@ extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
 
 static void sub_8043D5C(struct Sprite *);
-static const void *sub_8043CDC(u8);
+/*static*/ const void *sub_8043CDC(u8);
 /*static*/ void sub_8044210(u8, s16, u8);
 /*static*/ void draw_status_ailment_maybe(u8);
 extern void sub_8045180(struct Sprite *);
@@ -868,7 +868,7 @@ u8 battle_make_oam_safari_battle(void)
     return spriteId1;
 }
 
-static const void *sub_8043CDC(u8 a)
+/*static*/ const void *sub_8043CDC(u8 a)
 {
     return gHealthboxElementsGfxTable[a];
 }

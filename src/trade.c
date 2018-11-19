@@ -126,7 +126,7 @@ struct TradeEwramSubstruct {
     /*0x08fc*/ u8 filler_08fc[0x704];
 };
 
-IWRAM_DATA u8 gUnknown_03000508[8];
+static u8 gUnknown_03000508[8];
 
 struct UnkStructF {
     u8 filler_0000[9];
@@ -146,7 +146,7 @@ struct TradeEwramStruct {
 
 static void sub_8047EC0(void);
 static void sub_804AFB8(const struct WindowTemplate *, u8 *, const u8 *, u8);
-static void sub_804ACD8(const u8 *, u8 *, u8);
+/*static*/ void sub_804ACD8(const u8 *, u8 *, u8);
 static void nullsub_5(u8, u8);
 static void sub_804AA88(void);
 static void sub_804A964(struct UnkStructD *, void *);
@@ -174,12 +174,12 @@ static void sub_804A9F4(u8);
 static void sub_804AA00(u8);
 static void sub_8049E9C(u8);
 static void sub_804AADC(u16, u8);
-static void sub_804A80C(void);
+/*static*/ void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
 static void sub_804A840(u8);
 u8 sub_804A2B4(u8 *, u8, u8);
-static void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
-static void sub_804A96C(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
+/*static*/ void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
+/*static*/ void sub_804A96C(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
 void sub_804A33C(u8 *, u8, u8);
 void sub_804A51C(u8, u8, u8, u8, u8, u8);
 static void sub_804D7AC(struct Sprite *);
@@ -201,8 +201,8 @@ static void sub_804D80C(struct Sprite *);
 static void sub_804E1DC(void);
 static void sub_804BBCC(void);
 static void sub_804D8E4(void);
-static void sub_804C164(void);
-static void SetTradeSceneStrings(void);
+/*static*/ void sub_804C164(void);
+/*static*/ void SetTradeSceneStrings(void);
 void sub_804DB84(void);
 
 EWRAM_DATA u8 *gUnknown_020296CC[13] = {0};
@@ -3131,7 +3131,7 @@ static void sub_804A740(u8 whichParty)
     }
 }
 
-static void sub_804A80C(void)
+/*static*/ void sub_804A80C(void)
 {
     Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
     sub_804A41C(1);
@@ -3182,7 +3182,7 @@ static void sub_804A964(struct UnkStructD *unkStructD, void *dest)
     unkStructD->vramAddr = dest;
 }
 
-static void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
+/*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;
 
     for (y = 0; y < height; y++)
@@ -3200,7 +3200,7 @@ static void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *til
 }
 
 #if GERMAN
-static void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
+/*static*/ void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     sub_804A96C(arg0, left, top, tilemap, width, height, sp8);
 
     arg0->unk_10 = 1;
@@ -3317,7 +3317,7 @@ static bool8 sub_804ABF8(void)
     }
 }
 
-static void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
+/*static*/ void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
 {
     sub_804AFB8(&gWindowTemplate_81E725C, dest, src, a2);
 }
@@ -3481,7 +3481,7 @@ static void sub_804B104(struct Sprite *sprite)
     }
 }
 
-static void sub_804B128(void)
+/*static*/ void sub_804B128(void)
 {
     struct BgAffineDstData dest;
     DoBgAffineSet(&dest, gUnknown_03004828->unk_0104 << 8, gUnknown_03004828->unk_0106 << 8, gUnknown_03004828->unk_010c, gUnknown_03004828->unk_010e, gUnknown_03004828->unk_0118, gUnknown_03004828->unk_0118, gUnknown_03004828->unk_011c);
@@ -3564,7 +3564,7 @@ static void sub_804B210(void)
     TransferPlttBuffer();
 }
 
-static void sub_804B228(void)
+/*static*/ void sub_804B228(void)
 {
     gUnknown_03004828->unk_00b4 = 0;
     gUnknown_03004828->unk_00b2 = 0;
@@ -4405,7 +4405,7 @@ static void sub_804C0F8(u8 a0)
     }
 }
 
-static void sub_804C164(void)
+/*static*/ void sub_804C164(void)
 {
     LoadSpriteSheet(&gUnknown_082159A4);
     LoadSpriteSheet(&gUnknown_082159F4);
@@ -4415,7 +4415,7 @@ static void sub_804C164(void)
     LoadSpritePalette(&gUnknown_082159B4);
 }
 
-static void SetTradeSceneStrings(void)
+/*static*/ void SetTradeSceneStrings(void)
 {
     /*Sets the variable strings printed on the
      *actual trading screen. For use in strings

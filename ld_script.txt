@@ -482,6 +482,7 @@ SECTIONS {
         src/text.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/link.o(.rodata.str1.4);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         data/mon_attrs.o(.rodata);
@@ -577,6 +578,7 @@ SECTIONS {
         src/battle/battle_anim_80A7E7C.o(.rodata);
         src/item.o(.rodata);
         src/debug/matsuda_debug_menu.o(.rodata);
+        src/contest.o(.rodata);
         data/contest.o(.rodata);
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
@@ -593,6 +595,7 @@ SECTIONS {
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         src/battle/contest_link_80C2020.o(.rodata);
+        src/script_pokemon_util_80C4BF0.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         src/pc_screen_effect.o(.rodata);
         src/pc_screen_effect.o(.data);

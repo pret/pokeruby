@@ -23,11 +23,6 @@
 #include "trade.h"
 
 // RAM buffers used to assist with BuildEggMoveset()
-IWRAM_DATA u16 gHatchedEggLevelUpMoves[52];
-IWRAM_DATA u16 gHatchedEggFatherMoves[4];
-IWRAM_DATA u16 gHatchedEggFinalMoves[4];
-IWRAM_DATA u16 gHatchedEggEggMoves[12];
-IWRAM_DATA u16 gHatchedEggMotherMoves[4];
 
 extern u16 gMoveToLearn;
 
@@ -508,6 +503,12 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
     u32 numLevelUpMoves;
     u32 numEggMoves;
     u16 i, j;
+
+    static u16 gHatchedEggLevelUpMoves[52];
+    static u16 gHatchedEggFatherMoves[4];
+    static u16 gHatchedEggFinalMoves[4];
+    static u16 gHatchedEggEggMoves[12];
+    static u16 gHatchedEggMotherMoves[4];
 
     numSharedParentMoves = 0;
     for (i = 0; i < 4; i++)
