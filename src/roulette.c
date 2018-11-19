@@ -2436,7 +2436,8 @@ void debug_sub_812E698(struct Sprite *sprite)
     }
     else
     {
-	    eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
+        float v;
+	    eRoulette->var8C = (v = gUnknown_083F8DF4[eRoulette->var04_0].var1C) * 2;
 	    eRoulette->var7F = eRoulette->var7E;
     }
     sprite->data[0] = 1;
@@ -2560,10 +2561,10 @@ void sub_8119088(struct Sprite *sprite)
     if (!(eRoulette->var94 > 40.f))
     {
 #if MODERN
-        eRoulette->var98 = - (        4.0f / (float)eRoulette->var86);
+        eRoulette->var98 = - (            4.0f / (float)eRoulette->var86);
         eRoulette->var90 = - (eRoulette->var8C / (float)eRoulette->var86);
 #else
-        eRoulette->var98 = - (        4.0f / (float)(u16)eRoulette->var86);
+        eRoulette->var98 = - (            4.0f / (float)(u16)eRoulette->var86);
         eRoulette->var90 = - (eRoulette->var8C / (float)(u16)eRoulette->var86);
 #endif // MODERN
         sprite->animNum       = 0x2;
@@ -2581,10 +2582,10 @@ void sub_8119134(struct Sprite *sprite)
     {
         m4aSongNumStartOrChange(0x5D);
 #if MODERN
-        eRoulette->var98 = - (                20.0f / (float)eRoulette->var84);
+        eRoulette->var98 = - (                    20.0f / (float)eRoulette->var84);
         eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)eRoulette->var84);
 #else
-        eRoulette->var98 = - (                20.0f / (float)(u16)eRoulette->var84);
+        eRoulette->var98 = - (                    20.0f / (float)(u16)eRoulette->var84);
         eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)(u16)eRoulette->var84);
 #endif // MODERN
         sprite->animNum       = 0x1;
