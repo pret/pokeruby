@@ -102,11 +102,11 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte gSpeciesNames
 	.4byte gMoveNames
 	.4byte gDecorations
-	.4byte     0x1220
-	.4byte     0x1340
-	.4byte       0x18
-	.4byte      0x938
-	.4byte     0x3A8C
+	.4byte     0x1220 @ offsetof(struct SaveBlock1, flags)
+	.4byte     0x1340 @ offsetof(struct SaveBlock1, vars)
+	.4byte       0x18 @ offsetof(struct SaveBlock2, pokedex)
+	.4byte      0x938 @ offsetof(struct SaveBlock1, dexSeen2)
+	.4byte     0x3A8C @ offsetof(struct SaveBlock1, dexSeen3)
 	.4byte       0x46
 	.4byte      0x836
 	.4byte      0x84C
@@ -116,10 +116,10 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte  0xC121006
 	.4byte  0x8010B0F
 	.4byte        0xC
-	.4byte      0x890
-	.4byte     0x3AC0
-	.4byte      0x234
-	.4byte      0x238
+	.4byte      0x890 @ sizeof(struct SaveBlock2)
+	.4byte     0x3AC0 @ sizeof(struct SaveBlock1)
+	.4byte      0x234 @ offsetof(struct SaveBlock1, playerPartyCount)
+	.4byte      0x238 @ offsetof(struct SaveBlock1, playerParty)
 	.4byte          9
 	.4byte        0xA
 	.4byte          0
