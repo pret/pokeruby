@@ -1,6 +1,6 @@
 SlateportCity_Text_164642:: @ 8164642
-	.string "I’m the ENERGY GURU!\n"
-	.string "I’ll go for it and sell you what you need!$"
+	.string "I'm the ENERGY GURU!\n"
+	.string "I'll go for it and sell you what you need!$"
 
 SlateportCity_Text_164682:: @ 8164682
 	.string "Oh?\n"
@@ -20,7 +20,7 @@ SlateportCity_Text_1646FC:: @ 81646FC
 
 SlateportCity_Text_16471C:: @ 816471C
 	.string "You have to go for it a little harder.\p"
-	.string "If you do, I’ll give your POKéMON\n"
+	.string "If you do, I'll give your POKéMON\n"
 	.string "something nice.$"
 
 SlateportCity_Text_164775:: @ 8164775
@@ -30,7 +30,7 @@ SlateportCity_Text_164775:: @ 8164775
 SlateportCity_Text_1647A7:: @ 81647A7
 	.string "The light of the lighthouse reaches\n"
 	.string "dozens of miles away.\p"
-	.string "I wonder if it doesn’t startle POKéMON\n"
+	.string "I wonder if it doesn't startle POKéMON\n"
 	.string "in the sea.$"
 
 SlateportCity_Text_164814:: @ 8164814
@@ -54,23 +54,23 @@ SlateportCity_Text_164937:: @ 8164937
 
 SlateportCity_Text_164995:: @ 8164995
 	.string "If you put DOLLS or CUSHIONS on the\n"
-	.string "floor, they’ll get dirty.\p"
-	.string "I’m going to buy some BRICKS so my\n"
-	.string "DOLLS and CUSHIONS won’t get dirty\l"
+	.string "floor, they'll get dirty.\p"
+	.string "I'm going to buy some BRICKS so my\n"
+	.string "DOLLS and CUSHIONS won't get dirty\l"
 	.string "when I leave them out.$"
 
 SlateportCity_Text_164A30:: @ 8164A30
-	.string "Yeah! I’ve waited so long for this!\n"
+	.string "Yeah! I've waited so long for this!\n"
 	.string "POKéMON CONTESTS!\l"
-	.string "I’m going to enter!\p"
+	.string "I'm going to enter!\p"
 	.string "But before I do, I have to catch some\n"
 	.string "POKéMON!$"
 
 SlateportCity_Text_164AA9:: @ 8164AA9
-	.string "Whew... I’m just bushed...\p"
+	.string "Whew... I'm just bushed...\p"
 	.string "I hiked over from MAUVILLE CITY.\n"
-	.string "But, boy, this city’s huge.\p"
-	.string "If I’d known this, I would’ve ridden\n"
+	.string "But, boy, this city's huge.\p"
+	.string "If I'd known this, I would've ridden\n"
 	.string "my BIKE here.$"
 
 SlateportCity_Text_164B34:: @ 8164B34
@@ -91,7 +91,7 @@ SlateportCity_Text_164BEA:: @ 8164BEA
 
 SlateportCity_Text_164C64:: @ 8164C64
 	.string "Hey, there! Quit pushing!\n"
-	.string "This is the line, can’t you see?$"
+	.string "This is the line, can't you see?$"
 
 SlateportCity_Text_164C9F:: @ 8164C9F
 	.string "TEAM {EVIL_TEAM} has a policy of\n"
@@ -104,17 +104,17 @@ SlateportCity_Text_164CE8:: @ 8164CE8
 	.string "MUSEUM now?$"
 
 SlateportCity_Text_164D2B:: @ 8164D2B
-	.string "What’s the new scheme, I wonder?\p"
-	.string "Our BOSS is scary when he’s mad, so\n"
-	.string "I’d better not screw things up...$"
+	.string "What's the new scheme, I wonder?\p"
+	.string "Our BOSS is scary when he's mad, so\n"
+	.string "I'd better not screw things up...$"
 
 SlateportCity_Text_164D92:: @ 8164D92
-	.string "If there’s something we need in the\n"
+	.string "If there's something we need in the\n"
 	.string "MUSEUM, we should take it all!$"
 
 SlateportCity_Text_164DD5:: @ 8164DD5
 	.string "Hey, you there!\n"
-	.string "Don’t butt in!$"
+	.string "Don't butt in!$"
 
 SlateportCity_Text_164DF4:: @ 8164DF4
 	.string "A long line, huh?\p"
@@ -141,14 +141,14 @@ SlateportCity_Text_164F62:: @ 8164F62
 	.string "away and buy too much.$"
 
 SlateportCity_Text_164F9E:: @ 8164F9E
-	.string "If you want to change your POKéMON’s\n"
-	.string "nickname, you’ll have to get the NAME\l"
+	.string "If you want to change your POKéMON's\n"
+	.string "nickname, you'll have to get the NAME\l"
 	.string "RATER to help you.$"
 
 SlateportCity_Text_164FFC:: @ 8164FFC
 	.string "Any POKéMON you get in a trade, you\n"
-	.string "can’t change its nickname.\p"
-	.string "The original TRAINER’s love for that\n"
+	.string "can't change its nickname.\p"
+	.string "The original TRAINER's love for that\n"
 	.string "POKéMON is in the nickname.$"
 
 SlateportCity_Text_16507C:: @ 816507C
@@ -165,10 +165,10 @@ SlateportCity_Text_16511E:: @ 816511E
 	.string "People have to work together to get it\n"
 	.string "to spin faster.\p"
 	.string "The faster you can make it spin, the\n"
-	.string "better {POKEBLOCK}S you can get, I’ve heard.$"
+	.string "better {POKEBLOCK}S you can get, I've heard.$"
 
 SlateportCity_Text_1651A1:: @ 81651A1
-	.string "It’s used for making a kind of candy\n"
+	.string "It's used for making a kind of candy\n"
 	.string "called a {POKEBLOCK}.\p"
 	.string "If you give a good {POKEBLOCK} to a POKéMON,\n"
 	.string "its condition will improve by a lot.$"
@@ -176,13 +176,13 @@ SlateportCity_Text_1651A1:: @ 81651A1
 SlateportCity_Text_165222:: @ 8165222
 	.string "I was hoping that it was a famous star\n"
 	.string "so I could get an autograph.\p"
-	.string "But who’s that being interviewed?\n"
-	.string "Isn’t that CAPT. STERN?$"
+	.string "But who's that being interviewed?\n"
+	.string "Isn't that CAPT. STERN?$"
 
 SlateportCity_Text_1652A0:: @ 81652A0
 	.string "That lady interviewer is so cool and\n"
 	.string "pretty.\p"
-	.string "When I grow up, I’m going to be an\n"
+	.string "When I grow up, I'm going to be an\n"
 	.string "international journalist!$"
 
 SlateportCity_Text_16530A:: @ 816530A
@@ -192,7 +192,7 @@ SlateportCity_Text_16530A:: @ 816530A
 	.string "What could it be?$"
 
 SlateportCity_Text_165376:: @ 8165376
-	.string "What’s going on here?\p"
+	.string "What's going on here?\p"
 	.string "Did the good CAPTAIN come back with\n"
 	.string "a big fish from the ocean floor?$"
 
@@ -202,14 +202,14 @@ SlateportCity_Text_1653D1:: @ 81653D1
 
 SlateportCity_Text_1653F4:: @ 81653F4
 	.string "A TV interview! Here!\n"
-	.string "The CAPTAIN’s a celebrity!$"
+	.string "The CAPTAIN's a celebrity!$"
 
 SlateportCity_Text_165425:: @ 8165425
 	.string "TY: Okay, CAPT. STERN, a big smile\n"
 	.string "for the camera!$"
 
 SlateportCity_Text_165458:: @ 8165458
-	.string "GABBY: I see, I see. You’ve had a most\n"
+	.string "GABBY: I see, I see. You've had a most\n"
 	.string "invaluable experience...$"
 
 SlateportCity_Text_165498:: @ 8165498
@@ -217,7 +217,7 @@ SlateportCity_Text_165498:: @ 8165498
 	.string "move ahead with our exploration.$"
 
 SlateportCity_Text_1654E0:: @ 81654E0
-	.string "GABBY: That’s wonderful, CAPT. STERN!\n"
+	.string "GABBY: That's wonderful, CAPT. STERN!\n"
 	.string "Thank you for taking the time from\l"
 	.string "your busy schedule to talk to us.\p"
 	.string "We hope we can interview you again\n"
@@ -230,13 +230,13 @@ SlateportCity_Text_16558D:: @ 816558D
 
 SlateportCity_Text_1655E7:: @ 81655E7
 	.string "Oh! {PLAYER}{KUN}!\n"
-	.string "You’re looking great!\p"
+	.string "You're looking great!\p"
 	.string "We made a huge discovery on our last\n"
 	.string "seafloor exploration.\p"
 	.string "We found an underwater cavern on\n"
 	.string "ROUTE 128.\p"
-	.string "We think it’s the habitat of a POKéMON\n"
-	.string "that’s said to have been long extinct.$"
+	.string "We think it's the habitat of a POKéMON\n"
+	.string "that's said to have been long extinct.$"
 
 SlateportCity_Text_1656BC:: @ 81656BC
 	.string "Fufufu...\n"
@@ -256,9 +256,9 @@ SlateportCity_Text_16578F:: @ 816578F
 	.string "Where did it come from?$"
 
 SlateportCity_Text_1657FA:: @ 81657FA
-	.string "It’s from the HARBOR!\p"
+	.string "It's from the HARBOR!\p"
 	.string "The submarine!\n"
-	.string "They’re trying to take it!$"
+	.string "They're trying to take it!$"
 
 SlateportCity_Text_16583A:: @ 816583A
 	.string "{PLAYER}{KUN}!\n"
@@ -270,18 +270,18 @@ SlateportCity_Text_165856:: @ 8165856
 	.string "“Let it burn! POKéMON TRAINERS!”$"
 
 SlateportCity_Text_1658A0:: @ 81658A0
-	.string "STERN’S SHIPYARD\p"
+	.string "STERN'S SHIPYARD\p"
 	.string "“Wanted: A sailor capable of sailing\n"
 	.string "in all currents.”$"
 
 SlateportCity_Text_1658E8:: @ 81658E8
-	.string "STERN’S SHIPYARD\p"
+	.string "STERN'S SHIPYARD\p"
 	.string "“The ferry S.S. TIDAL nears\n"
 	.string "completion for serving the ports of\l"
 	.string "SLATEPORT and LILYCOVE.”$"
 
 SlateportCity_Text_165952:: @ 8165952
-	.string "STERN’S SHIPYARD\p"
+	.string "STERN'S SHIPYARD\p"
 	.string "“Boarding of the SLATEPORT-LILYCOVE\n"
 	.string "ferry S.S. TIDAL is handled at the\l"
 	.string "HARBOR.”$"
@@ -317,5 +317,5 @@ SlateportCity_Text_165B02:: @ 8165B02
 	.string "ferry S.S. TIDAL.”$"
 
 SlateportCity_Text_165B48:: @ 8165B48
-	.string "NAME RATER’S HOUSE\n"
+	.string "NAME RATER'S HOUSE\n"
 	.string "“POKéMON nicknames rated.”$"

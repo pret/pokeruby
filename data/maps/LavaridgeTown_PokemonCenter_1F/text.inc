@@ -2,7 +2,7 @@ LavaridgeTown_PokemonCenter_1F_Text_176E92:: @ 8176E92
 	.string "I think POKéMON get closer to their\n"
 	.string "TRAINERS if they spend time together.\p"
 	.string "The longer the better.\n"
-	.string "That’s what I think.$"
+	.string "That's what I think.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_176F08:: @ 8176F08
 	.string "I gave a RED {POKEBLOCK} to my POKéMON.\n"

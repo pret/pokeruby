@@ -26,7 +26,7 @@ u8 KagayaDebugMenu_SlotMachine(void);
 u8 Kagaya_80B0734(void);
 u8 debug_sub_80B07DC(void);
 
-const u8 Str_83EBB34[] = _("Trainer’s card");
+const u8 Str_83EBB34[] = _("Trainer's card");
 const u8 Str_83EBB43[] = _("Card to exchange");
 const u8 Str_83EBB54[] = _("Slot machine");
 

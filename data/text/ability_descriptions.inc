@@ -47,7 +47,7 @@ gAbilityDescription_Insomnia: @ 81F9B2C
 	.string "Prevents sleep.$"
 
 gAbilityDescription_ColorChange: @ 81F9B3C
-	.string "Changes type to foe’s move.$"
+	.string "Changes type to foe's move.$"
 
 gAbilityDescription_Immunity: @ 81F9B58
 	.string "Prevents poisoning.$"
@@ -65,10 +65,10 @@ gAbilityDescription_SuctionCups: @ 81F9BB2
 	.string "Firmly anchors the body.$"
 
 gAbilityDescription_Intimidate: @ 81F9BCB
-	.string "Lowers the foe’s ATTACK.$"
+	.string "Lowers the foe's ATTACK.$"
 
 gAbilityDescription_ShadowTag: @ 81F9BE4
-	.string "Prevents the foe’s escape.$"
+	.string "Prevents the foe's escape.$"
 
 gAbilityDescription_RoughSkin: @ 81F9BFF
 	.string "Hurts to touch.$"
@@ -137,7 +137,7 @@ gAbilityDescription_SandStream: @ 81F9DED
 	.string "Summons a sandstorm.$"
 
 gAbilityDescription_Pressure: @ 81F9E02
-	.string "Raises foe’s PP usage.$"
+	.string "Raises foe's PP usage.$"
 
 gAbilityDescription_ThickFat: @ 81F9E19
 	.string "Heat-and-cold protection.$"

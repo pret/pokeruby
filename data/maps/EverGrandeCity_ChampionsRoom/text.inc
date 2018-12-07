@@ -26,19 +26,19 @@ EverGrandeCity_ChampionsRoom_Text_1910FE:: @ 81910FE
 	.string "an even greater power.\p"
 	.string "And thus, you were able to grasp\n"
 	.string "victory today!\p"
-	.string "You are rightfully the HOENN region’s\n"
+	.string "You are rightfully the HOENN region's\n"
 	.string "new...$"
 
 EverGrandeCity_ChampionsRoom_Text_191225:: @ 8191225
 	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "Here’s some advice before you challenge\n"
+	.string "Here's some advice before you challenge\n"
 	.string "the CHAMPION...$"
 
 EverGrandeCity_ChampionsRoom_Text_191268:: @ 8191268
 	.string "MAY: Huh? What, what, what?\p"
 	.string "{PLAYER}{KUN}...\n"
 	.string "Could it be that...\l"
-	.string "It’s already over?$"
+	.string "It's already over?$"
 
 EverGrandeCity_ChampionsRoom_Text_1912B3:: @ 81912B3
 	.string "BRENDAN: {PLAYER}!\p"
@@ -48,19 +48,19 @@ EverGrandeCity_ChampionsRoom_Text_1912B3:: @ 81912B3
 EverGrandeCity_ChampionsRoom_Text_191305:: @ 8191305
 	.string "BRENDAN: {PLAYER}...\p"
 	.string "Are you trying to tell me...\n"
-	.string "You’ve beaten the CHAMPION?$"
+	.string "You've beaten the CHAMPION?$"
 
 EverGrandeCity_ChampionsRoom_Text_19134D:: @ 819134D
 	.string "PROF. BIRCH: See?\n"
 	.string "What did I tell you, {RIVAL}?\p"
-	.string "Didn’t I tell you that you don’t need\n"
+	.string "Didn't I tell you that you don't need\n"
 	.string "to worry about {PLAYER}{KUN}?\p"
 	.string "... ... ... ... ... ... ... ...\n"
-	.string "{PLAYER}{KUN}, you’ve finally done it.\p"
+	.string "{PLAYER}{KUN}, you've finally done it.\p"
 	.string "When I heard that you defeated your\n"
 	.string "own father at the PETALBURG GYM,\l"
 	.string "I thought perhaps you had a chance...\p"
-	.string "But to think you’ve actually become\n"
+	.string "But to think you've actually become\n"
 	.string "the CHAMPION!\p"
 	.string "Ah, yes!\p"
 	.string "What became of your POKéDEX?\n"
@@ -77,24 +77,24 @@ EverGrandeCity_ChampionsRoom_Text_191512:: @ 8191512
 	.string "Come with me.$"
 
 EverGrandeCity_ChampionsRoom_Text_191546:: @ 8191546
-	.string "STEVEN: I’m sorry, but...\p"
+	.string "STEVEN: I'm sorry, but...\p"
 	.string "From here on, only those TRAINERS who\n"
 	.string "have become CHAMPIONS may enter.\p"
-	.string "You’ll have to wait outside with the\n"
+	.string "You'll have to wait outside with the\n"
 	.string "PROFESSOR.$"
 
 EverGrandeCity_ChampionsRoom_Text_1915D7:: @ 81915D7
 	.string "MAY: Groan...\p"
 	.string "... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "I’m just joking! That’s okay!\n"
-	.string "That’s the rule!\p"
+	.string "I'm just joking! That's okay!\n"
+	.string "That's the rule!\p"
 	.string "{PLAYER}{KUN}!\n"
 	.string "Honestly, congratulations!$"
 
 EverGrandeCity_ChampionsRoom_Text_191675:: @ 8191675
 	.string "BRENDAN: ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "It can’t be helped if that’s the rule.\p"
+	.string "It can't be helped if that's the rule.\p"
 	.string "{PLAYER}, way to go!\n"
 	.string "Congratulations!$"

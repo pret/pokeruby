@@ -41,5 +41,5 @@ UnknownString_8186585: @ 8186585
 	.string "a jungle.\p"
 	.string "It gets awfully tiring walking around\n"
 	.string "this city.\p"
-	.string "That’s why I use FLY to instantly go to\n"
-	.string "any city I’ve visited.$"
+	.string "That's why I use FLY to instantly go to\n"
+	.string "any city I've visited.$"

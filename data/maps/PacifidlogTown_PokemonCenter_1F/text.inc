@@ -1,6 +1,6 @@
 PacifidlogTown_PokemonCenter_1F_Text_178E47:: @ 8178E47
-	.string "What color is your TRAINER’S CARD?\n"
-	.string "Mine’s copper!$"
+	.string "What color is your TRAINER'S CARD?\n"
+	.string "Mine's copper!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_178E79:: @ 8178E79
 	.string "PACIFIDLOG TOWN floats on top of\n"

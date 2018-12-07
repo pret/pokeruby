@@ -5,26 +5,26 @@ FortreeCity_Text_167577:: @ 8167577
 
 FortreeCity_Text_1675C2:: @ 81675C2
 	.string "I want to go to the POKéMON GYM, but\n"
-	.string "something’s blocking the way.\p"
+	.string "something's blocking the way.\p"
 	.string "After all the bother I went through\n"
 	.string "training on ROUTE 120...$"
 
 FortreeCity_Text_167642:: @ 8167642
-	.string "I’ve got my pride-and-joy POKéMON\n"
-	.string "with me. This time, I’ll beat WINONA.$"
+	.string "I've got my pride-and-joy POKéMON\n"
+	.string "with me. This time, I'll beat WINONA.$"
 
 FortreeCity_Text_16768A:: @ 816768A
 	.string "The ground absorbs rainwater, and\n"
 	.string "trees grow by drinking that water...\p"
 	.string "Our FORTREE CITY exists because\n"
-	.string "there’s both water and soil.$"
+	.string "there's both water and soil.$"
 
 FortreeCity_Text_16770E:: @ 816770E
 	.string "The CITY consists of homes built on\n"
 	.string "trees.\p"
 	.string "Perhaps because of that lifestyle,\n"
 	.string "everyone is healthy and lively.\p"
-	.string "Why, even myself - I feel as if I’ve\n"
+	.string "Why, even myself - I feel as if I've\n"
 	.string "grown thirty years younger.$"
 
 FortreeCity_Text_1677BD:: @ 81677BD

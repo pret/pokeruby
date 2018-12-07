@@ -1,17 +1,17 @@
 UnknownString_81B50C3: @ 81B50C3
-	.string "I’ll show you exactly how scary\n"
+	.string "I'll show you exactly how scary\n"
 	.string "TEAM AQUA can be!$"
 
 UnknownString_81B50F5: @ 81B50F5
 	.string "So you think you can stand up alone\n"
-	.string "to TEAM AQUA’s might...$"
+	.string "to TEAM AQUA's might...$"
 
 UnknownString_81B5131: @ 81B5131
 	.string "Yeah, so you are strong...\n"
-	.string "But there’re a lot of us!$"
+	.string "But there're a lot of us!$"
 
 UnknownString_81B5166: @ 81B5166
-	.string "What’s up with you?\n"
+	.string "What's up with you?\n"
 	.string "What does a single kid expect to do?$"
 
 UnknownString_81B519F: @ 81B519F
@@ -19,34 +19,34 @@ UnknownString_81B519F: @ 81B519F
 	.string "Too strong...$"
 
 UnknownString_81B51B5: @ 81B51B5
-	.string "You don’t know anything.\n"
+	.string "You don't know anything.\n"
 	.string "Quit messing around with us!$"
 
 UnknownString_81B51EB: @ 81B51EB
 	.string "Hey, I remember you from MT. CHIMNEY!\n"
-	.string "It’s payback time!$"
+	.string "It's payback time!$"
 
 UnknownString_81B5224: @ 81B5224
 	.string "Urgggh...\n"
 	.string "Beaten by some kid again!$"
 
 UnknownString_81B5248: @ 81B5248
-	.string "Heh, it doesn’t matter!\n"
+	.string "Heh, it doesn't matter!\n"
 	.string "We bought ourselves some time!\p"
 	.string "The BOSS should have snatched what\n"
 	.string "he was after!$"
 
 UnknownString_81B52B0: @ 81B52B0
 	.string "ARCHIE: Not you again...\p"
-	.string "You’ve impeded our plans repeatedly,\n"
-	.string "but this time you’re too late.\p"
+	.string "You've impeded our plans repeatedly,\n"
+	.string "but this time you're too late.\p"
 	.string "The RED ORB that rested atop\n"
 	.string "MT. PYRE...\l"
 	.string "I, ARCHIE, claim it as mine!\p"
 	.string "Fufufu... Finally, I can realize my\n"
 	.string "grand design...\p"
 	.string "Come on, crew!\n"
-	.string "It’s SLATEPORT next!$"
+	.string "It's SLATEPORT next!$"
 
 UnknownString_81B53AB: @ 81B53AB
 	.string "Oh, no...\n"
@@ -84,7 +84,7 @@ UnknownString_81B5647: @ 81B5647
 	.string "to its rightful place, too?$"
 
 UnknownString_81B56AB: @ 81B56AB
-	.string "What’s that?!\p"
+	.string "What's that?!\p"
 	.string "If the balance is not restored, there\n"
 	.string "is no telling what could happen.\p"
 	.string "You will return the BLUE ORB to its\n"
@@ -146,7 +146,7 @@ UnknownString_81B5BD7: @ 81B5BD7
 UnknownString_81B5BFC: @ 81B5BFC
 	.string "ARCHIE: You...\n"
 	.string "So you stopped KYOGRE...\p"
-	.string "I shouldn’t be surprised...\p"
+	.string "I shouldn't be surprised...\p"
 	.string "I understand now that humans cannot\n"
 	.string "freely control the balance between\l"
 	.string "the land and the sea...\p"

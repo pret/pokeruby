@@ -25,7 +25,7 @@ LilycoveCity_Harbor_Text_1C5120:: @ 81C5120
 
 SouthernIsland_Exterior_Text_1C5215:: @ 81C5215
 	.string "Aye, Maat, auf dieser gottverlassenen\n"
-	.string "Insel gibt’s nichts zu sehen und zu tun.\p"
+	.string "Insel gibt's nichts zu sehen und zu tun.\p"
 	.string "Sollen wir nicht nach SEEGRASULB CITY\n"
 	.string "zurücksegeln?$"
 

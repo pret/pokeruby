@@ -17,7 +17,7 @@ Route110_TrickHousePuzzle6_Text_19DD49:: @ 819DD49
 	.string "über die Mauer fliegen...$"
 
 Route110_TrickHousePuzzle6_Text_19DD83:: @ 819DD83
-	.string "Uaah! Ich hab’s vermasselt!$"
+	.string "Uaah! Ich hab's vermasselt!$"
 
 Route110_TrickHousePuzzle6_Text_19DD96:: @ 819DD96
 	.string "Hihihihi... Ich habe doch nur verloren,\n"

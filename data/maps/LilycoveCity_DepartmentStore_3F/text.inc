@@ -7,7 +7,7 @@ LilycoveCity_DepartmentStore_3F_Text_18C24B:: @ 818C24B
 LilycoveCity_DepartmentStore_3F_Text_18C2B5:: @ 818C2B5
 	.string "I want my POKéMON to have more\n"
 	.string "endurance.\p"
-	.string "I’m trying to decide whether to raise\n"
+	.string "I'm trying to decide whether to raise\n"
 	.string "DEFENSE with IRON, or SP. DEF with ZINC.$"
 
 LilycoveCity_DepartmentStore_3F_Text_18C32E:: @ 818C32E

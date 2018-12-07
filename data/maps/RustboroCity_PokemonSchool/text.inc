@@ -10,7 +10,7 @@ RustboroCity_PokemonSchool_Text_184389:: @ 8184389
 	.string "steadily lose HP.\p"
 	.string "The effects of poison remain after\n"
 	.string "a battle.\p"
-	.string "A poisoned POKéMON’s HP will drop\n"
+	.string "A poisoned POKéMON's HP will drop\n"
 	.string "while it is traveling.\p"
 	.string "Heal a poisoning using an ANTIDOTE.$"
 
@@ -32,7 +32,7 @@ RustboroCity_PokemonSchool_Text_1844EC:: @ 81844EC
 
 RustboroCity_PokemonSchool_Text_1845A5:: @ 81845A5
 	.string "A burn reduces ATTACK power, and it\n"
-	.string "steadily reduces the victim’s HP.\p"
+	.string "steadily reduces the victim's HP.\p"
 	.string "A burn lingers after battle.\n"
 	.string "Cure a burn using a BURN HEAL.$"
 
@@ -43,7 +43,7 @@ RustboroCity_PokemonSchool_Text_184627:: @ 8184627
 	.string "Thaw it out using an ICE HEAL.$"
 
 RustboroCity_PokemonSchool_Text_1846A2:: @ 81846A2
-	.string "Students who don’t study get a little\n"
+	.string "Students who don't study get a little\n"
 	.string "taste of my QUICK CLAW.\p"
 	.string "Whether or not you are a good student \n"
 	.string "will be evident from the way you use\l"
@@ -59,16 +59,16 @@ RustboroCity_PokemonSchool_Text_184737:: @ 8184737
 	.string "topics to study!$"
 
 RustboroCity_PokemonSchool_Text_18480E:: @ 818480E
-	.string "I’m trading POKéMON with my friend\n"
+	.string "I'm trading POKéMON with my friend\n"
 	.string "right now.$"
 
 RustboroCity_PokemonSchool_Text_18483C:: @ 818483C
 	.string "I always wanted a SEEDOT, and\n"
-	.string "I’m finally getting one!$"
+	.string "I'm finally getting one!$"
 
 RustboroCity_PokemonSchool_Text_184873:: @ 8184873
 	.string "POKéMON can hold items, but they\n"
-	.string "don’t know what to do with man-made\l"
+	.string "don't know what to do with man-made\l"
 	.string "items like POTION and ANTIDOTE.$"
 
 RustboroCity_PokemonSchool_Text_1848D8:: @ 81848D8
@@ -88,7 +88,7 @@ RustboroCity_PokemonSchool_Text_184988:: @ 8184988
 	.string "down...$"
 
 RustboroCity_PokemonSchool_Text_184A17:: @ 8184A17
-	.string "It’s this student’s notebook...\p"
+	.string "It's this student's notebook...\p"
 	.string "POKéMON are to be caught using\n"
 	.string "POKé BALLS.\p"
 	.string "Up to six POKéMON can accompany\n"
@@ -96,6 +96,6 @@ RustboroCity_PokemonSchool_Text_184A17:: @ 8184A17
 	.string "A TRAINER is someone who catches\n"
 	.string "POKéMON, raises them, and battles\l"
 	.string "with them.\p"
-	.string "A TRAINER’s mission is to defeat the\n"
+	.string "A TRAINER's mission is to defeat the\n"
 	.string "strong TRAINERS who await challengers\l"
 	.string "in POKéMON GYMS.$"

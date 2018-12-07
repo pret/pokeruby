@@ -19,15 +19,15 @@ SSTidalRooms_Text_1990F8:: @ 81990F8
 	.string "Thank you for sailing with us.$"
 
 SSTidalCorridor_Text_19913B:: @ 819913B
-	.string "It’ll be some time before we make land,\n"
+	.string "It'll be some time before we make land,\n"
 	.string "I reckon.\p"
-	.string "You can rest up in your cabin if you’d\n"
-	.string "like. Your cabin’s No. 2.\p"
+	.string "You can rest up in your cabin if you'd\n"
+	.string "like. Your cabin's No. 2.\p"
 	.string "The bed in there is soft and plushy.\n"
 	.string "I can attest to how comfy it is!$"
 
 SSTidalCorridor_Text_1991F4:: @ 81991F4
-	.string "We’ve arrived!$"
+	.string "We've arrived!$"
 
 SSTidalCorridor_Text_199203:: @ 8199203
 	.string "Go visit other cabins.\n"

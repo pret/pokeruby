@@ -1,16 +1,16 @@
 Route112_Text_16FDF0:: @ 816FDF0
 	.string "Grumble...\p"
 	.string "What happened to the others who went\n"
-	.string "to FALLARBOR? They’re late...$"
+	.string "to FALLARBOR? They're late...$"
 
 Route112_Text_16FE3E:: @ 816FE3E
 	.string "Grumble...\p"
-	.string "I’d like to ride the CABLE CAR to the\n"
+	.string "I'd like to ride the CABLE CAR to the\n"
 	.string "top, too..$"
 
 Route112_Text_16FE7A:: @ 816FE7A
-	.string "Eh, I’d like to get to MAUVILLE, but if\n"
-	.string "I went down these ledges, it’d be no\l"
+	.string "Eh, I'd like to get to MAUVILLE, but if\n"
+	.string "I went down these ledges, it'd be no\l"
 	.string "easy matter to get back to LAVARIDGE.$"
 
 Route112_Text_16FEED:: @ 816FEED

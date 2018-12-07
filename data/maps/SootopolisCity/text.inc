@@ -15,15 +15,15 @@ SootopolisCity_Text_16972B:: @ 816972B
 	.string "getting physically fit.$"
 
 SootopolisCity_Text_1697A7:: @ 81697A7
-	.string "I... I’ve never been out of this city.\p"
+	.string "I... I've never been out of this city.\p"
 	.string "I wonder what the world is like on the\n"
 	.string "other side of this round sky?$"
 
 SootopolisCity_Text_169813:: @ 8169813
 	.string "Hm!\n"
-	.string "You’ve come all the way to SOOTOPOLIS?\l"
-	.string "You’re no ordinary tourist.\p"
-	.string "But I suppose that doesn’t make you an\n"
+	.string "You've come all the way to SOOTOPOLIS?\l"
+	.string "You're no ordinary tourist.\p"
+	.string "But I suppose that doesn't make you an\n"
 	.string "extraordinary tourist, either.$"
 
 SootopolisCity_Text_1698A0:: @ 81698A0
@@ -32,7 +32,7 @@ SootopolisCity_Text_1698A0:: @ 81698A0
 	.string "If you look up at the sky, the lip of\n"
 	.string "the crater is also visible.\l"
 	.string "So, all you see is the sky in a circle.\p"
-	.string "But that’s what makes the sky above\n"
+	.string "But that's what makes the sky above\n"
 	.string "SOOTOPOLIS the most beautiful.$"
 
 SootopolisCity_Text_169988:: @ 8169988
@@ -43,8 +43,8 @@ SootopolisCity_Text_169988:: @ 8169988
 
 SootopolisCity_Text_1699FD:: @ 81699FD
 	.string "My name is WALLACE.\n"
-	.string "I’m this town’s GYM LEADER.\p"
-	.string "I’ve also been entrusted with the\n"
+	.string "I'm this town's GYM LEADER.\p"
+	.string "I've also been entrusted with the\n"
 	.string "protection of the CAVE OF ORIGIN.\p"
 	.string "This downpour is caused by a power\n"
 	.string "emanating from the CAVE OF ORIGIN.$"
@@ -76,9 +76,9 @@ SootopolisCity_Text_169BC7:: @ 8169BC7
 SootopolisCity_Text_169C99:: @ 8169C99
 	.string "STEVEN: {PLAYER}{KUN}, I never expected you\n"
 	.string "to be holding the BLUE ORB.\p"
-	.string "You’ll be okay. With your POKéMON,\n"
-	.string "you’ll get things done no matter what.\p"
-	.string "I’m convinced of it!$"
+	.string "You'll be okay. With your POKéMON,\n"
+	.string "you'll get things done no matter what.\p"
+	.string "I'm convinced of it!$"
 
 SootopolisCity_Text_169D37:: @ 8169D37
 	.string "WALLACE: You must go together with\n"
@@ -87,10 +87,10 @@ SootopolisCity_Text_169D37:: @ 8169D37
 	.string "you inside the CAVE...$"
 
 SootopolisCity_Text_169DA6:: @ 8169DA6
-	.string "STEVEN: You’ll be okay. With your\n"
-	.string "POKéMON, you’ll get things done\l"
+	.string "STEVEN: You'll be okay. With your\n"
+	.string "POKéMON, you'll get things done\l"
 	.string "whatever happens.\p"
-	.string "I’m convinced of it!$"
+	.string "I'm convinced of it!$"
 
 SootopolisCity_Text_169E0F:: @ 8169E0F
 	.string "STEVEN: {PLAYER}{KUN}, you came, too?\n"
@@ -100,8 +100,8 @@ SootopolisCity_Text_169E0F:: @ 8169E0F
 
 SootopolisCity_Text_169E82:: @ 8169E82
 	.string "My name is WALLACE.\n"
-	.string "I’m this town’s GYM LEADER.\p"
-	.string "I’ve also been entrusted with the\n"
+	.string "I'm this town's GYM LEADER.\p"
+	.string "I've also been entrusted with the\n"
 	.string "protection of the CAVE OF ORIGIN.\p"
 	.string "This sunshine is caused by a power\n"
 	.string "emanating from the CAVE OF ORIGIN.$"
@@ -134,9 +134,9 @@ SootopolisCity_Text_16A06C:: @ 816A06C
 SootopolisCity_Text_16A13E:: @ 816A13E
 	.string "STEVEN: {PLAYER}{KUN}, I never expected you\n"
 	.string "to be holding the RED ORB.\p"
-	.string "You’ll be okay. With your POKéMON,\n"
-	.string "you’ll get things done no matter what.\p"
-	.string "I’m convinced of it!$"
+	.string "You'll be okay. With your POKéMON,\n"
+	.string "you'll get things done no matter what.\p"
+	.string "I'm convinced of it!$"
 
 SootopolisCity_Text_16A1DB:: @ 816A1DB
 	.string "WALLACE: You must go together with\n"
@@ -145,14 +145,14 @@ SootopolisCity_Text_16A1DB:: @ 816A1DB
 	.string "you inside the CAVE...$"
 
 SootopolisCity_Text_16A249:: @ 816A249
-	.string "STEVEN: You’ll be okay. With your\n"
-	.string "POKéMON, you’ll get things done\l"
+	.string "STEVEN: You'll be okay. With your\n"
+	.string "POKéMON, you'll get things done\l"
 	.string "whatever happens.\p"
-	.string "I’m convinced of it!$"
+	.string "I'm convinced of it!$"
 
 SootopolisCity_Text_16A2B2:: @ 816A2B2
 	.string "The legend told by the old man on\n"
-	.string "MT. PYRE... It wasn’t a made-up story.$"
+	.string "MT. PYRE... It wasn't a made-up story.$"
 
 SootopolisCity_Text_16A2FB:: @ 816A2FB
 	.string "The natural balance of HOENN is going\n"
@@ -165,7 +165,7 @@ SootopolisCity_Text_16A33E:: @ 816A33E
 	.string "thanks, too.\p"
 	.string "And, that same WALLACE is waiting for\n"
 	.string "you inside.\p"
-	.string "He’s strong.\n"
+	.string "He's strong.\n"
 	.string "But the way you are now, you should be\l"
 	.string "on equal footing with him.\p"
 	.string "Give it your best shot.$"
@@ -177,21 +177,21 @@ SootopolisCity_Text_16A455:: @ 816A455
 	.string "from? Where are we bound?$"
 
 SootopolisCity_Text_16A4D6:: @ 816A4D6
-	.string "Let me guess, you’re going to challenge\n"
+	.string "Let me guess, you're going to challenge\n"
 	.string "WALLACE?\p"
 	.string "Oh, you are really?\n"
-	.string "You’re awfully brave!$"
+	.string "You're awfully brave!$"
 
 SootopolisCity_Text_16A531:: @ 816A531
-	.string "Let me guess, you’ve beaten WALLACE!\n"
+	.string "Let me guess, you've beaten WALLACE!\n"
 	.string "Oh, you did, really?\p"
-	.string "Maybe I’ll become your fan!$"
+	.string "Maybe I'll become your fan!$"
 
 SootopolisCity_Text_16A587:: @ 816A587
 	.string "Hm!\n"
-	.string "You’ve come all the way to SOOTOPOLIS?\l"
-	.string "You’re no ordinary tourist.\p"
-	.string "But I suppose that doesn’t make you an\n"
+	.string "You've come all the way to SOOTOPOLIS?\l"
+	.string "You're no ordinary tourist.\p"
+	.string "But I suppose that doesn't make you an\n"
 	.string "extraordinary tourist, either.$"
 
 SootopolisCity_Text_16A614:: @ 816A614
@@ -199,7 +199,7 @@ SootopolisCity_Text_16A614:: @ 816A614
 	.string "crater of a volcano...\p"
 	.string "And in that ring, stars flicker and\n"
 	.string "blink as if they were alive...\l"
-	.string "It’s my favorite scenery.$"
+	.string "It's my favorite scenery.$"
 
 SootopolisCity_Text_16A6AE:: @ 816A6AE
 	.string "Hunh? Where is my house?$"

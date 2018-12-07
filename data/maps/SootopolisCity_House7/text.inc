@@ -3,7 +3,7 @@ SootopolisCity_House7_Text_18FFA9:: @ 818FFA9
 	.string "forced itself up from the depths.\p"
 	.string "Its crater emerged from the sea and\n"
 	.string "became filled with rainwater.\p"
-	.string "That’s how SOOTOPOLIS CITY came into\n"
+	.string "That's how SOOTOPOLIS CITY came into\n"
 	.string "being.$"
 
 SootopolisCity_House7_Text_19005B:: @ 819005B
