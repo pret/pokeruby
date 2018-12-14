@@ -11025,7 +11025,7 @@ static void atk74_hpthresholds2(void)
 static void atk75_useitemonopponent(void)
 {
     gBankInMenu = gBankAttacker;
-    PokemonUseItemEffects(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBankAttacker], 0, 1);
+    PokemonUseItemEffects(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBankAttacker], 0, TRUE);
     gBattlescriptCurrInstr += 1;
 }
 

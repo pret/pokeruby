@@ -4,6 +4,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/species.h"
+#include "constants/pokemon_item_effect_constants.h"
 #include "main.h"
 #include "pokemon.h"
 #include "random.h"
@@ -1731,9 +1732,9 @@ void CalculateMonStats(struct Pokemon *mon)
         newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
     }
 
-    eStatHp = newMaxHP - oldMaxHP;
-    if (eStatHp == 0)
-        eStatHp = 1;
+    eLevelUpHPDelta = newMaxHP - oldMaxHP;
+    if (eLevelUpHPDelta == 0)
+        eLevelUpHPDelta = 1;
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
 

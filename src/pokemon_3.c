@@ -91,7 +91,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = 6;
 
-    temp = gItemEffectTable[itemId - 13];
+    temp = gItemEffectTable[itemId - ITEM_POTION];
 
     if (!temp && itemId != ITEM_ENIGMA_BERRY)
         return 0;
@@ -221,7 +221,7 @@ u8 *sub_803F378(u16 itemId)
     }
     else
     {
-        itemEffect = gItemEffectTable[itemId - 13];
+        itemEffect = gItemEffectTable[itemId - ITEM_POTION];
     }
 
     gStringBank = gBankInMenu;

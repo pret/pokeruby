@@ -1166,6 +1166,7 @@ void GetSpeciesName(u8 *name, u16 species)
     name[i] = EOS;
 }
 
+// pp bonus = (basePP / 5) * numPPUps
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex)
 {
     u8 basePP = gBattleMoves[move].pp;

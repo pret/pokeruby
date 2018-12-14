@@ -173,7 +173,7 @@ extern u8 gSharedMem[];
 #define ewram160F0arr(i)                (gSharedMem[0x160F0 + i])
 #define ewram160F8                      (gSharedMem[0x160F8])
 #define ewram160F9                      (gSharedMem[0x160F9])
-#define eStatHp                         (gSharedMem[0x160FA])
+#define eLevelUpHPDelta                         (gSharedMem[0x160FA])
 #define ewram160FB                      (gSharedMem[0x160FB])
 #define ewram16100                      ((u8 *)(gSharedMem + 0x16100))
 #define ewram16100arr(i)                (gSharedMem[0x16100 + i])
