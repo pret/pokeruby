@@ -5,10 +5,10 @@ gMaxLines = 60;
 
 MEMORY
 {
-	ewram_region (w!x) : ORIGIN = 0x02000000, LENGTH = 0x40000
-	iwram_region (w!x) : ORIGIN = 0x03000000, LENGTH = 0x8000
-	rom_region (rx) :    ORIGIN = 0x08000000, LENGTH = 0xD00000
-	rom_gfx_region (r) : ORIGIN = 0x08D00000, LENGTH = 0x1000000 - 0xD00000
+    ewram_region (w!x) : ORIGIN = 0x02000000, LENGTH = 0x40000
+    iwram_region (w!x) : ORIGIN = 0x03000000, LENGTH = 0x8000
+    rom_region (rx) :    ORIGIN = 0x08000000, LENGTH = 0xD00000
+    rom_gfx_region (r) : ORIGIN = 0x08D00000, LENGTH = 0x1000000 - 0xD00000
 }
 
 SECTIONS {
@@ -1224,18 +1224,18 @@ SECTIONS {
     {
         *(*);
     }
-	
-	.fillrom :
-	{
-		FILL(0xff);
-		. = ORIGIN(rom_region) + LENGTH(rom_region) - 1;
-		BYTE(0xff);
-	} >rom_region
-	
-	.fillromgfx :
-	{
-		FILL(0xff);
-		. = ORIGIN(rom_gfx_region) + LENGTH(rom_gfx_region) - 1;
-		BYTE(0xff);
-	} >rom_gfx_region
+    
+    .fillrom :
+    {
+        FILL(0xff);
+        . = ORIGIN(rom_region) + LENGTH(rom_region) - 1;
+        BYTE(0xff);
+    } >rom_region
+    
+    .fillromgfx :
+    {
+        FILL(0xff);
+        . = ORIGIN(rom_gfx_region) + LENGTH(rom_gfx_region) - 1;
+        BYTE(0xff);
+    } >rom_gfx_region
 }
