@@ -9912,10 +9912,10 @@ static void atk5D_getmoneyreward(void)
 {
     int i = 0;
     u8 r5 = 0;
-    u32 money_to_give;
+    u32 moneyToGive;
     if (gTrainerBattleOpponent == 0x400)
     {
-        money_to_give = 2 * gBattleStruct->moneyMultiplier * MONEY_UNKNOWN;
+        moneyToGive = 2 * gBattleStruct->moneyMultiplier * MONEY_UNKNOWN;
     }
     else
     {
@@ -9923,42 +9923,45 @@ static void atk5D_getmoneyreward(void)
         {
         case 0:
             {
-                const struct PokeTrainerData1 *data = &gTrainers[gTrainerBattleOpponent].party->noItemNoMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].lvl;
+                const struct TrainerMonNoItemDefaultMoves *party;
+                party = gTrainers[gTrainerBattleOpponent].party.NoItemDefaultMoves;
+                r5 = party[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
             }
             break;
         case 2:
             {
-                const struct PokeTrainerData2 *data = &gTrainers[gTrainerBattleOpponent].party->itemNoMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].lvl;
+                const struct TrainerMonItemDefaultMoves *party;
+                party = gTrainers[gTrainerBattleOpponent].party.ItemDefaultMoves;
+                r5 = party[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
             }
             break;
         case 1:
         case 3:
             {
-                const struct PokeTrainerData3 *data = &gTrainers[gTrainerBattleOpponent].party->itemMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].lvl;
+                const struct TrainerMonNoItemCustomMoves *party;
+                party = gTrainers[gTrainerBattleOpponent].party.NoItemCustomMoves;
+                r5 = party[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
             }
             break;
         }
         for (; gTrainerMoney[i * 4] != 0xFF && gTrainerMoney[i * 4 + 1] != gTrainers[gTrainerBattleOpponent].trainerClass ; i++) {}
 
-        money_to_give = (r5 << 2) * gBattleStruct->moneyMultiplier;
+        moneyToGive = (r5 << 2) * gBattleStruct->moneyMultiplier;
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            money_to_give = 2 * gTrainerMoney[i * 4 + 1] * money_to_give;
+            moneyToGive = 2 * gTrainerMoney[i * 4 + 1] * moneyToGive;
         else
-            money_to_give = 1 * gTrainerMoney[i * 4 + 1] * money_to_give;
+            moneyToGive = 1 * gTrainerMoney[i * 4 + 1] * moneyToGive;
     }
 
-    AddMoney(&gSaveBlock1.money, money_to_give);
+    AddMoney(&gSaveBlock1.money, moneyToGive);
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 1;
     gBattleTextBuff1[2] = 4;
     gBattleTextBuff1[3] = 5;
-    gBattleTextBuff1[4] = BYTE0(money_to_give);
-    gBattleTextBuff1[5] = BYTE1(money_to_give);
-    gBattleTextBuff1[6] = BYTE2(money_to_give);
-    gBattleTextBuff1[7] = BYTE3(money_to_give);
+    gBattleTextBuff1[4] = uBYTE0_32(moneyToGive);
+    gBattleTextBuff1[5] = uBYTE1_32(moneyToGive);
+    gBattleTextBuff1[6] = uBYTE2_32(moneyToGive);
+    gBattleTextBuff1[7] = uBYTE3_32(moneyToGive);
     gBattleTextBuff1[8] = 0xFF;
 
     gBattlescriptCurrInstr += 1;
