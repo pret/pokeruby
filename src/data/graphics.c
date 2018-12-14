@@ -1080,17 +1080,17 @@ const u16 gPokenavCondition7_Pal[] = INCBIN_U16("graphics/pokenav/condition7.bin
 const u8 gPokenavTrainersEyesHeader_Gfx[] = INCBIN_U8("graphics/pokenav/trainereyes.4bpp.lz");
 const u8 gPokenavRibbonsHeader_Gfx[] = INCBIN_U8("graphics/pokenav/ribbons.4bpp.lz");
 
-const u8 gMenuTrainerCard_Gfx[] = INCBIN_U8("graphics/misc/trainer_card.4bpp");
-const u16 gMenuTrainerCard0Star_Pal[] = INCBIN_U16("graphics/misc/trainer_card_0star.gbapal");
-const u16 gMenuTrainerCard1Star_Pal[] = INCBIN_U16("graphics/misc/trainer_card_1star.gbapal");
-const u16 gMenuTrainerCard2Star_Pal[] = INCBIN_U16("graphics/misc/trainer_card_2star.gbapal");
-const u16 gMenuTrainerCard3Star_Pal[] = INCBIN_U16("graphics/misc/trainer_card_3star.gbapal");
-const u16 gMenuTrainerCard4Star_Pal[] = INCBIN_U16("graphics/misc/trainer_card_4star.gbapal");
+const u8 gMenuTrainerCard_Gfx[] = INCBIN_U8("graphics/trainer_card/trainer_card.4bpp");
+const u16 gMenuTrainerCard0Star_Pal[] = INCBIN_U16("graphics/trainer_card/trainer_card_0star.gbapal");
+const u16 gMenuTrainerCard1Star_Pal[] = INCBIN_U16("graphics/trainer_card/trainer_card_1star.gbapal");
+const u16 gMenuTrainerCard2Star_Pal[] = INCBIN_U16("graphics/trainer_card/trainer_card_2star.gbapal");
+const u16 gMenuTrainerCard3Star_Pal[] = INCBIN_U16("graphics/trainer_card/trainer_card_3star.gbapal");
+const u16 gMenuTrainerCard4Star_Pal[] = INCBIN_U16("graphics/trainer_card/trainer_card_4star.gbapal");
 
-const u8 gUnknown_08E8CAC0[] = INCBIN_U8("graphics/unknown/unknown_E8CAC0.bin");
-const u8 gUnknown_08E8CFC0[] = INCBIN_U8("graphics/unknown/unknown_E8CFC0.bin");
-const u8 gUnknown_08E8D4C0[] = INCBIN_U8("graphics/unknown/unknown_E8D4C0.bin");
-const u8 gUnknown_08E8D9C0[] = INCBIN_U8("graphics/unknown/unknown_E8D9C0.bin");
+const u8 gMenuTrainerCardFront_Tilemap[] = INCBIN_U8("graphics/trainer_card/trainer_card_front.map.bin");
+const u8 gMenuTrainerCardBack_Tilemap[] = INCBIN_U8("graphics/trainer_card/trainer_card_back.map.bin");
+const u8 gMenuTrainerCardFront2_Tilemap[] = INCBIN_U8("graphics/trainer_card/trainer_card_front_2.map.bin");
+const u8 gMenuTrainerCardBackground_Tilemap[] = INCBIN_U8("graphics/trainer_card/trainer_card_background.map.bin");
 
 const u8 gPSSMenuHeader_Gfx[] = INCBIN_U8("graphics/pokemon_storage/header.4bpp.lz");
 const u16 gPSSMenu1_Pal[] = INCBIN_U16("graphics/pokemon_storage/menu1.gbapal");

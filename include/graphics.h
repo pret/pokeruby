@@ -2623,10 +2623,10 @@ extern const u16 gMenuTrainerCard1Star_Pal[];
 extern const u16 gMenuTrainerCard2Star_Pal[];
 extern const u16 gMenuTrainerCard3Star_Pal[];
 extern const u16 gMenuTrainerCard4Star_Pal[];
-extern const u8 gUnknown_08E8CAC0[];
-extern const u8 gUnknown_08E8CFC0[];
-extern const u8 gUnknown_08E8D4C0[];
-extern const u8 gUnknown_08E8D9C0[];
+extern const u8 gMenuTrainerCardFront_Tilemap[];
+extern const u8 gMenuTrainerCardBack_Tilemap[];
+extern const u8 gMenuTrainerCardFront2_Tilemap[];
+extern const u8 gMenuTrainerCardBackground_Tilemap[];
 
 extern const u8 gUnknown_08EA1DEC[];
 extern const u16 gUnknown_08EA0328[];
