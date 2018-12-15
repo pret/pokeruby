@@ -13,6 +13,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/species.h"
+#include "constants/pokemon_item_effect_constants.h"
 
 extern u8 gUnknown_02023A14_50;
 
@@ -866,13 +867,15 @@ static u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u
 {
     if (itemId == ITEM_FULL_RESTORE)
         return AI_ITEM_FULL_RESTORE;
-    if (itemEffect[4] & 4)
+    if (itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_HEAL_HP)
         return AI_ITEM_HEAL_HP;
-    if (itemEffect[3] & 0x3F)
+    if (itemEffect[MON_ITEM_FIELD_3] & MON_ITEM_CURE_ALL_STATUS)
         return AI_ITEM_CURE_CONDITION;
-    if (itemEffect[0] & 0x3F || itemEffect[1] != 0 || itemEffect[2] != 0)
+                                                                        /* MON_ITEM_X_DEFEND_MASK   MON_ITEM_X_ACCURACY_MASK
+                                                                           MON_ITEM_X_SPEED_MASK    MON_ITEM_X_SPECIAL_MASK  */
+    if (itemEffect[MON_ITEM_FIELD_0] & (MON_ITEM_HIGH_CRIT_MASK | MON_ITEM_X_ATTACK_MASK) || itemEffect[MON_ITEM_FIELD_1] != 0 || itemEffect[MON_ITEM_FIELD_2] != 0)
         return AI_ITEM_X_STAT;
-    if (itemEffect[3] & 0x80)
+    if (itemEffect[MON_ITEM_FIELD_3] & MON_ITEM_MIST)
         return AI_ITEM_GUARD_SPECS;
 
     return AI_ITEM_NOT_RECOGNIZABLE;
@@ -926,7 +929,7 @@ static bool8 ShouldUseItem(void)
             shouldUse = TRUE;
             break;
         case AI_ITEM_HEAL_HP:
-            paramOffset = GetItemEffectParamOffset(item, 4, 4);
+            paramOffset = GetItemEffectParamOffset(item, MON_ITEM_FIELD_4, MON_ITEM_HEAL_HP);
             if (paramOffset == 0)
                 break;
             if (gBattleMons[gActiveBattler].hp == 0)
@@ -936,52 +939,53 @@ static bool8 ShouldUseItem(void)
             break;
         case AI_ITEM_CURE_CONDITION:
             ewram160DA(gActiveBattler) = 0;
-            if (itemEffects[3] & 0x20 && gBattleMons[gActiveBattler].status1 & STATUS_SLEEP)
+            if (itemEffects[MON_ITEM_FIELD_3] & MON_ITEM_CURE_SLEEP && gBattleMons[gActiveBattler].status1 & STATUS_SLEEP)
             {
-               ewram160DA(gActiveBattler) |= 0x20;
+                ewram160DA(gActiveBattler) |= MON_ITEM_CURE_SLEEP;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x10 && (gBattleMons[gActiveBattler].status1 & STATUS_POISON || gBattleMons[gActiveBattler].status1 & STATUS_TOXIC_POISON))
+            if (itemEffects[MON_ITEM_FIELD_3] & MON_ITEM_CURE_POISON
+                && (gBattleMons[gActiveBattler].status1 & STATUS_POISON || gBattleMons[gActiveBattler].status1 & STATUS_TOXIC_POISON))
             {
-               ewram160DA(gActiveBattler) |= 0x10;
+                ewram160DA(gActiveBattler) |= MON_ITEM_CURE_POISON;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x8 && gBattleMons[gActiveBattler].status1 & STATUS_BURN)
+            if (itemEffects[MON_ITEM_FIELD_3] & MON_ITEM_CURE_BURN && gBattleMons[gActiveBattler].status1 & STATUS_BURN)
             {
-               ewram160DA(gActiveBattler) |= 0x8;
+                ewram160DA(gActiveBattler) |= MON_ITEM_CURE_BURN;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x4 && gBattleMons[gActiveBattler].status1 & STATUS_FREEZE)
+            if (itemEffects[MON_ITEM_FIELD_3] & MON_ITEM_CURE_FREEZE && gBattleMons[gActiveBattler].status1 & STATUS_FREEZE)
             {
-               ewram160DA(gActiveBattler) |= 0x4;
+                ewram160DA(gActiveBattler) |= MON_ITEM_CURE_FREEZE;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x2 && gBattleMons[gActiveBattler].status1 & STATUS_PARALYSIS)
+            if (itemEffects[MON_ITEM_FIELD_3] & MON_ITEM_CURE_PARALYSIS && gBattleMons[gActiveBattler].status1 & STATUS_PARALYSIS)
             {
-               ewram160DA(gActiveBattler) |= 0x2;
+                ewram160DA(gActiveBattler) |= MON_ITEM_CURE_PARALYSIS;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x1 && gBattleMons[gActiveBattler].status2 & STATUS2_CONFUSION)
+            if (itemEffects[MON_ITEM_FIELD_3] & MON_ITEM_CURE_CONFUSION && gBattleMons[gActiveBattler].status2 & STATUS2_CONFUSION)
             {
-               ewram160DA(gActiveBattler) |= 0x1;
+                ewram160DA(gActiveBattler) |= MON_ITEM_CURE_CONFUSION;
                 shouldUse = TRUE;
             }
             break;
         case AI_ITEM_X_STAT:
-           ewram160DA(gActiveBattler) = 0;
+            ewram160DA(gActiveBattler) = 0;
             if (gDisableStructs[gActiveBattler].isFirstTurn == 0)
                 break;
-            if (itemEffects[0] & 0xF)
+            if (itemEffects[MON_ITEM_FIELD_0] & MON_ITEM_X_ATTACK_MASK)
                ewram160DA(gActiveBattler) |= 0x1;
-            if (itemEffects[1] & 0xF0)
+            if (itemEffects[MON_ITEM_FIELD_1] & MON_ITEM_X_DEFEND_MASK)
                ewram160DA(gActiveBattler) |= 0x2;
-            if (itemEffects[1] & 0xF)
+            if (itemEffects[MON_ITEM_FIELD_1] & MON_ITEM_X_SPEED_MASK)
                ewram160DA(gActiveBattler) |= 0x4;
-            if (itemEffects[2] & 0xF)
+            if (itemEffects[MON_ITEM_FIELD_2] & MON_ITEM_X_SPECIAL_MASK)
                ewram160DA(gActiveBattler) |= 0x8;
-            if (itemEffects[2] & 0xF0)
+            if (itemEffects[MON_ITEM_FIELD_2] & MON_ITEM_X_ACCURACY_MASK)
                ewram160DA(gActiveBattler) |= 0x20;
-            if (itemEffects[0] & 0x30)
+            if (itemEffects[MON_ITEM_FIELD_0] & MON_ITEM_HIGH_CRIT_MASK)
                ewram160DA(gActiveBattler) |= 0x80;
             shouldUse = TRUE;
             break;

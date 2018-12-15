@@ -51,7 +51,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
 {
     u32 data;
     s32 friendship;
-    s32 cmdIndex;
+    s32 fieldOffset;
     bool8 itemUnsuccessful = TRUE;
     const u8 *itemEffect;
     u8 itemEffectExtraArgsIndex = MON_ITEM_EXTRA_ARGS_START_INDEX;
@@ -80,15 +80,15 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     if (gMain.inBattle)
     {
         gActiveBattler = gBankInMenu;
-        cmdIndex = (GetBattlerSide(gActiveBattler) != 0);
-        while (cmdIndex < gBattlersCount)
+        fieldOffset = (GetBattlerSide(gActiveBattler) != 0);
+        while (fieldOffset < gBattlersCount)
         {
-            if (gBattlerPartyIndexes[cmdIndex] == partyIndex)
+            if (gBattlerPartyIndexes[fieldOffset] == partyIndex)
             {
-                bank = cmdIndex;
+                bank = fieldOffset;
                 break;
             }
-            cmdIndex += 2;
+            fieldOffset += 2;
         }
     }
     else
@@ -114,76 +114,76 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
         itemEffect = gItemEffectTable[item - ITEM_POTION];
     }
 
-    for (cmdIndex = 0; cmdIndex < MON_ITEM_EXTRA_ARGS_START_INDEX; cmdIndex++)
+    for (fieldOffset = 0; fieldOffset < MON_ITEM_EXTRA_ARGS_START_INDEX; fieldOffset++)
     {
-        switch (cmdIndex)
+        switch (fieldOffset)
         {
-        case 0:
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_INFATUATION)
+        case MON_ITEM_FIELD_0:
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_INFATUATION)
              && gMain.inBattle && bank != MAX_BATTLERS_COUNT && (gBattleMons[bank].status2 & STATUS2_INFATUATION))
             {
                 gBattleMons[bank].status2 &= ~STATUS2_INFATUATION;
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_HIGH_CRIT_MASK)
+            if ((itemEffect[fieldOffset] & MON_ITEM_HIGH_CRIT_MASK)
              && !(gBattleMons[gActiveBattler].status2 & STATUS2_FOCUS_ENERGY))
             {
                 gBattleMons[gActiveBattler].status2 |= STATUS2_FOCUS_ENERGY;
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_X_ATTACK_MASK)
+            if ((itemEffect[fieldOffset] & MON_ITEM_X_ATTACK_MASK)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] += itemEffect[cmdIndex] & MON_ITEM_X_ATTACK_MASK;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] += itemEffect[fieldOffset] & MON_ITEM_X_ATTACK_MASK;
                 if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] > 12)
                     gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] = 12;
                 itemUnsuccessful = FALSE;
             }
             break;
-        case 1:
-            if ((itemEffect[cmdIndex] & MON_ITEM_X_DEFEND_MASK)
+        case MON_ITEM_FIELD_1:
+            if ((itemEffect[fieldOffset] & MON_ITEM_X_DEFEND_MASK)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] += (itemEffect[cmdIndex] & MON_ITEM_X_DEFEND_MASK) >> 4;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] += (itemEffect[fieldOffset] & MON_ITEM_X_DEFEND_MASK) >> 4;
                 if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] > 12)
                     gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] = 12;
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_X_SPEED_MASK)
+            if ((itemEffect[fieldOffset] & MON_ITEM_X_SPEED_MASK)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] += itemEffect[cmdIndex] & MON_ITEM_X_SPEED_MASK;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] += itemEffect[fieldOffset] & MON_ITEM_X_SPEED_MASK;
                 if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] > 12)
                     gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] = 12;
                 itemUnsuccessful = FALSE;
             }
             break;
-        case 2:
-            if ((itemEffect[cmdIndex] & MON_ITEM_X_ACCURACY_MASK)
+        case MON_ITEM_FIELD_2:
+            if ((itemEffect[fieldOffset] & MON_ITEM_X_ACCURACY_MASK)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] += (itemEffect[cmdIndex] & MON_ITEM_X_ACCURACY_MASK) >> 4;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] += (itemEffect[fieldOffset] & MON_ITEM_X_ACCURACY_MASK) >> 4;
                 if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] > 12)
                     gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] = 12;
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_X_SPECIAL_MASK)
+            if ((itemEffect[fieldOffset] & MON_ITEM_X_SPECIAL_MASK)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] += itemEffect[cmdIndex] & MON_ITEM_X_SPECIAL_MASK;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] += itemEffect[fieldOffset] & MON_ITEM_X_SPECIAL_MASK;
                 if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] > 12)
                     gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] = 12;
                 itemUnsuccessful = FALSE;
             }
             break;
-        case 3:
-            if ((itemEffect[cmdIndex] & MON_ITEM_MIST)
+        case MON_ITEM_FIELD_3:
+            if ((itemEffect[fieldOffset] & MON_ITEM_MIST)
              && gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer == 0)
             {
                 gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer = 5;
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_RAISE_LEVEL)  // raise level
+            if ((itemEffect[fieldOffset] & MON_ITEM_RAISE_LEVEL)  // raise level
              && GetMonData(pkmn, MON_DATA_LEVEL, NULL) != 100)
             {
                 data = gExperienceTables[gBaseStats[GetMonData(pkmn, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(pkmn, MON_DATA_LEVEL, NULL) + 1];
@@ -191,22 +191,22 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                 CalculateMonStats(pkmn);
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_SLEEP)
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_SLEEP)
              && HealStatusConditions(pkmn, partyIndex, STATUS_SLEEP, bank) == 0)
             {
                 if (bank != MAX_BATTLERS_COUNT)
                     gBattleMons[bank].status2 &= ~STATUS2_NIGHTMARE;
                 itemUnsuccessful = FALSE;
             }
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_POISON) && HealStatusConditions(pkmn, partyIndex, STATUS_PSN_ANY | STATUS_TOXIC_COUNTER, bank) == 0)
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_POISON) && HealStatusConditions(pkmn, partyIndex, STATUS_PSN_ANY | STATUS_TOXIC_COUNTER, bank) == 0)
                 itemUnsuccessful = FALSE;
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_BURN) && HealStatusConditions(pkmn, partyIndex, STATUS_BURN, bank) == 0)
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_BURN) && HealStatusConditions(pkmn, partyIndex, STATUS_BURN, bank) == 0)
                 itemUnsuccessful = FALSE;
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_FREEZE) && HealStatusConditions(pkmn, partyIndex, STATUS_FREEZE, bank) == 0)
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_FREEZE) && HealStatusConditions(pkmn, partyIndex, STATUS_FREEZE, bank) == 0)
                 itemUnsuccessful = FALSE;
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_PARALYSIS) && HealStatusConditions(pkmn, partyIndex, STATUS_PARALYSIS, bank) == 0)
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_PARALYSIS) && HealStatusConditions(pkmn, partyIndex, STATUS_PARALYSIS, bank) == 0)
                 itemUnsuccessful = FALSE;
-            if ((itemEffect[cmdIndex] & MON_ITEM_CURE_CONFUSION)
+            if ((itemEffect[fieldOffset] & MON_ITEM_CURE_CONFUSION)
              && gMain.inBattle && bank != MAX_BATTLERS_COUNT && (gBattleMons[bank].status2 & STATUS2_CONFUSION))
             {
                 gBattleMons[bank].status2 &= ~STATUS2_CONFUSION;
@@ -214,10 +214,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
             }
             break;
         // EV, HP, and PP raising effects
-        case 4:
+        case MON_ITEM_FIELD_4:
 #define ppWithBonus itemEffectCurBit
 #define ppUpScratchVar data
-            itemEffectByte = itemEffect[cmdIndex];
+            itemEffectByte = itemEffect[fieldOffset];
             if (itemEffectByte & MON_ITEM_PP_UP)
             {
                 itemEffectByte &= ~MON_ITEM_PP_UP;
@@ -443,8 +443,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                 itemEffectByte >>= 1;
             }
             break;
-        case 5:
-            itemEffectByte = itemEffect[cmdIndex];
+        case MON_ITEM_FIELD_5:
+            itemEffectByte = itemEffect[fieldOffset];
             itemEffectCurBit = 0;
             while (itemEffectByte != 0)
             {

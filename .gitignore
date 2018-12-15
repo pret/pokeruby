@@ -43,3 +43,10 @@ build/
 .vs/
 .projects/ARM/
 *.diff
+*.txt
+!charmap.txt
+!ld_script.txt
+!sym_bss.txt
+!sym_common.txt
+!sym_ewram.txt
+!projects/cMakeLists.txt

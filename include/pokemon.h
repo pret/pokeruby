@@ -645,7 +645,7 @@ struct Sprite *sub_80F7920(u16, u16, const u16 *);
 void BoxMonRestorePP(struct BoxPokemon *);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
-u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
+u8 GetItemEffectParamOffset(u16 itemId, u8 fieldOffset, u8 effectMask);
 
 #if DEBUG
 void Nakamura_NakaGenderTest_RecalcStats(struct Pokemon *);

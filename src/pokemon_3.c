@@ -2,6 +2,7 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/pokemon_item_effect_constants.h"
 #include "battle.h"
 #include "battle_message.h"
 #include "data2.h"
@@ -80,111 +81,112 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 bat
     }
 }
 
-u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
+u8 GetItemEffectParamOffset(u16 itemId, u8 fieldOffset, u8 effectMask)
 {
-    const u8 *temp;
+    const u8 *itemEffectTemp;
     const u8 *itemEffect;
     u8 offset;
-    int i;
-    u8 j;
-    u8 val;
+    int curFieldOffset;
+    u8 itemEffectCurBit;
+    u8 itemEffectByte;
 
-    offset = 6;
+    offset = MON_ITEM_EXTRA_ARGS_START_INDEX;
 
-    temp = gItemEffectTable[itemId - ITEM_POTION];
+    itemEffectTemp = gItemEffectTable[itemId - ITEM_POTION];
 
-    if (!temp && itemId != ITEM_ENIGMA_BERRY)
+    if (itemEffectTemp == NULL && itemId != ITEM_ENIGMA_BERRY)
         return 0;
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gActiveBattler].itemEffect;
+        itemEffectTemp = gEnigmaBerries[gActiveBattler].itemEffect;
     }
 
-    itemEffect = temp;
+    itemEffect = itemEffectTemp;
 
-    for (i = 0; i < 6; i++)
+    for (curFieldOffset = 0; curFieldOffset < MON_ITEM_EXTRA_ARGS_START_INDEX; curFieldOffset++)
     {
-        switch (i)
+        switch (curFieldOffset)
         {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-            if (i == effectByte)
+        case MON_ITEM_FIELD_0:
+        case MON_ITEM_FIELD_1:
+        case MON_ITEM_FIELD_2:
+        case MON_ITEM_FIELD_3:
+            if (curFieldOffset == fieldOffset)
                 return 0;
             break;
-        case 4:
-            val = itemEffect[4];
-            if (val & 0x20)
-                val &= 0xDF;
-            j = 0;
-            while (val)
+        case MON_ITEM_FIELD_4:
+            itemEffectByte = itemEffect[MON_ITEM_FIELD_4];
+            if (itemEffectByte & MON_ITEM_PP_UP)
+                itemEffectByte &= ~MON_ITEM_PP_UP;
+            itemEffectCurBit = 0;
+            while (itemEffectByte)
             {
-                if (val & 1)
+                if (itemEffectByte & 1)
                 {
-                    switch (j)
+                    switch (itemEffectCurBit)
                     {
-                    case 2:
-                        if (val & 0x10)
-                            val &= 0xEF;
-                    case 0:
-                        if (i == effectByte && (val & effectBit))
+                    case MON_ITEM_HEAL_HP_F:
+                        if (itemEffectByte & (1 << (MON_ITEM_REVIVE_F - MON_ITEM_HEAL_HP_F)))
+                            itemEffectByte &= ~(1 << (MON_ITEM_REVIVE_F - MON_ITEM_HEAL_HP_F));
+                    case MON_ITEM_HP_EV_F:
+                        if (curFieldOffset == fieldOffset && (itemEffectByte & effectMask))
                             return offset;
                         offset++;
                         break;
-                    case 1:
-                        if (i == effectByte && (val & effectBit))
+                    case MON_ITEM_ATK_EV_F:
+                        if (curFieldOffset == fieldOffset && (itemEffectByte & effectMask))
                             return offset;
                         offset++;
                         break;
-                    case 3:
-                        if (i == effectByte && (val & effectBit))
+                    case MON_ITEM_HEAL_PP_F:
+                        if (curFieldOffset == fieldOffset && (itemEffectByte & effectMask))
                             return offset;
                         offset++;
                         break;
-                    case 7:
-                        if (i == effectByte)
+                    case MON_ITEM_EVO_STONE_F:
+                        if (curFieldOffset == fieldOffset)
                             return 0;
                         break;
                     }
                 }
-                j++;
-                val >>= 1;
-                if (i == effectByte)
-                    effectBit >>= 1;
+                itemEffectCurBit++;
+                itemEffectByte >>= 1;
+                if (curFieldOffset == fieldOffset)
+                    effectMask >>= 1;
             }
             break;
-        case 5:
-            val = itemEffect[5];
-            j = 0;
-            while (val)
+        case MON_ITEM_FIELD_5:
+            itemEffectByte = itemEffect[MON_ITEM_FIELD_5];
+            itemEffectCurBit = 0;
+            while (itemEffectByte)
             {
-                if (val & 1)
+                if (itemEffectByte & 1)
                 {
-                    switch (j)
+                    switch (itemEffectCurBit)
                     {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                        if (i == effectByte && (val & effectBit))
+                    case MON_ITEM_DEF_EV_F:
+                    case MON_ITEM_SPEED_EV_F:
+                    case MON_ITEM_SPDEF_EV_F:
+                    case MON_ITEM_SPATK_EV_F:
+                    case MON_ITEM_PP_MAX_F:
+                    case MON_ITEM_AFFECT_FRIENDSHIP_0_TO_99_F:
+                    case MON_ITEM_AFFECT_FRIENDSHIP_100_TO_199_F:
+                        if (curFieldOffset == fieldOffset && (itemEffectByte & effectMask))
                             return offset;
                         offset++;
                         break;
-                    case 7:
-                        if (i == effectByte)
+                    // ??? why return 0 for this flag?
+                    case MON_ITEM_AFFECT_FRIENDSHIP_200_TO_255_F:
+                        if (curFieldOffset == fieldOffset)
                             return 0;
                         break;
                     }
                 }
-                j++;
-                val >>= 1;
-                if (i == effectByte)
-                    effectBit >>= 1;
+                itemEffectCurBit++;
+                itemEffectByte >>= 1;
+                if (curFieldOffset == fieldOffset)
+                    effectMask >>= 1;
             }
             break;
         }

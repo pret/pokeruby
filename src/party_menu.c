@@ -3,6 +3,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/pokemon_item_effect_constants.h"
 #include "party_menu.h"
 #include "battle.h"
 #include "battle_interface.h"
@@ -4929,9 +4930,9 @@ u8 GetItemEffectType(u16 item)
     register u32 itemEffect0_r0 asm("r0"); // u32 to prevent shifting when transferring itemEffect0 to this
     u8 mask;
 #else
-#define itemEffect0 itemEffect[0]
-#define itemEffect3 itemEffect[3]
-#define mask 0x3F
+#define itemEffect0 itemEffect[MON_ITEM_FIELD_0]
+#define itemEffect3 itemEffect[MON_ITEM_FIELD_3]
+#define mask (MON_ITEM_HIGH_CRIT_MASK | MON_ITEM_X_ATTACK_MASK)
 #endif
 
     // Read the item's effect properties.
@@ -4945,119 +4946,120 @@ u8 GetItemEffectType(u16 item)
     }
 
 #ifndef NONMATCHING
-    itemEffect0 = itemEffect[0];
-    mask = 0x3F;
+    itemEffect0 = itemEffect[MON_ITEM_FIELD_0];
+    mask = MON_ITEM_HIGH_CRIT_MASK | MON_ITEM_X_ATTACK_MASK; // or MON_ITEM_CURE_ALL_STATUS
 #endif
 
-    if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2])
+    if ((itemEffect0 & mask) || itemEffect[MON_ITEM_FIELD_1] || itemEffect[MON_ITEM_FIELD_2])
     {
-        return 0;
+        return MON_ITEM_TYPE_X_ITEM;
     }
 #ifndef NONMATCHING
-    itemEffect3 = itemEffect[3];
+    itemEffect3 = itemEffect[MON_ITEM_FIELD_3];
 #endif
-    if (itemEffect3 & 0x80)
+    if (itemEffect3 & MON_ITEM_MIST)
     {
-        return 0;
+        return MON_ITEM_TYPE_X_ITEM;
     }
-    else if (itemEffect0 & 0x40)
+    else if (itemEffect0 & MON_ITEM_0_0x40)
     {
-        return 10;
+        return MON_ITEM_TYPE_SACRED_ASH;
     }
-    else if (itemEffect3 & 0x40)
+    else if (itemEffect3 & MON_ITEM_RAISE_LEVEL)
     {
-        return 1;
+        return MON_ITEM_TYPE_RAISE_LEVEL;
     }
-    else if ((itemEffect3 & mask) || (itemEffect0 >> 7))
+    else if ((itemEffect3 & mask) || (itemEffect0 >> MON_ITEM_CURE_INFATUATION_F))
     {
-        if ((itemEffect3 & mask) == 0x20)
+        if ((itemEffect3 & mask) == MON_ITEM_CURE_SLEEP)
         {
-            return 4;
+            return MON_ITEM_TYPE_CURE_SLEEP;
         }
-        else if ((itemEffect3 & mask) == 0x10)
+        else if ((itemEffect3 & mask) == MON_ITEM_CURE_POISON)
         {
-            return 3;
+            return MON_ITEM_TYPE_CURE_POISON;
         }
-        else if ((itemEffect3 & mask) == 0x8)
+        else if ((itemEffect3 & mask) == MON_ITEM_CURE_BURN)
         {
-            return 5;
+            return MON_ITEM_TYPE_CURE_BURN;
         }
-        else if ((itemEffect3 & mask) == 0x4)
+        else if ((itemEffect3 & mask) == MON_ITEM_CURE_FREEZE)
         {
-            return 6;
+            return MON_ITEM_TYPE_CURE_FREEZE;
         }
-        else if ((itemEffect3 & mask) == 0x2)
+        else if ((itemEffect3 & mask) == MON_ITEM_CURE_PARALYSIS)
         {
-            return 7;
+            return MON_ITEM_TYPE_CURE_PARALYSIS;
         }
-        else if ((itemEffect3 & mask) == 0x1)
+        else if ((itemEffect3 & mask) == MON_ITEM_CURE_CONFUSION)
         {
-            return 8;
+            return MON_ITEM_TYPE_CURE_CONFUSION;
         }
         // alternate fakematching
         // itemEffect0_r0 = itemEffect0 >> 7;
         // asm(""); // increase live length for greg
         // if ((itemEffect0_r0 != 0) && (itemEffect3 & mask) == 0)
 #ifndef NONMATCHING
-        else if (((itemEffect0_r0 = itemEffect0 >> 7) != 0) && (itemEffect3 & mask) == 0)
+        else if (((itemEffect0_r0 = (itemEffect0 >> MON_ITEM_CURE_INFATUATION_F)) != 0) && (itemEffect3 & mask) == 0)
 #else
-        else if (((itemEffect[0] >> 7) != 0) && (itemEffect[3] & 0x3F) == 0)
+        else if ((itemEffect[MON_ITEM_FIELD_0] >> MON_ITEM_CURE_INFATUATION_F) != 0
+            && (itemEffect[MON_ITEM_FIELD_3] & MON_ITEM_CURE_ALL_STATUS) == 0)
 #endif
         {
-            return 9;
+            return MON_ITEM_TYPE_CURE_INFATUATION;
         }
         else
         {
-            return 11;
+            return MON_ITEM_TYPE_CURE_ALL_STATUS;
         }
     }
-    else if (itemEffect[4] & 0x44)
+    else if (itemEffect[MON_ITEM_FIELD_4] & (MON_ITEM_REVIVE | MON_ITEM_HEAL_HP))
     {
-        return 2;
+        return MON_ITEM_TYPE_HEAL_HP;
     }
-    else if (itemEffect[4] & 0x2)
+    else if (itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_ATK_EV)
     {
-        return 12;
+        return MON_ITEM_TYPE_ATK_EV;
     }
-    else if (itemEffect[4] & 0x1)
+    else if (itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_HP_EV)
     {
-        return 13;
+        return MON_ITEM_TYPE_HP_EV;
     }
-    else if (itemEffect[5] & 0x8)
+    else if (itemEffect[MON_ITEM_FIELD_5] & MON_ITEM_SPATK_EV)
     {
-        return 14;
+        return MON_ITEM_TYPE_SPATK_EV;
     }
-    else if (itemEffect[5] & 0x4)
+    else if (itemEffect[MON_ITEM_FIELD_5] & MON_ITEM_SPDEF_EV)
     {
-        return 15;
+        return MON_ITEM_TYPE_SPDEF_EV;
     }
-    else if (itemEffect[5] & 0x2)
+    else if (itemEffect[MON_ITEM_FIELD_5] & MON_ITEM_SPEED_EV)
     {
-        return 16;
+        return MON_ITEM_TYPE_SPEED_EV;
     }
-    else if (itemEffect[5] & 0x1)
+    else if (itemEffect[MON_ITEM_FIELD_5] & MON_ITEM_DEF_EV)
     {
-        return 17;
+        return MON_ITEM_TYPE_DEF_EV;
     }
-    else if (itemEffect[4] & 0x80)
+    else if (itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_EVO_STONE)
     {
-        return 18;
+        return MON_ITEM_TYPE_EVO_STONE;
     }
-    else if (itemEffect[4] & 0x20)
+    else if (itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_PP_UP)
     {
-        return 19;
+        return MON_ITEM_TYPE_PP_UP;
     }
-    else if (itemEffect[5] & 0x10)
+    else if (itemEffect[MON_ITEM_FIELD_5] & MON_ITEM_PP_MAX)
     {
-        return 20;
+        return MON_ITEM_TYPE_PP_MAX;
     }
-    else if (itemEffect[4] & 0x18)
+    else if (itemEffect[MON_ITEM_FIELD_4] & (MON_ITEM_HEAL_PP | MON_ITEM_PP_HEAL_ONE_MOVE))
     {
-        return 21;
+        return MON_ITEM_TYPE_HEAL_PP;
     }
     else
     {
-        return 22;
+        return MON_ITEM_TYPE_UNKNOWN;
     }
 #ifdef NONMATCHING
 #undef itemEffect0
