@@ -4205,7 +4205,7 @@ bool8 IsHPRecoveryItem(u16 item)
     else
         itemEffect = gItemEffectTable[item - ITEM_POTION];
 
-    if (itemEffect[4] & 4)
+    if (itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_HEAL_HP)
         return TRUE;
     else
         return FALSE;
@@ -4221,59 +4221,59 @@ void GetMedicineItemEffectMessage(u16 item)
 {
     switch (GetItemEffectType(item))
     {
-    case 3:
+    case MON_ITEM_TYPE_CURE_POISON:
         StringExpandPlaceholders(gStringVar4, gOtherText_CuredPoisoning);
         break;
-    case 4:
+    case MON_ITEM_TYPE_CURE_SLEEP:
         StringExpandPlaceholders(gStringVar4, gOtherText_WokeUp);
         break;
-    case 5:
+    case MON_ITEM_TYPE_CURE_BURN:
         StringExpandPlaceholders(gStringVar4, gOtherText_BurnHealed);
         break;
-    case 6:
+    case MON_ITEM_TYPE_CURE_FREEZE:
         StringExpandPlaceholders(gStringVar4, gOtherText_ThawedOut);
         break;
-    case 7:
+    case MON_ITEM_TYPE_CURE_PARALYSIS:
         StringExpandPlaceholders(gStringVar4, gOtherText_CuredParalysis);
         break;
-    case 8:
+    case MON_ITEM_TYPE_CURE_CONFUSION:
         StringExpandPlaceholders(gStringVar4, gOtherText_SnapConfusion);
         break;
-    case 9:
+    case MON_ITEM_TYPE_CURE_INFATUATION:
         StringExpandPlaceholders(gStringVar4, gOtherText_GotOverLove);
         break;
-    case 11:
+    case MON_ITEM_TYPE_CURE_ALL_STATUS:
         StringExpandPlaceholders(gStringVar4, gOtherText_BecameHealthy);
         break;
-    case 13:
+    case MON_ITEM_TYPE_HP_EV:
         StringCopy(gStringVar2, gOtherText_Hp2);
         StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
         break;
-    case 12:
+    case MON_ITEM_TYPE_ATK_EV:
         StringCopy(gStringVar2, gOtherText_Attack);
         StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
         break;
-    case 17:
+    case MON_ITEM_TYPE_DEF_EV:
         StringCopy(gStringVar2, gOtherText_Defense);
         StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
         break;
-    case 16:
+    case MON_ITEM_TYPE_SPEED_EV:
         StringCopy(gStringVar2, gOtherText_Speed);
         StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
         break;
-    case 14:
+    case MON_ITEM_TYPE_SPATK_EV:
         StringCopy(gStringVar2, gOtherText_SpAtk2);
         StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
         break;
-    case 15:
+    case MON_ITEM_TYPE_SPDEF_EV:
         StringCopy(gStringVar2, gOtherText_SpDef2);
         StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
         break;
-    case 19:
-    case 20:
+    case MON_ITEM_TYPE_PP_UP:
+    case MON_ITEM_TYPE_PP_MAX:
         StringExpandPlaceholders(gStringVar4, gOtherText_PPIncreased);
         break;
-    case 21:
+    case MON_ITEM_TYPE_HEAL_PP:
         StringExpandPlaceholders(gStringVar4, gOtherText_PPRestored);
         break;
     default:
@@ -4525,7 +4525,7 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 item, TaskFunc c)
     gTasks[taskId].func = TaskDummy;
     taskId2 = CreateTask(TaskDummy, 5);
     sub_806E8D0(taskId, item, c);
-    if (!(itemEffect[4] & 0x10))
+    if (!(itemEffect[MON_ITEM_FIELD_4] & MON_ITEM_PP_HEAL_ONE_MOVE))
     {
         gTasks[taskId2].data[11] = 0;
         DoRecoverPP(taskId2);

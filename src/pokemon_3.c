@@ -61,7 +61,7 @@ extern u8 BattleText_Rose[];
 extern u8 BattleText_UnknownString3[];
 extern u8 BattleText_MistShroud[];
 extern u8 BattleText_GetPumped[];
-extern u8 *gUnknown_08400F58[];
+extern u8 *gStatStageNamePtrs[];
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
@@ -195,20 +195,27 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 fieldOffset, u8 effectMask)
     return offset;
 }
 
-const u8 gUnknown_082082F8[] = {1, 1, 3, 2, 4, 6};
+const u8 sXItemMonItemEffectFieldOffsetToStatStageEnum[] = {
+    STAT_STAGE_ATK, // placeholder for dire hit
+    STAT_STAGE_ATK,
+    STAT_STAGE_SPEED,
+    STAT_STAGE_DEF,
+    STAT_STAGE_SPATK,
+    STAT_STAGE_ACC
+    };
 
-void sub_803F324(int stat)
+void ExpandXStatItemUseMessage(int stat)
 {
     gBankTarget = gBankInMenu;
-    StringCopy(gBattleTextBuff1, gUnknown_08400F58[gUnknown_082082F8[stat]]);
+    StringCopy(gBattleTextBuff1, gStatStageNamePtrs[sXItemMonItemEffectFieldOffsetToStatStageEnum[stat]]);
     StringCopy(gBattleTextBuff2, BattleText_Rose);
     StrCpyDecodeToDisplayedStringBattle(BattleText_UnknownString3);
 }
 
-u8 *sub_803F378(u16 itemId)
+u8 * GetXItemUseMessage(u16 itemId)
 {
     int i;
-    const u8 *itemEffect;
+    const u8 * itemEffect;
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
@@ -228,15 +235,15 @@ u8 *sub_803F378(u16 itemId)
 
     gStringBank = gBankInMenu;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MON_ITEM_FIELD_3; i++)
     {
-        if (itemEffect[i] & 0xF)
-            sub_803F324(i * 2);
-        if (itemEffect[i] & 0xF0)
+        if (itemEffect[i] & MON_ITEM_X_ITEM_MASK_LOW)
+            ExpandXStatItemUseMessage(i * 2);
+        if (itemEffect[i] & MON_ITEM_X_ITEM_MASK_HIGH)
         {
-            if (i)
+            if (i != MON_ITEM_FIELD_0)
             {
-                sub_803F324(i * 2 + 1);
+                ExpandXStatItemUseMessage(i * 2 + 1);
             }
             else
             {
@@ -246,7 +253,7 @@ u8 *sub_803F378(u16 itemId)
         }
     }
 
-    if (itemEffect[3] & 0x80)
+    if (itemEffect[MON_ITEM_FIELD_3] & MON_ITEM_MIST)
     {
         gBankAttacker = gBankInMenu;
         StrCpyDecodeToDisplayedStringBattle(BattleText_MistShroud);

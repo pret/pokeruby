@@ -38,6 +38,7 @@
 #include "constants/map_types.h"
 #include "constants/species.h"
 #include "constants/vars.h"
+#include "constants/pokemon_item_effect_constants.h"
 
 extern void (*gFieldItemUseCallback)(u8);
 extern void (*gFieldCallback)(void);
@@ -1047,7 +1048,7 @@ void sub_80CA2BC(u8 taskId)
     {
         PlaySE(SE_KAIFUKU);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        DisplayItemMessageOnField(taskId, sub_803F378(gSpecialVar_ItemId), sub_80CA294, 1);
+        DisplayItemMessageOnField(taskId, GetXItemUseMessage(gSpecialVar_ItemId), sub_80CA294, 1);
     }
 }
 
@@ -1138,36 +1139,36 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
 {
     switch (GetItemEffectType(gSpecialVar_ItemId) - 1)
     {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
+    case MON_ITEM_TYPE_HEAL_HP - 1:
+    case MON_ITEM_TYPE_CURE_POISON - 1:
+    case MON_ITEM_TYPE_CURE_SLEEP - 1:
+    case MON_ITEM_TYPE_CURE_BURN - 1:
+    case MON_ITEM_TYPE_CURE_FREEZE - 1:
+    case MON_ITEM_TYPE_CURE_PARALYSIS - 1:
+    case MON_ITEM_TYPE_CURE_ALL_STATUS - 1:
+    case MON_ITEM_TYPE_ATK_EV - 1:
+    case MON_ITEM_TYPE_HP_EV - 1:
+    case MON_ITEM_TYPE_SPATK_EV - 1:
+    case MON_ITEM_TYPE_SPDEF_EV - 1:
+    case MON_ITEM_TYPE_SPEED_EV - 1:
+    case MON_ITEM_TYPE_DEF_EV - 1:
         gTasks[taskId].data[15] = 1;
         ItemUseOutOfBattle_Medicine(taskId);
         break;
-    case 9:
+    case MON_ITEM_TYPE_SACRED_ASH - 1:
         gTasks[taskId].data[15] = 1;
         ItemUseOutOfBattle_SacredAsh(taskId);
         break;
-    case 0:
+    case MON_ITEM_TYPE_RAISE_LEVEL - 1:
         gTasks[taskId].data[15] = 1;
         ItemUseOutOfBattle_RareCandy(taskId);
         break;
-    case 18:
-    case 19:
+    case MON_ITEM_TYPE_PP_UP - 1:
+    case MON_ITEM_TYPE_PP_MAX - 1:
         gTasks[taskId].data[15] = 1;
         ItemUseOutOfBattle_PPUp(taskId);
         break;
-    case 20:
+    case MON_ITEM_TYPE_HEAL_PP - 1:
         gTasks[taskId].data[15] = 1;
         ItemUseOutOfBattle_PPRecovery(taskId);
         break;
@@ -1181,21 +1182,21 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
 {
     switch (GetItemEffectType(gSpecialVar_ItemId))
     {
-    case 0:
+    case MON_ITEM_TYPE_X_ITEM:
         ItemUseInBattle_StatIncrease(taskId);
         break;
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 11:
+    case MON_ITEM_TYPE_HEAL_HP:
+    case MON_ITEM_TYPE_CURE_POISON:
+    case MON_ITEM_TYPE_CURE_SLEEP:
+    case MON_ITEM_TYPE_CURE_BURN:
+    case MON_ITEM_TYPE_CURE_FREEZE:
+    case MON_ITEM_TYPE_CURE_PARALYSIS:
+    case MON_ITEM_TYPE_CURE_CONFUSION:
+    case MON_ITEM_TYPE_CURE_INFATUATION:
+    case MON_ITEM_TYPE_CURE_ALL_STATUS:
         ItemUseInBattle_Medicine(taskId);
         break;
-    case 21:
+    case MON_ITEM_TYPE_HEAL_PP:
         ItemUseInBattle_PPRecovery(taskId);
         break;
     default:

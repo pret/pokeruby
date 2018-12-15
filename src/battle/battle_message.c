@@ -179,7 +179,7 @@ extern u8 gBattleBufferA[4][0x200];
 EWRAM_DATA u8 gAbilitiesPerBank[4] = {0};
 
 extern const u8* const gUnknown_08401674[]; // table of pointers to 'a -TYPE' strings
-extern const u8* const gUnknown_08400F58[]; // table of pointers to stat strings
+extern const u8* const gStatStageNamePtrs[]; // table of pointers to stat strings
 extern const u8* const gUnknown_08400F78[]; // table of pointers to flavour strings
 
 struct StatusFlagString
@@ -919,7 +919,7 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
             srcID += 3;
             break;
         case 5: // stats
-            StringAppend(dst, gUnknown_08400F58[src[srcID + 1]]);
+            StringAppend(dst, gStatStageNamePtrs[src[srcID + 1]]);
             srcID += 2;
             break;
         case 6: // species name

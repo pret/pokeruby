@@ -841,7 +841,7 @@ const u8 BattleText_Ice[] = _("an ICE move");
 const u8 BattleText_Dragon[] = _("a DRAGON move");
 const u8 BattleText_Dark[] = _("a DARK move");
 
-const u8 *const gUnknown_08400F58[] =
+const u8 *const gStatStageNamePtrs[] =
 {
     BattleStatText_HP,
     BattleStatText_Attack,

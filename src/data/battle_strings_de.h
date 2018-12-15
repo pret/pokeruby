@@ -841,7 +841,7 @@ const u8 BattleText_Ice[] = _("eine EIS-Att.");
 const u8 BattleText_Dragon[] = _("eine DRACHEN-Att.");
 const u8 BattleText_Dark[] = _("eine UNLICHT-Att.");
 
-const u8 *const gUnknown_08400F58[] =
+const u8 *const gStatStageNamePtrs[] =
 {
     BattleStatText_HP,
     BattleStatText_Attack,

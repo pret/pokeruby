@@ -19,6 +19,7 @@
 #include "task.h"
 #include "text.h"
 #include "ewram.h"
+#include "constants/pokemon_item_effect_constants.h"
 
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
@@ -426,7 +427,7 @@ bool8 SetUpBattlePartyMenu(void)
     case 10:
         if (gUnknown_02038473 == 3)
         {
-            if (GetItemEffectType(gSpecialVar_ItemId) == 10)
+            if (GetItemEffectType(gSpecialVar_ItemId) == MON_ITEM_TYPE_SACRED_ASH)
                 ewram1B000.promptTextId = 0xFF;
             else
                 ewram1B000.promptTextId = 3;
@@ -464,7 +465,7 @@ void HandleBattlePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gUnknown_02038473 == 3 && GetItemEffectType(gSpecialVar_ItemId) == 10)
+        if (gUnknown_02038473 == 3 && GetItemEffectType(gSpecialVar_ItemId) == MON_ITEM_TYPE_SACRED_ASH)
         {
             gPokemonItemUseCallback(taskId, gSpecialVar_ItemId, Task_80952E4);
             return;
