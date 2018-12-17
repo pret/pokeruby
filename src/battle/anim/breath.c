@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D0930(struct Sprite* sprite);
 
@@ -50,20 +50,20 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7764 =
 
 void sub_80D0930(struct Sprite* sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gBattleAnimAttacker) == 0)
     {
         StartSpriteAnim(sprite, 0);
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + 32;
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + 32;
         sprite->data[1] = 0x40;
     }
     else
     {
         StartSpriteAnim(sprite, 1);
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) - 32;
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - 32;
         sprite->data[1] = -0x40;
     }
 
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = 0x34;
     sprite->data[2] = 0;
     sprite->data[3] = 0;

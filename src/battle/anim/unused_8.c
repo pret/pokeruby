@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB1B0[];
 
 void sub_80CF458(struct Sprite* sprite);

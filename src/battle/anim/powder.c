@@ -4,7 +4,7 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
+extern u8 gBattleAnimAttacker;
 
 void AnimMovePowderParticle(struct Sprite* sprite);
 static void AnimMovePowderParticleStep(struct Sprite* sprite);
@@ -75,7 +75,7 @@ void AnimMovePowderParticle(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
 
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->data[3] = -gBattleAnimArgs[4];
     }

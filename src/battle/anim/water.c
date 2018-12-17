@@ -5,8 +5,8 @@
 #include "util.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA318[];
 extern const union AnimCmd *const gSpriteAnimTable_83D9BC8[];
@@ -331,7 +331,7 @@ _080D3920:\n\
     movs r1, 0x4\n\
     orrs r0, r1\n\
     strb r0, [r2]\n\
-    ldr r0, _080D39A0 @ =gAnimBankAttacker\n\
+    ldr r0, _080D39A0 @ =gBattleAnimAttacker\n\
     ldrb r0, [r0]\n\
     bl GetBattlerSide\n\
     lsls r0, 24\n\
@@ -346,7 +346,7 @@ _080D3990: .4byte 0x00003f42\n\
 _080D3994: .4byte REG_BG1CNT\n\
 _080D3998: .4byte 0x040000d4\n\
 _080D399C: .4byte 0x85000400\n\
-_080D39A0: .4byte gAnimBankAttacker\n\
+_080D39A0: .4byte gBattleAnimAttacker\n\
 _080D39A4: .4byte gUnknown_08E70968\n\
 _080D39A8:\n\
     ldr r0, _080D39B4 @ =gUnknown_08E70C38\n\
@@ -454,7 +454,7 @@ _080D3A88: .4byte gBattle_BG1_X\n\
 _080D3A8C: .4byte 0x0000ffd0\n\
 _080D3A90: .4byte gBattle_BG1_Y\n\
 _080D3A94:\n\
-    ldr r0, _080D3AC4 @ =gAnimBankAttacker\n\
+    ldr r0, _080D3AC4 @ =gBattleAnimAttacker\n\
     ldrb r0, [r0]\n\
     bl GetBattlerSide\n\
     lsls r0, 24\n\
@@ -477,7 +477,7 @@ _080D3A94:\n\
     strh r1, [r7, 0xE]\n\
     b _080D3AEE\n\
     .align 2, 0\n\
-_080D3AC4: .4byte gAnimBankAttacker\n\
+_080D3AC4: .4byte gBattleAnimAttacker\n\
 _080D3AC8: .4byte 0x0000ff20\n\
 _080D3ACC: .4byte gBattle_BG1_X\n\
 _080D3AD0: .4byte gBattle_BG1_Y\n\

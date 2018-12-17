@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CEB0C(struct Sprite* sprite);
 void sub_80CECE8(struct Sprite* sprite);
@@ -221,8 +221,8 @@ void sub_80CEB0C(struct Sprite* sprite)
     }
     else
     {
-        a = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-        b = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+        a = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        b = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     }
 
     sprite->data[4] = sprite->pos1.x << 4;
@@ -288,14 +288,14 @@ static void sub_80CEC1C(struct Sprite* sprite)
 void sub_80CECE8(struct Sprite* sprite)
 {
     int a; 
-    if (GetBattlerSide(gAnimBankAttacker) == 1)
+    if (GetBattlerSide(gBattleAnimAttacker) == 1)
     {
         a = gBattleAnimArgs[1]; 
         (u16)gBattleAnimArgs[1] = -a;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
     StartSpriteAnim(sprite, gBattleAnimArgs[0]);
     sprite->data[2] = 0;
     sprite->data[3] = 0;
@@ -341,8 +341,8 @@ void sub_80CEDF0(struct Sprite* sprite)
         a = -16;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + a;
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + 8;
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + a;
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 8;
     sprite->data[0] = 8;
     sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);

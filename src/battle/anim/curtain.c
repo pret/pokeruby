@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN0H;

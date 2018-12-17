@@ -6,8 +6,8 @@
 #include "scanline_effect.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern u8 gBankAttacker;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
@@ -199,9 +199,9 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB100 =
 
 void sub_80DF5A0(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
-    if (GetBattlerSide(gAnimBankAttacker))
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
@@ -224,9 +224,9 @@ void sub_80DF5A0(struct Sprite *sprite)
 void sub_80DF63C(struct Sprite *sprite)
 {
     sub_8078650(sprite);
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
-    if (GetBattlerSide(gAnimBankAttacker))
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[1];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -252,13 +252,13 @@ void sub_80DF6F0(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
     }
     sub_807867C(sprite, gBattleAnimArgs[1]);
     sprite->pos1.y += gBattleAnimArgs[2];
@@ -270,7 +270,7 @@ void sub_80DF6F0(struct Sprite *sprite)
 
 void sub_80DF760(struct Sprite *sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
         StartSpriteAffineAnim(sprite, 1);
     sub_80DF63C(sprite);
 }
@@ -281,8 +281,8 @@ void sub_80DF78C(struct Sprite *sprite)
 {
     u16 r5;
     u16 r0;
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[4] = 0;
     sprite->data[5] = 1;
     sprite->data[6] = gBattleAnimArgs[0];
@@ -343,7 +343,7 @@ void sub_80DF924(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u16 i;
     u8 r1;
-    if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
+    if (GetBattlerPosition_permutated(gBattleAnimAttacker) == 1)
     {
         sp.dmaDest = &REG_BG1HOFS;
         task->data[2] = gBattle_BG1_X;
@@ -356,7 +356,7 @@ void sub_80DF924(u8 taskId)
     sp.dmaControl = 0xA2600001;
     sp.initState = 1;
     sp.unused9 = 0;
-    r1 = sub_8077FC0(gAnimBankAttacker);
+    r1 = sub_8077FC0(gBattleAnimAttacker);
     task->data[3] = r1 - 32;
     task->data[4] = r1 + 32;
     if (task->data[3] < 0)
@@ -426,8 +426,8 @@ void sub_80DFB28(struct Sprite *sprite)
 {
     int r6 = (gBattleAnimArgs[2] * 3) / 5;
     int i;
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[4];
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[4];
     sprite->data[1] = Cos(gBattleAnimArgs[1], gBattleAnimArgs[2]);
     sprite->data[2] = Sin(gBattleAnimArgs[1], r6);
     sprite->pos1.x += sprite->data[1] * gBattleAnimArgs[0];

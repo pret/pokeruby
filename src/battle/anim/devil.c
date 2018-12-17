@@ -5,7 +5,7 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimTarget;
 
 void sub_80D2ABC(struct Sprite *sprite);
 
@@ -45,7 +45,7 @@ void sub_80D2ABC(struct Sprite *sprite)
         sprite->pos1.x += gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
         StartSpriteAnim(sprite, 0);
-        sprite->subpriority = GetBattlerSubpriority(gAnimBankTarget) - 1;
+        sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) - 1;
         sprite->data[2] = 1;
     }
     sprite->data[0] += sprite->data[2];
