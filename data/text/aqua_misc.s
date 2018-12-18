@@ -1,5 +1,5 @@
 UnknownString_81B4F03: @ 81B4F03
-	.string "{PLAYER}’s BLUE ORB suddenly began\n"
+	.string "{PLAYER}'s BLUE ORB suddenly began\n"
 	.string "glowing!$"
 
 UnknownString_81B4F29: @ 81B4F29
@@ -13,4 +13,4 @@ UnknownString_81B4F6C: @ 81B4F6C
 	.string "ARCHIE: ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "This is good-bye.\n"
-	.string "This is the last you’ve seen of me...$"
+	.string "This is the last you've seen of me...$"

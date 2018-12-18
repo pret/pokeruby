@@ -3,9 +3,9 @@ AquaHideout_B2F_Text_197093:: @ 8197093
 	.string "Got here already, did you?\n"
 	.string "We underestimated you!\p"
 	.string "But this is it!\p"
-	.string "I’m a cut above the GRUNTS you’ve seen\n"
+	.string "I'm a cut above the GRUNTS you've seen\n"
 	.string "so far.\p"
-	.string "I’m not stalling for time. I’m going\n"
+	.string "I'm not stalling for time. I'm going\n"
 	.string "to pulverize you!$"
 
 AquaHideout_B2F_Text_197145:: @ 8197145
@@ -21,7 +21,7 @@ AquaHideout_B2F_Text_1971AE:: @ 81971AE
 	.string "Hehehe!\p"
 	.string "Our BOSS has already gone on his way to\n"
 	.string "some cave under the sea!\p"
-	.string "If you’re going to give chase, you’d\n"
+	.string "If you're going to give chase, you'd\n"
 	.string "better search the big, wide sea beyond\l"
 	.string "LILYCOVE.\p"
 	.string "But will you find it then?\n"
@@ -40,19 +40,19 @@ AquaHideout_B2F_Text_1972D2:: @ 81972D2
 	.string "Is this good enough?$"
 
 AquaHideout_B2F_Text_1972EF:: @ 81972EF
-	.string "Warp panels, the HIDEOUT’s pride\n"
+	.string "Warp panels, the HIDEOUT's pride\n"
 	.string "and joy!\p"
-	.string "You’re clueless about where you are,\n"
-	.string "aren’t you?\p"
+	.string "You're clueless about where you are,\n"
+	.string "aren't you?\p"
 	.string "Fluster and tire out the enemy, then\n"
-	.string "lower the boom! That’s our plan!$"
+	.string "lower the boom! That's our plan!$"
 
 AquaHideout_B2F_Text_197390:: @ 8197390
-	.string "What’s wrong with you?\n"
-	.string "You’re not tired at all!$"
+	.string "What's wrong with you?\n"
+	.string "You're not tired at all!$"
 
 AquaHideout_B2F_Text_1973C0:: @ 81973C0
-	.string "That reminds me... I can’t remember\n"
+	.string "That reminds me... I can't remember\n"
 	.string "where I put the MASTER BALL.\p"
 	.string "If I fail to guard it, our BOSS will\n"
 	.string "chew me out...$"

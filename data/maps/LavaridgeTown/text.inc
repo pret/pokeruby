@@ -8,34 +8,34 @@ LavaridgeTown_Text_16BDA4:: @ 816BDA4
 	.string "have this.$"
 
 LavaridgeTown_Text_16BE7D:: @ 816BE7D
-	.string "MAY: With those GO-GOGGLES, you’ll\n"
+	.string "MAY: With those GO-GOGGLES, you'll\n"
 	.string "have no trouble getting through the\l"
 	.string "desert near ROUTE 111.\p"
 	.string "But, wow, {PLAYER}{KUN}...\n"
 	.string "Challenging GYMS...\p"
-	.string "You’re trying hard because you don’t\n"
+	.string "You're trying hard because you don't\n"
 	.string "want to lose to me, I bet!\p"
 	.string "{PLAYER}{KUN}, I think I should challenge\n"
 	.string "your dad in PETALBURG GYM.\p"
 	.string "{PLAYER}{KUN}, see you again!$"
 
 LavaridgeTown_Text_16BF92:: @ 816BF92
-	.string "BRENDAN: {PLAYER}, hey, it’s been a while.\n"
-	.string "How’s it going?\p"
+	.string "BRENDAN: {PLAYER}, hey, it's been a while.\n"
+	.string "How's it going?\p"
 	.string "Hmm...\n"
-	.string "That’s a decent collection of BADGES.\p"
+	.string "That's a decent collection of BADGES.\p"
 	.string "All right, then.\n"
 	.string "You may as well have this.$"
 
 LavaridgeTown_Text_16C020:: @ 816C020
-	.string "BRENDAN: Keep those with you if you’re\n"
+	.string "BRENDAN: Keep those with you if you're\n"
 	.string "planning on going into that desert near\l"
 	.string "ROUTE 111.\p"
 	.string "There should be some POKéMON that\n"
 	.string "are exclusively desert-dwellers.\l"
 	.string "You might look around for those.\p"
 	.string "As for me...\n"
-	.string "I’m considering challenging NORMAN,\l"
+	.string "I'm considering challenging NORMAN,\l"
 	.string "the GYM LEADER of PETALBURG.\p"
 	.string "Unlike you, {PLAYER}, your dad looks like\n"
 	.string "he really is tough.\p"
@@ -43,10 +43,10 @@ LavaridgeTown_Text_16C020:: @ 816C020
 
 LavaridgeTown_Text_16C174:: @ 816C174
 	.string "I have here an EGG.\p"
-	.string "I’d hoped to hatch it by covering it in\n"
+	.string "I'd hoped to hatch it by covering it in\n"
 	.string "hot sand by the hot springs.\l"
-	.string "But that doesn’t seem to be enough...\p"
-	.string "I’ve heard it would be best if it were\n"
+	.string "But that doesn't seem to be enough...\p"
+	.string "I've heard it would be best if it were\n"
 	.string "kept together with POKéMON and\l"
 	.string "carried about.\p"
 	.string "You are a TRAINER, yes?\n"
@@ -55,15 +55,15 @@ LavaridgeTown_Text_16C174:: @ 816C174
 	.string "Will you take this EGG to hatch?$"
 
 LavaridgeTown_Text_16C2B6:: @ 816C2B6
-	.string "Good! I hope you’ll walk plenty with\n"
+	.string "Good! I hope you'll walk plenty with\n"
 	.string "this here EGG!$"
 
 LavaridgeTown_Text_16C2EA:: @ 816C2EA
 	.string "{PLAYER} received the EGG.$"
 
 LavaridgeTown_Text_16C2FF:: @ 816C2FF
-	.string "Oh? You’ve too many POKéMON.\n"
-	.string "There’s no room for this EGG...$"
+	.string "Oh? You've too many POKéMON.\n"
+	.string "There's no room for this EGG...$"
 
 LavaridgeTown_Text_16C33C:: @ 816C33C
 	.string "As you wish, then...\p"
@@ -73,12 +73,12 @@ LavaridgeTown_Text_16C33C:: @ 816C33C
 LavaridgeTown_Text_16C398:: @ 816C398
 	.string "Every so often, an EGG will be found at\n"
 	.string "the POKéMON DAY CARE.\p"
-	.string "Or at least that’s how the rumor goes.$"
+	.string "Or at least that's how the rumor goes.$"
 
 LavaridgeTown_Text_16C3FD:: @ 816C3FD
 	.string "We draw as much hot water as we need,\n"
 	.string "and yet the hot springs never run dry.\p"
-	.string "Isn’t it magical?\p"
+	.string "Isn't it magical?\p"
 	.string "These hot springs appear near active\n"
 	.string "volcanoes. Veins of water under the\l"
 	.string "ground are heated by magma to well up\l"
@@ -93,7 +93,7 @@ LavaridgeTown_Text_16C4DB:: @ 816C4DB
 
 LavaridgeTown_Text_16C54E:: @ 816C54E
 	.string "Oh, you like hot springs, do you?\p"
-	.string "That’s surprising for one as young\n"
+	.string "That's surprising for one as young\n"
 	.string "as you.$"
 
 LavaridgeTown_Text_16C59B:: @ 816C59B
@@ -108,7 +108,7 @@ LavaridgeTown_Text_16C603:: @ 816C603
 	.string "a bubble bath, or even a lava bath...$"
 
 LavaridgeTown_Text_16C694:: @ 816C694
-	.string "They’re claiming that these hot springs\n"
+	.string "They're claiming that these hot springs\n"
 	.string "are good for calming nervous tension,\l"
 	.string "relieving aching muscles, solving\l"
 	.string "romantic problems, and attracting\l"

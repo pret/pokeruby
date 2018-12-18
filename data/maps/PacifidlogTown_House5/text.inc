@@ -1,5 +1,5 @@
 PacifidlogTown_House5_Text_179718:: @ 8179718
-	.string "I can’t see MIRAGE ISLAND today...$"
+	.string "I can't see MIRAGE ISLAND today...$"
 
 PacifidlogTown_House5_Text_17973B:: @ 817973B
 	.string "Oh! Oh my!\n"

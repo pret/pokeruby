@@ -595,7 +595,7 @@ static const u8 DexDescription_Pixi_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Vulpix_1[] = _(
-    "In VULPIX’ Körper brennt eine Flamme,\n"
+    "In VULPIX' Körper brennt eine Flamme,\n"
     "die niemals erlischt. Am Tage, wenn die\n"
     "Temperaturen steigen, stößt dieses");
 static const u8 DexDescription_Vulpix_2[] = _(
@@ -766,7 +766,7 @@ static const u8 DexDescription_Giflor_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Paras_1[] = _(
-    "Auf PARAS’ Rücken wachsen parasitäre\n"
+    "Auf PARAS' Rücken wachsen parasitäre\n"
     "Pilze, die Tochukaso genannt werden.\n"
     "Sie wachsen, indem sie diesem");
 static const u8 DexDescription_Paras_2[] = _(
@@ -775,7 +775,7 @@ static const u8 DexDescription_Paras_2[] = _(
     "lebensverlängernde Medizin.");
 #else
 static const u8 DexDescription_Paras_1[] = _(
-    "Auf PARAS’ Rücken wachsen parasitäre\n"
+    "Auf PARAS' Rücken wachsen parasitäre\n"
     "Pilze, die Tochukaso genannt werden.\n"
     "Sie wachsen, indem sie dem");
 static const u8 DexDescription_Paras_2[] = _(
@@ -1319,7 +1319,7 @@ static const u8 DexDescription_Flegmon_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Lahmus_1[] = _(
-    "An LAHMUS’ Schweif hat sich ein \n"
+    "An LAHMUS' Schweif hat sich ein \n"
     "MUSCHAS festgebissen. Daher kann es\n"
     "ihn nicht mehr zum Fischen benutzen");
 static const u8 DexDescription_Lahmus_2[] = _(
@@ -1328,7 +1328,7 @@ static const u8 DexDescription_Lahmus_2[] = _(
     "halten.");
 #else
 static const u8 DexDescription_Lahmus_1[] = _(
-    "An LAHMUS’ Rute hat sich ein MUSCHAS\n"
+    "An LAHMUS' Rute hat sich ein MUSCHAS\n"
     "festgebissen. Daher kann es ihn nicht\n"
     "mehr zum Angeln benutzen");
 static const u8 DexDescription_Lahmus_2[] = _(
@@ -3161,7 +3161,7 @@ static const u8 DexDescription_Baldorfish_2[] = _(
 #endif
 
 static const u8 DexDescription_Scherox_1[] = _(
-    "SCHEROX’ Körper ist hart wie Stahl.\n"
+    "SCHEROX' Körper ist hart wie Stahl.\n"
     "Gewöhnliche Angriffe jagen ihm keine\n"
     "Angst ein. Dieses POKéMON schlägt");
 static const u8 DexDescription_Scherox_2[] = _(
@@ -3974,7 +3974,7 @@ static const u8 DexDescription_Magnayen_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Zigzachs_1[] = _(
-    "Das Haar auf ZIGZACHS’ Rücken ist\n"
+    "Das Haar auf ZIGZACHS' Rücken ist\n"
     "struppig. Es reibt seine Rückenborsten\n"
     "an Bäumen, um sein Revier zu markieren.");
 static const u8 DexDescription_Zigzachs_2[] = _(
@@ -4429,7 +4429,7 @@ static const u8 DexDescription_Kapilz_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Bummelz_1[] = _(
-    "BUMMELZ’ Herz schlägt nur ein Mal pro\n"
+    "BUMMELZ' Herz schlägt nur ein Mal pro\n"
     "Minute. Dieses POKéMON ist damit\n"
     "zufrieden, bewegungslos");
 static const u8 DexDescription_Bummelz_2[] = _(
@@ -5952,7 +5952,7 @@ static const u8 DexDescription_Perlu_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Aalabyss_1[] = _(
-    "AALABYSS’ Schweif ist wie ein Fisch\n"
+    "AALABYSS' Schweif ist wie ein Fisch\n"
     "geformt. Es benutzt ihn, um Beute\n"
     "anzuziehen und schluckt diese dann");
 static const u8 DexDescription_Aalabyss_2[] = _(
@@ -6012,7 +6012,7 @@ static const u8 DexDescription_Relicanth_2[] = _(
 
 #ifdef SAPPHIRE
 static const u8 DexDescription_Liebiskus_1[] = _(
-    "LIEBISKUS’ herzförmiger Körper ist ein\n"
+    "LIEBISKUS' herzförmiger Körper ist ein\n"
     "Symbol der Liebe und der Romantik.\n"
     "Man sagt, jedem Paar, dem es begegnet,");
 static const u8 DexDescription_Liebiskus_2[] = _(

@@ -1,5 +1,5 @@
 MtPyre_6F_Text_1969FE:: @ 81969FE
-	.string "When I’m here...\n"
+	.string "When I'm here...\n"
 	.string "A curious power flows into me...$"
 
 MtPyre_6F_Text_196A30:: @ 8196A30

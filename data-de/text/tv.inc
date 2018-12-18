@@ -1,6 +1,6 @@
 FallarborTown_ContestLobby_Text_1A6F7C:: @ 81A6F7C
 	.string "Du hast an einem POKéMON WETTBEWERB\n"
-	.string "teilgenommen, stimmt’s?\p"
+	.string "teilgenommen, stimmt's?\p"
 	.string "Da kannst du mir doch etwas über\n"
 	.string "dein POKéMON erzählen.\p"
 	.string "Ich bin Reporter. Ich arbeite an einer\n"
@@ -278,7 +278,7 @@ gTVBravoTrainerBattleTowerText15:: @ 81A8267
 	.string "Bravo, {STR_VAR_2}!\p"
 	.string "Ich hoffe, wir sehen {STR_VAR_1} noch\n"
 	.string "höhere Gipfel erklimmen!\p"
-	.string "Das war’s für den Moment!\n"
+	.string "Das war's für den Moment!\n"
 	.string "Bis zur nächsten Sendung!$"
 
 SlateportCity_PokemonFanClub_Text_1A82F1:: @ 81A82F1
@@ -294,7 +294,7 @@ SlateportCity_PokemonFanClub_Text_1A82F1:: @ 81A82F1
 
 SlateportCity_PokemonFanClub_Text_1A83D0:: @ 81A83D0
 	.string "Großartig! Danke schön!\p"
-	.string "Okay, los geht’s. Ich brauche\n"
+	.string "Okay, los geht's. Ich brauche\n"
 	.string "kurze, knappe Antworten, okay?$"
 
 SlateportCity_PokemonFanClub_Text_1A8414:: @ 81A8414
@@ -325,7 +325,7 @@ SlateportCity_PokemonFanClub_Text_1A852D:: @ 81A852D
 SlateportCity_PokemonFanClub_Text_1A85A6:: @ 81A85A6
 	.string "Ich verstehe!\p"
 	.string "Hmhm...\p"
-	.string "Das war’s! Danke, dass du mir deine\n"
+	.string "Das war's! Danke, dass du mir deine\n"
 	.string "Zeit zur Verfügung gestellt hast!\p"
 	.string "Es hat mir viel Spaß gemacht, mich mit\n"
 	.string "dir zu unterhalten.\p"
@@ -368,7 +368,7 @@ SlateportCity_PokemonFanClub_Text_1A8818:: @ 81A8818
 	.string "Ich verspreche, ich mache daraus eine\n"
 	.string "unterhaltsame Sendung. Die darfst\l"
 	.string "du nicht verpassen!\p"
-	.string "Okay, das war’s.\n"
+	.string "Okay, das war's.\n"
 	.string "Danke und leb wohl.$"
 
 gTVFanClubOpinionsText1:: @ 81A8917
@@ -524,7 +524,7 @@ SlateportCity_OceanicMuseum_1F_Text_1A93D1:: @ 81A93D1
 	.string "POKéMON eine Rolle spielen.$"
 
 SlateportCity_OceanicMuseum_1F_Text_1A9446:: @ 81A9446
-	.string "Oh, ich versteh’ schon...\p"
+	.string "Oh, ich versteh' schon...\p"
 	.string "Nun, wenn du mir eine interessante\n"
 	.string "Geschichte erzählen kannst, sag es mir.$"
 
@@ -1078,7 +1078,7 @@ gTVWorldOfMastersText3:: @ 81ABDF2
 	.string "erfreuen.\p"
 	.string "Talentierte TRAINER sollten versuchen,\n"
 	.string "diesen Rekord zu brechen.\p"
-	.string "Das war’s für heute.\n"
+	.string "Das war's für heute.\n"
 	.string "Bis zum nächsten Mal.$"
 
 	.include "data/text/gabby_and_ty.inc"

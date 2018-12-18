@@ -47,7 +47,7 @@ u8 gEasyChatGroupWords_Actions[] = _(
                                      "USE$"
                                      "USES$"
                                      "USING$"
-                                     "COULDN’T$"
+                                     "COULDN'T$"
                                      "CAPABLE$"
                                      "DISAPPEAR$"
                                      "APPEAR$"

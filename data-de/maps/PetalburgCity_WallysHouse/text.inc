@@ -25,7 +25,7 @@ PetalburgCity_WallysHouse_Text_179996:: @ 8179996
 	.string "Das verdanken wir allein dir!\p"
 	.string "Als HEIKO den Ort verließ, hast du\n"
 	.string "ihm geholfen, ein POKéMON zu fangen,\l"
-	.string "stimmt’s?\p"
+	.string "stimmt's?\p"
 	.string "Ich glaube, das hat HEIKO richtig\n"
 	.string "glücklich gemacht.\p"
 	.string "Und nicht nur HEIKO. Auch mich als\n"

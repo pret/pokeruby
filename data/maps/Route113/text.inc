@@ -1,13 +1,13 @@
 Route113_Text_16FF7F:: @ 816FF7F
-	.string "Wahahaha! Today’s technology is a\n"
+	.string "Wahahaha! Today's technology is a\n"
 	.string "wondrous thing!\p"
 	.string "Take this volcanic ash here.\n"
 	.string "It can be fashioned into glass.$"
 
 Route113_Text_16FFEE:: @ 816FFEE
-	.string "It’s fun walking through the volcano’s\n"
+	.string "It's fun walking through the volcano's\n"
 	.string "ashes on the ground and grass.\p"
-	.string "You can see where you walked - it’s\n"
+	.string "You can see where you walked - it's\n"
 	.string "really neat!$"
 
 Route113_Text_170065:: @ 8170065
