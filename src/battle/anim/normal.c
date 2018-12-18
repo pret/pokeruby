@@ -1772,7 +1772,7 @@ static void sub_80E3E64(u8 taskId)
     }
 }
 
-void sub_80E4008(u8 taskId)
+void AnimTask_GetBattleTerrain(u8 taskId)
 {
     gBattleAnimArgs[0] = gBattleTerrain;
     DestroyAnimVisualTask(taskId);

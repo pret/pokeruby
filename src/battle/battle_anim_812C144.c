@@ -888,7 +888,11 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_8402884[] =
     gSpriteAffineAnim_8402864,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8402894 =
+//arg[0]: frame (0-3)
+//arg[1]: x
+//arg[2]: y
+//arg[3]: ??? (time on screen?)
+const struct SpriteTemplate gPinkSmokeTemplate =
 {
     .tileTag = ANIM_TAG_PINK_CLOUD,
     .paletteTag = ANIM_TAG_PINK_CLOUD,
