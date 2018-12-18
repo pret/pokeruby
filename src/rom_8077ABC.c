@@ -410,7 +410,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
 {
     u8 *sprites;
 
-    if (whichBank == ANIM_BANK_ATTACKER)
+    if (whichBank == ANIM_BATTLER_ATTACKER)
     {
         if (IsBankSpritePresent(gBattleAnimAttacker))
         {
@@ -422,7 +422,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
             return 0xff;
         }
     }
-    else if (whichBank == ANIM_BANK_TARGET)
+    else if (whichBank == ANIM_BATTLER_TARGET)
     {
         if (IsBankSpritePresent(gBattleAnimTarget))
         {
@@ -434,7 +434,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
             return 0xff;
         }
     }
-    else if (whichBank == ANIM_BANK_ATK_PARTNER)
+    else if (whichBank == ANIM_BATTLER_ATK_PARTNER)
     {
         if (!IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
             return 0xff;
@@ -1883,7 +1883,7 @@ u8 GetBattlerSubpriority(u8 bank)
 
     if (IsContest())
     {
-        if (bank == ANIM_BANK_ATK_PARTNER)
+        if (bank == ANIM_BATTLER_ATK_PARTNER)
             return 30;
         else
             return 40;
