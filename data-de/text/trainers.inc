@@ -160,7 +160,7 @@ Route103_Text_1B8281:: @ 81B8281
 
 Route103_Text_1B82A9:: @ 81B82A9
 	.string "Mein POKéMON ist einfach anbetungs-\n"
-	.string "würdig. Nur keine Scheu, ich zeig’s dir.$"
+	.string "würdig. Nur keine Scheu, ich zeig's dir.$"
 
 Route103_Text_1B82EC:: @ 81B82EC
 	.string "Oh, so was aber auch!\n"
@@ -791,7 +791,7 @@ Route110_Text_1BA379:: @ 81BA379
 	.string "Kampfes ruhig bleiben...$"
 
 Route110_Text_1BA3A5:: @ 81BA3A5
-	.string "Kein Grund zur Panik. Nimm’s leicht.\n"
+	.string "Kein Grund zur Panik. Nimm's leicht.\n"
 	.string "Wir haben doch jede Menge Zeit.$"
 
 Route110_Text_1BA3EF:: @ 81BA3EF
@@ -803,7 +803,7 @@ Route110_Text_1BA432:: @ 81BA432
 	.string "verloren...$"
 
 Route110_Text_1BA456:: @ 81BA456
-	.string "Kein Grund zur Panik. Nimm’s leicht.\n"
+	.string "Kein Grund zur Panik. Nimm's leicht.\n"
 	.string "Wir haben doch jede Menge Zeit.$"
 
 Route110_Text_1BA4A0:: @ 81BA4A0
@@ -2029,7 +2029,7 @@ Route119_Text_1BE748:: @ 81BE748
 	.string "hoffe, dir gefiel unsere Vorstellung!$"
 
 Route119_Text_1BE784:: @ 81BE784
-	.string "Du weißt nicht, wer ich bin, stimmt’s?\p"
+	.string "Du weißt nicht, wer ich bin, stimmt's?\p"
 	.string "Aber... Ich kenne dich auch nicht.\n"
 	.string "Lass uns kämpfen.$"
 
@@ -2649,7 +2649,7 @@ Route124_Text_1C08EA:: @ 81C08EA
 
 Route124_Text_1C0936:: @ 81C0936
 	.string "Ich fange an, mich beim Schwimmen zu\n"
-	.string "langweilen. Wie wär’s mit einem Kampf?$"
+	.string "langweilen. Wie wär's mit einem Kampf?$"
 
 Route124_Text_1C096B:: @ 81C096B
 	.string "Ich hatte ja keine Ahnung, dass du so\n"
@@ -2837,7 +2837,7 @@ Route125_Text_1C13FF:: @ 81C13FF
 
 Route125_Text_1C141C:: @ 81C141C
 	.string "ZOE: Ein lustiger alter Mann lebt in der\n"
-	.string "KÜSTENHÖHLE, stimmt’s?\p"
+	.string "KÜSTENHÖHLE, stimmt's?\p"
 	.string "Komm, IRIS, wir besuchen ihn.$"
 
 Route125_Text_1C146E:: @ 81C146E
@@ -2876,7 +2876,7 @@ Route126_Text_1C1627:: @ 81C1627
 	.string "XENEROVILLE.$"
 
 Route126_Text_1C1660:: @ 81C1660
-	.string "Wie, das war’s schon?$"
+	.string "Wie, das war's schon?$"
 
 Route126_Text_1C166F:: @ 81C166F
 	.string "Ich kann den Eingang zu XENEROVILLE\n"
@@ -3108,11 +3108,11 @@ Route129_Text_1C2243:: @ 81C2243
 
 Route129_Text_1C22C8:: @ 81C22C8
 	.string "Sag: Hey, hey!\n"
-	.string "Los geht’s!$"
+	.string "Los geht's!$"
 
 Route129_Text_1C22EC:: @ 81C22EC
 	.string "Geschlagen, ich wurde geschlagen.\n"
-	.string "Das war’s. Fertig!$"
+	.string "Das war's. Fertig!$"
 
 Route129_Text_1C230F:: @ 81C230F
 	.string "Hier gibt es für Verlierer nichts zu tun.\n"

@@ -1,5 +1,5 @@
 Route111_Text_16F705:: @ 816F705
-	.string "Hallo! Ich hab’s, du bist ein Reisender.\p"
+	.string "Hallo! Ich hab's, du bist ein Reisender.\p"
 	.string "Was hältst du davon? Du trittst mit\n"
 	.string "deinen POKéMON gegen alle vier Familien-\l"
 	.string "mitglieder hintereinander an?$"

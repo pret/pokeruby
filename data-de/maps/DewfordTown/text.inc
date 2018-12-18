@@ -93,7 +93,7 @@ DewfordTown_Text_16B828:: @ 816B828
 
 DewfordTown_Text_16B84E:: @ 816B84E
 	.string "Yeah!\n"
-	.string "Wie steht’s mit deinen Angelkünsten?$"
+	.string "Wie steht's mit deinen Angelkünsten?$"
 
 DewfordTown_Text_16B866:: @ 816B866
 	.string "Also, wenn das stimmt... Das wäre\n"

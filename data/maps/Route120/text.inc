@@ -1,7 +1,7 @@
 Route120_Text_171827:: @ 8171827
 	.string "STEVEN: Hm? {PLAYER}{KUN}, hi.\n"
-	.string "It’s been a while.\p"
-	.string "There’s something here that you can’t\n"
+	.string "It's been a while.\p"
+	.string "There's something here that you can't\n"
 	.string "see, right?\p"
 	.string "Now, if I were to use this device on\n"
 	.string "the invisible obstacle...\p"
@@ -13,7 +13,7 @@ Route120_Text_171827:: @ 8171827
 
 Route120_Text_17193D:: @ 817193D
 	.string "STEVEN: No?\p"
-	.string "I’ll wait here, so you can get ready.$"
+	.string "I'll wait here, so you can get ready.$"
 
 Route120_Text_17196F:: @ 817196F
 	.string "STEVEN: {PLAYER}{KUN}, are your POKéMON\n"
@@ -34,7 +34,7 @@ Route120_Text_171A40:: @ 8171A40
 	.string "Your battle style is intriguing.\p"
 	.string "Your POKéMON have obviously grown\n"
 	.string "since I first met you in DEWFORD.\p"
-	.string "I’d like you to have this\n"
+	.string "I'd like you to have this\n"
 	.string "DEVON SCOPE.\p"
 	.string "Who knows, there may be other\n"
 	.string "concealed POKéMON.$"
@@ -43,8 +43,8 @@ Route120_Text_171B0E:: @ 8171B0E
 	.string "STEVEN: {PLAYER}{KUN}.\p"
 	.string "I enjoy seeing POKéMON and TRAINERS\n"
 	.string "who strive together.\p"
-	.string "I think you’re doing great.\p"
-	.string "Well, let’s meet again somewhere.$"
+	.string "I think you're doing great.\p"
+	.string "Well, let's meet again somewhere.$"
 
 Route119_Text_171B93:: @ 8171B93
 Route120_Text_171B93:: @ 8171B93

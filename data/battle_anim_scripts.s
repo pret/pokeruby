@@ -1329,7 +1329,7 @@ Move_SWORDS_DANCE: @ 81C8EA4
 	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_BATTLER_ATTACKER, 16, 6, 1, 4
 	createsprite gBattleAnimSpriteTemplate_83D748C, ANIM_BATTLER_ATTACKER, 2, 0, 0
 	delay 22
-	createvisualtask sub_80E21A8, 2, 10005, 2, 2, 32754, 16, 0, 0
+	createvisualtask sub_80E21A8, 2, ANIM_TAG_SWORD, 2, 2, 32754, 16, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATTACKER
 	blendoff
@@ -2690,13 +2690,13 @@ _81CB16A:
 	return
 
 Move_MEDITATE: @ 81CB1BD
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80DBC94, 2
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
 	delay 16
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_AGILITY: @ 81CB1DA
@@ -2759,11 +2759,11 @@ Move_RAGE: @ 81CB27C
 	end
 
 Move_TELEPORT: @ 81CB2F2
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80DBCFC, 2
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	delay 15
-	call Unknown_81D61F3
+	call BackgroundRestore
 	waitforvisualfinish
 	end
 
@@ -2849,21 +2849,21 @@ _81CB3E6:
 
 Move_AMNESIA: @ 81CB455
 	loadspritegfx ANIM_TAG_AMNESIA
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	delay 8
 	createsprite gBattleAnimSpriteTemplate_83DA88C, ANIM_BATTLER_ATTACKER, 20
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER
 	delay 54
 	loopsewithpan SE_W118, SOUND_PAN_ATTACKER, 16, 3
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_KINESIS: @ 81CB479
 	loadspritegfx ANIM_TAG_ALERT
 	loadspritegfx ANIM_TAG_BENT_SPOON
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createsprite gBattleAnimSpriteTemplate_83DA824, ANIM_BATTLER_ATTACKER, 20
 	createsprite gBattleAnimSpriteTemplate_83D7450, ANIM_BATTLER_ATTACKER, 19, 32, -8, 0
 	createsprite gBattleAnimSpriteTemplate_83D7450, ANIM_BATTLER_ATTACKER, 19, 32, 16, 1
@@ -2875,7 +2875,7 @@ Move_KINESIS: @ 81CB479
 	delay 70
 	playsewithpan SE_W207B, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_GLARE: @ 81CB4CA
@@ -3818,7 +3818,7 @@ Move_ERUPTION: @ 81CC74F
 
 Move_SKILL_SWAP: @ 81CC81C
 	loadspritegfx ANIM_TAG_BLUEGREEN_ORB
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80DC0B0, 3, 1
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_BATTLER_TARGET, 32767, 12, 3, 1
 	loopsewithpan SE_W179, SOUND_PAN_ATTACKER, 24, 3
@@ -3826,13 +3826,13 @@ Move_SKILL_SWAP: @ 81CC81C
 	createvisualtask sub_80DC0B0, 3, 0
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_BATTLER_ATTACKER, 32767, 12, 3, 1
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_IMPRISON: @ 81CC867
 	loadspritegfx ANIM_TAG_HOLLOW_ORB
 	loadspritegfx ANIM_TAG_X_SIGN
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	monbg ANIM_BATTLER_DEF_PARTNER
 	createvisualtask sub_80DBE00, 5
 	delay 8
@@ -3843,7 +3843,7 @@ Move_IMPRISON: @ 81CC867
 	createvisualtask sub_80E1864, 5, 4, 1, 10
 	playsewithpan SE_W063, SOUND_PAN_ATTACKER
 	clearmonbg ANIM_BATTLER_DEF_PARTNER
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_GRUDGE: @ 81CC8AA
@@ -3938,7 +3938,7 @@ Move_LUSTER_PURGE: @ 81CC95B
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATTACKER
 	blendoff
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_MIST_BALL: @ 81CCA72
@@ -4317,7 +4317,7 @@ Move_SHADOW_PUNCH: @ 81CD3D6
 	end
 
 Move_EXTRASENSORY: @ 81CD431
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	monbg ANIM_BATTLER_DEF_PARTNER
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_BATTLER_ATTACKER, 891, 12, 1, 1
@@ -4334,7 +4334,7 @@ Move_EXTRASENSORY: @ 81CD431
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_BATTLER_DEF_PARTNER
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_AERIAL_ACE: @ 81CD499
@@ -4702,7 +4702,7 @@ Move_REST: @ 81CDC29
 
 Move_CONFUSION: @ 81CDC69
 	monbg ANIM_BATTLER_DEF_PARTNER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BATTLER_ATTACKER, 1, 0, 10, 1
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 8, 32767
@@ -4714,12 +4714,12 @@ Move_CONFUSION: @ 81CDC69
 	clearmonbg ANIM_BATTLER_DEF_PARTNER
 	blendoff
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_PSYCHIC: @ 81CDCCA
 	monbg ANIM_BATTLER_DEF_PARTNER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BATTLER_ATTACKER, 1, 0, 10, 1
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 8, 767
@@ -4731,7 +4731,7 @@ Move_PSYCHIC: @ 81CDCCA
 	clearmonbg ANIM_BATTLER_DEF_PARTNER
 	blendoff
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_FUTURE_SIGHT: @ 81CDD2D
@@ -4739,12 +4739,12 @@ Move_FUTURE_SIGHT: @ 81CDD2D
 _81CDD32:
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81CDD3B:
 	monbg ANIM_BATTLER_ATK_PARTNER
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 8, 32767
@@ -4757,7 +4757,7 @@ _81CDD3B:
 Unknown_81CDD7A: @ 81CDD7A
 	monbg ANIM_BATTLER_DEF_PARTNER
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W048, SOUND_PAN_TARGET
 	waitplaysewithpan SE_W048, SOUND_PAN_TARGET, 8
@@ -6993,7 +6993,7 @@ Move_DREAM_EATER: @ 81D1271
 	monbg ANIM_BATTLER_DEF_PARTNER
 	monbgprio_2A ANIM_BATTLER_TARGET
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W107, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_BATTLER_TARGET, 5, 0, 15, 1
@@ -7009,7 +7009,7 @@ Move_DREAM_EATER: @ 81D1271
 	clearmonbg ANIM_BATTLER_DEF_PARTNER
 	blendoff
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D12DB:
 	playsewithpan SE_W207, SOUND_PAN_TARGET
@@ -7109,7 +7109,7 @@ Move_WRAP: @ 81D158C
 Move_PSYBEAM: @ 81D15A2
 	loadspritegfx ANIM_TAG_GOLD_RING
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createsoundtask sub_812B058, 200, -64, 63, 3, 4, 0, 15
 	call _81D1626
 	call _81D1626
@@ -7126,7 +7126,7 @@ Move_PSYBEAM: @ 81D15A2
 	call _81D1626
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D1626:
 	createsprite gBattleAnimSpriteTemplate_83DA784, ANIM_BATTLER_TARGET, 2, 16, 0, 0, 0, 13, 0
@@ -7135,14 +7135,14 @@ _81D1626:
 
 Move_HYPNOSIS: @ 81D163C
 	loadspritegfx ANIM_TAG_GOLD_RING
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	call _81D166F
 	call _81D166F
 	call _81D166F
 	createvisualtask sub_80E1F8C, 2, 4, 2, 2, 0, 12, 32351
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D166F:
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
@@ -7154,7 +7154,7 @@ _81D166F:
 Move_PSYWAVE: @ 81D169C
 	loadspritegfx ANIM_TAG_BLUE_RING
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80D3630, 5, 100
 	createsoundtask sub_812B058, 203, -64, 63, 2, 9, 0, 10
 	call _81D16FF
@@ -7166,7 +7166,7 @@ Move_PSYWAVE: @ 81D169C
 	call _81D16FF
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D16FF:
 	createsprite gBattleAnimSpriteTemplate_83D9280, ANIM_BATTLER_TARGET, 3, 10, 10, 0, 16
@@ -9508,7 +9508,7 @@ Move_PSYCHO_BOOST: @ 81D51C7
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATK_PARTNER
 	blendoff
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_KNOCK_OFF: @ 81D523B
@@ -9629,7 +9629,7 @@ Move_SKY_UPPERCUT: @ 81D53ED
 	end
 
 Move_SECRET_POWER: @ 81D54E6
-	createvisualtask sub_80E4008, 5
+	createvisualtask AnimTask_GetBattleTerrain, 5
 	jumpargeq 0, 0, Move_NEEDLE_ARM
 	jumpargeq 0, 1, Move_MAGICAL_LEAF
 	jumpargeq 0, 2, Move_MUD_SHOT
@@ -10150,14 +10150,14 @@ ConfusionEffect: @ 81D618B
 	createsprite gConfusionDuckSpriteTemplate, ANIM_BATTLER_TARGET, 2, 0, -15, 204, 3, 90
 	return
 
-Unknown_81D61E7: @ 81D61E7
+SetPsychicBackground: @ 81D61E7
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
 	createvisualtask sub_812C560, 5
 	waitbgfadein
 	return
 
-Unknown_81D61F3: @ 81D61F3
+BackgroundRestore: @ 81D61F3
 	restorebg
 	waitbgfadeout
 	setarg ARG_RET_ID, -1
@@ -10227,12 +10227,12 @@ StatusCondition_Confusion: @ 81D629B
 StatusCondition_Burn: @ 81D62A4
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W172, SOUND_PAN_TARGET
-	call _81D62BC
-	call _81D62BC
-	call _81D62BC
+	call ConditionBurnFire
+	call ConditionBurnFire
+	call ConditionBurnFire
 	waitforvisualfinish
 	end
-_81D62BC:
+ConditionBurnFire:
 	createsprite gBattleAnimSpriteTemplate_83D9614, ANIM_BATTLER_TARGET, 2, -24, 24, 24, 24, 20, 1, 1
 	delay 4
 	return
@@ -10347,17 +10347,17 @@ General_PokeblockThrow: @ 81D6438
 
 General_ItemKnockoff: @ 81D647E
 	loadspritegfx ANIM_TAG_ITEM_BAG
-	createsprite gBattleAnimSpriteTemplate_83D6734, ANIM_BATTLER_TARGET, 2
+	createsprite gFallingItemBagTemplate, ANIM_BATTLER_TARGET, 2
 	end
 
 General_TurnTrap: @ 81D6489
 	createvisualtask sub_8141DAC, 5
-	jumpargeq 0, 1, _81D64FD
-	jumpargeq 0, 2, _81D6522
-	jumpargeq 0, 3, _81D6576
-	jumpargeq 0, 4, _81D65D3
-	goto _81D64B5
-_81D64B5:
+	jumpargeq 0, 1, FireSpinHit
+	jumpargeq 0, 2, WhirlpoolHit
+	jumpargeq 0, 3, ClampHit
+	jumpargeq 0, 4, SandTombHit
+	goto WrapHit
+WrapHit:
 	loadspritegfx ANIM_TAG_TENDRILS
 	loopsewithpan SE_W010, SOUND_PAN_TARGET, 6, 2
 	createsprite gBattleAnimSpriteTemplate_83D65A0, ANIM_BATTLER_TARGET, 4, 0, 16, 0, 1
@@ -10370,7 +10370,7 @@ _81D64B5:
 	playsewithpan SE_W020, SOUND_PAN_TARGET
 	waitforvisualfinish
 	end
-_81D64FD:
+FireSpinHit:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W221B, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10379,7 +10379,7 @@ _81D64FD:
 	waitforvisualfinish
 	stopsound
 	end
-_81D6522:
+WhirlpoolHit:
 	loadspritegfx ANIM_TAG_WATER_ORB
 	monbg ANIM_BATTLER_DEF_PARTNER
 	monbgprio_28 1
@@ -10396,7 +10396,7 @@ _81D6522:
 	stopsound
 	clearmonbg ANIM_BATTLER_DEF_PARTNER
 	end
-_81D6576:
+ClampHit:
 	loadspritegfx ANIM_TAG_CLAMP
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_BATTLER_TARGET
@@ -10412,7 +10412,7 @@ _81D6576:
 	blendoff
 	waitforvisualfinish
 	end
-_81D65D3:
+SandTombHit:
 	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_BATTLER_ATTACKER, 0, 4, 2, 0, 7, rgb(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10453,32 +10453,32 @@ General_SmokeballEscape: @ 81D6690
 	setalpha 12, 4
 	delay 0
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_TARGET, 0, 0, 32, 28, 30
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_TARGET, 0, 0, 32, 28, 30
 	delay 4
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 127, 2, 12, 20, 30
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 127, 2, 12, 20, 30
 	delay 12
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 126, 2, -28, 4, 30
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 126, 2, -28, 4, 30
 	delay 4
 	delay 8
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 124, 2, 14, -20, 30
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 124, 2, 14, -20, 30
 	delay 4
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
 	createvisualtask sub_80DFC24, 2, 2
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 123, 3, 4, 4, 30
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 123, 3, 4, 4, 30
 	delay 14
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 122, 3, -14, 18, 46
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 122, 3, -14, 18, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 121, 3, 14, -14, 46
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 121, 3, 14, -14, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 120, 3, -12, -10, 46
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 120, 3, -12, -10, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 119, 3, 14, 14, 46
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 119, 3, 14, 14, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, ANIM_BATTLER_ATTACKER, 118, 3, 0, 0, 46
+	createsprite gPinkSmokeTemplate, ANIM_BATTLER_ATTACKER, 118, 3, 0, 0, 46
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATTACKER
 	invisible ANIM_BATTLER_ATTACKER
@@ -10571,7 +10571,7 @@ General_FutureSightHit: @ 81D68D5
 	createvisualtask sub_80E42B0, 2
 	monbg ANIM_BATTLER_DEF_PARTNER
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W048, SOUND_PAN_TARGET
 	waitplaysewithpan SE_W048, SOUND_PAN_TARGET, 8
@@ -10584,7 +10584,7 @@ General_FutureSightHit: @ 81D68D5
 	blendoff
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 General_DoomDesireHit: @ 81D6934

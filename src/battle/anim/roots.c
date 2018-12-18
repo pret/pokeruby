@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern s16 gUnknown_03000728[];
 
 void sub_80CB59C(struct Sprite* sprite);
@@ -83,8 +83,8 @@ void sub_80CB59C(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
         sprite->pos2.x = gBattleAnimArgs[0];
         sprite->pos2.y = gBattleAnimArgs[1];
         sprite->subpriority = gBattleAnimArgs[2] + 30;
@@ -101,10 +101,10 @@ void sub_80CB59C(struct Sprite* sprite)
 
 void sub_80CB620(struct Sprite *sprite)
 {
-    s16 p1 = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    s16 p2 = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
-    s16 e1 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    s16 e2 = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    s16 p1 = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    s16 p2 = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    s16 e1 = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    s16 e2 = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
     e1 -= p1;
     e2 -= p2;

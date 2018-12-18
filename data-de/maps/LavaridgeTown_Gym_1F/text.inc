@@ -132,7 +132,7 @@ LavaridgeTown_Gym_1F_Text_176B8F:: @ 8176B8F
 LavaridgeTown_Gym_1F_Text_176C4A:: @ 8176C4A
 	.string "Deine Stärke erinnert mich an\n"
 	.string "jemanden...\p"
-	.string "Jetzt weiß ich’s! Du kämpfst wie NORMAN,\n"
+	.string "Jetzt weiß ich's! Du kämpfst wie NORMAN,\n"
 	.string "der ARENALEITER von BLÜTENBURG CITY.$"
 
 LavaridgeTown_Gym_1F_Text_176CAF:: @ 8176CAF

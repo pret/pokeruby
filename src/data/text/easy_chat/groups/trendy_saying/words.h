@@ -56,7 +56,7 @@ u8 gEasyChatGroupWords_TrendySaying[] = _(
                                           "GIMMICK$"
                                           "HIP UND$"
                                           "BANANENSHAKE$"
-                                          "ROCK’N’ROLL$"
+                                          "ROCK'N'ROLL$"
                                           "DUFTE$"
                                           "MODERN$"
                                           "RÜBENNASE$"

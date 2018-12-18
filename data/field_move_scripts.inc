@@ -118,7 +118,7 @@ UseRockSmashPromptText: @ 81B0F4B
 	.string "Would you like to use ROCK SMASH?$"
 
 CannotUseRockSmashText: @ 81B0F90
-	.string "It’s a rugged rock, but a POKéMON\n"
+	.string "It's a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
 
 S_PushableBoulder:: @ 81B0FCB
@@ -167,17 +167,17 @@ Strength_ChoseNo: @ 81B103A
 	end
 
 UseStrengthPromptText: @ 81B103D
-	.string "It’s a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.\p"
 	.string "Would you like to use STRENGTH?$"
 
 UsedStrengthText: @ 81B109D
 	.string "{STR_VAR_1} used STRENGTH.\p"
-	.string "{STR_VAR_1}’s STRENGTH made it possible\n"
+	.string "{STR_VAR_1}'s STRENGTH made it possible\n"
 	.string "to move boulders around.$"
 
 CannotUseStrengthText: @ 81B10E7
-	.string "It’s a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.$"
 
 AlreadyUsedStrengthText: @ 81B1127
@@ -211,7 +211,7 @@ CannotUseWaterfallText: @ 81B119F
 	.string "a mighty roar.$"
 
 UseWaterfallPromptText: @ 81B11D4
-	.string "It’s a large waterfall.\n"
+	.string "It's a large waterfall.\n"
 	.string "Would you like to use WATERFALL?$"
 
 UsedWaterfallText: @ 81B120D
@@ -290,7 +290,7 @@ UnderwaterUseDivePromptText: @ 81B138E
 
 SurfacingBlockedText: @ 81B13CE
 	.string "There is something in the way above.\n"
-	.string "DIVE can’t be used here.$"
+	.string "DIVE can't be used here.$"
 
 SweetScentNothingHereScript:: @ 81B140C
 	msgbox SweetScentNothingHereText, 3

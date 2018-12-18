@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D0178(struct Sprite* sprite);
 static void sub_80D020C(struct Sprite* sprite);
@@ -65,8 +65,8 @@ void sub_80D0178(struct Sprite* sprite)
     sprite->pos1.x += r7;
     sprite->pos1.y += r4;
     sprite->data[0] = 6;
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + r8;
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + r6;
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + r8;
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + r6;
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, sub_80D020C);
 }

@@ -4,8 +4,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D6234(struct Sprite *sprite);
 static void sub_80D6278(struct Sprite *);
@@ -38,7 +38,7 @@ const struct SpriteTemplate gSpriteTemplate_83D980C =
 
 void sub_80D6234(struct Sprite *sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }

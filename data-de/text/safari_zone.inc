@@ -78,7 +78,7 @@ Route121_SafariZoneEntrance_Text_1C392D:: @ 81C392D
 	.string "Wir geben dir Bescheid, wenn das Spiel\n"
 	.string "vorbei ist.\p"
 	.string "Bis dahin wünschen wir viel Spaß!\n"
-	.string "Und auf geht’s in die Wildnis!$"
+	.string "Und auf geht's in die Wildnis!$"
 
 Route121_SafariZoneEntrance_Text_1C39A3:: @ 81C39A3
 	.string "Entschuldigung!\n"

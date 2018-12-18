@@ -3,8 +3,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D2D68(struct Sprite* sprite);
 static void sub_80D2E30(struct Sprite *);
@@ -26,7 +26,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7CC8 =
 void sub_80D2D68(struct Sprite* sprite)
 {
     int var1;
-    u8 slot = gBattleAnimArgs[0] == 0 ? gAnimBankAttacker : gAnimBankTarget;
+    u8 slot = gBattleAnimArgs[0] == 0 ? gBattleAnimAttacker : gBattleAnimTarget;
 
     if (GetBattlerSide(slot) == 1)
     {

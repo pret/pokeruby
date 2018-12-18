@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CD3E0(struct Sprite* sprite);
 void sub_80CD6CC(struct Sprite* sprite);
@@ -140,8 +140,8 @@ static void sub_80CD4EC(struct Sprite* sprite)
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
         sprite->data[0] = 6;
-        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + a;
-        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + b;
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + a;
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + b;
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, sub_80CD654);
     }

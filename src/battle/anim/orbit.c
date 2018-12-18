@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CABF8(struct Sprite* sprite);
 void sub_80CAD54(struct Sprite* sprite);
@@ -110,11 +110,11 @@ static void sub_80CAC44(struct Sprite* sprite)
     sprite->pos2.y = Cos(sprite->data[1], -3) + ((sprite->data[2] += 24) >> 8);
     if ((u16)(sprite->data[1] - 0x40) < 0x80)
     {
-        sprite->oam.priority = (sub_8079ED4(gAnimBankTarget) & 3);
+        sprite->oam.priority = (sub_8079ED4(gBattleAnimTarget) & 3);
     }
     else
     {
-        var1 = sub_8079ED4(gAnimBankTarget) + 1;
+        var1 = sub_8079ED4(gBattleAnimTarget) + 1;
         if (var1 > 3)
         {
             var1 = 3;
@@ -137,7 +137,7 @@ void sub_80CACEC(u8 taskId)
     }
     else
     {
-        if (GetBattlerPosition_permutated(gAnimBankTarget) == 1)
+        if (GetBattlerPosition_permutated(gBattleAnimTarget) == 1)
         {
             REG_BG2CNT_BITFIELD.priority = 3;
         }
@@ -157,7 +157,7 @@ void sub_80CAD54(struct Sprite* sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CADA8;
@@ -172,11 +172,11 @@ static void sub_80CADA8(struct Sprite* sprite)
         sprite->pos2.y += Cos(sprite->data[5], -5);
         if ((u16)(sprite->data[5] - 0x40) < 0x80)
         {
-            sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) - 1;
+            sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
         }
         else
         {
-            sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) + 1;
+            sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) + 1;
         }
 
         sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
@@ -194,7 +194,7 @@ void sub_80CAE20(struct Sprite* sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CAE74;

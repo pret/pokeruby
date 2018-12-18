@@ -18,7 +18,7 @@ Route119_WeatherInstitute_2F_Text_19EFA3:: @ 819EFA3
 	.string "gefunden wurden!$"
 
 Route119_WeatherInstitute_2F_Text_19EFDD:: @ 819EFDD
-	.string "Das war’s dann wohl!$"
+	.string "Das war's dann wohl!$"
 
 Route119_WeatherInstitute_2F_Text_19EFE9:: @ 819EFE9
 	.string "Du hast doch gar keine Ahnung, was wir\n"

@@ -1,6 +1,6 @@
 Route121_Text_171C8F:: @ 8171C8F
 	.string "Okay!\n"
-	.string "We’re to move out to MT. PYRE!$"
+	.string "We're to move out to MT. PYRE!$"
 
 Route121_Text_171CB4:: @ 8171CB4
 	.string "Ahead looms MT. PYRE...\p"

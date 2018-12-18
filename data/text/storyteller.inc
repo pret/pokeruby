@@ -1,6 +1,6 @@
 gTextStoryteller_Introduction:: @ 81AECC6
-	.string "I’m the STORYTELLER.\n"
-	.string "I’ll tell you tales of legendary\l"
+	.string "I'm the STORYTELLER.\n"
+	.string "I'll tell you tales of legendary\l"
 	.string "TRAINERS.\p"
 	.string "Will you hear my tale?$"
 
@@ -19,12 +19,12 @@ gTextStoryteller_ButIKnowOfNoLegendaryTrainers:: @ 81AED70
 	.string "of a legendary tale?$"
 
 gTextStoryteller_BirthOfANewLegend:: @ 81AEDE8
-	.string "What’s that?!\n"
+	.string "What's that?!\n"
 	.string "You... You...\p"
 	.string "{STR_VAR_2}\n"
 	.string "{STR_VAR_1} time(s)?!\p"
 	.string "That is indeed magnificent!\n"
-	.string "It’s the birth of a new legend!$"
+	.string "It's the birth of a new legend!$"
 
 gTextStoryteller_CouldThereBeOtherTrainers:: @ 81AEE50
 	.string "It gets me thinking, could there be\n"
@@ -42,7 +42,7 @@ gTextStoryteller_HearAnotherLegendaryTale:: @ 81AEF0A
 
 gTextStoryteller_ImNotSatisfied:: @ 81AEF49
 	.string "Hmm...\n"
-	.string "I’m not satisfied...\p"
+	.string "I'm not satisfied...\p"
 	.string "I wish you would bring me news worthy\n"
 	.string "of being called a legend.$"
 
@@ -118,7 +118,7 @@ gTextStoryteller_Story5Text:: @ 81AF2A9
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER got interviewed\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "{STR_VAR_3} must be a TRAINER who’s\n"
+	.string "{STR_VAR_3} must be a TRAINER who's\n"
 	.string "attracting much attention!$"
 
 gTextStoryteller_Story6Title:: @ 81AF32C
@@ -258,7 +258,7 @@ gTextStoryteller_Story15Text:: @ 81AF943
 	.string "This TRAINER used ROCK SMASH\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a TRAINER who\n"
-	.string "can’t leave a stone unsmashed!$"
+	.string "can't leave a stone unsmashed!$"
 
 gTextStoryteller_Story16Title:: @ 81AF9C8
 	.string "The Move-Loving TRAINER$"
@@ -425,7 +425,7 @@ gTextStoryteller_Story27Text:: @ 81B0173
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER got soaked by rain\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "{STR_VAR_3}’s charisma must even\n"
+	.string "{STR_VAR_3}'s charisma must even\n"
 	.string "attract rain!$"
 
 gTextStoryteller_Story28Title:: @ 81B01E9
@@ -467,8 +467,8 @@ gTextStoryteller_Story30Text:: @ 81B0364
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER jumped down ledges\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "If there’s a ledge to be jumped,\n"
-	.string "{STR_VAR_3} can’t ignore it!$"
+	.string "If there's a ledge to be jumped,\n"
+	.string "{STR_VAR_3} can't ignore it!$"
 
 gTextStoryteller_Story31Title:: @ 81B03E9
 	.string "The Legendary TV Viewer$"
@@ -495,7 +495,7 @@ gTextStoryteller_Story32Text:: @ 81B049A
 	.string "This TRAINER checked the time\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a punctual TRAINER\n"
-	.string "who’s conscious of the time.$"
+	.string "who's conscious of the time.$"
 
 gTextStoryteller_Story33Title:: @ 81B0523
 	.string "The POKéMON LOTTERY Wizard$"
@@ -537,7 +537,7 @@ gTextStoryteller_Story35Text:: @ 81B06D9
 	.string "This TRAINER rode the CABLE CAR\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a busy TRAINER\n"
-	.string "who’s up and down all the time!$"
+	.string "who's up and down all the time!$"
 
 gTextStoryteller_Story36Title:: @ 81B0763
 	.string "The Hot Spring-Loving TRAINER$"
