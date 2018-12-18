@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FC8;
 extern struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FF8;

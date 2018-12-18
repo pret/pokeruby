@@ -13,8 +13,8 @@ extern s16 gBattleAnimArgs[8];
 extern u8 gBankSpriteIds[];
 extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 static void AnimTask_ShakeMonStep(u8 taskId);
 static void AnimTask_ShakeMon2Step(u8 taskId);
@@ -203,7 +203,7 @@ void AnimTask_ShakeMon2(u8 taskId)
     }
     else
     {
-        sprite = gBankSpriteIds[gAnimBankAttacker];
+        sprite = gBankSpriteIds[gBattleAnimAttacker];
     }
 
     if (destroy)
@@ -427,7 +427,7 @@ static void sub_80A8488(u8 taskId)
 // arg 4: speed (valid values are 0-5)
 void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 {
-    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     AnimTask_TranslateMonElliptical(taskId);
@@ -440,14 +440,14 @@ void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 static void DoHorizontalLunge(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
-    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->data[1] = -gBattleAnimArgs[1];
     else
         sprite->data[1] = gBattleAnimArgs[1];
 
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[2] = 0;
-    sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
+    sprite->data[3] = gBankSpriteIds[gBattleAnimAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData(sprite, ReverseHorizontalLungeDirection);
     sprite->callback = TranslateMonBGUntil;
@@ -498,9 +498,9 @@ static void SlideMonToOriginalPos(struct Sprite *sprite)
     int something;
     int monSpriteId;
     if (!gBattleAnimArgs[0])
-        monSpriteId = gBankSpriteIds[gAnimBankAttacker];
+        monSpriteId = gBankSpriteIds[gBattleAnimAttacker];
     else
-        monSpriteId = gBankSpriteIds[gAnimBankTarget];
+        monSpriteId = gBankSpriteIds[gBattleAnimTarget];
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gSprites[monSpriteId].pos1.x + gSprites[monSpriteId].pos2.x;
@@ -567,9 +567,9 @@ static void SlideMonToOffset(struct Sprite *sprite)
     u8 battler;
     u8 monSpriteId;
     if (!gBattleAnimArgs[0])
-        battler = gAnimBankAttacker;
+        battler = gBattleAnimAttacker;
     else
-        battler = gAnimBankTarget;
+        battler = gBattleAnimTarget;
 
     monSpriteId = gBankSpriteIds[battler];
     if (GetBattlerSide(battler) != B_SIDE_PLAYER)
@@ -602,11 +602,11 @@ static void sub_80A8818(struct Sprite *sprite)
     sprite->invisible = TRUE;
     if (!gBattleAnimArgs[0])
     {
-        v1 = gAnimBankAttacker;
+        v1 = gBattleAnimAttacker;
     }
     else
     {
-        v1 = gAnimBankTarget;
+        v1 = gBattleAnimTarget;
     }
     spriteId = gBankSpriteIds[v1];
     if (GetBattlerSide(v1))
@@ -659,7 +659,7 @@ static void sub_80A88F0(struct Sprite *sprite)
 void AnimTask_WindUpLunge(u8 taskId)
 {
     s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
-    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
@@ -721,27 +721,27 @@ void sub_80A8A80(u8 taskId)
         spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
         break;
     case 2:
-        if (!IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
+        if (!IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
         {
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gBankSpriteIds[gAnimBankAttacker ^ 2];
+        spriteId = gBankSpriteIds[gBattleAnimAttacker ^ 2];
         break;
     case 3:
-        if (!IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
+        if (!IsAnimBankSpriteVisible(gBattleAnimTarget ^ 2))
         {
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gBankSpriteIds[gAnimBankTarget ^ 2];
+        spriteId = gBankSpriteIds[gBattleAnimTarget ^ 2];
         break;
     default:
         DestroyAnimVisualTask(taskId);
         return;
     }
     TASK.data[0] = spriteId;
-    if (GetBattlerSide(gAnimBankTarget))
+    if (GetBattlerSide(gBattleAnimTarget))
     {
         TASK.data[1] = gBattleAnimArgs[1];
     }
@@ -774,7 +774,7 @@ static void sub_80A8B3C(u8 taskId)
 void AnimTask_SwayMon(u8 taskId)
 {
     u8 spriteId;
-    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[4]);
@@ -785,9 +785,9 @@ void AnimTask_SwayMon(u8 taskId)
     TASK.data[4] = spriteId;
 
     if (gBattleAnimArgs[4] == 0)
-        TASK.data[5] = gAnimBankAttacker;
+        TASK.data[5] = gBattleAnimAttacker;
     else
-        TASK.data[5] = gAnimBankTarget;
+        TASK.data[5] = gBattleAnimTarget;
 
     TASK.data[12] = 1;
     TASK.func = AnimTask_SwayMonStep;
@@ -909,11 +909,11 @@ void sub_80A8E04(u8 taskId)
     {
         if (gBattleAnimArgs[2] == 0)
         {
-            TASK.data[7] = !GetBattlerSide(gAnimBankAttacker);
+            TASK.data[7] = !GetBattlerSide(gBattleAnimAttacker);
         }
         else
         {
-            TASK.data[7] = !GetBattlerSide(gAnimBankTarget);
+            TASK.data[7] = !GetBattlerSide(gBattleAnimTarget);
         }
     }
     if (TASK.data[7])
@@ -936,14 +936,14 @@ void sub_80A8EFC(u8 taskId)
     TASK.data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[2] == 0)
     {
-        if (GetBattlerSide(gAnimBankAttacker))
+        if (GetBattlerSide(gBattleAnimAttacker))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }
     }
     else
     {
-        if (GetBattlerSide(gAnimBankTarget))
+        if (GetBattlerSide(gBattleAnimTarget))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }

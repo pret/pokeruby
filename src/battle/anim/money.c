@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CFE9C(struct Sprite* sprite);
 void sub_80CFF50(struct Sprite* sprite);
@@ -66,9 +66,9 @@ void sub_80CFE9C(struct Sprite* sprite)
     u16 var;
 
     InitAnimSpritePos(sprite, 1);
-    r6 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    r7 = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    r6 = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    r7 = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     r6 += gBattleAnimArgs[2];
@@ -93,7 +93,7 @@ static void sub_80CFF68(struct Sprite* sprite)
 {
     sprite->data[0] += 0x80;
     sprite->pos2.x = sprite->data[0] >> 8;
-    if (GetBattlerSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gBattleAnimAttacker) == 0)
         sprite->pos2.x = -sprite->pos2.x;
 
     sprite->pos2.y = Sin(sprite->data[1], sprite->data[2]);

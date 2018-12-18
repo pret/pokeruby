@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern const union AnimCmd *const gSpriteAnimTable_83D6424[];
 extern const union AnimCmd *const gSpriteAnimTable_83D6420[];
 
@@ -115,9 +115,9 @@ void sub_80CC474(struct Sprite* sprite)
 {
     u8 bank;
     if (!gBattleAnimArgs[6])
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     if (GetBattlerSide(bank) != 0)
     {
@@ -150,7 +150,7 @@ void sub_80CC474(struct Sprite* sprite)
         sprite->oam.priority = sub_8079ED4(bank);
         break;
     case 3:
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[0];
         GetAnimBattlerSpriteId(1);
         sprite->oam.priority = sub_8079ED4(bank) + 1;
         break;

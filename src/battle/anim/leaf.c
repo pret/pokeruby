@@ -5,8 +5,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CAED8(struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
@@ -117,8 +117,8 @@ const struct SpriteTemplate gSwiftStarSpriteTemplate =
 
 void sub_80CAED8(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = gBattleAnimArgs[2];
@@ -153,7 +153,7 @@ static void sub_80CAF20(struct Sprite* sprite)
 
 static void sub_80CAF6C(struct Sprite* sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->pos2.x = -Sin(sprite->data[0], 0x19);
     }
@@ -188,7 +188,7 @@ static void sub_80CAF6C(struct Sprite* sprite)
 void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
@@ -196,19 +196,19 @@ void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     if (!gBattleAnimArgs[6])
     {
-        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
-        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     }
     else
     {
-        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
+        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->data[2], &sprite->data[4]);
         sprite->data[2] += gBattleAnimArgs[2];
         sprite->data[4] += gBattleAnimArgs[3];
     }
 
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
-    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
+    if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
         sprite->data[0] = 1;
     }
@@ -262,7 +262,7 @@ void AnimMoveTwisterParticle(struct Sprite* sprite)
 {
     if (!IsContest() && IsDoubleBattle() == TRUE)
     {
-        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
     }
 
     sprite->pos1.y += 32;
@@ -295,11 +295,11 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite)
     sprite->pos2.y = Sin(sprite->data[5], 5);
     if (sprite->data[5] <= 0x7F)
     {
-        sprite->oam.priority = sub_8079ED4(gAnimBankTarget) - 1;
+        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) - 1;
     }
     else
     {
-        sprite->oam.priority = sub_8079ED4(gAnimBankTarget) + 1;
+        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) + 1;
     }
 
     sprite->data[0]--;

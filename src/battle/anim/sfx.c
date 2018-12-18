@@ -7,8 +7,8 @@
 #include "task.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern u16 gBattlerPartyIndexes[];
 extern u16 gAnimSpeciesByBanks[];
 extern u8 gUnknown_0202F7D2;
@@ -158,13 +158,13 @@ void sub_812B18C(u8 taskId)
     {
         u8 bank;
         if (gBattleAnimArgs[0] == 0)
-            bank = gAnimBankAttacker;
+            bank = gBattleAnimAttacker;
         else if (gBattleAnimArgs[0] == 1)
-            bank = gAnimBankTarget;
+            bank = gBattleAnimTarget;
         else if (gBattleAnimArgs[0] == 2)
-            bank = gAnimBankAttacker ^ 0x2;
+            bank = gBattleAnimAttacker ^ 0x2;
         else
-            bank = gAnimBankTarget ^ 0x2;
+            bank = gBattleAnimTarget ^ 0x2;
 
         if (gBattleAnimArgs[0] == 1 || gBattleAnimArgs[0] == 3)
         {
@@ -202,7 +202,7 @@ void sub_812B2B8(u8 taskId)
     if (IsContest())
         species = shared19348.unk0;
     else
-        species = gAnimSpeciesByBanks[gAnimBankAttacker];
+        species = gAnimSpeciesByBanks[gBattleAnimAttacker];
 
     if (species != 0)
         PlayCry3(species, pan, 4);
