@@ -268,7 +268,6 @@ SECTIONS {
         src/battle/anim/aurora.o(.text);
         src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
-		src/water.o(.text);
         src/battle/anim/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
         src/battle/anim/fire_2.o(.text);
