@@ -355,7 +355,7 @@ void sub_80D5470(u8 taskId) // initialize animation task for Move_ERUPTION?
     task->data[5] = GetBattlerSide(gBattleAnimAttacker);
     task->data[6] = 0;
 
-    sub_8078E70(task->data[15], 0);
+    PrepareBattlerSpriteForRotScale(task->data[15], 0);
 
     task->func = sub_80D54E0;
 }

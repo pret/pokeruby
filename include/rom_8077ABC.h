@@ -47,7 +47,7 @@ void TranslateAnimLinearUntil(struct Sprite *sprite);
 void sub_8078D44(struct Sprite *sprite);
 void obj_id_set_rotscale(u8 sprite, s16, s16, u16);
 bool8 sub_8078E38();
-void sub_8078E70(u8 sprite, u8);
+void PrepareBattlerSpriteForRotScale(u8 sprite, u8);
 void sub_8078F40(u8 sprite);
 void sub_8078F9C(u8 sprite);
 void sub_8079518(struct Sprite *sprite);

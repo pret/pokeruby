@@ -569,7 +569,7 @@ void sub_813F798(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        sub_8078E70(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, 0);
         gTasks[taskId].data[10] = 0x100;
         gTasks[taskId].data[0]++;
         break;
@@ -829,7 +829,7 @@ static void sub_813FEC8(struct Sprite *sprite)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        sub_8078E70(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, 0);
         gTasks[taskId].data[10] = 256;
         gUnknown_03005F0C = 28;
         gUnknown_03005F14 = (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) - (sprite->pos1.y + sprite->pos2.y);
