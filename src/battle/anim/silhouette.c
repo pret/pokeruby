@@ -22,7 +22,7 @@ void sub_80CB340(u8 taskId)
     }
     else
     {
-        sub_8078E70(spriteId, 1);
+        PrepareBattlerSpriteForRotScale(spriteId, 1);
         gTasks[taskId].data[0] = gBattleAnimArgs[0];
         gTasks[taskId].data[1] = gBattleAnimArgs[1];
         gTasks[taskId].data[11] = 256;

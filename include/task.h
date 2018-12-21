@@ -1,6 +1,8 @@
 #ifndef GUARD_TASK_H
 #define GUARD_TASK_H
 
+#define NUM_TASKS 16
+
 // general task defines
 #define TASK gTasks[taskId]
 #define FUNC func

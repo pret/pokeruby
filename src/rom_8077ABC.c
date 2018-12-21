@@ -1159,7 +1159,7 @@ bool8 sub_8078E38()
     return FALSE;
 }
 
-void sub_8078E70(u8 sprite, u8 objMode)
+void PrepareBattlerSpriteForRotScale(u8 sprite, u8 objMode)
 {
     u8 r7 = gSprites[sprite].data[0];
 
@@ -1647,7 +1647,7 @@ void sub_80798F4(struct Task *task, u8 a2, const void *a3)
     task->data[11] = 0x100;
     task->data[12] = 0;
     sub_8079BF4(&task->data[13], &task->data[14], a3);
-    sub_8078E70(a2, 0);
+    PrepareBattlerSpriteForRotScale(a2, 0);
 }
 
 bool8 sub_807992C(struct Task *task)
