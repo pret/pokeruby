@@ -4,8 +4,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const union AnimCmd *const gSpriteAnimTable_83D9310[];
 
@@ -200,8 +200,8 @@ void sub_80D9D70(struct Sprite *sprite)
     InitAnimSpritePos(sprite, 1);
 
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     sprite->data[5] = -30;
 
     InitAnimArcTranslation(sprite);
@@ -222,9 +222,9 @@ void sub_80D9DF0(struct Sprite *sprite)
         StartSpriteAnim(sprite, 2);
 
     InitAnimSpritePos(sprite, 1);
-    SetAverageBattlerPositions(gAnimBankTarget, 1, &l1, &l2);
+    SetAverageBattlerPositions(gBattleAnimTarget, 1, &l1, &l2);
 
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[4] = -gBattleAnimArgs[4];
 
     sprite->data[0] = gBattleAnimArgs[2];
@@ -272,9 +272,9 @@ static void sub_80D9EE8(struct Sprite *sprite)
 
 void sub_80D9F14(struct Sprite *sprite)
 {
-    SetAverageBattlerPositions(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+    SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
     sprite->pos1.x += gBattleAnimArgs[0];
@@ -302,9 +302,9 @@ void AnimBubbleEffect(struct Sprite *sprite)
     }
     else
     {
-        SetAverageBattlerPositions(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
-        if (GetBattlerSide(gAnimBankAttacker))
+        if (GetBattlerSide(gBattleAnimAttacker))
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
         sprite->pos1.x += gBattleAnimArgs[0];

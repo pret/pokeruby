@@ -4,8 +4,8 @@
 #include "sprite.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D2C38(struct Sprite *sprite);
 static void sub_80D2CC4(struct Sprite *);
@@ -55,13 +55,13 @@ void sub_80D2C38(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-            sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
         }
         else
         {
-            sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-            sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
         }
 
         if (gBattleAnimArgs[1] == 0)

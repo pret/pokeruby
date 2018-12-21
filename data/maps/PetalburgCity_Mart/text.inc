@@ -6,8 +6,8 @@ PetalburgCity_Mart_Text_17BFFD:: @ 817BFFD
 
 PetalburgCity_Mart_Text_17C06C:: @ 817C06C
 	.string "Do you use REPEL?\n"
-	.string "It keeps POKéMON away, so it’s\l"
-	.string "useful when you’re in a hurry.$"
+	.string "It keeps POKéMON away, so it's\l"
+	.string "useful when you're in a hurry.$"
 
 PetalburgCity_Mart_Text_17C0BC:: @ 817C0BC
 	.string "Do you have any ANTIDOTES with\n"

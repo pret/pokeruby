@@ -1,11 +1,11 @@
 SlateportCity_House1_Text_17D46A:: @ 817D46A
-	.string "Hi, hi! I’m the NAME RATER!\n"
-	.string "I’m the fortune-teller of names!\p"
+	.string "Hi, hi! I'm the NAME RATER!\n"
+	.string "I'm the fortune-teller of names!\p"
 	.string "I shall be pleased to rate your\n"
-	.string "POKéMON’s nickname.$"
+	.string "POKéMON's nickname.$"
 
 SlateportCity_House1_Text_17D4DB:: @ 817D4DB
-	.string "Which POKéMON’s nickname should\n"
+	.string "Which POKéMON's nickname should\n"
 	.string "I divine?$"
 
 SlateportCity_House1_Text_17D505:: @ 817D505
@@ -39,7 +39,7 @@ SlateportCity_House1_Text_17D6CC:: @ 817D6CC
 	.string "Hmmm... {STR_VAR_1} it is!\p"
 	.string "This is a magnificent nickname!\n"
 	.string "It is impeccably beyond reproach!\p"
-	.string "You’ll do well to cherish your\n"
+	.string "You'll do well to cherish your\n"
 	.string "{STR_VAR_1} now and beyond.$"
 
 SlateportCity_House1_Text_17D752:: @ 817D752

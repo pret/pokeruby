@@ -1,6 +1,6 @@
 FallarborTown_ContestLobby_Text_1A5DFC:: @ 81A5DFC
 	.string "Hello, there!\p"
-	.string "We’re accepting registrations for\n"
+	.string "We're accepting registrations for\n"
 	.string "{STR_VAR_1} Rank POKéMON CONTESTS.$"
 
 FallarborTown_ContestLobby_Text_1A5E46:: @ 81A5E46
@@ -77,7 +77,7 @@ LilycoveCity_ContestLobby_Text_1A63F4:: @ 81A63F4
 
 FallarborTown_ContestLobby_Text_1A64F4:: @ 81A64F4
 	.string "Anyone with a CONTEST PASS may enter.\p"
-	.string "If you don’t have one, I can issue one\n"
+	.string "If you don't have one, I can issue one\n"
 	.string "for you right now.\p"
 	.string "Would you like me to issue you a\n"
 	.string "CONTEST PASS?$"
@@ -87,7 +87,7 @@ FallarborTown_ContestLobby_Text_1A6583:: @ 81A6583
 
 FallarborTown_ContestLobby_Text_1A6590:: @ 81A6590
 	.string "Oh?\p"
-	.string "We’ve already issued you a CONTEST\n"
+	.string "We've already issued you a CONTEST\n"
 	.string "PASS, {PLAYER}.\p"
 	.string "Please come back with your CONTEST\n"
 	.string "PASS.$"
@@ -101,13 +101,13 @@ FallarborTown_ContestLobby_Text_1A6623:: @ 81A6623
 
 FallarborTown_ContestLobby_Text_1A664A:: @ 81A664A
 LilycoveCity_ContestLobby_Text_1A664A:: @ 81A664A
-	.string "I’m terribly sorry, but your POKéMON\n"
+	.string "I'm terribly sorry, but your POKéMON\n"
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet...$"
 
 FallarborTown_ContestLobby_Text_1A669F:: @ 81A669F
 LilycoveCity_ContestLobby_Text_1A669F:: @ 81A669F
-	.string "I’m sorry, but an EGG cannot take part\n"
+	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
 FallarborTown_ContestLobby_Text_1A66DC:: @ 81A66DC
@@ -118,7 +118,7 @@ LilycoveCity_ContestLobby_Text_1A66DC:: @ 81A66DC
 FallarborTown_ContestLobby_Text_1A6724:: @ 81A6724
 	.string "Oh, but that RIBBON...\p"
 	.string "Your POKéMON has won this CONTEST\n"
-	.string "before, hasn’t it?\p"
+	.string "before, hasn't it?\p"
 	.string "Would you like to enter it in this\n"
 	.string "CONTEST anyway?$"
 
@@ -150,14 +150,14 @@ FallarborTown_ContestLobby_Text_1A68C6:: @ 81A68C6
 	.string "later on.$"
 
 LinkContestRoom1_Text_1A68F0:: @ 81A68F0
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a {STR_VAR_3} Rank POKéMON\l"
 	.string "{STR_VAR_2} CONTEST!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
 LinkContestRoom1_Text_1A6976:: @ 81A6976
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2} CONTEST!\p"
 	.string "The participating TRAINERS and their\n"
@@ -165,12 +165,12 @@ LinkContestRoom1_Text_1A6976:: @ 81A6976
 
 LinkContestRoom1_Text_1A6A04:: @ 81A6A04
 	.string "MC: Entry No. {STR_VAR_2}!\n"
-	.string "{STR_VAR_1}’s {STR_VAR_3}!$"
+	.string "{STR_VAR_1}'s {STR_VAR_3}!$"
 
 LinkContestRoom1_Text_1A6A1F:: @ 81A6A1F
-	.string "MC: We’ve just seen the four POKéMON\n"
+	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
-	.string "Now it’s time for primary judging!\p"
+	.string "Now it's time for primary judging!\p"
 	.string "The audience will vote on their\n"
 	.string "favorite POKéMON contestants.\p"
 	.string "Without any further ado, let the\n"
@@ -182,16 +182,16 @@ LinkContestRoom1_Text_1A6AE1:: @ 81A6AE1
 LinkContestRoom1_Text_1A6AF5:: @ 81A6AF5
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
-	.string "let’s move on to secondary judging!\p"
+	.string "let's move on to secondary judging!\p"
 	.string "The second stage of judging is the\n"
 	.string "much anticipated appeal time!\p"
 	.string "May the contestants amaze us with\n"
 	.string "superb appeals of dazzling moves!\p"
-	.string "Let’s see a little enthusiasm!\n"
-	.string "Let’s appeal!$"
+	.string "Let's see a little enthusiasm!\n"
+	.string "Let's appeal!$"
 
 LinkContestRoom1_Text_1A6C06:: @ 81A6C06
-	.string "MC: That’s it for judging!$"
+	.string "MC: That's it for judging!$"
 
 LinkContestRoom1_Text_1A6C21:: @ 81A6C21
 	.string "Thank you all for a most wonderful\n"

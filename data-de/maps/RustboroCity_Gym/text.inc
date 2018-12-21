@@ -1,5 +1,5 @@
 RustboroCity_Gym_Text_183A4B:: @ 8183A4B
-	.string "Hi, wie geht’s?\p"
+	.string "Hi, wie geht's?\p"
 	.string "Hör zu, mein Freund!\n"
 	.string "Würdest du gerne CHAMP werden?\p"
 	.string "Ich bin kein TRAINER. Ich nicht. Aber\n"

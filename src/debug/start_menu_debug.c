@@ -2709,7 +2709,7 @@ u8 DebugMenu_OpenMurakawa(void)
 
 const u8 Str_839C61A[] = _("abcde;　abcde:　ABCDE;　ABCDE:\p"
                            "Tableaux　des　verbes　du　2{SUPER_E}　groupe.\p"
-                           "La1{SUPER_RE}　chose　à apprendre　c’est　de　lire.\p"
+                           "La1{SUPER_RE}　chose　à apprendre　c'est　de　lire.\p"
                            "Tableaux　des　verbes　du　1{SUPER_ER}　groupe.\p"
                            "“あいうえおかきくけコさしすせそたちつてとな”\n"
                            "<にぬネのはひふへほマみむめもやゆよらりるれろわャッ>\p"

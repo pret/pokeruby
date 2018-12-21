@@ -11,10 +11,10 @@ FallarborTown_ContestHall_Text_1773C6:: @ 81773C6
 	.string "You can check them on your POKéNAV.$"
 
 FallarborTown_ContestHall_Text_177437:: @ 8177437
-	.string "I can’t beat GYM LEADERS...\p"
-	.string "I can’t win any CONTESTS...\p"
-	.string "I’ve been here, there, and everywhere,\n"
-	.string "and it’s all for naught...$"
+	.string "I can't beat GYM LEADERS...\p"
+	.string "I can't win any CONTESTS...\p"
+	.string "I've been here, there, and everywhere,\n"
+	.string "and it's all for naught...$"
 
 FallarborTown_ContestHall_Text_1774B1:: @ 81774B1
 	.string "POKéMON CONTESTS\n"

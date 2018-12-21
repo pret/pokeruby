@@ -5,22 +5,22 @@ MeteorFalls_1F_1R_Text_193237:: @ 8193237
 
 MeteorFalls_1F_1R_Text_193268:: @ 8193268
 	.string "Heh?\p"
-	.string "I don’t know who you are, but if you get\n"
-	.string "in the way of TEAM {EVIL_TEAM}, don’t\l"
+	.string "I don't know who you are, but if you get\n"
+	.string "in the way of TEAM {EVIL_TEAM}, don't\l"
 	.string "expect any mercy!$"
 
 MeteorFalls_1F_1R_Text_1932C5:: @ 81932C5
 	.string "Hold it right there, TEAM {EVIL_TEAM}!\p"
-	.string "We, TEAM {GOOD_TEAM}, won’t allow you to\n"
+	.string "We, TEAM {GOOD_TEAM}, won't allow you to\n"
 	.string "get away with your misdeeds!$"
 
 MeteorFalls_1F_1R_Text_193320:: @ 8193320
 	.string "Hehehe!\n"
 	.string "Even TEAM {GOOD_TEAM} joins us!\p"
-	.string "But it’s too much trouble to deal with\n"
+	.string "But it's too much trouble to deal with\n"
 	.string "you all...\p"
-	.string "Heh, it doesn’t matter!\p"
-	.string "We’ve got the METEORITE, so off to\n"
+	.string "Heh, it doesn't matter!\p"
+	.string "We've got the METEORITE, so off to\n"
 	.string "MT. CHIMNEY we go!\p"
 	.string "Hehehe! Be seeing you, you TEAM\n"
 	.string "{GOOD_TEAM} dingbats!$"
@@ -61,8 +61,8 @@ MeteorFalls_1F_1R_Text_193720:: @ 8193720
 
 MeteorFalls_1F_1R_Text_193747:: @ 8193747
 	.string "{GOOD_LEADER}: Yes, yes, we must!\n"
-	.string "We’ve got to hurry.\p"
-	.string "There’s no telling what TEAM {EVIL_TEAM}\n"
+	.string "We've got to hurry.\p"
+	.string "There's no telling what TEAM {EVIL_TEAM}\n"
 	.string "will do at MT. CHIMNEY!$"
 
 MeteorFalls_1F_1R_Text_1937AA:: @ 81937AA
@@ -71,8 +71,8 @@ MeteorFalls_1F_1R_Text_1937AA:: @ 81937AA
 	.string "Farewell!$"
 
 MeteorFalls_1F_1R_Text_1937EB:: @ 81937EB
-	.string "I... I’m COZMO...\n"
-	.string "I’m a PROFESSOR...\p"
+	.string "I... I'm COZMO...\n"
+	.string "I'm a PROFESSOR...\p"
 	.string "I usually study METEORITES in\n"
 	.string "FALLARBOR TOWN...\p"
 	.string "Then some people from TEAM {EVIL_TEAM}\n"

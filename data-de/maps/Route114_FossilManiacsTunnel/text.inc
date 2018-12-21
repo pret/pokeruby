@@ -12,7 +12,7 @@ Route114_FossilManiacsTunnel_Text_192795:: @ 8192795
 	.string "durch Sandstürme freigelegt werden.$"
 
 Route114_FossilManiacsTunnel_Text_1928DE:: @ 81928DE
-	.string "Du hast ein FOSSIL gefunden, stimmt’s?\n"
+	.string "Du hast ein FOSSIL gefunden, stimmt's?\n"
 	.string "Das ist schön... Traumhaft...\p"
 	.string "Was wirst du mit dem FOSSIL machen?\p"
 	.string "Ich habe gehört, dass DEVON versucht,\n"

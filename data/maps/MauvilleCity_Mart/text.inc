@@ -9,5 +9,5 @@ MauvilleCity_Mart_Text_1827D3:: @ 81827D3
 MauvilleCity_Mart_Text_18287F:: @ 818287F
 	.string "Use a certain move, or use an item\n"
 	.string "instead...\p"
-	.string "The TRAINER’s decisions determine how\n"
+	.string "The TRAINER's decisions determine how\n"
 	.string "battles turn out, I think.$"

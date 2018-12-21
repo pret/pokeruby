@@ -26,7 +26,7 @@ static EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 
 void CheckForFlashMemory(void)
 {
-    if (!IdentifyFlash())
+    if (!(bool16)IdentifyFlash())
     {
         gFlashMemoryPresent = TRUE;
         InitFlashTimer();

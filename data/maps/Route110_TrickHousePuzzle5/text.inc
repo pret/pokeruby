@@ -38,18 +38,18 @@ Route110_TrickHousePuzzle5_Text_19D615:: @ 819D615
 Route110_TrickHousePuzzle5_Text_19D636:: @ 819D636
 	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 2 AM I!\p"
-	.string "MECHADOLL 1’S QUIZ DIFFICULTY LEVEL\n"
+	.string "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
 	.string "IS SET TOO LOW.$"
 
 Route110_TrickHousePuzzle5_Text_19D68E:: @ 819D68E
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "In PROF. BIRCH’s bag, there were three\n"
+	.string "In PROF. BIRCH's bag, there were three\n"
 	.string "POKéMON. Which one was at the right?$"
 
 Route110_TrickHousePuzzle5_Text_19D6EC:: @ 819D6EC
 	.string "MECHADOLL 2 QUIZ.\p"
 	.string "Which POKéMON was offered for a trade\n"
-	.string "at the POKéMON TRAINER’S SCHOOL?$"
+	.string "at the POKéMON TRAINER'S SCHOOL?$"
 
 Route110_TrickHousePuzzle5_Text_19D745:: @ 819D745
 	.string "MECHADOLL 2 QUIZ.\p"
@@ -111,7 +111,7 @@ UnknownString_819DA64: @ 819DA64
 Route110_TrickHousePuzzle5_Text_19DA9A:: @ 819DA9A
 	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 5 AM I!\p"
-	.string "THE MASTER’S BEST AND PROUDEST\n"
+	.string "THE MASTER'S BEST AND PROUDEST\n"
 	.string "ACHIEVEMENT AM I.$"
 
 Route110_TrickHousePuzzle5_Text_19DAEF:: @ 819DAEF

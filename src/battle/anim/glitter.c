@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CD140(struct Sprite* sprite);
 void sub_80CD190(struct Sprite* sprite);
@@ -72,9 +72,9 @@ void sub_80CD190(struct Sprite* sprite)
 {
     u8 bank;
     if (!gBattleAnimArgs[2])
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
     {

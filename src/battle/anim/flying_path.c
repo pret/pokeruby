@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 static void sub_80CBF5C(u8 taskId);
 static s16 sub_80CC338(struct Sprite* sprite);
@@ -84,12 +84,12 @@ void sub_80CBDF4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[4] = GetBattlerSubpriority(gAnimBankTarget) - 1;
-    task->data[6] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    task->data[7] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
-    task->data[10] = sub_807A100(gAnimBankTarget, 1);
-    task->data[11] = sub_807A100(gAnimBankTarget, 0);
-    task->data[5] = (GetBattlerSide(gAnimBankTarget) == 1) ? 1 : -1;
+    task->data[4] = GetBattlerSubpriority(gBattleAnimTarget) - 1;
+    task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    task->data[10] = sub_807A100(gBattleAnimTarget, 1);
+    task->data[11] = sub_807A100(gBattleAnimTarget, 0);
+    task->data[5] = (GetBattlerSide(gBattleAnimTarget) == 1) ? 1 : -1;
     task->data[9] = 0x38 - (task->data[5] * 64);
     task->data[8] = task->data[7] - task->data[9] + task->data[6];
     task->data[2] = CreateSprite(&gSpriteTemplate_83D6884, task->data[8], task->data[9], task->data[4]);

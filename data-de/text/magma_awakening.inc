@@ -75,7 +75,7 @@ SeafloorCavern_Room9_Text_1B4D02:: @ 81B4D02
 	.string "ADRIAN: Was hast du da nur herauf-\n"
 	.string "beschworen?\p"
 	.string "MARC... Du hast GROUDON aufge-\n"
-	.string "weckt, stimmt’s?\p"
+	.string "weckt, stimmt's?\p"
 	.string "Was wird nur aus der Welt, wenn die\n"
 	.string "Sonne bis in alle Ewigkeit mit dieser\l"
 	.string "Kraft scheint?\p"
