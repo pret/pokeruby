@@ -8,7 +8,7 @@ u8 gEasyChatGroupWords_Hobbies[] = _(
                                      "MOVIE$"
                                      "SWEETS$"
                                      "CHAT$"
-                                     "CHILD’S PLAY$"
+                                     "CHILD'S PLAY$"
                                      "TOYS$"
                                      "MUSIC$"
                                      "CARDS$"

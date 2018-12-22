@@ -12,7 +12,7 @@ u8 gEasyChatGroupWords_Battle[] = _(
                                     "WON$"
                                     "IF I WIN$"
                                     "WHEN I WIN$"
-                                    "CAN’T WIN$"
+                                    "CAN'T WIN$"
                                     "CAN WIN$"
                                     "NO MATCH$"
                                     "SPIRIT$"

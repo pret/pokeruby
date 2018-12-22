@@ -126,7 +126,7 @@ MossdeepCity_Gym_Text_18CF02:: @ 818CF02
 MossdeepCity_Gym_Text_18D077:: @ 818D077
 	.string "BEN: Was?!? Unsere Kombination...\n"
 	.string "SVENJA: Wurde auseinander gerissen!\p"
-	.string "BEN: So sieht’s aus. Du hast gewonnen.\n"
+	.string "BEN: So sieht's aus. Du hast gewonnen.\n"
 	.string "SVENJA: Daher überreichen wir dir dies.$"
 
 MossdeepCity_Gym_Text_18D0F9:: @ 818D0F9

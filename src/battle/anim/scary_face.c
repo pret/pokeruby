@@ -7,8 +7,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const u8 gBattleAnimBackgroundTilemap_ScaryFaceContest[];
 extern const u8 gBattleAnimBackgroundTilemap_ScaryFacePlayer[];
@@ -43,7 +43,7 @@ void sub_80D23B4(u8 taskId)
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
     if (IsContest())
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceContest, subStruct.field_4);
-    else if (GetBattlerSide(gAnimBankTarget) == 1)
+    else if (GetBattlerSide(gBattleAnimTarget) == 1)
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFacePlayer, subStruct.field_4);
     else
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceOpponent, subStruct.field_4);

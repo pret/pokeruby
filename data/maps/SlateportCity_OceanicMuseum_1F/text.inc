@@ -7,14 +7,14 @@ SlateportCity_OceanicMuseum_1F_Text_17E1DE:: @ 817E1DE
 	.string "Please enjoy yourself.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E1F5:: @ 817E1F5
-	.string "Oh? I’m sorry, but you don’t seem to\n"
+	.string "Oh? I'm sorry, but you don't seem to\n"
 	.string "have enough money.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E22D:: @ 817E22D
-	.string "Oh? You’re with that group that\n"
+	.string "Oh? You're with that group that\n"
 	.string "went in earlier?\p"
-	.string "You’re the only one who’s late.\n"
-	.string "You’d better go catch up to them!$"
+	.string "You're the only one who's late.\n"
+	.string "You'd better go catch up to them!$"
 
 UnknownString_817E2A0: @ 817E2A0
 	.string "Please visit another time!$"
@@ -26,7 +26,7 @@ SlateportCity_OceanicMuseum_1F_Text_17E2BB:: @ 817E2BB
 SlateportCity_OceanicMuseum_1F_Text_17E2E3:: @ 817E2E3
 	.string "We were told to assemble here, so\n"
 	.string "we did, but...\p"
-	.string "Our BOSS, the lynchpin, isn’t here.$"
+	.string "Our BOSS, the lynchpin, isn't here.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E338:: @ 817E338
 	.string "If I ripped off the stuff here,\n"
@@ -37,11 +37,11 @@ SlateportCity_OceanicMuseum_1F_Text_17E36F:: @ 817E36F
 	.string "nefarious deeds...$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E3A9:: @ 817E3A9
-	.string "If our goons didn’t bungle things\n"
-	.string "in RUSTBORO, we wouldn’t be here!$"
+	.string "If our goons didn't bungle things\n"
+	.string "in RUSTBORO, we wouldn't be here!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E3ED:: @ 817E3ED
-	.string "I didn’t have ¥50, so it took a long\n"
+	.string "I didn't have ¥50, so it took a long\n"
 	.string "time getting by the receptionist.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E434:: @ 817E434
@@ -58,7 +58,7 @@ SlateportCity_OceanicMuseum_1F_Text_17E4D7:: @ 817E4D7
 	.string "The sea is vast without end, and\n"
 	.string "infinitely deep...\p"
 	.string "There must be many POKéMON that we\n"
-	.string "don’t know about.$"
+	.string "don't know about.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E540:: @ 817E540
 	.string "I want a sea POKéMON.\p"
@@ -68,7 +68,7 @@ SlateportCity_OceanicMuseum_1F_Text_17E540:: @ 817E540
 SlateportCity_OceanicMuseum_1F_Text_17E582:: @ 817E582
 	.string "Aiyeeeh!\n"
 	.string "What are you doing here?\p"
-	.string "Me? I’m the TEAM {EVIL_TEAM} member you\n"
+	.string "Me? I'm the TEAM {EVIL_TEAM} member you\n"
 	.string "thumped before, remember?\p"
 	.string "Here, take this!\n"
 	.string "You have to forgive me!$"
@@ -79,7 +79,7 @@ SlateportCity_OceanicMuseum_1F_Text_17E606:: @ 817E606
 	.string "I was going to rip off something\n"
 	.string "to make up for it, but...\p"
 	.string "Just you wait!\n"
-	.string "You’ll get yours one day!$"
+	.string "You'll get yours one day!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E695:: @ 817E695
 	.string "Awww, come on!\n"
@@ -95,10 +95,10 @@ SlateportCity_OceanicMuseum_1F_Text_17E741:: @ 817E741
 	.string "A red ball is bobbing up and down\n"
 	.string "inside a glass vessel.\p"
 	.string "“This is an experiment simulating a\n"
-	.string "WATERFALL using the ball’s buoyancy.”$"
+	.string "WATERFALL using the ball's buoyancy.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E7C4:: @ 817E7C4
-	.string "It’s a sample of soil from the ocean\n"
+	.string "It's a sample of soil from the ocean\n"
 	.string "floor.\p"
 	.string "“Over many years, the remains of\n"
 	.string "life-forms settle at the bottom of\l"
@@ -107,7 +107,7 @@ SlateportCity_OceanicMuseum_1F_Text_17E7C4:: @ 817E7C4
 	.string "ancient past is revealed.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E892:: @ 817E892
-	.string "It’s a sample of beach sand.\p"
+	.string "It's a sample of beach sand.\p"
 	.string "“Stones from mountains are washed\n"
 	.string "down by rivers where they are\l"
 	.string "chipped and ground down.\p"
@@ -142,7 +142,7 @@ SlateportCity_OceanicMuseum_1F_Text_17EB0D:: @ 817EB0D
 	.string "the size of land.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17EBBC:: @ 817EBBC
-	.string "It’s a fossil with wavy ridges on it.\p"
+	.string "It's a fossil with wavy ridges on it.\p"
 	.string "“Soil on the ocean floor gets scoured\n"
 	.string "by the tide.\p"
 	.string "“The flowing seawater marks the soil\n"
@@ -153,5 +153,5 @@ SlateportCity_OceanicMuseum_1F_Text_17EBBC:: @ 817EBBC
 SlateportCity_OceanicMuseum_1F_Text_17EC98:: @ 817EC98
 	.string "A strange machine is rotating under\n"
 	.string "a glass dome.\p"
-	.string "Maybe it’s for measuring the depth\n"
+	.string "Maybe it's for measuring the depth\n"
 	.string "of something...$"

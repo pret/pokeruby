@@ -7,8 +7,8 @@
 #include "blend_palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern u8 gBankSpriteIds[];
 
@@ -215,9 +215,9 @@ void sub_80D0FD8(struct Sprite* sprite)
     u8 r4;
 
     if (gBattleAnimArgs[2] == 0)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     r4 = gBattleAnimArgs[3] ^ 1;
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
@@ -260,13 +260,13 @@ void sub_80D10B8(struct Sprite* sprite)
 
     if (gBattleAnimArgs[5] == 0)
     {
-        bankr7 = gAnimBankAttacker;
-        bankr8 = gAnimBankTarget;
+        bankr7 = gBattleAnimAttacker;
+        bankr8 = gBattleAnimTarget;
     }
     else
     {
-        bankr7 = gAnimBankTarget;
-        bankr8 = gAnimBankAttacker;
+        bankr7 = gBattleAnimTarget;
+        bankr8 = gBattleAnimAttacker;
     }
 
     if (gBattleAnimArgs[6] == 0)
@@ -349,7 +349,7 @@ void sub_80D1368(struct Sprite* sprite)
 {
     s16 r1;
     InitAnimSpritePos(sprite, 0);
-    r1 = (GetBattlerSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
+    r1 = (GetBattlerSide(gBattleAnimAttacker)) ? -0xA0 : 0xA0;
     sprite->data[0] = 0x380;
     sprite->data[1] = r1;
     sprite->data[7] = gBattleAnimArgs[2];
@@ -362,7 +362,7 @@ static void sub_80D13AC(struct Sprite* sprite)
     sprite->pos2.y -= (sprite->data[0] >> 8);
     sprite->pos2.x = sprite->data[1] >> 8;
     sprite->data[0] -= 32;
-    add = (GetBattlerSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
+    add = (GetBattlerSide(gBattleAnimAttacker)) ? -0xA0 : 0xA0;
     sprite->data[1] += add;
     if (sprite->pos2.y > 0)
     {

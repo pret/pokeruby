@@ -9,12 +9,12 @@
 #include "trig.h"
 #include "ewram.h"
 
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern bool8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimTarget;
 extern u8 gBankSpriteIds[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
@@ -180,8 +180,8 @@ static void sub_807B8A4(struct Sprite *sprite)
 
 void sub_807B920(u8 taskId)
 {
-    s16 x = GetBattlerSpriteCoord(gAnimBankTarget, 2) - 32;
-    s16 y = GetBattlerSpriteCoord(gAnimBankTarget, 3) - 36;
+    s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) - 32;
+    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) - 36;
     u8 spriteId;
 
     if (IsContest())
@@ -336,8 +336,8 @@ void move_anim_start_t2(u8 a, u8 b)
 {
     u8 taskId;
 
-    gAnimBankAttacker = a;
-    gAnimBankTarget = a;
+    gBattleAnimAttacker = a;
+    gBattleAnimTarget = a;
     LaunchBattleAnimation(gBattleAnims_StatusConditions, b, 0);
     taskId = CreateTask(sub_807BDAC, 10);
     gTasks[taskId].data[0] = a;

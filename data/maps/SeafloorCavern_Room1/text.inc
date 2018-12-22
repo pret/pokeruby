@@ -1,5 +1,5 @@
 SeafloorCavern_Room1_Text_1974BA:: @ 81974BA
-	.string "We don’t need a kid around!\n"
+	.string "We don't need a kid around!\n"
 	.string "Go on home already!$"
 
 SeafloorCavern_Room1_Text_1974EA:: @ 81974EA
@@ -10,13 +10,13 @@ SeafloorCavern_Room1_Text_1974FF:: @ 81974FF
 	.string "boss around the GRUNTS...$"
 
 SeafloorCavern_Room1_Text_19753C:: @ 819753C
-	.string "That submarine... It’s tiny inside.\n"
-	.string "I’m sore all over!$"
+	.string "That submarine... It's tiny inside.\n"
+	.string "I'm sore all over!$"
 
 SeafloorCavern_Room1_Text_197573:: @ 8197573
 	.string "Losing makes me sore!$"
 
 SeafloorCavern_Room1_Text_197589:: @ 8197589
-	.string "That submarine we jacked, man, it’s\n"
+	.string "That submarine we jacked, man, it's\n"
 	.string "brutal as a ride.\l"
-	.string "It’s way too tight in there!$"
+	.string "It's way too tight in there!$"

@@ -42,8 +42,8 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern const u8 *const gBattleAnims_General[];
@@ -202,8 +202,8 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
         sub_80324E0(a);
         return TRUE;
     }
-    gAnimBankAttacker = b;
-    gAnimBankTarget = c;
+    gBattleAnimAttacker = b;
+    gBattleAnimTarget = c;
     ewram17840.unk0 = e;
     LaunchBattleAnimation(gBattleAnims_General, d, 0);
     taskId = CreateTask(sub_80315E8, 10);
@@ -242,8 +242,8 @@ void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d)
 {
     u8 taskId;
 
-    gAnimBankAttacker = b;
-    gAnimBankTarget = c;
+    gBattleAnimAttacker = b;
+    gBattleAnimTarget = c;
     LaunchBattleAnimation(gBattleAnims_Special, d, 0);
     taskId = CreateTask(sub_80316CC, 10);
     gTasks[taskId].data[0] = a;

@@ -10,7 +10,7 @@ SootopolisCity_Mart_Text_18F8F2:: @ 818F8F2
 	.string "Do you know FULL RESTORE?\p"
 	.string "Full restoration of HP!\n"
 	.string "Eradication of all status problems!\p"
-	.string "It’s truly an item of your dreams!$"
+	.string "It's truly an item of your dreams!$"
 
 SootopolisCity_Mart_Text_18F96B:: @ 818F96B
 	.string "This weather...\n"

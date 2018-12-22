@@ -25,7 +25,7 @@ MtPyre_2F_Text_196449:: @ 8196449
 	.string "eine Mutprobe zu bestehen.\p"
 	.string "Es ist unheimlich hier, aber zusammen\n"
 	.string "mit meinem Freund ist es schon okay.\p"
-	.string "Ich hab’s: Mein Freund soll zeigen, wie\n"
+	.string "Ich hab's: Mein Freund soll zeigen, wie\n"
 	.string "cool er ist, indem er dich besiegt!$"
 
 MtPyre_2F_Text_1964EB:: @ 81964EB

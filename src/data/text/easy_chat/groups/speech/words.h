@@ -31,7 +31,7 @@ u8 gEasyChatGroupWords_Speech[] = _(
                                     "VERY$"
                                     "A TINY BIT$"
                                     "WILD$"
-                                    "THAT’S$"
+                                    "THAT'S$"
                                     "JUST$"
                                     "EVEN SO,$"
                                     "MUST BE$"

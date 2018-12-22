@@ -1083,7 +1083,7 @@ _080D438A:
 	thumb_func_start sub_80D4394
 sub_80D4394: @ 80D4394
 	push {r4,r5,lr}
-	ldr r4, _080D43B8 @ =gAnimBankAttacker
+	ldr r4, _080D43B8 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -1099,7 +1099,7 @@ sub_80D4394: @ 80D4394
 	ldr r0, _080D43C0 @ =gPlayerParty
 	b _080D43D8
 	.align 2, 0
-_080D43B8: .4byte gAnimBankAttacker
+_080D43B8: .4byte gBattleAnimAttacker
 _080D43BC: .4byte gBattlerPartyIndexes
 _080D43C0: .4byte gPlayerParty
 _080D43C4:
@@ -1160,7 +1160,7 @@ sub_80D4418: @ 80D4418
 	lsls r1, 24
 	lsrs r1, 24
 	str r1, [sp]
-	ldr r4, _080D4520 @ =gAnimBankAttacker
+	ldr r4, _080D4520 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl GetBattlerSpriteCoord
@@ -1280,7 +1280,7 @@ _080D44EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4520: .4byte gAnimBankAttacker
+_080D4520: .4byte gBattleAnimAttacker
 _080D4524: .4byte gSpriteTemplate_83D9378
 _080D4528: .4byte gSprites
 	thumb_func_end sub_80D4418
@@ -1390,7 +1390,7 @@ sub_80D45D8: @ 80D45D8
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xA]
-	ldr r0, _080D460C @ =gAnimBankAttacker
+	ldr r0, _080D460C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -1402,7 +1402,7 @@ sub_80D45D8: @ 80D45D8
 	b _080D4616
 	.align 2, 0
 _080D4608: .4byte gTasks
-_080D460C: .4byte gAnimBankAttacker
+_080D460C: .4byte gBattleAnimAttacker
 _080D4610:
 	movs r0, 0x10
 	strh r0, [r4, 0x10]
@@ -1788,7 +1788,7 @@ sub_80D48F4: @ 80D48F4
 	lsls r1, 3
 	ldr r0, _080D4978 @ =gTasks
 	adds r5, r1, r0
-	ldr r4, _080D497C @ =gAnimBankAttacker
+	ldr r4, _080D497C @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl GetBattlerSpriteCoord
@@ -1845,7 +1845,7 @@ _080D494C:
 	bx r0
 	.align 2, 0
 _080D4978: .4byte gTasks
-_080D497C: .4byte gAnimBankAttacker
+_080D497C: .4byte gBattleAnimAttacker
 _080D4980: .4byte 0x0000ffe0
 _080D4984: .4byte sub_80D4988
 	thumb_func_end sub_80D48F4
@@ -2265,7 +2265,7 @@ sub_80D4CA4: @ 80D4CA4
 	adds r4, r0, 0
 	movs r1, 0x1
 	bl InitAnimSpritePos
-	ldr r5, _080D4CE0 @ =gAnimBankTarget
+	ldr r5, _080D4CE0 @ =gBattleAnimTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl GetBattlerSpriteCoord
@@ -2289,7 +2289,7 @@ sub_80D4CA4: @ 80D4CA4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4CE0: .4byte gAnimBankTarget
+_080D4CE0: .4byte gBattleAnimTarget
 _080D4CE4: .4byte gBattleAnimArgs
 _080D4CE8: .4byte sub_80D4CEC
 	thumb_func_end sub_80D4CA4
@@ -2443,7 +2443,7 @@ _080D4DF2:
 	strh r0, [r4, 0x2E]
 	mov r0, r9
 	strh r0, [r4, 0x30]
-	ldr r0, _080D4E3C @ =gAnimBankAttacker
+	ldr r0, _080D4E3C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSubpriority
 	subs r0, 0x1
@@ -2459,7 +2459,7 @@ _080D4DF2:
 	.align 2, 0
 _080D4E34: .4byte gSpriteTemplate_83D9420
 _080D4E38: .4byte gSprites
-_080D4E3C: .4byte gAnimBankAttacker
+_080D4E3C: .4byte gBattleAnimAttacker
 _080D4E40:
 	strh r7, [r4, 0x32]
 _080D4E42:
@@ -2501,7 +2501,7 @@ _080D4E68:
 	strh r0, [r4, 0x2E]
 	mov r0, r9
 	strh r0, [r4, 0x30]
-	ldr r0, _080D4EB4 @ =gAnimBankAttacker
+	ldr r0, _080D4EB4 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSubpriority
 	subs r0, 0x1
@@ -2517,7 +2517,7 @@ _080D4E68:
 	.align 2, 0
 _080D4EAC: .4byte gSpriteTemplate_83D9420
 _080D4EB0: .4byte gSprites
-_080D4EB4: .4byte gAnimBankAttacker
+_080D4EB4: .4byte gBattleAnimAttacker
 _080D4EB8:
 	strh r7, [r4, 0x32]
 _080D4EBA:

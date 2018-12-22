@@ -4,8 +4,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern struct OamMatrix gOamMatrices[];
 
 void sub_80D6294(struct Sprite *sprite);
@@ -66,10 +66,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9874 =
 
 void sub_80D6294(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y -= gBattleAnimArgs[1];
@@ -98,30 +98,30 @@ void sub_80D6328(struct Sprite *sprite)
     switch (gBattleAnimArgs[4])
     {
     case 0:
-        slot = gAnimBankAttacker;
+        slot = gBattleAnimAttacker;
         break;
     case 1:
     default:
-        slot = gAnimBankTarget;
+        slot = gBattleAnimTarget;
         break;
     case 2:
-        if (!IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
+        if (!IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
         {
-            slot = gAnimBankAttacker;
+            slot = gBattleAnimAttacker;
         }
         else
         {
-            slot = gAnimBankAttacker ^ 2;
+            slot = gBattleAnimAttacker ^ 2;
         }
         break;
     case 3:
-        if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
+        if (IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
         {
-            slot = gAnimBankTarget ^ 2;
+            slot = gBattleAnimTarget ^ 2;
         }
         else
         {
-            slot = gAnimBankTarget;
+            slot = gBattleAnimTarget;
         }
         break;
     }

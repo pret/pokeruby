@@ -12,14 +12,14 @@ BattleTower_Outside_Text_199D06:: @ 8199D06
 	.string "May I see your TICKET?$"
 
 BattleTower_Outside_Text_199D40:: @ 8199D40
-	.string "{PLAYER} doesn’t have the TICKET...\p"
-	.string "I’m terribly sorry.\p"
+	.string "{PLAYER} doesn't have the TICKET...\p"
+	.string "I'm terribly sorry.\p"
 	.string "You must have a TICKET to board\n"
 	.string "the ferry.$"
 
 BattleTower_Outside_Text_199D9D:: @ 8199D9D
 	.string "{PLAYER} flashed the TICKET.\p"
-	.string "Perfect! That’s all you need!\p"
+	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
 BattleTower_Outside_Text_199DF2:: @ 8199DF2
@@ -39,10 +39,10 @@ BattleTower_Outside_Text_199E7A:: @ 8199E7A
 	.string "Then, where would you like to go?$"
 
 BattleTower_Outside_Text_199E9C:: @ 8199E9C
-	.string "I’m not leaving until I’ve beaten 35\n"
+	.string "I'm not leaving until I've beaten 35\n"
 	.string "TRAINERS in a row!$"
 
 BattleTower_Outside_Text_199ED4:: @ 8199ED4
-	.string "Gee, there’re a lot of tough-looking\n"
+	.string "Gee, there're a lot of tough-looking\n"
 	.string "TRAINERS here.\l"
-	.string "I’m not good enough to enter yet...$"
+	.string "I'm not good enough to enter yet...$"

@@ -188,7 +188,7 @@ gUnknownText_LinkStandbyAndWinner:: @ 83CC361
 .ifdef ENGLISH
 	.string "Link standby...$"
 	.string "{COLOR WHITE2}$"
-	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
+	.string "The winner is {STR_VAR_1}'s {STR_VAR_2}!\nCongratulations!$"
 .else
 	.string "Verbindung...$"
 	.string "{COLOR WHITE2}$"
