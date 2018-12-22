@@ -120,12 +120,12 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte     0x3AC0 @ sizeof(struct SaveBlock1)
 	.4byte      0x234 @ offsetof(struct SaveBlock1, playerPartyCount)
 	.4byte      0x238 @ offsetof(struct SaveBlock1, playerParty)
-	.4byte          9
-	.4byte        0xA
-	.4byte          0
-	.4byte          8
-	.4byte      0x556
-	.4byte      0x557
+	.4byte          9 @ offsetof(struct SaveBlock2, specialSaveWarp)
+	.4byte        0xA @ offsetof(struct SaveBlock2, playerTrainerId)
+	.4byte          0 @ offsetof(struct SaveBlock2, playerName)
+	.4byte          8 @ offsetof(struct SaveBlock2, playerGender)
+	.4byte      0x556 @ offsetof(struct SaveBlock2, battleTower.var_4AE[0])
+	.4byte      0x557 @ offsetof(struct SaveBlock2, battleTower.var_4AE[1])
 	.4byte     0x312F
 	.4byte     0x311B
 	.4byte          0
