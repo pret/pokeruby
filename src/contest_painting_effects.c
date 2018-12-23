@@ -853,3 +853,50 @@ u16 sub_80FD68C(u16 * a0, u16 * a1, u16 * a2)
     blue = blue * factor / 31;
     return RGB2(red, green, blue);
 }
+
+u16 sub_80FD7AC(u16 * a0, u16 * a1, u16 * a2)
+{
+    u16 red;
+    u16 green;
+    u16 blue;
+    u16 avg0;
+    u16 avg1;
+    u16 avg2;
+    u16 r2;
+    u16 r0;
+    u32 minimum;
+    u16 factor;
+
+    if (*a0 == *a1 && *a2 == *a1)
+        return *a1;
+
+    red = (*a1 >> 0) & 0x1F;
+    green = (*a1 >> 5) & 0x1F;
+    blue = (*a1 >> 10) & 0x1F;
+
+    avg0 = (((*a0 >> 0) & 0x1F) + ((*a0 >> 5) & 0x1F) + ((*a0 >> 10) & 0x1F)) / 3;
+    avg1 = (((*a1 >> 0) & 0x1F) + ((*a1 >> 5) & 0x1F) + ((*a1 >> 10) & 0x1F)) / 3;
+    avg2 = (((*a2 >> 0) & 0x1F) + ((*a2 >> 5) & 0x1F) + ((*a2 >> 10) & 0x1F)) / 3;
+
+    if (avg0 == avg1 && avg2 == avg1)
+        return *a1;
+
+    if (avg0 > avg1)
+        r2 = avg0 - avg1;
+    else
+        r2 = avg1 - avg0;
+    if (avg2 > avg1)
+        r0 = avg2 - avg1;
+    else
+        r0 = avg1 - avg2;
+    if (r2 >= r0)
+        minimum = r2;
+    else
+        minimum = r0;
+
+    factor = 31 - minimum;
+    red = red * factor / 31;
+    green = green * factor / 31;
+    blue = blue * factor / 31;
+    return RGB2(red, green, blue);
+}
