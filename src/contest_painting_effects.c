@@ -751,3 +751,58 @@ u16 InvertColor(u16 *color)
 
     return RGB2(red, green, blue);
 }
+
+u16 sub_80FD568(u16 * a0, u16 * a1)
+{
+    u16 sp0[2][3];
+    u16 spC[3];
+    u8 r4;
+    u16 r2;
+    u16 r, g, b;
+
+    if (*a0 == *a1)
+        return *a1;
+    sp0[0][0] = (*a0 >> 0) & 0x1F;
+    sp0[0][1] = (*a0 >> 5) & 0x1F;
+    sp0[0][2] = (*a0 >> 10) & 0x1F;
+    sp0[1][0] = (*a1 >> 0) & 0x1F;
+    sp0[1][1] = (*a1 >> 5) & 0x1F;
+    sp0[1][2] = (*a1 >> 10) & 0x1F;
+
+    if (sp0[0][0] > 25 && sp0[0][1] > 25 && sp0[0][2] > 25)
+        return *a1;
+    if (sp0[1][0] > 25 && sp0[1][1] > 25 && sp0[1][2] > 25)
+        return *a1;
+
+    for (r4 = 0; r4 < 3; r4++)
+    {
+        if (sp0[0][r4] > sp0[1][r4])
+            spC[r4] = sp0[0][r4] - sp0[1][r4];
+        else
+            spC[r4] = sp0[1][r4] - sp0[0][r4];
+    }
+
+    if (spC[0] >= spC[1])
+    {
+        if (spC[0] >= spC[2])
+            r2 = spC[0];
+        else if (spC[1] >= spC[2])
+            r2 = spC[1];
+        else
+            r2 = spC[2];
+    }
+    else
+    {
+        if (spC[1] >= spC[2])
+            r2 = spC[1];
+        else if (spC[2] >= spC[0])
+            r2 = spC[2];
+        else
+            r2 = spC[0];
+    }
+
+    r = (sp0[1][0] * (31 - r2 / 2)) / 31;
+    g = (sp0[1][1] * (31 - r2 / 2)) / 31;
+    b = (sp0[1][2] * (31 - r2 / 2)) / 31;
+    return RGB2(r, g, b);
+}
