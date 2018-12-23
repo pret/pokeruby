@@ -1,6 +1,7 @@
 #ifndef GUARD_POKENAV_H
 #define GUARD_POKENAV_H
 
+#include "main.h"
 #include "region_map.h"
 #include "mon_markings.h"
 
@@ -217,7 +218,8 @@ void sub_80F3C94(void);
 void sub_80F3D00(void);
 void sub_80F4BD0(void);
 void sub_80F556C(struct UnkPokenav11*);
-void sub_80F567C(void *, void *);
+void sub_80F55AC(u8 *a0, struct UnkPokenav11 a1[]);
+void sub_80F567C(u8 *, struct UnkPokenav11 *);
 void sub_80F5B38(void);
 bool8 sub_80F5B50(void);
 void sub_80F5CDC(u8);
