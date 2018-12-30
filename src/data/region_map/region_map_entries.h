@@ -84,7 +84,7 @@ const u8 sMapName_SecretBase[] = _("SECRET BASE");
 const u8 sMapName_None[] = _("");
 
 #elif GERMAN
-#include "data/region_map_names_de.h"
+#include "region_map_names_de.h"
 #endif
 
 const struct RegionMapLocation gRegionMapEntries[] = {
