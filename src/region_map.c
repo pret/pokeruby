@@ -587,19 +587,19 @@ static void InitializeCursorPosition(void)
 
     r9 = x;
 
-    r1 = mapWidth / gRegionMapLocations[gRegionMap->mapSectionId].width;
+    r1 = mapWidth / gRegionMapEntries[gRegionMap->mapSectionId].width;
     if (r1 == 0)
         r1 = 1;
     x /= r1;
-    if (x >= gRegionMapLocations[gRegionMap->mapSectionId].width)
-        x = gRegionMapLocations[gRegionMap->mapSectionId].width - 1;
+    if (x >= gRegionMapEntries[gRegionMap->mapSectionId].width)
+        x = gRegionMapEntries[gRegionMap->mapSectionId].width - 1;
 
-    r1 = mapHeight / gRegionMapLocations[gRegionMap->mapSectionId].height;
+    r1 = mapHeight / gRegionMapEntries[gRegionMap->mapSectionId].height;
     if (r1 == 0)
         r1 = 1;
     y /= r1;
-    if (y >= gRegionMapLocations[gRegionMap->mapSectionId].height)
-        y = gRegionMapLocations[gRegionMap->mapSectionId].height - 1;
+    if (y >= gRegionMapEntries[gRegionMap->mapSectionId].height)
+        y = gRegionMapEntries[gRegionMap->mapSectionId].height - 1;
 
     switch (gRegionMap->mapSectionId)
     {
@@ -630,8 +630,8 @@ static void InitializeCursorPosition(void)
             x++;
         break;
     }
-    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
-    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
+    gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
 }
 
 static void sub_80FB600(void)
@@ -664,25 +664,25 @@ static void sub_80FB600(void)
             u16 r1;
 
             gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
-            r1 = mapHeader->mapLayout->width / gRegionMapLocations[gRegionMap->mapSectionId].width;
+            r1 = mapHeader->mapLayout->width / gRegionMapEntries[gRegionMap->mapSectionId].width;
             if (r1 == 0)
                 r1 = 1;
             x = sp2 / r1;
-            if (x >= gRegionMapLocations[gRegionMap->mapSectionId].width)
-                x = gRegionMapLocations[gRegionMap->mapSectionId].width - 1;
+            if (x >= gRegionMapEntries[gRegionMap->mapSectionId].width)
+                x = gRegionMapEntries[gRegionMap->mapSectionId].width - 1;
 
-            r1 = mapHeader->mapLayout->height / gRegionMapLocations[gRegionMap->mapSectionId].height;
+            r1 = mapHeader->mapLayout->height / gRegionMapEntries[gRegionMap->mapSectionId].height;
             if (r1 == 0)
                 r1 = 1;
             y = sp4 / r1;
-            if (y >= gRegionMapLocations[gRegionMap->mapSectionId].height)
-                y = gRegionMapLocations[gRegionMap->mapSectionId].height - 1;
+            if (y >= gRegionMapEntries[gRegionMap->mapSectionId].height)
+                y = gRegionMapEntries[gRegionMap->mapSectionId].height - 1;
         }
         break;
     }
     gRegionMap->playerIsInCave = FALSE;
-    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
-    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
+    gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
 }
 
 static u16 sub_80FB758(u16 mapSectionId)
@@ -1117,7 +1117,7 @@ const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length)
     if (mapSectionId == MAPSEC_SECRET_BASE)
         return GetSecretBaseMapName(dest);
     if (mapSectionId < MAPSEC_NOTHING)
-        return StringCopy(dest, gRegionMapLocations[mapSectionId].regionMapSectionId);
+        return StringCopy(dest, gRegionMapEntries[mapSectionId].regionMapSectionId);
     if (length == 0)
         length = 18;
     return StringFill(dest, CHAR_SPACE, length);
@@ -1146,10 +1146,10 @@ const u8 *CopyLocationName(u8 *dest, u16 mapSectionId)
 
 static void GetRegionMapLocationPosition(u16 mapSectionId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
-    *x = gRegionMapLocations[mapSectionId].x;
-    *y = gRegionMapLocations[mapSectionId].y;
-    *width = gRegionMapLocations[mapSectionId].width;
-    *height = gRegionMapLocations[mapSectionId].height;
+    *x = gRegionMapEntries[mapSectionId].x;
+    *y = gRegionMapEntries[mapSectionId].y;
+    *width = gRegionMapEntries[mapSectionId].width;
+    *height = gRegionMapEntries[mapSectionId].height;
 }
 
 struct UnknownStruct3

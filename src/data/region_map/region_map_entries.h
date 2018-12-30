@@ -87,7 +87,7 @@ const u8 sMapName_None[] = _("");
 #include "data/region_map_names_de.h"
 #endif
 
-const struct RegionMapLocation gRegionMapLocations[] = {
+const struct RegionMapLocation gRegionMapEntries[] = {
     [MAPSEC_LITTLEROOT_TOWN]           = { 4, 11, 1, 1, sMapName_LittlerootTown},
     [MAPSEC_OLDALE_TOWN]               = { 4,  9, 1, 1, sMapName_OldaleTown},
     [MAPSEC_DEWFORD_TOWN]              = { 2, 14, 1, 1, sMapName_DewfordTown},

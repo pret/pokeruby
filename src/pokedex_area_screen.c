@@ -1348,10 +1348,10 @@ static void CreateAreaMarkerSprites(void)
     for (i = 0; i < gPokedexAreaScreenPtr->numSpecialAreas; i++)
     {
         mapSecId = gPokedexAreaScreenPtr->specialAreaRegionMapSectionIds[i];
-        x = 8 * (gRegionMapLocations[mapSecId].x + 1) + 4;
-        y = 8 * (gRegionMapLocations[mapSecId].y) + 28;
-        x += 4 * (gRegionMapLocations[mapSecId].width - 1);
-        y += 4 * (gRegionMapLocations[mapSecId].height - 1);
+        x = 8 * (gRegionMapEntries[mapSecId].x + 1) + 4;
+        y = 8 * (gRegionMapEntries[mapSecId].y) + 28;
+        x += 4 * (gRegionMapEntries[mapSecId].width - 1);
+        y += 4 * (gRegionMapEntries[mapSecId].height - 1);
         spriteId = CreateSprite(&sAreaMarkerSpriteTemplate, x, y, 0);
         if (spriteId != MAX_SPRITES)
         {
