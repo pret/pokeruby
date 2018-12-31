@@ -1,4 +1,3 @@
-include $(DEVKITARM)/base_tools
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -11,15 +10,23 @@ endif
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
-AS        := $(PREFIX)as
+AS        := tools/binutils/bin/arm-none-eabi-as
 ifeq ($(MODERN), 1)
-CC1       := $(PREFIX)gcc -S -xc -
+CC1       := $(DEVKITARM)/bin/arm-none-eabi-gcc -S -xc -
 else
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 endif
-CPP       := $(PREFIX)cpp
-LD        := $(PREFIX)ld
-OBJCOPY   := $(PREFIX)objcopy
+ifeq ($(shell uname -s),Darwin)
+  ifeq ($(shell which cpp-8),)
+    $(error Mac OS users: Homebrew GCC is required for its C preprocessor.  Please run "brew install gcc")
+  else
+    CPP   := cpp-8
+  endif
+else
+  CPP     := cpp
+endif
+LD        := ../../tools/binutils/bin/arm-none-eabi-ld
+OBJCOPY   := tools/binutils/bin/arm-none-eabi-objcopy
 SHA1SUM   := sha1sum -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
@@ -32,7 +39,7 @@ GBAFIX    := tools/gbafix/gbafix$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 ifeq ($(MODERN), 1)
-CC1FLAGS := -mthumb -mthumb-interwork -Wimplicit -Wparentheses -Wunused -O2 -mabi=apcs-gnu -fno-jump-tables
+CC1FLAGS := -mthumb -mthumb-interwork -Wimplicit -Wparentheses -Wunused -O2 -mabi=apcs-gnu -fno-jump-tables -march=armv4t -mtune=arm7tdmi
 else
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 endif
@@ -152,7 +159,7 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
