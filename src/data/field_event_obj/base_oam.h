@@ -1,7 +1,3 @@
-//
-
-//
-
 #ifndef POKERUBY_BASE_OAM_H
 #define POKERUBY_BASE_OAM_H
 

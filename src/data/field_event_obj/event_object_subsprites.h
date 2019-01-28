@@ -152,29 +152,29 @@ const struct SubspriteTable gEventObjectSubspriteTables_Unused[] = {
     {1, gEventObjectSubspriteTable_Unused_3}
 };
 
-const struct Subsprite gEventObjectSubspriteTable_CableCar_0[] = {
+const struct Subsprite gEventObjectSubspriteTable_64x64_0[] = {
     {-32, -32, 0, 3, 0, 2}
 };
 
-const struct Subsprite gEventObjectSubspriteTable_CableCar_1[] = {
+const struct Subsprite gEventObjectSubspriteTable_64x64_1[] = {
     {-32, -32, 0, 3, 0, 1}
 };
 
-const struct Subsprite gEventObjectSubspriteTable_CableCar_2[] = {
+const struct Subsprite gEventObjectSubspriteTable_64x64_2[] = {
     {-32, -32, 0, 3, 0, 2}
 };
 
-const struct Subsprite gEventObjectSubspriteTable_CableCar_3[] = {
+const struct Subsprite gEventObjectSubspriteTable_64x64_3[] = {
     {-32, -32, 0, 3, 0, 2}
 };
 
-const struct SubspriteTable gEventObjectSubspriteTables_CableCar[] = {
+const struct SubspriteTable gEventObjectSubspriteTables_64x64[] = {
     {0, NULL},
-    {1, gEventObjectSubspriteTable_CableCar_0},
-    {1, gEventObjectSubspriteTable_CableCar_1},
-    {1, gEventObjectSubspriteTable_CableCar_2},
-    {1, gEventObjectSubspriteTable_CableCar_3},
-    {1, gEventObjectSubspriteTable_CableCar_3}
+    {1, gEventObjectSubspriteTable_64x64_0},
+    {1, gEventObjectSubspriteTable_64x64_1},
+    {1, gEventObjectSubspriteTable_64x64_2},
+    {1, gEventObjectSubspriteTable_64x64_3},
+    {1, gEventObjectSubspriteTable_64x64_3}
 };
 
 const struct Subsprite gEventObjectSubspriteTable_SSTidal_0[] = {
