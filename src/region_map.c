@@ -53,105 +53,13 @@ static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map
 static const u8 sRegionMapBkgnd_ImageLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
 static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
 
-#include "data/region_map_layout.h"
+static const u8 sRegionMapLayout[] = INCBIN_U8("graphics/pokenav/region_map_section_layout.bin");
 
 #if ENGLISH
-#include "data/region_map_names_en.h"
+#include "data/region_map/region_map_entries.h"
 #elif GERMAN
-#include "data/region_map_names_de.h"
+#include "data/region_map/region_map_entries_de.h"
 #endif
-
-const struct RegionMapLocation gRegionMapLocations[] =
-{
-    { 4, 11, 1, 1, gMapName_LittlerootTown},
-    { 4,  9, 1, 1, gMapName_OldaleTown},
-    { 2, 14, 1, 1, gMapName_DewfordTown},
-    { 5,  3, 1, 1, gMapName_LavaridgeTown},
-    { 3,  0, 1, 1, gMapName_FallarborTown},
-    { 4,  6, 1, 1, gMapName_VerdanturfTown},
-    {17, 10, 1, 1, gMapName_PacifidlogTown},
-    { 1,  9, 1, 1, gMapName_PetalburgCity},
-    { 8, 10, 1, 2, gMapName_SlateportCity},
-    { 8,  6, 2, 1, gMapName_MauvilleCity},
-    { 0,  5, 1, 2, gMapName_RustboroCity},
-    {12,  0, 1, 1, gMapName_FortreeCity},
-    {18,  3, 2, 1, gMapName_LilycoveCity},
-    {24,  5, 2, 1, gMapName_MossdeepCity},
-    {21,  7, 1, 1, gMapName_SootopolisCity},
-    {27,  8, 1, 2, gMapName_EverGrandeCity},
-    { 4, 10, 1, 1, gMapName_Route101},
-    { 2,  9, 2, 1, gMapName_Route102},
-    { 4,  8, 4, 1, gMapName_Route103},
-    { 0,  7, 1, 3, gMapName_Route104},
-    { 0, 10, 1, 3, gMapName_Route105},
-    { 0, 13, 2, 1, gMapName_Route106},
-    { 3, 14, 3, 1, gMapName_Route107},
-    { 6, 14, 2, 1, gMapName_Route108},
-    { 8, 12, 1, 3, gMapName_Route109},
-    { 8,  7, 1, 3, gMapName_Route110},
-    { 8,  0, 1, 6, gMapName_Route111},
-    { 6,  3, 2, 1, gMapName_Route112},
-    { 4,  0, 4, 1, gMapName_Route113},
-    { 1,  0, 2, 3, gMapName_Route114},
-    { 0,  2, 1, 3, gMapName_Route115},
-    { 1,  5, 4, 1, gMapName_Route116},
-    { 5,  6, 3, 1, gMapName_Route117},
-    {10,  6, 2, 1, gMapName_Route118},
-    {11,  0, 1, 6, gMapName_Route119},
-    {13,  0, 1, 4, gMapName_Route120},
-    {14,  3, 4, 1, gMapName_Route121},
-    {16,  4, 1, 2, gMapName_Route122},
-    {12,  6, 5, 1, gMapName_Route123},
-    {20,  3, 4, 3, gMapName_Route124},
-    {24,  3, 2, 2, gMapName_Route125},
-    {20,  6, 3, 3, gMapName_Route126},
-    {23,  6, 3, 3, gMapName_Route127},
-    {23,  9, 4, 1, gMapName_Route128},
-    {24, 10, 2, 1, gMapName_Route129},
-    {21, 10, 3, 1, gMapName_Route130},
-    {18, 10, 3, 1, gMapName_Route131},
-    {15, 10, 2, 1, gMapName_Route132},
-    {12, 10, 3, 1, gMapName_Route133},
-    { 9, 10, 3, 1, gMapName_Route134},
-    {20,  3, 4, 3, gMapName_Underwater},
-    {20,  6, 3, 3, gMapName_Underwater},
-    {23,  6, 3, 3, gMapName_Underwater},
-    {23,  9, 4, 1, gMapName_Underwater},
-    {21,  7, 1, 1, gMapName_Underwater},
-    { 1, 13, 1, 1, gMapName_GraniteCave},
-    { 6,  2, 1, 1, gMapName_MtChimney},
-    {16,  2, 1, 1, gMapName_SafariZone},
-    {22, 12, 1, 1, gMapName_BattleTower},
-    { 0,  8, 1, 1, gMapName_PetalburgWoods},
-    { 2,  5, 1, 1, gMapName_RusturfTunnel},
-    { 6, 14, 1, 1, gMapName_AbandonedShip},
-    { 8,  7, 1, 1, gMapName_NewMauville},
-    { 0,  3, 1, 1, gMapName_MeteorFalls},
-    { 1,  2, 1, 1, gMapName_MeteorFalls},
-    {16,  4, 1, 1, gMapName_MtPyre},
-    {19,  3, 1, 1, gMapName_EvilTeamHideout},
-    {24,  4, 1, 1, gMapName_ShoalCave},
-    {24,  9, 1, 1, gMapName_SeafloorCavern},
-    {24,  9, 1, 1, gMapName_Underwater},
-    {27,  9, 1, 1, gMapName_VictoryRoad},
-    {17, 10, 1, 1, gMapName_MirageIsland},
-    {21,  7, 1, 1, gMapName_CaveOfOrigin},
-    {12, 14, 1, 1, gMapName_SouthernIsland},
-    { 6,  3, 1, 1, gMapName_FieryPath},
-    { 7,  3, 1, 1, gMapName_FieryPath},
-    { 6,  3, 1, 1, gMapName_JaggedPass},
-    { 7,  2, 1, 1, gMapName_JaggedPass},
-    {11, 10, 1, 1, gMapName_SealedChamber},
-    {11, 10, 1, 1, gMapName_Underwater},
-    {13,  0, 1, 1, gMapName_ScorchedSlab},
-    {0,  10, 1, 1, gMapName_IslandCave},
-    { 8,  3, 1, 1, gMapName_DesertRuins},
-    {13,  2, 1, 1, gMapName_AncientTomb},
-    { 0,  0, 1, 1, gMapName_InsideOfTruck},
-    {19, 10, 1, 1, gMapName_SkyPillar},
-    { 0,  0, 1, 1, gMapName_SecretBase},
-    { 0,  0, 1, 1, gMapName_None},
-};
 
 static const u16 sUnderwaterMaps[][2] =
 {
@@ -167,7 +75,7 @@ static const u16 sUnderwaterMaps[][2] =
     {MAPSEC_JAGGED_PASS,     MAPSEC_ROUTE_112},
     {MAPSEC_MT_PYRE,           MAPSEC_ROUTE_122},
     {MAPSEC_SKY_PILLAR,        MAPSEC_ROUTE_131},
-    {MAPSEC_NOTHING,              MAPSEC_NOTHING},
+    {MAPSEC_NONE,              MAPSEC_NONE},
 };
 
 static u8 sub_80FAB78(void);
@@ -595,7 +503,7 @@ void RegionMapDefaultZoomOffsetPlayerSprite(s16 a, s16 b)
 static u16 GetRegionMapSectionAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
-        return MAPSEC_NOTHING;
+        return MAPSEC_NONE;
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
     return sRegionMapLayout[x + y * 28];
@@ -683,19 +591,19 @@ static void InitializeCursorPosition(void)
 
     r9 = x;
 
-    r1 = mapWidth / gRegionMapLocations[gRegionMap->mapSectionId].width;
+    r1 = mapWidth / gRegionMapEntries[gRegionMap->mapSectionId].width;
     if (r1 == 0)
         r1 = 1;
     x /= r1;
-    if (x >= gRegionMapLocations[gRegionMap->mapSectionId].width)
-        x = gRegionMapLocations[gRegionMap->mapSectionId].width - 1;
+    if (x >= gRegionMapEntries[gRegionMap->mapSectionId].width)
+        x = gRegionMapEntries[gRegionMap->mapSectionId].width - 1;
 
-    r1 = mapHeight / gRegionMapLocations[gRegionMap->mapSectionId].height;
+    r1 = mapHeight / gRegionMapEntries[gRegionMap->mapSectionId].height;
     if (r1 == 0)
         r1 = 1;
     y /= r1;
-    if (y >= gRegionMapLocations[gRegionMap->mapSectionId].height)
-        y = gRegionMapLocations[gRegionMap->mapSectionId].height - 1;
+    if (y >= gRegionMapEntries[gRegionMap->mapSectionId].height)
+        y = gRegionMapEntries[gRegionMap->mapSectionId].height - 1;
 
     switch (gRegionMap->mapSectionId)
     {
@@ -726,8 +634,8 @@ static void InitializeCursorPosition(void)
             x++;
         break;
     }
-    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
-    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
+    gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
 }
 
 static void sub_80FB600(void)
@@ -760,32 +668,32 @@ static void sub_80FB600(void)
             u16 r1;
 
             gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
-            r1 = mapHeader->mapLayout->width / gRegionMapLocations[gRegionMap->mapSectionId].width;
+            r1 = mapHeader->mapLayout->width / gRegionMapEntries[gRegionMap->mapSectionId].width;
             if (r1 == 0)
                 r1 = 1;
             x = sp2 / r1;
-            if (x >= gRegionMapLocations[gRegionMap->mapSectionId].width)
-                x = gRegionMapLocations[gRegionMap->mapSectionId].width - 1;
+            if (x >= gRegionMapEntries[gRegionMap->mapSectionId].width)
+                x = gRegionMapEntries[gRegionMap->mapSectionId].width - 1;
 
-            r1 = mapHeader->mapLayout->height / gRegionMapLocations[gRegionMap->mapSectionId].height;
+            r1 = mapHeader->mapLayout->height / gRegionMapEntries[gRegionMap->mapSectionId].height;
             if (r1 == 0)
                 r1 = 1;
             y = sp4 / r1;
-            if (y >= gRegionMapLocations[gRegionMap->mapSectionId].height)
-                y = gRegionMapLocations[gRegionMap->mapSectionId].height - 1;
+            if (y >= gRegionMapEntries[gRegionMap->mapSectionId].height)
+                y = gRegionMapEntries[gRegionMap->mapSectionId].height - 1;
         }
         break;
     }
     gRegionMap->playerIsInCave = FALSE;
-    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
-    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
+    gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
 }
 
 static u16 sub_80FB758(u16 mapSectionId)
 {
     switch (mapSectionId)
     {
-    case MAPSEC_NOTHING:
+    case MAPSEC_NONE:
         return 0;
     case MAPSEC_LITTLEROOT_TOWN:
         return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? 2 : 3;
@@ -838,7 +746,7 @@ static u16 GetOverworldMapFromUnderwaterMap_(u16 mapSectionId)
 {
     u16 i;
 
-    for (i = 0; sUnderwaterMaps[i][0] != MAPSEC_NOTHING; i++)
+    for (i = 0; sUnderwaterMaps[i][0] != MAPSEC_NONE; i++)
     {
         if (sUnderwaterMaps[i][0] == mapSectionId)
             return sUnderwaterMaps[i][1];
@@ -857,7 +765,7 @@ static void sub_80FBA18(void)
     u16 y;
     u16 i;
 
-    if (gRegionMap->mapSectionId == MAPSEC_NOTHING)
+    if (gRegionMap->mapSectionId == MAPSEC_NONE)
     {
         gRegionMap->everGrandeCityArea = 0;
         return;
@@ -1212,8 +1120,8 @@ const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length)
 {
     if (mapSectionId == MAPSEC_SECRET_BASE)
         return GetSecretBaseMapName(dest);
-    if (mapSectionId < MAPSEC_NOTHING)
-        return StringCopy(dest, gRegionMapLocations[mapSectionId].regionMapSectionId);
+    if (mapSectionId < MAPSEC_NONE)
+        return StringCopy(dest, gRegionMapEntries[mapSectionId].regionMapSectionId);
     if (length == 0)
         length = 18;
     return StringFill(dest, CHAR_SPACE, length);
@@ -1242,10 +1150,10 @@ const u8 *CopyLocationName(u8 *dest, u16 mapSectionId)
 
 static void GetRegionMapLocationPosition(u16 mapSectionId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
-    *x = gRegionMapLocations[mapSectionId].x;
-    *y = gRegionMapLocations[mapSectionId].y;
-    *width = gRegionMapLocations[mapSectionId].width;
-    *height = gRegionMapLocations[mapSectionId].height;
+    *x = gRegionMapEntries[mapSectionId].x;
+    *y = gRegionMapEntries[mapSectionId].y;
+    *width = gRegionMapEntries[mapSectionId].width;
+    *height = gRegionMapEntries[mapSectionId].height;
 }
 
 struct UnknownStruct3
@@ -1344,7 +1252,7 @@ static const u16 sSpecialFlyAreas[][2] =
 {
     // flag, mapSectionId
     {FLAG_LANDMARK_BATTLE_TOWER, MAPSEC_BATTLE_TOWER},
-    {0xFFFF, MAPSEC_NOTHING},
+    {0xFFFF, MAPSEC_NONE},
 };
 
 static const struct OamData sFlyTargetOamData =
@@ -1609,7 +1517,7 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 {
     u16 i;
 
-    for (i = 0; sSpecialFlyAreas[i][1] != MAPSEC_NOTHING; i++)
+    for (i = 0; sSpecialFlyAreas[i][1] != MAPSEC_NONE; i++)
     {
         u16 x;
         u16 y;
