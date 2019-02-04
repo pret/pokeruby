@@ -14,18 +14,18 @@ $(BUILD_DIR)/data/map_events.o: data/map_events.s $(MAPS_DIR)/events.inc $(MAP_E
 	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
 
 $(MAPS_DIR)/%/header.inc: $(MAPS_DIR)/%/map.json
-	$(MAPJSON) map $< $(LAYOUTS_DIR)/layouts.json
+	$(MAPJSON) map ruby $< $(LAYOUTS_DIR)/layouts.json
 $(MAPS_DIR)/%/events.inc: $(MAPS_DIR)/%/header.inc ;
 $(MAPS_DIR)/%/connections.inc: $(MAPS_DIR)/%/events.inc ;
 
 $(MAPS_DIR)/groups.inc: $(MAPS_DIR)/map_groups.json
-	$(MAPJSON) groups $<
+	$(MAPJSON) groups ruby $<
 $(MAPS_DIR)/connections.inc: $(MAPS_DIR)/groups.inc ;
 $(MAPS_DIR)/events.inc: $(MAPS_DIR)/connections.inc ;
 $(MAPS_DIR)/headers.inc: $(MAPS_DIR)/events.inc ;
 include/constants/map_groups.h: $(MAPS_DIR)/headers.inc ;
 
 $(LAYOUTS_DIR)/layouts.inc: $(LAYOUTS_DIR)/layouts.json
-	$(MAPJSON) layouts $<
+	$(MAPJSON) layouts ruby $<
 $(LAYOUTS_DIR)/layouts_table.inc: $(LAYOUTS_DIR)/layouts.inc ;
 include/constants/layouts.h: $(LAYOUTS_DIR)/layouts_table.inc ;
