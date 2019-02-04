@@ -1,0 +1,239 @@
+{
+  "id": "MAP_LITTLEROOT_TOWN",
+  "name": "LittlerootTown",
+  "layout": "LAYOUT_LITTLEROOT_TOWN",
+  "music": "MUS_MISHIRO",
+  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "up",
+      "offset": 0,
+      "map": "MAP_ROUTE101"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY_3",
+      "x": 16,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LittlerootTown_EventScript_14D6DF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_FAT_MAN",
+      "x": 12,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LittlerootTown_EventScript_14D6CD",
+      "flag": "FLAG_HIDE_FAT_MAN_LITTLEROOT"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_BOY_2",
+      "x": 14,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LittlerootTown_EventScript_14D6D6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MOM",
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LittlerootTown_EventScript_14DCE2",
+      "flag": "FLAG_HIDE_MOM_LITTLEROOT"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_TRUCK",
+      "x": 2,
+      "y": 10,
+      "elevation": 4,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "FLAG_HIDE_MOVING_TRUCK_BRENDAN"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_TRUCK",
+      "x": 11,
+      "y": 10,
+      "elevation": 4,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "FLAG_HIDE_MOVING_TRUCK_MAY"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 14,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 7,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 1,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 0,
+      "script": "LittlerootTown_EventScript_14D739"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 1,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 0,
+      "script": "LittlerootTown_EventScript_14D797"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 1,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 1,
+      "script": "LittlerootTown_EventScript_14D7C7"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 3,
+      "script": "LittlerootTown_EventScript_14D89E"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 3,
+      "script": "LittlerootTown_EventScript_14D8AA"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 3,
+      "script": "LittlerootTown_EventScript_14D886"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 3,
+      "script": "LittlerootTown_EventScript_14D892"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 3,
+      "script": "LittlerootTown_EventScript_14D860"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": 3,
+      "script": "LittlerootTown_EventScript_14D873"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LittlerootTown_EventScript_14D7F6"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LittlerootTown_EventScript_14D7FF"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LittlerootTown_EventScript_14D808"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 8,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LittlerootTown_EventScript_14D834"
+    }
+  ]
+}
