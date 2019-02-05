@@ -1,0 +1,74 @@
+{
+  "id": "MAP_CAVE_OF_ORIGIN_B3F",
+  "name": "CaveOfOrigin_B3F",
+  "layout": "LAYOUT_CAVE_OF_ORIGIN_B3F",
+  "music": "MUS_DAN03",
+  "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
+  "requires_flash": true,
+  "weather": "WEATHER_FOG_1",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CaveOfOrigin_B3F_EventScript_1B1A44",
+      "flag": "FLAG_ITEM_CAVE_OF_ORIGIN_B3F_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_CAVE_OF_ORIGIN_B2F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_CAVE_OF_ORIGIN_B4F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": 0,
+      "script": "CaveOfOrigin_B3F_EventScript_1A04AF"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": 0,
+      "script": "CaveOfOrigin_B3F_EventScript_1A04BB"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": 0,
+      "script": "CaveOfOrigin_B3F_EventScript_1A04BB"
+    }
+  ],
+  "bg_events": []
+}
