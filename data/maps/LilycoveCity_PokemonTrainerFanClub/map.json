@@ -1,0 +1,137 @@
+{
+  "id": "MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB",
+  "name": "LilycoveCity_PokemonTrainerFanClub",
+  "layout": "LAYOUT_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB",
+  "music": "MUS_MINAMO",
+  "region_map_section": "MAPSEC_LILYCOVE_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "x": 3,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_1595A6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_5",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_15952F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 6,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_15961D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_LITTLE_GIRL_2",
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_159694",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY_1",
+      "x": 7,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_15970B",
+      "flag": "FLAG_HIDE_FANCLUB_LITTLE_BOY"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_BOY_2",
+      "x": 1,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_15976D",
+      "flag": "FLAG_HIDE_FANCLUB_BOY"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "x": 3,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_1597CF",
+      "flag": "FLAG_HIDE_FANCLUB_LADY"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_OLD_WOMAN_1",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LilycoveCity_PokemonTrainerFanClub_EventScript_159831",
+      "flag": "FLAG_HIDE_FANCLUB_OLD_LADY"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_LILYCOVE_CITY",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 5,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_LILYCOVE_CITY",
+      "dest_warp_id": 5
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

@@ -1,0 +1,151 @@
+{
+  "id": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE2",
+  "name": "Route110_TrickHousePuzzle2",
+  "layout": "LAYOUT_ROUTE110_TRICK_HOUSE_PUZZLE2",
+  "music": "MUS_KARAKURI",
+  "region_map_section": "MAPSEC_ROUTE_110",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "x": 13,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161E78",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "x": 0,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161E8F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "x": 9,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161EA6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 5,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route110_TrickHousePuzzle2_EventScript_1B1A6B",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_2"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 0,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route110_TrickHousePuzzle2_EventScript_1B1A5E",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 1,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 13,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE110_TRICK_HOUSE_END",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": 0,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161DE0"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": 0,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161DF3"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": 0,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161E06"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_TEMP_4",
+      "var_value": 0,
+      "script": "Route110_TrickHousePuzzle2_EventScript_161E19"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route110_TrickHousePuzzle2_EventScript_161DC3"
+    }
+  ]
+}
