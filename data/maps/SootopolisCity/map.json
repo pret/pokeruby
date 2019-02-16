@@ -248,7 +248,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_SOOTOPOLIS_STATE",
-      "var_value": 1,
+      "var_value": "1",
       "script": "SootopolisCity_EventScript_14D308"
     }
   ],

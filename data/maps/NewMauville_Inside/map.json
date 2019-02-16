@@ -132,7 +132,7 @@
       "y": 38,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5AA"
     },
     {
@@ -141,7 +141,7 @@
       "y": 36,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5C2"
     },
     {
@@ -150,7 +150,7 @@
       "y": 26,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5AA"
     },
     {
@@ -159,7 +159,7 @@
       "y": 22,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5AA"
     },
     {
@@ -168,7 +168,7 @@
       "y": 18,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5C2"
     },
     {
@@ -177,7 +177,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5C2"
     },
     {
@@ -186,7 +186,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5AA"
     },
     {
@@ -195,7 +195,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5AA"
     },
     {
@@ -204,7 +204,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_15E5C2"
     },
     {
@@ -213,7 +213,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_NEW_MAUVILLE_STATE",
-      "var_value": 1,
+      "var_value": "1",
       "script": "NewMauville_Inside_EventScript_15E876"
     }
   ],

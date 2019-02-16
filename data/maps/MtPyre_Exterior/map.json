@@ -68,7 +68,7 @@
       "y": 21,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_15D4A7"
     },
     {
@@ -77,7 +77,7 @@
       "y": 21,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_15D4A7"
     },
     {
@@ -86,7 +86,7 @@
       "y": 27,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_15D4AC"
     },
     {
@@ -95,7 +95,7 @@
       "y": 28,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_15D4AC"
     },
     {
@@ -104,7 +104,7 @@
       "y": 21,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_15D4A7"
     }
   ],

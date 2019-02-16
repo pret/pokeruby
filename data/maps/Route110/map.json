@@ -482,7 +482,7 @@
       "y": 92,
       "elevation": 3,
       "var": "VAR_CYCLING_CHALLENGE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route110_EventScript_14FC27"
     },
     {
@@ -491,7 +491,7 @@
       "y": 92,
       "elevation": 3,
       "var": "VAR_CYCLING_CHALLENGE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route110_EventScript_14FC27"
     },
     {
@@ -500,7 +500,7 @@
       "y": 56,
       "elevation": 3,
       "var": "VAR_ROUTE110_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_EventScript_14FD13"
     },
     {
@@ -509,7 +509,7 @@
       "y": 56,
       "elevation": 3,
       "var": "VAR_ROUTE110_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_EventScript_14FD1E"
     },
     {
@@ -518,7 +518,7 @@
       "y": 56,
       "elevation": 3,
       "var": "VAR_ROUTE110_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_EventScript_14FD29"
     }
   ],

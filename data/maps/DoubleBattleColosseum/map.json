@@ -48,7 +48,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "DoubleBattleColosseum_EventScript_1A4383"
     },
     {
@@ -57,7 +57,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "DoubleBattleColosseum_EventScript_1A43B9"
     },
     {
@@ -66,7 +66,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "DoubleBattleColosseum_EventScript_1A439E"
     },
     {
@@ -75,7 +75,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "DoubleBattleColosseum_EventScript_1A43D4"
     }
   ],

@@ -54,7 +54,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -63,7 +63,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -72,7 +72,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -81,7 +81,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -90,7 +90,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -99,7 +99,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -108,7 +108,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -117,7 +117,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -126,7 +126,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -135,7 +135,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     },
     {
@@ -144,7 +144,7 @@
       "y": 58,
       "elevation": 1,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EverGrandeCity_EventScript_14D500"
     }
   ],

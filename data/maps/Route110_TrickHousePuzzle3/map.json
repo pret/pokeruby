@@ -185,7 +185,7 @@
       "y": 20,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625AB"
     },
     {
@@ -194,7 +194,7 @@
       "y": 12,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625B7"
     },
     {
@@ -203,7 +203,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625C3"
     },
     {
@@ -212,7 +212,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_4",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625CF"
     },
     {
@@ -221,7 +221,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_TEMP_5",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625DB"
     },
     {
@@ -230,7 +230,7 @@
       "y": 3,
       "elevation": 3,
       "var": "VAR_TEMP_6",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625E7"
     },
     {
@@ -239,7 +239,7 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_TEMP_7",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle3_EventScript_1625F3"
     }
   ],

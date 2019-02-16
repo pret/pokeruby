@@ -120,7 +120,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MT_PYRE_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Summit_EventScript_15D4BD"
     },
     {
@@ -129,7 +129,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MT_PYRE_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Summit_EventScript_15D4C9"
     },
     {
@@ -138,7 +138,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MT_PYRE_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Summit_EventScript_15D4D5"
     },
     {
@@ -147,7 +147,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MT_PYRE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "MtPyre_Summit_EventScript_15D6CE"
     },
     {
@@ -156,7 +156,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MT_PYRE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "MtPyre_Summit_EventScript_15D6DA"
     },
     {
@@ -165,7 +165,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MT_PYRE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "MtPyre_Summit_EventScript_15D6E6"
     }
   ],

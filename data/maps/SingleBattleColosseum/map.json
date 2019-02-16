@@ -48,7 +48,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SingleBattleColosseum_EventScript_1A436F"
     },
     {
@@ -57,7 +57,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SingleBattleColosseum_EventScript_1A4379"
     }
   ],

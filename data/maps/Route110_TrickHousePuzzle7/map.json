@@ -94,7 +94,7 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_TrickHousePuzzle7_EventScript_1632A8"
     }
   ],
