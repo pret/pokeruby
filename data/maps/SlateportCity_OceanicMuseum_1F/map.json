@@ -224,7 +224,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_SLATEPORT_MUSEUM_1F_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155AE4"
     },
     {
@@ -233,7 +233,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_SLATEPORT_MUSEUM_1F_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155AF5"
     }
   ],

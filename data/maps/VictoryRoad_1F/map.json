@@ -147,7 +147,7 @@
       "y": 3,
       "elevation": 3,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VictoryRoad_1F_EventScript_15DE97"
     },
     {
@@ -156,7 +156,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VictoryRoad_1F_EventScript_15DEAB"
     },
     {
@@ -165,7 +165,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VictoryRoad_1F_EventScript_15DEBF"
     }
   ],

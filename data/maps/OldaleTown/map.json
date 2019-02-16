@@ -117,7 +117,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_ROUTE102_ACCESSIBLE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "OldaleTown_EventScript_14DEFF"
     },
     {
@@ -126,7 +126,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_OLDALE_STATE",
-      "var_value": 1,
+      "var_value": "1",
       "script": "OldaleTown_EventScript_14DF41"
     },
     {
@@ -135,7 +135,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_OLDALE_STATE",
-      "var_value": 1,
+      "var_value": "1",
       "script": "OldaleTown_EventScript_14DF5C"
     },
     {
@@ -144,7 +144,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_OLDALE_STATE",
-      "var_value": 1,
+      "var_value": "1",
       "script": "OldaleTown_EventScript_14DF77"
     }
   ],

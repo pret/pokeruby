@@ -186,7 +186,7 @@
       "y": 3,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "LavaridgeTown_EventScript_14E710"
     }
   ],

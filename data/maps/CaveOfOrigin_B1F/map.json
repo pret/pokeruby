@@ -34,7 +34,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "CaveOfOrigin_B1F_EventScript_1A04AF"
     },
     {
@@ -43,7 +43,7 @@
       "y": 16,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "CaveOfOrigin_B1F_EventScript_1A04AF"
     },
     {
@@ -52,7 +52,7 @@
       "y": 17,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "CaveOfOrigin_B1F_EventScript_1A04AF"
     }
   ],

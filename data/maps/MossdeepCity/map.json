@@ -224,7 +224,7 @@
       "y": 25,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_14D008"
     },
     {
@@ -233,7 +233,7 @@
       "y": 25,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_14D008"
     },
     {
@@ -242,7 +242,7 @@
       "y": 27,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_14D008"
     },
     {
@@ -251,7 +251,7 @@
       "y": 27,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_14D008"
     }
   ],
