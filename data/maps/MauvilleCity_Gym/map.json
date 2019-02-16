@@ -19,8 +19,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MauvilleCity_Gym_EventScript_1565AB",
       "flag": "FLAG_HIDE_WATTSON_MAUVILLE_GYM"
     },
@@ -32,8 +32,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "MauvilleCity_Gym_EventScript_1566FD",
       "flag": "0"
     },
@@ -45,8 +45,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "MauvilleCity_Gym_EventScript_15672B",
       "flag": "0"
     },
@@ -58,8 +58,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "MauvilleCity_Gym_EventScript_156714",
       "flag": "0"
     },
@@ -71,8 +71,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "MauvilleCity_Gym_EventScript_1566E6",
       "flag": "0"
     },
@@ -84,8 +84,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MauvilleCity_Gym_EventScript_156742",
       "flag": "0"
     }

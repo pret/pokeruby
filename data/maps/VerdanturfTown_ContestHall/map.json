@@ -19,8 +19,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 3,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VerdanturfTown_ContestHall_EventScript_153EA9",
       "flag": "0"
     },
@@ -32,8 +32,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VerdanturfTown_ContestHall_EventScript_153E97",
       "flag": "0"
     },
@@ -45,8 +45,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 2,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VerdanturfTown_ContestHall_EventScript_153EA0",
       "flag": "0"
     }

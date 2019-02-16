@@ -25,8 +25,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 2,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_14D6DF",
       "flag": "0"
     },
@@ -38,8 +38,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_14D6CD",
       "flag": "FLAG_HIDE_FAT_MAN_LITTLEROOT"
     },
@@ -51,8 +51,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_14D6D6",
       "flag": "0"
     },
@@ -64,8 +64,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_14DCE2",
       "flag": "FLAG_HIDE_MOM_LITTLEROOT"
     },
@@ -77,8 +77,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_MOVING_TRUCK_BRENDAN"
     },
@@ -90,8 +90,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_MOVING_TRUCK_MAY"
     }

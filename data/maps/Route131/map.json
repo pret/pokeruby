@@ -30,8 +30,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN",
       "movement_range_x": 5,
       "movement_range_y": 7,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route131_EventScript_152452",
       "flag": "0"
     },
@@ -43,8 +43,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route131_EventScript_152469",
       "flag": "0"
     },
@@ -56,8 +56,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "Route131_EventScript_152480",
       "flag": "0"
     },
@@ -69,8 +69,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP",
       "movement_range_x": 1,
       "movement_range_y": 4,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route131_EventScript_152497",
       "flag": "0"
     },
@@ -82,8 +82,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route131_EventScript_1524AE",
       "flag": "0"
     },
@@ -95,8 +95,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route131_EventScript_1524C9",
       "flag": "0"
     }

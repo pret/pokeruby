@@ -30,8 +30,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C955",
       "flag": "0"
     },
@@ -43,8 +43,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C97D",
       "flag": "0"
     },
@@ -56,8 +56,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C95E",
       "flag": "0"
     },
@@ -69,8 +69,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C98F",
       "flag": "0"
     },
@@ -82,8 +82,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C986",
       "flag": "0"
     },
@@ -95,8 +95,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C998",
       "flag": "0"
     },
@@ -108,8 +108,8 @@
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FortreeCity_EventScript_14C9B3",
       "flag": "FLAG_HIDE_KECLEON_FORTREE"
     }

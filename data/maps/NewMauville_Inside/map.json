@@ -19,8 +19,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_1B183C",
       "flag": "FLAG_ITEM_NEW_MAUVILLE_INSIDE_1"
     },
@@ -32,8 +32,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_1B1849",
       "flag": "FLAG_ITEM_NEW_MAUVILLE_INSIDE_2"
     },
@@ -45,8 +45,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_1B1856",
       "flag": "FLAG_ITEM_NEW_MAUVILLE_INSIDE_3"
     },
@@ -58,8 +58,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_1B1863",
       "flag": "FLAG_ITEM_NEW_MAUVILLE_INSIDE_4"
     },
@@ -71,8 +71,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_1B1870",
       "flag": "FLAG_ITEM_NEW_MAUVILLE_INSIDE_5"
     },
@@ -84,8 +84,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_15E900",
       "flag": "FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE"
     },
@@ -97,8 +97,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_15E91E",
       "flag": "FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE"
     },
@@ -110,8 +110,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_Inside_EventScript_15E93C",
       "flag": "FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE"
     }

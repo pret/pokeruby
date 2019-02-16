@@ -30,8 +30,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
       "movement_range_x": 3,
       "movement_range_y": 3,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "Route132_EventScript_1524E5",
       "flag": "0"
     },
@@ -43,8 +43,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT",
       "movement_range_x": 4,
       "movement_range_y": 4,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "Route132_EventScript_1524FC",
       "flag": "0"
     },
@@ -56,8 +56,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route132_EventScript_1B16DD",
       "flag": "FLAG_ITEM_ROUTE132_1"
     },
@@ -69,8 +69,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "Route132_EventScript_15252A",
       "flag": "0"
     },
@@ -82,8 +82,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "Route132_EventScript_152513",
       "flag": "0"
     }

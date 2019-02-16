@@ -19,8 +19,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "VictoryRoad_1F_EventScript_15DF6F",
       "flag": "0"
     },
@@ -32,8 +32,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "VictoryRoad_1F_EventScript_15DF9D",
       "flag": "0"
     },
@@ -45,8 +45,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "VictoryRoad_1F_EventScript_15DF86",
       "flag": "0"
     },
@@ -58,8 +58,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VictoryRoad_1F_EventScript_15DF28",
       "flag": "FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD"
     },
@@ -71,8 +71,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VictoryRoad_1F_EventScript_1B1AC6",
       "flag": "FLAG_ITEM_VICTORY_ROAD_1F_1"
     },
@@ -84,8 +84,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VictoryRoad_1F_EventScript_1B1AD3",
       "flag": "FLAG_ITEM_VICTORY_ROAD_1F_2"
     },
@@ -97,8 +97,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VictoryRoad_1F_EventScript_15DF31",
       "flag": "FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD"
     }

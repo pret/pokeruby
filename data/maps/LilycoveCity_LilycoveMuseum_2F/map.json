@@ -19,8 +19,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8",
       "flag": "0"
     },
@@ -32,8 +32,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_158805",
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL"
     },
@@ -45,8 +45,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_15880E",
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS"
     },
@@ -58,8 +58,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_158817",
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS"
     }
