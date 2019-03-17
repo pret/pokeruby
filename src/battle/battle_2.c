@@ -64,12 +64,6 @@ struct UnknownStruct8
     u8 unk1A;
 };
 
-struct UnknownStruct12
-{
-    u32 unk0;
-    u8 filler4[0x54];
-};
-
 extern void sub_802BBD4();
 
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -90,7 +84,6 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gCurrentActionFuncId;
 extern u8 gBanksByTurnOrder[];
-extern struct UnknownStruct12 gUnknown_02024AD0[];
 extern u8 gBankSpriteIds[];
 extern u16 gCurrentMove;  // This is mis-named. It is a species, not a move ID.
 extern u8 gLastUsedAbility;
@@ -3725,10 +3718,8 @@ void SwitchInClearSetData(void)
             gBattleMons[gActiveBattler].statStages[i] = 6;
         for (i = 0; i < gBattlersCount; i++)
         {
-            struct UnknownStruct12 *sp20 = &gUnknown_02024AD0[i];
-
-            if ((sp20->unk0 & 0x04000000) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
-                sp20->unk0 &= ~0x04000000;
+            if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
+                gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
             if ((gStatuses3[i] & STATUS3_ALWAYS_HITS) && gDisableStructs[i].bankWithSureHit == gActiveBattler)
             {
                 gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
@@ -3760,10 +3751,10 @@ void SwitchInClearSetData(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gUnknown_02024AD0[i].unk0 & (gBitTable[gActiveBattler] << 16))
-            gUnknown_02024AD0[i].unk0 &= ~(gBitTable[gActiveBattler] << 16);
-        if ((gUnknown_02024AD0[i].unk0 & 0xE000) && ewram16020arr(i) == gActiveBattler)
-            gUnknown_02024AD0[i].unk0 &= ~0xE000;
+        if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
+            gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
+        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram16020arr(i) == gActiveBattler)
+            gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
 
     gActionSelectionCursor[gActiveBattler] = 0;

@@ -3714,7 +3714,7 @@ _0801EA84:\n\
     ldrb r1, [r1]\n\
     movs r0, 0x58\n\
     muls r0, r1\n\
-    ldr r1, _0801EAEC @ =gUnknown_02024ACC\n\
+    ldr r1, _0801EAEC @ =gBattleMons+0x4C @ gBattleMons.status1\n\
     adds r0, r1\n\
     str r0, [sp]\n\
     movs r0, 0\n\
@@ -3744,7 +3744,7 @@ _0801EADC: .4byte gBattlescriptCurrInstr\n\
 _0801EAE0: .4byte gMoveEffectBS_Ptrs\n\
 _0801EAE4: .4byte gBattleCommunication\n\
 _0801EAE8: .4byte gActiveBattler\n\
-_0801EAEC: .4byte gUnknown_02024ACC\n\
+_0801EAEC: .4byte gBattleMons+0x4C @ gBattleMons.status1\n\
 _0801EAF0: .4byte gHitMarker\n\
 _0801EAF4: .4byte 0xffffdfff\n\
 _0801EAF8:\n\
@@ -6523,7 +6523,7 @@ _0802163C:\n\
     beq _080216E4\n\
     movs r0, 0x1\n\
     mov r10, r0\n\
-    ldr r0, _08021678 @ =gUnknown_02024A98\n\
+    ldr r0, _08021678 @ =gBattleMons+0x18 @ gBattleMons.statStages\n\
     mov r9, r0\n\
     lsls r5, r1, 16\n\
 _0802164A:\n\
@@ -6548,7 +6548,7 @@ _0802164A:\n\
     .align 2, 0\n\
 _08021670: .4byte gBattlescriptCurrInstr\n\
 _08021674: .4byte gActiveBattler\n\
-_08021678: .4byte gUnknown_02024A98\n\
+_08021678: .4byte gBattleMons+0x18 @ gBattleMons.statStages\n\
 _0802167C:\n\
     ldr r6, _08021700 @ =gActiveBattler\n\
     ldrb r0, [r6]\n\
@@ -6636,7 +6636,7 @@ _0802171C:\n\
     mov r9, r5\n\
     cmp r4, 0\n\
     beq _08021758\n\
-    ldr r6, _0802178C @ =gUnknown_02024A98\n\
+    ldr r6, _0802178C @ =gBattleMons+0x18 @ gBattleMons.statStages\n\
     adds r5, r2, 0\n\
     lsls r2, r1, 16\n\
 _08021728:\n\
@@ -6694,7 +6694,7 @@ _08021772:\n\
     mov r1, r9\n\
     b _080217E6\n\
     .align 2, 0\n\
-_0802178C: .4byte gUnknown_02024A98\n\
+_0802178C: .4byte gBattleMons+0x18 @ gBattleMons.statStages\n\
 _08021790:\n\
     cmp r3, 0\n\
     beq _080217E0\n\
@@ -7644,7 +7644,7 @@ _08021E3C:\n\
     ldr r2, _08021E64 @ =gDisableStructs\n\
     ldr r5, _08021E68 @ =0xfeffffff\n\
     adds r3, r0, 0\n\
-    ldr r1, _08021E6C @ =gUnknown_02024AD0\n\
+    ldr r1, _08021E6C @ =gBattleMons+0x50\n\
 _08021E44:\n\
     ldrb r0, [r2, 0xA]\n\
     cmp r0, 0\n\
@@ -7664,7 +7664,7 @@ _08021E50:\n\
 _08021E60: .4byte gBattlersCount\n\
 _08021E64: .4byte gDisableStructs\n\
 _08021E68: .4byte 0xfeffffff\n\
-_08021E6C: .4byte gUnknown_02024AD0\n\
+_08021E6C: .4byte gBattleMons+0x50\n\
 _08021E70:\n\
     ldr r1, _08021F2C @ =gHitMarker\n\
     ldr r3, [r1]\n\
