@@ -34,13 +34,11 @@
 CFile::CFile(std::string filename) : m_filename(filename)
 {
     if (filename == "-") {
-        std::string s;
+        std::string s, b;
 
         while (!std::cin.eof()) {
-            std::string b;
             std::getline(std::cin, b);
-            b += "\n";
-            s += b;
+            s += b + "\n";
         }
         m_size = s.size();
         m_buffer = new char[m_size + 1];
