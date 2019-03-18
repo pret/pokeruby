@@ -140,17 +140,22 @@ int main(int argc, char **argv)
 
     g_charmap = new Charmap(argv[2]);
 
-    char* extension = GetFileExtension(argv[1]);
+    if (argv[1][0] == '-' && argv[1][1] == 0) {
+        PreprocCFile("-");
+    } else {
+        char* extension = GetFileExtension(argv[1]);
 
-    if (!extension)
-        FATAL_ERROR("\"%s\" has no file extension.\n", argv[1]);
+        if (!extension)
+            FATAL_ERROR("\"%s\" has no file extension.\n", argv[1]);
 
-    if ((extension[0] == 's') && extension[1] == 0)
-        PreprocAsmFile(argv[1]);
-    else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
-        PreprocCFile(argv[1]);
-    else
-        FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
+        if ((extension[0] == 's') && extension[1] == 0)
+            PreprocAsmFile(argv[1]);
+        else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
+            PreprocCFile(argv[1]);
+        else
+            FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
+    }
+
 
     return 0;
 }
