@@ -27,7 +27,7 @@ extern u8 gUnknown_02023A14_50;
 extern const u8* gBattlescriptCurrInstr;
 extern u8 gActiveBattler;
 extern u8 gBattleBufferB[4][0x200];
-extern u8* gUnknown_02024C1C[4]; //battlescript location when you try to choose a move you're not allowed to
+extern u8* gSelectionBattleScripts[4]; //battlescript location when you try to choose a move you're not allowed to
 extern u16 gLastUsedMove[4];
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -481,25 +481,25 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     {
         gBattleStruct->scriptingActive = gActiveBattler;
         gCurrentMove = move;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionDisabledMove;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionDisabledMove;
         limitations++;
     }
     if (move == gLastUsedMove[gActiveBattler] && move != MOVE_STRUGGLE && gBattleMons[gActiveBattler].status2 & STATUS2_TORMENT)
     {
         CancelMultiTurnMoves(gActiveBattler);
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionTormented;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionTormented;
         limitations++;
     }
     if (gDisableStructs[gActiveBattler].tauntTimer1 && gBattleMoves[move].power == 0)
     {
         gCurrentMove = move;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionTaunted;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionTaunted;
         limitations++;
     }
     if (IsImprisoned(gActiveBattler, move))
     {
         gCurrentMove = move;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionImprisoned;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionImprisoned;
         limitations++;
     }
     if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
@@ -511,12 +511,12 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     {
         gCurrentMove = *choicedMove;
         gLastUsedItem = gBattleMons[gActiveBattler].item;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionChoiceBanded;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionChoiceBanded;
         limitations++;
     }
     if (gBattleMons[gActiveBattler].pp[gBattleBufferB[gActiveBattler][2]] == 0)
     {
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionNoPP;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionNoPP;
         limitations++;
     }
     return limitations;
@@ -568,7 +568,7 @@ bool8 AreAllMovesUnusable(void)
     if (unusable == 0xF) //all moves are unusable
     {
         gProtectStructs[gActiveBattler].onlyStruggle = 1;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_NoMovesLeft;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_NoMovesLeft;
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             gBattleBufferB[gActiveBattler][3] = GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) ^ 1) | (Random() & 2));
         else

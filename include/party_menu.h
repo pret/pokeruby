@@ -17,6 +17,16 @@ enum
     PARTY_MENU_TYPE_MOVE_TUTOR,
 };
 
+enum
+{
+    PARTY_CHOOSE_MON,
+    PARTY_MUST_CHOOSE_MON,
+    PARTY_CANT_SWITCH,
+    PARTY_USE_ITEM_ON,
+    PARTY_ABILITY_PREVENTS,
+    PARTY_GIVE_ITEM,
+};
+
 // The party menu screen is presented differently depending on which menu layout is set.
 enum
 {

@@ -21,7 +21,7 @@
 #define B_ACTION_SAFARI_GO_NEAR         7
 #define B_ACTION_SAFARI_RUN             8
 // The exact purposes of these are unclear
-#define B_ACTION_UNKNOWN9               9
+#define B_ACTION_WALLY_THROW               9
 #define B_ACTION_EXEC_SCRIPT            10 // when executing an action
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_FINISHED               12 // when executing an action
@@ -690,6 +690,18 @@ struct scriptsStack
     const u8 *ptr[8];
     u8 size;
 };
+
+#define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
+#define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+
+#define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
+#define SET_BATTLER_TYPE(battlerId, type)   \
+{                                           \
+    gBattleMons[battlerId].type1 = type;    \
+    gBattleMons[battlerId].type2 = type;    \
+}
+
+#define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))
 
 extern u8 gBattleTextBuff1[];
 

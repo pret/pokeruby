@@ -133,6 +133,7 @@ extern u8 gSharedMem[];
 #define ewram1608B                      gSharedMem[0x1608B]
 
 #define ewram1608Carr(battler)          (gSharedMem[0x1608C + battler])
+#define ewram16094arr(battler)          (gSharedMem[0x16094 + battler])
 #define EWRAM_1609D                     (gSharedMem[0x1609D])
 #define ewram160A1                      (gSharedMem[0x160A1])
 #define ewram160A4                      (gSharedMem[0x160A4])
@@ -160,7 +161,7 @@ extern u8 gSharedMem[];
 #define USED_HELD_ITEMS(battler)        (*(u16 *)&gSharedMem[0x160CC + 2 * (battler)])
 #define ewram160D4(battler)             (gSharedMem[0x160D4 + (battler / 2) * 2])
 #define ewram160D8(battler)             (gSharedMem[0x160D8 + (battler / 2)])
-#define ewram160DA(battler)             (gSharedMem[0x160DA + (battler / 2)])
+#define ewram160DA(battler)             (gSharedMem[0x160DA + (battler >> 1)])
 #define ewram160DD                      (gSharedMem[0x160DD])
 #define ewram160E0(i)                   (gSharedMem[0x160E0 + i])
 #define ewram160E6                      (gSharedMem[0x160E6])
