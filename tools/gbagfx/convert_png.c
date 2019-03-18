@@ -63,7 +63,7 @@ static unsigned char *ConvertBitDepth(unsigned char *src, int srcBitDepth, int d
 
         for (j = 8 - srcBitDepth; j >= 0; j -= srcBitDepth)
         {
-            unsigned pixel = (srcByte >> j) % (1 << srcBitDepth);
+            int pixel = (int)((unsigned)srcByte >> j) % (1 << (unsigned)srcBitDepth);
 
             if (pixel >= (1 << destBitDepth))
                 FATAL_ERROR("Image exceeds the maximum color value for a %ibpp image.\n", destBitDepth);

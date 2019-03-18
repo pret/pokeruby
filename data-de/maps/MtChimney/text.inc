@@ -67,7 +67,7 @@ MtChimney_Text_195AD9:: @ 8195AD9
 
 MtChimney_Text_195B1C:: @ 8195B1C
 	.string "Ich habe Feuer in mir, Baby.\n"
-	.string "Ich halt’s nicht aus! Ich muss kämpfen!$"
+	.string "Ich halt's nicht aus! Ich muss kämpfen!$"
 
 MtChimney_Text_195B5F:: @ 8195B5F
 	.string "Oh, was für ein kochend heißer Kampf!$"

@@ -33,7 +33,7 @@ MtChimney_Text_1B3A68:: @ 81B3A68
 	.string "besiegt?!?$"
 
 MtChimney_Text_1B3A90:: @ 81B3A90
-	.string "MARC: Ach, was soll’s.\n"
+	.string "MARC: Ach, was soll's.\n"
 	.string "Ich werde für heute meine Pläne am\l"
 	.string "SCHLOTBERG vergessen. Für heute!\p"
 	.string "Niemand wird uns jemals stoppen!\n"

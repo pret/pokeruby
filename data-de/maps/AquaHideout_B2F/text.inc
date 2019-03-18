@@ -44,7 +44,7 @@ AquaHideout_B2F_Text_1972EF:: @ 81972EF
 	.string "Teleporter... Der ganze Stolz des\n"
 	.string "VERSTECKS!\p"
 	.string "Du weißt gar nicht mehr, wo du gerade\n"
-	.string "bist, stimmt’s? Kicher...\p"
+	.string "bist, stimmt's? Kicher...\p"
 	.string "Den Gegner verwirren, ermüden und dann\n"
 	.string "auf ihn mit Gebrüll! Das ist der Plan!$"
 

@@ -1,8 +1,8 @@
 Route102_Text_1A16B6:: @ 81A16B6
-	.string "It’s soft, loamy soil.$"
+	.string "It's soft, loamy soil.$"
 
 Route102_Text_1A16CD:: @ 81A16CD
-	.string "It’s soft, loamy soil.\n"
+	.string "It's soft, loamy soil.\n"
 	.string "Want to plant a BERRY?$"
 
 Route102_Text_1A16FB:: @ 81A16FB
@@ -41,13 +41,13 @@ Route102_Text_1A17FD:: @ 81A17FD
 
 Route102_Text_1A181A:: @ 81A181A
 	.string "{PLAYER} put away the {STR_VAR_1} BERRIES\n"
-	.string "in the BAG’s BERRIES POCKET.\p"
+	.string "in the BAG's BERRIES POCKET.\p"
 	.string "The soil returned to its soft and\n"
 	.string "loamy state.$"
 
 Route102_Text_1A1881:: @ 81A1881
-	.string "The BAG’s BERRIES POCKET is full.\p"
-	.string "The {STR_VAR_1} BERRIES couldn’t be taken.$"
+	.string "The BAG's BERRIES POCKET is full.\p"
+	.string "The {STR_VAR_1} BERRIES couldn't be taken.$"
 
 Route102_Text_1A18C5:: @ 81A18C5
 	.string "{PLAYER} left the {STR_VAR_1} BERRIES\n"

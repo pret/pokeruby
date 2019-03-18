@@ -11,8 +11,8 @@ RSFONT ?= $(RSFONT_DIR)/rsfont$(EXE)
 CC ?= gcc
 
 CFLAGS := -Wall -Wextra -Werror -std=c11 -O2 -DPNG_SKIP_SETJMP_CHECK
-RSFONT_CPPFLAGS :=  $(shell $(SHELL) $(RSFONT_DIR)/setjmp.sh $(CC) $(CFLAGS))
-RSFONT_LIBS := -lpng -lz
+RSFONT_CPPFLAGS :=  $(shell $(SHELL) $(RSFONT_DIR)/setjmp.sh $(CC) $(CFLAGS)) -I /usr/local/include
+RSFONT_LIBS := -lpng -lz -L/usr/local/lib
 
 
 RSFONT_SRCS := $(addprefix $(RSFONT_DIR)/,main.c convert_png.c util.c font.c)

@@ -98,7 +98,7 @@ static const u16 sFeebasData[][3] = {
 static const u16 sLandmarkData[][2] = {
     {MAPSEC_SKY_PILLAR,      FLAG_LANDMARK_SKY_PILLAR},
     {MAPSEC_SEAFLOOR_CAVERN, FLAG_LANDMARK_SEAFLOOR_CAVERN},
-    {MAPSEC_NOTHING}
+    {MAPSEC_NONE}
 };
 
 static struct PokedexAreaScreenEwramStruct *const gPokedexAreaScreenPtr = &ePokedexAreaScreen;
@@ -302,9 +302,9 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     if (gPokedexAreaScreenPtr->numSpecialAreas < 0x20)
     {
         mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
-        if (mapHeader->regionMapSectionId < MAPSEC_NOTHING)
+        if (mapHeader->regionMapSectionId < MAPSEC_NONE)
         {
-            for (i = 0; sLandmarkData[i][0] != MAPSEC_NOTHING; i++)
+            for (i = 0; sLandmarkData[i][0] != MAPSEC_NONE; i++)
             {
                 if (mapHeader->regionMapSectionId == sLandmarkData[i][0] && !FlagGet(sLandmarkData[i][1]))
                     return;
@@ -1348,10 +1348,10 @@ static void CreateAreaMarkerSprites(void)
     for (i = 0; i < gPokedexAreaScreenPtr->numSpecialAreas; i++)
     {
         mapSecId = gPokedexAreaScreenPtr->specialAreaRegionMapSectionIds[i];
-        x = 8 * (gRegionMapLocations[mapSecId].x + 1) + 4;
-        y = 8 * (gRegionMapLocations[mapSecId].y) + 28;
-        x += 4 * (gRegionMapLocations[mapSecId].width - 1);
-        y += 4 * (gRegionMapLocations[mapSecId].height - 1);
+        x = 8 * (gRegionMapEntries[mapSecId].x + 1) + 4;
+        y = 8 * (gRegionMapEntries[mapSecId].y) + 28;
+        x += 4 * (gRegionMapEntries[mapSecId].width - 1);
+        y += 4 * (gRegionMapEntries[mapSecId].height - 1);
         spriteId = CreateSprite(&sAreaMarkerSpriteTemplate, x, y, 0);
         if (spriteId != MAX_SPRITES)
         {

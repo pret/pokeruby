@@ -29,17 +29,19 @@ else
 SHA1SUM   := sha1sum -c
 endif
 
-GBAGFX     := tools/gbagfx/gbagfx$(EXE)
-RSFONT    := tools/rsfont/rsfont$(EXE)
-AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
-MID2AGB   := tools/mid2agb/mid2agb$(EXE)
-PREPROC   := tools/preproc/preproc$(EXE)
-SCANINC   := tools/scaninc/scaninc$(EXE)
-RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
-GBAFIX    := tools/gbafix/gbafix$(EXE)
+TOOLS_DIR := tools
+GBAGFX    := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
+RSFONT    := $(TOOLS_DIR)/rsfont/rsfont$(EXE)
+AIF2PCM   := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
+MID2AGB   := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
+PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
+SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
+RAMSCRGEN := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
+GBAFIX    := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
+MAPJSON   := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
 
-ALL_TOOLS := $(GBAGFX) $(SCANINC) $(PREPROC) $(BIN2C) $(RSFONT) $(AIF2PCM) $(RAMSCRGEN) $(MID2AGB) $(GBAFIX)
-ALL_TOOL_NAMES := gbagfx scaninc preproc bin2c rsfont aif2pcm ramscrgen
+ALL_TOOLS := $(GBAGFX) $(SCANINC) $(PREPROC) $(BIN2C) $(RSFONT) $(AIF2PCM) $(RAMSCRGEN) $(MID2AGB) $(GBAFIX) $(MAPJSON)
+ALL_TOOL_NAMES := gbagfx scaninc preproc bin2c rsfont aif2pcm ramscrgen mapjson
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -63,7 +65,7 @@ ifeq ($(V),0)
 ECHO := echo
 MAKEFLAGS += -s
 else
-# no-op the echoing 
+# no-op the echoing
 ECHO := \#
 endif
 
@@ -146,6 +148,9 @@ clean: tidy
 	$(RM) $(ALL_OBJECTS)
 	$(RM) -r .d
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
+	rm -f data/layouts/layouts.inc data/layouts/layouts_table.inc
+	rm -f data/maps/connections.inc data/maps/events.inc data/maps/groups.inc data/maps/headers.inc
+	find data/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	$(MAKE) clean -C tools/gbagfx
 	$(MAKE) clean -C tools/scaninc
 	$(MAKE) clean -C tools/preproc
@@ -154,9 +159,11 @@ clean: tidy
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
 	$(MAKE) clean -C tools/gbafix
+	$(MAKE) clean -C tools/mapjson
 
 tools: override NODEP = 1
 tools: $(ALL_TOOLS)
+	@$(MAKE) -C tools/mapjson
 
 tidy:
 	@$(ECHO) "Cleaning normal build files..."
@@ -271,6 +278,7 @@ include fonts.mk
 include misc.mk
 include spritesheet_rules.mk
 include override.mk
+include map_data_rules.mk
 
 %.1bpp:   %.png
 	@$(ECHO) " GBAGFX  $@"

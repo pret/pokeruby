@@ -8,9 +8,9 @@ SlateportCity_House2_Text_1804CF:: @ 81804CF
 SlateportCity_House2_Text_180567:: @ 8180567
 	.string "You need a CONTEST PASS to enter a\n"
 	.string "CONTEST.\p"
-	.string "It’s easy to get. They give it to\n"
+	.string "It's easy to get. They give it to\n"
 	.string "anyone who has POKéMON.$"
 
 SlateportCity_House2_Text_1805CD:: @ 81805CD
 	.string "Oh, a CONTEST PASS!\n"
-	.string "You’re going to be a contestant?$"
+	.string "You're going to be a contestant?$"

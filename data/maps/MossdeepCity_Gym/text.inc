@@ -1,20 +1,20 @@
 MossdeepCity_Gym_Text_18C7E3:: @ 818C7E3
-	.string "Yo, how’s it going, CHAMPION-bound\n"
+	.string "Yo, how's it going, CHAMPION-bound\n"
 	.string "{PLAYER}?\p"
 	.string "The GYM LEADERS here use PSYCHIC-type\n"
 	.string "POKéMON.\p"
 	.string "If you go up against them with\n"
 	.string "FIGHTING- or POISON-type POKéMON,\l"
-	.string "they’ll inflict horrible damage!\p"
-	.string "Plus, they’ll come at you with\n"
+	.string "they'll inflict horrible damage!\p"
+	.string "Plus, they'll come at you with\n"
 	.string "outstanding combination attacks.\p"
-	.string "If you want to win, you’ll need to show\n"
+	.string "If you want to win, you'll need to show\n"
 	.string "them how tight you are with your\l"
 	.string "POKéMON. Go for it!$"
 
 MossdeepCity_Gym_Text_18C938:: @ 818C938
-	.string "Wow, you’re astounding!\n"
-	.string "You’re one great TRAINER!$"
+	.string "Wow, you're astounding!\n"
+	.string "You're one great TRAINER!$"
 
 MossdeepCity_Gym_Text_18C96A:: @ 818C96A
 	.string "Battles hinge on the strength of your\n"
@@ -25,7 +25,7 @@ MossdeepCity_Gym_Text_18C9BA:: @ 818C9BA
 
 MossdeepCity_Gym_Text_18C9E1:: @ 818C9E1
 	.string "The indecisive lose.\n"
-	.string "That’s my warning to you.$"
+	.string "That's my warning to you.$"
 
 MossdeepCity_Gym_Text_18CA10:: @ 818CA10
 	.string "Let me see your talent!$"
@@ -44,7 +44,7 @@ MossdeepCity_Gym_Text_18CAC0:: @ 818CAC0
 	.string "BALL telekinetically!\p"
 	.string "Wrooooooooaaaar!\n"
 	.string "... ... ... ... ... ... ...\p"
-	.string "Sometimes, I’m out of sync...$"
+	.string "Sometimes, I'm out of sync...$"
 
 MossdeepCity_Gym_Text_18CB46:: @ 818CB46
 	.string "My POKéMON battling skills are out\n"
@@ -55,22 +55,22 @@ MossdeepCity_Gym_Text_18CB77:: @ 818CB77
 	.string "psychically. But this dust bunny...\p"
 	.string "Whoooooooooooooooh!\n"
 	.string "... ... ... ... ... ...\p"
-	.string "No, I’m not cheating!\n"
-	.string "I didn’t blow on it! Honestly!$"
+	.string "No, I'm not cheating!\n"
+	.string "I didn't blow on it! Honestly!$"
 
 MossdeepCity_Gym_Text_18CC1E:: @ 818CC1E
-	.string "When you lose to me, don’t be too hard\n"
+	.string "When you lose to me, don't be too hard\n"
 	.string "on yourself.\p"
-	.string "It’s not that you’re weak - I’m just\n"
+	.string "It's not that you're weak - I'm just\n"
 	.string "too strong!$"
 
 MossdeepCity_Gym_Text_18CC83:: @ 818CC83
-	.string "You’re just too strong!$"
+	.string "You're just too strong!$"
 
 MossdeepCity_Gym_Text_18CC9B:: @ 818CC9B
-	.string "I’m not going to get down on myself for\n"
+	.string "I'm not going to get down on myself for\n"
 	.string "losing. I just need to train harder.\p"
-	.string "Positive thinking - that’s my strong\n"
+	.string "Positive thinking - that's my strong\n"
 	.string "point!$"
 
 MossdeepCity_Gym_Text_18CD14:: @ 818CD14
@@ -86,16 +86,16 @@ MossdeepCity_Gym_Text_18CD73:: @ 818CD73
 	.string "You will wage a terrifically intense\n"
 	.string "battle with our GYM LEADERS...\p"
 	.string "The result...\n"
-	.string "You won’t hear it from me!$"
+	.string "You won't hear it from me!$"
 
 MossdeepCity_Gym_Text_18CDE0:: @ 818CDE0
 	.string "The roads you have traveled...\n"
 	.string "What you have experienced...\p"
-	.string "Come at me with everything you’ve\n"
+	.string "Come at me with everything you've\n"
 	.string "learned!$"
 
 MossdeepCity_Gym_Text_18CE47:: @ 818CE47
-	.string "You’ve traveled a path of greatness!$"
+	.string "You've traveled a path of greatness!$"
 
 MossdeepCity_Gym_Text_18CE6C:: @ 818CE6C
 	.string "A bright future awaits those who have\n"
@@ -109,9 +109,9 @@ MossdeepCity_Gym_Text_18CF02:: @ 818CF02
 	.string "LIZA: Fufufu... Were you surprised?\p"
 	.string "TATE: That there are two GYM LEADERS?\n"
 	.string "LIZA: That there are two GYM LEADERS?\p"
-	.string "TATE: We’re twins!\n"
-	.string "LIZA: We’re twins!\p"
-	.string "TATE: We don’t need to talk because...\n"
+	.string "TATE: We're twins!\n"
+	.string "LIZA: We're twins!\p"
+	.string "TATE: We don't need to talk because...\n"
 	.string "LIZA: We can each determine what...\p"
 	.string "TATE: The other is thinking...\n"
 	.string "LIZA: All in our minds!\p"
@@ -121,7 +121,7 @@ MossdeepCity_Gym_Text_18CF02:: @ 818CF02
 MossdeepCity_Gym_Text_18D077:: @ 818D077
 	.string "TATE: What?! Our combination...\n"
 	.string "LIZA: Was shattered!\p"
-	.string "TATE: It can’t be helped. You’ve won...\n"
+	.string "TATE: It can't be helped. You've won...\n"
 	.string "LIZA: So, in recognition, take this.$"
 
 MossdeepCity_Gym_Text_18D0F9:: @ 818D0F9
@@ -140,7 +140,7 @@ MossdeepCity_Gym_Text_18D1CF:: @ 818D1CF
 	.string "LIZA: CALM MIND!\p"
 	.string "TATE: It raises SP. ATK and...\n"
 	.string "LIZA: It raises SP. DEF!\p"
-	.string "TATE: It’s a move that’s perfect...\n"
+	.string "TATE: It's a move that's perfect...\n"
 	.string "LIZA: For PSYCHIC POKéMON!$"
 
 MossdeepCity_Gym_Text_18D273:: @ 818D273
@@ -148,14 +148,14 @@ MossdeepCity_Gym_Text_18D273:: @ 818D273
 	.string "and your POKéMON is far stronger than\l"
 	.string "the bond that we share as twins.\p"
 	.string "LIZA: You will become even stronger!\n"
-	.string "We’ve battled you, so we know.$"
+	.string "We've battled you, so we know.$"
 
 MossdeepCity_Gym_Text_18D324:: @ 818D324
 	.string "TATE: Hehehe... Were you surprised?\p"
 	.string "LIZA: That there are two GYM LEADERS?\p"
 	.string "TATE: Oops, you have only one...\n"
 	.string "LIZA: POKéMON that can battle.\p"
-	.string "TATE: We can’t battle that way!\p"
+	.string "TATE: We can't battle that way!\p"
 	.string "LIZA: If you want to challenge us,\n"
 	.string "bring some more POKéMON.$"
 
@@ -164,5 +164,5 @@ MossdeepCity_Gym_Text_18D40A:: @ 818D40A
 
 MossdeepCity_Gym_Text_18D424:: @ 818D424
 	.string "MOSSDEEP CITY POKéMON GYM\p"
-	.string "LIZA AND TATE’S CERTIFIED TRAINERS:\n"
+	.string "LIZA AND TATE'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"

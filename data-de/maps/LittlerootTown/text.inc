@@ -47,7 +47,7 @@ LittlerootTown_Text_16AB10:: @ 816AB10
 	.string "...Aber sei bitte vorsichtig.\n"
 	.string "Sollte etwas passieren, komm wieder\l"
 	.string "nach Hause.\p"
-	.string "Lauf, schnapp’ sie dir alle, Schatz!$"
+	.string "Lauf, schnapp' sie dir alle, Schatz!$"
 
 LittlerootTown_Text_16AC00:: @ 816AC00
 	.string "Wenn du einen PC benutzt, kannst du\n"

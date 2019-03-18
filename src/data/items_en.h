@@ -2993,7 +2993,7 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
     {
-        .name = _("KING’S ROCK"),
+        .name = _("KING'S ROCK"),
         .itemId = ITEM_KINGS_ROCK,
         .price = 100,
         .holdEffect = HOLD_EFFECT_FLINCH,

@@ -13,9 +13,9 @@ CC ?= gcc
 
 CFLAGS := -Wall -Wextra -Werror -std=c11 -O2
 
-GBAGFX_CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK $(shell $(SHELL) $(GBAGFX_DIR)/setjmp.sh $(CC) $(CFLAGS))
+GBAGFX_CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK $(shell $(SHELL) $(GBAGFX_DIR)/setjmp.sh $(CC) $(CFLAGS)) -I /usr/local/include
 
-GBAGFX_LIBS = -lpng -lz
+GBAGFX_LIBS = -lpng -lz -L/usr/local/lib
 
 GBAGFX_SRCS = $(addprefix $(GBAGFX_DIR)/,main.c convert_png.c gfx.c jasc_pal.c lz.c rl.c util.c font.c)
 GBAGFX_OBJS = $(GBAGFX_SRCS:.c=.o)

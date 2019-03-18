@@ -230,7 +230,7 @@ static void ContestEffect_StartlePrevMons2(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-// Shifts the JUDGE’s attention from others.
+// Shifts the JUDGE's attention from others.
 static void ContestEffect_ShiftJudgeAttention(void)
 {
     bool32 hitAny = FALSE;
@@ -260,7 +260,7 @@ static void ContestEffect_ShiftJudgeAttention(void)
     }
 }
 
-// Startles the POKéMON that has the JUDGE’s attention.
+// Startles the POKéMON that has the JUDGE's attention.
 static void ContestEffect_StartleMonWithJudgesAttention(void)
 {
     u8 numStartled = 0;
@@ -584,7 +584,7 @@ static void ContestEffect_BetterWhenLater(void)
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY);
 }
 
-// The appeal’s quality varies depending on its timing.
+// The appeal's quality varies depending on its timing.
 static void ContestEffect_QualityDependsOnTiming(void)
 {
     u8 rval = Random() % 10;
@@ -697,7 +697,7 @@ static void ContestEffect_AffectedByPrevAppeal(void)
     }
 }
 
-// Ups the user’s condition. Helps prevent nervousness.
+// Ups the user's condition. Helps prevent nervousness.
 static void ContestEffect_ImproveConditionPreventNervousness(void)
 {
     if (sContestantStatus[shared192D0.contestant].condition < 30)
@@ -710,7 +710,7 @@ static void ContestEffect_ImproveConditionPreventNervousness(void)
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NO_CONDITION_IMPROVE);
 }
 
-// The appeal works well if the user’s condition is good.
+// The appeal works well if the user's condition is good.
 static void ContestEffect_BetterWithGoodCondition(void)
 {
     sContestantStatus[shared192D0.contestant].appealTripleCondition = TRUE;
@@ -804,7 +804,7 @@ static void ContestEffect_NextAppealLater(void)
     }
 }
 
-// Makes the next turn’s order more easily scrambled.
+// Makes the next turn's order more easily scrambled.
 static void ContestEffect_MakeScramblingTurnOrderEasier(void)
 {
     // dummied out?

@@ -58,12 +58,12 @@ struct TayaMonDataEwramStruct {
 #define eTayaMonData (*(struct TayaMonDataEwramStruct *)gSharedMem)
 
 const u8 gUnknown_Debug_083C4E54[] = _("Profile");
-const u8 gUnknown_Debug_083C4E5C[] = _("Battle’s　start");
+const u8 gUnknown_Debug_083C4E5C[] = _("Battle's　start");
 const u8 gUnknown_Debug_083C4E6B[] = _("Good　saying");
 const u8 gUnknown_Debug_083C4E77[] = _("Lose　a　battle");
 const u8 gUnknown_Debug_083C4E85[] = _("MAIL");
 const u8 gUnknown_Debug_083C4E8A[] = _("MAIL　salutation");
-const u8 gUnknown_Debug_083C4E9A[] = _("BARD’s　song");
+const u8 gUnknown_Debug_083C4E9A[] = _("BARD's　song");
 const u8 gUnknown_Debug_083C4EA6[] = _("Interview");
 const u8 gUnknown_Debug_083C4EB0[] = _("InterviewシBTス");
 
@@ -109,7 +109,7 @@ const struct {
 
 const u8 gUnknown_Debug_083C4F94[] = _("しょうしょうおまちください！");
 const u8 gUnknown_Debug_083C4FA3[] = _("Weather");
-const u8 gUnknown_Debug_083C4FAB[] = _("LANETTE’S　PC");
+const u8 gUnknown_Debug_083C4FAB[] = _("LANETTE'S　PC");
 const u8 gUnknown_Debug_083C4FB8[] = _("SimpleText");
 const u8 gUnknown_Debug_083C4FC3[] = _("Old　man");
 const u8 gUnknown_Debug_083C4FCB[] = _("Trend");

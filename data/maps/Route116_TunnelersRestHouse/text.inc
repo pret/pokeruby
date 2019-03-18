@@ -6,21 +6,21 @@ Route116_TunnelersRestHouse_Text_192F33:: @ 8192F33
 	.string "It turns out that we would have had\n"
 	.string "a negative effect on wild POKéMON in\l"
 	.string "the area.\p"
-	.string "So, we’ve got nothing to do but loll\n"
+	.string "So, we've got nothing to do but loll\n"
 	.string "around here doing nothing.$"
 
 Route116_TunnelersRestHouse_Text_193049:: @ 8193049
-	.string "There’s a man digging his way to\n"
+	.string "There's a man digging his way to\n"
 	.string "VERDANTURF all by his lonesome.\l"
-	.string "He’s desperate to get through.\p"
+	.string "He's desperate to get through.\p"
 	.string "He says that if he digs little by little\n"
-	.string "without using machines, he won’t\l"
-	.string "disturb POKéMON, and he’ll avoid harming\l"
+	.string "without using machines, he won't\l"
+	.string "disturb POKéMON, and he'll avoid harming\l"
 	.string "the natural environment.$"
 
 Route116_TunnelersRestHouse_Text_193135:: @ 8193135
 	.string "To get to VERDANTURF without using\n"
-	.string "this TUNNEL, you’d have to cross the\l"
+	.string "this TUNNEL, you'd have to cross the\l"
 	.string "sea to DEWFORD, sail on to SLATEPORT,\l"
 	.string "then travel through MAUVILLE.$"
 

@@ -54,7 +54,7 @@ OldaleTown_PokemonCenter_2F_Text_1A48A3:: @ 81A48A3
 
 OldaleTown_PokemonCenter_2F_Text_1A48DD:: @ 81A48DD
 	.string "Your {STR_VAR_1} BERRY-holding POKéMON\n"
-	.string "can’t be traded.$"
+	.string "can't be traded.$"
 
 gUnknown_081A490C:: @ 81A490C
 OldaleTown_PokemonCenter_2F_Text_1A490C:: @ 81A490C
@@ -139,12 +139,12 @@ CableClub_TooBusyToNotice: @ 81A4CF6
 	.string "This TRAINER is too busy to notice...$"
 
 CableClub_LookAtTrainerCard1: @ 81A4D1C
-	.string "Score! Got to look at {STR_VAR_1}’s\n"
+	.string "Score! Got to look at {STR_VAR_1}'s\n"
 	.string "TRAINER CARD!$"
 
 CableClub_LookAtTrainerCard2: @ 81A4D45
-	.string "Score! Got to look at {STR_VAR_1}’s\n"
-	.string "TRAINER CARD! It’s a {STR_VAR_2} card!$"
+	.string "Score! Got to look at {STR_VAR_1}'s\n"
+	.string "TRAINER CARD! It's a {STR_VAR_2} card!$"
 
 SingleBattleColosseum_Text_1A4D7E:: @ 81A4D7E
 	.string "Please take your seat and start\n"

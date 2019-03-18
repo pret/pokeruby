@@ -6,8 +6,8 @@
 #include "random.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CFFD8(struct Sprite* sprite);
 static void sub_80D0030(struct Sprite* sprite);
@@ -42,8 +42,8 @@ void sub_80CFFD8(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = 20;
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     sprite->callback = StartAnimLinearTranslation;
     sprite->affineAnimPaused = 1;
     StoreSpriteCallbackInData(sprite, sub_80D0030);

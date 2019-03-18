@@ -1,0 +1,10 @@
+include tools/aif2pcm/Makefile
+include tools/bin2c/Makefile
+include tools/gbafix/Makefile
+include tools/gbagfx/Makefile
+include tools/mapjson/Makefile
+include tools/mid2agb/Makefile
+include tools/preproc/Makefile
+include tools/ramscrgen/Makefile
+include tools/rsfont/Makefile
+include tools/scaninc/Makefile

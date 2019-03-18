@@ -6,8 +6,8 @@ EverGrandeCity_PokemonLeague_Text_1916FD:: @ 81916FD
 	.string "all the GYM BADGES.$"
 
 EverGrandeCity_PokemonLeague_Text_19179C:: @ 819179C
-	.string "You haven’t obtained all the BADGES.\p"
-	.string "If you’re bound for the POKéMON\n"
+	.string "You haven't obtained all the BADGES.\p"
+	.string "If you're bound for the POKéMON\n"
 	.string "LEAGUE, you must return with them.$"
 
 EverGrandeCity_PokemonLeague_Text_191804:: @ 8191804

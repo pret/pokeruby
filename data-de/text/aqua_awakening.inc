@@ -75,7 +75,7 @@ UnknownString_81B464D: @ 81B464D
 	.string "MARC: Was hast du da nur herauf-\n"
 	.string "beschworen?\p"
 	.string "ADRIAN... Du hast KYOGRE aufge-\n"
-	.string "weckt, stimmt’s?\p"
+	.string "weckt, stimmt's?\p"
 	.string "Was wird nur aus der Welt, wenn es\n"
 	.string "bis in alle Ewigkeit regnen wird?\p"
 	.string "Das Land wird untergehen und im\n"
