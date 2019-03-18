@@ -151,7 +151,7 @@ gBattlescriptCurrInstr = .; /* 2024C10 */
 gActionForBanks = .; /* 2024C18 */
     . += 0x4;
 
-gUnknown_02024C1C = .; /* 2024C1C */
+gSelectionBattleScripts = .; /* 2024C1C */
     . += 0x10;
 
 gUnknown_02024C2C = .; /* 2024C2C */
