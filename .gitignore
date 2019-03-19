@@ -43,3 +43,6 @@ build/
 .vs/
 .projects/ARM/
 *.diff
+src/data/items.h
+src/data/item_descriptions.h
+

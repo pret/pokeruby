@@ -50,13 +50,8 @@ enum
     KEYITEMS_POCKET
 };
 
-#if ENGLISH
-#include "data/item_descriptions_en.h"
-#include "data/items_en.h"
-#elif GERMAN
-#include "data/item_descriptions_de.h"
-#include "data/items_de.h"
-#endif
+#include "data/item_descriptions.h"
+#include "data/items.h"
 
 static void CompactPCItems(void);
 
