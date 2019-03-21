@@ -51,7 +51,55 @@ void CFile::Find()
     FindIncbins();
     FindIncludes();
 }
-
+//
+//bool CFile::ConsumeNewline()
+//{
+//    if (m_buffer[m_pos] == '\n')
+//    {
+//        m_pos++;
+//        m_lineNum++;
+//        return true;
+//    }
+//
+//    if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
+//    {
+//        m_pos += 2;
+//        m_lineNum++;
+//        return true;
+//    }
+//
+//    return false;
+//}
+//
+//bool CFile::ConsumeComment()
+//{
+//    if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '*')
+//    {
+//        m_pos += 2;
+//        while (m_buffer[m_pos] != '*' || m_buffer[m_pos + 1] != '/')
+//        {
+//            if (m_buffer[m_pos] == 0)
+//                return false;
+//            if (!ConsumeNewline())
+//                m_pos++;
+//        }
+//        m_pos += 2;
+//        return true;
+//    }
+//    else if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '/')
+//    {
+//        m_pos += 2;
+//        while (!ConsumeNewline())
+//        {
+//            if (m_buffer[m_pos] == 0)
+//                return false;
+//            m_pos++;
+//        }
+//        return true;
+//    }
+//
+//    return false;
+//}
 
 void CFile::SkipWhitespace()
 {

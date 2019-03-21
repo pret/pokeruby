@@ -71,6 +71,7 @@ static void PreprocessFile(const char *restrict path, Stack *restrict defines, S
     init_lexer_state(&ls);
     init_lexer_mode(&ls);
     ls.flags |= HANDLE_PRAGMA | LEXER;
+    ls.flags &= ~HANDLE_TRIGRAPHS;
     if (g_lines)
         ls.flags |= (LINE_NUM | GCC_LINE_NUM);
     else
@@ -148,16 +149,16 @@ static void PreprocessFile(const char *restrict path, Stack *restrict defines, S
                         size_t pragmalen = (end_pos != NULL && end_pos > c) ? end_pos - c : strlen(c);
 
                         fwrite(c, 1, pragmalen, g_file);
-                        putc_unlocked(' ', g_file);
+                        putc(' ', g_file);
                         c += pragmalen;
                     }
                     else
                     {
                         fputs(operators_name[t] ? operators_name[t] : "", g_file);
-                        putc_unlocked(' ', g_file);
+                        putc(' ', g_file);
                     }
                 }
-                putc_unlocked('\n', g_file);
+                putc('\n', g_file);
             }
         }
         // TODO: Fix line numbers. They are way off.

@@ -202,7 +202,7 @@ $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld
 
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	@$(ECHO) " SED     $@"
-	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
+	$(CPP) -P -xc $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 	@$(ECHO) " CC      $@"
@@ -218,7 +218,7 @@ endif
 $(BUILD_DIR)/data/%.o: data/%.s
 	@$(ECHO) " AS      $@"
 ifeq (,$(KEEP_TEMPS))
-	$(PREPROC) -n -c charmap.txt $< | $(CPP) - -P -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) -n -c charmap.txt $< | $(CPP) -x assembler-with-cpp - -P -I include | $(AS) $(ASFLAGS) -o $@
 else
 	$(PREPROC) -n -c charmap.txt -o $(BUILD_DIR)/data/$*.preproc.S $<
 	$(CPP) $(BUILD_DIR)/data/$*.preproc.S -P -I include -o $(BUILD_DIR)/data/$*.s

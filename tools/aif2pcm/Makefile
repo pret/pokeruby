@@ -9,7 +9,7 @@ ECHO ?= \#
 CC ?= gcc
 TOOLS_DIR ?= ..
 AIF2PCM_DIR := $(basename $(TOOLS_DIR)/aif2pcm)
-AIF ?= $(AIF2PCM_DIR)/aif2pcm$(EXE)
+AIF2PCM ?= $(AIF2PCM_DIR)/aif2pcm$(EXE)
 
 CFLAGS := -Wall -Wextra -Wno-switch -Werror -std=c11 -O2
 AIF2PCM_LIBS := -lm

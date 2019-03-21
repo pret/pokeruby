@@ -27,7 +27,8 @@ preproc_all: $(PREPROC)
 # note: SEMPER_FIDELIS is the define that makes ucpp handle whitespace.
 $(PREPROC_DIR)/ucpp/libucpp.a:  $(wildcard $(PREPROC_DIR)/ucpp/*.[ch])
 	@$(ECHO) " MAKE   ucpp"
-	cd $(PREPROC_DIR)/ucpp && $(MAKE) STAND_ALONE=  CC="$(CC)" CFLAGS="$(PREPROC_CFLAGS) -DSEMPER_FIDELIS"
+	cd $(PREPROC_DIR)/ucpp && $(MAKE) STAND_ALONE=  CC="$(CC)" CFLAGS="$(PREPROC_CFLAGS)"
+#-DSEMPER_FIDELIS"
 
 $(PREPROC): $(PREPROC_OBJS) $(PREPROC_DIR)/ucpp/libucpp.a
 	@$(ECHO) " CCLD   $@"

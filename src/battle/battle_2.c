@@ -64,12 +64,6 @@ struct UnknownStruct8
     u8 unk1A;
 };
 
-struct UnknownStruct12
-{
-    u32 unk0;
-    u8 filler4[0x54];
-};
-
 extern void sub_802BBD4();
 
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -90,7 +84,6 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gCurrentActionFuncId;
 extern u8 gBanksByTurnOrder[];
-extern struct UnknownStruct12 gUnknown_02024AD0[];
 extern u8 gBankSpriteIds[];
 extern u16 gCurrentMove;  // This is mis-named. It is a species, not a move ID.
 extern u8 gLastUsedAbility;
@@ -1374,7 +1367,7 @@ void debug_sub_8012D10(u8);
 u32 debug_sub_8013294(u8, void *, u32);
 void debug_sub_80132C8(u8, void *, u32);
 
-extern s16 gUnknown_Debug_2023A76[][0x23];
+extern s16 gUnknown_Debug_2023A76[][35];
 extern s16 gUnknown_Debug_2023B02[][6][4];
 extern u8 gUnknown_Debug_03004360;
 extern struct Window gUnknown_Debug_03004370;
@@ -1548,12 +1541,6 @@ void debug_sub_8010B80(u8 a)
 	= r12 * 10 + r7;
 }
 
-// For some unexplainable reason, code in various functions will cause SetActionsAndBanksTurnOrder,
-// a completely separate and unrelated function, to use different registers. I have
-// absolutely no clue as to why this phenomenon occurs. For example,
-// I have to make debug_sub_8010CAC access gUnknown_Debug_2023A76 as a 3D array.
-// If I use a 2D array, SetActionsAndBanksTurnOrder will no longer match.
-#ifdef NONMATCHING
 void debug_sub_8010CAC(void)
 {
     s32 r5;
@@ -1851,309 +1838,6 @@ void debug_sub_8010CAC(void)
     AnimateSprites();
     BuildOamBuffer();
 }
-#else
-
-// 3D array
-extern s16 gUnknown_Debug_2023A76_[][7][5];
-
-void debug_sub_8010CAC(void)
-{
-    s32 r5;
-
-    if (gMain.heldKeysRaw == (L_BUTTON | SELECT_BUTTON))
-        DoSoftReset();
-    if (gMain.newKeysRaw == SELECT_BUTTON)
-    {
-        if (gUnknown_Debug_030043A4 < 6)
-        {
-            gUnknown_Debug_030043A8 = 0;
-            debug_sub_8012628();
-            SetMainCallback2(debug_sub_8011498);
-        }
-        if (gUnknown_Debug_030043A0 == 0 && gUnknown_Debug_030043A4 == 6)
-        {
-            gMain.savedCallback = debug_sub_80108B8;
-            CreateMon(
-              &gPlayerParty[0],
-              gUnknown_Debug_2023A76_[0][0][0],
-              gUnknown_Debug_2023A76_[0][0][1],
-              32,
-              0, 0, 0, 0);
-            for (r5 = 0; r5 < 4; r5++)
-            {
-                SetMonData(&gPlayerParty[0], MON_DATA_MOVE1 + r5, &gUnknown_Debug_2023B02[0][0][r5]);
-                SetMonData(&gPlayerParty[0], MON_DATA_PP1 + r5, &gBattleMoves[gUnknown_Debug_2023B02[0][0][r5]].pp);
-            }
-            switch (gUnknown_Debug_2023A76_[0][6][0])
-            {
-            case 1:
-                gCB2_AfterEvolution = debug_sub_80108B8;
-                EvolutionScene(&gPlayerParty[0], gUnknown_Debug_2023A76_[0][1][0], 1, 0);
-                break;
-            case 2:
-                debug_sub_8012688();
-                break;
-            }
-        }
-        if (gUnknown_Debug_030043A0 == 1 && gUnknown_Debug_030043A4 == 6)
-        {
-            // This is really weird
-            r5 = (gSaveBlock2.optionsBattleSceneOff | (gSaveBlock2.optionsSound << 1));
-            r5++;
-            if (r5 == 4)
-                r5 = 0;
-            gSaveBlock2.optionsBattleSceneOff = (r5 & 1);
-            gSaveBlock2.optionsSound = (r5 & 2) >> 1;
-            SetPokemonCryStereo(gSaveBlock2.optionsSound);
-            debug_nullsub_3();
-        }
-    }
-    if (gMain.newKeysRaw == START_BUTTON)
-        debug_sub_801174C();
-    if (gMain.newKeysRaw == DPAD_UP)
-    {
-        debug_sub_80125E4();
-        if (gUnknown_Debug_030043A4 != 0)
-            gUnknown_Debug_030043A4--;
-        else
-            gUnknown_Debug_030043A4 = 6;
-        debug_sub_8011E74();
-        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-        debug_sub_80125A0();
-    }
-    if (gMain.newKeysRaw == DPAD_DOWN)
-    {
-        debug_sub_80125E4();
-        if (gUnknown_Debug_030043A4 == 6)
-            gUnknown_Debug_030043A4 = 0;
-        else
-            gUnknown_Debug_030043A4++;
-        debug_sub_8011E74();
-        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-        debug_sub_80125A0();
-    }
-    if (gMain.newKeysRaw == DPAD_LEFT)
-    {
-        debug_sub_80125E4();
-        if (gUnknown_Debug_030043A0 != 0)
-        {
-            gUnknown_Debug_030043A0--;
-        }
-        else
-        {
-            if (gUnknown_Debug_03004360 != 0)
-            {
-                gUnknown_Debug_03004360 = 0;
-                gUnknown_Debug_030043A0 = 4;
-                gBattle_BG1_X = 0;
-                debug_sub_8011E5C();
-                debug_sub_8011E74();
-                debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            }
-        }
-        debug_sub_80125A0();
-    }
-    if (gMain.newKeysRaw == DPAD_RIGHT)
-    {
-        debug_sub_80125E4();
-        if (gUnknown_Debug_030043A0 != 4)
-        {
-            gUnknown_Debug_030043A0++;
-        }
-        else
-        {
-            if (gUnknown_Debug_03004360 == 0)
-            {
-                gUnknown_Debug_03004360 = 1;
-                gUnknown_Debug_030043A0 = 0;
-                gBattle_BG1_X = 0x100;
-                debug_sub_8011E5C();
-                debug_sub_8011E74();
-                debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            }
-        }
-        debug_sub_80125A0();
-    }
-    if (gMain.newAndRepeatedKeys & B_BUTTON)
-    {
-        switch (gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5)
-        {
-        case 31:
-            debug_sub_8010818();
-            debug_sub_8011E5C();
-            debug_sub_8011E74();
-            debug_sub_8012540();
-            debug_nullsub_3();
-            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            break;
-        case 32:
-            debug_sub_80132C8(31, gUnknown_Debug_2023A76, 0xEC);
-            debug_sub_8011E5C();
-            debug_sub_8011E74();
-            debug_sub_8012540();
-            debug_nullsub_3();
-            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            break;
-        case 33:
-            debug_sub_8013294(31, gUnknown_Debug_2023A76, 0xEC);
-            break;
-        case 34:
-            if (gUnknown_Debug_2023A76_[0][6][4] != 0)
-            {
-                gUnknown_Debug_2023A76_[0][6][4]--;
-                gUnknown_Debug_2023A76_[1][6][4]--;
-            }
-            else
-            {
-                gUnknown_Debug_2023A76_[0][6][4] = 8;
-                gUnknown_Debug_2023A76_[1][6][4] = 8;
-            }
-            debug_sub_8012540();
-            break;
-        case 30:
-            debug_sub_8010B80(0);
-            debug_sub_8011EA0(gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5);
-            break;
-        default:
-            if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
-            {
-                debug_sub_8010AAC(1);
-            }
-            else
-            {
-                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]--;
-                if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] < gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][4])
-                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] = gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3];
-            }
-            if (gUnknown_Debug_030043A0 == 0)
-            {
-                debug_sub_8010AAC(0);
-                debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
-            }
-            debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
-            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            break;
-        }
-    }
-    if (gMain.newAndRepeatedKeys & A_BUTTON)
-    {
-        switch (gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5)
-        {
-        case 31:
-            debug_sub_8010818();
-            debug_sub_8011E5C();
-            debug_sub_8011E74();
-            debug_sub_8012540();
-            debug_nullsub_3();
-            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            break;
-        case 32:
-            debug_sub_80132C8(31, gUnknown_Debug_2023A76, 0xEC);
-            debug_sub_8011E5C();
-            debug_sub_8011E74();
-            debug_sub_8012540();
-            debug_nullsub_3();
-            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            break;
-        case 33:
-            debug_sub_8013294(31, gUnknown_Debug_2023A76, 0xEC);
-            break;
-        case 34:
-            if (gUnknown_Debug_2023A76_[0][6][4] < 8)
-            {
-                gUnknown_Debug_2023A76_[0][6][4]++;
-                gUnknown_Debug_2023A76_[1][6][4]++;
-            }
-            else
-            {
-                gUnknown_Debug_2023A76_[0][6][4] = 0;
-                gUnknown_Debug_2023A76_[1][6][4] = 0;
-            }
-            debug_sub_8012540();
-            break;
-        case 30:
-            debug_sub_8010B80(1);
-            debug_sub_8011EA0(gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5);
-            break;
-        default:
-            if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
-            {
-                debug_sub_8010AAC(1);
-            }
-            else
-            {
-                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]++;
-                if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] > gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3])
-                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] = gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][4];
-            }
-            if (gUnknown_Debug_030043A0 == 0)
-            {
-                debug_sub_8010AAC(0);
-                debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
-            }
-            debug_sub_8011EA0(gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5);
-            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-            break;
-        }
-    }
-    if (gMain.newAndRepeatedKeys & L_BUTTON)
-    {
-        if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
-        {
-            debug_sub_8010AAC(1);
-        }
-        else
-        {
-            if (gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0 == 30)
-            {
-                debug_sub_8010B80(2);
-            }
-            else
-            {
-                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] -= 10;
-                while (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] < gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][4])
-                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] += gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3];
-            }
-        }
-        if (gUnknown_Debug_030043A0 == 0)
-        {
-            debug_sub_8010AAC(0);
-            debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
-        }
-        debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
-        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-    }
-    if (gMain.newAndRepeatedKeys & R_BUTTON)
-    {
-        if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
-        {
-            debug_sub_8010AAC(1);
-        }
-        else
-        {
-            if (gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0 == 30)
-            {
-                debug_sub_8010B80(3);
-            }
-            else
-            {
-                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] += 10;
-                while (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] > gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3])
-                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] -= gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3];
-            }
-        }
-        if (gUnknown_Debug_030043A0 == 0)
-        {
-            debug_sub_8010AAC(0);
-            debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
-        }
-        debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
-        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
-    }
-    AnimateSprites();
-    BuildOamBuffer();
-}
-#endif
 
 extern u16 gUnknown_Debug_821F564[][5];
 
@@ -3725,10 +3409,8 @@ void SwitchInClearSetData(void)
             gBattleMons[gActiveBattler].statStages[i] = 6;
         for (i = 0; i < gBattlersCount; i++)
         {
-            struct UnknownStruct12 *sp20 = &gUnknown_02024AD0[i];
-
-            if ((sp20->unk0 & 0x04000000) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
-                sp20->unk0 &= ~0x04000000;
+            if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
+                gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
             if ((gStatuses3[i] & STATUS3_ALWAYS_HITS) && gDisableStructs[i].bankWithSureHit == gActiveBattler)
             {
                 gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
@@ -3760,10 +3442,10 @@ void SwitchInClearSetData(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gUnknown_02024AD0[i].unk0 & (gBitTable[gActiveBattler] << 16))
-            gUnknown_02024AD0[i].unk0 &= ~(gBitTable[gActiveBattler] << 16);
-        if ((gUnknown_02024AD0[i].unk0 & 0xE000) && ewram16020arr(i) == gActiveBattler)
-            gUnknown_02024AD0[i].unk0 &= ~0xE000;
+        if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
+            gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
+        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram16020arr(i) == gActiveBattler)
+            gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
 
     gActionSelectionCursor[gActiveBattler] = 0;
@@ -4408,1536 +4090,366 @@ void sub_8012258(u8 a)
     }
 }
 
-/*
+enum
+{
+    STATE_BEFORE_ACTION_CHOSEN,
+    STATE_WAIT_ACTION_CHOSEN,
+    STATE_WAIT_ACTION_CASE_CHOSEN,
+    STATE_WAIT_ACTION_CONFIRMED_STANDBY,
+    STATE_WAIT_ACTION_CONFIRMED,
+    STATE_SELECTION_SCRIPT,
+    STATE_WAIT_SET_BEFORE_ACTION,
+    STATE_SELECTION_SCRIPT_MAY_RUN
+};
+
+extern u8 * gSelectionBattleScripts[];
+extern u8 BattleScript_ActionSelectionItemsCantBeUsed[];
+extern u8 BattleScript_PrintFullBox[];
+extern u8 BattleScript_PrintCantRunFromTrainer[];
+extern u8 BattleScript_PrintCantEscapeFromBattle[];
+
 void sub_8012324(void)
 {
-    u8 r5;
+    u8 position;
+    s32 i;
 
     gBattleCommunication[4] = 0;
     // inverted loop
     //_0801234C
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
-        r5 = GetBattlerPosition(gActiveBattler);
+        position = GetBattlerPosition(gActiveBattler);
         switch (gBattleCommunication[gActiveBattler])
         {
-        case 0:
-            ewram16068arr(gActiveBattler) = 6;
-            if (!(gBattleTypeFlags & 0x40)
-             && (r5 & 2)
-             && !(ewram160A6 & gBitTable[GetBattlerAtPosition(r5 ^ 2)])
-             && gBattleCommunication[GetBattlerAtPosition(r5)] != 4)
-                break;
-            //_080123F8
-            if (ewram160A6 & gBitTable[gActiveBattler])
-            {
-                gActionForBanks[gActiveBattler] = 13;
-                if (!(gBattleTypeFlags & 0x40))
-                    gBattleCommunication[gActiveBattler] = 4;
-                //_08012454
-                else
+            case STATE_BEFORE_ACTION_CHOSEN:
+                ewram16068arr(gActiveBattler) = 6;
+                if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                    && (position & BIT_FLANK) != B_FLANK_LEFT
+                    && !(ewram160A6 & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(position))])
+                    && gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] != STATE_WAIT_ACTION_CONFIRMED)
+                    break;
+                //_080123F8
+                if (ewram160A6 & gBitTable[gActiveBattler])
+                {
+                    gActionForBanks[gActiveBattler] = 13;
+                    if (!(gBattleTypeFlags & 0x40))
+                        gBattleCommunication[gActiveBattler] = 4;
+                        //_08012454
+                    else
+                        gBattleCommunication[gActiveBattler] = 3;
+                    break;
+                }
+                //_08012468
+                if ((gBattleMons[gActiveBattler].status2 & 0x1000)
+                    || (gBattleMons[gActiveBattler].status2 & 0x400000))
+                {
+                    gActionForBanks[gActiveBattler] = 0;
                     gBattleCommunication[gActiveBattler] = 3;
+                }
+                else
+                {
+                    Emitcmd18(0, gActionForBanks[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
+                    MarkBufferBankForExecution(gActiveBattler);
+                    gBattleCommunication[gActiveBattler]++;
+                }
                 break;
-            }
-            //_08012468
-            if ((gBattleMons[gActiveBattler].status2 & 0x1000)
-             || (gBattleMons[gActiveBattler].status2 & 0x10000000))
-            {
-                gActionForBanks[gActiveBattler] = 0;
-                gBattleCommunication[gActiveBattler] = 3;
-            }
-            else
-            {
-                Emitcmd18(0, gActionForBanks[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
-                MarkBufferBankForExecution(gActiveBattler);
-                gBattleCommunication[gActiveBattler]++;
-            }
-            break;
-        case 1:
+            case STATE_WAIT_ACTION_CHOSEN:
+                if (!(gBattleExecBuffer & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+                {
+                    gActionForBanks[gActiveBattler] = gBattleBufferB[gActiveBattler][1];
+                    switch (gBattleBufferB[gActiveBattler][1])
+                    {
+                        case B_ACTION_USE_MOVE:
+                            if (AreAllMovesUnusable())
+                            {
+                                gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
+                                ewram16060(gActiveBattler) = FALSE;
+                                ewram16094arr(gActiveBattler) = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
+                                ewram16010arr(gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                                return;
+                            }
+                            else if (gDisableStructs[gActiveBattler].encoredMove != 0)
+                            {
+                                gChosenMovesByBanks[gActiveBattler] = gDisableStructs[gActiveBattler].encoredMove;
+                                gBattleCommunication[gActiveBattler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
+                                return;
+                            }
+                            else
+                            {
+                                struct ChooseMoveStruct {
+                                    u16 moves[4];
+                                    u8 currentPp[4];
+                                    u8 maxPp[4];
+                                    u16 species;
+                                    u8 monType1;
+                                    u8 monType2;
+                                } moveInfo;
+
+                                moveInfo.species = gBattleMons[gActiveBattler].species;
+                                moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
+                                moveInfo.monType2 = gBattleMons[gActiveBattler].type2;
+
+                                for (i = 0; i < 4; i++)
+                                {
+                                    moveInfo.moves[i] = gBattleMons[gActiveBattler].moves[i];
+                                    moveInfo.currentPp[i] = gBattleMons[gActiveBattler].pp[i];
+                                    moveInfo.maxPp[i] = CalculatePPWithBonus(
+                                        gBattleMons[gActiveBattler].moves[i],
+                                        gBattleMons[gActiveBattler].ppBonuses,
+                                        i);
+                                }
+
+                                Emitcmd20(0, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0, FALSE, (u8 *)&moveInfo);
+                                MarkBufferBankForExecution(gActiveBattler);
+                            }
+                            break;
+                        case B_ACTION_USE_ITEM:
+                            if (gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                                    | BATTLE_TYPE_BATTLE_TOWER
+                                                    | BATTLE_TYPE_EREADER_TRAINER))
+                            {
+                                gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
+                                gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
+                                ewram16060(gActiveBattler) = FALSE;
+                                ewram16094arr(gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
+                                return;
+                            }
+                            else
+                            {
+                                EmitOpenBag(0, &ewram1606Carr(0, gActiveBattler));
+                                MarkBufferBankForExecution(gActiveBattler);
+                            }
+                            break;
+                        case B_ACTION_SWITCH:
+                            ewram16064arr(gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
+                            if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
+                                || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+                            {
+                                EmitChoosePokemon(0, 2, 6, ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                            }
+                            else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
+                                     || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
+                                         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
+                                         && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
+                                     || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
+                                         && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
+                            {
+                                EmitChoosePokemon(0, ((i - 1) << 4) | PARTY_ABILITY_PREVENTS, 6, gLastUsedAbility, &ewram1606Carr(0, gActiveBattler));
+                            }
+                            else
+                            {
+                                if (gActiveBattler == 2 && gActionForBanks[0] == B_ACTION_SWITCH)
+                                    EmitChoosePokemon(0, PARTY_CHOOSE_MON, ewram16068arr(0), ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                                else if (gActiveBattler == 3 && gActionForBanks[1] == B_ACTION_SWITCH)
+                                    EmitChoosePokemon(0, PARTY_CHOOSE_MON, ewram16068arr(1), ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                                else
+                                    EmitChoosePokemon(0, PARTY_CHOOSE_MON, 6, ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                            }
+                            MarkBufferBankForExecution(gActiveBattler);
+                            break;
+                        case B_ACTION_SAFARI_BALL:
+                            if (PlayerPartyAndPokemonStorageFull())
+                            {
+                                gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintFullBox;
+                                gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
+                                ewram16060(gActiveBattler) = FALSE;
+                                ewram16094arr(gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
+                                return;
+                            }
+                            break;
+                        case B_ACTION_SAFARI_POKEBLOCK:
+                            EmitOpenBag(0, &ewram1606Carr(0, gActiveBattler));
+                            MarkBufferBankForExecution(gActiveBattler);
+                            break;
+                        case B_ACTION_CANCEL_PARTNER:
+                            gBattleCommunication[gActiveBattler] = STATE_WAIT_SET_BEFORE_ACTION;
+                            gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))] = STATE_BEFORE_ACTION_CHOSEN;
+                            Emitcmd50(0);
+                            MarkBufferBankForExecution(gActiveBattler);
+                            return;
+                    }
+
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+                             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
+                             && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
+                    {
+                        BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
+                        gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                    }
+                    else if (CanRunFromBattle()
+                             && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
+                    {
+                        gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintCantEscapeFromBattle;
+                        gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
+                        ewram16060(gActiveBattler) = FALSE;
+                        ewram16094arr(gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
+                        return;
+                    }
+                    else
+                    {
+                        gBattleCommunication[gActiveBattler]++;
+                    }
+                }
+                break;
+            case STATE_WAIT_ACTION_CASE_CHOSEN:
+                if (!(gBattleExecBuffer & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+                {
+                    switch (gActionForBanks[gActiveBattler])
+                    {
+                        case B_ACTION_USE_MOVE:
+                            switch (gBattleBufferB[gActiveBattler][1])
+                            {
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    gActionForBanks[gActiveBattler] = gBattleBufferB[gActiveBattler][1];
+                                    return;
+                                default:
+                                    if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == 0xFFFF)
+                                    {
+                                        gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                                    }
+                                    else if (TrySetCantSelectMoveBattleScript())
+                                    {
+                                        gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
+                                        ewram16060(gActiveBattler) = FALSE;
+                                        gBattleBufferB[gActiveBattler][1] = 0;
+                                        ewram16094arr(gActiveBattler) = STATE_WAIT_ACTION_CHOSEN;
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        ewram1608Carr(gActiveBattler) = gBattleBufferB[gActiveBattler][2];
+                                        gChosenMovesByBanks[gActiveBattler] = gBattleMons[gActiveBattler].moves[ewram1608Carr(gActiveBattler)];
+                                        ewram16010arr(gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                                        gBattleCommunication[gActiveBattler]++;
+                                    }
+                                    break;
+                            }
+                            break;
+                        case B_ACTION_USE_ITEM:
+                            if ((gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8)) == 0)
+                            {
+                                gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                            }
+                            else
+                            {
+                                gLastUsedItem = (gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8));
+                                gBattleCommunication[gActiveBattler]++;
+                            }
+                            break;
+                        case B_ACTION_SWITCH:
+                            if (gBattleBufferB[gActiveBattler][1] == PARTY_SIZE)
+                            {
+                                gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                            }
+                            else
+                            {
+                                ewram16068arr(gActiveBattler) = gBattleBufferB[gActiveBattler][1];
+
+                                if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                                {
+                                    ewram1606Carr(0, gActiveBattler) &= 0xF;
+                                    ewram1606Carr(0, gActiveBattler) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
+                                    ewram1606Carr(1, gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+
+                                    ewram1606Carr(0, (gActiveBattler ^ BIT_FLANK)) &= (0xF0);
+                                    ewram1606Carr(0, (gActiveBattler ^ BIT_FLANK)) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
+                                    ewram1606Carr(2, (gActiveBattler ^ BIT_FLANK)) = gBattleBufferB[gActiveBattler][3];
+                                }
+                                gBattleCommunication[gActiveBattler]++;
+                            }
+                            break;
+                        case B_ACTION_RUN:
+                            gHitMarker |= HITMARKER_RUN;
+                            gBattleCommunication[gActiveBattler]++;
+                            break;
+                        case B_ACTION_SAFARI_WATCH_CAREFULLY:
+                            gBattleCommunication[gActiveBattler]++;
+                            break;
+                        case B_ACTION_SAFARI_BALL:
+                            gBattleCommunication[gActiveBattler]++;
+                            break;
+                        case B_ACTION_SAFARI_POKEBLOCK:
+                            if ((gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8)) != 0)
+                            {
+                                gBattleCommunication[gActiveBattler]++;
+                            }
+                            else
+                            {
+                                gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                            }
+                            break;
+                        case B_ACTION_SAFARI_GO_NEAR:
+                            gBattleCommunication[gActiveBattler]++;
+                            break;
+                        case B_ACTION_SAFARI_RUN:
+                            gHitMarker |= HITMARKER_RUN;
+                            gBattleCommunication[gActiveBattler]++;
+                            break;
+                        case B_ACTION_WALLY_THROW:
+                            gBattleCommunication[gActiveBattler]++;
+                            break;
+                    }
+                }
+                break;
+            case STATE_WAIT_ACTION_CONFIRMED_STANDBY:
+                if (!(gBattleExecBuffer & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+                {
+                    if (((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) != BATTLE_TYPE_DOUBLE)
+                        || (position & BIT_FLANK) != B_FLANK_LEFT
+                        || (ewram160A6 & gBitTable[GetBattlerAtPosition(position ^ BIT_FLANK)]))
+                    {
+                        EmitLinkStandbyMsg(0, 0);
+                    }
+                    else
+                    {
+                        EmitLinkStandbyMsg(0, 1);
+                    }
+                    MarkBufferBankForExecution(gActiveBattler);
+                    gBattleCommunication[gActiveBattler]++;
+                }
+                break;
+            case STATE_WAIT_ACTION_CONFIRMED:
+                if (!(gBattleExecBuffer & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+                {
+                    gBattleCommunication[ACTIONS_CONFIRMED_COUNT]++;
+                }
+                break;
+            case STATE_SELECTION_SCRIPT:
+                if (ewram16060(gActiveBattler))
+                {
+                    gBattleCommunication[gActiveBattler] = ewram16094arr(gActiveBattler);
+                }
+                else
+                {
+                    gBankAttacker = gActiveBattler;
+                    gBattlescriptCurrInstr = gSelectionBattleScripts[gActiveBattler];
+                    if (!(gBattleExecBuffer & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+                    {
+                        gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
+                    }
+                    gSelectionBattleScripts[gActiveBattler] = gBattlescriptCurrInstr;
+                }
+                break;
+            case STATE_WAIT_SET_BEFORE_ACTION:
+                if (!(gBattleExecBuffer & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+                {
+                    gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                }
+                break;
         }
     }
-}
-*/
-NAKED
-void sub_8012324(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x1C\n\
-    ldr r0, _08012340 @ =gBattleCommunication\n\
-    movs r1, 0\n\
-    strb r1, [r0, 0x4]\n\
-    ldr r0, _08012344 @ =gActiveBattler\n\
-    strb r1, [r0]\n\
-    ldr r0, _08012348 @ =gBattlersCount\n\
-    bl _08012F74\n\
-    .align 2, 0\n\
-_08012340: .4byte gBattleCommunication\n\
-_08012344: .4byte gActiveBattler\n\
-_08012348: .4byte gBattlersCount\n\
-_0801234C:\n\
-    ldr r4, _08012374 @ =gActiveBattler\n\
-    ldrb r0, [r4]\n\
-    bl GetBattlerPosition\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    ldr r1, _08012378 @ =gBattleCommunication\n\
-    ldrb r0, [r4]\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x6\n\
-    bls _08012368\n\
-    bl _08012F66\n\
-_08012368:\n\
-    lsls r0, 2\n\
-    ldr r1, _0801237C @ =_08012380\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08012374: .4byte gActiveBattler\n\
-_08012378: .4byte gBattleCommunication\n\
-_0801237C: .4byte _08012380\n\
-    .align 2, 0\n\
-_08012380:\n\
-    .4byte _0801239C\n\
-    .4byte _080124C8\n\
-    .4byte _08012A28\n\
-    .4byte _08012DA8\n\
-    .4byte _08012E50\n\
-    .4byte _08012E94\n\
-    .4byte _08012F38\n\
-_0801239C:\n\
-    ldr r4, _08012434 @ =gSharedMem\n\
-    ldr r0, _08012438 @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    ldr r1, _0801243C @ =0x00016068\n\
-    adds r0, r1\n\
-    adds r0, r4\n\
-    movs r1, 0x6\n\
-    strb r1, [r0]\n\
-    ldr r0, _08012440 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080123F8\n\
-    movs r1, 0x2\n\
-    movs r0, 0x2\n\
-    ands r0, r5\n\
-    cmp r0, 0\n\
-    beq _080123F8\n\
-    eors r5, r1\n\
-    adds r0, r5, 0\n\
-    bl GetBattlerAtPosition\n\
-    ldr r2, _08012444 @ =0x000160a6\n\
-    adds r1, r4, r2\n\
-    ldrb r1, [r1]\n\
-    ldr r2, _08012448 @ =gBitTable\n\
-    lsls r0, 24\n\
-    lsrs r0, 22\n\
-    adds r0, r2\n\
-    ldr r0, [r0]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _080123F8\n\
-    ldr r4, _0801244C @ =gBattleCommunication\n\
-    adds r0, r5, 0\n\
-    bl GetBattlerAtPosition\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    adds r0, r4\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    beq _080123F8\n\
-    bl _08012F66\n\
-_080123F8:\n\
-    ldr r0, _08012434 @ =gSharedMem\n\
-    ldr r3, _08012444 @ =0x000160a6\n\
-    adds r0, r3\n\
-    ldrb r3, [r0]\n\
-    ldr r1, _08012448 @ =gBitTable\n\
-    ldr r4, _08012438 @ =gActiveBattler\n\
-    ldrb r2, [r4]\n\
-    lsls r0, r2, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    ands r3, r0\n\
-    cmp r3, 0\n\
-    beq _08012468\n\
-    ldr r0, _08012450 @ =gActionForBanks\n\
-    adds r0, r2, r0\n\
-    movs r1, 0xD\n\
-    strb r1, [r0]\n\
-    ldr r0, _08012440 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08012454\n\
-    ldr r0, _0801244C @ =gBattleCommunication\n\
-    ldrb r1, [r4]\n\
-    adds r1, r0\n\
-    movs r0, 0x4\n\
-    strb r0, [r1]\n\
-    bl _08012F66\n\
-    .align 2, 0\n\
-_08012434: .4byte gSharedMem\n\
-_08012438: .4byte gActiveBattler\n\
-_0801243C: .4byte 0x00016068\n\
-_08012440: .4byte gBattleTypeFlags\n\
-_08012444: .4byte 0x000160a6\n\
-_08012448: .4byte gBitTable\n\
-_0801244C: .4byte gBattleCommunication\n\
-_08012450: .4byte gActionForBanks\n\
-_08012454:\n\
-    ldr r0, _08012464 @ =gBattleCommunication\n\
-    ldrb r1, [r4]\n\
-    adds r1, r0\n\
-    movs r0, 0x3\n\
-    strb r0, [r1]\n\
-    bl _08012F66\n\
-    .align 2, 0\n\
-_08012464: .4byte gBattleCommunication\n\
-_08012468:\n\
-    ldr r1, _0801249C @ =gBattleMons\n\
-    movs r0, 0x58\n\
-    muls r0, r2\n\
-    adds r1, 0x50\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08012488\n\
-    movs r0, 0x80\n\
-    lsls r0, 15\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _080124A8\n\
-_08012488:\n\
-    ldr r0, _080124A0 @ =gActionForBanks\n\
-    adds r0, r2, r0\n\
-    strb r3, [r0]\n\
-    ldr r1, _080124A4 @ =gBattleCommunication\n\
-    ldrb r0, [r4]\n\
-    adds r0, r1\n\
-    movs r1, 0x3\n\
-    strb r1, [r0]\n\
-    bl _08012F66\n\
-    .align 2, 0\n\
-_0801249C: .4byte gBattleMons\n\
-_080124A0: .4byte gActionForBanks\n\
-_080124A4: .4byte gBattleCommunication\n\
-_080124A8:\n\
-    ldr r0, _080124C0 @ =gActionForBanks\n\
-    ldrb r1, [r0]\n\
-    ldr r0, _080124C4 @ =gBattleBufferB\n\
-    ldrb r2, [r0, 0x1]\n\
-    ldrb r0, [r0, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r2, r0\n\
-    movs r0, 0\n\
-    bl Emitcmd18\n\
-    bl _08012E32\n\
-    .align 2, 0\n\
-_080124C0: .4byte gActionForBanks\n\
-_080124C4: .4byte gBattleBufferB\n\
-_080124C8:\n\
-    ldr r4, _08012520 @ =gBattleExecBuffer\n\
-    ldr r1, _08012524 @ =gBitTable\n\
-    ldr r3, _08012528 @ =gActiveBattler\n\
-    ldrb r5, [r3]\n\
-    lsls r0, r5, 2\n\
-    adds r0, r1\n\
-    ldr r2, [r0]\n\
-    lsls r0, r2, 4\n\
-    movs r1, 0xF0\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    orrs r0, r2\n\
-    lsls r1, r2, 8\n\
-    orrs r0, r1\n\
-    lsls r2, 12\n\
-    orrs r0, r2\n\
-    ldr r1, [r4]\n\
-    ands r1, r0\n\
-    mov r8, r3\n\
-    cmp r1, 0\n\
-    beq _080124F6\n\
-    bl _08012F66\n\
-_080124F6:\n\
-    ldr r2, _0801252C @ =gActionForBanks\n\
-    adds r2, r5, r2\n\
-    ldr r1, _08012530 @ =gBattleBufferB\n\
-    lsls r0, r5, 9\n\
-    adds r1, 0x1\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r2]\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 9\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xC\n\
-    bls _08012514\n\
-    b _08012968\n\
-_08012514:\n\
-    lsls r0, 2\n\
-    ldr r1, _08012534 @ =_08012538\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08012520: .4byte gBattleExecBuffer\n\
-_08012524: .4byte gBitTable\n\
-_08012528: .4byte gActiveBattler\n\
-_0801252C: .4byte gActionForBanks\n\
-_08012530: .4byte gBattleBufferB\n\
-_08012534: .4byte _08012538\n\
-    .align 2, 0\n\
-_08012538:\n\
-    .4byte _0801256C\n\
-    .4byte _080126B4\n\
-    .4byte _080126E0\n\
-    .4byte _08012968\n\
-    .4byte _08012968\n\
-    .4byte _080128B0\n\
-    .4byte _08012908\n\
-    .4byte _08012968\n\
-    .4byte _08012968\n\
-    .4byte _08012968\n\
-    .4byte _08012968\n\
-    .4byte _08012968\n\
-    .4byte _0801292C\n\
-_0801256C:\n\
-    bl AreAllMovesUnusable\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080125D0\n\
-    ldr r0, _080125B4 @ =gBattleCommunication\n\
-    ldr r2, _080125B8 @ =gActiveBattler\n\
-    ldrb r1, [r2]\n\
-    adds r1, r0\n\
-    movs r4, 0\n\
-    movs r0, 0x5\n\
-    strb r0, [r1]\n\
-    ldr r3, _080125BC @ =gSharedMem\n\
-    ldrb r0, [r2]\n\
-    ldr r1, _080125C0 @ =0x00016060\n\
-    adds r0, r1\n\
-    adds r0, r3\n\
-    strb r4, [r0]\n\
-    ldrb r0, [r2]\n\
-    ldr r4, _080125C4 @ =0x00016094\n\
-    adds r0, r4\n\
-    adds r0, r3\n\
-    movs r1, 0x3\n\
-    strb r1, [r0]\n\
-    ldrb r1, [r2]\n\
-    ldr r0, _080125C8 @ =0x00016010\n\
-    adds r2, r1, r0\n\
-    adds r2, r3\n\
-    ldr r0, _080125CC @ =gBattleBufferB\n\
-    lsls r1, 9\n\
-    adds r0, 0x3\n\
-    adds r1, r0\n\
-    ldrb r0, [r1]\n\
-    strb r0, [r2]\n\
-    bl _08012F90\n\
-    .align 2, 0\n\
-_080125B4: .4byte gBattleCommunication\n\
-_080125B8: .4byte gActiveBattler\n\
-_080125BC: .4byte gSharedMem\n\
-_080125C0: .4byte 0x00016060\n\
-_080125C4: .4byte 0x00016094\n\
-_080125C8: .4byte 0x00016010\n\
-_080125CC: .4byte gBattleBufferB\n\
-_080125D0:\n\
-    ldr r1, _080125FC @ =gDisableStructs\n\
-    ldr r5, _08012600 @ =gActiveBattler\n\
-    ldrb r4, [r5]\n\
-    lsls r0, r4, 3\n\
-    subs r0, r4\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrh r2, [r0, 0x6]\n\
-    cmp r2, 0\n\
-    beq _0801260C\n\
-    ldr r1, _08012604 @ =gChosenMovesByBanks\n\
-    lsls r0, r4, 1\n\
-    adds r0, r1\n\
-    strh r2, [r0]\n\
-    ldr r1, _08012608 @ =gBattleCommunication\n\
-    ldrb r0, [r5]\n\
-    adds r0, r1\n\
-    movs r1, 0x3\n\
-    strb r1, [r0]\n\
-    bl _08012F90\n\
-    .align 2, 0\n\
-_080125FC: .4byte gDisableStructs\n\
-_08012600: .4byte gActiveBattler\n\
-_08012604: .4byte gChosenMovesByBanks\n\
-_08012608: .4byte gBattleCommunication\n\
-_0801260C:\n\
-    add r2, sp, 0x4\n\
-    ldr r3, _080126AC @ =gBattleMons\n\
-    movs r1, 0x58\n\
-    adds r0, r4, 0\n\
-    muls r0, r1\n\
-    adds r0, r3\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r2, 0x10]\n\
-    ldrb r0, [r5]\n\
-    muls r0, r1\n\
-    adds r0, r3\n\
-    adds r0, 0x21\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r2, 0x12]\n\
-    ldrb r0, [r5]\n\
-    muls r0, r1\n\
-    adds r0, r3\n\
-    adds r0, 0x22\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r2, 0x13]\n\
-    movs r4, 0\n\
-    mov r1, sp\n\
-    adds r1, 0xC\n\
-    str r1, [sp, 0x18]\n\
-    add r2, sp, 0x10\n\
-    mov r10, r2\n\
-    mov r8, r3\n\
-    adds r7, r5, 0\n\
-    movs r6, 0x58\n\
-    movs r3, 0xC\n\
-    add r3, r8\n\
-    mov r9, r3\n\
-    add r5, sp, 0x4\n\
-_0801264E:\n\
-    lsls r2, r4, 1\n\
-    ldrb r0, [r7]\n\
-    muls r0, r6\n\
-    adds r0, r2, r0\n\
-    add r0, r9\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r5]\n\
-    ldr r0, [sp, 0x18]\n\
-    adds r3, r0, r4\n\
-    ldrb r0, [r7]\n\
-    muls r0, r6\n\
-    adds r0, r4, r0\n\
-    mov r1, r8\n\
-    adds r1, 0x24\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r3]\n\
-    ldrb r0, [r7]\n\
-    adds r1, r0, 0\n\
-    muls r1, r6\n\
-    adds r2, r1\n\
-    add r2, r9\n\
-    ldrh r0, [r2]\n\
-    add r1, r8\n\
-    adds r1, 0x3B\n\
-    ldrb r1, [r1]\n\
-    lsls r2, r4, 24\n\
-    lsrs r2, 24\n\
-    bl CalculatePPWithBonus\n\
-    mov r2, r10\n\
-    adds r1, r2, r4\n\
-    strb r0, [r1]\n\
-    adds r5, 0x2\n\
-    adds r4, 0x1\n\
-    cmp r4, 0x3\n\
-    ble _0801264E\n\
-    ldr r0, _080126B0 @ =gBattleTypeFlags\n\
-    ldrb r0, [r0]\n\
-    movs r1, 0x1\n\
-    ands r1, r0\n\
-    movs r0, 0\n\
-    movs r2, 0\n\
-    add r3, sp, 0x4\n\
-    bl Emitcmd20\n\
-    b _0801289E\n\
-    .align 2, 0\n\
-_080126AC: .4byte gBattleMons\n\
-_080126B0: .4byte gBattleTypeFlags\n\
-_080126B4:\n\
-    ldr r0, _080126D0 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    ldr r0, _080126D4 @ =0x00000902\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080126C2\n\
-    b _08012908\n\
-_080126C2:\n\
-    ldr r1, _080126D8 @ =gUnknown_02024C1C\n\
-    mov r3, r8\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r1, _080126DC @ =BattleScript_ActionSelectionItemsCantBeUsed\n\
-    b _080129CC\n\
-    .align 2, 0\n\
-_080126D0: .4byte gBattleTypeFlags\n\
-_080126D4: .4byte 0x00000902\n\
-_080126D8: .4byte gUnknown_02024C1C\n\
-_080126DC: .4byte BattleScript_ActionSelectionItemsCantBeUsed\n\
-_080126E0:\n\
-    ldr r3, _08012738 @ =gSharedMem\n\
-    ldr r5, _0801273C @ =gActiveBattler\n\
-    ldrb r0, [r5]\n\
-    ldr r4, _08012740 @ =0x00016064\n\
-    adds r1, r0, r4\n\
-    adds r1, r3\n\
-    ldr r2, _08012744 @ =gBattlerPartyIndexes\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldr r7, _08012748 @ =gBattleMons\n\
-    ldrb r2, [r5]\n\
-    movs r6, 0x58\n\
-    adds r0, r2, 0\n\
-    muls r0, r6\n\
-    adds r1, r7, 0\n\
-    adds r1, 0x50\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    ldr r1, _0801274C @ =0x0400e000\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08012722\n\
-    ldr r0, _08012750 @ =gStatuses3\n\
-    lsls r1, r2, 2\n\
-    adds r1, r0\n\
-    ldr r1, [r1]\n\
-    movs r0, 0x80\n\
-    lsls r0, 3\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _08012758\n\
-_08012722:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    ldr r2, _08012754 @ =0x0001606c\n\
-    adds r1, r3, r2\n\
-    adds r0, r1\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0x2\n\
-    movs r2, 0x6\n\
-    b _0801286C\n\
-    .align 2, 0\n\
-_08012738: .4byte gSharedMem\n\
-_0801273C: .4byte gActiveBattler\n\
-_08012740: .4byte 0x00016064\n\
-_08012744: .4byte gBattlerPartyIndexes\n\
-_08012748: .4byte gBattleMons\n\
-_0801274C: .4byte 0x0400e000\n\
-_08012750: .4byte gStatuses3\n\
-_08012754: .4byte 0x0001606c\n\
-_08012758:\n\
-    str r1, [sp]\n\
-    movs r0, 0xC\n\
-    adds r1, r2, 0\n\
-    movs r2, 0x17\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0\n\
-    bne _080127E0\n\
-    ldrb r1, [r5]\n\
-    str r4, [sp]\n\
-    movs r0, 0xC\n\
-    movs r2, 0x47\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0\n\
-    beq _080127A8\n\
-    ldrb r0, [r5]\n\
-    muls r0, r6\n\
-    adds r1, r0, r7\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x21\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    beq _080127A8\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x22\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    beq _080127A8\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x20\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1A\n\
-    bne _080127E0\n\
-_080127A8:\n\
-    ldr r5, _08012808 @ =gActiveBattler\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    movs r0, 0xF\n\
-    movs r2, 0x2A\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0\n\
-    beq _08012818\n\
-    ldr r2, _0801280C @ =gBattleMons\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r1, r0, r2\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x21\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x8\n\
-    beq _080127E0\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x22\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x8\n\
-    bne _08012818\n\
-_080127E0:\n\
-    subs r1, r4, 0x1\n\
-    lsls r1, 4\n\
-    movs r0, 0x4\n\
-    orrs r1, r0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    ldr r0, _08012810 @ =gLastUsedAbility\n\
-    ldrb r3, [r0]\n\
-    ldr r0, _08012808 @ =gActiveBattler\n\
-    ldrb r2, [r0]\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    ldr r2, _08012814 @ =gSharedMem + 0x1606C\n\
-    adds r0, r2\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r2, 0x6\n\
-    bl EmitChoosePokemon\n\
-    b _0801289E\n\
-    .align 2, 0\n\
-_08012808: .4byte gActiveBattler\n\
-_0801280C: .4byte gBattleMons\n\
-_08012810: .4byte gLastUsedAbility\n\
-_08012814: .4byte gSharedMem + 0x1606C\n\
-_08012818:\n\
-    ldr r0, _08012830 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    mov r8, r0\n\
-    cmp r1, 0x2\n\
-    bne _08012840\n\
-    ldr r0, _08012834 @ =gActionForBanks\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    bne _08012840\n\
-    ldr r3, _08012838 @ =gSharedMem\n\
-    ldr r4, _0801283C @ =0x00016068\n\
-    b _08012854\n\
-    .align 2, 0\n\
-_08012830: .4byte gActiveBattler\n\
-_08012834: .4byte gActionForBanks\n\
-_08012838: .4byte gSharedMem\n\
-_0801283C: .4byte 0x00016068\n\
-_08012840:\n\
-    mov r2, r8\n\
-    ldrb r0, [r2]\n\
-    cmp r0, 0x3\n\
-    bne _08012884\n\
-    ldr r0, _08012874 @ =gActionForBanks\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x2\n\
-    bne _08012884\n\
-    ldr r3, _08012878 @ =gSharedMem\n\
-    ldr r4, _0801287C @ =0x00016069\n\
-_08012854:\n\
-    adds r0, r3, r4\n\
-    ldrb r2, [r0]\n\
-    mov r0, r8\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    ldr r1, _08012880 @ =0x0001606c\n\
-    adds r3, r1\n\
-    adds r0, r3\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0\n\
-_0801286C:\n\
-    movs r3, 0\n\
-    bl EmitChoosePokemon\n\
-    b _0801289E\n\
-    .align 2, 0\n\
-_08012874: .4byte gActionForBanks\n\
-_08012878: .4byte gSharedMem\n\
-_0801287C: .4byte 0x00016069\n\
-_08012880: .4byte 0x0001606c\n\
-_08012884:\n\
-    ldr r0, _080128A8 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    ldr r1, _080128AC @ =gSharedMem + 0x1606C\n\
-    adds r0, r1\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0\n\
-    movs r2, 0x6\n\
-    movs r3, 0\n\
-    bl EmitChoosePokemon\n\
-_0801289E:\n\
-    ldr r0, _080128A8 @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    bl MarkBufferBankForExecution\n\
-    b _08012968\n\
-    .align 2, 0\n\
-_080128A8: .4byte gActiveBattler\n\
-_080128AC: .4byte gSharedMem + 0x1606C\n\
-_080128B0:\n\
-    bl PlayerPartyAndPokemonStorageFull\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08012968\n\
-    ldr r1, _080128EC @ =gUnknown_02024C1C\n\
-    ldr r2, _080128F0 @ =gActiveBattler\n\
-    ldrb r0, [r2]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r1, _080128F4 @ =BattleScript_PrintFullBox\n\
-    str r1, [r0]\n\
-    ldr r0, _080128F8 @ =gBattleCommunication\n\
-    ldrb r1, [r2]\n\
-    adds r1, r0\n\
-    movs r3, 0\n\
-    movs r0, 0x5\n\
-    strb r0, [r1]\n\
-    ldr r1, _080128FC @ =gSharedMem\n\
-    ldrb r0, [r2]\n\
-    ldr r4, _08012900 @ =0x00016060\n\
-    adds r0, r4\n\
-    adds r0, r1\n\
-    strb r3, [r0]\n\
-    ldrb r0, [r2]\n\
-    ldr r2, _08012904 @ =0x00016094\n\
-    adds r0, r2\n\
-    adds r0, r1\n\
-    strb r3, [r0]\n\
-    b _08012F90\n\
-    .align 2, 0\n\
-_080128EC: .4byte gUnknown_02024C1C\n\
-_080128F0: .4byte gActiveBattler\n\
-_080128F4: .4byte BattleScript_PrintFullBox\n\
-_080128F8: .4byte gBattleCommunication\n\
-_080128FC: .4byte gSharedMem\n\
-_08012900: .4byte 0x00016060\n\
-_08012904: .4byte 0x00016094\n\
-_08012908:\n\
-    ldr r4, _08012924 @ =gActiveBattler\n\
-    ldrb r0, [r4]\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    ldr r0, _08012928 @ =gSharedMem + 0x1606C\n\
-    adds r1, r0\n\
-    movs r0, 0\n\
-    bl EmitOpenBag\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    b _08012968\n\
-    .align 2, 0\n\
-_08012924: .4byte gActiveBattler\n\
-_08012928: .4byte gSharedMem + 0x1606C\n\
-_0801292C:\n\
-    ldr r4, _08012964 @ =gBattleCommunication\n\
-    mov r3, r8\n\
-    ldrb r1, [r3]\n\
-    adds r1, r4\n\
-    movs r5, 0\n\
-    movs r0, 0x6\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r3]\n\
-    bl GetBattlerPosition\n\
-    movs r1, 0x2\n\
-    eors r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl GetBattlerAtPosition\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    adds r0, r4\n\
-    strb r5, [r0]\n\
-    movs r0, 0\n\
-    bl Emitcmd50\n\
-    mov r4, r8\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    b _08012F90\n\
-    .align 2, 0\n\
-_08012964: .4byte gBattleCommunication\n\
-_08012968:\n\
-    ldr r0, _08012994 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0xA\n\
-    ands r0, r1\n\
-    cmp r0, 0x8\n\
-    bne _080129A8\n\
-    ldr r0, _08012998 @ =gBattleBufferB\n\
-    ldr r4, _0801299C @ =gActiveBattler\n\
-    ldrb r1, [r4]\n\
-    lsls r1, 9\n\
-    adds r0, 0x1\n\
-    adds r1, r0\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x3\n\
-    bne _080129A8\n\
-    ldr r0, _080129A0 @ =BattleScript_PrintCantRunFromTrainer\n\
-    bl BattleScriptExecute\n\
-    ldr r1, _080129A4 @ =gBattleCommunication\n\
-    ldrb r0, [r4]\n\
-    adds r0, r1\n\
-    b _08012BFE\n\
-    .align 2, 0\n\
-_08012994: .4byte gBattleTypeFlags\n\
-_08012998: .4byte gBattleBufferB\n\
-_0801299C: .4byte gActiveBattler\n\
-_080129A0: .4byte BattleScript_PrintCantRunFromTrainer\n\
-_080129A4: .4byte gBattleCommunication\n\
-_080129A8:\n\
-    bl CanRunFromBattle\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08012A14\n\
-    ldr r0, _080129F4 @ =gBattleBufferB\n\
-    ldr r3, _080129F8 @ =gActiveBattler\n\
-    ldrb r2, [r3]\n\
-    lsls r1, r2, 9\n\
-    adds r0, 0x1\n\
-    adds r1, r0\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x3\n\
-    bne _08012A14\n\
-    ldr r1, _080129FC @ =gUnknown_02024C1C\n\
-    lsls r0, r2, 2\n\
-    adds r0, r1\n\
-    ldr r1, _08012A00 @ =BattleScript_PrintCantEscapeFromBattle\n\
-_080129CC:\n\
-    str r1, [r0]\n\
-    ldr r0, _08012A04 @ =gBattleCommunication\n\
-    ldrb r1, [r3]\n\
-    adds r1, r0\n\
-    movs r2, 0\n\
-    movs r0, 0x5\n\
-    strb r0, [r1]\n\
-    ldr r1, _08012A08 @ =gSharedMem\n\
-    ldrb r0, [r3]\n\
-    ldr r4, _08012A0C @ =0x00016060\n\
-    adds r0, r4\n\
-    adds r0, r1\n\
-    strb r2, [r0]\n\
-    ldrb r0, [r3]\n\
-    ldr r3, _08012A10 @ =0x00016094\n\
-    adds r0, r3\n\
-    adds r0, r1\n\
-    strb r2, [r0]\n\
-    b _08012F90\n\
-    .align 2, 0\n\
-_080129F4: .4byte gBattleBufferB\n\
-_080129F8: .4byte gActiveBattler\n\
-_080129FC: .4byte gUnknown_02024C1C\n\
-_08012A00: .4byte BattleScript_PrintCantEscapeFromBattle\n\
-_08012A04: .4byte gBattleCommunication\n\
-_08012A08: .4byte gSharedMem\n\
-_08012A0C: .4byte 0x00016060\n\
-_08012A10: .4byte 0x00016094\n\
-_08012A14:\n\
-    ldr r2, _08012A20 @ =gBattleCommunication\n\
-    ldr r0, _08012A24 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012A20: .4byte gBattleCommunication\n\
-_08012A24: .4byte gActiveBattler\n\
-_08012A28:\n\
-    ldr r4, _08012A6C @ =gBattleExecBuffer\n\
-    ldr r1, _08012A70 @ =gBitTable\n\
-    ldr r3, _08012A74 @ =gActiveBattler\n\
-    ldrb r5, [r3]\n\
-    lsls r0, r5, 2\n\
-    adds r0, r1\n\
-    ldr r2, [r0]\n\
-    lsls r0, r2, 4\n\
-    movs r1, 0xF0\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    orrs r0, r2\n\
-    lsls r1, r2, 8\n\
-    orrs r0, r1\n\
-    lsls r2, 12\n\
-    orrs r0, r2\n\
-    ldr r1, [r4]\n\
-    ands r1, r0\n\
-    mov r8, r3\n\
-    cmp r1, 0\n\
-    beq _08012A54\n\
-    b _08012F66\n\
-_08012A54:\n\
-    ldr r1, _08012A78 @ =gActionForBanks\n\
-    adds r0, r5, r1\n\
-    ldrb r0, [r0]\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0x9\n\
-    bls _08012A62\n\
-    b _08012F66\n\
-_08012A62:\n\
-    lsls r0, 2\n\
-    ldr r1, _08012A7C @ =_08012A80\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08012A6C: .4byte gBattleExecBuffer\n\
-_08012A70: .4byte gBitTable\n\
-_08012A74: .4byte gActiveBattler\n\
-_08012A78: .4byte gActionForBanks\n\
-_08012A7C: .4byte _08012A80\n\
-    .align 2, 0\n\
-_08012A80:\n\
-    .4byte _08012AA8\n\
-    .4byte _08012BB0\n\
-    .4byte _08012BE8\n\
-    .4byte _08012CE0\n\
-    .4byte _08012D04\n\
-    .4byte _08012D18\n\
-    .4byte _08012D2C\n\
-    .4byte _08012D5C\n\
-    .4byte _08012D70\n\
-    .4byte _08012D94\n\
-_08012AA8:\n\
-    ldr r0, _08012AC8 @ =gBattleBufferB\n\
-    mov r1, r8\n\
-    ldrb r4, [r1]\n\
-    lsls r1, r4, 9\n\
-    adds r2, r0, 0x1\n\
-    adds r1, r2\n\
-    ldrb r1, [r1]\n\
-    adds r6, r0, 0\n\
-    cmp r1, 0x9\n\
-    bgt _08012ACC\n\
-    cmp r1, 0x3\n\
-    blt _08012ACC\n\
-    adds r0, r4, r3\n\
-    strb r1, [r0]\n\
-    b _08012F90\n\
-    .align 2, 0\n\
-_08012AC8: .4byte gBattleBufferB\n\
-_08012ACC:\n\
-    adds r3, r6, 0\n\
-    mov r5, r8\n\
-    ldrb r4, [r5]\n\
-    lsls r1, r4, 9\n\
-    adds r7, r3, 0x2\n\
-    adds r0, r1, r7\n\
-    ldrb r2, [r0]\n\
-    adds r3, 0x3\n\
-    mov r9, r3\n\
-    add r1, r9\n\
-    ldrb r0, [r1]\n\
-    lsls r0, 8\n\
-    orrs r2, r0\n\
-    ldr r0, _08012AF4 @ =0x0000ffff\n\
-    cmp r2, r0\n\
-    bne _08012AFC\n\
-    ldr r0, _08012AF8 @ =gBattleCommunication\n\
-    adds r0, r4, r0\n\
-    b _08012BFE\n\
-    .align 2, 0\n\
-_08012AF4: .4byte 0x0000ffff\n\
-_08012AF8: .4byte gBattleCommunication\n\
-_08012AFC:\n\
-    bl TrySetCantSelectMoveBattleScript\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08012B48\n\
-    ldr r0, _08012B38 @ =gBattleCommunication\n\
-    ldrb r1, [r5]\n\
-    adds r1, r0\n\
-    movs r2, 0\n\
-    movs r0, 0x5\n\
-    strb r0, [r1]\n\
-    ldr r3, _08012B3C @ =gSharedMem\n\
-    ldrb r0, [r5]\n\
-    ldr r4, _08012B40 @ =0x00016060\n\
-    adds r0, r4\n\
-    adds r0, r3\n\
-    strb r2, [r0]\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 9\n\
-    adds r1, r6, 0x1\n\
-    adds r0, r1\n\
-    strb r2, [r0]\n\
-    ldrb r0, [r5]\n\
-    ldr r1, _08012B44 @ =0x00016094\n\
-    adds r0, r1\n\
-    adds r0, r3\n\
-    movs r1, 0x1\n\
-    strb r1, [r0]\n\
-    b _08012F90\n\
-    .align 2, 0\n\
-_08012B38: .4byte gBattleCommunication\n\
-_08012B3C: .4byte gSharedMem\n\
-_08012B40: .4byte 0x00016060\n\
-_08012B44: .4byte 0x00016094\n\
-_08012B48:\n\
-    ldr r6, _08012B98 @ =gSharedMem\n\
-    mov r2, r8\n\
-    ldrb r0, [r2]\n\
-    ldr r2, _08012B9C @ =0x0001608c\n\
-    adds r1, r0, r2\n\
-    adds r1, r6\n\
-    lsls r0, 9\n\
-    adds r0, r7\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldr r0, _08012BA0 @ =gChosenMovesByBanks\n\
-    mov r4, r8\n\
-    ldrb r3, [r4]\n\
-    lsls r5, r3, 1\n\
-    adds r5, r0\n\
-    ldr r4, _08012BA4 @ =gBattleMons\n\
-    adds r2, r3, r2\n\
-    adds r2, r6\n\
-    ldrb r0, [r2]\n\
-    lsls r0, 1\n\
-    movs r1, 0x58\n\
-    muls r1, r3\n\
-    adds r0, r1\n\
-    adds r4, 0xC\n\
-    adds r0, r4\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r5]\n\
-    mov r1, r8\n\
-    ldrb r0, [r1]\n\
-    ldr r2, _08012BA8 @ =0x00016010\n\
-    adds r1, r0, r2\n\
-    adds r1, r6\n\
-    lsls r0, 9\n\
-    add r0, r9\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldr r0, _08012BAC @ =gBattleCommunication\n\
-    mov r3, r8\n\
-    ldrb r1, [r3]\n\
-    b _08012E3C\n\
-    .align 2, 0\n\
-_08012B98: .4byte gSharedMem\n\
-_08012B9C: .4byte 0x0001608c\n\
-_08012BA0: .4byte gChosenMovesByBanks\n\
-_08012BA4: .4byte gBattleMons\n\
-_08012BA8: .4byte 0x00016010\n\
-_08012BAC: .4byte gBattleCommunication\n\
-_08012BB0:\n\
-    ldr r2, _08012BD8 @ =gBattleBufferB\n\
-    ldr r5, _08012BDC @ =gActiveBattler\n\
-    ldrb r4, [r5]\n\
-    lsls r1, r4, 9\n\
-    adds r0, r2, 0x1\n\
-    adds r0, r1, r0\n\
-    ldrb r3, [r0]\n\
-    adds r2, 0x2\n\
-    adds r1, r2\n\
-    ldrb r0, [r1]\n\
-    lsls r0, 8\n\
-    orrs r3, r0\n\
-    cmp r3, 0\n\
-    bne _08012BCE\n\
-    b _08012F60\n\
-_08012BCE:\n\
-    ldr r0, _08012BE0 @ =gLastUsedItem\n\
-    strh r3, [r0]\n\
-    ldr r0, _08012BE4 @ =gBattleCommunication\n\
-    ldrb r1, [r5]\n\
-    b _08012E3C\n\
-    .align 2, 0\n\
-_08012BD8: .4byte gBattleBufferB\n\
-_08012BDC: .4byte gActiveBattler\n\
-_08012BE0: .4byte gLastUsedItem\n\
-_08012BE4: .4byte gBattleCommunication\n\
-_08012BE8:\n\
-    ldr r4, _08012C04 @ =gBattleBufferB\n\
-    ldr r7, _08012C08 @ =gActiveBattler\n\
-    ldrb r2, [r7]\n\
-    lsls r0, r2, 9\n\
-    adds r1, r4, 0x1\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    cmp r1, 0x6\n\
-    bne _08012C10\n\
-    ldr r0, _08012C0C @ =gBattleCommunication\n\
-    adds r0, r2, r0\n\
-_08012BFE:\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    b _08012F66\n\
-    .align 2, 0\n\
-_08012C04: .4byte gBattleBufferB\n\
-_08012C08: .4byte gActiveBattler\n\
-_08012C0C: .4byte gBattleCommunication\n\
-_08012C10:\n\
-    ldr r0, _08012CC4 @ =gSharedMem\n\
-    mov r12, r0\n\
-    ldr r3, _08012CC8 @ =0x00016068\n\
-    adds r0, r2, r3\n\
-    add r0, r12\n\
-    strb r1, [r0]\n\
-    ldr r0, _08012CCC @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08012CBE\n\
-    ldrb r0, [r7]\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    ldr r5, _08012CD0 @ =0x0001606c\n\
-    adds r1, r5\n\
-    add r1, r12\n\
-    ldrb r2, [r1]\n\
-    movs r0, 0xF\n\
-    ands r0, r2\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r7]\n\
-    lsls r2, r0, 1\n\
-    adds r2, r0\n\
-    adds r2, r5\n\
-    add r2, r12\n\
-    lsls r0, 9\n\
-    adds r6, r4, 0x2\n\
-    adds r0, r6\n\
-    ldrb r1, [r0]\n\
-    movs r3, 0xF0\n\
-    adds r0, r3, 0\n\
-    ands r0, r1\n\
-    ldrb r1, [r2]\n\
-    orrs r0, r1\n\
-    strb r0, [r2]\n\
-    ldrb r0, [r7]\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    ldr r2, _08012CD4 @ =0x0001606d\n\
-    adds r1, r2\n\
-    add r1, r12\n\
-    lsls r0, 9\n\
-    adds r4, 0x3\n\
-    mov r8, r4\n\
-    add r0, r8\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r7]\n\
-    movs r4, 0x2\n\
-    eors r0, r4\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    adds r1, r5\n\
-    add r1, r12\n\
-    ldrb r2, [r1]\n\
-    adds r0, r3, 0\n\
-    ands r0, r2\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r7]\n\
-    eors r0, r4\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    adds r1, r5\n\
-    add r1, r12\n\
-    ldrb r0, [r7]\n\
-    lsls r0, 9\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    ands r3, r0\n\
-    lsrs r3, 4\n\
-    ldrb r0, [r1]\n\
-    orrs r3, r0\n\
-    strb r3, [r1]\n\
-    ldrb r0, [r7]\n\
-    eors r4, r0\n\
-    lsls r1, r4, 1\n\
-    adds r1, r4\n\
-    ldr r3, _08012CD8 @ =0x0001606e\n\
-    adds r1, r3\n\
-    add r1, r12\n\
-    ldrb r0, [r7]\n\
-    lsls r0, 9\n\
-    add r0, r8\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-_08012CBE:\n\
-    ldr r0, _08012CDC @ =gBattleCommunication\n\
-    ldrb r1, [r7]\n\
-    b _08012E3C\n\
-    .align 2, 0\n\
-_08012CC4: .4byte gSharedMem\n\
-_08012CC8: .4byte 0x00016068\n\
-_08012CCC: .4byte gBattleTypeFlags\n\
-_08012CD0: .4byte 0x0001606c\n\
-_08012CD4: .4byte 0x0001606d\n\
-_08012CD8: .4byte 0x0001606e\n\
-_08012CDC: .4byte gBattleCommunication\n\
-_08012CE0:\n\
-    ldr r2, _08012CF8 @ =gHitMarker\n\
-    ldr r0, [r2]\n\
-    movs r1, 0x80\n\
-    lsls r1, 8\n\
-    orrs r0, r1\n\
-    str r0, [r2]\n\
-    ldr r2, _08012CFC @ =gBattleCommunication\n\
-    ldr r0, _08012D00 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012CF8: .4byte gHitMarker\n\
-_08012CFC: .4byte gBattleCommunication\n\
-_08012D00: .4byte gActiveBattler\n\
-_08012D04:\n\
-    ldr r2, _08012D10 @ =gBattleCommunication\n\
-    ldr r0, _08012D14 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012D10: .4byte gBattleCommunication\n\
-_08012D14: .4byte gActiveBattler\n\
-_08012D18:\n\
-    ldr r2, _08012D24 @ =gBattleCommunication\n\
-    ldr r0, _08012D28 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012D24: .4byte gBattleCommunication\n\
-_08012D28: .4byte gActiveBattler\n\
-_08012D2C:\n\
-    ldr r2, _08012D50 @ =gBattleBufferB\n\
-    ldr r0, _08012D54 @ =gActiveBattler\n\
-    ldrb r4, [r0]\n\
-    lsls r1, r4, 9\n\
-    adds r0, r2, 0x1\n\
-    adds r0, r1, r0\n\
-    ldrb r3, [r0]\n\
-    adds r2, 0x2\n\
-    adds r1, r2\n\
-    ldrb r0, [r1]\n\
-    lsls r0, 8\n\
-    orrs r3, r0\n\
-    cmp r3, 0\n\
-    bne _08012D4A\n\
-    b _08012F60\n\
-_08012D4A:\n\
-    ldr r1, _08012D58 @ =gBattleCommunication\n\
-    adds r1, r4, r1\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012D50: .4byte gBattleBufferB\n\
-_08012D54: .4byte gActiveBattler\n\
-_08012D58: .4byte gBattleCommunication\n\
-_08012D5C:\n\
-    ldr r2, _08012D68 @ =gBattleCommunication\n\
-    ldr r0, _08012D6C @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012D68: .4byte gBattleCommunication\n\
-_08012D6C: .4byte gActiveBattler\n\
-_08012D70:\n\
-    ldr r2, _08012D88 @ =gHitMarker\n\
-    ldr r0, [r2]\n\
-    movs r1, 0x80\n\
-    lsls r1, 8\n\
-    orrs r0, r1\n\
-    str r0, [r2]\n\
-    ldr r2, _08012D8C @ =gBattleCommunication\n\
-    ldr r0, _08012D90 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012D88: .4byte gHitMarker\n\
-_08012D8C: .4byte gBattleCommunication\n\
-_08012D90: .4byte gActiveBattler\n\
-_08012D94:\n\
-    ldr r2, _08012DA0 @ =gBattleCommunication\n\
-    ldr r0, _08012DA4 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, r2\n\
-    b _08012E3E\n\
-    .align 2, 0\n\
-_08012DA0: .4byte gBattleCommunication\n\
-_08012DA4: .4byte gActiveBattler\n\
-_08012DA8:\n\
-    ldr r3, _08012E10 @ =gBattleExecBuffer\n\
-    ldr r4, _08012E14 @ =gBitTable\n\
-    ldr r0, _08012E18 @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r4\n\
-    ldr r2, [r0]\n\
-    lsls r1, r2, 4\n\
-    movs r0, 0xF0\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    orrs r1, r2\n\
-    lsls r0, r2, 8\n\
-    orrs r1, r0\n\
-    lsls r2, 12\n\
-    orrs r1, r2\n\
-    ldr r0, [r3]\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08012DD2\n\
-    b _08012F66\n\
-_08012DD2:\n\
-    ldr r0, _08012E1C @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x41\n\
-    ands r0, r1\n\
-    cmp r0, 0x1\n\
-    bne _08012E06\n\
-    movs r1, 0x2\n\
-    movs r0, 0x2\n\
-    ands r0, r5\n\
-    cmp r0, 0\n\
-    bne _08012E06\n\
-    adds r0, r5, 0\n\
-    eors r0, r1\n\
-    bl GetBattlerAtPosition\n\
-    ldr r1, _08012E20 @ =gSharedMem\n\
-    ldr r2, _08012E24 @ =0x000160a6\n\
-    adds r1, r2\n\
-    ldrb r1, [r1]\n\
-    lsls r0, 24\n\
-    lsrs r0, 22\n\
-    adds r0, r4\n\
-    ldr r0, [r0]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _08012E28\n\
-_08012E06:\n\
-    movs r0, 0\n\
-    movs r1, 0\n\
-    bl EmitLinkStandbyMsg\n\
-    b _08012E30\n\
-    .align 2, 0\n\
-_08012E10: .4byte gBattleExecBuffer\n\
-_08012E14: .4byte gBitTable\n\
-_08012E18: .4byte gActiveBattler\n\
-_08012E1C: .4byte gBattleTypeFlags\n\
-_08012E20: .4byte gSharedMem\n\
-_08012E24: .4byte 0x000160a6\n\
-_08012E28:\n\
-    movs r0, 0\n\
-    movs r1, 0x1\n\
-    bl EmitLinkStandbyMsg\n\
-_08012E30:\n\
-    ldr r4, _08012E48 @ =gActiveBattler\n\
-_08012E32:\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r0, _08012E4C @ =gBattleCommunication\n\
-    ldrb r1, [r4]\n\
-_08012E3C:\n\
-    adds r1, r0\n\
-_08012E3E:\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    b _08012F66\n\
-    .align 2, 0\n\
-_08012E48: .4byte gActiveBattler\n\
-_08012E4C: .4byte gBattleCommunication\n\
-_08012E50:\n\
-    ldr r3, _08012E84 @ =gBattleExecBuffer\n\
-    ldr r1, _08012E88 @ =gBitTable\n\
-    ldr r0, _08012E8C @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r2, [r0]\n\
-    lsls r1, r2, 4\n\
-    movs r0, 0xF0\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    orrs r1, r2\n\
-    lsls r0, r2, 8\n\
-    orrs r1, r0\n\
-    lsls r2, 12\n\
-    orrs r1, r2\n\
-    ldr r0, [r3]\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08012F66\n\
-    ldr r1, _08012E90 @ =gBattleCommunication\n\
-    ldrb r0, [r1, 0x4]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1, 0x4]\n\
-    b _08012F66\n\
-    .align 2, 0\n\
-_08012E84: .4byte gBattleExecBuffer\n\
-_08012E88: .4byte gBitTable\n\
-_08012E8C: .4byte gActiveBattler\n\
-_08012E90: .4byte gBattleCommunication\n\
-_08012E94:\n\
-    ldr r2, _08012EB8 @ =gSharedMem\n\
-    ldr r5, _08012EBC @ =gActiveBattler\n\
-    ldrb r1, [r5]\n\
-    ldr r3, _08012EC0 @ =0x00016060\n\
-    adds r0, r1, r3\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _08012ECC\n\
-    ldr r0, _08012EC4 @ =gBattleCommunication\n\
-    adds r0, r1, r0\n\
-    ldr r4, _08012EC8 @ =0x00016094\n\
-    adds r1, r4\n\
-    adds r1, r2\n\
-    ldrb r1, [r1]\n\
-    strb r1, [r0]\n\
-    b _08012F66\n\
-    .align 2, 0\n\
-_08012EB8: .4byte gSharedMem\n\
-_08012EBC: .4byte gActiveBattler\n\
-_08012EC0: .4byte 0x00016060\n\
-_08012EC4: .4byte gBattleCommunication\n\
-_08012EC8: .4byte 0x00016094\n\
-_08012ECC:\n\
-    ldr r0, _08012F20 @ =gBankAttacker\n\
-    strb r1, [r0]\n\
-    ldr r7, _08012F24 @ =gBattlescriptCurrInstr\n\
-    ldr r6, _08012F28 @ =gUnknown_02024C1C\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldr r4, [r0]\n\
-    str r4, [r7]\n\
-    ldr r3, _08012F2C @ =gBattleExecBuffer\n\
-    ldr r1, _08012F30 @ =gBitTable\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r2, [r0]\n\
-    lsls r1, r2, 4\n\
-    movs r0, 0xF0\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    orrs r1, r2\n\
-    lsls r0, r2, 8\n\
-    orrs r1, r0\n\
-    lsls r2, 12\n\
-    orrs r1, r2\n\
-    ldr r0, [r3]\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08012F12\n\
-    ldr r0, _08012F34 @ =gBattleScriptingCommandsTable\n\
-    ldrb r1, [r4]\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    ldr r0, [r1]\n\
-    bl _call_via_r0\n\
-_08012F12:\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldr r1, [r7]\n\
-    str r1, [r0]\n\
-    b _08012F66\n\
-    .align 2, 0\n\
-_08012F20: .4byte gBankAttacker\n\
-_08012F24: .4byte gBattlescriptCurrInstr\n\
-_08012F28: .4byte gUnknown_02024C1C\n\
-_08012F2C: .4byte gBattleExecBuffer\n\
-_08012F30: .4byte gBitTable\n\
-_08012F34: .4byte gBattleScriptingCommandsTable\n\
-_08012F38:\n\
-    ldr r3, _08012FA0 @ =gBattleExecBuffer\n\
-    ldr r1, _08012FA4 @ =gBitTable\n\
-    ldr r0, _08012FA8 @ =gActiveBattler\n\
-    ldrb r4, [r0]\n\
-    lsls r0, r4, 2\n\
-    adds r0, r1\n\
-    ldr r2, [r0]\n\
-    lsls r0, r2, 4\n\
-    movs r1, 0xF0\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    orrs r0, r2\n\
-    lsls r1, r2, 8\n\
-    orrs r0, r1\n\
-    lsls r2, 12\n\
-    orrs r0, r2\n\
-    ldr r3, [r3]\n\
-    ands r3, r0\n\
-    cmp r3, 0\n\
-    bne _08012F66\n\
-_08012F60:\n\
-    ldr r0, _08012FAC @ =gBattleCommunication\n\
-    adds r0, r4, r0\n\
-    strb r3, [r0]\n\
-_08012F66:\n\
-    ldr r0, _08012FA8 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    adds r1, 0x1\n\
-    strb r1, [r0]\n\
-    ldr r0, _08012FB0 @ =gBattlersCount\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-_08012F74:\n\
-    adds r2, r0, 0\n\
-    ldrb r0, [r2]\n\
-    cmp r1, r0\n\
-    bcs _08012F80\n\
-    bl _0801234C\n\
-_08012F80:\n\
-    ldr r0, _08012FAC @ =gBattleCommunication\n\
-    ldrb r0, [r0, 0x4]\n\
-    ldrb r2, [r2]\n\
-    cmp r0, r2\n\
-    bne _08012F90\n\
-    ldr r1, _08012FB4 @ =gBattleMainFunc\n\
-    ldr r0, _08012FB8 @ =SetActionsAndBanksTurnOrder\n\
-    str r0, [r1]\n\
-_08012F90:\n\
-    add sp, 0x1C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08012FA0: .4byte gBattleExecBuffer\n\
-_08012FA4: .4byte gBitTable\n\
-_08012FA8: .4byte gActiveBattler\n\
-_08012FAC: .4byte gBattleCommunication\n\
-_08012FB0: .4byte gBattlersCount\n\
-_08012FB4: .4byte gBattleMainFunc\n\
-_08012FB8: .4byte SetActionsAndBanksTurnOrder\n\
-    .syntax divided\n");
+
+    // Check if everyone chose actions.
+    if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
+    {
+        gBattleMainFunc = SetActionsAndBanksTurnOrder;
+    }
 }
 
 void SwapTurnOrder(u8 a, u8 b)
@@ -6748,7 +5260,6 @@ void HandleAction_Switch(void)
         gBattleResults.unk2++;
 }
 
-#ifdef NONMATCHING
 void HandleAction_UseItem(void)
 {
     gBankAttacker = gBankTarget = gBanksByTurnOrder[gCurrentTurnActionNumber];
@@ -6788,7 +5299,7 @@ void HandleAction_UseItem(void)
             {
                 while (!(ewram160DA(gBankAttacker) & 1))
                 {
-                    ewram160DA(gBankAttacker) /= 2;
+                    ewram160DA(gBankAttacker) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
                 }
             }
@@ -6806,7 +5317,7 @@ void HandleAction_UseItem(void)
 
                 while (!(ewram160DA(gBankAttacker) & 1))
                 {
-                    ewram160DA(gBankAttacker) /= 2;
+                    ewram160DA(gBankAttacker) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -6826,376 +5337,6 @@ void HandleAction_UseItem(void)
     }
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
-#else
-NAKED
-void HandleAction_UseItem(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r4, _08014804 @ =gBankAttacker\n\
-    ldr r2, _08014808 @ =gBankTarget\n\
-    ldr r1, _0801480C @ =gBanksByTurnOrder\n\
-    ldr r0, _08014810 @ =gCurrentTurnActionNumber\n\
-    ldrb r0, [r0]\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r2]\n\
-    strb r0, [r4]\n\
-    ldr r0, _08014814 @ =gBattle_BG0_X\n\
-    movs r2, 0\n\
-    strh r2, [r0]\n\
-    ldr r0, _08014818 @ =gBattle_BG0_Y\n\
-    strh r2, [r0]\n\
-    ldr r3, _0801481C @ =gDisableStructs\n\
-    ldrb r1, [r4]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    strb r2, [r0, 0x10]\n\
-    ldr r5, _08014820 @ =gLastUsedItem\n\
-    ldr r2, _08014824 @ =gBattleBufferB\n\
-    ldrb r1, [r4]\n\
-    lsls r1, 9\n\
-    adds r0, r2, 0x1\n\
-    adds r0, r1, r0\n\
-    ldrb r3, [r0]\n\
-    adds r2, 0x2\n\
-    adds r1, r2\n\
-    ldrb r0, [r1]\n\
-    lsls r0, 8\n\
-    orrs r3, r0\n\
-    strh r3, [r5]\n\
-    cmp r3, 0xC\n\
-    bhi _08014830\n\
-    ldr r2, _08014828 @ =gBattlescriptCurrInstr\n\
-    ldr r1, _0801482C @ =gBattlescriptsForBallThrow\n\
-    ldrh r0, [r5]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    str r0, [r2]\n\
-    b _08014A8C\n\
-    .align 2, 0\n\
-_08014804: .4byte gBankAttacker\n\
-_08014808: .4byte gBankTarget\n\
-_0801480C: .4byte gBanksByTurnOrder\n\
-_08014810: .4byte gCurrentTurnActionNumber\n\
-_08014814: .4byte gBattle_BG0_X\n\
-_08014818: .4byte gBattle_BG0_Y\n\
-_0801481C: .4byte gDisableStructs\n\
-_08014820: .4byte gLastUsedItem\n\
-_08014824: .4byte gBattleBufferB\n\
-_08014828: .4byte gBattlescriptCurrInstr\n\
-_0801482C: .4byte gBattlescriptsForBallThrow\n\
-_08014830:\n\
-    adds r0, r3, 0\n\
-    subs r0, 0x50\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bhi _0801484C\n\
-    ldr r0, _08014844 @ =gBattlescriptCurrInstr\n\
-    ldr r1, _08014848 @ =gBattlescriptsForRunningByItem\n\
-    b _0801485C\n\
-    .align 2, 0\n\
-_08014844: .4byte gBattlescriptCurrInstr\n\
-_08014848: .4byte gBattlescriptsForRunningByItem\n\
-_0801484C:\n\
-    ldrb r0, [r4]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0801486C\n\
-    ldr r0, _08014864 @ =gBattlescriptCurrInstr\n\
-    ldr r1, _08014868 @ =gBattlescriptsForUsingItem\n\
-_0801485C:\n\
-    ldr r1, [r1]\n\
-    str r1, [r0]\n\
-    b _08014A8C\n\
-    .align 2, 0\n\
-_08014864: .4byte gBattlescriptCurrInstr\n\
-_08014868: .4byte gBattlescriptsForUsingItem\n\
-_0801486C:\n\
-    ldr r2, _080148A0 @ =gSharedMem\n\
-    ldrb r0, [r4]\n\
-    ldr r3, _080148A4 @ =0x00016003\n\
-    adds r1, r2, r3\n\
-    strb r0, [r1]\n\
-    lsls r0, 24\n\
-    lsrs r0, 25\n\
-    ldr r1, _080148A8 @ =0x000160d8\n\
-    adds r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    subs r0, 0x1\n\
-    mov r8, r4\n\
-    ldr r3, _080148AC @ =gBattlescriptCurrInstr\n\
-    mov r9, r3\n\
-    ldr r1, _080148B0 @ =gBattlescriptsForUsingItem\n\
-    mov r10, r1\n\
-    adds r7, r2, 0\n\
-    cmp r0, 0x4\n\
-    bls _08014896\n\
-    b _08014A74\n\
-_08014896:\n\
-    lsls r0, 2\n\
-    ldr r1, _080148B4 @ =_080148B8\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080148A0: .4byte gSharedMem\n\
-_080148A4: .4byte 0x00016003\n\
-_080148A8: .4byte 0x000160d8\n\
-_080148AC: .4byte gBattlescriptCurrInstr\n\
-_080148B0: .4byte gBattlescriptsForUsingItem\n\
-_080148B4: .4byte _080148B8\n\
-    .align 2, 0\n\
-_080148B8:\n\
-    .4byte _08014A74\n\
-    .4byte _08014A74\n\
-    .4byte _080148CC\n\
-    .4byte _08014958\n\
-    .4byte _08014A30\n\
-_080148CC:\n\
-    ldr r2, _08014904 @ =gBattleCommunication\n\
-    movs r0, 0\n\
-    strb r0, [r2, 0x5]\n\
-    ldr r1, _08014908 @ =gBankAttacker\n\
-    ldrb r0, [r1]\n\
-    lsrs r0, 1\n\
-    ldr r6, _0801490C @ =0x000160da\n\
-    adds r0, r6\n\
-    adds r0, r7\n\
-    ldrb r3, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r3\n\
-    mov r8, r1\n\
-    cmp r0, 0\n\
-    beq _08014918\n\
-    movs r0, 0x3E\n\
-    ands r0, r3\n\
-    ldr r3, _08014910 @ =gBattlescriptCurrInstr\n\
-    mov r9, r3\n\
-    ldr r1, _08014914 @ =gBattlescriptsForUsingItem\n\
-    mov r10, r1\n\
-    cmp r0, 0\n\
-    bne _080148FC\n\
-    b _08014A74\n\
-_080148FC:\n\
-    movs r0, 0x5\n\
-    strb r0, [r2, 0x5]\n\
-    b _08014A74\n\
-    .align 2, 0\n\
-_08014904: .4byte gBattleCommunication\n\
-_08014908: .4byte gBankAttacker\n\
-_0801490C: .4byte 0x000160da\n\
-_08014910: .4byte gBattlescriptCurrInstr\n\
-_08014914: .4byte gBattlescriptsForUsingItem\n\
-_08014918:\n\
-    ldr r3, _08014950 @ =gBattlescriptCurrInstr\n\
-    mov r9, r3\n\
-    ldr r0, _08014954 @ =gBattlescriptsForUsingItem\n\
-    mov r10, r0\n\
-    adds r5, r7, 0\n\
-    mov r4, r8\n\
-    adds r3, r6, 0\n\
-_08014926:\n\
-    ldrb r0, [r4]\n\
-    lsrs r0, 1\n\
-    adds r0, r3\n\
-    adds r0, r5\n\
-    ldrb r1, [r0]\n\
-    lsrs r1, 1\n\
-    strb r1, [r0]\n\
-    ldrb r0, [r2, 0x5]\n\
-    adds r0, 0x1\n\
-    strb r0, [r2, 0x5]\n\
-    ldrb r0, [r4]\n\
-    lsrs r0, 1\n\
-    adds r0, r3\n\
-    adds r0, r5\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08014926\n\
-    b _08014A74\n\
-    .align 2, 0\n\
-_08014950: .4byte gBattlescriptCurrInstr\n\
-_08014954: .4byte gBattlescriptsForUsingItem\n\
-_08014958:\n\
-    ldr r3, _0801498C @ =gBattleCommunication\n\
-    movs r0, 0x4\n\
-    strb r0, [r3, 0x5]\n\
-    ldr r2, _08014990 @ =gBankAttacker\n\
-    ldrb r0, [r2]\n\
-    lsrs r0, 1\n\
-    ldr r1, _08014994 @ =0x000160da\n\
-    mov r12, r1\n\
-    add r0, r12\n\
-    adds r6, r0, r7\n\
-    ldrb r1, [r6]\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    mov r8, r2\n\
-    cmp r5, 0\n\
-    beq _080149A0\n\
-    movs r0, 0x5\n\
-    strb r0, [r3, 0x5]\n\
-    ldr r2, _08014998 @ =gBattlescriptCurrInstr\n\
-    mov r9, r2\n\
-    ldr r3, _0801499C @ =gBattlescriptsForUsingItem\n\
-    mov r10, r3\n\
-    b _08014A74\n\
-    .align 2, 0\n\
-_0801498C: .4byte gBattleCommunication\n\
-_08014990: .4byte gBankAttacker\n\
-_08014994: .4byte 0x000160da\n\
-_08014998: .4byte gBattlescriptCurrInstr\n\
-_0801499C: .4byte gBattlescriptsForUsingItem\n\
-_080149A0:\n\
-    ldr r3, _08014A18 @ =gBattleTextBuff1\n\
-    movs r4, 0xFD\n\
-    strb r4, [r3]\n\
-    movs r0, 0x5\n\
-    strb r0, [r3, 0x1]\n\
-    movs r2, 0x1\n\
-    strb r2, [r3, 0x2]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r3, 0x3]\n\
-    ldr r1, _08014A1C @ =gBattleTextBuff2\n\
-    strb r4, [r1]\n\
-    strb r5, [r1, 0x1]\n\
-    movs r0, 0xD2\n\
-    strb r0, [r1, 0x2]\n\
-    strb r5, [r1, 0x3]\n\
-    subs r0, 0xD3\n\
-    strb r0, [r1, 0x4]\n\
-    ldrb r0, [r6]\n\
-    ands r2, r0\n\
-    ldr r0, _08014A20 @ =gBattlescriptCurrInstr\n\
-    mov r9, r0\n\
-    ldr r1, _08014A24 @ =gBattlescriptsForUsingItem\n\
-    mov r10, r1\n\
-    adds r6, r3, 0\n\
-    cmp r2, 0\n\
-    bne _08014A02\n\
-    adds r3, r7, 0\n\
-    mov r5, r8\n\
-    mov r4, r12\n\
-    adds r2, r6, 0\n\
-_080149DC:\n\
-    ldrb r0, [r5]\n\
-    lsrs r0, 1\n\
-    adds r0, r4\n\
-    adds r0, r3\n\
-    ldrb r1, [r0]\n\
-    lsrs r1, 1\n\
-    strb r1, [r0]\n\
-    ldrb r0, [r2, 0x2]\n\
-    adds r0, 0x1\n\
-    strb r0, [r2, 0x2]\n\
-    ldrb r0, [r5]\n\
-    lsrs r0, 1\n\
-    adds r0, r4\n\
-    adds r0, r3\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080149DC\n\
-_08014A02:\n\
-    ldrb r0, [r6, 0x2]\n\
-    adds r0, 0xE\n\
-    ldr r2, _08014A28 @ =0x000160a4\n\
-    adds r1, r7, r2\n\
-    movs r2, 0\n\
-    strb r0, [r1]\n\
-    ldr r3, _08014A2C @ =0x000160a5\n\
-    adds r0, r7, r3\n\
-    strb r2, [r0]\n\
-    b _08014A74\n\
-    .align 2, 0\n\
-_08014A18: .4byte gBattleTextBuff1\n\
-_08014A1C: .4byte gBattleTextBuff2\n\
-_08014A20: .4byte gBattlescriptCurrInstr\n\
-_08014A24: .4byte gBattlescriptsForUsingItem\n\
-_08014A28: .4byte 0x000160a4\n\
-_08014A2C: .4byte 0x000160a5\n\
-_08014A30:\n\
-    ldr r0, _08014A50 @ =gBattleTypeFlags\n\
-    ldrh r0, [r0]\n\
-    movs r1, 0x1\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _08014A64\n\
-    ldr r1, _08014A54 @ =gBattleCommunication\n\
-    movs r0, 0x2\n\
-    strb r0, [r1, 0x5]\n\
-    ldr r0, _08014A58 @ =gBankAttacker\n\
-    mov r8, r0\n\
-    ldr r1, _08014A5C @ =gBattlescriptCurrInstr\n\
-    mov r9, r1\n\
-    ldr r2, _08014A60 @ =gBattlescriptsForUsingItem\n\
-    mov r10, r2\n\
-    b _08014A74\n\
-    .align 2, 0\n\
-_08014A50: .4byte gBattleTypeFlags\n\
-_08014A54: .4byte gBattleCommunication\n\
-_08014A58: .4byte gBankAttacker\n\
-_08014A5C: .4byte gBattlescriptCurrInstr\n\
-_08014A60: .4byte gBattlescriptsForUsingItem\n\
-_08014A64:\n\
-    ldr r0, _08014AA0 @ =gBattleCommunication\n\
-    strb r1, [r0, 0x5]\n\
-    ldr r3, _08014AA4 @ =gBankAttacker\n\
-    mov r8, r3\n\
-    ldr r0, _08014AA8 @ =gBattlescriptCurrInstr\n\
-    mov r9, r0\n\
-    ldr r1, _08014AAC @ =gBattlescriptsForUsingItem\n\
-    mov r10, r1\n\
-_08014A74:\n\
-    mov r2, r8\n\
-    ldrb r0, [r2]\n\
-    lsrs r0, 1\n\
-    ldr r3, _08014AB0 @ =0x000160d8\n\
-    adds r0, r3\n\
-    adds r0, r7\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    add r0, r10\n\
-    ldr r0, [r0]\n\
-    mov r1, r9\n\
-    str r0, [r1]\n\
-_08014A8C:\n\
-    movs r0, 0xA\n\
-    ldr r2, _08014AB4 @ =gCurrentActionFuncId\n\
-    strb r0, [r2]\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08014AA0: .4byte gBattleCommunication\n\
-_08014AA4: .4byte gBankAttacker\n\
-_08014AA8: .4byte gBattlescriptCurrInstr\n\
-_08014AAC: .4byte gBattlescriptsForUsingItem\n\
-_08014AB0: .4byte 0x000160d8\n\
-_08014AB4: .4byte gCurrentActionFuncId\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 bool8 TryRunFromBattle(u8 bank)
 {
