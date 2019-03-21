@@ -113,7 +113,6 @@ static void PreprocessFile(const char *restrict path, Stack *restrict defines, S
     }
 
     enter_file(&ls, ls.flags);
-    int curline = 0;
     // Lex through the file.
     while ((status = lex(&ls)) < CPPERR_EOF)
     {
@@ -164,13 +163,14 @@ static void PreprocessFile(const char *restrict path, Stack *restrict defines, S
         // TODO: Fix line numbers. They are way off.
         else if (ls.ctok->type == CONTEXT)
         {
-            curline = ls.ctok->line;
             if (g_lines)
             {
                 free(current_file);
                 current_file = strdup(ls.ctok->name);
-                AddLineInfo(current_file, ls.ctok->line);
+                AddLineInfo(current_file, ls.line);
+                ls.oline--;
             }
+
         }
         else if (ls.ctok->type != COMMENT)
         {
