@@ -4885,7 +4885,7 @@ static bool8 sub_804C29C(void)
             if (!gPaletteFade.active)
             {
                 PlayBGM(gUnknown_03004828->unk_0124);
-                SetMainCallback2(c2_exit_to_overworld_2_switch);
+                SetMainCallback2(CB2_ReturnToField);
                 sub_804D8E4();
             }
             break;

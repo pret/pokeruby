@@ -37,7 +37,7 @@ void CleanUpOverworldMessage(u8);
 void ExecuteItemUseFromBlackPalette(void);
 void sub_80A5D04(void);
 void ItemMenu_LoadSellMenu(void);
-void sub_80A68CC();
+void CB2_ChooseBerry();
 void sub_80A6A30(void);
 bool32 UseRegisteredKeyItem(void);
 void sub_80A6DCC(void);

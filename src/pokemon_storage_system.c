@@ -377,7 +377,7 @@ void sub_80961A8(void)
 {
     gUnknown_02038474 = gPokemonStorageSystemPtr->unk_0005;
     gFieldCallback = FieldCB_ReturnToOverworld;
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 void ResetPokemonStorageSystem(void)

@@ -22,7 +22,7 @@ SlateportCity_PokemonFanClub_Text_17D773:: @ 817D773
 	.string "Oh, my! Excuse me! I seem to have\n"
 	.string "nattered on far too long!\p"
 	.string "Please, do allow me to examine your\n"
-	.string "POKéMON and see how it’s grown.$"
+	.string "POKéMON and see how it's grown.$"
 
 SlateportCity_PokemonFanClub_Text_17DA14:: @ 817DA14
 	.string "How is your POKéMON growing?\n"
@@ -33,7 +33,7 @@ SlateportCity_PokemonFanClub_Text_17DA49:: @ 817DA49
 	.string "I see...$"
 
 SlateportCity_PokemonFanClub_Text_17DA5C:: @ 817DA5C
-	.string "Hmmm... It’s not bad, but it’s not\n"
+	.string "Hmmm... It's not bad, but it's not\n"
 	.string "good, either...\p"
 	.string "You, the TRAINER, must put more\n"
 	.string "effort into raising this POKéMON!\p"
@@ -76,13 +76,13 @@ SlateportCity_PokemonFanClub_Text_17DD27:: @ 817DD27
 
 SlateportCity_PokemonFanClub_Text_17DD78:: @ 817DD78
 	.string "Let a POKéMON hold that YELLOW SCARF.\p"
-	.string "It will bolster your POKéMON’s\n"
+	.string "It will bolster your POKéMON's\n"
 	.string "toughness so much more!$"
 
 SlateportCity_PokemonFanClub_Text_17DDD5:: @ 817DDD5
-	.string "I’m sorry, but I’ve nothing else to\n"
+	.string "I'm sorry, but I've nothing else to\n"
 	.string "give you! None at all!\p"
-	.string "After all, you’re blessed with the gift\n"
+	.string "After all, you're blessed with the gift\n"
 	.string "of raising POKéMON without resorting\l"
 	.string "to any items!$"
 
@@ -92,7 +92,7 @@ SlateportCity_PokemonFanClub_Text_17DE6B:: @ 817DE6B
 	.string "POKéMON are very sensitive to the\n"
 	.string "feelings of their TRAINERS.\p"
 	.string "If you treat your POKéMON with love\n"
-	.string "and care, they’ll love you back.\p"
+	.string "and care, they'll love you back.\p"
 	.string "When your POKéMON grow to love you,\n"
 	.string "please come show me.$"
 
@@ -105,14 +105,14 @@ SlateportCity_PokemonFanClub_Text_17DFB8:: @ 817DFB8
 	.string "POKéMON are very sensitive to the\n"
 	.string "feelings of their TRAINERS.\p"
 	.string "If you treat your POKéMON with love\n"
-	.string "and care, they’ll love you back.$"
+	.string "and care, they'll love you back.$"
 
 SlateportCity_PokemonFanClub_Text_17E03B:: @ 817E03B
 	.string "If you keep letting a POKéMON faint\n"
-	.string "in battle, it’ll come to resent it.\p"
+	.string "in battle, it'll come to resent it.\p"
 	.string "Soon, it will become less trusting\n"
 	.string "of the TRAINER.\p"
-	.string "In other words, it certainly won’t\n"
+	.string "In other words, it certainly won't\n"
 	.string "like you very much.$"
 
 SlateportCity_PokemonFanClub_Text_17E0ED:: @ 817E0ED

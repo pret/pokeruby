@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CD3E0(struct Sprite* sprite);
 void sub_80CD6CC(struct Sprite* sprite);
@@ -23,8 +23,8 @@ static void sub_80CD67C(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DAC =
 {
-    .tileTag = 10014,
-    .paletteTag = 10014,
+    .tileTag = ANIM_TAG_LOCK_ON,
+    .paletteTag = ANIM_TAG_LOCK_ON,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -34,8 +34,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DAC =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DC4 =
 {
-    .tileTag = 10014,
-    .paletteTag = 10014,
+    .tileTag = ANIM_TAG_LOCK_ON,
+    .paletteTag = ANIM_TAG_LOCK_ON,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -80,7 +80,7 @@ static void sub_80CD408(struct Sprite* sprite)
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, sub_80CD4B8);
         sprite->data[5] += 0x100;
-        PlaySE12WithPanning(0xD2, BattleAnimAdjustPanning(0x3F));
+        PlaySE12WithPanning(0xD2, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
         break;
     }
 
@@ -140,8 +140,8 @@ static void sub_80CD4EC(struct Sprite* sprite)
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
         sprite->data[0] = 6;
-        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + a;
-        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + b;
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + a;
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + b;
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, sub_80CD654);
     }
@@ -166,7 +166,7 @@ static void sub_80CD5A8(struct Sprite* sprite)
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
         LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
-        PlaySE12WithPanning(0xC0, BattleAnimAdjustPanning(0x3F));
+        PlaySE12WithPanning(0xC0, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
     else if (sprite->data[1] == 0)
     {

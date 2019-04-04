@@ -6,8 +6,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83D752C[];
 
 void sub_80D3554(struct Sprite *sprite);
@@ -37,8 +37,8 @@ const union AnimCmd *const gSpriteAnimTable_83D91F0[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D91F4 =
 {
-    .tileTag = 10149,
-    .paletteTag = 10149,
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_837E04C,
     .anims = gSpriteAnimTable_83D91F0,
     .images = NULL,
@@ -48,8 +48,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D91F4 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D920C =
 {
-    .tileTag = 10259,
-    .paletteTag = 10259,
+    .tileTag = ANIM_TAG_BROWN_ORB,
+    .paletteTag = ANIM_TAG_BROWN_ORB,
     .oam = &gOamData_837E04C,
     .anims = gSpriteAnimTable_83D91F0,
     .images = NULL,
@@ -59,8 +59,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D920C =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9224 =
 {
-    .tileTag = 10264,
-    .paletteTag = 10264,
+    .tileTag = ANIM_TAG_GLOWY_RED_ORB,
+    .paletteTag = ANIM_TAG_GLOWY_RED_ORB,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -70,8 +70,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9224 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D923C =
 {
-    .tileTag = 10265,
-    .paletteTag = 10265,
+    .tileTag = ANIM_TAG_GLOWY_GREEN_ORB,
+    .paletteTag = ANIM_TAG_GLOWY_GREEN_ORB,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -94,8 +94,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9264[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9268 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9264,
     .images = NULL,
@@ -105,8 +105,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9268 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9280 =
 {
-    .tileTag = 10165,
-    .paletteTag = 10165,
+    .tileTag = ANIM_TAG_BLUE_RING,
+    .paletteTag = ANIM_TAG_BLUE_RING,
     .oam = &gOamData_837E034,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -140,8 +140,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D92CC[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D92D0 =
 {
-    .tileTag = 10149,
-    .paletteTag = 10149,
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_837E10C,
     .anims = gSpriteAnimTable_83D91F0,
     .images = NULL,
@@ -151,8 +151,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D92D0 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D92E8 =
 {
-    .tileTag = 10149,
-    .paletteTag = 10149,
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_837E10C,
     .anims = gSpriteAnimTable_83D91F0,
     .images = NULL,
@@ -166,9 +166,9 @@ void sub_80D3554(struct Sprite *sprite)
 
     sprite->data[0] = 30;
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
     InitAnimLinearTranslation(sprite);
 
@@ -228,15 +228,15 @@ void sub_80D3698(struct Sprite *sprite)
 {
     u8 subpriority;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     sprite->pos2.y = -10;
 
-    subpriority = sub_8079E90(gAnimBankAttacker);
+    subpriority = GetBattlerSubpriority(gBattleAnimAttacker);
 
     if (!IsContest())
     {
-        if (GetBattlerSide(gAnimBankAttacker) == 0)
+        if (GetBattlerSide(gBattleAnimAttacker) == 0)
         {
             sprite->pos2.x = 10;
             sprite->subpriority = subpriority + 2;
@@ -268,11 +268,11 @@ void sub_80D3728(struct Sprite *sprite)
 {
     int var1, var2;
 
-    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
+    if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
         gBattleAnimArgs[0] *= -1;
 
-        if (GetBattlerPosition(gAnimBankAttacker) == 0 || GetBattlerPosition(gAnimBankAttacker) == 1)
+        if (GetBattlerPosition(gBattleAnimAttacker) == 0 || GetBattlerPosition(gBattleAnimAttacker) == 1)
         {
             gBattleAnimArgs[0] *= -1;
         }
@@ -291,14 +291,14 @@ void sub_80D3728(struct Sprite *sprite)
 
     InitAnimSpritePos(sprite, var1);
 
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, var2) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, var2) + gBattleAnimArgs[3];
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

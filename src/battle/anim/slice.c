@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void AnimCuttingSlice(struct Sprite* sprite);
 void sub_80CC9BC(struct Sprite* sprite);
@@ -28,8 +28,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6B24[] =
 
 const struct SpriteTemplate gCuttingSliceSpriteTemplate =
 {
-    .tileTag = 10138,
-    .paletteTag = 10138,
+    .tileTag = ANIM_TAG_CUT,
+    .paletteTag = ANIM_TAG_CUT,
     .oam = &gOamData_837E054,
     .anims = gSpriteAnimTable_83D6B24,
     .images = NULL,
@@ -39,8 +39,8 @@ const struct SpriteTemplate gCuttingSliceSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6B40 =
 {
-    .tileTag = 10138,
-    .paletteTag = 10138,
+    .tileTag = ANIM_TAG_CUT,
+    .paletteTag = ANIM_TAG_CUT,
     .oam = &gOamData_837E054,
     .anims = gSpriteAnimTable_83D6B24,
     .images = NULL,
@@ -55,9 +55,9 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6B40 =
 // arg 2: slice direction; 0 = right-to-left, 1 = left-to-right
 void AnimCuttingSlice(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1);
-    if (GetBattlerSide(gAnimBankTarget) == 0)
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+    if (GetBattlerSide(gBattleAnimTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;
@@ -86,28 +86,28 @@ void sub_80CC9BC(struct Sprite* sprite)
     switch (gBattleAnimArgs[3])
     {
     case 1:
-        a = GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 0);
-        b = GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 1);
+        a = GetBattlerSpriteCoord(gBattleAnimTarget ^ 2, 0);
+        b = GetBattlerSpriteCoord(gBattleAnimTarget ^ 2, 1);
         break;
     case 2:
-        a = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-        b = GetBattlerSpriteCoord(gAnimBankTarget, 1);
-        if (IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
+        a = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+        b = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        if (IsAnimBankSpriteVisible(gBattleAnimTarget ^ 2))
         {
-            a = (GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 0) + a) / 2;
-            b = (GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 1) + b) / 2;
+            a = (GetBattlerSpriteCoord(gBattleAnimTarget ^ 2, 0) + a) / 2;
+            b = (GetBattlerSpriteCoord(gBattleAnimTarget ^ 2, 1) + b) / 2;
         }
         break;
     case 0:
     default:
-        a = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-        b = GetBattlerSpriteCoord(gAnimBankTarget, 1);
+        a = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+        b = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
         break;
     }
 
     sprite->pos1.x = a;
     sprite->pos1.y = b;
-    if (GetBattlerSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gBattleAnimTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;

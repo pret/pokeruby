@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const union AnimCmd *const gSpriteAnimTable_83D62D4[];
 
@@ -32,8 +32,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D65E0[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D65E8 =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837DFEC,
     .anims = gSpriteAnimTable_83D62D4,
     .images = NULL,
@@ -47,14 +47,14 @@ void sub_80CB4CC(struct Sprite* sprite)
     {
     case 0:
     {
-        if (GetBattlerSide(gAnimBankTarget) == 0)
+        if (GetBattlerSide(gBattleAnimTarget) == 0)
         {
             s16 a = gBattleAnimArgs[0];
             gBattleAnimArgs[0] = -a;
         }
 
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[1];
         sprite->invisible = 1;
         sprite->data[0]++;
         break;
@@ -66,8 +66,8 @@ void sub_80CB4CC(struct Sprite* sprite)
         {
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0] = 25;
-            sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-            sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+            sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+            sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
             sprite->callback = sub_8078CC0;
             StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
             break;

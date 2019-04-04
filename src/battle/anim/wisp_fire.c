@@ -7,8 +7,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankTarget;
-extern u8 gAnimBankAttacker;
+extern u8 gBattleAnimTarget;
+extern u8 gBattleAnimAttacker;
 extern u8 gBankSpriteIds[];
 
 void sub_80D5CC0(struct Sprite *sprite);
@@ -30,8 +30,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9778[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D977C =
 {
-    .tileTag = 10232,
-    .paletteTag = 10232,
+    .tileTag = ANIM_TAG_WISP_FIRE,
+    .paletteTag = ANIM_TAG_WISP_FIRE,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9778,
     .images = NULL,
@@ -68,9 +68,9 @@ void sub_80D5CC0(struct Sprite *sprite)
     if (gMain.inBattle)
     {
         if (sprite->data[1] < 64 || sprite->data[1] > 195)
-            sprite->oam.priority = sub_8079ED4(gAnimBankTarget);
+            sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
         else
-            sprite->oam.priority = sub_8079ED4(gAnimBankTarget) + 1;
+            sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) + 1;
     }
     else
     {
@@ -91,8 +91,8 @@ void sub_80D5DDC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[12] = !GetBattlerSide(gAnimBankAttacker) ? 1 : -1;
-    task->data[13] = IsAnimBankSpriteVisible(gAnimBankTarget ^ 2) + 1;
+    task->data[12] = !GetBattlerSide(gBattleAnimAttacker) ? 1 : -1;
+    task->data[13] = IsAnimBankSpriteVisible(gBattleAnimTarget ^ 2) + 1;
     task->data[14] = GetAnimBattlerSpriteId(1);
     task->data[15] = GetAnimBattlerSpriteId(3);
 
@@ -211,7 +211,7 @@ void sub_80D60B4(u8 taskId)
     }
     gTasks[taskId].data[0]++;
 
-    spriteId = gBankSpriteIds[gAnimBankTarget];
+    spriteId = gBankSpriteIds[gBattleAnimTarget];
 
     if (!gTasks[taskId].data[4])
         unk = gUnknown_083D9794[gTasks[taskId].data[0] % 10];

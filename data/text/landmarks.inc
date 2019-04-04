@@ -5,7 +5,7 @@ gLandmarkName_PetalburgWoods::
 	.string "PETALBURG WOODS$"
 
 gLandmarkName_MrBrineysCottage::
-	.string "MR. BRINEY’S COTTAGE$"
+	.string "MR. BRINEY'S COTTAGE$"
 
 gLandmarkName_AbandonedShip::
 	.string "ABANDONED SHIP$"
@@ -26,7 +26,7 @@ gLandmarkName_TrickHouse::
 	.string "TRICK HOUSE$"
 
 gLandmarkName_OldLadysRestShop::
-	.string "OLD LADY’S REST STOP$"
+	.string "OLD LADY'S REST STOP$"
 
 gLandmarkName_Desert::
 	.string "DESERT$"
@@ -47,7 +47,7 @@ gLandmarkName_MeteorFalls::
 	.string "METEOR FALLS$"
 
 gLandmarkName_TunnelersRestHouse::
-	.string "TUNNELER’S REST HOUSE$"
+	.string "TUNNELER'S REST HOUSE$"
 
 gLandmarkName_RusturfTunnel::
 	.string "RUSTURF TUNNEL$"
@@ -74,7 +74,7 @@ gLandmarkName_OceanCurrent::
 	.string "OCEAN CURRENT$"
 
 gLandmarkName_LanettesHouse::
-	.string "LANETTE’S HOUSE$"
+	.string "LANETTE'S HOUSE$"
 
 gLandmarkName_FieryPath::
 	.string "FIERY PATH$"
@@ -86,7 +86,7 @@ gLandmarkName_SkyPillar::
 	.string "SKY PILLAR$"
 
 gLandmarkName_BerryMastersHouse::
-	.string "BERRY MASTER’S HOUSE$"
+	.string "BERRY MASTER'S HOUSE$"
 
 gLandmarkName_IslandCave::
 	.string "ISLAND CAVE$"
@@ -104,7 +104,7 @@ gLandmarkName_SealedChamber::
 	.string "SEALED CHAMBER$"
 
 gLandmarkName_FossilManiacsHouse::
-	.string "FOSSIL MANIAC’S HOUSE$"
+	.string "FOSSIL MANIAC'S HOUSE$"
 
 gLandmarkName_HuntersHouse::
-	.string "HUNTER’S HOUSE$"
+	.string "HUNTER'S HOUSE$"

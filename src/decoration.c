@@ -3176,7 +3176,7 @@ void c1_overworld_prev_quest(u8 taskId)
             sub_81016F4();
             FreeSpritePaletteByTag(0xbb8);
             gFieldCallback = &sub_8100364;
-            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            SetMainCallback2(CB2_ReturnToField);
             DestroyTask(taskId);
             break;
     }
@@ -4139,7 +4139,7 @@ void sub_81015E0(u8 taskId)
         case 1:
             sub_81016F4();
             gFieldCallback = sub_8101678;
-            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            SetMainCallback2(CB2_ReturnToField);
             DestroyTask(taskId);
             break;
     }

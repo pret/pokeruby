@@ -243,5 +243,5 @@ gTVGabbyAndTyText9:: @ 81AD00A
 	.string "tieferer Sinn in dieser Aussage!\p"
 	.string "Kein Wunder! Ein bedeutender TRAINER\n"
 	.string "wird auch bedeutende Worte sagen!\p"
-	.string "Das war’s für heute!\n"
+	.string "Das war's für heute!\n"
 	.string "Bis zur nächsten Sendung!$"

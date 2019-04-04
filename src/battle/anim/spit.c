@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D28AC(struct Sprite* sprite);
 
@@ -27,8 +27,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7B5C[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7B60 =
 {
-    .tileTag = 10237,
-    .paletteTag = 10237,
+    .tileTag = ANIM_TAG_RED_ORB_2,
+    .paletteTag = ANIM_TAG_RED_ORB_2,
     .oam = &gOamData_837DFE4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -46,8 +46,8 @@ static void sub_80D287C(struct Sprite* sprite)
 
 void sub_80D28AC(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
     sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
     sprite->data[2] = gBattleAnimArgs[1];

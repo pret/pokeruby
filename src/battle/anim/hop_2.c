@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern void sub_80CB7EC(struct Sprite* sprite, s16 c);
 extern bool8 sub_80CB814(struct Sprite* sprite);
@@ -22,8 +22,8 @@ static void sub_80CBB60(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D677C =
 {
-    .tileTag = 10224,
-    .paletteTag = 10224,
+    .tileTag = ANIM_TAG_ITEM_BAG,
+    .paletteTag = ANIM_TAG_ITEM_BAG,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83D66B8,
     .images = NULL,
@@ -36,9 +36,9 @@ void sub_80CBAE8(struct Sprite* sprite)
     s16 p1;
     s16 p2;
     sub_8078764(sprite, FALSE);
-    p1 = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
-    p2 = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
-    if ((gAnimBankTarget ^ 2) == gAnimBankAttacker)
+    p1 = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+    p2 = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+    if ((gBattleAnimTarget ^ 2) == gBattleAnimAttacker)
     {
         sprite->data[6] = p1;
         sprite->data[7] = p2 + 10;
@@ -71,7 +71,7 @@ static void sub_80CBB60(struct Sprite* sprite)
     sprite->pos2.y = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sprite->pos2.y == 0)
     {
-        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(0x3F));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
 
     if (sub_80CB814(sprite))
@@ -79,6 +79,6 @@ static void sub_80CBB60(struct Sprite* sprite)
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
         sprite->callback = sub_80CB8B8;
-        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(-0x40));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
     }
 }

@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CC82C(struct Sprite* sprite);
 void sub_80CC884(struct Sprite* sprite);
@@ -51,8 +51,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D69DC =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D69F4 =
 {
-    .tileTag = 10287,
-    .paletteTag = 10287,
+    .tileTag = ANIM_TAG_WHIP_HIT,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D69D4,
     .images = NULL,
@@ -77,8 +77,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6A24[] =
 
 const struct SpriteTemplate gSpriteTemplate_83D6A28 =
 {
-    .tileTag = 10021,
-    .paletteTag = 10021,
+    .tileTag = ANIM_TAG_UNUSED_HIT,
+    .paletteTag = ANIM_TAG_UNUSED_HIT,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6A24,
     .images = NULL,
@@ -88,8 +88,8 @@ const struct SpriteTemplate gSpriteTemplate_83D6A28 =
 
 const struct SpriteTemplate gSpriteTemplate_83D6A40 =
 {
-    .tileTag = 10022,
-    .paletteTag = 10022,
+    .tileTag = ANIM_TAG_UNUSED_HIT_2,
+    .paletteTag = ANIM_TAG_UNUSED_HIT_2,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6A24,
     .images = NULL,
@@ -105,7 +105,7 @@ static void sub_80CC810(struct Sprite* sprite)
 
 void sub_80CC82C(struct Sprite* sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -122,7 +122,7 @@ void sub_80CC82C(struct Sprite* sprite)
 
 void sub_80CC884(struct Sprite* sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gBattleAnimAttacker) == 0)
         StartSpriteAnim(sprite, 1);
 
     sprite->callback = sub_80CC810;

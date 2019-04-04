@@ -1,17 +1,17 @@
 MtPyre_Summit_Text_1B5CFD:: @ 81B5CFD
-	.string "I’ll show you exactly how scary\n"
+	.string "I'll show you exactly how scary\n"
 	.string "TEAM MAGMA can be!$"
 
 MtPyre_Summit_Text_1B5D30:: @ 81B5D30
 	.string "So you think you can stand up alone\n"
-	.string "to TEAM MAGMA’s might...$"
+	.string "to TEAM MAGMA's might...$"
 
 MtPyre_Summit_Text_1B5D6D:: @ 81B5D6D
 	.string "Yeah, so you are strong...\n"
-	.string "But there’re a lot of us!$"
+	.string "But there're a lot of us!$"
 
 MtPyre_Summit_Text_1B5DA2:: @ 81B5DA2
-	.string "What’s up with you?\n"
+	.string "What's up with you?\n"
 	.string "What does a single kid expect to do?$"
 
 MtPyre_Summit_Text_1B5DDB:: @ 81B5DDB
@@ -19,34 +19,34 @@ MtPyre_Summit_Text_1B5DDB:: @ 81B5DDB
 	.string "Too strong...$"
 
 MtPyre_Summit_Text_1B5DF1:: @ 81B5DF1
-	.string "You don’t know anything.\n"
+	.string "You don't know anything.\n"
 	.string "Quit messing around with us!$"
 
 MtPyre_Summit_Text_1B5E27:: @ 81B5E27
 	.string "Hey, I remember you from MT. CHIMNEY!\n"
-	.string "It’s payback time!$"
+	.string "It's payback time!$"
 
 MtPyre_Summit_Text_1B5E60:: @ 81B5E60
 	.string "Urgggh...\n"
 	.string "Beaten by some kid again!$"
 
 MtPyre_Summit_Text_1B5E84:: @ 81B5E84
-	.string "Heh, it doesn’t matter!\n"
+	.string "Heh, it doesn't matter!\n"
 	.string "We bought ourselves some time!\p"
 	.string "The BOSS should have snatched what\n"
 	.string "he was after!$"
 
 MtPyre_Summit_Text_1B5EEC:: @ 81B5EEC
 	.string "MAXIE: Not you again...\p"
-	.string "You’ve impeded our plans repeatedly,\n"
-	.string "but this time you’re too late.\p"
+	.string "You've impeded our plans repeatedly,\n"
+	.string "but this time you're too late.\p"
 	.string "The BLUE ORB that rested atop\n"
 	.string "MT. PYRE...\l"
 	.string "I, MAXIE, claim it as mine!\p"
 	.string "Fufufu... Finally, I can realize my\n"
 	.string "grand design...\p"
 	.string "Come on, crew!\n"
-	.string "It’s SLATEPORT next!$"
+	.string "It's SLATEPORT next!$"
 
 MtPyre_Summit_Text_1B5FE6:: @ 81B5FE6
 	.string "Oh, no...\n"
@@ -84,7 +84,7 @@ MtPyre_Summit_Text_1B6283:: @ 81B6283
 	.string "to its rightful place, too?$"
 
 MtPyre_Summit_Text_1B62E7:: @ 81B62E7
-	.string "What’s that?!\p"
+	.string "What's that?!\p"
 	.string "If the balance is not restored, there\n"
 	.string "is no telling what could happen.\p"
 	.string "You will return the RED ORB to its\n"
@@ -146,7 +146,7 @@ MtPyre_Summit_Text_1B6823:: @ 81B6823
 MtPyre_Summit_Text_1B6848:: @ 81B6848
 	.string "MAXIE: You...\n"
 	.string "So you stopped GROUDON...\p"
-	.string "I shouldn’t be surprised...\p"
+	.string "I shouldn't be surprised...\p"
 	.string "I understand now that humans cannot\n"
 	.string "freely control the balance between\l"
 	.string "the land and the sea...\p"

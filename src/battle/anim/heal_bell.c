@@ -8,8 +8,8 @@
 #include "decompress.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const u8 gBattleAnimSpritePalette_206[];
 
@@ -42,8 +42,8 @@ const union AnimCmd *const gSpriteAnimTable_83D7A40[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7A44 =
 {
-    .tileTag = 10205,
-    .paletteTag = 10205,
+    .tileTag = ANIM_TAG_BELL,
+    .paletteTag = ANIM_TAG_BELL,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D7A40,
     .images = NULL,
@@ -63,8 +63,8 @@ const u16 gUnknown_083D7A5C[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7A68 =
 {
-    .tileTag = 10206,
-    .paletteTag = 10206,
+    .tileTag = ANIM_TAG_MUSIC_NOTES_2,
+    .paletteTag = ANIM_TAG_MUSIC_NOTES_2,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -120,12 +120,12 @@ static void sub_80D1BA8(struct Sprite* sprite, u8 a, u8 b)
 void sub_80D1C08(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 0);
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[3];
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sub_80D1BA8(sprite, gBattleAnimArgs[5], gBattleAnimArgs[6]);

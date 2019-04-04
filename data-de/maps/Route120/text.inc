@@ -45,7 +45,7 @@ Route120_Text_171B0E:: @ 8171B0E
 	.string "Ich liebe es, TRAINER und POKéMON zu\n"
 	.string "sehen, die fest zusammenhalten.\p"
 	.string "Ich finde, du machst das großartig.\p"
-	.string "Nun, mach’s gut. Wir sehen uns!$"
+	.string "Nun, mach's gut. Wir sehen uns!$"
 
 Route119_Text_171B93:: @ 8171B93
 Route120_Text_171B93:: @ 8171B93

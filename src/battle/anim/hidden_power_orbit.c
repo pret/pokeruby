@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void AnimOrbitFast(struct Sprite* sprite);
 void AnimOrbitScatter(struct Sprite* sprite);
@@ -27,8 +27,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7B10[] =
 
 const struct SpriteTemplate gHiddenPowerOrbSpriteTemplate =
 {
-    .tileTag = 10217,
-    .paletteTag = 10217,
+    .tileTag = ANIM_TAG_RED_ORB,
+    .paletteTag = ANIM_TAG_RED_ORB,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -38,8 +38,8 @@ const struct SpriteTemplate gHiddenPowerOrbSpriteTemplate =
 
 const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
 {
-    .tileTag = 10217,
-    .paletteTag = 10217,
+    .tileTag = ANIM_TAG_RED_ORB,
+    .paletteTag = ANIM_TAG_RED_ORB,
     .oam = &gOamData_837DFEC,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -53,12 +53,12 @@ const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
 // arg 1: initial wave offset
 void AnimOrbitFast(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->affineAnimPaused = 1;
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
-    sprite->data[7] = sub_8079E90(gAnimBankAttacker);
+    sprite->data[7] = GetBattlerSubpriority(gBattleAnimAttacker);
     sprite->callback = AnimOrbitFastStep;
     sprite->callback(sprite);
 }
@@ -104,8 +104,8 @@ static void AnimOrbitFastStep(struct Sprite* sprite)
 // arg 0: initial wave offset
 void AnimOrbitScatter(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
     sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
     sprite->callback = AnimOrbitScatterStep;

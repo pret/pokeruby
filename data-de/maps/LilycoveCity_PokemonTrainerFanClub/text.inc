@@ -132,7 +132,7 @@ LilycoveCity_PokemonTrainerFanClub_Text_18AA83:: @ 818AA83
 
 LilycoveCity_PokemonTrainerFanClub_Text_18AB0A:: @ 818AB0A
 	.string "{STR_VAR_1} ist wirklich megacool...\p"
-	.string "Jeder denkt das, stimmt’s? Stimmt’s?!?$"
+	.string "Jeder denkt das, stimmt's? Stimmt's?!?$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_18AB41:: @ 818AB41
 	.string "{STR_VAR_1} ist cooool, meinst du nicht\n"

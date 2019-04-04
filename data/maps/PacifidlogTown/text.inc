@@ -5,7 +5,7 @@ PacifidlogTown_Text_16CFC5:: @ 816CFC5
 	.string "up swept away somewhere else.$"
 
 PacifidlogTown_Text_16D04A:: @ 816D04A
-	.string "See, isn’t it neat?\n"
+	.string "See, isn't it neat?\n"
 	.string "These houses are on water!\p"
 	.string "I was born here!$"
 

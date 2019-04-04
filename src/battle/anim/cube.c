@@ -6,8 +6,8 @@
 #include "constants/songs.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CDFB0(struct Sprite* sprite);
 static void sub_80CE000(struct Sprite* sprite);
@@ -41,8 +41,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6EEC[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6EF0 =
 {
-    .tileTag = 10185,
-    .paletteTag = 10185,
+    .tileTag = ANIM_TAG_SPHERE_TO_CUBE,
+    .paletteTag = ANIM_TAG_SPHERE_TO_CUBE,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6EEC,
     .images = NULL,
@@ -52,14 +52,14 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6EF0 =
 
 void sub_80CDFB0(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) - 12;
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) - 12;
     sprite->data[0] = 0;
     sprite->data[1] = 2;
     sprite->data[2] = 0;
     sprite->data[3] = 0;
     sprite->data[4] = 0;
-    sprite->data[5] = BattleAnimAdjustPanning(-0x40);
+    sprite->data[5] = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
     sprite->callback = sub_80CE000;
 }
 

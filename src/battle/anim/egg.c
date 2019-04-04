@@ -6,8 +6,8 @@
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7594 =
 {
-    .tileTag = 10175,
-    .paletteTag = 10175,
+    .tileTag = ANIM_TAG_LARGE_FRESH_EGG,
+    .paletteTag = ANIM_TAG_LARGE_FRESH_EGG,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

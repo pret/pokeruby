@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CD140(struct Sprite* sprite);
 void sub_80CD190(struct Sprite* sprite);
@@ -34,8 +34,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6C84[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6C88 =
 {
-    .tileTag = 10049,
-    .paletteTag = 10049,
+    .tileTag = ANIM_TAG_SPARKLE_2,
+    .paletteTag = ANIM_TAG_SPARKLE_2,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6C84,
     .images = NULL,
@@ -45,8 +45,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6C88 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6CA0 =
 {
-    .tileTag = 10049,
-    .paletteTag = 10049,
+    .tileTag = ANIM_TAG_SPARKLE_2,
+    .paletteTag = ANIM_TAG_SPARKLE_2,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6C84,
     .images = NULL,
@@ -72,9 +72,9 @@ void sub_80CD190(struct Sprite* sprite)
 {
     u8 bank;
     if (!gBattleAnimArgs[2])
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
     {

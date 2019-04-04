@@ -5,8 +5,8 @@
 #include "util.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D31C8(struct Sprite* sprite);
 static void sub_80D32E8(struct Sprite *sprite);
@@ -43,8 +43,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9174[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9178 =
 {
-    .tileTag = 10146,
-    .paletteTag = 10146,
+    .tileTag = ANIM_TAG_BUBBLE,
+    .paletteTag = ANIM_TAG_BUBBLE,
     .oam = &gOamData_837E0AC,
     .anims = gSpriteAnimTable_83D9174,
     .images = NULL,
@@ -56,29 +56,29 @@ void sub_80D31C8(struct Sprite* sprite)
 {
     u8 newSpriteId;
 
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) - gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
     }
 
     sprite->animPaused = 1;
 
-    if (GetBattlerSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[6];
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
     InitAnimLinearTranslation(sprite);
 

@@ -16,13 +16,13 @@ gBirchSpeech_WorldInhabitedByPokemon:: @ 81C6E1A
 	.string "at times as cooperative workmates.\p"
 	.string "And sometimes, we band together\n"
 	.string "and battle others like us.\p"
-	.string "But despite our closeness, we don’t\n"
+	.string "But despite our closeness, we don't\n"
 	.string "know everything about POKéMON.\p"
 	.string "In fact, there are many, many\n"
 	.string "secrets surrounding POKéMON.\p"
 	.string "To unravel POKéMON mysteries,\n"
-	.string "I’ve been undertaking research.\l"
-	.string "That’s what I do.\p$"
+	.string "I've been undertaking research.\l"
+	.string "That's what I do.\p$"
 
 gBirchSpeech_AndYouAre:: @ 81C6FCB
 	.string "And you are?$"
@@ -33,14 +33,14 @@ gBirchSpeech_AreYouBoyOrGirl:: @ 81C6FD8
 
 gBirchSpeech_WhatsYourName:: @ 81C6FFA
 	.string "All right.\n"
-	.string "What’s your name?$"
+	.string "What's your name?$"
 
 gBirchSpeech_SoItsPlayer:: @ 81C7017
-	.string "So it’s {PLAYER}{KUN}?$"
+	.string "So it's {PLAYER}{KUN}?$"
 
 gBirchSpeech_AhOkayYouArePlayer:: @ 81C7025
 	.string "Ah, okay!\p"
-	.string "You’re {PLAYER}{KUN} who’s moving to my\n"
+	.string "You're {PLAYER}{KUN} who's moving to my\n"
 	.string "hometown of LITTLEROOT.\l"
 	.string "I get it now!$"
 
@@ -51,5 +51,5 @@ gBirchSpeech_AreYouReady:: @ 81C7074
 	.string "Take courage, and leap into the\n"
 	.string "world of POKéMON where dreams,\l"
 	.string "adventure, and friendships await!\p"
-	.string "Well, I’ll be expecting you later.\n"
+	.string "Well, I'll be expecting you later.\n"
 	.string "Come see me in my POKéMON LAB.\p$"

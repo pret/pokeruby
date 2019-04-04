@@ -55,9 +55,9 @@ void BattleSetup_StartScriptedWildBattle(void);
 s8 BattleSetup_GetTerrain(void);
 u8 BattleSetup_GetBattleTowerBattleTransition(void);
 u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
-void TrainerWantsBattle(u8, u8 *);
+void TrainerWantsBattle(u8, const u8 *);
 
-bool32 GetTrainerFlagFromScriptPointer(u8 *data);
+bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 //u8 ScrSpecial_GetTrainerBattleMode(void);
 //u8 ScrSpecial_HasTrainerBeenFought(void);
 //void sub_808257C(void);

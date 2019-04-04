@@ -5,8 +5,8 @@
 #include "util.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA318[];
 extern const union AnimCmd *const gSpriteAnimTable_83D9BC8[];
@@ -43,8 +43,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9314[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9318 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837E04C,
     .anims = gSpriteAnimTable_83D9310,
     .images = NULL,
@@ -54,8 +54,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9318 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9330 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837E10C,
     .anims = gSpriteAnimTable_83D9314,
     .images = NULL,
@@ -65,8 +65,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9330 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9348 =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D9BC8,
     .images = NULL,
@@ -76,8 +76,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9348 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9360 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -87,8 +87,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9360 =
 
 const struct SpriteTemplate gSpriteTemplate_83D9378 =
 {
-    .tileTag = 10268,
-    .paletteTag = 10268,
+    .tileTag = ANIM_TAG_GLOWY_BLUE_ORB,
+    .paletteTag = ANIM_TAG_GLOWY_BLUE_ORB,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -159,8 +159,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9404[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9408 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D93A8,
     .images = NULL,
@@ -170,8 +170,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9408 =
 
 const struct SpriteTemplate gSpriteTemplate_83D9420 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF84,
     .anims = gSpriteAnimTable_83D93A8,
     .images = NULL,
@@ -181,8 +181,8 @@ const struct SpriteTemplate gSpriteTemplate_83D9420 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9438 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83D93B0,
     .images = NULL,
@@ -331,7 +331,7 @@ _080D3920:\n\
     movs r1, 0x4\n\
     orrs r0, r1\n\
     strb r0, [r2]\n\
-    ldr r0, _080D39A0 @ =gAnimBankAttacker\n\
+    ldr r0, _080D39A0 @ =gBattleAnimAttacker\n\
     ldrb r0, [r0]\n\
     bl GetBattlerSide\n\
     lsls r0, 24\n\
@@ -346,7 +346,7 @@ _080D3990: .4byte 0x00003f42\n\
 _080D3994: .4byte REG_BG1CNT\n\
 _080D3998: .4byte 0x040000d4\n\
 _080D399C: .4byte 0x85000400\n\
-_080D39A0: .4byte gAnimBankAttacker\n\
+_080D39A0: .4byte gBattleAnimAttacker\n\
 _080D39A4: .4byte gUnknown_08E70968\n\
 _080D39A8:\n\
     ldr r0, _080D39B4 @ =gUnknown_08E70C38\n\
@@ -454,7 +454,7 @@ _080D3A88: .4byte gBattle_BG1_X\n\
 _080D3A8C: .4byte 0x0000ffd0\n\
 _080D3A90: .4byte gBattle_BG1_Y\n\
 _080D3A94:\n\
-    ldr r0, _080D3AC4 @ =gAnimBankAttacker\n\
+    ldr r0, _080D3AC4 @ =gBattleAnimAttacker\n\
     ldrb r0, [r0]\n\
     bl GetBattlerSide\n\
     lsls r0, 24\n\
@@ -477,7 +477,7 @@ _080D3A94:\n\
     strh r1, [r7, 0xE]\n\
     b _080D3AEE\n\
     .align 2, 0\n\
-_080D3AC4: .4byte gAnimBankAttacker\n\
+_080D3AC4: .4byte gBattleAnimAttacker\n\
 _080D3AC8: .4byte 0x0000ff20\n\
 _080D3ACC: .4byte gBattle_BG1_X\n\
 _080D3AD0: .4byte gBattle_BG1_Y\n\

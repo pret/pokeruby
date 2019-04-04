@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D1C80(struct Sprite* sprite);
 
@@ -15,8 +15,8 @@ void sub_80D1C80(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7A80 =
 {
-    .tileTag = 10210,
-    .paletteTag = 10210,
+    .tileTag = ANIM_TAG_MAGENTA_HEART,
+    .paletteTag = ANIM_TAG_MAGENTA_HEART,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

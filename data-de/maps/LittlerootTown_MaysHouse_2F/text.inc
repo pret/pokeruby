@@ -37,7 +37,7 @@ LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
 	.string "Du...\p"
 	.string "Wer bist du denn?\p"
 	.string "Ach ja, du bist {PLAYER}, richtig?\n"
-	.string "Du bist nebenan eingezogen, stimmt’s?\p"
+	.string "Du bist nebenan eingezogen, stimmt's?\p"
 	.string "Ich wusste nicht, dass du ein Mädchen\n"
 	.string "bist.\p"
 	.string "Vater, PROF. BIRK, hat mir erzählt, dass\n"

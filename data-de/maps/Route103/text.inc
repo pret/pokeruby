@@ -1,10 +1,10 @@
 Route103_Text_16D57A:: @ 816D57A
-	.string "MAIKE: Mal seh’n... Das POKéMON von\n"
+	.string "MAIKE: Mal seh'n... Das POKéMON von\n"
 	.string "ROUTE 103 besitzt...$"
 
 Route103_Text_16D5B6:: @ 816D5B6
 	.string "Oh, hi {PLAYER}{KUN}!\p"
-	.string "...Oh... Ich seh’ schon. Mein Vater hat dir\n"
+	.string "...Oh... Ich seh' schon. Mein Vater hat dir\n"
 	.string "ein POKéMON geschenkt.\p"
 	.string "Wenn wir schon mal hier sind, lass uns\n"
 	.string "doch kämpfen!\p"

@@ -7,8 +7,8 @@
 #include "task.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern u16 gBattlerPartyIndexes[];
 extern u16 gAnimSpeciesByBanks[];
 extern u8 gUnknown_0202F7D2;
@@ -27,8 +27,8 @@ void sub_812AF30(u8 taskId)
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
 
-    sourcePan = BattleAnimAdjustPanning(-64);
-    targetPan = BattleAnimAdjustPanning(63);
+    sourcePan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
+    targetPan = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     panIncrement = CalculatePanIncrement(sourcePan, targetPan, 2);
 
     TASK.data[2] = sourcePan;
@@ -70,7 +70,7 @@ static void sub_812B004(u8 taskId)
     {
         TASK.data[10] = 0;
 
-        pan = BattleAnimAdjustPanning(63);
+        pan = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
         PlaySE12WithPanning(TASK.data[1], pan);
 
         if (++TASK.data[11] == 2)
@@ -145,7 +145,7 @@ static void sub_812B108(u8 taskId)
 void sub_812B18C(u8 taskId)
 {
     u16 species = 0;
-    s8 pan = BattleAnimAdjustPanning(-64);
+    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
 
     if (IsContest())
     {
@@ -158,13 +158,13 @@ void sub_812B18C(u8 taskId)
     {
         u8 bank;
         if (gBattleAnimArgs[0] == 0)
-            bank = gAnimBankAttacker;
+            bank = gBattleAnimAttacker;
         else if (gBattleAnimArgs[0] == 1)
-            bank = gAnimBankTarget;
+            bank = gBattleAnimTarget;
         else if (gBattleAnimArgs[0] == 2)
-            bank = gAnimBankAttacker ^ 0x2;
+            bank = gBattleAnimAttacker ^ 0x2;
         else
-            bank = gAnimBankTarget ^ 0x2;
+            bank = gBattleAnimTarget ^ 0x2;
 
         if (gBattleAnimArgs[0] == 1 || gBattleAnimArgs[0] == 3)
         {
@@ -197,12 +197,12 @@ void sub_812B18C(u8 taskId)
 void sub_812B2B8(u8 taskId)
 {
     u16 species;
-    s8 pan = BattleAnimAdjustPanning(-64);
+    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
 
     if (IsContest())
         species = shared19348.unk0;
     else
-        species = gAnimSpeciesByBanks[gAnimBankAttacker];
+        species = gAnimSpeciesByBanks[gBattleAnimAttacker];
 
     if (species != 0)
         PlayCry3(species, pan, 4);

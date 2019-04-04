@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CB94C(struct Sprite* sprite);
 void sub_80CBA28(struct Sprite* sprite);
@@ -48,8 +48,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6714[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D671C =
 {
-    .tileTag = 10224,
-    .paletteTag = 10224,
+    .tileTag = ANIM_TAG_ITEM_BAG,
+    .paletteTag = ANIM_TAG_ITEM_BAG,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83D66B8,
     .images = NULL,
@@ -57,10 +57,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D671C =
     .callback = sub_80CB94C,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6734 =
+const struct SpriteTemplate gFallingItemBagTemplate =
 {
-    .tileTag = 10224,
-    .paletteTag = 10224,
+    .tileTag = ANIM_TAG_ITEM_BAG,
+    .paletteTag = ANIM_TAG_ITEM_BAG,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83D66B8,
     .images = NULL,
@@ -150,9 +150,9 @@ void sub_80CB94C(struct Sprite* sprite)
     s16 e1;
     s16 e2;
     InitAnimSpritePos(sprite, 0);
-    e1 = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-    e2 = GetBattlerSpriteCoord(gAnimBankTarget, 1);
-    if ((gAnimBankAttacker ^ 2) == gAnimBankTarget)
+    e1 = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+    e2 = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+    if ((gBattleAnimAttacker ^ 2) == gBattleAnimTarget)
     {
         sprite->data[6] = e1;
         sprite->data[7] = e2 + 10;
@@ -193,8 +193,8 @@ void sub_80CB9C4(struct Sprite* sprite)
 
 void sub_80CBA28(struct Sprite* sprite)
 {
-    s16 e = GetBattlerSpriteCoord(gAnimBankTarget, 1);
-    if (GetBattlerSide(gAnimBankTarget) == 0)
+    s16 e = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+    if (GetBattlerSide(gBattleAnimTarget) == 0)
     {
         sprite->data[6] = 0;
         sprite->data[7] = e + 10;

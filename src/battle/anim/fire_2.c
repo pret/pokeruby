@@ -7,8 +7,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void AnimEmberFlare(struct Sprite *sprite);
 void sub_80D5210(struct Sprite *sprite);
@@ -45,8 +45,8 @@ const union AnimCmd *const gSpriteAnimTable_83D95E0[] =
 
 const struct SpriteTemplate gEmberSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -56,8 +56,8 @@ const struct SpriteTemplate gEmberSpriteTemplate =
 
 const struct SpriteTemplate gEmberFlareSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -67,8 +67,8 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9614 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -78,8 +78,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9614 =
 
 const struct SpriteTemplate gFireRingSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -119,8 +119,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9674[] =
 
 const struct SpriteTemplate gFireCrossSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9650,
     .images = NULL,
@@ -130,8 +130,8 @@ const struct SpriteTemplate gFireCrossSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9694 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -141,8 +141,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9694 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96AC =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -153,8 +153,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96AC =
 
 const struct SpriteTemplate gSpriteTemplate_83D96C4 =
 {
-    .tileTag = 10201,
-    .paletteTag = 10201,
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -175,8 +175,8 @@ const s16 gHeatedRockCoords[][2] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96F8 =
 {
-    .tileTag = 10201,
-    .paletteTag = 10201,
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -195,9 +195,9 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96F8 =
 // arg 6: ? (todo: something related to which mon the pixel offsets are based on)
 void AnimEmberFlare(struct Sprite *sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget)
-        && (gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
-            || gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+    if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget)
+        && (gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
+            || gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->callback = sub_8079534;
@@ -237,9 +237,9 @@ static void AnimFireRingStep1(struct Sprite *sprite)
     {
         sprite->data[0] = 0x19;
         sprite->data[1] = sprite->pos1.x;
-        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
         sprite->data[3] = sprite->pos1.y;
-        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
         InitAnimLinearTranslation(sprite);
 
@@ -253,8 +253,8 @@ static void AnimFireRingStep2(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
 
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
 
@@ -352,7 +352,7 @@ void sub_80D5470(u8 taskId) // initialize animation task for Move_ERUPTION?
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[4] = gSprites[task->data[15]].pos1.y;
-    task->data[5] = GetBattlerSide(gAnimBankAttacker);
+    task->data[5] = GetBattlerSide(gBattleAnimAttacker);
     task->data[6] = 0;
 
     sub_8078E70(task->data[15], 0);
@@ -478,7 +478,7 @@ static void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3)
     u16 y = sub_80D5940(spriteId);
     u16 x = gSprites[spriteId].pos1.x;
 
-    if(!GetBattlerSide(gAnimBankAttacker))
+    if(!GetBattlerSide(gBattleAnimAttacker))
     {
         x -= 0xC;
         sign = 1;
@@ -524,7 +524,7 @@ u16 sub_80D5940(u8 spriteId)
 {
     u16 var1 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y + gSprites[spriteId].centerToCornerVecY;
 
-    if (GetBattlerSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gBattleAnimAttacker) == 0)
     {
         var1 = ((var1 << 16) + 0x4A0000) >> 16;
     }

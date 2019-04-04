@@ -73,7 +73,7 @@ static const u8 *const sSSTidalBetaStrings[] =
 static const MainCallback gExitToOverworldFuncList[] =
 {
     sub_808B020,
-    c2_exit_to_overworld_2_switch,
+    CB2_ReturnToField,
     sub_810B96C,
 };
 
@@ -793,8 +793,8 @@ void ItemUseOutOfBattle_Berry(u8 taskId)
     {
         gFieldItemUseCallback = ItemUseOnFieldCB_Berry;
         gFieldCallback = ExecuteItemUseFromBlackPalette;
-        gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
-        gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
+        gTasks[taskId].data[8] = (u32)CB2_ReturnToField >> 16;
+        gTasks[taskId].data[9] = (u32)CB2_ReturnToField;
         gTasks[taskId].func = HandleItemMenuPaletteFade;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB(0, 0, 0));
     }

@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 static void sub_80D04E0(u8 taskId);
 void sub_80D0614(struct Task* task, u8 taskId);
@@ -27,7 +27,7 @@ void sub_80D0488(u8 taskId)
     task->data[4] = 0x100;
     task->data[5] = 0;
     task->data[6] = 0;
-    task->data[7] = sub_8079E90(gAnimBankAttacker);
+    task->data[7] = GetBattlerSubpriority(gBattleAnimAttacker);
     task->func = sub_80D04E0;
 }
 

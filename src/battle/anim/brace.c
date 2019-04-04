@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CDF0C(struct Sprite* sprite);
 static void sub_80CDF70(struct Sprite* sprite);
@@ -30,8 +30,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6E94[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_EndureFlame =
 {
-    .tileTag = 10184,
-    .paletteTag = 10184,
+    .tileTag = ANIM_TAG_FOCUS_ENERGY,
+    .paletteTag = ANIM_TAG_FOCUS_ENERGY,
     .oam = &gOamData_837DF74,
     .anims = gSpriteAnimTable_83D6E94,
     .images = NULL,
@@ -43,13 +43,13 @@ void sub_80CDF0C(struct Sprite* sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[2];
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[2];
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[2];
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[2];
     }
 
     sprite->data[0] = 0;

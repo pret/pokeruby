@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void AnimLeechSeed(struct Sprite* sprite);
 static void AnimLeechSeedStep(struct Sprite* sprite);
@@ -32,8 +32,8 @@ const union AnimCmd *const gSpriteAnimTable_83D63C0[] =
 
 const struct SpriteTemplate gLeechSeedSpriteTemplate =
 {
-    .tileTag = 10006,
-    .paletteTag = 10006,
+    .tileTag = ANIM_TAG_SEED,
+    .paletteTag = ANIM_TAG_SEED,
     .oam = &gOamData_837DF2C,
     .anims = gSpriteAnimTable_83D63C0,
     .images = NULL,
@@ -52,14 +52,14 @@ const struct SpriteTemplate gLeechSeedSpriteTemplate =
 void AnimLeechSeed(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimLeechSeedStep;

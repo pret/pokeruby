@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern const union AnimCmd *const gSpriteAnimTable_83D6424[];
 extern const union AnimCmd *const gSpriteAnimTable_83D6420[];
 
@@ -28,8 +28,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D68B4[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D68B8 =
 {
-    .tileTag = 10159,
-    .paletteTag = 10159,
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D6424,
     .images = NULL,
@@ -39,8 +39,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D68B8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D68D0 =
 {
-    .tileTag = 10159,
-    .paletteTag = 10159,
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83D6420,
     .images = NULL,
@@ -80,8 +80,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6938[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D693C =
 {
-    .tileTag = 10271,
-    .paletteTag = 10271,
+    .tileTag = ANIM_TAG_SPARKLE_6,
+    .paletteTag = ANIM_TAG_SPARKLE_6,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -91,8 +91,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D693C =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6954 =
 {
-    .tileTag = 10271,
-    .paletteTag = 10271,
+    .tileTag = ANIM_TAG_SPARKLE_6,
+    .paletteTag = ANIM_TAG_SPARKLE_6,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -102,8 +102,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6954 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D696C =
 {
-    .tileTag = 10271,
-    .paletteTag = 10271,
+    .tileTag = ANIM_TAG_SPARKLE_6,
+    .paletteTag = ANIM_TAG_SPARKLE_6,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -115,9 +115,9 @@ void sub_80CC474(struct Sprite* sprite)
 {
     u8 bank;
     if (!gBattleAnimArgs[6])
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     if (GetBattlerSide(bank) != 0)
     {
@@ -150,7 +150,7 @@ void sub_80CC474(struct Sprite* sprite)
         sprite->oam.priority = sub_8079ED4(bank);
         break;
     case 3:
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[0];
         GetAnimBattlerSpriteId(1);
         sprite->oam.priority = sub_8079ED4(bank) + 1;
         break;

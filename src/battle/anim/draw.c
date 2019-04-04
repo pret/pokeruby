@@ -6,8 +6,8 @@
 #include "scanline_effect.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG1_X;
@@ -21,8 +21,8 @@ static void sub_80D0E8C(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D77E0 =
 {
-    .tileTag = 10002,
-    .paletteTag = 10002,
+    .tileTag = ANIM_TAG_PENCIL,
+    .paletteTag = ANIM_TAG_PENCIL,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -36,15 +36,15 @@ void sub_80D0C88(u8 taskId)
     struct ScanlineEffectParams params;
 
     s16 i;
-    task->data[0] = sub_8077FC0(gAnimBankTarget) + 32;
+    task->data[0] = sub_8077FC0(gBattleAnimTarget) + 32;
     task->data[1] = 4;
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[4] = 0;
     task->data[5] = 0;
-    task->data[15] = sub_807A100(gAnimBankTarget, 0);
+    task->data[15] = sub_807A100(gBattleAnimTarget, 0);
 
-    if (GetBattlerPosition_permutated(gAnimBankTarget) == 1)
+    if (GetBattlerPosition_permutated(gBattleAnimTarget) == 1)
     {
         task->data[6] = gBattle_BG1_X;
         params.dmaDest = (u16 *)REG_ADDR_BG1HOFS;
@@ -120,15 +120,15 @@ static void sub_80D0D68(u8 taskId)
 
 void sub_80D0E30(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) - 16;
-    sprite->pos1.y = sub_8077FC0(gAnimBankTarget) + 16;
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) - 16;
+    sprite->pos1.y = sub_8077FC0(gBattleAnimTarget) + 16;
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
     sprite->data[3] = 16;
     sprite->data[4] = 0;
-    sprite->data[5] = sub_807A100(gAnimBankTarget, 0) + 2;
-    sprite->data[6] = BattleAnimAdjustPanning(0x3F);
+    sprite->data[5] = sub_807A100(gBattleAnimTarget, 0) + 2;
+    sprite->data[6] = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     sprite->callback = sub_80D0E8C;
 }
 

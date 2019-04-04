@@ -6,8 +6,8 @@
 #include "random.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D2A38(struct Sprite* sprite);
 
@@ -16,8 +16,8 @@ void sub_80D2A38(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7BD0 =
 {
-    .tileTag = 10219,
-    .paletteTag = 10219,
+    .tileTag = ANIM_TAG_PINK_HEART,
+    .paletteTag = ANIM_TAG_PINK_HEART,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

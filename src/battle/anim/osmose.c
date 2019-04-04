@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CB768(struct Sprite* sprite);
 
@@ -26,8 +26,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6694[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6698 =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D6694,
     .images = NULL,
@@ -39,8 +39,8 @@ void sub_80CB768(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
         sprite->data[1] = gBattleAnimArgs[2];
         sprite->data[2] = gBattleAnimArgs[3];
         sprite->data[3] = gBattleAnimArgs[4];

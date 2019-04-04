@@ -124,7 +124,7 @@ TrainerEyeDescription_24:
 	.string "Wir sind Senior und Junior$"
 	.string "im Studium der PKMN.$"
 TrainerEyeDescription_25:
-	.string "Los geht’s, meine Lieben!$"
+	.string "Los geht's, meine Lieben!$"
 	.string "Ich mag sie alle!$"
 	.string "Auch beim Einkaufen lasse$"
 	.string "ich keinen Kampf aus!$"

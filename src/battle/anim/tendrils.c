@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CB25C(struct Sprite* sprite);
 static void sub_80CB298(struct Sprite* sprite);
@@ -59,8 +59,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6598[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D65A0 =
 {
-    .tileTag = 10186,
-    .paletteTag = 10186,
+    .tileTag = ANIM_TAG_TENDRILS,
+    .paletteTag = ANIM_TAG_TENDRILS,
     .oam = &gOamData_837DFBC,
     .anims = gSpriteAnimTable_83D6550,
     .images = NULL,

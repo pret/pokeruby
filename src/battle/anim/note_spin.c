@@ -4,8 +4,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern const union AnimCmd *const gSpriteAnimTable_83D70D8[];
 
@@ -44,8 +44,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7D10[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7D1C =
 {
-    .tileTag = 10206,
-    .paletteTag = 10206,
+    .tileTag = ANIM_TAG_MUSIC_NOTES_2,
+    .paletteTag = ANIM_TAG_MUSIC_NOTES_2,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83D70D8,
     .images = NULL,
@@ -55,8 +55,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7D1C =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7D34 =
 {
-    .tileTag = 10206,
-    .paletteTag = 10206,
+    .tileTag = ANIM_TAG_MUSIC_NOTES_2,
+    .paletteTag = ANIM_TAG_MUSIC_NOTES_2,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83D70D8,
     .images = NULL,

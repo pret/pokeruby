@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80D1A70(struct Sprite* sprite);
 static void sub_80D15E0(u8 taskId);
@@ -40,8 +40,8 @@ const union AnimCmd *const gSpriteAnimTable_83D79E4[] =
 
 const struct SpriteTemplate gSpriteTemplate_83D79E8 =
 {
-    .tileTag = 10207,
-    .paletteTag = 10207,
+    .tileTag = ANIM_TAG_SPEED_DUST,
+    .paletteTag = ANIM_TAG_SPEED_DUST,
     .oam = &gOamData_837DF2C,
     .anims = gSpriteAnimTable_83D79E4,
     .images = NULL,
@@ -87,7 +87,7 @@ void sub_80D1638(u8 taskId)
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[12] = 3;
-    if (GetBattlerSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gBattleAnimTarget) == 0)
     {
         task->data[13] = 0xFFFF;
         task->data[14] = 8;
@@ -205,8 +205,8 @@ void sub_80D18D4(u8 taskId)
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[13] = 0;
-    task->data[14] = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
-    task->data[15] = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
+    task->data[14] = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+    task->data[15] = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     task->func = sub_80D1930;
 }
 

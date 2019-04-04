@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 void sub_80CFDFC(struct Sprite* sprite);
 static void sub_80CFE2C(struct Sprite* sprite);
@@ -17,8 +17,8 @@ static void sub_80CFE2C(struct Sprite* sprite);
 
 const struct SpriteTemplate gSpriteTemplate_83D75AC =
 {
-    .tileTag = 10178,
-    .paletteTag = 10178,
+    .tileTag = ANIM_TAG_UNUSED_VOID_LINES,
+    .paletteTag = ANIM_TAG_UNUSED_VOID_LINES,
     .oam = &gOamData_837E05C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

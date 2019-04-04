@@ -4,7 +4,7 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
+extern u8 gBattleAnimAttacker;
 
 void sub_80D4ED8(struct Sprite *sprite);
 void sub_80D4F18(struct Sprite *sprite);
@@ -38,8 +38,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9470[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9478 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9470,
     .images = NULL,
@@ -49,8 +49,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9478 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9490 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9470,
     .images = NULL,
@@ -105,8 +105,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9504[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9508 =
 {
-    .tileTag = 10033,
-    .paletteTag = 10033,
+    .tileTag = ANIM_TAG_FIRE,
+    .paletteTag = ANIM_TAG_FIRE,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83D94CC,
     .images = NULL,
@@ -116,8 +116,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9508 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9520 =
 {
-    .tileTag = 10033,
-    .paletteTag = 10033,
+    .tileTag = ANIM_TAG_FIRE,
+    .paletteTag = ANIM_TAG_FIRE,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D94CC,
     .images = NULL,
@@ -127,8 +127,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9520 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9538 =
 {
-    .tileTag = 10035,
-    .paletteTag = 10035,
+    .tileTag = ANIM_TAG_FIRE_PLUME,
+    .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D94E8,
     .images = NULL,
@@ -138,8 +138,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9538 =
 
 const struct SpriteTemplate gSpriteTemplate_83D9550 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D94E8,
     .images = NULL,
@@ -162,8 +162,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9578[] =
 
 const struct SpriteTemplate gSpriteTemplate_83D957C =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9578,
     .images = NULL,
@@ -202,7 +202,7 @@ void sub_80D4F5C(struct Sprite *sprite)
 {
     sub_8078650(sprite);
 
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -224,7 +224,7 @@ void sub_80D4F5C(struct Sprite *sprite)
 
 void sub_80D4FCC(struct Sprite *sprite)
 {
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -260,7 +260,7 @@ void sub_80D5074(struct Sprite *sprite)
 {
     sub_8078650(sprite);
 
-    if (GetBattlerSide(gAnimBankAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }

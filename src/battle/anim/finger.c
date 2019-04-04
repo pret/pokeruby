@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 
 extern void sub_80CEF44(u8 bank, struct Sprite* sprite);
 
@@ -59,8 +59,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D72C0[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D72C8 =
 {
-    .tileTag = 10064,
-    .paletteTag = 10064,
+    .tileTag = ANIM_TAG_FINGER,
+    .paletteTag = ANIM_TAG_FINGER,
     .oam = &gOamData_837DFF4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -70,8 +70,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D72C8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D72E0 =
 {
-    .tileTag = 10064,
-    .paletteTag = 10064,
+    .tileTag = ANIM_TAG_FINGER,
+    .paletteTag = ANIM_TAG_FINGER,
     .oam = &gOamData_837DF94,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -125,8 +125,8 @@ const union AnimCmd *const gSpriteAnimTable_83D7348[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7358 =
 {
-    .tileTag = 10214,
-    .paletteTag = 10214,
+    .tileTag = ANIM_TAG_FINGER_2,
+    .paletteTag = ANIM_TAG_FINGER_2,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D7348,
     .images = NULL,
@@ -138,9 +138,9 @@ void sub_80CF040(struct Sprite* sprite)
 {
     u8 bank;
     if (gBattleAnimArgs[0] == 0)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     sub_80CEF44(bank, sprite);
     sprite->data[0] = 0;
@@ -162,9 +162,9 @@ void sub_80CF0BC(struct Sprite* sprite)
 {
     u8 bank;
     if (gBattleAnimArgs[0] == 0)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     sprite->pos1.x = GetBattlerSpriteCoord(bank, 0);
     sprite->pos1.y = sub_807A100(bank, 2);
@@ -219,9 +219,9 @@ void sub_80CF1C8(struct Sprite* sprite)
 {
     u8 bank;
     if (gBattleAnimArgs[0] == 0)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     sub_80CEF44(bank, sprite);
     if (GetBattlerSide(bank) == 0)
