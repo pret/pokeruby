@@ -22,7 +22,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_1B2C95",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_VAR_6",
@@ -87,7 +87,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D0FE",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_VAR_4",
@@ -100,7 +100,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D0F5",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_VAR_4",
@@ -113,7 +113,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D107",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_OLD_WOMAN_2",
@@ -152,7 +152,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D174",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_POOCHYENA",
@@ -243,7 +243,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D174",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_POOCHYENA",
@@ -269,7 +269,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D174",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_POOCHYENA",
@@ -308,7 +308,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtChimney_EventScript_15D174",
-      "flag": "FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY"
+      "flag": "FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_POOCHYENA",
