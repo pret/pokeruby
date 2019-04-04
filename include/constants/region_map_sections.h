@@ -89,6 +89,6 @@
 #define MAPSEC_SKY_PILLAR            0x55
 #define MAPSEC_SECRET_BASE           0x56
 #define MAPSEC_DYNAMIC               0x57
-#define MAPSEC_NOTHING               0x58
+#define MAPSEC_NONE                  0x58
 
 #endif // GUARD_REGIONMAPSEC_H

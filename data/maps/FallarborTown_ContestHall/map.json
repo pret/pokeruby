@@ -1,0 +1,89 @@
+{
+  "id": "MAP_FALLARBOR_TOWN_CONTEST_HALL",
+  "name": "FallarborTown_ContestHall",
+  "layout": "LAYOUT_CONTEST_HALL",
+  "music": "MUS_CONLOBBY",
+  "region_map_section": "MAPSEC_FALLARBOR_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "x": 19,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 2,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FallarborTown_ContestHall_EventScript_153ACF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_7",
+      "x": 5,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 3,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FallarborTown_ContestHall_EventScript_153AD8",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_YOUNGSTER",
+      "x": 0,
+      "y": 15,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 3,
+      "movement_range_y": 3,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FallarborTown_ContestHall_EventScript_153AE1",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_FALLARBOR_TOWN_CONTEST_LOBBY",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 11,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_FALLARBOR_TOWN_CONTEST_LOBBY",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 14,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FallarborTown_ContestHall_EventScript_153AEA"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 14,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FallarborTown_ContestHall_EventScript_153AEA"
+    }
+  ]
+}

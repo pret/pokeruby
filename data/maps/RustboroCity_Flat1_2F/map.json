@@ -1,0 +1,39 @@
+{
+  "id": "MAP_RUSTBORO_CITY_FLAT1_2F",
+  "name": "RustboroCity_Flat1_2F",
+  "layout": "LAYOUT_RUSTBORO_CITY_FLAT1_2F",
+  "music": "MUS_GOTOWN",
+  "region_map_section": "MAPSEC_RUSTBORO_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "x": 8,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 3,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "RustboroCity_Flat1_2F_EventScript_157C73",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_RUSTBORO_CITY_FLAT1_1F",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

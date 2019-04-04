@@ -1,0 +1,132 @@
+{
+  "id": "MAP_MT_PYRE_2F",
+  "name": "MtPyre_2F",
+  "layout": "LAYOUT_MT_PYRE_2F",
+  "music": "MUS_M_DUNGON",
+  "region_map_section": "MAPSEC_MT_PYRE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "MtPyre_2F_EventScript_15D39B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 0,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_2F_EventScript_1B1933",
+      "flag": "FLAG_ITEM_MT_PYRE_2F_1"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_1",
+      "x": 5,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_2F_EventScript_15D389",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 7,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_2F_EventScript_15D392",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "x": 2,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_2F_EventScript_15D3CD",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_5",
+      "x": 3,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_2F_EventScript_15D3B2",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 2,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_1F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_3F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 10,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_3F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 6,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_3F",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 11,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_1F",
+      "dest_warp_id": 5
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

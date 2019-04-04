@@ -86,25 +86,7 @@ gCurrentActionFuncId = .; /* 2024A7F */
     . += 0x1;
 
 gBattleMons = .; /* 2024A80 */
-    . += 0xC;
-
-gUnknown_02024A8C = .; /* 2024A8C */
-    . += 0xC;
-
-gUnknown_02024A98 = .; /* 2024A98 */
-    . += 0xC;
-
-gUnknown_02024AA4 = .; /* 2024AA4 */
-    . += 0x4;
-
-gUnknown_02024AA8 = .; /* 2024AA8 */
-    . += 0x24;
-
-gUnknown_02024ACC = .; /* 2024ACC */
-    . += 0x4;
-
-gUnknown_02024AD0 = .; /* 2024AD0 */
-    . += 0x110;
+    . += 0x160;
 
 gBankSpriteIds = .; /* 2024BE0 */
     . += 0x4;
@@ -169,7 +151,7 @@ gBattlescriptCurrInstr = .; /* 2024C10 */
 gActionForBanks = .; /* 2024C18 */
     . += 0x4;
 
-gUnknown_02024C1C = .; /* 2024C1C */
+gSelectionBattleScripts = .; /* 2024C1C */
     . += 0x10;
 
 gUnknown_02024C2C = .; /* 2024C2C */
