@@ -82,7 +82,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	compare FACING, 2
 	call_if_eq MtChimney_EventScript_1B2D9E
 	removeobject 1
-	setflag FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY
+	setflag FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY
 	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	clearflag FLAG_HIDE_PROF_COSMO_FALLARBOR
 	setflag FLAG_HIDE_PROF_COSMO_METEOR_FALLS
