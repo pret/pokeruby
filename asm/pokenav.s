@@ -2789,6 +2789,4 @@ _080F6C1A:
 	bx r1
 	thumb_func_end sub_80F6AF0
 
-.section .text_80F708C
-
 	.align 2, 0 @ Don't pad with nop.
