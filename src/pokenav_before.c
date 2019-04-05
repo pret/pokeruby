@@ -8525,7 +8525,7 @@ static bool8 sub_80F4D88(void)
 
 void sub_80F4F78(void)
 {
-    sub_80F53EC(gPokenavStructPtr->unk9040, gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9]);
+    sub_80F53EC(gPokenavStructPtr->unk9004[3], gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9]);
     sub_80F5504();
 }
 
@@ -8539,7 +8539,7 @@ bool8 sub_80F4FB4(void)
 void sub_80F4FDC(void)
 {
     if (gPokenavStructPtr->unk76AA || gPokenavStructPtr->unk87DC != gPokenavStructPtr->unk8828)
-        sub_80F53EC(gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9], gPokenavStructPtr->unk9040);
+        sub_80F53EC(gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9], gPokenavStructPtr->unk9004[3]);
 }
 
 bool8 sub_80F5038(void)
