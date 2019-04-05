@@ -701,6 +701,7 @@ SECTIONS {
         src/easy_chat_2.o(.data);
         src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
+        src/trainers_eye.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_man.o(.rodata);
         src/mail.o(.rodata);
