@@ -1106,7 +1106,7 @@ void sub_80F01E0(u16 a)
     if (gPokenavStructPtr->unk76AA == 1)
     {
         Menu_PrintText(gPokenavStructPtr->unk88E9[a], 13, 3);
-        sub_80F443C(gPokenavStructPtr->unk8788, gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk2);
+        sub_80F443C(gPokenavStructPtr->unk8788, gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk2_5);
         Menu_PrintText(gPokenavStructPtr->unk8788, 1, 6);
     }
 }
@@ -1304,7 +1304,7 @@ void ShowMapNamePopUpWindow(void)
     switch (gPokenavStructPtr->unk87CA)
     {
     case 0:
-        sub_80F443C(gPokenavStructPtr->unk8788, gPokenavStructPtr->unk893c[gPokenavStructPtr->unk876E].unk2);
+        sub_80F443C(gPokenavStructPtr->unk8788, gPokenavStructPtr->unk893c[gPokenavStructPtr->unk876E].unk2_5);
         break;
     case 1:
         sub_80F445C(gPokenavStructPtr->unk8788, gPokenavStructPtr->unk876E + 1);
@@ -2214,7 +2214,7 @@ bool8 sub_80F1778(void)
 void sub_80F1934(void)
 {
     u8 *buffer = gPokenavStructPtr->unk8788;
-    if (gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk4)
+    if (gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk3_14)
     {
         u8 nature = GetNature(&gPlayerParty[sub_8137124(gPokenavStructPtr->unk87DC)]);
         buffer = StringCopy(buffer, gOtherText_Nature2);
@@ -4020,7 +4020,7 @@ void sub_80F3D00(void)
     u8 var1;
     struct UnkUsePokeblockSub *var0 = &gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC];
 
-    if (!var0->unk4)
+    if (!var0->unk3_14)
         return;
 
     var1 = gPokenavStructPtr->unk8931[gPokenavStructPtr->unk8fe9];
@@ -4552,7 +4552,7 @@ void SetMonMarkings(u16 box, u16 monIndex, u8 markings)
 void sub_80F45A0(s16 arg0, u8 arg1)
 {
     u8 box;
-    u8 var0 = gPokenavStructPtr->unk893c[arg0].unk4;
+    u8 var0 = gPokenavStructPtr->unk893c[arg0].unk3_14;
     if (var0)
     {
         sub_80F4428(gPokenavStructPtr->unk8829[arg1], arg0, 0);
@@ -4578,7 +4578,7 @@ void sub_80F468C(s16 arg0, u8 arg1)
     u16 box;
     u16 monIndex;
 
-    if (gPokenavStructPtr->unk893c[arg0].unk4)
+    if (gPokenavStructPtr->unk893c[arg0].unk3_14)
     {
         box = gPokenavStructPtr->unk893c[arg0].unk1;
         monIndex = gPokenavStructPtr->unk893c[arg0].partyIdx;
@@ -4614,7 +4614,7 @@ void sub_80F4824(s16 arg0, u8 arg1)
     u16 box;
     u16 monIndex;
 
-    if (gPokenavStructPtr->unk893c[arg0].unk4)
+    if (gPokenavStructPtr->unk893c[arg0].unk3_14)
     {
         box = gPokenavStructPtr->unk893c[arg0].unk1;
         monIndex = gPokenavStructPtr->unk893c[arg0].partyIdx;
@@ -4782,13 +4782,13 @@ void sub_80F49F4(void)
 {
     u16 i;
 
-    gPokenavStructPtr->unk893c[0].unk2 = 1;
+    gPokenavStructPtr->unk893c[0].unk2_5 = 1;
     for (i = 1; i < gPokenavStructPtr->unk8FE4; i++)
     {
         if (gPokenavStructPtr->unk893c[i].unk0 == gPokenavStructPtr->unk893c[i - 1].unk0)
-            gPokenavStructPtr->unk893c[i].unk2 = gPokenavStructPtr->unk893c[i - 1].unk2;
+            gPokenavStructPtr->unk893c[i].unk2_5 = gPokenavStructPtr->unk893c[i - 1].unk2_5;
         else
-            gPokenavStructPtr->unk893c[i].unk2 = i + 1;
+            gPokenavStructPtr->unk893c[i].unk2_5 = i + 1;
     }
 
     gPokenavStructPtr->unk876C = 0;
@@ -4841,16 +4841,16 @@ void sub_80F4BD0(void)
         {
             gPokenavStructPtr->unk893c[j].unk1 = 14;
             gPokenavStructPtr->unk893c[j].partyIdx = i;
-            gPokenavStructPtr->unk893c[j].unk2 = j + 1;
-            gPokenavStructPtr->unk893c[j].unk4 = 1;
+            gPokenavStructPtr->unk893c[j].unk2_5 = j + 1;
+            gPokenavStructPtr->unk893c[j].unk3_14 = 1;
             j++;
         }
     }
 
     gPokenavStructPtr->unk893c[j].unk1 = 0;
     gPokenavStructPtr->unk893c[j].partyIdx = 0;
-    gPokenavStructPtr->unk893c[j].unk2 = 0;
-    gPokenavStructPtr->unk893c[j].unk4 = 0;
+    gPokenavStructPtr->unk893c[j].unk2_5 = 0;
+    gPokenavStructPtr->unk893c[j].unk3_14 = 0;
     gPokenavStructPtr->unk87DC = 0;
     gPokenavStructPtr->unk87DA = j + 1;
     sub_80F4B20();
@@ -4888,7 +4888,7 @@ bool8 sub_80F4D88(void)
     switch (gPokenavStructPtr->unk8FE6)
     {
     default:
-        var0.unk4 = 1;
+        var0.unk3_14 = 1;
         for (i = 0; i < 15; i++)
         {
 
@@ -4916,7 +4916,7 @@ bool8 sub_80F4D88(void)
         }
         break;
     case 14:
-        var0.unk4 = 1;
+        var0.unk3_14 = 1;
         var0.unk1 = 14;
         for (i = 0; i < gPokenavStructPtr->unk8828; i++)
         {
@@ -4977,7 +4977,7 @@ void sub_80F5060(u8 arg0)
         var0 = gPokenavStructPtr->unk8FEA;
 
     sub_80F53EC(gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9], gPokenavStructPtr->unk9004[var0]);
-    var1 = gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk4;
+    var1 = gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk3_14;
     if (arg0)
     {
         gPokenavStructPtr->unk8FEB = gPokenavStructPtr->unk8FEA;
@@ -5007,7 +5007,7 @@ void sub_80F5060(u8 arg0)
                                      : 0;
     }
 
-    var2 = gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk4;
+    var2 = gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk3_14;
     if (!var1)
         gPokenavStructPtr->unk87E0 = sub_80F5264;
     else if (!var2)
@@ -5907,6 +5907,68 @@ bool8 sub_80F6250(void)
                 break;
             }
         }
+        gPokenavStructPtr->unk8FE6++;
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_80F638C(void)
+{
+    gPokenavStructPtr->unk8FE6 = 0;
+    gPokenavStructPtr->unk8FE7 = 0;
+    sub_80F492C();
+    if (gPokenavStructPtr->unk6DAC == 0)
+    {
+        while (sub_80F63D0())
+            ;
+    }
+}
+
+bool8 sub_80F63D0(void)
+{
+    struct UnkUsePokeblockSub sp0;
+    u8 ribbons;
+    u16 i;
+
+    switch (gPokenavStructPtr->unk8FE6)
+    {
+    default:
+        sp0.unk3_14 = 1;
+        for (i = 0; i < 15; i++)
+        {
+            ribbons = GetBoxMonData(&gPokemonStorage.boxes[gPokenavStructPtr->unk8FE6][gPokenavStructPtr->unk8FE7 + 0], MON_DATA_RIBBON_COUNT);
+            if (ribbons != 0)
+            {
+                sp0.unk1 = gPokenavStructPtr->unk8FE6;
+                sp0.partyIdx = gPokenavStructPtr->unk8FE7;
+                sp0.unk0 = ribbons;
+                sub_80F4944(&sp0);
+            }
+            if (++gPokenavStructPtr->unk8FE7 == 30)
+            {
+                gPokenavStructPtr->unk8FE7 = 0;
+                if (++gPokenavStructPtr->unk8FE6 == 14)
+                    break;
+            }
+        }
+        break;
+    case 15:
+        return FALSE;
+    case 14:
+        sp0.unk3_14 = 1;
+        sp0.unk1 = 14;
+        for (i = 0; i < 6; i++)
+        {
+            ribbons = GetMonData(&gPlayerParty[i], MON_DATA_RIBBON_COUNT);
+            if (ribbons != 0)
+            {
+                sp0.partyIdx = i;
+                sp0.unk0 = ribbons;
+                sub_80F4944(&sp0);
+            }
+        }
+        sub_80F49F4();
         gPokenavStructPtr->unk8FE6++;
         return FALSE;
     }
