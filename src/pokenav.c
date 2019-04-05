@@ -6073,3 +6073,76 @@ u8 * sub_80F6514(u8 * r10, u16 sp0, u8 sp4)
     }
     return dest;
 }
+
+extern const u16 gUnknown_083E499C[];
+
+void sub_80F66E0(void)
+{
+    u8 r9;
+    u32 r7;
+    u16 i, j;
+    u8 r2;
+    u8 r0;
+
+    sub_80F6514(gPokenavStructPtr->unk8829[0], gPokenavStructPtr->unk876E, 0);
+    sub_80F4824(gPokenavStructPtr->unk876E, 0);
+    gPokenavStructPtr->unk87DC = gPokenavStructPtr->unk876E;
+    gPokenavStructPtr->unkBC8E = 0;
+    r9 = 0;
+    r7 = sub_80F44B0(gPokenavStructPtr->unk893c[gPokenavStructPtr->unk876E].unk1, gPokenavStructPtr->unk893c[gPokenavStructPtr->unk876E].partyIdx, MON_DATA_RIBBONS, NULL);
+    gPokenavStructPtr->unkBC8F = 0;
+    for (i = 0; i < 17; i++)
+    {
+        switch (gUnknown_083E499C[i])
+        {
+        case MON_DATA_COOL_RIBBON:
+        case MON_DATA_BEAUTY_RIBBON:
+        case MON_DATA_CUTE_RIBBON:
+        case MON_DATA_SMART_RIBBON:
+        case MON_DATA_TOUGH_RIBBON:
+            r2 = r7 & 7;
+            r7 >>= 3;
+            r0 = 4;
+            break;
+        default:
+            r2 = r7 & 1;
+            r7 >>= 1;
+            r0 = 1;
+            break;
+        };
+        for (j = 0; j < r2; j++)
+        {
+            gPokenavStructPtr->unkBC4C[gPokenavStructPtr->unkBC8E++] = r9 + j;
+        }
+        if (r2 && r9 > 24)
+        {
+            gPokenavStructPtr->unkBC8F++;
+        }
+        r9 += r0;
+    }
+    if (gPokenavStructPtr->unkBC8E != gPokenavStructPtr->unkBC8F)
+    {
+        gPokenavStructPtr->unkBC90 = 0;
+        gPokenavStructPtr->unkBC91 = 0;
+    }
+    else
+    {
+        gPokenavStructPtr->unkBC90 = 0;
+        gPokenavStructPtr->unkBC91 = 3;
+    }
+    r2 = gPokenavStructPtr->unkBC8E - gPokenavStructPtr->unkBC8F;
+    for (i = 0; i < 3; i++)
+    {
+        if (r2 > 8)
+        {
+            gPokenavStructPtr->unkBC96[i] = 9;
+            r2 -= 9;
+        }
+        else
+        {
+            gPokenavStructPtr->unkBC96[i] = r2;
+            r2 = 0;
+        }
+    }
+    gPokenavStructPtr->unkBC96[i] = gPokenavStructPtr->unkBC8F;
+}
