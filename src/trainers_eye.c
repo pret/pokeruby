@@ -27,21 +27,23 @@ static const struct TrainersEyeGymLeadersAndE4 sGymLeaderTrainersEye[13] = {
     {TRAINER_STEVEN,        MAPSEC_EVER_GRANDE_CITY}
 };
 
+void sub_80F6E04(u8);
+
 void sub_80F6C20(void)
 {
     u16 i;
 
-    gUnknown_083DFEC4->unkD158 = 0;
+    gPokenavStructPtr->unkD158 = 0;
 
     for (i = 0; i < 56; i++)
     {
         if (HasTrainerAlreadyBeenFought(gTrainerEyeTrainers[i].opponentIDs[0]))
         {
-            gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk0 = gTrainerEyeTrainers[i].opponentIDs[0];
-            gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk4 = i;
-            gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk5 = gSaveBlock1.trainerRematches[i];
-            gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk2 = Overworld_GetMapHeaderByGroupAndId(gTrainerEyeTrainers[i].mapGroup, gTrainerEyeTrainers[i].mapNum)->regionMapSectionId;
-            gUnknown_083DFEC4->unkD158++;
+            gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].opponentId = gTrainerEyeTrainers[i].opponentIDs[0];
+            gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].rematchTableIdx = i;
+            gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].rematchNo = gSaveBlock1.trainerRematches[i];
+            gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(gTrainerEyeTrainers[i].mapGroup, gTrainerEyeTrainers[i].mapNum)->regionMapSectionId;
+            gPokenavStructPtr->unkD158++;
         }
     }
 
@@ -50,19 +52,29 @@ void sub_80F6C20(void)
         {
             if (HasTrainerAlreadyBeenFought(sGymLeaderTrainersEye[i].opponentId))
             {
-                gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk0 = sGymLeaderTrainersEye[i].opponentId;
-                gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk2 = sGymLeaderTrainersEye[i].regionMapSectionId;
-                gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk5 = 0;
-                gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unkD158].unk4 = i + 0x38;
-                gUnknown_083DFEC4->unkD158++;
+                gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].opponentId = sGymLeaderTrainersEye[i].opponentId;
+                gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].regionMapSectionId = sGymLeaderTrainersEye[i].regionMapSectionId;
+                gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].rematchNo = 0;
+                gPokenavStructPtr->trainersEye[gPokenavStructPtr->unkD158].rematchTableIdx = i + 0x38;
+                gPokenavStructPtr->unkD158++;
             }
         }
     }
 
-    gUnknown_083DFEC4->unk876C = 0;
-    gUnknown_083DFEC4->unk8770 = 0;
-    gUnknown_083DFEC4->unk876E = 0;
-    gUnknown_083DFEC4->unk8772 = gUnknown_083DFEC4->unkD158 <= 8 ? gUnknown_083DFEC4->unkD158 - 1 : 7;
-    gUnknown_083DFEC4->unk8774 = gUnknown_083DFEC4->unkD158 - 1;
-    gUnknown_083DFEC4->unk87C9 = gUnknown_083DFEC4->unk8774 < 8 ? 0 : 1;
+    gPokenavStructPtr->unk876C = 0;
+    gPokenavStructPtr->unk8770 = 0;
+    gPokenavStructPtr->unk876E = 0;
+    gPokenavStructPtr->unk8772 = gPokenavStructPtr->unkD158 <= 8 ? gPokenavStructPtr->unkD158 - 1 : 7;
+    gPokenavStructPtr->unk8774 = gPokenavStructPtr->unkD158 - 1;
+    gPokenavStructPtr->unk87C9 = gPokenavStructPtr->unk8774 < 8 ? 0 : 1;
+}
+
+void sub_80F6DB8(void)
+{
+    s32 r1 = 0;
+    gPokenavStructPtr->unk8fe9 = r1;
+    sub_80F6E04(0);
+    gPokenavStructPtr->unkD15A = -72;
+    sub_80F2F7C(0);
+    gPokenavStructPtr->unk87DC = gPokenavStructPtr->unk876E;
 }

@@ -9,16 +9,16 @@
 
 void sub_80F700C(u8 *arg0, u16 arg1)
 {
-    const struct Trainer *trainer = &gTrainers[gUnknown_083DFEC4->unkCEE8[arg1].unk0];
+    const struct Trainer *trainer = &gTrainers[gPokenavStructPtr->trainersEye[arg1].opponentId];
     u8 *ptr = arg0;
 
     ptr = arg0;
-    if (arg1 < gUnknown_083DFEC4->unkD158)
+    if (arg1 < gPokenavStructPtr->unkD158)
     {
 #if ENGLISH
         ptr = StringCopy(ptr, gTrainerClassNames[trainer->trainerClass]);
 #elif GERMAN
-        ptr = StringCopy(ptr, de_sub_8041024(0, gUnknown_083DFEC4->unkCEE8[arg1].unk0));
+        ptr = StringCopy(ptr, de_sub_8041024(0, gPokenavStructPtr->trainersEye[arg1].opponentId));
 #endif
 
         ptr[0] = EXT_CTRL_CODE_BEGIN;

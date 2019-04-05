@@ -5,41 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80F6DB8
-sub_80F6DB8: @ 80F6DB8
-	push {r4,lr}
-	movs r1, 0
-	ldr r0, _080F6DEC @ =gUnknown_083DFEC4
-	ldr r4, [r0]
-	ldr r2, _080F6DF0 @ =0x00008fe9
-	adds r0, r4, r2
-	strb r1, [r0]
-	movs r0, 0
-	bl sub_80F6E04
-	ldr r0, _080F6DF4 @ =0x0000d15a
-	adds r1, r4, r0
-	ldr r0, _080F6DF8 @ =0x0000ffb8
-	strh r0, [r1]
-	movs r0, 0
-	bl sub_80F2F7C
-	ldr r1, _080F6DFC @ =0x0000876e
-	adds r0, r4, r1
-	ldrh r0, [r0]
-	ldr r2, _080F6E00 @ =0x000087dc
-	adds r4, r2
-	strh r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080F6DEC: .4byte gUnknown_083DFEC4
-_080F6DF0: .4byte 0x00008fe9
-_080F6DF4: .4byte 0x0000d15a
-_080F6DF8: .4byte 0x0000ffb8
-_080F6DFC: .4byte 0x0000876e
-_080F6E00: .4byte 0x000087dc
-	thumb_func_end sub_80F6DB8
-
 	thumb_func_start sub_80F6E04
 sub_80F6E04: @ 80F6E04
 	push {r4-r7,lr}
@@ -49,7 +14,7 @@ sub_80F6E04: @ 80F6E04
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F6E78 @ =gUnknown_083DFEC4
+	ldr r0, _080F6E78 @ =gPokenavStructPtr
 	ldr r5, [r0]
 	ldr r1, _080F6E7C @ =0x0000876e
 	adds r0, r5, r1
@@ -99,7 +64,7 @@ sub_80F6E04: @ 80F6E04
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6E78: .4byte gUnknown_083DFEC4
+_080F6E78: .4byte gPokenavStructPtr
 _080F6E7C: .4byte 0x0000876e
 _080F6E80: .4byte 0x0000cee8
 _080F6E84: .4byte gTrainers
@@ -113,7 +78,7 @@ _080F6E98: .4byte gTrainerFrontPicPaletteTable
 	thumb_func_start sub_80F6E9C
 sub_80F6E9C: @ 80F6E9C
 	push {lr}
-	ldr r0, _080F6EB4 @ =gUnknown_083DFEC4
+	ldr r0, _080F6EB4 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r2, _080F6EB8 @ =0x0000d15a
 	adds r1, r0, r2
@@ -125,7 +90,7 @@ sub_80F6E9C: @ 80F6E9C
 	movs r0, 0
 	b _080F6ED0
 	.align 2, 0
-_080F6EB4: .4byte gUnknown_083DFEC4
+_080F6EB4: .4byte gPokenavStructPtr
 _080F6EB8: .4byte 0x0000d15a
 _080F6EBC:
 	adds r0, r2, 0
@@ -147,7 +112,7 @@ _080F6ED0:
 	thumb_func_start sub_80F6ED4
 sub_80F6ED4: @ 80F6ED4
 	push {lr}
-	ldr r0, _080F6F00 @ =gUnknown_083DFEC4
+	ldr r0, _080F6F00 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r2, _080F6F04 @ =0x0000d15a
 	adds r1, r0, r2
@@ -168,7 +133,7 @@ sub_80F6ED4: @ 80F6ED4
 	movs r0, 0x1
 	b _080F6F0C
 	.align 2, 0
-_080F6F00: .4byte gUnknown_083DFEC4
+_080F6F00: .4byte gPokenavStructPtr
 _080F6F04: .4byte 0x0000d15a
 _080F6F08:
 	strh r2, [r1]
@@ -182,7 +147,7 @@ _080F6F0C:
 	thumb_func_start sub_80F6F10
 sub_80F6F10: @ 80F6F10
 	push {lr}
-	ldr r0, _080F6F48 @ =gUnknown_083DFEC4
+	ldr r0, _080F6F48 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r2, _080F6F4C @ =0x0000d15e
 	adds r1, r0, r2
@@ -209,7 +174,7 @@ sub_80F6F10: @ 80F6F10
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6F48: .4byte gUnknown_083DFEC4
+_080F6F48: .4byte gPokenavStructPtr
 _080F6F4C: .4byte 0x0000d15e
 _080F6F50: .4byte 0x0000d15f
 _080F6F54: .4byte REG_BLDCNT
@@ -221,7 +186,7 @@ _080F6F60: .4byte 0x00001f1f
 	thumb_func_start sub_80F6F64
 sub_80F6F64: @ 80F6F64
 	push {lr}
-	ldr r0, _080F6F9C @ =gUnknown_083DFEC4
+	ldr r0, _080F6F9C @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F6FA0 @ =0x0000d15e
 	adds r2, r1, r0
@@ -248,7 +213,7 @@ sub_80F6F64: @ 80F6F64
 	strh r0, [r1]
 	b _080F6FB0
 	.align 2, 0
-_080F6F9C: .4byte gUnknown_083DFEC4
+_080F6F9C: .4byte gPokenavStructPtr
 _080F6FA0: .4byte 0x0000d15e
 _080F6FA4: .4byte 0x0000d15f
 _080F6FA8: .4byte REG_BLDY
