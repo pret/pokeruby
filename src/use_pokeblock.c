@@ -549,8 +549,8 @@ static void sub_81369CC(void)
             break;
         case 2:
             sub_8136EF0();
-            sub_80F567C(gUnknown_02039304->unk5c, gPokenavStructPtr->unk9040);
-            sub_80F5550(gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9], gPokenavStructPtr->unk9040);
+            sub_80F567C(gUnknown_02039304->unk5c, gPokenavStructPtr->unk9004[3]);
+            sub_80F5550(gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9], gPokenavStructPtr->unk9004[3]);
             sub_8137138();
             gUnknown_02039304->unk50++;
             break;
