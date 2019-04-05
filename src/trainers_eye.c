@@ -35,7 +35,6 @@ static const struct TrainersEyeGymLeadersAndE4 sGymLeaderTrainersEye[13] = {
 };
 
 void sub_80F6E04(u8);
-void sub_80F6FB8(bool8);
 
 void sub_80F6C20(void)
 {
