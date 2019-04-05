@@ -365,10 +365,54 @@ void sub_80F58DC(struct UnkPokenav11 * a0)
         gPokenavStructPtr->unk9130[i - 56][0] = 0;
         gPokenavStructPtr->unk9130[i - 56][1] = 0;
     }
-//
+
 //    for (i = 56; i < 122; i++)
 //    {
 //        if (gPokenavStructPtr->unk9130[i - 56][0] == 0 && gPokenavStructPtr->unk9130[i - 56][1] != 0)
 //            gPokenavStructPtr->unk9130[i - 56][0] = 155;
 //    }
 }
+
+void sub_80F5A1C(struct UnkPokenav11 *arg0)
+{
+    u16 i, r6, varMax;
+
+    if (arg0[0].unk2 < arg0[4].unk2)
+    {
+        r6 = arg0[0].unk2;
+        sub_80F5688(gPokenavStructPtr->unk9238, &arg0[0], &arg0[4], 0, NULL);
+    }
+    else
+    {
+        r6 = arg0[4].unk2;
+        sub_80F5688(gPokenavStructPtr->unk9238, &arg0[4], &arg0[0], 1, NULL);
+    }
+
+    sub_80F5688(gPokenavStructPtr->unk9238, &arg0[4], &arg0[3], 0, NULL);
+
+    for (i = 56; i < r6; i++)
+    {
+        gPokenavStructPtr->unk9238[i - 56][0] = 0;
+        gPokenavStructPtr->unk9238[i - 56][1] = 0;
+    }
+
+    for (i = arg0[0].unk2; i <= gPokenavStructPtr->unk9340; i++)
+        gPokenavStructPtr->unk9238[i - 56][1] = 155;
+
+    varMax = max(gPokenavStructPtr->unk9340, arg0[3].unk2 + 1);
+    for (i = varMax; i < 122; i++)
+    {
+        gPokenavStructPtr->unk9238[i - 56][0] = 0;
+        gPokenavStructPtr->unk9238[i - 56][1] = 0;
+    }
+
+//    for (i = 0; i < 66; i++)
+//    {
+//        if (gPokenavStructPtr->unk9238[i][0] >= gPokenavStructPtr->unk9238[i][1])
+//        {
+//            gPokenavStructPtr->unk9238[i][1] = 0;
+//            gPokenavStructPtr->unk9238[i][0] = 0;
+//        }
+//    }
+}
+
