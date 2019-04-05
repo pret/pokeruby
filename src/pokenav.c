@@ -4523,7 +4523,7 @@ u8 *sub_80F445C(u8 *arg0, u16 arg1)
     return buffer;
 }
 
-u32 sub_80F44B0(u16 box, u16 monIndex, int monDataField, int *text)
+u32 sub_80F44B0(u16 box, u16 monIndex, int monDataField, u8 *text)
 {
     if (box == 14)
     {
@@ -5973,4 +5973,103 @@ bool8 sub_80F63D0(void)
         return FALSE;
     }
     return TRUE;
+}
+
+u8 * sub_80F6514(u8 * r10, u16 sp0, u8 sp4)
+{
+    u8 * dest = r10;
+    u8 box = gPokenavStructPtr->unk893c[sp0].unk1;
+    u8 monNo = gPokenavStructPtr->unk893c[sp0].partyIdx;
+    u16 species;
+    u16 level;
+    u8 gender;
+
+    if (!sub_80F44B0(box, monNo, MON_DATA_IS_EGG, NULL))
+    {
+        sub_80F44B0(box, monNo, MON_DATA_NICKNAME, dest);
+        StringGetEnd10(dest);
+        species = sub_80F44B0(box, monNo, MON_DATA_SPECIES, NULL);
+        if (box == 14)
+        {
+            level = GetMonData(&gPlayerParty[monNo], MON_DATA_LEVEL);
+            gender = GetMonGender(&gPlayerParty[monNo]);
+        }
+        else
+        {
+            level = GetLevelFromBoxMonExp(&gPokemonStorage.boxes[box][monNo]);
+            gender = GetGenderFromSpeciesAndPersonality(species, sub_80F44B0(box, monNo, MON_DATA_PERSONALITY, NULL));
+        }
+        if (ShouldHideGenderIcon(species, r10))
+        {
+            gender = MON_GENDERLESS;
+        }
+        dest += StringLength(dest);
+
+        dest[0] = 0xFC;
+        dest[1] = 0x13;
+        dest[2] = 0x3F;
+        dest += 3;
+
+        switch (gender)
+        {
+        case MON_MALE:
+            dest[0] = 0xFC;
+            dest[1] = 0x01;
+            dest[2] = 0x0C;
+            dest[3] = 0xFC;
+            dest[4] = 0x03;
+            dest[5] = 0x0D;
+            dest[6] = 0xB5;
+            dest += 7;
+            break;
+        case MON_FEMALE:
+            dest[0] = 0xFC;
+            dest[1] = 0x01;
+            dest[2] = 0x0A;
+            dest[3] = 0xFC;
+            dest[4] = 0x03;
+            dest[5] = 0x0B;
+            dest[6] = 0xB6;
+            dest += 7;
+            break;
+        }
+        dest[0] = 0xFC;
+        dest[1] = 0x01;
+        dest[2] = 0x01;
+        dest[3] = 0xFC;
+        dest[4] = 0x03;
+        dest[5] = 0x05;
+        dest += 6;
+
+        dest[0] = 0xFC;
+        dest[1] = 0x13;
+        dest[2] = 0x46;
+        dest += 3;
+
+        dest[0] = 0xBA;
+        dest[1] = 0xFC;
+        dest[2] = 0x11;
+        dest[3] = 0x01;
+        dest[4] = 0x34;
+        dest += 5;
+
+        dest = ConvertIntToDecimalString(dest, level);
+        if (sp4 == 1)
+        {
+            dest = AlignInt1InMenuWindow(dest, gPokenavStructPtr->unk893c[sp0].unk0, 0x80, 0x01);
+        }
+        else
+        {
+            dest[0] = 0xFC;
+            dest[1] = 0x13;
+            dest[2] = 0x67;
+            dest += 3;
+            *dest = EOS;
+        }
+    }
+    else
+    {
+        *dest = EOS;
+    }
+    return dest;
 }
