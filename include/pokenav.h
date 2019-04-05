@@ -38,9 +38,9 @@ struct UnkPokenavStruct_Sub3 {
 struct UnkUsePokeblockSub {
     /*0x0*/ u8 unk0;
     /*0x1*/ u8 unk1;
-    /*0x2*/ u8 partyIdx:5;
-    /*0x2*/ u16 unk2:9;
-    /*0x3*/ u8 unk4:1;
+    /*0x2*/ u16 partyIdx:5;
+    /*0x2*/ u16 unk2_5:9;
+    /*0x3*/ u16 unk3_14:1;
 };
 
 struct UnkPokenav11 {
