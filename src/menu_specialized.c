@@ -1,4 +1,5 @@
 #include "global.h"
+#include "scanline_effect.h"
 #include "pokenav.h"
 
 /* TODO
@@ -414,5 +415,45 @@ void sub_80F5A1C(struct UnkPokenav11 *arg0)
 //            gPokenavStructPtr->unk9238[i][0] = 0;
 //        }
 //    }
+}
+
+void sub_80F5B38(void)
+{
+    gPokenavStructPtr->unk9345 = 0;
+}
+
+extern const struct ScanlineEffectParams gUnknown_083E4990;
+
+bool8 sub_80F5B50(void)
+{
+    s32 i;
+    struct ScanlineEffectParams params;
+
+    switch (gPokenavStructPtr->unk9345)
+    {
+    case 0:
+        ScanlineEffect_Clear();
+        for (i = 0; i < 16; i++)
+        {
+            gScanlineEffectRegBuffers[0][16 + 2 * i] = 0xEF;
+            gScanlineEffectRegBuffers[0][17 + 2 * i] = 0xEF;
+            gScanlineEffectRegBuffers[1][16 + 2 * i] = 0xEF;
+            gScanlineEffectRegBuffers[1][17 + 2 * i] = 0xEF;
+        }
+        gPokenavStructPtr->unk9345++;
+        return TRUE;
+    case 1:
+        params = gUnknown_083E4990;
+        ScanlineEffect_SetParams(params);
+        gPokenavStructPtr->unk9345++;
+        break;
+    }
+    return FALSE;
+}
+
+void sub_80F5BDC(void)
+{
+    gScanlineEffect.state = 3;
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
