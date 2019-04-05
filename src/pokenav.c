@@ -5862,3 +5862,53 @@ void sub_80F6208(void)
             ;
     }
 }
+
+bool8 sub_80F6250(void)
+{
+    u16 i;
+
+    if (gPokenavStructPtr->unk8FE8 != -1)
+        return FALSE;
+
+    switch (gPokenavStructPtr->unk8FE6)
+    {
+    default:
+        for (i = 0; i < 10; i++)
+        {
+            if (GetBoxMonData(&gPokemonStorage.boxes[gPokenavStructPtr->unk8FE6 + 0][gPokenavStructPtr->unk8FE7], MON_DATA_RIBBON_COUNT) != 0)
+            {
+                gPokenavStructPtr->unk8FE8 = 1;
+                return FALSE;
+            }
+            if (GetBoxMonData(&gPokemonStorage.boxes[gPokenavStructPtr->unk8FE6 + 7][gPokenavStructPtr->unk8FE7], MON_DATA_RIBBON_COUNT) != 0)
+            {
+                gPokenavStructPtr->unk8FE8 = 1;
+                return FALSE;
+            }
+            if (++gPokenavStructPtr->unk8FE7 >= 30)
+            {
+                gPokenavStructPtr->unk8FE7 = 0;
+                if (++gPokenavStructPtr->unk8FE6 >= 7)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+    case 8:
+        return FALSE;
+    case 7:
+        gPokenavStructPtr->unk8FE8 = 0;
+        for (i = 0; i < 6; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_RIBBON_COUNT) != 0)
+            {
+                gPokenavStructPtr->unk8FE8 = 1;
+                break;
+            }
+        }
+        gPokenavStructPtr->unk8FE6++;
+        return FALSE;
+    }
+    return TRUE;
+}
