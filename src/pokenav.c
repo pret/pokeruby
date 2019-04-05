@@ -16,7 +16,7 @@ EWRAM_DATA u16 gUnknown_020388B4 = 0;
 
 // .rodata
 
-struct UnkPokenavStruct *const gUnknown_083DFEC4 = (struct UnkPokenavStruct *)gSharedMem;
+struct UnkPokenavStruct *const gPokenavStructPtr = (struct UnkPokenavStruct *)gSharedMem;
 
 extern const u8 gUnknown_083E4890[];
 

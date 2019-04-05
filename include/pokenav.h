@@ -5,11 +5,11 @@
 #include "region_map.h"
 #include "mon_markings.h"
 
-struct UnkPokenavStruct_Sub {
-    /*0x0*/ u16 unk0;
-    /*0x2*/ u16 unk2;
-    /*0x4*/ u8 unk4;
-    /*0x5*/ u8 unk5;
+struct TrainersEyeStruct {
+    /*0x0*/ u16 opponentId;
+    /*0x2*/ u16 regionMapSectionId;
+    /*0x4*/ u8 rematchTableIdx;
+    /*0x5*/ u8 rematchNo;
 };
 
 struct UnkPokenavStruct_Sub1 {
@@ -114,7 +114,7 @@ struct UnkPokenavStruct {
     /*0x877C*/ s16 unk877C;
     /*0x877E*/ u16 unk877E;
     /*0x8780*/ u16 unk8780;
-    /*0x8782*/ u8 filler8782[0x2];
+    /*0x8782*/ u16 unk8782;
     /*0x8784*/ u16 unk8784;
     /*0x8786*/ u16 unk8786;
     /*0x8788*/ u8 unk8788[0x40];
@@ -125,11 +125,9 @@ struct UnkPokenavStruct {
     /*0x87CC*/ struct Sprite *unk87CC;
     /*0x87D0*/ struct Sprite *unk87D0[2];
     /*0x87D8*/ u8 unk87D8;
-    /*0x87D9*/ u8 filler87D9[0x1];
     /*0x87DA*/ s16 unk87DA;
     /*0x87DC*/ s16 unk87DC;
     /*0x87DE*/ u8 unk87DE;
-    /*0x87DF*/ u8 filler87DF[0x1];
     /*0x87E0*/ bool8 (*unk87E0)(void);
     /*0x87E4*/ struct Sprite *unk87E4[7];
     /*0x8800*/ struct Sprite *unk8800[10];
@@ -143,12 +141,11 @@ struct UnkPokenavStruct {
     /*0x8FE4*/ u16 unk8FE4;
     /*0x8FE6*/ u8 unk8FE6;
     /*0x8FE7*/ u8 unk8FE7;
-    /*0x8FE8*/ u8 filler8FE8[0x1];
+    /*0x8FE8*/ u8 unk8FE8;
     /*0x8fe9*/ s8 unk8fe9;
     /*0x8fea*/ s8 unk8FEA;
     /*0x8feb*/ s8 unk8FEB;
     /*0x8fec*/ s8 unk8FEC;
-    /*0x8FED*/ u8 filler8FED[0x1];
     /*0x8fee*/ u16 unk8FEE;
     /*0x8ff0*/ u8 unk8ff0[4][5];
     /*0x9004*/ struct UnkPokenav11 unk9004[3][5];
@@ -183,7 +180,7 @@ struct UnkPokenavStruct {
     /*0xCE8E*/ u16 palettesCE8E[0x21];
     /*0xCED0*/ struct Sprite *unkCED0;
     /*0xCED4*/ struct Sprite *unkCED4[5];
-    /*0xCEE8*/ struct UnkPokenavStruct_Sub unkCEE8[69];
+    /*0xCEE8*/ struct TrainersEyeStruct trainersEye[69];
     /*0xD110*/ const u8 *trainerEyeDescriptionLines[4];
     /*0xD120*/ u8 fillerD114[0x18];
     /*0xD138*/ u8 unkD138[0x20];
@@ -203,7 +200,7 @@ struct UnkPokenavStruct {
     /*0x131E4*/ u8 unk131E4[0x1000];
 };
 
-extern struct UnkPokenavStruct *const gUnknown_083DFEC4;
+extern struct UnkPokenavStruct *const gPokenavStructPtr;
 
 bool8 sub_80F170C(void);
 bool8 sub_80F1778(void);
@@ -231,5 +228,6 @@ void sub_80F5550(struct UnkPokenav11*, struct UnkPokenav11*);
 bool8 sub_80F555C(void);
 void sub_80F7224(u8);
 void sub_80F5BDC(void);
+void sub_80F2F7C(u8 arg0);
 
 #endif // GUARD_POKENAV_H

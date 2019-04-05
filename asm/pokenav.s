@@ -149,7 +149,7 @@ _080F5772:
 	cmp r4, r10
 	ble _080F5772
 _080F5798:
-	ldr r1, _080F57DC @ =gUnknown_083DFEC4
+	ldr r1, _080F57DC @ =gPokenavStructPtr
 	ldr r0, [r1]
 	ldr r2, [sp, 0x4]
 	adds r1, r2, r5
@@ -185,7 +185,7 @@ _080F57D4:
 	b _080F58C4
 	.align 2, 0
 _080F57D8: .4byte 0x00026bff
-_080F57DC: .4byte gUnknown_083DFEC4
+_080F57DC: .4byte gPokenavStructPtr
 _080F57E0: .4byte 0x00009340
 _080F57E4:
 	ldr r1, [sp, 0x8]
@@ -238,7 +238,7 @@ _080F5838:
 	movs r0, 0x9B
 	strh r0, [r3]
 _080F5842:
-	ldr r2, _080F5888 @ =gUnknown_083DFEC4
+	ldr r2, _080F5888 @ =gPokenavStructPtr
 	ldr r0, [r2]
 	ldr r3, [sp, 0x4]
 	adds r1, r3, r5
@@ -274,10 +274,10 @@ _080F587E:
 	b _080F58C4
 	.align 2, 0
 _080F5884: .4byte 0x00026bff
-_080F5888: .4byte gUnknown_083DFEC4
+_080F5888: .4byte gPokenavStructPtr
 _080F588C: .4byte 0x00009340
 _080F5890:
-	ldr r0, _080F58BC @ =gUnknown_083DFEC4
+	ldr r0, _080F58BC @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r1, _080F58C0 @ =0x00009340
 	adds r0, r1
@@ -299,7 +299,7 @@ _080F5890:
 	strh r0, [r7, 0x2]
 	b _080F58CC
 	.align 2, 0
-_080F58BC: .4byte gUnknown_083DFEC4
+_080F58BC: .4byte gPokenavStructPtr
 _080F58C0: .4byte 0x00009340
 _080F58C4:
 	add r0, r12
@@ -330,7 +330,7 @@ sub_80F58DC: @ 80F58DC
 	bcs _080F5914
 	adds r4, r0, 0
 	mov r8, r4
-	ldr r0, _080F590C @ =gUnknown_083DFEC4
+	ldr r0, _080F590C @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r1, _080F5910 @ =0x00009130
 	adds r0, r1
@@ -343,12 +343,12 @@ sub_80F58DC: @ 80F58DC
 	bl sub_80F5688
 	b _080F5930
 	.align 2, 0
-_080F590C: .4byte gUnknown_083DFEC4
+_080F590C: .4byte gPokenavStructPtr
 _080F5910: .4byte 0x00009130
 _080F5914:
 	ldrh r4, [r5, 0x6]
 	mov r8, r4
-	ldr r0, _080F5A08 @ =gUnknown_083DFEC4
+	ldr r0, _080F5A08 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r1, _080F5A0C @ =0x00009130
 	adds r0, r1
@@ -361,7 +361,7 @@ _080F5914:
 	bl sub_80F5688
 _080F5930:
 	adds r1, r4, 0
-	ldr r0, _080F5A08 @ =gUnknown_083DFEC4
+	ldr r0, _080F5A08 @ =gPokenavStructPtr
 	ldr r6, [r0]
 	ldr r0, _080F5A0C @ =0x00009130
 	adds r4, r6, r0
@@ -410,7 +410,7 @@ _080F5978:
 	bcc _080F5978
 _080F5990:
 	ldrh r2, [r5, 0x2]
-	ldr r0, _080F5A08 @ =gUnknown_083DFEC4
+	ldr r0, _080F5A08 @ =gPokenavStructPtr
 	ldr r3, [r0]
 	ldr r4, _080F5A18 @ =0x00009340
 	adds r1, r3, r4
@@ -474,7 +474,7 @@ _080F59FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5A08: .4byte gUnknown_083DFEC4
+_080F5A08: .4byte gPokenavStructPtr
 _080F5A0C: .4byte 0x00009130
 _080F5A10: .4byte 0x00009238
 _080F5A14: .4byte 0x00009132
@@ -493,7 +493,7 @@ sub_80F5A1C: @ 80F5A1C
 	cmp r0, r1
 	bcs _080F5A54
 	adds r7, r0, 0
-	ldr r0, _080F5A4C @ =gUnknown_083DFEC4
+	ldr r0, _080F5A4C @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r2, _080F5A50 @ =0x00009238
 	adds r0, r2
@@ -507,11 +507,11 @@ sub_80F5A1C: @ 80F5A1C
 	bl sub_80F5688
 	b _080F5A70
 	.align 2, 0
-_080F5A4C: .4byte gUnknown_083DFEC4
+_080F5A4C: .4byte gPokenavStructPtr
 _080F5A50: .4byte 0x00009238
 _080F5A54:
 	ldrh r7, [r5, 0x12]
-	ldr r0, _080F5B28 @ =gUnknown_083DFEC4
+	ldr r0, _080F5B28 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r4, _080F5B2C @ =0x00009238
 	adds r0, r4
@@ -525,7 +525,7 @@ _080F5A54:
 	bl sub_80F5688
 _080F5A70:
 	adds r1, r4, 0
-	ldr r0, _080F5B28 @ =gUnknown_083DFEC4
+	ldr r0, _080F5B28 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	mov r8, r0
 	ldr r4, _080F5B2C @ =0x00009238
@@ -559,7 +559,7 @@ _080F5A9A:
 	bcc _080F5A9A
 _080F5AB2:
 	ldrh r2, [r5, 0x2]
-	ldr r0, _080F5B28 @ =gUnknown_083DFEC4
+	ldr r0, _080F5B28 @ =gPokenavStructPtr
 	ldr r3, [r0]
 	ldr r4, _080F5B34 @ =0x00009340
 	adds r1, r3, r4
@@ -623,7 +623,7 @@ _080F5B1C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5B28: .4byte gUnknown_083DFEC4
+_080F5B28: .4byte gPokenavStructPtr
 _080F5B2C: .4byte 0x00009238
 _080F5B30: .4byte 0x0000923a
 _080F5B34: .4byte 0x00009340
@@ -631,7 +631,7 @@ _080F5B34: .4byte 0x00009340
 
 	thumb_func_start sub_80F5B38
 sub_80F5B38: @ 80F5B38
-	ldr r0, _080F5B48 @ =gUnknown_083DFEC4
+	ldr r0, _080F5B48 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r1, _080F5B4C @ =0x00009345
 	adds r0, r1
@@ -639,7 +639,7 @@ sub_80F5B38: @ 80F5B38
 	strb r1, [r0]
 	bx lr
 	.align 2, 0
-_080F5B48: .4byte gUnknown_083DFEC4
+_080F5B48: .4byte gPokenavStructPtr
 _080F5B4C: .4byte 0x00009345
 	thumb_func_end sub_80F5B38
 
@@ -647,7 +647,7 @@ _080F5B4C: .4byte 0x00009345
 sub_80F5B50: @ 80F5B50
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, _080F5B68 @ =gUnknown_083DFEC4
+	ldr r0, _080F5B68 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r1, _080F5B6C @ =0x00009345
 	adds r4, r0, r1
@@ -658,7 +658,7 @@ sub_80F5B50: @ 80F5B50
 	beq _080F5BB4
 	b _080F5BCC
 	.align 2, 0
-_080F5B68: .4byte gUnknown_083DFEC4
+_080F5B68: .4byte gPokenavStructPtr
 _080F5B6C: .4byte 0x00009345
 _080F5B70:
 	bl ScanlineEffect_Clear
@@ -679,7 +679,7 @@ _080F5B82:
 	subs r3, 0x1
 	cmp r3, 0
 	bge _080F5B82
-	ldr r0, _080F5BAC @ =gUnknown_083DFEC4
+	ldr r0, _080F5BAC @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r5, _080F5BB0 @ =0x00009345
 	adds r1, r5
@@ -690,7 +690,7 @@ _080F5B82:
 	b _080F5BCE
 	.align 2, 0
 _080F5BA8: .4byte gScanlineEffectRegBuffers
-_080F5BAC: .4byte gUnknown_083DFEC4
+_080F5BAC: .4byte gPokenavStructPtr
 _080F5BB0: .4byte 0x00009345
 _080F5BB4:
 	mov r0, sp
@@ -736,7 +736,7 @@ sub_80F5BF0: @ 80F5BF0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r0, _080F5CB8 @ =gUnknown_083DFEC4
+	ldr r0, _080F5CB8 @ =gPokenavStructPtr
 	ldr r5, [r0]
 	ldr r1, _080F5CBC @ =0x00009344
 	adds r0, r5, r1
@@ -812,7 +812,7 @@ _080F5C40:
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r0, _080F5CB8 @ =gUnknown_083DFEC4
+	ldr r0, _080F5CB8 @ =gPokenavStructPtr
 	cmp r6, 0x41
 	bls _080F5C40
 	ldr r0, [r0]
@@ -830,7 +830,7 @@ _080F5CA6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5CB8: .4byte gUnknown_083DFEC4
+_080F5CB8: .4byte gPokenavStructPtr
 _080F5CBC: .4byte 0x00009344
 _080F5CC0: .4byte 0x0000911c
 _080F5CC4: .4byte gScanlineEffectRegBuffers
@@ -851,7 +851,7 @@ sub_80F5CDC: @ 80F5CDC
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080F5DB0 @ =gUnknown_083DFEC4
+	ldr r0, _080F5DB0 @ =gPokenavStructPtr
 	ldr r6, [r0]
 	ldr r1, _080F5DB4 @ =0x00009344
 	adds r0, r6, r1
@@ -932,7 +932,7 @@ _080F5D36:
 	adds r0, r7, 0x1
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, _080F5DB0 @ =gUnknown_083DFEC4
+	ldr r0, _080F5DB0 @ =gPokenavStructPtr
 	cmp r7, 0x41
 	bls _080F5D36
 	ldr r0, [r0]
@@ -950,7 +950,7 @@ _080F5DA0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5DB0: .4byte gUnknown_083DFEC4
+_080F5DB0: .4byte gPokenavStructPtr
 _080F5DB4: .4byte 0x00009344
 _080F5DB8: .4byte 0x0000911c
 _080F5DBC: .4byte gScanlineEffectRegBuffers
@@ -1008,7 +1008,7 @@ _080F5E1C:
 	thumb_func_start sub_80F5E20
 sub_80F5E20: @ 80F5E20
 	push {r4,r5,lr}
-	ldr r0, _080F5E38 @ =gUnknown_083DFEC4
+	ldr r0, _080F5E38 @ =gPokenavStructPtr
 	ldr r2, [r0]
 	ldr r3, _080F5E3C @ =0x0000876e
 	adds r1, r2, r3
@@ -1020,7 +1020,7 @@ sub_80F5E20: @ 80F5E20
 	movs r0, 0
 	b _080F5EC8
 	.align 2, 0
-_080F5E38: .4byte gUnknown_083DFEC4
+_080F5E38: .4byte gPokenavStructPtr
 _080F5E3C: .4byte 0x0000876e
 _080F5E40:
 	ldr r1, _080F5E6C @ =0x000087c9
@@ -1105,7 +1105,7 @@ _080F5EE0: .4byte 0x00008774
 	thumb_func_start sub_80F5EE4
 sub_80F5EE4: @ 80F5EE4
 	push {r4-r6,lr}
-	ldr r3, _080F5F04 @ =gUnknown_083DFEC4
+	ldr r3, _080F5F04 @ =gPokenavStructPtr
 	ldr r4, [r3]
 	ldr r1, _080F5F08 @ =0x0000876e
 	adds r0, r4, r1
@@ -1121,7 +1121,7 @@ sub_80F5EE4: @ 80F5EE4
 	movs r0, 0
 	b _080F5F98
 	.align 2, 0
-_080F5F04: .4byte gUnknown_083DFEC4
+_080F5F04: .4byte gPokenavStructPtr
 _080F5F08: .4byte 0x0000876e
 _080F5F0C: .4byte 0x00008774
 _080F5F10:
@@ -1207,7 +1207,7 @@ _080F5FB0: .4byte 0x00008774
 	thumb_func_start sub_80F5FB4
 sub_80F5FB4: @ 80F5FB4
 	push {r4,lr}
-	ldr r0, _080F5FD8 @ =gUnknown_083DFEC4
+	ldr r0, _080F5FD8 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r2, _080F5FDC @ =0x00008770
 	adds r0, r1, r2
@@ -1225,7 +1225,7 @@ _080F5FD2:
 	movs r0, 0
 	b _080F6004
 	.align 2, 0
-_080F5FD8: .4byte gUnknown_083DFEC4
+_080F5FD8: .4byte gPokenavStructPtr
 _080F5FDC: .4byte 0x00008770
 _080F5FE0: .4byte 0x000087c9
 _080F5FE4:
@@ -1256,7 +1256,7 @@ _080F600C: .4byte 0x0000fff8
 	thumb_func_start sub_80F6010
 sub_80F6010: @ 80F6010
 	push {r4-r6,lr}
-	ldr r0, _080F603C @ =gUnknown_083DFEC4
+	ldr r0, _080F603C @ =gPokenavStructPtr
 	ldr r3, [r0]
 	ldr r1, _080F6040 @ =0x00008772
 	adds r0, r3, r1
@@ -1279,7 +1279,7 @@ _080F6038:
 	movs r0, 0
 	b _080F606C
 	.align 2, 0
-_080F603C: .4byte gUnknown_083DFEC4
+_080F603C: .4byte gPokenavStructPtr
 _080F6040: .4byte 0x00008772
 _080F6044: .4byte 0x00008774
 _080F6048: .4byte 0x000087c9
@@ -1308,7 +1308,7 @@ _080F606C:
 	thumb_func_start sub_80F6074
 sub_80F6074: @ 80F6074
 	push {r4-r7,lr}
-	ldr r1, _080F6120 @ =gUnknown_083DFEC4
+	ldr r1, _080F6120 @ =gPokenavStructPtr
 	ldr r6, [r1]
 	ldr r1, _080F6124 @ =0x00008770
 	adds r3, r6, r1
@@ -1400,7 +1400,7 @@ _080F611A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6120: .4byte gUnknown_083DFEC4
+_080F6120: .4byte gPokenavStructPtr
 _080F6124: .4byte 0x00008770
 _080F6128: .4byte 0x00008774
 _080F612C: .4byte 0x00008772
@@ -1410,7 +1410,7 @@ _080F6130: .4byte 0x0000876e
 	thumb_func_start sub_80F6134
 sub_80F6134: @ 80F6134
 	push {r4-r6,lr}
-	ldr r0, _080F6194 @ =gUnknown_083DFEC4
+	ldr r0, _080F6194 @ =gPokenavStructPtr
 	ldr r3, [r0]
 	ldr r1, _080F6198 @ =0x000087c9
 	adds r0, r3, r1
@@ -1457,7 +1457,7 @@ sub_80F6134: @ 80F6134
 	strh r0, [r2]
 	b _080F61F4
 	.align 2, 0
-_080F6194: .4byte gUnknown_083DFEC4
+_080F6194: .4byte gPokenavStructPtr
 _080F6198: .4byte 0x000087c9
 _080F619C: .4byte 0x000087dc
 _080F61A0: .4byte 0x00008774
@@ -1513,7 +1513,7 @@ _080F6204: .4byte 0x0000876e
 	thumb_func_start sub_80F6208
 sub_80F6208: @ 80F6208
 	push {lr}
-	ldr r0, _080F623C @ =gUnknown_083DFEC4
+	ldr r0, _080F623C @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r2, _080F6240 @ =0x00008fe6
 	adds r0, r1, r2
@@ -1540,7 +1540,7 @@ _080F6238:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F623C: .4byte gUnknown_083DFEC4
+_080F623C: .4byte gPokenavStructPtr
 _080F6240: .4byte 0x00008fe6
 _080F6244: .4byte 0x00008fe7
 _080F6248: .4byte 0x00008fe8
@@ -1553,7 +1553,7 @@ sub_80F6250: @ 80F6250
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, _080F6270 @ =gUnknown_083DFEC4
+	ldr r0, _080F6270 @ =gPokenavStructPtr
 	ldr r2, [r0]
 	ldr r0, _080F6274 @ =0x00008fe8
 	adds r3, r2, r0
@@ -1567,7 +1567,7 @@ _080F626C:
 	movs r0, 0
 	b _080F637E
 	.align 2, 0
-_080F6270: .4byte gUnknown_083DFEC4
+_080F6270: .4byte gPokenavStructPtr
 _080F6274: .4byte 0x00008fe8
 _080F6278:
 	ldr r1, _080F630C @ =0x00008fe6
@@ -1668,14 +1668,14 @@ _080F632A:
 	bl GetMonData
 	cmp r0, 0
 	beq _080F6324
-	ldr r0, _080F6360 @ =gUnknown_083DFEC4
+	ldr r0, _080F6360 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r1, _080F6364 @ =0x00008fe8
 	adds r0, r1
 	movs r1, 0x1
 	strb r1, [r0]
 _080F634C:
-	ldr r0, _080F6360 @ =gUnknown_083DFEC4
+	ldr r0, _080F6360 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F6368 @ =0x00008fe6
 	adds r1, r0
@@ -1684,7 +1684,7 @@ _080F634C:
 	b _080F6372
 	.align 2, 0
 _080F635C: .4byte gPlayerParty
-_080F6360: .4byte gUnknown_083DFEC4
+_080F6360: .4byte gPokenavStructPtr
 _080F6364: .4byte 0x00008fe8
 _080F6368: .4byte 0x00008fe6
 _080F636C:
@@ -1710,7 +1710,7 @@ _080F637E:
 	thumb_func_start sub_80F638C
 sub_80F638C: @ 80F638C
 	push {r4,lr}
-	ldr r0, _080F63C0 @ =gUnknown_083DFEC4
+	ldr r0, _080F63C0 @ =gPokenavStructPtr
 	ldr r4, [r0]
 	ldr r1, _080F63C4 @ =0x00008fe6
 	adds r0, r4, r1
@@ -1735,7 +1735,7 @@ _080F63B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F63C0: .4byte gUnknown_083DFEC4
+_080F63C0: .4byte gPokenavStructPtr
 _080F63C4: .4byte 0x00008fe6
 _080F63C8: .4byte 0x00008fe7
 _080F63CC: .4byte 0x00006dac
@@ -1745,7 +1745,7 @@ _080F63CC: .4byte 0x00006dac
 sub_80F63D0: @ 80F63D0
 	push {r4-r6,lr}
 	sub sp, 0x4
-	ldr r0, _080F647C @ =gUnknown_083DFEC4
+	ldr r0, _080F647C @ =gPokenavStructPtr
 	ldr r2, [r0]
 	ldr r1, _080F6480 @ =0x00008fe6
 	adds r0, r2, r1
@@ -1831,7 +1831,7 @@ _080F646E:
 	bls _080F63FC
 	b _080F6508
 	.align 2, 0
-_080F647C: .4byte gUnknown_083DFEC4
+_080F647C: .4byte gPokenavStructPtr
 _080F6480: .4byte 0x00008fe6
 _080F6484: .4byte 0x00008fe7
 _080F6488: .4byte gPokemonStorage + 0x4
@@ -1878,7 +1878,7 @@ _080F64DA:
 	cmp r6, 0x5
 	bls _080F64A8
 	bl sub_80F49F4
-	ldr r0, _080F6500 @ =gUnknown_083DFEC4
+	ldr r0, _080F6500 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F6504 @ =0x00008fe6
 	adds r1, r0
@@ -1890,7 +1890,7 @@ _080F64F6:
 	b _080F650A
 	.align 2, 0
 _080F64FC: .4byte gPlayerParty
-_080F6500: .4byte gUnknown_083DFEC4
+_080F6500: .4byte gPokenavStructPtr
 _080F6504: .4byte 0x00008fe6
 _080F6508:
 	movs r0, 0x1
@@ -1917,7 +1917,7 @@ sub_80F6514: @ 80F6514
 	lsrs r2, 24
 	str r2, [sp, 0x4]
 	mov r5, r10
-	ldr r0, _080F65A4 @ =gUnknown_083DFEC4
+	ldr r0, _080F65A4 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	lsls r1, 2
 	adds r0, r1
@@ -1971,7 +1971,7 @@ _080F655E:
 	bl GetMonGender
 	b _080F65EA
 	.align 2, 0
-_080F65A4: .4byte gUnknown_083DFEC4
+_080F65A4: .4byte gPokenavStructPtr
 _080F65A8: .4byte 0x0000893d
 _080F65AC: .4byte 0x0000893e
 _080F65B0: .4byte gPlayerParty
@@ -2091,7 +2091,7 @@ _080F6656:
 	ldr r0, [sp, 0x4]
 	cmp r0, 0x1
 	bne _080F66C0
-	ldr r0, _080F66B8 @ =gUnknown_083DFEC4
+	ldr r0, _080F66B8 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r2, [sp]
 	lsls r1, r2, 2
@@ -2106,7 +2106,7 @@ _080F6656:
 	adds r5, r0, 0
 	b _080F66CE
 	.align 2, 0
-_080F66B8: .4byte gUnknown_083DFEC4
+_080F66B8: .4byte gPokenavStructPtr
 _080F66BC: .4byte 0x0000893c
 _080F66C0:
 	strb r4, [r5]
@@ -2137,7 +2137,7 @@ sub_80F66E0: @ 80F66E0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, _080F676C @ =gUnknown_083DFEC4
+	ldr r0, _080F676C @ =gPokenavStructPtr
 	mov r8, r0
 	ldr r4, [r0]
 	ldr r1, _080F6770 @ =0x00008829
@@ -2200,7 +2200,7 @@ _080F674E:
 	movs r0, 0x4
 	b _080F679A
 	.align 2, 0
-_080F676C: .4byte gUnknown_083DFEC4
+_080F676C: .4byte gPokenavStructPtr
 _080F6770: .4byte 0x00008829
 _080F6774: .4byte 0x0000876e
 _080F6778: .4byte 0x000087dc
@@ -2271,7 +2271,7 @@ _080F67EC:
 	mov r12, r0
 	cmp r0, 0x10
 	bls _080F674E
-	ldr r6, _080F6834 @ =gUnknown_083DFEC4
+	ldr r6, _080F6834 @ =gPokenavStructPtr
 	ldr r2, [r6]
 	ldr r1, _080F6828 @ =0x0000bc8e
 	adds r0, r2, r1
@@ -2293,7 +2293,7 @@ _080F67EC:
 _080F6828: .4byte 0x0000bc8e
 _080F682C: .4byte 0x0000bc4c
 _080F6830: .4byte 0x0000bc8f
-_080F6834: .4byte gUnknown_083DFEC4
+_080F6834: .4byte gPokenavStructPtr
 _080F6838: .4byte 0x0000bc90
 _080F683C: .4byte 0x0000bc91
 _080F6840:
@@ -2306,7 +2306,7 @@ _080F6840:
 	movs r0, 0x3
 	strb r0, [r1]
 _080F6850:
-	ldr r5, _080F6890 @ =gUnknown_083DFEC4
+	ldr r5, _080F6890 @ =gPokenavStructPtr
 	ldr r1, [r5]
 	ldr r6, _080F6894 @ =0x0000bc8e
 	adds r0, r1, r6
@@ -2337,7 +2337,7 @@ _080F6870:
 	.align 2, 0
 _080F6888: .4byte 0x0000bc90
 _080F688C: .4byte 0x0000bc91
-_080F6890: .4byte gUnknown_083DFEC4
+_080F6890: .4byte gPokenavStructPtr
 _080F6894: .4byte 0x0000bc8e
 _080F6898: .4byte 0x0000bc8f
 _080F689C: .4byte 0x0000bc96
@@ -2355,7 +2355,7 @@ _080F68AA:
 	mov r12, r0
 	cmp r0, 0x2
 	bls _080F6870
-	ldr r5, _080F68DC @ =gUnknown_083DFEC4
+	ldr r5, _080F68DC @ =gPokenavStructPtr
 	ldr r0, [r5]
 	ldr r6, _080F68E0 @ =0x0000bc96
 	adds r1, r0, r6
@@ -2373,7 +2373,7 @@ _080F68AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F68DC: .4byte gUnknown_083DFEC4
+_080F68DC: .4byte gPokenavStructPtr
 _080F68E0: .4byte 0x0000bc96
 _080F68E4: .4byte 0x0000bc8f
 	thumb_func_end sub_80F66E0
@@ -2381,7 +2381,7 @@ _080F68E4: .4byte 0x0000bc8f
 	thumb_func_start sub_80F68E8
 sub_80F68E8: @ 80F68E8
 	push {r4-r7,lr}
-	ldr r3, _080F6918 @ =gUnknown_083DFEC4
+	ldr r3, _080F6918 @ =gPokenavStructPtr
 	ldr r0, [r3]
 	ldr r2, _080F691C @ =0x0000bc90
 	adds r1, r0, r2
@@ -2404,7 +2404,7 @@ sub_80F68E8: @ 80F68E8
 	ble _080F692E
 	b _080F69BC
 	.align 2, 0
-_080F6918: .4byte gUnknown_083DFEC4
+_080F6918: .4byte gPokenavStructPtr
 _080F691C: .4byte 0x0000bc90
 _080F6920: .4byte 0x0000bc91
 _080F6924: .4byte gMain
@@ -2422,7 +2422,7 @@ _080F692E:
 	asrs r0, 24
 	cmp r0, 0x2
 	bgt _080F6978
-	ldr r3, _080F69B4 @ =gUnknown_083DFEC4
+	ldr r3, _080F69B4 @ =gPokenavStructPtr
 	ldr r2, _080F69B8 @ =0x0000bc96
 _080F6944:
 	lsls r0, r4, 24
@@ -2485,7 +2485,7 @@ _080F69AA:
 	b _080F69FC
 	.align 2, 0
 _080F69B0: .4byte 0x0000bc91
-_080F69B4: .4byte gUnknown_083DFEC4
+_080F69B4: .4byte gPokenavStructPtr
 _080F69B8: .4byte 0x0000bc96
 _080F69BC:
 	lsls r0, r4, 24
@@ -2574,7 +2574,7 @@ sub_80F6A4C: @ 80F6A4C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r0, _080F6AC4 @ =gUnknown_083DFEC4
+	ldr r0, _080F6AC4 @ =gPokenavStructPtr
 	ldr r3, [r0]
 	ldr r0, _080F6AC8 @ =0x0000876e
 	adds r2, r3, r0
@@ -2633,7 +2633,7 @@ _080F6A88:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6AC4: .4byte gUnknown_083DFEC4
+_080F6AC4: .4byte gPokenavStructPtr
 _080F6AC8: .4byte 0x0000876e
 _080F6ACC: .4byte 0x00008774
 _080F6AD0: .4byte 0x0000bc94
@@ -2649,7 +2649,7 @@ _080F6AEC: .4byte 0x000087de
 	thumb_func_start sub_80F6AF0
 sub_80F6AF0: @ 80F6AF0
 	push {r4,lr}
-	ldr r1, _080F6B10 @ =gUnknown_083DFEC4
+	ldr r1, _080F6B10 @ =gPokenavStructPtr
 	ldr r0, [r1]
 	ldr r2, _080F6B14 @ =0x000087de
 	adds r0, r2
@@ -2665,7 +2665,7 @@ _080F6B04:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F6B10: .4byte gUnknown_083DFEC4
+_080F6B10: .4byte gPokenavStructPtr
 _080F6B14: .4byte 0x000087de
 _080F6B18: .4byte _080F6B1C
 	.align 2, 0
@@ -2682,13 +2682,13 @@ _080F6B38:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F6C18
-	ldr r0, _080F6B4C @ =gUnknown_083DFEC4
+	ldr r0, _080F6B4C @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r3, _080F6B50 @ =0x000087de
 	adds r1, r3
 	b _080F6BCE
 	.align 2, 0
-_080F6B4C: .4byte gUnknown_083DFEC4
+_080F6B4C: .4byte gPokenavStructPtr
 _080F6B50: .4byte 0x000087de
 _080F6B54:
 	movs r2, 0x80
@@ -2704,23 +2704,23 @@ _080F6B54:
 	b _080F6BC6
 _080F6B6E:
 	bl DrawMonRibbonIcons
-	ldr r0, _080F6B7C @ =gUnknown_083DFEC4
+	ldr r0, _080F6B7C @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r2, _080F6B80 @ =0x000087de
 	adds r1, r2
 	b _080F6BCE
 	.align 2, 0
-_080F6B7C: .4byte gUnknown_083DFEC4
+_080F6B7C: .4byte gPokenavStructPtr
 _080F6B80: .4byte 0x000087de
 _080F6B84:
 	bl sub_80F13FC
-	ldr r0, _080F6B94 @ =gUnknown_083DFEC4
+	ldr r0, _080F6B94 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r3, _080F6B98 @ =0x000087de
 	adds r1, r3
 	b _080F6BCE
 	.align 2, 0
-_080F6B94: .4byte gUnknown_083DFEC4
+_080F6B94: .4byte gPokenavStructPtr
 _080F6B98: .4byte 0x000087de
 _080F6B9C:
 	ldr r4, [r4]
@@ -2743,7 +2743,7 @@ _080F6BC0:
 	movs r0, 0
 	bl sub_80F2E18
 _080F6BC6:
-	ldr r0, _080F6BD8 @ =gUnknown_083DFEC4
+	ldr r0, _080F6BD8 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F6BDC @ =0x000087de
 	adds r1, r0
@@ -2753,7 +2753,7 @@ _080F6BCE:
 	strb r0, [r1]
 	b _080F6C18
 	.align 2, 0
-_080F6BD8: .4byte gUnknown_083DFEC4
+_080F6BD8: .4byte gPokenavStructPtr
 _080F6BDC: .4byte 0x000087de
 _080F6BE0:
 	bl sub_80F170C
@@ -2767,7 +2767,7 @@ _080F6BE0:
 	ldr r0, _080F6C0C @ =0x0000dfff
 	ands r0, r1
 	strh r0, [r2]
-	ldr r0, _080F6C10 @ =gUnknown_083DFEC4
+	ldr r0, _080F6C10 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r2, _080F6C14 @ =0x000087de
 	adds r1, r2
@@ -2779,7 +2779,7 @@ _080F6C08:
 	b _080F6C1A
 	.align 2, 0
 _080F6C0C: .4byte 0x0000dfff
-_080F6C10: .4byte gUnknown_083DFEC4
+_080F6C10: .4byte gPokenavStructPtr
 _080F6C14: .4byte 0x000087de
 _080F6C18:
 	movs r0, 0x1
@@ -2797,7 +2797,7 @@ sub_80F708C: @ 80F708C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r0, _080F70E4 @ =gUnknown_083DFEC4
+	ldr r0, _080F70E4 @ =gPokenavStructPtr
 	ldr r3, [r0]
 	ldr r0, _080F70E8 @ =0x0000876e
 	adds r2, r3, r0
@@ -2840,7 +2840,7 @@ _080F70C8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F70E4: .4byte gUnknown_083DFEC4
+_080F70E4: .4byte gPokenavStructPtr
 _080F70E8: .4byte 0x0000876e
 _080F70EC: .4byte 0x00008774
 _080F70F0: .4byte 0x0000bc94
@@ -2851,7 +2851,7 @@ _080F70F8: .4byte 0x000087de
 	thumb_func_start sub_80F70FC
 sub_80F70FC: @ 80F70FC
 	push {r4-r6,lr}
-	ldr r1, _080F711C @ =gUnknown_083DFEC4
+	ldr r1, _080F711C @ =gPokenavStructPtr
 	ldr r0, [r1]
 	ldr r2, _080F7120 @ =0x000087de
 	adds r0, r2
@@ -2867,7 +2867,7 @@ _080F7110:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F711C: .4byte gUnknown_083DFEC4
+_080F711C: .4byte gPokenavStructPtr
 _080F7120: .4byte 0x000087de
 _080F7124: .4byte _080F7128
 	.align 2, 0
@@ -2885,13 +2885,13 @@ _080F7144:
 _080F714A:
 	movs r0, 0
 	bl sub_80F6E04
-	ldr r0, _080F715C @ =gUnknown_083DFEC4
+	ldr r0, _080F715C @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r2, _080F7160 @ =0x000087de
 	adds r1, r2
 	b _080F7206
 	.align 2, 0
-_080F715C: .4byte gUnknown_083DFEC4
+_080F715C: .4byte gPokenavStructPtr
 _080F7160: .4byte 0x000087de
 _080F7164:
 	movs r0, 0
@@ -2920,7 +2920,7 @@ _080F7198: .4byte 0x0000876e
 _080F719C: .4byte 0x000087de
 _080F71A0:
 	bl LoadTrainerEyesDescriptionLines
-	ldr r0, _080F71D4 @ =gUnknown_083DFEC4
+	ldr r0, _080F71D4 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F71D8 @ =0x0000bc95
 	adds r2, r1, r0
@@ -2932,7 +2932,7 @@ _080F71A0:
 	adds r0, 0x1
 	strb r0, [r1]
 _080F71BA:
-	ldr r0, _080F71D4 @ =gUnknown_083DFEC4
+	ldr r0, _080F71D4 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F71D8 @ =0x0000bc95
 	adds r4, r1, r0
@@ -2946,7 +2946,7 @@ _080F71CC:
 	strb r0, [r4]
 	b _080F721C
 	.align 2, 0
-_080F71D4: .4byte gUnknown_083DFEC4
+_080F71D4: .4byte gPokenavStructPtr
 _080F71D8: .4byte 0x0000bc95
 _080F71DC: .4byte 0x000087de
 _080F71E0:
@@ -2966,7 +2966,7 @@ _080F71F8:
 	cmp r0, 0
 	bne _080F721C
 _080F71FE:
-	ldr r0, _080F7214 @ =gUnknown_083DFEC4
+	ldr r0, _080F7214 @ =gPokenavStructPtr
 	ldr r1, [r0]
 	ldr r0, _080F7210 @ =0x000087de
 	adds r1, r0
@@ -2977,7 +2977,7 @@ _080F7206:
 	b _080F721C
 	.align 2, 0
 _080F7210: .4byte 0x000087de
-_080F7214: .4byte gUnknown_083DFEC4
+_080F7214: .4byte gPokenavStructPtr
 _080F7218:
 	movs r0, 0
 	b _080F721E
@@ -3002,7 +3002,7 @@ sub_80F7224: @ 80F7224
 	bl GetMonData
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080F7264 @ =gUnknown_083DFEC4
+	ldr r0, _080F7264 @ =gPokenavStructPtr
 	ldr r0, [r0]
 	ldr r3, _080F7268 @ =0x00008fe9
 	adds r1, r0, r3
@@ -3020,7 +3020,7 @@ sub_80F7224: @ 80F7224
 	b _080F7272
 	.align 2, 0
 _080F7260: .4byte gPlayerParty
-_080F7264: .4byte gUnknown_083DFEC4
+_080F7264: .4byte gPokenavStructPtr
 _080F7268: .4byte 0x00008fe9
 _080F726C: .4byte 0x00008931
 _080F7270:
