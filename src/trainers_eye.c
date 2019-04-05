@@ -1,7 +1,10 @@
 #include "global.h"
+#include "decompress.h"
 #include "battle_setup.h"
 #include "overworld.h"
 #include "pokenav.h"
+#include "battle.h"
+#include "data2.h"
 #include "constants/opponents.h"
 #include "constants/region_map_sections.h"
 
@@ -77,4 +80,12 @@ void sub_80F6DB8(void)
     gPokenavStructPtr->unkD15A = -72;
     sub_80F2F7C(0);
     gPokenavStructPtr->unk87DC = gPokenavStructPtr->unk876E;
+}
+
+void sub_80F6E04(u8 a0)
+{
+    u16 r1 = gPokenavStructPtr->trainersEye[gPokenavStructPtr->unk876E].opponentId;
+    u8 r6 = gTrainers[r1].trainerPic;
+    DecompressPicFromTable_2(&gTrainerFrontPicTable[r6], gTrainerFrontPicCoords[r6].coords, 1, gPokenavStructPtr->unk131E4, gPokenavStructPtr->unkD1E4[a0], r6);
+    LZ77UnCompWram(gTrainerFrontPicPaletteTable[r6].data, gPokenavStructPtr->unk0[a0]);
 }
