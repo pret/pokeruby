@@ -2,6 +2,11 @@
 #include "scanline_effect.h"
 #include "pokenav.h"
 
+u8 sub_80F5E20(void);
+u8 sub_80F5EE4(void);
+u8 sub_80F5FB4(void);
+u8 sub_80F6010(void);
+
 /* TODO
 // emerald: sub_81D2278
 void sub_80F5688(u16 * r6, u16 * r5, u16 * sp0, u8 r9, u16 * r7)
@@ -455,5 +460,90 @@ void sub_80F5BDC(void)
 {
     gScanlineEffect.state = 3;
     ScanlineEffect_InitHBlankDmaTransfer();
+}
+
+void sub_80F5BF0(void)
+{
+    u16 i;
+
+    if (gPokenavStructPtr->unk9344)
+    {
+        sub_80F58DC(gPokenavStructPtr->unk911C);
+        sub_80F5A1C(gPokenavStructPtr->unk911C);
+        for (i = 0; i < 66; i++)
+        {
+            gScanlineEffectRegBuffers[1][(i + 55) * 2 + 0] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 0] = (gPokenavStructPtr->unk9130[i][0] << 8) | (gPokenavStructPtr->unk9130[i][1]);
+            gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (gPokenavStructPtr->unk9238[i][0] << 8) | (gPokenavStructPtr->unk9238[i][1]);
+        }
+        gPokenavStructPtr->unk9344 = 0;
+    }
+}
+
+void sub_80F5CDC(u8 a0)
+{
+    u16 i, r5;
+
+    if (gPokenavStructPtr->unk9344)
+    {
+        sub_80F58DC(gPokenavStructPtr->unk911C);
+        sub_80F5A1C(gPokenavStructPtr->unk911C);
+        r5 = 2 * (55 - a0);
+        for (i = 0; i < 66; i ++)
+        {
+            gScanlineEffectRegBuffers[1][r5 + 0] = gScanlineEffectRegBuffers[0][r5 + 0] = (gPokenavStructPtr->unk9130[i][0] << 8) | (gPokenavStructPtr->unk9130[i][1]);
+            gScanlineEffectRegBuffers[1][r5 + 1] = gScanlineEffectRegBuffers[0][r5 + 1] = (gPokenavStructPtr->unk9238[i][0] << 8) | (gPokenavStructPtr->unk9238[i][1]);
+            r5 += 2;
+        }
+        gPokenavStructPtr->unk9344 = 0;
+    }
+}
+
+u8 sub_80F5DD4(void)
+{
+    if (({gMain.newAndRepeatedKeys & DPAD_UP;}))
+    {
+        return sub_80F5E20();
+    }
+    else if (({gMain.newAndRepeatedKeys & DPAD_DOWN;}))
+    {
+        return sub_80F5EE4();
+    }
+    else if (({gMain.newAndRepeatedKeys & DPAD_LEFT;}))
+    {
+        return sub_80F5FB4();
+    }
+    else if (({gMain.newAndRepeatedKeys & DPAD_RIGHT;}))
+    {
+        return sub_80F6010();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+u8 sub_80F5E20(void)
+{
+    if (gPokenavStructPtr->unk876E == 0)
+    {
+        return 0;
+    }
+    if (gPokenavStructPtr->unk87C9 != 0 && gPokenavStructPtr->unk876C == 0)
+    {
+        sub_80F063C(-1);
+        sub_80F6074(-1);
+        return 2;
+    }
+    gPokenavStructPtr->unk876C--;
+    if (gPokenavStructPtr->unk87C9 == 0 && gPokenavStructPtr->unk876C < 0)
+    {
+        gPokenavStructPtr->unk876C = gPokenavStructPtr->unk8772;
+    }
+    gPokenavStructPtr->unk876E = gPokenavStructPtr->unk8770 + gPokenavStructPtr->unk876C;
+    if (gPokenavStructPtr->unk876E > gPokenavStructPtr->unk8774)
+    {
+        gPokenavStructPtr->unk876E -= gPokenavStructPtr->unk8774 + 1;
+    }
+    return 1;
 }
 

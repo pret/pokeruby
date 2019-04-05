@@ -254,5 +254,7 @@ void LoadTrainerEyesDescriptionLines(void);
 void sub_80F0FFC(u8);
 void sub_80F105C(void);
 void sub_80F43D4(u8 *);
+void sub_80F063C(s16 arg0);
+void sub_80F6074(s16 arg0);
 
 #endif // GUARD_POKENAV_H
