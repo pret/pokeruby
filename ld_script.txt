@@ -297,6 +297,8 @@ SECTIONS {
         src/pokenav_before.o(.text);
         src/pokenav.o(.text);
         asm/pokenav.o(.text);
+        src/trainers_eye.o(.text);
+        asm/trainers_eye.o(.text);
         src/pokenav_after.o(.text);
         asm/pokenav.o(.text_80F708C);
         src/mon_markings.o(.text);
