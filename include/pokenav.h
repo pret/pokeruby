@@ -168,7 +168,9 @@ struct UnkPokenavStruct {
     /*0xBC91*/ u8 unkBC91;
     /*0xBC92*/ u8 unkBC92;
     /*0xBC93*/ u8 unkBC93;
-    /*0xBC94*/ u8 fillerBC94[0x6];
+    /*0xBC94*/ u8 unkBC94;
+    /*0xBC95*/ u8 unkBC95;
+    /*0xBC96*/ u8 fillerBC96[0x4];
     /*0xBC9A*/ u8 unkBC9A;
     /*0xBC9B*/ u8 unkBC9B;
     /*0xBC9C*/ u8 unkBC9C[22][200];
@@ -185,9 +187,10 @@ struct UnkPokenavStruct {
     /*0xD120*/ u8 fillerD114[0x18];
     /*0xD138*/ u8 unkD138[0x20];
     /*0xD158*/ u16 unkD158;
-    /*0xD15A*/ u16 unkD15A;
+    /*0xD15A*/ s16 unkD15A;
     /*0xD15C*/ u16 unkD15C;
-    /*0xD15E*/ u8 fillerD15E[2];
+    /*0xD15E*/ u8 unkD15E;
+    /*0xD15F*/ u8 unkD15F;
     /*0xD160*/ u16 unkD160;
     /*0xD162*/ u8 unkD162;
     /*0xD164*/ struct UnkPokenavStruct_Sub1 unkD164;
@@ -229,5 +232,11 @@ bool8 sub_80F555C(void);
 void sub_80F7224(u8);
 void sub_80F5BDC(void);
 void sub_80F2F7C(u8 arg0);
+
+bool8 sub_80F0D5C(void);
+void LoadTrainerEyesDescriptionLines(void);
+void sub_80F0FFC(u8);
+void sub_80F105C(void);
+void sub_80F43D4(u8 *);
 
 #endif // GUARD_POKENAV_H
