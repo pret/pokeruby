@@ -667,7 +667,7 @@ static void sub_8106F6C(u8 arg0)
 
     gUnknown_03005E20.var_16 = 2;
     gUnknown_03005E20.var_0 = arg0;
-    gUnknown_03005E20.var_10 = 0x6010000;
+    gUnknown_03005E20.var_10 = OBJ_VRAM0;
 
     sub_80FC7A0(&gUnknown_03005E20);
     sub_80FDA18(&gUnknown_03005E20);
