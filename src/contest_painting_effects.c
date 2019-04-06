@@ -895,3 +895,229 @@ u16 sub_80FD7AC(u16 *a0, u16 *a1, u16 *a2)
     blue = blue * factor / 31;
     return RGB2(red, green, blue);
 }
+
+/*
+void sub_80FD8CC(struct Unk03005E20 * a0)
+{
+    u16 i, j, k;
+    u8 r5 = a0->var_1D >> 3;
+    u8 sp08 = a0->var_1E >> 3;
+    u16 * sp00 = (u16 *)a0->var_4;
+    u16 * sp04 = (u16 *)a0->var_10;
+    if (a0->var_16 == 2)
+    {
+        for (i = 0; i < sp08; i++)
+        {
+            for (j = 0; j < r5; j++)
+            {
+                for (k = 0; k < 8; k++)
+                {
+                    u16 * r3 = &sp04[i * r5 * 32 + 4 * k];
+                    u16 * r2 = &sp00[j * 8 + (i * 8 + k) * 8 * r5];
+                    r3[0] = r2[0] | (r2[1] << 8);
+                    r3[1] = r2[2] | (r2[3] << 8);
+                    r3[2] = r2[4] | (r2[5] << 8);
+                    r3[3] = r2[6] | (r2[7] << 8);
+                }
+            }
+        }
+    }
+    else
+    {
+        for (i = 0; i < sp08; i++)
+        {
+            for (j = 0; j < r5; j++)
+            {
+                for (k = 0; k < 8; k++)
+                {
+                    u16 * r3 = &sp04[i * r5 * 16 + 2 * k];
+                    u16 * r2 = &sp00[j * 8 + (i * 8 + k) * 8 * r5];
+                    r3[0] = r2[0] | (r2[1] << 4) | (r2[2] << 8) | (r2[3] << 12);
+                    r3[1] = r2[4] | (r2[5] << 4) | (r2[6] << 8) | (r2[7] << 12);
+                }
+            }
+        }
+    }
+}
+*/
+
+NAKED
+void sub_80FD8CC(struct Unk03005E20 * a0)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0xC\n"
+                "\tldrb r1, [r0, 0x1D]\n"
+                "\tlsrs r5, r1, 3\n"
+                "\tldrb r1, [r0, 0x1E]\n"
+                "\tlsrs r1, 3\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tldr r1, [r0, 0x4]\n"
+                "\tstr r1, [sp]\n"
+                "\tldr r2, [r0, 0x10]\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tldrh r0, [r0, 0x16]\n"
+                "\tcmp r0, 0x2\n"
+                "\tbne _080FD97C\n"
+                "\tmovs r1, 0\n"
+                "\tldr r0, [sp, 0x8]\n"
+                "\tcmp r1, r0\n"
+                "\tbcc _080FD8FA\n"
+                "\tb _080FDA08\n"
+                "_080FD8FA:\n"
+                "\tmovs r0, 0\n"
+                "\tadds r2, r1, 0x1\n"
+                "\tmov r10, r2\n"
+                "\tcmp r0, r5\n"
+                "\tbcs _080FD96E\n"
+                "\tadds r2, r1, 0\n"
+                "\tmuls r2, r5\n"
+                "\tmov r9, r2\n"
+                "\tlsls r1, 3\n"
+                "\tmov r8, r1\n"
+                "_080FD90E:\n"
+                "\tmovs r4, 0\n"
+                "\tlsls r6, r0, 4\n"
+                "\tadds r7, r0, 0x1\n"
+                "\tadd r0, r9\n"
+                "\tlsls r0, 6\n"
+                "\tldr r1, [sp, 0x4]\n"
+                "\tadds r1, r0\n"
+                "\tmov r12, r1\n"
+                "_080FD91E:\n"
+                "\tlsls r0, r4, 3\n"
+                "\tmov r2, r12\n"
+                "\tadds r3, r2, r0\n"
+                "\tmov r1, r8\n"
+                "\tadds r0, r1, r4\n"
+                "\tlsls r0, 3\n"
+                "\tmuls r0, r5\n"
+                "\tlsls r0, 1\n"
+                "\tldr r2, [sp]\n"
+                "\tadds r0, r2, r0\n"
+                "\tadds r2, r0, r6\n"
+                "\tldrh r0, [r2, 0x2]\n"
+                "\tlsls r0, 8\n"
+                "\tldrh r1, [r2]\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r3]\n"
+                "\tldrh r0, [r2, 0x6]\n"
+                "\tlsls r0, 8\n"
+                "\tldrh r1, [r2, 0x4]\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r3, 0x2]\n"
+                "\tldrh r0, [r2, 0xA]\n"
+                "\tlsls r0, 8\n"
+                "\tldrh r1, [r2, 0x8]\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r3, 0x4]\n"
+                "\tldrh r0, [r2, 0xE]\n"
+                "\tlsls r0, 8\n"
+                "\tldrh r1, [r2, 0xC]\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r3, 0x6]\n"
+                "\tadds r0, r4, 0x1\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r4, r0, 16\n"
+                "\tcmp r4, 0x7\n"
+                "\tbls _080FD91E\n"
+                "\tlsls r0, r7, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tcmp r0, r5\n"
+                "\tbcc _080FD90E\n"
+                "_080FD96E:\n"
+                "\tmov r1, r10\n"
+                "\tlsls r0, r1, 16\n"
+                "\tlsrs r1, r0, 16\n"
+                "\tldr r2, [sp, 0x8]\n"
+                "\tcmp r1, r2\n"
+                "\tbcc _080FD8FA\n"
+                "\tb _080FDA08\n"
+                "_080FD97C:\n"
+                "\tmovs r1, 0\n"
+                "\tldr r0, [sp, 0x8]\n"
+                "\tcmp r1, r0\n"
+                "\tbcs _080FDA08\n"
+                "_080FD984:\n"
+                "\tmovs r0, 0\n"
+                "\tadds r2, r1, 0x1\n"
+                "\tmov r10, r2\n"
+                "\tcmp r0, r5\n"
+                "\tbcs _080FD9FC\n"
+                "\tadds r2, r1, 0\n"
+                "\tmuls r2, r5\n"
+                "\tmov r9, r2\n"
+                "\tlsls r1, 3\n"
+                "\tmov r8, r1\n"
+                "_080FD998:\n"
+                "\tmovs r4, 0\n"
+                "\tlsls r6, r0, 4\n"
+                "\tadds r7, r0, 0x1\n"
+                "\tadd r0, r9\n"
+                "\tlsls r0, 5\n"
+                "\tldr r1, [sp, 0x4]\n"
+                "\tadds r1, r0\n"
+                "\tmov r12, r1\n"
+                "_080FD9A8:\n"
+                "\tlsls r0, r4, 2\n"
+                "\tmov r2, r12\n"
+                "\tadds r3, r2, r0\n"
+                "\tmov r1, r8\n"
+                "\tadds r0, r1, r4\n"
+                "\tlsls r0, 3\n"
+                "\tmuls r0, r5\n"
+                "\tlsls r0, 1\n"
+                "\tldr r2, [sp]\n"
+                "\tadds r0, r2, r0\n"
+                "\tadds r2, r0, r6\n"
+                "\tldrh r1, [r2, 0x2]\n"
+                "\tlsls r1, 4\n"
+                "\tldrh r0, [r2]\n"
+                "\torrs r1, r0\n"
+                "\tldrh r0, [r2, 0x4]\n"
+                "\tlsls r0, 8\n"
+                "\torrs r1, r0\n"
+                "\tldrh r0, [r2, 0x6]\n"
+                "\tlsls r0, 12\n"
+                "\torrs r1, r0\n"
+                "\tstrh r1, [r3]\n"
+                "\tldrh r1, [r2, 0xA]\n"
+                "\tlsls r1, 4\n"
+                "\tldrh r0, [r2, 0x8]\n"
+                "\torrs r1, r0\n"
+                "\tldrh r0, [r2, 0xC]\n"
+                "\tlsls r0, 8\n"
+                "\torrs r1, r0\n"
+                "\tldrh r0, [r2, 0xE]\n"
+                "\tlsls r0, 12\n"
+                "\torrs r1, r0\n"
+                "\tstrh r1, [r3, 0x2]\n"
+                "\tadds r0, r4, 0x1\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r4, r0, 16\n"
+                "\tcmp r4, 0x7\n"
+                "\tbls _080FD9A8\n"
+                "\tlsls r0, r7, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tcmp r0, r5\n"
+                "\tbcc _080FD998\n"
+                "_080FD9FC:\n"
+                "\tmov r1, r10\n"
+                "\tlsls r0, r1, 16\n"
+                "\tlsrs r1, r0, 16\n"
+                "\tldr r2, [sp, 0x8]\n"
+                "\tcmp r1, r2\n"
+                "\tbcc _080FD984\n"
+                "_080FDA08:\n"
+                "\tadd sp, 0xC\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0");
+}
