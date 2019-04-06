@@ -6005,52 +6005,52 @@ u8 * sub_80F6514(u8 * r10, u16 sp0, u8 sp4)
         }
         dest += StringLength(dest);
 
-        dest[0] = 0xFC;
-        dest[1] = 0x13;
-        dest[2] = 0x3F;
+        dest[0] = EXT_CTRL_CODE_BEGIN;
+        dest[1] = 0x13; // CLEAR_TO
+        dest[2] = 63;
         dest += 3;
 
         switch (gender)
         {
         case MON_MALE:
-            dest[0] = 0xFC;
-            dest[1] = 0x01;
-            dest[2] = 0x0C;
-            dest[3] = 0xFC;
-            dest[4] = 0x03;
-            dest[5] = 0x0D;
-            dest[6] = 0xB5;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
+            dest[1] = 0x01; // COLOR
+            dest[2] = TEXT_COLOR_WHITE;
+            dest[3] = EXT_CTRL_CODE_BEGIN;
+            dest[4] = 0x03; // SHADOW
+            dest[5] = TEXT_COLOR_SKY_BLUE;
+            dest[6] = CHAR_MALE;
             dest += 7;
             break;
         case MON_FEMALE:
-            dest[0] = 0xFC;
-            dest[1] = 0x01;
-            dest[2] = 0x0A;
-            dest[3] = 0xFC;
-            dest[4] = 0x03;
-            dest[5] = 0x0B;
-            dest[6] = 0xB6;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
+            dest[1] = 0x01; // COLOR
+            dest[2] = TEXT_COLOR_BLACK2;
+            dest[3] = EXT_CTRL_CODE_BEGIN;
+            dest[4] = 0x03; // SHADOW
+            dest[5] = TEXT_COLOR_SILVER;
+            dest[6] = CHAR_FEMALE;
             dest += 7;
             break;
         }
-        dest[0] = 0xFC;
-        dest[1] = 0x01;
-        dest[2] = 0x01;
-        dest[3] = 0xFC;
-        dest[4] = 0x03;
-        dest[5] = 0x05;
+        dest[0] = EXT_CTRL_CODE_BEGIN;
+        dest[1] = 0x01; // COLOR
+        dest[2] = TEXT_COLOR_DARK_GREY;
+        dest[3] = EXT_CTRL_CODE_BEGIN;
+        dest[4] = 0x03; // SHADOW
+        dest[5] = TEXT_COLOR_YELLOW;
         dest += 6;
 
-        dest[0] = 0xFC;
-        dest[1] = 0x13;
-        dest[2] = 0x46;
+        dest[0] = EXT_CTRL_CODE_BEGIN;
+        dest[1] = 0x13; // CLEAR_TO
+        dest[2] = 70;
         dest += 3;
 
-        dest[0] = 0xBA;
-        dest[1] = 0xFC;
-        dest[2] = 0x11;
-        dest[3] = 0x01;
-        dest[4] = 0x34;
+        dest[0] = CHAR_SLASH;
+        dest[1] = EXT_CTRL_CODE_BEGIN;
+        dest[2] = EXT_CTRL_CODE_CLEAR;
+        dest[3] = 1;
+        dest[4] = CHAR_LV;
         dest += 5;
 
         dest = ConvertIntToDecimalString(dest, level);
@@ -6060,9 +6060,9 @@ u8 * sub_80F6514(u8 * r10, u16 sp0, u8 sp4)
         }
         else
         {
-            dest[0] = 0xFC;
-            dest[1] = 0x13;
-            dest[2] = 0x67;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
+            dest[1] = 0x13; // CLEAR_TO
+            dest[2] = 103;
             dest += 3;
             *dest = EOS;
         }
