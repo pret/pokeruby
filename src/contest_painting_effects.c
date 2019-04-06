@@ -4,14 +4,15 @@
 
 extern u16 (*gUnknown_03005DEC)[][32];
 extern u8 gUnknown_083E7A50[][3];
-extern u8 gUnknown_03005E00;
+extern u8 gUnknown_03005DE8;
+extern u8 gUnknown_03005DF0;
 extern u8 gUnknown_03005DFC;
 extern u8 gUnknown_03005DF8;
-extern u8 gUnknown_03005DF0;
-extern u8 gUnknown_03005E04;
 extern u8 gUnknown_03005DF4;
-
-extern u8 gUnknown_03005DE8;
+extern u8 gUnknown_03005E00;
+extern u8 gUnknown_03005E04;
+extern u16 * gUnknown_03005E08;
+extern u16 gUnknown_03005E0C;
 
 // this file's functions
 void sub_80FCAA4(void);
@@ -36,6 +37,19 @@ u16 InvertColor(u16*);
 u16 sub_80FD7AC(u16*, u16*, u16*);
 u16 sub_80FD568(u16*, u16*);
 u16 GetCoolColorFromPersonality(u8);
+void sub_80FDC18(bool8);
+void sub_80FDAE4(void);
+void sub_80FDF88(void);
+void sub_80FDBE4(void);
+void sub_80FDED8(void);
+void sub_80FDBA8(void);
+void sub_80FDE28(void);
+void sub_80FDB8C(void);
+void sub_80FDD70(void);
+u16 sub_80FE038(u16 *);
+u16 sub_80FE17C(u16 *);
+u16 sub_80FE1B0(u16 *);
+u16 sub_80FE0AC(u16 *);
 
 void sub_80FC7A0(struct Unk03005E20* info)
 {
@@ -1120,4 +1134,401 @@ void sub_80FD8CC(struct Unk03005E20 * a0)
                 "\tpop {r4-r7}\n"
                 "\tpop {r0}\n"
                 "\tbx r0");
+}
+
+void sub_80FDA18(struct Unk03005E20 *arg0)
+{
+    gUnknown_03005E0C = arg0->var_18 * 16;
+    gUnknown_03005E08 = &arg0->var_8[gUnknown_03005E0C];
+    gUnknown_03005DEC = arg0->var_4;
+    gUnknown_03005DE8 = arg0->var_19;
+    gUnknown_03005DFC = arg0->var_1A;
+    gUnknown_03005DF8 = arg0->var_1B;
+    gUnknown_03005DF0 = arg0->var_1C;
+    gUnknown_03005E04 = arg0->var_1D;
+    gUnknown_03005DF4 = arg0->var_1E;
+
+    switch (arg0->var_14)
+    {
+    case 0:
+        sub_80FDC18(FALSE);
+        break;
+    case 1:
+        sub_80FDC18(TRUE);
+        break;
+    case 2:
+        sub_80FDAE4();
+        sub_80FDF88();
+        break;
+    case 3:
+        sub_80FDBE4();
+        sub_80FDED8();
+        break;
+    case 4:
+        sub_80FDBA8();
+        sub_80FDE28();
+        break;
+    case 5:
+        sub_80FDB8C();
+        sub_80FDD70();
+        break;
+    }
+}
+
+void sub_80FDAE4(void)
+{
+    gUnknown_03005E08[0] = RGB2(0, 0, 0);
+    gUnknown_03005E08[1] = RGB2(6, 6, 6);
+    gUnknown_03005E08[2] = RGB2(29, 29, 29);
+    gUnknown_03005E08[3] = RGB2(11, 11, 11);
+    gUnknown_03005E08[4] = RGB2(29, 6, 6);
+    gUnknown_03005E08[5] = RGB2(6, 29, 6);
+    gUnknown_03005E08[6] = RGB2(6, 6, 29);
+    gUnknown_03005E08[7] = RGB2(29, 29, 6);
+    gUnknown_03005E08[8] = RGB2(29, 6, 29);
+    gUnknown_03005E08[9] = RGB2(6, 29, 29);
+    gUnknown_03005E08[10] = RGB2(29, 11, 6);
+    gUnknown_03005E08[11] = RGB2(11, 29, 6);
+    gUnknown_03005E08[12] = RGB2(6, 11, 29);
+    gUnknown_03005E08[13] = RGB2(29, 6, 11);
+    gUnknown_03005E08[14] = RGB2(6, 29, 11);
+    gUnknown_03005E08[15] = RGB2(11, 6, 29);
+}
+
+void sub_80FDB8C(void)
+{
+    gUnknown_03005E08[0] = RGB2(0, 0, 0);
+    gUnknown_03005E08[1] = RGB2(0, 0, 0);
+    gUnknown_03005E08[2] = RGB2(31, 31, 31);
+}
+
+void sub_80FDBA8(void)
+{
+    u8 i;
+
+    gUnknown_03005E08[0] = RGB2(0, 0, 0);
+    gUnknown_03005E08[1] = RGB2(0, 0, 0);
+    for (i = 0; i < 14; i++)
+        gUnknown_03005E08[i + 2] = RGB2(2 * (i + 2), 2 * (i + 2), 2 * (i + 2));
+}
+
+void sub_80FDBE4(void)
+{
+    u8 i;
+
+    gUnknown_03005E08[0] = RGB2(0, 0, 0);
+    for (i = 0; i < 32; i++)
+        gUnknown_03005E08[i + 1] = RGB2(i, i, i);
+}
+
+void sub_80FDC18(bool8 arg0)
+{
+    u8 i, j;
+    u16 maxIndex;
+
+    maxIndex = 0xDF;
+    if (!arg0)
+        maxIndex = 0xFF;
+
+    for (j = 0; j < maxIndex; j++)
+        gUnknown_03005E08[j] = 0;
+
+    gUnknown_03005E08[maxIndex] = RGB2(15, 15, 15);
+    for (i = 0; i < gUnknown_03005DF0; i++)
+    {
+        u16* var2 = &(*gUnknown_03005DEC)[0][(gUnknown_03005DFC + i) * gUnknown_03005E04];
+        u16* pal = &var2[gUnknown_03005DE8];
+        for (j = 0; j < gUnknown_03005DF8; j++, pal++)
+        {
+            if (*pal & 0x8000)
+            {
+                *pal = gUnknown_03005E0C;
+            }
+            else
+            {
+                u16 color = sub_80FE038(pal);
+                u8 curIndex = 1;
+                if (curIndex < maxIndex)
+                {
+                    if (gUnknown_03005E08[curIndex] == RGB_BLACK)
+                    {
+                        gUnknown_03005E08[curIndex] = color;
+                        *pal = gUnknown_03005E0C + curIndex;
+                    }
+                    else
+                    {
+                        while (curIndex < maxIndex)
+                        {
+                            if (gUnknown_03005E08[curIndex] == RGB_BLACK)
+                            {
+                                gUnknown_03005E08[curIndex] = color;
+                                *pal = gUnknown_03005E0C + curIndex;
+                                break;
+                            }
+
+                            if (gUnknown_03005E08[curIndex] == color)
+                            {
+                                *pal = gUnknown_03005E0C + curIndex;
+                                break;
+                            }
+
+                            curIndex++;
+                        }
+                    }
+                }
+
+                if (curIndex == maxIndex)
+                {
+                    curIndex = maxIndex;
+                    *pal = curIndex;
+                }
+            }
+        }
+    }
+}
+
+void sub_80FDD70(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < gUnknown_03005DF0; i++)
+    {
+        u16* var2 = &(*gUnknown_03005DEC)[0][(gUnknown_03005DFC + i) * gUnknown_03005E04];
+        u16* pal = &var2[gUnknown_03005DE8];
+        for (j = 0; j < gUnknown_03005DF8; j++, pal++)
+        {
+            if (*pal & 0x8000)
+            {
+                *pal = gUnknown_03005E0C;
+            }
+            else
+            {
+                if (ConvertToBlackOrWhite(pal) == RGB_BLACK)
+                    *pal = gUnknown_03005E0C + 1;
+                else
+                    *pal = gUnknown_03005E0C + 2;
+            }
+        }
+    }
+}
+
+void sub_80FDE28(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < gUnknown_03005DF0; i++)
+    {
+        u16* var2 = &(*gUnknown_03005DEC)[0][(gUnknown_03005DFC + i) * gUnknown_03005E04];
+        u16* pal = &var2[gUnknown_03005DE8];
+        for (j = 0; j < gUnknown_03005DF8; j++, pal++)
+        {
+            if (*pal & 0x8000)
+                *pal = gUnknown_03005E0C;
+            else
+                *pal = sub_80FE17C(pal) + gUnknown_03005E0C;
+        }
+    }
+}
+
+void sub_80FDED8(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < gUnknown_03005DF0; i++)
+    {
+        u16* var2 = &(*gUnknown_03005DEC)[0][(gUnknown_03005DFC + i) * gUnknown_03005E04];
+        u16* pal = &var2[gUnknown_03005DE8];
+        for (j = 0; j < gUnknown_03005DF8; j++, pal++)
+        {
+            if (*pal & 0x8000)
+                *pal = gUnknown_03005E0C;
+            else
+                *pal = sub_80FE1B0(pal) + gUnknown_03005E0C;
+        }
+    }
+}
+
+void sub_80FDF88(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < gUnknown_03005DF0; i++)
+    {
+        u16* var2 = &(*gUnknown_03005DEC)[0][(gUnknown_03005DFC + i) * gUnknown_03005E04];
+        u16* pal = &var2[gUnknown_03005DE8];
+        for (j = 0; j < gUnknown_03005DF8; j++, pal++)
+        {
+            if (*pal & 0x8000)
+                *pal = gUnknown_03005E0C;
+            else
+                *pal = sub_80FE0AC(pal) + gUnknown_03005E0C;
+        }
+    }
+}
+
+u16 sub_80FE038(u16 *color)
+{
+    u16 red = *color & 0x1F;
+    u16 green = (*color >> 5) & 0x1F;
+    u16 blue = (*color >> 10) & 0x1F;
+
+    if (red & 3)
+        red = (red & 0x1C) + 4;
+    if (green & 3)
+        green = (green & 0x1C) + 4;
+    if (blue & 3)
+        blue = (blue & 0x1C) + 4;
+
+    if (red < 6)
+        red = 6;
+    if (red > 30)
+        red = 30;
+
+    if (green < 6)
+        green = 6;
+    if (green > 30)
+        green = 30;
+
+    if (blue < 6)
+        blue = 6;
+    if (blue > 30)
+        blue = 30;
+
+    return RGB2(red, green, blue);
+}
+
+u16 sub_80FE0AC(u16* color)
+{
+    u16 red = *color & 0x1F;
+    u16 green = (*color >> 5) & 0x1F;
+    u16 blue = (*color >> 10) & 0x1F;
+
+    if (red < 12 && green < 11 && blue < 11)
+        return 1;
+
+    if (red > 19 && green > 19 && blue > 19)
+        return 2;
+
+    if (red > 19)
+    {
+        if (green > 19)
+        {
+            if (blue > 14)
+                return 2;
+            else
+                return 7;
+        }
+        else if (blue > 19)
+        {
+            if (green > 14)
+                return 2;
+            else
+                return 8;
+        }
+    }
+
+    if (green > 19 && blue > 19)
+    {
+        if (red > 14)
+            return 2;
+        else
+            return 9;
+    }
+
+    if (red > 19)
+    {
+        if (green > 11)
+        {
+            if (blue > 11)
+            {
+                if (green < blue)
+                    return 8;
+                else
+                    return 7;
+            }
+            else
+            {
+                return 10;
+            }
+        }
+        else if (blue > 11)
+        {
+            return 13;
+        }
+        else
+        {
+            return 4;
+        }
+    }
+
+    if (green > 19)
+    {
+        if (red > 11)
+        {
+            if (blue > 11)
+            {
+                if (red < blue)
+                    return 9;
+                else
+                    return 7;
+            }
+            else
+            {
+                return 11;
+            }
+        }
+        else
+        {
+            if (blue > 11)
+                return 14;
+            else
+                return 5;
+        }
+    }
+
+    if (blue > 19)
+    {
+        if (red > 11)
+        {
+            if (green > 11)
+            {
+                if (red < green)
+                    return 9;
+                else
+                    return 8;
+            }
+        }
+        else if (green > 11)
+        {
+            return 12;
+        }
+
+        if (blue > 11)
+            return 15;
+        else
+            return 6;
+    }
+
+    return 3;
+}
+
+u16 sub_80FE17C(u16 *color)
+{
+    u16 red = *color & 0x1F;
+    u16 green = (*color >> 5) & 0x1F;
+    u16 blue = (*color >> 10) & 0x1F;
+    u16 average = ((red + green + blue) / 3) & 0x1E;
+    if (average == 0)
+        return 1;
+    else
+        return average / 2;
+}
+
+u16 sub_80FE1B0(u16 *color)
+{
+    u16 red = *color & 0x1F;
+    u16 green = (*color >> 5) & 0x1F;
+    u16 blue = (*color >> 10) & 0x1F;
+    u16 average = (red + green + blue) / 3;
+    return average + 1;
 }
