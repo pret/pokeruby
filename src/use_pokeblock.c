@@ -138,10 +138,10 @@ static void sub_81371DC(struct Sprite *);
 
 void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
 {
-    gUnknown_02039304 = &gUnknown_083DFEC4->unkD164;
+    gUnknown_02039304 = &gPokenavStructPtr->unkD164;
     gUnknown_02039304->pokeblock = pokeblock;
     gUnknown_02039304->callback = callback;
-    gUnknown_083DFEC4->unkD162 = 2;
+    gPokenavStructPtr->unkD162 = 2;
     launch_c3_walk_stairs_and_run_once(sub_8136294);
     SetMainCallback2(sub_8136244);
 }
@@ -152,7 +152,7 @@ static void sub_8136174(void)
     gUnknown_02039304->callback = gUnknown_02039308;
     gPokeblockMonID = sub_81370E4(gPokeblockMonID);
     gUnknown_02039304->unk56 = gPokeblockMonID < 4 ? 0 : 1;
-    gUnknown_083DFEC4->unkD162 = 2;
+    gPokenavStructPtr->unkD162 = 2;
     launch_c3_walk_stairs_and_run_once(sub_8136294);
     SetMainCallback2(sub_81361E4);
 }
@@ -209,7 +209,7 @@ static void sub_8136294(void)
     {
         case 0:
             c1LinkRelatedActive = is_c1_link_related_active();
-            gUnknown_083DFEC4->unk6DAC = c1LinkRelatedActive;
+            gPokenavStructPtr->unk6DAC = c1LinkRelatedActive;
             if ((bool8)c1LinkRelatedActive == FALSE)
             {
                 gUnknown_02039304->unk55 = 0;
@@ -241,9 +241,9 @@ static void sub_8136294(void)
             }
             break;
         case 6:
-            gUnknown_083DFEC4->unk76AA = 0;
-            gUnknown_083DFEC4->unk87E0 = NULL;
-            gUnknown_083DFEC4->unk030C = 0x20;
+            gPokenavStructPtr->unk76AA = 0;
+            gPokenavStructPtr->unk87E0 = NULL;
+            gPokenavStructPtr->unk030C = 0x20;
             gUnknown_02039304->unk50++;
             break;
         case 7:
@@ -268,11 +268,11 @@ static void sub_8136294(void)
             break;
         case 11:
             gKeyRepeatStartDelay = 20;
-            gUnknown_083DFEC4->unk8828 = CalculatePlayerPartyCount();
-            gUnknown_083DFEC4->unk9344 = 0;
-            gUnknown_083DFEC4->unk8768 = NULL;
+            gPokenavStructPtr->unk8828 = CalculatePlayerPartyCount();
+            gPokenavStructPtr->unk9344 = 0;
+            gPokenavStructPtr->unk8768 = NULL;
             sub_80F4BD0();
-            gUnknown_083DFEC4->unkD160 = 0;
+            gPokenavStructPtr->unkD160 = 0;
             gUnknown_02039304->unk50++;
             break;
         case 12:
@@ -285,7 +285,7 @@ static void sub_8136294(void)
             break;
         case 13:
             sub_80F2E18(0);
-            gUnknown_083DFEC4->unk8768->pos2.y = 0xffd8;
+            gPokenavStructPtr->unk8768->pos2.y = 0xffd8;
             gUnknown_02039304->unk50++;
             break;
         case 14:
@@ -306,7 +306,7 @@ static void sub_8136294(void)
             gUnknown_02039304->unk50++;
             break;
         case 17:
-            sub_80F567C(&gUnknown_083DFEC4->unk8ff0, gUnknown_083DFEC4->unk9004);
+            sub_80F567C(gPokenavStructPtr->unk8ff0[0], gPokenavStructPtr->unk9004[0]);
             sub_80F5B38();
             gUnknown_02039304->unk50++;
             break;
@@ -317,7 +317,7 @@ static void sub_8136294(void)
             }
             break;
         case 19:
-            sub_80F556C(gUnknown_083DFEC4->unk9004[0]);
+            sub_80F556C(gPokenavStructPtr->unk9004[0]);
             gUnknown_02039304->unk50++;
             break;
         case 20:
@@ -396,7 +396,7 @@ static void sub_8136638(void)
             else if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
-                if (gUnknown_083DFEC4->unk87DC == gUnknown_083DFEC4->unk87DA - 1)
+                if (gPokenavStructPtr->unk87DC == gPokenavStructPtr->unk87DA - 1)
                 {
                     gUnknown_02039304->unk50 = 3;
                 }
@@ -464,7 +464,7 @@ static void sub_8136808(void)
     switch (gUnknown_02039304->unk50)
     {
         case 0:
-            gPokeblockMonID = sub_81370A4(gUnknown_083DFEC4->unk87DC);
+            gPokeblockMonID = sub_81370A4(gPokenavStructPtr->unk87DC);
             gUnknown_02039308 = gUnknown_02039304->callback;
             gUnknown_0203930C = gUnknown_02039304->pokeblock;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -485,7 +485,7 @@ static void sub_81368A4(void)
     switch (gUnknown_02039304->unk50)
     {
         case 0:
-            if (gUnknown_083DFEC4->unk87DC != gPokeblockMonID)
+            if (gPokenavStructPtr->unk87DC != gPokeblockMonID)
             {
                 sub_80F5060(gUnknown_02039304->unk56);
                 gUnknown_02039304->unk50++;
@@ -539,7 +539,7 @@ static void sub_81369CC(void)
     {
         case 0:
             gUnknown_02039304->pokemon = &gPlayerParty[0];
-            gUnknown_02039304->pokemon = &gPlayerParty[gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx];
+            gUnknown_02039304->pokemon = &gPlayerParty[gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].partyIdx];
             move_anim_execute();
             gUnknown_02039304->unk50++;
             break;
@@ -549,15 +549,15 @@ static void sub_81369CC(void)
             break;
         case 2:
             sub_8136EF0();
-            sub_80F567C(gUnknown_02039304->unk5c, gUnknown_083DFEC4->unk9040);
-            sub_80F5550(gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9], gUnknown_083DFEC4->unk9040);
+            sub_80F567C(gUnknown_02039304->unk5c, gPokenavStructPtr->unk9004[3]);
+            sub_80F5550(gPokenavStructPtr->unk9004[gPokenavStructPtr->unk8fe9], gPokenavStructPtr->unk9004[3]);
             sub_8137138();
             gUnknown_02039304->unk50++;
             break;
         case 3:
             if (!sub_80F555C())
             {
-                sub_80F7224(sub_81370A4(gUnknown_083DFEC4->unk87DC));
+                sub_80F7224(sub_81370A4(gPokenavStructPtr->unk87DC));
                 sub_80F3D00();
                 gUnknown_02039304->unk52 = 0;
                 gUnknown_02039304->unk50++;
@@ -606,7 +606,7 @@ static void sub_8136B44(void)
 
 static void sub_8136BB8(void)
 {
-    GetMonData(&gPlayerParty[sub_81370A4(gUnknown_083DFEC4->unk87DC)], MON_DATA_NICKNAME, gUnknown_02039304->stringBuffer);
+    GetMonData(&gPlayerParty[sub_81370A4(gPokenavStructPtr->unk87DC)], MON_DATA_NICKNAME, gUnknown_02039304->stringBuffer);
     StringGetEnd10(gUnknown_02039304->stringBuffer);
     StringAppend(gUnknown_02039304->stringBuffer, gOtherText_GetsAPokeBlock);
     BasicInitMenuWindow(&gWindowTemplate_81E709C);
@@ -781,7 +781,7 @@ static void sub_8136EF0(void)
 {
     u16 i;
     struct Pokemon *pokemon = gPlayerParty;
-    pokemon += gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx;
+    pokemon += gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].partyIdx;
     Pokeblock_GetMonContestStats(pokemon, gUnknown_02039304->unk57);
     sub_8136E40(gUnknown_02039304->pokeblock, pokemon);
     Pokeblock_GetMonContestStats(pokemon, gUnknown_02039304->unk5c);
@@ -826,7 +826,7 @@ static void sub_8136F74(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
 static bool8 sub_8137058(void)
 {
     struct Pokemon *pokemon = gPlayerParty;
-    pokemon += gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].partyIdx;
+    pokemon += gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].partyIdx;
     if (GetMonData(pokemon, MON_DATA_SHEEN) == 255)
         return TRUE;
     return FALSE;

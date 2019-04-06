@@ -23,7 +23,7 @@ SECTIONS {
         INCLUDE "sym_bss.ld"
 
         /* .bss.code starts at 0x3000F60 */
-        src/libs/m4a_2.o(.bss.code);
+        src/libs/m4a.o(.bss.code);
 
         /* COMMON starts at 0x3001760 */
         INCLUDE "sym_common.ld"
@@ -295,9 +295,8 @@ SECTIONS {
         src/easy_chat_1.o(.text);
         src/easy_chat_2.o(.text);
         src/pokenav_before.o(.text);
-        asm/pokenav.o(.text);
-        src/pokenav_after.o(.text);
-        asm/pokenav.o(.text_80F708C);
+        src/pokenav.o(.text);
+        src/trainers_eye.o(.text);
         src/mon_markings.o(.text);
         src/mauville_man.o(.text);
         src/mail.o(.text);
@@ -400,9 +399,7 @@ SECTIONS {
     {
         src/libs/libgcnmultiboot.o(.text);
         src/libs/m4a_1.o(.text);
-        src/libs/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/libs/m4a_4.o(.text);
+        src/libs/m4a.o(.text);
         src/libs/agb_flash.o(.text);
         src/libs/agb_flash_1m.o(.text);
         src/libs/agb_flash_mx.o(.text);
@@ -698,7 +695,10 @@ SECTIONS {
         src/easy_chat_1.o(.rodata);
         src/easy_chat_2.o(.rodata);
         src/easy_chat_2.o(.data);
+        src/pokenav_before.o(.rodata);
+        src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
+        src/trainers_eye.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_man.o(.rodata);
         src/mail.o(.rodata);
