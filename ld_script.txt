@@ -296,7 +296,6 @@ SECTIONS {
         src/easy_chat_2.o(.text);
         src/pokenav_before.o(.text);
         src/pokenav.o(.text);
-        asm/pokenav.o(.text);
         src/trainers_eye.o(.text);
         src/mon_markings.o(.text);
         src/mauville_man.o(.text);
