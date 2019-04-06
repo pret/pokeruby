@@ -6297,7 +6297,7 @@ Move_CRABHAMMER: @ 81D0159
 	end
 
 Move_SURF: @ 81D0253
-	createvisualtask sub_80D38BC, 2, 0
+	createvisualtask AnimTask_CreateSurfWave, 2, 0
 	delay 24
 	panse_1B SE_W057, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 2, 0
 	waitforvisualfinish
@@ -8557,7 +8557,7 @@ _81D3750:
 
 Move_MUDDY_WATER: @ 81D3764
 	panse_1B SE_W250, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 2, 0
-	createvisualtask sub_80D38BC, 2, 1
+	createvisualtask AnimTask_CreateSurfWave, 2, 1
 	waitforvisualfinish
 	end
 

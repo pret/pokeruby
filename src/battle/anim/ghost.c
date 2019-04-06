@@ -349,7 +349,7 @@ void sub_80DDDF0(u8 taskId)
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = 0x1000;
     spriteId = GetAnimBattlerSpriteId(0);
-    sub_8078E70(spriteId, 1);
+    PrepareBattlerSpriteForRotScale(spriteId, 1);
     obj_id_set_rotscale(spriteId, 128, 128, 0);
     gSprites[spriteId].invisible = FALSE;
     gTasks[taskId].data[0] = 128;

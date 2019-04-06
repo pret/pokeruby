@@ -83,7 +83,7 @@ static void sub_80CD81C(struct Sprite* sprite)
     if (sprite->data[0] == 0)
     {
         sprite->data[3] = gBankSpriteIds[gBattleAnimAttacker];
-        sub_8078E70(sprite->data[3], 0);
+        PrepareBattlerSpriteForRotScale(sprite->data[3], 0);
         sprite->data[4] = (sprite->data[6] = GetBattlerSide(gBattleAnimAttacker)) ? 0x300 : 0xFFFFFD00;
         sprite->data[5] = 0;
     }
@@ -166,7 +166,7 @@ static void sub_80CD9D4(struct Sprite* sprite)
         sprite->data[3] = GetBattlerSide(gBattleAnimAttacker);
         sprite->data[4] = (sprite->data[3] != 0) ? 0x200 : -0x200;
         sprite->data[5] = 0;
-        sub_8078E70(sprite->data[2], 0);
+        PrepareBattlerSpriteForRotScale(sprite->data[2], 0);
         sprite->data[0]++;
     case 1:
         sprite->data[5] += sprite->data[4];
@@ -247,7 +247,7 @@ void sub_80CDB60(u8 taskId)
             task->data[3] = 8;
             task->data[4] = 0;
             task->data[5] = (task->data[1] == 0) ? -0xC0 : 0xC0;
-            sub_8078E70(task->data[0], 0);
+            PrepareBattlerSpriteForRotScale(task->data[0], 0);
             task->data[2]++;
         }
         break;

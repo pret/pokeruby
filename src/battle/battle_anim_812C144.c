@@ -2070,7 +2070,7 @@ static void sub_812D3AC(struct Sprite *sprite)
     case 0:
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
-        sub_8078E70(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, 0);
         sprite->data[1] = 256;
         sprite->data[2] = 256;
         sprite->data[0]++;
@@ -2753,7 +2753,7 @@ void sub_812E568(u8 taskId)
         task->data[5] *= -1;
     }
 
-    sub_8078E70(task->data[15], 0);
+    PrepareBattlerSpriteForRotScale(task->data[15], 0);
     task->func = sub_812E638;
 }
 
@@ -2867,7 +2867,7 @@ void sub_812E860(u8 taskId)
     task->data[14] = 0x800;
     task->data[15] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
 
-    sub_8078E70(task->data[15], 0);
+    PrepareBattlerSpriteForRotScale(task->data[15], 0);
     task->func = sub_812E8B4;
 }
 
@@ -2989,7 +2989,7 @@ void sub_812EB10(u8 taskId)
 
         spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
         gTasks[taskId].data[10] = spriteId;
-        sub_8078E70(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, 0);
 
         switch (gBattleAnimArgs[1])
         {
@@ -4945,7 +4945,7 @@ void sub_81312E4(u8 taskId)
 
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_8078E70(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, 0);
         gTasks[taskId].data[1] = 0x100;
         gTasks[taskId].data[2] = 0x100;
         gTasks[taskId].data[0]++;
