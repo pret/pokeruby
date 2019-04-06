@@ -6,7 +6,7 @@ struct Unk03005E20
     u8 var_0;
     u8 pad1[3];
     u16 (*var_4)[][32];
-    u16 (*var_8)[];
+    u16 *var_8;
     u8 pad0C[4];
     u16 (*var_10)[][32];
     u16 var_14;

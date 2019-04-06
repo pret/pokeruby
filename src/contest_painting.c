@@ -23,7 +23,7 @@ u16 (*gUnknown_03005E10)[][32];
 struct Unk03005E20 gUnknown_03005E20;
 u8 gUnknown_03005E40[0x4C];
 struct ContestEntry *gUnknown_03005E8C;
-u16 (*gUnknown_03005E90)[];
+u16 *gUnknown_03005E90;
 
 static const u16 gPictureFramePalettes[][16] =
 {
@@ -634,7 +634,7 @@ static u8 sub_8106EE0(u8 arg0)
 
 static void sub_8106F4C(void)
 {
-    gUnknown_03005E90 = &ewram15E00.unk2017e00;
+    gUnknown_03005E90 = ewram15E00.unk2017e00;
     gUnknown_03005E10 = &ewram15E00.unk2015e00;
 }
 
