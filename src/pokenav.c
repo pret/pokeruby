@@ -6146,3 +6146,337 @@ void sub_80F66E0(void)
     }
     gPokenavStructPtr->unkBC96[i] = gPokenavStructPtr->unkBC8F;
 }
+
+// FIXME: wtf is this control flow
+#ifdef NONMATCHING
+u8 sub_80F68E8(void)
+{
+    s8 r5 = gPokenavStructPtr->unkBC90;
+    s8 r4 = gPokenavStructPtr->unkBC91;
+    u8 r12 = 1;
+    if (({gMain.newAndRepeatedKeys & DPAD_UP;}) && r4 > 0)
+    {
+        while (r4 > 0)
+        {
+            r4--;
+            if (gPokenavStructPtr->unkBC96[r4] != 0)
+            {
+                break;
+            }
+        }
+        if (gPokenavStructPtr->unkBC96[r4] != 0)
+        {
+            goto check_r5;
+        }
+        r4 = gPokenavStructPtr->unkBC91;
+    }
+    if (({gMain.newAndRepeatedKeys & DPAD_DOWN;}) && r4 < 3)
+    {
+        while (r4 < 3)
+        {
+            r4++;
+            if (gPokenavStructPtr->unkBC96[r4] != 0)
+            {
+                break;
+            }
+        }
+        if (gPokenavStructPtr->unkBC96[r4] != 0)
+        {
+            goto check_r5;
+        }
+        r4 = gPokenavStructPtr->unkBC91;
+    }
+    if (({gMain.newAndRepeatedKeys & DPAD_LEFT;}) && r5 > 0)
+    {
+        r5--;
+    }
+    else if (({gMain.newAndRepeatedKeys & DPAD_RIGHT;}) && r5 < gPokenavStructPtr->unkBC96[r4] - 1)
+    {
+        r5++;
+    }
+    else
+    {
+        r12 = 0;
+    }
+    goto end;
+
+    check_r5:
+    if (r5 >= gPokenavStructPtr->unkBC96[r4])
+    {
+        r5--;
+    }
+    end:
+    if (r12)
+    {
+        if (r5 != gPokenavStructPtr->unkBC90 || r4 != gPokenavStructPtr->unkBC91)
+        {
+            gPokenavStructPtr->unkBC90 = r5;
+            gPokenavStructPtr->unkBC91 = r4;
+        }
+        else
+        {
+            r12 = 0;
+        }
+    }
+    return r12;
+}
+#else
+NAKED
+bool8 sub_80F68E8(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tldr r3, _080F6918 @ =gPokenavStructPtr\n"
+                "\tldr r0, [r3]\n"
+                "\tldr r2, _080F691C @ =0x0000bc90\n"
+                "\tadds r1, r0, r2\n"
+                "\tldrb r5, [r1]\n"
+                "\tldr r6, _080F6920 @ =0x0000bc91\n"
+                "\tadds r0, r6\n"
+                "\tldrb r4, [r0]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmov r12, r0\n"
+                "\tldr r2, _080F6924 @ =gMain\n"
+                "\tldrh r1, [r2, 0x30]\n"
+                "\tmovs r0, 0x40\n"
+                "\tands r0, r1\n"
+                "\tadds r6, r3, 0\n"
+                "\tadds r7, r2, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F692E\n"
+                "\tlsls r0, r4, 24\n"
+                "\tcmp r0, 0\n"
+                "\tble _080F692E\n"
+                "\tb _080F69BC\n"
+                "\t.align 2, 0\n"
+                "_080F6918: .4byte gPokenavStructPtr\n"
+                "_080F691C: .4byte 0x0000bc90\n"
+                "_080F6920: .4byte 0x0000bc91\n"
+                "_080F6924: .4byte gMain\n"
+                "_080F6928:\n"
+                "\tldr r1, _080F69B0 @ =0x0000bc91\n"
+                "\tadds r0, r2, r1\n"
+                "\tldrb r4, [r0]\n"
+                "_080F692E:\n"
+                "\tldrh r1, [r7, 0x30]\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F6978\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0x2\n"
+                "\tbgt _080F6978\n"
+                "\tldr r3, _080F69B4 @ =gPokenavStructPtr\n"
+                "\tldr r2, _080F69B8 @ =0x0000bc96\n"
+                "_080F6944:\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0x2\n"
+                "\tbgt _080F6960\n"
+                "\tadds r0, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tldr r1, [r3]\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tasrs r0, 24\n"
+                "\tadds r1, r2\n"
+                "\tadds r1, r0\n"
+                "\tldrb r0, [r1]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F6944\n"
+                "_080F6960:\n"
+                "\tldr r2, [r6]\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldr r3, _080F69B8 @ =0x0000bc96\n"
+                "\tadds r1, r2, r3\n"
+                "\tadds r1, r0\n"
+                "\tldrb r0, [r1]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080F69EC\n"
+                "\tldr r1, _080F69B0 @ =0x0000bc91\n"
+                "\tadds r0, r2, r1\n"
+                "\tldrb r4, [r0]\n"
+                "_080F6978:\n"
+                "\tldrh r2, [r7, 0x30]\n"
+                "\tmovs r0, 0x20\n"
+                "\tands r0, r2\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F698A\n"
+                "\tlsls r0, r5, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbgt _080F6A3C\n"
+                "_080F698A:\n"
+                "\tmovs r0, 0x10\n"
+                "\tands r0, r2\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F69AA\n"
+                "\tlsls r0, r5, 24\n"
+                "\tasrs r2, r0, 24\n"
+                "\tldr r1, [r6]\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldr r3, _080F69B8 @ =0x0000bc96\n"
+                "\tadds r1, r3\n"
+                "\tadds r1, r0\n"
+                "\tldrb r0, [r1]\n"
+                "\tsubs r0, 0x1\n"
+                "\tcmp r2, r0\n"
+                "\tblt _080F6A38\n"
+                "_080F69AA:\n"
+                "\tmovs r0, 0\n"
+                "\tmov r12, r0\n"
+                "\tb _080F69FC\n"
+                "\t.align 2, 0\n"
+                "_080F69B0: .4byte 0x0000bc91\n"
+                "_080F69B4: .4byte gPokenavStructPtr\n"
+                "_080F69B8: .4byte 0x0000bc96\n"
+                "_080F69BC:\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tble _080F69DA\n"
+                "\tsubs r0, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tldr r1, [r6]\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldr r2, _080F6A2C @ =0x0000bc96\n"
+                "\tadds r1, r2\n"
+                "\tadds r1, r0\n"
+                "\tldrb r0, [r1]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F69BC\n"
+                "_080F69DA:\n"
+                "\tldr r2, [r6]\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldr r3, _080F6A2C @ =0x0000bc96\n"
+                "\tadds r1, r2, r3\n"
+                "\tadds r1, r0\n"
+                "\tldrb r0, [r1]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F6928\n"
+                "_080F69EC:\n"
+                "\tlsls r0, r5, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldrb r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tblt _080F69FC\n"
+                "\tsubs r0, r1, 0x1\n"
+                "_080F69F8:\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "_080F69FC:\n"
+                "\tmov r0, r12\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080F6A44\n"
+                "\tlsls r0, r5, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldr r3, [r6]\n"
+                "\tldr r1, _080F6A30 @ =0x0000bc90\n"
+                "\tadds r2, r3, r1\n"
+                "\tldrb r6, [r2]\n"
+                "\tcmp r0, r6\n"
+                "\tbne _080F6A20\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r0, 24\n"
+                "\tldr r6, _080F6A34 @ =0x0000bc91\n"
+                "\tadds r1, r3, r6\n"
+                "\tldrb r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tbeq _080F6A40\n"
+                "_080F6A20:\n"
+                "\tstrb r5, [r2]\n"
+                "\tldr r1, _080F6A34 @ =0x0000bc91\n"
+                "\tadds r0, r3, r1\n"
+                "\tstrb r4, [r0]\n"
+                "\tb _080F6A44\n"
+                "\t.align 2, 0\n"
+                "_080F6A2C: .4byte 0x0000bc96\n"
+                "_080F6A30: .4byte 0x0000bc90\n"
+                "_080F6A34: .4byte 0x0000bc91\n"
+                "_080F6A38:\n"
+                "\tadds r0, r2, 0x1\n"
+                "\tb _080F69F8\n"
+                "_080F6A3C:\n"
+                "\tsubs r0, 0x1\n"
+                "\tb _080F69F8\n"
+                "_080F6A40:\n"
+                "\tmovs r2, 0\n"
+                "\tmov r12, r2\n"
+                "_080F6A44:\n"
+                "\tmov r0, r12\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif //NONMATCHING
+
+void sub_80F6A4C(s8 a0)
+{
+    gPokenavStructPtr->unk876E += a0;
+    if (gPokenavStructPtr->unk876E < 0)
+    {
+        gPokenavStructPtr->unk876E = gPokenavStructPtr->unk8774;
+    }
+    if (gPokenavStructPtr->unk876E > gPokenavStructPtr->unk8774)
+    {
+        gPokenavStructPtr->unk876E = 0;
+    }
+    gPokenavStructPtr->unkBC94 = a0;
+    gPokenavStructPtr->unk87DC = gPokenavStructPtr->unk876E;
+    REG_WININ = 0x3F37;
+    REG_WINOUT = 0x3F3F;
+    REG_WIN0H = 0x58F0;
+    REG_WIN0V = 0x2060;
+    gPokenavStructPtr->unk87DE = 0;
+}
+
+bool8 sub_80F6AF0(void)
+{
+    switch (gPokenavStructPtr->unk87DE)
+    {
+    case 0:
+        if (!sub_80F173C())
+        {
+            gPokenavStructPtr->unk87DE++;
+        }
+        break;
+    case 1:
+        REG_DISPCNT |= DISPCNT_WIN0_ON;
+        sub_80F1480();
+        sub_80F66E0();
+        gPokenavStructPtr->unk87DE++;
+        break;
+    case 2:
+        DrawMonRibbonIcons();
+        gPokenavStructPtr->unk87DE++;
+        break;
+    case 3:
+        sub_80F13FC();
+        gPokenavStructPtr->unk87DE++;
+        break;
+    case 4:
+        sub_80F4824(gPokenavStructPtr->unk876E, 0);
+        gPokenavStructPtr->unk87DE++;
+        break;
+    case 5:
+        sub_80F2E18(0);
+        gPokenavStructPtr->unk87DE++;
+        break;
+    case 6:
+        if (!sub_80F170C())
+        {
+            sub_80F1438();
+            REG_DISPCNT &= ~DISPCNT_WIN0_ON;
+            gPokenavStructPtr->unk87DE++;
+            return FALSE;
+        }
+        break;
+    default:
+        return FALSE;
+    }
+
+    return TRUE;
+}

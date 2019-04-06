@@ -434,7 +434,7 @@ bool8 sub_80F70FC();
 void sub_80F708C(s8);
 void sub_80F6F10();
 void sub_80F15A8(void);
-void sub_80F6A4C();
+void sub_80F6A4C(s8);
 bool8 sub_80F6AF0();
 u8 sub_80F68E8();
 void sub_80F66E0();
