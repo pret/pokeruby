@@ -81,7 +81,7 @@ void sub_80D5B0C(struct Sprite *sprite)
             sprite->data[4] = -4;
         }
 
-        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
         sprite->data[0]++;
         break;
     case 1:

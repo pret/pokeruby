@@ -215,7 +215,7 @@ void sub_80DF5A0(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->invisible = 1;
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_8078504;
 }
 
@@ -243,7 +243,7 @@ void sub_80DF63C(struct Sprite *sprite)
     }
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
 }
 
 // Dragon Rage
@@ -263,7 +263,7 @@ void sub_80DF6F0(struct Sprite *sprite)
     sub_807867C(sprite, gBattleAnimArgs[1]);
     sprite->pos1.y += gBattleAnimArgs[2];
     sprite->callback = sub_8078600;
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
 }
 
 // Dragon Breath init
@@ -286,8 +286,8 @@ void sub_80DF78C(struct Sprite *sprite)
     sprite->data[4] = 0;
     sprite->data[5] = 1;
     sprite->data[6] = gBattleAnimArgs[0];
-    r5 = sub_807A100(gBankAttacker, 0);
-    r0 = sub_807A100(gBankAttacker, 1);
+    r5 = GetBattlerSpriteCoordAttr(gBankAttacker, 0);
+    r0 = GetBattlerSpriteCoordAttr(gBankAttacker, 1);
     if (r5 > r0)
         sprite->data[7] = r5 / 2;
     else

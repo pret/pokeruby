@@ -3986,7 +3986,7 @@ Move_FEATHER_DANCE: @ 81CCB01
 Move_TEETER_DANCE: @ 81CCBD1
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	loadspritegfx ANIM_TAG_DUCK
-	createvisualtask sub_813219C, 5
+	createvisualtask AnimTask_TeeterDanceMovement, 5
 	createsprite gBattleAnimSpriteTemplate_83D715C, ANIM_BATTLER_ATTACKER, 2, 0, 16, -2
 	playsewithpan SE_W298, SOUND_PAN_ATTACKER
 	delay 24
@@ -4095,7 +4095,7 @@ Move_NEEDLE_ARM: @ 81CCD73
 
 Move_SLACK_OFF: @ 81CCF23
 	loadspritegfx ANIM_TAG_BLUE_STAR
-	createvisualtask sub_813257C, 2, 0
+	createvisualtask AnimTask_SlackOffSquish, 2, 0
 	playsewithpan SE_W281, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	call Unknown_81D5EF5
@@ -8422,7 +8422,7 @@ Move_ROLE_PLAY: @ 81D3428
 	waitforvisualfinish
 	playsewithpan SE_W161, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W197, SOUND_PAN_ATTACKER, 30
-	createvisualtask sub_812EFC8, 2
+	createvisualtask AnimTask_RolePlaySilhouette, 2
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATK_PARTNER
 	createvisualtask sub_80E2A38, 10, 4, 2, 16, 0, 32767
@@ -8884,7 +8884,7 @@ Move_RETURN: @ 81D3F36
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_BATTLER_DEF_PARTNER
 	setalpha 12, 8
-	createvisualtask sub_81318F0, 2
+	createvisualtask AnimTask_GetReturnPowerLevel, 2
 	delay 2
 	jumpargeq 7, 0, _81D3F6C
 	jumpargeq 7, 1, _81D3FBE
@@ -9832,7 +9832,7 @@ Move_WEATHER_BALL: @ 81D5989
 	playsewithpan SE_W197, 0
 	createsprite gBattleAnimSpriteTemplate_83DB3DC, ANIM_BATTLER_ATTACKER, 2, 31, 5, 1, 32767, 10, 0, 0
 	waitforvisualfinish
-	createvisualtask sub_8132528, 2
+	createvisualtask AnimTask_GetWeather, 2
 	delay 1
 	jumpargeq 7, 0, _81D59F4
 	jumpargeq 7, 1, _81D5A31
@@ -10560,11 +10560,11 @@ _81D68AE:
 	end
 _81D68B5:
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
-	createvisualtask sub_8131944, 2
+	createvisualtask AnimTask_SnatchOpposingMonMove, 2
 	goto _81D68AE
 _81D68C5:
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
-	createvisualtask sub_8131FFC, 2
+	createvisualtask AnimTask_SnatchPartnerMove, 2
 	goto _81D68AE
 
 General_FutureSightHit: @ 81D68D5

@@ -627,11 +627,11 @@ void sub_80DA4D8(struct Sprite *sprite)
     {
         if (gMain.inBattle)
         {
-            sprite->oam.priority = sub_8079ED4(slot) + 1;
+            sprite->oam.priority = GetBattlerSpriteBGPriority(slot) + 1;
         }
         else
         {
-            sprite->oam.priority = sub_8079ED4(slot);
+            sprite->oam.priority = GetBattlerSpriteBGPriority(slot);
         }
 
         ((u8 *) data)[14] = data[7] & -2;
@@ -647,7 +647,7 @@ void sub_80DA4D8(struct Sprite *sprite)
     }
     else
     {
-        sprite->oam.priority = sub_8079ED4(slot);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(slot);
         ((u8 *) data)[14] |= 1;
 
         if (data[2] & 0x8000)
@@ -1881,7 +1881,7 @@ _080DAD2C: .4byte sub_80DA48C\n");
 
 void sub_80DAD30(struct Sprite *sprite)
 {
-    sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
+    sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
@@ -1911,12 +1911,12 @@ void sub_80DAD84(struct Sprite * sprite)
 
         if (gBattleAnimArgs[4])
         {
-            sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) + 1;
+            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
             // 080dae24
         }
         else
         {
-            sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
+            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
         }
     }
     else
@@ -2655,7 +2655,7 @@ void sub_80DB6A0(struct Sprite *sprite)
 
     if ((u16) (sprite->pos1.x + 0x2d) > 0x14a || sprite->pos1.y > 0x9d || sprite->pos1.y < -0x2d)
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 }
 
