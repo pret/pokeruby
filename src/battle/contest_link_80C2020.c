@@ -38,17 +38,17 @@
 
 struct UnkEwramStruct18000 {
     u8 unk_00;
-    u8 filler_01[1];
+    u8 unk_01;
     u8 unk_02;
     u8 unk_03;
     u8 unk_04;
     u8 unk_05;
     u8 unk_06;
-    u8 filler_07[1];
+    u8 unk_07;
     u8 unk_08;
     u8 unk_09;
     u8 unk_0a;
-    u8 filler_0b[9];
+    s16 unk_0c[4];
     u8 unk_14;
 };
 
@@ -1215,3 +1215,40 @@ void sub_80C3158(const u8 * string, u8 spriteId)
                 "_080C33D8: .4byte REG_BG0CNT");
 }
 #endif //NONMATCHING
+
+void sub_80C33DC(void)
+{
+    int i;
+    struct SpriteTemplate template;
+    u8 spriteIds[8];
+
+    template = gSpriteTemplate_83D174C;
+    for (i = 0; i <8; i++)
+        LoadSpriteSheet(&gUnknown_083D1764[i]);
+
+    LoadSpritePalette(&gUnknown_083D17A4);
+    for (i = 0; i < 8; i++)
+    {
+        spriteIds[i] = CreateSprite(&template, 272, 144, 10);
+        template.tileTag++;
+    }
+
+    gSprites[spriteIds[0]].data[0] = spriteIds[1];
+    gSprites[spriteIds[0]].data[1] = spriteIds[2];
+    gSprites[spriteIds[0]].data[2] = spriteIds[3];
+
+    gSprites[spriteIds[4]].data[0] = spriteIds[5];
+    gSprites[spriteIds[4]].data[1] = spriteIds[6];
+    gSprites[spriteIds[4]].data[2] = spriteIds[7];
+
+    eContestLink80C2020Struct2018000.unk_00 = spriteIds[0];
+    eContestLink80C2020Struct2018000.unk_04 = 0;
+    eContestLink80C2020Struct2018000.unk_01 = spriteIds[4];
+    sub_80C3764();
+}
+
+u16 sub_80C34AC(const u8 * string)
+{
+    u8 width = (StringLength(string) * 6);
+    return 0x70 - (width / 2);
+}
