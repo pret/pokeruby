@@ -39,7 +39,7 @@ void AnimTask_Splash(u8 taskId)
         task->data[2] = gBattleAnimArgs[1];
         task->data[3] = 0;
         task->data[4] = 0;
-        sub_80798F4(task, spriteId, &gSpriteAffineAnim_83D76F4);
+        PrepareAffineAnimInTaskData(task, spriteId, &gSpriteAffineAnim_83D76F4);
         task->func = AnimTask_SplashStep;
     }
 }
@@ -50,7 +50,7 @@ void AnimTask_SplashStep(u8 taskId)
     switch (task->data[1])
     {
     case 0:
-        sub_807992C(task);
+        RunAffineAnimFromTaskData(task);
         task->data[4] += 3;
         gSprites[task->data[0]].pos2.y += task->data[4];
         if (++task->data[3] > 7)
@@ -60,7 +60,7 @@ void AnimTask_SplashStep(u8 taskId)
         }
         break;
     case 1:
-        sub_807992C(task);
+        RunAffineAnimFromTaskData(task);
         gSprites[task->data[0]].pos2.y += task->data[4];
         if (++task->data[3] > 7)
         {
@@ -78,7 +78,7 @@ void AnimTask_SplashStep(u8 taskId)
             task->data[1]++;
         break;
     case 3:
-        if (!sub_807992C(task))
+        if (!RunAffineAnimFromTaskData(task))
         {
             if (--task->data[2] == 0)
             {
@@ -87,7 +87,7 @@ void AnimTask_SplashStep(u8 taskId)
             }
             else
             {
-                sub_80798F4(task, task->data[0], &gSpriteAffineAnim_83D76F4);
+                PrepareAffineAnimInTaskData(task, task->data[0], &gSpriteAffineAnim_83D76F4);
                 task->data[1] = 0;
             }
         }

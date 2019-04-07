@@ -461,7 +461,7 @@ static void AnimShadowBallStep(struct Sprite *sprite)
         sprite->data[0] += 1;
         break;
     case 3:
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
         break;
     }
 }
@@ -852,7 +852,7 @@ void sub_80DE918(u8 taskId)
     task->data[10] = gBattleAnimArgs[0];
 
     baseX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    baseY = sub_807A100(gBattleAnimAttacker, 3);
+    baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, 3);
     if (!IsContest())
     {
         for (battler = 0; battler < 4; battler++)
@@ -865,7 +865,7 @@ void sub_80DE918(u8 taskId)
                 if (spriteId != MAX_SPRITES)
                 {
                     x = GetBattlerSpriteCoord(battler, 2);
-                    y = sub_807A100(battler, 3);
+                    y = GetBattlerSpriteCoordAttr(battler, 3);
                     gSprites[spriteId].data[0] = baseX << 4;
                     gSprites[spriteId].data[1] = baseY << 4;
                     gSprites[spriteId].data[2] = ((x - baseX) << 4) / gBattleAnimArgs[1];
@@ -1216,9 +1216,9 @@ void sub_80DF1A4(u8 taskId)
     task->data[1] = 16;
     task->data[9] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     task->data[10] = sub_8077FC0(gBattleAnimAttacker);
-    task->data[11] = (sub_807A100(gBattleAnimAttacker, 1) / 2) + 8;
+    task->data[11] = (GetBattlerSpriteCoordAttr(gBattleAnimAttacker, 1) / 2) + 8;
     task->data[7] = 0;
-    task->data[5] = sub_8079ED4(gBattleAnimAttacker);
+    task->data[5] = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
     task->data[6] = GetBattlerSubpriority(gBattleAnimAttacker) - 2;
     task->data[3] = 0;
     task->data[4] = 16;
@@ -1370,6 +1370,6 @@ static void sub_80DF4F4(struct Sprite *sprite)
         gSprites[sprite->data[5]].pos2.x = 0;
         gSprites[sprite->data[5]].pos2.y = 0;
         gSprites[sprite->data[5]].pos1.y -= 8;
-        sprite->callback = move_anim_8074EE0;
+        sprite->callback = DestroySpriteAndMatrix;
     }
 }

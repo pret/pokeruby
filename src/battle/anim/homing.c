@@ -93,6 +93,6 @@ static void sub_80CC7D4(struct Sprite* sprite)
     }
     else
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 }

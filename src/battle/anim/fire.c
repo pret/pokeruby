@@ -253,7 +253,7 @@ static void sub_80D5038(struct Sprite *sprite)
     }
 
     if (sprite->data[0] == sprite->data[1])
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
 }
 
 void sub_80D5074(struct Sprite *sprite)
@@ -303,6 +303,6 @@ static void sub_80D50E8(struct Sprite *sprite)
     }
     else
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 }

@@ -153,7 +153,7 @@ static void sub_80CF088(struct Sprite* sprite)
     if (++sprite->data[0] > 16)
     {
         StartSpriteAffineAnim(sprite, 1);
-        StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+        StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
         sprite->callback = sub_80785E4;
     }
 }
@@ -167,7 +167,7 @@ void sub_80CF0BC(struct Sprite* sprite)
         bank = gBattleAnimTarget;
 
     sprite->pos1.x = GetBattlerSpriteCoord(bank, 0);
-    sprite->pos1.y = sub_807A100(bank, 2);
+    sprite->pos1.y = GetBattlerSpriteCoordAttr(bank, 2);
     if (sprite->pos1.y <= 9)
         sprite->pos1.y = 10;
 

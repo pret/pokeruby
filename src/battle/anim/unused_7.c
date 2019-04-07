@@ -34,7 +34,7 @@ static void sub_80CF374(struct Sprite* sprite)
     if (sprite->data[0] == 0)
     {
         gSprites[sprite->data[2]].pos2.x = 0;
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 
     sprite->data[0]--;

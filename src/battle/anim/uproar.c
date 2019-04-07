@@ -20,12 +20,12 @@ void sub_80D2CF8(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
 
-    sub_80798F4(&gTasks[taskId], spriteId, gSpriteAffineAnim_83D7CA8);
+    PrepareAffineAnimInTaskData(&gTasks[taskId], spriteId, gSpriteAffineAnim_83D7CA8);
     gTasks[taskId].func = sub_80D2D3C;
 }
 
 static void sub_80D2D3C(u8 taskId)
 {
-    if (!sub_807992C(&gTasks[taskId]))
+    if (!RunAffineAnimFromTaskData(&gTasks[taskId]))
         DestroyAnimVisualTask(taskId);
 }
