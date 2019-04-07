@@ -872,7 +872,7 @@ static void AnimFlickerIceEffectParticle(struct Sprite *sprite)
     sprite->invisible ^= 1;
     sprite->data[0] += 1;
     if (sprite->data[0] == 20)
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
 }
 
 // Animates the small snowballs that swirl around the target in Blizzard and Icy Wind.
@@ -1192,9 +1192,9 @@ static void AnimSwirlingFogAnim(struct Sprite *sprite)
         sprite->pos2.y += Cos(sprite->data[5], -6);
 
         if ((u16)(sprite->data[5] - 64) <= 0x7F)
-            sprite->oam.priority = sub_8079ED4(sprite->data[7]); 
+            sprite->oam.priority = GetBattlerSpriteBGPriority(sprite->data[7]); 
         else
-            sprite->oam.priority = sub_8079ED4(sprite->data[7]) + 1;
+            sprite->oam.priority = GetBattlerSpriteBGPriority(sprite->data[7]) + 1;
 
         sprite->data[5] = (sprite->data[5] + 3) & 0xFF;
     }
@@ -1438,7 +1438,7 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[3];
         sprite->data[3] = sprite->pos1.y + gBattleAnimArgs[2];
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[4];
-        sprite->data[7] |= sub_8079ED4(gBattleAnimTarget) << 8;
+        sprite->data[7] |= GetBattlerSpriteBGPriority(gBattleAnimTarget) << 8;
     }
     else
     {
@@ -1446,7 +1446,7 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[3];
         sprite->data[3] = sprite->pos1.y + gBattleAnimArgs[2];
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[4];
-        sprite->data[7] |= sub_8079ED4(gBattleAnimTarget) << 8;
+        sprite->data[7] |= GetBattlerSpriteBGPriority(gBattleAnimTarget) << 8;
     } 
 
     if (IsContest())
@@ -1968,13 +1968,13 @@ bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//
         {
         case 0:
             //
-            r7 -= sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 1) / 6;
-            r6 -= sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 0) / 6;
+            r7 -= GetBattlerSpriteCoordAttr(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 1) / 6;
+            r6 -= GetBattlerSpriteCoordAttr(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 0) / 6;
             break;
         case 1:
             //
-            r7 += sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 1) / 6;
-            r6 += sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 0) / 6;
+            r7 += GetBattlerSpriteCoordAttr(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 1) / 6;
+            r6 += GetBattlerSpriteCoordAttr(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 0) / 6;
         }
     }
 
@@ -2072,7 +2072,7 @@ NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
                 "_080D8C24:\n"
                 "\tadds r0, r5, 0\n"
                 "\tmovs r1, 0x1\n"
-                "\tbl sub_807A100\n"
+                "\tbl GetBattlerSpriteCoordAttr\n"
                 "\tlsls r0, 16\n"
                 "\tasrs r0, 16\n"
                 "\tmovs r1, 0x6\n"
@@ -2084,7 +2084,7 @@ NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
                 "\tlsrs r7, r1, 16\n"
                 "\tadds r0, r5, 0\n"
                 "\tmovs r1, 0\n"
-                "\tbl sub_807A100\n"
+                "\tbl GetBattlerSpriteCoordAttr\n"
                 "\tlsls r0, 16\n"
                 "\tasrs r0, 16\n"
                 "\tmovs r1, 0x6\n"
@@ -2096,7 +2096,7 @@ NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
                 "_080D8C5A:\n"
                 "\tadds r0, r5, 0\n"
                 "\tmovs r1, 0x1\n"
-                "\tbl sub_807A100\n"
+                "\tbl GetBattlerSpriteCoordAttr\n"
                 "\tlsls r0, 16\n"
                 "\tasrs r0, 16\n"
                 "\tmovs r1, 0x6\n"
@@ -2108,7 +2108,7 @@ NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
                 "\tlsrs r7, r1, 16\n"
                 "\tadds r0, r5, 0\n"
                 "\tmovs r1, 0\n"
-                "\tbl sub_807A100\n"
+                "\tbl GetBattlerSpriteCoordAttr\n"
                 "\tlsls r0, 16\n"
                 "\tasrs r0, 16\n"
                 "\tmovs r1, 0x6\n"

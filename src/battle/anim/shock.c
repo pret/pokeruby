@@ -85,7 +85,7 @@ void sub_80D6294(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
 
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_8078114;
 }
 
@@ -142,7 +142,7 @@ void sub_80D6328(struct Sprite *sprite)
 
     if (gBattleAnimArgs[6] & 1)
     {
-        sprite->oam.priority = sub_8079ED4(slot) + 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(slot) + 1;
     }
 
     matrixNum = sprite->oam.matrixNum;

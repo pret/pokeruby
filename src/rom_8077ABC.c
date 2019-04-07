@@ -685,7 +685,7 @@ void sub_8078504(struct Sprite *sprite)
     }
 }
 
-void move_anim_8074EE0(struct Sprite *sprite)
+void DestroySpriteAndMatrix(struct Sprite *sprite)
 {
     FreeSpriteOamMatrix(sprite);
     DestroyAnimSprite(sprite);
@@ -703,7 +703,7 @@ void unref_sub_8078588(struct Sprite *sprite)
 void unref_sub_80785CC(struct Sprite *sprite)
 {
     ResetPaletteStructByUid(sprite->data[5]);
-    move_anim_8074EE0(sprite);
+    DestroySpriteAndMatrix(sprite);
 }
 
 void sub_80785E4(struct Sprite *sprite)
@@ -1386,7 +1386,7 @@ void sub_80793C4(struct Sprite *sprite)
     }
     else if (sprite->animEnded || sprite->affineAnimEnded)
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 }
 
@@ -1637,7 +1637,7 @@ void sub_80798AC(u8 task)
     AnimTask_BlendMonInAndOutSetup(&gTasks[task]);
 }
 
-void sub_80798F4(struct Task *task, u8 a2, const void *a3)
+void PrepareAffineAnimInTaskData(struct Task *task, u8 a2, const void *a3)
 {
     task->data[7] = 0;
     task->data[8] = 0;
@@ -1650,7 +1650,7 @@ void sub_80798F4(struct Task *task, u8 a2, const void *a3)
     PrepareBattlerSpriteForRotScale(a2, 0);
 }
 
-bool8 sub_807992C(struct Task *task)
+bool8 RunAffineAnimFromTaskData(struct Task *task)
 {
     gUnknown_0202F7D4 = sub_8079BFC(task->data[13], task->data[14]) + (task->data[7] << 3);
     switch (gUnknown_0202F7D4->type)
@@ -1903,7 +1903,7 @@ u8 GetBattlerSubpriority(u8 bank)
     return ret;
 }
 
-u8 sub_8079ED4(u8 slot)
+u8 GetBattlerSpriteBGPriority(u8 slot)
 {
     u8 status = GetBattlerPosition(slot);
 
@@ -1930,7 +1930,7 @@ u8 GetBattlerPosition_permutated(u8 slot)
     return 1;
 }
 
-u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, u32 a8)
+u8 sub_8079F44(u16 species, bool8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, u32 a8)
 {
     u8 sprite;
     u16 sheet = LoadSpriteSheet(&gUnknown_0837F5E0[a3]);
@@ -1980,12 +1980,12 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
     return sprite;
 }
 
-void sub_807A0F4(struct Sprite *sprite)
+void DestroySpriteAndFreeResources_(struct Sprite *sprite)
 {
     DestroySpriteAndFreeResources(sprite);
 }
 
-s16 sub_807A100(u8 slot, u8 a2)
+s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
 {
     u16 species;
     u32 personality;
@@ -2185,7 +2185,7 @@ void sub_807A544(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->data[5] = gBattleAnimArgs[5];
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_8078504;
 }
 
@@ -2206,7 +2206,7 @@ void sub_807A5C4(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->data[5] = gBattleAnimArgs[5];
     StartSpriteAnim(sprite, gBattleAnimArgs[6]);
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_8078504;
 }
 

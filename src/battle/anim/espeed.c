@@ -63,14 +63,14 @@ void sub_80D15A4(u8 taskId)
     struct Task* task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
-    sub_80798F4(task, spriteId, &gSpriteAffineAnim_83D79BC);
+    PrepareAffineAnimInTaskData(task, spriteId, &gSpriteAffineAnim_83D79BC);
     task->func = sub_80D15E0;
 }
 
 void sub_80D15E0(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    if (sub_807992C(task) == 0)
+    if (RunAffineAnimFromTaskData(task) == 0)
     {
         gSprites[task->data[0]].pos2.y = 0;
         gSprites[task->data[0]].invisible = 1;

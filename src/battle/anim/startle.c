@@ -24,13 +24,13 @@ void sub_80D1E38(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(1);
     if (++gTasks[taskId].data[0] == 1)
     {
-        sub_80798F4(&gTasks[taskId], GetAnimBattlerSpriteId(1), &gSpriteAffineAnim_83D7A98);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(1), &gSpriteAffineAnim_83D7A98);
         gSprites[spriteId].pos2.x = 4;
     }
     else
     {
         gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
-        if (sub_807992C(&gTasks[taskId]) == 0)
+        if (RunAffineAnimFromTaskData(&gTasks[taskId]) == 0)
         {
             gSprites[spriteId].pos2.x = 0;
             gSprites[spriteId].pos2.y = 0;
@@ -45,13 +45,13 @@ void sub_80D1EC8(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(0);
     if (++gTasks[taskId].data[0] == 1)
     {
-        sub_80798F4(&gTasks[taskId], GetAnimBattlerSpriteId(0), &gSpriteAffineAnim_83D7A98);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(0), &gSpriteAffineAnim_83D7A98);
         gSprites[spriteId].pos2.x = 4;
     }
     else
     {
         gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
-        if (sub_807992C(&gTasks[taskId]) == 0)
+        if (RunAffineAnimFromTaskData(&gTasks[taskId]) == 0)
         {
             gSprites[spriteId].pos2.x = 0;
             gSprites[spriteId].pos2.y = 0;

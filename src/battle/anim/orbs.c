@@ -197,7 +197,7 @@ void sub_80CA7B0(struct Sprite* sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
 }
 
 void sub_80CA800(struct Sprite* sprite)

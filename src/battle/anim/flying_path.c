@@ -87,8 +87,8 @@ void sub_80CBDF4(u8 taskId)
     task->data[4] = GetBattlerSubpriority(gBattleAnimTarget) - 1;
     task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-    task->data[10] = sub_807A100(gBattleAnimTarget, 1);
-    task->data[11] = sub_807A100(gBattleAnimTarget, 0);
+    task->data[10] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, 1);
+    task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, 0);
     task->data[5] = (GetBattlerSide(gBattleAnimTarget) == 1) ? 1 : -1;
     task->data[9] = 0x38 - (task->data[5] * 64);
     task->data[8] = task->data[7] - task->data[9] + task->data[6];

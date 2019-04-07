@@ -265,7 +265,7 @@ static void sub_80CEC1C(struct Sprite* sprite)
 
     if ((u32)((c + 16) << 16) > (0x110) << 16 || a < -16 || a > 0x80)
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
     else
     {
@@ -322,7 +322,7 @@ static void sub_80CED78(struct Sprite* sprite)
     }
 
     if (++sprite->data[0] == 0x30)
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
 }
 
 // drum (using hands to slap the Pokemon's belly in a rhythm.)

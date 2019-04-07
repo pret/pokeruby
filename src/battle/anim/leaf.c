@@ -295,11 +295,11 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite)
     sprite->pos2.y = Sin(sprite->data[5], 5);
     if (sprite->data[5] <= 0x7F)
     {
-        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) - 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) - 1;
     }
     else
     {
-        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) + 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
     }
 
     sprite->data[0]--;
