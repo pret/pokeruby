@@ -765,27 +765,27 @@ static void sub_80C2F64(u8 taskId)
         eContestLink80C2020Struct2018000.unk_0a = 1;
 }
 
-#ifdef NONMATCHING
 void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 personality)
 {
     int i;
     int j;
     u16 tile;
     u16 offset;
-    int vOffset;
+    u16 var0;
+    u16 var1;
 
     if (useDmaNow)
     {
         DmaCopy32Defvars(3, GetMonIconPtr(species, personality) + (srcOffset << 9) + 0x80, BG_CHAR_ADDR(1) + (destOffset << 9), 0x180);
-        tile = ((destOffset + 10) << 12);
-        tile |= (destOffset * 16 + 0x200);
+        var0 = ((destOffset + 10) << 12);
+        var1 = (destOffset * 16 + 0x200);
+        tile = var1 | var0;
         offset = destOffset * 0x60 + 0x83;
         for (i = 0; i < 3; i++)
         {
-            vOffset = (i << 5) + offset;
             for (j = 0; j < 4; j++)
             {
-                ((u16 *)BG_CHAR_ADDR(3))[vOffset + j] = tile;
+                ((u16 *)BG_CHAR_ADDR(3))[(i << 5) + j + offset] = tile;
                 tile++;
             }
         }
@@ -795,97 +795,6 @@ void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 
         RequestSpriteCopy(GetMonIconPtr(species, personality) + (srcOffset << 9) + 0x80, BG_CHAR_ADDR(1) + (destOffset << 9), 0x180);
     }
 }
-#else
-__attribute__((naked)) void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 personality)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                    "\tldr r6, [sp, 0x10]\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r4, r1, 24\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r5, r2, 24\n"
-                    "\tlsls r3, 24\n"
-                    "\tcmp r3, 0\n"
-                    "\tbeq _080C30B0\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl GetMonIconPtr\n"
-                    "\tlsls r1, r5, 9\n"
-                    "\tadds r0, r1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tlsls r1, r4, 9\n"
-                    "\tldr r2, _080C30A0 @ =0x06004000\n"
-                    "\tadds r1, r2\n"
-                    "\tldr r2, _080C30A4 @ =0x040000d4\n"
-                    "\tstr r0, [r2]\n"
-                    "\tstr r1, [r2, 0x4]\n"
-                    "\tldr r0, _080C30A8 @ =0x84000060\n"
-                    "\tstr r0, [r2, 0x8]\n"
-                    "\tldr r0, [r2, 0x8]\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tadds r1, 0xA\n"
-                    "\tlsls r1, 28\n"
-                    "\tlsls r0, r4, 20\n"
-                    "\tmovs r2, 0x80\n"
-                    "\tlsls r2, 18\n"
-                    "\tadds r0, r2\n"
-                    "\torrs r0, r1\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tlsls r0, r4, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tlsls r0, 21\n"
-                    "\tmovs r2, 0x83\n"
-                    "\tlsls r2, 16\n"
-                    "\tadds r0, r2\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tmovs r2, 0\n"
-                    "\tldr r6, _080C30AC @ =0x0600c000\n"
-                    "_080C307C:\n"
-                    "\tlsls r0, r2, 5\n"
-                    "\tadds r4, r2, 0x1\n"
-                    "\tadds r0, r5\n"
-                    "\tmovs r3, 0x3\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r2, r0, r6\n"
-                    "_080C3088:\n"
-                    "\tstrh r1, [r2]\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tadds r2, 0x2\n"
-                    "\tsubs r3, 0x1\n"
-                    "\tcmp r3, 0\n"
-                    "\tbge _080C3088\n"
-                    "\tadds r2, r4, 0\n"
-                    "\tcmp r2, 0x2\n"
-                    "\tble _080C307C\n"
-                    "\tb _080C30CA\n"
-                    "\t.align 2, 0\n"
-                    "_080C30A0: .4byte 0x06004000\n"
-                    "_080C30A4: .4byte 0x040000d4\n"
-                    "_080C30A8: .4byte 0x84000060\n"
-                    "_080C30AC: .4byte 0x0600c000\n"
-                    "_080C30B0:\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl GetMonIconPtr\n"
-                    "\tlsls r1, r5, 9\n"
-                    "\tadds r0, r1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tlsls r1, r4, 9\n"
-                    "\tldr r2, _080C30D0 @ =0x06004000\n"
-                    "\tadds r1, r2\n"
-                    "\tmovs r2, 0xC0\n"
-                    "\tlsls r2, 1\n"
-                    "\tbl RequestSpriteCopy\n"
-                    "_080C30CA:\n"
-                    "\tpop {r4-r6}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_080C30D0: .4byte 0x06004000");
-}
-#endif
 
 static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
 {
@@ -897,57 +806,17 @@ static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80C310C(void)
 {
     int i;
+    register u16 species asm("r0");
 
     for (i = 0; i < 4; i++)
     {
-        u16 species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
+        species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
         LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[species]], 0xa0 + 0x10 * i, 0x20);
     }
 }
-#else
-__attribute__((naked)) void sub_80C310C(void)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tmovs r4, 0\n"
-                "\tldr r6, _080C314C @ =gMonIconPaletteIndices\n"
-                "\tmovs r5, 0xA0\n"
-                "\tlsls r5, 16\n"
-                "_080C3116:\n"
-                "\tldr r1, _080C3150 @ =gContestMons\n"
-                "\tlsls r0, r4, 6\n"
-                "\tadds r0, r1\n"
-                "\tldrh r0, [r0]\n"
-                "\tmovs r1, 0\n"
-                "\tbl mon_icon_convert_unown_species_id\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tadds r0, r6\n"
-                "\tldrb r0, [r0]\n"
-                "\tlsls r0, 5\n"
-                "\tldr r1, _080C3154 @ =gMonIconPalettes\n"
-                "\tadds r0, r1\n"
-                "\tlsrs r1, r5, 16\n"
-                "\tmovs r2, 0x20\n"
-                "\tbl LoadPalette\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 13\n"
-                "\tadds r5, r0\n"
-                "\tadds r4, 0x1\n"
-                "\tcmp r4, 0x3\n"
-                "\tble _080C3116\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080C314C: .4byte gMonIconPaletteIndices\n"
-                "_080C3150: .4byte gContestMons\n"
-                "_080C3154: .4byte gMonIconPalettes");
-}
-#endif
 
 // void sub_80C3158(const u8 *string, u8 spriteId)
 // {
