@@ -31,14 +31,14 @@ void sub_80D0A4C(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
     task->data[1] = 0;
-    sub_80798F4(task, spriteId, &gSpriteAffineAnim_83D77B0);
+    PrepareAffineAnimInTaskData(task, spriteId, &gSpriteAffineAnim_83D77B0);
     task->func = sub_80D0A8C;
 }
 
 static void sub_80D0A8C(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    if (!sub_807992C(task))
+    if (!RunAffineAnimFromTaskData(task))
         DestroyAnimVisualTask(taskId);
 }
 

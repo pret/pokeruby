@@ -913,7 +913,7 @@ void sub_80D6D18(struct Sprite *sprite)
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     }
 
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;
 }
 
@@ -963,7 +963,7 @@ static void sub_80D6E38(struct Sprite *sprite)
         gSprites[sprite->data[6]].pos2.x += sprite->data[7];
         if ((u16)(sprite->pos1.x + 80) > 400)
         {
-            move_anim_8074EE0(sprite);
+            DestroySpriteAndMatrix(sprite);
         }
         break;
     }
@@ -1154,7 +1154,7 @@ void sub_80D727C(struct Sprite *sprite)
         break;
     case 1:
         if (sprite->affineAnimEnded)
-            move_anim_8074EE0(sprite);
+            DestroySpriteAndMatrix(sprite);
         break;
     }
 }

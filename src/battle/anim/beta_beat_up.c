@@ -54,6 +54,6 @@ static void sub_80D6278(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 }

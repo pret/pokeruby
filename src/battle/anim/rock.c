@@ -351,7 +351,7 @@ static void sub_80DCF1C(struct Sprite *sprite)
     sprite->data[3] = 32;
     sprite->data[4] = -24;
 
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_8078278;
     sprite->callback(sprite);
 }
@@ -379,7 +379,7 @@ void sub_80DCF60(struct Sprite *sprite)
     sprite->data[4] = 0;
 
     sprite->callback = sub_8078394;
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
 }
 
 void sub_80DCFE4(struct Sprite *sprite)

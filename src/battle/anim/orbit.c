@@ -110,11 +110,11 @@ static void sub_80CAC44(struct Sprite* sprite)
     sprite->pos2.y = Cos(sprite->data[1], -3) + ((sprite->data[2] += 24) >> 8);
     if ((u16)(sprite->data[1] - 0x40) < 0x80)
     {
-        sprite->oam.priority = (sub_8079ED4(gBattleAnimTarget) & 3);
+        sprite->oam.priority = (GetBattlerSpriteBGPriority(gBattleAnimTarget) & 3);
     }
     else
     {
-        var1 = sub_8079ED4(gBattleAnimTarget) + 1;
+        var1 = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
         if (var1 > 3)
         {
             var1 = 3;
