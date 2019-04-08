@@ -432,7 +432,7 @@ extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
 extern u32 gContestRngValue;
 extern u8 gUnknown_02038696[4];
-extern s16 gUnknown_02038670[4];
+extern s16 gContestMonConditions[4];
 extern s16 gUnknown_02038678[4];
 extern s16 gUnknown_02038680[4];
 extern s16 gUnknown_02038688[4];
@@ -441,6 +441,7 @@ extern u8 gUnknown_02038696[4];
 extern u8 gUnknown_0203869B;
 extern u16 gSpecialVar_ContestRank;
 extern u16 gSpecialVar_ContestCategory;
+extern u8 gContestMonPartyIndex;
 
 void SetContestantEffectStringID(u8 a, u8 b);
 void SetContestantEffectStringID2(u8 a, u8 b);
