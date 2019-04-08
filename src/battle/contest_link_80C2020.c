@@ -2478,3 +2478,75 @@ void sub_80C40D4(u8 arg0, u8 arg1)
                 "_080C42BC: .4byte gSharedMem + 0x18000");
 }
 #endif //NONMATCHING
+
+void sub_80C42C0(u8 taskId /*r12*/)
+{
+    bool32 r6 = FALSE;
+    bool32 r9 = FALSE;
+    u8 r5 = gTasks[taskId].data[0];
+    s16 r7 = gTasks[taskId].data[1];
+    s16 r1 = gTasks[taskId].data[2];
+    s32 i;
+
+    if (r1 != 0)
+    {
+        if (eContestLink80C2020Struct2018000.unk_0c[r5] <= 0)
+            r6 = TRUE;
+    }
+    else
+    {
+        if (eContestLink80C2020Struct2018000.unk_0c[r5] >= 88)
+            r6 = TRUE;
+    }
+    if (eContestLink80C2020Struct2018000.unk_0c[r5] == r7)
+        r9 = TRUE;
+
+    if (!r9)
+    {
+        if (r6)
+        {
+            eContestLink80C2020Struct2018000.unk_0c[r5] = r7;
+        }
+        else if (r1 != 0)
+        {
+            eContestLink80C2020Struct2018000.unk_0c[r5]--;
+        }
+        else
+        {
+            eContestLink80C2020Struct2018000.unk_0c[r5]++;
+        }
+    }
+    if (!r6)
+    {
+        if (!r9)
+        {
+            for (i = 0; i < 11; i++)
+            {
+                u8 r0;
+                u16 tile;
+                if (eContestLink80C2020Struct2018000.unk_0c[r5] >= 8 * (i + 1))
+                {
+                    r0 = 8;
+                }
+                else if (eContestLink80C2020Struct2018000.unk_0c[r5] >= 8 * i)
+                {
+                    r0 = eContestLink80C2020Struct2018000.unk_0c[r5] % 8;
+                }
+                else
+                {
+                    r0 = 0;
+                }
+                if (r0 < 4)
+                    tile = 0x504C + r0;
+                else
+                    tile = 0x5057 + r0;
+                *(vu16 *)(0x0600E18E + 2 * (96 * r5 + i)) = tile;
+            }
+        }
+    }
+    if (r9)
+    {
+        eContestLink80C2020Struct2018000.unk_14--;
+        DestroyTask(taskId);
+    }
+}
