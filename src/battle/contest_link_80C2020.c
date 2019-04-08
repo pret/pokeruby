@@ -56,11 +56,17 @@ struct UnkEwramStruct18000 {
 };
 
 struct UnkEwramStruct18018 {
-    u8 filler_00[0x50];
+    s32 unk_00;
+    s32 unk_04;
+    u32 unk_08;
+    u32 unk_0c;
+    u8 unk_10;
+    u8 unk_11;
+    u8 unk_12;
 };
 
 #define eContestLink80C2020Struct2018000 (*(struct UnkEwramStruct18000 *)(gSharedMem + 0x18000))
-#define eContestLink80C2020Struct2018018 (*(struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
+#define eContestLink80C2020Struct2018018 ((struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
 #define eContestLink80C2020Struct2018068 (gSharedMem + 0x18068)
 
 static void sub_80C2430(void);
@@ -301,7 +307,7 @@ void sub_80C2358(void)
     LoadAllContestMonIcons(0, TRUE);
     sub_80C2340();
     eContestLink80C2020Struct2018000 = (struct UnkEwramStruct18000){};
-    eContestLink80C2020Struct2018018 = (struct UnkEwramStruct18018){};
+    memset(eContestLink80C2020Struct2018018, 0, 4 * sizeof(struct UnkEwramStruct18018));
     sub_80C33DC();
     BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
     gPaletteFade.bufferTransferDisabled = FALSE;
@@ -2069,5 +2075,76 @@ void sub_80C3EA4(u8 taskId)
         gTasks[taskId].data[10] = 0;
         sub_80C3024(gTasks[taskId].data[2], monIndex, gTasks[taskId].data[11], FALSE, gContestMons[monIndex].personality);
         gTasks[taskId].data[11] ^= 1;
+    }
+}
+
+void sub_80C3F00(void)
+{
+    s32 i;
+    s16 r2 = gUnknown_02038678[0];
+    s32 r4;
+    u32 r5;
+    s8 r0;
+
+    for (i = 1; i < 4; i++)
+    {
+        if (r2 < gUnknown_02038678[i])
+            r2 = gUnknown_02038678[i];
+    }
+
+    if (r2 < 0)
+    {
+        r2 = gUnknown_02038678[0];
+
+        for (i = 1; i < 4; i++)
+        {
+            if (r2 > gUnknown_02038678[i])
+                r2 = gUnknown_02038678[i];
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        r4 = 1000 * gUnknown_02038670[i] / ABS(r2);
+        if ((r4 % 10) >= 5)
+            r4 += 10;
+        eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
+
+        r4 = 1000 * ABS(gUnknown_02038688[i]) / ABS(r2);
+        if ((r4 % 10) >= 5)
+            r4 += 10;
+        eContestLink80C2020Struct2018018[i].unk_04 = r4 / 10;
+
+        if (gUnknown_02038688[i] < 0)
+            eContestLink80C2020Struct2018018[i].unk_10 = 1;
+
+        r5 = 22528 * eContestLink80C2020Struct2018018[i].unk_00 / 100;
+        if ((r5 % 256) >= 128)
+            r5 += 256;
+        eContestLink80C2020Struct2018018[i].unk_08 = r5 / 256;
+
+        r5 = eContestLink80C2020Struct2018018[i].unk_04 * 22528 / 100;
+        if ((r5 % 256) >= 128)
+            r5 += 256;
+        eContestLink80C2020Struct2018018[i].unk_0c = r5 / 256;
+
+        eContestLink80C2020Struct2018018[i].unk_11 = sub_80C3990(i, 1);
+        r0 = sub_80C39E4(i, 1);
+        eContestLink80C2020Struct2018018[i].unk_12 = ABS(r0);
+
+        if (gContestFinalStandings[i])
+        {
+            s16 r2__ = eContestLink80C2020Struct2018018[i].unk_08;
+            s16 r1__ = eContestLink80C2020Struct2018018[i].unk_0c;
+            if (eContestLink80C2020Struct2018018[i].unk_10)
+                r1__ = -r1__;
+            if (r2__ + r1__ == 88)
+            {
+                if (r1__ > 0)
+                    eContestLink80C2020Struct2018018[i].unk_0c--;
+                else if (r2__ > 0)
+                    eContestLink80C2020Struct2018018[i].unk_08--;
+            }
+        }
     }
 }
