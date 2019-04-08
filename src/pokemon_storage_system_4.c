@@ -3555,7 +3555,7 @@ void sub_809D0BC(struct UnkStruct_2000028 *unkStruct)
     int width = unkStruct->unk_08;
     for (i = 0; i < height; i++)
     {
-        CpuSet(src, dest, (width / 2) & 0x1FFFFF);
+        CpuCopy16(src, dest, width);
         dest += 64;
         src += 64;
     }
@@ -3569,7 +3569,7 @@ void sub_809D104(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sT
     int width2 = width * 2;
     while (to < end)
     {
-        CpuSet(from, to, (width2 / 2) & 0x1FFFFF);
+        CpuCopy16(from, to, width2);
         to += 64;
         from += 64;
     }
