@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data2.h"
 #include "util.h"
+#include "random.h"
 #include "overworld.h"
 #include "constants/songs.h"
 #include "ewram.h"
@@ -26,6 +27,7 @@
 #include "contest_link_80C857C.h"
 #include "contest_link_80C2020.h"
 #include "pokemon_storage_system.h"
+#include "trig.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
@@ -96,12 +98,14 @@ void sub_80C37E4(void);
 u8 sub_80C3990(u8 a0, u8 a1);
 s8 sub_80C39E4(u8 a0, u8 a1);
 void sub_80C3A5C(u8 taskId);
+void sub_80C3BD8(u8 taskId);
 void sub_80C3B30(u8 taskId);
 void sub_80C3C44(struct Sprite *sprite);
 void sub_80C3CB8(struct Sprite *sprite);
 void sub_80C3D04(u8 taskId);
 void sub_80C3DF0(struct Sprite *sprite);
 void sub_80C3E60(u8 a0, u8 a1);
+void sub_80C3EA4(u8 taskId);
 void sub_80C3F00(void);
 void sub_80C40D4(u8 a0, u8 a1);
 
@@ -1779,4 +1783,291 @@ u8 sub_80C3990(u8 monIndex, u8 arg1)
         var1 = 10;
 
     return var1;
+}
+
+s8 sub_80C39E4(u8 arg0, u8 arg1)
+{
+    u32 r4;
+    u32 r2;
+    s16 val;
+    s8 ret;
+
+    val = gUnknown_02038688[arg0];
+    if (val < 0)
+        r4 = -val << 16;
+    else
+        r4 =  val << 16;
+    r2 = r4 / 80;
+    if (r2 & 0xFFFF)
+        r2 += 0x10000;
+
+    r2 >>= 16;
+    if (r2 == 0 && r4 != 0)
+        r2 = 1;
+
+    if (arg1 != 0 && r2 > 10)
+        r2 = 10;
+
+    if (gUnknown_02038688[arg0] < 0)
+        ret = -r2;
+    else
+        ret =  r2;
+
+    return ret;
+}
+
+void sub_80C3A5C(u8 taskId)
+{
+    u16 firstTileNum;
+
+    if (gTasks[taskId].data[10] == 0)
+    {
+        gTasks[taskId].data[11] = (3 - gTasks[taskId].data[0]) * 40;
+        gTasks[taskId].data[10]++;
+    }
+    else if (gTasks[taskId].data[10] == 1)
+    {
+        if (--gTasks[taskId].data[11] == -1)
+        {
+            firstTileNum = gTasks[taskId].data[0] * 2 + 0x5043;
+            *(vu16 *)(0x0600E142 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x00;
+            *(vu16 *)(0x0600E144 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x01;
+            *(vu16 *)(0x0600E182 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x10;
+            *(vu16 *)(0x0600E184 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x11;
+            eContestLink80C2020Struct2018000.unk_05++;
+            DestroyTask(taskId);
+            PlaySE(SE_JYUNI);
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void sub_80C3B30(u8 taskId)
+{
+    int i, j, k;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    for (j = 0; j < 3; j++)
+    {
+        for (k = 0; k < 30; k++)
+        {
+            ((u16 *)(0x0600E100 + 2 * (96 * i + 32 * j)))[k] &= 0x0FFF;
+            ((u16 *)(0x0600E100 + 2 * (96 * i + 32 * j)))[k] |= 0x9000;
+        }
+    }
+    gTasks[taskId].data[10] = i;
+    gTasks[taskId].data[12] = 1;
+    gTasks[taskId].func = sub_80C3BD8;
+    eContestLink80C2020Struct2018000.unk_03 = taskId;
+}
+#else
+NAKED
+void sub_80C3B30(u8 taskId)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tmov r12, r0\n"
+                "\tmovs r5, 0\n"
+                "\tldr r1, _080C3BC0 @ =gContestFinalStandings\n"
+                "\tldrb r0, [r1]\n"
+                "\tldr r2, _080C3BC4 @ =gTasks\n"
+                "\tmov r10, r2\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080C3B5C\n"
+                "_080C3B4E:\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r5, 0x3\n"
+                "\tbgt _080C3B5C\n"
+                "\tadds r0, r5, r1\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080C3B4E\n"
+                "_080C3B5C:\n"
+                "\tmovs r1, 0\n"
+                "\tlsls r0, r5, 1\n"
+                "\tmov r2, r12\n"
+                "\tlsls r2, 2\n"
+                "\tmov r9, r2\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 5\n"
+                "\tmov r8, r0\n"
+                "\tldr r7, _080C3BC8 @ =0x00000fff\n"
+                "\tmovs r0, 0x90\n"
+                "\tlsls r0, 8\n"
+                "\tadds r6, r0, 0\n"
+                "_080C3B74:\n"
+                "\tlsls r0, r1, 5\n"
+                "\tadds r4, r1, 0x1\n"
+                "\tadd r0, r8\n"
+                "\t@ the next two instructions are swapped\n"
+                "\tmovs r3, 0x1D\n"
+                "\tlsls r0, 1\n"
+                "\tldr r1, _080C3BCC @ =0x0600e100\n"
+                "\tadds r2, r0, r1\n"
+                "_080C3B82:\n"
+                "\tldrh r1, [r2]\n"
+                "\tadds r0, r7, 0\n"
+                "\tands r0, r1\n"
+                "\torrs r0, r6\n"
+                "\tstrh r0, [r2]\n"
+                "\tadds r2, 0x2\n"
+                "\tsubs r3, 0x1\n"
+                "\tcmp r3, 0\n"
+                "\tbge _080C3B82\n"
+                "\tadds r1, r4, 0\n"
+                "\tcmp r1, 0x2\n"
+                "\tble _080C3B74\n"
+                "\tmov r0, r9\n"
+                "\tadd r0, r12\n"
+                "\tlsls r0, 3\n"
+                "\tadd r0, r10\n"
+                "\tstrh r5, [r0, 0x1C]\n"
+                "\tmovs r1, 0x1\n"
+                "\tstrh r1, [r0, 0x20]\n"
+                "\tldr r2, _080C3BD0 @ =sub_80C3BD8\n"
+                "\tstr r2, [r0]\n"
+                "\tmov r1, r12\n"
+                "\tldr r0, _080C3BD4 @ =gSharedMem + 0x18000\n"
+                "\tstrb r1, [r0, 0x3]\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080C3BC0: .4byte gContestFinalStandings\n"
+                "_080C3BC4: .4byte gTasks\n"
+                "_080C3BC8: .4byte 0x00000fff\n"
+                "_080C3BCC: .4byte 0x0600e100\n"
+                "_080C3BD0: .4byte sub_80C3BD8\n"
+                "_080C3BD4: .4byte gSharedMem + 0x18000");
+}
+#endif //NONMATCHING
+
+void sub_80C3BD8(u8 taskId)
+{
+    if (++gTasks[taskId].data[11] == 1)
+    {
+        gTasks[taskId].data[11] = 0;
+        BlendPalette(0x91, 1, gTasks[taskId].data[12], RGB(13, 28, 27));
+        if (gTasks[taskId].data[13] == 0)
+        {
+            if (++gTasks[taskId].data[12] == 16)
+                gTasks[taskId].data[13] = 1;
+        }
+        else
+        {
+            if (--gTasks[taskId].data[12] == 0)
+                gTasks[taskId].data[13] = 0;
+        }
+    }
+}
+
+void sub_80C3C44(struct Sprite *sprite)
+{
+    if (sprite->data[0] < 10)
+    {
+        if (++sprite->data[0] == 10)
+        {
+            PlayCry1(sprite->data[1], 0);
+            sprite->data[1] = 0;
+        }
+    }
+    else
+    {
+        s16 delta = (u16)sprite->data[1] + 0x600;
+        sprite->pos1.x -= delta >> 8;
+        sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+        if (sprite->pos1.x < 120)
+            sprite->pos1.x = 120;
+
+        if (sprite->pos1.x == 120)
+        {
+            sprite->callback = SpriteCallbackDummy;
+            sprite->data[1] = 0;
+            eContestLink80C2020Struct2018000.unk_06 = 1;
+        }
+    }
+}
+
+void sub_80C3CB8(struct Sprite *sprite)
+{
+    s16 delta = (u16)sprite->data[1] + 0x600;
+    sprite->pos1.x -= delta >> 8;
+    sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+    if (sprite->pos1.x < -32)
+    {
+        sprite->callback = SpriteCallbackDummy;
+        sprite->invisible = 1;
+        eContestLink80C2020Struct2018000.unk_06 = 2;
+    }
+}
+
+void sub_80C3D04(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] == 5)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (eContestLink80C2020Struct2018000.unk_07 < 40)
+        {
+            u8 spriteId = CreateSprite(&gSpriteTemplate_83D17B4, (Random() % 240) - 20, 44, 5);
+            gSprites[spriteId].data[0] = Random() % 512;
+            gSprites[spriteId].data[1] = (Random() % 24) + 16;
+            gSprites[spriteId].data[2] = (Random() % 256) + 48;
+            gSprites[spriteId].oam.tileNum += Random() % 17;
+            eContestLink80C2020Struct2018000.unk_07++;
+        }
+    }
+
+    if (eContestLink80C2020Struct2018000.unk_09)
+        DestroyTask(taskId);
+}
+
+void sub_80C3DF0(struct Sprite *sprite)
+{
+    register s16 var0 asm("r1");
+
+    sprite->data[3] += sprite->data[0];
+    sprite->pos2.x = Sin(sprite->data[3] >> 8, sprite->data[1]);
+    var0 = sprite->data[4] + sprite->data[2];
+    sprite->pos1.x += var0 >> 8;
+    var0 = var0 & 0xFF;
+    sprite->data[4] = var0;
+    sprite->pos1.y++;
+    if (eContestLink80C2020Struct2018000.unk_09)
+        sprite->invisible = 1;
+
+    if (sprite->pos1.x > 248 || sprite->pos1.y > 116)
+    {
+        DestroySprite(sprite);
+        eContestLink80C2020Struct2018000.unk_07--;
+    }
+}
+
+void sub_80C3E60(u8 monIndex, u8 numFrames)
+{
+    u8 taskId = CreateTask(sub_80C3EA4, 8);
+    gTasks[taskId].data[0] = monIndex;
+    gTasks[taskId].data[1] = numFrames;
+    gTasks[taskId].data[2] = gContestMons[monIndex].species;
+}
+
+void sub_80C3EA4(u8 taskId)
+{
+    u8 monIndex = gTasks[taskId].data[0];
+    if (gTasks[taskId].data[10]++ == gTasks[taskId].data[1])
+    {
+        gTasks[taskId].data[10] = 0;
+        sub_80C3024(gTasks[taskId].data[2], monIndex, gTasks[taskId].data[11], FALSE, gContestMons[monIndex].personality);
+        gTasks[taskId].data[11] ^= 1;
+    }
 }
