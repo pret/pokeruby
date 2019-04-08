@@ -73,7 +73,7 @@ static void sub_80C8660(u8 taskId)
 }
 
 #ifdef NONMATCHING
-u8 sub_80C86A0(const u8 *string)
+u8 GetStringLanguage(const u8 *string)
 {
     u8 language = GAME_LANGUAGE;
     if (string[0] == EXT_CTRL_CODE_BEGIN && string[1] == 0x15)
@@ -107,7 +107,7 @@ u8 sub_80C86A0(const u8 *string)
     return language;
 }
 #else
-NAKED u8 sub_80C86A0(const u8 *string)
+NAKED u8 GetStringLanguage(const u8 *string)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                     "\tadds r4, r0, 0\n"
@@ -252,7 +252,7 @@ void sub_80C8734(u8 taskId)
                     name = gContestMons[i].nickname;
                     if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
                     {
-                        ConvertInternationalString(name, sub_80C86A0(name));
+                        ConvertInternationalString(name, GetStringLanguage(name));
                     }
                     else if (name[10] == EXT_CTRL_CODE_BEGIN)
                     {
@@ -681,14 +681,14 @@ void sub_80C8EBC(u8 taskId)
         case 0:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(gUnknown_02038670, sizeof gUnknown_02038670);
+                SendBlockToAllOpponents(gContestMonConditions, sizeof gContestMonConditions);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(gUnknown_02038670, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038670);
+                memcpy(gContestMonConditions, gBlockRecvBuffer[gUnknown_0203869B], sizeof gContestMonConditions);
                 gTasks[taskId].data[0]++;
             }
             break;

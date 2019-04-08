@@ -37,7 +37,7 @@ extern u8 gSelectedOrderFromParty[];
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 
-extern u8 gUnknown_02038694;
+extern u8 gContestMonPartyIndex;
 extern u8 gUnknown_0203856C;
 
 void SetContestTrainerGfxIds(void)
@@ -153,7 +153,7 @@ void sub_80C4D80(void)
     u8 r4_;
 
     for (i = 0; i < 4; i++)
-        sp0[i] = gUnknown_02038670[i];
+        sp0[i] = gContestMonConditions[i];
 
     for (i = 0; i < 3; i++)
     {
@@ -194,7 +194,7 @@ void sub_80C4D80(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (r4 == gUnknown_02038670[i])
+        if (r4 == gContestMonConditions[i])
         {
             if (r2 == 1)
                 break;
@@ -244,7 +244,7 @@ void sub_80C4F70(void)
 
 bool8 GiveMonArtistRibbon(void)
 {
-    u8 ribbon = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_ARTIST_RIBBON);
+    u8 ribbon = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
 
     if(ribbon == FALSE
     && gContestFinalStandings[gContestPlayerMonIndex] == 0
@@ -252,7 +252,7 @@ bool8 GiveMonArtistRibbon(void)
     && gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         ribbon = TRUE;
-        SetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_ARTIST_RIBBON, &ribbon);
+        SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &ribbon);
         return TRUE;
     }
     else
