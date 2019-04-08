@@ -122,6 +122,10 @@ void sub_80C49F0(u8 taskId);
 void sub_80C4A0C(u8 taskId);
 void sub_80C4A28(u8 taskId);
 void sub_80C4A44(u8 taskId);
+void sub_80C4B0C(u8 taskId);
+void sub_80C4B5C(u8 taskId);
+void sub_80C4BA4(u8 taskId);
+void sub_80C4BCC(u8 taskId);
 
 const u16 gUnknown_083D1624[] = INCBIN_U16("graphics/unknown/unknown_3D1624/0.4bpp");
 const u16 gUnknown_083D1644[] = INCBIN_U16("graphics/unknown/unknown_3D1624/1.4bpp");
@@ -2820,4 +2824,83 @@ void sub_80C4A0C(u8 taskId)
 void sub_80C4A28(u8 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8938, sub_80C4A44);
+}
+
+void sub_80C4A44(u8 taskId)
+{
+    u8 i;
+    u8 sp0[4];
+    u8 sp4[4];
+
+    for (i = 0; i < 4; i++)
+        sp0[i] = gTasks[taskId].data[i + 1];
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sp0[0] != sp0[i])
+            break;
+    }
+
+    if (i == 4)
+        gSpecialVar_0x8004 = 0;
+    else
+        gSpecialVar_0x8004 = 1;
+
+    for (i = 0; i < 4; i++)
+        sp4[i] = gTasks[taskId].data[i + 5];
+
+    gUnknown_0203869B = sub_80C4B34(sp4);
+    sub_80AE82C(gSpecialVar_ContestCategory);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80C4B0C);
+}
+
+void sub_80C4B0C(u8 taskId)
+{
+    sub_80B0F28(0);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8F34, sub_80C4B5C);
+}
+
+u8 sub_80C4B34(u8 * a0)
+{
+    s32 i;
+    u8 result = 0;
+
+    for (i = 1; i < 4; i++)
+    {
+        if (a0[result] < a0[i])
+            result = i;
+    }
+
+    return result;
+}
+
+void sub_80C4B5C(u8 taskId)
+{
+    if (gSpecialVar_0x8004 == 1)
+    {
+        if (IsLinkTaskFinished())
+            gTasks[taskId].func = sub_80C4BA4;
+    }
+    else
+    {
+        DestroyTask(taskId);
+        ScriptContext2_Disable();
+        EnableBothScriptContexts();
+    }
+}
+
+void sub_80C4BA4(u8 taskId)
+{
+    sub_800832C();
+    gTasks[taskId].func = sub_80C4BCC;
+}
+
+void sub_80C4BCC(u8 taskId)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        DestroyTask(taskId);
+        ScriptContext2_Disable();
+        EnableBothScriptContexts();
+    }
 }
