@@ -25,6 +25,7 @@
 #include "field_specials.h"
 #include "contest_link_80C857C.h"
 #include "contest_link_80C2020.h"
+#include "pokemon_storage_system.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
@@ -84,8 +85,11 @@ void sub_80C310C(void);
 void sub_80C3158(const u8 *string, u8 spriteId);
 void sub_80C33DC(void);
 u16 sub_80C34AC(const u8 *string);
-void sub_80C34CC(s16 data4, s16 pos0y, u16 data5, s16 data6);
+void sub_80C34CC(s16 data4, u16 pos0y, u16 data5, u16 data6);
 void sub_80C3520(u16 a0);
+void sub_80C3588(struct Sprite *sprite);
+void sub_80C35FC(struct Sprite *sprite);
+void sub_80C3630(struct Sprite *sprite);
 void sub_80C3698(const u8 *string);
 void sub_80C3764(void);
 void sub_80C37E4(void);
@@ -1252,3 +1256,506 @@ u16 sub_80C34AC(const u8 * string)
     u8 width = (StringLength(string) * 6);
     return 0x70 - (width / 2);
 }
+
+void sub_80C34CC(s16 arg0, u16 y, u16 arg2, u16 arg3)
+{
+    struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
+    sprite->pos1.x = 272;
+    sprite->pos1.y = y;
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    sprite->data[4] = arg0 + 32;
+    sprite->data[5] = arg2;
+    sprite->data[6] = arg3;
+    sprite->data[7] = 0;
+    sprite->callback = sub_80C3588;
+    eContestLink80C2020Struct2018000.unk_04 = 1;
+}
+
+void sub_80C3520(u16 arg0)
+{
+    struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
+    sprite->pos1.x += sprite->pos2.x;
+    sprite->pos1.y += sprite->pos2.y;
+    sprite->pos2.y = 0;
+    sprite->pos2.x = 0;
+    sprite->data[6] = arg0;
+    sprite->data[7] = 0;
+    sprite->callback = sub_80C3630;
+    eContestLink80C2020Struct2018000.unk_04 = 3;
+}
+
+void sub_80C3564(struct Sprite *sprite)
+{
+    sprite->pos1.x = 272;
+    sprite->pos1.y = 144;
+    sprite->pos2.y = 0;
+    sprite->pos2.x = 0;
+    sprite->callback = SpriteCallbackDummy;
+    eContestLink80C2020Struct2018000.unk_04 = 0;
+}
+
+
+void sub_80C3588(struct Sprite *sprite)
+{
+    int i;
+    s16 var0;
+
+    var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
+    sprite->pos1.x -= var0 >> 8;
+    sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
+    if (sprite->pos1.x < sprite->data[4])
+        sprite->pos1.x = sprite->data[4];
+
+    for (i = 0; i < 3; i++)
+    {
+        struct Sprite *sprite2 = &gSprites[sprite->data[i]];
+        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+    }
+
+    if (sprite->pos1.x == sprite->data[4])
+        sprite->callback = sub_80C35FC;
+}
+
+void sub_80C35FC(struct Sprite *sprite)
+{
+    eContestLink80C2020Struct2018000.unk_04 = 2;
+    if ((u16)sprite->data[5] != 0xFFFF)
+    {
+        if (--sprite->data[5] == -1)
+            sub_80C3520(sprite->data[6]);
+    }
+}
+
+void sub_80C3630(struct Sprite *sprite)
+{
+    int i;
+    s16 var0;
+
+    var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
+    sprite->pos1.x -= var0 >> 8;
+    sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
+    for (i = 0; i < 3; i++)
+    {
+        struct Sprite *sprite2 = &gSprites[sprite->data[i]];
+        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+    }
+
+    if (sprite->pos1.x + sprite->pos2.x < -224)
+        sub_80C3564(sprite);
+}
+
+void sub_80C3698(const u8 *text)
+{
+    int i;
+    u16 x;
+    struct Sprite *sprite;
+
+    sub_80C3158(text, eContestLink80C2020Struct2018000.unk_01);
+    x = sub_80C34AC(text);
+    sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
+    sprite->pos1.x = x + 32;
+    sprite->pos1.y = 80;
+    sprite->invisible = 0;
+    for (i = 0; i < 3; i++)
+    {
+        gSprites[sprite->data[i]].pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        gSprites[sprite->data[i]].pos1.y = sprite->pos1.y;
+        gSprites[sprite->data[i]].invisible = 0;
+    }
+
+    gBattle_WIN0H = 0x00F0;
+    gBattle_WIN0V = ((sprite->pos1.y - 16) << 8) | (sprite->pos1.y + 16);
+    REG_WININ = WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR;
+}
+
+void sub_80C3764(void)
+{
+    int i;
+    struct Sprite *sprite;
+
+    sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
+    sprite->invisible = 1;
+    for (i = 0; i < 3; i++)
+        gSprites[sprite->data[i]].invisible = 1;
+
+    gBattle_WIN0H = 0;
+    gBattle_WIN0V = 0;
+    REG_WIN0H = gBattle_WIN0H;
+    REG_WIN0V = gBattle_WIN0V;
+    REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR  | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+}
+
+#ifdef ENGLISH
+#ifdef NONMATCHING
+static inline s32 de_sub_80C39A8(s32 a0)
+{
+    s32 result = 0;
+    if (gIsLinkContest & 0x1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 9, 2, 8, 2);
+        result = 8;
+    }
+    else if (gSpecialVar_ContestRank == 0)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 0, 9, 2);
+        result = 9;
+    }
+    else if (gSpecialVar_ContestRank == 1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 9, 0, 8, 2);
+        result = 8;
+    }
+    else if (gSpecialVar_ContestRank == 2)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 17, 0, 8, 2);
+        result = 8;
+    }
+    else
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 2, 9, 2);
+        result = 9;
+    }
+    return result;
+}
+
+static inline s32 de_sub_80C3A84(s32 a0, s32 * a1)
+{
+    s32 result;
+    if (gSpecialVar_ContestCategory == 0)
+    {
+        *a1 = 0;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 17, 2, 10, 2);
+        result = 10;
+    }
+    else if (gSpecialVar_ContestCategory == 1)
+    {
+        *a1 = 1;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 4, 11, 2);
+        result = 11;
+    }
+    else if (gSpecialVar_ContestCategory == 2)
+    {
+        *a1 = 2;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 11, 4, 10, 2);
+        result = 10;
+    }
+    else if (gSpecialVar_ContestCategory == 3)
+    {
+        *a1 = 3;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 21, 4, 10, 2);
+        result = 10;
+    }
+    else
+    {
+        *a1 = 4;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 6, 10, 2);
+        result = 10;
+    }
+    return result;
+}
+
+void sub_80C37E4(void)
+{
+    s32 sp0;
+    s32 i;
+    de_sub_80C3A84(de_sub_80C39A8(5) + 5, &sp0);
+    for (i = 0; i < 0x80; i++)
+    {
+        ((vu16 *)0x0600E000)[i] &= 0xFFF;
+        ((vu16 *)0x0600E000)[i] |= sp0 << 12;;
+    }
+}
+#else
+NAKED
+void sub_80C37E4(void)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                "\tsub sp, 0x10\n"
+                "\tmovs r5, 0x1\n"
+                "\tmovs r4, 0\n"
+                "\tldr r0, _080C3808 @ =gIsLinkContest\n"
+                "\tldrb r0, [r0]\n"
+                "\tadds r1, r5, 0\n"
+                "\tands r1, r0\n"
+                "\tcmp r1, 0\n"
+                "\tbeq _080C3814\n"
+                "\tldr r0, _080C380C @ =0x0600e000\n"
+                "\tldr r3, _080C3810 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tb _080C386A\n"
+                "\t.align 2, 0\n"
+                "_080C3808: .4byte gIsLinkContest\n"
+                "_080C380C: .4byte 0x0600e000\n"
+                "_080C3810: .4byte gUnknown_08E964B8\n"
+                "_080C3814:\n"
+                "\tldr r0, _080C3830 @ =gSpecialVar_ContestRank\n"
+                "\tldrh r2, [r0]\n"
+                "\tcmp r2, 0\n"
+                "\tbne _080C383C\n"
+                "\tmovs r4, 0x1\n"
+                "\tldr r0, _080C3834 @ =0x0600e000\n"
+                "\tldr r3, _080C3838 @ =gUnknown_08E964B8\n"
+                "\tstr r2, [sp]\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tb _080C3870\n"
+                "\t.align 2, 0\n"
+                "_080C3830: .4byte gSpecialVar_ContestRank\n"
+                "_080C3834: .4byte 0x0600e000\n"
+                "_080C3838: .4byte gUnknown_08E964B8\n"
+                "_080C383C:\n"
+                "\tcmp r2, 0x1\n"
+                "\tbne _080C385C\n"
+                "\tldr r0, _080C3854 @ =0x0600e000\n"
+                "\tldr r3, _080C3858 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "\tmovs r1, 0x8\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tb _080C3870\n"
+                "\t.align 2, 0\n"
+                "_080C3854: .4byte 0x0600e000\n"
+                "_080C3858: .4byte gUnknown_08E964B8\n"
+                "_080C385C:\n"
+                "\tcmp r2, 0x2\n"
+                "\tbne _080C3884\n"
+                "\tldr r0, _080C387C @ =0x0600e000\n"
+                "\tldr r3, _080C3880 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x11\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "_080C386A:\n"
+                "\tmovs r1, 0x8\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r2, [sp, 0xC]\n"
+                "_080C3870:\n"
+                "\tmovs r1, 0x5\n"
+                "\tmovs r2, 0x1\n"
+                "\tbl sub_809D104\n"
+                "\tb _080C389E\n"
+                "\t.align 2, 0\n"
+                "_080C387C: .4byte 0x0600e000\n"
+                "_080C3880: .4byte gUnknown_08E964B8\n"
+                "_080C3884:\n"
+                "\tmovs r4, 0x1\n"
+                "\tldr r0, _080C38C0 @ =0x0600e000\n"
+                "\tldr r3, _080C38C4 @ =gUnknown_08E964B8\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r2, [sp, 0xC]\n"
+                "\tmovs r1, 0x5\n"
+                "\tmovs r2, 0x1\n"
+                "\tbl sub_809D104\n"
+                "_080C389E:\n"
+                "\tadds r4, 0xD\n"
+                "\tldr r0, _080C38C8 @ =gSpecialVar_ContestCategory\n"
+                "\tldrh r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080C38CC\n"
+                "\tmovs r6, 0\n"
+                "\tldr r0, _080C38C0 @ =0x0600e000\n"
+                "\tldr r3, _080C38C4 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x11\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r2, [sp, 0xC]\n"
+                "\tb _080C392A\n"
+                "\t.align 2, 0\n"
+                "_080C38C0: .4byte 0x0600e000\n"
+                "_080C38C4: .4byte gUnknown_08E964B8\n"
+                "_080C38C8: .4byte gSpecialVar_ContestCategory\n"
+                "_080C38CC:\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _080C38EC\n"
+                "\tmovs r6, 0x1\n"
+                "\tldr r0, _080C38E4 @ =0x0600e000\n"
+                "\tldr r3, _080C38E8 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xB\n"
+                "\tb _080C3924\n"
+                "\t.align 2, 0\n"
+                "_080C38E4: .4byte 0x0600e000\n"
+                "_080C38E8: .4byte gUnknown_08E964B8\n"
+                "_080C38EC:\n"
+                "\tcmp r0, 0x2\n"
+                "\tbne _080C3910\n"
+                "\tmovs r6, 0x2\n"
+                "\tldr r0, _080C3908 @ =0x0600e000\n"
+                "\tldr r3, _080C390C @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0xB\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r6, [sp, 0xC]\n"
+                "\tb _080C392A\n"
+                "\t.align 2, 0\n"
+                "_080C3908: .4byte 0x0600e000\n"
+                "_080C390C: .4byte gUnknown_08E964B8\n"
+                "_080C3910:\n"
+                "\tcmp r0, 0x3\n"
+                "\tbne _080C393C\n"
+                "\tmovs r6, 0x3\n"
+                "\tldr r0, _080C3934 @ =0x0600e000\n"
+                "\tldr r3, _080C3938 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x15\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "_080C3924:\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "_080C392A:\n"
+                "\tadds r1, r4, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl sub_809D104\n"
+                "\tb _080C395A\n"
+                "\t.align 2, 0\n"
+                "_080C3934: .4byte 0x0600e000\n"
+                "_080C3938: .4byte gUnknown_08E964B8\n"
+                "_080C393C:\n"
+                "\tmovs r6, 0x4\n"
+                "\tldr r0, _080C3984 @ =0x0600e000\n"
+                "\tldr r3, _080C3988 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x6\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tadds r1, r4, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl sub_809D104\n"
+                "_080C395A:\n"
+                "\tldr r5, _080C398C @ =0x00000fff\n"
+                "\tlsls r4, r6, 12\n"
+                "\tldr r2, _080C3984 @ =0x0600e000\n"
+                "\tmovs r3, 0x7F\n"
+                "_080C3962:\n"
+                "\tldrh r1, [r2]\n"
+                "\tadds r0, r5, 0\n"
+                "\tands r0, r1\n"
+                "\tstrh r0, [r2]\n"
+                "\tldrh r1, [r2]\n"
+                "\tadds r0, r4, 0\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r2]\n"
+                "\tadds r2, 0x2\n"
+                "\tsubs r3, 0x1\n"
+                "\tcmp r3, 0\n"
+                "\tbge _080C3962\n"
+                "\tadd sp, 0x10\n"
+                "\tpop {r4-r6}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080C3984: .4byte 0x0600e000\n"
+                "_080C3988: .4byte gUnknown_08E964B8\n"
+                "_080C398C: .4byte 0x00000fff");
+}
+#endif // NONMATCHING
+
+#elif defined(GERMAN)
+s16 de_sub_80C39A8(s32 a0)
+{
+    s16 result;
+    if (gIsLinkContest & 1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 11, 3, 8, 3);
+        result = 8;
+    }
+    else if (gSpecialVar_ContestRank == 0)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 0, 0, 11, 3);
+        result = 11;
+    }
+    else if (gSpecialVar_ContestRank == 1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 11, 0, 10, 3);
+        result = 10;
+    }
+    else if (gSpecialVar_ContestRank == 2)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 21, 0, 10, 3);
+        result = 10;
+    }
+    else
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 0, 3, 11, 3);
+        result = 11;
+    }
+    return result;
+}
+
+s16 de_sub_80C3A84(s32 a0, s32 * a1)
+{
+    s16 result;
+    if (gSpecialVar_ContestCategory == 0)
+    {
+        *a1 = 0;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 19, 3, 7, 3);
+        result = 7;
+    }
+    else if (gSpecialVar_ContestCategory == 1)
+    {
+        *a1 = 1;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 0, 6, 7, 3);
+        result = 7;
+    }
+    else if (gSpecialVar_ContestCategory == 2)
+    {
+        *a1 = 2;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 7, 6, 4, 3);
+        result = 4;
+    }
+    else if (gSpecialVar_ContestCategory == 3)
+    {
+        *a1 = 3;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 11, 6, 6, 3);
+        result = 6;
+    }
+    else
+    {
+        *a1 = 4;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 17, 6, 5, 3);
+        result = 5;
+    }
+    return result;
+}
+
+void sub_80C37E4(void)
+{
+    s32 sp0;
+    s32 i;
+    de_sub_80C3A84(de_sub_80C39A8(6) + 6, &sp0);
+    for (i = 0; i < 0x80; i++)
+    {
+        ((vu16 *)0x0600E000)[i] &= 0xFFF;
+        ((vu16 *)0x0600E000)[i] |= sp0 << 12;;
+    }
+}
+#endif
