@@ -1,7 +1,6 @@
-// mapjson.h
+#ifndef GUARD_GLOBAL_H
+#define GUARD_GLOBAL_H
 
-#ifndef MAPJSON_H
-#define MAPJSON_H
 
 #include <cstdio>
 using std::fprintf; using std::exit;
@@ -28,4 +27,5 @@ do                                          \
 
 #endif // _MSC_VER
 
-#endif // MAPJSON_H
+
+#endif //GUARD_GLOBAL_H

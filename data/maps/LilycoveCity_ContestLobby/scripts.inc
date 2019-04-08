@@ -68,7 +68,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 
 LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	special sub_80C4858
+	special ScrSpecial_GetContestWinnerNick
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmovement 0
 	playse SE_PIN
@@ -240,7 +240,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 
 LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	special sub_80C4858
+	special ScrSpecial_GetContestWinnerNick
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmovement 0
 	playse SE_PIN
@@ -360,7 +360,7 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	choosecontestmon
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CEA
-	special sub_80C43F4
+	special ScrSpecial_CheckSelectedMonAndInitContest
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C96
 	compare RESULT, 1
@@ -466,7 +466,7 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
-	special sub_80C496C
+	special ScrSpecial_GetContestPlayerMonIdx
 	addvar VAR_SPECIAL_4, 1
 	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
@@ -478,7 +478,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 	call LilycoveCity_ContestLobby_EventScript_158E0B
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 1
-	special sub_80C4F70
+	special ScrSpecial_SetLinkContestTrainerGfxIdx
 	setvar VAR_CONTEST_LOCATION, 5
 	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_158F08
