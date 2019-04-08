@@ -1759,3 +1759,24 @@ void sub_80C37E4(void)
     }
 }
 #endif
+
+// fakematching?
+u8 sub_80C3990(u8 monIndex, u8 arg1)
+{
+    u32 var0;
+    u32 var1;
+
+    var0 = gUnknown_02038670[monIndex] << 16;
+    var1 = var0 / 0x3F;
+    if (var1 & 0xFFFF)
+        var1 += 0x10000;
+
+    var1 >>= 16;
+    if (var1 == 0 && var0)
+        var1 = 1;
+
+    if (arg1 && var1 > 10)
+        var1 = 10;
+
+    return var1;
+}

@@ -5,53 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80C3990
-sub_80C3990: @ 80C3990
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsls r1, 24
-	lsrs r5, r1, 24
-	ldr r1, _080C39DC @ =gUnknown_02038670
-	lsrs r0, 23
-	adds r0, r1
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	lsls r4, r0, 16
-	adds r0, r4, 0
-	movs r1, 0x3F
-	bl __udivsi3
-	adds r1, r0, 0
-	ldr r0, _080C39E0 @ =0x0000ffff
-	ands r0, r1
-	cmp r0, 0
-	beq _080C39BC
-	movs r0, 0x80
-	lsls r0, 9
-	adds r1, r0
-_080C39BC:
-	lsrs r1, 16
-	cmp r1, 0
-	bne _080C39C8
-	cmp r4, 0
-	beq _080C39C8
-	movs r1, 0x1
-_080C39C8:
-	cmp r5, 0
-	beq _080C39D2
-	cmp r1, 0xA
-	bls _080C39D2
-	movs r1, 0xA
-_080C39D2:
-	lsls r0, r1, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080C39DC: .4byte gUnknown_02038670
-_080C39E0: .4byte 0x0000ffff
-	thumb_func_end sub_80C3990
-
 	thumb_func_start sub_80C39E4
 sub_80C39E4: @ 80C39E4
 	push {r4-r7,lr}
