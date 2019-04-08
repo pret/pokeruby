@@ -61,7 +61,7 @@ struct TVSaleItem {
     u16 item_amount;
 };
 
-extern u8 gUnknown_02038694;
+extern u8 gContestMonPartyIndex;
 
 extern struct TVSaleItem gMartPurchaseHistory[3];
 
@@ -975,8 +975,8 @@ void sub_80BE284(u8 contestResult)
         bravoTrainer->contestResult = contestResult;
         bravoTrainer->contestCategory = gSpecialVar_ContestCategory;
         bravoTrainer->contestRank = (u8)gSpecialVar_ContestRank;
-        bravoTrainer->species = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_SPECIES, NULL);
-        GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_NICKNAME, bravoTrainer->pokemonNickname);
+        bravoTrainer->species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
+        GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME, bravoTrainer->pokemonNickname);
     }
 }
 

@@ -27,6 +27,8 @@
 #include "contest_link_80C857C.h"
 #include "contest_link_80C2020.h"
 #include "pokemon_storage_system.h"
+#include "event_data.h"
+#include "script.h"
 #include "trig.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
@@ -115,6 +117,11 @@ void sub_80C3EA4(u8 taskId);
 void sub_80C3F00(void);
 void sub_80C40D4(u8 a0, u8 a1);
 void sub_80C42C0(u8 taskId);
+void sub_80C49C4(u8 taskId);
+void sub_80C49F0(u8 taskId);
+void sub_80C4A0C(u8 taskId);
+void sub_80C4A28(u8 taskId);
+void sub_80C4A44(u8 taskId);
 
 const u16 gUnknown_083D1624[] = INCBIN_U16("graphics/unknown/unknown_3D1624/0.4bpp");
 const u16 gUnknown_083D1644[] = INCBIN_U16("graphics/unknown/unknown_3D1624/1.4bpp");
@@ -1777,7 +1784,7 @@ u8 sub_80C3990(u8 monIndex, u8 arg1)
     u32 var0;
     u32 var1;
 
-    var0 = gUnknown_02038670[monIndex] << 16;
+    var0 = gContestMonConditions[monIndex] << 16;
     var1 = var0 / 0x3F;
     if (var1 & 0xFFFF)
         var1 += 0x10000;
@@ -2106,7 +2113,7 @@ void sub_80C3F00(void)
 
     for (i = 0; i < 4; i++)
     {
-        r4 = 1000 * gUnknown_02038670[i] / ABS(r2);
+        r4 = 1000 * gContestMonConditions[i] / ABS(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
@@ -2549,4 +2556,268 @@ void sub_80C42C0(u8 taskId /*r12*/)
         eContestLink80C2020Struct2018000.unk_14--;
         DestroyTask(taskId);
     }
+}
+
+void sub_80C43F4(void)
+{
+    u8 result = sub_80AE47C(&gPlayerParty[gContestMonPartyIndex]);
+    if (result != 0)
+    {
+        Contest_InitAllPokemon(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
+        sub_80AE82C(gSpecialVar_ContestCategory);
+    }
+    gSpecialVar_Result = result;
+}
+
+u16 sub_80C4440(void)
+{
+    u16 result = 0;
+    struct Pokemon *mon = &gPlayerParty[gContestMonPartyIndex];
+    switch (gSpecialVar_ContestCategory)
+    {
+    case CONTEST_CATEGORY_COOL:
+        if (GetMonData(mon, MON_DATA_COOL_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        if (GetMonData(mon, MON_DATA_BEAUTY_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        if (GetMonData(mon, MON_DATA_CUTE_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_SMART:
+        if (GetMonData(mon, MON_DATA_SMART_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+        if (GetMonData(mon, MON_DATA_TOUGH_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    }
+
+    return result;
+}
+
+
+void sub_80C44C0(void)
+{
+    u8 ribbonData;
+
+    if (gContestFinalStandings[gContestPlayerMonIndex] != 0)
+        return;
+
+    switch (gSpecialVar_ContestCategory)
+    {
+    case CONTEST_CATEGORY_COOL:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_SMART:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON, &ribbonData);
+        }
+        break;
+    }
+}
+
+void sub_80C4674(u8 * dest, const u8 * src)
+{
+    StringCopy(dest, src);
+    if (dest[0] == EXT_CTRL_CODE_BEGIN && dest[1] == 0x15)
+        ConvertInternationalString(dest, LANGUAGE_JAPANESE);
+}
+
+void sub_80C4698(u8 * dest, u8 idx)
+{
+    StringCopy(dest, gContestMons[idx].nickname);
+    if (gIsLinkContest & 1)
+    {
+        if (gLinkPlayers[idx].language == LANGUAGE_JAPANESE)
+        {
+            ConvertInternationalString(dest, GetStringLanguage(dest));
+        }
+    }
+}
+
+void sub_80C46EC(void)
+{
+    if (gIsLinkContest & 1)
+    {
+        sub_80C4674(gStringVar1, gLinkPlayers[gSpecialVar_0x8006].name);
+    }
+    else
+    {
+        sub_80C4674(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
+    }
+}
+
+void sub_80C4740(void)
+{
+    sub_80C4698(gStringVar3, gSpecialVar_0x8006);
+}
+
+void sub_80C4758(void)
+{
+    u8 i;
+    u8 count;
+
+    for (i = 0, count = 0; i < 4; i++)
+    {
+        if (gContestMonConditions[gSpecialVar_0x8006] < gContestMonConditions[i])
+            count++;
+    }
+
+    gSpecialVar_0x8004 = count;
+}
+
+void sub_80C47A0(void)
+{
+    gSpecialVar_0x8004 = gContestMonConditions[gSpecialVar_0x8006];
+}
+
+void sub_80C47C0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    gSpecialVar_0x8005 = i;
+}
+
+void sub_80C47F0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    if (gIsLinkContest & 1)
+    {
+        sub_80C4674(gStringVar3, gLinkPlayers[i].name);
+    }
+    else
+    {
+        sub_80C4674(gStringVar3, gContestMons[i].trainerName);
+    }
+}
+
+void sub_80C4858(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    sub_80C4698(gStringVar1, i);
+}
+
+void sub_80C488C(void)
+{
+    SetMainCallback2(CB2_StartContest);
+}
+
+void sub_80C489C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        SetMainCallback2(sub_80C488C);
+    }
+}
+
+void sub_80C48C8(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_80C489C, 10);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+}
+
+void sub_80C48F4(void)
+{
+    gSpecialVar_0x8004 = gContestMons[gSpecialVar_0x8006].species;
+}
+
+void sub_80C4914(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        SetMainCallback2(sub_80C2358);
+    }
+}
+
+void sub_80C4940(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_80C4914, 10);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+}
+
+void sub_80C496C(void)
+{
+    gSpecialVar_0x8004 = gContestPlayerMonIndex;
+}
+
+void sub_80C4980(u8 taskId)
+{
+    u8 taskId2;
+    ScriptContext2_Enable();
+    taskId2 = CreateTask(sub_80C8604, 0);
+    SetTaskFuncWithFollowupFunc(taskId2, sub_80C8604, sub_80C49C4);
+    gTasks[taskId2].data[9] = taskId;
+}
+
+void sub_80C49C4(u8 taskId)
+{
+    Contest_CreatePlayerMon(gContestMonPartyIndex);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, sub_80C49F0);
+}
+
+void sub_80C49F0(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C88AC, sub_80C4A0C);
+}
+
+void sub_80C4A0C(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8E1C, sub_80C4A28);
+}
+
+void sub_80C4A28(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8938, sub_80C4A44);
 }

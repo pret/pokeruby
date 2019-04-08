@@ -267,12 +267,12 @@ void SelectContestMoveBankTarget(u16);
 
 EWRAM_DATA u8 gUnknown_0203856C = 0;
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
-EWRAM_DATA s16 gUnknown_02038670[4] = {0};
+EWRAM_DATA s16 gContestMonConditions[4] = {0};
 EWRAM_DATA s16 gUnknown_02038678[4] = {0};
 EWRAM_DATA s16 gUnknown_02038680[4] = {0};
 EWRAM_DATA s16 gUnknown_02038688[4] = {0};
 EWRAM_DATA u8 gContestFinalStandings[4] = {0};  // What "place" each participant came in.
-EWRAM_DATA u8 gUnknown_02038694 = 0;
+EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
 EWRAM_DATA u8 gUnknown_02038696[4] = {0};
 EWRAM_DATA u8 gIsLinkContest = 0;
@@ -2242,7 +2242,7 @@ void Contest_InitAllPokemon(u8 contestType, u8 rank)
     asm(""::"r"(i));
 #endif
 
-    Contest_CreatePlayerMon(gUnknown_02038694);
+    Contest_CreatePlayerMon(gContestMonPartyIndex);
 }
 
 // GetContestAvailability?
@@ -2423,7 +2423,7 @@ void sub_80AE82C(u8 a)
     u8 i;
 
     for (i = 0; i < 4; i++)
-        gUnknown_02038670[i] = sub_80AE770(i, a);
+        gContestMonConditions[i] = sub_80AE770(i, a);
 }
 
 u8 CreateJudgeSprite(void)
@@ -3024,7 +3024,7 @@ bool8 unref_sub_80AF5D0(u8 a, u8 b)
 void sub_80AF630(u8 a)
 {
     gUnknown_02038688[a] = sub_80AF688(a);
-    gUnknown_02038678[a] = gUnknown_02038670[a] + gUnknown_02038688[a];
+    gUnknown_02038678[a] = gContestMonConditions[a] + gUnknown_02038688[a];
 }
 
 void sub_80AF668(void)
@@ -3067,7 +3067,7 @@ void DetermineFinalStandings(void)
     for (i = 0; i < 4; i++)
     {
         sp8[i].unk0 = gUnknown_02038678[i];
-        sp8[i].unk4 = gUnknown_02038670[i];
+        sp8[i].unk4 = gContestMonConditions[i];
         sp8[i].unk8 = sp0[i];
         sp8[i].unkC = i;
     }
@@ -4433,8 +4433,8 @@ void sub_80B0F28(u8 a)
             gUnknown_02038696[i] = i;
             for (r4 = 0; r4 < i; r4++)
             {
-                if (gUnknown_02038670[gUnknown_02038696[r4]] < gUnknown_02038670[i]
-                 || (gUnknown_02038670[gUnknown_02038696[r4]] == gUnknown_02038670[i] && sp4[gUnknown_02038696[r4]] < sp4[i]))
+                if (gContestMonConditions[gUnknown_02038696[r4]] < gContestMonConditions[i]
+                 || (gContestMonConditions[gUnknown_02038696[r4]] == gContestMonConditions[i] && sp4[gUnknown_02038696[r4]] < sp4[i]))
                 {
                     for (r2 = i; r2 > r4; r2--)
                         gUnknown_02038696[r2] = gUnknown_02038696[r2 - 1];
