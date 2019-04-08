@@ -2562,18 +2562,18 @@ void sub_80C42C0(u8 taskId /*r12*/)
     }
 }
 
-void sub_80C43F4(void)
+void ScrSpecial_CheckSelectedMonAndInitContest(void)
 {
-    u8 result = sub_80AE47C(&gPlayerParty[gContestMonPartyIndex]);
+    u8 result = CanMonParticipateInContest(&gPlayerParty[gContestMonPartyIndex]);
     if (result != 0)
     {
         Contest_InitAllPokemon(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
-        sub_80AE82C(gSpecialVar_ContestCategory);
+        InitContestMonConditions(gSpecialVar_ContestCategory);
     }
     gSpecialVar_Result = result;
 }
 
-u16 sub_80C4440(void)
+u16 ScrSpecial_CanMonParticipateInSelectedLinkContest(void)
 {
     u16 result = 0;
     struct Pokemon *mon = &gPlayerParty[gContestMonPartyIndex];
@@ -2605,7 +2605,7 @@ u16 sub_80C4440(void)
 }
 
 
-void sub_80C44C0(void)
+void ScrSpecial_GiveContestRibbon(void)
 {
     u8 ribbonData;
 
@@ -2657,14 +2657,14 @@ void sub_80C44C0(void)
     }
 }
 
-void sub_80C4674(u8 * dest, const u8 * src)
+void Contest_CopyAndConvertTrainerName_Intl(u8 * dest, const u8 * src)
 {
     StringCopy(dest, src);
     if (dest[0] == EXT_CTRL_CODE_BEGIN && dest[1] == 0x15)
         ConvertInternationalString(dest, LANGUAGE_JAPANESE);
 }
 
-void sub_80C4698(u8 * dest, u8 idx)
+void Contest_CopyAndConvertNicknameI_Intl(u8 * dest, u8 idx)
 {
     StringCopy(dest, gContestMons[idx].nickname);
     if (gIsLinkContest & 1)
@@ -2676,24 +2676,24 @@ void sub_80C4698(u8 * dest, u8 idx)
     }
 }
 
-void sub_80C46EC(void)
+void Contest_GetTrainerNameI_StringVar1(void)
 {
     if (gIsLinkContest & 1)
     {
-        sub_80C4674(gStringVar1, gLinkPlayers[gSpecialVar_0x8006].name);
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar1, gLinkPlayers[gSpecialVar_0x8006].name);
     }
     else
     {
-        sub_80C4674(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
     }
 }
 
-void sub_80C4740(void)
+void Contest_GetNicknameI_StringVar1(void)
 {
-    sub_80C4698(gStringVar3, gSpecialVar_0x8006);
+    Contest_CopyAndConvertNicknameI_Intl(gStringVar3, gSpecialVar_0x8006);
 }
 
-void sub_80C4758(void)
+void ScrSpecial_CountContestMonsWithBetterCondition(void)
 {
     u8 i;
     u8 count;
@@ -2707,12 +2707,12 @@ void sub_80C4758(void)
     gSpecialVar_0x8004 = count;
 }
 
-void sub_80C47A0(void)
+void ScrSpecial_GetMonCondition(void)
 {
     gSpecialVar_0x8004 = gContestMonConditions[gSpecialVar_0x8006];
 }
 
-void sub_80C47C0(void)
+void ScrSpecial_GetContestWinnerIdx(void)
 {
     u8 i;
 
@@ -2722,7 +2722,7 @@ void sub_80C47C0(void)
     gSpecialVar_0x8005 = i;
 }
 
-void sub_80C47F0(void)
+void ScrSpecial_GetContestWinnerTrainerName(void)
 {
     u8 i;
 
@@ -2731,22 +2731,22 @@ void sub_80C47F0(void)
 
     if (gIsLinkContest & 1)
     {
-        sub_80C4674(gStringVar3, gLinkPlayers[i].name);
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar3, gLinkPlayers[i].name);
     }
     else
     {
-        sub_80C4674(gStringVar3, gContestMons[i].trainerName);
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar3, gContestMons[i].trainerName);
     }
 }
 
-void sub_80C4858(void)
+void ScrSpecial_GetContestWinnerNick(void)
 {
     u8 i;
 
     for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
         ;
 
-    sub_80C4698(gStringVar1, i);
+    Contest_CopyAndConvertNicknameI_Intl(gStringVar1, i);
 }
 
 void sub_80C488C(void)
@@ -2791,7 +2791,7 @@ void sub_80C4940(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
 }
 
-void sub_80C496C(void)
+void ScrSpecial_GetContestPlayerMonIdx(void)
 {
     gSpecialVar_0x8004 = gContestPlayerMonIndex;
 }
@@ -2850,7 +2850,7 @@ void sub_80C4A44(u8 taskId)
         sp4[i] = gTasks[taskId].data[i + 5];
 
     gUnknown_0203869B = sub_80C4B34(sp4);
-    sub_80AE82C(gSpecialVar_ContestCategory);
+    InitContestMonConditions(gSpecialVar_ContestCategory);
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80C4B0C);
 }
 

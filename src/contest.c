@@ -2246,7 +2246,7 @@ void Contest_InitAllPokemon(u8 contestType, u8 rank)
 }
 
 // GetContestAvailability?
-u8 sub_80AE47C(struct Pokemon *pkmn)
+u8 CanMonParticipateInContest(struct Pokemon *pkmn)
 {
     u8 ribbon;
     u8 retVal;
@@ -2380,7 +2380,7 @@ void sub_80AE6E4(u8 a, u8 b)
       1);
 }
 
-u16 sub_80AE770(u8 a, u8 b)
+u16 InitContestMonConditionI(u8 a, u8 b)
 {
     u8 r5;
     u8 r4;
@@ -2388,27 +2388,27 @@ u16 sub_80AE770(u8 a, u8 b)
 
     switch (b)
     {
-    case 0:
+    case CONTEST_CATEGORY_COOL:
         r5 = gContestMons[a].cool;
         r4 = gContestMons[a].tough;
         r3 = gContestMons[a].beauty;
         break;
-    case 1:
+    case CONTEST_CATEGORY_BEAUTY:
         r5 = gContestMons[a].beauty;
         r4 = gContestMons[a].cool;
         r3 = gContestMons[a].cute;
         break;
-    case 2:
+    case CONTEST_CATEGORY_CUTE:
         r5 = gContestMons[a].cute;
         r4 = gContestMons[a].beauty;
         r3 = gContestMons[a].smart;
         break;
-    case 3:
+    case CONTEST_CATEGORY_SMART:
         r5 = gContestMons[a].smart;
         r4 = gContestMons[a].cute;
         r3 = gContestMons[a].tough;
         break;
-    case 4:
+    case CONTEST_CATEGORY_TOUGH:
     default:
         r5 = gContestMons[a].tough;
         r4 = gContestMons[a].smart;
@@ -2418,12 +2418,12 @@ u16 sub_80AE770(u8 a, u8 b)
     return r5 + (r4 + r3 + gContestMons[a].sheen) / 2;
 }
 
-void sub_80AE82C(u8 a)
+void InitContestMonConditions(u8 a)
 {
     u8 i;
 
     for (i = 0; i < 4; i++)
-        gContestMonConditions[i] = sub_80AE770(i, a);
+        gContestMonConditions[i] = InitContestMonConditionI(i, a);
 }
 
 u8 CreateJudgeSprite(void)

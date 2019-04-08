@@ -182,7 +182,7 @@ static void sub_80A9D58(u8 taskId)
        dest[i] = gTasks[taskId].data[5 + i];
 
    gUnknown_0203869B = sub_80C4B34(dest);
-   sub_80AE82C((u8)gSpecialVar_ContestCategory);
+   InitContestMonConditions((u8)gSpecialVar_ContestCategory);
    sub_80B0F28(0);
    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
 }
@@ -607,7 +607,7 @@ void sub_80AA5E8(u8 var)
 
 static void sub_80AA614(u8 var1, u8 var2)
 {
-    u16 var = sub_80AE770(var1, var2);
+    u16 var = InitContestMonConditionI(var1, var2);
 
     ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
     Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
@@ -859,7 +859,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            sub_80AE82C(eMatsudaDebugVar);
+            InitContestMonConditions(eMatsudaDebugVar);
         SetMainCallback2(CB2_StartContest);
     }
 }
@@ -882,7 +882,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
 
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
-            gContestMonConditions[i] = sub_80AE770(i, gSpecialVar_ContestCategory);
+            gContestMonConditions[i] = InitContestMonConditionI(i, gSpecialVar_ContestCategory);
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
     }
 }

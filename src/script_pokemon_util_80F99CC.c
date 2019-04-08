@@ -139,7 +139,7 @@ void sub_80F9C00(void)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        switch (sub_80AE47C(&gPlayerParty[i]))
+        switch (CanMonParticipateInContest(&gPlayerParty[i]))
         {
         case 0:
         case 3:

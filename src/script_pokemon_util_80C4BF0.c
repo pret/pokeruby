@@ -24,9 +24,6 @@
 #include "task.h"
 #include "ewram.h"
 
-extern void sub_80C4674();
-extern void sub_80C4698(u8 *, u8);
-
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
 
@@ -72,8 +69,8 @@ void sub_80C4C28(void)
 
 void sub_80C4C64(void)
 {
-    sub_80C46EC();
-    sub_80C4740();
+    Contest_GetTrainerNameI_StringVar1();
+    Contest_GetNicknameI_StringVar1();
     sub_80C48F4();
 }
 
@@ -84,19 +81,19 @@ void sub_80C4C78(void)
 
     switch(gSpecialVar_ContestCategory)
     {
-    case 0:
+    case CONTEST_CATEGORY_COOL:
         var = 8;
         break;
-    case 1:
+    case CONTEST_CATEGORY_BEAUTY:
         var = 9;
         break;
-    case 2:
+    case CONTEST_CATEGORY_CUTE:
         var = 10;
         break;
-    case 3:
+    case CONTEST_CATEGORY_SMART:
         var = 11;
         break;
-    case 4:
+    case CONTEST_CATEGORY_TOUGH:
     default:
         var = 12;
         break;
@@ -202,12 +199,12 @@ void sub_80C4D80(void)
         }
     }
 
-    sub_80C4698(gStringVar1, i);
+    Contest_CopyAndConvertNicknameI_Intl(gStringVar1, i);
 
     if (gIsLinkContest & 1)
-        sub_80C4674(gStringVar2, gLinkPlayers[i].name);
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar2, gLinkPlayers[i].name);
     else
-        sub_80C4674(gStringVar2, gContestMons[i].trainerName);
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar2, gContestMons[i].trainerName);
 
     if (r10 == 1 || r7 == r10)
         gSpecialVar_0x8006 = r4_;
@@ -234,7 +231,7 @@ void ShowContestWinner(void)
     gMain.savedCallback = ShowContestWinnerCleanup;
 }
 
-void sub_80C4F70(void)
+void ScrSpecial_SetLinkContestTrainerGfxIdx(void)
 {
     VarSet(VAR_OBJ_GFX_ID_0, gContestMons[0].trainerGfxId);
     VarSet(VAR_OBJ_GFX_ID_1, gContestMons[1].trainerGfxId);
