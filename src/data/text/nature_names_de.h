@@ -1,53 +1,53 @@
-static const u8 NatureName_Hardy[]   = _("ROBUST");
-static const u8 NatureName_Lonely[]  = _("SOLO");
-static const u8 NatureName_Brave[]   = _("MUTIG");
-static const u8 NatureName_Adamant[] = _("HART");
-static const u8 NatureName_Naughty[] = _("FRECH");
-static const u8 NatureName_Bold[]    = _("KÜHN");
-static const u8 NatureName_Docile[]  = _("SANFT");
-static const u8 NatureName_Relaxed[] = _("LOCKER");
-static const u8 NatureName_Impish[]  = _("PFIFFIG");
-static const u8 NatureName_Lax[]     = _("LASCH");
-static const u8 NatureName_Timid[]   = _("SCHEU");
-static const u8 NatureName_Hasty[]   = _("HASTIG");
-static const u8 NatureName_Serious[] = _("ERNST");
-static const u8 NatureName_Jolly[]   = _("FROH");
-static const u8 NatureName_Naive[]   = _("NAIV");
-static const u8 NatureName_Modest[]  = _("MÄSSIG");
-static const u8 NatureName_Mild[]    = _("MILD");
-static const u8 NatureName_Quiet[]   = _("RUHIG");
-static const u8 NatureName_Bashful[] = _("ZAGHAFT");
-static const u8 NatureName_Rash[]    = _("HITZIG");
-static const u8 NatureName_Calm[]    = _("STILL");
-static const u8 NatureName_Gentle[]  = _("ZART");
-static const u8 NatureName_Sassy[]   = _("FORSCH");
-static const u8 NatureName_Careful[] = _("SACHT");
-static const u8 NatureName_Quirky[]  = _("KAUZIG");
+const u8 gNatureName_Hardy[]   = _("ROBUST");
+const u8 gNatureName_Lonely[]  = _("SOLO");
+const u8 gNatureName_Brave[]   = _("MUTIG");
+const u8 gNatureName_Adamant[] = _("HART");
+const u8 gNatureName_Naughty[] = _("FRECH");
+const u8 gNatureName_Bold[]    = _("KÜHN");
+const u8 gNatureName_Docile[]  = _("SANFT");
+const u8 gNatureName_Relaxed[] = _("LOCKER");
+const u8 gNatureName_Impish[]  = _("PFIFFIG");
+const u8 gNatureName_Lax[]     = _("LASCH");
+const u8 gNatureName_Timid[]   = _("SCHEU");
+const u8 gNatureName_Hasty[]   = _("HASTIG");
+const u8 gNatureName_Serious[] = _("ERNST");
+const u8 gNatureName_Jolly[]   = _("FROH");
+const u8 gNatureName_Naive[]   = _("NAIV");
+const u8 gNatureName_Modest[]  = _("MÄSSIG");
+const u8 gNatureName_Mild[]    = _("MILD");
+const u8 gNatureName_Quiet[]   = _("RUHIG");
+const u8 gNatureName_Bashful[] = _("ZAGHAFT");
+const u8 gNatureName_Rash[]    = _("HITZIG");
+const u8 gNatureName_Calm[]    = _("STILL");
+const u8 gNatureName_Gentle[]  = _("ZART");
+const u8 gNatureName_Sassy[]   = _("FORSCH");
+const u8 gNatureName_Careful[] = _("SACHT");
+const u8 gNatureName_Quirky[]  = _("KAUZIG");
 
 const u8 * const gNatureNames[] = {
-    NatureName_Hardy,
-    NatureName_Lonely,
-    NatureName_Brave,
-    NatureName_Adamant,
-    NatureName_Naughty,
-    NatureName_Bold,
-    NatureName_Docile,
-    NatureName_Relaxed,
-    NatureName_Impish,
-    NatureName_Lax,
-    NatureName_Timid,
-    NatureName_Hasty,
-    NatureName_Serious,
-    NatureName_Jolly,
-    NatureName_Naive,
-    NatureName_Modest,
-    NatureName_Mild,
-    NatureName_Quiet,
-    NatureName_Bashful,
-    NatureName_Rash,
-    NatureName_Calm,
-    NatureName_Gentle,
-    NatureName_Sassy,
-    NatureName_Careful,
-    NatureName_Quirky,
+    gNatureName_Hardy,
+    gNatureName_Lonely,
+    gNatureName_Brave,
+    gNatureName_Adamant,
+    gNatureName_Naughty,
+    gNatureName_Bold,
+    gNatureName_Docile,
+    gNatureName_Relaxed,
+    gNatureName_Impish,
+    gNatureName_Lax,
+    gNatureName_Timid,
+    gNatureName_Hasty,
+    gNatureName_Serious,
+    gNatureName_Jolly,
+    gNatureName_Naive,
+    gNatureName_Modest,
+    gNatureName_Mild,
+    gNatureName_Quiet,
+    gNatureName_Bashful,
+    gNatureName_Rash,
+    gNatureName_Calm,
+    gNatureName_Gentle,
+    gNatureName_Sassy,
+    gNatureName_Careful,
+    gNatureName_Quirky,
 };
