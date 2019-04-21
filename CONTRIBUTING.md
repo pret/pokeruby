@@ -34,7 +34,7 @@ It must be the first include in the file. Other includes will assume you have in
 
 ## 2. Include it in the rom
 
-Include `src/cable_car.c` in the rom by adding `src/cable_car.c` to `ld_script.txt`:
+Include `src/cable_car.c` in the rom by adding `src/cable_car.o` to `ld_script.txt`:
 ```diff
          asm/battle_message.o(.text);
          asm/choose_party.o(.text);
