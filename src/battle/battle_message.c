@@ -700,7 +700,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 break;
             case 25: // trainer class name
 #ifdef ENGLISH
-                if (gTrainerBattleOpponent == 0x400)
+                if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
                     toCpy = gTrainerClassNames[GetSecretBaseTrainerNameIndex()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                     toCpy = gTrainerClassNames[get_trainer_class_name_index()];
@@ -710,7 +710,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                     toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent].trainerClass];
                 break;
 #else
-                if (gTrainerBattleOpponent == 0x400)
+                if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
                     toCpy = de_sub_8041024(gTrainerBattleOpponent, 0);
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                     toCpy = de_sub_8041024(BATTLE_TYPE_BATTLE_TOWER, 0);
@@ -721,7 +721,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 break;
 #endif
             case 26: // trainer name
-                if (gTrainerBattleOpponent == 0x400)
+                if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
                 {
                     memset(text, 0xFF, 8);
                     memcpy(text, ewram17002, 7);
