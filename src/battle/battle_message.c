@@ -318,7 +318,7 @@ void BufferStringBattle(u16 stringID)
         }
         else
         {
-            if (gTrainerBattleOpponent == 0x800)
+            if (gTrainerBattleOpponent == LINK_BATTLE_OPPONENT)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = BattleText_WithdrewPoke3;

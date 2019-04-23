@@ -3056,7 +3056,7 @@ BattleScript_PayDayMoneyAndPickUpItems:: @ 81D8DCE
 BattleScript_LocalBattleLost:: @ 81D8DD1
 	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER, BattleScript_LocalBattleLostEnd
 	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
-	jumpifhalfword EQUAL, gTrainerBattleOpponent, 1024, BattleScript_LocalBattleLostEnd
+	jumpifhalfword EQUAL, gTrainerBattleOpponent, SECRET_BASE_OPPONENT, BattleScript_LocalBattleLostEnd
 	printstring BATTLE_TEXT_OutOfUsablePoke
 	waitmessage 64
 	printstring BATTLE_TEXT_WhitedOut

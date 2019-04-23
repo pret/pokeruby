@@ -135,7 +135,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != 1024
+            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
             && FlagGet(FLAG_BADGE01_GET)
             && !GetBattlerSide(bankAtk))
             attack = (110 * attack) / 100;
@@ -143,7 +143,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != 1024
+            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
             && FlagGet(FLAG_BADGE05_GET)
             && !GetBattlerSide(bankDef))
             defense = (110 * defense) / 100;
@@ -151,7 +151,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != 1024
+            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
             && FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(bankAtk))
             spAttack = (110 * spAttack) / 100;
@@ -159,7 +159,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != 1024
+            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
             && FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(bankDef))
             spDefense = (110 * spDefense) / 100;
