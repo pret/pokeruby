@@ -79,6 +79,17 @@ u8 GetBattlerSide(u8 bank);
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
+#define BADGE_BOOST(badge, stat, bank) ({ \
+if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))) \
+{ \
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) \
+    && gTrainerBattleOpponent != SECRET_BASE_OPPONENT \
+    && FlagGet(FLAG_BADGE0##badge##_GET) \
+    && GetBattlerSide(bank) == B_SIDE_PLAYER) \
+        (stat) = (110 * (stat)) / 100; \
+} \
+})
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 bankAtk, u8 bankDef)
 {
     u32 i;
@@ -132,38 +143,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-    {
-        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
-            && FlagGet(FLAG_BADGE01_GET)
-            && !GetBattlerSide(bankAtk))
-            attack = (110 * attack) / 100;
-    }
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-    {
-        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
-            && FlagGet(FLAG_BADGE05_GET)
-            && !GetBattlerSide(bankDef))
-            defense = (110 * defense) / 100;
-    }
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-    {
-        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
-            && FlagGet(FLAG_BADGE07_GET)
-            && !GetBattlerSide(bankAtk))
-            spAttack = (110 * spAttack) / 100;
-    }
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
-    {
-        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
-            && FlagGet(FLAG_BADGE07_GET)
-            && !GetBattlerSide(bankDef))
-            spDefense = (110 * spDefense) / 100;
-    }
+    BADGE_BOOST(1, attack, bankAtk);
+    BADGE_BOOST(5, defense, bankDef);
+    BADGE_BOOST(7, spAttack, bankAtk);
+    BADGE_BOOST(7, spDefense, bankDef);
 
     for (i = 0; i < 17; i++)
     {
