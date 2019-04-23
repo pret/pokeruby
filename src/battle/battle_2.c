@@ -543,7 +543,7 @@ void sub_800EC9C(void)
             SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
-                gTrainerBattleOpponent = 0x800;
+                gTrainerBattleOpponent = LINK_BATTLE_OPPONENT;
                 gBattleTypeFlags |= BATTLE_TYPE_20;
             }
         }
