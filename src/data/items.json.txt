@@ -1,0 +1,23 @@
+{{ doNotModifyHeader }}
+const struct Item gItems[] = {
+    {% for item in items %}{
+#ifdef ENGLISH
+        .name = {{ item.english }},
+#elif defined(GERMAN)
+        .name = {{ item.german }},
+#endif
+        .itemId = {{ item.itemId }},
+        .price = {{ item.price }},
+        .holdEffect = {{ item.holdEffect }},
+        .holdEffectParam = {{ item.holdEffectParam }},
+        .description = gItemDescription_{{ item.itemId }},
+        .importance = {{ item.importance }},
+        .exitsBagOnUse = {{ item.exitsBagOnUse }},
+        .pocket = {{ item.pocket }},
+        .type = {{ item.type }},
+        .fieldUseFunc = {{ item.fieldUseFunc }},
+        .battleUsage = {{ item.battleUsage }},
+        .battleUseFunc = {{ item.battleUseFunc }},
+        .secondaryId = {{ item.secondaryId }}
+    }, {% endfor %}
+};

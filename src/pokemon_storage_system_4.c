@@ -30,8 +30,8 @@ EWRAM_DATA u8 unk_2038790 = 0;
 EWRAM_DATA u32 unk_2038794 = 0;
 EWRAM_DATA u32 unk_2038798 = 0;
 #endif
-EWRAM_DATA s8 gUnknown_020384E4 = 0;
-EWRAM_DATA s8 gUnknown_020384E5 = 0;
+EWRAM_DATA s8 sBoxCursorArea = 0;
+EWRAM_DATA s8 sBoxCursorPosition = 0;
 EWRAM_DATA bool8 gUnknown_020384E6 = FALSE;
 EWRAM_DATA u8 gUnknown_020384E7 = 0;
 EWRAM_DATA u8 gUnknown_020384E8 = 0;
@@ -1159,10 +1159,10 @@ struct Sprite *sub_809A9A0(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
 void sub_809AA24(void)
 {
     if (gPokemonStorageSystemPtr->unk_0005 != 1)
-        gUnknown_020384E4 = 0;
+        sBoxCursorArea = 0;
     else
-        gUnknown_020384E4 = 1;
-    gUnknown_020384E5 = 0;
+        sBoxCursorArea = 1;
+    sBoxCursorPosition = 0;
     gUnknown_020384E6 = FALSE;
     gUnknown_020384E7 = 0;
     gUnknown_020384E8 = 0;
@@ -1224,12 +1224,12 @@ void sub_809AACC(u8 a0, u8 a1, u16 *a2, u16 *a3)
 
 u16 sub_809AB8C(void)
 {
-    switch (gUnknown_020384E4)
+    switch (sBoxCursorArea)
     {
         case 1:
-            return GetMonData(gPlayerParty + gUnknown_020384E5, MON_DATA_SPECIES);
+            return GetMonData(gPlayerParty + sBoxCursorPosition, MON_DATA_SPECIES);
         case 0:
-            return GetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, MON_DATA_SPECIES);
+            return GetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + sBoxCursorPosition, MON_DATA_SPECIES);
         default:
             return SPECIES_NONE;
     }
@@ -1339,7 +1339,7 @@ void sub_809AF18(u8 a0, u8 a1)
     sub_809AD94();
     if (!gUnknown_020384E6)
         StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 1);
-    if (a0 == 1 && gUnknown_020384E4 != 1)
+    if (a0 == 1 && sBoxCursorArea != 1)
     {
         gPokemonStorageSystemPtr->unk_11e2 = a0;
         gPokemonStorageSystemPtr->unk_11c4->invisible = TRUE;
@@ -1357,12 +1357,12 @@ void sub_809AF18(u8 a0, u8 a1)
 
 void sub_809AFB8(void)
 {
-    gUnknown_020384E4 = gPokemonStorageSystemPtr->unk_11e0;
-    gUnknown_020384E5 = gPokemonStorageSystemPtr->unk_11e1;
+    sBoxCursorArea = gPokemonStorageSystemPtr->unk_11e0;
+    sBoxCursorPosition = gPokemonStorageSystemPtr->unk_11e1;
     if (!gUnknown_020384E6)
         StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 0);
     sub_809BF74();
-    switch (gUnknown_020384E4)
+    switch (sBoxCursorArea)
     {
         case 2:
             sub_809A860(TRUE);
@@ -1406,7 +1406,7 @@ void sub_809B0D4(void)
 
 void sub_809B0E0(void)
 {
-    gUnknown_020384EA = gUnknown_020384E5;
+    gUnknown_020384EA = sBoxCursorPosition;
 }
 
 u8 sub_809B0F4(void)
@@ -1483,7 +1483,7 @@ bool8 sub_809B24C(void)
     switch (gPokemonStorageSystemPtr->unk_12a8)
     {
         case 0:
-            switch (gUnknown_020384E4)
+            switch (sBoxCursorArea)
             {
                 case 1:
                     gPokemonStorageSystemPtr->unk_12a9 = 14;
@@ -1495,14 +1495,14 @@ bool8 sub_809B24C(void)
                     return FALSE;
             }
             StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 2);
-            sub_80996B0(gPokemonStorageSystemPtr->unk_12a9, gUnknown_020384E5);
+            sub_80996B0(gPokemonStorageSystemPtr->unk_12a9, sBoxCursorPosition);
             gPokemonStorageSystemPtr->unk_12a8++;
             break;
         case 1:
             if (!sub_809971C())
             {
                 StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 3);
-                diegohint1(gPokemonStorageSystemPtr->unk_12a9, gUnknown_020384E5);
+                diegohint1(gPokemonStorageSystemPtr->unk_12a9, sBoxCursorPosition);
                 gPokemonStorageSystemPtr->unk_12a8++;
             }
             break;
@@ -1543,15 +1543,15 @@ bool8 sub_809B358(void)
 
 void sub_809B384(void)
 {
-    switch (gUnknown_020384E4)
+    switch (sBoxCursorArea)
     {
         case 1:
-            sub_809B44C(14, gUnknown_020384E5);
-            sub_8099584(0, gUnknown_020384E5);
+            sub_809B44C(14, sBoxCursorPosition);
+            sub_8099584(0, sBoxCursorPosition);
             break;
         case 0:
-            sub_809B44C(get_preferred_box(), gUnknown_020384E5);
-            sub_8099584(1, gUnknown_020384E5);
+            sub_809B44C(get_preferred_box(), sBoxCursorPosition);
+            sub_8099584(1, sBoxCursorPosition);
             break;
         default:
             return;
@@ -1562,16 +1562,16 @@ void sub_809B384(void)
 void sub_809B3E0(void)
 {
     u8 boxId;
-    switch (gUnknown_020384E4)
+    switch (sBoxCursorArea)
     {
         case 1:
-            diegohint2(14, gUnknown_020384E5);
-            sub_809960C(14, gUnknown_020384E5);
+            diegohint2(14, sBoxCursorPosition);
+            sub_809960C(14, sBoxCursorPosition);
             break;
         case 0:
             boxId = get_preferred_box();
-            diegohint2(boxId, gUnknown_020384E5);
-            sub_809960C(boxId, gUnknown_020384E5);
+            diegohint2(boxId, sBoxCursorPosition);
+            sub_809960C(boxId, sBoxCursorPosition);
             break;
         default:
             return;
@@ -1587,7 +1587,7 @@ void sub_809B440(void)
 void sub_809B44C(u8 a0, u8 a1)
 {
     if (a0 == 14)
-        gPokemonStorageSystemPtr->unk_25b4 = gPlayerParty[gUnknown_020384E5];
+        gPokemonStorageSystemPtr->unk_25b4 = gPlayerParty[sBoxCursorPosition];
     else
         ExpandBoxMon(gPokemonStorage.boxes[a0] + a1, &gPokemonStorageSystemPtr->unk_25b4);
     sub_809B548(a0, a1);
@@ -1642,9 +1642,9 @@ bool8 sub_809B62C(u8 boxId)
     }
     else
     {
-        sub_809B44C(14, gUnknown_020384E5);
+        sub_809B44C(14, sBoxCursorPosition);
         diegohint2(boxId, monIdx);
-        sub_8099520(gUnknown_020384E5);
+        sub_8099520(sBoxCursorPosition);
     }
     if (boxId == get_preferred_box())
         sub_8098D20(monIdx);
@@ -1664,11 +1664,11 @@ void sub_809B6DC(void)
 
     if (gUnknown_020384E6)
         mode = 2;
-    else if (gUnknown_020384E4 == 1)
+    else if (sBoxCursorArea == 1)
         mode = 0;
     else
         mode = 1;
-    sub_809981C(mode, gUnknown_020384E5);
+    sub_809981C(mode, sBoxCursorPosition);
     StringCopy(gPokemonStorageSystemPtr->unk_26e4, gPokemonStorageSystemPtr->unk_11fa);
 }
 
@@ -1690,11 +1690,11 @@ void sub_809B760(void)
     else
     {
         u8 boxId;
-        if (gUnknown_020384E4 == 1)
+        if (sBoxCursorArea == 1)
             boxId = 14;
         else
             boxId = get_preferred_box();
-        sub_809B548(boxId, gUnknown_020384E5);
+        sub_809B548(boxId, sBoxCursorPosition);
     }
     sub_809BF74();
 }
@@ -1716,17 +1716,17 @@ void sub_809B7D4(void)
     }
     else
     {
-        if (gUnknown_020384E4 == 1)
+        if (sBoxCursorArea == 1)
         {
-            gPokemonStorageSystemPtr->unk_2618 = gPlayerParty[gUnknown_020384E5];
+            gPokemonStorageSystemPtr->unk_2618 = gPlayerParty[sBoxCursorPosition];
             gPokemonStorageSystemPtr->unk_2682 = 14;
         }
         else
         {
-            ExpandBoxMon(gPokemonStorage.boxes[gPokemonStorage.currentBox] + gUnknown_020384E5, &gPokemonStorageSystemPtr->unk_2618);
+            ExpandBoxMon(gPokemonStorage.boxes[gPokemonStorage.currentBox] + sBoxCursorPosition, &gPokemonStorageSystemPtr->unk_2618);
             gPokemonStorageSystemPtr->unk_2682 = gPokemonStorage.currentBox;
         }
-        gPokemonStorageSystemPtr->unk_2683 = gUnknown_020384E5;
+        gPokemonStorageSystemPtr->unk_2683 = sBoxCursorPosition;
     }
     gPokemonStorageSystemPtr->unk_267e = 0;
     gPokemonStorageSystemPtr->unk_267f = 0;
@@ -1838,17 +1838,17 @@ void sub_809BC18(void)
         gPokemonStorageSystemPtr->unk_268c = 0;
         gPokemonStorageSystemPtr->unk_268e = 0;
     }
-    else if (gUnknown_020384E4 == 1)
+    else if (sBoxCursorArea == 1)
     {
         gPokemonStorageSystemPtr->unk_2690.pokemon = gPlayerParty;
-        gPokemonStorageSystemPtr->unk_268d = gUnknown_020384E5;
+        gPokemonStorageSystemPtr->unk_268d = sBoxCursorPosition;
         gPokemonStorageSystemPtr->unk_268c = StorageSystemGetPartySize() - 1;
         gPokemonStorageSystemPtr->unk_268e = 0;
     }
     else
     {
         gPokemonStorageSystemPtr->unk_2690.box = gPokemonStorage.boxes[gPokemonStorage.currentBox];
-        gPokemonStorageSystemPtr->unk_268d = gUnknown_020384E5;
+        gPokemonStorageSystemPtr->unk_268d = sBoxCursorPosition;
         gPokemonStorageSystemPtr->unk_268c = 30 - 1;
         gPokemonStorageSystemPtr->unk_268e = 5;
     }
@@ -1859,7 +1859,7 @@ void sub_809BD14(void)
     if (gUnknown_020384E6)
         sub_809BBC0();
     else
-        gUnknown_020384E5 = pssData.monIndex;
+        sBoxCursorPosition = pssData.monIndex;
 }
 
 s16 party_compaction(void)
@@ -1891,16 +1891,16 @@ void sub_809BDD8(u8 markings)
         SetMonData(&gPokemonStorageSystemPtr->unk_25b4, MON_DATA_MARKINGS, &markings);
     else
     {
-        if (gUnknown_020384E4 == 1)
-            SetMonData(gPlayerParty + gUnknown_020384E5, MON_DATA_MARKINGS, &markings);
-        if (gUnknown_020384E4 == 0)
-            SetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, MON_DATA_MARKINGS, &markings);
+        if (sBoxCursorArea == 1)
+            SetMonData(gPlayerParty + sBoxCursorPosition, MON_DATA_MARKINGS, &markings);
+        if (sBoxCursorArea == 0)
+            SetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + sBoxCursorPosition, MON_DATA_MARKINGS, &markings);
     }
 }
 
 bool8 sub_809BE80(void)
 {
-    if (gUnknown_020384E4 == 1 && !gUnknown_020384E6 && CountAlivePartyMonsExceptOne(gUnknown_020384E5) == 0)
+    if (sBoxCursorArea == 1 && !gUnknown_020384E6 && CountAlivePartyMonsExceptOne(sBoxCursorPosition) == 0)
         return TRUE;
     return FALSE;
 }
@@ -1909,7 +1909,7 @@ bool8 sub_809BEBC(void)
 {
     if (gUnknown_020384E6)
     {
-        if (gUnknown_020384E4 == 1 && CountAlivePartyMonsExceptOne(gUnknown_020384E5) == 0)
+        if (sBoxCursorArea == 1 && CountAlivePartyMonsExceptOne(sBoxCursorPosition) == 0)
         {
             if (gPokemonStorageSystemPtr->unk_11f9 || GetMonData(&gPokemonStorageSystemPtr->unk_25b4, MON_DATA_HP) == 0)
                 return FALSE;
@@ -1926,12 +1926,12 @@ bool8 sub_809BF20(void)
 
 bool8 sub_809BF2C(void)
 {
-    return gUnknown_020384E4 == 2 ? TRUE : FALSE;
+    return sBoxCursorArea == 2 ? TRUE : FALSE;
 }
 
 bool8 sub_809BF48(void)
 {
-    return (gUnknown_020384E4 == 3 && gUnknown_020384E5 == 1) ? TRUE : FALSE;
+    return (sBoxCursorArea == 3 && sBoxCursorPosition == 1) ? TRUE : FALSE;
 }
 
 void sub_809BF74(void)
@@ -1939,12 +1939,12 @@ void sub_809BF74(void)
     gPokemonStorageSystemPtr->unk_11f6 = gUnknown_020384E6 ? 0 : 1;
     if (!gUnknown_020384E6)
     {
-        switch (gUnknown_020384E4)
+        switch (sBoxCursorArea)
         {
             case 1:
-                if (gUnknown_020384E5 < PARTY_SIZE)
+                if (sBoxCursorPosition < PARTY_SIZE)
                 {
-                    sub_809C04C(gPlayerParty + gUnknown_020384E5, 0);
+                    sub_809C04C(gPlayerParty + sBoxCursorPosition, 0);
                     break;
                 }
                 // fallthrough
@@ -1953,7 +1953,7 @@ void sub_809BF74(void)
                 sub_809C04C(NULL, 2);
                 break;
             case 0:
-                sub_809C04C(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, 1);
+                sub_809C04C(gPokemonStorage.boxes[get_preferred_box()] + sBoxCursorPosition, 1);
                 break;
         }
     }
@@ -2125,8 +2125,8 @@ void sub_809C04C(void *pokemon, u8 a1)
 u8 sub_809C464(void)
 {
     u8 r9;
-    s8 r8 = gUnknown_020384E4;
-    s8 r4 = gUnknown_020384E5;
+    s8 r8 = sBoxCursorArea;
+    s8 r4 = sBoxCursorPosition;
 
     do
     {
@@ -2137,7 +2137,7 @@ u8 sub_809C464(void)
         if (JOY_REPT(DPAD_UP))
         {
             r9 = 1;
-            if (gUnknown_020384E5 >= 6)
+            if (sBoxCursorPosition >= 6)
             {
                 r4 -= 6;
             }
@@ -2165,7 +2165,7 @@ u8 sub_809C464(void)
         if (JOY_REPT(DPAD_LEFT))
         {
             r9 = 1;
-            if (gUnknown_020384E5 % 6)
+            if (sBoxCursorPosition % 6)
                 r4--;
             else
             {
@@ -2177,7 +2177,7 @@ u8 sub_809C464(void)
         if (JOY_REPT(DPAD_RIGHT))
         {
             r9 = 1;
-            if ((gUnknown_020384E5 + 1) % 6)
+            if ((sBoxCursorPosition + 1) % 6)
                 r4++;
             else
             {
@@ -2235,55 +2235,61 @@ u8 sub_809C464(void)
 #ifdef NONMATCHING
 u8 sub_809C664(void)
 {
-    s8 r10 = gUnknown_020384E4;
-    s8 r4 = gUnknown_020384E5;
+    s8 r10 = sBoxCursorArea;
+    s8 r4 = sBoxCursorPosition;
     u8 r8;
     u8 r9;
 
-    gPokemonStorageSystemPtr->unk_11df = 0;
-    gPokemonStorageSystemPtr->unk_11de = 0;
-    gPokemonStorageSystemPtr->unk_11e3 = 0;
-    r9 = FALSE;
-    r8 = 0;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    do
     {
-        if (--r4 < 0)
-            r4 = 6;
-        if (r4 != gUnknown_020384E5)
-            r8 = 1;
-    }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-    {
-        if (++r4 > 6)
-            r4 = 0;
-        if (r4 != gUnknown_020384E5)
-            r8 = 1;
-    }
-    else if ((gMain.newAndRepeatedKeys & DPAD_LEFT) && gUnknown_020384E5)
-    {
-        r8 = 1;
-        gPokemonStorageSystemPtr->unk_11e2 = gUnknown_020384E5;
-        r4 = 0;
-    }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
-    {
-        if (gUnknown_020384E5 == 0)
+        gPokemonStorageSystemPtr->unk_11df = 0;
+        gPokemonStorageSystemPtr->unk_11de = 0;
+        gPokemonStorageSystemPtr->unk_11e3 = 0;
+        r9 = FALSE;
+        r8 = 0;
+        if (JOY_REPT(DPAD_UP))
         {
-            r8 = 1;
-            r4 = gPokemonStorageSystemPtr->unk_11e2;
+            r4--;
+            if (r4 < 0)
+                r4 = 6;
+            if (r4 != sBoxCursorPosition)
+                r8 = 1;
+            break;
         }
-        else
+        if (JOY_REPT(DPAD_DOWN))
         {
-            r8 = 6;
-            r10 = 0;
-            r4 = 0;
+            r4++;
+            if (r4 > 6)
+                r4 = 0;
+            if (r4 != sBoxCursorPosition)
+                r8 = 1;
+            break;
         }
-    }
-    else
-    {
-        if (gMain.newKeys & A_BUTTON)
+        if ((JOY_REPT(DPAD_LEFT)) && sBoxCursorPosition != 0)
         {
-            if (gUnknown_020384E5 == 6)
+            r8 = 1;
+            gPokemonStorageSystemPtr->unk_11e2 = sBoxCursorPosition;
+            r4 = 0;
+            break;
+        }
+        if (JOY_REPT(DPAD_RIGHT))
+        {
+            if (sBoxCursorPosition == 0)
+            {
+                r8 = 1;
+                r4 = gPokemonStorageSystemPtr->unk_11e2;
+            }
+            else
+            {
+                r8 = 6;
+                r10 = 0;
+                r4 = 0;
+            }
+            break;
+        }
+        if (JOY_NEW(A_BUTTON))
+        {
+            if (sBoxCursorPosition == 6)
             {
                 if (gPokemonStorageSystemPtr->unk_0005 == 1)
                     return 4;
@@ -2295,37 +2301,38 @@ u8 sub_809C664(void)
                     return 8;
                 switch (sub_809CE4C(0))
                 {
-                    case 1:
-                        return 11;
-                    case 2:
-                        return 12;
-                    case 3:
-                        return 13;
-                    case 4:
-                        return 14;
-                    case 5:
-                        return 15;
+                case 1:
+                    return 11;
+                case 2:
+                    return 12;
+                case 3:
+                    return 13;
+                case 4:
+                    return 14;
+                case 5:
+                    return 15;
                 }
             }
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (gPokemonStorageSystemPtr->unk_0005 == 1)
                 return 16;
             r9 = TRUE;
         }
-        if (!r9)
+        if (r9)
         {
             r8 = 6;
             r10 = 0;
             r4 = 0;
+            break;
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_809CD88();
             return 0;
         }
-    }
+    } while (0);
     if (r8)
         sub_809AF18(r10, r4);
     return r8;
@@ -2338,10 +2345,10 @@ NAKED u8 sub_809C664(void)
                     "\tmov r6, r9\n"
                     "\tmov r5, r8\n"
                     "\tpush {r5-r7}\n"
-                    "\tldr r0, _0809C6D8 @ =gUnknown_020384E4\n"
+                    "\tldr r0, _0809C6D8 @ =sBoxCursorArea\n"
                     "\tldrb r0, [r0]\n"
                     "\tmov r10, r0\n"
-                    "\tldr r7, _0809C6DC @ =gUnknown_020384E5\n"
+                    "\tldr r7, _0809C6DC @ =sBoxCursorPosition\n"
                     "\tldrb r4, [r7]\n"
                     "\tldr r2, _0809C6E0 @ =gPokemonStorageSystemPtr\n"
                     "\tldr r5, [r2]\n"
@@ -2394,8 +2401,8 @@ NAKED u8 sub_809C664(void)
                     "\tmov r8, r2\n"
                     "\tb _0809C842\n"
                     "\t.align 2, 0\n"
-                    "_0809C6D8: .4byte gUnknown_020384E4\n"
-                    "_0809C6DC: .4byte gUnknown_020384E5\n"
+                    "_0809C6D8: .4byte sBoxCursorArea\n"
+                    "_0809C6DC: .4byte sBoxCursorPosition\n"
                     "_0809C6E0: .4byte gPokemonStorageSystemPtr\n"
                     "_0809C6E4: .4byte 0x000011df\n"
                     "_0809C6E8: .4byte 0x000011de\n"
@@ -2669,8 +2676,8 @@ u8 sub_809C85C(void)
 u8 sub_809C944(void)
 {
     u8 r6;
-    s8 var0 = gUnknown_020384E4;
-    s8 var1 = gUnknown_020384E5;
+    s8 var0 = sBoxCursorArea;
+    s8 var1 = sBoxCursorPosition;
 
     gPokemonStorageSystemPtr->unk_11df = 0;
     gPokemonStorageSystemPtr->unk_11de = 0;
@@ -2728,7 +2735,7 @@ u8 sub_809C944(void)
         r6 = 1;
         var0 = 0;
         gPokemonStorageSystemPtr->unk_11de = -1;
-        var1 = !gUnknown_020384E5 ? 24 : 29;
+        var1 = !sBoxCursorPosition ? 24 : 29;
         gPokemonStorageSystemPtr->unk_11e3 = 1;
     }
 
@@ -2745,10 +2752,10 @@ u8 sub_809C944(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-    ldr r0, _0809C988 @ =gUnknown_020384E4\n\
+    ldr r0, _0809C988 @ =sBoxCursorArea\n\
     ldrb r0, [r0]\n\
     mov r12, r0\n\
-    ldr r7, _0809C98C @ =gUnknown_020384E5\n\
+    ldr r7, _0809C98C @ =sBoxCursorPosition\n\
     ldrb r3, [r7]\n\
     ldr r0, _0809C990 @ =gPokemonStorageSystemPtr\n\
     ldr r1, [r0]\n\
@@ -2778,8 +2785,8 @@ u8 sub_809C944(void)
     movs r3, 0\n\
     b _0809CA2A\n\
     .align 2, 0\n\
-_0809C988: .4byte gUnknown_020384E4\n\
-_0809C98C: .4byte gUnknown_020384E5\n\
+_0809C988: .4byte sBoxCursorArea\n\
+_0809C98C: .4byte sBoxCursorPosition\n\
 _0809C990: .4byte gPokemonStorageSystemPtr\n\
 _0809C994: .4byte 0x000011df\n\
 _0809C998: .4byte 0x000011de\n\
@@ -2882,7 +2889,7 @@ u8 sub_809CA40(void)
     u16 i = 0;
     while (gUnknown_083BBBD4[i].func != NULL)
     {
-        if (gUnknown_083BBBD4[i].unk4 == gUnknown_020384E4)
+        if (gUnknown_083BBBD4[i].unk4 == sBoxCursorArea)
             return gUnknown_083BBBD4[i].func();
         i++;
     }
@@ -2961,7 +2968,7 @@ bool8 sub_809CAB0(void)
     sub_809CDEC(6);
     if (gPokemonStorageSystemPtr->unk_0005 == 2)
     {
-        if (!gUnknown_020384E4)
+        if (!sBoxCursorArea)
             sub_809CDEC(2);
         else
             sub_809CDEC(1);
@@ -2981,14 +2988,14 @@ void sub_809CB74(struct Sprite *sprite)
 
 void sub_809CB94(struct Pokemon *mon)
 {
-    if (gUnknown_020384E4 == 1)
+    if (sBoxCursorArea == 1)
     {
-        mon->box = gPlayerParty[gUnknown_020384E5].box;
+        mon->box = gPlayerParty[sBoxCursorPosition].box;
     }
     else
     {
         u8 boxId = get_preferred_box();
-        mon->box = gPokemonStorage.boxes[boxId][gUnknown_020384E5];
+        mon->box = gPokemonStorage.boxes[boxId][sBoxCursorPosition];
     }
 }
 
@@ -3007,7 +3014,7 @@ void sub_809CC04(void)
     gPokemonStorageSystemPtr->unk_11e4[0] = IndexOfSpritePaletteTag(0xDAC6);
     gPokemonStorageSystemPtr->unk_11e4[1] = IndexOfSpritePaletteTag(0xDAD1);
 
-    sub_809AACC(gUnknown_020384E4, gUnknown_020384E5, &x, &y);
+    sub_809AACC(sBoxCursorArea, sBoxCursorPosition, &x, &y);
     spriteId = CreateSprite(&gSpriteTemplate_83BBC70, x, y, 6);
     if (spriteId != MAX_SPRITES)
     {
@@ -3021,7 +3028,7 @@ void sub_809CC04(void)
         gPokemonStorageSystemPtr->unk_11c0 = NULL;
     }
 
-    if (gUnknown_020384E4 == 1)
+    if (sBoxCursorArea == 1)
     {
         subpriority = 12;
         priority = 1;
@@ -3037,7 +3044,7 @@ void sub_809CC04(void)
     {
         gPokemonStorageSystemPtr->unk_11c4 = &gSprites[spriteId];
         gPokemonStorageSystemPtr->unk_11c4->oam.priority = priority;
-        if (gUnknown_020384E4)
+        if (sBoxCursorArea)
             gPokemonStorageSystemPtr->unk_11c4->invisible = 1;
     }
     else

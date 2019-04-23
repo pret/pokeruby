@@ -25,8 +25,8 @@ PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
-ITEMSJSON := tools/json2s/json2s$(EXE) items
-MAPJSON   := tools/json2s/json2s$(EXE) map
+MAPJSON   := tools/mapjson/mapjson$(EXE)
+JSONPROC  := tools/jsonproc/jsonproc$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -99,6 +99,8 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
+AUTO_GEN_TARGETS :=
+
 # Create build subdirectories
 $(shell mkdir -p $(SUBDIRS))
 
@@ -122,7 +124,8 @@ clean: tidy
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
 	$(MAKE) clean -C tools/gbafix
-	$(MAKE) clean -C tools/json2s
+	$(MAKE) clean -C tools/mapjson
+	$(MAKE) clean -C tools/jsonproc
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -134,11 +137,15 @@ tools:
 	@$(MAKE) -C tools/ramscrgen
 	@$(MAKE) -C tools/mid2agb
 	@$(MAKE) -C tools/gbafix
-	@$(MAKE) -C tools/json2s
+	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/jsonproc
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
+	rm -f $(AUTO_GEN_TARGETS)
+
+include json_data_rules.mk
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
@@ -152,7 +159,7 @@ $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
-$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
+$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP) $(AUTO_GEN_TARGETS)
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
 	$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
@@ -207,11 +214,3 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
-
-ITEM_HEADERS := src/data/items.h src/data/item_descriptions.h
-
-src/data/item_descriptions.h: %: data/items.json
-	$(ITEMSJSON) $(shell echo $(GAME_LANGUAGE) | tr '[:upper:]' '[:lower:]') $<
-src/data/items.h: ;
-
-$(BUILD_DIR)/src/item.o: $(ITEM_HEADERS)

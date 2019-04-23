@@ -1,7 +1,9 @@
-#ifndef GUARD_GLOBAL_H
-#define GUARD_GLOBAL_H
+// jsonproc.h
 
+#ifndef JSONPROC_H
+#define JSONPROC_H
 
+#include <cstdlib>
 #include <cstdio>
 using std::fprintf; using std::exit;
 
@@ -27,5 +29,4 @@ do                                          \
 
 #endif // _MSC_VER
 
-
-#endif //GUARD_GLOBAL_H
+#endif // JSONPROC_H
