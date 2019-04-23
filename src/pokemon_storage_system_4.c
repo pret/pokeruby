@@ -2122,380 +2122,115 @@ void sub_809C04C(void *pokemon, u8 a1)
     }
 }
 
-#ifdef NONMATCHING
 u8 sub_809C464(void)
 {
     u8 r9;
     s8 r8 = gUnknown_020384E4;
     s8 r4 = gUnknown_020384E5;
-    gPokemonStorageSystemPtr->unk_11de = 0;
-    gPokemonStorageSystemPtr->unk_11df = 0;
-    gPokemonStorageSystemPtr->unk_11e3 = 0;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+
+    do
     {
-        r9 = 1;
-        if (gUnknown_020384E5 >= 6)
+        gPokemonStorageSystemPtr->unk_11de = 0;
+        gPokemonStorageSystemPtr->unk_11df = 0;
+        gPokemonStorageSystemPtr->unk_11e3 = 0;
+
+        if (JOY_REPT(DPAD_UP))
         {
-            r4 -= 6;
+            r9 = 1;
+            if (gUnknown_020384E5 >= 6)
+            {
+                r4 -= 6;
+            }
+            else
+            {
+                r8 = 2;
+                r4 = 0;
+            }
+            break;
         }
-        else
+        if (JOY_REPT(DPAD_DOWN))
         {
+            r9 = 1;
+            r4 += 6;
+            if (r4 >= 30)
+            {
+                r8 = 3;
+                r4 -= 30;
+                r4 /= 3;
+                gPokemonStorageSystemPtr->unk_11de = 1;
+                gPokemonStorageSystemPtr->unk_11e3 = 1;
+            }
+            break;
+        }
+        if (JOY_REPT(DPAD_LEFT))
+        {
+            r9 = 1;
+            if (gUnknown_020384E5 % 6)
+                r4--;
+            else
+            {
+                gPokemonStorageSystemPtr->unk_11df = -1;
+                r4 += 5;
+            }
+            break;
+        }
+        if (JOY_REPT(DPAD_RIGHT))
+        {
+            r9 = 1;
+            if ((gUnknown_020384E5 + 1) % 6)
+                r4++;
+            else
+            {
+                gPokemonStorageSystemPtr->unk_11df = 1;
+                r4 -= 5;
+            }
+            break;
+        }
+        if (JOY_NEW(START_BUTTON))
+        {
+            r9 = 1;
             r8 = 2;
             r4 = 0;
+            break;
         }
-    }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-    {
-        r9 = 1;
-        r4 += 6;
-        if (r4 >= 30)
-        {
-            r8 = 3;
-            r4 -= 30;
-            r4 /= 3;
-            gPokemonStorageSystemPtr->unk_11de = 1;
-            gPokemonStorageSystemPtr->unk_11e3 = 1;
-        }
-    }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
-    {
-        r9 = 1;
-        if (gUnknown_020384E5 % 6)
-            r4--;
-        else
-        {
-            gPokemonStorageSystemPtr->unk_11df = -1;
-            r4 += 5;
-        }
-    }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
-    {
-        r9 = 1;
-        if ((gUnknown_020384E5 + 1) % 6)
-            r4++;
-        else
-        {
-            gPokemonStorageSystemPtr->unk_11df = 1;
-            r4 -= 5;
-        }
-    }
-    else if (gMain.newKeys & START_BUTTON)
-    {
-        r9 = 1;
-        r8 = 2;
-        r4 = 0;
-    }
-    else
-    {
-        if ((gMain.newKeys & A_BUTTON) && sub_809CAB0())
+        if ((JOY_NEW(A_BUTTON)) && sub_809CAB0())
         {
             if (gUnknown_020384E9 == 0)
                 return 8;
             switch (sub_809CE4C(0))
             {
-                case 1:
-                    return 11;
-                case 2:
-                    return 12;
-                case 3:
-                    return 13;
-                case 4:
-                    return 14;
-                case 5:
-                    return 15;
+            case 1:
+                return 11;
+            case 2:
+                return 12;
+            case 3:
+                return 13;
+            case 4:
+                return 14;
+            case 5:
+                return 15;
             }
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             return 16;
         if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
-            if (gMain.heldKeys & L_BUTTON)
+            if (JOY_HELD(L_BUTTON))
                 return 10;
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 return 9;
         }
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_809CD88();
             return 0;
         }
         r9 = 0;
-    }
+    } while (0);
     if (r9)
         sub_809AF18(r8, r4);
     return r9;
 }
-#else
-NAKED u8 sub_809C464(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r9\n"
-                    "\tmov r6, r8\n"
-                    "\tpush {r6,r7}\n"
-                    "\tldr r0, _0809C4D8 @ =gUnknown_020384E4\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tmov r8, r0\n"
-                    "\tldr r2, _0809C4DC @ =gUnknown_020384E5\n"
-                    "\tldrb r4, [r2]\n"
-                    "\tldr r0, _0809C4E0 @ =gPokemonStorageSystemPtr\n"
-                    "\tldr r1, [r0]\n"
-                    "\tldr r0, _0809C4E4 @ =0x000011de\n"
-                    "\tadds r7, r1, r0\n"
-                    "\tmovs r0, 0\n"
-                    "\tstrb r0, [r7]\n"
-                    "\tldr r3, _0809C4E8 @ =0x000011df\n"
-                    "\tadds r5, r1, r3\n"
-                    "\tstrb r0, [r5]\n"
-                    "\tadds r3, 0x4\n"
-                    "\tadds r6, r1, r3\n"
-                    "\tstrb r0, [r6]\n"
-                    "\tldr r0, _0809C4EC @ =gMain\n"
-                    "\tmov r12, r0\n"
-                    "\tldrh r1, [r0, 0x30]\n"
-                    "\tmovs r0, 0x40\n"
-                    "\tands r0, r1\n"
-                    "\tadds r3, r2, 0\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C4A0\n"
-                    "\tb _0809C62A\n"
-                    "_0809C4A0:\n"
-                    "\tmovs r0, 0x80\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C4F0\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tmov r9, r1\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tmovs r3, 0xC0\n"
-                    "\tlsls r3, 19\n"
-                    "\tadds r0, r3\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tasrs r0, 24\n"
-                    "\tcmp r0, 0x1D\n"
-                    "\tbgt _0809C4BE\n"
-                    "\tb _0809C648\n"
-                    "_0809C4BE:\n"
-                    "\tmovs r1, 0x3\n"
-                    "\tmov r8, r1\n"
-                    "\tsubs r0, 0x1E\n"
-                    "\tlsls r0, 24\n"
-                    "\tasrs r0, 24\n"
-                    "\tbl __divsi3\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tmov r3, r9\n"
-                    "\tstrb r3, [r7]\n"
-                    "\tstrb r3, [r6]\n"
-                    "\tb _0809C648\n"
-                    "\t.align 2, 0\n"
-                    "_0809C4D8: .4byte gUnknown_020384E4\n"
-                    "_0809C4DC: .4byte gUnknown_020384E5\n"
-                    "_0809C4E0: .4byte gPokemonStorageSystemPtr\n"
-                    "_0809C4E4: .4byte 0x000011de\n"
-                    "_0809C4E8: .4byte 0x000011df\n"
-                    "_0809C4EC: .4byte gMain\n"
-                    "_0809C4F0:\n"
-                    "\tmovs r0, 0x20\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C524\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmov r9, r0\n"
-                    "\tmovs r0, 0\n"
-                    "\tldrsb r0, [r3, r0]\n"
-                    "\tmovs r1, 0x6\n"
-                    "\tbl __modsi3\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C514\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tmovs r1, 0xFF\n"
-                    "\tlsls r1, 24\n"
-                    "\tb _0809C63C\n"
-                    "_0809C514:\n"
-                    "\tmovs r0, 0xFF\n"
-                    "\tstrb r0, [r5]\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tmovs r3, 0xA0\n"
-                    "\tlsls r3, 19\n"
-                    "\tadds r0, r3\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tb _0809C648\n"
-                    "_0809C524:\n"
-                    "\tmovs r0, 0x10\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C554\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmov r9, r0\n"
-                    "\tmovs r0, 0\n"
-                    "\tldrsb r0, [r3, r0]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tmovs r1, 0x6\n"
-                    "\tbl __modsi3\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C548\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tmovs r1, 0x80\n"
-                    "\tlsls r1, 17\n"
-                    "\tb _0809C63C\n"
-                    "_0809C548:\n"
-                    "\tmov r3, r9\n"
-                    "\tstrb r3, [r5]\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tmovs r1, 0xFB\n"
-                    "\tlsls r1, 24\n"
-                    "\tb _0809C63C\n"
-                    "_0809C554:\n"
-                    "\tmov r3, r12\n"
-                    "\tldrh r1, [r3, 0x2E]\n"
-                    "\tmovs r0, 0x8\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C56A\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmov r9, r0\n"
-                    "\tmovs r1, 0x2\n"
-                    "\tmov r8, r1\n"
-                    "\tb _0809C646\n"
-                    "_0809C56A:\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C5D4\n"
-                    "\tbl sub_809CAB0\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C5D4\n"
-                    "\tldr r0, _0809C588 @ =gUnknown_020384E9\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _0809C58C\n"
-                    "\tmovs r0, 0x8\n"
-                    "\tb _0809C658\n"
-                    "\t.align 2, 0\n"
-                    "_0809C588: .4byte gUnknown_020384E9\n"
-                    "_0809C58C:\n"
-                    "\tmovs r0, 0\n"
-                    "\tbl sub_809CE4C\n"
-                    "\tsubs r0, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tasrs r0, 24\n"
-                    "\tcmp r0, 0x4\n"
-                    "\tbhi _0809C5D4\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, _0809C5A8 @ =_0809C5AC\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r0, [r0]\n"
-                    "\tmov pc, r0\n"
-                    "\t.align 2, 0\n"
-                    "_0809C5A8: .4byte _0809C5AC\n"
-                    "\t.align 2, 0\n"
-                    "_0809C5AC:\n"
-                    "\t.4byte _0809C5C0\n"
-                    "\t.4byte _0809C5C4\n"
-                    "\t.4byte _0809C5C8\n"
-                    "\t.4byte _0809C5CC\n"
-                    "\t.4byte _0809C5D0\n"
-                    "_0809C5C0:\n"
-                    "\tmovs r0, 0xB\n"
-                    "\tb _0809C658\n"
-                    "_0809C5C4:\n"
-                    "\tmovs r0, 0xC\n"
-                    "\tb _0809C658\n"
-                    "_0809C5C8:\n"
-                    "\tmovs r0, 0xD\n"
-                    "\tb _0809C658\n"
-                    "_0809C5CC:\n"
-                    "\tmovs r0, 0xE\n"
-                    "\tb _0809C658\n"
-                    "_0809C5D0:\n"
-                    "\tmovs r0, 0xF\n"
-                    "\tb _0809C658\n"
-                    "_0809C5D4:\n"
-                    "\tldr r2, _0809C5E4 @ =gMain\n"
-                    "\tldrh r1, [r2, 0x2E]\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C5E8\n"
-                    "\tmovs r0, 0x10\n"
-                    "\tb _0809C658\n"
-                    "\t.align 2, 0\n"
-                    "_0809C5E4: .4byte gMain\n"
-                    "_0809C5E8:\n"
-                    "\tldr r0, _0809C600 @ =gSaveBlock2\n"
-                    "\tldrb r0, [r0, 0x13]\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbne _0809C612\n"
-                    "\tldrh r1, [r2, 0x2C]\n"
-                    "\tmovs r0, 0x80\n"
-                    "\tlsls r0, 2\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C604\n"
-                    "\tmovs r0, 0xA\n"
-                    "\tb _0809C658\n"
-                    "\t.align 2, 0\n"
-                    "_0809C600: .4byte gSaveBlock2\n"
-                    "_0809C604:\n"
-                    "\tmovs r0, 0x80\n"
-                    "\tlsls r0, 1\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C612\n"
-                    "\tmovs r0, 0x9\n"
-                    "\tb _0809C658\n"
-                    "_0809C612:\n"
-                    "\tldrh r1, [r2, 0x2E]\n"
-                    "\tmovs r0, 0x4\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C624\n"
-                    "\tbl sub_809CD88\n"
-                    "\tmovs r0, 0\n"
-                    "\tb _0809C658\n"
-                    "_0809C624:\n"
-                    "\tmovs r3, 0\n"
-                    "\tmov r9, r3\n"
-                    "\tb _0809C656\n"
-                    "_0809C62A:\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmov r9, r0\n"
-                    "\tmovs r0, 0\n"
-                    "\tldrsb r0, [r2, r0]\n"
-                    "\tcmp r0, 0x5\n"
-                    "\tble _0809C642\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tmovs r1, 0xFA\n"
-                    "\tlsls r1, 24\n"
-                    "_0809C63C:\n"
-                    "\tadds r0, r1\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tb _0809C648\n"
-                    "_0809C642:\n"
-                    "\tmovs r3, 0x2\n"
-                    "\tmov r8, r3\n"
-                    "_0809C646:\n"
-                    "\tmovs r4, 0\n"
-                    "_0809C648:\n"
-                    "\tmov r0, r9\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0809C656\n"
-                    "\tmov r0, r8\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tbl sub_809AF18\n"
-                    "_0809C656:\n"
-                    "\tmov r0, r9\n"
-                    "_0809C658:\n"
-                    "\tpop {r3,r4}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1");
-}
-#endif
 
 #ifdef NONMATCHING
 u8 sub_809C664(void)
