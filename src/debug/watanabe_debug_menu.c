@@ -1358,7 +1358,7 @@ void debug_80C4AC4(u8 taskId)
     else if (gMain.newKeys & START_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gTrainerBattleOpponent = 0x400;
+        gTrainerBattleOpponent = SECRET_BASE_OPPONENT;
         eWatanabe17000.unk1_4 = 0;
         eWatanabe17000.unk2 = 0xAC;
         eWatanabe17000.unk3 = 0xFF;
