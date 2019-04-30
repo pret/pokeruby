@@ -50,7 +50,6 @@ enum
     KEYITEMS_POCKET
 };
 
-#include "data/item_descriptions.h"
 #include "data/items.h"
 
 static void CompactPCItems(void);

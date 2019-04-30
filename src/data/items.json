@@ -1,8 +1,8 @@
 {
   "items": [
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -19,8 +19,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MASTER BALL\")",
-      "german": "_(\"MEISTERBALL\")",
+      "english": "MASTER BALL",
+      "german": "MEISTERBALL",
       "itemId": "ITEM_MASTER_BALL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -37,8 +37,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ULTRA BALL\")",
-      "german": "_(\"HYPERBALL\")",
+      "english": "ULTRA BALL",
+      "german": "HYPERBALL",
       "itemId": "ITEM_ULTRA_BALL",
       "price": 1200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -55,8 +55,8 @@
       "secondaryId": 1
     },
     {
-      "english": "_(\"GREAT BALL\")",
-      "german": "_(\"SUPERBALL\")",
+      "english": "GREAT BALL",
+      "german": "SUPERBALL",
       "itemId": "ITEM_GREAT_BALL",
       "price": 600,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -73,8 +73,8 @@
       "secondaryId": 2
     },
     {
-      "english": "_(\"POKé BALL\")",
-      "german": "_(\"POKéBALL\")",
+      "english": "POKé BALL",
+      "german": "POKéBALL",
       "itemId": "ITEM_POKE_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -91,8 +91,8 @@
       "secondaryId": 3
     },
     {
-      "english": "_(\"SAFARI BALL\")",
-      "german": "_(\"SAFARIBALL\")",
+      "english": "SAFARI BALL",
+      "german": "SAFARIBALL",
       "itemId": "ITEM_SAFARI_BALL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -109,8 +109,8 @@
       "secondaryId": 4
     },
     {
-      "english": "_(\"NET BALL\")",
-      "german": "_(\"NETZBALL\")",
+      "english": "NET BALL",
+      "german": "NETZBALL",
       "itemId": "ITEM_NET_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -127,8 +127,8 @@
       "secondaryId": 5
     },
     {
-      "english": "_(\"DIVE BALL\")",
-      "german": "_(\"TAUCHBALL\")",
+      "english": "DIVE BALL",
+      "german": "TAUCHBALL",
       "itemId": "ITEM_DIVE_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -145,8 +145,8 @@
       "secondaryId": 6
     },
     {
-      "english": "_(\"NEST BALL\")",
-      "german": "_(\"NESTBALL\")",
+      "english": "NEST BALL",
+      "german": "NESTBALL",
       "itemId": "ITEM_NEST_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -163,8 +163,8 @@
       "secondaryId": 7
     },
     {
-      "english": "_(\"REPEAT BALL\")",
-      "german": "_(\"WIEDERBALL\")",
+      "english": "REPEAT BALL",
+      "german": "WIEDERBALL",
       "itemId": "ITEM_REPEAT_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -181,8 +181,8 @@
       "secondaryId": 8
     },
     {
-      "english": "_(\"TIMER BALL\")",
-      "german": "_(\"TIMERBALL\")",
+      "english": "TIMER BALL",
+      "german": "TIMERBALL",
       "itemId": "ITEM_TIMER_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -199,8 +199,8 @@
       "secondaryId": 9
     },
     {
-      "english": "_(\"LUXURY BALL\")",
-      "german": "_(\"LUXUSBALL\")",
+      "english": "LUXURY BALL",
+      "german": "LUXUSBALL",
       "itemId": "ITEM_LUXURY_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -217,8 +217,8 @@
       "secondaryId": 10
     },
     {
-      "english": "_(\"PREMIER BALL\")",
-      "german": "_(\"PREMIERBALL\")",
+      "english": "PREMIER BALL",
+      "german": "PREMIERBALL",
       "itemId": "ITEM_PREMIER_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -235,8 +235,8 @@
       "secondaryId": 11
     },
     {
-      "english": "_(\"POTION\")",
-      "german": "_(\"TRANK\")",
+      "english": "POTION",
+      "german": "TRANK",
       "itemId": "ITEM_POTION",
       "price": 300,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -253,8 +253,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ANTIDOTE\")",
-      "german": "_(\"GEGENGIFT\")",
+      "english": "ANTIDOTE",
+      "german": "GEGENGIFT",
       "itemId": "ITEM_ANTIDOTE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -271,8 +271,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BURN HEAL\")",
-      "german": "_(\"FEUERHEILER\")",
+      "english": "BURN HEAL",
+      "german": "FEUERHEILER",
       "itemId": "ITEM_BURN_HEAL",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -289,8 +289,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ICE HEAL\")",
-      "german": "_(\"EISHEILER\")",
+      "english": "ICE HEAL",
+      "german": "EISHEILER",
       "itemId": "ITEM_ICE_HEAL",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -307,8 +307,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"AWAKENING\")",
-      "german": "_(\"AUFWECKER\")",
+      "english": "AWAKENING",
+      "german": "AUFWECKER",
       "itemId": "ITEM_AWAKENING",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -325,8 +325,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PARLYZ HEAL\")",
-      "german": "_(\"PARA-HEILER\")",
+      "english": "PARLYZ HEAL",
+      "german": "PARA-HEILER",
       "itemId": "ITEM_PARALYZE_HEAL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -343,8 +343,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FULL RESTORE\")",
-      "german": "_(\"TOP-GENESUNG\")",
+      "english": "FULL RESTORE",
+      "german": "TOP-GENESUNG",
       "itemId": "ITEM_FULL_RESTORE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -361,8 +361,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAX POTION\")",
-      "german": "_(\"TOP-TRANK\")",
+      "english": "MAX POTION",
+      "german": "TOP-TRANK",
       "itemId": "ITEM_MAX_POTION",
       "price": 2500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -379,8 +379,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HYPER POTION\")",
-      "german": "_(\"HYPERTRANK\")",
+      "english": "HYPER POTION",
+      "german": "HYPERTRANK",
       "itemId": "ITEM_HYPER_POTION",
       "price": 1200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -397,8 +397,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SUPER POTION\")",
-      "german": "_(\"SUPERTRANK\")",
+      "english": "SUPER POTION",
+      "german": "SUPERTRANK",
       "itemId": "ITEM_SUPER_POTION",
       "price": 700,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -415,8 +415,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FULL HEAL\")",
-      "german": "_(\"HYPERHEILER\")",
+      "english": "FULL HEAL",
+      "german": "HYPERHEILER",
       "itemId": "ITEM_FULL_HEAL",
       "price": 600,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -433,8 +433,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"REVIVE\")",
-      "german": "_(\"BELEBER\")",
+      "english": "REVIVE",
+      "german": "BELEBER",
       "itemId": "ITEM_REVIVE",
       "price": 1500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -451,8 +451,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAX REVIVE\")",
-      "german": "_(\"TOP-BELEBER\")",
+      "english": "MAX REVIVE",
+      "german": "TOP-BELEBER",
       "itemId": "ITEM_MAX_REVIVE",
       "price": 4000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -469,8 +469,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FRESH WATER\")",
-      "german": "_(\"TAFELWASSER\")",
+      "english": "FRESH WATER",
+      "german": "TAFELWASSER",
       "itemId": "ITEM_FRESH_WATER",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -487,8 +487,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SODA POP\")",
-      "german": "_(\"SPRUDEL\")",
+      "english": "SODA POP",
+      "german": "SPRUDEL",
       "itemId": "ITEM_SODA_POP",
       "price": 300,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -505,8 +505,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LEMONADE\")",
-      "german": "_(\"LIMONADE\")",
+      "english": "LEMONADE",
+      "german": "LIMONADE",
       "itemId": "ITEM_LEMONADE",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -523,8 +523,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MOOMOO MILK\")",
-      "german": "_(\"KUHMUH-MILCH\")",
+      "english": "MOOMOO MILK",
+      "german": "KUHMUH-MILCH",
       "itemId": "ITEM_MOOMOO_MILK",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -541,8 +541,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ENERGYPOWDER\")",
-      "german": "_(\"ENERGIESTAUB\")",
+      "english": "ENERGYPOWDER",
+      "german": "ENERGIESTAUB",
       "itemId": "ITEM_ENERGY_POWDER",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -559,8 +559,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ENERGY ROOT\")",
-      "german": "_(\"KRAFTWURZEL\")",
+      "english": "ENERGY ROOT",
+      "german": "KRAFTWURZEL",
       "itemId": "ITEM_ENERGY_ROOT",
       "price": 800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -577,8 +577,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HEAL POWDER\")",
-      "german": "_(\"HEILPUDER\")",
+      "english": "HEAL POWDER",
+      "german": "HEILPUDER",
       "itemId": "ITEM_HEAL_POWDER",
       "price": 450,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -595,8 +595,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"REVIVAL HERB\")",
-      "german": "_(\"VITALKRAUT\")",
+      "english": "REVIVAL HERB",
+      "german": "VITALKRAUT",
       "itemId": "ITEM_REVIVAL_HERB",
       "price": 2800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -613,8 +613,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ETHER\")",
-      "german": "_(\"ÄTHER\")",
+      "english": "ETHER",
+      "german": "ÄTHER",
       "itemId": "ITEM_ETHER",
       "price": 1200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -631,8 +631,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAX ETHER\")",
-      "german": "_(\"TOP-ÄTHER\")",
+      "english": "MAX ETHER",
+      "german": "TOP-ÄTHER",
       "itemId": "ITEM_MAX_ETHER",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -649,8 +649,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ELIXIR\")",
-      "german": "_(\"ELIXIER\")",
+      "english": "ELIXIR",
+      "german": "ELIXIER",
       "itemId": "ITEM_ELIXIR",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -667,8 +667,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAX ELIXIR\")",
-      "german": "_(\"TOP-ELIXIER\")",
+      "english": "MAX ELIXIR",
+      "german": "TOP-ELIXIER",
       "itemId": "ITEM_MAX_ELIXIR",
       "price": 4500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -685,8 +685,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LAVA COOKIE\")",
-      "german": "_(\"LAVAKEKS\")",
+      "english": "LAVA COOKIE",
+      "german": "LAVAKEKS",
       "itemId": "ITEM_LAVA_COOKIE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -703,8 +703,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLUE FLUTE\")",
-      "german": "_(\"BLAUE FLÖTE\")",
+      "english": "BLUE FLUTE",
+      "german": "BLAUE FLÖTE",
       "itemId": "ITEM_BLUE_FLUTE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -721,8 +721,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"YELLOW FLUTE\")",
-      "german": "_(\"GELBE FLÖTE\")",
+      "english": "YELLOW FLUTE",
+      "german": "GELBE FLÖTE",
       "itemId": "ITEM_YELLOW_FLUTE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -739,8 +739,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RED FLUTE\")",
-      "german": "_(\"ROTE FLÖTE\")",
+      "english": "RED FLUTE",
+      "german": "ROTE FLÖTE",
       "itemId": "ITEM_RED_FLUTE",
       "price": 300,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -757,8 +757,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLACK FLUTE\")",
-      "german": "_(\"SCHW. FLÖTE\")",
+      "english": "BLACK FLUTE",
+      "german": "SCHW. FLÖTE",
       "itemId": "ITEM_BLACK_FLUTE",
       "price": 400,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -775,8 +775,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WHITE FLUTE\")",
-      "german": "_(\"WEISSE FLÖTE\")",
+      "english": "WHITE FLUTE",
+      "german": "WEISSE FLÖTE",
       "itemId": "ITEM_WHITE_FLUTE",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -793,8 +793,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BERRY JUICE\")",
-      "german": "_(\"BEERENSAFT\")",
+      "english": "BERRY JUICE",
+      "german": "BEERENSAFT",
       "itemId": "ITEM_BERRY_JUICE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_RESTORE_HP",
@@ -811,8 +811,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SACRED ASH\")",
-      "german": "_(\"ZAUBERASCHE\")",
+      "english": "SACRED ASH",
+      "german": "ZAUBERASCHE",
       "itemId": "ITEM_SACRED_ASH",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -829,8 +829,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SHOAL SALT\")",
-      "german": "_(\"KÜSTENSALZ\")",
+      "english": "SHOAL SALT",
+      "german": "KÜSTENSALZ",
       "itemId": "ITEM_SHOAL_SALT",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -847,8 +847,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SHOAL SHELL\")",
-      "german": "_(\"KÜSTENSCHALE\")",
+      "english": "SHOAL SHELL",
+      "german": "KÜSTENSCHALE",
       "itemId": "ITEM_SHOAL_SHELL",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -865,8 +865,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RED SHARD\")",
-      "german": "_(\"PURPURSTÜCK\")",
+      "english": "RED SHARD",
+      "german": "PURPURSTÜCK",
       "itemId": "ITEM_RED_SHARD",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -883,8 +883,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLUE SHARD\")",
-      "german": "_(\"INDIGOSTÜCK\")",
+      "english": "BLUE SHARD",
+      "german": "INDIGOSTÜCK",
       "itemId": "ITEM_BLUE_SHARD",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -901,8 +901,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"YELLOW SHARD\")",
-      "german": "_(\"GELBSTÜCK\")",
+      "english": "YELLOW SHARD",
+      "german": "GELBSTÜCK",
       "itemId": "ITEM_YELLOW_SHARD",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -919,8 +919,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GREEN SHARD\")",
-      "german": "_(\"GRÜNSTÜCK\")",
+      "english": "GREEN SHARD",
+      "german": "GRÜNSTÜCK",
       "itemId": "ITEM_GREEN_SHARD",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -937,8 +937,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -955,8 +955,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -973,8 +973,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -991,8 +991,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1009,8 +1009,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1027,8 +1027,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1045,8 +1045,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1063,8 +1063,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1081,8 +1081,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1099,8 +1099,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1117,8 +1117,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1135,8 +1135,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HP UP\")",
-      "german": "_(\"KP-PLUS\")",
+      "english": "HP UP",
+      "german": "KP-PLUS",
       "itemId": "ITEM_HP_UP",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1153,8 +1153,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PROTEIN\")",
-      "german": "_(\"PROTEIN\")",
+      "english": "PROTEIN",
+      "german": "PROTEIN",
       "itemId": "ITEM_PROTEIN",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1171,8 +1171,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"IRON\")",
-      "german": "_(\"EISEN\")",
+      "english": "IRON",
+      "german": "EISEN",
       "itemId": "ITEM_IRON",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1189,8 +1189,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CARBOS\")",
-      "german": "_(\"CARBON\")",
+      "english": "CARBOS",
+      "german": "CARBON",
       "itemId": "ITEM_CARBOS",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1207,8 +1207,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CALCIUM\")",
-      "german": "_(\"KALZIUM\")",
+      "english": "CALCIUM",
+      "german": "KALZIUM",
       "itemId": "ITEM_CALCIUM",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1225,8 +1225,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RARE CANDY\")",
-      "german": "_(\"SONDERBONBON\")",
+      "english": "RARE CANDY",
+      "german": "SONDERBONBON",
       "itemId": "ITEM_RARE_CANDY",
       "price": 4800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1243,8 +1243,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PP UP\")",
-      "german": "_(\"AP-PLUS\")",
+      "english": "PP UP",
+      "german": "AP-PLUS",
       "itemId": "ITEM_PP_UP",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1261,8 +1261,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ZINC\")",
-      "german": "_(\"ZINK\")",
+      "english": "ZINC",
+      "german": "ZINK",
       "itemId": "ITEM_ZINC",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1279,8 +1279,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PP MAX\")",
-      "german": "_(\"AP-TOP\")",
+      "english": "PP MAX",
+      "german": "AP-TOP",
       "itemId": "ITEM_PP_MAX",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1297,8 +1297,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1315,8 +1315,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GUARD SPEC.\")",
-      "german": "_(\"MEGABLOCK\")",
+      "english": "GUARD SPEC.",
+      "german": "MEGABLOCK",
       "itemId": "ITEM_GUARD_SPEC",
       "price": 700,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1333,8 +1333,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DIRE HIT\")",
-      "german": "_(\"ANGRIFFPLUS\")",
+      "english": "DIRE HIT",
+      "german": "ANGRIFFPLUS",
       "itemId": "ITEM_DIRE_HIT",
       "price": 650,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1351,8 +1351,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"X ATTACK\")",
-      "german": "_(\"X-ANGRIFF\")",
+      "english": "X ATTACK",
+      "german": "X-ANGRIFF",
       "itemId": "ITEM_X_ATTACK",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1369,8 +1369,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"X DEFEND\")",
-      "german": "_(\"X-ABWEHR\")",
+      "english": "X DEFEND",
+      "german": "X-ABWEHR",
       "itemId": "ITEM_X_DEFEND",
       "price": 550,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1387,8 +1387,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"X SPEED\")",
-      "german": "_(\"X-TEMPO\")",
+      "english": "X SPEED",
+      "german": "X-TEMPO",
       "itemId": "ITEM_X_SPEED",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1405,8 +1405,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"X ACCURACY\")",
-      "german": "_(\"X-TREFFER\")",
+      "english": "X ACCURACY",
+      "german": "X-TREFFER",
       "itemId": "ITEM_X_ACCURACY",
       "price": 950,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1423,8 +1423,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"X SPECIAL\")",
-      "german": "_(\"X-SPEZIAL\")",
+      "english": "X SPECIAL",
+      "german": "X-SPEZIAL",
       "itemId": "ITEM_X_SPECIAL",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1441,8 +1441,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"POKé DOLL\")",
-      "german": "_(\"POKéPUPPE\")",
+      "english": "POKé DOLL",
+      "german": "POKéPUPPE",
       "itemId": "ITEM_POKE_DOLL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1459,8 +1459,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FLUFFY TAIL\")",
-      "german": "_(\"ENECO-RUTE\")",
+      "english": "FLUFFY TAIL",
+      "german": "ENECO-RUTE",
       "itemId": "ITEM_FLUFFY_TAIL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1477,8 +1477,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1495,8 +1495,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SUPER REPEL\")",
-      "german": "_(\"SUPERSCHUTZ\")",
+      "english": "SUPER REPEL",
+      "german": "SUPERSCHUTZ",
       "itemId": "ITEM_SUPER_REPEL",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1513,8 +1513,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAX REPEL\")",
-      "german": "_(\"TOP-SCHUTZ\")",
+      "english": "MAX REPEL",
+      "german": "TOP-SCHUTZ",
       "itemId": "ITEM_MAX_REPEL",
       "price": 700,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1531,8 +1531,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ESCAPE ROPE\")",
-      "german": "_(\"FLUCHTSEIL\")",
+      "english": "ESCAPE ROPE",
+      "german": "FLUCHTSEIL",
       "itemId": "ITEM_ESCAPE_ROPE",
       "price": 550,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1549,8 +1549,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"REPEL\")",
-      "german": "_(\"SCHUTZ\")",
+      "english": "REPEL",
+      "german": "SCHUTZ",
       "itemId": "ITEM_REPEL",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1567,8 +1567,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1585,8 +1585,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1603,8 +1603,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1621,8 +1621,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1639,8 +1639,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1657,8 +1657,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1675,8 +1675,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SUN STONE\")",
-      "german": "_(\"SONNENSTEIN\")",
+      "english": "SUN STONE",
+      "german": "SONNENSTEIN",
       "itemId": "ITEM_SUN_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1693,8 +1693,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MOON STONE\")",
-      "german": "_(\"MONDSTEIN\")",
+      "english": "MOON STONE",
+      "german": "MONDSTEIN",
       "itemId": "ITEM_MOON_STONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1711,8 +1711,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FIRE STONE\")",
-      "german": "_(\"FEUERSTEIN\")",
+      "english": "FIRE STONE",
+      "german": "FEUERSTEIN",
       "itemId": "ITEM_FIRE_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1729,8 +1729,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"THUNDERSTONE\")",
-      "german": "_(\"DONNERSTEIN\")",
+      "english": "THUNDERSTONE",
+      "german": "DONNERSTEIN",
       "itemId": "ITEM_THUNDER_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1747,8 +1747,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WATER STONE\")",
-      "german": "_(\"WASSERSTEIN\")",
+      "english": "WATER STONE",
+      "german": "WASSERSTEIN",
       "itemId": "ITEM_WATER_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1765,8 +1765,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LEAF STONE\")",
-      "german": "_(\"BLATTSTEIN\")",
+      "english": "LEAF STONE",
+      "german": "BLATTSTEIN",
       "itemId": "ITEM_LEAF_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1783,8 +1783,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1801,8 +1801,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1819,8 +1819,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1837,8 +1837,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1855,8 +1855,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TINYMUSHROOM\")",
-      "german": "_(\"MINIPILZ\")",
+      "english": "TINYMUSHROOM",
+      "german": "MINIPILZ",
       "itemId": "ITEM_TINY_MUSHROOM",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1873,8 +1873,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BIG MUSHROOM\")",
-      "german": "_(\"RIESENPILZ\")",
+      "english": "BIG MUSHROOM",
+      "german": "RIESENPILZ",
       "itemId": "ITEM_BIG_MUSHROOM",
       "price": 5000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1891,8 +1891,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1909,8 +1909,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PEARL\")",
-      "german": "_(\"PERLE\")",
+      "english": "PEARL",
+      "german": "PERLE",
       "itemId": "ITEM_PEARL",
       "price": 1400,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1927,8 +1927,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BIG PEARL\")",
-      "german": "_(\"RIESENPERLE\")",
+      "english": "BIG PEARL",
+      "german": "RIESENPERLE",
       "itemId": "ITEM_BIG_PEARL",
       "price": 7500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1945,8 +1945,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"STARDUST\")",
-      "german": "_(\"STERNENSTAUB\")",
+      "english": "STARDUST",
+      "german": "STERNENSTAUB",
       "itemId": "ITEM_STARDUST",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1963,8 +1963,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"STAR PIECE\")",
-      "german": "_(\"STERNENSTÜCK\")",
+      "english": "STAR PIECE",
+      "german": "STERNENSTÜCK",
       "itemId": "ITEM_STAR_PIECE",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1981,8 +1981,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"NUGGET\")",
-      "german": "_(\"NUGGET\")",
+      "english": "NUGGET",
+      "german": "NUGGET",
       "itemId": "ITEM_NUGGET",
       "price": 10000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1999,8 +1999,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HEART SCALE\")",
-      "german": "_(\"HERZSCHUPPE\")",
+      "english": "HEART SCALE",
+      "german": "HERZSCHUPPE",
       "itemId": "ITEM_HEART_SCALE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2017,8 +2017,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2035,8 +2035,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2053,8 +2053,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2071,8 +2071,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2089,8 +2089,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2107,8 +2107,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2125,8 +2125,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2143,8 +2143,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2161,8 +2161,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2179,8 +2179,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ORANGE MAIL\")",
-      "german": "_(\"ZIGZAGBRIEF\")",
+      "english": "ORANGE MAIL",
+      "german": "ZIGZAGBRIEF",
       "itemId": "ITEM_ORANGE_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2197,8 +2197,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HARBOR MAIL\")",
-      "german": "_(\"HAFENBRIEF\")",
+      "english": "HARBOR MAIL",
+      "german": "HAFENBRIEF",
       "itemId": "ITEM_HARBOR_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2215,8 +2215,8 @@
       "secondaryId": 1
     },
     {
-      "english": "_(\"GLITTER MAIL\")",
-      "german": "_(\"GLITZERBRIEF\")",
+      "english": "GLITTER MAIL",
+      "german": "GLITZERBRIEF",
       "itemId": "ITEM_GLITTER_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2233,8 +2233,8 @@
       "secondaryId": 2
     },
     {
-      "english": "_(\"MECH MAIL\")",
-      "german": "_(\"EILBRIEF\")",
+      "english": "MECH MAIL",
+      "german": "EILBRIEF",
       "itemId": "ITEM_MECH_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2251,8 +2251,8 @@
       "secondaryId": 3
     },
     {
-      "english": "_(\"WOOD MAIL\")",
-      "german": "_(\"WALDBRIEF\")",
+      "english": "WOOD MAIL",
+      "german": "WALDBRIEF",
       "itemId": "ITEM_WOOD_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2269,8 +2269,8 @@
       "secondaryId": 4
     },
     {
-      "english": "_(\"WAVE MAIL\")",
-      "german": "_(\"WELLENBRIEF\")",
+      "english": "WAVE MAIL",
+      "german": "WELLENBRIEF",
       "itemId": "ITEM_WAVE_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2287,8 +2287,8 @@
       "secondaryId": 5
     },
     {
-      "english": "_(\"BEAD MAIL\")",
-      "german": "_(\"PERLENBRIEF\")",
+      "english": "BEAD MAIL",
+      "german": "PERLENBRIEF",
       "itemId": "ITEM_BEAD_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2305,8 +2305,8 @@
       "secondaryId": 6
     },
     {
-      "english": "_(\"SHADOW MAIL\")",
-      "german": "_(\"DUNKELBRIEF\")",
+      "english": "SHADOW MAIL",
+      "german": "DUNKELBRIEF",
       "itemId": "ITEM_SHADOW_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2323,8 +2323,8 @@
       "secondaryId": 7
     },
     {
-      "english": "_(\"TROPIC MAIL\")",
-      "german": "_(\"TROPENBRIEF\")",
+      "english": "TROPIC MAIL",
+      "german": "TROPENBRIEF",
       "itemId": "ITEM_TROPIC_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2341,8 +2341,8 @@
       "secondaryId": 8
     },
     {
-      "english": "_(\"DREAM MAIL\")",
-      "german": "_(\"TRAUMBRIEF\")",
+      "english": "DREAM MAIL",
+      "german": "TRAUMBRIEF",
       "itemId": "ITEM_DREAM_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2359,8 +2359,8 @@
       "secondaryId": 9
     },
     {
-      "english": "_(\"FAB MAIL\")",
-      "german": "_(\"EDELBRIEF\")",
+      "english": "FAB MAIL",
+      "german": "EDELBRIEF",
       "itemId": "ITEM_FAB_MAIL",
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2377,8 +2377,8 @@
       "secondaryId": 10
     },
     {
-      "english": "_(\"RETRO MAIL\")",
-      "german": "_(\"RETROBRIEF\")",
+      "english": "RETRO MAIL",
+      "german": "RETROBRIEF",
       "itemId": "ITEM_RETRO_MAIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2395,8 +2395,8 @@
       "secondaryId": 11
     },
     {
-      "english": "_(\"CHERI BERRY\")",
-      "german": "_(\"AMRENABEERE\")",
+      "english": "CHERI BERRY",
+      "german": "AMRENABEERE",
       "itemId": "ITEM_CHERI_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_PAR",
@@ -2413,8 +2413,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CHESTO BERRY\")",
-      "german": "_(\"MARONBEERE\")",
+      "english": "CHESTO BERRY",
+      "german": "MARONBEERE",
       "itemId": "ITEM_CHESTO_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_SLP",
@@ -2431,8 +2431,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PECHA BERRY\")",
-      "german": "_(\"PIRSIFBEERE\")",
+      "english": "PECHA BERRY",
+      "german": "PIRSIFBEERE",
       "itemId": "ITEM_PECHA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_PSN",
@@ -2449,8 +2449,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RAWST BERRY\")",
-      "german": "_(\"FRAGIABEERE\")",
+      "english": "RAWST BERRY",
+      "german": "FRAGIABEERE",
       "itemId": "ITEM_RAWST_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_BRN",
@@ -2467,8 +2467,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ASPEAR BERRY\")",
-      "german": "_(\"WILBIRBEERE\")",
+      "english": "ASPEAR BERRY",
+      "german": "WILBIRBEERE",
       "itemId": "ITEM_ASPEAR_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_FRZ",
@@ -2485,8 +2485,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LEPPA BERRY\")",
-      "german": "_(\"JONAGOBEERE\")",
+      "english": "LEPPA BERRY",
+      "german": "JONAGOBEERE",
       "itemId": "ITEM_LEPPA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RESTORE_PP",
@@ -2503,8 +2503,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ORAN BERRY\")",
-      "german": "_(\"SINELBEERE\")",
+      "english": "ORAN BERRY",
+      "german": "SINELBEERE",
       "itemId": "ITEM_ORAN_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RESTORE_HP",
@@ -2521,8 +2521,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PERSIM BERRY\")",
-      "german": "_(\"PERSIMBEERE\")",
+      "english": "PERSIM BERRY",
+      "german": "PERSIMBEERE",
       "itemId": "ITEM_PERSIM_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_CONFUSION",
@@ -2539,8 +2539,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LUM BERRY\")",
-      "german": "_(\"PRUNUSBEERE\")",
+      "english": "LUM BERRY",
+      "german": "PRUNUSBEERE",
       "itemId": "ITEM_LUM_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_STATUS",
@@ -2557,8 +2557,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SITRUS BERRY\")",
-      "german": "_(\"TSITRUBEERE\")",
+      "english": "SITRUS BERRY",
+      "german": "TSITRUBEERE",
       "itemId": "ITEM_SITRUS_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RESTORE_HP",
@@ -2575,8 +2575,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FIGY BERRY\")",
-      "german": "_(\"GIEFEBEERE\")",
+      "english": "FIGY BERRY",
+      "german": "GIEFEBEERE",
       "itemId": "ITEM_FIGY_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_SPICY",
@@ -2593,8 +2593,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WIKI BERRY\")",
-      "german": "_(\"WIKIBEERE\")",
+      "english": "WIKI BERRY",
+      "german": "WIKIBEERE",
       "itemId": "ITEM_WIKI_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_DRY",
@@ -2611,8 +2611,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAGO BERRY\")",
-      "german": "_(\"MAGOBEERE\")",
+      "english": "MAGO BERRY",
+      "german": "MAGOBEERE",
       "itemId": "ITEM_MAGO_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_SWEET",
@@ -2629,8 +2629,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"AGUAV BERRY\")",
-      "german": "_(\"GAUVEBEERE\")",
+      "english": "AGUAV BERRY",
+      "german": "GAUVEBEERE",
       "itemId": "ITEM_AGUAV_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_BITTER",
@@ -2647,8 +2647,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"IAPAPA BERRY\")",
-      "german": "_(\"YAPABEERE\")",
+      "english": "IAPAPA BERRY",
+      "german": "YAPABEERE",
       "itemId": "ITEM_IAPAPA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_SOUR",
@@ -2665,8 +2665,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RAZZ BERRY\")",
-      "german": "_(\"HIMMIHBEERE\")",
+      "english": "RAZZ BERRY",
+      "german": "HIMMIHBEERE",
       "itemId": "ITEM_RAZZ_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2683,8 +2683,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLUK BERRY\")",
-      "german": "_(\"MORBBEERE\")",
+      "english": "BLUK BERRY",
+      "german": "MORBBEERE",
       "itemId": "ITEM_BLUK_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2701,8 +2701,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"NANAB BERRY\")",
-      "german": "_(\"NANABBEERE\")",
+      "english": "NANAB BERRY",
+      "german": "NANABBEERE",
       "itemId": "ITEM_NANAB_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2719,8 +2719,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WEPEAR BERRY\")",
-      "german": "_(\"NIRBEBEERE\")",
+      "english": "WEPEAR BERRY",
+      "german": "NIRBEBEERE",
       "itemId": "ITEM_WEPEAR_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2737,8 +2737,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PINAP BERRY\")",
-      "german": "_(\"SANANABEERE\")",
+      "english": "PINAP BERRY",
+      "german": "SANANABEERE",
       "itemId": "ITEM_PINAP_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2755,8 +2755,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"POMEG BERRY\")",
-      "german": "_(\"GRANABEERE\")",
+      "english": "POMEG BERRY",
+      "german": "GRANABEERE",
       "itemId": "ITEM_POMEG_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2773,8 +2773,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"KELPSY BERRY\")",
-      "german": "_(\"SETANGBEERE\")",
+      "english": "KELPSY BERRY",
+      "german": "SETANGBEERE",
       "itemId": "ITEM_KELPSY_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2791,8 +2791,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"QUALOT BERRY\")",
-      "german": "_(\"QUALOTBEERE\")",
+      "english": "QUALOT BERRY",
+      "german": "QUALOTBEERE",
       "itemId": "ITEM_QUALOT_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2809,8 +2809,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HONDEW BERRY\")",
-      "german": "_(\"HONMELBEERE\")",
+      "english": "HONDEW BERRY",
+      "german": "HONMELBEERE",
       "itemId": "ITEM_HONDEW_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2827,8 +2827,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GREPA BERRY\")",
-      "german": "_(\"LABRUSBEERE\")",
+      "english": "GREPA BERRY",
+      "german": "LABRUSBEERE",
       "itemId": "ITEM_GREPA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2845,8 +2845,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TAMATO BERRY\")",
-      "german": "_(\"TAMOTBEERE\")",
+      "english": "TAMATO BERRY",
+      "german": "TAMOTBEERE",
       "itemId": "ITEM_TAMATO_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2863,8 +2863,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CORNN BERRY\")",
-      "german": "_(\"SAIMBEERE\")",
+      "english": "CORNN BERRY",
+      "german": "SAIMBEERE",
       "itemId": "ITEM_CORNN_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2881,8 +2881,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAGOST BERRY\")",
-      "german": "_(\"MAGOSTBEERE\")",
+      "english": "MAGOST BERRY",
+      "german": "MAGOSTBEERE",
       "itemId": "ITEM_MAGOST_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2899,8 +2899,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RABUTA BERRY\")",
-      "german": "_(\"RABUTABEERE\")",
+      "english": "RABUTA BERRY",
+      "german": "RABUTABEERE",
       "itemId": "ITEM_RABUTA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2917,8 +2917,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"NOMEL BERRY\")",
-      "german": "_(\"TRONZIBEERE\")",
+      "english": "NOMEL BERRY",
+      "german": "TRONZIBEERE",
       "itemId": "ITEM_NOMEL_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2935,8 +2935,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SPELON BERRY\")",
-      "german": "_(\"KIWANBEERE\")",
+      "english": "SPELON BERRY",
+      "german": "KIWANBEERE",
       "itemId": "ITEM_SPELON_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2953,8 +2953,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PAMTRE BERRY\")",
-      "german": "_(\"PALLMBEERE\")",
+      "english": "PAMTRE BERRY",
+      "german": "PALLMBEERE",
       "itemId": "ITEM_PAMTRE_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2971,8 +2971,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WATMEL BERRY\")",
-      "german": "_(\"WASMELBEERE\")",
+      "english": "WATMEL BERRY",
+      "german": "WASMELBEERE",
       "itemId": "ITEM_WATMEL_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -2989,8 +2989,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DURIN BERRY\")",
-      "german": "_(\"DURINBEERE\")",
+      "english": "DURIN BERRY",
+      "german": "DURINBEERE",
       "itemId": "ITEM_DURIN_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -3007,8 +3007,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BELUE BERRY\")",
-      "german": "_(\"MYRTILBEERE\")",
+      "english": "BELUE BERRY",
+      "german": "MYRTILBEERE",
       "itemId": "ITEM_BELUE_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -3025,8 +3025,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LIECHI BERRY\")",
-      "german": "_(\"LYDZIBEERE\")",
+      "english": "LIECHI BERRY",
+      "german": "LYDZIBEERE",
       "itemId": "ITEM_LIECHI_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_ATTACK_UP",
@@ -3043,8 +3043,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GANLON BERRY\")",
-      "german": "_(\"LINGANBEERE\")",
+      "english": "GANLON BERRY",
+      "german": "LINGANBEERE",
       "itemId": "ITEM_GANLON_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_DEFENSE_UP",
@@ -3061,8 +3061,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SALAC BERRY\")",
-      "german": "_(\"SALKABEERE\")",
+      "english": "SALAC BERRY",
+      "german": "SALKABEERE",
       "itemId": "ITEM_SALAC_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_SPEED_UP",
@@ -3079,8 +3079,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PETAYA BERRY\")",
-      "german": "_(\"TAHAYBEERE\")",
+      "english": "PETAYA BERRY",
+      "german": "TAHAYBEERE",
       "itemId": "ITEM_PETAYA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_SP_ATTACK_UP",
@@ -3097,8 +3097,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"APICOT BERRY\")",
-      "german": "_(\"APIKOBEERE\")",
+      "english": "APICOT BERRY",
+      "german": "APIKOBEERE",
       "itemId": "ITEM_APICOT_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_SP_DEFENSE_UP",
@@ -3115,8 +3115,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LANSAT BERRY\")",
-      "german": "_(\"LANSATBEERE\")",
+      "english": "LANSAT BERRY",
+      "german": "LANSATBEERE",
       "itemId": "ITEM_LANSAT_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CRITICAL_UP",
@@ -3133,8 +3133,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"STARF BERRY\")",
-      "german": "_(\"KRAMBOBEERE\")",
+      "english": "STARF BERRY",
+      "german": "KRAMBOBEERE",
       "itemId": "ITEM_STARF_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RANDOM_STAT_UP",
@@ -3151,8 +3151,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ENIGMA BERRY\")",
-      "german": "_(\"ENIGMABEERE\")",
+      "english": "ENIGMA BERRY",
+      "german": "ENIGMABEERE",
       "itemId": "ITEM_ENIGMA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -3169,8 +3169,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -3187,8 +3187,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -3205,8 +3205,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -3223,8 +3223,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BRIGHTPOWDER\")",
-      "german": "_(\"BLENDPUDER\")",
+      "english": "BRIGHTPOWDER",
+      "german": "BLENDPUDER",
       "itemId": "ITEM_BRIGHT_POWDER",
       "price": 10,
       "holdEffect": "HOLD_EFFECT_EVASION_UP",
@@ -3241,8 +3241,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WHITE HERB\")",
-      "german": "_(\"SCHLOHKRAUT\")",
+      "english": "WHITE HERB",
+      "german": "SCHLOHKRAUT",
       "itemId": "ITEM_WHITE_HERB",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_RESTORE_STATS",
@@ -3259,8 +3259,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MACHO BRACE\")",
-      "german": "_(\"MACHOBAND\")",
+      "english": "MACHO BRACE",
+      "german": "MACHOBAND",
       "itemId": "ITEM_MACHO_BRACE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_MACHO_BRACE",
@@ -3277,8 +3277,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"EXP. SHARE\")",
-      "german": "_(\"EP-TEILER\")",
+      "english": "EXP. SHARE",
+      "german": "EP-TEILER",
       "itemId": "ITEM_EXP_SHARE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_EXP_SHARE",
@@ -3295,8 +3295,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"QUICK CLAW\")",
-      "german": "_(\"FLINKKLAUE\")",
+      "english": "QUICK CLAW",
+      "german": "FLINKKLAUE",
       "itemId": "ITEM_QUICK_CLAW",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_QUICK_CLAW",
@@ -3313,8 +3313,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SOOTHE BELL\")",
-      "german": "_(\"SANFTGLOCKE\")",
+      "english": "SOOTHE BELL",
+      "german": "SANFTGLOCKE",
       "itemId": "ITEM_SOOTHE_BELL",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_HAPPINESS_UP",
@@ -3331,8 +3331,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MENTAL HERB\")",
-      "german": "_(\"MENTALKRAUT\")",
+      "english": "MENTAL HERB",
+      "german": "MENTALKRAUT",
       "itemId": "ITEM_MENTAL_HERB",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_CURE_ATTRACT",
@@ -3349,8 +3349,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CHOICE BAND\")",
-      "german": "_(\"WAHLBAND\")",
+      "english": "CHOICE BAND",
+      "german": "WAHLBAND",
       "itemId": "ITEM_CHOICE_BAND",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_CHOICE_BAND",
@@ -3367,8 +3367,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"KING'S ROCK\")",
-      "german": "_(\"KING-STEIN\")",
+      "english": "KING'S ROCK",
+      "german": "KING-STEIN",
       "itemId": "ITEM_KINGS_ROCK",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FLINCH",
@@ -3385,8 +3385,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SILVERPOWDER\")",
-      "german": "_(\"SILBERSTAUB\")",
+      "english": "SILVERPOWDER",
+      "german": "SILBERSTAUB",
       "itemId": "ITEM_SILVER_POWDER",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_BUG_POWER",
@@ -3403,8 +3403,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"AMULET COIN\")",
-      "german": "_(\"MÜNZAMULETT\")",
+      "english": "AMULET COIN",
+      "german": "MÜNZAMULETT",
       "itemId": "ITEM_AMULET_COIN",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_DOUBLE_PRIZE",
@@ -3421,8 +3421,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CLEANSE TAG\")",
-      "german": "_(\"SCHUTZBAND\")",
+      "english": "CLEANSE TAG",
+      "german": "SCHUTZBAND",
       "itemId": "ITEM_CLEANSE_TAG",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_REPEL",
@@ -3439,8 +3439,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SOUL DEW\")",
-      "german": "_(\"SEELENTAU\")",
+      "english": "SOUL DEW",
+      "german": "SEELENTAU",
       "itemId": "ITEM_SOUL_DEW",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_SOUL_DEW",
@@ -3457,8 +3457,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DEEPSEATOOTH\")",
-      "german": "_(\"ABYSSZAHN\")",
+      "english": "DEEPSEATOOTH",
+      "german": "ABYSSZAHN",
       "itemId": "ITEM_DEEP_SEA_TOOTH",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_DEEP_SEA_TOOTH",
@@ -3475,8 +3475,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DEEPSEASCALE\")",
-      "german": "_(\"ABYSSPLATTE\")",
+      "english": "DEEPSEASCALE",
+      "german": "ABYSSPLATTE",
       "itemId": "ITEM_DEEP_SEA_SCALE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_DEEP_SEA_SCALE",
@@ -3493,8 +3493,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SMOKE BALL\")",
-      "german": "_(\"RAUCHBALL\")",
+      "english": "SMOKE BALL",
+      "german": "RAUCHBALL",
       "itemId": "ITEM_SMOKE_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_CAN_ALWAYS_RUN",
@@ -3511,8 +3511,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"EVERSTONE\")",
-      "german": "_(\"EWIGSTEIN\")",
+      "english": "EVERSTONE",
+      "german": "EWIGSTEIN",
       "itemId": "ITEM_EVERSTONE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_PREVENT_EVOLVE",
@@ -3529,8 +3529,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"FOCUS BAND\")",
-      "german": "_(\"FOKUS-BAND\")",
+      "english": "FOCUS BAND",
+      "german": "FOKUS-BAND",
       "itemId": "ITEM_FOCUS_BAND",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_FOCUS_BAND",
@@ -3547,8 +3547,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LUCKY EGG\")",
-      "german": "_(\"GLÜCKS-EI\")",
+      "english": "LUCKY EGG",
+      "german": "GLÜCKS-EI",
       "itemId": "ITEM_LUCKY_EGG",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_LUCKY_EGG",
@@ -3565,8 +3565,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SCOPE LENS\")",
-      "german": "_(\"SCOPE-LINSE\")",
+      "english": "SCOPE LENS",
+      "german": "SCOPE-LINSE",
       "itemId": "ITEM_SCOPE_LENS",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_SCOPE_LENS",
@@ -3583,8 +3583,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"METAL COAT\")",
-      "german": "_(\"METALLMANTEL\")",
+      "english": "METAL COAT",
+      "german": "METALLMANTEL",
       "itemId": "ITEM_METAL_COAT",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_STEEL_POWER",
@@ -3601,8 +3601,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LEFTOVERS\")",
-      "german": "_(\"ÜBERRESTE\")",
+      "english": "LEFTOVERS",
+      "german": "ÜBERRESTE",
       "itemId": "ITEM_LEFTOVERS",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_LEFTOVERS",
@@ -3619,8 +3619,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DRAGON SCALE\")",
-      "german": "_(\"DRACHENHAUT\")",
+      "english": "DRAGON SCALE",
+      "german": "DRACHENHAUT",
       "itemId": "ITEM_DRAGON_SCALE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_DRAGON_SCALE",
@@ -3637,8 +3637,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LIGHT BALL\")",
-      "german": "_(\"KUGELBLITZ\")",
+      "english": "LIGHT BALL",
+      "german": "KUGELBLITZ",
       "itemId": "ITEM_LIGHT_BALL",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_LIGHT_BALL",
@@ -3655,8 +3655,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SOFT SAND\")",
-      "german": "_(\"PUDERSAND\")",
+      "english": "SOFT SAND",
+      "german": "PUDERSAND",
       "itemId": "ITEM_SOFT_SAND",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_GROUND_POWER",
@@ -3673,8 +3673,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HARD STONE\")",
-      "german": "_(\"GRANITSTEIN\")",
+      "english": "HARD STONE",
+      "german": "GRANITSTEIN",
       "itemId": "ITEM_HARD_STONE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_ROCK_POWER",
@@ -3691,8 +3691,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MIRACLE SEED\")",
-      "german": "_(\"WUNDERSAAT\")",
+      "english": "MIRACLE SEED",
+      "german": "WUNDERSAAT",
       "itemId": "ITEM_MIRACLE_SEED",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_GRASS_POWER",
@@ -3709,8 +3709,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLACKGLASSES\")",
-      "german": "_(\"SCHATTENGLAS\")",
+      "english": "BLACKGLASSES",
+      "german": "SCHATTENGLAS",
       "itemId": "ITEM_BLACK_GLASSES",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_DARK_POWER",
@@ -3727,8 +3727,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLACK BELT\")",
-      "german": "_(\"SCHWARZGURT\")",
+      "english": "BLACK BELT",
+      "german": "SCHWARZGURT",
       "itemId": "ITEM_BLACK_BELT",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FIGHTING_POWER",
@@ -3745,8 +3745,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MAGNET\")",
-      "german": "_(\"MAGNET\")",
+      "english": "MAGNET",
+      "german": "MAGNET",
       "itemId": "ITEM_MAGNET",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_ELECTRIC_POWER",
@@ -3763,8 +3763,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MYSTIC WATER\")",
-      "german": "_(\"ZAUBERWASSER\")",
+      "english": "MYSTIC WATER",
+      "german": "ZAUBERWASSER",
       "itemId": "ITEM_MYSTIC_WATER",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_WATER_POWER",
@@ -3781,8 +3781,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SHARP BEAK\")",
-      "german": "_(\"HACKATTACK\")",
+      "english": "SHARP BEAK",
+      "german": "HACKATTACK",
       "itemId": "ITEM_SHARP_BEAK",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FLYING_POWER",
@@ -3799,8 +3799,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"POISON BARB\")",
-      "german": "_(\"GIFTSTICH\")",
+      "english": "POISON BARB",
+      "german": "GIFTSTICH",
       "itemId": "ITEM_POISON_BARB",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_POISON_POWER",
@@ -3817,8 +3817,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"NEVERMELTICE\")",
-      "german": "_(\"EWIGES EIS\")",
+      "english": "NEVERMELTICE",
+      "german": "EWIGES EIS",
       "itemId": "ITEM_NEVER_MELT_ICE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_ICE_POWER",
@@ -3835,8 +3835,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SPELL TAG\")",
-      "german": "_(\"BANNSTICKER\")",
+      "english": "SPELL TAG",
+      "german": "BANNSTICKER",
       "itemId": "ITEM_SPELL_TAG",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_GHOST_POWER",
@@ -3853,8 +3853,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TWISTEDSPOON\")",
-      "german": "_(\"KRÜMMLÖFFEL\")",
+      "english": "TWISTEDSPOON",
+      "german": "KRÜMMLÖFFEL",
       "itemId": "ITEM_TWISTED_SPOON",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_PSYCHIC_POWER",
@@ -3871,8 +3871,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CHARCOAL\")",
-      "german": "_(\"HOLZKOHLE\")",
+      "english": "CHARCOAL",
+      "german": "HOLZKOHLE",
       "itemId": "ITEM_CHARCOAL",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_FIRE_POWER",
@@ -3889,8 +3889,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DRAGON FANG\")",
-      "german": "_(\"DRACHENZAHN\")",
+      "english": "DRAGON FANG",
+      "german": "DRACHENZAHN",
       "itemId": "ITEM_DRAGON_FANG",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_DRAGON_POWER",
@@ -3907,8 +3907,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SILK SCARF\")",
-      "german": "_(\"SEIDENSCHAL\")",
+      "english": "SILK SCARF",
+      "german": "SEIDENSCHAL",
       "itemId": "ITEM_SILK_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NORMAL_POWER",
@@ -3925,8 +3925,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"UP-GRADE\")",
-      "german": "_(\"UP-GRADE\")",
+      "english": "UP-GRADE",
+      "german": "UP-GRADE",
       "itemId": "ITEM_UP_GRADE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_UP_GRADE",
@@ -3943,8 +3943,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SHELL BELL\")",
-      "german": "_(\"SEEGESANG\")",
+      "english": "SHELL BELL",
+      "german": "SEEGESANG",
       "itemId": "ITEM_SHELL_BELL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_SHELL_BELL",
@@ -3961,8 +3961,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SEA INCENSE\")",
-      "german": "_(\"SEERAUCH\")",
+      "english": "SEA INCENSE",
+      "german": "SEERAUCH",
       "itemId": "ITEM_SEA_INCENSE",
       "price": 9600,
       "holdEffect": "HOLD_EFFECT_WATER_POWER",
@@ -3979,8 +3979,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LAX INCENSE\")",
-      "german": "_(\"LAXRAUCH\")",
+      "english": "LAX INCENSE",
+      "german": "LAXRAUCH",
       "itemId": "ITEM_LAX_INCENSE",
       "price": 9600,
       "holdEffect": "HOLD_EFFECT_EVASION_UP",
@@ -3997,8 +3997,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LUCKY PUNCH\")",
-      "german": "_(\"LUCKY PUNCH\")",
+      "english": "LUCKY PUNCH",
+      "german": "LUCKY PUNCH",
       "itemId": "ITEM_LUCKY_PUNCH",
       "price": 10,
       "holdEffect": "HOLD_EFFECT_LUCKY_PUNCH",
@@ -4015,8 +4015,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"METAL POWDER\")",
-      "german": "_(\"METALLSTAUB\")",
+      "english": "METAL POWDER",
+      "german": "METALLSTAUB",
       "itemId": "ITEM_METAL_POWDER",
       "price": 10,
       "holdEffect": "HOLD_EFFECT_METAL_POWDER",
@@ -4033,8 +4033,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"THICK CLUB\")",
-      "german": "_(\"KAMPFKNOCHEN\")",
+      "english": "THICK CLUB",
+      "german": "KAMPFKNOCHEN",
       "itemId": "ITEM_THICK_CLUB",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_THICK_CLUB",
@@ -4051,8 +4051,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"STICK\")",
-      "german": "_(\"LAUCHSTANGE\")",
+      "english": "STICK",
+      "german": "LAUCHSTANGE",
       "itemId": "ITEM_STICK",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_STICK",
@@ -4069,8 +4069,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4087,8 +4087,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4105,8 +4105,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4123,8 +4123,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4141,8 +4141,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4159,8 +4159,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4177,8 +4177,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4195,8 +4195,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4213,8 +4213,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4231,8 +4231,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4249,8 +4249,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4267,8 +4267,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4285,8 +4285,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4303,8 +4303,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4321,8 +4321,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4339,8 +4339,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4357,8 +4357,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4375,8 +4375,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4393,8 +4393,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4411,8 +4411,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4429,8 +4429,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4447,8 +4447,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4465,8 +4465,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4483,8 +4483,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4501,8 +4501,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4519,8 +4519,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4537,8 +4537,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4555,8 +4555,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4573,8 +4573,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RED SCARF\")",
-      "german": "_(\"ROTER SCHAL\")",
+      "english": "RED SCARF",
+      "german": "ROTER SCHAL",
       "itemId": "ITEM_RED_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4591,8 +4591,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLUE SCARF\")",
-      "german": "_(\"BLAUER SCHAL\")",
+      "english": "BLUE SCARF",
+      "german": "BLAUER SCHAL",
       "itemId": "ITEM_BLUE_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4609,8 +4609,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"PINK SCARF\")",
-      "german": "_(\"ROSA SCHAL\")",
+      "english": "PINK SCARF",
+      "german": "ROSA SCHAL",
       "itemId": "ITEM_PINK_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4627,8 +4627,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GREEN SCARF\")",
-      "german": "_(\"GRÜNER SCHAL\")",
+      "english": "GREEN SCARF",
+      "german": "GRÜNER SCHAL",
       "itemId": "ITEM_GREEN_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4645,8 +4645,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"YELLOW SCARF\")",
-      "german": "_(\"GELBER SCHAL\")",
+      "english": "YELLOW SCARF",
+      "german": "GELBER SCHAL",
       "itemId": "ITEM_YELLOW_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4663,8 +4663,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"MACH BIKE\")",
-      "german": "_(\"EILRAD\")",
+      "english": "MACH BIKE",
+      "german": "EILRAD",
       "itemId": "ITEM_MACH_BIKE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4681,8 +4681,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"COIN CASE\")",
-      "german": "_(\"MÜNZKORB\")",
+      "english": "COIN CASE",
+      "german": "MÜNZKORB",
       "itemId": "ITEM_COIN_CASE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4699,8 +4699,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ITEMFINDER\")",
-      "german": "_(\"DETEKTOR\")",
+      "english": "ITEMFINDER",
+      "german": "DETEKTOR",
       "itemId": "ITEM_ITEMFINDER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4717,8 +4717,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"OLD ROD\")",
-      "german": "_(\"ANGEL\")",
+      "english": "OLD ROD",
+      "german": "ANGEL",
       "itemId": "ITEM_OLD_ROD",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4735,8 +4735,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GOOD ROD\")",
-      "german": "_(\"PROFIANGEL\")",
+      "english": "GOOD ROD",
+      "german": "PROFIANGEL",
       "itemId": "ITEM_GOOD_ROD",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4753,8 +4753,8 @@
       "secondaryId": 1
     },
     {
-      "english": "_(\"SUPER ROD\")",
-      "german": "_(\"SUPERANGEL\")",
+      "english": "SUPER ROD",
+      "german": "SUPERANGEL",
       "itemId": "ITEM_SUPER_ROD",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4771,8 +4771,8 @@
       "secondaryId": 2
     },
     {
-      "english": "_(\"S.S. TICKET\")",
-      "german": "_(\"BOOTSTICKET\")",
+      "english": "S.S. TICKET",
+      "german": "BOOTSTICKET",
       "itemId": "ITEM_SS_TICKET",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4789,8 +4789,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CONTEST PASS\")",
-      "german": "_(\"WETTB.-KARTE\")",
+      "english": "CONTEST PASS",
+      "german": "WETTB.-KARTE",
       "itemId": "ITEM_CONTEST_PASS",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4807,8 +4807,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4825,8 +4825,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"WAILMER PAIL\")",
-      "german": "_(\"WAILMERKANNE\")",
+      "english": "WAILMER PAIL",
+      "german": "WAILMERKANNE",
       "itemId": "ITEM_WAILMER_PAIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4843,8 +4843,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DEVON GOODS\")",
-      "german": "_(\"DEVON-WAREN\")",
+      "english": "DEVON GOODS",
+      "german": "DEVON-WAREN",
       "itemId": "ITEM_DEVON_GOODS",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4861,8 +4861,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SOOT SACK\")",
-      "german": "_(\"ASCHETASCHE\")",
+      "english": "SOOT SACK",
+      "german": "ASCHETASCHE",
       "itemId": "ITEM_SOOT_SACK",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4879,8 +4879,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BASEMENT KEY\")",
-      "german": "_(\"KELLERÖFFNER\")",
+      "english": "BASEMENT KEY",
+      "german": "KELLERÖFFNER",
       "itemId": "ITEM_BASEMENT_KEY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4897,8 +4897,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ACRO BIKE\")",
-      "german": "_(\"KUNSTRAD\")",
+      "english": "ACRO BIKE",
+      "german": "KUNSTRAD",
       "itemId": "ITEM_ACRO_BIKE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4915,8 +4915,8 @@
       "secondaryId": 1
     },
     {
-      "english": "_(\"{POKEBLOCK} CASE\")",
-      "german": "_(\"{POKEBLOCK}BOX\")",
+      "english": "{POKEBLOCK} CASE",
+      "german": "{POKEBLOCK}BOX",
       "itemId": "ITEM_POKEBLOCK_CASE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4933,8 +4933,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"LETTER\")",
-      "german": "_(\"BRIEF\")",
+      "english": "LETTER",
+      "german": "BRIEF",
       "itemId": "ITEM_LETTER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4951,8 +4951,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"EON TICKET\")",
-      "german": "_(\"ÄON-TICKET\")",
+      "english": "EON TICKET",
+      "german": "ÄON-TICKET",
       "itemId": "ITEM_EON_TICKET",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4969,8 +4969,8 @@
       "secondaryId": 1
     },
     {
-      "english": "_(\"RED ORB\")",
-      "german": "_(\"ROTE KUGEL\")",
+      "english": "RED ORB",
+      "german": "ROTE KUGEL",
       "itemId": "ITEM_RED_ORB",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4987,8 +4987,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"BLUE ORB\")",
-      "german": "_(\"BLAUE KUGEL\")",
+      "english": "BLUE ORB",
+      "german": "BLAUE KUGEL",
       "itemId": "ITEM_BLUE_ORB",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5005,8 +5005,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"SCANNER\")",
-      "german": "_(\"SCANNER\")",
+      "english": "SCANNER",
+      "german": "SCANNER",
       "itemId": "ITEM_SCANNER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5023,8 +5023,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"GO-GOGGLES\")",
-      "german": "_(\"WÜSTENGLAS\")",
+      "english": "GO-GOGGLES",
+      "german": "WÜSTENGLAS",
       "itemId": "ITEM_GO_GOGGLES",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5041,8 +5041,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"METEORITE\")",
-      "german": "_(\"METEORIT\")",
+      "english": "METEORITE",
+      "german": "METEORIT",
       "itemId": "ITEM_METEORITE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5059,8 +5059,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RM. 1 KEY\")",
-      "german": "_(\"K1-SCHLÜSSEL\")",
+      "english": "RM. 1 KEY",
+      "german": "K1-SCHLÜSSEL",
       "itemId": "ITEM_ROOM_1_KEY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5077,8 +5077,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RM. 2 KEY\")",
-      "german": "_(\"K2-SCHLÜSSEL\")",
+      "english": "RM. 2 KEY",
+      "german": "K2-SCHLÜSSEL",
       "itemId": "ITEM_ROOM_2_KEY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5095,8 +5095,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RM. 4 KEY\")",
-      "german": "_(\"K4-SCHLÜSSEL\")",
+      "english": "RM. 4 KEY",
+      "german": "K4-SCHLÜSSEL",
       "itemId": "ITEM_ROOM_4_KEY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5113,8 +5113,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"RM. 6 KEY\")",
-      "german": "_(\"K6-SCHLÜSSEL\")",
+      "english": "RM. 6 KEY",
+      "german": "K6-SCHLÜSSEL",
       "itemId": "ITEM_ROOM_6_KEY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5131,8 +5131,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"STORAGE KEY\")",
-      "german": "_(\"L.-SCHLÜSSEL\")",
+      "english": "STORAGE KEY",
+      "german": "L.-SCHLÜSSEL",
       "itemId": "ITEM_STORAGE_KEY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5149,8 +5149,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"ROOT FOSSIL\")",
-      "german": "_(\"WURZELFOSSIL\")",
+      "english": "ROOT FOSSIL",
+      "german": "WURZELFOSSIL",
       "itemId": "ITEM_ROOT_FOSSIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5167,8 +5167,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"CLAW FOSSIL\")",
-      "german": "_(\"KLAUENFOSSIL\")",
+      "english": "CLAW FOSSIL",
+      "german": "KLAUENFOSSIL",
       "itemId": "ITEM_CLAW_FOSSIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5185,8 +5185,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"DEVON SCOPE\")",
-      "german": "_(\"DEVON-SCOPE\")",
+      "english": "DEVON SCOPE",
+      "german": "DEVON-SCOPE",
       "itemId": "ITEM_DEVON_SCOPE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5203,8 +5203,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM01\")",
-      "german": "_(\"TM01\")",
+      "english": "TM01",
+      "german": "TM01",
       "itemId": "ITEM_TM01_FOCUS_PUNCH",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5221,8 +5221,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM02\")",
-      "german": "_(\"TM02\")",
+      "english": "TM02",
+      "german": "TM02",
       "itemId": "ITEM_TM02_DRAGON_CLAW",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5239,8 +5239,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM03\")",
-      "german": "_(\"TM03\")",
+      "english": "TM03",
+      "german": "TM03",
       "itemId": "ITEM_TM03_WATER_PULSE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5257,8 +5257,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM04\")",
-      "german": "_(\"TM04\")",
+      "english": "TM04",
+      "german": "TM04",
       "itemId": "ITEM_TM04_CALM_MIND",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5275,8 +5275,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM05\")",
-      "german": "_(\"TM05\")",
+      "english": "TM05",
+      "german": "TM05",
       "itemId": "ITEM_TM05_ROAR",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5293,8 +5293,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM06\")",
-      "german": "_(\"TM06\")",
+      "english": "TM06",
+      "german": "TM06",
       "itemId": "ITEM_TM06_TOXIC",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5311,8 +5311,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM07\")",
-      "german": "_(\"TM07\")",
+      "english": "TM07",
+      "german": "TM07",
       "itemId": "ITEM_TM07_HAIL",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5329,8 +5329,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM08\")",
-      "german": "_(\"TM08\")",
+      "english": "TM08",
+      "german": "TM08",
       "itemId": "ITEM_TM08_BULK_UP",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5347,8 +5347,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM09\")",
-      "german": "_(\"TM09\")",
+      "english": "TM09",
+      "german": "TM09",
       "itemId": "ITEM_TM09_BULLET_SEED",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5365,8 +5365,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM10\")",
-      "german": "_(\"TM10\")",
+      "english": "TM10",
+      "german": "TM10",
       "itemId": "ITEM_TM10_HIDDEN_POWER",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5383,8 +5383,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM11\")",
-      "german": "_(\"TM11\")",
+      "english": "TM11",
+      "german": "TM11",
       "itemId": "ITEM_TM11_SUNNY_DAY",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5401,8 +5401,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM12\")",
-      "german": "_(\"TM12\")",
+      "english": "TM12",
+      "german": "TM12",
       "itemId": "ITEM_TM12_TAUNT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5419,8 +5419,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM13\")",
-      "german": "_(\"TM13\")",
+      "english": "TM13",
+      "german": "TM13",
       "itemId": "ITEM_TM13_ICE_BEAM",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5437,8 +5437,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM14\")",
-      "german": "_(\"TM14\")",
+      "english": "TM14",
+      "german": "TM14",
       "itemId": "ITEM_TM14_BLIZZARD",
       "price": 5500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5455,8 +5455,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM15\")",
-      "german": "_(\"TM15\")",
+      "english": "TM15",
+      "german": "TM15",
       "itemId": "ITEM_TM15_HYPER_BEAM",
       "price": 7500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5473,8 +5473,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM16\")",
-      "german": "_(\"TM16\")",
+      "english": "TM16",
+      "german": "TM16",
       "itemId": "ITEM_TM16_LIGHT_SCREEN",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5491,8 +5491,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM17\")",
-      "german": "_(\"TM17\")",
+      "english": "TM17",
+      "german": "TM17",
       "itemId": "ITEM_TM17_PROTECT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5509,8 +5509,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM18\")",
-      "german": "_(\"TM18\")",
+      "english": "TM18",
+      "german": "TM18",
       "itemId": "ITEM_TM18_RAIN_DANCE",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5527,8 +5527,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM19\")",
-      "german": "_(\"TM19\")",
+      "english": "TM19",
+      "german": "TM19",
       "itemId": "ITEM_TM19_GIGA_DRAIN",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5545,8 +5545,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM20\")",
-      "german": "_(\"TM20\")",
+      "english": "TM20",
+      "german": "TM20",
       "itemId": "ITEM_TM20_SAFEGUARD",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5563,8 +5563,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM21\")",
-      "german": "_(\"TM21\")",
+      "english": "TM21",
+      "german": "TM21",
       "itemId": "ITEM_TM21_FRUSTRATION",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5581,8 +5581,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM22\")",
-      "german": "_(\"TM22\")",
+      "english": "TM22",
+      "german": "TM22",
       "itemId": "ITEM_TM22_SOLARBEAM",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5599,8 +5599,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM23\")",
-      "german": "_(\"TM23\")",
+      "english": "TM23",
+      "german": "TM23",
       "itemId": "ITEM_TM23_IRON_TAIL",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5617,8 +5617,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM24\")",
-      "german": "_(\"TM24\")",
+      "english": "TM24",
+      "german": "TM24",
       "itemId": "ITEM_TM24_THUNDERBOLT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5635,8 +5635,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM25\")",
-      "german": "_(\"TM25\")",
+      "english": "TM25",
+      "german": "TM25",
       "itemId": "ITEM_TM25_THUNDER",
       "price": 5500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5653,8 +5653,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM26\")",
-      "german": "_(\"TM26\")",
+      "english": "TM26",
+      "german": "TM26",
       "itemId": "ITEM_TM26_EARTHQUAKE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5671,8 +5671,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM27\")",
-      "german": "_(\"TM27\")",
+      "english": "TM27",
+      "german": "TM27",
       "itemId": "ITEM_TM27_RETURN",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5689,8 +5689,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM28\")",
-      "german": "_(\"TM28\")",
+      "english": "TM28",
+      "german": "TM28",
       "itemId": "ITEM_TM28_DIG",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5707,8 +5707,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM29\")",
-      "german": "_(\"TM29\")",
+      "english": "TM29",
+      "german": "TM29",
       "itemId": "ITEM_TM29_PSYCHIC",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5725,8 +5725,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM30\")",
-      "german": "_(\"TM30\")",
+      "english": "TM30",
+      "german": "TM30",
       "itemId": "ITEM_TM30_SHADOW_BALL",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5743,8 +5743,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM31\")",
-      "german": "_(\"TM31\")",
+      "english": "TM31",
+      "german": "TM31",
       "itemId": "ITEM_TM31_BRICK_BREAK",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5761,8 +5761,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM32\")",
-      "german": "_(\"TM32\")",
+      "english": "TM32",
+      "german": "TM32",
       "itemId": "ITEM_TM32_DOUBLE_TEAM",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5779,8 +5779,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM33\")",
-      "german": "_(\"TM33\")",
+      "english": "TM33",
+      "german": "TM33",
       "itemId": "ITEM_TM33_REFLECT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5797,8 +5797,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM34\")",
-      "german": "_(\"TM34\")",
+      "english": "TM34",
+      "german": "TM34",
       "itemId": "ITEM_TM34_SHOCK_WAVE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5815,8 +5815,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM35\")",
-      "german": "_(\"TM35\")",
+      "english": "TM35",
+      "german": "TM35",
       "itemId": "ITEM_TM35_FLAMETHROWER",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5833,8 +5833,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM36\")",
-      "german": "_(\"TM36\")",
+      "english": "TM36",
+      "german": "TM36",
       "itemId": "ITEM_TM36_SLUDGE_BOMB",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5851,8 +5851,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM37\")",
-      "german": "_(\"TM37\")",
+      "english": "TM37",
+      "german": "TM37",
       "itemId": "ITEM_TM37_SANDSTORM",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5869,8 +5869,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM38\")",
-      "german": "_(\"TM38\")",
+      "english": "TM38",
+      "german": "TM38",
       "itemId": "ITEM_TM38_FIRE_BLAST",
       "price": 5500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5887,8 +5887,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM39\")",
-      "german": "_(\"TM39\")",
+      "english": "TM39",
+      "german": "TM39",
       "itemId": "ITEM_TM39_ROCK_TOMB",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5905,8 +5905,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM40\")",
-      "german": "_(\"TM40\")",
+      "english": "TM40",
+      "german": "TM40",
       "itemId": "ITEM_TM40_AERIAL_ACE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5923,8 +5923,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM41\")",
-      "german": "_(\"TM41\")",
+      "english": "TM41",
+      "german": "TM41",
       "itemId": "ITEM_TM41_TORMENT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5941,8 +5941,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM42\")",
-      "german": "_(\"TM42\")",
+      "english": "TM42",
+      "german": "TM42",
       "itemId": "ITEM_TM42_FACADE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5959,8 +5959,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM43\")",
-      "german": "_(\"TM43\")",
+      "english": "TM43",
+      "german": "TM43",
       "itemId": "ITEM_TM43_SECRET_POWER",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5977,8 +5977,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM44\")",
-      "german": "_(\"TM44\")",
+      "english": "TM44",
+      "german": "TM44",
       "itemId": "ITEM_TM44_REST",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5995,8 +5995,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM45\")",
-      "german": "_(\"TM45\")",
+      "english": "TM45",
+      "german": "TM45",
       "itemId": "ITEM_TM45_ATTRACT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6013,8 +6013,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM46\")",
-      "german": "_(\"TM46\")",
+      "english": "TM46",
+      "german": "TM46",
       "itemId": "ITEM_TM46_THIEF",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6031,8 +6031,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM47\")",
-      "german": "_(\"TM47\")",
+      "english": "TM47",
+      "german": "TM47",
       "itemId": "ITEM_TM47_STEEL_WING",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6049,8 +6049,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM48\")",
-      "german": "_(\"TM48\")",
+      "english": "TM48",
+      "german": "TM48",
       "itemId": "ITEM_TM48_SKILL_SWAP",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6067,8 +6067,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM49\")",
-      "german": "_(\"TM49\")",
+      "english": "TM49",
+      "german": "TM49",
       "itemId": "ITEM_TM49_SNATCH",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6085,8 +6085,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"TM50\")",
-      "german": "_(\"TM50\")",
+      "english": "TM50",
+      "german": "TM50",
       "itemId": "ITEM_TM50_OVERHEAT",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6103,8 +6103,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM01\")",
-      "german": "_(\"VM01\")",
+      "english": "HM01",
+      "german": "VM01",
       "itemId": "ITEM_HM01_CUT",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6121,8 +6121,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM02\")",
-      "german": "_(\"VM02\")",
+      "english": "HM02",
+      "german": "VM02",
       "itemId": "ITEM_HM02_FLY",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6139,8 +6139,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM03\")",
-      "german": "_(\"VM03\")",
+      "english": "HM03",
+      "german": "VM03",
       "itemId": "ITEM_HM03_SURF",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6157,8 +6157,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM04\")",
-      "german": "_(\"VM04\")",
+      "english": "HM04",
+      "german": "VM04",
       "itemId": "ITEM_HM04_STRENGTH",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6175,8 +6175,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM05\")",
-      "german": "_(\"VM05\")",
+      "english": "HM05",
+      "german": "VM05",
       "itemId": "ITEM_HM05_FLASH",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6193,8 +6193,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM06\")",
-      "german": "_(\"VM06\")",
+      "english": "HM06",
+      "german": "VM06",
       "itemId": "ITEM_HM06_ROCK_SMASH",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6211,8 +6211,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM07\")",
-      "german": "_(\"VM07\")",
+      "english": "HM07",
+      "german": "VM07",
       "itemId": "ITEM_HM07_WATERFALL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6229,8 +6229,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"HM08\")",
-      "german": "_(\"VM08\")",
+      "english": "HM08",
+      "german": "VM08",
       "itemId": "ITEM_HM08_DIVE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6247,8 +6247,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -6265,8 +6265,8 @@
       "secondaryId": 0
     },
     {
-      "english": "_(\"????????\")",
-      "german": "_(\"????????\")",
+      "english": "????????",
+      "german": "????????",
       "itemId": "ITEM_NONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
