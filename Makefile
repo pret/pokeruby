@@ -12,7 +12,11 @@ endif
 
 SHELL     := /bin/bash -o pipefail
 AS        := $(PREFIX)as
+ifeq ($(MODERN),0)
 CC1       := tools/agbcc/bin/agbcc$(EXE)
+else
+CC1       := $(shell $(PREFIX)gcc --print-prog-name=cc1)
+endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
@@ -27,9 +31,13 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
 
-ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
+ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym MODERN=$(MODERN)
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
+ifeq ($(MODERN),0)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG)
+else
+CC1FLAGS := -mthumb -mthumb-interwork -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -O2 -fno-toplevel-reorder -Wno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
+endif
 
 
 #### Files ####
@@ -54,6 +62,7 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
 # Special configurations required for lib files
+ifeq ($(MODERN),0)
 %src/libs/siirtc.o:       CC1FLAGS := -mthumb-interwork
 %src/libs/agb_flash.o:    CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
@@ -61,11 +70,13 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 %src/libs/m4a.o:          CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 %src/libs/libisagbprn.o:  CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 %src/libs/libisagbprn.o:  CC1FLAGS := -mthumb-interwork
+endif
 
 
 #### Main Rules ####
 
 ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug
+MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
@@ -141,10 +152,10 @@ tidy:
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
-	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
+	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
@@ -174,6 +185,17 @@ sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
+
+modern:               ; @$(MAKE) GAME_VERSION=RUBY MODERN=1 COMPARE=0
+ruby_modern:          ; @$(MAKE) GAME_VERSION=RUBY MODERN=1 COMPARE=0
+ruby_rev1_modern:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 MODERN=1 COMPARE=0
+ruby_rev2_modern:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 MODERN=1 COMPARE=0
+sapphire_modern:      ; @$(MAKE) GAME_VERSION=SAPPHIRE MODERN=1 COMPARE=0
+sapphire_rev1_modern: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 MODERN=1 COMPARE=0
+sapphire_rev2_modern: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 MODERN=1 COMPARE=0
+ruby_de_modern:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN MODERN=1 COMPARE=0
+sapphire_de_modern:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN MODERN=1 COMPARE=0
+ruby_de_debug_modern: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1 MODERN=1 COMPARE=0
 
 
 #### Graphics Rules ####

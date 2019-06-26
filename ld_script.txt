@@ -460,18 +460,22 @@ SECTIONS {
         . += 0x8; /* Why the gap? */
         src/text.o(.rodata);
         src/string_util.o(.rodata);
+        src/link.o(.rodata.str1.4);
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
+        src/rom3.o(.rodata);
         data/mon_attrs.o(.rodata);
         src/battle/battle_1.o(.rodata);
         src/battle/battle_bg.o(.rodata);
+        src/battle/battle_2.o(.rodata);
         data/btl_attrs.o(.rodata);
         src/battle/battle_4.o(.rodata);
         src/battle/battle_controller_player.o(.rodata);
         data/smokescreen.o(.rodata); /* why is smokescreen rodata way up here and not in the correct location? */
         data/battle_7.o(.rodata);
         src/battle/battle_controller_opponent.o(.rodata);
+        src/battle/battle_ai_switch_items.o(.rodata);
         src/battle/battle_controller_linkopponent.o(.rodata);
         src/data/battle_moves.o(.rodata);
         src/battle/battle_util.o(.rodata);
@@ -503,6 +507,7 @@ SECTIONS {
         src/text_window.o(.rodata);
         src/script.o(.rodata);
         src/scrcmd.o(.rodata);
+        src/field_control_avatar.o(.rodata);
         src/coord_event_weather.o(.rodata);
         src/field_tasks.o(.rodata);
         src/reset_rtc_screen.o(.rodata);
@@ -524,10 +529,12 @@ SECTIONS {
         data/unused_hit.o(.rodata);
         data/unused_orb2.o(.rodata);
         src/task.o(.rodata);
+        src/battle/reshow_battle_screen.o(.rodata);
         src/battle/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
         src/field_weather.o(.rodata);
         src/field_weather_effects.o(.rodata);
+        src/field_fadetransition.o(.rodata);
         src/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
         src/cable_club.o(.rodata);
@@ -538,6 +545,7 @@ SECTIONS {
         src/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         src/field_effect.o(.rodata);
+        src/scanline_effect.o(.rodata);
         src/pokemon_menu.o(.rodata);
         src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
@@ -556,6 +564,7 @@ SECTIONS {
         src/battle/battle_anim_80A7E7C.o(.rodata);
         src/item.o(.rodata);
         src/debug/matsuda_debug_menu.o(.rodata);
+        src/contest.o(.rodata);
         data/contest.o(.rodata);
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
@@ -572,14 +581,17 @@ SECTIONS {
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         src/battle/contest_link_80C2020.o(.rodata);
+        src/script_pokemon_util_80C4BF0.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         src/pc_screen_effect.o(.rodata);
         src/pc_screen_effect.o(.data);
         src/fldeff_secretpower.o(.rodata);
+        src/fldeff_secret_base_pc.o(.rodata);
         src/fldeff_decoration.o(.rodata);
         src/fldeff_recordmixing.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
+        src/battle/contest_link_80C857C.o(.rodata);
         src/item_use.o(.rodata);
         src/battle/anim/powder.o(.rodata);
         src/battle/anim/orbs.o(.rodata);
@@ -634,6 +646,7 @@ SECTIONS {
         src/battle/anim/cyclone.o(.rodata);
         src/battle/anim/grip.o(.rodata);
         src/battle/anim/guillotine.o(.rodata);
+        src/battle/anim/shadow_minimize.o(.rodata);
         src/battle/anim/splash.o(.rodata);
         src/battle/anim/grow.o(.rodata);
         src/battle/anim/breath.o(.rodata);
@@ -648,6 +661,8 @@ SECTIONS {
         src/battle/anim/blow_kiss.o(.rodata);
         src/battle/anim/kiss_fountain.o(.rodata);
         src/battle/anim/flying_hearts.o(.rodata);
+        src/battle/anim/love_bg.o(.rodata);
+        src/battle/anim/scary_face.o(.rodata);
         src/battle/anim/hidden_power_orbit.o(.rodata);
         src/battle/anim/spit.o(.rodata);
         src/battle/anim/perceive.o(.rodata);
@@ -699,8 +714,10 @@ SECTIONS {
         src/mauville_man.o(.rodata);
         src/mail.o(.rodata);
         src/menu_helpers.o(.rodata);
+        src/script_pokemon_util_80F99CC.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
+        src/contest_painting_effects.o(.rodata);
         data/contest_painting_effects.o(.rodata);
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
@@ -716,6 +733,7 @@ SECTIONS {
         src/battle/battle_records.o(.rodata);
         src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
+        src/roulette.o(.rodata);
         data/roulette.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);
         src/pokedex_cry_screen.o(.data);
@@ -739,6 +757,7 @@ SECTIONS {
         src/battle/battle_controller_wally.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
+        src/field_region_map.o(.rodata);
         src/battle/battle_anim_813F0F4.o(.rodata);
         src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
@@ -748,6 +767,7 @@ SECTIONS {
         src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
+        src/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);
         src/debug/nakamura_debug_menu.o(.rodata);
         src/intro_credits_graphics.o(.rodata);
@@ -1187,6 +1207,7 @@ SECTIONS {
     lib_rodata :
     ALIGN(4)
     {
+		src/libs/m4a.o(.rodata);
         src/libs/agb_flash.o(.rodata);
         src/libs/agb_flash_1m.o(.rodata);
         src/libs/agb_flash_mx.o(.rodata);

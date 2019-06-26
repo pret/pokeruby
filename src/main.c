@@ -89,7 +89,14 @@ static void WaitForVBlank(void);
 
 void AgbMain()
 {
+#if MODERN
+    // Modern compilers are liberal with the stack on entry to this function,
+    // so RegisterRamReset may crash if it resets IWRAM.
+    RegisterRamReset(RESET_ALL & ~RESET_IWRAM);
+    DmaFill32(3, 0, (void *)0x03000000, 0x7E00);
+#else
     RegisterRamReset(RESET_ALL);
+#endif //MODERN
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
     InitIntrHandlers();

@@ -242,7 +242,7 @@ void sub_8119D80(struct Sprite *);
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
 extern struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
-extern u8 gUnknown_083F8EC4;
+extern const u16 gUnknown_083F8EC4[3];
 extern u8 gUnknown_083F8DF0[];
 extern u8 gUnknown_083F8E34[];
 extern const u8 gUnknown_08E8096C[];
@@ -371,7 +371,7 @@ void sub_8115238(void)
     struct StructgUnknown_083F8DF4 *s0;
     u16 arr[0x3]; // the third is never used ?
 
-    memcpy(arr, &gUnknown_083F8EC4, 0x6);
+    memcpy(arr, gUnknown_083F8EC4, sizeof(gUnknown_083F8EC4));
     // u16 arr[] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)};
     memset(eRoulette, 0x0, 0x17C);
     eRoulette->var04_0 = (gSpecialVar_0x8004 & 0x1);
@@ -2526,7 +2526,7 @@ void sub_8118F8C(struct Sprite *sprite)
             struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
             p = &gUnknown_083F8DF4[0];
-            eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
+            eRoulette->var8C -= (FLOAT_U8(p[eRoulette->var04_0].var03))
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
 #if DEBUG
@@ -2554,32 +2554,32 @@ void sub_8118F8C(struct Sprite *sprite)
 void sub_8119088(struct Sprite *sprite)
 {
     sub_8118724(sprite);
-    if (!(eRoulette->var94 > 40.f))
-    {
-        eRoulette->var98 = - (        4.0f / (float)(u16)eRoulette->var86);
-        eRoulette->var90 = - (eRoulette->var8C / (float)(u16)eRoulette->var86);
-        sprite->animNum       = 0x2;
-        sprite->animBeginning = TRUE;
-        sprite->animEnded     = FALSE;
-        sprite->data[0x1]     = 0x3;
-        sprite->callback      = &sub_8118F8C;
-    }
+    if (eRoulette->var94 > 40.f)
+        return;
+
+    eRoulette->var98 = - (            4.0f / FLOAT_U16((u16)eRoulette->var86));
+    eRoulette->var90 = - (eRoulette->var8C / FLOAT_U16((u16)eRoulette->var86));
+    sprite->animNum       = 0x2;
+    sprite->animBeginning = TRUE;
+    sprite->animEnded     = FALSE;
+    sprite->data[0x1]     = 0x3;
+    sprite->callback      = &sub_8118F8C;
 }
 
 void sub_8119134(struct Sprite *sprite)
 {
     sub_8118724(sprite);
-    if (!(eRoulette->var94 > 60.0f))
-    {
-        m4aSongNumStartOrChange(0x5D);
-        eRoulette->var98 = - (                20.0f / (float)(u16)eRoulette->var84);
-        eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)(u16)eRoulette->var84);
-        sprite->animNum       = 0x1;
-        sprite->animBeginning = TRUE;
-        sprite->animEnded     = FALSE;
-        sprite->data[0x1]     = 0x2;
-        sprite->callback      = &sub_8119088;
-    }
+    if (eRoulette->var94 > 60.0f)
+        return;
+
+    m4aSongNumStartOrChange(SE_TAMAKORO_E);
+    eRoulette->var98 = - (                    20.0f / FLOAT_U16((u16)eRoulette->var84));
+    eRoulette->var90 =   ((1.0f - eRoulette->var8C) / FLOAT_U16((u16)eRoulette->var84));
+    sprite->animNum       = 0x1;
+    sprite->animBeginning = TRUE;
+    sprite->animEnded     = FALSE;
+    sprite->data[0x1]     = 0x2;
+    sprite->callback      = &sub_8119088;
 }
 
 void sub_81191F4(struct Sprite *sprite)

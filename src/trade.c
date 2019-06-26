@@ -126,7 +126,7 @@ struct TradeEwramSubstruct {
     /*0x08fc*/ u8 filler_08fc[0x704];
 };
 
-IWRAM_DATA u8 gUnknown_03000508[8];
+static u8 gUnknown_03000508[8];
 
 struct UnkStructF {
     u8 filler_0000[9];

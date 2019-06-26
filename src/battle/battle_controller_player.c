@@ -106,7 +106,6 @@ extern void sub_802E460(void);
 extern void b_link_standby_message(void);
 extern void sub_802D18C(void);
 extern void sub_802DF18(void);
-extern void BufferStringBattle();
 extern void sub_80326EC();
 extern void sub_8031F24(void);
 extern void sub_80324BC();

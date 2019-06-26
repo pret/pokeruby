@@ -211,5 +211,6 @@ void sub_805465C(void);
 
 void CB2_InitTestMenu(void);
 void debug_sub_8058C00(void);
+void sub_80546B8(void);
 
 #endif // GUARD_ROM4_H

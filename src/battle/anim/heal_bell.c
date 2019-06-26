@@ -76,7 +76,7 @@ void sub_80D1ADC(u8 taskId)
 {
     int i;
     u8 sp[8];
-    void* src;
+    const void* src;
     void* dest;
     void* what;
     sp[0] = IndexOfSpritePaletteTag(0x27DE);

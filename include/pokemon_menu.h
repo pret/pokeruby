@@ -48,5 +48,6 @@ void sub_808B0C0(u8 taskID);
 void sub_808B508(u8);
 void sub_808B564(void);
 void debug_sub_80986AC(void);
+void sub_808A3F8(void);
 
 #endif // GUARD_POKEMON_MENU_H

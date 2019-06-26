@@ -98,7 +98,7 @@ struct PokenavRibbonIconGfx {
     u8 paletteNum;
 };
 
-IWRAM_DATA void (*gUnknown_03000744)(void);
+static void (*gUnknown_03000744)(void);
 
 struct UnkPokenavStruct *const gPokenavStructPtr = (struct UnkPokenavStruct *)gSharedMem;
 

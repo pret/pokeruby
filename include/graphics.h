@@ -1,6 +1,13 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+struct BattleAnimBackground
+{
+    void *image;
+    void *palette;
+    void *tilemap;
+};
+
 // data/graphics.s
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u8 gInterfacePal_PokeBall[];

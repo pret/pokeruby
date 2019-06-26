@@ -5,6 +5,7 @@ GAME_VERSION  ?= RUBY
 GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
+MODERN        ?= 0
 COMPARE  ?= 1
 
 # For gbafix
@@ -56,5 +57,12 @@ endif
 # Debug
 ifeq ($(DEBUG), 1)
   BUILD_NAME := $(BUILD_NAME)_debug
+endif
+
+# Modern GCC
+ifeq ($(MODERN), 0)
+  BUILD_NAME := $(BUILD_NAME)
+else
+  BUILD_NAME := $(BUILD_NAME)_modern
 endif
 
