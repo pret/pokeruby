@@ -719,7 +719,6 @@ SECTIONS {
         src/evolution_scene.o(.rodata);
         src/roulette.o(.rodata);
         src/roulette_gfx.o(.rodata);
-        data/roulette.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);
         src/pokedex_cry_screen.o(.data);
         src/landmark.o(.rodata);
