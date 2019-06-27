@@ -1,5 +1,6 @@
 #include "global.h"
 #include "random.h"
+#include "graphics.h"
 #include "ewram.h"
 #include "field_fadetransition.h"
 #include "constants/game_stat.h"
@@ -94,18 +95,256 @@ extern const u16 RouletteSpritePalette_15[];
 extern const u16 RouletteSpritePalette_16[];
 #endif //ENGLISH
 
-extern const u8 gUnknown_083F90FC[];
-extern const u8 gUnknown_083F92A8[];
-extern const u8 gUnknown_083F9D3C[];
-extern const struct SpritePalette gUnknown_083F9E30[];
-extern const struct SpriteSheet gUnknown_083F9F54;
-extern const struct SpriteSheet gUnknown_083F9F5C;
-extern const struct SpriteTemplate gSpriteTemplate_83FA07C[];
-extern const struct SpriteTemplate gSpriteTemplate_83F9FD4[];
-extern const struct SpriteTemplate gSpriteTemplate_83FA034[];
+const u8 gUnknown_083F90FC[] = INCBIN_U8("graphics/roulette/ball.4bpp.lz");
+const u8 RouletteBallCounterTiles[] = INCBIN_U8("graphics/roulette/ball_counter.4bpp.lz");
+const u8 gUnknown_083F92A8[] = INCBIN_U8("graphics/roulette/roulette_tilt.4bpp.lz");
+const u8 RoulettePokeIconsTiles[] = INCBIN_U8("graphics/roulette/poke_icons.4bpp.lz");
+const u8 RoulettePokeIcons2Tiles[] = INCBIN_U8("graphics/roulette/poke_icons2.4bpp.lz");
+const u8 gUnknown_083F9D3C[] = INCBIN_U8("graphics/roulette/shadow.4bpp.lz");
+const u8 RouletteCursorTiles[] = INCBIN_U8("graphics/roulette/cursor.4bpp.lz");
+
+const struct SpritePalette gUnknown_083F9E30[] = {
+    {RouletteSpritePalette_01, 1 },
+    {RouletteSpritePalette_02, 2 },
+    {RouletteSpritePalette_03, 3 },
+    {RouletteSpritePalette_04, 4 },
+    {RouletteSpritePalette_05, 5 },
+    {RouletteSpritePalette_06, 6 },
+    {RouletteSpritePalette_07, 7 },
+    {RouletteSpritePalette_08, 8 },
+    {RouletteSpritePalette_09, 9 },
+    {RouletteSpritePalette_10, 10},
+    {RouletteSpritePalette_11, 11},
+    {RouletteSpritePalette_12, 12},
+    {RouletteSpritePalette_13, 13},
+    {RouletteSpritePalette_14, 14},
+    {RouletteSpritePalette_15, 15},
+    {RouletteSpritePalette_16, 16},
+    {}
+};
+
+const struct OamData gOamData_83F9EB8 = {
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 1
+};
+
+const struct OamData gOamData_83F9EC0 = {
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 1
+};
+
+const struct OamData gOamData_83F9EC8 = {
+    .y = 60,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2
+};
+
+const union AnimCmd gSpriteAnim_83F9ED0[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9ED8[] = {
+    gSpriteAnim_83F9ED0
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83F9EDC[] = {
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83F9EE4[] = {
+    gSpriteAffineAnim_83F9EDC
+};
+
+const struct CompressedSpriteSheet gUnknown_083F9EE8 = {
+    RoulettePokeIcons2Tiles,
+    0xC00,
+    0
+};
+
+const union AnimCmd gSpriteAnim_83F9EF0[] = {
+	ANIMCMD_FRAME(0, 0),
+	ANIMCMD_FRAME(32, 0),
+	ANIMCMD_FRAME(64, 0),
+	ANIMCMD_FRAME(72, 0),
+	ANIMCMD_FRAME(8, 0),
+	ANIMCMD_FRAME(40, 0),
+	ANIMCMD_FRAME(48, 0),
+	ANIMCMD_FRAME(80, 0),
+	ANIMCMD_FRAME(16, 0),
+	ANIMCMD_FRAME(24, 0),
+	ANIMCMD_FRAME(56, 0),
+	ANIMCMD_FRAME(88, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F24[] = {
+    gSpriteAnim_83F9EF0 +  0
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F28[] = {
+    gSpriteAnim_83F9EF0 +  1
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F2C[] = {
+    gSpriteAnim_83F9EF0 +  2
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F30[] = {
+    gSpriteAnim_83F9EF0 +  3
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F34[] = {
+    gSpriteAnim_83F9EF0 +  4
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F38[] = {
+    gSpriteAnim_83F9EF0 +  5
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F3C[] = {
+    gSpriteAnim_83F9EF0 +  6
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F40[] = {
+    gSpriteAnim_83F9EF0 +  7
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F44[] = {
+    gSpriteAnim_83F9EF0 +  8
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F48[] = {
+    gSpriteAnim_83F9EF0 +  9
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F4C[] = {
+    gSpriteAnim_83F9EF0 + 10
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9F50[] = {
+    gSpriteAnim_83F9EF0 + 11
+};
+
+const struct CompressedSpriteSheet gUnknown_083F9F54 = {
+    gRouletteHeadersTiles,
+    0x1600,
+    4
+};
+
+const struct CompressedSpriteSheet gUnknown_083F9F5C = {
+    RoulettePokeIconsTiles,
+    0x400,
+    5
+};
+
+const union AnimCmd gSpriteAnim_83F9F64[] = {
+	ANIMCMD_FRAME(0, 0),
+	ANIMCMD_FRAME(16, 0),
+	ANIMCMD_FRAME(32, 0),
+	ANIMCMD_FRAME(48, 0),
+	ANIMCMD_FRAME(64, 0),
+	ANIMCMD_FRAME(80, 0),
+	ANIMCMD_FRAME(96, 0),
+	ANIMCMD_FRAME(112, 0),
+	ANIMCMD_FRAME(128, 0),
+	ANIMCMD_FRAME(144, 0),
+	ANIMCMD_FRAME(160, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83F9F94[] = {
+	ANIMCMD_FRAME(0, 0),
+	ANIMCMD_FRAME(4, 0),
+	ANIMCMD_FRAME(8, 0),
+	ANIMCMD_FRAME(12, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FA8[] = {
+    gSpriteAnim_83F9F64 +  0
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FAC[] = {
+    gSpriteAnim_83F9F64 +  2
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FB0[] = {
+    gSpriteAnim_83F9F64 +  4
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FB4[] = {
+    gSpriteAnim_83F9F64 +  6
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FB8[] = {
+    gSpriteAnim_83F9F64 +  8
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FBC[] = {
+    gSpriteAnim_83F9F64 +  9
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FC0[] = {
+    gSpriteAnim_83F9F64 + 10
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FC4[] = {
+    gSpriteAnim_83F9F94 + 0
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FC8[] = {
+    gSpriteAnim_83F9F94 + 1
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FCC[] = {
+    gSpriteAnim_83F9F94 + 2
+};
+
+const union AnimCmd *const gSpriteAnimTable_83F9FD0[] = {
+    gSpriteAnim_83F9F94 + 3
+};
+
+const struct SpriteTemplate gSpriteTemplate_83F9FD4[] = {
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FA8, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FAC, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FB0, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FB4, NULL, gDummySpriteAffineAnimTable, sub_81184CC}
+};
+
+const struct SpriteTemplate gSpriteTemplate_83FA034[] = {
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FB8, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FBC, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {4, 8, &gOamData_83F9EB8, gSpriteAnimTable_83F9FC0, NULL, gDummySpriteAffineAnimTable, sub_81184CC}
+};
+
+const struct SpriteTemplate gSpriteTemplate_83FA07C[] ={
+    {5, 8, &gOamData_83F9EC0, gSpriteAnimTable_83F9FC4, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {5, 8, &gOamData_83F9EC0, gSpriteAnimTable_83F9FC8, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {5, 8, &gOamData_83F9EC0, gSpriteAnimTable_83F9FCC, NULL, gDummySpriteAffineAnimTable, sub_81184CC},
+    {5, 8, &gOamData_83F9EC0, gSpriteAnimTable_83F9FD0, NULL, gDummySpriteAffineAnimTable, sub_81184CC}
+};
+
+const struct SpriteTemplate gSpriteTemplate_83FA0DC[] = {
+    {0, 9, &gOamData_83F9EC8, gSpriteAnimTable_83F9F24, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 10, &gOamData_83F9EC8, gSpriteAnimTable_83F9F28, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 11, &gOamData_83F9EC8, gSpriteAnimTable_83F9F2C, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 12, &gOamData_83F9EC8, gSpriteAnimTable_83F9F30, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 9, &gOamData_83F9EC8, gSpriteAnimTable_83F9F34, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 10, &gOamData_83F9EC8, gSpriteAnimTable_83F9F38, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 11, &gOamData_83F9EC8, gSpriteAnimTable_83F9F3C, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 12, &gOamData_83F9EC8, gSpriteAnimTable_83F9F40, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 9, &gOamData_83F9EC8, gSpriteAnimTable_83F9F44, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 10, &gOamData_83F9EC8, gSpriteAnimTable_83F9F48, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 11, &gOamData_83F9EC8, gSpriteAnimTable_83F9F4C, NULL, gDummySpriteAffineAnimTable, sub_8117E98},
+    {0, 12, &gOamData_83F9EC8, gSpriteAnimTable_83F9F50, NULL, gDummySpriteAffineAnimTable, sub_8117E98}
+};
+
 extern const struct SpriteTemplate gSpriteTemplate_83FA40C;
-extern const struct SpriteSheet gUnknown_083F9EE8;
-extern const struct SpriteTemplate gSpriteTemplate_83FA0DC[];
 extern struct OamMatrix gOamMatrices[];
 extern const struct SpriteSheet gUnknown_083FA21C[];
 extern const struct SpriteTemplate gSpriteTemplate_83FA2B0;
@@ -844,13 +1083,13 @@ void debug_sub_812E698(struct Sprite *sprite)
     m4aSongNumStart(0x38);
     if (Random() & 1)
     {
-	    eRoulette->var8C = 0;
-	    eRoulette->var7F = (eRoulette->var7E + 1) % 12;
+        eRoulette->var8C = 0;
+        eRoulette->var7F = (eRoulette->var7E + 1) % 12;
     }
     else
     {
-	    eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
-	    eRoulette->var7F = eRoulette->var7E;
+        eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
+        eRoulette->var7F = eRoulette->var7E;
     }
     sprite->data[0] = 1;
     sprite->data[2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
@@ -1455,7 +1694,7 @@ void sub_8119780(struct Sprite *sprite)
 {
     if (sprite->data[1]++ >= sprite->data[3])
     {
-	sprite->pos1.x -= 2;
+    sprite->pos1.x -= 2;
         if (sprite->pos1.x < -16)
         {
             if (!eRoulette->var03_6)

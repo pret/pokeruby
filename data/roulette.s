@@ -3,326 +3,6 @@
 
 	.section .rodata
 
-// This might indicate a file boundary
-
-	.align 2
-gUnknown_083F90FC:: @ 83F90FC
-	.incbin "graphics/roulette/ball.4bpp.lz"
-
-	.align 2
-RouletteBallCounterTiles: @ 83F9244
-	.incbin "graphics/roulette/ball_counter.4bpp.lz"
-
-	.align 2
-gUnknown_083F92A8:: @ 83F92A8
-	.incbin "graphics/roulette/roulette_tilt.4bpp.lz"
-
-	.align 2
-RoulettePokeIconsTiles: @ 83F9698
-	.incbin "graphics/roulette/poke_icons.4bpp.lz"
-
-	.align 2
-RoulettePokeIcons2Tiles: @ 83F983C
-	.incbin "graphics/roulette/poke_icons2.4bpp.lz"
-
-	.align 2
-gUnknown_083F9D3C:: @ 83F9D3C
-	.incbin "graphics/roulette/shadow.4bpp.lz"
-
-	.align 2
-RouletteCursorTiles: @ 83F9DD4
-	.incbin "graphics/roulette/cursor.4bpp.lz"
-
-	.align 2
-gUnknown_083F9E30:: @ 83F9E30
-	obj_pal RouletteSpritePalette_01, 1
-	obj_pal RouletteSpritePalette_02, 2
-	obj_pal RouletteSpritePalette_03, 3
-	obj_pal RouletteSpritePalette_04, 4
-	obj_pal RouletteSpritePalette_05, 5
-	obj_pal RouletteSpritePalette_06, 6
-	obj_pal RouletteSpritePalette_07, 7
-	obj_pal RouletteSpritePalette_08, 8
-	obj_pal RouletteSpritePalette_09, 9
-	obj_pal RouletteSpritePalette_10, 10
-	obj_pal RouletteSpritePalette_11, 11
-	obj_pal RouletteSpritePalette_12, 12
-	obj_pal RouletteSpritePalette_13, 13
-	obj_pal RouletteSpritePalette_14, 14
-	obj_pal RouletteSpritePalette_15, 15
-	obj_pal RouletteSpritePalette_16, 16
-	null_obj_pal
-
-	.align 2
-gOamData_83F9EB8:: @ 83F9EB8
-	.2byte 0x0000
-	.2byte 0x8000
-	.2byte 0x0400
-
-	.align 2
-gOamData_83F9EC0:: @ 83F9EC0
-	.2byte 0x0000
-	.2byte 0x4000
-	.2byte 0x0400
-
-	.align 2
-gOamData_83F9EC8:: @ 83F9EC8
-	.2byte 0x833C
-	.2byte 0x8000
-	.2byte 0x0800
-
-	.align 2
-gSpriteAnim_83F9ED0:: @ 83F9ED0
-	obj_image_anim_frame 0, 0
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83F9ED8:: @ 83F9ED8
-	.4byte gSpriteAnim_83F9ED0
-
-	.align 2
-gSpriteAffineAnim_83F9EDC:: @ 83F9EDC
-	obj_rot_scal_anim_end
-
-	.align 2
-gSpriteAffineAnimTable_83F9EE4:: @ 83F9EE4
-	.4byte gSpriteAffineAnim_83F9EDC
-
-	.align 2
-gUnknown_083F9EE8:: @ 83F9EE8
-	obj_tiles RoulettePokeIcons2Tiles, 0xC00, 0
-
-	.align 2
-gSpriteAnim_83F9EF0:: @ 83F9EF0
-	obj_image_anim_frame 0, 0
-	obj_image_anim_frame 32, 0
-	obj_image_anim_frame 64, 0
-	obj_image_anim_frame 72, 0
-	obj_image_anim_frame 8, 0
-	obj_image_anim_frame 40, 0
-	obj_image_anim_frame 48, 0
-	obj_image_anim_frame 80, 0
-	obj_image_anim_frame 16, 0
-	obj_image_anim_frame 24, 0
-	obj_image_anim_frame 56, 0
-	obj_image_anim_frame 88, 0
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83F9F24:: @ 83F9F24
-	.4byte gSpriteAnim_83F9EF0
-
-	.align 2
-gSpriteAnimTable_83F9F28:: @ 83F9F28
-	.4byte gSpriteAnim_83F9EF0 + 0x4
-
-	.align 2
-gSpriteAnimTable_83F9F2C:: @ 83F9F2C
-	.4byte gSpriteAnim_83F9EF0 + 0x8
-
-	.align 2
-gSpriteAnimTable_83F9F30:: @ 83F9F30
-	.4byte gSpriteAnim_83F9EF0 + 0xC
-
-	.align 2
-gSpriteAnimTable_83F9F34:: @ 83F9F34
-	.4byte gSpriteAnim_83F9EF0 + 0x10
-
-	.align 2
-gSpriteAnimTable_83F9F38:: @ 83F9F38
-	.4byte gSpriteAnim_83F9EF0 + 0x14
-
-	.align 2
-gSpriteAnimTable_83F9F3C:: @ 83F9F3C
-	.4byte gSpriteAnim_83F9EF0 + 0x18
-
-	.align 2
-gSpriteAnimTable_83F9F40:: @ 83F9F40
-	.4byte gSpriteAnim_83F9EF0 + 0x1C
-
-	.align 2
-gSpriteAnimTable_83F9F44:: @ 83F9F44
-	.4byte gSpriteAnim_83F9EF0 + 0x20
-
-	.align 2
-gSpriteAnimTable_83F9F48:: @ 83F9F48
-	.4byte gSpriteAnim_83F9EF0 + 0x24
-
-	.align 2
-gSpriteAnimTable_83F9F4C:: @ 83F9F4C
-	.4byte gSpriteAnim_83F9EF0 + 0x28
-
-	.align 2
-gSpriteAnimTable_83F9F50:: @ 83F9F50
-	.4byte gSpriteAnim_83F9EF0 + 0x2C
-
-	.align 2
-gUnknown_083F9F54:: @ 83F9F54
-	obj_tiles gRouletteHeadersTiles, 0x1600, 4
-
-	.align 2
-gUnknown_083F9F5C:: @ 83F9F5C
-	obj_tiles RoulettePokeIconsTiles, 0x400, 5
-
-	.align 2
-gSpriteAnim_83F9F64:: @ 83F9F64
-	obj_image_anim_frame 0, 0
-	obj_image_anim_frame 16, 0
-	obj_image_anim_frame 32, 0
-	obj_image_anim_frame 48, 0
-	obj_image_anim_frame 64, 0
-	obj_image_anim_frame 80, 0
-	obj_image_anim_frame 96, 0
-	obj_image_anim_frame 112, 0
-	obj_image_anim_frame 128, 0
-	obj_image_anim_frame 144, 0
-	obj_image_anim_frame 160, 0
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83F9F94:: @ 83F9F94
-	obj_image_anim_frame 0, 0
-	obj_image_anim_frame 4, 0
-	obj_image_anim_frame 8, 0
-	obj_image_anim_frame 12, 0
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83F9FA8:: @ 83F9FA8
-	.4byte gSpriteAnim_83F9F64
-
-	.align 2
-gSpriteAnimTable_83F9FAC:: @ 83F9FAC
-	.4byte gSpriteAnim_83F9F64 + 0x8
-
-	.align 2
-gSpriteAnimTable_83F9FB0:: @ 83F9FB0
-	.4byte gSpriteAnim_83F9F64 + 0x10
-
-	.align 2
-gSpriteAnimTable_83F9FB4:: @ 83F9FB4
-	.4byte gSpriteAnim_83F9F64 + 0x18
-
-	.align 2
-gSpriteAnimTable_83F9FB8:: @ 83F9FB8
-	.4byte gSpriteAnim_83F9F64 + 0x20
-
-	.align 2
-gSpriteAnimTable_83F9FBC:: @ 83F9FBC
-	.4byte gSpriteAnim_83F9F64 + 0x24
-
-	.align 2
-gSpriteAnimTable_83F9FC0:: @ 83F9FC0
-	.4byte gSpriteAnim_83F9F64 + 0x28
-
-	.align 2
-gSpriteAnimTable_83F9FC4:: @ 83F9FC4
-	.4byte gSpriteAnim_83F9F94
-
-	.align 2
-gSpriteAnimTable_83F9FC8:: @ 83F9FC8
-	.4byte gSpriteAnim_83F9F94 + 0x4
-
-	.align 2
-gSpriteAnimTable_83F9FCC:: @ 83F9FCC
-	.4byte gSpriteAnim_83F9F94 + 0x8
-
-	.align 2
-gSpriteAnimTable_83F9FD0:: @ 83F9FD0
-	.4byte gSpriteAnim_83F9F94 + 0xC
-
-	.align 2
-gSpriteTemplate_83F9FD4:: @ 83F9FD4
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FA8, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83F9FEC:: @ 83F9FEC
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FAC, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA004:: @ 83FA004
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FB0, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA01C:: @ 83FA01C
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FB4, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA034:: @ 83FA034
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FB8, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA04C:: @ 83FA04C
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FBC, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA064:: @ 83FA064
-	spr_template 4, 8, gOamData_83F9EB8, gSpriteAnimTable_83F9FC0, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA07C:: @ 83FA07C
-	spr_template 5, 8, gOamData_83F9EC0, gSpriteAnimTable_83F9FC4, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA094:: @ 83FA094
-	spr_template 5, 8, gOamData_83F9EC0, gSpriteAnimTable_83F9FC8, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA0AC:: @ 83FA0AC
-	spr_template 5, 8, gOamData_83F9EC0, gSpriteAnimTable_83F9FCC, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA0C4:: @ 83FA0C4
-	spr_template 5, 8, gOamData_83F9EC0, gSpriteAnimTable_83F9FD0, NULL, gDummySpriteAffineAnimTable, sub_81184CC
-
-	.align 2
-gSpriteTemplate_83FA0DC:: @ 83FA0DC
-	spr_template 0, 9, gOamData_83F9EC8, gSpriteAnimTable_83F9F24, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA0F4:: @ 83FA0F4
-	spr_template 0, 10, gOamData_83F9EC8, gSpriteAnimTable_83F9F28, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA10C:: @ 83FA10C
-	spr_template 0, 11, gOamData_83F9EC8, gSpriteAnimTable_83F9F2C, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA124:: @ 83FA124
-	spr_template 0, 12, gOamData_83F9EC8, gSpriteAnimTable_83F9F30, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA13C:: @ 83FA13C
-	spr_template 0, 9, gOamData_83F9EC8, gSpriteAnimTable_83F9F34, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA154:: @ 83FA154
-	spr_template 0, 10, gOamData_83F9EC8, gSpriteAnimTable_83F9F38, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA16C:: @ 83FA16C
-	spr_template 0, 11, gOamData_83F9EC8, gSpriteAnimTable_83F9F3C, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA184:: @ 83FA184
-	spr_template 0, 12, gOamData_83F9EC8, gSpriteAnimTable_83F9F40, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA19C:: @ 83FA19C
-	spr_template 0, 9, gOamData_83F9EC8, gSpriteAnimTable_83F9F44, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA1B4:: @ 83FA1B4
-	spr_template 0, 10, gOamData_83F9EC8, gSpriteAnimTable_83F9F48, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA1CC:: @ 83FA1CC
-	spr_template 0, 11, gOamData_83F9EC8, gSpriteAnimTable_83F9F4C, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
-	.align 2
-gSpriteTemplate_83FA1E4:: @ 83FA1E4
-	spr_template 0, 12, gOamData_83F9EC8, gSpriteAnimTable_83F9F50, NULL, gDummySpriteAffineAnimTable, sub_8117E98
-
 	.align 2
 gOamData_83FA1FC:: @ 83FA1FC
 	.2byte 0x4000
@@ -358,16 +38,16 @@ gUnknown_083FA21C:: @ 83FA21C
 
 	.align 2
 gSpriteAnim_83FA24C:: @ 83FA24C
-	obj_image_anim_frame 0, 0
-	obj_image_anim_frame 2, 0
-	obj_image_anim_frame 4, 0
-	obj_image_anim_frame 6, 0
-	obj_image_anim_frame 8, 0
-	obj_image_anim_frame 10, 0
-	obj_image_anim_frame 12, 0
-	obj_image_anim_frame 14, 0
-	obj_image_anim_frame 16, 0
-	obj_image_anim_frame 18, 0
+	obj_image_anim_frame 0, 0  @ ANIMCMD_FRAME(0, 0),
+	obj_image_anim_frame 2, 0  @ ANIMCMD_FRAME(2, 0),
+	obj_image_anim_frame 4, 0  @ ANIMCMD_FRAME(4, 0),
+	obj_image_anim_frame 6, 0  @ ANIMCMD_FRAME(6, 0),
+	obj_image_anim_frame 8, 0  @ ANIMCMD_FRAME(8, 0),
+	obj_image_anim_frame 10, 0  @ ANIMCMD_FRAME(10, 0),
+	obj_image_anim_frame 12, 0  @ ANIMCMD_FRAME(12, 0),
+	obj_image_anim_frame 14, 0  @ ANIMCMD_FRAME(14, 0),
+	obj_image_anim_frame 16, 0  @ ANIMCMD_FRAME(16, 0),
+	obj_image_anim_frame 18, 0  @ ANIMCMD_FRAME(18, 0),
 
 	.align 2
 gSpriteAnimTable_83FA274:: @ 83FA274
@@ -375,12 +55,12 @@ gSpriteAnimTable_83FA274:: @ 83FA274
 
 	.align 2
 gSpriteAnim_83FA278:: @ 83FA278
-	obj_image_anim_frame 0, 0
-	obj_image_anim_frame 8, 0
-	obj_image_anim_frame 16, 0
-	obj_image_anim_frame 24, 0
-	obj_image_anim_frame 32, 0
-	obj_image_anim_end
+	obj_image_anim_frame 0, 0  @ ANIMCMD_FRAME(0, 0),
+	obj_image_anim_frame 8, 0  @ ANIMCMD_FRAME(8, 0),
+	obj_image_anim_frame 16, 0  @ ANIMCMD_FRAME(16, 0),
+	obj_image_anim_frame 24, 0  @ ANIMCMD_FRAME(24, 0),
+	obj_image_anim_frame 32, 0  @ ANIMCMD_FRAME(32, 0),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnimTable_83FA290:: @ 83FA290
@@ -388,12 +68,12 @@ gSpriteAnimTable_83FA290:: @ 83FA290
 
 	.align 2
 gSpriteAnim_83FA294:: @ 83FA294
-	obj_image_anim_frame 0, 0
-	obj_image_anim_frame 2, 0
-	obj_image_anim_frame 4, 0
-	obj_image_anim_frame 6, 0
-	obj_image_anim_frame 8, 0
-	obj_image_anim_end
+	obj_image_anim_frame 0, 0  @ ANIMCMD_FRAME(0, 0),
+	obj_image_anim_frame 2, 0  @ ANIMCMD_FRAME(2, 0),
+	obj_image_anim_frame 4, 0  @ ANIMCMD_FRAME(4, 0),
+	obj_image_anim_frame 6, 0  @ ANIMCMD_FRAME(6, 0),
+	obj_image_anim_frame 8, 0  @ ANIMCMD_FRAME(8, 0),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnimTable_83FA2AC:: @ 83FA2AC
@@ -434,65 +114,65 @@ gSpriteImageTable_83FA330:: @ 83FA330
 
 	.align 2
 gSpriteAnim_83FA350:: @ 83FA350
-	obj_image_anim_frame 0, 5
-	obj_image_anim_frame 1, 5
-	obj_image_anim_frame 2, 5
-	obj_image_anim_frame 1, 5
-	obj_image_anim_jump 0
+	obj_image_anim_frame 0, 5  @ ANIMCMD_FRAME(0, 5),
+	obj_image_anim_frame 1, 5  @ ANIMCMD_FRAME(1, 5),
+	obj_image_anim_frame 2, 5  @ ANIMCMD_FRAME(2, 5),
+	obj_image_anim_frame 1, 5  @ ANIMCMD_FRAME(1, 5),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnim_83FA364:: @ 83FA364
-	obj_image_anim_frame 0, 10
-	obj_image_anim_frame 1, 10
-	obj_image_anim_frame 2, 10
-	obj_image_anim_frame 1, 10
-	obj_image_anim_jump 0
+	obj_image_anim_frame 0, 10  @ ANIMCMD_FRAME(0, 10),
+	obj_image_anim_frame 1, 10  @ ANIMCMD_FRAME(1, 10),
+	obj_image_anim_frame 2, 10  @ ANIMCMD_FRAME(2, 10),
+	obj_image_anim_frame 1, 10  @ ANIMCMD_FRAME(1, 10),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnim_83FA378:: @ 83FA378
-	obj_image_anim_frame 0, 15
-	obj_image_anim_frame 1, 15
-	obj_image_anim_frame 2, 15
-	obj_image_anim_frame 1, 15
-	obj_image_anim_jump 0
+	obj_image_anim_frame 0, 15  @ ANIMCMD_FRAME(0, 15),
+	obj_image_anim_frame 1, 15  @ ANIMCMD_FRAME(1, 15),
+	obj_image_anim_frame 2, 15  @ ANIMCMD_FRAME(2, 15),
+	obj_image_anim_frame 1, 15  @ ANIMCMD_FRAME(1, 15),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnim_83FA38C:: @ 83FA38C
-	obj_image_anim_frame 1, 2
-	obj_image_anim_frame 2, 5
-	obj_image_anim_frame 1, 5
-	obj_image_anim_frame 3, 5
-	obj_image_anim_end
+	obj_image_anim_frame 1, 2  @ ANIMCMD_FRAME(1, 2),
+	obj_image_anim_frame 2, 5  @ ANIMCMD_FRAME(2, 5),
+	obj_image_anim_frame 1, 5  @ ANIMCMD_FRAME(1, 5),
+	obj_image_anim_frame 3, 5  @ ANIMCMD_FRAME(3, 5),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnim_83FA3A0:: @ 83FA3A0
-	obj_image_anim_frame 1, 2
-	obj_image_anim_frame 0, 4
-	obj_image_anim_frame 1, 4
-	obj_image_anim_frame 2, 4
-	obj_image_anim_frame 3, 4
-	obj_image_anim_end
+	obj_image_anim_frame 1, 2  @ ANIMCMD_FRAME(1, 2),
+	obj_image_anim_frame 0, 4  @ ANIMCMD_FRAME(0, 4),
+	obj_image_anim_frame 1, 4  @ ANIMCMD_FRAME(1, 4),
+	obj_image_anim_frame 2, 4  @ ANIMCMD_FRAME(2, 4),
+	obj_image_anim_frame 3, 4  @ ANIMCMD_FRAME(3, 4),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnim_83FA3B8:: @ 83FA3B8
-	obj_image_anim_frame 0, 2
-	obj_image_anim_frame 1, 5
-	obj_image_anim_frame 2, 5
-	obj_image_anim_frame 3, 5
-	obj_image_anim_end
+	obj_image_anim_frame 0, 2  @ ANIMCMD_FRAME(0, 2),
+	obj_image_anim_frame 1, 5  @ ANIMCMD_FRAME(1, 5),
+	obj_image_anim_frame 2, 5  @ ANIMCMD_FRAME(2, 5),
+	obj_image_anim_frame 3, 5  @ ANIMCMD_FRAME(3, 5),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnim_83FA3CC:: @ 83FA3CC
-	obj_image_anim_frame 3, 0
-	obj_image_anim_end
+	obj_image_anim_frame 3, 0  @ ANIMCMD_FRAME(3, 0),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnim_83FA3D4:: @ 83FA3D4
-	obj_image_anim_frame 2, 2
-	obj_image_anim_frame 1, 5
-	obj_image_anim_frame 0, 5
-	obj_image_anim_frame 3, 5
-	obj_image_anim_end
+	obj_image_anim_frame 2, 2  @ ANIMCMD_FRAME(2, 2),
+	obj_image_anim_frame 1, 5  @ ANIMCMD_FRAME(1, 5),
+	obj_image_anim_frame 0, 5  @ ANIMCMD_FRAME(0, 5),
+	obj_image_anim_frame 3, 5  @ ANIMCMD_FRAME(3, 5),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnimTable_83FA3E8:: @ 83FA3E8
@@ -548,47 +228,47 @@ gSpriteImageTable_83FA45C:: @ 83FA45C
 
 	.align 2
 gSpriteAnim_83FA494:: @ 83FA494
-	obj_image_anim_frame 0, 6
-	obj_image_anim_frame 1, 6
-	obj_image_anim_frame 2, 6
-	obj_image_anim_frame 3, 6
-	obj_image_anim_frame 2, 6
-	obj_image_anim_frame 4, 6
-	obj_image_anim_jump 2
+	obj_image_anim_frame 0, 6  @ ANIMCMD_FRAME(0, 6),
+	obj_image_anim_frame 1, 6  @ ANIMCMD_FRAME(1, 6),
+	obj_image_anim_frame 2, 6  @ ANIMCMD_FRAME(2, 6),
+	obj_image_anim_frame 3, 6  @ ANIMCMD_FRAME(3, 6),
+	obj_image_anim_frame 2, 6  @ ANIMCMD_FRAME(2, 6),
+	obj_image_anim_frame 4, 6  @ ANIMCMD_FRAME(4, 6),
+	obj_image_anim_jump 2  @ ANIMCMD_JUMP(2),
 
 	.align 2
 gSpriteAnim_83FA4B0:: @ 83FA4B0
-	obj_image_anim_frame 5, 10
-	obj_image_anim_end
+	obj_image_anim_frame 5, 10  @ ANIMCMD_FRAME(5, 10),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnim_83FA4B8:: @ 83FA4B8
-	obj_image_anim_frame 5, 10, OBJ_IMAGE_ANIM_H_FLIP
-	obj_image_anim_end
+	obj_image_anim_frame 5, 10, OBJ_IMAGE_ANIM_H_FLIP  @ ANIMCMD_FRAME(5, 10, OBJ_IMAGE_ANIM_H_FLIP),
+	obj_image_anim_end  @ ANIMCMD_END
 
 	.align 2
 gSpriteAnim_83FA4C0:: @ 83FA4C0
-	obj_image_anim_frame 5, 20
-	obj_image_anim_frame 6, 20
-	obj_image_anim_jump 0
+	obj_image_anim_frame 5, 20  @ ANIMCMD_FRAME(5, 20),
+	obj_image_anim_frame 6, 20  @ ANIMCMD_FRAME(6, 20),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnim_83FA4CC:: @ 83FA4CC
-	obj_image_anim_frame 5, 20, OBJ_IMAGE_ANIM_H_FLIP
-	obj_image_anim_frame 6, 20, OBJ_IMAGE_ANIM_H_FLIP
-	obj_image_anim_jump 0
+	obj_image_anim_frame 5, 20, OBJ_IMAGE_ANIM_H_FLIP  @ ANIMCMD_FRAME(5, 20, OBJ_IMAGE_ANIM_H_FLIP),
+	obj_image_anim_frame 6, 20, OBJ_IMAGE_ANIM_H_FLIP  @ ANIMCMD_FRAME(6, 20, OBJ_IMAGE_ANIM_H_FLIP),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnim_83FA4D8:: @ 83FA4D8
-	obj_image_anim_frame 5, 10
-	obj_image_anim_frame 6, 10
-	obj_image_anim_jump 0
+	obj_image_anim_frame 5, 10  @ ANIMCMD_FRAME(5, 10),
+	obj_image_anim_frame 6, 10  @ ANIMCMD_FRAME(6, 10),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnim_83FA4E4:: @ 83FA4E4
-	obj_image_anim_frame 5, 10, OBJ_IMAGE_ANIM_H_FLIP
-	obj_image_anim_frame 6, 10, OBJ_IMAGE_ANIM_H_FLIP
-	obj_image_anim_jump 0
+	obj_image_anim_frame 5, 10, OBJ_IMAGE_ANIM_H_FLIP  @ ANIMCMD_FRAME(5, 10, OBJ_IMAGE_ANIM_H_FLIP),
+	obj_image_anim_frame 6, 10, OBJ_IMAGE_ANIM_H_FLIP  @ ANIMCMD_FRAME(6, 10, OBJ_IMAGE_ANIM_H_FLIP),
+	obj_image_anim_jump 0  @ ANIMCMD_JUMP(0),
 
 	.align 2
 gSpriteAnimTable_83FA4F0:: @ 83FA4F0
