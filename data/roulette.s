@@ -3,46 +3,7 @@
 
 	.section .rodata
 
-// These objects are initialied in the functions in which they are used.
-
-	.align 1
-gUnknown_083F8EC4:: @ 83F8EC4
-	.2byte 0x2898
-	.2byte 0x1A6A
-	.2byte 0x2898
-
-gUnknown_083F8ECA:: @ 83F8ECA
-	.byte 0xFB, 0x05, 0xFF, 0x01
-
-	.align 1
-gUnknown_083F8ECE:: @ 83F8ECE
-	.2byte  0, 180
-	.2byte 90, 270
-
-	.align 2
-gUnknown_083F8ED8:: @ 83F8ED8
-	.4byte 0x10842
-	.4byte 0x21084
-	.4byte 0x42108
-	.4byte 0x84210
-
-	.align 2
-gUnknown_083F8EE8:: @ 83F8EE8
-	.4byte   0x3E0
-	.4byte  0x7C00
-	.4byte 0xF8000
-
-gUnknown_083F8EF4:: @ 83F8EF4
-	.byte 0, 3, 4, 6, 12
-
 // This might indicate a file boundary
-
-.if DEBUG
-@ Could also be after English-only graphics
-gUnknown_Debug_0842510D:: @ 0x842510D
-	.string "Set　COIN　and　Press　START\n"
-	.string "Aーp1　Bーm1　R:Lー×10$"
-.endif
 
 .ifdef ENGLISH
 	.align 2
