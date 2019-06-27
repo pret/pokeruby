@@ -512,7 +512,7 @@ extern const u8 gUnknown_081C411C;
 extern const u8 gUnknown_083F92A8[];
 extern const u8 gUnknown_083F90FC[];
 extern const u8 gUnknown_083F9D3C[];
-extern const struct SpritePalette gUnknown_083F9E30;
+extern const struct SpritePalette gUnknown_083F9E30[];
 extern const struct SpriteSheet gUnknown_083F9F54;
 extern const struct SpriteSheet gUnknown_083F9F5C;
 extern const struct SpriteTemplate gSpriteTemplate_83FA07C[];
@@ -1897,10 +1897,10 @@ void debug_sub_812CDE4(u8 taskId)
     }
 }
 
+const u8 gUnknown_Debug_0842510D[] = _("Set　COIN　and　Press　START\nAーp1　Bーm1　R:Lー×10");
+
 void debug_sub_812CFE8(u8 taskId)
 {
-    static const u8 gUnknown_Debug_0842510D[] = _("Set　COIN　and　Press　START\nAーp1　Bーm1　R:Lー×10");
-    
     gTasks[taskId].data[13] = gSaveBlock1.coins;
     if (Random() & 1)
         gSpecialVar_0x8004 |= 0x80;
@@ -1937,7 +1937,7 @@ void sub_8117838(u8 r0)
     if (!r0)
     {
         FreeAllSpritePalettes();
-        LoadSpritePalettes(&gUnknown_083F9E30);
+        LoadSpritePalettes(gUnknown_083F9E30);
         LZ77UnCompWram(gUnknown_083F92A8, ewram17000);
         LZ77UnCompWram(gUnknown_083F90FC, ewram17E00);
         LZ77UnCompWram(gUnknown_083F9D3C, ewram18000);
