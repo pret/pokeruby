@@ -483,7 +483,6 @@ const struct YesNoFuncTable gUnknown_083F8EBC = {
 
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
-extern u8 gUnknown_083F8EC4;
 extern const u8 gUnknown_08E8096C[];
 extern const u8 gRouletteWheelTiles[];
 extern const u8 gRouletteCenter_Gfx[];
@@ -600,10 +599,7 @@ void sub_8115238(void)
     u8 i;
     u32 temp;
     const struct StructgUnknown_083F8DF4 *s0;
-    u16 arr[0x3]; // the third is never used ?
-
-    memcpy(arr, &gUnknown_083F8EC4, 0x6);
-    // u16 arr[] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)};
+    u16 arr[] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)};
     memset(eRoulette, 0x0, 0x17C);
     eRoulette->var04_0 = (gSpecialVar_0x8004 & 0x1);
     if (gSpecialVar_0x8004 & 0x80)
@@ -869,10 +865,8 @@ u8 sub_8115A94(s16 *r0, u8 r1)
 {
     s8 temp1 = 0;
     s8 temp = 0;
-    s8 arr[0x4];
+    s8 arr[4] = {-5, 5, -1, 1};
     s8 t;
-    memcpy(&arr, gUnknown_083F8ECA, 0x4);
-    // char arr[] = {-5, 5, -1, 1};
     t = (u8)*r0;
     switch (r1)
     {
@@ -1123,9 +1117,7 @@ void sub_8116100(u8 taskid)
     u16 g = 0;
     u16 rand;
     u16 randmod;
-    u16 angles[0x4]; // angles in 90 degree steps
-    memcpy(angles, &gUnknown_083F8ECE, 0x8);
-    // u16 angles[] = {0, 180, 90, 270};
+    u16 angles[] = {0, 180, 90, 270};
     rand = Random();
     randmod = rand % 0x64;
     eRoulette->var7C = gTasks[taskid].data[0x6];
@@ -1516,12 +1508,8 @@ void sub_8116CF8(void)
 
 u8 sub_8116D54(u8 taskid, u8 r1)
 {
-    u32 t0[0x4];
-    u32 t1[0x3];
-    memcpy(t0, gUnknown_083F8ED8, 0x10);
-    memcpy(t1, gUnknown_083F8EE8, 0xC);
-    // u32 t0[] = {67650, 135300, 270600, 541200};
-    // u32 t1[] = {0x3e0, 0x7c00, 0xf8000};
+    u32 t0[] = {67650, 135300, 270600, 541200};
+    u32 t1[] = {0x3e0, 0x7c00, 0xf8000};
     if (r1 > 0xB)
     {
         return 0x0;
@@ -1701,9 +1689,7 @@ void sub_8117158(u8 r0)
 
 u8 sub_8117380(u8 r0)
 {
-    u8 var0[5];
-    memcpy(var0, gUnknown_083F8EF4, 5);
-    // u8 var0[] = {0, 3, 4, 6, 12};
+    u8 var0[] = {0, 3, 4, 6, 12};
     if (r0 > 19)
         r0 = 0;
     switch (gUnknown_083F8C00[r0].var01_0)
@@ -1911,10 +1897,10 @@ void debug_sub_812CDE4(u8 taskId)
     }
 }
 
-extern const u8 gUnknown_Debug_0842510D[];
-
 void debug_sub_812CFE8(u8 taskId)
 {
+    static const u8 gUnknown_Debug_0842510D[] = _("Set　COIN　and　Press　START\nAーp1　Bーm1　R:Lー×10");
+    
     gTasks[taskId].data[13] = gSaveBlock1.coins;
     if (Random() & 1)
         gSpecialVar_0x8004 |= 0x80;
