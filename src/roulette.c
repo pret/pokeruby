@@ -1663,7 +1663,7 @@ void debug_sub_812CDE4(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
         MenuPrint_RightAligned(gStringVar4, 9, 1);
     }
-    else if (gMain.newKeys & 0x100)
+    else if (gMain.newKeys & R_BUTTON)
     {
         gTasks[taskId].data[13] += 10;
         if (gTasks[taskId].data[13] > 9999)
@@ -1672,7 +1672,7 @@ void debug_sub_812CDE4(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
         MenuPrint_RightAligned(gStringVar4, 9, 1);
     }
-    else if (gMain.newKeys & 0x200)
+    else if (gMain.newKeys & L_BUTTON)
     {
         gTasks[taskId].data[13] -= 10;
         if (gTasks[taskId].data[13] < 0)
@@ -1681,7 +1681,7 @@ void debug_sub_812CDE4(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
         MenuPrint_RightAligned(gStringVar4, 9, 1);
     }
-    else if (gMain.newKeys & 8)
+    else if (gMain.newKeys & START_BUTTON)
     {
         gSaveBlock1.coins = gTasks[taskId].data[13];
         gTasks[taskId].func = Task_Roulette_0;
@@ -1690,7 +1690,7 @@ void debug_sub_812CDE4(u8 taskId)
         MenuPrint_RightAligned(gStringVar4, 9, 1);
         unk_2039560 = 0;
     }
-    else if (gMain.newKeys & 4)
+    else if (gMain.newKeys & SELECT_BUTTON)
     {
         gSaveBlock1.coins = gTasks[taskId].data[13];
         gTasks[taskId].func = Task_Roulette_0;
