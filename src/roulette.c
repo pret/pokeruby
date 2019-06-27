@@ -319,10 +319,171 @@ const struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[] = {
     }
 };
 
+const struct UnkStruct1 gUnknown_083F8E34[] = {
+	{
+        .var00 = 0x8000,
+        .var02 = 0x0005,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x000A,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x0015,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x0055,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x005A,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x0065,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x0075,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x007A,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x0085,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x0095,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x009A,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x8000,
+        .var02 = 0x00A5,
+        .var04 = 0x01,
+        .var05 = 0x01,
+        .var06 = 0xFF,
+        .var07_0 = 8,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x77D6,
+        .var02 = 0x0028,
+        .var04 = 0x02,
+        .var05 = 0x0A,
+        .var06 = 0xFF,
+        .var07_0 = 14,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }
+};
+
+const struct UnkStruct1 gUnknown_083F8E9C[] = {
+    {
+        .var00 = 0x53ff,
+        .var02 = 0x0101,
+        .var04 = 0x05,
+        .var05 = 0x1e,
+        .var06 = 0xff,
+        .var07_0 = 14,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x7ffb,
+        .var02 = 0x0106,
+        .var04 = 0x05,
+        .var05 = 0x1e,
+        .var06 = 0xff,
+        .var07_0 = 14,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }, {
+        .var00 = 0x7f7f,
+        .var02 = 0x010b,
+        .var04 = 0x05,
+        .var05 = 0x1e,
+        .var06 = 0xff,
+        .var07_0 = 14,
+        .var07_5 = 2,
+        .var07_7 = FALSE
+    }
+};
+
+const struct YesNoFuncTable gUnknown_083F8EB4 = {
+    sub_811755C,
+    sub_81175C0
+};
+
+const struct YesNoFuncTable gUnknown_083F8EBC = {
+    sub_811577C,
+    sub_81157AC
+};
+
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
 extern u8 gUnknown_083F8EC4;
-extern u8 gUnknown_083F8E34[];
 extern const u8 gUnknown_08E8096C[];
 extern const u8 gRouletteWheelTiles[];
 extern const u8 gRouletteCenter_Gfx[];
@@ -333,7 +494,6 @@ extern const u8 gRouletteMultiplierTiles[];
 extern u16 gPlttBufferFaded[];
 extern u16 gPlttBufferUnfaded[];
 extern const u8 gUnknown_081C4157[];
-extern const struct YesNoFuncTable gUnknown_083F8EBC;
 extern const u8 gUnknown_081C41E3;
 extern const u16 gUnknown_083F8ECE;
 const extern u8 gUnknown_083F8ECA[];
@@ -346,9 +506,7 @@ const extern u8 gUnknown_081C4231;
 const extern u8 gUnknown_081C41D2;
 extern const u32 gUnknown_083F8ED8[];
 extern const u32 gUnknown_083F8EE8[];
-extern const struct UnkStruct1 gUnknown_083F8E9C[];
 extern const u8 gUnknown_083F8EF4[];
-extern const struct YesNoFuncTable gUnknown_083F8EB4;
 extern const u8 gUnknown_081C40DF;
 extern const u8 gUnknown_081C4139;
 extern const u8 gUnknown_081C411C;
@@ -461,7 +619,7 @@ void sub_8115238(void)
         gPlttBufferUnfaded[0] = gPlttBufferUnfaded[0x51] = gPlttBufferFaded[0] = gPlttBufferFaded[0x51] = arr[1];
     sub_8124918((&eRoulette->varB8));
     for (i = 0; i < 0xD; i++)
-        sub_812492C((&eRoulette->varB8), i, (struct UnkStruct1 *)&gUnknown_083F8E34[i * 8]);
+        sub_812492C((&eRoulette->varB8), i, &gUnknown_083F8E34[i]);
     for (i = 0; i < 0x6; i++)
     {
         switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2))
