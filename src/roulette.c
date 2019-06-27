@@ -402,11 +402,11 @@ void sub_8115238(void)
     u32 temp;
     const struct StructgUnknown_083F8DF4 *s0;
     u16 arr[] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)};
-    memset(eRoulette, 0, 0x17c);
+    memset(eRoulette, 0, sizeof(*eRoulette));
     eRoulette->var04_0 = (gSpecialVar_0x8004 & 1);
-    if (gSpecialVar_0x8004 & 128)
+    if (gSpecialVar_0x8004 & 0x80)
         eRoulette->var04_7 = 1;
-    s0 = &gUnknown_083F8DF4[0];
+    s0 = gUnknown_083F8DF4;
     eRoulette->var22   = s0[eRoulette->var04_0].var03;
     eRoulette->var23   = s0[eRoulette->var04_0].var04;
     eRoulette->var19 = temp = gUnknown_083F8DF0[eRoulette->var04_0 + eRoulette->var04_7 * 2];
@@ -453,8 +453,8 @@ void sub_8115384(void)
         REG_BG1CNT   = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(4) | BGCNT_TXT512x256;
         REG_BLDCNT   = BLDCNT_EFFECT_NONE | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BD;
         REG_BLDALPHA = BLDALPHA_BLEND(10, 6);
-        LZ77UnCompVram(&gUnknown_08E8096C, (void *)VRAM);
-        LZ77UnCompVram(&gRouletteWheelTiles, (void *)(VRAM + 0x4000));
+        LZ77UnCompVram(gUnknown_08E8096C, (void *)VRAM);
+        LZ77UnCompVram(gRouletteWheelTiles, (void *)(VRAM + 0x4000));
         gMain.state++;
         break;
     case 1:
@@ -466,14 +466,14 @@ void sub_8115384(void)
     case 2:
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
         InitMenuWindow(&gMenuTextWindowTemplate);
-        LoadPalette(&gUnknown_083F86BC, 0, 0x1c0);
+        LoadPalette(gUnknown_083F86BC, 0, 0x1c0);
         gMain.state++;
         break;
     case 3:
         sub_8115238();
         ClearBGTilemapBuffers();
-        LZ77UnCompWram(&gUnknown_083F88BC, (void *)(ewram18800));
-        LZ77UnCompVram(&gUnknown_083F8A60, (void *)(VRAM + 0x3000));
+        LZ77UnCompWram(gUnknown_083F88BC, (void *)(ewram18800));
+        LZ77UnCompVram(gUnknown_083F8A60, (void *)(VRAM + 0x3000));
         gMain.state++;
         break;
     case 4:
@@ -494,7 +494,7 @@ void sub_8115384(void)
         sub_811829C(0);
         sub_8117158(0);
         Menu_DrawStdWindowFrame(0, 14, 29, 19);
-        Menu_PrintText(&gUnknown_081C4157[0], 1, 15);
+        Menu_PrintText(gUnknown_081C4157, 1, 15);
         gSpriteCoordOffsetX = -60;
         gSpriteCoordOffsetY = 0;
         gMain.state++;
@@ -505,22 +505,22 @@ void sub_8115384(void)
         break;
     case 7:
         temp_IME      = REG_IME;
-        REG_IME       = 0;      //disable interrupts
-        REG_IE       |= 1;      //enable VBlank interrupt
-        REG_IME       = temp_IME; //reenable interrupts
+        REG_IME       = 0;
+        REG_IE       |= INTR_FLAG_VBLANK;
+        REG_IME       = temp_IME;
         REG_DISPSTAT |= 8;
-        SetVBlankCallback(&sub_8115124);
+        SetVBlankCallback(sub_8115124);
         BeginHardwarePaletteFade(255, 0, 16, 0 , 1);
-        taskid = eRoulette->varA4 = CreateTask(&sub_81156BC, 0);
+        taskid = eRoulette->varA4 = CreateTask(sub_81156BC, 0);
         gTasks[taskid].data[6] = 6;
         gTasks[taskid].data[13] = gSaveBlock1.coins;
-        eRoulette->varA5 = CreateTask(&sub_8115634, 1);
-        SetMainCallback2(&sub_81150FC);
+        eRoulette->varA5 = CreateTask(sub_8115634, 1);
+        SetMainCallback2(sub_81150FC);
         break;
     }
 }
 
-void sub_8115634(u8 unused)
+void sub_8115634(u8 taskId)
 {
     s16 sin;
     s16 cos;
@@ -530,7 +530,7 @@ void sub_8115634(u8 unused)
     {
         eRoulette->var21 = 0;
         if ((eRoulette->var24 -= eRoulette->var22) < 0)
-            eRoulette->var24 = 0x168 - eRoulette->var22;
+            eRoulette->var24 = 360 - eRoulette->var22;
     }
     sin = Sin2(eRoulette->var24);
     cos = Cos2(eRoulette->var24);
@@ -563,7 +563,7 @@ void sub_81156BC(u8 taskid)
         sub_81185E8();
         sub_8117158(0);
         sub_81182F8(6);
-        sub_8116C34(taskid, &sub_81159BC, 0xffff, 3);
+        sub_8116C34(taskid, sub_81159BC, 0xffff, 3);
     }
 }
 
@@ -579,7 +579,7 @@ void sub_8115734(u8 taskid)
 void sub_811577C(u8 taskid)
 {
     Menu_EraseWindowRect(20, 8, 26, 13);
-    gTasks[taskid].func = &sub_81159BC;
+    gTasks[taskid].func = sub_81159BC;
 }
 
 void sub_81157AC(u8 taskid)
@@ -635,14 +635,14 @@ void sub_811597C(u8 taskid)
     sub_81157D0(gTasks[taskid].data[4]);
     eRoulette->var23 = 2;
     eRoulette->var21 = 0;
-    gTasks[taskid].func = &sub_8115E14;
+    gTasks[taskid].func = sub_8115E14;
 }
 
 void sub_81159BC(u8 taskid)
 {
     s16 i;
 
-    if (eRoulette->var08 & 32)
+    if (eRoulette->var08 & 0x20)
     {
         for (i = 11; (i < 14); i++)
             if ((eRoulette->var08 & gUnknown_083F8C00[i].var08) == 0)
@@ -660,7 +660,7 @@ void sub_81159BC(u8 taskid)
     sub_811829C(gTasks[taskid].data[4]);
     sub_8116EF8(gTasks[taskid].data[4]);
     gTasks[taskid].data[1] = 0;
-    gTasks[taskid].func = &sub_811597C;
+    gTasks[taskid].func = sub_811597C;
 }
 
 u8 sub_8115A94(s16 *r0, u8 r1)
@@ -762,7 +762,7 @@ void sub_8115D58(u8 r0)
         eRoulette->var23 = 0;
     eRoulette->var21 = 0;
     gTasks[r0].data[1] = 32;
-    gTasks[r0].func = &sub_8115ECC;
+    gTasks[r0].func = sub_8115ECC;
 }
 
 void sub_8115DA0(u8 taskid)
@@ -773,7 +773,7 @@ void sub_8115DA0(u8 taskid)
     if ((gTasks[taskid].data[13] -= eRoulette->var19) < 0)
         gTasks[taskid].data[13] = 0;
     sub_81180F4(gTasks[taskid].data[13]);
-    gTasks[taskid].func = &sub_8115D58;
+    gTasks[taskid].func = sub_8115D58;
 }
 
 void sub_8115E14(u8 taskid)
@@ -802,7 +802,7 @@ void sub_8115E14(u8 taskid)
         else
         {
             m4aSongNumStart(SE_REGI);
-            gTasks[taskid].func = &sub_8115DA0;
+            gTasks[taskid].func = sub_8115DA0;
         }
     }
 }
@@ -820,7 +820,7 @@ void sub_8115ECC(u8 taskid)
     {
         sub_8117AA8(1, 255);
         sub_8117C60(1, 255);
-        gTasks[taskid].func = &sub_8116100;
+        gTasks[taskid].func = sub_8116100;
         gTasks[taskid].data[1] = 0;
     }
 }
@@ -840,18 +840,18 @@ u8 sub_8115F58(u16 r0, u16 r1)
                 return 1;
             else
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var02 / 2;
             }
         }
         else if (!(r1 & 3))
         {
-            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
             return p[eRoulette->var04_0].var02 / 2;
         }
         else
         {
-            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
             return p[eRoulette->var04_0].var02;
         }
         break;
@@ -862,7 +862,7 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (r0 < 6 || (r1 & 1))
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var02 / 2;
             }
             else
@@ -872,12 +872,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
         }
         else if ((r1 & 1) && !(r0 < 7))
         {
-            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
             return p[eRoulette->var04_0].var02 / 4;
         }
         else
         {
-            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
             return p[eRoulette->var04_0].var02 / 2;
         }
         break;
@@ -893,7 +893,7 @@ u8 sub_8115F58(u16 r0, u16 r1)
             }
             else
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var02 / 2;
             }
         }
@@ -901,12 +901,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (!(r0 < 13))
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var02 / 2;
             }
             else
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var02;
             }
         }
@@ -914,18 +914,18 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (!(r0 < 13))
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var02;
             }
             else
             {
-                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
                 return p[eRoulette->var04_0].var01;
             }
         }
         else
         {
-            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = gUnknown_083F8DF4;
             return p[eRoulette->var04_0].var01 * 2;
         }
     }
@@ -984,7 +984,7 @@ void sub_8116308(u8 taskid)
     gTasks[taskid].data[8]++;
     sub_81182F8(6 - gTasks[taskid].data[6]);
     m4aSongNumStart(SE_TAMAKORO);
-    gTasks[taskid].func = &sub_811637C;
+    gTasks[taskid].func = sub_811637C;
 }
 
 void sub_811637C(u8 taskid)
@@ -1020,7 +1020,7 @@ void sub_811637C(u8 taskid)
                 sub_8117AA8(0, (u8)gTasks[taskid].data[12]);
                 sub_8117C60(0, (u8)gTasks[taskid].data[6] - 1);
                 gTasks[taskid].data[1] = 32;
-                gTasks[taskid].func = &sub_8116474;
+                gTasks[taskid].func = sub_8116474;
             }
         }
     }
@@ -1033,7 +1033,7 @@ void sub_8116474(u8 taskid)
         if (gTasks[taskid].data[1] > 2)
             gSpriteCoordOffsetX -= 2;
         if ((eRoulette->var26 -= 4) == 104)
-            gSprites[eRoulette->var3C[25]].callback = &sub_81184CC;
+            gSprites[eRoulette->var3C[25]].callback = sub_81184CC;
     }
     else
     {
@@ -1042,7 +1042,7 @@ void sub_8116474(u8 taskid)
             gTasks[taskid].data[1] = 121;
         else
             gTasks[taskid].data[1] = 61;
-        gTasks[taskid].func = &sub_8116514;
+        gTasks[taskid].func = sub_8116514;
     }
 }
 
@@ -1064,7 +1064,7 @@ void sub_8116514(u8 taskid)
     }
     else
     {
-        sub_8116C34(taskid, &sub_8116638, 30, 0);
+        sub_8116C34(taskid, sub_8116638, 30, 0);
     }
 }
 
@@ -1079,7 +1079,7 @@ void sub_811659C(u8 taskid)
             u32 wins = GetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS);
             if (wins < ++gTasks[taskid].data[11])
                 SetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS, gTasks[taskid].data[11]);
-            sub_8116C34(taskid, &sub_811677C, 0xffff, 3);
+            sub_8116C34(taskid, sub_811677C, 0xffff, 3);
         }
         break;
     case 0:
@@ -1087,7 +1087,7 @@ void sub_811659C(u8 taskid)
         if (!IsSEPlaying())
         {
             gTasks[taskid].data[11] = FALSE;
-            sub_8116C34(taskid, &sub_81167F4, 0xffff, 3);
+            sub_8116C34(taskid, sub_81167F4, 0xffff, 3);
         }
     }
 }
@@ -1118,7 +1118,7 @@ void sub_8116638(u8 taskid)
         Menu_PrintText(&gUnknown_081C41AE, 1, 15);
     }
     gTasks[taskid].data[1] = 0;
-    gTasks[taskid].func = &sub_811659C;
+    gTasks[taskid].func = sub_811659C;
 }
 
 void sub_81166E8(u8 taskid)
@@ -1148,7 +1148,7 @@ void sub_81166E8(u8 taskid)
         gTasks[taskid].data[7]++;
     }
     if (gTasks[taskid].data[1] == 0)
-        sub_8116C34(taskid, &sub_81167F4, 0xffff, 3);
+        sub_8116C34(taskid, sub_81167F4, 0xffff, 3);
 }
 
 void sub_811677C(u8 taskid)
@@ -1159,7 +1159,7 @@ void sub_811677C(u8 taskid)
     Menu_PrintText((u8 *)&gStringVar4, 1, 15);
     gTasks[taskid].data[1] = (eRoulette->var19 * gTasks[taskid].data[2]);
     gTasks[taskid].data[7] = 0;
-    gTasks[taskid].func = &sub_81166E8;
+    gTasks[taskid].func = sub_81166E8;
 }
 
 void sub_81167F4(u8 taskid)
@@ -1169,7 +1169,7 @@ void sub_81167F4(u8 taskid)
     eRoulette->varB8.var04[14].var00_7 = 0;
     eRoulette->varB8.var04[13].var00_7 = 0;
     gSprites[eRoulette->var3C[7 + gUnknown_083F8C00[gTasks[taskid].data[12]].var00]].invisible = TRUE;
-    gTasks[taskid].func = &sub_8116880;
+    gTasks[taskid].func = sub_8116880;
 }
 
 void sub_8116880(u8 taskid)
@@ -1197,18 +1197,18 @@ void sub_8116880(u8 taskid)
         {
             Menu_DrawStdWindowFrame(0, 14, 29, 19);
             Menu_PrintText(&gUnknown_081C4231, 1, 15);
-            sub_8116C34(taskid, &sub_8115734, 0xffff, 3);
+            sub_8116C34(taskid, sub_8115734, 0xffff, 3);
         }
         else
         {
-            gTasks[taskid].func = &sub_8115734;
+            gTasks[taskid].func = sub_8115734;
         }
     }
     else
     {
         Menu_DrawStdWindowFrame(0, 14, 29, 19);
         Menu_PrintText(&gUnknown_081C41D2, 1, 15);
-        sub_8116C34(taskid, &sub_81157AC, 60, 3);
+        sub_8116C34(taskid, sub_81157AC, 60, 3);
     }
 }
 
@@ -1227,11 +1227,11 @@ void dp01t_12_3_battle_menu(u8 taskid)
     {
         Menu_DrawStdWindowFrame(0, 14, 29, 19);
         Menu_PrintText(&gUnknown_081C4231, 1, 15);
-        sub_8116C34(taskid, &sub_8115734, 0xffff, 3);
+        sub_8116C34(taskid, sub_8115734, 0xffff, 3);
     }
     else
     {
-        gTasks[taskid].func = &sub_8115734;
+        gTasks[taskid].func = sub_8115734;
     }
 }
 
@@ -1245,7 +1245,7 @@ void sub_8116AB0(u8 taskid)
     else
         gSpecialVar_0x8004 = FALSE;
     BeginHardwarePaletteFade(255, 0, 0, 16, 0);
-    gTasks[taskid].func = &sub_8116B40;
+    gTasks[taskid].func = sub_8116B40;
 }
 
 void sub_8116B40(u8 taskId) // end roulette ?
@@ -1263,7 +1263,7 @@ void sub_8116B40(u8 taskId) // end roulette ?
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
         REG_BLDY = 0;
-        gFieldCallback = &sub_8080990;
+        gFieldCallback = sub_8080990;
         SetMainCallback2(&CB2_ReturnToField);
         DestroyTask(taskId);
 #if DEBUG
@@ -1298,7 +1298,7 @@ void sub_8116C34(u8 taskid, TaskFunc r1, u16 r2, u16 r3)
         eRoulette->varAA = 0xffff;
     else
         eRoulette->varAA = r3;
-    gTasks[taskid].func = &sub_8116BC0;
+    gTasks[taskid].func = sub_8116BC0;
 }
 
 void sub_8116CAC(u8 taskid)
@@ -1577,7 +1577,7 @@ void sub_8117528(u8 taskid)
     if (!gPaletteFade.active)
     {
         SetVBlankCallback(NULL);
-        SetMainCallback2(&sub_8115384);
+        SetMainCallback2(sub_8115384);
         DestroyTask(taskid);
     }
 }
@@ -1589,7 +1589,7 @@ void sub_811755C(u8 taskid)
     BeginNormalPaletteFade(0xffffffff, 0, 0, 16, RGB(0, 0, 0));
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
     UpdatePaletteFade();
-    gTasks[taskid].func = &sub_8117528;
+    gTasks[taskid].func = sub_8117528;
 }
 
 void sub_81175C0(u8 taskid)
@@ -1620,7 +1620,7 @@ void sub_8117630(u8 taskid)
     StringExpandPlaceholders(gStringVar4, &gUnknown_081C40DF);
     Menu_DrawStdWindowFrame(0, 14, 29, 19);
     Menu_PrintText(gStringVar4, 1, 15);
-    gTasks[taskid].func = &sub_81174F8;
+    gTasks[taskid].func = sub_81174F8;
 }
 
 void Task_Roulette_0(u8 taskid)
@@ -1634,18 +1634,18 @@ void Task_Roulette_0(u8 taskid)
     ConvertIntToDecimalStringN(gStringVar1, temp, 2, 1);
     if (gTasks[taskid].data[13] >= temp)
     {
-        if ((gSpecialVar_0x8004 & 128) && (gSpecialVar_0x8004 & 1))
+        if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
         {
             Menu_DrawStdWindowFrame(0, 14, 29, 19);
             Menu_PrintText(&gUnknown_081C4139, 1, 15);
-            sub_8116C34(taskid , &sub_8117630, 0xffff, 3);
+            sub_8116C34(taskid , sub_8117630, 0xffff, 3);
         }
         else
         {
             StringExpandPlaceholders(gStringVar4, &gUnknown_081C40DF);
             Menu_DrawStdWindowFrame(0, 14, 29, 19);
             Menu_PrintText(gStringVar4, 1, 15);
-            gTasks[taskid].func = &sub_81174F8;
+            gTasks[taskid].func = sub_81174F8;
         }
     }
     else
@@ -1653,7 +1653,7 @@ void Task_Roulette_0(u8 taskid)
         StringExpandPlaceholders(gStringVar4, &gUnknown_081C411C);
         Menu_DrawStdWindowFrame(0, 14, 29, 19);
         Menu_PrintText(gStringVar4, 1, 15);
-        gTasks[taskid].func = &sub_81175DC;
+        gTasks[taskid].func = sub_81175DC;
         gTasks[taskid].data[13] = 0;
         gTasks[taskid].data[0] = 0;
     }
