@@ -1410,7 +1410,7 @@ void debug_sub_812E698(struct Sprite *sprite)
     }
     else
     {
-        eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
+        eRoulette->var8C = ({float f = gUnknown_083F8DF4[eRoulette->var04_0].var1C; f * 2;});
         eRoulette->var7F = eRoulette->var7E;
     }
     sprite->data[0] = 1;

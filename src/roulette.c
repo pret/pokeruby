@@ -33,8 +33,6 @@ asm(".include \"constants/gba_constants.inc\"");
 void *gUnknown_Debug_03005FB8;
 #endif
 
-#define static
-
 void sub_81150FC(void);
 void sub_8115124(void);
 void sub_8115238(void);
@@ -1701,10 +1699,9 @@ void debug_sub_812CDE4(u8 taskId)
     }
 }
 
-const u8 gUnknown_Debug_0842510D[] = _("Set　COIN　and　Press　START\nAーp1　Bーm1　R:Lー×10");
-
 void debug_sub_812CFE8(u8 taskId)
 {
+    static const u8 gUnknown_Debug_0842510D[] = _("Set　COIN　and　Press　START\nAーp1　Bーm1　R:Lー×10");
     gTasks[taskId].data[13] = gSaveBlock1.coins;
     if (Random() & 1)
         gSpecialVar_0x8004 |= 0x80;
