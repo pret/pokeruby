@@ -59,6 +59,10 @@ void sub_8119BCC(struct Sprite *);
 void sub_8119D08(struct Sprite *);
 void sub_8119D80(struct Sprite *);
 
+#if DEBUG
+extern u8 unk_2039560;
+#endif //DEBUG
+
 #ifdef ENGLISH
 ALIGNED(4) const u16 RouletteSpritePalette_01[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
 const u16 RouletteSpritePalette_02[] = INCBIN_U16("graphics/roulette/ball.gbapal");
