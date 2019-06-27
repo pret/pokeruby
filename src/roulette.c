@@ -128,7 +128,6 @@ struct StructgUnknown_083F8D90
     u8 var00;
     u8 var01;
     u8 var02;
-    u8 var03;
     u32 var04;
 };
 
@@ -266,11 +265,63 @@ const struct StructgUnknown_083F8C00 gUnknown_083F8C00[] = {
 	{0x0B, 0xC, 0x4, 0x03, 0x1A, 0x10, 0x09, 0x09, 0x00, 0x00080000, 0x00080000, 0x2800, 0x0000},
 };
 
+const struct StructgUnknown_083F8D90 gUnknown_083F8D90[] = {
+    { 0,  1,  6, 0x00000040},
+    { 1,  3, 12, 0x00001000},
+    { 2,  5, 18, 0x00040000},
+    { 3,  7,  9, 0x00000200},
+    { 4,  9, 11, 0x00000800},
+    { 5, 11, 17, 0x00020000},
+    { 6, 13,  8, 0x00000100},
+    { 7, 15, 14, 0x00004000},
+    { 8, 17, 16, 0x00010000},
+    { 9, 19,  7, 0x00000080},
+    {10, 21, 13, 0x00002000},
+    {11, 23, 19, 0x00080000}
+};
+
+const u8 gUnknown_083F8DF0[] = {
+    1, 3,
+    1, 6,
+};
+
+const struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[] = {
+    {
+        .var00 = 1,
+        .var01 = 60,
+        .var02 = 30,
+        .var03 = 1,
+        .var04 = 1,
+        .var08 = 45,
+        .var0A = 30,
+        .var0C = 1,
+        .var10 = 75,
+        .var12 = 27,
+        .var14 = 24,
+        .var18 = 10,
+        .var1A = 360,
+        .var1C = -0.5f
+    }, {
+        .var00 = 3,
+        .var01 = 30,
+        .var02 = 15,
+        .var03 = 1,
+        .var04 = 0,
+        .var08 = 75,
+        .var0A = 60,
+        .var0C = 2,
+        .var10 = 0,
+        .var12 = 54,
+        .var14 = 48,
+        .var18 = 10,
+        .var1A = 270,
+        .var1C = -1.0f
+    }
+};
+
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
-extern struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
 extern u8 gUnknown_083F8EC4;
-extern u8 gUnknown_083F8DF0[];
 extern u8 gUnknown_083F8E34[];
 extern const u8 gUnknown_08E8096C[];
 extern const u8 gRouletteWheelTiles[];
@@ -293,7 +344,6 @@ const extern u8 gUnknown_081C41BD;
 const extern u8 gUnknown_081C41F1;
 const extern u8 gUnknown_081C4231;
 const extern u8 gUnknown_081C41D2;
-extern const struct StructgUnknown_083F8D90 gUnknown_083F8D90[];
 extern const u32 gUnknown_083F8ED8[];
 extern const u32 gUnknown_083F8EE8[];
 extern const struct UnkStruct1 gUnknown_083F8E9C[];
@@ -391,7 +441,7 @@ void sub_8115238(void)
 {
     u8 i;
     u32 temp;
-    struct StructgUnknown_083F8DF4 *s0;
+    const struct StructgUnknown_083F8DF4 *s0;
     u16 arr[0x3]; // the third is never used ?
 
     memcpy(arr, &gUnknown_083F8EC4, 0x6);
@@ -816,18 +866,18 @@ u8 sub_8115F58(u16 r0, u16 r1)
                 return 0x1;
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
         }
         else if (!(r1 & 0x3))
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02 / 2;
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02;
         }
         break;
@@ -838,7 +888,7 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (r0 < 0x6 || (r1 & 0x1))
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
             else
@@ -848,12 +898,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
         }
         else if ((r1 & 0x1) && !(r0 < 0x7))
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02 / 4;
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var02 / 2;
         }
         break;
@@ -869,7 +919,7 @@ u8 sub_8115F58(u16 r0, u16 r1)
             }
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
         }
@@ -877,12 +927,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (!(r0 < 0xD))
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02 / 2;
             }
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02;
             }
         }
@@ -890,18 +940,18 @@ u8 sub_8115F58(u16 r0, u16 r1)
         {
             if (!(r0 < 0xD))
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var02;
             }
             else
             {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+                const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
                 return p[eRoulette->var04_0].var01;
             }
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
+            const struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
             return p[eRoulette->var04_0].var01 * 2;
         }
     }
@@ -2278,7 +2328,7 @@ void sub_811889C(struct Sprite *sprite)
 void sub_81189A8(struct Sprite *sprite)
 {
     float f0, f1, f2;
-    struct StructgUnknown_083F8DF4 *p;
+    const struct StructgUnknown_083F8DF4 *p;
     sub_8118724(sprite);
     switch (sprite->data[0x3])
     {
@@ -2503,7 +2553,10 @@ void sub_8118DE4(struct Sprite *sprite)
         }
         else
         {
-            eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2; // couldn't replicate loads
+            eRoulette->var8C = ({
+                float f = gUnknown_083F8DF4[eRoulette->var04_0].var1C;
+                f * 2;
+            }); // couldn't replicate loads
             t = (eRoulette->var7E + 0xB) % 0xC;
             eRoulette->var7F = eRoulette->var7E;
         }
@@ -2546,7 +2599,7 @@ void sub_8118F8C(struct Sprite *sprite)
         sub_81186B8(sprite);
         if (!sub_81186E8(sprite))
         {
-            struct StructgUnknown_083F8DF4 *p;
+            const struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
             p = &gUnknown_083F8DF4[0];
             eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
@@ -2649,7 +2702,7 @@ void sub_81193D4(struct Sprite *sprite)
     u8 i = 0;
     s16 t;
     s16 s[0x2][0x2];
-    struct StructgUnknown_083F8DF4 *p;
+    const struct StructgUnknown_083F8DF4 *p;
     memcpy(s, &gUnknown_083FA616, 0x8);
     t = sprite->data[0x7] - 0x2;
     eRoulette->var3C[0x37] = CreateSprite(&gSpriteTemplate_83FA524, s[sprite->data[0x0]][0x0], s[sprite->data[0x0]][0x1], 0x32);
