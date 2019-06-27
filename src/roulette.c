@@ -1,5 +1,6 @@
 #include "global.h"
 #include "random.h"
+#include "graphics.h"
 #include "ewram.h"
 #include "field_fadetransition.h"
 #include "constants/game_stat.h"
@@ -330,13 +331,6 @@ const struct YesNoFuncTable gUnknown_083F8EBC = {
 
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
-extern const u8 gUnknown_08E8096C[];
-extern const u8 gRouletteWheelTiles[];
-extern const u8 gRouletteCenter_Gfx[];
-extern const u8 gRouletteHeadersTiles[];
-extern const u8 gRouletteCreditTiles[];
-extern const u8 gRouletteNumbersTiles[];
-extern const u8 gRouletteMultiplierTiles[];
 extern u16 gPlttBufferFaded[];
 extern u16 gPlttBufferUnfaded[];
 extern const u8 gUnknown_081C4157[];
