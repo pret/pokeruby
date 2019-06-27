@@ -718,7 +718,7 @@ u8 sub_8117890(const struct SpriteTemplate *r0, u8 r1, u16 *r2)
     gSprites[spriteid].affineAnimPaused   = TRUE;
     temp = *r2;
     *r2 += 30;
-    if (*r2 >- 360)
+    if (*r2 >= 360)
         *r2 = temp - 330;
     return spriteid;
 }
@@ -805,7 +805,7 @@ void sub_8117BBC(void)
         eRoulette->var3C[49 + i] = CreateSprite(&gSpriteTemplate_83FA40C, 116, 20, 10);
         gSprites[eRoulette->var3C[49 + i]].invisible    = TRUE;
         gSprites[eRoulette->var3C[49 + i]].data[0]      = 1;
-        gSprites[eRoulette->var3C[49 + i]].callback     = &sub_81184CC;
+        gSprites[eRoulette->var3C[49 + i]].callback     = sub_81184CC;
         gSprites[eRoulette->var3C[49 + i]].oam.priority = 1;
         StartSpriteAnim(&gSprites[eRoulette->var3C[49 + i]], 8);
     }
@@ -1063,7 +1063,7 @@ void sub_81184D8(void)
 void sub_8118554(struct Sprite *sprite)
 {
     u32 t = sprite->oam.matrixNum;
-    struct OamMatrix *m = &gOamMatrices[0];
+    struct OamMatrix *m = gOamMatrices;
     m[t].d = eRoulette->var2C.a;
     m[t].a = eRoulette->var2C.a;
     m[t].b = eRoulette->var2C.b;
@@ -1106,7 +1106,7 @@ s16 sub_811866C(struct Sprite *sprite)
     if (eRoulette->var24 > sprite->data[3])
     {
         sprite->data[6] = 360 - eRoulette->var24 + sprite->data[3];
-        if (sprite->data[6] > 359)
+        if (sprite->data[6] >= 360)
             sprite->data[6] -= 360;
     }
     else
@@ -1170,7 +1170,7 @@ void sub_8118834(struct Sprite *sprite)
 {
     s16 sin, cos;
     sprite->data[3] = eRoulette->var24 + sprite->data[6];
-    if (sprite->data[3] > 359)
+    if (sprite->data[3] >= 360)
         sprite->data[3] -= 360;
     sin = Sin2(sprite->data[3]);
     cos = Cos2(sprite->data[3]);
@@ -1200,7 +1200,7 @@ void sub_811889C(struct Sprite *sprite)
                 sprite->data[4] = 30;
                 sub_811866C(sprite);
                 sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
-                sprite->callback = &sub_8118834;
+                sprite->callback = sub_8118834;
                 m4aSongNumStartOrChange(SE_HASHI);
                 eRoulette->var9C = eRoulette->var98 = 0.0f;
                 eRoulette->var8C = -1.0f;
@@ -1217,7 +1217,7 @@ void sub_811889C(struct Sprite *sprite)
                 sprite->data[4] = 30;
                 sub_811866C(sprite);
                 sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
-                sprite->callback = &sub_8118834;
+                sprite->callback = sub_8118834;
                 m4aSongNumStartOrChange(SE_HASHI);
                 eRoulette->var9C = eRoulette->var98 = 0.0f;
                 eRoulette->var8C = -1.0f;
@@ -1237,7 +1237,7 @@ void sub_81189A8(struct Sprite *sprite)
         if (sprite->data[0] != 1)
         {
             f0 = ((float)sprite->data[7]);
-            p = &gUnknown_083F8DF4[0];
+            p = gUnknown_083F8DF4;
             f1 = (f0 * ((float)(s32)p[eRoulette->var04_0].var01) + (float)((s32)p[eRoulette->var04_0].var02 - 1));
             f2 = (f0 / ((float)(s32)p[eRoulette->var04_0].var0C));
         }
@@ -1250,7 +1250,7 @@ void sub_81189A8(struct Sprite *sprite)
         if (sprite->data[0] != 0)
         {
             f0 = ((float)sprite->data[7]);
-            p = &gUnknown_083F8DF4[0];
+            p = gUnknown_083F8DF4;
             f1 = (f0 * ((float)(s32)p[eRoulette->var04_0].var01) + (float)((s32)p[eRoulette->var04_0].var02 - 1));
             f2 = -(f0 / ((float)(s32)p[eRoulette->var04_0].var0C));
         }
@@ -1269,7 +1269,7 @@ void sub_81189A8(struct Sprite *sprite)
     sprite->animNum       = 0;
     sprite->animBeginning = TRUE;
     sprite->animEnded     = FALSE;
-    sprite->callback      = &sub_811889C;
+    sprite->callback      = sub_811889C;
     sprite->data[2]     = 0;
 }
 
@@ -1286,7 +1286,7 @@ void sub_8118B30(struct Sprite *sprite)
         sprite->data[4] = 30;
         sub_811866C(sprite);
         sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
-        sprite->callback  = &sub_8118834;
+        sprite->callback  = sub_8118834;
         m4aSongNumStartOrChange(SE_HASHI);
         eRoulette->var03_6 = TRUE;
     }
@@ -1322,7 +1322,7 @@ void sub_8118BD8(struct Sprite *sprite)
             sprite->animBeginning = TRUE;
             sprite->animEnded     = FALSE;
             sprite->data[2]     = 0;
-            sprite->callback      = &sub_8118B30;
+            sprite->callback      = sub_8118B30;
             m4aSongNumStart(SE_NAGERU);
         }
     }
@@ -1336,14 +1336,14 @@ void sub_8118CAC(struct Sprite *sprite)
     case 90:
         if (sprite->data[0] != 1)
         {
-            sprite->callback  = &sub_8118BD8;
+            sprite->callback  = sub_8118BD8;
             sprite->data[2] = 0;
         }
         break;
     case 270:
         if (sprite->data[0] != 0)
         {
-            sprite->callback  = &sub_8118BD8;
+            sprite->callback  = sub_8118BD8;
             sprite->data[2] = 0;
         }
         break;
@@ -1358,11 +1358,11 @@ void sub_8118CEC(struct Sprite *sprite)
     default:
     case 0:
         sub_8119224(sprite);
-        sprite->callback = &sub_81189A8;
+        sprite->callback = sub_81189A8;
         break;
     case 1:
         sub_81193D4(sprite);
-        sprite->callback = &sub_8118CAC;
+        sprite->callback = sub_8118CAC;
         break;
     }
 }
@@ -1383,7 +1383,7 @@ void sub_8118D2C(struct Sprite *sprite)
             sprite->data[4] = 30;
             sub_811866C(sprite);
             sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
-            sprite->callback  = &sub_8118834;
+            sprite->callback  = sub_8118834;
             m4aSongNumStartOrChange(SE_HASHI);
         }
         else
@@ -1415,7 +1415,7 @@ void debug_sub_812E698(struct Sprite *sprite)
     }
     sprite->data[0] = 1;
     sprite->data[2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
-    eRoulette->var98 = 0.085;
+    eRoulette->var98 = 0.085f;
     sprite->callback = sub_8118D2C;
     sprite->data[1] = 5;
 }
@@ -1436,7 +1436,7 @@ void sub_8118DE4(struct Sprite *sprite)
         sprite->data[4] = 30;
         sub_811866C(sprite);
         sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
-        sprite->callback  = &sub_8118834;
+        sprite->callback  = sub_8118834;
         m4aSongNumStartOrChange(SE_HASHI);
     }
     else
@@ -1502,7 +1502,7 @@ void sub_8118F8C(struct Sprite *sprite)
         {
             const struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
-            p = &gUnknown_083F8DF4[0];
+            p = gUnknown_083F8DF4;
             eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 1));
             sprite->data[1] = 4;
@@ -1539,7 +1539,7 @@ void sub_8119088(struct Sprite *sprite)
         sprite->animBeginning = TRUE;
         sprite->animEnded     = FALSE;
         sprite->data[1]     = 3;
-        sprite->callback      = &sub_8118F8C;
+        sprite->callback      = sub_8118F8C;
     }
 }
 
@@ -1555,7 +1555,7 @@ void sub_8119134(struct Sprite *sprite)
         sprite->animBeginning = TRUE;
         sprite->animEnded     = FALSE;
         sprite->data[1]     = 2;
-        sprite->callback      = &sub_8119088;
+        sprite->callback      = sub_8119088;
     }
 }
 
@@ -1565,7 +1565,7 @@ void sub_81191F4(struct Sprite *sprite)
     sprite->data[2] = 0;
     sub_8118724(sprite);
     sprite->invisible = FALSE;
-    sprite->callback  = &sub_8119134;
+    sprite->callback  = sub_8119134;
 }
 
 void sub_8119224(struct Sprite *sprite)
@@ -1580,7 +1580,7 @@ void sub_8119224(struct Sprite *sprite)
     t = sprite->data[7] - 2;
     p = eRoulette;
     p->var3C[55] = CreateSprite(&gSpriteTemplate_83FA50C, 36, -12, 50);
-    p->var3C[56] = CreateSprite(&gSpriteTemplate_83FA5C0[0], s[sprite->data[0]][0], s[sprite->data[0]][1], 59);
+    p->var3C[56] = CreateSprite(gSpriteTemplate_83FA5C0, s[sprite->data[0]][0], s[sprite->data[0]][1], 59);
     p->var3C[57] = CreateSprite(&gSpriteTemplate_83FA5C0[1], 36, 140, 51);
     gSprites[eRoulette->var3C[57]].oam.objMode = 1;
     for (i = 0; i < 3; i++)
@@ -1615,7 +1615,7 @@ void sub_81193D4(struct Sprite *sprite)
     eRoulette->var3C[56] = CreateSprite(&gSpriteTemplate_83FA5F0, s[sprite->data[0]][0], s[sprite->data[0]][1], 51);
     gSprites[eRoulette->var3C[56]].affineAnimPaused = TRUE;
     gSprites[eRoulette->var3C[56]].animPaused       = TRUE;
-    sprite->data[7] = (t * (p = &gUnknown_083F8DF4[0])[eRoulette->var04_0].var01) + (p[eRoulette->var04_0].var10 + 45);
+    sprite->data[7] = (t * (p = gUnknown_083F8DF4)[eRoulette->var04_0].var01) + (p[eRoulette->var04_0].var10 + 45);
     for (; i < 2; i++)
     {
         gSprites[eRoulette->var3C[55 + i]].data[4] = eRoulette->var3C[55];
@@ -1698,7 +1698,7 @@ void sub_811952C(struct Sprite *sprite)
     }
     if ((eRoulette->var03_0 + 1) & eRoulette->var02)
     {
-        if (p && (t & 255) < 192)
+        if (p && (t & 0xFF) < 192)
         {
             sprite->data[7] = p;
         }
@@ -2086,11 +2086,11 @@ void sub_8119898(struct Sprite *sprite)
     if (sprite->data[1] > 60)
     {
         sprite->data[1] = 0;
-        sprite->callback = &sub_8119780;
-        gSprites[sprite->data[6]].callback  = &sub_8119780;
+        sprite->callback = sub_8119780;
+        gSprites[sprite->data[6]].callback  = sub_8119780;
         gSprites[sprite->data[6]].data[1] = -2;
         gSprites[sprite->data[5]].invisible = FALSE;
-        gSprites[sprite->data[5]].callback  = &sub_81197D8;
+        gSprites[sprite->data[5]].callback  = sub_81197D8;
         m4aSongNumStart(SE_W070);
     }
 }
@@ -2140,7 +2140,7 @@ void sub_8119964(struct Sprite *sprite)
         }
         if (t == z)
         {
-            gSprites[sprite->data[4]].callback  = &sub_8119898;
+            gSprites[sprite->data[4]].callback  = sub_8119898;
             gSprites[sprite->data[4]].invisible = FALSE;
             sprite->callback  = &SpriteCallbackDummy;
             sprite->data[7] = 0;
@@ -2197,7 +2197,7 @@ void sub_8119B24(struct Sprite *sprite)
         {
             m4aSongNumStart(SE_RU_HYUU);
             StartSpriteAnim(sprite, eRoulette->var38->data[0] + 4);
-            sprite->callback = &sub_8119AAC;
+            sprite->callback = sub_8119AAC;
             gSprites[sprite->data[6]].affineAnimPaused = FALSE;
         }
     }
@@ -2242,7 +2242,7 @@ void sub_8119BCC(struct Sprite *sprite)
                 PlayCry1(SPECIES_TAILLOW, -63);
             StartSpriteAnim(sprite, eRoulette->var38->data[0] + 2);
             sprite->data[1] = 45;
-            sprite->callback = &sub_8119B24;
+            sprite->callback = sub_8119B24;
         }
     }
 }
@@ -2257,7 +2257,7 @@ void sub_8119D08(struct Sprite *sprite)
     }
     else
     {
-        sprite->callback = &sub_8119A90;
+        sprite->callback = sub_8119A90;
     }
 }
 
@@ -2287,7 +2287,7 @@ void sub_8119D80(struct Sprite *sprite)
             return;
         }
     }
-    gSprites[sprite->data[6]].callback = &sub_8119D08;
-    gSprites[sprite->data[4]].callback = &sub_8119BCC;
+    gSprites[sprite->data[6]].callback = sub_8119D08;
+    gSprites[sprite->data[4]].callback = sub_8119BCC;
     m4aSongNumStart(SE_RU_HYUU);
 }
