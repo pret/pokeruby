@@ -1148,9 +1148,8 @@ void sub_8118724(struct Sprite *sprite)
     eRoulette->var88 += eRoulette->var8C;
     if (eRoulette->var88 >= 360)
         eRoulette->var88 -= 360.0f;
-    else
-        if (eRoulette->var88 < 0.0f)
-            eRoulette->var88 += 360.0f;
+    else if (eRoulette->var88 < 0.0f)
+        eRoulette->var88 += 360.0f;
     sprite->data[3] = eRoulette->var88;
     eRoulette->var98 += eRoulette->var9C;
     eRoulette->var94 += eRoulette->var98;
@@ -1270,7 +1269,7 @@ void sub_81189A8(struct Sprite *sprite)
     sprite->animBeginning = TRUE;
     sprite->animEnded     = FALSE;
     sprite->callback      = sub_811889C;
-    sprite->data[2]     = 0;
+    sprite->data[2]       = 0;
 }
 
 void sub_8118B30(struct Sprite *sprite)
@@ -1321,7 +1320,7 @@ void sub_8118BD8(struct Sprite *sprite)
             sprite->animNum       = 1;
             sprite->animBeginning = TRUE;
             sprite->animEnded     = FALSE;
-            sprite->data[2]     = 0;
+            sprite->data[2]       = 0;
             sprite->callback      = sub_8118B30;
             m4aSongNumStart(SE_NAGERU);
         }
