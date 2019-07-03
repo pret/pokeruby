@@ -251,6 +251,7 @@ extern u16 gReservedSpriteTileCount;
 extern u8 gOamLimit;
 
 extern struct Sprite gSprites[];
+extern struct OamMatrix gOamMatrices[];
 
 void ResetSpriteData(void);
 void AnimateSprites(void);
