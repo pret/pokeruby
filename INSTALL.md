@@ -125,3 +125,19 @@ If you have 8 cores, run:
 If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
 
 	make NODEP=1
+
+# Using present-day toolchains
+
+`agbcc` is based on GCC 2.95.1, which is primitive by today's standards and compiles inoptimal instructions. You can overcome this by swapping in a more modern compiler. Makefile rules have been set up for you to do this, all you need to do is run
+
+    make MODERN=1
+
+or
+
+    make modern
+
+You can build Sapphire and other Ruby revisions by appending `_modern` to the target name:
+
+    make sapphire_rev1_modern
+
+Bear in mind that the resulting ROM will not match vanilla Ruby and may exhibit undefined, buggy behavior. We are trying to resolve this as much as possible, so please report anything you find.

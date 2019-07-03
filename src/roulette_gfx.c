@@ -1502,7 +1502,7 @@ void sub_8118F8C(struct Sprite *sprite)
             const struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
             p = gUnknown_083F8DF4;
-            eRoulette->var8C -= (FLOAT_U8(p[eRoulette->var04_0].var03))
+            eRoulette->var8C -= ((float)(p[eRoulette->var04_0].var03))
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 1));
             sprite->data[1] = 4;
 #if DEBUG
@@ -1532,8 +1532,8 @@ void sub_8119088(struct Sprite *sprite)
     sub_8118724(sprite);
     if (!(eRoulette->var94 > 40.f))
     {
-        eRoulette->var98 = - (        4.0f / FLOAT_U16((u16)eRoulette->var86));
-        eRoulette->var90 = - (eRoulette->var8C / FLOAT_U16((u16)eRoulette->var86));
+        eRoulette->var98 = - (        4.0f / (float)((u16)eRoulette->var86));
+        eRoulette->var90 = - (eRoulette->var8C / (float)((u16)eRoulette->var86));
         sprite->animNum       = 2;
         sprite->animBeginning = TRUE;
         sprite->animEnded     = FALSE;
@@ -1548,8 +1548,8 @@ void sub_8119134(struct Sprite *sprite)
     if (!(eRoulette->var94 > 60.0f))
     {
         m4aSongNumStartOrChange(SE_TAMAKORO_E);
-        eRoulette->var98 = - (                20.0f / FLOAT_U16((u16)eRoulette->var84));
-        eRoulette->var90 =   ((1.0f - eRoulette->var8C) / FLOAT_U16((u16)eRoulette->var84));
+        eRoulette->var98 = - (                20.0f / (float)((u16)eRoulette->var84));
+        eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)((u16)eRoulette->var84));
         sprite->animNum       = 1;
         sprite->animBeginning = TRUE;
         sprite->animEnded     = FALSE;
