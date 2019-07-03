@@ -141,3 +141,5 @@ You can build Sapphire and other Ruby revisions by appending `_modern` to the ta
     make sapphire_rev1_modern
 
 Bear in mind that the resulting ROM will not match vanilla Ruby and may exhibit undefined, buggy behavior. We are trying to resolve this as much as possible, so please report anything you find.
+
+If you don't want to use devkitARM, you can install your own ARM toolchain consisting of GNU binutils, GCC, and newlib targeting arm-none-eabi. You can pass the root directory of your toolchain to the variable `TOOLCHAIN` when running `make` for any target.  **If you opt to do this, the assumption is that you know what you are doing already!**

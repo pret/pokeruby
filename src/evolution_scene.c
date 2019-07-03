@@ -113,8 +113,8 @@ static void CB2_BeginEvolutionScene(void)
 }
 
 #define tState              data[0]
-#define tMonPtrHI           data[1]
-#define tMonPtrLO           data[2]
+#define tMonPtrLo           data[1]
+#define tMonPtrHi           data[2]
 #define tPreEvoSpecies      data[3]
 #define tPostEvoSpecies     data[4]
 #define tCanStop            data[5] // in first fast data[5] only checks that
@@ -146,9 +146,9 @@ static void Task_BeginEvolutionScene(u8 taskID)
             u8 partyID;
 
 #if MODERN
-            mon = (struct Pokemon*)((u16)gTasks[taskID].tMonPtrHI | (gTasks[taskID].tMonPtrLO << 0x10));
+            mon = (struct Pokemon*)((u16)gTasks[taskID].tMonPtrLo | (gTasks[taskID].tMonPtrHi << 0x10));
 #else
-            mon = (struct Pokemon*)(gTasks[taskID].tMonPtrHI | (gTasks[taskID].tMonPtrLO << 0x10));
+            mon = (struct Pokemon*)(gTasks[taskID].tMonPtrLo | (gTasks[taskID].tMonPtrHi << 0x10));
 #endif
             speciesToEvolve = gTasks[taskID].tPostEvoSpecies;
             canStopEvo = gTasks[taskID].tCanStop;
@@ -165,8 +165,8 @@ void BeginEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStop
 {
     u8 taskID = CreateTask(Task_BeginEvolutionScene, 0);
     gTasks[taskID].tState = 0;
-    gTasks[taskID].tMonPtrHI = (u32)(mon);
-    gTasks[taskID].tMonPtrLO = (u32)(mon) >> 0x10;
+    gTasks[taskID].tMonPtrLo = (u32)(mon);
+    gTasks[taskID].tMonPtrHi = (u32)(mon) >> 0x10;
     gTasks[taskID].tPostEvoSpecies = speciesToEvolve;
     gTasks[taskID].tCanStop = canStopEvo;
     gTasks[taskID].tPartyID = partyID;
@@ -262,8 +262,8 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tState = 0;
     gTasks[ID].tPreEvoSpecies = currSpecies;
     gTasks[ID].tPostEvoSpecies = speciesToEvolve;
-    gTasks[ID].tMonPtrHI = (u32)(mon);
-    gTasks[ID].tMonPtrLO = (u32)(mon) >> 0x10;
+    gTasks[ID].tMonPtrLo = (u32)(mon);
+    gTasks[ID].tMonPtrHi = (u32)(mon) >> 0x10;
     gTasks[ID].tCanStop = canStopEvo;
     gTasks[ID].tLearnsFirstMove = TRUE;
     gTasks[ID].tEvoWasStopped = FALSE;
@@ -463,8 +463,8 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     gTasks[ID].tState = 0;
     gTasks[ID].tPreEvoSpecies = currSpecies;
     gTasks[ID].tPostEvoSpecies = speciesToEvolve;
-    gTasks[ID].tMonPtrHI = (u32)(mon);
-    gTasks[ID].tMonPtrLO = (u32)(mon) >> 0x10;
+    gTasks[ID].tMonPtrLo = (u32)(mon);
+    gTasks[ID].tMonPtrHi = (u32)(mon) >> 0x10;
     gTasks[ID].tLearnsFirstMove = TRUE;
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
@@ -529,7 +529,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 static void Task_EvolutionScene(u8 taskID)
 {
     u32 var;
-    struct Pokemon* mon = (struct Pokemon*)(gTasks[taskID].tMonPtrHI | (gTasks[taskID].tMonPtrLO << 0x10));
+    struct Pokemon* mon = (struct Pokemon*)(gTasks[taskID].tMonPtrLo | (gTasks[taskID].tMonPtrHi << 0x10));
 
     // check if B Button was held, so the evolution gets stopped
     if (gMain.heldKeys == B_BUTTON && gTasks[taskID].tState == 8 && gTasks[taskID].tBits & TASK_BIT_CAN_STOP)
@@ -885,7 +885,7 @@ static void Task_EvolutionScene(u8 taskID)
 static void Task_TradeEvolutionScene(u8 taskID)
 {
     u32 var;
-    struct Pokemon* mon = (struct Pokemon*)(gTasks[taskID].tMonPtrHI | (gTasks[taskID].tMonPtrLO << 0x10));
+    struct Pokemon* mon = (struct Pokemon*)(gTasks[taskID].tMonPtrLo | (gTasks[taskID].tMonPtrHi << 0x10));
 
     switch (gTasks[taskID].tState)
     {
