@@ -1,4 +1,12 @@
+TOOLCHAIN ?= $(DEVKITARM)
+ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
 include $(DEVKITARM)/base_tools
+else
+PREFIX := $(TOOLCHAIN)/bin/arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+CC := $(PREFIX)gcc
+AS := $(PREFIX)as
+endif
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -11,7 +19,6 @@ endif
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
-AS        := $(PREFIX)as
 ifeq ($(MODERN),0)
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 else
@@ -19,7 +26,6 @@ CC1       := $(shell $(PREFIX)gcc --print-prog-name=cc1)
 endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
-OBJCOPY   := $(PREFIX)objcopy
 SHA1SUM   := sha1sum -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
@@ -56,9 +62,16 @@ ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
 SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
 
-LIBC   := tools/agbcc/lib/libc.a
-LIBGCC := tools/agbcc/lib/libgcc.a
-LDFLAGS := -L ../../tools/agbcc/lib -lgcc -lc
+GCC_VER = $(shell $(CC) -dumpversion)
+
+ifeq ($(MODERN),0)
+LIBDIRS := ../../tools/agbcc/lib
+else
+LIBDIRS := \
+	$(TOOLCHAIN)/lib/gcc/arm-none-eabi/$(GCC_VER)/thumb \
+	$(TOOLCHAIN)/arm-none-eabi/lib/thumb
+endif
+LDFLAGS := $(LIBDIRS:%=-L %) -lgcc -lc
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
@@ -149,6 +162,7 @@ tools:
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) $(MODERN_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
 
 $(ROM): %.gba: %.elf
