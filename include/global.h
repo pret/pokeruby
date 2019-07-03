@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 

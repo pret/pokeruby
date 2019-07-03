@@ -22,7 +22,7 @@ SHELL     := /bin/bash -o pipefail
 ifeq ($(MODERN),0)
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 else
-CC1       := $(shell $(PREFIX)gcc --print-prog-name=cc1)
+CC1       := $(shell $(PREFIX)gcc --print-prog-name=cc1) -quiet
 endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
@@ -38,13 +38,17 @@ GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym MODERN=$(MODERN)
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
+CPPFLAGS := -iquote include -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
 ifeq ($(MODERN),0)
+CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 else
-CC1FLAGS := -mthumb -mthumb-interwork -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -O2 -fno-toplevel-reorder -Wno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
+CC1FLAGS := -mthumb -mthumb-interwork -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -O2 -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 endif
 
+ifneq (,$(DINFO))
+CC1FLAGS += -g
+endif
 
 #### Files ####
 
@@ -93,7 +97,7 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 # Available targets
-.PHONY: all clean tidy tools $(ALL_BUILDS)
+.PHONY: all clean mostlyclean tidy tools $(ALL_BUILDS)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -131,13 +135,15 @@ ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
 
-clean: tidy
+mostlyclean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 	rm -f data/layouts/layouts.inc data/layouts/layouts_table.inc
 	rm -f data/maps/connections.inc data/maps/events.inc data/maps/groups.inc data/maps/headers.inc
 	find data/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
+
+clean: mostlyclean
 	$(MAKE) clean -C tools/gbagfx
 	$(MAKE) clean -C tools/scaninc
 	$(MAKE) clean -C tools/preproc

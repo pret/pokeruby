@@ -932,4 +932,5 @@ u8 unref_sub_8126080(u8 sector, u8 *data)
 }
 
 asm(".section .rodata\n"
-    "\t.align 2");
+    "\t.align 2\n"
+    "\t.text");
