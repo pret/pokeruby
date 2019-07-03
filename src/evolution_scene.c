@@ -145,7 +145,11 @@ static void Task_BeginEvolutionScene(u8 taskID)
             bool8 canStopEvo;
             u8 partyID;
 
+#if MODERN
+            mon = (struct Pokemon*)((u16)gTasks[taskID].tMonPtrHI | (gTasks[taskID].tMonPtrLO << 0x10));
+#else
             mon = (struct Pokemon*)(gTasks[taskID].tMonPtrHI | (gTasks[taskID].tMonPtrLO << 0x10));
+#endif
             speciesToEvolve = gTasks[taskID].tPostEvoSpecies;
             canStopEvo = gTasks[taskID].tCanStop;
             partyID = gTasks[taskID].tPartyID;
