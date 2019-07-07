@@ -323,6 +323,7 @@ SECTIONS {
         src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         src/roulette.o(.text);
+        src/roulette_gfx.o(.text);
         src/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);
@@ -716,7 +717,8 @@ SECTIONS {
         src/battle/battle_records.o(.rodata);
         src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
-        data/roulette.o(.rodata);
+        src/roulette.o(.rodata);
+        src/roulette_gfx.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);
         src/pokedex_cry_screen.o(.data);
         src/landmark.o(.rodata);

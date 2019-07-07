@@ -51,6 +51,7 @@ SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
 
 LIBC   := tools/agbcc/lib/libc.a
 LIBGCC := tools/agbcc/lib/libgcc.a
+LDFLAGS := -L ../../tools/agbcc/lib -lgcc -lc
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
@@ -152,7 +153,7 @@ $(ROM): %.gba: %.elf
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LDFLAGS)
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
