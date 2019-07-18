@@ -12,6 +12,7 @@
 #include "script.h"
 #include "script_movement.h"
 #include "constants/songs.h"
+#include "constants/metatile_labels.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -239,9 +240,9 @@ void Task_HandleTruckSequence(u8 taskId)
         data[1]++;
         if (data[1] == 120)
         {
-            MapGridSetMetatileIdAt(11, 8, 520);
-            MapGridSetMetatileIdAt(11, 9, 528);
-            MapGridSetMetatileIdAt(11, 10, 536);
+            MapGridSetMetatileIdAt(11, 8, METATILE_ID(InsideOfTruck, ExitLight_Top));
+            MapGridSetMetatileIdAt(11, 9, METATILE_ID(InsideOfTruck, ExitLight_Mid));
+            MapGridSetMetatileIdAt(11, 10, METATILE_ID(InsideOfTruck, ExitLight_Bottom));
             DrawWholeMapView();
             PlaySE(SE_TRACK_DOOR);
             DestroyTask(taskId);
@@ -253,9 +254,9 @@ void Task_HandleTruckSequence(u8 taskId)
 
 void ExecuteTruckSequence(void)
 {
-    MapGridSetMetatileIdAt(11, 8, 525);
-    MapGridSetMetatileIdAt(11, 9, 533);
-    MapGridSetMetatileIdAt(11, 10, 541);
+    MapGridSetMetatileIdAt(11, 8, METATILE_ID(InsideOfTruck, DoorClosedFloor_Top));
+    MapGridSetMetatileIdAt(11, 9, METATILE_ID(InsideOfTruck, DoorClosedFloor_Mid));
+    MapGridSetMetatileIdAt(11, 10, METATILE_ID(InsideOfTruck, DoorClosedFloor_Bottom));
     DrawWholeMapView();
     ScriptContext2_Enable();
     CpuFastFill(0, gPlttBufferFaded, 0x400);

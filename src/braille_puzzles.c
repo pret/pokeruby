@@ -17,6 +17,7 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/metatile_labels.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
@@ -42,12 +43,12 @@ bool8 ShouldDoBrailleDigEffect(void)
 
 void DoBrailleDigEffect(void)
 {
-    MapGridSetMetatileIdAt(16, 8, 554);
-    MapGridSetMetatileIdAt(17, 8, 555);
-    MapGridSetMetatileIdAt(18, 8, 556);
-    MapGridSetMetatileIdAt(16, 9, 3634);
-    MapGridSetMetatileIdAt(17, 9, 563);
-    MapGridSetMetatileIdAt(18, 9, 3636);
+    MapGridSetMetatileIdAt(16, 8, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
+    MapGridSetMetatileIdAt(17, 8, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
+    MapGridSetMetatileIdAt(18, 8, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
+    MapGridSetMetatileIdAt(16, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(17, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
+    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
@@ -85,12 +86,12 @@ bool8 ShouldDoBrailleStrengthEffect(void)
 void DoBrailleStrengthEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
+    MapGridSetMetatileIdAt(14, 26, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
+    MapGridSetMetatileIdAt(15, 26, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
+    MapGridSetMetatileIdAt(16, 26, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
+    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
+    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
@@ -131,12 +132,12 @@ void UseFlyAncientTomb_Callback(void)
 
 void UseFlyAncientTomb_Finish(void)
 {
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
+    MapGridSetMetatileIdAt(14, 26, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
+    MapGridSetMetatileIdAt(15, 26, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
+    MapGridSetMetatileIdAt(16, 26, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
+    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
+    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_FLY);
