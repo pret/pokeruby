@@ -154,9 +154,17 @@ const u8 gPokenavOutlinePalette[] = INCBIN_U8("graphics/pokenav/outline.gbapal")
 const u8 gPokenavOutlineTiles[] = INCBIN_U8("graphics/pokenav/outline.4bpp.lz");
 const u8 gPokenavOutlineTilemap[] = INCBIN_U8("graphics/pokenav/outline_map.bin.lz");
 
+#include "data/region_map/city_map_tilemaps.h"
 
-
-
+#ifdef ENGLISH
+#include "data/text/ribbon_descriptions_en.h"
+#include "data/text/gift_ribbon_descriptions_en.h"
+#include "data/text/trainer_eye_descriptions_en.h"
+#elif GERMAN
+#include "data/text/ribbon_descriptions_de.h"
+#include "data/text/gift_ribbon_descriptions_de.h"
+#include "data/text/trainer_eye_descriptions_de.h"
+#endif
 
 
 
