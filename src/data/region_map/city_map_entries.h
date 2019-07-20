@@ -1,4 +1,4 @@
-const u8 *const gPokenavCityMaps[][2] = 
+const u32 *const gPokenavCityMaps[][2] = 
 {
     {gPokenavCityMap_Littleroot_0, NULL},
     {gPokenavCityMap_Oldale_0, NULL},
