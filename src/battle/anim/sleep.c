@@ -97,5 +97,5 @@ static void sub_80CD394(struct Sprite* sprite)
     sprite->data[4] += sprite->data[3] * 2;
     sprite->data[0] += sprite->data[1];
     if (++sprite->data[1] > 0x3C)
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
 }

@@ -3422,4 +3422,14 @@ extern const u8 Tiles_D129AC[];
 extern const u8 gAreaUnknownTiles[];
 extern const u16 gAreaUnknownPalette[];
 
+extern const u8 gUnknown_08E964B8[];
+
+extern const u8 gUnknown_08E8096C[];
+extern const u8 gRouletteWheelTiles[];
+extern const u8 gRouletteCenter_Gfx[];
+extern const u8 gRouletteHeadersTiles[];
+extern const u8 gRouletteCreditTiles[];
+extern const u8 gRouletteNumbersTiles[];
+extern const u8 gRouletteMultiplierTiles[];
+
 #endif  // GUARD_GRAPHICS_H

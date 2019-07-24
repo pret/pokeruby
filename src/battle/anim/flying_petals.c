@@ -139,20 +139,20 @@ void sub_80CC474(struct Sprite* sprite)
     {
     case 0:
         sprite->pos1.y = gBattleAnimArgs[0];
-        sprite->oam.priority = sub_8079ED4(bank);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(bank);
         break;
     case 1:
         sprite->pos1.y = gBattleAnimArgs[0];
-        sprite->oam.priority = sub_8079ED4(bank) + 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(bank) + 1;
         break;
     case 2:
         sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[0];
-        sprite->oam.priority = sub_8079ED4(bank);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(bank);
         break;
     case 3:
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[0];
         GetAnimBattlerSpriteId(1);
-        sprite->oam.priority = sub_8079ED4(bank) + 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(bank) + 1;
         break;
     }
 
@@ -177,5 +177,5 @@ static void sub_80CC580(struct Sprite* sprite)
             return;
     }
 
-    move_anim_8074EE0(sprite);
+    DestroySpriteAndMatrix(sprite);
 }

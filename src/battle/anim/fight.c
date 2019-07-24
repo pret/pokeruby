@@ -505,8 +505,8 @@ void sub_80D90F4(struct Sprite *sprite)
     sprite->pos1.x = GetBattlerSpriteCoord(bank, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(bank, 3);
 
-    xMod = sub_807A100(bank, 1) / 2;
-    yMod = sub_807A100(bank, 0) / 4;
+    xMod = GetBattlerSpriteCoordAttr(bank, 1) / 2;
+    yMod = GetBattlerSpriteCoordAttr(bank, 0) / 4;
 
     x = Random() % xMod;
     y = Random() % yMod;
@@ -819,12 +819,12 @@ void sub_80D97CC(struct Sprite *sprite)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBankAttacker, 2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBankAttacker, 3);
-        sprite->oam.priority = sub_8079ED4(gBattleAnimAttacker);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
         sprite->data[7] = gBattleAnimTarget;
     }
     else
     {
-        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
         sprite->data[7] = gBattleAnimAttacker;
     }
 
@@ -847,7 +847,7 @@ static void sub_80D986C(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(sprite->data[7], 3);
 
         InitAnimLinearTranslation(sprite);
-        StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+        StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
         sprite->callback = TranslateAnimLinearUntil;
     }
 }
@@ -922,12 +922,12 @@ void sub_80D9A38(struct Sprite *sprite)
         sprite->pos1.x = GetBattlerSpriteCoord(gBankAttacker, 2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBankAttacker, 3);
         bank = gBattleAnimTarget;
-        sprite->oam.priority = sub_8079ED4(gBattleAnimAttacker);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
     }
     else
     {
         bank = gBattleAnimAttacker;
-        sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
     }
 
     if (IsContest())

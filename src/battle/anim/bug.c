@@ -494,6 +494,6 @@ void sub_80DCE40(struct Sprite *sprite)
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 18;
     }
 
-    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;
 }

@@ -847,7 +847,7 @@ void AnimTask_ScaleMonAndRestore(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[3]);
-    sub_8078E70(spriteId, gBattleAnimArgs[4]);
+    PrepareBattlerSpriteForRotScale(spriteId, gBattleAnimArgs[4]);
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
     TASK.data[2] = gBattleAnimArgs[2];
@@ -887,7 +887,7 @@ void sub_80A8E04(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
-    sub_8078E70(spriteId, 0);
+    PrepareBattlerSpriteForRotScale(spriteId, 0);
     TASK.data[1] = 0;
     TASK.data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[3] != 1)
@@ -931,7 +931,7 @@ void sub_80A8EFC(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
-    sub_8078E70(spriteId, 0);
+    PrepareBattlerSpriteForRotScale(spriteId, 0);
     TASK.data[1] = 0;
     TASK.data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[2] == 0)

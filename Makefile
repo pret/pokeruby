@@ -87,6 +87,7 @@ SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
 
 LIBC   := tools/agbcc/lib/libc.a
 LIBGCC := tools/agbcc/lib/libgcc.a
+LDFLAGS := -L ../../tools/agbcc/lib -lgcc -lc
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
@@ -95,10 +96,9 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 %src/libs/agb_flash.o:    CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
-%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-%src/libs/libisagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-%src/libs/libisagbprn.o: CC1FLAGS := -mthumb-interwork
+%src/libs/m4a.o:          CC1 := tools/agbcc/bin/old_agbcc$(EXE)
+%src/libs/libisagbprn.o:  CC1 := tools/agbcc/bin/old_agbcc$(EXE)
+%src/libs/libisagbprn.o:  CC1FLAGS := -mthumb-interwork
 
 #### Main Rules ####
 
@@ -192,9 +192,9 @@ $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
-%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(SYNTAXDEPS)
+%.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	@$(ECHO) " LD      $@"
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LDFLAGS)
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	@$(ECHO) " SED     $@"

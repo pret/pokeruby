@@ -68,9 +68,9 @@ void sub_80D5CC0(struct Sprite *sprite)
     if (gMain.inBattle)
     {
         if (sprite->data[1] < 64 || sprite->data[1] > 195)
-            sprite->oam.priority = sub_8079ED4(gBattleAnimTarget);
+            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
         else
-            sprite->oam.priority = sub_8079ED4(gBattleAnimTarget) + 1;
+            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
     }
     else
     {

@@ -24,7 +24,7 @@ extern const u8 gPPUpReadMasks[];
 extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
-extern u8 gUnknown_02038694;
+extern u8 gContestMonPartyIndex;
 extern u16 gSpecialVar_Result;
 
 extern void (*gFieldCallback)(void);
@@ -139,7 +139,7 @@ void sub_80F9C00(void)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        switch (sub_80AE47C(&gPlayerParty[i]))
+        switch (CanMonParticipateInContest(&gPlayerParty[i]))
         {
         case 0:
         case 3:
@@ -162,13 +162,13 @@ void HandleSelectPartyMenu(u8 var)
         {
         case A_BUTTON:
             PlaySE(SE_SELECT);
-            gUnknown_02038694 = sub_806CA38(var);
-            gSpecialVar_0x8004 = gUnknown_02038694;
+            gContestMonPartyIndex = sub_806CA38(var);
+            gSpecialVar_0x8004 = gContestMonPartyIndex;
             sub_8123138(var);
             break;
         case B_BUTTON:
             PlaySE(SE_SELECT);
-            gUnknown_02038694 = 0xFF;
+            gContestMonPartyIndex = 0xFF;
             gSpecialVar_0x8004 = 0xFF;
             sub_8123138(var);
             break;

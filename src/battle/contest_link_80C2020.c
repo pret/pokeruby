@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data2.h"
 #include "util.h"
+#include "random.h"
 #include "overworld.h"
 #include "constants/songs.h"
 #include "ewram.h"
@@ -25,6 +26,10 @@
 #include "field_specials.h"
 #include "contest_link_80C857C.h"
 #include "contest_link_80C2020.h"
+#include "pokemon_storage_system.h"
+#include "event_data.h"
+#include "script.h"
+#include "trig.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
@@ -38,26 +43,32 @@
 
 struct UnkEwramStruct18000 {
     u8 unk_00;
-    u8 filler_01[1];
+    u8 unk_01;
     u8 unk_02;
     u8 unk_03;
     u8 unk_04;
     u8 unk_05;
     u8 unk_06;
-    u8 filler_07[1];
+    u8 unk_07;
     u8 unk_08;
     u8 unk_09;
     u8 unk_0a;
-    u8 filler_0b[9];
+    s16 unk_0c[4];
     u8 unk_14;
 };
 
 struct UnkEwramStruct18018 {
-    u8 filler_00[0x50];
+    s32 unk_00;
+    s32 unk_04;
+    u32 unk_08;
+    u32 unk_0c;
+    u8 unk_10;
+    u8 unk_11;
+    u8 unk_12;
 };
 
 #define eContestLink80C2020Struct2018000 (*(struct UnkEwramStruct18000 *)(gSharedMem + 0x18000))
-#define eContestLink80C2020Struct2018018 (*(struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
+#define eContestLink80C2020Struct2018018 ((struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
 #define eContestLink80C2020Struct2018068 (gSharedMem + 0x18068)
 
 static void sub_80C2430(void);
@@ -84,22 +95,37 @@ void sub_80C310C(void);
 void sub_80C3158(const u8 *string, u8 spriteId);
 void sub_80C33DC(void);
 u16 sub_80C34AC(const u8 *string);
-void sub_80C34CC(s16 data4, s16 pos0y, u16 data5, s16 data6);
+void sub_80C34CC(s16 data4, u16 pos0y, u16 data5, u16 data6);
 void sub_80C3520(u16 a0);
+void sub_80C3588(struct Sprite *sprite);
+void sub_80C35FC(struct Sprite *sprite);
+void sub_80C3630(struct Sprite *sprite);
 void sub_80C3698(const u8 *string);
 void sub_80C3764(void);
 void sub_80C37E4(void);
 u8 sub_80C3990(u8 a0, u8 a1);
 s8 sub_80C39E4(u8 a0, u8 a1);
 void sub_80C3A5C(u8 taskId);
+void sub_80C3BD8(u8 taskId);
 void sub_80C3B30(u8 taskId);
 void sub_80C3C44(struct Sprite *sprite);
 void sub_80C3CB8(struct Sprite *sprite);
 void sub_80C3D04(u8 taskId);
 void sub_80C3DF0(struct Sprite *sprite);
 void sub_80C3E60(u8 a0, u8 a1);
+void sub_80C3EA4(u8 taskId);
 void sub_80C3F00(void);
 void sub_80C40D4(u8 a0, u8 a1);
+void sub_80C42C0(u8 taskId);
+void sub_80C49C4(u8 taskId);
+void sub_80C49F0(u8 taskId);
+void sub_80C4A0C(u8 taskId);
+void sub_80C4A28(u8 taskId);
+void sub_80C4A44(u8 taskId);
+void sub_80C4B0C(u8 taskId);
+void sub_80C4B5C(u8 taskId);
+void sub_80C4BA4(u8 taskId);
+void sub_80C4BCC(u8 taskId);
 
 const u16 gUnknown_083D1624[] = INCBIN_U16("graphics/unknown/unknown_3D1624/0.4bpp");
 const u16 gUnknown_083D1644[] = INCBIN_U16("graphics/unknown/unknown_3D1624/1.4bpp");
@@ -293,7 +319,7 @@ void sub_80C2358(void)
     LoadAllContestMonIcons(0, TRUE);
     sub_80C2340();
     eContestLink80C2020Struct2018000 = (struct UnkEwramStruct18000){};
-    eContestLink80C2020Struct2018018 = (struct UnkEwramStruct18018){};
+    memset(eContestLink80C2020Struct2018018, 0, 4 * sizeof(struct UnkEwramStruct18018));
     sub_80C33DC();
     BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
     gPaletteFade.bufferTransferDisabled = FALSE;
@@ -765,27 +791,27 @@ static void sub_80C2F64(u8 taskId)
         eContestLink80C2020Struct2018000.unk_0a = 1;
 }
 
-#ifdef NONMATCHING
 void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 personality)
 {
     int i;
     int j;
     u16 tile;
     u16 offset;
-    int vOffset;
+    u16 var0;
+    u16 var1;
 
     if (useDmaNow)
     {
         DmaCopy32Defvars(3, GetMonIconPtr(species, personality) + (srcOffset << 9) + 0x80, BG_CHAR_ADDR(1) + (destOffset << 9), 0x180);
-        tile = ((destOffset + 10) << 12);
-        tile |= (destOffset * 16 + 0x200);
+        var0 = ((destOffset + 10) << 12);
+        var1 = (destOffset * 16 + 0x200);
+        tile = var1 | var0;
         offset = destOffset * 0x60 + 0x83;
         for (i = 0; i < 3; i++)
         {
-            vOffset = (i << 5) + offset;
             for (j = 0; j < 4; j++)
             {
-                ((u16 *)BG_CHAR_ADDR(3))[vOffset + j] = tile;
+                ((u16 *)BG_CHAR_ADDR(3))[(i << 5) + j + offset] = tile;
                 tile++;
             }
         }
@@ -795,97 +821,6 @@ void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 
         RequestSpriteCopy(GetMonIconPtr(species, personality) + (srcOffset << 9) + 0x80, BG_CHAR_ADDR(1) + (destOffset << 9), 0x180);
     }
 }
-#else
-__attribute__((naked)) void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 personality)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                    "\tldr r6, [sp, 0x10]\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r4, r1, 24\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r5, r2, 24\n"
-                    "\tlsls r3, 24\n"
-                    "\tcmp r3, 0\n"
-                    "\tbeq _080C30B0\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl GetMonIconPtr\n"
-                    "\tlsls r1, r5, 9\n"
-                    "\tadds r0, r1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tlsls r1, r4, 9\n"
-                    "\tldr r2, _080C30A0 @ =0x06004000\n"
-                    "\tadds r1, r2\n"
-                    "\tldr r2, _080C30A4 @ =0x040000d4\n"
-                    "\tstr r0, [r2]\n"
-                    "\tstr r1, [r2, 0x4]\n"
-                    "\tldr r0, _080C30A8 @ =0x84000060\n"
-                    "\tstr r0, [r2, 0x8]\n"
-                    "\tldr r0, [r2, 0x8]\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tadds r1, 0xA\n"
-                    "\tlsls r1, 28\n"
-                    "\tlsls r0, r4, 20\n"
-                    "\tmovs r2, 0x80\n"
-                    "\tlsls r2, 18\n"
-                    "\tadds r0, r2\n"
-                    "\torrs r0, r1\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tlsls r0, r4, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tlsls r0, 21\n"
-                    "\tmovs r2, 0x83\n"
-                    "\tlsls r2, 16\n"
-                    "\tadds r0, r2\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tmovs r2, 0\n"
-                    "\tldr r6, _080C30AC @ =0x0600c000\n"
-                    "_080C307C:\n"
-                    "\tlsls r0, r2, 5\n"
-                    "\tadds r4, r2, 0x1\n"
-                    "\tadds r0, r5\n"
-                    "\tmovs r3, 0x3\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r2, r0, r6\n"
-                    "_080C3088:\n"
-                    "\tstrh r1, [r2]\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tadds r2, 0x2\n"
-                    "\tsubs r3, 0x1\n"
-                    "\tcmp r3, 0\n"
-                    "\tbge _080C3088\n"
-                    "\tadds r2, r4, 0\n"
-                    "\tcmp r2, 0x2\n"
-                    "\tble _080C307C\n"
-                    "\tb _080C30CA\n"
-                    "\t.align 2, 0\n"
-                    "_080C30A0: .4byte 0x06004000\n"
-                    "_080C30A4: .4byte 0x040000d4\n"
-                    "_080C30A8: .4byte 0x84000060\n"
-                    "_080C30AC: .4byte 0x0600c000\n"
-                    "_080C30B0:\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl GetMonIconPtr\n"
-                    "\tlsls r1, r5, 9\n"
-                    "\tadds r0, r1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tlsls r1, r4, 9\n"
-                    "\tldr r2, _080C30D0 @ =0x06004000\n"
-                    "\tadds r1, r2\n"
-                    "\tmovs r2, 0xC0\n"
-                    "\tlsls r2, 1\n"
-                    "\tbl RequestSpriteCopy\n"
-                    "_080C30CA:\n"
-                    "\tpop {r4-r6}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_080C30D0: .4byte 0x06004000");
-}
-#endif
 
 static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
 {
@@ -897,148 +832,2075 @@ static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80C310C(void)
 {
     int i;
+    register u16 species asm("r0");
 
     for (i = 0; i < 4; i++)
     {
-        u16 species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
+        species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
         LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[species]], 0xa0 + 0x10 * i, 0x20);
     }
 }
+
+#ifdef NONMATCHING
+void sub_80C3158(const u8 *string, u8 spriteId)
+{
+    int i, j;
+    u8 width;
+    u8 * displayedStringBattle;
+    void * dest;
+    u8 * d1;
+    u8 * d2;
+    void *d3;
+    void *d4;
+    void *d5;
+    void *d6;
+    int w;
+    u16 sp00[4];
+    struct Sprite *sprite = &gSprites[spriteId];
+    sp00[0] = gSprites[spriteId].oam.tileNum;
+    sp00[1] = gSprites[sprite->data[0]].oam.tileNum;
+    sp00[2] = gSprites[sprite->data[1]].oam.tileNum;
+    sp00[3] = gSprites[sprite->data[2]].oam.tileNum;
+
+    for (i = 0; i < 4; i++)
+    {
+        DmaClear32(3, (void *)VRAM + 0x10000 + 32 * sp00[i], 0x400);
+    }
+
+    width = Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7278, string);
+    displayedStringBattle = gDisplayedStringBattle;
+    displayedStringBattle = StringCopy(displayedStringBattle, gUnknown_083D17E2);
+    if ((~width + 1) & 7)
+    {
+        displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+        displayedStringBattle[1] = 0x11;
+        displayedStringBattle[2] = ((~width + 1) & 7) / 2;
+        displayedStringBattle += 3;
+    }
+
+    width += -8 & (width + 7);
+    displayedStringBattle = StringCopy(displayedStringBattle, string);
+
+    displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+    displayedStringBattle[1] = 0x13;
+    displayedStringBattle[2] = width;
+    displayedStringBattle[3] = EOS;
+
+    sub_80034D4(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
+
+    CpuCopy32(&gUnknown_083D1624[0x0], (void *)0x6010000 + 32 * sp00[0], 32);
+    CpuCopy32(&gUnknown_083D1624[0x40], (void *)0x6010000 + 32 * sp00[0] + 0x100, 32);
+    CpuCopy32(&gUnknown_083D1624[0x40], (void *)0x6010000 + 32 * sp00[0] + 0x200, 32);
+    CpuCopy32(&gUnknown_083D1624[0x20], (void *)0x6010000 + 32 * sp00[0] + 0x300, 32);
+
+    w = width / 8;
+    j = 0;
+    if (j <= w)
+    {
+        d2 = eContestLink80C2020Struct2018068 + 0x20;
+        d1 = eContestLink80C2020Struct2018068;
+        d3 = (void *)VRAM + 0x0FD20;
+        d4 = (void *)VRAM + 0x0FE20;
+        d5 = (void *)VRAM + 0x0FF20;
+        d6 = (void *)VRAM + 0x10020;
+        while (j <= w)
+        {
+            if (j < 7)
+                dest = 32 * sp00[0] + d6;
+            else if (j < 15)
+                dest = 32 * sp00[1] + d5;
+            else if (j < 23)
+                dest = 32 * sp00[2] + d4;
+            else
+                dest = 32 * sp00[3] + d3;
+
+            if (j == w)
+                break;
+
+            CpuCopy32(gUnknown_083D16E4, dest, 32);
+            CpuCopy32(gUnknown_083D16E4 + 0x10, dest + 0x300, 32);
+            CpuCopy32(j * 0x40 + d2, dest + 0x100, 32);
+            CpuCopy32(j * 0x40 + d1, dest + 0x200, 32);
+
+            d3 += 0x20;
+            d4 += 0x20;
+            d5 += 0x20;
+            d6 += 0x20;
+            j++;
+        }
+    }
+
+    CpuCopy32(gUnknown_083D1644, dest, 32);
+    CpuCopy32(gUnknown_083D1644 + 0x40, dest + 0x100, 32);
+    CpuCopy32(gUnknown_083D1644 + 0x40, dest + 0x200, 32);
+    CpuCopy32(gUnknown_083D1644 + 0x20, dest + 0x300, 32);
+}
 #else
-__attribute__((naked)) void sub_80C310C(void)
+asm(".include \"constants/gba_constants.inc\"");
+asm(".include \"include/macros.inc\"");
+NAKED
+void sub_80C3158(const u8 * string, u8 spriteId)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0x1C\n"
+                "\tmov r9, r0\n"
+                "\tlsls r1, 24\n"
+                "\tlsrs r1, 24\n"
+                "\tlsls r2, r1, 4\n"
+                "\tadds r2, r1\n"
+                "\tlsls r2, 2\n"
+                "\tldr r3, _080C32C0 @ =gSprites\n"
+                "\tadds r2, r3\n"
+                "\tmov r1, sp\n"
+                "\tldrh r0, [r2, 0x4]\n"
+                "\tlsls r0, 22\n"
+                "\tlsrs r0, 22\n"
+                "\tstrh r0, [r1]\n"
+                "\tmov r4, sp\n"
+                "\tmovs r0, 0x2E\n"
+                "\tldrsh r1, [r2, r0]\n"
+                "\tlsls r0, r1, 4\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r3\n"
+                "\tldrh r0, [r0, 0x4]\n"
+                "\tlsls r0, 22\n"
+                "\tlsrs r0, 22\n"
+                "\tstrh r0, [r4, 0x2]\n"
+                "\tmovs r0, 0x30\n"
+                "\tldrsh r1, [r2, r0]\n"
+                "\tlsls r0, r1, 4\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r3\n"
+                "\tldrh r0, [r0, 0x4]\n"
+                "\tlsls r0, 22\n"
+                "\tlsrs r0, 22\n"
+                "\tstrh r0, [r4, 0x4]\n"
+                "\tmovs r0, 0x32\n"
+                "\tldrsh r1, [r2, r0]\n"
+                "\tlsls r0, r1, 4\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r3\n"
+                "\tldrh r0, [r0, 0x4]\n"
+                "\tlsls r0, 22\n"
+                "\tlsrs r0, 22\n"
+                "\tstrh r0, [r4, 0x6]\n"
+                "\tldr r1, _080C32C4 @ =gWindowTemplate_81E7278\n"
+                "\tmov r8, r1\n"
+                "\tldr r7, _080C32C8 @ =0x06010000\n"
+                "\tldr r2, _080C32CC @ =0x040000d4\n"
+                "\tldr r6, _080C32D0 @ =0x85000100\n"
+                "\tmov r1, sp\n"
+                "\tmovs r5, 0\n"
+                "\tadd r3, sp, 0x8\n"
+                "\tmovs r4, 0x3\n"
+                "_080C31CE:\n"
+                "\tldrh r0, [r1]\n"
+                "\tlsls r0, 5\n"
+                "\tadds r0, r7\n"
+                "\tstr r5, [sp, 0x8]\n"
+                "\tstr r3, [r2]\n"
+                "\tstr r0, [r2, 0x4]\n"
+                "\tstr r6, [r2, 0x8]\n"
+                "\tldr r0, [r2, 0x8]\n"
+                "\tadds r1, 0x2\n"
+                "\tsubs r4, 0x1\n"
+                "\tcmp r4, 0\n"
+                "\tbge _080C31CE\n"
+                "\tmov r0, r8\n"
+                "\tmov r1, r9\n"
+                "\tbl Text_GetStringWidthFromWindowTemplate\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "\tldr r2, _080C32D4 @ =gDisplayedStringBattle\n"
+                "\tldr r1, _080C32D8 @ =gUnknown_083D17E2\n"
+                "\tadds r0, r2, 0\n"
+                "\tbl StringCopy\n"
+                "\tadds r2, r0, 0\n"
+                "\tmvns r0, r5\n"
+                "\tadds r1, r0, 0x1\n"
+                "\tmovs r0, 0x7\n"
+                "\tands r1, r0\n"
+                "\tcmp r1, 0\n"
+                "\tbeq _080C3218\n"
+                "\tmovs r0, 0xFC\n"
+                "\tstrb r0, [r2]\n"
+                "\tmovs r0, 0x11\n"
+                "\tstrb r0, [r2, 0x1]\n"
+                "\tlsrs r0, r1, 1\n"
+                "\tstrb r0, [r2, 0x2]\n"
+                "\tadds r2, 0x3\n"
+                "_080C3218:\n"
+                "\tadds r6, r5, 0x7\n"
+                "\tmovs r1, 0x8\n"
+                "\tnegs r1, r1\n"
+                "\tadds r0, r1, 0\n"
+                "\tands r6, r0\n"
+                "\tlsls r6, 24\n"
+                "\tlsrs r5, r6, 24\n"
+                "\tadds r0, r2, 0\n"
+                "\tmov r1, r9\n"
+                "\tbl StringCopy\n"
+                "\tadds r2, r0, 0\n"
+                "\tmovs r0, 0xFC\n"
+                "\tstrb r0, [r2]\n"
+                "\tmovs r0, 0x13\n"
+                "\tstrb r0, [r2, 0x1]\n"
+                "\tstrb r5, [r2, 0x2]\n"
+                "\tmovs r0, 0xFF\n"
+                "\tstrb r0, [r2, 0x3]\n"
+                "\tldr r0, _080C32DC @ =gSharedMem + 0x18068\n"
+                "\tmov r10, r0\n"
+                "\tldr r1, _080C32D4 @ =gDisplayedStringBattle\n"
+                "\tbl sub_80034D4\n"
+                "\tmov r0, sp\n"
+                "\tldrh r4, [r0]\n"
+                "\tlsls r4, 5\n"
+                "\tldr r1, _080C32C8 @ =0x06010000\n"
+                "\tadds r7, r4, r1\n"
+                "\tldr r0, _080C32E0 @ =gUnknown_083D1624\n"
+                "\tmov r9, r0\n"
+                "\tldr r1, _080C32E4 @ =REG_BG0CNT\n"
+                "\tmov r8, r1\n"
+                "\tadds r1, r7, 0\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tmov r5, r9\n"
+                "\tadds r5, 0x80\n"
+                "\tldr r0, _080C32E8 @ =0x06010100\n"
+                "\tadds r1, r4, r0\n"
+                "\tadds r0, r5, 0\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tldr r0, _080C32EC @ =0x06010200\n"
+                "\tadds r1, r4, r0\n"
+                "\tadds r0, r5, 0\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tmov r0, r9\n"
+                "\tadds r0, 0x40\n"
+                "\tldr r1, _080C32F0 @ =0x06010300\n"
+                "\tadds r4, r1\n"
+                "\tadds r1, r4, 0\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tlsrs r5, r6, 27\n"
+                "\tmovs r4, 0\n"
+                "\tcmp r4, r5\n"
+                "\tbgt _080C3382\n"
+                "\tmov r6, sp\n"
+                "\tmov r0, r10\n"
+                "\tadds r0, 0x20\n"
+                "\tstr r0, [sp, 0xC]\n"
+                "\tmov r1, r10\n"
+                "\tstr r1, [sp, 0x10]\n"
+                "\tldr r0, _080C32F4 @ =0x0600fd20\n"
+                "\tstr r0, [sp, 0x14]\n"
+                "\tldr r1, _080C32F8 @ =0x0600fe20\n"
+                "\tstr r1, [sp, 0x18]\n"
+                "\tldr r0, _080C32FC @ =0x0600ff20\n"
+                "\tmov r10, r0\n"
+                "\tldr r1, _080C3300 @ =0x06010020\n"
+                "\tmov r9, r1\n"
+                "_080C32B2:\n"
+                "\tcmp r4, 0x6\n"
+                "\tbgt _080C3304\n"
+                "\tldrh r0, [r6]\n"
+                "\tlsls r0, 5\n"
+                "\tmov r1, r9\n"
+                "\tb _080C3322\n"
+                "\t.align 2, 0\n"
+                "_080C32C0: .4byte gSprites\n"
+                "_080C32C4: .4byte gWindowTemplate_81E7278\n"
+                "_080C32C8: .4byte 0x06010000\n"
+                "_080C32CC: .4byte 0x040000d4\n"
+                "_080C32D0: .4byte 0x85000100\n"
+                "_080C32D4: .4byte gDisplayedStringBattle\n"
+                "_080C32D8: .4byte gUnknown_083D17E2\n"
+                "_080C32DC: .4byte gSharedMem + 0x18068\n"
+                "_080C32E0: .4byte gUnknown_083D1624\n"
+                "_080C32E4: .4byte REG_BG0CNT\n"
+                "_080C32E8: .4byte 0x06010100\n"
+                "_080C32EC: .4byte 0x06010200\n"
+                "_080C32F0: .4byte 0x06010300\n"
+                "_080C32F4: .4byte 0x0600fd20\n"
+                "_080C32F8: .4byte 0x0600fe20\n"
+                "_080C32FC: .4byte 0x0600ff20\n"
+                "_080C3300: .4byte 0x06010020\n"
+                "_080C3304:\n"
+                "\tcmp r4, 0xE\n"
+                "\tbgt _080C3310\n"
+                "\tldrh r0, [r6, 0x2]\n"
+                "\tlsls r0, 5\n"
+                "\tmov r1, r10\n"
+                "\tb _080C3322\n"
+                "_080C3310:\n"
+                "\tcmp r4, 0x16\n"
+                "\tbgt _080C331C\n"
+                "\tldrh r0, [r6, 0x4]\n"
+                "\tlsls r0, 5\n"
+                "\tldr r1, [sp, 0x18]\n"
+                "\tb _080C3322\n"
+                "_080C331C:\n"
+                "\tldrh r0, [r6, 0x6]\n"
+                "\tlsls r0, 5\n"
+                "\tldr r1, [sp, 0x14]\n"
+                "_080C3322:\n"
+                "\tadds r7, r0, r1\n"
+                "\tcmp r4, r5\n"
+                "\tbeq _080C3382\n"
+                "\tldr r0, _080C33D0 @ =gUnknown_083D16E4\n"
+                "\tadds r1, r7, 0\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tmovs r0, 0xC0\n"
+                "\tlsls r0, 2\n"
+                "\tadds r1, r7, r0\n"
+                "\tldr r0, _080C33D0 @ =gUnknown_083D16E4\n"
+                "\tadds r0, 0x20\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 1\n"
+                "\tadds r1, r7, r0\n"
+                "\tldr r0, [sp, 0x10]\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 2\n"
+                "\tadds r1, r7, r0\n"
+                "\tldr r0, [sp, 0xC]\n"
+                "\tmov r2, r8\n"
+                "\tbl CpuSet\n"
+                "\tldr r1, [sp, 0xC]\n"
+                "\tadds r1, 0x40\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tldr r0, [sp, 0x10]\n"
+                "\tadds r0, 0x40\n"
+                "\tstr r0, [sp, 0x10]\n"
+                "\tldr r1, [sp, 0x14]\n"
+                "\tadds r1, 0x20\n"
+                "\tstr r1, [sp, 0x14]\n"
+                "\tldr r0, [sp, 0x18]\n"
+                "\tadds r0, 0x20\n"
+                "\tstr r0, [sp, 0x18]\n"
+                "\tmovs r1, 0x20\n"
+                "\tadd r10, r1\n"
+                "\tadd r9, r1\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, r5\n"
+                "\tble _080C32B2\n"
+                "_080C3382:\n"
+                "\tldr r4, _080C33D4 @ =gUnknown_083D1644\n"
+                "\tldr r5, _080C33D8 @ =REG_BG0CNT\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r7, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl CpuSet\n"
+                "\tadds r6, r4, 0\n"
+                "\tadds r6, 0x80\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 1\n"
+                "\tadds r1, r7, r0\n"
+                "\tadds r0, r6, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl CpuSet\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 2\n"
+                "\tadds r1, r7, r0\n"
+                "\tadds r0, r6, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl CpuSet\n"
+                "\tadds r4, 0x40\n"
+                "\tmovs r0, 0xC0\n"
+                "\tlsls r0, 2\n"
+                "\tadds r1, r7, r0\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl CpuSet\n"
+                "\tadd sp, 0x1C\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080C33D0: .4byte gUnknown_083D16E4\n"
+                "_080C33D4: .4byte gUnknown_083D1644\n"
+                "_080C33D8: .4byte REG_BG0CNT");
+}
+#endif //NONMATCHING
+
+void sub_80C33DC(void)
+{
+    int i;
+    struct SpriteTemplate template;
+    u8 spriteIds[8];
+
+    template = gSpriteTemplate_83D174C;
+    for (i = 0; i <8; i++)
+        LoadSpriteSheet(&gUnknown_083D1764[i]);
+
+    LoadSpritePalette(&gUnknown_083D17A4);
+    for (i = 0; i < 8; i++)
+    {
+        spriteIds[i] = CreateSprite(&template, 272, 144, 10);
+        template.tileTag++;
+    }
+
+    gSprites[spriteIds[0]].data[0] = spriteIds[1];
+    gSprites[spriteIds[0]].data[1] = spriteIds[2];
+    gSprites[spriteIds[0]].data[2] = spriteIds[3];
+
+    gSprites[spriteIds[4]].data[0] = spriteIds[5];
+    gSprites[spriteIds[4]].data[1] = spriteIds[6];
+    gSprites[spriteIds[4]].data[2] = spriteIds[7];
+
+    eContestLink80C2020Struct2018000.unk_00 = spriteIds[0];
+    eContestLink80C2020Struct2018000.unk_04 = 0;
+    eContestLink80C2020Struct2018000.unk_01 = spriteIds[4];
+    sub_80C3764();
+}
+
+u16 sub_80C34AC(const u8 * string)
+{
+    u8 width = (StringLength(string) * 6);
+    return 0x70 - (width / 2);
+}
+
+void sub_80C34CC(s16 arg0, u16 y, u16 arg2, u16 arg3)
+{
+    struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
+    sprite->pos1.x = 272;
+    sprite->pos1.y = y;
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    sprite->data[4] = arg0 + 32;
+    sprite->data[5] = arg2;
+    sprite->data[6] = arg3;
+    sprite->data[7] = 0;
+    sprite->callback = sub_80C3588;
+    eContestLink80C2020Struct2018000.unk_04 = 1;
+}
+
+void sub_80C3520(u16 arg0)
+{
+    struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
+    sprite->pos1.x += sprite->pos2.x;
+    sprite->pos1.y += sprite->pos2.y;
+    sprite->pos2.y = 0;
+    sprite->pos2.x = 0;
+    sprite->data[6] = arg0;
+    sprite->data[7] = 0;
+    sprite->callback = sub_80C3630;
+    eContestLink80C2020Struct2018000.unk_04 = 3;
+}
+
+void sub_80C3564(struct Sprite *sprite)
+{
+    sprite->pos1.x = 272;
+    sprite->pos1.y = 144;
+    sprite->pos2.y = 0;
+    sprite->pos2.x = 0;
+    sprite->callback = SpriteCallbackDummy;
+    eContestLink80C2020Struct2018000.unk_04 = 0;
+}
+
+
+void sub_80C3588(struct Sprite *sprite)
+{
+    int i;
+    s16 var0;
+
+    var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
+    sprite->pos1.x -= var0 >> 8;
+    sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
+    if (sprite->pos1.x < sprite->data[4])
+        sprite->pos1.x = sprite->data[4];
+
+    for (i = 0; i < 3; i++)
+    {
+        struct Sprite *sprite2 = &gSprites[sprite->data[i]];
+        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+    }
+
+    if (sprite->pos1.x == sprite->data[4])
+        sprite->callback = sub_80C35FC;
+}
+
+void sub_80C35FC(struct Sprite *sprite)
+{
+    eContestLink80C2020Struct2018000.unk_04 = 2;
+    if ((u16)sprite->data[5] != 0xFFFF)
+    {
+        if (--sprite->data[5] == -1)
+            sub_80C3520(sprite->data[6]);
+    }
+}
+
+void sub_80C3630(struct Sprite *sprite)
+{
+    int i;
+    s16 var0;
+
+    var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
+    sprite->pos1.x -= var0 >> 8;
+    sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
+    for (i = 0; i < 3; i++)
+    {
+        struct Sprite *sprite2 = &gSprites[sprite->data[i]];
+        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+    }
+
+    if (sprite->pos1.x + sprite->pos2.x < -224)
+        sub_80C3564(sprite);
+}
+
+void sub_80C3698(const u8 *text)
+{
+    int i;
+    u16 x;
+    struct Sprite *sprite;
+
+    sub_80C3158(text, eContestLink80C2020Struct2018000.unk_01);
+    x = sub_80C34AC(text);
+    sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
+    sprite->pos1.x = x + 32;
+    sprite->pos1.y = 80;
+    sprite->invisible = 0;
+    for (i = 0; i < 3; i++)
+    {
+        gSprites[sprite->data[i]].pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        gSprites[sprite->data[i]].pos1.y = sprite->pos1.y;
+        gSprites[sprite->data[i]].invisible = 0;
+    }
+
+    gBattle_WIN0H = 0x00F0;
+    gBattle_WIN0V = ((sprite->pos1.y - 16) << 8) | (sprite->pos1.y + 16);
+    REG_WININ = WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR;
+}
+
+void sub_80C3764(void)
+{
+    int i;
+    struct Sprite *sprite;
+
+    sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
+    sprite->invisible = 1;
+    for (i = 0; i < 3; i++)
+        gSprites[sprite->data[i]].invisible = 1;
+
+    gBattle_WIN0H = 0;
+    gBattle_WIN0V = 0;
+    REG_WIN0H = gBattle_WIN0H;
+    REG_WIN0V = gBattle_WIN0V;
+    REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR  | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+}
+
+#ifdef ENGLISH
+#ifdef NONMATCHING
+static inline s32 de_sub_80C39A8(s32 a0)
+{
+    s32 result = 0;
+    if (gIsLinkContest & 0x1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 9, 2, 8, 2);
+        result = 8;
+    }
+    else if (gSpecialVar_ContestRank == 0)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 0, 9, 2);
+        result = 9;
+    }
+    else if (gSpecialVar_ContestRank == 1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 9, 0, 8, 2);
+        result = 8;
+    }
+    else if (gSpecialVar_ContestRank == 2)
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 17, 0, 8, 2);
+        result = 8;
+    }
+    else
+    {
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 2, 9, 2);
+        result = 9;
+    }
+    return result;
+}
+
+static inline s32 de_sub_80C3A84(s32 a0, s32 * a1)
+{
+    s32 result;
+    if (gSpecialVar_ContestCategory == 0)
+    {
+        *a1 = 0;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 17, 2, 10, 2);
+        result = 10;
+    }
+    else if (gSpecialVar_ContestCategory == 1)
+    {
+        *a1 = 1;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 4, 11, 2);
+        result = 11;
+    }
+    else if (gSpecialVar_ContestCategory == 2)
+    {
+        *a1 = 2;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 11, 4, 10, 2);
+        result = 10;
+    }
+    else if (gSpecialVar_ContestCategory == 3)
+    {
+        *a1 = 3;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 21, 4, 10, 2);
+        result = 10;
+    }
+    else
+    {
+        *a1 = 4;
+        sub_809D104((void *)0x0600E000, a0, 1, gUnknown_08E964B8, 0, 6, 10, 2);
+        result = 10;
+    }
+    return result;
+}
+
+void sub_80C37E4(void)
+{
+    s32 sp0;
+    s32 i;
+    de_sub_80C3A84(de_sub_80C39A8(5) + 5, &sp0);
+    for (i = 0; i < 0x80; i++)
+    {
+        ((vu16 *)0x0600E000)[i] &= 0xFFF;
+        ((vu16 *)0x0600E000)[i] |= sp0 << 12;;
+    }
+}
+#else
+NAKED
+void sub_80C37E4(void)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
+                "\tsub sp, 0x10\n"
+                "\tmovs r5, 0x1\n"
                 "\tmovs r4, 0\n"
-                "\tldr r6, _080C314C @ =gMonIconPaletteIndices\n"
-                "\tmovs r5, 0xA0\n"
-                "\tlsls r5, 16\n"
-                "_080C3116:\n"
-                "\tldr r1, _080C3150 @ =gContestMons\n"
-                "\tlsls r0, r4, 6\n"
-                "\tadds r0, r1\n"
-                "\tldrh r0, [r0]\n"
-                "\tmovs r1, 0\n"
-                "\tbl mon_icon_convert_unown_species_id\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tadds r0, r6\n"
+                "\tldr r0, _080C3808 @ =gIsLinkContest\n"
                 "\tldrb r0, [r0]\n"
-                "\tlsls r0, 5\n"
-                "\tldr r1, _080C3154 @ =gMonIconPalettes\n"
-                "\tadds r0, r1\n"
-                "\tlsrs r1, r5, 16\n"
-                "\tmovs r2, 0x20\n"
-                "\tbl LoadPalette\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 13\n"
-                "\tadds r5, r0\n"
-                "\tadds r4, 0x1\n"
-                "\tcmp r4, 0x3\n"
-                "\tble _080C3116\n"
+                "\tadds r1, r5, 0\n"
+                "\tands r1, r0\n"
+                "\tcmp r1, 0\n"
+                "\tbeq _080C3814\n"
+                "\tldr r0, _080C380C @ =0x0600e000\n"
+                "\tldr r3, _080C3810 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tb _080C386A\n"
+                "\t.align 2, 0\n"
+                "_080C3808: .4byte gIsLinkContest\n"
+                "_080C380C: .4byte 0x0600e000\n"
+                "_080C3810: .4byte gUnknown_08E964B8\n"
+                "_080C3814:\n"
+                "\tldr r0, _080C3830 @ =gSpecialVar_ContestRank\n"
+                "\tldrh r2, [r0]\n"
+                "\tcmp r2, 0\n"
+                "\tbne _080C383C\n"
+                "\tmovs r4, 0x1\n"
+                "\tldr r0, _080C3834 @ =0x0600e000\n"
+                "\tldr r3, _080C3838 @ =gUnknown_08E964B8\n"
+                "\tstr r2, [sp]\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tb _080C3870\n"
+                "\t.align 2, 0\n"
+                "_080C3830: .4byte gSpecialVar_ContestRank\n"
+                "_080C3834: .4byte 0x0600e000\n"
+                "_080C3838: .4byte gUnknown_08E964B8\n"
+                "_080C383C:\n"
+                "\tcmp r2, 0x1\n"
+                "\tbne _080C385C\n"
+                "\tldr r0, _080C3854 @ =0x0600e000\n"
+                "\tldr r3, _080C3858 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "\tmovs r1, 0x8\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tb _080C3870\n"
+                "\t.align 2, 0\n"
+                "_080C3854: .4byte 0x0600e000\n"
+                "_080C3858: .4byte gUnknown_08E964B8\n"
+                "_080C385C:\n"
+                "\tcmp r2, 0x2\n"
+                "\tbne _080C3884\n"
+                "\tldr r0, _080C387C @ =0x0600e000\n"
+                "\tldr r3, _080C3880 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x11\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "_080C386A:\n"
+                "\tmovs r1, 0x8\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r2, [sp, 0xC]\n"
+                "_080C3870:\n"
+                "\tmovs r1, 0x5\n"
+                "\tmovs r2, 0x1\n"
+                "\tbl sub_809D104\n"
+                "\tb _080C389E\n"
+                "\t.align 2, 0\n"
+                "_080C387C: .4byte 0x0600e000\n"
+                "_080C3880: .4byte gUnknown_08E964B8\n"
+                "_080C3884:\n"
+                "\tmovs r4, 0x1\n"
+                "\tldr r0, _080C38C0 @ =0x0600e000\n"
+                "\tldr r3, _080C38C4 @ =gUnknown_08E964B8\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r1, 0x9\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r2, [sp, 0xC]\n"
+                "\tmovs r1, 0x5\n"
+                "\tmovs r2, 0x1\n"
+                "\tbl sub_809D104\n"
+                "_080C389E:\n"
+                "\tadds r4, 0xD\n"
+                "\tldr r0, _080C38C8 @ =gSpecialVar_ContestCategory\n"
+                "\tldrh r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080C38CC\n"
+                "\tmovs r6, 0\n"
+                "\tldr r0, _080C38C0 @ =0x0600e000\n"
+                "\tldr r3, _080C38C4 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x11\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r2, [sp, 0xC]\n"
+                "\tb _080C392A\n"
+                "\t.align 2, 0\n"
+                "_080C38C0: .4byte 0x0600e000\n"
+                "_080C38C4: .4byte gUnknown_08E964B8\n"
+                "_080C38C8: .4byte gSpecialVar_ContestCategory\n"
+                "_080C38CC:\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _080C38EC\n"
+                "\tmovs r6, 0x1\n"
+                "\tldr r0, _080C38E4 @ =0x0600e000\n"
+                "\tldr r3, _080C38E8 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xB\n"
+                "\tb _080C3924\n"
+                "\t.align 2, 0\n"
+                "_080C38E4: .4byte 0x0600e000\n"
+                "_080C38E8: .4byte gUnknown_08E964B8\n"
+                "_080C38EC:\n"
+                "\tcmp r0, 0x2\n"
+                "\tbne _080C3910\n"
+                "\tmovs r6, 0x2\n"
+                "\tldr r0, _080C3908 @ =0x0600e000\n"
+                "\tldr r3, _080C390C @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0xB\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tstr r6, [sp, 0xC]\n"
+                "\tb _080C392A\n"
+                "\t.align 2, 0\n"
+                "_080C3908: .4byte 0x0600e000\n"
+                "_080C390C: .4byte gUnknown_08E964B8\n"
+                "_080C3910:\n"
+                "\tcmp r0, 0x3\n"
+                "\tbne _080C393C\n"
+                "\tmovs r6, 0x3\n"
+                "\tldr r0, _080C3934 @ =0x0600e000\n"
+                "\tldr r3, _080C3938 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0x15\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "_080C3924:\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "_080C392A:\n"
+                "\tadds r1, r4, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl sub_809D104\n"
+                "\tb _080C395A\n"
+                "\t.align 2, 0\n"
+                "_080C3934: .4byte 0x0600e000\n"
+                "_080C3938: .4byte gUnknown_08E964B8\n"
+                "_080C393C:\n"
+                "\tmovs r6, 0x4\n"
+                "\tldr r0, _080C3984 @ =0x0600e000\n"
+                "\tldr r3, _080C3988 @ =gUnknown_08E964B8\n"
+                "\tmovs r1, 0\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r1, 0x6\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tmovs r1, 0xA\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tmovs r1, 0x2\n"
+                "\tstr r1, [sp, 0xC]\n"
+                "\tadds r1, r4, 0\n"
+                "\tadds r2, r5, 0\n"
+                "\tbl sub_809D104\n"
+                "_080C395A:\n"
+                "\tldr r5, _080C398C @ =0x00000fff\n"
+                "\tlsls r4, r6, 12\n"
+                "\tldr r2, _080C3984 @ =0x0600e000\n"
+                "\tmovs r3, 0x7F\n"
+                "_080C3962:\n"
+                "\tldrh r1, [r2]\n"
+                "\tadds r0, r5, 0\n"
+                "\tands r0, r1\n"
+                "\tstrh r0, [r2]\n"
+                "\tldrh r1, [r2]\n"
+                "\tadds r0, r4, 0\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r2]\n"
+                "\tadds r2, 0x2\n"
+                "\tsubs r3, 0x1\n"
+                "\tcmp r3, 0\n"
+                "\tbge _080C3962\n"
+                "\tadd sp, 0x10\n"
                 "\tpop {r4-r6}\n"
                 "\tpop {r0}\n"
                 "\tbx r0\n"
                 "\t.align 2, 0\n"
-                "_080C314C: .4byte gMonIconPaletteIndices\n"
-                "_080C3150: .4byte gContestMons\n"
-                "_080C3154: .4byte gMonIconPalettes");
+                "_080C3984: .4byte 0x0600e000\n"
+                "_080C3988: .4byte gUnknown_08E964B8\n"
+                "_080C398C: .4byte 0x00000fff");
+}
+#endif // NONMATCHING
+
+#elif defined(GERMAN)
+s16 de_sub_80C39A8(s32 a0)
+{
+    s16 result;
+    if (gIsLinkContest & 1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 11, 3, 8, 3);
+        result = 8;
+    }
+    else if (gSpecialVar_ContestRank == 0)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 0, 0, 11, 3);
+        result = 11;
+    }
+    else if (gSpecialVar_ContestRank == 1)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 11, 0, 10, 3);
+        result = 10;
+    }
+    else if (gSpecialVar_ContestRank == 2)
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 21, 0, 10, 3);
+        result = 10;
+    }
+    else
+    {
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 0, 3, 11, 3);
+        result = 11;
+    }
+    return result;
+}
+
+s16 de_sub_80C3A84(s32 a0, s32 * a1)
+{
+    s16 result;
+    if (gSpecialVar_ContestCategory == 0)
+    {
+        *a1 = 0;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 19, 3, 7, 3);
+        result = 7;
+    }
+    else if (gSpecialVar_ContestCategory == 1)
+    {
+        *a1 = 1;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 0, 6, 7, 3);
+        result = 7;
+    }
+    else if (gSpecialVar_ContestCategory == 2)
+    {
+        *a1 = 2;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 7, 6, 4, 3);
+        result = 4;
+    }
+    else if (gSpecialVar_ContestCategory == 3)
+    {
+        *a1 = 3;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 11, 6, 6, 3);
+        result = 6;
+    }
+    else
+    {
+        *a1 = 4;
+        sub_809D104((void *)0x0600E000, a0, 0, gUnknown_08E964B8, 17, 6, 5, 3);
+        result = 5;
+    }
+    return result;
+}
+
+void sub_80C37E4(void)
+{
+    s32 sp0;
+    s32 i;
+    de_sub_80C3A84(de_sub_80C39A8(6) + 6, &sp0);
+    for (i = 0; i < 0x80; i++)
+    {
+        ((vu16 *)0x0600E000)[i] &= 0xFFF;
+        ((vu16 *)0x0600E000)[i] |= sp0 << 12;;
+    }
 }
 #endif
 
-// void sub_80C3158(const u8 *string, u8 spriteId)
-// {
-//     int i, j;
-//     u8 width;
-//     u8 * displayedStringBattle;
-//     void * dest;
-//     u8 * d1;
-//     u8 * d2;
-//     void *d3;
-//     void *d4;
-//     void *d5;
-//     void *d6;
-//     int w;
-//     u16 sp00[4];
-//     struct Sprite *sprite = &gSprites[spriteId];
-//     sp00[0] = gSprites[spriteId].oam.tileNum;
-//     sp00[1] = gSprites[sprite->data[0]].oam.tileNum;
-//     sp00[2] = gSprites[sprite->data[1]].oam.tileNum;
-//     sp00[3] = gSprites[sprite->data[2]].oam.tileNum;
+// fakematching?
+u8 sub_80C3990(u8 monIndex, u8 arg1)
+{
+    u32 var0;
+    u32 var1;
 
-//     for (i = 0; i < 4; i++)
-//     {
-//         DmaClear32(3, (void *)VRAM + 0x10000 + 32 * sp00[i], 0x400);
-//     }
+    var0 = gContestMonConditions[monIndex] << 16;
+    var1 = var0 / 0x3F;
+    if (var1 & 0xFFFF)
+        var1 += 0x10000;
 
-//     width = Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7278, string);
-//     displayedStringBattle = gDisplayedStringBattle;
-//     displayedStringBattle = StringCopy(displayedStringBattle, gUnknown_083D17E2);
-//     if ((~width + 1) & 7)
-//     {
-//         displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
-//         displayedStringBattle[1] = 0x11;
-//         displayedStringBattle[2] = ((~width + 1) & 7) / 2;
-//         displayedStringBattle += 3;
-//     }
+    var1 >>= 16;
+    if (var1 == 0 && var0)
+        var1 = 1;
 
-//     width += -8 & (width + 7);
-//     displayedStringBattle = StringCopy(displayedStringBattle, string);
+    if (arg1 && var1 > 10)
+        var1 = 10;
 
-//     displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
-//     displayedStringBattle[1] = 0x13;
-//     displayedStringBattle[2] = width;
-//     displayedStringBattle[3] = EOS;
+    return var1;
+}
 
-//     sub_80034D4(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
+s8 sub_80C39E4(u8 arg0, u8 arg1)
+{
+    u32 r4;
+    u32 r2;
+    s16 val;
+    s8 ret;
 
-//     CpuSet(&gUnknown_083D1624[0x0], (void *)0x6010000 + 32 * sp00[0], 0x4000008);
-//     CpuSet(&gUnknown_083D1624[0x40], (void *)0x6010000 + 32 * sp00[0] + 0x100, 0x4000008);
-//     CpuSet(&gUnknown_083D1624[0x40], (void *)0x6010000 + 32 * sp00[0] + 0x200, 0x4000008);
-//     CpuSet(&gUnknown_083D1624[0x20], (void *)0x6010000 + 32 * sp00[0] + 0x300, 0x4000008);
+    val = gUnknown_02038688[arg0];
+    if (val < 0)
+        r4 = -val << 16;
+    else
+        r4 =  val << 16;
+    r2 = r4 / 80;
+    if (r2 & 0xFFFF)
+        r2 += 0x10000;
 
-//     w = width / 8;
-//     j = 0;
-//     if (j <= w)
-//     {
-//         d2 = eContestLink80C2020Struct2018068 + 0x20;
-//         d1 = eContestLink80C2020Struct2018068;
-//         d3 = (void *)VRAM + 0x0FD20;
-//         d4 = (void *)VRAM + 0x0FE20;
-//         d5 = (void *)VRAM + 0x0FF20;
-//         d6 = (void *)VRAM + 0x10020;
-//         while (j <= w)
-//         {
-//             if (j < 7)
-//                 dest = 32 * sp00[0] + d6;
-//             else if (j < 15)
-//                 dest = 32 * sp00[1] + d5;
-//             else if (j < 23)
-//                 dest = 32 * sp00[2] + d4;
-//             else
-//                 dest = 32 * sp00[3] + d3;
+    r2 >>= 16;
+    if (r2 == 0 && r4 != 0)
+        r2 = 1;
 
-//             if (j == w)
-//                 break;
+    if (arg1 != 0 && r2 > 10)
+        r2 = 10;
 
-//             CpuSet(gUnknown_083D16E4, dest, 0x4000008);
-//             CpuSet(gUnknown_083D16E4 + 0x10, dest + 0x300, 0x4000008);
-//             CpuSet(j * 0x40 + d2, dest + 0x100, 0x4000008);
-//             CpuSet(j * 0x40 + d1, dest + 0x200, 0x4000008);
+    if (gUnknown_02038688[arg0] < 0)
+        ret = -r2;
+    else
+        ret =  r2;
 
-//             d3 += 0x20;
-//             d4 += 0x20;
-//             d5 += 0x20;
-//             d6 += 0x20;
-//             j++;
-//         }
-//     }
+    return ret;
+}
 
-//     CpuSet(gUnknown_083D1644, dest, 0x4000008);
-//     CpuSet(gUnknown_083D1644 + 0x40, dest + 0x100, 0x4000008);
-//     CpuSet(gUnknown_083D1644 + 0x40, dest + 0x200, 0x4000008);
-//     CpuSet(gUnknown_083D1644 + 0x20, dest + 0x300, 0x4000008);
-// }
+void sub_80C3A5C(u8 taskId)
+{
+    u16 firstTileNum;
+
+    if (gTasks[taskId].data[10] == 0)
+    {
+        gTasks[taskId].data[11] = (3 - gTasks[taskId].data[0]) * 40;
+        gTasks[taskId].data[10]++;
+    }
+    else if (gTasks[taskId].data[10] == 1)
+    {
+        if (--gTasks[taskId].data[11] == -1)
+        {
+            firstTileNum = gTasks[taskId].data[0] * 2 + 0x5043;
+            *(vu16 *)(0x0600E142 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x00;
+            *(vu16 *)(0x0600E144 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x01;
+            *(vu16 *)(0x0600E182 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x10;
+            *(vu16 *)(0x0600E184 + gTasks[taskId].data[1] * 192) = firstTileNum + 0x11;
+            eContestLink80C2020Struct2018000.unk_05++;
+            DestroyTask(taskId);
+            PlaySE(SE_JYUNI);
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void sub_80C3B30(u8 taskId)
+{
+    int i, j, k;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    for (j = 0; j < 3; j++)
+    {
+        for (k = 0; k < 30; k++)
+        {
+            ((u16 *)(0x0600E100 + 2 * (96 * i + 32 * j)))[k] &= 0x0FFF;
+            ((u16 *)(0x0600E100 + 2 * (96 * i + 32 * j)))[k] |= 0x9000;
+        }
+    }
+    gTasks[taskId].data[10] = i;
+    gTasks[taskId].data[12] = 1;
+    gTasks[taskId].func = sub_80C3BD8;
+    eContestLink80C2020Struct2018000.unk_03 = taskId;
+}
+#else
+NAKED
+void sub_80C3B30(u8 taskId)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tmov r12, r0\n"
+                "\tmovs r5, 0\n"
+                "\tldr r1, _080C3BC0 @ =gContestFinalStandings\n"
+                "\tldrb r0, [r1]\n"
+                "\tldr r2, _080C3BC4 @ =gTasks\n"
+                "\tmov r10, r2\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080C3B5C\n"
+                "_080C3B4E:\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r5, 0x3\n"
+                "\tbgt _080C3B5C\n"
+                "\tadds r0, r5, r1\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080C3B4E\n"
+                "_080C3B5C:\n"
+                "\tmovs r1, 0\n"
+                "\tlsls r0, r5, 1\n"
+                "\tmov r2, r12\n"
+                "\tlsls r2, 2\n"
+                "\tmov r9, r2\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 5\n"
+                "\tmov r8, r0\n"
+                "\tldr r7, _080C3BC8 @ =0x00000fff\n"
+                "\tmovs r0, 0x90\n"
+                "\tlsls r0, 8\n"
+                "\tadds r6, r0, 0\n"
+                "_080C3B74:\n"
+                "\tlsls r0, r1, 5\n"
+                "\tadds r4, r1, 0x1\n"
+                "\tadd r0, r8\n"
+                "\t@ the next two instructions are swapped\n"
+                "\tmovs r3, 0x1D\n"
+                "\tlsls r0, 1\n"
+                "\tldr r1, _080C3BCC @ =0x0600e100\n"
+                "\tadds r2, r0, r1\n"
+                "_080C3B82:\n"
+                "\tldrh r1, [r2]\n"
+                "\tadds r0, r7, 0\n"
+                "\tands r0, r1\n"
+                "\torrs r0, r6\n"
+                "\tstrh r0, [r2]\n"
+                "\tadds r2, 0x2\n"
+                "\tsubs r3, 0x1\n"
+                "\tcmp r3, 0\n"
+                "\tbge _080C3B82\n"
+                "\tadds r1, r4, 0\n"
+                "\tcmp r1, 0x2\n"
+                "\tble _080C3B74\n"
+                "\tmov r0, r9\n"
+                "\tadd r0, r12\n"
+                "\tlsls r0, 3\n"
+                "\tadd r0, r10\n"
+                "\tstrh r5, [r0, 0x1C]\n"
+                "\tmovs r1, 0x1\n"
+                "\tstrh r1, [r0, 0x20]\n"
+                "\tldr r2, _080C3BD0 @ =sub_80C3BD8\n"
+                "\tstr r2, [r0]\n"
+                "\tmov r1, r12\n"
+                "\tldr r0, _080C3BD4 @ =gSharedMem + 0x18000\n"
+                "\tstrb r1, [r0, 0x3]\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080C3BC0: .4byte gContestFinalStandings\n"
+                "_080C3BC4: .4byte gTasks\n"
+                "_080C3BC8: .4byte 0x00000fff\n"
+                "_080C3BCC: .4byte 0x0600e100\n"
+                "_080C3BD0: .4byte sub_80C3BD8\n"
+                "_080C3BD4: .4byte gSharedMem + 0x18000");
+}
+#endif //NONMATCHING
+
+void sub_80C3BD8(u8 taskId)
+{
+    if (++gTasks[taskId].data[11] == 1)
+    {
+        gTasks[taskId].data[11] = 0;
+        BlendPalette(0x91, 1, gTasks[taskId].data[12], RGB(13, 28, 27));
+        if (gTasks[taskId].data[13] == 0)
+        {
+            if (++gTasks[taskId].data[12] == 16)
+                gTasks[taskId].data[13] = 1;
+        }
+        else
+        {
+            if (--gTasks[taskId].data[12] == 0)
+                gTasks[taskId].data[13] = 0;
+        }
+    }
+}
+
+void sub_80C3C44(struct Sprite *sprite)
+{
+    if (sprite->data[0] < 10)
+    {
+        if (++sprite->data[0] == 10)
+        {
+            PlayCry1(sprite->data[1], 0);
+            sprite->data[1] = 0;
+        }
+    }
+    else
+    {
+        s16 delta = (u16)sprite->data[1] + 0x600;
+        sprite->pos1.x -= delta >> 8;
+        sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+        if (sprite->pos1.x < 120)
+            sprite->pos1.x = 120;
+
+        if (sprite->pos1.x == 120)
+        {
+            sprite->callback = SpriteCallbackDummy;
+            sprite->data[1] = 0;
+            eContestLink80C2020Struct2018000.unk_06 = 1;
+        }
+    }
+}
+
+void sub_80C3CB8(struct Sprite *sprite)
+{
+    s16 delta = (u16)sprite->data[1] + 0x600;
+    sprite->pos1.x -= delta >> 8;
+    sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+    if (sprite->pos1.x < -32)
+    {
+        sprite->callback = SpriteCallbackDummy;
+        sprite->invisible = 1;
+        eContestLink80C2020Struct2018000.unk_06 = 2;
+    }
+}
+
+void sub_80C3D04(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] == 5)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (eContestLink80C2020Struct2018000.unk_07 < 40)
+        {
+            u8 spriteId = CreateSprite(&gSpriteTemplate_83D17B4, (Random() % 240) - 20, 44, 5);
+            gSprites[spriteId].data[0] = Random() % 512;
+            gSprites[spriteId].data[1] = (Random() % 24) + 16;
+            gSprites[spriteId].data[2] = (Random() % 256) + 48;
+            gSprites[spriteId].oam.tileNum += Random() % 17;
+            eContestLink80C2020Struct2018000.unk_07++;
+        }
+    }
+
+    if (eContestLink80C2020Struct2018000.unk_09)
+        DestroyTask(taskId);
+}
+
+void sub_80C3DF0(struct Sprite *sprite)
+{
+    register s16 var0 asm("r1");
+
+    sprite->data[3] += sprite->data[0];
+    sprite->pos2.x = Sin(sprite->data[3] >> 8, sprite->data[1]);
+    var0 = sprite->data[4] + sprite->data[2];
+    sprite->pos1.x += var0 >> 8;
+    var0 = var0 & 0xFF;
+    sprite->data[4] = var0;
+    sprite->pos1.y++;
+    if (eContestLink80C2020Struct2018000.unk_09)
+        sprite->invisible = 1;
+
+    if (sprite->pos1.x > 248 || sprite->pos1.y > 116)
+    {
+        DestroySprite(sprite);
+        eContestLink80C2020Struct2018000.unk_07--;
+    }
+}
+
+void sub_80C3E60(u8 monIndex, u8 numFrames)
+{
+    u8 taskId = CreateTask(sub_80C3EA4, 8);
+    gTasks[taskId].data[0] = monIndex;
+    gTasks[taskId].data[1] = numFrames;
+    gTasks[taskId].data[2] = gContestMons[monIndex].species;
+}
+
+void sub_80C3EA4(u8 taskId)
+{
+    u8 monIndex = gTasks[taskId].data[0];
+    if (gTasks[taskId].data[10]++ == gTasks[taskId].data[1])
+    {
+        gTasks[taskId].data[10] = 0;
+        sub_80C3024(gTasks[taskId].data[2], monIndex, gTasks[taskId].data[11], FALSE, gContestMons[monIndex].personality);
+        gTasks[taskId].data[11] ^= 1;
+    }
+}
+
+void sub_80C3F00(void)
+{
+    s32 i;
+    s16 r2 = gUnknown_02038678[0];
+    s32 r4;
+    u32 r5;
+    s8 r0;
+
+    for (i = 1; i < 4; i++)
+    {
+        if (r2 < gUnknown_02038678[i])
+            r2 = gUnknown_02038678[i];
+    }
+
+    if (r2 < 0)
+    {
+        r2 = gUnknown_02038678[0];
+
+        for (i = 1; i < 4; i++)
+        {
+            if (r2 > gUnknown_02038678[i])
+                r2 = gUnknown_02038678[i];
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        r4 = 1000 * gContestMonConditions[i] / ABS(r2);
+        if ((r4 % 10) >= 5)
+            r4 += 10;
+        eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
+
+        r4 = 1000 * ABS(gUnknown_02038688[i]) / ABS(r2);
+        if ((r4 % 10) >= 5)
+            r4 += 10;
+        eContestLink80C2020Struct2018018[i].unk_04 = r4 / 10;
+
+        if (gUnknown_02038688[i] < 0)
+            eContestLink80C2020Struct2018018[i].unk_10 = 1;
+
+        r5 = 22528 * eContestLink80C2020Struct2018018[i].unk_00 / 100;
+        if ((r5 % 256) >= 128)
+            r5 += 256;
+        eContestLink80C2020Struct2018018[i].unk_08 = r5 / 256;
+
+        r5 = eContestLink80C2020Struct2018018[i].unk_04 * 22528 / 100;
+        if ((r5 % 256) >= 128)
+            r5 += 256;
+        eContestLink80C2020Struct2018018[i].unk_0c = r5 / 256;
+
+        eContestLink80C2020Struct2018018[i].unk_11 = sub_80C3990(i, 1);
+        r0 = sub_80C39E4(i, 1);
+        eContestLink80C2020Struct2018018[i].unk_12 = ABS(r0);
+
+        if (gContestFinalStandings[i])
+        {
+            s16 r2__ = eContestLink80C2020Struct2018018[i].unk_08;
+            s16 r1__ = eContestLink80C2020Struct2018018[i].unk_0c;
+            if (eContestLink80C2020Struct2018018[i].unk_10)
+                r1__ = -r1__;
+            if (r2__ + r1__ == 88)
+            {
+                if (r1__ > 0)
+                    eContestLink80C2020Struct2018018[i].unk_0c--;
+                else if (r2__ > 0)
+                    eContestLink80C2020Struct2018018[i].unk_08--;
+            }
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void sub_80C40D4(u8 arg0, u8 arg1)
+{
+    int i;
+    u8 taskId;
+    u8 sp8, spC;
+
+    sp8 = 0;
+    spC = 0;
+    if (!arg0)
+    {
+        u32 var0;
+        for (i = 0; i < 4; i++)
+        {
+            u8 var1 = eContestLink80C2020Struct2018018[i].unk_11;
+            if (arg1 < var1)
+            {
+                int x = var1 + 19;
+                x += 32 * (i * 3 + 5);
+                x -= arg1;
+                x--;
+                *(vu16 *)(0x0600C000 + 2 * x) = 0x60B3;
+                taskId = CreateTask(sub_80C42C0, 10);
+                var0 = ((eContestLink80C2020Struct2018018[i].unk_08 << 16) / eContestLink80C2020Struct2018018[i].unk_11) * (arg1 + 1);
+                if ((var0 % 0x10000) >= 0x8000)
+                    var0 += 0x10000;
+
+                gTasks[taskId].data[0] = i;
+                gTasks[taskId].data[1] = var0 >> 16;
+                eContestLink80C2020Struct2018000.unk_14++;
+                sp8++;
+            }
+        }
+    }
+    else
+    {
+        u32 var0;
+        for (i = 0; i < 4; i++)
+        {
+            int tile;
+            s8 var1 = eContestLink80C2020Struct2018018[i].unk_12;
+            tile = eContestLink80C2020Struct2018018[i].unk_10 ? 0x60A5 : 0x60A3;
+            if (arg1 < var1)
+            {
+                int x = var1 + 19;
+                x += 32 * (i * 3 + 6);
+                x -= arg1;
+                x--;
+                *(vu16 *)(0x0600C000 + 2 * x) = tile;
+                taskId = CreateTask(sub_80C42C0, 10);
+                var0 = ((eContestLink80C2020Struct2018018[i].unk_0c << 16) / eContestLink80C2020Struct2018018[i].unk_12) * (arg1 + 1);
+                if ((var0 % 0x10000) >= 0x8000)
+                    var0 += 0x10000;
+
+                gTasks[taskId].data[0] = i;
+                if (eContestLink80C2020Struct2018018[i].unk_10)
+                {
+                    gTasks[taskId].data[2] = 1;
+                    spC++;
+                }
+                else
+                {
+                    sp8++;
+                }
+
+                if (eContestLink80C2020Struct2018018[i].unk_10)
+                    gTasks[taskId].data[1] =  -(var0 >> 16) + eContestLink80C2020Struct2018018[i].unk_08;
+                else
+                    gTasks[taskId].data[1] = (var0 >> 16) + eContestLink80C2020Struct2018018[i].unk_08;
+
+                eContestLink80C2020Struct2018000.unk_14++;
+            }
+        }
+    }
+
+    if (spC)
+        PlaySE(SE_BOO);
+
+    if (sp8)
+        PlaySE(SE_PIN);
+}
+#else
+// Assorted register differences
+NAKED
+void sub_80C40D4(u8 arg0, u8 arg1)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0x8\n"
+                "\tlsls r0, 24\n"
+                "\tlsls r1, 24\n"
+                "\tlsrs r7, r1, 24\n"
+                "\tmovs r1, 0\n"
+                "\tmov r10, r1\n"
+                "\tmovs r2, 0\n"
+                "\tstr r2, [sp]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080C4198\n"
+                "\tmov r8, r2\n"
+                "\tldr r0, _080C417C @ =gSharedMem + 0x18018\n"
+                "\tsubs r1, 0x18\n"
+                "\tadds r1, r0\n"
+                "\tmov r9, r1\n"
+                "\tadds r4, r0, 0\n"
+                "\tadds r4, 0x8\n"
+                "\tmovs r6, 0xA0\n"
+                "_080C4102:\n"
+                "\tldrb r0, [r4, 0x9]\n"
+                "\tcmp r7, r0\n"
+                "\tbcs _080C416A\n"
+                "\tadds r0, 0x13\n"
+                "\tadds r0, r6, r0\n"
+                "\tsubs r0, r7\n"
+                "\tlsls r0, 1\n"
+                "\tldr r2, _080C4180 @ =0x0600bffe\n"
+                "\tadds r0, r2\n"
+                "\tldr r2, _080C4184 @ =0x000060b3\n"
+                "\tadds r1, r2, 0\n"
+                "\tstrh r1, [r0]\n"
+                "\tldr r0, _080C4188 @ =sub_80C42C0\n"
+                "\tmovs r1, 0xA\n"
+                "\tbl CreateTask\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "\tldr r0, [r4]\n"
+                "\tlsls r0, 16\n"
+                "\tldrb r1, [r4, 0x9]\n"
+                "\tbl __udivsi3\n"
+                "\tadds r1, r7, 0x1\n"
+                "\tadds r3, r0, 0\n"
+                "\tmuls r3, r1\n"
+                "\tldr r0, _080C418C @ =0x0000ffff\n"
+                "\tands r0, r3\n"
+                "\tldr r1, _080C4190 @ =0x00007fff\n"
+                "\tcmp r0, r1\n"
+                "\tbls _080C4146\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 9\n"
+                "\tadds r3, r0\n"
+                "_080C4146:\n"
+                "\tldr r1, _080C4194 @ =gTasks\n"
+                "\tlsls r0, r5, 2\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r1\n"
+                "\tmov r1, r8\n"
+                "\tstrh r1, [r0, 0x8]\n"
+                "\tlsrs r1, r3, 16\n"
+                "\tstrh r1, [r0, 0xA]\n"
+                "\tmov r2, r9\n"
+                "\tldrb r0, [r2, 0x14]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrb r0, [r2, 0x14]\n"
+                "\tmov r0, r10\n"
+                "\tadds r0, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tmov r10, r0\n"
+                "_080C416A:\n"
+                "\tadds r4, 0x14\n"
+                "\tadds r6, 0x60\n"
+                "\tmovs r0, 0x1\n"
+                "\tadd r8, r0\n"
+                "\tmov r1, r8\n"
+                "\tcmp r1, 0x3\n"
+                "\tble _080C4102\n"
+                "\tb _080C4292\n"
+                "\t.align 2, 0\n"
+                "_080C417C: .4byte gSharedMem + 0x18018\n"
+                "_080C4180: .4byte 0x0600bffe\n"
+                "_080C4184: .4byte 0x000060b3\n"
+                "_080C4188: .4byte sub_80C42C0\n"
+                "_080C418C: .4byte 0x0000ffff\n"
+                "_080C4190: .4byte 0x00007fff\n"
+                "_080C4194: .4byte gTasks\n"
+                "_080C4198:\n"
+                "\tmovs r2, 0\n"
+                "\tmov r8, r2\n"
+                "\tldr r0, _080C4220 @ =gSharedMem + 0x18018\n"
+                "\tmov r12, r0\n"
+                "\tmov r9, r2\n"
+                "\tmovs r1, 0xC0\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "_080C41A6:\n"
+                "\tmov r6, r9\n"
+                "\tadd r6, r12\n"
+                "\tldrb r1, [r6, 0x12]\n"
+                "\tldrb r0, [r6, 0x10]\n"
+                "\tldr r2, _080C4224 @ =0x000060a3\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080C41B6\n"
+                "\tadds r2, 0x2\n"
+                "_080C41B6:\n"
+                "\tlsls r0, r1, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r7, r0\n"
+                "\tbge _080C427E\n"
+                "\tadds r0, 0x13\n"
+                "\tldr r1, [sp, 0x4]\n"
+                "\tadds r0, r1, r0\n"
+                "\tsubs r0, r7\n"
+                "\tlsls r0, 1\n"
+                "\tldr r1, _080C4228 @ =0x0600bffe\n"
+                "\tadds r0, r1\n"
+                "\tstrh r2, [r0]\n"
+                "\tldr r0, _080C422C @ =sub_80C42C0\n"
+                "\tmovs r1, 0xA\n"
+                "\tbl CreateTask\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "\tldr r0, [r6, 0xC]\n"
+                "\tlsls r0, 16\n"
+                "\tldrb r1, [r6, 0x12]\n"
+                "\tbl __udivsi3\n"
+                "\tadds r1, r7, 0x1\n"
+                "\tadds r3, r0, 0\n"
+                "\tmuls r3, r1\n"
+                "\tldr r0, _080C4230 @ =0x0000ffff\n"
+                "\tands r0, r3\n"
+                "\tldr r1, _080C4234 @ =0x00007fff\n"
+                "\tcmp r0, r1\n"
+                "\tbls _080C41FA\n"
+                "\tmovs r2, 0x80\n"
+                "\tlsls r2, 9\n"
+                "\tadds r3, r2\n"
+                "_080C41FA:\n"
+                "\tldr r1, _080C4238 @ =gTasks\n"
+                "\tlsls r2, r5, 2\n"
+                "\tadds r0, r2, r5\n"
+                "\tlsls r0, 3\n"
+                "\tadds r4, r0, r1\n"
+                "\tmov r0, r8\n"
+                "\tstrh r0, [r4, 0x8]\n"
+                "\tldrb r0, [r6, 0x10]\n"
+                "\tadds r6, r1, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080C423C\n"
+                "\tmovs r0, 0x1\n"
+                "\tstrh r0, [r4, 0xC]\n"
+                "\tldr r0, [sp]\n"
+                "\tadds r0, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tstr r0, [sp]\n"
+                "\tb _080C4246\n"
+                "\t.align 2, 0\n"
+                "_080C4220: .4byte gSharedMem + 0x18018\n"
+                "_080C4224: .4byte 0x000060a3\n"
+                "_080C4228: .4byte 0x0600bffe\n"
+                "_080C422C: .4byte sub_80C42C0\n"
+                "_080C4230: .4byte 0x0000ffff\n"
+                "_080C4234: .4byte 0x00007fff\n"
+                "_080C4238: .4byte gTasks\n"
+                "_080C423C:\n"
+                "\tmov r0, r10\n"
+                "\tadds r0, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tmov r10, r0\n"
+                "_080C4246:\n"
+                "\tldr r0, _080C4264 @ =gSharedMem + 0x18018\n"
+                "\tmov r1, r9\n"
+                "\tadds r4, r1, r0\n"
+                "\tldrb r1, [r4, 0x10]\n"
+                "\tmov r12, r0\n"
+                "\tcmp r1, 0\n"
+                "\tbeq _080C4268\n"
+                "\tadds r0, r2, r5\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r6\n"
+                "\tlsrs r2, r3, 16\n"
+                "\tldr r1, [r4, 0x8]\n"
+                "\tsubs r1, r2\n"
+                "\tb _080C4274\n"
+                "\t.align 2, 0\n"
+                "_080C4264: .4byte gSharedMem + 0x18018\n"
+                "_080C4268:\n"
+                "\tadds r0, r2, r5\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r6\n"
+                "\tlsrs r2, r3, 16\n"
+                "\tldr r1, [r4, 0x8]\n"
+                "\tadds r1, r2\n"
+                "_080C4274:\n"
+                "\tstrh r1, [r0, 0xA]\n"
+                "\tldr r1, _080C42BC @ =gSharedMem + 0x18000\n"
+                "\tldrb r0, [r1, 0x14]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrb r0, [r1, 0x14]\n"
+                "_080C427E:\n"
+                "\tmovs r2, 0x14\n"
+                "\tadd r9, r2\n"
+                "\tldr r0, [sp, 0x4]\n"
+                "\tadds r0, 0x60\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tmovs r1, 0x1\n"
+                "\tadd r8, r1\n"
+                "\tmov r2, r8\n"
+                "\tcmp r2, 0x3\n"
+                "\tble _080C41A6\n"
+                "_080C4292:\n"
+                "\tldr r0, [sp]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080C429E\n"
+                "\tmovs r0, 0x16\n"
+                "\tbl PlaySE\n"
+                "_080C429E:\n"
+                "\tmov r1, r10\n"
+                "\tcmp r1, 0\n"
+                "\tbeq _080C42AA\n"
+                "\tmovs r0, 0x15\n"
+                "\tbl PlaySE\n"
+                "_080C42AA:\n"
+                "\tadd sp, 0x8\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080C42BC: .4byte gSharedMem + 0x18000");
+}
+#endif //NONMATCHING
+
+void sub_80C42C0(u8 taskId /*r12*/)
+{
+    bool32 r6 = FALSE;
+    bool32 r9 = FALSE;
+    u8 r5 = gTasks[taskId].data[0];
+    s16 r7 = gTasks[taskId].data[1];
+    s16 r1 = gTasks[taskId].data[2];
+    s32 i;
+
+    if (r1 != 0)
+    {
+        if (eContestLink80C2020Struct2018000.unk_0c[r5] <= 0)
+            r6 = TRUE;
+    }
+    else
+    {
+        if (eContestLink80C2020Struct2018000.unk_0c[r5] >= 88)
+            r6 = TRUE;
+    }
+    if (eContestLink80C2020Struct2018000.unk_0c[r5] == r7)
+        r9 = TRUE;
+
+    if (!r9)
+    {
+        if (r6)
+        {
+            eContestLink80C2020Struct2018000.unk_0c[r5] = r7;
+        }
+        else if (r1 != 0)
+        {
+            eContestLink80C2020Struct2018000.unk_0c[r5]--;
+        }
+        else
+        {
+            eContestLink80C2020Struct2018000.unk_0c[r5]++;
+        }
+    }
+    if (!r6)
+    {
+        if (!r9)
+        {
+            for (i = 0; i < 11; i++)
+            {
+                u8 r0;
+                u16 tile;
+                if (eContestLink80C2020Struct2018000.unk_0c[r5] >= 8 * (i + 1))
+                {
+                    r0 = 8;
+                }
+                else if (eContestLink80C2020Struct2018000.unk_0c[r5] >= 8 * i)
+                {
+                    r0 = eContestLink80C2020Struct2018000.unk_0c[r5] % 8;
+                }
+                else
+                {
+                    r0 = 0;
+                }
+                if (r0 < 4)
+                    tile = 0x504C + r0;
+                else
+                    tile = 0x5057 + r0;
+                *(vu16 *)(0x0600E18E + 2 * (96 * r5 + i)) = tile;
+            }
+        }
+    }
+    if (r9)
+    {
+        eContestLink80C2020Struct2018000.unk_14--;
+        DestroyTask(taskId);
+    }
+}
+
+void ScrSpecial_CheckSelectedMonAndInitContest(void)
+{
+    u8 result = CanMonParticipateInContest(&gPlayerParty[gContestMonPartyIndex]);
+    if (result != 0)
+    {
+        Contest_InitAllPokemon(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
+        InitContestMonConditions(gSpecialVar_ContestCategory);
+    }
+    gSpecialVar_Result = result;
+}
+
+u16 ScrSpecial_CanMonParticipateInSelectedLinkContest(void)
+{
+    u16 result = 0;
+    struct Pokemon *mon = &gPlayerParty[gContestMonPartyIndex];
+    switch (gSpecialVar_ContestCategory)
+    {
+    case CONTEST_CATEGORY_COOL:
+        if (GetMonData(mon, MON_DATA_COOL_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        if (GetMonData(mon, MON_DATA_BEAUTY_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        if (GetMonData(mon, MON_DATA_CUTE_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_SMART:
+        if (GetMonData(mon, MON_DATA_SMART_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+        if (GetMonData(mon, MON_DATA_TOUGH_RIBBON) > gSpecialVar_ContestRank)
+            result = 1;
+        break;
+    }
+
+    return result;
+}
+
+
+void ScrSpecial_GiveContestRibbon(void)
+{
+    u8 ribbonData;
+
+    if (gContestFinalStandings[gContestPlayerMonIndex] != 0)
+        return;
+
+    switch (gSpecialVar_ContestCategory)
+    {
+    case CONTEST_CATEGORY_COOL:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_SMART:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON, &ribbonData);
+        }
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        {
+            ribbonData++;
+            SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON, &ribbonData);
+        }
+        break;
+    }
+}
+
+void Contest_CopyAndConvertTrainerName_Intl(u8 * dest, const u8 * src)
+{
+    StringCopy(dest, src);
+    if (dest[0] == EXT_CTRL_CODE_BEGIN && dest[1] == 0x15)
+        ConvertInternationalString(dest, LANGUAGE_JAPANESE);
+}
+
+void Contest_CopyAndConvertNicknameI_Intl(u8 * dest, u8 idx)
+{
+    StringCopy(dest, gContestMons[idx].nickname);
+    if (gIsLinkContest & 1)
+    {
+        if (gLinkPlayers[idx].language == LANGUAGE_JAPANESE)
+        {
+            ConvertInternationalString(dest, GetStringLanguage(dest));
+        }
+    }
+}
+
+void Contest_GetTrainerNameI_StringVar1(void)
+{
+    if (gIsLinkContest & 1)
+    {
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar1, gLinkPlayers[gSpecialVar_0x8006].name);
+    }
+    else
+    {
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
+    }
+}
+
+void Contest_GetNicknameI_StringVar1(void)
+{
+    Contest_CopyAndConvertNicknameI_Intl(gStringVar3, gSpecialVar_0x8006);
+}
+
+void ScrSpecial_CountContestMonsWithBetterCondition(void)
+{
+    u8 i;
+    u8 count;
+
+    for (i = 0, count = 0; i < 4; i++)
+    {
+        if (gContestMonConditions[gSpecialVar_0x8006] < gContestMonConditions[i])
+            count++;
+    }
+
+    gSpecialVar_0x8004 = count;
+}
+
+void ScrSpecial_GetMonCondition(void)
+{
+    gSpecialVar_0x8004 = gContestMonConditions[gSpecialVar_0x8006];
+}
+
+void ScrSpecial_GetContestWinnerIdx(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    gSpecialVar_0x8005 = i;
+}
+
+void ScrSpecial_GetContestWinnerTrainerName(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    if (gIsLinkContest & 1)
+    {
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar3, gLinkPlayers[i].name);
+    }
+    else
+    {
+        Contest_CopyAndConvertTrainerName_Intl(gStringVar3, gContestMons[i].trainerName);
+    }
+}
+
+void ScrSpecial_GetContestWinnerNick(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    Contest_CopyAndConvertNicknameI_Intl(gStringVar1, i);
+}
+
+void sub_80C488C(void)
+{
+    SetMainCallback2(CB2_StartContest);
+}
+
+void sub_80C489C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        SetMainCallback2(sub_80C488C);
+    }
+}
+
+void sub_80C48C8(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_80C489C, 10);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+}
+
+void sub_80C48F4(void)
+{
+    gSpecialVar_0x8004 = gContestMons[gSpecialVar_0x8006].species;
+}
+
+void sub_80C4914(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        SetMainCallback2(sub_80C2358);
+    }
+}
+
+void sub_80C4940(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_80C4914, 10);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+}
+
+void ScrSpecial_GetContestPlayerMonIdx(void)
+{
+    gSpecialVar_0x8004 = gContestPlayerMonIndex;
+}
+
+void sub_80C4980(u8 taskId)
+{
+    u8 taskId2;
+    ScriptContext2_Enable();
+    taskId2 = CreateTask(sub_80C8604, 0);
+    SetTaskFuncWithFollowupFunc(taskId2, sub_80C8604, sub_80C49C4);
+    gTasks[taskId2].data[9] = taskId;
+}
+
+void sub_80C49C4(u8 taskId)
+{
+    Contest_CreatePlayerMon(gContestMonPartyIndex);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, sub_80C49F0);
+}
+
+void sub_80C49F0(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C88AC, sub_80C4A0C);
+}
+
+void sub_80C4A0C(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8E1C, sub_80C4A28);
+}
+
+void sub_80C4A28(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8938, sub_80C4A44);
+}
+
+void sub_80C4A44(u8 taskId)
+{
+    u8 i;
+    u8 sp0[4];
+    u8 sp4[4];
+
+    for (i = 0; i < 4; i++)
+        sp0[i] = gTasks[taskId].data[i + 1];
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sp0[0] != sp0[i])
+            break;
+    }
+
+    if (i == 4)
+        gSpecialVar_0x8004 = 0;
+    else
+        gSpecialVar_0x8004 = 1;
+
+    for (i = 0; i < 4; i++)
+        sp4[i] = gTasks[taskId].data[i + 5];
+
+    gUnknown_0203869B = sub_80C4B34(sp4);
+    InitContestMonConditions(gSpecialVar_ContestCategory);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80C4B0C);
+}
+
+void sub_80C4B0C(u8 taskId)
+{
+    sub_80B0F28(0);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8F34, sub_80C4B5C);
+}
+
+u8 sub_80C4B34(u8 * a0)
+{
+    s32 i;
+    u8 result = 0;
+
+    for (i = 1; i < 4; i++)
+    {
+        if (a0[result] < a0[i])
+            result = i;
+    }
+
+    return result;
+}
+
+void sub_80C4B5C(u8 taskId)
+{
+    if (gSpecialVar_0x8004 == 1)
+    {
+        if (IsLinkTaskFinished())
+            gTasks[taskId].func = sub_80C4BA4;
+    }
+    else
+    {
+        DestroyTask(taskId);
+        ScriptContext2_Disable();
+        EnableBothScriptContexts();
+    }
+}
+
+void sub_80C4BA4(u8 taskId)
+{
+    sub_800832C();
+    gTasks[taskId].func = sub_80C4BCC;
+}
+
+void sub_80C4BCC(u8 taskId)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        DestroyTask(taskId);
+        ScriptContext2_Disable();
+        EnableBothScriptContexts();
+    }
+}

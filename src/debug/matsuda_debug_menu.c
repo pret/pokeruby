@@ -19,7 +19,7 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_02038694;
+extern u8 gContestMonPartyIndex;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 
@@ -182,7 +182,7 @@ static void sub_80A9D58(u8 taskId)
        dest[i] = gTasks[taskId].data[5 + i];
 
    gUnknown_0203869B = sub_80C4B34(dest);
-   sub_80AE82C((u8)gSpecialVar_ContestCategory);
+   InitContestMonConditions((u8)gSpecialVar_ContestCategory);
    sub_80B0F28(0);
    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
 }
@@ -502,12 +502,12 @@ static void sub_80AA10C(void)
     SetVBlankCallback(sub_80AA090);
     SetMainCallback2(sub_80AA064);
     gPaletteFade.bufferTransferDisabled = 0;
-    gUnknown_02038694 = 0;
+    gContestMonPartyIndex = 0;
 
     if (!(gContestMons[0].nickname[0]))
         Contest_InitAllPokemon(0, 0);
 
-    Contest_CreatePlayerMon(gUnknown_02038694);
+    Contest_CreatePlayerMon(gContestMonPartyIndex);
 
     for (i = 0; i < 6; i++)
     {
@@ -607,7 +607,7 @@ void sub_80AA5E8(u8 var)
 
 static void sub_80AA614(u8 var1, u8 var2)
 {
-    u16 var = sub_80AE770(var1, var2);
+    u16 var = InitContestMonConditionI(var1, var2);
 
     ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
     Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
@@ -859,7 +859,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            sub_80AE82C(eMatsudaDebugVar);
+            InitContestMonConditions(eMatsudaDebugVar);
         SetMainCallback2(CB2_StartContest);
     }
 }
@@ -882,7 +882,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
 
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
-            gUnknown_02038670[i] = sub_80AE770(i, gSpecialVar_ContestCategory);
+            gContestMonConditions[i] = InitContestMonConditionI(i, gSpecialVar_ContestCategory);
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
     }
 }
@@ -950,13 +950,13 @@ void sub_80AAF30(void)
 
     for (i = 0; i < 3; i++)
     {
-        gUnknown_02038670[i] = 0;
+        gContestMonConditions[i] = 0;
         gUnknown_02038680[i] = 0;
         gUnknown_02038678[i] = 0;
         gContestMons[i] = gContestMons[3];
     }
 
-    gUnknown_02038670[3] = 0x12C;
+    gContestMonConditions[3] = 0x12C;
     gUnknown_02038680[3] = 0x190;
     gUnknown_02038678[3] = 0x190;
     Contest_SaveWinner(0xFE);
@@ -976,7 +976,7 @@ u8 MatsudaDebugMenu_ResetHighScore(void)
     gUnknown_0203856C = 0;
     for (i = 0; i < 4; i++)
     {
-        gUnknown_02038670[i] = 0;
+        gContestMonConditions[i] = 0;
         gUnknown_02038680[i] = 0;
         gUnknown_02038678[i] = 0;
     }

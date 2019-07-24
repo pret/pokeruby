@@ -9913,7 +9913,7 @@ static void atk5D_getmoneyreward(void)
     int i = 0;
     u8 r5 = 0;
     u32 money_to_give;
-    if (gTrainerBattleOpponent == 0x400)
+    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
         money_to_give = 2 * gBattleStruct->moneyMultiplier * MONEY_UNKNOWN;
     }
@@ -14521,7 +14521,7 @@ static void atkD1_trysethelpinghand(void)
 #ifdef NONMATCHING
 static void atkD2_tryswapitems(void)
 {
-    if ((GetBattlerSide(gBankAttacker) != 1 || gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER) || gTrainerBattleOpponent == 0x400))
+    if ((GetBattlerSide(gBankAttacker) != 1 || gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER) || gTrainerBattleOpponent == SECRET_BASE_OPPONENT))
     {
         u8 side = GetBattlerSide(gBankAttacker);
         if (gBattleTypeFlags)

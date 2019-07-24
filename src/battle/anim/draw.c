@@ -42,7 +42,7 @@ void sub_80D0C88(u8 taskId)
     task->data[3] = 0;
     task->data[4] = 0;
     task->data[5] = 0;
-    task->data[15] = sub_807A100(gBattleAnimTarget, 0);
+    task->data[15] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, 0);
 
     if (GetBattlerPosition_permutated(gBattleAnimTarget) == 1)
     {
@@ -127,7 +127,7 @@ void sub_80D0E30(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = 16;
     sprite->data[4] = 0;
-    sprite->data[5] = sub_807A100(gBattleAnimTarget, 0) + 2;
+    sprite->data[5] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, 0) + 2;
     sprite->data[6] = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     sprite->callback = sub_80D0E8C;
 }

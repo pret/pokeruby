@@ -20,7 +20,7 @@ void sub_80D0488(u8 taskId)
     struct Task* task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
-    sub_8078E70(spriteId, 0);
+    PrepareBattlerSpriteForRotScale(spriteId, 0);
     task->data[1] = 0;
     task->data[2] = 0;
     task->data[3] = 0;

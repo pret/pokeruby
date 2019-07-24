@@ -17,7 +17,7 @@ static void sub_80CF514(u8 taskId);
 
 void sub_80CF4D8(u8 taskId)
 {
-    sub_8078E70(gBankSpriteIds[gBattleAnimAttacker], 0);
+    PrepareBattlerSpriteForRotScale(gBankSpriteIds[gBattleAnimAttacker], 0);
     gTasks[taskId].func = sub_80CF514;
 }
 

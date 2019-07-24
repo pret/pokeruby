@@ -23,7 +23,7 @@ SECTIONS {
         INCLUDE "sym_bss.ld"
 
         /* .bss.code starts at 0x3000F60 */
-        src/libs/m4a_2.o(.bss.code);
+        src/libs/m4a.o(.bss.code);
 
         /* COMMON starts at 0x3001760 */
         INCLUDE "sym_common.ld"
@@ -159,7 +159,6 @@ SECTIONS {
         src/secret_base.o(.text);
         src/tv.o(.text);
         src/battle/contest_link_80C2020.o(.text);
-        asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
@@ -268,7 +267,6 @@ SECTIONS {
         src/battle/anim/aurora.o(.text);
         src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
-        asm/water.o(.text);
         src/battle/anim/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
         src/battle/anim/fire_2.o(.text);
@@ -295,9 +293,8 @@ SECTIONS {
         src/easy_chat_1.o(.text);
         src/easy_chat_2.o(.text);
         src/pokenav_before.o(.text);
-        asm/pokenav.o(.text);
-        src/pokenav_after.o(.text);
-        asm/pokenav.o(.text_80F708C);
+        src/pokenav.o(.text);
+        src/trainers_eye.o(.text);
         src/mon_markings.o(.text);
         src/mauville_man.o(.text);
         src/mail.o(.text);
@@ -307,7 +304,6 @@ SECTIONS {
         src/heal_location.o(.text);
         src/region_map.o(.text);
         src/contest_painting_effects.o(.text);
-        asm/contest_painting_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
@@ -327,6 +323,7 @@ SECTIONS {
         src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         src/roulette.o(.text);
+        src/roulette_gfx.o(.text);
         src/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);
@@ -349,7 +346,6 @@ SECTIONS {
         src/battle/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         src/battle/battle_anim_812C144.o(.text);
-        asm/battle_anim_812C144.o(.text);
         src/move_tutor_menu.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
@@ -400,9 +396,7 @@ SECTIONS {
     {
         src/libs/libgcnmultiboot.o(.text);
         src/libs/m4a_1.o(.text);
-        src/libs/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/libs/m4a_4.o(.text);
+        src/libs/m4a.o(.text);
         src/libs/agb_flash.o(.text);
         src/libs/agb_flash_1m.o(.text);
         src/libs/agb_flash_mx.o(.text);
@@ -698,7 +692,10 @@ SECTIONS {
         src/easy_chat_1.o(.rodata);
         src/easy_chat_2.o(.rodata);
         src/easy_chat_2.o(.data);
+        src/pokenav_before.o(.rodata);
+        src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
+        src/trainers_eye.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_man.o(.rodata);
         src/mail.o(.rodata);
@@ -720,7 +717,8 @@ SECTIONS {
         src/battle/battle_records.o(.rodata);
         src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
-        data/roulette.o(.rodata);
+        src/roulette.o(.rodata);
+        src/roulette_gfx.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);
         src/pokedex_cry_screen.o(.data);
         src/landmark.o(.rodata);
