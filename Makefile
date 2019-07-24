@@ -22,7 +22,7 @@ SHELL     := /bin/bash -o pipefail
 ifeq ($(MODERN),0)
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 else
-CC1       := $(shell $(PREFIX)gcc --print-prog-name=cc1) -quiet
+CC1        = $(shell $(CC) --print-prog-name=cc1) -quiet
 endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
