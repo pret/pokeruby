@@ -31,6 +31,10 @@ matrix:
         - make -j2 sapphire_rev1
         - make -j2 sapphire_rev2
     - os: linux
+      env: _="Build Nonmatching"
+      script:
+        - make -j2 ruby NONMATCHING=1
+    - os: linux
       env: _="Build German"
       before_script:
         - cp override-de.mk override.mk
