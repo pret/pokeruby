@@ -33,7 +33,7 @@ matrix:
     - os: linux
       env: _="Build Nonmatching"
       script:
-        - make -j2 ruby NONMATCHING=1
+        - make -j2 ruby NONMATCHING=1 COMPARE=0
     - os: linux
       env: _="Build German"
       before_script:
