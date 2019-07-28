@@ -16,7 +16,6 @@
 
 extern u8 gUnknown_02023A14_50;
 
-extern u8 gLastHitBy[];
 extern u8 gActiveBattler;
 extern u16 gBattleTypeFlags;
 extern u8 gAbsentBattlerFlags;

@@ -4,7 +4,7 @@
 #include "rom_8077ABC.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "task.h"
 #include "decompress.h"
 #include "palette.h"

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_80CA710.h"
