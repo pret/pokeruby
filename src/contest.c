@@ -3758,6 +3758,7 @@ u8 unref_sub_80B06E0(u8 *a)
 void sub_80B0748(u8 taskId)
 {
     u8 i;
+    u8 r4;
     u8 r4_2;
     u8 r1;
     u8 r7;
