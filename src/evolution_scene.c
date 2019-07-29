@@ -223,7 +223,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     DecompressPicFromTable_2(&gMonFrontPicTable[currSpecies],
                              gMonFrontPicCoords[currSpecies].coords,
                              gMonFrontPicCoords[currSpecies].y_offset,
-                             (void*)(0x2000000),
+                             (void*)EWRAM,
                              gUnknown_081FAF4C[1], currSpecies);
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(currSpecies, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x110, 0x20);
@@ -240,7 +240,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     DecompressPicFromTable_2(&gMonFrontPicTable[speciesToEvolve],
                              gMonFrontPicCoords[speciesToEvolve].coords,
                              gMonFrontPicCoords[speciesToEvolve].y_offset,
-                             (void*)(0x2000000),
+                             (void*)EWRAM,
                              gUnknown_081FAF4C[3], speciesToEvolve);
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
@@ -320,7 +320,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
                              gMonFrontPicCoords[postEvoSpecies].coords,
                              gMonFrontPicCoords[postEvoSpecies].y_offset,
-                             (void*)(0x2000000),
+                             (void*)EWRAM,
                              gUnknown_081FAF4C[3], postEvoSpecies);
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
@@ -390,7 +390,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
                                      gMonFrontPicCoords[postEvoSpecies].coords,
                                      gMonFrontPicCoords[postEvoSpecies].y_offset,
-                                     (void*)(0x2000000),
+                                     (void*)EWRAM,
                                      gUnknown_081FAF4C[3], postEvoSpecies);
             pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
             LoadCompressedPalette(*pokePal, 0x120, 0x20);
@@ -440,7 +440,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     DecompressPicFromTable_2(&gMonFrontPicTable[speciesToEvolve],
                              gMonFrontPicCoords[speciesToEvolve].coords,
                              gMonFrontPicCoords[speciesToEvolve].y_offset,
-                             (void*)(0x2000000),
+                             (void*)EWRAM,
                              gUnknown_081FAF4C[1], speciesToEvolve);
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);

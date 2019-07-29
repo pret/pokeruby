@@ -1561,7 +1561,7 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         &gMonFrontPicTable[species],
         gMonFrontPicCoords[species].coords,
         gMonFrontPicCoords[species].y_offset,
-        0x2000000,
+        EWRAM,
         gUnknown_0840B5A0[position],
         species,
         personality,
