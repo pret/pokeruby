@@ -97,7 +97,6 @@ extern u16 gLastLandedMoves[];
 extern u16 gLastHitByType[];
 extern u16 gUnknown_02024C4C[];
 extern u16 gLockedMoves[];
-extern u8 gLastHitBy[];
 extern u16 gChosenMovesByBanks[];
 extern u32 gHitMarker;
 extern u8 gUnknown_02024C70[];

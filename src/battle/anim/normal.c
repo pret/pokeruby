@@ -10,7 +10,7 @@
 #include "sound.h"
 #include "task.h"
 #include "trig.h"
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "constants/songs.h"
 
 extern s16 gBattleAnimArgs[];
