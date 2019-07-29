@@ -26,6 +26,7 @@
 #include "pokemon_summary_screen.h"
 #include "use_pokeblock.h"
 #include "constants/game_stat.h"
+#include "pokemon.h"
 
 struct UnknownPokenav0
 {
@@ -232,22 +233,22 @@ const u16 Palette_3E42D8[] = INCBIN_U16("graphics/pokenav/83E42D8.gbapal");
 
 const u16 gUnknown_083E42F8[] = 
 {
-    0x408,
-    0x408,
-    0x507,
-    0x507,
-    0x606,
-    0x606,
-    0x805,
-    0x805,
-    0xA04,
-    0xA04,
-    0xC03,
-    0xC03,
-    0xE02,
-    0xE02,
-    0x1000,
-    0x1000,
+    BLDALPHA_BLEND(8, 4),
+    BLDALPHA_BLEND(8, 4),
+    BLDALPHA_BLEND(7, 5),
+    BLDALPHA_BLEND(7, 5),
+    BLDALPHA_BLEND(6, 6),
+    BLDALPHA_BLEND(6, 6),
+    BLDALPHA_BLEND(5, 8),
+    BLDALPHA_BLEND(5, 8),
+    BLDALPHA_BLEND(4, 10),
+    BLDALPHA_BLEND(4, 10),
+    BLDALPHA_BLEND(3, 12),
+    BLDALPHA_BLEND(3, 12),
+    BLDALPHA_BLEND(2, 14),
+    BLDALPHA_BLEND(2, 14),
+    BLDALPHA_BLEND(0, 16),
+    BLDALPHA_BLEND(0, 16),
 };
 
 const struct OamData gOamData_83E4318 = 
@@ -1095,23 +1096,23 @@ const struct ScanlineEffectParams gUnknown_083E4990 =
 
 const u16 gUnknown_083E499C[] = 
 {
-    0x43,
-    0x32,
-    0x33,
-    0x34,
-    0x35,
-    0x36,
-    0x44,
-    0x45,
-    0x46,
-    0x47,
-    0x48,
-    0x49,
-    0x4A,
-    0x4B,
-    0x4C,
-    0x4D,
-    0x4E,
+    MON_DATA_CHAMPION_RIBBON,
+    MON_DATA_COOL_RIBBON,
+    MON_DATA_BEAUTY_RIBBON,
+    MON_DATA_CUTE_RIBBON,
+    MON_DATA_SMART_RIBBON,
+    MON_DATA_TOUGH_RIBBON,
+    MON_DATA_WINNING_RIBBON,
+    MON_DATA_VICTORY_RIBBON,
+    MON_DATA_ARTIST_RIBBON,
+    MON_DATA_EFFORT_RIBBON,
+    MON_DATA_GIFT_RIBBON_1,
+    MON_DATA_GIFT_RIBBON_2,
+    MON_DATA_GIFT_RIBBON_3,
+    MON_DATA_GIFT_RIBBON_4,
+    MON_DATA_GIFT_RIBBON_5,
+    MON_DATA_GIFT_RIBBON_6,
+    MON_DATA_GIFT_RIBBON_7,
 };
 
 void sub_80EBA5C()
