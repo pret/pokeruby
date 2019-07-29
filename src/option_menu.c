@@ -112,7 +112,7 @@ void CB2_InitOptionMenu(void)
         break;
     case 5:
         LoadPalette(gUnknown_0839F5FC, 0x80, 0x40);
-        CpuCopy16(gUnknown_0839F63C, (void *)0x0600BEE0, 0x40);
+        CpuCopy16(gUnknown_0839F63C, (void *)(VRAM + 0xBEE0), 0x40);
         gMain.state++;
         break;
     case 6:

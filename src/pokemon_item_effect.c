@@ -1,5 +1,5 @@
 #include "global.h"
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/species.h"

@@ -8,7 +8,7 @@
 #include "constants/species.h"
 #include "gba/flash_internal.h"
 #include "battle.h"
-#include "battle_ai.h"
+#include "battle_ai_script_commands.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
@@ -97,7 +97,6 @@ extern u16 gLastLandedMoves[];
 extern u16 gLastHitByType[];
 extern u16 gUnknown_02024C4C[];
 extern u16 gLockedMoves[];
-extern u8 gLastHitBy[];
 extern u16 gChosenMovesByBanks[];
 extern u32 gHitMarker;
 extern u8 gUnknown_02024C70[];
@@ -2514,7 +2513,7 @@ void debug_sub_8012688(void)
 	  &gMonFrontPicTable[gCurrentMove],
 	  gMonFrontPicCoords[gCurrentMove].coords,
 	  gMonFrontPicCoords[gCurrentMove].y_offset,
-	  (void *)0x02000000,
+	  (void *)EWRAM,
 	  gUnknown_081FAF4C[1],
 	  gCurrentMove);
 	LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
@@ -2574,7 +2573,7 @@ void debug_sub_80129F8(u8 taskId)
       &gMonFrontPicTable[gCurrentMove],
       gMonFrontPicCoords[gCurrentMove].coords,
       gMonFrontPicCoords[gCurrentMove].y_offset,
-      (void *)0x02000000,
+      (void *)EWRAM,
       gUnknown_081FAF4C[1],
       gCurrentMove);
     LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);

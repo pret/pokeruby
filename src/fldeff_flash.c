@@ -220,8 +220,8 @@ static void sub_810CE5C(u8 taskId)
 static void sub_810CE78(u8 taskId)
 {
     REG_DISPCNT = 0;
-    LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
-    LZ77UnCompVram(gCaveTransitionTilemap, (void *)0x600F800);
+    LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
+    LZ77UnCompVram(gCaveTransitionTilemap, (void *)(VRAM + 0xF800));
     LoadPalette(gCaveTransitionPalette_White, 0xE0, 0x20);
     LoadPalette(gUnknown_083F809C, 0xE0, 0x10);
     REG_BLDCNT = 15937;
@@ -292,8 +292,8 @@ static void sub_810D00C(u8 taskId)
 static void sub_810D028(u8 taskId)
 {
     REG_DISPCNT = 0;
-    LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
-    LZ77UnCompVram(gCaveTransitionTilemap, (void *)0x600F800);
+    LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
+    LZ77UnCompVram(gCaveTransitionTilemap, (void *)(VRAM + 0xF800));
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
     REG_BLDY = 0;

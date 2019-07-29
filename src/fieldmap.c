@@ -910,8 +910,8 @@ void sub_8056CBC(struct Tileset *tileset, int offset, int size)
         }
         else
         {
-            LZ77UnCompVram(tileset->palettes, (void*)0x2000000);
-            LoadPalette((void*)0x2000000, offset, size);
+            LZ77UnCompVram(tileset->palettes, (void*)EWRAM);
+            LoadPalette((void*)EWRAM, offset, size);
         }
     }
 }

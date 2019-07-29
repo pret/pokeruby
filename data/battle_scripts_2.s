@@ -1,4 +1,4 @@
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 	.include "include/macros.inc"
