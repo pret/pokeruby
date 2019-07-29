@@ -4,7 +4,7 @@
 #include "rom_8077ABC.h"
 #include "sound.h"
 #include "trig.h"
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "constants/songs.h"
 
 extern s16 gBattleAnimArgs[];

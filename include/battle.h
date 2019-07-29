@@ -2,7 +2,7 @@
 #define GUARD_BATTLE_H
 
 #include "sprite.h"
-#include "constants/battle_constants.h"
+#include "constants/battle.h"
 #include "battle_setup.h"
 
 #define GET_BATTLER_POSITION(bank)((gBattlerPositions[bank]))
@@ -761,6 +761,8 @@ extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN1V;
+
+extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
 
 extern u8 gDisplayedStringBattle[];
 

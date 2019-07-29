@@ -1943,8 +1943,8 @@ u8 sub_8079F44(u16 species, bool8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a
             &gMonFrontPicTable[species],
             gMonFrontPicCoords[species].coords,
             gMonFrontPicCoords[species].y_offset,
-            0x2000000,
-            (void *)0x2000000,
+            EWRAM,
+            (void *)EWRAM,
             species,
             a7,
             1
@@ -1957,15 +1957,15 @@ u8 sub_8079F44(u16 species, bool8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a
             &gMonBackPicTable[species],
             gMonBackPicCoords[species].coords,
             gMonBackPicCoords[species].y_offset,
-            0x2000000,
-            (void *)0x2000000,
+            EWRAM,
+            (void *)EWRAM,
             species,
             a7,
             0
         );
     }
 
-    DmaCopy32Defvars(3, (void *)0x2000000, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800);
+    DmaCopy32Defvars(3, (void *)EWRAM, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800);
 
     if (!isBackpic)
         sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonFrontPicCoords[species].y_offset, a6);
