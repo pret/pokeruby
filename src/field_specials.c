@@ -430,10 +430,10 @@ void MauvilleGymSpecial2(void)
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH2_On));
                     break;
                 case METATILE_ID(MauvilleGym, GreenBeamH3_Off):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH3_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH3_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, GreenBeamH4_Off):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH4_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH4_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, RedBeamH1_On):
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH1_Off));
@@ -454,41 +454,41 @@ void MauvilleGymSpecial2(void)
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH2_On));
                     break;
                 case METATILE_ID(MauvilleGym, RedBeamH3_Off):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH3_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH3_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, RedBeamH4_Off):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH4_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH4_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, GreenBeamV1_On):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, GreenBeamV2_On):
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, FloorTile));
                     break;
                 case METATILE_ID(MauvilleGym, RedBeamV1_On):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_Off) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_Off) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, RedBeamV2_On):
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, FloorTile));
                     break;
                 case METATILE_ID(MauvilleGym, PoleBottom_On):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV1_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV1_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, FloorTile):
                     if (MapGridGetMetatileIdAt(x, y - 1) == METATILE_ID(MauvilleGym, GreenBeamV1_On))
                     {
-                        MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV2_On) | METATILE_COLLISION_MASK);
+                        MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV2_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     }
                     else
                     {
-                        MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV2_On) | METATILE_COLLISION_MASK);
+                        MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV2_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     }
                     break;
                 case METATILE_ID(MauvilleGym, PoleBottom_Off):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV1_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV1_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, PoleTop_Off):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleTop_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleTop_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, PoleTop_On):
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleTop_Off));
@@ -538,10 +538,10 @@ void MauvilleGymSpecial3(void)
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH4_Off));
                     break;
                 case METATILE_ID(MauvilleGym, GreenBeamV1_On):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_On) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_On) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, RedBeamV1_On):
-                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_Off) | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_Off) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
                     break;
                 case METATILE_ID(MauvilleGym, GreenBeamV2_On):
                 case METATILE_ID(MauvilleGym, RedBeamV2_On):
@@ -913,7 +913,7 @@ static void PCTurnOffEffect(void)
     {
         tileId = METATILE_ID(BrendansMaysHouse, MayPC_Off);
     }
-    MapGridSetMetatileIdAt(gSaveBlock1.pos.x + dx + 7, gSaveBlock1.pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(gSaveBlock1.pos.x + dx + 7, gSaveBlock1.pos.y + dy + 7, tileId | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
 }
 
@@ -949,13 +949,13 @@ static void LotteryCornerComputerEffect(struct Task *task)
         task->data[3] = 0;
         if (task->data[4] != 0)
         {
-            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
         }
         else
         {
-            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Flash) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Flash) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Flash) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Flash) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
         }
         DrawWholeMapView();
         task->data[4] ^= 1;
@@ -969,8 +969,8 @@ static void LotteryCornerComputerEffect(struct Task *task)
 
 void EndLotteryCornerComputerEffect(void)
 {
-    MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
 }
 
@@ -1302,33 +1302,33 @@ void sub_810ED60(struct Task *task)
         task->data[3] = 0;
         if (task->data[4] != 0)
         {
-            MapGridSetMetatileIdAt( 7,  7, METATILE_BattleTower_Elevator_Top0 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 8,  7, METATILE_BattleTower_Elevator_Top1 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 9,  7, METATILE_BattleTower_Elevator_Top1 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(10,  7, METATILE_BattleTower_Elevator_Top2 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 7,  8, METATILE_BattleTower_Elevator_Mid0 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 8,  8, METATILE_BattleTower_Elevator_Mid1 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 9,  8, METATILE_BattleTower_Elevator_Mid1 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(10,  8, METATILE_BattleTower_Elevator_Mid2 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 7,  9, METATILE_BattleTower_Elevator_Bottom0 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 8,  9, METATILE_BattleTower_Elevator_Bottom1 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 9,  9, METATILE_BattleTower_Elevator_Bottom1 | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(10,  9, METATILE_BattleTower_Elevator_Bottom2 | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt( 7,  7, METATILE_BattleTower_Elevator_Top0 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 8,  7, METATILE_BattleTower_Elevator_Top1 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 9,  7, METATILE_BattleTower_Elevator_Top1 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(10,  7, METATILE_BattleTower_Elevator_Top2 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 7,  8, METATILE_BattleTower_Elevator_Mid0 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 8,  8, METATILE_BattleTower_Elevator_Mid1 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 9,  8, METATILE_BattleTower_Elevator_Mid1 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(10,  8, METATILE_BattleTower_Elevator_Mid2 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 7,  9, METATILE_BattleTower_Elevator_Bottom0 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 8,  9, METATILE_BattleTower_Elevator_Bottom1 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 9,  9, METATILE_BattleTower_Elevator_Bottom1 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(10,  9, METATILE_BattleTower_Elevator_Bottom2 | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
         }
         else
         {
-            MapGridSetMetatileIdAt( 7,  7, (METATILE_BattleTower_Elevator_Top0 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 8,  7, (METATILE_BattleTower_Elevator_Top1 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 9,  7, (METATILE_BattleTower_Elevator_Top1 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(10,  7, (METATILE_BattleTower_Elevator_Top2 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 7,  8, (METATILE_BattleTower_Elevator_Mid0 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 8,  8, (METATILE_BattleTower_Elevator_Mid1 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 9,  8, (METATILE_BattleTower_Elevator_Mid1 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(10,  8, (METATILE_BattleTower_Elevator_Mid2 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 7,  9, (METATILE_BattleTower_Elevator_Bottom0 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 8,  9, (METATILE_BattleTower_Elevator_Bottom1 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt( 9,  9, (METATILE_BattleTower_Elevator_Bottom1 + 3) | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(10,  9, (METATILE_BattleTower_Elevator_Bottom2 + 3) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt( 7,  7, (METATILE_BattleTower_Elevator_Top0 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 8,  7, (METATILE_BattleTower_Elevator_Top1 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 9,  7, (METATILE_BattleTower_Elevator_Top1 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(10,  7, (METATILE_BattleTower_Elevator_Top2 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 7,  8, (METATILE_BattleTower_Elevator_Mid0 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 8,  8, (METATILE_BattleTower_Elevator_Mid1 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 9,  8, (METATILE_BattleTower_Elevator_Mid1 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(10,  8, (METATILE_BattleTower_Elevator_Mid2 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 7,  9, (METATILE_BattleTower_Elevator_Bottom0 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 8,  9, (METATILE_BattleTower_Elevator_Bottom1 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt( 9,  9, (METATILE_BattleTower_Elevator_Bottom1 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            MapGridSetMetatileIdAt(10,  9, (METATILE_BattleTower_Elevator_Bottom2 + 3) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
         }
         DrawWholeMapView();
         task->data[4] ^= 1;

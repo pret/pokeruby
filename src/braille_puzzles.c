@@ -46,9 +46,9 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt(16, 8, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
     MapGridSetMetatileIdAt(17, 8, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
     MapGridSetMetatileIdAt(18, 8, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
-    MapGridSetMetatileIdAt(16, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(16, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     MapGridSetMetatileIdAt(17, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
-    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
@@ -89,9 +89,9 @@ void DoBrailleStrengthEffect(void)
     MapGridSetMetatileIdAt(14, 26, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
     MapGridSetMetatileIdAt(15, 26, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
     MapGridSetMetatileIdAt(16, 26, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
-    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
-    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
@@ -135,9 +135,9 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(14, 26, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
     MapGridSetMetatileIdAt(15, 26, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
     MapGridSetMetatileIdAt(16, 26, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
-    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
-    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_FLY);
