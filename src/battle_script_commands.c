@@ -2358,7 +2358,7 @@ u8 BankGetTurnOrder(u8 bank)
     return i;
 }
 
-//Someone please decompile this monstrosity below...
+//TODO Someone please decompile this monstrosity below...
 #ifdef NONMATCHING
 void SetMoveEffect(bool8 primary, u8 certainArg)
 {
@@ -2748,7 +2748,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                     {gBattlescriptCurrInstr++; return;}
 
 				gLastUsedItem = gBattleMons[gBankTarget].item;
-                USED_HELD_ITEM(bank) = gLastUsedItem;
+                *(u16 *)USED_HELD_ITEM(gBankTarget) = gLastUsedItem;
                 gBattleMons[gBankTarget].item = 0;
 
                 gActiveBattler = gBankAttacker;
@@ -2762,7 +2762,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
-				CHOICED_MOVE(gBankTarget) = 0;
+				*(u16 *)CHOICED_MOVE(gBankTarget) = 0;
             }
             break;
         case 32: //escape prevention
@@ -2837,7 +2837,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_KnockedOff;
 
-                CHOICED_MOVE(gEffectBank) = 0;
+                *(u16 *)CHOICED_MOVE(gEffectBank) = 0;
             }
             break;
         case 59: //overheat
@@ -6470,14 +6470,14 @@ static void atk48_playstatchangeanimation(void)
             stat_animID = 0x38;
     }
     if ((T2_READ_8(gBattlescriptCurrInstr + 3) & 2 && changeable_stats <= 1)
-        || changeable_stats == 0 || gBattleStruct->filler2[0] != 0)
+        || changeable_stats == 0 || gBattleStruct->unk160DC != 0)
         gBattlescriptCurrInstr += 4;
     else
     {
         EmitBattleAnimation(0, 1, stat_animID);
         MarkBufferBankForExecution(gActiveBattler);
         if ((T2_READ_8(gBattlescriptCurrInstr + 3) & 4) && changeable_stats > 1)
-            gBattleStruct->filler2[0] = 1;
+            gBattleStruct->unk160DC = 1;
         gBattlescriptCurrInstr += 4;
     }
 }
