@@ -64,6 +64,13 @@ enum
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+#define T2_WRITE_32(ptr, value) ({\
+    (ptr)[0] = ((value) >>  0) & 0xFF;\
+    (ptr)[1] = ((value) >>  8) & 0xFF;\
+    (ptr)[2] = ((value) >> 16) & 0xFF;\
+    (ptr)[3] = ((value) >> 24) & 0xFF;\
+})
+
 // Credits to Made (dolphin emoji)
 #define S16TOPOSFLOAT(val)   \
 ({                           \

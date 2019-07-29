@@ -22,6 +22,7 @@
 #include "sound.h"
 #include "task.h"
 #include "decompress.h"
+#include "string_util.h"
 #include "pokemon_summary_screen.h"
 #include "naming_screen.h"
 #include "ewram.h"
@@ -205,7 +206,6 @@ void HandleLowHpMusicChange(struct Pokemon*, u8 bank);
 bool8 IsTradedMon(struct Pokemon*);
 void BattleScriptPop(void);
 void SwitchInClearSetData(void);
-u8* ConvertIntToDecimalStringN(u8*, s32, u8, u8);
 u8 GetSetPokedexFlag(u16 nationalNum, u8 caseID);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u8 sub_803FC34(u8 bank);
@@ -8771,21 +8771,21 @@ static void atk5D_getmoneyreward(void)
         {
         case 0:
             {
-                const struct PokeTrainerData1 *data = &gTrainers[gTrainerBattleOpponent].party->noItemNoMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].lvl;
+                const struct TrainerMonNoItemDefaultMoves *data = gTrainers[gTrainerBattleOpponent].party.NoItemDefaultMoves;
+                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
             }
             break;
         case 2:
             {
-                const struct PokeTrainerData2 *data = &gTrainers[gTrainerBattleOpponent].party->itemNoMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].lvl;
+                const struct TrainerMonItemDefaultMoves *data = gTrainers[gTrainerBattleOpponent].party.ItemDefaultMoves;
+                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
             }
             break;
         case 1:
         case 3:
             {
-                const struct PokeTrainerData3 *data = &gTrainers[gTrainerBattleOpponent].party->itemMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].lvl;
+                const struct TrainerMonItemCustomMoves *data = gTrainers[gTrainerBattleOpponent].party.ItemCustomMoves;
+                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
             }
             break;
         }
@@ -8803,10 +8803,7 @@ static void atk5D_getmoneyreward(void)
     gBattleTextBuff1[1] = 1;
     gBattleTextBuff1[2] = 4;
     gBattleTextBuff1[3] = 5;
-    gBattleTextBuff1[4] = BYTE0(money_to_give);
-    gBattleTextBuff1[5] = BYTE1(money_to_give);
-    gBattleTextBuff1[6] = BYTE2(money_to_give);
-    gBattleTextBuff1[7] = BYTE3(money_to_give);
+    T2_WRITE_32(&gBattleTextBuff1[4], money_to_give);
     gBattleTextBuff1[8] = 0xFF;
 
     gBattlescriptCurrInstr += 1;
@@ -9341,10 +9338,13 @@ static void atk6B_atknameinbuff1(void)
 }
 
 #ifdef NONMATCHING
+extern const u8 BattleText_Format2[];
+
+// TODO: finish
 static void atk6C_drawlvlupbox(void)
 {
-    u8 r1 = 0;
-    u8 r7 = 0;
+    UNUSED u8 r1 = 0;
+    UNUSED u8 r7 = 0;
     switch (gBattleStruct->atk6C_statetracker)
     {
     case 0:
@@ -13371,8 +13371,9 @@ static void atkD2_tryswapitems(void)
 {
     if ((GetBattlerSide(gBankAttacker) != 1 || gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER) || gTrainerBattleOpponent == SECRET_BASE_OPPONENT))
     {
-        u8 side = GetBattlerSide(gBankAttacker);
+        UNUSED u8 side = GetBattlerSide(gBankAttacker);
         if (gBattleTypeFlags)
+            ; // TODO: finish this
     }
 
     gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
