@@ -1601,9 +1601,9 @@ static u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
     u8 spriteId;
 
     if (front)
-        LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
+        LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, EWRAM, gUnknown_0840B5A0[d], species, 0, 1);
     else
-        LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].coords, gMonBackPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 0);
+        LoadSpecialPokePic(&gMonBackPicTable[species], gMonBackPicCoords[species].coords, gMonBackPicCoords[species].y_offset, EWRAM, gUnknown_0840B5A0[d], species, 0, 0);
     lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, 0, 0xFFFF);
     LoadCompressedPalette(lzPaletteData, 0x100 + d * 0x10, 0x20);
     sub_8143648(d, d);
@@ -1617,7 +1617,7 @@ static u8 sub_813CFA8(u16 a, u16 b, u16 c, u16 d)
 {
     u8 spriteId;
 
-    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].coords, gTrainerBackPicCoords[a].y_offset, (void *)0x2000000, gUnknown_0840B5A0[d], a);
+    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].coords, gTrainerBackPicCoords[a].y_offset, (void *)EWRAM, gUnknown_0840B5A0[d], a);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + d * 0x10, 0x20);
     sub_8143680(d, d);
     gUnknown_02024E8C.anims = gUnknown_0840B064;

@@ -14583,8 +14583,8 @@ static void atkF2_displaydexinfo(void)
     case 2:
         if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2 && !gTasks[gBattleCommunication[1]].isActive)
         {
-            LZDecompressVram(gBattleTerrainTiles_Building, (void*)(0x06008000));
-            LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(0x0600d000));
+            LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM + 0x8000));
+            LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(VRAM + 0xD000));
             LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
             REG_BG3CNT = 0x5a0b;
             gBattle_BG3_X = 0x100;

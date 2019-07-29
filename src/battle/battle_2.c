@@ -2513,7 +2513,7 @@ void debug_sub_8012688(void)
 	  &gMonFrontPicTable[gCurrentMove],
 	  gMonFrontPicCoords[gCurrentMove].coords,
 	  gMonFrontPicCoords[gCurrentMove].y_offset,
-	  (void *)0x02000000,
+	  (void *)EWRAM,
 	  gUnknown_081FAF4C[1],
 	  gCurrentMove);
 	LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
@@ -2573,7 +2573,7 @@ void debug_sub_80129F8(u8 taskId)
       &gMonFrontPicTable[gCurrentMove],
       gMonFrontPicCoords[gCurrentMove].coords,
       gMonFrontPicCoords[gCurrentMove].y_offset,
-      (void *)0x02000000,
+      (void *)EWRAM,
       gUnknown_081FAF4C[1],
       gCurrentMove);
     LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
