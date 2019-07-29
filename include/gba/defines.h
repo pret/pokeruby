@@ -18,6 +18,9 @@
 #define INTR_CHECK     (*(u16 *)0x3007FF8)
 #define INTR_VECTOR    (*(void **)0x3007FFC)
 
+#define EWRAM 0x2000000
+#define IWRAM 0x3000000
+
 #define PLTT      0x5000000
 #define PLTT_SIZE 0x400
 

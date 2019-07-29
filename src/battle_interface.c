@@ -1350,11 +1350,11 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
         int foo;
 
         foo = gSprites[a].oam.tileNum + MACRO1(r7);
-        CpuCopy32(r6, (u8 *)0x06010000 + foo * 32, 32);
+        CpuCopy32(r6, (u8 *)(VRAM + 0x10000) + foo * 32, 32);
         r6 += 32;
 
         foo = gSprites[a].oam.tileNum + 8 + MACRO1(r7);
-        CpuCopy32(r6, (u8 *)0x06010000 + foo * 32, 32);
+        CpuCopy32(r6, (u8 *)(VRAM + 0x10000) + foo * 32, 32);
         r6 += 32;
     }
     //_08044486
@@ -1370,12 +1370,12 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
         if (r7 <= 1)
         {
             int foo = (gSprites[r5].oam.tileNum + 2 + r7);
-            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)0x06010000 + foo * 32, 32);
+            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)(VRAM + 0x10000) + foo * 32, 32);
         }
         else
         {
             int foo = (r7 + gSprites[r5].oam.tileNum);
-            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)0x060100C0 + foo * 32, 32);
+            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)(VRAM + 0x100C0) + foo * 32, 32);
         }
     }
 }
@@ -1524,7 +1524,7 @@ _08044446:\n\
     lsls r5, 6\n\
     adds r0, r5\n\
     lsls r0, 5\n\
-    ldr r2, _08044500 @ =0x06010000\n\
+    ldr r2, _08044500 @ =(VRAM + 0x10000)\n\
     adds r1, r0, r2\n\
     adds r0, r6, 0\n\
     mov r2, r10\n\
@@ -1538,7 +1538,7 @@ _08044446:\n\
     adds r0, r4\n\
     adds r0, r5\n\
     lsls r0, 5\n\
-    ldr r2, _08044500 @ =0x06010000\n\
+    ldr r2, _08044500 @ =(VRAM + 0x10000)\n\
     adds r1, r0, r2\n\
     adds r0, r6, 0\n\
     mov r2, r10\n\
@@ -1596,7 +1596,7 @@ _080444DA:\n\
     adds r0, r7, 0x2\n\
     adds r1, r0\n\
     lsls r1, 5\n\
-    ldr r0, _08044500 @ =0x06010000\n\
+    ldr r0, _08044500 @ =(VRAM + 0x10000)\n\
     adds r1, r0\n\
     adds r0, r4, 0\n\
     ldr r2, _080444F8 @ =REG_BG0CNT\n\

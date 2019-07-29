@@ -5541,7 +5541,7 @@ static void atk23_getexp(void)
                 gBattleResources_statsBeforeLvlUp->spd = GetMonData(&gPlayerParty[gBattleStruct->expGetterID], MON_DATA_SPEED);
                 gBattleResources_statsBeforeLvlUp->spAtk = GetMonData(&gPlayerParty[gBattleStruct->expGetterID], MON_DATA_SPATK);
                 gBattleResources_statsBeforeLvlUp->spDef = GetMonData(&gPlayerParty[gBattleStruct->expGetterID], MON_DATA_SPDEF);
-                
+
                 gActiveBattler = gBattleStruct->expGetterBank;
 
                 EmitExpBarUpdate(0, gBattleStruct->expGetterID, gBattleMoveDamage);
@@ -6752,52 +6752,75 @@ _080217E6:\n\
 
 #endif // NONMATCHING
 
-#ifdef NONMATCHING
-static void atk49_moveend(void)
+#define BattleScript_FlushMessageBox gUnknown_081D9B2D
+
+extern u8 BattleScript_RageIsBuilding[];
+extern u8 BattleScript_DefrostedViaFireMove[];
+extern u8 BattleScript_FlushMessageBox[];
+
+// atk49, moveend cases
+#define ATK49_RAGE                              0
+#define ATK49_DEFROST                           1
+#define ATK49_SYNCHRONIZE_TARGET                2
+#define ATK49_MOVE_END_ABILITIES                3
+#define ATK49_STATUS_IMMUNITY_ABILITIES         4
+#define ATK49_SYNCHRONIZE_ATTACKER              5
+#define ATK49_CHOICE_MOVE                       6
+#define ATK49_CHANGED_ITEMS                     7
+#define ATK49_ATTACKER_INVISIBLE                8
+#define ATK49_ATTACKER_VISIBLE                  9
+#define ATK49_TARGET_VISIBLE                    10
+#define ATK49_ITEM_EFFECTS_ALL                  11
+#define ATK49_KINGSROCK_SHELLBELL               12
+#define ATK49_SUBSTITUTE                        13
+#define ATK49_UPDATE_LAST_MOVES                 14
+#define ATK49_MIRROR_MOVE                       15
+#define ATK49_NEXT_TARGET                       16
+#define ATK49_COUNT                             17
+
+void atk49_moveend(void)
 {
     int i;
-    int effect = 0;
-    u16 last_move = 0, *choiced_move_atk;
-    int arg1, arg2, hold_effect_atk, move_type;
-    if (gLastUsedMove != 0xFFFF)
-        last_move = gLastUsedMove;
+    bool32 effect = FALSE;
+    u16 moveType;
+    u8 holdEffectAtk;
+    u16 *choicedMoveAtk;
+    u8 arg1, arg2;
 
     arg1 = T2_READ_8(gBattlescriptCurrInstr + 1);
     arg2 = T2_READ_8(gBattlescriptCurrInstr + 2);
-    if (gBattleMons[gBankTarget].item == ITEM_ENIGMA_BERRY)
-        hold_effect_atk = gEnigmaBerries[gBankAttacker].holdEffect;
-    else
-        hold_effect_atk = ItemId_GetHoldEffect(gBattleMons[gBankTarget].item);
 
-    choiced_move_atk = (u16*)(gBankAttacker * (ewram_addr + 0x160E8));
-    if (gBattleStruct->dynamicMoveType)
-        move_type = gBattleStruct->dynamicMoveType & 0x3F;
+    if (gBattleMons[gBankAttacker].item == ITEM_ENIGMA_BERRY)
+        holdEffectAtk = gEnigmaBerries[gBankAttacker].holdEffect;
     else
-        move_type = gBattleMoves[gCurrentMove].type;
+        holdEffectAtk = ItemId_GetHoldEffect(gBattleMons[gBankAttacker].item);
+
+    choicedMoveAtk = &((u16*)(gSharedMem + 0x160E8))[gBankAttacker];
+    GET_MOVE_TYPE(gCurrentMove, moveType);
 
     do
     {
         switch (gBattleStruct->cmd49StateTracker)
         {
-        case 0: //rage check
+        case ATK49_RAGE: // rage check
             if (gBattleMons[gBankTarget].status2 & STATUS2_RAGE
-                && gBattleMons[gBankTarget].hp && gBankAttacker != gBankTarget
+                && gBattleMons[gBankTarget].hp != 0 && gBankAttacker != gBankTarget
                 && GetBattlerSide(gBankAttacker) != GetBattlerSide(gBankTarget)
-                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && TARGET_TURN_DAMAGED
+                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && (gProtectStructs[gBankTarget].physicalDmg != 0 || gProtectStructs[gBankTarget].specialDmg != 0)
                 && gBattleMoves[gCurrentMove].power && gBattleMons[gBankTarget].statStages[STAT_STAGE_ATK] <= 0xB)
             {
                 gBattleMons[gBankTarget].statStages[STAT_STAGE_ATK]++;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_RageIsBuilding;
-                effect = 1;
+                effect = TRUE;
             }
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 1: //defrosting check
+        case ATK49_DEFROST: // defrosting check
             if (gBattleMons[gBankTarget].status1 & STATUS_FREEZE
                 && gBattleMons[gBankTarget].hp && gBankAttacker != gBankTarget
-                && gSpecialStatuses[gBankTarget].moveturnLostHP
-                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && move_type == TYPE_FIRE)
+                && gSpecialStatuses[gBankTarget].moveturnLostHP_special
+                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && moveType == TYPE_FIRE)
             {
                 gBattleMons[gBankTarget].status1 &= ~(STATUS_FREEZE);
                 gActiveBattler = gBankTarget;
@@ -6805,55 +6828,79 @@ static void atk49_moveend(void)
                 MarkBufferBankForExecution(gActiveBattler);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_DefrostedViaFireMove;
-                effect = 1;
+                effect = TRUE;
             }
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 2: //target synchronize
+        case ATK49_SYNCHRONIZE_TARGET: // target synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_SYNCHRONIZE, gBankTarget, 0, 0, 0))
-                effect = 1;
+                effect = TRUE;
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 3: //contact abilities
-            if (AbilityBattleEffects(ABILITYEFFECT_CONTACT, gBankTarget, 0, 0, 0))
-                effect = 1;
+        case ATK49_MOVE_END_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
+            if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END, gBankTarget, 0, 0, 0))
+                effect = TRUE;
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 4: //status immunities
+        case ATK49_STATUS_IMMUNITY_ABILITIES: //status immunities
             if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, 0, 0, 0, 0))
-                effect = 1; //it loops through 4 banks, so we increment after its done with all banks
+                effect = TRUE; //it loops through 4 banks, so we increment after its done with all banks
             else
                 gBattleStruct->cmd49StateTracker++;
             break;
-        case 5: //attacker synchronize
+        case ATK49_SYNCHRONIZE_ATTACKER: //attacker synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_ATK_SYNCHRONIZE, gBankAttacker, 0, 0, 0))
-                effect = 1;
+                effect = TRUE;
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 6: //update choice band move
-            if (gHitMarker & HITMARKER_OBEYS && hold_effect_atk == HOLD_EFFECT_CHOICE_BAND
-                && gLastUsedMove != MOVE_STRUGGLE && (*choiced_move_atk == 0 || *choiced_move_atk == 0xFFF)
-                && gLastUsedMove != MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        case ATK49_CHOICE_MOVE: //update choice band move
+            if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
+                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
+                    goto LOOP;
+            if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
             {
-                *choiced_move_atk = gLastUsedMove;
-                for (i = 0; i < 4 && gBattleMons[gBankAttacker].moves[i] != *choiced_move_atk; i++){}
-                if (i == 4)
-                    *choiced_move_atk = 0;
+                gBattleStruct->cmd49StateTracker++;
+                break;
             }
-            gBattleStruct->cmd49StateTracker++;
+            *choicedMoveAtk = gChosenMove;
+            LOOP:
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    if (gBattleMons[gBankAttacker].moves[i] == *choicedMoveAtk)
+                        break;
+                }
+                if (i == 4)
+                    *choicedMoveAtk = 0;
+                gBattleStruct->cmd49StateTracker++;
+            }
             break;
-        case 7: //changed held items
+        case ATK49_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
             {
-                #define CHANGED_ITEM (((*u16)(gSharedMem + 0x160F0)))
-                if (CHANGED_ITEM(i))
-                    gBattleMons[i].item = CHANGED_ITEM(i);
+                #define CHANGED_ITEM ((u16 *)(gSharedMem + 0x160F0))
+                if (CHANGED_ITEM[i] != 0)
+                {
+                    gBattleMons[i].item = CHANGED_ITEM[i];
+                    CHANGED_ITEM[i] = 0;
+                }
+                #undef CHANGED_ITEM
             }
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 8: //make sprite invisible
-            if (gStatuses3[gBankAttacker] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER)
-                && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+        case ATK49_ATTACKER_INVISIBLE: // make attacker sprite invisible
+            if (ItemBattleEffects(ITEMEFFECT_MOVE_END, 0, FALSE))
+                effect = TRUE;
+            else
+                gBattleStruct->cmd49StateTracker++;
+            break;
+        case ATK49_ATTACKER_VISIBLE: // make attacker sprite visible
+            if (ItemBattleEffects(ITEMEFFECT_KINGSROCK_SHELLBELL, 0, FALSE))
+                effect = TRUE;
+            gBattleStruct->cmd49StateTracker++;
+            break;
+        case ATK49_TARGET_VISIBLE: // make target sprite visible
+            if ((gStatuses3[gBankAttacker] & 0x400C0) && (gHitMarker & HITMARKER_NO_ANIMATIONS))
             {
                 gActiveBattler = gBankAttacker;
                 EmitSpriteInvisibility(0, 1);
@@ -6861,1347 +6908,148 @@ static void atk49_moveend(void)
             }
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 9: //semi-invlurneable attacker make visible
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || !(gStatuses3[gBankAttacker] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+        case ATK49_ITEM_EFFECTS_ALL: // item effects for all battlers
+            if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT
+                || !(gStatuses3[gBankAttacker] & (STATUS3_SEMI_INVULNERABLE))
                 || WasUnableToUseMove(gBankAttacker))
-                {
-                    gActiveBattler = gBankAttacker;
-                    EmitSpriteInvisibility(0, 0);
-                    MarkBufferBankForExecution(gActiveBattler);
-                    gStatuses3 &= ~(STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER);
-                    gSpecialStatuses[gBankAttacker].restored_bank_sprite = 1;
-                }
+            {
+                gActiveBattler = gBankAttacker;
+                EmitSpriteInvisibility(0, FALSE);
+                MarkBufferBankForExecution(gActiveBattler);
+                gStatuses3[gBankAttacker] &= ~(STATUS3_SEMI_INVULNERABLE);
+                gSpecialStatuses[gBankAttacker].restoredBankSprite = 1;
+            }
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 10: //semi-invlurneable target make visible
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || !(gStatuses3[gBankTarget] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
-                || WasUnableToUseMove(gBankTarget))
-                {
-                    gActiveBattler = gBankTarget;
-                    EmitSpriteInvisibility(0, 0);
-                    MarkBufferBankForExecution(gActiveBattler);
-                    gStatuses3 &= ~(STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER);
-                    gSpecialStatuses[gBankTarget].restored_bank_sprite = 1;
-                }
+        case ATK49_KINGSROCK_SHELLBELL: // king's rock and shell bell
+            if (!gSpecialStatuses[gBankTarget].restoredBankSprite && gBankTarget < gBattlersCount
+                && !(gStatuses3[gBankTarget] & STATUS3_SEMI_INVULNERABLE))
+            {
+                gActiveBattler = gBankTarget;
+                EmitSpriteInvisibility(0, FALSE);
+                MarkBufferBankForExecution(gActiveBattler);
+                gStatuses3[gBankTarget] &= ~(STATUS3_SEMI_INVULNERABLE);
+            }
             gBattleStruct->cmd49StateTracker++;
             break;
-        case 11: //
+        case ATK49_SUBSTITUTE: // update substitute
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gDisableStructs[i].substituteHP == 0)
+                    gBattleMons[i].status2 &= ~(STATUS2_SUBSTITUTE);
+            }
+            gBattleStruct->cmd49StateTracker++;
+            break;
+        case ATK49_UPDATE_LAST_MOVES:
+            if (gHitMarker & HITMARKER_PURSUIT_TRAP)
+            {
+                gActiveBattler = gBankAttacker;
+                gBankAttacker = gBankTarget;
+                gBankTarget = gActiveBattler;
+                gHitMarker &= ~(HITMARKER_PURSUIT_TRAP);
+            }
+
+            if (gBattleMoves[gChosenMove].effect != 0x7F || (gMoveResultFlags & 0x29))
+                gUnknown_02024C2C[gBankAttacker] = gChosenMove;
+
+            if (!(gAbsentBattlerFlags & gBitTable[gBankAttacker])
+                && !(gSharedMem[0x160A6] & gBitTable[gBankAttacker])
+                && gBattleMoves[gChosenMove].effect != EFFECT_BATON_PASS)
+            {
+                if (gHitMarker & HITMARKER_OBEYS)
+                {
+                    gLastUsedMove[gBankAttacker] = gChosenMove;
+                    gUnknown_02024C4C[gBankAttacker] = gCurrentMove;
+                }
+                else
+                {
+                    gLastUsedMove[gBankAttacker] = 0xFFFF;
+                    gUnknown_02024C4C[gBankAttacker] = 0xFFFF;
+                }
+
+                if (!(gHitMarker & HITMARKER_FAINTED(gBankTarget)))
+                    gLastHitBy[gBankTarget] = gBankAttacker;
+
+                if (gHitMarker & HITMARKER_OBEYS && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+                {
+                    if (gChosenMove == 0xFFFF)
+                    {
+                        gLastLandedMoves[gBankTarget] = gChosenMove;
+                    }
+                    else
+                    {
+                        gLastLandedMoves[gBankTarget] = gCurrentMove;
+                        GET_MOVE_TYPE(gCurrentMove, gLastHitByType[gBankTarget]);
+                    }
+                }
+                else
+                {
+                    gLastLandedMoves[gBankTarget] = 0xFFFF;
+                }
+            }
+            gBattleStruct->cmd49StateTracker++;
+            break;
+        case ATK49_MIRROR_MOVE:
+            if (!(gAbsentBattlerFlags & gBitTable[gBankAttacker]) && !(gSharedMem[0x160A6] & gBitTable[gBankAttacker]))
+            {
+                if (gBattleMoves[gChosenMove].flags & 0x10 && gHitMarker & HITMARKER_OBEYS
+                 && gBankAttacker != gBankTarget && !(gHitMarker & HITMARKER_FAINTED(gBankTarget))
+                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+                {
+                    gSharedMem[0x160AC + gBankTarget * 2 + 0] = gChosenMove;
+                    gSharedMem[0x160AC + gBankTarget * 2 + 1] = gChosenMove >> 8;
+
+                    gSharedMem[0x16100 + gBankTarget * 4 + 0 + (gBankAttacker / 2) * 2] = gChosenMove;
+                    gSharedMem[0x16100 + gBankTarget * 4 + 1 + (gBankAttacker / 2) * 2] = gChosenMove >> 8;
+                }
+                else if (gBankAttacker != gBankTarget)
+                {
+                    gSharedMem[0x160AC + gBankTarget * 2 + 0] = 0;
+                    gSharedMem[0x160AC + gBankTarget * 2 + 1] = 0;
+
+                    gSharedMem[0x16100 + gBankTarget * 4 + 0 + (gBankAttacker / 2) * 2] = 0;
+                    gSharedMem[0x16100 + gBankTarget * 4 + 1 + (gBankAttacker / 2) * 2] = 0;
+                }
+            }
+            gBattleStruct->cmd49StateTracker++;
+            break;
+        case ATK49_NEXT_TARGET:
+            if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE) && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                && !gProtectStructs[gBankAttacker].chargingTurn && gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH
+                && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
+            {
+                u8 battlerId = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBankTarget)));
+                if (gBattleMons[battlerId].hp != 0)
+                {
+                    gBankTarget = battlerId;
+                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
+                    gBattleStruct->cmd49StateTracker = 0;
+                    MoveValuesCleanUp();
+                    BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
+                    gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
+                    return;
+                }
+                else
+                {
+                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
+                }
+            }
+            gBattleStruct->cmd49StateTracker++;
+            break;
+        case ATK49_COUNT:
+            break;
         }
 
-    } while (effect == 0)
+        if (arg1 == 1 && effect == FALSE)
+            gBattleStruct->cmd49StateTracker = ATK49_COUNT;
+        if (arg1 == 2 && arg2 == gBattleStruct->cmd49StateTracker)
+            gBattleStruct->cmd49StateTracker = ATK49_COUNT;
+
+    } while (gBattleStruct->cmd49StateTracker != ATK49_COUNT && effect == FALSE);
+
+    if (gBattleStruct->cmd49StateTracker == ATK49_COUNT && effect == FALSE)
+        gBattlescriptCurrInstr += 3;
 }
-#else
-NAKED
-void atk49_moveend(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x18\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    ldr r0, _08021834 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r0]\n\
-    ldrb r1, [r0, 0x1]\n\
-    str r1, [sp, 0x10]\n\
-    ldrb r0, [r0, 0x2]\n\
-    str r0, [sp, 0x14]\n\
-    ldr r1, _08021838 @ =gBattleMons\n\
-    ldr r0, _0802183C @ =gBankAttacker\n\
-    ldrb r2, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r2\n\
-    adds r1, r0, r1\n\
-    ldrh r0, [r1, 0x2E]\n\
-    cmp r0, 0xAF\n\
-    bne _08021844\n\
-    ldr r1, _08021840 @ =gEnigmaBerries\n\
-    lsls r0, r2, 3\n\
-    subs r0, r2\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r0, [r0, 0x7]\n\
-    b _0802184E\n\
-    .align 2, 0\n\
-_08021834: .4byte gBattlescriptCurrInstr\n\
-_08021838: .4byte gBattleMons\n\
-_0802183C: .4byte gBankAttacker\n\
-_08021840: .4byte gEnigmaBerries\n\
-_08021844:\n\
-    ldrh r0, [r1, 0x2E]\n\
-    bl ItemId_GetHoldEffect\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-_0802184E:\n\
-    str r0, [sp, 0x8]\n\
-    ldr r0, _0802186C @ =gBankAttacker\n\
-    ldrb r1, [r0]\n\
-    lsls r1, 1\n\
-    ldr r0, _08021870 @ =gSharedMem + 0x160E8\n\
-    adds r1, r0\n\
-    str r1, [sp, 0xC]\n\
-    subs r0, 0xCC\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _080218C0\n\
-    movs r2, 0x3F\n\
-    ands r2, r0\n\
-    str r2, [sp, 0x4]\n\
-    b _080218D2\n\
-    .align 2, 0\n\
-_0802186C: .4byte gBankAttacker\n\
-_08021870: .4byte gSharedMem + 0x160E8\n\
-_08021874:\n\
-    strb r2, [r7]\n\
-    ldr r0, [r5]\n\
-    orrs r0, r6\n\
-    str r0, [r5]\n\
-    ldr r0, _080218AC @ =gSharedMem\n\
-    ldr r3, _080218B0 @ =0x0001600c\n\
-    adds r0, r3\n\
-    strb r4, [r0]\n\
-    bl MoveValuesCleanUp\n\
-    ldr r2, _080218B4 @ =gBattleScriptsForMoveEffects\n\
-    mov r4, r8\n\
-    ldrh r1, [r4]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r9\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldr r0, [r0]\n\
-    bl BattleScriptPush\n\
-    ldr r1, _080218B8 @ =gBattlescriptCurrInstr\n\
-    ldr r0, _080218BC @ =gUnknown_081D9B2D\n\
-    bl _0802229C\n\
-    .align 2, 0\n\
-_080218AC: .4byte gSharedMem\n\
-_080218B0: .4byte 0x0001600c\n\
-_080218B4: .4byte gBattleScriptsForMoveEffects\n\
-_080218B8: .4byte gBattlescriptCurrInstr\n\
-_080218BC: .4byte gUnknown_081D9B2D\n\
-_080218C0:\n\
-    ldr r2, _080218D8 @ =gBattleMoves\n\
-    ldr r0, _080218DC @ =gCurrentMove\n\
-    ldrh r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x2]\n\
-    str r0, [sp, 0x4]\n\
-_080218D2:\n\
-    ldr r5, _080218E0 @ =gSharedMem\n\
-    mov r12, r5\n\
-    b _080218EE\n\
-    .align 2, 0\n\
-_080218D8: .4byte gBattleMoves\n\
-_080218DC: .4byte gCurrentMove\n\
-_080218E0: .4byte gSharedMem\n\
-_080218E4:\n\
-    mov r0, r10\n\
-    cmp r0, 0\n\
-    beq _080218EE\n\
-    bl _08022286\n\
-_080218EE:\n\
-    ldr r0, _08021908 @ =0x0001600c\n\
-    add r0, r12\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x11\n\
-    bls _080218FC\n\
-    bl _0802224E\n\
-_080218FC:\n\
-    lsls r0, 2\n\
-    ldr r1, _0802190C @ =_08021910\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08021908: .4byte 0x0001600c\n\
-_0802190C: .4byte _08021910\n\
-    .align 2, 0\n\
-_08021910:\n\
-    .4byte _08021958\n\
-    .4byte _08021A34\n\
-    .4byte _08021AF0\n\
-    .4byte _08021B20\n\
-    .4byte _08021B44\n\
-    .4byte _08021B78\n\
-    .4byte _08021B9C\n\
-    .4byte _08021C40\n\
-    .4byte _08021C78\n\
-    .4byte _08021CA8\n\
-    .4byte _08021CCC\n\
-    .4byte _08021D18\n\
-    .4byte _08021DAC\n\
-    .4byte _08021E30\n\
-    .4byte _08021E70\n\
-    .4byte _08022068\n\
-    .4byte _080221C0\n\
-    .4byte _0802224E\n\
-_08021958:\n\
-    ldr r5, _08021A08 @ =gBattleMons\n\
-    ldr r2, _08021A0C @ =gBankTarget\n\
-    ldrb r4, [r2]\n\
-    movs r6, 0x58\n\
-    adds r3, r4, 0\n\
-    muls r3, r6\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x50\n\
-    adds r0, r3, r0\n\
-    ldr r1, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 16\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _080219FE\n\
-    adds r0, r3, r5\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    beq _080219FE\n\
-    ldr r0, _08021A10 @ =gBankAttacker\n\
-    ldrb r1, [r0]\n\
-    cmp r1, r4\n\
-    beq _080219FE\n\
-    adds r0, r1, 0\n\
-    bl GetBattlerSide\n\
-    adds r4, r0, 0\n\
-    ldr r1, _08021A0C @ =gBankTarget\n\
-    ldrb r0, [r1]\n\
-    bl GetBattlerSide\n\
-    lsls r4, 24\n\
-    lsls r0, 24\n\
-    cmp r4, r0\n\
-    beq _080219FE\n\
-    ldr r0, _08021A14 @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x29\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080219FE\n\
-    ldr r2, _08021A18 @ =gProtectStructs\n\
-    ldr r4, _08021A0C @ =gBankTarget\n\
-    ldrb r3, [r4]\n\
-    lsls r1, r3, 4\n\
-    adds r0, r2, 0x4\n\
-    adds r0, r1, r0\n\
-    ldr r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _080219C8\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x8\n\
-    adds r0, r1, r0\n\
-    ldr r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _080219FE\n\
-_080219C8:\n\
-    ldr r2, _08021A1C @ =gBattleMoves\n\
-    ldr r0, _08021A20 @ =gCurrentMove\n\
-    ldrh r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0\n\
-    beq _080219FE\n\
-    adds r0, r3, 0\n\
-    muls r0, r6\n\
-    adds r1, r0, r5\n\
-    ldrb r2, [r1, 0x19]\n\
-    movs r0, 0x19\n\
-    ldrsb r0, [r1, r0]\n\
-    cmp r0, 0xB\n\
-    bgt _080219FE\n\
-    adds r0, r2, 0x1\n\
-    strb r0, [r1, 0x19]\n\
-    bl BattleScriptPushCursor\n\
-    ldr r1, _08021A24 @ =gBattlescriptCurrInstr\n\
-    ldr r0, _08021A28 @ =BattleScript_RageIsBuilding\n\
-    str r0, [r1]\n\
-    movs r5, 0x1\n\
-    mov r10, r5\n\
-_080219FE:\n\
-    ldr r2, _08021A2C @ =gSharedMem\n\
-    ldr r0, _08021A30 @ =0x0001600c\n\
-    adds r1, r2, r0\n\
-    b _08021E00\n\
-    .align 2, 0\n\
-_08021A08: .4byte gBattleMons\n\
-_08021A0C: .4byte gBankTarget\n\
-_08021A10: .4byte gBankAttacker\n\
-_08021A14: .4byte gMoveResultFlags\n\
-_08021A18: .4byte gProtectStructs\n\
-_08021A1C: .4byte gBattleMoves\n\
-_08021A20: .4byte gCurrentMove\n\
-_08021A24: .4byte gBattlescriptCurrInstr\n\
-_08021A28: .4byte BattleScript_RageIsBuilding\n\
-_08021A2C: .4byte gSharedMem\n\
-_08021A30: .4byte 0x0001600c\n\
-_08021A34:\n\
-    ldr r2, _08021AD0 @ =gBattleMons\n\
-    ldr r1, _08021AD4 @ =gBankTarget\n\
-    ldrb r4, [r1]\n\
-    movs r3, 0x58\n\
-    mov r12, r3\n\
-    mov r3, r12\n\
-    muls r3, r4\n\
-    adds r7, r2, 0\n\
-    adds r7, 0x4C\n\
-    adds r6, r3, r7\n\
-    ldr r5, [r6]\n\
-    movs r0, 0x20\n\
-    ands r0, r5\n\
-    cmp r0, 0\n\
-    bne _08021A54\n\
-    b _08021DFA\n\
-_08021A54:\n\
-    adds r0, r3, r2\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    bne _08021A5E\n\
-    b _08021DFA\n\
-_08021A5E:\n\
-    ldr r0, _08021AD8 @ =gBankAttacker\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r4\n\
-    bne _08021A68\n\
-    b _08021DFA\n\
-_08021A68:\n\
-    ldr r0, _08021ADC @ =gSpecialStatuses\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 2\n\
-    adds r0, 0xC\n\
-    adds r1, r0\n\
-    ldr r0, [r1]\n\
-    cmp r0, 0\n\
-    bne _08021A7C\n\
-    b _08021DFA\n\
-_08021A7C:\n\
-    ldr r0, _08021AE0 @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x29\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021A8A\n\
-    b _08021DFA\n\
-_08021A8A:\n\
-    ldr r4, [sp, 0x4]\n\
-    cmp r4, 0xA\n\
-    beq _08021A92\n\
-    b _08021DFA\n\
-_08021A92:\n\
-    movs r0, 0x21\n\
-    negs r0, r0\n\
-    ands r5, r0\n\
-    str r5, [r6]\n\
-    ldr r4, _08021AE4 @ =gActiveBattler\n\
-    ldr r5, _08021AD4 @ =gBankTarget\n\
-    ldrb r0, [r5]\n\
-    strb r0, [r4]\n\
-    ldrb r0, [r5]\n\
-    mov r1, r12\n\
-    muls r1, r0\n\
-    adds r0, r1, 0\n\
-    adds r0, r7\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0x28\n\
-    movs r2, 0\n\
-    movs r3, 0x4\n\
-    bl EmitSetMonData\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    bl BattleScriptPushCursor\n\
-    ldr r1, _08021AE8 @ =gBattlescriptCurrInstr\n\
-    ldr r0, _08021AEC @ =BattleScript_DefrostedViaFireMove\n\
-    str r0, [r1]\n\
-    movs r2, 0x1\n\
-    mov r10, r2\n\
-    b _08021DFA\n\
-    .align 2, 0\n\
-_08021AD0: .4byte gBattleMons\n\
-_08021AD4: .4byte gBankTarget\n\
-_08021AD8: .4byte gBankAttacker\n\
-_08021ADC: .4byte gSpecialStatuses\n\
-_08021AE0: .4byte gMoveResultFlags\n\
-_08021AE4: .4byte gActiveBattler\n\
-_08021AE8: .4byte gBattlescriptCurrInstr\n\
-_08021AEC: .4byte BattleScript_DefrostedViaFireMove\n\
-_08021AF0:\n\
-    ldr r0, _08021B14 @ =gBankTarget\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    movs r0, 0x7\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08021B0C\n\
-    movs r4, 0x1\n\
-    mov r10, r4\n\
-_08021B0C:\n\
-    ldr r2, _08021B18 @ =gSharedMem\n\
-    ldr r5, _08021B1C @ =0x0001600c\n\
-    adds r1, r2, r5\n\
-    b _08021E00\n\
-    .align 2, 0\n\
-_08021B14: .4byte gBankTarget\n\
-_08021B18: .4byte gSharedMem\n\
-_08021B1C: .4byte 0x0001600c\n\
-_08021B20:\n\
-    ldr r0, _08021B40 @ =gBankTarget\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    movs r0, 0x4\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08021B3A\n\
-    b _08021DFA\n\
-_08021B3A:\n\
-    movs r0, 0x1\n\
-    mov r10, r0\n\
-    b _08021DFA\n\
-    .align 2, 0\n\
-_08021B40: .4byte gBankTarget\n\
-_08021B44:\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08021B68\n\
-    movs r4, 0x1\n\
-    mov r10, r4\n\
-    ldr r5, _08021B64 @ =gSharedMem\n\
-    mov r12, r5\n\
-    b _0802224E\n\
-    .align 2, 0\n\
-_08021B64: .4byte gSharedMem\n\
-_08021B68:\n\
-    ldr r2, _08021B70 @ =gSharedMem\n\
-    ldr r0, _08021B74 @ =0x0001600c\n\
-    adds r1, r2, r0\n\
-    b _08021E00\n\
-    .align 2, 0\n\
-_08021B70: .4byte gSharedMem\n\
-_08021B74: .4byte 0x0001600c\n\
-_08021B78:\n\
-    ldr r0, _08021B98 @ =gBankAttacker\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    movs r0, 0x8\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl AbilityBattleEffects\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08021B92\n\
-    b _08021DFA\n\
-_08021B92:\n\
-    movs r1, 0x1\n\
-    mov r10, r1\n\
-    b _08021DFA\n\
-    .align 2, 0\n\
-_08021B98: .4byte gBankAttacker\n\
-_08021B9C:\n\
-    ldr r0, _08021C28 @ =gHitMarker\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    lsls r1, 18\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021BE0\n\
-    ldr r4, [sp, 0x8]\n\
-    cmp r4, 0x1D\n\
-    bne _08021BE0\n\
-    ldr r0, _08021C2C @ =gChosenMove\n\
-    ldrh r2, [r0]\n\
-    adds r7, r0, 0\n\
-    cmp r2, 0xA5\n\
-    beq _08021BE0\n\
-    ldr r5, [sp, 0xC]\n\
-    ldrh r1, [r5]\n\
-    cmp r1, 0\n\
-    beq _08021BC8\n\
-    ldr r0, _08021C30 @ =0x0000ffff\n\
-    cmp r1, r0\n\
-    bne _08021BE0\n\
-_08021BC8:\n\
-    cmp r2, 0xE2\n\
-    bne _08021BDA\n\
-    ldr r0, _08021C34 @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08021BDA\n\
-    b _08022244\n\
-_08021BDA:\n\
-    ldrh r0, [r7]\n\
-    ldr r1, [sp, 0xC]\n\
-    strh r0, [r1]\n\
-_08021BE0:\n\
-    movs r4, 0\n\
-    ldr r2, _08021C38 @ =gBattleMons\n\
-    ldr r3, _08021C3C @ =gBankAttacker\n\
-    ldrb r1, [r3]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r2, 0xC\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    ldr r5, [sp, 0xC]\n\
-    ldrh r1, [r5]\n\
-    mov r9, r3\n\
-    cmp r0, r1\n\
-    beq _08021C18\n\
-    mov r6, r9\n\
-    movs r3, 0x58\n\
-    adds r5, r1, 0\n\
-_08021C02:\n\
-    adds r4, 0x1\n\
-    cmp r4, 0x3\n\
-    bgt _08021C18\n\
-    lsls r0, r4, 1\n\
-    ldrb r1, [r6]\n\
-    muls r1, r3\n\
-    adds r0, r1\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r5\n\
-    bne _08021C02\n\
-_08021C18:\n\
-    cmp r4, 0x4\n\
-    beq _08021C1E\n\
-    b _08022244\n\
-_08021C1E:\n\
-    movs r0, 0\n\
-    ldr r1, [sp, 0xC]\n\
-_08021C22:\n\
-    strh r0, [r1]\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_08021C28: .4byte gHitMarker\n\
-_08021C2C: .4byte gChosenMove\n\
-_08021C30: .4byte 0x0000ffff\n\
-_08021C34: .4byte gMoveResultFlags\n\
-_08021C38: .4byte gBattleMons\n\
-_08021C3C: .4byte gBankAttacker\n\
-_08021C40:\n\
-    movs r4, 0\n\
-    ldr r0, _08021C6C @ =gBattlersCount\n\
-    ldrb r2, [r0]\n\
-    cmp r4, r2\n\
-    blt _08021C4C\n\
-    b _08022244\n\
-_08021C4C:\n\
-    movs r5, 0\n\
-    ldr r2, _08021C70 @ =gSharedMem + 0x160F0\n\
-    ldr r3, _08021C74 @ =gBattleMons\n\
-_08021C52:\n\
-    ldrh r1, [r2]\n\
-    cmp r1, 0\n\
-    beq _08021C5C\n\
-    strh r1, [r3, 0x2E]\n\
-    strh r5, [r2]\n\
-_08021C5C:\n\
-    adds r2, 0x2\n\
-    adds r3, 0x58\n\
-    adds r4, 0x1\n\
-    ldrb r1, [r0]\n\
-    cmp r4, r1\n\
-    blt _08021C52\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_08021C6C: .4byte gBattlersCount\n\
-_08021C70: .4byte gSharedMem + 0x160F0\n\
-_08021C74: .4byte gBattleMons\n\
-_08021C78:\n\
-    movs r0, 0x3\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    bl ItemBattleEffects\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08021C98\n\
-    movs r2, 0x1\n\
-    mov r10, r2\n\
-    ldr r3, _08021C94 @ =gSharedMem\n\
-    mov r12, r3\n\
-    b _0802224E\n\
-    .align 2, 0\n\
-_08021C94: .4byte gSharedMem\n\
-_08021C98:\n\
-    ldr r2, _08021CA0 @ =gSharedMem\n\
-    ldr r4, _08021CA4 @ =0x0001600c\n\
-    adds r1, r2, r4\n\
-    b _08021E00\n\
-    .align 2, 0\n\
-_08021CA0: .4byte gSharedMem\n\
-_08021CA4: .4byte 0x0001600c\n\
-_08021CA8:\n\
-    movs r0, 0x4\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    bl ItemBattleEffects\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08021CBC\n\
-    movs r5, 0x1\n\
-    mov r10, r5\n\
-_08021CBC:\n\
-    ldr r2, _08021CC4 @ =gSharedMem\n\
-    ldr r0, _08021CC8 @ =0x0001600c\n\
-    adds r1, r2, r0\n\
-    b _08021E00\n\
-    .align 2, 0\n\
-_08021CC4: .4byte gSharedMem\n\
-_08021CC8: .4byte 0x0001600c\n\
-_08021CCC:\n\
-    ldr r1, _08021D04 @ =gStatuses3\n\
-    ldr r0, _08021D08 @ =gBankAttacker\n\
-    ldrb r2, [r0]\n\
-    lsls r0, r2, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    ldr r1, _08021D0C @ =0x000400c0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08021CE2\n\
-    b _08021DFA\n\
-_08021CE2:\n\
-    ldr r0, _08021D10 @ =gHitMarker\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08021CF0\n\
-    b _08021DFA\n\
-_08021CF0:\n\
-    ldr r4, _08021D14 @ =gActiveBattler\n\
-    strb r2, [r4]\n\
-    movs r0, 0\n\
-    movs r1, 0x1\n\
-    bl EmitSpriteInvisibility\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    b _08021DFA\n\
-    .align 2, 0\n\
-_08021D04: .4byte gStatuses3\n\
-_08021D08: .4byte gBankAttacker\n\
-_08021D0C: .4byte 0x000400c0\n\
-_08021D10: .4byte gHitMarker\n\
-_08021D14: .4byte gActiveBattler\n\
-_08021D18:\n\
-    ldr r0, _08021D88 @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x29\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08021D44\n\
-    ldr r1, _08021D8C @ =gStatuses3\n\
-    ldr r0, _08021D90 @ =gBankAttacker\n\
-    ldrb r2, [r0]\n\
-    lsls r0, r2, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    ldr r1, _08021D94 @ =0x000400c0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021D44\n\
-    adds r0, r2, 0\n\
-    bl WasUnableToUseMove\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08021D7E\n\
-_08021D44:\n\
-    ldr r4, _08021D98 @ =gActiveBattler\n\
-    ldr r5, _08021D90 @ =gBankAttacker\n\
-    ldrb r0, [r5]\n\
-    strb r0, [r4]\n\
-    movs r0, 0\n\
-    movs r1, 0\n\
-    bl EmitSpriteInvisibility\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r0, _08021D8C @ =gStatuses3\n\
-    ldrb r2, [r5]\n\
-    lsls r2, 2\n\
-    adds r2, r0\n\
-    ldr r0, [r2]\n\
-    ldr r1, _08021D9C @ =0xfffbff3f\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-    ldr r2, _08021DA0 @ =gSpecialStatuses\n\
-    ldrb r1, [r5]\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r1, [r0]\n\
-    movs r2, 0x4\n\
-    orrs r1, r2\n\
-    strb r1, [r0]\n\
-_08021D7E:\n\
-    ldr r2, _08021DA4 @ =gSharedMem\n\
-    ldr r4, _08021DA8 @ =0x0001600c\n\
-    adds r1, r2, r4\n\
-    b _08021E00\n\
-    .align 2, 0\n\
-_08021D88: .4byte gMoveResultFlags\n\
-_08021D8C: .4byte gStatuses3\n\
-_08021D90: .4byte gBankAttacker\n\
-_08021D94: .4byte 0x000400c0\n\
-_08021D98: .4byte gActiveBattler\n\
-_08021D9C: .4byte 0xfffbff3f\n\
-_08021DA0: .4byte gSpecialStatuses\n\
-_08021DA4: .4byte gSharedMem\n\
-_08021DA8: .4byte 0x0001600c\n\
-_08021DAC:\n\
-    ldr r2, _08021E0C @ =gSpecialStatuses\n\
-    ldr r1, _08021E10 @ =gBankTarget\n\
-    ldrb r3, [r1]\n\
-    lsls r4, r3, 2\n\
-    adds r0, r4, r3\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 29\n\
-    cmp r0, 0\n\
-    blt _08021DFA\n\
-    ldr r0, _08021E14 @ =gBattlersCount\n\
-    ldrb r0, [r0]\n\
-    cmp r3, r0\n\
-    bcs _08021DFA\n\
-    ldr r5, _08021E18 @ =gStatuses3\n\
-    adds r0, r4, r5\n\
-    ldr r0, [r0]\n\
-    ldr r1, _08021E1C @ =0x000400c0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08021DFA\n\
-    ldr r4, _08021E20 @ =gActiveBattler\n\
-    strb r3, [r4]\n\
-    movs r0, 0\n\
-    movs r1, 0\n\
-    bl EmitSpriteInvisibility\n\
-    ldrb r0, [r4]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r0, _08021E10 @ =gBankTarget\n\
-    ldrb r2, [r0]\n\
-    lsls r2, 2\n\
-    adds r2, r5\n\
-    ldr r0, [r2]\n\
-    ldr r1, _08021E24 @ =0xfffbff3f\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-_08021DFA:\n\
-    ldr r2, _08021E28 @ =gSharedMem\n\
-    ldr r3, _08021E2C @ =0x0001600c\n\
-    adds r1, r2, r3\n\
-_08021E00:\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    mov r12, r2\n\
-    b _0802224E\n\
-    .align 2, 0\n\
-_08021E0C: .4byte gSpecialStatuses\n\
-_08021E10: .4byte gBankTarget\n\
-_08021E14: .4byte gBattlersCount\n\
-_08021E18: .4byte gStatuses3\n\
-_08021E1C: .4byte 0x000400c0\n\
-_08021E20: .4byte gActiveBattler\n\
-_08021E24: .4byte 0xfffbff3f\n\
-_08021E28: .4byte gSharedMem\n\
-_08021E2C: .4byte 0x0001600c\n\
-_08021E30:\n\
-    movs r4, 0\n\
-    ldr r0, _08021E60 @ =gBattlersCount\n\
-    ldrb r5, [r0]\n\
-    cmp r4, r5\n\
-    blt _08021E3C\n\
-    b _08022244\n\
-_08021E3C:\n\
-    ldr r2, _08021E64 @ =gDisableStructs\n\
-    ldr r5, _08021E68 @ =0xfeffffff\n\
-    adds r3, r0, 0\n\
-    ldr r1, _08021E6C @ =gBattleMons+0x50\n\
-_08021E44:\n\
-    ldrb r0, [r2, 0xA]\n\
-    cmp r0, 0\n\
-    bne _08021E50\n\
-    ldr r0, [r1]\n\
-    ands r0, r5\n\
-    str r0, [r1]\n\
-_08021E50:\n\
-    adds r2, 0x1C\n\
-    adds r1, 0x58\n\
-    adds r4, 0x1\n\
-    ldrb r0, [r3]\n\
-    cmp r4, r0\n\
-    blt _08021E44\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_08021E60: .4byte gBattlersCount\n\
-_08021E64: .4byte gDisableStructs\n\
-_08021E68: .4byte 0xfeffffff\n\
-_08021E6C: .4byte gBattleMons+0x50\n\
-_08021E70:\n\
-    ldr r1, _08021F2C @ =gHitMarker\n\
-    ldr r3, [r1]\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    ands r0, r3\n\
-    ldr r2, _08021F30 @ =gBankAttacker\n\
-    mov r9, r2\n\
-    adds r5, r1, 0\n\
-    cmp r0, 0\n\
-    beq _08021E9A\n\
-    ldr r0, _08021F34 @ =gActiveBattler\n\
-    ldrb r2, [r2]\n\
-    strb r2, [r0]\n\
-    ldr r1, _08021F38 @ =gBankTarget\n\
-    ldrb r0, [r1]\n\
-    mov r4, r9\n\
-    strb r0, [r4]\n\
-    strb r2, [r1]\n\
-    ldr r0, _08021F3C @ =0xffffefff\n\
-    ands r3, r0\n\
-    str r3, [r5]\n\
-_08021E9A:\n\
-    ldr r1, _08021F40 @ =gBattleMoves\n\
-    ldr r2, _08021F44 @ =gChosenMove\n\
-    ldrh r3, [r2]\n\
-    lsls r0, r3, 1\n\
-    adds r0, r3\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    mov r8, r1\n\
-    adds r7, r2, 0\n\
-    cmp r0, 0x7F\n\
-    bne _08021EBE\n\
-    ldr r0, _08021F48 @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x29\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021ECA\n\
-_08021EBE:\n\
-    ldr r1, _08021F4C @ =gUnknown_02024C2C\n\
-    mov r2, r9\n\
-    ldrb r0, [r2]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    strh r3, [r0]\n\
-_08021ECA:\n\
-    ldr r0, _08021F50 @ =gAbsentBattlerFlags\n\
-    ldrb r1, [r0]\n\
-    ldr r2, _08021F54 @ =gBitTable\n\
-    mov r3, r9\n\
-    ldrb r4, [r3]\n\
-    lsls r0, r4, 2\n\
-    adds r0, r2\n\
-    ldr r3, [r0]\n\
-    ands r1, r3\n\
-    adds r6, r2, 0\n\
-    cmp r1, 0\n\
-    beq _08021EE4\n\
-    b _08022244\n\
-_08021EE4:\n\
-    ldr r0, _08021F58 @ =0x000160a6\n\
-    add r0, r12\n\
-    ldrb r0, [r0]\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08021EF2\n\
-    b _08022244\n\
-_08021EF2:\n\
-    ldrh r2, [r7]\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x7F\n\
-    bne _08021F04\n\
-    b _08022244\n\
-_08021F04:\n\
-    ldr r0, [r5]\n\
-    movs r1, 0x80\n\
-    lsls r1, 18\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021F68\n\
-    ldr r1, _08021F5C @ =gLastUsedMove\n\
-    lsls r0, r4, 1\n\
-    adds r0, r1\n\
-    strh r2, [r0]\n\
-    ldr r0, _08021F60 @ =gUnknown_02024C4C\n\
-    mov r4, r9\n\
-    ldrb r1, [r4]\n\
-    lsls r1, 1\n\
-    adds r1, r0\n\
-    ldr r0, _08021F64 @ =gCurrentMove\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r1]\n\
-    b _08021F82\n\
-    .align 2, 0\n\
-_08021F2C: .4byte gHitMarker\n\
-_08021F30: .4byte gBankAttacker\n\
-_08021F34: .4byte gActiveBattler\n\
-_08021F38: .4byte gBankTarget\n\
-_08021F3C: .4byte 0xffffefff\n\
-_08021F40: .4byte gBattleMoves\n\
-_08021F44: .4byte gChosenMove\n\
-_08021F48: .4byte gMoveResultFlags\n\
-_08021F4C: .4byte gUnknown_02024C2C\n\
-_08021F50: .4byte gAbsentBattlerFlags\n\
-_08021F54: .4byte gBitTable\n\
-_08021F58: .4byte 0x000160a6\n\
-_08021F5C: .4byte gLastUsedMove\n\
-_08021F60: .4byte gUnknown_02024C4C\n\
-_08021F64: .4byte gCurrentMove\n\
-_08021F68:\n\
-    ldr r1, _08021FD0 @ =gLastUsedMove\n\
-    lsls r0, r4, 1\n\
-    adds r0, r1\n\
-    ldr r1, _08021FD4 @ =0x0000ffff\n\
-    strh r1, [r0]\n\
-    ldr r1, _08021FD8 @ =gUnknown_02024C4C\n\
-    mov r2, r9\n\
-    ldrb r0, [r2]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    movs r1, 0x1\n\
-    negs r1, r1\n\
-    strh r1, [r0]\n\
-_08021F82:\n\
-    ldr r2, _08021FDC @ =gBankTarget\n\
-    ldrb r3, [r2]\n\
-    lsls r0, r3, 2\n\
-    adds r0, r6\n\
-    ldr r0, [r0]\n\
-    lsls r0, 28\n\
-    ldr r1, [r5]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _08021FA0\n\
-    ldr r0, _08021FE0 @ =gLastHitBy\n\
-    adds r0, r3, r0\n\
-    mov r3, r9\n\
-    ldrb r1, [r3]\n\
-    strb r1, [r0]\n\
-_08021FA0:\n\
-    ldr r0, [r5]\n\
-    movs r1, 0x80\n\
-    lsls r1, 18\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0802204C\n\
-    ldr r0, _08021FE4 @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x29\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0802204C\n\
-    ldrh r2, [r7]\n\
-    ldr r0, _08021FD4 @ =0x0000ffff\n\
-    cmp r2, r0\n\
-    bne _08021FEC\n\
-    ldr r1, _08021FE8 @ =gLastLandedMoves\n\
-    ldr r4, _08021FDC @ =gBankTarget\n\
-    ldrb r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    strh r2, [r0]\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_08021FD0: .4byte gLastUsedMove\n\
-_08021FD4: .4byte 0x0000ffff\n\
-_08021FD8: .4byte gUnknown_02024C4C\n\
-_08021FDC: .4byte gBankTarget\n\
-_08021FE0: .4byte gLastHitBy\n\
-_08021FE4: .4byte gMoveResultFlags\n\
-_08021FE8: .4byte gLastLandedMoves\n\
-_08021FEC:\n\
-    ldr r0, _08022014 @ =gLastLandedMoves\n\
-    ldr r5, _08022018 @ =gBankTarget\n\
-    ldrb r1, [r5]\n\
-    lsls r1, 1\n\
-    adds r1, r0\n\
-    ldr r4, _0802201C @ =gCurrentMove\n\
-    ldrh r0, [r4]\n\
-    strh r0, [r1]\n\
-    ldr r0, _08022020 @ =0x0001601c\n\
-    add r0, r12\n\
-    ldrb r3, [r0]\n\
-    cmp r3, 0\n\
-    beq _08022028\n\
-    ldr r0, _08022024 @ =gLastHitByType\n\
-    ldrb r1, [r5]\n\
-    lsls r1, 1\n\
-    adds r1, r0\n\
-    movs r0, 0x3F\n\
-    ands r0, r3\n\
-    b _08021C22\n\
-    .align 2, 0\n\
-_08022014: .4byte gLastLandedMoves\n\
-_08022018: .4byte gBankTarget\n\
-_0802201C: .4byte gCurrentMove\n\
-_08022020: .4byte 0x0001601c\n\
-_08022024: .4byte gLastHitByType\n\
-_08022028:\n\
-    ldr r0, _08022044 @ =gLastHitByType\n\
-    ldr r1, _08022048 @ =gBankTarget\n\
-    ldrb r2, [r1]\n\
-    lsls r2, 1\n\
-    adds r2, r0\n\
-    ldrh r1, [r4]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    ldrb r0, [r0, 0x2]\n\
-    strh r0, [r2]\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_08022044: .4byte gLastHitByType\n\
-_08022048: .4byte gBankTarget\n\
-_0802204C:\n\
-    ldr r0, _0802205C @ =gLastLandedMoves\n\
-    ldr r2, _08022060 @ =gBankTarget\n\
-    ldrb r1, [r2]\n\
-    lsls r1, 1\n\
-    adds r1, r0\n\
-    ldr r0, _08022064 @ =0x0000ffff\n\
-    b _08021C22\n\
-    .align 2, 0\n\
-_0802205C: .4byte gLastLandedMoves\n\
-_08022060: .4byte gBankTarget\n\
-_08022064: .4byte 0x0000ffff\n\
-_08022068:\n\
-    ldr r0, _0802212C @ =gAbsentBattlerFlags\n\
-    ldrb r1, [r0]\n\
-    ldr r6, _08022130 @ =gBitTable\n\
-    ldr r2, _08022134 @ =gBankAttacker\n\
-    ldrb r5, [r2]\n\
-    lsls r0, r5, 2\n\
-    adds r0, r6\n\
-    ldr r4, [r0]\n\
-    ands r1, r4\n\
-    mov r9, r2\n\
-    cmp r1, 0\n\
-    beq _08022082\n\
-    b _08022244\n\
-_08022082:\n\
-    ldr r0, _08022138 @ =0x000160a6\n\
-    add r0, r12\n\
-    ldrb r0, [r0]\n\
-    ands r0, r4\n\
-    cmp r0, 0\n\
-    beq _08022090\n\
-    b _08022244\n\
-_08022090:\n\
-    ldr r1, _0802213C @ =gBattleMoves\n\
-    ldr r4, _08022140 @ =gChosenMove\n\
-    ldrh r3, [r4]\n\
-    lsls r0, r3, 1\n\
-    adds r0, r3\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r1, [r0, 0x8]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0802215C\n\
-    ldr r0, _08022144 @ =gHitMarker\n\
-    ldr r1, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 18\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0802215C\n\
-    ldr r2, _08022148 @ =gBankTarget\n\
-    ldrb r0, [r2]\n\
-    cmp r5, r0\n\
-    bne _080220C0\n\
-    b _08022244\n\
-_080220C0:\n\
-    adds r2, r0, 0\n\
-    lsls r0, r2, 2\n\
-    adds r0, r6\n\
-    ldr r0, [r0]\n\
-    lsls r0, 28\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _0802215C\n\
-    ldr r0, _0802214C @ =gMoveResultFlags\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x29\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0802215C\n\
-    lsls r0, r2, 1\n\
-    ldr r5, _08022150 @ =0x000160ac\n\
-    adds r0, r5\n\
-    add r0, r12\n\
-    strb r3, [r0]\n\
-    ldr r0, _08022148 @ =gBankTarget\n\
-    ldrb r1, [r0]\n\
-    lsls r1, 1\n\
-    ldr r2, _08022154 @ =0x000160ad\n\
-    adds r1, r2\n\
-    add r1, r12\n\
-    ldrh r0, [r4]\n\
-    lsrs r0, 8\n\
-    strb r0, [r1]\n\
-    ldr r3, _08022148 @ =gBankTarget\n\
-    ldrb r2, [r3]\n\
-    lsls r2, 2\n\
-    mov r5, r9\n\
-    ldrb r0, [r5]\n\
-    lsrs r0, 1\n\
-    lsls r0, 1\n\
-    ldr r1, _08022158 @ =0x00016100\n\
-    adds r0, r1\n\
-    adds r2, r0\n\
-    add r2, r12\n\
-    ldrh r0, [r4]\n\
-    strb r0, [r2]\n\
-    ldrb r2, [r3]\n\
-    lsls r2, 2\n\
-    ldrb r0, [r5]\n\
-    lsrs r0, 1\n\
-    lsls r0, 1\n\
-    adds r1, 0x1\n\
-    adds r0, r1\n\
-    adds r2, r0\n\
-    add r2, r12\n\
-    ldrh r0, [r4]\n\
-    lsrs r0, 8\n\
-    strb r0, [r2]\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_0802212C: .4byte gAbsentBattlerFlags\n\
-_08022130: .4byte gBitTable\n\
-_08022134: .4byte gBankAttacker\n\
-_08022138: .4byte 0x000160a6\n\
-_0802213C: .4byte gBattleMoves\n\
-_08022140: .4byte gChosenMove\n\
-_08022144: .4byte gHitMarker\n\
-_08022148: .4byte gBankTarget\n\
-_0802214C: .4byte gMoveResultFlags\n\
-_08022150: .4byte 0x000160ac\n\
-_08022154: .4byte 0x000160ad\n\
-_08022158: .4byte 0x00016100\n\
-_0802215C:\n\
-    mov r1, r9\n\
-    ldrb r0, [r1]\n\
-    ldr r2, _080221B4 @ =gBankTarget\n\
-    ldrb r2, [r2]\n\
-    cmp r0, r2\n\
-    beq _08022244\n\
-    ldr r3, _080221B4 @ =gBankTarget\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 1\n\
-    ldr r4, _080221B8 @ =0x000160ac\n\
-    adds r0, r4\n\
-    add r0, r12\n\
-    movs r3, 0\n\
-    strb r3, [r0]\n\
-    ldr r5, _080221B4 @ =gBankTarget\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 1\n\
-    ldr r1, _080221BC @ =0x000160ad\n\
-    adds r0, r1\n\
-    add r0, r12\n\
-    strb r3, [r0]\n\
-    ldrb r2, [r5]\n\
-    lsls r2, 2\n\
-    mov r4, r9\n\
-    ldrb r0, [r4]\n\
-    lsrs r0, 1\n\
-    lsls r0, 1\n\
-    adds r1, 0x53\n\
-    adds r0, r1\n\
-    adds r2, r0\n\
-    add r2, r12\n\
-    strb r3, [r2]\n\
-    ldrb r2, [r5]\n\
-    lsls r2, 2\n\
-    ldrb r0, [r4]\n\
-    lsrs r0, 1\n\
-    lsls r0, 1\n\
-    adds r1, 0x1\n\
-    adds r0, r1\n\
-    adds r2, r0\n\
-    add r2, r12\n\
-    strb r3, [r2]\n\
-    b _08022244\n\
-    .align 2, 0\n\
-_080221B4: .4byte gBankTarget\n\
-_080221B8: .4byte 0x000160ac\n\
-_080221BC: .4byte 0x000160ad\n\
-_080221C0:\n\
-    ldr r5, _080222B0 @ =gHitMarker\n\
-    ldr r2, [r5]\n\
-    movs r0, 0x80\n\
-    lsls r0, 12\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _08022244\n\
-    ldr r0, _080222B4 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08022244\n\
-    ldr r1, _080222B8 @ =gProtectStructs\n\
-    ldr r0, _080222BC @ =gBankAttacker\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 4\n\
-    adds r0, r1\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 29\n\
-    cmp r0, 0\n\
-    blt _08022244\n\
-    ldr r0, _080222C0 @ =gBattleMoves\n\
-    mov r9, r0\n\
-    ldr r1, _080222C4 @ =gCurrentMove\n\
-    mov r8, r1\n\
-    ldrh r0, [r1]\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    add r1, r9\n\
-    ldrb r0, [r1, 0x6]\n\
-    cmp r0, 0x8\n\
-    bne _08022244\n\
-    movs r6, 0x80\n\
-    lsls r6, 2\n\
-    adds r4, r6, 0\n\
-    ands r4, r2\n\
-    cmp r4, 0\n\
-    bne _08022244\n\
-    ldr r7, _080222C8 @ =gBankTarget\n\
-    ldrb r0, [r7]\n\
-    bl GetBattlerPosition\n\
-    movs r1, 0x2\n\
-    eors r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl GetBattlerAtPosition\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    ldr r1, _080222CC @ =gBattleMons\n\
-    movs r0, 0x58\n\
-    muls r0, r2\n\
-    adds r0, r1\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    beq _0802223A\n\
-    bl _08021874\n\
-_0802223A:\n\
-    ldr r0, [r5]\n\
-    orrs r0, r6\n\
-    str r0, [r5]\n\
-    ldr r2, _080222D0 @ =gSharedMem\n\
-    mov r12, r2\n\
-_08022244:\n\
-    ldr r1, _080222D4 @ =0x0001600c\n\
-    add r1, r12\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-_0802224E:\n\
-    ldr r3, [sp, 0x10]\n\
-    cmp r3, 0x1\n\
-    bne _08022262\n\
-    mov r4, r10\n\
-    cmp r4, 0\n\
-    bne _08022262\n\
-    ldr r1, _080222D4 @ =0x0001600c\n\
-    add r1, r12\n\
-    movs r0, 0x11\n\
-    strb r0, [r1]\n\
-_08022262:\n\
-    ldr r5, [sp, 0x10]\n\
-    cmp r5, 0x2\n\
-    bne _08022278\n\
-    ldr r1, _080222D4 @ =0x0001600c\n\
-    add r1, r12\n\
-    ldr r0, [sp, 0x14]\n\
-    ldrb r2, [r1]\n\
-    cmp r0, r2\n\
-    bne _08022278\n\
-    movs r0, 0x11\n\
-    strb r0, [r1]\n\
-_08022278:\n\
-    ldr r0, _080222D4 @ =0x0001600c\n\
-    add r0, r12\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x11\n\
-    beq _08022286\n\
-    bl _080218E4\n\
-_08022286:\n\
-    ldr r0, _080222D4 @ =0x0001600c\n\
-    add r0, r12\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x11\n\
-    bne _0802229E\n\
-    mov r3, r10\n\
-    cmp r3, 0\n\
-    bne _0802229E\n\
-    ldr r1, _080222D8 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x3\n\
-_0802229C:\n\
-    str r0, [r1]\n\
-_0802229E:\n\
-    add sp, 0x18\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080222B0: .4byte gHitMarker\n\
-_080222B4: .4byte gBattleTypeFlags\n\
-_080222B8: .4byte gProtectStructs\n\
-_080222BC: .4byte gBankAttacker\n\
-_080222C0: .4byte gBattleMoves\n\
-_080222C4: .4byte gCurrentMove\n\
-_080222C8: .4byte gBankTarget\n\
-_080222CC: .4byte gBattleMons\n\
-_080222D0: .4byte gSharedMem\n\
-_080222D4: .4byte 0x0001600c\n\
-_080222D8: .4byte gBattlescriptCurrInstr\n\
-        .syntax divided"
-                );
-}
-#endif // NONMATCHING
 
 static void atk4A_typecalc2(void)
 {
@@ -14010,15 +12858,15 @@ static void atkC1_hiddenpowercalc(void)
 	          ((gBattleMons[gBankAttacker].speedIV & 1) << 3) |
 	          ((gBattleMons[gBankAttacker].spAttackIV & 1) << 4) |
 	          ((gBattleMons[gBankAttacker].spDefenseIV & 1) << 5);
-	
+
 	gDynamicBasePower = 30 + (power * 40 / 63);
-	
+
 	gBattleStruct->dynamicMoveType = ((type * 15) / 63) + 1;
 	if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
 		gBattleStruct->dynamicMoveType++;
-	
+
 	gBattleStruct->dynamicMoveType |= 0xC0;
-	
+
 	gBattlescriptCurrInstr++;
 }
 
@@ -15735,8 +14583,8 @@ static void atkF2_displaydexinfo(void)
     case 2:
         if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2 && !gTasks[gBattleCommunication[1]].isActive)
         {
-            LZDecompressVram(gBattleTerrainTiles_Building, (void*)(0x06008000));
-            LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(0x0600d000));
+            LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM + 0x8000));
+            LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(VRAM + 0xD000));
             LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
             REG_BG3CNT = 0x5a0b;
             gBattle_BG3_X = 0x100;

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_anim_813F0F4.h"
+#include "battle_anim_special.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "data2.h"

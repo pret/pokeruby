@@ -2459,7 +2459,7 @@ u8 unref_sub_80AE908(void)
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords,
       gMonFrontPicCoords[species].y_offset,
-      (void *)0x02000000,
+      (void *)EWRAM,
       gUnknown_081FAF4C[1],
       species);
     LoadCompressedPalette(gMonPaletteTable[species].data, 0x110, 32);
@@ -2485,7 +2485,7 @@ u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
       &gMonBackPicTable[species],
       gMonBackPicCoords[species].coords,
       gMonBackPicCoords[species].y_offset,
-      0x02000000,
+      EWRAM,
       gUnknown_081FAF4C[0],
       species,
       personality);

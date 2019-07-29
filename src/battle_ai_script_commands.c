@@ -1,5 +1,5 @@
 #include "global.h"
-#include "battle_ai.h"
+#include "battle_ai_script_commands.h"
 #include "constants/abilities.h"
 #include "battle.h"
 #include "constants/battle_move_effects.h"
