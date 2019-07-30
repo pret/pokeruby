@@ -544,9 +544,9 @@ void sub_8115634(u8 taskId)
     if (unk_203955C[0] != 0 && (gMain.newKeys & START_BUTTON))
     {
         gTasks[eRoulette->varA4].func = sub_81157AC;
-        m4aMPlayStop(&gMPlay_SE1);
-        m4aMPlayStop(&gMPlay_SE2);
-        m4aMPlayStop(&gMPlay_SE3);
+        m4aMPlayStop(&gMPlayInfo_SE1);
+        m4aMPlayStop(&gMPlayInfo_SE2);
+        m4aMPlayStop(&gMPlayInfo_SE3);
     }
 #endif
 }

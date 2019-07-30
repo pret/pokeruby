@@ -60,9 +60,9 @@ extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern MainCallback gPreBattleCallback1;
 extern void (*const gOpponentBufferCommands[])(void);
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u32 gBattleControllerExecFlags;
 
 extern u8 GetBattlerSpriteCoord();
@@ -337,9 +337,9 @@ void sub_8032C88(void)
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            m4aMPlayContinue(&gMPlay_BGM);
+            m4aMPlayContinue(&gMPlayInfo_BGM);
         else
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         ewram17810[gActiveBattler].unk9 = 3;
         gBattlerControllerFuncs[gActiveBattler] = sub_8032C4C;
     }

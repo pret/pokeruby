@@ -1313,9 +1313,9 @@ u16 gSoundAnimFramesToWait;
 s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 u16 gAnimSpriteIndexArray[ANIM_SPRITE_INDEX_COUNT];
 
-extern struct MusicPlayerInfo gMPlay_BGM;
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
 extern const u16 gSingingMoves[];
 extern const u8 *const gBattleAnims_Moves[];
@@ -1516,7 +1516,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
             if (move == gSingingMoves[i])
             {
                 // Lower the volume for the short song that gets played.
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
                 break;
             }
         }
@@ -1772,8 +1772,8 @@ static void ScriptCmd_end(void)
         }
         else
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
     }
 
@@ -1792,7 +1792,7 @@ static void ScriptCmd_end(void)
 
     if (!continuousAnim) // may have been used for debug?
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         if (IsContest() == 0)
         {
             UpdateBattlerSpritePriorities();
@@ -3037,8 +3037,8 @@ static void ScriptCmd_waitsound(void)
     {
         if (++gSoundAnimFramesToWait > 90)
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
             gSoundAnimFramesToWait = 0;
         }
         else
@@ -3230,7 +3230,7 @@ static void ScriptCmd_doublebattle_2E(void)
 // Cease playing sounds.
 static void ScriptCmd_stopsound(void)
 {
-    m4aMPlayStop(&gMPlay_SE1);
-    m4aMPlayStop(&gMPlay_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }
