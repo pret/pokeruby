@@ -16,7 +16,7 @@ CC1       := tools/agbcc/bin/agbcc$(EXE)
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
-SHA1SUM   := sha1sum -c
+SHA1SUM   := shasum -c # change back to sha1sum
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
 AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
@@ -26,6 +26,7 @@ SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
+JSONPROC  := tools/jsonproc/jsonproc$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -114,15 +115,16 @@ clean: tidy
 	rm -f data/layouts/layouts.inc data/layouts/layouts_table.inc
 	rm -f data/maps/connections.inc data/maps/events.inc data/maps/groups.inc data/maps/headers.inc
 	find data/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
-	$(MAKE) clean -C tools/gbagfx
-	$(MAKE) clean -C tools/scaninc
-	$(MAKE) clean -C tools/preproc
-	$(MAKE) clean -C tools/bin2c
-	$(MAKE) clean -C tools/rsfont
-	$(MAKE) clean -C tools/aif2pcm
-	$(MAKE) clean -C tools/ramscrgen
-	$(MAKE) clean -C tools/gbafix
-	$(MAKE) clean -C tools/mapjson
+#	$(MAKE) clean -C tools/gbagfx
+#	$(MAKE) clean -C tools/scaninc
+#	$(MAKE) clean -C tools/preproc
+#	$(MAKE) clean -C tools/bin2c
+#	$(MAKE) clean -C tools/rsfont
+#	$(MAKE) clean -C tools/aif2pcm
+#	$(MAKE) clean -C tools/ramscrgen
+#	$(MAKE) clean -C tools/gbafix
+#	$(MAKE) clean -C tools/mapjson
+#   $(MAKE) clean -C tools/jsonproc
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -135,6 +137,7 @@ tools:
 	@$(MAKE) -C tools/mid2agb
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/jsonproc
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
