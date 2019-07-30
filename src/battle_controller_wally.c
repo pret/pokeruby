@@ -29,14 +29,14 @@ struct MovePpInfo
 };
 
 extern u8 gActiveBattler;
-extern void (*gBattleBankFunc[])(void);
-extern u32 gBattleExecBuffer;
+extern void (*gBattlerControllerFuncs[])(void);
+extern u32 gBattleControllerExecFlags;
 extern u8 gBattleBufferA[][0x200];
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern MainCallback gPreBattleCallback1;
 extern bool8 gDoingBattleAnim;
 extern u16 gBattlerPartyIndexes[];
-extern u8 gHealthboxIDs[];
+extern u8 gHealthboxSpriteIds[];
 extern u16 gBattleTypeFlags;
 extern u16 gAnimMovePower;
 extern s32 gAnimMoveDmg;
@@ -59,8 +59,8 @@ extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];
 
 // TODO: include rom3.h when my other PR gets merged
-extern void Emitcmd33(u8, u8, u16);
-extern void Emitcmd35(u8, u16);
+extern void BtlController_EmitTwoReturnValues(u8, u8, u16);
+extern void BtlController_EmitOneReturnValue(u8, u16);
 
 extern void nullsub_14(void);
 extern void PrepareBagForWallyTutorial(void);
@@ -74,7 +74,7 @@ extern void LoadPlayerTrainerBankSprite();
 extern u8 GetBattlerPosition(u8);
 extern void sub_80313A0(struct Sprite *);
 extern u8 GetBattlerAtPosition(u8);
-extern u8 sub_8031720();
+extern u8 IsMoveWithoutAnimation();
 extern void DoMoveAnim();
 extern void sub_80326EC();
 extern void sub_8031F24(void);
@@ -116,10 +116,10 @@ void WallyHandleReturnPokeToBall(void);
 void WallyHandleTrainerThrow(void);
 void WallyHandleTrainerSlide(void);
 void WallyHandleTrainerSlideBack(void);
-void WallyHandlecmd10(void);
-void WallyHandlecmd11(void);
-void WallyHandlecmd12(void);
-void WallyHandleBallThrow(void);
+void WallyHandleFaintAnimation(void);
+void WallyHandlePaletteFade(void);
+void WallyHandleSuccessBallThrowAnim(void);
+void WallyHandleBallThrowAnim(void);
 void WallyHandlePuase(void);
 void WallyHandleMoveAnimation(void);
 void WallyHandlePrintString(void);
@@ -179,10 +179,10 @@ static const BattleBufferCmd gWallyBufferCommands[] =
     WallyHandleTrainerThrow,
     WallyHandleTrainerSlide,
     WallyHandleTrainerSlideBack,
-    WallyHandlecmd10,
-    WallyHandlecmd11,
-    WallyHandlecmd12,
-    WallyHandleBallThrow,
+    WallyHandleFaintAnimation,
+    WallyHandlePaletteFade,
+    WallyHandleSuccessBallThrowAnim,
+    WallyHandleBallThrowAnim,
     WallyHandlePuase,
     WallyHandleMoveAnimation,
     WallyHandlePrintString,
@@ -236,7 +236,7 @@ void unref_sub_8137220(void)
 
 void SetBankFuncToWallyBufferRunCommand(void)
 {
-    gBattleBankFunc[gActiveBattler] = WallyBufferRunCommand;
+    gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
     ewram160A8 = 0;
     ewram160A9 = 0;
     ewram160AA = 0;
@@ -245,7 +245,7 @@ void SetBankFuncToWallyBufferRunCommand(void)
 
 void WallyBufferRunCommand(void)
 {
-    if (gBattleExecBuffer & gBitTable[gActiveBattler])
+    if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
         if (gBattleBufferA[gActiveBattler][0] < 0x39)
             gWallyBufferCommands[gBattleBufferA[gActiveBattler][0]]();
@@ -269,7 +269,7 @@ void sub_81372BC(void)
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
-            Emitcmd33(1, 0, 0);
+            BtlController_EmitTwoReturnValues(1, 0, 0);
             WallyBufferExecCompleted();
             ewram160A8++;
             ewram160A9 = r4;
@@ -281,7 +281,7 @@ void sub_81372BC(void)
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
-            Emitcmd33(1, 0, 0);
+            BtlController_EmitTwoReturnValues(1, 0, 0);
             WallyBufferExecCompleted();
             ewram160A8++;
             ewram160A9 = r4;
@@ -292,7 +292,7 @@ void sub_81372BC(void)
         r4 = --ewram160AA;
         if (r4 == 0)
         {
-            Emitcmd33(1, 9, 0);
+            BtlController_EmitTwoReturnValues(1, 9, 0);
             WallyBufferExecCompleted();
             ewram160A8++;
             ewram160A9 = r4;
@@ -314,7 +314,7 @@ void sub_81372BC(void)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
-            Emitcmd33(1, 1, 0);
+            BtlController_EmitTwoReturnValues(1, 1, 0);
             WallyBufferExecCompleted();
         }
         break;
@@ -323,7 +323,7 @@ void sub_81372BC(void)
 
 void sub_813741C(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
 }
 
@@ -343,7 +343,7 @@ void sub_813746C(void)
     }
 }
 
-void bx_wait_t5(void)
+void CompleteOnFinishedAnimation(void)
 {
     if (!gDoingBattleAnim)
         WallyBufferExecCompleted();
@@ -353,7 +353,7 @@ void sub_81374C4(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattleBankFunc[gActiveBattler] = sub_81374FC;
+        gBattlerControllerFuncs[gActiveBattler] = sub_81374FC;
         nullsub_14();
         PrepareBagForWallyTutorial();
     }
@@ -364,7 +364,7 @@ void sub_81374FC(void)
     if (gMain.callback2 == BattleMainCB2
      && !gPaletteFade.active)
     {
-        Emitcmd35(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
         WallyBufferExecCompleted();
     }
 }
@@ -382,16 +382,16 @@ void sub_8137538(void)
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
             DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler ^ 2]]);
-            sub_8045A5C(gHealthboxIDs[gActiveBattler ^ 2], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ 2]], 0);
+            sub_8045A5C(gHealthboxSpriteIds[gActiveBattler ^ 2], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ 2]], 0);
             sub_804777C(gActiveBattler ^ 2);
-            sub_8043DFC(gHealthboxIDs[gActiveBattler ^ 2]);
+            sub_8043DFC(gHealthboxSpriteIds[gActiveBattler ^ 2]);
         }
         DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
-        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 0);
+        sub_8045A5C(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 0);
         sub_804777C(gActiveBattler);
-        sub_8043DFC(gHealthboxIDs[gActiveBattler]);
+        sub_8043DFC(gHealthboxSpriteIds[gActiveBattler]);
         ewram17840.unk9_0 = 0;
-        gBattleBankFunc[gActiveBattler] = sub_81376B8;
+        gBattlerControllerFuncs[gActiveBattler] = sub_81376B8;
     }
 }
 
@@ -399,7 +399,7 @@ void sub_81376B8(void)
 {
     bool8 r4 = FALSE;
 
-    if (gSprites[gHealthboxIDs[gActiveBattler]].callback == SpriteCallbackDummy)
+    if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         r4 = TRUE;
     if (r4 && ewram17810[gActiveBattler].unk1_0 && ewram17810[gActiveBattler ^ 2].unk1_0)
     {
@@ -419,11 +419,11 @@ void sub_81377B0(void)
 {
     s16 r4;
 
-    r4 = sub_8045C78(gActiveBattler, gHealthboxIDs[gActiveBattler], 0, 0);
-    sub_8043DFC(gHealthboxIDs[gActiveBattler]);
+    r4 = sub_8045C78(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], 0, 0);
+    sub_8043DFC(gHealthboxSpriteIds[gActiveBattler]);
     if (r4 != -1)
     {
-        sub_80440EC(gHealthboxIDs[gActiveBattler], r4, 0);
+        sub_80440EC(gHealthboxSpriteIds[gActiveBattler], r4, 0);
     }
     else
     {
@@ -434,7 +434,7 @@ void sub_81377B0(void)
 
 void bx_blink_t5(void)
 {
-    u8 spriteId = gBankSpriteIds[gActiveBattler];
+    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
 
     if (gSprites[spriteId].data[1] == 32)
     {
@@ -455,17 +455,17 @@ void sub_813789C(void)
 {
     if (!ewram17810[gActiveBattler].unk0_6)
     {
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        sub_8043DB0(gHealthboxIDs[gActiveBattler]);
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        sub_8043DB0(gHealthboxSpriteIds[gActiveBattler]);
         WallyBufferExecCompleted();
     }
 }
 
 // Duplicate of sub_813741C
-void sub_8137908(void)
+void CompleteOnBankSpriteCallbackDummy2(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
 }
 
@@ -477,7 +477,7 @@ void sub_8137940(void)
 
 void WallyBufferExecCompleted(void)
 {
-    gBattleBankFunc[gActiveBattler] = WallyBufferRunCommand;
+    gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         u8 multiplayerId = GetMultiplayerId();
@@ -487,7 +487,7 @@ void WallyBufferExecCompleted(void)
     }
     else
     {
-        gBattleExecBuffer &= ~gBitTable[gActiveBattler];
+        gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
 }
 
@@ -518,7 +518,7 @@ void WallyHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    Emitcmd29(1, r6, arr);
+    BtlController_EmitDataTransfer(1, r6, arr);
     WallyBufferExecCompleted();
 }
 
@@ -1087,13 +1087,13 @@ void WallyHandleReturnPokeToBall(void)
     if (gBattleBufferA[gActiveBattler][1] == 0)
     {
         move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 1);
-        gBattleBankFunc[gActiveBattler] = sub_813789C;
+        gBattlerControllerFuncs[gActiveBattler] = sub_813789C;
     }
     else
     {
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        sub_8043DB0(gHealthboxIDs[gActiveBattler]);
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        sub_8043DB0(gHealthboxSpriteIds[gActiveBattler]);
         WallyBufferExecCompleted();
     }
 }
@@ -1102,30 +1102,30 @@ void WallyHandleTrainerThrow(void)
 {
     LoadPlayerTrainerBankSprite(2, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
-    gBankSpriteIds[gActiveBattler] = CreateSprite(
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
-    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = -2;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_80313A0;
-    gBattleBankFunc[gActiveBattler] = sub_813741C;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
+    gBattlerControllerFuncs[gActiveBattler] = sub_813741C;
 }
 
 void WallyHandleTrainerSlide(void)
 {
     LoadPlayerTrainerBankSprite(2, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
-    gBankSpriteIds[gActiveBattler] = CreateSprite(
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
-    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -96;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 2;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_80313A0;
-    gBattleBankFunc[gActiveBattler] = sub_8137908;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
 }
 
 void WallyHandleTrainerSlideBack(void)
@@ -1133,32 +1133,32 @@ void WallyHandleTrainerSlideBack(void)
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd10(void)
+void WallyHandleFaintAnimation(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd11(void)
+void WallyHandlePaletteFade(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd12(void)
+void WallyHandleSuccessBallThrowAnim(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = TRUE;
     move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
-    gBattleBankFunc[gActiveBattler] = bx_wait_t5;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
-void WallyHandleBallThrow(void)
+void WallyHandleBallThrowAnim(void)
 {
-    u8 val = gBattleBufferA[gActiveBattler][1];
+    u8 ballThrowCaseId = gBattleBufferA[gActiveBattler][1];
 
-    ewram17840.unk8 = val;
+    ewram17840.unk8 = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
     move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
-    gBattleBankFunc[gActiveBattler] = bx_wait_t5;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
 void WallyHandlePuase(void)
@@ -1177,15 +1177,15 @@ void WallyHandleMoveAnimation(void)
     gWeatherMoveAnim = gBattleBufferA[gActiveBattler][12] | (gBattleBufferA[gActiveBattler][13] << 8);
     gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBattler][16];
     gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-    if (sub_8031720(move, gAnimMoveTurn) != 0)
+    if (IsMoveWithoutAnimation(move, gAnimMoveTurn) != 0)
     {
-        // Dead code. sub_8031720 always returns 0.
+        // Dead code. IsMoveWithoutAnimation always returns 0.
         WallyBufferExecCompleted();
     }
     else
     {
         ewram17810[gActiveBattler].unk4 = 0;
-        gBattleBankFunc[gActiveBattler] = sub_81390D0;
+        gBattlerControllerFuncs[gActiveBattler] = sub_81390D0;
     }
 }
 
@@ -1245,7 +1245,7 @@ void WallyHandlePrintString(void)
         DestroyMenuCursor();
     BufferStringBattle(*ptr);
     Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
-    gBattleBankFunc[gActiveBattler] = sub_8137454;
+    gBattlerControllerFuncs[gActiveBattler] = sub_8137454;
 }
 
 void WallyHandlePrintStringPlayerOnly(void)
@@ -1265,14 +1265,14 @@ void WallyHandlecmd18(void)
     gUnknown_03004210.paletteNum = 0;
     Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
     Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
-    gBattleBankFunc[gActiveBattler] = sub_81372BC;
+    gBattlerControllerFuncs[gActiveBattler] = sub_81372BC;
     Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
     Text_PrintWindow8002F44(&gUnknown_03004210);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     for (i = 0; i < 4; i++)
         nullsub_8(i);
     sub_802E3E4(0, 0);
-    StrCpyDecodeToDisplayedStringBattle(BattleText_WallyMenu);
+    BattleStringExpandPlaceholdersToDisplayedString(BattleText_WallyMenu);
 #ifdef ENGLISH
     Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 440, 2, 35);
 #else
@@ -1301,7 +1301,7 @@ void WallyHandlecmd20(void)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);
-            Emitcmd33(1, 10, 256);
+            BtlController_EmitTwoReturnValues(1, 10, 256);
             WallyBufferExecCompleted();
         }
         break;
@@ -1311,7 +1311,7 @@ void WallyHandlecmd20(void)
 void WallyHandleOpenBag(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-    gBattleBankFunc[gActiveBattler] = sub_81374C4;
+    gBattlerControllerFuncs[gActiveBattler] = sub_81374C4;
     gBankInMenu = gActiveBattler;
 }
 
@@ -1336,16 +1336,16 @@ void WallyHandleHealthBarUpdate(void)
         u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
         u32 curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
 
-        sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, curHP, r7);
+        sub_8043D84(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, r7);
     }
     else
     {
         u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
-        sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, 0, r7);
-        sub_80440EC(gHealthboxIDs[gActiveBattler], 0, 0);
+        sub_8043D84(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, r7);
+        sub_80440EC(gHealthboxSpriteIds[gActiveBattler], 0, 0);
     }
-    gBattleBankFunc[gActiveBattler] = sub_81377B0;
+    gBattlerControllerFuncs[gActiveBattler] = sub_81377B0;
 }
 
 void WallyHandleExpBarUpdate(void)
@@ -1430,16 +1430,16 @@ void WallyHandlecmd40(void)
 
 void WallyHandleHitAnimation(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBattler]].invisible == TRUE)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
     {
         WallyBufferExecCompleted();
     }
     else
     {
         gDoingBattleAnim = 1;
-        gSprites[gBankSpriteIds[gActiveBattler]].data[1] = 0;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
         sub_8047858(gActiveBattler);
-        gBattleBankFunc[gActiveBattler] = bx_blink_t5;
+        gBattlerControllerFuncs[gActiveBattler] = bx_blink_t5;
     }
 }
 
@@ -1478,23 +1478,23 @@ void WallyHandleTrainerBallThrow(void)
     u8 paletteNum;
     u8 taskId;
 
-    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBattler]]);
-    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 50;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[4] = gSprites[gBankSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
-    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBattler]], sub_8030E38);
-    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], 1);
+    oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
+    StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8030E38);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[2].data, 0x100 + paletteNum * 16, 32);
-    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
     taskId = CreateTask(sub_8139A2C, 5);
     gTasks[taskId].data[0] = gActiveBattler;
     if (ewram17810[gActiveBattler].unk0_0)
         gTasks[gUnknown_02024E68[gActiveBattler]].func = sub_8044CA0;
     ewram17810[4].unk9 |= 1;
-    gBattleBankFunc[gActiveBattler] = nullsub_91;
+    gBattlerControllerFuncs[gActiveBattler] = nullsub_91;
 }
 
 void sub_81398BC(u8 bank)
@@ -1506,18 +1506,18 @@ void sub_81398BC(u8 bank)
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
-    gBankSpriteIds[bank] = CreateSprite(
+    gBattlerSpriteIds[bank] = CreateSprite(
       &gUnknown_02024E8C,
       GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
       GetBattlerSubpriority(bank));
-    gSprites[gUnknown_0300434C[bank]].data[1] = gBankSpriteIds[bank];
-    gSprites[gBankSpriteIds[bank]].data[0] = bank;
-    gSprites[gBankSpriteIds[bank]].data[2] = species;
-    gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
-    StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
-    gSprites[gBankSpriteIds[bank]].invisible = TRUE;
-    gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
+    gSprites[gUnknown_0300434C[bank]].data[1] = gBattlerSpriteIds[bank];
+    gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
+    gSprites[gBattlerSpriteIds[bank]].data[2] = species;
+    gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
+    gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
     gSprites[gUnknown_0300434C[bank]].data[0] = StartSendOutMonAnimation(0, 0xFF);
 }
 
@@ -1534,7 +1534,7 @@ void sub_8139A2C(u8 taskId)
         gActiveBattler = gTasks[taskId].data[0];
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_81398BC(gActiveBattler);
-        gBattleBankFunc[gActiveBattler] = sub_8137538;
+        gBattlerControllerFuncs[gActiveBattler] = sub_8137538;
         gActiveBattler = savedActiveBank;
         DestroyTask(taskId);
     }
@@ -1577,7 +1577,7 @@ void WallyHandleBattleAnimation(void)
     if (move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, val2, val))
         WallyBufferExecCompleted();
     else
-        gBattleBankFunc[gActiveBattler] = sub_8137940;
+        gBattlerControllerFuncs[gActiveBattler] = sub_8137940;
 }
 
 void WallyHandleLinkStandbyMsg(void)
@@ -1597,7 +1597,7 @@ void WallyHandlecmd55(void)
     BeginFastPaletteFade(3);
     WallyBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
-        gBattleBankFunc[gActiveBattler] = sub_813746C;
+        gBattlerControllerFuncs[gActiveBattler] = sub_813746C;
 }
 
 void WallyHandlecmd56(void)

@@ -14,7 +14,7 @@ extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 
 void sub_80DB74C(struct Sprite *sprite);
 void sub_80DBA4C(struct Sprite *sprite);
@@ -524,11 +524,11 @@ static void sub_80DB92C(struct Sprite *sprite)
             u8 bank = bankCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
             if (IsAnimBankSpriteVisible(bank))
-                gSprites[gBankSpriteIds[bank]].invisible = 0;
+                gSprites[gBattlerSpriteIds[bank]].invisible = 0;
 
             bank = bankCopy ^ 2;
             if (IsAnimBankSpriteVisible(bank))
-                gSprites[gBankSpriteIds[bank]].invisible = 0;
+                gSprites[gBattlerSpriteIds[bank]].invisible = 0;
         }
 
         sprite->invisible = 1;

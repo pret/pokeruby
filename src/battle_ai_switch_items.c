@@ -40,7 +40,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
         && gDisableStructs[gActiveBattler].perishSongTimer1 == 0)
     {
         ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6; // gBattleStruct->AI_monToSwitchIntoId[GetBattlerPosition(gActiveBattler)] = 6;
-        Emitcmd33(1, 2, 0);
+        BtlController_EmitTwoReturnValues(1, 2, 0);
         return TRUE;
     }
 
@@ -97,7 +97,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             {
                 // we found a mon
                 ewram160C8arr(GetBattlerPosition(gActiveBattler)) = i; // gBattleStruct->AI_monToSwitchIntoId[GetBattlerPosition(gActiveBattler)] = i;
-                Emitcmd33(1, B_ACTION_SWITCH, 0);
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                 return TRUE;
             }
         }
@@ -137,7 +137,7 @@ _08036070:\n\
     movs r0, 0x1\n\
     movs r1, 0x2\n\
     movs r2, 0\n\
-    bl Emitcmd33\n\
+    bl BtlController_EmitTwoReturnValues\n\
     movs r0, 0x1\n\
     b _080361CA\n\
     .align 2, 0\n\
@@ -376,7 +376,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         {
             // we found a mon
             ewram160C8arr(GetBattlerPosition(gActiveBattler)) = i;
-            Emitcmd33(1, B_ACTION_SWITCH, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -396,13 +396,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if ((gLastLandedMoves[gActiveBattler] == 0 || gLastLandedMoves[gActiveBattler] == 0xFFFF) && Random() & 1)
     {
         ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6;
-        Emitcmd33(1, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0 && Random() & 1)
     {
         ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6;
-        Emitcmd33(1, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -413,7 +413,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (Random() & 1)
     {
         ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6;
-        Emitcmd33(1, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -557,7 +557,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     ewram160C8arr(GetBattlerPosition(gActiveBattler)) = i;
-                    Emitcmd33(1, B_ACTION_SWITCH, 0);
+                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -704,7 +704,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    Emitcmd33(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
+    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
 static void ModulateByTypeEffectiveness(u8 attackType, u8 defenseType1, u8 defenseType2, u8 *var)
@@ -996,7 +996,7 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            Emitcmd33(1, B_ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
             ewram160D4(gActiveBattler) = item;
             AI_BATTLE_HISTORY->trainerItems[i] = 0;
             return shouldUse;

@@ -61,7 +61,7 @@ gBattleBufferB = .; /* 2024260 */
 gActiveBattler = .; /* 2024A60 */
     . += 0x4;
 
-gBattleExecBuffer = .; /* 2024A64 */
+gBattleControllerExecFlags = .; /* 2024A64 */
     . += 0x4;
 
 gBattlersCount = .; /* 2024A68 */
@@ -88,7 +88,7 @@ gCurrentActionFuncId = .; /* 2024A7F */
 gBattleMons = .; /* 2024A80 */
     . += 0x160;
 
-gBankSpriteIds = .; /* 2024BE0 */
+gBattlerSpriteIds = .; /* 2024BE0 */
     . += 0x4;
 
 gCurrMovePos = .; /* 2024BE4 */
@@ -121,19 +121,19 @@ gLastUsedItem = .; /* 2024C04 */
 gLastUsedAbility = .; /* 2024C06 */
     . += 0x1;
 
-gBankAttacker = .; /* 2024C07 */
+gBattlerAttacker = .; /* 2024C07 */
     . += 0x1;
 
-gBankTarget = .; /* 2024C08 */
+gBattlerTarget = .; /* 2024C08 */
     . += 0x1;
 
 gBank1 = .; /* 2024C09 */
     . += 0x1;
 
-gEffectBank = .; /* 2024C0A */
+gEffectBattler = .; /* 2024C0A */
     . += 0x1;
 
-gStringBank = .; /* 2024C0B */
+gPotentialItemEffectBattler = .; /* 2024C0B */
     . += 0x1;
 
 gAbsentBattlerFlags = .; /* 2024C0C */
