@@ -3248,7 +3248,7 @@ BattleScript_DamagingWeatherContinues:: @ 81D8F7D
 	setbyte gBattleCommunication, 0
 
 BattleScript_DamagingWeatherLoop: @ 81D8F95
-	copyarraywithindex gBattlerAttacker, gBanksByTurnOrder, gBattleCommunication, 1
+	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 1
 	weatherdamage
 	jumpifword EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
@@ -3693,7 +3693,7 @@ BattleScript_MoveSelectionImprisoned:: @ 81D9464
 	printselectionstring BATTLE_TEXT_SealedNoUse
 	endselectionscript
 
-BattleScript_SelectingImprisionedMoveInPalace:: @ 81D9468
+BattleScript_GrudgeTakesPp:: @ 81D9468
 	printstring BATTLE_TEXT_GrudgeLosePP
 	waitmessage 64
 	return

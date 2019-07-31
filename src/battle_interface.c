@@ -425,7 +425,7 @@ u8 *const gUnknown_0820A904[10] =
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
-extern u8 gBanksBySide[];
+extern u8 gBattlerPositions[];
 extern u8 gHealthboxSpriteIds[];
 
 extern u16 gBattleTypeFlags;
@@ -836,7 +836,7 @@ u8 battle_make_oam_normal_battle(u8 a)
     }
     //_08043B50
 
-    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplates_820A56C[gBanksBySide[a]], 140, 60, 0);
+    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplates_820A56C[gBattlerPositions[a]], 140, 60, 0);
     sprite = &gSprites[spriteId3];
     SetSubspriteTables(sprite, &gSubspriteTables_820A684[GetBattlerSide(a)]);
     sprite->subspriteMode = 2;

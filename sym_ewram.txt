@@ -70,13 +70,13 @@ gBattlersCount = .; /* 2024A68 */
 gBattlerPartyIndexes = .; /* 2024A6A */
     . += 0x8;
 
-gBanksBySide = .; /* 2024A72 */
+gBattlerPositions = .; /* 2024A72 */
     . += 0x4;
 
 gActionsByTurnOrder = .; /* 2024A76 */
     . += 0x4;
 
-gBanksByTurnOrder = .; /* 2024A7A */
+gBattlerByTurnOrder = .; /* 2024A7A */
     . += 0x4;
 
 gCurrentTurnActionNumber = .; /* 2024A7E */
@@ -187,13 +187,13 @@ gHitMarker = .; /* 2024C6C */
 gUnknown_02024C70 = .; /* 2024C70 */
     . += 0x4;
 
-gTakenDmgBanks = .; /* 2024C74 */
+gTakenDmgByBattler = .; /* 2024C74 */
     . += 0x4;
 
 gUnknown_02024C78 = .; /* 2024C78 */
     . += 0x2;
 
-gSideAffecting = .; /* 2024C7A */
+gSideStatuses = .; /* 2024C7A */
     . += 0x6;
 
 gSideTimers = .; /* 2024C80 */

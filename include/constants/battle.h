@@ -324,9 +324,7 @@
 #define ABILITYEFFECT_COUNT_ON_FIELD      0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD      0x13
 
-#define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
-
-#define BS_GET_TARGET                   0
+#define BS_TARGET                   0
 #define BS_GET_ATTACKER                 1
 #define BS_GET_EFFECT_BANK              2
 #define BS_GET_gBank1   3

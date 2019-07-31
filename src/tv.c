@@ -634,7 +634,7 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
         gSaveBlock1.gabbyAndTyData.battleNum ++;
-    gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
+    gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.playerMonWasDamaged;
 
     if (gBattleResults.playerFaintCounter)
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;

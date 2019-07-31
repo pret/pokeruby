@@ -41,8 +41,8 @@ extern u8 gBattlersCount;
 extern u32 gStatuses3[4];
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
-extern u8 gBanksByTurnOrder[4];
-extern u16 gSideAffecting[2];
+extern u8 gBattlerByTurnOrder[4];
+extern u16 gSideStatuses[2];
 extern u16 gBattleWeather;
 extern void (*gBattleMainFunc)(void);
 extern u8 gAbsentBattlerFlags;
@@ -54,7 +54,7 @@ extern s32 gBattleMoveDamage;
 extern u16 gBattlerPartyIndexes[4];
 extern u16 gChosenMovesByBanks[4];
 extern s32 gTakenDmg[4];
-extern u8 gTakenDmgBanks[4];
+extern u8 gTakenDmgByBattler[4];
 extern u8 gMoveResultFlags;
 extern u8 gLastUsedAbility;
 extern u8 gBattleTextBuff2[];
@@ -90,7 +90,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 sub_803FC34(u8 bank);
 u16 sub_803FBFC(u8 a);
 void RecordAbilityBattle(u8 bank, u8 ability);
-void RecordItemBattle(u8 bank, u8 holdEffect);
+void RecordItemEffectBattle(u8 bank, u8 holdEffect);
 s8 GetPokeFlavourRelation(u32 pid, u8 flavor);
 
 extern u8 BattleScript_MoveSelectionDisabledMove[];
@@ -208,12 +208,12 @@ extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
 #define MULTISTRING_CHOOSER 0x5
 #define MSG_DISPLAY         0x7
 
-u8 GetBattleBank(u8 caseId)
+u8 GetBattlerForBattleScript(u8 caseId)
 {
     u8 ret = 0;
     switch (caseId)
     {
-    case BS_GET_TARGET:
+    case BS_TARGET:
         ret = gBattlerTarget;
         break;
     case BS_GET_ATTACKER:
@@ -258,7 +258,7 @@ void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move)
         gBattleMons[bankAtk].pp[i]--;
 
     if (!(gBattleMons[bankAtk].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[bankAtk].unk18_b & gBitTable[i]))
+        && !(gDisableStructs[bankAtk].mimickedMoves & gBitTable[i]))
     {
         gActiveBattler = bankAtk;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + i, 0, 1, &gBattleMons[gActiveBattler].pp[i]);
@@ -292,7 +292,7 @@ void PressurePPLoseOnUsingImprision(u8 bankAtk)
 
     if (imprisionPos != 4
         && !(gBattleMons[bankAtk].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[bankAtk].unk18_b & gBitTable[imprisionPos]))
+        && !(gDisableStructs[bankAtk].mimickedMoves & gBitTable[imprisionPos]))
     {
         gActiveBattler = bankAtk;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisionPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisionPos]);
@@ -325,7 +325,7 @@ void PressurePPLoseOnUsingPerishSong(u8 bankAtk)
 
     if (perishSongPos != 4
         && !(gBattleMons[bankAtk].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[bankAtk].unk18_b & gBitTable[perishSongPos]))
+        && !(gDisableStructs[bankAtk].mimickedMoves & gBitTable[perishSongPos]))
     {
         gActiveBattler = bankAtk;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
@@ -623,14 +623,14 @@ u8 UpdateTurnCounters(void)
         case 0:
             for (i = 0; i < gBattlersCount; i++)
             {
-                gBanksByTurnOrder[i] = i;
+                gBattlerByTurnOrder[i] = i;
             }
             for (i = 0; i < gBattlersCount - 1; i++)
             {
                 s32 j;
                 for (j = i + 1; j < gBattlersCount; j++)
                 {
-                    if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], 0))
+                    if (GetWhoStrikesFirst(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], 0))
                         SwapTurnOrder(i, j);
                 }
             }
@@ -641,12 +641,12 @@ u8 UpdateTurnCounters(void)
             {
                 gActiveBattler = gBattlerAttacker = sideBank = gBattleStruct->turnSideTracker;
 
-                if (gSideAffecting[sideBank] & SIDE_STATUS_REFLECT)
+                if (gSideStatuses[sideBank] & SIDE_STATUS_REFLECT)
                 {
                     if (--gSideTimers[sideBank].reflectTimer == 0)
                     {
 
-                        gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
+                        gSideStatuses[sideBank] &= ~SIDE_STATUS_REFLECT;
                         BattleScriptExecute(BattleScript_SideStatusWoreOff);
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
@@ -670,11 +670,11 @@ u8 UpdateTurnCounters(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 gActiveBattler = gBattlerAttacker = sideBank = gBattleStruct->turnSideTracker;
-                if (gSideAffecting[sideBank] & SIDE_STATUS_LIGHTSCREEN)
+                if (gSideStatuses[sideBank] & SIDE_STATUS_LIGHTSCREEN)
                 {
                     if (--gSideTimers[sideBank].lightscreenTimer == 0)
                     {
-                        gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
+                        gSideStatuses[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
                         BattleScriptExecute(BattleScript_SideStatusWoreOff);
                         gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                         gBattleTextBuff1[0] = 0xFD;
@@ -701,7 +701,7 @@ u8 UpdateTurnCounters(void)
                 gActiveBattler = gBattlerAttacker = sideBank = gBattleStruct->turnSideTracker;
                 if (gSideTimers[sideBank].mistTimer && --gSideTimers[sideBank].mistTimer == 0)
                 {
-                    gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
+                    gSideStatuses[sideBank] &= ~SIDE_STATUS_MIST;
                     BattleScriptExecute(BattleScript_SideStatusWoreOff);
                     gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                     gBattleTextBuff1[0] = 0xFD;
@@ -725,11 +725,11 @@ u8 UpdateTurnCounters(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 gActiveBattler = gBattlerAttacker = sideBank = gBattleStruct->turnSideTracker;
-                if (gSideAffecting[sideBank] & SIDE_STATUS_SAFEGUARD)
+                if (gSideStatuses[sideBank] & SIDE_STATUS_SAFEGUARD)
                 {
                     if (--gSideTimers[sideBank].safeguardTimer == 0)
                     {
-                        gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
+                        gSideStatuses[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
                         BattleScriptExecute(BattleScript_SafeguardEnds);
                         effect++;
                     }
@@ -747,7 +747,7 @@ u8 UpdateTurnCounters(void)
         case 5:
             while (gBattleStruct->turnSideTracker < gBattlersCount)
             {
-                gActiveBattler = gBanksByTurnOrder[gBattleStruct->turnSideTracker];
+                gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnSideTracker];
                 if (gWishFutureKnock.wishCounter[gActiveBattler] && --gWishFutureKnock.wishCounter[gActiveBattler] == 0 && gBattleMons[gActiveBattler].hp)
                 {
                     gBattlerTarget = gActiveBattler;
@@ -857,7 +857,7 @@ u8 TurnBasedEffects(void)
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
     while (gBattleStruct->turnEffectsBank < gBattlersCount && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
-        gActiveBattler = gBattlerAttacker = gBanksByTurnOrder[gBattleStruct->turnEffectsBank];
+        gActiveBattler = gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->turnEffectsBank];
         if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
         {
             gBattleStruct->turnEffectsBank++;
@@ -1199,7 +1199,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
     case 1: // perish song
         while (gBattleStruct->sub80170DC_Bank < gBattlersCount)
         {
-            gActiveBattler = gBattlerAttacker = gBanksByTurnOrder[gBattleStruct->sub80170DC_Bank];
+            gActiveBattler = gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->sub80170DC_Bank];
             if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
                 gBattleStruct->sub80170DC_Bank++;
             else
@@ -1546,7 +1546,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     {
                         gCurrentMove = MOVE_BIDE;
                         *bideDmg = gTakenDmg[gBattlerAttacker] * 2;
-                        gBattlerTarget = gTakenDmgBanks[gBattlerAttacker];
+                        gBattlerTarget = gTakenDmgByBattler[gBattlerAttacker];
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetMoveTarget(MOVE_BIDE, 1);
                         gBattlescriptCurrInstr = BattleScript_BideAttack;
@@ -2752,7 +2752,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleMoveDamage *= -1;
                     BattleScriptExecute(BattleScript_ItemHealHP_End2);
                     effect = ITEM_HP_CHANGE;
-                    RecordItemBattle(bank, bankHoldEffect);
+                    RecordItemEffectBattle(bank, bankHoldEffect);
                 }
                 break;
             // nice copy/paste there gamefreak, making a function for confuse berries was too much eh?
@@ -3106,7 +3106,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 case ITEM_PP_CHANGE:
-                    if (!(gBattleMons[bank].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[bank].unk18_b & gBitTable[i]))
+                    if (!(gBattleMons[bank].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[bank].mimickedMoves & gBitTable[i]))
                         gBattleMons[bank].pp[i] = changedPP;
                     break;
                 }
@@ -3341,13 +3341,13 @@ void unref_sub_801B40C(void)
                     {
                         gSideTimers[GetBattlerPosition(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
                         gSideTimers[GetBattlerPosition(bank) & 1].field4 = sCombinedMoves[i].newMove;
-                        gSideAffecting[GetBattlerPosition(bank) & 1] |= SIDE_STATUS_X4;
+                        gSideStatuses[GetBattlerPosition(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank + 2] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank])
                     {
                         gSideTimers[GetBattlerPosition(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
                         gSideTimers[GetBattlerPosition(bank) & 1].field4 = sCombinedMoves[i].newMove;
-                        gSideAffecting[GetBattlerPosition(bank) & 1] |= SIDE_STATUS_X4;
+                        gSideStatuses[GetBattlerPosition(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     bank++;
                 }

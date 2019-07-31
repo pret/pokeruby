@@ -69,10 +69,6 @@
 #define TYPE_FORESIGHT  0xFE
 #define TYPE_ENDTABLE   0xFF
 
-// physical/special types
-#define TYPE_IS_PHYSICAL(type) ((type) < TYPE_MYSTERY)
-#define TYPE_IS_SPECIAL(type) ((type) > TYPE_MYSTERY)
-
 struct DisableStruct
 {
     /*0x00*/ u32 transformedMonPersonality;
@@ -97,12 +93,12 @@ struct DisableStruct
     /*0x13*/ u8 tauntTimer1:4;
     /*0x13*/ u8 tauntTimer2:4;
     /*0x14*/ u8 bankPreventingEscape;
-    /*0x15*/ u8 bankWithSureHit;
+    /*0x15*/ u8 battlerWithSureHit;
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
     /*0x18*/ u8 truantCounter : 1;
     /*0x18*/ u8 unk18_a : 3;
-    /*0x18*/ u8 unk18_b : 4;
+    /*0x18*/ u8 mimickedMoves : 4;
     /*0x19*/ u8 rechargeCounter;
     /*0x1A*/ u8 unk1A[2];
 };
@@ -240,7 +236,7 @@ struct BattleResults
     u8 unk2;                  // 0x2
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
-    u8 unk5_0:1;              // 0x5
+    u8 playerMonWasDamaged:1; // 0x5
     u8 unk5_1:1;              // 0x5
     u16 poke1Species;         // 0x6
     u8 pokeString1[10];       // 0x8
@@ -310,7 +306,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x16015*/ u8 unk16015;
     /*0x16016*/ u8 unk16016;
     /*0x16017*/ u8 unk16017;
-    /*0x16018*/ u8 expGetterID;
+    /*0x16018*/ u8 expGetterMonId;
     /*0x16019*/ u8 unk16019;
     /*0x1601A*/ u8 atk5A_StateTracker; //also atk5B, statetracker
     /*0x1601B*/ u8 wildVictorySong;
@@ -408,7 +404,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1609F*/ u8 unk1609F;
     /*0x160A0*/ u8 stringMoveType;
     /*0x160A1*/ u8 animTargetsHit;
-    /*0x160A2*/ u8 expGetterBank;
+    /*0x160A2*/ u8 expGetterBattlerId;
     /*0x160A3*/ u8 unk160A3;
     /*0x160A4*/ u8 animArg1;
     /*0x160A5*/ u8 animArg2;
@@ -776,7 +772,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
 u8 TypeCalc(u16 move, u8 bank_atk, u8 bank_def);
-u8 BankGetTurnOrder(u8 bank);
+u8 GetBattlerTurnOrderNum(u8 bank);
 
 // asm/battle_5.o
 void nullsub_91(void);
