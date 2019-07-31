@@ -6,7 +6,7 @@
 . += 0x2E8;
 
 . = ALIGN(4); src/link.o(ewram_data);
-. = ALIGN(4); src/rom3.o(ewram_data);
+. = ALIGN(4); src/battle_controllers.o(ewram_data);
 
 /* battle */
 
