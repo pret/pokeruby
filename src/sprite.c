@@ -18,15 +18,15 @@
 
 #define ALLOC_SPRITE_TILE(n)                             \
 {                                                        \
-    gSpriteTileAllocBitmap[(n) / 8] |= (1 << ((n) % 8)); \
+    sSpriteTileAllocBitmap[(n) / 8] |= (1 << ((n) % 8)); \
 }
 
 #define FREE_SPRITE_TILE(n)                               \
 {                                                         \
-    gSpriteTileAllocBitmap[(n) / 8] &= ~(1 << ((n) % 8)); \
+    sSpriteTileAllocBitmap[(n) / 8] &= ~(1 << ((n) % 8)); \
 }
 
-#define SPRITE_TILE_IS_ALLOCATED(n) ((gSpriteTileAllocBitmap[(n) / 8] >> ((n) % 8)) & 1)
+#define SPRITE_TILE_IS_ALLOCATED(n) ((sSpriteTileAllocBitmap[(n) / 8] >> ((n) % 8)) & 1)
 
 struct SpriteCopyRequest
 {
@@ -93,21 +93,21 @@ typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
 typedef void (*AffineAnimCmdFunc)(u8 matrixNum, struct Sprite *);
 
-#define DUMMY_OAM_DATA        \
-{                             \
-    160, /* Y (off-screen) */ \
-    0,                        \
-    0,                        \
-    0,                        \
-    0,                        \
-    0,                        \
-    304, /* X */              \
-    0,                        \
-    0,                        \
-    0,                        \
-    3, /* lowest priority */  \
-    0,                        \
-    0                         \
+#define DUMMY_OAM_DATA                      \
+{                                           \
+    .y = 160,                               \
+    .affineMode = 0,                        \
+    .objMode = 0,                           \
+    .mosaic = 0,                            \
+    .bpp = 0,                               \
+    .shape = SPRITE_SHAPE(8x8),             \
+    .x = 304,                               \
+    .matrixNum = 0,                         \
+    .size = SPRITE_SIZE(8x8),               \
+    .tileNum = 0,                           \
+    .priority = 3, /* lowest priority */    \
+    .paletteNum = 0,                        \
+    .affineParam = 0                        \
 }
 
 #define ANIM_END        0xFFFF
@@ -180,10 +180,10 @@ static const struct Sprite sDummySprite =
     .animPaused = 0,
     .affineAnimPaused = 0,
     .animLoopCounter = 0,
-    .data = {0},
+    .data = {0, 0, 0, 0, 0, 0, 0},
     .inUse = 0,
     .coordOffsetEnabled = 0,
-    .invisible = 0,
+    .invisible = FALSE,
     .flags_3 = 0,
     .flags_4 = 0,
     .flags_5 = 0,
@@ -287,22 +287,22 @@ static u16 sSpriteTileRanges[MAX_SPRITES * 2];
 static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
 static u16 sSpritePaletteTags[16];
 
-u8 gSpriteOrder[MAX_SPRITES];
-bool8 gShouldProcessSpriteCopyRequests;
-u8 gSpriteCopyRequestCount;
-struct SpriteCopyRequest gSpriteCopyRequests[MAX_SPRITE_COPY_REQUESTS];
-u8 gOamLimit;
-u16 gReservedSpriteTileCount;
-u8 gSpriteTileAllocBitmap[128];
-s16 gSpriteCoordOffsetX;
-s16 gSpriteCoordOffsetY;
 u32 gOamMatrixAllocBitmap;
-struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
 u8 gReservedSpritePaletteCount;
 
 EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
-EWRAM_DATA u16 gSpritePriorities[MAX_SPRITES] = {0};
-EWRAM_DATA u8 gAffineAnimsDisabled = {0};
+EWRAM_DATA u16 sSpritePriorities[MAX_SPRITES] = {0};
+u8 sSpriteOrder[MAX_SPRITES];
+bool8 sShouldProcessSpriteCopyRequests;
+u8 gSpriteCopyRequestCount;
+struct SpriteCopyRequest sSpriteCopyRequests[MAX_SPRITE_COPY_REQUESTS];
+u8 gOamLimit;
+u16 gReservedSpriteTileCount;
+u8 sSpriteTileAllocBitmap[128];
+s16 gSpriteCoordOffsetX;
+s16 gSpriteCoordOffsetY;
+struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
+EWRAM_DATA bool8 gAffineAnimsDisabled = 0;
 
 void ResetSpriteData(void)
 {
@@ -346,7 +346,7 @@ void BuildOamBuffer(void)
     AddSpritesToOamBuffer();
     CopyMatricesToOamBuffer();
     gMain.oamLoadDisabled = temp;
-    gShouldProcessSpriteCopyRequests = TRUE;
+    sShouldProcessSpriteCopyRequests = TRUE;
 }
 
 static void UpdateOamCoords(void)
@@ -378,7 +378,7 @@ static void BuildSpritePriorities(void)
     {
         struct Sprite *sprite = &gSprites[i];
         u16 priority = sprite->subpriority | (sprite->oam.priority << 8);
-        gSpritePriorities[i] = priority;
+        sSpritePriorities[i] = priority;
     }
 }
 
@@ -388,10 +388,10 @@ static void SortSprites(void)
     for (i = 1; i < MAX_SPRITES; i++)
     {
         u8 j = i;
-        struct Sprite *sprite1 = &gSprites[gSpriteOrder[i - 1]];
-        struct Sprite *sprite2 = &gSprites[gSpriteOrder[i]];
-        u16 sprite1Priority = gSpritePriorities[gSpriteOrder[i - 1]];
-        u16 sprite2Priority = gSpritePriorities[gSpriteOrder[i]];
+        struct Sprite *sprite1 = &gSprites[sSpriteOrder[i - 1]];
+        struct Sprite *sprite2 = &gSprites[sSpriteOrder[i]];
+        u16 sprite1Priority = sSpritePriorities[sSpriteOrder[i - 1]];
+        u16 sprite2Priority = sSpritePriorities[sSpriteOrder[i]];
         s16 sprite1Y = sprite1->oam.y;
         s16 sprite2Y = sprite2->oam.y;
 
@@ -427,20 +427,20 @@ static void SortSprites(void)
             && ((sprite1Priority > sprite2Priority)
              || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
         {
-            u8 temp = gSpriteOrder[j];
-            gSpriteOrder[j] = gSpriteOrder[j - 1];
-            gSpriteOrder[j - 1] = temp;
+            u8 temp = sSpriteOrder[j];
+            sSpriteOrder[j] = sSpriteOrder[j - 1];
+            sSpriteOrder[j - 1] = temp;
 
             // UB: If j equals 1, then j-- makes j equal 0.
-            // Then, gSpriteOrder[-1] gets accessed below.
+            // Then, sSpriteOrder[-1] gets accessed below.
             // Although this doesn't result in a bug in the ROM,
             // the behavior is undefined.
             j--;
 
-            sprite1 = &gSprites[gSpriteOrder[j - 1]];
-            sprite2 = &gSprites[gSpriteOrder[j]];
-            sprite1Priority = gSpritePriorities[gSpriteOrder[j - 1]];
-            sprite2Priority = gSpritePriorities[gSpriteOrder[j]];
+            sprite1 = &gSprites[sSpriteOrder[j - 1]];
+            sprite2 = &gSprites[sSpriteOrder[j]];
+            sprite1Priority = sSpritePriorities[sSpriteOrder[j - 1]];
+            sprite2Priority = sSpritePriorities[sSpriteOrder[j]];
             sprite1Y = sprite1->oam.y;
             sprite2Y = sprite2->oam.y;
 
@@ -495,7 +495,7 @@ static void AddSpritesToOamBuffer(void)
 
     while (i < MAX_SPRITES)
     {
-        struct Sprite *sprite = &gSprites[gSpriteOrder[i]];
+        struct Sprite *sprite = &gSprites[sSpriteOrder[i]];
         if (sprite->inUse && !sprite->invisible && AddSpriteToOamBuffer(sprite, &oamIndex))
             break;
         i++;
@@ -662,14 +662,14 @@ static void ClearSpriteCopyRequests(void)
 {
     u8 i;
 
-    gShouldProcessSpriteCopyRequests = FALSE;
+    sShouldProcessSpriteCopyRequests = FALSE;
     gSpriteCopyRequestCount = 0;
 
     for (i = 0; i < MAX_SPRITE_COPY_REQUESTS; i++)
     {
-        gSpriteCopyRequests[i].src = 0;
-        gSpriteCopyRequests[i].dest = 0;
-        gSpriteCopyRequests[i].size = 0;
+        sSpriteCopyRequests[i].src = 0;
+        sSpriteCopyRequests[i].dest = 0;
+        sSpriteCopyRequests[i].size = 0;
     }
 }
 
@@ -777,17 +777,17 @@ u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
     if (op == 0)
     {
         val = ~(1 << val);
-        gSpriteTileAllocBitmap[index] &= val;
+        sSpriteTileAllocBitmap[index] &= val;
     }
     else if (op == 1)
     {
         val = (1 << val);
-        gSpriteTileAllocBitmap[index] |= val;
+        sSpriteTileAllocBitmap[index] |= val;
     }
     else
     {
         retVal = 1 << shift;
-        retVal &= gSpriteTileAllocBitmap[index];
+        retVal &= sSpriteTileAllocBitmap[index];
     }
 
     return retVal;
@@ -799,18 +799,18 @@ void SpriteCallbackDummy(struct Sprite *sprite)
 
 void ProcessSpriteCopyRequests(void)
 {
-    if (gShouldProcessSpriteCopyRequests)
+    if (sShouldProcessSpriteCopyRequests)
     {
         u8 i = 0;
 
         while (gSpriteCopyRequestCount > 0)
         {
-            CpuCopy16(gSpriteCopyRequests[i].src, gSpriteCopyRequests[i].dest, gSpriteCopyRequests[i].size);
+            CpuCopy16(sSpriteCopyRequests[i].src, sSpriteCopyRequests[i].dest, sSpriteCopyRequests[i].size);
             gSpriteCopyRequestCount--;
             i++;
         }
 
-        gShouldProcessSpriteCopyRequests = FALSE;
+        sShouldProcessSpriteCopyRequests = FALSE;
     }
 }
 
@@ -818,9 +818,9 @@ static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct Spr
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
-        gSpriteCopyRequests[gSpriteCopyRequestCount].src = images[index].data;
-        gSpriteCopyRequests[gSpriteCopyRequestCount].dest = OBJ_VRAM0 + TILE_SIZE_4BPP * tileNum;
-        gSpriteCopyRequests[gSpriteCopyRequestCount].size = images[index].size;
+        sSpriteCopyRequests[gSpriteCopyRequestCount].src = images[index].data;
+        sSpriteCopyRequests[gSpriteCopyRequestCount].dest = OBJ_VRAM0 + TILE_SIZE_4BPP * tileNum;
+        sSpriteCopyRequests[gSpriteCopyRequestCount].size = images[index].size;
         gSpriteCopyRequestCount++;
     }
 #if DEBUG
@@ -835,9 +835,9 @@ void RequestSpriteCopy(const void *src, u8 *dest, u16 size)
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
-        gSpriteCopyRequests[gSpriteCopyRequestCount].src = src;
-        gSpriteCopyRequests[gSpriteCopyRequestCount].dest = dest;
-        gSpriteCopyRequests[gSpriteCopyRequestCount].size = size;
+        sSpriteCopyRequests[gSpriteCopyRequestCount].src = src;
+        sSpriteCopyRequests[gSpriteCopyRequestCount].dest = dest;
+        sSpriteCopyRequests[gSpriteCopyRequestCount].size = size;
         gSpriteCopyRequestCount++;
     }
 #if DEBUG
@@ -880,7 +880,7 @@ static void ResetAllSprites(void)
     for (i = 0; i < MAX_SPRITES; i++)
     {
         ResetSprite(&gSprites[i]);
-        gSpriteOrder[i] = i;
+        sSpriteOrder[i] = i;
     }
 
     ResetSprite(&gSprites[i]);

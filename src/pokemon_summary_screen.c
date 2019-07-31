@@ -122,7 +122,7 @@ static void SummaryScreen_PrintColoredText(const u8 *, u8, u8, u8);
 
 extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gPPUpReadMasks[];
 extern TaskFunc gUnknown_03005CF0;
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -929,7 +929,7 @@ static void SummaryScreen_DestroyTask(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         SetMainCallback2(pssData.callback);
         DestroyTask(taskId);
     }

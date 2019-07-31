@@ -784,7 +784,7 @@ static void sub_808382C(u8 taskId)
             break;
         }
 
-        SetMainCallback2(sub_800E7C4);
+        SetMainCallback2(CB2_InitBattle);
         gMain.savedCallback = sub_8083958;
         DestroyTask(taskId);
         break;

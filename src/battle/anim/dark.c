@@ -14,7 +14,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -233,7 +233,7 @@ static void sub_80DFC9C(u8 taskId)
         gTasks[taskId].data[2] = 0;
         if (r2 == 16)
         {
-            gSprites[gBankSpriteIds[gBattleAnimAttacker]].invisible = 1;
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = 1;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -957,12 +957,12 @@ void sub_80E0918(u8 taskId)
 {
     u8 toBG2 = GetBattlerPosition_permutated(gBattleAnimAttacker) ^ 1 ? 1 : 0;
     MoveBattlerSpriteToBG(gBattleAnimAttacker, toBG2);
-    gSprites[gBankSpriteIds[gBattleAnimAttacker]].invisible = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = 0;
 
     if (IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
     {
         MoveBattlerSpriteToBG(gBattleAnimAttacker ^ 2, toBG2 ^ 1);
-        gSprites[gBankSpriteIds[gBattleAnimAttacker ^ 2]].invisible = 0;
+        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = 0;
     }
 
     DestroyAnimVisualTask(taskId);
@@ -1015,7 +1015,7 @@ void sub_80E0A4C(u8 taskId)
         {
             if (IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2) == TRUE)
             {
-                gSprites[gBankSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority--;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority--;
                 REG_BG1CNT_BITFIELD.priority = 1;
                 var0 = 1;
             }
@@ -1101,7 +1101,7 @@ static void sub_80E0CD0(u8 taskId)
 
             if (gTasks[taskIdCopy].data[6] == 1)
             {
-                gSprites[gBankSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority++;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority++;
             }
             
             DestroyAnimVisualTask(taskIdCopy);
@@ -1149,7 +1149,7 @@ void sub_80E0E24(u8 taskId)
     {
         bank = GetBattlerAtPosition(identity);
         if (IsAnimBankSpriteVisible(bank))
-            spriteId = gBankSpriteIds[bank];
+            spriteId = gBattlerSpriteIds[bank];
         else
             spriteId = 0xFF;
     }
