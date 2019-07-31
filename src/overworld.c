@@ -1441,7 +1441,7 @@ void sub_80546B8(void)
     CB2_ReturnToField();
 }
 
-void c2_exit_to_overworld_1_continue_scripts_restart_music(void)
+void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080990;

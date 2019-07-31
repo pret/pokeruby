@@ -92,7 +92,7 @@ extern u8 gAbsentBattlerFlags;
 extern u8 gMultiHitCounter;
 extern u8 gActionForBanks[];
 extern u16 gUnknown_02024C2C[];
-extern u16 gLastUsedMove[];
+extern u16 gLastMoves[];
 extern u16 gLastLandedMoves[];
 extern u16 gLastHitByType[];
 extern u16 gUnknown_02024C4C[];
@@ -3329,7 +3329,7 @@ void sub_8010874(void)
         MEMSET_ALT(&gDisableStructs[i], 0, 0x1C, j, r4);
         gDisableStructs[i].isFirstTurn= 2;
         gUnknown_02024C70[i] = 0;
-        gLastUsedMove[i] = 0;
+        gLastMoves[i] = 0;
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
         gUnknown_02024C4C[i] = 0;
@@ -3484,7 +3484,7 @@ void SwitchInClearSetData(void)
     }
 
     gDisableStructs[gActiveBattler].isFirstTurn= 2;
-    gLastUsedMove[gActiveBattler] = 0;
+    gLastMoves[gActiveBattler] = 0;
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
     gUnknown_02024C4C[gActiveBattler] = 0;
@@ -3548,7 +3548,7 @@ void UndoEffectsAfterFainting(void)
     gProtectStructs[gActiveBattler].notFirstStrike = 0;
 
     gDisableStructs[gActiveBattler].isFirstTurn= 2;
-    gLastUsedMove[gActiveBattler] = 0;
+    gLastMoves[gActiveBattler] = 0;
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
     gUnknown_02024C4C[gActiveBattler] = 0;
@@ -3981,7 +3981,7 @@ void BattleTurnPassed(void)
     TurnValuesCleanUp(1);
     if (gBattleOutcome == 0)
     {
-        if (UpdateTurnCounters() != 0)
+        if (DoFieldEndTurnEffects() != 0)
             return;
         if (TurnBasedEffects() != 0)
             return;

@@ -293,13 +293,13 @@ struct BattleStruct /* 0x2000000 */
     /*0x15DDF*/ u8 unk15DDF;
     /*0x15DE0*/ u8 filler15DE0[0x220];
     /*0x16000*/ u8 turnEffectsTracker;
-    /*0x16001*/ u8 turnEffectsBank;
+    /*0x16001*/ u8 turnEffectsBattlerId;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
     /*0x16004*/ u8 wrappedMove[8];
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
-    /*0x1600E*/ u8 turncountersTracker;
+    /*0x1600E*/ u8 turnCountersTracker;
     /*0x1600F*/ u8 getexpStateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
@@ -501,8 +501,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x1610D*/ u8 unk1610D;
     /*0x1610E*/ u8 unk1610E;
     /*0x1610F*/ u8 unk1610F;
-    /*0x16110*/ u8 sub80170DC_Tracker;
-    /*0x16111*/ u8 sub80170DC_Bank;
+    /*0x16110*/ u8 wishPerishSongState;
+    /*0x16111*/ u8 wishPerishSongBattlerId;
     /*0x16112*/ u8 unk16112;
     /*0x16113*/ u8 unk16113;
     /*0x16114*/ u8 unk16114;
@@ -762,7 +762,7 @@ void debug_sub_8010800(void);
 
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
-u8 UpdateTurnCounters(void);
+u8 DoFieldEndTurnEffects(void);
 u8 TurnBasedEffects(void);
 u8 HandleFaintedMonActions();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);

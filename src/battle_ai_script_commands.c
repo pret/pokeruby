@@ -26,7 +26,7 @@ extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 extern u8 gMoveResultFlags;
 extern u16 gDynamicBasePower;
-extern u16 gLastUsedMove[MAX_BATTLERS_COUNT];
+extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 extern u16 gSideStatuses[2];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
@@ -448,7 +448,7 @@ void sub_810745C(void)
     {
         if (AI_BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] == 0)
         {
-            AI_BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] = gLastUsedMove[gBattlerTarget];
+            AI_BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] = gLastMoves[gBattlerTarget];
             return;
         }
     }
@@ -1256,9 +1256,9 @@ _081083D0: .4byte gAIScriptPtr\n\
 static void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
-        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBattlerAttacker];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerAttacker];
     else
-        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBattlerTarget];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerTarget];
 
     gAIScriptPtr += 2;
 }

@@ -53,7 +53,7 @@ extern u8 gPotentialItemEffectBattler;
 extern u8 gEffectBattler;
 extern u8 gAbsentBattlerFlags;
 extern u8 gMultiHitCounter;
-extern u16 gLastUsedMove[4];
+extern u16 gLastMoves[4];
 extern u16 gLockedMoves[4];
 extern u16 gChosenMovesByBanks[4];
 extern u16 gSideStatuses[2];
@@ -6901,12 +6901,12 @@ void atk49_moveend(void)
             {
                 if (gHitMarker & HITMARKER_OBEYS)
                 {
-                    gLastUsedMove[gBattlerAttacker] = gChosenMove;
+                    gLastMoves[gBattlerAttacker] = gChosenMove;
                     gUnknown_02024C4C[gBattlerAttacker] = gCurrentMove;
                 }
                 else
                 {
-                    gLastUsedMove[gBattlerAttacker] = 0xFFFF;
+                    gLastMoves[gBattlerAttacker] = 0xFFFF;
                     gUnknown_02024C4C[gBattlerAttacker] = 0xFFFF;
                 }
 
@@ -11385,8 +11385,8 @@ static bool8 IsMoveUncopyable(u16 move)
 static void atk9D_mimicattackcopy(void)
 {
     gChosenMove = 0xFFFF;
-    if (IsMoveUncopyable(gLastUsedMove[gBattlerTarget]) || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED
-        || gLastUsedMove[gBattlerTarget] == 0 || gLastUsedMove[gBattlerTarget] == 0xFFFF)
+    if (IsMoveUncopyable(gLastMoves[gBattlerTarget]) || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED
+        || gLastMoves[gBattlerTarget] == 0 || gLastMoves[gBattlerTarget] == 0xFFFF)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -11395,21 +11395,21 @@ static void atk9D_mimicattackcopy(void)
         int i;
         for (i = 0; i < 4; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] == gLastUsedMove[gBattlerTarget])
+            if (gBattleMons[gBattlerAttacker].moves[i] == gLastMoves[gBattlerTarget])
                 break;
         }
         if (i == 4)
         {
-            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastUsedMove[gBattlerTarget];
-            if (gBattleMoves[gLastUsedMove[gBattlerTarget]].pp < 5)
-                gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastUsedMove[gBattlerTarget]].pp;
+            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
+            if (gBattleMoves[gLastMoves[gBattlerTarget]].pp < 5)
+                gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastMoves[gBattlerTarget]].pp;
             else
                 gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = 5;
 
             gBattleTextBuff1[0] = 0xFD;
             gBattleTextBuff1[1] = 2;
-            gBattleTextBuff1[2] = gLastUsedMove[gBattlerTarget];
-            gBattleTextBuff1[3] = uBYTE1_16(gLastUsedMove[gBattlerTarget]);
+            gBattleTextBuff1[2] = gLastMoves[gBattlerTarget];
+            gBattleTextBuff1[3] = uBYTE1_16(gLastMoves[gBattlerTarget]);
             gBattleTextBuff1[4] = 0xFF;
 
             gDisableStructs[gBattlerAttacker].mimickedMoves |= gBitTable[gCurrMovePos];
@@ -11770,7 +11770,7 @@ static void atkA3_disablelastusedattack(void)
     int i;
     for (i = 0; i < 4; i++)
     {
-        if (gBattleMons[gBattlerTarget].moves[i] == gLastUsedMove[gBattlerTarget])
+        if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
     }
     if (gDisableStructs[gBattlerTarget].disabledMove == 0 && i != 4 && gBattleMons[gBattlerTarget].pp[i] != 0)
@@ -11797,10 +11797,10 @@ static void atkA4_trysetencore(void)
     int i;
     for (i = 0; i < 4; i++)
     {
-        if (gBattleMons[gBattlerTarget].moves[i] == gLastUsedMove[gBattlerTarget])
+        if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
     }
-    if (gLastUsedMove[gBattlerTarget] == MOVE_STRUGGLE || gLastUsedMove[gBattlerTarget] == MOVE_ENCORE || gLastUsedMove[gBattlerTarget] == MOVE_MIRROR_MOVE)
+    if (gLastMoves[gBattlerTarget] == MOVE_STRUGGLE || gLastMoves[gBattlerTarget] == MOVE_ENCORE || gLastMoves[gBattlerTarget] == MOVE_MIRROR_MOVE)
         i = 4;
     if (gDisableStructs[gBattlerTarget].encoredMove == 0 && i != 4 && gBattleMons[gBattlerTarget].pp[i] != 0)
     {
@@ -12295,12 +12295,12 @@ static void atkAC_remaininghptopower(void)
 
 static void atkAD_tryspiteppreduce(void)
 {
-    if (gLastUsedMove[gBattlerTarget] != 0 && gLastUsedMove[gBattlerTarget] != 0xFFFF && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+    if (gLastMoves[gBattlerTarget] != 0 && gLastMoves[gBattlerTarget] != 0xFFFF && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
     {
         int i;
         for (i = 0; i < 4; i++)
         {
-            if (gLastUsedMove[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
+            if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
                 break;
         }
         if (i != 4 && gBattleMons[gBattlerTarget].pp[i] > 1)
@@ -12311,8 +12311,8 @@ static void atkAD_tryspiteppreduce(void)
 
             gBattleTextBuff1[0] = 0xFD;
             gBattleTextBuff1[1] = 2;
-            gBattleTextBuff1[2] = gLastUsedMove[gBattlerTarget];
-            gBattleTextBuff1[3] = gLastUsedMove[gBattlerTarget] >> 8;
+            gBattleTextBuff1[2] = gLastMoves[gBattlerTarget];
+            gBattleTextBuff1[3] = gLastMoves[gBattlerTarget] >> 8;
             gBattleTextBuff1[4] = 0xFF;
             ConvertIntToDecimalStringN(gBattleTextBuff2, lost_pp, 0, 1);
             gBattleTextBuff2[0] = 0xFD;

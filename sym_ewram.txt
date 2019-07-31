@@ -157,7 +157,7 @@ gSelectionBattleScripts = .; /* 2024C1C */
 gUnknown_02024C2C = .; /* 2024C2C */
     . += 0x8;
 
-gLastUsedMove = .; /* 2024C34 */
+gLastMoves = .; /* 2024C34 */
     . += 0x8;
 
 gLastLandedMoves = .; /* 2024C3C */

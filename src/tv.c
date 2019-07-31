@@ -2073,7 +2073,7 @@ void ChangePokemonNickname(void)
 void ChangePokemonNickname_CB(void)
 {
     SetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, gStringVar2);
-    c2_exit_to_overworld_1_continue_scripts_restart_music();
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
 void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)

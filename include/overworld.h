@@ -127,7 +127,7 @@ void CB2_ReturnToFieldLink(void);
 // sub_805465C
 void c2_exit_to_overworld_1_sub_8080DEC(void);
 // sub_80546B8
-void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
+void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void sub_80546F0(void);
 // sub_805470C
 void CB2_ContinueSavedGame(void);

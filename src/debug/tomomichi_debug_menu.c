@@ -1885,7 +1885,7 @@ bool8 InitTomomichiDebugWindow(void)
 
 static void debug_sub_808B868(void)
 {
-    c2_exit_to_overworld_1_continue_scripts_restart_music();
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
 static bool8 InitDebugWindow(void)

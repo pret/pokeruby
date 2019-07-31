@@ -761,7 +761,7 @@ u8 GetLeadMonFriendshipScore(void)
 
 void CB2_FieldShowRegionMap(void)
 {
-    FieldInitRegionMap(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    FieldInitRegionMap(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void FieldShowRegionMap(void)

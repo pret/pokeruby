@@ -1282,7 +1282,7 @@ void sub_81354CC(void)
         break;
     }
 
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void sub_8135534(u8 taskId)

@@ -1782,7 +1782,7 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 {
     u8 v2 = VarGet(ScriptReadHalfword(ctx));
 
-    PlaySlotMachine(v2, c2_exit_to_overworld_1_continue_scripts_restart_music);
+    PlaySlotMachine(v2, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     ScriptContext1_Stop();
     return TRUE;
 }

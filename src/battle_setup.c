@@ -558,7 +558,7 @@ void ScrSpecial_StartWallyTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
-    gMain.savedCallback = c2_exit_to_overworld_1_continue_scripts_restart_music;
+    gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
     CreateBattleStartTask(B_TRANSITION_SLICE, 0);
 }
@@ -640,7 +640,7 @@ void CB2_EndScriptedWildBattle(void)
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
         SetMainCallback2(CB2_WhiteOut);
     else
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 s8 BattleSetup_GetTerrain(void)
@@ -898,7 +898,7 @@ static void CB2_StartFirstBattle(void)
 static void CB2_EndFirstBattle(void)
 {
     Overworld_ClearSavedMusic();
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 // why not just use the macros? maybe its because they didnt want to uncast const every time?
@@ -1107,7 +1107,7 @@ void CB2_EndTrainerBattle(void)
 {
     if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
@@ -1115,7 +1115,7 @@ void CB2_EndTrainerBattle(void)
     }
     else
     {
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         SetCurrentTrainerBattledFlag();
     }
 }
@@ -1124,7 +1124,7 @@ void CB2_EndTrainerEyeRematchBattle(void)
 {
     if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
@@ -1132,7 +1132,7 @@ void CB2_EndTrainerEyeRematchBattle(void)
     }
     else
     {
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         SetCurrentTrainerBattledFlag();
         SetTrainerFlagsAfterTrainerEyeRematch();
     }
