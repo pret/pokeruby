@@ -3443,7 +3443,7 @@ void SwitchInClearSetData(void)
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
         gBattleMons[gActiveBattler].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
-        gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BANK | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
+        gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
 
         for (i = 0; i < gBattlersCount; i++)
         {
@@ -4545,7 +4545,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     if (heldItemEffect == HOLD_EFFECT_MACHO_BRACE)
         bank1AdjustedSpeed /= 2;
 
-    if (gBattleMons[bank1].status1 & STATUS_PARALYSIS)
+    if (gBattleMons[bank1].status1 & STATUS1_PARALYSIS)
         bank1AdjustedSpeed /= 4;
 
     if (heldItemEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (heldItemEffectParam * 0xFFFF) / 100)
@@ -4575,7 +4575,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     if (heldItemEffect == HOLD_EFFECT_MACHO_BRACE)
         bank2AdjustedSpeed /= 2;
 
-    if (gBattleMons[bank2].status1 & STATUS_PARALYSIS)
+    if (gBattleMons[bank2].status1 & STATUS1_PARALYSIS)
         bank2AdjustedSpeed /= 4;
 
     if (heldItemEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (heldItemEffectParam * 0xFFFF) / 100)
@@ -4787,7 +4787,7 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
             gActiveBattler = gBattlerAttacker = eFocusPunchBattler;
             eFocusPunchBattler++;
             if (gChosenMovesByBanks[gActiveBattler] == MOVE_FOCUS_PUNCH
-                && !(gBattleMons[gActiveBattler].status1 & STATUS_SLEEP)
+                && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
@@ -4846,7 +4846,7 @@ void HandleEndTurn_BattleWon(void)
         gBattleTextBuff1[0] = gBattleOutcome;
         gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+        gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
     {
@@ -4896,7 +4896,7 @@ void HandleEndTurn_BattleLost(void)
         gBattleTextBuff1[0] = gBattleOutcome;
         gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+        gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
     }
     else
     {
@@ -4983,7 +4983,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     if (!gPaletteFade.active)
     {
         ResetSpriteData();
-        if (gLeveledUpInBattle == 0 || gBattleOutcome != BATTLE_WON)
+        if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
@@ -5049,7 +5049,7 @@ static void ReturnFromBattleToOverworld(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
     {
         UpdateRoamerHPStatus(&gEnemyParty[0]);
-        if (gBattleOutcome == BATTLE_WON || gBattleOutcome == BATTLE_CAUGHT)
+        if (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT)
             SetRoamerInactive();
     }
 
@@ -5407,7 +5407,7 @@ bool8 TryRunFromBattle(u8 bank)
     if (effect)
     {
         gCurrentTurnActionNumber = gBattlersCount;
-        gBattleOutcome = BATTLE_RAN;
+        gBattleOutcome = B_OUTCOME_RAN;
     }
 
     return effect;
@@ -5426,16 +5426,16 @@ void HandleAction_Run(void)
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 if (gActionForBanks[gActiveBattler] == B_ACTION_RUN)
-                    gBattleOutcome |= BATTLE_LOST;
+                    gBattleOutcome |= B_OUTCOME_LOST;
             }
             else
             {
                 if (gActionForBanks[gActiveBattler] == B_ACTION_RUN)
-                    gBattleOutcome |= BATTLE_WON;
+                    gBattleOutcome |= B_OUTCOME_WON;
             }
         }
 
-        gBattleOutcome |= OUTCOME_LINK_BATTLE_RUN;
+        gBattleOutcome |= B_OUTCOME_LINK_BATTLE_RAN;
     }
     else
     {
@@ -5460,7 +5460,7 @@ void HandleAction_Run(void)
             else
             {
                 gCurrentTurnActionNumber = gBattlersCount;
-                gBattleOutcome = BATTLE_POKE_FLED;
+                gBattleOutcome = B_OUTCOME_MON_FLED;
             }
         }
     }
@@ -5540,7 +5540,7 @@ void HandleAction_SafriZoneRun(void)
     gBattlerAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);
     gCurrentTurnActionNumber = gBattlersCount;
-    gBattleOutcome = BATTLE_RAN;
+    gBattleOutcome = B_OUTCOME_RAN;
 }
 
 void HandleAction_Action9(void)
@@ -5573,7 +5573,7 @@ void HandleAction_NothingIsFainted(void)
                     | HITMARKER_NO_PPDEDUCT | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_IGNORE_ON_AIR
                     | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
                     | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
-                    | HITMARKER_x8000000 | HITMARKER_x4000000);
+                    | HITMARKER_CHARGING | HITMARKER_x4000000);
 }
 
 void HandleAction_ActionFinished(void)
@@ -5585,7 +5585,7 @@ void HandleAction_ActionFinished(void)
                     | HITMARKER_NO_PPDEDUCT | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_IGNORE_ON_AIR
                     | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
                     | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
-                    | HITMARKER_x8000000 | HITMARKER_x4000000);
+                    | HITMARKER_CHARGING | HITMARKER_x4000000);
 
     gBattleMoveDamage = 0;
     ewram16002 = 0;

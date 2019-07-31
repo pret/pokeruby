@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_controllers.h"
 #include "battle_811DA74.h"
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"

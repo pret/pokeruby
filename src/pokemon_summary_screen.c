@@ -4772,15 +4772,15 @@ void sub_80A1C30(u8 a)
 
 u8 GetPrimaryStatus(u32 status)
 {
-    if (status & (STATUS_POISON | STATUS_TOXIC_POISON))
+    if (status & (STATUS1_POISON | STATUS1_TOXIC_POISON))
         return STATUS_PRIMARY_POISON;
-    if (status & STATUS_PARALYSIS)
+    if (status & STATUS1_PARALYSIS)
         return STATUS_PRIMARY_PARALYSIS;
-    if (status & STATUS_SLEEP)
+    if (status & STATUS1_SLEEP)
         return STATUS_PRIMARY_SLEEP;
-    if (status & STATUS_FREEZE)
+    if (status & STATUS1_FREEZE)
         return STATUS_PRIMARY_FREEZE;
-    if (status & STATUS_BURN)
+    if (status & STATUS1_BURN)
         return STATUS_PRIMARY_BURN;
 
     return STATUS_PRIMARY_NONE;

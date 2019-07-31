@@ -1805,9 +1805,9 @@ void PrintEReaderTrainerGreeting(void)
 
 void PrintEReaderTrainerFarewellMessage(void)
 {
-    if (gBattleOutcome == BATTLE_DREW)
+    if (gBattleOutcome == B_OUTCOME_DREW)
         gStringVar4[0] = EOS;
-    else if (gBattleOutcome == BATTLE_WON)
+    else if (gBattleOutcome == B_OUTCOME_WON)
         PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.ereaderTrainer.farewellPlayerWon);
     else
         PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.ereaderTrainer.farewellPlayerLost);

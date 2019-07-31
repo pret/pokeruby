@@ -622,7 +622,7 @@ BattleScript_EffectBide: @ 81D7297
 	ppreduce
 	attackanimation
 	waitanimation
-	orword gHitMarker, HITMARKER_x8000000
+	orword gHitMarker, HITMARKER_CHARGING
 	setbide
 	goto BattleScript_MoveEnd
 
@@ -851,7 +851,7 @@ BattleScriptFirstChargingTurn: @ 81D756C
 	ppreduce
 	attackanimation
 	waitanimation
-	orword gHitMarker, HITMARKER_x8000000
+	orword gHitMarker, HITMARKER_CHARGING
 	setbyte cEFFECT_CHOOSER, 76
 	seteffectprimary
 	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
@@ -2000,7 +2000,7 @@ BattleScript_SolarbeamDecideTurn: @ 81D81E1
 	goto BattleScript_MoveEnd
 
 BattleScript_SolarbeamOnFirstTurn: @ 81D8209
-	orword gHitMarker, HITMARKER_x8000000
+	orword gHitMarker, HITMARKER_CHARGING
 	setbyte cEFFECT_CHOOSER, 76
 	seteffectprimary
 	ppreduce

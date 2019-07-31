@@ -681,17 +681,6 @@ void BtlController_EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34
 void BtlController_EmitResetActionMoveSelection(u8 a, u8 b); //0x36
 void BtlController_EmitCmd55(u8 a, u8 b); //0x37
 
-#define REQUEST_ALL_BATTLE      0x0
-#define REQUEST_SPECIES_BATTLE  0x1
-#define REQUEST_HELDITEM_BATTLE 0x2
-#define REQUEST_MOVES_PP_BATTLE 0x3
-#define REQUEST_PPMOVE1_BATTLE  0x9
-#define REQUEST_PPMOVE2_BATTLE  0xA
-#define REQUEST_PPMOVE3_BATTLE  0xB
-#define REQUEST_PPMOVE4_BATTLE  0xC
-#define REQUEST_STATUS_BATTLE   0x28
-#define REQUEST_HP_BATTLE       0x2A
-
 void MarkBattlerForControllerExec(u8 bank);
 
 extern u8 gBattleTextBuff1[];

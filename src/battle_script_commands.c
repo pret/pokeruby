@@ -13,6 +13,7 @@
 #include "constants/hold_effects.h"
 #include "random.h"
 #include "rom3.h"
+#include "battle_controllers.h"
 #include "constants/species.h"
 #include "pokemon.h"
 #include "text.h"
@@ -30,69 +31,6 @@
 // TODO: put this into battle_controllers.h
 
 #define RET_VALUE_LEVELLED_UP   11
-
-enum
-{
-    CONTROLLER_GETMONDATA,
-    CONTROLLER_GETRAWMONDATA,
-    CONTROLLER_SETMONDATA,
-    CONTROLLER_SETRAWMONDATA,
-    CONTROLLER_LOADMONSPRITE,
-    CONTROLLER_SWITCHINANIM,
-    CONTROLLER_RETURNMONTOBALL,
-    CONTROLLER_DRAWTRAINERPIC,
-    CONTROLLER_TRAINERSLIDE,
-    CONTROLLER_TRAINERSLIDEBACK,
-    CONTROLLER_FAINTANIMATION,
-    CONTROLLER_PALETTEFADE,
-    CONTROLLER_SUCCESSBALLTHROWANIM,
-    CONTROLLER_BALLTHROWANIM,
-    CONTROLLER_PAUSE,
-    CONTROLLER_MOVEANIMATION,
-    CONTROLLER_PRINTSTRING,
-    CONTROLLER_PRINTSTRINGPLAYERONLY,
-    CONTROLLER_CHOOSEACTION,
-    CONTROLLER_UNKNOWNYESNOBOX,
-    CONTROLLER_CHOOSEMOVE,
-    CONTROLLER_OPENBAG,
-    CONTROLLER_CHOOSEPOKEMON,
-    CONTROLLER_23,
-    CONTROLLER_HEALTHBARUPDATE,
-    CONTROLLER_EXPUPDATE,
-    CONTROLLER_STATUSICONUPDATE,
-    CONTROLLER_STATUSANIMATION,
-    CONTROLLER_STATUSXOR,
-    CONTROLLER_DATATRANSFER,
-    CONTROLLER_DMA3TRANSFER,
-    CONTROLLER_31,
-    CONTROLLER_32,
-    CONTROLLER_TWORETURNVALUES,
-    CONTROLLER_CHOSENMONRETURNVALUE,
-    CONTROLLER_ONERETURNVALUE,
-    CONTROLLER_ONERETURNVALUE_DUPLICATE,
-    CONTROLLER_37,
-    CONTROLLER_38,
-    CONTROLLER_39,
-    CONTROLLER_40,
-    CONTROLLER_HITANIMATION,
-    CONTROLLER_42,
-    CONTROLLER_EFFECTIVENESSSOUND,
-    CONTROLLER_PLAYFANFAREORBGM,
-    CONTROLLER_FAINTINGCRY,
-    CONTROLLER_INTROSLIDE,
-    CONTROLLER_INTROTRAINERBALLTHROW,
-    CONTROLLER_DRAWPARTYSTATUSSUMMARY,
-    CONTROLLER_49,
-    CONTROLLER_50,
-    CONTROLLER_SPRITEINVISIBILITY,
-    CONTROLLER_BATTLEANIMATION,
-    CONTROLLER_LINKSTANDBYMSG,
-    CONTROLLER_RESETACTIONMOVESELECTION,
-    CONTROLLER_55,
-    /*new controllers should go here*/
-    CONTROLLER_TERMINATOR_NOP,
-    CONTROLLER_CMDS_COUNT
-};
 
 //extern needed variables
 extern u8 gUnknown_02023A14_50;
@@ -881,12 +819,12 @@ static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2};
 static const u32 sStatusFlagsForMoveEffects[] =
 {
     0x00000000,
-    STATUS_SLEEP,
-    STATUS_POISON,
-    STATUS_BURN,
-    STATUS_FREEZE,
-    STATUS_PARALYSIS,
-    STATUS_TOXIC_POISON,
+    STATUS1_SLEEP,
+    STATUS1_POISON,
+    STATUS1_BURN,
+    STATUS1_FREEZE,
+    STATUS1_PARALYSIS,
+    STATUS1_TOXIC_POISON,
     STATUS2_CONFUSION,
     STATUS2_FLINCHED,
     0x00000000,
@@ -2398,7 +2336,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
     {
         switch (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
         {
-        case STATUS_SLEEP:
+        case STATUS1_SLEEP:
             //check active uproar
             if (gBattleMons[gEffectBattler].ability != ABILITY_SOUNDPROOF)
             {
@@ -2414,7 +2352,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             CancelMultiTurnMoves(gEffectBattler);
             StatusChanged = 1;
             break;
-        case STATUS_POISON:
+        case STATUS1_POISON:
             if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && (primary == 1 || certain == 0x80))
             {
                 gLastUsedAbility = ABILITY_IMMUNITY;
@@ -2448,7 +2386,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
 
             StatusChanged = 1;
             break;
-        case STATUS_BURN:
+        case STATUS1_BURN:
             if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL && (primary == 1 || certain == 0x80))
             {
                 gLastUsedAbility = ABILITY_WATER_VEIL;
@@ -2479,7 +2417,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             if (gBattleMons[gEffectBattler].status1 == 0) {break;}
             StatusChanged = 1;
             break;
-        case STATUS_FREEZE:
+        case STATUS1_FREEZE:
             if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY) {NoSunCanFreeze = 0;}
             if (gBattleMons[gEffectBattler].type1 == TYPE_ICE) {break;}
             if (gBattleMons[gEffectBattler].type2 == TYPE_ICE) {break;}
@@ -2490,7 +2428,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             CancelMultiTurnMoves(gEffectBattler);
             StatusChanged = 1;
             break;
-        case STATUS_PARALYSIS:
+        case STATUS1_PARALYSIS:
             if (gBattleMons[gEffectBattler].ability == ABILITY_LIMBER)
             {
                 if ((primary == 1 || certain == 0x80))
@@ -2514,7 +2452,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             if (gBattleMons[gEffectBattler].status1) {break;}
             StatusChanged = 1;
             break;
-        case STATUS_TOXIC_POISON:
+        case STATUS1_TOXIC_POISON:
             if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && (primary == 1 || certain == 0x80))
             {
                 gLastUsedAbility = ABILITY_IMMUNITY;
@@ -2557,7 +2495,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
         if (StatusChanged == 1)
         {
             BattleScriptPush(gBattlescriptCurrInstr + 1);
-            if (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS_SLEEP)
+            if (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS1_SLEEP)
                 gBattleMons[gEffectBattler].status1 |= ((Random() & 3) + 2);
             else
                 gBattleMons[gEffectBattler].status1 |= sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -2781,9 +2719,9 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             gBattlescriptCurrInstr = BattleScript_RapidSpinAway;
             return;
         case 36: //paralysis removal
-            if (gBattleMons[gBattlerTarget].status1 & STATUS_PARALYSIS)
+            if (gBattleMons[gBattlerTarget].status1 & STATUS1_PARALYSIS)
             {
-                gBattleMons[gBattlerTarget].status1 &= ~(STATUS_PARALYSIS);
+                gBattleMons[gBattlerTarget].status1 &= ~(STATUS1_PARALYSIS);
                 gActiveBattler = gBattlerTarget;
                 BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gBattlerTarget].status1);
                 MarkBattlerForControllerExec(gActiveBattler);
@@ -5641,7 +5579,7 @@ static void atk24(void)
     }
 
     if (HP_count == 0)
-        gBattleOutcome |= BATTLE_LOST;
+        gBattleOutcome |= B_OUTCOME_LOST;
 
     for (HP_count = 0, i = 0; i < 6; i++)
     {
@@ -5650,7 +5588,7 @@ static void atk24(void)
     }
 
     if (!HP_count)
-        gBattleOutcome |= BATTLE_WON;
+        gBattleOutcome |= B_OUTCOME_WON;
 
     if (!gBattleOutcome && (gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -6815,12 +6753,12 @@ void atk49_moveend(void)
             gBattleStruct->cmd49StateTracker++;
             break;
         case ATK49_DEFROST: // defrosting check
-            if (gBattleMons[gBattlerTarget].status1 & STATUS_FREEZE
+            if (gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE
                 && gBattleMons[gBattlerTarget].hp && gBattlerAttacker != gBattlerTarget
                 && gSpecialStatuses[gBattlerTarget].specialDmg
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && moveType == TYPE_FIRE)
             {
-                gBattleMons[gBattlerTarget].status1 &= ~(STATUS_FREEZE);
+                gBattleMons[gBattlerTarget].status1 &= ~(STATUS1_FREEZE);
                 gActiveBattler = gBattlerTarget;
                 BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gBattlerTarget].status1);
                 MarkBattlerForControllerExec(gActiveBattler);
@@ -6939,12 +6877,12 @@ void atk49_moveend(void)
             gBattleStruct->cmd49StateTracker++;
             break;
         case ATK49_UPDATE_LAST_MOVES:
-            if (gHitMarker & HITMARKER_PURSUIT_TRAP)
+            if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
             {
                 gActiveBattler = gBattlerAttacker;
                 gBattlerAttacker = gBattlerTarget;
                 gBattlerTarget = gActiveBattler;
-                gHitMarker &= ~(HITMARKER_PURSUIT_TRAP);
+                gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
             }
 
             if (gBattleMoves[gChosenMove].effect != 0x7F || (gMoveResultFlags & 0x29))
@@ -9111,10 +9049,10 @@ static void atk5F_8025B24(void)
     gBattlerAttacker = gBattlerTarget;
     gBattlerTarget = gActiveBattler;
     //what is xor...
-    if (gHitMarker & HITMARKER_PURSUIT_TRAP)
-        gHitMarker &= ~(HITMARKER_PURSUIT_TRAP);
+    if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
+        gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
     else
-        gHitMarker |= HITMARKER_PURSUIT_TRAP;
+        gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
     gBattlescriptCurrInstr++;
 }
 
@@ -10193,7 +10131,7 @@ static void atk81_trysetrest(void)
         gBattlescriptCurrInstr = fail_loc;
     else
     {
-        if (gBattleMons[gBattlerTarget].status1 & ((u8)(~STATUS_SLEEP)))
+        if (gBattleMons[gBattlerTarget].status1 & ((u8)(~STATUS1_SLEEP)))
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         else
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -12279,7 +12217,7 @@ static u8 AttacksThisTurn(u8 bank, u16 move) //Note: returns 1 if it's a chargin
     effect = gBattleMoves[move].effect;
     if (effect == EFFECT_SKULL_BASH || effect == EFFECT_RAZOR_WIND || effect == EFFECT_SKY_ATTACK || effect == EFFECT_SOLARBEAM || effect == EFFECT_FLY || effect == EFFECT_BIDE)
     {
-        if ((gHitMarker & HITMARKER_x8000000))
+        if ((gHitMarker & HITMARKER_CHARGING))
             return 1;
     }
     return 2;
@@ -12718,7 +12656,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
             gBattlerTarget = GetBattlerAtPosition(2);
     }
 
-    if (gActionForBanks[gBattlerTarget] == 0 && gBattlerAttacker == ewram16010arr(gBattlerTarget) && !(gBattleMons[gBattlerTarget].status1 & (STATUS_SLEEP | STATUS_FREEZE))
+    if (gActionForBanks[gBattlerTarget] == 0 && gBattlerAttacker == ewram16010arr(gBattlerTarget) && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
         && gBattleMons[gBattlerAttacker].hp && !gDisableStructs[gBattlerTarget].truantCounter && gChosenMovesByBanks[gBattlerTarget] == MOVE_PURSUIT)
     {
         int i;
@@ -12799,7 +12737,7 @@ static void atkBE_rapidspinfree(void) //rapid spin
     else if (gStatuses3[gBattlerAttacker] & STATUS3_LEECHSEED)
     {
         gStatuses3[gBattlerAttacker] &= ~(STATUS3_LEECHSEED);
-        gStatuses3[gBattlerAttacker] &= ~(STATUS3_LEECHSEED_BANK);
+        gStatuses3[gBattlerAttacker] &= ~(STATUS3_LEECHSEED_BATTLER);
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_LeechSeedFree;
     }
@@ -13308,7 +13246,7 @@ static void atkCC_callterrainattack(void) //nature power
 
 static void atkCD_cureifburnedparalysedorpoisoned(void) //refresh
 {
-    if (gBattleMons[gBattlerAttacker].status1 & (STATUS_POISON | STATUS_BURN | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
+    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
     {
         gBattleMons[gBattlerAttacker].status1 = 0;
         gBattlescriptCurrInstr += 5;
@@ -13814,7 +13752,7 @@ static void atkDA_tryswapabilities(void)
 static void atkDB_tryimprision(void)
 {
     u8 r8 = 0;
-    if ((gStatuses3[gBattlerAttacker] & STATUS3_IMPRISIONED))
+    if ((gStatuses3[gBattlerAttacker] & STATUS3_IMPRISONED_OTHERS))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -13840,7 +13778,7 @@ static void atkDB_tryimprision(void)
                 }
                 if (j != 4)
                 {
-                    gStatuses3[gBattlerAttacker] |= STATUS3_IMPRISIONED;
+                    gStatuses3[gBattlerAttacker] |= STATUS3_IMPRISONED_OTHERS;
                     gBattlescriptCurrInstr += 5;
                     break;
                 }
@@ -14480,9 +14418,9 @@ void atkEF_handleballthrow(void)
             ball_multiplier = sBallCatchBonuses[gLastUsedItem - 2];
 
         odds = (catch_rate * ball_multiplier / 10) * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2) / (3 * gBattleMons[gBattlerTarget].maxHP);
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS_SLEEP | STATUS_FREEZE))
+        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
             odds *= 2;
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS_POISON | STATUS_BURN | STATUS_PARALYSIS /*| STATUS_TOXIC_POISON */)) //nice one gf
+        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS /*| STATUS1_TOXIC_POISON */)) //nice one gf
             odds = (odds * 15) / 10;
 
         if (gLastUsedItem != ITEM_SAFARI_BALL)
