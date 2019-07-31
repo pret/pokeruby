@@ -40,6 +40,6 @@ struct BardSong
 // Exported ROM declarations
 
 const struct BardSound *GetWordSounds(u16 group, u16 word);
-s32 GetWordPhonemes(struct BardSong *dest, const struct BardSound *src, u16 arg2);
+s32 GetWordPhonemes(struct BardSong *dest, const struct BardSound *src, u16 word);
 
 #endif  // GUARD_BARD_MUSIC_H
