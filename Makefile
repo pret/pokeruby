@@ -16,7 +16,7 @@ CC1       := tools/agbcc/bin/agbcc$(EXE)
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
-SHA1SUM   := shasum -c # change back to sha1sum
+SHA1SUM   := sha1sum -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
 AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
@@ -119,16 +119,16 @@ clean: tidy
 	rm -f data/maps/connections.inc data/maps/events.inc data/maps/groups.inc data/maps/headers.inc
 	find data/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
-#	$(MAKE) clean -C tools/gbagfx
-#	$(MAKE) clean -C tools/scaninc
-#	$(MAKE) clean -C tools/preproc
-#	$(MAKE) clean -C tools/bin2c
-#	$(MAKE) clean -C tools/rsfont
-#	$(MAKE) clean -C tools/aif2pcm
-#	$(MAKE) clean -C tools/ramscrgen
-#	$(MAKE) clean -C tools/gbafix
-#	$(MAKE) clean -C tools/mapjson
-#   $(MAKE) clean -C tools/jsonproc
+	$(MAKE) clean -C tools/gbagfx
+	$(MAKE) clean -C tools/scaninc
+	$(MAKE) clean -C tools/preproc
+	$(MAKE) clean -C tools/bin2c
+	$(MAKE) clean -C tools/rsfont
+	$(MAKE) clean -C tools/aif2pcm
+	$(MAKE) clean -C tools/ramscrgen
+	$(MAKE) clean -C tools/gbafix
+	$(MAKE) clean -C tools/mapjson
+	$(MAKE) clean -C tools/jsonproc
 
 tools:
 	@$(MAKE) -C tools/gbagfx
