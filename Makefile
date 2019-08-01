@@ -47,7 +47,8 @@ C_OBJECTS    := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
 ASM_OBJECTS  := $(addprefix $(BUILD_DIR)/, $(ASM_SOURCES:%.s=%.o))
 ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
-SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
+SUBDIRS        := $(sort $(dir $(ALL_OBJECTS)))
+DATA_SRC_SUBDIR = src/data
 
 LIBC   := tools/agbcc/lib/libc.a
 LIBGCC := tools/agbcc/lib/libgcc.a
@@ -103,6 +104,8 @@ MAKEFLAGS += --no-print-directory
 # Create build subdirectories
 $(shell mkdir -p $(SUBDIRS))
 
+AUTO_GEN_TARGETS :=
+
 all: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
@@ -115,6 +118,7 @@ clean: tidy
 	rm -f data/layouts/layouts.inc data/layouts/layouts_table.inc
 	rm -f data/maps/connections.inc data/maps/events.inc data/maps/groups.inc data/maps/headers.inc
 	find data/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
+	rm -f $(AUTO_GEN_TARGETS)
 #	$(MAKE) clean -C tools/gbagfx
 #	$(MAKE) clean -C tools/scaninc
 #	$(MAKE) clean -C tools/preproc
@@ -191,6 +195,7 @@ include misc.mk
 include spritesheet_rules.mk
 include override.mk
 include map_data_rules.mk
+include json_data_rules.mk
 
 %.1bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
 %.4bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
