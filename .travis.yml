@@ -22,8 +22,15 @@ install:
 matrix:
   include:
     - os: linux
+      addons:
+        apt:
+          sources:
+              - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
       env: _="Build"
       script:
+        - make tools CXX=g++-7
         - make -j2 ruby
         - make -j2 ruby_rev1
         - make -j2 ruby_rev2
@@ -31,12 +38,19 @@ matrix:
         - make -j2 sapphire_rev1
         - make -j2 sapphire_rev2
     - os: linux
+      addons:
+        apt:
+          sources:
+              - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
       env: _="Build German"
       before_script:
         - cp override-de.mk override.mk
         - rsync -avhI data-de/ data/
         - rsync -avhI graphics-de/ graphics/
       script:
+        - make tools CXX=g++-7
         - make -j2 ruby_de
         - make -j2 sapphire_de
         - make -j2 ruby_de_debug

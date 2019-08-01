@@ -17,7 +17,6 @@
 #include "tv.h"
 
 #include "data/wild_encounters.h"
-//#include "data/we_ruby.h"
 
 const struct WildPokemon gWildFeebasRoute119Data = {20, 25, SPECIES_FEEBAS};
 
