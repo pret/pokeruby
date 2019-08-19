@@ -332,14 +332,14 @@ void BattleAI_SetupAIData(void)
 
     // special AI flag cases.
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-        AI_THINKING_STRUCT->aiFlags = 0x40000000;
+        AI_THINKING_STRUCT->aiFlags = AI_FLAG_SAFARI;
     else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
-        AI_THINKING_STRUCT->aiFlags = 0x20000000;
+        AI_THINKING_STRUCT->aiFlags = AI_FLAG_ROAMING;
     else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-        AI_THINKING_STRUCT->aiFlags = 0x80000000;
+        AI_THINKING_STRUCT->aiFlags = AI_FLAG_GO_EASY;
 #ifdef GERMAN
     else if (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER) || gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
-        AI_THINKING_STRUCT->aiFlags = 7;
+        AI_THINKING_STRUCT->aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
 #endif
     else // otherwise, just set aiFlags to whatever flags the trainer has set in their data.
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;

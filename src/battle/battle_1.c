@@ -9,6 +9,7 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/opponents.h"
+#include "battle_ai_script_commands.h"
 
 const struct MonCoords gTrainerBackPicCoords[] = {
     {8, 4},
