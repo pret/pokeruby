@@ -185,7 +185,7 @@ _0845E34C:
 
 .ifdef ENGLISH
 _0845E34F:
-	.string "A POKéMON was added to the {PLAYER}'s\n"
+	.string "A POKéMON was added to {PLAYER}'s\n"
 	.string "team.$"
 
 _0845E387:
