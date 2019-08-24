@@ -174,8 +174,8 @@ const u8 Str_839B7D8[] = _("Transport");
 const u8 Str_839B7E2[] = _("See portraits");
 const u8 Str_839B7F0[] = _("Time records");
 const u8 Str_839B7FD[] = _("Set time");
-const u8 Str_839B806[] = _("National オカDex");
-const u8 Str_839B815[] = _("Hoenn オカDex");
+const u8 Str_839B806[] = _("National {POKE}Dex");
+const u8 Str_839B815[] = _("Hoenn {POKE}Dex");
 const u8 Str_839B821[] = _("Create {PKMN}");
 const u8 Str_839B82B[] = _("See {PKMN} graphics");
 const u8 Str_839B83B[] = _("See trainers");
@@ -272,21 +272,22 @@ const u8 gUnknown_Debug_839BB64[] =
 const u8 gUnknown_Debug_0839BBA4[] = _("Debugging Version");
 const u8 gUnknown_Debug_0839BBB6[] = _("{VERSION} Version");
 const u8 gUnknown_Debug_0839BBC1[] = _("Normal RTC compatible");
-const u8 Str_839BBD7[] = _("か　の　じっけん");
-const u8 Str_839BBE0[] = _("じっけん2");
-const u8 Str_839BBE6[] = _("BGじっけん");
+
+const u8 Str_839BBD7[] = DTR("か　の　じっけん", "Test");
+const u8 Str_839BBE0[] = DTR("じっけん2", "Test2");
+const u8 Str_839BBE6[] = DTR("BGじっけん", "BG Test");
 const u8 Str_839BBED[] = _("Battle");
-const u8 Str_839BBF4[] = _("つうしん　じっけん");
+const u8 Str_839BBF4[] = DTR("つうしん　じっけん", "LINK Test");
 const u8 Str_839BBFE[] = _("LINK Test2");
-const u8 Str_839BC09[] = _("フィールド　はじめる");
-const u8 Str_839BC14[] = _("フィールド　つづき");
+const u8 Str_839BC09[] = DTR("フィールド　はじめる", "Field Start"); // TRN
+const u8 Str_839BC14[] = DTR("フィールド　つづき", "Field Continue"); // TRN
 const u8 Str_839BC1E[] = _("Sound test");
 const u8 Str_839BC29[] = _("{POKEBLOCK} test");
 const u8 Str_839BC34[] = _("Crash backup data");
 const u8 Str_839BC46[] = _("e-Card test");
-const u8 Str_839BC52[] = _("こうかんデモ　　　");
+const u8 Str_839BC52[] = DTR("こうかんデモ　　　", "Trade demo");
 const u8 Str_839BC5C[] = _("Time in game");
-const u8 Str_839BC69[] = _("フェスタ　モード");
+const u8 Str_839BC69[] = DTR("フェスタ　モード", "Festa mode"); // TRN
 const u8 Str_839BC72[] = _("Mimic e-Card");
 const u8 Str_839BC7F[] = _("RTC reset");
 const u8 Str_839BC89[] = _("Converter");
@@ -324,16 +325,20 @@ const u8 gMenuOrders_839BD14[][10] =
 
 const u8 Str_839BD26[] = {2, 0, 0, 0};  // doesn't appear to be referenced
 
-const u8 Str_839BD2C[] = _("RTCを　リセット　します\n"         // Reset RTC
-                           "Aで　じっこう　　　Bでキャンセル");
+const u8 Str_839BD2C[] = DTR("RTCを　リセット　します\n"         // Reset RTC
+                             "Aで　じっこう　　　Bでキャンセル",
+                             "Reset RTC?\n"
+                             "A: START    B: CANCEL");
 
-const u8 Str_839BD4C[] = _("RTCを　リセット　した！");
+const u8 Str_839BD4C[] = DTR("RTCを　リセット　した！", "RTC reset successful!");
 
-const u8 Str_839BD5A[] = _("セーブデータを　コンバートします\n"
-                           "Aで　けってい　　Bで　キャンセル");
+const u8 Str_839BD5A[] = DTR("セーブデータを　コンバートします\n"
+                             "Aで　けってい　　Bで　キャンセル",
+                             "Convert save data?\n"
+                             "A: CONFIRM   B: CANCEL");
 
-const u8 Str_839BD7D[] = _("へんかんが　しゅうりょう　しました！");
-
+const u8 Str_839BD7D[] = DTR("へんかんが　しゅうりょう　しました！",
+                             "Conversion finished!");
 
 extern const u8 Str_839BD2C[];
 extern const u8 Str_839BD4C[];
@@ -593,14 +598,14 @@ u8 DebugMenu_8076EDC(void)
     return 0;
 }
 
-const u8 Str_839BD90[] = _("ジュンイチ");
-const u8 Str_839BD96[] = _("ダイゴロウ");
-const u8 Str_839BD9C[] = _("テツジ");
-const u8 Str_839BDA0[] = _("バレンシア");
-const u8 Str_839BDA6[] = _("ハルコマチ");
+const u8 Str_839BD90[] = DTR("ジュンイチ", "JUNICHI");
+const u8 Str_839BD96[] = DTR("ダイゴロウ", "STEVEN LOW"); // TRN - likely special char
+const u8 Str_839BD9C[] = DTR("テツジ", "TETSUJI");
+const u8 Str_839BDA0[] = DTR("バレンシア", "VALENCIA"); // TRN
+const u8 Str_839BDA6[] = DTR("ハルコマチ", "HARUKOMACHI"); // TRN
 const u8 Str_839BDAC[] = _("RAYMOND");
 const u8 Str_839BDB4[] = _("TIFFANY");
-const u8 Str_839BDBC[] = _("くまxちえ");
+const u8 Str_839BDBC[] = DTR("くまxちえ", "KUMA x CHIE"); // TRN
 
 const struct {
     const u8 * text;
@@ -869,7 +874,7 @@ const u8 Str_839BE0F[] = _("HP");
 const u8 Str_839BE12[] = _("PAR");
 const u8 Str_839BE16[] = _("SLP");
 const u8 Str_839BE1A[] = _("PSN");
-const u8 Str_839BE1E[] = _("ウマイ");
+const u8 Str_839BE1E[] = KANA("ウマイ");
 
 u8 DebugMenu_8077434(void)
 {
@@ -1161,10 +1166,12 @@ u8 DebugMenu_8077954(void)
     return TRUE;
 }
 
-const u8 Str_839BE6B[] = _("さいせんかのうトレーナー:{STR_VAR_1}\n"
-                           "さいせんじょうたいトレーナー:{STR_VAR_2}");
-const u8 Str_839BE8D[] = _("いる");
-const u8 Str_839BE90[] = _("いない");
+const u8 Str_839BE6B[] = DTR("さいせんかのうトレーナー:{STR_VAR_1}\n"
+                             "さいせんじょうたいトレーナー:{STR_VAR_2}",
+                             "Rematchable TRAINERS: {STR_VAR_1}\n"
+                             "TRAINERS in rematch state: {STR_VAR_2}");
+const u8 Str_839BE8D[] = DTR("いる", "ON");
+const u8 Str_839BE90[] = DTR("いない", "OFF");
 
 bool8 DebugMenu_8077974(void)
 {
@@ -1251,11 +1258,15 @@ bool8 DebugMenu_8077AE8(void)
     return TRUE;
 }
 
-const u8 Str_839BF0C[] = _("のこり　{STR_VAR_1}ほ");
-const u8 Str_839BF14[] = _("{STR_VAR_1}\n"
-                           "のこり　{STR_VAR_2}ほ");
-const u8 Str_839BF1F[] = _("めのまえには\n"
-                           "キューブが　ありません！");
+const u8 Str_839BF0C[] = DTR("のこり　{STR_VAR_1}ほ", "Remaining steps: {STR_VAR_1}");
+const u8 Str_839BF14[] = DTR("{STR_VAR_1}\n"
+                             "のこり　{STR_VAR_2}ほ",
+                             "{STR_VAR_1}\n"
+                             "Remaining steps: {STR_VAR_2}");
+const u8 Str_839BF1F[] = DTR("めのまえには\n"
+                             "キューブが　ありません！",
+                             "There is no {POKEBLOCK}\n"
+                             "in front of you!");
 
 bool8 DebugMenu_8077B00(void)
 {
@@ -1268,11 +1279,11 @@ bool8 DebugMenu_8077B00(void)
     return FALSE;
 }
 
-const u8 Str_839BF33[] = _("ほすうをのこり1にする");
-const u8 Str_839BF3F[] = _("ボールをのこり1にする");
-const u8 Str_839BF4B[] = _("キューブおきば");
-const u8 Str_839BF53[] = _("ボールをのこり30に");
-const u8 Str_839BF5E[] = _("ほすうをのこり500に");
+const u8 Str_839BF33[] = DTR("ほすうをのこり1にする", "One step remaining");
+const u8 Str_839BF3F[] = DTR("ボールをのこり1にする", "One BALL remaining");
+const u8 Str_839BF4B[] = DTR("キューブおきば", "{POKEBLOCK} FEEDER");
+const u8 Str_839BF53[] = DTR("ボールをのこり30に", "30 BALLS remaining");
+const u8 Str_839BF5E[] = DTR("ほすうをのこり500に", "500 steps remaining");
 
 const struct MenuAction gUnknown_Debug_839BF6C[] = {
     {Str_839BF4B, DebugMenu_8077B00},
@@ -1366,7 +1377,8 @@ u8 DebugMenu_8077C14(void)
     return FALSE;
 }
 
-const u8 Str_839BFDC[] = _("　じかん　ふん　びょう");
+
+const u8 Str_839BFDC[] = DTR("　じかん　ふん　びょう", "  HOURS MINUTES SECONDS");
 
 const s32 gUnknown_Debug_839BFE8[] = {
     99, 10, 2, 23,
@@ -1636,7 +1648,7 @@ void DebugMenu_8077F40(u8 taskId)
     task->func = DebugMenu_8077F7C;
 }
 
-const u8 Str_839C014[] = _("How　many？");
+const u8 Str_839C014[] = _("How many？");
 
 void DebugMenu_8077F7C(u8 taskId)
 {
@@ -1685,13 +1697,19 @@ void DebugMenu_807806C(u8 taskId)
     DebugMenu_8077048();
 }
 
-const u8 Str_839C01E[] = _("にがおえ　ばんごう\n"
-                           "ポケモンナンバー\n"
-                           "ポケモンめい\n"
-                           "ブリーダーめい\n"
-                           "しゅるい\n"
-                           "こせいらんすう");
-const u8 Str_839C04D[] = _("データなし");
+const u8 Str_839C01E[] = DTR("にがおえ　ばんごう\n"
+                             "ポケモンナンバー\n"
+                             "ポケモンめい\n"
+                             "ブリーダーめい\n"
+                             "しゅるい\n"
+                             "こせいらんすう",
+                             "PORTRAIT No.\n"
+                             "POKéMON No.\n"
+                             "POKéMON Name\n"
+                             "BREEDER Name\n" // TRN ?
+                             "TYPE\n"
+                             "Personality");
+const u8 Str_839C04D[] = DTR("データなし", "No data");
 
 void DebugMenu_807808C(u32 a0)
 {
@@ -1932,60 +1950,61 @@ u8 DebugMenu_OpenMysteryEvent(void)
 
 const u8 Str_839C07C[] = _("{STR_VAR_1}:{STR_VAR_2}\n"
                            "{STR_VAR_3}");
-const u8 Str_839C085[] = _("みしよう　データ");
+const u8 Str_839C085[] = DTR("みしよう　データ", "Unused data");
 const u8 Str_839C08E[] = _("Confirmation");
 const u8 Str_839C09B[] = _("Max-1 set");
 const u8 Str_839C0A5[] = _("Zero clear");
-const u8 Str_839C0B0[] = _("レポート");
-const u8 Str_839C0B5[] = _("クリア　じかん");
-const u8 Str_839C0BD[] = _("りゅうこう　さくせい");
-const u8 Str_839C0C8[] = _("きのみを　うえたかいすう");
-const u8 Str_839C0D5[] = _("じてんしゃこうかん");
-const u8 Str_839C0DF[] = _("ほすう");
-const u8 Str_839C0E3[] = _("インタビュー");
-const u8 Str_839C0EA[] = _("バトル");
-const u8 Str_839C0EE[] = _("やせいバトル");
-const u8 Str_839C0F5[] = _("トレーナーバトル");
-const u8 Str_839C0FE[] = _("でんどういり");
-const u8 Str_839C105[] = _("ポケモンほかく");
-const u8 Str_839C10D[] = _("つった　かいすう");
-const u8 Str_839C116[] = _("タマゴかえった");
-const u8 Str_839C11E[] = _("しんかした");
-const u8 Str_839C124[] = _("ポケセン　かいふく");
-const u8 Str_839C12E[] = _("じたく　かいふく");
-const u8 Str_839C137[] = _("サファリ　りよう");
-const u8 Str_839C140[] = _("ひでん:いあいぎり");
-const u8 Str_839C14A[] = _("ひでん:いわくだき");
-const u8 Str_839C154[] = _("きち　ひっこし");
-const u8 Str_839C15C[] = _("つうしんこうかん");
-const u8 Str_839C165[] = _("つうしんたいせん");
-const u8 Str_839C16E[] = _("つうしん　かち");
-const u8 Str_839C176[] = _("つうしん　まけ");
-const u8 Str_839C17E[] = _("つうしん　ひきわけ");
-const u8 Str_839C188[] = _("わざ:はねる");
-const u8 Str_839C18F[] = _("わざ:わるあがき");
-const u8 Str_839C198[] = _("スロットおおあたりかいすう");
-const u8 Str_839C1A6[] = _("ルーレット　れんしょう");
-const u8 Str_839C1B2[] = _("バトルタワー");
-const u8 Str_839C1B9[] = _("バトルタワーかち");
-const u8 Str_839C1C2[] = _("バトルタワーれんしょう");
-const u8 Str_839C1CE[] = _("ポロックさくせい");
-const u8 Str_839C1D7[] = _("つうしんでポロックつくった");
-const u8 Str_839C1E5[] = _("つうしんコンテストかち");
-const u8 Str_839C1F1[] = _("CPUコンテストさんか");
-const u8 Str_839C1FD[] = _("CPUコンテストかち");
-const u8 Str_839C208[] = _("かいもの");
-const u8 Str_839C20D[] = _("ダウジングマシン");
-const u8 Str_839C216[] = _("あめふり");
-const u8 Str_839C21B[] = _("ずかんをみた");
-const u8 Str_839C222[] = _("リボン　もらった");
-const u8 Str_839C22B[] = _("だんさ　とびおり");
-const u8 Str_839C234[] = _("TVを　みた");
-const u8 Str_839C23B[] = _("とけいを　みた");
-const u8 Str_839C243[] = _("くじが　あたった");
-const u8 Str_839C24C[] = _("ポケモンあずけた");
-const u8 Str_839C255[] = _("ロープウェイりよう");
-const u8 Str_839C25F[] = _("おんせん　はいった");
+const u8 Str_839C0B0[] = DTR("レポート", "SAVES");
+const u8 Str_839C0B5[] = DTR("クリア　じかん", "Clear time");
+const u8 Str_839C0BD[] = DTR("りゅうこう　さくせい", "TRENDS created");
+const u8 Str_839C0C8[] = DTR("きのみを　うえたかいすう", "BERRIES planted");
+const u8 Str_839C0D5[] = DTR("じてんしゃこうかん", "BIKE swaps");
+const u8 Str_839C0DF[] = DTR("ほすう", "Steps");
+const u8 Str_839C0E3[] = DTR("インタビュー", "INTERVIEWS");
+const u8 Str_839C0EA[] = DTR("バトル", "BATTLES");
+const u8 Str_839C0EE[] = DTR("やせいバトル", "Wild BATTLES");
+const u8 Str_839C0F5[] = DTR("トレーナーバトル", "TRAINER BATTLES");
+const u8 Str_839C0FE[] = DTR("でんどういり", "HALL of FAME times");
+const u8 Str_839C105[] = DTR("ポケモンほかく", "POKéMON caught");
+const u8 Str_839C10D[] = DTR("つった　かいすう", "Times fished");
+const u8 Str_839C116[] = DTR("タマゴかえった", "EGGS hatched");
+const u8 Str_839C11E[] = DTR("しんかした", "Evolutions");
+const u8 Str_839C124[] = DTR("ポケセン　かいふく", "{PKMN} Center heals");
+const u8 Str_839C12E[] = DTR("じたく　かいふく", "Home heals");
+const u8 Str_839C137[] = DTR("サファリ　りよう", "SAFARI times");
+const u8 Str_839C140[] = DTR("ひでん:いあいぎり", "HM: CUT");
+const u8 Str_839C14A[] = DTR("ひでん:いわくだき", "HM: ROCK SMASH");
+const u8 Str_839C154[] = DTR("きち　ひっこし", "BASE relocations");
+const u8 Str_839C15C[] = DTR("つうしんこうかん", "LINK TRADES");
+const u8 Str_839C165[] = DTR("つうしんたいせん", "LINK BATTLES");
+const u8 Str_839C16E[] = DTR("つうしん　かち", "LINK WINS");
+const u8 Str_839C176[] = DTR("つうしん　まけ", "LINK LOSSES");
+const u8 Str_839C17E[] = DTR("つうしん　ひきわけ", "LINK TIES");
+// Idiot counter?
+const u8 Str_839C188[] = DTR("わざ:はねる", "Move: SPLASH");
+const u8 Str_839C18F[] = DTR("わざ:わるあがき", "Move: STRUGGLE");
+const u8 Str_839C198[] = DTR("スロットおおあたりかいすう", "SLOTS jackpots");
+const u8 Str_839C1A6[] = DTR("ルーレット　れんしょう", "ROULETTE streak");
+const u8 Str_839C1B2[] = DTR("バトルタワー", "BATTLE TOWER");
+const u8 Str_839C1B9[] = DTR("バトルタワーかち", "BATTLE TOWER wins");
+const u8 Str_839C1C2[] = DTR("バトルタワーれんしょう", "BATTLE TOWER streak");
+const u8 Str_839C1CE[] = DTR("ポロックさくせい", "{POKEBLOCK}s created");
+const u8 Str_839C1D7[] = DTR("つうしんでポロックつくった", "LINK {POKEBLOCK}s made");
+const u8 Str_839C1E5[] = DTR("つうしんコンテストかち", "LINK CONTEST wins");
+const u8 Str_839C1F1[] = DTR("CPUコンテストさんか", "CPU CONTEST entries");
+const u8 Str_839C1FD[] = DTR("CPUコンテストかち", "CPU CONTEST wins");
+const u8 Str_839C208[] = DTR("かいもの", "Shopping");
+const u8 Str_839C20D[] = DTR("ダウジングマシン", "ITEMFINDER");
+const u8 Str_839C216[] = DTR("あめふり", "Rained");
+const u8 Str_839C21B[] = DTR("ずかんをみた", "POKéDEX reads");
+const u8 Str_839C222[] = DTR("リボン　もらった", "RIBBONS awarded");
+const u8 Str_839C22B[] = DTR("だんさ　とびおり", "Ledge hops");
+const u8 Str_839C234[] = DTR("TVを　みた", "Watched TV");
+const u8 Str_839C23B[] = DTR("とけいを　みた", "Checked CLOCK");
+const u8 Str_839C243[] = DTR("くじが　あたった", "LOTTERY wins");
+const u8 Str_839C24C[] = DTR("ポケモンあずけた", "POKéMON DAYCARE uses");
+const u8 Str_839C255[] = DTR("ロープウェイりよう", "CABLE CAR uses");
+const u8 Str_839C25F[] = DTR("おんせん　はいった", "HOT SPRING uses");
 
 const struct {
     u32 maxVal;
@@ -2248,7 +2267,7 @@ u8 DebugMenu_OpenBerryInfo(void)
     return TRUE;
 }
 
-const u8 Str_839C42E[] = _("レベル　　ステージ");
+const u8 Str_839C42E[] = DTR("レベル　　ステージ", "TOWER level stage");
 
 void DebugMenu_8078950(void)
 {
@@ -2337,7 +2356,7 @@ u8 DebugMenu_BattleTowerStages(void)
     return TRUE;
 }
 
-const u8 Str_839C438[] = _("ポロック　グループ{STR_VAR_1}");
+const u8 Str_839C438[] = DTR("ポロック　グループ{STR_VAR_1}", "{POKEBLOCK} GROUP{STR_VAR_1}");
 
 void DebugMenu_8078B70(u16 value)
 {
@@ -2473,10 +2492,10 @@ bool8 DebugMenu_8078CA8(void)
     return FALSE;
 }
 
-const u8 Str_839C5CC[] =_("かきこみ　せいこう");
-const u8 Str_839C5D6[] =_("よみこみせいこう");
-const u8 Str_839C5DF[] =_("かきこみ　しっぱい");
-const u8 Str_839C5E9[] =_("よみこみ　しっぱい");
+const u8 Str_839C5CC[] = DTR("かきこみ　せいこう", "Write successful");
+const u8 Str_839C5D6[] = DTR("よみこみせいこう", "Read successful");
+const u8 Str_839C5DF[] = DTR("かきこみ　しっぱい", "Writing failed");
+const u8 Str_839C5E9[] = DTR("よみこみ　しっぱい", "Reading failed");
 
 bool8 DebugMenu_8078CE4(void)
 {

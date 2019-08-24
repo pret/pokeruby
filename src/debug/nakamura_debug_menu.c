@@ -50,7 +50,7 @@ static bool8 SetPokeblock(void);
 static const u8 Str_843E36C[] = _("Berries");
 static const u8 Str_843E374[] = _("Goods");
 static const u8 Str_843E37A[] = _("{PKMN} list");
-static const u8 Str_843E382[] = _("トラップ");
+static const u8 Str_843E382[] = DTR("トラップ", "Trap");
 static const u8 Str_843E387[] = _("Move your base");
 static const u8 Str_843E396[] = _("Moving {PKMN}");
 static const u8 Str_843E3A0[] = _("Fishing points");
@@ -874,10 +874,11 @@ static struct {
 
 EWRAM_DATA u8 sNakaGenderTest_CursorPosition = 0;
 static const u8 _843E5D1[] = {0x0F, 0x16, 0x19};
-static const u8 Str_843E5D4[] = _(
-                                    "Aボタン　{ESCAPE}\p"
-                                    "　　Bボタン　ー\n"
-                                    "START　けってい");
+static const u8 Str_843E5D4[] = DTR(
+                                    "Aボタン　{TALL_PLUS}　　Bボタン　ー\n"
+                                    "START　けってい",
+                                    "A BUTTON {TALL_PLUS}    B BUTTON {JPN}ー{ENG}\n"
+                                    "START  CHOOSE");
 
 void NakaGenderTest(void)
 {
@@ -1916,14 +1917,14 @@ static bool8 SetPokeblock(void)
 
 EWRAM_DATA u8 sEVTest_CursorPosition = 0;
 
-static const u8 Str_843E5F2[] = _("HP　どりょくち");
-static const u8 Str_843E5FB[] = _("こうげき　どりょくち");
-static const u8 Str_843E606[] = _("ぼうぎょ　どりょくち");
-static const u8 Str_843E611[] = _("すばやさ　どりょくち");
-static const u8 Str_843E61C[] = _("とくこう　どりょくち");
-static const u8 Str_843E627[] = _("とくぼう　どりょくち");
-static const u8 Str_843E632[] = _("なつきど");
-static const u8 Str_843E637[] = _("どりょくち　ごうけい");
+static const u8 Str_843E5F2[] = DTR("HP　どりょくち", "HP EVs");
+static const u8 Str_843E5FB[] = DTR("こうげき　どりょくち", "ATK EVs");
+static const u8 Str_843E606[] = DTR("ぼうぎょ　どりょくち", "DEF EVs");
+static const u8 Str_843E611[] = DTR("すばやさ　どりょくち", "SPE EVs");
+static const u8 Str_843E61C[] = DTR("とくこう　どりょくち", "SPA EVs");
+static const u8 Str_843E627[] = DTR("とくぼう　どりょくち", "SPD EVs");
+static const u8 Str_843E632[] = DTR("なつきど", "FRIENDSHIP");
+static const u8 Str_843E637[] = DTR("どりょくち　ごうけい", "EV TOTAL");
 
 static void EVTest_Init(void)
 {
@@ -2071,13 +2072,13 @@ EWRAM_DATA u16 sRngRight = 0;
 EWRAM_DATA u16 sNumSamples = 0;
 EWRAM_DATA u16 sRngMax = 0;
 
-static const u8 Str_843E642[] = _("ここから");
-static const u8 Str_843E647[] = _("ここまで");
-static const u8 Str_843E64C[] = _("かいすう");
-static const u8 Str_843E651[] = _("けっか");
-static const u8 Str_843E655[] = _("かい");
+static const u8 Str_843E642[] = DTR("ここから", "FROM");
+static const u8 Str_843E647[] = DTR("ここまで", "TO");
+static const u8 Str_843E64C[] = DTR("かいすう", "TIMES");
+static const u8 Str_843E651[] = DTR("けっか", "RESULT");
+static const u8 Str_843E655[] = DTR("かい", "×");
 static const u8 Str_843E658[] = _("0");
-static const u8 Str_843E65A[] = _("はんい");
+static const u8 Str_843E65A[] = DTR("はんい", "RANGE");
 
 static u16 EVTest_GetDiscreteUniformRandomSamples(void)
 {

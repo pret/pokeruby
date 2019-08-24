@@ -5616,29 +5616,30 @@ static void debug_sub_811B2E8(void)
     Menu_PrintText(text, 6, 1);
 }
 
-static const u8 Str_841B1C4[] = _("SETTEI");
-static const u8 Str_841B1CB[] = _("MAWASITA");
-static const u8 Str_841B1D4[] = _("MODOSI");
-static const u8 Str_841B1DB[] = _("NOMARE");
-static const u8 Str_841B1E2[] = _("MAE　7");
-static const u8 Str_841B1E8[] = _("LR　　HENKOU");
-static const u8 Str_841B1F3[] = _("START　　JIDOUSU");
-static const u8 Str_841B202[] = _("SELECT　　SETTEI");
-static const u8 Str_841B211[] = _("TYUHSEN");
+static const u8 Str_841B1C4[] = DTR("SETTEI", "SET");
+static const u8 Str_841B1CB[] = DTR("MAWASITA", "TURNED");
+static const u8 Str_841B1D4[] = DTR("MODOSI", "RETURN");
+static const u8 Str_841B1DB[] = _("NOMARE"); // TRN: Normal, 's rare, etc?
+static const u8 Str_841B1E2[] = DTR("MAE　7", "BEFORE 7");
+static const u8 Str_841B1E8[] = DTR("LR  HENKOU", "LR: CHANGE");
+static const u8 Str_841B1F3[] = _("START  JIDOUSU"); //  TRN
+static const u8 Str_841B202[] = DTR("SELECT  SETTEI", "SELECT: SET");
+// Irregular Romaji: 抽選 (ちゅうせん/chuusen)
+static const u8 Str_841B211[] = DTR("TYUHSEN", "LOTTERY");
 static const u8 Str_841B219[] = _("CHERRY");
 static const u8 Str_841B220[] = _("REPLAY");
-static const u8 Str_841B227[] = _("HASUBO");
-static const u8 Str_841B22E[] = _("RURIRI");
-static const u8 Str_841B235[] = _("INAZU");
+static const u8 Str_841B227[] = DTR("HASUBO", "LOTAD"); // TRN
+static const u8 Str_841B22E[] = DTR("RURIRI", "AZURILL");
+static const u8 Str_841B235[] = DTR("INAZU", "LIGHTNING");
 static const u8 Str_841B23B[] = _("REG");
 static const u8 Str_841B23F[] = _("BIG");
 static const u8 Str_841B243[] = _("BD");
 static const u8 Str_841B246[] = _("R7");
 static const u8 Str_841B249[] = _("B7");
-static const u8 Str_841B24C[] = _("A　　COIN");
-static const u8 Str_841B254[] = _("TYUHSEN");
-static const u8 Str_841B25C[] = _("UD　　100");
-static const u8 Str_841B264[] = _("LR　　1000");
+static const u8 Str_841B24C[] = _("A  COIN");
+static const u8 Str_841B254[] = DTR("TYUHSEN", "LOTTERY");
+static const u8 Str_841B25C[] = _("UD  100");
+static const u8 Str_841B264[] = _("LR  1000");
 static const u8 Str_841B26D[] = _("×");
 
 void debug_sub_811B310(void)
@@ -5882,10 +5883,10 @@ static void debug_sub_811B654(u8 taskId)
     }
 }
 
-static const u8 Str_841B2B0[] = _("·カウントエラーがおきました");
-static const u8 Str_841B2BF[] = _("·リールそうさで　エラーが　おきました");
-static const u8 Str_841B2D3[] = _("·フラグオフエラーが　おきました");
-static const u8 Str_841B2E4[] = _("·ボーナスこやくの　エラーが　おきました");
+static const u8 Str_841B2B0[] = DTR("·カウントエラーがおきました", "Count error occured.");
+static const u8 Str_841B2BF[] = DTR("·リールそうさで　エラーが　おきました", "Reel processing error occurred.");
+static const u8 Str_841B2D3[] = DTR("·フラグオフエラーが　おきました", "FLAG OFF error occurred.");
+static const u8 Str_841B2E4[] = DTR("·ボーナスこやくの　エラーが　おきました", "BONUS use error occurred."); // TRN
 
 static void debug_sub_811B894(void)
 {

@@ -400,16 +400,16 @@ void InitSizeComparison(void)
     gTasks[taskId].data[0] = 0xfc;
 }
 
-const u8 gUnknown_Debug_083F7FDA[] = _("ひりつ");
-const u8 gUnknown_Debug_083F7FDE[] = _("たかさ");
-const u8 gUnknown_Debug_083F7FE2[] = _("Lキー▶しゅくしょう");
-const u8 gUnknown_Debug_083F7FED[] = _("Rキー▶かくだい");
-const u8 gUnknown_Debug_083F7FF6[] = _("Uキー▶うえ　いどう");
-const u8 gUnknown_Debug_083F8001[] = _("Dキー▶した　いどう");
-const u8 gUnknown_Debug_083F800C[] = _("Aボタン▶そうさきりかえ");
-const u8 gUnknown_Debug_083F8019[] = _("Bボタン▶やめる");
-const u8 gUnknown_Debug_083F8022[] = _("スタート:");
-const u8 gUnknown_Debug_083F8028[] = _(":セレクト");
+const u8 gUnknown_Debug_083F7FDA[] = DTR("ひりつ", "SCALE");
+const u8 gUnknown_Debug_083F7FDE[] = DTR("たかさ", "HEIGHT");
+const u8 gUnknown_Debug_083F7FE2[] = DTR("Lキー▶しゅくしょう", "{LEFT_ARROW}: SHRINK");
+const u8 gUnknown_Debug_083F7FED[] = DTR("Rキー▶かくだい", "{RIGHT_ARROW}: ENLARGE");
+const u8 gUnknown_Debug_083F7FF6[] = DTR("Uキー▶うえ　いどう", "{UP_ARROW}: MOVE UP");
+const u8 gUnknown_Debug_083F8001[] = DTR("Dキー▶した　いどう", "{DOWN_ARROW}: MOVE DOWN");
+const u8 gUnknown_Debug_083F800C[] = DTR("Aボタン▶そうさきりかえ", "A: SWITCH CONTROL");
+const u8 gUnknown_Debug_083F8019[] = DTR("Bボタン▶やめる", "B: QUIT");
+const u8 gUnknown_Debug_083F8022[] = DTR("スタート:", "START:");
+const u8 gUnknown_Debug_083F8028[] = DTR(":セレクト", ":SELECT");
 
 #ifdef NONMATCHING
 void debug_80C3A50(u8 taskId)
@@ -1003,11 +1003,13 @@ void debug_80C41A8(void)
     CreateTask(debug_80C47BC, 0);
 }
 
-const u8 gUnknown_Debug_083F802E[] = _("やせいたいせん");
-const u8 gUnknown_Debug_083F8036[] = _("1VS1たいせん");
-const u8 gUnknown_Debug_083F803F[] = _("2VS2たいせん");
-const u8 gUnknown_Debug_083F8048[] = _("{COLOR BLUE}1VS1つうしんたいせん");
-const u8 gUnknown_Debug_083F8058[] = _("{COLOR BLUE}2VS2つうしんたいせん");
+const u8 gUnknown_Debug_083F802E[] = DTR("やせいたいせん", "Wild BATTLE");
+const u8 gUnknown_Debug_083F8036[] = DTR("1VS1たいせん", "1v1 BATTLE");
+const u8 gUnknown_Debug_083F803F[] = DTR("2VS2たいせん", "2v2 BATTLE");
+const u8 gUnknown_Debug_083F8048[] = DTR("{COLOR BLUE}1VS1つうしんたいせん",
+                                         "{COLOR BLUE}LINK 1v1 BATTLE");
+const u8 gUnknown_Debug_083F8058[] = DTR("{COLOR BLUE}2VS2つうしんたいせん",
+                                         "{COLOR BLUE}LINK 2v2 BATTLE");
 
 const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[] = {
 	{gUnknown_Debug_083F802E, {.type1 = {0x00, 0x01}}},
@@ -1017,16 +1019,16 @@ const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[] = {
 	{gUnknown_Debug_083F8058, {.type1 = {0x0B, 0x02}}}
 };
 
-const u8 gUnknown_Debug_083F8090[] = _("きほんタイプ");
-const u8 gUnknown_Debug_083F8097[] = _("AIタイプ2");
-const u8 gUnknown_Debug_083F809E[] = _("AIタイプ3");
-const u8 gUnknown_Debug_083F80A5[] = _("AIタイプ4");
-const u8 gUnknown_Debug_083F80AC[] = _("AIタイプ5");
-const u8 gUnknown_Debug_083F80B3[] = _("AIタイプ6");
-const u8 gUnknown_Debug_083F80BA[] = _("AIタイプ7");
-const u8 gUnknown_Debug_083F80C1[] = _("AIタイプ8");
-const u8 gUnknown_Debug_083F80C8[] = _("AIタイプ9");
-const u8 gUnknown_Debug_083F80CF[] = _("AIタイプ10");
+const u8 gUnknown_Debug_083F8090[] = DTR("きほんタイプ", "Base type");
+const u8 gUnknown_Debug_083F8097[] = DTR("AIタイプ2", "AI type 2");
+const u8 gUnknown_Debug_083F809E[] = DTR("AIタイプ3", "AI type 3");
+const u8 gUnknown_Debug_083F80A5[] = DTR("AIタイプ4", "AI type 4");
+const u8 gUnknown_Debug_083F80AC[] = DTR("AIタイプ5", "AI type 5");
+const u8 gUnknown_Debug_083F80B3[] = DTR("AIタイプ6", "AI type 6");
+const u8 gUnknown_Debug_083F80BA[] = DTR("AIタイプ7", "AI type 7");
+const u8 gUnknown_Debug_083F80C1[] = DTR("AIタイプ8", "AI type 8");
+const u8 gUnknown_Debug_083F80C8[] = DTR("AIタイプ9", "AI type 9");
+const u8 gUnknown_Debug_083F80CF[] = DTR("AIタイプ10", "AI type 10");
 
 const struct WatanabeDebugMenuItem gUnknown_Debug_083F80D8[] = {
 	{gUnknown_Debug_083F8090, {.type2 = 0x1}},
@@ -1041,15 +1043,15 @@ const struct WatanabeDebugMenuItem gUnknown_Debug_083F80D8[] = {
 	{gUnknown_Debug_083F80CF, {.type2 = 0x200}}
 };
 
-const u8 gUnknown_Debug_083F8128[] = _("くさ");
-const u8 gUnknown_Debug_083F812B[] = _("ながい　くさ");
-const u8 gUnknown_Debug_083F8132[] = _("すな");
-const u8 gUnknown_Debug_083F8135[] = _("みず");
-const u8 gUnknown_Debug_083F8138[] = _("うみ");
-const u8 gUnknown_Debug_083F813B[] = _("いけ");
-const u8 gUnknown_Debug_083F813E[] = _("いわ");
-const u8 gUnknown_Debug_083F8141[] = _("どうくつ");
-const u8 gUnknown_Debug_083F8146[] = _("そのた");
+const u8 gUnknown_Debug_083F8128[] = DTR("くさ", "GRASS");
+const u8 gUnknown_Debug_083F812B[] = DTR("ながい　くさ", "TALL GRASS");
+const u8 gUnknown_Debug_083F8132[] = DTR("すな", "SAND");
+const u8 gUnknown_Debug_083F8135[] = DTR("みず", "WATER");
+const u8 gUnknown_Debug_083F8138[] = DTR("うみ", "SEA");
+const u8 gUnknown_Debug_083F813B[] = DTR("いけ", "POND");
+const u8 gUnknown_Debug_083F813E[] = DTR("いわ", "ROCKY");
+const u8 gUnknown_Debug_083F8141[] = DTR("どうくつ", "CAVE");
+const u8 gUnknown_Debug_083F8146[] = DTR("そのた", "OTHER");
 
 const struct WatanabeDebugMenuItem gUnknown_Debug_083F814C[] = {
 	{gUnknown_Debug_083F8128, {.type3 = 0x0}},
@@ -1105,8 +1107,8 @@ void debug_80C4214(UNUSED u8 a0)
 
 void debug_80C42B8(u8 taskId)
 {
-     u8 sp00[] = _("ポケモンを　えらんでね");
-     u8 sp0c[] = _("{COLOR RED}START:つぎへ");
+     u8 sp00[] = DTR("ポケモンを　えらんでね", "Choose POKéMON");
+     u8 sp0c[] = DTR("{COLOR RED}START:つぎへ", "{COLOR RED}START: NEXT");
 
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     Menu_PrintText(sp00, 1, 17);
@@ -1218,7 +1220,7 @@ void debug_80C4550(u8 taskId)
 void debug_80C4694(void)
 {
     u8 i;
-    u8 sp00[] = _("{COLOR RED}じぶんの　ポケモン");
+    u8 sp00[] = DTR("{COLOR RED}じぶんの　ポケモン", "{COLOR RED}Enemy's POKéMON");
     u8 sp10[POKEMON_NAME_LENGTH + 1];
 
     Menu_DrawStdWindowFrame(0, 0, 14, 15);
@@ -1233,7 +1235,7 @@ void debug_80C4694(void)
 void debug_80C4704(void)
 {
     u8 i;
-    u8 sp00[] = _("{COLOR RED}あいての　ポケモン");
+    u8 sp00[] = DTR("{COLOR RED}あいての　ポケモン", "{COLOR RED}Your POKéMON");
     u8 sp10[POKEMON_NAME_LENGTH + 1];
 
     Menu_DrawStdWindowFrame(15, 0, 29, 15);
@@ -1256,10 +1258,10 @@ bool8 debug_80C4774(void)
 void debug_80C47BC(u8 taskId)
 {
     u8 i;
-    u8 sp00[] = _("たいせんモードを　えらんでね");
-    u8 sp10[] = _("{COLOR RED}START:つぎへ");
-    u8 sp20[] = _("{COLOR RED}バトルモード　せんたく");
-    u8 sp30[] = _("{COLOR RED}トレーナーAI　せんたく");
+    u8 sp00[] = DTR("たいせんモードを　えらんでね", "Choose a battle mode");
+    u8 sp10[] = DTR("{COLOR RED}START:つぎへ", "{COLOR RED}START: NEXT");
+    u8 sp20[] = DTR("{COLOR RED}バトルモード　せんたく", "{COLOR RED}Battle mode:");
+    u8 sp30[] = DTR("{COLOR RED}トレーナーAI　せんたく", "{COLOR RED}TRAINER AI mode:");
 
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     Menu_PrintText(sp00, 1, 17);
@@ -1424,9 +1426,9 @@ void debug_80C4C44(u8 a0)
 
 void debug_80C4D14(u8 taskId)
 {
-    u8 sp00[] = _("たいせんモードを　えらんでね");
-    u8 sp10[] = _("{COLOR RED}START:かいし");
-    u8 sp20[] = _("{COLOR RED}バトルちけい　せんたく");
+    u8 sp00[] = DTR("たいせんモードを　えらんでね", "Choose a battle mode");
+    u8 sp10[] = DTR("{COLOR RED}START:かいし", "{COLOR RED}START: BEGIN");
+    u8 sp20[] = DTR("{COLOR RED}バトルちけい　せんたく", "{COLOR RED}Battle terrain:");
 
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     Menu_PrintText(sp00, 1, 17);
@@ -1499,11 +1501,11 @@ void debug_80C4F00(u8 a0)
 
 void debug_80C4F48(u8 taskId)
 {
-    u8 sp00[] = _("じぶんの　せいべつを　えらんでね");
-    u8 sp14[] = _("{COLOR RED}START:つぎへ");
-    u8 sp24[] = _("{COLOR RED}せいべつ　せんたく");
-    u8 sp34[] = _("おとこ");
-    u8 sp38[] = _("おんな");
+    u8 sp00[] = DTR("じぶんの　せいべつを　えらんでね", "Choose a gender");
+    u8 sp14[] = DTR("{COLOR RED}START:つぎへ", "{COLOR RED}START: NEXT");
+    u8 sp24[] = DTR("{COLOR RED}せいべつ　せんたく", "{COLOR RED}Gender:");
+    u8 sp34[] = DTR("おとこ", "BOY");
+    u8 sp38[] = DTR("おんな", "GIRL");
 
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     Menu_PrintText(sp00, 1, 17);
@@ -1732,7 +1734,7 @@ const u8 gUnknown_Debug_083F851C[] = _("{COLOR RED}DEF　");
 const u8 gUnknown_Debug_083F8524[] = _("{COLOR RED}SPEED");
 const u8 gUnknown_Debug_083F852D[] = _("{COLOR RED}SP。ATK");
 const u8 gUnknown_Debug_083F8537[] = _("{COLOR RED}SP。DEF");
-const u8 gUnknown_Debug_083F8541[] = _("なし");
+const u8 gUnknown_Debug_083F8541[] = DTR("なし", "without");
 const u8 gUnknown_Debug_083F8544[] = _("♂");
 const u8 gUnknown_Debug_083F8546[] = _("♀");
 const u8 gUnknown_Debug_083F8548[] = _("ー");
@@ -1828,11 +1830,11 @@ const struct WatanabeDebugMenuItem gUnknown_Debug_083F86E8[] = {
     {gUnknown_Debug_083F86E0, {.type3 = 0x80}}
 };
 
-const u8 gUnknown_Debug_083F8720[] = _("PKMNワLIST");
-const u8 gUnknown_Debug_083F872A[] = _("PKMNワBOX");
+const u8 gUnknown_Debug_083F8720[] = _("PKMN{RIGHT_ARROW}LIST");
+const u8 gUnknown_Debug_083F872A[] = _("PKMN{RIGHT_ARROW}BOX");
 void InitCreatePokemon(void)
 {
-    u8 sp04[] = _("Create　POKひMON　　　LR:Shift　　START:Add");
+    u8 sp04[] = _("Create POKéMON   LR:Shift  START:Add");
 
     debug_80C35DC();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
@@ -2193,7 +2195,7 @@ void debug_80C5EF4(void)
 void debug_80C5FFC(void)
 {
     u32 ivs;
-    u8 sp10[] = _("たまご");
+    u8 sp10[] = DTR("たまご", "EGG");
     u8 sp14[] = _("DebugーG");
     u8 one;
     u16 ff;
@@ -2600,12 +2602,12 @@ const u16 gUnknown_Debug_083F8790[] = {
     0x0002
 };
 
-const u8 gUnknown_Debug_083F87D0[] = _("{COLOR RED}L{ESCAPE}ロ");
-const u8 gUnknown_Debug_083F87D8[] = _("{COLOR RED}{ESCAPE}ワR");
-const u8 gUnknown_Debug_083F87E0[] = _("かいはつナンバー");
-const u8 gUnknown_Debug_083F87E9[] = _("グラフィックナンバー");
-const u8 gUnknown_Debug_083F87F4[] = _("{COLOR RED}A:カラーせってい");
-const u8 gUnknown_Debug_083F8801[] = _("{COLOR RED}A:けってい　B:キャンセル");
+const u8 gUnknown_Debug_083F87D0[] = _("{COLOR RED}L{ESCAPE}{LEFT_ARROW}");
+const u8 gUnknown_Debug_083F87D8[] = _("{COLOR RED}{ESCAPE}{RIGHT_ARROW}R");
+const u8 gUnknown_Debug_083F87E0[] = DTR("かいはつナンバー", "Devel No.");
+const u8 gUnknown_Debug_083F87E9[] = DTR("グラフィックナンバー", "Graphic No.");
+const u8 gUnknown_Debug_083F87F4[] = DTR("{COLOR RED}A:カラーせってい", "{COLOR RED}A: SET COLOR");
+const u8 gUnknown_Debug_083F8801[] = DTR("{COLOR RED}A:けってい　B:キャンセル", "{COLOR RED}A: CONFIRM  B: CANCEL");
 const u8 gUnknown_Debug_083F8813[] = _(":");
 void debug_80C6B00(u8 taskId)
 {

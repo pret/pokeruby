@@ -31,9 +31,9 @@ const u8 gUnknown_0839B22C[][3] =
 };
 
 const u8 gUnknown_0839B24A[] = _("ND");
-const u8 gUnknown_0839B24D[] = _("の　こどもは\n"); // "'s child <topic-particle>"=
+const u8 gUnknown_0839B24D[] = DTR("の　こどもは\n", "'s child =\n"); // TRN
 const u8 gUnknown_0839B255[] = _(" ");
-const u8 gUnknown_0839B257[] = _("ながいなまえぽけもん"); // "long name pokemon" (used as test name)
+const u8 gUnknown_0839B257[] = DTR("ながいなまえぽけもん", "LongName{PKMN}"); // "long name pokemon" (used as test name)
 const u8 Text_39B262[] = _("Search a child");
 const u8 Text_39B271[] = _("Egg");
 const u8 Text_39B275[] = _("Egg (male)");
@@ -45,7 +45,7 @@ const u8 Text_39B2AF[] = _("Long name");
 #ifdef GERMAN
 const u8 Text_39B2B9[] = _("Delete {POKEBLOCK}");
 #else
-const u8 Text_39B2B9[] = _("ポロックけす");
+const u8 Text_39B2B9[] = DTR("ポロックけす", "Delete {POKEBLOCK}");
 #endif
 
 const struct MenuAction gMoriDebugMenuActions[] =

@@ -2475,11 +2475,13 @@ void debug_nullsub_3(void)
 
 extern const u32 gUnknown_Debug_821F680[][0x23];
 
+// Shows a cursor
 void debug_sub_80125A0(void)
 {
     gSharedMem[gUnknown_Debug_821F680[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]] = 0x6D;
 }
 
+// Hides a cursor
 void debug_sub_80125E4(void)
 {
     gSharedMem[gUnknown_Debug_821F680[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]] = 0x81;

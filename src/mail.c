@@ -242,9 +242,9 @@ const struct MailLayout gUnknown_083E57A4[] =
 
 #if DEBUG
 
-const u8 Str_8411540[] = _("レイアウトを　にほんごで　ひょうじ？");  // Display using Japanese layout?
-const u8 Str_8411553[] = _("にほんご　");  // Japanese
-const u8 Str_8411559[] = _("かいがい　");  // Overseas
+const u8 Str_8411540[] = DTR("レイアウトを　にほんごで　ひょうじ？", "Display using JAPANESE layout?");
+const u8 Str_8411553[] = DTR("にほんご　", "JAPANESE");
+const u8 Str_8411559[] = DTR("かいがい　", "OVERSEAS");
 
 const u8 *const _8411560[] =
 {
@@ -252,20 +252,20 @@ const u8 *const _8411560[] =
     Str_8411559,
 };
 
-const u8 Str_8411568[] = _("イメージ　タイプを　えらんでね");  // Choose an image type
+const u8 Str_8411568[] = DTR("イメージ　タイプを　えらんでね", "Choose an image type");
 const u8 Str_8411578[] = _("{STR_VAR_1}");
-const u8 Str_841157B[] = _("オレンジ　");  // Orange
-const u8 Str_8411581[] = _("ハーバー　");  // Harbor
-const u8 Str_8411587[] = _("キラキラ　");  // Glitter
-const u8 Str_841158D[] = _("メカニカル");  // Mech
-const u8 Str_8411593[] = _("ウッディー");  // Wood
-const u8 Str_8411599[] = _("クロス　　");  // Wave
-const u8 Str_841159F[] = _("トレジャー");  // Bead
-const u8 Str_84115A5[] = _("シャドウ　");  // Shadow
-const u8 Str_84115AB[] = _("トロピカル");  // Tropic
-const u8 Str_84115B1[] = _("ドリーム　");  // Dream
-const u8 Str_84115B7[] = _("ミラクル　");  // Fab
-const u8 Str_84115BD[] = _("レトロ　　");  // Retro
+const u8 Str_841157B[] = DTR("オレンジ　", "ORANGE ");
+const u8 Str_8411581[] = DTR("ハーバー　", "HARBOR ");
+const u8 Str_8411587[] = DTR("キラキラ　", "GLITTER");
+const u8 Str_841158D[] = DTR("メカニカル", "MECH   ");
+const u8 Str_8411593[] = DTR("ウッディー", "WOOD   ");
+const u8 Str_8411599[] = DTR("クロス　　", "WAVE   ");
+const u8 Str_841159F[] = DTR("トレジャー", "BEAD   ");
+const u8 Str_84115A5[] = DTR("シャドウ　", "SHADOW ");
+const u8 Str_84115AB[] = DTR("トロピカル", "TROPIC ");
+const u8 Str_84115B1[] = DTR("ドリーム　", "DREAM  ");
+const u8 Str_84115B7[] = DTR("ミラクル　", "FAB    ");
+const u8 Str_84115BD[] = DTR("レトロ　　", "RETRO  ");
 
 const u8 *const _84115C4[] =
 {
@@ -283,10 +283,10 @@ const u8 *const _84115C4[] =
     Str_84115BD,
 };
 
-const u8 Str_84115F4[] = _("メールをみる");  // View Mail
-const u8 Str_84115FB[] = _("メールとうろく");  // Register Mail
-const u8 Str_8411603[] = _("もたせる");  // Give to Pokémon
-const u8 Str_8411608[] = _("メールをけす");  // Delete Mail
+const u8 Str_84115F4[] = DTR("メールをみる", "View MAIL");
+const u8 Str_84115FB[] = DTR("メールとうろく", "Register MAIL");
+const u8 Str_8411603[] = DTR("もたせる", "Give MAIL");
+const u8 Str_8411608[] = DTR("メールをけす", "Delete MAIL");
 
 #endif
 
@@ -744,7 +744,7 @@ void debug_sub_810CA7C(u8 taskId)
 void debug_sub_810CB50(u8 taskId)
 {
     u8 sp0[] = _("{STR_VAR_1}　{STR_VAR_2}");
-    u8 sp8[] = _("メール{STR_VAR_1}　{STR_VAR_2}");
+    u8 sp8[] = DTR("メール{STR_VAR_1}　{STR_VAR_2}", "MAIL{STR_VAR_1} {STR_VAR_2}");
     bool8 r2 = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
@@ -791,7 +791,7 @@ void debug_sub_810CB50(u8 taskId)
 
 void debug_sub_810CCEC(u8 taskId)
 {
-    u8 string1[] = _("メール{STR_VAR_1}を　だれに　もたせる？");
+    u8 string1[] = DTR("メール{STR_VAR_1}を　だれに　もたせる？", "Give MAIL {STR_VAR_1} to who?");
     u8 string2[] = _("000　{STR_VAR_1}");
 
     ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_0x8005, 1, 1);
@@ -876,8 +876,10 @@ u8 debug_sub_810CEA4(void)
 
 u8 debug_sub_810CED0(void)
 {
-    u8 text[] = _("せいきの　データが　とうろくずみ　です\n"
-                  "しんき　とうろく　できません");
+    u8 text[] = DTR("せいきの　データが　とうろくずみ　です\n"
+                    "しんき　とうろく　できません",
+                    "Normal data is registered.\n"
+                    "Cannot register new data.");
     s8 input = Menu_ProcessInput();
 
     switch (input)
@@ -911,8 +913,10 @@ u8 debug_sub_810CED0(void)
 
 u8 debug_sub_810CFA4(void)
 {
-    u8 text[] = _("せいきに　とうろくされたメールデータは\n"
-                  "へんこう　できません");
+    u8 text[] = DTR("せいきに　とうろくされたメールデータは\n"
+                    "へんこう　できません",
+                    "Regularly, registered MAIL data\n"
+                    "cannot be changed.");
     s8 input = Menu_ProcessInput();
 
     switch (input)
@@ -990,7 +994,7 @@ u8 debug_sub_810D030(void)
 
 void debug_sub_810D174(u8 a)
 {
-    u8 string[] = _("メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}");
+    u8 string[] = DTR("メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}", "MAIL{STR_VAR_1} {STR_VAR_2} {STR_VAR_3}");
     u8 buffer[9][20];
     struct MenuAction menuActions[9];
     u8 i;

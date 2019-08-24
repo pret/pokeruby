@@ -295,19 +295,19 @@ static const struct MenuAction sMenuActions_TrickRelated[] = {
     {sString_TrickRelated_TrickMaster, TrickRelated_TrickMaster_InitSubmenu}
 };
 
-static const u8 sString_Event1[] = _("パート1");
-static const u8 sString_Event2[] = _("パート2");
+static const u8 sString_Event1[] = DTR("パート1", "PART 1");
+static const u8 sString_Event2[] = DTR("パート2", "PART 2");
 
 static const struct MenuAction sMenuActions_ControlEvents[] = {
     {sString_Event1, ControlEvents_InitSubmenu1},
     {sString_Event2, ControlEvents_InitSubmenu2}
 };
 
-static const u8 sString_EventFlag[] = _("イベントFLAG");
-static const u8 sString_VanishFlag[] = _("バニシュFLAG");
-static const u8 sString_TrainerFlag[] = _("トレーナーFLAG");
+static const u8 sString_EventFlag[] = DTR("イベントFLAG", "EVENT FLAG");
+static const u8 sString_VanishFlag[] = DTR("バニシュFLAG", "VANISH FLAG");
+static const u8 sString_TrainerFlag[] = DTR("トレーナーFLAG", "TRAINER FLAG");
 static const u8 sString_SysFlag[] = _("SYSFLAG");
-static const u8 sString_BallVanishFlag[] = _("BALLバニシュFLAG");
+static const u8 sString_BallVanishFlag[] = DTR("BALLバニシュFLAG", "VANISH FLAG");
 static const u8 sString_FH[] = _("FH");
 static const u8 sString_FH_OBJ[] = _("FH-OBJ");
 
@@ -326,7 +326,7 @@ static const u8 sString_SysWork[] = _("SYSWORK");
 static const u8 sString_LocalWork[] = _("LOCALWORK");
 static const u8 sString_ObjWork[] = _("OBJWORK");
 static const u8 sString_AnsWork[] = _("ANSWORK");
-static const u8 sString_SaveWorkPart2[] = _("SAVEWORK　パート2");
+static const u8 sString_SaveWorkPart2[] = DTR("SAVEWORK パート2", "SAVEWORK PART 2");
 
 static const struct MenuAction sMenuActions_ControlWorks[] = {
     {sString_SaveWork, ControlWorks_SaveWork_InitSubmenu},
@@ -337,15 +337,15 @@ static const struct MenuAction sMenuActions_ControlWorks[] = {
     {sString_SaveWorkPart2, ControlWorks_SaveWorkPart2_InitSubmenu}
 };
 
-static const u8 sString_Clear_go[] = _("クリアご");
-static const u8 sString_Coin_kounyuuka[] = _("コインこうにゅうかのう");
-static const u8 sString_Oldale_supporter_set[] = _("コトキサポーターセット");
-static const u8 sString_New_Mauville_open[] = _("ニューキンセツOPEN");
-static const u8 sString_Renrakusen_ni_noreru[] = _("れんらくせんにのれる");
-static const u8 sString_Egg_tsuika[] = _("タマゴついか");
-static const u8 sString_Item_ippai[] = _("アイテムいっぱい");
-static const u8 sString_Gezzu_ippai[] = _("グッズいっぱい");
-static const u8 sString_Coin_ippai[] = _("COINいっぱい");
+static const u8 sString_Clear_go[] = DTR("クリアご", "POSTGAME");
+static const u8 sString_Coin_kounyuuka[] = DTR("コインこうにゅうかのう", ",Get COIN CASE");
+static const u8 sString_Oldale_supporter_set[] = DTR("コトキサポーターセット", "OLDALE POST RIVAL");
+static const u8 sString_New_Mauville_open[] = DTR("ニューキンセツOPEN", "Open NEW MAUVILLE");
+static const u8 sString_Renrakusen_ni_noreru[] = DTR("れんらくせんにのれる", "Get S.S. TICKET");
+static const u8 sString_Egg_tsuika[] = DTR("タマゴついか", "Get KYOGRE EGG");
+static const u8 sString_Item_ippai[] = DTR("アイテムいっぱい", "Max Items");
+static const u8 sString_Gezzu_ippai[] = DTR("グッズいっぱい", "Max Decorations");
+static const u8 sString_Coin_ippai[] = DTR("COINいっぱい", "Max COINS");
 
 static const struct MenuAction sMenuActions_ControlEvents_Events1[] = {
     {sString_Clear_go, CallScript_DoHallOfFame},
@@ -359,12 +359,13 @@ static const struct MenuAction sMenuActions_ControlEvents_Events1[] = {
     {sString_Coin_ippai, CallScript_GiveAllCoins}
 };
 
-static const u8 sString_SootpolisGymOpen[] = _("ムロジムOPEN");
-static const u8 sString_MoneyTo0[] = _("おかねを0へ");
-static const u8 sString_BarboachFull[] = _("ドジョッチ　FULL");
-static const u8 sString_ShroomishFull[] = _("キノココ　FULL");
-static const u8 sString_BarboachEgg[] = _("ドジョッチ　タマゴ");
-static const u8 sString_ShroomishEgg[] = _("キノココ　タマゴ");
+// Note: JP text says Dewford Gym for some reason.
+static const u8 sString_SootpolisGymOpen[] = DTR("ムロジムOPEN", "Open SOOTOPOLIS GYM");
+static const u8 sString_MoneyTo0[] = DTR("おかねを0へ", "Set money to 0");
+static const u8 sString_BarboachFull[] = DTR("ドジョッチ　FULL", "Full BARBOACH PARTY");
+static const u8 sString_ShroomishFull[] = DTR("キノココ　FULL", "Full SHROOMISH PARTY");
+static const u8 sString_BarboachEgg[] = DTR("ドジョッチ　タマゴ", "Get BARBOACH EGG");
+static const u8 sString_ShroomishEgg[] = DTR("キノココ　タマゴ", "Get SHROOMISH EGG");
 
 static const struct MenuAction sMenuActions_ControlEvents_Events2[] = {
     {sString_SootpolisGymOpen, CallScript_OpenSootopolisGym},
@@ -375,7 +376,7 @@ static const struct MenuAction sMenuActions_ControlEvents_Events2[] = {
     {sString_ShroomishEgg, CallScript_GiveShroomishEgg}
 };
 
-static const u8 sString_Answork_Mikansei[] = _("ANSWORK　みかんせい");
+static const u8 sString_Answork_Mikansei[] = DTR("ANSWORK　みかんせい", "ANSWORK Incomplete");
 
 static const struct MenuAction sMenuActions_ControlEvents_AnsWork[] = {
     {sString_Answork_Mikansei, DummyMenuAction}
@@ -499,15 +500,15 @@ static const u16 gUnknown_Debug_083C12D2[][9] = {
     {0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10}
 };
 
-static const u8 gUnknown_Debug_083C12F6[] = _("BATCH");
-static const u8 gUnknown_Debug_083C12FC[] = _("タウンとうちゃく");
-static const u8 gUnknown_Debug_083C1305[] = _("シティとうちゃく");
+static const u8 gUnknown_Debug_083C12F6[] = DTR("BATCH", "BADGE");
+static const u8 gUnknown_Debug_083C12FC[] = DTR("タウンとうちゃく", "Towns arrived");
+static const u8 gUnknown_Debug_083C1305[] = DTR("シティとうちゃく", "Cities arrived");
 static const u8 gUnknown_Debug_083C130E[] = _("GET");
-static const u8 gUnknown_Debug_083C1312[] = _("そのた1");
-static const u8 gUnknown_Debug_083C1317[] = _("そのた2");
-static const u8 gUnknown_Debug_083C131C[] = _("そのた3");
-static const u8 gUnknown_Debug_083C1321[] = _("そのた4");
-static const u8 gUnknown_Debug_083C1326[] = _("そのた　とうちゃく");
+static const u8 gUnknown_Debug_083C1312[] = DTR("そのた1", "Other 1");
+static const u8 gUnknown_Debug_083C1317[] = DTR("そのた2", "Other 2");
+static const u8 gUnknown_Debug_083C131C[] = DTR("そのた3", "Other 3");
+static const u8 gUnknown_Debug_083C1321[] = DTR("そのた4", "Other 4");
+static const u8 gUnknown_Debug_083C1326[] = DTR("そのた　とうちゃく", "Others arrived");
 
 static const struct MenuAction gUnknown_Debug_083C1330[] = {
     {gUnknown_Debug_083C12F6, debug_sub_808CFA4},
@@ -717,7 +718,7 @@ static const u16 gUnknown_Debug_083C19C6[][9] = {
     {FLAG_LANDMARK_SEAFLOOR_CAVERN, FLAG_LANDMARK_BATTLE_TOWER, FLAG_LANDMARK_SOUTHERN_ISLAND, FLAG_SYS_POKEMON_LEAGUE_FLY, FLAG_LANDMARK_SKY_PILLAR}
 };
 
-static const u8 gDebug_0x83C1A68[] = _("FVーBALL　パート1");
+static const u8 gDebug_0x83C1A68[] = DTR("FVーBALL　パート1", "FV-BALL PART 1");
 
 static const struct MenuAction gUnknown_Debug_083C1A78[] = {
 	{gDebug_0x83C1A68, debug_sub_808D8D8}
@@ -737,9 +738,9 @@ static const u16 gUnknown_Debug_083C1AAE[][9] = {
     {FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2, FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1}
 };
 
-static const u8 gUnknown_Debug_083C1AC0[] = _("ジムリーダー");
-static const u8 gUnknown_Debug_083C1AC7[] = _("してんのう");
-static const u8 gUnknown_Debug_083C1ACD[] = _("みつる/Champロード");
+static const u8 gUnknown_Debug_083C1AC0[] = DTR("ジムリーダー", "GYM LEADER");
+static const u8 gUnknown_Debug_083C1AC7[] = DTR("してんのう", "ELITE FOUR");
+static const u8 gUnknown_Debug_083C1ACD[] = DTR("みつる/Champロード", "WALLY/VICTORY ROAD");
 
 static const struct MenuAction gUnknown_Debug_083C1ADC[] = {
 	{gUnknown_Debug_083C1AC0, debug_sub_808CD08},
@@ -792,14 +793,14 @@ static const u16 gUnknown_Debug_083C1C38[][9] = {
     {0x04E1}
 };
 
-static const u8 gUnknown_Debug_083C1C6E[] = _("120/119ばんどうろカクレオン");
-static const u8 gUnknown_Debug_083C1C80[] = _("そのた1　/　SUPPORTM/W");
-static const u8 gUnknown_Debug_083C1C92[] = _("ODAMAKI/FIGHTER1");
-static const u8 gUnknown_Debug_083C1CA3[] = _("MITSURU/TENKI");
-static const u8 gUnknown_Debug_083C1CB1[] = _("そのた2　/DAIGO");
+static const u8 gUnknown_Debug_083C1C6E[] = DTR("120/119ばんどうろカクレオン", "ROUTE 120/119 KECLEON");
+static const u8 gUnknown_Debug_083C1C80[] = DTR("そのた1　/　SUPPORTM/W", "Other 1/SUPPORT/M/W");
+static const u8 gUnknown_Debug_083C1C92[] = DTR("ODAMAKI/FIGHTER1", "BIRCH/FIGHTER1");
+static const u8 gUnknown_Debug_083C1CA3[] = DTR("MITSURU/TENKI", "WALLY/WEATHER");
+static const u8 gUnknown_Debug_083C1CB1[] = DTR("そのた2　/DAIGO", "Other 2/STEVEN");
 static const u8 gUnknown_Debug_083C1CBD[] = _("POKE/POKEMON");
 static const u8 gUnknown_Debug_083C1CCA[] = _("MAMA/SUPPORT02");
-static const u8 gUnknown_Debug_083C1CD9[] = _("HAGI");
+static const u8 gUnknown_Debug_083C1CD9[] = DTR("HAGI", "Mr. BRINEY");
 static const u8 gUnknown_Debug_083C1CDE[] = _("SUPPORT01");
 
 static const struct MenuAction gUnknown_Debug_083C1CE8[] = {
@@ -1020,15 +1021,16 @@ static const u16 gUnknown_Debug_083C271A[][9] = {
     {FLAG_HIDE_RIVAL_BIRCH_LAB, FLAG_HIDE_RIVAL_CHAMPIONS_ROOM, FLAG_HIDE_RIVAL_RUSTBORO, FLAG_HIDE_RIVAL_LILYCOVE_MART, FLAG_HIDE_RIVAL_ROUTE103, FLAG_HIDE_RIVAL_ROUTE110, FLAG_HIDE_RIVAL_ROUTE119, FLAG_HIDE_RIVAL_LAVARIDGE_1, FLAG_HIDE_RIVAL_OLDALE_TOWN}
 };
 
-static const u8 gUnknown_Debug_083C27BC[] = _("FEひでんわざ/デボンかんれん");
-static const u8 gUnknown_Debug_083C27CC[] = _("FEだいじなアイテムPART1");
-static const u8 gUnknown_Debug_083C27DC[] = _("そのた1");
-static const u8 gUnknown_Debug_083C27E1[] = _("MITSURU/DOOR");
-static const u8 gUnknown_Debug_083C27EE[] = _("カラクリやしき10のやじるし/GYM07");
-static const u8 gUnknown_Debug_083C2803[] = _("SUPPORT/そのた4");
-static const u8 gUnknown_Debug_083C2810[] = _("DAISUKI/そのた5");
-static const u8 gUnknown_Debug_083C281D[] = _("そのた2");
-static const u8 gUnknown_Debug_083C2822[] = _("そのた6");
+static const u8 gUnknown_Debug_083C27BC[] = DTR("FEひでんわざ/デボンかんれん", "Field HMs/DEVON-related");
+static const u8 gUnknown_Debug_083C27CC[] = DTR("FEだいじなアイテムPART1", "Field Key Items Part 1");
+static const u8 gUnknown_Debug_083C27DC[] = DTR("そのた1", "Other 1");
+static const u8 gUnknown_Debug_083C27E1[] = DTR("MITSURU/DOOR", "WALLY/Door");
+static const u8 gUnknown_Debug_083C27EE[] = DTR("カラクリやしき10のやじるし/GYM07",
+                                                "TRICK HOUSE 10 Arrows/GYM 7");
+static const u8 gUnknown_Debug_083C2803[] = DTR("SUPPORT/そのた4", "Support/Other 4");
+static const u8 gUnknown_Debug_083C2810[] = DTR("DAISUKI/そのた5", "FAN CLUB/Other 5");
+static const u8 gUnknown_Debug_083C281D[] = DTR("そのた2", "Other 2");
+static const u8 gUnknown_Debug_083C2822[] = DTR("そのた6", "Other 6");
 
 static const struct MenuAction gUnknown_Debug_083C2828[] = {
 	{gUnknown_Debug_083C27BC, debug_sub_808C3B0},
@@ -1254,11 +1256,11 @@ static const u16 gUnknown_Debug_83C31E6[][9] = {
     {FLAG_BIRCH_AIDE_MET, FLAG_DECLINED_BIKE, FLAG_RECEIVED_SECRET_POWER}
 };
 
-static const u8 gUnknown_Debug_083C3288[] = _("CYCLEかんれん");
-static const u8 gUnknown_Debug_083C3292[] = _("おおきさくらべ");
-static const u8 gUnknown_Debug_083C329A[] = _("カウンタ");
-static const u8 gUnknown_Debug_083C329F[] = _("そのた1");
-static const u8 gUnknown_Debug_083C32A4[] = _("そのた2");
+static const u8 gUnknown_Debug_083C3288[] = DTR("CYCLEかんれん", "CYCLE-related");
+static const u8 gUnknown_Debug_083C3292[] = DTR("おおきさくらべ", "Size comparison");
+static const u8 gUnknown_Debug_083C329A[] = DTR("カウンタ", "Counter");
+static const u8 gUnknown_Debug_083C329F[] = DTR("そのた1", "Other 1");
+static const u8 gUnknown_Debug_083C32A4[] = DTR("そのた2", "Other 2");
 
 static const struct MenuAction gUnknown_Debug_083C32AC[] = {
     {gUnknown_Debug_083C3288, debug_sub_808E400},
@@ -1404,11 +1406,11 @@ static const u16 gUnknown_Debug_083C371E[][9] = {
 };
 
 static const u8 gUnknown_Debug_083C3742[] = _("SP");
-static const u8 gUnknown_Debug_083C3745[] = _("ルーム　R110　PART1/カラクリ");
-static const u8 gUnknown_Debug_083C3759[] = _("ルーム　R110　PART2");
-static const u8 gUnknown_Debug_083C3768[] = _("ルーム　ロード");
-static const u8 gUnknown_Debug_083C3770[] = _("ソノタ1");
-static const u8 gUnknown_Debug_083C3775[] = _("ソノタ2");
+static const u8 gUnknown_Debug_083C3745[] = DTR("ルーム　R110　PART1/カラクリ", "Room R110 Part 1/TRICK");
+static const u8 gUnknown_Debug_083C3759[] = DTR("ルーム　R110　PART2", "Room R110 Part 2");
+static const u8 gUnknown_Debug_083C3768[] = DTR("ルーム　ロード", "Room road");
+static const u8 gUnknown_Debug_083C3770[] = DTR("ソノタ1", "Other 1");
+static const u8 gUnknown_Debug_083C3775[] = DTR("ソノタ2", "Other 2");
 
 static const struct MenuAction sMenuActions_ControlWorks_SaveWorkPart2[] = {
     {gUnknown_Debug_083C3742, ControlWorks_SaveWorkPart2_SP_InitSubsubmenu},
@@ -1561,15 +1563,15 @@ static const u16 sControlWorks_SaveWork_ItemArrays[][9] = {
     {VAR_WEATHER_INSTITUTE_STATE, VAR_SLATEPORT_FAN_CLUB_STATE, 0x40BB, VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, VAR_GAME_CORNER_STATE, VAR_WHICH_FOSSIL_REVIVED}
 };
 
-static const u8 sString_Town[] = _("タウン");
-static const u8 sString_City[] = _("シティ");
-static const u8 sString_Route_101_to_109[] = _("ロード101ー109");
-static const u8 sString_Route_110_to_118[] = _("ロード110ー118");
-static const u8 sString_Route_119_to_127[] = _("ロード119ー127");
-static const u8 sString_Route_128_to_134[] = _("ロード128ー134");
-static const u8 sString_Room_Town[] = _("ルーム　タウン");
-static const u8 sString_Room_City[] = _("ルーム　シティ");
-static const u8 sString_Dungeon_nai[] = _("ダンジョンない");
+static const u8 sString_Town[] = DTR("タウン", "TOWN");
+static const u8 sString_City[] = DTR("シティ", "CITY");
+static const u8 sString_Route_101_to_109[] = DTR("ロード101ー109", "ROUTE 101-109");
+static const u8 sString_Route_110_to_118[] = DTR("ロード110ー118", "ROUTE 110-118");
+static const u8 sString_Route_119_to_127[] = DTR("ロード119ー127", "ROUTE 119-127");
+static const u8 sString_Route_128_to_134[] = DTR("ロード128ー134", "ROUTE 128-134");
+static const u8 sString_Room_Town[] = DTR("ルーム　タウン", "Room Town");
+static const u8 sString_Room_City[] = DTR("ルーム　シティ", "Room City");
+static const u8 sString_Dungeon_nai[] = DTR("ダンジョンない", "DUNGEON");
 
 static const struct MenuAction sMenuAction_ControlWorks_SaveWork[] = {
     {sString_Town, ControlWorks_SaveWork_Town_InitSubsubmenu},
@@ -1858,13 +1860,13 @@ static const struct MenuAction gUnknown_Debug_083C47F0[] = {
     {gUnknown_Debug_083C47E9, DummyMenuAction}
 };
 
-static const u8 gUnknown_Debug_083C4830[] = _("Trick　Master");
+static const u8 gUnknown_Debug_083C4830[] = _("Trick Master");
 
-static const u8 gUnknown_Debug_083C483D[] = _("Hidden　MASTER");
-static const u8 gUnknown_Debug_083C484B[] = _("Inside　the　HOUSE");
-static const u8 gUnknown_Debug_083C485C[] = _("Pass　a　reward");
-static const u8 gUnknown_Debug_083C486A[] = _("Rig　a　trick");
-static const u8 gUnknown_Debug_083C4876[] = _("MASTER　is　gone");
+static const u8 gUnknown_Debug_083C483D[] = _("Hidden MASTER");
+static const u8 gUnknown_Debug_083C484B[] = _("Inside the HOUSE");
+static const u8 gUnknown_Debug_083C485C[] = _("Pass a reward");
+static const u8 gUnknown_Debug_083C486A[] = _("Rig a trick");
+static const u8 gUnknown_Debug_083C4876[] = _("MASTER is gone");
 
 static const struct MenuAction gUnknown_Debug_083C4888[] = {
     {gUnknown_Debug_083C483D, DummyMenuAction},
