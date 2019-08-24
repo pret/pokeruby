@@ -1402,9 +1402,9 @@ extern const u16 gUnknown_Debug_821F424[][5];
 extern const u16 gUnknown_Debug_821F56C[][5];
 extern const u32 gUnknown_Debug_821F798[][4];
 
-extern const u8 gUnusedOldCharmap_Gfx_lz[];
-extern const u8 gUnusedOldCharmap_Tilemap_lz[];
-extern const u8 gUnusedOldCharmap_Pal_lz[];
+extern const u8 gDebugBattleCharmap_Gfx_lz[];
+extern const u8 gDebugBattleCharmap_Tilemap_lz[];
+extern const u8 gDebugBattleCharmap_Pal_lz[];
 
 void debug_sub_8010800(void)
 {
@@ -1457,10 +1457,10 @@ void debug_sub_80108B8(void)
 	REG_BG1CNT = 0x4801;
 	REG_BLDCNT = 0;
 	REG_BLDY = 0;
-	LZDecompressVram(gUnusedOldCharmap_Gfx_lz, (void *)VRAM);
-	LZDecompressWram(gUnusedOldCharmap_Tilemap_lz, gSharedMem);
-	LZDecompressVram(gUnusedOldCharmap_Pal_lz, (void *)PLTT);
-	LZDecompressVram(gUnusedOldCharmap_Pal_lz, (void *)(PLTT + 0x1E0));
+	LZDecompressVram(gDebugBattleCharmap_Gfx_lz, (void *)VRAM);
+	LZDecompressWram(gDebugBattleCharmap_Tilemap_lz, gSharedMem);
+	LZDecompressVram(gDebugBattleCharmap_Pal_lz, (void *)PLTT);
+	LZDecompressVram(gDebugBattleCharmap_Pal_lz, (void *)(PLTT + 0x1E0));
 	m4aSoundVSyncOn();
 	SetVBlankCallback(debug_sub_8011D40);
 	SetMainCallback2(debug_sub_8010CAC);
