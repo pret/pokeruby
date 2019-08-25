@@ -57,11 +57,11 @@ bool8 NoharaDebugMenu_LegendsFlagOn(void);
 bool8 NoharaDebugMenu_AddNumWinningStreaks(void);
 
 const u8 gUnknown_Debug_083C48C4[] = _("TV");
-const u8 gUnknown_Debug_083C48C7[] = _("Fan");
+const u8 gUnknown_Debug_083C48C7[] = DTR("Fan", "LILYCOVE TRAINER FAN CLUB");
 const u8 gUnknown_Debug_083C48CB[] = _("Battle (vs Dad)");
 const u8 gUnknown_Debug_083C48DB[] = _("Dad after battle");
 const u8 gUnknown_Debug_083C48EC[] = _("SOOTOPOLIS CITY");
-const u8 gUnknown_Debug_083C48FC[] = _("Embark");
+const u8 gUnknown_Debug_083C48FC[] = DTR("Embark", "Reset Mr. BRINEY");
 const u8 gUnknown_Debug_083C4903[] = _("Yes 9999");
 const u8 gUnknown_Debug_083C490C[] = _("Legends flag ON");
 const u8 gUnknown_Debug_083C491C[] = _("Add num of winning streaks");
@@ -756,15 +756,18 @@ bool8 debug_sub_80900AC(void)
     CloseMenu();
     return TRUE;
 }
-// TRN: Figure out the meaning of these abbreviations
-const u8 gUnknown_Debug_083C4C77[] = DTR("1　スクル", "1 SCHOOL");
-const u8 gUnknown_Debug_083C4C7D[] = DTR("2　ミドル", "2 MIDDLE");
-const u8 gUnknown_Debug_083C4C83[] = DTR("3　オジヨ", "3 UNCLE");
-const u8 gUnknown_Debug_083C4C89[] = DTR("4　ボーヤ", "4 BOY");
-const u8 gUnknown_Debug_083C4C8F[] = DTR("5　ボーイ", "5 BOY");
-const u8 gUnknown_Debug_083C4C95[] = DTR("6　ヤング", "6 YOUNG");
-const u8 gUnknown_Debug_083C4C9B[] = DTR("7　ヲーカ", "7 WOUKA");
-const u8 gUnknown_Debug_083C4CA1[] = DTR("8　オルド", "8 OLD");
+// These represent the people in Lilycove Fan Club.
+// TRN: These translations are probably wrong but it is really hard to tell with
+// the abbreviations. They are mosly based on observation
+// The first one is selected by default when there are no fans.
+const u8 gUnknown_Debug_083C4C77[] = DTR("1　スクル", "1 LASS/NONE"); // school (girl)
+const u8 gUnknown_Debug_083C4C7D[] = DTR("2　ミドル", "2 MIDDLE AGE MAN"); // middle
+const u8 gUnknown_Debug_083C4C83[] = DTR("3　オジヨ", "3 DAUGHTER"); // おしょう (daughter)
+const u8 gUnknown_Debug_083C4C89[] = DTR("4　ボーヤ", "4 YOUNG BOY"); // 坊や (boy)
+const u8 gUnknown_Debug_083C4C8F[] = DTR("5　ボーイ", "5 BOY"); // boy
+const u8 gUnknown_Debug_083C4C95[] = DTR("6　ヤング", "6 YOUNG MAN"); // young
+const u8 gUnknown_Debug_083C4C9B[] = DTR("7　ヲーカ", "7 MOM"); // お母さん? (probably typo)
+const u8 gUnknown_Debug_083C4CA1[] = DTR("8　オルド", "8 OLD LADY"); // old
 
 const u8 *const gUnknown_Debug_083C4CA8[] = {
     gUnknown_Debug_083C4C77,
@@ -777,9 +780,9 @@ const u8 *const gUnknown_Debug_083C4CA8[] = {
     gUnknown_Debug_083C4CA1
 };
 
-const u8 gUnknown_Debug_083C4CC8[] = _("Start");
-const u8 gUnknown_Debug_083C4CCE[] = _("Increase");
-const u8 gUnknown_Debug_083C4CD7[] = _("Reduce");
+const u8 gUnknown_Debug_083C4CC8[] = _("Start"); // Starts the "Oh! I've heard of you' script"
+const u8 gUnknown_Debug_083C4CCE[] = _("Increase"); // Increases popularity
+const u8 gUnknown_Debug_083C4CD7[] = _("Reduce"); // reduces popularity
 const u8 gUnknown_Debug_083C4CDE[] = _("Points");
 const u8 gUnknown_Debug_083C4CE5[] = _("Play time 6");
 const u8 gUnknown_Debug_083C4CF1[] = _("P ELITE FOUR");
