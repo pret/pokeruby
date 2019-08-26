@@ -273,49 +273,49 @@ const u8 gUnknown_Debug_0839BBA4[] = _("Debugging Version");
 const u8 gUnknown_Debug_0839BBB6[] = _("{VERSION} Version");
 const u8 gUnknown_Debug_0839BBC1[] = _("Normal RTC compatible");
 
-const u8 Str_839BBD7[] = DTR("か　の　じっけん", "Test");
-const u8 Str_839BBE0[] = DTR("じっけん2", "Test2");
-const u8 Str_839BBE6[] = DTR("BGじっけん", "BG Test");
-const u8 Str_839BBED[] = _("Battle");
-const u8 Str_839BBF4[] = DTR("つうしん　じっけん", "LINK Test");
-const u8 Str_839BBFE[] = _("LINK Test2");
-const u8 Str_839BC09[] = DTR("フィールド　はじめる", "Field Start"); // TRN
-const u8 Str_839BC14[] = DTR("フィールド　つづき", "Field Continue"); // TRN
-const u8 Str_839BC1E[] = _("Sound test");
-const u8 Str_839BC29[] = _("{POKEBLOCK} test");
-const u8 Str_839BC34[] = _("Crash backup data");
-const u8 Str_839BC46[] = _("e-Card test");
-const u8 Str_839BC52[] = DTR("こうかんデモ　　　", "Trade demo");
-const u8 Str_839BC5C[] = _("Time in game");
-const u8 Str_839BC69[] = DTR("フェスタ　モード", "Festa mode"); // TRN
-const u8 Str_839BC72[] = _("Mimic e-Card");
-const u8 Str_839BC7F[] = _("RTC reset");
-const u8 Str_839BC89[] = _("Converter");
+const u8 gTestMenu_TestMenuHeaderText[] = DTR("か　の　じっけん", "TEST MENU"); // 科の実験 (Test section)
+const u8 gTestMenu_Test2Text[] = DTR("じっけん2", "Test2");
+const u8 gTestMenu_BGTestText[] = DTR("BGじっけん", "BG Test");
+const u8 gTestMenu_BattleText[] = _("Battle");
+const u8 gTestMenu_UnusedLinkTestText[] = DTR("つうしん　じっけん", "LINK Test"); // unused
+const u8 gTestMenu_LinkTest2Text[] = _("LINK Test2");
+const u8 gTestMenu_FieldStartText[] = DTR("フィールド　はじめる", "New game"); // "Field start"
+const u8 gTestMenu_FieldContinueText[] = DTR("フィールド　つづき", "Continue game"); // "Field continue"
+const u8 gTestMenu_SoundTestText[] = _("Sound test");
+const u8 gTestMenu_PokeblockTestText[] = _("{POKEBLOCK} test");
+const u8 gTestMenu_CrashBackupDataText[] = _("Crash backup data");
+const u8 gTestMenu_eCardTestText[] = _("e-Card test");
+const u8 gTestMenu_TradeDemoText[] = DTR("こうかんデモ　　　", "Trade demo");
+const u8 gTestMenu_TimeInGameText[] = _("Time in game");
+const u8 gTestMenu_UnusedFestaModeText[] = DTR("フェスタ　モード", "Festa mode"); // unused
+const u8 gTestMenu_MimicECardText[] = _("Mimic e-Card");
+const u8 gTestMenu_RTCResetText[] = _("RTC reset");
+const u8 gTestMenu_ConverterText[] = _("Converter");
 
-const struct MenuAction gUnknown_Debug_839BC94[] =
+const struct MenuAction gDebug_TestMenuItems[] =
 {
-    { Str_839BBD7, DebugMenu_8076CBC },
-    { Str_839BBE0, DebugMenu_8076CC0 },
-    { Str_839BBE6, DebugMenu_8076CD4 },
-    { Str_839BBED, DebugMenu_8076C6C },
-    { Str_839BC29, DebugMenu_8076CD8 },
-    { Str_839BBFE, DebugMenu_8076D28 },
-    { Str_839BC1E, DebugMenu_8076D3C },
-    { Str_839BC09, DebugMenu_8076C80 },
-    { Str_839BC14, DebugMenu_8076C90 },
-    { Str_839BC34, DebugMenu_8076D50 },
-    { Str_839BC46, DebugMenu_8076CEC },
-    { Str_839BC52, DebugMenu_8076D14 },
-    { Str_839BC72, DebugMenu_8076D00 },
-    { Str_839BC5C, DebugMenu_8076D5C },
-    { Str_839BC7F, DebugMenu_8076E18 },
-    { Str_839BC89, DebugMenu_8076EDC },
+    { gTestMenu_TestMenuHeaderText,  DebugMenu_8076CBC }, // Disabled - nop header
+    { gTestMenu_Test2Text,           DebugMenu_8076CC0 }, // Disabled - freezes game (likely went to tomohara menu
+    { gTestMenu_BGTestText,          DebugMenu_8076CD4 }, // Disabled - nop
+    { gTestMenu_BattleText,          DebugMenu_8076C6C },
+    { gTestMenu_PokeblockTestText,   DebugMenu_8076CD8 },
+    { gTestMenu_LinkTest2Text,       DebugMenu_8076D28 },
+    { gTestMenu_SoundTestText,       DebugMenu_8076D3C },
+    { gTestMenu_FieldStartText,      DebugMenu_8076C80 }, // Disabled - starts new game w/o intro with preset name
+    { gTestMenu_FieldContinueText,   DebugMenu_8076C90 }, // Disabled - continues game
+    { gTestMenu_CrashBackupDataText, DebugMenu_8076D50 },
+    { gTestMenu_eCardTestText,       DebugMenu_8076CEC },
+    { gTestMenu_TradeDemoText,       DebugMenu_8076D14 }, // Disabled - starts a trade then crashes
+    { gTestMenu_MimicECardText,      DebugMenu_8076D00 },
+    { gTestMenu_TimeInGameText,      DebugMenu_8076D5C },
+    { gTestMenu_RTCResetText,        DebugMenu_8076E18 },
+    { gTestMenu_ConverterText,       DebugMenu_8076EDC },
 };
 
 // NOTE: When decompiling this file, I found out that having an extraneous extern
 // in a C file can affect the generated asm. If this extern is commented out,
 // debug_sub_8076BB4 will access the array differently and no longer match.
-//extern const struct MenuAction gUnknown_Debug_839BC94[];
+//extern const struct MenuAction gDebug_TestMenuItems[];
 
 const u8 gMenuOrders_839BD14[][10] =
 {
@@ -367,7 +367,7 @@ void debug_sub_8076AC8(u8 a)
         ;
     Menu_EraseWindowRect(16, 0, 29, 19);
     Menu_DrawStdWindowFrame(16, 0, 29, r4 * 2 + 1);
-    Menu_PrintItemsReordered(17, 1, r4, (struct MenuAction2 *)gUnknown_Debug_839BC94, gUnknown_030006C4);
+    Menu_PrintItemsReordered(17, 1, r4, (struct MenuAction2 *)gDebug_TestMenuItems, gUnknown_030006C4);
     InitMenu(0, 17, 1, r4, 0, 12);
 }
 
@@ -400,7 +400,7 @@ void debug_sub_8076BB4(u8 taskId)
     switch (input)
     {
     default:
-        gUnknown_Debug_839BC94[gUnknown_030006C4[cursorPos]].func();
+        gDebug_TestMenuItems[gUnknown_030006C4[cursorPos]].func();
         break;
     case -2:
         if (gMain.newKeys & 0x20)
@@ -606,14 +606,15 @@ u8 DebugMenu_8076EDC(void)
     return 0;
 }
 
+// A list of preset player names
 const u8 Str_839BD90[] = DTR("ジュンイチ", "JUNICHI");
-const u8 Str_839BD96[] = DTR("ダイゴロウ", "STEVEN LOW"); // TRN - likely special char
-const u8 Str_839BD9C[] = DTR("テツジ", "TETSUJI");
-const u8 Str_839BDA0[] = DTR("バレンシア", "VALENCIA"); // TRN
-const u8 Str_839BDA6[] = DTR("ハルコマチ", "HARUKOMACHI"); // TRN
+const u8 Str_839BD96[] = DTR("ダイゴロウ", "DAIGORO");
+const u8 Str_839BD9C[] = DTR("テツジ",     "TETSUJI");
+const u8 Str_839BDA0[] = DTR("バレンシア", "VALENCY"); // Valencia is too long
+const u8 Str_839BDA6[] = DTR("ハルコマチ", "MAY");     // May town?
 const u8 Str_839BDAC[] = _("RAYMOND");
 const u8 Str_839BDB4[] = _("TIFFANY");
-const u8 Str_839BDBC[] = DTR("くまxちえ", "KUMA x CHIE"); // TRN
+const u8 Str_839BDBC[] = DTR("くまxちえ",  "KUMA"); // Chie Kuma?
 
 const struct {
     const u8 * text;
