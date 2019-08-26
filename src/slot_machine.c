@@ -5619,25 +5619,25 @@ static void debug_sub_811B2E8(void)
 static const u8 Str_841B1C4[] = DTR("SETTEI", "SET");
 static const u8 Str_841B1CB[] = DTR("MAWASITA", "TURNED");
 static const u8 Str_841B1D4[] = DTR("MODOSI", "RETURN");
-static const u8 Str_841B1DB[] = _("NOMARE"); // TRN: Normal, 's rare, etc?
+static const u8 Str_841B1DB[] = DTR("NOMARE", "CONSUMED");
 static const u8 Str_841B1E2[] = DTR("MAE　7", "BEFORE 7");
 static const u8 Str_841B1E8[] = DTR("LR  HENKOU", "LR: CHANGE");
-static const u8 Str_841B1F3[] = _("START  JIDOUSU"); //  TRN
-static const u8 Str_841B202[] = DTR("SELECT  SETTEI", "SELECT: SET");
+static const u8 Str_841B1F3[] = DTR("START  JIDOUSU", "START: AUTO");
+static const u8 Str_841B202[] = DTR("SELECT  SETTEI", "SELECT: FORCE");
 // Irregular Romaji: 抽選 (ちゅうせん/chuusen)
-static const u8 Str_841B211[] = DTR("TYUHSEN", "LOTTERY");
+static const u8 Str_841B211[] = DTR("TYUHSEN", "DRAWINGS");
 static const u8 Str_841B219[] = _("CHERRY");
 static const u8 Str_841B220[] = _("REPLAY");
-static const u8 Str_841B227[] = DTR("HASUBO", "LOTAD"); // TRN
+static const u8 Str_841B227[] = DTR("HASUBO", "LOTAD");
 static const u8 Str_841B22E[] = DTR("RURIRI", "AZURILL");
 static const u8 Str_841B235[] = DTR("INAZU", "LIGHTNING");
 static const u8 Str_841B23B[] = _("REG");
 static const u8 Str_841B23F[] = _("BIG");
-static const u8 Str_841B243[] = _("BD");
+static const u8 Str_841B243[] = DTR("BD", "REEL TIME");
 static const u8 Str_841B246[] = _("R7");
 static const u8 Str_841B249[] = _("B7");
-static const u8 Str_841B24C[] = _("A  COIN");
-static const u8 Str_841B254[] = DTR("TYUHSEN", "LOTTERY");
+static const u8 Str_841B24C[] = DTR("A  COIN", "A: COIN");
+static const u8 Str_841B254[] = DTR("TYUHSEN", "DRAWINGS");
 static const u8 Str_841B25C[] = _("UD  100");
 static const u8 Str_841B264[] = _("LR  1000");
 static const u8 Str_841B26D[] = _("×");
@@ -5676,15 +5676,21 @@ void debug_sub_811B310(void)
     PRINT_NUMBER(eSlotMachine->unk68, 10, 3);
     PRINT_NUMBER(eSlotMachine->unk6C, 10, 5);
     PRINT_NUMBER(eSlotMachine->unk10, 10, 7);
-    PRINT_NUMBER(eSlotMachine->unk70, 20, 3);
-    PRINT_NUMBER(eSlotMachine->unk74, 20, 5);
-    PRINT_NUMBER(eSlotMachine->unk78, 20, 7);
-    PRINT_NUMBER(eSlotMachine->unk7C, 20, 9);
-    PRINT_NUMBER(eSlotMachine->unk80, 20, 11);
-    PRINT_NUMBER(eSlotMachine->unk84, 20, 13);
-    PRINT_NUMBER(eSlotMachine->unk88, 20, 15);
-    PRINT_NUMBER(eSlotMachine->unk8C, 20, 17);
 
+#if DEBUG_TRANSLATE
+#define OFFSET 24 // wider window
+#else
+#define OFFSET 20
+#endif
+    PRINT_NUMBER(eSlotMachine->unk70, OFFSET, 3);
+    PRINT_NUMBER(eSlotMachine->unk74, OFFSET, 5);
+    PRINT_NUMBER(eSlotMachine->unk78, OFFSET, 7);
+    PRINT_NUMBER(eSlotMachine->unk7C, OFFSET, 9);
+    PRINT_NUMBER(eSlotMachine->unk80, OFFSET, 11);
+    PRINT_NUMBER(eSlotMachine->unk84, OFFSET, 13);
+    PRINT_NUMBER(eSlotMachine->unk88, OFFSET, 15);
+    PRINT_NUMBER(eSlotMachine->unk8C, OFFSET, 17);
+#undef OFFSET
 #undef PRINT_NUMBER
 
     if (unk_debug_bss_1_0 != 0)
@@ -5779,7 +5785,12 @@ static void debug_sub_811B654(u8 taskId)
     switch (task->data[0])
     {
     case 0:
+#if DEBUG_TRANSLATE
+        Menu_DrawStdWindowFrame(0, 0, 28, 19); // wider window
+#else
         Menu_DrawStdWindowFrame(0, 0, 24, 19);
+#endif
+
         debug_sub_811B310();
         task->data[0]++;
         break;
