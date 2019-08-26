@@ -947,9 +947,11 @@ u8 debug_sub_810CFA4(void)
 
 u8 debug_sub_810D030(void)
 {
-    const u8 text1[] = _("メール{STR_VAR_1}　とうろく　かいじょ");
-    const u8 text2[] = _("デバッグメニューから　とうろくした\n"
-                         "メール　いがいは　けせません");
+    const u8 text1[] = DTR("メール{STR_VAR_1}　とうろく　かいじょ", "UNREGISTER MAIL{STR_VAR_1}");
+    const u8 text2[] = DTR("デバッグメニューから　とうろくした\n"
+                           "メール　いがいは　けせません",
+                           "You cannot delete REGISTERED MAIL\n"
+                           "from the DEBUG MENU");
     s8 input = Menu_ProcessInput();
 
     switch (input)
