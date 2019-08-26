@@ -1400,7 +1400,7 @@ void DebugMenu_ConvertBuildDate(const char *buildDateStr, u8 *out)
     // Prevents register allocation swap
     // Intended: r7 = out, r6 = gDebugBuildDate->numDigits
     // Observed: r6 = out, r7 = gDebugBuildDate->numDigits
-    asm("");
+    ++out; --out;
 
     gDebugBuildDate = gDebugBuildDateInfo;
     *out++ = CHAR_SPACE;
