@@ -16,6 +16,8 @@
 #include "contest_painting.h"
 #include "sound.h"
 
+// TRN: If anyone wants to translate the dummy options, they are welcome to :P
+
 static u16 sPicTest_Species;
 static u32 sPicTest_OTID;
 static u32 sPicTest_Personality;
@@ -1408,7 +1410,7 @@ static const u16 gUnknown_Debug_083C371E[][9] = {
 static const u8 gUnknown_Debug_083C3742[] = _("SP");
 static const u8 gUnknown_Debug_083C3745[] = DTR("ルーム　R110　PART1/カラクリ", "Room R110 Part 1/TRICK");
 static const u8 gUnknown_Debug_083C3759[] = DTR("ルーム　R110　PART2", "Room R110 Part 2");
-static const u8 gUnknown_Debug_083C3768[] = DTR("ルーム　ロード", "Room road");
+static const u8 gUnknown_Debug_083C3768[] = DTR("ルーム　ロード", "Room road"); // TRN
 static const u8 gUnknown_Debug_083C3770[] = DTR("ソノタ1", "Other 1");
 static const u8 gUnknown_Debug_083C3775[] = DTR("ソノタ2", "Other 2");
 
@@ -1569,7 +1571,7 @@ static const u8 sString_Route_101_to_109[] = DTR("ロード101ー109", "ROUTE 10
 static const u8 sString_Route_110_to_118[] = DTR("ロード110ー118", "ROUTE 110-118");
 static const u8 sString_Route_119_to_127[] = DTR("ロード119ー127", "ROUTE 119-127");
 static const u8 sString_Route_128_to_134[] = DTR("ロード128ー134", "ROUTE 128-134");
-static const u8 sString_Room_Town[] = DTR("ルーム　タウン", "Room Town");
+static const u8 sString_Room_Town[] = DTR("ルーム　タウン", "Room Town"); // TRN
 static const u8 sString_Room_City[] = DTR("ルーム　シティ", "Room City");
 static const u8 sString_Dungeon_nai[] = DTR("ダンジョンない", "DUNGEON");
 
