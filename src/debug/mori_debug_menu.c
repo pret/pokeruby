@@ -31,7 +31,7 @@ const u8 gUnknown_0839B22C[][3] =
 };
 
 const u8 gUnknown_0839B24A[] = _("ND");
-const u8 gUnknown_0839B24D[] = DTR("の　こどもは\n", "'s child =\n"); // TRN
+const u8 gUnknown_0839B24D[] = DTR("の　こどもは\n", "'s child is\n");
 const u8 gUnknown_0839B255[] = _(" ");
 const u8 gUnknown_0839B257[] = DTR("ながいなまえぽけもん", "LongName{PKMN}"); // "long name pokemon" (used as test name)
 const u8 Text_39B262[] = _("Search a child");
