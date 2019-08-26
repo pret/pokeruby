@@ -87,7 +87,7 @@ const struct TrainerCard sTestTrainerCard =
     .pokemonTrades = 0xFFFF,
     .money = 99999,
     .var_28 = {1, 2, 3, 4},
-    .playerName = _("てすと"),  // "test"
+    .playerName = DTR("てすと", "TEST"),
 };
 #endif
 
