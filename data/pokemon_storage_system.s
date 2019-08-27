@@ -73,7 +73,7 @@ gSpriteTemplate_83BBC88:: @ 83BBC88
 	spr_template 1, 56006, gOamData_83BBC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_809CB74
 
 .if DEBUG
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 gUnknown_Debug_0x83E6268:: @ 0x83E6268
 	.string "SET$"
 .else

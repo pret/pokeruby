@@ -33,6 +33,11 @@
 	.equiv FEMALE, 1
 
 	.ifdef ENGLISH
+
+	.ifdef DEBUG
+	.set DEBUG_TRANSLATE, 1
+	.endif
+
 	.equiv GAME_LANGUAGE, 2
 	.else
 	.ifdef GERMAN

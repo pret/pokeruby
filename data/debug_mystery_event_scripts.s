@@ -26,7 +26,7 @@ _0845DAFF:
 	me_runscript _0845DD0D
 	me_end
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 _0845DB16:
 	.string "Run and visit your DAD in the\n"
 	.string "PETALBURG CITY GYM.$"
@@ -70,7 +70,7 @@ _0845DBB5:
 	release
 	end
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 _0845DBBE:
 	.string "DAD: {PLAYER}! Nice to see you!\n"
 	.string "Here is a Letter for you, {PLAYER}.$"
@@ -85,7 +85,7 @@ _0845DC94:
 	.string "in your BAG is full.\p"
 	.string "Store some of your KEY ITEMS in\n"
 	.string "the PC and come back later.$"
-.else
+.else @ !DEBUG_TRANSLATE
 _0845DBBE:
 	.string "VATER: {PLAYER}! Schön, dich zu sehen!\n"
 	.string "Hier ist ein Brief für dich, {PLAYER}.$"
@@ -100,7 +100,7 @@ _0845DC94:
 	.string "deines BEUTELS ist voll.\p"
 	.string "Lagere einige deiner Basis-Items in\n"
 	.string "deinem PC und komm dann wieder.$"
-.endif
+.endif @ !DEBUG_TRANSLATE
 
 _845DB56End:
 	.size _845DB56, _845DB56End - _845DB56
@@ -132,7 +132,7 @@ _0845DD5B:
 	setmysteryeventstatus 0x3
 	end
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 _0845DD63:
 	.string "This GIFT can only be used\n"
 	.string "once.$"
@@ -183,7 +183,7 @@ _0845E34C:
 	setmysteryeventstatus 0x3
 	end
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 _0845E34F:
 	.string "A POKéMON was added to {PLAYER}'s\n"
 	.string "team.$"
@@ -273,7 +273,7 @@ _0845E637:
 	me_setstatus 0x2
 	me_end
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 
 _0845E64C:
 	.string "Visit your DAD in the PETALBURG\n"
@@ -305,7 +305,7 @@ _0845E683:
 _0845E6BF:
 	gotoram
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 _0845E6C0:
 	.string "DAD: Hi, {PLAYER}!\p"
 	.string "I have just received this rare\n"
@@ -345,7 +345,7 @@ _0845E755:
 	setmysteryeventstatus 0x3
 	end
 
-.ifdef ENGLISH
+.ifdef DEBUG_TRANSLATE
 _0845E75D:
 	.string "{STR_VAR_1} was handed over.$"
 _0845E771:
@@ -373,4 +373,4 @@ gUnknown_Debug_845E7B5End:
 	.size gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End - gUnknown_Debug_845E7B5
 gUnknown_Debug_845E797End::
 
-.endif
+.endif @ DEBUG

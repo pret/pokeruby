@@ -105,7 +105,8 @@ gUnknown_Debug_821F5AC::
 
 Str_821F624:: @ 0x821F624
 	.string "ーーーーーーーーーーーー$"
-.ifdef ENGLISH
+
+.ifdef DEBUG_TRANSLATE
 
 str_821F631:: @ 0x821F631
 	.string "JUNICHI$"
@@ -138,7 +139,7 @@ debug_unk_0b::
 @ 0x821F66D
 	.string "Connection error$"
 
-.else
+.else @ !DEBUG_TRANSLATE
 str_821F631:: @ 0x821F631
 	.string "ジュンイチ$"
 	.string "ダイゴロウ$"
@@ -170,7 +171,7 @@ debug_unk_0b::
 @ 0x821F66D
 	.string "せつぞくエラー$"
 
-.endif
+.endif @ !DEBUG_TRANSLATE
 
 @ 0x821f675
 	.byte 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00
@@ -188,7 +189,8 @@ gUnknown_Debug_821F680::
 
 gUnknown_Debug_821F798::
 	.byte 0xc0, 0x03, 0x00, 0x00, 0xd6, 0x03, 0x00, 0x00, 0x40, 0x04, 0x00, 0x00, 0x56, 0x04, 0x00, 0x00, 0xc0, 0x0b, 0x00, 0x00, 0xd6, 0x0b, 0x00, 0x00, 0x40, 0x0c, 0x00, 0x00, 0x56, 0x0c, 0x00, 0x00
-.ifdef ENGLISH
+
+.ifdef DEBUG_TRANSLATE
 Str_821F7B8:: @ 0x821F7B8
 	.string "HEIGHT$"
 
@@ -203,7 +205,11 @@ Str_821F7DA:: @ 0x821F7DA
 Str_821F7EA:: @ 0x821F7EA
 	.string "Would you like to load?$"
 
-.else
+@ 0x821F7F3
+gUnknown_Debug_821F7F3::
+	.string "Would you like to save?$"
+
+.else @ !DEBUG_TRANSLATE
 
 Str_821F7B8:: @ 0x821F7B8
 	.string "たかさ　$"
@@ -218,12 +224,13 @@ Str_821F7DA:: @ 0x821F7DA
 
 Str_821F7EA:: @ 0x821F7EA
 	.string "ロードしますか？$"
-.endif
 
 @ 0x821F7F3
 gUnknown_Debug_821F7F3::
 	.string "セーブしますか？$"
-.endif
+.endif @ DEBUG_TRANSLATE
+
+.endif @ DEBUG
 
 	.align 2
 gOamData_81F96E8:: @ 81F96E8
