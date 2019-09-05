@@ -7,7 +7,7 @@
 #define TAIL_SENTINEL 0xFF
 
 // gTasks is a queue of the active 16 tasks
-struct Task gTasks[ACTIVE_SENTINEL];
+struct Task gTasks[NUM_TASKS];
 
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask();
@@ -16,38 +16,38 @@ const u8 gError_NoTasksLeft[] = _(
     "TASK OVER\n"
     "タスクがオーバーしました");
 
-void ResetTasks()
+void ResetTasks(void)
 {
-    u8 taskId;
+    u8 i;
 
-    for (taskId = 0; taskId < ACTIVE_SENTINEL; taskId++)
+    for (i = 0; i < NUM_TASKS; i++)
     {
-        gTasks[taskId].isActive = FALSE;
-        gTasks[taskId].func = TaskDummy;
-        gTasks[taskId].prev = taskId;
-        gTasks[taskId].next = taskId + 1;
-        gTasks[taskId].priority = -1;
-        memset(gTasks[taskId].data, 0, sizeof(gTasks[taskId].data));
+        gTasks[i].isActive = FALSE;
+        gTasks[i].func = TaskDummy;
+        gTasks[i].prev = i;
+        gTasks[i].next = i + 1;
+        gTasks[i].priority = -1;
+        memset(gTasks[i].data, 0, sizeof(gTasks[i].data));
     }
 
     gTasks[0].prev = HEAD_SENTINEL;
-    gTasks[ACTIVE_SENTINEL - 1].next = TAIL_SENTINEL;
+    gTasks[NUM_TASKS - 1].next = TAIL_SENTINEL;
 }
 
 u8 CreateTask(TaskFunc func, u8 priority)
 {
-    u8 taskId;
+    u8 i;
 
-    for (taskId = 0; taskId < ACTIVE_SENTINEL; taskId++)
+    for (i = 0; i < NUM_TASKS; i++)
     {
-        if (!gTasks[taskId].isActive)
+        if (!gTasks[i].isActive)
         {
-            gTasks[taskId].func = func;
-            gTasks[taskId].priority = priority;
-            InsertTask(taskId);
-            memset(gTasks[taskId].data, 0, sizeof(gTasks[taskId].data));
-            gTasks[taskId].isActive = TRUE;
-            return taskId;
+            gTasks[i].func = func;
+            gTasks[i].priority = priority;
+            InsertTask(i);
+            memset(gTasks[i].data, 0, sizeof(gTasks[i].data));
+            gTasks[i].isActive = TRUE;
+            return i;
         }
     }
 
@@ -62,7 +62,7 @@ static void InsertTask(u8 newTaskId)
 {
     u8 taskId = FindFirstActiveTask();
 
-    if (taskId == ACTIVE_SENTINEL)
+    if (taskId == NUM_TASKS)
     {
         // The task system inserts from the top downwards starting from the end (0xFF) to 0. If FindFirstActiveTask returned the value equivalent to ACTIVE_SENTINEL, it means it is the only task because it searched the entire queue.
         gTasks[newTaskId].prev = HEAD_SENTINEL;
@@ -78,10 +78,8 @@ static void InsertTask(u8 newTaskId)
             // so we insert the new task before it.
             gTasks[newTaskId].prev = gTasks[taskId].prev;
             gTasks[newTaskId].next = taskId;
-
             if (gTasks[taskId].prev != HEAD_SENTINEL)
                 gTasks[gTasks[taskId].prev].next = newTaskId; // as long as we are not at the end, insert the newTask appropriately.
-
             gTasks[taskId].prev = newTaskId;
             return;
         }
@@ -127,7 +125,7 @@ void RunTasks(void)
 {
     u8 taskId = FindFirstActiveTask();
 
-    if (taskId != ACTIVE_SENTINEL)
+    if (taskId != NUM_TASKS)
     {
         do
         {
@@ -141,7 +139,7 @@ static u8 FindFirstActiveTask(void)
 {
     u8 taskId;
 
-    for (taskId = 0; taskId < ACTIVE_SENTINEL; taskId++)
+    for (taskId = 0; taskId < NUM_TASKS; taskId++)
         if (gTasks[taskId].isActive == TRUE && gTasks[taskId].prev == HEAD_SENTINEL)
             break;
 
@@ -184,7 +182,7 @@ bool8 FuncIsActiveTask(TaskFunc func)
 {
     u8 i;
 
-    for (i = 0; i < ACTIVE_SENTINEL; i++)
+    for (i = 0; i < NUM_TASKS; i++)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return TRUE;
 
@@ -195,11 +193,11 @@ u8 FindTaskIdByFunc(TaskFunc func)
 {
     s32 i;
 
-    for (i = 0; i < ACTIVE_SENTINEL; i++)
+    for (i = 0; i < NUM_TASKS; i++)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return -1;
+    return 0xFF;
 }
 
 u8 GetTaskCount(void)
@@ -207,7 +205,7 @@ u8 GetTaskCount(void)
     u8 i;
     u8 count = 0;
 
-    for (i = 0; i < ACTIVE_SENTINEL; i++)
+    for (i = 0; i < NUM_TASKS; i++)
         if (gTasks[i].isActive == TRUE)
             count++;
 

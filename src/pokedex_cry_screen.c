@@ -9,7 +9,7 @@
 #include "sound.h"
 
 extern struct SoundInfo gSoundInfo;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 struct Unk201C800 {
     s8 unk_0;
@@ -474,7 +474,7 @@ void sub_8119F88(u8 a0)
 
 void sub_811A050(u16 species)
 {
-    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
+    if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
     {
         if (!gPokedexCryScreenPtr->unk001B)
         {

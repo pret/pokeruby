@@ -41,7 +41,7 @@ extern const u8 gUnknown_08D2E014[];
 extern const u8 gUnknown_08D2E170[];
 extern const u16 gUnknown_08D2E150[];
 extern u8 gBattleMonForms[];
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern u16 gBattlerPartyIndexes[];
 
 extern u8 sub_8046234(s16 x, s16 y, u8 a3);
@@ -2327,11 +2327,11 @@ void sub_812D7E8(u8 taskId)
 
             ptr = EWRAM_19348;
             if (IsSpeciesNotUnown(ptr[1]))
-                gSprites[gBankSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
             else
-                gSprites[gBankSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7BEC;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7BEC;
 
-            StartSpriteAffineAnim(&gSprites[gBankSpriteIds[gBattleAnimAttacker]], 0);
+            StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], 0);
         }
 
         gTasks[taskId].data[0]++;
@@ -2371,7 +2371,7 @@ void sub_812D7E8(u8 taskId)
 
 void c3_80DFBE4(u8 taskId)
 {
-    gBattleAnimArgs[7] = gSprites[gBankSpriteIds[gBattleAnimAttacker]].invisible;
+    gBattleAnimArgs[7] = gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -3673,7 +3673,7 @@ static void sub_812FAF8(u8 taskId)
 
 void sub_812FC68(u8 taskId)
 {
-    gTasks[taskId].data[15] = gBankSpriteIds[gBattleAnimAttacker];
+    gTasks[taskId].data[15] = gBattlerSpriteIds[gBattleAnimAttacker];
     gTasks[taskId].data[14] = gBattleAnimArgs[0];
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[13] = gBattleAnimArgs[6];
@@ -4675,8 +4675,8 @@ void sub_81312E4(u8 taskId)
         refresh_graphics_maybe(gBattleAnimAttacker, 0, spriteId);
         if (IsContest())
         {
-            gSprites[gBankSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
-            StartSpriteAffineAnim(&gSprites[gBankSpriteIds[gBattleAnimAttacker]], 0);
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
+            StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], 0);
         }
 
         for (i = 0; i < 16; i++)
@@ -5801,7 +5801,7 @@ void AnimTask_SnatchPartnerMove(u8 taskId)
         gTasks[taskId].data[15]++;
         break;
     case 1:
-        spriteId = gBankSpriteIds[gBattleAnimAttacker];
+        spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
         gSprites[spriteId].pos2.x += gTasks[taskId].data[0];
         if (gTasks[taskId].data[0] > 0)
         {
@@ -5819,7 +5819,7 @@ void AnimTask_SnatchPartnerMove(u8 taskId)
         gTasks[taskId].data[15]++;
         break;
     case 3:
-        spriteId = gBankSpriteIds[gBattleAnimAttacker];
+        spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
         gSprites[spriteId].pos2.x += gTasks[taskId].data[0];
         if (gTasks[taskId].data[0] < 0)
         {
@@ -5834,7 +5834,7 @@ void AnimTask_SnatchPartnerMove(u8 taskId)
         break;
     case 4:
     default:
-        spriteId = gBankSpriteIds[gBattleAnimAttacker];
+        spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
         gSprites[spriteId].pos2.x = 0;
         DestroyAnimVisualTask(taskId);
         break;

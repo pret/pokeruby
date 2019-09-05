@@ -60,7 +60,7 @@ extern u8 gUnknown_03005E98;
 
 struct MusicPlayerInfo *gUnknown_03005D30;
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 void Task_InitSoundCheckMenu(u8);
 void sub_80BA384(u8);
@@ -1249,7 +1249,7 @@ void Task_InitCryTest(u8 taskId)
     REG_BG2CNT = 0xF01;
     REG_BG3CNT = 0x1D03;
     REG_DISPCNT = 0x1d40;
-    m4aMPlayFadeOutTemporarily(&gMPlay_BGM, 2);
+    m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM, 2);
     gTasks[taskId].func = Task_ProcessCryTestInput;
 }
 

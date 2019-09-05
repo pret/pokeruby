@@ -4,7 +4,7 @@
 struct DoorGraphics
 {
     u16 metatileNum;
-    u8 unk2;
+    u8 sound;
     const void *tiles;
     const void *palette;
 };

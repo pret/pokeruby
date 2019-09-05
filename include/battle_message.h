@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
+#define TEXT_BUFF_ARRAY_COUNT   16
+
 struct StringInfoBattle
 {
     u16 currentMove;
@@ -154,7 +156,7 @@ struct StringInfoBattle
 }
 
 void BufferStringBattle(u16 stringID);
-u32 StrCpyDecodeToDisplayedStringBattle(const u8* src);
-u32 StrCpyDecodeBattle(const u8* src, u8* dst);
+u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
+u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
 
 #endif // GUARD_BATTLE_MESSAGE_H

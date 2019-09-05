@@ -1160,8 +1160,8 @@ void sub_8118724(struct Sprite *sprite)
     sprite->pos2.y = -cos * sprite->data[4] >> 12;
     if (IsSEPlaying())
     {
-        m4aMPlayPanpotControl(&gMPlay_SE1, 0xffff, sprite->pos2.x);
-        m4aMPlayPanpotControl(&gMPlay_SE2, 0xffff, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xffff, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xffff, sprite->pos2.x);
     }
 }
 
@@ -2221,8 +2221,8 @@ void sub_8119BCC(struct Sprite *sprite)
         if (IsSEPlaying())
         {
             s8 u =  -((116 - sprite->pos1.x) / 2);
-            m4aMPlayPanpotControl(&gMPlay_SE1, 0xffff, u);
-            m4aMPlayPanpotControl(&gMPlay_SE2, 0xffff, u);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xffff, u);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xffff, u);
         }
     }
     else

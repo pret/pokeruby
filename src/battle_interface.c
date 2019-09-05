@@ -426,7 +426,7 @@ extern u8 gDisplayedStringBattle[];
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
-extern u8 gHealthboxIDs[];
+extern u8 gHealthboxSpriteIds[];
 
 extern u16 gBattleTypeFlags;
 
@@ -957,7 +957,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
         u8 spriteId2;
         u8 spriteId3;
 
-        spriteId1 = gHealthboxIDs[i];
+        spriteId1 = gHealthboxSpriteIds[i];
         spriteId2 = gSprites[spriteId1].oam.affineParam;
         spriteId3 = gSprites[spriteId1].data[5];
         gSprites[spriteId1].oam.priority = priority;
@@ -1006,7 +1006,7 @@ void sub_8043F44(u8 a)
             break;
         }
     }
-    sub_8043E50(gHealthboxIDs[a], x, y);
+    sub_8043E50(gHealthboxSpriteIds[a], x, y);
 }
 
 #if ENGLISH
@@ -1650,7 +1650,7 @@ void sub_804454C(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gSprites[gHealthboxIDs[i]].callback == SpriteCallbackDummy
+        if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
 #if DEBUG
          && (gUnknown_020297ED != 0 || GetBattlerSide(i) != 1)
 #else
@@ -1672,17 +1672,17 @@ void sub_804454C(void)
 
                 if (r6 == 1)
                 {
-                    spriteId = gSprites[gHealthboxIDs[i]].data[5];
+                    spriteId = gSprites[gHealthboxSpriteIds[i]].data[5];
 
                     CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
-                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), 0);
-                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), 1);
+                    sub_8044210(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), 0);
+                    sub_8044210(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), 1);
                 }
                 else
                 {
-                    draw_status_ailment_maybe(gHealthboxIDs[i]);
-                    sub_8045A5C(gHealthboxIDs[i], &gPlayerParty[gBattlerPartyIndexes[i]], 5);
-                    CpuCopy32(sub_8043CDC(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxIDs[i]].oam.tileNum * 32, 32);
+                    draw_status_ailment_maybe(gHealthboxSpriteIds[i]);
+                    sub_8045A5C(gHealthboxSpriteIds[i], &gPlayerParty[gBattlerPartyIndexes[i]], 5);
+                    CpuCopy32(sub_8043CDC(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * 32, 32);
                 }
             }
             else
@@ -1691,26 +1691,26 @@ void sub_804454C(void)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     {
-                        sub_8044338(gHealthboxIDs[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
+                        sub_8044338(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
                     }
                     else
                     {
-                        spriteId = gSprites[gHealthboxIDs[i]].data[5];
+                        spriteId = gSprites[gHealthboxSpriteIds[i]].data[5];
 
                         CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
-                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), 0);
-                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), 1);
+                        sub_8044210(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), 0);
+                        sub_8044210(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), 1);
                     }
                 }
                 else
                 {
-                    draw_status_ailment_maybe(gHealthboxIDs[i]);
-                    sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlerPartyIndexes[i]], 5);
+                    draw_status_ailment_maybe(gHealthboxSpriteIds[i]);
+                    sub_8045A5C(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]], 5);
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                        sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlerPartyIndexes[i]], 4);
+                        sub_8045A5C(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]], 4);
                 }
             }
-            gSprites[gHealthboxIDs[i]].data[7] ^= 1;
+            gSprites[gHealthboxSpriteIds[i]].data[7] ^= 1;
         }
     }
 }

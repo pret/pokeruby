@@ -27,7 +27,7 @@ static EWRAM_DATA u32 sUnknown_0203931C = 0;
 
 extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -983,7 +983,7 @@ static void sub_8142DF4(u8 taskID)
             if (IsCryPlayingOrClearCrySongs())
             {
                 StopCryAndClearCrySongs();
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
             }
             gTasks[taskID].func = sub_8142F78;
         }
@@ -993,7 +993,7 @@ static void sub_8142DF4(u8 taskID)
         if (IsCryPlayingOrClearCrySongs())
         {
             StopCryAndClearCrySongs();
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         }
         gTasks[taskID].func = sub_8142F78;
     }

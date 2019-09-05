@@ -716,7 +716,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             sub_8024CEC();
             PlayFanfare(MUS_FANFA1);
-            StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[3]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
             Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
@@ -733,7 +733,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (gUnknown_03004210.state == 0 && !IsSEPlaying())
             {
                 sub_8024CEC();
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[4]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
@@ -741,7 +741,7 @@ static void Task_EvolutionScene(u8 taskID)
         case 1:
             if (gUnknown_03004210.state == 0 && !IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[5]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
@@ -751,7 +751,7 @@ static void Task_EvolutionScene(u8 taskID)
                 break;
             if (!IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[6]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tData9 = 5;
                 gTasks[taskID].tdata10 = 9;
@@ -784,7 +784,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (gMain.newKeys & A_BUTTON)
             {
                 sub_8023AD8();
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
@@ -799,7 +799,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (gMain.newKeys & B_BUTTON)
             {
                 sub_8023AD8();
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
@@ -825,7 +825,7 @@ static void Task_EvolutionScene(u8 taskID)
                     u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (IsHMMove2(move))
                     {
-                        StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[307]);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
                         Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                         gTasks[taskID].tLearnMoveState = 11;
                     }
@@ -838,7 +838,7 @@ static void Task_EvolutionScene(u8 taskID)
                         gBattleTextBuff2[4] = EOS;
                         RemoveMonPPBonus(mon, var);
                         SetMonMoveSlot(mon, gMoveToLearn, var);
-                        StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[207]);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
                         Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                         gTasks[taskID].tLearnMoveState++;
                     }
@@ -848,7 +848,7 @@ static void Task_EvolutionScene(u8 taskID)
         case 7:
             if (gUnknown_03004210.state == 0 && !IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[7]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
@@ -856,20 +856,20 @@ static void Task_EvolutionScene(u8 taskID)
         case 8:
             if (gUnknown_03004210.state == 0 && !IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[208]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
                 Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tState = 19;
             }
             break;
         case 9:
-            StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[8]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
             Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tData9 = 10;
             gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
-            StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[9]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
             Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tState = 14;
             break;
@@ -1030,7 +1030,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         {
             sub_8024CEC();
             PlayFanfare(MUS_FANFA1);
-            StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[3]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
             Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
@@ -1047,7 +1047,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
                 sub_8024CEC();
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[4]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
@@ -1055,7 +1055,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 1:
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[5]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
@@ -1065,7 +1065,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 break;
             if (!IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[6]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tData9 = 5;
                 gTasks[taskID].tdata10 = 9;
@@ -1103,7 +1103,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             {
                 Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
@@ -1119,7 +1119,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             {
                 Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 PlaySE(SE_SELECT);
                 gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
@@ -1145,7 +1145,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                     u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (IsHMMove2(move))
                     {
-                        StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[307]);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
                         Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                         gTasks[taskID].tLearnMoveState = 11;
                     }
@@ -1158,7 +1158,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                         gBattleTextBuff2[4] = EOS;
                         RemoveMonPPBonus(mon, var);
                         SetMonMoveSlot(mon, gMoveToLearn, var);
-                        StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[207]);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
                         Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                         gTasks[taskID].tLearnMoveState++;
                     }
@@ -1168,7 +1168,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 7:
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[7]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
@@ -1176,20 +1176,20 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 8:
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
-                StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[208]);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tState = 15;
             }
             break;
         case 9:
-            StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[8]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
             Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gTasks[taskID].tData9 = 10;
             gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
-            StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[9]);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
             Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gTasks[taskID].tState = 13;
             break;

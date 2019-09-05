@@ -26,8 +26,8 @@ extern u8 gActiveBattler;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gCurrentMove;
 extern u8 gLastUsedAbility;
-extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 extern u8 gXXX_CritRelated;
 extern u16 gBattleWeather;
@@ -67,14 +67,14 @@ u8 CountAliveMons(u8 a1)
     case 1:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(gBankAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case 2:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(gBankTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;

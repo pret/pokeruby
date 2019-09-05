@@ -11,7 +11,7 @@
 #include "constants/songs.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 extern u8 gUnknown_0202F7D2;
@@ -1302,7 +1302,7 @@ static void sub_80DF3D8(struct Sprite *sprite)
 static void sub_80DF49C(struct Sprite *sprite)
 {
     sprite->invisible = 1;
-    sprite->data[5] = gBankSpriteIds[gBattleAnimAttacker];
+    sprite->data[5] = gBattlerSpriteIds[gBattleAnimAttacker];
     sprite->data[0] = 128;
     sprite->data[1] = 10;
     sprite->data[2] = gBattleAnimArgs[0];

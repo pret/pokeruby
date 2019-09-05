@@ -21,7 +21,7 @@ extern u8 gBankInMenu;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gActiveBattler;
-extern u8 gStringBank;
+extern u8 gPotentialItemEffectBattler;
 extern struct BattlePokemon gBattleMons[];
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 
@@ -75,7 +75,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
         holdEffect = ItemId_GetHoldEffect(heldItem);
     }
 
-    gStringBank = gBankInMenu;
+    gPotentialItemEffectBattler = gBankInMenu;
     if (gMain.inBattle)
     {
         gActiveBattler = gBankInMenu;
@@ -332,8 +332,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                         // I have to re-use this variable to match.
                                         r5 = gActiveBattler;
                                         gActiveBattler = sp34;
-                                        EmitGetAttributes(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
+                                        BtlController_EmitGetMonData(0, 0, 0);
+                                        MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
                                 }

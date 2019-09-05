@@ -8,11 +8,11 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u8 gBankAttacker;
+extern u8 gBattlerAttacker;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
 extern u16 gUnknown_03000730[];
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 
 void sub_80DF5A0(struct Sprite *sprite);
 void sub_80DF760(struct Sprite *sprite);
@@ -286,8 +286,8 @@ void sub_80DF78C(struct Sprite *sprite)
     sprite->data[4] = 0;
     sprite->data[5] = 1;
     sprite->data[6] = gBattleAnimArgs[0];
-    r5 = GetBattlerSpriteCoordAttr(gBankAttacker, 0);
-    r0 = GetBattlerSpriteCoordAttr(gBankAttacker, 1);
+    r5 = GetBattlerSpriteCoordAttr(gBattlerAttacker, 0);
+    r0 = GetBattlerSpriteCoordAttr(gBattlerAttacker, 1);
     if (r5 > r0)
         sprite->data[7] = r5 / 2;
     else

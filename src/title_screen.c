@@ -41,7 +41,7 @@
 #endif
 
 extern u8 gReservedSpritePaletteCount;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG1_X;
 extern const u8 gUnknown_08E9D8CC[];
@@ -851,7 +851,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
                 gBattle_BG1_X = 0;
             }
             UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
-            if ((gMPlay_BGM.status & 0xFFFF) == 0)
+            if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
             {
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);
                 SetMainCallback2(CB2_GoToCopyrightScreen);
