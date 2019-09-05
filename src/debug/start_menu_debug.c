@@ -607,27 +607,27 @@ u8 DebugMenu_8076EDC(void)
 }
 
 // A list of preset player names
-const u8 Str_839BD90[] = DTR("ジュンイチ", "JUNICHI");
-const u8 Str_839BD96[] = DTR("ダイゴロウ", "DAIGORO");
-const u8 Str_839BD9C[] = DTR("テツジ",     "TETSUJI");
-const u8 Str_839BDA0[] = DTR("バレンシア", "VALENCY"); // Valencia is too long
-const u8 Str_839BDA6[] = DTR("ハルコマチ", "MAY");     // May town?
-const u8 Str_839BDAC[] = _("RAYMOND");
-const u8 Str_839BDB4[] = _("TIFFANY");
-const u8 Str_839BDBC[] = DTR("くまxちえ",  "KUMA"); // Chie Kuma?
+const u8 gTestMenuStr_Junichi[] = DTR("ジュンイチ", "JUNICHI");
+const u8 gTestMenuStr_Daigoro[] = DTR("ダイゴロウ", "DAIGORO");
+const u8 gTestMenuStr_Tetsuji[] = DTR("テツジ",     "TETSUJI");
+const u8 gTestMenuStr_Valencia[] = DTR("バレンシア", "VALENCY"); // Valencia is too long
+const u8 gTestMenuStr_Harukomachi[] = DTR("ハルコマチ", "MAY");     // May town?
+const u8 gTestMenuStr_Raymond[] = _("RAYMOND");
+const u8 gTestMenuStr_Tiffany[] = _("TIFFANY");
+const u8 gTestMenuStr_KumaXChie[] = DTR("くまxちえ",  "KUMA"); // Chie Kuma?
 
 const struct {
     const u8 * text;
     u32 flags;
-} gUnknown_Debug_839BDC4[] = {
-    {Str_839BD90, 0x0},
-    {Str_839BD96, 0x0},
-    {Str_839BDA0, 0x1},
-    {Str_839BDA6, 0x1},
-    {Str_839BDAC, 0x80},
-    {Str_839BDB4, 0x81},
-    {Str_839BD9C, 0x0},
-    {Str_839BDBC, 0x1}
+} gTestMenu_FieldStartNames[] = {
+    {gTestMenuStr_Junichi, 0x0},
+    {gTestMenuStr_Daigoro, 0x0},
+    {gTestMenuStr_Tetsuji, 0x1},
+    {gTestMenuStr_Valencia, 0x1},
+    {gTestMenuStr_Harukomachi, 0x80},
+    {gTestMenuStr_Raymond, 0x81},
+    {gTestMenuStr_Tiffany, 0x0},
+    {gTestMenuStr_KumaXChie, 0x1}
 };
 
 void DebugMenu_8076EF4(void)
@@ -635,12 +635,12 @@ void DebugMenu_8076EF4(void)
     u8 i;
 
     Menu_DrawStdWindowFrame(0, 0, 11, 17);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_839BDC4), gUnknown_Debug_839BDC4);
-    for (i = 0; i < ARRAY_COUNT(gUnknown_Debug_839BDC4); i++)
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gTestMenu_FieldStartNames), gTestMenu_FieldStartNames);
+    for (i = 0; i < ARRAY_COUNT(gTestMenu_FieldStartNames); i++)
     {
-        sub_8071F60((gUnknown_Debug_839BDC4[i].flags & 1) == MALE ? CHAR_MALE : CHAR_FEMALE, 10, 2 * i + 1);
+        sub_8071F60((gTestMenu_FieldStartNames[i].flags & 1) == MALE ? CHAR_MALE : CHAR_FEMALE, 10, 2 * i + 1);
     }
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_839BDC4), 0, 9);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gTestMenu_FieldStartNames), 0, 9);
 }
 
 void DebugMenu_8076F60(u8 taskId)
@@ -659,9 +659,9 @@ void DebugMenu_8076F60(u8 taskId)
             break;
         default:
         {
-            u8 flags = gUnknown_Debug_839BDC4[cursorPos].flags;
+            u8 flags = gTestMenu_FieldStartNames[cursorPos].flags;
             gSaveBlock2.playerGender = flags & 1;
-            StringCopy(gSaveBlock2.playerName, gUnknown_Debug_839BDC4[cursorPos].text);
+            StringCopy(gSaveBlock2.playerName, gTestMenu_FieldStartNames[cursorPos].text);
             if ((flags & 0x80) == 0)
                 debug_sub_8057508(FALSE);
             else
