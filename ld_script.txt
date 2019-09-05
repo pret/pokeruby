@@ -592,6 +592,7 @@ SECTIONS {
         src/secret_base.o(.rodata*);
         src/tv.o(.rodata*);
         src/contest_link_80C2020.o(.rodata*);
+        src/script_pokemon_util_80C4BF0.o(.rodata*);
         src/pokemon_size_record.o(.rodata*);
         src/pc_screen_effect.o(.rodata*);
         src/pc_screen_effect.o(.data);
