@@ -1,8 +1,4 @@
-ifneq (,$(DEVKITARM))
 include $(DEVKITARM)/base_tools
-else
-PREFIX := $(CURDIR)/tools/binutils/bin/arm-none-eabi-
-endif
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -17,7 +13,7 @@ endif
 SHELL     := /bin/bash -o pipefail
 AS        := $(PREFIX)as
 CC1       := tools/agbcc/bin/agbcc$(EXE)
-CPP       := $(CC) -E -std=gnu99
+CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
 SHA1SUM   := sha1sum -c
@@ -34,16 +30,6 @@ MAPJSON   := tools/mapjson/mapjson$(EXE)
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym DEBUG_TRANSLATE=$(DEBUG_TRANSLATE) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -DDEBUG_TRANSLATE=$(DEBUG_TRANSLATE) -D DEBUG=$(DEBUG)
-
-CPPVERSION := $(shell $(CPP) --version 2>/dev/null || true)
-
-# Clang's cpp has some issues.
-ifneq (,$(filter $(CPPVERSION),clang llvm LLVM Clang))
-override CPP += -Wno-unicode
-CLANG_CPP := 1
-else
-CLANG_CPP :=
-endif
 
 #### Files ####
 
@@ -75,7 +61,6 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 %src/libs/m4a.o:          CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 %src/libs/libisagbprn.o:  CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 %src/libs/libisagbprn.o:  CC1FLAGS := -mthumb-interwork
-$(BUILD_DIR)/data/%.o: data/%.s
 
 
 #### Main Rules ####
@@ -101,10 +86,6 @@ ifeq ($(NODEP),)
   $(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include $(C_FILE:$(BUILD_DIR)/=))
   $(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
   $(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
-endif
-
-ifneq (,$(CLANG_CPP))
-  $(BUILD_DIR)/data/%.o: override CPP += -P
 endif
 
 MAKEFLAGS += --no-print-directory
@@ -168,7 +149,7 @@ $(ROM): %.gba: %.elf
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
-	$(CPP) -P -xc $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
+	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
@@ -178,9 +159,7 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
-	$(PREPROC) $< charmap.txt | $(CPP) - -I include | $(AS) $(ASFLAGS) -o $@
-
-
+	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
