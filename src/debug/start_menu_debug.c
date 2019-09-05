@@ -622,11 +622,11 @@ const struct {
 } gTestMenu_FieldStartNames[] = {
     {gTestMenuStr_Junichi, 0x0},
     {gTestMenuStr_Daigoro, 0x0},
-    {gTestMenuStr_Tetsuji, 0x1},
     {gTestMenuStr_Valencia, 0x1},
-    {gTestMenuStr_Harukomachi, 0x80},
-    {gTestMenuStr_Raymond, 0x81},
-    {gTestMenuStr_Tiffany, 0x0},
+    {gTestMenuStr_Harukomachi, 0x1},
+    {gTestMenuStr_Raymond, 0x80},
+    {gTestMenuStr_Tiffany, 0x81},
+    {gTestMenuStr_Tetsuji, 0x0},
     {gTestMenuStr_KumaXChie, 0x1}
 };
 
