@@ -2746,7 +2746,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                     {gBattlescriptCurrInstr++; return;}
 
 				gLastUsedItem = gBattleMons[gBattlerTarget].item;
-                USED_HELD_ITEM(bank) = gLastUsedItem;
+                *USED_HELD_ITEM(gBattlerTarget) = gLastUsedItem;
                 gBattleMons[gBattlerTarget].item = 0;
 
                 gActiveBattler = gBattlerAttacker;
@@ -2760,11 +2760,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
-<<<<<<< HEAD
-				*(u16 *)CHOICED_MOVE(gBankTarget) = 0;
-=======
-				CHOICED_MOVE(gBattlerTarget) = 0;
->>>>>>> master
+				*CHOICED_MOVE(gBattlerTarget) = 0;
             }
             break;
         case 32: //escape prevention
@@ -2839,11 +2835,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_KnockedOff;
 
-<<<<<<< HEAD
-                *(u16 *)CHOICED_MOVE(gEffectBank) = 0;
-=======
-                CHOICED_MOVE(gEffectBattler) = 0;
->>>>>>> master
+                *CHOICED_MOVE(gEffectBattler) = 0;
             }
             break;
         case 59: //overheat
@@ -5916,7 +5908,7 @@ _08020B46:\n\
 _08020B50: .4byte gBattlescriptCurrInstr\n\
         .syntax divided\n");
 }
-#endif
+#endif // NONMATCHING
 
 static void MoveValuesCleanUp(void)
 {
@@ -9770,7 +9762,7 @@ _08024C48: .4byte gBattlescriptCurrInstr\n\
         .syntax divided");
 }
 
-#endif
+#endif // NONMATCHING
 
 static void atk6D_resetsentmonsvalue(void)
 {
