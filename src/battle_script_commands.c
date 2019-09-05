@@ -13372,343 +13372,81 @@ static void atkD1_trysethelpinghand(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-#ifdef NONMATCHING
 static void atkD2_tryswapitems(void)
 {
-    if ((GetBattlerSide(gBattlerAttacker) != 1 || gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER) || gTrainerBattleOpponent == SECRET_BASE_OPPONENT))
-    {
-<<<<<<< HEAD
-        UNUSED u8 side = GetBattlerSide(gBankAttacker);
-=======
-        u8 side = GetBattlerSide(gBattlerAttacker);
->>>>>>> master
-        if (gBattleTypeFlags)
-            ; // TODO: finish this
+    // opponent can't swap items with player in regular battles
+    if ((GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
+         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                  | BATTLE_TYPE_EREADER_TRAINER
+                                  | BATTLE_TYPE_BATTLE_TOWER))
+         && gTrainerBattleOpponent != SECRET_BASE_OPPONENT)) {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
+    else {
+        u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
 
-    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-}
+        // you can't swap items if they were knocked off in regular battles
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                  | BATTLE_TYPE_EREADER_TRAINER
+                                  | BATTLE_TYPE_BATTLE_TOWER))
+            && gTrainerBattleOpponent != SECRET_BASE_OPPONENT
+            && (gWishFutureKnock.knockedOffPokes[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
+            )) {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        }
+            // can't swap if two pokemon don't have an item
+            // or if either of them is an enigma berry or a mail
+        else if ((gBattleMons[gBattlerAttacker].item == 0 && gBattleMons[gBattlerTarget].item == 0)
+                 || gBattleMons[gBattlerAttacker].item == ITEM_ENIGMA_BERRY
+                 || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY
+                 || IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
+                 || IS_ITEM_MAIL(gBattleMons[gBattlerTarget].item)) {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        }
+            // check if ability prevents swapping
+        else if (gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD) {
+            gBattlescriptCurrInstr = BattleScript_NoItemSteal;
+            gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+            RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
+        }
+            // took a while, but all checks passed and items can be safely swapped
+        else {
+            u16 oldItemAtk, *newItemAtk;
 
-#else
-NAKED
-static void atkD2_tryswapitems(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r0, _0802A30C @ =gBattlerAttacker\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0802A24C\n\
-    ldr r0, _0802A310 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    ldr r0, _0802A314 @ =0x00000902\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0802A24C\n\
-    ldr r0, _0802A318 @ =gTrainerBattleOpponent\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 3\n\
-    cmp r1, r0\n\
-    bne _0802A2EE\n\
-_0802A24C:\n\
-    ldr r4, _0802A30C @ =gBattlerAttacker\n\
-    ldrb r0, [r4]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    ldr r0, _0802A310 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    ldr r0, _0802A314 @ =0x00000902\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0802A290\n\
-    ldr r0, _0802A318 @ =gTrainerBattleOpponent\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 3\n\
-    cmp r1, r0\n\
-    beq _0802A290\n\
-    ldr r0, _0802A31C @ =gWishFutureKnock\n\
-    adds r0, 0x29\n\
-    adds r0, r2, r0\n\
-    ldrb r1, [r0]\n\
-    ldr r3, _0802A320 @ =gBitTable\n\
-    ldr r2, _0802A324 @ =gBattlerPartyIndexes\n\
-    ldrb r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    ldr r0, [r0]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _0802A2EE\n\
-_0802A290:\n\
-    ldr r0, _0802A328 @ =gBattleMons\n\
-    mov r9, r0\n\
-    ldr r1, _0802A30C @ =gBattlerAttacker\n\
-    ldrb r4, [r1]\n\
-    movs r2, 0x58\n\
-    mov r8, r2\n\
-    mov r0, r8\n\
-    muls r0, r4\n\
-    mov r3, r9\n\
-    adds r5, r0, r3\n\
-    ldrh r3, [r5, 0x2E]\n\
-    adds r1, r3, 0\n\
-    cmp r1, 0\n\
-    bne _0802A2BE\n\
-    ldr r0, _0802A32C @ =gBattlerTarget\n\
-    ldrb r0, [r0]\n\
-    mov r2, r8\n\
-    muls r2, r0\n\
-    adds r0, r2, 0\n\
-    add r0, r9\n\
-    ldrh r0, [r0, 0x2E]\n\
-    cmp r0, 0\n\
-    beq _0802A2EE\n\
-_0802A2BE:\n\
-    cmp r1, 0xAF\n\
-    beq _0802A2EE\n\
-    ldr r7, _0802A32C @ =gBattlerTarget\n\
-    ldrb r0, [r7]\n\
-    mov r1, r8\n\
-    muls r1, r0\n\
-    adds r0, r1, 0\n\
-    mov r1, r9\n\
-    adds r2, r0, r1\n\
-    ldrh r1, [r2, 0x2E]\n\
-    cmp r1, 0xAF\n\
-    beq _0802A2EE\n\
-    adds r0, r3, 0\n\
-    subs r0, 0x79\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xB\n\
-    bls _0802A2EE\n\
-    adds r0, r1, 0\n\
-    subs r0, 0x79\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xB\n\
-    bhi _0802A334\n\
-_0802A2EE:\n\
-    ldr r3, _0802A330 @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    str r1, [r3]\n\
-    b _0802A49A\n\
-    .align 2, 0\n\
-_0802A30C: .4byte gBattlerAttacker\n\
-_0802A310: .4byte gBattleTypeFlags\n\
-_0802A314: .4byte 0x00000902\n\
-_0802A318: .4byte gTrainerBattleOpponent\n\
-_0802A31C: .4byte gWishFutureKnock\n\
-_0802A320: .4byte gBitTable\n\
-_0802A324: .4byte gBattlerPartyIndexes\n\
-_0802A328: .4byte gBattleMons\n\
-_0802A32C: .4byte gBattlerTarget\n\
-_0802A330: .4byte gBattlescriptCurrInstr\n\
-_0802A334:\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x20\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x3C\n\
-    bne _0802A36C\n\
-    ldr r1, _0802A360 @ =gBattlescriptCurrInstr\n\
-    ldr r0, _0802A364 @ =BattleScript_NoItemSteal\n\
-    str r0, [r1]\n\
-    ldr r1, _0802A368 @ =gLastUsedAbility\n\
-    ldrb r0, [r7]\n\
-    mov r2, r8\n\
-    muls r2, r0\n\
-    adds r0, r2, 0\n\
-    add r0, r9\n\
-    adds r0, 0x20\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r7]\n\
-    ldrb r1, [r1]\n\
-    bl RecordAbilityBattle\n\
-    b _0802A49A\n\
-    .align 2, 0\n\
-_0802A360: .4byte gBattlescriptCurrInstr\n\
-_0802A364: .4byte BattleScript_NoItemSteal\n\
-_0802A368: .4byte gLastUsedAbility\n\
-_0802A36C:\n\
-    lsls r0, r4, 1\n\
-    ldr r4, _0802A458 @ =gSharedMem + 0x160F0\n\
-    adds r6, r0, r4\n\
-    ldrh r5, [r5, 0x2E]\n\
-    mov r10, r5\n\
-    strh r1, [r6]\n\
-    ldr r3, _0802A45C @ =gBattlerAttacker\n\
-    ldrb r0, [r3]\n\
-    mov r1, r8\n\
-    muls r1, r0\n\
-    adds r0, r1, 0\n\
-    add r0, r9\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0x2E]\n\
-    ldrb r0, [r7]\n\
-    mov r2, r8\n\
-    muls r2, r0\n\
-    adds r0, r2, 0\n\
-    add r0, r9\n\
-    mov r3, r10\n\
-    strh r3, [r0, 0x2E]\n\
-    ldr r5, _0802A460 @ =gActiveBattler\n\
-    ldr r1, _0802A45C @ =gBattlerAttacker\n\
-    ldrb r0, [r1]\n\
-    strb r0, [r5]\n\
-    str r6, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0x2\n\
-    movs r2, 0\n\
-    movs r3, 0x2\n\
-    bl BtlController_EmitSetMonData\n\
-    ldr r2, _0802A45C @ =gBattlerAttacker\n\
-    ldrb r0, [r2]\n\
-    bl MarkBattlerForControllerExec\n\
-    ldrb r0, [r7]\n\
-    strb r0, [r5]\n\
-    ldrb r0, [r7]\n\
-    mov r3, r8\n\
-    muls r3, r0\n\
-    adds r0, r3, 0\n\
-    mov r1, r9\n\
-    adds r1, 0x2E\n\
-    adds r0, r1\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0x2\n\
-    movs r2, 0\n\
-    movs r3, 0x2\n\
-    bl BtlController_EmitSetMonData\n\
-    ldrb r0, [r7]\n\
-    bl MarkBattlerForControllerExec\n\
-    ldr r0, _0802A464 @ =0xfffe9f10\n\
-    adds r4, r0\n\
-    ldrb r0, [r7]\n\
-    lsls r0, 1\n\
-    ldr r2, _0802A468 @ =0x000160e8\n\
-    adds r0, r2\n\
-    adds r0, r4\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldrb r0, [r7]\n\
-    lsls r0, 1\n\
-    ldr r1, _0802A46C @ =0x000160e9\n\
-    adds r0, r1\n\
-    adds r0, r4\n\
-    movs r3, 0\n\
-    strb r3, [r0]\n\
-    ldr r3, _0802A45C @ =gBattlerAttacker\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    adds r0, r4\n\
-    movs r2, 0\n\
-    strb r2, [r0]\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    adds r0, r4\n\
-    strb r2, [r0]\n\
-    ldr r1, _0802A470 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x5\n\
-    str r0, [r1]\n\
-    ldr r1, _0802A474 @ =gBattleTextBuff1\n\
-    movs r3, 0xFD\n\
-    strb r3, [r1]\n\
-    movs r2, 0xA\n\
-    strb r2, [r1, 0x1]\n\
-    ldrh r0, [r6]\n\
-    strb r0, [r1, 0x2]\n\
-    ldrh r0, [r6]\n\
-    lsrs r0, 8\n\
-    strb r0, [r1, 0x3]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r1, 0x4]\n\
-    ldr r1, _0802A478 @ =gBattleTextBuff2\n\
-    strb r3, [r1]\n\
-    strb r2, [r1, 0x1]\n\
-    mov r3, r10\n\
-    strb r3, [r1, 0x2]\n\
-    mov r2, r10\n\
-    lsrs r0, r2, 8\n\
-    strb r0, [r1, 0x3]\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    strb r0, [r1, 0x4]\n\
-    cmp r2, 0\n\
-    beq _0802A480\n\
-    ldrh r0, [r6]\n\
-    cmp r0, 0\n\
-    beq _0802A494\n\
-    ldr r1, _0802A47C @ =gBattleCommunication\n\
-    movs r0, 0x2\n\
-    b _0802A498\n\
-    .align 2, 0\n\
-_0802A458: .4byte gSharedMem + 0x160F0\n\
-_0802A45C: .4byte gBattlerAttacker\n\
-_0802A460: .4byte gActiveBattler\n\
-_0802A464: .4byte 0xfffe9f10\n\
-_0802A468: .4byte 0x000160e8\n\
-_0802A46C: .4byte 0x000160e9\n\
-_0802A470: .4byte gBattlescriptCurrInstr\n\
-_0802A474: .4byte gBattleTextBuff1\n\
-_0802A478: .4byte gBattleTextBuff2\n\
-_0802A47C: .4byte gBattleCommunication\n\
-_0802A480:\n\
-    ldrh r0, [r6]\n\
-    cmp r0, 0\n\
-    beq _0802A494\n\
-    ldr r0, _0802A490 @ =gBattleCommunication\n\
-    movs r3, 0\n\
-    strb r3, [r0, 0x5]\n\
-    b _0802A49A\n\
-    .align 2, 0\n\
-_0802A490: .4byte gBattleCommunication\n\
-_0802A494:\n\
-    ldr r1, _0802A4AC @ =gBattleCommunication\n\
-    movs r0, 0x1\n\
-_0802A498:\n\
-    strb r0, [r1, 0x5]\n\
-_0802A49A:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0802A4AC: .4byte gBattleCommunication\n\
-        .syntax divided");
+            newItemAtk = (u16 *)(ewram160F0 + 2 * gBattlerAttacker);
+            oldItemAtk = gBattleMons[gBattlerAttacker].item;
+            *newItemAtk = gBattleMons[gBattlerTarget].item;
+
+            gBattleMons[gBattlerAttacker].item = 0;
+            gBattleMons[gBattlerTarget].item = oldItemAtk;
+
+            gActiveBattler = gBattlerAttacker;
+            BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, newItemAtk);
+            MarkBattlerForControllerExec(gBattlerAttacker);
+
+            gActiveBattler = gBattlerTarget;
+            BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerTarget].item);
+            MarkBattlerForControllerExec(gBattlerTarget);
+
+            ewram160E8arr2(0, gBattlerTarget) = 0;
+            ewram160E8arr2(1, gBattlerTarget) = 0;
+            ewram160E8arr2(0, gBattlerAttacker) = 0;
+            ewram160E8arr2(1, gBattlerAttacker) = 0;
+
+            gBattlescriptCurrInstr += 5;
+
+            PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
+            PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
+
+            if (oldItemAtk != 0 && *newItemAtk != 0)
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2; // attacker's item -> <- target's item
+            else if (oldItemAtk == 0 && *newItemAtk != 0)
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0; // nothing -> <- target's item
+            else
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1; // attacker's item -> <- nothing
+        }
+    }
 }
-#endif // NONMATCHING
 
 static void atkD3_trycopyability(void) //role play
 {
