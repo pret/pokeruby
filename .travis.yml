@@ -30,7 +30,7 @@ matrix:
         - make -j2 sapphire
         - make -j2 sapphire_rev1
         - make -j2 sapphire_rev2
-        - make -j2 ruby
+        - make -j2 modern
     - os: linux
       env: _="Build German"
       before_script:
