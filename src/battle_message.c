@@ -26,7 +26,7 @@
 #endif
 
 // This is four lists of moves which use a different attack string in Japanese
-// to the default. See the documentation for sub_8121D74 for more detail.
+// to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
 const u16 gUnknown_084016BC[] =
 {
     MOVE_SWORDS_DANCE,
@@ -156,10 +156,10 @@ extern const u8* const gBattleStringsTable[BATTLESTRINGS_NO];
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gActiveBattler;
-extern u8 gBankAttacker;
-extern u8 gBankTarget;
-extern u8 gStringBank;
-extern u8 gEffectBank;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
+extern u8 gPotentialItemEffectBattler;
+extern u8 gEffectBattler;
 extern u8 gBattleTextBuff1[];
 extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
@@ -193,9 +193,9 @@ extern const struct StatusFlagString gUnknown_081FA6D4[7]; // status flag/text
 extern struct StringInfoBattle* gSelectedOrderFromParty;
 #define gStringInfo gSelectedOrderFromParty
 
-void sub_8121D1C(u8* textBuff);
-void sub_8121D74(u8* textBuff);
-void StrCpyDecodeBattleTextBuff(u8* src, u8* dst);
+void ChooseMoveUsedParticle(u8* textBuff);
+void ChooseTypeOfMoveUsedString(u8* textBuff);
+void ExpandBattleTextBuffPlaceholders(u8* src, u8* dst);
 
 u8 GetBattlerSide(u8 bank);
 s32 sub_803FC34(u16);
@@ -220,7 +220,7 @@ void BufferStringBattle(u16 stringID)
     gBattleStruct->scriptingActive = gStringInfo->scrActive;
     gBattleStruct->unk1605E = gStringInfo->unk1605E;
     gBattleStruct->hpScale = gStringInfo->hpScale;
-    gStringBank = gStringInfo->StringBank;
+    gPotentialItemEffectBattler = gStringInfo->StringBank;
     gBattleStruct->stringMoveType = gStringInfo->moveType;
     for (i = 0; i < 4; i++)
     {
@@ -365,12 +365,12 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case 4: // pokemon used a move msg
-        sub_8121D1C(gBattleTextBuff1);
+        ChooseMoveUsedParticle(gBattleTextBuff1);
         if (gStringInfo->currentMove > 0x162)
             StringCopy(gBattleTextBuff2, gUnknown_08401674[gBattleStruct->stringMoveType]);
         else
             StringCopy(gBattleTextBuff2, gMoveNames[gStringInfo->currentMove]);
-        sub_8121D74(gBattleTextBuff2);
+        ChooseTypeOfMoveUsedString(gBattleTextBuff2);
         stringPtr = BattleText_OpponentUsedMove;
         break;
     case 5: // battle end
@@ -440,15 +440,15 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     }
-    StrCpyDecodeToDisplayedStringBattle(stringPtr);
+    BattleStringExpandPlaceholdersToDisplayedString(stringPtr);
 }
 
-u32 StrCpyDecodeToDisplayedStringBattle(const u8* src)
+u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src)
 {
-    StrCpyDecodeBattle(src, gDisplayedStringBattle);
+    BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
 }
 
-const u8* AppendStatusString(u8* src)
+const u8* TryGetStatusString(u8* src)
 {
     u32 i;
     u8 status[8];
@@ -529,7 +529,7 @@ extern u8 *de_sub_8041024(s32, u32);
     }
 #endif
 
-u32 StrCpyDecodeBattle(const u8* src, u8* dst)
+u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
 {
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
     const u8* toCpy = NULL;
@@ -546,12 +546,12 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
             case 0:
                 if (gBattleTextBuff1[0] == 0xFD)
                 {
-                    StrCpyDecodeBattleTextBuff(gBattleTextBuff1, gStringVar1);
+                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gStringVar1);
                     toCpy = gStringVar1;
                 }
                 else
                 {
-                    toCpy = AppendStatusString(gBattleTextBuff1);
+                    toCpy = TryGetStatusString(gBattleTextBuff1);
                     if (toCpy == 0)
                         toCpy = gBattleTextBuff1;
                 }
@@ -559,7 +559,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
             case 1:
                 if (gBattleTextBuff2[0] == 0xFD)
                 {
-                    StrCpyDecodeBattleTextBuff(gBattleTextBuff2, gStringVar2);
+                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff2, gStringVar2);
                     toCpy = gStringVar2;
                 }
                 else
@@ -568,7 +568,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
             case 42:
                 if (gBattleTextBuff3[0] == 0xFD)
                 {
-                    StrCpyDecodeBattleTextBuff(gBattleTextBuff3, gStringVar3);
+                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff3, gStringVar3);
                     toCpy = gStringVar3;
                 }
                 else
@@ -595,45 +595,45 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = text;
                 break;
             case 6: // link first player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18]], MON_DATA_NICKNAME, text);
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 7: // link first opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18 ^ 1]], MON_DATA_NICKNAME, text);
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 1]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 8: // link second player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18 ^ 2]], MON_DATA_NICKNAME, text);
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 2]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 9: // link second opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18 ^ 3]], MON_DATA_NICKNAME, text);
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 3]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 10: // attacker name with prefix, only bank 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBankAttacker, gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBankAttacker) & 1)])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker, gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) & 1)])
                 break;
             case 11: // attacker partner name, only bank 0/1
-                if (GetBattlerSide(gBankAttacker) == 0)
-                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBankAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
+                if (GetBattlerSide(gBattlerAttacker) == 0)
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
                 else
-                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBankAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
+                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
 
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 12: // attacker name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBankAttacker, gBattlerPartyIndexes[gBankAttacker])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker])
                 break;
             case 13: // target name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBankTarget, gBattlerPartyIndexes[gBankTarget])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
                 break;
             case 14: // effect bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlerPartyIndexes[gEffectBank])
+                HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
                 break;
             case 15: // active bank name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
@@ -658,9 +658,9 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 {
                     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 == gStringBank)
+                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id == gPotentialItemEffectBattler)
                         {
-                            StringCopy(text, gEnigmaBerries[gStringBank].name);
+                            StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
 #ifdef ENGLISH
                             StringAppend(text, BattleText_Berry);
 #else
@@ -687,16 +687,16 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gLastUsedAbility];
                 break;
             case 21: // attacker ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBankAttacker]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gBattlerAttacker]];
                 break;
             case 22: // target ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBankTarget]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gBattlerTarget]];
                 break;
             case 23: // scripting active ability
                 toCpy = gAbilityNames[gAbilitiesPerBank[gBattleStruct->scriptingActive]];
                 break;
             case 24: // effect bank ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gEffectBank]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gEffectBattler]];
                 break;
             case 25: // trainer class name
 #ifdef ENGLISH
@@ -744,13 +744,13 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gLinkPlayers[multiplayerID].name;
                 break;
             case 28: // link partner name?
-                toCpy = gLinkPlayers[sub_803FC34(2 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[sub_803FC34(2 ^ gLinkPlayers[multiplayerID].id)].name;
                 break;
             case 29: // link opponent 1 name?
-                toCpy = gLinkPlayers[sub_803FC34(1 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[sub_803FC34(1 ^ gLinkPlayers[multiplayerID].id)].name;
                 break;
             case 30: // link opponent 2 name?
-                toCpy = gLinkPlayers[sub_803FC34(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[sub_803FC34(3 ^ gLinkPlayers[multiplayerID].id)].name;
                 break;
             case 31: // link scripting active name
                 toCpy = gLinkPlayers[sub_803FC34(gBattleStruct->scriptingActive)].name;
@@ -771,37 +771,37 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                     toCpy = BattleText_Someone;
                 break;
             case 38:
-                if (GetBattlerSide(gBankAttacker) == 0)
+                if (GetBattlerSide(gBattlerAttacker) == 0)
                     toCpy = BattleText_Ally2;
                 else
                     toCpy = BattleText_Foe3;
                 break;
             case 39:
-                if (GetBattlerSide(gBankTarget) == 0)
+                if (GetBattlerSide(gBattlerTarget) == 0)
                     toCpy = BattleText_Ally2;
                 else
                     toCpy = BattleText_Foe3;
                 break;
             case 36:
-                if (GetBattlerSide(gBankAttacker) == 0)
+                if (GetBattlerSide(gBattlerAttacker) == 0)
                     toCpy = BattleText_Ally;
                 else
                     toCpy = BattleText_Foe2;
                 break;
             case 37:
-                if (GetBattlerSide(gBankTarget) == 0)
+                if (GetBattlerSide(gBattlerTarget) == 0)
                     toCpy = BattleText_Ally;
                 else
                     toCpy = BattleText_Foe2;
                 break;
             case 40:
-                if (GetBattlerSide(gBankAttacker) == 0)
+                if (GetBattlerSide(gBattlerAttacker) == 0)
                     toCpy = BattleText_Ally3;
                 else
                     toCpy = BattleText_Foe4;
                 break;
             case 41:
-                if (GetBattlerSide(gBankTarget) == 0)
+                if (GetBattlerSide(gBattlerTarget) == 0)
                     toCpy = BattleText_Ally3;
                 else
                     toCpy = BattleText_Foe4;
@@ -837,7 +837,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
 #define ByteRead16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define ByteRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 
-void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
+void ExpandBattleTextBuffPlaceholders(u8* src, u8* dst)
 {
     u32 srcID = 1;
     u32 value = 0;
@@ -949,9 +949,9 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
                 {
                     if (hword == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 == gStringBank)
+                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id == gPotentialItemEffectBattler)
                         {
-                            StringCopy(dst, gEnigmaBerries[gStringBank].name);
+                            StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
 #ifdef ENGLISH
                             StringAppend(dst, BattleText_Berry);
 #else
@@ -975,9 +975,9 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
 
 // Loads one of two text strings into the provided buffer. This is functionally
 // unused, since the value loaded into the buffer is not read; it loaded one of
-// two particles (either "は" or "の") which works in tandem with sub_8121D74
+// two particles (either "は" or "の") which works in tandem with ChooseTypeOfMoveUsedString
 // below to effect changes in the meaning of the line.
-void sub_8121D1C(u8* textBuff)
+void ChooseMoveUsedParticle(u8* textBuff)
 {
     s32 counter = 0;
     u32 i = 0;
@@ -1017,7 +1017,7 @@ void sub_8121D1C(u8* textBuff)
 // 
 // BattleText_Exclamation5 was " こうげき！" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
-void sub_8121D74(u8* dst)
+void ChooseTypeOfMoveUsedString(u8* dst)
 {
     s32 counter = 0;
     s32 i = 0;

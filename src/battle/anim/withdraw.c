@@ -8,7 +8,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 
 static void sub_80CF514(u8 taskId);
 
@@ -17,13 +17,13 @@ static void sub_80CF514(u8 taskId);
 
 void sub_80CF4D8(u8 taskId)
 {
-    PrepareBattlerSpriteForRotScale(gBankSpriteIds[gBattleAnimAttacker], 0);
+    PrepareBattlerSpriteForRotScale(gBattlerSpriteIds[gBattleAnimAttacker], 0);
     gTasks[taskId].func = sub_80CF514;
 }
 
 void sub_80CF514(u8 taskId)
 {
-    u8 a = gBankSpriteIds[gBattleAnimAttacker];
+    u8 a = gBattlerSpriteIds[gBattleAnimAttacker];
     s16 b;
     if (GetBattlerSide(gBattleAnimAttacker) == 0)
     {

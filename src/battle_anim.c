@@ -1283,9 +1283,9 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 };
 
 extern u16 gBattlerPartyIndexes[4];
-extern u8 gBankSpriteIds[];
-extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBattlerSpriteIds[];
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
 
 // sBattleAnimScriptPtr is a pointer to the next set of battle script commands.
 EWRAM_DATA const u8 *sBattleAnimScriptPtr = NULL;
@@ -1313,9 +1313,9 @@ u16 gSoundAnimFramesToWait;
 s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 u16 gAnimSpriteIndexArray[ANIM_SPRITE_INDEX_COUNT];
 
-extern struct MusicPlayerInfo gMPlay_BGM;
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
 extern const u16 gSingingMoves[];
 extern const u8 *const gBattleAnims_Moves[];
@@ -1464,8 +1464,8 @@ void ClearBattleAnimationVars(void)
 
 void DoMoveAnim(u16 move)
 {
-    gBattleAnimAttacker = gBankAttacker;
-    gBattleAnimTarget = gBankTarget;
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gBattlerTarget;
     LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 
@@ -1516,7 +1516,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
             if (move == gSingingMoves[i])
             {
                 // Lower the volume for the short song that gets played.
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
                 break;
             }
         }
@@ -1772,8 +1772,8 @@ static void ScriptCmd_end(void)
         }
         else
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
     }
 
@@ -1792,7 +1792,7 @@ static void ScriptCmd_end(void)
 
     if (!continuousAnim) // may have been used for debug?
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         if (IsContest() == 0)
         {
             UpdateBattlerSpritePriorities();
@@ -1844,7 +1844,7 @@ static void ScriptCmd_monbg(void)
             toBG_2 = 1;
 
         MoveBattlerSpriteToBG(bank, toBG_2);
-        spriteId = gBankSpriteIds[bank];
+        spriteId = gBattlerSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = spriteId;
         gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
@@ -1875,7 +1875,7 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = 1;
         MoveBattlerSpriteToBG(bank, toBG_2);
-        spriteId = gBankSpriteIds[bank];
+        spriteId = gBattlerSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = spriteId;
         gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
@@ -1912,7 +1912,7 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!(EWRAM_17800[bank].unk0 & 1) || !gSprites[gBankSpriteIds[bank]].invisible)
+    if (!(EWRAM_17800[bank].unk0 & 1) || !gSprites[gBattlerSpriteIds[bank]].invisible)
         return TRUE;
 
     return FALSE;
@@ -1938,12 +1938,12 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         REG_BG1CNT_BITFIELD.screenSize = 1;
         REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
 
-        spriteId = gBankSpriteIds[bank];
+        spriteId = gBattlerSpriteIds[bank];
         gBattle_BG1_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         if (IsContest() != 0 && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
             gBattle_BG1_X--;
         gBattle_BG1_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
-        gSprites[gBankSpriteIds[bank]].invisible = TRUE;
+        gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
 
         REG_BG1HOFS = gBattle_BG1_X;
         REG_BG1VOFS = gBattle_BG1_Y;
@@ -1972,10 +1972,10 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         REG_BG2CNT_BITFIELD.screenSize = 1;
         REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
 
-        spriteId = gBankSpriteIds[bank];
+        spriteId = gBattlerSpriteIds[bank];
         gBattle_BG2_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         gBattle_BG2_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
-        gSprites[gBankSpriteIds[bank]].invisible = TRUE;
+        gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
 
         REG_BG2HOFS = gBattle_BG2_X;
         REG_BG2VOFS = gBattle_BG2_Y;
@@ -2106,9 +2106,9 @@ static void ScriptCmd_clearmonbg(void)
         bank = gBattleAnimTarget;
 
     if (gMonAnimTaskIdArray[0] != 0xFF)
-        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
     if (animBankId > 1 && gMonAnimTaskIdArray[1] != 0xFF)
-        gSprites[gBankSpriteIds[bank ^ 2]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[bank ^ 2]].invisible = FALSE;
     else
         animBankId = 0;
 
@@ -2177,7 +2177,7 @@ static void ScriptCmd_monbg_22(void)
         else
             r1 = 1;
         MoveBattlerSpriteToBG(bank, r1);
-        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
     }
 
     bank ^= 2;
@@ -2190,7 +2190,7 @@ static void ScriptCmd_monbg_22(void)
         else
             r1 = 1;
         MoveBattlerSpriteToBG(bank, r1);
-        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
     }
     sBattleAnimScriptPtr++;
 }
@@ -2215,9 +2215,9 @@ static void ScriptCmd_clearmonbg_23(void)
         bank = gBattleAnimTarget;
 
     if (IsAnimBankSpriteVisible(bank))
-        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
     if (animBankId > 1 && IsAnimBankSpriteVisible(bank ^ 2))
-        gSprites[gBankSpriteIds[bank ^ 2]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[bank ^ 2]].invisible = FALSE;
     else
         animBankId = 0;
 
@@ -3037,8 +3037,8 @@ static void ScriptCmd_waitsound(void)
     {
         if (++gSoundAnimFramesToWait > 90)
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
             gSoundAnimFramesToWait = 0;
         }
         else
@@ -3230,7 +3230,7 @@ static void ScriptCmd_doublebattle_2E(void)
 // Cease playing sounds.
 static void ScriptCmd_stopsound(void)
 {
-    m4aMPlayStop(&gMPlay_SE1);
-    m4aMPlayStop(&gMPlay_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }

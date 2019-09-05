@@ -15,7 +15,7 @@ extern u8  gBattleAnimAttacker;
 extern u8  gBattleAnimTarget;
 extern u8  gAnimVisualTaskCount;
 extern u8  gBanksBySide[];
-extern u8  gBankSpriteIds[];
+extern u8  gBattlerSpriteIds[];
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;

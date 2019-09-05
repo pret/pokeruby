@@ -16,14 +16,14 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u8 gHealthboxIDs[];
+extern u8 gHealthboxSpriteIds[];
 extern u8 gBattlersCount;
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern u8 gBattleTerrain;
 extern u16 gBattlerPartyIndexes[];
-extern u8 gBankTarget;
-extern u8 gEffectBank;
-extern u8 gBankAttacker;
+extern u8 gBattlerTarget;
+extern u8 gEffectBattler;
+extern u8 gBattlerAttacker;
 extern u8 gAnimVisualTaskCount;
 
 extern const u8 gUnknown_08D20A14[];
@@ -702,7 +702,7 @@ void unref_sub_80E23A8(u8 taskId)
 
     if (gTasks[taskId].data[2] & 0x1)
     {
-        paletteIndex = IndexOfSpritePaletteTag(gSprites[gHealthboxIDs[attackerBattler]].template->paletteTag);
+        paletteIndex = IndexOfSpritePaletteTag(gSprites[gHealthboxSpriteIds[attackerBattler]].template->paletteTag);
         selectedPalettes |= ((1 << paletteIndex) << 16);
     }
     
@@ -781,7 +781,7 @@ static void sub_80E255C(struct Sprite *sprite)
         if (var0 < 2)
         {
             for (i = 0; i < gBattlersCount; i++)
-                gSprites[gBankSpriteIds[i]].coordOffsetEnabled = 0;
+                gSprites[gBattlerSpriteIds[i]].coordOffsetEnabled = 0;
         }
 
         DestroyAnimSprite(sprite);
@@ -790,20 +790,20 @@ static void sub_80E255C(struct Sprite *sprite)
 
 static void sub_80E260C(void)
 {
-    gSprites[gBankSpriteIds[gBattleAnimAttacker]].coordOffsetEnabled = 0;
-    gSprites[gBankSpriteIds[gBattleAnimTarget]].coordOffsetEnabled = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].coordOffsetEnabled = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimTarget]].coordOffsetEnabled = 0;
 
     if (gBattleAnimArgs[4] == 2)
     {
-        gSprites[gBankSpriteIds[gBattleAnimAttacker]].coordOffsetEnabled = 1;
-        gSprites[gBankSpriteIds[gBattleAnimTarget]].coordOffsetEnabled = 1;
+        gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].coordOffsetEnabled = 1;
+        gSprites[gBattlerSpriteIds[gBattleAnimTarget]].coordOffsetEnabled = 1;
     }
     else
     {
         if (gBattleAnimArgs[4] == 0)
-            gSprites[gBankSpriteIds[gBattleAnimAttacker]].coordOffsetEnabled = 1;
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].coordOffsetEnabled = 1;
         else
-            gSprites[gBankSpriteIds[gBattleAnimTarget]].coordOffsetEnabled = 1;
+            gSprites[gBattlerSpriteIds[gBattleAnimTarget]].coordOffsetEnabled = 1;
     }
 }
 
@@ -1206,7 +1206,7 @@ void sub_80E2F2C(u8 taskId)
         {
             if (IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2) == TRUE)
             {
-                gSprites[gBankSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority -= 1;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority -= 1;
                 REG_BG1CNT_BITFIELD.priority = 1;
                 var0 = 1;
             }
@@ -1275,7 +1275,7 @@ static void sub_80E3194(u8 taskId)
             sub_8078914(&subStruct);
             DmaFill32Defvars(3, 0, subStruct.field_4, 0x800);
             if (gTasks[taskId].data[6] == 1)
-                gSprites[gBankSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority++;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].oam.priority++;
 
             REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
             do {} while(0); // needed to match. perhaps part of a debug macro
@@ -1343,7 +1343,7 @@ static void sub_80E3338(u8 taskId)
         {
             if (IsAnimBankSpriteVisible(battler2) == TRUE)
             {
-                gSprites[gBankSpriteIds[battler2]].oam.priority -= 1;
+                gSprites[gBattlerSpriteIds[battler2]].oam.priority -= 1;
                 REG_BG1CNT_BITFIELD.priority = 1;
                 var0 = 1;
             }
@@ -1362,9 +1362,9 @@ static void sub_80E3338(u8 taskId)
             species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
     }
 
-    spriteId = sub_807A4A0(battler1, gBankSpriteIds[battler1], species);
+    spriteId = sub_807A4A0(battler1, gBattlerSpriteIds[battler1], species);
     if (taskData[3])
-        spriteId2 = sub_807A4A0(battler2, gBankSpriteIds[battler2], species);
+        spriteId2 = sub_807A4A0(battler2, gBattlerSpriteIds[battler2], species);
     
     sub_8078914(&subStruct);
     if (taskData[0] == 0)
@@ -1422,7 +1422,7 @@ static void sub_80E3338(u8 taskId)
     gTasks[taskId].data[2] = taskData[3];
     gTasks[taskId].data[3] = spriteId2;
     gTasks[taskId].data[6] = var0;
-    gTasks[taskId].data[7] = gBankSpriteIds[battler2];
+    gTasks[taskId].data[7] = gBattlerSpriteIds[battler2];
     gTasks[taskId].func = sub_80E3704;
 
     if (taskData[0] == 0)
@@ -1648,7 +1648,7 @@ void sub_80E3BDC(u8 taskId)
     for (i = 0; i < 4; i++)
     {
         if (i != gBattleAnimAttacker && IsAnimBankSpriteVisible(i))
-            gSprites[gBankSpriteIds[i]].invisible = gBattleAnimArgs[0];
+            gSprites[gBattlerSpriteIds[i]].invisible = gBattleAnimArgs[0];
     }
 
     DestroyAnimVisualTask(taskId);
@@ -1692,9 +1692,9 @@ void sub_80E3C4C(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
             species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
     }
 
-    spriteId = sub_807A4A0(battler1, gBankSpriteIds[battler1], species);
+    spriteId = sub_807A4A0(battler1, gBattlerSpriteIds[battler1], species);
     if (arg4)
-        spriteId2 = sub_807A4A0(battler2, gBankSpriteIds[battler2], species);
+        spriteId2 = sub_807A4A0(battler2, gBattlerSpriteIds[battler2], species);
 
     sub_8078914(&subStruct);
     LZDecompressVram(arg9, subStruct.field_4);
@@ -1884,8 +1884,8 @@ void sub_80E4200(u8 taskId)
 
 void sub_80E4234(u8 taskId)
 {
-    gBattleAnimAttacker = gBankTarget;
-    gBattleAnimTarget = gEffectBank;
+    gBattleAnimAttacker = gBattlerTarget;
+    gBattleAnimTarget = gEffectBattler;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1901,14 +1901,14 @@ void sub_80E4264(u8 taskId)
 
 void sub_80E42B0(u8 taskId)
 {
-    gBattleAnimTarget = gBankTarget;
+    gBattleAnimTarget = gBattlerTarget;
     DestroyAnimVisualTask(taskId);
 }
 
 void sub_80E42D0(u8 taskId)
 {
-    gBattleAnimAttacker = gBankAttacker;
-    gBattleAnimTarget = gEffectBank;
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gEffectBattler;
     DestroyAnimVisualTask(taskId);
 }
 

@@ -10,7 +10,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 
 void sub_80D0FD8(struct Sprite* sprite);
 void sub_80D10B8(struct Sprite* sprite);
@@ -284,23 +284,23 @@ void sub_80D10B8(struct Sprite* sprite)
     {
         r9 = GetBattlerSpriteCoord(bankr7, r10) + gBattleAnimArgs[0];
         if (IsAnimBankSpriteVisible(bankr8 ^ 2))
-            sprite->subpriority = gSprites[gBankSpriteIds[bankr8 ^ 2]].subpriority - 1;
+            sprite->subpriority = gSprites[gBattlerSpriteIds[bankr8 ^ 2]].subpriority - 1;
         else
-            sprite->subpriority = gSprites[gBankSpriteIds[bankr8]].subpriority - 1;
+            sprite->subpriority = gSprites[gBattlerSpriteIds[bankr8]].subpriority - 1;
     }
     else
     {
         r9 = GetBattlerSpriteCoord(bankr7, r10) - gBattleAnimArgs[0];
         if (gMain.inBattle && IsAnimBankSpriteVisible(bankr7 ^ 2))
         {
-            if (gSprites[gBankSpriteIds[bankr7]].pos1.x < gSprites[gBankSpriteIds[bankr7 ^ 2]].pos1.x)
-                sprite->subpriority = gSprites[gBankSpriteIds[bankr7 ^ 2]].subpriority + 1;
+            if (gSprites[gBattlerSpriteIds[bankr7]].pos1.x < gSprites[gBattlerSpriteIds[bankr7 ^ 2]].pos1.x)
+                sprite->subpriority = gSprites[gBattlerSpriteIds[bankr7 ^ 2]].subpriority + 1;
             else
-                sprite->subpriority = gSprites[gBankSpriteIds[bankr7]].subpriority - 1;
+                sprite->subpriority = gSprites[gBattlerSpriteIds[bankr7]].subpriority - 1;
         }
         else
         {
-            sprite->subpriority = gSprites[gBankSpriteIds[bankr7]].subpriority - 1;
+            sprite->subpriority = gSprites[gBattlerSpriteIds[bankr7]].subpriority - 1;
         }
 
     }

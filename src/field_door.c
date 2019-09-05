@@ -3,8 +3,8 @@
 #include "field_camera.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "constants/songs.h"
 #include "task.h"
+#include "constants/songs.h"
 
 const u8 DoorAnimTiles_04[][0x100] =
 {
@@ -517,7 +517,7 @@ static s8 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct Do
     }
 }
 
-static void DrawClosedDoor(const struct DoorGraphics *unused, u32 x, u32 y)
+static void DrawClosedDoor(const struct DoorGraphics *gfx, u32 x, u32 y)
 {
     DrawClosedDoorTiles(x, y);
 }
@@ -553,7 +553,7 @@ static s8 cur_mapdata_get_door_x2_at(const struct DoorGraphics *gfx, u32 x, u32 
     if (gfx == NULL)
         return -1;
     else
-        return gfx->unk2;
+        return gfx->sound;
 }
 
 void unref_sub_805869C(u32 x, u32 y)

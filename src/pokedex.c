@@ -126,7 +126,7 @@ struct UnknownStruct4
     u8 unk9;
 };
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gUnknown_03005E98;
@@ -1448,7 +1448,7 @@ void CB2_InitPokedex(void)
             SetVBlankCallback(sub_808C0B8);
             SetMainCallback2(MainCB);
             SortPokedex(gPokedexView->dexMode, gPokedexView->dexOrder);
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
         }
         break;
     }
@@ -1679,7 +1679,7 @@ static void Task_ClosePokedex(u8 taskId)
         gSaveBlock2.pokedex.order = gPokedexView->dexOrder;
         DestroyTask(taskId);
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
     }
 }
 
@@ -3150,7 +3150,7 @@ static void Task_InitCryScreenMultistep(u8 taskId)
     default:
         if (!gPaletteFade.active)
         {
-            m4aMPlayStop(&gMPlay_BGM);
+            m4aMPlayStop(&gMPlayInfo_BGM);
             gPokedexView->unk64A = 6;
             gUnknown_03005CEC = gMain.vblankCallback;
             SetVBlankCallback(NULL);
@@ -3260,7 +3260,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
         if (gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
-            m4aMPlayContinue(&gMPlay_BGM);
+            m4aMPlayContinue(&gMPlayInfo_BGM);
             gPokedexView->unk64F = 1;
             gTasks[taskId].func = sub_808FFBC;
             PlaySE(SE_PC_OFF);
@@ -3270,7 +3270,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
          || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
-            m4aMPlayContinue(&gMPlay_BGM);
+            m4aMPlayContinue(&gMPlayInfo_BGM);
             gPokedexView->unk64F = 2;
             gTasks[taskId].func = sub_808FFBC;
             PlaySE(SE_Z_PAGE);
@@ -3286,7 +3286,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
             else
             {
                 BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
-                m4aMPlayContinue(&gMPlay_BGM);
+                m4aMPlayContinue(&gMPlayInfo_BGM);
                 gPokedexView->unk64F = 3;
                 gTasks[taskId].func = sub_808FFBC;
                 PlaySE(SE_Z_PAGE);

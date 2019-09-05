@@ -21,6 +21,7 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
         INCLUDE "sym_bss.ld"
+        *(.bss);
 
         /* .bss.code starts at 0x3000F60 */
         src/libs/m4a.o(.bss.code);
@@ -28,6 +29,7 @@ SECTIONS {
         /* COMMON starts at 0x3001760 */
         INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
+        *(COMMON);
         end = .;
         . = 0x8000;
     }

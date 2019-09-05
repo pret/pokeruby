@@ -40,14 +40,14 @@ extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
 
-extern struct MusicPlayerInfo gMPlay_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
-extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
 extern u8 gBanksBySide[];
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern struct Window gUnknown_03004210;
 extern u32 gContestRngValue;
 
@@ -533,9 +533,9 @@ u8 sub_80AB70C(u8 *a)
         gBanksBySide[2] = 3;
         gBanksBySide[3] = 2;
         gBattleTypeFlags = 0;
-        gBankAttacker = 2;
-        gBankTarget = 3;
-        gBankSpriteIds[gBankAttacker] = CreateJudgeSprite();
+        gBattlerAttacker = 2;
+        gBattlerTarget = 3;
+        gBattlerSpriteIds[gBattlerAttacker] = CreateJudgeSprite();
         sub_80B292C();
         break;
     default:
@@ -912,7 +912,7 @@ void debug_sub_80BA054(u8 taskId)
 	gSprites[r6].pos2.x = 120;
 	gSprites[r6].callback = sub_80AD8FC;
 	gTasks[taskId].data[2] = r6;
-	gBankSpriteIds[gBankAttacker] = r6;
+	gBattlerSpriteIds[gBattlerAttacker] = r6;
 	gTasks[taskId].data[3] = 0;
 	gTasks[taskId].data[0]++;
 	sContest.unk1925E = 0;
@@ -1124,7 +1124,7 @@ void sub_80AC2CC(u8 taskId)
         gSprites[spriteId].pos2.x = 120;
         gSprites[spriteId].callback = sub_80AD8FC;
         gTasks[taskId].data[2] = spriteId;
-        gBankSpriteIds[gBankAttacker] = spriteId;
+        gBattlerSpriteIds[gBattlerAttacker] = spriteId;
         sub_80B0BC4(sub_80B09E4(sContest.unk19215), FALSE);
         gTasks[taskId].data[0] = 4;
         return;
@@ -3366,8 +3366,8 @@ void sub_80AFC74(u8 taskId)
         if (r1 > 0)
         {
             PlaySE(SE_C_GAJI);
-            m4aMPlayImmInit(&gMPlay_SE1);
-            m4aMPlayPitchControl(&gMPlay_SE1, 0xFFFF, r10 * 256);
+            m4aMPlayImmInit(&gMPlayInfo_SE1);
+            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
         }
         else
         {
@@ -5394,14 +5394,14 @@ void sub_80B28F0(u8 a)
 
 void sub_80B292C(void)
 {
-    gBankSpriteIds[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
-    InitSpriteAffineAnim(&gSprites[gBankSpriteIds[gBankTarget]]);
+    gBattlerSpriteIds[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    InitSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattlerTarget]]);
     sub_80B2968();
 }
 
 void sub_80B2968(void)
 {
-    struct Sprite *sprite = &gSprites[gBankSpriteIds[3]];
+    struct Sprite *sprite = &gSprites[gBattlerSpriteIds[3]];
 
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;
@@ -5416,14 +5416,14 @@ void SelectContestMoveBankTarget(u16 move)
     {
     case TARGET_UNK2:
     case TARGET_USER:
-        gBankTarget = 2;
+        gBattlerTarget = 2;
         break;
     case TARGET_SELECTED_POKEMON:
     case TARGET_RANDOM:
     case TARGET_BOTH_ENEMIES:
     case TARGET_ALL_EXCEPT_USER:
     default:
-        gBankTarget = 3;
+        gBattlerTarget = 3;
         break;
     }
 }

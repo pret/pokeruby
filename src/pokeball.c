@@ -17,14 +17,14 @@
 #include "util.h"
 #include "ewram.h"
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gBattleTypeFlags;
-extern u8 gBankTarget;
+extern u8 gBattlerTarget;
 extern u8 gActiveBattler;
 extern u16 gBattlerPartyIndexes[];
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern u8 gDoingBattleAnim;
-extern u8 gHealthboxIDs[];
+extern u8 gHealthboxSpriteIds[];
 
 #define GFX_TAG_POKEBALL    55000
 #define GFX_TAG_GREATBALL   55001
@@ -371,7 +371,7 @@ static void SendOutMonAnimation(u8 taskId)
     switch (side)
     {
     case 0xFF: // Player's side
-        gBankTarget = battler;
+        gBattlerTarget = battler;
         gSprites[spriteId].pos1.x = 24;
         gSprites[spriteId].pos1.y = 68;
         gSprites[spriteId].callback = SendOutPlayerMonAnimation_Step0;
@@ -379,17 +379,17 @@ static void SendOutMonAnimation(u8 taskId)
     case 0xFE: // Opponent's side
         gSprites[spriteId].pos1.x = GetBattlerSpriteCoord(battler, 0);
         gSprites[spriteId].pos1.y = GetBattlerSpriteCoord(battler, 1) + 24;
-        gBankTarget = battler;
+        gBattlerTarget = battler;
         gSprites[spriteId].data[0] = 0;
         gSprites[spriteId].callback = SendOutOpponentMonAnimation_Step0;
         break;
     default:
-        gBankTarget = GetBattlerAtPosition(1);
+        gBattlerTarget = GetBattlerAtPosition(1);
         debug = TRUE;
         break;
     }
 
-    gSprites[spriteId].data[6] = gBankTarget;
+    gSprites[spriteId].data[6] = gBattlerTarget;
     if (!debug)
     {
         DestroyTask(taskId);
@@ -397,12 +397,12 @@ static void SendOutMonAnimation(u8 taskId)
     }
 
     gSprites[spriteId].data[0] = 0x22;
-    gSprites[spriteId].data[2] = GetBattlerSpriteCoord(gBankTarget, 0);
-    gSprites[spriteId].data[4] = GetBattlerSpriteCoord(gBankTarget, 1) - 16;
+    gSprites[spriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, 0);
+    gSprites[spriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, 1) - 16;
     gSprites[spriteId].data[5] = -40;
     InitAnimArcTranslation(&gSprites[spriteId]);
     gSprites[spriteId].oam.affineParam = taskId;
-    gTasks[taskId].data[4] = gBankTarget;
+    gTasks[taskId].data[4] = gBattlerTarget;
     gTasks[taskId].func = TaskDummy;
     PlaySE(SE_NAGERU);
 }
@@ -445,9 +445,9 @@ static void sub_80466F4(struct Sprite *sprite)
     {
         sprite->data[5] = 0;
         sprite->callback = sub_8046760;
-        StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->data[6]]], 2);
-        AnimateSprite(&gSprites[gBankSpriteIds[sprite->data[6]]]);
-        gSprites[gBankSpriteIds[sprite->data[6]]].data[1] = 0;
+        StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[sprite->data[6]]], 2);
+        AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->data[6]]]);
+        gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] = 0;
     }
 }
 
@@ -456,17 +456,17 @@ static void sub_8046760(struct Sprite *sprite)
     sprite->data[5]++;
     if (sprite->data[5] == 11)
         PlaySE(SE_SUIKOMU);
-    if (gSprites[gBankSpriteIds[sprite->data[6]]].affineAnimEnded)
+    if (gSprites[gBattlerSpriteIds[sprite->data[6]]].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
-        gSprites[gBankSpriteIds[sprite->data[6]]].invisible = TRUE;
+        gSprites[gBattlerSpriteIds[sprite->data[6]]].invisible = TRUE;
         sprite->data[5] = 0;
         sprite->callback = sub_80467F8;
     }
     else
     {
-        gSprites[gBankSpriteIds[sprite->data[6]]].data[1] += 0x60;
-        gSprites[gBankSpriteIds[sprite->data[6]]].pos2.y = -gSprites[gBankSpriteIds[sprite->data[6]]].data[1] >> 8;
+        gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] += 0x60;
+        gSprites[gBattlerSpriteIds[sprite->data[6]]].pos2.y = -gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] >> 8;
     }
 }
 
@@ -732,11 +732,11 @@ static void sub_8046C78(struct Sprite *sprite)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 if (IsBGMPlaying())
-                    m4aMPlayStop(&gMPlay_BGM);
+                    m4aMPlayStop(&gMPlayInfo_BGM);
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
             }
         }
 
@@ -754,9 +754,9 @@ static void sub_8046C78(struct Sprite *sprite)
         gTasks[taskId].data[15] = 0;
     }
 
-    StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->data[6]]], 1);
-    AnimateSprite(&gSprites[gBankSpriteIds[sprite->data[6]]]);
-    gSprites[gBankSpriteIds[sprite->data[6]]].data[1] = 0x1000;
+    StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[sprite->data[6]]], 1);
+    AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->data[6]]]);
+    gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] = 0x1000;
 }
 
 static void sub_8046E7C(struct Sprite *sprite)
@@ -773,25 +773,25 @@ static void sub_8046E9C(struct Sprite *sprite)
     bool8 r7 = FALSE;
     u8 r4 = sprite->data[6];
 
-    gSprites[gBankSpriteIds[r4]].invisible = FALSE;
+    gSprites[gBattlerSpriteIds[r4]].invisible = FALSE;
     if (sprite->animEnded)
         sprite->invisible = TRUE;
-    if (gSprites[gBankSpriteIds[r4]].affineAnimEnded)
+    if (gSprites[gBattlerSpriteIds[r4]].affineAnimEnded)
     {
-        StartSpriteAffineAnim(&gSprites[gBankSpriteIds[r4]], 0);
+        StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[r4]], 0);
         r7 = TRUE;
     }
     else
     {
-        gSprites[gBankSpriteIds[r4]].data[1] -= 288;
-        gSprites[gBankSpriteIds[r4]].pos2.y = gSprites[gBankSpriteIds[r4]].data[1] >> 8;
+        gSprites[gBattlerSpriteIds[r4]].data[1] -= 288;
+        gSprites[gBattlerSpriteIds[r4]].pos2.y = gSprites[gBattlerSpriteIds[r4]].data[1] >> 8;
     }
     if (sprite->animEnded && r7)
     {
         s32 i;
         u32 r3;
 
-        gSprites[gBankSpriteIds[r4]].pos2.y = 0;
+        gSprites[gBattlerSpriteIds[r4]].pos2.y = 0;
         gDoingBattleAnim = 0;
         ewram17810[r4].unk0_3 = 0;
         FreeSpriteOamMatrix(sprite);
@@ -826,8 +826,8 @@ static void sub_8046FBC(struct Sprite *sprite)
     }
     else if (sprite->data[4] == 315)
     {
-        FreeOamMatrix(gSprites[gBankSpriteIds[sprite->data[6]]].oam.matrixNum);
-        DestroySprite(&gSprites[gBankSpriteIds[sprite->data[6]]]);
+        FreeOamMatrix(gSprites[gBattlerSpriteIds[sprite->data[6]]].oam.matrixNum);
+        DestroySprite(&gSprites[gBattlerSpriteIds[sprite->data[6]]]);
         DestroySpriteAndFreeResources(sprite);
         if (gMain.inBattle)
             ewram17810[r7].unk0_3 = 0;
@@ -1103,7 +1103,7 @@ void obj_delete_and_free_associated_resources_(struct Sprite *sprite)
 
 void sub_804777C(u8 a)
 {
-    struct Sprite *sprite = &gSprites[gHealthboxIDs[a]];
+    struct Sprite *sprite = &gSprites[gHealthboxSpriteIds[a]];
 
     sprite->data[0] = 5;
     sprite->data[1] = 0;
@@ -1146,7 +1146,7 @@ void sub_8047858(u8 a)
 
     spriteId = CreateInvisibleSpriteWithCallback(oamc_804BEB4);
     gSprites[spriteId].data[0] = 1;
-    gSprites[spriteId].data[1] = gHealthboxIDs[a];
+    gSprites[spriteId].data[1] = gHealthboxSpriteIds[a];
     gSprites[spriteId].callback = oamc_804BEB4;
 }
 

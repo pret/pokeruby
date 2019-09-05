@@ -31,7 +31,7 @@
 #define gCastformElevations gUnknownCastformData_0837F5A8
 #define gCastformBackSpriteYCoords gUnknown_0837F5AC
 #define gTransformPersonalities gTransformedPersonalities
-#define gBattleMonSprites gBankSpriteIds
+#define gBattleMonSprites gBattlerSpriteIds
 
 struct Struct_gUnknown_0837F578
 {

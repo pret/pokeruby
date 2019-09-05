@@ -85,6 +85,11 @@ extern struct MapLayout * const gMapLayouts[];
 extern struct MapHeader * const * const gMapGroups[];
 extern s32 gMaxFlashLevel;
 
+u16 word_3004858;
+void (*gFieldCallback)(void);
+u8 gUnknown_03004860;
+u8 gFieldLinkPlayerCount;
+
 EWRAM_DATA struct WarpData gLastUsedWarp = {0};
 EWRAM_DATA struct WarpData gWarpDestination = {0};
 EWRAM_DATA struct WarpData gFixedDiveWarp = {0};
@@ -97,11 +102,6 @@ EWRAM_DATA struct LinkPlayerEventObject gLinkPlayerEventObjects[4] = {0};
 static u8 gUnknown_03000580[4];
 static u16 (*gUnknown_03000584)(u32);
 static u8 gUnknown_03000588;
-
-u16 word_3004858;
-extern void (*gFieldCallback)(void);
-u8 gUnknown_03004860;
-u8 gFieldLinkPlayerCount;
 
 static void CB2_Overworld(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState*, u16, u8);

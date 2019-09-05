@@ -9,7 +9,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimTarget;
 extern u8 gBattleAnimAttacker;
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 
 void sub_80D5CC0(struct Sprite *sprite);
 static void sub_80D5E4C(u8 taskId);
@@ -211,7 +211,7 @@ void sub_80D60B4(u8 taskId)
     }
     gTasks[taskId].data[0]++;
 
-    spriteId = gBankSpriteIds[gBattleAnimTarget];
+    spriteId = gBattlerSpriteIds[gBattleAnimTarget];
 
     if (!gTasks[taskId].data[4])
         unk = gUnknown_083D9794[gTasks[taskId].data[0] % 10];

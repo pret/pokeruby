@@ -1290,7 +1290,7 @@ void sub_8135534(u8 taskId)
     if (IsBattleTransitionDone() == TRUE)
     {
         gMain.savedCallback = sub_81354CC;
-        SetMainCallback2(sub_800E7C4);
+        SetMainCallback2(CB2_InitBattle);
         DestroyTask(taskId);
     }
 }

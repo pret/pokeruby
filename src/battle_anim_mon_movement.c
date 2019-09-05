@@ -10,7 +10,7 @@
 
 extern s16 gBattleAnimArgs[8];
 
-extern u8 gBankSpriteIds[];
+extern u8 gBattlerSpriteIds[];
 extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gBattleAnimAttacker;
@@ -199,11 +199,11 @@ void AnimTask_ShakeMon2(u8 taskId)
         if (IsAnimBankSpriteVisible(side) == FALSE)
             destroy = TRUE;
 
-        sprite = gBankSpriteIds[side];
+        sprite = gBattlerSpriteIds[side];
     }
     else
     {
-        sprite = gBankSpriteIds[gBattleAnimAttacker];
+        sprite = gBattlerSpriteIds[gBattleAnimAttacker];
     }
 
     if (destroy)
@@ -447,7 +447,7 @@ static void DoHorizontalLunge(struct Sprite *sprite)
 
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[2] = 0;
-    sprite->data[3] = gBankSpriteIds[gBattleAnimAttacker];
+    sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData(sprite, ReverseHorizontalLungeDirection);
     sprite->callback = TranslateMonBGUntil;
@@ -498,9 +498,9 @@ static void SlideMonToOriginalPos(struct Sprite *sprite)
     int something;
     int monSpriteId;
     if (!gBattleAnimArgs[0])
-        monSpriteId = gBankSpriteIds[gBattleAnimAttacker];
+        monSpriteId = gBattlerSpriteIds[gBattleAnimAttacker];
     else
-        monSpriteId = gBankSpriteIds[gBattleAnimTarget];
+        monSpriteId = gBattlerSpriteIds[gBattleAnimTarget];
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gSprites[monSpriteId].pos1.x + gSprites[monSpriteId].pos2.x;
@@ -571,7 +571,7 @@ static void SlideMonToOffset(struct Sprite *sprite)
     else
         battler = gBattleAnimTarget;
 
-    monSpriteId = gBankSpriteIds[battler];
+    monSpriteId = gBattlerSpriteIds[battler];
     if (GetBattlerSide(battler) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -608,7 +608,7 @@ static void sub_80A8818(struct Sprite *sprite)
     {
         v1 = gBattleAnimTarget;
     }
-    spriteId = gBankSpriteIds[v1];
+    spriteId = gBattlerSpriteIds[v1];
     if (GetBattlerSide(v1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -726,7 +726,7 @@ void sub_80A8A80(u8 taskId)
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gBankSpriteIds[gBattleAnimAttacker ^ 2];
+        spriteId = gBattlerSpriteIds[gBattleAnimAttacker ^ 2];
         break;
     case 3:
         if (!IsAnimBankSpriteVisible(gBattleAnimTarget ^ 2))
@@ -734,7 +734,7 @@ void sub_80A8A80(u8 taskId)
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gBankSpriteIds[gBattleAnimTarget ^ 2];
+        spriteId = gBattlerSpriteIds[gBattleAnimTarget ^ 2];
         break;
     default:
         DestroyAnimVisualTask(taskId);

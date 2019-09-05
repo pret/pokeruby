@@ -126,6 +126,8 @@ struct TradeEwramSubstruct {
     /*0x08fc*/ u8 filler_08fc[0x704];
 };
 
+struct TradeEwramSubstruct2 *gUnknown_03004828;
+
 IWRAM_DATA u8 gUnknown_03000508[8];
 
 struct UnkStructF {
@@ -209,7 +211,7 @@ EWRAM_DATA u8 *gUnknown_020296CC[13] = {0};
 EWRAM_DATA struct MailStruct gUnknown_02029700[6] = {0};
 EWRAM_DATA u8 gUnknown_020297D8[2] = {0};
 
-extern struct TradeEwramSubstruct *gUnknown_03004824;
+struct TradeEwramSubstruct *gUnknown_03004824;
 
 const u32 unref_data_820ABD4[] =
 {
