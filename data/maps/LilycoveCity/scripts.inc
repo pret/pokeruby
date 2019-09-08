@@ -14,47 +14,47 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 
 LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	.ifndef SAPPHIRE
-	setmetatile 69, 4, 169, 1
-	setmetatile 70, 4, 680, 1
-	setmetatile 71, 4, 681, 1
-	setmetatile 72, 4, 682, 1
-	setmetatile 69, 5, 145, 1
-	setmetatile 70, 5, 688, 1
-	setmetatile 71, 5, 689, 0
-	setmetatile 72, 5, 690, 1
-	setmetatile 69, 6, 446, 0
-	setmetatile 70, 6, 447, 0
-	setmetatile 71, 6, 368, 0
-	setmetatile 72, 6, 445, 0
+	setmetatile 69, 4, METATILE_General_RockWall_WaterBase, 1
+	setmetatile 70, 4, METATILE_Lilycove_AquaHideout_Entrance_TopLeft, 1
+	setmetatile 71, 4, METATILE_Lilycove_AquaHideout_Entrance_TopMid, 1
+	setmetatile 72, 4, METATILE_Lilycove_AquaHideout_Entrance_TopRight, 1
+	setmetatile 69, 5, METATILE_General_RockWall_SandBase, 1
+	setmetatile 70, 5, METATILE_Lilycove_AquaHideout_Entrance_BottomLeft, 1
+	setmetatile 71, 5, METATILE_Lilycove_AquaHideout_Entrance_BottomMid, 0
+	setmetatile 72, 5, METATILE_Lilycove_AquaHideout_Entrance_BottomRight, 1
+	setmetatile 69, 6, METATILE_General_Shore_BottomMid, 0
+	setmetatile 70, 6, METATILE_General_Shore_BottomRight, 0
+	setmetatile 71, 6, METATILE_General_CalmWater, 0
+	setmetatile 72, 6, METATILE_General_Shore_BottomLeft, 0
 	.endif
 	call_if_unset FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_14CABE
 	call_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_14CB2B
 	end
 
 LilycoveCity_EventScript_14CABE:: @ 814CABE
-	setmetatile 76, 12, 656, 1
-	setmetatile 77, 12, 657, 1
-	setmetatile 76, 13, 672, 1
-	setmetatile 77, 13, 673, 1
-	setmetatile 76, 14, 664, 1
-	setmetatile 77, 14, 665, 1
-	setmetatile 76, 15, 672, 1
-	setmetatile 77, 15, 673, 1
-	setmetatile 77, 16, 664, 1
-	setmetatile 78, 16, 665, 1
-	setmetatile 77, 17, 672, 1
-	setmetatile 78, 17, 673, 1
+	setmetatile 76, 12, METATILE_Lilycove_Wailmer0, 1
+	setmetatile 77, 12, METATILE_Lilycove_Wailmer1, 1
+	setmetatile 76, 13, METATILE_Lilycove_Wailmer2, 1
+	setmetatile 77, 13, METATILE_Lilycove_Wailmer3, 1
+	setmetatile 76, 14, METATILE_Lilycove_Wailmer0_Alt, 1
+	setmetatile 77, 14, METATILE_Lilycove_Wailmer1_Alt, 1
+	setmetatile 76, 15, METATILE_Lilycove_Wailmer2, 1
+	setmetatile 77, 15, METATILE_Lilycove_Wailmer3, 1
+	setmetatile 77, 16, METATILE_Lilycove_Wailmer0_Alt, 1
+	setmetatile 78, 16, METATILE_Lilycove_Wailmer1_Alt, 1
+	setmetatile 77, 17, METATILE_Lilycove_Wailmer2, 1
+	setmetatile 78, 17, METATILE_Lilycove_Wailmer3, 1
 	return
 
 LilycoveCity_EventScript_14CB2B:: @ 814CB2B
-	setmetatile 69, 4, 169, 1
-	setmetatile 70, 4, 169, 1
-	setmetatile 71, 4, 169, 1
-	setmetatile 72, 4, 169, 1
-	setmetatile 69, 5, 145, 1
-	setmetatile 70, 5, 145, 1
-	setmetatile 71, 5, 145, 1
-	setmetatile 72, 5, 145, 1
+	setmetatile 69, 4, METATILE_General_RockWall_WaterBase, 1
+	setmetatile 70, 4, METATILE_General_RockWall_WaterBase, 1
+	setmetatile 71, 4, METATILE_General_RockWall_WaterBase, 1
+	setmetatile 72, 4, METATILE_General_RockWall_WaterBase, 1
+	setmetatile 69, 5, METATILE_General_RockWall_SandBase, 1
+	setmetatile 70, 5, METATILE_General_RockWall_SandBase, 1
+	setmetatile 71, 5, METATILE_General_RockWall_SandBase, 1
+	setmetatile 72, 5, METATILE_General_RockWall_SandBase, 1
 	return
 
 LilycoveCity_EventScript_14CB74:: @ 814CB74

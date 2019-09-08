@@ -52,15 +52,15 @@ VerdanturfTown_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3D6A:: @ 81A3D6A
-	setmetatile 5, 3, 514, 0
+	setmetatile 5, 3, METATILE_PokemonCenter_Floor_Plain_Alt, 0
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3D74:: @ 81A3D74
-	setmetatile 8, 3, 514, 0
+	setmetatile 8, 3, METATILE_PokemonCenter_Floor_Plain_Alt, 0
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3D7E:: @ 81A3D7E
-	setmetatile 11, 3, 514, 0
+	setmetatile 11, 3, METATILE_PokemonCenter_Floor_Plain_Alt, 0
 	end
 
 DewfordTown_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
@@ -119,7 +119,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E0C:: @ 81A3E0C
 OldaleTown_PokemonCenter_2F_EventScript_1A3E17:: @ 81A3E17
 	lockall
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3E30
-	setmetatile 8, 3, 605, 1
+	setmetatile 8, 3, METATILE_PokemonCenter_CounterBarrier, 1
 	special DrawWholeMapView
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -147,14 +147,14 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E7B:: @ 81A3E7B
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3DB2
-	setmetatile 11, 3, 605, 1
+	setmetatile 11, 3, METATILE_PokemonCenter_CounterBarrier, 1
 	special DrawWholeMapView
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E8D:: @ 81A3E8D
 	lockall
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3DDA
-	setmetatile 5, 3, 605, 1
+	setmetatile 5, 3, METATILE_PokemonCenter_CounterBarrier, 1
 	special DrawWholeMapView
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -220,7 +220,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	copyvar VAR_CABLE_CLUB_STATE, VAR_SPECIAL_4
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
-	setmetatile 5, 3, 514, 0
+	setmetatile 5, 3, METATILE_PokemonCenter_Floor_Plain_Alt, 0
 	special DrawWholeMapView
 	delay 60
 	applymovement LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
@@ -384,7 +384,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	copyvar VAR_CABLE_CLUB_STATE, VAR_SPECIAL_4
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
-	setmetatile 8, 3, 514, 0
+	setmetatile 8, 3, METATILE_PokemonCenter_Floor_Plain_Alt, 0
 	special DrawWholeMapView
 	delay 60
 	applymovement LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
@@ -481,7 +481,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	copyvar VAR_CABLE_CLUB_STATE, VAR_SPECIAL_4
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
-	setmetatile 11, 3, 514, 0
+	setmetatile 11, 3, METATILE_PokemonCenter_Floor_Plain_Alt, 0
 	special DrawWholeMapView
 	delay 60
 	applymovement LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
