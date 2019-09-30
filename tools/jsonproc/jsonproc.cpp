@@ -72,21 +72,6 @@ int main(int argc, char *argv[])
         return get_custom_var(key);
     });
 
-    env.add_callback("trackVar", 2, [](Arguments& args) {
-        static int counter = 0;
-
-        int addValue = args.at(0)->get<int>();
-        int checkValue = args.at(1)->get<int>();
-
-        bool over = false;
-
-        counter = (counter + addValue) % (checkValue + 1);
-
-        if (counter <= addValue) over = true;
-
-        return over;
-    });
-
     env.add_callback("concat", 2, [](Arguments& args) {
         string first = args.at(0)->get<string>();
         string second = args.at(1)->get<string>();
@@ -111,6 +96,11 @@ int main(int argc, char *argv[])
             return rawValue;
 
         return rawValue.substr(0, i);
+    });
+
+    // single argument is a json object
+    env.add_callback("isEmpty", 1, [](Arguments& args) {
+        return args.at(0)->empty();
     });
 
     try
