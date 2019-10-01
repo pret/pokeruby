@@ -33,9 +33,9 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	lock
 	faceplayer
 	msgbox Route112_CableCarStation_Text_1924F5, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq Route112_CableCarStation_EventScript_15C0AD
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route112_CableCarStation_EventScript_15C0DC
 	end
 
@@ -45,7 +45,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	applymovement 1, Route112_CableCarStation_Movement_15C0E6
 	applymovement 255, Route112_CableCarStation_Movement_15C0F0
 	waitmovement 0
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

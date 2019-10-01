@@ -17,7 +17,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	.else
 	givedecoration_std DECOR_SEEDOT_DOLL
 	.endif
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route114_LanettesHouse_EventScript_1A02AE
 	setflag FLAG_RECEIVED_DOLL_LANETTE
 	release
@@ -31,7 +31,7 @@ Route114_LanettesHouse_EventScript_15C28F:: @ 815C28F
 Route114_LanettesHouse_EventScript_15C299:: @ 815C299
 	lockall
 	msgbox Route114_LanettesHouse_Text_192B4A, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq Route114_LanettesHouse_EventScript_15C2B7
 	msgbox Route114_LanettesHouse_Text_192DA9, 4
 	releaseall
@@ -39,7 +39,7 @@ Route114_LanettesHouse_EventScript_15C299:: @ 815C299
 
 Route114_LanettesHouse_EventScript_15C2B7:: @ 815C2B7
 	msgbox Route114_LanettesHouse_Text_192C01, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq Route114_LanettesHouse_EventScript_15C2CC
 	releaseall
 	end

@@ -8,10 +8,10 @@ Route114_EventScript_150733:: @ 8150733
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE114, Route114_EventScript_150778
 	msgbox Route114_Text_1C5803, 4
 	random 5
-	addvar RESULT, 15
-	addvar RESULT, 133
-	giveitem_std RESULT
-	compare RESULT, 0
+	addvar VAR_RESULT, 15
+	addvar VAR_RESULT, 133
+	giveitem_std VAR_RESULT
+	compare VAR_RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
 	msgbox Route114_Text_1C5861, 4
@@ -29,7 +29,7 @@ Route114_EventScript_150782:: @ 8150782
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
 	giveitem_std ITEM_TM05_ROAR
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM05
 	msgbox Route114_Text_1701C5, 4
@@ -85,8 +85,8 @@ Route114_EventScript_150836:: @ 8150836
 
 Route114_EventScript_15084D:: @ 815084D
 	trainerbattle 0, TRAINER_STEVE_1, 0, Route114_Text_1BC2F5, Route114_Text_1BC327
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route114_EventScript_150874
 	msgbox Route114_Text_1BC337, 6
 	end
@@ -98,8 +98,8 @@ Route114_EventScript_150874:: @ 8150874
 
 Route114_EventScript_15088B:: @ 815088B
 	trainerbattle 0, TRAINER_BERNIE_1, 0, Route114_Text_1BC45A, Route114_Text_1BC499
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route114_EventScript_1508B2
 	msgbox Route114_Text_1BC4B5, 6
 	end

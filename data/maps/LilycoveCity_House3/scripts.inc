@@ -4,18 +4,18 @@ LilycoveCity_House3_MapScripts:: @ 8159BE4
 
 LilycoveCity_House3_MapScript1_159BEA:: @ 8159BEA
 	random 4
-	copyvar VAR_TEMP_1, RESULT
+	copyvar VAR_TEMP_1, VAR_RESULT
 	end
 
 LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_18B8CC, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_House3_EventScript_159C1D
 	msgbox LilycoveCity_House3_Text_18BA2B, 4
 	closemessage
-	applymovement LAST_TALKED, LilycoveCity_House3_Movement_1A083D
+	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -23,7 +23,7 @@ LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 LilycoveCity_House3_EventScript_159C1D:: @ 8159C1D
 	msgbox LilycoveCity_House3_Text_18B9DC, 4
 	closemessage
-	applymovement LAST_TALKED, LilycoveCity_House3_Movement_1A083D
+	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -33,7 +33,7 @@ LilycoveCity_House3_EventScript_159C32:: @ 8159C32
 	faceplayer
 	msgbox LilycoveCity_House3_Text_18BD64, 4
 	closemessage
-	applymovement LAST_TALKED, LilycoveCity_House3_Movement_1A083D
+	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_1A083D
 	waitmovement 0
 	release
 	end

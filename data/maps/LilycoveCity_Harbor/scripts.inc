@@ -10,7 +10,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	lock
 	faceplayer
 	checkitem ITEM_EON_TICKET, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_Harbor_EventScript_1599EE
 	goto LilycoveCity_Harbor_EventScript_1598BA
 	end
@@ -24,7 +24,7 @@ LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
 LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
 	msgbox LilycoveCity_Harbor_Text_18B36F, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_159929
 	message LilycoveCity_Harbor_Text_18B406
 	waitmessage
@@ -33,7 +33,7 @@ LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
 
 LilycoveCity_Harbor_EventScript_1598F1:: @ 81598F1
 	multichoicedefault 18, 6, 56, 2, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, LilycoveCity_Harbor_EventScript_159933
 	case 1, LilycoveCity_Harbor_EventScript_15995B
 	case 2, LilycoveCity_Harbor_EventScript_1599E4
@@ -47,7 +47,7 @@ LilycoveCity_Harbor_EventScript_159929:: @ 8159929
 
 LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	msgbox LilycoveCity_Harbor_Text_18B47D, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_15998A
@@ -58,7 +58,7 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 
 LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
 	msgbox LilycoveCity_Harbor_Text_18B499, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp MAP_BATTLE_TOWER_OUTSIDE, 255, 19, 23
@@ -75,17 +75,17 @@ LilycoveCity_Harbor_EventScript_15997E:: @ 815997E
 LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	msgbox LilycoveCity_Harbor_Text_18B4B3, 4
 	closemessage
-	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
+	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
-	compare FACING, 2
+	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
+	compare VAR_FACING, 2
 	call_if_eq LilycoveCity_Harbor_EventScript_1599D9
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	return
 
@@ -110,10 +110,10 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closemessage
-	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
+	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
+	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
 	addobject 4
 	delay 30
@@ -125,14 +125,14 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	waitmovement 0
 	delay 30
 	removeobject 4
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq LilycoveCity_Harbor_EventScript_1599D9
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate

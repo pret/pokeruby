@@ -9,7 +9,7 @@ IslandCave_MapScript1_15EEC6:: @ 815EEC6
 	end
 
 IslandCave_EventScript_15EED0:: @ 815EED0
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	return
 
 IslandCave_MapScript1_15EED4:: @ 815EED4

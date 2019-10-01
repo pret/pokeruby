@@ -23,25 +23,25 @@ SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
 
 SlateportCity_Harbor_EventScript_155F9B:: @ 8155F9B
 	lockall
-	setvar VAR_SPECIAL_8, 0
+	setvar VAR_0x8008, 0
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FA7:: @ 8155FA7
 	lockall
-	setvar VAR_SPECIAL_8, 1
+	setvar VAR_0x8008, 1
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FB3:: @ 8155FB3
 	lockall
-	setvar VAR_SPECIAL_8, 2
+	setvar VAR_0x8008, 2
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 	lockall
-	setvar VAR_SPECIAL_8, 3
+	setvar VAR_0x8008, 3
 	applymovement 255, SlateportCity_Harbor_Movement_1560C2
 	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_155FD5
@@ -62,13 +62,13 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	removeobject 7
 	removeobject 8
 	setvar VAR_SLATEPORT_HARBOR_STATE, 2
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq SlateportCity_Harbor_EventScript_15605C
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq SlateportCity_Harbor_EventScript_156071
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq SlateportCity_Harbor_EventScript_156086
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closemessage
@@ -166,7 +166,7 @@ SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 SlateportCity_Harbor_EventScript_1560D9:: @ 81560D9
 	msgbox SlateportCity_Harbor_Text_17FA73, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156135
 	message SlateportCity_Harbor_Text_17FB0A
 	waitmessage
@@ -175,7 +175,7 @@ SlateportCity_Harbor_EventScript_1560D9:: @ 81560D9
 
 SlateportCity_Harbor_EventScript_1560FD:: @ 81560FD
 	multichoicedefault 18, 6, 52, 2, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_15613F
 	case 1, SlateportCity_Harbor_EventScript_156167
 	case 2, SlateportCity_Harbor_EventScript_1561DA
@@ -189,7 +189,7 @@ SlateportCity_Harbor_EventScript_156135:: @ 8156135
 
 SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 	msgbox SlateportCity_Harbor_Text_17FB81, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	setvar VAR_PORTHOLE_STATE, 1
 	call SlateportCity_Harbor_EventScript_156196
@@ -200,7 +200,7 @@ SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 
 SlateportCity_Harbor_EventScript_156167:: @ 8156167
 	msgbox SlateportCity_Harbor_Text_17FB9C, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	call SlateportCity_Harbor_EventScript_156196
 	warp MAP_BATTLE_TOWER_OUTSIDE, 255, 19, 23
@@ -217,17 +217,17 @@ SlateportCity_Harbor_EventScript_15618A:: @ 815618A
 SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	msgbox SlateportCity_Harbor_Text_17FBB6, 4
 	closemessage
-	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
+	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobjectat LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
-	compare FACING, 2
+	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
+	compare VAR_FACING, 2
 	call_if_eq SlateportCity_Harbor_EventScript_1561EF
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq SlateportCity_Harbor_EventScript_1561E4
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	setvar VAR_SPECIAL_4, 5
+	setvar VAR_0x8004, 5
 	call SlateportCity_Harbor_EventScript_1A040E
 	return
 
@@ -273,7 +273,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
 	closemessage
-	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
+	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -298,7 +298,7 @@ SlateportCity_Harbor_EventScript_15626F:: @ 815626F
 	compare VAR_TEMP_1, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_156380
 	checkitem ITEM_SCANNER, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_1562A7
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_15629D
 	msgbox SlateportCity_Harbor_Text_18017B, 4
@@ -318,7 +318,7 @@ SlateportCity_Harbor_EventScript_1562A7:: @ 81562A7
 
 SlateportCity_Harbor_EventScript_1562B3:: @ 81562B3
 	multichoice 0, 0, 46, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_1562EA
 	case 1, SlateportCity_Harbor_EventScript_15632A
 	case 2, SlateportCity_Harbor_EventScript_15636A
@@ -327,10 +327,10 @@ SlateportCity_Harbor_EventScript_1562B3:: @ 81562B3
 
 SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	msgbox SlateportCity_Harbor_Text_1803DD, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
 	giveitem_std ITEM_DEEP_SEA_TOOTH
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
@@ -340,10 +340,10 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 
 SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	msgbox SlateportCity_Harbor_Text_180412, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
 	giveitem_std ITEM_DEEP_SEA_SCALE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4

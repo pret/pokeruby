@@ -22,16 +22,16 @@ LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
 	end
 
 @ 81527F1
 	lockall
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_15280A
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152814
 	end
 
@@ -50,14 +50,14 @@ gUnknown_0815281E:: @ 815281E
 LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 	lockall
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152837
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_15285D
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, 4
@@ -67,7 +67,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	end
 
 gBrendanHouse_TurnPCOff:: @ 8152850
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall

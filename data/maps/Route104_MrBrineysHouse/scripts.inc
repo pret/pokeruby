@@ -33,7 +33,7 @@ Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
 	msgbox Route104_MrBrineysHouse_Text_191AAD, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
@@ -42,7 +42,7 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 	message Route104_MrBrineysHouse_Text_191E80
 	waitmessage
 	multichoicedefault 21, 8, 14, 1, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, Route104_MrBrineysHouse_EventScript_15BDAB
 	case 1, Route104_MrBrineysHouse_EventScript_15BDA1
 	case 127, Route104_MrBrineysHouse_EventScript_15BDA1
@@ -50,14 +50,14 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 
 Route104_MrBrineysHouse_EventScript_15BD65:: @ 815BD65
 	msgbox Route104_MrBrineysHouse_Text_191CC3, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
 	msgbox Route104_MrBrineysHouse_Text_191DA6, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end

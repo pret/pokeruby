@@ -2,8 +2,8 @@ Route111_EventScript_1AE313:: @ 81AE313
 Route118_EventScript_1AE313:: @ 81AE313
 Route120_EventScript_1AE313:: @ 81AE313
 	cleartrainerflag TRAINER_GABBY_AND_TY_6
-	specialvar RESULT, GabbyAndTyGetBattleNum
-	switch RESULT
+	specialvar VAR_RESULT, GabbyAndTyGetBattleNum
+	switch VAR_RESULT
 	case 0, Route111_EventScript_1AE384
 	case 1, Route111_EventScript_1AE38A
 	case 2, Route111_EventScript_1AE395
@@ -202,11 +202,11 @@ Route120_EventScript_1AE582:: @ 81AE582
 Route111_EventScript_1AE5A2:: @ 81AE5A2
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToEventObjectLocalIds
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq Route111_EventScript_1AE5E0
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq Route111_EventScript_1AE5EB
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq Route111_EventScript_1AE5FD
 	goto_if_set FLAG_TEMP_1, Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, MSGBOX_YESNO
@@ -214,19 +214,19 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	end
 
 Route111_EventScript_1AE5E0:: @ 81AE5E0
-	applymovement VAR_SPECIAL_4, Route111_Movement_1AE699
+	applymovement VAR_0x8004, Route111_Movement_1AE699
 	waitmovement 0
 	return
 
 Route111_EventScript_1AE5EB:: @ 81AE5EB
-	applymovement VAR_SPECIAL_4, Route111_Movement_1AE69B
-	applymovement VAR_SPECIAL_5, Route111_Movement_1A0841
+	applymovement VAR_0x8004, Route111_Movement_1AE69B
+	applymovement VAR_0x8005, Route111_Movement_1A0841
 	waitmovement 0
 	return
 
 Route111_EventScript_1AE5FD:: @ 81AE5FD
-	applymovement VAR_SPECIAL_4, Route111_Movement_1AE69D
-	applymovement VAR_SPECIAL_5, Route111_Movement_1A083F
+	applymovement VAR_0x8004, Route111_Movement_1AE69D
+	applymovement VAR_0x8005, Route111_Movement_1A083F
 	waitmovement 0
 	return
 
@@ -235,19 +235,19 @@ Route118_EventScript_1AE60F:: @ 81AE60F
 Route120_EventScript_1AE60F:: @ 81AE60F
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToEventObjectLocalIds
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq Route111_EventScript_1AE5E0
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq Route111_EventScript_1AE5EB
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq Route111_EventScript_1AE5FD
 	goto_if_set FLAG_TEMP_1, Route111_EventScript_1AE73A
-	specialvar RESULT, GabbyAndTyGetLastQuote
-	compare RESULT, 0
+	specialvar VAR_RESULT, GabbyAndTyGetLastQuote
+	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_1AE69F
 	msgbox Route111_Text_1AC10A, 4
-	specialvar RESULT, GabbyAndTyGetLastBattleTrivia
-	switch RESULT
+	specialvar VAR_RESULT, GabbyAndTyGetLastBattleTrivia
+	switch VAR_RESULT
 	case 0, Route111_EventScript_1AE6AD
 	case 1, Route111_EventScript_1AE6BB
 	case 2, Route111_EventScript_1AE6C9
@@ -298,14 +298,14 @@ Route111_EventScript_1AE6E5:: @ 81AE6E5
 	end
 
 Route111_EventScript_1AE6F3:: @ 81AE6F3
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC40F, 4
-	setvar VAR_SPECIAL_4, 10
+	setvar VAR_0x8004, 10
 	call Route111_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC487, 4
 	special GabbyAndTyAfterInterview

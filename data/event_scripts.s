@@ -424,7 +424,7 @@ gUnknown_0815F399:: @ 815F399
 
 EventScript_15F3A0:
 	multichoice 0, 0, 6, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, EventScript_15F432
 	case 1, EventScript_15F419
 	case 2, EventScript_15F436
@@ -434,7 +434,7 @@ EventScript_15F3A0:
 
 EventScript_15F3E2:
 	multichoice 0, 0, 5, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, EventScript_15F432
 	case 1, EventScript_15F419
 	case 2, EventScript_15F51D
@@ -443,7 +443,7 @@ EventScript_15F3E2:
 
 EventScript_15F419:
 	msgbox UnknownString_81A38FB, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_15F384
 	closemessage
 	special SecretBasePC_PackUp
@@ -474,7 +474,7 @@ EventScript_15F452:
 	message UnknownString_81A3A87
 	waitmessage
 	multichoice 0, 0, 7, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, EventScript_15F4A1
 	case 1, EventScript_15F436
 	case 2, EventScript_15F511
@@ -489,13 +489,13 @@ gUnknown_0815F49A:: @ 815F49A
 
 EventScript_15F4A1:
 	special sub_80BC56C
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq EventScript_15F4E0
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq EventScript_15F503
 	special BufferSecretBaseOwnerName
 	msgbox UnknownString_81A3958, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_15F452
 	msgbox UnknownString_81A3A22, 3
 	special sub_80BC5BC
@@ -505,7 +505,7 @@ EventScript_15F4A1:
 
 EventScript_15F4E0:
 	msgbox UnknownString_81A3982, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_15F452
 	msgbox UnknownString_81A3A3A, 3
 	special sub_80BC5BC
@@ -539,13 +539,13 @@ gUnknown_0815F523:: @ 815F523
 
 gUnknown_0815F528:: @ 815F528
 	special GetShieldToyTVDecorationInfo
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_15F558
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq EventScript_15F561
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq EventScript_15F56A
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq EventScript_15F573
 	end
 
@@ -946,10 +946,10 @@ gUnknown_0819F80B:: @ 819F80B
 gUnknown_0819F818:: @ 819F818
 	lock
 	faceplayer
-	applymovement LAST_TALKED, Movement_19F8F0
+	applymovement VAR_LAST_TALKED, Movement_19F8F0
 	waitmovement 0
-	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
-	compare RESULT, 0
+	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	compare VAR_RESULT, 0
 	goto_if_ne EventScript_19F83F
 	special PlayTrainerEncounterMusic
 	special sub_8082524
@@ -962,11 +962,11 @@ gUnknown_0819F840:: @ 819F840
 	lock
 	faceplayer
 	call EventScript_19F8E5
-	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
-	compare RESULT, 0
+	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	compare VAR_RESULT, 0
 	goto_if_ne EventScript_19F877
 	special CheckForAlivePartyMons
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_ne EventScript_19F870
 	special PlayTrainerEncounterMusic
 	special sub_8082524
@@ -983,7 +983,7 @@ EventScript_19F877:
 	gotopostbattlescript
 
 gUnknown_0819F878:: @ 819F878
-	applymovement LAST_TALKED, Movement_19F8F0
+	applymovement VAR_LAST_TALKED, Movement_19F8F0
 	waitmovement 0
 	special PlayTrainerEncounterMusic
 	trainerbattlebegin
@@ -991,8 +991,8 @@ gUnknown_0819F878:: @ 819F878
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
-	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
-	compare RESULT, 0
+	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_19F8AD
 	special PlayTrainerEncounterMusic
 	special sub_8082524
@@ -1008,11 +1008,11 @@ EventScript_19F8AD:
 	gotopostbattlescript
 
 gUnknown_0819F8AE:: @ 819F8AE
-	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
-	compare RESULT, 0
+	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_19F8DD
 	special CheckForAlivePartyMons
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_ne EventScript_19F8DE
 	special PlayTrainerEncounterMusic
 	special sub_8082524
@@ -1035,7 +1035,7 @@ EventScript_19F8DE:
 	end
 
 EventScript_19F8E5:
-	applymovement LAST_TALKED, Movement_19F8F0
+	applymovement VAR_LAST_TALKED, Movement_19F8F0
 	waitmovement 0
 	return
 
@@ -1048,16 +1048,16 @@ EventScript_19F8F2:
 	waitmessage
 	waitbuttonpress
 	trainerbattlebegin
-	specialvar RESULT, ScrSpecial_GetTrainerBattleMode
-	compare RESULT, 0
+	specialvar VAR_RESULT, ScrSpecial_GetTrainerBattleMode
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_19F934
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq EventScript_19F936
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq EventScript_19F936
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq EventScript_19F936
-	compare RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if_eq EventScript_19F936
 
 EventScript_19F934:
@@ -1435,9 +1435,9 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	lock
 	faceplayer
 	msgbox gText_NurseJoy_Welcome, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq do_heal_party
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq dont_heal_party
 	end
 
@@ -1445,11 +1445,11 @@ do_heal_party:: @ 819FD7C
 	incrementgamestat GAME_STAT_USED_POKECENTER
 	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waitmessage
-	applymovement VAR_SPECIAL_B, OldaleTown_PokemonCenter_1F_Movement_1A083F
+	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_1A083F
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_SPECIAL_B, OldaleTown_PokemonCenter_1F_Movement_1A0845
+	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
 	goto_if_unset FLAG_POKERUS_EXPLAINED, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
@@ -1459,7 +1459,7 @@ do_heal_party:: @ 819FD7C
 OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
 	message gText_NurseJoy_ThankYouForWaiting
 	waitmessage
-	applymovement VAR_SPECIAL_B, OldaleTown_PokemonCenter_1F_Movement_19FDF4
+	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_19FDF4
 	waitmovement 0
 	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waitmessage
@@ -1471,10 +1471,10 @@ dont_heal_party:: @ 819FDC7
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
-	specialvar RESULT, IsPokerusInParty
-	compare RESULT, 1
+	specialvar VAR_RESULT, IsPokerusInParty
+	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FDEA
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
 
@@ -1490,23 +1490,23 @@ OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
 	end_movement
 
 Std_ObtainItem: @ 819FDF7
-	giveitem VAR_SPECIAL_0, VAR_SPECIAL_1
-	copyvar VAR_SPECIAL_7, RESULT
+	giveitem VAR_0x8000, VAR_0x8001
+	copyvar VAR_0x8007, VAR_RESULT
 	call Std_ObtainItem_
 	return
 
 Std_ObtainItem_: @ 819FE07
-	bufferitemname 1, VAR_SPECIAL_0
-	checkitemtype VAR_SPECIAL_0
+	bufferitemname 1, VAR_0x8000
+	checkitemtype VAR_0x8000
 	call GetItem_HandlePocket
-	compare VAR_SPECIAL_7, 0x1
+	compare VAR_0x8007, 0x1
 	call_if_eq Std_ObtainItem_Success
-	compare VAR_SPECIAL_7, 0x0
+	compare VAR_0x8007, 0x0
 	call_if_eq Std_ObtainItem_Fail
 	return
 
 GetItem_HandlePocket:
-	switch RESULT
+	switch VAR_RESULT
 	case POCKET_ITEMS,      GetItem_HandlePocket_Items
 	case POCKET_KEY_ITEMS,  GetItem_HandlePocket_KeyItems
 	case POCKET_POKE_BALLS, GetItem_HandlePocket_PokeBalls
@@ -1516,31 +1516,31 @@ GetItem_HandlePocket:
 
 GetItem_HandlePocket_Items:
 	bufferstdstring 2, 0xE
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	call_if_eq PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_KeyItems:
 	bufferstdstring 2, 0xF
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	call_if_eq PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_PokeBalls:
 	bufferstdstring 2, 0x10
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	call_if_eq PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_TMsHMs:
 	bufferstdstring 2, 0x11
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	call_if_eq PlayGetTMHMFanfare
 	return
 
 GetItem_HandlePocket_Berries:
 	bufferstdstring 2, 0x12
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	call_if_eq PlayGetItemFanfare
 	return
 
@@ -1549,11 +1549,11 @@ Std_ObtainItem_Success: @ 819FEB7
 	waitfanfare
 	waitmessage
 	msgbox Message_PutAwayItem
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	return
 
 Std_ObtainItem_Fail: @ 819FECC
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	return
 
 PlayGetItemFanfare:
@@ -1565,16 +1565,16 @@ PlayGetTMHMFanfare:
 	return
 
 Std_ObtainDecoration: @ 819FEDA
-	givedecoration VAR_SPECIAL_0
-	copyvar VAR_SPECIAL_7, RESULT
+	givedecoration VAR_0x8000
+	copyvar VAR_0x8007, VAR_RESULT
 	call Std_ObtainDecoration_
 	return
 
 Std_ObtainDecoration_: @ 819FEE8
-	bufferdecorationname 1, VAR_SPECIAL_0
-	compare VAR_SPECIAL_7, 1
+	bufferdecorationname 1, VAR_0x8000
+	compare VAR_0x8007, 1
 	call_if_eq Std_ObtainDecoration_Success
-	compare VAR_SPECIAL_7, 0
+	compare VAR_0x8007, 0
 	call_if_eq Std_ObtainDecoration_Fail
 	return
 
@@ -1584,31 +1584,31 @@ Std_ObtainDecoration_Success: @ 819FF03
 	waitfanfare
 	waitmessage
 	msgbox Message_TransferredToPC
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	return
 
 Std_ObtainDecoration_Fail: @ 819FF1B
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	return
 
 Std_FindItem: @ 819FF21
 	lock
 	faceplayer
 	waitse
-	giveitem VAR_SPECIAL_0, VAR_SPECIAL_1
-	copyvar VAR_SPECIAL_7, RESULT
-	bufferitemname 1, VAR_SPECIAL_0
-	checkitemtype VAR_SPECIAL_0
+	giveitem VAR_0x8000, VAR_0x8001
+	copyvar VAR_0x8007, VAR_RESULT
+	bufferitemname 1, VAR_0x8000
+	checkitemtype VAR_0x8000
 	call GetItem_HandlePocket
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	call_if_eq Std_FindItem_Success
-	compare VAR_SPECIAL_7, 0
+	compare VAR_0x8007, 0
 	call_if_eq Std_FindItem_Fail
 	release
 	return
 
 Std_FindItem_Success: @ 819FF52
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	message Message_FoundOneItem
 	waitfanfare
 	waitmessage
@@ -1618,20 +1618,20 @@ Std_FindItem_Success: @ 819FF52
 Std_FindItem_Fail: @ 819FF65
 	msgbox Message_ObtainedItem
 	msgbox Message_BagFull
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	return
 
 HiddenItemScript:: @ 819FF7B
 	lockall
 	waitse
-	giveitem VAR_SPECIAL_5, 1
-	copyvar VAR_SPECIAL_7, RESULT
-	bufferitemname 0x1, VAR_SPECIAL_5
-	checkitemtype VAR_SPECIAL_5
+	giveitem VAR_0x8005, 1
+	copyvar VAR_0x8007, VAR_RESULT
+	bufferitemname 0x1, VAR_0x8005
+	checkitemtype VAR_0x8005
 	call GetItem_HandlePocket
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	goto_if_eq HiddenItemScript_Success
-	compare VAR_SPECIAL_7, 0
+	compare VAR_0x8007, 0
 	goto_if_eq HiddenItemScript_Fail
 	end
 
@@ -1647,7 +1647,7 @@ HiddenItemScript_Success:
 HiddenItemScript_Fail:
 	msgbox Message_FoundOneItem
 	msgbox Message_BagFull
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	releaseall
 	end
 
@@ -1655,9 +1655,9 @@ UnusedMixRecordsScript: @ 819FFD5
 	lock
 	faceplayer
 	msgbox UnusedMixRecordsPromptText, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq UnusedMixRecordsScript_Yes
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq UnusedMixRecordsScript_Done
 	goto UnusedMixRecordsScript_Done
 UnusedMixRecordsScript_Yes: @ 819FFFA
@@ -1674,7 +1674,7 @@ UnusedMixRecordsScript_Done: @ 81A0000
 
 gUnknown_081A0009:: @ 81A0009
 	lockall
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox UnknownString_81A09EC, 4
@@ -1690,7 +1690,7 @@ EventScript_1A0023:
 	end
 
 EventScript_1A0033:
-	switch RESULT
+	switch VAR_RESULT
 	case 0, EventScript_1A0085
 	case 1, EventScript_1A0070
 	case 2, EventScript_1A00CB
@@ -1725,7 +1725,7 @@ EventScript_1A00B5:
 	return
 
 EventScript_1A00BE:
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
@@ -1796,26 +1796,26 @@ RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
 DewfordTown_EventScript_1A0102:: @ 81A0102
 DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
 	dodailyevents
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return
 
 DewfordTown_EventScript_1A010C:: @ 81A010C
 Route104_MrBrineysHouse_EventScript_1A010C:: @ 81A010C
 Route109_EventScript_1A010C:: @ 81A010C
-	copyvar VAR_SPECIAL_8, VAR_BRINEY_LOCATION
+	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
 UseSurfScript:: @ 81A0117
 	checkpartymove MOVE_SURF
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq UseSurfScript_NoMon
-	bufferpartymonnick 0, RESULT
-	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	lockall
 	msgbox UseSurfPromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq UseSurfScript_No
 	msgbox UsedSurfText, 4
 	dofieldeffect FLDEFF_USE_SURF
@@ -1834,9 +1834,9 @@ Route110_EventScript_1A014E:: @ 81A014E
 Route119_EventScript_1A014E:: @ 81A014E
 RustboroCity_EventScript_1A014E:: @ 81A014E
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_EventScript_1A0166
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_EventScript_1A016C
 	end
 
@@ -1852,9 +1852,9 @@ LavaridgeTown_EventScript_1A0172:: @ 81A0172
 Route110_EventScript_1A0172:: @ 81A0172
 Route119_EventScript_1A0172:: @ 81A0172
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_1A018A
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LavaridgeTown_EventScript_1A0190
 	end
 
@@ -1925,7 +1925,7 @@ MossdeepCity_Gym_EventScript_1A01C0:: @ 81A01C0
 PetalburgCity_Gym_EventScript_1A01C0:: @ 81A01C0
 RustboroCity_Gym_EventScript_1A01C0:: @ 81A01C0
 SootopolisCity_Gym_1F_EventScript_1A01C0:: @ 81A01C0
-	switch VAR_SPECIAL_8
+	switch VAR_0x8008
 	case 1, DewfordTown_Gym_EventScript_1A021E
 	case 2, DewfordTown_Gym_EventScript_1A0225
 	case 3, DewfordTown_Gym_EventScript_1A022F
@@ -2181,7 +2181,7 @@ Route103_EventScript_1A037F:: @ 81A037F
 	lock
 	faceplayer
 	msgbox Route101_Text_1C4449, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route101_EventScript_1A039B
 	call Route101_EventScript_1A03B0
 	release
@@ -2193,7 +2193,7 @@ Route101_EventScript_1A039B:: @ 81A039B
 	end
 
 Route101_EventScript_1A03A5:: @ 81A03A5
-	copyvar VAR_SPECIAL_4, VAR_SPECIAL_9
+	copyvar VAR_0x8004, VAR_0x8009
 	special ShowPokedexRatingMessage
 	waitmessage
 	waitbuttonpress
@@ -2201,23 +2201,23 @@ Route101_EventScript_1A03A5:: @ 81A03A5
 
 EverGrandeCity_ChampionsRoom_EventScript_1A03B0:: @ 81A03B0
 Route101_EventScript_1A03B0:: @ 81A03B0
-	setvar VAR_SPECIAL_4, 0
-	specialvar RESULT, ScriptGetPokedexInfo
-	copyvar VAR_SPECIAL_8, VAR_SPECIAL_5
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	copyvar VAR_SPECIAL_A, RESULT
-	buffernumberstring 0, VAR_SPECIAL_8
-	buffernumberstring 1, VAR_SPECIAL_9
+	setvar VAR_0x8004, 0
+	specialvar VAR_RESULT, ScriptGetPokedexInfo
+	copyvar VAR_0x8008, VAR_0x8005
+	copyvar VAR_0x8009, VAR_0x8006
+	copyvar VAR_0x800A, VAR_RESULT
+	buffernumberstring 0, VAR_0x8008
+	buffernumberstring 1, VAR_0x8009
 	msgbox Route101_Text_1C44DC, 4
 	call Route101_EventScript_1A03A5
-	compare VAR_SPECIAL_A, 0
+	compare VAR_0x800A, 0
 	goto_if_eq Route101_EventScript_1A14DC
-	setvar VAR_SPECIAL_4, 1
-	specialvar RESULT, ScriptGetPokedexInfo
-	copyvar VAR_SPECIAL_8, VAR_SPECIAL_5
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	buffernumberstring 0, VAR_SPECIAL_8
-	buffernumberstring 1, VAR_SPECIAL_9
+	setvar VAR_0x8004, 1
+	specialvar VAR_RESULT, ScriptGetPokedexInfo
+	copyvar VAR_0x8008, VAR_0x8005
+	copyvar VAR_0x8009, VAR_0x8006
+	buffernumberstring 0, VAR_0x8008
+	buffernumberstring 1, VAR_0x8009
 	msgbox Route101_Text_1C4B05, 4
 	return
 
@@ -2225,7 +2225,7 @@ BattleTower_Outside_EventScript_1A040E:: @ 81A040E
 LilycoveCity_Harbor_EventScript_1A040E:: @ 81A040E
 SlateportCity_Harbor_EventScript_1A040E:: @ 81A040E
 	delay 60
-	applymovement VAR_SPECIAL_4, SlateportCity_Harbor_Movement_1A041C
+	applymovement VAR_0x8004, SlateportCity_Harbor_Movement_1A041C
 	waitmovement 0
 	return
 
@@ -2277,9 +2277,9 @@ Movement_1A047A:
 
 BattleTower_Outside_EventScript_1A047C:: @ 81A047C
 SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq BattleTower_Outside_EventScript_160B2F
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq BattleTower_Outside_EventScript_160B3A
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
@@ -2319,8 +2319,8 @@ CaveOfOrigin_B3F_EventScript_1A04BB:: @ 81A04BB
 
 CaveOfOrigin_1F_EventScript_1A04D3:: @ 81A04D3
 CaveOfOrigin_B2F_EventScript_1A04D3:: @ 81A04D3
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
 	special sub_810F758
 	waitstate
 	releaseall
@@ -2373,56 +2373,56 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 Route120_EventScript_1A0539:: @ 81A0539
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A0546:: @ 81A0546
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A0553:: @ 81A0553
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 3
+	setvar VAR_0x8004, 3
 	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A0560:: @ 81A0560
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 4
+	setvar VAR_0x8004, 4
 	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A056D:: @ 81A056D
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 5
+	setvar VAR_0x8004, 5
 	goto Route120_EventScript_1A0594
 	end
 
 Route119_EventScript_1A057A:: @ 81A057A
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 6
+	setvar VAR_0x8004, 6
 	goto Route119_EventScript_1A0594
 	end
 
 Route119_EventScript_1A0587:: @ 81A0587
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_4, 7
+	setvar VAR_0x8004, 7
 	goto Route119_EventScript_1A0594
 	end
 
 Route119_EventScript_1A0594:: @ 81A0594
 Route120_EventScript_1A0594:: @ 81A0594
 	checkitem ITEM_DEVON_SCOPE, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_1A05AE
 	msgbox Route119_Text_171B93, 4
 	release
@@ -2430,7 +2430,7 @@ Route120_EventScript_1A0594:: @ 81A0594
 
 Route119_EventScript_1A05AE:: @ 81A05AE
 	msgbox Route119_Text_171BB6, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq Route119_EventScript_1A05C3
 	release
 	end
@@ -2438,28 +2438,28 @@ Route119_EventScript_1A05AE:: @ 81A05AE
 Route119_EventScript_1A05C3:: @ 81A05C3
 	msgbox Route119_Text_171BF6, 4
 	closemessage
-	applymovement LAST_TALKED, Route119_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Route119_Movement_1A0839
 	waitmovement 0
-	applymovement LAST_TALKED, Route119_Movement_1A0662
+	applymovement VAR_LAST_TALKED, Route119_Movement_1A0662
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2
 	delay 40
 	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
-	compare VAR_SPECIAL_4, 1
+	compare VAR_0x8004, 1
 	call_if_eq Route119_EventScript_1A0646
-	compare VAR_SPECIAL_4, 2
+	compare VAR_0x8004, 2
 	call_if_eq Route119_EventScript_1A064A
-	compare VAR_SPECIAL_4, 3
+	compare VAR_0x8004, 3
 	call_if_eq Route119_EventScript_1A064E
-	compare VAR_SPECIAL_4, 4
+	compare VAR_0x8004, 4
 	call_if_eq Route119_EventScript_1A0652
-	compare VAR_SPECIAL_4, 5
+	compare VAR_0x8004, 5
 	call_if_eq Route119_EventScript_1A0656
-	compare VAR_SPECIAL_4, 6
+	compare VAR_0x8004, 6
 	call_if_eq Route119_EventScript_1A065A
-	compare VAR_SPECIAL_4, 7
+	compare VAR_0x8004, 7
 	call_if_eq Route119_EventScript_1A065E
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
@@ -2534,12 +2534,12 @@ FallarborTown_House1_EventScript_1A067F:: @ 81A067F
 GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
-	bufferitemname 0, VAR_SPECIAL_4
+	bufferitemname 0, VAR_0x8004
 	playfanfare MUS_ME_WAZA
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare
-	takeitem VAR_SPECIAL_4, 1
+	takeitem VAR_0x8004, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
@@ -3251,7 +3251,7 @@ gUnknown_081A14B8:: @ 81A14B8
 	lockall
 	special ExecuteWhiteOut
 	waitstate
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq EventScript_1A14CA
 	releaseall
 	end
@@ -3596,32 +3596,32 @@ SecretBase_RedCave1_Text_1A2BA4:: @ 81A2BA4
 gUnknown_081A2C51:: @ 81A2C51
 	special sub_80BB70C
 	special CheckPlayerHasSecretBase
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq AskToMoveSecretBase
 	checkpartymove MOVE_SECRET_POWER
-	setfieldeffectargument 0, RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	buffermovename 1, MOVE_SECRET_POWER
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	goto_if_eq EventScript_1A2CB0
-	compare VAR_SPECIAL_7, 2
+	compare VAR_0x8007, 2
 	goto_if_eq EventScript_1A2CB0
-	compare VAR_SPECIAL_7, 3
+	compare VAR_0x8007, 3
 	goto_if_eq EventScript_1A2CB0
-	compare VAR_SPECIAL_7, 4
+	compare VAR_0x8007, 4
 	goto_if_eq EventScript_1A2CB0
-	compare VAR_SPECIAL_7, 5
+	compare VAR_0x8007, 5
 	goto_if_eq EventScript_1A2D08
-	compare VAR_SPECIAL_7, 6
+	compare VAR_0x8007, 6
 	goto_if_eq EventScript_1A2D60
 	end
 
 EventScript_1A2CB0:
 	lockall
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq EventScript_1A2CF1
-	bufferpartymonnick 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
 	msgbox UnknownString_8198F34, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -3648,11 +3648,11 @@ EventScript_1A2CFA:
 
 EventScript_1A2D08:
 	lockall
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq EventScript_1A2D49
-	bufferpartymonnick 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
 	msgbox UnknownString_81A197B, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -3679,11 +3679,11 @@ EventScript_1A2D52:
 
 EventScript_1A2D60:
 	lockall
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq EventScript_1A2DA1
-	bufferpartymonnick 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
 	msgbox UnknownString_81A1A4B, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -3715,8 +3715,8 @@ EventScript_1A2DB8:
 	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
 	special sub_80BBAF0
-	setvar VAR_SPECIAL_4, 0
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 0
 	special sub_80BBDD0
 	setvar VAR_0x4089, 1
 	waitstate
@@ -3727,7 +3727,7 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	waitmovement 0
 	setvar VAR_0x4097, 1
 	msgbox SecretBase_RedCave1_Text_198F89, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
 	closemessage
 	playse SE_KAIDAN
@@ -3751,7 +3751,7 @@ gUnknown_081A2E14:: @ 81A2E14
 	setvar VAR_0x4097, 1
 	playse SE_KAIDAN
 	special sub_80BC114
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1A2E38
 	clearflag FLAG_DECORATION_1
 	special sub_80BBAF0
@@ -3768,57 +3768,57 @@ EventScript_1A2E38:
 
 AskToMoveSecretBase:
 	checkpartymove MOVE_SECRET_POWER
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq EventScript_1A2EF7
-	setfieldeffectargument 0, RESULT
-	setorcopyvar VAR_SPECIAL_4, RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
 	msgbox UnknownString_81A3C71, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UnknownString_81A38FB, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	fadescreen 1
 	special MoveSecretBase
 	closemessage
 	fadescreen 0
 	msgbox UnknownString_81A3CC9, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	bufferpartymonnick 0, VAR_SPECIAL_4
+	bufferpartymonnick 0, VAR_0x8004
 	buffermovename 1, MOVE_SECRET_POWER
 	msgbox UsedCutRockSmashText, 4
 	closemessage
 	closemessage
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	goto_if_eq DoSecretBaseCaveFieldEffectScript
-	compare VAR_SPECIAL_7, 2
+	compare VAR_0x8007, 2
 	goto_if_eq DoSecretBaseCaveFieldEffectScript
-	compare VAR_SPECIAL_7, 3
+	compare VAR_0x8007, 3
 	goto_if_eq DoSecretBaseCaveFieldEffectScript
-	compare VAR_SPECIAL_7, 4
+	compare VAR_0x8007, 4
 	goto_if_eq DoSecretBaseCaveFieldEffectScript
-	compare VAR_SPECIAL_7, 5
+	compare VAR_0x8007, 5
 	goto_if_eq DoSecretBaseTreeFieldEffectScript
-	compare VAR_SPECIAL_7, 6
+	compare VAR_0x8007, 6
 	goto_if_eq DoSecretBaseShrubFieldEffectScript
 	releaseall
 	end
 
 EventScript_1A2EF7::
-	compare VAR_SPECIAL_7, 1
+	compare VAR_0x8007, 1
 	goto_if_eq EventScript_1A2CF1
-	compare VAR_SPECIAL_7, 2
+	compare VAR_0x8007, 2
 	goto_if_eq EventScript_1A2CF1
-	compare VAR_SPECIAL_7, 3
+	compare VAR_0x8007, 3
 	goto_if_eq EventScript_1A2CF1
-	compare VAR_SPECIAL_7, 4
+	compare VAR_0x8007, 4
 	goto_if_eq EventScript_1A2CF1
-	compare VAR_SPECIAL_7, 5
+	compare VAR_0x8007, 5
 	goto_if_eq EventScript_1A2D49
-	compare VAR_SPECIAL_7, 6
+	compare VAR_0x8007, 6
 	goto_if_eq EventScript_1A2DA1
 	end
 
@@ -3849,14 +3849,14 @@ SecretBase_RedCave1_EventScript_1A2F3D:: @ 81A2F3D
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F68:: @ 81A2F68
 LittlerootTown_MaysHouse_2F_EventScript_1A2F68:: @ 81A2F68
 SecretBase_RedCave1_EventScript_1A2F68:: @ 81A2F68
-	setvar VAR_SPECIAL_4, 0
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 0
 	special sub_80BBDD0
 	setvar VAR_0x4089, 1
 	end
 
 gUnknown_081A2F7B:: @ 81A2F7B
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8005, 0
 	goto EventScript_1A2F86
 	end
 
@@ -3865,19 +3865,19 @@ EventScript_1A2F86:
 	end
 
 gUnknown_081A2F8A:: @ 81A2F8A
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	goto EventScript_1A2F95
 	end
 
 EventScript_1A2F95:
 	special sub_8100A7C
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq EventScript_1A2FBF
-	addvar VAR_SPECIAL_4, 1
-	compare VAR_SPECIAL_5, 0
+	addvar VAR_0x8004, 1
+	compare VAR_0x8005, 0
 	goto_if_eq EventScript_1A2F95
-	removeobject VAR_SPECIAL_6
-	setflag VAR_SPECIAL_5
+	removeobject VAR_0x8006
+	setflag VAR_0x8005
 	goto EventScript_1A2F95
 	end
 
@@ -3909,41 +3909,41 @@ SecretBase_YellowCave2_EventScript_1A2FC0:: @ 81A2FC0
 SecretBase_YellowCave3_EventScript_1A2FC0:: @ 81A2FC0
 SecretBase_YellowCave4_EventScript_1A2FC0:: @ 81A2FC0
 	special sub_80BCE90
-	compare VAR_SPECIAL_4, 0
+	compare VAR_0x8004, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3032
-	compare VAR_SPECIAL_4, 1
+	compare VAR_0x8004, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30AE
-	compare VAR_SPECIAL_4, 2
+	compare VAR_0x8004, 2
 	goto_if_eq SecretBase_RedCave1_EventScript_1A312A
-	compare VAR_SPECIAL_4, 3
+	compare VAR_0x8004, 3
 	goto_if_eq SecretBase_RedCave1_EventScript_1A31A6
-	compare VAR_SPECIAL_4, 4
+	compare VAR_0x8004, 4
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3222
-	compare VAR_SPECIAL_4, 5
+	compare VAR_0x8004, 5
 	goto_if_eq SecretBase_RedCave1_EventScript_1A329E
-	compare VAR_SPECIAL_4, 6
+	compare VAR_0x8004, 6
 	goto_if_eq SecretBase_RedCave1_EventScript_1A331A
-	compare VAR_SPECIAL_4, 7
+	compare VAR_0x8004, 7
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3396
-	compare VAR_SPECIAL_4, 8
+	compare VAR_0x8004, 8
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3412
-	compare VAR_SPECIAL_4, 9
+	compare VAR_0x8004, 9
 	goto_if_eq SecretBase_RedCave1_EventScript_1A348E
 	end
 
 SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3086
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30A5
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A1AEA, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1B83, 4
@@ -3955,7 +3955,7 @@ SecretBase_RedCave1_EventScript_1A3086:: @ 81A3086
 	end
 
 SecretBase_RedCave1_EventScript_1A308F:: @ 81A308F
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1B97, 2
@@ -3967,17 +3967,17 @@ SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3102
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3121
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A1E67, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1F04, 4
@@ -3989,7 +3989,7 @@ SecretBase_RedCave1_EventScript_1A3102:: @ 81A3102
 	end
 
 SecretBase_RedCave1_EventScript_1A310B:: @ 81A310B
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1F2E, 2
@@ -4001,17 +4001,17 @@ SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A317E
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A319D
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A218F, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2220, 4
@@ -4023,7 +4023,7 @@ SecretBase_RedCave1_EventScript_1A317E:: @ 81A317E
 	end
 
 SecretBase_RedCave1_EventScript_1A3187:: @ 81A3187
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2230, 2
@@ -4035,17 +4035,17 @@ SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A31FA
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3219
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A24E1, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A256F, 4
@@ -4057,7 +4057,7 @@ SecretBase_RedCave1_EventScript_1A31FA:: @ 81A31FA
 	end
 
 SecretBase_RedCave1_EventScript_1A3203:: @ 81A3203
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A258A, 2
@@ -4069,17 +4069,17 @@ SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3276
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3295
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A2830, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A28D7, 4
@@ -4091,7 +4091,7 @@ SecretBase_RedCave1_EventScript_1A3276:: @ 81A3276
 	end
 
 SecretBase_RedCave1_EventScript_1A327F:: @ 81A327F
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A28F4, 2
@@ -4103,17 +4103,17 @@ SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A32F2
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3311
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A1CB2, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1D48, 4
@@ -4125,7 +4125,7 @@ SecretBase_RedCave1_EventScript_1A32F2:: @ 81A32F2
 	end
 
 SecretBase_RedCave1_EventScript_1A32FB:: @ 81A32FB
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1D59, 2
@@ -4137,17 +4137,17 @@ SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A336E
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A338D
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A2026, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2095, 4
@@ -4159,7 +4159,7 @@ SecretBase_RedCave1_EventScript_1A336E:: @ 81A336E
 	end
 
 SecretBase_RedCave1_EventScript_1A3377:: @ 81A3377
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A20AE, 2
@@ -4171,17 +4171,17 @@ SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A33EA
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3409
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A236A, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2405, 4
@@ -4193,7 +4193,7 @@ SecretBase_RedCave1_EventScript_1A33EA:: @ 81A33EA
 	end
 
 SecretBase_RedCave1_EventScript_1A33F3:: @ 81A33F3
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2420, 2
@@ -4205,17 +4205,17 @@ SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3466
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3485
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A2663, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2710, 4
@@ -4227,7 +4227,7 @@ SecretBase_RedCave1_EventScript_1A3466:: @ 81A3466
 	end
 
 SecretBase_RedCave1_EventScript_1A346F:: @ 81A346F
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2736, 2
@@ -4239,17 +4239,17 @@ SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A34E2
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3501
 	lock
 	faceplayer
 	msgbox SecretBase_RedCave1_Text_1A2A13, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	special sub_80BCE4C
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2AE2, 4
@@ -4261,7 +4261,7 @@ SecretBase_RedCave1_EventScript_1A34E2:: @ 81A34E2
 	end
 
 SecretBase_RedCave1_EventScript_1A34EB:: @ 81A34EB
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2AFB, 2
@@ -4273,8 +4273,8 @@ SecretBase_RedCave1_EventScript_1A3501:: @ 81A3501
 
 SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	special sub_80BCE1C
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 0
 	special StartSpecialBattle
 	waitstate
 	special ScrSpecial_HealPlayerParty
@@ -4368,29 +4368,29 @@ SlateportCity_PokemonFanClub_EventScript_1ADE46:: @ 81ADE46
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADE4D:: @ 81ADE4D
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8005, 1
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADED6
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
+	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_1A8704, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADE84
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADEB9
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADE84:: @ 81ADE84
 	msgbox SlateportCity_PokemonFanClub_Text_1A87CA, 4
-	setvar VAR_SPECIAL_4, 5
-	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9
-	setvar VAR_SPECIAL_6, 1
+	setvar VAR_0x8004, 5
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 1
 	call SlateportCity_PokemonFanClub_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADEC3
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADEB9
 	end
 
@@ -4401,7 +4401,7 @@ SlateportCity_PokemonFanClub_EventScript_1ADEB9:: @ 81ADEB9
 
 SlateportCity_PokemonFanClub_EventScript_1ADEC3:: @ 81ADEC3
 	msgbox SlateportCity_PokemonFanClub_Text_1A8818, 4
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8005, 1
 	goto SlateportCity_PokemonFanClub_EventScript_1ADE46
 	end
 
@@ -4413,39 +4413,39 @@ SlateportCity_PokemonFanClub_EventScript_1ADED6:: @ 81ADED6
 SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_5, 2
+	setvar VAR_0x8005, 2
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF96
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
+	copyvar VAR_0x8009, VAR_0x8006
 	goto_if_set FLAG_OCEANIC_MUSEUM_MET_REPORTER, SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
 	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF44
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF79
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF25:: @ 81ADF25
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A934C, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF44
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF79
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF44:: @ 81ADF44
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A93D1, 4
-	setvar VAR_SPECIAL_4, 5
-	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9
-	setvar VAR_SPECIAL_6, 0
+	setvar VAR_0x8004, 5
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 0
 	call SlateportCity_OceanicMuseum_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF83
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF79
 	end
 
@@ -4456,7 +4456,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF79:: @ 81ADF79
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF83:: @ 81ADF83
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A949A, 4
-	setvar VAR_SPECIAL_5, 2
+	setvar VAR_0x8005, 2
 	goto SlateportCity_OceanicMuseum_1F_EventScript_1ADE46
 	end
 
@@ -4468,26 +4468,26 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF96:: @ 81ADF96
 SlateportCity_PokemonFanClub_EventScript_1ADFA0:: @ 81ADFA0
 	lock
 	faceplayer
-	specialvar RESULT, LeadMonNicknamed
-	compare RESULT, 0
+	specialvar VAR_RESULT, LeadMonNicknamed
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADE4D
-	setvar VAR_SPECIAL_5, 3
+	setvar VAR_0x8005, 3
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0AC
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
+	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_1A82F1, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADFE9
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADFE9:: @ 81ADFE9
 	msgbox SlateportCity_PokemonFanClub_Text_1A83D0, 4
 	random 3
-	copyvar VAR_SPECIAL_A, RESULT
-	switch RESULT
+	copyvar VAR_0x800A, VAR_RESULT
+	switch VAR_RESULT
 	case 0, SlateportCity_PokemonFanClub_EventScript_1AE020
 	case 1, SlateportCity_PokemonFanClub_EventScript_1AE02E
 	case 2, SlateportCity_PokemonFanClub_EventScript_1AE03C
@@ -4509,24 +4509,24 @@ SlateportCity_PokemonFanClub_EventScript_1AE03C:: @ 81AE03C
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE04A:: @ 81AE04A
-	setvar VAR_SPECIAL_4, 7
-	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9
-	setvar VAR_SPECIAL_6, 0
+	setvar VAR_0x8004, 7
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 0
 	call SlateportCity_PokemonFanClub_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
 	msgbox SlateportCity_PokemonFanClub_Text_1A852D, 4
-	setvar VAR_SPECIAL_6, 1
+	setvar VAR_0x8006, 1
 	call SlateportCity_PokemonFanClub_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
 	msgbox SlateportCity_PokemonFanClub_Text_1A85A6, 4
-	copyvar VAR_SPECIAL_7, VAR_SPECIAL_A
-	setvar VAR_SPECIAL_5, 3
+	copyvar VAR_0x8007, VAR_0x800A
+	setvar VAR_0x8005, 3
 	goto SlateportCity_PokemonFanClub_EventScript_1ADE46
 	end
 
@@ -4547,29 +4547,29 @@ VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
 	goto_if_set FLAG_TEMP_2, FallarborTown_ContestLobby_EventScript_1AE17E
-	setvar VAR_SPECIAL_5, 6
+	setvar VAR_0x8005, 6
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
+	copyvar VAR_0x8009, VAR_0x8006
 	msgbox FallarborTown_ContestLobby_Text_1A6F7C, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE0F8
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE0F8:: @ 81AE0F8
 	msgbox FallarborTown_ContestLobby_Text_1A704E, 4
-	setvar VAR_SPECIAL_4, 11
-	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9
-	setvar VAR_SPECIAL_6, 0
+	setvar VAR_0x8004, 11
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 0
 	call FallarborTown_ContestLobby_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE137
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
 	end
 
@@ -4579,20 +4579,20 @@ FallarborTown_ContestLobby_EventScript_1AE12D:: @ 81AE12D
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
-	setvar VAR_SPECIAL_4, 24
+	setvar VAR_0x8004, 24
 	special SetContestCategoryStringVarForInterview
 	msgbox FallarborTown_ContestLobby_Text_1A70A5, 4
-	setvar VAR_SPECIAL_4, 11
-	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9
-	setvar VAR_SPECIAL_6, 1
+	setvar VAR_0x8004, 11
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 1
 	call FallarborTown_ContestLobby_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
 	msgbox FallarborTown_ContestLobby_Text_1A7153, 4
 	setflag FLAG_TEMP_2
-	setvar VAR_SPECIAL_5, 6
+	setvar VAR_0x8005, 6
 	goto FallarborTown_ContestLobby_EventScript_1ADE46
 	end
 
@@ -4607,9 +4607,9 @@ SlateportCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 	compare VAR_LINK_CONTEST_ROOM_STATE, 2
 	goto_if_ne FallarborTown_ContestLobby_EventScript_1AE1FE
-	setvar VAR_SPECIAL_5, 6
+	setvar VAR_0x8005, 6
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE1FE
 	switch VAR_CONTEST_LOCATION
 	case 0, FallarborTown_ContestLobby_EventScript_1AE1FE
@@ -4643,15 +4643,15 @@ BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	lock
 	faceplayer
 	goto_if_set FLAG_TEMP_2, BattleTower_Lobby_EventScript_1AE2E3
-	setvar VAR_SPECIAL_5, 7
+	setvar VAR_0x8005, 7
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
-	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
+	copyvar VAR_0x8009, VAR_0x8006
 	msgbox BattleTower_Lobby_Text_1A776D, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq BattleTower_Lobby_EventScript_1AE241
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq BattleTower_Lobby_EventScript_1AE297
 	end
 
@@ -4659,20 +4659,20 @@ BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	message BattleTower_Lobby_Text_1A7823
 	waitmessage
 	multichoice 19, 8, 45, 1
-	copyvar VAR_SPECIAL_8, RESULT
-	compare RESULT, 0
+	copyvar VAR_0x8008, VAR_RESULT
+	compare VAR_RESULT, 0
 	call_if_eq BattleTower_Lobby_EventScript_1AE2A1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq BattleTower_Lobby_EventScript_1AE2AA
 	msgbox BattleTower_Lobby_Text_1A79EB, 4
-	setvar VAR_SPECIAL_4, 12
-	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9
+	setvar VAR_0x8004, 12
+	copyvar VAR_0x8005, VAR_0x8009
 	call BattleTower_Lobby_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2B3
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2D9
 	end
 
@@ -4690,12 +4690,12 @@ BattleTower_Lobby_EventScript_1AE2AA:: @ 81AE2AA
 	return
 
 BattleTower_Lobby_EventScript_1AE2B3:: @ 81AE2B3
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2D9
 	msgbox BattleTower_Lobby_Text_1A7A6E, 4
 	setflag FLAG_TEMP_2
-	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
-	setvar VAR_SPECIAL_5, 7
+	copyvar VAR_0x8004, VAR_0x8008
+	setvar VAR_0x8005, 7
 	goto BattleTower_Lobby_EventScript_1ADE46
 	end
 
@@ -4712,9 +4712,9 @@ BattleTower_Lobby_EventScript_1AE2E3:: @ 81AE2E3
 BattleTower_Lobby_EventScript_1AE2ED:: @ 81AE2ED
 	compare VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE30F
-	setvar VAR_SPECIAL_5, 7
+	setvar VAR_0x8005, 7
 	special InterviewBefore
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE30F
 	clearflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	return
@@ -4776,25 +4776,25 @@ Text_RepelWoreOff: @ 81C33EF
 
 MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	checkitem ITEM_COIN_CASE, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	getpricereduction 2
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1C40DA
-	addvar VAR_SPECIAL_4, 128
+	addvar VAR_0x8004, 128
 	goto MauvilleCity_GameCorner_EventScript_1C40DA
 	end
 
 MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	checkitem ITEM_COIN_CASE, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	getpricereduction 2
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1C40DA
-	addvar VAR_SPECIAL_4, 128
+	addvar VAR_0x8004, 128
 	goto MauvilleCity_GameCorner_EventScript_1C40DA
 	end
 

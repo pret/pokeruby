@@ -17,7 +17,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152660:: @ 8152660
 
 LittlerootTown_BrendansHouse_1F_EventScript_152673:: @ 8152673
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152680
 	return
 
@@ -75,15 +75,15 @@ LittlerootTown_BrendansHouse_1F_Movement_152720:: @ 8152720
 
 LittlerootTown_BrendansHouse_1F_EventScript_152722:: @ 8152722
 	lockall
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 	lockall
-	setvar VAR_SPECIAL_4, 0
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 1
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF
 	end
 
@@ -115,9 +115,9 @@ LittlerootTown_BrendansHouse_1F_Movement_152782:: @ 8152782
 
 LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	lockall
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 0
-	applymovement VAR_SPECIAL_4, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 0
+	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
 	end

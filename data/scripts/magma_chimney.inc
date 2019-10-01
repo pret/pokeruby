@@ -65,9 +65,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq MtChimney_EventScript_1B2D7D
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq MtChimney_EventScript_1B2D88
 	applymovement 255, MtChimney_Movement_1A083F
 	waitmovement 0
@@ -77,9 +77,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	msgbox MtChimney_Text_1B3FFE, 4
 	.endif
 	closemessage
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq MtChimney_EventScript_1B2D93
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq MtChimney_EventScript_1B2D9E
 	removeobject 1
 	setflag FLAG_HIDE_OTHER_TEAM_MT_CHIMNEY

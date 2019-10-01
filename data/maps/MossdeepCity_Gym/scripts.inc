@@ -60,7 +60,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	setflag FLAG_BADGE07_GET
 	clearflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
 	clearflag FLAG_UNKNOWN_393
-	setvar VAR_SPECIAL_8, 7
+	setvar VAR_0x8008, 7
 	call MossdeepCity_Gym_EventScript_1A01C0
 	clearflag FLAG_HIDE_WORKERS_SLATEPORT_HARBOR
 	goto MossdeepCity_Gym_EventScript_15A5C6
@@ -68,7 +68,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 	giveitem_std ITEM_TM04_CALM_MIND
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
 	setflag FLAG_RECEIVED_TM04

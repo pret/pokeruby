@@ -123,7 +123,7 @@ RustboroCity_EventScript_14C481:: @ 814C481
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -131,7 +131,7 @@ RustboroCity_EventScript_14C498:: @ 814C498
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -139,7 +139,7 @@ RustboroCity_EventScript_14C4AF:: @ 814C4AF
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -147,7 +147,7 @@ RustboroCity_EventScript_14C4C6:: @ 814C4C6
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar VAR_SPECIAL_4, 3
+	setvar VAR_0x8004, 3
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -155,7 +155,7 @@ RustboroCity_EventScript_14C4DD:: @ 814C4DD
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar VAR_SPECIAL_4, 4
+	setvar VAR_0x8004, 4
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -465,7 +465,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	call_if_eq RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
 	giveitem_std ITEM_GREAT_BALL
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4
 	closemessage
@@ -547,9 +547,9 @@ RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	faceplayer
 	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_14C917
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C8FD
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_EventScript_14C90A
 	end
 
@@ -567,9 +567,9 @@ RustboroCity_EventScript_14C90A:: @ 814C90A
 
 RustboroCity_EventScript_14C917:: @ 814C917
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C92F
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_EventScript_14C939
 	end
 

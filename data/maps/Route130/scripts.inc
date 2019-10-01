@@ -3,8 +3,8 @@ Route130_MapScripts:: @ 81523C2
 	.byte 0
 
 Route130_MapScript1_1523C8:: @ 81523C8
-	specialvar RESULT, IsMirageIslandPresent
-	compare RESULT, 1
+	specialvar VAR_RESULT, IsMirageIslandPresent
+	compare VAR_RESULT, 1
 	goto_if_eq Route130_EventScript_15240C
 	setflag FLAG_TEMP_11
 	setflag FLAG_TEMP_12

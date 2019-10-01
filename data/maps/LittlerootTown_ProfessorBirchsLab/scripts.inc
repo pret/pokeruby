@@ -30,23 +30,23 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1A0678
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
@@ -59,9 +59,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
@@ -122,9 +122,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_1A0843
 	waitmovement 0
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E13
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E40
 	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
@@ -137,19 +137,19 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1743D4, 4
 	giveitem_std ITEM_POKE_BALL, 5
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E85
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17443D, 4
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17453C, 4
 	giveitem_std ITEM_POKE_BALL, 5
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17458C, 4
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
@@ -186,9 +186,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152EA3:: @ 8152EA3
 	lock
 	faceplayer
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152EBE
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152EC7
 	release
 	end

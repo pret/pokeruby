@@ -41,7 +41,7 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	playbgm MUS_TSURETEK, FALSE
 	msgbox OldaleTown_Text_16AEF2, 4
 	closemessage
-	switch FACING
+	switch VAR_FACING
 	case 1, OldaleTown_EventScript_14DE07
 	case 2, OldaleTown_EventScript_14DE1E
 	case 4, OldaleTown_EventScript_14DE35
@@ -71,7 +71,7 @@ OldaleTown_EventScript_14DE35:: @ 814DE35
 OldaleTown_EventScript_14DE4C:: @ 814DE4C
 	msgbox OldaleTown_Text_16AF2F, 4
 	giveitem_std ITEM_POTION
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DE83
 	msgbox OldaleTown_Text_16AFE1, 4
 	setflag FLAG_RECEIVED_POTION_OLDALE
@@ -251,9 +251,9 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 
 OldaleTown_EventScript_14DF92:: @ 814DF92
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DFAA
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_EventScript_14DFB8
 	end
 

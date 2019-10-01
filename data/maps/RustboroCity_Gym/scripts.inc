@@ -17,7 +17,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	setflag FLAG_BADGE01_GET
 	setvar VAR_RUSTBORO_STATE, 1
 	addvar VAR_PETALBURG_GYM_STATE, 1
-	setvar VAR_SPECIAL_8, 1
+	setvar VAR_0x8008, 1
 	call RustboroCity_Gym_EventScript_1A01C0
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq RustboroCity_Gym_EventScript_1A00FB
@@ -26,7 +26,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 
 RustboroCity_Gym_EventScript_15793C:: @ 815793C
 	giveitem_std ITEM_TM39_ROCK_TOMB
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_Gym_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_184170, 4

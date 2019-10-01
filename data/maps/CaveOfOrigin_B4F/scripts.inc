@@ -42,9 +42,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	dofieldeffect FLDEFF_SPARKLE
 	waitfieldeffect FLDEFF_SPARKLE
 	.ifdef SAPPHIRE
-	setvar RESULT, 3
+	setvar VAR_RESULT, 3
 	.else
-	setvar RESULT, 2
+	setvar VAR_RESULT, 2
 	.endif
 	playse SE_TAMA
 	special sub_80818A4
@@ -63,8 +63,8 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar RESULT, GetBattleOutcome
-	compare RESULT, 1
+	specialvar VAR_RESULT, GetBattleOutcome
+	compare VAR_RESULT, 1
 	call_if_eq CaveOfOrigin_B4F_EventScript_15DE73
 	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1

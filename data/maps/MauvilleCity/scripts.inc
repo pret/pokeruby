@@ -101,12 +101,12 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	end
 
 MauvilleCity_EventScript_14C154:: @ 814C154
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq MauvilleCity_EventScript_14C23C
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_EventScript_14C285
 	closemessage
-	switch FACING
+	switch VAR_FACING
 	case 2, MauvilleCity_EventScript_14C187
 	case 4, MauvilleCity_EventScript_14C1D9
 	end
@@ -299,7 +299,7 @@ MauvilleCity_EventScript_14C332:: @ 814C332
 MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, 4
 	giveitem_std ITEM_TM24_THUNDERBOLT
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM24
 	msgbox MauvilleCity_Text_166488, 4

@@ -56,7 +56,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 	lock
 	faceplayer
 	checkitem ITEM_DEVON_SCOPE, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq FortreeCity_EventScript_14C9CF
 	msgbox FortreeCity_Text_167868, 4
 	release
@@ -64,7 +64,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 
 FortreeCity_EventScript_14C9CF:: @ 814C9CF
 	msgbox FortreeCity_Text_16788B, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq FortreeCity_EventScript_14C9E4
 	release
 	end
@@ -72,15 +72,15 @@ FortreeCity_EventScript_14C9CF:: @ 814C9CF
 FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	msgbox FortreeCity_Text_1678CB, 4
 	closemessage
-	applymovement LAST_TALKED, FortreeCity_Movement_1A0662
+	applymovement VAR_LAST_TALKED, FortreeCity_Movement_1A0662
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2
 	delay 40
 	waitmoncry
-	applymovement LAST_TALKED, FortreeCity_Movement_14CA13
+	applymovement VAR_LAST_TALKED, FortreeCity_Movement_14CA13
 	waitmovement 0
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	setflag FLAG_KECLEON_FLED_FORTREE
 	release
 	end

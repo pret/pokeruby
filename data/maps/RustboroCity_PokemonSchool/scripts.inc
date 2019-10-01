@@ -11,7 +11,7 @@ RustboroCity_PokemonSchool_EventScript_1579F1:: @ 81579F1
 	message RustboroCity_PokemonSchool_Text_184368
 	waitmessage
 	multichoicegrid 8, 1, 13, 3, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, RustboroCity_PokemonSchool_EventScript_157A50
 	case 1, RustboroCity_PokemonSchool_EventScript_157A5E
 	case 2, RustboroCity_PokemonSchool_EventScript_157A6C
@@ -78,35 +78,35 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_157B34
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq RustboroCity_PokemonSchool_EventScript_157B1E
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq RustboroCity_PokemonSchool_EventScript_157B29
 	msgbox RustboroCity_PokemonSchool_Text_1846A2, 4
 	giveitem_std ITEM_QUICK_CLAW
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
 	closemessage
-	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
+	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
 	waitmovement 0
 	setflag FLAG_RECEIVED_QUICK_CLAW
 	release
 	end
 
 RustboroCity_PokemonSchool_EventScript_157B1E:: @ 8157B1E
-	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B60
+	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B60
 	waitmovement 0
 	return
 
 RustboroCity_PokemonSchool_EventScript_157B29:: @ 8157B29
-	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B49
+	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B49
 	waitmovement 0
 	return
 
 RustboroCity_PokemonSchool_EventScript_157B34:: @ 8157B34
 	msgbox RustboroCity_PokemonSchool_Text_184737, 4
 	closemessage
-	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
+	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
 	waitmovement 0
 	release
 	end

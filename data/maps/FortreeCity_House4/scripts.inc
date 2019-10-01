@@ -21,25 +21,25 @@ FortreeCity_House4_EventScript_158188:: @ 8158188
 	end
 
 FortreeCity_House4_EventScript_1581C2:: @ 81581C2
-	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_18684E, 4
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_1581D6:: @ 81581D6
-	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, 4
 	giveitem_std ITEM_MENTAL_HERB
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House4_EventScript_1A029B
 	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_158204:: @ 8158204
-	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186924, 4
 	releaseall

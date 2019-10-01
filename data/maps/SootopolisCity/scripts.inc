@@ -89,23 +89,23 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS, SootopolisCity_EventScript_14D241
 	msgbox SootopolisCity_Text_1C63F2, 4
 	random 10
-	addvar RESULT, 20
-	addvar RESULT, ITEM_CHERI_BERRY
-	giveitem_std RESULT
-	compare RESULT, 0
+	addvar VAR_RESULT, 20
+	addvar VAR_RESULT, ITEM_CHERI_BERRY
+	giveitem_std VAR_RESULT
+	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
 	msgbox SootopolisCity_Text_1C64D0, 4
 	random 2
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_14D1FF
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SootopolisCity_EventScript_14D220
 	end
 
 SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 	giveitem_std ITEM_FIGY_BERRY
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
 	release
@@ -113,7 +113,7 @@ SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 
 SootopolisCity_EventScript_14D220:: @ 814D220
 	giveitem_std ITEM_IAPAPA_BERRY
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
 	release
@@ -121,7 +121,7 @@ SootopolisCity_EventScript_14D220:: @ 814D220
 
 SootopolisCity_EventScript_14D241:: @ 814D241
 	msgbox SootopolisCity_Text_1C6540, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SootopolisCity_EventScript_14D25E
 	msgbox SootopolisCity_Text_1C6626, 4
 	release
@@ -446,13 +446,13 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	msgbox SootopolisCity_Text_16A33E, 4
 	closemessage
-	applymovement LAST_TALKED, SootopolisCity_Movement_1A0845
+	applymovement VAR_LAST_TALKED, SootopolisCity_Movement_1A0845
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
 	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	release
 	end

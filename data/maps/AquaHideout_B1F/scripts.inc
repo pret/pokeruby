@@ -8,7 +8,7 @@ AquaHideout_B1F_MapScript1_15D83C:: @ 815D83C
 	end
 
 AquaHideout_B1F_EventScript_15D846:: @ 815D846
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	return
 
 AquaHideout_B1F_MapScript1_15D84A:: @ 815D84A

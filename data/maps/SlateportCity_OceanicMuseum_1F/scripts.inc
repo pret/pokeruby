@@ -34,7 +34,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	showmoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
 	closemessage
 	hidemoneybox 0, 0
@@ -45,7 +45,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	checkmoney 0x32, 0
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B5A
 	takemoney 0x32, 0
 	updatemoneybox 0, 0
@@ -164,14 +164,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, 4
 	giveitem_std ITEM_TM46_THIEF
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
 	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E606, 4
 	closemessage
-	compare FACING, 2
+	compare VAR_FACING, 2
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155C98
-	compare FACING, 2
+	compare VAR_FACING, 2
 	goto_if_ne SlateportCity_OceanicMuseum_1F_EventScript_155CAD
 	end
 

@@ -54,9 +54,9 @@ LittlerootTown_EventScript_14D5A6:: @ 814D5A6
 	clearflag FLAG_HIDE_MOM_LITTLEROOT
 	setobjectmovementtype 4, 8
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D5C5
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D5CD
 	return
 
@@ -76,8 +76,8 @@ LittlerootTown_MapScript2_14D5D5:: @ 814D5D5
 
 LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 	lockall
-	setvar VAR_SPECIAL_4, 5
-	setvar VAR_SPECIAL_5, 8
+	setvar VAR_0x8004, 5
+	setvar VAR_0x8005, 8
 	call LittlerootTown_EventScript_14D62B
 	setflag FLAG_HIDE_MOVING_TRUCK_BRENDAN
 	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
@@ -87,8 +87,8 @@ LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 
 LittlerootTown_EventScript_14D60D:: @ 814D60D
 	lockall
-	setvar VAR_SPECIAL_4, 14
-	setvar VAR_SPECIAL_5, 8
+	setvar VAR_0x8004, 14
+	setvar VAR_0x8005, 8
 	call LittlerootTown_EventScript_14D62B
 	setflag FLAG_HIDE_MOVING_TRUCK_MAY
 	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
@@ -101,12 +101,12 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	playse SE_DANSA
 	applymovement 255, LittlerootTown_Movement_14D6C0
 	waitmovement 0
-	opendoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	addobject 4
 	applymovement 4, LittlerootTown_Movement_14D6AC
 	waitmovement 0
-	closedoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	delay 10
 	applymovement 4, LittlerootTown_Movement_14D6AE
@@ -116,7 +116,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	applymovement 4, LittlerootTown_Movement_14D6B1
 	applymovement 255, LittlerootTown_Movement_14D6B8
 	waitmovement 0
-	opendoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14D6B5
 	applymovement 255, LittlerootTown_Movement_14D6BD
@@ -124,7 +124,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	setflag FLAG_HIDE_MOM_LITTLEROOT
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	hideobjectat 255, MAP_PETALBURG_CITY
-	closedoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
 	clearflag FLAG_SPECIAL_FLAG_0
@@ -331,9 +331,9 @@ LittlerootTown_EventScript_14D7FF:: @ 814D7FF
 LittlerootTown_EventScript_14D808:: @ 814D808
 	lockall
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D822
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D82B
 	releaseall
 	end
@@ -349,9 +349,9 @@ LittlerootTown_EventScript_14D82B:: @ 814D82B
 LittlerootTown_EventScript_14D834:: @ 814D834
 	lockall
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D84E
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D857
 	releaseall
 	end
@@ -366,77 +366,77 @@ LittlerootTown_EventScript_14D857:: @ 814D857
 
 LittlerootTown_EventScript_14D860:: @ 814D860
 	lockall
-	setvar VAR_SPECIAL_8, 0
+	setvar VAR_0x8008, 0
 	setobjectxy 4, 10, 9
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D873:: @ 814D873
 	lockall
-	setvar VAR_SPECIAL_8, 1
+	setvar VAR_0x8008, 1
 	setobjectxy 4, 11, 9
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D886:: @ 814D886
 	lockall
-	setvar VAR_SPECIAL_8, 2
+	setvar VAR_0x8008, 2
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D892:: @ 814D892
 	lockall
-	setvar VAR_SPECIAL_8, 3
+	setvar VAR_0x8008, 3
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D89E:: @ 814D89E
 	lockall
-	setvar VAR_SPECIAL_8, 4
+	setvar VAR_0x8008, 4
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D8AA:: @ 814D8AA
 	lockall
-	setvar VAR_SPECIAL_8, 5
+	setvar VAR_0x8008, 5
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D8B6:: @ 814D8B6
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D93C
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D947
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D926
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D931
 	msgbox LittlerootTown_Text_16A8EE, 4
 	closemessage
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D952
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D995
 	call LittlerootTown_EventScript_14DD38
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14DAAA
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14DAED
 	goto LittlerootTown_EventScript_14DD2B
 	end
 
 LittlerootTown_EventScript_14D926:: @ 814D926
-	setvar VAR_SPECIAL_9, 5
-	setvar VAR_SPECIAL_A, 8
+	setvar VAR_0x8009, 5
+	setvar VAR_0x800A, 8
 	return
 
 LittlerootTown_EventScript_14D931:: @ 814D931
-	setvar VAR_SPECIAL_9, 14
-	setvar VAR_SPECIAL_A, 8
+	setvar VAR_0x8009, 14
+	setvar VAR_0x800A, 8
 	return
 
 LittlerootTown_EventScript_14D93C:: @ 814D93C
@@ -450,32 +450,32 @@ LittlerootTown_EventScript_14D947:: @ 814D947
 	return
 
 LittlerootTown_EventScript_14D952:: @ 814D952
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_EventScript_14D9D8
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_EventScript_14D9ED
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_EventScript_14DA02
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq LittlerootTown_EventScript_14DA17
-	compare VAR_SPECIAL_8, 4
+	compare VAR_0x8008, 4
 	call_if_eq LittlerootTown_EventScript_14DA2C
-	compare VAR_SPECIAL_8, 5
+	compare VAR_0x8008, 5
 	call_if_eq LittlerootTown_EventScript_14DA41
 	return
 
 LittlerootTown_EventScript_14D995:: @ 814D995
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_EventScript_14D9D8
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_EventScript_14D9ED
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_EventScript_14DA56
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq LittlerootTown_EventScript_14DA6B
-	compare VAR_SPECIAL_8, 4
+	compare VAR_0x8008, 4
 	call_if_eq LittlerootTown_EventScript_14DA80
-	compare VAR_SPECIAL_8, 5
+	compare VAR_0x8008, 5
 	call_if_eq LittlerootTown_EventScript_14DA95
 	return
 
@@ -550,32 +550,32 @@ LittlerootTown_EventScript_14DA95:: @ 814DA95
 	return
 
 LittlerootTown_EventScript_14DAAA:: @ 814DAAA
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_EventScript_14DB30
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_EventScript_14DB3B
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_EventScript_14DB46
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq LittlerootTown_EventScript_14DB6C
-	compare VAR_SPECIAL_8, 4
+	compare VAR_0x8008, 4
 	call_if_eq LittlerootTown_EventScript_14DB92
-	compare VAR_SPECIAL_8, 5
+	compare VAR_0x8008, 5
 	call_if_eq LittlerootTown_EventScript_14DBB8
 	return
 
 LittlerootTown_EventScript_14DAED:: @ 814DAED
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_EventScript_14DB30
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_EventScript_14DB3B
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_EventScript_14DBDE
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq LittlerootTown_EventScript_14DC04
-	compare VAR_SPECIAL_8, 4
+	compare VAR_0x8008, 4
 	call_if_eq LittlerootTown_EventScript_14DC2A
-	compare VAR_SPECIAL_8, 5
+	compare VAR_0x8008, 5
 	call_if_eq LittlerootTown_EventScript_14DC50
 	return
 
@@ -592,96 +592,96 @@ LittlerootTown_EventScript_14DB3B:: @ 814DB3B
 LittlerootTown_EventScript_14DB46:: @ 814DB46
 	applymovement 4, LittlerootTown_Movement_14DCB4
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DB6C:: @ 814DB6C
 	applymovement 4, LittlerootTown_Movement_14DCBA
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DB92:: @ 814DB92
 	applymovement 4, LittlerootTown_Movement_14DCC1
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DBB8:: @ 814DBB8
 	applymovement 4, LittlerootTown_Movement_14DCC5
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DBDE:: @ 814DBDE
 	applymovement 4, LittlerootTown_Movement_14DCCA
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC04:: @ 814DC04
 	applymovement 4, LittlerootTown_Movement_14DCCF
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC2A:: @ 814DC2A
 	applymovement 4, LittlerootTown_Movement_14DCD3
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC50:: @ 814DC50
 	applymovement 4, LittlerootTown_Movement_14DCDA
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
@@ -839,19 +839,19 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	lock
 	faceplayer
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_EventScript_14D926
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D931
 	call LittlerootTown_EventScript_14DD38
 	applymovement 4, LittlerootTown_Movement_1A0841
 	waitmovement 0
-	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
-	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	goto LittlerootTown_EventScript_14DD2B
 	end

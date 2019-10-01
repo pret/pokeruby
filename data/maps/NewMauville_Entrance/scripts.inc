@@ -27,10 +27,10 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_1982C0, 4
 	checkitem ITEM_BASEMENT_KEY, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982D4, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982EA, 4
 	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, 0

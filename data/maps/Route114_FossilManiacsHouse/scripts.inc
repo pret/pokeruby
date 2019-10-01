@@ -12,7 +12,7 @@ Route114_FossilManiacsHouse_EventScript_15C1C3:: @ 815C1C3
 	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_15C1F2
 	msgbox Route114_FossilManiacsHouse_Text_1925E1, 4
 	giveitem_std ITEM_TM28_DIG
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route114_FossilManiacsHouse_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM28
 	release

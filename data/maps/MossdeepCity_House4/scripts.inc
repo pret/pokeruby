@@ -18,7 +18,7 @@ MossdeepCity_House4_EventScript_15AB50:: @ 815AB50
 	lock
 	faceplayer
 	special CheckPlayerHasSecretBase
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_House4_EventScript_15AB6D
 	special GetSecretBaseNearbyMapName
 	msgbox MossdeepCity_House4_Text_18E17E, 4

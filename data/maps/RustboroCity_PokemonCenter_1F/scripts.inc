@@ -8,7 +8,7 @@ RustboroCity_PokemonCenter_1F_MapScript1_157B7F:: @ 8157B7F
 	end
 
 RustboroCity_PokemonCenter_1F_EventScript_157B88:: @ 8157B88
-	setvar VAR_SPECIAL_B, 1
+	setvar VAR_0x800B, 1
 	call RustboroCity_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

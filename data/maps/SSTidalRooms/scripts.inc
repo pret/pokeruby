@@ -7,7 +7,7 @@ SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	goto_if_set FLAG_RECEIVED_TM49, SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem_std ITEM_TM49_SNATCH
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SSTidalRooms_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM49
 	msgbox SSTidalRooms_Text_199C1A, 4

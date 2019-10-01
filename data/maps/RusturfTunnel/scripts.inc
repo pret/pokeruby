@@ -24,7 +24,7 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 	faceplayer
 	msgbox RusturfTunnel_Text_194766, 4
 	closemessage
-	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
+	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -36,7 +36,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closemessage
-	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
+	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -44,7 +44,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 	msgbox RusturfTunnel_Text_1945B2, 4
 	closemessage
-	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
+	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_1A083D
 	waitmovement 0
 	release
 	end

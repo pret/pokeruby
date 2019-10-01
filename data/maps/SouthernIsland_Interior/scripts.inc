@@ -22,9 +22,9 @@ SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 
 SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SouthernIsland_Interior_EventScript_160B8F
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SouthernIsland_Interior_EventScript_160B95
 	end
 
@@ -38,7 +38,7 @@ SouthernIsland_Interior_EventScript_160B95:: @ 8160B95
 
 SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 	lockall
-	setvar VAR_SPECIAL_8, 12
+	setvar VAR_0x8008, 12
 	goto SouthernIsland_Interior_EventScript_160BA7
 	end
 

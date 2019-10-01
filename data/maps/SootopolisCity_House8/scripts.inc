@@ -8,15 +8,15 @@ SootopolisCity_House8_EventScript_15B401:: @ 815B401
 	msgbox SootopolisCity_House8_Text_1900F7, 4
 	special SelectMonForNPCTrade
 	waitstate
-	copyvar RESULT, VAR_SPECIAL_4
-	compare RESULT, 255
+	copyvar VAR_RESULT, VAR_0x8004
+	compare VAR_RESULT, 255
 	goto_if_eq SootopolisCity_House8_EventScript_15B448
 	special CompareShroomishSize
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SootopolisCity_House8_EventScript_15B452
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq SootopolisCity_House8_EventScript_15B45C
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq SootopolisCity_House8_EventScript_15B466
 	release
 	end
@@ -39,7 +39,7 @@ SootopolisCity_House8_EventScript_15B45C:: @ 815B45C
 SootopolisCity_House8_EventScript_15B466:: @ 815B466
 	msgbox SootopolisCity_House8_Text_19021D, 4
 	giveitem_std ITEM_ELIXIR
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B488
 	closemessage
 	release
@@ -57,15 +57,15 @@ SootopolisCity_House8_EventScript_15B492:: @ 815B492
 	msgbox SootopolisCity_House8_Text_190431, 4
 	special SelectMonForNPCTrade
 	waitstate
-	copyvar RESULT, VAR_SPECIAL_4
-	compare RESULT, 255
+	copyvar VAR_RESULT, VAR_0x8004
+	compare VAR_RESULT, 255
 	goto_if_eq SootopolisCity_House8_EventScript_15B4D9
 	special CompareBarboachSize
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq SootopolisCity_House8_EventScript_15B4E3
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq SootopolisCity_House8_EventScript_15B4ED
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq SootopolisCity_House8_EventScript_15B4F7
 	release
 	end
@@ -88,7 +88,7 @@ SootopolisCity_House8_EventScript_15B4ED:: @ 815B4ED
 SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
 	msgbox SootopolisCity_House8_Text_190536, 4
 	giveitem_std ITEM_ELIXIR
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B519
 	closemessage
 	release

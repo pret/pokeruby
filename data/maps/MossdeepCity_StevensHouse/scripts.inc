@@ -71,12 +71,12 @@ MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
 MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_18DD12, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AAE6
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
-	copyvar VAR_SPECIAL_4, RESULT
+	copyvar VAR_0x8004, VAR_RESULT
 	removeobject 2
 	playfanfare MUS_FANFA4
 	message MossdeepCity_StevensHouse_Text_18DD61
@@ -85,7 +85,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
 	bufferspeciesname 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
 	setflag FLAG_RECEIVED_BELDUM
