@@ -73,8 +73,8 @@ Route121_EventScript_151B72:: @ 8151B72
 
 Route121_EventScript_151B89:: @ 8151B89
 	trainerbattle 0, TRAINER_WALTER_1, 0, Route121_Text_1BFA1B, Route121_Text_1BFA8C
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route121_EventScript_151BB0
 	msgbox Route121_Text_1BFA9D, 6
 	end
@@ -101,8 +101,8 @@ Route121_EventScript_151BF9:: @ 8151BF9
 
 Route121_EventScript_151C14:: @ 8151C14
 	trainerbattle 0, TRAINER_JESSICA_1, 0, Route121_Text_1BFE51, Route121_Text_1BFE80
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route121_EventScript_151C3B
 	msgbox Route121_Text_1BFEAE, 6
 	end

@@ -44,9 +44,9 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	setvar VAR_TEMP_1, 1
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC41
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC4D
 	end
 

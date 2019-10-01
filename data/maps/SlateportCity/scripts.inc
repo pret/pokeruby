@@ -66,11 +66,11 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	faceplayer
 	bufferleadmonspeciesname 0
 	msgbox SlateportCity_Text_164682, 4
-	specialvar RESULT, LeadMonHasEffortRibbon
-	compare RESULT, 1
+	specialvar VAR_RESULT, LeadMonHasEffortRibbon
+	compare VAR_RESULT, 1
 	call_if_eq SlateportCity_EventScript_14BB35
-	specialvar RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
-	compare RESULT, 0
+	specialvar VAR_RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
+	compare VAR_RESULT, 0
 	call_if_eq SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
 	playfanfare MUS_FANFA4
@@ -283,9 +283,9 @@ SlateportCity_EventScript_14BD06:: @ 814BD06
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_1650F1, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq SlateportCity_EventScript_14BD28
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	call_if_eq SlateportCity_EventScript_14BD31
 	release
 	end

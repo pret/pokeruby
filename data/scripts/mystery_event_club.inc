@@ -9,7 +9,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B14:: @ 81B1B14
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D:: @ 81B1B2D
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1D10, 4
 	multichoice 17, 6, 20, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A
 	case 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1BD1
 	case 2, PetalburgCity_PokemonCenter_1F_EventScript_1B1B6C
@@ -24,15 +24,15 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B6C:: @ 81B1B6C
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1F7B, 4
 	closemessage
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare VAR_SPECIAL_4, 1
+	compare VAR_0x8004, 1
 	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
 	end
 
@@ -42,7 +42,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1:: @ 81B1BB1
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB:: @ 81B1BBB
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	special sub_80EB7C4
 	waitmessage
 	delay 80
@@ -63,7 +63,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB:: @ 81B1BDB
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9:: @ 81B1BE9
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B2063, 4
 	multichoice 17, 6, 20, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, PetalburgCity_PokemonCenter_1F_EventScript_1B1C36
 	case 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C6D
 	case 2, PetalburgCity_PokemonCenter_1F_EventScript_1B1C28
@@ -78,15 +78,15 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C28:: @ 81B1C28
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B207F, 4
 	closemessage
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare VAR_SPECIAL_4, 1
+	compare VAR_0x8004, 1
 	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
 	end
 

@@ -31,7 +31,7 @@ LavaridgeTown_HerbShop_EventScript_153655:: @ 8153655
 	goto_if_set FLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_153684
 	msgbox LavaridgeTown_HerbShop_Text_1761A2, 4
 	giveitem_std ITEM_CHARCOAL
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_HerbShop_EventScript_1A029B
 	setflag FLAG_RECEIVED_CHARCOAL
 	release

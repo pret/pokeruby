@@ -13,13 +13,13 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	goto_if_set FLAG_DAILY_PICKED_LOTTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
 	setflag FLAG_DAILY_PICKED_LOTTO_TICKET
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
 	waitmessage
 	special RetrieveLotteryNumber
-	copyvar VAR_SPECIAL_8, RESULT
+	copyvar VAR_0x8008, VAR_RESULT
 	special BufferLottoTicketNumber
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4CF6, 4
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_1A0843
@@ -32,24 +32,24 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	delay 10
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
 	waitmovement 0
-	compare VAR_SPECIAL_4, 0
+	compare VAR_0x8004, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	incrementgamestat GAME_STAT_WON_POKEMON_LOTTERY
-	compare VAR_SPECIAL_6, 0
+	compare VAR_0x8006, 0
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E3A
-	compare VAR_SPECIAL_6, 1
+	compare VAR_0x8006, 1
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E43
-	bufferitemname 0, VAR_SPECIAL_5
-	compare VAR_SPECIAL_4, 1
+	bufferitemname 0, VAR_0x8005
+	compare VAR_0x8004, 1
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E78
-	compare VAR_SPECIAL_4, 2
+	compare VAR_0x8004, 2
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E81
-	compare VAR_SPECIAL_4, 3
+	compare VAR_0x8004, 3
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E8A
-	compare VAR_SPECIAL_4, 4
+	compare VAR_0x8004, 4
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E93
-	giveitem_std VAR_SPECIAL_5
-	compare RESULT, 0
+	giveitem_std VAR_0x8005
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
 	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
 	end
@@ -99,7 +99,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159E93:: @ 8159E93
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_159E9C:: @ 8159E9C
-	copyvar VAR_LOTTERY_PRIZE, VAR_SPECIAL_5
+	copyvar VAR_LOTTERY_PRIZE, VAR_0x8005
 	goto LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	end
 
@@ -111,7 +111,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EA7:: @ 8159EA7
 LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, 4
 	giveitem_std VAR_LOTTERY_PRIZE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	setvar VAR_LOTTERY_PRIZE, 0
 	release

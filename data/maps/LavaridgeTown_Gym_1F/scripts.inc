@@ -75,7 +75,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq LavaridgeTown_Gym_1F_EventScript_1A00FB
-	setvar VAR_SPECIAL_8, 4
+	setvar VAR_0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_1A01C0
 	setflag FLAG_HIDE_WALLY_WANDAS_HOUSE
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 1
@@ -84,7 +84,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 
 LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
 	giveitem_std ITEM_TM50_OVERHEAT
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
 	msgbox LavaridgeTown_Gym_1F_Text_176B8F, 4
 	setflag FLAG_RECEIVED_TM50

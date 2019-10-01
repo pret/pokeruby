@@ -60,8 +60,8 @@ Route113_EventScript_150652:: @ 8150652
 
 Route113_EventScript_150669:: @ 8150669
 	trainerbattle 0, TRAINER_MADELINE_1, 0, Route113_Text_1BBB27, Route113_Text_1BBB7A
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route113_EventScript_150690
 	msgbox Route113_Text_1BBB9A, 6
 	end
@@ -73,8 +73,8 @@ Route113_EventScript_150690:: @ 8150690
 
 Route113_EventScript_1506A7:: @ 81506A7
 	trainerbattle 0, TRAINER_LAO_1, 0, Route113_Text_1BBC59, Route113_Text_1BBC90
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route113_EventScript_1506CE
 	msgbox Route113_Text_1BBCAB, 6
 	end

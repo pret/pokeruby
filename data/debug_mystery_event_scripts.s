@@ -38,10 +38,10 @@ _0845DB16:
 _845DB56:
 	setvaddress _845DB56
 	checkitem ITEM_EON_TICKET, 0x1
-	compare RESULT, 0x1
+	compare VAR_RESULT, 0x1
 	vgoto_if 0x1, _0845DBB4
 	checkpcitem ITEM_EON_TICKET, 0x1
-	compare RESULT, 0x1
+	compare VAR_RESULT, 0x1
 	vgoto_if 0x1, _0845DBB4
 	checkflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
 	vgoto_if 0x1, _0845DBB4
@@ -51,10 +51,10 @@ _845DB56:
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_EON_TICKET, 0x1
-	compare RESULT, 0x0
+	compare VAR_RESULT, 0x0
 	vgoto_if 0x1, _0845DBB5
-	setorcopyvar VAR_SPECIAL_0, ITEM_EON_TICKET
-	setorcopyvar VAR_SPECIAL_1, 0x1
+	setorcopyvar VAR_0x8000, ITEM_EON_TICKET
+	setorcopyvar VAR_0x8001, 0x1
 	callstd 0x0
 	setflag FLAG_SYS_HAS_EON_TICKET
 	vmessage _0845DC00
@@ -108,15 +108,15 @@ _845DB56End:
 _0845DD0D:
 	setvaddress _0845DD0D
 	checkitem ITEM_EON_TICKET, 0x1
-	compare RESULT, 0x1
+	compare VAR_RESULT, 0x1
 	vgoto_if 0x1, _0845DD53
 	checkpcitem ITEM_EON_TICKET, 0x1
-	compare RESULT, 0x1
+	compare VAR_RESULT, 0x1
 	vgoto_if 0x1, _0845DD53
 	checkflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
 	vgoto_if 0x1, _0845DD53
 	checkitemspace ITEM_EON_TICKET, 0x1
-	compare RESULT, 0x0
+	compare VAR_RESULT, 0x0
 	vgoto_if 0x1, _0845DD5B
 	vloadptr _0845DB16
 	setmysteryeventstatus 0x2
@@ -173,7 +173,7 @@ gUnknown_Debug_845E306::
 _0845E329:
 	setvaddress _0845E329
 	getpartysize
-	compare RESULT, 0x6
+	compare VAR_RESULT, 0x6
 	vgoto_if 0x1, _0845E34C
 	givemon SPECIES_LUVDISC, 15, ITEM_BERRY_JUICE, 0x0, 0x0, 0x0
 	setmysteryeventstatus 0x2
@@ -287,18 +287,18 @@ _0845E64C:
 _0845E683:
 	setvaddress _0845E683
 	checkitem ITEM_GANLON_BERRY, 0x1
-	compare RESULT, 0x1
+	compare VAR_RESULT, 0x1
 	vgoto_if 0x1, _0845E6BF
 	checkpcitem ITEM_GANLON_BERRY, 0x1
-	compare RESULT, 0x1
+	compare VAR_RESULT, 0x1
 	vgoto_if 0x1, _0845E6BF
 	lock
 	faceplayer
 	vmessage _0845E6C0
 	waitmessage
 	waitbuttonpress
-	setorcopyvar VAR_SPECIAL_0, ITEM_GANLON_BERRY
-	setorcopyvar VAR_SPECIAL_1, 0x1
+	setorcopyvar VAR_0x8000, ITEM_GANLON_BERRY
+	setorcopyvar VAR_0x8001, 0x1
 	callstd 0x0
 	release
 	killscript
@@ -334,7 +334,7 @@ _0845E736:
 	setvaddress _0845E736
 	bufferdecorationname 0x0, DECOR_REGISTEEL_DOLL
 	givedecoration DECOR_REGISTEEL_DOLL
-	compare RESULT, 0x0
+	compare VAR_RESULT, 0x0
 	vgoto_if 0x1, _0845E755
 	vloadptr _0845E75D
 	setmysteryeventstatus 0x2

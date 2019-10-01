@@ -17,8 +17,8 @@ Route106_EventScript_14F34F:: @ 814F34F
 
 Route106_EventScript_14F366:: @ 814F366
 	trainerbattle 0, TRAINER_ELLIOT_1, 0, Route106_Text_1B8EF0, Route106_Text_1B8F25
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route106_EventScript_14F38D
 	msgbox Route106_Text_1B8F55, 6
 	end

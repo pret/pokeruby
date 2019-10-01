@@ -7,21 +7,21 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_15733D
 	msgbox MauvilleCity_House2_Text_18244E, 4
 	checkitem ITEM_HARBOR_MAIL, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_House2_EventScript_1572E5
 	release
 	end
 
 MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
 	playse SE_PIN
-	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0833
+	applymovement VAR_LAST_TALKED, MauvilleCity_House2_Movement_1A0833
 	waitmovement 0
-	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0835
+	applymovement VAR_LAST_TALKED, MauvilleCity_House2_Movement_1A0835
 	waitmovement 0
 	msgbox MauvilleCity_House2_Text_1824D8, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_House2_EventScript_15731B
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_House2_EventScript_157347
 	end
 

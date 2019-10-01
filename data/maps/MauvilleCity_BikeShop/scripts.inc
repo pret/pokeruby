@@ -8,17 +8,17 @@ MauvilleCity_BikeShop_EventScript_156796:: @ 8156796
 	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_1567D1
 	msgbox MauvilleCity_BikeShop_Text_180F9F, 4
 	msgbox MauvilleCity_BikeShop_Text_181016, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_BikeShop_EventScript_156824
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_BikeShop_EventScript_156817
 	end
 
 MauvilleCity_BikeShop_EventScript_1567D1:: @ 81567D1
 	msgbox MauvilleCity_BikeShop_Text_181016, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_BikeShop_EventScript_156824
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_BikeShop_EventScript_156817
 	end
 
@@ -26,7 +26,7 @@ MauvilleCity_BikeShop_EventScript_1567F0:: @ 81567F0
 	message MauvilleCity_BikeShop_Text_1810B1
 	waitmessage
 	multichoice 21, 8, 12, 1
-	switch RESULT
+	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_15682D
 	case 1, MauvilleCity_BikeShop_EventScript_156847
 	end
@@ -62,19 +62,19 @@ MauvilleCity_BikeShop_EventScript_156861:: @ 8156861
 
 MauvilleCity_BikeShop_EventScript_15686E:: @ 815686E
 	msgbox MauvilleCity_BikeShop_Text_1813A0, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_BikeShop_EventScript_15688D
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_BikeShop_EventScript_1568BF
 	end
 
 MauvilleCity_BikeShop_EventScript_15688D:: @ 815688D
 	msgbox MauvilleCity_BikeShop_Text_1813D4, 4
 	checkitem ITEM_ACRO_BIKE, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_BikeShop_EventScript_1568C9
 	checkitem ITEM_MACH_BIKE, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_BikeShop_EventScript_1568EA
 	msgbox MauvilleCity_BikeShop_Text_181498, 4
 	release
@@ -113,7 +113,7 @@ MauvilleCity_BikeShop_EventScript_156914:: @ 8156914
 
 MauvilleCity_BikeShop_EventScript_156920:: @ 8156920
 	multichoice 0, 0, 43, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_156962
 	case 1, MauvilleCity_BikeShop_EventScript_15696E
 	case 2, MauvilleCity_BikeShop_EventScript_15697A
@@ -151,7 +151,7 @@ MauvilleCity_BikeShop_EventScript_156988:: @ 8156988
 
 MauvilleCity_BikeShop_EventScript_156994:: @ 8156994
 	multichoice 0, 0, 44, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_1569D6
 	case 1, MauvilleCity_BikeShop_EventScript_1569E2
 	case 2, MauvilleCity_BikeShop_EventScript_1569EE

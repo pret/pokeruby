@@ -4,7 +4,7 @@ BattleTower_Corridor_MapScripts:: @ 8160845
 	.byte 0
 
 BattleTower_Corridor_MapScript1_160850:: @ 8160850
-	compare VAR_SPECIAL_6, 1
+	compare VAR_0x8006, 1
 	goto_if_eq BattleTower_Corridor_EventScript_16086E
 	setmetatile 12, 0, METATILE_BattleTower_CorridorOpenDoor_Top, 0
 	setmetatile 12, 1, METATILE_BattleTower_CorridorOpenDoor_Bottom, 0
@@ -21,7 +21,7 @@ BattleTower_Corridor_MapScript2_160881:: @ 8160881
 
 BattleTower_Corridor_EventScript_16088B:: @ 816088B
 	setvar VAR_TEMP_0, 1
-	compare VAR_SPECIAL_6, 1
+	compare VAR_0x8006, 1
 	goto_if_eq BattleTower_Corridor_EventScript_1608B1
 	applymovement 1, BattleTower_Corridor_Movement_1608D5
 	applymovement 255, BattleTower_Corridor_Movement_1608D4

@@ -7,7 +7,7 @@ DebugScript_081C1CFE:: @ 81C1CFE
 
 DebugScript_081C1D07:: @ 81C1D07
 	checkitem ITEM_COIN_CASE, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq DebugScript_081C1D1D
 	giveitem ITEM_COIN_CASE, 1
 	end
@@ -34,7 +34,7 @@ DebugScript_081C1D34:: @ 81C1D34
 
 DebugScript_081C1D35:: @ 81C1D35
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq DebugScript_081C1D45
 	giveegg SPECIES_KYOGRE
 	end
@@ -463,15 +463,15 @@ DebugScript_081C23F6:: @ 81C23F6
 
 DebugScript_081C23FD:: @ 81C23FD
 	getpartysize
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq DebugScript_081C2436
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq DebugScript_081C2445
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq DebugScript_081C2454
-	compare RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if_eq DebugScript_081C2463
-	compare RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if_eq DebugScript_081C2472
 	end
 
@@ -489,15 +489,15 @@ DebugScript_081C2472:
 
 DebugScript_081C2482:: @ 81C2482
 	getpartysize
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq DebugScript_081C24BB
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq DebugScript_081C24CA
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq DebugScript_081C24D9
-	compare RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if_eq DebugScript_081C24E8
-	compare RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if_eq DebugScript_081C24F7
 	end
 
@@ -515,7 +515,7 @@ DebugScript_081C24F7:
 
 DebugScript_081C2507:: @ 81C2507
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq DebugScript_081C2517
 	giveegg SPECIES_BARBOACH
 	end
@@ -525,7 +525,7 @@ DebugScript_081C2517:: @ 81C2517
 
 DebugScript_081C2518:: @ 81C2518
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq DebugScript_081C2528
 	giveegg SPECIES_SHROOMISH
 	end

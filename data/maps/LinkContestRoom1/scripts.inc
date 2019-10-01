@@ -13,15 +13,15 @@ LinkContestRoom1_MapScript1_15F595:: @ 815F595
 
 LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
 	special ScriptGetMultiplayerId
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LinkContestRoom1_EventScript_15F5E0
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LinkContestRoom1_EventScript_15F5E4
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	call_if_eq LinkContestRoom1_EventScript_15F5E8
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	call_if_eq LinkContestRoom1_EventScript_15F5EC
-	compare RESULT, 4
+	compare VAR_RESULT, 4
 	call_if_eq LinkContestRoom1_EventScript_15F5F0
 	return
 
@@ -126,10 +126,10 @@ LinkContestRoom1_EventScript_15F6DB:: @ 815F6DB
 	return
 
 LinkContestRoom1_EventScript_15F6E6:: @ 815F6E6
-	setvar RESULT, 32
+	setvar VAR_RESULT, 32
 	special ScriptRandom
-	addvar RESULT, 1
-	switch RESULT
+	addvar VAR_RESULT, 1
+	switch VAR_RESULT
 	case 1, LinkContestRoom1_EventScript_15F859
 	case 2, LinkContestRoom1_EventScript_15F85F
 	case 3, LinkContestRoom1_EventScript_15F865
@@ -414,9 +414,9 @@ LilycoveCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 SlateportCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF3
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF9
 	return
 

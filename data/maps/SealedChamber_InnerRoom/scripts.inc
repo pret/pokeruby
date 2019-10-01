@@ -7,8 +7,8 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_15F247
-	specialvar RESULT, CheckRelicanthWailord
-	compare RESULT, 0
+	specialvar VAR_RESULT, CheckRelicanthWailord
+	compare VAR_RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	fadeoutbgm 0
 	playse SE_TRACK_MOVE

@@ -5,9 +5,9 @@ SootopolisCity_House2_EventScript_15B2E5:: @ 815B2E5
 	lock
 	faceplayer
 	msgbox SootopolisCity_House2_Text_18FA66, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq SootopolisCity_House2_EventScript_15B307
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	call_if_eq SootopolisCity_House2_EventScript_15B310
 	release
 	end

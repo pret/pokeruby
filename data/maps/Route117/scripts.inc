@@ -39,8 +39,8 @@ Route117_EventScript_150D84:: @ 8150D84
 
 Route117_EventScript_150D8D:: @ 8150D8D
 	trainerbattle 0, TRAINER_ISAAC_1, 0, Route117_Text_1BD49E, Route117_Text_1BD4D9
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route117_EventScript_150DB4
 	msgbox Route117_Text_1BD4F9, 6
 	end
@@ -52,8 +52,8 @@ Route117_EventScript_150DB4:: @ 8150DB4
 
 Route117_EventScript_150DCB:: @ 8150DCB
 	trainerbattle 0, TRAINER_LYDIA_1, 0, Route117_Text_1BD634, Route117_Text_1BD67B
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route117_EventScript_150DF2
 	msgbox Route117_Text_1BD69B, 6
 	end
@@ -65,8 +65,8 @@ Route117_EventScript_150DF2:: @ 8150DF2
 
 Route117_EventScript_150E09:: @ 8150E09
 	trainerbattle 0, TRAINER_DYLAN_1, 0, Route117_Text_1BD79A, Route117_Text_1BD7E0
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route117_EventScript_150E30
 	msgbox Route117_Text_1BD7F5, 6
 	end
@@ -78,8 +78,8 @@ Route117_EventScript_150E30:: @ 8150E30
 
 Route117_EventScript_150E47:: @ 8150E47
 	trainerbattle 0, TRAINER_MARIA_1, 0, Route117_Text_1BD914, Route117_Text_1BD965
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route117_EventScript_150E6E
 	msgbox Route117_Text_1BD98F, 6
 	end
@@ -96,8 +96,8 @@ Route117_EventScript_150E85:: @ 8150E85
 
 Route117_EventScript_150E9C:: @ 8150E9C
 	trainerbattle 4, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_1BDBC3, Route117_Text_1BDC07, Route117_Text_1BDC96
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route117_EventScript_150EC7
 	msgbox Route117_Text_1BDC44, 6
 	end
@@ -109,8 +109,8 @@ Route117_EventScript_150EC7:: @ 8150EC7
 
 Route117_EventScript_150EE2:: @ 8150EE2
 	trainerbattle 4, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_1BDCD2, Route117_Text_1BDD1E, Route117_Text_1BDD8B
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route117_EventScript_150F0D
 	msgbox Route117_Text_1BDD4E, 6
 	end

@@ -3,8 +3,8 @@ AbandonedShip_Rooms2_1F_MapScripts:: @ 815EA67
 
 AbandonedShip_Rooms2_1F_EventScript_15EA68:: @ 815EA68
 	trainerbattle 4, TRAINER_LOIS_AND_HAL_1, 0, AbandonedShip_Rooms2_1F_Text_1987C1, AbandonedShip_Rooms2_1F_Text_1987FE, AbandonedShip_Rooms2_1F_Text_19887F
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq AbandonedShip_Rooms2_1F_EventScript_15EA93
 	msgbox AbandonedShip_Rooms2_1F_Text_198835, 6
 	end
@@ -16,8 +16,8 @@ AbandonedShip_Rooms2_1F_EventScript_15EA93:: @ 815EA93
 
 AbandonedShip_Rooms2_1F_EventScript_15EAAE:: @ 815EAAE
 	trainerbattle 4, TRAINER_LOIS_AND_HAL_1, 0, AbandonedShip_Rooms2_1F_Text_1988CC, AbandonedShip_Rooms2_1F_Text_198916, AbandonedShip_Rooms2_1F_Text_19899A
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq AbandonedShip_Rooms2_1F_EventScript_15EAD9
 	msgbox AbandonedShip_Rooms2_1F_Text_198934, 6
 	end

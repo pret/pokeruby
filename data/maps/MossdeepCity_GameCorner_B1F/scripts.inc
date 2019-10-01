@@ -18,15 +18,15 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	special PrintEReaderTrainerGreeting
 	msgbox gStringVar4, 4
 	closemessage
-	setvar VAR_SPECIAL_4, 2
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
 	special StartSpecialBattle
 	waitstate
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	call_if_eq MossdeepCity_GameCorner_B1F_EventScript_15AED5
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq MossdeepCity_GameCorner_B1F_EventScript_15AEE3
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	call_if_eq MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closemessage
 	special ScrSpecial_HealPlayerParty

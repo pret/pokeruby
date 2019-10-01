@@ -7,8 +7,8 @@ FallarborTown_ContestLobby_MapScript1_1539C7:: @ 81539C7
 	end
 
 FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
-	setvar VAR_SPECIAL_B, 6
-	setvar CONTEST_RANK, 1
+	setvar VAR_0x800B, 6
+	setvar VAR_CONTEST_RANK, 1
 	call FallarborTown_ContestLobby_EventScript_1A4E92
 	call FallarborTown_ContestLobby_EventScript_1539F8
 	special SetContestTrainerGfxIds

@@ -68,10 +68,10 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157640
 	msgbox RustboroCity_DevonCorp_2F_Text_182ED5, 4
 	checkitem ITEM_ROOT_FOSSIL, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_1575A6
 	checkitem ITEM_CLAW_FOSSIL, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_1575EE
 	release
 	end
@@ -84,7 +84,7 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
 	bufferitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
@@ -102,7 +102,7 @@ RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
 	bufferitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
@@ -133,9 +133,9 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	bufferspeciesname 1, SPECIES_LILEEP
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
-	copyvar VAR_SPECIAL_4, RESULT
+	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare MUS_FANFA4
@@ -144,7 +144,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	waitmessage
 	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end
@@ -153,9 +153,9 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	bufferspeciesname 1, SPECIES_ANORITH
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
-	copyvar VAR_SPECIAL_4, RESULT
+	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare MUS_FANFA4
@@ -164,7 +164,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	waitmessage
 	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end

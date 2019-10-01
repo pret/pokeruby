@@ -21,21 +21,21 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB8
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EC5
 	waitmovement 0
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E62
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E62
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDAE, 4
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_ne SlateportCity_OceanicMuseum_2F_EventScript_155E6D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDD7, 4
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE01, 4
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EB2
 	waitmovement 0
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E78
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E83
 	trainerbattle 3, TRAINER_MUSEUM_2F_GRUNT_1, 0, SlateportCity_OceanicMuseum_2F_Text_17EE4E
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE66, 4
@@ -78,7 +78,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0843
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F352, 4
-	setvar VAR_SPECIAL_4, 269
+	setvar VAR_0x8004, 269
 	call SlateportCity_OceanicMuseum_2F_EventScript_1A067F
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F433, 4
 	closemessage
@@ -266,7 +266,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155F46:: @ 8155F46
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F53B, 4
 	closemessage
-	applymovement LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_1A083D
+	applymovement VAR_LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_1A083D
 	waitmovement 0
 	release
 	end

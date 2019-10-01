@@ -92,8 +92,8 @@ LilycoveCity_LilycoveMuseum_2F_Movement_1586D5:: @ 81586D5
 LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8:: @ 81586D8
 	lockall
 	goto_if_set FLAG_RECEIVED_GLASS_ORNAMENT, LilycoveCity_LilycoveMuseum_2F_EventScript_158793
-	specialvar VAR_SPECIAL_4, sub_80C4D50
-	switch VAR_SPECIAL_4
+	specialvar VAR_0x8004, sub_80C4D50
+	switch VAR_0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
 	case 2, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
 	case 3, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
@@ -119,7 +119,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188120, 4
 	givedecoration_std DECOR_GLASS_ORNAMENT
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158783
 	setflag FLAG_RECEIVED_GLASS_ORNAMENT
 	closemessage

@@ -13,7 +13,7 @@ NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
 	end
 
 NewMauville_Inside_EventScript_15E58F:: @ 815E58F
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	return
 
 NewMauville_Inside_MapScript1_15E593:: @ 815E593

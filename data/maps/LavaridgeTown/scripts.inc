@@ -27,7 +27,7 @@ LavaridgeTown_MapScript2_14E4E3:: @ 814E4E3
 
 LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	lockall
-	setvar VAR_SPECIAL_8, 1
+	setvar VAR_0x8008, 1
 	opendoor 12, 15
 	waitdooranim
 	addobject 8
@@ -43,16 +43,16 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	applymovement 8, LavaridgeTown_Movement_1A0835
 	waitmovement 0
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LavaridgeTown_EventScript_14E56B
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LavaridgeTown_EventScript_14E570
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LavaridgeTown_EventScript_14E68F
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E5AB
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LavaridgeTown_EventScript_14E5D0
 	end
 
@@ -67,16 +67,16 @@ LavaridgeTown_EventScript_14E570:: @ 814E570
 LavaridgeTown_EventScript_14E575:: @ 814E575
 	lock
 	faceplayer
-	setvar VAR_SPECIAL_8, 0
+	setvar VAR_0x8008, 0
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LavaridgeTown_EventScript_14E56B
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LavaridgeTown_EventScript_14E570
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E5AB
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LavaridgeTown_EventScript_14E5D0
 	end
 
@@ -98,22 +98,22 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	closemessage
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LavaridgeTown_EventScript_14E646
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq LavaridgeTown_EventScript_14E64E
 	removeobject 8
 	addobject 7
 	delay 30
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq LavaridgeTown_EventScript_14E69A
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq LavaridgeTown_EventScript_14E6A5
 	removeobject 7
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	savebgm 0
 	fadedefaultbgm
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	goto_if_eq LavaridgeTown_EventScript_14E644
 	releaseall
 	end
@@ -127,13 +127,13 @@ LavaridgeTown_EventScript_14E646:: @ 814E646
 	return
 
 LavaridgeTown_EventScript_14E64E:: @ 814E64E
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq LavaridgeTown_EventScript_14E67B
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq LavaridgeTown_EventScript_14E680
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq LavaridgeTown_EventScript_14E685
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq LavaridgeTown_EventScript_14E68A
 	return
 
@@ -164,13 +164,13 @@ LavaridgeTown_EventScript_14E69A:: @ 814E69A
 	return
 
 LavaridgeTown_EventScript_14E6A5:: @ 814E6A5
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq LavaridgeTown_EventScript_14E6D2
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq LavaridgeTown_EventScript_14E6D2
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq LavaridgeTown_EventScript_14E6DD
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq LavaridgeTown_EventScript_14E6D2
 	return
 
@@ -235,8 +235,8 @@ LavaridgeTown_Movement_14E70E:: @ 814E70E
 	end_movement
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
-	specialvar RESULT, GetPlayerFacingDirection
-	compare RESULT, 1
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, 1
 	goto_if_eq LavaridgeTown_EventScript_14E721
 	end
 
@@ -273,10 +273,10 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	faceplayer
 	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LavaridgeTown_EventScript_14E7B2
 	getpartysize
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG

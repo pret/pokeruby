@@ -33,7 +33,7 @@ Route110_EventScript_14F946:: @ 814F946
 	lock
 	faceplayer
 	msgbox Route110_Text_16E6C0, 4
-	applymovement LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -42,7 +42,7 @@ Route110_EventScript_14F95C:: @ 814F95C
 	lock
 	faceplayer
 	msgbox Route110_Text_16E6F2, 4
-	applymovement LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -51,7 +51,7 @@ Route110_EventScript_14F972:: @ 814F972
 	lock
 	faceplayer
 	msgbox Route110_Text_16E729, 4
-	applymovement LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -60,7 +60,7 @@ Route110_EventScript_14F988:: @ 814F988
 	lock
 	faceplayer
 	msgbox Route110_Text_16E76A, 4
-	applymovement LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -131,8 +131,8 @@ Route110_EventScript_14FA25:: @ 814FA25
 
 Route110_EventScript_14FA2E:: @ 814FA2E
 	lockall
-	specialvar RESULT, GetRecordedCyclingRoadResults
-	compare RESULT, 0
+	specialvar VAR_RESULT, GetRecordedCyclingRoadResults
+	compare VAR_RESULT, 0
 	goto_if_eq Route110_EventScript_14FA49
 	msgbox Route110_Text_16F53A, 4
 	releaseall
@@ -146,8 +146,8 @@ Route110_EventScript_14FA49:: @ 814FA49
 Route110_EventScript_14FA53:: @ 814FA53
 	lock
 	faceplayer
-	specialvar RESULT, GetPlayerAvatarBike
-	compare RESULT, 1
+	specialvar VAR_RESULT, GetPlayerAvatarBike
+	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FA84
 	compare VAR_CYCLING_CHALLENGE_STATE, 0
 	goto_if_eq Route110_EventScript_14FA7A
@@ -177,8 +177,8 @@ Route110_EventScript_14FAA5:: @ 814FAA5
 
 Route110_EventScript_14FABC:: @ 814FABC
 	trainerbattle 0, TRAINER_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FAE3
 	msgbox Route110_Text_1BA829, 6
 	end
@@ -205,8 +205,8 @@ Route110_EventScript_14FB28:: @ 814FB28
 
 Route110_EventScript_14FB3F:: @ 814FB3F
 	trainerbattle 0, TRAINER_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FB66
 	msgbox Route110_Text_1BA3A5, 6
 	end
@@ -223,8 +223,8 @@ Route110_EventScript_14FB7D:: @ 814FB7D
 
 Route110_EventScript_14FB94:: @ 814FB94
 	trainerbattle 0, TRAINER_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FBBB
 	msgbox Route110_Text_1BA52E, 6
 	end
@@ -236,8 +236,8 @@ Route110_EventScript_14FBBB:: @ 814FBBB
 
 Route110_EventScript_14FBD2:: @ 814FBD2
 	trainerbattle 0, TRAINER_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FBF9
 	msgbox Route110_Text_1BA9E9, 6
 	end
@@ -263,7 +263,7 @@ Route110_EventScript_14FC27:: @ 814FC27
 Route110_EventScript_14FC39:: @ 814FC39
 	special FinishCyclingRoadChallenge
 	msgbox Route110_Text_16EF65, 4
-	switch RESULT
+	switch VAR_RESULT
 	case 10, Route110_EventScript_14FCC3
 	case 9, Route110_EventScript_14FCD1
 	case 8, Route110_EventScript_14FCD1
@@ -309,26 +309,26 @@ Route110_EventScript_14FD09:: @ 814FD09
 	return
 
 Route110_EventScript_14FD13:: @ 814FD13
-	setvar VAR_SPECIAL_8, 1
+	setvar VAR_0x8008, 1
 	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD1E:: @ 814FD1E
-	setvar VAR_SPECIAL_8, 2
+	setvar VAR_0x8008, 2
 	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD29:: @ 814FD29
-	setvar VAR_SPECIAL_8, 3
+	setvar VAR_0x8008, 3
 	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD34:: @ 814FD34
 	lockall
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_EventScript_14FDA7
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq Route110_EventScript_14FDAC
 	applymovement 28, Route110_Movement_1A0845
 	waitmovement 0
@@ -337,16 +337,16 @@ Route110_EventScript_14FD34:: @ 814FD34
 	applymovement 28, Route110_Movement_1A0835
 	waitmovement 0
 	delay 30
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq Route110_EventScript_14FF14
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq Route110_EventScript_14FF1F
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq Route110_EventScript_14FF2A
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route110_EventScript_14FDB1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FE2B
 	releaseall
 	end
@@ -425,22 +425,22 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 
 Route110_EventScript_14FEB2:: @ 814FEB2
 	closemessage
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq Route110_EventScript_14FF56
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq Route110_EventScript_14FF5E
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq Route110_EventScript_14FF66
 	setobjectmovementtype 28, 10
 	setobjectmovementtype 29, 10
 	removeobject 28
 	addobject 29
 	delay 45
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq Route110_EventScript_14FF35
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq Route110_EventScript_14FF40
-	compare VAR_SPECIAL_8, 3
+	compare VAR_0x8008, 3
 	call_if_eq Route110_EventScript_14FF4B
 	removeobject 29
 	setvar VAR_ROUTE110_STATE, 1

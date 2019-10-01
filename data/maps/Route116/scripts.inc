@@ -40,31 +40,31 @@ Route116_EventScript_150A7B:: @ 8150A7B
 Route116_EventScript_150A94:: @ 8150A94
 	setflag FLAG_MET_DEVON_EMPLOYEE
 	giveitem_std ITEM_REPEAT_BALL
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
 	closemessage
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq Route116_EventScript_150AEE
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq Route116_EventScript_150AEE
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq Route116_EventScript_150AEE
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq Route116_EventScript_150AF9
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_EMPLOYEE_DEVON_CORP_3F
 	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end
 
 Route116_EventScript_150AEE:: @ 8150AEE
-	applymovement LAST_TALKED, Route116_Movement_150B1C
+	applymovement VAR_LAST_TALKED, Route116_Movement_150B1C
 	waitmovement 0
 	return
 
 Route116_EventScript_150AF9:: @ 8150AF9
-	applymovement LAST_TALKED, Route116_Movement_150B25
+	applymovement VAR_LAST_TALKED, Route116_Movement_150B25
 	waitmovement 0
 	return
 
@@ -144,10 +144,10 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	lock
 	faceplayer
 	checkitem ITEM_BLACK_GLASSES, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150BCA
-	specialvar RESULT, FoundBlackGlasses
-	compare RESULT, 1
+	specialvar VAR_RESULT, FoundBlackGlasses
+	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
 	release
@@ -162,8 +162,8 @@ Route116_EventScript_150BBB:: @ 8150BBB
 Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_1708EE, 4
 	msgbox Route116_Text_170921, 4
-	specialvar RESULT, FoundBlackGlasses
-	compare RESULT, 1
+	specialvar VAR_RESULT, FoundBlackGlasses
+	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
 	release
@@ -177,25 +177,25 @@ Route116_EventScript_150BF4:: @ 8150BF4
 
 Route116_EventScript_150C03:: @ 8150C03
 	delay 20
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq Route116_EventScript_150C37
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq Route116_EventScript_150C37
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq Route116_EventScript_150C37
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq Route116_EventScript_150C42
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	release
 	end
 
 Route116_EventScript_150C37:: @ 8150C37
-	applymovement LAST_TALKED, Route116_Movement_150C4D
+	applymovement VAR_LAST_TALKED, Route116_Movement_150C4D
 	waitmovement 0
 	return
 
 Route116_EventScript_150C42:: @ 8150C42
-	applymovement LAST_TALKED, Route116_Movement_150C57
+	applymovement VAR_LAST_TALKED, Route116_Movement_150C57
 	waitmovement 0
 	return
 
@@ -236,8 +236,8 @@ Route116_EventScript_150C79:: @ 8150C79
 
 Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, TRAINER_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
 	end
@@ -259,8 +259,8 @@ Route116_EventScript_150CE5:: @ 8150CE5
 
 Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, TRAINER_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6
 	end

@@ -17,7 +17,7 @@ LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
 
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
 	checkplayergender
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1528BE
 	return
 
@@ -75,15 +75,15 @@ LittlerootTown_MaysHouse_1F_Movement_15295E:: @ 815295E
 
 LittlerootTown_MaysHouse_1F_EventScript_152960:: @ 8152960
 	lockall
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 	lockall
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B6B2E
 	end
 
@@ -116,9 +116,9 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 @ 81529C7
 	lockall
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1529E1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1529E2
 	releaseall
 	end
@@ -160,9 +160,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_152A2B:: @ 8152A2B
 
 LittlerootTown_MaysHouse_1F_EventScript_152A35:: @ 8152A35
 	lockall
-	setvar VAR_SPECIAL_4, 1
-	setvar VAR_SPECIAL_5, 1
-	applymovement VAR_SPECIAL_4, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
+	applymovement VAR_0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B69B7
 	end

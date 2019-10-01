@@ -8,7 +8,7 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 	applymovement 2, Route109_Movement_14F67B
 	waitmovement 0
 	removeobject 2
-	switch FACING
+	switch VAR_FACING
 	case 1, Route109_EventScript_14F518
 	case 3, Route109_EventScript_14F538
 	case 4, Route109_EventScript_14F528
@@ -54,7 +54,7 @@ Route109_EventScript_14F548:: @ 814F548
 	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_16B4B5, 4
 	closemessage
-	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority 255, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
@@ -278,7 +278,7 @@ Route109_EventScript_14F680:: @ 814F680
 Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
 	msgbox Route109_Text_16E0F9, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route109_EventScript_14F6F1
 	goto Route109_EventScript_14F6E2
 	end
@@ -287,7 +287,7 @@ Route109_EventScript_14F6AF:: @ 814F6AF
 	message Route109_Text_16E26A
 	waitmessage
 	multichoicedefault 21, 8, 14, 1, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, Route109_EventScript_14F6E2
 	case 1, Route109_EventScript_14F6FB
 	case 127, Route109_EventScript_14F6FB
@@ -318,7 +318,7 @@ Route109_EventScript_14F70E:: @ 814F70E
 	faceplayer
 	msgbox Route109_Text_16E405, 4
 	closemessage
-	applymovement LAST_TALKED, Route109_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -330,10 +330,10 @@ Route109_EventScript_14F725:: @ 814F725
 	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem_std ITEM_SOFT_SAND
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
 	closemessage
-	applymovement LAST_TALKED, Route109_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
 	setflag FLAG_RECEIVED_SOFT_SAND
 	release
@@ -341,7 +341,7 @@ Route109_EventScript_14F725:: @ 814F725
 
 Route109_EventScript_14F762:: @ 814F762
 	msgbox Route109_Text_16E446, 4
-	applymovement LAST_TALKED, Route109_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -394,8 +394,8 @@ Route109_EventScript_14F7F2:: @ 814F7F2
 
 Route109_EventScript_14F809:: @ 814F809
 	trainerbattle 0, TRAINER_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route109_EventScript_14F830
 	msgbox Route109_Text_1B9C6E, 6
 	end
@@ -407,8 +407,8 @@ Route109_EventScript_14F830:: @ 814F830
 
 Route109_EventScript_14F847:: @ 814F847
 	trainerbattle 0, TRAINER_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route109_EventScript_14F86E
 	msgbox Route109_Text_1B9D8E, 6
 	end

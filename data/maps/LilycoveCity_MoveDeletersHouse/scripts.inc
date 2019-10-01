@@ -6,7 +6,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159AAE:: @ 8159AAE
 	applymovement 1, LilycoveCity_MoveDeletersHouse_Movement_1A0839
 	waitmovement 0
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B622, MSGBOX_YESNO
-	switch RESULT
+	switch VAR_RESULT
 	case YES, LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	case NO, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	releaseall
@@ -16,23 +16,23 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B68C, 4
 	special SelectMonForNPCTrade
 	waitstate
-	compare VAR_SPECIAL_4, 255
+	compare VAR_0x8004, 255
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	special IsSelectedMonEgg
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B71
 	special ScrSpecial_CountPokemonMoves
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B64
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6B0, 4
 	fadescreen 1
 	special SelectMove
 	fadescreen 0
-	compare VAR_SPECIAL_5, 4
+	compare VAR_0x8005, 4
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, MSGBOX_YESNO
-	switch RESULT
+	switch VAR_RESULT
 	case YES, LilycoveCity_MoveDeletersHouse_EventScript_159B53
 	case NO, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	releaseall

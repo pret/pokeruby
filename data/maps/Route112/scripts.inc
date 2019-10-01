@@ -38,8 +38,8 @@ Route112_EventScript_150549:: @ 8150549
 
 Route112_EventScript_150560:: @ 8150560
 	trainerbattle 0, TRAINER_TRENT_1, 0, Route112_Text_1BB6A0, Route112_Text_1BB707
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route112_EventScript_150587
 	msgbox Route112_Text_1BB721, 6
 	end

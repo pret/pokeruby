@@ -1449,11 +1449,11 @@
 	.endm
 
 	.macro switch var
-	copyvar VAR_SPECIAL_0, \var
+	copyvar VAR_0x8000, \var
 	.endm
 
 	.macro case condition, dest
-	compare_var_to_value VAR_SPECIAL_0, \condition
+	compare_var_to_value VAR_0x8000, \condition
 	goto_if_eq \dest
 	.endm
 
@@ -1469,12 +1469,12 @@
 	NO  = 0
 
 	.macro giveitem_std item, amount=1, function=0
-	setorcopyvar VAR_SPECIAL_0, \item
-	setorcopyvar VAR_SPECIAL_1, \amount
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
 	callstd \function
 	.endm
 
 	.macro givedecoration_std decoration
-	setorcopyvar VAR_SPECIAL_0, \decoration
+	setorcopyvar VAR_0x8000, \decoration
 	callstd 7
 	.endm
