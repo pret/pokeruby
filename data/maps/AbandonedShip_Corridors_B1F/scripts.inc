@@ -13,11 +13,11 @@ AbandonedShip_Corridors_B1F_MapScript1_15E9A3:: @ 815E9A3
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_15E9B6:: @ 815E9B6
-	setmetatile 11, 4, 563, 1
+	setmetatile 11, 4, METATILE_InsideShip_InTactDoor0_Bottom, 1
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_15E9C0:: @ 815E9C0
-	setmetatile 11, 4, 555, 1
+	setmetatile 11, 4, METATILE_InsideShip_InTactDoor1_Bottom, 1
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_15E9CA:: @ 815E9CA

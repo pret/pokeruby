@@ -11,12 +11,13 @@
 #if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x
 #define __(x) x
-#define INCBIN_U8 {0}
-#define INCBIN_U16 {0}
-#define INCBIN_U32 {0}
-#define INCBIN_S8 {0}
-#define INCBIN_S16 {0}
-#define INCBIN_S32 {0}
+#define INCBIN(x) {0}
+#define INCBIN_U8 INCBIN
+#define INCBIN_U16 INCBIN
+#define INCBIN_U32 INCBIN
+#define INCBIN_S8 INCBIN
+#define INCBIN_S16 INCBIN
+#define INCBIN_S32 INCBIN
 #endif
 
 // Prevent cross-jump optimization.
@@ -64,6 +65,13 @@ enum
 #define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
+
+#define T2_WRITE_32(ptr, value) ({\
+    (ptr)[0] = ((value) >>  0) & 0xFF;\
+    (ptr)[1] = ((value) >>  8) & 0xFF;\
+    (ptr)[2] = ((value) >> 16) & 0xFF;\
+    (ptr)[3] = ((value) >> 24) & 0xFF;\
+})
 
 // Credits to Made (dolphin emoji)
 #define S16TOPOSFLOAT(val)   \

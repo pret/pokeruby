@@ -23,14 +23,14 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A7C
 	waitmovement 0
 	playse SE_HASHI
-	setmetatile 4, 2, 545, 1
-	setmetatile 4, 3, 609, 1
+	setmetatile 4, 2, METATILE_Contest_WallShadow, 1
+	setmetatile 4, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A7F
 	waitmovement 0
 	playse SE_HASHI
-	setmetatile 4, 2, 721, 1
-	setmetatile 4, 3, 729, 1
+	setmetatile 4, 2, METATILE_Contest_CounterFlap_Top, 1
+	setmetatile 4, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A8C

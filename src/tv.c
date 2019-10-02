@@ -42,6 +42,7 @@
 #include "ewram.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
+#include "constants/metatile_labels.h"
 
 struct UnkTvStruct
 {
@@ -536,7 +537,7 @@ void UpdateTVScreensOnMap(int width, int height)
     switch (CheckForBigMovieOrEmergencyNewsOnTV())
     {
     case 1:
-        SetTVMetatilesOnMap(width, height, 0x3);
+        SetTVMetatilesOnMap(width, height, METATILE_ID(Building, TV_On));
         break;
     case 2:
         break;
@@ -544,12 +545,12 @@ void UpdateTVScreensOnMap(int width, int height)
         if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
          && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
         {
-            SetTVMetatilesOnMap(width, height, 0x3);
+            SetTVMetatilesOnMap(width, height, METATILE_ID(Building, TV_On));
         }
         else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
             FlagClear(FLAG_SYS_TV_WATCH);
-            SetTVMetatilesOnMap(width, height, 0x3);
+            SetTVMetatilesOnMap(width, height, METATILE_ID(Building, TV_On));
         }
         break;
     }
@@ -565,14 +566,14 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
         for (x=0; x<width; x++)
         {
             if (MapGridGetMetatileBehaviorAt(x, y) == 0x86)
-                MapGridSetMetatileIdAt(x, y, tileId | 0xc00);
+                MapGridSetMetatileIdAt(x, y, tileId | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
         }
     }
 }
 
 void TurnOffTVScreen(void)
 {
-    SetTVMetatilesOnMap(gUnknown_03004870.width, gUnknown_03004870.height, 0x2);
+    SetTVMetatilesOnMap(gUnknown_03004870.width, gUnknown_03004870.height, METATILE_ID(Building, TV_Off));
     DrawWholeMapView();
 }
 

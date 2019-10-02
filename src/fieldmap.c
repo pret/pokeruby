@@ -382,13 +382,13 @@ u8 MapGridIsImpassableAt(int x, int y)
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
         block = gMapHeader.mapLayout->border[i];
-        block |= 0xc00;
+        block |= METATILE_COLLISION_MASK;
     }
-    if (block == 0x3ff)
+    if (block == METATILE_ID_UNDEFINED)
     {
         return 1;
     }
-    return (block & 0xc00) >> 10;
+    return (block & METATILE_COLLISION_MASK) >> 10;
 }
 
 u32 MapGridGetMetatileIdAt(int x, int y)

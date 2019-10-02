@@ -11,8 +11,8 @@ LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
-	setmetatile 5, 4, 624, 1
-	setmetatile 5, 2, 616, 1
+	setmetatile 5, 4, METATILE_BrendansMaysHouse_MovingBox_Open, 1
+	setmetatile 5, 2, METATILE_BrendansMaysHouse_MovingBox_Closed, 1
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
@@ -22,7 +22,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
-	setmetatile 6, 7, 659, 1
+	setmetatile 6, 7, METATILE_BrendansMaysHouse_BookOnTable, 1
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8

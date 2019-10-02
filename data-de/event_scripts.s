@@ -12,6 +12,7 @@
 #include "constants/weather.h"
 #include "constants/heal_locations.h"
 #include "constants/vars.h"
+#include "constants/metatile_labels.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"
 	.include "constants/constants.inc"
