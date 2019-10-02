@@ -70,23 +70,23 @@ Route110_TrickHousePuzzle2_EventScript_161E19:: @ 8161E19
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161E2C:: @ 8161E2C
-	setmetatile 14, 21, 601, 0
-	setmetatile 1, 12, 618, 0
+	setmetatile 14, 21, METATILE_TrickHousePuzzle_Button_Pressed, 0
+	setmetatile 1, 12, METATILE_TrickHousePuzzle_Door_Shuttered, 0
 	return
 
 Route110_TrickHousePuzzle2_EventScript_161E3F:: @ 8161E3F
-	setmetatile 8, 17, 601, 0
-	setmetatile 12, 13, 618, 0
+	setmetatile 8, 17, METATILE_TrickHousePuzzle_Button_Pressed, 0
+	setmetatile 12, 13, METATILE_TrickHousePuzzle_Door_Shuttered, 0
 	return
 
 Route110_TrickHousePuzzle2_EventScript_161E52:: @ 8161E52
-	setmetatile 4, 10, 601, 0
-	setmetatile 8, 4, 618, 0
+	setmetatile 4, 10, METATILE_TrickHousePuzzle_Button_Pressed, 0
+	setmetatile 8, 4, METATILE_TrickHousePuzzle_Door_Shuttered, 0
 	return
 
 Route110_TrickHousePuzzle2_EventScript_161E65:: @ 8161E65
-	setmetatile 5, 2, 601, 0
-	setmetatile 12, 5, 618, 0
+	setmetatile 5, 2, METATILE_TrickHousePuzzle_Button_Pressed, 0
+	setmetatile 12, 5, METATILE_TrickHousePuzzle_Door_Shuttered, 0
 	return
 
 Route110_TrickHousePuzzle2_EventScript_161E78:: @ 8161E78

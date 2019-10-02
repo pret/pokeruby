@@ -17,12 +17,12 @@ DesertRuins_MapScript1_15CB11:: @ 815CB11
 	end
 
 DesertRuins_EventScript_15CB1B:: @ 815CB1B
-	setmetatile 7, 19, 553, 1
-	setmetatile 8, 19, 553, 1
-	setmetatile 9, 19, 553, 1
-	setmetatile 7, 20, 565, 1
-	setmetatile 8, 20, 565, 1
-	setmetatile 9, 20, 565, 1
+	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
 DesertRuins_MapScript1_15CB52:: @ 815CB52

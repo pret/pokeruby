@@ -4,9 +4,9 @@ InsideOfTruck_MapScripts:: @ 815FBFF
 	.byte 0
 
 InsideOfTruck_MapScript1_15FC0A:: @ 815FC0A
-	setmetatile 4, 1, 520, 0
-	setmetatile 4, 2, 528, 0
-	setmetatile 4, 3, 536, 0
+	setmetatile 4, 1, METATILE_InsideOfTruck_ExitLight_Top, 0
+	setmetatile 4, 2, METATILE_InsideOfTruck_ExitLight_Mid, 0
+	setmetatile 4, 3, METATILE_InsideOfTruck_ExitLight_Bottom, 0
 	end
 
 InsideOfTruck_MapScript1_15FC26:: @ 815FC26

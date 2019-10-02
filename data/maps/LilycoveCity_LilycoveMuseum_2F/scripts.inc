@@ -28,32 +28,32 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3:: @ 81585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD:: @ 81585FD
-	setmetatile 10, 6, 606, 1
-	setmetatile 11, 6, 607, 1
+	setmetatile 10, 6, METATILE_LilycoveMuseum_Painting2_Left, 1
+	setmetatile 11, 6, METATILE_LilycoveMuseum_Painting2_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158615:: @ 8158615
-	setmetatile 18, 6, 604, 1
-	setmetatile 19, 6, 605, 1
+	setmetatile 18, 6, METATILE_LilycoveMuseum_Painting1_Left, 1
+	setmetatile 19, 6, METATILE_LilycoveMuseum_Painting1_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15862D:: @ 815862D
-	setmetatile 14, 10, 608, 1
-	setmetatile 15, 10, 609, 1
+	setmetatile 14, 10, METATILE_LilycoveMuseum_Painting3_Left, 1
+	setmetatile 15, 10, METATILE_LilycoveMuseum_Painting3_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158645:: @ 8158645
-	setmetatile 6, 10, 602, 1
-	setmetatile 7, 10, 603, 1
+	setmetatile 6, 10, METATILE_LilycoveMuseum_Painting0_Left, 1
+	setmetatile 7, 10, METATILE_LilycoveMuseum_Painting0_Right, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15865D:: @ 815865D
-	setmetatile 2, 6, 610, 1
-	setmetatile 3, 6, 611, 1
+	setmetatile 2, 6, METATILE_LilycoveMuseum_Painting4_Left, 1
+	setmetatile 3, 6, METATILE_LilycoveMuseum_Painting4_Right, 1
 	end
 
 LilycoveCity_LilycoveMuseum_2F_MapScript2_158670:: @ 8158670

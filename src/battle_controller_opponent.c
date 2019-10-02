@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_ai_script_commands.h"
 #include "battle_ai_switch_items.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -14,6 +15,7 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
+#include "random.h"
 #include "rom_8077ABC.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -1435,6 +1437,11 @@ void OpponentHandlecmd19(void)
     OpponentBufferExecCompleted();
 }
 
+struct ChooseMoveStruct
+{
+    u16 moves[4];
+};
+
 #if DEBUG
 NAKED
 void OpponentHandlecmd20(void)
@@ -1744,249 +1751,58 @@ void OpponentHandlecmd20(void)
     bx  r0");
 }
 #else
-#ifdef NONMATCHING
 void OpponentHandlecmd20(void)
 {
-    u16 r4;
-    // Needed to match closer
-    struct {u16 moves[4];} *r5 = (void *)&gBattleBufferA[gActiveBattler][4];
+    u8 chosenMoveId;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBattler][4];
 
-    if (gBattleTypeFlags & 0x498)
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
     {
         BattleAI_SetupAIData();
-        r4 = BattleAI_GetAIActionToUse();
-        switch (r4)
+        chosenMoveId = BattleAI_GetAIActionToUse();
+
+        switch (chosenMoveId)
         {
-        case 5:
-            BtlController_EmitTwoReturnValues(1, 4, 0);
+        case 5: // AI_CHOICE_WATCH
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
             break;
-        case 4:
-            BtlController_EmitTwoReturnValues(1, 3, 0);
+        case 4: // AI_CHOICE_FLEE
+            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             break;
         default:
-            if (gBattleMoves[r5->moves[r4]].target & 0x12)
+            if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                 gBattlerTarget = gActiveBattler;
-            if (gBattleMoves[r5->moves[r4]].target & 8)
+            if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & 8)
             {
                 gBattlerTarget = GetBattlerAtPosition(0);
                 if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                     gBattlerTarget = GetBattlerAtPosition(2);
             }
-            r4 |= gBattlerTarget << 8;
-            BtlController_EmitTwoReturnValues(1, 10, r4);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gBattlerTarget << 8));
             break;
         }
         OpponentBufferExecCompleted();
     }
     else
     {
-        u16 r2;
+        u16 move;
 
         do
         {
             // Can't for the life of me get this to match.
-            r4 = Random() % 4;
-            r2 = r5->moves[r4];
-        } while (r2 == 0);
+            chosenMoveId = Random() & 3;
+            move = moveInfo->moves[chosenMoveId];
+        } while (move == 0);
 
-        if (gBattleMoves[r2].target & 0x12)
-        {
-            r4 |= gActiveBattler << 8;
-            BtlController_EmitTwoReturnValues(1, 10, r4);
-        }
+        if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gActiveBattler << 8));
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-        {
-            u16 r2 = GetBattlerAtPosition(Random() & 2) << 8;
-
-            BtlController_EmitTwoReturnValues(1, 10, r4 | r2);
-        }
+            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(Random() & 2) << 8));
         else
-        {
-            u16 r2 = GetBattlerAtPosition(0) << 8;
-
-            BtlController_EmitTwoReturnValues(1, 10, r4 | r2);
-        }
+            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(0) << 8));
         OpponentBufferExecCompleted();
     }
 }
-#else
-NAKED
-void OpponentHandlecmd20(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    ldr r6, _0803545C @ =gActiveBattler\n\
-    ldrb r0, [r6]\n\
-    lsls r0, 9\n\
-    ldr r1, _08035460 @ =gBattleBufferA+4\n\
-    adds r5, r0, r1\n\
-    ldr r0, _08035464 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x93\n\
-    lsls r0, 3\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080354F8\n\
-    bl BattleAI_SetupAIData\n\
-    bl BattleAI_GetAIActionToUse\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x4\n\
-    beq _08035468\n\
-    cmp r4, 0x5\n\
-    bne _08035474\n\
-    movs r0, 0x1\n\
-    movs r1, 0x4\n\
-    b _0803546C\n\
-    .align 2, 0\n\
-_0803545C: .4byte gActiveBattler\n\
-_08035460: .4byte gBattleBufferA+4\n\
-_08035464: .4byte gBattleTypeFlags\n\
-_08035468:\n\
-    movs r0, 0x1\n\
-    movs r1, 0x3\n\
-_0803546C:\n\
-    movs r2, 0\n\
-    bl BtlController_EmitTwoReturnValues\n\
-    b _080354E0\n\
-_08035474:\n\
-    ldr r3, _080354E8 @ =gBattleMoves\n\
-    lsls r0, r4, 1\n\
-    adds r2, r5, r0\n\
-    ldrh r1, [r2]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    ldrb r1, [r0, 0x6]\n\
-    movs r0, 0x12\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08035494\n\
-    ldr r1, _080354EC @ =gBattlerTarget\n\
-    ldrb r0, [r6]\n\
-    strb r0, [r1]\n\
-_08035494:\n\
-    ldrh r1, [r2]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    ldrb r1, [r0, 0x6]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080354CE\n\
-    movs r0, 0\n\
-    bl GetBattlerAtPosition\n\
-    ldr r5, _080354EC @ =gBattlerTarget\n\
-    strb r0, [r5]\n\
-    ldr r0, _080354F0 @ =gAbsentBattlerFlags\n\
-    ldrb r1, [r0]\n\
-    ldr r2, _080354F4 @ =gBitTable\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldr r0, [r0]\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _080354CE\n\
-    movs r0, 0x2\n\
-    bl GetBattlerAtPosition\n\
-    strb r0, [r5]\n\
-_080354CE:\n\
-    ldr r0, _080354EC @ =gBattlerTarget\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 8\n\
-    orrs r4, r0\n\
-    movs r0, 0x1\n\
-    movs r1, 0xA\n\
-    adds r2, r4, 0\n\
-    bl BtlController_EmitTwoReturnValues\n\
-_080354E0:\n\
-    bl OpponentBufferExecCompleted\n\
-    b _0803558A\n\
-    .align 2, 0\n\
-_080354E8: .4byte gBattleMoves\n\
-_080354EC: .4byte gBattlerTarget\n\
-_080354F0: .4byte gAbsentBattlerFlags\n\
-_080354F4: .4byte gBitTable\n\
-_080354F8:\n\
-    movs r6, 0x3\n\
-_080354FA:\n\
-    bl Random\n\
-    adds r4, r0, 0\n\
-    ands r4, r6\n\
-    lsls r0, r4, 1\n\
-    adds r0, r5, r0\n\
-    ldrh r2, [r0]\n\
-    cmp r2, 0\n\
-    beq _080354FA\n\
-    ldr r1, _08035534 @ =gBattleMoves\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r1, [r0, 0x6]\n\
-    movs r0, 0x12\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0803553C\n\
-    ldr r0, _08035538 @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 8\n\
-    orrs r4, r0\n\
-    movs r0, 0x1\n\
-    movs r1, 0xA\n\
-    adds r2, r4, 0\n\
-    bl BtlController_EmitTwoReturnValues\n\
-    b _08035586\n\
-    .align 2, 0\n\
-_08035534: .4byte gBattleMoves\n\
-_08035538: .4byte gActiveBattler\n\
-_0803553C:\n\
-    ldr r0, _0803556C @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08035570\n\
-    bl Random\n\
-    movs r1, 0x2\n\
-    ands r1, r0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    adds r0, r1, 0\n\
-    bl GetBattlerAtPosition\n\
-    adds r2, r0, 0\n\
-    lsls r2, 24\n\
-    lsrs r2, 16\n\
-    orrs r2, r4\n\
-    movs r0, 0x1\n\
-    movs r1, 0xA\n\
-    bl BtlController_EmitTwoReturnValues\n\
-    b _08035586\n\
-    .align 2, 0\n\
-_0803556C: .4byte gBattleTypeFlags\n\
-_08035570:\n\
-    movs r0, 0\n\
-    bl GetBattlerAtPosition\n\
-    adds r2, r0, 0\n\
-    lsls r2, 24\n\
-    lsrs r2, 16\n\
-    orrs r2, r4\n\
-    movs r0, 0x1\n\
-    movs r1, 0xA\n\
-    bl BtlController_EmitTwoReturnValues\n\
-_08035586:\n\
-    bl OpponentBufferExecCompleted\n\
-_0803558A:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 #endif
 
 void OpponentHandleOpenBag(void)

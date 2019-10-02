@@ -8,8 +8,8 @@ Route111_MapScript1_14FF9C:: @ 814FF9C
 	end
 
 Route111_EventScript_14FFA6:: @ 814FFA6
-	setmetatile 29, 86, 124, 1
-	setmetatile 29, 87, 145, 1
+	setmetatile 29, 86, METATILE_General_RockWall_RockBase, 1
+	setmetatile 29, 87, METATILE_General_RockWall_SandBase, 1
 	return
 
 Route111_MapScript1_14FFB9:: @ 814FFB9

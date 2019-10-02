@@ -55,15 +55,15 @@ Route120_MapScript1_151686:: @ 8151686
 	end
 
 Route120_EventScript_1516A2:: @ 81516A2
-	setmetatile 7, 54, 124, 1
-	setmetatile 7, 55, 145, 1
+	setmetatile 7, 54, METATILE_General_RockWall_RockBase, 1
+	setmetatile 7, 55, METATILE_General_RockWall_SandBase, 1
 	return
 
 Route120_EventScript_1516B5:: @ 81516B5
-	setmetatile 13, 15, 663, 0
-	setmetatile 12, 16, 671, 0
-	setmetatile 12, 17, 161, 0
-	setmetatile 13, 17, 161, 0
+	setmetatile 13, 15, METATILE_Fortree_WoodBridge_Kecleon0, 0
+	setmetatile 12, 16, METATILE_Fortree_WoodBridge_Kecleon1, 0
+	setmetatile 12, 17, METATILE_General_ReflectiveWater, 0
+	setmetatile 13, 17, METATILE_General_ReflectiveWater, 0
 	return
 
 Route120_EventScript_1516DA:: @ 81516DA
@@ -244,10 +244,10 @@ Route120_EventScript_151908:: @ 8151908
 	delay 15
 	removeobject 31
 	waitfieldeffect FLDEFF_NPCFLY_OUT
-	setmetatile 13, 15, 663, 0
-	setmetatile 12, 16, 671, 0
-	setmetatile 12, 17, 161, 0
-	setmetatile 13, 17, 161, 0
+	setmetatile 13, 15, METATILE_Fortree_WoodBridge_Kecleon0, 0
+	setmetatile 12, 16, METATILE_Fortree_WoodBridge_Kecleon1, 0
+	setmetatile 12, 17, METATILE_General_ReflectiveWater, 0
+	setmetatile 13, 17, METATILE_General_ReflectiveWater, 0
 	special DrawWholeMapView
 	release
 	end
