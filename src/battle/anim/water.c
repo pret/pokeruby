@@ -6,6 +6,8 @@
 #include "sprite.h"
 #include "trig.h"
 #include "util.h"
+#include "scanline_effect.h"
+#include "palette.h"
 #include "constants/battle_anim.h"
 
 extern u8 gAnimVisualTaskCount;
@@ -23,6 +25,7 @@ void sub_8078F40(u8);
 void sub_8079A64(u8);
 void sub_80D37FC(struct Sprite *sprite);
 void sub_80D3838(struct Sprite *sprite);
+void sub_80D3D68(u8 taskId);
 void sub_80D4044(struct Sprite *sprite);
 void sub_80D40A8(struct Sprite *);
 void sub_80D4150(u8);
@@ -579,7 +582,7 @@ _080D3B5C: .4byte sub_80D3B60\n\
 #ifdef NONMATCHING
 void sub_80D3B60(u8 taskId)
 {
-    struct UnknownAnimStruct2 unk;
+    struct Struct_sub_8078914 unk;
     u8 i;
     u16 rgbBuffer;
     u16 *BGptrX = &gBattle_BG1_X;
@@ -590,18 +593,18 @@ void sub_80D3B60(u8 taskId)
 
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
-    sub_80A6B30(&unk);
+    sub_8078914(&unk);
     gTasks[taskId].data[2] += gTasks[taskId].data[1];
     if (++gTasks[taskId].data[5] == 4)
     {
-        rgbBuffer = gPlttBufferFaded[unk.unk8 * 16 + 7];
+        rgbBuffer = gPlttBufferFaded[unk.field_8 * 16 + 7];
         for (i = 6; i != 0; i--)
         {
-            palNum = unk.unk8 * 16;
+            palNum = unk.field_8 * 16;
             palOffset = 1 + i;
             gPlttBufferFaded[palNum + palOffset] = gPlttBufferFaded[palNum + palOffset - 1];
         }
-        gPlttBufferFaded[unk.unk8 * 16 + 1] = rgbBuffer;
+        gPlttBufferFaded[unk.field_8 * 16 + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
     }
     if (++gTasks[taskId].data[6] > 1)
@@ -622,7 +625,7 @@ void sub_80D3B60(u8 taskId)
     if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
     {
         gTasks[taskId].data[0] = gTasks[gTasks[taskId].data[15]].data[1] & 0x1F;
-        gTasks[taskId].func = sub_8107CC4;
+        gTasks[taskId].func = sub_80D3D68;
     }
 }
 #else
@@ -1895,14 +1898,14 @@ void sub_80D4D64(struct Sprite *sprite, int xDiff, int yDiff)
     s16 something = sprite->data[0] / 2;
     s16 combinedX = sprite->pos1.x + sprite->pos2.x;
     s16 combinedY = sprite->pos1.y + sprite->pos2.y;
-    s16 randomSomethingY = yDiff + (Random2() % 10) - 5;
-    s16 randomSomethingX = -xDiff + (Random2() % 10) - 5;
+    s16 randomSomethingY = yDiff + (Random() % 10) - 5;
+    s16 randomSomethingX = -xDiff + (Random() % 10) - 5;
     s16 i;
     u8 spriteId;
 
     for (i = 0; i <= 0; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY + something, 130);
+        spriteId = CreateSprite(&gSpriteTemplate_83D9420, combinedX, combinedY + something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
@@ -1913,7 +1916,7 @@ void sub_80D4D64(struct Sprite *sprite, int xDiff, int yDiff)
     }
     for (i = 0; i <= 0; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY - something, 130);
+        spriteId = CreateSprite(&gSpriteTemplate_83D9420, combinedX, combinedY - something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;

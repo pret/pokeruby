@@ -12,6 +12,8 @@
 #include "item.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 // Static type declarations
 
@@ -3120,18 +3122,18 @@ s16 sub_809CF30(void)
     {
         if (gMain.newKeys & B_BUTTON)
         {
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             textId++;
         }
 
         if (gMain.newKeys & DPAD_UP)
         {
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             Menu_MoveCursor(-1);
         }
         else if (gMain.newKeys & DPAD_DOWN)
         {
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             Menu_MoveCursor(1);
         }
     }

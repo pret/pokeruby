@@ -11,8 +11,8 @@ MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
-	setmetatile 3, 0, 653, 1
-	setmetatile 3, 1, 661, 1
+	setmetatile 3, 0, METATILE_GenericBuilding_Doorway_ClosedTop, 1
+	setmetatile 3, 1, METATILE_GenericBuilding_Doorway_ClosedBottom, 1
 	return
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84

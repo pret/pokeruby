@@ -17,12 +17,12 @@ IslandCave_MapScript1_15EED4:: @ 815EED4
 	end
 
 IslandCave_EventScript_15EEDE:: @ 815EEDE
-	setmetatile 7, 19, 553, 1
-	setmetatile 8, 19, 553, 1
-	setmetatile 9, 19, 553, 1
-	setmetatile 7, 20, 565, 1
-	setmetatile 8, 20, 565, 1
-	setmetatile 9, 20, 565, 1
+	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
 IslandCave_MapScript1_15EF15:: @ 815EF15
@@ -30,12 +30,12 @@ IslandCave_MapScript1_15EF15:: @ 815EF15
 	end
 
 S_OpenRegiceChamber:: @ 815EF19
-	setmetatile 7, 19, 554, 1
-	setmetatile 8, 19, 555, 1
-	setmetatile 9, 19, 556, 1
-	setmetatile 7, 20, 562, 1
-	setmetatile 8, 20, 563, 0
-	setmetatile 9, 20, 564, 1
+	setmetatile 7, 19, METATILE_Cave_SealedChamberEntrance_TopLeft, 1
+	setmetatile 8, 19, METATILE_Cave_SealedChamberEntrance_TopMid, 1
+	setmetatile 9, 19, METATILE_Cave_SealedChamberEntrance_TopRight, 1
+	setmetatile 7, 20, METATILE_Cave_SealedChamberEntrance_BottomLeft, 1
+	setmetatile 8, 20, METATILE_Cave_SealedChamberEntrance_BottomMid, 0
+	setmetatile 9, 20, METATILE_Cave_SealedChamberEntrance_BottomRight, 1
 	special DrawWholeMapView
 	playse SE_BAN
 	setflag FLAG_SYS_BRAILLE_WAIT

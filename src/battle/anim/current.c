@@ -484,12 +484,11 @@ void sub_80D681C(u8 taskId)
     gTasks[taskId].func = sub_80D6874;
 }
 
-#ifdef NONMATCHING // couldn't get the proper tail merging in the "CreateSprite" switch cases.
 static void sub_80D6874(u8 taskId)
 {
     u16 r8;
+    u16 r2;
     s16 r12;
-    s16 r2;
     u8 spriteId = 0;
     u8 r7 = 0;
     u8 sp = gTasks[taskId].data[2];
@@ -512,27 +511,31 @@ static void sub_80D6874(u8 taskId)
     switch (gTasks[taskId].data[10])
     {
     case 0:
-        r8 += r2 * 0;
-        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + (r12 * 1), 2);
+        r12 *= 1;
+        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + r12, 2);
         r7++;
         break;
     case 2:
+        r12 *= 2;
         r8 += r2;
-        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + (r12 * 2), 2);
+        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + r12, 2);
         r7++;
         break;
     case 4:
+        r12 *= 3;
         r8 += r2 * 2;
-        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + (r12 * 3), 2);
+        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + r12, 2);
         r7++;
         break;
     case 6:
+        r12 *= 4;
         r8 += r2 * 3;
-        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + (r12 * 4), 2);
+        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + r12, 2);
         r7++;
         break;
     case 8:
-        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + (r12 * 5), 2);
+        r12 *= 5;
+        spriteId = CreateSprite(&gSpriteTemplate_83D9938, r4, r6 + r12, 2);
         r7++;
         break;
     case 10:
@@ -549,221 +552,6 @@ static void sub_80D6874(u8 taskId)
 
     gTasks[taskId].data[10]++;
 }
-#else
-NAKED
-static void sub_80D6874(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r9, r0\n\
-    movs r5, 0\n\
-    movs r7, 0\n\
-    ldr r1, _080D68B4 @ =gTasks\n\
-    lsls r0, 2\n\
-    add r0, r9\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldrb r2, [r0, 0xC]\n\
-    str r2, [sp]\n\
-    ldrh r4, [r0, 0x8]\n\
-    ldrh r6, [r0, 0xA]\n\
-    movs r3, 0xC\n\
-    ldrsh r0, [r0, r3]\n\
-    mov r10, r1\n\
-    cmp r0, 0\n\
-    bne _080D68B8\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    movs r2, 0x1\n\
-    movs r1, 0x10\n\
-    mov r12, r1\n\
-    b _080D68C2\n\
-    .align 2, 0\n\
-_080D68B4: .4byte gTasks\n\
-_080D68B8:\n\
-    movs r2, 0x10\n\
-    mov r12, r2\n\
-    movs r3, 0x8\n\
-    mov r8, r3\n\
-    movs r2, 0x4\n\
-_080D68C2:\n\
-    mov r0, r9\n\
-    lsls r1, r0, 2\n\
-    adds r0, r1, r0\n\
-    lsls r0, 3\n\
-    add r0, r10\n\
-    movs r3, 0x1C\n\
-    ldrsh r0, [r0, r3]\n\
-    mov r10, r1\n\
-    cmp r0, 0xA\n\
-    bhi _080D69B8\n\
-    lsls r0, 2\n\
-    ldr r1, _080D68E0 @ =_080D68E4\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080D68E0: .4byte _080D68E4\n\
-    .align 2, 0\n\
-_080D68E4:\n\
-    .4byte _080D6910\n\
-    .4byte _080D69B8\n\
-    .4byte _080D6924\n\
-    .4byte _080D69B8\n\
-    .4byte _080D6944\n\
-    .4byte _080D69B8\n\
-    .4byte _080D695A\n\
-    .4byte _080D69B8\n\
-    .4byte _080D697C\n\
-    .4byte _080D69B8\n\
-    .4byte _080D69B0\n\
-_080D6910:\n\
-    ldr r0, _080D6920 @ =gSpriteTemplate_83D9938\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    mov r4, r12\n\
-    lsls r3, r4, 16\n\
-    b _080D6992\n\
-    .align 2, 0\n\
-_080D6920: .4byte gSpriteTemplate_83D9938\n\
-_080D6924:\n\
-    mov r0, r12\n\
-    lsls r3, r0, 17\n\
-    mov r1, r8\n\
-    adds r0, r1, r2\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    ldr r0, _080D6940 @ =gSpriteTemplate_83D9938\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    b _080D6992\n\
-    .align 2, 0\n\
-_080D6940: .4byte gSpriteTemplate_83D9938\n\
-_080D6944:\n\
-    mov r3, r12\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    lsls r3, r0, 1\n\
-    adds r3, r0\n\
-    lsls r0, r2, 1\n\
-    add r0, r8\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    b _080D6986\n\
-_080D695A:\n\
-    mov r0, r12\n\
-    lsls r3, r0, 18\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    add r0, r8\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    ldr r0, _080D6978 @ =gSpriteTemplate_83D9938\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    b _080D6992\n\
-    .align 2, 0\n\
-_080D6978: .4byte gSpriteTemplate_83D9938\n\
-_080D697C:\n\
-    mov r1, r12\n\
-    lsls r0, r1, 16\n\
-    asrs r0, 16\n\
-    lsls r3, r0, 2\n\
-    adds r3, r0\n\
-_080D6986:\n\
-    ldr r0, _080D69AC @ =gSpriteTemplate_83D9938\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    lsls r3, 16\n\
-_080D6992:\n\
-    asrs r3, 16\n\
-    adds r2, r3\n\
-    lsls r2, 16\n\
-    asrs r2, 16\n\
-    movs r3, 0x2\n\
-    bl CreateSprite\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    b _080D69B8\n\
-    .align 2, 0\n\
-_080D69AC: .4byte gSpriteTemplate_83D9938\n\
-_080D69B0:\n\
-    mov r0, r9\n\
-    bl DestroyAnimVisualTask\n\
-    b _080D69FC\n\
-_080D69B8:\n\
-    cmp r7, 0\n\
-    beq _080D69EC\n\
-    ldr r4, _080D6A0C @ =gSprites\n\
-    lsls r3, r5, 4\n\
-    adds r3, r5\n\
-    lsls r3, 2\n\
-    adds r0, r3, r4\n\
-    ldrh r5, [r0, 0x4]\n\
-    lsls r2, r5, 22\n\
-    lsrs r2, 22\n\
-    add r2, r8\n\
-    ldr r6, _080D6A10 @ =0x000003ff\n\
-    adds r1, r6, 0\n\
-    ands r2, r1\n\
-    ldr r1, _080D6A14 @ =0xfffffc00\n\
-    ands r1, r5\n\
-    orrs r1, r2\n\
-    strh r1, [r0, 0x4]\n\
-    mov r1, sp\n\
-    ldrh r1, [r1]\n\
-    strh r1, [r0, 0x2E]\n\
-    adds r4, 0x1C\n\
-    adds r3, r4\n\
-    ldr r1, [r3]\n\
-    bl _call_via_r1\n\
-_080D69EC:\n\
-    ldr r0, _080D6A18 @ =gTasks\n\
-    mov r1, r10\n\
-    add r1, r9\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldrh r0, [r1, 0x1C]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1, 0x1C]\n\
-_080D69FC:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080D6A0C: .4byte gSprites\n\
-_080D6A10: .4byte 0x000003ff\n\
-_080D6A14: .4byte 0xfffffc00\n\
-_080D6A18: .4byte gTasks\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80D6A1C(struct Sprite *sprite)
 {

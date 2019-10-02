@@ -1,0 +1,84 @@
+{{ doNotModifyHeader }}
+
+## for wild_encounter_group in wild_encounter_groups
+{% if wild_encounter_group.for_maps %}
+## for wild_encounter_field in wild_encounter_group.fields
+## for encounter_rate in wild_encounter_field.encounter_rates
+{% if trackVar(encounter_rate, 100) %}
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} {{ encounter_rate }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ subtract(loop.index, 1) }} + {{ encounter_rate }}{% endif %} {{ setVarInt(wild_encounter_field.type, loop.index) }}
+## endfor
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ getVar(wild_encounter_field.type) }})
+## endfor
+{% endif %}
+
+## for encounter in wild_encounter_group.encounters
+{% if contains(encounter.base_label, "Sapphire") %}#ifdef SAPPHIRE
+{% else if contains(encounter.base_label, "Ruby") %}#ifdef RUBY{% endif %}
+{% if existsIn(encounter, "land_mons") %}const struct WildPokemon {{ encounter.base_label }}_LandMons[] =
+{
+## for wild_mon in encounter.land_mons.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+
+const struct WildPokemonInfo {{ encounter.base_label }}_LandMonsInfo = { {{encounter.land_mons.encounter_rate}}, {{ encounter.base_label }}_LandMons };
+{% endif %}
+{% if existsIn(encounter, "water_mons") %}
+const struct WildPokemon {{ encounter.base_label }}_WaterMons[] =
+{
+## for wild_mon in encounter.water_mons.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+
+const struct WildPokemonInfo {{ encounter.base_label }}_WaterMonsInfo = { {{encounter.water_mons.encounter_rate}}, {{ encounter.base_label }}_WaterMons };
+{% endif %}
+{% if existsIn(encounter, "rock_smash_mons") %}
+const struct WildPokemon {{ encounter.base_label }}_RockSmashMons[] =
+{
+## for wild_mon in encounter.rock_smash_mons.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+
+const struct WildPokemonInfo {{ encounter.base_label }}_RockSmashMonsInfo = { {{encounter.rock_smash_mons.encounter_rate}}, {{ encounter.base_label }}_RockSmashMons };
+{% endif %}
+{% if existsIn(encounter, "fishing_mons") %}
+const struct WildPokemon {{ encounter.base_label }}_FishingMons[] =
+{
+## for wild_mon in encounter.fishing_mons.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+
+const struct WildPokemonInfo {{ encounter.base_label }}_FishingMonsInfo = { {{encounter.fishing_mons.encounter_rate}}, {{ encounter.base_label }}_FishingMons };
+{% endif %}
+#endif
+
+## endfor
+
+const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
+{
+## for encounter in wild_encounter_group.encounters
+{% if contains(encounter.base_label, "Sapphire") %}#ifdef SAPPHIRE
+{% else if contains(encounter.base_label, "Ruby") %}#ifdef RUBY{% endif %}
+    {
+        .mapGroup = {% if wild_encounter_group.for_maps %}MAP_GROUP({{ removePrefix(encounter.map, "MAP_") }}){% else %}0{% endif %},
+        .mapNum = {% if wild_encounter_group.for_maps %}MAP_NUM({{ removePrefix(encounter.map, "MAP_") }}){% else %}{{ loop.index1 }}{% endif %},
+        .landMonsInfo = {% if existsIn(encounter, "land_mons") %}&{{ encounter.base_label }}_LandMonsInfo{% else %}NULL{% endif %},
+        .waterMonsInfo = {% if existsIn(encounter, "water_mons") %}&{{ encounter.base_label }}_WaterMonsInfo{% else %}NULL{% endif %},
+        .rockSmashMonsInfo = {% if existsIn(encounter, "rock_smash_mons") %}&{{ encounter.base_label }}_RockSmashMonsInfo{% else %}NULL{% endif %},
+        .fishingMonsInfo = {% if existsIn(encounter, "fishing_mons") %}&{{ encounter.base_label }}_FishingMonsInfo{% else %}NULL{% endif %},
+    },
+#endif
+## endfor
+    {
+        .mapGroup = MAP_GROUP(UNDEFINED),
+        .mapNum = MAP_NUM(UNDEFINED),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+};
+## endfor

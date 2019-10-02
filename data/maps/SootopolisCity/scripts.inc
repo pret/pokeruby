@@ -11,7 +11,7 @@ SootopolisCity_MapScript1_14D08D:: @ 814D08D
 
 SootopolisCity_EventScript_14D0A0:: @ 814D0A0
 	setobjectxyperm 3, 31, 18
-	setmetatile 31, 32, 592, 1
+	setmetatile 31, 32, METATILE_Sootopolis_GymDoor_Closed, 1
 	return
 
 SootopolisCity_EventScript_14D0B1:: @ 814D0B1
@@ -19,15 +19,15 @@ SootopolisCity_EventScript_14D0B1:: @ 814D0B1
 	return
 
 SootopolisCity_EventScript_14D0BB:: @ 814D0BB
-	setmetatile 9, 6, 584, 1
-	setmetatile 9, 17, 584, 1
-	setmetatile 9, 26, 584, 1
-	setmetatile 44, 17, 584, 1
-	setmetatile 8, 35, 584, 1
-	setmetatile 53, 28, 584, 1
-	setmetatile 45, 6, 584, 1
-	setmetatile 48, 25, 584, 1
-	setmetatile 31, 32, 592, 1
+	setmetatile 9, 6, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 9, 17, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 9, 26, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 44, 17, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 8, 35, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 53, 28, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 45, 6, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 48, 25, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 31, 32, METATILE_Sootopolis_GymDoor_Closed, 1
 	return
 
 SootopolisCity_MapScript1_14D10D:: @ 814D10D
