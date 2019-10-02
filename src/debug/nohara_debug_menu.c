@@ -57,14 +57,14 @@ bool8 NoharaDebugMenu_LegendsFlagOn(void);
 bool8 NoharaDebugMenu_AddNumWinningStreaks(void);
 
 const u8 gUnknown_Debug_083C48C4[] = _("TV");
-const u8 gUnknown_Debug_083C48C7[] = _("Fan");
-const u8 gUnknown_Debug_083C48CB[] = _("Battle　(vs　Dad)");
-const u8 gUnknown_Debug_083C48DB[] = _("Dad　after　battle");
-const u8 gUnknown_Debug_083C48EC[] = _("SOOTOPOLIS　CITY");
-const u8 gUnknown_Debug_083C48FC[] = _("Embark");
-const u8 gUnknown_Debug_083C4903[] = _("Yes　9999");
-const u8 gUnknown_Debug_083C490C[] = _("Legends　flag　ON");
-const u8 gUnknown_Debug_083C491C[] = _("Add　num　of　winning　streaks");
+const u8 gUnknown_Debug_083C48C7[] = DTR("Fan", "LILYCOVE TRAINER FAN CLUB");
+const u8 gUnknown_Debug_083C48CB[] = _("Battle (vs Dad)");
+const u8 gUnknown_Debug_083C48DB[] = _("Dad after battle");
+const u8 gUnknown_Debug_083C48EC[] = _("SOOTOPOLIS CITY");
+const u8 gUnknown_Debug_083C48FC[] = DTR("Embark", "Reset Mr. BRINEY");
+const u8 gUnknown_Debug_083C4903[] = _("Yes 9999");
+const u8 gUnknown_Debug_083C490C[] = _("Legends flag ON");
+const u8 gUnknown_Debug_083C491C[] = _("Add num of winning streaks");
 
 const struct MenuAction gUnknown_Debug_083C4938[] = {
     {gUnknown_Debug_083C48C4, NoharaDebugMenu_TV},
@@ -104,28 +104,30 @@ bool8 debug_sub_808F414(void)
     }
 }
 
-const u8 gUnknown_Debug_083C4980[] = _("Want　to　change　data　type{CLEAR_TO 143}Press　Left\n"
-                                       "to　see　secret　type　now？{CLEAR_TO 143}to　switch");
+const u8 gUnknown_Debug_083C4980[] = _("Want to change data type{CLEAR_TO 143}Press　Left\n"
+                                       "to see secret type now？{CLEAR_TO 143}to　switch");
 
-const u8 gUnknown_Debug_083C49CA[] = _("Choose　the　TV　data　you　wish　to\n"
-                                       "create　to　check　a　transmission。");
+const u8 gUnknown_Debug_083C49CA[] = _("Choose the TV data you wish to\n"
+                                       "create to check a transmission。");
 
-const u8 gUnknown_Debug_083C4A09[] = _("ほうそうの　はっせいりつを　セット\n"
-                                       "してください　？ぶんの1に　なります");
+const u8 gUnknown_Debug_083C4A09[] = DTR("ほうそうの　はっせいりつを　セット\n"
+                                         "してください　？ぶんの1に　なります",
+                                         "Please set the transmission frequency\n"
+                                         "Part 1");
 
 const u8 gUnknown_Debug_083C4A2E[] = _("SURVEY");
-const u8 gUnknown_Debug_083C4A35[] = _("RECENT　HAPPENINGS");
-const u8 gUnknown_Debug_083C4A47[] = _("POKひMON　FAN　CLUB");
-const u8 gUnknown_Debug_083C4A58[] = _("ジム");
+const u8 gUnknown_Debug_083C4A35[] = _("RECENT HAPPENINGS");
+const u8 gUnknown_Debug_083C4A47[] = _("POKéMON FAN CLUB");
+const u8 gUnknown_Debug_083C4A58[] = DTR("ジム", "GYM");
 const u8 gUnknown_Debug_083C4A5B[] = _("OUTBREAKS");
-const u8 gUnknown_Debug_083C4A65[] = _("NAME　RATER");
+const u8 gUnknown_Debug_083C4A65[] = _("NAME RATER");
 const u8 gUnknown_Debug_083C4A70[] = _("CONTEST");
 const u8 gUnknown_Debug_083C4A78[] = _("INTRODUCTION");
 const u8 gUnknown_Debug_083C4A85[] = _("SHOPPING");
 const u8 gUnknown_Debug_083C4A8E[] = _("MISFORTUNE");
 const u8 gUnknown_Debug_083C4A99[] = _("FISHING");
-const u8 gUnknown_Debug_083C4AA1[] = _("MEMORABLE　DAY");
-const u8 gUnknown_Debug_083C4AAF[] = _("BRAVO　TRAINER");
+const u8 gUnknown_Debug_083C4AA1[] = _("MEMORABLE DAY");
+const u8 gUnknown_Debug_083C4AAF[] = _("BRAVO TRAINER");
 
 const u8 gUnknown_Debug_083C4ABD[] = {
     TVSHOW_FAN_CLUB_LETTER,
@@ -159,8 +161,8 @@ const u8 *const gUnknown_Debug_083C4ACC[] = {
 
 const u8 gDebugText_BigSale[] = _("BIG SALE");
 
-const u8 gUnknown_Debug_083C4B05[] = _("SERVICE　DAY");
-const u8 gUnknown_Debug_083C4B11[] = _("CLEARーOUT　SALE");
+const u8 gUnknown_Debug_083C4B05[] = _("SERVICE DAY");
+const u8 gUnknown_Debug_083C4B11[] = _("CLEAR-OUT SALE");
 const u8 gUnknown_Debug_083C4B20[] = {1, 2, 3};
 
 const u8 *const gUnknown_Debug_083C4B24[] = {
@@ -169,15 +171,15 @@ const u8 *const gUnknown_Debug_083C4B24[] = {
     gUnknown_Debug_083C4B11
 };
 
-const u8 gUnknown_Debug_083C4B30[] = _("Secret　type");
+const u8 gUnknown_Debug_083C4B30[] = _("Secret type");
 const u8 gUnknown_Debug_083C4B3C[] = _("Start");
-const u8 gUnknown_Debug_083C4B42[] = _("Create　TV");
-const u8 gUnknown_Debug_083C4B4C[] = _("All　clear");
-const u8 gUnknown_Debug_083C4B56[] = _("All　seen");
-const u8 gUnknown_Debug_083C4B5F[] = _("Create　CM");
-const u8 gUnknown_Debug_083C4B69[] = _("Not　yet　seen");
-const u8 gUnknown_Debug_083C4B76[] = _("Hit　Table");
-const u8 gUnknown_Debug_083C4B80[] = _("Set　full");
+const u8 gUnknown_Debug_083C4B42[] = _("Create TV");
+const u8 gUnknown_Debug_083C4B4C[] = _("All clear");
+const u8 gUnknown_Debug_083C4B56[] = _("All seen");
+const u8 gUnknown_Debug_083C4B5F[] = _("Create CM");
+const u8 gUnknown_Debug_083C4B69[] = _("Not yet seen");
+const u8 gUnknown_Debug_083C4B76[] = _("Hit Table");
+const u8 gUnknown_Debug_083C4B80[] = _("Set full");
 
 // Normaly these would be struct MenuAction, but the prototype of
 // member .func is not consistent.
@@ -754,15 +756,18 @@ bool8 debug_sub_80900AC(void)
     CloseMenu();
     return TRUE;
 }
-
-const u8 gUnknown_Debug_083C4C77[] = _("1　スクル");
-const u8 gUnknown_Debug_083C4C7D[] = _("2　ミドル");
-const u8 gUnknown_Debug_083C4C83[] = _("3　オジヨ");
-const u8 gUnknown_Debug_083C4C89[] = _("4　ボーヤ");
-const u8 gUnknown_Debug_083C4C8F[] = _("5　ボーイ");
-const u8 gUnknown_Debug_083C4C95[] = _("6　ヤング");
-const u8 gUnknown_Debug_083C4C9B[] = _("7　ヲーカ");
-const u8 gUnknown_Debug_083C4CA1[] = _("8　オルド");
+// These represent the people in Lilycove Fan Club.
+// TRN: These translations are probably wrong but it is really hard to tell with
+// the abbreviations. They are mosly based on observation
+// The first one is selected by default when there are no fans.
+const u8 gUnknown_Debug_083C4C77[] = DTR("1　スクル", "1 LASS/NONE"); // school (girl)
+const u8 gUnknown_Debug_083C4C7D[] = DTR("2　ミドル", "2 MIDDLE AGE MAN"); // middle
+const u8 gUnknown_Debug_083C4C83[] = DTR("3　オジヨ", "3 DAUGHTER"); // おしょう (daughter)
+const u8 gUnknown_Debug_083C4C89[] = DTR("4　ボーヤ", "4 YOUNG BOY"); // 坊や (boy)
+const u8 gUnknown_Debug_083C4C8F[] = DTR("5　ボーイ", "5 BOY"); // boy
+const u8 gUnknown_Debug_083C4C95[] = DTR("6　ヤング", "6 YOUNG MAN"); // young
+const u8 gUnknown_Debug_083C4C9B[] = DTR("7　ヲーカ", "7 MOM"); // お母さん? (probably typo)
+const u8 gUnknown_Debug_083C4CA1[] = DTR("8　オルド", "8 OLD LADY"); // old
 
 const u8 *const gUnknown_Debug_083C4CA8[] = {
     gUnknown_Debug_083C4C77,
@@ -775,15 +780,15 @@ const u8 *const gUnknown_Debug_083C4CA8[] = {
     gUnknown_Debug_083C4CA1
 };
 
-const u8 gUnknown_Debug_083C4CC8[] = _("Start");
-const u8 gUnknown_Debug_083C4CCE[] = _("Increase");
-const u8 gUnknown_Debug_083C4CD7[] = _("Reduce");
+const u8 gUnknown_Debug_083C4CC8[] = _("Start"); // Starts the "Oh! I've heard of you' script"
+const u8 gUnknown_Debug_083C4CCE[] = _("Increase"); // Increases popularity
+const u8 gUnknown_Debug_083C4CD7[] = _("Reduce"); // reduces popularity
 const u8 gUnknown_Debug_083C4CDE[] = _("Points");
-const u8 gUnknown_Debug_083C4CE5[] = _("Play　time　6");
-const u8 gUnknown_Debug_083C4CF1[] = _("P　ELITE　FOUR");
-const u8 gUnknown_Debug_083C4CFE[] = _("P　SECRET　BASE");
-const u8 gUnknown_Debug_083C4D0C[] = _("P　CONTEST");
-const u8 gUnknown_Debug_083C4D16[] = _("P　BATTLE　TOWER");
+const u8 gUnknown_Debug_083C4CE5[] = _("Play time 6");
+const u8 gUnknown_Debug_083C4CF1[] = _("P ELITE FOUR");
+const u8 gUnknown_Debug_083C4CFE[] = _("P SECRET BASE");
+const u8 gUnknown_Debug_083C4D0C[] = _("P CONTEST");
+const u8 gUnknown_Debug_083C4D16[] = _("P BATTLE TOWER");
 
 const struct MenuAction gUnknown_Debug_083C4D28[] = {
     {gUnknown_Debug_083C4CC8, debug_sub_80901E4},

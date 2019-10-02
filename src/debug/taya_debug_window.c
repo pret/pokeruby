@@ -65,7 +65,7 @@ const u8 gUnknown_Debug_083C4E85[] = _("MAIL");
 const u8 gUnknown_Debug_083C4E8A[] = _("MAIL　salutation");
 const u8 gUnknown_Debug_083C4E9A[] = _("BARD's　song");
 const u8 gUnknown_Debug_083C4EA6[] = _("Interview");
-const u8 gUnknown_Debug_083C4EB0[] = _("InterviewシBTス");
+const u8 gUnknown_Debug_083C4EB0[] = _("Interview(BT)");
 
 const struct {
     const u8 * text;
@@ -88,10 +88,10 @@ const u8 gUnknown_Debug_083C4F0E[] = _("BARD");
 const u8 gUnknown_Debug_083C4F13[] = _("HIPSTER");
 const u8 gUnknown_Debug_083C4F1B[] = _("RECYCLE");
 const u8 gUnknown_Debug_083C4F23[] = _("STORYTELLER");
-const u8 gUnknown_Debug_083C4F2F[] = _("GIDDY　GUY");
-const u8 gUnknown_Debug_083C4F39[] = _("Flag　OFF");
-const u8 gUnknown_Debug_083C4F42[] = _("21　letters");
-const u8 gUnknown_Debug_083C4F4D[] = _("ナウくなる");
+const u8 gUnknown_Debug_083C4F2F[] = _("GIDDY GUY");
+const u8 gUnknown_Debug_083C4F39[] = _("Flag OFF");
+const u8 gUnknown_Debug_083C4F42[] = _("21 letters");
+const u8 gUnknown_Debug_083C4F4D[] = DTR("ナウくなる", "BECOME HIP");
 
 const struct {
     const u8 * text;
@@ -107,18 +107,18 @@ const struct {
     {gUnknown_Debug_083C4F4D}
 };
 
-const u8 gUnknown_Debug_083C4F94[] = _("しょうしょうおまちください！");
+const u8 gUnknown_Debug_083C4F94[] = DTR("しょうしょうおまちください！", "Please wait!");
 const u8 gUnknown_Debug_083C4FA3[] = _("Weather");
-const u8 gUnknown_Debug_083C4FAB[] = _("LANETTE'S　PC");
+const u8 gUnknown_Debug_083C4FAB[] = _("LANETTE'S PC");
 const u8 gUnknown_Debug_083C4FB8[] = _("SimpleText");
 const u8 gUnknown_Debug_083C4FC3[] = _("Old　man");
 const u8 gUnknown_Debug_083C4FCB[] = _("Trend");
-const u8 gUnknown_Debug_083C4FD1[] = _("Trend　R");
-const u8 gUnknown_Debug_083C4FD9[] = _("Town　flag");
-const u8 gUnknown_Debug_083C4FE3[] = _("Award　a　ribbon");
+const u8 gUnknown_Debug_083C4FD1[] = _("Trend R");
+const u8 gUnknown_Debug_083C4FD9[] = _("Town flag");
+const u8 gUnknown_Debug_083C4FE3[] = _("Award a ribbon");
 const u8 gUnknown_Debug_083C4FF2[] = _("{PKMN}LOTTERY");
 const u8 gUnknown_Debug_083C4FFC[] = _("Trainer");
-const u8 gUnknown_Debug_083C5004[] = _("POKéNAV　D");
+const u8 gUnknown_Debug_083C5004[] = _("POKéNAV D");
 
 const struct MenuAction gUnknown_Debug_083C5010[] = {
     {gUnknown_Debug_083C4FA3, debug_sub_808560C},
@@ -195,7 +195,7 @@ const struct {
     }
 };
 
-const u8 gUnknown_Debug_083C517C[] = _("Select　Ribbon");
+const u8 gUnknown_Debug_083C517C[] = _("Select Ribbon");
 
 bool8 TayaDebugMenu_Trend(void)
 {

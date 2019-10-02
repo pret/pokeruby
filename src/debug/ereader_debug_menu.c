@@ -10,7 +10,11 @@
 #include "berry.h"
 #include "mail_data.h"
 
+#if DEBUG
+const u8 Str_842E238[] = DTR("タマゴ", "EGG");
+#else
 const u8 Str_842E238[] = _("タマゴ");
+#endif
 
 #if DEBUG
 
@@ -131,7 +135,7 @@ extern u8 gUnknown_Debug_845DDB2[];
 extern u8 gUnknown_Debug_845DDB2End[];
 extern u8 gUnknown_Debug_845DDD6[];
 
-const u8 Str_842E23C[] = _("ガイブ");
+const u8 Str_842E23C[] = DTR("ガイブ", "EXTERNAL");
 
 size_t debug_sub_813C5B4(u8 * dest)
 {
@@ -286,7 +290,7 @@ extern u8 gUnknown_Debug_845E4EF[];
 extern u8 gUnknown_Debug_845E4EFEnd[];
 extern u8 gUnknown_Debug_845E506[];
 
-const u8 Str_842E253[] = _("　そら　　カードイー");
+const u8 Str_842E253[] = DTR("　そら　　カードイー", "eCARD TRAINER");
 
 size_t debug_sub_813C93C(u8 * dest)
 {
@@ -305,22 +309,22 @@ size_t debug_sub_813C93C(u8 * dest)
     return size;
 }
 
-const u8 Str_842E25E[] = _("ポケコッコ");
+const u8 Str_842E25E[] = KANA("ポケコッコ"); // TRN: kokko?
 const u8 Str_842E264[] = _("ticket");
 const u8 Str_842E26B[] = _("{PKMN}");
-const u8 Str_842E26E[] = _("wrong　{PKMN}");
+const u8 Str_842E26E[] = _("wrong {PKMN}");
 const u8 Str_842E277[] = _("ribbon");
 const u8 Str_842E27E[] = _("DEX");
 const u8 Str_842E282[] = _("message");
 const u8 Str_842E28A[] = _("egg");
-const u8 Str_842E28E[] = _("RAM　seed");
+const u8 Str_842E28E[] = _("RAM seed");
 const u8 Str_842E297[] = _("trainer");
 const u8 Str_842E29F[] = _("clock");
 const u8 Str_842E2A5[] = _("item");
 const u8 Str_842E2AA[] = _("goods");
 const u8 Str_842E2B0[] = _("potion");
 const u8 Str_842E2B7[] = _("ball");
-const u8 Str_842E2BC[] = _("cheri　berry");
+const u8 Str_842E2BC[] = _("cheri berry");
 const u8 Str_842E2C8[] = _("TM01");
 
 const struct UnkDebugMenu3Items gUnknown_Debug_842E2D0[] = {

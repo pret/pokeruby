@@ -156,10 +156,10 @@ void CB2_StartSoundCheckMenu(void)
 
 void Task_InitSoundCheckMenu(u8 taskId)
 {
-    u8 soundcheckStr[] = _("サウンドチェック");
+    u8 soundcheckStr[] = DTR("サウンドチェック", "SOUND CHECK");
     u8 bgmStr[] = _("BGM");
     u8 seStr[] = _("SE ");
-    u8 abDescStr[] = _("A‥さいせい　B‥おわり");
+    u8 abDescStr[] = DTR("A‥さいせい　B‥おわり", "A PLAY  B STOP");
     u8 upDownStr[] = _("L‥UP R‥DOWN");
     u8 driverStr[] = _("R‥DRIVER-TEST");
 
@@ -399,8 +399,8 @@ void sub_80BA79C(const u8 *const string, u16 x, u16 y)
 
 void Task_DrawDriverTestMenu(u8 taskId) // Task_DrawDriverTestMenu
 {
-    u8 bbackStr[] = _("Bぼたんで　もどる");
-    u8 aplayStr[] = _("Aぼたんで　さいせい");
+    u8 bbackStr[] = DTR("Bぼたんで　もどる", "B BUTTON: BACK");
+    u8 aplayStr[] = DTR("Aぼたんで　さいせい", "A BUTTON: PLAY");
     u8 voiceStr[] = _("VOICE‥‥‥‥");
     u8 volumeStr[] = _("VOLUME‥‥‥");
     u8 panpotStr[] = _("PANPOT‥‥‥");
@@ -410,9 +410,9 @@ void Task_DrawDriverTestMenu(u8 taskId) // Task_DrawDriverTestMenu
     u8 progressStr[] = _("PROGRESS‥");
     u8 chorusStr[] = _("CHORUS‥‥‥");
     u8 priorityStr[] = _("PRIORITY‥");
-    u8 playingStr[] = _("さいせいちゆう‥"); // 再生中 (playing)
-    u8 reverseStr[] = _("はんてん‥‥‥‥"); // 反転 (reverse)
-    u8 stereoStr[] = _("すてれお‥‥‥‥"); // stereo
+    u8 playingStr[] = DTR("さいせいちゆう‥", "PLAYING"); // 再生中 (playing)
+    u8 reverseStr[] = DTR("はんてん‥‥‥‥", "REVERSE"); // 反転 (reverse)
+    u8 stereoStr[] = DTR("すてれお‥‥‥‥", "STEREO"); // stereo
 
     REG_DISPCNT = 0x3140;
     Menu_DrawStdWindowFrame(0, 0, 29, 19);
@@ -680,7 +680,7 @@ void sub_80BAF84(u8 taskId)
 {
     u8 seStr[] = _("SE");
     u8 panStr[] = _("PAN");
-    u8 playingStr[] = _("さいせいちゆう‥");
+    u8 playingStr[] = DTR("さいせいちゆう‥", "PLAYING");
 
     REG_DISPCNT = 0x3140;
     Menu_DrawStdWindowFrame(0, 0, 29, 19);

@@ -1072,8 +1072,8 @@ extern const u8 gSpriteImage_UnusedCherry[];
 extern const u16 gSpritePalette_UnusedCherry[];
 extern u8 gUnknown_Debug_839B6CE[];
 
-static const u8 gUnknown_Debug_083F7F84[] = _("そとから　きた　きのみ");
-static const u8 gUnknown_Debug_083F7F90[] = _("ただいま　かいはつちゅう");
+static const u8 gUnknown_Debug_083F7F84[] = DTR("そとから　きた　きのみ", "An exterior BERRY");
+static const u8 gUnknown_Debug_083F7F90[] = DTR("ただいま　かいはつちゅう", "Currently under development");
 
 void debug_sub_80C2C18(const u8 *name, u8 holdEffect, u8 holdEffectParam)
 {
