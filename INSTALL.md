@@ -1,149 +1,125 @@
-# Linux
+# Prerequisites
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+| Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, and 1703)
+| ----- | ----- | ------------------------- | ------------------ | ---------------------------------------------------------
+| none | [Xcode Command Line Tools package][xcode] | [Windows Subsystem for Linux 2][wsl2] | [Windows Subsystem for Linux][wsl] | MSYS2 (see below)
 
-Then run the following commands.
+[xcode]: https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_MACOS_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_
+[wsl2]: https://docs.microsoft.com/windows/wsl/wsl2-install
+[wsl]: https://docs.microsoft.com/windows/wsl/install-win10
 
-	export DEVKITPRO=/opt/devkitPro
+The [prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy) available in the 1607 and 1703 releases of Windows 10 is obsolete so consider uninstalling it.
+
+Make sure that the `build-essential`, `git`, and `libpng-dev` packages are installed. The `build-essential` package includes the `make`, `gcc-core`, and `g++` packages so they do not have to be obtained separately. MSYS2 does not include `libpng-dev` so it must be built from source.
+
+On Linux and Mac OS X, using `(dkp-)pacman`, install `gba-dev`. This will give you devkitARM and all its extensions.
+
+Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables. For Windows versions without the Linux subsystem, the devkitPro [graphical installer](https://github.com/devkitPro/installer/releases) includes a preconfigured MSYS2 environment, thus the steps below are not required.
+
+	export DEVKITPRO=/opt/devkitpro
 	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
 	export DEVKITARM=$DEVKITPRO/devkitARM
 	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
+### Platform-specific notes
+#### Mac OS X
+It is highly recommended that you use the [Homebrew](https://brew.sh) package manager. Suggested packages include `gcc`, `libpng`, `coreutils`, `git`, `make`, and `md5sha1sum`. Note that `make` will be aliased as `gmake` in Terminal, and `gcc` as `gcc-${VM}` where `${VM}` is the GCC major version (currently 9).
+
+# Installation
+
+To set up the repository:
+
 	git clone https://github.com/pret/pokeruby
 	git clone https://github.com/pret/agbcc
 
-	cd agbcc
+	cd ./agbcc
 	./build.sh
 	./install.sh ../pokeruby
 
 	cd ../pokeruby
 
-To build **pokeruby.gba**:
+To build **pokeruby.gba** and confirm it matches the official ROM image:
 
-	make -j4
+	make
 
+To build Pokémon Sapphire:
 
-# Mac
+    make sapphire
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+The above two commands will build the English v1.0 version of the respective title. To build the 1.1 and 1.2 revisions, use the appropriate `_rev` target. For example, to build Ruby 1.2, run:
 
-Then in **Terminal**, run the following commands.
+    make ruby_rev2
 
-	xcode-select --install
+## Notes
 
-	export DEVKITPRO=${HOME}/devkitPro
-	echo "export DEVKITPRO=${DEVKITPRO}" >> ~/.bashrc
-	export DEVKITARM=${DEVKITPRO}/devkitARM
-	echo "export DEVKITARM=${DEVKITARM}" >> ~/.bashrc
+* If the base tools are not found on macOS in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
 
-	git clone https://github.com/pret/pokeruby
-	git clone https://github.com/pret/agbcc
+* If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and try building again. [Learn the differences between MSYS2 and Cygwin.](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin)
 
-	cd agbcc
-	./build.sh
-	./install.sh ../pokeruby
+## Notes about the German language ROMs
+This repository also supports the German versions of Ruby and Sapphire. However, due to major differences in scripts, text, and graphics, a special configuration needs to be set up before compilation and torn down after.
 
-	cd ../pokeruby
+To set up the repository:
 
-To build **pokeruby.gba**:
+    make clean
+    sh de_before.sh
 
-	make -j4
+To compile the German ROMs:
 
+    make ruby_de
+    make sapphire_de
 
-# Windows
+To compile the leaked Debug ROM (German):
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM) to the default directory (C:/devkitpro).
+    make ruby_de_debug
 
-Then download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
+To restore the repository (**MUST BE DONE BEFORE ATTEMPTING TO BUILD ANY ENGLISH LANGUAGE ROM**):
 
-Run the Cygwin setup and leave the default settings. At "Select Packages", set the view to "Full" and choose to install the following:
+    make clean
+    sh de_after.sh
 
-- `make`
-- `git`
-- `gcc-core`
-- `gcc-g++`
-- `libpng-devel`
+# Guidance
 
-In the **Cygwin terminal**, enter these commands:
+To build **pokeruby.gba** with your changes:
 
-	export DEVKITPRO=/cygdrive/c/devkitpro
-	echo export DEVKITPRO=$DEVKITPRO >> ~/.bashrc
-	export DEVKITARM=$DEVKITPRO/devkitARM
-	echo export DEVKITARM=$DEVKITARM >> ~/.bashrc
+	make COMPARE=0
 
-	git clone https://github.com/pret/pokeruby
-	git clone https://github.com/pret/agbcc
+## Parallel builds
 
-	cd agbcc
-	./build.sh
-	./install.sh ../pokeruby
+See [the GNU docs](https://www.gnu.org/software/make/manual/html_node/Parallel.html) and [this Stack Exchange thread](https://unix.stackexchange.com/questions/208568) for more information.
 
-	cd ../pokeruby
+To speed up building, run:
 
-To build **pokeruby.gba**:
+	make -j$(nproc)
 
-	make -j4
+`nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
+## Building without dependency scanning
 
-# Compiling Sapphire and later revisions
-
-When you simply enter `make` and don't specify a target, then Pokémon Ruby 1.0 will be built. However, Sapphire can also be built, along with revisions 1 and 2 of both Ruby and Sapphire. Here is a listing of each ROM that can be made, along with the command to make the ROM.
-
-Version      | Command
--------------|---------------------
-Ruby 1.0     | `make ruby`
-Ruby 1.1     | `make ruby_rev1`
-Ruby 1.2     | `make ruby_rev2`
-Sapphire 1.0 | `make sapphire`
-Sapphire 1.1 | `make sapphire_rev1`
-Sapphire 1.2 | `make sapphire_rev2`
-
-
-# Faster builds
-
-After the first build, subsequent builds are faster. You can further speed up the build:
-
-## Parallel build
-
-This significantly speeds up the build on modern machines.
-
-By default `make` only runs a single thread. You can tell `make` to run on multiple threads with `make -j`. See the manfile for usage (`man make`).
-
-The optimal value for `-j` is the number of logical cores on your machine. You can run `nproc` to see the exact number.
-
-	$ nproc
-	8
-
-If you have 8 cores, run:
-
-	make -j8
-
-`-j` on its own will spawn a new thread for each job. A clean build will have thousands of jobs, which will be slower than not using -j at all.
-
-## Disable the dependency scanning
-
-If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
+If only `.c` or `.s` files were changed, turn off the dependency scanning temporarily. Changes to any other files will be ignored and the build will either fail or not reflect those changes.
 
 	make NODEP=1
 
-# Using present-day toolchains
+## Building with devkitARM's C compiler
 
-`agbcc` is based on GCC 2.95.1, which is primitive by today's standards and compiles inoptimal instructions. You can overcome this by swapping in a more modern compiler. Makefile rules have been set up for you to do this, all you need to do is run
+This project supports the `arm-none-eabi-gcc` compiler included with devkitARM. To build this target, simply run:
 
-    make MODERN=1
+	make modern
 
-or
+## Building with other toolchains
 
-    make modern
+To build using a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain, which must contain the subdirectory `bin`.
 
-You can build Sapphire and other Ruby revisions by appending `_modern` to the target name:
+	make TOOLCHAIN="/path/to/toolchain/here"
 
-    make sapphire_rev1_modern
+The following is an example:
 
-Bear in mind that the resulting ROM will not match vanilla Ruby and may exhibit undefined, buggy behavior. We are trying to resolve this as much as possible, so please report anything you find.
+	make TOOLCHAIN="/usr/local/arm-none-eabi"
 
-If you don't want to use devkitARM, you can install your own ARM toolchain consisting of GNU binutils, GCC, and newlib targeting arm-none-eabi. You can pass the root directory of your toolchain to the variable `TOOLCHAIN` when running `make` for any target.  **If you opt to do this, the assumption is that you know what you are doing already!**
+To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
 
-# Debug symbols
+## Building with debug info
 
-You can compile the ROM with helpful debug symbols by passing `DINFO=1` to make. Note that this WILL NOT result in a matching build even with the default compiler. You can suppress the `pokeruby.gba: FAILED` error by additionally passing `COMPARE=0`.
+To build **pokeruby.elf** with enhanced debug info, use the `DINFO` variable.
+
+	make DINFO=1
