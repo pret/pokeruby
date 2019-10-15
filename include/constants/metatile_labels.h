@@ -191,12 +191,12 @@
 #define METATILE_MauvilleGym_PoleBottom_Off  0x243
 
 // gTileset_MossdeepGym
-#define METATILE_MossdeepGym_Obelisk_Top           0x204
-#define METATILE_MossdeepGym_Obelisk_Base          0x20C
-#define METATILE_MossdeepGym_Wall_LeftCorner       0x20D
-#define METATILE_MossdeepGym_OuterWall_RightCorner 0x205
-#define METATILE_MossdeepGym_Empty0                0x238
-#define METATILE_MossdeepGym_Empty1                0x239
+#define METATILE_MossdeepGym_RedArrow_Right        0x204
+#define METATILE_MossdeepGym_RedArrow_Left         0x20C
+#define METATILE_MossdeepGym_RedArrow_Up           0x20D
+#define METATILE_MossdeepGym_RedArrow_Down         0x205
+#define METATILE_MossdeepGym_Switch_Up             0x238
+#define METATILE_MossdeepGym_Switch_Down           0x239
 
 // gTileset_Building
 #define METATILE_Building_TV_Off 0x002
