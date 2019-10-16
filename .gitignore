@@ -43,3 +43,4 @@ build/
 .vs/
 .projects/ARM/
 *.diff
+porymap.project.cfg
