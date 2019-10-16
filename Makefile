@@ -7,8 +7,6 @@ else
 EXE :=
 endif
 
-COMPARE := 0
-
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
