@@ -7,7 +7,6 @@ else
 EXE :=
 endif
 
-
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
@@ -114,6 +113,8 @@ ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
 
+compare: ; @$(MAKE) COMPARE=1
+
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
@@ -187,6 +188,16 @@ sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
 ruby_en_debug: ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 DEBUG_TRANSLATE=1
 
+compare_ruby:          ; @$(MAKE) GAME_VERSION=RUBY COMPARE=1
+compare_ruby_rev1:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 COMPARE=1
+compare_ruby_rev2:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 COMPARE=1
+compare_sapphire:      ; @$(MAKE) GAME_VERSION=SAPPHIRE COMPARE=1
+compare_sapphire_rev1: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 COMPARE=1
+compare_sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 COMPARE=1
+compare_ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN COMPARE=1
+compare_sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN COMPARE=1
+compare_ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1 COMPARE=1
+compare_ruby_en_debug: ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 DEBUG_TRANSLATE=1 COMPARE=1
 
 #### Graphics Rules ####
 
