@@ -1258,7 +1258,7 @@ static void sub_804E9F8(void)
         break;
     case 102:
         if (!gPaletteFade.active)
-            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         break;
     }
     RunTasks();
@@ -2480,7 +2480,7 @@ static void sub_8050E30(void)
         break;
     case 12:
         if (gReceivedRemoteLinkPlayers == 0)
-            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         break;
     }
 
@@ -2529,7 +2529,7 @@ static void sub_80510E8(void)
             if (gBerryBlenderData->field_7C == 0)
                 SetMainCallback2(DoBerryBlending);
             else
-                SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+                SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         }
         break;
     }

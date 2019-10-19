@@ -753,7 +753,7 @@ static void sub_80C2EA0(u8 taskId)
             REG_BLDCNT = 0;
             REG_BLDY = 0;
             DestroyTask(taskId);
-            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         }
     }
 }

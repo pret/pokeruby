@@ -26,9 +26,9 @@ extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 extern u8 gMoveResultFlags;
 extern u16 gDynamicBasePower;
-extern u16 gLastUsedMove[MAX_BATTLERS_COUNT];
+extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
-extern u16 gSideAffecting[2];
+extern u16 gSideStatuses[2];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
@@ -448,7 +448,7 @@ void sub_810745C(void)
     {
         if (AI_BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] == 0)
         {
-            AI_BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] = gLastUsedMove[gBattlerTarget];
+            AI_BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] = gLastMoves[gBattlerTarget];
             return;
         }
     }
@@ -468,7 +468,7 @@ void RecordAbilityBattle(u8 a, u8 b)
         AI_BATTLE_HISTORY->abilities[GetBattlerPosition(a) & 1] = b;
 }
 
-void RecordItemBattle(u8 a, u8 b)
+void RecordItemEffectBattle(u8 a, u8 b)
 {
     if (GetBattlerSide(a) == 0)
         AI_BATTLE_HISTORY->itemEffects[GetBattlerPosition(a) & 1] = b;
@@ -697,7 +697,7 @@ static void BattleAICmd_if_status4(void)
     arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gSideAffecting[arg1] & arg2) != 0)
+    if ((gSideStatuses[arg1] & arg2) != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -716,7 +716,7 @@ static void BattleAICmd_if_not_status4(void)
     arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gSideAffecting[arg1] & arg2) == 0)
+    if ((gSideStatuses[arg1] & arg2) == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -1256,9 +1256,9 @@ _081083D0: .4byte gAIScriptPtr\n\
 static void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
-        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBattlerAttacker];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerAttacker];
     else
-        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBattlerTarget];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerTarget];
 
     gAIScriptPtr += 2;
 }

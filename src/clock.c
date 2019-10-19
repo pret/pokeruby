@@ -1,21 +1,20 @@
 #include "global.h"
 #include "clock.h"
-#include "berry.h"
-#include "dewford_trend.h"
 #include "event_data.h"
-#include "field_specials.h"
-#include "field_weather.h"
-#include "lottery_corner.h"
-#include "main.h"
-#include "overworld.h"
 #include "rtc.h"
 #include "time_events.h"
+#include "field_specials.h"
+#include "lottery_corner.h"
+#include "dewford_trend.h"
 #include "tv.h"
+#include "field_weather.h"
+#include "berry.h"
+#include "main.h"
+#include "overworld.h"
 #include "wallclock.h"
 
-static void UpdatePerDay(struct Time *time);
-static void UpdatePerMinute(struct Time *time);
-static void ReturnFromStartWallClock(void);
+static void UpdatePerDay(struct Time *localTime);
+static void UpdatePerMinute(struct Time *localTime);
 
 void InitTimeBasedEvents(void)
 {
@@ -35,50 +34,49 @@ void DoTimeBasedEvents(void)
     }
 }
 
-static void UpdatePerDay(struct Time *time)
+static void UpdatePerDay(struct Time *localTime)
 {
     u16 *varPtr = GetVarPointer(VAR_DAYS);
     int days = *varPtr;
-    u16 newDays;
+    u16 daysSince;
 
-    if (days != time->days && days <= time->days)
+    if (days != localTime->days && days <= localTime->days)
     {
-        newDays = time->days - days;
+        daysSince = localTime->days - days;
         ClearDailyFlags();
-        UpdateDewfordTrendPerDay(newDays);
-        UpdateTVShowsPerDay(newDays);
-        UpdateWeatherPerDay(newDays);
-        UpdatePartyPokerusTime(newDays);
-        UpdateMirageRnd(newDays);
-        UpdateBirchState(newDays);
-        SetShoalItemFlag(newDays);
-        SetRandomLotteryNumber(newDays);
-        *varPtr = time->days;
+        UpdateDewfordTrendPerDay(daysSince);
+        UpdateTVShowsPerDay(daysSince);
+        UpdateWeatherPerDay(daysSince);
+        UpdatePartyPokerusTime(daysSince);
+        UpdateMirageRnd(daysSince);
+        UpdateBirchState(daysSince);
+        SetShoalItemFlag(daysSince);
+        SetRandomLotteryNumber(daysSince);
+        *varPtr = localTime->days;
     }
 }
 
-static void UpdatePerMinute(struct Time *time)
+static void UpdatePerMinute(struct Time *localTime)
 {
-    struct Time newTime;
-    s32 minutesPassed;
+    struct Time difference;
+    int minutes;
 
-    CalcTimeDifference(&newTime, &gSaveBlock2.lastBerryTreeUpdate, time);
-    minutesPassed = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
-
-    if (minutesPassed == 0) // do not do the update for the first minute.
-        return;
-
-    if (minutesPassed > -1) // do not perform an update on invalid minutesPassed.
+    CalcTimeDifference(&difference, &gSaveBlock2.lastBerryTreeUpdate, localTime);
+    minutes = 24 * 60 * difference.days + 60 * difference.hours + difference.minutes;
+    if (minutes != 0)
     {
-        BerryTreeTimeUpdate(minutesPassed);
-        gSaveBlock2.lastBerryTreeUpdate = *time;
+        if (minutes >= 0)
+        {
+            BerryTreeTimeUpdate(minutes);
+            gSaveBlock2.lastBerryTreeUpdate = *localTime;
+        }
     }
 }
 
 static void ReturnFromStartWallClock(void)
 {
     InitTimeBasedEvents();
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void StartWallClock(void)

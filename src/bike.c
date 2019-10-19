@@ -20,6 +20,7 @@ extern u8 gUnknown_020297ED;
 u8 debug_sub_805F2B0(u8);
 #endif
 
+// this file's functions
 static void MovePlayerOnMachBike(u8, u16, u16);
 static u8 GetMachBikeTransition(u8 *);
 static void MachBikeTransition_FaceDirection(u8);
@@ -60,6 +61,8 @@ static void Bike_TryAdvanceCyclingRoadCollisions();
 static u8 CanBikeFaceDirOnMetatile(u8, u8);
 static bool8 WillPlayerCollideWithCollision(u8, u8);
 static void Bike_SetBikeStill(void);
+
+// const rom data
 
 /*
     A bike transition is a type of callback for the bike that actually
@@ -123,7 +126,7 @@ static const u8 sAcroBikeJumpTimerList[] = {4, 0};
 // this is a list of history inputs to do in order to do the check to retrieve a jump direction for acro bike. it seems to be an extensible list, so its possible that Game Freak may have intended for the Acro Bike to have more complex tricks at some point. The final list only has the acro jump.
 static const struct BikeHistoryInputInfo sAcroBikeTricksList[] =
 {
-    // the 0xF is a mask performed with each byte of the array in order to perform the check on only the last entry of the history list, otherwise the check wouldnt work as there can be 0xF0 as opposed to 0x0F.
+    // the 0xF is a mask performed with each byte of the array in order to perform the check on only the last entry of the history list, otherwise the check wouldn't work as there can be 0xF0 as opposed to 0x0F.
     {DIR_SOUTH, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_SOUTH},
     {DIR_NORTH, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_NORTH},
     {DIR_WEST, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_WEST},
@@ -630,7 +633,7 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
         return;
     }
     collision = get_some_collision(direction);
-    //TODO: Try to get rid of this goto
+    // TODO: Try to get rid of this goto
     if (collision == 0 || collision == 9)
     {
         goto derp;
@@ -647,7 +650,7 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
         }
         else
         {
-          derp:
+        derp:
             PlayerMovingHoppingWheelie(direction);
         }
     }
@@ -755,7 +758,7 @@ static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
 
 static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
 {
-    u8 var;
+    u8 collision;
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
@@ -763,12 +766,12 @@ static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
         PlayerEndWheelie(playerEventObj->movementDirection);
         return;
     }
-    var = get_some_collision(direction);
-    if (var > 0 && var < 12)
+    collision = get_some_collision(direction);
+    if (collision > 0 && collision < 12)
     {
-        if (var == 6)
+        if (collision == 6)
             PlayerJumpLedge(direction);
-        else if (var < 5 || var > 8)
+        else if (collision < 5 || collision > 8)
             PlayerEndWheelie(direction);
         return;
     }

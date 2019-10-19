@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_special.h"
+#include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "item.h"
@@ -14,7 +15,6 @@
 #include "constants/moves.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "rom3.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
@@ -819,10 +819,10 @@ void sub_802CA60(void)
             r9->unkC[gMoveSelectionCursor[gActiveBattler]] = r9->unkC[gUnknown_03004344];
             r9->unkC[gUnknown_03004344] = i;
 
-            if (gDisableStructs[gActiveBattler].unk18_b & gBitTable[gMoveSelectionCursor[gActiveBattler]])
+            if (gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[gMoveSelectionCursor[gActiveBattler]])
             {
-                gDisableStructs[gActiveBattler].unk18_b &= ~gBitTable[gMoveSelectionCursor[gActiveBattler]];
-                gDisableStructs[gActiveBattler].unk18_b |= gBitTable[gUnknown_03004344];
+                gDisableStructs[gActiveBattler].mimickedMoves &= ~gBitTable[gMoveSelectionCursor[gActiveBattler]];
+                gDisableStructs[gActiveBattler].mimickedMoves |= gBitTable[gUnknown_03004344];
             }
 
             sub_802E1B0();

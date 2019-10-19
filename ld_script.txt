@@ -47,7 +47,7 @@ SECTIONS {
         src/link.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
-        src/rom3.o(.text);
+        src/battle_controllers.o(.text);
         src/decompress.o(.text);
         asm/decompress.o(.text);
         src/battle_bg.o(.text);
