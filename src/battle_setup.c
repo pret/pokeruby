@@ -32,6 +32,7 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/items.h"
 
 extern u16 gSpecialVar_Result;
 
@@ -871,7 +872,7 @@ static void CB2_GiveStarter(void)
 
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterPoke = GetStarterPokemon(gSpecialVar_Result);
-    ScriptGiveMon(starterPoke, 5, 0, 0, 0, 0);
+    ScriptGiveMon(starterPoke, 5, ITEM_NONE, 0, 0, 0);
     ResetTasks();
     sub_80408BC();
     SetMainCallback2(CB2_StartFirstBattle);
