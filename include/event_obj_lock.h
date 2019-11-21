@@ -1,5 +1,5 @@
-#ifndef GUARD_OBJ_EVENT_LOCK_H
-#define GUARD_OBJ_EVENT_LOCK_H
+#ifndef GUARD_EVENT_OBJ_LOCK_H
+#define GUARD_EVENT_OBJ_LOCK_H
 
 bool8 walkrun_is_standing_still(void);
 void sub_8064CDC(u8 taskId);
@@ -13,4 +13,4 @@ void unref_sub_8064E5C(void);
 void sub_8064EAC(void);
 void sub_8064ED4(void);
 
-#endif // GUARD_OBJ_EVENT_LOCK_H
+#endif // GUARD_EVENT_OBJ_LOCK_H

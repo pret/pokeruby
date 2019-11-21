@@ -24,7 +24,7 @@
 #include "trainer_see.h"
 #include "constants/vars.h"
 #include "wild_encounter.h"
-#include "constants/bg_event_constants.h"
+#include "constants/event_bg.h"
 #include "constants/map_types.h"
 
 struct Coords32

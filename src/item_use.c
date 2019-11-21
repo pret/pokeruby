@@ -34,7 +34,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "constants/bg_event_constants.h"
+#include "constants/event_bg.h"
 #include "constants/map_types.h"
 #include "constants/species.h"
 #include "constants/vars.h"

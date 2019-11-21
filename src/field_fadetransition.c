@@ -19,7 +19,7 @@
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/songs.h"
 
 void sub_8080B9C(u8);
