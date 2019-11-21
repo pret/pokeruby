@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 4,
       "y": 6,
       "elevation": 3,
@@ -25,7 +25,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCIENTIST_1",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 1,
       "y": 4,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 7,
       "y": 7,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 10,
       "y": 3,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_5",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_5",
       "x": 7,
       "y": 3,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 4,
       "y": 4,
       "elevation": 3,

@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_8",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_8",
       "x": 9,
       "y": 10,
       "elevation": 3,

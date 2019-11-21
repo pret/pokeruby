@@ -92,7 +92,7 @@ void Debug_SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 metatileBehavior;
 
-    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         FieldCallback_CutTree();
@@ -131,7 +131,7 @@ bool8 SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 tileBehavior;
 
-    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE)
     {
         // Standing in front of cuttable tree.
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
@@ -377,7 +377,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     for (i = 1; i < 8; i++)
         DestroySprite(&gSprites[eCutGrassSpriteArray[i]]);
     FieldEffectStop(&gSprites[eCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 

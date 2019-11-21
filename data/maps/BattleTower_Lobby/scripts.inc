@@ -19,7 +19,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	compare VAR_0x8007, 50
 	goto_if_lt BattleTower_Lobby_EventScript_1602E4
 	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
-	special TryInitBattleTowerAwardManEventObject
+	special TryInitBattleTowerAwardManObjectEvent
 	return
 
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
@@ -27,7 +27,7 @@ BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
 	compare VAR_0x8007, 100
 	goto_if_lt BattleTower_Lobby_EventScript_1602E4
 	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
-	special TryInitBattleTowerAwardManEventObject
+	special TryInitBattleTowerAwardManObjectEvent
 	return
 
 BattleTower_Lobby_EventScript_1602E4:: @ 81602E4

@@ -9,11 +9,11 @@ struct InitialPlayerAvatarState
     u8 direction;
 };
 
-struct LinkPlayerEventObject
+struct LinkPlayerObjectEvent
 {
     u8 active;
     u8 linkPlayerId;
-    u8 eventObjId;
+    u8 objEventId;
     u8 mode;
 };
 
@@ -35,10 +35,10 @@ void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
 void SetGameStat(u8, u32);
-// LoadEventObjTemplatesFromHeader
-// LoadSaveblockEventObjScripts
-void Overworld_SetEventObjTemplateCoords(u8, s16, s16);
-void Overworld_SetEventObjTemplateMovementType(u8, u8);
+// LoadObjEventTemplatesFromHeader
+// LoadSaveblockObjEventScripts
+void Overworld_SetObjEventTemplateCoords(u8, s16, s16);
+void Overworld_SetObjEventTemplateMovementType(u8, u8);
 // mapdata_load_assets_to_gpu_and_full_redraw
 // ApplyCurrentWarp
 // SetWarpData
@@ -188,9 +188,9 @@ bool32 sub_8055870(void);
 u32 sub_80558AC(void);
 u32 sub_8055910(void);
 u32 sub_8055940(void);
-// ClearLinkPlayerEventObject
-void ClearLinkPlayerEventObjects(void);
-// ZeroEventObject
+// ClearLinkPlayerObjectEvent
+void ClearLinkPlayerObjectEvents(void);
+// ZeroObjectEvent
 // unref_sub_8055A6C
 // unref_sub_8055A9C
 u8 sub_8055AE8(u8);

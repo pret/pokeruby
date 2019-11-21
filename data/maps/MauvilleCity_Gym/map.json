@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WATTSON",
+      "graphics_id": "OBJ_EVENT_GFX_WATTSON",
       "x": 4,
       "y": 3,
       "elevation": 3,
@@ -25,7 +25,7 @@
       "flag": "FLAG_HIDE_WATTSON_MAUVILLE_GYM"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_6",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_6",
       "x": 6,
       "y": 9,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 7,
       "y": 11,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 1,
       "y": 13,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_6",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_6",
       "x": 2,
       "y": 15,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 7,
       "y": 20,
       "elevation": 3,

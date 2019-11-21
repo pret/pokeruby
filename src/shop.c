@@ -447,25 +447,25 @@ static void Shop_LoadViewportObjects(void)
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     playerHeight = PlayerGetZCoord();
     for (y = 0; y < 16; y++)
-        gMartViewportObjects[y][EVENT_OBJ_ID] = 16;
+        gMartViewportObjects[y][OBJ_EVENT_ID] = 16;
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 eventObjId = GetEventObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, playerHeight);
+            u8 objEventId = GetObjectEventIdByXYZ(facingX - 3 + x, facingY - 2 + y, playerHeight);
 
-            if (eventObjId != 16)
+            if (objEventId != 16)
             {
-                gMartViewportObjects[r8][EVENT_OBJ_ID] = eventObjId;
+                gMartViewportObjects[r8][OBJ_EVENT_ID] = objEventId;
                 gMartViewportObjects[r8][X_COORD] = x;
                 gMartViewportObjects[r8][Y_COORD] = y;
-                if (gEventObjects[eventObjId].facingDirection == DIR_SOUTH)
+                if (gObjectEvents[objEventId].facingDirection == DIR_SOUTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 0;
-                if (gEventObjects[eventObjId].facingDirection == DIR_NORTH)
+                if (gObjectEvents[objEventId].facingDirection == DIR_NORTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 1;
-                if (gEventObjects[eventObjId].facingDirection == DIR_WEST)
+                if (gObjectEvents[objEventId].facingDirection == DIR_WEST)
                     gMartViewportObjects[r8][ANIM_NUM] = 2;
-                if (gEventObjects[eventObjId].facingDirection == DIR_EAST)
+                if (gObjectEvents[objEventId].facingDirection == DIR_EAST)
                     gMartViewportObjects[r8][ANIM_NUM] = 3;
                 r8++;
             }
@@ -479,11 +479,11 @@ static void Shop_AnimViewportObjects(void)
 
     for (i = 0; i < 16; i++) // max objects?
     {
-        if (gMartViewportObjects[i][EVENT_OBJ_ID] == 16)
+        if (gMartViewportObjects[i][OBJ_EVENT_ID] == 16)
             continue;
 
-        StartSpriteAnim(&gSprites[AddPseudoEventObject(
-            gEventObjects[gMartViewportObjects[i][EVENT_OBJ_ID]].graphicsId,
+        StartSpriteAnim(&gSprites[AddPseudoObjectEvent(
+            gObjectEvents[gMartViewportObjects[i][OBJ_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)gMartViewportObjects[i][X_COORD] * 16 + 8,
             (u16)gMartViewportObjects[i][Y_COORD] * 16 + 32,

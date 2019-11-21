@@ -740,10 +740,10 @@ void sub_80E8BF4(u8 reporter, u8 b)
     {
     case 0:  // Gabby
     default:
-        gabbyTyGfxId = EVENT_OBJ_GFX_REPORTER_M;
+        gabbyTyGfxId = OBJ_EVENT_GFX_REPORTER_M;
         break;
     case 1:  // Ty
-        gabbyTyGfxId = EVENT_OBJ_GFX_REPORTER_F;
+        gabbyTyGfxId = OBJ_EVENT_GFX_REPORTER_F;
         break;
     }
 
@@ -751,8 +751,8 @@ void sub_80E8BF4(u8 reporter, u8 b)
     LoadSpritePalette(&gUnknown_083DBD38);
     CreateSprite(&gSpriteTemplate_83DBD48, x, y, 1);
 
-    spriteId = AddPseudoEventObject(
-      (gSaveBlock2.playerGender == MALE) ? EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL : EVENT_OBJ_GFX_RIVAL_MAY_NORMAL,
+    spriteId = AddPseudoObjectEvent(
+      (gSaveBlock2.playerGender == MALE) ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
       SpriteCallbackDummy, x - 12, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -760,7 +760,7 @@ void sub_80E8BF4(u8 reporter, u8 b)
         StartSpriteAnim(&gSprites[spriteId], 3);
     }
 
-    spriteId = AddPseudoEventObject(gabbyTyGfxId, SpriteCallbackDummy, x + 12, y, 0);
+    spriteId = AddPseudoObjectEvent(gabbyTyGfxId, SpriteCallbackDummy, x + 12, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.priority = 0;

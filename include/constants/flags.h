@@ -357,7 +357,7 @@
 #define FLAG_HIDDEN_ITEM_61      0x2B9
 
 
-// event object hide/show flags
+// object event hide/show flags
 #define FLAG_HIDE_BIRCH_STARTERS_BAG        0x2BC
 
 #define FLAG_HIDE_BIRCH_BATTLE_POOCHYENA    0x2D0

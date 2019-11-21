@@ -33,7 +33,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 18,
       "y": 68,
       "elevation": 1,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 45,
       "y": 44,
       "elevation": 1,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
       "y": 7,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "FLAG_ITEM_ROUTE127_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 64,
       "y": 39,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "FLAG_ITEM_ROUTE127_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 53,
       "y": 13,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 52,
       "y": 25,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 64,
       "y": 19,
       "elevation": 3,
@@ -124,7 +124,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_6",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_6",
       "x": 12,
       "y": 18,
       "elevation": 3,
@@ -137,7 +137,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 63,
       "y": 63,
       "elevation": 3,

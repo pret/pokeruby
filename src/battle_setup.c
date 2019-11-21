@@ -40,7 +40,7 @@ extern void (*gFieldCallback)(void);
 
 EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;
-EWRAM_DATA static u16 sTrainerEventObjectLocalId = 0;
+EWRAM_DATA static u16 sTrainerObjectEventLocalId = 0;
 EWRAM_DATA static u8 *sTrainerIntroSpeech = NULL;
 EWRAM_DATA static u8 *sTrainerDefeatSpeech = NULL;
 EWRAM_DATA static u8 *sTrainerVictorySpeech = NULL;
@@ -52,7 +52,7 @@ extern u16 gBattleTypeFlags;
 extern u16 gSpecialVar_LastTalked;
 extern u8 gBattleOutcome;
 
-extern struct EventObject gEventObjects[];
+extern struct ObjectEvent gObjectEvents[];
 
 extern u8 gUnknown_0819F818[];
 extern u8 gUnknown_0819F840[];
@@ -101,7 +101,7 @@ static const struct TrainerBattleParameter gTrainerBattleSpecs_0[] =
 {
     {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerEventObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerObjectEventLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -113,7 +113,7 @@ static const struct TrainerBattleParameter gTrainerBattleSpecs_1[] =
 {
     {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerEventObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerObjectEventLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -125,7 +125,7 @@ static const struct TrainerBattleParameter gTrainerBattleSpecs_2[] =
 {
     {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerEventObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerObjectEventLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -137,7 +137,7 @@ static const struct TrainerBattleParameter gTrainerBattleSpecs_3[] =
 {
     {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerEventObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerObjectEventLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerIntroSpeech,         TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -149,7 +149,7 @@ static const struct TrainerBattleParameter gTrainerBattleSpecs_4[] =
 {
     {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerEventObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerObjectEventLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -516,7 +516,7 @@ void BattleSetup_StartWildBattle(void)
 static void DoStandardWildBattle(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     sub_80597F4();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
@@ -528,7 +528,7 @@ static void DoStandardWildBattle(void)
 void BattleSetup_StartRoamerBattle(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     sub_80597F4();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
@@ -540,7 +540,7 @@ void BattleSetup_StartRoamerBattle(void)
 static void DoSafariBattle(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     sub_80597F4();
     gMain.savedCallback = sub_80C824C;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
@@ -945,7 +945,7 @@ static void ResetTrainerOpponentIds(void)
 {
     sTrainerBattleMode = 0;
     gTrainerBattleOpponent = 0;
-    sTrainerEventObjectLocalId = 0;
+    sTrainerObjectEventLocalId = 0;
     sTrainerIntroSpeech = 0;
     sTrainerDefeatSpeech = 0;
     sTrainerVictorySpeech = 0;
@@ -991,10 +991,10 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
 
 static void SetMapVarsToTrainer(void)
 {
-    if (sTrainerEventObjectLocalId)
+    if (sTrainerObjectEventLocalId)
     {
-        gSpecialVar_LastTalked = sTrainerEventObjectLocalId;
-        gSelectedEventObject = GetEventObjectIdByLocalIdAndMap(sTrainerEventObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+        gSpecialVar_LastTalked = sTrainerObjectEventLocalId;
+        gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(sTrainerObjectEventLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
 }
 
@@ -1039,10 +1039,10 @@ u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     }
 }
 
-void TrainerWantsBattle(u8 trainerEventObjId, const u8 *trainerScript)
+void TrainerWantsBattle(u8 trainerObjEventId, const u8 *trainerScript)
 {
-    gSelectedEventObject = trainerEventObjId;
-    gSpecialVar_LastTalked = gEventObjects[trainerEventObjId].localId;
+    gSelectedObjectEvent = trainerObjEventId;
+    gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
     ScriptContext1_SetupScript(gUnknown_0819F80B);
     ScriptContext2_Enable();
@@ -1056,9 +1056,9 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 
 void sub_8082524(void)
 {
-    struct EventObject *eventObject = &gEventObjects[gSelectedEventObject];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gSelectedObjectEvent];
 
-    SetTrainerMovementType(eventObject, GetTrainerFacingDirectionMovementType(eventObject->facingDirection));
+    SetTrainerMovementType(objectEvent, GetTrainerFacingDirectionMovementType(objectEvent->facingDirection));
 }
 
 u8 ScrSpecial_GetTrainerBattleMode(void)

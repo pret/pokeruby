@@ -30,7 +30,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *, u8, u8);
 void ClearPoisonStepCounter(void);
 void RestartWildEncounterImmunitySteps(void);
 u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *);
-const u8 *GetEventObjectScriptPointerPlayerFacing(void);
+const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 u8 TrySetDiveWarp(void);
 bool8 dive_warp(struct MapPosition*, u16);
 
