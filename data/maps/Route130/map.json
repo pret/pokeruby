@@ -23,7 +23,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 7,
       "y": 26,
       "elevation": 1,
@@ -36,7 +36,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 68,
       "y": 22,
       "elevation": 1,
@@ -49,7 +49,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 52,
       "y": 9,
       "elevation": 3,

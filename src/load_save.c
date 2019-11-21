@@ -81,32 +81,32 @@ void LoadPlayerParty(void)
         gPlayerParty[i] = gSaveBlock1.playerParty[i];
 }
 
-static void SaveEventObjects(void)
+static void SaveObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
-        gSaveBlock1.eventObjects[i] = gEventObjects[i];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        gSaveBlock1.objectEvents[i] = gObjectEvents[i];
 }
 
-static void LoadEventObjects(void)
+static void LoadObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
-        gEventObjects[i] = gSaveBlock1.eventObjects[i];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        gObjectEvents[i] = gSaveBlock1.objectEvents[i];
 }
 
 void SaveSerializedGame(void)
 {
     SavePlayerParty();
-    SaveEventObjects();
+    SaveObjectEvents();
 }
 
 void LoadSerializedGame(void)
 {
     LoadPlayerParty();
-    LoadEventObjects();
+    LoadObjectEvents();
 }
 
 void LoadPlayerBag(void)

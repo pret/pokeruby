@@ -88,11 +88,11 @@ bool8 sub_8086E50(struct Task *);
 bool8 sub_8086EB0(struct Task *);
 bool8 sub_8086ED4(struct Task *);
 
-bool8 sub_8086FB0(struct Task *, struct EventObject *);
-bool8 waterfall_1_do_anim_probably(struct Task *, struct EventObject *);
-bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct EventObject *);
-bool8 sub_8087030(struct Task *, struct EventObject *);
-bool8 sub_8087058(struct Task *, struct EventObject *);
+bool8 sub_8086FB0(struct Task *, struct ObjectEvent *);
+bool8 waterfall_1_do_anim_probably(struct Task *, struct ObjectEvent *);
+bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct ObjectEvent *);
+bool8 sub_8087030(struct Task *, struct ObjectEvent *);
+bool8 sub_8087058(struct Task *, struct ObjectEvent *);
 
 bool8 sub_8087124(struct Task *);
 bool8 dive_2_unknown(struct Task *);
@@ -100,25 +100,25 @@ bool8 dive_3_unknown(struct Task *);
 
 void sub_80871B8(u8);
 
-bool8 sub_808722C(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_8087264(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_8087298(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80872E4(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80873D8(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80873F4(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_808722C(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_8087264(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_8087298(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80872E4(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80873D8(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80873F4(struct Task *, struct ObjectEvent *, struct Sprite *);
 
-bool8 sub_80874CC(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80874FC(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_8087548(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_808759C(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80874CC(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80874FC(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_8087548(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_808759C(struct Task *, struct ObjectEvent *, struct Sprite *);
 
 void sub_8087654(u8);
 
-bool8 sub_80876C8(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80876F8(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_8087774(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80877AC(struct Task *, struct EventObject *, struct Sprite *);
-bool8 sub_80877D4(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80876C8(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80876F8(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_8087774(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80877AC(struct Task *, struct ObjectEvent *, struct Sprite *);
+bool8 sub_80877D4(struct Task *, struct ObjectEvent *, struct Sprite *);
 
 void sub_8087AA4(struct Task *);
 void sub_8087AC8(struct Task *);

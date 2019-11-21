@@ -33,7 +33,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 77,
       "y": 24,
       "elevation": 1,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 35,
       "y": 34,
       "elevation": 1,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_STEVEN",
+      "graphics_id": "OBJ_EVENT_GFX_STEVEN",
       "x": 40,
       "y": 22,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "FLAG_HIDE_STEVEN_ROUTE128"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_6",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_6",
       "x": 37,
       "y": 22,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "FLAG_HIDE_EVIL_LEADER_ROUTE128"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_7",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_7",
       "x": 38,
       "y": 21,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "FLAG_HIDE_OTHER_LEADER_ROUTE128"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 63,
       "y": 28,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 24,
       "y": 8,
       "elevation": 3,
@@ -124,7 +124,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_7",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_7",
       "x": 47,
       "y": 9,
       "elevation": 3,

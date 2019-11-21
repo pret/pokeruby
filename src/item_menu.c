@@ -53,7 +53,7 @@ extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
 extern void sub_802E424(u8);
-extern void ScriptUnfreezeEventObjects(void);
+extern void ScriptUnfreezeObjectEvents(void);
 
 struct UnknownStruct2
 {
@@ -2518,7 +2518,7 @@ void CleanUpOverworldMessage(u8 taskId)
 {
     Menu_EraseWindowRect(0, 13, 29, 19);
     DestroyTask(taskId);
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 
@@ -3141,7 +3141,7 @@ bool32 UseRegisteredKeyItem(void)
             u8 taskId;
 
             ScriptContext2_Enable();
-            FreezeEventObjects();
+            FreezeObjectEvents();
             sub_80594C0();
             sub_80597F4();
             gSpecialVar_ItemId = gSaveBlock1.registeredItem;

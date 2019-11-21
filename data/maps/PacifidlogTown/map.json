@@ -23,7 +23,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 10,
       "y": 23,
       "elevation": 3,
@@ -36,7 +36,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 11,
       "y": 14,
       "elevation": 3,
@@ -49,7 +49,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_1",
       "x": 9,
       "y": 16,
       "elevation": 3,

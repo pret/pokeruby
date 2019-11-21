@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_4",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_4",
       "x": 0,
       "y": 7,
       "elevation": 0,
@@ -25,7 +25,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_3",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_3",
       "x": 20,
       "y": 15,
       "elevation": 0,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL_2",
       "x": 9,
       "y": 8,
       "elevation": 3,

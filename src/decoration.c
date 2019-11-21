@@ -1089,183 +1089,183 @@ const u16 DecorGfx_KISS_POSTER[] = {
 };
 
 const u16 DecorGfx_PICHU_DOLL[] = {
-    EVENT_OBJ_GFX_PICHU_DOLL
+    OBJ_EVENT_GFX_PICHU_DOLL
 };
 
 const u16 DecorGfx_PIKACHU_DOLL[] = {
-    EVENT_OBJ_GFX_PIKACHU_DOLL
+    OBJ_EVENT_GFX_PIKACHU_DOLL
 };
 
 const u16 DecorGfx_MARILL_DOLL[] = {
-    EVENT_OBJ_GFX_MARILL_DOLL
+    OBJ_EVENT_GFX_MARILL_DOLL
 };
 
 const u16 DecorGfx_TOGEPI_DOLL[] = {
-    EVENT_OBJ_GFX_TOGEPI_DOLL
+    OBJ_EVENT_GFX_TOGEPI_DOLL
 };
 
 const u16 DecorGfx_CYNDAQUIL_DOLL[] = {
-    EVENT_OBJ_GFX_CYNDAQUIL_DOLL
+    OBJ_EVENT_GFX_CYNDAQUIL_DOLL
 };
 
 const u16 DecorGfx_CHIKORITA_DOLL[] = {
-    EVENT_OBJ_GFX_CHIKORITA_DOLL
+    OBJ_EVENT_GFX_CHIKORITA_DOLL
 };
 
 const u16 DecorGfx_TOTODILE_DOLL[] = {
-    EVENT_OBJ_GFX_TOTODILE_DOLL
+    OBJ_EVENT_GFX_TOTODILE_DOLL
 };
 
 const u16 DecorGfx_JIGGLYPUFF_DOLL[] = {
-    EVENT_OBJ_GFX_JIGGLYPUFF_DOLL
+    OBJ_EVENT_GFX_JIGGLYPUFF_DOLL
 };
 
 const u16 DecorGfx_MEOWTH_DOLL[] = {
-    EVENT_OBJ_GFX_MEOWTH_DOLL
+    OBJ_EVENT_GFX_MEOWTH_DOLL
 };
 
 const u16 DecorGfx_CLEFAIRY_DOLL[] = {
-    EVENT_OBJ_GFX_CLEFAIRY_DOLL
+    OBJ_EVENT_GFX_CLEFAIRY_DOLL
 };
 
 const u16 DecorGfx_DITTO_DOLL[] = {
-    EVENT_OBJ_GFX_DITTO_DOLL
+    OBJ_EVENT_GFX_DITTO_DOLL
 };
 
 const u16 DecorGfx_SMOOCHUM_DOLL[] = {
-    EVENT_OBJ_GFX_SMOOCHUM_DOLL
+    OBJ_EVENT_GFX_SMOOCHUM_DOLL
 };
 
 const u16 DecorGfx_TREECKO_DOLL[] = {
-    EVENT_OBJ_GFX_TREECKO_DOLL
+    OBJ_EVENT_GFX_TREECKO_DOLL
 };
 
 const u16 DecorGfx_TORCHIC_DOLL[] = {
-    EVENT_OBJ_GFX_TORCHIC_DOLL
+    OBJ_EVENT_GFX_TORCHIC_DOLL
 };
 
 const u16 DecorGfx_MUDKIP_DOLL[] = {
-    EVENT_OBJ_GFX_MUDKIP_DOLL
+    OBJ_EVENT_GFX_MUDKIP_DOLL
 };
 
 const u16 DecorGfx_DUSKULL_DOLL[] = {
-    EVENT_OBJ_GFX_DUSKULL_DOLL
+    OBJ_EVENT_GFX_DUSKULL_DOLL
 };
 
 const u16 DecorGfx_WYNAUT_DOLL[] = {
-    EVENT_OBJ_GFX_WYNAUT_DOLL
+    OBJ_EVENT_GFX_WYNAUT_DOLL
 };
 
 const u16 DecorGfx_BALTOY_DOLL[] = {
-    EVENT_OBJ_GFX_BALTOY_DOLL
+    OBJ_EVENT_GFX_BALTOY_DOLL
 };
 
 const u16 DecorGfx_KECLEON_DOLL[] = {
-    EVENT_OBJ_GFX_KECLEON_DOLL
+    OBJ_EVENT_GFX_KECLEON_DOLL
 };
 
 const u16 DecorGfx_AZURILL_DOLL[] = {
-    EVENT_OBJ_GFX_AZURILL_DOLL
+    OBJ_EVENT_GFX_AZURILL_DOLL
 };
 
 const u16 DecorGfx_SKITTY_DOLL[] = {
-    EVENT_OBJ_GFX_SKITTY_DOLL
+    OBJ_EVENT_GFX_SKITTY_DOLL
 };
 
 const u16 DecorGfx_SWABLU_DOLL[] = {
-    EVENT_OBJ_GFX_SWABLU_DOLL
+    OBJ_EVENT_GFX_SWABLU_DOLL
 };
 
 const u16 DecorGfx_GULPIN_DOLL[] = {
-    EVENT_OBJ_GFX_GULPIN_DOLL
+    OBJ_EVENT_GFX_GULPIN_DOLL
 };
 
 const u16 DecorGfx_LOTAD_DOLL[] = {
-    EVENT_OBJ_GFX_LOTAD_DOLL
+    OBJ_EVENT_GFX_LOTAD_DOLL
 };
 
 const u16 DecorGfx_SEEDOT_DOLL[] = {
-    EVENT_OBJ_GFX_SEEDOT_DOLL
+    OBJ_EVENT_GFX_SEEDOT_DOLL
 };
 
 const u16 DecorGfx_PIKA_CUSHION[] = {
-    EVENT_OBJ_GFX_PIKA_CUSHION
+    OBJ_EVENT_GFX_PIKA_CUSHION
 };
 
 const u16 DecorGfx_ROUND_CUSHION[] = {
-    EVENT_OBJ_GFX_ROUND_CUSHION
+    OBJ_EVENT_GFX_ROUND_CUSHION
 };
 
 const u16 DecorGfx_KISS_CUSHION[] = {
-    EVENT_OBJ_GFX_KISS_CUSHION
+    OBJ_EVENT_GFX_KISS_CUSHION
 };
 
 const u16 DecorGfx_ZIGZAG_CUSHION[] = {
-    EVENT_OBJ_GFX_ZIGZAG_CUSHION
+    OBJ_EVENT_GFX_ZIGZAG_CUSHION
 };
 
 const u16 DecorGfx_SPIN_CUSHION[] = {
-    EVENT_OBJ_GFX_SPIN_CUSHION
+    OBJ_EVENT_GFX_SPIN_CUSHION
 };
 
 const u16 DecorGfx_DIAMOND_CUSHION[] = {
-    EVENT_OBJ_GFX_DIAMOND_CUSHION
+    OBJ_EVENT_GFX_DIAMOND_CUSHION
 };
 
 const u16 DecorGfx_BALL_CUSHION[] = {
-    EVENT_OBJ_GFX_BALL_CUSHION
+    OBJ_EVENT_GFX_BALL_CUSHION
 };
 
 const u16 DecorGfx_GRASS_CUSHION[] = {
-    EVENT_OBJ_GFX_GRASS_CUSHION
+    OBJ_EVENT_GFX_GRASS_CUSHION
 };
 
 const u16 DecorGfx_FIRE_CUSHION[] = {
-    EVENT_OBJ_GFX_FIRE_CUSHION
+    OBJ_EVENT_GFX_FIRE_CUSHION
 };
 
 const u16 DecorGfx_WATER_CUSHION[] = {
-    EVENT_OBJ_GFX_WATER_CUSHION
+    OBJ_EVENT_GFX_WATER_CUSHION
 };
 
 const u16 DecorGfx_SNORLAX_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_SNORLAX_DOLL
+    OBJ_EVENT_GFX_BIG_SNORLAX_DOLL
 };
 
 const u16 DecorGfx_RHYDON_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_RHYDON_DOLL
+    OBJ_EVENT_GFX_BIG_RHYDON_DOLL
 };
 
 const u16 DecorGfx_LAPRAS_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_LAPRAS_DOLL
+    OBJ_EVENT_GFX_BIG_LAPRAS_DOLL
 };
 
 const u16 DecorGfx_VENUSAUR_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_VENUSAUR_DOLL
+    OBJ_EVENT_GFX_BIG_VENUSAUR_DOLL
 };
 
 const u16 DecorGfx_CHARIZARD_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_CHARIZARD_DOLL
+    OBJ_EVENT_GFX_BIG_CHARIZARD_DOLL
 };
 
 const u16 DecorGfx_BLASTOISE_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_BLASTOISE_DOLL
+    OBJ_EVENT_GFX_BIG_BLASTOISE_DOLL
 };
 
 const u16 DecorGfx_WAILMER_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_WAILMER_DOLL
+    OBJ_EVENT_GFX_BIG_WAILMER_DOLL
 };
 
 const u16 DecorGfx_REGIROCK_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_REGIROCK_DOLL
+    OBJ_EVENT_GFX_BIG_REGIROCK_DOLL
 };
 
 const u16 DecorGfx_REGICE_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_REGICE_DOLL
+    OBJ_EVENT_GFX_BIG_REGICE_DOLL
 };
 
 const u16 DecorGfx_REGISTEEL_DOLL[] = {
-    EVENT_OBJ_GFX_BIG_REGISTEEL_DOLL
+    OBJ_EVENT_GFX_BIG_REGISTEEL_DOLL
 };
 
 #if ENGLISH
@@ -2158,20 +2158,20 @@ void sub_80FF474(void)
         if (FlagGet(i + FLAG_DECORATION_2) == 1)
         {
             FlagClear(i + FLAG_DECORATION_2);
-            for (j=0; j<gMapHeader.events->eventObjectCount; j++)
+            for (j=0; j<gMapHeader.events->objectEventCount; j++)
             {
-                if (gMapHeader.events->eventObjects[j].flagId == i + FLAG_DECORATION_2)
+                if (gMapHeader.events->objectEvents[j].flagId == i + FLAG_DECORATION_2)
                 {
                     break;
                 }
             }
-            VarSet(0x3f20 + gMapHeader.events->eventObjects[j].graphicsId, gUnknown_02038900.decoration->tiles[0]);
-            gSpecialVar_0x8005 = gMapHeader.events->eventObjects[j].localId;
+            VarSet(0x3f20 + gMapHeader.events->objectEvents[j].graphicsId, gUnknown_02038900.decoration->tiles[0]);
+            gSpecialVar_0x8005 = gMapHeader.events->objectEvents[j].localId;
             gSpecialVar_0x8006 = gUnknown_020391A4;
             gSpecialVar_0x8007 = gUnknown_020391A6;
             show_sprite(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
             sub_805C0F8(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-            TryOverrideTemplateCoordsForEventObject(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+            TryOverrideTemplateCoordsForObjectEvent(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
             break;
         }
     }
@@ -2243,7 +2243,7 @@ void sub_80FF6AC(u8 taskId)
             break;
         case 1:
             gPaletteFade.bufferTransferDisabled = 1;
-            AddDecorationIconObjectFromEventObject(&gUnknown_02038900, gUnknown_020388D0[gUnknown_020388F5]);
+            AddDecorationIconObjectFromObjectEvent(&gUnknown_02038900, gUnknown_020388D0[gUnknown_020388F5]);
             sub_80FF960(taskId);
             SetUpPlacingDecorationPlayerAvatar(taskId, &gUnknown_02038900);
             pal_fill_black();
@@ -2260,7 +2260,7 @@ void sub_80FF6AC(u8 taskId)
     }
 }
 
-void AddDecorationIconObjectFromEventObject(struct UnkStruct_02038900 * unk_02038900, u8 decoIdx)
+void AddDecorationIconObjectFromObjectEvent(struct UnkStruct_02038900 * unk_02038900, u8 decoIdx)
 {
     sub_80FEF74();
     sub_80FED1C();
@@ -2278,7 +2278,7 @@ void AddDecorationIconObjectFromEventObject(struct UnkStruct_02038900 * unk_0203
     } else
     {
         gUnknown_020391A8 = gSprites[gFieldCamera.trackedSpriteId].data[0];
-        gFieldCamera.trackedSpriteId = AddPseudoEventObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
+        gFieldCamera.trackedSpriteId = AddPseudoObjectEvent(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
         gSprites[gFieldCamera.trackedSpriteId].oam.priority = 1;
     }
 }
@@ -2293,10 +2293,10 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *un
     }
     if (gSaveBlock2.playerGender == MALE)
     {
-        gUnknown_020391A9 = AddPseudoEventObject(0xc1, SpriteCallbackDummy, v0, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoObjectEvent(0xc1, SpriteCallbackDummy, v0, 0x48, 0);
     } else
     {
-        gUnknown_020391A9 = AddPseudoEventObject(0xc2, SpriteCallbackDummy, v0, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoObjectEvent(0xc2, SpriteCallbackDummy, v0, 0x48, 0);
     }
     gSprites[gUnknown_020391A9].oam.priority = 1;
     DestroySprite(&gSprites[gUnknown_020391A8]);
@@ -2437,7 +2437,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    behaviorAt = GetEventObjectIdByXYZ(curX, curY, 0);
+                    behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
                     if (behaviorAt != 0 && behaviorAt != 16)
                     {
                         return FALSE;
@@ -2462,7 +2462,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    if (GetEventObjectIdByXYZ(curX, curY, 0) != 16)
+                    if (GetObjectEventIdByXYZ(curX, curY, 0) != 16)
                     {
                         return FALSE;
                     }
@@ -2482,7 +2482,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     return FALSE;
                 }
-                behaviorAt = GetEventObjectIdByXYZ(curX, curY, 0);
+                behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
                 if (behaviorAt != 0 && behaviorAt != 16)
                 {
                     return FALSE;
@@ -2527,7 +2527,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                         return FALSE;
                     }
                 }
-                if (GetEventObjectIdByXYZ(curX, curY, 0) != 16)
+                if (GetObjectEventIdByXYZ(curX, curY, 0) != 16)
                 {
                     return FALSE;
                 }
@@ -2678,7 +2678,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0xC]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetEventObjectIdByXYZ\n"
+    "\tbl GetObjectEventIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r4, r0, 24\n"
     "\tcmp r4, 0\n"
@@ -2801,7 +2801,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0x20]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetEventObjectIdByXYZ\n"
+    "\tbl GetObjectEventIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r0, 24\n"
     "\tcmp r0, 0x10\n"
@@ -2905,7 +2905,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0x20]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetEventObjectIdByXYZ\n"
+    "\tbl GetObjectEventIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r4, r0, 24\n"
     "\tcmp r4, 0\n"
@@ -3045,7 +3045,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0x20]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetEventObjectIdByXYZ\n"
+    "\tbl GetObjectEventIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r0, 24\n"
     "\tcmp r0, 0x10\n"
@@ -3618,11 +3618,11 @@ void sub_8100A7C(void)
     {
         gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;
         sub_8100A60(gUnknown_020391B4[gSpecialVar_0x8004].decorId);
-        for (i=0; i<gMapHeader.events->eventObjectCount; i++)
+        for (i=0; i<gMapHeader.events->objectEventCount; i++)
         {
-            if (gMapHeader.events->eventObjects[i].flagId == gSpecialVar_0x8005)
+            if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8005)
             {
-                gSpecialVar_0x8006 = gMapHeader.events->eventObjects[i].localId;
+                gSpecialVar_0x8006 = gMapHeader.events->objectEvents[i].localId;
                 break;
             }
         }
@@ -3632,11 +3632,11 @@ void sub_8100A7C(void)
 void sub_8100B20(void)
 {
     u8 i;
-    for (i=0; i<gMapHeader.events->eventObjectCount; i++)
+    for (i=0; i<gMapHeader.events->objectEventCount; i++)
     {
-        if (gMapHeader.events->eventObjects[i].flagId == gSpecialVar_0x8004)
+        if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8004)
         {
-            gSpecialVar_0x8005 = gMapHeader.events->eventObjects[i].localId;
+            gSpecialVar_0x8005 = gMapHeader.events->objectEvents[i].localId;
             break;
         }
     }
@@ -3729,10 +3729,10 @@ void SetUpPuttingAwayDecorationPlayerAvatar(void)
     gFieldCamera.trackedSpriteId = CreateSprite(&gSpriteTemplate_83ECA88, 0x78, 0x50, 0);
     if (gSaveBlock2.playerGender == MALE)
     {
-        gUnknown_020391A9 = AddPseudoEventObject(0xc1, SpriteCallbackDummy, 0x88, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoObjectEvent(0xc1, SpriteCallbackDummy, 0x88, 0x48, 0);
     } else
     {
-        gUnknown_020391A9 = AddPseudoEventObject(0xc2, SpriteCallbackDummy, 0x88, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoObjectEvent(0xc2, SpriteCallbackDummy, 0x88, 0x48, 0);
     }
     gSprites[gUnknown_020391A9].oam.priority = 1;
     DestroySprite(&gSprites[gUnknown_020391A8]);
@@ -3916,9 +3916,9 @@ void sub_81012A0(void)
     yOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].decorId] & 0xf;
     for (i=0; i<0x40; i++)
     {
-        if (gSaveBlock1.eventObjectTemplates[i].x == xOff && gSaveBlock1.eventObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1.eventObjectTemplates[i].flagId))
+        if (gSaveBlock1.objectEventTemplates[i].x == xOff && gSaveBlock1.objectEventTemplates[i].y == yOff && !FlagGet(gSaveBlock1.objectEventTemplates[i].flagId))
         {
-            gUnknown_020391B4[gUnknown_02039234].flagId = gSaveBlock1.eventObjectTemplates[i].flagId;
+            gUnknown_020391B4[gUnknown_02039234].flagId = gSaveBlock1.objectEventTemplates[i].flagId;
             break;
         }
     }

@@ -49,7 +49,7 @@ struct Struct2000000
     /*0x9C*/ u8 language; // 0x9C
 };
 
-extern struct LinkPlayerEventObject gLinkPlayerEventObjects[];
+extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[];
 
 EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 
@@ -225,7 +225,7 @@ void TrainerCard_ShowLinkCard(u8 playerIndex, Callback arg2)
 #endif
     TrainerCard_InitScreenForLinkPlayer(playerIndex, arg2);
     SetMainCallback2(sub_8093174);
-    ewram0_2.language = gLinkPlayers[gLinkPlayerEventObjects[playerIndex].linkPlayerId].language;
+    ewram0_2.language = gLinkPlayers[gLinkPlayerObjectEvents[playerIndex].linkPlayerId].language;
 }
 
 #if DEBUG

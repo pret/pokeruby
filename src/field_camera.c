@@ -302,7 +302,7 @@ static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
         gBGTilemapBuffers[2][offset + 0x20] = metatiles[2];
         gBGTilemapBuffers[2][offset + 0x21] = metatiles[3];
 
-        // Draw metatile's top layer to the top background layer, which covers event object sprites.
+        // Draw metatile's top layer to the top background layer, which covers object event sprites.
         gBGTilemapBuffers[1][offset] = metatiles[4];
         gBGTilemapBuffers[1][offset + 1] = metatiles[5];
         gBGTilemapBuffers[1][offset + 0x20] = metatiles[6];
@@ -416,7 +416,7 @@ void CameraUpdate(void)
     if (deltaX != 0 || deltaY != 0)
     {
         CameraMove(deltaX, deltaY);
-        UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
+        UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         ResetBerryTreeSparkleFlags();
         tilemap_move_something(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
@@ -431,7 +431,7 @@ void CameraUpdate(void)
 void MoveCameraAndRedrawMap(int deltaX, int deltaY)
 {
     CameraMove(deltaX, deltaY);
-    UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
+    UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
     DrawWholeMapView();
     gTotalCameraPixelOffsetX -= deltaX * 16;
     gTotalCameraPixelOffsetY -= deltaY * 16;

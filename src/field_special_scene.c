@@ -27,8 +27,8 @@ enum
     STEP_END = 0xFE,
 };
 
-const u32 gEventObjectPic_MovingBox[] = INCBIN_U32("graphics/event_objects/pics/misc/moving_box.4bpp");
-const u16 gEventObjectPalette19[] = INCBIN_U16("graphics/event_objects/palettes/19.gbapal");
+const u32 gObjectEventPic_MovingBox[] = INCBIN_U32("graphics/object_events/pics/misc/moving_box.4bpp");
+const u16 gObjectEventPalette19[] = INCBIN_U16("graphics/object_events/palettes/19.gbapal");
 
 static const s8 gTruckCamera_HorizontalTable[] =
 {
@@ -349,7 +349,7 @@ void Task_HandlePorthole(u8 taskId)
 
 void sub_80C78A0(void)
 {
-    u8 spriteId = AddPseudoEventObject(0x8C, SpriteCallbackDummy, 112, 80, 0);
+    u8 spriteId = AddPseudoObjectEvent(0x8C, SpriteCallbackDummy, 112, 80, 0);
 
     gSprites[spriteId].coordOffsetEnabled = FALSE;
 
@@ -366,7 +366,7 @@ void sub_80C78A0(void)
 void sub_80C791C(void)
 {
     sub_80C78A0();
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     pal_fill_black();
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();

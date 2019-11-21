@@ -405,7 +405,7 @@ void sub_8071310(void)
 {
     if (!is_c1_link_related_active())
     {
-        FreezeEventObjects();
+        FreezeObjectEvents();
         sub_80594C0();
         sub_80597F4();
     }
@@ -588,7 +588,7 @@ static u8 SaveCallback2(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:
         Menu_EraseScreen();
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         ScriptContext2_Disable();
         return TRUE;
     }

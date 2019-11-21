@@ -236,8 +236,8 @@ void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 
 void DoSecretBaseGlitterMatSparkle(void)
 {
-    s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
-    s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
+    s16 x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s16 y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     u8 spriteId;
 
     sub_8060470(&x, &y, 8, 4);

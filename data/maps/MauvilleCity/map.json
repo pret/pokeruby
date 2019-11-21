@@ -33,7 +33,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_3",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_3",
       "x": 29,
       "y": 16,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_4",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_4",
       "x": 24,
       "y": 10,
       "elevation": 3,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 14,
       "y": 11,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 18,
       "y": 6,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 17,
       "y": 14,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WALLY",
+      "graphics_id": "OBJ_EVENT_GFX_WALLY",
       "x": 8,
       "y": 6,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "flag": "FLAG_HIDE_WALLY_MAUVILLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -124,7 +124,7 @@
       "flag": "FLAG_HIDE_WALLY_FATHER_MAUVILLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WATTSON",
+      "graphics_id": "OBJ_EVENT_GFX_WATTSON",
       "x": 29,
       "y": 9,
       "elevation": 3,
@@ -137,7 +137,7 @@
       "flag": "FLAG_HIDE_WATTSON_MAUVILLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 28,
       "y": 19,
       "elevation": 3,

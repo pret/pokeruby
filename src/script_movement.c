@@ -18,25 +18,25 @@ static void sub_80A2490(u8, u8, u8, const u8 *);
 
 bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGroup, const u8 *movementScript)
 {
-    u8 eventObjId;
+    u8 objEventId;
 
-    if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjId))
+    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objEventId))
         return TRUE;
     if (!FuncIsActiveTask(Task_80A244C))
         sub_80A2198(50);
-    return sub_80A21F4(sub_80A21E0(), eventObjId, movementScript);
+    return sub_80A21F4(sub_80A21E0(), objEventId, movementScript);
 }
 
 bool8 ScriptMovement_IsObjectMovementFinished(u8 localId, u8 mapNum, u8 mapBank)
 {
-    u8 eventObjId;
+    u8 objEventId;
     u8 r4;
     u8 r1;
 
-    if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapBank, &eventObjId))
+    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapBank, &objEventId))
         return TRUE;
     r4 = sub_80A21E0();
-    r1 = sub_80A2260(r4, eventObjId);
+    r1 = sub_80A2260(r4, objEventId);
     if (r1 == 16)
         return TRUE;
     return sub_80A2370(r4, r1);
@@ -69,11 +69,11 @@ static u8 sub_80A21E0(void)
     return FindTaskIdByFunc(Task_80A244C);
 }
 
-static bool8 sub_80A21F4(u8 taskId, u8 eventObjId, const u8 *movementScript)
+static bool8 sub_80A21F4(u8 taskId, u8 objEventId, const u8 *movementScript)
 {
     u8 r4;
 
-    r4 = sub_80A2260(taskId, eventObjId);
+    r4 = sub_80A2260(taskId, objEventId);
     if (r4 != 16)
     {
         if (sub_80A2370(taskId, r4) == 0)
@@ -82,7 +82,7 @@ static bool8 sub_80A21F4(u8 taskId, u8 eventObjId, const u8 *movementScript)
         }
         else
         {
-            sub_80A23C8(taskId, r4, eventObjId, movementScript);
+            sub_80A23C8(taskId, r4, objEventId, movementScript);
             return FALSE;
         }
     }
@@ -93,7 +93,7 @@ static bool8 sub_80A21F4(u8 taskId, u8 eventObjId, const u8 *movementScript)
     }
     else
     {
-        sub_80A23C8(taskId, r4, eventObjId, movementScript);
+        sub_80A23C8(taskId, r4, objEventId, movementScript);
         return FALSE;
     }
 }
@@ -169,23 +169,23 @@ static const u8 *sub_80A23B8(u8 a)
     return gUnknown_020384F8[a];
 }
 
-static void sub_80A23C8(u8 taskId, u8 b, u8 eventObjId, const u8 *movementScript)
+static void sub_80A23C8(u8 taskId, u8 b, u8 objEventId, const u8 *movementScript)
 {
     sub_80A2318(taskId, b);
     npc_obj_offscreen_culling_and_flag_update(b, movementScript);
-    sub_80A22D0(taskId, b, eventObjId);
+    sub_80A22D0(taskId, b, objEventId);
 }
 
 static void UnfreezeObjects(u8 taskId)
 {
-    u8 *pEventObjId;
+    u8 *pObjEventId;
     u8 i;
 
-    pEventObjId = (u8 *)&gTasks[taskId].data[1];
-    for (i = 0; i < 16; i++, pEventObjId++)
+    pObjEventId = (u8 *)&gTasks[taskId].data[1];
+    for (i = 0; i < 16; i++, pObjEventId++)
     {
-        if (*pEventObjId != 0xFF)
-            UnfreezeEventObject(&gEventObjects[*pEventObjId]);
+        if (*pObjEventId != 0xFF)
+            UnfreezeObjectEvent(&gObjectEvents[*pObjEventId]);
     }
 }
 
@@ -202,23 +202,23 @@ static void Task_80A244C(u8 taskId)
     }
 }
 
-static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
+static void sub_80A2490(u8 taskId, u8 b, u8 objEventId, const u8 *d)
 {
     u8 var;
 
-    if (EventObjectIsHeldMovementActive(&gEventObjects[eventObjId])
-     && !EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
+    if (ObjectEventIsHeldMovementActive(&gObjectEvents[objEventId])
+     && !ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]))
         return;
 
     var = *d;
     if (var == 0xFE)
     {
         sub_80A2348(taskId, b);
-        FreezeEventObject(&gEventObjects[eventObjId]);
+        FreezeObjectEvent(&gObjectEvents[objEventId]);
     }
     else
     {
-        if (!EventObjectSetHeldMovement(&gEventObjects[eventObjId], var))
+        if (!ObjectEventSetHeldMovement(&gObjectEvents[objEventId], var))
         {
             d++;
             npc_obj_offscreen_culling_and_flag_update(b, d);

@@ -806,7 +806,7 @@ static void Task_BardSong(u8 taskId)
 
 void sub_80F83D0(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD + GetCurrentMauvilleOldMan());
+    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BARD + GetCurrentMauvilleOldMan());
 }
 
 struct Story

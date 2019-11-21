@@ -23,7 +23,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 4,
       "y": 17,
       "elevation": 3,
@@ -36,7 +36,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL_1",
       "x": 9,
       "y": 2,
       "elevation": 3,
@@ -49,7 +49,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 11,
       "y": 9,
       "elevation": 3,
@@ -62,7 +62,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 6,
       "y": 10,
       "elevation": 3,
