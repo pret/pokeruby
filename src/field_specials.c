@@ -33,7 +33,7 @@
 #include "pokemon_summary_screen.h"
 #include "random.h"
 #include "constants/abilities.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/species.h"

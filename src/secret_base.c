@@ -29,7 +29,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "constants/bg_event_constants.h"
+#include "constants/event_bg.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
