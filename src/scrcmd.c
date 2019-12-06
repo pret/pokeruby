@@ -22,7 +22,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "main.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"

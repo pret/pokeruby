@@ -5,7 +5,7 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "main.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "menu.h"
 #include "rom6.h"
 #include "script.h"

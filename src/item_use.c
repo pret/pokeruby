@@ -17,7 +17,7 @@
 #include "constants/items.h"
 #include "mail.h"
 #include "main.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "metatile_behavior.h"
