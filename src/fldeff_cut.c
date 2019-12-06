@@ -4,7 +4,7 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "metatile_behavior.h"
 #include "pokemon_menu.h"
 #include "overworld.h"

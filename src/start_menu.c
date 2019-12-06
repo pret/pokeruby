@@ -9,7 +9,7 @@
 #include "load_save.h"
 #include "m4a.h"
 #include "main.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "menu.h"
 #include "new_game.h"
 #include "option_menu.h"

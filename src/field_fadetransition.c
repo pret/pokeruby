@@ -11,7 +11,7 @@
 #include "fldeff_flash.h"
 #include "link.h"
 #include "main.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "overworld.h"
