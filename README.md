@@ -30,7 +30,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 [poketcg]: https://github.com/pret/poketcg
 [pokefirered]: https://github.com/pret/pokefirered
 [pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/6EuWgX9
+[Discord]: https://discord.gg/d5dubZ3
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
 [travis]: https://travis-ci.org/pret/pokeruby
 [travis-badge]: https://travis-ci.org/pret/pokeruby.svg?branch=master
