@@ -47,7 +47,7 @@ SECTIONS {
         src/link.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
-        src/rom3.o(.text);
+        src/battle_controllers.o(.text);
         src/decompress.o(.text);
         asm/decompress.o(.text);
         src/battle_bg.o(.text);
@@ -475,7 +475,7 @@ SECTIONS {
         src/link.o(.rodata*);
         src/rtc.o(.rodata*);
         src/main_menu.o(.rodata*);
-		src/rom3.o(.rodata*);
+		src/battle_controllers.o(.rodata*);
         data/mon_attrs.o(.rodata*);
         src/battle/battle_1.o(.rodata*);
         src/battle_bg.o(.rodata*);

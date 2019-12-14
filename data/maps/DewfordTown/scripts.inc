@@ -13,7 +13,7 @@ DewfordTown_EventScript_14E002:: @ 814E002
 	message DewfordTown_Text_16B522
 	waitmessage
 	multichoicedefault 21, 6, 0, 2, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, DewfordTown_EventScript_14E04B
 	case 1, DewfordTown_EventScript_14E05B
 	case 2, DewfordTown_EventScript_14E06B
@@ -42,7 +42,7 @@ DewfordTown_EventScript_14E06B:: @ 814E06B
 
 DewfordTown_EventScript_14E076:: @ 814E076
 	msgbox DewfordTown_Text_16B3BC, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
@@ -75,9 +75,9 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	faceplayer
 	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_14E11B
 	msgbox DewfordTown_Text_16B665, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E0F0
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq DewfordTown_EventScript_14E111
 	end
 
@@ -98,9 +98,9 @@ DewfordTown_EventScript_14E11B:: @ 814E11B
 	message DewfordTown_Text_16B84E
 	waitmessage
 	multichoice 20, 8, 50, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E13D
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E147
 	end
 
@@ -141,7 +141,7 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 2
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
-	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	waitstate
 	release
 	end
@@ -177,7 +177,7 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E281
 	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E28A
 	closemessage
-	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2
@@ -595,9 +595,9 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	faceplayer
 	call DewfordTown_EventScript_1A0102
 	msgbox DewfordTown_Text_16B9CE, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E439
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq DewfordTown_EventScript_14E443
 	end
 
@@ -608,19 +608,19 @@ DewfordTown_EventScript_14E439:: @ 814E439
 
 DewfordTown_EventScript_14E443:: @ 814E443
 	msgbox DewfordTown_Text_16BADC, 4
-	setvar VAR_SPECIAL_4, 9
+	setvar VAR_0x8004, 9
 	call DewfordTown_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E46E
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E485
 	end
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
 	incrementgamestat GAME_STAT_STARTED_TRENDS
-	compare VAR_SPECIAL_4, 0
+	compare VAR_0x8004, 0
 	goto_if_eq DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4
 	release

@@ -8,9 +8,9 @@ Route119_MapScript1_151172:: @ 8151172
 	end
 
 Route119_EventScript_15117C:: @ 815117C
-	compare VAR_SPECIAL_4, 6
+	compare VAR_0x8004, 6
 	call_if_eq Route119_EventScript_151193
-	compare VAR_SPECIAL_4, 7
+	compare VAR_0x8004, 7
 	call_if_eq Route119_EventScript_151197
 	return
 
@@ -51,9 +51,9 @@ Route119_EventScript_1511DB:: @ 81511DB
 	lockall
 	addobject 25
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route119_EventScript_151254
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq Route119_EventScript_151259
 	delay 65
 	compare VAR_TEMP_1, 1
@@ -71,9 +71,9 @@ Route119_EventScript_1511DB:: @ 81511DB
 	addobject 16
 	delay 30
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route119_EventScript_15125E
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_1512D8
 	releaseall
 	end
@@ -295,8 +295,8 @@ Route119_EventScript_1514A8:: @ 81514A8
 
 Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, TRAINER_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
 	end
@@ -308,8 +308,8 @@ Route119_EventScript_1514E6:: @ 81514E6
 
 Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, TRAINER_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6
 	end
@@ -354,7 +354,7 @@ Route119_EventScript_1515C5:: @ 81515C5
 	faceplayer
 	msgbox Route119_Text_171520, 4
 	closemessage
-	applymovement LAST_TALKED, Route119_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route119_Movement_1A083D
 	waitmovement 0
 	release
 	end
@@ -364,7 +364,7 @@ Route119_EventScript_1515DC:: @ 81515DC
 	faceplayer
 	msgbox Route119_Text_17157C, 4
 	closemessage
-	applymovement LAST_TALKED, Route119_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Route119_Movement_1A083D
 	waitmovement 0
 	release
 	end

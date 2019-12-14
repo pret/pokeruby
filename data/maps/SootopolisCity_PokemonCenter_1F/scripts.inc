@@ -7,7 +7,7 @@ SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
 	end
 
 @ 815B19A
-	setvar VAR_SPECIAL_B, 1
+	setvar VAR_0x800B, 1
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

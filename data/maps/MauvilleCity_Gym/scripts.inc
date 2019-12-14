@@ -44,19 +44,19 @@ MauvilleCity_Gym_EventScript_15649B:: @ 815649B
 	end
 
 MauvilleCity_Gym_EventScript_15657D:: @ 815657D
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_15658B:: @ 815658B
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_156599:: @ 8156599
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_156491
 	end
@@ -84,7 +84,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq MauvilleCity_Gym_EventScript_1A00FB
-	setvar VAR_SPECIAL_8, 3
+	setvar VAR_0x8008, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special MauvilleGymSpecial3
 	special DrawWholeMapView
@@ -94,7 +94,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
 	giveitem_std ITEM_TM34_SHOCK_WAVE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4
 	setflag FLAG_RECEIVED_TM34
@@ -112,7 +112,7 @@ MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 	compare VAR_MAUVILLE_GYM_STATE, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar VAR_MAUVILLE_GYM_STATE, 1
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	goto MauvilleCity_Gym_EventScript_1566BA
 	end
 
@@ -122,7 +122,7 @@ MauvilleCity_Gym_EventScript_156670:: @ 8156670
 	compare VAR_MAUVILLE_GYM_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar VAR_MAUVILLE_GYM_STATE, 2
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	goto MauvilleCity_Gym_EventScript_1566BA
 	end
 
@@ -132,7 +132,7 @@ MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	compare VAR_MAUVILLE_GYM_STATE, 3
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar VAR_MAUVILLE_GYM_STATE, 3
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	goto MauvilleCity_Gym_EventScript_1566BA
 	end
 

@@ -22,26 +22,26 @@ MossdeepCity_Gym_EventScript_15A506:: @ 815A506
 	end
 
 MossdeepCity_Gym_EventScript_15A510:: @ 815A510
-	setmetatile 5, 5, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 2, 7, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 5, 5, METATILE_MossdeepGym_RedArrow_Right, 0
+	setmetatile 2, 7, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A4E8
 	end
 
 MossdeepCity_Gym_EventScript_15A528:: @ 815A528
-	setmetatile 8, 14, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 8, 10, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 8, 14, METATILE_MossdeepGym_RedArrow_Right, 0
+	setmetatile 8, 10, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A4F7
 	end
 
 MossdeepCity_Gym_EventScript_15A540:: @ 815A540
-	setmetatile 15, 17, METATILE_MossdeepGym_Obelisk_Base, 0
-	setmetatile 17, 15, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 15, 17, METATILE_MossdeepGym_RedArrow_Left, 0
+	setmetatile 17, 15, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A506
 	end
 
 MossdeepCity_Gym_EventScript_15A558:: @ 815A558
-	setmetatile 1, 23, METATILE_MossdeepGym_Wall_LeftCorner, 0
-	setmetatile 5, 24, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 1, 23, METATILE_MossdeepGym_RedArrow_Up, 0
+	setmetatile 5, 24, METATILE_MossdeepGym_Switch_Down, 1
 	end
 
 MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
@@ -60,7 +60,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	setflag FLAG_BADGE07_GET
 	clearflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
 	clearflag FLAG_UNKNOWN_393
-	setvar VAR_SPECIAL_8, 7
+	setvar VAR_0x8008, 7
 	call MossdeepCity_Gym_EventScript_1A01C0
 	clearflag FLAG_HIDE_WORKERS_SLATEPORT_HARBOR
 	goto MossdeepCity_Gym_EventScript_15A5C6
@@ -68,7 +68,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 	giveitem_std ITEM_TM04_CALM_MIND
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
 	setflag FLAG_RECEIVED_TM04
@@ -81,8 +81,8 @@ MossdeepCity_Gym_EventScript_15A5EA:: @ 815A5EA
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 5, 5, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 2, 7, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 5, 5, METATILE_MossdeepGym_RedArrow_Right, 0
+	setmetatile 2, 7, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -96,8 +96,8 @@ MossdeepCity_Gym_EventScript_15A621:: @ 815A621
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 5, 5, METATILE_MossdeepGym_Obelisk_Base, 0
-	setmetatile 2, 7, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 5, 5, METATILE_MossdeepGym_RedArrow_Left, 0
+	setmetatile 2, 7, METATILE_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -107,8 +107,8 @@ MossdeepCity_Gym_EventScript_15A646:: @ 815A646
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 8, 14, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 8, 10, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 8, 14, METATILE_MossdeepGym_RedArrow_Right, 0
+	setmetatile 8, 10, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -116,8 +116,8 @@ MossdeepCity_Gym_EventScript_15A675:: @ 815A675
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 8, 14, METATILE_MossdeepGym_OuterWall_RightCorner, 0
-	setmetatile 8, 10, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 8, 14, METATILE_MossdeepGym_RedArrow_Down, 0
+	setmetatile 8, 10, METATILE_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -127,8 +127,8 @@ MossdeepCity_Gym_EventScript_15A69A:: @ 815A69A
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 15, 17, METATILE_MossdeepGym_Obelisk_Base, 0
-	setmetatile 17, 15, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 15, 17, METATILE_MossdeepGym_RedArrow_Left, 0
+	setmetatile 17, 15, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -136,8 +136,8 @@ MossdeepCity_Gym_EventScript_15A6C9:: @ 815A6C9
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 15, 17, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 17, 15, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 15, 17, METATILE_MossdeepGym_RedArrow_Right, 0
+	setmetatile 17, 15, METATILE_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -147,8 +147,8 @@ MossdeepCity_Gym_EventScript_15A6EE:: @ 815A6EE
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 1, 23, METATILE_MossdeepGym_Wall_LeftCorner, 0
-	setmetatile 5, 24, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 1, 23, METATILE_MossdeepGym_RedArrow_Up, 0
+	setmetatile 5, 24, METATILE_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -156,8 +156,8 @@ MossdeepCity_Gym_EventScript_15A71D:: @ 815A71D
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmetatile 1, 23, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 5, 24, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 1, 23, METATILE_MossdeepGym_RedArrow_Right, 0
+	setmetatile 5, 24, METATILE_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 

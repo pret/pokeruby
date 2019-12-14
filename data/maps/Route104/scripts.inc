@@ -32,7 +32,7 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE104, Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
 	giveitem_std ITEM_CHESTO_BERRY
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	msgbox Route104_Text_1C5665, 4
@@ -50,7 +50,7 @@ Route104_EventScript_14EF09:: @ 814EF09
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
 	giveitem_std ITEM_WHITE_HERB
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_WHITE_HERB
 	release
@@ -103,7 +103,7 @@ Route104_EventScript_14EF93:: @ 814EF93
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
 	giveitem_std ITEM_TM09_BULLET_SEED
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM09
 	release
@@ -148,7 +148,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	call Route104_EventScript_1A02EF
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	hideobjectat 7, MAP_ROUTE104
-	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority 255, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
@@ -402,8 +402,8 @@ Route104_EventScript_14F189:: @ 814F189
 
 Route104_EventScript_14F1A0:: @ 814F1A0
 	trainerbattle 0, TRAINER_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_14F1C7
 	msgbox Route104_Text_1B87C3, 6
 	end
@@ -415,8 +415,8 @@ Route104_EventScript_14F1C7:: @ 814F1C7
 
 Route104_EventScript_14F1DE:: @ 814F1DE
 	trainerbattle 0, TRAINER_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_14F205
 	msgbox Route104_Text_1B8925, 6
 	end
@@ -428,8 +428,8 @@ Route104_EventScript_14F205:: @ 814F205
 
 Route104_EventScript_14F21C:: @ 814F21C
 	trainerbattle 0, TRAINER_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_14F243
 	msgbox Route104_Text_1B8A69, 6
 	end

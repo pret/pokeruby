@@ -44,13 +44,13 @@ static void sub_80AA614(u8, u8);
 static void sub_80AAD08(struct Sprite *, s8);
 
 // unused
-const u8 gText_Unused83C9150[] = _("テストです"); // "test"
+const u8 gText_Unused83C9150[] = DTR("テストです", "Test");
 const u8 gMatsudaDebugMenu_ActionContestText[] = _("Contest");
 const u8 gMatsudaDebugMenu_ActionContestResultsText[] = _("Contest results");
 // unused
-const u8 gMatsudaDebugMenu_ActionChangePerimeterText[] = _("パラメータへんこう"); // "Change parameter"
+const u8 gMatsudaDebugMenu_ActionChangeParameterText[] = DTR("パラメータへんこう", "Change parameter");
 // unused
-const u8 gMatsudaDebugMenu_ActionChangeMoveText[] = _("わざ へんこう"); // "Change move"
+const u8 gMatsudaDebugMenu_ActionChangeMoveText[] = DTR("わざ へんこう", "Change move"); // "Change move"
 const u8 gMatsudaDebugMenu_ActionContestCommText[] = _("Contest (comm.)");
 const u8 gMatsudaDebugMenu_ActionCommTestText[] = _("Init comm. data");
 const u8 gMatsudaDebugMenu_ActionSetHighScoreText[] = _("Set highest score");
@@ -387,8 +387,8 @@ static void (* const gUnknown_083C92E4[][2])(struct Sprite *, s8) =
     };
 
 static const u8 gMatsudaDebugMenu_StartText[] = _("{COLOR CYAN}{HIGHLIGHT RED}");
-static const u8 gMatsudaDebugMenu_StartJapText[] = _("かいし"); // because StartText is only called by StringCopy, this part appears to be unused.
-static const u8 gMatsudaDebugMenu_GoBackText[] = _("もどる");
+static const u8 gMatsudaDebugMenu_StartJapText[] = DTR("かいし", "START"); // because StartText is only called by StringCopy, this part appears to be unused.
+static const u8 gMatsudaDebugMenu_GoBackText[] = DTR("もどる", "BACK");
 
 #ifdef GERMAN
 static const u8 gMatsudaDebugMenu_BattlePointsText[] = _("{COLOR MAGENTA}BP,");
@@ -396,12 +396,12 @@ static const u8 gMatsudaDebugMenu_BattlePointsText[] = _("{COLOR MAGENTA}BP,");
 static const u8 gMatsudaDebugMenu_BattlePointsText[] = _("{COLOR MAGENTA}BP.");
 #endif
 
-static const u8 MatsudaDebugMenuText_Cool[] = _("かっこよさ"); // cool
-static const u8 MatsudaDebugMenuText_Cute[] = _("かわいさ"); // cute
-static const u8 MatsudaDebugMenuText_Beauty[] = _("うつくしさ"); // beauty
-static const u8 MatsudaDebugMenuText_Smart[] = _("かしこさ"); // smart
-static const u8 MatsudaDebugMenuText_Tough[] = _("たくましさ"); // tough
-static const u8 MatsudaDebugMenuText_Sheen[] = _("けづや"); // sheen
+static const u8 MatsudaDebugMenuText_Cool[] = DTR("かっこよさ", "COOL");
+static const u8 MatsudaDebugMenuText_Cute[] = DTR("かわいさ", "CUTE");
+static const u8 MatsudaDebugMenuText_Beauty[] = DTR("うつくしさ", "BEAUTY");
+static const u8 MatsudaDebugMenuText_Smart[] = DTR("かしこさ", "SMART");
+static const u8 MatsudaDebugMenuText_Tough[] = DTR("たくましさ", "TOUGH");
+static const u8 MatsudaDebugMenuText_Sheen[] = DTR("けづや", "SHEEN");
 
 static const u8 *const gMatsudaDebugMenuTextList1[] =
     {
@@ -413,11 +413,11 @@ static const u8 *const gMatsudaDebugMenuTextList1[] =
         MatsudaDebugMenuText_Sheen,
     };
 
-static const u8 MatsudaDebugMenuText_CoolContest[] = _("かっこよさコンテスト");
-static const u8 MatsudaDebugMenuText_BeautyContest[] = _("うつくしさコンテスト");
-static const u8 MatsudaDebugMenuText_CuteContest[] = _("かわいさコンテスト　");
-static const u8 MatsudaDebugMenuText_SmartContest[] = _("かしこさコンテスト　");
-static const u8 MatsudaDebugMenuText_ToughContest[] = _("たくましさコンテスト");
+static const u8 MatsudaDebugMenuText_CoolContest[] = DTR("かっこよさコンテスト", "COOL CONTEST");
+static const u8 MatsudaDebugMenuText_BeautyContest[] = DTR("うつくしさコンテスト", "BEAUTY CONTEST");
+static const u8 MatsudaDebugMenuText_CuteContest[] = DTR("かわいさコンテスト　", "CUTE CONTEST");
+static const u8 MatsudaDebugMenuText_SmartContest[] = DTR("かしこさコンテスト　", "SMART CONTEST");
+static const u8 MatsudaDebugMenuText_ToughContest[] = DTR("たくましさコンテスト", "TOUGH CONTEST");
 
 static const u8 *const gMatsudaDebugMenuTextList2[] =
     {
@@ -428,10 +428,10 @@ static const u8 *const gMatsudaDebugMenuTextList2[] =
         MatsudaDebugMenuText_ToughContest,
     };
 
-static const u8 MatsudaDebugMenuText_Fallarbor[] = _("ハジツゲ/ノーマル"); // Fallarbor / Normal
-static const u8 MatsudaDebugMenuText_Verdanturf[] = _("シダケ/スーパー　"); // Verdanturf / Super
-static const u8 MatsudaDebugMenuText_Slateport[] = _("カイナ/ハイパー　"); // Slateport / Hyper
-static const u8 MatsudaDebugMenuText_Lilycove[] = _("ミナモ/マスター　"); // Lilycove / Master
+static const u8 MatsudaDebugMenuText_Fallarbor[] = DTR("ハジツゲ/ノーマル", "FALLARBOR/NORMAL"); // Fallarbor / Normal
+static const u8 MatsudaDebugMenuText_Verdanturf[] = DTR("シダケ/スーパー　", "VERDANTURF/SUPER"); // Verdanturf / Super
+static const u8 MatsudaDebugMenuText_Slateport[] = DTR("カイナ/ハイパー　", "SLATEPORT/HYPER"); // Slateport / Hyper
+static const u8 MatsudaDebugMenuText_Lilycove[] = DTR("ミナモ/マスター　", "LILYCOVE/MASTER"); // Lilycove / Master
 
 static const u8 *const gMatsudaDebugMenuTextList3[] =
     {

@@ -50,7 +50,7 @@ Route111_EventScript_15000D:: @ 815000D
 Route111_EventScript_150023:: @ 8150023
 	lockall
 	msgbox Route111_Text_16FA54, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route111_EventScript_15005F
 	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
@@ -72,7 +72,7 @@ Route111_EventScript_15005F:: @ 815005F
 Route111_EventScript_150069:: @ 8150069
 	lockall
 	msgbox Route111_Text_16FAED, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route111_EventScript_1500A5
 	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
@@ -122,7 +122,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE111, Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
 	giveitem_std ITEM_RAZZ_BERRY
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	special GetPlayerBigGuyGirlString
@@ -137,31 +137,31 @@ Route111_EventScript_150100:: @ 8150100
 
 @ 815010A
 	lockall
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150116:: @ 8150116
 	lockall
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150122:: @ 8150122
 	lockall
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	goto Route111_EventScript_15013A
 	end
 
 @ 815012E
 	lockall
-	setvar VAR_SPECIAL_4, 3
+	setvar VAR_0x8004, 3
 	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_15013A:: @ 815013A
 	checkitem ITEM_GO_GOGGLES, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_150151
 	setvar VAR_TEMP_3, 1
 	releaseall
@@ -170,13 +170,13 @@ Route111_EventScript_15013A:: @ 815013A
 Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
 	closemessage
-	compare VAR_SPECIAL_4, 0
+	compare VAR_0x8004, 0
 	call_if_eq Route111_EventScript_150188
-	compare VAR_SPECIAL_4, 1
+	compare VAR_0x8004, 1
 	call_if_eq Route111_EventScript_150193
-	compare VAR_SPECIAL_4, 2
+	compare VAR_0x8004, 2
 	call_if_eq Route111_EventScript_15019E
-	compare VAR_SPECIAL_4, 3
+	compare VAR_0x8004, 3
 	call_if_eq Route111_EventScript_1501A9
 	releaseall
 	end
@@ -235,7 +235,7 @@ Route111_EventScript_1501D1:: @ 81501D1
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_16F705, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq Route111_EventScript_1501F3
 	msgbox Route111_Text_16F785, 4
 	release
@@ -389,8 +389,8 @@ Route111_EventScript_1503EC:: @ 81503EC
 
 Route111_EventScript_150403:: @ 8150403
 	trainerbattle 0, TRAINER_DUSTY_1, 0, Route111_Text_1BAEC9, Route111_Text_1BAF14
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_15042A
 	msgbox Route111_Text_1BAF5B, 6
 	end
@@ -417,8 +417,8 @@ Route111_EventScript_15046F:: @ 815046F
 
 Route111_EventScript_150486:: @ 8150486
 	trainerbattle 0, TRAINER_WILTON_1, 0, Route111_Text_1BB2E3, Route111_Text_1BB313
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_1504AD
 	msgbox Route111_Text_1BB33E, 6
 	end
@@ -430,8 +430,8 @@ Route111_EventScript_1504AD:: @ 81504AD
 
 Route111_EventScript_1504C4:: @ 81504C4
 	trainerbattle 0, TRAINER_BROOKE_1, 0, Route111_Text_1BB44F, Route111_Text_1BB49F
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_1504EB
 	msgbox Route111_Text_1BB4CE, 6
 	end

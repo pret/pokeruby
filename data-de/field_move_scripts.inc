@@ -2,13 +2,13 @@ S_CuttableTree:: @ 81B0DCC
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, CannotUseCut
 	checkpartymove MOVE_CUT
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq CannotUseCut
-	setfieldeffectargument 0, RESULT
-	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
 	msgbox UseCutPromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -25,9 +25,9 @@ DoCutFieldEffectScript:: @ 81B0E16
 	end
 
 DoTreeCutMovement: @ 81B0E21
-	applymovement LAST_TALKED, TreeCutMovement @ tree cut animation
+	applymovement VAR_LAST_TALKED, TreeCutMovement @ tree cut animation
 	waitmovement 0
-	removeobject LAST_TALKED @ tree disappears
+	removeobject VAR_LAST_TALKED @ tree disappears
 	releaseall
 	end
 
@@ -62,13 +62,13 @@ S_BreakableRock:: @ 81B0EB7
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, CannotUseRockSmash
 	checkpartymove MOVE_ROCK_SMASH
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq CannotUseRockSmash
-	setfieldeffectargument 0, RESULT
-	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -85,14 +85,14 @@ S_UseRockSmash:: @ 81B0F01
 	end
 
 DoRockSmashMovement: @ 81B0F0C
-	applymovement LAST_TALKED, RockSmashMovement
+	applymovement VAR_LAST_TALKED, RockSmashMovement
 	waitmovement 0
-	removeobject LAST_TALKED
-	specialvar RESULT, TryUpdateRusturfTunnelState
-	compare RESULT, 1
+	removeobject VAR_LAST_TALKED
+	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
+	compare VAR_RESULT, 1
 	goto_if_eq DoRockSmashMovement_Done
 	special ScrSpecial_RockSmashWildEncounter
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq DoRockSmashMovement_Done
 	waitstate
 	releaseall
@@ -129,11 +129,11 @@ S_PushableBoulder:: @ 81B0FCB
 	goto_if_unset FLAG_BADGE04_GET, CannotUseStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, AlreadyUsedStrength
 	checkpartymove 70
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq CannotUseStrength
-	setfieldeffectargument 0, RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox UseStrengthPromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Strength_ChoseNo
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
@@ -190,12 +190,12 @@ AlreadyUsedStrengthText: @ 81B1127
 S_UseWaterfall:: @ 81B115A
 	lockall
 	checkpartymove MOVE_WATERFALL
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq Waterfall_NoMonKnows
-	bufferpartymonnick 0, RESULT
-	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox UseWaterfallPromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	dofieldeffect FLDEFF_USE_WATERFALL
@@ -223,13 +223,13 @@ UsedWaterfallText: @ 81B120D
 UseDiveScript:: @ 81B1220
 	lockall
 	checkpartymove MOVE_DIVE
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq CannotUseDive
-	bufferpartymonnick 0, RESULT
-	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox UseDivePromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
 	dofieldeffect FLDEFF_USE_DIVE
@@ -246,13 +246,13 @@ Dive_Done: @ 81B1267
 S_UseDiveUnderwater:: @ 81B1269
 	lockall
 	checkpartymove MOVE_DIVE
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq UnderwaterCannotUseDive
-	bufferpartymonnick 0, RESULT
-	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox UnderwaterUseDivePromptText, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	dofieldeffect FLDEFF_USE_DIVE

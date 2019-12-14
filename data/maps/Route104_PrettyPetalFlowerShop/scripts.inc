@@ -21,18 +21,18 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	goto_if_set FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_15BE4A
 	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE6A
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE73
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE4A:: @ 815BE4A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F1B, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE6A
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE73
 	release
 	end
@@ -88,9 +88,9 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP, Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
-	addvar RESULT, ITEM_CHERI_BERRY
-	giveitem_std RESULT
-	compare RESULT, 0
+	addvar VAR_RESULT, ITEM_CHERI_BERRY
+	giveitem_std VAR_RESULT
+	compare VAR_RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, 4

@@ -7,8 +7,8 @@ VerdanturfTown_ContestLobby_MapScript1_153D70:: @ 8153D70
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
-	setvar VAR_SPECIAL_B, 5
-	setvar CONTEST_RANK, 0
+	setvar VAR_0x800B, 5
+	setvar VAR_CONTEST_RANK, 0
 	call VerdanturfTown_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
 	special SetContestTrainerGfxIds
@@ -104,7 +104,7 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
 	giveitem_std ITEM_TM45_ATTRACT
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM45
 	release

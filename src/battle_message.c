@@ -379,7 +379,7 @@ void BufferStringBattle(u16 stringID)
             gBattleTextBuff1[0] &= ~(0x80);
             if (GetBattlerSide(gActiveBattler) == 1 && gBattleTextBuff1[0] != 3)
                 gBattleTextBuff1[0] ^= 3;
-            if (gBattleTextBuff1[0] == BATTLE_LOST || gBattleTextBuff1[0] == BATTLE_DREW)
+            if (gBattleTextBuff1[0] == B_OUTCOME_LOST || gBattleTextBuff1[0] == B_OUTCOME_DREW)
                 stringPtr = BattleText_GotAwaySafely;
             else
             {
@@ -397,13 +397,13 @@ void BufferStringBattle(u16 stringID)
             {
                 switch (gBattleTextBuff1[0])
                 {
-                case BATTLE_WON:
+                case B_OUTCOME_WON:
                     stringPtr = BattleText_PlayerDefeatedTrainers;
                     break;
-                case BATTLE_LOST:
+                case B_OUTCOME_LOST:
                     stringPtr = BattleText_PlayerLostTrainers;
                     break;
-                case BATTLE_DREW:
+                case B_OUTCOME_DREW:
                     stringPtr = BattleText_PlayerTiedTrainers;
                     break;
                 }
@@ -412,13 +412,13 @@ void BufferStringBattle(u16 stringID)
             {
                 switch (gBattleTextBuff1[0])
                 {
-                case BATTLE_WON:
+                case B_OUTCOME_WON:
                     stringPtr = BattleText_PlayerDefeatedTrainer;
                     break;
-                case BATTLE_LOST:
+                case B_OUTCOME_LOST:
                     stringPtr = BattleText_PlayerLostTrainer;
                     break;
-                case BATTLE_DREW:
+                case B_OUTCOME_DREW:
                     stringPtr = BattleText_PlayerTiedTrainer;
                     break;
                 }

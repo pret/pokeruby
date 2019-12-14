@@ -1282,7 +1282,7 @@ void sub_81354CC(void)
         break;
     }
 
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void sub_8135534(u8 taskId)
@@ -1805,9 +1805,9 @@ void PrintEReaderTrainerGreeting(void)
 
 void PrintEReaderTrainerFarewellMessage(void)
 {
-    if (gBattleOutcome == BATTLE_DREW)
+    if (gBattleOutcome == B_OUTCOME_DREW)
         gStringVar4[0] = EOS;
-    else if (gBattleOutcome == BATTLE_WON)
+    else if (gBattleOutcome == B_OUTCOME_WON)
         PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.ereaderTrainer.farewellPlayerWon);
     else
         PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.ereaderTrainer.farewellPlayerLost);

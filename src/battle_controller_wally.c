@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_special.h"
+#include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "data2.h"
@@ -10,7 +11,6 @@
 #include "menu_cursor.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "rom3.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -58,7 +58,6 @@ extern u8 gUnknown_0300434C[];
 extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];
 
-// TODO: include rom3.h when my other PR gets merged
 extern void BtlController_EmitTwoReturnValues(u8, u8, u16);
 extern void BtlController_EmitOneReturnValue(u8, u16);
 

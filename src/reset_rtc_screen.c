@@ -635,10 +635,10 @@ void debug_sub_806F9B8(void)
     ScriptContext2_Enable();
 }
 
-static const u8 sDebugText_Days[] = _("にっすう");  // "days"
-static const u8 sDebugText_Time[] = _("じかん");  // "time"
-static const u8 sDebugText_GameTime[] = _("ゲームない　じかん");  // "game time"
-static const u8 sDebugText_RTCTime[] = _("RTC　じかん");  // "RTC time"
+static const u8 sDebugText_Days[] = DTR("にっすう", "days");
+static const u8 sDebugText_Time[] = DTR("じかん", "time");
+static const u8 sDebugText_GameTime[] = DTR("ゲームない　じかん", "game time");
+static const u8 sDebugText_RTCTime[] = DTR("RTC　じかん", "RTC time");
 
 void debug_sub_806F9E4(u8 taskId)
 {

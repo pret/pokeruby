@@ -32,9 +32,9 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	lock
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_19256A, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C16C
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C19B
 	end
 
@@ -44,7 +44,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
 	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
 	waitmovement 0
-	setvar VAR_SPECIAL_4, 1
+	setvar VAR_0x8004, 1
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

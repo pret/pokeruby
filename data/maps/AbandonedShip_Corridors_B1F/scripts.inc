@@ -28,7 +28,7 @@ AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	lockall
 	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15EA14
 	checkitem ITEM_STORAGE_KEY, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
 	playse SE_PIN

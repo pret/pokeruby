@@ -7,5 +7,5 @@ MagmaHideout_B1F_MapScript1_15F2AE:: @ 815F2AE
 	end
 
 MagmaHideout_B1F_EventScript_15F2B8:: @ 815F2B8
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	return

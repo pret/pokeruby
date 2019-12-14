@@ -2,13 +2,13 @@
 #include "gba/flash_internal.h"
 #include "gba/m4a_internal.h"
 #include "main.h"
+#include "battle_controllers.h"
 #include "intro.h"
 #include "link.h"
 #include "load_save.h"
 #include "m4a.h"
 #include "play_time.h"
 #include "random.h"
-#include "rom3.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "siirtc.h"
@@ -34,10 +34,12 @@ const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = GAME_LANGUAGE;
 
-#if defined(ENGLISH)
-const char BuildDateTime[] = "2002 10 15 20:34";
-#elif defined(GERMAN)
+// The debug menu expects this exact format. With the English build string, it
+// will overflow on the title debug menu, outputting '9999ィ'.
+#if defined(GERMAN) || DEBUG
 const char BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
+#elif defined(ENGLISH)
+const char BuildDateTime[] = "2002 10 15 20:34";
 #endif
 
 const IntrFunc gIntrTableTemplate[] =

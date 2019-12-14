@@ -110,7 +110,7 @@ void sub_80C824C(void)
     {
         ScriptContext1_SetupScript(&gUnknown_081C3459);
         ScriptContext1_Stop();
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }
 

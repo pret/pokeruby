@@ -62,7 +62,7 @@ extern u8 gBattleMonSprites[NUM_BATTLE_SLOTS];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 extern s16 gBattleAnimArgs[8];
-extern u8 gBanksBySide[NUM_BATTLE_SLOTS];
+extern u8 gBattlerPositions[NUM_BATTLE_SLOTS];
 extern u8 gBattlersCount; // gNumBattleMons?
 extern struct OamMatrix gOamMatrices[];
 extern struct Struct_2017810 unk_2017810[];
@@ -815,12 +815,12 @@ void InitAnimSpritePos(struct Sprite *sprite, u8 a2)
 
 u8 GetBattlerSide(u8 slot)
 {
-    return gBanksBySide[slot] & 1;
+    return gBattlerPositions[slot] & 1;
 }
 
 u8 GetBattlerPosition(u8 slot)
 {
-    return gBanksBySide[slot];
+    return gBattlerPositions[slot];
 }
 
 u8 GetBattlerAtPosition(u8 slot)
@@ -829,7 +829,7 @@ u8 GetBattlerAtPosition(u8 slot)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBanksBySide[i] == slot)
+        if (gBattlerPositions[i] == slot)
             break;
     }
     return i;
@@ -847,7 +847,7 @@ bool8 IsBankSpritePresent(u8 slot)
     }
     else
     {
-        if (gBanksBySide[slot] == 0xff)
+        if (gBattlerPositions[slot] == 0xff)
             return FALSE;
         if (GetBattlerSide(slot) != B_SIDE_PLAYER)
         {

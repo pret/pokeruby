@@ -20,6 +20,20 @@
 #define INCBIN_S32 INCBIN
 #endif
 
+// For debug menu translations.
+// DTR("こんにちは", "Hello") will expand to "Hello" with DEBUG_TRANSLATE,
+// or "こんにちは" if not.
+// The KANA macro will wrap Japanese text with encoding markers to
+// prevent mojibake while they are being translated.
+
+#if DEBUG_TRANSLATE
+#define DTR(japanese, english) _(english)
+#define KANA(txt) _("{JPN}" txt "{ENG}")
+#else
+#define DTR(japanese, english) _(japanese)
+#define KANA(txt) _(txt)
+#endif
+
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 

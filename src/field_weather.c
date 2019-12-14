@@ -216,21 +216,21 @@ static const u8 sBasePaletteGammaTypes[32] =
 
 #if DEBUG
 
-static const u8 sDebugText_Weather_None[]        = _("なし　　　");  // "none"
-static const u8 sDebugText_Weather_Clear[]       = _("はれ　　　");  // "clear"
-static const u8 sDebugText_Weather_Clear2[]      = _("はれ2　　");  // "clear2"
-static const u8 sDebugText_Weather_Rain[]        = _("あめ　　　");  // "rain"
-static const u8 sDebugText_Weather_Snow[]        = _("ゆき　　　");  // "snow"
-static const u8 sDebugText_Weather_Lightning[]   = _("かみなり　");  // "lightning"
-static const u8 sDebugText_Weather_Fog[]         = _("きり　　　");  // "fog"
-static const u8 sDebugText_Weather_VolcanicAsh[] = _("かざんばい");  // "volcanic ash"
-static const u8 sDebugText_Weather_Sandstorm[]   = _("すなあらし");  // "sandstorm
-static const u8 sDebugText_Weather_Fog2[]        = _("きり2　　");  // "fog2"
-static const u8 sDebugText_Weather_Underwater[]  = _("かいてい　");  // "undersea"
-static const u8 sDebugText_Weather_Cloudy[]      = _("くもり　　");  // "cloudy"
-static const u8 sDebugText_Weather_Clear3[]      = _("はれ3　　");  // "clear3"
-static const u8 sDebugText_Weather_HeavyRain[]   = _("おおあめ");  // "heavy rain"
-static const u8 sDebugText_Weather_Underwater2[] = _("かいてい2");  // "undersea2"
+static const u8 sDebugText_Weather_None[]        = DTR("なし　　　", "NONE      ");
+static const u8 sDebugText_Weather_Clear[]       = DTR("はれ　　　", "CLOUDY    ");
+static const u8 sDebugText_Weather_Clear2[]      = DTR("はれ2　　", "SUNNY     ");
+static const u8 sDebugText_Weather_Rain[]        = DTR("あめ　　　", "RAIN      ");
+static const u8 sDebugText_Weather_Snow[]        = DTR("ゆき　　　", "SNOW      ");
+static const u8 sDebugText_Weather_Lightning[]   = DTR("かみなり　", "LIGHTNING ");
+static const u8 sDebugText_Weather_Fog[]         = DTR("きり　　　", "FOG 1     ");
+static const u8 sDebugText_Weather_VolcanicAsh[] = DTR("かざんばい", "ASH       ");
+static const u8 sDebugText_Weather_Sandstorm[]   = DTR("すなあらし", "SANDSTORM ");
+static const u8 sDebugText_Weather_Fog2[]        = DTR("きり2　　", "FOG 2     ");
+static const u8 sDebugText_Weather_Underwater[]  = DTR("かいてい　", "FOG 3     ");
+static const u8 sDebugText_Weather_Cloudy[]      = DTR("くもり　　", "SHADE     ");
+static const u8 sDebugText_Weather_Clear3[]      = DTR("はれ3　　", "DROUGHT   ");
+static const u8 sDebugText_Weather_HeavyRain[]   = DTR("おおあめ", "HEAVY RAIN");
+static const u8 sDebugText_Weather_Underwater2[] = DTR("かいてい2",  "UNDERWATER");
 
 static const u8 *const sDebugText_Weather[] =
 {

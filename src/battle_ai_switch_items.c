@@ -1,13 +1,13 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_ai_switch_items.h"
+#include "battle_controllers.h"
 #include "battle_script_commands.h"
 #include "data2.h"
 #include "ewram.h"
 #include "pokemon.h"
 #include "random.h"
 #include "rom_8077ABC.h"
-#include "rom3.h"
 #include "util.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -386,7 +386,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
 static bool8 ShouldSwitchIfNaturalCure(void)
 {
-    if (!(gBattleMons[gActiveBattler].status1 & STATUS_SLEEP))
+    if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
         return FALSE;
     if (gBattleMons[gActiveBattler].ability != ABILITY_NATURAL_CURE)
         return FALSE;
@@ -936,27 +936,27 @@ static bool8 ShouldUseItem(void)
             break;
         case AI_ITEM_CURE_CONDITION:
             ewram160DA(gActiveBattler) = 0;
-            if (itemEffects[3] & 0x20 && gBattleMons[gActiveBattler].status1 & STATUS_SLEEP)
+            if (itemEffects[3] & 0x20 && gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
             {
                ewram160DA(gActiveBattler) |= 0x20;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x10 && (gBattleMons[gActiveBattler].status1 & STATUS_POISON || gBattleMons[gActiveBattler].status1 & STATUS_TOXIC_POISON))
+            if (itemEffects[3] & 0x10 && (gBattleMons[gActiveBattler].status1 & STATUS1_POISON || gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON))
             {
                ewram160DA(gActiveBattler) |= 0x10;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x8 && gBattleMons[gActiveBattler].status1 & STATUS_BURN)
+            if (itemEffects[3] & 0x8 && gBattleMons[gActiveBattler].status1 & STATUS1_BURN)
             {
                ewram160DA(gActiveBattler) |= 0x8;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x4 && gBattleMons[gActiveBattler].status1 & STATUS_FREEZE)
+            if (itemEffects[3] & 0x4 && gBattleMons[gActiveBattler].status1 & STATUS1_FREEZE)
             {
                ewram160DA(gActiveBattler) |= 0x4;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x2 && gBattleMons[gActiveBattler].status1 & STATUS_PARALYSIS)
+            if (itemEffects[3] & 0x2 && gBattleMons[gActiveBattler].status1 & STATUS1_PARALYSIS)
             {
                ewram160DA(gActiveBattler) |= 0x2;
                 shouldUse = TRUE;

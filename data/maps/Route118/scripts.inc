@@ -11,9 +11,9 @@ Route118_EventScript_150F34:: @ 8150F34
 	faceplayer
 	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_150F89
 	msgbox Route118_Text_170F12, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq Route118_EventScript_150F5E
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq Route118_EventScript_150F7F
 	end
 
@@ -49,7 +49,7 @@ Route118_EventScript_150FA5:: @ 8150FA5
 
 Route118_EventScript_150FAE:: @ 8150FAE
 	lockall
-	setvar VAR_SPECIAL_8, 0
+	setvar VAR_0x8008, 0
 	applymovement 255, Route118_Movement_1A0841
 	waitmovement 0
 	applymovement 19, Route118_Movement_151069
@@ -59,7 +59,7 @@ Route118_EventScript_150FAE:: @ 8150FAE
 
 Route118_EventScript_150FCE:: @ 8150FCE
 	lockall
-	setvar VAR_SPECIAL_8, 1
+	setvar VAR_0x8008, 1
 	applymovement 255, Route118_Movement_1A0841
 	waitmovement 0
 	goto Route118_EventScript_151004
@@ -67,7 +67,7 @@ Route118_EventScript_150FCE:: @ 8150FCE
 
 Route118_EventScript_150FE4:: @ 8150FE4
 	lockall
-	setvar VAR_SPECIAL_8, 2
+	setvar VAR_0x8008, 2
 	applymovement 255, Route118_Movement_1A0841
 	waitmovement 0
 	applymovement 19, Route118_Movement_15106B
@@ -82,11 +82,11 @@ Route118_EventScript_151004:: @ 8151004
 	delay 30
 	msgbox Route118_Text_170D66, 4
 	closemessage
-	compare VAR_SPECIAL_8, 0
+	compare VAR_0x8008, 0
 	call_if_eq Route118_EventScript_151048
-	compare VAR_SPECIAL_8, 1
+	compare VAR_0x8008, 1
 	call_if_eq Route118_EventScript_151053
-	compare VAR_SPECIAL_8, 2
+	compare VAR_0x8008, 2
 	call_if_eq Route118_EventScript_15105E
 	setvar VAR_ROUTE118_STATE, 1
 	removeobject 19
@@ -160,8 +160,8 @@ Route118_Movement_151086:: @ 8151086
 
 Route118_EventScript_15108F:: @ 815108F
 	trainerbattle 0, TRAINER_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_1510B6
 	msgbox Route118_Text_1BE05E, 6
 	end
@@ -183,8 +183,8 @@ Route118_EventScript_1510E4:: @ 81510E4
 
 Route118_EventScript_1510FB:: @ 81510FB
 	trainerbattle 0, TRAINER_DALTON_1, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_151122
 	msgbox Route118_Text_1BE413, 6
 	end

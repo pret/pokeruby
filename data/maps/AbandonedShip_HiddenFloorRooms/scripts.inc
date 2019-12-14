@@ -43,8 +43,8 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
 	setfieldeffectargument 1, 10
 	setfieldeffectargument 2, 0
 	dofieldeffect FLDEFF_SPARKLE
-	specialvar RESULT, FoundAbandonedShipRoom4Key
-	compare RESULT, 0
+	specialvar VAR_RESULT, FoundAbandonedShipRoom4Key
+	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
@@ -54,11 +54,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
-	specialvar RESULT, FoundAbandonedShipRoom1Key
-	compare RESULT, 1
+	specialvar VAR_RESULT, FoundAbandonedShipRoom1Key
+	compare VAR_RESULT, 1
 	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
 	delay 20
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
@@ -77,8 +77,8 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	setfieldeffectargument 1, 3
 	setfieldeffectargument 2, 0
 	dofieldeffect FLDEFF_SPARKLE
-	specialvar RESULT, FoundAbandonedShipRoom6Key
-	compare RESULT, 0
+	specialvar VAR_RESULT, FoundAbandonedShipRoom6Key
+	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
@@ -98,8 +98,8 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	setfieldeffectargument 1, 6
 	setfieldeffectargument 2, 0
 	dofieldeffect FLDEFF_SPARKLE
-	specialvar RESULT, FoundAbandonedShipRoom2Key
-	compare RESULT, 0
+	specialvar VAR_RESULT, FoundAbandonedShipRoom2Key
+	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10

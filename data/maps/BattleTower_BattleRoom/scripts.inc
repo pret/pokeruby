@@ -21,27 +21,27 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	waitmessage
 	closemessage
 	special ScrSpecial_HealPlayerParty
-	setvar VAR_SPECIAL_4, 0
-	setvar VAR_SPECIAL_5, 0
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 0
 	special StartSpecialBattle
 	waitstate
-	switch RESULT
+	switch VAR_RESULT
 	case 1, BattleTower_BattleRoom_EventScript_160961
 	special LoadPlayerParty
-	setvar VAR_SPECIAL_4, 0
-	setvar VAR_SPECIAL_5, 5
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 5
 	special SetBattleTowerProperty
-	setvar VAR_SPECIAL_4, 14
+	setvar VAR_0x8004, 14
 	special SetBattleTowerProperty
-	setvar VAR_SPECIAL_4, 3
+	setvar VAR_0x8004, 3
 	special sub_810FF60
 	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160961:: @ 8160961
-	setvar VAR_SPECIAL_4, 6
+	setvar VAR_0x8004, 6
 	special SetBattleTowerProperty
-	switch RESULT
+	switch VAR_RESULT
 	case 8, BattleTower_BattleRoom_EventScript_160A56
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC6
 	waitmovement 0
@@ -60,21 +60,21 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 
 BattleTower_BattleRoom_EventScript_1609B2:: @ 81609B2
 	msgbox BattleTower_BattleRoom_Text_19AD09, MSGBOX_YESNO
-	switch RESULT
+	switch VAR_RESULT
 	case NO, BattleTower_BattleRoom_EventScript_1609E0
 	case YES, BattleTower_BattleRoom_EventScript_160A3C
 	case 127, BattleTower_BattleRoom_EventScript_1609E0
 
 BattleTower_BattleRoom_EventScript_1609E0:: @ 81609E0
 	msgbox BattleTower_BattleRoom_Text_19AD3C, MSGBOX_YESNO
-	switch RESULT
+	switch VAR_RESULT
 	case NO, BattleTower_BattleRoom_EventScript_160A0E
 	case YES, BattleTower_BattleRoom_EventScript_160A94
 	case 127, BattleTower_BattleRoom_EventScript_160A0E
 
 BattleTower_BattleRoom_EventScript_160A0E:: @ 8160A0E
 	msgbox BattleTower_BattleRoom_Text_19AD66, MSGBOX_YESNO
-	switch RESULT
+	switch VAR_RESULT
 	case NO, BattleTower_BattleRoom_EventScript_1609B2
 	case YES, BattleTower_BattleRoom_EventScript_160AB1
 	case 127, BattleTower_BattleRoom_EventScript_1609B2
@@ -89,23 +89,23 @@ BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 
 BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 	special LoadPlayerParty
-	setvar VAR_SPECIAL_4, 0
-	setvar VAR_SPECIAL_5, 4
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 4
 	special SetBattleTowerProperty
-	setvar VAR_SPECIAL_4, 2
-	setvar VAR_SPECIAL_5, 1
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 1
 	special SetBattleTowerProperty
-	setvar VAR_SPECIAL_4, 7
+	setvar VAR_0x8004, 7
 	special SetBattleTowerProperty
-	setvar VAR_SPECIAL_4, 14
+	setvar VAR_0x8004, 14
 	special SetBattleTowerProperty
-	setvar VAR_SPECIAL_4, 3
+	setvar VAR_0x8004, 3
 	special sub_810FF60
 	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
-	setvar VAR_SPECIAL_4, 2
+	setvar VAR_0x8004, 2
 	special SaveBattleTowerProgress
 	message BattleTower_BattleRoom_Text_1C6CE1
 	delay 60

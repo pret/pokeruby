@@ -12,7 +12,7 @@ extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 extern u8 gAnimVisualTaskCount;
 extern struct OamMatrix gOamMatrices[];
-extern u8 gBanksBySide[];
+extern u8 gBattlerPositions[];
 extern const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB538;
 
 void sub_80785E4(struct Sprite *sprite);
@@ -1899,7 +1899,7 @@ void sub_80DAD84(struct Sprite * sprite)
 
     if (gMain.inBattle)
     {
-        if (gBanksBySide[gBattleAnimTarget] & 1)
+        if (gBattlerPositions[gBattleAnimTarget] & 1)
         {
             sprite->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[3];
         }

@@ -6,8 +6,8 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	faceplayer
 	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
 	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
-	specialvar RESULT, CompletedHoennPokedex
-	compare RESULT, 1
+	specialvar VAR_RESULT, CompletedHoennPokedex
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release
 	end

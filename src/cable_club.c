@@ -940,7 +940,7 @@ void unref_sub_8083BB0(void)
 
 void sub_8083BDC(void)
 {
-    TrainerCard_ShowLinkCard(gSpecialVar_0x8006, c2_exit_to_overworld_1_continue_scripts_restart_music);
+    TrainerCard_ShowLinkCard(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 bool32 sub_8083BF4(u8 linkPlayerIndex)

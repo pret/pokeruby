@@ -9,7 +9,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u8 gBanksBySide[];
+extern u8 gBattlerPositions[];
 extern u16 gBattleTypeFlags;
 
 extern void sub_80D4CA4(struct Sprite *sprite);
@@ -296,7 +296,7 @@ void sub_80CFB04(u8 taskId)
     }
     else
     {
-        if ((gBanksBySide[gBattleAnimTarget] & 1) == 0)
+        if ((gBattlerPositions[gBattleAnimTarget] & 1) == 0)
         {
             gTasks[taskId].data[4] = 1;
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];

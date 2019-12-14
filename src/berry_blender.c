@@ -1258,7 +1258,7 @@ static void sub_804E9F8(void)
         break;
     case 102:
         if (!gPaletteFade.active)
-            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         break;
     }
     RunTasks();
@@ -2480,7 +2480,7 @@ static void sub_8050E30(void)
         break;
     case 12:
         if (gReceivedRemoteLinkPlayers == 0)
-            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         break;
     }
 
@@ -2529,7 +2529,7 @@ static void sub_80510E8(void)
             if (gBerryBlenderData->field_7C == 0)
                 SetMainCallback2(DoBerryBlending);
             else
-                SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+                SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         }
         break;
     }
@@ -3271,6 +3271,13 @@ void debug_sub_80524BC(void)
     SetMainCallback2(sub_8052AF8);
 }
 
+// Partially fixes the clipping on longer names.
+#if DEBUG_TRANSLATE && DEBUG
+#  define BLENDER_DEBUG_BERRY_LEN 12
+#else
+#  define BLENDER_DEBUG_BERRY_LEN 6
+#endif
+
 static void BlenderDebug_PrintBerryData(void)
 {
     u8 text[128];
@@ -3294,8 +3301,8 @@ static void BlenderDebug_PrintBerryData(void)
         else
         {
             CopyItemName(sBlenderDebug.berries[i] + 133, &text[0]);
-            text[6] = CHAR_SPACE;
-            text[7] = EOS;
+            text[BLENDER_DEBUG_BERRY_LEN] = CHAR_SPACE;
+            text[BLENDER_DEBUG_BERRY_LEN + 1] = EOS;
         }
         var = (i * 3) + 3;
         Menu_PrintText(text, 2, var);
@@ -3318,7 +3325,7 @@ static void BlenderDebug_PrintBerryData(void)
         ConvertIntToDecimalStringN(&text[15], gBerries[sBlenderDebug.berries[i]].smoothness, 2, 2);
 
         text[17] = EOS;
-        Menu_PrintText(text, 7, var);
+        Menu_PrintText(text, BLENDER_DEBUG_BERRY_LEN + 1, var);
     }
     if (sBlenderDebug.pokeblock.color != 0)
     {
@@ -3343,7 +3350,7 @@ static void BlenderDebug_PrintBerryData(void)
         ConvertIntToHexStringN(&text[15], sBlenderDebug.feel, 2, 2);
 
         text[17] = EOS;
-        Menu_PrintText(text, 7, 17);
+        Menu_PrintText(text, BLENDER_DEBUG_BERRY_LEN + 1, 17);
     }
 }
 

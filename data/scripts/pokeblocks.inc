@@ -1,34 +1,34 @@
 FallarborTown_ContestLobby_EventScript_1B7604:: @ 81B7604
-	setvar VAR_SPECIAL_8, 4
-	setvar VAR_SPECIAL_9, 1
-	applymovement VAR_SPECIAL_8, FallarborTown_ContestLobby_Movement_1B7821
+	setvar VAR_0x8008, 4
+	setvar VAR_0x8009, 1
+	applymovement VAR_0x8008, FallarborTown_ContestLobby_Movement_1B7821
 	waitmovement 0
 	goto FallarborTown_ContestLobby_EventScript_1B7681
 	end
 
 SlateportCity_ContestLobby_EventScript_1B761E:: @ 81B761E
-	setvar VAR_SPECIAL_8, 2
-	setvar VAR_SPECIAL_9, 2
+	setvar VAR_0x8008, 2
+	setvar VAR_0x8009, 2
 	applymovement 6, SlateportCity_ContestLobby_Movement_1A083D
-	applymovement VAR_SPECIAL_8, SlateportCity_ContestLobby_Movement_1B7821
+	applymovement VAR_0x8008, SlateportCity_ContestLobby_Movement_1B7821
 	waitmovement 0
 	goto SlateportCity_ContestLobby_EventScript_1B7681
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B763F:: @ 81B763F
-	setvar VAR_SPECIAL_8, 2
-	setvar VAR_SPECIAL_9, 1
-	applymovement VAR_SPECIAL_8, VerdanturfTown_ContestLobby_Movement_1B7821
+	setvar VAR_0x8008, 2
+	setvar VAR_0x8009, 1
+	applymovement VAR_0x8008, VerdanturfTown_ContestLobby_Movement_1B7821
 	waitmovement 0
 	goto VerdanturfTown_ContestLobby_EventScript_1B7681
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B7659:: @ 81B7659
-	setvar VAR_SPECIAL_8, 3
-	setvar VAR_SPECIAL_9, 3
+	setvar VAR_0x8008, 3
+	setvar VAR_0x8009, 3
 	applymovement 9, LilycoveCity_ContestLobby_Movement_1A083D
 	applymovement 10, LilycoveCity_ContestLobby_Movement_1A083D
-	applymovement VAR_SPECIAL_8, LilycoveCity_ContestLobby_Movement_1B7821
+	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_1B7821
 	waitmovement 0
 	goto LilycoveCity_ContestLobby_EventScript_1B7681
 	end
@@ -39,24 +39,24 @@ SlateportCity_ContestLobby_EventScript_1B7681:: @ 81B7681
 VerdanturfTown_ContestLobby_EventScript_1B7681:: @ 81B7681
 	lockall
 	msgbox FallarborTown_ContestLobby_Text_1B6E63, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B76A1
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B76E5
 	end
 
 FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7780
-	specialvar RESULT, PlayerHasBerries
-	compare RESULT, 0
+	specialvar VAR_RESULT, PlayerHasBerries
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
-	specialvar RESULT, GetFirstFreePokeblockSlot
-	compare RESULT, -1
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
+	compare VAR_RESULT, -1
 	goto_if_ne FallarborTown_ContestLobby_EventScript_1B76EF
-	compare RESULT, -1
+	compare VAR_RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7776
 	end
 
@@ -67,9 +67,9 @@ FallarborTown_ContestLobby_EventScript_1B76E5:: @ 81B76E5
 
 FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
 	msgbox FallarborTown_ContestLobby_Text_1B6ED0, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7734
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7726
 	end
 
@@ -91,7 +91,7 @@ FallarborTown_ContestLobby_EventScript_1B7734:: @ 81B7734
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7742:: @ 81B7742
-	copyvar VAR_SPECIAL_4, VAR_SPECIAL_9
+	copyvar VAR_0x8004, VAR_0x8009
 	fadescreen 1
 	special DoBerryBlending
 	waitstate
@@ -121,22 +121,22 @@ FallarborTown_ContestLobby_EventScript_1B7780:: @ 81B7780
 	end
 
 FallarborTown_ContestLobby_EventScript_1B778A:: @ 81B778A
-	setvar VAR_SPECIAL_8, 4
+	setvar VAR_0x8008, 4
 	goto FallarborTown_ContestLobby_EventScript_1B77B6
 	end
 
 SlateportCity_ContestLobby_EventScript_1B7795:: @ 81B7795
-	setvar VAR_SPECIAL_8, 2
+	setvar VAR_0x8008, 2
 	goto SlateportCity_ContestLobby_EventScript_1B77B6
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B77A0:: @ 81B77A0
-	setvar VAR_SPECIAL_8, 2
+	setvar VAR_0x8008, 2
 	goto VerdanturfTown_ContestLobby_EventScript_1B77B6
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B77AB:: @ 81B77AB
-	setvar VAR_SPECIAL_8, 3
+	setvar VAR_0x8008, 3
 	goto LilycoveCity_ContestLobby_EventScript_1B77B6
 	end
 
@@ -147,10 +147,10 @@ VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 	lock
 	faceplayer
 	msgbox FallarborTown_ContestLobby_Text_1B742F, 4
-	specialvar RESULT, PlayerHasBerries
-	compare RESULT, 1
+	specialvar VAR_RESULT, PlayerHasBerries
+	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77DC
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77E6
 	end
 
@@ -206,24 +206,24 @@ LilycoveCity_ContestLobby_EventScript_1B783B:: @ 81B783B
 SlateportCity_ContestLobby_EventScript_1B783B:: @ 81B783B
 VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	lockall
-	specialvar RESULT, PlayerHasBerries
-	compare RESULT, 0
+	specialvar VAR_RESULT, PlayerHasBerries
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7897
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
-	specialvar RESULT, GetFirstFreePokeblockSlot
-	compare RESULT, -1
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
+	compare VAR_RESULT, -1
 	goto_if_ne FallarborTown_ContestLobby_EventScript_1B7878
-	compare RESULT, -1
+	compare VAR_RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7938
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7878:: @ 81B7878
 	msgbox FallarborTown_ContestLobby_Text_1B727C, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B78A1
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	end
 
@@ -234,21 +234,21 @@ FallarborTown_ContestLobby_EventScript_1B7897:: @ 81B7897
 
 FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	message FallarborTown_ContestLobby_Text_1B7304
 	waitmessage
 	special sub_8083614
 	waitstate
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7980
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B794C
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7959
-	compare RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7966
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7973
 	end
 
@@ -268,7 +268,7 @@ FallarborTown_ContestLobby_EventScript_1B790F:: @ 81B790F
 	end
 
 FallarborTown_ContestLobby_EventScript_1B791D:: @ 81B791D
-	setvar VAR_SPECIAL_4, 0
+	setvar VAR_0x8004, 0
 	fadescreen 1
 	removeobject 240
 	removeobject 239
@@ -319,16 +319,16 @@ FallarborTown_ContestLobby_EventScript_1B7973:: @ 81B7973
 
 FallarborTown_ContestLobby_EventScript_1B7980:: @ 81B7980
 	fadescreen 1
-	specialvar RESULT, GetLinkPartnerNames
-	copyvar VAR_SPECIAL_8, RESULT
-	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
+	specialvar VAR_RESULT, GetLinkPartnerNames
+	copyvar VAR_0x8008, VAR_RESULT
+	copyvar VAR_0x8004, VAR_0x8008
 	special SpawnBerryBlenderLinkPlayerSprites
 	goto FallarborTown_ContestLobby_EventScript_1B799A
 	end
 
 FallarborTown_ContestLobby_EventScript_1B799A:: @ 81B799A
 	fadescreen 0
-	switch VAR_SPECIAL_8
+	switch VAR_0x8008
 	case 2, FallarborTown_ContestLobby_EventScript_1B78F3
 	case 3, FallarborTown_ContestLobby_EventScript_1B7901
 	case 4, FallarborTown_ContestLobby_EventScript_1B790F

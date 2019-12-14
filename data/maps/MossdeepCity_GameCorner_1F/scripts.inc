@@ -6,7 +6,7 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
 	special ValidateEReaderTrainer
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AC71
 	end
 
@@ -17,7 +17,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
 	special ValidateEReaderTrainer
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AC9E
 	compare VAR_GAME_CORNER_STATE, 0
 	call_if_ne MossdeepCity_GameCorner_1F_EventScript_15ACAF
@@ -94,28 +94,28 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	special SavePlayerParty
 	special BufferEReaderTrainerName
 	msgbox MossdeepCity_GameCorner_1F_Text_18E650, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	call MossdeepCity_GameCorner_1F_EventScript_15ADF5
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	msgbox MossdeepCity_GameCorner_1F_Text_18E741, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special LoadPlayerParty
 	call S_DoSaveDialog
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	erasebox 0, 0, 15, 10
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
 	msgbox MossdeepCity_GameCorner_1F_Text_18E777, 4
 	closemessage
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE04
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE16
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE28
 	warp MAP_MOSSDEEP_CITY_GAME_CORNER_B1F, 255, 3, 1
 	waitstate
@@ -136,19 +136,19 @@ MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE04:: @ 815AE04
-	applymovement LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
+	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE3A
 	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE16:: @ 815AE16
-	applymovement LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE49
+	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE49
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE3E
 	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE28:: @ 815AE28
-	applymovement LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
+	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE42
 	waitmovement 0
 	return

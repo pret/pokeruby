@@ -30,9 +30,9 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	drawcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158918
 	releaseall
 	end
@@ -42,8 +42,8 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	closemessage
 	special sub_80C4CEC
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	specialvar RESULT, GiveMonArtistRibbon
-	compare RESULT, 1
+	specialvar VAR_RESULT, GiveMonArtistRibbon
+	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_ContestLobby_EventScript_158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
@@ -55,7 +55,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 
 LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closemessage
@@ -86,8 +86,8 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	return
 
 LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
-	specialvar VAR_SPECIAL_4, sub_80C4D50
-	switch VAR_SPECIAL_4
+	specialvar VAR_0x8004, sub_80C4D50
+	switch VAR_0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_1589D6
 	case 2, LilycoveCity_ContestLobby_EventScript_1589DA
 	case 3, LilycoveCity_ContestLobby_EventScript_1589DE
@@ -116,7 +116,7 @@ LilycoveCity_ContestLobby_EventScript_1589E6:: @ 81589E6
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589EA:: @ 81589EA
-	switch CONTEST_CATEGORY
+	switch VAR_CONTEST_CATEGORY
 	case 0, LilycoveCity_ContestLobby_EventScript_158A27
 	case 1, LilycoveCity_ContestLobby_EventScript_158A2B
 	case 2, LilycoveCity_ContestLobby_EventScript_158A2F
@@ -203,9 +203,9 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	fadescreen 1
 	drawcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AE8
 	end
 
@@ -214,8 +214,8 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	closemessage
 	special sub_80C4CEC
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	specialvar RESULT, GiveMonArtistRibbon
-	compare RESULT, 1
+	specialvar VAR_RESULT, GiveMonArtistRibbon
+	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_ContestLobby_EventScript_158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
@@ -227,7 +227,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 
 LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closemessage
@@ -303,7 +303,7 @@ LilycoveCity_ContestLobby_Movement_158B7C:: @ 8158B7C
 LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	lockall
 	checkitem ITEM_CONTEST_PASS, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BBA
 	goto_if_set FLAG_TEMP_2, LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
@@ -325,18 +325,18 @@ LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
 
 LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	msgbox LilycoveCity_ContestLobby_Text_188521, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	call S_DoSaveDialog
 	erasebox 0, 0, 15, 9
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	setflag FLAG_TEMP_3
 	return
 
 LilycoveCity_ContestLobby_EventScript_158BF0:: @ 8158BF0
 	multichoice 0, 0, 2, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_158CEA
 	case 1, LilycoveCity_ContestLobby_EventScript_158C27
 	case 2, LilycoveCity_ContestLobby_EventScript_158C35
@@ -356,20 +356,20 @@ LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
 
 LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	msgbox LilycoveCity_ContestLobby_Text_188703, 4
-	setvar CONTEST_RANK, 0
+	setvar VAR_CONTEST_RANK, 0
 	choosecontestmon
-	compare VAR_SPECIAL_4, 255
+	compare VAR_0x8004, 255
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CEA
 	special ScrSpecial_CheckSelectedMonAndInitContest
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C96
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CC0
-	compare RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CC0
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CA4
-	compare RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CB2
 	end
 
@@ -389,11 +389,11 @@ LilycoveCity_ContestLobby_EventScript_158CB2:: @ 8158CB2
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
-	copyvar VAR_SPECIAL_8, VAR_SPECIAL_4
+	copyvar VAR_0x8008, VAR_0x8004
 	message LilycoveCity_ContestLobby_Text_1A67A3
 	waitmessage
 	yesnobox 20, 8
-	switch RESULT
+	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_158C42
 	case 1, LilycoveCity_ContestLobby_EventScript_158D24
 	end
@@ -403,29 +403,29 @@ LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 	message LilycoveCity_ContestLobby_Text_1886DC
 	waitmessage
 	multichoice 0, 0, 4, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 5, LilycoveCity_ContestLobby_EventScript_158C35
 	case 127, LilycoveCity_ContestLobby_EventScript_158C35
-	copyvar CONTEST_CATEGORY, RESULT
+	copyvar VAR_CONTEST_CATEGORY, VAR_RESULT
 	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	message LilycoveCity_ContestLobby_Text_1887C7
 	waitmessage
-	copyvar VAR_SPECIAL_4, RESULT
+	copyvar VAR_0x8004, VAR_RESULT
 	special sub_808363C
 	waitstate
-	compare RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158D90
-	compare RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DA1
-	compare RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DB2
 	messageautoscroll LilycoveCity_ContestLobby_Text_18872A
 	waitmessage
 	contestlinktransfer
-	switch VAR_SPECIAL_4
+	switch VAR_0x8004
 	case 0, LilycoveCity_ContestLobby_EventScript_158DD1
 	case 1, LilycoveCity_ContestLobby_EventScript_158D82
 	case 2, LilycoveCity_ContestLobby_EventScript_158DC3
@@ -467,11 +467,11 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	special ScrSpecial_GetContestPlayerMonIdx
-	addvar VAR_SPECIAL_4, 1
+	addvar VAR_0x8004, 1
 	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
-	addvar VAR_SPECIAL_4, -1
+	addvar VAR_0x8004, -1
 	goto LilycoveCity_ContestLobby_EventScript_158DEE
 	end
 
@@ -480,7 +480,7 @@ LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 1
 	special ScrSpecial_SetLinkContestTrainerGfxIdx
 	setvar VAR_CONTEST_LOCATION, 5
-	setvar CONTEST_RANK, 3
+	setvar VAR_CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_158F08
 	end
 
@@ -564,11 +564,11 @@ LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
 	end_movement
 
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
-	specialvar RESULT, sub_80C5044
-	compare RESULT, 1
+	specialvar VAR_RESULT, sub_80C5044
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158EE8
-	setvar VAR_SPECIAL_B, 8
-	setvar CONTEST_RANK, 3
+	setvar VAR_0x800B, 8
+	setvar VAR_CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call LilycoveCity_ContestLobby_EventScript_158F86
 	special SetContestTrainerGfxIds
@@ -582,14 +582,14 @@ LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
 	giveitem ITEM_CONTEST_PASS, 1
-	setvar VAR_SPECIAL_B, 8
-	setvar CONTEST_RANK, 3
+	setvar VAR_0x800B, 8
+	setvar VAR_CONTEST_RANK, 3
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	setflag FLAG_SYS_RIBBON_GET
 	end
 
 LilycoveCity_ContestLobby_EventScript_158F08:: @ 8158F08
-	switch CONTEST_CATEGORY
+	switch VAR_CONTEST_CATEGORY
 	case 0, LilycoveCity_ContestLobby_EventScript_158F45
 	case 1, LilycoveCity_ContestLobby_EventScript_158F52
 	case 2, LilycoveCity_ContestLobby_EventScript_158F5F

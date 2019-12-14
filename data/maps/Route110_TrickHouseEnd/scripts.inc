@@ -61,7 +61,7 @@ Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_RARE_CANDY
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -74,7 +74,7 @@ Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_TIMER_BALL
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -87,7 +87,7 @@ Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_HARD_STONE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -100,7 +100,7 @@ Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_SMOKE_BALL
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -113,7 +113,7 @@ Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_TM12_TAUNT
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -126,7 +126,7 @@ Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_MAGNET
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -139,7 +139,7 @@ Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_PP_MAX
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closemessage
@@ -150,13 +150,13 @@ Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	msgbox Route110_TrickHouseEnd_Text_19C5AF, 4
 	closemessage
-	compare FACING, 1
+	compare VAR_FACING, 1
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C74
-	compare FACING, 2
+	compare VAR_FACING, 2
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C7F
-	compare FACING, 3
+	compare VAR_FACING, 3
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C8A
-	compare FACING, 4
+	compare VAR_FACING, 4
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C95
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C602, 4
@@ -171,7 +171,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	.else
 	givedecoration_std DECOR_RED_TENT
 	.endc
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C61
 	msgbox Route110_TrickHouseEnd_Text_19C85C, 4
 	call Route110_TrickHouseEnd_EventScript_161C2E

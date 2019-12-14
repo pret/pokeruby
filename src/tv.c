@@ -635,7 +635,7 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1.gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
     if (gSaveBlock1.gabbyAndTyData.battleNum != 0xff)
         gSaveBlock1.gabbyAndTyData.battleNum ++;
-    gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
+    gSaveBlock1.gabbyAndTyData.valA_0 = gBattleResults.playerMonWasDamaged;
 
     if (gBattleResults.playerFaintCounter)
         gSaveBlock1.gabbyAndTyData.valA_1 = 1;
@@ -2074,7 +2074,7 @@ void ChangePokemonNickname(void)
 void ChangePokemonNickname_CB(void)
 {
     SetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, gStringVar2);
-    c2_exit_to_overworld_1_continue_scripts_restart_music();
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
 void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)

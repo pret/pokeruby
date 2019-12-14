@@ -7,7 +7,7 @@ PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105
 	end
 
 @ 8154109
-	setvar VAR_SPECIAL_B, 1
+	setvar VAR_0x800B, 1
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

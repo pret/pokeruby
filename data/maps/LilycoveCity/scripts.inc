@@ -64,9 +64,9 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_LILYCOVE, LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
-	addvar RESULT, ITEM_CHERI_BERRY
-	giveitem_std RESULT
-	compare RESULT, 0
+	addvar VAR_RESULT, ITEM_CHERI_BERRY
+	giveitem_std VAR_RESULT
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
 	msgbox LilycoveCity_Text_1C5B1D, 4
@@ -164,8 +164,8 @@ LilycoveCity_EventScript_14CC79:: @ 814CC79
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
 	lockall
-	specialvar VAR_SPECIAL_4, sub_80C4D50
-	switch VAR_SPECIAL_4
+	specialvar VAR_0x8004, sub_80C4D50
+	switch VAR_0x8004
 	case 0, LilycoveCity_EventScript_14CCA2
 	msgbox LilycoveCity_Text_168EA4, 4
 	releaseall
@@ -204,10 +204,10 @@ LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, 4
-	applymovement LAST_TALKED, LilycoveCity_Movement_1A0839
+	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A0839
 	waitmovement 0
 	msgbox LilycoveCity_Text_168675, 4
-	applymovement LAST_TALKED, LilycoveCity_Movement_1A083D
+	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A083D
 	waitmovement 0
 	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
@@ -238,9 +238,9 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 	lock
 	faceplayer
 	checkplayergender
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CD60
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_EventScript_14CDD3
 	end
 
@@ -248,7 +248,7 @@ LilycoveCity_EventScript_14CD60:: @ 814CD60
 	playbgm MUS_GIRL_SUP, TRUE
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CDB0
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CDB9
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
 	switch VAR_STARTER_MON
@@ -277,7 +277,7 @@ LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	playbgm MUS_BOY_SUP, TRUE
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CE23
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CE2C
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
 	switch VAR_STARTER_MON
@@ -334,11 +334,11 @@ LilycoveCity_EventScript_14CE96:: @ 814CE96
 
 LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	msgbox LilycoveCity_Text_167C6B, 4
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_14CEDE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LilycoveCity_EventScript_14CEEE
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_EventScript_14CEF7
 	clearflag FLAG_HIDE_MAY_UPSTAIRS
 	clearflag FLAG_HIDE_MAY_PICHU_DOLL
@@ -350,7 +350,7 @@ LilycoveCity_EventScript_14CEDE:: @ 814CEDE
 	return
 
 LilycoveCity_EventScript_14CEE8:: @ 814CEE8
-	setvar RESULT, 1
+	setvar VAR_RESULT, 1
 	return
 
 LilycoveCity_EventScript_14CEEE:: @ 814CEEE
@@ -368,11 +368,11 @@ LilycoveCity_EventScript_14CF09:: @ 814CF09
 
 LilycoveCity_EventScript_14CF12:: @ 814CF12
 	msgbox LilycoveCity_Text_168149, 4
-	setvar RESULT, 0
+	setvar VAR_RESULT, 0
 	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_14CEDE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	call_if_eq LilycoveCity_EventScript_14CF47
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_EventScript_14CF50
 	clearflag FLAG_HIDE_BRENDAN_UPSTAIRS
 	goto LilycoveCity_EventScript_14CF6B
@@ -393,13 +393,13 @@ LilycoveCity_EventScript_14CF62:: @ 814CF62
 
 LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	closemessage
-	applymovement LAST_TALKED, LilycoveCity_Movement_1A0845
+	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A0845
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
 	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	savebgm 0
 	fadedefaultbgm

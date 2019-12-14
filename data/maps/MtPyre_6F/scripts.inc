@@ -3,8 +3,8 @@ MtPyre_6F_MapScripts:: @ 815D447
 
 MtPyre_6F_EventScript_15D448:: @ 815D448
 	trainerbattle 0, TRAINER_VALERIE_1, 0, MtPyre_6F_Text_1969FE, MtPyre_6F_Text_196A30
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq MtPyre_6F_EventScript_15D46F
 	msgbox MtPyre_6F_Text_196A4C, 6
 	end

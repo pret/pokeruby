@@ -55,7 +55,7 @@ SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	compare VAR_TEMP_1, 0
 	goto_if_eq SafariZone_Southeast_EventScript_1600D1
 	msgbox SafariZone_Southeast_Text_1C3A56, MSGBOX_YESNO
-	compare RESULT, YES
+	compare VAR_RESULT, YES
 	goto_if_eq SafariZone_Southeast_EventScript_1600E0
 	msgbox SafariZone_Southeast_Text_1C3A9C, 4
 	release
@@ -70,7 +70,7 @@ SafariZone_Southeast_EventScript_1600D1:: @ 81600D1
 SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
 	msgbox SafariZone_Southeast_Text_1C3ACA, 4
 	closemessage
-	switch FACING
+	switch VAR_FACING
 	case 2, SafariZone_Southeast_EventScript_160105
 	case 4, SafariZone_Southeast_EventScript_16011F
 	end

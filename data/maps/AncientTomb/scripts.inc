@@ -9,7 +9,7 @@ AncientTomb_MapScript1_15EFCE:: @ 815EFCE
 	end
 
 AncientTomb_EventScript_15EFD8:: @ 815EFD8
-	removeobject LAST_TALKED
+	removeobject VAR_LAST_TALKED
 	return
 
 AncientTomb_MapScript1_15EFDC:: @ 815EFDC

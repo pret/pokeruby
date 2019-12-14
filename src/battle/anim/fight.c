@@ -12,7 +12,7 @@ extern u8 gBattlerAttacker;
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 extern u8 gBattlerSpriteIds[];
-extern u8 gBanksBySide[];
+extern u8 gBattlerPositions[];
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -516,7 +516,7 @@ void sub_80D90F4(struct Sprite *sprite)
     if (Random() & 1)
         y *= -1;
 
-    if ((gBanksBySide[bank] & 1) == 0)
+    if ((gBattlerPositions[bank] & 1) == 0)
         y += 0xFFF0;
 
     sprite->pos1.x += x;

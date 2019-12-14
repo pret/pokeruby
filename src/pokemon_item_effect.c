@@ -367,7 +367,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                     SetMonData(pkmn, MON_DATA_PP1 + r5, &data);
                                     if (gMain.inBattle
                                      && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                     && !(gDisableStructs[sp34].unk18_b & gBitTable[r5]))
+                                     && !(gDisableStructs[sp34].mimickedMoves & gBitTable[r5]))
                                         gBattleMons[sp34].pp[r5] = data;
                                     retVal = FALSE;
                                 }
@@ -392,7 +392,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
                                 if (gMain.inBattle
                                  && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                 && !(gDisableStructs[sp34].unk18_b & gBitTable[moveIndex]))
+                                 && !(gDisableStructs[sp34].mimickedMoves & gBitTable[moveIndex]))
                                     gBattleMons[sp34].pp[moveIndex] = data;
                                 retVal = FALSE;
                             }

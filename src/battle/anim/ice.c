@@ -14,7 +14,7 @@ extern s16 gBattleAnimArgs[];
 extern u8  gBattleAnimAttacker;
 extern u8  gBattleAnimTarget;
 extern u8  gAnimVisualTaskCount;
-extern u8  gBanksBySide[];
+extern u8  gBattlerPositions[];
 extern u8  gBattlerSpriteIds[];
 
 extern u16 gBattle_BG1_X;
@@ -1419,12 +1419,12 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
     if (GetBattlerSpriteCoord(gBattleAnimAttacker, 2) < GetBattlerSpriteCoord(gBattleAnimTarget, 2))
         sprite->data[7] = 0x8000;
 
-    if (!(gBanksBySide[gBattleAnimTarget] & 1))
+    if (!(gBattlerPositions[gBattleAnimTarget] & 1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
 
-        if ((sprite->data[7] & 0x8000) && !(gBanksBySide[gBattleAnimAttacker] & 1))
+        if ((sprite->data[7] & 0x8000) && !(gBattlerPositions[gBattleAnimAttacker] & 1))
             sprite->subpriority = gSprites[GetAnimBattlerSpriteId(1)].subpriority + 1;
 
         sprite->data[6] = 1; 
@@ -1490,7 +1490,7 @@ static void sub_80D8874(struct Sprite *sprite)
             sprite->data[3] = sprite->pos1.y;
             sprite->data[4] = sprite->pos1.y + 29;
             sprite->data[7]++;
-            if (gMain.inBattle && gBanksBySide[gBattleAnimTarget] & 1)
+            if (gMain.inBattle && gBattlerPositions[gBattleAnimTarget] & 1)
                 sprite->data[5] = 204;
             else
                 sprite->data[5] = value2;
@@ -1535,7 +1535,7 @@ static void sub_80D8874(struct Sprite *sprite)
             sprite->data[1] = sprite->pos1.x += sprite->pos2.x;
             sprite->data[3] = sprite->pos1.y += sprite->pos2.y;
             sprite->data[4] = sprite->pos1.y + 4;
-            if (gMain.inBattle && gBanksBySide[gBattleAnimTarget] & 1)
+            if (gMain.inBattle && gBattlerPositions[gBattleAnimTarget] & 1)
                 sprite->data[2] = 0x100;
             else
                 sprite->data[2] = -0x10;
@@ -1646,7 +1646,7 @@ NAKED static void sub_80D8874(struct Sprite *sprite)
                 "\tands r0, r1\n"
                 "\tcmp r0, 0\n"
                 "\tbeq _080D8938\n"
-                "\tldr r1, _080D8934 @ =gBanksBySide\n"
+                "\tldr r1, _080D8934 @ =gBattlerPositions\n"
                 "\tldrb r0, [r6]\n"
                 "\tadds r0, r1\n"
                 "\tldrb r1, [r0]\n"
@@ -1661,7 +1661,7 @@ NAKED static void sub_80D8874(struct Sprite *sprite)
                 "_080D8928: .4byte gBattleAnimTarget\n"
                 "_080D892C: .4byte gMain\n"
                 "_080D8930: .4byte 0x0000043d\n"
-                "_080D8934: .4byte gBanksBySide\n"
+                "_080D8934: .4byte gBattlerPositions\n"
                 "_080D8938:\n"
                 "\tstrh r5, [r4, 0x38]\n"
                 "_080D893A:\n"
@@ -1806,7 +1806,7 @@ NAKED static void sub_80D8874(struct Sprite *sprite)
                 "\tands r0, r1\n"
                 "\tcmp r0, 0\n"
                 "\tbeq _080D8A78\n"
-                "\tldr r1, _080D8A70 @ =gBanksBySide\n"
+                "\tldr r1, _080D8A70 @ =gBattlerPositions\n"
                 "\tldr r0, _080D8A74 @ =gBattleAnimTarget\n"
                 "\tldrb r0, [r0]\n"
                 "\tadds r0, r1\n"
@@ -1821,7 +1821,7 @@ NAKED static void sub_80D8874(struct Sprite *sprite)
                 "\t.align 2, 0\n"
                 "_080D8A68: .4byte gMain\n"
                 "_080D8A6C: .4byte 0x0000043d\n"
-                "_080D8A70: .4byte gBanksBySide\n"
+                "_080D8A70: .4byte gBattlerPositions\n"
                 "_080D8A74: .4byte gBattleAnimTarget\n"
                 "_080D8A78:\n"
                 "\tldr r0, _080D8A90 @ =0x0000fff0\n"

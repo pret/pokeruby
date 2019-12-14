@@ -77,12 +77,12 @@ BattleScript_TryNicknameCaughtMon: @ 81D9EE3
 
 BattleScript_GiveCaughtMonEnd: @ 81D9EF8
 	givecaughtmon
-	setbyte gBattleOutcome, BATTLE_CAUGHT
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
 BattleScript_WallyBallThrow:: @ 81D9F00
 	printstring BATTLE_TEXT_BallCaught2
-	setbyte gBattleOutcome, BATTLE_CAUGHT
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
 BattleScript_ShakeBallThrow:: @ 81D9F0A
@@ -92,7 +92,7 @@ BattleScript_ShakeBallThrow:: @ 81D9F0A
 	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0, BattleScript_ShakeBallThrowEnd
 	printstring BATTLE_TEXT_SafariOver
 	waitmessage 64
-	setbyte gBattleOutcome, BATTLE_OUT_OF_BALLS
+	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
 
 BattleScript_ShakeBallThrowEnd: @ 81D9F34
 	finishaction
@@ -165,7 +165,7 @@ BattleScript_OpponentUsesGuardSpecs: @ 81D9FBB
 
 BattleScript_RunByUsingItem: @ 81D9FDA
 	playse SE_NIGERU
-	setbyte gBattleOutcome, BATTLE_RAN
+	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 
 BattleScript_ActionWatchesCarefully: @ 81D9FE4

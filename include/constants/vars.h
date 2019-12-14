@@ -172,25 +172,26 @@
 #define VAR_STEVENS_HOUSE_STATE           0x40C6
 #define VAR_OLDALE_STATE                  0x40C7
 
+#define SPECIAL_VARS_START 0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
-#define VAR_SPECIAL_0     0x8000
-#define VAR_SPECIAL_1     0x8001
-#define VAR_SPECIAL_2     0x8002
-#define VAR_SPECIAL_3     0x8003
-#define VAR_SPECIAL_4     0x8004
-#define VAR_SPECIAL_5     0x8005
-#define VAR_SPECIAL_6     0x8006
-#define VAR_SPECIAL_7     0x8007
-#define VAR_SPECIAL_8     0x8008
-#define VAR_SPECIAL_9     0x8009
-#define VAR_SPECIAL_A     0x800A
-#define VAR_SPECIAL_B     0x800B
-#define FACING           0x800C
-#define RESULT           0x800D
-#define ITEM_ID          0x800E
-#define LAST_TALKED      0x800F
-#define CONTEST_RANK     0x8010
-#define CONTEST_CATEGORY 0x8011
+#define VAR_0x8000                    0x8000
+#define VAR_0x8001                    0x8001
+#define VAR_0x8002                    0x8002
+#define VAR_0x8003                    0x8003
+#define VAR_0x8004                    0x8004
+#define VAR_0x8005                    0x8005
+#define VAR_0x8006                    0x8006
+#define VAR_0x8007                    0x8007
+#define VAR_0x8008                    0x8008
+#define VAR_0x8009                    0x8009
+#define VAR_0x800A                    0x800A
+#define VAR_0x800B                    0x800B
+#define VAR_FACING                    0x800C
+#define VAR_RESULT                    0x800D
+#define VAR_ITEM_ID                   0x800E
+#define VAR_LAST_TALKED               0x800F
+#define VAR_CONTEST_RANK              0x8010
+#define VAR_CONTEST_CATEGORY          0x8011
 
 #endif // GUARD_CONSTANTS_VARS_H

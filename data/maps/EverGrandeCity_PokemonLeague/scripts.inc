@@ -14,7 +14,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BA8B:: @ 815BA8B
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
-	setvar VAR_SPECIAL_B, 1
+	setvar VAR_0x800B, 1
 	call EverGrandeCity_PokemonLeague_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress
@@ -89,11 +89,11 @@ EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB57:: @ 815BB57
-	applymovement LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
+	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
 	waitmovement 0
 	msgbox EverGrandeCity_PokemonLeague_Text_191804, 4
 	closemessage
-	applymovement LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
+	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
 	waitmovement 0
 	releaseall
 	end

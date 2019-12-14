@@ -18,17 +18,17 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	showmoneybox 0, 0
 	nop
 	msgbox MtChimney_Text_195760, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D00B
 	checkmoney 0xc8, 0
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D018
 	msgbox MtChimney_Text_1957A9, 4
 	checkitemspace ITEM_LAVA_COOKIE, 1
-	compare RESULT, 1
+	compare VAR_RESULT, 1
 	call_if_eq MtChimney_EventScript_15D000
 	giveitem_std ITEM_LAVA_COOKIE
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_15CFF3
 	hidemoneybox 0, 0
 	release
@@ -409,7 +409,7 @@ MtChimney_EventScript_15D17D:: @ 815D17D
 	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MtChimney_EventScript_15D1D0
 	goto_if_set FLAG_RECEIVED_METEORITE, MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem_std ITEM_METEORITE
@@ -438,8 +438,8 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 
 MtChimney_EventScript_15D1E3:: @ 815D1E3
 	trainerbattle 0, TRAINER_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
-	specialvar RESULT, ShouldTryRematchBattle
-	compare RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_if_eq MtChimney_EventScript_15D20A
 	msgbox MtChimney_Text_195A04, 6
 	end

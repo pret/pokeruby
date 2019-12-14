@@ -214,7 +214,7 @@ void sub_80C4D80(void)
 
 void ShowContestWinnerCleanup(void)
 {
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void ShowContestWinner(void)
@@ -521,7 +521,7 @@ void sub_80C5580(void)
         break;
     }
 
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void ChooseBattleTowerPlayerParty(void)
@@ -546,7 +546,7 @@ void SetBattleTowerPlayerParty(void)
         break;
     }
 
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void ReducePlayerPartyToThree(void)

@@ -13,7 +13,7 @@ BattleTower_Outside_EventScript_160168:: @ 8160168
 	faceplayer
 	msgbox BattleTower_Outside_Text_199D06, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq BattleTower_Outside_EventScript_1601C6
 	message BattleTower_Outside_Text_199D9D
 	waitmessage
@@ -22,7 +22,7 @@ BattleTower_Outside_EventScript_160168:: @ 8160168
 
 BattleTower_Outside_EventScript_16018E:: @ 816018E
 	multichoicedefault 21, 6, 53, 2, 0
-	switch RESULT
+	switch VAR_RESULT
 	case 0, BattleTower_Outside_EventScript_1601D0
 	case 1, BattleTower_Outside_EventScript_1601FB
 	case 2, BattleTower_Outside_EventScript_160250
@@ -36,7 +36,7 @@ BattleTower_Outside_EventScript_1601C6:: @ 81601C6
 
 BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 	msgbox BattleTower_Outside_Text_199DF2, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
@@ -47,7 +47,7 @@ BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 
 BattleTower_Outside_EventScript_1601FB:: @ 81601FB
 	msgbox BattleTower_Outside_Text_199E0E, MSGBOX_YESNO
-	compare RESULT, NO
+	compare VAR_RESULT, NO
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
@@ -64,11 +64,11 @@ BattleTower_Outside_EventScript_160226:: @ 8160226
 
 BattleTower_Outside_EventScript_160232:: @ 8160232
 	closemessage
-	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
+	applymovement VAR_LAST_TALKED, BattleTower_Outside_Movement_1A0845
 	waitmovement 0
 	delay 30
 	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
-	setvar VAR_SPECIAL_4, 4
+	setvar VAR_0x8004, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return
 
