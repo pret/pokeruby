@@ -16,4 +16,8 @@ void sub_8052E4C(void);
 void NewGameInitData(void);
 void debug_sub_8057508(bool32 arg0);
 
+#if DEBUG
+void debug_sub_8052E04();
+#endif
+
 #endif // GUARD_NEW_GAME_H

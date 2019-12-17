@@ -19,6 +19,7 @@
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
+#include "new_game.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/songs.h"
 
