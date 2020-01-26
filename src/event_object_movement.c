@@ -1761,11 +1761,11 @@ static void get_berry_tree_graphics(struct ObjectEvent *objectEvent, struct Spri
 
 const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u8 graphicsId)
 {
-    if (graphicsId > SPRITE_VAR)
+    if (graphicsId >= OBJ_EVENT_GFX_VARS)
     {
         graphicsId = VarGetObjectEventGraphicsId(graphicsId + 16);
     }
-    if (graphicsId > NUM_OBJECT_GRAPHICS_INFO)
+    if (graphicsId >= NUM_OBJ_EVENT_GFX)
     {
         graphicsId = OBJ_EVENT_GFX_LITTLE_BOY_1;
     }
@@ -1774,7 +1774,7 @@ const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u8 graphicsId)
 
 static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *objectEvent)
 {
-    if (objectEvent->graphicsId > SPRITE_VAR)
+    if (objectEvent->graphicsId >= OBJ_EVENT_GFX_VARS)
     {
         objectEvent->graphicsId = VarGetObjectEventGraphicsId(objectEvent->graphicsId + 16);
     }
