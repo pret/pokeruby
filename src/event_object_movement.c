@@ -103,8 +103,8 @@ void (*const gCameraObjectFuncs[])(struct Sprite *) = {
     CameraObject_2,
 };
 
-#include "data/object_event/event_object_graphics.h"
-#include "data/object_event/field_effect_object_graphics.h"
+#include "data/object_events/object_event_graphics.h"
+#include "data/field_effects/field_effect_object_graphics.h"
 
 // movement type callbacks
 static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
@@ -378,13 +378,13 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
-#include "data/object_event/event_object_graphics_info_pointers.h"
-#include "data/object_event/field_effect_object_template_pointers.h"
-#include "data/object_event/event_object_pic_tables.h"
-#include "data/object_event/event_object_anims.h"
-#include "data/object_event/base_oam.h"
-#include "data/object_event/event_object_subsprites.h"
-#include "data/object_event/event_object_graphics_info.h"
+#include "data/object_events/object_event_graphics_info_pointers.h"
+#include "data/field_effects/field_effect_object_template_pointers.h"
+#include "data/object_events/object_event_pic_tables.h"
+#include "data/object_events/object_event_anims.h"
+#include "data/object_events/base_oam.h"
+#include "data/object_events/object_event_subsprites.h"
+#include "data/object_events/object_event_graphics_info.h"
 
 const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPalette0,  OBJ_EVENT_PAL_TAG_0},
@@ -591,14 +591,14 @@ const u16 *const gObjectPaletteTagSets[] = {
     gObjectPaletteTags3,
 };
 
-#include "data/object_event/berry_tree_graphics_tables.h"
-#include "data/object_event/field_effect_objects.h"
+#include "data/object_events/berry_tree_graphics_tables.h"
+#include "data/field_effects/field_effect_objects.h"
 
 const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
 const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
 const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
 
-#include "data/object_event/movement_type_func_tables.h"
+#include "data/object_events/movement_type_func_tables.h"
 
 const u8 gFaceDirectionAnimNums[] = {
     0, // DIR_NONE
@@ -1019,7 +1019,7 @@ const u8 gUnknown_08375767[][4] = {
     {3, 4, 2, 1}
 };
 
-#include "data/object_event/movement_action_func_tables.h"
+#include "data/object_events/movement_action_func_tables.h"
 
 // There is code supporing multiple sets of player reflection palettes, but
 // the data for each is identical. Perhaps non-water/ice reflections were planned.
