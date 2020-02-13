@@ -201,7 +201,7 @@ Route120_EventScript_1AE582:: @ 81AE582
 
 Route111_EventScript_1AE5A2:: @ 81AE5A2
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToEventObjectLocalIds
+	special GabbyAndTySetScriptVarsToObjectEventLocalIds
 	compare VAR_FACING, 2
 	call_if_eq Route111_EventScript_1AE5E0
 	compare VAR_FACING, 1
@@ -234,7 +234,7 @@ Route111_EventScript_1AE60F:: @ 81AE60F
 Route118_EventScript_1AE60F:: @ 81AE60F
 Route120_EventScript_1AE60F:: @ 81AE60F
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToEventObjectLocalIds
+	special GabbyAndTySetScriptVarsToObjectEventLocalIds
 	compare VAR_FACING, 2
 	call_if_eq Route111_EventScript_1AE5E0
 	compare VAR_FACING, 1

@@ -24,7 +24,7 @@
 #include "trainer_see.h"
 #include "constants/vars.h"
 #include "wild_encounter.h"
-#include "constants/bg_event_constants.h"
+#include "constants/event_bg.h"
 #include "constants/map_types.h"
 
 struct Coords32
@@ -35,7 +35,7 @@ struct Coords32
 
 extern u16 gSpecialVar_LastTalked;
 extern u16 gSpecialVar_Facing;
-extern struct LinkPlayerEventObject gLinkPlayerEventObjects[];
+extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_020297ED;
@@ -43,7 +43,7 @@ extern u8 gUnknown_020297ED;
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
 
-u8 gSelectedEventObject;
+u8 gSelectedObjectEvent;
 
 //scripts
 extern u8 gUnknown_081A2C51[];
@@ -89,7 +89,7 @@ static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u16 GetPlayerCurMetatileBehavior(int);
 static bool8 TryStartInteractionScript(struct MapPosition*, u16, u8);
 static const u8 *GetInteractionScript(struct MapPosition*, u8, u8);
-static const u8 *GetInteractedEventObjectScript(struct MapPosition *, u8, u8);
+static const u8 *GetInteractedObjectEventScript(struct MapPosition *, u8, u8);
 static u8 *GetInteractedBackgroundEventScript(struct MapPosition *, u8, u8);
 static u8 *GetInteractedMetatileScript(struct MapPosition *, u8, u8);
 static u8 *GetInteractedWaterScript(struct MapPosition *, u8, u8);
@@ -331,7 +331,7 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
 
 static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    const u8 *script = GetInteractedEventObjectScript(position, metatileBehavior, direction);
+    const u8 *script = GetInteractedObjectEventScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
 
@@ -352,50 +352,50 @@ static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileB
 
 const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    u8 eventObjectId;
+    u8 objectEventId;
     s32 i;
 
     if (!MetatileBehavior_IsCounter(MapGridGetMetatileBehaviorAt(position->x, position->y)))
-        eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
+        objectEventId = GetObjectEventIdByXYZ(position->x, position->y, position->height);
     else
-        eventObjectId = GetEventObjectIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
+        objectEventId = GetObjectEventIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
 
-    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
+    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
         return NULL;
 
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayerEventObjects[i].active == TRUE && gLinkPlayerEventObjects[i].eventObjId == eventObjectId)
+        if (gLinkPlayerObjectEvents[i].active == TRUE && gLinkPlayerObjectEvents[i].objEventId == objectEventId)
             return NULL;
     }
 
-    gSelectedEventObject = eventObjectId;
-    gSpecialVar_LastTalked = gEventObjects[eventObjectId].localId;
+    gSelectedObjectEvent = objectEventId;
+    gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
     gSpecialVar_Facing = direction;
-    return GetEventObjectScriptPointerByEventObjectId(eventObjectId);
+    return GetObjectEventScriptPointerByObjectEventId(objectEventId);
 }
 
-static const u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
+static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    u8 eventObjectId;
+    u8 objectEventId;
     const u8 *script;
 
-    eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
-    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
+    objectEventId = GetObjectEventIdByXYZ(position->x, position->y, position->height);
+    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
             return NULL;
 
-        // Look for an event object on the other side of the counter.
-        eventObjectId = GetEventObjectIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
-        if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
+        // Look for an object event on the other side of the counter.
+        objectEventId = GetObjectEventIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
+        if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
             return NULL;
     }
 
-    gSelectedEventObject = eventObjectId;
-    gSpecialVar_LastTalked = gEventObjects[eventObjectId].localId;
+    gSelectedObjectEvent = objectEventId;
+    gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
     gSpecialVar_Facing = direction;
-    script = GetEventObjectScriptPointerByEventObjectId(eventObjectId);
+    script = GetObjectEventScriptPointerByObjectEventId(objectEventId);
     script = GetRamScript(gSpecialVar_LastTalked, script);
     return script;
 }
@@ -935,14 +935,14 @@ u8 TrySetDiveWarp(void)
     return 0;
 }
 
-const u8 *GetEventObjectScriptPointerPlayerFacing(void)
+const u8 *GetObjectEventScriptPointerPlayerFacing(void)
 {
     u8 direction;
     struct MapPosition position;
 
     direction = GetPlayerMovementDirection();
     GetInFrontOfPlayerPosition(&position);
-    return GetInteractedEventObjectScript(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), direction);
+    return GetInteractedObjectEventScript(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), direction);
 }
 
 int SetCableClubWarp(void)

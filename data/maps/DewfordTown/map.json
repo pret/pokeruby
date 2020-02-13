@@ -23,7 +23,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 7,
       "y": 12,
       "elevation": 3,
@@ -36,7 +36,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -49,7 +49,7 @@
       "flag": "FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 12,
       "y": 14,
       "elevation": 3,
@@ -62,7 +62,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MR_BRINEYS_BOAT",
+      "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
       "x": 12,
       "y": 8,
       "elevation": 1,
@@ -75,7 +75,7 @@
       "flag": "FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 1,
       "y": 6,
       "elevation": 3,

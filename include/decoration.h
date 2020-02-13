@@ -184,7 +184,7 @@ bool8 sub_80FEFA4(void);
 void sub_80FF394(u16, u16, u16);
 void sub_80FF6AC(u8);
 void sub_80FF960(u8);
-void AddDecorationIconObjectFromEventObject(struct UnkStruct_02038900 *, u8);
+void AddDecorationIconObjectFromObjectEvent(struct UnkStruct_02038900 *, u8);
 void SetUpPlacingDecorationPlayerAvatar(u8, struct UnkStruct_02038900 *);
 void sub_8100038(u8);
 void sub_81000A0(u8);

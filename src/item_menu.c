@@ -41,7 +41,7 @@
 #include "shop.h"
 #include "field_weather.h"
 #include "pokemon_storage_system.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 
 struct UnknownStruct2
 {
@@ -2506,7 +2506,7 @@ void CleanUpOverworldMessage(u8 taskId)
 {
     Menu_EraseWindowRect(0, 13, 29, 19);
     DestroyTask(taskId);
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 
@@ -3129,7 +3129,7 @@ bool32 UseRegisteredKeyItem(void)
             u8 taskId;
 
             ScriptContext2_Enable();
-            FreezeEventObjects();
+            FreezeObjectEvents();
             sub_80594C0();
             sub_80597F4();
             gSpecialVar_ItemId = gSaveBlock1.registeredItem;

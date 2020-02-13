@@ -29,7 +29,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "constants/bg_event_constants.h"
+#include "constants/event_bg.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
@@ -387,7 +387,7 @@ bool8 sub_80BBB24(void)
 
 void sub_80BBB50(u8 taskid)
 {
-    EventObjectTurn(&(gEventObjects[gPlayerAvatar.eventObjectId]), 2);
+    ObjectEventTurn(&(gObjectEvents[gPlayerAvatar.objectEventId]), 2);
     if (IsWeatherNotFadingIn() == 1)
     {
         EnableBothScriptContexts();
@@ -500,25 +500,25 @@ void sub_80BBDD0(void)
             permission = gDecorations[roomdecor[decidx]].permission;
             if (permission == DECORPERM_SOLID_MAT)
             {
-                for (objid = 0; objid < gMapHeader.events->eventObjectCount; objid++)
+                for (objid = 0; objid < gMapHeader.events->objectEventCount; objid++)
                 {
-                    if (gMapHeader.events->eventObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                    if (gMapHeader.events->objectEvents[objid].flagId == gSpecialVar_0x8004 + 0xAE)
                         break;
                 }
-                if (objid != gMapHeader.events->eventObjectCount)
+                if (objid != gMapHeader.events->objectEventCount)
                 {
                     gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
                     gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
                     metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                     if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatile) == TRUE || MetatileBehavior_IsLargeMatCenter(metatile) == TRUE)
                     {
-                        gSpecialVar_Result = gMapHeader.events->eventObjects[objid].graphicsId + VAR_0x3F20;
+                        gSpecialVar_Result = gMapHeader.events->objectEvents[objid].graphicsId + VAR_0x3F20;
                         VarSet(gSpecialVar_Result, gDecorations[roomdecor[decidx]].tiles[0]);
-                        gSpecialVar_Result = gMapHeader.events->eventObjects[objid].localId;
+                        gSpecialVar_Result = gMapHeader.events->objectEvents[objid].localId;
                         FlagClear(gSpecialVar_0x8004 + 0xAE);
                         show_sprite(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
                         sub_805C0F8(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                        TryOverrideTemplateCoordsForEventObject(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+                        TryOverrideTemplateCoordsForObjectEvent(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
                         gSpecialVar_0x8004 ++;
                     }
                 }

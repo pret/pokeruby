@@ -5,7 +5,7 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "main.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "menu.h"
 #include "rom6.h"
 #include "script.h"
@@ -186,7 +186,7 @@ void Task_BrailleWait(u8 taskId)
                 data[0] = 4;
             break;
         }
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         DestroyTask(taskId);
         ScriptContext2_Disable();
         break;
@@ -196,7 +196,7 @@ void Task_BrailleWait(u8 taskId)
             data[0] = 4;
         break;
     case 4:
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         ScriptContext1_SetupScript(S_OpenRegiceChamber);
         DestroyTask(taskId);
         break;

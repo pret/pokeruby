@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 19,
       "y": 10,
       "elevation": 3,
@@ -25,7 +25,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 19,
       "y": 11,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 26,
       "y": 17,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "FLAG_HIDE_EVIL_TEAM_PETALBURG_WOODS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 26,
       "y": 20,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "FLAG_HIDE_DEVON_PETALBURG_WOODS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 45,
       "y": 7,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "FLAG_ITEM_PETALBURG_WOODS_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 35,
       "y": 20,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "FLAG_ITEM_PETALBURG_WOODS_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 8,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "FLAG_ITEM_PETALBURG_WOODS_3"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_2",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 15,
       "y": 19,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 7,
       "y": 32,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 4,
       "y": 14,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_3",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_3",
       "x": 30,
       "y": 34,
       "elevation": 3,
@@ -155,7 +155,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 26,
       "elevation": 3,
@@ -168,7 +168,7 @@
       "flag": "FLAG_ITEM_PETALBURG_WOODS_4"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 33,
       "y": 5,
       "elevation": 3,

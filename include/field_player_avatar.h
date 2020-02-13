@@ -14,7 +14,7 @@ enum {
 
 // MovementType_None2
 void player_step(u8 a, u16 b, u16 c);
-u8 CheckForEventObjectCollision(struct EventObject *a, s16 b, s16 c, u8 d, u8 e);
+u8 CheckForObjectEventCollision(struct ObjectEvent *a, s16 b, s16 c, u8 d, u8 e);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void sub_8059204(void);
 u8 PlayerGetCopyableMovement(void);

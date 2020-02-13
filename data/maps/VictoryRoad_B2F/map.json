@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 15,
       "y": 6,
       "elevation": 3,
@@ -25,7 +25,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 43,
       "y": 14,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_7",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_7",
       "x": 2,
       "y": 17,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_7",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_7",
       "x": 35,
       "y": 22,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 13,
       "y": 8,
       "elevation": 3,

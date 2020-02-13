@@ -11,7 +11,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/map_types.h"
@@ -36,18 +36,18 @@ static void sub_810B634(void);
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
 {
-    u8 eventObjId;
+    u8 objEventId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     gPlayerFacingPosition.height = PlayerGetZCoord();
-    eventObjId = GetEventObjectIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
-    if (gEventObjects[eventObjId].graphicsId != graphicsId)
+    objEventId = GetObjectEventIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
+    if (gObjectEvents[objEventId].graphicsId != graphicsId)
     {
         return FALSE;
     }
     else
     {
-        gSpecialVar_LastTalked = gEventObjects[eventObjId].localId;
+        gSpecialVar_LastTalked = gObjectEvents[objEventId].localId;
         return TRUE;
     }
 }
@@ -60,13 +60,13 @@ u8 oei_task_add(void)
 
 static void task08_080C9820(u8 taskId)
 {
-    u8 eventObjId;
+    u8 objEventId;
 
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
-    eventObjId = gPlayerAvatar.eventObjectId;
-    if (!EventObjectIsMovementOverridden(&gEventObjects[eventObjId])
-     || EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
+    objEventId = gPlayerAvatar.objectEventId;
+    if (!ObjectEventIsMovementOverridden(&gObjectEvents[objEventId])
+     || ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]))
     {
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
@@ -76,7 +76,7 @@ static void task08_080C9820(u8 taskId)
         else
         {
             sub_8059BF4();
-            EventObjectSetHeldMovement(&gEventObjects[eventObjId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+            ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
             gTasks[taskId].func = sub_810B3DC;
         }
     }
@@ -84,7 +84,7 @@ static void task08_080C9820(u8 taskId)
 
 static void sub_810B3DC(u8 taskId)
 {
-    if (EventObjectCheckHeldMovementStatus(&gEventObjects[gPlayerAvatar.eventObjectId]) == TRUE)
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]) == TRUE)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_810B428;
@@ -104,7 +104,7 @@ static void sub_810B428(u8 taskId)
             gFieldEffectArguments[2] = 2;
         if (gFieldEffectArguments[1] == 4)
             gFieldEffectArguments[2] = 3;
-        EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
+        ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByCurrentState());
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_810B4CC;
@@ -123,7 +123,7 @@ static void sub_810B4CC(u8 taskId)
 #if DEBUG
 void debug_sub_8120968(void)
 {
-    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         sub_810B53C();
@@ -137,7 +137,7 @@ void debug_sub_8120968(void)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_810B53C;

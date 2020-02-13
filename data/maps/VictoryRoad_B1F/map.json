@@ -12,7 +12,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 20,
       "y": 5,
       "elevation": 3,
@@ -25,7 +25,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 21,
       "y": 4,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 4,
       "y": 7,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 9,
       "y": 10,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 20,
       "y": 26,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 21,
       "y": 25,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 35,
       "y": 6,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "FLAG_TEMP_1E"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 19,
       "y": 5,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 20,
       "y": 4,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "FLAG_TEMP_1A"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 18,
       "y": 12,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "FLAG_TEMP_1B"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 20,
       "y": 25,
       "elevation": 3,
@@ -155,7 +155,7 @@
       "flag": "FLAG_TEMP_1C"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 21,
       "y": 26,
       "elevation": 3,
@@ -168,7 +168,7 @@
       "flag": "FLAG_TEMP_1D"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 34,
       "y": 4,
       "elevation": 3,
@@ -181,7 +181,7 @@
       "flag": "FLAG_TEMP_1F"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 37,
       "y": 12,
       "elevation": 3,
@@ -194,7 +194,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_7",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_7",
       "x": 26,
       "y": 16,
       "elevation": 3,
@@ -207,7 +207,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_7",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_7",
       "x": 5,
       "y": 21,
       "elevation": 3,
@@ -220,7 +220,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 34,
       "y": 3,
       "elevation": 3,
@@ -233,7 +233,7 @@
       "flag": "FLAG_VICTORY_ROAD_ROCK"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 42,
       "y": 8,
       "elevation": 4,
@@ -246,7 +246,7 @@
       "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 3,
       "elevation": 3,

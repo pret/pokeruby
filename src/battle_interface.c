@@ -461,308 +461,77 @@ static int do_nothing(s16 unused1, s16 unused2, int unused3)
     return 9;
 }
 
-#ifdef NONMATCHING
-void sub_8043740(s16 a, u16 *b, u8 c)
+void sub_8043740(s16 number, u16 *dest, bool8 unk)
 {
-    u8 sp0[4];
-    s8 i;
-    s8 j;
-    s32 r9;
+    s8 i, j;
+    u8 buff[4];
 
     for (i = 0; i < 4; i++)
-        sp0[i] = 0;
-
-    //_0804377C
-    //i = 3;
-    //r9 = -1;
-    for (i = 3, r9 = -1;;)
     {
-        if (a > 0)
+        buff[i] = 0;
+    }
+
+    for (i = 3; ; i--)
+    {
+        if (number > 0)
         {
-            sp0[i] = a % 10;
-            a /= 10;
-            i--;
+            buff[i] = number % 10;
+            number /= 10;
         }
         else
+        {
+            for (; i > -1; i--)
+            {
+                buff[i] = 0xFF;
+            }
+            if (buff[3] == 0xFF)
+                buff[3] = 0;
             break;
-        asm(""::"r"(r9));
+        }
     }
 
-    //_080437AA
-    for (; i > r9; i--)
-    {
-        //asm("":"=r"(r9));
-        sp0[i] = -1;
-    }
-    //_080437CE
-    if (sp0[3] == 0xFF)
-        sp0[3] = 0;
-
-    //_080437DA
-    if (c == 0)
+    if (!unk)
     {
         for (i = 0, j = 0; i < 4; i++)
         {
-            if (sp0[j] == 0xFF)
+            if (buff[j] == 0xFF)
             {
-                b[j] = (b[j] & 0xFC00) | 0x1E;
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | 0x1E;
+                dest[j + 0x00] &= 0xFC00;
+                dest[j + 0x00] |= 0x1E;
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x1E;
             }
             else
             {
-                b[j] = (b[j] & 0xFC00) | (sp0[j] + 0x14);
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | (sp0[i] + 0x34);
+                dest[j + 0x00] &= 0xFC00;
+                dest[j + 0x00] |= 0x14 + buff[j];
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x34 + buff[i];
             }
             j++;
         }
-
     }
-    //_0804386A
     else
     {
         for (i = 0; i < 4; i++)
         {
-            if (sp0[i] == 0xFF)
+            if (buff[i] == 0xFF)
             {
-                b[i] = (b[i] & 0xFC00) | 0x1E;
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | 0x1E;
+                dest[i + 0x00] &= 0xFC00;
+                dest[i + 0x00] |= 0x1E;
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x1E;
             }
             else
             {
-                b[i] = (b[i] & 0xFC00) | (sp0[i] + 0x14);
-                b[i + 0x20] = (b[i + 0x20] & 0xFC00) | (sp0[i] + 0x34);
+                dest[i + 0x00] &= 0xFC00;
+                dest[i + 0x00] |= 0x14 + buff[i];
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x34 + buff[i];
             }
         }
     }
-    asm(""::"r"(r9));
 }
-#else
-NAKED
-void sub_8043740(s16 a, u16 *b, u8 c)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    adds r7, r1, 0\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    mov r10, r2\n\
-    movs r3, 0\n\
-    movs r2, 0\n\
-_0804375C:\n\
-    lsls r0, r3, 24\n\
-    asrs r0, 24\n\
-    mov r3, sp\n\
-    adds r1, r3, r0\n\
-    strb r2, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _0804375C\n\
-    movs r3, 0x3\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    mov r9, r0\n\
-    mov r8, sp\n\
-_0804377C:\n\
-    lsls r0, r5, 16\n\
-    asrs r6, r0, 16\n\
-    cmp r6, 0\n\
-    ble _080437AA\n\
-    lsls r4, r3, 24\n\
-    asrs r4, 24\n\
-    mov r1, sp\n\
-    adds r5, r1, r4\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xA\n\
-    bl __modsi3\n\
-    strb r0, [r5]\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    subs r4, 0x1\n\
-    lsls r4, 24\n\
-    lsrs r3, r4, 24\n\
-    b _0804377C\n\
-_080437AA:\n\
-    lsls r1, r3, 24\n\
-    asrs r0, r1, 24\n\
-    cmp r0, r9\n\
-    ble _080437CE\n\
-    movs r4, 0xFF\n\
-    movs r3, 0x1\n\
-    negs r3, r3\n\
-_080437B8:\n\
-    asrs r2, r1, 24\n\
-    mov r5, sp\n\
-    adds r1, r5, r2\n\
-    ldrb r0, [r1]\n\
-    orrs r0, r4\n\
-    strb r0, [r1]\n\
-    subs r2, 0x1\n\
-    lsls r1, r2, 24\n\
-    asrs r0, r1, 24\n\
-    cmp r0, r3\n\
-    bgt _080437B8\n\
-_080437CE:\n\
-    mov r1, r8\n\
-    ldrb r0, [r1, 0x3]\n\
-    cmp r0, 0xFF\n\
-    bne _080437DA\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x3]\n\
-_080437DA:\n\
-    mov r2, r10\n\
-    cmp r2, 0\n\
-    bne _0804386A\n\
-    movs r3, 0\n\
-    movs r1, 0\n\
-    movs r6, 0xFC\n\
-    lsls r6, 8\n\
-    movs r5, 0x1E\n\
-    mov r12, r5\n\
-_080437EC:\n\
-    lsls r1, 24\n\
-    asrs r2, r1, 24\n\
-    mov r0, sp\n\
-    adds r5, r0, r2\n\
-    ldrb r0, [r5]\n\
-    mov r8, r1\n\
-    cmp r0, 0xFF\n\
-    bne _08043822\n\
-    lsls r1, r2, 1\n\
-    adds r1, r7\n\
-    ldrh r2, [r1]\n\
-    adds r0, r6, 0\n\
-    ands r0, r2\n\
-    mov r2, r12\n\
-    orrs r0, r2\n\
-    strh r0, [r1]\n\
-    lsls r3, 24\n\
-    asrs r1, r3, 23\n\
-    adds r1, r7\n\
-    adds r1, 0x40\n\
-    ldrh r2, [r1]\n\
-    adds r0, r6, 0\n\
-    ands r0, r2\n\
-    mov r5, r12\n\
-    orrs r0, r5\n\
-    strh r0, [r1]\n\
-    b _08043852\n\
-_08043822:\n\
-    lsls r2, 1\n\
-    adds r2, r7\n\
-    ldrh r0, [r2]\n\
-    adds r1, r6, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x14\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    lsls r4, r3, 24\n\
-    asrs r3, r4, 24\n\
-    lsls r2, r3, 1\n\
-    adds r2, r7\n\
-    adds r2, 0x40\n\
-    ldrh r0, [r2]\n\
-    adds r1, r6, 0\n\
-    ands r1, r0\n\
-    mov r5, sp\n\
-    adds r0, r5, r3\n\
-    ldrb r0, [r0]\n\
-    adds r0, 0x34\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    adds r3, r4, 0\n\
-_08043852:\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    add r0, r8\n\
-    lsrs r1, r0, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r3, r2\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _080437EC\n\
-    b _080438CE\n\
-_0804386A:\n\
-    movs r3, 0\n\
-    movs r4, 0xFC\n\
-    lsls r4, 8\n\
-    movs r6, 0x1E\n\
-_08043872:\n\
-    lsls r1, r3, 24\n\
-    asrs r2, r1, 24\n\
-    mov r3, sp\n\
-    adds r5, r3, r2\n\
-    ldrb r0, [r5]\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0xFF\n\
-    bne _0804389E\n\
-    lsls r1, r2, 1\n\
-    adds r1, r7\n\
-    ldrh r2, [r1]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    adds r1, 0x40\n\
-    ldrh r2, [r1]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    b _080438C0\n\
-_0804389E:\n\
-    lsls r2, 1\n\
-    adds r2, r7\n\
-    ldrh r0, [r2]\n\
-    adds r1, r4, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x14\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    adds r2, 0x40\n\
-    ldrh r0, [r2]\n\
-    adds r1, r4, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x34\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-_080438C0:\n\
-    movs r5, 0x80\n\
-    lsls r5, 17\n\
-    adds r0, r3, r5\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _08043872\n\
-_080438CE:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 void unref_sub_80438E0(s16 a, s16 b, u16 *c)
 {

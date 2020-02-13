@@ -179,7 +179,7 @@ SYMBOL(gTotalCameraPixelOffsetY, 4)
 SYMBOL(gTotalCameraPixelOffsetX, 4)
 
 // event_object_movement.c
-SYMBOL(gEventObjects, 576)
+SYMBOL(gObjectEvents, 576)
 
 #if DEBUG
 gUnknown_Debug_03004BC0 = .;
@@ -187,7 +187,7 @@ gUnknown_Debug_03004BC0 = .;
 #endif
 
 // field_control_avatar.c
-SYMBOL(gSelectedEventObject, 4)
+SYMBOL(gSelectedObjectEvent, 4)
 
 // ???
 SYMBOL(gPokemonItemUseCallback, 4)

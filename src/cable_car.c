@@ -818,15 +818,15 @@ static void LoadSprites(void)
     u8 i;
 
     u8 playerGraphicsIds[2] = {
-        EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
-        EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+        OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
+        OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
     u8 hikerGraphicsIds[4] = {
-        EVENT_OBJ_GFX_HIKER,
-        EVENT_OBJ_GFX_CAMPER,
-        EVENT_OBJ_GFX_PICNICKER,
-        EVENT_OBJ_GFX_POOCHYENA
+        OBJ_EVENT_GFX_HIKER,
+        OBJ_EVENT_GFX_CAMPER,
+        OBJ_EVENT_GFX_PICNICKER,
+        OBJ_EVENT_GFX_POOCHYENA
     };
     s16 hikerCoords[2][2] = {
         {   0,  80 },
@@ -847,7 +847,7 @@ static void LoadSprites(void)
     {
         case 0:
         default:
-            spriteId = AddPseudoEventObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0xc8, 0x49, 0x66);
+            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0xc8, 0x49, 0x66);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -871,7 +871,7 @@ static void LoadSprites(void)
             break;
         case 1:
             CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
-            spriteId = AddPseudoEventObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
+            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -902,7 +902,7 @@ static void LoadSprites(void)
     }
     if ((rval % 64) == 0)
     {
-        spriteId = AddPseudoEventObject(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
+        spriteId = AddPseudoObjectEvent(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;
