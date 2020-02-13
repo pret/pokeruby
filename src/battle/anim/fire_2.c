@@ -467,6 +467,7 @@ static void sub_80D54E0(u8 taskId) // animate Move_ERUPTION?
 
         break;
     default:
+        break;
     }
 }
 

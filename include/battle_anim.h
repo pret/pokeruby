@@ -31,13 +31,6 @@ enum
     BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
 
-struct BattleAnimBackground
-{
-    void *image;
-    void *palette;
-    void *tilemap;
-};
-
 struct UnknownStruct1
 {
     u8 unk0;

@@ -2942,7 +2942,7 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
 
 static void sub_8045D58(u8 a, u8 b)
 {
-    u8 sp8[7];
+    u8 sp8[8];
     u8 r0;
     u8 r8;
     u8 i;

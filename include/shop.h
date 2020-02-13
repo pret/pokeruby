@@ -41,5 +41,6 @@ void Shop_CreatePokemartMenu(u16 *);
 void Shop_CreateDecorationShop1Menu(u16 *);
 void Shop_CreateDecorationShop2Menu(u16 *);
 void Shop_RunExitSellMenuTask(u8 taskId);
+void Shop_FadeReturnToMartMenu(void);
 
 #endif // GUARD_SHOP_H

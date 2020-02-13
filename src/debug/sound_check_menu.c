@@ -184,8 +184,8 @@ void Task_InitSoundCheckMenu(u8 taskId)
 // ideally this should be a multi Coords8 struct, but it wont match when its treated like a struct.
 static const u8 gUnknown_083D0300[] = { 1, 1, 1, 3, 1, 5, 1, 7, 1, 9, 1, 11, 1, 13, 1, 15, 1, 17 };
 
-extern const u8 *const gBGMNames[];
-extern const u8 *const gSENames[];
+static const u8 *const gBGMNames[];
+static const u8 *const gSENames[];
 
 void sub_80BA384(u8 taskId) // Task_HandleDrawingSoundCheckMenuText
 {

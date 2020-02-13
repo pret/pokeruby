@@ -2,6 +2,7 @@
 #define GUARD_DATA2_H
 
 #include "sprite.h"
+#include "battle.h"
 
 struct ScanlineEffectParams;
 

@@ -58,17 +58,14 @@ extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 
 extern u8 move_anim_start_t3();
-extern u8 IsBankSpritePresent();
 extern void sub_8044CA0(u8);
 extern void sub_8030E38(struct Sprite *);
 extern void StartBattleIntroAnim();
 extern void sub_8047858();
 extern void move_anim_start_t2_for_situation();
-extern void sub_8043D84();
 extern void BufferStringBattle();
 extern void sub_8031F24(void);
 extern void sub_80326EC();
-extern void DoMoveAnim();
 extern void sub_80324BC();
 extern u8 IsMoveWithoutAnimation();
 extern u8 mplay_80342A4();
@@ -83,21 +80,10 @@ extern u8 StartSendOutMonAnimation();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
 extern void BattleLoadPlayerMonSprite();
-extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
-extern u8 GetBattlerSubpriority();
 extern void nullsub_10();
-extern void sub_8045A5C();
-extern void sub_804777C();
-extern void sub_8043DFC();
-//extern s16 sub_8045C78();
-extern void sub_80440EC();
-extern void HandleLowHpMusicChange();
 extern void nullsub_9(u16);
-extern void sub_8043DB0();
-extern void move_anim_start_t4();
 extern void c3_0802FDF4(u8);
-extern void sub_8031F88();
 extern void c2_8011A1C(void);
 
 // this file's functions
@@ -327,7 +313,7 @@ void sub_811DCA0(void)
             sub_8045A5C(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 0);
             sub_804777C(gActiveBattler);
             sub_8043DFC(gHealthboxSpriteIds[gActiveBattler]);
-            (s8)ewram17810[4].unk9 &= ~1;
+            ewram17810[4].unk9 = (s8)ewram17810[4].unk9 & ~1;
             gBattlerControllerFuncs[gActiveBattler] = sub_811DBC0;
         }
     }

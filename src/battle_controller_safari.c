@@ -45,10 +45,8 @@ extern void LoadPlayerTrainerBankSprite();
 extern u8 GetBattlerSubpriority();
 extern void sub_80313A0(struct Sprite *);
 extern void sub_810BADC(void);
-extern void sub_8045A5C();
 extern void StartBattleIntroAnim();
 extern void sub_804777C();
-extern void sub_8043DFC();
 extern bool8 move_anim_start_t3();
 
 #if ENGLISH

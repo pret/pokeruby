@@ -19,6 +19,7 @@
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
+#include "new_game.h"
 #include "constants/event_object_movement.h"
 #include "constants/songs.h"
 
@@ -511,16 +512,18 @@ void sub_80810DC(void)
 
 #if DEBUG
 
-NAKED
 void debug_sub_80888D8()
 {
-    asm("\
+    debug_sub_8052E04();
+    sub_8080E88();
+    ScriptContext2_Enable();
+/*    asm("\
     PUSH    {LR}\n\
     BL      debug_sub_8052E04\n\
     BL      sub_8080E88\n\
     BL      ScriptContext2_Enable\n\
     POP     {R0}\n\
-    BX      R0");
+    BX      R0");*/
 }
 
 #endif

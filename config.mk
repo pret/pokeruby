@@ -5,6 +5,7 @@ GAME_VERSION  ?= RUBY
 GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
+MODERN        ?= 0
 DEBUG_TRANSLATE ?= 0
 COMPARE  ?= 0
 
@@ -67,7 +68,12 @@ ifeq ($(GAME_LANGUAGE), ENGLISH)
   COMPARE := 0
   DEBUG_TRANSLATE := 1
 endif
-
 endif
 
+# Modern GCC
+ifeq ($(MODERN), 0)
+  BUILD_NAME := $(BUILD_NAME)
+else
+  BUILD_NAME := $(BUILD_NAME)_modern
+endif
 

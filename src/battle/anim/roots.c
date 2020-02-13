@@ -7,10 +7,10 @@ extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 
-IWRAM_DATA u32 filler_03000724;
-IWRAM_DATA u16 gUnknown_03000728[4];
-IWRAM_DATA u16 gUnknown_03000730[6];
-IWRAM_DATA u32 filler_0300073c;
+BSS_DATA u32 filler_03000724;
+BSS_DATA u16 gUnknown_03000728[4];
+BSS_DATA u16 gUnknown_03000730[6];
+BSS_DATA u32 filler_0300073c;
 
 void sub_80CB59C(struct Sprite* sprite);
 void sub_80CB620(struct Sprite *sprite);

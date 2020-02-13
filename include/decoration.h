@@ -2,6 +2,8 @@
 #define GUARD_DECORATION_H
 
 #include "task.h"
+#include "menu.h"
+#include "menu_helpers.h"
 
 enum DecorPerm {
     /*

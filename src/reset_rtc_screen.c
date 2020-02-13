@@ -118,7 +118,7 @@ const union AnimCmd gSpriteAnim_83764C4[] =
 
 const union AnimCmd gSpriteAnim_83764CC[] =
 {
-    ANIMCMD_FRAME(0, 158, .vFlip = TRUE),
+    ANIMCMD_FRAME(0, 30, .vFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 

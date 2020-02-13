@@ -658,7 +658,10 @@ static u16 CalculateChecksum(void *data, u16 size)
     u32 checksum = 0;
 
     for (i = 0; i < (size / 4); i++)
-        checksum += *((u32 *)data)++;
+    {
+        checksum += *((u32 *)data);
+        data += sizeof(u32);
+    }
 
     return ((checksum >> 16) + checksum);
 }
@@ -929,4 +932,5 @@ u8 unref_sub_8126080(u8 sector, u8 *data)
 }
 
 asm(".section .rodata\n"
-    "\t.align 2");
+    "\t.align 2\n"
+    "\t.text");
