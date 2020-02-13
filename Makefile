@@ -25,7 +25,8 @@ CC1        = $(shell $(CC) --print-prog-name=cc1) -quiet
 endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
-SHA1SUM   := sha1sum -c
+OBJCOPY   := $(PREFIX)objcopy
+SHA1SUM   := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
 AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
