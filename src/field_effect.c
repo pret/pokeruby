@@ -575,177 +575,47 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-#ifdef NONMATCHING
+// r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     int curRed;
     int curGreen;
     int curBlue;
+    u16 outPal;
 
-    curRed = gPlttBufferUnfaded[i] & 0x1f;
-    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
-    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
     curRed += (((0x1f - curRed) * r) >> 4);
     curGreen += (((0x1f - curGreen) * g) >> 4);
     curBlue += (((0x1f - curBlue) * b) >> 4);
-    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }
 
+// r, g, b are between 0 and 16
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     int curRed;
     int curGreen;
     int curBlue;
+    u16 outPal;
 
-    curRed = gPlttBufferUnfaded[i] & 0x1f;
-    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
-    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
     curRed -= ((curRed * r) >> 4);
     curGreen -= ((curGreen * g) >> 4);
     curBlue -= ((curBlue * b) >> 4);
-    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }
-#else
-NAKED
-void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    asm(".syntax unified\n"
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tlsls r0, 16\n"
-    "\tlsls r1, 24\n"
-    "\tlsrs r1, 24\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tlsls r3, 24\n"
-    "\tlsrs r3, 24\n"
-    "\tldr r4, _08085D00 @ =gPlttBufferUnfaded\n"
-    "\tlsrs r0, 15\n"
-    "\tadds r4, r0, r4\n"
-    "\tldrh r4, [r4]\n"
-    "\tmovs r5, 0x1F\n"
-    "\tmov r9, r5\n"
-    "\tmov r8, r4\n"
-    "\tmov r6, r8\n"
-    "\tands r6, r5\n"
-    "\tmov r8, r6\n"
-    "\tmovs r6, 0xF8\n"
-    "\tlsls r6, 2\n"
-    "\tands r6, r4\n"
-    "\tlsrs r6, 5\n"
-    "\tmovs r5, 0xF8\n"
-    "\tlsls r5, 7\n"
-    "\tands r4, r5\n"
-    "\tlsrs r4, 10\n"
-    "\tmov r7, r9\n"
-    "\tmov r5, r8\n"
-    "\tsubs r7, r5\n"
-    "\tmov r12, r7\n"
-    "\tmov r7, r12\n"
-    "\tmuls r7, r1\n"
-    "\tadds r1, r7, 0\n"
-    "\tasrs r1, 4\n"
-    "\tadd r8, r1\n"
-    "\tmov r5, r9\n"
-    "\tsubs r1, r5, r6\n"
-    "\tmuls r1, r2\n"
-    "\tasrs r1, 4\n"
-    "\tadds r6, r1\n"
-    "\tsubs r5, r4\n"
-    "\tmov r9, r5\n"
-    "\tmov r1, r9\n"
-    "\tmuls r1, r3\n"
-    "\tasrs r1, 4\n"
-    "\tadds r4, r1\n"
-    "\tmov r7, r8\n"
-    "\tlsls r7, 16\n"
-    "\tlsls r6, 21\n"
-    "\torrs r6, r7\n"
-    "\tlsls r4, 26\n"
-    "\torrs r4, r6\n"
-    "\tlsrs r4, 16\n"
-    "\tldr r1, _08085D04 @ =gPlttBufferFaded\n"
-    "\tadds r0, r1\n"
-    "\tstrh r4, [r0]\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_08085D00: .4byte gPlttBufferUnfaded\n"
-    "_08085D04: .4byte gPlttBufferFaded\n"
-    ".syntax divided");
-}
-
-NAKED
-void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    asm(".syntax unified\n"
-    "\tpush {r4-r6,lr}\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6}\n"
-    "\tlsls r0, 16\n"
-    "\tlsls r1, 24\n"
-    "\tlsrs r1, 24\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tlsls r3, 24\n"
-    "\tlsrs r3, 24\n"
-    "\tldr r4, _08085D78 @ =gPlttBufferUnfaded\n"
-    "\tlsrs r0, 15\n"
-    "\tadds r4, r0, r4\n"
-    "\tldrh r4, [r4]\n"
-    "\tmovs r5, 0x1F\n"
-    "\tmov r8, r5\n"
-    "\tmov r6, r8\n"
-    "\tands r6, r4\n"
-    "\tmov r8, r6\n"
-    "\tmovs r5, 0xF8\n"
-    "\tlsls r5, 2\n"
-    "\tands r5, r4\n"
-    "\tlsrs r5, 5\n"
-    "\tmovs r6, 0xF8\n"
-    "\tlsls r6, 7\n"
-    "\tands r4, r6\n"
-    "\tlsrs r4, 10\n"
-    "\tmov r6, r8\n"
-    "\tmuls r6, r1\n"
-    "\tadds r1, r6, 0\n"
-    "\tasrs r1, 4\n"
-    "\tmov r6, r8\n"
-    "\tsubs r6, r1\n"
-    "\tadds r1, r5, 0\n"
-    "\tmuls r1, r2\n"
-    "\tasrs r1, 4\n"
-    "\tsubs r5, r1\n"
-    "\tadds r1, r4, 0\n"
-    "\tmuls r1, r3\n"
-    "\tasrs r1, 4\n"
-    "\tsubs r4, r1\n"
-    "\tlsls r6, 16\n"
-    "\tlsls r5, 21\n"
-    "\torrs r5, r6\n"
-    "\tlsls r4, 26\n"
-    "\torrs r4, r5\n"
-    "\tlsrs r4, 16\n"
-    "\tldr r1, _08085D7C @ =gPlttBufferFaded\n"
-    "\tadds r0, r1\n"
-    "\tstrh r4, [r0]\n"
-    "\tpop {r3}\n"
-    "\tmov r8, r3\n"
-    "\tpop {r4-r6}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_08085D78: .4byte gPlttBufferUnfaded\n"
-    "_08085D7C: .4byte gPlttBufferFaded\n"
-    ".syntax divided");
-}
-#endif
 
 void Task_PokecenterHeal(u8 taskId);
 u8 CreatePokeballGlowSprite(s16, s16, s16, u16);
@@ -2594,7 +2464,6 @@ void sub_80886F8(struct Task *task)
     task->data[3] += 16;
 }
 
-#ifdef NONMATCHING
 bool8 sub_8088708(struct Task *task)
 {
     u16 i;
@@ -2611,116 +2480,18 @@ bool8 sub_8088708(struct Task *task)
         dstOffs = (32 - dstOffs) & 0x1f;
         srcOffs = (32 - task->data[4]) & 0x1f;
         dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
-        for (i=0; i<10; i++)
+        for (i = 0; i < 10; i++)
         {
-            dest[dstOffs + i * 32] = gDarknessFieldMoveStreaksTilemap[srcOffs + i * 32] | 0xf000;
+            dest[dstOffs + i * 32] = gDarknessFieldMoveStreaksTilemap[srcOffs + i * 32];
+            dest[dstOffs + i * 32] |= 0xf000;
+
             dest[((dstOffs + 1) & 0x1f) + i * 32] = gDarknessFieldMoveStreaksTilemap[((srcOffs + 1) & 0x1f) + i * 32] | 0xf000;
+            dest[((dstOffs + 1) & 0x1f) + i * 32] |= 0xf000;
         }
         task->data[4] += 2;
     }
     return FALSE;
 }
-#else
-NAKED
-bool8 sub_8088708(struct Task *task)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x4\n"
-                    "\tadds r5, r0, 0\n"
-                    "\tldrh r2, [r5, 0x10]\n"
-                    "\tmovs r1, 0x10\n"
-                    "\tldrsh r0, [r5, r1]\n"
-                    "\tcmp r0, 0x1F\n"
-                    "\tble _08088724\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tb _080887A8\n"
-                    "_08088724:\n"
-                    "\tldrh r0, [r5, 0xE]\n"
-                    "\tlsls r0, 16\n"
-                    "\tasrs r3, r0, 19\n"
-                    "\tmovs r1, 0x1F\n"
-                    "\tands r3, r1\n"
-                    "\tmovs r4, 0x10\n"
-                    "\tldrsh r0, [r5, r4]\n"
-                    "\tcmp r3, r0\n"
-                    "\tblt _080887A6\n"
-                    "\tmovs r0, 0x20\n"
-                    "\tsubs r3, r0, r3\n"
-                    "\tands r3, r1\n"
-                    "\tsubs r0, r2\n"
-                    "\tmov r12, r0\n"
-                    "\tmov r7, r12\n"
-                    "\tands r7, r1\n"
-                    "\tmov r12, r7\n"
-                    "\tldrh r0, [r5, 0x20]\n"
-                    "\tldr r1, _080887B8 @ =0x06000140\n"
-                    "\tadds r1, r0\n"
-                    "\tmov r8, r1\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r7, _080887BC @ =gDarknessFieldMoveStreaksTilemap\n"
-                    "\tmov r10, r7\n"
-                    "\tmovs r0, 0xF0\n"
-                    "\tlsls r0, 8\n"
-                    "\tmov r9, r0\n"
-                    "\tadds r1, r3, 0x1\n"
-                    "\tmovs r0, 0x1F\n"
-                    "\tands r1, r0\n"
-                    "\tstr r1, [sp]\n"
-                    "\tmov r6, r12\n"
-                    "\tadds r6, 0x1\n"
-                    "\tands r6, r0\n"
-                    "_08088768:\n"
-                    "\tlsls r1, r4, 5\n"
-                    "\tadds r2, r1, r3\n"
-                    "\tlsls r2, 1\n"
-                    "\tadd r2, r8\n"
-                    "\tmov r7, r12\n"
-                    "\tadds r0, r7, r1\n"
-                    "\tlsls r0, 1\n"
-                    "\tadd r0, r10\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tmov r7, r9\n"
-                    "\torrs r0, r7\n"
-                    "\tstrh r0, [r2]\n"
-                    "\tldr r0, [sp]\n"
-                    "\tadds r2, r1, r0\n"
-                    "\tlsls r2, 1\n"
-                    "\tadd r2, r8\n"
-                    "\tadds r1, r6, r1\n"
-                    "\tlsls r1, 1\n"
-                    "\tadd r1, r10\n"
-                    "\tldrh r0, [r1]\n"
-                    "\tmov r1, r9\n"
-                    "\torrs r0, r1\n"
-                    "\tstrh r0, [r2]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tcmp r4, 0x9\n"
-                    "\tbls _08088768\n"
-                    "\tldrh r0, [r5, 0x10]\n"
-                    "\tadds r0, 0x2\n"
-                    "\tstrh r0, [r5, 0x10]\n"
-                    "_080887A6:\n"
-                    "\tmovs r0, 0\n"
-                    "_080887A8:\n"
-                    "\tadd sp, 0x4\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.align 2, 0\n"
-                    "_080887B8: .4byte 0x06000140\n"
-                    "_080887BC: .4byte gDarknessFieldMoveStreaksTilemap");
-}
-#endif
 
 bool8 sub_80887C0(struct Task *task)
 {
