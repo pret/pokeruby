@@ -3,7 +3,7 @@ EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
 	.byte 0
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
-	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_2
+	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE
 	setflag FLAG_SYS_POKEMON_LEAGUE_FLY
 	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_EventScript_15BA8B
 	end
