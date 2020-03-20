@@ -3,7 +3,7 @@ EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 815BC66
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C:: @ 815BC6C
-	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_1
+	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
