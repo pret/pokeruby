@@ -19,7 +19,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155ADB",
       "flag": "0"
@@ -32,7 +32,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155BA1",
       "flag": "FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM"
@@ -45,7 +45,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155BAA",
       "flag": "FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM"
@@ -58,7 +58,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155B98",
       "flag": "FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM"
@@ -71,7 +71,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155B8F",
       "flag": "FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM"
@@ -84,7 +84,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155BB3",
       "flag": "FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM"
@@ -97,7 +97,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155ADB",
       "flag": "0"
@@ -110,7 +110,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155BBC",
       "flag": "FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM"
@@ -123,7 +123,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155C16",
       "flag": "FLAG_HIDE_OCEANIC_MUSEUM_VISITORS"
@@ -136,7 +136,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155C1F",
       "flag": "FLAG_HIDE_OCEANIC_MUSEUM_VISITORS"
@@ -149,7 +149,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155C28",
       "flag": "FLAG_HIDE_OCEANIC_MUSEUM_VISITORS"
@@ -162,7 +162,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155C31",
       "flag": "FLAG_HIDE_OCEANIC_MUSEUM_VISITORS"
@@ -175,7 +175,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_155C3A",
       "flag": "FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM"
@@ -188,7 +188,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0",
       "flag": "FLAG_HIDE_OCEANIC_MUSEUM_VISITORS"

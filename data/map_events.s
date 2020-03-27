@@ -5,6 +5,7 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/secret_bases.h"
+#include "constants/trainer_types.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
 
