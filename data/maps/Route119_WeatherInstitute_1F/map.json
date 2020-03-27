@@ -19,7 +19,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route119_WeatherInstitute_1F_EventScript_163C94",
       "flag": "FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE"
@@ -32,7 +32,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route119_WeatherInstitute_1F_EventScript_163CAB",
       "flag": "FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE"
@@ -45,7 +45,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route119_WeatherInstitute_1F_EventScript_163C7A",
       "flag": "FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F"
@@ -58,7 +58,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route119_WeatherInstitute_1F_EventScript_163C71",
       "flag": "FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F"
@@ -71,7 +71,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route119_WeatherInstitute_1F_EventScript_163C4D",
       "flag": "0"

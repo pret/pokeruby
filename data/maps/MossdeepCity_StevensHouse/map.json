@@ -19,7 +19,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MossdeepCity_StevensHouse_EventScript_15AAF9",
       "flag": "FLAG_HIDE_STEVEN_STEVENS_HOUSE"
@@ -32,7 +32,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MossdeepCity_StevensHouse_EventScript_15AA7C",
       "flag": "FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE"
@@ -45,7 +45,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MossdeepCity_StevensHouse_EventScript_15AB20",
       "flag": "FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1"
@@ -58,7 +58,7 @@
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MossdeepCity_StevensHouse_EventScript_15AB02",
       "flag": "FLAG_HIDE_STEVENS_LETTER"
