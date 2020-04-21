@@ -10,6 +10,7 @@
 #include "util.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
+#include "constants/trainer_types.h"
 
 static bool8 CheckTrainer(u8);
 static void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
@@ -43,7 +44,7 @@ bool8 CheckTrainers(void)
     for (objEventId = 0; objEventId < 16; objEventId++)
     {
         if (gObjectEvents[objEventId].active
-         && (gObjectEvents[objEventId].trainerType == 1 ||  gObjectEvents[objEventId].trainerType == 3)
+         && (gObjectEvents[objEventId].trainerType == TRAINER_TYPE_NORMAL ||  gObjectEvents[objEventId].trainerType == TRAINER_TYPE_BURIED)
          && CheckTrainer(objEventId))
             return TRUE;
     }
@@ -83,14 +84,14 @@ static bool8 TrainerCanApproachPlayer(struct ObjectEvent *trainerObj)
     u8 approachDistance;
 
     PlayerGetDestCoords(&x, &y);
-    if (trainerObj->trainerType == 1)  // can only see in one direction
+    if (trainerObj->trainerType == TRAINER_TYPE_NORMAL)  // can only see in one direction
     {
         approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->facingDirection - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
         return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->facingDirection);
     }
-    else  // can see in all directions
+    else // TRAINER_TYPE_SEE_ALL_DIRECTIONS, TRAINER_TYPE_BURIED
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < ARRAY_COUNT(sDirectionalApproachDistanceFuncs); i++)
         {
             approachDistance = sDirectionalApproachDistanceFuncs[i](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
             if (CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, i + 1)) // directions are 1-4 instead of 0-3. south north west east
