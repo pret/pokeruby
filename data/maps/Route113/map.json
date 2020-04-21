@@ -126,7 +126,7 @@
       "movement_type": "MOVEMENT_TYPE_HIDDEN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "3",
+      "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route113_EventScript_1506A7",
       "flag": "0"
@@ -139,7 +139,7 @@
       "movement_type": "MOVEMENT_TYPE_HIDDEN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "3",
+      "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route113_EventScript_1506E5",
       "flag": "0"
