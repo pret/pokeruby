@@ -59,7 +59,7 @@ LittlerootTown_BrendansHouse_1F_MapScript2_1526D0:: @ 81526D0
 
 LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
 	lockall
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172574, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172574, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_152720
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_152720
@@ -98,7 +98,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_152782
 	waitmovement 0
 	special GetRivalSonDaughterString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE, 2
 	releaseall

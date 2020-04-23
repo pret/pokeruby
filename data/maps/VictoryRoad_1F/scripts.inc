@@ -37,9 +37,9 @@ VictoryRoad_1F_EventScript_15DEBF:: @ 815DEBF
 VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
 	applymovement 255, VictoryRoad_1F_Movement_1A083F
 	waitmovement 0
-	msgbox VictoryRoad_1F_Text_19782B, 4
+	msgbox VictoryRoad_1F_Text_19782B, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_1, VictoryRoad_1F_Text_197943
-	msgbox VictoryRoad_1F_Text_197967, 4
+	msgbox VictoryRoad_1F_Text_197967, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD
 	moveobjectoffscreen 4
 	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
@@ -87,7 +87,7 @@ VictoryRoad_1F_Movement_15DF1E:: @ 815DF1E
 	end_movement
 
 VictoryRoad_1F_EventScript_15DF28:: @ 815DF28
-	msgbox VictoryRoad_1F_Text_197967, 2
+	msgbox VictoryRoad_1F_Text_197967, MSGBOX_NPC
 	end
 
 VictoryRoad_1F_EventScript_15DF31:: @ 815DF31
@@ -95,25 +95,25 @@ VictoryRoad_1F_EventScript_15DF31:: @ 815DF31
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq VictoryRoad_1F_EventScript_15DF58
-	msgbox VictoryRoad_1F_Text_197A47, 6
+	msgbox VictoryRoad_1F_Text_197A47, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_15DF58:: @ 815DF58
 	trainerbattle_rematch TRAINER_WALLY_3, VictoryRoad_1F_Text_1979BA, VictoryRoad_1F_Text_197A23
-	msgbox VictoryRoad_1F_Text_197A47, 6
+	msgbox VictoryRoad_1F_Text_197A47, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_15DF6F:: @ 815DF6F
 	trainerbattle_single TRAINER_EDGAR, VictoryRoad_1F_Text_197AD1, VictoryRoad_1F_Text_197B1A
-	msgbox VictoryRoad_1F_Text_197B36, 6
+	msgbox VictoryRoad_1F_Text_197B36, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_15DF86:: @ 815DF86
 	trainerbattle_single TRAINER_ALBERT, VictoryRoad_1F_Text_197B99, VictoryRoad_1F_Text_197BE1
-	msgbox VictoryRoad_1F_Text_197BF7, 6
+	msgbox VictoryRoad_1F_Text_197BF7, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_15DF9D:: @ 815DF9D
 	trainerbattle_single TRAINER_HOPE, VictoryRoad_1F_Text_197C45, VictoryRoad_1F_Text_197C8D
-	msgbox VictoryRoad_1F_Text_197CAF, 6
+	msgbox VictoryRoad_1F_Text_197CAF, MSGBOX_AUTOCLOSE
 	end

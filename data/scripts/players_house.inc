@@ -5,14 +5,14 @@ LittlerootTown_MaysHouse_2F_EventScript_1B6950:: @ 81B6950
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6956:: @ 81B6956
 LittlerootTown_MaysHouse_1F_EventScript_1B6956:: @ 81B6956
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, MSGBOX_DEFAULT
 	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmovement 0
 	compare VAR_0x8005, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B699F
 	compare VAR_0x8005, 1
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B69AA
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172453, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172453, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_LITTLEROOT_INTRO_STATE, 4
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B69B5
@@ -37,7 +37,7 @@ LittlerootTown_BrendansHouse_1F_Movement_1B69B5:: @ 81B69B5
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B69B7:: @ 81B69B7
 LittlerootTown_MaysHouse_1F_EventScript_1B69B7:: @ 81B69B7
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172531, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172531, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0841
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CDC
@@ -60,7 +60,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69DF:: @ 81B69DF
 LittlerootTown_BrendansHouse_2F_EventScript_1B69EB:: @ 81B69EB
 LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	goto_if_set FLAG_SET_WALL_CLOCK, LittlerootTown_BrendansHouse_2F_EventScript_1B6A91
-	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, MSGBOX_DEFAULT
 	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
 	delay 30
 	setvar VAR_LITTLEROOT_INTRO_STATE, 6
@@ -84,7 +84,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A31:: @ 81B6A31
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A0843
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AA9
 	waitmovement 0
@@ -97,7 +97,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A083F
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AB4
 	waitmovement 0
@@ -160,7 +160,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CCC
 	waitmovement 0
 	playbgm MUS_INTER_V, FALSE
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
 	waitmovement 0
@@ -169,8 +169,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	call LittlerootTown_BrendansHouse_1F_EventScript_1B6BBE
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1A083F
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1725FE, 4
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172644, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1725FE, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172644, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BE1
@@ -185,7 +185,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1B6CD4
 	waitmovement 0
 	playbgm MUS_INTER_V, FALSE
-	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BDE
 	waitmovement 0
@@ -194,8 +194,8 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	call LittlerootTown_MaysHouse_1F_EventScript_1B6BBE
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_1F_Text_1725FE, 4
-	msgbox LittlerootTown_MaysHouse_1F_Text_172644, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1725FE, MSGBOX_DEFAULT
+	msgbox LittlerootTown_MaysHouse_1F_Text_172644, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BE5
@@ -210,7 +210,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
 	waitmovement 0
 	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0835
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1725A3, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1725A3, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -218,7 +218,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 LittlerootTown_MaysHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1A0841
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, MSGBOX_DEFAULT
 	fadedefaultbgm
 	special TurnOffTVScreen
 	setflag FLAG_SYS_TV_HOME
@@ -261,33 +261,33 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
 	compare VAR_LITTLEROOT_INTRO_STATE, 7
 	goto_if_ge LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C33:: @ 81B6C33
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172BBC, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172BBC, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
 	goto_if_set FLAG_RECEIVED_AMULET_COIN, LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, MSGBOX_DEFAULT
 	giveitem ITEM_AMULET_COIN
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_AMULET_COIN
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C72:: @ 81B6C72
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172717, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172717, MSGBOX_DEFAULT
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C80:: @ 81B6C80
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1726D2, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1726D2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -295,12 +295,12 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A:: @ 81B6C8A
 	closemessage
 	call LittlerootTown_BrendansHouse_1F_EventScript_1A02CA
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
-	msgbox LittlerootTown_BrendansHouse_1F_Text_17276B, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_17276B, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C:: @ 81B6C9C
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1726E7, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1726E7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -310,7 +310,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CA6:: @ 81B6CA6
 	faceplayer
 	waitse
 	playmoncry SPECIES_MACHOKE, 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_17281D, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_17281D, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -321,7 +321,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CB9:: @ 81B6CB9
 	faceplayer
 	waitse
 	playmoncry SPECIES_MACHOKE, 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172831, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172831, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -378,15 +378,15 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6DCD
 	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8
-	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, MSGBOX_DEFAULT
 	giveitem ITEM_SS_TICKET
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6DE3
 	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6DEE
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172B5E, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172B5E, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9

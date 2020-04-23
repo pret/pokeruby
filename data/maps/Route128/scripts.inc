@@ -21,28 +21,28 @@ Route128_EventScript_15213F:: @ 815213F
 	.endif
 	applymovement 4, Route128_Movement_152271
 	waitmovement 0
-	msgbox Route128_Text_171EE0, 4
+	msgbox Route128_Text_171EE0, MSGBOX_DEFAULT
 	applymovement 4, Route128_Movement_152279
 	waitmovement 0
-	msgbox Route128_Text_171F35, 4
+	msgbox Route128_Text_171F35, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Route128_Movement_152293
 	waitmovement 0
 	applymovement 4, Route128_Movement_1A0841
 	waitmovement 0
-	msgbox Route128_Text_171F4B, 4
+	msgbox Route128_Text_171F4B, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Route128_Movement_1522A1
 	waitmovement 0
 	applymovement 255, Route128_Movement_1A0841
 	waitmovement 0
-	msgbox Route128_Text_172008, 4
+	msgbox Route128_Text_172008, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route128_Movement_15227E
 	applymovement 255, Route128_Movement_1A083F
 	applymovement 5, Route128_Movement_152290
 	waitmovement 0
-	msgbox Route128_Text_17210B, 4
+	msgbox Route128_Text_17210B, MSGBOX_DEFAULT
 	closemessage
 	delay 40
 	applymovement 5, Route128_Movement_152296
@@ -59,19 +59,19 @@ Route128_EventScript_15213F:: @ 815213F
 	waitmovement 0
 	applymovement 255, Route128_Movement_1A0843
 	waitmovement 0
-	msgbox Route128_Text_172181, 4
+	msgbox Route128_Text_172181, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_15226D
 	applymovement 255, Route128_Movement_1A0841
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox Route128_Text_1721A2, 4
+	msgbox Route128_Text_1721A2, MSGBOX_DEFAULT
 	.else
-	msgbox Route128_Text_1722A1, 4
+	msgbox Route128_Text_1722A1, MSGBOX_DEFAULT
 	.endif
 	applymovement 3, Route128_Movement_1A0845
 	waitmovement 0
-	msgbox Route128_Text_1723BE, 4
+	msgbox Route128_Text_1723BE, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_1A0845
 	waitmovement 0
@@ -184,12 +184,12 @@ Route128_EventScript_1522A4:: @ 81522A4
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route128_EventScript_1522CB
-	msgbox Route128_Text_1C1CC3, 6
+	msgbox Route128_Text_1C1CC3, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1522CB:: @ 81522CB
 	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_1C1D02, Route128_Text_1C1D45
-	msgbox Route128_Text_1C1D6B, 6
+	msgbox Route128_Text_1C1D6B, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1522E2:: @ 81522E2
@@ -197,25 +197,25 @@ Route128_EventScript_1522E2:: @ 81522E2
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route128_EventScript_152309
-	msgbox Route128_Text_1C1E4A, 6
+	msgbox Route128_Text_1C1E4A, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_152309:: @ 8152309
 	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_1C1E90, Route128_Text_1C1EFA
-	msgbox Route128_Text_1C1F2E, 6
+	msgbox Route128_Text_1C1F2E, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_152320:: @ 8152320
 	trainerbattle_single TRAINER_ALEXA, Route128_Text_1C1F6D, Route128_Text_1C1FCC
-	msgbox Route128_Text_1C1FE8, 6
+	msgbox Route128_Text_1C1FE8, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_152337:: @ 8152337
 	trainerbattle_single TRAINER_RUBEN, Route128_Text_1C202C, Route128_Text_1C2051
-	msgbox Route128_Text_1C2060, 6
+	msgbox Route128_Text_1C2060, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_15234E:: @ 815234E
 	trainerbattle_single TRAINER_WAYNE, Route128_Text_1C2090, Route128_Text_1C20FC
-	msgbox Route128_Text_1C210D, 6
+	msgbox Route128_Text_1C210D, MSGBOX_AUTOCLOSE
 	end

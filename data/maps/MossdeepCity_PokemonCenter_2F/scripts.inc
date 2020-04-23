@@ -5,7 +5,7 @@ MossdeepCity_PokemonCenter_2F_MapScripts:: @ 815A8FA
 	.byte 0
 
 MossdeepCity_PokemonCenter_2F_EventScript_15A90A:: @ 815A90A
-	msgbox MossdeepCity_PokemonCenter_2F_Text_18D6F5, 2
+	msgbox MossdeepCity_PokemonCenter_2F_Text_18D6F5, MSGBOX_NPC
 	end
 
 MossdeepCity_PokemonCenter_2F_EventScript_15A913:: @ 815A913

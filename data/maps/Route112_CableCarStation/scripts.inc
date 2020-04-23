@@ -40,7 +40,7 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	end
 
 Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
-	msgbox Route112_CableCarStation_Text_1925A9, 4
+	msgbox Route112_CableCarStation_Text_1925A9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route112_CableCarStation_Movement_15C0E6
 	applymovement 255, Route112_CableCarStation_Movement_15C0F0
@@ -55,7 +55,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	end
 
 Route112_CableCarStation_EventScript_15C0DC:: @ 815C0DC
-	msgbox Route112_CableCarStation_Text_192548, 4
+	msgbox Route112_CableCarStation_Text_192548, MSGBOX_DEFAULT
 	release
 	end
 

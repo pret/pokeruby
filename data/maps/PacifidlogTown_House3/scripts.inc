@@ -28,27 +28,27 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	special DoInGameTradeScene
 	waitstate
 	bufferspeciesname 0, VAR_0x8009
-	msgbox PacifidlogTown_House3_Text_1794C4, 4
+	msgbox PacifidlogTown_House3_Text_1794C4, MSGBOX_DEFAULT
 	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
 	release
 	end
 
 PacifidlogTown_House3_EventScript_154320:: @ 8154320
-	msgbox PacifidlogTown_House3_Text_1794ED, 4
+	msgbox PacifidlogTown_House3_Text_1794ED, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House3_EventScript_15432A:: @ 815432A
 	bufferspeciesname 0, VAR_0x8009
-	msgbox PacifidlogTown_House3_Text_1794DF, 4
+	msgbox PacifidlogTown_House3_Text_1794DF, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House3_EventScript_154338:: @ 8154338
-	msgbox PacifidlogTown_House3_Text_17950A, 4
+	msgbox PacifidlogTown_House3_Text_17950A, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House3_EventScript_154342:: @ 8154342
-	msgbox PacifidlogTown_House3_Text_179541, 2
+	msgbox PacifidlogTown_House3_Text_179541, MSGBOX_NPC
 	end

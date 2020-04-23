@@ -10,13 +10,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	lock
 	faceplayer
 	goto_if_set FLAG_MET_DIVING_TREASURE_HUNTER, Route124_DivingTreasureHuntersHouse_EventScript_163E20
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, MSGBOX_DEFAULT
 	setflag FLAG_MET_DIVING_TREASURE_HUNTER
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E20:: @ 8163E20
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F48F, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F48F, MSGBOX_DEFAULT
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
 	end
 
@@ -60,7 +60,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E9C:: @ 8163E9C
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163EA2:: @ 8163EA2
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F544, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F544, MSGBOX_DEFAULT
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163EB0
 	end
 
@@ -260,7 +260,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	removeitem VAR_0x8008
 	giveitem VAR_0x8009
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, MSGBOX_DEFAULT
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare VAR_TEMP_1, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164333
@@ -271,17 +271,17 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164315:: @ 8164315
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F64E, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F64E, MSGBOX_DEFAULT
 	release
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_16431F:: @ 816431F
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F686, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F686, MSGBOX_DEFAULT
 	release
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164329:: @ 8164329
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F4D1, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F4D1, MSGBOX_DEFAULT
 	release
 	end
 
@@ -290,5 +290,5 @@ Route124_DivingTreasureHuntersHouse_EventScript_164333:: @ 8164333
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164335:: @ 8164335
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F6C5, 3
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F6C5, MSGBOX_SIGN
 	end

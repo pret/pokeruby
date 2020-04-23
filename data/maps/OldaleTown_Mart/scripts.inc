@@ -8,7 +8,7 @@ OldaleTown_Mart_EventScript_152F79:: @ 8152F79
 	waitmessage
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_EventScript_152FA8
 	pokemart OldaleTown_Mart_Items1
-	msgbox OldaleTown_Mart_Text_1A0C02, 4
+	msgbox OldaleTown_Mart_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -24,7 +24,7 @@ OldaleTown_Mart_Items1:: @ 8152F9C
 
 OldaleTown_Mart_EventScript_152FA8:: @ 8152FA8
 	pokemart OldaleTown_Mart_Items2
-	msgbox OldaleTown_Mart_Text_1A0C02, 4
+	msgbox OldaleTown_Mart_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -43,15 +43,15 @@ OldaleTown_Mart_EventScript_152FC6:: @ 8152FC6
 	lock
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_EventScript_152FDB
-	msgbox OldaleTown_Mart_Text_174A8A, 4
+	msgbox OldaleTown_Mart_Text_174A8A, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_Mart_EventScript_152FDB:: @ 8152FDB
-	msgbox OldaleTown_Mart_Text_174ACB, 4
+	msgbox OldaleTown_Mart_Text_174ACB, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_Mart_EventScript_152FE5:: @ 8152FE5
-	msgbox OldaleTown_Mart_Text_174B10, 2
+	msgbox OldaleTown_Mart_Text_174B10, MSGBOX_NPC
 	end

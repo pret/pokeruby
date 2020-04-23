@@ -61,15 +61,15 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AD22:: @ 815AD22
-	msgbox MossdeepCity_GameCorner_1F_Text_18E80E, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E80E, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AD2B:: @ 815AD2B
-	msgbox MossdeepCity_GameCorner_1F_Text_18E859, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E859, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AD34:: @ 815AD34
-	msgbox MossdeepCity_GameCorner_1F_Text_18E7B1, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E7B1, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_Movement_15AD3D:: @ 815AD3D
@@ -86,7 +86,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	faceplayer
 	compare VAR_TEMP_1, 1
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD59
-	msgbox MossdeepCity_GameCorner_1F_Text_18E59A, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E59A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -109,7 +109,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	erasebox 0, 0, 15, 10
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
-	msgbox MossdeepCity_GameCorner_1F_Text_18E777, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E777, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE04
@@ -124,12 +124,12 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 
 MossdeepCity_GameCorner_1F_EventScript_15ADE8:: @ 815ADE8
 	special LoadPlayerParty
-	msgbox MossdeepCity_GameCorner_1F_Text_18E698, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E698, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
-	msgbox MossdeepCity_GameCorner_1F_Text_18E6DA, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_18E6DA, MSGBOX_DEFAULT
 	fadescreen 1
 	special sub_80C5568
 	waitstate
@@ -182,5 +182,5 @@ MossdeepCity_GameCorner_1F_Movement_15AE49:: @ 815AE49
 	end_movement
 
 MossdeepCity_GameCorner_1F_EventScript_15AE4C:: @ 815AE4C
-	msgbox MossdeepCity_GameCorner_1F_Text_18E631, 3
+	msgbox MossdeepCity_GameCorner_1F_Text_18E631, MSGBOX_SIGN
 	end

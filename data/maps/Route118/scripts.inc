@@ -18,33 +18,33 @@ Route118_EventScript_150F34:: @ 8150F34
 	end
 
 Route118_EventScript_150F5E:: @ 8150F5E
-	msgbox Route118_Text_170F46, 4
+	msgbox Route118_Text_170F46, MSGBOX_DEFAULT
 	giveitem ITEM_GOOD_ROD
 	setflag FLAG_RECEIVED_GOOD_ROD
-	msgbox Route118_Text_170F7E, 4
+	msgbox Route118_Text_170F7E, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_150F7F:: @ 8150F7F
-	msgbox Route118_Text_170FB0, 4
+	msgbox Route118_Text_170FB0, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_150F89:: @ 8150F89
-	msgbox Route118_Text_170FC8, 4
+	msgbox Route118_Text_170FC8, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_150F93:: @ 8150F93
-	msgbox Route118_Text_170FFE, 2
+	msgbox Route118_Text_170FFE, MSGBOX_NPC
 	end
 
 Route118_EventScript_150F9C:: @ 8150F9C
-	msgbox Route118_Text_17108B, 3
+	msgbox Route118_Text_17108B, MSGBOX_SIGN
 	end
 
 Route118_EventScript_150FA5:: @ 8150FA5
-	msgbox Route118_Text_1710A5, 3
+	msgbox Route118_Text_1710A5, MSGBOX_SIGN
 	end
 
 Route118_EventScript_150FAE:: @ 8150FAE
@@ -80,7 +80,7 @@ Route118_EventScript_151004:: @ 8151004
 	applymovement 19, Route118_Movement_15106D
 	waitmovement 0
 	delay 30
-	msgbox Route118_Text_170D66, 4
+	msgbox Route118_Text_170D66, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if_eq Route118_EventScript_151048
@@ -163,22 +163,22 @@ Route118_EventScript_15108F:: @ 815108F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_1510B6
-	msgbox Route118_Text_1BE05E, 6
+	msgbox Route118_Text_1BE05E, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1510B6:: @ 81510B6
 	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_1BE0AB, Route118_Text_1BE0D3
-	msgbox Route118_Text_1BE104, 6
+	msgbox Route118_Text_1BE104, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1510CD:: @ 81510CD
 	trainerbattle_single TRAINER_BARNY, Route118_Text_1BE24A, Route118_Text_1BE291
-	msgbox Route118_Text_1BE2BE, 6
+	msgbox Route118_Text_1BE2BE, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1510E4:: @ 81510E4
 	trainerbattle_single TRAINER_WADE, Route118_Text_1BE318, Route118_Text_1BE385
-	msgbox Route118_Text_1BE39C, 6
+	msgbox Route118_Text_1BE39C, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1510FB:: @ 81510FB
@@ -186,20 +186,20 @@ Route118_EventScript_1510FB:: @ 81510FB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_151122
-	msgbox Route118_Text_1BE413, 6
+	msgbox Route118_Text_1BE413, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_151122:: @ 8151122
 	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_1BE489, Route118_Text_1BE4CC
-	msgbox Route118_Text_1BE4D9, 6
+	msgbox Route118_Text_1BE4D9, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_151139:: @ 8151139
 	trainerbattle_single TRAINER_PERRY, Route118_Text_1BE148, Route118_Text_1BE188
-	msgbox Route118_Text_1BE19D, 6
+	msgbox Route118_Text_1BE19D, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_151150:: @ 8151150
 	trainerbattle_single TRAINER_CHESTER, Route118_Text_1BE1D7, Route118_Text_1BE1F5
-	msgbox Route118_Text_1BE20D, 6
+	msgbox Route118_Text_1BE20D, MSGBOX_AUTOCLOSE
 	end

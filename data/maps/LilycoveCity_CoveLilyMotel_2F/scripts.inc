@@ -13,7 +13,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7:: @ 81583C7
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_186FE7, 4
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_186FE7, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
@@ -33,21 +33,21 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD:: @ 81583DD
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583EE:: @ 81583EE
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_187149, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_187149, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583F7:: @ 81583F7
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_18719E, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_18719E, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_158400:: @ 8158400
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_1871DF, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_1871DF, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_158409:: @ 8158409
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_18729A, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_18729A, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_158412:: @ 8158412
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_1872D4, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_1872D4, MSGBOX_NPC
 	end

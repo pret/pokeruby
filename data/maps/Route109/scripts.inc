@@ -52,7 +52,7 @@ Route109_EventScript_14F548:: @ 814F548
 	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	hideobjectat 1, MAP_ROUTE109
-	msgbox Route109_Text_16B4B5, 4
+	msgbox Route109_Text_16B4B5, MSGBOX_DEFAULT
 	closemessage
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority 255, MAP_ROUTE109
@@ -294,29 +294,29 @@ Route109_EventScript_14F6AF:: @ 814F6AF
 	end
 
 Route109_EventScript_14F6E2:: @ 814F6E2
-	msgbox Route109_Text_16E159, 4
+	msgbox Route109_Text_16E159, MSGBOX_DEFAULT
 	closemessage
 	goto Route109_EventScript_14F4D3
 	end
 
 Route109_EventScript_14F6F1:: @ 814F6F1
-	msgbox Route109_Text_16E1B1, 4
+	msgbox Route109_Text_16E1B1, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_EventScript_14F6FB:: @ 814F6FB
-	msgbox Route109_Text_16E2C5, 4
+	msgbox Route109_Text_16E2C5, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_EventScript_14F705:: @ 814F705
-	msgbox Route109_Text_16E307, 2
+	msgbox Route109_Text_16E307, MSGBOX_NPC
 	end
 
 Route109_EventScript_14F70E:: @ 814F70E
 	lock
 	faceplayer
-	msgbox Route109_Text_16E405, 4
+	msgbox Route109_Text_16E405, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
@@ -328,7 +328,7 @@ Route109_EventScript_14F725:: @ 814F725
 	faceplayer
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_14F762
-	msgbox Route109_Text_16E433, 4
+	msgbox Route109_Text_16E433, MSGBOX_DEFAULT
 	giveitem ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
@@ -340,18 +340,18 @@ Route109_EventScript_14F725:: @ 814F725
 	end
 
 Route109_EventScript_14F762:: @ 814F762
-	msgbox Route109_Text_16E446, 4
+	msgbox Route109_Text_16E446, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
 	release
 	end
 
 Route109_EventScript_14F776:: @ 814F776
-	msgbox Route109_Text_16E35B, 2
+	msgbox Route109_Text_16E35B, MSGBOX_NPC
 	end
 
 Route109_EventScript_14F77F:: @ 814F77F
-	msgbox Route109_Text_16E4D5, 2
+	msgbox Route109_Text_16E4D5, MSGBOX_NPC
 	end
 
 Route109_EventScript_14F788:: @ 814F788
@@ -359,37 +359,37 @@ Route109_EventScript_14F788:: @ 814F788
 	faceplayer
 	waitse
 	playmoncry SPECIES_ZIGZAGOON, 0
-	msgbox Route109_Text_16E5CA, 4
+	msgbox Route109_Text_16E5CA, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 Route109_EventScript_14F79B:: @ 814F79B
-	msgbox Route109_Text_16E5DC, 3
+	msgbox Route109_Text_16E5DC, MSGBOX_SIGN
 	end
 
 Route109_EventScript_14F7A4:: @ 814F7A4
-	msgbox Route109_Text_16E62C, 3
+	msgbox Route109_Text_16E62C, MSGBOX_SIGN
 	end
 
 Route109_EventScript_14F7AD:: @ 814F7AD
 	trainerbattle_single TRAINER_DAVID, Route109_Text_1B9A1C, Route109_Text_1B9A59
-	msgbox Route109_Text_1B9A6D, 6
+	msgbox Route109_Text_1B9A6D, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F7C4:: @ 814F7C4
 	trainerbattle_single TRAINER_ALICE, Route109_Text_1B9AAD, Route109_Text_1B9AD9
-	msgbox Route109_Text_1B9AEB, 6
+	msgbox Route109_Text_1B9AEB, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F7DB:: @ 814F7DB
 	trainerbattle_single TRAINER_HUEY, Route109_Text_1B9B11, Route109_Text_1B9B57
-	msgbox Route109_Text_1B9B68, 6
+	msgbox Route109_Text_1B9B68, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F7F2:: @ 814F7F2
 	trainerbattle_single TRAINER_EDMOND, Route109_Text_1B9B91, Route109_Text_1B9BAE
-	msgbox Route109_Text_1B9BD3, 6
+	msgbox Route109_Text_1B9BD3, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F809:: @ 814F809
@@ -397,12 +397,12 @@ Route109_EventScript_14F809:: @ 814F809
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route109_EventScript_14F830
-	msgbox Route109_Text_1B9C6E, 6
+	msgbox Route109_Text_1B9C6E, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F830:: @ 814F830
 	trainerbattle_rematch TRAINER_RICKY_1, Route109_Text_1B9CB3, Route109_Text_1B9CEB
-	msgbox Route109_Text_1B9D10, 6
+	msgbox Route109_Text_1B9D10, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F847:: @ 814F847
@@ -410,35 +410,35 @@ Route109_EventScript_14F847:: @ 814F847
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route109_EventScript_14F86E
-	msgbox Route109_Text_1B9D8E, 6
+	msgbox Route109_Text_1B9D8E, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F86E:: @ 814F86E
 	trainerbattle_rematch TRAINER_LOLA_1, Route109_Text_1B9DD8, Route109_Text_1B9E16
-	msgbox Route109_Text_1B9E1D, 6
+	msgbox Route109_Text_1B9E1D, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F885:: @ 814F885
 	trainerbattle_single TRAINER_CARMEN, Route109_Text_1B9E60, Route109_Text_1B9EA1
-	msgbox Route109_Text_1B9ECA, 6
+	msgbox Route109_Text_1B9ECA, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F89C:: @ 814F89C
 	trainerbattle_single TRAINER_GWEN, Route109_Text_1B9F07, Route109_Text_1B9F31
-	msgbox Route109_Text_1B9F44, 6
+	msgbox Route109_Text_1B9F44, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F8B3:: @ 814F8B3
 	trainerbattle_single TRAINER_CARTER, Route109_Text_1B9F65, Route109_Text_1B9F9C
-	msgbox Route109_Text_1B9FB7, 6
+	msgbox Route109_Text_1B9FB7, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F8CA:: @ 814F8CA
 	trainerbattle_double TRAINER_MEL_AND_PAUL, Route109_Text_1B9FF6, Route109_Text_1BA052, Route109_Text_1BA0BF
-	msgbox Route109_Text_1BA069, 6
+	msgbox Route109_Text_1BA069, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_14F8E5:: @ 814F8E5
 	trainerbattle_double TRAINER_MEL_AND_PAUL, Route109_Text_1BA114, Route109_Text_1BA15F, Route109_Text_1BA1D0
-	msgbox Route109_Text_1BA193, 6
+	msgbox Route109_Text_1BA193, MSGBOX_AUTOCLOSE
 	end

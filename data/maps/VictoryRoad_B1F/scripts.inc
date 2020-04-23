@@ -3,15 +3,15 @@ VictoryRoad_B1F_MapScripts:: @ 815DFB4
 
 VictoryRoad_B1F_EventScript_15DFB5:: @ 815DFB5
 	trainerbattle_single TRAINER_SAMUEL, VictoryRoad_B1F_Text_197CE9, VictoryRoad_B1F_Text_197D42
-	msgbox VictoryRoad_B1F_Text_197D5B, 6
+	msgbox VictoryRoad_B1F_Text_197D5B, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B1F_EventScript_15DFCC:: @ 815DFCC
 	trainerbattle_single TRAINER_SHANNON, VictoryRoad_B1F_Text_197D98, VictoryRoad_B1F_Text_197DE8
-	msgbox VictoryRoad_B1F_Text_197E13, 6
+	msgbox VictoryRoad_B1F_Text_197E13, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B1F_EventScript_15DFE3:: @ 815DFE3
 	trainerbattle_single TRAINER_MICHELLE, VictoryRoad_B1F_Text_197E5D, VictoryRoad_B1F_Text_197EA6
-	msgbox VictoryRoad_B1F_Text_197EB6, 6
+	msgbox VictoryRoad_B1F_Text_197EB6, MSGBOX_AUTOCLOSE
 	end

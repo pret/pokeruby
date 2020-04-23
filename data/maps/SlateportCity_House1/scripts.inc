@@ -12,7 +12,7 @@ SlateportCity_House1_EventScript_15567B:: @ 815567B
 	end
 
 SlateportCity_House1_EventScript_15569C:: @ 815569C
-	msgbox SlateportCity_House1_Text_17D4DB, 4
+	msgbox SlateportCity_House1_Text_17D4DB, MSGBOX_DEFAULT
 	special SelectMonForNPCTrade
 	waitstate
 	compare VAR_0x8004, 255
@@ -22,7 +22,7 @@ SlateportCity_House1_EventScript_15569C:: @ 815569C
 	end
 
 SlateportCity_House1_EventScript_1556BF:: @ 81556BF
-	msgbox SlateportCity_House1_Text_17D61E, 4
+	msgbox SlateportCity_House1_Text_17D61E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -46,27 +46,27 @@ SlateportCity_House1_EventScript_1556C9:: @ 81556C9
 	end
 
 SlateportCity_House1_EventScript_15571C:: @ 815571C
-	msgbox SlateportCity_House1_Text_17D752, 4
+	msgbox SlateportCity_House1_Text_17D752, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_House1_EventScript_155726:: @ 8155726
-	msgbox SlateportCity_House1_Text_17D6CC, 4
+	msgbox SlateportCity_House1_Text_17D6CC, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_House1_EventScript_155730:: @ 8155730
-	msgbox SlateportCity_House1_Text_17D580, 4
+	msgbox SlateportCity_House1_Text_17D580, MSGBOX_DEFAULT
 	call SlateportCity_House1_EventScript_1A0678
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_15575A
-	msgbox SlateportCity_House1_Text_17D63A, 4
+	msgbox SlateportCity_House1_Text_17D63A, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_House1_EventScript_15575A:: @ 815575A
-	msgbox SlateportCity_House1_Text_17D5B0, 4
+	msgbox SlateportCity_House1_Text_17D5B0, MSGBOX_DEFAULT
 	release
 	end

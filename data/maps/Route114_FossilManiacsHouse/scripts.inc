@@ -10,7 +10,7 @@ Route114_FossilManiacsHouse_EventScript_15C1C3:: @ 815C1C3
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_15C1F2
-	msgbox Route114_FossilManiacsHouse_Text_1925E1, 4
+	msgbox Route114_FossilManiacsHouse_Text_1925E1, MSGBOX_DEFAULT
 	giveitem ITEM_TM28_DIG
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_FossilManiacsHouse_EventScript_1A029B
@@ -19,14 +19,14 @@ Route114_FossilManiacsHouse_EventScript_15C1C3:: @ 815C1C3
 	end
 
 Route114_FossilManiacsHouse_EventScript_15C1F2:: @ 815C1F2
-	msgbox Route114_FossilManiacsHouse_Text_1926AE, 4
+	msgbox Route114_FossilManiacsHouse_Text_1926AE, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_FossilManiacsHouse_EventScript_15C1FC:: @ 815C1FC
-	msgbox Route114_FossilManiacsHouse_Text_1926FA, 3
+	msgbox Route114_FossilManiacsHouse_Text_1926FA, MSGBOX_SIGN
 	end
 
 Route114_FossilManiacsHouse_EventScript_15C205:: @ 815C205
-	msgbox Route114_FossilManiacsHouse_Text_192729, 3
+	msgbox Route114_FossilManiacsHouse_Text_192729, MSGBOX_SIGN
 	end

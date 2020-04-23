@@ -8,7 +8,7 @@ PetalburgCity_Mart_EventScript_1552B0:: @ 81552B0
 	waitmessage
 	goto_if_set FLAG_PETALBURG_MART_EXPANDED_ITEMS, PetalburgCity_Mart_EventScript_1552EA
 	pokemart PetalburgCity_Mart_Items1
-	msgbox PetalburgCity_Mart_Text_1A0C02, 4
+	msgbox PetalburgCity_Mart_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -31,7 +31,7 @@ PetalburgCity_Mart_Items1:: @ 81552D0
 
 PetalburgCity_Mart_EventScript_1552EA:: @ 81552EA
 	pokemart PetalburgCity_Mart_Items2
-	msgbox PetalburgCity_Mart_Text_1A0C02, 4
+	msgbox PetalburgCity_Mart_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -55,13 +55,13 @@ PetalburgCity_Mart_Items2:: @ 81552FC
 	end
 
 PetalburgCity_Mart_EventScript_15531A:: @ 815531A
-	msgbox PetalburgCity_Mart_Text_17BFFD, 2
+	msgbox PetalburgCity_Mart_Text_17BFFD, MSGBOX_NPC
 	end
 
 PetalburgCity_Mart_EventScript_155323:: @ 8155323
-	msgbox PetalburgCity_Mart_Text_17C06C, 2
+	msgbox PetalburgCity_Mart_Text_17C06C, MSGBOX_NPC
 	end
 
 PetalburgCity_Mart_EventScript_15532C:: @ 815532C
-	msgbox PetalburgCity_Mart_Text_17C0BC, 2
+	msgbox PetalburgCity_Mart_Text_17C0BC, MSGBOX_NPC
 	end

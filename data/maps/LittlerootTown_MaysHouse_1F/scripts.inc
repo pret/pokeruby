@@ -59,7 +59,7 @@ LittlerootTown_MaysHouse_1F_MapScript2_15290E:: @ 815290E
 
 LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	lockall
-	msgbox LittlerootTown_MaysHouse_1F_Text_172574, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_172574, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_15295E
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
@@ -98,7 +98,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
 	waitmovement 0
 	special GetRivalSonDaughterString
-	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 2
 	releaseall
@@ -127,7 +127,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1529E1:: @ 81529E1
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1529E2:: @ 81529E2
-	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1529EB:: @ 81529EB
@@ -139,22 +139,22 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special GetRivalSonDaughterString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152A17:: @ 8152A17
-	msgbox LittlerootTown_BrendansHouse_1F_Text_173262, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_173262, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152A21:: @ 8152A21
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1732B9, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1732B9, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152A2B:: @ 8152A2B
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1731E3, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1731E3, MSGBOX_DEFAULT
 	release
 	end
 

@@ -37,11 +37,11 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA6E
 	waitmovement 0
-	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
+	msgbox MossdeepCity_StevensHouse_Text_18DA77, MSGBOX_DEFAULT
 	giveitem ITEM_HM08_DIVE
 	setflag FLAG_RECEIVED_HM08
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
-	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
+	msgbox MossdeepCity_StevensHouse_Text_18DB22, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA76
@@ -93,32 +93,32 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AADC:: @ 815AADC
-	msgbox MossdeepCity_StevensHouse_Text_18DD77, 4
+	msgbox MossdeepCity_StevensHouse_Text_18DD77, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AAE6:: @ 815AAE6
-	msgbox MossdeepCity_StevensHouse_Text_18DD9E, 4
+	msgbox MossdeepCity_StevensHouse_Text_18DD9E, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AAF0:: @ 815AAF0
-	msgbox MossdeepCity_StevensHouse_Text_18E0A3, 3
+	msgbox MossdeepCity_StevensHouse_Text_18E0A3, MSGBOX_SIGN
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
-	msgbox MossdeepCity_StevensHouse_Text_18DC25, 2
+	msgbox MossdeepCity_StevensHouse_Text_18DC25, MSGBOX_NPC
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
 	goto_if_set FLAG_OMIT_DIVE_FROM_STEVEN_LETTER, MossdeepCity_StevensHouse_EventScript_15AB16
-	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
+	msgbox MossdeepCity_StevensHouse_Text_18DF1A, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AB16:: @ 815AB16
-	msgbox MossdeepCity_StevensHouse_Text_18DDC2, 4
+	msgbox MossdeepCity_StevensHouse_Text_18DDC2, MSGBOX_DEFAULT
 	releaseall
 	end
 

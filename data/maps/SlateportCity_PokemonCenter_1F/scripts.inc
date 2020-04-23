@@ -16,9 +16,9 @@ SlateportCity_PokemonCenter_1F_EventScript_1563CE:: @ 81563CE
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_1563DC:: @ 81563DC
-	msgbox SlateportCity_PokemonCenter_1F_Text_180602, 2
+	msgbox SlateportCity_PokemonCenter_1F_Text_180602, MSGBOX_NPC
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_1563E5:: @ 81563E5
-	msgbox SlateportCity_PokemonCenter_1F_Text_1806CB, 2
+	msgbox SlateportCity_PokemonCenter_1F_Text_1806CB, MSGBOX_NPC
 	end

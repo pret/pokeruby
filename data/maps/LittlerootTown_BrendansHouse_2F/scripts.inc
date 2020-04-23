@@ -36,12 +36,12 @@ LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_15280A:: @ 815280A
-	msgbox UnknownString_8172F31, 4
+	msgbox UnknownString_8172F31, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152814:: @ 8152814
-	msgbox UnknownString_8173A76, 4
+	msgbox UnknownString_8173A76, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -60,7 +60,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	setvar VAR_0x8004, 1
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall
@@ -74,16 +74,16 @@ gBrendanHouse_TurnPCOff:: @ 8152850
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_15285D:: @ 815285D
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1A100C, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1A100C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152867:: @ 8152867
 LittlerootTown_MaysHouse_2F_EventScript_152867:: @ 8152867
-	msgbox LittlerootTown_BrendansHouse_2F_Text_172F9A, 3
+	msgbox LittlerootTown_BrendansHouse_2F_Text_172F9A, MSGBOX_SIGN
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152870:: @ 8152870
 LittlerootTown_MaysHouse_2F_EventScript_152870:: @ 8152870
-	msgbox LittlerootTown_BrendansHouse_2F_Text_17306C, 3
+	msgbox LittlerootTown_BrendansHouse_2F_Text_17306C, MSGBOX_SIGN
 	end

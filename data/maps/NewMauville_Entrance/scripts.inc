@@ -25,14 +25,14 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	lockall
 	applymovement 255, NewMauville_Entrance_Movement_1A0841
 	waitmovement 0
-	msgbox NewMauville_Entrance_Text_1982C0, 4
+	msgbox NewMauville_Entrance_Text_1982C0, MSGBOX_DEFAULT
 	checkitem ITEM_BASEMENT_KEY, 1
 	compare VAR_RESULT, 0
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982D4, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
-	msgbox NewMauville_Entrance_Text_1982EA, 4
+	msgbox NewMauville_Entrance_Text_1982EA, MSGBOX_DEFAULT
 	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, 0
 	setmetatile 4, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile1, 0
 	setmetatile 5, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile2, 0

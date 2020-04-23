@@ -27,7 +27,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BAA8:: @ 815BAA8
 	message EverGrandeCity_PokemonLeague_Text_1A0BE4
 	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_Items
-	msgbox EverGrandeCity_PokemonLeague_Text_1A0C02, 4
+	msgbox EverGrandeCity_PokemonLeague_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -84,14 +84,14 @@ EverGrandeCity_PokemonLeague_EventScript_15BB3F:: @ 815BB3F
 
 EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
 	playse SE_HAZURE
-	msgbox EverGrandeCity_PokemonLeague_Text_19179C, 4
+	msgbox EverGrandeCity_PokemonLeague_Text_19179C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB57:: @ 815BB57
 	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
 	waitmovement 0
-	msgbox EverGrandeCity_PokemonLeague_Text_191804, 4
+	msgbox EverGrandeCity_PokemonLeague_Text_191804, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
 	waitmovement 0

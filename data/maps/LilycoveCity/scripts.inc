@@ -62,53 +62,53 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	faceplayer
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_LILYCOVE, LilycoveCity_EventScript_14CBB4
-	msgbox LilycoveCity_Text_1C5A7A, 4
+	msgbox LilycoveCity_Text_1C5A7A, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
 	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
-	msgbox LilycoveCity_Text_1C5B1D, 4
+	msgbox LilycoveCity_Text_1C5B1D, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CBB4:: @ 814CBB4
-	msgbox LilycoveCity_Text_1C5B5D, 4
+	msgbox LilycoveCity_Text_1C5B5D, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CBBE:: @ 814CBBE
-	msgbox LilycoveCity_Text_1686C9, 2
+	msgbox LilycoveCity_Text_1686C9, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CBC7:: @ 814CBC7
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_14CBDC
-	msgbox LilycoveCity_Text_168750, 4
+	msgbox LilycoveCity_Text_168750, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CBDC:: @ 814CBDC
-	msgbox LilycoveCity_Text_168791, 4
+	msgbox LilycoveCity_Text_168791, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CBE6:: @ 814CBE6
-	msgbox LilycoveCity_Text_168819, 2
+	msgbox LilycoveCity_Text_168819, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CBEF:: @ 814CBEF
 	lock
 	faceplayer
 	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_14CC04
-	msgbox LilycoveCity_Text_1688C1, 4
+	msgbox LilycoveCity_Text_1688C1, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CC04:: @ 814CC04
-	msgbox LilycoveCity_Text_168934, 4
+	msgbox LilycoveCity_Text_168934, MSGBOX_DEFAULT
 	release
 	end
 
@@ -116,50 +116,50 @@ LilycoveCity_EventScript_14CC0E:: @ 814CC0E
 	lock
 	faceplayer
 	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_14CC23
-	msgbox LilycoveCity_Text_1689BF, 4
+	msgbox LilycoveCity_Text_1689BF, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CC23:: @ 814CC23
-	msgbox LilycoveCity_Text_168A55, 4
+	msgbox LilycoveCity_Text_168A55, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CC2D:: @ 814CC2D
-	msgbox LilycoveCity_Text_168A8D, 2
+	msgbox LilycoveCity_Text_168A8D, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CC36:: @ 814CC36
-	msgbox LilycoveCity_Text_168B1F, 3
+	msgbox LilycoveCity_Text_168B1F, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CC3F:: @ 814CC3F
-	msgbox LilycoveCity_Text_168B9B, 3
+	msgbox LilycoveCity_Text_168B9B, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CC48:: @ 814CC48
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_14CC5D
-	msgbox LilycoveCity_Text_168C16, 4
+	msgbox LilycoveCity_Text_168C16, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CC5D:: @ 814CC5D
-	msgbox LilycoveCity_Text_168D15, 4
+	msgbox LilycoveCity_Text_168D15, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_EventScript_14CC67:: @ 814CC67
-	msgbox LilycoveCity_Text_168DA9, 3
+	msgbox LilycoveCity_Text_168DA9, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CC70:: @ 814CC70
-	msgbox LilycoveCity_Text_168DE1, 3
+	msgbox LilycoveCity_Text_168DE1, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CC79:: @ 814CC79
-	msgbox LilycoveCity_Text_168E2F, 3
+	msgbox LilycoveCity_Text_168E2F, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
@@ -167,46 +167,46 @@ LilycoveCity_EventScript_14CC82:: @ 814CC82
 	specialvar VAR_0x8004, sub_80C4D50
 	switch VAR_0x8004
 	case 0, LilycoveCity_EventScript_14CCA2
-	msgbox LilycoveCity_Text_168EA4, 4
+	msgbox LilycoveCity_Text_168EA4, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_EventScript_14CCA2:: @ 814CCA2
-	msgbox LilycoveCity_Text_168E67, 4
+	msgbox LilycoveCity_Text_168E67, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_EventScript_14CCAC:: @ 814CCAC
 	lockall
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_14CCC0
-	msgbox LilycoveCity_Text_168EDA, 4
+	msgbox LilycoveCity_Text_168EDA, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_EventScript_14CCC0:: @ 814CCC0
-	msgbox LilycoveCity_Text_168F57, 4
+	msgbox LilycoveCity_Text_168F57, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_EventScript_14CCCA:: @ 814CCCA
-	msgbox LilycoveCity_Text_168FA1, 3
+	msgbox LilycoveCity_Text_168FA1, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CCD3:: @ 814CCD3
-	msgbox LilycoveCity_Text_168FF3, 3
+	msgbox LilycoveCity_Text_168FF3, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CCDC:: @ 814CCDC
-	msgbox LilycoveCity_Text_169072, 3
+	msgbox LilycoveCity_Text_169072, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_14CD18
-	msgbox LilycoveCity_Text_16864A, 4
+	msgbox LilycoveCity_Text_16864A, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A0839
 	waitmovement 0
-	msgbox LilycoveCity_Text_168675, 4
+	msgbox LilycoveCity_Text_168675, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A083D
 	waitmovement 0
 	setflag FLAG_MET_WAILMER_TRAINER
@@ -214,24 +214,24 @@ LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	end
 
 LilycoveCity_EventScript_14CD18:: @ 814CD18
-	msgbox LilycoveCity_Text_16864A, 4
+	msgbox LilycoveCity_Text_16864A, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_EventScript_14CD22:: @ 814CD22
-	msgbox LilycoveCity_Text_168455, 2
+	msgbox LilycoveCity_Text_168455, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CD2B:: @ 814CD2B
-	msgbox LilycoveCity_Text_1684C2, 2
+	msgbox LilycoveCity_Text_1684C2, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CD34:: @ 814CD34
-	msgbox LilycoveCity_Text_168573, 2
+	msgbox LilycoveCity_Text_168573, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CD3D:: @ 814CD3D
-	msgbox LilycoveCity_Text_1685EB, 2
+	msgbox LilycoveCity_Text_1685EB, MSGBOX_NPC
 	end
 
 LilycoveCity_EventScript_14CD46:: @ 814CD46
@@ -250,7 +250,7 @@ LilycoveCity_EventScript_14CD60:: @ 814CD60
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CDB9
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CDC2
-	msgbox LilycoveCity_Text_167B94, 4
+	msgbox LilycoveCity_Text_167B94, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_14CE46
 	case 1, LilycoveCity_EventScript_14CE56
@@ -267,7 +267,7 @@ LilycoveCity_EventScript_14CDB9:: @ 814CDB9
 
 LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 	setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
-	msgbox LilycoveCity_Text_167AEB, 4
+	msgbox LilycoveCity_Text_167AEB, MSGBOX_DEFAULT
 	savebgm 0
 	fadedefaultbgm
 	release
@@ -279,7 +279,7 @@ LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CE2C
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CE35
-	msgbox LilycoveCity_Text_1680A9, 4
+	msgbox LilycoveCity_Text_1680A9, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_14CE76
 	case 1, LilycoveCity_EventScript_14CE86
@@ -296,7 +296,7 @@ LilycoveCity_EventScript_14CE2C:: @ 814CE2C
 
 LilycoveCity_EventScript_14CE35:: @ 814CE35
 	setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
-	msgbox LilycoveCity_Text_16802C, 4
+	msgbox LilycoveCity_Text_16802C, MSGBOX_DEFAULT
 	savebgm 0
 	fadedefaultbgm
 	release
@@ -333,7 +333,7 @@ LilycoveCity_EventScript_14CE96:: @ 814CE96
 	end
 
 LilycoveCity_EventScript_14CEA6:: @ 814CEA6
-	msgbox LilycoveCity_Text_167C6B, 4
+	msgbox LilycoveCity_Text_167C6B, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_14CEDE
 	compare VAR_RESULT, 0
@@ -354,20 +354,20 @@ LilycoveCity_EventScript_14CEE8:: @ 814CEE8
 	return
 
 LilycoveCity_EventScript_14CEEE:: @ 814CEEE
-	msgbox LilycoveCity_Text_167D08, 4
+	msgbox LilycoveCity_Text_167D08, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_14CEF7:: @ 814CEF7
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_14CF09
-	msgbox LilycoveCity_Text_167DDD, 4
+	msgbox LilycoveCity_Text_167DDD, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_14CF09:: @ 814CF09
-	msgbox LilycoveCity_Text_167EAA, 4
+	msgbox LilycoveCity_Text_167EAA, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_14CF12:: @ 814CF12
-	msgbox LilycoveCity_Text_168149, 4
+	msgbox LilycoveCity_Text_168149, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_14CEDE
 	compare VAR_RESULT, 0
@@ -379,16 +379,16 @@ LilycoveCity_EventScript_14CF12:: @ 814CF12
 	end
 
 LilycoveCity_EventScript_14CF47:: @ 814CF47
-	msgbox LilycoveCity_Text_1681EA, 4
+	msgbox LilycoveCity_Text_1681EA, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_14CF50:: @ 814CF50
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_14CF62
-	msgbox LilycoveCity_Text_168282, 4
+	msgbox LilycoveCity_Text_168282, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_14CF62:: @ 814CF62
-	msgbox LilycoveCity_Text_16835A, 4
+	msgbox LilycoveCity_Text_16835A, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_14CF6B:: @ 814CF6B

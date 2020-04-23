@@ -39,7 +39,7 @@ EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
 	playbgm MUS_DAIGO, FALSE
-	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_STEVEN, EverGrandeCity_ChampionsRoom_Text_1910A0
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
 	end
@@ -49,7 +49,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, 0
 	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, 0
 	special DrawWholeMapView
-	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, MSGBOX_DEFAULT
 	closemessage
 	playse SE_DOOR
 	checkplayergender
@@ -75,7 +75,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B881:: @ 815B881
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
-	msgbox EverGrandeCity_ChampionsRoom_Text_191225, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_191225, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
@@ -83,12 +83,12 @@ EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
-	msgbox EverGrandeCity_ChampionsRoom_Text_191268, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_191268, MSGBOX_DEFAULT
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
-	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
@@ -96,7 +96,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
-	msgbox EverGrandeCity_ChampionsRoom_Text_191305, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_191305, MSGBOX_DEFAULT
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
 	end
 
@@ -107,15 +107,15 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	waitmovement 0
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0843
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, MSGBOX_DEFAULT
 	call EverGrandeCity_ChampionsRoom_EventScript_1A03B0
-	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, MSGBOX_DEFAULT
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
 	waitmovement 0
 	delay 20
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_191512, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_191512, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
@@ -126,7 +126,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	delay 20
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_191546, MSGBOX_DEFAULT
 	checkplayergender
 	compare VAR_RESULT, 0
 	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B9AB
@@ -143,11 +143,11 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9AB:: @ 815B9AB
-	msgbox EverGrandeCity_ChampionsRoom_Text_1915D7, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_1915D7, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9B4:: @ 815B9B4
-	msgbox EverGrandeCity_ChampionsRoom_Text_191675, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_191675, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9BD:: @ 815B9BD

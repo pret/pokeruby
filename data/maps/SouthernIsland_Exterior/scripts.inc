@@ -12,7 +12,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	msgbox SouthernIsland_Exterior_Text_1C5215, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SouthernIsland_Exterior_EventScript_160B25
-	msgbox SouthernIsland_Exterior_Text_1C5281, 4
+	msgbox SouthernIsland_Exterior_Text_1C5281, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
 	waitmovement 0
@@ -26,7 +26,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	end
 
 SouthernIsland_Exterior_EventScript_160B25:: @ 8160B25
-	msgbox SouthernIsland_Exterior_Text_1C52A6, 4
+	msgbox SouthernIsland_Exterior_Text_1C52A6, MSGBOX_DEFAULT
 	release
 	end
 
@@ -50,5 +50,5 @@ BattleTower_Outside_Movement_160B47:: @ 8160B47
 	end_movement
 
 SouthernIsland_Exterior_EventScript_160B4A:: @ 8160B4A
-	msgbox SouthernIsland_Exterior_Text_1C52FB, 3
+	msgbox SouthernIsland_Exterior_Text_1C52FB, MSGBOX_SIGN
 	end

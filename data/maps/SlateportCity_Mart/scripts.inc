@@ -7,7 +7,7 @@ SlateportCity_Mart_EventScript_156411:: @ 8156411
 	message SlateportCity_Mart_Text_1A0BE4
 	waitmessage
 	pokemart SlateportCity_Mart_Items
-	msgbox SlateportCity_Mart_Text_1A0C02, 4
+	msgbox SlateportCity_Mart_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -27,9 +27,9 @@ SlateportCity_Mart_Items:: @ 8156428
 	end
 
 SlateportCity_Mart_EventScript_15643E:: @ 815643E
-	msgbox SlateportCity_Mart_Text_180730, 2
+	msgbox SlateportCity_Mart_Text_180730, MSGBOX_NPC
 	end
 
 SlateportCity_Mart_EventScript_156447:: @ 8156447
-	msgbox SlateportCity_Mart_Text_18079D, 2
+	msgbox SlateportCity_Mart_Text_18079D, MSGBOX_NPC
 	end

@@ -38,15 +38,15 @@ SafariZone_Southeast_Movement_160089:: @ 8160089
 	end_movement
 
 SafariZone_Southeast_EventScript_16008C:: @ 816008C
-	msgbox SafariZone_Southeast_Text_1C3B71, 2
+	msgbox SafariZone_Southeast_Text_1C3B71, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_160095:: @ 8160095
-	msgbox SafariZone_Southeast_Text_1C3BBD, 2
+	msgbox SafariZone_Southeast_Text_1C3BBD, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_16009E:: @ 816009E
-	msgbox SafariZone_Southeast_Text_1C3DCE, 2
+	msgbox SafariZone_Southeast_Text_1C3DCE, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
@@ -57,18 +57,18 @@ SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	msgbox SafariZone_Southeast_Text_1C3A56, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SafariZone_Southeast_EventScript_1600E0
-	msgbox SafariZone_Southeast_Text_1C3A9C, 4
+	msgbox SafariZone_Southeast_Text_1C3A9C, MSGBOX_DEFAULT
 	release
 	end
 
 SafariZone_Southeast_EventScript_1600D1:: @ 81600D1
 	setvar VAR_TEMP_1, 1
-	msgbox SafariZone_Southeast_Text_1C3B2D, 4
+	msgbox SafariZone_Southeast_Text_1C3B2D, MSGBOX_DEFAULT
 	release
 	end
 
 SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
-	msgbox SafariZone_Southeast_Text_1C3ACA, 4
+	msgbox SafariZone_Southeast_Text_1C3ACA, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 2, SafariZone_Southeast_EventScript_160105

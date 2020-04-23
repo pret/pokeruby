@@ -87,7 +87,7 @@ Route119_EventScript_151259:: @ 8151259
 	return
 
 Route119_EventScript_15125E:: @ 815125E
-	msgbox Route119_Text_1710BB, 4
+	msgbox Route119_Text_1710BB, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_15128D
 	case 1, Route119_EventScript_15129D
@@ -110,14 +110,14 @@ Route119_EventScript_1512AD:: @ 81512AD
 	end
 
 Route119_EventScript_1512BD:: @ 81512BD
-	msgbox Route119_Text_1711B1, 4
+	msgbox Route119_Text_1711B1, MSGBOX_DEFAULT
 	call Route119_EventScript_151352
-	msgbox Route119_Text_171214, 4
+	msgbox Route119_Text_171214, MSGBOX_DEFAULT
 	goto Route119_EventScript_151362
 	end
 
 Route119_EventScript_1512D8:: @ 81512D8
-	msgbox Route119_Text_171358, 4
+	msgbox Route119_Text_171358, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_151307
 	case 1, Route119_EventScript_151317
@@ -140,9 +140,9 @@ Route119_EventScript_151327:: @ 8151327
 	end
 
 Route119_EventScript_151337:: @ 8151337
-	msgbox Route119_Text_17140B, 4
+	msgbox Route119_Text_17140B, MSGBOX_DEFAULT
 	call Route119_EventScript_151352
-	msgbox Route119_Text_171475, 4
+	msgbox Route119_Text_171475, MSGBOX_DEFAULT
 	goto Route119_EventScript_151362
 	end
 
@@ -252,45 +252,45 @@ Route119_Movement_15140F:: @ 815140F
 	end_movement
 
 Route119_EventScript_15141A:: @ 815141A
-	msgbox Route119_Text_171698, 2
+	msgbox Route119_Text_171698, MSGBOX_NPC
 	end
 
 Route119_EventScript_151423:: @ 8151423
-	msgbox Route119_Text_171749, 3
+	msgbox Route119_Text_171749, MSGBOX_SIGN
 	end
 
 Route119_EventScript_15142C:: @ 815142C
-	msgbox Route119_Text_171762, 3
+	msgbox Route119_Text_171762, MSGBOX_SIGN
 	end
 
 Route119_EventScript_151435:: @ 8151435
 	trainerbattle_single TRAINER_BRENT, Route119_Text_1BE521, Route119_Text_1BE54F
-	msgbox Route119_Text_1BE561, 6
+	msgbox Route119_Text_1BE561, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_15144C:: @ 815144C
 	trainerbattle_single TRAINER_DONALD, Route119_Text_1BE5A4, Route119_Text_1BE5DF
-	msgbox Route119_Text_1BE5F8, 6
+	msgbox Route119_Text_1BE5F8, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151463:: @ 8151463
 	trainerbattle_single TRAINER_TAYLOR, Route119_Text_1BE632, Route119_Text_1BE67B
-	msgbox Route119_Text_1BE695, 6
+	msgbox Route119_Text_1BE695, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_15147A:: @ 815147A
 	trainerbattle_single TRAINER_DOUG, Route119_Text_1BE6EA, Route119_Text_1BE729
-	msgbox Route119_Text_1BE748, 6
+	msgbox Route119_Text_1BE748, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151491:: @ 8151491
 	trainerbattle_single TRAINER_GREG, Route119_Text_1BE784, Route119_Text_1BE7D3
-	msgbox Route119_Text_1BE7E9, 6
+	msgbox Route119_Text_1BE7E9, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_1514A8:: @ 81514A8
 	trainerbattle_single TRAINER_KENT, Route119_Text_1BE82F, Route119_Text_1BE88D
-	msgbox Route119_Text_1BE89A, 6
+	msgbox Route119_Text_1BE89A, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_1514BF:: @ 81514BF
@@ -298,12 +298,12 @@ Route119_EventScript_1514BF:: @ 81514BF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_1514E6
-	msgbox Route119_Text_1BE937, 6
+	msgbox Route119_Text_1BE937, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_1514E6:: @ 81514E6
 	trainerbattle_rematch TRAINER_JACKSON_1, Route119_Text_1BE98D, Route119_Text_1BE9D0
-	msgbox Route119_Text_1BE9E8, 6
+	msgbox Route119_Text_1BE9E8, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_1514FD:: @ 81514FD
@@ -311,48 +311,48 @@ Route119_EventScript_1514FD:: @ 81514FD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_151524
-	msgbox Route119_Text_1BEAB3, 6
+	msgbox Route119_Text_1BEAB3, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151524:: @ 8151524
 	trainerbattle_rematch TRAINER_CATHERINE_1, Route119_Text_1BEB22, Route119_Text_1BEB49
-	msgbox Route119_Text_1BEB68, 6
+	msgbox Route119_Text_1BEB68, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_15153B:: @ 815153B
 	trainerbattle_single TRAINER_HUGH, Route119_Text_1BEBC0, Route119_Text_1BEC1C
-	msgbox Route119_Text_1BEC2A, 6
+	msgbox Route119_Text_1BEC2A, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151552:: @ 8151552
 	trainerbattle_single TRAINER_PHIL, Route119_Text_1BEC5E, Route119_Text_1BEC9A
-	msgbox Route119_Text_1BECB1, 6
+	msgbox Route119_Text_1BECB1, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151569:: @ 8151569
 	trainerbattle_single TRAINER_YASU, Route119_Text_1BECF1, Route119_Text_1BED4C
-	msgbox Route119_Text_1BED5C, 6
+	msgbox Route119_Text_1BED5C, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151580:: @ 8151580
 	trainerbattle_single TRAINER_TAKASHI, Route119_Text_1BEDB6, Route119_Text_1BEDEC
-	msgbox Route119_Text_1BEE06, 6
+	msgbox Route119_Text_1BEE06, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_151597:: @ 8151597
 	trainerbattle_single TRAINER_HIDEO_2, Route119_Text_1BEE2D, Route119_Text_1BEE4B
-	msgbox Route119_Text_1BEE66, 6
+	msgbox Route119_Text_1BEE66, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_1515AE:: @ 81515AE
 	trainerbattle_single TRAINER_EUGENE, Route119_Text_1BEED0, Route119_Text_1BEF37
-	msgbox Route119_Text_1BEF67, 6
+	msgbox Route119_Text_1BEF67, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_1515C5:: @ 81515C5
 	lock
 	faceplayer
-	msgbox Route119_Text_171520, 4
+	msgbox Route119_Text_171520, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Route119_Movement_1A083D
 	waitmovement 0
@@ -362,7 +362,7 @@ Route119_EventScript_1515C5:: @ 81515C5
 Route119_EventScript_1515DC:: @ 81515DC
 	lock
 	faceplayer
-	msgbox Route119_Text_17157C, 4
+	msgbox Route119_Text_17157C, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Route119_Movement_1A083D
 	waitmovement 0
@@ -370,13 +370,13 @@ Route119_EventScript_1515DC:: @ 81515DC
 	end
 
 Route119_EventScript_1515F3:: @ 81515F3
-	msgbox Route119_Text_1715D7, 2
+	msgbox Route119_Text_1715D7, MSGBOX_NPC
 	end
 
 Route119_EventScript_1515FC:: @ 81515FC
-	msgbox Route119_Text_1716F4, 2
+	msgbox Route119_Text_1716F4, MSGBOX_NPC
 	end
 
 Route119_EventScript_151605:: @ 8151605
-	msgbox Route119_Text_171774, 3
+	msgbox Route119_Text_171774, MSGBOX_SIGN
 	end

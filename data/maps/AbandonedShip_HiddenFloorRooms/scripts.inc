@@ -138,6 +138,6 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE9B:: @ 815EE9B
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EEAB:: @ 815EEAB
 	lockall
-	msgbox AbandonedShip_HiddenFloorRooms_Text_198EE2, 4
+	msgbox AbandonedShip_HiddenFloorRooms_Text_198EE2, MSGBOX_DEFAULT
 	releaseall
 	end

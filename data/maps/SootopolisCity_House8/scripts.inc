@@ -5,7 +5,7 @@ SootopolisCity_House8_EventScript_15B401:: @ 815B401
 	special GetShroomishSizeRecordInfo
 	lock
 	faceplayer
-	msgbox SootopolisCity_House8_Text_1900F7, 4
+	msgbox SootopolisCity_House8_Text_1900F7, MSGBOX_DEFAULT
 	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
@@ -22,22 +22,22 @@ SootopolisCity_House8_EventScript_15B401:: @ 815B401
 	end
 
 SootopolisCity_House8_EventScript_15B448:: @ 815B448
-	msgbox SootopolisCity_House8_Text_190366, 4
+	msgbox SootopolisCity_House8_Text_190366, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B452:: @ 815B452
-	msgbox SootopolisCity_House8_Text_190329, 4
+	msgbox SootopolisCity_House8_Text_190329, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B45C:: @ 815B45C
-	msgbox SootopolisCity_House8_Text_1902E4, 4
+	msgbox SootopolisCity_House8_Text_1902E4, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B466:: @ 815B466
-	msgbox SootopolisCity_House8_Text_19021D, 4
+	msgbox SootopolisCity_House8_Text_19021D, MSGBOX_DEFAULT
 	giveitem ITEM_ELIXIR
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B488
@@ -46,7 +46,7 @@ SootopolisCity_House8_EventScript_15B466:: @ 815B466
 	end
 
 SootopolisCity_House8_EventScript_15B488:: @ 815B488
-	msgbox SootopolisCity_House8_Text_1902C4, 4
+	msgbox SootopolisCity_House8_Text_1902C4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -54,7 +54,7 @@ SootopolisCity_House8_EventScript_15B492:: @ 815B492
 	special GetBarboachSizeRecordInfo
 	lock
 	faceplayer
-	msgbox SootopolisCity_House8_Text_190431, 4
+	msgbox SootopolisCity_House8_Text_190431, MSGBOX_DEFAULT
 	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
@@ -71,22 +71,22 @@ SootopolisCity_House8_EventScript_15B492:: @ 815B492
 	end
 
 SootopolisCity_House8_EventScript_15B4D9:: @ 815B4D9
-	msgbox SootopolisCity_House8_Text_19065A, 4
+	msgbox SootopolisCity_House8_Text_19065A, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B4E3:: @ 815B4E3
-	msgbox SootopolisCity_House8_Text_190628, 4
+	msgbox SootopolisCity_House8_Text_190628, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B4ED:: @ 815B4ED
-	msgbox SootopolisCity_House8_Text_1905E6, 4
+	msgbox SootopolisCity_House8_Text_1905E6, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
-	msgbox SootopolisCity_House8_Text_190536, 4
+	msgbox SootopolisCity_House8_Text_190536, MSGBOX_DEFAULT
 	giveitem ITEM_ELIXIR
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B519
@@ -95,20 +95,20 @@ SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
 	end
 
 SootopolisCity_House8_EventScript_15B519:: @ 815B519
-	msgbox SootopolisCity_House8_Text_1905C1, 4
+	msgbox SootopolisCity_House8_Text_1905C1, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House8_EventScript_15B523:: @ 815B523
 	special GetShroomishSizeRecordInfo
 	lockall
-	msgbox SootopolisCity_House8_Text_1903C9, 4
+	msgbox SootopolisCity_House8_Text_1903C9, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SootopolisCity_House8_EventScript_15B531:: @ 815B531
 	special GetBarboachSizeRecordInfo
 	lockall
-	msgbox SootopolisCity_House8_Text_1906BE, 4
+	msgbox SootopolisCity_House8_Text_1906BE, MSGBOX_DEFAULT
 	releaseall
 	end

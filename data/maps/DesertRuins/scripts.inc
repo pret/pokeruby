@@ -39,7 +39,7 @@ DesertRuins_EventScript_15CB56:: @ 815CB56
 	end
 
 DesertRuins_EventScript_15CB6D:: @ 815CB6D
-	msgbox DesertRuins_Text_1A13BE, 4
+	msgbox DesertRuins_Text_1A13BE, MSGBOX_DEFAULT
 	releaseall
 	end
 

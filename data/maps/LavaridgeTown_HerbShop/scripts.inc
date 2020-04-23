@@ -7,7 +7,7 @@ LavaridgeTown_HerbShop_EventScript_153629:: @ 8153629
 	message LavaridgeTown_HerbShop_Text_17615C
 	waitmessage
 	pokemart LavaridgeTown_HerbShop_Items
-	msgbox LavaridgeTown_HerbShop_Text_1A0C02, 4
+	msgbox LavaridgeTown_HerbShop_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -22,14 +22,14 @@ LavaridgeTown_HerbShop_Items:: @ 8153640
 	end
 
 LavaridgeTown_HerbShop_EventScript_15364C:: @ 815364C
-	msgbox LavaridgeTown_HerbShop_Text_1762A3, 2
+	msgbox LavaridgeTown_HerbShop_Text_1762A3, MSGBOX_NPC
 	end
 
 LavaridgeTown_HerbShop_EventScript_153655:: @ 8153655
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_153684
-	msgbox LavaridgeTown_HerbShop_Text_1761A2, 4
+	msgbox LavaridgeTown_HerbShop_Text_1761A2, MSGBOX_DEFAULT
 	giveitem ITEM_CHARCOAL
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_HerbShop_EventScript_1A029B
@@ -38,6 +38,6 @@ LavaridgeTown_HerbShop_EventScript_153655:: @ 8153655
 	end
 
 LavaridgeTown_HerbShop_EventScript_153684:: @ 8153684
-	msgbox LavaridgeTown_HerbShop_Text_176209, 4
+	msgbox LavaridgeTown_HerbShop_Text_176209, MSGBOX_DEFAULT
 	release
 	end

@@ -30,21 +30,21 @@ EventScript_1A6EBB:
 
 EventScript_1A6EF1:
 	special GetMomOrDadStringForTVMessage
-	msgbox UnknownString_81A0E68, 4
+	msgbox UnknownString_81A0E68, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
 
 EventScript_1A6F01:
-	msgbox UnknownString_817288C, 4
+	msgbox UnknownString_817288C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_1A6F0B:
 	.ifdef SAPPHIRE
-	msgbox UnknownString_8172D30, 4
+	msgbox UnknownString_8172D30, MSGBOX_DEFAULT
 	.else
-	msgbox UnknownString_8172C50, 4
+	msgbox UnknownString_8172C50, MSGBOX_DEFAULT
 	.endif
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATI
@@ -70,7 +70,7 @@ EventScript_1A6F37:
 
 EventScript_1A6F3F:
 	special GetMomOrDadStringForTVMessage
-	msgbox UnknownString_81A0E68, 4
+	msgbox UnknownString_81A0E68, MSGBOX_DEFAULT
 	goto EventScript_1A6F37
 	end
 

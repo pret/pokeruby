@@ -97,7 +97,7 @@ DewfordTown_Gym_EventScript_153151:: @ 8153151
 DewfordTown_Gym_EventScript_153152:: @ 8153152
 	trainerbattle_single TRAINER_BRAWLY, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_1531B5
-	msgbox DewfordTown_Gym_Text_175412, 4
+	msgbox DewfordTown_Gym_Text_175412, MSGBOX_DEFAULT
 	release
 	end
 
@@ -106,7 +106,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	message DewfordTown_Gym_Text_1752BB
 	waitmessage
 	call DewfordTown_Gym_EventScript_1A02C5
-	msgbox DewfordTown_Gym_Text_1752E6, 4
+	msgbox DewfordTown_Gym_Text_1752E6, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
@@ -121,14 +121,14 @@ DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	giveitem ITEM_TM08_BULK_UP
 	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1A029B
-	msgbox DewfordTown_Gym_Text_1753BF, 4
+	msgbox DewfordTown_Gym_Text_1753BF, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
 	release
 	end
 
 DewfordTown_Gym_EventScript_1531D9:: @ 81531D9
 	trainerbattle_single TRAINER_HIDEKI, DewfordTown_Gym_Text_174F61, DewfordTown_Gym_Text_174F7A, DewfordTown_Gym_EventScript_1531F4
-	msgbox DewfordTown_Gym_Text_174F8E, 6
+	msgbox DewfordTown_Gym_Text_174F8E, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1531F4:: @ 81531F4
@@ -138,7 +138,7 @@ DewfordTown_Gym_EventScript_1531F4:: @ 81531F4
 
 DewfordTown_Gym_EventScript_1531FB:: @ 81531FB
 	trainerbattle_single TRAINER_TESSA, DewfordTown_Gym_Text_174FCE, DewfordTown_Gym_Text_175009, DewfordTown_Gym_EventScript_153216
-	msgbox DewfordTown_Gym_Text_175031, 6
+	msgbox DewfordTown_Gym_Text_175031, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_153216:: @ 8153216
@@ -148,7 +148,7 @@ DewfordTown_Gym_EventScript_153216:: @ 8153216
 
 DewfordTown_Gym_EventScript_15321D:: @ 815321D
 	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_1750C9, DewfordTown_Gym_Text_175104, DewfordTown_Gym_EventScript_153238
-	msgbox DewfordTown_Gym_Text_175117, 6
+	msgbox DewfordTown_Gym_Text_175117, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_153238:: @ 8153238
@@ -160,12 +160,12 @@ DewfordTown_Gym_EventScript_15323F:: @ 815323F
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_DEWFORD_GYM, DewfordTown_Gym_EventScript_153254
-	msgbox DewfordTown_Gym_Text_174D98, 4
+	msgbox DewfordTown_Gym_Text_174D98, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_Gym_EventScript_153254:: @ 8153254
-	msgbox DewfordTown_Gym_Text_174F1E, 4
+	msgbox DewfordTown_Gym_Text_174F1E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -182,11 +182,11 @@ DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	end
 
 DewfordTown_Gym_EventScript_15327E:: @ 815327E
-	msgbox DewfordTown_Gym_Text_175490, 4
+	msgbox DewfordTown_Gym_Text_175490, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Gym_EventScript_153288:: @ 8153288
-	msgbox DewfordTown_Gym_Text_175477, 4
+	msgbox DewfordTown_Gym_Text_175477, MSGBOX_DEFAULT
 	releaseall
 	end

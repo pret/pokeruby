@@ -23,7 +23,7 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
 	waitmovement 0
-	msgbox EverGrandeCity_HallOfFame_Text_191841, 4
+	msgbox EverGrandeCity_HallOfFame_Text_191841, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC60
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC60
@@ -32,7 +32,7 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
 	waitmovement 0
-	msgbox EverGrandeCity_HallOfFame_Text_1918D7, 4
+	msgbox EverGrandeCity_HallOfFame_Text_1918D7, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0841
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841

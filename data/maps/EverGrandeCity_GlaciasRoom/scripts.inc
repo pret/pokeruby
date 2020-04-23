@@ -42,19 +42,19 @@ EverGrandeCity_GlaciasRoom_EventScript_15B6CA:: @ 815B6CA
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_15B6F1
 	playbgm MUS_SITENNOU, FALSE
-	msgbox EverGrandeCity_GlaciasRoom_Text_190AF9, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_190AF9, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_190C01
 	goto EverGrandeCity_GlaciasRoom_EventScript_15B6FB
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_15B6F1:: @ 815B6F1
-	msgbox EverGrandeCity_GlaciasRoom_Text_190C8F, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_190C8F, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_15B6FB:: @ 815B6FB
 	setflag FLAG_DEFEATED_ELITE_4_GLACIA
 	call EverGrandeCity_GlaciasRoom_EventScript_1A0693
-	msgbox EverGrandeCity_GlaciasRoom_Text_190C8F, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_190C8F, MSGBOX_DEFAULT
 	release
 	end

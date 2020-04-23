@@ -29,15 +29,15 @@ Route110_TrickHousePuzzle6_EventScript_1630FC:: @ 81630FC
 
 Route110_TrickHousePuzzle6_EventScript_163107:: @ 8163107
 	trainerbattle_single TRAINER_SOPHIA, Route110_TrickHousePuzzle6_Text_19DC87, Route110_TrickHousePuzzle6_Text_19DCC6
-	msgbox Route110_TrickHousePuzzle6_Text_19DCE7, 6
+	msgbox Route110_TrickHousePuzzle6_Text_19DCE7, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle6_EventScript_16311E:: @ 816311E
 	trainerbattle_single TRAINER_BENNY, Route110_TrickHousePuzzle6_Text_19DD49, Route110_TrickHousePuzzle6_Text_19DD83
-	msgbox Route110_TrickHousePuzzle6_Text_19DD96, 6
+	msgbox Route110_TrickHousePuzzle6_Text_19DD96, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle6_EventScript_163135:: @ 8163135
 	trainerbattle_single TRAINER_SEBASTIAN, Route110_TrickHousePuzzle6_Text_19DDCF, Route110_TrickHousePuzzle6_Text_19DDFE
-	msgbox Route110_TrickHousePuzzle6_Text_19DE44, 6
+	msgbox Route110_TrickHousePuzzle6_Text_19DE44, MSGBOX_AUTOCLOSE
 	end

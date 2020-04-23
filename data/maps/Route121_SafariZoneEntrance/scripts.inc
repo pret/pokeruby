@@ -27,7 +27,7 @@ Route121_SafariZoneEntrance_Movement_15C348:: @ 815C348
 	end_movement
 
 Route121_SafariZoneEntrance_EventScript_15C351:: @ 815C351
-	msgbox Route121_SafariZoneEntrance_Text_1C35D0, 2
+	msgbox Route121_SafariZoneEntrance_Text_1C35D0, MSGBOX_NPC
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C35A:: @ 815C35A
@@ -36,12 +36,12 @@ Route121_SafariZoneEntrance_EventScript_15C35A:: @ 815C35A
 	msgbox Route121_SafariZoneEntrance_Text_1C3704, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C379
-	msgbox Route121_SafariZoneEntrance_Text_1C373C, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C373C, MSGBOX_DEFAULT
 	release
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C379:: @ 815C379
-	msgbox Route121_SafariZoneEntrance_Text_1C375F, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C375F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -54,7 +54,7 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	msgbox Route121_SafariZoneEntrance_Text_1C3832, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C3B3
-	msgbox Route121_SafariZoneEntrance_Text_1C3895, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C3895, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
@@ -66,16 +66,16 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	checkmoney 500, 0
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C45E
-	msgbox Route121_SafariZoneEntrance_Text_1C38D9, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C38D9, MSGBOX_DEFAULT
 	removemoney 500, 0
 	updatemoneybox 0, 0
 	nop
-	msgbox Route121_SafariZoneEntrance_Text_1C38F4, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C38F4, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message Route121_SafariZoneEntrance_Text_1C3910
 	waitfanfare
 	waitmessage
-	msgbox Route121_SafariZoneEntrance_Text_1C392D, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C392D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox 0, 0
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
@@ -93,7 +93,7 @@ Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	specialvar VAR_RESULT, CheckFreePokemonStorageSpace
 	compare VAR_RESULT, 1
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C44F
-	msgbox Route121_SafariZoneEntrance_Text_1C39A3, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C39A3, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
@@ -101,12 +101,12 @@ Route121_SafariZoneEntrance_EventScript_15C44F:: @ 815C44F
 	return
 
 Route121_SafariZoneEntrance_EventScript_15C450:: @ 815C450
-	msgbox Route121_SafariZoneEntrance_Text_1C39C3, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C39C3, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C45E:: @ 815C45E
-	msgbox Route121_SafariZoneEntrance_Text_1C38B5, 4
+	msgbox Route121_SafariZoneEntrance_Text_1C38B5, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
@@ -134,5 +134,5 @@ Route121_SafariZoneEntrance_Movement_15C47E:: @ 815C47E
 	end_movement
 
 Route121_SafariZoneEntrance_EventScript_15C487:: @ 815C487
-	msgbox Route121_SafariZoneEntrance_Text_1C3E4B, 3
+	msgbox Route121_SafariZoneEntrance_Text_1C3E4B, MSGBOX_SIGN
 	end

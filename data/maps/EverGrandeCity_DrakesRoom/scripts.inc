@@ -42,13 +42,13 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B78B
 	playbgm MUS_SITENNOU, FALSE
-	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_190E42
 	goto EverGrandeCity_DrakesRoom_EventScript_15B795
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
-	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -57,6 +57,6 @@ EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
 	special sub_810FF60
 	setflag FLAG_DEFEATED_ELITE_4_DRAKE
 	call EverGrandeCity_DrakesRoom_EventScript_1A0693
-	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, MSGBOX_DEFAULT
 	release
 	end

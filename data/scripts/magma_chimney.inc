@@ -12,26 +12,26 @@ MtChimney_EventScript_1B2C95:: @ 81B2C95
 
 MtChimney_EventScript_1B2CB9:: @ 81B2CB9
 	.ifdef SAPPHIRE
-	msgbox MtChimney_Text_1B350B, 4
+	msgbox MtChimney_Text_1B350B, MSGBOX_DEFAULT
 	.else
-	msgbox MtChimney_Text_1B3EC1, 4
+	msgbox MtChimney_Text_1B3EC1, MSGBOX_DEFAULT
 	.endif
 	return
 
 MtChimney_EventScript_1B2CC2:: @ 81B2CC2
 	.ifdef SAPPHIRE
-	msgbox MtChimney_Text_1B3598, 4
+	msgbox MtChimney_Text_1B3598, MSGBOX_DEFAULT
 	.else
-	msgbox MtChimney_Text_1B3F8C, 4
+	msgbox MtChimney_Text_1B3F8C, MSGBOX_DEFAULT
 	.endif
 	return
 
 MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	lockall
 	.ifdef SAPPHIRE
-	msgbox MtChimney_Text_1B2DEE, 4
+	msgbox MtChimney_Text_1B2DEE, MSGBOX_DEFAULT
 	.else
-	msgbox MtChimney_Text_1B37BB, 4
+	msgbox MtChimney_Text_1B37BB, MSGBOX_DEFAULT
 	.endif
 	applymovement 2, MtChimney_Movement_1A0839
 	waitmovement 0
@@ -41,9 +41,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	applymovement 2, MtChimney_Movement_1A0835
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox MtChimney_Text_1B2ED9, 4
+	msgbox MtChimney_Text_1B2ED9, MSGBOX_DEFAULT
 	.else
-	msgbox MtChimney_Text_1B38B3, 4
+	msgbox MtChimney_Text_1B38B3, MSGBOX_DEFAULT
 	.endif
 	.ifdef SAPPHIRE
 	trainerbattle_no_intro TRAINER_MT_CHIMNEY_GRUNT_3, MtChimney_Text_1B3099
@@ -51,9 +51,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	trainerbattle_no_intro TRAINER_MT_CHIMNEY_GRUNT_3, MtChimney_Text_1B3A68
 	.endif
 	.ifdef SAPPHIRE
-	msgbox MtChimney_Text_1B30C2, 4
+	msgbox MtChimney_Text_1B30C2, MSGBOX_DEFAULT
 	.else
-	msgbox MtChimney_Text_1B3A90, 4
+	msgbox MtChimney_Text_1B3A90, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	delay 30
@@ -72,9 +72,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	applymovement 255, MtChimney_Movement_1A083F
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox MtChimney_Text_1B3608, 4
+	msgbox MtChimney_Text_1B3608, MSGBOX_DEFAULT
 	.else
-	msgbox MtChimney_Text_1B3FFE, 4
+	msgbox MtChimney_Text_1B3FFE, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	compare VAR_FACING, 4

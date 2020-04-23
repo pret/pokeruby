@@ -17,7 +17,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmovement 0
 	special PrintBattleTowerTrainerGreeting
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	special ScrSpecial_HealPlayerParty
@@ -50,7 +50,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	waitmovement 0
 	applymovement 255, BattleTower_BattleRoom_Movement_160ABC
 	waitmovement 0
-	msgbox BattleTower_BattleRoom_Text_19ACDC, 4
+	msgbox BattleTower_BattleRoom_Text_19ACDC, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
 	special SetBattleTowerParty
@@ -112,7 +112,7 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	waitmessage
 	playse SE_SAVE
 	waitse
-	msgbox BattleTower_BattleRoom_Text_1C6D05, 4
+	msgbox BattleTower_BattleRoom_Text_1C6D05, MSGBOX_DEFAULT
 
 BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
 	fadescreen 1

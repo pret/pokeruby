@@ -70,7 +70,7 @@ MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_15661D
 	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_156641
-	msgbox MauvilleCity_Gym_Text_180EDB, 4
+	msgbox MauvilleCity_Gym_Text_180EDB, MSGBOX_DEFAULT
 	release
 	end
 
@@ -78,7 +78,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	message MauvilleCity_Gym_Text_180DAF
 	waitmessage
 	call MauvilleCity_Gym_EventScript_1A02C5
-	msgbox MauvilleCity_Gym_Text_180DDA, 4
+	msgbox MauvilleCity_Gym_Text_180DDA, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
@@ -96,13 +96,13 @@ MauvilleCity_Gym_EventScript_15661D:: @ 815661D
 	giveitem ITEM_TM34_SHOCK_WAVE
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
-	msgbox MauvilleCity_Gym_Text_180E76, 4
+	msgbox MauvilleCity_Gym_Text_180E76, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	release
 	end
 
 MauvilleCity_Gym_EventScript_156641:: @ 8156641
-	msgbox MauvilleCity_Gym_Text_180F1D, 4
+	msgbox MauvilleCity_Gym_Text_180F1D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -162,34 +162,34 @@ MauvilleCity_Gym_EventScript_1566E1:: @ 81566E1
 
 MauvilleCity_Gym_EventScript_1566E6:: @ 81566E6
 	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_180956, MauvilleCity_Gym_Text_180997
-	msgbox MauvilleCity_Gym_Text_1809D1, 6
+	msgbox MauvilleCity_Gym_Text_1809D1, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_1566FD:: @ 81566FD
 	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_180A05, MauvilleCity_Gym_Text_180A42
-	msgbox MauvilleCity_Gym_Text_180A5E, 6
+	msgbox MauvilleCity_Gym_Text_180A5E, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_156714:: @ 8156714
 	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_180AE0, MauvilleCity_Gym_Text_180B06
-	msgbox MauvilleCity_Gym_Text_180B1D, 6
+	msgbox MauvilleCity_Gym_Text_180B1D, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_15672B:: @ 815672B
 	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_180B5A, MauvilleCity_Gym_Text_180B93
-	msgbox MauvilleCity_Gym_Text_180BAE, 6
+	msgbox MauvilleCity_Gym_Text_180BAE, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_156742:: @ 8156742
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_156757
-	msgbox MauvilleCity_Gym_Text_180815, 4
+	msgbox MauvilleCity_Gym_Text_180815, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_Gym_EventScript_156757:: @ 8156757
-	msgbox MauvilleCity_Gym_Text_18091D, 4
+	msgbox MauvilleCity_Gym_Text_18091D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -206,11 +206,11 @@ MauvilleCity_Gym_EventScript_156771:: @ 8156771
 	end
 
 MauvilleCity_Gym_EventScript_156781:: @ 8156781
-	msgbox MauvilleCity_Gym_Text_180F64, 4
+	msgbox MauvilleCity_Gym_Text_180F64, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MauvilleCity_Gym_EventScript_15678B:: @ 815678B
-	msgbox MauvilleCity_Gym_Text_180F4A, 4
+	msgbox MauvilleCity_Gym_Text_180F4A, MSGBOX_DEFAULT
 	releaseall
 	end

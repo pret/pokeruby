@@ -37,7 +37,7 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	waitmovement 0
 	applymovement 255, FallarborTown_ContestLobby_Movement_153A7A
 	waitmovement 0
-	msgbox FallarborTown_ContestLobby_Text_1A6832, 4
+	msgbox FallarborTown_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A83
 	applymovement 255, FallarborTown_ContestLobby_Movement_153A70
@@ -88,20 +88,20 @@ FallarborTown_ContestLobby_Movement_153A8C:: @ 8153A8C
 	end_movement
 
 FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
-	msgbox FallarborTown_ContestLobby_Text_177141, 2
+	msgbox FallarborTown_ContestLobby_Text_177141, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
 	goto_if_set FLAG_CONTEST_SKETCH_CREATED, FallarborTown_ContestLobby_EventScript_153AA9
-	msgbox FallarborTown_ContestLobby_Text_177246, 2
+	msgbox FallarborTown_ContestLobby_Text_177246, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153AA9:: @ 8153AA9
-	msgbox FallarborTown_ContestLobby_Text_1772D8, 2
+	msgbox FallarborTown_ContestLobby_Text_1772D8, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153AB2:: @ 8153AB2
-	msgbox FallarborTown_ContestLobby_Text_1771F2, 2
+	msgbox FallarborTown_ContestLobby_Text_1771F2, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB

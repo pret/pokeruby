@@ -498,7 +498,7 @@ EventScript_15F4A1:
 	msgbox UnknownString_81A3958, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_15F452
-	msgbox UnknownString_81A3A22, 3
+	msgbox UnknownString_81A3A22, MSGBOX_SIGN
 	special sub_80BC5BC
 	special DoSecretBasePCTurnOffEffect
 	releaseall
@@ -508,14 +508,14 @@ EventScript_15F4E0:
 	msgbox UnknownString_81A3982, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_15F452
-	msgbox UnknownString_81A3A3A, 3
+	msgbox UnknownString_81A3A3A, MSGBOX_SIGN
 	special sub_80BC5BC
 	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
 EventScript_15F503:
-	msgbox UnknownString_81A39C0, 3
+	msgbox UnknownString_81A39C0, MSGBOX_SIGN
 	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
@@ -551,19 +551,19 @@ gUnknown_0815F528:: @ 815F528
 	end
 
 EventScript_15F558:
-	msgbox UnknownString_81A3B5B, 3
+	msgbox UnknownString_81A3B5B, MSGBOX_SIGN
 	end
 
 EventScript_15F561:
-	msgbox UnknownString_81A3BA4, 3
+	msgbox UnknownString_81A3BA4, MSGBOX_SIGN
 	end
 
 EventScript_15F56A:
-	msgbox UnknownString_81A3BE8, 3
+	msgbox UnknownString_81A3BE8, MSGBOX_SIGN
 	end
 
 EventScript_15F573:
-	msgbox UnknownString_81A3C31, 3
+	msgbox UnknownString_81A3C31, MSGBOX_SIGN
 	end
 
 	.include "data/maps/SingleBattleColosseum/scripts.inc"
@@ -1678,7 +1678,7 @@ gUnknown_081A0009:: @ 81A0009
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox UnknownString_81A09EC, 4
+	msgbox UnknownString_81A09EC, MSGBOX_DEFAULT
 	goto EventScript_1A0023
 	end
 
@@ -1701,7 +1701,7 @@ EventScript_1A0033:
 
 EventScript_1A0070:
 	playse SE_PC_LOGON
-	msgbox UnknownString_81A0A54, 4
+	msgbox UnknownString_81A0A54, MSGBOX_DEFAULT
 	special PlayerPC
 	waitstate
 	goto EventScript_1A0023
@@ -1711,18 +1711,18 @@ EventScript_1A0085:
 	playse SE_PC_LOGON
 	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_1A00AC
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_1A00B5
-	msgbox UnknownString_81A0A35, 4
+	msgbox UnknownString_81A0A35, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystem
 	waitstate
 	goto EventScript_1A0023
 	end
 
 EventScript_1A00AC:
-	msgbox UnknownString_81A0A1E, 4
+	msgbox UnknownString_81A0A1E, MSGBOX_DEFAULT
 	return
 
 EventScript_1A00B5:
-	msgbox UnknownString_81A0A66, 4
+	msgbox UnknownString_81A0A66, MSGBOX_DEFAULT
 	return
 
 EventScript_1A00BE:
@@ -1751,7 +1751,7 @@ RustboroCity_EventScript_1A00E1:: @ 81A00E1
 SlateportCity_EventScript_1A00E1:: @ 81A00E1
 SootopolisCity_EventScript_1A00E1:: @ 81A00E1
 VerdanturfTown_EventScript_1A00E1:: @ 81A00E1
-	msgbox PetalburgCity_Text_1A0D41, 3
+	msgbox PetalburgCity_Text_1A0D41, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1A00EA:: @ 81A00EA
@@ -1769,7 +1769,7 @@ RustboroCity_EventScript_1A00EA:: @ 81A00EA
 SlateportCity_EventScript_1A00EA:: @ 81A00EA
 SootopolisCity_EventScript_1A00EA:: @ 81A00EA
 VerdanturfTown_EventScript_1A00EA:: @ 81A00EA
-	msgbox PetalburgCity_Text_1A0D75, 3
+	msgbox PetalburgCity_Text_1A0D75, MSGBOX_SIGN
 	end
 
 BattleTower_Lobby_EventScript_1A00F3:: @ 81A00F3
@@ -1818,7 +1818,7 @@ UseSurfScript:: @ 81A0117
 	msgbox UseSurfPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq UseSurfScript_No
-	msgbox UsedSurfText, 4
+	msgbox UsedSurfText, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 UseSurfScript_No: @ 81A014C
 	releaseall
@@ -2045,7 +2045,7 @@ SlateportCity_PokemonFanClub_EventScript_1A029B:: @ 81A029B
 SootopolisCity_EventScript_1A029B:: @ 81A029B
 SootopolisCity_Gym_1F_EventScript_1A029B:: @ 81A029B
 VerdanturfTown_ContestLobby_EventScript_1A029B:: @ 81A029B
-	msgbox MauvilleCity_Text_1A0CC2, 4
+	msgbox MauvilleCity_Text_1A0CC2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2053,11 +2053,11 @@ MauvilleCity_GameCorner_EventScript_1A02A5:: @ 81A02A5
 Route110_TrickHouseEnd_EventScript_1A02A5:: @ 81A02A5
 Route110_TrickHouseEntrance_EventScript_1A02A5:: @ 81A02A5
 Route113_GlassWorkshop_EventScript_1A02A5:: @ 81A02A5
-	msgbox MauvilleCity_GameCorner_Text_1A0CC2, 4
+	msgbox MauvilleCity_GameCorner_Text_1A0CC2, MSGBOX_DEFAULT
 	return
 
 Route114_LanettesHouse_EventScript_1A02AE:: @ 81A02AE
-	msgbox Route114_LanettesHouse_Text_1A0CEF, 4
+	msgbox Route114_LanettesHouse_Text_1A0CEF, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2066,7 +2066,7 @@ MauvilleCity_GameCorner_EventScript_1A02B8:: @ 81A02B8
 Route110_TrickHouseEnd_EventScript_1A02B8:: @ 81A02B8
 Route110_TrickHouseEntrance_EventScript_1A02B8:: @ 81A02B8
 Route113_GlassWorkshop_EventScript_1A02B8:: @ 81A02B8
-	msgbox MauvilleCity_GameCorner_Text_1A0CEF, 4
+	msgbox MauvilleCity_GameCorner_Text_1A0CEF, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_EventScript_1A02C1:: @ 81A02C1
@@ -2111,7 +2111,7 @@ SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 
 Event_WorldMap:: @ 81A02D6
 	lockall
-	msgbox UnknownString_817303D, 4
+	msgbox UnknownString_817303D, MSGBOX_DEFAULT
 	fadescreen 1
 	special FieldShowRegionMap
 	waitstate
@@ -2189,7 +2189,7 @@ Route103_EventScript_1A037F:: @ 81A037F
 	end
 
 Route101_EventScript_1A039B:: @ 81A039B
-	msgbox Route101_Text_1C449B, 4
+	msgbox Route101_Text_1C449B, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2209,7 +2209,7 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	copyvar VAR_0x800A, VAR_RESULT
 	buffernumberstring 0, VAR_0x8008
 	buffernumberstring 1, VAR_0x8009
-	msgbox Route101_Text_1C44DC, 4
+	msgbox Route101_Text_1C44DC, MSGBOX_DEFAULT
 	call Route101_EventScript_1A03A5
 	compare VAR_0x800A, 0
 	goto_if_eq Route101_EventScript_1A14DC
@@ -2219,7 +2219,7 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	copyvar VAR_0x8009, VAR_0x8006
 	buffernumberstring 0, VAR_0x8008
 	buffernumberstring 1, VAR_0x8009
-	msgbox Route101_Text_1C4B05, 4
+	msgbox Route101_Text_1C4B05, MSGBOX_DEFAULT
 	return
 
 BattleTower_Outside_EventScript_1A040E:: @ 81A040E
@@ -2425,7 +2425,7 @@ Route120_EventScript_1A0594:: @ 81A0594
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare VAR_RESULT, 1
 	goto_if_eq Route119_EventScript_1A05AE
-	msgbox Route119_Text_171B93, 4
+	msgbox Route119_Text_171B93, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2437,7 +2437,7 @@ Route119_EventScript_1A05AE:: @ 81A05AE
 	end
 
 Route119_EventScript_1A05C3:: @ 81A05C3
-	msgbox Route119_Text_171BF6, 4
+	msgbox Route119_Text_171BF6, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Route119_Movement_1A0839
 	waitmovement 0
@@ -2909,31 +2909,31 @@ Route110_TrickHouseEntrance_Movement_1A0856:: @ 81A0856
 	end_movement
 
 PictureBookShelfScript:: @ 81A085B
-	msgbox PictureBookShelfText, 3
+	msgbox PictureBookShelfText, MSGBOX_SIGN
 	end
 
 BookshelfScript:: @ 81A0864
-	msgbox BookshelfText, 3
+	msgbox BookshelfText, MSGBOX_SIGN
 	end
 
 PokemonCenterBookshelfScript:: @ 81A086D
-	msgbox PokemonCenterBookshelfText, 3
+	msgbox PokemonCenterBookshelfText, MSGBOX_SIGN
 	end
 
 VaseScript:: @ 81A0876
-	msgbox VaseText, 3
+	msgbox VaseText, MSGBOX_SIGN
 	end
 
 TrashCanScript:: @ 81A087F
-	msgbox TrashCanText, 3
+	msgbox TrashCanText, MSGBOX_SIGN
 	end
 
 ShopShelfScript:: @ 81A0888
-	msgbox ShopShelfText, 3
+	msgbox ShopShelfText, MSGBOX_SIGN
 	end
 
 BlueprintScript:: @ 81A0891
-	msgbox BlueprintText, 3
+	msgbox BlueprintText, MSGBOX_SIGN
 	end
 
 SampleMessage1:: @ 81A089A
@@ -3245,7 +3245,7 @@ FallarborTown_House1_Text_1A1498:: @ 81A1498
 	.string "{STR_VAR_1}.$"
 
 Event_NoRegisteredItem:: @ 81A14AF
-	msgbox Text_NoRegisteredItem, 3
+	msgbox Text_NoRegisteredItem, MSGBOX_SIGN
 	end
 
 gUnknown_081A14B8:: @ 81A14B8
@@ -3624,7 +3624,7 @@ EventScript_1A2CB0:
 	msgbox UnknownString_8198F34, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	msgbox UsedCutRockSmashText, 4
+	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
@@ -3639,11 +3639,11 @@ DoSecretBaseCaveFieldEffectScript:: @ 81A2CE6
 	end
 
 EventScript_1A2CF1:
-	msgbox UnknownString_8198F10, 3
+	msgbox UnknownString_8198F10, MSGBOX_SIGN
 	end
 
 EventScript_1A2CFA:
-	msgbox UnknownString_8198F6E, 4
+	msgbox UnknownString_8198F6E, MSGBOX_DEFAULT
 	goto EventScript_1A2DB8
 	end
 
@@ -3655,7 +3655,7 @@ EventScript_1A2D08:
 	msgbox UnknownString_81A197B, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	msgbox UsedCutRockSmashText, 4
+	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
@@ -3670,11 +3670,11 @@ DoSecretBaseTreeFieldEffectScript:: @ 81A2D3E
 	end
 
 EventScript_1A2D49:
-	msgbox UnknownString_81A1948, 3
+	msgbox UnknownString_81A1948, MSGBOX_SIGN
 	end
 
 EventScript_1A2D52:
-	msgbox UnknownString_81A19C4, 4
+	msgbox UnknownString_81A19C4, MSGBOX_DEFAULT
 	goto EventScript_1A2DB8
 	end
 
@@ -3686,7 +3686,7 @@ EventScript_1A2D60:
 	msgbox UnknownString_81A1A4B, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	msgbox UsedCutRockSmashText, 4
+	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
@@ -3701,11 +3701,11 @@ DoSecretBaseShrubFieldEffectScript:: @ 81A2D96
 	end
 
 EventScript_1A2DA1:
-	msgbox UnknownString_81A1A03, 3
+	msgbox UnknownString_81A1A03, MSGBOX_SIGN
 	end
 
 EventScript_1A2DAA:
-	msgbox UnknownString_81A1AA9, 4
+	msgbox UnknownString_81A1AA9, MSGBOX_DEFAULT
 	goto EventScript_1A2DB8
 	end
 
@@ -3790,7 +3790,7 @@ AskToMoveSecretBase:
 	goto_if_eq EventScript_1A2F3A
 	bufferpartymonnick 0, VAR_0x8004
 	buffermovename 1, MOVE_SECRET_POWER
-	msgbox UsedCutRockSmashText, 4
+	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
 	closemessage
 	closemessage
 	compare VAR_0x8007, 1
@@ -3947,23 +3947,23 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A1B83, 4
+	msgbox SecretBase_RedCave1_Text_1A1B83, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3086:: @ 81A3086
-	msgbox SecretBase_RedCave1_Text_1A1C3B, 2
+	msgbox SecretBase_RedCave1_Text_1A1C3B, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A308F:: @ 81A308F
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A1B97, 2
+	msgbox SecretBase_RedCave1_Text_1A1B97, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
-	msgbox SecretBase_RedCave1_Text_1A1BF8, 2
+	msgbox SecretBase_RedCave1_Text_1A1BF8, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
@@ -3981,23 +3981,23 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A1F04, 4
+	msgbox SecretBase_RedCave1_Text_1A1F04, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3102:: @ 81A3102
-	msgbox SecretBase_RedCave1_Text_1A1FBD, 2
+	msgbox SecretBase_RedCave1_Text_1A1FBD, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A310B:: @ 81A310B
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A1F2E, 2
+	msgbox SecretBase_RedCave1_Text_1A1F2E, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
-	msgbox SecretBase_RedCave1_Text_1A1F88, 2
+	msgbox SecretBase_RedCave1_Text_1A1F88, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
@@ -4015,23 +4015,23 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2220, 4
+	msgbox SecretBase_RedCave1_Text_1A2220, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A317E:: @ 81A317E
-	msgbox SecretBase_RedCave1_Text_1A22FA, 2
+	msgbox SecretBase_RedCave1_Text_1A22FA, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3187:: @ 81A3187
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2230, 2
+	msgbox SecretBase_RedCave1_Text_1A2230, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
-	msgbox SecretBase_RedCave1_Text_1A2280, 2
+	msgbox SecretBase_RedCave1_Text_1A2280, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
@@ -4049,23 +4049,23 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A256F, 4
+	msgbox SecretBase_RedCave1_Text_1A256F, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A31FA:: @ 81A31FA
-	msgbox SecretBase_RedCave1_Text_1A2609, 2
+	msgbox SecretBase_RedCave1_Text_1A2609, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3203:: @ 81A3203
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A258A, 2
+	msgbox SecretBase_RedCave1_Text_1A258A, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
-	msgbox SecretBase_RedCave1_Text_1A25D2, 2
+	msgbox SecretBase_RedCave1_Text_1A25D2, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
@@ -4083,23 +4083,23 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A28D7, 4
+	msgbox SecretBase_RedCave1_Text_1A28D7, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3276:: @ 81A3276
-	msgbox SecretBase_RedCave1_Text_1A297C, 2
+	msgbox SecretBase_RedCave1_Text_1A297C, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A327F:: @ 81A327F
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A28F4, 2
+	msgbox SecretBase_RedCave1_Text_1A28F4, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
-	msgbox SecretBase_RedCave1_Text_1A294D, 2
+	msgbox SecretBase_RedCave1_Text_1A294D, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
@@ -4117,23 +4117,23 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A1D48, 4
+	msgbox SecretBase_RedCave1_Text_1A1D48, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A32F2:: @ 81A32F2
-	msgbox SecretBase_RedCave1_Text_1A1DF6, 2
+	msgbox SecretBase_RedCave1_Text_1A1DF6, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A32FB:: @ 81A32FB
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A1D59, 2
+	msgbox SecretBase_RedCave1_Text_1A1D59, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
-	msgbox SecretBase_RedCave1_Text_1A1DC0, 2
+	msgbox SecretBase_RedCave1_Text_1A1DC0, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
@@ -4151,23 +4151,23 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2095, 4
+	msgbox SecretBase_RedCave1_Text_1A2095, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A336E:: @ 81A336E
-	msgbox SecretBase_RedCave1_Text_1A2147, 2
+	msgbox SecretBase_RedCave1_Text_1A2147, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3377:: @ 81A3377
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A20AE, 2
+	msgbox SecretBase_RedCave1_Text_1A20AE, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
-	msgbox SecretBase_RedCave1_Text_1A2109, 2
+	msgbox SecretBase_RedCave1_Text_1A2109, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
@@ -4185,23 +4185,23 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2405, 4
+	msgbox SecretBase_RedCave1_Text_1A2405, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A33EA:: @ 81A33EA
-	msgbox SecretBase_RedCave1_Text_1A2480, 2
+	msgbox SecretBase_RedCave1_Text_1A2480, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A33F3:: @ 81A33F3
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2420, 2
+	msgbox SecretBase_RedCave1_Text_1A2420, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
-	msgbox SecretBase_RedCave1_Text_1A2446, 2
+	msgbox SecretBase_RedCave1_Text_1A2446, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
@@ -4219,23 +4219,23 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2710, 4
+	msgbox SecretBase_RedCave1_Text_1A2710, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3466:: @ 81A3466
-	msgbox SecretBase_RedCave1_Text_1A27A4, 2
+	msgbox SecretBase_RedCave1_Text_1A27A4, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A346F:: @ 81A346F
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2736, 2
+	msgbox SecretBase_RedCave1_Text_1A2736, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
-	msgbox SecretBase_RedCave1_Text_1A276A, 2
+	msgbox SecretBase_RedCave1_Text_1A276A, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
@@ -4253,23 +4253,23 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2AE2, 4
+	msgbox SecretBase_RedCave1_Text_1A2AE2, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A34E2:: @ 81A34E2
-	msgbox SecretBase_RedCave1_Text_1A2BA4, 2
+	msgbox SecretBase_RedCave1_Text_1A2BA4, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A34EB:: @ 81A34EB
 	setvar VAR_RESULT, 0
 	special sub_80BCE4C
 	erasebox 0, 0, 15, 10
-	msgbox SecretBase_RedCave1_Text_1A2AFB, 2
+	msgbox SecretBase_RedCave1_Text_1A2AFB, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A3501:: @ 81A3501
-	msgbox SecretBase_RedCave1_Text_1A2B69, 2
+	msgbox SecretBase_RedCave1_Text_1A2B69, MSGBOX_NPC
 	end
 
 SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
@@ -4382,7 +4382,7 @@ SlateportCity_PokemonFanClub_EventScript_1ADE4D:: @ 81ADE4D
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADE84:: @ 81ADE84
-	msgbox SlateportCity_PokemonFanClub_Text_1A87CA, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A87CA, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 5
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 1
@@ -4396,18 +4396,18 @@ SlateportCity_PokemonFanClub_EventScript_1ADE84:: @ 81ADE84
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADEB9:: @ 81ADEB9
-	msgbox SlateportCity_PokemonFanClub_Text_1A8667, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A8667, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADEC3:: @ 81ADEC3
-	msgbox SlateportCity_PokemonFanClub_Text_1A8818, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A8818, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 1
 	goto SlateportCity_PokemonFanClub_EventScript_1ADE46
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADED6:: @ 81ADED6
-	msgbox SlateportCity_PokemonFanClub_Text_1A86B5, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A86B5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -4437,7 +4437,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF25:: @ 81ADF25
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF44:: @ 81ADF44
-	msgbox SlateportCity_OceanicMuseum_1F_Text_1A93D1, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_1A93D1, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 5
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
@@ -4451,18 +4451,18 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF44:: @ 81ADF44
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF79:: @ 81ADF79
-	msgbox SlateportCity_OceanicMuseum_1F_Text_1A9446, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_1A9446, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF83:: @ 81ADF83
-	msgbox SlateportCity_OceanicMuseum_1F_Text_1A949A, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_1A949A, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 2
 	goto SlateportCity_OceanicMuseum_1F_EventScript_1ADE46
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF96:: @ 81ADF96
-	msgbox SlateportCity_OceanicMuseum_1F_Text_1A952E, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_1A952E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -4485,7 +4485,7 @@ SlateportCity_PokemonFanClub_EventScript_1ADFA0:: @ 81ADFA0
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADFE9:: @ 81ADFE9
-	msgbox SlateportCity_PokemonFanClub_Text_1A83D0, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A83D0, MSGBOX_DEFAULT
 	random 3
 	copyvar VAR_0x800A, VAR_RESULT
 	switch VAR_RESULT
@@ -4495,17 +4495,17 @@ SlateportCity_PokemonFanClub_EventScript_1ADFE9:: @ 81ADFE9
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE020:: @ 81AE020
-	msgbox SlateportCity_PokemonFanClub_Text_1A8414, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A8414, MSGBOX_DEFAULT
 	goto SlateportCity_PokemonFanClub_EventScript_1AE04A
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE02E:: @ 81AE02E
-	msgbox SlateportCity_PokemonFanClub_Text_1A8470, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A8470, MSGBOX_DEFAULT
 	goto SlateportCity_PokemonFanClub_EventScript_1AE04A
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE03C:: @ 81AE03C
-	msgbox SlateportCity_PokemonFanClub_Text_1A84D5, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A84D5, MSGBOX_DEFAULT
 	goto SlateportCity_PokemonFanClub_EventScript_1AE04A
 	end
 
@@ -4518,26 +4518,26 @@ SlateportCity_PokemonFanClub_EventScript_1AE04A:: @ 81AE04A
 	faceplayer
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
-	msgbox SlateportCity_PokemonFanClub_Text_1A852D, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A852D, MSGBOX_DEFAULT
 	setvar VAR_0x8006, 1
 	call SlateportCity_PokemonFanClub_EventScript_1A00F3
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
-	msgbox SlateportCity_PokemonFanClub_Text_1A85A6, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A85A6, MSGBOX_DEFAULT
 	copyvar VAR_0x8007, VAR_0x800A
 	setvar VAR_0x8005, 3
 	goto SlateportCity_PokemonFanClub_EventScript_1ADE46
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE0A2:: @ 81AE0A2
-	msgbox SlateportCity_PokemonFanClub_Text_1A8667, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A8667, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE0AC:: @ 81AE0AC
-	msgbox SlateportCity_PokemonFanClub_Text_1A86B5, 4
+	msgbox SlateportCity_PokemonFanClub_Text_1A86B5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -4561,7 +4561,7 @@ VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE0F8:: @ 81AE0F8
-	msgbox FallarborTown_ContestLobby_Text_1A704E, 4
+	msgbox FallarborTown_ContestLobby_Text_1A704E, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
@@ -4575,14 +4575,14 @@ FallarborTown_ContestLobby_EventScript_1AE0F8:: @ 81AE0F8
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE12D:: @ 81AE12D
-	msgbox FallarborTown_ContestLobby_Text_1A7256, 4
+	msgbox FallarborTown_ContestLobby_Text_1A7256, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
 	setvar VAR_0x8004, 24
 	special SetContestCategoryStringVarForInterview
-	msgbox FallarborTown_ContestLobby_Text_1A70A5, 4
+	msgbox FallarborTown_ContestLobby_Text_1A70A5, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 1
@@ -4591,14 +4591,14 @@ FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
 	faceplayer
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
-	msgbox FallarborTown_ContestLobby_Text_1A7153, 4
+	msgbox FallarborTown_ContestLobby_Text_1A7153, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	setvar VAR_0x8005, 6
 	goto FallarborTown_ContestLobby_EventScript_1ADE46
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE17E:: @ 81AE17E
-	msgbox FallarborTown_ContestLobby_Text_1A72A8, 4
+	msgbox FallarborTown_ContestLobby_Text_1A72A8, MSGBOX_DEFAULT
 	release
 	end
 
@@ -4665,7 +4665,7 @@ BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	call_if_eq BattleTower_Lobby_EventScript_1AE2A1
 	compare VAR_RESULT, 1
 	call_if_eq BattleTower_Lobby_EventScript_1AE2AA
-	msgbox BattleTower_Lobby_Text_1A79EB, 4
+	msgbox BattleTower_Lobby_Text_1A79EB, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	copyvar VAR_0x8005, VAR_0x8009
 	call BattleTower_Lobby_EventScript_1A00F3
@@ -4678,22 +4678,22 @@ BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	end
 
 BattleTower_Lobby_EventScript_1AE297:: @ 81AE297
-	msgbox BattleTower_Lobby_Text_1A78B7, 4
+	msgbox BattleTower_Lobby_Text_1A78B7, MSGBOX_DEFAULT
 	release
 	end
 
 BattleTower_Lobby_EventScript_1AE2A1:: @ 81AE2A1
-	msgbox BattleTower_Lobby_Text_1A791B, 4
+	msgbox BattleTower_Lobby_Text_1A791B, MSGBOX_DEFAULT
 	return
 
 BattleTower_Lobby_EventScript_1AE2AA:: @ 81AE2AA
-	msgbox BattleTower_Lobby_Text_1A7990, 4
+	msgbox BattleTower_Lobby_Text_1A7990, MSGBOX_DEFAULT
 	return
 
 BattleTower_Lobby_EventScript_1AE2B3:: @ 81AE2B3
 	compare VAR_RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2D9
-	msgbox BattleTower_Lobby_Text_1A7A6E, 4
+	msgbox BattleTower_Lobby_Text_1A7A6E, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	copyvar VAR_0x8004, VAR_0x8008
 	setvar VAR_0x8005, 7
@@ -4701,12 +4701,12 @@ BattleTower_Lobby_EventScript_1AE2B3:: @ 81AE2B3
 	end
 
 BattleTower_Lobby_EventScript_1AE2D9:: @ 81AE2D9
-	msgbox BattleTower_Lobby_Text_1A7AE0, 4
+	msgbox BattleTower_Lobby_Text_1A7AE0, MSGBOX_DEFAULT
 	release
 	end
 
 BattleTower_Lobby_EventScript_1AE2E3:: @ 81AE2E3
-	msgbox BattleTower_Lobby_Text_1A7B66, 4
+	msgbox BattleTower_Lobby_Text_1A7B66, MSGBOX_DEFAULT
 	release
 	end
 
@@ -4757,7 +4757,7 @@ gUnknown_081B694A:: @ 81B694A
 	.include "data/scripts/players_house.inc"
 
 S_RunningShoesManual:: @ 81B6E5A
-	msgbox UnknownString_81728E3, 3
+	msgbox UnknownString_81728E3, MSGBOX_SIGN
 	end
 
 	.include "data/text/pokeblocks.inc"
@@ -4766,7 +4766,7 @@ S_RunningShoesManual:: @ 81B6E5A
 	.include "data/text/trainers.inc"
 
 S_RepelWoreOff:: @ 81C33E6
-	msgbox Text_RepelWoreOff, 3
+	msgbox Text_RepelWoreOff, MSGBOX_SIGN
 	end
 
 Text_RepelWoreOff: @ 81C33EF
@@ -4882,18 +4882,18 @@ GraniteCave_B1F_Movement_1C6BF7:: @ 81C6BF7
 	end_movement
 
 @ 81C6BF9
-	msgbox Text_1C6C2B, 2
+	msgbox Text_1C6C2B, MSGBOX_NPC
 	end
 
 gUnknown_081C6C02:: @ 81C6C02
-	msgbox Text_1C6C4B, 3
+	msgbox Text_1C6C4B, MSGBOX_SIGN
 	end
 
 @ 81C6C0B
 	end
 
 @ 81C6C0C
-	msgbox Text_1C6C62, 3
+	msgbox Text_1C6C62, MSGBOX_SIGN
 	end
 
 @ 81C6C15

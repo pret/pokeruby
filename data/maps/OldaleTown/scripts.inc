@@ -25,11 +25,11 @@ OldaleTown_EventScript_14DD9E:: @ 814DD9E
 	return
 
 OldaleTown_EventScript_14DDAA:: @ 814DDAA
-	msgbox OldaleTown_Text_16B20E, 3
+	msgbox OldaleTown_Text_16B20E, MSGBOX_SIGN
 	end
 
 OldaleTown_EventScript_14DDB3:: @ 814DDB3
-	msgbox OldaleTown_Text_16AEC0, 2
+	msgbox OldaleTown_Text_16AEC0, MSGBOX_NPC
 	end
 
 OldaleTown_EventScript_14DDBC:: @ 814DDBC
@@ -39,7 +39,7 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_14DE79
 	setflag FLAG_TEMP_1
 	playbgm MUS_TSURETEK, FALSE
-	msgbox OldaleTown_Text_16AEF2, 4
+	msgbox OldaleTown_Text_16AEF2, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 1, OldaleTown_EventScript_14DE07
@@ -69,23 +69,23 @@ OldaleTown_EventScript_14DE35:: @ 814DE35
 	end
 
 OldaleTown_EventScript_14DE4C:: @ 814DE4C
-	msgbox OldaleTown_Text_16AF2F, 4
+	msgbox OldaleTown_Text_16AF2F, MSGBOX_DEFAULT
 	giveitem ITEM_POTION
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DE83
-	msgbox OldaleTown_Text_16AFE1, 4
+	msgbox OldaleTown_Text_16AFE1, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE
 	fadedefaultbgm
 	release
 	end
 
 OldaleTown_EventScript_14DE79:: @ 814DE79
-	msgbox OldaleTown_Text_16AFE1, 4
+	msgbox OldaleTown_Text_16AFE1, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_EventScript_14DE83:: @ 814DE83
-	msgbox OldaleTown_Text_1A0CC2, 4
+	msgbox OldaleTown_Text_1A0CC2, MSGBOX_DEFAULT
 	fadedefaultbgm
 	release
 	end
@@ -191,7 +191,7 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	lock
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_14DF26
-	msgbox OldaleTown_Text_16B0CC, 4
+	msgbox OldaleTown_Text_16B0CC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, OldaleTown_Movement_1A083D
 	waitmovement 0
@@ -203,7 +203,7 @@ OldaleTown_EventScript_14DEFF:: @ 814DEFF
 	applymovement 255, OldaleTown_Movement_14DFEC
 	applymovement 3, OldaleTown_Movement_14DFEF
 	waitmovement 0
-	msgbox OldaleTown_Text_16B045, 4
+	msgbox OldaleTown_Text_16B045, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, OldaleTown_Movement_14DFF5
 	waitmovement 0
@@ -211,7 +211,7 @@ OldaleTown_EventScript_14DEFF:: @ 814DEFF
 	end
 
 OldaleTown_EventScript_14DF26:: @ 814DF26
-	msgbox OldaleTown_Text_16B12A, 4
+	msgbox OldaleTown_Text_16B12A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -258,12 +258,12 @@ OldaleTown_EventScript_14DF92:: @ 814DF92
 	end
 
 OldaleTown_EventScript_14DFAA:: @ 814DFAA
-	msgbox OldaleTown_Text_16B196, 4
+	msgbox OldaleTown_Text_16B196, MSGBOX_DEFAULT
 	goto OldaleTown_EventScript_14DFC6
 	end
 
 OldaleTown_EventScript_14DFB8:: @ 814DFB8
-	msgbox OldaleTown_Text_16B1BE, 4
+	msgbox OldaleTown_Text_16B1BE, MSGBOX_DEFAULT
 	goto OldaleTown_EventScript_14DFC6
 	end
 

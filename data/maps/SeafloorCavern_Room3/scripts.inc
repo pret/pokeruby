@@ -8,5 +8,5 @@ SeafloorCavern_Room3_MapScript1_15DAA2:: @ 815DAA2
 
 SeafloorCavern_Room3_EventScript_15DAA8:: @ 815DAA8
 	trainerbattle_single TRAINER_SEAFLOOR_CAVERN_GRUNT_3, SeafloorCavern_Room3_Text_1975DC, SeafloorCavern_Room3_Text_1976F3
-	msgbox SeafloorCavern_Room3_Text_197704, 6
+	msgbox SeafloorCavern_Room3_Text_197704, MSGBOX_AUTOCLOSE
 	end

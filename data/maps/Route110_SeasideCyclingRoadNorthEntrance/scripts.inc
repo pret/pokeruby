@@ -16,7 +16,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5:: @ 81634E5
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634EB:: @ 81634EB
 	lock
 	faceplayer
-	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E406, 4
+	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E406, MSGBOX_DEFAULT
 	release
 	end
 
@@ -40,7 +40,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D:: @ 816351D
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523:: @ 8163523
 @ You don't have a bike!
-	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E3AD, 4
+	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E3AD, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route110_SeasideCyclingRoadNorthEntrance_Movement_163538
 	waitmovement 0

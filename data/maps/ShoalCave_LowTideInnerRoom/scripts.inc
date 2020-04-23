@@ -72,7 +72,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E257:: @ 815E257
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E289:: @ 815E289
-	msgbox ShoalCave_LowTideInnerRoom_Text_1C69B8, 4
+	msgbox ShoalCave_LowTideInnerRoom_Text_1C69B8, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -125,7 +125,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E329:: @ 815E329
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E35B:: @ 815E35B
-	msgbox ShoalCave_LowTideInnerRoom_Text_1C6979, 4
+	msgbox ShoalCave_LowTideInnerRoom_Text_1C6979, MSGBOX_DEFAULT
 	releaseall
 	end
 

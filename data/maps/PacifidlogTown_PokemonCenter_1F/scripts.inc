@@ -15,13 +15,13 @@ PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_154117:: @ 8154117
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_178E47, 2
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_178E47, MSGBOX_NPC
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_154120:: @ 8154120
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_178E79, 2
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_178E79, MSGBOX_NPC
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_154129:: @ 8154129
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_178ED9, 2
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_178ED9, MSGBOX_NPC
 	end

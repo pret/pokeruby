@@ -111,7 +111,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	delay 10
 	applymovement 4, LittlerootTown_Movement_14D6AE
 	waitmovement 0
-	msgbox LittlerootTown_Text_16A7C9, 4
+	msgbox LittlerootTown_Text_16A7C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_14D6B1
 	applymovement 255, LittlerootTown_Movement_14D6B8
@@ -176,11 +176,11 @@ LittlerootTown_EventScript_14D6C5:: @ 814D6C5
 	end
 
 LittlerootTown_EventScript_14D6CD:: @ 814D6CD
-	msgbox LittlerootTown_Text_16AC00, 2
+	msgbox LittlerootTown_Text_16AC00, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_14D6D6:: @ 814D6D6
-	msgbox LittlerootTown_Text_16AC56, 2
+	msgbox LittlerootTown_Text_16AC56, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_14D6DF:: @ 814D6DF
@@ -190,12 +190,12 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_14D722
 	compare VAR_LITTLEROOT_STATE, 0
 	goto_if_ne LittlerootTown_EventScript_14D708
-	msgbox LittlerootTown_Text_16ACEB, 4
+	msgbox LittlerootTown_Text_16ACEB, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_14D708:: @ 814D708
-	msgbox LittlerootTown_Text_16AD82, 4
+	msgbox LittlerootTown_Text_16AD82, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1A083D
 	waitmovement 0
@@ -205,12 +205,12 @@ LittlerootTown_EventScript_14D708:: @ 814D708
 
 LittlerootTown_EventScript_14D722:: @ 814D722
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_16ADF2, 4
+	msgbox LittlerootTown_Text_16ADF2, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_14D72F:: @ 814D72F
-	msgbox LittlerootTown_Text_16AE25, 4
+	msgbox LittlerootTown_Text_16AE25, MSGBOX_DEFAULT
 	release
 	end
 
@@ -225,12 +225,12 @@ LittlerootTown_EventScript_14D739:: @ 814D739
 	end
 
 LittlerootTown_EventScript_14D755:: @ 814D755
-	msgbox LittlerootTown_Text_16ACEB, 4
+	msgbox LittlerootTown_Text_16ACEB, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_14D787
 	applymovement 255, LittlerootTown_Movement_14D793
 	waitmovement 0
-	msgbox LittlerootTown_Text_16AD3C, 4
+	msgbox LittlerootTown_Text_16AD3C, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -312,7 +312,7 @@ LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	waitmovement 0
 	applymovement 255, LittlerootTown_Movement_1A083F
 	waitmovement 0
-	msgbox LittlerootTown_Text_16AD82, 4
+	msgbox LittlerootTown_Text_16AD82, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1A083D
 	waitmovement 0
@@ -321,11 +321,11 @@ LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	end
 
 LittlerootTown_EventScript_14D7F6:: @ 814D7F6
-	msgbox LittlerootTown_Text_16AE50, 3
+	msgbox LittlerootTown_Text_16AE50, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_14D7FF:: @ 814D7FF
-	msgbox LittlerootTown_Text_16AE87, 3
+	msgbox LittlerootTown_Text_16AE87, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_14D808:: @ 814D808
@@ -339,11 +339,11 @@ LittlerootTown_EventScript_14D808:: @ 814D808
 	end
 
 LittlerootTown_EventScript_14D822:: @ 814D822
-	msgbox LittlerootTown_Text_16AEA1, 4
+	msgbox LittlerootTown_Text_16AEA1, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D82B:: @ 814D82B
-	msgbox LittlerootTown_Text_16AEAC, 4
+	msgbox LittlerootTown_Text_16AEAC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D834:: @ 814D834
@@ -357,11 +357,11 @@ LittlerootTown_EventScript_14D834:: @ 814D834
 	end
 
 LittlerootTown_EventScript_14D84E:: @ 814D84E
-	msgbox LittlerootTown_Text_16AEAC, 4
+	msgbox LittlerootTown_Text_16AEAC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D857:: @ 814D857
-	msgbox LittlerootTown_Text_16AEA1, 4
+	msgbox LittlerootTown_Text_16AEA1, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D860:: @ 814D860
@@ -413,7 +413,7 @@ LittlerootTown_EventScript_14D8B6:: @ 814D8B6
 	call_if_eq LittlerootTown_EventScript_14D926
 	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D931
-	msgbox LittlerootTown_Text_16A8EE, 4
+	msgbox LittlerootTown_Text_16A8EE, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -864,14 +864,14 @@ LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 	end
 
 LittlerootTown_EventScript_14DD38:: @ 814DD38
-	msgbox LittlerootTown_Text_16A8FD, 4
+	msgbox LittlerootTown_Text_16A8FD, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waitmessage
 	setflag FLAG_RECEIVED_RUNNING_SHOES
-	msgbox LittlerootTown_Text_16AA5C, 4
-	msgbox LittlerootTown_Text_16AB10, 4
+	msgbox LittlerootTown_Text_16AA5C, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_16AB10, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	return

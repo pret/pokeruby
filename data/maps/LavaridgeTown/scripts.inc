@@ -81,18 +81,18 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	end
 
 LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
-	msgbox LavaridgeTown_Text_16BDA4, 4
+	msgbox LavaridgeTown_Text_16BDA4, MSGBOX_DEFAULT
 	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	msgbox LavaridgeTown_Text_16BE7D, 4
+	msgbox LavaridgeTown_Text_16BE7D, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_14E5F5
 	end
 
 LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
-	msgbox LavaridgeTown_Text_16BF92, 4
+	msgbox LavaridgeTown_Text_16BF92, MSGBOX_DEFAULT
 	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	msgbox LavaridgeTown_Text_16C020, 4
+	msgbox LavaridgeTown_Text_16C020, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_14E5F5
 	end
 
@@ -245,27 +245,27 @@ LavaridgeTown_EventScript_14E721:: @ 814E721
 	end
 
 LavaridgeTown_EventScript_14E724:: @ 814E724
-	msgbox LavaridgeTown_Text_16C3FD, 2
+	msgbox LavaridgeTown_Text_16C3FD, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E72D:: @ 814E72D
-	msgbox LavaridgeTown_Text_16C4DB, 3
+	msgbox LavaridgeTown_Text_16C4DB, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_14E736:: @ 814E736
-	msgbox LavaridgeTown_Text_16C59B, 2
+	msgbox LavaridgeTown_Text_16C59B, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E73F:: @ 814E73F
-	msgbox LavaridgeTown_Text_16C603, 2
+	msgbox LavaridgeTown_Text_16C603, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E748:: @ 814E748
-	msgbox LavaridgeTown_Text_16C694, 2
+	msgbox LavaridgeTown_Text_16C694, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E751:: @ 814E751
-	msgbox LavaridgeTown_Text_16C54E, 2
+	msgbox LavaridgeTown_Text_16C54E, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E75A:: @ 814E75A
@@ -278,7 +278,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	getpartysize
 	compare VAR_RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
-	msgbox LavaridgeTown_Text_16C2B6, 4
+	msgbox LavaridgeTown_Text_16C2B6, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare MUS_FANFA4
 	message LavaridgeTown_Text_16C2EA
@@ -289,32 +289,32 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	end
 
 LavaridgeTown_EventScript_14E79E:: @ 814E79E
-	msgbox LavaridgeTown_Text_16C398, 4
+	msgbox LavaridgeTown_Text_16C398, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_14E7A8:: @ 814E7A8
-	msgbox LavaridgeTown_Text_16C2FF, 4
+	msgbox LavaridgeTown_Text_16C2FF, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_14E7B2:: @ 814E7B2
-	msgbox LavaridgeTown_Text_16C33C, 4
+	msgbox LavaridgeTown_Text_16C33C, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_14E7BC:: @ 814E7BC
-	msgbox LavaridgeTown_Text_16C72F, 3
+	msgbox LavaridgeTown_Text_16C72F, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_14E7C5:: @ 814E7C5
-	msgbox LavaridgeTown_Text_16C77C, 3
+	msgbox LavaridgeTown_Text_16C77C, MSGBOX_SIGN
 	end
 
 @ 814E7CE
-	msgbox LavaridgeTown_Text_16C7CF, 3
+	msgbox LavaridgeTown_Text_16C7CF, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_14E7D7:: @ 814E7D7
-	msgbox LavaridgeTown_Text_16C7CF, 3
+	msgbox LavaridgeTown_Text_16C7CF, MSGBOX_SIGN
 	end

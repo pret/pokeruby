@@ -13,9 +13,9 @@ SootopolisCity_House2_EventScript_15B2E5:: @ 815B2E5
 	end
 
 SootopolisCity_House2_EventScript_15B307:: @ 815B307
-	msgbox SootopolisCity_House2_Text_18FAAE, 4
+	msgbox SootopolisCity_House2_Text_18FAAE, MSGBOX_DEFAULT
 	return
 
 SootopolisCity_House2_EventScript_15B310:: @ 815B310
-	msgbox SootopolisCity_House2_Text_18FB04, 4
+	msgbox SootopolisCity_House2_Text_18FB04, MSGBOX_DEFAULT
 	return

@@ -6,12 +6,12 @@ MeteorFalls_1F_2R_EventScript_15C679:: @ 815C679
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq MeteorFalls_1F_2R_EventScript_15C6A0
-	msgbox MeteorFalls_1F_2R_Text_193A60, 6
+	msgbox MeteorFalls_1F_2R_Text_193A60, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6A0:: @ 815C6A0
 	trainerbattle_rematch TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_193AB3, MeteorFalls_1F_2R_Text_193B21
-	msgbox MeteorFalls_1F_2R_Text_193B4C, 6
+	msgbox MeteorFalls_1F_2R_Text_193B4C, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6B7:: @ 815C6B7
@@ -19,12 +19,12 @@ MeteorFalls_1F_2R_EventScript_15C6B7:: @ 815C6B7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq MeteorFalls_1F_2R_EventScript_15C6E2
-	msgbox MeteorFalls_1F_2R_Text_193C35, 6
+	msgbox MeteorFalls_1F_2R_Text_193C35, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6E2:: @ 815C6E2
 	trainerbattle_rematch_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_193E75, MeteorFalls_1F_2R_Text_193ECE, MeteorFalls_1F_2R_Text_193F59
-	msgbox MeteorFalls_1F_2R_Text_193EF3, 6
+	msgbox MeteorFalls_1F_2R_Text_193EF3, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6FD:: @ 815C6FD
@@ -32,10 +32,10 @@ MeteorFalls_1F_2R_EventScript_15C6FD:: @ 815C6FD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq MeteorFalls_1F_2R_EventScript_15C728
-	msgbox MeteorFalls_1F_2R_Text_193D9A, 6
+	msgbox MeteorFalls_1F_2R_Text_193D9A, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_15C728:: @ 815C728
 	trainerbattle_rematch_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_193FCA, MeteorFalls_1F_2R_Text_19403A, MeteorFalls_1F_2R_Text_1940DF
-	msgbox MeteorFalls_1F_2R_Text_194066, 6
+	msgbox MeteorFalls_1F_2R_Text_194066, MSGBOX_AUTOCLOSE
 	end

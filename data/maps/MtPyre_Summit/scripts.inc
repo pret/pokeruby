@@ -37,9 +37,9 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	compare VAR_0x8008, 2
 	call_if_eq MtPyre_Summit_EventScript_15D59F
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B52B0, 4
+	msgbox UnknownString_81B52B0, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B5EEC, 4
+	msgbox MtPyre_Summit_Text_1B5EEC, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	fadescreen 1
@@ -59,9 +59,9 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	compare VAR_0x8008, 2
 	call_if_eq MtPyre_Summit_EventScript_15D5CA
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B53AB, 4
+	msgbox UnknownString_81B53AB, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B5FE6, 4
+	msgbox MtPyre_Summit_Text_1B5FE6, MSGBOX_DEFAULT
 	.endif
 	giveitem ITEM_RED_OR_BLUE_ORB
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
@@ -152,17 +152,17 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 
 MtPyre_Summit_EventScript_15D611:: @ 815D611
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5992, 4
+	msgbox UnknownString_81B5992, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B65D6, 4
+	msgbox MtPyre_Summit_Text_1B65D6, MSGBOX_DEFAULT
 	.endif
 	return
 
 MtPyre_Summit_EventScript_15D61A:: @ 815D61A
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5BD7, 4
+	msgbox UnknownString_81B5BD7, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B6823, 4
+	msgbox MtPyre_Summit_Text_1B6823, MSGBOX_DEFAULT
 	.endif
 	return
 
@@ -173,9 +173,9 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, MtPyre_Summit_EventScript_15D64A
 	goto_if_set FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_15D6BA
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B54BE, 4
+	msgbox UnknownString_81B54BE, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B60F9, 4
+	msgbox MtPyre_Summit_Text_1B60F9, MSGBOX_DEFAULT
 	.endif
 	release
 	end
@@ -203,9 +203,9 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 	waitmovement 0
 	delay 10
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5762, 4
+	msgbox UnknownString_81B5762, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B639C, 4
+	msgbox MtPyre_Summit_Text_1B639C, MSGBOX_DEFAULT
 	.endif
 	setflag FLAG_RETURNED_RED_OR_BLUE_ORB
 	release
@@ -225,18 +225,18 @@ MtPyre_Summit_EventScript_15D69B:: @ 815D69B
 
 MtPyre_Summit_EventScript_15D6BA:: @ 815D6BA
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5540, 4
+	msgbox UnknownString_81B5540, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B617B, 4
+	msgbox MtPyre_Summit_Text_1B617B, MSGBOX_DEFAULT
 	.endif
 	release
 	end
 
 MtPyre_Summit_EventScript_15D6C4:: @ 815D6C4
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B57BE, 4
+	msgbox UnknownString_81B57BE, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B63F8, 4
+	msgbox MtPyre_Summit_Text_1B63F8, MSGBOX_DEFAULT
 	.endif
 	release
 	end
@@ -272,9 +272,9 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	compare VAR_0x8008, 2
 	call_if_eq MtPyre_Summit_EventScript_15D774
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5BFC, 4
+	msgbox UnknownString_81B5BFC, MSGBOX_DEFAULT
 	.else
-	msgbox MtPyre_Summit_Text_1B6848, 4
+	msgbox MtPyre_Summit_Text_1B6848, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	compare VAR_0x8008, 0

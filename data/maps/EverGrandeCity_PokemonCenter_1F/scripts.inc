@@ -16,9 +16,9 @@ SootopolisCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC7E:: @ 815BC7E
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_191967, 2
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_191967, MSGBOX_NPC
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC87:: @ 815BC87
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_1919EF, 2
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_1919EF, MSGBOX_NPC
 	end

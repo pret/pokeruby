@@ -26,9 +26,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	applymovement 255, CaveOfOrigin_B4F_Movement_1A0841
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B4F03, 4
+	msgbox UnknownString_81B4F03, MSGBOX_DEFAULT
 	.else
-	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
+	msgbox CaveOfOrigin_B4F_Text_1B4FE4, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	setweather WEATHER_NONE
@@ -81,9 +81,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 
 CaveOfOrigin_B4F_EventScript_15DE73:: @ 815DE73
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B4F29, 4
+	msgbox UnknownString_81B4F29, MSGBOX_DEFAULT
 	.else
-	msgbox CaveOfOrigin_B4F_Text_1B5009, 4
+	msgbox CaveOfOrigin_B4F_Text_1B5009, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	return

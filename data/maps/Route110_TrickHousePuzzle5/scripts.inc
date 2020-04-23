@@ -171,7 +171,7 @@ Route110_TrickHousePuzzle5_EventScript_16293F:: @ 816293F
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162E2B
 	compare VAR_TEMP_9, 3
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162E63
-	msgbox Route110_TrickHousePuzzle5_Text_19D423, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D423, MSGBOX_DEFAULT
 	random 3
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162B83
@@ -193,7 +193,7 @@ Route110_TrickHousePuzzle5_EventScript_1629B3:: @ 81629B3
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162ED3
 	compare VAR_TEMP_9, 3
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162F0B
-	msgbox Route110_TrickHousePuzzle5_Text_19D636, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D636, MSGBOX_DEFAULT
 	random 3
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162BEC
@@ -215,7 +215,7 @@ Route110_TrickHousePuzzle5_EventScript_162A27:: @ 8162A27
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162E2B
 	compare VAR_TEMP_9, 3
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162E63
-	msgbox Route110_TrickHousePuzzle5_Text_19D7D3, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D7D3, MSGBOX_DEFAULT
 	random 3
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162C55
@@ -237,7 +237,7 @@ Route110_TrickHousePuzzle5_EventScript_162A9B:: @ 8162A9B
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162E2B
 	compare VAR_TEMP_9, 3
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162E63
-	msgbox Route110_TrickHousePuzzle5_Text_19D93D, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D93D, MSGBOX_DEFAULT
 	random 3
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162CBE
@@ -259,7 +259,7 @@ Route110_TrickHousePuzzle5_EventScript_162B0F:: @ 8162B0F
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162ED3
 	compare VAR_TEMP_9, 3
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_162F0B
-	msgbox Route110_TrickHousePuzzle5_Text_19DA9A, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19DA9A, MSGBOX_DEFAULT
 	random 3
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162D27
@@ -268,7 +268,7 @@ Route110_TrickHousePuzzle5_EventScript_162B0F:: @ 8162B0F
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162B83:: @ 8162B83
-	msgbox Route110_TrickHousePuzzle5_Text_19D4AE, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D4AE, MSGBOX_DEFAULT
 	multichoice 0, 0, 25, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -276,7 +276,7 @@ Route110_TrickHousePuzzle5_EventScript_162B83:: @ 8162B83
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162BA6:: @ 8162BA6
-	msgbox Route110_TrickHousePuzzle5_Text_19D501, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D501, MSGBOX_DEFAULT
 	multichoice 0, 0, 26, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -284,7 +284,7 @@ Route110_TrickHousePuzzle5_EventScript_162BA6:: @ 8162BA6
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162BC9:: @ 8162BC9
-	msgbox Route110_TrickHousePuzzle5_Text_19D553, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D553, MSGBOX_DEFAULT
 	multichoice 0, 0, 27, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -292,7 +292,7 @@ Route110_TrickHousePuzzle5_EventScript_162BC9:: @ 8162BC9
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162BEC:: @ 8162BEC
-	msgbox Route110_TrickHousePuzzle5_Text_19D68E, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D68E, MSGBOX_DEFAULT
 	multichoice 0, 0, 28, 1
 	switch VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -300,7 +300,7 @@ Route110_TrickHousePuzzle5_EventScript_162BEC:: @ 8162BEC
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162C0F:: @ 8162C0F
-	msgbox Route110_TrickHousePuzzle5_Text_19D6EC, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D6EC, MSGBOX_DEFAULT
 	multichoice 0, 0, 29, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -308,7 +308,7 @@ Route110_TrickHousePuzzle5_EventScript_162C0F:: @ 8162C0F
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162C32:: @ 8162C32
-	msgbox Route110_TrickHousePuzzle5_Text_19D745, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D745, MSGBOX_DEFAULT
 	multichoice 0, 0, 30, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -316,7 +316,7 @@ Route110_TrickHousePuzzle5_EventScript_162C32:: @ 8162C32
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162C55:: @ 8162C55
-	msgbox Route110_TrickHousePuzzle5_Text_19D81B, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D81B, MSGBOX_DEFAULT
 	multichoice 0, 0, 31, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -324,7 +324,7 @@ Route110_TrickHousePuzzle5_EventScript_162C55:: @ 8162C55
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162C78:: @ 8162C78
-	msgbox Route110_TrickHousePuzzle5_Text_19D865, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D865, MSGBOX_DEFAULT
 	multichoice 0, 0, 32, 1
 	switch VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -332,7 +332,7 @@ Route110_TrickHousePuzzle5_EventScript_162C78:: @ 8162C78
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162C9B:: @ 8162C9B
-	msgbox Route110_TrickHousePuzzle5_Text_19D8BA, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D8BA, MSGBOX_DEFAULT
 	multichoice 0, 0, 33, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -340,7 +340,7 @@ Route110_TrickHousePuzzle5_EventScript_162C9B:: @ 8162C9B
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162CBE:: @ 8162CBE
-	msgbox Route110_TrickHousePuzzle5_Text_19D987, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D987, MSGBOX_DEFAULT
 	multichoice 0, 0, 34, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -348,7 +348,7 @@ Route110_TrickHousePuzzle5_EventScript_162CBE:: @ 8162CBE
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162CE1:: @ 8162CE1
-	msgbox Route110_TrickHousePuzzle5_Text_19D9DC, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D9DC, MSGBOX_DEFAULT
 	multichoice 0, 0, 35, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -356,7 +356,7 @@ Route110_TrickHousePuzzle5_EventScript_162CE1:: @ 8162CE1
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162D04:: @ 8162D04
-	msgbox Route110_TrickHousePuzzle5_Text_19DA1D, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19DA1D, MSGBOX_DEFAULT
 	multichoice 0, 0, 36, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -364,7 +364,7 @@ Route110_TrickHousePuzzle5_EventScript_162D04:: @ 8162D04
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162D27:: @ 8162D27
-	msgbox Route110_TrickHousePuzzle5_Text_19DAEF, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19DAEF, MSGBOX_DEFAULT
 	multichoice 0, 0, 37, 1
 	switch VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -372,7 +372,7 @@ Route110_TrickHousePuzzle5_EventScript_162D27:: @ 8162D27
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162D4A:: @ 8162D4A
-	msgbox Route110_TrickHousePuzzle5_Text_19DB43, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19DB43, MSGBOX_DEFAULT
 	multichoice 0, 0, 38, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -380,7 +380,7 @@ Route110_TrickHousePuzzle5_EventScript_162D4A:: @ 8162D4A
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162D6D:: @ 8162D6D
-	msgbox Route110_TrickHousePuzzle5_Text_19DB97, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19DB97, MSGBOX_DEFAULT
 	multichoice 0, 0, 39, 1
 	switch VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_162DDF
@@ -390,16 +390,16 @@ Route110_TrickHousePuzzle5_EventScript_162D6D:: @ 8162D6D
 Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 	waitse
 	playse SE_HAZURE
-	msgbox Route110_TrickHousePuzzle5_Text_19D5CF, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D5CF, MSGBOX_DEFAULT
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_16309F
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_16309F
 	applymovement 3, Route110_TrickHousePuzzle5_Movement_16309F
 	applymovement 4, Route110_TrickHousePuzzle5_Movement_16309F
 	applymovement 5, Route110_TrickHousePuzzle5_Movement_16309F
-	msgbox Route110_TrickHousePuzzle5_Text_19D5ED, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D5ED, MSGBOX_DEFAULT
 	waitmovement 0
 	closemessage
-	msgbox Route110_TrickHousePuzzle5_Text_19D615, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D615, MSGBOX_DEFAULT
 	closemessage
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
 	waitstate
@@ -413,7 +413,7 @@ Route110_TrickHousePuzzle5_EventScript_162DDF:: @ 8162DDF
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162DE9:: @ 8162DE9
-	msgbox Route110_TrickHousePuzzle5_Text_19D599, 4
+	msgbox Route110_TrickHousePuzzle5_Text_19D599, MSGBOX_DEFAULT
 	releaseall
 	end
 

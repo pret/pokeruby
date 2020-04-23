@@ -37,7 +37,7 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	waitmovement 0
 	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E23
 	waitmovement 0
-	msgbox VerdanturfTown_ContestLobby_Text_1A6832, 4
+	msgbox VerdanturfTown_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E2C
 	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E19
@@ -95,14 +95,14 @@ VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153E3E:: @ 8153E3E
-	msgbox VerdanturfTown_ContestLobby_Text_177D6C, 2
+	msgbox VerdanturfTown_ContestLobby_Text_177D6C, MSGBOX_NPC
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_ContestLobby_EventScript_153E76
-	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
+	msgbox VerdanturfTown_ContestLobby_Text_177DEC, MSGBOX_DEFAULT
 	giveitem ITEM_TM45_ATTRACT
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
@@ -111,12 +111,12 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153E76:: @ 8153E76
-	msgbox VerdanturfTown_ContestLobby_Text_177E98, 4
+	msgbox VerdanturfTown_ContestLobby_Text_177E98, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153E80:: @ 8153E80
-	msgbox VerdanturfTown_ContestLobby_Text_177ECD, 2
+	msgbox VerdanturfTown_ContestLobby_Text_177ECD, MSGBOX_NPC
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153E89:: @ 8153E89

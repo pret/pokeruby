@@ -38,6 +38,6 @@ Underwater_SeafloorCavern_MapScript1_15DA36:: @ 815DA36
 
 Underwater_SeafloorCavern_EventScript_15DA3F:: @ 815DA3F
 	lockall
-	msgbox Underwater_SeafloorCavern_Text_197435, 4
+	msgbox Underwater_SeafloorCavern_Text_197435, MSGBOX_DEFAULT
 	releaseall
 	end

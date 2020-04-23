@@ -12,44 +12,44 @@ FortreeCity_MapScript1_14C952:: @ 814C952
 	end
 
 FortreeCity_EventScript_14C955:: @ 814C955
-	msgbox FortreeCity_Text_167577, 2
+	msgbox FortreeCity_Text_167577, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_14C95E:: @ 814C95E
 	lock
 	faceplayer
 	goto_if_set FLAG_KECLEON_FLED_FORTREE, FortreeCity_EventScript_14C973
-	msgbox FortreeCity_Text_1675C2, 4
+	msgbox FortreeCity_Text_1675C2, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_14C973:: @ 814C973
-	msgbox FortreeCity_Text_167642, 4
+	msgbox FortreeCity_Text_167642, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_14C97D:: @ 814C97D
-	msgbox FortreeCity_Text_16768A, 2
+	msgbox FortreeCity_Text_16768A, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_14C986:: @ 814C986
-	msgbox FortreeCity_Text_16770E, 2
+	msgbox FortreeCity_Text_16770E, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_14C98F:: @ 814C98F
-	msgbox FortreeCity_Text_1677BD, 2
+	msgbox FortreeCity_Text_1677BD, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_14C998:: @ 814C998
-	msgbox FortreeCity_Text_16782C, 2
+	msgbox FortreeCity_Text_16782C, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_14C9A1:: @ 814C9A1
-	msgbox FortreeCity_Text_16792F, 3
+	msgbox FortreeCity_Text_16792F, MSGBOX_SIGN
 	end
 
 FortreeCity_EventScript_14C9AA:: @ 814C9AA
-	msgbox FortreeCity_Text_167969, 3
+	msgbox FortreeCity_Text_167969, MSGBOX_SIGN
 	end
 
 FortreeCity_EventScript_14C9B3:: @ 814C9B3
@@ -58,7 +58,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare VAR_RESULT, 1
 	goto_if_eq FortreeCity_EventScript_14C9CF
-	msgbox FortreeCity_Text_167868, 4
+	msgbox FortreeCity_Text_167868, MSGBOX_DEFAULT
 	release
 	end
 
@@ -70,7 +70,7 @@ FortreeCity_EventScript_14C9CF:: @ 814C9CF
 	end
 
 FortreeCity_EventScript_14C9E4:: @ 814C9E4
-	msgbox FortreeCity_Text_1678CB, 4
+	msgbox FortreeCity_Text_1678CB, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, FortreeCity_Movement_1A0662
 	waitmovement 0

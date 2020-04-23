@@ -15,9 +15,9 @@ MossdeepCity_PokemonCenter_1F_EventScript_15A8DA:: @ 815A8DA
 	end
 
 MossdeepCity_PokemonCenter_1F_EventScript_15A8E8:: @ 815A8E8
-	msgbox MossdeepCity_PokemonCenter_1F_Text_18D62F, 2
+	msgbox MossdeepCity_PokemonCenter_1F_Text_18D62F, MSGBOX_NPC
 	end
 
 MossdeepCity_PokemonCenter_1F_EventScript_15A8F1:: @ 815A8F1
-	msgbox MossdeepCity_PokemonCenter_1F_Text_18D69A, 2
+	msgbox MossdeepCity_PokemonCenter_1F_Text_18D69A, MSGBOX_NPC
 	end

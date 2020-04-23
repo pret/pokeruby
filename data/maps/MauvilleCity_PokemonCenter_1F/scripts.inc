@@ -21,13 +21,13 @@ MauvilleCity_PokemonCenter_1F_EventScript_157369:: @ 8157369
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157377:: @ 8157377
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1825BD, 2
+	msgbox MauvilleCity_PokemonCenter_1F_Text_1825BD, MSGBOX_NPC
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157380:: @ 8157380
-	msgbox MauvilleCity_PokemonCenter_1F_Text_182622, 2
+	msgbox MauvilleCity_PokemonCenter_1F_Text_182622, MSGBOX_NPC
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157389:: @ 8157389
-	msgbox MauvilleCity_PokemonCenter_1F_Text_1826A6, 2
+	msgbox MauvilleCity_PokemonCenter_1F_Text_1826A6, MSGBOX_NPC
 	end

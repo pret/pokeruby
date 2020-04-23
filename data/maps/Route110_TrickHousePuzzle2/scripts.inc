@@ -91,15 +91,15 @@ Route110_TrickHousePuzzle2_EventScript_161E65:: @ 8161E65
 
 Route110_TrickHousePuzzle2_EventScript_161E78:: @ 8161E78
 	trainerbattle_single TRAINER_TED, Route110_TrickHousePuzzle2_Text_19CD46, Route110_TrickHousePuzzle2_Text_19CD66
-	msgbox Route110_TrickHousePuzzle2_Text_19CD91, 6
+	msgbox Route110_TrickHousePuzzle2_Text_19CD91, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161E8F:: @ 8161E8F
 	trainerbattle_single TRAINER_PAUL, Route110_TrickHousePuzzle2_Text_19CDBF, Route110_TrickHousePuzzle2_Text_19CDF0
-	msgbox Route110_TrickHousePuzzle2_Text_19CE0D, 6
+	msgbox Route110_TrickHousePuzzle2_Text_19CE0D, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161EA6:: @ 8161EA6
 	trainerbattle_single TRAINER_GEORGIA, Route110_TrickHousePuzzle2_Text_19CE52, Route110_TrickHousePuzzle2_Text_19CE98
-	msgbox Route110_TrickHousePuzzle2_Text_19CEB8, 6
+	msgbox Route110_TrickHousePuzzle2_Text_19CEB8, MSGBOX_AUTOCLOSE
 	end

@@ -17,7 +17,7 @@ Route111_OldLadysRestStop_EventScript_15BFDB:: @ 815BFDB
 	end
 
 Route111_OldLadysRestStop_EventScript_15BFFC:: @ 815BFFC
-	msgbox Route111_OldLadysRestStop_Text_192423, 4
+	msgbox Route111_OldLadysRestStop_Text_192423, MSGBOX_DEFAULT
 	closemessage
 	call Route111_OldLadysRestStop_EventScript_1A02CA
 	msgbox Route111_OldLadysRestStop_Text_19244D, MSGBOX_YESNO
@@ -28,6 +28,6 @@ Route111_OldLadysRestStop_EventScript_15BFFC:: @ 815BFFC
 	end
 
 Route111_OldLadysRestStop_EventScript_15C029:: @ 815C029
-	msgbox Route111_OldLadysRestStop_Text_1924C6, 4
+	msgbox Route111_OldLadysRestStop_Text_1924C6, MSGBOX_DEFAULT
 	release
 	end

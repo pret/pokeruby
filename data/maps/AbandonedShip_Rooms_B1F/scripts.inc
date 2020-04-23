@@ -7,5 +7,5 @@ AbandonedShip_Rooms_B1F_MapScript1_15EA3B:: @ 815EA3B
 	end
 
 AbandonedShip_Rooms_B1F_EventScript_15EA44:: @ 815EA44
-	msgbox AbandonedShip_Rooms_B1F_Text_1986FE, 2
+	msgbox AbandonedShip_Rooms_B1F_Text_1986FE, MSGBOX_NPC
 	end

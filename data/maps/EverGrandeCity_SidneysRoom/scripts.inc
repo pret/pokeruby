@@ -43,19 +43,19 @@ EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_15B5BD
 	playbgm MUS_SITENNOU, FALSE
-	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
+	msgbox EverGrandeCity_SidneysRoom_Text_190728, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_190823
 	goto EverGrandeCity_SidneysRoom_EventScript_15B5C7
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B5BD:: @ 815B5BD
-	msgbox EverGrandeCity_SidneysRoom_Text_19086D, 4
+	msgbox EverGrandeCity_SidneysRoom_Text_19086D, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B5C7:: @ 815B5C7
 	setflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	call EverGrandeCity_SidneysRoom_EventScript_1A0693
-	msgbox EverGrandeCity_SidneysRoom_Text_19086D, 4
+	msgbox EverGrandeCity_SidneysRoom_Text_19086D, MSGBOX_DEFAULT
 	release
 	end

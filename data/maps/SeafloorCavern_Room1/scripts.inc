@@ -8,10 +8,10 @@ SeafloorCavern_Room1_MapScript1_15DA67:: @ 815DA67
 
 SeafloorCavern_Room1_EventScript_15DA6D:: @ 815DA6D
 	trainerbattle_single TRAINER_SEAFLOOR_CAVERN_GRUNT_1, SeafloorCavern_Room1_Text_1974BA, SeafloorCavern_Room1_Text_1974EA
-	msgbox SeafloorCavern_Room1_Text_1974FF, 6
+	msgbox SeafloorCavern_Room1_Text_1974FF, MSGBOX_AUTOCLOSE
 	end
 
 SeafloorCavern_Room1_EventScript_15DA84:: @ 815DA84
 	trainerbattle_single TRAINER_SEAFLOOR_CAVERN_GRUNT_2, SeafloorCavern_Room1_Text_19753C, SeafloorCavern_Room1_Text_197573
-	msgbox SeafloorCavern_Room1_Text_197589, 6
+	msgbox SeafloorCavern_Room1_Text_197589, MSGBOX_AUTOCLOSE
 	end

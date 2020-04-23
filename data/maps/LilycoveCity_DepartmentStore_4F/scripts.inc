@@ -2,15 +2,15 @@ LilycoveCity_DepartmentStore_4F_MapScripts:: @ 8159FFD
 	.byte 0
 
 LilycoveCity_DepartmentStore_4F_EventScript_159FFE:: @ 8159FFE
-	msgbox LilycoveCity_DepartmentStore_4F_Text_18C39C, 2
+	msgbox LilycoveCity_DepartmentStore_4F_Text_18C39C, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_15A007:: @ 815A007
-	msgbox LilycoveCity_DepartmentStore_4F_Text_18C41B, 2
+	msgbox LilycoveCity_DepartmentStore_4F_Text_18C41B, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_15A010:: @ 815A010
-	msgbox LilycoveCity_DepartmentStore_4F_Text_18C481, 2
+	msgbox LilycoveCity_DepartmentStore_4F_Text_18C481, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_15A019:: @ 815A019
@@ -19,7 +19,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_15A019:: @ 815A019
 	message LilycoveCity_DepartmentStore_4F_Text_1A0BE4
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_4F_Items1
-	msgbox LilycoveCity_DepartmentStore_4F_Text_1A0C02, 4
+	msgbox LilycoveCity_DepartmentStore_4F_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -39,7 +39,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_15A03C:: @ 815A03C
 	message LilycoveCity_DepartmentStore_4F_Text_1A0BE4
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_4F_Items2
-	msgbox LilycoveCity_DepartmentStore_4F_Text_1A0C02, 4
+	msgbox LilycoveCity_DepartmentStore_4F_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 

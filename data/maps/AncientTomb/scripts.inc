@@ -39,7 +39,7 @@ AncientTomb_EventScript_15F021:: @ 815F021
 	end
 
 AncientTomb_EventScript_15F038:: @ 815F038
-	msgbox AncientTomb_Text_1A13BE, 4
+	msgbox AncientTomb_Text_1A13BE, MSGBOX_DEFAULT
 	releaseall
 	end
 

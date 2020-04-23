@@ -71,7 +71,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	end
 
 SouthernIsland_Interior_EventScript_160C08:: @ 8160C08
-	msgbox SouthernIsland_Interior_Text_1C52C5, 4
+	msgbox SouthernIsland_Interior_Text_1C52C5, MSGBOX_DEFAULT
 	releaseall
 	end
 

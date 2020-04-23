@@ -19,7 +19,7 @@ JaggedPass_EventScript_15D280:: @ 815D280
 
 JaggedPass_EventScript_15D285:: @ 815D285
 	trainerbattle_single TRAINER_ERIC, JaggedPass_Text_195DAC, JaggedPass_Text_195E27
-	msgbox JaggedPass_Text_195E3E, 6
+	msgbox JaggedPass_Text_195E3E, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_15D29C:: @ 815D29C
@@ -27,12 +27,12 @@ JaggedPass_EventScript_15D29C:: @ 815D29C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq JaggedPass_EventScript_15D2C3
-	msgbox JaggedPass_Text_195F04, 6
+	msgbox JaggedPass_Text_195F04, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_15D2C3:: @ 815D2C3
 	trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_195F58, JaggedPass_Text_195F8C
-	msgbox JaggedPass_Text_195FB9, 6
+	msgbox JaggedPass_Text_195FB9, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_15D2DA:: @ 815D2DA
@@ -40,10 +40,10 @@ JaggedPass_EventScript_15D2DA:: @ 815D2DA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq JaggedPass_EventScript_15D301
-	msgbox JaggedPass_Text_196077, 6
+	msgbox JaggedPass_Text_196077, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_15D301:: @ 815D301
 	trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_1960AA, JaggedPass_Text_1960E2
-	msgbox JaggedPass_Text_196118, 6
+	msgbox JaggedPass_Text_196118, MSGBOX_AUTOCLOSE
 	end

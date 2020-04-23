@@ -15,13 +15,13 @@ FortreeCity_PokemonCenter_1F_EventScript_15801B:: @ 815801B
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_158029:: @ 8158029
-	msgbox FortreeCity_PokemonCenter_1F_Text_186027, 2
+	msgbox FortreeCity_PokemonCenter_1F_Text_186027, MSGBOX_NPC
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_158032:: @ 8158032
-	msgbox FortreeCity_PokemonCenter_1F_Text_186086, 2
+	msgbox FortreeCity_PokemonCenter_1F_Text_186086, MSGBOX_NPC
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_15803B:: @ 815803B
-	msgbox FortreeCity_PokemonCenter_1F_Text_186138, 2
+	msgbox FortreeCity_PokemonCenter_1F_Text_186138, MSGBOX_NPC
 	end

@@ -16,9 +16,9 @@ DewfordTown_PokemonCenter_1F_EventScript_153023:: @ 8153023
 	end
 
 DewfordTown_PokemonCenter_1F_EventScript_153031:: @ 8153031
-	msgbox DewfordTown_PokemonCenter_1F_Text_174CDB, 2
+	msgbox DewfordTown_PokemonCenter_1F_Text_174CDB, MSGBOX_NPC
 	end
 
 DewfordTown_PokemonCenter_1F_EventScript_15303A:: @ 815303A
-	msgbox DewfordTown_PokemonCenter_1F_Text_174D32, 2
+	msgbox DewfordTown_PokemonCenter_1F_Text_174D32, MSGBOX_NPC
 	end

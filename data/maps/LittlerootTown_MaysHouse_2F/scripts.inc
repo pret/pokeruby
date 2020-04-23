@@ -45,7 +45,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
-	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, MSGBOX_DEFAULT
 	playbgm MUS_GIRL_SUP, TRUE
 	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
@@ -53,7 +53,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152B29
@@ -79,7 +79,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, MSGBOX_DEFAULT
 	playbgm MUS_BOY_SUP, TRUE
 	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
@@ -87,7 +87,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152B9F
@@ -121,20 +121,20 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BDB:: @ 8152BDB
 	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_152BFF
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1737AE, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1737AE, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BED:: @ 8152BED
 	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_152C08
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1738F2, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1738F2, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BFF:: @ 8152BFF
-	msgbox LittlerootTown_BrendansHouse_2F_Text_173883, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_173883, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152C08:: @ 8152C08
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1739CC, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1739CC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_Movement_152C11:: @ 8152C11
@@ -197,7 +197,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C39:: @ 8152C39
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
-	msgbox LittlerootTown_MaysHouse_2F_Text_1A100C, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1A100C, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -205,7 +205,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	setvar VAR_0x8004, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall

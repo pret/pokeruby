@@ -61,7 +61,7 @@ LavaridgeTown_Gym_1F_EventScript_153740:: @ 8153740
 LavaridgeTown_Gym_1F_EventScript_153741:: @ 8153741
 	trainerbattle_single TRAINER_FLANNERY, LavaridgeTown_Gym_1F_Text_176801, LavaridgeTown_Gym_1F_Text_176960, LavaridgeTown_Gym_1F_EventScript_153766, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM50, LavaridgeTown_Gym_1F_EventScript_1537A7
-	msgbox LavaridgeTown_Gym_1F_Text_176C4A, 4
+	msgbox LavaridgeTown_Gym_1F_Text_176C4A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -69,7 +69,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	message LavaridgeTown_Gym_1F_Text_176A62
 	waitmessage
 	call LavaridgeTown_Gym_1F_EventScript_1A02C5
-	msgbox LavaridgeTown_Gym_1F_Text_176A8C, 4
+	msgbox LavaridgeTown_Gym_1F_Text_176A8C, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
@@ -86,14 +86,14 @@ LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
 	giveitem ITEM_TM50_OVERHEAT
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
-	msgbox LavaridgeTown_Gym_1F_Text_176B8F, 4
+	msgbox LavaridgeTown_Gym_1F_Text_176B8F, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	release
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1537CB:: @ 81537CB
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_COLE, 2, LavaridgeTown_Gym_1F_Text_176432, LavaridgeTown_Gym_1F_Text_17644F, LavaridgeTown_Gym_1F_EventScript_1537E6
-	msgbox LavaridgeTown_Gym_1F_Text_176472, 6
+	msgbox LavaridgeTown_Gym_1F_Text_176472, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1537E6:: @ 81537E6
@@ -103,34 +103,34 @@ LavaridgeTown_Gym_1F_EventScript_1537E6:: @ 81537E6
 
 LavaridgeTown_Gym_1F_EventScript_1537ED:: @ 81537ED
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_AXLE, 4, LavaridgeTown_Gym_1F_Text_1764D1, LavaridgeTown_Gym_1F_Text_176516, LavaridgeTown_Gym_1F_EventScript_1537E6
-	msgbox LavaridgeTown_Gym_1F_Text_176537, 6
+	msgbox LavaridgeTown_Gym_1F_Text_176537, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153808:: @ 8153808
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_ANDY, 7, LavaridgeTown_Gym_1F_Text_17658D, LavaridgeTown_Gym_1F_Text_17663F, LavaridgeTown_Gym_1F_EventScript_1537E6
-	msgbox LavaridgeTown_Gym_1F_Text_176660, 6
+	msgbox LavaridgeTown_Gym_1F_Text_176660, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153823:: @ 8153823
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_SADIE, 5, LavaridgeTown_Gym_1F_Text_176784, LavaridgeTown_Gym_1F_Text_1767A6, LavaridgeTown_Gym_1F_EventScript_1537E6
-	msgbox LavaridgeTown_Gym_1F_Text_1767C1, 6
+	msgbox LavaridgeTown_Gym_1F_Text_1767C1, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_15383E:: @ 815383E
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_ZANE, 3, LavaridgeTown_Gym_1F_Text_1766D2, LavaridgeTown_Gym_1F_Text_1766FE, LavaridgeTown_Gym_1F_EventScript_1537E6
-	msgbox LavaridgeTown_Gym_1F_Text_17671D, 6
+	msgbox LavaridgeTown_Gym_1F_Text_17671D, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153859:: @ 8153859
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_LAVARIDGE_GYM, LavaridgeTown_Gym_1F_EventScript_15386E
-	msgbox LavaridgeTown_Gym_1F_Text_176312, 4
+	msgbox LavaridgeTown_Gym_1F_Text_176312, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_Gym_1F_EventScript_15386E:: @ 815386E
-	msgbox LavaridgeTown_Gym_1F_Text_17640C, 4
+	msgbox LavaridgeTown_Gym_1F_Text_17640C, MSGBOX_DEFAULT
 	release
 	end
 
@@ -147,11 +147,11 @@ LavaridgeTown_Gym_1F_EventScript_153888:: @ 8153888
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153898:: @ 8153898
-	msgbox LavaridgeTown_Gym_1F_Text_176CCA, 4
+	msgbox LavaridgeTown_Gym_1F_Text_176CCA, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1538A2:: @ 81538A2
-	msgbox LavaridgeTown_Gym_1F_Text_176CAF, 4
+	msgbox LavaridgeTown_Gym_1F_Text_176CAF, MSGBOX_DEFAULT
 	releaseall
 	end

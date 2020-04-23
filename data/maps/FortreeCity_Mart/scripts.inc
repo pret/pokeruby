@@ -7,7 +7,7 @@ FortreeCity_Mart_EventScript_158067:: @ 8158067
 	message FortreeCity_Mart_Text_1A0BE4
 	waitmessage
 	pokemart FortreeCity_Mart_Items
-	msgbox FortreeCity_Mart_Text_1A0C02, 4
+	msgbox FortreeCity_Mart_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -28,13 +28,13 @@ FortreeCity_Mart_Items:: @ 8158080
 	end
 
 FortreeCity_Mart_EventScript_158098:: @ 8158098
-	msgbox FortreeCity_Mart_Text_1861EF, 2
+	msgbox FortreeCity_Mart_Text_1861EF, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_EventScript_1580A1:: @ 81580A1
-	msgbox FortreeCity_Mart_Text_186251, 2
+	msgbox FortreeCity_Mart_Text_186251, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_EventScript_1580AA:: @ 81580AA
-	msgbox FortreeCity_Mart_Text_1862CA, 2
+	msgbox FortreeCity_Mart_Text_1862CA, MSGBOX_NPC
 	end

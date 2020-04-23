@@ -64,21 +64,21 @@ SootopolisCity_EventScript_14D16E:: @ 814D16E
 	lock
 	faceplayer
 	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D183
-	msgbox SootopolisCity_Text_1696A4, 4
+	msgbox SootopolisCity_Text_1696A4, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D183:: @ 814D183
-	msgbox SootopolisCity_Text_16A455, 4
+	msgbox SootopolisCity_Text_16A455, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D18D:: @ 814D18D
-	msgbox SootopolisCity_Text_16A2B2, 2
+	msgbox SootopolisCity_Text_16A2B2, MSGBOX_NPC
 	end
 
 SootopolisCity_EventScript_14D196:: @ 814D196
-	msgbox SootopolisCity_Text_16A2FB, 2
+	msgbox SootopolisCity_Text_16A2FB, MSGBOX_NPC
 	end
 
 SootopolisCity_EventScript_14D19F:: @ 814D19F
@@ -87,7 +87,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	dotimebasedevents
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS, SootopolisCity_EventScript_14D241
-	msgbox SootopolisCity_Text_1C63F2, 4
+	msgbox SootopolisCity_Text_1C63F2, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
@@ -95,7 +95,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
-	msgbox SootopolisCity_Text_1C64D0, 4
+	msgbox SootopolisCity_Text_1C64D0, MSGBOX_DEFAULT
 	random 2
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_14D1FF
@@ -107,7 +107,7 @@ SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 	giveitem ITEM_FIGY_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
-	msgbox SootopolisCity_Text_1C650B, 4
+	msgbox SootopolisCity_Text_1C650B, MSGBOX_DEFAULT
 	release
 	end
 
@@ -115,7 +115,7 @@ SootopolisCity_EventScript_14D220:: @ 814D220
 	giveitem ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
-	msgbox SootopolisCity_Text_1C650B, 4
+	msgbox SootopolisCity_Text_1C650B, MSGBOX_DEFAULT
 	release
 	end
 
@@ -123,12 +123,12 @@ SootopolisCity_EventScript_14D241:: @ 814D241
 	msgbox SootopolisCity_Text_1C6540, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SootopolisCity_EventScript_14D25E
-	msgbox SootopolisCity_Text_1C6626, 4
+	msgbox SootopolisCity_Text_1C6626, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D25E:: @ 814D25E
-	msgbox SootopolisCity_Text_1C65D4, 4
+	msgbox SootopolisCity_Text_1C65D4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -136,12 +136,12 @@ SootopolisCity_EventScript_14D268:: @ 814D268
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_SOOTOPOLIS_GYM, SootopolisCity_EventScript_14D27D
-	msgbox SootopolisCity_Text_16A4D6, 4
+	msgbox SootopolisCity_Text_16A4D6, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D27D:: @ 814D27D
-	msgbox SootopolisCity_Text_16A531, 4
+	msgbox SootopolisCity_Text_16A531, MSGBOX_DEFAULT
 	release
 	end
 
@@ -149,12 +149,12 @@ SootopolisCity_EventScript_14D287:: @ 814D287
 	lock
 	faceplayer
 	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D29C
-	msgbox SootopolisCity_Text_169813, 4
+	msgbox SootopolisCity_Text_169813, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D29C:: @ 814D29C
-	msgbox SootopolisCity_Text_16A587, 4
+	msgbox SootopolisCity_Text_16A587, MSGBOX_DEFAULT
 	release
 	end
 
@@ -162,12 +162,12 @@ SootopolisCity_EventScript_14D2A6:: @ 814D2A6
 	lock
 	faceplayer
 	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D2BB
-	msgbox SootopolisCity_Text_1698A0, 4
+	msgbox SootopolisCity_Text_1698A0, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D2BB:: @ 814D2BB
-	msgbox SootopolisCity_Text_16A614, 4
+	msgbox SootopolisCity_Text_16A614, MSGBOX_DEFAULT
 	release
 	end
 
@@ -175,29 +175,29 @@ SootopolisCity_EventScript_14D2C5:: @ 814D2C5
 	lock
 	faceplayer
 	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D2DA
-	msgbox SootopolisCity_Text_1697A7, 4
+	msgbox SootopolisCity_Text_1697A7, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D2DA:: @ 814D2DA
-	msgbox SootopolisCity_Text_16A6AE, 4
+	msgbox SootopolisCity_Text_16A6AE, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_14D2E4:: @ 814D2E4
-	msgbox SootopolisCity_Text_16972B, 2
+	msgbox SootopolisCity_Text_16972B, MSGBOX_NPC
 	end
 
 SootopolisCity_EventScript_14D2ED:: @ 814D2ED
-	msgbox SootopolisCity_Text_16A6C7, 3
+	msgbox SootopolisCity_Text_16A6C7, MSGBOX_SIGN
 	end
 
 SootopolisCity_EventScript_14D2F6:: @ 814D2F6
-	msgbox SootopolisCity_Text_16A711, 3
+	msgbox SootopolisCity_Text_16A711, MSGBOX_SIGN
 	end
 
 ClosedSootopolisDoorScript:: @ 814D2FF
-	msgbox ClosedSootopolisDoorText, 3
+	msgbox ClosedSootopolisDoorText, MSGBOX_SIGN
 	end
 
 SootopolisCity_EventScript_14D308:: @ 814D308
@@ -213,18 +213,18 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	applymovement 10, SootopolisCity_Movement_14D413
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169988, 4
+	msgbox SootopolisCity_Text_169988, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_169E0F, 4
+	msgbox SootopolisCity_Text_169E0F, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	applymovement 10, SootopolisCity_Movement_14D417
 	applymovement 255, SootopolisCity_Movement_14D440
 	waitmovement 10
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_1699FD, 4
+	msgbox SootopolisCity_Text_1699FD, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_169E82, 4
+	msgbox SootopolisCity_Text_169E82, MSGBOX_DEFAULT
 	.endif
 	playse SE_PIN
 	applymovement 5, SootopolisCity_Movement_1A0833
@@ -232,9 +232,9 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	applymovement 5, SootopolisCity_Movement_1A0835
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169AB7, 4
+	msgbox SootopolisCity_Text_169AB7, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_169F3C, 4
+	msgbox SootopolisCity_Text_169F3C, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	delay 30
@@ -249,9 +249,9 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	applymovement 10, SootopolisCity_Movement_1A0845
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169AE7, 4
+	msgbox SootopolisCity_Text_169AE7, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_169F6B, 4
+	msgbox SootopolisCity_Text_169F6B, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	delay 30
@@ -262,16 +262,16 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	applymovement 5, SootopolisCity_Movement_1A083F
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169BC7, 4
+	msgbox SootopolisCity_Text_169BC7, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_16A06C, 4
+	msgbox SootopolisCity_Text_16A06C, MSGBOX_DEFAULT
 	.endif
 	applymovement 255, SootopolisCity_Movement_1A083F
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169C99, 4
+	msgbox SootopolisCity_Text_169C99, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_16A13E, 4
+	msgbox SootopolisCity_Text_16A13E, MSGBOX_DEFAULT
 	.endif
 	moveobjectoffscreen 5
 	setobjectmovementtype 5, 9
@@ -425,9 +425,9 @@ SootopolisCity_Movement_14D47C:: @ 814D47C
 
 SootopolisCity_EventScript_14D48F:: @ 814D48F
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169D37, 2
+	msgbox SootopolisCity_Text_169D37, MSGBOX_NPC
 	.else
-	msgbox SootopolisCity_Text_16A1DB, 2
+	msgbox SootopolisCity_Text_16A1DB, MSGBOX_NPC
 	.endif
 	end
 
@@ -436,15 +436,15 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 	faceplayer
 	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D4AD
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169DA6, 4
+	msgbox SootopolisCity_Text_169DA6, MSGBOX_DEFAULT
 	.else
-	msgbox SootopolisCity_Text_16A249, 4
+	msgbox SootopolisCity_Text_16A249, MSGBOX_DEFAULT
 	.endif
 	release
 	end
 
 SootopolisCity_EventScript_14D4AD:: @ 814D4AD
-	msgbox SootopolisCity_Text_16A33E, 4
+	msgbox SootopolisCity_Text_16A33E, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, SootopolisCity_Movement_1A0845
 	waitmovement 0

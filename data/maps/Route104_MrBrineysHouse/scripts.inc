@@ -31,7 +31,7 @@ Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
 
 Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
-	msgbox Route104_MrBrineysHouse_Text_191A82, 4
+	msgbox Route104_MrBrineysHouse_Text_191A82, MSGBOX_DEFAULT
 	msgbox Route104_MrBrineysHouse_Text_191AAD, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
@@ -63,17 +63,17 @@ Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD97:: @ 815BD97
-	msgbox Route104_MrBrineysHouse_Text_191C57, 4
+	msgbox Route104_MrBrineysHouse_Text_191C57, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_MrBrineysHouse_EventScript_15BDA1:: @ 815BDA1
-	msgbox Route104_MrBrineysHouse_Text_191EDB, 4
+	msgbox Route104_MrBrineysHouse_Text_191EDB, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
-	msgbox Route104_MrBrineysHouse_Text_191BFD, 4
+	msgbox Route104_MrBrineysHouse_Text_191BFD, MSGBOX_DEFAULT
 	call Route104_MrBrineysHouse_EventScript_1A010C
 	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104
@@ -89,7 +89,7 @@ Route104_MrBrineysHouse_EventScript_15BDD1:: @ 815BDD1
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox Route104_MrBrineysHouse_Text_191FB9, 4
+	msgbox Route104_MrBrineysHouse_Text_191FB9, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

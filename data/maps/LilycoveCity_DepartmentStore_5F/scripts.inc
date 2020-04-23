@@ -7,7 +7,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A061:: @ 815A061
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items1
-	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
+	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -35,7 +35,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A094:: @ 815A094
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items2
-	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
+	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -60,7 +60,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A0C2:: @ 815A0C2
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items3
-	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
+	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -85,7 +85,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A0F2:: @ 815A0F2
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items4
-	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
+	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, MSGBOX_DEFAULT
 	release
 	end
 
@@ -106,13 +106,13 @@ LilycoveCity_DepartmentStore_5F_Items4:: @ 815A10C
 	end
 
 LilycoveCity_DepartmentStore_5F_EventScript_15A124:: @ 815A124
-	msgbox LilycoveCity_DepartmentStore_5F_Text_18C4F9, 2
+	msgbox LilycoveCity_DepartmentStore_5F_Text_18C4F9, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_5F_EventScript_15A12D:: @ 815A12D
-	msgbox LilycoveCity_DepartmentStore_5F_Text_18C59F, 2
+	msgbox LilycoveCity_DepartmentStore_5F_Text_18C59F, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_5F_EventScript_15A136:: @ 815A136
-	msgbox LilycoveCity_DepartmentStore_5F_Text_18C556, 2
+	msgbox LilycoveCity_DepartmentStore_5F_Text_18C556, MSGBOX_NPC
 	end

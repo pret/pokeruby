@@ -51,7 +51,7 @@ IslandCave_EventScript_15EF59:: @ 815EF59
 	end
 
 IslandCave_EventScript_15EF72:: @ 815EF72
-	msgbox IslandCave_Text_1A13BE, 4
+	msgbox IslandCave_Text_1A13BE, MSGBOX_DEFAULT
 	releaseall
 	end
 

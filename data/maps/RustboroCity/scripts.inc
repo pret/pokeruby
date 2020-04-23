@@ -12,36 +12,36 @@ RustboroCity_EventScript_14C386:: @ 814C386
 	lock
 	faceplayer
 	goto_if_set FLAG_DEVON_GOODS_STOLEN, RustboroCity_EventScript_14C39B
-	msgbox RustboroCity_Text_16689D, 4
+	msgbox RustboroCity_Text_16689D, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C39B:: @ 814C39B
-	msgbox RustboroCity_Text_16690C, 4
+	msgbox RustboroCity_Text_16690C, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C3A5:: @ 814C3A5
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_166A67, 4
+	msgbox RustboroCity_Text_166A67, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C3B1:: @ 814C3B1
-	msgbox RustboroCity_Text_166AE0, 2
+	msgbox RustboroCity_Text_166AE0, MSGBOX_NPC
 	end
 
 RustboroCity_EventScript_14C3BA:: @ 814C3BA
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE01_GET, RustboroCity_EventScript_14C3CF
-	msgbox RustboroCity_Text_16696D, 4
+	msgbox RustboroCity_Text_16696D, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C3CF:: @ 814C3CF
-	msgbox RustboroCity_Text_1669FE, 4
+	msgbox RustboroCity_Text_1669FE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -49,55 +49,55 @@ RustboroCity_EventScript_14C3D9:: @ 814C3D9
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_14C3EE
-	msgbox RustboroCity_Text_166B86, 4
+	msgbox RustboroCity_Text_166B86, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C3EE:: @ 814C3EE
-	msgbox RustboroCity_Text_166BEF, 4
+	msgbox RustboroCity_Text_166BEF, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C3F8:: @ 814C3F8
-	msgbox RustboroCity_Text_166C98, 2
+	msgbox RustboroCity_Text_166C98, MSGBOX_NPC
 	end
 
 RustboroCity_EventScript_14C401:: @ 814C401
-	msgbox RustboroCity_Text_166CFA, 3
+	msgbox RustboroCity_Text_166CFA, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C40A:: @ 814C40A
-	msgbox RustboroCity_Text_167374, 3
+	msgbox RustboroCity_Text_167374, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C413:: @ 814C413
-	msgbox RustboroCity_Text_1673FA, 3
+	msgbox RustboroCity_Text_1673FA, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C41C:: @ 814C41C
-	msgbox RustboroCity_Text_167439, 3
+	msgbox RustboroCity_Text_167439, MSGBOX_SIGN
 	end
 
 @ 814C425
-	msgbox RustboroCity_Text_167485, 3
+	msgbox RustboroCity_Text_167485, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C42E:: @ 814C42E
-	msgbox RustboroCity_Text_1674DD, 3
+	msgbox RustboroCity_Text_1674DD, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C437:: @ 814C437
-	msgbox RustboroCity_Text_167525, 3
+	msgbox RustboroCity_Text_167525, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C440:: @ 814C440
-	msgbox RustboroCity_Text_167568, 3
+	msgbox RustboroCity_Text_167568, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_14C449:: @ 814C449
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_166D59, 4
+	msgbox RustboroCity_Text_166D59, MSGBOX_DEFAULT
 	applymovement 7, RustboroCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -106,7 +106,7 @@ RustboroCity_EventScript_14C449:: @ 814C449
 RustboroCity_EventScript_14C45F:: @ 814C45F
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_166DB0, 4
+	msgbox RustboroCity_Text_166DB0, MSGBOX_DEFAULT
 	applymovement 8, RustboroCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -115,7 +115,7 @@ RustboroCity_EventScript_14C45F:: @ 814C45F
 RustboroCity_EventScript_14C475:: @ 814C475
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_166DEE, 4
+	msgbox RustboroCity_Text_166DEE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -160,7 +160,7 @@ RustboroCity_EventScript_14C4DD:: @ 814C4DD
 	end
 
 RustboroCity_EventScript_14C4F4:: @ 814C4F4
-	msgbox RustboroCity_Text_166E65, 4
+	msgbox RustboroCity_Text_166E65, MSGBOX_DEFAULT
 	closemessage
 	addobject 10
 	addobject 9
@@ -169,7 +169,7 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	removeobject 10
 	applymovement 9, RustboroCity_Movement_14C5D3
 	waitmovement 0
-	msgbox RustboroCity_Text_166E7E, 4
+	msgbox RustboroCity_Text_166E7E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, RustboroCity_Movement_14C5DB
 	waitmovement 0
@@ -189,11 +189,11 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	end
 
 @ 814C55D
-	msgbox RustboroCity_Text_166F6B, 4
+	msgbox RustboroCity_Text_166F6B, MSGBOX_DEFAULT
 	return
 
 @ 814C566
-	msgbox RustboroCity_Text_166FB4, 4
+	msgbox RustboroCity_Text_166FB4, MSGBOX_DEFAULT
 	return
 
 @ 814C56F
@@ -324,7 +324,7 @@ RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	lock
 	faceplayer
 	goto_if_set FLAG_RECOVERED_DEVON_GOODS, RustboroCity_EventScript_14C614
-	msgbox RustboroCity_Text_166F6B, 4
+	msgbox RustboroCity_Text_166F6B, MSGBOX_DEFAULT
 	release
 	end
 
@@ -370,7 +370,7 @@ RustboroCity_EventScript_14C650:: @ 814C650
 	setflag FLAG_UNKNOWN_9F
 	setvar VAR_RUSTBORO_STATE, 3
 	moveobjectoffscreen 9
-	msgbox RustboroCity_Text_166EA5, 4
+	msgbox RustboroCity_Text_166EA5, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -463,11 +463,11 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	call_if_eq RustboroCity_EventScript_14C882
 	compare VAR_TEMP_1, 4
 	call_if_eq RustboroCity_EventScript_14C8B8
-	msgbox RustboroCity_Text_166FB4, 4
+	msgbox RustboroCity_Text_166FB4, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
 	call_if_eq RustboroCity_EventScript_14C7F5
-	msgbox RustboroCity_Text_16707F, 4
+	msgbox RustboroCity_Text_16707F, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_HIDE_DEVON_RUSTBORO
@@ -479,7 +479,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	end
 
 RustboroCity_EventScript_14C7F5:: @ 814C7F5
-	msgbox RustboroCity_Text_16704C, 4
+	msgbox RustboroCity_Text_16704C, MSGBOX_DEFAULT
 	return
 
 RustboroCity_EventScript_14C7FE:: @ 814C7FE
@@ -555,13 +555,13 @@ RustboroCity_EventScript_14C8DA:: @ 814C8DA
 
 RustboroCity_EventScript_14C8FD:: @ 814C8FD
 	setflag FLAG_MET_RIVAL_RUSTBORO
-	msgbox RustboroCity_Text_1670A7, 4
+	msgbox RustboroCity_Text_1670A7, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C90A:: @ 814C90A
 	setflag FLAG_MET_RIVAL_RUSTBORO
-	msgbox RustboroCity_Text_167213, 4
+	msgbox RustboroCity_Text_167213, MSGBOX_DEFAULT
 	release
 	end
 
@@ -574,11 +574,11 @@ RustboroCity_EventScript_14C917:: @ 814C917
 	end
 
 RustboroCity_EventScript_14C92F:: @ 814C92F
-	msgbox RustboroCity_Text_16713C, 4
+	msgbox RustboroCity_Text_16713C, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_14C939:: @ 814C939
-	msgbox RustboroCity_Text_1672B8, 4
+	msgbox RustboroCity_Text_1672B8, MSGBOX_DEFAULT
 	release
 	end

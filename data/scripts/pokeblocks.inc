@@ -52,7 +52,7 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
-	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
+	msgbox FallarborTown_ContestLobby_Text_1B6E9D, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, -1
 	goto_if_ne FallarborTown_ContestLobby_EventScript_1B76EF
@@ -61,7 +61,7 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	end
 
 FallarborTown_ContestLobby_EventScript_1B76E5:: @ 81B76E5
-	msgbox FallarborTown_ContestLobby_Text_1B6EA8, 4
+	msgbox FallarborTown_ContestLobby_Text_1B6EA8, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -74,19 +74,19 @@ FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
 	end
 
 FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
-	msgbox FallarborTown_ContestLobby_Text_1B6FF0, 4
+	msgbox FallarborTown_ContestLobby_Text_1B6FF0, MSGBOX_DEFAULT
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FALLARBOR, FallarborTown_ContestLobby_EventScript_1B774F
 	goto FallarborTown_ContestLobby_EventScript_1B7759
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7726:: @ 81B7726
-	msgbox FallarborTown_ContestLobby_Text_1B6F1F, 4
+	msgbox FallarborTown_ContestLobby_Text_1B6F1F, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1B7734
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7734:: @ 81B7734
-	msgbox FallarborTown_ContestLobby_Text_1B6EF1, 4
+	msgbox FallarborTown_ContestLobby_Text_1B6EF1, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1B7742
 	end
 
@@ -99,24 +99,24 @@ FallarborTown_ContestLobby_EventScript_1B7742:: @ 81B7742
 	end
 
 FallarborTown_ContestLobby_EventScript_1B774F:: @ 81B774F
-	msgbox FallarborTown_ContestLobby_Text_1B70F6, 4
+	msgbox FallarborTown_ContestLobby_Text_1B70F6, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7759:: @ 81B7759
-	msgbox FallarborTown_ContestLobby_Text_1B704A, 4
+	msgbox FallarborTown_ContestLobby_Text_1B704A, MSGBOX_DEFAULT
 	giveitem ITEM_PECHA_BERRY
 	setflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
 	goto FallarborTown_ContestLobby_EventScript_1B76EF
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7776:: @ 81B7776
-	msgbox FallarborTown_ContestLobby_Text_1B717C, 4
+	msgbox FallarborTown_ContestLobby_Text_1B717C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7780:: @ 81B7780
-	msgbox FallarborTown_ContestLobby_Text_1B71D2, 4
+	msgbox FallarborTown_ContestLobby_Text_1B71D2, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -146,7 +146,7 @@ SlateportCity_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 	lock
 	faceplayer
-	msgbox FallarborTown_ContestLobby_Text_1B742F, 4
+	msgbox FallarborTown_ContestLobby_Text_1B742F, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77DC
@@ -155,7 +155,7 @@ VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 	end
 
 FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
-	msgbox FallarborTown_ContestLobby_Text_1B7469, 4
+	msgbox FallarborTown_ContestLobby_Text_1B7469, MSGBOX_DEFAULT
 	release
 	end
 
@@ -166,15 +166,15 @@ FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
 	end
 
 FallarborTown_ContestLobby_EventScript_1B77F6:: @ 81B77F6
-	msgbox FallarborTown_ContestLobby_Text_1B7578, 4
+	msgbox FallarborTown_ContestLobby_Text_1B7578, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7800:: @ 81B7800
-	msgbox FallarborTown_ContestLobby_Text_1B74B4, 4
+	msgbox FallarborTown_ContestLobby_Text_1B74B4, MSGBOX_DEFAULT
 	giveitem ITEM_PECHA_BERRY
 	setflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
-	msgbox FallarborTown_ContestLobby_Text_1B753A, 4
+	msgbox FallarborTown_ContestLobby_Text_1B753A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -228,7 +228,7 @@ FallarborTown_ContestLobby_EventScript_1B7878:: @ 81B7878
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7897:: @ 81B7897
-	msgbox FallarborTown_ContestLobby_Text_1B7381, 4
+	msgbox FallarborTown_ContestLobby_Text_1B7381, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -253,17 +253,17 @@ FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
 	end
 
 FallarborTown_ContestLobby_EventScript_1B78F3:: @ 81B78F3
-	msgbox FallarborTown_ContestLobby_Text_1B733B, 4
+	msgbox FallarborTown_ContestLobby_Text_1B733B, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1B791D
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7901:: @ 81B7901
-	msgbox FallarborTown_ContestLobby_Text_1B7347, 4
+	msgbox FallarborTown_ContestLobby_Text_1B7347, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1B791D
 	end
 
 FallarborTown_ContestLobby_EventScript_1B790F:: @ 81B790F
-	msgbox FallarborTown_ContestLobby_Text_1B735A, 4
+	msgbox FallarborTown_ContestLobby_Text_1B735A, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1B791D
 	end
 
@@ -284,36 +284,36 @@ FallarborTown_ContestLobby_EventScript_1B7936:: @ 81B7936
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7938:: @ 81B7938
-	msgbox FallarborTown_ContestLobby_Text_1B73B7, 4
+	msgbox FallarborTown_ContestLobby_Text_1B73B7, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7942:: @ 81B7942
-	msgbox FallarborTown_ContestLobby_Text_1B73F1, 4
+	msgbox FallarborTown_ContestLobby_Text_1B73F1, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B794C:: @ 81B794C
 	special CloseLink
-	msgbox FallarborTown_ContestLobby_Text_1A4A30, 4
+	msgbox FallarborTown_ContestLobby_Text_1A4A30, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7959:: @ 81B7959
 	special CloseLink
-	msgbox FallarborTown_ContestLobby_Text_1A4B1D, 4
+	msgbox FallarborTown_ContestLobby_Text_1A4B1D, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7966:: @ 81B7966
 	special CloseLink
-	msgbox FallarborTown_ContestLobby_Text_1A10EB, 4
+	msgbox FallarborTown_ContestLobby_Text_1A10EB, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7973:: @ 81B7973
 	special CloseLink
-	msgbox FallarborTown_ContestLobby_Text_1A4A85, 4
+	msgbox FallarborTown_ContestLobby_Text_1A4A85, MSGBOX_DEFAULT
 	releaseall
 	end
 

@@ -16,17 +16,17 @@ FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B10:: @ 8153B10
-	msgbox FallarborTown_PokemonCenter_1F_Text_17768C, 2
+	msgbox FallarborTown_PokemonCenter_1F_Text_17768C, MSGBOX_NPC
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B19:: @ 8153B19
-	msgbox FallarborTown_PokemonCenter_1F_Text_1776F5, 2
+	msgbox FallarborTown_PokemonCenter_1F_Text_1776F5, MSGBOX_NPC
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B22:: @ 8153B22
 	lock
 	faceplayer
-	msgbox FallarborTown_PokemonCenter_1F_Text_1774D4, 4
+	msgbox FallarborTown_PokemonCenter_1F_Text_1774D4, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 2, FallarborTown_PokemonCenter_1F_EventScript_153B49

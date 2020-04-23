@@ -17,9 +17,9 @@ VerdanturfTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
 	end
 
 VerdanturfTown_PokemonCenter_1F_EventScript_153F26:: @ 8153F26
-	msgbox VerdanturfTown_PokemonCenter_1F_Text_17831D, 2
+	msgbox VerdanturfTown_PokemonCenter_1F_Text_17831D, MSGBOX_NPC
 	end
 
 VerdanturfTown_PokemonCenter_1F_EventScript_153F2F:: @ 8153F2F
-	msgbox VerdanturfTown_PokemonCenter_1F_Text_178389, 2
+	msgbox VerdanturfTown_PokemonCenter_1F_Text_178389, MSGBOX_NPC
 	end

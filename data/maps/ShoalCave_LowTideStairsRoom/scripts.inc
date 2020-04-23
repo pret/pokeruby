@@ -27,6 +27,6 @@ ShoalCave_LowTideStairsRoom_EventScript_15E3B7:: @ 815E3B7
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_15E3E9:: @ 815E3E9
-	msgbox ShoalCave_LowTideStairsRoom_Text_1C6979, 4
+	msgbox ShoalCave_LowTideStairsRoom_Text_1C6979, MSGBOX_DEFAULT
 	releaseall
 	end

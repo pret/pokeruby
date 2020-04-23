@@ -13,7 +13,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	delay 30
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0845
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_193237, 4
+	msgbox MeteorFalls_1F_1R_Text_193237, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0841
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A0841
@@ -23,11 +23,11 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	waitmovement 0
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0835
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_193268, 4
+	msgbox MeteorFalls_1F_1R_Text_193268, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, MeteorFalls_1F_1R_Movement_15C5EE
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_1932C5, 4
+	msgbox MeteorFalls_1F_1R_Text_1932C5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MeteorFalls_1F_1R_Movement_1A083F
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A083F
@@ -43,7 +43,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A083F
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A083F
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_193320, 4
+	msgbox MeteorFalls_1F_1R_Text_193320, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MeteorFalls_1F_1R_Movement_15C64F
 	applymovement 5, MeteorFalls_1F_1R_Movement_15C5F1
@@ -54,21 +54,21 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 7, MeteorFalls_1F_1R_Movement_15C628
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox MeteorFalls_1F_1R_Text_1933EC, 4
+	msgbox MeteorFalls_1F_1R_Text_1933EC, MSGBOX_DEFAULT
 	.else
-	msgbox MeteorFalls_1F_1R_Text_193584, 4
+	msgbox MeteorFalls_1F_1R_Text_193584, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	applymovement 8, MeteorFalls_1F_1R_Movement_15C639
 	applymovement 9, MeteorFalls_1F_1R_Movement_15C64A
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_193720, 4
+	msgbox MeteorFalls_1F_1R_Text_193720, MSGBOX_DEFAULT
 	applymovement 7, MeteorFalls_1F_1R_Movement_1A0845
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_193747, 4
+	msgbox MeteorFalls_1F_1R_Text_193747, MSGBOX_DEFAULT
 	applymovement 7, MeteorFalls_1F_1R_Movement_1A083F
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_1937AA, 4
+	msgbox MeteorFalls_1F_1R_Text_1937AA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, MeteorFalls_1F_1R_Movement_15C61F
 	applymovement 8, MeteorFalls_1F_1R_Movement_15C62E
@@ -217,11 +217,11 @@ MeteorFalls_1F_1R_EventScript_15C656:: @ 815C656
 	faceplayer
 	goto_if_set FLAG_MET_PROF_COSMO, MeteorFalls_1F_1R_EventScript_15C66E
 	setflag FLAG_MET_PROF_COSMO
-	msgbox MeteorFalls_1F_1R_Text_1937EB, 4
+	msgbox MeteorFalls_1F_1R_Text_1937EB, MSGBOX_DEFAULT
 	release
 	end
 
 MeteorFalls_1F_1R_EventScript_15C66E:: @ 815C66E
-	msgbox MeteorFalls_1F_1R_Text_19396A, 4
+	msgbox MeteorFalls_1F_1R_Text_19396A, MSGBOX_DEFAULT
 	release
 	end

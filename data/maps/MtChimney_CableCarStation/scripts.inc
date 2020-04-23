@@ -39,7 +39,7 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	end
 
 MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
-	msgbox MtChimney_CableCarStation_Text_1925A9, 4
+	msgbox MtChimney_CableCarStation_Text_1925A9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
 	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
@@ -54,7 +54,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	end
 
 MtChimney_CableCarStation_EventScript_15C19B:: @ 815C19B
-	msgbox MtChimney_CableCarStation_Text_1925BF, 4
+	msgbox MtChimney_CableCarStation_Text_1925BF, MSGBOX_DEFAULT
 	release
 	end
 

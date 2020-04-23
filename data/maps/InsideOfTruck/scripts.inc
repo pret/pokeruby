@@ -48,5 +48,5 @@ InsideOfTruck_EventScript_15FC68:: @ 815FC68
 	end
 
 InsideOfTruck_EventScript_15FC8B:: @ 815FC8B
-	msgbox InsideOfTruck_Text_198FAD, 3
+	msgbox InsideOfTruck_Text_198FAD, MSGBOX_SIGN
 	end

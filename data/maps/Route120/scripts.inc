@@ -159,21 +159,21 @@ Route120_EventScript_151813:: @ 8151813
 	compare VAR_RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
-	msgbox Route120_Text_1C5A0B, 4
+	msgbox Route120_Text_1C5A0B, MSGBOX_DEFAULT
 	release
 	end
 
 Route120_EventScript_151837:: @ 8151837
-	msgbox Route120_Text_1C5A4D, 4
+	msgbox Route120_Text_1C5A4D, MSGBOX_DEFAULT
 	release
 	end
 
 Route120_EventScript_151841:: @ 8151841
-	msgbox Route120_Text_1C5979, 4
+	msgbox Route120_Text_1C5979, MSGBOX_DEFAULT
 	return
 
 Route120_EventScript_15184A:: @ 815184A
-	msgbox Route120_Text_1C59B5, 4
+	msgbox Route120_Text_1C59B5, MSGBOX_DEFAULT
 	return
 
 Route120_EventScript_151853:: @ 8151853
@@ -187,7 +187,7 @@ Route120_EventScript_151853:: @ 8151853
 	end
 
 Route120_EventScript_151877:: @ 8151877
-	msgbox Route120_Text_17193D, 4
+	msgbox Route120_Text_17193D, MSGBOX_DEFAULT
 	setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	release
 	end
@@ -200,7 +200,7 @@ Route120_EventScript_151884:: @ 8151884
 	end
 
 Route120_EventScript_15189D:: @ 815189D
-	msgbox Route120_Text_1719A0, 4
+	msgbox Route120_Text_1719A0, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if_eq Route120_EventScript_15197F
@@ -209,7 +209,7 @@ Route120_EventScript_15189D:: @ 815189D
 	applymovement 31, Route120_Movement_1A083F
 	waitmovement 0
 	delay 20
-	msgbox Route120_Text_1719D4, 4
+	msgbox Route120_Text_1719D4, MSGBOX_DEFAULT
 	closemessage
 	applymovement 30, Route120_Movement_1A0843
 	waitmovement 0
@@ -231,10 +231,10 @@ Route120_EventScript_151908:: @ 8151908
 	applymovement 31, Route120_Movement_1A0845
 	applymovement 255, Route120_Movement_1A0841
 	waitmovement 0
-	msgbox Route120_Text_171A40, 4
+	msgbox Route120_Text_171A40, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
-	msgbox Route120_Text_171B0E, 4
+	msgbox Route120_Text_171B0E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 31, Route120_Movement_1A0845
 	waitmovement 0
@@ -268,20 +268,20 @@ Route120_Movement_151995:: @ 8151995
 	end_movement
 
 Route120_EventScript_151998:: @ 8151998
-	msgbox Route120_Text_171B93, 2
+	msgbox Route120_Text_171B93, MSGBOX_NPC
 	end
 
 Route120_EventScript_1519A1:: @ 81519A1
-	msgbox Route120_Text_171C5E, 3
+	msgbox Route120_Text_171C5E, MSGBOX_SIGN
 	end
 
 Route120_EventScript_1519AA:: @ 81519AA
-	msgbox Route120_Text_171C77, 3
+	msgbox Route120_Text_171C77, MSGBOX_SIGN
 	end
 
 Route120_EventScript_1519B3:: @ 81519B3
 	trainerbattle_single TRAINER_COLIN, Route120_Text_1BEFC8, Route120_Text_1BF000
-	msgbox Route120_Text_1BF015, 6
+	msgbox Route120_Text_1BF015, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1519CA:: @ 81519CA
@@ -289,22 +289,22 @@ Route120_EventScript_1519CA:: @ 81519CA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
-	msgbox Route120_Text_1BF0C3, 6
+	msgbox Route120_Text_1BF0C3, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1519F1:: @ 81519F1
 	trainerbattle_rematch TRAINER_ROBERT_1, Route120_Text_1BF0FA, Route120_Text_1BF131
-	msgbox Route120_Text_1BF154, 6
+	msgbox Route120_Text_1BF154, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151A08:: @ 8151A08
 	trainerbattle_single TRAINER_CARLOS, Route120_Text_1BF193, Route120_Text_1BF1D4
-	msgbox Route120_Text_1BF215, 6
+	msgbox Route120_Text_1BF215, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151A1F:: @ 8151A1F
 	trainerbattle_single TRAINER_JENNA, Route120_Text_1BF26E, Route120_Text_1BF2D2
-	msgbox Route120_Text_1BF2EA, 6
+	msgbox Route120_Text_1BF2EA, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151A36:: @ 8151A36
@@ -312,40 +312,40 @@ Route120_EventScript_151A36:: @ 8151A36
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
-	msgbox Route120_Text_1BF38D, 6
+	msgbox Route120_Text_1BF38D, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151A5D:: @ 8151A5D
 	trainerbattle_rematch TRAINER_BRANDON_1, Route120_Text_1BF3D0, Route120_Text_1BF416
-	msgbox Route120_Text_1BF43E, 6
+	msgbox Route120_Text_1BF43E, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151A74:: @ 8151A74
 	trainerbattle_single TRAINER_JENNIFER, Route120_Text_1BF4A0, Route120_Text_1BF504
-	msgbox Route120_Text_1BF51F, 6
+	msgbox Route120_Text_1BF51F, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151A8B:: @ 8151A8B
 	trainerbattle_single TRAINER_CHIP, Route120_Text_1BF560, Route120_Text_1BF5D6
-	msgbox Route120_Text_1BF5F4, 6
+	msgbox Route120_Text_1BF5F4, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151AA2:: @ 8151AA2
 	trainerbattle_single TRAINER_CLARISSA, Route120_Text_1BF65B, Route120_Text_1BF6A4
-	msgbox Route120_Text_1BF6D0, 6
+	msgbox Route120_Text_1BF6D0, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151AB9:: @ 8151AB9
 	trainerbattle_single TRAINER_ANGELICA, Route120_Text_1BF728, Route120_Text_1BF78C
-	msgbox Route120_Text_1BF7B2, 6
+	msgbox Route120_Text_1BF7B2, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151AD0:: @ 8151AD0
 	trainerbattle_single TRAINER_KEIGO, Route120_Text_1BF80B, Route120_Text_1BF852
-	msgbox Route120_Text_1BF891, 6
+	msgbox Route120_Text_1BF891, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_151AE7:: @ 8151AE7
 	trainerbattle_single TRAINER_TSUNAO, Route120_Text_1BF8C5, Route120_Text_1BF920
-	msgbox Route120_Text_1BF946, 6
+	msgbox Route120_Text_1BF946, MSGBOX_AUTOCLOSE
 	end

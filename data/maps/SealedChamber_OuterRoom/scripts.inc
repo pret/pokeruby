@@ -116,7 +116,7 @@ SealedChamber_OuterRoom_EventScript_15F1B8:: @ 815F1B8
 	end
 
 SealedChamber_OuterRoom_EventScript_15F1CF:: @ 815F1CF
-	msgbox SealedChamber_OuterRoom_Text_1A13BE, 4
+	msgbox SealedChamber_OuterRoom_Text_1A13BE, MSGBOX_DEFAULT
 	releaseall
 	end
 

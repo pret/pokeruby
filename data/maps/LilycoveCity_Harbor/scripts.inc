@@ -17,12 +17,12 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_1598CD
-	msgbox LilycoveCity_Harbor_Text_18B306, 4
+	msgbox LilycoveCity_Harbor_Text_18B306, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
-	msgbox LilycoveCity_Harbor_Text_18B36F, 4
+	msgbox LilycoveCity_Harbor_Text_18B36F, MSGBOX_DEFAULT
 	checkitem ITEM_SS_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_159929
@@ -41,7 +41,7 @@ LilycoveCity_Harbor_EventScript_1598F1:: @ 81598F1
 	end
 
 LilycoveCity_Harbor_EventScript_159929:: @ 8159929
-	msgbox LilycoveCity_Harbor_Text_18B3A9, 4
+	msgbox LilycoveCity_Harbor_Text_18B3A9, MSGBOX_DEFAULT
 	release
 	end
 
@@ -73,7 +73,7 @@ LilycoveCity_Harbor_EventScript_15997E:: @ 815997E
 	end
 
 LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
-	msgbox LilycoveCity_Harbor_Text_18B4B3, 4
+	msgbox LilycoveCity_Harbor_Text_18B4B3, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
@@ -100,7 +100,7 @@ LilycoveCity_Harbor_EventScript_1599D9:: @ 81599D9
 	return
 
 LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
-	msgbox LilycoveCity_Harbor_Text_18B45B, 4
+	msgbox LilycoveCity_Harbor_Text_18B45B, MSGBOX_DEFAULT
 	release
 	end
 
@@ -108,7 +108,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	goto_if_unset FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_1598BA
 	goto_if_set FLAG_ENCOUNTERED_LATIAS_OR_LATIOS, LilycoveCity_Harbor_EventScript_1598BA
 	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_1598BA
-	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
+	msgbox LilycoveCity_Harbor_Text_1C50F2, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
@@ -119,7 +119,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	delay 30
 	applymovement 4, LilycoveCity_Harbor_Movement_1A0839
 	waitmovement 0
-	msgbox LilycoveCity_Harbor_Text_1C5120, 4
+	msgbox LilycoveCity_Harbor_Text_1C5120, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
@@ -156,11 +156,11 @@ LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_159AA2
-	msgbox LilycoveCity_Harbor_Text_18B504, 4
+	msgbox LilycoveCity_Harbor_Text_18B504, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_159AA2:: @ 8159AA2
-	msgbox LilycoveCity_Harbor_Text_18B58E, 4
+	msgbox LilycoveCity_Harbor_Text_18B58E, MSGBOX_DEFAULT
 	release
 	end
