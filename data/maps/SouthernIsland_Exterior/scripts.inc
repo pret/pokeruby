@@ -1,5 +1,5 @@
 SouthernIsland_Exterior_MapScripts:: @ 8160AD6
-	map_script 3, SouthernIsland_Exterior_MapScript1_160ADC
+	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Exterior_MapScript1_160ADC
 	.byte 0
 
 SouthernIsland_Exterior_MapScript1_160ADC:: @ 8160ADC

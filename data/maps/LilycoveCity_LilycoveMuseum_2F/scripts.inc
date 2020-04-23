@@ -1,6 +1,6 @@
 LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 81585AC
-	map_script 1, LilycoveCity_LilycoveMuseum_2F_MapScript1_1585B7
-	map_script 2, LilycoveCity_LilycoveMuseum_2F_MapScript2_158670
+	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_LilycoveMuseum_2F_MapScript1_1585B7
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_LilycoveMuseum_2F_MapScript2_158670
 	.byte 0
 
 LilycoveCity_LilycoveMuseum_2F_MapScript1_1585B7:: @ 81585B7

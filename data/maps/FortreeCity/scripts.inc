@@ -1,6 +1,6 @@
 FortreeCity_MapScripts:: @ 814C943
-	map_script 3, FortreeCity_MapScript1_14C94E
-	map_script 5, FortreeCity_MapScript1_14C952
+	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_MapScript1_14C94E
+	map_script MAP_SCRIPT_ON_RESUME, FortreeCity_MapScript1_14C952
 	.byte 0
 
 FortreeCity_MapScript1_14C94E:: @ 814C94E

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
+#include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
 #define SCRIPT_STACK_SIZE 20
@@ -256,14 +257,14 @@ static u8 *mapheader_get_tagged_pointer(u8 tag)
     }
 }
 
-static void mapheader_run_script_by_tag(u8 tag)
+static void MapHeaderRunScriptType(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
     if (ptr)
         ScriptContext2_RunNewScript(ptr);
 }
 
-static u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
+static u8 *MapHeaderCheckScriptTable(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
 
@@ -286,29 +287,29 @@ static u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
     }
 }
 
-void mapheader_run_script_with_tag_x1(void)
+void RunOnLoadMapScript(void)
 {
-    mapheader_run_script_by_tag(1);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_LOAD);
 }
 
-void mapheader_run_script_with_tag_x3(void)
+void RunOnTransitionMapScript(void)
 {
-    mapheader_run_script_by_tag(3);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_TRANSITION);
 }
 
-void mapheader_run_script_with_tag_x5(void)
+void RunOnResumeMapScript(void)
 {
-    mapheader_run_script_by_tag(5);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_RESUME);
 }
 
-void mapheader_run_script_with_tag_x6(void)
+void RunOnDiveWarpMapScript(void)
 {
-    mapheader_run_script_by_tag(6);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_DIVE_WARP);
 }
 
-bool8 mapheader_run_first_tag2_script_list_match(void)
+bool8 TryRunOnFrameMapScript(void)
 {
-    u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(2);
+    u8 *ptr = MapHeaderCheckScriptTable(MAP_SCRIPT_ON_FRAME_TABLE);
 
     if (!ptr)
         return 0;
@@ -317,9 +318,9 @@ bool8 mapheader_run_first_tag2_script_list_match(void)
     return 1;
 }
 
-void mapheader_run_first_tag4_script_list_match(void)
+void TryRunOnWarpIntoMapScript(void)
 {
-    u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(4);
+    u8 *ptr = MapHeaderCheckScriptTable(MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE);
     if (ptr)
         ScriptContext2_RunNewScript(ptr);
 }

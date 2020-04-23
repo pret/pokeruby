@@ -1,6 +1,6 @@
 CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
-	map_script 5, CaveOfOrigin_B4F_MapScript1_15DDB7
-	map_script 3, CaveOfOrigin_B4F_MapScript1_15DDC5
+	map_script MAP_SCRIPT_ON_RESUME, CaveOfOrigin_B4F_MapScript1_15DDB7
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_B4F_MapScript1_15DDC5
 	.byte 0
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7

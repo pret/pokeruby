@@ -1,7 +1,7 @@
 Route110_MapScripts:: @ 814F900
-	map_script 5, Route110_MapScript1_14F910
-	map_script 3, Route110_MapScript1_14F914
-	map_script 2, Route110_MapScript2_14F933
+	map_script MAP_SCRIPT_ON_RESUME, Route110_MapScript1_14F910
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_MapScript1_14F914
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_MapScript2_14F933
 	.byte 0
 
 Route110_MapScript1_14F910:: @ 814F910

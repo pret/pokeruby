@@ -1,5 +1,5 @@
 ShoalCave_LowTideLowerRoom_MapScripts:: @ 815E3F3
-	map_script 1, ShoalCave_LowTideLowerRoom_MapScript1_15E3F9
+	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideLowerRoom_MapScript1_15E3F9
 	.byte 0
 
 ShoalCave_LowTideLowerRoom_MapScript1_15E3F9:: @ 815E3F9

@@ -1,5 +1,5 @@
 FallarborTown_ContestLobby_MapScripts:: @ 81539C1
-	map_script 3, FallarborTown_ContestLobby_MapScript1_1539C7
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_ContestLobby_MapScript1_1539C7
 	.byte 0
 
 FallarborTown_ContestLobby_MapScript1_1539C7:: @ 81539C7

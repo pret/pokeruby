@@ -1,6 +1,6 @@
 PetalburgCity_MapScripts:: @ 814B70C
-	map_script 3, PetalburgCity_MapScript1_14B717
-	map_script 2, PetalburgCity_MapScript2_14B73D
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_MapScript1_14B717
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_MapScript2_14B73D
 	.byte 0
 
 PetalburgCity_MapScript1_14B717:: @ 814B717

@@ -1,6 +1,6 @@
 NewMauville_Entrance_MapScripts:: @ 815E48A
-	map_script 1, NewMauville_Entrance_MapScript1_15E495
-	map_script 3, NewMauville_Entrance_MapScript1_15E4D8
+	map_script MAP_SCRIPT_ON_LOAD, NewMauville_Entrance_MapScript1_15E495
+	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_Entrance_MapScript1_15E4D8
 	.byte 0
 
 NewMauville_Entrance_MapScript1_15E495:: @ 815E495

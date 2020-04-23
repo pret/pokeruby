@@ -228,7 +228,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 #if DEBUG
      !input->input_field_1_1 &&
 #endif
-     mapheader_run_first_tag2_script_list_match() == 1)
+     TryRunOnFrameMapScript() == TRUE)
         return TRUE;
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)

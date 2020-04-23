@@ -1,5 +1,5 @@
 FallarborTown_PokemonCenter_1F_MapScripts:: @ 8153AF3
-	map_script 3, FallarborTown_PokemonCenter_1F_MapScript1_153AF9
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_MapScript1_153AF9
 	.byte 0
 
 FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9

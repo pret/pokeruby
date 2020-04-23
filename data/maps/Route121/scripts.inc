@@ -1,5 +1,5 @@
 Route121_MapScripts:: @ 8151AFE
-	map_script 3, Route121_MapScript1_151B04
+	map_script MAP_SCRIPT_ON_TRANSITION, Route121_MapScript1_151B04
 	.byte 0
 
 Route121_MapScript1_151B04:: @ 8151B04

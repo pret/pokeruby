@@ -1,5 +1,5 @@
 VerdanturfTown_PokemonCenter_1F_MapScripts:: @ 8153F09
-	map_script 3, VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F
+	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F
 	.byte 0
 
 VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F:: @ 8153F0F

@@ -1,5 +1,5 @@
 Route116_TunnelersRestHouse_MapScripts:: @ 815C2DE
-	map_script 3, Route116_TunnelersRestHouse_MapScript1_15C2E4
+	map_script MAP_SCRIPT_ON_TRANSITION, Route116_TunnelersRestHouse_MapScript1_15C2E4
 	.byte 0
 
 Route116_TunnelersRestHouse_MapScript1_15C2E4:: @ 815C2E4

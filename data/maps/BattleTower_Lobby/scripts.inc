@@ -1,8 +1,8 @@
 BattleTower_Lobby_MapScripts:: @ 816027E
-	map_script 5, BattleTower_Lobby_MapScript1_160293
-	map_script 3, BattleTower_Lobby_MapScript1_1602E8
-	map_script 2, BattleTower_Lobby_MapScript2_160302
-	map_script 4, BattleTower_Lobby_MapScript2_1602EE
+	map_script MAP_SCRIPT_ON_RESUME, BattleTower_Lobby_MapScript1_160293
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleTower_Lobby_MapScript1_1602E8
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleTower_Lobby_MapScript2_160302
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleTower_Lobby_MapScript2_1602EE
 	.byte 0
 
 BattleTower_Lobby_MapScript1_160293:: @ 8160293

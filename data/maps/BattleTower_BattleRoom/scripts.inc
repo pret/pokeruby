@@ -1,5 +1,5 @@
 BattleTower_BattleRoom_MapScripts:: @ 81608DB
-	map_script 2, BattleTower_BattleRoom_MapScript2_1608E1
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleTower_BattleRoom_MapScript2_1608E1
 	.byte 0
 
 BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1

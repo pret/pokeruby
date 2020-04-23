@@ -1,5 +1,5 @@
 RustboroCity_DevonCorp_1F_MapScripts:: @ 8157406
-	map_script 3, RustboroCity_DevonCorp_1F_MapScript1_15740C
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_1F_MapScript1_15740C
 	.byte 0
 
 RustboroCity_DevonCorp_1F_MapScript1_15740C:: @ 815740C

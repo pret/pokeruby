@@ -1,5 +1,5 @@
 RustboroCity_MapScripts:: @ 814C372
-	map_script 3, RustboroCity_MapScript1_14C378
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_MapScript1_14C378
 	.byte 0
 
 RustboroCity_MapScript1_14C378:: @ 814C378

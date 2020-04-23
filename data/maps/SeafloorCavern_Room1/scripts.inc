@@ -1,5 +1,5 @@
 SeafloorCavern_Room1_MapScripts:: @ 815DA61
-	map_script 3, SeafloorCavern_Room1_MapScript1_15DA67
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafloorCavern_Room1_MapScript1_15DA67
 	.byte 0
 
 SeafloorCavern_Room1_MapScript1_15DA67:: @ 815DA67

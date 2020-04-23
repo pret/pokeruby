@@ -1,6 +1,6 @@
 Route104_MapScripts:: @ 814EE8C
-	map_script 2, Route104_MapScript2_14EE97
-	map_script 3, Route104_MapScript1_14EEA8
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_MapScript2_14EE97
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MapScript1_14EEA8
 	.byte 0
 
 Route104_MapScript2_14EE97:: @ 814EE97

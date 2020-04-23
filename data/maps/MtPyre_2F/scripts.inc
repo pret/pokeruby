@@ -1,7 +1,7 @@
 MtPyre_2F_MapScripts:: @ 815D36E
-	map_script 2, MtPyre_2F_MapScript2_1C6BB5
-	map_script 3, MtPyre_2F_MapScript1_1C6BBF
-	map_script 5, MtPyre_2F_MapScript1_15D37E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtPyre_2F_MapScript2_1C6BB5
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_2F_MapScript1_1C6BBF
+	map_script MAP_SCRIPT_ON_RESUME, MtPyre_2F_MapScript1_15D37E
 	.byte 0
 
 MtPyre_2F_MapScript1_15D37E:: @ 815D37E

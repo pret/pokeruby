@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle6_MapScripts:: @ 81630CD
-	map_script 3, Route110_TrickHousePuzzle6_MapScript1_1630D8
-	map_script 4, Route110_TrickHousePuzzle6_MapScript2_1630DC
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle6_MapScript1_1630D8
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHousePuzzle6_MapScript2_1630DC
 	.byte 0
 
 Route110_TrickHousePuzzle6_MapScript1_1630D8:: @ 81630D8

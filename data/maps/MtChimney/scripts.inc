@@ -1,6 +1,6 @@
 MtChimney_MapScripts:: @ 815CF7C
-	map_script 5, MtChimney_MapScript1_15CF92
-	map_script 3, MtChimney_MapScript1_15CF87
+	map_script MAP_SCRIPT_ON_RESUME, MtChimney_MapScript1_15CF92
+	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_MapScript1_15CF87
 	.byte 0
 
 MtChimney_MapScript1_15CF87:: @ 815CF87

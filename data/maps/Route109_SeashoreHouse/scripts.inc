@@ -1,5 +1,5 @@
 Route109_SeashoreHouse_MapScripts:: @ 8160DCA
-	map_script 3, Route109_SeashoreHouse_MapScript1_160DD0
+	map_script MAP_SCRIPT_ON_TRANSITION, Route109_SeashoreHouse_MapScript1_160DD0
 	.byte 0
 
 Route109_SeashoreHouse_MapScript1_160DD0:: @ 8160DD0

@@ -1,6 +1,6 @@
 EverGrandeCity_HallOfFame_MapScripts:: @ 815BB84
-	map_script 2, EverGrandeCity_HallOfFame_MapScript2_15BB9E
-	map_script 4, EverGrandeCity_HallOfFame_MapScript2_15BB8F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_MapScript2_15BB9E
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_HallOfFame_MapScript2_15BB8F
 	.byte 0
 
 EverGrandeCity_HallOfFame_MapScript2_15BB8F:: @ 815BB8F

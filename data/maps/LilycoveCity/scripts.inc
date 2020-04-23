@@ -1,6 +1,6 @@
 LilycoveCity_MapScripts:: @ 814CA15
-	map_script 3, LilycoveCity_MapScript1_14CA20
-	map_script 1, LilycoveCity_MapScript1_14CA3F
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_MapScript1_14CA20
+	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_MapScript1_14CA3F
 	.byte 0
 
 LilycoveCity_MapScript1_14CA20:: @ 814CA20

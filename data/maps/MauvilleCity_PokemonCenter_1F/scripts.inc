@@ -1,5 +1,5 @@
 MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8157351
-	map_script 3, MauvilleCity_PokemonCenter_1F_MapScript1_157357
+	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_MapScript1_157357
 	.byte 0
 
 MauvilleCity_PokemonCenter_1F_MapScript1_157357:: @ 8157357

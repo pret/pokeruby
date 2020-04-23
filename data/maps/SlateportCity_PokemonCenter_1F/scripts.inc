@@ -1,5 +1,5 @@
 SlateportCity_PokemonCenter_1F_MapScripts:: @ 81563BF
-	map_script 3, SlateportCity_PokemonCenter_1F_MapScript1_1563C5
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_PokemonCenter_1F_MapScript1_1563C5
 	.byte 0
 
 SlateportCity_PokemonCenter_1F_MapScript1_1563C5:: @ 81563C5

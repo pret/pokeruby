@@ -1,7 +1,7 @@
 EverGrandeCity_ChampionsRoom_MapScripts:: @ 815B7AF
-	map_script 3, EverGrandeCity_ChampionsRoom_MapScript1_15B7BF
-	map_script 4, EverGrandeCity_ChampionsRoom_MapScript2_15B7C5
-	map_script 2, EverGrandeCity_ChampionsRoom_MapScript2_15B7D4
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_ChampionsRoom_MapScript1_15B7BF
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_ChampionsRoom_MapScript2_15B7C5
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_ChampionsRoom_MapScript2_15B7D4
 	.byte 0
 
 EverGrandeCity_ChampionsRoom_MapScript1_15B7BF:: @ 815B7BF

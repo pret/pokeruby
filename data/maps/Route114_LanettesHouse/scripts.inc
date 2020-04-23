@@ -1,5 +1,5 @@
 Route114_LanettesHouse_MapScripts:: @ 815C258
-	map_script 3, Route114_LanettesHouse_MapScript1_15C25E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_LanettesHouse_MapScript1_15C25E
 	.byte 0
 
 Route114_LanettesHouse_MapScript1_15C25E:: @ 815C25E

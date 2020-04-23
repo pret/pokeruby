@@ -1,5 +1,5 @@
 EverGrandeCity_Corridor4_MapScripts:: @ 815BA4B
-	map_script 4, EverGrandeCity_Corridor4_MapScript2_15BA51
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_Corridor4_MapScript2_15BA51
 	.byte 0
 
 EverGrandeCity_Corridor4_MapScript2_15BA51:: @ 815BA51

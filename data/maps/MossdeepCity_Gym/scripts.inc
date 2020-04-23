@@ -1,5 +1,5 @@
 MossdeepCity_Gym_MapScripts:: @ 815A4D3
-	map_script 1, MossdeepCity_Gym_MapScript1_15A4D9
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_Gym_MapScript1_15A4D9
 	.byte 0
 
 MossdeepCity_Gym_MapScript1_15A4D9:: @ 815A4D9

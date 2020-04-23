@@ -1,5 +1,5 @@
 Route113_GlassWorkshop_MapScripts:: @ 816354A
-	map_script 3, Route113_GlassWorkshop_MapScript1_163550
+	map_script MAP_SCRIPT_ON_TRANSITION, Route113_GlassWorkshop_MapScript1_163550
 	.byte 0
 
 Route113_GlassWorkshop_MapScript1_163550:: @ 8163550

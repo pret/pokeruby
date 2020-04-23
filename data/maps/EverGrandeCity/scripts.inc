@@ -1,5 +1,5 @@
 EverGrandeCity_MapScripts:: @ 814D4D5
-	map_script 3, EverGrandeCity_MapScript1_14D4DB
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_MapScript1_14D4DB
 	.byte 0
 
 EverGrandeCity_MapScript1_14D4DB:: @ 814D4DB

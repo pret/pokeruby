@@ -1,6 +1,6 @@
 BattleTower_Elevator_MapScripts:: @ 81607CF
-	map_script 2, BattleTower_Elevator_MapScript2_1607DA
-	map_script 4, BattleTower_Elevator_MapScript2_160821
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleTower_Elevator_MapScript2_1607DA
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleTower_Elevator_MapScript2_160821
 	.byte 0
 
 BattleTower_Elevator_MapScript2_1607DA:: @ 81607DA

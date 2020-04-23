@@ -1,6 +1,6 @@
 PacifidlogTown_MapScripts:: @ 814E8EE
-	map_script 3, PacifidlogTown_MapScript1_14E8F9
-	map_script 5, PacifidlogTown_MapScript1_14E8FD
+	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_MapScript1_14E8F9
+	map_script MAP_SCRIPT_ON_RESUME, PacifidlogTown_MapScript1_14E8FD
 	.byte 0
 
 PacifidlogTown_MapScript1_14E8F9:: @ 814E8F9

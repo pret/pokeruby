@@ -1,7 +1,7 @@
 LittlerootTown_BrendansHouse_1F_MapScripts:: @ 815263B
-	map_script 1, LittlerootTown_BrendansHouse_1F_MapScript1_15264B
-	map_script 3, LittlerootTown_BrendansHouse_1F_MapScript1_15268A
-	map_script 2, LittlerootTown_BrendansHouse_1F_MapScript2_1526D0
+	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_BrendansHouse_1F_MapScript1_15264B
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_1F_MapScript1_15268A
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_MapScript2_1526D0
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15264B:: @ 815264B

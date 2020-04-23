@@ -1,5 +1,5 @@
 Route130_MapScripts:: @ 81523C2
-	map_script 3, Route130_MapScript1_1523C8
+	map_script MAP_SCRIPT_ON_TRANSITION, Route130_MapScript1_1523C8
 	.byte 0
 
 Route130_MapScript1_1523C8:: @ 81523C8

@@ -582,7 +582,7 @@ static bool8 SetDiveWarp(u8 direction, u16 x, u16 y)
     }
     else
     {
-        mapheader_run_script_with_tag_x6();
+        RunOnDiveWarpMapScript();
         if (IsDummyWarp(&gFixedDiveWarp))
             return FALSE;
 
@@ -620,7 +620,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    mapheader_run_script_with_tag_x3();
+    RunOnTransitionMapScript();
     not_trainer_hill_battle_pyramid();
     sub_8056D38(gMapHeader.mapLayout);
     apply_map_tileset2_palette(gMapHeader.mapLayout);
@@ -633,7 +633,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     RoamerMove();
     DoCurrentWeather();
     ResetFieldTasksArgs();
-    mapheader_run_script_with_tag_x5();
+    RunOnResumeMapScript();
     ShowMapNamePopup();
 }
 
@@ -658,7 +658,7 @@ void sub_8053994(u32 a1)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    mapheader_run_script_with_tag_x3();
+    RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
     not_trainer_hill_battle_pyramid();
@@ -1829,7 +1829,7 @@ void sub_8054D4C(u32 a1)
     sub_8080750();
     if (!a1)
         SetUpFieldTasks();
-    mapheader_run_script_with_tag_x5();
+    RunOnResumeMapScript();
 }
 
 void sub_8054D90(void)
@@ -1838,7 +1838,7 @@ void sub_8054D90(void)
     gTotalCameraPixelOffsetY = 0;
     ResetObjectEvents();
     TrySpawnObjectEvents(0, 0);
-    mapheader_run_first_tag4_script_list_match();
+    TryRunOnWarpIntoMapScript();
 }
 
 void mli4_mapscripts_and_other(void)
@@ -1855,7 +1855,7 @@ void mli4_mapscripts_and_other(void)
     ResetInitialPlayerAvatarState();
     TrySpawnObjectEvents(0, 0);
     ResetBerryTreeSparkleFlags();
-    mapheader_run_first_tag4_script_list_match();
+    TryRunOnWarpIntoMapScript();
 }
 
 void sub_8054E20(void)

@@ -1,5 +1,5 @@
 Route123_BerryMastersHouse_MapScripts:: @ 81639DF
-	map_script 3, Route123_BerryMastersHouse_MapScript1_1639E5
+	map_script MAP_SCRIPT_ON_TRANSITION, Route123_BerryMastersHouse_MapScript1_1639E5
 	.byte 0
 
 Route123_BerryMastersHouse_MapScript1_1639E5:: @ 81639E5

@@ -1,7 +1,7 @@
 DesertRuins_MapScripts:: @ 815CAF3
-	map_script 5, DesertRuins_MapScript1_15CB03
-	map_script 1, DesertRuins_MapScript1_15CB11
-	map_script 3, DesertRuins_MapScript1_15CB52
+	map_script MAP_SCRIPT_ON_RESUME, DesertRuins_MapScript1_15CB03
+	map_script MAP_SCRIPT_ON_LOAD, DesertRuins_MapScript1_15CB11
+	map_script MAP_SCRIPT_ON_TRANSITION, DesertRuins_MapScript1_15CB52
 	.byte 0
 
 DesertRuins_MapScript1_15CB03:: @ 815CB03

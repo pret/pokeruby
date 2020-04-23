@@ -1,6 +1,6 @@
 Route113_MapScripts:: @ 81505CC
-	map_script 5, Route113_MapScript1_1505D7
-	map_script 3, Route113_MapScript1_1505DA
+	map_script MAP_SCRIPT_ON_RESUME, Route113_MapScript1_1505D7
+	map_script MAP_SCRIPT_ON_TRANSITION, Route113_MapScript1_1505DA
 	.byte 0
 
 Route113_MapScript1_1505D7:: @ 81505D7

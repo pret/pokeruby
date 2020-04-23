@@ -1,5 +1,5 @@
 SootopolisCity_PokemonCenter_1F_MapScripts:: @ 815B190
-	map_script 3, SootopolisCity_PokemonCenter_1F_MapScript1_15B196
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_PokemonCenter_1F_MapScript1_15B196
 	.byte 0
 
 SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196

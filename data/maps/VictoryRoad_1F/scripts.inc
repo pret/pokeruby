@@ -1,5 +1,5 @@
 VictoryRoad_1F_MapScripts:: @ 815DE83
-	map_script 3, VictoryRoad_1F_MapScript1_15DE89
+	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_1F_MapScript1_15DE89
 	.byte 0
 
 VictoryRoad_1F_MapScript1_15DE89:: @ 815DE89

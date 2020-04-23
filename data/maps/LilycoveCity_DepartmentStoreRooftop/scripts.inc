@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 815A13F
-	map_script 3, LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145
 	.byte 0
 
 LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145

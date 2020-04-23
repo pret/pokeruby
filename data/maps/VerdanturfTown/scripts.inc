@@ -1,5 +1,5 @@
 VerdanturfTown_MapScripts:: @ 814E854
-	map_script 3, VerdanturfTown_MapScript1_14E85A
+	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_MapScript1_14E85A
 	.byte 0
 
 VerdanturfTown_MapScript1_14E85A:: @ 814E85A

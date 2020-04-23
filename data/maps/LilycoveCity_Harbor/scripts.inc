@@ -1,5 +1,5 @@
 LilycoveCity_Harbor_MapScripts:: @ 8159893
-	map_script 3, LilycoveCity_Harbor_MapScript1_159899
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_Harbor_MapScript1_159899
 	.byte 0
 
 LilycoveCity_Harbor_MapScript1_159899:: @ 8159899

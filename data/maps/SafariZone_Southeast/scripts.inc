@@ -1,6 +1,6 @@
 SafariZone_Southeast_MapScripts:: @ 8160036
-	map_script 3, SafariZone_Southeast_MapScript1_160073
-	map_script 2, SafariZone_Southeast_MapScript2_160041
+	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_Southeast_MapScript1_160073
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SafariZone_Southeast_MapScript2_160041
 	.byte 0
 
 SafariZone_Southeast_MapScript2_160041:: @ 8160041

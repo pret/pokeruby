@@ -1,5 +1,5 @@
 Route103_MapScripts:: @ 814EB81
-	map_script 3, Route103_MapScript1_14EB87
+	map_script MAP_SCRIPT_ON_TRANSITION, Route103_MapScript1_14EB87
 	.byte 0
 
 Route103_MapScript1_14EB87:: @ 814EB87

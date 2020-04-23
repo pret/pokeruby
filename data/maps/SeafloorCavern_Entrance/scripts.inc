@@ -1,5 +1,5 @@
 SeafloorCavern_Entrance_MapScripts:: @ 815DA4A
-	map_script 5, SeafloorCavern_Entrance_MapScript1_15DA50
+	map_script MAP_SCRIPT_ON_RESUME, SeafloorCavern_Entrance_MapScript1_15DA50
 	.byte 0
 
 SeafloorCavern_Entrance_MapScript1_15DA50:: @ 815DA50

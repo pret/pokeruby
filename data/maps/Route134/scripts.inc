@@ -1,5 +1,5 @@
 Route134_MapScripts:: @ 81525B5
-	map_script 5, Route134_MapScript1_1525BB
+	map_script MAP_SCRIPT_ON_RESUME, Route134_MapScript1_1525BB
 	.byte 0
 
 Route134_MapScript1_1525BB:: @ 81525BB

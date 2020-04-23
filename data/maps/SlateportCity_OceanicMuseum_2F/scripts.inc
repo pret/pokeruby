@@ -1,5 +1,5 @@
 SlateportCity_OceanicMuseum_2F_MapScripts:: @ 8155CDA
-	map_script 3, SlateportCity_OceanicMuseum_2F_MapScript1_155CE0
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_OceanicMuseum_2F_MapScript1_155CE0
 	.byte 0
 
 SlateportCity_OceanicMuseum_2F_MapScript1_155CE0:: @ 8155CE0

@@ -1,5 +1,5 @@
 MossdeepCity_PokemonCenter_1F_MapScripts:: @ 815A8D0
-	map_script 3, MossdeepCity_PokemonCenter_1F_MapScript1_15A8D6
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_1F_MapScript1_15A8D6
 	.byte 0
 
 MossdeepCity_PokemonCenter_1F_MapScript1_15A8D6:: @ 815A8D6

@@ -1,6 +1,6 @@
 SouthernIsland_Interior_MapScripts:: @ 8160B53
-	map_script 5, SouthernIsland_Interior_MapScript1_160B5E
-	map_script 3, SouthernIsland_Interior_MapScript1_160B6C
+	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_MapScript1_160B5E
+	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_MapScript1_160B6C
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E

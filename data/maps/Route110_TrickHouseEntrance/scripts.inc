@@ -1,7 +1,7 @@
 Route110_TrickHouseEntrance_MapScripts:: @ 8160F2B
-	map_script 3, Route110_TrickHouseEntrance_MapScript1_160F3B
-	map_script 2, Route110_TrickHouseEntrance_MapScript2_1611CD
-	map_script 4, Route110_TrickHouseEntrance_MapScript2_1610B2
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_MapScript1_160F3B
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEntrance_MapScript2_1611CD
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEntrance_MapScript2_1610B2
 	.byte 0
 
 Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B

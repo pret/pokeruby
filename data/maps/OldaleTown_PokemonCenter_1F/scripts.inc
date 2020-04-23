@@ -1,5 +1,5 @@
 OldaleTown_PokemonCenter_1F_MapScripts:: @ 8152F08
-	map_script 3, OldaleTown_PokemonCenter_1F_MapScript1_152F0E
+	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_PokemonCenter_1F_MapScript1_152F0E
 	.byte 0
 
 OldaleTown_PokemonCenter_1F_MapScript1_152F0E:: @ 8152F0E

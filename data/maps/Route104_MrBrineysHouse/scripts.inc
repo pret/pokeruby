@@ -1,5 +1,5 @@
 Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
-	map_script 3, Route104_MrBrineysHouse_MapScript1_15BCB8
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MrBrineysHouse_MapScript1_15BCB8
 	.byte 0
 
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8

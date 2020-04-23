@@ -1,7 +1,7 @@
 MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
-	map_script 1, MossdeepCity_GameCorner_1F_MapScript1_15AC62
-	map_script 3, MossdeepCity_GameCorner_1F_MapScript1_15AC84
-	map_script 2, MossdeepCity_GameCorner_1F_MapScript2_15ACBB
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_GameCorner_1F_MapScript1_15AC62
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_GameCorner_1F_MapScript1_15AC84
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_GameCorner_1F_MapScript2_15ACBB
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62

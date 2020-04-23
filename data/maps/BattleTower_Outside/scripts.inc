@@ -1,5 +1,5 @@
 BattleTower_Outside_MapScripts:: @ 8160156
-	map_script 3, BattleTower_Outside_MapScript1_16015C
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleTower_Outside_MapScript1_16015C
 	.byte 0
 
 BattleTower_Outside_MapScript1_16015C:: @ 816015C

@@ -1,5 +1,5 @@
 EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
-	map_script 3, EverGrandeCity_PokemonLeague_MapScript1_15BA7B
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_MapScript1_15BA7B
 	.byte 0
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B

@@ -1,5 +1,5 @@
 MeteorFalls_1F_1R_MapScripts:: @ 815C490
-	map_script 3, MeteorFalls_1F_1R_MapScript1_15C496
+	map_script MAP_SCRIPT_ON_TRANSITION, MeteorFalls_1F_1R_MapScript1_15C496
 	.byte 0
 
 MeteorFalls_1F_1R_MapScript1_15C496:: @ 815C496

@@ -1,8 +1,8 @@
 PetalburgCity_Gym_MapScripts:: @ 8154477
-	map_script 1, PetalburgCity_Gym_MapScript1_15448C
-	map_script 3, PetalburgCity_Gym_MapScript1_15451B
-	map_script 4, PetalburgCity_Gym_MapScript2_154553
-	map_script 2, PetalburgCity_Gym_MapScript2_154562
+	map_script MAP_SCRIPT_ON_LOAD, PetalburgCity_Gym_MapScript1_15448C
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_Gym_MapScript1_15451B
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_Gym_MapScript2_154553
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_Gym_MapScript2_154562
 	.byte 0
 
 PetalburgCity_Gym_MapScript1_15448C:: @ 815448C

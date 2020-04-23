@@ -1,5 +1,5 @@
 Route118_MapScripts:: @ 8150F28
-	map_script 3, Route118_MapScript1_150F2E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route118_MapScript1_150F2E
 	.byte 0
 
 Route118_MapScript1_150F2E:: @ 8150F2E

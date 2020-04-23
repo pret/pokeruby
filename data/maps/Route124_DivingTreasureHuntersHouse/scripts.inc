@@ -1,5 +1,5 @@
 Route124_DivingTreasureHuntersHouse_MapScripts:: @ 8163DFA
-	map_script 3, Route124_DivingTreasureHuntersHouse_MapScript1_163E00
+	map_script MAP_SCRIPT_ON_TRANSITION, Route124_DivingTreasureHuntersHouse_MapScript1_163E00
 	.byte 0
 
 Route124_DivingTreasureHuntersHouse_MapScript1_163E00:: @ 8163E00

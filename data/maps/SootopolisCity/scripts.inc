@@ -1,7 +1,7 @@
 SootopolisCity_MapScripts:: @ 814D07D
-	map_script 1, SootopolisCity_MapScript1_14D08D
-	map_script 3, SootopolisCity_MapScript1_14D10D
-	map_script 5, SootopolisCity_MapScript1_14D165
+	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_MapScript1_14D08D
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MapScript1_14D10D
+	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_MapScript1_14D165
 	.byte 0
 
 SootopolisCity_MapScript1_14D08D:: @ 814D08D

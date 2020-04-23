@@ -1,5 +1,5 @@
 DewfordTown_PokemonCenter_1F_MapScripts:: @ 8153014
-	map_script 3, DewfordTown_PokemonCenter_1F_MapScript1_15301A
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_PokemonCenter_1F_MapScript1_15301A
 	.byte 0
 
 DewfordTown_PokemonCenter_1F_MapScript1_15301A:: @ 815301A

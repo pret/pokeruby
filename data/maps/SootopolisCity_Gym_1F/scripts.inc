@@ -1,8 +1,8 @@
 SootopolisCity_Gym_1F_MapScripts:: @ 815AF07
-	map_script 2, SootopolisCity_Gym_1F_MapScript2_15AF86
-	map_script 5, SootopolisCity_Gym_1F_MapScript1_15AF22
-	map_script 1, SootopolisCity_Gym_1F_MapScript1_15AF25
-	map_script 3, SootopolisCity_Gym_1F_MapScript1_15AF1C
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_Gym_1F_MapScript2_15AF86
+	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_Gym_1F_MapScript1_15AF22
+	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_Gym_1F_MapScript1_15AF25
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_Gym_1F_MapScript1_15AF1C
 	.byte 0
 
 SootopolisCity_Gym_1F_MapScript1_15AF1C:: @ 815AF1C

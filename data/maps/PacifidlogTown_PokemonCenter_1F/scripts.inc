@@ -1,5 +1,5 @@
 PacifidlogTown_PokemonCenter_1F_MapScripts:: @ 81540FF
-	map_script 3, PacifidlogTown_PokemonCenter_1F_MapScript1_154105
+	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_PokemonCenter_1F_MapScript1_154105
 	.byte 0
 
 PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105

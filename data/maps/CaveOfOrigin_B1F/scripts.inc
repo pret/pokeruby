@@ -1,5 +1,5 @@
 CaveOfOrigin_B1F_MapScripts:: @ 815DD7C
-	map_script 3, CaveOfOrigin_B1F_MapScript1_15DD82
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_B1F_MapScript1_15DD82
 	.byte 0
 
 CaveOfOrigin_B1F_MapScript1_15DD82:: @ 815DD82

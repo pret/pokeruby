@@ -1,5 +1,5 @@
 Route121_SafariZoneEntrance_MapScripts:: @ 815C323
-	map_script 2, Route121_SafariZoneEntrance_MapScript2_15C329
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route121_SafariZoneEntrance_MapScript2_15C329
 	.byte 0
 
 Route121_SafariZoneEntrance_MapScript2_15C329:: @ 815C329

@@ -1,7 +1,7 @@
 IslandCave_MapScripts:: @ 815EEB6
-	map_script 5, IslandCave_MapScript1_15EEC6
-	map_script 1, IslandCave_MapScript1_15EED4
-	map_script 3, IslandCave_MapScript1_15EF15
+	map_script MAP_SCRIPT_ON_RESUME, IslandCave_MapScript1_15EEC6
+	map_script MAP_SCRIPT_ON_LOAD, IslandCave_MapScript1_15EED4
+	map_script MAP_SCRIPT_ON_TRANSITION, IslandCave_MapScript1_15EF15
 	.byte 0
 
 IslandCave_MapScript1_15EEC6:: @ 815EEC6

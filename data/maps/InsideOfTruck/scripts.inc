@@ -1,6 +1,6 @@
 InsideOfTruck_MapScripts:: @ 815FBFF
-	map_script 1, InsideOfTruck_MapScript1_15FC0A
-	map_script 5, InsideOfTruck_MapScript1_15FC26
+	map_script MAP_SCRIPT_ON_LOAD, InsideOfTruck_MapScript1_15FC0A
+	map_script MAP_SCRIPT_ON_RESUME, InsideOfTruck_MapScript1_15FC26
 	.byte 0
 
 InsideOfTruck_MapScript1_15FC0A:: @ 815FC0A

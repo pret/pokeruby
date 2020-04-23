@@ -1,5 +1,5 @@
 OldaleTown_MapScripts:: @ 814DD62
-	map_script 3, OldaleTown_MapScript1_14DD68
+	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_MapScript1_14DD68
 	.byte 0
 
 OldaleTown_MapScript1_14DD68:: @ 814DD68

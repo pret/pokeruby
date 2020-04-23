@@ -1,5 +1,5 @@
 LilycoveCity_PokemonCenter_1F_MapScripts:: @ 8159327
-	map_script 3, LilycoveCity_PokemonCenter_1F_MapScript1_15932D
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonCenter_1F_MapScript1_15932D
 	.byte 0
 
 LilycoveCity_PokemonCenter_1F_MapScript1_15932D:: @ 815932D

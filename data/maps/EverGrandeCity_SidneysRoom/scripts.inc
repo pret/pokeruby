@@ -1,7 +1,7 @@
 EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
-	map_script 1, EverGrandeCity_SidneysRoom_MapScript1_15B54F
-	map_script 4, EverGrandeCity_SidneysRoom_MapScript2_15B570
-	map_script 2, EverGrandeCity_SidneysRoom_MapScript2_15B57F
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_SidneysRoom_MapScript1_15B54F
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_MapScript2_15B570
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_SidneysRoom_MapScript2_15B57F
 	.byte 0
 
 EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F

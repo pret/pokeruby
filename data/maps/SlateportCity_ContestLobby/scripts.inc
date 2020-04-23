@@ -1,5 +1,5 @@
 SlateportCity_ContestLobby_MapScripts:: @ 8155411
-	map_script 3, SlateportCity_ContestLobby_MapScript1_155417
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_ContestLobby_MapScript1_155417
 	.byte 0
 
 SlateportCity_ContestLobby_MapScript1_155417:: @ 8155417

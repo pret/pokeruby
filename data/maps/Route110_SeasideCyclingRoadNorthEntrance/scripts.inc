@@ -1,5 +1,5 @@
 Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 81634C8
-	map_script 3, Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE
 	.byte 0
 
 Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE:: @ 81634CE

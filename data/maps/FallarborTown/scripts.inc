@@ -1,5 +1,5 @@
 FallarborTown_MapScripts:: @ 814E7E0
-	map_script 3, FallarborTown_MapScript1_14E7E6
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_MapScript1_14E7E6
 	.byte 0
 
 FallarborTown_MapScript1_14E7E6:: @ 814E7E6

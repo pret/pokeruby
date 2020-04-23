@@ -1,5 +1,5 @@
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 815390C
-	map_script 3, LavaridgeTown_PokemonCenter_1F_MapScript1_153912
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_MapScript1_153912
 	.byte 0
 
 LavaridgeTown_PokemonCenter_1F_MapScript1_153912:: @ 8153912

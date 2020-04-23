@@ -1,5 +1,5 @@
 SSTidalCorridor_MapScripts:: @ 815FC94
-	map_script 2, SSTidalCorridor_MapScript2_15FC9A
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSTidalCorridor_MapScript2_15FC9A
 	.byte 0
 
 SSTidalCorridor_MapScript2_15FC9A:: @ 815FC9A

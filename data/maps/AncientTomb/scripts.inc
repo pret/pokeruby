@@ -1,7 +1,7 @@
 AncientTomb_MapScripts:: @ 815EFBE
-	map_script 5, AncientTomb_MapScript1_15EFCE
-	map_script 1, AncientTomb_MapScript1_15EFE0
-	map_script 3, AncientTomb_MapScript1_15EFDC
+	map_script MAP_SCRIPT_ON_RESUME, AncientTomb_MapScript1_15EFCE
+	map_script MAP_SCRIPT_ON_LOAD, AncientTomb_MapScript1_15EFE0
+	map_script MAP_SCRIPT_ON_TRANSITION, AncientTomb_MapScript1_15EFDC
 	.byte 0
 
 AncientTomb_MapScript1_15EFCE:: @ 815EFCE

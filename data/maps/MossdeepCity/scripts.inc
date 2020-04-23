@@ -1,5 +1,5 @@
 MossdeepCity_MapScripts:: @ 814CF92
-	map_script 3, MossdeepCity_MapScript1_14CF98
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_MapScript1_14CF98
 	.byte 0
 
 MossdeepCity_MapScript1_14CF98:: @ 814CF98

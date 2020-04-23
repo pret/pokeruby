@@ -1,6 +1,6 @@
 LittlerootTown_MaysHouse_2F_MapScripts:: @ 8152A50
-	map_script 3, LittlerootTown_MaysHouse_2F_MapScript1_152A5B
-	map_script 4, LittlerootTown_MaysHouse_2F_MapScript2_152A86
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_2F_MapScript1_152A5B
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MaysHouse_2F_MapScript2_152A86
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B

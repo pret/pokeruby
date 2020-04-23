@@ -1,8 +1,8 @@
 SecretBase_YellowCave4_MapScripts:: @ 815F337
-	map_script 4, SecretBase_RedCave1_MapScript2_15F358
-	map_script 3, SecretBase_RedCave1_MapScript1_15F34F
-	map_script 2, SecretBase_RedCave1_MapScript2_15F362
-	map_script 5, SecretBase_RedCave1_MapScript1_15F34C
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SecretBase_RedCave1_MapScript2_15F358
+	map_script MAP_SCRIPT_ON_TRANSITION, SecretBase_RedCave1_MapScript1_15F34F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_RedCave1_MapScript2_15F362
+	map_script MAP_SCRIPT_ON_RESUME, SecretBase_RedCave1_MapScript1_15F34C
 	.byte 0
 
 SecretBase_RedCave1_MapScript1_15F34C:: @ 815F34C

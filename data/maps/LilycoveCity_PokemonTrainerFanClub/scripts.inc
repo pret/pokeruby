@@ -1,6 +1,6 @@
 LilycoveCity_PokemonTrainerFanClub_MapScripts:: @ 815938A
-	map_script 2, LilycoveCity_PokemonTrainerFanClub_MapScript2_159395
-	map_script 3, LilycoveCity_PokemonTrainerFanClub_MapScript1_159412
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_MapScript2_159395
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonTrainerFanClub_MapScript1_159412
 	.byte 0
 
 LilycoveCity_PokemonTrainerFanClub_MapScript2_159395:: @ 8159395

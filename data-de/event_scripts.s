@@ -14,6 +14,7 @@
 #include "constants/vars.h"
 #include "constants/metatile_labels.h"
 #include "constants/battle_setup.h"
+#include "constants/map_scripts.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"
 	.include "constants/constants.inc"

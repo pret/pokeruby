@@ -1,7 +1,7 @@
 NewMauville_Inside_MapScripts:: @ 815E55F
-	map_script 5, NewMauville_Inside_MapScript1_15E56F
-	map_script 3, NewMauville_Inside_MapScript1_15E593
-	map_script 1, NewMauville_Inside_MapScript1_15E59E
+	map_script MAP_SCRIPT_ON_RESUME, NewMauville_Inside_MapScript1_15E56F
+	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_Inside_MapScript1_15E593
+	map_script MAP_SCRIPT_ON_LOAD, NewMauville_Inside_MapScript1_15E59E
 	.byte 0
 
 NewMauville_Inside_MapScript1_15E56F:: @ 815E56F

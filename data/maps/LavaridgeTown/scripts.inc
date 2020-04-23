@@ -1,6 +1,6 @@
 LavaridgeTown_MapScripts:: @ 814E4A3
-	map_script 3, LavaridgeTown_MapScript1_14E4AE
-	map_script 2, LavaridgeTown_MapScript2_14E4E3
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_MapScript1_14E4AE
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_MapScript2_14E4E3
 	.byte 0
 
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE

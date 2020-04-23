@@ -1,5 +1,5 @@
 SlateportCity_Harbor_MapScripts:: @ 8155F5D
-	map_script 3, SlateportCity_Harbor_MapScript1_155F63
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_Harbor_MapScript1_155F63
 	.byte 0
 
 SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63

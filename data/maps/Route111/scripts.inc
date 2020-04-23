@@ -1,6 +1,6 @@
 Route111_MapScripts:: @ 814FF91
-	map_script 1, Route111_MapScript1_14FF9C
-	map_script 3, Route111_MapScript1_14FFB9
+	map_script MAP_SCRIPT_ON_LOAD, Route111_MapScript1_14FF9C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_MapScript1_14FFB9
 	.byte 0
 
 Route111_MapScript1_14FF9C:: @ 814FF9C

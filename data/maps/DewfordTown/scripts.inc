@@ -1,5 +1,5 @@
 DewfordTown_MapScripts:: @ 814DFF8
-	map_script 3, DewfordTown_MapScript1_14DFFE
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_MapScript1_14DFFE
 	.byte 0
 
 DewfordTown_MapScript1_14DFFE:: @ 814DFFE

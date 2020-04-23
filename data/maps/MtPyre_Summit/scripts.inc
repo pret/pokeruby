@@ -1,5 +1,5 @@
 MtPyre_Summit_MapScripts:: @ 815D4B1
-	map_script 3, MtPyre_Summit_MapScript1_15D4B7
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_MapScript1_15D4B7
 	.byte 0
 
 MtPyre_Summit_MapScript1_15D4B7:: @ 815D4B7

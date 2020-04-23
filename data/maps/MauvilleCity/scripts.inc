@@ -1,5 +1,5 @@
 MauvilleCity_MapScripts:: @ 814C032
-	map_script 3, MauvilleCity_MapScript1_14C038
+	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_MapScript1_14C038
 	.byte 0
 
 MauvilleCity_MapScript1_14C038:: @ 814C038

@@ -1,7 +1,7 @@
 SlateportCity_PokemonCenter_2F_MapScripts:: @ 81563EE
-	map_script 2, SlateportCity_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, SlateportCity_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, SlateportCity_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, SlateportCity_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 SlateportCity_PokemonCenter_2F_EventScript_1563FE:: @ 81563FE

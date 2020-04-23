@@ -1,5 +1,5 @@
 LilycoveCity_House3_MapScripts:: @ 8159BE4
-	map_script 3, LilycoveCity_House3_MapScript1_159BEA
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_House3_MapScript1_159BEA
 	.byte 0
 
 LilycoveCity_House3_MapScript1_159BEA:: @ 8159BEA

@@ -1,5 +1,5 @@
 Route116_MapScripts:: @ 8150A31
-	map_script 3, Route116_MapScript1_150A37
+	map_script MAP_SCRIPT_ON_TRANSITION, Route116_MapScript1_150A37
 	.byte 0
 
 Route116_MapScript1_150A37:: @ 8150A37

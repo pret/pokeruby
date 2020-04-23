@@ -1,5 +1,5 @@
 Route123_MapScripts:: @ 8151C53
-	map_script 3, Route123_MapScript1_151C59
+	map_script MAP_SCRIPT_ON_TRANSITION, Route123_MapScript1_151C59
 	.byte 0
 
 Route123_MapScript1_151C59:: @ 8151C59

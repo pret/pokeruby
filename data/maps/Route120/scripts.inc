@@ -1,7 +1,7 @@
 Route120_MapScripts:: @ 815160E
-	map_script 5, Route120_MapScript1_15161E
-	map_script 3, Route120_MapScript1_1516DF
-	map_script 1, Route120_MapScript1_151686
+	map_script MAP_SCRIPT_ON_RESUME, Route120_MapScript1_15161E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route120_MapScript1_1516DF
+	map_script MAP_SCRIPT_ON_LOAD, Route120_MapScript1_151686
 	.byte 0
 
 Route120_MapScript1_15161E:: @ 815161E

@@ -1,5 +1,5 @@
 Route127_MapScripts:: @ 815206A
-	map_script 3, Route127_MapScript1_152070
+	map_script MAP_SCRIPT_ON_TRANSITION, Route127_MapScript1_152070
 	.byte 0
 
 Route127_MapScript1_152070:: @ 8152070

@@ -1,5 +1,5 @@
 VerdanturfTown_ContestLobby_MapScripts:: @ 8153D6A
-	map_script 3, VerdanturfTown_ContestLobby_MapScript1_153D70
+	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_ContestLobby_MapScript1_153D70
 	.byte 0
 
 VerdanturfTown_ContestLobby_MapScript1_153D70:: @ 8153D70

@@ -1,6 +1,6 @@
 RusturfTunnel_MapScripts:: @ 815C745
-	map_script 3, RusturfTunnel_MapScript1_15C762
-	map_script 2, RusturfTunnel_MapScript2_15C750
+	map_script MAP_SCRIPT_ON_TRANSITION, RusturfTunnel_MapScript1_15C762
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RusturfTunnel_MapScript2_15C750
 	.byte 0
 
 RusturfTunnel_MapScript2_15C750:: @ 815C750

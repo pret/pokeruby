@@ -1,5 +1,5 @@
 MauvilleCity_Gym_MapScripts:: @ 8156450
-	map_script 1, MauvilleCity_Gym_MapScript1_156456
+	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_Gym_MapScript1_156456
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_156456:: @ 8156456

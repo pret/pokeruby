@@ -1,5 +1,5 @@
 FallarborTown_House1_MapScripts:: @ 8153BAE
-	map_script 3, FallarborTown_House1_MapScript1_153BB4
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_House1_MapScript1_153BB4
 	.byte 0
 
 FallarborTown_House1_MapScript1_153BB4:: @ 8153BB4

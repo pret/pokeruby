@@ -1,6 +1,6 @@
 Route119_MapScripts:: @ 8151167
-	map_script 5, Route119_MapScript1_151172
-	map_script 3, Route119_MapScript1_15119B
+	map_script MAP_SCRIPT_ON_RESUME, Route119_MapScript1_151172
+	map_script MAP_SCRIPT_ON_TRANSITION, Route119_MapScript1_15119B
 	.byte 0
 
 Route119_MapScript1_151172:: @ 8151172

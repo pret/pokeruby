@@ -1,5 +1,5 @@
 Route105_MapScripts:: @ 814F298
-	map_script 1, Route105_MapScript1_14F29E
+	map_script MAP_SCRIPT_ON_LOAD, Route105_MapScript1_14F29E
 	.byte 0
 
 Route105_MapScript1_14F29E:: @ 814F29E

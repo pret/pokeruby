@@ -1,6 +1,6 @@
 LittlerootTown_MapScripts:: @ 814D509
-	map_script 3, LittlerootTown_MapScript1_14D514
-	map_script 2, LittlerootTown_MapScript2_14D5D5
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MapScript1_14D514
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_MapScript2_14D5D5
 	.byte 0
 
 LittlerootTown_MapScript1_14D514:: @ 814D514

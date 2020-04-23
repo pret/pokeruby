@@ -1,6 +1,6 @@
 JaggedPass_MapScripts:: @ 815D266
-	map_script 5, JaggedPass_MapScript1_15D271
-	map_script 3, JaggedPass_MapScript1_15D274
+	map_script MAP_SCRIPT_ON_RESUME, JaggedPass_MapScript1_15D271
+	map_script MAP_SCRIPT_ON_TRANSITION, JaggedPass_MapScript1_15D274
 	.byte 0
 
 JaggedPass_MapScript1_15D271:: @ 815D271

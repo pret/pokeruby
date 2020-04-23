@@ -1,6 +1,6 @@
 Route112_CableCarStation_MapScripts:: @ 815C033
-	map_script 3, Route112_CableCarStation_MapScript1_15C03E
-	map_script 2, Route112_CableCarStation_MapScript2_15C05E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_CableCarStation_MapScript1_15C03E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route112_CableCarStation_MapScript2_15C05E
 	.byte 0
 
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E

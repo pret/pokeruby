@@ -1,6 +1,6 @@
 LilycoveCity_ContestLobby_MapScripts:: @ 8158866
-	map_script 3, LilycoveCity_ContestLobby_MapScript1_158871
-	map_script 2, LilycoveCity_ContestLobby_MapScript2_158877
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_MapScript1_158871
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_MapScript2_158877
 	.byte 0
 
 LilycoveCity_ContestLobby_MapScript1_158871:: @ 8158871

@@ -1,5 +1,5 @@
 PetalburgCity_PokemonCenter_1F_MapScripts:: @ 8155204
-	map_script 3, PetalburgCity_PokemonCenter_1F_MapScript1_15520A
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_PokemonCenter_1F_MapScript1_15520A
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_MapScript1_15520A:: @ 815520A

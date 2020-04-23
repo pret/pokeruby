@@ -1,5 +1,5 @@
 SlateportCity_MapScripts:: @ 814BA36
-	map_script 3, SlateportCity_MapScript1_14BA3C
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_MapScript1_14BA3C
 	.byte 0
 
 SlateportCity_MapScript1_14BA3C:: @ 814BA3C

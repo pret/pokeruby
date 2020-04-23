@@ -1,7 +1,7 @@
 EverGrandeCity_GlaciasRoom_MapScripts:: @ 815B673
-	map_script 2, EverGrandeCity_GlaciasRoom_MapScript2_15B692
-	map_script 1, EverGrandeCity_GlaciasRoom_MapScript1_15B6A9
-	map_script 4, EverGrandeCity_GlaciasRoom_MapScript2_15B683
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_15B692
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_GlaciasRoom_MapScript1_15B6A9
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_15B683
 	.byte 0
 
 EverGrandeCity_GlaciasRoom_MapScript2_15B683:: @ 815B683

@@ -1,7 +1,7 @@
 LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 8152C82
-	map_script 3, LittlerootTown_ProfessorBirchsLab_MapScript1_152C92
-	map_script 4, LittlerootTown_ProfessorBirchsLab_MapScript2_152C9D
-	map_script 2, LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_MapScript1_152C92
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_ProfessorBirchsLab_MapScript2_152C9D
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_152C92:: @ 8152C92

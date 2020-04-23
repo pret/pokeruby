@@ -1,5 +1,5 @@
 AquaHideout_B2F_MapScripts:: @ 815D8B1
-	map_script 3, AquaHideout_B2F_MapScript1_15D8B7
+	map_script MAP_SCRIPT_ON_TRANSITION, AquaHideout_B2F_MapScript1_15D8B7
 	.byte 0
 
 AquaHideout_B2F_MapScript1_15D8B7:: @ 815D8B7

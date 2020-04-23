@@ -1,5 +1,5 @@
 Route111_OldLadysRestStop_MapScripts:: @ 815BFD1
-	map_script 3, Route111_OldLadysRestStop_MapScript1_15BFD7
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OldLadysRestStop_MapScript1_15BFD7
 	.byte 0
 
 Route111_OldLadysRestStop_MapScript1_15BFD7:: @ 815BFD7

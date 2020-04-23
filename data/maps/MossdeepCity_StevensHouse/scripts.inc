@@ -1,7 +1,7 @@
 MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
-	map_script 1, MossdeepCity_StevensHouse_MapScript1_15A9D5
-	map_script 3, MossdeepCity_StevensHouse_MapScript1_15A9E9
-	map_script 2, MossdeepCity_StevensHouse_MapScript2_15AA01
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_StevensHouse_MapScript1_15A9D5
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_MapScript1_15A9E9
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_StevensHouse_MapScript2_15AA01
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5

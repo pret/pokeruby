@@ -1,6 +1,6 @@
 Route101_MapScripts:: @ 814E924
-	map_script 3, Route101_MapScript1_14E92F
-	map_script 2, Route101_MapScript2_14E935
+	map_script MAP_SCRIPT_ON_TRANSITION, Route101_MapScript1_14E92F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_MapScript2_14E935
 	.byte 0
 
 Route101_MapScript1_14E92F:: @ 814E92F

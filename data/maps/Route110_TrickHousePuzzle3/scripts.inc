@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle3_MapScripts:: @ 8161EBD
-	map_script 5, Route110_TrickHousePuzzle3_MapScript1_161EC8
-	map_script 3, Route110_TrickHousePuzzle3_MapScript1_161EE4
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle3_MapScript1_161EC8
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle3_MapScript1_161EE4
 	.byte 0
 
 Route110_TrickHousePuzzle3_MapScript1_161EC8:: @ 8161EC8

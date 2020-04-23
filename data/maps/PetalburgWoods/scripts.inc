@@ -1,5 +1,5 @@
 PetalburgWoods_MapScripts:: @ 815CC9C
-	map_script 3, PetalburgWoods_MapScript1_15CCA2
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgWoods_MapScript1_15CCA2
 	.byte 0
 
 PetalburgWoods_MapScript1_15CCA2:: @ 815CCA2

@@ -1,8 +1,8 @@
 Route110_TrickHouseEnd_MapScripts:: @ 8161936
-	map_script 5, Route110_TrickHouseEnd_MapScript1_16194B
-	map_script 3, Route110_TrickHouseEnd_MapScript1_161957
-	map_script 2, Route110_TrickHouseEnd_MapScript2_16197C
-	map_script 4, Route110_TrickHouseEnd_MapScript2_161965
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHouseEnd_MapScript1_16194B
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEnd_MapScript1_161957
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEnd_MapScript2_16197C
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEnd_MapScript2_161965
 	.byte 0
 
 Route110_TrickHouseEnd_MapScript1_16194B:: @ 816194B

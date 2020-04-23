@@ -1,6 +1,6 @@
 BattleTower_Corridor_MapScripts:: @ 8160845
-	map_script 1, BattleTower_Corridor_MapScript1_160850
-	map_script 2, BattleTower_Corridor_MapScript2_160881
+	map_script MAP_SCRIPT_ON_LOAD, BattleTower_Corridor_MapScript1_160850
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleTower_Corridor_MapScript2_160881
 	.byte 0
 
 BattleTower_Corridor_MapScript1_160850:: @ 8160850

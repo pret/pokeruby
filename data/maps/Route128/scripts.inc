@@ -1,6 +1,6 @@
 Route128_MapScripts:: @ 815211B
-	map_script 3, Route128_MapScript1_152126
-	map_script 2, Route128_MapScript2_152135
+	map_script MAP_SCRIPT_ON_TRANSITION, Route128_MapScript1_152126
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route128_MapScript2_152135
 	.byte 0
 
 Route128_MapScript1_152126:: @ 8152126

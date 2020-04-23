@@ -1,5 +1,5 @@
 DewfordTown_Gym_MapScripts:: @ 8153065
-	map_script 3, DewfordTown_Gym_MapScript1_15306B
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_Gym_MapScript1_15306B
 	.byte 0
 
 DewfordTown_Gym_MapScript1_15306B:: @ 815306B
