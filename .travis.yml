@@ -1,5 +1,5 @@
 language: generic
-dist: trusty
+dist: bionic
 sudo: false
 env:
   global:
@@ -64,7 +64,7 @@ matrix:
         - rsync -avhI data-de/ data/
         - rsync -avhI graphics-de/ graphics/
       script:
-        - make tools CXX=g++-7
+        - make -j2 tools CXX=g++-7
         - make -j2 compare_ruby_de
         - make -j2 compare_sapphire_de
         - make -j2 compare_ruby_de_debug
