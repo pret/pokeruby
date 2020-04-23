@@ -160,7 +160,7 @@ MauvilleCity_EventScript_14C22B:: @ 814C22B
 
 MauvilleCity_EventScript_14C23C:: @ 814C23C
 	msgbox MauvilleCity_Text_165F0D, 4
-	trainerbattle 3, TRAINER_WALLY_2, 0, MauvilleCity_Text_165F38
+	trainerbattle_no_intro TRAINER_WALLY_2, MauvilleCity_Text_165F38
 	applymovement 6, MauvilleCity_Movement_1A0843
 	waitmovement 0
 	msgbox MauvilleCity_Text_165F85, 4
@@ -285,7 +285,7 @@ MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	goto_if_eq MauvilleCity_EventScript_14C33C
 	goto_if_set FLAG_RECEIVED_BASEMENT_KEY, MauvilleCity_EventScript_14C332
 	msgbox MauvilleCity_Text_1661C1, 4
-	giveitem_std ITEM_BASEMENT_KEY
+	giveitem ITEM_BASEMENT_KEY
 	setflag FLAG_RECEIVED_BASEMENT_KEY
 	msgbox MauvilleCity_Text_166331, 4
 	release
@@ -298,7 +298,7 @@ MauvilleCity_EventScript_14C332:: @ 814C332
 
 MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, 4
-	giveitem_std ITEM_TM24_THUNDERBOLT
+	giveitem ITEM_TM24_THUNDERBOLT
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM24

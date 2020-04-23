@@ -79,7 +79,7 @@ SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag FLAG_RECEIVED_RED_SCARF
-	giveitem_std ITEM_RED_SCARF
+	giveitem ITEM_RED_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DC1B, 4
 	release
 	end
@@ -90,7 +90,7 @@ SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag FLAG_RECEIVED_BLUE_SCARF
-	giveitem_std ITEM_BLUE_SCARF
+	giveitem ITEM_BLUE_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DC74, 4
 	release
 	end
@@ -101,7 +101,7 @@ SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag FLAG_RECEIVED_PINK_SCARF
-	giveitem_std ITEM_PINK_SCARF
+	giveitem ITEM_PINK_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DCCB, 4
 	release
 	end
@@ -112,7 +112,7 @@ SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag FLAG_RECEIVED_GREEN_SCARF
-	giveitem_std ITEM_GREEN_SCARF
+	giveitem ITEM_GREEN_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DD27, 4
 	release
 	end
@@ -123,7 +123,7 @@ SlateportCity_PokemonFanClub_EventScript_155967:: @ 8155967
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag FLAG_RECEIVED_YELLOW_SCARF
-	giveitem_std ITEM_YELLOW_SCARF
+	giveitem ITEM_YELLOW_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DD78, 4
 	release
 	end
@@ -201,7 +201,7 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	applymovement VAR_LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835
 	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, 4
-	giveitem_std ITEM_SOOTHE_BELL
+	giveitem ITEM_SOOTHE_BELL
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1A029B
 	setflag FLAG_RECEIVED_SOOTHE_BELL

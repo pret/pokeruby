@@ -361,7 +361,7 @@ Route110_TrickHouseEntrance_EventScript_16136E:: @ 816136E
 	end
 
 Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
-	giveitem_std ITEM_RARE_CANDY
+	giveitem ITEM_RARE_CANDY
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -371,7 +371,7 @@ Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
 	end
 
 Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
-	giveitem_std ITEM_TIMER_BALL
+	giveitem ITEM_TIMER_BALL
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -381,7 +381,7 @@ Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
 	end
 
 Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
-	giveitem_std ITEM_HARD_STONE
+	giveitem ITEM_HARD_STONE
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -391,7 +391,7 @@ Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
 	end
 
 Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
-	giveitem_std ITEM_SMOKE_BALL
+	giveitem ITEM_SMOKE_BALL
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -401,7 +401,7 @@ Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
 	end
 
 Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
-	giveitem_std ITEM_TM12_TAUNT
+	giveitem ITEM_TM12_TAUNT
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -411,7 +411,7 @@ Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
 	end
 
 Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
-	giveitem_std ITEM_MAGNET
+	giveitem ITEM_MAGNET
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -421,7 +421,7 @@ Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
 	end
 
 Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
-	giveitem_std ITEM_PP_MAX
+	giveitem ITEM_PP_MAX
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare VAR_RESULT, 0
@@ -443,9 +443,9 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
 	.ifdef SAPPHIRE
-	givedecoration_std DECOR_BLUE_TENT
+	givedecoration DECOR_BLUE_TENT
 	.else
-	givedecoration_std DECOR_RED_TENT
+	givedecoration DECOR_RED_TENT
 	.endif
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161551

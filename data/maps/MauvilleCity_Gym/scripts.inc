@@ -66,7 +66,7 @@ MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
 	end
 
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
-	trainerbattle 1, TRAINER_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
+	trainerbattle_single TRAINER_WATTSON, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_15661D
 	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_156641
@@ -93,7 +93,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	end
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
-	giveitem_std ITEM_TM34_SHOCK_WAVE
+	giveitem ITEM_TM34_SHOCK_WAVE
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4
@@ -161,22 +161,22 @@ MauvilleCity_Gym_EventScript_1566E1:: @ 81566E1
 	end
 
 MauvilleCity_Gym_EventScript_1566E6:: @ 81566E6
-	trainerbattle 0, TRAINER_KIRK, 0, MauvilleCity_Gym_Text_180956, MauvilleCity_Gym_Text_180997
+	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_180956, MauvilleCity_Gym_Text_180997
 	msgbox MauvilleCity_Gym_Text_1809D1, 6
 	end
 
 MauvilleCity_Gym_EventScript_1566FD:: @ 81566FD
-	trainerbattle 0, TRAINER_SHAWN, 0, MauvilleCity_Gym_Text_180A05, MauvilleCity_Gym_Text_180A42
+	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_180A05, MauvilleCity_Gym_Text_180A42
 	msgbox MauvilleCity_Gym_Text_180A5E, 6
 	end
 
 MauvilleCity_Gym_EventScript_156714:: @ 8156714
-	trainerbattle 0, TRAINER_BEN, 0, MauvilleCity_Gym_Text_180AE0, MauvilleCity_Gym_Text_180B06
+	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_180AE0, MauvilleCity_Gym_Text_180B06
 	msgbox MauvilleCity_Gym_Text_180B1D, 6
 	end
 
 MauvilleCity_Gym_EventScript_15672B:: @ 815672B
-	trainerbattle 0, TRAINER_VIVIAN, 0, MauvilleCity_Gym_Text_180B5A, MauvilleCity_Gym_Text_180B93
+	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_180B5A, MauvilleCity_Gym_Text_180B93
 	msgbox MauvilleCity_Gym_Text_180BAE, 6
 	end
 

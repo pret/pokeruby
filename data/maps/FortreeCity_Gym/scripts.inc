@@ -16,7 +16,7 @@ FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
 	end
 
 FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
-	trainerbattle 1, TRAINER_WINONA, 0, FortreeCity_Gym_Text_185CCB, FortreeCity_Gym_Text_185DBA, FortreeCity_Gym_EventScript_157F15
+	trainerbattle_single TRAINER_WINONA, FortreeCity_Gym_Text_185CCB, FortreeCity_Gym_Text_185DBA, FortreeCity_Gym_EventScript_157F15, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM40, FortreeCity_Gym_EventScript_157F3E
 	msgbox FortreeCity_Gym_Text_185F98, 4
 	release
@@ -35,7 +35,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	end
 
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
-	giveitem_std ITEM_TM40_AERIAL_ACE
+	giveitem ITEM_TM40_AERIAL_ACE
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4
@@ -44,22 +44,22 @@ FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
 	end
 
 FortreeCity_Gym_EventScript_157F62:: @ 8157F62
-	trainerbattle 0, TRAINER_JARED, 0, FortreeCity_Gym_Text_1859B9, FortreeCity_Gym_Text_1859EA
+	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_1859B9, FortreeCity_Gym_Text_1859EA
 	msgbox FortreeCity_Gym_Text_185A02, 6
 	end
 
 FortreeCity_Gym_EventScript_157F79:: @ 8157F79
-	trainerbattle 0, TRAINER_WILL, 0, FortreeCity_Gym_Text_185A7F, FortreeCity_Gym_Text_185AEC
+	trainerbattle_single TRAINER_WILL, FortreeCity_Gym_Text_185A7F, FortreeCity_Gym_Text_185AEC
 	msgbox FortreeCity_Gym_Text_185B18, 6
 	end
 
 FortreeCity_Gym_EventScript_157F90:: @ 8157F90
-	trainerbattle 0, TRAINER_TERRELL, 0, FortreeCity_Gym_Text_185B8D, FortreeCity_Gym_Text_185BEB
+	trainerbattle_single TRAINER_TERRELL, FortreeCity_Gym_Text_185B8D, FortreeCity_Gym_Text_185BEB
 	msgbox FortreeCity_Gym_Text_185C00, 6
 	end
 
 FortreeCity_Gym_EventScript_157FA7:: @ 8157FA7
-	trainerbattle 0, TRAINER_KYLEE, 0, FortreeCity_Gym_Text_185C45, FortreeCity_Gym_Text_185C7C
+	trainerbattle_single TRAINER_KYLEE, FortreeCity_Gym_Text_185C45, FortreeCity_Gym_Text_185C7C
 	msgbox FortreeCity_Gym_Text_185C8C, 6
 	end
 

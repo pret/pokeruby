@@ -18,16 +18,16 @@ MtPyre_2F_EventScript_15D392:: @ 815D392
 	end
 
 MtPyre_2F_EventScript_15D39B:: @ 815D39B
-	trainerbattle 0, TRAINER_MARK, 0, MtPyre_2F_Text_196674, MtPyre_2F_Text_1966BE
+	trainerbattle_single TRAINER_MARK, MtPyre_2F_Text_196674, MtPyre_2F_Text_1966BE
 	msgbox MtPyre_2F_Text_1966E7, 6
 	end
 
 MtPyre_2F_EventScript_15D3B2:: @ 815D3B2
-	trainerbattle 4, TRAINER_DEZ_AND_LUKE, 0, MtPyre_2F_Text_1962C6, MtPyre_2F_Text_196358, MtPyre_2F_Text_1963CB
+	trainerbattle_double TRAINER_DEZ_AND_LUKE, MtPyre_2F_Text_1962C6, MtPyre_2F_Text_196358, MtPyre_2F_Text_1963CB
 	msgbox MtPyre_2F_Text_196368, 6
 	end
 
 MtPyre_2F_EventScript_15D3CD:: @ 815D3CD
-	trainerbattle 4, TRAINER_DEZ_AND_LUKE, 0, MtPyre_2F_Text_196449, MtPyre_2F_Text_1964EB, MtPyre_2F_Text_196539
+	trainerbattle_double TRAINER_DEZ_AND_LUKE, MtPyre_2F_Text_196449, MtPyre_2F_Text_1964EB, MtPyre_2F_Text_196539
 	msgbox MtPyre_2F_Text_196504, 6
 	end

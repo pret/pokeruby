@@ -21,17 +21,17 @@ Route119_WeatherInstitute_2F_EventScript_163CF0:: @ 8163CF0
 	return
 
 Route119_WeatherInstitute_2F_EventScript_163CFC:: @ 8163CFC
-	trainerbattle 0, TRAINER_WEATHER_INSTITUTE_GRUNT_3, 0, Route119_WeatherInstitute_2F_Text_19EEAF, Route119_WeatherInstitute_2F_Text_19EF1B
+	trainerbattle_single TRAINER_WEATHER_INSTITUTE_GRUNT_3, Route119_WeatherInstitute_2F_Text_19EEAF, Route119_WeatherInstitute_2F_Text_19EF1B
 	msgbox Route119_WeatherInstitute_2F_Text_19EF3E, 6
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163D13:: @ 8163D13
-	trainerbattle 0, TRAINER_WEATHER_INSTITUTE_GRUNT_4, 0, Route119_WeatherInstitute_2F_Text_19EFA3, Route119_WeatherInstitute_2F_Text_19EFDD
+	trainerbattle_single TRAINER_WEATHER_INSTITUTE_GRUNT_4, Route119_WeatherInstitute_2F_Text_19EFA3, Route119_WeatherInstitute_2F_Text_19EFDD
 	msgbox Route119_WeatherInstitute_2F_Text_19EFE9, 6
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163D2A:: @ 8163D2A
-	trainerbattle 2, TRAINER_WEATHER_INSTITUTE_GRUNT_5, 0, Route119_WeatherInstitute_2F_Text_19F042, Route119_WeatherInstitute_2F_Text_19F0F4, Route119_WeatherInstitute_2F_EventScript_163D45
+	trainerbattle_single TRAINER_WEATHER_INSTITUTE_GRUNT_5, Route119_WeatherInstitute_2F_Text_19F042, Route119_WeatherInstitute_2F_Text_19F0F4, Route119_WeatherInstitute_2F_EventScript_163D45
 	msgbox Route119_WeatherInstitute_2F_Text_19F11B, 6
 	end
 
@@ -62,7 +62,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
 	waitmessage
-	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
+	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER
 	setflag FLAG_RECEIVED_CASTFORM
 	msgbox Route119_WeatherInstitute_2F_Text_19F27D, 4
 	release

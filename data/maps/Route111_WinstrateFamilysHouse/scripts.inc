@@ -15,7 +15,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
 	setvar VAR_0x8008, 3
 	goto_if_set FLAG_RECEIVED_MACHO_BRACE, Route111_WinstrateFamilysHouse_EventScript_15BF72
 	msgbox Route111_WinstrateFamilysHouse_Text_19208A, 4
-	giveitem_std ITEM_MACHO_BRACE
+	giveitem ITEM_MACHO_BRACE
 	compare VAR_RESULT, 0
 	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_1A029B
 	setflag FLAG_RECEIVED_MACHO_BRACE

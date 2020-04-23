@@ -464,7 +464,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	compare VAR_TEMP_1, 4
 	call_if_eq RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
-	giveitem_std ITEM_GREAT_BALL
+	giveitem ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
 	call_if_eq RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4

@@ -41,7 +41,7 @@ FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
 FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
 	goto_if_set FLAG_RECEIVED_CONTEST_PASS, FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
-	giveitem_std ITEM_CONTEST_PASS
+	giveitem ITEM_CONTEST_PASS
 	setflag FLAG_RECEIVED_CONTEST_PASS
 	setflag FLAG_TEMP_1
 	msgbox FallarborTown_ContestLobby_Text_1A5E98, 4
@@ -60,7 +60,7 @@ FallarborTown_ContestLobby_EventScript_1A4F4E:: @ 81A4F4E
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F67:: @ 81A4F67
-	giveitem_std ITEM_LUXURY_BALL
+	giveitem ITEM_LUXURY_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F86
 	setvar VAR_CONTEST_PRIZE_PICKUP, 0
@@ -1131,7 +1131,7 @@ LinkContestRoom1_EventScript_1A5D2D:: @ 81A5D2D
 	return
 
 LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
-	giveitem_std ITEM_LUXURY_BALL
+	giveitem ITEM_LUXURY_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq LinkContestRoom1_EventScript_1A5D2D
 	msgbox LinkContestRoom1_Text_1A6DF1, 3

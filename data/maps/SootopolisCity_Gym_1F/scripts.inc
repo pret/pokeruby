@@ -86,7 +86,7 @@ SootopolisCity_Gym_1F_Movement_15AFFD:: @ 815AFFD
 	end_movement
 
 SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
-	trainerbattle 1, TRAINER_WALLACE, 0, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D
+	trainerbattle_single TRAINER_WALLACE, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_15B056
 	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_15B07A
 	msgbox SootopolisCity_Gym_1F_Text_18F4D7, 4
@@ -106,7 +106,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B056:: @ 815B056
-	giveitem_std ITEM_TM03_WATER_PULSE
+	giveitem ITEM_TM03_WATER_PULSE
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_Gym_1F_EventScript_1A029B
 	msgbox SootopolisCity_Gym_1F_Text_18F466, 4

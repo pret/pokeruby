@@ -4,7 +4,7 @@
 void ClearDecorationInventories(void);
 s8 FindFreeDecorationInventorySlot(u8);
 u8 InventoryContainsDecoration(u8);
-u8 GiveDecoration(u8);
+u8 AddDecoration(u8);
 u8 CheckDecorationInventoryHasSpace(u8);
 s8 RemoveDecorationFromInventory(u8);
 void SortDecorationInventory(u8);

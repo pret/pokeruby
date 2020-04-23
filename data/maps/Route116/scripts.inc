@@ -39,7 +39,7 @@ Route116_EventScript_150A7B:: @ 8150A7B
 
 Route116_EventScript_150A94:: @ 8150A94
 	setflag FLAG_MET_DEVON_EMPLOYEE
-	giveitem_std ITEM_REPEAT_BALL
+	giveitem ITEM_REPEAT_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
@@ -225,17 +225,17 @@ Route116_Movement_150C57:: @ 8150C57
 	end_movement
 
 Route116_EventScript_150C62:: @ 8150C62
-	trainerbattle 0, TRAINER_JOEY, 0, Route116_Text_1BD02B, Route116_Text_1BD04C
+	trainerbattle_single TRAINER_JOEY, Route116_Text_1BD02B, Route116_Text_1BD04C
 	msgbox Route116_Text_1BD078, 6
 	end
 
 Route116_EventScript_150C79:: @ 8150C79
-	trainerbattle 0, TRAINER_JOSE, 0, Route116_Text_1BD0AF, Route116_Text_1BD0D7
+	trainerbattle_single TRAINER_JOSE, Route116_Text_1BD0AF, Route116_Text_1BD0D7
 	msgbox Route116_Text_1BD0F4, 6
 	end
 
 Route116_EventScript_150C90:: @ 8150C90
-	trainerbattle 0, TRAINER_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
+	trainerbattle_single TRAINER_JERRY_1, Route116_Text_1BD1C0, Route116_Text_1BD21A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150CB7
@@ -243,22 +243,22 @@ Route116_EventScript_150C90:: @ 8150C90
 	end
 
 Route116_EventScript_150CB7:: @ 8150CB7
-	trainerbattle 5, TRAINER_JERRY_1, 0, Route116_Text_1BD2A5, Route116_Text_1BD2FE
+	trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_1BD2A5, Route116_Text_1BD2FE
 	msgbox Route116_Text_1BD31A, 6
 	end
 
 Route116_EventScript_150CCE:: @ 8150CCE
-	trainerbattle 0, TRAINER_CLARK, 0, Route116_Text_1BCF79, Route116_Text_1BCFBB
+	trainerbattle_single TRAINER_CLARK, Route116_Text_1BCF79, Route116_Text_1BCFBB
 	msgbox Route116_Text_1BCFE3, 6
 	end
 
 Route116_EventScript_150CE5:: @ 8150CE5
-	trainerbattle 0, TRAINER_JANICE, 0, Route116_Text_1BD131, Route116_Text_1BD165
+	trainerbattle_single TRAINER_JANICE, Route116_Text_1BD131, Route116_Text_1BD165
 	msgbox Route116_Text_1BD180, 6
 	end
 
 Route116_EventScript_150CFC:: @ 8150CFC
-	trainerbattle 0, TRAINER_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
+	trainerbattle_single TRAINER_KAREN_1, Route116_Text_1BD377, Route116_Text_1BD3AC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_150D23
@@ -266,6 +266,6 @@ Route116_EventScript_150CFC:: @ 8150CFC
 	end
 
 Route116_EventScript_150D23:: @ 8150D23
-	trainerbattle 5, TRAINER_KAREN_1, 0, Route116_Text_1BD405, Route116_Text_1BD44A
+	trainerbattle_rematch TRAINER_KAREN_1, Route116_Text_1BD405, Route116_Text_1BD44A
 	msgbox Route116_Text_1BD466, 6
 	end

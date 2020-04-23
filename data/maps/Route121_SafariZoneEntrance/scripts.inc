@@ -63,11 +63,11 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C450
 	call Route121_SafariZoneEntrance_EventScript_15C425
-	checkmoney 0x1f4, 0
+	checkmoney 500, 0
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C45E
 	msgbox Route121_SafariZoneEntrance_Text_1C38D9, 4
-	takemoney 0x1f4, 0
+	removemoney 500, 0
 	updatemoneybox 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C38F4, 4

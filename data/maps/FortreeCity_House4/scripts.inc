@@ -31,7 +31,7 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, 4
-	giveitem_std ITEM_MENTAL_HERB
+	giveitem ITEM_MENTAL_HERB
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House4_EventScript_1A029B
 	setflag FLAG_RECEIVED_MENTAL_HERB

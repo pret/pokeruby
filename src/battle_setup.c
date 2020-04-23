@@ -27,6 +27,7 @@
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
+#include "constants/battle_setup.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/opponents.h"
@@ -1005,34 +1006,34 @@ u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 
     switch (sTrainerBattleMode)
     {
-    case 3:
+    case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_3, data);
         return gUnknown_0819F878;
-    case 4:
+    case TRAINER_BATTLE_DOUBLE:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
         SetMapVarsToTrainer();
         return gUnknown_0819F840;
-    case 1:
-    case 2:
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC:
+    case TRAINER_BATTLE_CONTINUE_SCRIPT:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_1, data);
         SetMapVarsToTrainer();
         return gUnknown_0819F818;
-    case 6:
-    case 8:
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE:
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_4, data);
         SetMapVarsToTrainer();
         return gUnknown_0819F840;
-    case 7:
+    case TRAINER_BATTLE_REMATCH_DOUBLE:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent = GetRematchTrainerId(gTrainerBattleOpponent);
         return gUnknown_0819F8AE;
-    case 5:
+    case TRAINER_BATTLE_REMATCH:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent = GetRematchTrainerId(gTrainerBattleOpponent);
         return gUnknown_0819F887;
-    default:
+    default: // TRAINER_BATTLE_SINGLE
         TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
         SetMapVarsToTrainer();
         return gUnknown_0819F818;

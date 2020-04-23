@@ -38,7 +38,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA6E
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
-	giveitem_std ITEM_HM08_DIVE
+	giveitem ITEM_HM08_DIVE
 	setflag FLAG_RECEIVED_HM08
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
@@ -82,7 +82,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
 	waitmessage
-	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_BELDUM, 5, ITEM_NONE
 	bufferspeciesname 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -123,6 +123,6 @@ MossdeepCity_StevensHouse_EventScript_15AB16:: @ 815AB16
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AB20:: @ 815AB20
-	giveitem_std ITEM_HM08_DIVE, 1, 1
+	finditem ITEM_HM08_DIVE
 	setflag FLAG_RECEIVED_HM08
 	end

@@ -22,7 +22,7 @@ FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_House1_EventScript_153C47
 	msgbox FallarborTown_House1_Text_1778C4, 4
-	giveitem_std ITEM_TM27_RETURN
+	giveitem ITEM_TM27_RETURN
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_House1_EventScript_1A029B
 	setvar VAR_0x8004, 280

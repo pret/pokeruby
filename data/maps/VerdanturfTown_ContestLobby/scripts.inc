@@ -90,7 +90,7 @@ VerdanturfTown_ContestLobby_Movement_153E35:: @ 8153E35
 VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	lockall
 	fadescreen 1
-	drawcontestwinner 1
+	showcontestwinner 1
 	releaseall
 	end
 
@@ -103,7 +103,7 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
-	giveitem_std ITEM_TM45_ATTRACT
+	giveitem ITEM_TM45_ATTRACT
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM45

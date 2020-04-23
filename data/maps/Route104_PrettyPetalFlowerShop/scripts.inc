@@ -75,7 +75,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEA4:: @ 815BEA4
 
 Route104_PrettyPetalFlowerShop_EventScript_15BEB9:: @ 815BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6158, 4
-	giveitem_std ITEM_WAILMER_PAIL
+	giveitem ITEM_WAILMER_PAIL
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
 	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
@@ -84,12 +84,12 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEB9:: @ 815BEB9
 Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP, Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
-	giveitem_std VAR_RESULT
+	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP

@@ -329,10 +329,10 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	msgbox SlateportCity_Harbor_Text_1803DD, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
-	giveitem_std ITEM_DEEP_SEA_TOOTH
+	giveitem ITEM_DEEP_SEA_TOOTH
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
-	takeitem ITEM_SCANNER, 1
+	removeitem ITEM_SCANNER
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380
@@ -342,10 +342,10 @@ SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	msgbox SlateportCity_Harbor_Text_180412, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
-	giveitem_std ITEM_DEEP_SEA_SCALE
+	giveitem ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
-	takeitem ITEM_SCANNER, 1
+	removeitem ITEM_SCANNER
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380

@@ -60,12 +60,12 @@ LilycoveCity_EventScript_14CB2B:: @ 814CB2B
 LilycoveCity_EventScript_14CB74:: @ 814CB74
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_LILYCOVE, LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
-	giveitem_std VAR_RESULT
+	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
@@ -303,32 +303,32 @@ LilycoveCity_EventScript_14CE35:: @ 814CE35
 	end
 
 LilycoveCity_EventScript_14CE46:: @ 814CE46
-	trainerbattle 3, TRAINER_MAY_11, 0, LilycoveCity_Text_167BD5
+	trainerbattle_no_intro TRAINER_MAY_11, LilycoveCity_Text_167BD5
 	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE56:: @ 814CE56
-	trainerbattle 3, TRAINER_MAY_12, 0, LilycoveCity_Text_167BD5
+	trainerbattle_no_intro TRAINER_MAY_12, LilycoveCity_Text_167BD5
 	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE66:: @ 814CE66
-	trainerbattle 3, TRAINER_MAY_10, 0, LilycoveCity_Text_167BD5
+	trainerbattle_no_intro TRAINER_MAY_10, LilycoveCity_Text_167BD5
 	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE76:: @ 814CE76
-	trainerbattle 3, TRAINER_BRENDAN_11, 0, LilycoveCity_Text_1680E4
+	trainerbattle_no_intro TRAINER_BRENDAN_11, LilycoveCity_Text_1680E4
 	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE86:: @ 814CE86
-	trainerbattle 3, TRAINER_BRENDAN_12, 0, LilycoveCity_Text_1680E4
+	trainerbattle_no_intro TRAINER_BRENDAN_12, LilycoveCity_Text_1680E4
 	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE96:: @ 814CE96
-	trainerbattle 3, TRAINER_BRENDAN_10, 0, LilycoveCity_Text_1680E4
+	trainerbattle_no_intro TRAINER_BRENDAN_10, LilycoveCity_Text_1680E4
 	goto LilycoveCity_EventScript_14CF12
 	end
 

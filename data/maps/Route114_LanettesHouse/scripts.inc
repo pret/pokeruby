@@ -13,9 +13,9 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_192A0D, 4
 	.ifdef SAPPHIRE
-	givedecoration_std DECOR_LOTAD_DOLL
+	givedecoration DECOR_LOTAD_DOLL
 	.else
-	givedecoration_std DECOR_SEEDOT_DOLL
+	givedecoration DECOR_SEEDOT_DOLL
 	.endif
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_LanettesHouse_EventScript_1A02AE

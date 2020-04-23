@@ -108,7 +108,7 @@ Route120_EventScript_151735:: @ 8151735
 Route120_EventScript_151739:: @ 8151739
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE120, Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -155,7 +155,7 @@ Route120_EventScript_151808:: @ 8151808
 	end
 
 Route120_EventScript_151813:: @ 8151813
-	giveitem_std VAR_0x8004
+	giveitem VAR_0x8004
 	compare VAR_RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
@@ -232,7 +232,7 @@ Route120_EventScript_151908:: @ 8151908
 	applymovement 255, Route120_Movement_1A0841
 	waitmovement 0
 	msgbox Route120_Text_171A40, 4
-	giveitem_std ITEM_DEVON_SCOPE
+	giveitem ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_171B0E, 4
 	closemessage
@@ -280,12 +280,12 @@ Route120_EventScript_1519AA:: @ 81519AA
 	end
 
 Route120_EventScript_1519B3:: @ 81519B3
-	trainerbattle 0, TRAINER_COLIN, 0, Route120_Text_1BEFC8, Route120_Text_1BF000
+	trainerbattle_single TRAINER_COLIN, Route120_Text_1BEFC8, Route120_Text_1BF000
 	msgbox Route120_Text_1BF015, 6
 	end
 
 Route120_EventScript_1519CA:: @ 81519CA
-	trainerbattle 0, TRAINER_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
+	trainerbattle_single TRAINER_ROBERT_1, Route120_Text_1BF07E, Route120_Text_1BF0A5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
@@ -293,22 +293,22 @@ Route120_EventScript_1519CA:: @ 81519CA
 	end
 
 Route120_EventScript_1519F1:: @ 81519F1
-	trainerbattle 5, TRAINER_ROBERT_1, 0, Route120_Text_1BF0FA, Route120_Text_1BF131
+	trainerbattle_rematch TRAINER_ROBERT_1, Route120_Text_1BF0FA, Route120_Text_1BF131
 	msgbox Route120_Text_1BF154, 6
 	end
 
 Route120_EventScript_151A08:: @ 8151A08
-	trainerbattle 0, TRAINER_CARLOS, 0, Route120_Text_1BF193, Route120_Text_1BF1D4
+	trainerbattle_single TRAINER_CARLOS, Route120_Text_1BF193, Route120_Text_1BF1D4
 	msgbox Route120_Text_1BF215, 6
 	end
 
 Route120_EventScript_151A1F:: @ 8151A1F
-	trainerbattle 0, TRAINER_JENNA, 0, Route120_Text_1BF26E, Route120_Text_1BF2D2
+	trainerbattle_single TRAINER_JENNA, Route120_Text_1BF26E, Route120_Text_1BF2D2
 	msgbox Route120_Text_1BF2EA, 6
 	end
 
 Route120_EventScript_151A36:: @ 8151A36
-	trainerbattle 0, TRAINER_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
+	trainerbattle_single TRAINER_BRANDON_1, Route120_Text_1BF32B, Route120_Text_1BF36B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
@@ -316,36 +316,36 @@ Route120_EventScript_151A36:: @ 8151A36
 	end
 
 Route120_EventScript_151A5D:: @ 8151A5D
-	trainerbattle 5, TRAINER_BRANDON_1, 0, Route120_Text_1BF3D0, Route120_Text_1BF416
+	trainerbattle_rematch TRAINER_BRANDON_1, Route120_Text_1BF3D0, Route120_Text_1BF416
 	msgbox Route120_Text_1BF43E, 6
 	end
 
 Route120_EventScript_151A74:: @ 8151A74
-	trainerbattle 0, TRAINER_JENNIFER, 0, Route120_Text_1BF4A0, Route120_Text_1BF504
+	trainerbattle_single TRAINER_JENNIFER, Route120_Text_1BF4A0, Route120_Text_1BF504
 	msgbox Route120_Text_1BF51F, 6
 	end
 
 Route120_EventScript_151A8B:: @ 8151A8B
-	trainerbattle 0, TRAINER_CHIP, 0, Route120_Text_1BF560, Route120_Text_1BF5D6
+	trainerbattle_single TRAINER_CHIP, Route120_Text_1BF560, Route120_Text_1BF5D6
 	msgbox Route120_Text_1BF5F4, 6
 	end
 
 Route120_EventScript_151AA2:: @ 8151AA2
-	trainerbattle 0, TRAINER_CLARISSA, 0, Route120_Text_1BF65B, Route120_Text_1BF6A4
+	trainerbattle_single TRAINER_CLARISSA, Route120_Text_1BF65B, Route120_Text_1BF6A4
 	msgbox Route120_Text_1BF6D0, 6
 	end
 
 Route120_EventScript_151AB9:: @ 8151AB9
-	trainerbattle 0, TRAINER_ANGELICA, 0, Route120_Text_1BF728, Route120_Text_1BF78C
+	trainerbattle_single TRAINER_ANGELICA, Route120_Text_1BF728, Route120_Text_1BF78C
 	msgbox Route120_Text_1BF7B2, 6
 	end
 
 Route120_EventScript_151AD0:: @ 8151AD0
-	trainerbattle 0, TRAINER_KEIGO, 0, Route120_Text_1BF80B, Route120_Text_1BF852
+	trainerbattle_single TRAINER_KEIGO, Route120_Text_1BF80B, Route120_Text_1BF852
 	msgbox Route120_Text_1BF891, 6
 	end
 
 Route120_EventScript_151AE7:: @ 8151AE7
-	trainerbattle 0, TRAINER_TSUNAO, 0, Route120_Text_1BF8C5, Route120_Text_1BF920
+	trainerbattle_single TRAINER_TSUNAO, Route120_Text_1BF8C5, Route120_Text_1BF920
 	msgbox Route120_Text_1BF946, 6
 	end

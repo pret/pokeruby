@@ -44,10 +44,10 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
-	checkmoney 0x32, 0
+	checkmoney 50, 0
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B5A
-	takemoney 0x32, 0
+	removemoney 50, 0
 	updatemoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1DE, 4
@@ -163,7 +163,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, 4
-	giveitem_std ITEM_TM46_THIEF
+	giveitem ITEM_TM46_THIEF
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
 	setflag FLAG_RECEIVED_TM46

@@ -30,6 +30,7 @@
 #include "task.h"
 #include "text.h"
 #include "constants/event_bg.h"
+#include "constants/event_objects.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
@@ -512,7 +513,7 @@ void sub_80BBDD0(void)
                     metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                     if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatile) == TRUE || MetatileBehavior_IsLargeMatCenter(metatile) == TRUE)
                     {
-                        gSpecialVar_Result = gMapHeader.events->objectEvents[objid].graphicsId + VAR_0x3F20;
+                        gSpecialVar_Result = VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[objid].graphicsId - OBJ_EVENT_GFX_VAR_0);
                         VarSet(gSpecialVar_Result, gDecorations[roomdecor[decidx]].tiles[0]);
                         gSpecialVar_Result = gMapHeader.events->objectEvents[objid].localId;
                         FlagClear(gSpecialVar_0x8004 + 0xAE);

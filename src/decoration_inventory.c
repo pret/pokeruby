@@ -61,7 +61,7 @@ bool8 InventoryContainsDecoration(u8 decorationId)
     return FALSE;
 }
 
-bool8 GiveDecoration(u8 decorationId)
+bool8 AddDecoration(u8 decorationId)
 {
     u8 category;
     s8 slot;
@@ -159,6 +159,6 @@ void Debug_GiveAllDecorations(void)
     u8 decor;
 
     for (decor = 0; decor < DECOR_COUNT; decor++)
-        GiveDecoration(decor);
+        AddDecoration(decor);
 }
 #endif

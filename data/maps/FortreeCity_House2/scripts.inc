@@ -19,7 +19,7 @@ FortreeCity_House2_EventScript_1580B4:: @ 81580B4
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_158161
 	msgbox FortreeCity_House2_Text_1864C6, 4
-	giveitem_std ITEM_TM10_HIDDEN_POWER
+	giveitem ITEM_TM10_HIDDEN_POWER
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House2_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM10

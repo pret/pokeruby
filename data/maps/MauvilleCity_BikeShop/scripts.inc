@@ -44,13 +44,13 @@ MauvilleCity_BikeShop_EventScript_156824:: @ 8156824
 
 MauvilleCity_BikeShop_EventScript_15682D:: @ 815682D
 	msgbox MauvilleCity_BikeShop_Text_181332, 4
-	giveitem_std ITEM_MACH_BIKE
+	giveitem ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_156861
 	end
 
 MauvilleCity_BikeShop_EventScript_156847:: @ 8156847
 	msgbox MauvilleCity_BikeShop_Text_18134A, 4
-	giveitem_std ITEM_ACRO_BIKE
+	giveitem ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_156861
 	end
 
@@ -88,16 +88,16 @@ MauvilleCity_BikeShop_EventScript_1568BF:: @ 81568BF
 MauvilleCity_BikeShop_EventScript_1568C9:: @ 81568C9
 	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_181439, 4
-	takeitem ITEM_ACRO_BIKE, 1
-	giveitem_std ITEM_MACH_BIKE
+	removeitem ITEM_ACRO_BIKE
+	giveitem ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_156861
 	end
 
 MauvilleCity_BikeShop_EventScript_1568EA:: @ 81568EA
 	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_181408, 4
-	takeitem ITEM_MACH_BIKE, 1
-	giveitem_std ITEM_ACRO_BIKE
+	removeitem ITEM_MACH_BIKE
+	giveitem ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_156861
 	end
 

@@ -103,27 +103,27 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A232:: @ 815A232
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D:: @ 815A23D
-	checkmoney 0xc8, 0
+	checkmoney 200, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A244:: @ 815A244
-	checkmoney 0x12c, 0
+	checkmoney 300, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B:: @ 815A24B
-	checkmoney 0x15e, 0
+	checkmoney 350, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A252:: @ 815A252
-	takemoney 0xc8, 0
+	removemoney 200, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A259:: @ 815A259
-	takemoney 0x12c, 0
+	removemoney 300, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A260:: @ 815A260
-	takemoney 0x15e, 0
+	removemoney 350, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
@@ -149,7 +149,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	bufferitemname 0, VAR_TEMP_0
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
-	giveitem VAR_TEMP_0, 1
+	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
@@ -161,7 +161,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
-	giveitem VAR_TEMP_0, 1
+	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
@@ -173,7 +173,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
-	giveitem VAR_TEMP_0, 1
+	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4

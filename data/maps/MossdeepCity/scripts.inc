@@ -72,7 +72,7 @@ MossdeepCity_EventScript_14D027:: @ 814D027
 	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_EventScript_14D073
 	msgbox MossdeepCity_Text_169117, 4
-	giveitem_std ITEM_KINGS_ROCK
+	giveitem ITEM_KINGS_ROCK
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_EventScript_1A029B
 	setflag FLAG_RECEIVED_KINGS_ROCK

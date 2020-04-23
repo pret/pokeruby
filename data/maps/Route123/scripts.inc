@@ -15,7 +15,7 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_EventScript_151CAA
 	msgbox Route123_Text_171DC2, 4
-	giveitem_std ITEM_TM19_GIGA_DRAIN
+	giveitem ITEM_TM19_GIGA_DRAIN
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM19
@@ -45,22 +45,22 @@ Route123_EventScript_151CC8:: @ 8151CC8
 	end
 
 Route123_EventScript_151CD1:: @ 8151CD1
-	trainerbattle 0, TRAINER_WENDY, 0, Route123_Text_1BFF6A, Route123_Text_1BFFA2
+	trainerbattle_single TRAINER_WENDY, Route123_Text_1BFF6A, Route123_Text_1BFFA2
 	msgbox Route123_Text_1BFFC1, 6
 	end
 
 Route123_EventScript_151CE8:: @ 8151CE8
-	trainerbattle 0, TRAINER_CLYDE, 0, Route123_Text_1BFFF0, Route123_Text_1C0057
+	trainerbattle_single TRAINER_CLYDE, Route123_Text_1BFFF0, Route123_Text_1C0057
 	msgbox Route123_Text_1C0075, 6
 	end
 
 Route123_EventScript_151CFF:: @ 8151CFF
-	trainerbattle 0, TRAINER_VIOLET, 0, Route123_Text_1C009E, Route123_Text_1C00D4
+	trainerbattle_single TRAINER_VIOLET, Route123_Text_1C009E, Route123_Text_1C00D4
 	msgbox Route123_Text_1C0100, 6
 	end
 
 Route123_EventScript_151D16:: @ 8151D16
-	trainerbattle 0, TRAINER_CAMERON_1, 0, Route123_Text_1C013F, Route123_Text_1C01A3
+	trainerbattle_single TRAINER_CAMERON_1, Route123_Text_1C013F, Route123_Text_1C01A3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route123_EventScript_151D3D
@@ -68,12 +68,12 @@ Route123_EventScript_151D16:: @ 8151D16
 	end
 
 Route123_EventScript_151D3D:: @ 8151D3D
-	trainerbattle 5, TRAINER_CAMERON_1, 0, Route123_Text_1C01F9, Route123_Text_1C0240
+	trainerbattle_rematch TRAINER_CAMERON_1, Route123_Text_1C01F9, Route123_Text_1C0240
 	msgbox Route123_Text_1C024E, 6
 	end
 
 Route123_EventScript_151D54:: @ 8151D54
-	trainerbattle 0, TRAINER_JACKI_1, 0, Route123_Text_1C028C, Route123_Text_1C0303
+	trainerbattle_single TRAINER_JACKI_1, Route123_Text_1C028C, Route123_Text_1C0303
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route123_EventScript_151D7B
@@ -81,21 +81,21 @@ Route123_EventScript_151D54:: @ 8151D54
 	end
 
 Route123_EventScript_151D7B:: @ 8151D7B
-	trainerbattle 5, TRAINER_JACKI_1, 0, Route123_Text_1C0351, Route123_Text_1C0380
+	trainerbattle_rematch TRAINER_JACKI_1, Route123_Text_1C0351, Route123_Text_1C0380
 	msgbox Route123_Text_1C038C, 6
 	end
 
 Route123_EventScript_151D92:: @ 8151D92
-	trainerbattle 4, TRAINER_MIU_AND_YUKI, 0, Route123_Text_1C03CB, Route123_Text_1C040E, Route123_Text_1C0462
+	trainerbattle_double TRAINER_MIU_AND_YUKI, Route123_Text_1C03CB, Route123_Text_1C040E, Route123_Text_1C0462
 	msgbox Route123_Text_1C0423, 6
 	end
 
 Route123_EventScript_151DAD:: @ 8151DAD
-	trainerbattle 4, TRAINER_MIU_AND_YUKI, 0, Route123_Text_1C049C, Route123_Text_1C04CD, Route123_Text_1C0519
+	trainerbattle_double TRAINER_MIU_AND_YUKI, Route123_Text_1C049C, Route123_Text_1C04CD, Route123_Text_1C0519
 	msgbox Route123_Text_1C04E3, 6
 	end
 
 Route123_EventScript_151DC8:: @ 8151DC8
-	trainerbattle 0, TRAINER_KINDRA, 0, Route123_Text_1C0554, Route123_Text_1C059F
+	trainerbattle_single TRAINER_KINDRA, Route123_Text_1C0554, Route123_Text_1C059F
 	msgbox Route123_Text_1C05BC, 6
 	end

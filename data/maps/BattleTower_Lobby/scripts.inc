@@ -389,7 +389,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	goto_if_set FLAG_RECEIVED_SILVER_SHIELD, BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
 	setvar VAR_0x8008, DECOR_SILVER_SHIELD
-	givedecoration_std DECOR_SILVER_SHIELD
+	givedecoration DECOR_SILVER_SHIELD
 	compare VAR_RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
 	setflag FLAG_RECEIVED_SILVER_SHIELD
@@ -403,7 +403,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	goto_if_lt BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
 	setvar VAR_0x8008, DECOR_GOLD_SHIELD
-	givedecoration_std DECOR_GOLD_SHIELD
+	givedecoration DECOR_GOLD_SHIELD
 	compare VAR_RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
 	setflag FLAG_RECEIVED_GOLD_SHIELD

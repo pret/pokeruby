@@ -31,7 +31,7 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE104, Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
-	giveitem_std ITEM_CHESTO_BERRY
+	giveitem ITEM_CHESTO_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
@@ -49,7 +49,7 @@ Route104_EventScript_14EF09:: @ 814EF09
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
-	giveitem_std ITEM_WHITE_HERB
+	giveitem ITEM_WHITE_HERB
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_WHITE_HERB
@@ -102,7 +102,7 @@ Route104_EventScript_14EF93:: @ 814EF93
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
-	giveitem_std ITEM_TM09_BULLET_SEED
+	giveitem ITEM_TM09_BULLET_SEED
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM09
@@ -391,17 +391,17 @@ Route104_Movement_14F16F:: @ 814F16F
 	end_movement
 
 Route104_EventScript_14F172:: @ 814F172
-	trainerbattle 0, TRAINER_IVAN, 0, Route104_Text_1B85EB, Route104_Text_1B8637
+	trainerbattle_single TRAINER_IVAN, Route104_Text_1B85EB, Route104_Text_1B8637
 	msgbox Route104_Text_1B8680, 6
 	end
 
 Route104_EventScript_14F189:: @ 814F189
-	trainerbattle 0, TRAINER_BILLY, 0, Route104_Text_1B86BE, Route104_Text_1B86E8
+	trainerbattle_single TRAINER_BILLY, Route104_Text_1B86BE, Route104_Text_1B86E8
 	msgbox Route104_Text_1B871C, 6
 	end
 
 Route104_EventScript_14F1A0:: @ 814F1A0
-	trainerbattle 0, TRAINER_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
+	trainerbattle_single TRAINER_HALEY_1, Route104_Text_1B8770, Route104_Text_1B87A7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_14F1C7
@@ -409,12 +409,12 @@ Route104_EventScript_14F1A0:: @ 814F1A0
 	end
 
 Route104_EventScript_14F1C7:: @ 814F1C7
-	trainerbattle 5, TRAINER_HALEY_1, 0, Route104_Text_1B8839, Route104_Text_1B8852
+	trainerbattle_rematch TRAINER_HALEY_1, Route104_Text_1B8839, Route104_Text_1B8852
 	msgbox Route104_Text_1B8872, 6
 	end
 
 Route104_EventScript_14F1DE:: @ 814F1DE
-	trainerbattle 0, TRAINER_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
+	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_1B88D4, Route104_Text_1B8911
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_14F205
@@ -422,12 +422,12 @@ Route104_EventScript_14F1DE:: @ 814F1DE
 	end
 
 Route104_EventScript_14F205:: @ 814F205
-	trainerbattle 5, TRAINER_WINSTON_1, 0, Route104_Text_1B895E, Route104_Text_1B899E
+	trainerbattle_rematch TRAINER_WINSTON_1, Route104_Text_1B895E, Route104_Text_1B899E
 	msgbox Route104_Text_1B89C0, 6
 	end
 
 Route104_EventScript_14F21C:: @ 814F21C
-	trainerbattle 0, TRAINER_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
+	trainerbattle_single TRAINER_CINDY_1, Route104_Text_1B8A24, Route104_Text_1B8A61
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_14F243
@@ -435,19 +435,19 @@ Route104_EventScript_14F21C:: @ 814F21C
 	end
 
 Route104_EventScript_14F243:: @ 814F243
-	trainerbattle 5, TRAINER_CINDY_1, 0, Route104_Text_1B8AA7, Route104_Text_1B8AD9
+	trainerbattle_rematch TRAINER_CINDY_1, Route104_Text_1B8AA7, Route104_Text_1B8AD9
 	msgbox Route104_Text_1B8B02, 6
 	end
 
 Route104_EventScript_14F25A:: @ 814F25A
-	trainerbattle 4, TRAINER_GINA_AND_MIA_1, 0, Route104_Text_1B83E9, Route104_Text_1B8414, Route104_Text_1B845C
+	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_1B83E9, Route104_Text_1B8414, Route104_Text_1B845C
 	special GetPlayerBigGuyGirlString
 	msgbox Route104_Text_1B842C, 4
 	release
 	end
 
 Route104_EventScript_14F279:: @ 814F279
-	trainerbattle 4, TRAINER_GINA_AND_MIA_1, 0, Route104_Text_1B84DB, Route104_Text_1B850D, Route104_Text_1B8577
+	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_1B84DB, Route104_Text_1B850D, Route104_Text_1B8577
 	special GetPlayerBigGuyGirlString
 	msgbox Route104_Text_1B853B, 4
 	release

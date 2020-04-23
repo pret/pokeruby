@@ -30,7 +30,7 @@ PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	applymovement 3, PetalburgWoods_Movement_15CEC8
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194EE8, 4
-	trainerbattle 3, TRAINER_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
+	trainerbattle_no_intro TRAINER_PETALBURG_WOODS_GRUNT, PetalburgWoods_Text_194F83
 	applymovement 3, PetalburgWoods_Movement_15CEB3
 	waitmovement 0
 	call PetalburgWoods_EventScript_15CDFA
@@ -65,7 +65,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	applymovement 255, PetalburgWoods_Movement_1A0841
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194EE8, 4
-	trainerbattle 3, TRAINER_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
+	trainerbattle_no_intro TRAINER_PETALBURG_WOODS_GRUNT, PetalburgWoods_Text_194F83
 	applymovement 3, PetalburgWoods_Movement_15CEB3
 	waitmovement 0
 	call PetalburgWoods_EventScript_15CDFA
@@ -90,7 +90,7 @@ PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	applymovement 255, PetalburgWoods_Movement_1A0845
 	waitmovement 0
 	msgbox PetalburgWoods_Text_19507E, 4
-	giveitem_std ITEM_GREAT_BALL
+	giveitem ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq PetalburgWoods_EventScript_15CE3F
 	goto PetalburgWoods_EventScript_15CE4D
@@ -243,7 +243,7 @@ PetalburgWoods_EventScript_15CEDC:: @ 815CEDC
 	faceplayer
 	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_15CF0B
 	msgbox PetalburgWoods_Text_19549E, 4
-	giveitem_std ITEM_MIRACLE_SEED
+	giveitem ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
 	goto_if_eq PetalburgWoods_EventScript_1A029B
 	setflag FLAG_RECEIVED_MIRACLE_SEED
@@ -264,12 +264,12 @@ PetalburgWoods_EventScript_15CF1E:: @ 815CF1E
 	end
 
 PetalburgWoods_EventScript_15CF27:: @ 815CF27
-	trainerbattle 0, TRAINER_LYLE, 0, PetalburgWoods_Text_1951BE, PetalburgWoods_Text_195202
+	trainerbattle_single TRAINER_LYLE, PetalburgWoods_Text_1951BE, PetalburgWoods_Text_195202
 	msgbox PetalburgWoods_Text_195232, 6
 	end
 
 PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
-	trainerbattle 0, TRAINER_JAMES_1, 0, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
+	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq PetalburgWoods_EventScript_15CF65
@@ -277,6 +277,6 @@ PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
 	end
 
 PetalburgWoods_EventScript_15CF65:: @ 815CF65
-	trainerbattle 5, TRAINER_JAMES_1, 0, PetalburgWoods_Text_195306, PetalburgWoods_Text_195338
+	trainerbattle_rematch TRAINER_JAMES_1, PetalburgWoods_Text_195306, PetalburgWoods_Text_195338
 	msgbox PetalburgWoods_Text_195356, 6
 	end

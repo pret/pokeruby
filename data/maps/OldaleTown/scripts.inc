@@ -70,7 +70,7 @@ OldaleTown_EventScript_14DE35:: @ 814DE35
 
 OldaleTown_EventScript_14DE4C:: @ 814DE4C
 	msgbox OldaleTown_Text_16AF2F, 4
-	giveitem_std ITEM_POTION
+	giveitem ITEM_POTION
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DE83
 	msgbox OldaleTown_Text_16AFE1, 4

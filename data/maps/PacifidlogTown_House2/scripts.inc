@@ -4,7 +4,7 @@ PacifidlogTown_House2_MapScripts:: @ 8154167
 PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	call PacifidlogTown_House2_EventScript_1541B4
 	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_154254
 	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_1541CE
@@ -41,7 +41,7 @@ PacifidlogTown_House2_EventScript_1541E8:: @ 81541E8
 
 PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	msgbox PacifidlogTown_House2_Text_179169, 4
-	giveitem_std ITEM_TM27_RETURN
+	giveitem ITEM_TM27_RETURN
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
@@ -57,7 +57,7 @@ PacifidlogTown_House2_EventScript_15421B:: @ 815421B
 
 PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	msgbox PacifidlogTown_House2_Text_17922D, 4
-	giveitem_std ITEM_TM21_FRUSTRATION
+	giveitem ITEM_TM21_FRUSTRATION
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK

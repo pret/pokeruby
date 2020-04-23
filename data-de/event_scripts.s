@@ -13,6 +13,7 @@
 #include "constants/heal_locations.h"
 #include "constants/vars.h"
 #include "constants/metatile_labels.h"
+#include "constants/battle_setup.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1496,7 +1497,7 @@ OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
 	end_movement
 
 Std_ObtainItem: @ 819FDF7
-	giveitem VAR_0x8000, VAR_0x8001
+	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call Std_ObtainItem_
 	return
@@ -1571,7 +1572,7 @@ PlayGetTMHMFanfare:
 	return
 
 Std_ObtainDecoration: @ 819FEDA
-	givedecoration VAR_0x8000
+	adddecoration VAR_0x8000
 	copyvar VAR_0x8007, VAR_RESULT
 	call Std_ObtainDecoration_
 	return
@@ -1601,7 +1602,7 @@ Std_FindItem: @ 819FF21
 	lock
 	faceplayer
 	waitse
-	giveitem VAR_0x8000, VAR_0x8001
+	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemname 1, VAR_0x8000
 	checkitemtype VAR_0x8000
@@ -1630,7 +1631,7 @@ Std_FindItem_Fail: @ 819FF65
 HiddenItemScript:: @ 819FF7B
 	lockall
 	waitse
-	giveitem VAR_0x8005, 1
+	additem VAR_0x8005
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemname 0x1, VAR_0x8005
 	checkitemtype VAR_0x8005
@@ -1801,7 +1802,7 @@ RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
 
 DewfordTown_EventScript_1A0102:: @ 81A0102
 DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
-	dodailyevents
+	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return
@@ -2545,7 +2546,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare
-	takeitem VAR_0x8004, 1
+	removeitem VAR_0x8004, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693

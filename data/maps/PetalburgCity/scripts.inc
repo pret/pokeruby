@@ -35,8 +35,9 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	special ScrSpecial_StartWallyTutorialBattle
 	waitstate
 	msgbox PetalburgCity_Text_16D3DE, 4
-	applymovement 2, PetalburgCity_Movement_1A083F, 0, 0
-	waitmovement 0, 0, 2
+	applymovement 2, PetalburgCity_Movement_1A083F, MAP_PETALBURG_CITY
+	@ Local id and map num were swapped here (0, 0, 2 vs 2, 0, 0). Fixed to waitmovement 2, MAP_PETALBURG_CITY in Emerald
+	waitmovement 0, MAP_MAUVILLE_CITY
 	msgbox PetalburgCity_Text_16D408, 4
 	closemessage
 	clearflag FLAG_SPECIAL_FLAG_0

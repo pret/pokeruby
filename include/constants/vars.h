@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_VARS_H
 #define GUARD_CONSTANTS_VARS_H
 
-#define VAR_0x3F20                 0x3F20
-
 #define VARS_START 0x4000
 
 // temporary vars
@@ -172,6 +170,8 @@
 #define VAR_STEVENS_HOUSE_STATE           0x40C6
 #define VAR_OLDALE_STATE                  0x40C7
 
+#define VARS_END                          0x40FF
+
 #define SPECIAL_VARS_START 0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
@@ -193,5 +193,7 @@
 #define VAR_LAST_TALKED               0x800F
 #define VAR_CONTEST_RANK              0x8010
 #define VAR_CONTEST_CATEGORY          0x8011
+
+#define SPECIAL_VARS_END              0x8015
 
 #endif // GUARD_CONSTANTS_VARS_H

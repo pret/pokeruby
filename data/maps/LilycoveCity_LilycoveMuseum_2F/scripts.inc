@@ -118,7 +118,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158735:: @ 8158735
 LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188120, 4
-	givedecoration_std DECOR_GLASS_ORNAMENT
+	givedecoration DECOR_GLASS_ORNAMENT
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158783
 	setflag FLAG_RECEIVED_GLASS_ORNAMENT
@@ -187,34 +187,34 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158817:: @ 8158817
 LilycoveCity_LilycoveMuseum_2F_EventScript_158820:: @ 8158820
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	drawcontestwinner 9
+	showcontestwinner 9
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15882E:: @ 815882E
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	drawcontestwinner 10
+	showcontestwinner 10
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15883C:: @ 815883C
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	drawcontestwinner 11
+	showcontestwinner 11
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15884A:: @ 815884A
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	drawcontestwinner 12
+	showcontestwinner 12
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158858:: @ 8158858
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	drawcontestwinner 13
+	showcontestwinner 13
 	releaseall
 	end

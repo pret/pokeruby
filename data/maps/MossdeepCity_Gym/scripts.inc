@@ -45,7 +45,7 @@ MossdeepCity_Gym_EventScript_15A558:: @ 815A558
 	end
 
 MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
-	trainerbattle 8, TRAINER_TATE_AND_LIZA, 0, MossdeepCity_Gym_Text_18CF02, MossdeepCity_Gym_Text_18D077, MossdeepCity_Gym_Text_18D324, MossdeepCity_Gym_EventScript_15A594
+	trainerbattle_double TRAINER_TATE_AND_LIZA, MossdeepCity_Gym_Text_18CF02, MossdeepCity_Gym_Text_18D077, MossdeepCity_Gym_Text_18D324, MossdeepCity_Gym_EventScript_15A594, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM04, MossdeepCity_Gym_EventScript_15A5C6
 	msgbox MossdeepCity_Gym_Text_18D273, 4
 	release
@@ -67,7 +67,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	end
 
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
-	giveitem_std ITEM_TM04_CALM_MIND
+	giveitem ITEM_TM04_CALM_MIND
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
@@ -169,32 +169,32 @@ MossdeepCity_Gym_EventScript_15A742:: @ 815A742
 	end
 
 MossdeepCity_Gym_EventScript_15A74E:: @ 815A74E
-	trainerbattle 0, TRAINER_PRESTON, 0, MossdeepCity_Gym_Text_18C96A, MossdeepCity_Gym_Text_18C9BA
+	trainerbattle_single TRAINER_PRESTON, MossdeepCity_Gym_Text_18C96A, MossdeepCity_Gym_Text_18C9BA
 	msgbox MossdeepCity_Gym_Text_18C9E1, 6
 	end
 
 MossdeepCity_Gym_EventScript_15A765:: @ 815A765
-	trainerbattle 0, TRAINER_VIRGIL, 0, MossdeepCity_Gym_Text_18CA10, MossdeepCity_Gym_Text_18CA28
+	trainerbattle_single TRAINER_VIRGIL, MossdeepCity_Gym_Text_18CA10, MossdeepCity_Gym_Text_18CA28
 	msgbox MossdeepCity_Gym_Text_18CA48, 6
 	end
 
 MossdeepCity_Gym_EventScript_15A77C:: @ 815A77C
-	trainerbattle 0, TRAINER_FRITZ, 0, MossdeepCity_Gym_Text_18CAC0, MossdeepCity_Gym_Text_18CB46
+	trainerbattle_single TRAINER_FRITZ, MossdeepCity_Gym_Text_18CAC0, MossdeepCity_Gym_Text_18CB46
 	msgbox MossdeepCity_Gym_Text_18CB77, 6
 	end
 
 MossdeepCity_Gym_EventScript_15A793:: @ 815A793
-	trainerbattle 0, TRAINER_HANNAH, 0, MossdeepCity_Gym_Text_18CC1E, MossdeepCity_Gym_Text_18CC83
+	trainerbattle_single TRAINER_HANNAH, MossdeepCity_Gym_Text_18CC1E, MossdeepCity_Gym_Text_18CC83
 	msgbox MossdeepCity_Gym_Text_18CC9B, 6
 	end
 
 MossdeepCity_Gym_EventScript_15A7AA:: @ 815A7AA
-	trainerbattle 0, TRAINER_SAMANTHA, 0, MossdeepCity_Gym_Text_18CD14, MossdeepCity_Gym_Text_18CD66
+	trainerbattle_single TRAINER_SAMANTHA, MossdeepCity_Gym_Text_18CD14, MossdeepCity_Gym_Text_18CD66
 	msgbox MossdeepCity_Gym_Text_18CD73, 6
 	end
 
 MossdeepCity_Gym_EventScript_15A7C1:: @ 815A7C1
-	trainerbattle 0, TRAINER_MAURA, 0, MossdeepCity_Gym_Text_18CDE0, MossdeepCity_Gym_Text_18CE47
+	trainerbattle_single TRAINER_MAURA, MossdeepCity_Gym_Text_18CDE0, MossdeepCity_Gym_Text_18CE47
 	msgbox MossdeepCity_Gym_Text_18CE6C, 6
 	end
 

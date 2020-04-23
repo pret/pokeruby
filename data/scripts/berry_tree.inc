@@ -45,7 +45,7 @@ BerryTree_EventScript_1A1577:: @ 81A1577
 	waitstate
 	compare VAR_ITEM_ID, 0
 	goto_if_eq BerryTree_EventScript_1A1593
-	takeitem VAR_ITEM_ID, 1
+	removeitem VAR_ITEM_ID, 1
 	call S_PlantBerryTree
 BerryTree_EventScript_1A1593:: @ 81A1593
 	release

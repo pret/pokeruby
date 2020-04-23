@@ -17,7 +17,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E412:: @ 815E412
 ShoalCave_LowTideLowerRoom_EventScript_15E413:: @ 815E413
 	lockall
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SALT_4, ShoalCave_LowTideLowerRoom_EventScript_15E445
-	giveitem_std ITEM_SHOAL_SALT
+	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
 	setmetatile 18, 2, 858, 0
@@ -36,7 +36,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E44F:: @ 815E44F
 	faceplayer
 	goto_if_set FLAG_RECEIVED_FOCUS_BAND, ShoalCave_LowTideLowerRoom_EventScript_15E47E
 	msgbox ShoalCave_LowTideLowerRoom_Text_198200, 4
-	giveitem_std ITEM_FOCUS_BAND
+	giveitem ITEM_FOCUS_BAND
 	compare VAR_RESULT, 0
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
 	setflag FLAG_RECEIVED_FOCUS_BAND

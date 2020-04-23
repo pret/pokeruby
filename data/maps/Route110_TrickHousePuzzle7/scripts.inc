@@ -219,16 +219,16 @@ Route110_TrickHousePuzzle7_EventScript_1633D1:: @ 81633D1
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633D6:: @ 81633D6
-	trainerbattle 0, TRAINER_JOSHUA, 0, Route110_TrickHousePuzzle7_Text_19DF0B, Route110_TrickHousePuzzle7_Text_19DF4B
+	trainerbattle_single TRAINER_JOSHUA, Route110_TrickHousePuzzle7_Text_19DF0B, Route110_TrickHousePuzzle7_Text_19DF4B
 	msgbox Route110_TrickHousePuzzle7_Text_19DF7E, 6
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633ED:: @ 81633ED
-	trainerbattle 0, TRAINER_PATRICIA, 0, Route110_TrickHousePuzzle7_Text_19DFBB, Route110_TrickHousePuzzle7_Text_19DFF2
+	trainerbattle_single TRAINER_PATRICIA, Route110_TrickHousePuzzle7_Text_19DFBB, Route110_TrickHousePuzzle7_Text_19DFF2
 	msgbox Route110_TrickHousePuzzle7_Text_19E00F, 6
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163404:: @ 8163404
-	trainerbattle 0, TRAINER_ALEXIS, 0, Route110_TrickHousePuzzle7_Text_19E054, Route110_TrickHousePuzzle7_Text_19E098
+	trainerbattle_single TRAINER_ALEXIS, Route110_TrickHousePuzzle7_Text_19E054, Route110_TrickHousePuzzle7_Text_19E098
 	msgbox Route110_TrickHousePuzzle7_Text_19E0B2, 6
 	end

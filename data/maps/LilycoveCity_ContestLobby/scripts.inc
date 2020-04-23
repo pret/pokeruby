@@ -27,7 +27,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
 	lockall
 	fadescreen 1
-	drawcontestwinner 0
+	showcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -201,7 +201,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
 	lockall
 	fadescreen 1
-	drawcontestwinner 0
+	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
@@ -581,7 +581,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
-	giveitem ITEM_CONTEST_PASS, 1
+	additem ITEM_CONTEST_PASS
 	setvar VAR_0x800B, 8
 	setvar VAR_CONTEST_RANK, 3
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
@@ -730,21 +730,21 @@ LilycoveCity_ContestLobby_EventScript_15905D:: @ 815905D
 LilycoveCity_ContestLobby_EventScript_159066:: @ 8159066
 	lockall
 	fadescreen 1
-	drawcontestwinner 6
+	showcontestwinner 6
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_15906D:: @ 815906D
 	lockall
 	fadescreen 1
-	drawcontestwinner 7
+	showcontestwinner 7
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_159074:: @ 8159074
 	lockall
 	fadescreen 1
-	drawcontestwinner 8
+	showcontestwinner 8
 	releaseall
 	end
 

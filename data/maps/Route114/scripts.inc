@@ -4,13 +4,13 @@ Route114_MapScripts:: @ 8150732
 Route114_EventScript_150733:: @ 8150733
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE114, Route114_EventScript_150778
 	msgbox Route114_Text_1C5803, 4
 	random 5
 	addvar VAR_RESULT, 15
 	addvar VAR_RESULT, 133
-	giveitem_std VAR_RESULT
+	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
@@ -28,7 +28,7 @@ Route114_EventScript_150782:: @ 8150782
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
-	giveitem_std ITEM_TM05_ROAR
+	giveitem ITEM_TM05_ROAR
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM05
@@ -64,27 +64,27 @@ Route114_EventScript_1507E8:: @ 81507E8
 	end
 
 Route114_EventScript_1507F1:: @ 81507F1
-	trainerbattle 0, TRAINER_LENNY, 0, Route114_Text_1BC05B, Route114_Text_1BC0B5
+	trainerbattle_single TRAINER_LENNY, Route114_Text_1BC05B, Route114_Text_1BC0B5
 	msgbox Route114_Text_1BC0C3, 6
 	end
 
 Route114_EventScript_150808:: @ 8150808
-	trainerbattle 0, TRAINER_LUCAS_1, 0, Route114_Text_1BC125, Route114_Text_1BC163
+	trainerbattle_single TRAINER_LUCAS_1, Route114_Text_1BC125, Route114_Text_1BC163
 	msgbox Route114_Text_1BC184, 6
 	end
 
 Route114_EventScript_15081F:: @ 815081F
-	trainerbattle 0, TRAINER_SHANE, 0, Route114_Text_1BC1C8, Route114_Text_1BC23F
+	trainerbattle_single TRAINER_SHANE, Route114_Text_1BC1C8, Route114_Text_1BC23F
 	msgbox Route114_Text_1BC24F, 6
 	end
 
 Route114_EventScript_150836:: @ 8150836
-	trainerbattle 0, TRAINER_NANCY, 0, Route114_Text_1BC289, Route114_Text_1BC2BE
+	trainerbattle_single TRAINER_NANCY, Route114_Text_1BC289, Route114_Text_1BC2BE
 	msgbox Route114_Text_1BC2C6, 6
 	end
 
 Route114_EventScript_15084D:: @ 815084D
-	trainerbattle 0, TRAINER_STEVE_1, 0, Route114_Text_1BC2F5, Route114_Text_1BC327
+	trainerbattle_single TRAINER_STEVE_1, Route114_Text_1BC2F5, Route114_Text_1BC327
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route114_EventScript_150874
@@ -92,12 +92,12 @@ Route114_EventScript_15084D:: @ 815084D
 	end
 
 Route114_EventScript_150874:: @ 8150874
-	trainerbattle 5, TRAINER_STEVE_1, 0, Route114_Text_1BC3B3, Route114_Text_1BC3E0
+	trainerbattle_rematch TRAINER_STEVE_1, Route114_Text_1BC3B3, Route114_Text_1BC3E0
 	msgbox Route114_Text_1BC40F, 6
 	end
 
 Route114_EventScript_15088B:: @ 815088B
-	trainerbattle 0, TRAINER_BERNIE_1, 0, Route114_Text_1BC45A, Route114_Text_1BC499
+	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_1BC45A, Route114_Text_1BC499
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route114_EventScript_1508B2
@@ -105,26 +105,26 @@ Route114_EventScript_15088B:: @ 815088B
 	end
 
 Route114_EventScript_1508B2:: @ 81508B2
-	trainerbattle 5, TRAINER_BERNIE_1, 0, Route114_Text_1BC525, Route114_Text_1BC559
+	trainerbattle_rematch TRAINER_BERNIE_1, Route114_Text_1BC525, Route114_Text_1BC559
 	msgbox Route114_Text_1BC58C, 6
 	end
 
 Route114_EventScript_1508C9:: @ 81508C9
-	trainerbattle 0, TRAINER_CLAUDE, 0, Route114_Text_1BC5FC, Route114_Text_1BC653
+	trainerbattle_single TRAINER_CLAUDE, Route114_Text_1BC5FC, Route114_Text_1BC653
 	msgbox Route114_Text_1BC679, 6
 	end
 
 Route114_EventScript_1508E0:: @ 81508E0
-	trainerbattle 0, TRAINER_NOLAN, 0, Route114_Text_1BC6EC, Route114_Text_1BC750
+	trainerbattle_single TRAINER_NOLAN, Route114_Text_1BC6EC, Route114_Text_1BC750
 	msgbox Route114_Text_1BC78A, 6
 	end
 
 Route114_EventScript_1508F7:: @ 81508F7
-	trainerbattle 4, TRAINER_TYRA_AND_IVY, 0, Route114_Text_1BC7E3, Route114_Text_1BC834, Route114_Text_1BC88A
+	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_1BC7E3, Route114_Text_1BC834, Route114_Text_1BC88A
 	msgbox Route114_Text_1BC858, 6
 	end
 
 Route114_EventScript_150912:: @ 8150912
-	trainerbattle 4, TRAINER_TYRA_AND_IVY, 0, Route114_Text_1BC8D8, Route114_Text_1BC8FB, Route114_Text_1BC96A
+	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_1BC8D8, Route114_Text_1BC8FB, Route114_Text_1BC96A
 	msgbox Route114_Text_1BC91E, 6
 	end

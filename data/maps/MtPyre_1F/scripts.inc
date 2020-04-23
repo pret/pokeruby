@@ -6,7 +6,7 @@ MtPyre_1F_EventScript_15D323:: @ 815D323
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CLEANSE_TAG, MtPyre_1F_EventScript_15D352
 	msgbox MtPyre_1F_Text_196151, 4
-	giveitem_std ITEM_CLEANSE_TAG
+	giveitem ITEM_CLEANSE_TAG
 	compare VAR_RESULT, 0
 	goto_if_eq MtPyre_1F_EventScript_1A029B
 	setflag FLAG_RECEIVED_CLEANSE_TAG

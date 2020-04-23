@@ -84,14 +84,14 @@ SootopolisCity_EventScript_14D196:: @ 814D196
 SootopolisCity_EventScript_14D19F:: @ 814D19F
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS, SootopolisCity_EventScript_14D241
 	msgbox SootopolisCity_Text_1C63F2, 4
 	random 10
 	addvar VAR_RESULT, 20
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
-	giveitem_std VAR_RESULT
+	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
@@ -104,7 +104,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	end
 
 SootopolisCity_EventScript_14D1FF:: @ 814D1FF
-	giveitem_std ITEM_FIGY_BERRY
+	giveitem ITEM_FIGY_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
@@ -112,7 +112,7 @@ SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 	end
 
 SootopolisCity_EventScript_14D220:: @ 814D220
-	giveitem_std ITEM_IAPAPA_BERRY
+	giveitem ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4

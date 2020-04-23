@@ -4,7 +4,7 @@ MossdeepCity_SpaceCenter_1F_MapScripts:: @ 815AB8A
 MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
@@ -34,7 +34,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, 4
-	giveitem_std ITEM_SUN_STONE
+	giveitem ITEM_SUN_STONE
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_1A029B
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP

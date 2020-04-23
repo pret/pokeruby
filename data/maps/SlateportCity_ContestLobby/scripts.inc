@@ -105,7 +105,7 @@ SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, 4
-	giveitem_std ITEM_POKEBLOCK_CASE
+	giveitem ITEM_POKEBLOCK_CASE
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	releaseall
 	end
@@ -117,7 +117,7 @@ SlateportCity_ContestLobby_EventScript_155526:: @ 8155526
 SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
 	lockall
 	fadescreen 1
-	drawcontestwinner 3
+	showcontestwinner 3
 	releaseall
 	end
 

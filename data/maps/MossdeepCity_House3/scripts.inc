@@ -9,7 +9,7 @@ MossdeepCity_House3_EventScript_15A972:: @ 815A972
 	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_House3_EventScript_15A9BB
 	msgbox MossdeepCity_House3_Text_18D9A9, 4
-	giveitem_std ITEM_SUPER_ROD
+	giveitem ITEM_SUPER_ROD
 	setflag FLAG_RECEIVED_SUPER_ROD
 	msgbox MossdeepCity_House3_Text_18D9E3, 4
 	release

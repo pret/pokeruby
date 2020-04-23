@@ -12,26 +12,26 @@ Route105_EventScript_14F2A8:: @ 814F2A8
 	return
 
 Route105_EventScript_14F2BB:: @ 814F2BB
-	trainerbattle 0, TRAINER_FOSTER, 0, Route105_Text_1B8B40, Route105_Text_1B8B93
+	trainerbattle_single TRAINER_FOSTER, Route105_Text_1B8B40, Route105_Text_1B8B93
 	msgbox Route105_Text_1B8BDE, 6
 	end
 
 Route105_EventScript_14F2D2:: @ 814F2D2
-	trainerbattle 0, TRAINER_LUIS, 0, Route105_Text_1B8C28, Route105_Text_1B8C99
+	trainerbattle_single TRAINER_LUIS, Route105_Text_1B8C28, Route105_Text_1B8C99
 	msgbox Route105_Text_1B8CA9, 6
 	end
 
 Route105_EventScript_14F2E9:: @ 814F2E9
-	trainerbattle 0, TRAINER_AUSTIN, 0, Route105_Text_1B8CEE, Route105_Text_1B8D23
+	trainerbattle_single TRAINER_AUSTIN, Route105_Text_1B8CEE, Route105_Text_1B8D23
 	msgbox Route105_Text_1B8D45, 6
 	end
 
 Route105_EventScript_14F300:: @ 814F300
-	trainerbattle 0, TRAINER_BEVERLY, 0, Route105_Text_1B8D99, Route105_Text_1B8DDD
+	trainerbattle_single TRAINER_BEVERLY, Route105_Text_1B8D99, Route105_Text_1B8DDD
 	msgbox Route105_Text_1B8DED, 6
 	end
 
 Route105_EventScript_14F317:: @ 814F317
-	trainerbattle 0, TRAINER_DAWN, 0, Route105_Text_1B8E66, Route105_Text_1B8EA0
+	trainerbattle_single TRAINER_DAWN, Route105_Text_1B8E66, Route105_Text_1B8EA0
 	msgbox Route105_Text_1B8EBD, 6
 	end

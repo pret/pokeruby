@@ -19,7 +19,7 @@ Route118_EventScript_150F34:: @ 8150F34
 
 Route118_EventScript_150F5E:: @ 8150F5E
 	msgbox Route118_Text_170F46, 4
-	giveitem_std ITEM_GOOD_ROD
+	giveitem ITEM_GOOD_ROD
 	setflag FLAG_RECEIVED_GOOD_ROD
 	msgbox Route118_Text_170F7E, 4
 	release
@@ -159,7 +159,7 @@ Route118_Movement_151086:: @ 8151086
 	end_movement
 
 Route118_EventScript_15108F:: @ 815108F
-	trainerbattle 0, TRAINER_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
+	trainerbattle_single TRAINER_ROSE_1, Route118_Text_1BDFF4, Route118_Text_1BE03C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_1510B6
@@ -167,22 +167,22 @@ Route118_EventScript_15108F:: @ 815108F
 	end
 
 Route118_EventScript_1510B6:: @ 81510B6
-	trainerbattle 5, TRAINER_ROSE_1, 0, Route118_Text_1BE0AB, Route118_Text_1BE0D3
+	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_1BE0AB, Route118_Text_1BE0D3
 	msgbox Route118_Text_1BE104, 6
 	end
 
 Route118_EventScript_1510CD:: @ 81510CD
-	trainerbattle 0, TRAINER_BARNY, 0, Route118_Text_1BE24A, Route118_Text_1BE291
+	trainerbattle_single TRAINER_BARNY, Route118_Text_1BE24A, Route118_Text_1BE291
 	msgbox Route118_Text_1BE2BE, 6
 	end
 
 Route118_EventScript_1510E4:: @ 81510E4
-	trainerbattle 0, TRAINER_WADE, 0, Route118_Text_1BE318, Route118_Text_1BE385
+	trainerbattle_single TRAINER_WADE, Route118_Text_1BE318, Route118_Text_1BE385
 	msgbox Route118_Text_1BE39C, 6
 	end
 
 Route118_EventScript_1510FB:: @ 81510FB
-	trainerbattle 0, TRAINER_DALTON_1, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
+	trainerbattle_single TRAINER_DALTON_1, Route118_Text_1BE3E8, Route118_Text_1BE406
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_151122
@@ -190,16 +190,16 @@ Route118_EventScript_1510FB:: @ 81510FB
 	end
 
 Route118_EventScript_151122:: @ 8151122
-	trainerbattle 5, TRAINER_DALTON_1, 0, Route118_Text_1BE489, Route118_Text_1BE4CC
+	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_1BE489, Route118_Text_1BE4CC
 	msgbox Route118_Text_1BE4D9, 6
 	end
 
 Route118_EventScript_151139:: @ 8151139
-	trainerbattle 0, TRAINER_PERRY, 0, Route118_Text_1BE148, Route118_Text_1BE188
+	trainerbattle_single TRAINER_PERRY, Route118_Text_1BE148, Route118_Text_1BE188
 	msgbox Route118_Text_1BE19D, 6
 	end
 
 Route118_EventScript_151150:: @ 8151150
-	trainerbattle 0, TRAINER_CHESTER, 0, Route118_Text_1BE1D7, Route118_Text_1BE1F5
+	trainerbattle_single TRAINER_CHESTER, Route118_Text_1BE1D7, Route118_Text_1BE1F5
 	msgbox Route118_Text_1BE20D, 6
 	end

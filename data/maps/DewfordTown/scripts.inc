@@ -83,7 +83,7 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 
 DewfordTown_EventScript_14E0F0:: @ 814E0F0
 	msgbox DewfordTown_Text_16B6A8, 4
-	giveitem_std ITEM_OLD_ROD
+	giveitem ITEM_OLD_ROD
 	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_16B6F9, 4
 	release

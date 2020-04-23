@@ -32,7 +32,7 @@ AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
 	playse SE_PIN
-	takeitem ITEM_STORAGE_KEY, 1
+	removeitem ITEM_STORAGE_KEY, 1
 	setflag FLAG_USED_STORAGE_KEY
 	call AbandonedShip_Corridors_B1F_EventScript_15E9C0
 	special DrawWholeMapView
@@ -50,6 +50,6 @@ AbandonedShip_Corridors_B1F_EventScript_15EA14:: @ 815EA14
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_15EA1E:: @ 815EA1E
-	trainerbattle 0, TRAINER_DUNCAN, 0, AbandonedShip_Corridors_B1F_Text_19856F, AbandonedShip_Corridors_B1F_Text_1985C5
+	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_19856F, AbandonedShip_Corridors_B1F_Text_1985C5
 	msgbox AbandonedShip_Corridors_B1F_Text_1985D7, 6
 	end

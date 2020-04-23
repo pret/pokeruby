@@ -258,8 +258,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
-	takeitem VAR_0x8008, 1
-	giveitem_std VAR_0x8009
+	removeitem VAR_0x8008
+	giveitem VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare VAR_TEMP_1, 0

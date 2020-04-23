@@ -273,7 +273,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C33:: @ 81B6C33
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
 	goto_if_set FLAG_RECEIVED_AMULET_COIN, LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, 4
-	giveitem_std ITEM_AMULET_COIN
+	giveitem ITEM_AMULET_COIN
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, 4
@@ -379,7 +379,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, 4
-	giveitem_std ITEM_SS_TICKET
+	giveitem ITEM_SS_TICKET
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, 4
 	closemessage
 	compare VAR_0x8008, 0

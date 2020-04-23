@@ -25,7 +25,7 @@ MagmaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 
 AquaHideout_B2F_EventScript_15D8E1:: @ 815D8E1
 MagmaHideout_B2F_EventScript_15D8E1:: @ 815D8E1
-	trainerbattle 2, TRAINER_HIDEOUT_B2F_GRUNT_1, 0, AquaHideout_B2F_Text_197093, AquaHideout_B2F_Text_197145, AquaHideout_B2F_EventScript_15D8FD
+	trainerbattle_single TRAINER_HIDEOUT_B2F_GRUNT_1, AquaHideout_B2F_Text_197093, AquaHideout_B2F_Text_197145, AquaHideout_B2F_EventScript_15D8FD
 	msgbox AquaHideout_B2F_Text_1971AE, 4
 	release
 	end
@@ -85,7 +85,7 @@ AquaHideout_B2F_Movement_15D95D:: @ 815D95D
 
 AquaHideout_B2F_EventScript_15D962:: @ 815D962
 MagmaHideout_B2F_EventScript_15D962:: @ 815D962
-	trainerbattle 2, TRAINER_HIDEOUT_B2F_GRUNT_2, 0, AquaHideout_B2F_Text_197270, AquaHideout_B2F_Text_1972AC, AquaHideout_B2F_EventScript_15D97D
+	trainerbattle_single TRAINER_HIDEOUT_B2F_GRUNT_2, AquaHideout_B2F_Text_197270, AquaHideout_B2F_Text_1972AC, AquaHideout_B2F_EventScript_15D97D
 	msgbox AquaHideout_B2F_Text_1972D2, 6
 	end
 
@@ -96,6 +96,6 @@ AquaHideout_B2F_EventScript_15D97D:: @ 815D97D
 
 AquaHideout_B2F_EventScript_15D987:: @ 815D987
 MagmaHideout_B2F_EventScript_15D987:: @ 815D987
-	trainerbattle 0, TRAINER_HIDEOUT_B2F_GRUNT_3, 0, AquaHideout_B2F_Text_1972EF, AquaHideout_B2F_Text_197390
+	trainerbattle_single TRAINER_HIDEOUT_B2F_GRUNT_3, AquaHideout_B2F_Text_1972EF, AquaHideout_B2F_Text_197390
 	msgbox AquaHideout_B2F_Text_1973C0, 6
 	end

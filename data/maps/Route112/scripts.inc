@@ -32,12 +32,12 @@ Route112_EventScript_150540:: @ 8150540
 	end
 
 Route112_EventScript_150549:: @ 8150549
-	trainerbattle 0, TRAINER_BRICE, 0, Route112_Text_1BB619, Route112_Text_1BB655
+	trainerbattle_single TRAINER_BRICE, Route112_Text_1BB619, Route112_Text_1BB655
 	msgbox Route112_Text_1BB667, 6
 	end
 
 Route112_EventScript_150560:: @ 8150560
-	trainerbattle 0, TRAINER_TRENT_1, 0, Route112_Text_1BB6A0, Route112_Text_1BB707
+	trainerbattle_single TRAINER_TRENT_1, Route112_Text_1BB6A0, Route112_Text_1BB707
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route112_EventScript_150587
@@ -45,16 +45,16 @@ Route112_EventScript_150560:: @ 8150560
 	end
 
 Route112_EventScript_150587:: @ 8150587
-	trainerbattle 5, TRAINER_TRENT_1, 0, Route112_Text_1BB7C7, Route112_Text_1BB801
+	trainerbattle_rematch TRAINER_TRENT_1, Route112_Text_1BB7C7, Route112_Text_1BB801
 	msgbox Route112_Text_1BB819, 6
 	end
 
 Route112_EventScript_15059E:: @ 815059E
-	trainerbattle 0, TRAINER_LARRY, 0, Route112_Text_1BB893, Route112_Text_1BB8B6
+	trainerbattle_single TRAINER_LARRY, Route112_Text_1BB893, Route112_Text_1BB8B6
 	msgbox Route112_Text_1BB8BE, 6
 	end
 
 Route112_EventScript_1505B5:: @ 81505B5
-	trainerbattle 0, TRAINER_CAROL, 0, Route112_Text_1BB8F0, Route112_Text_1BB942
+	trainerbattle_single TRAINER_CAROL, Route112_Text_1BB8F0, Route112_Text_1BB942
 	msgbox Route112_Text_1BB958, 6
 	end

@@ -48,7 +48,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157835
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, 4
-	giveitem_std ITEM_LETTER
+	giveitem ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, 4
 	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_3F_Text_183422
@@ -157,7 +157,7 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 
 RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18353E, 4
-	giveitem_std ITEM_EXP_SHARE
+	giveitem ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1A029B
 	setflag FLAG_RECEIVED_EXP_SHARE

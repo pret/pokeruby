@@ -22,7 +22,7 @@ Route113_GlassWorkshop_EventScript_163565:: @ 8163565
 	compare VAR_GLASS_WORKSHOP_STATE, 1
 	goto_if_eq Route113_GlassWorkshop_EventScript_1635AB
 	msgbox Route113_GlassWorkshop_Text_19E4E6, 4
-	giveitem_std ITEM_SOOT_SACK
+	giveitem ITEM_SOOT_SACK
 	setvar VAR_GLASS_WORKSHOP_STATE, 1
 	msgbox Route113_GlassWorkshop_Text_19E59B, 4
 	release
@@ -210,13 +210,13 @@ Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	end
 
 Route113_GlassWorkshop_EventScript_163889:: @ 8163889
-	giveitem_std VAR_0x8008
+	giveitem VAR_0x8008
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_1638B4
 	return
 
 Route113_GlassWorkshop_EventScript_1638A1:: @ 81638A1
-	givedecoration_std VAR_0x8008
+	givedecoration VAR_0x8008
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_1638C3
 	return
