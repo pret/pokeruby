@@ -51,9 +51,10 @@ static void sub_80BCBC0(u8);
 static void sub_80BCBF8(u8 taskId);
 static void sub_80BCC54(u8 taskId);
 static void Task_SecretBasePC_Registry(u8 taskId);
+static u8 GetSecretBaseOwnerType(u8 secretBaseIndex);
 
-extern u8 gUnknown_0815F399[];
-extern u8 gUnknown_0815F49A[];
+extern u8 SecretBase_EventScript_PCCancel[];
+extern u8 SecretBase_EventScript_ShowRegisterMenu[];
 EWRAM_DATA u8 gCurrentSecretBaseId = 0;
 
 const struct
@@ -108,8 +109,19 @@ const struct YesNoFuncTable gUnknown_083D13E4 = {
     sub_80BCBC0
 };
 
-const u8 gUnknown_083D13EC[] = {
-    0x23,0x24,0xF,0x1F,0x21,0x2F,0xE,0x14,0x20,0x22,0x0,0x0
+static const u8 sSecretBaseOwnerGfxIds[] = {
+    // Male
+    OBJ_EVENT_GFX_YOUNGSTER,
+    OBJ_EVENT_GFX_BUG_CATCHER,
+    OBJ_EVENT_GFX_BOY_4,
+    OBJ_EVENT_GFX_CAMPER,
+    OBJ_EVENT_GFX_MAN_4,
+    // Female
+    OBJ_EVENT_GFX_LASS,
+    OBJ_EVENT_GFX_GIRL_3,
+    OBJ_EVENT_GFX_WOMAN_3,
+    OBJ_EVENT_GFX_PICNICKER,
+    OBJ_EVENT_GFX_WOMAN_7,
 };
 
 extern u8 gUnknown_081A2E14[];
@@ -381,7 +393,7 @@ void sub_80BBAF0(void)
 
 bool8 sub_80BBB24(void)
 {
-    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_0x4097) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_INIT_SECRET_BASE) == 0)
         return FALSE;
     return TRUE;
 }
@@ -463,7 +475,7 @@ void sub_80BBCCC(u8 flagIn)
             sub_80BB764(&x, &y, 0x220);
             MapGridSetMetatileIdAt(x + 7, y + 7, 0xe21);
         }
-        else if (flagIn == 1 && VarGet(VAR_0x4089) == 1)
+        else if (flagIn == 1 && VarGet(VAR_SECRET_BASE_INITIALIZED) == 1)
         {
             sub_80BB764(&x, &y, 0x220);
             MapGridSetMetatileIdAt(x + 7, y + 7, 0xe0a);
@@ -528,10 +540,10 @@ void sub_80BBDD0(void)
     }
 }
 
-void sub_80BBFA4(void)
+void SetSecretBaseOwnerGfxId(void)
 {
     int curBase = VarGet(VAR_CURRENT_SECRET_BASE);
-    VarSet(VAR_OBJ_GFX_ID_F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
+    VarSet(VAR_OBJ_GFX_ID_F, sSecretBaseOwnerGfxIds[GetSecretBaseOwnerType(curBase)]);
 }
 
 void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEvents *events)
@@ -705,7 +717,7 @@ void sub_80BC440(void)
     sub_80BC0F8();
 }
 
-void SecretBasePC_PackUp(void)
+void MoveOutOfSecretBase(void)
 {
     IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
     sub_80BC440();
@@ -766,7 +778,7 @@ u8 sub_80BC538(void)
     return retVal;
 }
 
-void sub_80BC56C(void)
+void GetCurSecretBaseRegistrationValidity(void)
 {
     if (sub_80BC268(sub_80BC14C(gCurrentSecretBaseId)) == TRUE)
         gSpecialVar_Result = 1;
@@ -776,10 +788,10 @@ void sub_80BC56C(void)
         gSpecialVar_Result = 0;
 }
 
-void sub_80BC5BC(void)
+void ToggleCurSecretBaseRegistry(void)
 {
     gSaveBlock1.secretBases[sub_80BC14C(gCurrentSecretBaseId)].sbr_field_1_6 ^= 1;
-    FlagSet(FLAG_DECORATION_16);
+    FlagSet(FLAG_SECRET_BASE_REGISTRY_ENABLED);
 }
 
 void SecretBasePC_Decoration(void)
@@ -1077,14 +1089,14 @@ void sub_80BCC54(u8 taskId)
     DestroyVerticalScrollIndicator(BOTTOM_ARROW);
 
     if (curBaseIndex == 0)
-        ScriptContext1_SetupScript(gUnknown_0815F399);
+        ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
     else
-        ScriptContext1_SetupScript(gUnknown_0815F49A);
+        ScriptContext1_SetupScript(SecretBase_EventScript_ShowRegisterMenu);
 
     DestroyTask(taskId);
 }
 
-u8 sub_80BCCA4(u8 secretBaseIndex)
+static u8 GetSecretBaseOwnerType(u8 secretBaseIndex)
 {
     return (gSaveBlock1.secretBases[secretBaseIndex].playerName[OT_NAME_LENGTH] % 5) 
         + gSaveBlock1.secretBases[secretBaseIndex].gender * 5;
@@ -1092,7 +1104,7 @@ u8 sub_80BCCA4(u8 secretBaseIndex)
 
 const u8 *GetSecretBaseTrainerLoseText(void)
 {
-    u8 param = sub_80BCCA4(VarGet(VAR_CURRENT_SECRET_BASE));
+    u8 param = GetSecretBaseOwnerType(VarGet(VAR_CURRENT_SECRET_BASE));
     if (param == 0) return UnknownString_81A1BB2;
     if (param == 1) return UnknownString_81A1F67;
     if (param == 2) return UnknownString_81A2254;
@@ -1148,7 +1160,7 @@ void sub_80BCE90()
         FlagSet(FLAG_DAILY_UNKNOWN_8C2);
     }
 
-    gSpecialVar_0x8004 = sub_80BCCA4(curBaseIndex);
+    gSpecialVar_0x8004 = GetSecretBaseOwnerType(curBaseIndex);
     gSpecialVar_Result = gSaveBlock1.secretBases[curBaseIndex].sbr_field_1_5;
 }
 

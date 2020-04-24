@@ -18,10 +18,10 @@ gSpecials::
 	def_special CheckPlayerHasSecretBase
 	def_special sub_80BBAF0
 	def_special sub_80BC440
-	def_special SecretBasePC_PackUp
+	def_special MoveOutOfSecretBase
 	def_special sub_80BC114
-	def_special sub_80BC56C
-	def_special sub_80BC5BC
+	def_special GetCurSecretBaseRegistrationValidity
+	def_special ToggleCurSecretBaseRegistry
 	def_special SecretBasePC_Decoration
 	def_special SecretBasePC_Registry
 	def_special sub_80BCE1C
@@ -30,7 +30,7 @@ gSpecials::
 	def_special sub_80FF474
 	def_special sub_8100B20
 	def_special sub_80BB70C
-	def_special sub_80BBFA4
+	def_special SetSecretBaseOwnerGfxId
 	def_special sub_8100A7C
 	def_special sub_80BBC78
 	def_special sub_80BCE4C

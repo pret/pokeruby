@@ -51,11 +51,11 @@ gSpecialVars::
 gStdScripts::
 	.4byte Std_ObtainItem
 	.4byte Std_FindItem
-	.4byte Std_2
-	.4byte Std_3
-	.4byte Std_4
-	.4byte Std_5
-	.4byte Std_6
+	.4byte Std_MsgboxNPC
+	.4byte Std_MsgboxSign
+	.4byte Std_MsgboxDefault
+	.4byte Std_MsgboxYesNo
+	.4byte Std_MsgboxAutoclose
 	.4byte Std_ObtainDecoration
 gStdScripts_End::
 
@@ -375,198 +375,7 @@ gStdScripts_End::
 	.include "data/maps/ShoalCave_LowTideIceRoom/scripts.inc"
 	.include "data/maps/SkyPillar_5F/scripts.inc"
 	.include "data/maps/SkyPillar_Top/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave1/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave2/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave3/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave4/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave1/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave2/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave3/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave4/scripts.inc"
-	.include "data/maps/SecretBase_RedCave1/scripts.inc"
-	.include "data/maps/SecretBase_RedCave2/scripts.inc"
-	.include "data/maps/SecretBase_RedCave3/scripts.inc"
-	.include "data/maps/SecretBase_RedCave4/scripts.inc"
-	.include "data/maps/SecretBase_Shrub1/scripts.inc"
-	.include "data/maps/SecretBase_Shrub2/scripts.inc"
-	.include "data/maps/SecretBase_Shrub3/scripts.inc"
-	.include "data/maps/SecretBase_Shrub4/scripts.inc"
-	.include "data/maps/SecretBase_Tree1/scripts.inc"
-	.include "data/maps/SecretBase_Tree2/scripts.inc"
-	.include "data/maps/SecretBase_Tree3/scripts.inc"
-	.include "data/maps/SecretBase_Tree4/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave1/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave2/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave3/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave4/scripts.inc"
-
-gUnknown_0815F36C:: @ 815F36C
-	lockall
-	playse SE_PC_LOGON
-	message UnknownString_81A3A72
-	dofieldeffect FLDEFF_SECRET_BASE_PC_TURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto EventScript_15F384
-	end
-
-EventScript_15F384:
-	message UnknownString_81A3A87
-	waitmessage
-	goto_if_set FLAG_DECORATION_16, EventScript_15F3A0
-	goto EventScript_15F3E2
-	end
-
-gUnknown_0815F399:: @ 815F399
-	lockall
-	goto EventScript_15F384
-	end
-
-EventScript_15F3A0:
-	multichoice 0, 0, 6, 0
-	switch VAR_RESULT
-	case 0, EventScript_15F432
-	case 1, EventScript_15F419
-	case 2, EventScript_15F436
-	case 3, EventScript_15F51D
-	case 127, EventScript_15F51D
-	end
-
-EventScript_15F3E2:
-	multichoice 0, 0, 5, 0
-	switch VAR_RESULT
-	case 0, EventScript_15F432
-	case 1, EventScript_15F419
-	case 2, EventScript_15F51D
-	case 127, EventScript_15F51D
-	end
-
-EventScript_15F419:
-	msgbox UnknownString_81A38FB, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_15F384
-	closemessage
-	special SecretBasePC_PackUp
-	releaseall
-	end
-
-EventScript_15F432:
-	special SecretBasePC_Decoration
-	end
-
-EventScript_15F436:
-	special SecretBasePC_Registry
-	end
-
-gUnknown_0815F43A:: @ 815F43A
-	lockall
-	message UnknownString_81A3A72
-	playse SE_PC_LOGON
-	dofieldeffect FLDEFF_SECRET_BASE_PC_TURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto EventScript_15F452
-	end
-
-EventScript_15F452:
-	message UnknownString_81A3A87
-	waitmessage
-	multichoice 0, 0, 7, 0
-	switch VAR_RESULT
-	case 0, EventScript_15F4A1
-	case 1, EventScript_15F436
-	case 2, EventScript_15F511
-	case 3, EventScript_15F51D
-	case 127, EventScript_15F51D
-	end
-
-gUnknown_0815F49A:: @ 815F49A
-	lockall
-	goto EventScript_15F452
-	end
-
-EventScript_15F4A1:
-	special sub_80BC56C
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_15F4E0
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_15F503
-	special BufferSecretBaseOwnerName
-	msgbox UnknownString_81A3958, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_15F452
-	msgbox UnknownString_81A3A22, MSGBOX_SIGN
-	special sub_80BC5BC
-	special DoSecretBasePCTurnOffEffect
-	releaseall
-	end
-
-EventScript_15F4E0:
-	msgbox UnknownString_81A3982, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_15F452
-	msgbox UnknownString_81A3A3A, MSGBOX_SIGN
-	special sub_80BC5BC
-	special DoSecretBasePCTurnOffEffect
-	releaseall
-	end
-
-EventScript_15F503:
-	msgbox UnknownString_81A39C0, MSGBOX_SIGN
-	special DoSecretBasePCTurnOffEffect
-	closemessage
-	releaseall
-	end
-
-EventScript_15F511:
-	message UnknownString_81A3AA2
-	waitmessage
-	goto EventScript_15F452
-	end
-
-EventScript_15F51D:
-	special DoSecretBasePCTurnOffEffect
-	closemessage
-	releaseall
-	end
-
-gUnknown_0815F523:: @ 815F523
-	dofieldeffect FLDEFF_SAND_PILLAR
-	waitstate
-	end
-
-gUnknown_0815F528:: @ 815F528
-	special GetShieldToyTVDecorationInfo
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_15F558
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_15F561
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_15F56A
-	compare VAR_RESULT, 3
-	goto_if_eq EventScript_15F573
-	end
-
-EventScript_15F558:
-	msgbox UnknownString_81A3B5B, MSGBOX_SIGN
-	end
-
-EventScript_15F561:
-	msgbox UnknownString_81A3BA4, MSGBOX_SIGN
-	end
-
-EventScript_15F56A:
-	msgbox UnknownString_81A3BE8, MSGBOX_SIGN
-	end
-
-EventScript_15F573:
-	msgbox UnknownString_81A3C31, MSGBOX_SIGN
-	end
-
+	.include "data/scripts/shared_secret_base.inc"
 	.include "data/maps/SingleBattleColosseum/scripts.inc"
 	.include "data/maps/TradeCenter/scripts.inc"
 	.include "data/maps/RecordCorner/scripts.inc"
@@ -902,7 +711,7 @@ UnknownString_819C21F: @ 819C21F
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/text.inc"
 
 
-Std_2:
+Std_MsgboxNPC:
 	lock
 	faceplayer
 	message 0x0
@@ -911,7 +720,7 @@ Std_2:
 	release
 	return
 
-Std_3:
+Std_MsgboxSign:
 	lockall
 	message 0x0
 	waitmessage
@@ -919,13 +728,13 @@ Std_3:
 	releaseall
 	return
 
-Std_4:
+Std_MsgboxDefault:
 	message 0x0
 	waitmessage
 	waitbuttonpress
 	return
 
-Std_5:
+Std_MsgboxYesNo:
 	message 0x0
 	waitmessage
 	yesnobox 20, 8
@@ -1075,7 +884,7 @@ EventScript_19F934:
 EventScript_19F936:
 	gotobeatenscript
 
-Std_6::
+Std_MsgboxAutoclose::
 	message 0x0
 	waitmessage
 	waitbuttonpress
@@ -3734,21 +3543,21 @@ EventScript_1A2DAA:
 EventScript_1A2DB8:
 	closemessage
 	playse SE_KAIDAN
-	setvar VAR_0x4097, 0
+	setvar VAR_INIT_SECRET_BASE, 0
 	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
 	special sub_80BBAF0
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_80BBDD0
-	setvar VAR_0x4089, 1
+	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	waitstate
 	end
 
-SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
+SecretBase_EventScript_FirstEntrance:: @ 81A2DDE
 	applymovement 255, SecretBase_RedCave1_Movement_1A2E11
 	waitmovement 0
-	setvar VAR_0x4097, 1
+	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_RedCave1_Text_198F89, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
@@ -3771,21 +3580,21 @@ SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 
 gUnknown_081A2E14:: @ 81A2E14
 	lockall
-	setvar VAR_0x4097, 1
+	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_KAIDAN
 	special sub_80BC114
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1A2E38
 	clearflag FLAG_DECORATION_1
 	special sub_80BBAF0
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
 EventScript_1A2E38:
 	setflag FLAG_DECORATION_1
 	special sub_80BBAF0
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
@@ -3800,7 +3609,7 @@ AskToMoveSecretBase:
 	msgbox UnknownString_81A3C71, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	msgbox UnknownString_81A38FB, MSGBOX_YESNO
+	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	fadescreen 1
@@ -3850,9 +3659,7 @@ EventScript_1A2F3A::
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
-LittlerootTown_MaysHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
-SecretBase_RedCave1_EventScript_1A2F3D:: @ 81A2F3D
+SecretBase_EventScript_SetDecorationFlags:: @ 81A2F3D
 	setflag FLAG_DECORATION_2
 	setflag FLAG_DECORATION_3
 	setflag FLAG_DECORATION_4
@@ -3869,13 +3676,11 @@ SecretBase_RedCave1_EventScript_1A2F3D:: @ 81A2F3D
 	setflag FLAG_DECORATION_15
 	return
 
-LittlerootTown_BrendansHouse_2F_EventScript_1A2F68:: @ 81A2F68
-LittlerootTown_MaysHouse_2F_EventScript_1A2F68:: @ 81A2F68
-SecretBase_RedCave1_EventScript_1A2F68:: @ 81A2F68
+SecretBase_EventScript_InitDecorations:: @ 81A2F68
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_80BBDD0
-	setvar VAR_0x4089, 1
+	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	end
 
 gUnknown_081A2F7B:: @ 81A2F7B
@@ -4307,43 +4112,43 @@ SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	.include "data/text/secret_power_tm.inc"
 	.include "data/scripts/secret_power_tm.inc"
 
-UnknownString_81A38FB: @ 81A38FB
+SecretBase_Text_AllDecorationsWillBeReturned: @ 81A38FB
 	.string "Alle Dekorationsgegenstände und das\n"
 	.string "Mobiliar aus deiner GEHEIMBASIS werden\l"
 	.string "auf deinen PC gesendet.\p"
 	.string "Einverstanden?$"
 
-UnknownString_81A3958: @ 81A3958
+SecretBase_Text_WantToRegisterSecretBase: @ 81A3958
 	.string "Möchtest du GEHEIMBASIS von\n"
 	.string "{STR_VAR_1} eintragen?$"
 
-UnknownString_81A3982: @ 81A3982
+SecretBase_Text_AlreadyRegisteredDelete: @ 81A3982
 	.string "Diese Daten wurden bereits\n"
 	.string "eingetragen. Möchtest du sie löschen?$"
 
-UnknownString_81A39C0: @ 81A39C0
+SecretBase_Text_TooManyBasesDeleteSome: @ 81A39C0
 	.string "Bis zu 10 Orte können eingetragen\n"
 	.string "werden.\p"
 	.string "Lösche einen Ort, um einen neuen\n"
 	.string "eintragen zu können.$"
 
-UnknownString_81A3A22: @ 81A3A22
+SecretBase_Text_RegistrationCompleted: @ 81A3A22
 	.string "Registrierung abgeschlossen.$"
 
-UnknownString_81A3A3A: @ 81A3A3A
+SecretBase_Text_DataUnregistered: @ 81A3A3A
 	.string "Daten wurden aus der Registrierung\n"
 	.string "genommen.$"
 
 UnknownString_81A3A56: @ 81A3A56
 	.string "Es sind keine Dekorationen vorhanden.$"
 
-UnknownString_81A3A72: @ 81A3A72
+SecretBase_Text_BootUpPC: @ 81A3A72
 	.string "{PLAYER} schaltet den PC ein.$"
 
-UnknownString_81A3A87: @ 81A3A87
+SecretBase_Text_WhatWouldYouLikeToDo: @ 81A3A87
 	.string "Was möchtest du tun?$"
 
-UnknownString_81A3AA2: @ 81A3AA2
+SecretBase_Text_RegistryInfo: @ 81A3AA2
 	.string "Die eingetragene GEHEIMBASIS bleibt\n"
 	.string "erhalten, bis der Eigentümer umzieht.\p"
 	.string "Wird sie aus dem Grundbuch ent-\n"
@@ -4352,22 +4157,22 @@ UnknownString_81A3AA2: @ 81A3AA2
 	.string "Bis zu 10 Orte können eingetragen\n"
 	.string "werden.{0xFC}Ì$"
 
-UnknownString_81A3B5B: @ 81A3B5B
+SecretBase_Text_BattleTowerShield: @ 81A3B5B
 	.string "Ein Schild aus {STR_VAR_2}, welches zeigt,\n"
 	.string "dass {STR_VAR_1}-mal hintereinander im\l"
 	.string "DUELLTURM ein Kampf gewonnen wurde.$"
 
-UnknownString_81A3BA4: @ 81A3BA4
+SecretBase_Text_ToyTV: @ 81A3BA4
 	.string "Ein sehr realistischer Spielzeug-\n"
 	.string "Fernseher. Man könnte ihn glatt mit\l"
 	.string "einem echten Gerät verwechseln.$"
 
-UnknownString_81A3BE8: @ 81A3BE8
+SecretBase_Text_SeedotTV: @ 81A3BE8
 	.string "Ein Spielzeug-Fernseher, der aussieht\n"
 	.string "wie ein SAMURZEL. Er scheint von\l"
 	.string "alleine davonrollen zu wollen...$"
 
-UnknownString_81A3C31: @ 81A3C31
+SecretBase_Text_SkittyTV: @ 81A3C31
 	.string "Ein Spielzeug-Fernseher, der aussieht\n"
 	.string "wie ein ENECO. Es scheint, als wolle\l"
 	.string "er sich langsam davonschleichen ...$"

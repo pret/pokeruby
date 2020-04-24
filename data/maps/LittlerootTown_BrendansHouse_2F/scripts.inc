@@ -7,8 +7,8 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1527AF:: @ 81527AF
 	call_if_unset FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_2F_EventScript_1527CE
 	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6950
-	call LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D
-	setvar VAR_0x4089, 0
+	call SecretBase_EventScript_SetDecorationFlags
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527CE:: @ 81527CE
@@ -17,13 +17,13 @@ LittlerootTown_BrendansHouse_2F_EventScript_1527CE:: @ 81527CE
 	return
 
 LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA
-	map_script_2 VAR_0x4089, 0, LittlerootTown_BrendansHouse_2F_EventScript_1527E4
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_1527E4
 	.2byte 0
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
+	goto_if_eq SecretBase_EventScript_InitDecorations
 	end
 
 @ 81527F1

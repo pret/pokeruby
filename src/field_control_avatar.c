@@ -49,8 +49,8 @@ u8 gSelectedObjectEvent;
 extern u8 gUnknown_081A2C51[];
 extern u8 gUnknown_0815281E[];
 extern u8 gUnknown_08152C39[];
-extern u8 gUnknown_0815F36C[];
-extern u8 gUnknown_0815F43A[];
+extern u8 SecretBase_EventScript_PC[];
+extern u8 SecretBase_EventScript_RecordMixingPC[];
 extern u8 gUnknown_081A0009[];
 extern u8 gUnknown_081C6C02[];
 extern u8 HiddenItemScript[];
@@ -69,10 +69,8 @@ extern u8 VaseScript[];
 extern u8 TrashCanScript[];
 extern u8 ShopShelfScript[];
 extern u8 BlueprintScript[];
-extern u8 gUnknown_0815F36C[];
-extern u8 gUnknown_0815F43A[];
-extern u8 gUnknown_0815F523[];
-extern u8 gUnknown_0815F528[];
+extern u8 SecretBase_EventScript_SandOrnament[];
+extern u8 SecretBase_EventScript_ShieldOrToyTV[];
 extern u8 UseSurfScript[];
 extern u8 S_UseWaterfall[];
 extern u8 S_CannotUseWaterfall[];
@@ -320,8 +318,8 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     // Play computer noise for PC-related scripts.
     if (script != gUnknown_0815281E
      && script != gUnknown_08152C39
-     && script != gUnknown_0815F36C
-     && script != gUnknown_0815F43A
+     && script != SecretBase_EventScript_PC
+     && script != SecretBase_EventScript_RecordMixingPC
      && script != gUnknown_081A0009)
         PlaySE(5);
 
@@ -490,13 +488,13 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     if (height == MapGridGetZCoordAt(position->x, position->y))
     {
         if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
-            return gUnknown_0815F36C;
+            return SecretBase_EventScript_PC;
         if (MetatileBehavior_IsRecordMixingSecretBasePC(metatileBehavior) == TRUE)
-            return gUnknown_0815F43A;
+            return SecretBase_EventScript_RecordMixingPC;
         if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior) == TRUE)
-            return gUnknown_0815F523;
+            return SecretBase_EventScript_SandOrnament;
         if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
-            return gUnknown_0815F528;
+            return SecretBase_EventScript_ShieldOrToyTV;
     }
 
     return NULL;

@@ -1430,7 +1430,7 @@ const struct YesNoFuncTable gUnknown_083EC634[] = {
 
 // text
 
-extern u8 gUnknown_0815F399[];
+extern u8 SecretBase_EventScript_PCCancel[];
 
 void sub_80FE1DC(void)
 {
@@ -1524,7 +1524,7 @@ void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
     FreeSpritePaletteByTag(6);
     if (ewram_1f000.isPlayerRoom == 0)
     {
-        ScriptContext1_SetupScript(gUnknown_0815F399);
+        ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
         DestroyTask(taskId);
     } else
     {
