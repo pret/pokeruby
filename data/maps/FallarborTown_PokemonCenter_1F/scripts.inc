@@ -4,12 +4,12 @@ FallarborTown_PokemonCenter_1F_MapScripts:: @ 8153AF3
 
 FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
 	setrespawn HEAL_LOCATION_FALLARBOR_TOWN
-	call FallarborTown_PokemonCenter_1F_EventScript_19FD1B
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
 	setvar VAR_0x800B, 1
-	call FallarborTown_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

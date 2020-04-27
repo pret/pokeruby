@@ -4,13 +4,13 @@ VerdanturfTown_PokemonCenter_1F_MapScripts:: @ 8153F09
 
 VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F:: @ 8153F0F
 	setrespawn HEAL_LOCATION_VERDANTURF_TOWN
-	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
 VerdanturfTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
 	setvar VAR_0x800B, 1
-	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

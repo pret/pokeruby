@@ -60,8 +60,8 @@ extern u8 gUnknown_020297ED;
 extern u16 gTotalCameraPixelOffsetY;
 extern u16 gTotalCameraPixelOffsetX;
 
-extern u8 S_WhiteOut[];
-extern u8 gUnknown_0819FC9F[];
+extern u8 EventScript_WhiteOut[];
+extern u8 EventScript_ResetMrBriney[];
 extern u8 SingleBattleColosseum_EventScript_1A436F[];
 extern u8 SingleBattleColosseum_EventScript_1A4379[];
 extern u8 DoubleBattleColosseum_EventScript_1A4383[];
@@ -208,7 +208,7 @@ static void (*const gUnknown_082166D8[])(struct LinkPlayerObjectEvent *, struct 
 
 static void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(S_WhiteOut);
+    ScriptContext2_RunNewScript(EventScript_WhiteOut);
     gSaveBlock1.money /= 2;
     ScrSpecial_HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
@@ -234,7 +234,7 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    ScriptContext2_RunNewScript(gUnknown_0819FC9F);
+    ScriptContext2_RunNewScript(EventScript_ResetMrBriney);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)

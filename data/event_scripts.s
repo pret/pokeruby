@@ -716,29 +716,29 @@ UnknownString_819C21F: @ 819C21F
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
 
-S_WhiteOut:: @ 819FC74
+EventScript_WhiteOut:: @ 819FC74
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
-	call EventScript_19FC84
-	goto gUnknown_0819FC9F
+	call EventScript_TryReadyRivalForGoGoggles
+	goto EventScript_ResetMrBriney
 	end
 
-EventScript_19FC84:
-	goto_if_set FLAG_RECEIVED_GO_GOGGLES, Route101_EventScript_1A14DC
-	goto_if_unset FLAG_DEFEATED_LAVARIDGE_GYM, Route101_EventScript_1A14DC
+EventScript_TryReadyRivalForGoGoggles:
+	goto_if_set FLAG_RECEIVED_GO_GOGGLES, Common_EventScript_Return
+	goto_if_unset FLAG_DEFEATED_LAVARIDGE_GYM, Common_EventScript_Return
 	clearflag FLAG_HIDE_RIVAL_LAVARIDGE_1
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	return
 
-gUnknown_0819FC9F:: @ 819FC9F
+EventScript_ResetMrBriney:: @ 819FC9F
 	compare VAR_BRINEY_LOCATION, 1
-	goto_if_eq EventScript_19FCC1
+	goto_if_eq EventScript_MoveMrBrineyToHouse
 	compare VAR_BRINEY_LOCATION, 2
-	goto_if_eq EventScript_19FCD7
+	goto_if_eq EventScript_MoveMrBrineyToDewford
 	compare VAR_BRINEY_LOCATION, 3
-	goto_if_eq EventScript_19FCF0
+	goto_if_eq EventScript_MoveMrBrineyToRoute109
 	end
 
-EventScript_19FCC1:
+EventScript_MoveMrBrineyToHouse:
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
@@ -748,7 +748,7 @@ EventScript_19FCC1:
 	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	end
 
-EventScript_19FCD7:
+EventScript_MoveMrBrineyToDewford:
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
@@ -759,7 +759,7 @@ EventScript_19FCD7:
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	end
 
-EventScript_19FCF0:
+EventScript_MoveMrBrineyToRoute109:
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
@@ -778,104 +778,27 @@ EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 819FD09
 	setvar VAR_ELITE_4_STATE, 0
 	return
 
-DewfordTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-FallarborTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-LavaridgeTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-MauvilleCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-OldaleTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-PetalburgCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-RustboroCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-SlateportCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-	goto_if_unset FLAG_RECEIVED_POKENAV, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	goto_if_unset FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104, OldaleTown_PokemonCenter_1F_EventScript_19FD49
-	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
-	goto_if_unset FLAG_HIDE_MR_BRINEY_ROUTE109, OldaleTown_PokemonCenter_1F_EventScript_19FD55
+Common_EventScript_UpdateBrineyLocation:: @ 819FD1B
+	goto_if_unset FLAG_RECEIVED_POKENAV, Common_EventScript_Return
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_Return
+	goto_if_unset FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104, EventScript_SetBrineyLocation_House
+	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, EventScript_SetBrineyLocation_Dewford
+	goto_if_unset FLAG_HIDE_MR_BRINEY_ROUTE109, EventScript_SetBrineyLocation_Route109
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_19FD49:: @ 819FD49
+EventScript_SetBrineyLocation_House:: @ 819FD49
 	setvar VAR_BRINEY_LOCATION, 1
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_19FD4F:: @ 819FD4F
+EventScript_SetBrineyLocation_Dewford:: @ 819FD4F
 	setvar VAR_BRINEY_LOCATION, 2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_19FD55:: @ 819FD55
+EventScript_SetBrineyLocation_Route109:: @ 819FD55
 	setvar VAR_BRINEY_LOCATION, 3
 	return
 
-DewfordTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-EverGrandeCity_PokemonLeague_EventScript_19FD5B:: @ 819FD5B
-FallarborTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-FortreeCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-LavaridgeTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-LilycoveCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-MauvilleCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-MossdeepCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-OldaleTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-PetalburgCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-RustboroCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-SlateportCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-SootopolisCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
-	lock
-	faceplayer
-	msgbox gText_NurseJoy_Welcome, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq do_heal_party
-	compare VAR_RESULT, NO
-	goto_if_eq dont_heal_party
-	end
-
-do_heal_party:: @ 819FD7C
-	incrementgamestat GAME_STAT_USED_POKECENTER
-	message gText_NurseJoy_OkayIllTakeYourPokemon
-	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_1A083F
-	waitmovement 0
-	dofieldeffect FLDEFF_POKECENTER_HEAL
-	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_1A0845
-	waitmovement 0
-	special ScrSpecial_HealPlayerParty
-	goto_if_unset FLAG_POKERUS_EXPLAINED, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
-	goto OldaleTown_PokemonCenter_1F_EventScript_19FDB0
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
-	message gText_NurseJoy_ThankYouForWaiting
-	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_19FDF4
-	waitmovement 0
-	message gText_NurseJoy_WeHopeToSeeYouAgain
-	waitmessage
-	return
-
-dont_heal_party:: @ 819FDC7
-	message gText_NurseJoy_WeHopeToSeeYouAgain
-	waitmessage
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
-	specialvar VAR_RESULT, IsPokerusInParty
-	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FDEA
-	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FDB0
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
-	message gText_NurseJoy_Pokerus
-	waitmessage
-	setflag FLAG_POKERUS_EXPLAINED
-	return
-
-OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
-	nurse_joy_bow
-	delay_4
-	step_end
+	.include "data/scripts/pkmn_center_nurse.inc"
 
 Std_ObtainItem: @ 819FDF7
 	additem VAR_0x8000, VAR_0x8001
@@ -1523,7 +1446,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1A02F4:: @ 81A02F4
 Route101_EventScript_1A02F4:: @ 81A02F4
 Route103_EventScript_1A02F4:: @ 81A02F4
 	compare VAR_PETALBURG_GYM_STATE, 0
-	goto_if_eq Route101_EventScript_1A14DC
+	goto_if_eq Common_EventScript_Return
 	compare VAR_BIRCH_STATE, 0
 	call_if_eq Route101_EventScript_1A0358
 	compare VAR_BIRCH_STATE, 1
@@ -1599,7 +1522,7 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	msgbox Route101_Text_1C44DC, MSGBOX_DEFAULT
 	call Route101_EventScript_1A03A5
 	compare VAR_0x800A, 0
-	goto_if_eq Route101_EventScript_1A14DC
+	goto_if_eq Common_EventScript_Return
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
@@ -2655,9 +2578,7 @@ EventScript_1A14CA::
 	waitstate
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_1A14DC:: @ 81A14DC
-PacifidlogTown_House2_EventScript_1A14DC:: @ 81A14DC
-Route101_EventScript_1A14DC:: @ 81A14DC
+Common_EventScript_Return:: @ 81A14DC
 	return
 
 	.include "data/scripts/debug.inc"

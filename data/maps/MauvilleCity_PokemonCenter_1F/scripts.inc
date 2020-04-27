@@ -4,7 +4,7 @@ MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8157351
 
 MauvilleCity_PokemonCenter_1F_MapScript1_157357:: @ 8157357
 	setrespawn HEAL_LOCATION_MAUVILLE_CITY
-	call MauvilleCity_PokemonCenter_1F_EventScript_19FD1B
+	call Common_EventScript_UpdateBrineyLocation
 	goto MauvilleCity_PokemonCenter_1F_EventScript_157365
 	end
 
@@ -14,7 +14,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_157365:: @ 8157365
 
 MauvilleCity_PokemonCenter_1F_EventScript_157369:: @ 8157369
 	setvar VAR_0x800B, 1
-	call MauvilleCity_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

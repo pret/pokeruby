@@ -8,7 +8,7 @@ SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
 
 @ 815B19A
 	setvar VAR_0x800B, 1
-	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

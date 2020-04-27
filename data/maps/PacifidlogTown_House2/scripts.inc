@@ -20,7 +20,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	end
 
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
-	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_1A14DC
+	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, Common_EventScript_Return
 	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare VAR_RESULT, 0
 	call_if_eq PacifidlogTown_House2_EventScript_1541E8

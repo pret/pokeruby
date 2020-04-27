@@ -8,7 +8,7 @@ FortreeCity_PokemonCenter_1F_MapScript1_158017:: @ 8158017
 
 FortreeCity_PokemonCenter_1F_EventScript_15801B:: @ 815801B
 	setvar VAR_0x800B, 1
-	call FortreeCity_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

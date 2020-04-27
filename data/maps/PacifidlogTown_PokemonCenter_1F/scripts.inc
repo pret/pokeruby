@@ -8,7 +8,7 @@ PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105
 
 @ 8154109
 	setvar VAR_0x800B, 1
-	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
