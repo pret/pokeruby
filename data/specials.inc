@@ -177,7 +177,7 @@ gSpecials::
 	def_special sub_810FA74
 	def_special UpdateMovedLilycoveFanClubMembers
 	def_special sub_810FF48
-	def_special sub_810FAA0
+	def_special UpdateTrainerFanClubGameClear
 	def_special sub_810FF60
 	def_special ScrSpecial_RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum

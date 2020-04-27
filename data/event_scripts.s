@@ -714,44 +714,10 @@ UnknownString_819C21F: @ 819C21F
 	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/new_game.inc"
-
-EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
-	clearflag FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE
-	call EverGrandeCity_HallOfFame_EventScript_19FD09
-	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
-	clearflag FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
-	clearflag FLAG_HIDE_STEVENS_LETTER
-	setvar VAR_STEVENS_HOUSE_STATE, 1
-	clearflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
-	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
-	clearflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
-	special sub_810FAA0
-	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_19FC62
-	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, EverGrandeCity_HallOfFame_EventScript_19FC70
-	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_19FC5A
-	call_if_unset FLAG_RECEIVED_HM08, EverGrandeCity_HallOfFame_EventScript_19FC5E
-	return
-
-EverGrandeCity_HallOfFame_EventScript_19FC5A:: @ 819FC5A
-	clearflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
-	return
-
-EverGrandeCity_HallOfFame_EventScript_19FC5E:: @ 819FC5E
-	clearflag FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1
-	return
-
-EverGrandeCity_HallOfFame_EventScript_19FC62:: @ 819FC62
-	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
-	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
-	clearflag FLAG_HIDE_NORMAN_LITTLEROOT
-	return
-
-EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
-	setflag FLAG_SYS_TV_LATI
-	return
+	.include "data/scripts/hall_of_fame.inc"
 
 S_WhiteOut:: @ 819FC74
-	call EverGrandeCity_HallOfFame_EventScript_19FD09
+	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	call EventScript_19FC84
 	goto gUnknown_0819FC9F
 	end
@@ -804,7 +770,7 @@ EventScript_19FCF0:
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	end
 
-EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
+EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 819FD09
 	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA

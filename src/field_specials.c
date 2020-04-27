@@ -1966,7 +1966,7 @@ void sub_810FA74(void)
     }
 }
 
-void sub_810FAA0(void)
+void UpdateTrainerFanClubGameClear(void)
 {
     if (!((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
     {

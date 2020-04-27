@@ -2,7 +2,7 @@
 
 DebugScript_081C1CFE:: @ 81C1CFE
 	setflag FLAG_SYS_GAME_CLEAR
-	call EverGrandeCity_HallOfFame_EventScript_19FC13
+	call EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags
 	end
 
 DebugScript_081C1D07:: @ 81C1D07
