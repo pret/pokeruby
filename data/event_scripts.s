@@ -49,14 +49,14 @@ gSpecialVars::
 
 	.align 2
 gStdScripts::
-	.4byte Std_ObtainItem
-	.4byte Std_FindItem
-	.4byte Std_MsgboxNPC
-	.4byte Std_MsgboxSign
-	.4byte Std_MsgboxDefault
-	.4byte Std_MsgboxYesNo
-	.4byte Std_MsgboxAutoclose
-	.4byte Std_ObtainDecoration
+	.4byte Std_ObtainItem              @ STD_OBTAIN_ITEM
+	.4byte Std_FindItem                @ STD_FIND_ITEM
+	.4byte Std_MsgboxNPC               @ MSGBOX_NPC
+	.4byte Std_MsgboxSign              @ MSGBOX_SIGN
+	.4byte Std_MsgboxDefault           @ MSGBOX_DEFAULT
+	.4byte Std_MsgboxYesNo             @ MSGBOX_YESNO
+	.4byte Std_MsgboxAutoclose         @ MSGBOX_AUTOCLOSE
+	.4byte Std_ObtainDecoration        @ STD_OBTAIN_DECORATION
 gStdScripts_End::
 
 	.include "data/maps/PetalburgCity/scripts.inc"
@@ -709,43 +709,7 @@ UnknownString_819C21F: @ 819C21F
 	.include "data/maps/Route119_House/text.inc"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/text.inc"
 
-
-Std_MsgboxNPC:
-	lock
-	faceplayer
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	release
-	return
-
-Std_MsgboxSign:
-	lockall
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	releaseall
-	return
-
-Std_MsgboxDefault:
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	return
-
-Std_MsgboxYesNo:
-	message 0x0
-	waitmessage
-	yesnobox 20, 8
-	return
-
-@ 819F805
-	return
-
-S_DoSaveDialog:: @ 819F806
-	special ScrSpecial_DoSaveDialog
-	waitstate
-	return
+	.include "data/scripts/std_msgbox.inc"
 
 gUnknown_0819F80B:: @ 819F80B
 	lock
@@ -3749,7 +3713,7 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
 	erasebox 0, 0, 15, 10
@@ -3783,7 +3747,7 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
 	erasebox 0, 0, 15, 10
@@ -3817,7 +3781,7 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
 	erasebox 0, 0, 15, 10
@@ -3851,7 +3815,7 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
 	erasebox 0, 0, 15, 10
@@ -3885,7 +3849,7 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
 	erasebox 0, 0, 15, 10
@@ -3919,7 +3883,7 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
 	erasebox 0, 0, 15, 10
@@ -3953,7 +3917,7 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
 	erasebox 0, 0, 15, 10
@@ -3987,7 +3951,7 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
 	erasebox 0, 0, 15, 10
@@ -4021,7 +3985,7 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
 	erasebox 0, 0, 15, 10
@@ -4055,7 +4019,7 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
 	setvar VAR_RESULT, 1
 	special sub_80BCE4C
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
 	erasebox 0, 0, 15, 10

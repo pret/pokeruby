@@ -190,7 +190,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EBC:: @ 81A3EBC
 	case 127, OldaleTown_PokemonCenter_2F_EventScript_1A4319
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3FEF
@@ -359,7 +359,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 	call OldaleTown_PokemonCenter_2F_EventScript_1A41BB
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
@@ -452,7 +452,7 @@ VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C

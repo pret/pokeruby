@@ -327,7 +327,7 @@ LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	msgbox LilycoveCity_ContestLobby_Text_188521, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	erasebox 0, 0, 15, 9
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35

@@ -101,7 +101,7 @@ gSpecials::
 	def_special sub_80C5044
 	def_special GiveMonArtistRibbon
 	def_special sub_808363C
-	def_special ScrSpecial_DoSaveDialog
+	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
 	def_special sub_80E60D8
 	def_special sub_80EB7C4

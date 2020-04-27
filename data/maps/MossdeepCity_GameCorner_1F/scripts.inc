@@ -103,7 +103,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	compare VAR_RESULT, NO
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special LoadPlayerParty
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	erasebox 0, 0, 15, 10

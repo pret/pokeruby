@@ -240,7 +240,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 5
 	erasebox 0, 0, 15, 10
 	compare VAR_RESULT, 0

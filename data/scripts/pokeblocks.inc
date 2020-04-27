@@ -233,7 +233,7 @@ FallarborTown_ContestLobby_EventScript_1B7897:: @ 81B7897
 	end
 
 FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	message FallarborTown_ContestLobby_Text_1B7304
