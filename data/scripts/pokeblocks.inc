@@ -9,7 +9,7 @@ FallarborTown_ContestLobby_EventScript_1B7604:: @ 81B7604
 SlateportCity_ContestLobby_EventScript_1B761E:: @ 81B761E
 	setvar VAR_0x8008, 2
 	setvar VAR_0x8009, 2
-	applymovement 6, SlateportCity_ContestLobby_Movement_1A083D
+	applymovement 6, Common_Movement_FaceOriginalDirection
 	applymovement VAR_0x8008, SlateportCity_ContestLobby_Movement_1B7821
 	waitmovement 0
 	goto SlateportCity_ContestLobby_EventScript_1B7681
@@ -26,8 +26,8 @@ VerdanturfTown_ContestLobby_EventScript_1B763F:: @ 81B763F
 LilycoveCity_ContestLobby_EventScript_1B7659:: @ 81B7659
 	setvar VAR_0x8008, 3
 	setvar VAR_0x8009, 3
-	applymovement 9, LilycoveCity_ContestLobby_Movement_1A083D
-	applymovement 10, LilycoveCity_ContestLobby_Movement_1A083D
+	applymovement 9, Common_Movement_FaceOriginalDirection
+	applymovement 10, Common_Movement_FaceOriginalDirection
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_1B7821
 	waitmovement 0
 	goto LilycoveCity_ContestLobby_EventScript_1B7681

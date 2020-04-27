@@ -9,18 +9,18 @@ LilycoveCity_PokemonTrainerFanClub_MapScript2_159395:: @ 8159395
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15939F:: @ 815939F
 	lockall
-	applymovement 1, LilycoveCity_PokemonTrainerFanClub_Movement_1A0845
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A1D6, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_159402
 	applymovement 2, LilycoveCity_PokemonTrainerFanClub_Movement_1593FA
 	waitmovement 0
-	applymovement 255, LilycoveCity_PokemonTrainerFanClub_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A1E8, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_159409
 	waitmovement 0
-	applymovement 255, LilycoveCity_PokemonTrainerFanClub_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_15940C
 	waitmovement 0

@@ -33,7 +33,7 @@ Route110_EventScript_14F946:: @ 814F946
 	lock
 	faceplayer
 	msgbox Route110_Text_16E6C0, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -42,7 +42,7 @@ Route110_EventScript_14F95C:: @ 814F95C
 	lock
 	faceplayer
 	msgbox Route110_Text_16E6F2, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -51,7 +51,7 @@ Route110_EventScript_14F972:: @ 814F972
 	lock
 	faceplayer
 	msgbox Route110_Text_16E729, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -60,7 +60,7 @@ Route110_EventScript_14F988:: @ 814F988
 	lock
 	faceplayer
 	msgbox Route110_Text_16E76A, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -254,7 +254,7 @@ Route110_EventScript_14FC10:: @ 814FC10
 
 Route110_EventScript_14FC27:: @ 814FC27
 	lockall
-	applymovement 21, Route110_Movement_1A0843
+	applymovement 21, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	call Route110_EventScript_14FC39
 	releaseall
@@ -330,11 +330,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	call_if_eq Route110_EventScript_14FDA7
 	compare VAR_RESULT, 1
 	call_if_eq Route110_EventScript_14FDAC
-	applymovement 28, Route110_Movement_1A0845
+	applymovement 28, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 28, Route110_Movement_1A0833
+	applymovement 28, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 28, Route110_Movement_1A0835
+	applymovement 28, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
 	compare VAR_0x8008, 1

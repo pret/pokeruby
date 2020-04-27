@@ -22,7 +22,7 @@ EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	lockall
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A084E
+	applymovement 255, Common_Movement_WalkUp4
 	waitmovement 0
 	delay 40
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B802
@@ -78,9 +78,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	msgbox EverGrandeCity_ChampionsRoom_Text_191225, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
-	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191268, MSGBOX_DEFAULT
@@ -91,9 +91,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
-	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191305, MSGBOX_DEFAULT
@@ -105,26 +105,26 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	addobject 3
 	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
 	waitmovement 0
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, MSGBOX_DEFAULT
 	call EverGrandeCity_ChampionsRoom_EventScript_1A03B0
 	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, MSGBOX_DEFAULT
-	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
-	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191512, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
-	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_1A0841
+	applymovement 3, Common_Movement_WalkInPlaceFastestUp
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
 	waitmovement 0
 	delay 20
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, MSGBOX_DEFAULT
 	checkplayergender
@@ -153,7 +153,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B9B4:: @ 815B9B4
 EverGrandeCity_ChampionsRoom_EventScript_15B9BD:: @ 815B9BD
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9E6
 	waitmovement 0
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

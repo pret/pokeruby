@@ -19,11 +19,11 @@ Route103_EventScript_14EB92:: @ 814EB92
 Route103_EventScript_14EBAB:: @ 814EBAB
 	msgbox Route103_Text_16D57A, MSGBOX_DEFAULT
 	playbgm MUS_GIRL_SUP, TRUE
-	applymovement 2, Route103_Movement_1A0839
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement 2, Route103_Movement_1A0833
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Route103_Movement_1A0835
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_16D5B6, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
@@ -35,11 +35,11 @@ Route103_EventScript_14EBAB:: @ 814EBAB
 Route103_EventScript_14EC04:: @ 814EC04
 	msgbox Route103_Text_16D762, MSGBOX_DEFAULT
 	playbgm MUS_BOY_SUP, TRUE
-	applymovement 2, Route103_Movement_1A0839
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement 2, Route103_Movement_1A0833
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Route103_Movement_1A0835
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_16D7A9, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON

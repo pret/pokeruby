@@ -53,7 +53,7 @@ DewfordTown_Hall_EventScript_15330A:: @ 815330A
 	call DewfordTown_Hall_EventScript_1A0102
 	msgbox DewfordTown_Hall_Text_17570D, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, DewfordTown_Hall_Movement_1A0841
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -64,7 +64,7 @@ DewfordTown_Hall_EventScript_153326:: @ 8153326
 	call DewfordTown_Hall_EventScript_1A0102
 	msgbox DewfordTown_Hall_Text_17574C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, DewfordTown_Hall_Movement_1A0841
+	applymovement 5, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -200,7 +200,7 @@ DewfordTown_Hall_EventScript_1534FD:: @ 81534FD
 DewfordTown_Hall_EventScript_15351E:: @ 815351E
 	compare VAR_FACING, 4
 	goto_if_eq DewfordTown_Hall_EventScript_1534FC
-	applymovement 255, DewfordTown_Hall_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -224,19 +224,19 @@ DewfordTown_Hall_EventScript_153556:: @ 8153556
 	return
 
 DewfordTown_Hall_EventScript_15356D:: @ 815356D
-	applymovement 255, DewfordTown_Hall_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_153578:: @ 8153578
-	applymovement 255, DewfordTown_Hall_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_153583:: @ 8153583
 	compare VAR_FACING, 3
 	goto_if_eq DewfordTown_Hall_EventScript_1534FC
-	applymovement 255, DewfordTown_Hall_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

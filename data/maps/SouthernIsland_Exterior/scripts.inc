@@ -14,7 +14,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	goto_if_eq SouthernIsland_Exterior_EventScript_160B25
 	msgbox SouthernIsland_Exterior_Text_1C5281, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR

@@ -7,7 +7,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_15841C:: @ 815841C
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158425:: @ 8158425
 	lockall
-	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_1A0839
+	applymovement 2, Common_Movement_FacePlayer
 	message LilycoveCity_LilycoveMuseum_1F_Text_1873B9
 	waitmessage
 	multichoice 20, 8, 16, 1
@@ -152,7 +152,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158585:: @ 8158585
 LilycoveCity_LilycoveMuseum_1F_EventScript_15858E:: @ 815858E
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187B04, MSGBOX_NPC
 	lockall
-	applymovement 8, LilycoveCity_LilycoveMuseum_1F_Movement_1A083D
+	applymovement 8, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

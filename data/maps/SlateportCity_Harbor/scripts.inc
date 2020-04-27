@@ -48,9 +48,9 @@ SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 	end
 
 SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
-	applymovement 7, SlateportCity_Harbor_Movement_1A0845
+	applymovement 7, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 255, SlateportCity_Harbor_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_17FD7D, MSGBOX_DEFAULT
 	closemessage
@@ -82,21 +82,21 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 SlateportCity_Harbor_EventScript_15605C:: @ 815605C
 	applymovement 4, SlateportCity_Harbor_Movement_1560B3
 	waitmovement 0
-	applymovement 255, SlateportCity_Harbor_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_156071:: @ 8156071
 	applymovement 4, SlateportCity_Harbor_Movement_1560B9
 	waitmovement 0
-	applymovement 255, SlateportCity_Harbor_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_156086:: @ 8156086
 	applymovement 4, SlateportCity_Harbor_Movement_1560BE
 	waitmovement 0
-	applymovement 255, SlateportCity_Harbor_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -217,7 +217,7 @@ SlateportCity_Harbor_EventScript_15618A:: @ 815618A
 SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	msgbox SlateportCity_Harbor_Text_17FBB6, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
@@ -273,7 +273,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

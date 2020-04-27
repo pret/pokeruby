@@ -196,9 +196,9 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 
 SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	playse SE_PIN
-	applymovement VAR_LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0833
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, MSGBOX_DEFAULT
 	giveitem ITEM_SOOTHE_BELL

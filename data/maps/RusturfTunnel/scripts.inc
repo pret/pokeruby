@@ -24,7 +24,7 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 	faceplayer
 	msgbox RusturfTunnel_Text_194766, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -36,7 +36,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_1944C5, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -44,7 +44,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 	msgbox RusturfTunnel_Text_1945B2, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -95,7 +95,7 @@ RusturfTunnel_EventScript_15C892:: @ 815C892
 	applymovement 255, RusturfTunnel_Movement_15C96D
 	applymovement 1, RusturfTunnel_Movement_15C994
 	waitmovement 0
-	applymovement 10, RusturfTunnel_Movement_1A0845
+	applymovement 10, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -103,14 +103,14 @@ RusturfTunnel_EventScript_15C8AE:: @ 815C8AE
 	applymovement 255, RusturfTunnel_Movement_15C96D
 	applymovement 1, RusturfTunnel_Movement_15C994
 	waitmovement 0
-	applymovement 10, RusturfTunnel_Movement_1A0845
+	applymovement 10, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C8CA:: @ 815C8CA
-	applymovement 1, RusturfTunnel_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement 255, RusturfTunnel_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -148,9 +148,9 @@ RusturfTunnel_EventScript_15C91B:: @ 815C91B
 
 RusturfTunnel_EventScript_15C92D:: @ 815C92D
 	playse SE_PIN
-	applymovement 1, RusturfTunnel_Movement_1A0833
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, RusturfTunnel_Movement_1A0835
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	return
 
@@ -326,7 +326,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	applymovement 5, RusturfTunnel_Movement_15CAC0
 	waitmovement 0
 	msgbox RusturfTunnel_Text_19432A, MSGBOX_DEFAULT
-	applymovement 5, RusturfTunnel_Movement_1A0839
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	message RusturfTunnel_Text_19434F
 	waitmessage

@@ -68,7 +68,7 @@ MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, MauvilleCity_Movement_1A083D
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -76,7 +76,7 @@ MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 	msgbox MauvilleCity_Text_165E45, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, MauvilleCity_Movement_1A083D
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -84,17 +84,17 @@ MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	lockall
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_14C292
-	applymovement 6, MauvilleCity_Movement_1A0843
+	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_165BE3, MSGBOX_DEFAULT
 	msgbox MauvilleCity_Text_165C57, MSGBOX_DEFAULT
 	msgbox MauvilleCity_Text_165D01, MSGBOX_DEFAULT
-	applymovement 6, MauvilleCity_Movement_1A0839
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 6, MauvilleCity_Movement_1A0833
+	applymovement 6, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 6, MauvilleCity_Movement_1A0835
+	applymovement 6, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MauvilleCity_Text_165D50, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_14C154
@@ -115,12 +115,12 @@ MauvilleCity_EventScript_14C187:: @ 814C187
 	applymovement 6, MauvilleCity_Movement_14C2AA
 	applymovement 7, MauvilleCity_Movement_14C2CC
 	waitmovement 0
-	applymovement 6, MauvilleCity_Movement_1A0843
+	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 30
 	applymovement 7, MauvilleCity_Movement_14C2D8
 	waitmovement 0
-	applymovement 255, MauvilleCity_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, MSGBOX_DEFAULT
 	closemessage
@@ -134,12 +134,12 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 	applymovement 6, MauvilleCity_Movement_14C2B0
 	applymovement 7, MauvilleCity_Movement_14C2D2
 	waitmovement 0
-	applymovement 6, MauvilleCity_Movement_1A0843
+	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 30
 	applymovement 7, MauvilleCity_Movement_14C2DC
 	waitmovement 0
-	applymovement 255, MauvilleCity_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, MSGBOX_DEFAULT
 	closemessage
@@ -161,13 +161,13 @@ MauvilleCity_EventScript_14C22B:: @ 814C22B
 MauvilleCity_EventScript_14C23C:: @ 814C23C
 	msgbox MauvilleCity_Text_165F0D, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_2, MauvilleCity_Text_165F38
-	applymovement 6, MauvilleCity_Movement_1A0843
+	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_165F85, MSGBOX_DEFAULT
-	applymovement 6, MauvilleCity_Movement_1A0839
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MauvilleCity_Text_165FB3, MSGBOX_DEFAULT
-	applymovement 6, MauvilleCity_Movement_1A0843
+	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_166050, MSGBOX_DEFAULT
 	return
@@ -179,7 +179,7 @@ MauvilleCity_EventScript_14C285:: @ 814C285
 	end
 
 MauvilleCity_EventScript_14C292:: @ 814C292
-	applymovement 6, MauvilleCity_Movement_1A0839
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MauvilleCity_Text_165EE2, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_14C154

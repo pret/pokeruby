@@ -12,7 +12,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	compare VAR_RESULT, 1
 	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -56,7 +56,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AC1F:: @ 815AC1F
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E427, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

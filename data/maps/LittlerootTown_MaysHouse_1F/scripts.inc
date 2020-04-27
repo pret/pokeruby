@@ -90,11 +90,11 @@ LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	lockall
 	playse SE_PIN
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0835
+	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -162,7 +162,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152A35:: @ 8152A35
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	applymovement VAR_0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B69B7
 	end

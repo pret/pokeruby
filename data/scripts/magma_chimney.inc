@@ -4,7 +4,7 @@ MtChimney_EventScript_1B2C95:: @ 81B2C95
 	call_if_unset FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_1B2CB9
 	call_if_set FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_1B2CC2
 	closemessage
-	applymovement 1, MtChimney_Movement_1A083D
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	release
@@ -33,12 +33,12 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.else
 	msgbox MtChimney_Text_1B37BB, MSGBOX_DEFAULT
 	.endif
-	applymovement 2, MtChimney_Movement_1A0839
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 2, MtChimney_Movement_1A0833
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, MtChimney_Movement_1A0835
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox MtChimney_Text_1B2ED9, MSGBOX_DEFAULT
@@ -69,7 +69,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	call_if_eq MtChimney_EventScript_1B2D7D
 	compare VAR_FACING, 2
 	call_if_eq MtChimney_EventScript_1B2D88
-	applymovement 255, MtChimney_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox MtChimney_Text_1B3608, MSGBOX_DEFAULT

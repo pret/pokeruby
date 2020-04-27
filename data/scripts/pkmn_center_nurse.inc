@@ -12,11 +12,11 @@ EventScript_PkmnCenterNurse_HealPkmn:: @ 819FD7C
 	incrementgamestat GAME_STAT_USED_POKECENTER
 	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_1A083F
+	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_1A0845
+	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
 	goto_if_unset FLAG_POKERUS_EXPLAINED, EventScript_PkmnCenterNurse_CheckPokerus

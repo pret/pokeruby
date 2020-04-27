@@ -30,7 +30,7 @@ Route101_EventScript_14E948:: @ 814E948
 	applymovement 4, Route101_Movement_14EA00
 	applymovement 2, Route101_Movement_14EA31
 	waitmovement 0
-	applymovement 2, Route101_Movement_1A0843
+	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, Route101_Movement_14EA27
 	applymovement 2, Route101_Movement_14EA58
@@ -222,7 +222,7 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	fadescreen 1
 	removeobject 4
 	setobjectxy 255, 6, 13
-	applymovement 255, Route101_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	special ScrSpecial_ChooseStarter
 	waitstate

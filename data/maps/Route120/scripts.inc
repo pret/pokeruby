@@ -206,12 +206,12 @@ Route120_EventScript_15189D:: @ 815189D
 	call_if_eq Route120_EventScript_15197F
 	compare VAR_FACING, 3
 	call_if_eq Route120_EventScript_15198A
-	applymovement 31, Route120_Movement_1A083F
+	applymovement 31, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 20
 	msgbox Route120_Text_1719D4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, Route120_Movement_1A0843
+	applymovement 30, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 30, Route120_Movement_1A0662
 	waitmovement 0
@@ -228,15 +228,15 @@ Route120_EventScript_15189D:: @ 815189D
 	end
 
 Route120_EventScript_151908:: @ 8151908
-	applymovement 31, Route120_Movement_1A0845
-	applymovement 255, Route120_Movement_1A0841
+	applymovement 31, Common_Movement_WalkInPlaceFastestDown
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox Route120_Text_171A40, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_171B0E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, Route120_Movement_1A0845
+	applymovement 31, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -253,7 +253,7 @@ Route120_EventScript_151908:: @ 8151908
 	end
 
 Route120_EventScript_15197F:: @ 815197F
-	applymovement 255, Route120_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

@@ -318,7 +318,7 @@ Route109_EventScript_14F70E:: @ 814F70E
 	faceplayer
 	msgbox Route109_Text_16E405, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -333,7 +333,7 @@ Route109_EventScript_14F725:: @ 814F725
 	compare VAR_RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
 	closemessage
-	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_RECEIVED_SOFT_SAND
 	release
@@ -341,7 +341,7 @@ Route109_EventScript_14F725:: @ 814F725
 
 Route109_EventScript_14F762:: @ 814F762
 	msgbox Route109_Text_16E446, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Route109_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

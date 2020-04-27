@@ -18,14 +18,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_155ADB:: @ 8155ADB
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AE4:: @ 8155AE4
 	lockall
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 	lockall
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
@@ -158,9 +158,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	faceplayer
 	delay 8
 	playse SE_PIN
-	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
+	applymovement 13, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
+	applymovement 13, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, MSGBOX_DEFAULT
 	giveitem ITEM_TM46_THIEF

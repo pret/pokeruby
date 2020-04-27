@@ -8,11 +8,11 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_1553CF
 	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_1553B0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C14B, MSGBOX_DEFAULT
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C1EC, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A083D
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag FLAG_HIDE_EVIL_TEAM_SLATEPORT
@@ -20,31 +20,31 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_155388:: @ 8155388
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C472, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_15539C:: @ 815539C
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C3F7, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_1553B0:: @ 81553B0
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C2F2, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A083D
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_1553CF:: @ 81553CF
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C360, MSGBOX_DEFAULT
 	releaseall

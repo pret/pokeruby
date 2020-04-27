@@ -35,7 +35,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	special ScrSpecial_StartWallyTutorialBattle
 	waitstate
 	msgbox PetalburgCity_Text_16D3DE, MSGBOX_DEFAULT
-	applymovement 2, PetalburgCity_Movement_1A083F, MAP_PETALBURG_CITY
+	applymovement 2, Common_Movement_WalkInPlaceFastestLeft, MAP_PETALBURG_CITY
 	@ Local id and map num were swapped here (0, 0, 2 vs 2, 0, 0). Fixed to waitmovement 2, MAP_PETALBURG_CITY in Emerald
 	waitmovement 0, MAP_MAUVILLE_CITY
 	msgbox PetalburgCity_Text_16D408, MSGBOX_DEFAULT
@@ -56,7 +56,7 @@ PetalburgCity_EventScript_14B7AC:: @ 814B7AC
 	faceplayer
 	msgbox PetalburgCity_Text_164490, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, PetalburgCity_Movement_1A083D
+	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -180,13 +180,13 @@ PetalburgCity_EventScript_14B85A:: @ 814B85A
 	end
 
 PetalburgCity_EventScript_14B866:: @ 814B866
-	applymovement 9, PetalburgCity_Movement_1A0839
+	applymovement 9, Common_Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_TSURETEK, FALSE
 	playse SE_PIN
-	applymovement 9, PetalburgCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, PetalburgCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_EventScript_14B91B
@@ -207,8 +207,8 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_EventScript_14B99B
 	msgbox PetalburgCity_Text_164426, MSGBOX_DEFAULT
-	applymovement 9, PetalburgCity_Movement_1A0843
-	applymovement 255, PetalburgCity_Movement_1A0843
+	applymovement 9, Common_Movement_WalkInPlaceFastestRight
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox PetalburgCity_Text_164449, MSGBOX_DEFAULT
 	closemessage
@@ -221,7 +221,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 PetalburgCity_EventScript_14B91B:: @ 814B91B
 	applymovement 9, PetalburgCity_Movement_14B9B1
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -233,14 +233,14 @@ PetalburgCity_EventScript_14B930:: @ 814B930
 PetalburgCity_EventScript_14B93B:: @ 814B93B
 	applymovement 9, PetalburgCity_Movement_14B9B9
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B950:: @ 814B950
 	applymovement 9, PetalburgCity_Movement_14B9BE
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 

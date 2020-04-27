@@ -98,7 +98,7 @@ RustboroCity_EventScript_14C449:: @ 814C449
 	lock
 	faceplayer
 	msgbox RustboroCity_Text_166D59, MSGBOX_DEFAULT
-	applymovement 7, RustboroCity_Movement_1A083D
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -107,7 +107,7 @@ RustboroCity_EventScript_14C45F:: @ 814C45F
 	lock
 	faceplayer
 	msgbox RustboroCity_Text_166DB0, MSGBOX_DEFAULT
-	applymovement 8, RustboroCity_Movement_1A083D
+	applymovement 8, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -219,7 +219,7 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 @ 814C59B
 	applymovement 9, RustboroCity_Movement_14C5F7
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -375,52 +375,52 @@ RustboroCity_EventScript_14C650:: @ 814C650
 	end
 
 RustboroCity_EventScript_14C691:: @ 814C691
-	applymovement 9, RustboroCity_Movement_1A0841
+	applymovement 9, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C6BD:: @ 814C6BD
-	applymovement 9, RustboroCity_Movement_1A083F
+	applymovement 9, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C6E9:: @ 814C6E9
-	applymovement 9, RustboroCity_Movement_1A0845
+	applymovement 9, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C715:: @ 814C715
-	applymovement 9, RustboroCity_Movement_1A0845
+	applymovement 9, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_14C74B
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -483,62 +483,62 @@ RustboroCity_EventScript_14C7F5:: @ 814C7F5
 	return
 
 RustboroCity_EventScript_14C7FE:: @ 814C7FE
-	applymovement 9, RustboroCity_Movement_1A0841
+	applymovement 9, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C82A:: @ 814C82A
-	applymovement 9, RustboroCity_Movement_1A0843
+	applymovement 9, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C856:: @ 814C856
-	applymovement 9, RustboroCity_Movement_1A0845
+	applymovement 9, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C882:: @ 814C882
-	applymovement 9, RustboroCity_Movement_1A0845
+	applymovement 9, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_14C74B
 	waitmovement 0
-	applymovement 255, RustboroCity_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C8B8:: @ 814C8B8
-	applymovement 9, RustboroCity_Movement_1A083F
+	applymovement 9, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	return
 

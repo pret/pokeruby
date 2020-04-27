@@ -52,7 +52,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BFB6:: @ 815BFB6
 
 Route111_WinstrateFamilysHouse_EventScript_15BFC4:: @ 815BFC4
 	closemessage
-	applymovement VAR_0x8008, Route111_WinstrateFamilysHouse_Movement_1A083D
+	applymovement VAR_0x8008, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

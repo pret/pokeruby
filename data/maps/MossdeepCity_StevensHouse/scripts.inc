@@ -28,12 +28,12 @@ MossdeepCity_StevensHouse_MapScript2_15AA01:: @ 815AA01
 
 MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	lockall
-	applymovement 1, MossdeepCity_StevensHouse_Movement_1A083F
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0833
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0835
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA6E
 	waitmovement 0

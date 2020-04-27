@@ -35,12 +35,12 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	waitmovement 0
 	closedoor 12, 15
 	waitdooranim
-	applymovement 8, LavaridgeTown_Movement_1A083F
+	applymovement 8, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	applymovement 255, LavaridgeTown_Movement_1A0843
-	applymovement 8, LavaridgeTown_Movement_1A0833
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement 8, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 8, LavaridgeTown_Movement_1A0835
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0

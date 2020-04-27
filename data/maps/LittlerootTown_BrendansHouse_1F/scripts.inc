@@ -90,11 +90,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	lockall
 	playse SE_PIN
-	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1A0833
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1A0835
+	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_152782
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -117,7 +117,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
-	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
 	end

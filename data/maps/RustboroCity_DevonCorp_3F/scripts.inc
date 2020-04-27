@@ -150,7 +150,7 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -163,7 +163,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -171,7 +171,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 RustboroCity_DevonCorp_3F_EventScript_15789B:: @ 815789B
 	msgbox RustboroCity_DevonCorp_3F_Text_18368D, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

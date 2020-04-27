@@ -72,7 +72,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, LilycoveCity_ContestLobby_Movement_1A0833
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmovement 0
@@ -244,7 +244,7 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmovement 0
 	playse SE_PIN
-	applymovement 11, LilycoveCity_ContestLobby_Movement_1A0833
+	applymovement 11, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmovement 0

@@ -47,7 +47,7 @@ Route121_SafariZoneEntrance_EventScript_15C379:: @ 815C379
 
 Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	lockall
-	applymovement 255, Route121_SafariZoneEntrance_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showmoneybox 0, 0
 	nop

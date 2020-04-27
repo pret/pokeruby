@@ -47,11 +47,11 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, MSGBOX_DEFAULT
 	playbgm MUS_GIRL_SUP, TRUE
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, MSGBOX_DEFAULT
 	closemessage
@@ -81,11 +81,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, MSGBOX_DEFAULT
 	playbgm MUS_BOY_SUP, TRUE
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, MSGBOX_DEFAULT
 	closemessage
@@ -108,7 +108,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BAA:: @ 8152BAA
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0

@@ -13,14 +13,14 @@ VerdanturfTown_EventScript_14E866:: @ 814E866
 	faceplayer
 	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_14E885
 	msgbox VerdanturfTown_Text_16CAEB, MSGBOX_DEFAULT
-	applymovement 2, VerdanturfTown_Movement_1A083D
+	applymovement 2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 VerdanturfTown_EventScript_14E885:: @ 814E885
 	msgbox VerdanturfTown_Text_16CBCE, MSGBOX_DEFAULT
-	applymovement 2, VerdanturfTown_Movement_1A083D
+	applymovement 2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

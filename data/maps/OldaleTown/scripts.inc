@@ -193,7 +193,7 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_14DF26
 	msgbox OldaleTown_Text_16B0CC, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, OldaleTown_Movement_1A083D
+	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -217,7 +217,7 @@ OldaleTown_EventScript_14DF26:: @ 814DF26
 
 OldaleTown_EventScript_14DF30:: @ 814DF30
 	lockall
-	applymovement 4, OldaleTown_Movement_1A0839
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
@@ -226,7 +226,7 @@ OldaleTown_EventScript_14DF41:: @ 814DF41
 	lockall
 	applymovement 4, OldaleTown_Movement_14DFDE
 	waitmovement 0
-	applymovement 255, OldaleTown_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
@@ -235,7 +235,7 @@ OldaleTown_EventScript_14DF5C:: @ 814DF5C
 	lockall
 	applymovement 4, OldaleTown_Movement_14DFE1
 	waitmovement 0
-	applymovement 255, OldaleTown_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
@@ -244,7 +244,7 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 	lockall
 	applymovement 4, OldaleTown_Movement_14DFE3
 	waitmovement 0
-	applymovement 255, OldaleTown_Movement_1A0843
+	applymovement 255, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end

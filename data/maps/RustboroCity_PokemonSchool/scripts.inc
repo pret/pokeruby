@@ -87,7 +87,7 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	setflag FLAG_RECEIVED_QUICK_CLAW
 	release
@@ -106,7 +106,7 @@ RustboroCity_PokemonSchool_EventScript_157B29:: @ 8157B29
 RustboroCity_PokemonSchool_EventScript_157B34:: @ 8157B34
 	msgbox RustboroCity_PokemonSchool_Text_184737, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	release
 	end

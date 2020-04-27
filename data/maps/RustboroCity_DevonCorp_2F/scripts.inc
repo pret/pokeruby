@@ -79,9 +79,9 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	closemessage
 	playse SE_PIN
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -97,9 +97,9 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	closemessage
 	playse SE_PIN
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, MSGBOX_YESNO
 	compare VAR_RESULT, NO

@@ -132,8 +132,8 @@ Route116_EventScript_150B5D:: @ 8150B5D
 
 Route116_EventScript_150B6E:: @ 8150B6E
 	lockall
-	applymovement 11, Route116_Movement_1A0843
-	applymovement 255, Route116_Movement_1A083F
+	applymovement 11, Common_Movement_WalkInPlaceFastestRight
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox Route116_Text_17032A, MSGBOX_DEFAULT
 	setvar VAR_ROUTE116_STATE, 2

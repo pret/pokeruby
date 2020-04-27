@@ -15,7 +15,7 @@ LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 	goto_if_eq LilycoveCity_House3_EventScript_159C1D
 	msgbox LilycoveCity_House3_Text_18BA2B, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -23,7 +23,7 @@ LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 LilycoveCity_House3_EventScript_159C1D:: @ 8159C1D
 	msgbox LilycoveCity_House3_Text_18B9DC, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -33,7 +33,7 @@ LilycoveCity_House3_EventScript_159C32:: @ 8159C32
 	faceplayer
 	msgbox LilycoveCity_House3_Text_18BD64, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

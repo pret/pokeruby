@@ -21,14 +21,14 @@ FortreeCity_House4_EventScript_158188:: @ 8158188
 	end
 
 FortreeCity_House4_EventScript_1581C2:: @ 81581C2
-	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_18684E, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_1581D6:: @ 81581D6
-	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, MSGBOX_DEFAULT
 	giveitem ITEM_MENTAL_HERB
@@ -39,7 +39,7 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	end
 
 FortreeCity_House4_EventScript_158204:: @ 8158204
-	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186924, MSGBOX_DEFAULT
 	releaseall

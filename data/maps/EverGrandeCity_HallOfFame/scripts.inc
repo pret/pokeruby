@@ -20,8 +20,8 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC59
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC59
 	waitmovement 0
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_191841, MSGBOX_DEFAULT
 	closemessage
@@ -29,13 +29,13 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC60
 	waitmovement 0
 	delay 20
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_1918D7, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0841
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
 	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD

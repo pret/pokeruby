@@ -14,9 +14,9 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 
 MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
 	playse SE_PIN
-	applymovement VAR_LAST_TALKED, MauvilleCity_House2_Movement_1A0833
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, MauvilleCity_House2_Movement_1A0835
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MauvilleCity_House2_Text_1824D8, MSGBOX_YESNO
 	compare VAR_RESULT, YES

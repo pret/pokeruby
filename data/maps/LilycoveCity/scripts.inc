@@ -204,10 +204,10 @@ LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_Text_168675, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
@@ -393,7 +393,7 @@ LilycoveCity_EventScript_14CF62:: @ 814CF62
 
 LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_1A0845
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1

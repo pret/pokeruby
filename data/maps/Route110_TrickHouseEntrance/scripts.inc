@@ -237,9 +237,9 @@ Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 
 Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
 	playse SE_PIN
-	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0833
+	applymovement 255, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0835
+	applymovement 255, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_1612CD
@@ -327,21 +327,21 @@ Route110_TrickHouseEntrance_EventScript_161327:: @ 8161327
 Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	msgbox Route110_TrickHouseEntrance_Text_19BF19, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0833
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0835
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19BFAB, MSGBOX_DEFAULT
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16136E:: @ 816136E
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C07E, MSGBOX_DEFAULT
 	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
@@ -433,13 +433,13 @@ Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
 Route110_TrickHouseEntrance_EventScript_161502:: @ 8161502
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 3
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
-	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, MSGBOX_DEFAULT
 	.ifdef SAPPHIRE
@@ -497,7 +497,7 @@ Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
 	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, 0
 	special DrawWholeMapView
 	delay 20
-	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0856
+	applymovement 255, Common_Movement_WalkUp
 	waitmovement 0
 	applymovement 255, Route110_TrickHouseEntrance_Movement_16165E
 	waitmovement 0

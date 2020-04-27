@@ -35,7 +35,7 @@ VictoryRoad_1F_EventScript_15DEBF:: @ 815DEBF
 	end
 
 VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
-	applymovement 255, VictoryRoad_1F_Movement_1A083F
+	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox VictoryRoad_1F_Text_19782B, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_1, VictoryRoad_1F_Text_197943

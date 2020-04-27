@@ -498,7 +498,7 @@ MauvilleCity_GameCorner_EventScript_1570F8:: @ 81570F8
 
 MauvilleCity_GameCorner_EventScript_157108:: @ 8157108
 	closemessage
-	applymovement VAR_LAST_TALKED, MauvilleCity_GameCorner_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -161,7 +161,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C602, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEnd_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C691, MSGBOX_DEFAULT
@@ -202,22 +202,22 @@ Route110_TrickHouseEnd_EventScript_161C61:: @ 8161C61
 	return
 
 Route110_TrickHouseEnd_EventScript_161C74:: @ 8161C74
-	applymovement 1, Route110_TrickHouseEnd_Movement_1A0845
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161C7F:: @ 8161C7F
-	applymovement 1, Route110_TrickHouseEnd_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161C8A:: @ 8161C8A
-	applymovement 1, Route110_TrickHouseEnd_Movement_1A083F
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161C95:: @ 8161C95
-	applymovement 1, Route110_TrickHouseEnd_Movement_1A0843
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -225,13 +225,13 @@ Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	lockall
 	turnobject 1, 3
 	playse SE_PIN
-	applymovement 1, Route110_TrickHouseEnd_Movement_1A0833
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 20
 	applymovement 1, Route110_TrickHouseEnd_Movement_161CEA
 	waitmovement 0
 	playse SE_W153
-	applymovement 255, Route110_TrickHouseEnd_Movement_1A0845
+	applymovement 255, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, MSGBOX_DEFAULT
 	closemessage

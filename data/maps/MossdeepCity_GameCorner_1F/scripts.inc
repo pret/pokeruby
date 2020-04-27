@@ -47,7 +47,7 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	applymovement 1, MossdeepCity_GameCorner_1F_Movement_15AD3F
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, MossdeepCity_GameCorner_1F_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_GAME_CORNER_STATE, 1
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD22

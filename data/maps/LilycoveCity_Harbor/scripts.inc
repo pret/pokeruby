@@ -75,7 +75,7 @@ LilycoveCity_Harbor_EventScript_15997E:: @ 815997E
 LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	msgbox LilycoveCity_Harbor_Text_18B4B3, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
@@ -110,18 +110,18 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
 	addobject 4
 	delay 30
-	applymovement 4, LilycoveCity_Harbor_Movement_1A0839
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_Harbor_Text_1C5120, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, LilycoveCity_Harbor_Movement_1A0841
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	removeobject 4

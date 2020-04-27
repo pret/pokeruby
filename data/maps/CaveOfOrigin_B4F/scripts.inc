@@ -23,7 +23,7 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 
 CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	lockall
-	applymovement 255, CaveOfOrigin_B4F_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4F03, MSGBOX_DEFAULT

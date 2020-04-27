@@ -3,7 +3,7 @@ LilycoveCity_MoveDeletersHouse_MapScripts:: @ 8159AAD
 
 LilycoveCity_MoveDeletersHouse_EventScript_159AAE:: @ 8159AAE
 	lockall
-	applymovement 1, LilycoveCity_MoveDeletersHouse_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B622, MSGBOX_YESNO
 	switch VAR_RESULT

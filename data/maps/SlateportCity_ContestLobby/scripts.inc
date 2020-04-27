@@ -102,7 +102,7 @@ SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
 SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	lockall
 	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, SlateportCity_ContestLobby_EventScript_155526
-	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
+	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, MSGBOX_DEFAULT
 	giveitem ITEM_POKEBLOCK_CASE

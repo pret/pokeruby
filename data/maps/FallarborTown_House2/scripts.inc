@@ -3,7 +3,7 @@ FallarborTown_House2_MapScripts:: @ 8153C90
 
 FallarborTown_House2_EventScript_153C91:: @ 8153C91
 	lockall
-	applymovement 1, FallarborTown_House2_Movement_1A0839
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_set FLAG_TEMP_1, FallarborTown_House2_EventScript_153CB6
 	msgbox FallarborTown_House2_Text_177AF4, MSGBOX_DEFAULT

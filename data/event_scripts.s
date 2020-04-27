@@ -1573,7 +1573,7 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 
 EventScript_1A0457: @ unreferenced?
 	delay 30
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
+	applymovement 255, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
@@ -1749,7 +1749,7 @@ Route119_EventScript_1A05AE:: @ 81A05AE
 Route119_EventScript_1A05C3:: @ 81A05C3
 	msgbox Route119_Text_171BF6, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route119_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, Route119_Movement_1A0662
 	waitmovement 0
@@ -1857,7 +1857,7 @@ EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_GlaciasRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_PhoebesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
-	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0853
+	applymovement 255, Common_Movement_Delay32
 	waitmovement 0
 	playse SE_DOOR
 	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
@@ -1879,7 +1879,7 @@ EverGrandeCity_DrakesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_GlaciasRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_PhoebesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
-	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0847
+	applymovement 255, Common_Movement_WalkUp6
 	waitmovement 0
 	playse SE_TRACK_DOOR
 	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
@@ -1927,296 +1927,7 @@ EverGrandeCity_SidneysRoom_EventScript_1A07FA:: @ 81A07FA
 	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
 	return
 
-SlateportCity_Movement_1A0831:: @ 81A0831
-	emote_question_mark
-	step_end
-
-AquaHideout_B2F_Movement_1A0833:: @ 81A0833
-EverGrandeCity_ChampionsRoom_Movement_1A0833:: @ 81A0833
-LavaridgeTown_Movement_1A0833:: @ 81A0833
-LilycoveCity_ContestLobby_Movement_1A0833:: @ 81A0833
-LilycoveCity_CoveLilyMotel_1F_Movement_1A0833:: @ 81A0833
-LittlerootTown_BrendansHouse_1F_Movement_1A0833:: @ 81A0833
-LittlerootTown_BrendansHouse_2F_Movement_1A0833:: @ 81A0833
-LittlerootTown_MaysHouse_1F_Movement_1A0833:: @ 81A0833
-MauvilleCity_House2_Movement_1A0833:: @ 81A0833
-MauvilleCity_Movement_1A0833:: @ 81A0833
-MeteorFalls_1F_1R_Movement_1A0833:: @ 81A0833
-MossdeepCity_StevensHouse_Movement_1A0833:: @ 81A0833
-MtChimney_Movement_1A0833:: @ 81A0833
-PetalburgCity_Movement_1A0833:: @ 81A0833
-Route103_Movement_1A0833:: @ 81A0833
-Route110_Movement_1A0833:: @ 81A0833
-Route110_TrickHouseEnd_Movement_1A0833:: @ 81A0833
-Route110_TrickHouseEntrance_Movement_1A0833:: @ 81A0833
-Route110_TrickHousePuzzle5_Movement_1A0833:: @ 81A0833
-RustboroCity_DevonCorp_2F_Movement_1A0833:: @ 81A0833
-RustboroCity_Movement_1A0833:: @ 81A0833
-RusturfTunnel_Movement_1A0833:: @ 81A0833
-SeafloorCavern_Room9_Movement_1A0833:: @ 81A0833
-SlateportCity_Movement_1A0833:: @ 81A0833
-SlateportCity_OceanicMuseum_1F_Movement_1A0833:: @ 81A0833
-SlateportCity_PokemonFanClub_Movement_1A0833:: @ 81A0833
-SootopolisCity_Movement_1A0833:: @ 81A0833
-	emote_exclamation_mark
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_1A0835:: @ 81A0835
-LavaridgeTown_Movement_1A0835:: @ 81A0835
-LilycoveCity_CoveLilyMotel_1F_Movement_1A0835:: @ 81A0835
-LittlerootTown_BrendansHouse_1F_Movement_1A0835:: @ 81A0835
-LittlerootTown_BrendansHouse_2F_Movement_1A0835:: @ 81A0835
-LittlerootTown_MaysHouse_1F_Movement_1A0835:: @ 81A0835
-MauvilleCity_House2_Movement_1A0835:: @ 81A0835
-MauvilleCity_Movement_1A0835:: @ 81A0835
-MeteorFalls_1F_1R_Movement_1A0835:: @ 81A0835
-MossdeepCity_StevensHouse_Movement_1A0835:: @ 81A0835
-MtChimney_Movement_1A0835:: @ 81A0835
-PetalburgCity_Movement_1A0835:: @ 81A0835
-Route103_Movement_1A0835:: @ 81A0835
-Route110_Movement_1A0835:: @ 81A0835
-Route110_TrickHouseEntrance_Movement_1A0835:: @ 81A0835
-Route110_TrickHousePuzzle5_Movement_1A0835:: @ 81A0835
-RustboroCity_DevonCorp_2F_Movement_1A0835:: @ 81A0835
-RustboroCity_Movement_1A0835:: @ 81A0835
-RusturfTunnel_Movement_1A0835:: @ 81A0835
-SeafloorCavern_Room9_Movement_1A0835:: @ 81A0835
-SlateportCity_Movement_1A0835:: @ 81A0835
-SlateportCity_OceanicMuseum_1F_Movement_1A0835:: @ 81A0835
-SlateportCity_PokemonFanClub_Movement_1A0835:: @ 81A0835
-SootopolisCity_Movement_1A0835:: @ 81A0835
-	delay_16
-	delay_16
-	delay_16
-	step_end
-
-AquaHideout_B2F_Movement_1A0839:: @ 81A0839
-EverGrandeCity_PokemonLeague_Movement_1A0839:: @ 81A0839
-FallarborTown_House2_Movement_1A0839:: @ 81A0839
-FortreeCity_House4_Movement_1A0839:: @ 81A0839
-LilycoveCity_ContestHall_Movement_1A0839:: @ 81A0839
-LilycoveCity_CoveLilyMotel_1F_Movement_1A0839:: @ 81A0839
-LilycoveCity_DepartmentStore_1F_Movement_1A0839:: @ 81A0839
-LilycoveCity_Harbor_Movement_1A0839:: @ 81A0839
-LilycoveCity_LilycoveMuseum_1F_Movement_1A0839:: @ 81A0839
-LilycoveCity_LilycoveMuseum_2F_Movement_1A0839:: @ 81A0839
-LilycoveCity_MoveDeletersHouse_Movement_1A0839:: @ 81A0839
-LilycoveCity_Movement_1A0839:: @ 81A0839
-LittlerootTown_BrendansHouse_1F_Movement_1A0839:: @ 81A0839
-LittlerootTown_BrendansHouse_2F_Movement_1A0839:: @ 81A0839
-MauvilleCity_Movement_1A0839:: @ 81A0839
-MtChimney_Movement_1A0839:: @ 81A0839
-MtPyre_Summit_Movement_1A0839:: @ 81A0839
-OldaleTown_Movement_1A0839:: @ 81A0839
-PetalburgCity_Gym_Movement_1A0839:: @ 81A0839
-PetalburgCity_Movement_1A0839:: @ 81A0839
-Route103_Movement_1A0839:: @ 81A0839
-Route110_TrickHouseEnd_Movement_1A0839:: @ 81A0839
-Route110_TrickHouseEntrance_Movement_1A0839:: @ 81A0839
-Route110_TrickHousePuzzle5_Movement_1A0839:: @ 81A0839
-Route119_Movement_1A0839:: @ 81A0839
-RusturfTunnel_Movement_1A0839:: @ 81A0839
-SeafloorCavern_Room9_Movement_1A0839:: @ 81A0839
-SlateportCity_ContestLobby_Movement_1A0839:: @ 81A0839
-SlateportCity_Movement_1A0839:: @ 81A0839
-SlateportCity_SternsShipyard_1F_Movement_1A0839:: @ 81A0839
-	face_player
-	step_end
-
-@ 81A083B
-	face_away_player
-	step_end
-
-EverGrandeCity_PokemonLeague_Movement_1A083D:: @ 81A083D
-LilycoveCity_ContestHall_Movement_1A083D:: @ 81A083D
-LilycoveCity_ContestLobby_Movement_1A083D:: @ 81A083D
-LilycoveCity_CoveLilyMotel_1F_Movement_1A083D:: @ 81A083D
-LilycoveCity_House3_Movement_1A083D:: @ 81A083D
-LilycoveCity_LilycoveMuseum_1F_Movement_1A083D:: @ 81A083D
-LilycoveCity_Movement_1A083D:: @ 81A083D
-LittlerootTown_Movement_1A083D:: @ 81A083D
-MauvilleCity_GameCorner_Movement_1A083D:: @ 81A083D
-MauvilleCity_Movement_1A083D:: @ 81A083D
-MossdeepCity_Movement_1A083D:: @ 81A083D
-MossdeepCity_SpaceCenter_1F_Movement_1A083D:: @ 81A083D
-MtChimney_Movement_1A083D:: @ 81A083D
-OldaleTown_Movement_1A083D:: @ 81A083D
-PetalburgCity_Movement_1A083D:: @ 81A083D
-Route109_Movement_1A083D:: @ 81A083D
-Route110_Movement_1A083D:: @ 81A083D
-Route111_WinstrateFamilysHouse_Movement_1A083D:: @ 81A083D
-Route119_Movement_1A083D:: @ 81A083D
-RustboroCity_DevonCorp_3F_Movement_1A083D:: @ 81A083D
-RustboroCity_Movement_1A083D:: @ 81A083D
-RusturfTunnel_Movement_1A083D:: @ 81A083D
-SlateportCity_ContestHall_Movement_1A083D:: @ 81A083D
-SlateportCity_ContestLobby_Movement_1A083D:: @ 81A083D
-SlateportCity_Harbor_Movement_1A083D:: @ 81A083D
-SlateportCity_Movement_1A083D:: @ 81A083D
-SlateportCity_OceanicMuseum_2F_Movement_1A083D:: @ 81A083D
-SlateportCity_SternsShipyard_1F_Movement_1A083D:: @ 81A083D
-VerdanturfTown_Movement_1A083D:: @ 81A083D
-	face_original_direction
-	step_end
-
-Movement_1A083F:: @ 81A083F
-DewfordTown_Hall_Movement_1A083F:: @ 81A083F
-EverGrandeCity_ChampionsRoom_Movement_1A083F:: @ 81A083F
-EverGrandeCity_HallOfFame_Movement_1A083F:: @ 81A083F
-LavaridgeTown_Movement_1A083F:: @ 81A083F
-LilycoveCity_PokemonTrainerFanClub_Movement_1A083F:: @ 81A083F
-LittlerootTown_BrendansHouse_1F_Movement_1A083F:: @ 81A083F
-LittlerootTown_BrendansHouse_2F_Movement_1A083F:: @ 81A083F
-LittlerootTown_MaysHouse_1F_Movement_1A083F:: @ 81A083F
-LittlerootTown_Movement_1A083F:: @ 81A083F
-MeteorFalls_1F_1R_Movement_1A083F:: @ 81A083F
-MossdeepCity_StevensHouse_Movement_1A083F:: @ 81A083F
-MtChimney_Movement_1A083F:: @ 81A083F
-MtPyre_Summit_Movement_1A083F:: @ 81A083F
-OldaleTown_PokemonCenter_1F_Movement_1A083F:: @ 81A083F
-PetalburgCity_Gym_Movement_1A083F:: @ 81A083F
-PetalburgCity_Movement_1A083F:: @ 81A083F
-PetalburgWoods_Movement_1A083F:: @ 81A083F
-Route101_Movement_1A083F:: @ 81A083F
-Route110_TrickHouseEnd_Movement_1A083F:: @ 81A083F
-Route111_Movement_1A083F:: @ 81A083F
-Route116_Movement_1A083F:: @ 81A083F
-Route120_Movement_1A083F:: @ 81A083F
-Route128_Movement_1A083F:: @ 81A083F
-RustboroCity_Movement_1A083F:: @ 81A083F
-SeafloorCavern_Room9_Movement_1A083F:: @ 81A083F
-SlateportCity_Movement_1A083F:: @ 81A083F
-SlateportCity_OceanicMuseum_1F_Movement_1A083F:: @ 81A083F
-SlateportCity_OceanicMuseum_2F_Movement_1A083F:: @ 81A083F
-SootopolisCity_Movement_1A083F:: @ 81A083F
-VictoryRoad_1F_Movement_1A083F:: @ 81A083F
-	walk_in_place_fastest_left
-	step_end
-
-AquaHideout_B2F_Movement_1A0841:: @ 81A0841
-CaveOfOrigin_B4F_Movement_1A0841:: @ 81A0841
-DewfordTown_Hall_Movement_1A0841:: @ 81A0841
-EverGrandeCity_ChampionsRoom_Movement_1A0841:: @ 81A0841
-EverGrandeCity_HallOfFame_Movement_1A0841:: @ 81A0841
-LilycoveCity_Harbor_Movement_1A0841:: @ 81A0841
-LittlerootTown_BrendansHouse_1F_Movement_1A0841:: @ 81A0841
-LittlerootTown_Movement_1A0841:: @ 81A0841
-MeteorFalls_1F_1R_Movement_1A0841:: @ 81A0841
-MossdeepCity_GameCorner_1F_Movement_1A0841:: @ 81A0841
-MtPyre_Summit_Movement_1A0841:: @ 81A0841
-NewMauville_Entrance_Movement_1A0841:: @ 81A0841
-PetalburgCity_Gym_Movement_1A0841:: @ 81A0841
-PetalburgCity_Movement_1A0841:: @ 81A0841
-PetalburgWoods_Movement_1A0841:: @ 81A0841
-Route110_TrickHouseEnd_Movement_1A0841:: @ 81A0841
-Route110_TrickHouseEntrance_Movement_1A0841:: @ 81A0841
-Route111_Movement_1A0841:: @ 81A0841
-Route118_Movement_1A0841:: @ 81A0841
-Route120_Movement_1A0841:: @ 81A0841
-Route121_SafariZoneEntrance_Movement_1A0841:: @ 81A0841
-Route128_Movement_1A0841:: @ 81A0841
-RustboroCity_Movement_1A0841:: @ 81A0841
-RusturfTunnel_Movement_1A0841:: @ 81A0841
-SeafloorCavern_Room9_Movement_1A0841:: @ 81A0841
-SlateportCity_Harbor_Movement_1A0841:: @ 81A0841
-SlateportCity_Movement_1A0841:: @ 81A0841
-SlateportCity_OceanicMuseum_2F_Movement_1A0841:: @ 81A0841
-	walk_in_place_fastest_up
-	step_end
-
-AquaHideout_B2F_Movement_1A0843:: @ 81A0843
-DewfordTown_Hall_Movement_1A0843:: @ 81A0843
-EverGrandeCity_ChampionsRoom_Movement_1A0843:: @ 81A0843
-EverGrandeCity_HallOfFame_Movement_1A0843:: @ 81A0843
-LavaridgeTown_Movement_1A0843:: @ 81A0843
-LilycoveCity_DepartmentStore_1F_Movement_1A0843:: @ 81A0843
-LilycoveCity_PokemonTrainerFanClub_Movement_1A0843:: @ 81A0843
-LittlerootTown_BrendansHouse_1F_Movement_1A0843:: @ 81A0843
-LittlerootTown_BrendansHouse_2F_Movement_1A0843:: @ 81A0843
-LittlerootTown_MaysHouse_1F_Movement_1A0843:: @ 81A0843
-LittlerootTown_Movement_1A0843:: @ 81A0843
-LittlerootTown_ProfessorBirchsLab_Movement_1A0843:: @ 81A0843
-MauvilleCity_Movement_1A0843:: @ 81A0843
-MtPyre_Summit_Movement_1A0843:: @ 81A0843
-OldaleTown_Movement_1A0843:: @ 81A0843
-PetalburgCity_Gym_Movement_1A0843:: @ 81A0843
-PetalburgCity_Movement_1A0843:: @ 81A0843
-Route101_Movement_1A0843:: @ 81A0843
-Route110_Movement_1A0843:: @ 81A0843
-Route110_TrickHouseEnd_Movement_1A0843:: @ 81A0843
-Route116_Movement_1A0843:: @ 81A0843
-Route120_Movement_1A0843:: @ 81A0843
-Route128_Movement_1A0843:: @ 81A0843
-RustboroCity_Movement_1A0843:: @ 81A0843
-SlateportCity_Harbor_Movement_1A0843:: @ 81A0843
-SlateportCity_Movement_1A0843:: @ 81A0843
-SlateportCity_OceanicMuseum_1F_Movement_1A0843:: @ 81A0843
-SlateportCity_OceanicMuseum_2F_Movement_1A0843:: @ 81A0843
-SootopolisCity_Movement_1A0843:: @ 81A0843
-	walk_in_place_fastest_right
-	step_end
-
-BattleTower_Outside_Movement_1A0845:: @ 81A0845
-DewfordTown_Hall_Movement_1A0845:: @ 81A0845
-EverGrandeCity_ChampionsRoom_Movement_1A0845:: @ 81A0845
-LilycoveCity_CoveLilyMotel_1F_Movement_1A0845:: @ 81A0845
-LilycoveCity_DepartmentStoreElevator_Movement_1A0845:: @ 81A0845
-LilycoveCity_Movement_1A0845:: @ 81A0845
-LilycoveCity_PokemonTrainerFanClub_Movement_1A0845:: @ 81A0845
-LittlerootTown_Movement_1A0845:: @ 81A0845
-MauvilleCity_Movement_1A0845:: @ 81A0845
-MeteorFalls_1F_1R_Movement_1A0845:: @ 81A0845
-MtPyre_Summit_Movement_1A0845:: @ 81A0845
-OldaleTown_PokemonCenter_1F_Movement_1A0845:: @ 81A0845
-PetalburgCity_Gym_Movement_1A0845:: @ 81A0845
-PetalburgCity_Movement_1A0845:: @ 81A0845
-PetalburgWoods_Movement_1A0845:: @ 81A0845
-Route110_Movement_1A0845:: @ 81A0845
-Route110_TrickHouseEnd_Movement_1A0845:: @ 81A0845
-Route119_Movement_1A0845:: @ 81A0845
-Route120_Movement_1A0845:: @ 81A0845
-Route128_Movement_1A0845:: @ 81A0845
-RustboroCity_Movement_1A0845:: @ 81A0845
-RustboroCity_PokemonSchool_Movement_1A0845:: @ 81A0845
-RusturfTunnel_Movement_1A0845:: @ 81A0845
-SeafloorCavern_Room9_Movement_1A0845:: @ 81A0845
-SlateportCity_Harbor_Movement_1A0845:: @ 81A0845
-SlateportCity_Movement_1A0845:: @ 81A0845
-SlateportCity_OceanicMuseum_2F_Movement_1A0845:: @ 81A0845
-SootopolisCity_Movement_1A0845:: @ 81A0845
-SouthernIsland_Exterior_Movement_1A0845:: @ 81A0845
-	walk_in_place_fastest_down
-	step_end
-
-EverGrandeCity_SidneysRoom_Movement_1A0847:: @ 81A0847
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_1A084E:: @ 81A084E
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-EverGrandeCity_SidneysRoom_Movement_1A0853:: @ 81A0853
-	delay_16
-	delay_16
-	step_end
-
-Route110_TrickHouseEntrance_Movement_1A0856:: @ 81A0856
-	walk_up
-	step_end
-
-@ 81A0858
-	walk_up
-	walk_up
-	step_end
+	.include "data/scripts/movement.inc"
 
 PictureBookShelfScript:: @ 81A085B
 	msgbox PictureBookShelfText, MSGBOX_SIGN
