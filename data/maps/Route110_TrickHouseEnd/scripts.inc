@@ -231,11 +231,11 @@ Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	applymovement 1, Route110_TrickHouseEnd_Movement_161CEA
 	waitmovement 0
 	playse SE_W153
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route110_TrickHouseEnd_Movement_161CE8
+	applymovement OBJ_EVENT_ID_PLAYER, Route110_TrickHouseEnd_Movement_161CE8
 	waitmovement 0
 	delay 4
 	turnobject 1, 4

@@ -8,7 +8,7 @@ MeteorFalls_1F_1R_MapScript1_15C496:: @ 815C496
 
 MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	lockall
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	applymovement 5, Common_Movement_WalkInPlaceFastestDown
@@ -29,7 +29,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_1932C5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 6, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
@@ -45,7 +45,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_193320, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MeteorFalls_1F_1R_Movement_15C64F
+	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_15C64F
 	applymovement 5, MeteorFalls_1F_1R_Movement_15C5F1
 	applymovement 6, MeteorFalls_1F_1R_Movement_15C5FC
 	waitmovement 0

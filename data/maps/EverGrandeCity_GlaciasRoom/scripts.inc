@@ -9,7 +9,7 @@ EverGrandeCity_GlaciasRoom_MapScript2_15B683:: @ 815B683
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_15B68D:: @ 815B68D
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript2_15B692:: @ 815B692

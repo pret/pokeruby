@@ -68,7 +68,7 @@ LinkContestRoom1_EventScript_15F61A:: @ 815F61A
 	end
 
 LinkContestRoom1_EventScript_15F625:: @ 815F625
-	hideobjectat 255, MAP_LITTLEROOT_TOWN
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	call LinkContestRoom1_EventScript_15F919
 	end
 

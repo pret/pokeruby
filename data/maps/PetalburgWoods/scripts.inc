@@ -44,7 +44,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	call PetalburgWoods_EventScript_15CDE6
 	applymovement 4, PetalburgWoods_Movement_15CE8E
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, MSGBOX_DEFAULT
 	closemessage
@@ -62,7 +62,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	applymovement 4, PetalburgWoods_Movement_15CEA4
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194E9A, MSGBOX_DEFAULT
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194EE8, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PETALBURG_WOODS_GRUNT, PetalburgWoods_Text_194F83
@@ -87,7 +87,7 @@ PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	applymovement 3, PetalburgWoods_Movement_15CEB7
 	waitmovement 0
 	removeobject 3
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_19507E, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL

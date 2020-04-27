@@ -1573,11 +1573,11 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 
 EventScript_1A0457: @ unreferenced?
 	delay 30
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	showobjectat 255, MAP_PETALBURG_CITY
+	showobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	delay 30
-	applymovement 255, Movement_1A047A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A047A
 	waitmovement 0
 	delay 30
 	return
@@ -1593,7 +1593,7 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare VAR_FACING, 3
 	call_if_eq BattleTower_Outside_EventScript_160B3A
 	delay 30
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	call BattleTower_Outside_EventScript_1A040E
 	return
 
@@ -1857,7 +1857,7 @@ EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_GlaciasRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_PhoebesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
-	applymovement 255, Common_Movement_Delay32
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay32
 	waitmovement 0
 	playse SE_DOOR
 	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
@@ -1879,7 +1879,7 @@ EverGrandeCity_DrakesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_GlaciasRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_PhoebesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
-	applymovement 255, Common_Movement_WalkUp6
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp6
 	waitmovement 0
 	playse SE_TRACK_DOOR
 	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
@@ -2743,7 +2743,7 @@ EventScript_1A2DB8:
 	end
 
 SecretBase_EventScript_FirstEntrance:: @ 81A2DDE
-	applymovement 255, SecretBase_RedCave1_Movement_1A2E11
+	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_RedCave1_Movement_1A2E11
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_RedCave1_Text_198F89, MSGBOX_YESNO
@@ -3873,7 +3873,7 @@ SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
 S_FallDownHole:: @ 81C6BC5
 	lockall
 	delay 20
-	applymovement 255, GraniteCave_B1F_Movement_1C6BF7
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_B1F_Movement_1C6BF7
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
@@ -3884,7 +3884,7 @@ S_FallDownHole:: @ 81C6BC5
 gUnknown_081C6BDE:: @ 81C6BDE
 	lockall
 	delay 20
-	applymovement 255, GraniteCave_B1F_Movement_1C6BF7
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_B1F_Movement_1C6BF7
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60

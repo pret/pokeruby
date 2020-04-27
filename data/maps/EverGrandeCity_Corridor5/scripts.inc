@@ -7,5 +7,5 @@ EverGrandeCity_Corridor5_MapScript2_15BA66:: @ 815BA66
 	.2byte 0
 
 EverGrandeCity_Corridor5_EventScript_15BA70:: @ 815BA70
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end

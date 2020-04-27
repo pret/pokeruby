@@ -61,7 +61,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
 	lockall
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172574, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_152720
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_152720
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_152720
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 255, 7, 1
@@ -94,7 +94,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	waitmovement 0
 	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_152782
 	waitmovement 0
 	special GetRivalSonDaughterString

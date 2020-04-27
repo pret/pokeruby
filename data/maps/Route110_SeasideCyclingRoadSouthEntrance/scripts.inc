@@ -21,7 +21,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_16348B:: @ 816348B
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6:: @ 81634A6
 	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_19E3AD, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route110_SeasideCyclingRoadSouthEntrance_Movement_1634BB
+	applymovement OBJ_EVENT_ID_PLAYER, Route110_SeasideCyclingRoadSouthEntrance_Movement_1634BB
 	waitmovement 0
 	releaseall
 	end

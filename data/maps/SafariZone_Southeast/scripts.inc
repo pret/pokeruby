@@ -10,7 +10,7 @@ SafariZone_Southeast_MapScript2_160041:: @ 8160041
 SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	lockall
 	setvar VAR_TEMP_1, 0
-	applymovement 255, SafariZone_Southeast_Movement_160087
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_Southeast_Movement_160087
 	waitmovement 0
 	applymovement 1, SafariZone_Southeast_Movement_160089
 	waitmovement 0
@@ -78,7 +78,7 @@ SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
 SafariZone_Southeast_EventScript_160105:: @ 8160105
 	applymovement 1, SafariZone_Southeast_Movement_160150
 	waitmovement 0
-	applymovement 255, SafariZone_Southeast_Movement_16014B
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_Southeast_Movement_16014B
 	waitmovement 0
 	goto SafariZone_Southeast_EventScript_160139
 	end
@@ -86,7 +86,7 @@ SafariZone_Southeast_EventScript_160105:: @ 8160105
 SafariZone_Southeast_EventScript_16011F:: @ 816011F
 	applymovement 1, SafariZone_Southeast_Movement_160153
 	waitmovement 0
-	applymovement 255, SafariZone_Southeast_Movement_16014D
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_Southeast_Movement_16014D
 	waitmovement 0
 	goto SafariZone_Southeast_EventScript_160139
 	end

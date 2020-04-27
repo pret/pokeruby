@@ -18,14 +18,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_155ADB:: @ 8155ADB
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AE4:: @ 8155AE4
 	lockall
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 	lockall
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
@@ -38,7 +38,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_155B8D
 	waitmovement 0
 	releaseall
 	end
@@ -61,7 +61,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_155B8D
 	waitmovement 0
 	releaseall
 	end

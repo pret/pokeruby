@@ -13,7 +13,7 @@ EverGrandeCity_ChampionsRoom_MapScript2_15B7C5:: @ 815B7C5
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7CF:: @ 815B7CF
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
@@ -22,10 +22,10 @@ EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	lockall
-	applymovement 255, Common_Movement_WalkUp4
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp4
 	waitmovement 0
 	delay 40
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B802
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_15B802
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B805
@@ -105,7 +105,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	addobject 3
 	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, MSGBOX_DEFAULT
 	call EverGrandeCity_ChampionsRoom_EventScript_1A03B0
@@ -119,12 +119,12 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_15B9DD
 	applymovement 3, Common_Movement_WalkInPlaceFastestUp
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
 	waitmovement 0
 	delay 20
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, MSGBOX_DEFAULT
 	checkplayergender
@@ -134,7 +134,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B9B4
 	closemessage
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
-	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_15B9E0
 	waitmovement 0
 	setflag FLAG_HIDE_PETALBURG_GYM_GUIDE
 	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 255, 7, 16
@@ -153,7 +153,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B9B4:: @ 815B9B4
 EverGrandeCity_ChampionsRoom_EventScript_15B9BD:: @ 815B9BD
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9E6
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

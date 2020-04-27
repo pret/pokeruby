@@ -73,12 +73,12 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB34:: @ 815BB34
-	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB76
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_Movement_15BB76
 	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB3F:: @ 815BB3F
-	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB7A
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_Movement_15BB7A
 	waitmovement 0
 	return
 

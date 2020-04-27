@@ -14,7 +14,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_152C9D:: @ 8152C9D
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CA7:: @ 8152CA7
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC:: @ 8152CAC
@@ -67,7 +67,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D4A:: @ 8152D4A
 	lockall
-	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_152D5B
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_152D5B
 	waitmovement 0
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_152DBA
 	end
@@ -119,7 +119,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174248, MSGBOX_DEFAULT
 	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_152E97
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0

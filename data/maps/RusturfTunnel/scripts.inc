@@ -86,13 +86,13 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	end
 
 RusturfTunnel_EventScript_15C880:: @ 815C880
-	applymovement 255, RusturfTunnel_Movement_15C96A
+	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_15C96A
 	applymovement 1, RusturfTunnel_Movement_15C98F
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C892:: @ 815C892
-	applymovement 255, RusturfTunnel_Movement_15C96D
+	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_15C96D
 	applymovement 1, RusturfTunnel_Movement_15C994
 	waitmovement 0
 	applymovement 10, Common_Movement_WalkInPlaceFastestDown
@@ -100,7 +100,7 @@ RusturfTunnel_EventScript_15C892:: @ 815C892
 	return
 
 RusturfTunnel_EventScript_15C8AE:: @ 815C8AE
-	applymovement 255, RusturfTunnel_Movement_15C96D
+	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_15C96D
 	applymovement 1, RusturfTunnel_Movement_15C994
 	waitmovement 0
 	applymovement 10, Common_Movement_WalkInPlaceFastestDown
@@ -110,7 +110,7 @@ RusturfTunnel_EventScript_15C8AE:: @ 815C8AE
 RusturfTunnel_EventScript_15C8CA:: @ 815C8CA
 	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -314,7 +314,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	msgbox RusturfTunnel_Text_194274, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_GOODS
 	closemessage
-	applymovement 255, RusturfTunnel_Movement_15CA99
+	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_15CA99
 	applymovement 6, RusturfTunnel_Movement_15CAA2
 	waitmovement 0
 	removeobject 6
@@ -322,7 +322,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	addobject 5
 	applymovement 5, RusturfTunnel_Movement_15CAAC
 	waitmovement 0
-	applymovement 255, RusturfTunnel_Movement_15CA9F
+	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_15CA9F
 	applymovement 5, RusturfTunnel_Movement_15CAC0
 	waitmovement 0
 	msgbox RusturfTunnel_Text_19432A, MSGBOX_DEFAULT

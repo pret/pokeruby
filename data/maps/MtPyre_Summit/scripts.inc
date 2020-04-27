@@ -25,7 +25,7 @@ MtPyre_Summit_EventScript_15D4D5:: @ 815D4D5
 	end
 
 MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	applymovement 2, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
@@ -93,7 +93,7 @@ MtPyre_Summit_EventScript_15D59F:: @ 815D59F
 MtPyre_Summit_EventScript_15D5AA:: @ 815D5AA
 	applymovement 3, MtPyre_Summit_Movement_15D5DF
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -105,7 +105,7 @@ MtPyre_Summit_EventScript_15D5BF:: @ 815D5BF
 MtPyre_Summit_EventScript_15D5CA:: @ 815D5CA
 	applymovement 3, MtPyre_Summit_Movement_15D5E5
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -260,7 +260,7 @@ MtPyre_Summit_EventScript_15D6E6:: @ 815D6E6
 	end
 
 MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	applymovement 2, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0

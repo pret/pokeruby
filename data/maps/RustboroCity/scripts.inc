@@ -219,7 +219,7 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 @ 814C59B
 	applymovement 9, RustboroCity_Movement_14C5F7
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -382,7 +382,7 @@ RustboroCity_EventScript_14C691:: @ 814C691
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -394,7 +394,7 @@ RustboroCity_EventScript_14C6BD:: @ 814C6BD
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -406,7 +406,7 @@ RustboroCity_EventScript_14C6E9:: @ 814C6E9
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -420,7 +420,7 @@ RustboroCity_EventScript_14C715:: @ 814C715
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_14C74B
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -490,7 +490,7 @@ RustboroCity_EventScript_14C7FE:: @ 814C7FE
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -502,7 +502,7 @@ RustboroCity_EventScript_14C82A:: @ 814C82A
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -514,7 +514,7 @@ RustboroCity_EventScript_14C856:: @ 814C856
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -528,7 +528,7 @@ RustboroCity_EventScript_14C882:: @ 814C882
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_14C74B
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 

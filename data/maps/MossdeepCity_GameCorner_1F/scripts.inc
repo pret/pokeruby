@@ -42,12 +42,12 @@ MossdeepCity_GameCorner_1F_MapScript2_15ACBB:: @ 815ACBB
 
 MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	lockall
-	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AD3D
+	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_GameCorner_1F_Movement_15AD3D
 	waitmovement 0
 	applymovement 1, MossdeepCity_GameCorner_1F_Movement_15AD3F
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_GAME_CORNER_STATE, 1
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD22
@@ -137,19 +137,19 @@ MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
 
 MossdeepCity_GameCorner_1F_EventScript_15AE04:: @ 815AE04
 	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
-	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE3A
+	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_GameCorner_1F_Movement_15AE3A
 	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE16:: @ 815AE16
 	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE49
-	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE3E
+	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_GameCorner_1F_Movement_15AE3E
 	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE28:: @ 815AE28
 	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
-	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE42
+	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_GameCorner_1F_Movement_15AE42
 	waitmovement 0
 	return
 

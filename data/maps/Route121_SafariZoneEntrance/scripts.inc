@@ -8,7 +8,7 @@ Route121_SafariZoneEntrance_MapScript2_15C329:: @ 815C329
 
 Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
 	lockall
-	applymovement 255, Route121_SafariZoneEntrance_Movement_15C348
+	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_15C348
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_SAFARI_ZONE_STATE, 0
@@ -47,7 +47,7 @@ Route121_SafariZoneEntrance_EventScript_15C379:: @ 815C379
 
 Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	lockall
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showmoneybox 0, 0
 	nop
@@ -78,7 +78,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C392D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
+	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_15C47E
 	waitmovement 0
 	special EnterSafariMode
 	setvar VAR_SAFARI_ZONE_STATE, 2
@@ -113,7 +113,7 @@ Route121_SafariZoneEntrance_EventScript_15C45E:: @ 815C45E
 Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47C
+	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_15C47C
 	waitmovement 0
 	releaseall
 	end

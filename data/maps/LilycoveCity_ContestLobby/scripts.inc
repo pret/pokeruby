@@ -22,7 +22,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	addobject 4
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A3B
 	waitmovement 4
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158A4C
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158A4C
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_18890F, MSGBOX_DEFAULT
 	lockall
@@ -196,7 +196,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	addobject 11
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B64
 	waitmovement 11
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158B76
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158B76
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_18890F, MSGBOX_DEFAULT
 	lockall
@@ -505,14 +505,14 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EAE
 	waitmovement 0
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158E99
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158E99
 	waitmovement 0
 	messageautoscroll LilycoveCity_ContestLobby_Text_1A6832
 	waitmessage
 	delay 20
 	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA4
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158E8E
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158E8E
 	waitmovement 0
 	releaseall
 	return
@@ -644,12 +644,12 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15901C
 	waitmovement 0
-	applymovement 255, LilycoveCity_ContestLobby_Movement_159008
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_159008
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_ContestLobby_Movement_159013
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158FFE
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158FFE
 	waitmovement 0
 	releaseall
 	return

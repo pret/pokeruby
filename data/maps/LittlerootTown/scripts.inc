@@ -99,7 +99,7 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 LittlerootTown_EventScript_14D62B:: @ 814D62B
 	delay 15
 	playse SE_DANSA
-	applymovement 255, LittlerootTown_Movement_14D6C0
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6C0
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
@@ -114,16 +114,16 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	msgbox LittlerootTown_Text_16A7C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_14D6B1
-	applymovement 255, LittlerootTown_Movement_14D6B8
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6B8
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14D6B5
-	applymovement 255, LittlerootTown_Movement_14D6BD
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6BD
 	waitmovement 0
 	setflag FLAG_HIDE_MOM_LITTLEROOT
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
@@ -228,7 +228,7 @@ LittlerootTown_EventScript_14D755:: @ 814D755
 	msgbox LittlerootTown_Text_16ACEB, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_14D787
-	applymovement 255, LittlerootTown_Movement_14D793
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D793
 	waitmovement 0
 	msgbox LittlerootTown_Text_16AD3C, MSGBOX_DEFAULT
 	closemessage
@@ -310,7 +310,7 @@ LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	lockall
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox LittlerootTown_Text_16AD82, MSGBOX_DEFAULT
 	closemessage
@@ -480,70 +480,70 @@ LittlerootTown_EventScript_14D995:: @ 814D995
 	return
 
 LittlerootTown_EventScript_14D9D8:: @ 814D9D8
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC76
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D9ED:: @ 814D9ED
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC7D
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA02:: @ 814DA02
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC84
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA17:: @ 814DA17
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC89
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA2C:: @ 814DA2C
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC8F
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA41:: @ 814DA41
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC92
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA56:: @ 814DA56
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC96
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA6B:: @ 814DA6B
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC9A
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA80:: @ 814DA80
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC9D
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA95:: @ 814DA95
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DCA3
 	waitmovement 0

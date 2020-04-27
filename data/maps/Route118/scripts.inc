@@ -50,7 +50,7 @@ Route118_EventScript_150FA5:: @ 8150FA5
 Route118_EventScript_150FAE:: @ 8150FAE
 	lockall
 	setvar VAR_0x8008, 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	applymovement 19, Route118_Movement_151069
 	waitmovement 0
@@ -60,7 +60,7 @@ Route118_EventScript_150FAE:: @ 8150FAE
 Route118_EventScript_150FCE:: @ 8150FCE
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	goto Route118_EventScript_151004
 	end
@@ -68,7 +68,7 @@ Route118_EventScript_150FCE:: @ 8150FCE
 Route118_EventScript_150FE4:: @ 8150FE4
 	lockall
 	setvar VAR_0x8008, 2
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	applymovement 19, Route118_Movement_15106B
 	waitmovement 0

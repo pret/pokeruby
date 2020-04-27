@@ -42,7 +42,7 @@ SlateportCity_Harbor_EventScript_155FB3:: @ 8155FB3
 SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 	lockall
 	setvar VAR_0x8008, 3
-	applymovement 255, SlateportCity_Harbor_Movement_1560C2
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_1560C2
 	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
@@ -50,7 +50,7 @@ SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	applymovement 7, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_17FD7D, MSGBOX_DEFAULT
 	closemessage
@@ -82,21 +82,21 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 SlateportCity_Harbor_EventScript_15605C:: @ 815605C
 	applymovement 4, SlateportCity_Harbor_Movement_1560B3
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_156071:: @ 8156071
 	applymovement 4, SlateportCity_Harbor_Movement_1560B9
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_156086:: @ 8156086
 	applymovement 4, SlateportCity_Harbor_Movement_1560BE
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -226,7 +226,7 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	compare VAR_FACING, 4
 	call_if_eq SlateportCity_Harbor_EventScript_1561E4
 	delay 30
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 5
 	call SlateportCity_Harbor_EventScript_1A040E
 	return
@@ -237,12 +237,12 @@ SlateportCity_Harbor_EventScript_1561DA:: @ 81561DA
 	end
 
 SlateportCity_Harbor_EventScript_1561E4:: @ 81561E4
-	applymovement 255, SlateportCity_Harbor_Movement_1561FA
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_1561FA
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_1561EF:: @ 81561EF
-	applymovement 255, SlateportCity_Harbor_Movement_1561FD
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_1561FD
 	waitmovement 0
 	return
 

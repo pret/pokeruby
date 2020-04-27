@@ -61,7 +61,7 @@ PetalburgCity_Gym_MapScript2_154553:: @ 8154553
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_15455D:: @ 815455D
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 PetalburgCity_Gym_MapScript2_154562:: @ 8154562
@@ -73,14 +73,14 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	msgbox PetalburgCity_Gym_Text_17A196, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_17A1B0, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	applymovement 10, PetalburgCity_Gym_Movement_1545B4
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 10
 	setflag FLAG_HIDE_WALLY_PETALBURG
 	delay 30
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_17A2A4, MSGBOX_DEFAULT
 	setvar VAR_PETALBURG_GYM_STATE, 2
@@ -219,13 +219,13 @@ PetalburgCity_Gym_EventScript_154800:: @ 8154800
 	applymovement 10, PetalburgCity_Gym_Movement_154B1D
 	waitmovement 0
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_15481C:: @ 815481C
 	applymovement 1, Common_Movement_WalkInPlaceFastestDown
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	applymovement 10, PetalburgCity_Gym_Movement_154B27
 	waitmovement 0
 	return
@@ -233,25 +233,25 @@ PetalburgCity_Gym_EventScript_15481C:: @ 815481C
 PetalburgCity_Gym_EventScript_154835:: @ 8154835
 	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	applymovement 10, PetalburgCity_Gym_Movement_154B3E
-	applymovement 255, PetalburgCity_Gym_Movement_154B4D
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Gym_Movement_154B4D
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_15484E:: @ 815484E
 	applymovement 10, PetalburgCity_Gym_Movement_154B2E
-	applymovement 255, PetalburgCity_Gym_Movement_154B45
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Gym_Movement_154B45
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154860:: @ 8154860
 	applymovement 10, PetalburgCity_Gym_Movement_154B3E
-	applymovement 255, PetalburgCity_Gym_Movement_154B57
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Gym_Movement_154B57
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154872:: @ 8154872
 	applymovement 10, PetalburgCity_Gym_Movement_154B36
-	applymovement 255, PetalburgCity_Gym_Movement_154B5F
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Gym_Movement_154B5F
 	waitmovement 0
 	return
 
@@ -262,19 +262,19 @@ PetalburgCity_Gym_EventScript_154884:: @ 8154884
 
 PetalburgCity_Gym_EventScript_15488F:: @ 815488F
 	applymovement 1, Common_Movement_WalkInPlaceFastestDown
-	applymovement 255, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548A1:: @ 81548A1
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548B3:: @ 81548B3
 	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 

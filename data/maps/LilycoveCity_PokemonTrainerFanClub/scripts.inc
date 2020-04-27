@@ -15,12 +15,12 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15939F:: @ 815939F
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_159402
 	applymovement 2, LilycoveCity_PokemonTrainerFanClub_Movement_1593FA
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A1E8, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_159409
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_15940C
 	waitmovement 0

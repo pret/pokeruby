@@ -491,7 +491,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	waitmovement 0
 	delay 25
 	applymovement 11, SlateportCity_Movement_14C000
-	applymovement 255, SlateportCity_Movement_14C00E
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Movement_14C00E
 	applymovement 10, SlateportCity_Movement_14BFDD
 	applymovement 9, SlateportCity_Movement_14BFEA
 	waitmovement 0
@@ -523,7 +523,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	msgbox SlateportCity_Text_16583A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 11, SlateportCity_Movement_14BFFB
-	applymovement 255, SlateportCity_Movement_14C008
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Movement_14C008
 	waitmovement 0
 	removeobject 11
 	clearflag FLAG_HIDE_STERN_SLATEPORT_HARBOR

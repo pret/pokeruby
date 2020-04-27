@@ -44,7 +44,7 @@ BattleTower_Lobby_MapScript2_1602EE:: @ 81602EE
 
 BattleTower_Lobby_EventScript_1602F8:: @ 81602F8
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 BattleTower_Lobby_MapScript2_160302:: @ 8160302
@@ -292,12 +292,12 @@ BattleTower_Lobby_EventScript_160662:: @ 8160662
 
 BattleTower_Lobby_EventScript_160664:: @ 8160664
 	applymovement 1, BattleTower_Lobby_Movement_160693
-	applymovement 255, BattleTower_Lobby_Movement_160693
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Lobby_Movement_160693
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, BattleTower_Lobby_Movement_160697
-	applymovement 255, BattleTower_Lobby_Movement_16069A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Lobby_Movement_16069A
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

@@ -15,32 +15,32 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 	end
 
 Route109_EventScript_14F518:: @ 814F518
-	applymovement 255, Route109_Movement_14F66D
+	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F66D
 	waitmovement 0
 	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F528:: @ 814F528
-	applymovement 255, Route109_Movement_14F675
+	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F675
 	waitmovement 0
 	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F538:: @ 814F538
-	applymovement 255, Route109_Movement_14F678
+	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F678
 	waitmovement 0
 	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F548:: @ 814F548
-	hideobjectat 255, MAP_ROUTE109
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE109
 	call Route109_EventScript_1A02E7
 	applymovement 1, Route109_Movement_14F5BF
-	applymovement 255, Route109_Movement_14F5BF
+	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F5BF
 	waitmovement 0
 	call Route109_EventScript_1A02EF
-	showobjectat 255, MAP_DEWFORD_TOWN
-	applymovement 255, Route109_Movement_14F670
+	showobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
+	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F670
 	waitmovement 0
 	addobject 4
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
@@ -55,7 +55,7 @@ Route109_EventScript_14F548:: @ 814F548
 	msgbox Route109_Text_16B4B5, MSGBOX_DEFAULT
 	closemessage
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
-	resetobjectpriority 255, MAP_ROUTE109
+	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	release

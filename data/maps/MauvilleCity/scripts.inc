@@ -120,7 +120,7 @@ MauvilleCity_EventScript_14C187:: @ 814C187
 	delay 30
 	applymovement 7, MauvilleCity_Movement_14C2D8
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, MSGBOX_DEFAULT
 	closemessage
@@ -139,7 +139,7 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 	delay 30
 	applymovement 7, MauvilleCity_Movement_14C2DC
 	waitmovement 0
-	applymovement 255, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, MSGBOX_DEFAULT
 	closemessage
