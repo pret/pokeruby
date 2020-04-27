@@ -66,7 +66,7 @@ MtChimney_Movement_15D025:: @ 815D025
 	walk_up
 	walk_up
 	walk_right
-	end_movement
+	step_end
 
 MtChimney_Movement_15D02D:: @ 815D02D
 	walk_left
@@ -77,7 +77,7 @@ MtChimney_Movement_15D02D:: @ 815D02D
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 MtChimney_Movement_15D036:: @ 815D036
 	walk_up
@@ -87,7 +87,7 @@ MtChimney_Movement_15D036:: @ 815D036
 	walk_up
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
@@ -99,7 +99,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D048
 	walk_down
@@ -119,7 +119,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
 	walk_left
 	walk_down
-	end_movement
+	step_end
 
 @ 815D05A
 	walk_down
@@ -130,7 +130,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
 	walk_left
 	walk_down
-	end_movement
+	step_end
 
 @ 815D063
 	walk_right
@@ -147,7 +147,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D072
 	walk_fast_down
@@ -174,7 +174,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
 	walk_left
 	walk_down
-	end_movement
+	step_end
 
 @ 815D08B
 	delay_16
@@ -187,7 +187,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
 	walk_left
 	walk_down
-	end_movement
+	step_end
 
 @ 815D096
 	delay_16
@@ -205,7 +205,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0A6
 	delay_16
@@ -224,7 +224,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
 	walk_left
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0B7
 	delay_16
@@ -234,7 +234,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 @ 815D0BF
 	walk_down
@@ -250,11 +250,11 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0CD
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0CF
 	walk_down
@@ -264,7 +264,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0D7
 	delay_16
@@ -276,7 +276,7 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0E1
 	delay_16
@@ -289,20 +289,20 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	delay_16
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815D0EC
 	lock_facing_direction
 	walk_fast_left
 	unlock_facing_direction
 	face_right
-	end_movement
+	step_end
 
 @ 815D0F1
 	walk_left
 	walk_in_place_fastest_right
 	delay_16
-	end_movement
+	step_end
 
 MtChimney_EventScript_15D0F5:: @ 815D0F5
 	.ifdef SAPPHIRE

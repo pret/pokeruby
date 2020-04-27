@@ -73,7 +73,7 @@ EverGrandeCity_HallOfFame_Movement_15BC59:: @ 815BC59
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 EverGrandeCity_HallOfFame_Movement_15BC60:: @ 815BC60
 	walk_up
@@ -81,4 +81,4 @@ EverGrandeCity_HallOfFame_Movement_15BC60:: @ 815BC60
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end

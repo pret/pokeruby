@@ -51,7 +51,7 @@ FortreeCity_House4_Movement_158218:: @ 8158218
 	walk_fast_right
 	walk_in_place_fastest_down
 	delay_8
-	end_movement
+	step_end
 
 FortreeCity_House4_EventScript_15821E:: @ 815821E
 	lock

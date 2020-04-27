@@ -55,22 +55,22 @@ SlateportCity_ContestLobby_Movement_1554C0:: @ 81554C0
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554CA:: @ 81554CA
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554CC:: @ 81554CC
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554CF:: @ 81554CF
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554D3:: @ 81554D3
 	walk_left
@@ -81,11 +81,11 @@ SlateportCity_ContestLobby_Movement_1554D3:: @ 81554D3
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554DC:: @ 81554DC
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_EventScript_1554DE:: @ 81554DE
 	msgbox SlateportCity_ContestLobby_Text_17C937, MSGBOX_NPC

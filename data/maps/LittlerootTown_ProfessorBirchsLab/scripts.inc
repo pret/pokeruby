@@ -80,7 +80,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_152D5B:: @ 8152D5B
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	lock
@@ -176,7 +176,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E8E:: @ 8152E8E
 LittlerootTown_ProfessorBirchsLab_Movement_152E97:: @ 8152E97
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E9A:: @ 8152E9A
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1746A2, MSGBOX_SIGN

@@ -132,42 +132,42 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 
 LittlerootTown_Movement_14D6AC:: @ 814D6AC
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6AE:: @ 814D6AE
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6B1:: @ 814D6B1
 	delay_16
 	delay_8
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6B5:: @ 814D6B5
 	walk_up
 	set_invisible
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6B8:: @ 814D6B8
 	delay_16
 	delay_8
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6BD:: @ 814D6BD
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6C0:: @ 814D6C0
 	jump_right
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14D6C5:: @ 814D6C5
 	lockall
@@ -248,11 +248,11 @@ LittlerootTown_Movement_14D779:: @ 814D779
 	walk_fast_up
 	walk_fast_left
 	face_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D787:: @ 814D787
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D789:: @ 814D789
 	walk_right
@@ -264,13 +264,13 @@ LittlerootTown_Movement_14D789:: @ 814D789
 	walk_left
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D793:: @ 814D793
 	lock_facing_direction
 	walk_down
 	unlock_facing_direction
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14D797:: @ 814D797
 	lockall
@@ -295,7 +295,7 @@ LittlerootTown_Movement_14D7B3:: @ 814D7B3
 	walk_fast_up
 	walk_fast_right
 	face_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D7C0:: @ 814D7C0
 	walk_left
@@ -304,7 +304,7 @@ LittlerootTown_Movement_14D7C0:: @ 814D7C0
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	lockall
@@ -692,7 +692,7 @@ LittlerootTown_Movement_14DC76:: @ 814DC76
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC7D:: @ 814DC7D
 	walk_up
@@ -701,14 +701,14 @@ LittlerootTown_Movement_14DC7D:: @ 814DC7D
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC84:: @ 814DC84
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC89:: @ 814DC89
 	walk_right
@@ -716,29 +716,29 @@ LittlerootTown_Movement_14DC89:: @ 814DC89
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC8F:: @ 814DC8F
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC92:: @ 814DC92
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC96:: @ 814DC96
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC9A:: @ 814DC9A
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC9D:: @ 814DC9D
 	walk_left
@@ -746,14 +746,14 @@ LittlerootTown_Movement_14DC9D:: @ 814DC9D
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCA3:: @ 814DCA3
 	walk_left
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCA8:: @ 814DCA8
 	walk_down
@@ -761,7 +761,7 @@ LittlerootTown_Movement_14DCA8:: @ 814DCA8
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCAE:: @ 814DCAE
 	walk_down
@@ -769,7 +769,7 @@ LittlerootTown_Movement_14DCAE:: @ 814DCAE
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCB4:: @ 814DCB4
 	walk_left
@@ -777,7 +777,7 @@ LittlerootTown_Movement_14DCB4:: @ 814DCB4
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCBA:: @ 814DCBA
 	walk_left
@@ -786,33 +786,33 @@ LittlerootTown_Movement_14DCBA:: @ 814DCBA
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCC1:: @ 814DCC1
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCC5:: @ 814DCC5
 	walk_left
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCCA:: @ 814DCCA
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCCF:: @ 814DCCF
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCD3:: @ 814DCD3
 	walk_right
@@ -821,7 +821,7 @@ LittlerootTown_Movement_14DCD3:: @ 814DCD3
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCDA:: @ 814DCDA
 	walk_right
@@ -829,11 +829,11 @@ LittlerootTown_Movement_14DCDA:: @ 814DCDA
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCE0:: @ 814DCE0
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	lock

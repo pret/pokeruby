@@ -71,7 +71,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 
 LittlerootTown_MaysHouse_1F_Movement_15295E:: @ 815295E
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_MaysHouse_1F_EventScript_152960:: @ 8152960
 	lockall
@@ -111,7 +111,7 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 @ 81529C7
 	lockall

@@ -61,14 +61,14 @@ LilycoveCity_CoveLilyMotel_1F_Movement_158395:: @ 8158395
 	lock_facing_direction
 	walk_left
 	unlock_facing_direction
-	end_movement
+	step_end
 
 LilycoveCity_CoveLilyMotel_1F_Movement_15839A:: @ 815839A
 	walk_up
-	end_movement
+	step_end
 
 LilycoveCity_CoveLilyMotel_1F_Movement_15839C:: @ 815839C
 	face_down
 	walk_down
 	face_up
-	end_movement
+	step_end

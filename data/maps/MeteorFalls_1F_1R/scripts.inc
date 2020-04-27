@@ -85,7 +85,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 MeteorFalls_1F_1R_Movement_15C5EE:: @ 815C5EE
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C5F1:: @ 815C5F1
 	walk_fast_up
@@ -98,7 +98,7 @@ MeteorFalls_1F_1R_Movement_15C5F1:: @ 815C5F1
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C5FC:: @ 815C5FC
 	walk_fast_up
@@ -112,7 +112,7 @@ MeteorFalls_1F_1R_Movement_15C5FC:: @ 815C5FC
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C608:: @ 815C608
 	walk_right
@@ -121,7 +121,7 @@ MeteorFalls_1F_1R_Movement_15C608:: @ 815C608
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C60F:: @ 815C60F
 	delay_16
@@ -131,7 +131,7 @@ MeteorFalls_1F_1R_Movement_15C60F:: @ 815C60F
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C617:: @ 815C617
 	delay_16
@@ -141,7 +141,7 @@ MeteorFalls_1F_1R_Movement_15C617:: @ 815C617
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C61F:: @ 815C61F
 	walk_right
@@ -152,7 +152,7 @@ MeteorFalls_1F_1R_Movement_15C61F:: @ 815C61F
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C628:: @ 815C628
 	walk_right
@@ -160,7 +160,7 @@ MeteorFalls_1F_1R_Movement_15C628:: @ 815C628
 	walk_up
 	walk_up
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C62E:: @ 815C62E
 	walk_up
@@ -173,14 +173,14 @@ MeteorFalls_1F_1R_Movement_15C62E:: @ 815C62E
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C639:: @ 815C639
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C63E:: @ 815C63E
 	walk_up
@@ -194,14 +194,14 @@ MeteorFalls_1F_1R_Movement_15C63E:: @ 815C63E
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C64A:: @ 815C64A
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_Movement_15C64F:: @ 815C64F
 	walk_in_place_fastest_down
@@ -210,7 +210,7 @@ MeteorFalls_1F_1R_Movement_15C64F:: @ 815C64F
 	lock_facing_direction
 	walk_left
 	unlock_facing_direction
-	end_movement
+	step_end
 
 MeteorFalls_1F_1R_EventScript_15C656:: @ 815C656
 	lock

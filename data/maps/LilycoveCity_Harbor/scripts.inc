@@ -142,15 +142,15 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 LilycoveCity_Harbor_Movement_159A86:: @ 8159A86
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LilycoveCity_Harbor_Movement_159A89:: @ 8159A89
 	walk_up
-	end_movement
+	step_end
 
 @ 8159A8B
 	walk_up
-	end_movement
+	step_end
 
 LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock

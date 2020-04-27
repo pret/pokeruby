@@ -30,12 +30,12 @@ SafariZone_Southeast_EventScript_16007F:: @ 816007F
 
 SafariZone_Southeast_Movement_160087:: @ 8160087
 	walk_down
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_160089:: @ 8160089
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SafariZone_Southeast_EventScript_16008C:: @ 816008C
 	msgbox SafariZone_Southeast_Text_1C3B71, MSGBOX_NPC
@@ -100,19 +100,19 @@ SafariZone_Southeast_EventScript_160139:: @ 8160139
 
 SafariZone_Southeast_Movement_16014B:: @ 816014B
 	walk_up
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_16014D:: @ 816014D
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_160150:: @ 8160150
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_160153:: @ 8160153
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end

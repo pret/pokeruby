@@ -55,4 +55,4 @@ BattleTower_Corridor_Movement_1608D5:: @ 81608D5
 	walk_right
 	walk_up
 	set_invisible
-	end_movement
+	step_end

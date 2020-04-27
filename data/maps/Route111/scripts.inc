@@ -113,7 +113,7 @@ Route111_Movement_1500AF:: @ 81500AF
 	set_invisible
 	delay_16
 	set_visible
-	end_movement
+	step_end
 
 Route111_EventScript_1500C5:: @ 81500C5
 	lock
@@ -203,19 +203,19 @@ Route111_EventScript_1501A9:: @ 81501A9
 
 Route111_Movement_1501B4:: @ 81501B4
 	walk_up
-	end_movement
+	step_end
 
 Route111_Movement_1501B6:: @ 81501B6
 	walk_down
-	end_movement
+	step_end
 
 Route111_Movement_1501B8:: @ 81501B8
 	walk_left
-	end_movement
+	step_end
 
 Route111_Movement_1501BA:: @ 81501BA
 	walk_right
-	end_movement
+	step_end
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather WEATHER_SUNNY
@@ -323,17 +323,17 @@ Route111_EventScript_15034F:: @ 815034F
 Route111_Movement_150356:: @ 8150356
 	walk_in_place_fastest_up
 	walk_up
-	end_movement
+	step_end
 
 Route111_Movement_150359:: @ 8150359
 	walk_down
-	end_movement
+	step_end
 
 Route111_Movement_15035B:: @ 815035B
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 Route111_EventScript_15035F:: @ 815035F
 	msgbox Route111_Text_16FC9C, MSGBOX_SIGN

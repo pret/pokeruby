@@ -24,7 +24,7 @@ Route121_SafariZoneEntrance_Movement_15C348:: @ 815C348
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 Route121_SafariZoneEntrance_EventScript_15C351:: @ 815C351
 	msgbox Route121_SafariZoneEntrance_Text_1C35D0, MSGBOX_NPC
@@ -120,7 +120,7 @@ Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C
 
 Route121_SafariZoneEntrance_Movement_15C47C:: @ 815C47C
 	walk_right
-	end_movement
+	step_end
 
 Route121_SafariZoneEntrance_Movement_15C47E:: @ 815C47E
 	walk_left
@@ -131,7 +131,7 @@ Route121_SafariZoneEntrance_Movement_15C47E:: @ 815C47E
 	walk_left
 	walk_down
 	delay_16
-	end_movement
+	step_end
 
 Route121_SafariZoneEntrance_EventScript_15C487:: @ 815C487
 	msgbox Route121_SafariZoneEntrance_Text_1C3E4B, MSGBOX_SIGN

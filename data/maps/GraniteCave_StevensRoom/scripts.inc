@@ -48,7 +48,7 @@ GraniteCave_StevensRoom_Movement_15CC8C:: @ 815CC8C
 	walk_up
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 GraniteCave_StevensRoom_Movement_15CC93:: @ 815CC93
 	walk_left
@@ -59,4 +59,4 @@ GraniteCave_StevensRoom_Movement_15CC93:: @ 815CC93
 	walk_up
 	walk_up
 	delay_8
-	end_movement
+	step_end

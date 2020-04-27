@@ -65,7 +65,7 @@ FallarborTown_PokemonCenter_1F_Movement_153B74:: @ 8153B74
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 FallarborTown_PokemonCenter_1F_Movement_153B81:: @ 8153B81
 	walk_down
@@ -78,4 +78,4 @@ FallarborTown_PokemonCenter_1F_Movement_153B81:: @ 8153B81
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end

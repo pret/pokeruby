@@ -211,7 +211,7 @@ Route119_Movement_1513F0:: @ 81513F0
 	walk_fast_right
 	walk_fast_right
 	walk_fast_up
-	end_movement
+	step_end
 
 Route119_Movement_1513FA:: @ 81513FA
 	walk_fast_right
@@ -224,7 +224,7 @@ Route119_Movement_1513FA:: @ 81513FA
 	walk_fast_right
 	walk_fast_right
 	walk_fast_up
-	end_movement
+	step_end
 
 Route119_Movement_151405:: @ 8151405
 	walk_fast_right
@@ -236,7 +236,7 @@ Route119_Movement_151405:: @ 8151405
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route119_Movement_15140F:: @ 815140F
 	walk_fast_left
@@ -249,7 +249,7 @@ Route119_Movement_15140F:: @ 815140F
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route119_EventScript_15141A:: @ 815141A
 	msgbox Route119_Text_171698, MSGBOX_NPC

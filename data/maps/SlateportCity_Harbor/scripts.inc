@@ -105,14 +105,14 @@ SlateportCity_Harbor_Movement_15609B:: @ 815609B
 	delay_16
 	jump_up
 	set_invisible
-	end_movement
+	step_end
 
 @ 81560A0
 	delay_16
 	delay_16
 	jump_up
 	set_invisible
-	end_movement
+	step_end
 
 SlateportCity_Harbor_Movement_1560A5:: @ 81560A5
 	delay_16
@@ -128,7 +128,7 @@ SlateportCity_Harbor_Movement_1560A5:: @ 81560A5
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 SlateportCity_Harbor_Movement_1560B3:: @ 81560B3
 	walk_left
@@ -136,24 +136,24 @@ SlateportCity_Harbor_Movement_1560B3:: @ 81560B3
 	walk_left
 	walk_left
 	walk_up
-	end_movement
+	step_end
 
 SlateportCity_Harbor_Movement_1560B9:: @ 81560B9
 	walk_left
 	walk_left
 	walk_up
 	walk_left
-	end_movement
+	step_end
 
 SlateportCity_Harbor_Movement_1560BE:: @ 81560BE
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SlateportCity_Harbor_Movement_1560C2:: @ 81560C2
 	walk_up
-	end_movement
+	step_end
 
 SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
@@ -249,11 +249,11 @@ SlateportCity_Harbor_EventScript_1561EF:: @ 81561EF
 SlateportCity_Harbor_Movement_1561FA:: @ 81561FA
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SlateportCity_Harbor_Movement_1561FD:: @ 81561FD
 	walk_up
-	end_movement
+	step_end
 
 SlateportCity_Harbor_EventScript_1561FF:: @ 81561FF
 	msgbox SlateportCity_Harbor_Text_17FC07, MSGBOX_NPC

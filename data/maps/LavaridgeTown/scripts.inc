@@ -191,7 +191,7 @@ LavaridgeTown_Movement_14E6E8:: @ 814E6E8
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E6EF:: @ 814E6EF
 	walk_fast_right
@@ -204,7 +204,7 @@ LavaridgeTown_Movement_14E6EF:: @ 814E6EF
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E6FA:: @ 814E6FA
 	walk_fast_right
@@ -215,7 +215,7 @@ LavaridgeTown_Movement_14E6FA:: @ 814E6FA
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E703:: @ 814E703
 	walk_fast_down
@@ -228,11 +228,11 @@ LavaridgeTown_Movement_14E703:: @ 814E703
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E70E:: @ 814E70E
 	walk_down
-	end_movement
+	step_end
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
 	specialvar VAR_RESULT, GetPlayerFacingDirection

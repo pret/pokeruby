@@ -103,7 +103,7 @@ EventScript_RevealTrainer:
 
 Movement_RevealTrainer::
 	reveal_trainer
-	end_movement
+	step_end
 
 EventScript_DoTrainerBattle:
 	special ShowTrainerIntroSpeech

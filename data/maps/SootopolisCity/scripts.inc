@@ -285,7 +285,7 @@ SootopolisCity_Movement_14D413:: @ 814D413
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D417:: @ 814D417
 	walk_right
@@ -293,7 +293,7 @@ SootopolisCity_Movement_14D417:: @ 814D417
 	walk_right
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D41D:: @ 814D41D
 	walk_down
@@ -311,7 +311,7 @@ SootopolisCity_Movement_14D41D:: @ 814D41D
 	walk_down
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D42D:: @ 814D42D
 	walk_left
@@ -332,14 +332,14 @@ SootopolisCity_Movement_14D42D:: @ 814D42D
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D440:: @ 814D440
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D445:: @ 814D445
 	walk_right
@@ -359,7 +359,7 @@ SootopolisCity_Movement_14D445:: @ 814D445
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D457:: @ 814D457
 	delay_16
@@ -380,7 +380,7 @@ SootopolisCity_Movement_14D457:: @ 814D457
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D46A:: @ 814D46A
 	walk_down
@@ -400,7 +400,7 @@ SootopolisCity_Movement_14D46A:: @ 814D46A
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SootopolisCity_Movement_14D47C:: @ 814D47C
 	delay_16
@@ -421,7 +421,7 @@ SootopolisCity_Movement_14D47C:: @ 814D47C
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SootopolisCity_EventScript_14D48F:: @ 814D48F
 	.ifdef SAPPHIRE

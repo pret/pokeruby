@@ -53,7 +53,7 @@ Route111_Movement_1A38E3:: @ 81A38E3
 	walk_left
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route111_Movement_1A38EF:: @ 81A38EF
 	walk_left
@@ -67,4 +67,4 @@ Route111_Movement_1A38EF:: @ 81A38EF
 	walk_left
 	walk_down
 	walk_down
-	end_movement
+	step_end

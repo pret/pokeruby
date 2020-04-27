@@ -64,25 +64,25 @@ Route112_CableCarStation_Movement_15C0E6:: @ 815C0E6
 	walk_up
 	walk_right
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 Route112_CableCarStation_Movement_15C0EB:: @ 815C0EB
 	delay_16
 	walk_left
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route112_CableCarStation_Movement_15C0F0:: @ 815C0F0
 	walk_up
 	walk_up
 	walk_up
 	delay_16
-	end_movement
+	step_end
 
 Route112_CableCarStation_Movement_15C0F5:: @ 815C0F5
 	walk_down
 	walk_down
 	walk_down
 	delay_16
-	end_movement
+	step_end

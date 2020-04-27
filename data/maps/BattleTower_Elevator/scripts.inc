@@ -36,22 +36,22 @@ BattleTower_Elevator_Movement_160835:: @ 8160835
 	walk_up
 	walk_right
 	face_down
-	end_movement
+	step_end
 
 BattleTower_Elevator_Movement_160839:: @ 8160839
 	walk_up
 	walk_up
 	face_down
-	end_movement
+	step_end
 
 BattleTower_Elevator_Movement_16083D:: @ 816083D
 	walk_down
 	walk_down
 	set_invisible
-	end_movement
+	step_end
 
 BattleTower_Elevator_Movement_160841:: @ 8160841
 	walk_right
 	walk_down
 	walk_down
-	end_movement
+	step_end

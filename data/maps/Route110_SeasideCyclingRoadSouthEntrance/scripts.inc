@@ -28,7 +28,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6:: @ 81634A6
 
 Route110_SeasideCyclingRoadSouthEntrance_Movement_1634BB:: @ 81634BB
 	walk_left
-	end_movement
+	step_end
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634BD:: @ 81634BD
 	lockall

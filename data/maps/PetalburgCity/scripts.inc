@@ -98,7 +98,7 @@ PetalburgCity_Movement_14B7CC:: @ 814B7CC
 	walk_up
 	walk_up
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B7ED:: @ 814B7ED
 	delay_8
@@ -137,7 +137,7 @@ PetalburgCity_Movement_14B7ED:: @ 814B7ED
 	delay_16
 	delay_16
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 PetalburgCity_EventScript_14B812:: @ 814B812
 	msgbox PetalburgCity_Text_1645BB, MSGBOX_SIGN
@@ -272,26 +272,26 @@ PetalburgCity_EventScript_14B99B:: @ 814B99B
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9B1:: @ 814B9B1
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9B6:: @ 814B9B6
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9B9:: @ 814B9B9
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9BE:: @ 814B9BE
 	walk_down
@@ -299,7 +299,7 @@ PetalburgCity_Movement_14B9BE:: @ 814B9BE
 	walk_right
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9C4:: @ 814B9C4
 	walk_right
@@ -312,7 +312,7 @@ PetalburgCity_Movement_14B9C4:: @ 814B9C4
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9CF:: @ 814B9CF
 	walk_down
@@ -328,7 +328,7 @@ PetalburgCity_Movement_14B9CF:: @ 814B9CF
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9DD:: @ 814B9DD
 	walk_right
@@ -341,7 +341,7 @@ PetalburgCity_Movement_14B9DD:: @ 814B9DD
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9E8:: @ 814B9E8
 	walk_right
@@ -355,7 +355,7 @@ PetalburgCity_Movement_14B9E8:: @ 814B9E8
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9F4:: @ 814B9F4
 	walk_down
@@ -370,7 +370,7 @@ PetalburgCity_Movement_14B9F4:: @ 814B9F4
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA01:: @ 814BA01
 	walk_down
@@ -382,7 +382,7 @@ PetalburgCity_Movement_14BA01:: @ 814BA01
 	walk_right
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA0B:: @ 814BA0B
 	delay_16
@@ -397,7 +397,7 @@ PetalburgCity_Movement_14BA0B:: @ 814BA0B
 	walk_right
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA18:: @ 814BA18
 	walk_up
@@ -409,7 +409,7 @@ PetalburgCity_Movement_14BA18:: @ 814BA18
 	walk_right
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA22:: @ 814BA22
 	walk_up
@@ -422,7 +422,7 @@ PetalburgCity_Movement_14BA22:: @ 814BA22
 	walk_right
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_EventScript_14BA2D:: @ 814BA2D
 	msgbox PetalburgCity_Text_16438A, MSGBOX_NPC

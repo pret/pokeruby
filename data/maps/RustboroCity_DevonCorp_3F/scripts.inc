@@ -73,7 +73,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	walk_up
 	walk_up
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_157803:: @ 8157803
 	walk_right
@@ -90,12 +90,12 @@ RustboroCity_DevonCorp_3F_Movement_157803:: @ 8157803
 	walk_right
 	walk_right
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_157812:: @ 8157812
 	delay_16
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_157815:: @ 8157815
 	walk_right
@@ -106,7 +106,7 @@ RustboroCity_DevonCorp_3F_Movement_157815:: @ 8157815
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_15781E:: @ 815781E
 	walk_left
@@ -117,7 +117,7 @@ RustboroCity_DevonCorp_3F_Movement_15781E:: @ 815781E
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_157827:: @ 8157827
 	walk_right
@@ -133,7 +133,7 @@ RustboroCity_DevonCorp_3F_Movement_157827:: @ 8157827
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_157835:: @ 8157835
 	delay_16
@@ -141,7 +141,7 @@ RustboroCity_DevonCorp_3F_Movement_157835:: @ 8157835
 	walk_down
 	walk_down
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock

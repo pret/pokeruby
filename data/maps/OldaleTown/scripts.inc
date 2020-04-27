@@ -99,7 +99,7 @@ OldaleTown_Movement_14DE8E:: @ 814DE8E
 	walk_up
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DE97:: @ 814DE97
 	walk_left
@@ -112,7 +112,7 @@ OldaleTown_Movement_14DE97:: @ 814DE97
 	walk_up
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DEA2:: @ 814DEA2
 	walk_up
@@ -123,7 +123,7 @@ OldaleTown_Movement_14DEA2:: @ 814DEA2
 	walk_up
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 @ 814DEAB
 	walk_up
@@ -139,7 +139,7 @@ OldaleTown_Movement_14DEA2:: @ 814DEA2
 	walk_up
 	delay_8
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DEB9:: @ 814DEB9
 	walk_right
@@ -149,7 +149,7 @@ OldaleTown_Movement_14DEB9:: @ 814DEB9
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DEC1:: @ 814DEC1
 	delay_16
@@ -161,7 +161,7 @@ OldaleTown_Movement_14DEC1:: @ 814DEC1
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DECB:: @ 814DECB
 	walk_up
@@ -171,7 +171,7 @@ OldaleTown_Movement_14DECB:: @ 814DECB
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 @ 814DED3
 	walk_left
@@ -185,7 +185,7 @@ OldaleTown_Movement_14DECB:: @ 814DECB
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	lock
@@ -280,15 +280,15 @@ OldaleTown_EventScript_14DFC6:: @ 814DFC6
 OldaleTown_Movement_14DFDE:: @ 814DFDE
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DFE1:: @ 814DFE1
 	walk_left
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DFE3:: @ 814DFE3
 	face_left
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DFE5:: @ 814DFE5
 	walk_down
@@ -297,12 +297,12 @@ OldaleTown_Movement_14DFE5:: @ 814DFE5
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DFEC:: @ 814DFEC
 	delay_8
 	walk_right
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DFEF:: @ 814DFEF
 	walk_fast_up
@@ -310,9 +310,9 @@ OldaleTown_Movement_14DFEF:: @ 814DFEF
 	lock_facing_direction
 	walk_right
 	unlock_facing_direction
-	end_movement
+	step_end
 
 OldaleTown_Movement_14DFF5:: @ 814DFF5
 	walk_down
 	walk_left
-	end_movement
+	step_end

@@ -148,7 +148,7 @@ LittlerootTown_BrendansHouse_2F_Movement_152C11:: @ 8152C11
 	walk_up
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_152C1C:: @ 8152C1C
 	walk_left
@@ -159,7 +159,7 @@ LittlerootTown_BrendansHouse_2F_Movement_152C1C:: @ 8152C1C
 	walk_left
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_152C25:: @ 8152C25
 	walk_down
@@ -172,7 +172,7 @@ LittlerootTown_BrendansHouse_2F_Movement_152C25:: @ 8152C25
 	walk_up
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_152C30:: @ 8152C30
 	walk_right
@@ -183,7 +183,7 @@ LittlerootTown_BrendansHouse_2F_Movement_152C30:: @ 8152C30
 	walk_right
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 gUnknown_08152C39:: @ 8152C39
 

@@ -387,7 +387,7 @@ DewfordTown_Movement_14E293:: @ 814E293
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 DewfordTown_Movement_14E356:: @ 814E356
 	walk_right
@@ -561,34 +561,34 @@ DewfordTown_Movement_14E356:: @ 814E356
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 DewfordTown_Movement_14E402:: @ 814E402
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 DewfordTown_Movement_14E405:: @ 814E405
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 DewfordTown_Movement_14E409:: @ 814E409
 	walk_up
 	walk_up
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 DewfordTown_Movement_14E40E:: @ 814E40E
 	walk_up
-	end_movement
+	step_end
 
 DewfordTown_Movement_14E410:: @ 814E410
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 DewfordTown_EventScript_14E413:: @ 814E413
 	lock

@@ -544,7 +544,7 @@ SlateportCity_Movement_14BFCD:: @ 814BFCD
 	delay_16
 	delay_16
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 SlateportCity_Movement_14BFD5:: @ 814BFD5
 	emote_question_mark
@@ -554,7 +554,7 @@ SlateportCity_Movement_14BFD5:: @ 814BFD5
 	delay_16
 	delay_16
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 SlateportCity_Movement_14BFDD:: @ 814BFDD
 	delay_16
@@ -569,7 +569,7 @@ SlateportCity_Movement_14BFDD:: @ 814BFDD
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SlateportCity_Movement_14BFEA:: @ 814BFEA
 	walk_down
@@ -585,19 +585,19 @@ SlateportCity_Movement_14BFEA:: @ 814BFEA
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 @ 814BFF8
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SlateportCity_Movement_14BFFB:: @ 814BFFB
 	walk_right
 	walk_up
 	walk_up
 	set_invisible
-	end_movement
+	step_end
 
 SlateportCity_Movement_14C000:: @ 814C000
 	delay_16
@@ -607,7 +607,7 @@ SlateportCity_Movement_14C000:: @ 814C000
 	delay_16
 	walk_down
 	walk_left
-	end_movement
+	step_end
 
 SlateportCity_Movement_14C008:: @ 814C008
 	walk_in_place_fastest_right
@@ -615,7 +615,7 @@ SlateportCity_Movement_14C008:: @ 814C008
 	delay_16
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 SlateportCity_Movement_14C00E:: @ 814C00E
 	delay_16
@@ -626,7 +626,7 @@ SlateportCity_Movement_14C00E:: @ 814C00E
 	delay_16
 	delay_16
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SlateportCity_EventScript_14C017:: @ 814C017
 	msgbox SlateportCity_Text_165425, MSGBOX_SIGN

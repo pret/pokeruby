@@ -495,17 +495,17 @@ Route110_Movement_14FF6E:: @ 814FF6E
 	walk_down
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF72:: @ 814FF72
 	walk_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF74:: @ 814FF74
 	walk_down
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF78:: @ 814FF78
 	walk_fast_up
@@ -515,7 +515,7 @@ Route110_Movement_14FF78:: @ 814FF78
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route110_Movement_14FF80:: @ 814FF80
 	walk_fast_up
@@ -526,7 +526,7 @@ Route110_Movement_14FF80:: @ 814FF80
 	walk_fast_up
 	walk_fast_up
 	walk_fast_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF89:: @ 814FF89
 	walk_fast_up
@@ -536,4 +536,4 @@ Route110_Movement_14FF89:: @ 814FF89
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end

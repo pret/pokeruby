@@ -92,7 +92,7 @@ PetalburgCity_Gym_Movement_1545B4:: @ 81545B4
 	walk_down
 	walk_down
 	delay_16
-	end_movement
+	step_end
 
 PetalburgCity_Gym_EventScript_1545B9:: @ 81545B9
 	lock
@@ -479,7 +479,7 @@ PetalburgCity_Gym_EventScript_154B09:: @ 8154B09
 	delay_16
 	delay_8
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B1D:: @ 8154B1D
 	delay_16
@@ -491,7 +491,7 @@ PetalburgCity_Gym_Movement_154B1D:: @ 8154B1D
 	walk_up
 	walk_up
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B27:: @ 8154B27
 	delay_16
@@ -500,7 +500,7 @@ PetalburgCity_Gym_Movement_154B27:: @ 8154B27
 	delay_8
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B2E:: @ 8154B2E
 	walk_down
@@ -510,7 +510,7 @@ PetalburgCity_Gym_Movement_154B2E:: @ 8154B2E
 	walk_in_place_fastest_up
 	delay_16
 	walk_in_place_down
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B36:: @ 8154B36
 	walk_down
@@ -520,7 +520,7 @@ PetalburgCity_Gym_Movement_154B36:: @ 8154B36
 	walk_in_place_fastest_up
 	delay_16
 	walk_in_place_down
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B3E:: @ 8154B3E
 	walk_down
@@ -529,7 +529,7 @@ PetalburgCity_Gym_Movement_154B3E:: @ 8154B3E
 	walk_in_place_fastest_up
 	delay_16
 	walk_in_place_down
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B45:: @ 8154B45
 	delay_16
@@ -539,7 +539,7 @@ PetalburgCity_Gym_Movement_154B45:: @ 8154B45
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B4D:: @ 8154B4D
 	delay_16
@@ -551,7 +551,7 @@ PetalburgCity_Gym_Movement_154B4D:: @ 8154B4D
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B57:: @ 8154B57
 	delay_16
@@ -561,7 +561,7 @@ PetalburgCity_Gym_Movement_154B57:: @ 8154B57
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 PetalburgCity_Gym_Movement_154B5F:: @ 8154B5F
 	walk_in_place_fastest_down
@@ -573,7 +573,7 @@ PetalburgCity_Gym_Movement_154B5F:: @ 8154B5F
 	walk_right
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 PetalburgCity_Gym_EventScript_154B69:: @ 8154B69
 	msgbox PetalburgCity_Gym_Text_17AB17, MSGBOX_DEFAULT

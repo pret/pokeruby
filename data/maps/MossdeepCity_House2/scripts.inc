@@ -44,11 +44,11 @@ MossdeepCity_House2_Movement_15A8C4:: @ 815A8C4
 	walk_fast_left
 	walk_fast_down
 	delay_8
-	end_movement
+	step_end
 
 MossdeepCity_House2_Movement_15A8CB:: @ 815A8CB
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	delay_8
-	end_movement
+	step_end

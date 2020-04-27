@@ -102,8 +102,8 @@
 	create_movement_action clear_fixed_priority
 	create_movement_action init_affine_anim
 	create_movement_action clear_affine_anim
-	create_movement_action walk_down_affine_0
-	create_movement_action walk_down_affine_1
+	create_movement_action walk_down_start_affine
+	create_movement_action walk_down_affine
 
 	enum_start 0xfe
-	create_movement_action end_movement
+	create_movement_action step_end

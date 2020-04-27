@@ -64,7 +64,7 @@ MossdeepCity_GameCorner_B1F_Movement_15AEF9:: @ 815AEF9
 	walk_down
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 MossdeepCity_GameCorner_B1F_Movement_15AEFF:: @ 815AEFF
 	walk_left
@@ -74,4 +74,4 @@ MossdeepCity_GameCorner_B1F_Movement_15AEFF:: @ 815AEFF
 	walk_up
 	walk_up
 	delay_8
-	end_movement
+	step_end

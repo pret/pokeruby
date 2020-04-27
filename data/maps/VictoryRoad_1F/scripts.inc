@@ -59,7 +59,7 @@ VictoryRoad_1F_Movement_15DF07:: @ 815DF07
 	walk_up
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 VictoryRoad_1F_Movement_15DF13:: @ 815DF13
 	walk_up
@@ -72,7 +72,7 @@ VictoryRoad_1F_Movement_15DF13:: @ 815DF13
 	walk_up
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 VictoryRoad_1F_Movement_15DF1E:: @ 815DF1E
 	walk_up
@@ -84,7 +84,7 @@ VictoryRoad_1F_Movement_15DF1E:: @ 815DF1E
 	walk_up
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 VictoryRoad_1F_EventScript_15DF28:: @ 815DF28
 	msgbox VictoryRoad_1F_Text_197967, MSGBOX_NPC

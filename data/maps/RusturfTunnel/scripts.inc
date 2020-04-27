@@ -166,7 +166,7 @@ RusturfTunnel_Movement_15C945:: @ 815C945
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C951:: @ 815C951
 	walk_right
@@ -180,41 +180,41 @@ RusturfTunnel_Movement_15C951:: @ 815C951
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 @ 815C95D
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 @ 815C960
 	walk_down
 	walk_in_place_fastest_up
 	delay_8
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 @ 815C965
 	walk_up
 	walk_in_place_fastest_down
 	delay_8
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C96A:: @ 815C96A
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C96D:: @ 815C96D
 	walk_right
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C970:: @ 815C970
 	walk_up
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C973:: @ 815C973
 	walk_right
@@ -229,7 +229,7 @@ RusturfTunnel_Movement_15C973:: @ 815C973
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C980:: @ 815C980
 	walk_up
@@ -244,25 +244,25 @@ RusturfTunnel_Movement_15C980:: @ 815C980
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C98D:: @ 815C98D
 	walk_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C98F:: @ 815C98F
 	walk_in_place_fast_up
 	walk_in_place_fast_up
 	walk_fast_up
 	walk_fast_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15C994:: @ 815C994
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_fast_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 RusturfTunnel_EventScript_15C999:: @ 815C999
 	setvar VAR_TEMP_1, 1
@@ -293,7 +293,7 @@ RusturfTunnel_Movement_15C9D3:: @ 815C9D3
 	lock_facing_direction
 	walk_right
 	unlock_facing_direction
-	end_movement
+	step_end
 
 RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 	lock
@@ -354,12 +354,12 @@ RusturfTunnel_Movement_15CA99:: @ 815CA99
 	walk_up
 	unlock_facing_direction
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15CA9F:: @ 815CA9F
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15CAA2:: @ 815CAA2
 	walk_fast_left
@@ -371,7 +371,7 @@ RusturfTunnel_Movement_15CAA2:: @ 815CAA2
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15CAAC:: @ 815CAAC
 	walk_right
@@ -381,7 +381,7 @@ RusturfTunnel_Movement_15CAAC:: @ 815CAAC
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15CAB4:: @ 815CAB4
 	walk_left
@@ -395,12 +395,12 @@ RusturfTunnel_Movement_15CAB4:: @ 815CAB4
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15CAC0:: @ 815CAC0
 	delay_16
 	walk_right
-	end_movement
+	step_end
 
 RusturfTunnel_Movement_15CAC3:: @ 815CAC3
 	walk_left
@@ -412,7 +412,7 @@ RusturfTunnel_Movement_15CAC3:: @ 815CAC3
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 RusturfTunnel_EventScript_15CACD:: @ 815CACD
 	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_194814, RusturfTunnel_Text_1948A2

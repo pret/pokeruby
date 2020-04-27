@@ -75,7 +75,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B7B:: @ 8155B7B
 
 SlateportCity_OceanicMuseum_1F_Movement_155B8D:: @ 8155B8D
 	walk_down
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B8F:: @ 8155B8F
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E2BB, MSGBOX_NPC
@@ -205,7 +205,7 @@ SlateportCity_OceanicMuseum_1F_Movement_155CCC:: @ 8155CCC
 	walk_fast_down
 	walk_fast_down
 	delay_8
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_1F_Movement_155CD3:: @ 8155CD3
 	walk_fast_right
@@ -214,4 +214,4 @@ SlateportCity_OceanicMuseum_1F_Movement_155CD3:: @ 8155CD3
 	walk_fast_down
 	walk_fast_down
 	delay_8
-	end_movement
+	step_end

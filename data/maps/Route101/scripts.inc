@@ -70,15 +70,15 @@ Route101_EventScript_14E9E4:: @ 814E9E4
 
 Route101_Movement_14E9FA:: @ 814E9FA
 	walk_up
-	end_movement
+	step_end
 
 Route101_Movement_14E9FC:: @ 814E9FC
 	walk_right
-	end_movement
+	step_end
 
 Route101_Movement_14E9FE:: @ 814E9FE
 	walk_down
-	end_movement
+	step_end
 
 Route101_Movement_14EA00:: @ 814EA00
 	walk_fast_up
@@ -111,7 +111,7 @@ Route101_Movement_14EA00:: @ 814EA00
 	walk_fast_down
 	walk_fast_left
 	walk_fast_left
-	end_movement
+	step_end
 
 Route101_Movement_14EA1F:: @ 814EA1F
 	walk_fast_up
@@ -120,24 +120,24 @@ Route101_Movement_14EA1F:: @ 814EA1F
 	walk_fast_right
 	walk_fast_right
 	walk_fast_up
-	end_movement
+	step_end
 
 @ 814EA26
-	end_movement
+	step_end
 
 Route101_Movement_14EA27:: @ 814EA27
 	walk_in_place_fast_left
 	walk_in_place_fast_left
 	walk_in_place_fast_left
 	walk_in_place_fast_left
-	end_movement
+	step_end
 
 Route101_Movement_14EA2C:: @ 814EA2C
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route101_Movement_14EA31:: @ 814EA31
 	walk_fast_up
@@ -170,7 +170,7 @@ Route101_Movement_14EA31:: @ 814EA31
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
-	end_movement
+	step_end
 
 Route101_Movement_14EA50:: @ 814EA50
 	walk_fast_right
@@ -179,28 +179,28 @@ Route101_Movement_14EA50:: @ 814EA50
 	walk_fast_right
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 @ 814EA57
-	end_movement
+	step_end
 
 Route101_Movement_14EA58:: @ 814EA58
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_in_place_fast_right
-	end_movement
+	step_end
 
 @ 814EA5D
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 @ 814EA60
 	walk_up
 	walk_left
 	walk_up
-	end_movement
+	step_end
 
 Route101_EventScript_14EA64:: @ 814EA64
 	msgbox Route101_Text_16D25E, MSGBOX_NPC
@@ -243,4 +243,4 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 
 Route101_Movement_14EAD7:: @ 814EAD7
 	walk_right
-	end_movement
+	step_end

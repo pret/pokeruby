@@ -63,25 +63,25 @@ MtChimney_CableCarStation_Movement_15C1A5:: @ 815C1A5
 	walk_up
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 MtChimney_CableCarStation_Movement_15C1AA:: @ 815C1AA
 	delay_16
 	walk_right
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 MtChimney_CableCarStation_Movement_15C1AF:: @ 815C1AF
 	walk_up
 	walk_up
 	walk_up
 	delay_16
-	end_movement
+	step_end
 
 MtChimney_CableCarStation_Movement_15C1B4:: @ 815C1B4
 	walk_down
 	walk_down
 	walk_down
 	delay_16
-	end_movement
+	step_end

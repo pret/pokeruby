@@ -134,7 +134,7 @@ RustboroCity_PokemonSchool_Movement_157B49:: @ 8157B49
 	walk_up
 	walk_up
 	walk_right
-	end_movement
+	step_end
 
 RustboroCity_PokemonSchool_Movement_157B60:: @ 8157B60
 	walk_right
@@ -161,4 +161,4 @@ RustboroCity_PokemonSchool_Movement_157B60:: @ 8157B60
 	walk_up
 	walk_left
 	walk_left
-	end_movement
+	step_end

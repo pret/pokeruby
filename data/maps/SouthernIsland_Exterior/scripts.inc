@@ -42,12 +42,12 @@ BattleTower_Outside_EventScript_160B3A:: @ 8160B3A
 
 BattleTower_Outside_Movement_160B45:: @ 8160B45
 	walk_down
-	end_movement
+	step_end
 
 BattleTower_Outside_Movement_160B47:: @ 8160B47
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SouthernIsland_Exterior_EventScript_160B4A:: @ 8160B4A
 	msgbox SouthernIsland_Exterior_Text_1C52FB, MSGBOX_SIGN

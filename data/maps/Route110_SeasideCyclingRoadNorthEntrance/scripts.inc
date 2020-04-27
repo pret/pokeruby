@@ -49,7 +49,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523:: @ 8163523
 
 Route110_SeasideCyclingRoadNorthEntrance_Movement_163538:: @ 8163538
 	walk_left
-	end_movement
+	step_end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_16353A:: @ 816353A
 @ Coord event directly in front of the gatesman heading right to left

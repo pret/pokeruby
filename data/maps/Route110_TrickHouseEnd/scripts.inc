@@ -244,8 +244,8 @@ Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 
 Route110_TrickHouseEnd_Movement_161CE8:: @ 8161CE8
 	walk_down
-	end_movement
+	step_end
 
 Route110_TrickHouseEnd_Movement_161CEA:: @ 8161CEA
 	jump_in_place_left
-	end_movement
+	step_end

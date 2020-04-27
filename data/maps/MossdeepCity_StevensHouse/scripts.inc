@@ -58,7 +58,7 @@ MossdeepCity_StevensHouse_Movement_15AA6E:: @ 815AA6E
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
 	walk_up
@@ -66,7 +66,7 @@ MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall

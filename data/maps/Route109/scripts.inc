@@ -235,38 +235,38 @@ Route109_Movement_14F5BF:: @ 814F5BF
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route109_Movement_14F66D:: @ 814F66D
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route109_Movement_14F670:: @ 814F670
 	walk_down
 	walk_down
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 Route109_Movement_14F675:: @ 814F675
 	walk_right
 	walk_down
-	end_movement
+	step_end
 
 Route109_Movement_14F678:: @ 814F678
 	walk_left
 	walk_down
-	end_movement
+	step_end
 
 Route109_Movement_14F67B:: @ 814F67B
 	walk_down
-	end_movement
+	step_end
 
 Route109_Movement_14F67D:: @ 814F67D
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 Route109_EventScript_14F680:: @ 814F680
 	lock

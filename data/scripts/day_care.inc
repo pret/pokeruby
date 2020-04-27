@@ -252,7 +252,7 @@ Route117_PokemonDayCare_Movement_1B2543:: @ 81B2543
 	face_down
 	set_visible
 	walk_slow_down
-	end_movement
+	step_end
 
 @ 81B2557
 	end

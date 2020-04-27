@@ -55,22 +55,22 @@ VerdanturfTown_ContestLobby_Movement_153E19:: @ 8153E19
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 VerdanturfTown_ContestLobby_Movement_153E23:: @ 8153E23
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 VerdanturfTown_ContestLobby_Movement_153E25:: @ 8153E25
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 VerdanturfTown_ContestLobby_Movement_153E28:: @ 8153E28
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 VerdanturfTown_ContestLobby_Movement_153E2C:: @ 8153E2C
 	walk_left
@@ -81,11 +81,11 @@ VerdanturfTown_ContestLobby_Movement_153E2C:: @ 8153E2C
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 VerdanturfTown_ContestLobby_Movement_153E35:: @ 8153E35
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	lockall

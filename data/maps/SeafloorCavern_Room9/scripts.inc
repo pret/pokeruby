@@ -223,21 +223,21 @@ SeafloorCavern_Room9_Movement_15DD36:: @ 815DD36
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 @ 815DD3E
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD41:: @ 815DD41
 	walk_left
 	delay_16
-	end_movement
+	step_end
 
 @ 815DD44
 	walk_right
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD46:: @ 815DD46
 	face_up
@@ -245,7 +245,7 @@ SeafloorCavern_Room9_Movement_15DD46:: @ 815DD46
 	walk_down
 	unlock_facing_direction
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD4C:: @ 815DD4C
 	delay_16
@@ -258,12 +258,12 @@ SeafloorCavern_Room9_Movement_15DD4C:: @ 815DD4C
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD57:: @ 815DD57
 	slide_up
 	slide_up
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD5A:: @ 815DD5A
 	walk_fast_right
@@ -271,21 +271,21 @@ SeafloorCavern_Room9_Movement_15DD5A:: @ 815DD5A
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD60:: @ 815DD60
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD63:: @ 815DD63
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 SeafloorCavern_Room9_Movement_15DD68:: @ 815DD68
 	delay_16
 	delay_16
-	end_movement
+	step_end

@@ -33,7 +33,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B69AA:: @ 81B69AA
 
 LittlerootTown_BrendansHouse_1F_Movement_1B69B5:: @ 81B69B5
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B69B7:: @ 81B69B7
 LittlerootTown_MaysHouse_1F_EventScript_1B69B7:: @ 81B69B7
@@ -124,13 +124,13 @@ LittlerootTown_BrendansHouse_2F_Movement_1B6AA2:: @ 81B6AA2
 	delay_16
 	delay_8
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_1B6AA9:: @ 81B6AA9
 	walk_right
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_1B6AAD:: @ 81B6AAD
 	delay_8
@@ -139,13 +139,13 @@ LittlerootTown_BrendansHouse_2F_Movement_1B6AAD:: @ 81B6AAD
 	delay_16
 	delay_8
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_1B6AB4:: @ 81B6AB4
 	walk_left
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6AB8:: @ 81B6AB8
 LittlerootTown_MaysHouse_1F_EventScript_1B6AB8:: @ 81B6AB8
@@ -228,24 +228,24 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 LittlerootTown_BrendansHouse_1F_Movement_1B6BDB:: @ 81B6BDB
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_1B6BDE:: @ 81B6BDE
 	walk_right
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6BE1:: @ 81B6BE1
 	walk_left
 	walk_down
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_1B6BE5:: @ 81B6BE5
 	walk_right
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
@@ -332,11 +332,11 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6CCC:: @ 81B6CCC
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6CD2:: @ 81B6CD2
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_1B6CD4:: @ 81B6CD4
 	walk_down
@@ -344,15 +344,15 @@ LittlerootTown_MaysHouse_1F_Movement_1B6CD4:: @ 81B6CD4
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_1B6CDA:: @ 81B6CDA
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6CDC:: @ 81B6CDC
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
@@ -457,20 +457,20 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6E28:: @ 81B6E28
 LittlerootTown_BrendansHouse_1F_Movement_1B6E33:: @ 81B6E33
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E36:: @ 81B6E36
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E39:: @ 81B6E39
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E3B:: @ 81B6E3B
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E3D:: @ 81B6E3D
 	walk_down
@@ -478,7 +478,7 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6E3D:: @ 81B6E3D
 	walk_right
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E43:: @ 81B6E43
 	walk_down
@@ -486,7 +486,7 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6E43:: @ 81B6E43
 	walk_left
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E49:: @ 81B6E49
 	delay_16
@@ -494,14 +494,14 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6E49:: @ 81B6E49
 	walk_down
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E4F:: @ 81B6E4F
 	delay_16
 	delay_16
 	delay_16
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6E54:: @ 81B6E54
 	delay_16
@@ -509,4 +509,4 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6E54:: @ 81B6E54
 	walk_down
 	walk_down
 	walk_in_place_fastest_right
-	end_movement
+	step_end

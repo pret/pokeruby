@@ -128,7 +128,7 @@ PetalburgWoods_Movement_15CE73:: @ 815CE73
 	delay_16
 	face_up
 	delay_16
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CE80:: @ 815CE80
 	walk_fast_right
@@ -139,14 +139,14 @@ PetalburgWoods_Movement_15CE80:: @ 815CE80
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CE89:: @ 815CE89
 	delay_16
 	face_player
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CE8E:: @ 815CE8E
 	delay_16
@@ -155,7 +155,7 @@ PetalburgWoods_Movement_15CE8E:: @ 815CE8E
 	walk_down
 	walk_down
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CE95:: @ 815CE95
 	walk_fast_left
@@ -166,7 +166,7 @@ PetalburgWoods_Movement_15CE95:: @ 815CE95
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CE9E:: @ 815CE9E
 	walk_fast_right
@@ -174,13 +174,13 @@ PetalburgWoods_Movement_15CE9E:: @ 815CE9E
 	walk_fast_down
 	walk_fast_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEA4:: @ 815CEA4
 	walk_fast_down
 	walk_fast_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEA8:: @ 815CEA8
 	walk_in_place_fastest_down
@@ -190,18 +190,18 @@ PetalburgWoods_Movement_15CEA8:: @ 815CEA8
 	delay_16
 	delay_16
 	face_up
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEB0:: @ 815CEB0
 	walk_fast_down
 	walk_fast_down
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEB3:: @ 815CEB3
 	lock_facing_direction
 	walk_up
 	unlock_facing_direction
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEB7:: @ 815CEB7
 	walk_fast_up
@@ -211,24 +211,24 @@ PetalburgWoods_Movement_15CEB7:: @ 815CEB7
 	walk_fast_up
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEBF:: @ 815CEBF
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEC3:: @ 815CEC3
 	walk_down
 	walk_down
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 PetalburgWoods_Movement_15CEC8:: @ 815CEC8
 	walk_down
-	end_movement
+	step_end
 
 PetalburgWoods_EventScript_15CECA:: @ 815CECA
 	msgbox PetalburgWoods_Text_1953AC, MSGBOX_NPC

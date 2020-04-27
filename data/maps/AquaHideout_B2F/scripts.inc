@@ -74,14 +74,14 @@ AquaHideout_B2F_Movement_15D958:: @ 815D958
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 AquaHideout_B2F_Movement_15D95D:: @ 815D95D
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 AquaHideout_B2F_EventScript_15D962:: @ 815D962
 MagmaHideout_B2F_EventScript_15D962:: @ 815D962

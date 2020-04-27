@@ -82,12 +82,12 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15867A:: @ 815867A
 
 LilycoveCity_LilycoveMuseum_2F_Movement_1586D3:: @ 81586D3
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LilycoveCity_LilycoveMuseum_2F_Movement_1586D5:: @ 81586D5
 	face_up
 	delay_16
-	end_movement
+	step_end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8:: @ 81586D8
 	lockall

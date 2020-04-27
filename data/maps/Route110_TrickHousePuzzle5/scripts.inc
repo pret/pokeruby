@@ -647,33 +647,33 @@ Route110_TrickHousePuzzle5_EventScript_163082:: @ 8163082
 
 Route110_TrickHousePuzzle5_Movement_16308D:: @ 816308D
 	walk_left
-	end_movement
+	step_end
 
 Route110_TrickHousePuzzle5_Movement_16308F:: @ 816308F
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route110_TrickHousePuzzle5_Movement_163092:: @ 8163092
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route110_TrickHousePuzzle5_Movement_163096:: @ 8163096
 	walk_right
-	end_movement
+	step_end
 
 Route110_TrickHousePuzzle5_Movement_163098:: @ 8163098
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 Route110_TrickHousePuzzle5_Movement_16309B:: @ 816309B
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 Route110_TrickHouseEntrance_Movement_16309F:: @ 816309F
 Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
@@ -722,4 +722,4 @@ Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
 	face_right
 	delay_2
 	face_down
-	end_movement
+	step_end

@@ -55,22 +55,22 @@ FallarborTown_ContestLobby_Movement_153A70:: @ 8153A70
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A7A:: @ 8153A7A
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A7C:: @ 8153A7C
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A7F:: @ 8153A7F
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A83:: @ 8153A83
 	walk_left
@@ -81,11 +81,11 @@ FallarborTown_ContestLobby_Movement_153A83:: @ 8153A83
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A8C:: @ 8153A8C
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
 	msgbox FallarborTown_ContestLobby_Text_177141, MSGBOX_NPC

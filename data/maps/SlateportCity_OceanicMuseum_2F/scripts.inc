@@ -117,7 +117,7 @@ SlateportCity_OceanicMuseum_2F_Movement_155E8E:: @ 8155E8E
 	walk_left
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155E92:: @ 8155E92
 	walk_up
@@ -125,7 +125,7 @@ SlateportCity_OceanicMuseum_2F_Movement_155E92:: @ 8155E92
 	walk_left
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155E98:: @ 8155E98
 	walk_up
@@ -141,11 +141,11 @@ SlateportCity_OceanicMuseum_2F_Movement_155E98:: @ 8155E98
 	walk_up
 	walk_up
 	delay_8
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EA6:: @ 8155EA6
 	walk_right
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EA8:: @ 8155EA8
 	walk_down
@@ -157,17 +157,17 @@ SlateportCity_OceanicMuseum_2F_Movement_155EA8:: @ 8155EA8
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EB2:: @ 8155EB2
 	walk_right
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EB4:: @ 8155EB4
 	walk_down
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EB8:: @ 8155EB8
 	walk_down
@@ -176,17 +176,17 @@ SlateportCity_OceanicMuseum_2F_Movement_155EB8:: @ 8155EB8
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EBF:: @ 8155EBF
 	lock_facing_direction
 	walk_left
 	unlock_facing_direction
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EC3:: @ 8155EC3
 	walk_down
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155EC5:: @ 8155EC5
 	walk_down
@@ -197,7 +197,7 @@ SlateportCity_OceanicMuseum_2F_Movement_155EC5:: @ 8155EC5
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_155ECE:: @ 8155ECE
 	delay_16
@@ -211,7 +211,7 @@ SlateportCity_OceanicMuseum_2F_Movement_155ECE:: @ 8155ECE
 	delay_8
 	walk_fast_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SlateportCity_OceanicMuseum_2F_EventScript_155EDA:: @ 8155EDA
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F572, MSGBOX_SIGN

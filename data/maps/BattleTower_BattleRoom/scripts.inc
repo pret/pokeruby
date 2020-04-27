@@ -124,15 +124,15 @@ BattleTower_BattleRoom_Movement_160AB7:: @ 8160AB7
 	walk_up
 	walk_up
 	face_right
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160ABC:: @ 8160ABC
 	face_down
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160ABE:: @ 8160ABE
 	face_right
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160AC0:: @ 8160AC0
 	walk_down
@@ -140,21 +140,21 @@ BattleTower_BattleRoom_Movement_160AC0:: @ 8160AC0
 	walk_down
 	walk_down
 	face_left
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160AC6:: @ 8160AC6
 	walk_up
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160ACB:: @ 8160ACB
 	walk_right
 	walk_right
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160AD0:: @ 8160AD0
 	walk_down
@@ -162,4 +162,4 @@ BattleTower_BattleRoom_Movement_160AD0:: @ 8160AD0
 	walk_left
 	walk_left
 	face_right
-	end_movement
+	step_end

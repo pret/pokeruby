@@ -102,20 +102,20 @@ EverGrandeCity_PokemonLeague_Movement_15BB76:: @ 815BB76
 	walk_down
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_15BB7A:: @ 815BB7A
 	walk_down
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_15BB7E:: @ 815BB7E
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_15BB81:: @ 815BB81
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end

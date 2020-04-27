@@ -307,18 +307,18 @@ BattleTower_Lobby_Movement_160693:: @ 8160693
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 BattleTower_Lobby_Movement_160697:: @ 8160697
 	walk_up
 	set_invisible
-	end_movement
+	step_end
 
 BattleTower_Lobby_Movement_16069A:: @ 816069A
 	walk_up
 	walk_up
 	set_invisible
-	end_movement
+	step_end
 
 @ 816069E
 	walk_fast_up
@@ -327,7 +327,7 @@ BattleTower_Lobby_Movement_16069A:: @ 816069A
 	walk_fast_up
 	walk_fast_up
 	set_invisible
-	end_movement
+	step_end
 
 BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 	lock

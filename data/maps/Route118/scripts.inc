@@ -110,17 +110,17 @@ Route118_EventScript_15105E:: @ 815105E
 
 Route118_Movement_151069:: @ 8151069
 	walk_left
-	end_movement
+	step_end
 
 Route118_Movement_15106B:: @ 815106B
 	walk_right
-	end_movement
+	step_end
 
 Route118_Movement_15106D:: @ 815106D
 	jump_2_down
 	delay_16
 	walk_down
-	end_movement
+	step_end
 
 Route118_Movement_151071:: @ 8151071
 	walk_right
@@ -133,7 +133,7 @@ Route118_Movement_151071:: @ 8151071
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 Route118_Movement_15107C:: @ 815107C
 	walk_right
@@ -145,7 +145,7 @@ Route118_Movement_15107C:: @ 815107C
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 Route118_Movement_151086:: @ 8151086
 	walk_right
@@ -156,7 +156,7 @@ Route118_Movement_151086:: @ 8151086
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 Route118_EventScript_15108F:: @ 815108F
 	trainerbattle_single TRAINER_ROSE_1, Route118_Text_1BDFF4, Route118_Text_1BE03C

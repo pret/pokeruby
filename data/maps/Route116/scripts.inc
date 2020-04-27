@@ -87,7 +87,7 @@ Route116_Movement_150B1C:: @ 8150B1C
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route116_Movement_150B25:: @ 8150B25
 	walk_down
@@ -100,7 +100,7 @@ Route116_Movement_150B25:: @ 8150B25
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route116_EventScript_150B30:: @ 8150B30
 	msgbox Route116_Text_170A46, MSGBOX_SIGN
@@ -209,7 +209,7 @@ Route116_Movement_150C4D:: @ 8150C4D
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route116_Movement_150C57:: @ 8150C57
 	walk_up
@@ -222,7 +222,7 @@ Route116_Movement_150C57:: @ 8150C57
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route116_EventScript_150C62:: @ 8150C62
 	trainerbattle_single TRAINER_JOEY, Route116_Text_1BD02B, Route116_Text_1BD04C

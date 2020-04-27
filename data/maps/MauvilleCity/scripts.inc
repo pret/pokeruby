@@ -191,7 +191,7 @@ MauvilleCity_Movement_14C2AA:: @ 814C2AA
 	walk_down
 	walk_down
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2B0:: @ 814C2B0
 	walk_down
@@ -199,7 +199,7 @@ MauvilleCity_Movement_14C2B0:: @ 814C2B0
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2B6:: @ 814C2B6
 	delay_16
@@ -212,7 +212,7 @@ MauvilleCity_Movement_14C2B6:: @ 814C2B6
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2C1:: @ 814C2C1
 	delay_16
@@ -225,7 +225,7 @@ MauvilleCity_Movement_14C2C1:: @ 814C2C1
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2CC:: @ 814C2CC
 	walk_left
@@ -233,7 +233,7 @@ MauvilleCity_Movement_14C2CC:: @ 814C2CC
 	walk_left
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2D2:: @ 814C2D2
 	walk_left
@@ -241,18 +241,18 @@ MauvilleCity_Movement_14C2D2:: @ 814C2D2
 	walk_down
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2D8:: @ 814C2D8
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2DC:: @ 814C2DC
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2DF:: @ 814C2DF
 	walk_left
@@ -263,7 +263,7 @@ MauvilleCity_Movement_14C2DF:: @ 814C2DF
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_Movement_14C2E8:: @ 814C2E8
 	walk_down
@@ -275,7 +275,7 @@ MauvilleCity_Movement_14C2E8:: @ 814C2E8
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	lock

@@ -36,7 +36,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_1593FA:: @ 81593FA
 	walk_down
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_159402:: @ 8159402
 	walk_fast_left
@@ -45,12 +45,12 @@ LilycoveCity_PokemonTrainerFanClub_Movement_159402:: @ 8159402
 	walk_fast_down
 	walk_fast_left
 	walk_fast_down
-	end_movement
+	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_159409:: @ 8159409
 	walk_down
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_15940C:: @ 815940C
 	jump_in_place_right
@@ -58,7 +58,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_15940C:: @ 815940C
 	walk_fast_up
 	walk_fast_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LilycoveCity_PokemonTrainerFanClub_MapScript1_159412:: @ 8159412
 	compare VAR_LILYCOVE_FAN_CLUB_STATE, 1

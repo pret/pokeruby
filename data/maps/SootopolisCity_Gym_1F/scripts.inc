@@ -83,7 +83,7 @@ SootopolisCity_Gym_1F_EventScript_15AFE4:: @ 815AFE4
 
 SootopolisCity_Gym_1F_Movement_15AFFD:: @ 815AFFD
 	set_invisible
-	end_movement
+	step_end
 
 SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
 	trainerbattle_single TRAINER_WALLACE, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D, NO_MUSIC

@@ -42,7 +42,7 @@ Route121_Movement_151B57:: @ 8151B57
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route121_Movement_151B60:: @ 8151B60
 	walk_down
@@ -53,7 +53,7 @@ Route121_Movement_151B60:: @ 8151B60
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route121_Movement_151B69:: @ 8151B69
 	walk_down
@@ -64,7 +64,7 @@ Route121_Movement_151B69:: @ 8151B69
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route121_EventScript_151B72:: @ 8151B72
 	trainerbattle_single TRAINER_VANESSA, Route121_Text_1BF96E, Route121_Text_1BF9A1

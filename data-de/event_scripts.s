@@ -1127,7 +1127,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
 OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
 	nurse_joy_bow
 	delay_4
-	end_movement
+	step_end
 
 Std_ObtainItem: @ 819FDF7
 	additem VAR_0x8000, VAR_0x8001
@@ -1877,7 +1877,7 @@ SlateportCity_Harbor_Movement_1A041C:: @ 81A041C
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
@@ -1913,7 +1913,7 @@ EventScript_1A0457: @ unreferenced?
 
 Movement_1A047A:
 	walk_up
-	end_movement
+	step_end
 
 BattleTower_Outside_EventScript_1A047C:: @ 81A047C
 SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
@@ -2159,7 +2159,7 @@ Route120_Movement_1A0662:: @ 81A0662
 	set_invisible
 	delay_16
 	set_visible
-	end_movement
+	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1A0678:: @ 81A0678
 MossdeepCity_StevensHouse_EventScript_1A0678:: @ 81A0678
@@ -2258,7 +2258,7 @@ EverGrandeCity_SidneysRoom_EventScript_1A07FA:: @ 81A07FA
 
 SlateportCity_Movement_1A0831:: @ 81A0831
 	emote_question_mark
-	end_movement
+	step_end
 
 AquaHideout_B2F_Movement_1A0833:: @ 81A0833
 EverGrandeCity_ChampionsRoom_Movement_1A0833:: @ 81A0833
@@ -2288,7 +2288,7 @@ SlateportCity_OceanicMuseum_1F_Movement_1A0833:: @ 81A0833
 SlateportCity_PokemonFanClub_Movement_1A0833:: @ 81A0833
 SootopolisCity_Movement_1A0833:: @ 81A0833
 	emote_exclamation_mark
-	end_movement
+	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_1A0835:: @ 81A0835
 LavaridgeTown_Movement_1A0835:: @ 81A0835
@@ -2317,7 +2317,7 @@ SootopolisCity_Movement_1A0835:: @ 81A0835
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 AquaHideout_B2F_Movement_1A0839:: @ 81A0839
 EverGrandeCity_PokemonLeague_Movement_1A0839:: @ 81A0839
@@ -2350,11 +2350,11 @@ SlateportCity_ContestLobby_Movement_1A0839:: @ 81A0839
 SlateportCity_Movement_1A0839:: @ 81A0839
 SlateportCity_SternsShipyard_1F_Movement_1A0839:: @ 81A0839
 	face_player
-	end_movement
+	step_end
 
 @ 81A083B
 	face_away_player
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_1A083D:: @ 81A083D
 LilycoveCity_ContestHall_Movement_1A083D:: @ 81A083D
@@ -2386,7 +2386,7 @@ SlateportCity_OceanicMuseum_2F_Movement_1A083D:: @ 81A083D
 SlateportCity_SternsShipyard_1F_Movement_1A083D:: @ 81A083D
 VerdanturfTown_Movement_1A083D:: @ 81A083D
 	face_original_direction
-	end_movement
+	step_end
 
 Movement_1A083F:: @ 81A083F
 DewfordTown_Hall_Movement_1A083F:: @ 81A083F
@@ -2420,7 +2420,7 @@ SlateportCity_OceanicMuseum_2F_Movement_1A083F:: @ 81A083F
 SootopolisCity_Movement_1A083F:: @ 81A083F
 VictoryRoad_1F_Movement_1A083F:: @ 81A083F
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 AquaHideout_B2F_Movement_1A0841:: @ 81A0841
 CaveOfOrigin_B4F_Movement_1A0841:: @ 81A0841
@@ -2451,7 +2451,7 @@ SlateportCity_Harbor_Movement_1A0841:: @ 81A0841
 SlateportCity_Movement_1A0841:: @ 81A0841
 SlateportCity_OceanicMuseum_2F_Movement_1A0841:: @ 81A0841
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 AquaHideout_B2F_Movement_1A0843:: @ 81A0843
 DewfordTown_Hall_Movement_1A0843:: @ 81A0843
@@ -2483,7 +2483,7 @@ SlateportCity_OceanicMuseum_1F_Movement_1A0843:: @ 81A0843
 SlateportCity_OceanicMuseum_2F_Movement_1A0843:: @ 81A0843
 SootopolisCity_Movement_1A0843:: @ 81A0843
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 BattleTower_Outside_Movement_1A0845:: @ 81A0845
 DewfordTown_Hall_Movement_1A0845:: @ 81A0845
@@ -2515,7 +2515,7 @@ SlateportCity_OceanicMuseum_2F_Movement_1A0845:: @ 81A0845
 SootopolisCity_Movement_1A0845:: @ 81A0845
 SouthernIsland_Exterior_Movement_1A0845:: @ 81A0845
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 EverGrandeCity_SidneysRoom_Movement_1A0847:: @ 81A0847
 	walk_up
@@ -2524,28 +2524,28 @@ EverGrandeCity_SidneysRoom_Movement_1A0847:: @ 81A0847
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_1A084E:: @ 81A084E
 	walk_up
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 EverGrandeCity_SidneysRoom_Movement_1A0853:: @ 81A0853
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 Route110_TrickHouseEntrance_Movement_1A0856:: @ 81A0856
 	walk_up
-	end_movement
+	step_end
 
 @ 81A0858
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 PictureBookShelfScript:: @ 81A085B
 	msgbox PictureBookShelfText, MSGBOX_SIGN
@@ -3399,7 +3399,7 @@ SecretBase_RedCave1_EventScript_1A2E08:: @ 81A2E08
 SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 gUnknown_081A2E14:: @ 81A2E14
 	lockall
@@ -4540,7 +4540,7 @@ gUnknown_081C6BDE:: @ 81C6BDE
 
 GraniteCave_B1F_Movement_1C6BF7:: @ 81C6BF7
 	set_invisible
-	end_movement
+	step_end
 
 @ 81C6BF9
 	msgbox Text_1C6C2B, MSGBOX_NPC

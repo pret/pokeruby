@@ -265,7 +265,7 @@ Route120_EventScript_15198A:: @ 815198A
 Route120_Movement_151995:: @ 8151995
 	walk_down
 	walk_left
-	end_movement
+	step_end
 
 Route120_EventScript_151998:: @ 8151998
 	msgbox Route120_Text_171B93, MSGBOX_NPC
