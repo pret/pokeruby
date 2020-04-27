@@ -437,20 +437,18 @@ u8 ScriptGiveEgg(u16 species)
     return GiveMonToPlayer(&mon);
 }
 
-void CheckForAlivePartyMons(void)
+void HasEnoughMonsForDoubleBattle(void)
 {
-    u8 var = sub_803DAA0();
-
-    switch(var)
+    switch (GetMonsStateToDoubles())
     {
-    case 1:
-        gSpecialVar_Result = var;
+    case PLAYER_HAS_TWO_USABLE_MONS:
+        gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
         break;
-    case 0:
-        gSpecialVar_Result = var;
+    case PLAYER_HAS_ONE_MON:
+        gSpecialVar_Result = PLAYER_HAS_ONE_MON;
         break;
-    case 2:
-        gSpecialVar_Result = var;
+    case PLAYER_HAS_ONE_USABLE_MON:
+        gSpecialVar_Result = PLAYER_HAS_ONE_USABLE_MON;
         break;
     }
 }

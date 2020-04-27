@@ -6,6 +6,5 @@
 
 bool8 CheckTrainers(void);
 void sub_8084794(struct ObjectEvent *var);
-void ScrSpecial_EndTrainerApproach(void);
 
 #endif // GUARD_TRAINER_SEE_H

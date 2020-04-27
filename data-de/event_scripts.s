@@ -15,6 +15,7 @@
 #include "constants/metatile_labels.h"
 #include "constants/battle_setup.h"
 #include "constants/map_scripts.h"
+#include "constants/pokemon.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"
 	.include "constants/constants.inc"
@@ -711,144 +712,7 @@ UnknownString_819C21F: @ 819C21F
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/text.inc"
 
 	.include "data/scripts/std_msgbox.inc"
-
-gUnknown_0819F80B:: @ 819F80B
-	lock
-	special PlayTrainerEncounterMusic
-	special ScrSpecial_EndTrainerApproach
-	waitstate
-	goto EventScript_19F8F2
-
-gUnknown_0819F818:: @ 819F818
-	lock
-	faceplayer
-	applymovement VAR_LAST_TALKED, Movement_19F8F0
-	waitmovement 0
-	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_19F83F
-	special PlayTrainerEncounterMusic
-	special sub_8082524
-	goto EventScript_19F8F2
-
-EventScript_19F83F:
-	gotopostbattlescript
-
-gUnknown_0819F840:: @ 819F840
-	lock
-	faceplayer
-	call EventScript_19F8E5
-	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_19F877
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_19F870
-	special PlayTrainerEncounterMusic
-	special sub_8082524
-	goto EventScript_19F8F2
-
-EventScript_19F870:
-	special ScrSpecial_ShowTrainerNonBattlingSpeech
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-EventScript_19F877:
-	gotopostbattlescript
-
-gUnknown_0819F878:: @ 819F878
-	applymovement VAR_LAST_TALKED, Movement_19F8F0
-	waitmovement 0
-	special PlayTrainerEncounterMusic
-	trainerbattlebegin
-	gotopostbattlescript
-
-gUnknown_0819F887:: @ 819F887
-	call EventScript_19F8E5
-	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_19F8AD
-	special PlayTrainerEncounterMusic
-	special sub_8082524
-	special ScrSpecial_ShowTrainerIntroSpeech
-	waitmessage
-	waitbuttonpress
-	special ScrSpecial_StartTrainerEyeRematch
-	waitstate
-	releaseall
-	end
-
-EventScript_19F8AD:
-	gotopostbattlescript
-
-gUnknown_0819F8AE:: @ 819F8AE
-	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_19F8DD
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_19F8DE
-	special PlayTrainerEncounterMusic
-	special sub_8082524
-	special ScrSpecial_ShowTrainerIntroSpeech
-	waitmessage
-	waitbuttonpress
-	special ScrSpecial_StartTrainerEyeRematch
-	waitstate
-	releaseall
-	end
-
-EventScript_19F8DD:
-	gotopostbattlescript
-
-EventScript_19F8DE:
-	special ScrSpecial_ShowTrainerNonBattlingSpeech
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-EventScript_19F8E5:
-	applymovement VAR_LAST_TALKED, Movement_19F8F0
-	waitmovement 0
-	return
-
-Movement_19F8F0::
-	reveal_trainer
-	end_movement
-
-EventScript_19F8F2:
-	special ScrSpecial_ShowTrainerIntroSpeech
-	waitmessage
-	waitbuttonpress
-	trainerbattlebegin
-	specialvar VAR_RESULT, ScrSpecial_GetTrainerBattleMode
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_19F934
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_19F936
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_19F936
-	compare VAR_RESULT, 6
-	goto_if_eq EventScript_19F936
-	compare VAR_RESULT, 8
-	goto_if_eq EventScript_19F936
-
-EventScript_19F934:
-	releaseall
-	end
-
-EventScript_19F936:
-	gotobeatenscript
-
-Std_MsgboxAutoclose::
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	release
-	return
+	.include "data/scripts/trainer_battle.inc"
 
 Event_ResetBerryTrees: @ 19F940
 	setberrytree 2, 7, 5

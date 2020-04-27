@@ -448,7 +448,7 @@ void sub_8084794(struct ObjectEvent *var)
 
 static void Task_DestroyTrainerApproachTask(u8);
 
-void ScrSpecial_EndTrainerApproach(void)
+void EndTrainerApproach(void)
 {
     sub_80842FC(Task_DestroyTrainerApproachTask);
 }

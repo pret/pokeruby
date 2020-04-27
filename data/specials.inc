@@ -60,16 +60,16 @@ gSpecials::
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special ScrSpecial_GetTrainerBattleMode
-	def_special ScrSpecial_ShowTrainerIntroSpeech
+	def_special ShowTrainerIntroSpeech
 	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
-	def_special ScrSpecial_HasTrainerBeenFought
-	def_special ScrSpecial_EndTrainerApproach
+	def_special GetTrainerFlag
+	def_special EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
-	def_special ScrSpecial_GetTrainerEyeRematchFlag
-	def_special ScrSpecial_StartTrainerEyeRematch
+	def_special IsTrainerReadyForRematch
+	def_special BattleSetup_StartRematchBattle
 	def_special ShowPokemonStorageSystem
-	def_special CheckForAlivePartyMons
+	def_special HasEnoughMonsForDoubleBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -322,7 +322,7 @@ gSpecials::
 	def_special ScrSpecial_StartGroudonKyogreBattle
 	def_special ScrSpecial_StartRayquazaBattle
 	def_special ScrSpecial_StartRegiBattle
-	def_special sub_8082524
+	def_special SetUpTrainerMovement
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
 	def_special sub_807E25C

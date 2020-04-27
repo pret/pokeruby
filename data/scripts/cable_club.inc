@@ -279,8 +279,8 @@ OldaleTown_PokemonCenter_2F_EventScript_1A403C:: @ 81A403C
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4042:: @ 81A4042
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_1A4056
 	setvar VAR_0x8004, 2
 	return
