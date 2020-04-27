@@ -363,11 +363,23 @@
 #define ITEM_15B 347
 #define ITEM_15C 348
 
+#define ITEMS_COUNT 349
+#define ITEM_FIELD_ARROW ITEMS_COUNT
+
 #define NUM_TECHNICAL_MACHINES 50
 #define NUM_HIDDEN_MACHINES     8
 
+#define MAX_BAG_ITEM_CAPACITY  99
+#define MAX_PC_ITEM_CAPACITY   999
+#define MAX_BERRY_CAPACITY     999
+
+#define FIRST_BERRY_INDEX             ITEM_CHERI_BERRY
+#define LAST_BERRY_INDEX              ITEM_ENIGMA_BERRY
+
+#define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
+
 // Check if the item is one that can be used on a Pokemon.
-#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
+#define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
 
 #define IS_ITEM_MAIL(item) ((item) >= ITEM_ORANGE_MAIL && (item) <= ITEM_RETRO_MAIL)
 

@@ -1,39 +1,6 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
-#define BERRY_NAME_LENGTH 6
-#define BERRY_REGROW_LIMIT 10
-#define MAX_BERRY_TREES 128
-
-#define BERRY_NONE 0
-#define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY  ITEM_ENIGMA_BERRY
-
-#define GETBERRYID(berry) ((berry - FIRST_BERRY) + 1)
-#define GETITEMID(berry) ((berry + FIRST_BERRY) - 1)
-
-enum
-{
-    BERRY_FIRMNESS_UNKNOWN,
-    BERRY_FIRMNESS_VERY_SOFT,
-    BERRY_FIRMNESS_SOFT,
-    BERRY_FIRMNESS_HARD,
-    BERRY_FIRMNESS_VERY_HARD,
-    BERRY_FIRMNESS_SUPER_HARD,
-};
-
-// berry stages
-enum
-{
-    BERRY_STAGE_NO_BERRY, // there is no tree planted and the soil is completely flat.
-    BERRY_STAGE_PLANTED,
-    BERRY_STAGE_SPROUTED,
-    BERRY_STAGE_TALLER,
-    BERRY_STAGE_FLOWERING,
-    BERRY_STAGE_BERRIES,
-    BERRY_STAGE_SPARKLING = 0xFF,
-};
-
 void ClearEnigmaBerries(void);
 void debug_sub_80C2C18(const u8 *name, u8 holdEffect, u8 holdEffectParam);
 void SetEnigmaBerry(u8 *src);

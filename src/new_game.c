@@ -38,7 +38,7 @@ extern u8 gPlayerPartyCount;
 extern u8 gUnknown_03005CE8;
 extern u16 gSaveFileStatus;
 
-extern u8 gUnknown_0819FA81[];
+extern u8 EventScript_ResetAllMapFlags[];
 
 static const struct ContestWinner sEmptyMuseumPortrait =
 {
@@ -202,7 +202,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
-    ScriptContext2_RunNewScript(gUnknown_0819FA81);
+    ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
 }
 
 #if DEBUG

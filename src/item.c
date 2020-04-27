@@ -64,7 +64,7 @@ void CopyItemName(u16 itemId, u8 *string)
 {
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        StringCopy(string, GetBerryInfo(GETBERRYID(ITEM_ENIGMA_BERRY))->name);
+        StringCopy(string, GetBerryInfo(ITEM_TO_BERRY(ITEM_ENIGMA_BERRY))->name);
         StringAppend(string, gOtherText_Berry2);
     }
     else
