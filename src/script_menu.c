@@ -11,6 +11,7 @@
 #include "sprite.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/script_menu.h"
 
 // multichoice lists
 const struct MenuAction MultichoiceList_00[] =
@@ -555,27 +556,27 @@ const struct MultichoiceListStruct gMultichoiceLists[] =
     {MultichoiceList_72, ARRAY_COUNT(MultichoiceList_72)},
 };
 
-const u8 *const gUnknown_083CE048[] =
+const u8 *const gStdStrings[] =
 {
-    OtherText_Cool2,
-    OtherText_Beauty3,
-    OtherText_Cute2,
-    OtherText_Smart2,
-    OtherText_Tough2,
-    OtherText_Normal,
-    OtherText_Super,
-    OtherText_Hyper,
-    OtherText_Master,
-    OtherText_Cool3,
-    OtherText_Beauty4,
-    OtherText_Cute3,
-    OtherText_Smart3,
-    OtherText_Tough3,
-    OtherText_Items,
-    OtherText_KeyItems,
-    OtherText_Balls,
-    OtherText_TMsHMs,
-    OtherText_Berries,
+    [STDSTRING_COOL]      = OtherText_Cool2,
+    [STDSTRING_BEAUTY]    = OtherText_Beauty3,
+    [STDSTRING_CUTE]      = OtherText_Cute2,
+    [STDSTRING_SMART]     = OtherText_Smart2,
+    [STDSTRING_TOUGH]     = OtherText_Tough2,
+    [STDSTRING_NORMAL]    = OtherText_Normal,
+    [STDSTRING_SUPER]     = OtherText_Super,
+    [STDSTRING_HYPER]     = OtherText_Hyper,
+    [STDSTRING_MASTER]    = OtherText_Master,
+    [STDSTRING_COOL2]     = OtherText_Cool3,
+    [STDSTRING_BEAUTY2]   = OtherText_Beauty4,
+    [STDSTRING_CUTE2]     = OtherText_Cute3,
+    [STDSTRING_SMART2]    = OtherText_Smart3,
+    [STDSTRING_TOUGH2]    = OtherText_Tough3,
+    [STDSTRING_ITEMS]     = OtherText_Items,
+    [STDSTRING_KEYITEMS]  = OtherText_KeyItems,
+    [STDSTRING_POKEBALLS] = OtherText_Balls,
+    [STDSTRING_TMHMS]     = OtherText_TMsHMs,
+    [STDSTRING_BERRIES]   = OtherText_Berries,
 };
 
 extern u8 gPCText_WhichPCShouldBeAccessed[];

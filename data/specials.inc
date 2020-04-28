@@ -158,7 +158,7 @@ gSpecials::
 	def_special GetPlayerTrainerIdOnesDigit
 	def_special GetPlayerBigGuyGirlString
 	def_special GetRivalSonDaughterString
-	def_special SetFlagInVar
+	def_special SetHiddenItemFlag
 	def_special CableCarWarp
 	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic

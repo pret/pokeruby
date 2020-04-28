@@ -722,7 +722,7 @@ void CableCarWarp(void)
     }
 }
 
-void SetFlagInVar(void)
+void SetHiddenItemFlag(void)
 {
     FlagSet(gSpecialVar_0x8004);
 }
