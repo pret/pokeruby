@@ -801,27 +801,7 @@ EventScript_SetBrineyLocation_Route109:: @ 819FD55
 
 	.include "data/scripts/pkmn_center_nurse.inc"
 	.include "data/scripts/obtain_item.inc"
-
-UnusedMixRecordsScript: @ 819FFD5
-	lock
-	faceplayer
-	msgbox UnusedMixRecordsPromptText, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq UnusedMixRecordsScript_Yes
-	compare VAR_RESULT, NO
-	goto_if_eq UnusedMixRecordsScript_Done
-	goto UnusedMixRecordsScript_Done
-UnusedMixRecordsScript_Yes: @ 819FFFA
-	special sub_80B929C
-	waitstate
-	lock
-	faceplayer
-UnusedMixRecordsScript_Done: @ 81A0000
-	message UnusedMixRecordsSeeYouAgainText
-	waitmessage
-	waitbuttonpress
-	release
-	end
+	.include "data/scripts/record_mix.inc"
 
 gUnknown_081A0009:: @ 81A0009
 	lockall

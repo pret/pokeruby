@@ -44,7 +44,7 @@ struct BattleTowerRecord *gBattleTowerPlayerRecord = &gSaveBlock2.battleTower.pl
 
 #define BUFFER_CHUNK_SIZE 200
 
-void sub_80B929C(void)
+void RecordMixingPlayerSpotTriggered(void)
 {
     sub_8083A84(Task_RecordMixing_Main);
 }

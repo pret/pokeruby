@@ -685,7 +685,7 @@ TradeCenter_EventScript_1A43FA:: @ 81A43FA
 
 RecordCorner_EventScript_1A4418:: @ 81A4418
 	setvar VAR_0x8005, 0
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -693,7 +693,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 
 RecordCorner_EventScript_1A442D:: @ 81A442D
 	setvar VAR_0x8005, 1
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -701,7 +701,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 
 RecordCorner_EventScript_1A4442:: @ 81A4442
 	setvar VAR_0x8005, 2
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -709,7 +709,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 
 RecordCorner_EventScript_1A4457:: @ 81A4457
 	setvar VAR_0x8005, 3
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
