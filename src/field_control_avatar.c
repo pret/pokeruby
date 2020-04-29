@@ -51,11 +51,10 @@ extern u8 gUnknown_0815281E[];
 extern u8 gUnknown_08152C39[];
 extern u8 SecretBase_EventScript_PC[];
 extern u8 SecretBase_EventScript_RecordMixingPC[];
-extern u8 gUnknown_081A0009[];
+extern u8 EventScript_PC[];
 extern u8 gUnknown_081C6C02[];
 extern u8 EventScript_HiddenItem[];
 extern u8 Event_TV[];
-extern u8 gUnknown_081A0009[];
 extern u8 ClosedSootopolisDoorScript[];
 extern u8 gUnknown_081A4363[];
 extern u8 gUnknown_081C346A[];
@@ -320,7 +319,7 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
      && script != gUnknown_08152C39
      && script != SecretBase_EventScript_PC
      && script != SecretBase_EventScript_RecordMixingPC
-     && script != gUnknown_081A0009)
+     && script != EventScript_PC)
         PlaySE(5);
 
     ScriptContext1_SetupScript(script);
@@ -456,7 +455,7 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
         return Event_TV;
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
-        return gUnknown_081A0009;
+        return EventScript_PC;
     if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
         return ClosedSootopolisDoorScript;
     if (MetatileBehavior_IsLinkBattleRecords(metatileBehavior) == TRUE)

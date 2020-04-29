@@ -803,73 +803,7 @@ EventScript_SetBrineyLocation_Route109:: @ 819FD55
 	.include "data/scripts/pkmn_center_nurse.inc"
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/record_mix.inc"
-
-gUnknown_081A0009:: @ 81A0009
-	lockall
-	setvar VAR_0x8004, 0
-	special DoPCTurnOnEffect
-	playse SE_PC_ON
-	msgbox UnknownString_81A09EC, MSGBOX_DEFAULT
-	goto EventScript_1A0023
-	end
-
-EventScript_1A0023:
-	message gPCText_WhichPCShouldBeAccessed
-	waitmessage
-	special ScrSpecial_CreatePCMenu
-	waitstate
-	goto EventScript_1A0033
-	end
-
-EventScript_1A0033:
-	switch VAR_RESULT
-	case 0, EventScript_1A0085
-	case 1, EventScript_1A0070
-	case 2, EventScript_1A00CB
-	case 3, EventScript_1A00BE
-	case 127, EventScript_1A00BE
-	end
-
-EventScript_1A0070:
-	playse SE_PC_LOGON
-	msgbox UnknownString_81A0A54, MSGBOX_DEFAULT
-	special PlayerPC
-	waitstate
-	goto EventScript_1A0023
-	end
-
-EventScript_1A0085:
-	playse SE_PC_LOGON
-	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_1A00AC
-	call_if_set FLAG_SYS_PC_LANETTE, EventScript_1A00B5
-	msgbox UnknownString_81A0A35, MSGBOX_DEFAULT
-	special ShowPokemonStorageSystem
-	waitstate
-	goto EventScript_1A0023
-	end
-
-EventScript_1A00AC:
-	msgbox UnknownString_81A0A1E, MSGBOX_DEFAULT
-	return
-
-EventScript_1A00B5:
-	msgbox UnknownString_81A0A66, MSGBOX_DEFAULT
-	return
-
-EventScript_1A00BE:
-	setvar VAR_0x8004, 0
-	playse SE_PC_OFF
-	special DoPCTurnOffEffect
-	releaseall
-	end
-
-EventScript_1A00CB:
-	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_1A00BE
-	playse SE_PC_LOGON
-	special AccessHallOfFamePC
-	waitstate
-	goto EventScript_1A0033
-	end
+	.include "data/scripts/pc.inc"
 
 FallarborTown_EventScript_1A00E1:: @ 81A00E1
 FortreeCity_EventScript_1A00E1:: @ 81A00E1
@@ -1803,22 +1737,22 @@ UnusedMixRecordsPromptText: @ 81A099F
 UnusedMixRecordsSeeYouAgainText: @ 81A09D2
 	.string "Komm bald wieder!$"
 
-UnknownString_81A09EC: @ 81A09EC
+Text_BootUpPC: @ 81A09EC
 	.string "{PLAYER} schaltet den PC ein.$"
 
-gPCText_WhichPCShouldBeAccessed:: @ 81A0A01
+Text_WhichPCShouldBeAccessed:: @ 81A0A01
 	.string "Zugriff auf wessen PC?$"
 
-UnknownString_81A0A1E: @ 81A0A1E
+Text_AccessedSomeonesPC: @ 81A0A1E
 	.string "Verbindung zu jemandes PC hergestellt.$"
 
 UnknownString_81A0A35: @ 81A0A35
 	.string "POKéMON-Lagerungs-System geöffnet.$"
 
-UnknownString_81A0A54: @ 81A0A54
+Text_AccessedPlayersPC: @ 81A0A54
 	.string "Verbindung mit PC von {PLAYER}.$"
 
-UnknownString_81A0A66: @ 81A0A66
+Text_AccessedLanettesPC: @ 81A0A66
 	.string "Verbindung zu LANETTES PC hergestellt.$"
 
 gText_NurseJoy_Welcome:: @ 81A0A7D

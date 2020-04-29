@@ -579,7 +579,7 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BERRIES]   = OtherText_Berries,
 };
 
-extern u8 gPCText_WhichPCShouldBeAccessed[];
+extern u8 Text_WhichPCShouldBeAccessed[];
 
 extern u16 gSpecialVar_Result;
 
@@ -881,7 +881,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
 #undef tIgnoreBPress
 #undef tDoWrap
 
-bool8 ScrSpecial_CreatePCMenu(void)
+bool8 ScriptMenu_CreatePCMultichoice(void)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -1098,7 +1098,7 @@ _080B588C: .4byte gPCText_PlayersPC\n\
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     Menu_DisplayDialogueFrame();
-    Menu_PrintText(gPCText_WhichPCShouldBeAccessed, 2, 15);
+    Menu_PrintText(Text_WhichPCShouldBeAccessed, 2, 15);
 }
 
 #define tState       data[0]

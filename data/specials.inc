@@ -270,7 +270,7 @@ gSpecials::
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special ScrSpecial_CreatePCMenu
+	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special ScrSpecial_ShowDiploma
 	def_special CheckLeadMonCool
