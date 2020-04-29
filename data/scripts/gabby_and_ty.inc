@@ -302,7 +302,7 @@ Route111_EventScript_1AE6F3:: @ 81AE6F3
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC40F, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 10
-	call Route111_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0

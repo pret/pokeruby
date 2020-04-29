@@ -25,7 +25,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1F7B, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 0
-	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_0x8004, 1
@@ -79,7 +79,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B207F, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 0
-	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_0x8004, 1

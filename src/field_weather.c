@@ -15,6 +15,7 @@
 #include "task.h"
 #include "trig.h"
 #include "ewram.h"
+#include "constants/field_weather.h"
 
 #define MACRO1(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 

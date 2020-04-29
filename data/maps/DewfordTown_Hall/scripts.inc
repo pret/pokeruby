@@ -4,7 +4,7 @@ DewfordTown_Hall_MapScripts:: @ 8153292
 DewfordTown_Hall_EventScript_153293:: @ 8153293
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	special TrendyPhraseIsOld
 	compare VAR_RESULT, 1
 	goto_if_eq DewfordTown_Hall_EventScript_1532B2
@@ -20,7 +20,7 @@ DewfordTown_Hall_EventScript_1532B2:: @ 81532B2
 DewfordTown_Hall_EventScript_1532BC:: @ 81532BC
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_17559E, MSGBOX_DEFAULT
 	release
 	end
@@ -28,7 +28,7 @@ DewfordTown_Hall_EventScript_1532BC:: @ 81532BC
 DewfordTown_Hall_EventScript_1532CD:: @ 81532CD
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	special BufferRandomHobbyOrLifestyleString
 	msgbox DewfordTown_Hall_Text_1755F9, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -50,7 +50,7 @@ DewfordTown_Hall_EventScript_153300:: @ 8153300
 DewfordTown_Hall_EventScript_15330A:: @ 815330A
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_17570D, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Common_Movement_WalkInPlaceFastestUp
@@ -61,7 +61,7 @@ DewfordTown_Hall_EventScript_15330A:: @ 815330A
 DewfordTown_Hall_EventScript_153326:: @ 8153326
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_17574C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Common_Movement_WalkInPlaceFastestUp
@@ -72,21 +72,21 @@ DewfordTown_Hall_EventScript_153326:: @ 8153326
 DewfordTown_Hall_EventScript_153342:: @ 8153342
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_175779, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_Hall_EventScript_153353:: @ 8153353
 	lockall
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_175842, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_153363:: @ 8153363
 	lockall
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	special GetDewfordHallPaintingNameIndex
 	switch VAR_RESULT
 	case 0, DewfordTown_Hall_EventScript_1533CA
@@ -132,7 +132,7 @@ DewfordTown_Hall_EventScript_1533FE:: @ 81533FE
 	end
 
 DewfordTown_Hall_EventScript_15340A:: @ 815340A
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	special GetDewfordHallPaintingNameIndex
 	switch VAR_RESULT
 	case 0, DewfordTown_Hall_EventScript_153470
@@ -251,7 +251,7 @@ DewfordTown_Hall_Movement_15359B:: @ 815359B
 DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	lock
 	faceplayer
-	call DewfordTown_Hall_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_1535D1
 	msgbox DewfordTown_Hall_Text_175E13, MSGBOX_DEFAULT
 	giveitem ITEM_TM36_SLUDGE_BOMB

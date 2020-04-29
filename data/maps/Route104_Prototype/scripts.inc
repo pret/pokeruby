@@ -44,7 +44,7 @@ Route104_Prototype_EventScript_160CF1:: @ 8160CF1
 Route104_Prototype_EventScript_160CFB:: @ 8160CFB
 	closemessage
 	delay 60
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	delay 60
 	special DoSoftReset
 	waitstate

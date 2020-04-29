@@ -115,7 +115,7 @@ DewfordTown_EventScript_14E147:: @ 814E147
 	end
 
 DewfordTown_EventScript_14E151:: @ 814E151
-	call DewfordTown_EventScript_1A010C
+	call EventScript_BackupMrBrineyLocation
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	setobjectpriority 255, MAP_DEWFORD_TOWN, 0
 	applymovement 2, DewfordTown_Movement_14E40E
@@ -147,7 +147,7 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	end
 
 DewfordTown_EventScript_14E1D8:: @ 814E1D8
-	call DewfordTown_EventScript_1A010C
+	call EventScript_BackupMrBrineyLocation
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	setobjectpriority 255, MAP_DEWFORD_TOWN, 1
 	applymovement 2, DewfordTown_Movement_14E40E
@@ -593,7 +593,7 @@ DewfordTown_Movement_14E410:: @ 814E410
 DewfordTown_EventScript_14E413:: @ 814E413
 	lock
 	faceplayer
-	call DewfordTown_EventScript_1A0102
+	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Text_16B9CE, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E439
@@ -609,7 +609,7 @@ DewfordTown_EventScript_14E439:: @ 814E439
 DewfordTown_EventScript_14E443:: @ 814E443
 	msgbox DewfordTown_Text_16BADC, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 9
-	call DewfordTown_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1

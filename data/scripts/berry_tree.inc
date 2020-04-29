@@ -39,7 +39,7 @@ BerryTree_EventScript_1A1558:: @ 81A1558
 	end
 
 BerryTree_EventScript_1A1577:: @ 81A1577
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	closemessage
 	special Berry_FadeAndGoToBerryBagMenu
 	waitstate

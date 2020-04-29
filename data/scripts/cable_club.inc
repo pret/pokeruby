@@ -613,7 +613,7 @@ SingleBattleColosseum_EventScript_1A4379:: @ 81A4379
 	end
 
 DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -624,7 +624,7 @@ DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
 	end
 
 DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -635,7 +635,7 @@ DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
 	end
 
 DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -646,7 +646,7 @@ DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
 	end
 
 DoubleBattleColosseum_EventScript_1A43D4:: @ 81A43D4
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -727,7 +727,7 @@ TradeRoom_ReadTrainerCard1:: @ 81A4479
 	message CableClub_LookAtTrainerCard1
 	waitmessage
 	waitbuttonpress
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_8083BDC
 	waitstate
 	end
@@ -736,7 +736,7 @@ TradeRoom_ReadTrainerCard2:: @ 81A4487
 	message CableClub_LookAtTrainerCard2
 	waitmessage
 	waitbuttonpress
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_8083BDC
 	waitstate
 	end

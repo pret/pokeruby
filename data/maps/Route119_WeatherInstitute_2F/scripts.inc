@@ -41,12 +41,12 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
 	fadedefaultbgm
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setflag FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE
 	removeobject 1
 	removeobject 2
 	removeobject 3
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_163DC8
 	waitmovement 0
 	moveobjectoffscreen 5

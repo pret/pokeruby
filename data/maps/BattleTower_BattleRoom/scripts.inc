@@ -115,7 +115,7 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	msgbox BattleTower_BattleRoom_Text_1C6D05, MSGBOX_DEFAULT
 
 BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special BattleTower_SoftReset
 	end
 

@@ -2,7 +2,7 @@ Route109_MapScripts:: @ 814F4D2
 	.byte 0
 
 Route109_EventScript_14F4D3:: @ 814F4D3
-	call Route109_EventScript_1A010C
+	call EventScript_BackupMrBrineyLocation
 	setobjectpriority 2, MAP_ROUTE109, 0
 	setobjectpriority 255, MAP_ROUTE109, 0
 	applymovement 2, Route109_Movement_14F67B

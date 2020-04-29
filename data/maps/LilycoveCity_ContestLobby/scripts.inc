@@ -26,7 +26,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_18890F, MSGBOX_DEFAULT
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
@@ -200,7 +200,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_18890F, MSGBOX_DEFAULT
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -729,21 +729,21 @@ LilycoveCity_ContestLobby_EventScript_15905D:: @ 815905D
 
 LilycoveCity_ContestLobby_EventScript_159066:: @ 8159066
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 6
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_15906D:: @ 815906D
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 7
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_159074:: @ 8159074
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 8
 	releaseall
 	end

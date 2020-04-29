@@ -57,12 +57,12 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.endif
 	closemessage
 	delay 30
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 3
 	removeobject 22
 	setflag FLAG_HIDE_EVIL_TEAM_MT_CHIMNEY
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setobjectxyperm 1, 10, 12
 	addobject 1
 	compare VAR_FACING, 4

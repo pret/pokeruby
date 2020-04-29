@@ -105,14 +105,14 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A91:: @ 81B6A91
 	incrementgamestat GAME_STAT_CHECKED_CLOCK
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ScrSpecial_ViewWallClock
 	waitstate
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B:: @ 81B6A9B
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special StartWallClock
 	waitstate
 	return

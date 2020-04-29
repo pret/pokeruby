@@ -53,7 +53,7 @@ prompt_write_lyrics:
 
 write_lyrics:
 	setvar VAR_0x8004, 6
-	call MauvilleCity_PokemonCenter_1F_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, NO

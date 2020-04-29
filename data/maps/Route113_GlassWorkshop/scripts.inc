@@ -196,10 +196,10 @@ Route113_GlassWorkshop_EventScript_163845:: @ 8163845
 Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	msgbox Route113_GlassWorkshop_Text_19E827, MSGBOX_DEFAULT
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playse SE_SELECT
 	delay 30
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	msgbox Route113_GlassWorkshop_Text_19E9D7, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
 	call_if_eq Route113_GlassWorkshop_EventScript_163889

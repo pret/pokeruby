@@ -83,7 +83,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	compare VAR_PETALBURG_GYM_STATE, 6
-	call_if_eq MauvilleCity_Gym_EventScript_1A00FB
+	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special MauvilleGymSpecial3

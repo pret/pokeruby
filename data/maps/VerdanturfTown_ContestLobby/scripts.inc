@@ -89,7 +89,7 @@ VerdanturfTown_ContestLobby_Movement_153E35:: @ 8153E35
 
 VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 1
 	releaseall
 	end

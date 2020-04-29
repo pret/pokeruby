@@ -92,7 +92,7 @@ FallarborTown_ContestLobby_EventScript_1B7734:: @ 81B7734
 
 FallarborTown_ContestLobby_EventScript_1B7742:: @ 81B7742
 	copyvar VAR_0x8004, VAR_0x8009
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special DoBerryBlending
 	waitstate
 	releaseall
@@ -269,7 +269,7 @@ FallarborTown_ContestLobby_EventScript_1B790F:: @ 81B790F
 
 FallarborTown_ContestLobby_EventScript_1B791D:: @ 81B791D
 	setvar VAR_0x8004, 0
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 240
 	removeobject 239
 	removeobject 238
@@ -318,7 +318,7 @@ FallarborTown_ContestLobby_EventScript_1B7973:: @ 81B7973
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7980:: @ 81B7980
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	specialvar VAR_RESULT, GetLinkPartnerNames
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_0x8008
@@ -327,7 +327,7 @@ FallarborTown_ContestLobby_EventScript_1B7980:: @ 81B7980
 	end
 
 FallarborTown_ContestLobby_EventScript_1B799A:: @ 81B799A
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	switch VAR_0x8008
 	case 2, FallarborTown_ContestLobby_EventScript_1B78F3
 	case 3, FallarborTown_ContestLobby_EventScript_1B7901

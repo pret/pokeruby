@@ -68,11 +68,11 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F17E, MSGBOX_DEFAULT
 	.endif
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 3
 	removeobject 4
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	delay 30
 	setflag FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight

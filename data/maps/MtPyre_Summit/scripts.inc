@@ -42,14 +42,14 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	msgbox MtPyre_Summit_Text_1B5EEC, MSGBOX_DEFAULT
 	.endif
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 4
 	removeobject 5
 	removeobject 6
 	setflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
 	setflag FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	delay 20
 	call MtPyre_Summit_EventScript_15D57A
 	compare VAR_0x8008, 0

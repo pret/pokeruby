@@ -116,7 +116,7 @@ SlateportCity_ContestLobby_EventScript_155526:: @ 8155526
 
 SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 3
 	releaseall
 	end

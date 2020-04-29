@@ -214,7 +214,7 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	copyvar VAR_0x8006, VAR_RESULT
 	special SetBattleTowerProperty
 	msgbox BattleTower_Lobby_Text_19A07B, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseBattleTowerPlayerParty
 	waitstate
 	compare VAR_RESULT, 0
@@ -342,7 +342,7 @@ BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 BattleTower_Lobby_EventScript_1606CC:: @ 81606CC
 	msgbox BattleTower_Lobby_Text_19A7C3, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
-	call BattleTower_Lobby_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0

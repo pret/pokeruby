@@ -100,7 +100,7 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	compare VAR_RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23F3
 	msgbox Route117_PokemonDayCare_Text_1B2947, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseSendDaycareMon
 	waitstate
 	compare VAR_0x8004, 255

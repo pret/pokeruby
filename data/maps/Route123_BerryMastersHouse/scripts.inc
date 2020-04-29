@@ -42,7 +42,7 @@ Route123_BerryMastersHouse_EventScript_163A64:: @ 8163A64
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FROM_BERRYMASTER_WIFE, Route123_BerryMastersHouse_EventScript_163C13
 	msgbox Route123_BerryMastersHouse_Text_1C5D24, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 13
-	call Route123_BerryMastersHouse_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1

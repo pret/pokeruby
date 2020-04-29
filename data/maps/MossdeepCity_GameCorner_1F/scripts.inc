@@ -130,7 +130,7 @@ MossdeepCity_GameCorner_1F_EventScript_15ADE8:: @ 815ADE8
 
 MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
 	msgbox MossdeepCity_GameCorner_1F_Text_18E6DA, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	return

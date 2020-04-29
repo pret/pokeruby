@@ -103,7 +103,7 @@ gSpecials::
 	def_special sub_808363C
 	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
-	def_special sub_80E60D8
+	def_special ShowEasyChatScreen
 	def_special sub_80EB7C4
 	def_special ScrSpecial_GetCurrentMauvilleMan
 	def_special ScrSpecial_HasBardSongBeenChanged

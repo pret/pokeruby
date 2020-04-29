@@ -25,9 +25,9 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B64
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6B0, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special SelectMove
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	compare VAR_0x8005, 4
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special ScrSpecial_GetPokemonNicknameAndMoveName

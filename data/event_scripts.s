@@ -18,6 +18,7 @@
 #include "constants/pokemon.h"
 #include "constants/berry.h"
 #include "constants/script_menu.h"
+#include "constants/field_weather.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"
 	.include "constants/constants.inc"
@@ -804,70 +805,32 @@ EventScript_SetBrineyLocation_Route109:: @ 819FD55
 	.include "data/scripts/record_mix.inc"
 	.include "data/scripts/pc.inc"
 
-FallarborTown_EventScript_1A00E1:: @ 81A00E1
-FortreeCity_EventScript_1A00E1:: @ 81A00E1
-LavaridgeTown_EventScript_1A00E1:: @ 81A00E1
-MauvilleCity_EventScript_1A00E1:: @ 81A00E1
-MossdeepCity_EventScript_1A00E1:: @ 81A00E1
-OldaleTown_EventScript_1A00E1:: @ 81A00E1
-PetalburgCity_EventScript_1A00E1:: @ 81A00E1
-RustboroCity_EventScript_1A00E1:: @ 81A00E1
-SlateportCity_EventScript_1A00E1:: @ 81A00E1
-SootopolisCity_EventScript_1A00E1:: @ 81A00E1
-VerdanturfTown_EventScript_1A00E1:: @ 81A00E1
-	msgbox PetalburgCity_Text_1A0D41, MSGBOX_SIGN
+Common_EventScript_PokemartSign:: @ 81A00E1
+	msgbox Text_PokemartSign, MSGBOX_SIGN
 	end
 
-DewfordTown_EventScript_1A00EA:: @ 81A00EA
-EverGrandeCity_EventScript_1A00EA:: @ 81A00EA
-FallarborTown_EventScript_1A00EA:: @ 81A00EA
-FortreeCity_EventScript_1A00EA:: @ 81A00EA
-LavaridgeTown_EventScript_1A00EA:: @ 81A00EA
-LilycoveCity_EventScript_1A00EA:: @ 81A00EA
-MauvilleCity_EventScript_1A00EA:: @ 81A00EA
-MossdeepCity_EventScript_1A00EA:: @ 81A00EA
-OldaleTown_EventScript_1A00EA:: @ 81A00EA
-PacifidlogTown_EventScript_1A00EA:: @ 81A00EA
-PetalburgCity_EventScript_1A00EA:: @ 81A00EA
-RustboroCity_EventScript_1A00EA:: @ 81A00EA
-SlateportCity_EventScript_1A00EA:: @ 81A00EA
-SootopolisCity_EventScript_1A00EA:: @ 81A00EA
-VerdanturfTown_EventScript_1A00EA:: @ 81A00EA
-	msgbox PetalburgCity_Text_1A0D75, MSGBOX_SIGN
+Common_EventScript_PokemonCenterSign:: @ 81A00EA
+	msgbox Text_PokemonCenterSign, MSGBOX_SIGN
 	end
 
-BattleTower_Lobby_EventScript_1A00F3:: @ 81A00F3
-DewfordTown_EventScript_1A00F3:: @ 81A00F3
-FallarborTown_ContestLobby_EventScript_1A00F3:: @ 81A00F3
-MauvilleCity_PokemonCenter_1F_EventScript_1A00F3:: @ 81A00F3
-PetalburgCity_PokemonCenter_1F_EventScript_1A00F3:: @ 81A00F3
-Route111_EventScript_1A00F3:: @ 81A00F3
-Route123_BerryMastersHouse_EventScript_1A00F3:: @ 81A00F3
-SlateportCity_OceanicMuseum_1F_EventScript_1A00F3:: @ 81A00F3
-SlateportCity_PokemonFanClub_EventScript_1A00F3:: @ 81A00F3
-	fadescreen 1
-	special sub_80E60D8
-	fadescreen 0
+Common_EventScript_ShowEasyChatScreen:: @ 81A00F3
+	fadescreen FADE_TO_BLACK
+	special ShowEasyChatScreen
+	fadescreen FADE_FROM_BLACK
 	return
 
-DewfordTown_Gym_EventScript_1A00FB:: @ 81A00FB
-LavaridgeTown_Gym_1F_EventScript_1A00FB:: @ 81A00FB
-MauvilleCity_Gym_EventScript_1A00FB:: @ 81A00FB
-RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
+Common_EventScript_ReadyPetalburgGymForBattle:: @ 81A00FB
 	clearflag FLAG_HIDE_PETALBURG_GYM_GUIDE
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-DewfordTown_EventScript_1A0102:: @ 81A0102
-DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
+Common_EventScript_BufferTrendyPhrase:: @ 81A0102
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return
 
-DewfordTown_EventScript_1A010C:: @ 81A010C
-Route104_MrBrineysHouse_EventScript_1A010C:: @ 81A010C
-Route109_EventScript_1A010C:: @ 81A010C
+EventScript_BackupMrBrineyLocation:: @ 81A010C
 	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
 	setvar VAR_BRINEY_LOCATION, 0
 	return
@@ -1166,17 +1129,17 @@ LittlerootTown_BrendansHouse_1F_EventScript_1A02CA:: @ 81A02CA
 Route111_OldLadysRestStop_EventScript_1A02CA:: @ 81A02CA
 Route119_WeatherInstitute_1F_EventScript_1A02CA:: @ 81A02CA
 SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	return
 
 Event_WorldMap:: @ 81A02D6
 	lockall
 	msgbox UnknownString_817303D, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special FieldShowRegionMap
 	waitstate
 	releaseall
@@ -1590,7 +1553,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1A0678:: @ 81A0678
 MossdeepCity_StevensHouse_EventScript_1A0678:: @ 81A0678
 RustboroCity_DevonCorp_2F_EventScript_1A0678:: @ 81A0678
 SlateportCity_House1_EventScript_1A0678:: @ 81A0678
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChangePokemonNickname
 	waitstate
 	return
@@ -1871,11 +1834,11 @@ Message_TransferredToPC: @ 81A0D1F
 	.string "The {STR_VAR_2} was transferred\n"
 	.string "to the PC.$"
 
-PetalburgCity_Text_1A0D41:: @ 81A0D41
+Text_PokemartSign:: @ 81A0D41
 	.string "“Selected items for your convenience!”\n"
 	.string "POKéMON MART$"
 
-PetalburgCity_Text_1A0D75:: @ 81A0D75
+Text_PokemonCenterSign:: @ 81A0D75
 	.string "“Rejuvenate your tired partners!”\n"
 	.string "POKéMON CENTER$"
 
@@ -2038,7 +2001,7 @@ EventScript_1A14CA::
 	waitbuttonpress
 	special sub_8081924
 	waitstate
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sp0C8_whiteout_maybe
 	waitstate
 	end
@@ -2554,10 +2517,10 @@ AskToMoveSecretBase:
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special MoveSecretBase
 	closemessage
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	msgbox UnknownString_81A3CC9, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
@@ -3155,7 +3118,7 @@ SlateportCity_PokemonFanClub_EventScript_1ADE84:: @ 81ADE84
 	setvar VAR_0x8004, 5
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 1
-	call SlateportCity_PokemonFanClub_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -3210,7 +3173,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF44:: @ 81ADF44
 	setvar VAR_0x8004, 5
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
-	call SlateportCity_OceanicMuseum_1F_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -3282,14 +3245,14 @@ SlateportCity_PokemonFanClub_EventScript_1AE04A:: @ 81AE04A
 	setvar VAR_0x8004, 7
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
-	call SlateportCity_PokemonFanClub_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
 	msgbox SlateportCity_PokemonFanClub_Text_1A852D, MSGBOX_DEFAULT
 	setvar VAR_0x8006, 1
-	call SlateportCity_PokemonFanClub_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
@@ -3334,7 +3297,7 @@ FallarborTown_ContestLobby_EventScript_1AE0F8:: @ 81AE0F8
 	setvar VAR_0x8004, 11
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
-	call FallarborTown_ContestLobby_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -3355,7 +3318,7 @@ FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
 	setvar VAR_0x8004, 11
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 1
-	call FallarborTown_ContestLobby_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
@@ -3437,7 +3400,7 @@ BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	msgbox BattleTower_Lobby_Text_1A79EB, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	copyvar VAR_0x8005, VAR_0x8009
-	call BattleTower_Lobby_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1

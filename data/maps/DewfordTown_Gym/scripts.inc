@@ -111,7 +111,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	setflag FLAG_BADGE02_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	compare VAR_PETALBURG_GYM_STATE, 6
-	call_if_eq DewfordTown_Gym_EventScript_1A00FB
+	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call DewfordTown_Gym_EventScript_1A01C0
 	goto DewfordTown_Gym_EventScript_1531B5
