@@ -213,7 +213,7 @@ Route120_EventScript_15189D:: @ 815189D
 	closemessage
 	applymovement 30, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement 30, Route120_Movement_1A0662
+	applymovement 30, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2
@@ -268,7 +268,7 @@ Route120_Movement_151995:: @ 8151995
 	step_end
 
 Route120_EventScript_151998:: @ 8151998
-	msgbox Route120_Text_171B93, MSGBOX_NPC
+	msgbox Text_SomethingUnseeable, MSGBOX_NPC
 	end
 
 Route120_EventScript_1519A1:: @ 81519A1
