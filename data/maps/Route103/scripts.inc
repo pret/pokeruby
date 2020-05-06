@@ -3,7 +3,7 @@ Route103_MapScripts:: @ 814EB81
 	.byte 0
 
 Route103_MapScript1_14EB87:: @ 814EB87
-	call Route103_EventScript_1A014E
+	call Common_EventScript_SetupRivalGfxId
 	call Route103_EventScript_1A02F4
 	end
 

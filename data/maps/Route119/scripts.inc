@@ -23,9 +23,9 @@ Route119_EventScript_151197:: @ 8151197
 	return
 
 Route119_MapScript1_15119B:: @ 815119B
-	call Route119_EventScript_1A014E
-	call Route119_EventScript_1A0172
-	call Route119_EventScript_1A0196
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
+	call Common_EventScript_SetupEvilTeamGfxIds
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if_eq Route119_EventScript_1511B9
 	special SetRoute119Weather

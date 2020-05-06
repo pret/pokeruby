@@ -70,7 +70,7 @@ extern u8 ShopShelfScript[];
 extern u8 BlueprintScript[];
 extern u8 SecretBase_EventScript_SandOrnament[];
 extern u8 SecretBase_EventScript_ShieldOrToyTV[];
-extern u8 UseSurfScript[];
+extern u8 EventScript_UseSurf[];
 extern u8 S_UseWaterfall[];
 extern u8 S_CannotUseWaterfall[];
 extern u8 UseDiveScript[];
@@ -502,7 +502,7 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
 static u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
     if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
-        return UseSurfScript;
+        return EventScript_UseSurf;
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {

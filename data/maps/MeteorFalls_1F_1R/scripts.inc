@@ -3,7 +3,7 @@ MeteorFalls_1F_1R_MapScripts:: @ 815C490
 	.byte 0
 
 MeteorFalls_1F_1R_MapScript1_15C496:: @ 815C496
-	call MeteorFalls_1F_1R_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C

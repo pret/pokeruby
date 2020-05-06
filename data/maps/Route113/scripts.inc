@@ -9,7 +9,7 @@ Route113_MapScript1_1505D7:: @ 81505D7
 
 Route113_MapScript1_1505DA:: @ 81505DA
 	call Route113_EventScript_1505E5
-	call Route113_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 Route113_EventScript_1505E5:: @ 81505E5

@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/decorations.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
@@ -836,115 +837,8 @@ EventScript_BackupMrBrineyLocation:: @ 81A010C
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
-UseSurfScript:: @ 81A0117
-	checkpartymove MOVE_SURF
-	compare VAR_RESULT, 6
-	goto_if_eq UseSurfScript_NoMon
-	bufferpartymonnick 0, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
-	lockall
-	msgbox UseSurfPromptText, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq UseSurfScript_No
-	msgbox UsedSurfText, MSGBOX_DEFAULT
-	dofieldeffect FLDEFF_USE_SURF
-UseSurfScript_No: @ 81A014C
-	releaseall
-UseSurfScript_NoMon: @ 81A014D
-	end
-
-EverGrandeCity_ChampionsRoom_EventScript_1A014E:: @ 81A014E
-LavaridgeTown_EventScript_1A014E:: @ 81A014E
-LilycoveCity_EventScript_1A014E:: @ 81A014E
-LittlerootTown_ProfessorBirchsLab_EventScript_1A014E:: @ 81A014E
-OldaleTown_EventScript_1A014E:: @ 81A014E
-Route103_EventScript_1A014E:: @ 81A014E
-Route110_EventScript_1A014E:: @ 81A014E
-Route119_EventScript_1A014E:: @ 81A014E
-RustboroCity_EventScript_1A014E:: @ 81A014E
-	checkplayergender
-	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_EventScript_1A0166
-	compare VAR_RESULT, 1
-	goto_if_eq RustboroCity_EventScript_1A016C
-	end
-
-RustboroCity_EventScript_1A0166:: @ 81A0166
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	return
-
-RustboroCity_EventScript_1A016C:: @ 81A016C
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-LavaridgeTown_EventScript_1A0172:: @ 81A0172
-Route110_EventScript_1A0172:: @ 81A0172
-Route119_EventScript_1A0172:: @ 81A0172
-	checkplayergender
-	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_EventScript_1A018A
-	compare VAR_RESULT, 1
-	goto_if_eq LavaridgeTown_EventScript_1A0190
-	end
-
-LavaridgeTown_EventScript_1A018A:: @ 81A018A
-	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE
-	return
-
-LavaridgeTown_EventScript_1A0190:: @ 81A0190
-	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE
-	return
-
-AquaHideout_1F_EventScript_1A0196:: @ 81A0196
-AquaHideout_B1F_EventScript_1A0196:: @ 81A0196
-AquaHideout_B2F_EventScript_1A0196:: @ 81A0196
-LilycoveCity_EventScript_1A0196:: @ 81A0196
-MeteorFalls_1F_1R_EventScript_1A0196:: @ 81A0196
-MtChimney_EventScript_1A0196:: @ 81A0196
-MtPyre_Summit_EventScript_1A0196:: @ 81A0196
-PetalburgWoods_EventScript_1A0196:: @ 81A0196
-Route110_EventScript_1A0196:: @ 81A0196
-Route112_EventScript_1A0196:: @ 81A0196
-Route113_EventScript_1A0196:: @ 81A0196
-Route119_EventScript_1A0196:: @ 81A0196
-Route119_WeatherInstitute_1F_EventScript_1A0196:: @ 81A0196
-Route119_WeatherInstitute_2F_EventScript_1A0196:: @ 81A0196
-Route121_EventScript_1A0196:: @ 81A0196
-Route128_EventScript_1A0196:: @ 81A0196
-RustboroCity_EventScript_1A0196:: @ 81A0196
-RusturfTunnel_EventScript_1A0196:: @ 81A0196
-SeafloorCavern_Room1_EventScript_1A0196:: @ 81A0196
-SeafloorCavern_Room3_EventScript_1A0196:: @ 81A0196
-SeafloorCavern_Room4_EventScript_1A0196:: @ 81A0196
-SeafloorCavern_Room9_EventScript_1A0196:: @ 81A0196
-SlateportCity_OceanicMuseum_2F_EventScript_1A0196:: @ 81A0196
-	.ifdef SAPPHIRE
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_AQUA_MEMBER_M
-	setvar VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_AQUA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_MAGMA_MEMBER_M
-	setvar VAR_OBJ_GFX_ID_5, OBJ_EVENT_GFX_MAGMA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_6, OBJ_EVENT_GFX_ARCHIE
-	setvar VAR_OBJ_GFX_ID_7, OBJ_EVENT_GFX_MAXIE
-	.else
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_MAGMA_MEMBER_M
-	setvar VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_MAGMA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_AQUA_MEMBER_M
-	setvar VAR_OBJ_GFX_ID_5, OBJ_EVENT_GFX_AQUA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_6, OBJ_EVENT_GFX_MAXIE
-	setvar VAR_OBJ_GFX_ID_7, OBJ_EVENT_GFX_ARCHIE
-	.endif
-	return
-
-CaveOfOrigin_B4F_EventScript_1A01B5:: @ 81A01B5
-SeafloorCavern_Room9_EventScript_1A01B5:: @ 81A01B5
-	.ifdef SAPPHIRE
-	setvar VAR_OBJ_GFX_ID_8, OBJ_EVENT_GFX_KYOGRE_1
-	setvar VAR_OBJ_GFX_ID_9, OBJ_EVENT_GFX_KYOGRE_2
-	.else
-	setvar VAR_OBJ_GFX_ID_8, OBJ_EVENT_GFX_GROUDON_1
-	setvar VAR_OBJ_GFX_ID_9, OBJ_EVENT_GFX_GROUDON_2
-	.endif
-	return
+	.include "data/scripts/surf.inc"
+	.include "data/scripts/dynamic_npc_graphics.inc"
 
 DewfordTown_Gym_EventScript_1A01C0:: @ 81A01C0
 FortreeCity_Gym_EventScript_1A01C0:: @ 81A01C0

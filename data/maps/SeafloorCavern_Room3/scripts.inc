@@ -3,7 +3,7 @@ SeafloorCavern_Room3_MapScripts:: @ 815DA9C
 	.byte 0
 
 SeafloorCavern_Room3_MapScript1_15DAA2:: @ 815DAA2
-	call SeafloorCavern_Room3_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 SeafloorCavern_Room3_EventScript_15DAA8:: @ 815DAA8

@@ -8,8 +8,8 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
 	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_1A02C1
-	call LilycoveCity_EventScript_1A0196
-	call LilycoveCity_EventScript_1A014E
+	call Common_EventScript_SetupEvilTeamGfxIds
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 LilycoveCity_MapScript1_14CA3F:: @ 814CA3F

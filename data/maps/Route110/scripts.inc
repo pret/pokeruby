@@ -9,9 +9,9 @@ Route110_MapScript1_14F910:: @ 814F910
 	end
 
 Route110_MapScript1_14F914:: @ 814F914
-	call Route110_EventScript_1A0196
-	call Route110_EventScript_1A014E
-	call Route110_EventScript_1A0172
+	call Common_EventScript_SetupEvilTeamGfxIds
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_CYCLING_CHALLENGE_STATE, 1
 	call_if_eq Route110_EventScript_14F92F
 	end

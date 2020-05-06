@@ -3,7 +3,7 @@ SlateportCity_OceanicMuseum_2F_MapScripts:: @ 8155CDA
 	.byte 0
 
 SlateportCity_OceanicMuseum_2F_MapScript1_155CE0:: @ 8155CE0
-	call SlateportCity_OceanicMuseum_2F_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6

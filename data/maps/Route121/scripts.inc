@@ -3,7 +3,7 @@ Route121_MapScripts:: @ 8151AFE
 	.byte 0
 
 Route121_MapScript1_151B04:: @ 8151B04
-	call Route121_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 Route121_EventScript_151B0A:: @ 8151B0A

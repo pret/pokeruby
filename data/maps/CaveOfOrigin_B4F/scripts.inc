@@ -17,7 +17,7 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	.else
 	setmaplayoutindex 313
 	.endif
-	call CaveOfOrigin_B4F_EventScript_1A01B5
+	call Common_EventScript_SetupLegendaryGfxIds
 	call_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, CaveOfOrigin_B4F_EventScript_1A04E3
 	end
 

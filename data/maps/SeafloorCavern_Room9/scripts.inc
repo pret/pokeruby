@@ -3,8 +3,8 @@ SeafloorCavern_Room9_MapScripts:: @ 815DAE6
 	.byte 0
 
 SeafloorCavern_Room9_MapScript1_15DAEC:: @ 815DAEC
-	call SeafloorCavern_Room9_EventScript_1A0196
-	call SeafloorCavern_Room9_EventScript_1A01B5
+	call Common_EventScript_SetupEvilTeamGfxIds
+	call Common_EventScript_SetupLegendaryGfxIds
 	.ifdef SAPPHIRE
 	setmaplayoutindex 157
 	.else

@@ -5,7 +5,7 @@ EverGrandeCity_ChampionsRoom_MapScripts:: @ 815B7AF
 	.byte 0
 
 EverGrandeCity_ChampionsRoom_MapScript1_15B7BF:: @ 815B7BF
-	call EverGrandeCity_ChampionsRoom_EventScript_1A014E
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7C5:: @ 815B7C5

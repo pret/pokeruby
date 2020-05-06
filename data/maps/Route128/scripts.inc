@@ -5,7 +5,7 @@ Route128_MapScripts:: @ 815211B
 
 Route128_MapScript1_152126:: @ 8152126
 	call_if_set FLAG_SYS_WEATHER_CTRL, Route128_EventScript_1A02C1
-	call Route128_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 Route128_MapScript2_152135:: @ 8152135

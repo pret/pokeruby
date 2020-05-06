@@ -3,7 +3,7 @@ PetalburgWoods_MapScripts:: @ 815CC9C
 	.byte 0
 
 PetalburgWoods_MapScript1_15CCA2:: @ 815CCA2
-	call PetalburgWoods_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 PetalburgWoods_EventScript_15CCA8:: @ 815CCA8

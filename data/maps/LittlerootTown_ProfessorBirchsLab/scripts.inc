@@ -5,7 +5,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 8152C82
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_152C92:: @ 8152C92
-	call LittlerootTown_ProfessorBirchsLab_EventScript_1A014E
+	call Common_EventScript_SetupRivalGfxId
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1A02F4
 	end
 

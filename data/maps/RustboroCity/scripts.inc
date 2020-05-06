@@ -4,8 +4,8 @@ RustboroCity_MapScripts:: @ 814C372
 
 RustboroCity_MapScript1_14C378:: @ 814C378
 	setflag FLAG_VISITED_RUSTBORO_CITY
-	call RustboroCity_EventScript_1A0196
-	call RustboroCity_EventScript_1A014E
+	call Common_EventScript_SetupEvilTeamGfxIds
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 RustboroCity_EventScript_14C386:: @ 814C386

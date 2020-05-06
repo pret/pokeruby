@@ -3,7 +3,7 @@ MtPyre_Summit_MapScripts:: @ 815D4B1
 	.byte 0
 
 MtPyre_Summit_MapScript1_15D4B7:: @ 815D4B7
-	call MtPyre_Summit_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 MtPyre_Summit_EventScript_15D4BD:: @ 815D4BD

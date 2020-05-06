@@ -3,7 +3,7 @@ OldaleTown_MapScripts:: @ 814DD62
 	.byte 0
 
 OldaleTown_MapScript1_14DD68:: @ 814DD68
-	call OldaleTown_EventScript_1A014E
+	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_14DD92
 	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_14DD9E

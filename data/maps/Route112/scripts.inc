@@ -3,7 +3,7 @@ Route112_MapScripts:: @ 8150502
 	.byte 0
 
 Route112_MapScript1_150508:: @ 8150508
-	call Route112_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
 	end
 

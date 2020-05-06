@@ -3,7 +3,7 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 	.byte 0
 
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
-	call Route119_WeatherInstitute_2F_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	call_if_eq Route119_WeatherInstitute_2F_EventScript_163CE4
 	compare VAR_WEATHER_INSTITUTE_STATE, 1

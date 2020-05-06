@@ -9,7 +9,7 @@ RusturfTunnel_MapScript2_15C750:: @ 815C750
 	.2byte 0
 
 RusturfTunnel_MapScript1_15C762:: @ 815C762
-	call RusturfTunnel_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	compare VAR_RUSTURF_TUNNEL_STATE, 2
 	call_if_eq RusturfTunnel_EventScript_15C773
 	end

@@ -12,7 +12,7 @@ AquaHideout_B1F_EventScript_15D846:: @ 815D846
 	return
 
 AquaHideout_B1F_MapScript1_15D84A:: @ 815D84A
-	call AquaHideout_B1F_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 AquaHideout_B1F_EventScript_15D850:: @ 815D850

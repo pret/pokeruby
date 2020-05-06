@@ -3,7 +3,7 @@ AquaHideout_B2F_MapScripts:: @ 815D8B1
 	.byte 0
 
 AquaHideout_B2F_MapScript1_15D8B7:: @ 815D8B7
-	call AquaHideout_B2F_EventScript_1A0196
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 AquaHideout_B2F_EventScript_15D8BD:: @ 815D8BD

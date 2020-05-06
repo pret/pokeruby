@@ -6,8 +6,8 @@ LavaridgeTown_MapScripts:: @ 814E4A3
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_14E4DF
-	call LavaridgeTown_EventScript_1A014E
-	call LavaridgeTown_EventScript_1A0172
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_LAVARIDGE_RIVAL_STATE, 2
 	call_if_eq LavaridgeTown_EventScript_14E4D0
 	end
