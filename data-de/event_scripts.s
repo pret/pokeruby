@@ -963,57 +963,7 @@ Common_EventScript_FerryDepartIsland:: @ 81A047C
 	call Common_EventScript_FerryDepart
 	return
 
-CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
-	lockall
-	waitse
-	playmoncry SPECIES_GROUDON_OR_KYOGRE, 2
-	waitmoncry
-	setvar VAR_TEMP_5, 1
-	releaseall
-	end
-
-CaveOfOrigin_1F_EventScript_1A04AF:: @ 81A04AF
-CaveOfOrigin_B1F_EventScript_1A04AF:: @ 81A04AF
-CaveOfOrigin_B2F_EventScript_1A04AF:: @ 81A04AF
-CaveOfOrigin_B3F_EventScript_1A04AF:: @ 81A04AF
-	lockall
-	setvar VAR_TEMP_1, 1
-	goto CaveOfOrigin_1F_EventScript_1A04D3
-	end
-
-CaveOfOrigin_B2F_EventScript_1A04BB:: @ 81A04BB
-CaveOfOrigin_B3F_EventScript_1A04BB:: @ 81A04BB
-	lockall
-	setvar VAR_TEMP_2, 1
-	goto CaveOfOrigin_B2F_EventScript_1A04D3
-	end
-
-@ 81A04C7
-	lockall
-	setvar VAR_TEMP_3, 1
-	goto CaveOfOrigin_B2F_EventScript_1A04D3
-	end
-
-CaveOfOrigin_1F_EventScript_1A04D3:: @ 81A04D3
-CaveOfOrigin_B2F_EventScript_1A04D3:: @ 81A04D3
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	special sub_810F758
-	waitstate
-	releaseall
-	end
-
-CaveOfOrigin_1F_EventScript_1A04E3:: @ 81A04E3
-CaveOfOrigin_B1F_EventScript_1A04E3:: @ 81A04E3
-CaveOfOrigin_B2F_EventScript_1A04E3:: @ 81A04E3
-CaveOfOrigin_B3F_EventScript_1A04E3:: @ 81A04E3
-CaveOfOrigin_B4F_EventScript_1A04E3:: @ 81A04E3
-	setvar VAR_TEMP_1, 1
-	setvar VAR_TEMP_2, 1
-	setvar VAR_TEMP_3, 1
-	setvar VAR_TEMP_4, 1
-	setvar VAR_TEMP_5, 1
-	return
+	.include "data/scripts/cave_of_origin.inc"
 
 AquaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD

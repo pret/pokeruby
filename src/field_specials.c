@@ -1791,7 +1791,7 @@ bool8 IsPokerusInParty(void)
 static void sub_810F7A8(u8);
 static void sub_810F814(u8);
 
-void sub_810F758(void)
+void ShakeCamera(void)
 {
     u8 taskId = CreateTask(sub_810F7A8, 9);
     gTasks[taskId].data[0] = gSpecialVar_0x8005;

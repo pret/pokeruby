@@ -49,7 +49,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "CaveOfOrigin_B3F_EventScript_1A04AF"
+      "script": "CaveOfOrigin_EventScript_Shake1"
     },
     {
       "type": "trigger",
@@ -58,7 +58,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "CaveOfOrigin_B3F_EventScript_1A04BB"
+      "script": "CaveOfOrigin_EventScript_Shake2"
     },
     {
       "type": "trigger",
@@ -67,7 +67,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "CaveOfOrigin_B3F_EventScript_1A04BB"
+      "script": "CaveOfOrigin_EventScript_Shake2"
     }
   ],
   "bg_events": []

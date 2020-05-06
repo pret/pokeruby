@@ -106,7 +106,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	waitstate
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_810F758
+	special ShakeCamera
 	waitstate
 	applymovement 1, SeafloorCavern_Room9_Movement_15DD57
 	waitmovement 0
@@ -114,7 +114,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	delay 4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
-	special sub_810F758
+	special ShakeCamera
 	waitstate
 	delay 30
 	setvar VAR_0x8004, 2
