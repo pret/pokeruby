@@ -19,7 +19,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	delay 30
 	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR
 	setvar VAR_0x8004, 2
-	call SouthernIsland_Exterior_EventScript_1A047C
+	call Common_EventScript_FerryDepartIsland
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -30,12 +30,12 @@ SouthernIsland_Exterior_EventScript_160B25:: @ 8160B25
 	release
 	end
 
-BattleTower_Outside_EventScript_160B2F:: @ 8160B2F
+Ferry_EventScript_DepartIslandSouth:: @ 8160B2F
 	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Outside_Movement_160B45
 	waitmovement 0
 	return
 
-BattleTower_Outside_EventScript_160B3A:: @ 8160B3A
+Ferry_EventScript_DepartIslandWest:: @ 8160B3A
 	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Outside_Movement_160B47
 	waitmovement 0
 	return

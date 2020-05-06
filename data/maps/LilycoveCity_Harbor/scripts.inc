@@ -86,7 +86,7 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	delay 30
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 2
-	call LilycoveCity_Harbor_EventScript_1A040E
+	call Common_EventScript_FerryDepart
 	return
 
 LilycoveCity_Harbor_EventScript_1599CE:: @ 81599CE
@@ -133,7 +133,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
 	setvar VAR_0x8004, 2
-	call LilycoveCity_Harbor_EventScript_1A040E
+	call Common_EventScript_FerryDepart
 	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate
 	release

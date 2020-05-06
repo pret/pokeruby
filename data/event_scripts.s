@@ -900,15 +900,13 @@ Common_EventScript_StopBrineysBoatMusic:: @ 81A02EF
 
 	.include "data/scripts/prof_birch.inc"
 
-BattleTower_Outside_EventScript_1A040E:: @ 81A040E
-LilycoveCity_Harbor_EventScript_1A040E:: @ 81A040E
-SlateportCity_Harbor_EventScript_1A040E:: @ 81A040E
+Common_EventScript_FerryDepart:: @ 81A040E
 	delay 60
-	applymovement VAR_0x8004, SlateportCity_Harbor_Movement_1A041C
+	applymovement VAR_0x8004, Movement_FerryDepart
 	waitmovement 0
 	return
 
-SlateportCity_Harbor_Movement_1A041C:: @ 81A041C
+Movement_FerryDepart:: @ 81A041C
 	walk_slow_right
 	walk_slow_right
 	walk_slow_right
@@ -918,7 +916,7 @@ SlateportCity_Harbor_Movement_1A041C:: @ 81A041C
 	walk_right
 	step_end
 
-PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
+EventScript_HideMrBriney:: @ 81A0424
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
@@ -930,7 +928,7 @@ PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
-RusturfTunnel_EventScript_1A0442:: @ 81A0442
+RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 81A0442
 	removeobject 1
 	removeobject 10
 	clearflag FLAG_HIDE_BOYFRIEND_WANDAS_HOUSE
@@ -939,30 +937,29 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
-EventScript_1A0457: @ unreferenced?
+EventScript_UnusedBoardFerry:
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	showobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	showobjectat OBJ_EVENT_ID_PLAYER, 0
 	delay 30
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A047A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_UnusedBoardFerry
 	waitmovement 0
 	delay 30
 	return
 
-Movement_1A047A:
+Movement_UnusedBoardFerry:
 	walk_up
 	step_end
 
-BattleTower_Outside_EventScript_1A047C:: @ 81A047C
-SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
-	compare VAR_FACING, 1
-	call_if_eq BattleTower_Outside_EventScript_160B2F
-	compare VAR_FACING, 3
-	call_if_eq BattleTower_Outside_EventScript_160B3A
+Common_EventScript_FerryDepartIsland:: @ 81A047C
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq Ferry_EventScript_DepartIslandSouth
+	compare VAR_FACING, DIR_WEST
+	call_if_eq Ferry_EventScript_DepartIslandWest
 	delay 30
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
-	call BattleTower_Outside_EventScript_1A040E
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
+	call Common_EventScript_FerryDepart
 	return
 
 CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0

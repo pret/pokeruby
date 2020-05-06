@@ -390,7 +390,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
-	call PetalburgCity_Gym_EventScript_1A0424
+	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_WATTSON_MAUVILLE_GYM
 	clearflag FLAG_HIDE_WATTSON_MAUVILLE
 	setvar VAR_0x8008, 5

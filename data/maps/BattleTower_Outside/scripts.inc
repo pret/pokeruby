@@ -69,7 +69,7 @@ BattleTower_Outside_EventScript_160232:: @ 8160232
 	delay 30
 	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
 	setvar VAR_0x8004, 4
-	call BattleTower_Outside_EventScript_1A047C
+	call Common_EventScript_FerryDepartIsland
 	return
 
 BattleTower_Outside_EventScript_160250:: @ 8160250
