@@ -190,13 +190,13 @@ Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
 	return
 
 Route110_TrickHouseEnd_EventScript_161C4E:: @ 8161C4E
-	call Route110_TrickHouseEnd_EventScript_1A02A5
+	call Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEnd_Text_19C92E, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_161C61:: @ 8161C61
-	call Route110_TrickHouseEnd_EventScript_1A02B8
+	call Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEnd_Text_19C7D7, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return

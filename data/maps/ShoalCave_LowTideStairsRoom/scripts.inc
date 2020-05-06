@@ -19,7 +19,7 @@ ShoalCave_LowTideStairsRoom_EventScript_15E3B7:: @ 815E3B7
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SALT_3, ShoalCave_LowTideStairsRoom_EventScript_15E3E9
 	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 11, 11, METATILE_Cave_ShoalCave_DirtPile_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SALT_3

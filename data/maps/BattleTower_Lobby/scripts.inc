@@ -413,7 +413,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 
 BattleTower_Lobby_EventScript_1607AF:: @ 81607AF
 	bufferdecorationname 1, VAR_0x8008
-	msgbox BattleTower_Lobby_Text_1A0CEF, MSGBOX_DEFAULT
+	msgbox Text_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	msgbox BattleTower_Lobby_Text_19ABED, MSGBOX_DEFAULT
 	release
 	end

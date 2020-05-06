@@ -37,7 +37,7 @@ SootopolisCity_MapScript1_14D10D:: @ 814D10D
 	end
 
 SootopolisCity_EventScript_14D123:: @ 814D123
-	call SootopolisCity_EventScript_1A02C1
+	call Common_EventScript_SetLegendaryWeather
 	setobjectxyperm 1, 29, 19
 	setobjectxyperm 2, 33, 19
 	compare VAR_SOOTOPOLIS_STATE, 1
@@ -93,7 +93,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
 	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
 	msgbox SootopolisCity_Text_1C64D0, MSGBOX_DEFAULT
 	random 2
@@ -106,7 +106,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 	giveitem ITEM_FIGY_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_1C650B, MSGBOX_DEFAULT
 	release
 	end
@@ -114,7 +114,7 @@ SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 SootopolisCity_EventScript_14D220:: @ 814D220
 	giveitem ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_1C650B, MSGBOX_DEFAULT
 	release
 	end

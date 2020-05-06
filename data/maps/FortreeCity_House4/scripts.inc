@@ -33,7 +33,7 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	msgbox FortreeCity_House4_Text_186881, MSGBOX_DEFAULT
 	giveitem ITEM_MENTAL_HERB
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_House4_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end

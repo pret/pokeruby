@@ -25,7 +25,7 @@ FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
 FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	message FortreeCity_Gym_Text_185E48
 	waitmessage
-	call FortreeCity_Gym_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox FortreeCity_Gym_Text_185E73, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
@@ -37,7 +37,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
 	giveitem ITEM_TM40_AERIAL_ACE
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_Gym_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_185F4A, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
 	release

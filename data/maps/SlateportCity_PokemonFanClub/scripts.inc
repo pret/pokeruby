@@ -203,7 +203,7 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, MSGBOX_DEFAULT
 	giveitem ITEM_SOOTHE_BELL
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SOOTHE_BELL
 	release
 	end

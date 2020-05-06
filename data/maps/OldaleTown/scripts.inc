@@ -85,7 +85,7 @@ OldaleTown_EventScript_14DE79:: @ 814DE79
 	end
 
 OldaleTown_EventScript_14DE83:: @ 814DE83
-	msgbox OldaleTown_Text_1A0CC2, MSGBOX_DEFAULT
+	msgbox Text_TooBadBagIsFull, MSGBOX_DEFAULT
 	fadedefaultbgm
 	release
 	end

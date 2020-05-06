@@ -17,7 +17,7 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	msgbox Route123_Text_171DC2, MSGBOX_DEFAULT
 	giveitem ITEM_TM19_GIGA_DRAIN
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM19
 	msgbox Route123_Text_171E34, MSGBOX_DEFAULT
 	release

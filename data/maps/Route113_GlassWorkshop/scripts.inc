@@ -222,13 +222,13 @@ Route113_GlassWorkshop_EventScript_1638A1:: @ 81638A1
 	return
 
 Route113_GlassWorkshop_EventScript_1638B4:: @ 81638B4
-	call Route113_GlassWorkshop_EventScript_1A02A5
+	call Common_EventScript_BagIsFull
 	msgbox Route113_GlassWorkshop_Text_19EA06, MSGBOX_DEFAULT
 	release
 	end
 
 Route113_GlassWorkshop_EventScript_1638C3:: @ 81638C3
-	call Route113_GlassWorkshop_EventScript_1A02B8
+	call Common_EventScript_NoRoomForDecor
 	msgbox Route113_GlassWorkshop_Text_19EA64, MSGBOX_DEFAULT
 	release
 	end

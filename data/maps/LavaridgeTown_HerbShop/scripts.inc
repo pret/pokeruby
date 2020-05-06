@@ -32,7 +32,7 @@ LavaridgeTown_HerbShop_EventScript_153655:: @ 8153655
 	msgbox LavaridgeTown_HerbShop_Text_1761A2, MSGBOX_DEFAULT
 	giveitem ITEM_CHARCOAL
 	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_HerbShop_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHARCOAL
 	release
 	end

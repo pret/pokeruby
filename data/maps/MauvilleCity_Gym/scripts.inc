@@ -77,7 +77,7 @@ MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	message MauvilleCity_Gym_Text_180DAF
 	waitmessage
-	call MauvilleCity_Gym_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MauvilleCity_Gym_Text_180DDA, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
@@ -95,7 +95,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
 	giveitem ITEM_TM34_SHOCK_WAVE
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_180E76, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	release

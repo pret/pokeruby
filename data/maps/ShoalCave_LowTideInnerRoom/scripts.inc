@@ -64,7 +64,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E257:: @ 815E257
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SHELL_1
@@ -81,7 +81,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E293:: @ 815E293
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SHELL_2
@@ -93,7 +93,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E2C5:: @ 815E2C5
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SHELL_3
@@ -105,7 +105,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E2F7:: @ 815E2F7
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SHELL_4
@@ -117,7 +117,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E329:: @ 815E329
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_15E35B
 	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SALT_1
@@ -134,7 +134,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E365:: @ 815E365
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_15E35B
 	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SALT_2

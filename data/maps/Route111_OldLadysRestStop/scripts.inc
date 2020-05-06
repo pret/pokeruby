@@ -19,7 +19,7 @@ Route111_OldLadysRestStop_EventScript_15BFDB:: @ 815BFDB
 Route111_OldLadysRestStop_EventScript_15BFFC:: @ 815BFFC
 	msgbox Route111_OldLadysRestStop_Text_192423, MSGBOX_DEFAULT
 	closemessage
-	call Route111_OldLadysRestStop_EventScript_1A02CA
+	call Common_EventScript_OutOfCenterPartyHeal
 	msgbox Route111_OldLadysRestStop_Text_19244D, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15BFFC

@@ -18,7 +18,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	givedecoration DECOR_SEEDOT_DOLL
 	.endif
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_LanettesHouse_EventScript_1A02AE
+	goto_if_eq Common_EventScript_ShowNoRoomForDecor
 	setflag FLAG_RECEIVED_DOLL_LANETTE
 	release
 	end

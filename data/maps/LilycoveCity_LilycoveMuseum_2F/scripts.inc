@@ -127,7 +127,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158783:: @ 8158783
-	call LilycoveCity_LilycoveMuseum_2F_EventScript_1A02B8
+	call Common_EventScript_NoRoomForDecor
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188166, MSGBOX_DEFAULT
 	closemessage
 	releaseall

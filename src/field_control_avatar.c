@@ -59,7 +59,7 @@ extern u8 ClosedSootopolisDoorScript[];
 extern u8 gUnknown_081A4363[];
 extern u8 gUnknown_081C346A[];
 extern u8 gUnknown_081616E1[];
-extern u8 Event_WorldMap[];
+extern u8 EventScript_RegionMap[];
 extern u8 S_RunningShoesManual[];
 extern u8 PictureBookShelfScript[];
 extern u8 BookshelfScript[];
@@ -465,7 +465,7 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
         return gUnknown_081616E1;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
-        return Event_WorldMap;
+        return EventScript_RegionMap;
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
         return S_RunningShoesManual;
     if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)

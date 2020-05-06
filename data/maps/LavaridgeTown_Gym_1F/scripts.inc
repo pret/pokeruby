@@ -68,7 +68,7 @@ LavaridgeTown_Gym_1F_EventScript_153741:: @ 8153741
 LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	message LavaridgeTown_Gym_1F_Text_176A62
 	waitmessage
-	call LavaridgeTown_Gym_1F_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox LavaridgeTown_Gym_1F_Text_176A8C, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
@@ -85,7 +85,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
 	giveitem ITEM_TM50_OVERHEAT
 	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_176B8F, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	release

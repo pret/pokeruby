@@ -186,7 +186,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	call_if_eq PetalburgCity_Gym_EventScript_1548F1
 	msgbox PetalburgCity_Gym_Text_17A171, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_SPECIAL_FLAG_1
+	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_TSURETEK, FALSE
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_Gym_EventScript_154835
@@ -375,7 +375,7 @@ PetalburgCity_Gym_EventScript_1549B2:: @ 81549B2
 PetalburgCity_Gym_EventScript_1549B8:: @ 81549B8
 	giveitem ITEM_ENIGMA_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_ENIGMA_BERRY_AVAILABLE, 0
 	release
 	end
@@ -385,7 +385,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	trainerbattle_no_intro TRAINER_NORMAN, PetalburgCity_Gym_Text_17A77A
 	message PetalburgCity_Gym_Text_17A7DD
 	waitmessage
-	call PetalburgCity_Gym_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox PetalburgCity_Gym_Text_17A805, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
@@ -404,7 +404,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	giveitem ITEM_TM42_FACADE
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM42
 	msgbox PetalburgCity_Gym_Text_17A8CF, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_17A976, MSGBOX_DEFAULT

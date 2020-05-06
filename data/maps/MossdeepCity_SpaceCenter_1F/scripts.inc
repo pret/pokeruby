@@ -36,7 +36,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, MSGBOX_DEFAULT
 	giveitem ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E39B, MSGBOX_DEFAULT
 	release

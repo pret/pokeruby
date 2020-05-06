@@ -19,7 +19,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E413:: @ 815E413
 	goto_if_set FLAG_HIDE_TOOK_SHOAL_SALT_4, ShoalCave_LowTideLowerRoom_EventScript_15E445
 	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 18, 2, 858, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SALT_4
@@ -38,7 +38,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E44F:: @ 815E44F
 	msgbox ShoalCave_LowTideLowerRoom_Text_198200, MSGBOX_DEFAULT
 	giveitem ITEM_FOCUS_BAND
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FOCUS_BAND
 	release
 	end

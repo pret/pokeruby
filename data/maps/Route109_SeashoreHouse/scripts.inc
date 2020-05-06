@@ -70,7 +70,7 @@ Route109_SeashoreHouse_EventScript_160E9E:: @ 8160E9E
 	end
 
 Route109_SeashoreHouse_EventScript_160EAB:: @ 8160EAB
-	msgbox Route109_SeashoreHouse_Text_1A0CC2, MSGBOX_DEFAULT
+	msgbox Text_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox 0, 0
 	release
 	end

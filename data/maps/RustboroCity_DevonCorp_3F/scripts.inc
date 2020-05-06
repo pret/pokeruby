@@ -159,7 +159,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18353E, MSGBOX_DEFAULT
 	giveitem ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, MSGBOX_DEFAULT
 	closemessage

@@ -206,7 +206,7 @@ MauvilleCity_GameCorner_EventScript_156CF4:: @ 8156CF4
 	end
 
 MauvilleCity_GameCorner_EventScript_156D02:: @ 8156D02
-	call MauvilleCity_GameCorner_EventScript_1A02B8
+	call Common_EventScript_NoRoomForDecor
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
 
@@ -368,7 +368,7 @@ MauvilleCity_GameCorner_EventScript_156F5E:: @ 8156F5E
 	end
 
 MauvilleCity_GameCorner_EventScript_156F6C:: @ 8156F6C
-	call MauvilleCity_GameCorner_EventScript_1A02A5
+	call Common_EventScript_BagIsFull
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
@@ -433,7 +433,7 @@ MauvilleCity_GameCorner_EventScript_15702F:: @ 815702F
 	end
 
 MauvilleCity_GameCorner_EventScript_157059:: @ 8157059
-	call MauvilleCity_GameCorner_EventScript_1A02B8
+	call Common_EventScript_NoRoomForDecor
 	msgbox MauvilleCity_GameCorner_Text_181F97, MSGBOX_DEFAULT
 	release
 	end

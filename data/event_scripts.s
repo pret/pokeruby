@@ -840,84 +840,25 @@ EventScript_BackupMrBrineyLocation:: @ 81A010C
 	.include "data/scripts/dynamic_npc_graphics.inc"
 	.include "data/scripts/set_gym_trainers.inc"
 
-DewfordTown_Gym_EventScript_1A029B:: @ 81A029B
-DewfordTown_Hall_EventScript_1A029B:: @ 81A029B
-FallarborTown_House1_EventScript_1A029B:: @ 81A029B
-FortreeCity_Gym_EventScript_1A029B:: @ 81A029B
-FortreeCity_House2_EventScript_1A029B:: @ 81A029B
-FortreeCity_House4_EventScript_1A029B:: @ 81A029B
-LavaridgeTown_Gym_1F_EventScript_1A029B:: @ 81A029B
-LavaridgeTown_HerbShop_EventScript_1A029B:: @ 81A029B
-LilycoveCity_EventScript_1A029B:: @ 81A029B
-LilycoveCity_House2_EventScript_1A029B:: @ 81A029B
-LittlerootTown_BrendansHouse_1F_EventScript_1A029B:: @ 81A029B
-MauvilleCity_EventScript_1A029B:: @ 81A029B
-MauvilleCity_Gym_EventScript_1A029B:: @ 81A029B
-MossdeepCity_EventScript_1A029B:: @ 81A029B
-MossdeepCity_Gym_EventScript_1A029B:: @ 81A029B
-MossdeepCity_SpaceCenter_1F_EventScript_1A029B:: @ 81A029B
-MtPyre_1F_EventScript_1A029B:: @ 81A029B
-PacifidlogTown_House2_EventScript_1A029B:: @ 81A029B
-PetalburgCity_Gym_EventScript_1A029B:: @ 81A029B
-PetalburgWoods_EventScript_1A029B:: @ 81A029B
-Route104_EventScript_1A029B:: @ 81A029B
-Route104_PrettyPetalFlowerShop_EventScript_1A029B:: @ 81A029B
-Route109_EventScript_1A029B:: @ 81A029B
-Route111_EventScript_1A029B:: @ 81A029B
-Route111_WinstrateFamilysHouse_EventScript_1A029B:: @ 81A029B
-Route114_EventScript_1A029B:: @ 81A029B
-Route114_FossilManiacsHouse_EventScript_1A029B:: @ 81A029B
-Route120_EventScript_1A029B:: @ 81A029B
-Route123_BerryMastersHouse_EventScript_1A029B:: @ 81A029B
-Route123_EventScript_1A029B:: @ 81A029B
-RustboroCity_DevonCorp_3F_EventScript_1A029B:: @ 81A029B
-RustboroCity_Flat2_2F_EventScript_1A029B:: @ 81A029B
-RustboroCity_Gym_EventScript_1A029B:: @ 81A029B
-RustboroCity_PokemonSchool_EventScript_1A029B:: @ 81A029B
-SSTidalRooms_EventScript_1A029B:: @ 81A029B
-ShoalCave_LowTideEntranceRoom_EventScript_1A029B:: @ 81A029B
-ShoalCave_LowTideInnerRoom_EventScript_1A029B:: @ 81A029B
-ShoalCave_LowTideLowerRoom_EventScript_1A029B:: @ 81A029B
-ShoalCave_LowTideStairsRoom_EventScript_1A029B:: @ 81A029B
-SlateportCity_ContestHall_EventScript_1A029B:: @ 81A029B
-SlateportCity_Harbor_EventScript_1A029B:: @ 81A029B
-SlateportCity_PokemonFanClub_EventScript_1A029B:: @ 81A029B
-SootopolisCity_EventScript_1A029B:: @ 81A029B
-SootopolisCity_Gym_1F_EventScript_1A029B:: @ 81A029B
-VerdanturfTown_ContestLobby_EventScript_1A029B:: @ 81A029B
-	msgbox MauvilleCity_Text_1A0CC2, MSGBOX_DEFAULT
+Common_EventScript_ShowBagIsFull:: @ 81A029B
+	msgbox Text_TooBadBagIsFull, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_GameCorner_EventScript_1A02A5:: @ 81A02A5
-Route110_TrickHouseEnd_EventScript_1A02A5:: @ 81A02A5
-Route110_TrickHouseEntrance_EventScript_1A02A5:: @ 81A02A5
-Route113_GlassWorkshop_EventScript_1A02A5:: @ 81A02A5
-	msgbox MauvilleCity_GameCorner_Text_1A0CC2, MSGBOX_DEFAULT
+Common_EventScript_BagIsFull:: @ 81A02A5
+	msgbox Text_TooBadBagIsFull, MSGBOX_DEFAULT
 	return
 
-Route114_LanettesHouse_EventScript_1A02AE:: @ 81A02AE
-	msgbox Route114_LanettesHouse_Text_1A0CEF, MSGBOX_DEFAULT
+Common_EventScript_ShowNoRoomForDecor:: @ 81A02AE
+	msgbox Text_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_1A02B8:: @ 81A02B8
-MauvilleCity_GameCorner_EventScript_1A02B8:: @ 81A02B8
-Route110_TrickHouseEnd_EventScript_1A02B8:: @ 81A02B8
-Route110_TrickHouseEntrance_EventScript_1A02B8:: @ 81A02B8
-Route113_GlassWorkshop_EventScript_1A02B8:: @ 81A02B8
-	msgbox MauvilleCity_GameCorner_Text_1A0CEF, MSGBOX_DEFAULT
+Common_EventScript_NoRoomForDecor:: @ 81A02B8
+	msgbox Text_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-EverGrandeCity_EventScript_1A02C1:: @ 81A02C1
-LilycoveCity_EventScript_1A02C1:: @ 81A02C1
-MossdeepCity_EventScript_1A02C1:: @ 81A02C1
-Route124_EventScript_1A02C1:: @ 81A02C1
-Route125_EventScript_1A02C1:: @ 81A02C1
-Route126_EventScript_1A02C1:: @ 81A02C1
-Route127_EventScript_1A02C1:: @ 81A02C1
-Route128_EventScript_1A02C1:: @ 81A02C1
-SootopolisCity_EventScript_1A02C1:: @ 81A02C1
+Common_EventScript_SetLegendaryWeather:: @ 81A02C1
 	.ifdef SAPPHIRE
 	setweather WEATHER_RAIN_HEAVY
 	.else
@@ -925,23 +866,12 @@ SootopolisCity_EventScript_1A02C1:: @ 81A02C1
 	.endif
 	return
 
-DewfordTown_Gym_EventScript_1A02C5:: @ 81A02C5
-FortreeCity_Gym_EventScript_1A02C5:: @ 81A02C5
-LavaridgeTown_Gym_1F_EventScript_1A02C5:: @ 81A02C5
-LilycoveCity_CoveLilyMotel_2F_EventScript_1A02C5:: @ 81A02C5
-MauvilleCity_Gym_EventScript_1A02C5:: @ 81A02C5
-MossdeepCity_Gym_EventScript_1A02C5:: @ 81A02C5
-PetalburgCity_Gym_EventScript_1A02C5:: @ 81A02C5
-RustboroCity_Gym_EventScript_1A02C5:: @ 81A02C5
-SootopolisCity_Gym_1F_EventScript_1A02C5:: @ 81A02C5
+Common_EventScript_PlayGymBadgeFanfare:: @ 81A02C5
 	playfanfare MUS_ME_BACHI
 	waitfanfare
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1A02CA:: @ 81A02CA
-Route111_OldLadysRestStop_EventScript_1A02CA:: @ 81A02CA
-Route119_WeatherInstitute_1F_EventScript_1A02CA:: @ 81A02CA
-SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
+Common_EventScript_OutOfCenterPartyHeal:: @ 81A02CA
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -949,26 +879,22 @@ SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen FADE_FROM_BLACK
 	return
 
-Event_WorldMap:: @ 81A02D6
+EventScript_RegionMap:: @ 81A02D6
 	lockall
-	msgbox UnknownString_817303D, MSGBOX_DEFAULT
+	msgbox Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special FieldShowRegionMap
 	waitstate
 	releaseall
 	end
 
-DewfordTown_EventScript_1A02E7:: @ 81A02E7
-Route104_EventScript_1A02E7:: @ 81A02E7
-Route109_EventScript_1A02E7:: @ 81A02E7
-	setflag FLAG_SPECIAL_FLAG_1
+Common_EventScript_PlayBrineysBoatMusic:: @ 81A02E7
+	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_M_BOAT, FALSE
 	return
 
-DewfordTown_EventScript_1A02EF:: @ 81A02EF
-Route104_EventScript_1A02EF:: @ 81A02EF
-Route109_EventScript_1A02EF:: @ 81A02EF
-	clearflag FLAG_SPECIAL_FLAG_1
+Common_EventScript_StopBrineysBoatMusic:: @ 81A02EF
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	fadedefaultbgm
 	return
 
@@ -1624,22 +1550,14 @@ Message_PutAwayItem:
 Message_FoundOneItem:
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
-MauvilleCity_GameCorner_Text_1A0CC2:: @ 81A0CC2
-MauvilleCity_Text_1A0CC2:: @ 81A0CC2
-MtChimney_Text_1A0CC2:: @ 81A0CC2
-OldaleTown_Text_1A0CC2:: @ 81A0CC2
-Route109_SeashoreHouse_Text_1A0CC2:: @ 81A0CC2
-Message_BagFull:
+Text_TooBadBagIsFull:
 	.string "Too bad!\n"
 	.string "The BAG is full...$"
 
 Message_ObtainedDecoration: @ 81A0CDE
 	.string "Obtained the {STR_VAR_2}.$"
 
-BattleTower_Lobby_Text_1A0CEF:: @ 81A0CEF
-MauvilleCity_GameCorner_Text_1A0CEF:: @ 81A0CEF
-Route114_LanettesHouse_Text_1A0CEF:: @ 81A0CEF
-SootopolisCity_House6_Text_1A0CEF:: @ 81A0CEF
+Text_NoRoomLeftForAnother:: @ 81A0CEF
 	.string "Too bad! There's no room left for\n"
 	.string "another {STR_VAR_2}...$"
 

@@ -21,7 +21,7 @@ FortreeCity_House2_EventScript_1580B4:: @ 81580B4
 	msgbox FortreeCity_House2_Text_1864C6, MSGBOX_DEFAULT
 	giveitem ITEM_TM10_HIDDEN_POWER
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_House2_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM10
 	msgbox FortreeCity_House2_Text_18652F, MSGBOX_DEFAULT
 	release

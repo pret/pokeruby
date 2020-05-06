@@ -12,7 +12,7 @@ Route114_EventScript_150733:: @ 8150733
 	addvar VAR_RESULT, 133
 	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
 	msgbox Route114_Text_1C5861, MSGBOX_DEFAULT
 	release
@@ -30,7 +30,7 @@ Route114_EventScript_150782:: @ 8150782
 	msgbox Route114_Text_170154, MSGBOX_DEFAULT
 	giveitem ITEM_TM05_ROAR
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05
 	msgbox Route114_Text_1701C5, MSGBOX_DEFAULT
 	release

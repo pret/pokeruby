@@ -124,12 +124,12 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E402
 	waitmovement 0
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
-	call DewfordTown_EventScript_1A02E7
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 4, DewfordTown_Movement_14E293
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E293
 	waitmovement 0
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
-	call DewfordTown_EventScript_1A02EF
+	call Common_EventScript_StopBrineysBoatMusic
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E405
 	waitmovement 0
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
@@ -156,11 +156,11 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E402
 	waitmovement 0
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
-	call DewfordTown_EventScript_1A02E7
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 4, DewfordTown_Movement_14E356
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E356
 	waitmovement 0
-	call DewfordTown_EventScript_1A02EF
+	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE109
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E409
 	waitmovement 0

@@ -300,7 +300,7 @@ MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, MSGBOX_DEFAULT
 	giveitem ITEM_TM24_THUNDERBOLT
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM24
 	msgbox MauvilleCity_Text_166488, MSGBOX_DEFAULT
 	release

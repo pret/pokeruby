@@ -39,7 +39,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	removeitem ITEM_SHOAL_SHELL, 4
 	giveitem ITEM_SHELL_BELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C688E, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	release

@@ -7,7 +7,7 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
-	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_1A02C1
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
 	call Common_EventScript_SetupEvilTeamGfxIds
 	call Common_EventScript_SetupRivalGfxId
 	end
@@ -67,7 +67,7 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
 	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
 	msgbox LilycoveCity_Text_1C5B1D, MSGBOX_DEFAULT
 	release

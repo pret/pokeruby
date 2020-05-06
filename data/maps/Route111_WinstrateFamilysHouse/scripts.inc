@@ -17,7 +17,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
 	msgbox Route111_WinstrateFamilysHouse_Text_19208A, MSGBOX_DEFAULT
 	giveitem ITEM_MACHO_BRACE
 	compare VAR_RESULT, 0
-	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MACHO_BRACE
 	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end

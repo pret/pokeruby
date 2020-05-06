@@ -7,7 +7,7 @@ MossdeepCity_MapScript1_14CF98:: @ 814CF98
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	call_if_set FLAG_SYS_WEATHER_CTRL, MossdeepCity_EventScript_1A02C1
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
 	end
 
 MossdeepCity_EventScript_14CFAE:: @ 814CFAE
@@ -74,7 +74,7 @@ MossdeepCity_EventScript_14D027:: @ 814D027
 	msgbox MossdeepCity_Text_169117, MSGBOX_DEFAULT
 	giveitem ITEM_KINGS_ROCK
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_KINGS_ROCK
 	release
 	end

@@ -275,7 +275,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, MSGBOX_DEFAULT
 	giveitem ITEM_AMULET_COIN
 	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_AMULET_COIN
 	release
@@ -293,7 +293,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C80:: @ 81B6C80
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A:: @ 81B6C8A
 	closemessage
-	call LittlerootTown_BrendansHouse_1F_EventScript_1A02CA
+	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17276B, MSGBOX_DEFAULT
 	release

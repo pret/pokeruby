@@ -85,7 +85,7 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	msgbox RustboroCity_PokemonSchool_Text_1846A2, MSGBOX_DEFAULT
 	giveitem ITEM_QUICK_CLAW
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0

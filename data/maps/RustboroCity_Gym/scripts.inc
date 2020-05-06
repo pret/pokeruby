@@ -11,7 +11,7 @@ RustboroCity_Gym_EventScript_1578D9:: @ 81578D9
 RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	message RustboroCity_Gym_Text_1840AB
 	waitmessage
-	call RustboroCity_Gym_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox RustboroCity_Gym_Text_1840D5, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
@@ -27,7 +27,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 RustboroCity_Gym_EventScript_15793C:: @ 815793C
 	giveitem ITEM_TM39_ROCK_TOMB
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_Gym_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_184170, MSGBOX_DEFAULT
 	release

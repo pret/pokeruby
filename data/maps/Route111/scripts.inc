@@ -123,7 +123,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	msgbox Route111_Text_1C56F0, MSGBOX_DEFAULT
 	giveitem ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route111_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_1C5781, MSGBOX_DEFAULT

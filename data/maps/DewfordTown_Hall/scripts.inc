@@ -256,7 +256,7 @@ DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	msgbox DewfordTown_Hall_Text_175E13, MSGBOX_DEFAULT
 	giveitem ITEM_TM36_SLUDGE_BOMB
 	compare VAR_RESULT, 0
-	goto_if_eq DewfordTown_Hall_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
 	release
 	end

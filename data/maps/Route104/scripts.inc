@@ -33,7 +33,7 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	msgbox Route104_Text_1C55B9, MSGBOX_DEFAULT
 	giveitem ITEM_CHESTO_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	msgbox Route104_Text_1C5665, MSGBOX_DEFAULT
 	release
@@ -51,7 +51,7 @@ Route104_EventScript_14EF09:: @ 814EF09
 	msgbox Route104_Text_16DD91, MSGBOX_DEFAULT
 	giveitem ITEM_WHITE_HERB
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
@@ -104,7 +104,7 @@ Route104_EventScript_14EF93:: @ 814EF93
 	msgbox Route104_Text_16DC5F, MSGBOX_DEFAULT
 	giveitem ITEM_TM09_BULLET_SEED
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
 	release
 	end
@@ -127,13 +127,13 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_14F162
 	waitmovement 0
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
-	call Route104_EventScript_1A02E7
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 7, Route104_Movement_14F09F
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_14F09F
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_14F166
 	waitmovement 0
-	call Route104_EventScript_1A02EF
+	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_14F168
 	waitmovement 0
@@ -145,7 +145,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	waitmovement 0
 	addobject 4
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
-	call Route104_EventScript_1A02EF
+	call Common_EventScript_StopBrineysBoatMusic
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	hideobjectat 7, MAP_ROUTE104
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008

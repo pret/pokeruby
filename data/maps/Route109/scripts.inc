@@ -34,11 +34,11 @@ Route109_EventScript_14F538:: @ 814F538
 
 Route109_EventScript_14F548:: @ 814F548
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE109
-	call Route109_EventScript_1A02E7
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 1, Route109_Movement_14F5BF
 	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F5BF
 	waitmovement 0
-	call Route109_EventScript_1A02EF
+	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	applymovement OBJ_EVENT_ID_PLAYER, Route109_Movement_14F670
 	waitmovement 0
@@ -331,7 +331,7 @@ Route109_EventScript_14F725:: @ 814F725
 	msgbox Route109_Text_16E433, MSGBOX_DEFAULT
 	giveitem ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
-	goto_if_eq Route109_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0

@@ -91,7 +91,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	addvar VAR_RESULT, ITEM_CHERI_BERRY
 	giveitem VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, MSGBOX_DEFAULT
 	release

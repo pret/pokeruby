@@ -245,7 +245,7 @@ PetalburgWoods_EventScript_15CEDC:: @ 815CEDC
 	msgbox PetalburgWoods_Text_19549E, MSGBOX_DEFAULT
 	giveitem ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgWoods_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MIRACLE_SEED
 	release
 	end

@@ -24,7 +24,7 @@ FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 	msgbox FallarborTown_House1_Text_1778C4, MSGBOX_DEFAULT
 	giveitem ITEM_TM27_RETURN
 	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_House1_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, 280
 	call FallarborTown_House1_EventScript_1A067F
 	setflag FLAG_RECEIVED_TM27

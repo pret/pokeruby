@@ -926,7 +926,7 @@ void Overworld_ClearSavedMusic(void)
 
 void sub_8053F0C(void)
 {
-    if (FlagGet(FLAG_SPECIAL_FLAG_1) != TRUE)
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
@@ -973,7 +973,7 @@ u8 GetMapMusicFadeoutSpeed(void)
 void TryFadeOutOldMapMusic(void)
 {
     u16 music = GetWarpDestinationMusic();
-    if (FlagGet(FLAG_SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && music != GetCurrentMapMusic())
     {
         u8 speed = GetMapMusicFadeoutSpeed();
         FadeOutMapMusic(speed);

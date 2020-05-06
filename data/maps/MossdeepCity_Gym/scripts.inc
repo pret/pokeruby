@@ -54,7 +54,7 @@ MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
 MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	message MossdeepCity_Gym_Text_18D0F9
 	waitmessage
-	call MossdeepCity_Gym_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MossdeepCity_Gym_Text_18D128, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
@@ -69,7 +69,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 	giveitem ITEM_TM04_CALM_MIND
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_18D1CF, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	release

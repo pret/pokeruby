@@ -28,7 +28,7 @@ LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
 	.string "Record your progress with SAVE.\p"
 	.string "The remaining pages are blank...$"
 
-UnknownString_817303D: @ 817303D
+Text_LookCloserAtMap: @ 817303D
 	.string "{PLAYER} took a closer look at the\n"
 	.string "HOENN region map.$"
 

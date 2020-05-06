@@ -126,7 +126,7 @@ EventScript_PickUpItem: @ 819FF52
 
 EventScript_NoRoomToPickUpItem: @ 819FF65
 	msgbox Message_ObtainedItem
-	msgbox Message_BagFull
+	msgbox Text_TooBadBagIsFull
 	setvar VAR_RESULT, FALSE
 	return
 
@@ -155,7 +155,7 @@ EventScript_PickUpHiddenItem:
 
 EventScript_NoRoomToPickUpHiddenItem:
 	msgbox Message_FoundOneItem
-	msgbox Message_BagFull
+	msgbox Text_TooBadBagIsFull
 	setvar VAR_RESULT, FALSE
 	releaseall
 	end

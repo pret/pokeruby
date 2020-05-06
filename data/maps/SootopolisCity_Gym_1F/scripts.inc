@@ -96,7 +96,7 @@ SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
 SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	message SootopolisCity_Gym_1F_Text_18F342
 	waitmessage
-	call SootopolisCity_Gym_1F_EventScript_1A02C5
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox SootopolisCity_Gym_1F_Text_18F36B, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
@@ -108,7 +108,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 SootopolisCity_Gym_1F_EventScript_15B056:: @ 815B056
 	giveitem ITEM_TM03_WATER_PULSE
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_18F466, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
 	release

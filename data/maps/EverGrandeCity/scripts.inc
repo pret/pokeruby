@@ -3,7 +3,7 @@ EverGrandeCity_MapScripts:: @ 814D4D5
 	.byte 0
 
 EverGrandeCity_MapScript1_14D4DB:: @ 814D4DB
-	call_if_set FLAG_SYS_WEATHER_CTRL, EverGrandeCity_EventScript_1A02C1
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
 	end
 
 EverGrandeCity_EventScript_14D4E5:: @ 814D4E5
