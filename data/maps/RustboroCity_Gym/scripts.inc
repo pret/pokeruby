@@ -18,7 +18,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	setvar VAR_RUSTBORO_STATE, 1
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	setvar VAR_0x8008, 1
-	call RustboroCity_Gym_EventScript_1A01C0
+	call Common_EventScript_SetGymTrainers
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	goto RustboroCity_Gym_EventScript_15793C

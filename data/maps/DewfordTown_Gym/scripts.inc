@@ -113,7 +113,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
-	call DewfordTown_Gym_EventScript_1A01C0
+	call Common_EventScript_SetGymTrainers
 	goto DewfordTown_Gym_EventScript_1531B5
 	end
 
