@@ -108,7 +108,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, MSGBOX_DEFAULT
-	call EverGrandeCity_ChampionsRoom_EventScript_1A03B0
+	call ProfBirch_EventScript_RatePokedex
 	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, MSGBOX_DEFAULT
 	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0

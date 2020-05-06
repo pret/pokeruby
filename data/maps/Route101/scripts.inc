@@ -4,7 +4,7 @@ Route101_MapScripts:: @ 814E924
 	.byte 0
 
 Route101_MapScript1_14E92F:: @ 814E92F
-	call Route101_EventScript_1A02F4
+	call ProfBirch_EventScript_UpdateLocation
 	end
 
 Route101_MapScript2_14E935:: @ 814E935

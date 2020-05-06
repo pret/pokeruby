@@ -6,7 +6,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 8152C82
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_152C92:: @ 8152C92
 	call Common_EventScript_SetupRivalGfxId
-	call LittlerootTown_ProfessorBirchsLab_EventScript_1A02F4
+	call ProfBirch_EventScript_UpdateLocation
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_152C9D:: @ 8152C9D
@@ -106,7 +106,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D90:: @ 8152D90
 LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	lock
 	faceplayer
-	goto_if_unset FLAG_UNKNOWN_BIRCH_380, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
+	goto_if_unset FLAG_UNKNOWN_BIRCH_380, ProfBirch_EventScript_AskRatePokedex
 	compare VAR_BIRCH_LAB_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1740B4, MSGBOX_DEFAULT

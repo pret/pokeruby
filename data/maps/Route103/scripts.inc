@@ -4,7 +4,7 @@ Route103_MapScripts:: @ 814EB81
 
 Route103_MapScript1_14EB87:: @ 814EB87
 	call Common_EventScript_SetupRivalGfxId
-	call Route103_EventScript_1A02F4
+	call ProfBirch_EventScript_UpdateLocation
 	end
 
 Route103_EventScript_14EB92:: @ 814EB92
