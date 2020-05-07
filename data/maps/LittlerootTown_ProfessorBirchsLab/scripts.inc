@@ -38,7 +38,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
 	setvar VAR_0x8004, 0
-	call LittlerootTown_ProfessorBirchsLab_EventScript_1A0678
+	call Common_EventScript_NameReceivedPartyMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 

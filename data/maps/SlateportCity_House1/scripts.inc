@@ -57,7 +57,7 @@ SlateportCity_House1_EventScript_155726:: @ 8155726
 
 SlateportCity_House1_EventScript_155730:: @ 8155730
 	msgbox SlateportCity_House1_Text_17D580, MSGBOX_DEFAULT
-	call SlateportCity_House1_EventScript_1A0678
+	call Common_EventScript_NameReceivedPartyMon
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1

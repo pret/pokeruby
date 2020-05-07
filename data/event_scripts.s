@@ -965,19 +965,13 @@ Common_EventScript_FerryDepartIsland:: @ 81A047C
 	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/static_pokemon.inc"
 
-LittlerootTown_ProfessorBirchsLab_EventScript_1A0678:: @ 81A0678
-MossdeepCity_StevensHouse_EventScript_1A0678:: @ 81A0678
-RustboroCity_DevonCorp_2F_EventScript_1A0678:: @ 81A0678
-SlateportCity_House1_EventScript_1A0678:: @ 81A0678
+Common_EventScript_NameReceivedPartyMon:: @ 81A0678
 	fadescreen FADE_TO_BLACK
 	special ChangePokemonNickname
 	waitstate
 	return
 
-FallarborTown_House1_EventScript_1A067F:: @ 81A067F
-GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
-MtPyre_Summit_EventScript_1A067F:: @ 81A067F
-SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
+Common_EventScript_PlayerHandedOverTheItem:: @ 81A067F
 	bufferitemname 0, VAR_0x8004
 	playfanfare MUS_ME_WAZA
 	message FallarborTown_House1_Text_1A1498
@@ -986,109 +980,9 @@ SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
 	removeitem VAR_0x8004, 1
 	return
 
-EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
-EverGrandeCity_GlaciasRoom_EventScript_1A0693:: @ 81A0693
-EverGrandeCity_PhoebesRoom_EventScript_1A0693:: @ 81A0693
-EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay32
-	waitmovement 0
-	playse SE_DOOR
-	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
-	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
-	setmetatile 0, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 1, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 2, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 3, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 4, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 8, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 9, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 10, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 11, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	special DrawWholeMapView
-	return
-
-EverGrandeCity_DrakesRoom_EventScript_1A0710:: @ 81A0710
-EverGrandeCity_GlaciasRoom_EventScript_1A0710:: @ 81A0710
-EverGrandeCity_PhoebesRoom_EventScript_1A0710:: @ 81A0710
-EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp6
-	waitmovement 0
-	playse SE_TRACK_DOOR
-	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	special DrawWholeMapView
-	return
-
-EverGrandeCity_DrakesRoom_EventScript_1A0757:: @ 81A0757
-EverGrandeCity_GlaciasRoom_EventScript_1A0757:: @ 81A0757
-EverGrandeCity_PhoebesRoom_EventScript_1A0757:: @ 81A0757
-EverGrandeCity_SidneysRoom_EventScript_1A0757:: @ 81A0757
-	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
-	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
-	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 0, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 1, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 2, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 3, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 4, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 8, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 9, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 10, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 11, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	return
-
-EverGrandeCity_DrakesRoom_EventScript_1A07FA:: @ 81A07FA
-EverGrandeCity_GlaciasRoom_EventScript_1A07FA:: @ 81A07FA
-EverGrandeCity_PhoebesRoom_EventScript_1A07FA:: @ 81A07FA
-EverGrandeCity_SidneysRoom_EventScript_1A07FA:: @ 81A07FA
-	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	return
-
+	.include "data/scripts/elite_four.inc"
 	.include "data/scripts/movement.inc"
-
-PictureBookShelfScript:: @ 81A085B
-	msgbox PictureBookShelfText, MSGBOX_SIGN
-	end
-
-BookshelfScript:: @ 81A0864
-	msgbox BookshelfText, MSGBOX_SIGN
-	end
-
-PokemonCenterBookshelfScript:: @ 81A086D
-	msgbox PokemonCenterBookshelfText, MSGBOX_SIGN
-	end
-
-VaseScript:: @ 81A0876
-	msgbox VaseText, MSGBOX_SIGN
-	end
-
-TrashCanScript:: @ 81A087F
-	msgbox TrashCanText, MSGBOX_SIGN
-	end
-
-ShopShelfScript:: @ 81A0888
-	msgbox ShopShelfText, MSGBOX_SIGN
-	end
-
-BlueprintScript:: @ 81A0891
-	msgbox BlueprintText, MSGBOX_SIGN
-	end
+	.include "data/scripts/check_furniture.inc"
 
 SampleMessage1:: @ 81A089A
 	.string "This is sample message 1.\p"
@@ -2952,34 +2846,7 @@ MauvilleCity_GameCorner_EventScript_1C40DA:: @ 81C40DA
 	.include "data/text/braille.inc"
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
-
-PictureBookShelfText: @ 81C6A69
-	.string "There's a set of POKéMON picture books.$"
-
-BookshelfText: @ 81C6A91
-	.string "It's filled with all sorts of books.$"
-
-PokemonCenterBookshelfText: @ 81C6AB6
-	.string "POKéMON magazines!\n"
-	.string "POKéMON PAL...\p"
-	.string "POKéMON HANDBOOK...\n"
-	.string "ADORABLE POKéMON...$"
-
-VaseText: @ 81C6B00
-	.string "This vase looks expensive...\n"
-	.string "Peered inside...\p"
-	.string "But, it was empty.$"
-
-TrashCanText: @ 81C6B41
-	.string "It's empty.$"
-
-ShopShelfText: @ 81C6B4D
-	.string "The shelves brim with all sorts of\n"
-	.string "POKéMON merchandise.$"
-
-BlueprintText: @ 81C6B85
-	.string "A blueprint of some sort?\n"
-	.string "It's too complicated!$"
+	.include "data/text/check_furniture.inc"
 
 GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5

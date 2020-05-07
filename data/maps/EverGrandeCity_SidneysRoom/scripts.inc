@@ -11,11 +11,11 @@ EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B564:: @ 815B564
-	call EverGrandeCity_SidneysRoom_EventScript_1A0757
+	call PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom
 	return
 
 EverGrandeCity_SidneysRoom_EventScript_15B56A:: @ 815B56A
-	call EverGrandeCity_SidneysRoom_EventScript_1A07FA
+	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
 EverGrandeCity_DrakesRoom_MapScript2_15B570:: @ 815B570
@@ -33,7 +33,7 @@ EverGrandeCity_SidneysRoom_MapScript2_15B57F:: @ 815B57F
 
 EverGrandeCity_SidneysRoom_EventScript_15B589:: @ 815B589
 	lockall
-	call EverGrandeCity_SidneysRoom_EventScript_1A0710
+	call PokemonLeague_EliteFour_EventScript_WalkInCloseDoor
 	setvar VAR_ELITE_4_STATE, 1
 	releaseall
 	end
@@ -55,7 +55,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B5BD:: @ 815B5BD
 
 EverGrandeCity_SidneysRoom_EventScript_15B5C7:: @ 815B5C7
 	setflag FLAG_DEFEATED_ELITE_4_SYDNEY
-	call EverGrandeCity_SidneysRoom_EventScript_1A0693
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_SidneysRoom_Text_19086D, MSGBOX_DEFAULT
 	release
 	end

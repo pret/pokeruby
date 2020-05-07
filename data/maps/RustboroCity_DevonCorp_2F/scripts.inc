@@ -145,7 +145,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	givemon SPECIES_LILEEP, 20, ITEM_NONE
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	call_if_eq RustboroCity_DevonCorp_2F_EventScript_1A0678
+	call_if_eq Common_EventScript_NameReceivedPartyMon
 	release
 	end
 
@@ -165,7 +165,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	givemon SPECIES_ANORITH, 20, ITEM_NONE
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	call_if_eq RustboroCity_DevonCorp_2F_EventScript_1A0678
+	call_if_eq Common_EventScript_NameReceivedPartyMon
 	release
 	end
 

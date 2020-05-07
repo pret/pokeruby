@@ -78,8 +78,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F352, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 269
-	call SlateportCity_OceanicMuseum_2F_EventScript_1A067F
+	setvar VAR_0x8004, ITEM_DEVON_GOODS
+	call Common_EventScript_PlayerHandedOverTheItem
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F433, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_155E98

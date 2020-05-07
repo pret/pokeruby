@@ -194,7 +194,7 @@ MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 
 MtPyre_Summit_EventScript_15D669:: @ 815D669
 	setvar VAR_0x8004, ITEM_RED_OR_BLUE_ORB
-	call MtPyre_Summit_EventScript_1A067F
+	call Common_EventScript_PlayerHandedOverTheItem
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0

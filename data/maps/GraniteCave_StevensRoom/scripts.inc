@@ -6,7 +6,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	faceplayer
 	msgbox GraniteCave_StevensRoom_Text_194AE5, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_LETTER
-	call GraniteCave_StevensRoom_EventScript_1A067F
+	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_194BDD, MSGBOX_DEFAULT
 	giveitem ITEM_TM47_STEEL_WING

@@ -18,7 +18,7 @@ EverGrandeCity_PhoebesRoom_MapScript2_15B5F8:: @ 815B5F8
 
 EverGrandeCity_PhoebesRoom_EventScript_15B602:: @ 815B602
 	lockall
-	call EverGrandeCity_PhoebesRoom_EventScript_1A0710
+	call PokemonLeague_EliteFour_EventScript_WalkInCloseDoor
 	setvar VAR_ELITE_4_STATE, 2
 	releaseall
 	end
@@ -30,11 +30,11 @@ EverGrandeCity_PhoebesRoom_MapScript1_15B60F:: @ 815B60F
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_15B624:: @ 815B624
-	call EverGrandeCity_PhoebesRoom_EventScript_1A0757
+	call PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom
 	return
 
 EverGrandeCity_PhoebesRoom_EventScript_15B62A:: @ 815B62A
-	call EverGrandeCity_PhoebesRoom_EventScript_1A07FA
+	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
 EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
@@ -54,7 +54,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B657:: @ 815B657
 
 EverGrandeCity_PhoebesRoom_EventScript_15B661:: @ 815B661
 	setflag FLAG_DEFEATED_ELITE_4_PHOEBE
-	call EverGrandeCity_PhoebesRoom_EventScript_1A0693
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_PhoebesRoom_Text_190A2A, MSGBOX_DEFAULT
 	release
 	end

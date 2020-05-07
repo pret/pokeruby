@@ -61,13 +61,13 @@ extern u8 gUnknown_081C346A[];
 extern u8 gUnknown_081616E1[];
 extern u8 EventScript_RegionMap[];
 extern u8 S_RunningShoesManual[];
-extern u8 PictureBookShelfScript[];
-extern u8 BookshelfScript[];
-extern u8 PokemonCenterBookshelfScript[];
-extern u8 VaseScript[];
-extern u8 TrashCanScript[];
-extern u8 ShopShelfScript[];
-extern u8 BlueprintScript[];
+extern u8 EventScript_PictureBookshelf[];
+extern u8 EventScript_Bookshelf[];
+extern u8 EventScript_PokemonCenterBookshelf[];
+extern u8 EventScript_Vase[];
+extern u8 EventScript_EmptyTrashCan[];
+extern u8 EventScript_ShopShelf[];
+extern u8 EventScript_Blueprint[];
 extern u8 SecretBase_EventScript_SandOrnament[];
 extern u8 SecretBase_EventScript_ShieldOrToyTV[];
 extern u8 EventScript_UseSurf[];
@@ -469,19 +469,19 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
         return S_RunningShoesManual;
     if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)
-        return PictureBookShelfScript;
+        return EventScript_PictureBookshelf;
     if (MetatileBehavior_IsBookShelf(metatileBehavior) == TRUE)
-        return BookshelfScript;
+        return EventScript_Bookshelf;
     if (MetatileBehavior_IsPokeCenterBookShelf(metatileBehavior) == TRUE)
-        return PokemonCenterBookshelfScript;
+        return EventScript_PokemonCenterBookshelf;
     if (MetatileBehavior_IsVase(metatileBehavior) == TRUE)
-        return VaseScript;
+        return EventScript_Vase;
     if (MetatileBehavior_IsTrashCan(metatileBehavior) == TRUE)
-        return TrashCanScript;
+        return EventScript_EmptyTrashCan;
     if (MetatileBehavior_IsShopShelf(metatileBehavior) == TRUE)
-        return ShopShelfScript;
+        return EventScript_ShopShelf;
     if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
-        return BlueprintScript;
+        return EventScript_Blueprint;
 
     height = position->height;
     if (height == MapGridGetZCoordAt(position->x, position->y))
