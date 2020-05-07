@@ -46,10 +46,10 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE73:: @ 815BE73
 	return
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
-	message Route104_PrettyPetalFlowerShop_Text_1A0C42
+	message Text_PlayerWhatCanIDoForYou
 	waitmessage
 	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Items
-	msgbox Route104_PrettyPetalFlowerShop_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

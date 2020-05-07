@@ -24,10 +24,10 @@ EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
 EverGrandeCity_PokemonLeague_EventScript_15BAA8:: @ 815BAA8
 	lock
 	faceplayer
-	message EverGrandeCity_PokemonLeague_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_Items
-	msgbox EverGrandeCity_PokemonLeague_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

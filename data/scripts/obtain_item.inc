@@ -54,10 +54,10 @@ EventScript_BufferBerriesPocket:
 	return
 
 EventScript_ObtainedItem: @ 819FEB7
-	message Message_ObtainedItem
+	message Text_ObtainedTheItem
 	waitfanfare
 	waitmessage
-	msgbox Message_PutAwayItem
+	msgbox Text_PutItemInPocket
 	setvar VAR_RESULT, TRUE
 	return
 
@@ -89,10 +89,10 @@ EventScript_ObtainDecorationMessage: @ 819FEE8
 
 EventScript_ObtainedDecor: @ 819FF03
 	playfanfare MUS_FANFA4
-	message Message_ObtainedDecoration
+	message Text_ObtainedTheDecor
 	waitfanfare
 	waitmessage
-	msgbox Message_TransferredToPC
+	msgbox Text_TheDecorWasTransferredToThePC
 	setvar VAR_RESULT, TRUE
 	return
 
@@ -118,14 +118,14 @@ Std_FindItem: @ 819FF21
 
 EventScript_PickUpItem: @ 819FF52
 	removeobject VAR_LAST_TALKED
-	message Message_FoundOneItem
+	message Text_FoundOneItem
 	waitfanfare
 	waitmessage
-	msgbox Message_PutAwayItem
+	msgbox Text_PutItemInPocket
 	return
 
 EventScript_NoRoomToPickUpItem: @ 819FF65
-	msgbox Message_ObtainedItem
+	msgbox Text_ObtainedTheItem
 	msgbox Text_TooBadBagIsFull
 	setvar VAR_RESULT, FALSE
 	return
@@ -145,16 +145,16 @@ EventScript_HiddenItem:: @ 819FF7B
 	end
 
 EventScript_PickUpHiddenItem:
-	message Message_FoundOneItem
+	message Text_FoundOneItem
 	waitfanfare
 	waitmessage
-	msgbox Message_PutAwayItem
+	msgbox Text_PutItemInPocket
 	special SetHiddenItemFlag
 	releaseall
 	end
 
 EventScript_NoRoomToPickUpHiddenItem:
-	msgbox Message_FoundOneItem
+	msgbox Text_FoundOneItem
 	msgbox Text_TooBadBagIsFull
 	setvar VAR_RESULT, FALSE
 	releaseall

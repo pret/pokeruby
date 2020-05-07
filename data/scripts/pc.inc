@@ -36,7 +36,7 @@ EventScript_AccessPokemonStorage:
 	playse SE_PC_LOGON
 	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_AccessSomeonesPC
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_AccessLanettesPC
-	msgbox UnknownString_81A0A35, MSGBOX_DEFAULT
+	msgbox Text_StorageSystemOpened, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystem
 	waitstate
 	goto EventScript_PCMainMenu

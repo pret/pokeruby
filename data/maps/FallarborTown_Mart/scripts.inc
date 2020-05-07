@@ -4,10 +4,10 @@ FallarborTown_Mart_MapScripts:: @ 8153966
 FallarborTown_Mart_EventScript_153967:: @ 8153967
 	lock
 	faceplayer
-	message FallarborTown_Mart_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart FallarborTown_Mart_Items
-	msgbox FallarborTown_Mart_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

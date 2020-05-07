@@ -21,10 +21,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A163:: @ 815A163
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A167:: @ 815A167
 	lock
 	faceplayer
-	message LilycoveCity_DepartmentStoreRooftop_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemartdecoration LilycoveCity_DepartmentStoreRooftop_Decorations
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -152,7 +152,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, MSGBOX_DEFAULT
+	msgbox Text_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
 	goto_if_ne LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
@@ -164,7 +164,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, MSGBOX_DEFAULT
+	msgbox Text_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
 	goto_if_ne LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
@@ -176,7 +176,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, MSGBOX_DEFAULT
+	msgbox Text_PutItemInPocket, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	end
 
@@ -192,7 +192,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A:: @ 815A37A
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A388:: @ 815A388
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C79, MSGBOX_DEFAULT
+	msgbox Text_TheBagIsFull, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
 	end
 

@@ -4,11 +4,11 @@ PetalburgCity_Mart_MapScripts:: @ 81552AF
 PetalburgCity_Mart_EventScript_1552B0:: @ 81552B0
 	lock
 	faceplayer
-	message PetalburgCity_Mart_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_PETALBURG_MART_EXPANDED_ITEMS, PetalburgCity_Mart_EventScript_1552EA
 	pokemart PetalburgCity_Mart_Items1
-	msgbox PetalburgCity_Mart_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -31,7 +31,7 @@ PetalburgCity_Mart_Items1:: @ 81552D0
 
 PetalburgCity_Mart_EventScript_1552EA:: @ 81552EA
 	pokemart PetalburgCity_Mart_Items2
-	msgbox PetalburgCity_Mart_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

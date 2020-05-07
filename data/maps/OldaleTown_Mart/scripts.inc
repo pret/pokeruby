@@ -4,11 +4,11 @@ OldaleTown_Mart_MapScripts:: @ 8152F78
 OldaleTown_Mart_EventScript_152F79:: @ 8152F79
 	lock
 	faceplayer
-	message OldaleTown_Mart_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_EventScript_152FA8
 	pokemart OldaleTown_Mart_Items1
-	msgbox OldaleTown_Mart_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -24,7 +24,7 @@ OldaleTown_Mart_Items1:: @ 8152F9C
 
 OldaleTown_Mart_EventScript_152FA8:: @ 8152FA8
 	pokemart OldaleTown_Mart_Items2
-	msgbox OldaleTown_Mart_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

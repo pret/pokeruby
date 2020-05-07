@@ -45,7 +45,7 @@ SlateportCity_EventScript_14BAB6:: @ 814BAB6
 	message SlateportCity_Text_164642
 	waitmessage
 	pokemart SlateportCity_Items1
-	msgbox SlateportCity_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -381,10 +381,10 @@ SlateportCity_EventScript_14BDDB:: @ 814BDDB
 SlateportCity_EventScript_14BDF2:: @ 814BDF2
 	lock
 	faceplayer
-	message SlateportCity_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemartdecoration SlateportCity_Decorations1
-	msgbox SlateportCity_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -406,10 +406,10 @@ SlateportCity_EventScript_14BE20:: @ 814BE20
 	lock
 	faceplayer
 	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BE16
-	message SlateportCity_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemartdecoration SlateportCity_Decorations2
-	msgbox SlateportCity_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -437,10 +437,10 @@ SlateportCity_Decorations2:: @ 814BE40
 	lock
 	faceplayer
 	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BE16
-	message SlateportCity_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemartdecoration SlateportCity_Decorations3
-	msgbox SlateportCity_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -464,10 +464,10 @@ SlateportCity_Decorations3:: @ 814BE80
 SlateportCity_EventScript_14BE9A:: @ 814BE9A
 	lock
 	faceplayer
-	message SlateportCity_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart SlateportCity_Items2
-	msgbox SlateportCity_Text_1A0C02, MSGBOX_DEFAULT
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
