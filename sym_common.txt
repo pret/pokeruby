@@ -170,7 +170,7 @@ SYMBOL(gFieldLinkPlayerCount, 4)
 
 // fieldmap.c
 . = ALIGN(16);
-gUnknown_03004870 = .;
+gBackupMapLayout = .;
 . += 0xC;
 
 // field_camera.c

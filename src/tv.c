@@ -573,7 +573,7 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
 
 void TurnOffTVScreen(void)
 {
-    SetTVMetatilesOnMap(gUnknown_03004870.width, gUnknown_03004870.height, METATILE_ID(Building, TV_Off));
+    SetTVMetatilesOnMap(gBackupMapLayout.width, gBackupMapLayout.height, METATILE_ID(Building, TV_Off));
     DrawWholeMapView();
 }
 

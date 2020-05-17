@@ -8,8 +8,9 @@
 #define NUM_METATILES_TOTAL 1024
 #define NUM_PALS_IN_PRIMARY 6
 #define NUM_PALS_TOTAL 12
+#define MAX_MAP_DATA_SIZE 0x2800
 
-extern struct BackupMapLayout gUnknown_03004870;
+extern struct BackupMapLayout gBackupMapLayout;
 struct MapHeader *mapconnection_get_mapheader(struct MapConnection *connection);
 int GetMapBorderIdAt(int x, int y);
 int CanCameraMoveInDirection(int direction);
