@@ -327,7 +327,7 @@ gSpecials::
 	def_special FoundBlackGlasses
 	def_special sub_807E25C
 	def_special sp13E_warp_to_last_warp
-	def_special sp13F_fall_to_last_warp
+	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
 	def_special sub_80C5164
 	def_special SetEReaderTrainerGfxId

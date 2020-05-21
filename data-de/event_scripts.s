@@ -1641,46 +1641,7 @@ MauvilleCity_GameCorner_EventScript_1C40DA:: @ 81C40DA
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 	.include "data/text/check_furniture.inc"
-
-GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
-MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5
-SkyPillar_2F_MapScript2_1C6BB5:: @ 81C6BB5
-SkyPillar_4F_MapScript2_1C6BB5:: @ 81C6BB5
-	map_script_2 VAR_ICE_STEP_COUNT, 0, S_FallDownHole
-	.2byte 0
-
-GraniteCave_B1F_MapScript1_1C6BBF:: @ 81C6BBF
-MtPyre_2F_MapScript1_1C6BBF:: @ 81C6BBF
-SkyPillar_2F_MapScript1_1C6BBF:: @ 81C6BBF
-SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
-	copyvar VAR_ICE_STEP_COUNT, 0x1
-	end
-
-S_FallDownHole:: @ 81C6BC5
-	lockall
-	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_B1F_Movement_1C6BF7
-	waitmovement 0
-	playse SE_RU_HYUU
-	delay 60
-	warphole MAP_UNDEFINED
-	waitstate
-	end
-
-gUnknown_081C6BDE:: @ 81C6BDE
-	lockall
-	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_B1F_Movement_1C6BF7
-	waitmovement 0
-	playse SE_RU_HYUU
-	delay 60
-	special sp13F_fall_to_last_warp
-	waitstate
-	end
-
-GraniteCave_B1F_Movement_1C6BF7:: @ 81C6BF7
-	set_invisible
-	step_end
+	.include "data/scripts/cave_hole.inc"
 
 @ 81C6BF9
 	msgbox Text_1C6C2B, MSGBOX_NPC

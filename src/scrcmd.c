@@ -770,7 +770,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
         SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
-    sp13F_fall_to_last_warp();
+    DoFallWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }

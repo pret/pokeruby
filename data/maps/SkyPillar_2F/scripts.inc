@@ -1,6 +1,6 @@
 SkyPillar_2F_MapScripts:: @ 815F2C9
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_2F_MapScript2_1C6BB5
-	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_2F_MapScript1_1C6BBF
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_CheckFallDownHole
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveHole_FixCrackedGround
 	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_2F_MapScript1_15F2D9
 	.byte 0
 

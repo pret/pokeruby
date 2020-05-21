@@ -75,11 +75,11 @@ extern u8 S_UseWaterfall[];
 extern u8 S_CannotUseWaterfall[];
 extern u8 UseDiveScript[];
 extern u8 S_UseDiveUnderwater[];
-extern u8 S_FallDownHole[];
+extern u8 EventScript_FallDownHole[];
 extern u8 gUnknown_081A14B8[];
 extern u8 S_EggHatch[];
 extern u8 gUnknown_0815FD0D[];
-extern u8 gUnknown_081C6BDE[];
+extern u8 EventScript_FallDownHoleMtPyre[];
 
 static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
@@ -563,7 +563,7 @@ bool8 TryStartCrackedFloorHoleScript(u16 metatileBehavior)
 {
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
-        ScriptContext1_SetupScript(S_FallDownHole);
+        ScriptContext1_SetupScript(EventScript_FallDownHole);
         return TRUE;
     }
     return FALSE;
@@ -717,7 +717,7 @@ bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileBehavior
         }
         if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
-            ScriptContext1_SetupScript(gUnknown_081C6BDE);
+            ScriptContext1_SetupScript(EventScript_FallDownHoleMtPyre);
             return TRUE;
         }
         sub_8080E88();

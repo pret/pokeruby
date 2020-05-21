@@ -1,6 +1,6 @@
 GraniteCave_B1F_MapScripts:: @ 815CBDD
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, GraniteCave_B1F_MapScript2_1C6BB5
-	map_script MAP_SCRIPT_ON_TRANSITION, GraniteCave_B1F_MapScript1_1C6BBF
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_CheckFallDownHole
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveHole_FixCrackedGround
 	map_script MAP_SCRIPT_ON_RESUME, GraniteCave_B1F_MapScript1_15CBED
 	.byte 0
 
