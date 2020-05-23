@@ -2796,7 +2796,7 @@ Move_DOUBLE_TEAM: @ 81CB30B
 
 Move_MINIMIZE: @ 81CB352
 	setalpha 10, 8
-	createvisualtask sub_80D0488, 2
+	createvisualtask AnimTask_Minimize, 2
 	loopsewithpan SE_W107, SOUND_PAN_ATTACKER, 34, 3
 	waitforvisualfinish
 	blendoff
