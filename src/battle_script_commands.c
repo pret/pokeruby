@@ -5576,64 +5576,65 @@ static void atk23_getexp(void)
 static void atk24(void)
 {
     u16 HP_count = 0;
-    int i;
-    if (gBattleControllerExecFlags) {return;}
+    s32 i;
+    s32 found1;
+    s32 found2;
 
-    for (i = 0; i < 6; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-            HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
-    }
-
-    if (HP_count == 0)
-        gBattleOutcome |= B_OUTCOME_LOST;
-
-    for (HP_count = 0, i = 0; i < 6; i++)
-    {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
-            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
-    }
-
-    if (!HP_count)
-        gBattleOutcome |= B_OUTCOME_WON;
-
-    if (!gBattleOutcome && (gBattleTypeFlags & BATTLE_TYPE_LINK))
-    {
-        register int found1 asm("r2");
-        register int found2 asm("r4");
-
-        //I can't for the love of god decompile that part
-
-        for (found1 = 0, i = 0; i < gBattlersCount; i += 2)
+    // maybe it should be like this, plethora of other atk routines do it too
+    if (gBattleControllerExecFlags == 0) // cmp r0, 0
+    { // beq 0x80209C6
+        for (i = 0; i < 6; i++)
         {
-            if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
-                found1++;
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
         }
 
-        for (found2 = 0, i = 1; i < gBattlersCount; i += 2)
+        if (HP_count == 0)
+            gBattleOutcome |= B_OUTCOME_LOST;
+
+        for (HP_count = 0, i = 0; i < 6; i++)
         {
-            if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
-                found2++;
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
+                HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
         }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        if (!HP_count)
+            gBattleOutcome |= B_OUTCOME_WON;
+
+        if (!gBattleOutcome && (gBattleTypeFlags & BATTLE_TYPE_LINK))
         {
-            if (found2 + found1 > 1)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+            for (found1 = 0, i = 0; i < gBattlersCount; i += 2)
+            {
+                if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
+                    found1++;
+            }
+
+            for (found2 = 0, i = 1; i < gBattlersCount; i += 2)
+            {
+                if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
+                    found2++;
+            }
+
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            {
+                if (found2 + found1 > 1)
+                    gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                else
+                    gBattlescriptCurrInstr += 5;
+            }
             else
-                gBattlescriptCurrInstr += 5;
+            {
+                if (found2 != 0 && found1 != 0)
+                    gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                else
+                    gBattlescriptCurrInstr += 5;
+            }
         }
-        else
+        else // b 0x8020B46
         {
-            if (found2 != 0 && found1 != 0)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-            else
-                gBattlescriptCurrInstr += 5;
+            gBattlescriptCurrInstr += 5;
         }
     }
-    else
-        gBattlescriptCurrInstr += 5;
-
 }
 #else
 NAKED
