@@ -1009,19 +1009,19 @@ static void sub_8127FD4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, surfBlobDirectionAnims[objectEvent->movementDirection]);
 }
 
-#ifdef NONMATCHING
 static void sub_812800C(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    s16 x;
-    s16 y;
     u8 i;
+    s16 x = objectEvent->currentCoords.x;
+    s16 y = objectEvent->currentCoords.y;
+    s32 spriteY = sprite->pos2.y;
 
-    x = objectEvent->currentCoords.x;
-    y = objectEvent->currentCoords.y;
-    if (sprite->pos2.y == 0 && (x != sprite->data[6] || y != sprite->data[7]))
+    if (spriteY == 0 && (x != sprite->data[6] || y != sprite->data[7]))
     {
-        sprite->data[5] = sprite->pos2.y;
-        for (sprite->data[6] = x, sprite->data[7] = y, i = DIR_SOUTH; i <= DIR_EAST; i ++, x = sprite->data[6], y = sprite->data[7])
+        sprite->data[5] = spriteY;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
+        for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
         {
             MoveCoords(i, &x, &y);
             if (MapGridGetZCoordAt(x, y) == 3)
@@ -1032,87 +1032,6 @@ static void sub_812800C(struct ObjectEvent *objectEvent, struct Sprite *sprite)
         }
     }
 }
-#else
-NAKED static void sub_812800C(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r8\n"
-                    "\tpush {r7}\n"
-                    "\tsub sp, 0x4\n"
-                    "\tadds r4, r1, 0\n"
-                    "\tldrh r2, [r0, 0x10]\n"
-                    "\tmov r1, sp\n"
-                    "\tstrh r2, [r1]\n"
-                    "\tldrh r1, [r0, 0x12]\n"
-                    "\tmov r0, sp\n"
-                    "\tadds r0, 0x2\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tmovs r2, 0x26\n"
-                    "\tldrsh r3, [r4, r2]\n"
-                    "\tmov r8, r0\n"
-                    "\tcmp r3, 0\n"
-                    "\tbne _08128094\n"
-                    "\tmov r0, sp\n"
-                    "\tmovs r5, 0\n"
-                    "\tldrsh r2, [r0, r5]\n"
-                    "\tmovs r5, 0x3A\n"
-                    "\tldrsh r0, [r4, r5]\n"
-                    "\tcmp r2, r0\n"
-                    "\tbne _08128048\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tmovs r5, 0x3C\n"
-                    "\tldrsh r1, [r4, r5]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbeq _08128094\n"
-                    "_08128048:\n"
-                    "\tstrh r3, [r4, 0x38]\n"
-                    "\tstrh r2, [r4, 0x3A]\n"
-                    "\tmov r1, r8\n"
-                    "\tmovs r2, 0\n"
-                    "\tldrsh r0, [r1, r2]\n"
-                    "\tstrh r0, [r4, 0x3C]\n"
-                    "\tmovs r5, 0x1\n"
-                    "\tmov r7, r8\n"
-                    "\tmov r6, sp\n"
-                    "_0812805A:\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tmov r1, sp\n"
-                    "\tadds r2, r7, 0\n"
-                    "\tbl MoveCoords\n"
-                    "\tmovs r1, 0\n"
-                    "\tldrsh r0, [r6, r1]\n"
-                    "\tmovs r2, 0\n"
-                    "\tldrsh r1, [r7, r2]\n"
-                    "\tbl MapGridGetZCoordAt\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tcmp r0, 0x3\n"
-                    "\tbne _08128080\n"
-                    "\tldrh r0, [r4, 0x38]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrh r0, [r4, 0x38]\n"
-                    "\tb _08128094\n"
-                    "_08128080:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tldrh r0, [r4, 0x3A]\n"
-                    "\tstrh r0, [r6]\n"
-                    "\tldrh r0, [r4, 0x3C]\n"
-                    "\tmov r1, r8\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tcmp r5, 0x4\n"
-                    "\tbls _0812805A\n"
-                    "_08128094:\n"
-                    "\tadd sp, 0x4\n"
-                    "\tpop {r3}\n"
-                    "\tmov r8, r3\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0");
-}
-#endif
 
 static void sub_81280A0(struct ObjectEvent *objectEvent, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
@@ -1453,152 +1372,35 @@ void WaitFieldEffectSpriteAnim(struct Sprite *sprite)
         UpdateObjectEventSpriteVisibility(sprite, FALSE);
 }
 
-#ifdef NONMATCHING
 static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
 {
     u8 i;
-    s16 xlo;
-    s16 xhi;
-    s16 lx;
-    s16 lyhi;
-    s16 ly;
-    s16 ylo;
-    s16 yhi;
-    struct ObjectEvent *objectEvent; // r4
-    const struct ObjectEventGraphicsInfo *graphicsInfo; // destroyed
-    struct Sprite *linkedSprite; // r5
+    s16 var, xhi, lyhi, yhi, ylo;
+    const struct ObjectEventGraphicsInfo *graphicsInfo; // Unused Variable
+    struct Sprite *linkedSprite;
 
     SetObjectSubpriorityByZCoord(z, sprite, offset);
-    for (i = 0; i < 16; i ++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i ++)
     {
-        objectEvent = &gObjectEvents[i];
+        struct ObjectEvent *objectEvent = &gObjectEvents[i];
         if (objectEvent->active)
         {
             graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
             linkedSprite = &gSprites[objectEvent->spriteId];
             xhi = sprite->pos1.x + sprite->centerToCornerVecX;
-            xlo = sprite->pos1.x - sprite->centerToCornerVecX;
-            lx = linkedSprite->pos1.x;
-            if (xhi < lx && xlo > lx)
+            var = sprite->pos1.x - sprite->centerToCornerVecX;
+            if (xhi < linkedSprite->pos1.x && var > linkedSprite->pos1.x)
             {
                 lyhi = linkedSprite->pos1.y + linkedSprite->centerToCornerVecY;
-                ly = linkedSprite->pos1.y;
+                var = linkedSprite->pos1.y;
                 ylo = sprite->pos1.y - sprite->centerToCornerVecY;
                 yhi = ylo + linkedSprite->centerToCornerVecY;
-                if ((lyhi < yhi || lyhi < ylo) && ly > yhi)
+                if ((lyhi < yhi || lyhi < ylo) && var > yhi && sprite->subpriority <= linkedSprite->subpriority)
                 {
-                    if (sprite->subpriority <= linkedSprite->subpriority)
-                    {
-                        sprite->subpriority = linkedSprite->subpriority + 2;
-                        break;
-                    }
+                    sprite->subpriority = linkedSprite->subpriority + 2;
+                    break;
                 }
             }
         }
     }
 }
-#else
-NAKED static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tadds r6, r0, 0\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r2, 24\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl SetObjectSubpriorityByZCoord\n"
-                    "\tmovs r7, 0\n"
-                    "_08128842:\n"
-                    "\tlsls r0, r7, 3\n"
-                    "\tadds r0, r7\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, _081288DC @ =gObjectEvents\n"
-                    "\tadds r4, r0, r1\n"
-                    "\tldrb r0, [r4]\n"
-                    "\tlsls r0, 31\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _081288E4\n"
-                    "\tldrb r0, [r4, 0x5]\n"
-                    "\tbl GetObjectEventGraphicsInfo\n"
-                    "\tldrb r1, [r4, 0x4]\n"
-                    "\tlsls r0, r1, 4\n"
-                    "\tadds r0, r1\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, _081288E0 @ =gSprites\n"
-                    "\tadds r5, r0, r1\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tadds r0, 0x28\n"
-                    "\tmovs r2, 0\n"
-                    "\tldrsb r2, [r0, r2]\n"
-                    "\tldrh r0, [r6, 0x20]\n"
-                    "\tadds r1, r0, r2\n"
-                    "\tsubs r0, r2\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tlsls r1, 16\n"
-                    "\tasrs r1, 16\n"
-                    "\tmovs r0, 0x20\n"
-                    "\tldrsh r2, [r5, r0]\n"
-                    "\tcmp r1, r2\n"
-                    "\tbge _081288E4\n"
-                    "\tlsls r0, r4, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tcmp r0, r2\n"
-                    "\tble _081288E4\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tadds r0, 0x29\n"
-                    "\tmovs r3, 0\n"
-                    "\tldrsb r3, [r0, r3]\n"
-                    "\tldrh r2, [r5, 0x22]\n"
-                    "\tadds r2, r3\n"
-                    "\tldrh r4, [r5, 0x22]\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tadds r0, 0x29\n"
-                    "\tmovs r1, 0\n"
-                    "\tldrsb r1, [r0, r1]\n"
-                    "\tldrh r0, [r6, 0x22]\n"
-                    "\tsubs r0, r1\n"
-                    "\tlsls r0, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tadds r3, r0, r3\n"
-                    "\tlsls r2, 16\n"
-                    "\tasrs r2, 16\n"
-                    "\tlsls r3, 16\n"
-                    "\tasrs r3, 16\n"
-                    "\tcmp r2, r3\n"
-                    "\tblt _081288BC\n"
-                    "\tcmp r2, r0\n"
-                    "\tbge _081288E4\n"
-                    "_081288BC:\n"
-                    "\tlsls r0, r4, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tcmp r0, r3\n"
-                    "\tble _081288E4\n"
-                    "\tadds r2, r6, 0\n"
-                    "\tadds r2, 0x43\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tadds r0, 0x43\n"
-                    "\tldrb r1, [r0]\n"
-                    "\tldrb r0, [r2]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbhi _081288E4\n"
-                    "\tadds r0, r1, 0x2\n"
-                    "\tstrb r0, [r2]\n"
-                    "\tb _081288EE\n"
-                    "\t.align 2, 0\n"
-                    "_081288DC: .4byte gObjectEvents\n"
-                    "_081288E0: .4byte gSprites\n"
-                    "_081288E4:\n"
-                    "\tadds r0, r7, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r7, r0, 24\n"
-                    "\tcmp r7, 0xF\n"
-                    "\tbls _08128842\n"
-                    "_081288EE:\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0");
-}
-#endif

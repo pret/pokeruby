@@ -119,7 +119,7 @@ void CreateMinimizeSprite(struct Task* task, u8 taskId)
             gSprites[spriteId].subpriority = task->data[7] - task->data[3];
             task->data[3]++;
             task->data[6]++;
-            gSprites[spriteId].data[0] = 16; 
+            gSprites[spriteId].data[0] = 16;
             gSprites[spriteId].data[1] = taskId;
             gSprites[spriteId].data[2] = 6;
             gSprites[spriteId].callback = ClonedMinimizeSprite_Step;
