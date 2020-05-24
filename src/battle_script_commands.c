@@ -5598,7 +5598,7 @@ static void atk24(void)
                 HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
         }
 
-        if (!HP_count)
+        if (HP_count == 0)
             gBattleOutcome |= B_OUTCOME_WON;
 
         if (!gBattleOutcome && (gBattleTypeFlags & BATTLE_TYPE_LINK))
@@ -5630,11 +5630,12 @@ static void atk24(void)
                     gBattlescriptCurrInstr += 5;
             }
         }
-        else // b 0x8020B46
+        else
         {
             gBattlescriptCurrInstr += 5;
         }
     }
+    // b 0x8020B46
 }
 #else
 NAKED
