@@ -5572,6 +5572,7 @@ static void atk23_getexp(void)
     }
 }
 
+// very close permutation but still isn't right
 #ifdef NONMATCHING
 static void atk24(void)
 {
@@ -5580,7 +5581,7 @@ static void atk24(void)
     s32 found1;
     s32 found2;
 
-    // maybe it should be like this, plethora of other atk routines do it too
+    // should...? be like this, plethora of other attack routines do it too
     if (gBattleControllerExecFlags == 0) // cmp r0, 0
     { // beq 0x80209C6
         for (i = 0; i < 6; i++)

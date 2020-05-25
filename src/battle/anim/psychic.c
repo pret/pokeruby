@@ -1042,17 +1042,14 @@ static void sub_80DC3F4(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80DC4F4(u8 taskId)
 {
     s16 spriteId;
-    u8 matrixNum;
-    register u8 matrixNum2 asm("r6");
+    s16 matrixNum;
     struct Task *task = &gTasks[taskId];
     
     matrixNum = AllocOamMatrix();
-    matrixNum2 = matrixNum;
-    if (matrixNum2 == 0xFF)
+    if (matrixNum == 0xFF)
     {
         DestroyAnimVisualTask(taskId);
         return;
@@ -1068,7 +1065,7 @@ void sub_80DC4F4(u8 taskId)
 
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-    gSprites[spriteId].oam.matrixNum = matrixNum2;
+    gSprites[spriteId].oam.matrixNum = matrixNum;
     gSprites[spriteId].affineAnimPaused = 1;
     gSprites[spriteId].subpriority++;
     obj_id_set_rotscale(spriteId, 256, 256, 0);
@@ -1079,132 +1076,6 @@ void sub_80DC4F4(u8 taskId)
     task->data[15] = spriteId;
     task->func = sub_80DC5F4;
 }
-#else
-NAKED
-void sub_80DC4F4(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    mov r8, r4\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    ldr r1, _080DC528 @ =gTasks\n\
-    adds r7, r0, r1\n\
-    bl AllocOamMatrix\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    mov r10, r5\n\
-    adds r6, r5, 0\n\
-    cmp r6, 0xFF\n\
-    bne _080DC52C\n\
-    adds r0, r4, 0\n\
-    bl DestroyAnimVisualTask\n\
-    b _080DC5D6\n\
-    .align 2, 0\n\
-_080DC528: .4byte gTasks\n\
-_080DC52C:\n\
-    ldr r1, _080DC550 @ =gBattleAnimArgs\n\
-    ldrb r0, [r1]\n\
-    bl duplicate_obj_of_side_rel2move_in_transparent_mode\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    mov r9, r1\n\
-    asrs r0, 16\n\
-    cmp r0, 0\n\
-    bge _080DC554\n\
-    adds r0, r5, 0\n\
-    bl FreeOamMatrix\n\
-    mov r0, r8\n\
-    bl DestroyAnimVisualTask\n\
-    b _080DC5D6\n\
-    .align 2, 0\n\
-_080DC550: .4byte gBattleAnimArgs\n\
-_080DC554:\n\
-    ldr r2, _080DC5E4 @ =gSprites\n\
-    lsls r4, r0, 4\n\
-    adds r4, r0\n\
-    lsls r4, 2\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x1C\n\
-    adds r0, r4, r0\n\
-    ldr r1, _080DC5E8 @ =SpriteCallbackDummy\n\
-    str r1, [r0]\n\
-    adds r4, r2\n\
-    ldrb r0, [r4, 0x1]\n\
-    movs r1, 0x3\n\
-    orrs r0, r1\n\
-    strb r0, [r4, 0x1]\n\
-    movs r0, 0x1F\n\
-    ands r6, r0\n\
-    lsls r2, r6, 1\n\
-    ldrb r1, [r4, 0x3]\n\
-    movs r0, 0x3F\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    orrs r0, r2\n\
-    strb r0, [r4, 0x3]\n\
-    adds r2, r4, 0\n\
-    adds r2, 0x2C\n\
-    ldrb r0, [r2]\n\
-    movs r1, 0x80\n\
-    orrs r0, r1\n\
-    strb r0, [r2]\n\
-    adds r1, r4, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    mov r1, r9\n\
-    lsls r0, r1, 24\n\
-    lsrs r0, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 1\n\
-    adds r1, r2, 0\n\
-    movs r3, 0\n\
-    bl obj_id_set_rotscale\n\
-    ldrb r3, [r4, 0x1]\n\
-    lsrs r1, r3, 6\n\
-    ldrb r2, [r4, 0x3]\n\
-    lsrs r2, 6\n\
-    lsls r3, 30\n\
-    lsrs r3, 30\n\
-    adds r0, r4, 0\n\
-    bl CalcCenterToCornerVec\n\
-    ldr r1, _080DC5EC @ =gBattleAnimArgs\n\
-    ldrb r0, [r1]\n\
-    bl GetAnimBattlerSpriteId\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    strh r0, [r7, 0x22]\n\
-    mov r0, r10\n\
-    strh r0, [r7, 0x24]\n\
-    mov r1, r9\n\
-    strh r1, [r7, 0x26]\n\
-    ldr r0, _080DC5F0 @ =sub_80DC5F4\n\
-    str r0, [r7]\n\
-_080DC5D6:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080DC5E4: .4byte gSprites\n\
-_080DC5E8: .4byte SpriteCallbackDummy\n\
-_080DC5EC: .4byte gBattleAnimArgs\n\
-_080DC5F0: .4byte sub_80DC5F4\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80DC5F4(u8 taskId)
 {

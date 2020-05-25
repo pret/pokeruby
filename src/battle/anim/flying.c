@@ -2330,195 +2330,59 @@ void sub_80DB330(struct Sprite *sprite)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80DB374(struct Sprite *sprite)
 {
-    // NONMATCHING - Functionally equivalent - slight register swap at end
-
     u32 matrixNum;
-    int t1, t3;
-    s16 t2;
+    int t1, t2;
 
     switch (sprite->data[0])
     {
+    case 0:
+        if (!gBattleAnimArgs[0])
+        {
+            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+        }
+        else
+        {
+            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        }
 
-        case 0:
-            if (!gBattleAnimArgs[0])
-            {
-                sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-                sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
-            }
-            else
-            {
-                sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-                sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
-            }
+        sprite->data[1] = 512;
 
-            sprite->data[1] = 512;
+        sub_8078FDC(sprite, 0, 256, sprite->data[1], 0);
+        sprite->data[0]++;
+        break;
+    case 1:
+        if (sprite->data[2] <= 11)
+            sprite->data[1] -= 40;
+        else
+            sprite->data[1] += 40;
 
-            sub_8078FDC(sprite, 0, 256, sprite->data[1], 0);
-            ++sprite->data[0];
-            break;
-        case 1:
-            if (sprite->data[2] <= 11)
-            {
-                sprite->data[1] -= 40;
-            }
-            else
-            {
-                sprite->data[1] += 40;
-            }
+        sprite->data[2]++;
 
-            ++sprite->data[2];
+        sub_8078FDC(sprite, 0, 256, sprite->data[1], 0);
 
-            sub_8078FDC(sprite, 0, 256, sprite->data[1], 0);
+        matrixNum = sprite->oam.matrixNum;
 
-            matrixNum = sprite->oam.matrixNum;
+        t1 = 15616;
+        t2 = t1 / gOamMatrices[matrixNum].d + 1;
 
-            t1 = 15616;
-            t2 = gOamMatrices[matrixNum].d;
-            t3 = t1 / t2 + 1;
+        if (t2 > 128)
+            t2 = 128;
 
-            if (t3 > 128)
-            {
-                t3 = 128;
-            }
+        t2 = (64 - t2) / 2;
+        sprite->pos2.y = t2;
 
-            /* NONMATCHING
-             * compiles to:
-             *  asr	r0, r0, #0x1
-                strh	r0, [r5, #0x26]
-             * needed:
-             *  asrs r1, r0, 1
-             *  strh r1, [r5, 0x26] */
-            sprite->pos2.y = (64 - t3) / 2;
-
-            if (sprite->data[2] == 24)
-            {
-                sub_8079098(sprite);
-                DestroyAnimSprite(sprite);
-            }
+        if (sprite->data[2] == 24)
+        {
+            sub_8079098(sprite);
+            DestroyAnimSprite(sprite);
+        }
+        break;
     }
 }
-#else
-NAKED
-void sub_80DB374(struct Sprite *sprite)
-{
-    asm_unified("push {r4,r5,lr}\n\
-	sub sp, 0x4\n\
-	adds r5, r0, 0\n\
-	movs r1, 0x2E\n\
-	ldrsh r0, [r5, r1]\n\
-	cmp r0, 0\n\
-	beq _080DB388\n\
-	cmp r0, 0x1\n\
-	beq _080DB3E0\n\
-	b _080DB44C\n\
-_080DB388:\n\
-	ldr r0, _080DB398 @ =gBattleAnimArgs\n\
-	movs r2, 0\n\
-	ldrsh r0, [r0, r2]\n\
-	cmp r0, 0\n\
-	bne _080DB3A0\n\
-	ldr r4, _080DB39C @ =gBattleAnimAttacker\n\
-	b _080DB3A2\n\
-	.align 2, 0\n\
-_080DB398: .4byte gBattleAnimArgs\n\
-_080DB39C: .4byte gBattleAnimAttacker\n\
-_080DB3A0:\n\
-	ldr r4, _080DB3DC @ =gBattleAnimTarget\n\
-_080DB3A2:\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	strh r0, [r5, 0x20]\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0x1\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	strh r0, [r5, 0x22]\n\
-	movs r0, 0\n\
-	movs r3, 0x80\n\
-	lsls r3, 2\n\
-	strh r3, [r5, 0x30]\n\
-	movs r2, 0x80\n\
-	lsls r2, 1\n\
-	str r0, [sp]\n\
-	adds r0, r5, 0\n\
-	movs r1, 0\n\
-	bl sub_8078FDC\n\
-	ldrh r0, [r5, 0x2E]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5, 0x2E]\n\
-	b _080DB44C\n\
-	.align 2, 0\n\
-_080DB3DC: .4byte gBattleAnimTarget\n\
-_080DB3E0:\n\
-	movs r1, 0x32\n\
-	ldrsh r0, [r5, r1]\n\
-	cmp r0, 0xB\n\
-	bgt _080DB3EE\n\
-	ldrh r0, [r5, 0x30]\n\
-	subs r0, 0x28\n\
-	b _080DB3F2\n\
-_080DB3EE:\n\
-	ldrh r0, [r5, 0x30]\n\
-	adds r0, 0x28\n\
-_080DB3F2:\n\
-	strh r0, [r5, 0x30]\n\
-	ldrh r0, [r5, 0x32]\n\
-	adds r0, 0x1\n\
-	movs r1, 0\n\
-	strh r0, [r5, 0x32]\n\
-	movs r2, 0x80\n\
-	lsls r2, 1\n\
-	movs r0, 0x30\n\
-	ldrsh r3, [r5, r0]\n\
-	str r1, [sp]\n\
-	adds r0, r5, 0\n\
-	bl sub_8078FDC\n\
-	ldrb r1, [r5, 0x3]\n\
-	lsls r1, 26\n\
-	lsrs r1, 27\n\
-	movs r0, 0xF4\n\
-	lsls r0, 6\n\
-	ldr r2, _080DB454 @ =gOamMatrices\n\
-	lsls r1, 3\n\
-	adds r1, r2\n\
-	movs r2, 0x6\n\
-	ldrsh r1, [r1, r2]\n\
-	bl __divsi3\n\
-	adds r1, r0, 0x1\n\
-	cmp r1, 0x80\n\
-	ble _080DB42C\n\
-	movs r1, 0x80\n\
-_080DB42C:\n\
-	movs r0, 0x40\n\
-	subs r0, r1\n\
-	lsrs r1, r0, 31\n\
-	adds r0, r1\n\
-	asrs r1, r0, 1\n\
-	strh r1, [r5, 0x26]\n\
-	movs r1, 0x32\n\
-	ldrsh r0, [r5, r1]\n\
-	cmp r0, 0x18\n\
-	bne _080DB44C\n\
-	adds r0, r5, 0\n\
-	bl sub_8079098\n\
-	adds r0, r5, 0\n\
-	bl DestroyAnimSprite\n\
-_080DB44C:\n\
-	add sp, 0x4\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080DB454: .4byte gOamMatrices\n");
-}
-#endif
 
 void sub_80DB458(struct Sprite *sprite)
 {

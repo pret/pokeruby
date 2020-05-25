@@ -1,5 +1,7 @@
 #include "global.h"
 #include "battle.h"
+#include "decompress.h"
+#include "graphics.h"
 #include "battle_anim.h"
 #include "random.h"
 #include "rom_8077ABC.h"
@@ -25,6 +27,7 @@ void sub_8078F40(u8);
 void sub_8079A64(u8);
 void sub_80D37FC(struct Sprite *sprite);
 void sub_80D3838(struct Sprite *sprite);
+void sub_80D3B60(u8 taskId);
 void sub_80D3D68(u8 taskId);
 void sub_80D4044(struct Sprite *sprite);
 void sub_80D40A8(struct Sprite *);
@@ -260,8 +263,120 @@ static void sub_80D3874(struct Sprite *sprite)
     }
 }
 
-NAKED
+/*
+    Presumably a macro GF used to stall the CPU for
+    a bit of time so that DMA can finish, likely for
+    debugging purposes.
+*/
+#define cpuWait()     \
+{                     \
+    vu8 cpuDelay = 0; \
+    cpu_delay = 0;    \
+}
+
+/*
+    Despite how close the attempt is, there's still a regswap
+    that throws everything over. Could the way data is currently
+    linked be the problem here?
+*/
+#ifdef NONMATCHING
 void AnimTask_CreateSurfWave(u8 taskId)
+{
+    struct Struct_sub_8078914 subStruct;
+    u8 taskId2;
+    u16* x = &gBattle_BG1_X;
+    u16* y = &gBattle_BG1_Y;
+
+    REG_BLDCNT = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL;
+    REG_BLDALPHA = 0x1000;
+    REG_BG1CNT_BITFIELD.priority = 1;
+    REG_BG1CNT_BITFIELD.screenSize = 1;
+
+    sub_8078914(&subStruct);
+
+    DmaFill32Defvars(3, 0, subStruct.field_0, 0x2000);
+    cpuWait(); // wait for DMA to finish
+    DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
+
+    if (IsContest() == 0)
+    {
+        REG_BG1CNT_BITFIELD.charBaseBlock = 1;
+        if (GetBattlerSide(gBattleAnimAttacker) == 1)
+        {
+            LZDecompressVram(&gUnknown_08E70968, subStruct.field_4);
+        }
+        else
+        {
+            LZDecompressVram(&gUnknown_08E70C38, subStruct.field_4);
+        }
+    }
+    else
+    {
+        LZDecompressVram(&gUnknown_08E70F0C, subStruct.field_4);
+        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 1);
+    }
+
+    LZDecompressVram(&gBattleAnimBackgroundImage_Surf, subStruct.field_0);
+
+    if (gBattleAnimArgs[0] == 0)
+    {
+        LoadCompressedPalette(&gBattleAnimBackgroundPalette_Surf, 16 * subStruct.field_8, 32);
+    }
+    else
+    {
+        LoadCompressedPalette(&gBattleAnimBackgroundImageMuddyWater_Pal, 16 * subStruct.field_8, 32);
+    }
+
+    taskId2 = CreateTask(sub_80D3D68, gTasks[taskId].priority + 1);
+    gTasks[taskId].data[15] = taskId2;
+    gTasks[taskId2].data[0] = 0;
+    gTasks[taskId2].data[1] = 0x1000;
+    gTasks[taskId2].data[2] = 0x1000;
+
+    if (IsContest())
+    {
+        *x = -80;
+        *y = -48;
+        gTasks[taskId].data[0] = 2;
+        gTasks[taskId].data[1] = 1;
+        gTasks[taskId2].data[3] = 0;
+    }
+    else if (GetBattlerSide(gBattleAnimAttacker) == 1)
+    {
+        *x = -224;
+        *y = 256;
+        gTasks[taskId].data[0] = 2;
+        gTasks[taskId].data[1] = -1;
+        gTasks[taskId2].data[3] = 1;
+    }
+    else
+    {
+        *x = 0;
+        *y = -48;
+        gTasks[taskId].data[0] = -2;
+        gTasks[taskId].data[1] = 1;
+        gTasks[taskId2].data[3] = 0;
+    }
+
+    REG_BG1HOFS = *x;
+    REG_BG1VOFS = *y;
+
+    if(gTasks[taskId2].data[3] == 0)
+    {
+        gTasks[taskId2].data[4] = 48;
+        gTasks[taskId2].data[5] = 112;
+    }
+    else
+    {
+        gTasks[taskId2].data[4] = 0;
+        gTasks[taskId2].data[5] = 0;
+    }
+
+    gTasks[taskId].data[6] = 1;
+    gTasks[taskId].func = sub_80D3B60;
+}
+#else
+NAKED void AnimTask_CreateSurfWave(u8 taskId)
 {
     asm(".syntax unified\n\
     .equ REG_BLDCNT, 0x4000050\n\
@@ -578,6 +693,7 @@ _080D3B38:\n\
 _080D3B5C: .4byte sub_80D3B60\n\
     .syntax divided\n");
 }
+#endif // NONMATCHING
 
 #ifdef NONMATCHING
 void sub_80D3B60(u8 taskId)
