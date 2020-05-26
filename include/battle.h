@@ -139,15 +139,14 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered:1;
-    u8 lightningRodRedirected:1;
-    u8 restoredBattlerSprite: 1;
-    u8 intimidatedMon:1;
-    u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
-    u8 flag40:1;
-    u8 focusBanded:1;
-    u8 field1[3];
+    u32 statLowered:1;
+    u32 lightningRodRedirected:1;
+    u32 restoredBattlerSprite: 1;
+    u32 intimidatedMon:1;
+    u32 traced:1;
+    u32 ppNotAffectedByPressure:1;
+    u32 flag40:1;
+    u32 focusBanded:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
