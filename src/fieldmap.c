@@ -460,7 +460,7 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
     }
 }
 
-u32 GetBehaviorByMetatileId(u16 metatile)
+u16 GetBehaviorByMetatileId(u16 metatile)
 {
     u16 *attributes;
     if (metatile < NUM_METATILES_IN_PRIMARY)

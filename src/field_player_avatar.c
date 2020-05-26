@@ -681,24 +681,16 @@ void SetPlayerAvatarTransitionFlags(u16 a)
 static void DoPlayerAvatarTransition(void)
 {
     u8 i;
-    u32 flags = gPlayerAvatar.unk1;
+    u8 flags = gPlayerAvatar.unk1;
 
     if (flags != 0)
     {
-        for (i = 0; i < 8; i++, flags >>= 1)
+        for (i = 0; i < ARRAY_COUNT(gUnknown_0830FC14); i++, flags >>= 1)
         {
-#ifdef NONMATCHING
             if (flags & 1)
             {
                 gUnknown_0830FC14[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
             }
-#else
-            if (flags & 1)
-            {
-                register void (*const *funcs)(struct ObjectEvent *) asm("r0") = gUnknown_0830FC14;
-                funcs[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
-            }
-#endif
         }
         gPlayerAvatar.unk1 = 0;
     }
