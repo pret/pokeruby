@@ -264,14 +264,21 @@ static void sub_80D3874(struct Sprite *sprite)
 }
 
 /*
-    Presumably a macro GF used to stall the CPU for
-    a bit of time so that DMA can finish, likely for
-    debugging purposes.
+    Many games use wasteful NOPs; some of which are
+    even moreso than regular ones. This is so that
+    hardware operations can finish.
+
+    GF perhaps used a macro to stall the CPU for a bit
+    of time, presumably so that DMA can finish, likely
+    for debugging purposes. It looks to have been purged
+    by FireRed, as it is missing in there.
+
+    It could have looked like this:
 */
 #define cpuWait()     \
 {                     \
     vu8 cpuDelay = 0; \
-    cpu_delay = 0;    \
+    cpuDelay = 0;     \
 }
 
 /*
