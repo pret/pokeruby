@@ -1695,13 +1695,13 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
     s16 randomSomethingY;
 
     something = sprite->data[0] / 2;
-    // regalloc acts funny here...
+    // Without the weird hack? you are about to see below, regalloc acts funny here...
     combinedX = sprite->pos1.x + sprite->pos2.x;
     combinedY = sprite->pos1.y + sprite->pos2.y;
     /*
-        Then goes back to normal at this exact point. Something must have existed here.
-        Whatever it was, it's not the traditional if (0) or do {} while (0). Nor is it
-        var++--. It's something completely obscene.
+        Then goes back to normal at this exact point. Something must have existed here
+        that lined up regalloc properly. Whatever it was, it's not the traditional if
+        (0) or do {} while (0). Nor is it var++--. It's something completely obscene.
 
         Upon random experiments, there was an observation about how parameters affected
         regalloc in ways more bizarre than local variables. xDiff++; xDiff--; had actually
@@ -1750,6 +1750,7 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
         u8 unk = -unk; // ...this is what I came up with. It matches.
         // i = -i; // This matches too. It might just work on any uninitialized.
     }
+    // by the way, yDiff works for the if case too, but oddly not sprite.
 
     randomSomethingY = yDiff + (Random() % 10) - 5;
     randomSomethingX = -xDiff + (Random() % 10) - 5;
