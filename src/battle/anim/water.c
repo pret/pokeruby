@@ -359,6 +359,8 @@ void AnimTask_CreateSurfWave(u8 taskId)
 void sub_80D3B60(u8 taskId)
 {
     struct Struct_sub_8078914 unk;
+
+    vu8 cpuDelay; // yet again
     u8 i;
     u16 rgbBuffer;
     u16 *BGptrX = &gBattle_BG1_X;
@@ -385,6 +387,7 @@ void sub_80D3B60(u8 taskId)
     }
     if (++gTasks[taskId].data[6] > 1)
     {
+        // there is some weird math going on here
         gTasks[taskId].data[6] = 0;
         unkUse = ++gTasks[taskId].data[3];
         if (unkUse <= 13)
@@ -400,8 +403,20 @@ void sub_80D3B60(u8 taskId)
     }
     if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
     {
-        gTasks[taskId].data[0] = gTasks[gTasks[taskId].data[15]].data[1] & 0x1F;
-        gTasks[taskId].func = sub_80D3D68;
+        Dma3FillLarge32_(0, unk.field_0, 0x2000); // !
+        cpuDelay = 0; // stall the CPU
+        cpuDelay = 0; // stall the CPU
+        Dma3FillLarge32_(0, unk.field_4, 0x1000); // !
+        if (!IsContest)
+            REG_BG1CNT_BITFIELD.charBaseBlock = 1;
+        *BGptrX = 0;
+        *BGptrY = 0;
+
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+
+        gTasks[gTasks[taskId].data[15]].data[15] = 0xffff;
+        DestroyAnimVisualTask(taskId);
     }
 }
 #else
@@ -1668,16 +1683,76 @@ void sub_80D4CEC(struct Sprite *sprite)
     sprite->data[0]++;
 }
 
-#ifdef NONMATCHING
-void sub_80D4D64(struct Sprite *sprite, int xDiff, int yDiff)
+void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
 {
-    s16 something = sprite->data[0] / 2;
-    s16 combinedX = sprite->pos1.x + sprite->pos2.x;
-    s16 combinedY = sprite->pos1.y + sprite->pos2.y;
-    s16 randomSomethingY = yDiff + (Random() % 10) - 5;
-    s16 randomSomethingX = -xDiff + (Random() % 10) - 5;
     s16 i;
     u8 spriteId;
+
+    s16 combinedX;
+    s16 combinedY;
+    s16 something;
+    s16 randomSomethingX;
+    s16 randomSomethingY;
+
+    something = sprite->data[0] / 2;
+    // regalloc acts funny here...
+    combinedX = sprite->pos1.x + sprite->pos2.x;
+    combinedY = sprite->pos1.y + sprite->pos2.y;
+    /*
+        Then goes back to normal at this exact point. Something must have existed here.
+        Whatever it was, it's not the traditional if (0) or do {} while (0). Nor is it
+        var++--. It's something completely obscene.
+
+        Upon random experiments, there was an observation about how parameters affected
+        regalloc in ways more bizarre than local variables. xDiff++; xDiff--; had actually
+        changed the regalloc immensely:
+
+        mov     r2, #0x2e
+        ldrsh   r1, [r0, r2]
+        lsr     r2, r1, #0x1f
+        add     r1, r1, r2
+        lsl     r1, r1, #0xf
+        lsr     r1, r1, #0x10
+        str     r1, [sp]
+
+        ldrh    r3, [r0, #0x24]
+        mov     r8, r3
+        ldrh    r1, [r0, #0x20]
+        add     r8, r8, r1
+        mov     r2, r8
+        lsl     r2, r2, #0x10
+        lsr     r2, r2, #0x10
+        mov     r8, r2
+
+        ldrh    r6, [r0, #0x26]
+        ldrh    r0, [r0, #0x22]
+        add     r6, r6, r0
+        lsl     r6, r6, #0x10
+        lsr     r6, r6, #0x10
+
+        compared to doing the same to a local variable, where there was no change at
+        all. It's more similar to the actual ASM, but not quite, telling us that
+        something did indeed poke xDiff, but not through mathematical statements.
+        The only ideal possibility to turn to in this situation now would be an if
+        statement.
+    */
+    if (xDiff)
+    {
+        /*
+            if (xDiff) by itself won't match, so something needs to
+            be in here.
+
+            Virtually nothing what you are about to see is in the
+            assembly, you just have to to come up a strange variety
+            of compile time scenarios, question reality, and see if
+            something happens.
+        */
+        u8 unk = -unk; // ...this is what I came up with. It matches.
+        // i = -i; // This matches too. It might just work on any uninitialized.
+    }
+
+    randomSomethingY = yDiff + (Random() % 10) - 5;
+    randomSomethingX = -xDiff + (Random() % 10) - 5;
 
     for (i = 0; i <= 0; i++)
     {
@@ -1702,184 +1777,3 @@ void sub_80D4D64(struct Sprite *sprite, int xDiff, int yDiff)
             gSprites[spriteId].data[2] = randomSomethingX;
     }
 }
-#else
-NAKED
-void sub_80D4D64(struct Sprite *sprite, int xDiff, int yDiff)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x18\n\
-	adds r4, r1, 0\n\
-	adds r5, r2, 0\n\
-	movs r2, 0x2E\n\
-	ldrsh r1, [r0, r2]\n\
-	lsrs r2, r1, 31\n\
-	adds r1, r2\n\
-	lsls r1, 15\n\
-	lsrs r1, 16\n\
-	str r1, [sp]\n\
-	ldrh r1, [r0, 0x24]\n\
-	ldrh r3, [r0, 0x20]\n\
-	adds r1, r3\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r8, r1\n\
-	ldrh r1, [r0, 0x26]\n\
-	ldrh r0, [r0, 0x22]\n\
-	adds r1, r0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r10, r1\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	adds r0, r5, r0\n\
-	subs r0, 0x5\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r9, r0\n\
-	bl Random\n\
-	negs r4, r4\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	adds r4, r0\n\
-	subs r4, 0x5\n\
-	lsls r4, 16\n\
-	lsrs r7, r4, 16\n\
-	movs r6, 0\n\
-	mov r0, r8\n\
-	lsls r0, 16\n\
-	mov r8, r0\n\
-	mov r1, r10\n\
-	lsls r1, 16\n\
-	str r1, [sp, 0xC]\n\
-	ldr r2, [sp]\n\
-	lsls r2, 16\n\
-	str r2, [sp, 0x10]\n\
-	asrs r1, 16\n\
-	lsls r0, r7, 16\n\
-	asrs r5, r0, 16\n\
-	str r0, [sp, 0x14]\n\
-	negs r3, r5\n\
-	str r3, [sp, 0x4]\n\
-	asrs r0, r2, 16\n\
-	adds r1, r0\n\
-	lsls r1, 16\n\
-	mov r10, r1\n\
-_080D4DF2:\n\
-	ldr r0, =gSpriteTemplate_83D9420\n\
-	mov r2, r8\n\
-	asrs r1, r2, 16\n\
-	mov r3, r10\n\
-	asrs r2, r3, 16\n\
-	movs r3, 0x82\n\
-	bl CreateSprite\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	ldr r1, =gSprites\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r4, r0, r1\n\
-	movs r0, 0x14\n\
-	strh r0, [r4, 0x2E]\n\
-	mov r0, r9\n\
-	strh r0, [r4, 0x30]\n\
-	ldr r0, =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSubpriority\n\
-	subs r0, 0x1\n\
-	adds r1, r4, 0\n\
-	adds r1, 0x43\n\
-	strb r0, [r1]\n\
-	cmp r5, 0\n\
-	bge _080D4E40\n\
-	mov r1, sp\n\
-	ldrh r1, [r1, 0x4]\n\
-	strh r1, [r4, 0x32]\n\
-	b _080D4E42\n\
-	.align 2, 0\n\
-	.pool\n\
-_080D4E40:\n\
-	strh r7, [r4, 0x32]\n\
-_080D4E42:\n\
-	lsls r0, r6, 16\n\
-	movs r2, 0x80\n\
-	lsls r2, 9\n\
-	adds r0, r2\n\
-	lsrs r6, r0, 16\n\
-	cmp r0, 0\n\
-	ble _080D4DF2\n\
-	movs r6, 0\n\
-	ldr r3, [sp, 0xC]\n\
-	asrs r1, r3, 16\n\
-	ldr r0, [sp, 0x14]\n\
-	asrs r5, r0, 16\n\
-	negs r2, r5\n\
-	str r2, [sp, 0x8]\n\
-	ldr r3, [sp, 0x10]\n\
-	asrs r0, r3, 16\n\
-	subs r1, r0\n\
-	lsls r1, 16\n\
-	mov r10, r1\n\
-_080D4E68:\n\
-	ldr r0, =gSpriteTemplate_83D9420\n\
-	mov r2, r8\n\
-	asrs r1, r2, 16\n\
-	mov r3, r10\n\
-	asrs r2, r3, 16\n\
-	movs r3, 0x82\n\
-	bl CreateSprite\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	ldr r1, =gSprites\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r4, r0, r1\n\
-	movs r0, 0x14\n\
-	strh r0, [r4, 0x2E]\n\
-	mov r0, r9\n\
-	strh r0, [r4, 0x30]\n\
-	ldr r0, =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSubpriority\n\
-	subs r0, 0x1\n\
-	adds r1, r4, 0\n\
-	adds r1, 0x43\n\
-	strb r0, [r1]\n\
-	cmp r5, 0\n\
-	ble _080D4EB8\n\
-	mov r1, sp\n\
-	ldrh r1, [r1, 0x8]\n\
-	strh r1, [r4, 0x32]\n\
-	b _080D4EBA\n\
-	.align 2, 0\n\
-	.pool\n\
-_080D4EB8:\n\
-	strh r7, [r4, 0x32]\n\
-_080D4EBA:\n\
-	lsls r0, r6, 16\n\
-	movs r2, 0x80\n\
-	lsls r2, 9\n\
-	adds r0, r2\n\
-	lsrs r6, r0, 16\n\
-	cmp r0, 0\n\
-	ble _080D4E68\n\
-	add sp, 0x18\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n");
-}
-#endif
