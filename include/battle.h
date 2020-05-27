@@ -130,8 +130,8 @@ struct ProtectStruct
     u32 free : 4;
     /*field3*/
     u32 field3 : 8;
-    u32 physicalDmg;
-    u32 specialDmg;
+    s32 physicalDmg;
+    s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u16 fieldE;
