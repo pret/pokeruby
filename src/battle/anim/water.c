@@ -47,7 +47,7 @@ void sub_80D4BF0(struct Sprite *sprite);
 void sub_80D4C18(struct Sprite *);
 void sub_80D4CEC(struct Sprite *);
 void sub_80D4C64(struct Sprite *sprite);
-void sub_80D4D64(struct Sprite*, int, int);
+void sub_80D4D64(struct Sprite*, s32, s32);
 void sub_80E1864(u8);
 static void sub_80D3874(struct Sprite *sprite);
 
@@ -1701,7 +1701,7 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
     /*
         Then goes back to normal at this exact point. Something must have existed here
         that lined up regalloc properly. Whatever it was, it's not the traditional if
-        (0) or do {} while (0). Nor is it var++--. It's something completely obscene.
+        (0) or do {} while (0). Nor is it localvar++--. It's something completely obscene.
 
         Upon random experiments, there was an observation about how parameters affected
         regalloc in ways more bizarre than local variables. xDiff++; xDiff--; had actually
@@ -1747,6 +1747,7 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
             of compile time scenarios, question reality, and see if
             something happens.
         */
+        // This absolutely needs to be a negation of some kind.
         u8 unk = -unk; // ...this is what I came up with. It matches.
         // i = -i; // This matches too. It might just work on any uninitialized.
     }
