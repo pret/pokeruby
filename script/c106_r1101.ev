@@ -1,0 +1,232 @@
+//====================================================================
+//							c106_r1101
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r1101_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							受け付け嬢								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_c106_r1101
+	_EASY_OBJ_MSG	msg_workerw2_01_p01_c106_r1101
+	_END
+
+
+/********************************************************************/
+/*							受け付け嬢								*/
+/********************************************************************/
+/*
+// ●ウェイト手打ち
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p20_kuzi
+msg_uketuke_01_p20_kuzi:
+	.byte	de_,ha_,spc_,ku_,zi_,wo_,spc_,hi_,i_,te_,spc_,ku_,da_,sa_,i_
+	.byte	CR_
+	.byte	tenten_,CTRL_,C_WAIT_,0x39,tenten_,CTRL_,C_WAIT_,0x39,tenten_,CTRL_,C_WAIT_,0x39
+	.byte	EOM_
+// ■□□□□□□□□□□□□□□□□□□□□■
+*/
+
+SCRIPT_LABEL	ev_workerw2_02_p01_c106_r1101
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME		//ゲーム内時間＆関連フラグ更新
+
+	//ストックしているアイテムがあるか
+	_IFVAL_JUMP		WK_POKELOT_PRIZE,NE,0,get_stock_item_kuzi
+
+	//ポケモンくじをすでに引いたか
+	_IF_FLAGON_JUMP	TMFLG_POKEMON_LOT,ev_workerw2_02_p02_c106_r1101
+
+	_TALK_YES_NO	msg_uketuke_01_p01_kuzi
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_kuzi_01_p01
+
+	//一日一回フラグを立てる
+	_FLAG_SET		TMFLG_POKEMON_LOT
+
+	_TALKMSG		msg_uketuke_01_p20_kuzi
+	_TALK_WAIT
+
+	//当たり番号取得(ANSWORK)
+	_PROGRAM		GET_LOT_NUM
+	_LDWK			TMPWK0,ANSWORK
+
+	//_GET_NUM_MSG	0,ANSWORK
+	_PROGRAM		GET_LOT_NUM_MSG
+	_TALK_KEYWAIT	msg_uketuke_01_p05_kuzi
+
+	_SET_OBJ_ANIME	WORKERW2_02_C106_R1101,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//パソコン確認アニメ
+	_SE				SE_PC_ON
+	_PROGRAM		ADD_NOTE_ANIME
+
+	//すべてのIDを見る
+	_PROGRAM		CHK_LOT_NUM
+
+	_TIME_WAIT		220
+
+	_PROGRAM		DEL_NOTE_ANIME
+
+	_TIME_WAIT		10
+
+	_SET_OBJ_ANIME	WORKERW2_02_C106_R1101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//はずれ
+	_IFVAL_JUMP		PARAM0,EQ,FALSE,hazure_kuzi_01
+
+	//記録カウントアップ
+	_INC_RECORD		CNT_POKE_LOTO
+
+	//当たりのポケモンが手持ちかパソコンか
+	_IFVAL_CALL		PARAM2,EQ,0,temoti_atari_kuzi
+	_IFVAL_CALL		PARAM2,EQ,1,paso_atari_kuzi
+
+	//当たり桁数によってメッセージ分岐
+	_GET_ITEMNAME	0,PARAM1
+	_IFVAL_CALL		PARAM0,EQ,1,atari_2_keta_kuzi
+	_IFVAL_CALL		PARAM0,EQ,2,atari_3_keta_kuzi
+	_IFVAL_CALL		PARAM0,EQ,3,atari_4_keta_kuzi
+	_IFVAL_CALL		PARAM0,EQ,4,atari_5_keta_kuzi
+
+	_ITEM_EVENT		PARAM1,1
+	_IF_ZERO_JUMP	get_fail_kuzi_hozon
+
+	_JUMP			end_kuzi_01
+	_END
+
+//当たりのポケモンが手持ち
+temoti_atari_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p06_kuzi
+	_RET
+
+//当たりのポケモンがパソコン
+paso_atari_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p07_kuzi
+	_RET
+
+//ポケモンくじをすでに引いた
+ev_workerw2_02_p02_c106_r1101:
+	_TALK_KEYWAIT	msg_uketuke_01_p02_kuzi
+	_TALK_OBJ_END
+	_END
+
+//くじを引かない
+no_kuzi_01_p01:
+	_TALK_KEYWAIT	msg_uketuke_01_p03_kuzi
+	_TALK_OBJ_END
+	_END
+
+//はずれを引いた
+hazure_kuzi_01:
+	_TALK_KEYWAIT	msg_uketuke_01_p08_kuzi
+	_JUMP			end_kuzi_01
+	_END
+
+//終了処理
+end_kuzi_01:
+	_TALK_KEYWAIT	msg_uketuke_01_p15_kuzi
+	_TALK_OBJ_END
+	_END
+
+//当たり２桁
+atari_2_keta_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p09_kuzi
+	_RET
+
+//当たり３桁
+atari_3_keta_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p10_kuzi
+	_RET
+
+//当たり４桁
+atari_4_keta_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p11_kuzi
+	_RET
+
+//当たり５桁
+atari_5_keta_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p12_kuzi
+	_RET
+
+//次に来たときにアイテム貰えるように保存しておく
+get_fail_kuzi_hozon:
+	_LDWK			WK_POKELOT_PRIZE,PARAM1
+	_JUMP			get_fail_kuzi
+	_END
+
+//どうぐがいっぱい
+get_fail_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p13_kuzi
+	_TALK_OBJ_END
+	_END
+
+//ストックしているアイテムを貰う
+get_stock_item_kuzi:
+	_TALK_KEYWAIT	msg_uketuke_01_p14_kuzi
+
+	_ITEM_EVENT		WK_POKELOT_PRIZE,1
+	_IF_ZERO_JUMP	get_fail_kuzi
+
+	//クリアする
+	_LDVAL			WK_POKELOT_PRIZE,0
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								おばさん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew2_01_p01_c106_r1101
+	_EASY_OBJ_MSG	msg_middlew2_01_p01_c106_r1101
+	_END
+
+
+/********************************************************************/
+/*								お嬢								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou2_01_p01_c106_r1101
+	_EASY_OBJ_MSG	msg_ojyou2_01_p01_c106_r1101
+	_END
+
+/********************************************************************/
+/*								おじさん２							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_c106_r1101
+	_EASY_OBJ_MSG	msg_middlem2_01_p01_c106_r1101
+	_END
+
+
+/********************************************************************/
+/*								マリルリ							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_mariruri_01_p01_c106_r1101
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_MARIRURI,0
+	_TALK_KEYWAIT	msg_mariruri_01_p01_c106_r1101
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_c106_r1101
+	_EASY_MSG	msg_kanban_01_p01_c106_r1101
+	_END
+
+

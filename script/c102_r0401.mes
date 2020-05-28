@@ -1,0 +1,356 @@
+// カイナシティ　ポケモンだいすきクラブ
+
+
+// ●大好きクラブ会長
+// ●話しかけ１回目　　　　→msg_gentlem1_01_p01_c102_r0401:
+// ●話しかけ２回目以降　　→msg_gentlem1_01_p02_c102_r0401:
+// ●全てのアイテム入手後　→msg_gentlem1_01_p12_c102_r0401:
+
+// ●話しかけ１回目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c102_r0401
+msg_gentlem1_01_p01_c102_r0401:
+	.byte	U_,OO_,TTU_,HO_,N_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ga_,spc_,PO_,KE_,MO_,N_,spc_,da_,i_,su_,ki_,KU_,RA_,BU_,de_
+	.byte	CR_
+	.byte	i_,ti_,ba_,bou_,n_,spc_,e_,ra_,i_,spc_,ka_,i_,ti_,yyo_,u_,spc_,de_,su_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,ta_,ttu_,te_,spc_,ka_,i_,ti_,yyo_,u_,spc_,de_,su_,ka_,ra_,na_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,so_,da_,te_,sa_,se_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,gi_,ni_,spc_,de_,ru_,mo_,no_,spc_,na_,si_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,n_,na_,spc_,KO_,N_,TE_,SU_,TO_,de_,mo_
+	.byte	CR_
+	.byte	yu_,u_,si_,yyo_,u_,spc_,ka_,ku_,zi_,tu_,spc_,na_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,si_,spc_,so_,re_,de_,ha_,spc_,ho_,ka_,no_,spc_,mi_,na_,sa_,ma_,no_
+	.byte	CR_
+	.byte	ta_,no_,si_,mi_,wo_,spc_,u_,ba_,ttu_,te_,spc_,si_,ma_,i_,ma_,su_,ka_,ra_,na_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,ha_,spc_,ko_,ko_,de_,spc_,mi_,na_,sa_,n_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	mi_,sa_,se_,te_,spc_,i_,ta_,da_,ku_,da_,ke_,ni_,spc_,si_,te_,o_,ru_,no_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,bou_,spc_,hi_,to_,no_,spc_,so_,da_,te_,ta_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	ha_,i_,ke_,n_,spc_,su_,ru_,no_,ha_,spc_,ta_,no_,si_,i_,spc_,de_,su_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ti_,n_,to_,spc_,so_,da_,te_,ra_,re_,ta_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	si_,a_,wa_,se_,so_,u_,na_,spc_,ka_,o_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,wo_,spc_,mi_,tu_,me_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	ya_,sa_,si_,ge_,na_,spc_,hi_,to_,mi_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,bou_,spc_,si_,a_,wa_,se_,de_
+	.byte	CR_
+	.byte	mu_,ne_,ga_,spc_,i_,ttu_,pa_,i_,ni_,spc_,na_,ri_,ma_,su_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ttu_,to_,spc_,si_,tu_,re_,i_,gyoe_,spc_,tu_,i_,tu_,i_
+	.byte	CR_
+	.byte	ha_,na_,si_,ga_,spc_,na_,ga_,ku_,na_,ttu_,te_,spc_,si_,ma_,i_,ma_,si_,ta_,na_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,sa_,ttu_,so_,ku_,spc_,ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	do_,re_,ho_,do_,spc_,so_,da_,ttu_,te_,i_,ru_,no_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,i_,ke_,n_,spc_,sa_,se_,te_,spc_,mo_,ra_,i_,ma_,su_,ka_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて　msg_gentlem1_01_p03_c102_r0401:
+
+// ●話しかけ２回目以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_c102_r0401
+msg_gentlem1_01_p02_c102_r0401:
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,spc_,so_,da_,ttu_,te_,spc_,ma_,su_,ka_,na_,hate_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,ha_,i_,ke_,n_,spc_,sa_,se_,te_,spc_,mo_,ra_,i_,ma_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて　msg_gentlem1_01_p03_c102_r0401:
+
+// ●ポケモンのチェック
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p03_c102_r0401
+msg_gentlem1_01_p03_c102_r0401:
+	.byte	hu_,mu_,hu_,mu_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,ru_,ho_,do_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●手持ちリスト先頭のポケモンのコンテスト用ステータスをチェック
+// 　かっこよさ、うつくしさ、かわいさ、かしこさ、たくましさのステータスのどれかが
+// 　２００以上ならアイテムがもらえます
+// ●アイテムもらえない　　　　　　　→msg_gentlem1_01_p04_c102_r0401:
+// ●アイテムもらえるがバッグが一杯　→msg_gentlem1_01_p05_c102_r0401:
+// ●アイテムもらえる　　　　　　　　→msg_gentlem1_01_p06_c102_r0401:
+
+// ●アイテムもらえない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p04_c102_r0401
+msg_gentlem1_01_p04_c102_r0401:
+	.byte	hu_,mu_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,ru_,ku_,ha_,spc_,na_,i_,n_,da_,ga_,spc_,yo_,ku_,mo_,na_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ya_,no_,spc_,TO_,RE_,bou_,NA_,bou_,de_,a_,ru_,spc_,ki_,mi_,no_
+	.byte	CR_
+	.byte	do_,ri_,yyo_,ku_,ga_,spc_,hi_,tu_,yo_,u_,spc_,de_,su_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,to_,e_,ba_,spc_,mo_,ttu_,to_,spc_,ta_,ku_,sa_,n_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,a_,ge_,ru_,no_,ha_,spc_,do_,u_,de_,su_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アイテムもらえるがバッグが一杯
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p05_c102_r0401
+msg_gentlem1_01_p05_c102_r0401:
+	.byte	a_,ra_,ra_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ke_,ttu_,ko_,u_,spc_,PO_,KE_,MO_,N_,ga_,spc_,so_,da_,ttu_,te_,i_,ru_,no_,de_
+	.byte	CR_
+	.byte	i_,i_,mo_,no_,wo_,spc_,a_,ge_,yo_,u_,to_,spc_,o_,mo_,ttu_,ta_,no_,de_,su_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,ti_,mo_,no_,ga_,spc_,i_,ttu_,pa_,i_,spc_,de_,su_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アイテムもらえる
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p06_c102_r0401
+msg_gentlem1_01_p06_c102_r0401:
+	.byte	ki_,mi_,no_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,de_,su_,ga_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,mi_,go_,to_,ni_,spc_,so_,da_,ttu_,te_,spc_,o_,ri_,ma_,su_,na_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ya_,bou_,spc_,ta_,i_,si_,ta_,spc_,mo_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,ko_,no_,spc_,do_,u_,gu_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,a_,ge_,ta_,na_,ra_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,so_,da_,tu_,ko_,to_,spc_,ma_,ti_,ga_,i_,na_,si_,gyoe_,spc_,de_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝手持ちリスト先頭のポケモン
+// ●かっこよさ　→「あかいバンダナ」　（No254）入手後→　msg_gentlem1_01_p07_c102_r0401:
+// ●うつくしさ　→「あおいバンダナ」　（No255）入手後→　msg_gentlem1_01_p08_c102_r0401:
+// ●かわいさ　　→「ピンクのバンダナ」（No256）入手後→　msg_gentlem1_01_p09_c102_r0401:
+// ●かしこさ　　→「みどりのバンダナ」（No257）入手後→　msg_gentlem1_01_p10_c102_r0401:
+// ●たくましさ　→「きいろのバンダナ」（No258）入手後→　msg_gentlem1_01_p11_c102_r0401:
+// ●同時に複数の条件を満たしているときは
+// 　かっこよさ＞うつくしさ＞かわいさ＞かしこさ＞たくましさ
+// 　の順番で処理してください
+// ●アイテムをもらえるのは１度に１個です
+
+// ●「かっこよさアイテム」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p07_c102_r0401
+msg_gentlem1_01_p07_c102_r0401:
+	.byte	so_,no_,spc_,a_,ka_,i_,BA_,N_,DA_,NA_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ka_,ttu_,ko_,yo_,sa_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,n_,na_,ni_,spc_,mi_,to_,me_,sa_,se_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「うつくしさアイテム」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p08_c102_r0401
+msg_gentlem1_01_p08_c102_r0401:
+	.byte	so_,no_,spc_,a_,o_,i_,BA_,N_,DA_,NA_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,u_,tu_,ku_,si_,sa_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ma_,yo_,ri_,spc_,ki_,wa_,da_,ta_,se_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「かわいさアイテム」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p09_c102_r0401
+msg_gentlem1_01_p09_c102_r0401:
+	.byte	so_,no_,spc_,PI_,N_,KU_,no_,BA_,N_,DA_,NA_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ka_,wa_,i_,sa_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,hi_,ki_,da_,su_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「かしこさアイテム」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p10_c102_r0401
+msg_gentlem1_01_p10_c102_r0401:
+	.byte	so_,no_,spc_,mi_,do_,ri_,no_,BA_,N_,DA_,NA_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ka_,si_,ko_,sa_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ra_,ni_,spc_,mi_,ga_,ku_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「たくましさアイテム」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p11_c102_r0401
+msg_gentlem1_01_p11_c102_r0401:
+	.byte	so_,no_,spc_,ki_,i_,ro_,no_,BA_,N_,DA_,NA_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ta_,ku_,ma_,si_,sa_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ttu_,so_,u_,spc_,A_,PI_,bou_,RU_,spc_,de_,ki_,ma_,su_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●全てのアイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p12_c102_r0401
+msg_gentlem1_01_p12_c102_r0401:
+	.byte	ki_,mi_,ni_,spc_,a_,ge_,ru_,spc_,do_,u_,gu_,ha_
+	.byte	CR_
+	.byte	mo_,u_,spc_,na_,ni_,mo_,spc_,na_,i_,de_,su_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,si_,ro_,spc_,do_,u_,gu_,ni_,spc_,ta_,yo_,ra_,n_,de_,mo_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,so_,da_,te_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,i_,no_,u_,ha_,spc_,BA_,TU_,GU_,N_,spc_,de_,su_,ka_,ra_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●女性２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c102_r0401
+msg_woman2_01_p01_c102_r0401:
+	.byte	wa_,ta_,si_,spc_,PO_,KE_,MO_,N_,ga_,spc_,na_,tu_,i_,te_,i_,ru_
+	.byte	CR_
+	.byte	su_,ga_,ta_,wo_,spc_,mi_,ru_,no_,ga_,spc_,su_,ki_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ttu_,te_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,i_,ru_
+	.byte	CR_
+	.byte	hi_,to_,no_,spc_,ki_,mo_,ti_,ni_,spc_,su_,go_,ku_,spc_,bi_,n_,ka_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ga_,spc_,PO_,KE_,MO_,N_,wo_,spc_,da_,i_,zi_,ni_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,a_,na_,ta_,ni_,spc_,na_,tu_,i_,te_,ku_,re_,ru_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,a_,na_,ta_,ni_,spc_,na_,tu_,i_,ta_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ni_,mo_,spc_,mi_,se_,te_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●先頭のポケモンのなつき度が１５０以上なら続けて　→msg_woman2_01_p02_c102_r0401:
+
+// ●先頭のポケモンのなつき度が１５０以上
+// ●「！」マーク表示後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p02_c102_r0401
+msg_woman2_01_p02_c102_r0401:
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	a_,na_,ta_,ni_,spc_,na_,tu_,i_,te_,i_,ru_,no_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,ya_,sa_,si_,i_,spc_,TO_,RE_,bou_,NA_,bou_,sa_,n_,ni_
+	.byte	CR_
+	.byte	da_,i_,su_,ki_,KU_,RA_,BU_,ka_,ra_,no_,spc_,o_,ku_,ri_,mo_,no_,spc_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「やすらぎのスズ」（No184）入手処理
+
+// ●アイテム入手後に話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p03_c102_r0401
+msg_woman2_01_p03_c102_r0401:
+	.byte	PO_,KE_,MO_,N_,ttu_,te_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,i_,ru_
+	.byte	CR_
+	.byte	hi_,to_,no_,spc_,ki_,mo_,ti_,ni_,spc_,su_,go_,ku_,spc_,bi_,n_,ka_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ga_,spc_,PO_,KE_,MO_,N_,wo_,spc_,da_,i_,zi_,ni_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,a_,na_,ta_,ni_,spc_,na_,tu_,i_,te_,ku_,re_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●おやじ１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c102_r0401
+msg_middlem1_01_p01_c102_r0401:
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,ni_,spc_,ma_,ke_,te_
+	.byte	CR_
+	.byte	hi_,n_,si_,ni_,spc_,sa_,se_,te_,spc_,ba_,ka_,ri_,da_,to_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,do_,n_,do_,n_,spc_,su_,sa_,n_,de_
+	.byte	SCROLL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,ko_,to_,spc_,u_,ta_,ga_,u_,spc_,yo_,u_,ni_,na_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ma_,ri_,spc_,na_,tu_,i_,te_,spc_,ku_,re_,na_,ku_,na_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou1_01_p01_c102_r0401
+msg_ojyou1_01_p01_c102_r0401:
+	.byte	PO_,KE_,MO_,N_,ttu_,te_,spc_,do_,u_,gu_
+	.byte	CR_
+	.byte	tu_,ka_,ttu_,te_,mo_,ra_,u_,no_,ga_,spc_,su_,ki_,na_,no_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,TA_,U_,RI_,N_,to_,ka_,spc_,a_,ge_,ru_,to_
+	.byte	CR_
+	.byte	su_,go_,ku_,spc_,u_,re_,si_,so_,u_,ni_,spc_,su_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ポケモン・エネコ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_eneco_01_p01_c102_r0401
+msg_eneco_01_p01_c102_r0401:
+	.byte	E_,NE_,KO_,kako2_,hu_,ni_,yya_,a_,bou_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にエネコの鳴き声をならす
+
+// ●ポケモン・ジグザグマ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_jiguma_01_p01_c102_r0401
+msg_jiguma_01_p01_c102_r0401:
+	.byte	ZI_,GU_,ZA_,GU_,MA_,kako2_,KI_,YYU_,U_,U_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にジグザグマの鳴き声をならす
+
+// ●ポケモン・マリルリ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mariruri_01_p01_c102_r0401
+msg_mariruri_01_p01_c102_r0401:
+	.byte	MA_,RI_,RU_,RI_,kako2_,MA_,RI_,spc_,MA_,RI_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にマリルリの鳴き声をならす

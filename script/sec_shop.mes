@@ -1,0 +1,315 @@
+// ●ＴＶの安売りの時限定、買い物の放送（今は普通でもやる）
+// ●＠０　主人公の名前
+// ●＠１　町の名前
+// ●ＴＶ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_buy
+msg_TV_01_p01_buy:
+	.byte	ko_,n_,ni_,ti_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	kako2_,ki_,yyo_,u_,no_,spc_,ka_,i_,mo_,no_,spc_,zi_,yyo_,u_,zu_,kakot2_,no_
+	.byte	CR_
+	.byte	zi_,ka_,n_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,mi_,na_,sa_,n_,spc_,o_,ge_,n_,ki_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,I_MSG_,STR_TEMP_BUF1,no_
+	.byte	CR_
+	.byte	o_,mi_,se_,ni_,spc_,ki_,te_,i_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,i_,ki_,n_,spc_,na_,ni_,ga_,spc_,u_,re_,te_,i_,ru_,no_,ka_
+	.byte	CR_
+	.byte	TI_,EE_,TTU_,KU_,spc_,si_,te_,mi_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●個数が２５４以下なら→msg_TV_01_p02_buy
+// ●個数が２５５以上なら→msg_TV_01_p12_buy
+
+// ●＠０　主人公の名前
+// ●＠１　商品名１
+// ●＠２　商品名１を買った数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_buy
+msg_TV_01_p02_buy:
+	.byte	so_,re_,de_,ha_,spc_,te_,n_,i_,n_,sa_,n_,ni_
+	.byte	CR_
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,spc_,si_,te_,mi_,ma_,si_,yyo_,u_
+	.byte	SCROLL_WAIT_
+	.byte	do_,u_,de_,su_,ka_,spc_,u_,re_,te_,spc_,i_,ma_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	te_,n_,i_,n_,kako2_,ha_,i_,spc_,o_,ka_,ge_,sa_,ma_,de_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ku_,ni_,spc_,I_MSG_,STR_TEMP_BUF1,ga_
+	.byte	CR_
+	.byte	i_,ma_,spc_,u_,re_,te_,spc_,i_,ru_,n_,de_,su_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ma_,e_,mo_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,to_,i_,u_
+	.byte	CR_
+	.byte	ka_,ta_,ga_,spc_,I_MSG_,STR_TEMP_BUF2,ko_,mo_,spc_,ka_,ttu_,te_,spc_,i_,ka_,re_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ランダムでえらばれる
+// ●→msg_TV_01_p03_buy
+// ●→msg_TV_01_p04_buy
+// ●→msg_TV_01_p05_buy
+// ●→msg_TV_01_p06_buy
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_buy
+msg_TV_01_p03_buy:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,I_MSG_,STR_TEMP_BUF1,wo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,mo_,spc_,ka_,u_,na_,n_,te_,spc_,su_,go_,i_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,ka_,si_,ta_,ra_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ha_
+	.byte	CR_
+	.byte	ko_,re_,ka_,ra_,spc_,to_,o_,ku_,ma_,de_,spc_,i_,ku_,ta_,me_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,bi_,zi_,ta_,ku_,wo_,spc_,si_,te_,i_,ta_,no_,ka_,mo_,spc_,si_,re_,ma_,se_,n_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ttu_,pa_,ri_,spc_,ta_,bi_,ni_,ha_,spc_,I_MSG_,STR_TEMP_BUF1,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●まだ　買った物があれば　→msg_TV_01_p07_buy
+// ●なければ　→msg_TV_01_p11_buy
+
+
+// ●＠２　＝　＠２より１つ多い数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_buy
+msg_TV_01_p04_buy:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,I_MSG_,STR_TEMP_BUF1,spc_,to_,i_,e_,ba_
+	.byte	CR_
+	.byte	wa_,ta_,si_,spc_,na_,n_,ka_,spc_,ko_,no_,ma_,e_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,mo_,spc_,ka_,i_,ma_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,ttu_,te_,spc_,i_,i_,de_,su_,ka_,ra_,ne_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●まだ　買った物があれば　→msg_TV_01_p07_buy
+// ●なければ　→msg_TV_01_p11_buy
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_buy
+msg_TV_01_p05_buy:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,I_MSG_,STR_TEMP_BUF1,wo_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,mo_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,so_,n_,na_,ni_,spc_,ka_,u_,hi_,to_,ga_
+	.byte	CR_
+	.byte	i_,ru_,na_,n_,te_,spc_,si_,ra_,na_,ka_,ttu_,ta_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,spc_,na_,n_,ka_,spc_,se_,i_,ze_,i_,spc_,n1_,ko_,ka_,spc_,n2_,ko_,si_,ka_
+	.byte	CR_
+	.byte	ka_,wa_,na_,i_,ka_,ra_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●まだ　買った物があれば　→msg_TV_01_p07_buy
+// ●なければ　→msg_TV_01_p11_buy
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p06_buy
+msg_TV_01_p06_buy:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,wa_,ta_,si_,mo_,spc_,mu_,ka_,si_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,ta_,ku_,sa_,n_,spc_,ka_,ttu_,ta_,ko_,to_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ttu_,ta_,n_,spc_,de_,su_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ma_,ttu_,te_,spc_,si_,ma_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,u_,ka_,i_,spc_,si_,ta_,wa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ka_,ra_,to_,spc_,i_,u_,mo_,no_,spc_,hi_,tu_,yo_,u_,na_
+	.byte	CR_
+	.byte	bu_,n_,da_,ke_,spc_,ka_,u_,yo_,u_,ni_,spc_,si_,te_,ru_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ttu_,to_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,no_,spc_,ko_,to_,wo_,spc_,ha_,na_,si_,te_,mo_
+	.byte	CR_
+	.byte	si_,yyo_,u_,ga_,na_,i_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●まだ　買った物があれば　→msg_TV_01_p07_buy
+// ●なければ　→msg_TV_01_p11_buy
+
+
+// ●＠１　商品名２
+// ●＠２　商品名２を買った数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p07_buy
+msg_TV_01_p07_buy:
+	.byte	te_,n_,i_,n_,kako2_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ha_,spc_,so_,no_,ho_,ka_,ni_,mo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,I_MSG_,STR_TEMP_BUF2,ko_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,to_,me_,te_,spc_,ka_,wa_,re_,ma_,si_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,o_,bou_,spc_,I_MSG_,STR_TEMP_BUF1,mo_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,yo_,i_,spc_,de_,su_,mo_,n_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●まだ　買った物があれば　→msg_TV_01_p08_buy
+// ●もし大安売りだったら→msg_TV_01_p09_buy
+// ●なければ　→msg_TV_01_p10_buy
+
+
+
+// ●＠１　商品名３
+// ●＠２　商品名３を買った数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p08_buy
+msg_TV_01_p08_buy:
+	.byte	te_,n_,i_,n_,kako2_,tu_,i_,de_,ni_,spc_,I_MSG_,STR_TEMP_BUF1,mo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,spc_,ka_,wa_,re_,te_,spc_,i_,ki_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし大安売りだったら→msg_TV_01_p09_buy
+// ●なければ　→msg_TV_01_p10_buy
+
+
+// ●もし大安売りだったら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p09_buy
+msg_TV_01_p09_buy:
+	.byte	te_,n_,i_,n_,kako2_,si_,ka_,mo_,spc_,o_,o_,ya_,su_,u_,ri_,no_,spc_,to_,ki_
+	.byte	CR_
+	.byte	de_,su_,ka_,ra_,spc_,sa_,su_,ga_,spc_,de_,su_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし　初めに買ったアイテムが２５５以上だったら→msg_TV_01_p13_buy
+// ●→msg_TV_01_p10_buy
+
+
+// ●＠１　合計金額
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p10_buy
+msg_TV_01_p10_buy:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,u_,bou_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ttu_,te_,spc_,ka_,na_,ri_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,mo_,no_,zi_,yyo_,u_,zu_,spc_,na_,no_,ka_,mo_,spc_,si_,re_,ma_,se_,n_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,de_,spc_,go_,u_,ke_,i_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,e_,n_,gyoe_,hate_
+	.byte	CR_
+	.byte	sa_,su_,ga_,spc_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ttu_,to_,spc_,so_,re_,de_,ha_,spc_,ma_,ta_,zi_,ka_,i_,no_
+	.byte	CR_
+	.byte	ho_,u_,so_,u_,de_,spc_,o_,a_,i_,spc_,si_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p11_buy
+msg_TV_01_p11_buy:
+	.byte	te_,n_,i_,n_,kako2_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ha_,spc_,ho_,n_,to_,u_,ni_
+	.byte	CR_
+	.byte	da_,i_,zi_,na_,spc_,o_,ki_,yya_,ku_,sa_,ma_,spc_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし大安売りだったら→msg_TV_01_p09_buy
+// ●なければ　→msg_TV_01_p10_buy
+
+
+// ●＠０　主人公の名前
+// ●＠１　商品名１
+// ●商品を２５５個以上買った場合
+// ●文章が長くなったので、一つしか商品は紹介されない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p12_buy
+msg_TV_01_p12_buy:
+	.byte	so_,re_,de_,ha_,spc_,te_,n_,i_,n_,sa_,n_,ni_
+	.byte	CR_
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,spc_,si_,te_,spc_,mi_,ma_,si_,yyo_,u_
+	.byte	SCROLL_WAIT_
+	.byte	do_,u_,de_,su_,ka_,spc_,u_,re_,te_,spc_,ma_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	te_,n_,i_,n_,kako2_,ha_,i_,spc_,o_,ka_,ge_,sa_,ma_,de_
+	.byte	CR_
+	.byte	u_,re_,te_,u_,re_,te_,spc_,ko_,ma_,ttu_,te_,spc_,ma_,su_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ma_,e_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,to_,i_,u_,ka_,ta_,ga_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,ta_,ku_,sa_,n_,spc_,ka_,wa_,re_,ma_,si_,te_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,se_,no_,na_,ka_,ni_,spc_,I_MSG_,STR_TEMP_BUF1,ga_
+	.byte	CR_
+	.byte	na_,ku_,na_,ttu_,te_,spc_,si_,ma_,i_,so_,u_,spc_,da_,ttu_,ta_,n_,de_,su_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,ku_,si_,mo_,spc_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,so_,n_,na_,ni_
+	.byte	CR_
+	.byte	ka_,u_,spc_,o_,ki_,yya_,ku_,sa_,ma_,ga_,spc_,i_,ru_,na_,n_,te_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,me_,ni_,mo_,spc_,o_,mo_,i_,ma_,se_,n_,spc_,de_,si_,ta_,spc_,ka_,ra_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,to_,spc_,i_,u_,ko_,to_,ha_,tenten_,tenten_
+	.byte	CR_
+	.byte	n1_,n0_,n0_,ko_,spc_,to_,ka_,spc_,n2_,n0_,n0_,ko_,spc_,to_,ka_,spc_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	te_,n_,i_,n_,kako2_,i_,ya_,spc_,mo_,ttu_,to_,spc_,de_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,u_,hi_,yya_,bou_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ttu_,te_,spc_,su_,go_,i_,spc_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	te_,n_,i_,n_,kako2_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ha_,spc_,ho_,n_,to_,u_,ni_
+	.byte	CR_
+	.byte	da_,i_,zi_,na_,spc_,o_,ki_,yya_,ku_,sa_,ma_,spc_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし大安売りだったら→msg_TV_01_p09_buy
+// ●なければ　→msg_TV_01_p13_buy
+
+
+// ●＠０　主人公の名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p13_buy
+msg_TV_01_p13_buy:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,u_,bou_,n_,spc_,su_,go_,i_,spc_,de_,su_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,na_,n_,de_,spc_,so_,n_,na_,ni_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,spc_,ka_,ttu_,ta_,no_,de_,spc_,si_,yyo_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,zo_,ha_,spc_,hu_,ka_,ma_,ru_,spc_,ba_,ka_,ri_,de_,su_,ga_
+	.byte	CR_
+	.byte	zi_,ka_,n_,no_,spc_,yo_,u_,na_,no_,de_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ta_,zi_,ka_,i_,spc_,o_,a_,i_,spc_,si_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ni_,spc_,si_,te_,mo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ttu_,te_,spc_,na_,zo_,da_,wa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●

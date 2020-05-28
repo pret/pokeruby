@@ -1,0 +1,93 @@
+//====================================================================
+//							field_r107
+//						フィールド・ロード107
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r107_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_04
+	_TRAINER_DATA2	msg_swimmerm_04_01
+	_TRAINER_DATA3	msg_swimmerm_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_04_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_05
+	_TRAINER_DATA2	msg_swimmerm_05_01
+	_TRAINER_DATA3	msg_swimmerm_05_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_swimmerm_05
+	_TRAINER_EASY_MSG	msg_swimmerm_05_03
+	_END
+
+_revenge_swimmerm_05:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_05
+	_TRAINER_DATA2	msg_swimmerm_05_04
+	_TRAINER_DATA3	msg_swimmerm_05_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_05_06
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_04
+	_TRAINER_DATA2	msg_swimmerw_04_01
+	_TRAINER_DATA3	msg_swimmerw_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_04_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_05
+	_TRAINER_DATA2	msg_swimmerw_05_01
+	_TRAINER_DATA3	msg_swimmerw_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_05_03
+	_END
+
+SCRIPT_LABEL	ev_aneotouto_07_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_07
+	_TRAINER_DATA2	msg_aneotouto_07_01
+	_TRAINER_DATA3	msg_aneotouto_07_02
+	_TRAINER_DATA4	msg_aneotouto_07_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aneotouto_07_03
+	_END
+
+SCRIPT_LABEL	ev_aneotouto_07_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_07
+	_TRAINER_DATA2	msg_aneotouto_07_05
+	_TRAINER_DATA3	msg_aneotouto_07_06
+	_TRAINER_DATA4	msg_aneotouto_07_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aneotouto_07_07
+	_END
+

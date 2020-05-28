@@ -1,0 +1,131 @@
+//====================================================================
+//						field_r112
+//					フィールド・ロード112
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r112_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r112
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//					     FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r112:
+	//アクア団charセット
+	_CALL			set_evil_char
+
+	//でこぼこ山を通ったとき天候そのまま
+	_LDVAL			WK_SCENE_CAVE_D0702,0
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_01_p01_field_r112
+	_EASY_OBJ_MSG	msg_aquam1_01_p01_field_r112
+	_END
+
+
+/********************************************************************/
+/*							アクア団２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_02_p01_field_r112
+	_EASY_OBJ_MSG	msg_aquam1_02_p01_field_r112
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r112
+	_EASY_MSG       msg_kanban_01_p01_field_r112
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r112
+	_EASY_MSG       msg_kanban_02_p01_field_r112
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r112
+	_EASY_MSG       msg_kanban_03_p01_field_r112
+	_END
+
+
+/********************************************************************/
+/*							山男１									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_hill1_01_p01_field_r112
+	_EASY_OBJ_MSG	msg_hill1_01_p01_field_r112
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mount_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_01
+	_TRAINER_DATA2	msg_mount_01_01
+	_TRAINER_DATA3	msg_mount_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_01_03
+	_END
+
+SCRIPT_LABEL	ev_mount_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_02
+	_TRAINER_DATA2	msg_mount_02_01
+	_TRAINER_DATA3	msg_mount_02_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_mount_02
+	_TRAINER_EASY_MSG	msg_mount_02_03
+	_END
+
+_revenge_mount_02:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_02
+	_TRAINER_DATA2	msg_mount_02_04
+	_TRAINER_DATA3	msg_mount_02_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_02_06
+	_END
+
+SCRIPT_LABEL	ev_campb_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_03
+	_TRAINER_DATA2	msg_campb_03_01
+	_TRAINER_DATA3	msg_campb_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_03_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_03
+	_TRAINER_DATA2	msg_picnicg_03_01
+	_TRAINER_DATA3	msg_picnicg_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_03_03
+	_END
+

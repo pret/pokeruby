@@ -1,0 +1,77 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_W124	0
+#define EXITNUM_FIELD_W124	0
+#define POSNUM_FIELD_W124	0
+#define BGNUM_FIELD_W124	7
+
+const SXY_BG	BG_field_w124[] =
+{
+	{
+		0x002a,		//Xpos
+		0x0033,		//Ypos
+		0x00,		//Height
+		BG_ITEMPICK,		//Event Type
+		indometasin_8,		//Script
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0028,		//Ypos
+		0x00,		//Height
+		BG_ITEMPICK,		//Event Type
+		midorinokakera_9,		//Script
+	},
+
+	{
+		0x0042,		//Xpos
+		0x0022,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		sinzyu_10,		//Script
+	},
+
+	{
+		0x0040,		//Xpos
+		0x0036,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		ookinasinzyu_11,		//Script
+	},
+
+	{
+		0x0046,		//Xpos
+		0x0040,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		haatonouroko_13,		//Script
+	},
+
+	{
+		0x002a,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		rizotiumu_36,		//Script
+	},
+
+	{
+		0x002d,		//Xpos
+		0x0024,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		haatonouroko_38,		//Script
+	},
+
+};
+
+const SXY_DATA	field_w124_sxy_data =
+{
+OBJNUM_FIELD_W124,			// field obj max
+EXITNUM_FIELD_W124,		// exit max
+POSNUM_FIELD_W124,			// pos event max
+BGNUM_FIELD_W124,			// bg event max
+NULL,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+BG_field_w124,				// bg event data
+};

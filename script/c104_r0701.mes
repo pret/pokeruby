@@ -1,0 +1,28 @@
+// ●カナズミシティ　民家１（街の東）
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c104_r0701
+msg_middlew1_01_p01_c104_r0701:
+	.byte	TO_,RE_,bou_,NA_,bou_,ZU_,spc_,SU_,KU_,bou_,RU_,ha_,spc_,i_,i_,wa_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,so_,ko_,de_,spc_,PO_,KE_,MO_,N_,no_,spc_,be_,n_,ki_,yyo_,u_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	ZI_,MU_,RI_,bou_,DA_,bou_,ni_,spc_,da_,ttu_,te_,spc_,na_,re_,ma_,su_,mo_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c104_r0701
+msg_ojyou2_01_p01_c104_r0701:
+	.byte	ZI_,MU_,RI_,bou_,DA_,bou_,no_,spc_,TU_,TU_,ZI_,spc_,ne_,bou_,ti_,yya_,n_
+	.byte	CR_
+	.byte	su_,ttu_,go_,i_,spc_,PO_,KE_,MO_,N_,spc_,ku_,wa_,si_,ku_,te_
+	.byte	SCROLL_WAIT_
+	.byte	su_,ttu_,go_,i_,spc_,PO_,KE_,MO_,N_,spc_,tu_,yo_,i_,n_,da_,ka_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,36 @@
+// ●海底洞窟
+
+
+// ▼d1106----------------------------------
+// ●アクア団員♂０８：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_08_01
+msg_aquam_08_01:
+	.byte	da_,re_,da_,spc_,o_,ma_,e_,hate_
+	.byte	CR_
+	.byte	do_,ko_,ka_,ra_,spc_,ha_,i_,ttu_,te_,ki_,ta_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂０８：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_08_02
+msg_aquam_08_02:
+	.byte	ma_,ke_,ta_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂０８：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_08_03
+msg_aquam_08_03:
+	.byte	de_,gu_,ti_,ga_,spc_,wa_,ka_,n_,ne_,bou_,n_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,wa_,ga_,ttu_,te_,ru_,spc_,wa_,ke_,zi_,yya_,spc_,ne_,bou_,zo_
+	.byte	CR_
+	.byte	ka_,n_,ti_,ga_,i_,spc_,su_,n_,na_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,79 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_T107_R0101	2
+#define EXITNUM_T107_R0101	2
+#define POSNUM_T107_R0101	0
+#define BGNUM_T107_R0101	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_youngm2_01_p01_t107_r0101[];
+extern const u8	ev_woman2_01_p01_t107_r0101[];
+
+const evObjData	OBJ_t107_r0101[] =
+{
+	{
+		YOUNGM2_01_T107_R0101,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_youngm2_01_p01_t107_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WOMAN2_01_T107_R0101,		//OBJ ID
+		WOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_woman2_01_p01_t107_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_t107_r0101[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_T107_DOOR02,		//Door ID
+		FIELD_T107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_T107_DOOR02,		//Door ID
+		FIELD_T107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	t107_r0101_sxy_data =
+{
+OBJNUM_T107_R0101,			// field obj max
+EXITNUM_T107_R0101,		// exit max
+POSNUM_T107_R0101,			// pos event max
+BGNUM_T107_R0101,			// bg event max
+OBJ_t107_r0101,			// field obj data
+EXIT_t107_r0101,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

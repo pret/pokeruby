@@ -1,0 +1,176 @@
+// ●デコボコ山道
+
+
+// ▼d0702----------------------------------
+// ●山男０７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mount_07_01
+msg_mount_07_01:
+	.byte	e_,n_,to_,tu_,ya_,ma_,no_,spc_,DE_,KO_,BO_,KO_,sa_,n_,do_,u_
+	.byte	CR_
+	.byte	ma_,sa_,ni_,spc_,wa_,ta_,si_,ga_,spc_,mo_,to_,me_,te_,i_,ta_,spc_,ya_,ma_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,no_,spc_,DE_,KO_,BO_,KO_,si_,ta_,spc_,to_,ko_,ro_,ga_,spc_,ta_,ma_,ra_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●山男０７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mount_07_02
+msg_mount_07_02:
+	.byte	ma_,ke_,te_,spc_,ku_,ya_,si_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●山男０７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mount_07_03
+msg_mount_07_03:
+	.byte	ta_,si_,ka_,ni_,spc_,PO_,KE_,MO_,N_,de_,ha_,spc_,ma_,ke_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,ya_,ma_,wo_,spc_,a_,i_,su_,ru_,spc_,ki_,mo_,ti_,na_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,ho_,u_,ga_,spc_,ma_,sa_,ttu_,te_,i_,ru_,da_,ro_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0702----------------------------------
+// ●ピクニックガール０６：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picnicg_06_01
+msg_picnicg_06_01:
+	.byte	ko_,ko_,ha_,spc_,ki_,ga_,ru_,ni_,spc_,no_,bo_,ttu_,te_,spc_,i_,ke_,na_,i_,mo_,no_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,PI_,KU_,NI_,TTU_,KU_,mu_,ki_,spc_,zi_,yya_,na_,i_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ピクニックガール０６：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picnicg_06_02
+msg_picnicg_06_02:
+	.byte	a_,bou_,n_,spc_,mo_,u_,gyoe_
+	.byte	CR_
+	.byte	si_,ta_,ga_,spc_,DE_,KO_,BO_,KO_,da_,ka_,ra_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ピクニックガール０６：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picnicg_06_03
+msg_picnicg_06_03:
+	.byte	ko_,n_,na_,spc_,DE_,KO_,BO_,KO_,si_,ta_,to_,ko_,ro_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,de_,spc_,zi_,yyo_,u_,zu_,ni_,spc_,no_,bo_,ttu_,te_,i_,ku_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,to_,mo_,spc_,i_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0702----------------------------------
+// ●ピクニックガール０６（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picnicg_06_04
+msg_picnicg_06_04:
+	.byte	do_,n_,na_,spc_,mi_,ti_,mo_,spc_,PI_,KU_,NI_,TTU_,KU_,ha_,spc_,ta_,no_,si_,i_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,i_,ttu_,si_,yyo_,spc_,da_,si_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ピクニックガール０６（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picnicg_06_05
+msg_picnicg_06_05:
+	.byte	ma_,ke_,ta_,no_,ha_
+	.byte	CR_
+	.byte	si_,ta_,ga_,spc_,DE_,KO_,BO_,KO_,da_,ka_,ra_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ピクニックガール０６（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picnicg_06_06
+msg_picnicg_06_06:
+	.byte	ma_,ke_,ta_,ko_,to_,ha_,spc_,sa_,ttu_,sa_,to_,spc_,wa_,su_,re_,te_
+	.byte	CR_
+	.byte	ko_,no_,spc_,DE_,KO_,BO_,KO_,mi_,ti_,wo_,spc_,ta_,no_,si_,n_,zi_,yya_,o_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0702----------------------------------
+// ●キャンプボーイ０６：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_campb_06_01
+msg_campb_06_01:
+	.byte	ko_,no_,spc_,DE_,KO_,BO_,KO_,sa_,n_,do_,u_,ha_,spc_,a_,ru_,ki_,ni_,ku_,i_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,ki_,ta_,e_,ru_,no_,ni_,spc_,mu_,i_,te_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キャンプボーイ０６：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_campb_06_02
+msg_campb_06_02:
+	.byte	a_,si_,ba_,wo_,spc_,ki_,ni_,si_,te_,ru_,spc_,u_,ti_,ni_
+	.byte	CR_
+	.byte	o_,wa_,ttu_,ti_,yya_,ttu_,ta_,spc_,ka_,n_,zi_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キャンプボーイ０６：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_campb_06_03
+msg_campb_06_03:
+	.byte	bo_,ku_,mo_,spc_,DA_,bou_,TO_,zi_,te_,n_,si_,yya_,spc_,mo_,ttu_,te_,i_,re_,ba_
+	.byte	CR_
+	.byte	da_,n_,sa_,wo_,spc_,to_,bi_,ko_,e_,te_,spc_,i_,ke_,ru_,no_,ni_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0702----------------------------------
+// ●キャンプボーイ０６（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_campb_06_04
+msg_campb_06_04:
+	.byte	DE_,KO_,BO_,KO_,ni_,spc_,na_,re_,ti_,yya_,ttu_,ta_,ka_,ra_
+	.byte	CR_
+	.byte	ti_,ka_,go_,ro_,da_,to_,spc_,u_,ta_,i_,na_,ga_,ra_,spc_,no_,bo_,ru_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キャンプボーイ０６（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_campb_06_05
+msg_campb_06_05:
+	.byte	ya_,ttu_,pa_,ri_,spc_,DE_,KO_,BO_,KO_,da_,to_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,i_,ni_,ku_,i_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キャンプボーイ０６（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_campb_06_06
+msg_campb_06_06:
+	.byte	bo_,ku_,mo_,spc_,KI_,N_,SE_,TU_,de_,spc_,KA_,ZE_,NO_,sa_,n_,ka_,ra_
+	.byte	CR_
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,spc_,mo_,ra_,o_,u_,ka_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

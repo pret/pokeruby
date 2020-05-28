@@ -1,0 +1,40 @@
+// ●115番道路　フィールド
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_field_r115
+msg_woman1_01_p01_field_r115:
+	.byte	do_,u_,ku_,tu_,no_,spc_,na_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	ku_,sa_,mu_,ra_,no_,spc_,a_,ru_,spc_,do_,u_,ro_,to_,spc_,ti_,ga_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	i_,tu_,spc_,PO_,KE_,MO_,N_,ga_,spc_,to_,bi_,da_,si_,te_,spc_,ku_,ru_,no_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ra_,na_,i_,ka_,ra_,spc_,DO_,KI_,DO_,KI_,spc_,si_,ti_,yya_,u_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●カナズミ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r115
+msg_kanban_01_p01_field_r115:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n5_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowD__,spc_,KA_,NA_,ZU_,MI_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トンネル入口の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r115
+msg_kanban_02_p01_field_r115:
+	.byte	ko_,ko_,ha_,spc_,ri_,yyu_,u_,se_,i_,no_,ta_,ki_
+	.byte	CR_
+	.byte	to_,o_,ri_,nu_,ke_,ru_,to_,spc_,HA_,ZI_,TU_,GE_,TA_,U_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

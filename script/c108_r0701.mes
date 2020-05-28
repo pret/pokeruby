@@ -1,0 +1,61 @@
+// ●ルネシティ　民家６（街の東側・上から３番目）
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c108_r0701
+msg_woman1_01_p01_c108_r0701:
+	.byte	wa_,bou_,spc_,hi_,sa_,si_,bu_,ri_,no_,spc_,o_,ki_,yya_,ku_,sa_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,da_,ka_,spc_,u_,re_,si_,i_,ka_,ra_
+	.byte	CR_
+	.byte	HO_,E_,RU_,KO_,no_,spc_,o_,o_,ki_,i_,spc_,nu_,i_,gu_,ru_,mi_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　　　　　　　　→msg_woman1_01_p02_c108_r0701:
+// ●「はい」だがパソコン一杯→msg_woman1_01_p03_c108_r0701:
+// ●「いいえ」　　　　　　　→msg_woman1_01_p04_c108_r0701:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p02_c108_r0701
+msg_woman1_01_p02_c108_r0701:
+	.byte	da_,i_,zi_,ni_,spc_,si_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●おおきいぬいぐるみのホエルコ
+// ●アイテム入手ナレーション
+
+// ●「はい」だがパソコン一杯
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p03_c108_r0701
+msg_woman1_01_p03_c108_r0701:
+	.byte	ho_,si_,i_,ke_,do_,spc_,i_,ma_,ha_,spc_,DA_,ME_,hate_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,a_,zu_,ka_,ttu_,te_,o_,i_,te_,spc_,a_,ge_,ru_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p04_c108_r0701
+msg_woman1_01_p04_c108_r0701:
+	.byte	so_,u_,na_,no_,hate_
+	.byte	CR_
+	.byte	nu_,i_,gu_,ru_,mi_,spc_,ho_,si_,ku_,na_,i_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p05_c108_r0701
+msg_woman1_01_p05_c108_r0701:
+	.byte	a_,ta_,si_,spc_,nu_,i_,gu_,ru_,mi_,spc_,da_,i_,su_,ki_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

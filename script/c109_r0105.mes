@@ -1,0 +1,261 @@
+// ●ポケモンリーグ　第５の部屋
+
+
+// ●ダイゴ（チャンピオン）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p01_c109_r0105
+msg_daigo_01_p01_c109_r0105:
+	.byte	DA_,I_,GO_,kako2_,yo_,u_,ko_,so_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	NORMAL_WAIT_
+	.byte	i_,tu_,spc_,ki_,mi_,ga_,spc_,ko_,ko_,ma_,de_,spc_,ku_,ru_,no_,ka_
+	.byte	CR_
+	.byte	ta_,no_,si_,mi_,ni_,spc_,si_,te_,i_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,tenten_,tenten_,spc_,PO_,KE_,MO_,N_,to_,spc_,ta_,bi_,wo_,si_,te_
+	.byte	CR_
+	.byte	na_,ni_,wo_,spc_,mi_,te_,ki_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ku_,sa_,n_,no_,spc_,TO_,RE_,bou_,NA_,bou_,to_,spc_,de_,a_,ttu_,te_
+	.byte	CR_
+	.byte	na_,ni_,wo_,spc_,ka_,n_,zi_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,na_,ka_,ni_,spc_,me_,ba_,e_,ta_,spc_,na_,ni_,ka_
+	.byte	CR_
+	.byte	so_,no_,spc_,su_,be_,te_,wo_,spc_,BO_,KU_,ni_,spc_,bu_,tu_,ke_,te_,ho_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,a_,spc_,ha_,zi_,me_,yo_,u_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘敗北のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p02_c109_r0105
+msg_daigo_01_p02_c109_r0105:
+	.byte	TI_,YYA_,N_,PI_,O_,N_,de_,a_,ru_
+	.byte	CR_
+	.byte	BO_,KU_,ga_,spc_,ma_,ke_,ru_,spc_,to_,ha_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,su_,ga_,da_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,ho_,n_,to_,u_,ni_,spc_,su_,ba_,ra_,si_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘モードを抜けてのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p03_c109_r0105
+msg_daigo_01_p03_c109_r0105:
+	.byte	DA_,I_,GO_,kako2_,o_,me_,de_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,o_,mo_,u_,spc_,ki_,mo_,ti_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,so_,no_,spc_,ki_,mo_,ti_,ni_,spc_,ko_,ta_,e_,ru_,ta_,me_
+	.byte	CR_
+	.byte	ze_,n_,ri_,yyo_,ku_,wo_,spc_,tu_,ku_,si_,ta_,spc_,PO_,KE_,MO_,N_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ra_,ga_,spc_,a_,wa_,sa_,ttu_,te_,spc_,hi_,to_,tu_,to_,spc_,na_,ri_
+	.byte	CR_
+	.byte	sa_,ra_,ni_,spc_,o_,o_,ki_,na_,spc_,ti_,ka_,ra_,wo_,spc_,u_,mi_,da_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,ko_,so_,spc_,ko_,u_,si_,te_
+	.byte	CR_
+	.byte	ki_,mi_,ga_,spc_,si_,yyo_,u_,ri_,wo_,spc_,tu_,ka_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ko_,so_,spc_,HO_,U_,E_,N_,ti_,ho_,u_,no_
+	.byte	CR_
+	.byte	a_,ta_,ra_,si_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで手前の入口ドアがバーンと開き、
+// 　サポートが駆け込んでくる
+// ●主人公の左側にサポートが立ち、主人公の方を向き、話し始める
+// 　主人公もサポートの方を向く
+
+// ●サポートのセリフ（ハルカの場合）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_c109_r0105
+msg_heroine_01_p01_c109_r0105:
+	.byte	HA_,RU_,KA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,ma_,e_,ni_
+	.byte	CR_
+	.byte	A_,DO_,BA_,I_,SU_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここでサポートは頭上に「！」を表示してから
+// 　ダイゴと主人公の方をキョロキョロと見て
+// 　（上方向と右方向を２回ほど交互に見る感じで）、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p02_c109_r0105
+msg_heroine_01_p02_c109_r0105:
+	.byte	HA_,RU_,KA_,kako2_,a_,re_,hate_,spc_,a_,re_,re_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,tenten_,tenten_
+	.byte	CR_
+	.byte	hi_,yyo_,ttu_,to_,si_,te_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,u_,spc_,o_,wa_,ttu_,ti_,yya_,ttu_,ta_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このあと博士のセリフへ
+
+// ●サポートのセリフ（ユウキの場合）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_c109_r0105
+msg_hero_01_p01_c109_r0105:
+	.byte	YU_,U_,KI_,kako2_,I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,ma_,e_,ni_
+	.byte	CR_
+	.byte	O_,RE_,ga_,spc_,A_,DO_,BA_,I_,SU_,spc_,si_,te_,ya_,ro_,u_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここでサポートは頭上に「！」を表示してから
+// 　ダイゴと主人公の方をキョロキョロと見て
+// 　（上方向と右方向を２回ほど交互に見る感じで）、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p02_c109_r0105
+msg_hero_01_p02_c109_r0105:
+	.byte	YU_,U_,KI_,kako2_,I_MSG_,MY_NAME_BUF,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,spc_,hi_,yyo_,ttu_,to_,si_,te_
+	.byte	CR_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,ni_,spc_,ka_,ttu_,ta_,no_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このあと博士のセリフへ
+
+// ●ここでオダマキも入ってきて、主人公の右側に立ち、
+// 　以下のセリフ主人公はオダマキの方を向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p01_c109_r0105
+msg_odamaki_01_p01_c109_r0105:
+	.byte	O_,DA_,MA_,KI_,kako2_,ho_,re_,mi_,ro_,spc_,I_MSG_,STR_SUPPORT_NPC,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,na_,ra_,spc_,si_,n_,pa_,i_,spc_,i_,ra_,n_,to_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ga_,spc_,i_,ttu_,ta_,to_,o_,ri_,spc_,da_,ro_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,tenten_,spc_,tenten_,tenten_,tenten_,spc_,tenten_,tenten_,tenten_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,to_,u_,to_,u_,spc_,ya_,ri_,to_,ge_,ta_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ga_,spc_,TO_,U_,KA_,spc_,ZI_,MU_,no_,spc_,o_,to_,u_,sa_,n_,ni_
+	.byte	CR_
+	.byte	ka_,ti_,nu_,i_,ta_,to_,spc_,ki_,i_,ta_,spc_,to_,ki_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,si_,ya_,tenten_,tenten_,spc_,to_,ha_,spc_,o_,mo_,ttu_,ta_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,sa_,ka_,spc_,ho_,n_,to_,u_,ni_,spc_,TI_,YYA_,N_,PI_,O_,N_,ni_
+	.byte	CR_
+	.byte	na_,ttu_,te_,si_,ma_,u_,to_,ha_,spc_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,o_,o_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,ha_,spc_,do_,u_,na_,ttu_,ta_,hate_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ni_,spc_,mi_,se_,te_,spc_,go_,ra_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで「hyouka.msg」の「msg_odamaki_01_p02_zukan:」を参照して
+// 　表示このときの図鑑の状態によって、そのあとに続く「捕まえた数」メッセージを表示
+// ●続いて「hyouka.msg」の「msg_odamaki_01_p20_zukan:」を参照して表示
+// ●続いて以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p02_c109_r0105
+msg_odamaki_01_p02_c109_r0105:
+	.byte	O_,DA_,MA_,KI_,kako2_,to_,ni_,ka_,ku_,spc_,o_,me_,de_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,a_,spc_,mu_,ne_,wo_,ha_,ttu_,te_,spc_,o_,ku_,no_,spc_,he_,ya_,ni_
+	.byte	CR_
+	.byte	i_,ttu_,te_,ku_,ru_,ga_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ここでダイゴが、いったん奥の部屋の方を振り向いてから以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p04_c109_r0105
+msg_daigo_01_p04_c109_r0105:
+	.byte	DA_,I_,GO_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,a_,ta_,ra_,si_,i_,spc_,TI_,YYA_,N_,PI_,O_,N_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,KU_,ni_,spc_,tu_,i_,te_,ki_,na_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そういって、ダイゴ、主人公、サポートの順番に歩き出す
+// ●が、ダイゴが奥の部屋の入口まできたところで立ち止まり、
+// 　まずダイゴがうしろを振り返り、続いて主人公もうしろを振り返る
+// 　（サポートはそのまま）
+// ●そして以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p05_c109_r0105
+msg_daigo_01_p05_c109_r0105:
+	.byte	DA_,I_,GO_,kako2_,mo_,u_,si_,wa_,ke_,na_,i_,ke_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ka_,ra_,spc_,sa_,ki_,ha_,spc_,TI_,YYA_,N_,PI_,O_,N_,ni_,spc_,na_,ttu_,ta_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,spc_,da_,ke_,ga_,spc_,ha_,i_,re_,ru_,spc_,ba_,si_,yyo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,so_,ko_,de_,spc_,ha_,ka_,se_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	ma_,ttu_,te_,i_,te_,spc_,ku_,re_,na_,i_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここでサポート
+// 　ハルカ　→msg_heroine_01_p03_c109_r0105:
+// 　ユウカ　→msg_hero_01_p03_c109_r0105:
+
+// ●ハルカ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p03_c109_r0105
+msg_heroine_01_p03_c109_r0105:
+	.byte	HA_,RU_,KA_,kako2_,tenten_,tenten_,ga_,bou_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,bou_,n_,te_,ne_,spc_,i_,i_,no_,spc_,i_,i_,no_,gyoe_
+	.byte	CR_
+	.byte	da_,ttu_,te_,spc_,so_,u_,i_,u_,spc_,ki_,ma_,ri_,spc_,da_,mo_,n_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,ni_,spc_,o_,me_,de_,to_,u_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ユウキ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p03_c109_r0105
+msg_hero_01_p03_c109_r0105:
+	.byte	YU_,U_,KI_,kako2_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,ta_,na_,i_,ka_
+	.byte	CR_
+	.byte	so_,u_,i_,u_,spc_,ki_,ma_,ri_,spc_,da_,mo_,n_,na_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,gyoe_,spc_,yo_,ka_,ttu_,ta_,na_
+	.byte	CR_
+	.byte	o_,me_,de_,to_,u_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そうしてダイゴと主人公だけが奥の部屋に入っていく

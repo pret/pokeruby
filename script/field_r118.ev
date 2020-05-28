@@ -1,0 +1,330 @@
+//====================================================================
+//							field_r118
+//						フィールド・ロード118
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r118_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r118
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r118:
+	_CALL			change_camera_obj		//カメラOBJ操作
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							釣り人1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fishing1_01_p01_field_r118
+	_TALK_OBJ_START
+
+	//既に貰っている
+	_IF_FLAGON_JUMP	FE_IITURIZAO_GET,ev_fishing1_01_p05_field_r118
+
+	//いいつりざおは　いいよ！
+	_TALK_YES_NO	msg_fishing1_01_p01_field_r118
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_fishing1_01_p02_field_r118
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_fishing1_01_p04_field_r118
+	_END
+
+//「はい」
+ev_fishing1_01_p02_field_r118:
+	_TALK_KEYWAIT	msg_fishing1_01_p02_field_r118
+
+	//「いいつりざお」ゲット
+	_ITEM_EVENT		ITEM_IITURIZAO,1
+	_FLAG_SET		FE_IITURIZAO_GET
+
+	_TALK_KEYWAIT	msg_fishing1_01_p03_field_r118
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+ev_fishing1_01_p04_field_r118:
+	_TALK_KEYWAIT	msg_fishing1_01_p04_field_r118
+	_TALK_OBJ_END
+	_END
+
+//「いいつりざお」入手後
+ev_fishing1_01_p05_field_r118:
+	_TALK_KEYWAIT	msg_fishing1_01_p05_field_r118
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							少女２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_field_r118
+	_EASY_OBJ_MSG	msg_girl2_01_p01_field_r118
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r118
+	_EASY_MSG       msg_kanban_01_p01_field_r118
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r118
+	_EASY_MSG       msg_kanban_02_p01_field_r118
+	_END
+
+
+/********************************************************************/
+/*							ダイゴ(POS)								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r118_pos01
+	_TALK_START
+	_LDVAL		TMPWK0,0
+
+	//向きを上へ(※ダート自転車対策）
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//左へ移動
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R118,daigo_01_field_r118_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP		ev_common_field_r118_pos01
+	_END
+
+SCRIPT_LABEL	ev_field_r118_pos02
+	_TALK_START
+	_LDVAL		TMPWK0,1
+
+	//向きを上へ(※ダート自転車対策）
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP		ev_common_field_r118_pos01
+	_END
+
+SCRIPT_LABEL	ev_field_r118_pos03
+	_TALK_START
+	_LDVAL		TMPWK0,2
+
+	//向きを上へ(※ダート自転車対策）
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//右へ移動
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R118,daigo_03_field_r118_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP		ev_common_field_r118_pos01
+	_END
+
+//共通処理
+ev_common_field_r118_pos01:
+	_SE		SE_DANSA
+	//進んでくる(go)
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R118,daigo_01_field_r118_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+
+	_TALK_KEYWAIT	msg_daigo_01_p01_field_r118
+	_TALK_CLOSE
+
+	//去っていく
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_daigo_01_field_r118
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_daigo_01_field_r118
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_daigo_01_field_r118
+
+	_LDVAL			WK_SCENE_FIELD_R118,1
+	_OBJ_DELETE		DAIGO_01_FIELD_R118
+	_TALK_END
+	_END
+
+//去っていく
+case0_daigo_01_field_r118:
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R118,daigo_01_field_r118_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case1_daigo_01_field_r118:
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R118,daigo_02_field_r118_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case2_daigo_01_field_r118:
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R118,daigo_03_field_r118_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//ダイゴ	左へ(POS01)
+//--------------------------------------------------------------------
+daigo_01_field_r118_anime01:
+	.byte	AC_WALK_L_1	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	右へ(POS01)
+//--------------------------------------------------------------------
+daigo_03_field_r118_anime01:
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	出てくる共通部分(go)(POS01)
+//--------------------------------------------------------------------
+daigo_01_field_r118_anime03:
+	.byte	AC_JUMP_D_2
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	去っていく(POS01)
+//--------------------------------------------------------------------
+daigo_01_field_r118_anime02:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//ダイゴ	去っていく(POS02)
+//--------------------------------------------------------------------
+daigo_02_field_r118_anime02:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	去っていく(POS03)
+//--------------------------------------------------------------------
+daigo_03_field_r118_anime02:
+	.byte	AC_WALK_R_1	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_aroma_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AROMA_02
+	_TRAINER_DATA2	msg_aroma_02_01
+	_TRAINER_DATA3	msg_aroma_02_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_aroma_02
+	_TRAINER_EASY_MSG	msg_aroma_02_03
+	_END
+
+_revenge_aroma_02:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	AROMA_02
+	_TRAINER_DATA2	msg_aroma_02_04
+	_TRAINER_DATA3	msg_aroma_02_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aroma_02_06
+	_END
+
+SCRIPT_LABEL	ev_fishing_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_08
+	_TRAINER_DATA2	msg_fishing_08_01
+	_TRAINER_DATA3	msg_fishing_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_08_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_09
+	_TRAINER_DATA2	msg_fishing_09_01
+	_TRAINER_DATA3	msg_fishing_09_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_09_03
+	_END
+
+SCRIPT_LABEL	ev_guitarist_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	GUITARIST_06
+	_TRAINER_DATA2	msg_guitarist_06_01
+	_TRAINER_DATA3	msg_guitarist_06_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_guitarist_06
+	_TRAINER_EASY_MSG	msg_guitarist_06_03
+	_END
+
+_revenge_guitarist_06:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	GUITARIST_06
+	_TRAINER_DATA2	msg_guitarist_06_04
+	_TRAINER_DATA3	msg_guitarist_06_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_guitarist_06_06
+	_END
+
+SCRIPT_LABEL	ev_bird_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1  BIRD_01
+	_TRAINER_DATA2	msg_bird_01_01
+	_TRAINER_DATA3	msg_bird_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_01_03
+	_END
+
+SCRIPT_LABEL	ev_bird_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1  BIRD_11
+	_TRAINER_DATA2	msg_bird_11_01
+	_TRAINER_DATA3	msg_bird_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_11_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

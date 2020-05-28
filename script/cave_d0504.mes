@@ -1,0 +1,90 @@
+// ●いしのどうくつ　地下１階分室
+
+
+// ●デボンコーポレーションの社長の息子
+// 　名前はダイゴ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p01_cave_d0504
+msg_daigo_01_p01_cave_d0504:
+	.byte	ki_,mi_,no_,spc_,so_,re_,tenten_,tenten_
+	.byte	CR_
+	.byte	PO_,KE_,NA_,BI_,spc_,zi_,yya_,na_,i_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,si_,ka_,spc_,PO_,KE_,NA_,BI_,wo_,spc_,mo_,ttu_,te_,i_,ru_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,do_,u_,si_,de_,spc_,si_,yyo_,u_,bu_,wo_,spc_,su_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,ro_,ku_,spc_,sa_,re_,te_,spc_,i_,ku_,n_,da_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	si_,tu_,re_,i_
+	.byte	CR_
+	.byte	BO_,KU_,no_,spc_,na_,ma_,e_,ha_,spc_,DA_,I_,GO_
+	.byte	NORMAL_WAIT_
+	.byte	me_,zu_,ra_,si_,i_,spc_,i_,si_,ni_,spc_,ki_,yyo_,u_,mi_,ga_,spc_,a_,ttu_,te_
+	.byte	CR_
+	.byte	a_,ti_,ko_,ti_,spc_,ta_,bi_,spc_,si_,te_,ru_,n_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	e_,ttu_,hate_
+	.byte	CR_
+	.byte	BO_,KU_,ni_,spc_,te_,ga_,mi_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ダイゴへのてがみ」を削除
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p02_cave_d0504
+msg_daigo_01_p02_cave_d0504:
+	.byte	DA_,I_,GO_,kako2_,u_,n_,spc_,a_,ri_,ga_,to_,u_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,za_,wa_,za_,spc_,to_,do_,ke_,te_,spc_,ku_,re_,ta_,n_,da_
+	.byte	CR_
+	.byte	na_,ni_,ka_,spc_,o_,re_,i_,wo_,spc_,sa_,se_,te_,mo_,ra_,u_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,ne_
+	.byte	CR_
+	.byte	ko_,no_,spc_,wa_,za_,MA_,SI_,N_,wo_,spc_,a_,ge_,yo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ga_,ne_,no_,tu_,ba_,sa_,spc_,to_,i_,ttu_,te_
+	.byte	CR_
+	.byte	BO_,KU_,no_,spc_,o_,ki_,ni_,i_,ri_,no_,spc_,wa_,za_,spc_,da_,ka_,ra_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン４７「はがねのつばさ」（No335）入手
+// ●荷物がいっぱいの時→msg_daigo_01_p04_cave_d0504:
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p03_cave_d0504
+msg_daigo_01_p03_cave_d0504:
+	.byte	DA_,I_,GO_,kako2_,ki_,mi_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,i_,i_,spc_,ka_,n_,zi_,spc_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyu_,gi_,yyo_,u_,wo_,spc_,tu_,du_,ke_,re_,ba_
+	.byte	CR_
+	.byte	i_,tu_,ka_,ha_,spc_,PO_,KE_,MO_,N_,RI_,bou_,GU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,ni_,spc_,da_,ttu_,te_,spc_,na_,re_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	BO_,KU_,ha_,spc_,so_,u_,spc_,o_,mo_,u_,na_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,zi_,yya_,a_
+	.byte	CR_
+	.byte	BO_,KU_,ha_,spc_,sa_,ki_,wo_,spc_,i_,so_,gu_,ka_,ra_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●といって出口方向へ去っていく
+
+// ●荷物がいっぱいの時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p04_cave_d0504
+msg_daigo_01_p04_cave_d0504:
+	.byte	BA_,TTU_,GU_,ga_,spc_,i_,ttu_,pa_,i_,spc_,na_,no_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,si_,ka_,ta_,na_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて　→msg_daigo_01_p03_cave_d0504:

@@ -1,0 +1,43 @@
+// ●トクサネシティ　宇宙センター２Ｆ
+
+
+// ●研究員男
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_c107_r0702
+msg_studym1_01_p01_c107_r0702:
+	.byte	TO_,KU_,SA_,NE_,ha_,spc_,te_,n_,ki_,no_,spc_,yo_,i_,spc_,hi_,ga_,spc_,o_,o_,i_
+	.byte	CR_
+	.byte	ka_,ze_,no_,spc_,mu_,ki_,mo_,spc_,a_,n_,te_,i_,spc_,si_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	RO_,KE_,TTU_,TO_,wo_,spc_,u_,ti_,a_,ge_,ru_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,ko_,i_,no_,spc_,ba_,si_,yyo_,spc_,na_,n_,de_,su_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c107_r0702
+msg_gentlem1_01_p01_c107_r0702:
+	.byte	wa_,si_,mo_,spc_,mo_,u_,su_,ko_,si_,spc_,wa_,ka_,ke_,re_,ba_
+	.byte	CR_
+	.byte	u_,ti_,yyu_,u_,spc_,hi_,ko_,u_,si_,ni_,spc_,na_,ri_,ta_,ka_,ttu_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,i_,ma_,ka_,ra_,de_,mo_,spc_,o_,so_,ku_,na_,i_,gyoe_
+	.byte	CR_
+	.byte	yo_,bou_,si_,spc_,ga_,n_,ba_,ru_,zo_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy4_01_p01_c107_r0702
+msg_boy4_01_p01_c107_r0702:
+	.byte	i_,tu_,ka_,spc_,hu_,tu_,bou_,no_,spc_,hi_,to_,mo_
+	.byte	CR_
+	.byte	u_,ti_,yyu_,u_,ni_,spc_,i_,ke_,ru_,to_,spc_,i_,i_,no_,ni_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

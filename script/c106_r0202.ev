@@ -1,0 +1,308 @@
+//====================================================================
+//					ミナモシティ・美術館2Ｆ
+//							c106_r0202.ev
+//==================================================================== 
+EVENT_DATA_START c106_r0202_event_data
+//EVENT_DATA_END /* 特別なスクリプトなし */
+BG_CHANGE_LABEL	bg_change_c106_r0202	
+SP_SCRIPT_LABEL	scene_museum_c106_r0202
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+/*							強制イベント							*/
+//--------------------------------------------------------------------
+bg_change_c106_r0202://かっこよさの絵
+	_IF_FLAGON_JUMP	FE_PICTURE_01_C106_R0202,picture_01_put_init
+	_JUMP	picture_02_putcheck
+	_END
+
+picture_02_putcheck://美しさの絵
+	_IF_FLAGON_JUMP	FE_PICTURE_02_C106_R0202,picture_02_put_init
+	_JUMP	picture_03_putcheck
+	_END
+
+
+picture_03_putcheck://かわいさの絵
+	_IF_FLAGON_JUMP	FE_PICTURE_03_C106_R0202,picture_03_put_init
+	_JUMP	picture_04_putcheck
+	_END
+
+picture_04_putcheck://かしこさの絵
+	_IF_FLAGON_JUMP	FE_PICTURE_04_C106_R0202,picture_04_put_init
+	_JUMP	picture_05_putcheck
+	_END
+
+picture_05_putcheck://たくましさの絵
+	_IF_FLAGON_JUMP	FE_PICTURE_05_C106_R0202,picture_05_put_init
+	_END
+
+picture_01_put_init://かっこいい絵書き換え
+	_SET_CELL		10,6,606,1	//
+	_SET_CELL		11,6,607,1	//
+	_JUMP	picture_02_putcheck
+	_END
+
+picture_02_put_init://うつくしい絵書き換え
+	_SET_CELL		18,6,604,1	//
+	_SET_CELL		19,6,605,1	//
+	_JUMP	picture_03_putcheck
+	_END
+	
+picture_03_put_init://かわいい絵書き換え
+	_SET_CELL		14,10,608,1	//
+	_SET_CELL		15,10,609,1	//
+	_JUMP	picture_04_putcheck
+	_END
+
+picture_04_put_init://かしこい絵書き換え
+	_SET_CELL		6,10,602,1	//
+	_SET_CELL		7,10,603,1	//
+	_JUMP	picture_05_putcheck
+	_END
+
+picture_05_put_init://たくましい絵書き換え
+	_SET_CELL		2,6,610,1	//
+	_SET_CELL		3,6,611,1	//
+	_END
+
+//--------------------------------------------------------------------
+/*							強制イベント							*/
+//--------------------------------------------------------------------
+/********************************************************************/
+/*					WK_SCENE_C106_R0202＝0＝館長の話				*/
+/*					WK_SCENE_C106_R0202＝1＝話終了					*/
+/********************************************************************/
+scene_museum_c106_r0202:
+	SP_SCRIPT_DATA	WK_SCENE_C106_R0202,0,ev_gentlem1_01_p01_c106_r0202
+	SP_SCRIPT_END
+
+
+/********************************************************************/
+/*								scene0								*/
+/*							館長のお話								*/
+/********************************************************************/
+ev_gentlem1_01_p01_c106_r0202:
+	_TALK_START
+	_SET_OBJ_ANIME	GENTLEM1_01_C106_R0202,turn_hero_site_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,musueum_c106_r0202_anime01
+	_OBJ_ANIME_WAIT
+	_EASY_MSG	msg_gentlem1_01_p01_c106_r0202
+	_SET_OBJ_ANIME	GENTLEM1_01_C106_R0202,musueum_c106_r0202_anime02
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME	EV_OBJ_SPID,musueum_c106_r0202_anime02
+	_OBJ_ANIME_WAIT
+	_EASY_MSG	msg_gentlem1_01_p02_c106_r0202
+	_SET_OBJ_ANIME	GENTLEM1_01_C106_R0202,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME	EV_OBJ_SPID,musueum_c106_r0202_anime01
+	_OBJ_ANIME_WAIT
+	_EASY_MSG	msg_gentlem1_01_p03_c106_r0202
+	_LDWK	WK_SCENE_C106_R0202,1
+	_TALK_END
+	_END
+
+//-------------------------------------------------------------------
+//					　　scene0のアニメ
+//--------------------------------------------------------------------
+musueum_c106_r0202_anime01:
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+musueum_c106_r0202_anime02:
+	.byte	AC_SITE_U
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+/*							館長									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p04_c106_r0202//絵の枚数チェック！
+	_TALK_START
+	
+	_IF_FLAGON_JUMP	FE_GOODS_GET_C106_R0202,ev_gentlem1_01_p17_c106_r0202
+	
+	_FUNC_CALL	PARAM0,	ART_COUNT_CHK
+	_SWITCH	PARAM0
+	_CASEJUMP	1,ev_gentlem1_01_p05_c106_r0202
+	_CASEJUMP	2,ev_gentlem1_01_p05_c106_r0202
+	_CASEJUMP	3,ev_gentlem1_01_p05_c106_r0202
+	_CASEJUMP	4,ev_gentlem1_01_p05_c106_r0202
+	_CASEJUMP	5,ev_gentlem1_01_p06_c106_r0202
+	_EASY_OBJ_MSG	msg_gentlem1_01_p04_c106_r0202	
+	_END
+	
+ev_gentlem1_01_p05_c106_r0202://１～４枚
+	_EASY_OBJ_MSG	msg_gentlem1_01_p05_c106_r0202
+	_END
+
+
+ev_gentlem1_01_p06_c106_r0202://五枚そろった
+	_SET_OBJ_ANIME	GENTLEM1_01_C106_R0202,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_c106_r0202
+	_SET_OBJ_ANIME	GENTLEM1_01_C106_R0202,musueum_c106_r0202_anime02
+	_TALK_KEYWAIT	msg_gentlem1_01_p07_c106_r0202
+	_JUMP	ev_gentlem1_01_p16_c106_r0202
+	_END
+	
+ev_gentlem1_01_p16_c106_r0202://グッズをもらう
+	_SET_OBJ_ANIME	GENTLEM1_01_C106_R0202,turn_hero_site_anime
+	_TALK_KEYWAIT	msg_gentlem1_01_p13_c106_r0202
+	_GOODS_EVENT	GOODS_GARASUNOOBUJE
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_gentlem1_01_p15_c106_r0202
+	_FLAG_SET	FE_GOODS_GET_C106_R0202
+	_TALK_CLOSE
+	_TALK_END
+	_END
+
+ev_gentlem1_01_p15_c106_r0202://グッズがいっぱいのとき
+	_CALL				ev_fail_goods_ret	//失敗メッセージ
+	_TALK_KEYWAIT	msg_gentlem1_01_p15_c106_r0202
+	_TALK_CLOSE
+	_TALK_END
+	_END
+
+ev_gentlem1_01_p17_c106_r0202://グッズを貰っている
+	_EASY_OBJ_MSG	msg_gentlem1_01_p17_c106_r0202
+	_TALK_END
+	_END
+
+/********************************************************************/
+/*						want to	かわいらしい絵						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p08_c106_r0202
+	_TALK_START
+	_IF_FLAGON_JUMP	FE_PICTURE_03_C106_R0202,ev_picture_03_p01_c106_r0202//絵がある？
+	_EASY_MSG	msg_gentlem1_01_p08_c106_r0202
+	_END
+	
+	
+/********************************************************************/
+/*						want to	たくましい絵						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p09_c106_r0202
+	_TALK_START
+	_IF_FLAGON_JUMP	FE_PICTURE_05_C106_R0202,ev_picture_05_p01_c106_r0202//絵がある？
+	_EASY_MSG	msg_gentlem1_01_p09_c106_r0202
+	_END
+	
+
+/********************************************************************/
+/*						want to	かっこよさ絵						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p10_c106_r0202
+	_TALK_START
+	_IF_FLAGON_JUMP	FE_PICTURE_01_C106_R0202,ev_picture_01_p01_c106_r0202//絵がある？
+	_EASY_MSG	msg_gentlem1_01_p11_c106_r0202
+	_END
+
+
+/********************************************************************/
+/*						want to	うつくしい絵						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p11_c106_r0202
+	_TALK_START
+	_IF_FLAGON_JUMP	FE_PICTURE_02_C106_R0202,ev_picture_02_p01_c106_r0202//絵がある？
+	_EASY_MSG	msg_gentlem1_01_p10_c106_r0202
+	_END
+
+
+/********************************************************************/
+/*						want to	かしこい絵						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p12_c106_r0202
+	_TALK_START
+	_IF_FLAGON_JUMP	FE_PICTURE_04_C106_R0202,ev_picture_04_p01_c106_r0202//絵がある？
+	_EASY_MSG	msg_gentlem1_01_p12_c106_r0202
+	_END
+
+
+/********************************************************************/
+/*							かざってある場合						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_nigaoe_01_p01_c106_r0202
+	_EASY_MSG	msg_nigaoe_01_p01_c106_r0202
+	_END
+
+
+/********************************************************************/
+/*							ステップ２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_c106_r0202
+	_EASY_OBJ_MSG	msg_girl2_01_p01_c106_r0202
+	_END
+
+
+/********************************************************************/
+/*							ステップ5								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_c106_r0202
+	_EASY_OBJ_MSG	msg_oldman1_01_p01_c106_r0202
+	_END
+
+SCRIPT_LABEL	ev_boy4_01_p01_c106_r0202
+	_EASY_OBJ_MSG	msg_boy4_01_p01_c106_r0202
+	_END
+
+
+/********************************************************************/
+/*							似顔絵（かっこよさ：９）表示			*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_01_p01_c106_r0202
+	_EASY_MSG	msg_nigaoe_01_p01_c106_r0202
+	_PUT_PORTRAIT	9
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							似顔絵（美しさ：10）表示				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_02_p01_c106_r0202
+	_EASY_MSG	msg_nigaoe_01_p01_c106_r0202
+	_PUT_PORTRAIT	10
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							似顔絵（かわいさ：11）表示				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_03_p01_c106_r0202
+	_EASY_MSG	msg_nigaoe_01_p01_c106_r0202
+	_PUT_PORTRAIT	11
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							似顔絵（賢さ：12）表示					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_04_p01_c106_r0202
+	_EASY_MSG	msg_nigaoe_01_p01_c106_r0202
+	_PUT_PORTRAIT	12
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							似顔絵（たくましさ：13）表示			*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_05_p01_c106_r0202
+	_EASY_MSG	msg_nigaoe_01_p01_c106_r0202
+	_PUT_PORTRAIT	13
+	_TALK_END
+	_END
+
+
+
+
+
+
+
+
+
+

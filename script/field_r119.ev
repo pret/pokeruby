@@ -1,0 +1,577 @@
+//====================================================================
+//							field_r119
+//						フィールド・ロード119
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r119_event_data
+INIT_CTRL_LABEL		init_ctrl_field_r119
+FLAG_CHANGE_LABEL	flag_change_field_r119
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_field_r119:
+	_IF_FLAGON_CALL	SYS_CTRL_OBJ_DELETE,pokemon_del_field_r119
+	_END
+
+//戦闘後のタイミングで削除
+pokemon_del_field_r119:
+	_IFVAL_CALL		PARAM0,EQ,6,case0_poke_del_field_r119
+	_IFVAL_CALL		PARAM0,EQ,7,case1_poke_del_field_r119
+	_RET
+
+case0_poke_del_field_r119:
+	_OBJ_DELETE		KAKURE_01_FIELD_R119
+	_RET
+
+case1_poke_del_field_r119:
+	_OBJ_DELETE		KAKURE_02_FIELD_R119
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r119:
+	//サポートキャラをセットする
+	_CALL			set_support_char
+	_CALL			set_support_cycle_char
+
+	//アクア団charセット
+	_CALL			set_evil_char
+
+	//助手の位置を変更する
+	_IFVAL_CALL		WK_SCENE_R119_TENKI,EQ,1,obj_del_r119_r0101
+
+	_PROGRAM		SET_WEATHER_R119
+    _END
+
+//助手の位置を変更する
+obj_del_r119_r0101:
+	_FLAG_SET		FV_TENKI_01_R119_R0102
+	_FLAG_RESET		FV_TENKI_01_R119_R0101
+	_LDVAL			WK_SCENE_R119_TENKI,2
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							オダマキ娘								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r119_pos01
+	_LDVAL	LOCALWORK1,1
+	_JUMP	ev_field_r119_poscommon
+	_END
+
+SCRIPT_LABEL	ev_field_r119_pos02
+	_LDVAL	LOCALWORK1,2
+	_JUMP	ev_field_r119_poscommon
+	_END
+
+ev_field_r119_poscommon:	
+	_TALK_START
+	//OBJ出す
+	_OBJ_APPEAR		SUPPORT_02_FIELD_R119
+	
+	_GET_MY_SEX	//性別で曲を分ける
+	_IFVAL_CALL		ANSWORK,EQ,0,mus_boy_01_field_r119	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,mus_girl_01_field_r119	//女の子
+
+	_TIME_WAIT		65
+
+	//サポートキャラが近づいてくる:場所によりアニメ分岐
+	_IFVAL_CALL	LOCALWORK1,EQ,1,ev_support_anime_p01_field_r119
+	_IFVAL_CALL	LOCALWORK1,EQ,2,ev_support_anime_p02_field_r119
+
+	//振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+
+	//歩きOBJに変更
+	_IFVAL_CALL		LOCALWORK1,EQ,1,ev_support_pos_p01_field_r119
+	_IFVAL_CALL		LOCALWORK1,EQ,2,ev_support_pos_p02_field_r119
+	_OBJ_DELETE		SUPPORT_02_FIELD_R119
+	_OBJ_APPEAR		SUPPORT_01_FIELD_R119
+
+	_TIME_WAIT		30
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,boy_01_field_r119	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,girl_01_field_r119	//女の子
+	_TALK_END
+    _END
+
+mus_boy_01_field_r119:
+	_BGM_SET	MUS_GIRL_SUP,1
+	_RET
+
+mus_girl_01_field_r119:
+	_BGM_SET	MUS_BOY_SUP,1
+	_RET
+
+//男の子
+boy_01_field_r119:
+	_TALK_KEYWAIT   msg_heroine_01_p01_field_r119
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_boy_battle_field_r119
+	_CASEJUMP		1,case1_my_sex_boy_battle_field_r119
+	_CASEJUMP		2,case2_my_sex_boy_battle_field_r119
+	_END
+
+//トレーナー戦へ
+//タイプ炎
+case0_my_sex_boy_battle_field_r119:
+	_TRAINER_EVENT_FIGHT	SUPPORTW02_03,msg_heroine_01_p02_field_r119
+	_JUMP			common_heroine_battle_field_r119
+	_END
+
+//タイプ水
+case1_my_sex_boy_battle_field_r119:
+	_TRAINER_EVENT_FIGHT	SUPPORTW03_03,msg_heroine_01_p02_field_r119
+	_JUMP			common_heroine_battle_field_r119
+	_END
+
+//タイプ草
+case2_my_sex_boy_battle_field_r119:
+	_TRAINER_EVENT_FIGHT	SUPPORTW01_03,msg_heroine_01_p02_field_r119
+	_JUMP			common_heroine_battle_field_r119
+	_END
+
+//共通処理
+common_heroine_battle_field_r119:
+	_TALK_KEYWAIT   msg_heroine_01_p03_field_r119
+
+	//共通アイテム取得処理
+	_CALL			item_get_field_r119
+
+	_TALK_KEYWAIT   msg_heroine_01_p04_field_r119
+
+	//共通終了処理
+	_JUMP			end_support_field_r119
+    _END
+
+//--------------------------------------------------------------------
+//女の子
+//--------------------------------------------------------------------
+girl_01_field_r119:
+	_TALK_KEYWAIT   msg_hero_01_p01_field_r119
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_girl_battle_field_r119
+	_CASEJUMP		1,case1_my_sex_girl_battle_field_r119
+	_CASEJUMP		2,case2_my_sex_girl_battle_field_r119
+	_END
+
+//トレーナー戦へ
+//タイプ炎
+case0_my_sex_girl_battle_field_r119:
+	_TRAINER_EVENT_FIGHT	SUPPORTM02_03,msg_hero_01_p02_field_r119
+	_JUMP			common_hero_battle_field_r119
+	_END
+
+//タイプ水
+case1_my_sex_girl_battle_field_r119:
+	_TRAINER_EVENT_FIGHT	SUPPORTM03_03,msg_hero_01_p02_field_r119
+	_JUMP			common_hero_battle_field_r119
+	_END
+
+//タイプ草
+case2_my_sex_girl_battle_field_r119:
+	_TRAINER_EVENT_FIGHT	SUPPORTM01_03,msg_hero_01_p02_field_r119
+	_JUMP			common_hero_battle_field_r119
+	_END
+
+//共通処理
+common_hero_battle_field_r119:
+	_TALK_KEYWAIT   msg_hero_01_p03_field_r119
+
+	//共通アイテム取得処理
+	_CALL			item_get_field_r119
+
+	_TALK_KEYWAIT   msg_hero_01_p04_field_r119
+
+	//共通終了処理
+	_JUMP			end_support_field_r119
+    _END
+
+//共通アイテム取得処理
+item_get_field_r119:
+	_ITEM_EVENT		ITEM_HIDENMASIN02,1
+	_FLAG_SET		FE_HWAZA02_01_FIELD_R119
+	_RET
+
+//共通終了処理
+end_support_field_r119:
+	_TALK_CLOSE
+
+	//自転車OBJに変更
+	_IFVAL_CALL		LOCALWORK1,EQ,1,ev_support_pos_p01_field_r119
+	_IFVAL_CALL		LOCALWORK1,EQ,2,ev_support_pos_p02_field_r119
+	_OBJ_DELETE		SUPPORT_01_FIELD_R119
+	_OBJ_APPEAR		SUPPORT_02_FIELD_R119
+
+	_TIME_WAIT		30
+
+	//サポートキャラが去っていく:場所によりアニメ分岐
+	_IFVAL_CALL		LOCALWORK1,EQ,1,ev_support_anime_p03_field_r119
+	_IFVAL_CALL		LOCALWORK1,EQ,2,ev_support_anime_p04_field_r119
+
+	//OBJ消す
+	_OBJ_DELETE		SUPPORT_02_FIELD_R119
+
+	//強制イベント終了
+	_LDVAL			WK_SCENE_FIELD_R119,1
+
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+
+	_TALK_END
+	_END
+
+//サポートキャラの登場アニメ呼び出し
+ev_support_anime_p01_field_r119://登場するときpos01
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R119,support_01_field_r119_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p02_field_r119://登場するときpos02
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R119,support_01_field_r119_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p03_field_r119://退場するときpos01
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R119,support_01_field_r119_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p04_field_r119://退場するときpos02
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R119,support_01_field_r119_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+
+//sxy情報書き換え
+ev_support_pos_p01_field_r119:
+	_SXY_POS_CHANGE	SUPPORT_01_FIELD_R119,25,32
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_R119,25,32
+	_RET
+
+ev_support_pos_p02_field_r119:
+	_SXY_POS_CHANGE	SUPPORT_01_FIELD_R119,26,32
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_R119,26,32
+	_RET
+
+//--------------------------------------------------------------------
+//サポート	近づいてくる
+//--------------------------------------------------------------------
+support_01_field_r119_anime01://pos01
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+support_01_field_r119_anime03://pos02
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート	去っていく
+//--------------------------------------------------------------------
+support_01_field_r119_anime02://pos01
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+support_01_field_r119_anime04://pos02
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								自転車男							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cyclem1_01_p01_field_r119
+	_EASY_OBJ_MSG       msg_cyclem1_01_p01_field_r119
+	_END
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r119
+	_EASY_MSG       msg_kanban_01_p01_field_r119
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r119
+	_EASY_MSG       msg_kanban_02_p01_field_r119
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mushimaster_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHIMASTER_01
+	_TRAINER_DATA2	msg_mushimaster_01_01
+	_TRAINER_DATA3	msg_mushimaster_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushimaster_01_03
+	_END
+
+SCRIPT_LABEL	ev_mushimaster_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHIMASTER_02
+	_TRAINER_DATA2	msg_mushimaster_02_01
+	_TRAINER_DATA3	msg_mushimaster_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushimaster_02_03
+	_END
+
+SCRIPT_LABEL	ev_mushimaster_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHIMASTER_03
+	_TRAINER_DATA2	msg_mushimaster_03_01
+	_TRAINER_DATA3	msg_mushimaster_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushimaster_03_03
+	_END
+
+SCRIPT_LABEL	ev_mushi_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_04
+	_TRAINER_DATA2	msg_mushi_04_01
+	_TRAINER_DATA3	msg_mushi_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_04_03
+	_END
+
+SCRIPT_LABEL	ev_mushi_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_05
+	_TRAINER_DATA2	msg_mushi_05_01
+	_TRAINER_DATA3	msg_mushi_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_05_03
+	_END
+
+SCRIPT_LABEL	ev_mushi_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_06
+	_TRAINER_DATA2	msg_mushi_06_01
+	_TRAINER_DATA3	msg_mushi_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_06_03
+	_END
+
+SCRIPT_LABEL	ev_rangerm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	RANGERM_01
+	_TRAINER_DATA2	msg_rangerm_01_01
+	_TRAINER_DATA3	msg_rangerm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_rangerm_01
+	_TRAINER_EASY_MSG	msg_rangerm_01_03
+	_END
+
+_revenge_rangerm_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	RANGERM_01
+	_TRAINER_DATA2	msg_rangerm_01_04
+	_TRAINER_DATA3	msg_rangerm_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_rangerm_01_06
+	_END
+
+SCRIPT_LABEL	ev_rangerw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	RANGERW_01
+	_TRAINER_DATA2	msg_rangerw_01_01
+	_TRAINER_DATA3	msg_rangerw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_rangerw_01
+	_TRAINER_EASY_MSG	msg_rangerw_01_03
+	_END
+
+_revenge_rangerw_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	RANGERW_01
+	_TRAINER_DATA2	msg_rangerw_01_04
+	_TRAINER_DATA3	msg_rangerw_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_rangerw_01_06
+	_END
+
+SCRIPT_LABEL	ev_bird_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_02
+	_TRAINER_DATA2	msg_bird_02_01
+	_TRAINER_DATA3	msg_bird_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_02_03
+	_END
+
+SCRIPT_LABEL	ev_bird_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_03
+	_TRAINER_DATA2	msg_bird_03_01
+	_TRAINER_DATA3	msg_bird_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_03_03
+	_END
+
+SCRIPT_LABEL	ev_shinobi_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_01
+	_TRAINER_DATA2	msg_shinobi_01_01
+	_TRAINER_DATA3	msg_shinobi_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_01_03
+	_END
+
+SCRIPT_LABEL	ev_shinobi_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_02
+	_TRAINER_DATA2	msg_shinobi_02_01
+	_TRAINER_DATA3	msg_shinobi_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_02_03
+	_END
+
+SCRIPT_LABEL	ev_shinobi_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_11
+	_TRAINER_DATA2	msg_shinobi_11_01
+	_TRAINER_DATA3	msg_shinobi_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_11_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_20
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_20
+	_TRAINER_DATA2	msg_fish_20_01
+	_TRAINER_DATA3	msg_fish_20_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fish_20_03
+	_END
+
+/********************************************************************/
+/*							アクア団１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_01_p01_field_r119
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_aquam1_01_p01_field_r119
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							アクア団２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_02_p01_field_r119
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_aquam1_02_p01_field_r119
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							少年3									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy3_01_p01_field_r119
+	_EASY_OBJ_MSG		msg_boy3_01_p01_field_r119
+	_END
+
+
+/********************************************************************/
+/*							少年									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_field_r119
+	_EASY_OBJ_MSG		msg_boy2_01_p01_field_r119
+	_END
+
+/********************************************************************/
+/*							お得な掲示板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r119
+	_EASY_MSG       msg_kanban_03_p01_field_r119
+	_END
+
+
+

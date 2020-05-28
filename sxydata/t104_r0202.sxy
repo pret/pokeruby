@@ -1,0 +1,201 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_T104_R0202	0
+#define EXITNUM_T104_R0202	20
+#define POSNUM_T104_R0202	0
+#define BGNUM_T104_R0202	0
+
+const SXY_CONNECT	EXIT_t104_r0202[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR01,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0009,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR06,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR02,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR03,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR05,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0014,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR04,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0000,		//Xpos
+		0x0017,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR07,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0000,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR08,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR09,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0000,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR10,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR11,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR12,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0000,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR13,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR14,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR15,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR16,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x000a,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR17,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR18,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR19,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		T104_R0201_STAIR20,		//Door ID
+		T104_R0201,			//Map ID
+		T104,				//Field ID
+	},
+
+};
+
+const SXY_DATA	t104_r0202_sxy_data =
+{
+OBJNUM_T104_R0202,			// field obj max
+EXITNUM_T104_R0202,		// exit max
+POSNUM_T104_R0202,			// pos event max
+BGNUM_T104_R0202,			// bg event max
+NULL,			// field obj data
+EXIT_t104_r0202,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

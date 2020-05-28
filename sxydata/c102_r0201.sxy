@@ -1,0 +1,232 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C102_R0201	8
+#define EXITNUM_C102_R0201	3
+#define POSNUM_C102_R0201	0
+#define BGNUM_C102_R0201	4
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_pccable_01_p01_c102_r0201[];
+extern const u8	ev_cube_oyaji_01_p01_c102_r0201[];
+extern const u8	ev_trainerm1_01_p01_c102_r0201[];
+extern const u8	ev_girl1_01_p01_c102_r0201[];
+extern const u8	letter_contest_script[];
+extern const u8	ev_boy1_01_p01_c102_r0201[];
+extern const u8	ev_ojyou2_01_p01_c102_r0201[];
+extern const u8	ev_woman1_01_p01_c102_r0201[];
+
+//BG_SCRIPT
+extern const u8	ev_tane_blender_comm_01_c102_r0201[];
+extern const u8	ev_tane_blender_01_c102_r0201[];
+extern const u8	ev_picture_01_p01_c102_r0201[];
+extern const u8	ev_score_01_p01_c106_r0301[];
+
+const evObjData	OBJ_c102_r0201[] =
+{
+	{
+		PCCABLE_01_C102_R0201,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x3,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pccable_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		CUBEOYAJI_01_C102_R0201,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_cube_oyaji_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TRAINERM1_01_C102_R0201,		//OBJ ID
+		TRAINERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_VON,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_trainerm1_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		GIRL1_01_C102_R0201,		//OBJ ID
+		GIRL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_girl1_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		INTERVM1_01_C102_R0201,		//OBJ ID
+		INTERVM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		letter_contest_script,		//Event Lavel
+		FV_INTERVM1_01_C102_R0201,		//Event Flag
+	},
+
+	{
+		BOY1_01_C102_R0201,		//OBJ ID
+		BOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy1_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OJYOU2_01_C102_R0201,		//OBJ ID
+		OJYOU2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ojyou2_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WOMAN1_01_C102_R0201,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_woman1_01_p01_c102_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c102_r0201[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		FIELD_C102_DOOR04,		//Door ID
+		FIELD_C102,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		FIELD_C102_DOOR04,		//Door ID
+		FIELD_C102,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C102_R0202_MAT01,		//Door ID
+		C102_R0202,			//Map ID
+		C102,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c102_r0201[] =
+{
+	{
+		0x000a,		//Xpos
+		0x0003,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tane_blender_comm_01_c102_r0201,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tane_blender_01_c102_r0201,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_picture_01_p01_c102_r0201,		//Script
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_score_01_p01_c106_r0301,		//Script
+	},
+
+};
+
+const SXY_DATA	c102_r0201_sxy_data =
+{
+OBJNUM_C102_R0201,			// field obj max
+EXITNUM_C102_R0201,		// exit max
+POSNUM_C102_R0201,			// pos event max
+BGNUM_C102_R0201,			// bg event max
+OBJ_c102_r0201,			// field obj data
+EXIT_c102_r0201,			// exit data
+NULL,			// pos event data
+BG_c102_r0201,				// bg event data
+};

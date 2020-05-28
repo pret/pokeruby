@@ -1,0 +1,19 @@
+// ●ポケモンフェスタ用
+
+
+// ●三女
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_test_newtown2
+msg_girl1_01_p01_test_newtown2:
+	.byte	a_,ta_,si_,spc_,ki_,yyo_,u_,ha_,spc_,o_,ru_,su_,ba_,n_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,bou_,sa_,n_,ta_,ti_,ha_,spc_,zi_,yyu_,n_,bi_,ga_,spc_,a_,ru_,ttu_,te_
+	.byte	CR_
+	.byte	do_,ko_,ka_,ni_,spc_,i_,ttu_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ki_,ni_,spc_,na_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	o_,ha_,na_,ya_,sa_,n_,spc_,ha_,zi_,me_,ru_,ka_,ra_,spc_,ma_,ttu_,te_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,12 @@
+enum{
+	SITE_NOTHING,       	//000
+	SITE_DOWN,          	//001
+	SITE_UP,            	//002
+	SITE_LEFT,          	//003
+	SITE_RIGHT,         	//004
+	SITE_DOWNLEFT,      	//005
+	SITE_DOWNRIGHT,     	//006
+	SITE_UPLEFT,        	//007
+	SITE_UPRIGHT,       	//008
+};
+

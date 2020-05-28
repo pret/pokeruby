@@ -1,0 +1,45 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D2002	0
+#define EXITNUM_CAVE_D2002	1
+#define POSNUM_CAVE_D2002	0
+#define BGNUM_CAVE_D2002	1
+
+//BG_SCRIPT
+extern const u8	ev_tenji_01_p01_cave_d2002[];
+
+const SXY_CONNECT	EXIT_cave_d2002[] =
+{
+	{
+		0x0007,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		CAVE_D2001_DOOR01,		//Door ID
+		CAVE_D2001,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_cave_d2002[] =
+{
+	{
+		0x000c,		//Xpos
+		0x002b,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2002,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d2002_sxy_data =
+{
+OBJNUM_CAVE_D2002,			// field obj max
+EXITNUM_CAVE_D2002,		// exit max
+POSNUM_CAVE_D2002,			// pos event max
+BGNUM_CAVE_D2002,			// bg event max
+NULL,			// field obj data
+EXIT_cave_d2002,			// exit data
+NULL,			// pos event data
+BG_cave_d2002,				// bg event data
+};

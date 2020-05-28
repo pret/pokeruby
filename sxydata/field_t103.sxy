@@ -1,0 +1,207 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_T103	5
+#define EXITNUM_FIELD_T103	5
+#define POSNUM_FIELD_T103	0
+#define BGNUM_FIELD_T103	5
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_woman1_01_p01_field_t103[];
+extern const u8	hagi_script_field_t103[];
+extern const u8	ev_fishing1_01_p01_field_t103[];
+extern const u8	ev_boy1_01_p01_field_t103[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_field_t103[];
+extern const u8	ev_kanban_03_p01_field_t103[];
+extern const u8	ev_kanban_pc_01[];
+extern const u8	ev_kanban_pc_01[];
+extern const u8	ev_kanban_04_p01_field_t103[];
+
+const evObjData	OBJ_field_t103[] =
+{
+	{
+		WOMAN1_01_FIELD_T103,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_HON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_woman1_01_p01_field_t103,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OLDMAN1_01_FIELD_T103,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0003,		//work area
+		hagi_script_field_t103,		//Event Lavel
+		FV_HAGI_01_FIELD_T103,		//Event Flag
+	},
+
+	{
+		FISHING1_01_FIELD_T103,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_HON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_fishing1_01_p01_field_t103,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		FUNE_01_FIELD_T103,		//OBJ ID
+		SHIP1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0008,		//Ypos
+		0x01,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_FUNE_01_FIELD_T103,		//Event Flag
+	},
+
+	{
+		BOY1_01_FIELD_T103,		//OBJ ID
+		BOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy1_01_p01_field_t103,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_field_t103[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0003,		//Ypos
+		0x00,		//Height
+		T103_R0301_MAT01,		//Door ID
+		T103_R0301,			//Map ID
+		T103,				//Field ID
+	},
+
+	{
+		0x0002,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		T103_PC01_MAT01,		//Door ID
+		T103_PC01,			//Map ID
+		T103,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0011,		//Ypos
+		0x00,		//Height
+		T103_R0201_MAT01,		//Door ID
+		T103_R0201,			//Map ID
+		T103,				//Field ID
+	},
+
+	{
+		0x0011,		//Xpos
+		0x000e,		//Ypos
+		0x00,		//Height
+		T103_R0101_MAT01,		//Door ID
+		T103_R0101,			//Map ID
+		T103,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		T103_R0401_MAT01,		//Door ID
+		T103_R0401,			//Map ID
+		T103,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_t103[] =
+{
+	{
+		0x000a,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_field_t103,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0010,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_03_p01_field_t103,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_pc_01,		//Script
+	},
+
+	{
+		0x0003,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_pc_01,		//Script
+	},
+
+	{
+		0x0002,		//Xpos
+		0x0004,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_04_p01_field_t103,		//Script
+	},
+
+};
+
+const SXY_DATA	field_t103_sxy_data =
+{
+OBJNUM_FIELD_T103,			// field obj max
+EXITNUM_FIELD_T103,		// exit max
+POSNUM_FIELD_T103,			// pos event max
+BGNUM_FIELD_T103,			// bg event max
+OBJ_field_t103,			// field obj data
+EXIT_field_t103,			// exit data
+NULL,			// pos event data
+BG_field_t103,				// bg event data
+};

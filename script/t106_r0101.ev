@@ -1,0 +1,189 @@
+//====================================================================
+//							t106_r0101
+//						シダケ・ルーム0101
+//====================================================================
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t106_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_t106_r0101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+/*							FLAG_CHANGE_LABEL						*/
+//--------------------------------------------------------------------
+flag_change_t106_r0101:
+	_CALL			tv_contest_chk
+	_END
+
+//--------------------------------------------------------------------
+/*							スクリプト本体							*/
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						ポケモンコンテスト受付						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_pccable_01_p01_t106_r0101
+	_LDVAL		TMPWK3,NORMAL				//文字列取得用
+	_LDVAL		CON_RANK,NORMAL_RANK		//ノーマルに登録
+	_CALL		contest_script_before		//受付処理
+	_CALL		ev_hero_01_anime_t106_r0101//アニメ移動処理
+	_PROGRAM	SET_BRD_OBJ					//ブリーダーを配置
+	_CALL		hero_sexcheck_sp_contest	//主人公配置
+	_LDVAL		WK_SCENE_SP_CONTEST03,1		//マップを記憶
+	_MAP_CHANGE	SP,SP_CONTEST03_1,7,5		//ワープ
+	_STOP_SCRIPT
+	_END
+
+
+/********************************************************************/
+/*						主人公のアニメ処理							*/
+/********************************************************************/
+ev_hero_01_anime_t106_r0101:
+	_TALK_START
+	_SET_OBJ_ANIME	PCCABLE_01_T106_R0101,pccable_01_anime01_t106_r0101
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		4,2,545,1	//カウンターセル書き換え
+	_SET_CELL		4,3,609,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+	
+	_SET_OBJ_ANIME	PCCABLE_01_T106_R0101,pccable_01_anime02_t106_r0101
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		4,2,721,1	//カウンターセル書き換え
+	_SET_CELL		4,3,729,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+	
+	_TIME_WAIT	20
+
+	_SET_OBJ_ANIME	PCCABLE_01_T106_R0101,pccable_01_anime04_t106_r0101
+	_OBJ_ANIME_WAIT
+
+	
+	_SET_OBJ_ANIME	EV_OBJ_SPID hero_01_anime02_t106_r0101
+	_OBJ_ANIME_WAIT
+	
+	_TALK_KEYWAIT	msg_pccable_01_p11_sp_contest
+	_TALK_CLOSE
+	
+	_SET_OBJ_ANIME	PCCABLE_01_T106_R0101,pccable_01_anime03_t106_r0101
+	_SET_OBJ_ANIME	EV_OBJ_SPID hero_01_anime01_t106_r0101
+	_OBJ_ANIME_WAIT 
+	_TALK_END
+	_RET
+
+//-------------------------------------------------------------------
+//				主人公のアニメ
+//-------------------------------------------------------------------
+hero_01_anime01_t106_r0101:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+hero_01_anime02_t106_r0101:
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//-------------------------------------------------------------------
+//				受け付け嬢のアニメ
+//-------------------------------------------------------------------
+pccable_01_anime01_t106_r0101:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+pccable_01_anime02_t106_r0101:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+pccable_01_anime03_t106_r0101:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+pccable_01_anime04_t106_r0101:
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*				似顔絵表示2											*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_01_p01_t106_r0101
+	_TALK_START
+	_PUT_PORTRAIT	1
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*						ロビーにいる人（boy2）						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_t106_r0101
+	_EASY_OBJ_MSG	msg_boy2_01_p01_t106_r0101
+	_END
+
+
+/********************************************************************/
+/*				ロビーうろつき（girl1）								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_t106_r0101
+	_TALK_OBJ_START
+
+	//すでにアイテム入手しているか
+	_IF_FLAGON_JUMP	FE_WAZAM45_GET,ev_girl1_01_p02_t106_r0101
+
+	_TALK_KEYWAIT   msg_girl1_01_p01_t106_r0101
+
+	_ITEM_EVENT		ITEM_WAZAMASIN45,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM45_GET
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテム入手している
+ev_girl1_01_p02_t106_r0101:
+	_TALK_KEYWAIT   msg_girl1_01_p02_t106_r0101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				ロビーうろつき（boy3）								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy3_01_p01_t106_r0101
+	_EASY_OBJ_MSG	msg_boy3_01_p01_t106_r0101
+	_END
+
+
+/********************************************************************/
+/*						タネブレンダー結果発表						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_score_01_p01_t106_r0101
+	_TALK_START
+	_PROGRAM			BLENDMACHINE_SCORE
+	_AB_KEYWAIT
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+
+

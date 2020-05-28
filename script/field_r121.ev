@@ -1,0 +1,205 @@
+//====================================================================
+//							field_r121
+//						フィールド・ロード121
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r121_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r121
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						 FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r121:
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//						 スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							サラリーウーマン						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw1_01_p01_field_r121
+	_EASY_OBJ_MSG	msg_workerw1_01_p01_field_r121
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r121
+	_EASY_MSG       msg_kanban_01_p01_field_r121
+	_END
+
+
+/********************************************************************/
+/*					サファリゾーンの看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r121
+	_EASY_MSG       msg_kanban_02_p01_field_r121
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r121_pos01
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_aquam1_01_p01_field_r121
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	EVILM1_01_FIELD_R121,evilm1_01_field_r121_anime01
+	_SET_OBJ_ANIME	EVILM1_02_FIELD_R121,evilm1_02_field_r121_anime01
+	_SET_OBJ_ANIME	EVILM1_03_FIELD_R121,evilm1_03_field_r121_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//OBJ消す
+	_OBJ_DELETE		EVILM1_01_FIELD_R121
+	_OBJ_DELETE		EVILM1_02_FIELD_R121
+	_OBJ_DELETE		EVILM1_03_FIELD_R121
+
+	_LDVAL			WK_SCENE_FIELD_R121,1
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//アクア団	去っていく
+//--------------------------------------------------------------------
+evilm1_01_field_r121_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクア団２	去っていく
+//--------------------------------------------------------------------
+evilm1_02_field_r121_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクア団３	去っていく
+//--------------------------------------------------------------------
+evilm1_03_field_r121_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_daisukiw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIW_02
+	_TRAINER_DATA2	msg_daisukiw_02_01
+	_TRAINER_DATA3	msg_daisukiw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_daisukiw_02_03
+	_END
+
+SCRIPT_LABEL	ev_gentleman_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	GENTLEMAN_01
+	_TRAINER_DATA2	msg_gentleman_01_01
+	_TRAINER_DATA3	msg_gentleman_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_gentleman_01
+	_TRAINER_EASY_MSG	msg_gentleman_01_03
+	_END
+
+_revenge_gentleman_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	GENTLEMAN_01
+	_TRAINER_DATA2	msg_gentleman_01_04
+	_TRAINER_DATA3	msg_gentleman_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_gentleman_01_06
+	_END
+
+SCRIPT_LABEL	ev_okaruto_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	OKARUTO_03
+	_TRAINER_DATA2	msg_okaruto_03_01
+	_TRAINER_DATA3	msg_okaruto_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_okaruto_03_03
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_01_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_01
+	_TRAINER_DATA2	msg_senpaikouhai_01_01
+	_TRAINER_DATA3	msg_senpaikouhai_01_02
+	_TRAINER_DATA4	msg_senpaikouhai_01_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_01_03
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_01_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_01
+	_TRAINER_DATA2	msg_senpaikouhai_01_05
+	_TRAINER_DATA3	msg_senpaikouhai_01_06
+	_TRAINER_DATA4	msg_senpaikouhai_01_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_01_07
+	_END
+
+SCRIPT_LABEL	ev_sexyw_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_04
+	_TRAINER_DATA2	msg_sexyw_04_01
+	_TRAINER_DATA3	msg_sexyw_04_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_sexyw_04
+	_TRAINER_EASY_MSG	msg_sexyw_04_03
+	_END
+
+_revenge_sexyw_04:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_04
+	_TRAINER_DATA2	msg_sexyw_04_04
+	_TRAINER_DATA3	msg_sexyw_04_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_04_06
+	_END
+

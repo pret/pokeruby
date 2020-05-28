@@ -1,0 +1,120 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_T105_R0102	3
+#define EXITNUM_T105_R0102	2
+#define POSNUM_T105_R0102	0
+#define BGNUM_T105_R0102	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_middlem1_01_p01_t105_r0102[];
+extern const u8	ev_trainerw1_01_p01_t105_r0102[];
+extern const u8	ev_capboy1_01_p01_t105_r0102[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_t105_r0102[];
+extern const u8	ev_kanban_01_p01_t105_r0102[];
+
+const evObjData	OBJ_t105_r0102[] =
+{
+	{
+		MIDDLEM1_01_T105_R0102,		//OBJ ID
+		MIDDLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		MV_ON,		//Obj Mode Type
+		0x2,		//Move Limit X
+		0x2,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem1_01_p01_t105_r0102,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TRAINERW1_01_T105_R0102,		//OBJ ID
+		TRAINERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		MV_ON,		//Obj Mode Type
+		0x2,		//Move Limit X
+		0x3,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_trainerw1_01_p01_t105_r0102,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		CAPBOY1_01_T105_R0102,		//OBJ ID
+		CAPBOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		MV_ON,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x3,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_capboy1_01_p01_t105_r0102,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_t105_r0102[] =
+{
+	{
+		0x000a,		//Xpos
+		0x0011,		//Ypos
+		0x00,		//Height
+		T105_R0101_DOOR01,		//Door ID
+		T105_R0101,			//Map ID
+		T105,				//Field ID
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0011,		//Ypos
+		0x00,		//Height
+		T105_R0101_DOOR01,		//Door ID
+		T105_R0101,			//Map ID
+		T105,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_t105_r0102[] =
+{
+	{
+		0x000c,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_t105_r0102,		//Script
+	},
+
+	{
+		0x0008,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_t105_r0102,		//Script
+	},
+
+};
+
+const SXY_DATA	t105_r0102_sxy_data =
+{
+OBJNUM_T105_R0102,			// field obj max
+EXITNUM_T105_R0102,		// exit max
+POSNUM_T105_R0102,			// pos event max
+BGNUM_T105_R0102,			// bg event max
+OBJ_t105_r0102,			// field obj data
+EXIT_t105_r0102,			// exit data
+NULL,			// pos event data
+BG_t105_r0102,				// bg event data
+};

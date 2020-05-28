@@ -1,0 +1,84 @@
+//====================================================================
+//						cave_d0802
+//						おくりびやま２Ｆ
+//※自転車で早く通過しないと下の階に落ちる床を設置してあります。
+//　evdata.sにsp_script_pitfall/ev_flag_pitfallの本体があるので参照のこと。
+//====================================================================
+
+//--------------------------------------------------------------------
+//						 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		cave_d0802_event_data
+SP_SCRIPT_LABEL			sp_script_pitfall
+FLAG_CHANGE_LABEL		ev_flag_pitfall
+INIT_CTRL_LABEL			ev_effect_pitfall
+EVENT_DATA_END 
+
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+ev_effect_pitfall:
+	_SET_MAP_EFFECT		MAP_EFFECT_BREAKFLOOR	@壊れる床の仕組みを登録
+	_SET_PITFALL_MAP_ID	CAVE,CAVE_D0801,0,0		@落ちた先のマップを指定
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						少女４										*/
+/********************************************************************/
+SCRIPT_LABEL			ev_girl4_01_p01_cave_d0802
+	_EASY_OBJ_MSG		msg_girl4_01_p01_cave_d0802
+	_END
+
+
+/********************************************************************/
+/*						おじさん２									*/
+/********************************************************************/
+SCRIPT_LABEL			ev_middlem2_01_p01_cave_d0802
+	_EASY_OBJ_MSG		msg_middlem2_01_p01_cave_d0802
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL			ev_monsterm_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		MONSTERM_03
+	_TRAINER_DATA2		msg_monsterm_03_01
+	_TRAINER_DATA3		msg_monsterm_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_monsterm_03_03
+	_END
+
+SCRIPT_LABEL			ev_lovelove_01_01		//男
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1		LOVELOVE_01
+	_TRAINER_DATA2		msg_lovelove_01_01
+	_TRAINER_DATA3		msg_lovelove_01_02
+	_TRAINER_DATA4		msg_lovelove_01_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_lovelove_01_03
+	_END
+
+SCRIPT_LABEL			ev_lovelove_01_02		//女
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1		LOVELOVE_01
+	_TRAINER_DATA2		msg_lovelove_01_05
+	_TRAINER_DATA3		msg_lovelove_01_06
+	_TRAINER_DATA4		msg_lovelove_01_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_lovelove_01_07
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

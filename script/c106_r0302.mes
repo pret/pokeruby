@@ -1,0 +1,495 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆ミナモ　マスターランク：ホール
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ホールうろつき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_c106_r0302
+msg_boy1_01_p01_c106_r0302:
+	.byte	u_,tu_,ku_,si_,sa_,spc_,KO_,N_,TE_,SU_,TO_,de_
+	.byte	CR_
+	.byte	yu_,u_,si_,yyo_,u_,si_,ta_,spc_,ko_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,ka_,si_,ko_,sa_,spc_,KO_,N_,TE_,SU_,TO_,de_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,u_,si_,yyo_,u_,spc_,sa_,se_,ta_,n_,da_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,a_,spc_,zi_,bu_,n_,no_,spc_,sa_,i_,no_,u_,ga_,spc_,ko_,wa_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ホールうろつき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p01_c106_r0302
+msg_boy3_01_p01_c106_r0302:
+	.byte	na_,n_,do_,mo_,spc_,KO_,N_,TE_,SU_,TO_,ni_,spc_,de_,te_,i_,te_
+	.byte	CR_
+	.byte	na_,n_,to_,na_,ku_,spc_,wa_,ka_,ttu_,te_,spc_,ki_,ta_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,to_,e_,ba_,spc_,ka_,ttu_,ko_,i_,i_,KO_,N_,TE_,SU_,TO_,de_
+	.byte	CR_
+	.byte	ka_,ttu_,ko_,i_,i_,wa_,za_,wo_,spc_,da_,su_,to_,spc_,u_,ke_,ru_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,si_,ko_,i_,A_,PI_,bou_,RU_,ya_,spc_,ka_,wa_,i_,i_,A_,PI_,bou_,RU_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ze_,ka_,spc_,u_,ke_,ga_,spc_,wa_,ru_,i_,n_,da_,yo_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ホールうろつき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_c106_r0302
+msg_girl3_01_p01_c106_r0302:
+	.byte	sa_,ttu_,ki_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_,spc_,o_,ni_,i_,sa_,n_
+	.byte	CR_
+	.byte	su_,ttu_,go_,i_,spc_,ta_,ku_,sa_,n_,no_,spc_,si_,yyu_,ru_,i_,no_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,mo_,ttu_,te_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,re_,da_,ke_,spc_,mo_,ttu_,te_,re_,ba_
+	.byte	CR_
+	.byte	yu_,u_,si_,yyo_,u_,spc_,de_,ki_,ru_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ホールうろつき（カイナからきた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c106_r0302
+msg_seaman1_01_p01_c106_r0302:
+	.byte	ka_,bou_,ttu_,spc_,hi_,ro_,i_,ne_,spc_,ko_,ko_,ha_,gyoe_
+	.byte	CR_
+	.byte	i_,na_,ka_,no_,spc_,KO_,N_,TE_,SU_,TO_,spc_,ka_,i_,zi_,yyo_,u_,spc_,to_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,n_,ti_,yyo_,u_,ka_,n_,ga_,spc_,ti_,ga_,u_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージ：左端（かしこさ）＝Ａ
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●司会Ａ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_c106_r0302
+msg_workerw1_01_p01_c106_r0302:
+	.byte	si_,ka_,i_,kako2_,ha_,a_,i_,spc_,ka_,si_,ko_,i_,spc_,PO_,KE_,MO_,N_,to_
+	.byte	CR_
+	.byte	so_,si_,te_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,mi_,na_,sa_,bou_,n_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ga_,n_,ba_,ttu_,te_,ku_,da_,sa_,bou_,bou_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	RE_,TTU_,TU_,gyoe_,spc_,A_,PI_,bou_,RU_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●審査員Ａ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_c106_r0302
+msg_workerm1_01_p01_c106_r0302:
+	.byte	si_,n_,sa_,i_,n_,kako2_,KO_,N_,TE_,SU_,TO_,spc_,ta_,no_,si_,n_,de_,ma_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,to_,mo_,da_,ti_,wo_,spc_,n3_,ni_,n_,spc_,tu_,re_,te_,ku_,re_,ba_
+	.byte	CR_
+	.byte	n4_,ni_,n_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,sa_,n_,ka_,spc_,de_,ki_,ma_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ１人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p01_c106_r0302
+msg_fighter1_01_p01_c106_r0302:
+	.byte	a_,wa_,wa_,wa_,tenten_,tenten_
+	.byte	CR_
+	.byte	de_,ru_,spc_,KO_,N_,TE_,SU_,TO_,spc_,ma_,ti_,ga_,e_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ku_,ma_,si_,i_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	ka_,si_,ko_,sa_,spc_,KO_,N_,TE_,SU_,TO_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,spc_,yo_,si_,ttu_
+	.byte	CR_
+	.byte	ka_,si_,ko_,so_,u_,na_,spc_,i_,wa_,ku_,da_,ki_,spc_,ta_,no_,mu_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ２人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c106_r0302
+msg_oldman1_01_p01_c106_r0302:
+	.byte	wa_,si_,ga_,spc_,na_,ga_,ne_,n_
+	.byte	CR_
+	.byte	ti_,si_,ki_,no_,spc_,su_,be_,te_,wo_,spc_,ka_,ke_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,si_,ko_,ku_,spc_,so_,da_,te_,ta_,spc_,PO_,KE_,MO_,N_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ka_,i_,spc_,ya_,tu_,ra_,no_,spc_,PO_,KE_,MO_,N_,spc_,na_,n_,zo_,ni_
+	.byte	CR_
+	.byte	so_,u_,spc_,ya_,su_,ya_,su_,to_,spc_,ma_,ke_,ta_,ri_,ha_,spc_,se_,n_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ba_,a_,sa_,n_,spc_,mi_,to_,ru_,ka_,bou_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ３人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_c106_r0302
+msg_freak1_01_p01_c106_r0302:
+	.byte	yo_,si_,gyoe_,spc_,o_,re_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	ko_,no_,tu_,gi_,ni_,spc_,ka_,si_,ko_,i_,spc_,wa_,za_,wo_,da_,se_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ttu_,ki_,ni_,spc_,ka_,i_,zi_,yyo_,u_,ga_,spc_,E_,KI_,SA_,I_,TO_,su_,ru_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ４人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_waitress1_01_p01_c106_r0302
+msg_waitress1_01_p01_c106_r0302:
+	.byte	ya_,da_,a_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,no_,spc_,ZU_,BA_,TTU_,TO_,ti_,yya_,n_,no_
+	.byte	CR_
+	.byte	ki_,yyu_,u_,ke_,tu_,ga_,spc_,a_,n_,ma_,ri_,spc_,su_,te_,ki_,de_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,du_,ke_,te_,spc_,na_,n_,do_,mo_,spc_,da_,si_,te_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	na_,n_,ka_,spc_,ga_,ttu_,ka_,ri_,spc_,sa_,re_,ti_,yya_,ttu_,te_,ru_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_c106_r0302
+msg_oldwoman1_01_p01_c106_r0302:
+	.byte	KI_,YYA_,bou_,gyoe_,spc_,o_,zi_,i_,sa_,n_,spc_,su_,te_,ki_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_02_p01_c106_r0302
+msg_boy1_02_p01_c106_r0302:
+	.byte	o_,na_,zi_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ttu_,te_,i_,te_,mo_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ni_,spc_,yo_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ze_,n_,ze_,n_,spc_,ti_,ga_,u_,spc_,wa_,za_,de_
+	.byte	SCROLL_WAIT_
+	.byte	A_,PI_,bou_,RU_,si_,te_,spc_,ku_,ru_,n_,da_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ha_,spc_,si_,yyo_,u_,bu_,to_,spc_,i_,ttu_,si_,yyo_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boyscout1_01_p01_c106_r0302
+msg_boyscout1_01_p01_c106_r0302:
+	.byte	TO_,RE_,bou_,NA_,bou_,yo_,ri_,spc_,PO_,KE_,MO_,N_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	a_,ta_,ma_,spc_,yo_,sa_,so_,u_,ni_,spc_,mi_,e_,ru_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＡ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c106_r0302
+msg_trainerw1_01_p01_c106_r0302:
+	.byte	ya_,ttu_,pa_,ri_,spc_,ka_,si_,ko_,sa_,spc_,KO_,N_,TE_,SU_,TO_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,se_,i_,te_,ki_,na_,spc_,mi_,do_,ri_,i_,ro_,ga_
+	.byte	CR_
+	.byte	u_,bou_,n_,spc_,KU_,bou_,RU_,da_,wa_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージ：右から２番目（美しさ）＝Ｂ
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●司会Ｂ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_02_p01_c106_r0302
+msg_workerw1_02_p01_c106_r0302:
+	.byte	si_,ka_,i_,kako2_,a_,ra_,hate_,spc_,a_,na_,ta_,mo_
+	.byte	CR_
+	.byte	u_,tu_,ku_,si_,sa_,spc_,KO_,N_,TE_,SU_,TO_,ni_,spc_,de_,ru_,no_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	ga_,n_,ba_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●審査員Ｂ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_02_p01_c106_r0302
+msg_workerm1_02_p01_c106_r0302:
+	.byte	si_,n_,sa_,i_,n_,kako2_,do_,no_,spc_,PO_,KE_,MO_,N_,mo_
+	.byte	CR_
+	.byte	zi_,tu_,ni_,spc_,u_,tu_,ku_,si_,i_,spc_,de_,su_,na_,aa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,mo_,wa_,zu_,spc_,sa_,i_,te_,n_,wo_,spc_,wa_,su_,re_,ma_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ１人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c106_r0302
+msg_woman2_01_p01_c106_r0302:
+	.byte	ko_,n_,na_,ni_,spc_,u_,tu_,ku_,si_,i_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	ho_,ka_,ni_,spc_,i_,na_,i_,wa_,yo_,spc_,ne_,e_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,n_,na_,no_,spc_,me_,wo_,spc_,ku_,gi_,du_,ke_,ni_,spc_,si_,ti_,yya_,u_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ２人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou1_01_p01_c106_r0302
+msg_ojyou1_01_p01_c106_r0302:
+	.byte	u_,wa_,bou_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,KO_,N_,TE_,SU_,TO_,no_,spc_,ta_,me_,ni_
+	.byte	CR_
+	.byte	i_,ttu_,si_,yyo_,ke_,n_,me_,i_,spc_,ke_,du_,ku_,ro_,i_,spc_,si_,ta_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ri_,su_,gi_,te_,spc_,a_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	BO_,SA_,BO_,SA_,ni_,spc_,na_,ttu_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,si_,yo_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ３人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p01_c106_r0302
+msg_boy5_01_p01_c106_r0302:
+	.byte	ko_,no_,spc_,ma_,bu_,si_,su_,gi_,ru_,spc_,O_,bou_,RO_,RA_,BI_,bou_,MU_,ni_
+	.byte	CR_
+	.byte	si_,n_,sa_,i_,n_,mo_,spc_,me_,wo_,spc_,a_,ke_,ra_,re_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,a_,re_,hate_
+	.byte	CR_
+	.byte	so_,re_,zi_,yya_,spc_,i_,mi_,ga_,spc_,na_,i_,no_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ４人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c106_r0302
+msg_middlew1_01_p01_c106_r0302:
+	.byte	ko_,no_,spc_,ki_,re_,i_,na_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	a_,ta_,si_,no_,spc_,wa_,ka_,i_,spc_,ko_,ro_,ni_,spc_,so_,ttu_,ku_,ri_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ttu_,te_,spc_,i_,ttu_,ta_,ra_,tenten_,tenten_,spc_,to_,u_,ti_,yya_,n_,ga_
+	.byte	CR_
+	.byte	no_,n_,de_,ta_,spc_,o_,ti_,yya_,wo_,spc_,hu_,ki_,da_,si_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,na_,n_,ka_,spc_,he_,n_,na_,ko_,to_,spc_,i_,ttu_,ta_,ka_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c106_r0302
+msg_woman1_01_p01_c106_r0302:
+	.byte	ya_,ttu_,pa_,ri_,spc_,zi_,yyo_,se_,i_,to_,spc_,si_,te_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	u_,tu_,ku_,si_,sa_,KO_,N_,TE_,SU_,TO_,de_,spc_,ka_,te_,ru_,to_
+	.byte	CR_
+	.byte	i_,tu_,mo_,yo_,ri_,spc_,ti_,yyo_,ttu_,pi_,ri_,spc_,u_,re_,si_,i_,no_,yo_,ne_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c106_r0302
+msg_middlem1_01_p01_c106_r0302:
+	.byte	u_,wa_,ttu_,ha_,ttu_,ha_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	be_,ttu_,pi_,n_,na_,spc_,PO_,KE_,MO_,N_,ti_,yya_,n_,spc_,ga_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,da_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,ri_,yya_,spc_,ha_,na_,ya_,ka_,de_,spc_,e_,e_,no_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＢ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl4_01_p01_c106_r0302
+msg_girl4_01_p01_c106_r0302:
+	.byte	ta_,da_,spc_,u_,tu_,ku_,si_,i_,spc_,da_,ke_,zi_,yya_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,ka_,te_,na_,i_,wa_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,mi_,ta_,i_,ni_
+	.byte	CR_
+	.byte	o_,te_,i_,re_,si_,te_,spc_,TU_,YA_,TU_,YA_,spc_,zi_,yya_,na_,ki_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージ：右端（かわいさ）＝（カイナから引っ越し）
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●司会C
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_03_p01_c106_r0302
+msg_workerw1_03_p01_c106_r0302:
+	.byte	si_,ka_,i_,kako2_,a_,ra_,spc_,a_,ra_,bou_,gyoe_
+	.byte	CR_
+	.byte	i_,ma_,ha_,spc_,KO_,N_,TE_,SU_,TO_,spc_,ti_,yyu_,u_,spc_,de_,su_,yo_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,ke_,tu_,ke_,de_,spc_,E_,N_,TO_,RI_,bou_,spc_,si_,te_,ka_,ra_
+	.byte	CR_
+	.byte	de_,te_,spc_,ku_,da_,sa_,bou_,i_,gyoe_,spc_,ne_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●審査員Ｃ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_03_p01_c106_r0302
+msg_workerm1_03_p01_c106_r0302:
+	.byte	si_,n_,sa_,i_,n_,kako2_,o_,o_
+	.byte	CR_
+	.byte	mi_,n_,na_,spc_,ka_,wa_,i_,i_,spc_,A_,PI_,bou_,RU_,da_,na_,a_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,o_,ttu_,spc_,na_,n_,te_,spc_,ka_,wa_,i_,i_
+	.byte	CR_
+	.byte	mi_,zu_,a_,so_,bi_,no_,spc_,A_,PI_,bou_,RU_,na_,n_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ１人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_02_p01_c106_r0302
+msg_boy2_02_p01_c106_r0302:
+	.byte	a_,a_,spc_,bo_,ku_,no_,spc_,RU_,RI_,RI_,ti_,yya_,n_,ga_
+	.byte	CR_
+	.byte	ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ki_,wo_,spc_,to_,ra_,re_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ２人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_c106_r0302
+msg_girl2_01_p01_c106_r0302:
+	.byte	wa_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,ttu_,te_,spc_,si_,yyo_,u_,bu_,da_,to_
+	.byte	CR_
+	.byte	n1_,do_,mo_,spc_,ka_,ttu_,ta_,spc_,ko_,to_,spc_,na_,i_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,ha_,spc_,o_,to_,ku_,i_,spc_,na_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ３人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_02_p01_c106_r0302
+msg_boy3_02_p01_c106_r0302:
+	.byte	bo_,ku_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,ka_,re_,i_,na_
+	.byte	CR_
+	.byte	ha_,na_,bi_,ra_,no_,ma_,i_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	da_,re_,ni_,mo_,spc_,zi_,yya_,ma_,ha_,spc_,sa_,se_,na_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ４人目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_02_p01_c106_r0302
+msg_oldwoman1_02_p01_c106_r0302:
+	.byte	do_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,mo_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,ni_,spc_,ka_,wa_,i_,i_,wa_,ne_,e_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,wa_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	ka_,wa_,i_,ku_,spc_,A_,PI_,bou_,RU_,spc_,su_,re_,ba_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,mo_,ttu_,to_,spc_,ka_,wa_,i_,i_,spc_,ha_,zu_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_03_p01_c106_r0302
+msg_woman1_03_p01_c106_r0302:
+	.byte	u_,ti_,no_,ko_,ga_,spc_,KO_,N_,TE_,SU_,TO_,ni_,spc_,de_,te_,ru_,n_,de_,su_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,ra_,ttu_,spc_,ga_,n_,ba_,ttu_,te_,gyoe_
+	.byte	CR_
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ti_,ba_,n_,yo_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_02_p01_c106_r0302
+msg_middlem1_02_p01_c106_r0302:
+	.byte	WA_,SI_,ha_,spc_,a_,no_,spc_,o_,n_,na_,no_,ko_,ga_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,spc_,ka_,wa_,i_,i_,to_,spc_,o_,mo_,u_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	e_,ttu_,hate_,spc_,PO_,KE_,MO_,N_,no_,spc_,mi_,ta_,me_,wo_
+	.byte	CR_
+	.byte	ku_,ra_,be_,te_,ru_,n_,ka_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ステージＣ客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c106_r0302
+msg_ojyou2_01_p01_c106_r0302:
+	.byte	a_,a_,n_,spc_,mi_,te_,ta_,ra_
+	.byte	CR_
+	.byte	a_,no_,spc_,PO_,KE_,MO_,N_,spc_,ho_,si_,ku_,spc_,na_,ttu_,ti_,yya_,ttu_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,ma_,e_,ni_,spc_,i_,ko_,ttu_,to_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●５つステージがある看板メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_c106_r0302
+msg_kanban_01_p01_c106_r0302:
+	.byte	ka_,ttu_,ko_,yo_,sa_,KO_,N_,TE_,SU_,TO_,spc_,SU_,TE_,bou_,ZI_
+	.byte	CR_
+	.byte	KU_,bou_,RU_,na_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ME_,RO_,ME_,RO_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_kanban_02_p01_c106_r0302
+msg_kanban_02_p01_c106_r0302:
+	.byte	u_,tu_,ku_,si_,sa_,KO_,N_,TE_,SU_,TO_,spc_,SU_,TE_,bou_,ZI_
+	.byte	CR_
+	.byte	BI_,YYU_,bou_,TE_,II_,HU_,RU_,spc_,PO_,KE_,MO_,N_,ni_,spc_,KU_,RA_,KU_,RA_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_kanban_03_p01_c106_r0302
+msg_kanban_03_p01_c106_r0302:
+	.byte	ka_,wa_,i_,sa_,KO_,N_,TE_,SU_,TO_,spc_,SU_,TE_,bou_,ZI_
+	.byte	CR_
+	.byte	KI_,YYU_,bou_,TO_,na_,spc_,PO_,KE_,MO_,N_,ni_,spc_,U_,KI_,U_,KI_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_kanban_04_p01_c106_r0302
+msg_kanban_04_p01_c106_r0302:
+	.byte	ka_,si_,ko_,sa_,KO_,N_,TE_,SU_,TO_,spc_,SU_,TE_,bou_,ZI_
+	.byte	CR_
+	.byte	I_,N_,TE_,RI_,spc_,PO_,KE_,MO_,N_,ni_,spc_,TO_,RO_,TO_,RO_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_kanban_05_p01_c106_r0302
+msg_kanban_05_p01_c106_r0302:
+	.byte	ta_,ku_,ma_,si_,sa_,KO_,N_,TE_,SU_,TO_,spc_,SU_,TE_,bou_,ZI_
+	.byte	CR_
+	.byte	WA_,I_,RU_,DO_,na_,spc_,PO_,KE_,MO_,N_,ni_,spc_,DO_,KI_,DO_,KI_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

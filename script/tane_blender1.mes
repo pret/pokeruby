@@ -1,0 +1,206 @@
+// ●きのみブレンダーをチェック
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p01_contest
+msg_cube_01_p01_contest:
+	.byte	o_,gyoe_,spc_,o_,zi_,sa_,n_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ri_,ta_,i_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●いいえ　→msg_cube_01_p03_contest:
+// ●はい　　→msg_cube_01_p02_contest:
+// ●はい　　でも、きのみを持っていない→msg_cube_01_p07_contest:
+
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p02_contest
+msg_cube_01_p02_contest:
+	.byte	so_,u_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_cube_01_p04_contest:
+// ●　ポロックケースがいっぱい（４０個）だったとき→msg_cube_01_p10_contest:
+// ●　ポロックケースをまだもってない→msg_cube_01_p11_contest:
+
+
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p03_contest
+msg_cube_01_p03_contest:
+	.byte	so_,u_,ka_,tenten_
+	.byte	CR_
+	.byte	o_,zi_,sa_,n_,spc_,sa_,mi_,si_,i_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p04_contest
+msg_cube_01_p04_contest:
+	.byte	zi_,yya_,a_,spc_,PO_,RO_,TTU_,KU_,no_,spc_,tu_,ku_,ri_,ka_,ta_,ha_,spc_
+	.byte	CR_
+	.byte	mo_,u_,spc_,si_,ttu_,te_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●はい　　→msg_cube_01_p06_contest:
+// ●いいえ　→msg_cube_01_p05_contest:
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p05_contest
+msg_cube_01_p05_contest:
+	.byte	zi_,yya_,a_,spc_,ha_,zi_,me_,ru_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RE_,TTU_,TU_,spc_,ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ゲーム画面へ
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p06_contest
+msg_cube_01_p06_contest:
+	.byte	yo_,si_,spc_,se_,tu_,me_,i_,su_,ru_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,aa_,ni_,spc_,ka_,n_,ta_,n_,na_,spc_,ko_,to_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,no_,spc_,MA_,bou_,KU_,ga_
+	.byte	CR_
+	.byte	zi_,bu_,n_,no_,spc_,to_,ko_,ro_,ni_,spc_,ki_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	BO_,TA_,N_,wo_,spc_,o_,se_,ba_,spc_,i_,i_,da_,ke_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,zi_,ttu_,sa_,i_,ni_,spc_,ya_,ttu_,te_,mi_,re_,ba_
+	.byte	CR_
+	.byte	su_,gu_,spc_,wa_,ka_,ru_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_cube_01_p05_contest:
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p07_contest
+msg_cube_01_p07_contest:
+	.byte	a_,re_,hate_
+	.byte	CR_
+	.byte	de_,mo_,spc_,ki_,no_,mi_,wo_,spc_,mo_,ttu_,te_,na_,i_,spc_,mi_,ta_,i_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,no_,mi_,ga_,spc_,na_,i_,to_,spc_,PO_,RO_,TTU_,KU_,ha_
+	.byte	CR_
+	.byte	tu_,ku_,re_,na_,i_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　今日はまだきのみをもらってない　→msg_cube_01_p08_contest:
+// ●　今日はもうきのみをもらった　　　→msg_cube_01_p09_contest:
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p08_contest
+msg_cube_01_p08_contest:
+	.byte	si_,ka_,ta_,na_,i_,na_,aa_,spc_,mo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	o_,zi_,sa_,n_,no_,spc_,a_,ma_,ttu_,ta_,spc_,ki_,no_,mi_,de_
+	.byte	CR_
+	.byte	yo_,ke_,re_,ba_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,de_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,de_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ro_,u_,ya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●モモンのみをおやじからもらいます。
+// ●一日フラグをたてます。
+// ●　→msg_cube_01_p04_contest:
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p09_contest
+msg_cube_01_p09_contest:
+	.byte	o_,zi_,sa_,n_,no_,spc_,a_,ma_,ri_,no_,spc_,ki_,no_,mi_,ga_,spc_,a_,re_,ba_
+	.byte	CR_
+	.byte	a_,ge_,ru_,n_,spc_,da_,ke_,do_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,mo_,u_,spc_,a_,ma_,ttu_,te_,spc_,na_,i_,n_,da_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,ko_,n_,do_,spc_,ya_,ro_,u_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●ポロックがいっぱいの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p10_contest
+msg_cube_01_p10_contest:
+	.byte	de_,mo_,spc_,PO_,RO_,TTU_,KU_,KE_,bou_,SU_,spc_,ga_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,no_,spc_,yo_,u_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,he_,ra_,si_,te_,ka_,ra_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,o_,i_,de_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●ポロックケースがない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_01_p11_contest
+msg_cube_01_p11_contest:
+	.byte	de_,mo_,spc_,PO_,RO_,TTU_,KU_,KE_,bou_,SU_,wo_
+	.byte	CR_
+	.byte	ma_,da_,mo_,ttu_,te_,spc_,na_,i_,yo_,u_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,RO_,TTU_,KU_,KE_,bou_,SU_,wo_
+	.byte	CR_
+	.byte	mo_,ra_,ttu_,te_,ka_,ra_,spc_,ma_,ta_,o_,i_,de_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// ●ゲーム内きのみブレンダーキャラ
+// ●男の子用メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cubeboy_01_p01_contest
+msg_cubeboy_01_p01_contest:
+	.byte	ha_,ya_,ku_,spc_,ma_,ze_,yo_,u_,ze_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女の子用メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cubegirl_01_p01_contest
+msg_cubegirl_01_p01_contest:
+	.byte	do_,n_,na_,spc_,PO_,RO_,TTU_,KU_,ga_,spc_,de_,ki_,ru_,no_,ka_,si_,ra_,hate_
+	.byte	CR_
+	.byte	DO_,KI_,DO_,KI_,spc_,si_,ti_,yya_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

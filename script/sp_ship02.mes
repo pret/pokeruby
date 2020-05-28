@@ -1,0 +1,74 @@
+// ●船底
+
+
+// ▼ship02----------------------------------
+// ●ふなのり０５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_05_01
+msg_sailor_05_01:
+	.byte	ko_,n_,na_,ni_,spc_,de_,ttu_,ka_,i_,spc_,to_,ko_,ro_
+	.byte	CR_
+	.byte	so_,u_,zi_,spc_,si_,te_,ru_,no_,mo_,spc_,a_,ki_,ta_,zo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,i_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,yo_,u_,ya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ふなのり０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_05_02
+msg_sailor_05_02:
+	.byte	o_,to_,u_,to_,spc_,ma_,ke_,ti_,ma_,ttu_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ふなのり０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_05_03
+msg_sailor_05_03:
+	.byte	o_,re_,ta_,ti_,spc_,o_,so_,u_,zi_,spc_,BU_,RA_,ZA_,bou_,ZU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ni_,ki_,ga_,spc_,se_,n_,za_,i_,spc_,bu_,ti_,ma_,ke_,te_,bou_
+	.byte	CR_
+	.byte	o_,to_,u_,to_,spc_,se_,ttu_,se_,to_,spc_,mi_,ga_,ku_,no_,sa_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼ship02----------------------------------
+// ●ふなのり０６：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_06_01
+msg_sailor_06_01:
+	.byte	ko_,n_,na_,ni_,spc_,hi_,ro_,i_,ka_,ra_
+	.byte	CR_
+	.byte	hu_,na_,zo_,ko_,de_,spc_,PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,si_,te_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	da_,i_,zi_,yyo_,u_,bu_,spc_,da_,ro_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ふなのり０６：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_06_02
+msg_sailor_06_02:
+	.byte	a_,ni_,ki_,spc_,ma_,ke_,ti_,ma_,ttu_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ふなのり０６：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_06_03
+msg_sailor_06_03:
+	.byte	o_,re_,ta_,ti_,spc_,o_,so_,u_,zi_,spc_,BU_,RA_,ZA_,bou_,ZU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ni_,ki_,ga_,spc_,se_,n_,za_,i_,spc_,bu_,ti_,ma_,ke_,te_,bou_
+	.byte	CR_
+	.byte	o_,to_,u_,to_,spc_,se_,ttu_,se_,to_,spc_,mi_,ga_,ku_,no_,sa_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

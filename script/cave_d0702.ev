@@ -1,0 +1,95 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d0702_event_data
+INIT_CTRL_LABEL		ev_effect_cave_d0702
+FLAG_CHANGE_LABEL	flag_change_cave_d0702
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//灰エフェクトセット
+ev_effect_cave_d0702:
+	_SET_MAP_EFFECT		MAP_EFFECT_ASH
+	_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0702:
+	//天候を変える
+	_IFVAL_CALL			WK_SCENE_CAVE_D0702,EQ,1,set_weather_cave_d0702
+	_END
+
+//天候を変える
+set_weather_cave_d0702:
+	_SET_WEATHER		ID_WEATHER_ASH		/* 火山灰 */
+	_UPDATE_WEATHER
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mount_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_07
+	_TRAINER_DATA2	msg_mount_07_01
+	_TRAINER_DATA3	msg_mount_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_07_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_06
+	_TRAINER_DATA2	msg_picnicg_06_01
+	_TRAINER_DATA3	msg_picnicg_06_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_picnicg_06
+	_TRAINER_EASY_MSG	msg_picnicg_06_03
+	_END
+
+_revenge_picnicg_06:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_06
+	_TRAINER_DATA2	msg_picnicg_06_04
+	_TRAINER_DATA3	msg_picnicg_06_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_06_06
+	_END
+
+SCRIPT_LABEL	ev_campb_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_06
+	_TRAINER_DATA2	msg_campb_06_01
+	_TRAINER_DATA3	msg_campb_06_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_campb_06
+	_TRAINER_EASY_MSG	msg_campb_06_03
+	_END
+
+_revenge_campb_06:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_06
+	_TRAINER_DATA2	msg_campb_06_04
+	_TRAINER_DATA3	msg_campb_06_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_06_06
+	_END
+

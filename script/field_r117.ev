@@ -1,0 +1,232 @@
+//====================================================================
+//							field_r117
+//						フィールド・ロード117
+//====================================================================
+
+//--------------------------------------------------------------------
+//				      マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r117_event_data
+FLAG_CHANGE_LABEL	ev_flag_set_field_r117
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+ev_flag_set_field_r117:
+	_CALL	ev_flag_sub_sodateya
+	_END
+
+//2歩前へ
+ev_flag_sub_sodateya:
+	_IF_FLAGOFF_JUMP	FE_SODATE_TAMAGO,_check2_sodate_01
+	_SXY_POS_CHANGE	OLDMAN2_01_SODATEYA,47,6
+_check2_sodate_01:
+	_RET
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								少女4								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl4_01_p01_field_r117
+	_EASY_OBJ_MSG	msg_girl4_01_p01_field_r117
+	_END
+
+
+/********************************************************************/
+/*								坊や２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya2_01_p01_field_r117
+	_EASY_OBJ_MSG	msg_boya2_01_p01_field_r117
+	_END
+
+
+/********************************************************************/
+/*								少女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_field_r117
+	_EASY_OBJ_MSG	msg_girl2_01_p01_field_r117
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r117
+	_EASY_MSG       msg_kanban_01_p01_field_r117
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r117
+	_EASY_MSG       msg_kanban_02_p01_field_r117
+	_END
+
+
+/********************************************************************/
+/*							看板（育てや）							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r117
+	_EASY_MSG       msg_kanban_03_p01_field_r117
+	_END
+
+
+/********************************************************************/
+//							トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_breederm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BREEDERM_01
+	_TRAINER_DATA2	msg_breederm_01_01
+	_TRAINER_DATA3	msg_breederm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_breederm_01
+	_TRAINER_EASY_MSG	msg_breederm_01_03
+	_END
+
+_revenge_breederm_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	BREEDERM_01
+	_TRAINER_DATA2	msg_breederm_01_04
+	_TRAINER_DATA3	msg_breederm_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_breederm_01_06
+	_END
+
+SCRIPT_LABEL	ev_breederw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BREEDERW_01
+	_TRAINER_DATA2	msg_breederw_01_01
+	_TRAINER_DATA3	msg_breederw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_breederw_01
+	_TRAINER_EASY_MSG	msg_breederw_01_03
+	_END
+
+_revenge_breederw_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	BREEDERW_01
+	_TRAINER_DATA2	msg_breederw_01_04
+	_TRAINER_DATA3	msg_breederw_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_breederw_01_06
+	_END
+
+SCRIPT_LABEL	ev_athleterm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETERM_01
+	_TRAINER_DATA2	msg_athleterm_01_01
+	_TRAINER_DATA3	msg_athleterm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_athleterm_01
+	_TRAINER_EASY_MSG	msg_athleterm_01_03
+	_END
+
+_revenge_athleterm_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETERM_01
+	_TRAINER_DATA2	msg_athleterm_01_04
+	_TRAINER_DATA3	msg_athleterm_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athleterm_01_06
+	_END
+
+SCRIPT_LABEL	ev_athleterw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETERW_01
+	_TRAINER_DATA2	msg_athleterw_01_01
+	_TRAINER_DATA3	msg_athleterw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_athleterw_01
+	_TRAINER_EASY_MSG	msg_athleterw_01_03
+	_END
+
+_revenge_athleterw_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETERW_01
+	_TRAINER_DATA2	msg_athleterw_01_04
+	_TRAINER_DATA3	msg_athleterw_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athleterw_01_06
+	_END
+
+SCRIPT_LABEL	ev_mushimaster_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHIMASTER_05
+	_TRAINER_DATA2	msg_mushimaster_05_01
+	_TRAINER_DATA3	msg_mushimaster_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushimaster_05_03
+	_END
+	
+SCRIPT_LABEL	ev_senpaikouhai_02_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_02
+	_TRAINER_DATA2	msg_senpaikouhai_02_01
+	_TRAINER_DATA3	msg_senpaikouhai_02_02
+	_TRAINER_DATA4	msg_senpaikouhai_02_04
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_senpaikouhai_02_01
+	_TRAINER_EASY_MSG	msg_senpaikouhai_02_03
+	_END
+
+_revenge_senpaikouhai_02_01:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_02
+	_TRAINER_DATA2	msg_senpaikouhai_02_09
+	_TRAINER_DATA3	msg_senpaikouhai_02_10
+	_TRAINER_DATA4	msg_senpaikouhai_02_12
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_02_11
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_02_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_02
+	_TRAINER_DATA2	msg_senpaikouhai_02_05
+	_TRAINER_DATA3	msg_senpaikouhai_02_06
+	_TRAINER_DATA4	msg_senpaikouhai_02_08
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_senpaikouhai_02_02
+	_TRAINER_EASY_MSG	msg_senpaikouhai_02_07
+	_END
+	
+_revenge_senpaikouhai_02_02:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_02
+	_TRAINER_DATA2	msg_senpaikouhai_02_13
+	_TRAINER_DATA3	msg_senpaikouhai_02_14
+	_TRAINER_DATA4	msg_senpaikouhai_02_16
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_02_15
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

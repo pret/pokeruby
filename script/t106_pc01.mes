@@ -1,0 +1,30 @@
+// ●シダケタウン　ポケモンセンター１Ｆ
+
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_t106_pc01
+msg_gentlem1_01_p01_t106_pc01:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,na_,tu_,ka_,re_,te_,spc_,i_,na_,i_,yo_,u_,de_,ha_
+	.byte	CR_
+	.byte	i_,ti_,ni_,n_,ma_,e_,spc_,to_,ha_,spc_,i_,e_,na_,i_,ne_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,a_,ge_,ta_,ri_,to_,ka_,spc_,si_,te_,i_,ru_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_t106_pc01
+msg_oldman1_01_p01_t106_pc01:
+	.byte	SI_,DA_,KE_,ni_,ku_,ru_,spc_,ri_,yu_,u_,to_,spc_,i_,e_,ba_
+	.byte	CR_
+	.byte	zu_,ba_,ri_,spc_,PO_,KE_,MO_,N_,spc_,KO_,N_,TE_,SU_,TO_,zi_,yya_,ro_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,he_,no_,spc_,ti_,yyo_,u_,se_,n_,ha_
+	.byte	CR_
+	.byte	ko_,ko_,ka_,ra_,spc_,ha_,zi_,ma_,ru_,ka_,ra_,no_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,74 @@
+//MapEditNH Ver.3.53 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R130	3
+#define EXITNUM_FIELD_R130	0
+#define POSNUM_FIELD_R130	0
+#define BGNUM_FIELD_R130	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_swimmerm_15[];
+extern const u8	ev_swimmerw_15[];
+extern const u8	seed_script[];
+
+const evObjData	OBJ_field_r130[] =
+{
+	{
+		TR_SWIMMERM_15,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x001a,		//Ypos
+		0x01,		//Height
+		MV_RTURLD,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x6,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerm_15,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERW_15,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0044,		//Xpos
+		0x0016,		//Ypos
+		0x01,		//Height
+		MV_V,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerw_15,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_01_FIELD_R130,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0034,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0052,		//work area
+		seed_script,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+};
+
+const SXY_DATA	field_r130_sxy_data =
+{
+OBJNUM_FIELD_R130,			// field obj max
+EXITNUM_FIELD_R130,		// exit max
+POSNUM_FIELD_R130,			// pos event max
+BGNUM_FIELD_R130,			// bg event max
+OBJ_field_r130,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

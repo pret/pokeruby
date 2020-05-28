@@ -1,0 +1,88 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_SP_PC04	1
+#define EXITNUM_SP_PC04	2
+#define POSNUM_SP_PC04	2
+#define BGNUM_SP_PC04	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_comm_talk_trade_guide[];
+
+//POS_SCRIPT
+extern const u8	ev_comm_trade0_start[];
+extern const u8	ev_comm_trade1_start[];
+
+const evObjData	OBJ_sp_pc04[] =
+{
+	{
+		WAITRESS1_01_SP_PC04,		//OBJ ID
+		WAITRESS1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_comm_talk_trade_guide,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_sp_pc04[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		SPFIELD_MAP_EXIT01,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		SPFIELD_MAP_EXIT01,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_sp_pc04[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		LOCALWORK0,		//Event Type
+		0x00,		//Scene
+		ev_comm_trade0_start,		//Script
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		LOCALWORK0,		//Event Type
+		0x00,		//Scene
+		ev_comm_trade1_start,		//Script
+	},
+
+};
+
+const SXY_DATA	sp_pc04_sxy_data =
+{
+OBJNUM_SP_PC04,			// field obj max
+EXITNUM_SP_PC04,		// exit max
+POSNUM_SP_PC04,			// pos event max
+BGNUM_SP_PC04,			// bg event max
+OBJ_sp_pc04,			// field obj data
+EXIT_sp_pc04,			// exit data
+POS_sp_pc04,			// pos event data
+NULL,				// bg event data
+};

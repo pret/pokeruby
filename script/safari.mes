@@ -1,0 +1,53 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　サファリ終了関連
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ※リタイア、そらをとぶの場合
+	.GLOBAL	msg_safari_cancel_ask
+msg_safari_cancel_ask:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,wo_
+	.byte	CR_
+	.byte	ko_,no_,ma_,ma_,spc_,si_,yyu_,u_,ri_,yyo_,u_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ※制限歩数をこえた場合
+	.GLOBAL	msg_safari_end_by_step
+msg_safari_end_by_step:
+	.byte	PI_,N_,PO_,bou_,N_,gyoe_,spc_,zi_,ka_,n_,spc_,de_,bou_,su_,gyoe_
+	.byte	CR_
+	.byte	SA_,HU_,AA_,RI_,GE_,bou_,MU_,wo_,spc_,si_,yyu_,u_,ri_,yyo_,u_,spc_,si_,ma_,su_
+	.byte	EOM_
+
+
+// ※ボールを使い切った場合
+	.GLOBAL	msg_safari_end_by_ball
+msg_safari_end_by_ball:
+	.byte	SA_,HU_,AA_,RI_,BO_,bou_,RU_,wo_,spc_,tu_,ka_,i_,ki_,ttu_,ta_,no_,de_
+	.byte	CR_
+	.byte	SA_,HU_,AA_,RI_,GE_,bou_,MU_,wo_,spc_,si_,yyu_,u_,ri_,yyo_,u_,spc_,si_,ma_,su_
+	.byte	EOM_
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　キューブ置き場関連
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_cube_set
+msg_safari_cube_set:
+	.byte	PO_,RO_,TTU_,KU_,o_,ki_,ba_,ni_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,o_,ki_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_safari_cube_full
+msg_safari_cube_full:
+	.byte	ma_,da_,spc_,I_MSG_,STR_TEMP_BUF0,ga_,spc_,no_,ko_,ttu_,te_,i_,ma_,su_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_safari_cube_on
+msg_safari_cube_on:
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_
+	.byte	CR_
+	.byte	o_,ki_,ma_,si_,ta_,gyoe_
+	.byte	EOM_
+

@@ -1,0 +1,135 @@
+//====================================================================
+//						c106_r1201
+//					ミナモデパート内のエレベーター
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c106_r1201_event_data
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						エレベーターガール
+/********************************************************************/
+SCRIPT_LABEL	ev_pcwoman2_01_p01_c106_r1201
+	_TALK_OBJ_START
+
+	//現在のフロア情報をセットする
+	_IF_FLAGOFF_CALL	FH_01,ev_now_floor_set
+
+	//現在のフロアを表示
+	_LDWK			PARAM1,WK_ELEVATOR_NO
+	_PROGRAM		WRITE_NOW_FLOOR
+
+	//ミナモデパートへようこそ！
+	_TALKMSG		msg_elevator_p02
+	_TALK_WAIT
+
+/*
+	//要素数クリア
+	_LDVAL			PARAM0,0
+	_ELEVATOR_MENU	MSG_1F,C106,C106_R1101,C106_R1101_STAIR01
+	_ELEVATOR_MENU	MSG_2F,C106,C106_R1102,0
+	_ELEVATOR_MENU	MSG_3F,C106,C106_R1103,0
+	_ELEVATOR_MENU	MSG_4F,C106,C106_R1104,0
+	_ELEVATOR_MENU	MSG_5F,C106,C106_R1105,0
+	//_ELEVATOR_MENU	MSG_TOP,C106,C106_R1106,0
+	_ELEVATOR_MENU_START
+*/
+	
+	_SELECT_WINDOW	0,0,ELEVATOR_MENU,0		//B有効
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case0_c106_r1201
+	_CASEJUMP		1,case1_c106_r1201
+	_CASEJUMP		2,case2_c106_r1201
+	_CASEJUMP		3,case3_c106_r1201
+	_CASEJUMP		4,case4_c106_r1201
+	_CASECANCEL		case_cancel_c106_r1201
+	_END
+
+//WK_ELEVATOR_NOに現在のフロアが入る
+//１かい
+case0_c106_r1201:
+	_SET_SP_MAP_ID	C106,C106_R1101,2,1
+	_IFVAL_JUMP		WK_ELEVATOR_NO,EQ,MSG_1F,case_cancel_c106_r1201
+
+	_CALL			common_01_c106_r1201
+	_LDVAL			WK_ELEVATOR_NO,MSG_1F
+	_JUMP			case_cancel_c106_r1201
+	_END
+
+//２かい
+case1_c106_r1201:
+	_SET_SP_MAP_ID	C106,C106_R1102,2,1
+	_IFVAL_JUMP		WK_ELEVATOR_NO,EQ,MSG_2F,case_cancel_c106_r1201
+
+	_CALL			common_01_c106_r1201
+	_LDVAL			WK_ELEVATOR_NO,MSG_2F
+	_JUMP			case_cancel_c106_r1201
+	_END
+
+//３かい
+case2_c106_r1201:
+	_SET_SP_MAP_ID	C106,C106_R1103,2,1
+	_IFVAL_JUMP		WK_ELEVATOR_NO,EQ,MSG_3F,case_cancel_c106_r1201
+
+	_CALL			common_01_c106_r1201
+	_LDVAL			WK_ELEVATOR_NO,MSG_3F
+	_JUMP			case_cancel_c106_r1201
+	_END
+
+//４かい
+case3_c106_r1201:
+	_SET_SP_MAP_ID	C106,C106_R1104,2,1
+	_IFVAL_JUMP		WK_ELEVATOR_NO,EQ,MSG_4F,case_cancel_c106_r1201
+
+	_CALL			common_01_c106_r1201
+	_LDVAL			WK_ELEVATOR_NO,MSG_4F
+	_JUMP			case_cancel_c106_r1201
+	_END
+
+//５かい
+case4_c106_r1201:
+	_SET_SP_MAP_ID	C106,C106_R1105,2,1
+	_IFVAL_JUMP		WK_ELEVATOR_NO,EQ,MSG_5F,case_cancel_c106_r1201
+
+	_CALL			common_01_c106_r1201
+	_LDVAL			WK_ELEVATOR_NO,MSG_5F
+	_JUMP			case_cancel_c106_r1201
+	_END
+
+//キャンセルした
+case_cancel_c106_r1201:
+	_SCREEN_CLEAR
+	_TALK_OBJ_END
+	_END
+
+//共通処理
+common_01_c106_r1201:
+	//下を向く前にウィンドウを閉じたいので
+	_SCREEN_CLEAR
+
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	_PROGRAM		ELEVATOR_MOVE
+	_STOP_SCRIPT
+
+	_FLAG_SET		FH_01
+	_RET
+
+//現在のフロア情報をセットする
+ev_now_floor_set:
+	_PROGRAM		SET_NOW_FLOOR
+	_RET
+
+
+/********************************************************************/
+/********************************************************************/

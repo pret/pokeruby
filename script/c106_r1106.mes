@@ -1,0 +1,109 @@
+// ●ミナモシティ　デパート屋上
+
+
+// ●サラリーマン１
+// ●掘り出し物市が開催されていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_c106_r1106
+msg_workerm1_01_p01_c106_r1106:
+	.byte	ho_,ri_,da_,si_,mo_,no_,i_,ti_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,tu_,spc_,ya_,ru_,no_,ka_,spc_,ki_,ma_,ttu_,te_,spc_,na_,i_,no_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	TE_,RE_,BI_,spc_,mi_,te_,te_,mo_
+	.byte	CR_
+	.byte	ze_,n_,ze_,n_,spc_,KO_,MA_,bou_,SI_,YYA_,RU_,spc_,na_,i_,n_,da_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●掘り出し物市が開催されている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p02_c106_r1106
+msg_workerm1_01_p02_c106_r1106:
+	.byte	ma_,ti_,ni_,spc_,ma_,ttu_,ta_,spc_,ho_,ri_,da_,si_,mo_,no_,i_,ti_,gyoe_
+	.byte	CR_
+	.byte	ko_,ko_,de_,si_,ka_,spc_,ka_,e_,na_,i_,mo_,no_,spc_,ba_,ka_,ri_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	yo_,bou_,si_,spc_,ta_,ku_,sa_,n_,spc_,ka_,ttu_,ti_,yya_,u_,zo_,o_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c106_r1106
+msg_trainerm1_01_p01_c106_r1106:
+	.byte	a_,a_,spc_,no_,do_,ga_,spc_,ka_,wa_,i_,ta_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●自販機
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p01_c106_r1106
+msg_machine_01_p01_c106_r1106:
+	.byte	zi_,do_,u_,spc_,ha_,n_,ba_,i_,ki_,spc_,ga_,a_,ru_,gyoe_
+	.byte	CR_
+	.byte	ho_,si_,i_,spc_,no_,mi_,mo_,no_,spc_,ha_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●商品リストが開きます
+// ●おいしいみず　２００円
+// ●サイコソーダ　３００円
+// ●ミックスオレ　３５０円
+// ●やめる
+
+// ●購入可能　　→msg_machine_01_p02_c106_r1106:
+// ●料金不足　　→msg_machine_01_p03_c106_r1106:
+// ●キャンセル　→msg_machine_01_p04_c106_r1106:
+
+// ●購入可能
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p02_c106_r1106
+msg_machine_01_p02_c106_r1106:
+	.byte	GA_,GO_,N_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ga_,spc_,de_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝購入した道具の名前
+// ●当たりかどうかの判定をおこないます
+// 　当たり確率１／６４（変更するかも）
+// ●運が良ければ連続して当たります
+// ●当たると　→　msg_machine_01_p05_c106_r1106:
+// ●この場合、でてくる道具は最初に選んだもの
+// ●荷物が一杯になるときは作動しない
+
+// ●当たり
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p05_c106_r1106
+msg_machine_01_p05_c106_r1106:
+	.byte	GA_,GO_,N_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,ri_,da_,gyoe_,spc_,mo_,u_,i_,ttu_,po_,n_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ga_,spc_,de_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●料金不足
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p03_c106_r1106
+msg_machine_01_p03_c106_r1106:
+	.byte	o_,ka_,ne_,ga_,spc_,ta_,ri_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●キャンセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p04_c106_r1106
+msg_machine_01_p04_c106_r1106:
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,ya_,ttu_,pa_,ri_,spc_,ya_,me_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+

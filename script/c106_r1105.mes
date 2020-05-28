@@ -1,0 +1,51 @@
+// ●ミナモシティ　デパート５Ｆ
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c106_r1105
+msg_middlew1_01_p01_c106_r1105:
+	.byte	su_,te_,ki_,na_,spc_,nu_,i_,gu_,ru_,mi_,ga_,spc_,i_,ttu_,pa_,i_,spc_,na_,no_,ne_,bou_
+	.byte	CR_
+	.byte	ko_,do_,mo_,no_,bu_,n_,spc_,da_,ke_,zi_,yya_,spc_,na_,ku_,te_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ta_,si_,no_,bu_,n_,mo_,spc_,ka_,o_,u_,ka_,si_,ra_,spc_,O_,HO_,HO_,HO_,HO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c106_r1105
+msg_ojyou2_01_p01_c106_r1105:
+	.byte	a_,ta_,si_,spc_,ma_,da_,spc_,PO_,KE_,MO_,N_,spc_,so_,da_,te_,ra_,re_,na_,i_,ka_,ra_
+	.byte	CR_
+	.byte	ka_,wa_,i_,i_,spc_,nu_,i_,gu_,ru_,mi_,spc_,ka_,ttu_,te_,mo_,ra_,u_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c106_r1105
+msg_woman1_01_p01_c106_r1105:
+	.byte	ka_,wa_,i_,i_,spc_,MA_,TTU_,TO_,ga_,spc_,ta_,ku_,sa_,n_,spc_,u_,ttu_,te_,ru_,no_,gyoe_
+	.byte	CR_
+	.byte	do_,re_,wo_,spc_,ka_,o_,u_,ka_,na_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ze_,bou_,n_,bu_,spc_,ka_,ttu_,ti_,yya_,o_,u_,ka_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_c106_r1105
+msg_kanban_01_p01_c106_r1105:
+	.byte	ka_,wa_,i_,i_,spc_,to_,mo_,da_,ti_
+	.byte	CR_
+	.byte	n5_,ka_,i_,spc_,tenten_,tenten_,spc_,nu_,i_,gu_,ru_,mi_,spc_,HU_,RO_,A_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

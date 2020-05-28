@@ -1,0 +1,198 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C104_R0301	6
+#define EXITNUM_C104_R0301	2
+#define POSNUM_C104_R0301	0
+#define BGNUM_C104_R0301	5
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_agboy1_01_p01_c104_r0301[];
+extern const u8	ev_agboy1_02_p01_c104_r0301[];
+extern const u8	ev_boy4_01_p01_c104_r0301[];
+extern const u8	ev_schoolw1_01_p01_c104_r0301[];
+extern const u8	ev_schoolm1_01_p01_c104_r0301[];
+extern const u8	ev_oldman2_01_p01_c104_r0301[];
+
+//BG_SCRIPT
+extern const u8	ev_board_01_p01_c104_r0301[];
+extern const u8	ev_board_01_p01_c104_r0301[];
+extern const u8	ev_board_01_p01_c104_r0301[];
+extern const u8	ev_board_01_p01_c104_r0301[];
+extern const u8	ev_note1_01_p01_c104_r0301[];
+
+const evObjData	OBJ_c104_r0301[] =
+{
+	{
+		AGBOY1_01_C104_R0301,		//OBJ ID
+		AGBOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_agboy1_01_p01_c104_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		AGBOY1_02_C104_R0301,		//OBJ ID
+		AGBOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_agboy1_02_p01_c104_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOY4_01_C104_R0301,		//OBJ ID
+		BOY4,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy4_01_p01_c104_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SCHOOLW1_01_C101_R0301,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_schoolw1_01_p01_c104_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SCHOOLM1_01_C104_R0301,		//OBJ ID
+		SCHOOLM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_schoolm1_01_p01_c104_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OLDMAN2_01_C104_R0301,		//OBJ ID
+		GENTLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman2_01_p01_c104_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c104_r0301[] =
+{
+	{
+		0x0005,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		FIELD_C104_DOOR05,		//Door ID
+		FIELD_C104,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		FIELD_C104_DOOR05,		//Door ID
+		FIELD_C104,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c104_r0301[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_board_01_p01_c104_r0301,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_board_01_p01_c104_r0301,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_board_01_p01_c104_r0301,		//Script
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_board_01_p01_c104_r0301,		//Script
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_note1_01_p01_c104_r0301,		//Script
+	},
+
+};
+
+const SXY_DATA	c104_r0301_sxy_data =
+{
+OBJNUM_C104_R0301,			// field obj max
+EXITNUM_C104_R0301,		// exit max
+POSNUM_C104_R0301,			// pos event max
+BGNUM_C104_R0301,			// bg event max
+OBJ_c104_r0301,			// field obj data
+EXIT_c104_r0301,			// exit data
+NULL,			// pos event data
+BG_c104_r0301,				// bg event data
+};

@@ -1,0 +1,111 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_C106_R1106	3
+#define EXITNUM_C106_R1106	1
+#define POSNUM_C106_R1106	0
+#define BGNUM_C106_R1106	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_workerm1_01_p01_c106_r1106[];
+extern const u8	ev_trainerm1_01_p01_c106_r1106[];
+extern const u8	ev_horidasi_01_p01_c106_r1106[];
+
+//BG_SCRIPT
+extern const u8	ev_machine_01_p01_c106_r1106[];
+extern const u8	ev_machine_01_p01_c106_r1106[];
+
+const evObjData	OBJ_c106_r1106[] =
+{
+	{
+		WORKERM1_01_C106_R1106,		//OBJ ID
+		WORKERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerm1_01_p01_c106_r1106,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TRAINERM1_01_C106_R1106,		//OBJ ID
+		TRAINERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_HON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_trainerm1_01_p01_c106_r1106,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		HORIDASI_01_C106_R1106,		//OBJ ID
+		SHOPW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_horidasi_01_p01_c106_r1106,		//Event Lavel
+		FV_HORIDASI_01_C106_R1106,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c106_r1106[] =
+{
+	{
+		0x000d,		//Xpos
+		0x0003,		//Ypos
+		0x00,		//Height
+		C106_R1105_STAIR03,		//Door ID
+		C106_R1105,			//Map ID
+		C106,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c106_r1106[] =
+{
+	{
+		0x0009,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_machine_01_p01_c106_r1106,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_machine_01_p01_c106_r1106,		//Script
+	},
+
+};
+
+const SXY_DATA	c106_r1106_sxy_data =
+{
+OBJNUM_C106_R1106,			// field obj max
+EXITNUM_C106_R1106,		// exit max
+POSNUM_C106_R1106,			// pos event max
+BGNUM_C106_R1106,			// bg event max
+OBJ_c106_r1106,			// field obj data
+EXIT_c106_r1106,			// exit data
+NULL,			// pos event data
+BG_c106_r1106,				// bg event data
+};

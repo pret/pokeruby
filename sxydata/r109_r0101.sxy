@@ -1,0 +1,113 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_R109_R0101	4
+#define EXITNUM_R109_R0101	2
+#define POSNUM_R109_R0101	0
+#define BGNUM_R109_R0101	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_middlem2_01_p01_r109_r0101[];
+extern const u8	ev_sailor_04[];
+extern const u8	ev_ukiwam_02[];
+extern const u8	ev_sexyw_13[];
+
+const evObjData	OBJ_r109_r0101[] =
+{
+	{
+		MIDDLEM2_01_R109_R0101,		//OBJ ID
+		MIDDLEM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem2_01_p01_r109_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SAILOR_04,		//OBJ ID
+		SEAMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_sailor_04,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_UKIWAM_02,		//OBJ ID
+		BEACHBOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_ukiwam_02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_13,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_H,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_sexyw_13,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r109_r0101[] =
+{
+	{
+		0x0006,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		FIELD_R109_DOOR01,		//Door ID
+		FIELD_R109,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		FIELD_R109_DOOR01,		//Door ID
+		FIELD_R109,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	r109_r0101_sxy_data =
+{
+OBJNUM_R109_R0101,			// field obj max
+EXITNUM_R109_R0101,		// exit max
+POSNUM_R109_R0101,			// pos event max
+BGNUM_R109_R0101,			// bg event max
+OBJ_r109_r0101,			// field obj data
+EXIT_r109_r0101,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

@@ -1,0 +1,108 @@
+// ●ミナモシティ　技忘れオヤジ
+
+
+// ●技忘れ
+// ●１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c106_r0601
+msg_oldman1_01_p01_c106_r0601:
+	.byte	e_,bou_,to_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,u_,zi_,yya_,spc_,wa_,si_,spc_,wa_,su_,re_,zi_,i_,sa_,n_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,wo_
+	.byte	CR_
+	.byte	wa_,su_,re_,sa_,se_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,n_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,za_,wo_,spc_,wa_,su_,re_,spc_,sa_,se_,ru_,ka_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択肢：はい→２へ
+// 　　　　　いいえ→7へ
+// ●２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_c106_r0601
+msg_oldman1_01_p02_c106_r0601:
+	.byte	do_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,su_,ru_,n_,zi_,yya_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択肢：はい→３へ
+// 　　　　　いいえ→７へ
+// ●３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p03_c106_r0601
+msg_oldman1_01_p03_c106_r0601:
+	.byte	do_,no_,spc_,wa_,za_,wo_
+	.byte	CR_
+	.byte	wa_,su_,re_,spc_,sa_,se_,ru_,n_,zi_,yya_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモン選択画面が表示されます。
+// ●戻る、Ｂキャンセル→７へ
+// ●タマゴを選択したとき→8へ
+
+// ●４
+// ●選択したポケモンの技が１つしかない場合
+// ●＠０選択したポケモン名
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p04_c106_r0601
+msg_oldman1_01_p04_c106_r0601:
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,wa_,za_,wo_,spc_,n1_,tu_,si_,ka_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,na_,i_,spc_,yo_,u_,zi_,yya_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●５
+// ●＠０選択したポケモン名、＠１選択した技名
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p05_c106_r0601
+msg_oldman1_01_p05_c106_r0601:
+	.byte	mu_,mu_,gyoe_,spc_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF1,zi_,yya_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択肢：はい→６へ
+// 　　　　　いいえ→７へ
+// ●６
+// ●『技忘れの』ジングル鳴ります。
+// ●＠０選択したポケモン名、＠１選択した技名
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p06_c106_r0601
+msg_oldman1_01_p06_c106_r0601:
+	.byte	da_,i_,se_,i_,ko_,u_,spc_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,I_MSG_,STR_TEMP_BUF1,wo_
+	.byte	CR_
+	.byte	wa_,su_,re_,ta_,spc_,yo_,u_,zi_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●７
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p07_c106_r0601
+msg_oldman1_01_p07_c106_r0601:
+	.byte	wa_,su_,re_,sa_,se_,ta_,i_,spc_,wa_,za_,ga_,spc_,a_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,ku_,ru_,no_,zi_,yya_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●８
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p08_c106_r0601
+msg_oldman1_01_p08_c106_r0601:
+	.byte	na_,nu_,gyoe_,hate_,spc_,TA_,MA_,GO_,ha_
+	.byte	CR_
+	.byte	wa_,za_,wo_,spc_,o_,bo_,e_,te_,i_,na_,i_,spc_,yo_,u_,zi_,yya_,ga_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

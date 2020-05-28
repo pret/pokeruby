@@ -1,0 +1,24 @@
+// ●コトキタウン　民家２（右側）
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_t102_r0201
+msg_middlew1_01_p01_t102_r0201:
+	.byte	PO_,KE_,MO_,N_,ttu_,te_,spc_,ta_,ta_,ka_,u_,to_
+	.byte	CR_
+	.byte	RE_,BE_,RU_,A_,TTU_,PU_,si_,te_,spc_,tu_,yo_,ku_,na_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●学生男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p01_t102_r0201
+msg_schoolm1_01_p01_t102_r0201:
+	.byte	tu_,re_,te_,spc_,a_,ru_,ku_,spc_,PO_,KE_,MO_,N_,ga_,spc_,tu_,yo_,ka_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	to_,o_,ku_,ma_,de_,spc_,i_,ke_,ru_,yo_,u_,ni_,spc_,na_,ru_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

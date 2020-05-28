@@ -1,0 +1,171 @@
+// ●船内　フィールド
+
+
+// ●アナウンス：カイナからから乗り込んだ場合／連絡船デモモード開始（ミナモから乗り込んだ場合）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aqua_01_p01_sp_ship01
+msg_aqua_01_p01_sp_ship01:
+	.byte	ka_,i_,ri_,yyu_,u_,wo_,spc_,mo_,no_,to_,mo_,se_,zu_,spc_,su_,su_,mu_
+	.byte	CR_
+	.byte	re_,n_,ra_,ku_,se_,n_,wo_,spc_,do_,u_,zo_,spc_,go_,ra_,n_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アナウンス：連絡船デモモード終了（カイナから乗り込んだ場合）／ミナモシティから乗り込んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aqua_01_p02_sp_ship01
+msg_aqua_01_p02_sp_ship01:
+	.byte	so_,re_,de_,ha_,spc_,re_,n_,ra_,ku_,se_,n_,ni_,spc_,yo_,ru_
+	.byte	CR_
+	.byte	hu_,na_,ta_,bi_,wo_,spc_,o_,ta_,no_,si_,mi_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アナウンス：カイナシティに到着
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aqua_01_p03_sp_ship01
+msg_aqua_01_p03_sp_ship01:
+	.byte	o_,tu_,ka_,re_,sa_,ma_,de_,su_,spc_,ta_,da_,i_,ma_
+	.byte	CR_
+	.byte	KA_,I_,NA_,SI_,TE_,II_,ni_,spc_,to_,u_,ti_,yya_,ku_,spc_,si_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アナウンス：ミナモシティに到着
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aqua_01_p04_sp_ship01
+msg_aqua_01_p04_sp_ship01:
+	.byte	o_,tu_,ka_,re_,sa_,ma_,de_,su_,spc_,ta_,da_,i_,ma_
+	.byte	CR_
+	.byte	MI_,NA_,MO_,SI_,TE_,II_,ni_,spc_,to_,u_,ti_,yya_,ku_,spc_,si_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り
+// ●到着前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman_01_p01_sp_ship01
+msg_seaman_01_p01_sp_ship01:
+	.byte	to_,u_,ti_,yya_,ku_,ma_,de_,spc_,ma_,da_,ma_,da_,spc_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,bu_,n_,no_,spc_,he_,ya_,ni_,spc_,mo_,do_,ttu_,te_,spc_,ya_,su_,n_,de_,i_,na_,yo_
+	.byte	CR_
+	.byte	ta_,si_,ka_,spc_,ki_,mi_,no_,spc_,he_,ya_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	n2_,go_,u_,si_,tu_,spc_,da_,ttu_,ta_,na_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,spc_,he_,ya_,no_,spc_,BE_,TTU_,DO_,ha_
+	.byte	CR_
+	.byte	hu_,ka_,hu_,ka_,spc_,si_,te_,i_,te_,spc_,ki_,mo_,ti_,i_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●到着後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman_01_p02_sp_ship01
+msg_seaman_01_p02_sp_ship01:
+	.byte	to_,u_,ti_,yya_,ku_,spc_,si_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り
+// ●船内のすべてのトレーナーに勝利する前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman_02_p01_sp_ship01
+msg_seaman_02_p01_sp_ship01:
+	.byte	hu_,na_,ta_,bi_,ni_,spc_,a_,ki_,ti_,yya_,ttu_,te_
+	.byte	CR_
+	.byte	ki_,yya_,ku_,si_,tu_,de_,spc_,PO_,KE_,MO_,N_,de_,spc_,si_,yyo_,u_,bu_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	si_,ta_,ga_,ttu_,te_,i_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,mo_,spc_,i_,ru_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●船内のすべてのトレーナーに勝利した後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman_02_p02_sp_ship01
+msg_seaman_02_p02_sp_ship01:
+	.byte	ma_,ttu_,spc_,hu_,na_,ta_,bi_,wo_,spc_,ta_,no_,si_,n_,de_,ku_,re_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●船内の窓（通常時）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_window_01_p01_sp_ship01
+msg_window_01_p01_sp_ship01:
+	.byte	ma_,do_,no_,spc_,mu_,ko_,u_,ni_
+	.byte	CR_
+	.byte	su_,i_,he_,i_,se_,n_,ga_,spc_,hi_,ro_,ga_,ttu_,te_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ハギ老人（Ｘ３３　Ｙ５）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_sp_ship01
+msg_oldman1_01_p01_sp_ship01:
+	.byte	HA_,GI_,kako2_,yo_,u_,ko_,so_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ga_,spc_,ko_,no_,spc_,TA_,I_,DO_,RI_,TTU_,PU_,go_,u_,no_
+	.byte	CR_
+	.byte	me_,i_,yo_,spc_,se_,n_,ti_,yyo_,u_,spc_,HA_,GI_,spc_,zi_,yya_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,aa_,spc_,i_,ti_,do_,ha_,spc_,i_,n_,ta_,i_,spc_,si_,ta_,ga_
+	.byte	CR_
+	.byte	ko_,n_,na_,spc_,su_,go_,i_,spc_,hu_,ne_,wo_,spc_,mi_,te_,si_,ma_,u_,to_
+	.byte	SCROLL_WAIT_
+	.byte	hu_,na_,no_,ri_,no_,spc_,ti_,ga_,spc_,sa_,wa_,gu_,no_,u_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ピーコちゃん（Ｘ２９　Ｙ７　適当にうろつき）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camome_01_p01_sp_ship01
+msg_camome_01_p01_sp_ship01:
+	.byte	PI_,bou_,KO_,kako2_,PI_,hi_,yyo_,spc_,PI_,hi_,yyo_,hi_,yyo_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時に「キャモメ」の鳴き声ＳＥをならす
+
+
+// ●部屋のプレート
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_plate_01_p01_sp_ship01
+msg_plate_01_p01_sp_ship01:
+	.byte	n1_,go_,u_,si_,tu_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●部屋のプレート（主人公の部屋）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_plate_02_p01_sp_ship01
+msg_plate_02_p01_sp_ship01:
+	.byte	n2_,go_,u_,si_,tu_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●部屋のプレート
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_plate_03_p01_sp_ship01
+msg_plate_03_p01_sp_ship01:
+	.byte	n3_,go_,u_,si_,tu_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●部屋のプレート
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_plate_04_p01_sp_ship01
+msg_plate_04_p01_sp_ship01:
+	.byte	n4_,go_,u_,si_,tu_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

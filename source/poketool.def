@@ -1,0 +1,187 @@
+
+enum{
+	ID_personal_rnd=0,			//個性乱数
+	ID_id_no,					//IDナンバー
+	ID_nickname,				//ニックネーム
+	ID_country_code,			//国コード
+	ID_fusei_tamago_flag,		//データ改ざんによるタマゴ化
+	ID_poke_exist_flag,			//ポケモンの存在フラグ
+	ID_egg_exist_flag,			//ポケモンの存在フラグ
+	ID_oyaname,					//親の名前
+	ID_mark,					//ポケモンにつけるマーク
+	ID_checksum,				//チェックサム
+	ID_amari,					//続編のための余り領域←この位置を変更するのも禁止
+								//ここから上の順番を変更するのは禁止！！
+
+	ID_monsno,					//モンスターナンバー
+	ID_item,					//所持アイテム
+	ID_waza1,					//技１
+	ID_waza2,					//技２
+	ID_waza3,					//技３
+	ID_waza4,					//技４
+	ID_pp1,						//技ポイント1
+	ID_pp2,						//技ポイント２
+	ID_pp3,						//技ポイント３
+	ID_pp4,						//技ポイント４
+	ID_pp_count,				//技ポイントアップカウンタ
+	ID_style,					//かっこよさ
+	ID_beautiful,				//うつくしさ
+	ID_cute,					//かわいさ
+	ID_exp,						//経験値
+	ID_hp_exp,					//ヒットポイント努力値
+	ID_pow_exp,					//攻撃力努力値
+	ID_def_exp,					//防御力努力値
+	ID_agi_exp,					//素早さ努力値
+	ID_spepow_exp,				//特殊攻撃努力値
+	ID_spedef_exp,				//特殊防御努力値
+	ID_friend,					//なつき度
+	ID_clever,					//かしこさ
+	ID_pokerus,					//ポケルス
+	ID_get_place,				//捕獲場所
+	ID_get_level,				//捕獲レベル
+	ID_get_cassette,			//捕獲カセット
+	ID_get_ball,				//捕獲ボール
+	ID_hp_rnd,					//ヒットポイントパワー乱数
+	ID_pow_rnd,					//攻撃力パワー乱数
+	ID_def_rnd,					//防御力パワー乱数
+	ID_agi_rnd,					//素早さパワー乱数
+	ID_spepow_rnd,				//特殊攻撃パワー乱数
+	ID_spedef_rnd,				//特殊防御パワー乱数
+	ID_tamago_flag,				//たまごかどうか（0:タマゴじゃない1:たまごだよ）
+	ID_speabi,					//特殊能力（0:特殊能力1　1:特殊能力2）
+	ID_strong,					//たくましさ
+	ID_fur,						//毛ヅヤ
+	ID_oyasex,					//親の性別
+	ID_stylemedal,				//かっこよさメダル
+	ID_beautifulmedal,			//うつくしさメダル
+	ID_cutemedal,				//かわいさメダル
+	ID_clevermedal,				//かしこさメダル
+	ID_strongmedal,				//たくましさメダル
+	ID_condition,				//コンディション(状態異常）
+	ID_level,					//レベル
+	ID_hp,						//ヒットポイント
+	ID_hpmax,					//ヒットポイントマックス
+	ID_pow,						//攻撃力
+	ID_def,						//防御力
+	ID_agi,						//素早さ
+	ID_spepow,					//特殊攻撃
+	ID_spedef,					//特殊防御
+	ID_mailid,					//所持メール
+	ID_monsno_egg,				//モンスターナンバー（タマゴかどうかもチェックする）
+	ID_power_rnd,				//パワー乱数をu32で扱う
+	ID_champ_ribbon,				//チャンプリボン（殿堂入り）
+	ID_winning_ribbon,			//ウィニングリボン（バトルタワーLV50勝ち抜き）
+	ID_victory_ribbon,			//ビクトリーリボン（バトルタワーLV100勝ち抜き）
+	ID_bromide_ribbon,			//ブロマイドリボン（美術館に似顔絵を飾られた）
+	ID_ganba_ribbon,				//がんばリボン（努力値既定以上）
+	ID_marine_ribbon,			//マリンリボン（イベントで入手）
+	ID_land_ribbon,				//ランドリボン（イベントで入手）
+	ID_sky_ribbon,				//スカイリボン（イベントで入手）
+	ID_country_ribbon,			//カントリーリボン（イベントで入手）
+	ID_national_ribbon,			//ナショナルリボン（イベントで入手）
+	ID_earth_ribbon,				//アースリボン（イベントで入手）
+	ID_world_ribbon,				//ワールドリボン（イベントで入手）
+	ID_amari_ribbon,				//ワールドリボン（イベントで入手）
+	ID_waza_have_check,				//技を持っているかチェック
+	ID_ribbon_cnt,					//リボンをいくつ持っているか？
+	ID_ribbon_bit,					//取得リボンに応じたbitを立てて返す（ﾎﾟｹﾅﾋﾞ）
+};
+
+#define	POKE2VS2_OK		0				//2体2戦闘可能
+#define	POKE2VS2_ONE	1				//1体しかポケモンがいない
+#define	POKE2VS2_NOTWO	2				//戦えるポケモンが2体いない
+
+//StatusRecover関数がどこから呼ばれたのかを指示するフラグ
+
+#define		CALL_FIELD	0
+#define		CALL_BATTLE	1
+
+//進化条件
+enum{
+	LEVELUP_SHINKA=0,		//レベルアップによる進化
+	TUUSHIN_SHINKA,			//通信による進化
+	ITEM_SHINKA,			//アイテムによる進化
+	ITEM_SHINKA_CHECK,		//アイテムによる進化（かわらずのいしを装備していてもチェックはする）
+};
+
+#define	SHINKA_FRIEND		220		//進化に必要ななつき度
+
+#define	SHINKA_CANCEL_OFF	0
+#define	SHINKA_CANCEL_ON	1
+
+#define	SHINKA_BGM_RESTART_ON	0x00	//進化デモからの復帰時にBGMStartをかける
+#define	SHINKA_BGM_RESTART_OFF	0x80	//進化デモからの復帰時にBGMStartをかけない
+
+
+//なつき計算
+enum{
+	FRIEND_LEVELUP=0,		//レベルアップ
+	FRIEND_PARAEXP_ITEM,	//努力値アイテム	
+	FRIEND_BATTLE_ITEM,		//戦闘中アイテム
+	FRIEND_BOSS_BATTLE,		//ボス戦闘	
+	FRIEND_WAZA_MACHINE,	//技マシン使用
+	FRIEND_TSUREARUKI,		//連れ歩き	
+	FRIEND_HINSHI,			//瀕死
+	FRIEND_DOKU_HINSHI,		//毒による瀕死
+	FRIEND_LEVEL30_HINSHI,	//レベル差30以上の瀕死
+};
+
+//努力値に関する定義
+
+#define	PARA_EXP_TOTAL_MAX	510		//6個のパラメータの合計値のマックス
+#define	PARA_EXP_MAX		100		//6個のパラメータのマックス
+
+//ポケモンパラメータ取得系の定義
+enum{
+	ID_POKEPARADATA11=0,
+	ID_POKEPARADATA12,
+	ID_POKEPARADATA13,
+	ID_POKEPARADATA14,
+	ID_POKEPARADATA15,
+	ID_POKEPARADATA16,
+	ID_POKEPARADATA21,
+	ID_POKEPARADATA22,
+	ID_POKEPARADATA23,
+	ID_POKEPARADATA24,
+	ID_POKEPARADATA25,
+	ID_POKEPARADATA26,
+	ID_POKEPARADATA31,
+	ID_POKEPARADATA32,
+	ID_POKEPARADATA33,
+	ID_POKEPARADATA34,
+	ID_POKEPARADATA35,
+	ID_POKEPARADATA36,
+	ID_POKEPARADATA41,
+	ID_POKEPARADATA42,
+	ID_POKEPARADATA43,
+	ID_POKEPARADATA44,
+	ID_POKEPARADATA45,
+	ID_POKEPARADATA46,
+};
+
+enum{
+	ID_POKEPARA1=0,
+	ID_POKEPARA2,
+	ID_POKEPARA3,
+	ID_POKEPARA4,
+};
+
+//ポケモン捕獲情報
+#define	POS_EVENT_EGG	253		//おんせんバーさんにもらうタマゴ
+#define	POS_CABLEKOUKAN	254		//ゲーム内交換
+#define	POS_EVENTHAIHU	255		//イベントでの配布
+
+//味覚情報
+enum{
+	TASTE_KARAI=0,
+	TASTE_SIBUI,
+	TASTE_AMAI,
+	TASTE_NIGAI,
+	TASTE_SUPPAI,
+};
+
+//HitCountCheckFlag
+#define	HCC_NORMAL		0		//自分に以外で場にいるポケモンの数
+#define	HCC_ATTACK		1		//Attack側にいるポケモンの数
+#define	HCC_DEFENCE		2		//Defence側にいるポケモンの数
+

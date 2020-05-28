@@ -1,0 +1,90 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//						ミナモ・アジト１階
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START cave_d0901_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d0901
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0901:
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							見張り１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_akua_01_p01_cave_d0901
+	_TALK_OBJ_START
+	
+	//カイナの潜水艇イベント発生フラグがたっていたら
+	_IF_FLAGON_JUMP	FE_AKUA_01_CAVE_D0901,ev_evilm1_01_p02_cave_d0901
+
+	_TALK_KEYWAIT	msg_evilm1_01_p01_cave_d0901
+	_TALK_OBJ_END
+	_END
+
+//カイナの潜水艇イベント発生フラグがたっている
+ev_evilm1_01_p02_cave_d0901:
+	_TALK_KEYWAIT	msg_evilm1_01_p02_cave_d0901
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							見張り２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_akua_02_p01_cave_d0901
+	_TALK_OBJ_START
+
+	//カイナの潜水艇イベント発生フラグがたっていたら
+	_IF_FLAGON_JUMP	FE_AKUA_01_CAVE_D0901,ev_evilm1_02_p02_cave_d0901
+
+	_TALK_KEYWAIT	msg_evilm1_02_p01_cave_d0901
+	_TALK_OBJ_END
+	_END
+
+//カイナの潜水艇イベント発生フラグがたっている
+ev_evilm1_02_p02_cave_d0901:
+	_TALK_KEYWAIT	msg_evilm1_02_p02_cave_d0901
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam_01
+	_EVTRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAM_01
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAM_01
+#endif
+	_TRAINER_DATA2	msg_aquam_01_01
+	_TRAINER_DATA3	msg_aquam_01_02
+	_TRAINER_DATA4	ev_aquam_01_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_01_03
+	_END
+
+ev_aquam_01_end:
+	_TALK_KEYWAIT	msg_aquam_01_03
+	_TALK_OBJ_END
+	_END
+

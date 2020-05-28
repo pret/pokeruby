@@ -1,0 +1,62 @@
+// ●目覚めの祠　最深部
+// ●サファイアver
+
+
+// ●超古代ポケモン、カイオーガ
+// ●初期状態では、地底湖部分でカイオーガは暴れ回っている。
+// （定期的にカイオーガの鳴き声を鳴らしておきたい）
+// ●主人公が指定されたポスに乗ると、主人公は上を向いて以下のナレーション。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_goods1_01_p01_cave_d1206s
+msg_goods1_01_p01_cave_d1206s:
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,a_,i_,i_,ro_,no_,ta_,ma_,ga_
+	.byte	CR_
+	.byte	to_,tu_,ze_,n_,spc_,ka_,ga_,ya_,ki_,spc_,ha_,zi_,me_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そうしてカイオーガの動きがゆっくりになり、
+// 主人公の方へ寄ってきて、大きくひと鳴きしてから戦闘に突入する。
+
+// ●主人公が超古代ポケモンを捕獲せずに倒した場合のみ
+// 　以下のメッセージを展開
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_goods1_01_p02_cave_d1206s
+msg_goods1_01_p02_cave_d1206s:
+	.byte	KA_,I_,O_,bou_,GA_,ha_,spc_,hu_,ta_,ta_,bi_
+	.byte	CR_
+	.byte	ne_,mu_,ri_,ni_,spc_,tu_,i_,ta_,spc_,yo_,u_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●底に沈んでいくような演出（ができるのかどうか知りませんが、とりあえず）
+
+// ●カイオーガとの戦闘終了後、アオギリが途中で
+// 　立ち止まったりしながら、ためらいがちにやってきて、
+// 　主人公のとなりに立ち、以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p01_cave_d1206s
+msg_aquaboss_01_p01_cave_d1206s:
+	.byte	A_,O_,GI_,RI_,kako2_,ko_,re_,wo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム入手メッセージを表示。
+// ●「べにいろのたま」を「たいせつなもの」に追加。
+// ●そしてアオギリは去っていく。
+// ●主人公から３マスほど離れたところで振り返り、
+// 以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p02_cave_d1206s
+msg_aquaboss_01_p02_cave_d1206s:
+	.byte	A_,O_,GI_,RI_,kako2_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	SA_,YO_,NA_,RA_,da_
+	.byte	CR_
+	.byte	mo_,u_,spc_,a_,u_,ko_,to_,ha_,spc_,na_,i_,da_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フラグ２５成立

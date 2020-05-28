@@ -1,0 +1,63 @@
+// ●海底洞窟
+
+
+// ▼d1105----------------------------------
+// ●アクア団員♀０５：戦闘前メッセージ
+// ●女幹部
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_05_01
+msg_aquaw_05_01:
+	.byte	O_,bou_,TTU_,HO_,TTU_,HO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	se_,n_,su_,i_,te_,i_,mo_,spc_,na_,i_,no_,ni_
+	.byte	CR_
+	.byte	yo_,ku_,spc_,ko_,ko_,ma_,de_,spc_,o_,i_,ka_,ke_,te_,spc_,ki_,ta_,wa_,ne_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,i_,si_,ta_,spc_,o_,ko_,sa_,ma_,spc_,da_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	ZI_,YYA_,MA_,sa_,re_,ru_,to_,spc_,me_,n_,do_,u_,spc_,na_,no_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	te_,n_,ki_,spc_,ke_,n_,ki_,yyu_,u_,zi_,yyo_,spc_,de_,no_
+	.byte	CR_
+	.byte	ka_,ri_,mo_,spc_,ka_,e_,si_,ta_,i_,si_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,ttu_,to_,spc_,i_,ta_,i_,spc_,o_,mo_,i_,spc_,sa_,se_,ti_,yya_,u_,ka_,ra_
+	.byte	CR_
+	.byte	ka_,ku_,go_,spc_,si_,na_,sa_,bou_,i_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♀０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_05_02
+msg_aquaw_05_02:
+	.byte	O_,bou_,TTU_,HO_,TTU_,HO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,ta_,bou_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♀０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_05_03
+msg_aquaw_05_03:
+	.byte	O_,bou_,TTU_,HO_,TTU_,HO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,spc_,so_,n_,na_,ni_,spc_,tu_,yo_,i_,n_,da_,mo_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,na_,ka_,ma_,spc_,zi_,yya_,na_,ku_,te_
+	.byte	SCROLL_WAIT_
+	.byte	to_,ttu_,te_,mo_,spc_,za_,n_,ne_,n_,da_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,ga_,spc_,zi_,tu_,ge_,n_,spc_,si_,te_,ku_,re_,ru_
+	.byte	CR_
+	.byte	su_,ba_,ra_,si_,i_,spc_,se_,ka_,i_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ttu_,si_,yyo_,ni_,spc_,ta_,no_,si_,mu_,ko_,to_,ga_,spc_,de_,ki_,ta_,no_,ni_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

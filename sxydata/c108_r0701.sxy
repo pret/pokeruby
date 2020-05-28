@@ -1,0 +1,62 @@
+//MapEditNH Ver.3.51 *.evt -> *.sxy Convert.
+#define OBJNUM_C108_R0701	1
+#define EXITNUM_C108_R0701	2
+#define POSNUM_C108_R0701	0
+#define BGNUM_C108_R0701	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_woman1_01_p01_c108_r0701[];
+
+const evObjData	OBJ_c108_r0701[] =
+{
+	{
+		WOMAN1_01_C108_R0701,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_woman1_01_p01_c108_r0701,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c108_r0701[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		FIELD_C108_DOOR10,		//Door ID
+		FIELD_C108,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		FIELD_C108_DOOR10,		//Door ID
+		FIELD_C108,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c108_r0701_sxy_data =
+{
+OBJNUM_C108_R0701,			// field obj max
+EXITNUM_C108_R0701,		// exit max
+POSNUM_C108_R0701,			// pos event max
+BGNUM_C108_R0701,			// bg event max
+OBJ_c108_r0701,			// field obj data
+EXIT_c108_r0701,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

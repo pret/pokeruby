@@ -1,0 +1,193 @@
+// 造船所１階
+
+
+// ●テーブルの向こう側で図面に集中しているツガ名人（＝おじさん１）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c102_r0101
+msg_middlem1_01_p01_c102_r0101:
+	.byte	e_,bou_,to_,tenten_,tenten_,spc_,ko_,re_,ga_,spc_,ko_,bou_,na_,ttu_,te_
+	.byte	CR_
+	.byte	so_,i_,de_,mo_,ttu_,te_,spc_,a_,re_,ga_,spc_,a_,bou_,na_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	to_,spc_,i_,u_,ko_,to_,ha_,spc_,so_,re_,to_,spc_,ko_,re_,ha_,spc_,do_,re_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,a_,spc_,mo_,u_,spc_,wa_,ke_,ga_,spc_,wa_,ka_,ra_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで主人公の方を振り向き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_c102_r0101
+msg_middlem1_01_p02_c102_r0101:
+	.byte	tenten_,tenten_,n_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	re_,n_,ra_,ku_,se_,n_,no_,spc_,se_,ttu_,ke_,i_,wo_,spc_,ma_,ka_,sa_,re_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	TU_,GA_,to_,i_,u_,spc_,mo_,no_,da_,ke_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ttu_,gyoe_,hate_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,DE_,BO_,N_,no_,ni_,mo_,tu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,bou_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,ma_,ttu_,ta_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_
+	.byte	CR_
+	.byte	ho_,ka_,ni_,mo_,spc_,si_,go_,to_,ga_,spc_,a_,ru_,ka_,ra_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ko_,ka_,ni_,spc_,i_,ttu_,ti_,yya_,ttu_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ru_,i_,ke_,do_,spc_,ki_,mi_,spc_,KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_
+	.byte	CR_
+	.byte	sa_,ga_,si_,te_,spc_,ni_,mo_,tu_,wo_,spc_,wa_,ta_,si_,te_,a_,ge_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●以後、「c102_r0502.msg」の
+// 　アクア団イベントが終了するまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_c102_r0101
+msg_middlem1_01_p03_c102_r0101:
+	.byte	TU_,GA_,kako2_,KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_
+	.byte	CR_
+	.byte	do_,ko_,ni_,spc_,i_,ttu_,ti_,yya_,ttu_,ta_,no_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ru_,i_,ke_,do_,spc_,ki_,mi_,spc_,KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_
+	.byte	CR_
+	.byte	sa_,ga_,si_,te_,spc_,ni_,mo_,tu_,wo_,spc_,wa_,ta_,si_,te_,a_,ge_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「c102_r0502.msg」のアクア団イベントが終了し、
+// 　ハギ老人がここに来るまでは、以下のセリフを繰り返し
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p06_c102_r0101
+msg_middlem1_01_p06_c102_r0101:
+	.byte	TU_,GA_,kako2_,hu_,ne_,wo_,tu_,ku_,ru_,spc_,ttu_,te_,i_,u_,no_,ha_
+	.byte	CR_
+	.byte	tu_,ku_,e_,no_,spc_,u_,e_,de_,no_,spc_,ke_,i_,sa_,n_,spc_,da_,ke_,de_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ra_,na_,i_,ko_,to_,mo_,spc_,o_,o_,ku_,te_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ttu_,pa_,ri_,spc_,u_,mi_,no_,ko_,to_,wo_,spc_,si_,ri_,tu_,ku_,si_,ta_
+	.byte	CR_
+	.byte	BE_,TE_,RA_,N_,no_,spc_,ti_,e_,ga_,spc_,ho_,si_,i_,to_,ko_,ro_,da_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ハギ老人が合流して（トクサネのジムバッジ入手）以降のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p07_c102_r0101
+msg_middlem1_01_p07_c102_r0101:
+	.byte	TU_,GA_,kako2_,ya_,a_,gyoe_,spc_,HA_,GI_,ro_,u_,zi_,n_,ga_,spc_,ko_,ko_,de_
+	.byte	CR_
+	.byte	te_,tu_,da_,ttu_,te_,spc_,ku_,re_,ru_,yo_,u_,ni_,spc_,na_,ttu_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,n_,se_,tu_,no_,spc_,hu_,na_,no_,ri_,ni_,spc_,te_,tu_,da_,ttu_,te_,mo_,ra_,e_,te_
+	.byte	CR_
+	.byte	re_,n_,ra_,ku_,se_,n_,ha_,spc_,ti_,yya_,ku_,ti_,yya_,ku_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,se_,i_,ni_,spc_,mu_,ka_,ttu_,te_,i_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●連絡船完成後のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p08_c102_r0101
+msg_middlem1_01_p08_c102_r0101:
+	.byte	TU_,GA_,kako2_,tu_,i_,ni_,spc_,hu_,ne_,ha_,spc_,ka_,n_,se_,i_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ki_,ta_,spc_,re_,n_,ra_,ku_,se_,n_,spc_,TA_,I_,DO_,RI_,TTU_,PU_,go_,u_,ha_
+	.byte	CR_
+	.byte	ma_,sa_,ni_,spc_,sa_,i_,ko_,u_,spc_,ke_,ttu_,sa_,ku_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ke_,do_,spc_,mo_,ttu_,to_,spc_,i_,i_,mo_,no_,ga_,spc_,de_,ki_,so_,u_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,n_,na_,spc_,ki_,mo_,spc_,su_,ru_,n_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	mo_,no_,du_,ku_,ri_,ni_,spc_,o_,wa_,ri_,ha_,spc_,na_,i_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ハギ老人
+// 　→トクサネのジムバッジ入手のタイミングで出現
+// ●連絡船完成前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c102_r0101
+msg_oldman1_01_p01_c102_r0101:
+	.byte	HA_,GI_,kako2_,o_,o_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	CR_
+	.byte	hi_,sa_,si_,bu_,ri_,spc_,zi_,yya_,no_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,a_,spc_,ki_,mi_,to_,spc_,de_,a_,ttu_,te_,ka_,ra_
+	.byte	CR_
+	.byte	hu_,na_,no_,ri_,no_,spc_,ti_,ga_,spc_,sa_,wa_,i_,de_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	TU_,GA_,ku_,n_,ni_,spc_,ki_,yyo_,u_,ri_,yyo_,ku_,spc_,si_,te_
+	.byte	CR_
+	.byte	re_,n_,ra_,ku_,se_,n_,wo_,spc_,tu_,ku_,ri_,ta_,ku_,spc_,na_,ttu_,ta_,n_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	re_,n_,ra_,ku_,se_,n_,ga_,spc_,de_,ki_,ru_,to_,spc_,o_,o_,ku_,no_
+	.byte	CR_
+	.byte	hi_,to_,wo_,spc_,ha_,ko_,be_,ru_,yo_,u_,ni_,spc_,na_,ru_,ka_,ra_,no_,u_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,si_,tenten_,tenten_,spc_,hu_,mu_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	TU_,GA_,ku_,n_,ha_,spc_,su_,go_,i_,no_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,re_,no_,spc_,gi_,zi_,yyu_,tu_,to_,spc_,wa_,si_,no_,spc_,ke_,i_,ke_,n_,wo_
+	.byte	CR_
+	.byte	ga_,ttu_,ta_,i_,spc_,sa_,se_,re_,ba_,spc_,ka_,na_,ra_,zu_,ya_
+	.byte	SCROLL_WAIT_
+	.byte	su_,go_,i_,spc_,hu_,ne_,ga_,spc_,de_,ki_,ru_,ni_,spc_,ti_,ga_,i_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ゲームクリアのタイミングで、ここから削除
+// 　連絡船タイドリップ号に出現
+
+// ●ピーコちゃん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camome_01_p01_c102_r0101
+msg_camome_01_p01_c102_r0101:
+	.byte	PI_,bou_,KO_,ti_,yya_,n_,kako2_,PI_,bou_,spc_,PI_,hi_,yyo_,ro_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時に「キャモメ」の鳴き声ＳＥをならす
+
+
+// ●ツガ名人の助手１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_c102_r0101
+msg_studym1_01_p01_c102_r0101:
+	.byte	ki_,se_,tu_,ya_,spc_,te_,n_,ki_,ya_,spc_,tu_,ki_,no_,i_,ti_,spc_,na_,do_
+	.byte	CR_
+	.byte	sa_,ma_,za_,ma_,na_,spc_,zi_,yyo_,u_,ke_,n_,spc_,ni_,yo_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	u_,mi_,ha_,spc_,tu_,ne_,ni_,spc_,su_,ga_,ta_,wo_,spc_,ka_,e_,te_,i_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,gyoe_,spc_,u_,mi_,spc_,to_,i_,u_,no_,ha_
+	.byte	CR_
+	.byte	i_,ki_,mo_,no_,spc_,no_,yo_,u_,na_,spc_,mo_,no_,spc_,na_,n_,de_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ツガ名人の助手２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_02_p01_c102_r0101
+msg_studym1_02_p01_c102_r0101:
+	.byte	bo_,ku_,ha_,spc_,su_,gu_,ni_,spc_,hu_,na_,yo_,i_,spc_,su_,ru_,no_,yo_,ne_
+	.byte	CR_
+	.byte	da_,ka_,ra_,spc_,ko_,ko_,de_,spc_,o_,te_,tu_,da_,i_,spc_,si_,te_,ru_,no_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

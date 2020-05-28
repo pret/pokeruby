@@ -1,0 +1,186 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	park_kokoro02_event_data
+INIT_CTRL_LABEL		init_ctrl_park_kokoro02
+FLAG_CHANGE_LABEL	flag_change_park_kokoro02
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_park_kokoro02:
+	_IF_FLAGON_CALL	SYS_CTRL_OBJ_DELETE,pokemon_del_park_kokoro02
+	_END
+
+pokemon_del_park_kokoro02:
+	_OBJ_DELETE		KOKORO_01_PARK_KOKORO02
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_park_kokoro02:
+	//ラティアス・ラティオスセット
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_LDVAL			OBJCHRWORK2,RATIOSU
+#elif ( PM_VERSION == VERSION_RUBY )
+	_LDVAL			OBJCHRWORK2,RATIASU
+#endif
+
+	//ダミーOBJをセットする
+	_CALL			set_dummy_obj_park_kokoro02
+	_END
+
+//ダミーOBJをセットする
+set_dummy_obj_park_kokoro02:
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_park_kokoro02
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_park_kokoro02
+	_END
+
+my_sex_boy_park_kokoro02:
+	_LDVAL			OBJCHRWORK1,HERO
+	_RET
+
+my_sex_girl_park_kokoro02:
+	_LDVAL			OBJCHRWORK1,HEROINE
+	_RET
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							モニュメント
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_park_kokoro02
+	_TALK_START
+	_LDVAL		TMPWK0,12			//X座標
+	_JUMP		common_kanban_01_park_kokoro02
+	_END
+
+//共通処理
+common_kanban_01_park_kokoro02:
+	//すでに戦っていたら
+	_IF_FLAGON_JUMP		FE_KOKORO_BATTLE,ev_kanban_01_p02_park_kokoro02
+
+	//南の孤島イベント許可されていない場合
+	_IF_FLAGOFF_JUMP	SYS_KOKORO_EVENT,ev_kanban_01_p02_park_kokoro02
+
+	_FLAG_SET		FE_KOKORO_BATTLE
+
+	//スクロールOBJ追加
+	_PROGRAM		SET_MAP_SCROOL
+
+	//スクロールさせる
+	_SET_OBJ_ANIME	DMY_OBJ_ID,hero_01_park_kokoro02_anime01
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		50
+
+	//鳴き声鳴らす
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_VOICE_PLAY		MONSNO_RATHIOSU,0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_VOICE_PLAY		MONSNO_RATHIASU,0
+#endif
+
+	_TIME_WAIT		30
+	_VOICE_WAIT
+
+	//ラティアス(ラティオス)を出す
+	_OBJ_APPEAR		KOKORO_01_PARK_KOKORO02
+
+	_TIME_WAIT		30
+
+	//アニメーション(主人公の位置に戻す)
+	_SET_OBJ_ANIME	DMY_OBJ_ID,hero_01_park_kokoro02_anime02
+	_SET_OBJ_ANIME	KOKORO_01_PARK_KOKORO02,kokoro_01_park_kokoro02_anime01
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		50
+
+	//スクロールOBJ削除
+	_PROGRAM		RESET_MAP_SCROOL
+
+	//戦闘に入る
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_WILD_FIGHT_SET	MONSNO_RATHIOSU,50,ITEM_KOKORONOSIZUKU
+#elif ( PM_VERSION == VERSION_RUBY )
+	_WILD_FIGHT_SET	MONSNO_RATHIASU,50,ITEM_KOKORONOSIZUKU
+#endif
+
+	//ラティアス削除
+	//通常戦なので負けてもOBJが消えているようにする
+	_FLAG_SET		FV_KOKORO_01_PARK_KOKORO02
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_PROGRAM		KOKORO_POKE_FIGHT
+	_STOP_SCRIPT
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_END
+	_END
+
+//すでに戦っている
+ev_kanban_01_p02_park_kokoro02:
+	_TALK_KEYWAIT	msg_monument_01_p01_kokoro01
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	スクロールさせる
+//--------------------------------------------------------------------
+hero_01_park_kokoro02_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	スクロール元に戻す
+//--------------------------------------------------------------------
+hero_01_park_kokoro02_anime02:
+	//登場待ち
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	//ウェイト
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	//スクロール
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ラティアス(ラティオス)	アニメーション
+//--------------------------------------------------------------------
+kokoro_01_park_kokoro02_anime01:
+	//登場待ち
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	//ウェイト
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	//スクロール
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+

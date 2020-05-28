@@ -1,0 +1,329 @@
+//====================================================================
+//							t101_r0301
+//						ミシロ・ルーム0301
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t101_r0301_event_data
+FLAG_CHANGE_LABEL	flag_change_t101_r0301
+OBJ_CTRL_LABEL		obj_ctrl_t101_r0301
+SP_SCRIPT_LABEL		scene_odamaki_01_p01_t101_r0301
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_t101_r0301:
+	_CALL			set_support_char
+
+	//オダマキ出現チェック
+	_CALL			chk_odamaki_hyouka
+	_END
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_t101_r0301:
+	OBJ_CTRL_DATA	WK_SCENE_T101_R0301,2,ev_site_chg_t101_r0301
+	OBJ_CTRL_END
+
+//初ポケモンゲットイベント発動
+ev_site_chg_t101_r0301:
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_U
+	_END
+
+//--------------------------------------------------------------------
+//							SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_odamaki_01_p01_t101_r0301:
+	//初ポケモンゲットイベント発動
+	SP_SCRIPT_DATA	WK_SCENE_T101_R0301,2,ev_scene_odamaki_01_p01_t101_r0301
+
+	//図鑑もらうイベント発動
+	SP_SCRIPT_DATA	WK_SCENE_T101_R0301,4,ev_scene_odamaki_01_p02_t101_r0301
+	SP_SCRIPT_END
+
+//オダマキと研究所で初会話
+ev_scene_odamaki_01_p01_t101_r0301:
+	_TALK_START
+
+	_GET_TEMOTI_MONSNAME	0
+	_TALKMSG		msg_odamaki_01_p01_t101_r0301
+	_TALK_WAIT
+	_JINGLE			MUS_FANFA4
+	_JINGLE_WAIT
+
+	//ニックネームつけるかい
+	_TALK_YES_NO	msg_odamaki_01_p02_t101_r0301
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_odamaki_01_p03_t101_r0301	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_odamaki_return_t101_r0301
+	_END
+
+//「はい」
+yes_odamaki_01_p03_t101_r0301:
+	_LDVAL			PARAM0,0		//先頭のポケモン
+
+	//名前入力画面
+	//変更する前のニックネームを＠２に格納して、NameIn呼び出す(＠１も使用している)
+	_CALL			ev_new_poke_nick_name_script
+
+	_JUMP			ev_odamaki_return_t101_r0301
+	_END
+
+//「いいえ」か「はい」の続き
+ev_odamaki_return_t101_r0301:
+	_TALK_YES_NO	msg_odamaki_01_p03_t101_r0301
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_odamaki_01_p01_t101_r0301	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_odamaki_01_p01_t101_r0301	//「いいえ」
+	_END
+
+//「はい」
+yes_odamaki_01_p01_t101_r0301:
+	_TALK_KEYWAIT	msg_odamaki_01_p04_t101_r0301
+
+	_FLAG_RESET		FV_BOY2_01_FIELD_R101
+	_LDVAL			WK_SCENE_T101_R0301,3
+	_TALK_END
+	_END
+
+//「いいえ」
+no_odamaki_01_p01_t101_r0301:
+	_TALK_YES_NO	msg_odamaki_01_p05_t101_r0301
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_odamaki_01_p01_t101_r0301	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_odamaki_01_p01_t101_r0301	//「いいえ」
+	_END
+
+//図鑑貰うイベント
+ev_scene_odamaki_01_p02_t101_r0301:
+	_TALK_START
+
+	//オダマキの前まで移動する
+	_SET_OBJ_ANIME		EV_OBJ_SPID,hero_01_t101_r0301_anime50
+	_OBJ_ANIME_WAIT
+
+	_JUMP			ev_odamaki_01_p02_t101_r0301
+	_END
+
+//--------------------------------------------------------------------
+//主人公	オダマキの前まで移動
+//--------------------------------------------------------------------
+hero_01_t101_r0301_anime50:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							助手(近い方)							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_t101_r0301
+	_TALK_OBJ_START
+
+	//オダマキが戻ってきてから
+	_IFVAL_JUMP		WK_SCENE_T101_R0301,GE,3,ev_studym1_01_p03_t101_r0301
+
+	//一度話したか
+	_IF_FLAGON_JUMP	FE_STUDYM1_01_P01_T101_R0301,ev_studym1_01_p02_t101_r0301
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_t101_r0301
+
+	//一度話した
+	_FLAG_SET		FE_STUDYM1_01_P01_T101_R0301
+
+	_TALK_OBJ_END
+	_END
+
+//一度話した
+ev_studym1_01_p02_t101_r0301:
+	_TALK_KEYWAIT	msg_studym1_01_p02_t101_r0301
+	_TALK_OBJ_END
+	_END
+
+//オダマキが戻ってきてから
+ev_studym1_01_p03_t101_r0301:
+	_TALK_KEYWAIT	msg_studym1_01_p03_t101_r0301
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							オダマキ博士							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_odamaki_01_p01_t101_r0301
+	_TALK_OBJ_START
+
+	//評価
+	_IF_FLAGOFF_JUMP	FV_ODAMAKI_HYOUKA_T101_R0301,ev_odamaki_01_p01_zukan
+	
+	//コトキのストッパー解除しているか(モンスターボールをもらっているか)
+	_IFVAL_JUMP		WK_SCENE_T101_R0301,EQ,5,ev_odamaki_01_p03_t101_r0301
+
+	_TALK_KEYWAIT	msg_odamaki_01_p06_t101_r0301
+	_TALK_OBJ_END
+	_END
+
+//オダマキ娘と対戦して勝利している
+ev_odamaki_01_p02_t101_r0301:
+	_TALK_KEYWAIT	msg_odamaki_01_p07_t101_r0301
+
+	//ポケモン図鑑入手
+	_CALL			zukan_get_01_p10_t101_r0301
+
+	_TALK_KEYWAIT	msg_odamaki_01_p09_t101_r0301
+
+	//サポート主人公に近づく
+	_SET_OBJ_ANIME	SUPPORT_01_T101_R0301,support_01_t101_r0301_anime01
+	_OBJ_ANIME_WAIT
+
+	//振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,my_sex_boy_t101_r0301_support
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,my_sex_girl_t101_r0301_support
+
+	//モンスターボールをあげた
+	_LDVAL			WK_SCENE_T101_R0301,5	//シーン５に切り替え
+	_FLAG_SET		FE_MONSBALL_GET			//モンスターボール貰った
+
+	//コトキのストッパー解除する
+	_LDVAL			WK_SCENE_FIELD_T102,1	//シーン１に切り替え
+
+	//ロード１０３で勝利後会話した
+	_LDVAL			WK_SCENE_T101_R0202,4
+
+	//母からランニングシューズ貰えるイベント開始
+	_LDVAL			WK_SCENE_FIELD_T101,3
+
+	_TALK_END
+	_END
+
+//主人公(男)
+my_sex_boy_t101_r0301_support:
+	_TALK_KEYWAIT	msg_heroine_01_p01_t101_r0301
+
+	//モンスターボールを５個くれる
+	_ITEM_EVENT		ITEM_MONSUTAABOORU,5
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,ev_fail_item_t101_r0301_boy
+	
+	_TALK_KEYWAIT	msg_heroine_01_p02_t101_r0301
+
+	//男を代入
+	_LDVAL			ANSWORK,FALSE
+	_RET
+
+//主人公(女)
+my_sex_girl_t101_r0301_support:
+	_TALK_KEYWAIT	msg_hero_01_p01_t101_r0301
+
+	//モンスターボールを５個くれる
+	_ITEM_EVENT		ITEM_MONSUTAABOORU,5
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,ev_fail_item_t101_r0301_girl
+	
+	_TALK_KEYWAIT	msg_hero_01_p02_t101_r0301
+
+	//女を代入
+	_LDVAL			ANSWORK,TRUE
+	_RET
+
+//ポケモン図鑑入手
+zukan_get_01_p10_t101_r0301:
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_odamaki_01_p08_t101_r0301
+	_JINGLE_WAIT
+	_FLAG_SET		SYS_ZUKAN_GET
+	_RET
+
+//コトキのストッパー解除している
+ev_odamaki_01_p03_t101_r0301:
+	_TALK_KEYWAIT	msg_odamaki_01_p10_t101_r0301
+	_TALK_OBJ_END
+	_END
+
+//バッグがいっぱいだったとき(男)
+ev_fail_item_t101_r0301_boy:
+	_TALK_KEYWAIT	msg_heroine_01_p04_t101_r0301
+	_RET
+
+//バッグがいっぱいだったとき(女)
+ev_fail_item_t101_r0301_girl:
+	_TALK_KEYWAIT	msg_hero_01_p04_t101_r0301
+	_RET
+
+//--------------------------------------------------------------------
+//サポート	主人公に近づく
+//--------------------------------------------------------------------
+support_01_t101_r0301_anime01:
+	.byte	AC_WALK_D_1	
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+	
+
+/********************************************************************/
+/*							回復マシン								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_machine_01_p01_t101_r0301
+	_EASY_MSG		msg_machine_01_p01_t101_r0301
+	_END
+
+
+/********************************************************************/
+/*							サポート								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_t101_r0301
+	_TALK_OBJ_START
+
+	//コトキのストッパー解除した(モンスターボールをもらっている)
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,my_sex_boy_t101_r0301_support_02
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,my_sex_girl_t101_r0301_support_02
+	_TALK_OBJ_END
+	_END
+
+//主人公男
+my_sex_boy_t101_r0301_support_02:
+	_TALK_KEYWAIT	msg_heroine_01_p03_t101_r0301
+	_RET
+
+//主人公女
+my_sex_girl_t101_r0301_support_02:
+	_TALK_KEYWAIT	msg_hero_01_p03_t101_r0301
+	_RET
+
+
+/********************************************************************/
+/*							パソコン								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_paso_01_p01_t101_r0301
+	_EASY_MSG	msg_paso_01_p01_t101_r0301
+	_END
+
+
+/********************************************************************/
+/*								本棚								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bookshelf_01_p01_t101_r0301
+	_EASY_MSG	msg_bookshelf_01_p01_t101_r0301
+	_END
+
+
+/********************************************************************/
+/*								書物								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_books_01_p01_t101_r0301
+	_EASY_MSG	msg_books_01_p01_t101_r0301
+	_END
+
+

@@ -1,0 +1,400 @@
+#include "../script/tane_blender1.mes"
+#include "../script/tane_blender2.mes"
+#include "../script/cube_oyaji.mes"
+
+
+/********************************************************************/
+//						タネブレンダー	
+/********************************************************************/
+SCRIPT_LABEL	ev_tane_blender_01_t105_r0101
+	_LDVAL			TMPWK0,CUBEOYAJI_01_T105_R0101
+	_LDVAL			TMPWK1,PLAYER_2
+
+	//タネブレンダーの方を向く
+	_SET_OBJ_ANIME	TMPWK0,oyaji_01_contest_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP			script_tane_blender1
+	_END
+
+SCRIPT_LABEL	ev_tane_blender_01_c102_r0201
+	_LDVAL			TMPWK0,CUBEOYAJI_01_C102_R0201
+	_LDVAL			TMPWK1,PLAYER_3
+
+	//タネブレンダーの方を向く
+	_SET_OBJ_ANIME	BOY1_01_C102_R0201,default_site_anime
+	_SET_OBJ_ANIME	TMPWK0,oyaji_01_contest_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP			script_tane_blender1
+	_END
+
+SCRIPT_LABEL	ev_tane_blender_01_t106_r0101
+	_LDVAL			TMPWK0,CUBEOYAJI_01_T106_R0101
+	_LDVAL			TMPWK1,PLAYER_2
+
+	//タネブレンダーの方を向く
+	_SET_OBJ_ANIME	TMPWK0,oyaji_01_contest_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP			script_tane_blender1
+	_END
+
+SCRIPT_LABEL	ev_tane_blender_01_c106_r0301
+	_LDVAL			TMPWK0,CUBEOYAJI_01_C106_R0301
+	_LDVAL			TMPWK1,PLAYER_4
+
+	//タネブレンダーの方を向く
+	_SET_OBJ_ANIME	BOY1_01_C106_R0301,default_site_anime
+	_SET_OBJ_ANIME	GIRL1_01_C106_R0301,default_site_anime
+	_SET_OBJ_ANIME	TMPWK0,oyaji_01_contest_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP			script_tane_blender1
+	_END
+
+SCRIPT_LABEL	script_tane_blender1
+	_TALK_START
+
+	//作りたい？
+	_TALK_YES_NO	msg_cube_01_p01_contest
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_tane_blender_01_p01	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_tane_blender_01_p01		//「いいえ」
+	_END
+
+//つくりたい？「はい」
+yes_tane_blender_01_p01:
+	//キューブケースをもっているか
+	_CHECK_ITEM		ITEM_POROKKUKEESU,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,item_nothing_cubecase_01	// キューブケースない
+
+	_FUNC_CALL		ANSWORK,CHK_SEED_POCKET
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_tane_blender_01_p02	// ない
+
+	_TALK_KEYWAIT	msg_cube_01_p02_contest
+
+	_FUNC_CALL		ANSWORK,CHK_CUBECASE
+	_IFVAL_JUMP		ANSWORK,NE,65535,makeing_tane_blender	// キューブケースに空きがある
+	_IFVAL_JUMP		ANSWORK,EQ,65535,cubecase_max_blender_01// キューブケースに空きがない
+
+	_END
+
+//つくりたい？「いいえ」
+no_tane_blender_01_p01:
+	_TALK_KEYWAIT	msg_cube_01_p03_contest
+	_TALK_END
+	_END
+
+//つくりかたのコツはもう知っているかい？
+makeing_tane_blender:
+	_TALK_YES_NO	msg_cube_01_p04_contest
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_tane_blender_01_p03	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_tane_blender_01_p03	//「いいえ」
+	_END
+
+//タネをもっていない
+no_tane_blender_01_p02:
+	_TALK_KEYWAIT	msg_cube_01_p07_contest
+
+	//一日一回の判断
+	_UPDATE_GAME_TIME
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT,yes_tane_blender_01_p04	// もうもらっている
+	_JUMP			no_tane_blender_01_p04				// 今日はまだもらっていない
+	_END
+
+//説明を聞く
+no_tane_blender_01_p03:
+	_TALK_KEYWAIT	msg_cube_01_p06_contest
+	_JUMP			yes_tane_blender_01_p03
+	_END
+
+//説明を聞かない
+yes_tane_blender_01_p03:
+	_TALK_KEYWAIT	msg_cube_01_p05_contest
+	_JUMP			start_tane_blender
+	_END
+
+//ゲーム画面
+start_tane_blender:
+	//タネブレンダーのタイプをセットする
+	_LDWK			PARAM0,TMPWK1
+
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		START_BLENDER
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//もうもらっている
+yes_tane_blender_01_p04:
+	_TALK_KEYWAIT	msg_cube_01_p09_contest
+	_TALK_END
+	_END
+
+//今日はまだもらっていない
+no_tane_blender_01_p04:
+	_TALK_KEYWAIT	msg_cube_01_p08_contest
+	//タネ取得処理
+	_ITEM_EVENT		ITEM_MOMONNOMI,1	//仮
+
+	//一日フラグを立てる
+	_FLAG_SET		TMFLG_SEED_PRESENT
+
+	_JUMP			makeing_tane_blender
+	_END
+
+//キューブケースが空きがない
+cubecase_max_blender_01:
+	_TALK_KEYWAIT	msg_cube_01_p10_contest
+	_TALK_END
+	_END
+
+// キューブケースない
+item_nothing_cubecase_01:
+	_TALK_KEYWAIT	msg_cube_01_p11_contest
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						タネ大好きおやじ	
+/********************************************************************/
+SCRIPT_LABEL	ev_cube_oyaji_01_p01_t105_r0101
+	_LDVAL			TMPWK0,CUBEOYAJI_01_T105_R0101
+	_JUMP			script_cube_oyaji
+	_END
+
+SCRIPT_LABEL	ev_cube_oyaji_01_p01_c102_r0201
+	_LDVAL			TMPWK0,CUBEOYAJI_01_C102_R0201
+	_JUMP			script_cube_oyaji
+	_END
+
+SCRIPT_LABEL	ev_cube_oyaji_01_p01_t106_r0101
+	_LDVAL			TMPWK0,CUBEOYAJI_01_T106_R0101
+	_JUMP			script_cube_oyaji
+	_END
+
+SCRIPT_LABEL	ev_cube_oyaji_01_p01_c106_r0301
+	_LDVAL			TMPWK0,CUBEOYAJI_01_C106_R0301
+	_JUMP			script_cube_oyaji
+	_END
+
+SCRIPT_LABEL	script_cube_oyaji
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_oyaji_01_p01_contest
+
+	_FUNC_CALL		ANSWORK,CHK_SEED_POCKET
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_cube_oyaji_02_p02	// ある
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_cube_oyaji_02_p02	// ない
+	_END
+
+//タネをもっている 
+yes_cube_oyaji_02_p02:
+	_TALK_KEYWAIT	msg_oyaji_01_p02_contest
+	_TALK_OBJ_END
+	_END
+
+//タネをもっていない
+no_cube_oyaji_02_p02:
+	//一日一回の判断
+	_UPDATE_GAME_TIME
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT,yes_cube_oyaji_02_p03	// もうもらっている
+	_JUMP			no_cube_oyaji_02_p03				// 今日はまだもらっていない
+	_END
+
+//もうもらっている
+yes_cube_oyaji_02_p03:
+	_TALK_KEYWAIT	msg_oyaji_01_p05_contest
+	_TALK_OBJ_END
+	_END
+
+//今日はまだもらっていない
+no_cube_oyaji_02_p03:
+	_TALK_KEYWAIT	msg_oyaji_01_p03_contest
+	_ITEM_EVENT		ITEM_MOMONNOMI,1	//仮
+
+	//一日フラグを立てる
+	_FLAG_SET		TMFLG_SEED_PRESENT
+
+	_TALK_KEYWAIT	msg_oyaji_01_p04_contest
+	_TALK_OBJ_END
+	_END
+
+//右を向く
+oyaji_01_contest_anime01:
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						タネブレンダー	
+//							通信用
+/********************************************************************/
+SCRIPT_LABEL	ev_tane_blender_comm_01_t105_r0101
+	_JUMP			tane_blender_comm_script
+	_END
+
+SCRIPT_LABEL	ev_tane_blender_comm_01_c102_r0201
+	_JUMP			tane_blender_comm_script
+	_END
+
+SCRIPT_LABEL	ev_tane_blender_comm_01_t106_r0101
+	_JUMP			tane_blender_comm_script
+	_END
+
+SCRIPT_LABEL	ev_tane_blender_comm_01_c106_r0301
+	_JUMP			tane_blender_comm_script
+	_END
+
+tane_blender_comm_script:
+	_TALK_START
+	_FUNC_CALL		ANSWORK,CHK_SEED_POCKET
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_tane_blender_02_p01	// ない
+
+	//キューブケースをもっているか
+	_CHECK_ITEM		ITEM_POROKKUKEESU,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,item_nothing_cubecase_02	// キューブケースない
+
+	_FUNC_CALL		ANSWORK,CHK_CUBECASE
+	_IFVAL_JUMP		ANSWORK,NE,65535,yes_tane_blender_02_p01// キューブケースに空きがある
+	_IFVAL_JUMP		ANSWORK,EQ,65535,cubecase_max_blender_02// キューブケースに空きがない
+	_END
+
+//タネをもっている
+yes_tane_blender_02_p01:
+	_TALK_YES_NO	msg_cube_02_p01_contest	//セーブしてよろしいですか
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_tane_blender_02_p02	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_tane_blender_02_p02		//「いいえ」
+	_END
+
+//タネをもっていない
+no_tane_blender_02_p01:
+	_TALK_KEYWAIT	msg_cube_02_p07_contest
+	_TALK_END
+	_END
+
+//セーブした
+yes_tane_blender_02_p02:
+	_CALL			FieldSaveScript
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_tane_blender_02_p02	// キャンセル・失敗
+
+	_TALKMSG		msg_cube_02_p02_contest
+	_TALK_WAIT
+
+	//フェードは重いので、コメントにする
+	//_FLD_FADE_BLACKOUT
+	_PROGRAM		CONNECT_BLEND
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP		ANSWORK,EQ,COMM_RES_OK,			_blend_ok
+	_IFVAL_JUMP		ANSWORK,EQ,COMM_RES_TIMEOUT,	ev_blend_fail
+	_IFVAL_JUMP		ANSWORK,EQ,COMM_RES_OTHERMODE,	ev_blend_differ
+	//_IFVAL_JUMP		ANSWORK,EQ,COMM_RES_WRONG_NUM,	ev_reception_wrong_number_battle
+	_IFVAL_JUMP		ANSWORK,EQ,COMM_RES_CANCEL,		ev_blend_end
+	_IFVAL_JUMP		ANSWORK,EQ,COMM_RES_ERROR,		ev_blend_error
+
+	_END
+
+case1_blend_comm_num:
+	_TALK_KEYWAIT	msg_cube_02_p03_contest
+	_JUMP			blend_comm_start
+	_END
+
+case2_blend_comm_num:
+	_TALK_KEYWAIT	msg_cube_02_p04_contest
+	_JUMP			blend_comm_start
+	_END
+
+case3_blend_comm_num:
+	_TALK_KEYWAIT	msg_cube_02_p05_contest
+	_JUMP			blend_comm_start
+	_END
+
+//ブレンドマシーン起動
+blend_comm_start:
+	_LDVAL			PARAM0,PLAYER_SIO
+
+	_FLD_FADE_BLACKOUT
+
+	//表示されていないOBJIDをDELしても大丈夫らしいので、４人分DELしている
+	_OBJ_DELETE		0xf0
+	_OBJ_DELETE		0xef
+	_OBJ_DELETE		0xee
+	_OBJ_DELETE		0xed
+
+	_PROGRAM		START_BLENDER
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//セーブをしたくないので、終了
+no_tane_blender_02_p02:
+	_TALK_END
+	_END
+
+//キューブケースに空きがない
+cubecase_max_blender_02:
+	_TALK_KEYWAIT	msg_cube_02_p08_contest
+	_TALK_END
+	_END
+
+// キューブケースない
+item_nothing_cubecase_02:
+	_TALK_KEYWAIT	msg_cube_02_p09_contest
+	_TALK_END
+	_END
+
+//通信接続失敗(connect.evより抜擢)
+SCRIPT_LABEL	ev_blend_fail
+	_PROGRAM		COMM_END
+	_TALK_KEYWAIT	msg_reception_common_p04
+	_TALK_END
+	_END
+
+//通信選択が違う場合(connect.evより抜擢)
+SCRIPT_LABEL	ev_blend_differ
+	_PROGRAM		COMM_END
+	_TALK_KEYWAIT	msg_reception_common_p05
+	_TALK_END
+	_END
+
+//通信接続をしない場合
+SCRIPT_LABEL	ev_blend_end
+	_PROGRAM		COMM_END
+	_TALK_KEYWAIT	msg_blend_common_end
+	_TALK_END
+	_END
+
+//通信エラー発生の場合
+SCRIPT_LABEL	ev_blend_error
+	_PROGRAM		COMM_END
+	_TALK_KEYWAIT	msg_reception_error
+	_TALK_END
+	_END
+
+//通信成功
+_blend_ok:
+	_FLD_FADE_BLACKOUT
+
+	_FUNC_CALL		ANSWORK,SET_BLEND_COMM_NAME
+	_LDWK			TMPWK0,ANSWORK		//保存
+
+	_LDWK			PARAM0,TMPWK0
+	_PROGRAM		SET_BLEND_COMM_OBJ
+	_JUMP			select_blend_comm_01
+
+	_END
+
+//通信人数によって、メッセージの分岐を分ける
+select_blend_comm_01:
+	_FLD_FADE_BLACKIN
+	_SWITCH			TMPWK0
+	_CASEJUMP		2,case1_blend_comm_num
+	_CASEJUMP		3,case2_blend_comm_num
+	_CASEJUMP		4,case3_blend_comm_num
+	_END
+
+

@@ -1,0 +1,81 @@
+// ●ＢＧメッセージ
+
+// ●本棚その１
+// ●小さい本棚（青い本棚）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bookrack_01
+msg_bookrack_01:
+	.byte	PO_,KE_,MO_,N_,e_,ho_,n_,ga_,spc_,so_,ro_,ttu_,te_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●本棚その２
+// ●大きな本棚１（民家の本棚）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bookrack_02
+msg_bookrack_02:
+	.byte	i_,ro_,n_,na_,spc_,ho_,n_,ga_,spc_,i_,ttu_,pa_,i_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●本棚その３
+// ●大きな本棚２（ＰＣの本棚）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bookrack_03
+msg_bookrack_03:
+	.byte	PO_,KE_,MO_,N_,za_,ttu_,si_,ga_,spc_,na_,ra_,n_,de_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,kako_,PO_,KE_,MO_,N_,no_,to_,mo_,kakot_
+	.byte	CR_
+	.byte	tenten_,tenten_,kako_,PO_,KE_,MO_,N_,spc_,te_,ti_,yyo_,u_,kakot_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_,kako_,ka_,wa_,i_,i_,spc_,PO_,KE_,MO_,N_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●つぼ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pot_01
+msg_pot_01:
+	.byte	ta_,ka_,so_,u_,na_,spc_,tu_,bo_,ga_,spc_,a_,ru_,gyoe_
+	.byte	CR_
+	.byte	no_,zo_,ki_,ko_,mu_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ka_,ha_,spc_,ka_,ra_,ttu_,po_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ゴミ箱
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trashbox_01
+msg_trashbox_01:
+	.byte	na_,ka_,ha_,spc_,ka_,ra_,ttu_,po_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デパート・ショップの棚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_glasscase_01
+msg_glasscase_01:
+	.byte	ta_,ku_,sa_,n_,no_,spc_,PO_,KE_,MO_,N_,spc_,GU_,TTU_,ZU_,ga_
+	.byte	CR_
+	.byte	to_,ko_,ro_,se_,ma_,si_,to_,spc_,na_,ra_,be_,ra_,re_,te_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●設計図
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_blueprint_01
+msg_blueprint_01:
+	.byte	na_,ni_,ka_,no_,spc_,se_,ttu_,ke_,i_,zu_,tenten_,tenten_,hate_
+	.byte	CR_
+	.byte	mi_,te_,mo_,spc_,TI_,N_,PU_,N_,KA_,N_,PU_,N_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

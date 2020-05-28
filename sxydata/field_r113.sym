@@ -1,0 +1,17 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 11
+#define BOYA1_01_FIELD_R113	1
+#define GENTLEM1_01_FIELD_R113	2
+#define TR_TANPAN_09	3
+#define TR_TANPAN_10	4
+#define TR_PARASOL_01	5
+#define BALL1_12	6
+#define BALL1_13	7
+#define TR_SHINOBI_05	8
+#define TR_SHINOBI_06	9
+#define TR_FUTAGO_10_01	10
+#define TR_FUTAGO_10_02	11
+
+//Exit ID = 1
+#define FIELD_R113_DOOR01	0

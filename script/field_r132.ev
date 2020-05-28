@@ -1,0 +1,53 @@
+
+//====================================================================
+//							field_r132
+//====================================================================
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r132_event_data
+EVENT_DATA_END
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_swimmerm_19
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_19
+	_TRAINER_DATA2	msg_swimmerm_19_01
+	_TRAINER_DATA3	msg_swimmerm_19_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_19_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_18
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_18
+	_TRAINER_DATA2	msg_swimmerw_18_01
+	_TRAINER_DATA3	msg_swimmerw_18_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_18_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_15
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_15
+	_TRAINER_DATA2	msg_fishing_15_01
+	_TRAINER_DATA3	msg_fishing_15_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_15_03
+	_END
+
+SCRIPT_LABEL	ev_karate_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_03
+	_TRAINER_DATA2	msg_karate_03_01
+	_TRAINER_DATA3	msg_karate_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_03_03
+	_END

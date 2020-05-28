@@ -1,0 +1,420 @@
+// ●オダマキ研究所
+// ●はじめて来たときには博士はおらず、助手が１人
+
+
+// ●助手
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_t101_r0301
+msg_studym1_01_p01_t101_r0301:
+	.byte	e_,hate_,spc_,O_,DA_,MA_,KI_,ha_,ka_,se_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ka_,se_,spc_,na_,ra_,spc_,HU_,II_,bou_,RU_,DO_,WA_,bou_,KU_,ni_
+	.byte	CR_
+	.byte	de_,ka_,ke_,te_,i_,te_,spc_,i_,ma_,se_,n_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,a_,spc_,HU_,II_,bou_,RU_,DO_,WA_,bou_,KU_,ttu_,te_,spc_,i_,u_,no_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,ttu_,sa_,i_,ni_,spc_,no_,ya_,ma_,he_,spc_,de_,ka_,ke_,te_,i_,ttu_,te_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,wo_,spc_,su_,ru_,ko_,to_,spc_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ka_,se_,ha_,spc_,tu_,ku_,e_,no_,u_,e_,de_,spc_,ke_,n_,ki_,yyu_,u_,wo_
+	.byte	CR_
+	.byte	su_,ru_,yo_,ri_,mo_,spc_,zi_,ttu_,sa_,i_,ni_,spc_,so_,to_,he_,spc_,to_,bi_,da_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,i_,ke_,n_,su_,ru_,spc_,TA_,I_,PU_,no_,hi_,to_,spc_,na_,n_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●２度目以降は以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_t101_r0301
+msg_studym1_01_p02_t101_r0301:
+	.byte	ha_,ka_,se_,ha_,spc_,tu_,ku_,e_,no_,u_,e_,de_,spc_,ke_,n_,ki_,yyu_,u_,wo_
+	.byte	CR_
+	.byte	su_,ru_,yo_,ri_,mo_,spc_,zi_,ttu_,sa_,i_,ni_,spc_,so_,to_,he_,spc_,to_,bi_,da_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,i_,ke_,n_,su_,ru_,spc_,TA_,I_,PU_,no_,hi_,to_,spc_,na_,n_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●101番道路イベントを終えて（フラグ03）からは以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p03_t101_r0301
+msg_studym1_01_p03_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,ha_,ka_,se_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,do_,ko_,ni_,spc_,su_,n_,de_,i_,ru_,no_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	bu_,n_,pu_,no_,spc_,ti_,yyo_,u_,sa_,wo_,spc_,na_,sa_,ttu_,te_,i_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_SUPPORT_NPC,sa_,n_,ha_,spc_,su_,ki_,na_,spc_,o_,to_,u_,sa_,n_,no_
+	.byte	CR_
+	.byte	o_,te_,tu_,da_,i_,wo_,spc_,na_,sa_,ttu_,te_,spc_,i_,ru_,no_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●101番道路で主人公が初めてオダマキと遭遇（フラグ03）してから、
+// 　画面フェードアウトしてこの部屋にフェードイン
+// ●室内のオダマキ定位置の隣に主人公
+// ●オダマキが話し始める
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p01_t101_r0301
+msg_odamaki_01_p01_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,tenten_,tenten_,sa_,te_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,ko_,to_,ha_,spc_,o_,to_,u_,sa_,n_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	i_,tu_,mo_,spc_,ki_,ka_,sa_,re_,te_,i_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,ma_,da_,spc_,zi_,bu_,n_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,ta_,ko_,to_,ga_,spc_,na_,i_,n_,da_,ttu_,te_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ni_,si_,te_,ha_,spc_,sa_,ttu_,ki_,no_,spc_,ta_,ta_,ka_,i_,bu_,ri_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,mi_,go_,to_,spc_,da_,ttu_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ttu_,pa_,ri_,spc_,ki_,mi_,ni_,ha_,spc_,o_,to_,u_,sa_,n_,no_
+	.byte	CR_
+	.byte	ti_,ga_,spc_,na_,ga_,re_,te_,spc_,i_,ru_,n_,da_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,so_,u_,gyoe_,spc_,ta_,su_,ke_,te_,ku_,re_,ta_,spc_,o_,re_,i_,ni_
+	.byte	CR_
+	.byte	sa_,ttu_,ki_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,wa_,ta_,si_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,mi_,he_,no_,spc_,PU_,RE_,ZE_,N_,TO_,ni_,spc_,si_,yo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ＳＥ（アイテム入手したときのもの）鳴らす
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p02_t101_r0301
+msg_odamaki_01_p02_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,se_,ttu_,ka_,ku_,spc_,da_,ka_,ra_,spc_,I_MSG_,STR_TEMP_BUF0,ni_
+	.byte	CR_
+	.byte	NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,te_,mi_,te_,ha_,spc_,do_,u_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「つける／つけない」の選択
+// ●「つける」　→文字入力画面へ行ってからmsg_odamaki_01_p03_t101_r0301:へ
+// ●「つけない」→msg_odamaki_01_p03_t101_r0301:へ
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p03_t101_r0301
+msg_odamaki_01_p03_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,ko_,re_,ka_,ra_,spc_,sa_,ra_,ni_
+	.byte	CR_
+	.byte	ke_,i_,ke_,n_,wo_,spc_,tu_,n_,de_,spc_,i_,ke_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	i_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ni_,spc_,na_,re_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,u_,do_,spc_,u_,ti_,no_,spc_,I_MSG_,STR_SUPPORT_NPC,ga_
+	.byte	CR_
+	.byte	n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_,de_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ti_,yyo_,u_,sa_,wo_,spc_,si_,te_,i_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	a_,i_,ni_,spc_,i_,ttu_,ta_,ra_,spc_,do_,u_,da_,ro_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_odamaki_01_p04_t101_r0301:
+// ●「いいえ」→msg_odamaki_01_p05_t101_r0301:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p04_t101_r0301
+msg_odamaki_01_p04_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,so_,u_,ka_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,I_MSG_,STR_SUPPORT_NPC,mo_,spc_,yo_,ro_,ko_,bu_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,ga_,spc_,do_,n_,na_,spc_,mo_,no_,ka_
+	.byte	CR_
+	.byte	o_,si_,e_,te_,mo_,ra_,u_,to_,spc_,i_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p05_t101_r0301
+msg_odamaki_01_p05_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,so_,n_,na_,ko_,to_,spc_,i_,wa_,zu_,ni_
+	.byte	CR_
+	.byte	a_,i_,ni_,spc_,i_,ttu_,ta_,ra_,spc_,do_,u_,da_,ro_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_odamaki_01_p04_t101_r0301:
+// ●「いいえ」→msg_odamaki_01_p05_t101_r0301:
+
+// ●103番道路でサポートに勝利（フラグ04）するまでは、以下のセリフを繰り返し
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p06_t101_r0301
+msg_odamaki_01_p06_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,I_MSG_,STR_SUPPORT_NPC,spc_,da_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_,ni_,spc_,i_,ru_,spc_,ha_,zu_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,mo_,spc_,ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,KI_,ZU_,tu_,i_,ta_,ra_
+	.byte	CR_
+	.byte	zi_,bu_,n_,no_,spc_,i_,e_,de_,spc_,ya_,su_,mu_,to_,spc_,i_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●103番道路でサポートに勝利（フラグ04）してから
+// 　研究所にくると、部屋のいちばん奥にオダマキ博士がいる
+// ●研究所に入るとオートイベントが発動します
+// 　主人公、オダマキ博士の前まで進むと博士のメッセージ展開
+// ●男なら「くん」女なら「ちゃん」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p07_t101_r0301
+msg_odamaki_01_p07_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,o_,ttu_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,zi_,me_,te_,de_,spc_,I_MSG_,STR_SUPPORT_NPC,ni_
+	.byte	CR_
+	.byte	ka_,tu_,spc_,da_,na_,n_,te_,spc_,su_,go_,i_,zi_,yya_,na_,i_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_SUPPORT_NPC,ha_,spc_,ka_,na_,ri_,spc_,ma_,e_,ka_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,ke_,n_,ki_,yyu_,u_,wo_,spc_,te_,tu_,da_,ttu_,te_,i_,te_
+	.byte	SCROLL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,re_,ki_,ha_,spc_,ke_,ttu_,ko_,u_,spc_,na_,ga_,i_,n_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,mu_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ni_,mo_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,no_,spc_,ta_,me_,ni_,spc_,to_,ri_,yo_,se_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,no_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,wo_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで図鑑を入手したメッセージ表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p08_t101_r0301
+msg_odamaki_01_p08_t101_r0301:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p09_t101_r0301
+msg_odamaki_01_p09_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,so_,no_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,ha_
+	.byte	CR_
+	.byte	ki_,mi_,ga_,spc_,de_,a_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,do_,u_,te_,ki_,ni_,spc_,ki_,ro_,ku_,spc_,si_,te_,i_,ttu_,te_,ku_,re_,ru_
+	.byte	CR_
+	.byte	HA_,I_,TE_,KU_,na_,spc_,do_,u_,gu_,spc_,na_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_SUPPORT_NPC,mo_,spc_,so_,no_,spc_,zu_,ka_,n_,wo_,spc_,mo_,ttu_,te_,i_,te_
+	.byte	CR_
+	.byte	a_,ti_,ko_,ti_,ni_,spc_,a_,so_,bi_,ni_,spc_,i_,ku_,n_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	de_,spc_,me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,te_
+	.byte	CR_
+	.byte	zu_,ka_,n_,ni_,spc_,ki_,ro_,ku_,spc_,de_,ki_,ru_,to_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,II_,bou_,RU_,DO_,WA_,bou_,KU_,wo_,spc_,si_,te_,i_,ru_,spc_,wa_,ta_,si_,wo_
+	.byte	CR_
+	.byte	sa_,ga_,si_,da_,si_,te_,ha_,spc_,mi_,se_,te_,spc_,ku_,re_,ru_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて……
+// 　msg_heroine_01_p01_t101_r0301:　か
+// 　msg_hero_01_p01_t101_r0301:　のメッセージに行きます
+// 　（オートイベント継続中）
+
+// ●以後の博士のメッセージ（トウカでパパに会うまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p10_t101_r0301
+msg_odamaki_01_p10_t101_r0301:
+	.byte	O_,DA_,MA_,KI_,kako2_,ki_,mi_,no_,spc_,yu_,ku_,te_,ni_,ha_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,ma_,ttu_,te_,i_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,bou_,spc_,ha_,ya_,ku_,spc_,HU_,II_,bou_,RU_,DO_,WA_,bou_,KU_,ni_
+	.byte	CR_
+	.byte	i_,ki_,ta_,ku_,spc_,na_,ttu_,te_,ki_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トウカでパパに会って以降図鑑評価システムが作動します
+// ●シナリオファイルは「hyouka.msg」です
+
+
+// ●サポートキャラ♀「ハルカ」
+// ●ポケモン図鑑をもらったあと主人公の横に来る
+// 　主人公に向かってからメッセージ表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_t101_r0301
+msg_heroine_01_p01_t101_r0301:
+	.byte	HA_,RU_,KA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,spc_,mo_,ra_,ttu_,ta_,n_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ka_,ttu_,ta_,ne_,gyoe_,spc_,a_,ta_,si_,to_,spc_,i_,ttu_,si_,yyo_,da_,yo_,gyoe_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,a_,ta_,si_,ha_,spc_,ko_,re_,wo_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「モンスターボール」（No004）×５入手処理
+// ●荷物がいっぱいの時→msg_heroine_01_p04_t101_r0301:
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p02_t101_r0301
+msg_heroine_01_p02_t101_r0301:
+	.byte	HA_,RU_,KA_,kako2_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,i_,ru_,to_,spc_,ta_,no_,si_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,spc_,sa_,ga_,si_,ta_,i_,ka_,ra_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,to_,ko_,ro_,wo_,spc_,sa_,ga_,su_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,ka_,wa_,i_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ta_,ra_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,de_,spc_,tu_,ka_,ma_,e_,ti_,yya_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●これでオートイベント終了です
+// ●荷物がいっぱいの時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p04_t101_r0301
+msg_heroine_01_p04_t101_r0301:
+	.byte	a_,ra_,hate_,spc_,BA_,TTU_,GU_,spc_,i_,ttu_,pa_,i_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて　→msg_heroine_01_p02_t101_r0301:に
+
+// ●以降の博士の娘のメッセージ（トウカでパパに会うまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p03_t101_r0301
+msg_heroine_01_p03_t101_r0301:
+	.byte	HA_,RU_,KA_,kako2_,ko_,n_,do_,ha_,spc_,do_,ko_,ma_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,sa_,ga_,si_,ni_,spc_,i_,ko_,u_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トウカでパパに会うと削除
+
+
+// ●サポートキャラ♂「ユウキ」
+// ●ポケモン図鑑をもらったあと主人公の横に来る
+// 　主人公に向かってからメッセージ表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_t101_r0301
+msg_hero_01_p01_t101_r0301:
+	.byte	YU_,U_,KI_,kako2_,hu_,u_,n_,spc_,I_MSG_,MY_NAME_BUF,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,spc_,mo_,ra_,ttu_,ta_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,O_,RE_,ha_,spc_,ko_,re_,spc_,ya_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「モンスターボール」（No004）×５入手処理
+// ●荷物がいっぱいの時→msg_hero_01_p04_t101_r0301:
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p02_t101_r0301
+msg_hero_01_p02_t101_r0301:
+	.byte	YU_,U_,KI_,kako2_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,i_,ru_,to_,spc_,ta_,no_,si_,i_,ka_,ra_,na_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,spc_,i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,spc_,sa_,ga_,su_,ta_,me_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,to_,ko_,ro_,ni_,spc_,i_,ku_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,ka_,ttu_,ko_,i_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ta_,ra_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,de_,spc_,tu_,ka_,ma_,e_,ru_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●これでオートイベント終了です
+// ●荷物がいっぱいの時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p04_t101_r0301
+msg_hero_01_p04_t101_r0301:
+	.byte	o_,ya_,hate_,spc_,BA_,TTU_,GU_,spc_,i_,ttu_,pa_,i_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて　→msg_hero_01_p02_t101_r0301:に
+
+// ●以降の博士の息子のメッセージ（トウカでパパに会うまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p03_t101_r0301
+msg_hero_01_p03_t101_r0301:
+	.byte	YU_,U_,KI_,kako2_,ko_,n_,do_,ha_,spc_,do_,ko_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,sa_,ga_,si_,ni_,spc_,i_,ko_,u_,ka_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トウカでパパに会うと削除
+
+
+// ●謎のマシン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p01_t101_r0301
+msg_machine_01_p01_t101_r0301:
+	.byte	na_,n_,ka_,spc_,su_,go_,so_,u_,na_,spc_,MA_,SI_,N_,da_,gyoe_
+	.byte	CR_
+	.byte	ha_,ka_,se_,ga_,spc_,ke_,n_,ki_,yyu_,u_,ni_,spc_,tu_,ka_,u_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●パソコン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_paso_01_p01_t101_r0301
+msg_paso_01_p01_t101_r0301:
+	.byte	ke_,n_,ki_,yyu_,u_,ni_,spc_,tu_,ka_,wa_,re_,te_,i_,ru_,spc_,PA_,SO_,KO_,N_,da_,gyoe_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,sa_,wa_,ru_,no_,ha_,spc_,ya_,me_,te_,o_,ko_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●本棚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bookshelf_01_p01_t101_r0301
+msg_bookshelf_01_p01_t101_r0301:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,tu_,i_,te_,spc_,ka_,ka_,re_,ta_
+	.byte	CR_
+	.byte	ho_,n_,ga_,spc_,i_,ttu_,pa_,i_,spc_,a_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●書物
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_01_p01_t101_r0301
+msg_books_01_p01_t101_r0301:
+	.byte	mu_,zu_,ka_,si_,so_,u_,na_,spc_,ho_,n_,ga_,spc_,o_,i_,te_,a_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

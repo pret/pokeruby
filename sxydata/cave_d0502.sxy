@@ -1,0 +1,107 @@
+//MapEditNH Ver.3.53 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D0502	1
+#define EXITNUM_CAVE_D0502	7
+#define POSNUM_CAVE_D0502	0
+#define BGNUM_CAVE_D0502	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_ball1_51[];
+
+const evObjData	OBJ_cave_d0502[] =
+{
+	{
+		BALL1_51,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000f,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_51,		//Event Lavel
+		FV_BALL1_51,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d0502[] =
+{
+	{
+		0x0019,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		CAVE_D0501_STAIR01,		//Door ID
+		CAVE_D0501,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		CAVE_D0501_STAIR02,		//Door ID
+		CAVE_D0501,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x001d,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		CAVE_D0503_STAIR01,		//Door ID
+		CAVE_D0503,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x001c,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		CAVE_D0503_STAIR02,		//Door ID
+		CAVE_D0503,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		CAVE_D0503_STAIR05,		//Door ID
+		CAVE_D0503,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x000c,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		CAVE_D0503_STAIR06,		//Door ID
+		CAVE_D0503,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x001d,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		CAVE_D0503_STAIR07,		//Door ID
+		CAVE_D0503,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d0502_sxy_data =
+{
+OBJNUM_CAVE_D0502,			// field obj max
+EXITNUM_CAVE_D0502,		// exit max
+POSNUM_CAVE_D0502,			// pos event max
+BGNUM_CAVE_D0502,			// bg event max
+OBJ_cave_d0502,			// field obj data
+EXIT_cave_d0502,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

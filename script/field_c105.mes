@@ -1,0 +1,171 @@
+// ●ヒワマキシティ　フィールド
+
+
+// ●社員１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_field_c105
+msg_workerm1_01_p01_field_c105:
+	.byte	ku_,n_,ku_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,n_,ka_,spc_,ki_,mi_,tenten_,tenten_,spc_,KO_,GE_,ku_,sa_,i_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,za_,n_,ni_,spc_,de_,mo_,spc_,i_,ttu_,te_,ki_,ta_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ●街中のカクレオンがいる
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_field_c105
+msg_trainerw1_01_p01_field_c105:
+	.byte	PO_,KE_,MO_,N_,ZI_,MU_,ni_,spc_,i_,ki_,ta_,i_,no_,ni_
+	.byte	CR_
+	.byte	na_,ni_,ka_,ga_,spc_,mi_,ti_,wo_,spc_,hu_,sa_,i_,de_,i_,ru_,no_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	se_,ttu_,ka_,ku_,spc_,n1_,n2_,n0_,ba_,n_,spc_,do_,u_,ro_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,spc_,ki_,ta_,no_,ni_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●街中のカクレオンがいなくなった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p02_field_c105
+msg_trainerw1_01_p02_field_c105:
+	.byte	a_,ta_,si_,no_,spc_,zi_,ma_,n_,no_,spc_,PO_,KE_,MO_,N_,de_
+	.byte	CR_
+	.byte	ko_,n_,do_,ko_,so_,spc_,NA_,GI_,sa_,n_,ni_,spc_,ka_,ttu_,te_,mi_,se_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_field_c105
+msg_girl1_01_p01_field_c105:
+	.byte	a_,me_,ga_,spc_,zi_,me_,n_,ni_,spc_,su_,i_,ko_,ma_,re_,te_
+	.byte	CR_
+	.byte	so_,no_,spc_,mi_,zu_,wo_,spc_,su_,ttu_,te_,spc_,ki_,ga_,so_,da_,tu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,zu_,to_,spc_,tu_,ti_,ga_,spc_,ri_,yyo_,u_,ho_,u_,spc_,a_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	ko_,no_,spc_,HI_,WA_,MA_,KI_,SI_,TE_,II_,mo_,spc_,a_,ru_,no_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_field_c105
+msg_oldman2_01_p01_field_c105:
+	.byte	ko_,no_,ma_,ti_,ha_,spc_,ki_,no_,u_,e_,ni_
+	.byte	CR_
+	.byte	i_,e_,wo_,spc_,ta_,te_,te_,spc_,ku_,ra_,si_,te_,i_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,se_,i_,ka_,spc_,mi_,n_,na_,spc_,ge_,n_,ki_,de_
+	.byte	CR_
+	.byte	I_,KI_,I_,KI_,to_,spc_,si_,te_,i_,ru_,spc_,no_,de_,su_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,mo_,spc_,ko_,no_,ma_,ti_,ni_,spc_,ki_,te_,ka_,ra_
+	.byte	CR_
+	.byte	n3_,n0_,ne_,n_,ho_,do_,spc_,wa_,ka_,ga_,e_,ttu_,ta_,spc_,ki_,bu_,n_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_field_c105
+msg_boy1_01_p01_field_c105:
+	.byte	ki_,no_,u_,e_,de_,spc_,ku_,ra_,su_,no_,ha_,spc_,i_,i_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ki_,do_,ki_,spc_,ma_,do_,no_,spc_,so_,to_,ka_,ra_
+	.byte	CR_
+	.byte	mu_,si_,PO_,KE_,MO_,N_,ga_,spc_,ha_,i_,ttu_,te_,spc_,ki_,ta_,ri_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	bi_,ttu_,ku_,ri_,spc_,si_,ti_,yya_,u_,n_,da_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_agboy1_01_p01_field_c105
+msg_agboy1_01_p01_field_c105:
+	.byte	tu_,u_,si_,n_,KE_,bou_,BU_,RU_,wo_,spc_,to_,o_,ru_,ko_,to_,de_
+	.byte	CR_
+	.byte	si_,n_,ka_,spc_,su_,ru_,spc_,PO_,KE_,MO_,N_,mo_,spc_,i_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カクレオン（Ｘ２５・Ｙ４）
+// ●「デボンスコープ」を持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakure_01_p01_field_c105
+msg_kakure_01_p01_field_c105:
+	.byte	mi_,e_,na_,i_,spc_,na_,ni_,ka_,ga_,spc_,i_,ru_,yo_,u_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「デボンスコープ」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakure_01_p02_field_c105
+msg_kakure_01_p02_field_c105:
+	.byte	mi_,e_,na_,i_,spc_,na_,ni_,ka_,ga_,spc_,i_,ru_,yo_,u_,da_
+	.byte	NORMAL_WAIT_
+	.byte	DE_,BO_,N_,SU_,KO_,bou_,PU_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_door_01_p03_field_c105:
+// ●「いいえ」→メッセージ終了
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakure_01_p03_field_c105
+msg_kakure_01_p03_field_c105:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	DE_,BO_,N_,SU_,KO_,bou_,PU_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,me_,i_,ni_,spc_,na_,ttu_,te_,i_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,su_,ga_,ta_,ga_,spc_,ma_,ru_,wa_,ka_,ri_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	o_,do_,ro_,i_,te_,spc_,ni_,ge_,da_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●通行可能になる
+// ●カクレオンが逃げる演出はＯＢＪができてから……？
+
+
+// ●町の中央の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_c105
+msg_kanban_01_p01_field_c105:
+	.byte	ko_,ko_,ha_,spc_,HI_,WA_,MA_,KI_,spc_,SI_,TE_,II_
+	.byte	CR_
+	.byte	ki_,no_,spc_,u_,e_,de_,spc_,si_,ze_,n_,to_,spc_,ta_,wa_,mu_,re_,ru_,spc_,ma_,ti_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ジムの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_c105
+msg_kanban_02_p01_field_c105:
+	.byte	HI_,WA_,MA_,KI_,spc_,SI_,TE_,II_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	CR_
+	.byte	RI_,bou_,DA_,bou_,spc_,NA_,GI_
+	.byte	SCROLL_WAIT_
+	.byte	se_,ka_,i_,ni_,spc_,ha_,ba_,ta_,ku_,spc_,to_,ri_,tu_,ka_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

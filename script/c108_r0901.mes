@@ -1,0 +1,260 @@
+// ●ルネシティ　ポケモン計測の家
+
+// ●計測オヤジ（キノココ：山登り好き）（X-7,Y-4)固定
+// ●オブジェ　……　山男１(No.52)
+// ●＠１　……　今回のキノココの大きさ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p01_c108_r0901
+msg_hill1_01_p01_c108_r0901:
+	.byte	ki_,mi_,spc_,KI_,NO_,KO_,KO_,ttu_,te_,spc_,PO_,KE_,MO_,N_,spc_,si_,ttu_,te_,ru_,hate_
+	.byte	CR_
+	.byte	RU_,NE_,de_,ha_,spc_,me_,ttu_,ta_,ni_,spc_,mi_,ra_,re_,na_,i_,n_,spc_,da_,ke_,do_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,spc_,o_,o_,ki_,na_,spc_,KI_,NO_,KO_,KO_,ga_
+	.byte	CR_
+	.byte	me_,ti_,yya_,me_,ti_,yya_,spc_,da_,i_,su_,ki_,spc_,na_,no_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,to_,u_,to_,ha_,spc_,DO_,ZI_,YYO_,TTU_,TI_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	o_,o_,ki_,i_,ttu_,te_,spc_,i_,u_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	KI_,NO_,KO_,KO_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	o_,o_,ki_,i_,ni_,spc_,ki_,ma_,ttu_,te_,ru_,spc_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n_,hate_,spc_,ki_,mi_,spc_,KI_,NO_,KO_,KO_,spc_,mo_,ttu_,te_,ru_,no_,hate_
+	.byte	CR_
+	.byte	ti_,yyo_,spc_,ti_,yyo_,spc_,ti_,yyo_,ttu_,to_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	o_,zi_,sa_,n_,ni_,spc_,mi_,se_,te_,spc_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモン選択画面へ
+// ●ポケモン選択後
+// ●キノココ選択で記録更新した　　　→msg_hill1_01_p02_c108_r0901:
+// ●キノココ選択で記録更新していない→msg_hill1_01_p05_c108_r0901:
+// ●キノココ以外を選択　　　　　　　→msg_hill1_01_p06_c108_r0901:
+// ●キャンセル　　　　　　　　　　　→msg_hill1_01_p07_c108_r0901:
+
+// ●キノココ選択で記録更新した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p02_c108_r0901
+msg_hill1_01_p02_c108_r0901:
+	.byte	I_MSG_,STR_TEMP_BUF1,c__,m__,gyoe_,gyoe_
+	.byte	CR_
+	.byte	o_,o_,gyoe_,spc_,ko_,i_,tu_,ha_,spc_,de_,ka_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,to_,u_,to_,ga_,spc_,mi_,ta_,spc_,de_,ka_,i_,spc_,DO_,ZI_,YYO_,TTU_,TI_,ni_
+	.byte	CR_
+	.byte	ma_,ke_,na_,i_,spc_,o_,o_,ki_,sa_,spc_,ka_,mo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,se_,te_,spc_,ku_,re_,te_,spc_,a_,ri_,ga_,to_,u_
+	.byte	CR_
+	.byte	o_,re_,i_,ni_,spc_,ko_,re_,wo_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●道具に空きがある→msg_hill1_01_p03_c108_r0901:
+// ●道具に空きがない→msg_hill1_01_p04_c108_r0901:
+
+// ●道具に空きがある
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p03_c108_r0901
+msg_hill1_01_p03_c108_r0901:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	ki_,zu_,gu_,su_,ri_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●道具に空きがない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p04_c108_r0901
+msg_hill1_01_p04_c108_r0901:
+	.byte	a_,ri_,yya_,hate_
+	.byte	CR_
+	.byte	ki_,mi_,spc_,mo_,ti_,mo_,no_,spc_,i_,ttu_,pa_,i_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キノココ選択で記録更新していない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p05_c108_r0901
+msg_hill1_01_p05_c108_r0901:
+	.byte	I_MSG_,STR_TEMP_BUF1,c__,m__,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	u_,u_,mu_,spc_,wa_,si_,ha_,spc_,ko_,re_,yo_,ri_,spc_,o_,o_,ki_,i_
+	.byte	CR_
+	.byte	KI_,NO_,KO_,KO_,wo_,spc_,mi_,ta_,ko_,to_,spc_,a_,ru_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キノココ以外を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p06_c108_r0901
+msg_hill1_01_p06_c108_r0901:
+	.byte	o_,o_,spc_,ko_,i_,tu_,ha_,spc_,na_,ka_,na_,ka_,tenten_,tenten_,spc_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,re_,spc_,KI_,NO_,KO_,KO_,zi_,yya_,spc_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キャンセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p07_c108_r0901
+msg_hill1_01_p07_c108_r0901:
+	.byte	o_,o_,ki_,i_,spc_,KI_,NO_,KO_,KO_,spc_,mo_,ttu_,te_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,do_,spc_,o_,o_,ki_,i_,spc_,KI_,NO_,KO_,KO_,spc_,mi_,se_,te_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●おおきさの記録の張り紙（X-7,Y-1)
+// ●＠１　……　記録保持者の名前
+// ●＠２　……　これまでのキノココの記録（RAMに保存）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_panel1_01_p02_c108_r0901
+msg_panel1_01_p02_c108_r0901:
+	.byte	si_,zi_,yyo_,u_,spc_,sa_,i_,da_,i_,no_,spc_,KI_,NO_,KO_,KO_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,I_MSG_,STR_TEMP_BUF2,c__,m__,no_,ya_,tu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	DO_,ZI_,YYO_,TTU_,TI_,yo_,ri_,spc_,o_,o_,ki_,i_,spc_,KI_,NO_,KO_,KO_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,bo_,si_,yyu_,u_,ti_,yyu_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●計測オヤジ（ドジョッチ：釣り好き）（X-4,Y-4)固定
+// ●オブジェ　……　釣り人１(No.47)
+// ●＠１　……　今回のドジョッチの大きさ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p01_c108_r0901
+msg_fishing1_01_p01_c108_r0901:
+	.byte	ki_,mi_,spc_,DO_,ZI_,YYO_,TTU_,TI_,ttu_,te_,spc_,PO_,KE_,MO_,N_,spc_,si_,ttu_,te_,ru_,hate_
+	.byte	CR_
+	.byte	RU_,NE_,de_,ha_,spc_,me_,ttu_,ta_,ni_,spc_,mi_,ra_,re_,na_,i_,n_,spc_,da_,ke_,do_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,spc_,o_,o_,ki_,na_,spc_,DO_,ZI_,YYO_,TTU_,TI_,ga_
+	.byte	CR_
+	.byte	me_,ti_,yya_,me_,ti_,yya_,spc_,da_,i_,su_,ki_,spc_,na_,no_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	A_,NI_,KI_,ha_,spc_,KI_,NO_,KO_,KO_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	o_,o_,ki_,i_,ttu_,te_,spc_,i_,u_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	DO_,ZI_,YYO_,TTU_,TI_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	o_,o_,ki_,i_,ni_,spc_,ki_,ma_,ttu_,te_,ru_,spc_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n_,hate_,spc_,ki_,mi_,spc_,DO_,ZI_,YYO_,TTU_,TI_,spc_,mo_,ttu_,te_,ru_,no_,hate_
+	.byte	CR_
+	.byte	ti_,yyo_,spc_,ti_,yyo_,spc_,ti_,yyo_,ttu_,to_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	o_,zi_,sa_,n_,ni_,spc_,mi_,se_,te_,spc_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン選択画面へ
+// ●ポケモン選択後
+// ●ドジョッチ選択で記録更新した　　　→msg_fishing1_01_p02_c108_r0901:
+// ●ドジョッチ選択で記録更新していない→msg_fishing1_01_p05_c108_r0901:
+// ●ドジョッチ以外を選択　　　　　　　→msg_fishing1_01_p06_c108_r0901:
+// ●キャンセル　　　　　　　　　　　　→msg_fishing1_01_p07_c108_r0901:
+
+// ●ドジョッチ選択で記録更新した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p02_c108_r0901
+msg_fishing1_01_p02_c108_r0901:
+	.byte	I_MSG_,STR_TEMP_BUF1,c__,m__,gyoe_,gyoe_
+	.byte	CR_
+	.byte	o_,o_,gyoe_,spc_,ko_,i_,tu_,ha_,spc_,de_,ka_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ni_,ki_,ga_,spc_,mi_,ta_,spc_,de_,ka_,i_,spc_,KI_,NO_,KO_,KO_,ni_
+	.byte	CR_
+	.byte	ma_,ke_,na_,i_,spc_,o_,o_,ki_,sa_,spc_,ka_,mo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,se_,te_,spc_,ku_,re_,te_,spc_,a_,ri_,ga_,to_,u_
+	.byte	CR_
+	.byte	o_,re_,i_,ni_,spc_,ko_,re_,wo_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●道具に空きがある→msg_fishing1_01_p03_c108_r0901:
+// ●道具に空きがない→msg_fishing1_01_p04_c108_r0901:
+
+// ●道具に空きがない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p04_c108_r0901
+msg_fishing1_01_p04_c108_r0901:
+	.byte	a_,ri_,yya_,hate_
+	.byte	CR_
+	.byte	ki_,mi_,spc_,mo_,ti_,mo_,no_,spc_,i_,ttu_,pa_,i_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドジョッチ選択で記録更新していない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p05_c108_r0901
+msg_fishing1_01_p05_c108_r0901:
+	.byte	I_MSG_,STR_TEMP_BUF1,c__,m__,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	u_,u_,mu_,spc_,wa_,si_,ha_,spc_,ko_,re_,yo_,ri_,spc_,o_,o_,ki_,i_
+	.byte	CR_
+	.byte	DO_,ZI_,YYO_,TTU_,TI_,wo_,spc_,mi_,ta_,ko_,to_,spc_,a_,ru_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドジョッチ以外を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p06_c108_r0901
+msg_fishing1_01_p06_c108_r0901:
+	.byte	o_,o_,spc_,ko_,i_,tu_,ha_,spc_,na_,ka_,na_,ka_,tenten_,tenten_,spc_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,re_,spc_,DO_,ZI_,YYO_,TTU_,TI_,zi_,yya_,spc_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キャンセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p07_c108_r0901
+msg_fishing1_01_p07_c108_r0901:
+	.byte	o_,o_,ki_,i_,spc_,DO_,ZI_,YYO_,TTU_,TI_,spc_,mo_,ttu_,te_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,do_,spc_,o_,o_,ki_,i_,spc_,DO_,ZI_,YYO_,TTU_,TI_,spc_,mi_,se_,te_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おおきさの記録の張り紙（X-4,Y-1)
+// ●＠１　……　記録保持者の名前
+// ●＠２　……　これまでのドジョッチの記録（RAMに保存）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_panel1_02_p02_c108_r0901
+msg_panel1_02_p02_c108_r0901:
+	.byte	si_,zi_,yyo_,u_,spc_,sa_,i_,da_,i_,no_,spc_,DO_,ZI_,YYO_,TTU_,TI_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,I_MSG_,STR_TEMP_BUF2,c__,m__,no_,ya_,tu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KI_,NO_,KO_,KO_,yo_,ri_,spc_,o_,o_,ki_,i_,spc_,DO_,ZI_,YYO_,TTU_,TI_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,bo_,si_,yyu_,u_,ti_,yyu_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

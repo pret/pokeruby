@@ -1,0 +1,18 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 10
+#define FIGHTER1_01_CAVE_D0201	1
+#define CRUSHROCK1_01_CAVE_D0201	2
+#define BALL1_48	3
+#define BALL1_49	4
+#define HAGI_01_CAVE_D0201	5
+#define AQUAM1_01_CAVE_D0201	6
+#define CAMOME_01_CAVE_D0201	7
+#define CRUSHROCK1_02_CAVE_D0201	8
+#define TR_MOUNT_10	9
+#define WOMAN1_01_CAVE_D0201	10
+
+//Exit ID = 3
+#define CAVE_D0201_DOOR01	0
+#define CAVE_D0201_DOOR02	1
+#define CAVE_D0201_DOOR03	2

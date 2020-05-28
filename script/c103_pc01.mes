@@ -1,0 +1,46 @@
+// ●キンセツシティ　ポケモンセンター１Ｆ
+
+
+// ●少女４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl4_01_p01_c103_pc01
+msg_girl4_01_p01_c103_pc01:
+	.byte	a_,so_,ko_,ni_,spc_,i_,ru_,spc_,O_,YA_,ZI_
+	.byte	CR_
+	.byte	he_,n_,na_,ko_,to_,spc_,i_,ttu_,ta_,ri_,spc_,su_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,da_,ka_,spc_,o_,mo_,si_,ro_,ku_,ttu_,te_
+	.byte	CR_
+	.byte	wa_,su_,re_,ra_,re_,na_,i_,spc_,so_,n_,za_,i_,spc_,da_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●５人のオヤジについて
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c103_pc01
+msg_trainerw1_01_p01_c103_pc01:
+	.byte	RE_,KO_,bou_,DO_,KO_,bou_,NA_,bou_,wo_,spc_,tu_,ka_,ttu_,ta_,ra_,ne_
+	.byte	CR_
+	.byte	MU_,RO_,TA_,U_,N_,de_,spc_,ha_,ya_,ttu_,te_,i_,ru_,spc_,mo_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	to_,mo_,da_,ti_,to_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,na_,ttu_,ta_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●帽子男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy1_01_p01_c103_pc01
+msg_capboy1_01_p01_c103_pc01:
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,no_,spc_,n2_,ka_,i_,ni_
+	.byte	CR_
+	.byte	RE_,KO_,bou_,DO_,KO_,bou_,NA_,bou_,ga_,spc_,de_,ki_,ta_,n_,da_,ttu_,te_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ku_,spc_,wa_,ka_,ra_,na_,i_,ke_,do_,spc_,o_,mo_,si_,ro_,so_,u_,da_,ro_,hate_
+	.byte	CR_
+	.byte	to_,ni_,ka_,ku_,spc_,ya_,ttu_,te_,mi_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

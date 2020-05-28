@@ -1,0 +1,166 @@
+// お留守番キャラのメッセージ１
+// 男：「たんぱん　こぞう」　女：「ミニスカート」
+
+// 「たんぱん　こぞう」
+// ●戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy_01_p01_sp_base
+msg_boy_01_p01_sp_base:
+	.byte	ki_,mi_,ha_,spc_,mo_,u_,spc_,hi_,mi_,tu_,ki_,ti_,wo_,spc_,tu_,ku_,ttu_,ta_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,a_,ttu_,ti_,spc_,ko_,ttu_,ti_,spc_,ma_,wa_,ttu_,te_
+	.byte	CR_
+	.byte	ya_,ttu_,to_,spc_,ko_,no_,spc_,ba_,si_,yyo_,ni_,spc_,ki_,me_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	se_,ttu_,ka_,ku_,spc_,ki_,ta_,n_,da_,ka_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,spc_,si_,na_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→☆対戦する
+// ●「いいえ」の場合　→☆対戦しない
+
+// ☆対戦する
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy_01_p02_sp_base
+msg_boy_01_p02_sp_base:
+	.byte	so_,re_,zi_,yya_,spc_,i_,ku_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●セーブする？
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→対戦フラグにオンでセーブ。その後、ポケモン対戦
+// ●「いいえ」の場合　→☆対戦しない
+
+// ☆対戦しない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy_01_p03_sp_base
+msg_boy_01_p03_sp_base:
+	.byte	e_,ttu_,spc_,i_,ma_,ha_,spc_,mu_,ri_,na_,n_,da_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy_01_p04_sp_base
+msg_boy_01_p04_sp_base:
+	.byte	u_,wa_,ttu_,spc_,ki_,mi_,ttu_,te_,spc_,tu_,yo_,i_,na_,bou_
+	.byte	CR_
+	.byte	bo_,ku_,ga_,spc_,ma_,ke_,ta_,ko_,to_,spc_,hi_,mi_,tu_,ni_,spc_,si_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy_01_p05_sp_base
+msg_boy_01_p05_sp_base:
+	.byte	bo_,ku_,no_,spc_,hi_,mi_,tu_,ki_,ti_,spc_,do_,u_,ka_,na_,bou_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,a_,si_,ta_,mo_,spc_,a_,so_,bi_,ni_,spc_,ki_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●対戦不可時のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy_01_p06_sp_base
+msg_boy_01_p06_sp_base:
+	.byte	ki_,mi_,ha_,spc_,mo_,u_,spc_,hi_,mi_,tu_,ki_,ti_,wo_,spc_,tu_,ku_,ttu_,ta_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,a_,ttu_,ti_,spc_,ko_,ttu_,ti_,spc_,ma_,wa_,ttu_,te_
+	.byte	CR_
+	.byte	ya_,ttu_,to_,spc_,ko_,no_,spc_,ba_,si_,yyo_,ni_,spc_,ki_,me_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yu_,ttu_,ku_,ri_,spc_,si_,te_,spc_,i_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+// 「ミニスカート」
+// ●戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl_01_p01_sp_base
+msg_girl_01_p01_sp_base:
+	.byte	hi_,mi_,tu_,ki_,ti_,wo_,spc_,tu_,ku_,re_,ru_,spc_,ba_,si_,yyo_,ha_
+	.byte	CR_
+	.byte	ho_,ka_,ni_,mo_,spc_,ta_,ku_,sa_,n_,spc_,a_,ru_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,ko_,ga_,spc_,i_,ti_,ba_,n_,spc_,ki_,ni_,i_,ttu_,ta_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,ttu_,gyoe_,spc_,su_,te_,ki_,de_,si_,yyo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ttu_,spc_,mo_,si_,spc_,yo_,ka_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,spc_,si_,na_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→☆対戦する
+// ●「いいえ」の場合　→☆対戦しない
+
+// ☆対戦する
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl_01_p02_sp_base
+msg_girl_01_p02_sp_base:
+	.byte	so_,re_,zi_,yya_,spc_,i_,ku_,wa_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●セーブする？
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→対戦フラグにオンでセーブ。その後、ポケモン対戦
+// ●「いいえ」の場合　→☆対戦しない
+
+// ☆対戦しない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl_01_p03_sp_base
+msg_girl_01_p03_sp_base:
+	.byte	so_,u_,spc_,i_,ma_,ha_,spc_,mu_,ri_,na_,no_,ne_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl_01_p04_sp_base
+msg_girl_01_p04_sp_base:
+	.byte	u_,bou_,n_,spc_,wa_,ta_,si_,no_,spc_,ma_,ke_,ne_,tenten_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ga_,spc_,ma_,ke_,ta_,no_,ha_,spc_,na_,i_,si_,yyo_,no_,spc_,hi_,mi_,tu_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl_01_p05_sp_base
+msg_girl_01_p05_sp_base:
+	.byte	ko_,no_,ti_,ka_,ku_,ni_,spc_,ku_,ru_,ko_,to_,ga_,spc_,a_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,a_,so_,bi_,ni_,spc_,yo_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●対戦不可時のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl_01_p06_sp_base
+msg_girl_01_p06_sp_base:
+	.byte	hi_,mi_,tu_,ki_,ti_,wo_,spc_,tu_,ku_,re_,ru_,spc_,ba_,si_,yyo_,ha_
+	.byte	CR_
+	.byte	ho_,ka_,ni_,mo_,spc_,ta_,ku_,sa_,n_,spc_,a_,ru_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,ko_,ga_,spc_,i_,ti_,ba_,n_,spc_,ki_,ni_,i_,ttu_,ta_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,ttu_,gyoe_,spc_,su_,te_,ki_,de_,si_,yyo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

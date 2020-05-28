@@ -1,0 +1,135 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_TOWER01	5
+#define EXITNUM_PARK_TOWER01	1
+#define POSNUM_PARK_TOWER01	0
+#define BGNUM_PARK_TOWER01	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_capboy2_01_p01_park_tower01[];
+extern const u8	ev_woman2_01_p01_park_tower01[];
+extern const u8	ev_boy2_01_p01_park_tower01[];
+extern const u8	ev_workerw2_01_p01_park_tower01[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_park_tower01[];
+
+const evObjData	OBJ_park_tower01[] =
+{
+	{
+		CAPBOY2_01_PARK_TOWER01,		//OBJ ID
+		CAPBOY2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0012,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_capboy2_01_p01_park_tower01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WOMAN2_01_P01_PARK_BATTLE01,		//OBJ ID
+		WOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_woman2_01_p01_park_tower01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOY2_02_PARK_TOWER01,		//OBJ ID
+		BOY2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy2_01_p01_park_tower01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		HISHIP1_01_PARK_TOWER01,		//OBJ ID
+		HISHIP1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x001a,		//Ypos
+		0x01,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WORKERW2_01_PARK_TOWER01,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x0018,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerw2_01_p01_park_tower01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_park_tower01[] =
+{
+	{
+		0x000e,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_BATTLE01_MAT01,		//Door ID
+		PARK_BATTLE01,			//Map ID
+		PARK,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_park_tower01[] =
+{
+	{
+		0x0010,		//Xpos
+		0x000d,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_park_tower01,		//Script
+	},
+
+};
+
+const SXY_DATA	park_tower01_sxy_data =
+{
+OBJNUM_PARK_TOWER01,			// field obj max
+EXITNUM_PARK_TOWER01,		// exit max
+POSNUM_PARK_TOWER01,			// pos event max
+BGNUM_PARK_TOWER01,			// bg event max
+OBJ_park_tower01,			// field obj data
+EXIT_park_tower01,			// exit data
+NULL,			// pos event data
+BG_park_tower01,				// bg event data
+};

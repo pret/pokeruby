@@ -1,0 +1,451 @@
+//====================================================================
+//							sodateya
+//							育て屋
+//====================================================================
+
+/********************************************************************/
+/*							じいさん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_sodateya_m
+	_TALK_OBJ_START
+	_PROGRAM		GET_SODATE_NAME
+	_FUNC_CALL		ANSWORK,GET_SODATEYA_ZIISAN		//じいさんチェック0:なし1:たまご2:一匹3:2匹
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_m_0100	//タマゴ
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_m_0200	//１匹預かっている
+	_IFVAL_JUMP		ANSWORK,EQ,3,ev_sodateya_m_0300	//２匹預かっている
+	_TALK_KEYWAIT	msg_sodateya_oldman_01			//じいさん自己紹介
+	_TALK_OBJ_END
+	_END
+
+
+/*==================================================================*/
+/*  じいさんタマゴ発見												*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_m_0100
+	_TALK_YES_NO	msg_sodateya_oldman_02			//タマゴがあったぞい  ほしいじゃろ
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_m_0101	//はい
+													
+													//いいえ
+
+	_TALK_YES_NO	msg_sodateya_oldman_11			//ほんとうはほしいんじゃろ？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_m_0101	//はい
+	
+													//いいえ
+	_TALK_KEYWAIT	msg_sodateya_oldman_04			//それじゃわしがもらおうありがとよ
+	_FLAG_RESET		FE_SODATE_TAMAGO				//おじいさん移動フラグをオフ
+	_PROGRAM		DEL_SODATEYA_EGG				//タマゴ削除
+	_TALK_OBJ_END
+	_END
+
+/*==================================================================*/
+/*  タマゴもらう前に手持ちチェック									*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_m_0101
+	_FUNC_CALL		ANSWORK,GET_POKE_COUNT
+	_IFVAL_JUMP		ANSWORK,NE,6,ev_sodateya_m_0102
+	_TALK_KEYWAIT	msg_sodateya_oldman_05			//てもちがいっぱいのようじゃな
+	
+	_TALK_OBJ_END
+	_END
+
+
+/*==================================================================*/
+/*  じいさんからタマゴをもらった！									*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_m_0102
+	_TALKMSG		msg_sodateya_oldman_06			//○○○はタマゴをもらった
+	_JINGLE			MUS_FANFA1
+	_JINGLE_WAIT
+	_AB_KEYWAIT
+	_TALK_KEYWAIT	msg_sodateya_oldman_07
+
+	_PROGRAM		GET_SODATEYA_EGG				//タマゴが手持ちにはいる
+	_FLAG_RESET		FE_SODATE_TAMAGO				//おじいさん移動フラグをオフ
+	_TALK_OBJ_END
+	_END
+
+
+ev_sodateya_m_mail_01:
+	_FUNC_CALL	ANSWORK,SIOMAIL_CHECK				//レコードコーナーでメールが交換されたか
+	_IFVAL_CALL	ANSWORK,EQ,1,ev_sodateya_m_mail_02	//メールきてたよ表示
+	_RET
+
+ev_sodateya_m_mail_02:
+	_TALK_KEYWAIT	msg_sodateya_oldman_08			//ところであんたの○○○じゃが
+	_RET
+
+
+/*==================================================================*/
+/*  ○○○はげんきじゃぞ											*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_m_0200	//１匹預かっている
+	_PROGRAM		GET_SODATE_NAME
+	_TALK_KEYWAIT	msg_sodateya_oldman_03			//おおあんたか！○○○はげんきじゃぞ
+	_LDVAL			PARAM0,0
+	_CALL			ev_sodateya_m_mail_01
+	_TALK_OBJ_END
+	_END
+
+/*==================================================================*/
+/*  ○○○と○○○はげんきじゃぞ									*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_m_0300					//２匹預かっている
+	_PROGRAM		GET_SODATE_NAME
+	_TALK_KEYWAIT	msg_sodateya_oldman_10			//○○○と○○○はげんきじゃぞ
+	_PROGRAM		MSG_SODATEYA_AISHOU				//相性をセットする
+	_PROGRAM		MSGEXPANDBUF
+//	_IFVAL_JUMP		ANSWORK,EQ,3,ev_sodateya_m_0101	//はい
+//	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_m_0101	//はい
+//	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_m_0101	//はい
+	_TALK_WAIT
+	_AB_KEYWAIT
+//	_TALK_END
+	_LDVAL			PARAM0,0
+	_CALL			ev_sodateya_m_mail_01
+	_LDVAL			PARAM0,1
+	_CALL			ev_sodateya_m_mail_01
+
+	_TALK_OBJ_END
+	_END
+
+
+
+/********************************************************************/
+/*							ばあさん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_sodateya_w
+	_TALK_OBJ_START
+//	_PROGRAM		GET_SODATE_NAME
+	_FUNC_CALL		ANSWORK,GET_SODATEYA_ZIISAN		//じいさんチェック0:なし1:たまご2:一匹3:2匹
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0100	//タマゴ
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_w_0200	//１匹預かっている
+	_IFVAL_JUMP		ANSWORK,EQ,3,ev_sodateya_w_0300	//２匹預かっている
+
+	_TALK_YES_NO	msg_sodateya_oldwoman_01		//じこしょうかい→あずけるかい？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0001	//はい
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_06		//そうかいそれじゃまたきておくれ
+	
+	_TALK_OBJ_END
+	_END
+
+/*==================================================================*/
+/*  どのこをそだててみるかね？										*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0001
+	_FUNC_CALL		ANSWORK,GET_POKE_COUNT2			//手持ちは１ぴきじゃないか？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0003	//ない
+
+
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_02	//どのこをそだててみるかね
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	SODAYE_POKELIST					//ポケモンリスト表示
+	_STOP_SCRIPT
+//	_FLD_FADE_BLACKIN
+	_IFVAL_JUMP		PARAM0,EQ,0xff,ev_sodateya_w_end//キャンセルされた
+
+	_FUNC_CALL		ANSWORK,GET_POKE_COUNT3			//あずけたら戦闘できなくないか？
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_sodateya_w_0004	//できない
+
+	_FUNC_CALL		PARAM1,MSG_AZUKE_SET				//育て屋にあずけるポケモンの名前と番号をセット
+	_VOICE_PLAY		PARAM1,0					//泣き声
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_03	//それではしばらくあずかるぞ
+	_VOICE_WAIT
+	_PROGRAM		SET_SODATEYA_POKE			//てもちから育て屋ワークへ
+	_INC_RECORD		CNT_SODATEYA				//育て屋に預けた回数をカウント
+
+	_FUNC_CALL		ANSWORK,GET_SODATEYA_ZIISAN		//預けチェック 2=1匹  3=2匹
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_w_0002	//もう一体預ける？
+	_TALK_OBJ_END
+	_END
+
+/*==================================================================*/
+/*  それじゃまたきておくれ											*/
+/*==================================================================*/
+ev_sodateya_w_end:
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_09		//それじゃまたきておくれ
+	_TALK_OBJ_END
+	_END
+
+
+/*==================================================================*/
+/*  もう１ぴきそだてるかい？										*/
+/*==================================================================*/
+ev_sodateya_w_0002:
+	_TALK_YES_NO	msg_sodateya_oldwoman_04		//もう１ぴきそだてるかい？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0001	//はい
+
+	_JUMP			ev_sodateya_w_end				//それじゃまたきておくれ
+	_END
+
+
+/*==================================================================*/
+/*  おや？ポケモンが１ぴきしかいないよだな							*/
+/*==================================================================*/
+ev_sodateya_w_0003:
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_16		//おやポケモンが１ぴきしかいないようだな
+	_TALK_OBJ_END
+	_END
+	
+
+/*==================================================================*/
+/*  そのポケモンをあずけるとたたかえなくなるぞ						*/
+/*==================================================================*/
+ev_sodateya_w_0004:
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_18		//おやポケモンが１ぴきしかいないようだな
+	_TALK_OBJ_END
+	_END
+
+
+/*==================================================================*/
+/*  そういえばじいさんがさがしておったぞ							*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0100
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_05		//じいさんがさがしておったぞ
+	_TALK_OBJ_END
+	_END
+
+
+ev_sodateya_poke_levelput:
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_11		//○○○はレベルでいうと○○○くらい
+	_RET
+
+
+ev_sodateya_poke_leveldiff:
+	_FUNC_CALL		ANSWORK,SODATE_POKE_LEVEL_STR	//レベル差を取得
+	_IFVAL_CALL		ANSWORK,NE,0,ev_sodateya_poke_levelput		
+	_RET
+
+
+/*==================================================================*/
+/*  １ぴきあずかってる												*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0200
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_10		//おおあんたか！よくきたな
+	_LDVAL			PARAM0,0
+	_CALL			ev_sodateya_poke_leveldiff
+
+	_TALK_YES_NO	msg_sodateya_oldwoman_04		//もう１ぴきそだてるかい？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0001	//はい
+
+	_TALK_YES_NO	msg_sodateya_oldwoman_17		//ポケモンをひきとるかい
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0201	//はい
+
+	_JUMP			ev_sodateya_w_end				//それじゃまたきておくれ
+	_END
+
+/*==================================================================*/
+/*  ひきとるかい？													*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0201
+	_FUNC_CALL		ANSWORK,GET_POKE_COUNT			//手持ちに空きはあるか？
+	_IFVAL_JUMP		ANSWORK,EQ,6,ev_sodateya_w_0206	//ない
+
+	_FUNC_CALL		ANSWORK,GET_SODATEYA_ZIISAN		//	2:1匹	3:2匹
+
+	_LDVAL			PARAM0,0
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_w_0202	//あずかってるのは１匹
+
+	_PROGRAM		HIKITORI_LIST					//選択
+	_STOP_SCRIPT
+
+	_LDWK			PARAM0,ANSWORK
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_w_end	//キャンセル
+	_JUMP			ev_sodateya_w_0202				//ひきとるなら…
+	_END
+
+/*==================================================================*/
+/*  ○○○をひきとるなら料金は○○○円だよ							*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0202
+	_PROGRAM		HIKITORI_RYOUKIN
+	_TALK_YES_NO	msg_sodateya_oldwoman_14			//○○○をひきとるなら料金は○○円だよ
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0203		//お金チェックへ
+
+	_JUMP			ev_sodateya_w_end					//それじゃまたきておくれ
+	_END
+
+/*==================================================================*/
+/* おかね足りてるかチェック											*/
+/*==================================================================*/
+ev_sodateya_w_0203:
+	_FUNC_CALL		ANSWORK,COMP_MY_GOLD				//お金足りてる？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0204		//足りてる
+		
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_07			//おかねがたりないようじゃのう
+	_TALK_OBJ_END
+	_END
+
+/*==================================================================*/
+/*  ○○○は○○○をひきとった										*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0204
+	_SET_OBJ_ANIME	OLDWOMAN2_01_SODATEYA,oldwoman_2_01_r117_anime01
+	_OBJ_ANIME_WAIT										//アニメ終了待ち
+
+	_FUNC_CALL		ANSWORK,HIKITORI_POKE				//ポケモンを引き取る
+	_PROGRAM		SUB_MY_GOLD							//お金引く
+
+	_SE				SE_REGI
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_15			//はいよ　たしかに！
+	_VOICE_PLAY		ANSWORK,0
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_15b			//○○○は○○○を…
+	_VOICE_WAIT
+	_FUNC_CALL		ANSWORK,GET_SODATEYA_ZIISAN			//預けてる数 0:0  2:1匹	3:2匹
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_w_0205		//もういっぴき質問
+	_JUMP			ev_sodateya_w_end					//それじゃまたきておくれ
+	_END
+
+
+	
+
+/*==================================================================*/
+/*  もういっぴきもひきとるか？										*/
+/*==================================================================*/
+ev_sodateya_w_0205:
+	_TALK_YES_NO	msg_sodateya_oldwoman_08			//もう１ぴきもひきとるか？
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0201		//はい
+	_JUMP			ev_sodateya_w_end					//それじゃまたきておくれ
+	_END
+
+
+/*==================================================================*/
+/*  てもちのポケモンがいっぱいじゃよ								*/
+/*==================================================================*/
+ev_sodateya_w_0206:
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_12			//てもちのポケモンがいっぱいじゃよ
+	_TALK_OBJ_END
+	_END
+
+
+oldwoman_2_01_r117_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_L
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_R
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_U
+	.byte	AC_WALK_U_05
+	.byte	AC_VANISH_ON
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_D
+	.byte	AC_VANISH_OFF
+	.byte	AC_WALK_D_05
+	.byte	ACMD_END
+	_END
+/*==================================================================*/
+/*  ２ひきあずかってる												*/
+/*==================================================================*/
+SCRIPT_LABEL	ev_sodateya_w_0300
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_10		//おおあんたか！よくきたな
+
+	_LDVAL			PARAM0,0						//１匹目のレベルアップチェック
+	_CALL			ev_sodateya_poke_leveldiff
+
+	_LDVAL			PARAM0,1						//二匹目のレベルアップチェック
+	_CALL			ev_sodateya_poke_leveldiff
+
+	_TALK_YES_NO	msg_sodateya_oldwoman_17		//ポケモンをひきとるかい
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_sodateya_w_0201	//はい
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_09		//それじゃまたきておくれ
+
+	_TALK_OBJ_END
+	_END
+
+
+/*==================================================================*/
+/*  ひきとる選択													*/
+/*==================================================================*/
+SCRIPT_LABEL		ev_sodateya_w_0301
+	_PROGRAM		HIKITORI_LIST					//選択
+	_STOP_SCRIPT
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_sodateya_w_end	//キャンセル
+	_LDWK			PARAM0,ANSWORK
+
+	_FUNC_CALL		ANSWORK,HIKITORI_POKE			//ポケモンを引き取る
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_15		//はいよ　たしかに！○○○は○○○を…
+
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_09		//それじゃまたきておくれ
+	_TALK_OBJ_END
+	_END
+
+
+
+
+
+/*==================================================================*/
+/*  タマゴが孵化した												*/
+/*==================================================================*/
+SCRIPT_LABEL		ev_sodateya_tamago_huka
+	_TALK_START
+//	_PROGRAM		TAMAGO_HUKA						//タマゴからポケモンへ
+	_TALK_KEYWAIT	msg_sodateya_tamago_huka_01		//タマゴから○○○がうまれた！
+	_PROGRAM		TAMAGO_DEMO
+	_STOP_SCRIPT
+//	_JINGLE			MUS_FANFA5;
+//	_JINGLE_WAIT
+	_TALK_END
+	_END
+
+
+
+
+
+#if 0
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_03	//それではしばらくあずかるぞ
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_04	//もう１ぴきそだてるかい
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_06	//そうかいそれじゃまたきておくれ
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_07	//おかねがたりないようじゃのう
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_09	//それじゃまたきておくれ
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_11	//○○○はレベルでいうと○○○くらい
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_12	//てもちのポケモンがいっぱいじゃよ！
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_13	//どっちのポケモンをひきとるかい？
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_15	//はいよ　たしかに！○○○は○○○を…
+	_TALK_KEYWAIT	msg_sodateya_oldwoman_16	//おやポケモンが１ぴきしかいないようだな
+#endif
+
+#if 0
+	//比較なしJUMP
+	_JUMP			ev_???
+	_CALL			ev_???
+
+	//比較文(ワーク)
+	_IFVAL_JUMP		PARAM0,EQ,0,ev_boya1_01_p02_field_t101
+	_IFVAL_CALL		ANSWORK,NE,0,ev_boya1_01_p02_field_t101
+
+	//比較文(フラグ)
+	_IF_FLAGON_JUMP		FH_00,ev_boya1_01_p02_field_t101
+	_IF_FLAGOFF_CALL	FH_00,ev_boya1_01_p02_field_t101
+
+	//メッセージ表示
+	_TALK_KEYWAIT	msg_boya1_01_p01_field_t101
+
+	//はい、いいえウィン＋メッセージ
+	_TALK_YES_NO	msg_boya1_01_p01_field_t101
+
+	//ウィン閉じる
+	_TALK_CLOSE
+
+	//プログラム呼び出し
+	_PROGRAM		TEST_01
+	_FUNC_CALL		ANSWORK,TEST_01
+
+	//アニメーション
+	_SET_OBJ_ANIME	BOYA1_01_FIELD_T101,boya1_01_field_t101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	
+	//OBJ消去(マップエディタでバニッシュフラグを指定しないとダメです)
+	_OBJ_DELETE		BOYA1_01_FIELD_T101
+
+	//スクリプトの停止
+	_STOP_SCRIPT
+
+	//CALLで呼び出したところに変える
+	_RET
+#endif

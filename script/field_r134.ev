@@ -1,0 +1,72 @@
+//====================================================================
+//							field_r134
+//====================================================================
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r134_event_data
+INIT_CTRL_LABEL		ev_init_diving_field_r134
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//				※マップ初期化時に毎回呼ばれる
+//--------------------------------------------------------------------
+ev_init_diving_field_r134:
+	_SET_DIVING_MAP_ID	CAVE,CAVE_D2001,8,6
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_22
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_22
+	_TRAINER_DATA2	msg_swimmerm_22_01
+	_TRAINER_DATA3	msg_swimmerm_22_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_22_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_23
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_23
+	_TRAINER_DATA2	msg_swimmerw_23_01
+	_TRAINER_DATA3	msg_swimmerw_23_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_23_03
+	_END
+
+SCRIPT_LABEL	ev_bird_16
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_16
+	_TRAINER_DATA2	msg_bird_16_01
+	_TRAINER_DATA3	msg_bird_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_16_03
+	_END
+
+SCRIPT_LABEL	ev_dragon_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DRAGON_06
+	_TRAINER_DATA2	msg_dragon_06_01
+	_TRAINER_DATA3	msg_dragon_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_dragon_06_03
+	_END
+
+SCRIPT_LABEL	ev_karate_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_02
+	_TRAINER_DATA2	msg_karate_02_01
+	_TRAINER_DATA3	msg_karate_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_02_03
+	_END
+

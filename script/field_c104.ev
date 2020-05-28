@@ -1,0 +1,825 @@
+//====================================================================
+//							field_c104
+//						カナズミ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_c104_event_data
+FLAG_CHANGE_LABEL	ev_arrive_flag_set_c104
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//到着フラグセット
+ev_arrive_flag_set_c104:
+	_FLAG_SET		SYS_C104_ARRIVE
+
+	_CALL			set_evil_char
+	_CALL			set_support_char
+	_END
+
+
+//--------------------------------------------------------------------
+//						 スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*					デボン社の左わきにいる大男						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_field_c104
+	_TALK_OBJ_START
+
+	//盗難イベント中だったら
+	_IF_FLAGON_JUMP		FE_DEBON_01_FIELD_C104,ev_bigman1_01_p02_field_c104
+
+	_TALK_KEYWAIT	msg_bigman1_01_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+//盗難イベント中
+ev_bigman1_01_p02_field_c104:
+	_TALK_KEYWAIT	msg_bigman1_01_p02_field_c104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*			町の中央付近、大階段の左斜め下にいるデボンの社員3		*/
+/*			(元デボンの社員４）										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_devon1_03_p01_field_c104
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_devon1_03_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				町の中央付近、大階段の右わきにいる女性２。			*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw1_01_p01_field_c104
+	_EASY_OBJ_MSG	msg_trainerw1_01_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*							トレーナー男							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_field_c104
+	_TALK_OBJ_START
+
+	//バッチ０１を取得していたら
+	_IF_FLAGON_JUMP	SYS_BATCH01_GET,ev_trainerm1_01_p02_field_c104
+
+	_TALK_KEYWAIT	msg_trainerm1_01_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+//バッチ０１を取得していたら
+ev_trainerm1_01_p02_field_c104:
+	_TALK_KEYWAIT	msg_trainerm1_01_p02_field_c104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				ポケセンの左斜め下にいる少年２。					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_field_c104
+	_TALK_OBJ_START
+
+	//「ポケナビ」入手していたら
+	_IF_FLAGON_JUMP	FE_POKEGEAR_GET,ev_boy2_01_p02_field_c104
+
+	_TALK_KEYWAIT	msg_boy2_01_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+//「ポケナビ」入手している
+ev_boy2_01_p02_field_c104:
+	_TALK_KEYWAIT	msg_boy2_01_p02_field_c104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					ポケセンの前にいるお嬢1。						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou1_01_p01_field_c104
+	_EASY_OBJ_MSG	msg_ojyou1_01_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*		トレーナーズスクール（r0301）の前にいる坊や１。				*/
+/*	_EASY_MSGでやっている(主人公の方の振り向かないようにしてる)		*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_field_c104
+	_EASY_MSG		msg_boya1_01_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*						116番道路方面の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_c104
+	_EASY_MSG       msg_kanban_01_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*					デボンの入り口そばの看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_c104
+	_EASY_MSG       msg_kanban_02_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*						ジムの前の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_c104
+	_EASY_MSG       msg_kanban_03_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*						デボン分別室								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_c104
+	_EASY_MSG       msg_kanban_04_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*						町の中央の看板(5)							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_c104
+	_EASY_MSG       msg_kanban_05_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*			ポケモントレーナーズスクール(r0301)の看板				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_06_p01_field_c104
+	_EASY_MSG       msg_kanban_06_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*						いあいぎりの看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_07_p01_field_c104
+	_EASY_MSG       msg_kanban_07_p01_field_c104
+	_END
+
+
+/********************************************************************/
+/*								坊や２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya2_01_p01_field_c104
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_boya2_01_p01_field_c104
+
+	_SET_OBJ_ANIME	BOYA2_01_FIELD_C104,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								お嬢２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou2_01_p01_field_c104
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_ojyou2_01_p01_field_c104
+
+	_SET_OBJ_ANIME	OJYOU2_01_FIELD_C104,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					若者男１										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm1_01_p01_field_c104
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_youngm1_01_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン盗難事件発生						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_c104_pos04
+	_TALK_START
+	_SXY_POS_CHANGE	WORKERM1_04_FIELD_C104,14,21
+	_SXY_SITE_CHANGE	WORKERM1_04_FIELD_C104,MV_RIGHT
+	_LDVAL		PARAM0,0
+	_JUMP		ev_debon_01_start
+	_END
+SCRIPT_LABEL	ev_field_c104_pos05
+	_TALK_START
+	_SXY_POS_CHANGE	WORKERM1_04_FIELD_C104,14,21
+	_SXY_SITE_CHANGE	WORKERM1_04_FIELD_C104,MV_RIGHT
+	_LDVAL		PARAM0,1
+	_JUMP		ev_debon_01_start
+	_END
+SCRIPT_LABEL	ev_field_c104_pos06
+	_TALK_START
+	_SXY_POS_CHANGE	WORKERM1_04_FIELD_C104,14,21
+	_SXY_SITE_CHANGE	WORKERM1_04_FIELD_C104,MV_RIGHT
+	_LDVAL		PARAM0,2
+	_JUMP		ev_debon_01_start
+	_END
+SCRIPT_LABEL	ev_field_c104_pos07
+	_TALK_START
+	_SXY_POS_CHANGE	WORKERM1_04_FIELD_C104,14,21
+	_SXY_SITE_CHANGE	WORKERM1_04_FIELD_C104,MV_RIGHT
+	_LDVAL		PARAM0,3
+	_JUMP		ev_debon_01_start
+	_END
+SCRIPT_LABEL	ev_field_c104_pos08
+	_TALK_START
+	_SXY_POS_CHANGE	WORKERM1_04_FIELD_C104,14,21
+	_SXY_SITE_CHANGE	WORKERM1_04_FIELD_C104,MV_RIGHT
+	_LDVAL		PARAM0,4
+	_JUMP		ev_debon_01_start
+	_END
+
+ev_debon_01_start:
+	_TALK_KEYWAIT	msg_evilm1_01_p01_field_c104
+	_TALK_CLOSE
+
+	//OBJ出現
+	_OBJ_APPEAR		SEAMAN1_02_FIELD_C104
+	_OBJ_APPEAR		WORKERM1_04_FIELD_C104
+
+	//マリン団が逃げていく
+	_SET_OBJ_ANIME	SEAMAN1_02_FIELD_C104,seaman1_02_field_c104_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		SEAMAN1_02_FIELD_C104
+
+	//社員が追いかてくる
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime01
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_workerm1_04_p01_field_c104
+	_TALK_CLOSE
+
+	//社員がさらに追いかてくる
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime51
+	_OBJ_ANIME_WAIT
+
+	//OBJ消す
+	_OBJ_DELETE		WORKERM1_04_FIELD_C104
+	_SXY_POS_CHANGE	WORKERM1_04_FIELD_C104,30,10
+
+	//街中に出すのでフラグ戻す
+	_FLAG_RESET		FV_WORKERM1_04_FIELD_C104
+
+	//盗難イベント中
+	_FLAG_SET		FE_DEBON_01_FIELD_C104
+
+	_LDVAL			WK_SCENE_FIELD_C104,2
+
+	//カナシダトンネルのイベント発動
+	_LDVAL			WK_SCENE_CAVE_D0201,2
+	_LDVAL			WK_SCENE_FIELD_R116,1
+	_FLAG_RESET		FV_HAGI_01_FIELD_R116
+	_FLAG_RESET		FV_POKEMON_01_CAVE_D0201
+	_FLAG_RESET		FV_AQUAM1_01_CAVE_D0201
+	
+	//ハギたちを消す
+	_FLAG_SET		FV_HAGI_01_R104_R0101
+	_FLAG_SET		FV_POKEMON_01_R104_R0101
+
+	_TALK_END
+	_END
+
+//とりかえしてくれ「はい」
+yes_oldman1_01_p01_field_c104:
+	_TALK_KEYWAIT	msg_workerm1_04_p03_field_c104
+	_RET
+
+//とりかえしてくれ「いいえ」
+no_oldman1_01_p01_field_c104:
+	_TALK_KEYWAIT	msg_workerm1_04_p04_field_c104
+	_RET
+
+//近づいてくる
+case0_oldman1_01_p01_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+
+case1_oldman1_01_p01_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime05
+	_OBJ_ANIME_WAIT
+	_RET
+
+case2_oldman1_01_p01_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime06
+	_OBJ_ANIME_WAIT
+	_RET
+
+case3_oldman1_01_p01_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime07
+	_OBJ_ANIME_WAIT
+	_RET
+
+case4_oldman1_01_p01_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,oldman1_01_field_c104_anime08
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//マリン団１が逃げていく
+//--------------------------------------------------------------------
+seaman1_01_field_c104_anime01:	
+	.byte	AC_WALK_R_4
+	.byte	AC_WALK_R_4
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マリン団２が逃げていく
+//--------------------------------------------------------------------
+seaman1_02_field_c104_anime01:	
+	.byte	AC_WALK_R_4
+	.byte	AC_WALK_R_4
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ムクゲ社長が追いかてくる
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime01:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ムクゲ社長	さらに追いかける
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime51:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ムクゲ社長	近づいてくる(case0)
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime04:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ムクゲ社長	近づいてくる(case1)
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime05:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ムクゲ社長	近づいてくる(case2)
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime06:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+//--------------------------------------------------------------------
+//ムクゲ社長	近づいてくる(case3)
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime07:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+//--------------------------------------------------------------------
+//ムクゲ社長	近づいてくる(case4)
+//--------------------------------------------------------------------
+oldman1_01_field_c104_anime08:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*					カナズミの北東にいる研究員						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_04_p01_field_c104
+	_TALK_OBJ_START
+
+	//盗難イベント終了していたら(全滅で後ろから話し掛けよう)
+	_IF_FLAGON_JUMP	FE_DEBON_02_FIELD_C104,ev_workerm1_04_p02_field_c104
+
+	_TALK_KEYWAIT	msg_workerm1_04_p03_field_c104
+	_TALK_OBJ_END
+	_END
+
+//盗難イベント終了していたら(全滅で後ろから話し掛けよう)
+ev_workerm1_04_p02_field_c104:
+	_SE_WAIT
+	_LDVAL		LOCALWORK1,4
+	_JUMP		ev_common_field_c104_pos14
+	_END
+
+
+/********************************************************************/
+/*						研究員(トウカの森の人)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_c104_pos10
+	_TALK_START
+	_LDVAL		LOCALWORK1,0
+	_JUMP		ev_common_field_c104_pos10
+	_END
+
+SCRIPT_LABEL	ev_field_c104_pos11
+	_TALK_START
+	_LDVAL		LOCALWORK1,1
+	_JUMP		ev_common_field_c104_pos10
+	_END
+
+SCRIPT_LABEL	ev_field_c104_pos12
+	_TALK_START
+	_LDVAL		LOCALWORK1,2
+	_JUMP		ev_common_field_c104_pos10
+	_END
+
+SCRIPT_LABEL	ev_field_c104_pos13
+	_TALK_START
+	_LDVAL		LOCALWORK1,3
+	_JUMP		ev_common_field_c104_pos10
+	_END
+
+//共通処理
+ev_common_field_c104_pos10:
+	//近づく
+	_IFVAL_CALL		LOCALWORK1,EQ,0,case0_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,1,case1_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,2,case2_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,3,case3_workerm1_04_field_c104
+
+	_FLAG_SET		FE_WORKERM1_04_FIELD_C104
+	_LDVAL			WK_SCENE_FIELD_C104,3
+	_SXY_POS_OVERWRITE	WORKERM1_04_FIELD_C104
+
+	_TALK_KEYWAIT	msg_workerm1_04_p02_field_c104
+	_TALK_END
+	_END
+
+//pos10
+case0_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//pos11
+case1_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//pos12
+case2_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//pos13
+case3_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,workerm1_04_field_c104_anime01
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//研究員	近づく(POS10)
+//--------------------------------------------------------------------
+workerm1_04_field_c104_anime01:
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						研究員(トウカの森の人)						*/
+//					デボンのにもつを取り返した後
+/********************************************************************/
+SCRIPT_LABEL	ev_field_c104_pos14
+	_TALK_START
+	_LDVAL		LOCALWORK1,0
+	_JUMP		ev_common_field_c104_pos14
+	_END
+
+SCRIPT_LABEL	ev_field_c104_pos15
+	_TALK_START
+	_LDVAL		LOCALWORK1,1
+	_JUMP		ev_common_field_c104_pos14
+	_END
+
+SCRIPT_LABEL	ev_field_c104_pos16
+	_TALK_START
+	_LDVAL		LOCALWORK1,2
+	_JUMP		ev_common_field_c104_pos14
+	_END
+
+SCRIPT_LABEL	ev_field_c104_pos17
+	_TALK_START
+	_LDVAL		LOCALWORK1,3
+	_JUMP		ev_common_field_c104_pos14
+	_END
+
+//共通処理
+ev_common_field_c104_pos14:
+	//近づく
+	_IFVAL_CALL		LOCALWORK1,EQ,0,case100_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,1,case101_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,2,case102_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,3,case103_workerm1_04_field_c104
+	_IFVAL_CALL		LOCALWORK1,EQ,4,case104_workerm1_04_field_c104
+
+	_TALK_KEYWAIT	msg_workerm1_04_p04_field_c104
+
+	_ITEM_EVENT		ITEM_SUUPAABOORU,1
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,ev_fail_item_workerm1_04_field_c104
+
+	_TALK_KEYWAIT	msg_workerm1_04_p06_field_c104
+	_TALK_CLOSE
+
+	_FLAG_SET		FE_DEBON_NIMOTSU_RETURN
+
+	//OBJ消す
+	_FLAG_SET		FV_WORKERM1_04_FIELD_C104
+
+	_LDVAL			WK_SCENE_FIELD_C104,5
+
+	_TIME_WAIT		30
+
+	_MAP_CHANGE		C104,C104_R0103,2,2
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//バックがいっぱいでアイテムが貰えない
+ev_fail_item_workerm1_04_field_c104:
+	_TALK_KEYWAIT	msg_workerm1_04_p05_field_c104
+	_RET
+
+//近づいてくる
+//pos14
+case100_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//pos15
+case101_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//pos16
+case102_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//pos17
+case103_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,workerm1_04_field_c104_anime01
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//全滅での例外対処
+case104_workerm1_04_field_c104:
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	WORKERM1_04_FIELD_C104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+
+/********************************************************************/
+/*							サポート								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_field_c104
+	_TALK_OBJ_START
+
+	//一度会話しているか
+	_IF_FLAGON_JUMP	FE_SUPPORT_01_FIELD_C104,ev_support_01_p02_field_c104
+
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_field_c104
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_field_c104
+	_END
+
+
+//主人公男の場合(相手が娘）
+my_sex_boy_field_c104:
+	_FLAG_SET		FE_SUPPORT_01_FIELD_C104
+	_TALK_KEYWAIT	msg_heroine_01_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+//主人公女の場合(相手が息子）
+my_sex_girl_field_c104:
+	_FLAG_SET		FE_SUPPORT_01_FIELD_C104
+	_TALK_KEYWAIT	msg_hero_01_p01_field_c104
+	_TALK_OBJ_END
+	_END
+
+//一度会話している
+ev_support_01_p02_field_c104:
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_02_field_c104
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_02_field_c104
+	_END
+
+//主人公男の場合(相手が娘）
+my_sex_boy_02_field_c104:
+	_TALK_KEYWAIT	msg_heroine_01_p02_field_c104
+	_TALK_OBJ_END
+	_END
+
+//主人公女の場合(相手が息子）
+my_sex_girl_02_field_c104:
+	_TALK_KEYWAIT	msg_hero_01_p02_field_c104
+	_TALK_OBJ_END
+	_END
+
+

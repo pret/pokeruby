@@ -1,0 +1,14 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 6
+#define OLDMAN2_01_CAVE_D0808	1
+#define AQUABOSS_01_CAVE_D0808S	2
+#define OLDWOMAN1_01_CAVE_D0808	3
+#define TR_AQUAM_26	4
+#define TR_AQUAM_27	5
+#define TR_AQUAM_28	6
+
+//Exit ID = 3
+#define CAVE_D0808_STAIR01	0
+#define CAVE_D0808_STAIR02	1
+#define CAVE_D0808_STAIR03	2

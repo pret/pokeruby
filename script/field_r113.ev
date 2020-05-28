@@ -1,0 +1,193 @@
+//====================================================================
+//							field_r113
+//						フィールド・ロード113
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r113_event_data
+
+INIT_CTRL_LABEL		ev_effect_field_r113
+FLAG_CHANGE_LABEL	flag_change_field_r113
+EVENT_DATA_END
+
+//灰エフェクトセット
+ev_effect_field_r113:
+	_SET_MAP_EFFECT		MAP_EFFECT_ASH
+	_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r113:
+	_CALL			ctrl_field_r113				//BGM、天候のセット
+
+	//アクア団charセット
+	_CALL			set_evil_char
+	_END
+
+//BGM、天候のセット
+ctrl_field_r113:
+	_GET_MAP_POS	LOCALWORK0,LOCALWORK1
+	_IFVAL_JUMP		LOCALWORK0,LT,19,	_ret_bgm_ctrl_field_r113
+	_IFVAL_JUMP		LOCALWORK0,GT,84,	_ret_bgm_ctrl_field_r113
+
+	_SET_WEATHER	ID_WEATHER_ASH			/* 火山灰 */
+	_RET
+
+_ret_bgm_ctrl_field_r113:
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							老紳士									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_field_r113
+	_EASY_OBJ_MSG	msg_gentlem1_01_p01_field_r113
+	_END
+
+
+/********************************************************************/
+/*							坊や1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_field_r113
+	_EASY_OBJ_MSG	msg_boya1_01_p01_field_r113
+	_END
+
+
+/********************************************************************/
+/*							看板1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r113
+	_EASY_MSG       msg_kanban_01_p01_field_r113
+	_END
+
+
+/********************************************************************/
+/*							看板2									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r113
+	_EASY_MSG       msg_kanban_02_p01_field_r113
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_r113
+	_EASY_MSG       msg_kanban_04_p01_field_r113
+	_END
+
+
+/********************************************************************/
+/*							おとくなけいじばん						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r113
+	_EASY_MSG       msg_kanban_03_p01_field_r113
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_tanpan_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_09
+	_TRAINER_DATA2	msg_tanpan_09_01
+	_TRAINER_DATA3	msg_tanpan_09_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_09_03
+	_END
+
+SCRIPT_LABEL	ev_tanpan_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_10
+	_TRAINER_DATA2	msg_tanpan_10_01
+	_TRAINER_DATA3	msg_tanpan_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_10_03
+	_END
+
+SCRIPT_LABEL	ev_parasol_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PARASOL_01
+	_TRAINER_DATA2	msg_parasol_01_01
+	_TRAINER_DATA3	msg_parasol_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_parasol_01
+	_TRAINER_EASY_MSG	msg_parasol_01_03
+	_END
+
+_revenge_parasol_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	PARASOL_01
+	_TRAINER_DATA2	msg_parasol_01_04
+	_TRAINER_DATA3	msg_parasol_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_parasol_01_06
+	_END
+
+SCRIPT_LABEL	ev_shinobi_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_05
+	_TRAINER_DATA2	msg_shinobi_05_01
+	_TRAINER_DATA3	msg_shinobi_05_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_shinobi_05
+	_TRAINER_EASY_MSG	msg_shinobi_05_03
+	_END
+
+_revenge_shinobi_05:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_05
+	_TRAINER_DATA2	msg_shinobi_05_04
+	_TRAINER_DATA3	msg_shinobi_05_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_05_06
+	_END
+
+SCRIPT_LABEL	ev_shinobi_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_06
+	_TRAINER_DATA2	msg_shinobi_06_01
+	_TRAINER_DATA3	msg_shinobi_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_06_03
+	_END
+
+SCRIPT_LABEL	ev_futago_10_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_10
+	_TRAINER_DATA2	msg_futago_10_01
+	_TRAINER_DATA3	msg_futago_10_02
+	_TRAINER_DATA4	msg_futago_10_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_10_03
+	_END
+
+SCRIPT_LABEL	ev_futago_10_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_10
+	_TRAINER_DATA2	msg_futago_10_05
+	_TRAINER_DATA3	msg_futago_10_06
+	_TRAINER_DATA4	msg_futago_10_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_10_07
+	_END
+

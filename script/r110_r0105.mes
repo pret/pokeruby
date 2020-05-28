@@ -1,0 +1,125 @@
+// ◆◆ダンジョン２◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+
+
+// ・合い言葉を手に入れた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karakuri_01_p03_r110_r0105
+msg_karakuri_01_p03_r110_r0105:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,a_,i_,ko_,to_,ba_,wo_
+	.byte	CR_
+	.byte	to_,bi_,ra_,ni_,spc_,ka_,ki_,tu_,ke_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,KA_,RA_,KU_,RI_,da_,i_,o_,u_,spc_,sa_,ma_,spc_,ka_,si_,ko_,i_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,gi_,no_,spc_,ha_,zu_,re_,ru_,spc_,o_,to_,ga_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・効果音・ロック解除
+
+
+// ・トレーナー　塾帰り男
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm_02_01
+msg_schoolm_02_01:
+	.byte	do_,no_,spc_,SU_,I_,TTU_,TI_,de_
+	.byte	CR_
+	.byte	do_,no_,spc_,a_,na_,ga_,spc_,hu_,sa_,ga_,ru_,n_,da_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm_02_02
+msg_schoolm_02_02:
+	.byte	si_,yyo_,u_,bu_,spc_,si_,te_,ta_,ra_
+	.byte	CR_
+	.byte	yo_,ke_,i_,spc_,wa_,ka_,n_,na_,ku_,na_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm_02_03
+msg_schoolm_02_03:
+	.byte	ki_,mi_,spc_,bo_,ku_,no_,spc_,ka_,wa_,ri_,ni_
+	.byte	CR_
+	.byte	SU_,I_,TTU_,TI_,spc_,ze_,n_,bu_,spc_,o_,si_,te_,ki_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ・トレーナー　塾帰り男
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm_03_01
+msg_schoolm_03_01:
+	.byte	o_,ttu_,gyoe_,spc_,KA_,RA_,KU_,RI_,ya_,si_,ki_
+	.byte	CR_
+	.byte	n2_,do_,me_,no_,spc_,TI_,YYA_,RE_,N_,ZI_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm_03_02
+msg_schoolm_03_02:
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,mo_
+	.byte	CR_
+	.byte	so_,n_,na_,ni_,spc_,tu_,yo_,i_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm_03_03
+msg_schoolm_03_03:
+	.byte	KA_,RA_,KU_,RI_,da_,i_,o_,u_,ga_,spc_,hi_,to_,ri_,de_
+	.byte	CR_
+	.byte	ko_,no_,spc_,si_,ka_,ke_,wo_,spc_,tu_,ku_,ttu_,te_,ru_,n_,da_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ・トレーナー　塾帰り女
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw_02_01
+msg_schoolw_02_01:
+	.byte	i_,tu_,ka_,spc_,wa_,ta_,si_,no_,spc_,ZI_,MU_,wo_,spc_,tu_,ku_,ri_,ta_,ku_,te_
+	.byte	CR_
+	.byte	si_,ka_,ke_,wo_,spc_,ke_,n_,ki_,yyu_,u_,si_,te_,ru_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw_02_02
+msg_schoolw_02_02:
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,ha_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,spc_,bu_,so_,ku_,spc_,da_,ttu_,ta_,wa_,bou_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw_02_03
+msg_schoolw_02_03:
+	.byte	a_,na_,ta_,spc_,tu_,yo_,i_,no_,ne_,tenten_
+	.byte	CR_
+	.byte	ZI_,MU_,RI_,bou_,DA_,bou_,ni_,spc_,na_,re_,ru_,n_,zi_,yya_,na_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+

@@ -1,0 +1,100 @@
+//====================================================================
+//							sp_truck
+//							引越し荷台
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//
+//						LOCALWORK1使用
+//--------------------------------------------------------------------
+EVENT_DATA_START    sp_truck_event_data
+BG_CHANGE_LABEL		bg_change_sp_truck
+INIT_CTRL_LABEL		ev_init_sp_truck
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//トラックのドアが開く
+bg_change_sp_truck:
+	_SET_CELL		4,1,520,0
+	_SET_CELL		4,2,528,0
+	_SET_CELL		4,3,536,0
+	_END
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+ev_init_sp_truck:
+	_SET_MAP_EFFECT		MAP_EFFECT_CARGO
+	_END
+
+
+//--------------------------------------------------------------------
+//						　　スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								出口								*/
+/********************************************************************/
+SCRIPT_LABEL     ev_sp_truck_pos01
+	_TALK_START
+
+	//マップ名を出さなくする
+	_FLAG_SET		CTRL_MAPNAME_HIDE
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,boy_pokemon_game_start		//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,girl_pokemon_game_start	//女の子
+    _END
+
+//男の子
+boy_pokemon_game_start:
+	_SET_WARP_ID	WP_BOY_START
+	_LDVAL			WK_SCENE_SP_OPENING,1
+	_FLAG_SET		FV_MAMA_01_T101_R0201
+	_FLAG_SET		FV_TRUCK1_02_FIELD_T101
+	_FLAG_SET		FV_WOMAN2_01_T101_R0101
+	_FLAG_SET		FV_SUPPORTM_01_T101_R0102		//オダマキ息子消す
+
+	//隣の奥さんが部屋に入ると出迎えてくれる
+	_LDVAL			WK_SCENE_T101_R0201,1
+
+	//ミシロタウンの自宅前にワープ(左)
+	_SET_SP_MAP_ID	FIELD,FIELD_T101,3,10
+
+	_TALK_END
+    _END
+
+//女の子
+girl_pokemon_game_start:
+	_SET_WARP_ID	WP_GIRL_START
+	_LDVAL			WK_SCENE_SP_OPENING,2
+	_FLAG_SET		FV_MAMA_01_T101_R0101
+	_FLAG_SET		FV_TRUCK1_01_FIELD_T101
+	_FLAG_SET		FV_WOMAN2_01_T101_R0201
+	_FLAG_SET		FV_SUPPORTW_01_T101_R0202		//オダマキ娘消す
+
+	//隣の奥さんが部屋に入ると出迎えてくれる
+	_LDVAL			WK_SCENE_T101_R0101,1
+
+	//ミシロタウンの自宅前にワープ(右)
+	_SET_SP_MAP_ID	FIELD,FIELD_T101,12,10
+
+	_TALK_END
+    _END
+
+
+/********************************************************************/
+//							荷物１
+/********************************************************************/
+SCRIPT_LABEL    ev_nimotsu1_01_p01_sp_truck
+SCRIPT_LABEL	ev_cargo1_01_sp_truck
+SCRIPT_LABEL	ev_cargo1_02_sp_truck
+SCRIPT_LABEL	ev_cargo1_03_sp_truck
+	_EASY_MSG		msg_nimotsu_01_p01_sp_truck
+	_END
+
+

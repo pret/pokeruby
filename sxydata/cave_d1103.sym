@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define PUSHROCK1_01_CAVE_D1103	1
+#define PUSHROCK1_02_CAVE_D1103	2
+#define CRUSHROCK1_01_CAVE_D1103	3
+#define TR_AQUAM_06	4
+#define TR_AQUAM_07	5
+
+//Exit ID = 3
+#define CAVE_D1103_DOOR01	0
+#define CAVE_D1103_DOOR02	1
+#define CAVE_D1103_DOOR03	2

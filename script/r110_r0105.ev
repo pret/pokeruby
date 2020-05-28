@@ -1,0 +1,192 @@
+//====================================================================
+//						r110_r0105
+//						カラクリ屋敷ステージ２
+//						LOCALWORK1使用
+//						LOCALWORK2使用
+//						LOCALWORK3使用
+//						LOCALWORK4使用
+//====================================================================
+
+//--------------------------------------------------------------------
+//					    マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0105_event_data
+INIT_CTRL_LABEL			init_ctrl_label_r110_r0105
+FLAG_CHANGE_LABEL		flag_change_r110_r0105
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_label_r110_r0105:
+	_IFVAL_CALL			LOCALWORK1,EQ,1,switch_01_set_cell_r110_r0105
+	_IFVAL_CALL			LOCALWORK2,EQ,1,switch_02_set_cell_r110_r0105
+	_IFVAL_CALL			LOCALWORK3,EQ,1,switch_03_set_cell_r110_r0105
+	_IFVAL_CALL			LOCALWORK4,EQ,1,switch_04_set_cell_r110_r0105
+	_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r110_r0105:
+	_LDVAL				LOCALWORK1,0		//ストッパー１セット
+	_LDVAL				LOCALWORK2,0		//ストッパー２セット
+	_LDVAL				LOCALWORK3,0		//ストッパー３セット
+	_LDVAL				LOCALWORK4,0		//ストッパー４セット
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						合い言葉の書
+/********************************************************************/
+SCRIPT_LABEL			ev_karakuri_01_p01_r110_r0105
+	_TALK_START
+	_IFVAL_JUMP			WK_SCENE_R110_R0105,EQ,0,get_aikotoba_r110_r0105
+	_JUMP				look_aikotoba_mes_r110_r0101
+	_END
+
+//あいことばを入手
+get_aikotoba_r110_r0105:
+	_LDVAL				WK_SCENE_R110_R0105,1
+	_JUMP				get_aikotoba_mes_r110_r0101
+	_END
+
+
+/********************************************************************/
+//						スイッチ１	
+/********************************************************************/
+SCRIPT_LABEL			ev_r110_r0105_pos01
+	_TALK_START
+	_LDVAL				LOCALWORK1,1		//スイッチを押された状態へ
+
+	//スイッチ起動音
+	_SE					SE_PIN
+
+	_CALL				switch_01_set_cell_r110_r0105
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						スイッチ２	
+/********************************************************************/
+SCRIPT_LABEL			ev_r110_r0105_pos02
+	_TALK_START
+	_LDVAL				LOCALWORK2,1		//スイッチを押された状態へ
+
+	//スイッチ起動音
+	_SE					SE_PIN
+
+	_CALL				switch_02_set_cell_r110_r0105
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						スイッチ３	
+/********************************************************************/
+SCRIPT_LABEL			ev_r110_r0105_pos03
+	_TALK_START
+	_LDVAL				LOCALWORK3,1		//スイッチを押された状態へ
+
+	//スイッチ起動音
+	_SE					SE_PIN
+
+	_CALL				switch_03_set_cell_r110_r0105
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						スイッチ４	
+/********************************************************************/
+SCRIPT_LABEL			ev_r110_r0105_pos04
+	_TALK_START
+	_LDVAL				LOCALWORK4,1		//スイッチを押された状態へ
+
+	//スイッチ起動音
+	_SE					SE_PIN
+
+	_CALL				switch_04_set_cell_r110_r0105
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+//スイッチ１を押した状態のセル
+switch_01_set_cell_r110_r0105:
+	//スイッチを押した状態へ
+	_SET_CELL			14,21,601,0
+	//ストッパー解除
+	_SET_CELL			1,12,618,0
+	_RET
+
+//スイッチ２を押した状態のセル
+switch_02_set_cell_r110_r0105:
+	//スイッチを押した状態へ
+	_SET_CELL			8,17,601,0
+	//ストッパー解除
+	_SET_CELL			12,13,618,0
+	_RET
+
+//スイッチ３を押した状態のセル
+switch_03_set_cell_r110_r0105:
+	//スイッチを押した状態へ
+	_SET_CELL			4,10,601,0
+	//ストッパー解除
+	_SET_CELL			8,4,618,0
+	_RET
+
+//スイッチ４を押した状態のセル
+switch_04_set_cell_r110_r0105:
+	//スイッチを押した状態へ
+	_SET_CELL			5,2,601,0
+	//ストッパー解除
+	_SET_CELL			12,5,618,0
+	_RET
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL			ev_schoolm_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		SCHOOLM_02
+	_TRAINER_DATA2		msg_schoolm_02_01
+	_TRAINER_DATA3		msg_schoolm_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_schoolm_02_03
+	_END
+
+SCRIPT_LABEL			ev_schoolm_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		SCHOOLM_03
+	_TRAINER_DATA2		msg_schoolm_03_01
+	_TRAINER_DATA3		msg_schoolm_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_schoolm_03_03
+	_END
+
+SCRIPT_LABEL			ev_schoolw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		SCHOOLW_02
+	_TRAINER_DATA2		msg_schoolw_02_01
+	_TRAINER_DATA3		msg_schoolw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_schoolw_02_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

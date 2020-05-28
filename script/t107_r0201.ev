@@ -1,0 +1,150 @@
+//====================================================================
+//							t107_r0201
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t107_r0201_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジェントルマン							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_t107_r0201
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//一週間たっているかのチェック
+	_CALL			ev_flag_chk_t107_r0201
+
+	//アイテムを入手しているか
+	_IF_FLAGON_JUMP	FE_WAZA_GET_T107_R0201,ev_gentlem1_01_p02_t107_r0201
+
+	//一度会話したかでメッセージ分岐
+	_IF_FLAGON_CALL		FE_GENTLEM1_01_T107_R0201,ev_gentlem1_01_p03_t107_r0201
+	_IF_FLAGOFF_CALL	FE_GENTLEM1_01_T107_R0201,ev_gentlem1_01_p04_t107_r0201
+
+	//なつき度チェック
+	_FLAG_SET		FE_GENTLEM1_01_T107_R0201		//一度会話した
+
+	//１５０以上
+	_FUNC_CALL		ANSWORK,GET_NATUKIDO_LEVEL		//150～
+	_IFVAL_JUMP		ANSWORK,GE,4,natsuki_level_high_t107_r0201
+
+	//５０以上
+	_FUNC_CALL		ANSWORK,GET_NATUKIDO_LEVEL		//～49
+	_IFVAL_JUMP		ANSWORK,GE,2,natsuki_level_normal_t107_r0201
+
+	//４９以下
+	_JUMP			natsuki_level_low_t107_r0201
+	_END
+
+//一週間
+ev_flag_chk_t107_r0201:
+	//すでにアイテム入手できる状態の時は何もしない
+	_IF_FLAGOFF_JUMP	FE_WAZA_GET_T107_R0201,ret_only_script
+
+	_FUNC_CALL		ANSWORK,GET_ONE_WEEK
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_gentlem1_01_item_ok
+	_RET
+
+//会話した
+ev_gentlem1_01_p03_t107_r0201:
+	_TALK_KEYWAIT	msg_gentlem1_01_p05_t107_r0201
+	_RET
+
+//会話してない
+ev_gentlem1_01_p04_t107_r0201:
+	_TALK_KEYWAIT	msg_gentlem1_01_p01_t107_r0201
+	_TALK_KEYWAIT	msg_gentlem1_01_p05_t107_r0201
+	_RET
+
+//アイテムをまた入手できる
+ev_gentlem1_01_item_ok:
+	_FLAG_RESET		FE_WAZA_GET_T107_R0201
+	_RET
+
+//なつきレベルが高いとき
+natsuki_level_high_t107_r0201:
+	_TALK_KEYWAIT	msg_gentlem1_01_p02_t107_r0201
+
+	_ITEM_EVENT		ITEM_WAZAMASIN27,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	//アイテムを入手した(一週間後にクリアさせる)
+	_FLAG_SET		FE_WAZA_GET_T107_R0201
+	_PROGRAM		SET_GAME_DAY
+
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_t107_r0201
+	_TALK_OBJ_END
+	_END
+
+//なつきレベルがふつうのとき
+natsuki_level_normal_t107_r0201:
+	_TALK_KEYWAIT	msg_gentlem1_01_p03_t107_r0201
+	_TALK_OBJ_END
+	_END
+
+//なつきレベルが低いとき
+natsuki_level_low_t107_r0201:
+	_TALK_KEYWAIT	msg_gentlem1_01_p04_t107_r0201
+
+	_ITEM_EVENT		ITEM_WAZAMASIN21,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	//アイテムを入手した(一週間後にクリアさせる)
+	_FLAG_SET		FE_WAZA_GET_T107_R0201
+	_PROGRAM		SET_GAME_DAY
+
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_t107_r0201
+	_TALK_OBJ_END
+	_END
+
+//アイテムをすでに貰っている
+ev_gentlem1_01_p02_t107_r0201:
+	_FUNC_CALL		ANSWORK,GET_ONE_WEEK
+	_GET_NUM_MSG	0,ANSWORK
+	_TALK_KEYWAIT	msg_gentlem1_01_p07_t107_r0201
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								ルリリ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ruriri_01_p01_t107_r0201
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_RURIRI,0
+	_TALK_KEYWAIT	msg_ruriri_01_p01_t107_r0201
+	_VOICE_WAIT
+
+	_TALK_KEYWAIT	msg_ruriri_01_p02_t107_r0201
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								ルリリ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ruriri_02_p01_t107_r0201
+	_TALK_OBJ_START
+
+	//なつき度が低いので怒っているＳＥ(2)を使用(松宮さん承認)
+	_VOICE_PLAY		MONSNO_RURIRI,2
+	_TALK_KEYWAIT	msg_ruriri_02_p01_t107_r0201
+	_VOICE_WAIT
+
+	_TALK_KEYWAIT	msg_ruriri_02_p02_t107_r0201
+	_TALK_OBJ_END
+	_END
+
+
+

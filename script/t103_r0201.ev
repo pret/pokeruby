@@ -1,0 +1,276 @@
+//====================================================================
+//							t103_r0201
+//							ムロ・ジム
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t103_r0201_event_data
+FLAG_CHANGE_LABEL		ev_bright_change_t103_r0201
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+ev_bright_change_t103_r0201:
+	_CALL	ev_bright_value_set_t103_r0201
+	_END
+
+
+/* フラグから明るさ指定を算出、セットする　*/
+ev_bright_value_set_t103_r0201:
+	_IF_TR_FLAGON_JUMP	LEADERM_02,_set_normal_bright_t103_r0201
+
+	_CALL	ev_check_trainer_t103_r0201
+	_LDWK	RG1,RG0
+	_IFVAL_JUMP	RG0,EQ,0,_set_bright_level4_muro_gym
+	_IFVAL_JUMP RG0,EQ,1,_set_bright_level3_muro_gym
+	_IFVAL_JUMP RG0,EQ,2,_set_bright_level2_muro_gym
+	_JUMP		_set_bright_level1_muro_gym
+	
+_set_normal_bright_t103_r0201:
+	_FLD_BRIGHT_CHANGE	0
+	_RET
+_set_bright_level1_muro_gym:
+	_FLD_BRIGHT_CHANGE	1
+	_RET
+_set_bright_level2_muro_gym:
+	_FLD_BRIGHT_CHANGE	2
+	_RET
+_set_bright_level3_muro_gym:
+	_FLD_BRIGHT_CHANGE	3
+	_RET
+_set_bright_level4_muro_gym:
+	_FLD_BRIGHT_CHANGE	4
+	_RET
+
+// トレーナー話しかけ時にフラグを再カウント、
+// 変動があった場合は見える範囲を大きくする
+SCRIPT_LABEL	ev_check_bright_t103_r0201
+
+	_CALL		ev_check_trainer_t103_r0201
+	_DUMMY
+	_IFWK_JUMP	RG0,EQ,RG1,_ev_bright_end
+	_LDWK		RG1,RG0
+	_IFVAL_JUMP RG0,EQ,1,_ev_bright_4to3
+	_IFVAL_JUMP RG0,EQ,2,_ev_bright_3to2
+	_IFVAL_JUMP RG0,EQ,3,_ev_bright_2to1
+
+_ev_bright_end:
+	_RET
+
+_ev_bright_4to3:
+	_SE		SE_MU_PACHI
+	_FLD_BRIGHT_EFFECT	3
+	_CALL		ev_bright_value_set_t103_r0201
+	_RET
+
+_ev_bright_3to2:
+	_SE		SE_MU_PACHI
+	_FLD_BRIGHT_EFFECT	2
+	_CALL		ev_bright_value_set_t103_r0201
+	_RET
+
+_ev_bright_2to1:
+	_SE		SE_MU_PACHI
+	_FLD_BRIGHT_EFFECT	1
+	_CALL		ev_bright_value_set_t103_r0201
+	_RET
+
+_ev_bright_to0:
+	_SE		SE_MU_PACHI
+	_FLD_BRIGHT_EFFECT	0
+	_CALL		ev_bright_value_set_t103_r0201
+	_RET
+
+
+/* トレーナーの対戦フラグをカウントする	*/
+ev_check_trainer_t103_r0201:
+	_LDVAL	RG0,0
+
+	_IF_TR_FLAGOFF_JUMP	KARATE_01,_check_battleg01
+	_ADDWK	RG0,1
+_check_battleg01:
+
+	_IF_TR_FLAGOFF_JUMP	BATTLEG_01,_check_battleg02
+	_ADDWK	RG0,1
+_check_battleg02:
+
+	_IF_TR_FLAGOFF_JUMP	BATTLEG_02,_check_t103_r0201_end
+	_ADDWK	RG0,1
+_check_t103_r0201_end:
+
+	_RET
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_02_01
+	_LEADER_DATA_START
+	_TRAINER_DATA1	LEADERM_02
+	_TRAINER_DATA2	msg_gymleader_02_01
+	_TRAINER_DATA3	msg_gymleader_02_02
+	_TRAINER_DATA4	ev_gymleader_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシン貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_T103_R0201,gymleader_02_wazam_get
+
+	_TALK_KEYWAIT	msg_gymleader_02_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_02_end:
+	_CALL			_ev_bright_to0
+
+	_TALKMSG		msg_gymleader_02_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_02_04
+
+	_FLAG_SET		FT_GYM_02_LEADER
+	_FLAG_SET		SYS_BATCH02_GET			//バッチゲット
+	_ADDWK			WK_SCENE_C101_R0201,1
+
+	//バッチを４つゲットした
+	_IFVAL_CALL		WK_SCENE_C101_R0201,EQ,6,papa_pos_change
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,2
+	_CALL			gym_trainer_all_flagon
+
+	_JUMP			gymleader_02_wazam_get
+	_END
+
+//技マシン貰う
+gymleader_02_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN08,1		
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_gymleader_02_05
+	_FLAG_SET		FE_WAZAM_01_T103_R0201	//技マシン貰った
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_karate_01
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_01
+	_TRAINER_DATA2	msg_karate_01_01
+	_TRAINER_DATA3	msg_karate_01_02
+	_TRAINER_DATA4	ev_karate_01_end
+	_TRAINER_DATA_END
+	/* */
+//	_CALL	ev_check_bright_t103_r0201
+	_TRAINER_EASY_MSG	msg_karate_01_03
+	_END
+ev_karate_01_end:
+	_CALL	ev_check_bright_t103_r0201
+	_TALK_OBJ_END
+	_END
+	
+
+SCRIPT_LABEL	ev_battleg_01
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	BATTLEG_01
+	_TRAINER_DATA2	msg_battleg_01_01
+	_TRAINER_DATA3	msg_battleg_01_02
+	_TRAINER_DATA4	ev_battleg_01_end
+	_TRAINER_DATA_END
+	/* */
+//	_CALL	ev_check_bright_t103_r0201
+	_TRAINER_EASY_MSG	msg_battleg_01_03
+	_END
+ev_battleg_01_end:
+	_CALL	ev_check_bright_t103_r0201
+	_TALK_OBJ_END
+	_END
+
+SCRIPT_LABEL	ev_battleg_02
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	BATTLEG_02
+	_TRAINER_DATA2	msg_battleg_02_01
+	_TRAINER_DATA3	msg_battleg_02_02
+	_TRAINER_DATA4	ev_battleg_02_end
+	_TRAINER_DATA_END
+	/* */
+//	_CALL	ev_check_bright_t103_r0201
+	_TRAINER_EASY_MSG	msg_battleg_02_03
+	_END
+ev_battleg_02_end:
+	_CALL	ev_check_bright_t103_r0201
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_02_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_02_LEADER,ev_danpei_02_02
+
+	_TALK_KEYWAIT	msg_danpei_02_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_02_02:
+	_TALK_KEYWAIT	msg_danpei_02_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_t103_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH02_GET,batch_get_t103_r0201
+
+	_JUMP			batch_no_get_t103_r0201
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_t103_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH02_GET,batch_get_t103_r0201
+
+	_JUMP			batch_no_get_t103_r0201
+	_END
+
+//すでにリーダーを倒している
+batch_get_t103_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p02_t103_r0201
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_t103_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p01_t103_r0201
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

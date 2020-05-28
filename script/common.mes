@@ -1,0 +1,569 @@
+//====================================================================
+//					テストメッセージ(01,02,03)
+//====================================================================
+msg_obj01_test:
+	.byte	SA_,N_,PU_,RU_,spc_,ME_,TTU_,SE_,bou_,ZI_,n1_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,A__,G__,B__,no_,spc_,se_,ka_,i_,he_
+	.byte	CR_
+	.byte	yo_,u_,ko_,so_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ta_,no_,si_,n_,de_,ne_
+	.byte	EOM_
+
+msg_obj02_test:
+	.byte	SA_,N_,PU_,RU_,spc_,ME_,TTU_,SE_,bou_,ZI_,n2_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,A__,G__,B__,no_,spc_,se_,ka_,i_,he_
+	.byte	CR_
+	.byte	yo_,u_,ko_,so_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ta_,no_,si_,n_,de_,ne_
+	.byte	EOM_
+
+msg_obj03_test:
+	.byte	SA_,N_,PU_,RU_,spc_,ME_,TTU_,SE_,bou_,ZI_,n3_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,A__,G__,B__,no_,spc_,se_,ka_,i_,he_
+	.byte	CR_
+	.byte	yo_,u_,ko_,so_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ta_,no_,si_,n_,de_,ne_
+	.byte	EOM_
+
+//====================================================================
+//					ふしぎなねがいごと？通信部分メッセージ
+//====================================================================
+msg_mix_01:
+	.byte	o_,to_,mo_,da_,ti_,to_,spc_,RE_,PO_,bou_,TO_,wo_
+	.byte	CR_
+	.byte	ma_,ze_,ma_,su_,ka_,hate_
+	.byte	EOM_
+//	.byte	o_,to_,mo_,da_,ti_,to_,spc_,DE_,bou_,TA_,wo_
+//	.byte	CR_
+//	.byte	ko_,u_,ka_,n_,spc_,si_,ma_,su_,ka_,hate_
+//	.byte	EOM_
+
+msg_mix_02:
+	.byte	ma_,ta_,no_
+	.byte	CR_
+	.byte	go_,ri_,yo_,u_,wo_,spc_,o_,ma_,ti_,spc_,si_,te_,ma_,su_,gyoe_
+	.byte	EOM_
+
+
+//====================================================================
+//	パソコンインターフェイス
+//====================================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●
+// ●パソコンインターフェイスメッセージ
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_paso_sw_on
+msg_paso_sw_on:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	PA_,SO_,KO_,N_,no_,spc_,SU_,I_,TTU_,TI_,wo_,spc_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_paso_start
+msg_paso_start:
+	.byte	do_,ko_,no_,spc_,PA_,SO_,KO_,N_,ni_,spc_,se_,tu_,zo_,ku_,spc_,si_,te_
+	.byte	CR_
+	.byte	tu_,u_,si_,n_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// 
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「だれかのパソコン」を選んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_paso_dareka
+msg_paso_dareka:
+	.byte	da_,re_,ka_,no_,spc_,PA_,SO_,KO_,N_,ni_,spc_,se_,tu_,zo_,ku_,spc_,si_,ta_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_paso_dareka2
+msg_paso_dareka2:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,a_,zu_,ka_,ri_,spc_,SI_,SU_,TE_,MU_,wo_
+	.byte	CR_
+	.byte	yo_,bi_,da_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＃のパソコン」を選んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_paso_hero
+msg_paso_hero:
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,PA_,SO_,KO_,N_,ni_,spc_,se_,tu_,zo_,ku_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「マユミのパソコン」を選んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_paso_mayumi
+msg_paso_mayumi:
+	.byte	MA_,YU_,MI_,no_,spc_,PA_,SO_,KO_,N_,ni_,spc_,se_,tu_,zo_,ku_,spc_,si_,ta_,gyoe_
+	.byte	EOM_
+
+
+//====================================================================
+//					ポケモンセンター１階・２階
+//					フレンドリィショップ
+//====================================================================
+// ●ポケモンセンターp01
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_heal_p01
+msg_heal_p01:
+	//.byte	o_,so_,ku_,ma_,de_,spc_,o_,tu_,ka_,re_,sa_,ma_,de_,su_,gyoe_
+	.byte	o_,tu_,ka_,re_,sa_,ma_,de_,su_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,SE_,N_,TA_,bou_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,ha_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	ta_,i_,ri_,yyo_,ku_,spc_,ka_,i_,hu_,ku_,wo_,spc_,si_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	ya_,su_,ma_,se_,te_,spc_,a_,ge_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// 
+// ●ポケモンセンターp03
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_heal_p03
+msg_heal_p03:
+	.byte	ma_,ta_,no_
+	.byte	CR_
+	.byte	go_,ri_,yo_,u_,wo_,spc_,o_,ma_,ti_,spc_,si_,te_,ma_,su_,gyoe_
+	.byte	EOM_
+//
+// ●ポケモンセンターp04
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_heal_p04
+msg_heal_p04:
+	.byte	o_,ma_,ti_,do_,o_,sa_,ma_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,a_,zu_,ka_,ri_,spc_,si_,ta_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	mi_,n_,na_,spc_,ge_,n_,ki_,ni_,spc_,na_,ri_,ma_,si_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●ポケモンつうしんクラブ	トレードセンター
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_pc02_01_p01
+msg_pc02_01_p01:
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,DO_,SE_,N_,TA_,bou_,ni_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●ポケモンつうしんクラブ	コロシアム
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_pc02_02_p01
+msg_pc02_02_p01:
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,RO_,SI_,A_,MU_,ni_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●ポケモンつうしんクラブ	タイムカプセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_pc02_03_p01
+msg_pc02_03_p01:
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_
+	.byte	NORMAL_WAIT_
+	.byte	TA_,I_,MU_,KA_,PU_,SE_,RU_,ni_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●フレンドリショップ
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_shop_p01
+msg_shop_p01:
+	.byte	yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ka_,i_,mo_,no_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+//	.GLOBAL	msg_shop_p02
+msg_shop_p02:
+	.byte	ma_,ta_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+//	.GLOBAL	msg_shop_p03
+msg_shop_p03:
+	.byte	yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,ya_,su_,u_,ri_,spc_,de_,su_,yo_,gyoe_
+	.byte	EOM_
+
+//	.GLOBAL	msg_shop_p04
+msg_shop_p04:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,i_,ra_,ttu_,si_,yya_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ka_,i_,mo_,no_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+//====================================================================
+//				アイテム入手
+// ●アイテムゲットメッセージ
+//====================================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_itemget_p01
+msg_itemget_p01:
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,te_,ni_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_itemget_p03
+msg_itemget_p03:
+	.byte	BA_,TTU_,KU_,ga_,spc_,i_,ttu_,pa_,i_,da_,gyoe_
+	.byte	EOM_
+
+//	.GLOBAL	msg_itemget_p05
+msg_itemget_p05:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,I_MSG_,STR_TEMP_BUF1,wo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,PO_,KE_,TTU_,TO_,ni_,spc_,si_,ma_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+//	.GLOBAL	msg_itemget_p06
+msg_itemget_p06:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,I_MSG_,STR_TEMP_BUF1,wo_
+	.byte	CR_
+	.byte	mi_,tu_,ke_,ta_,gyoe_
+	.byte	EOM_
+
+//	.GLOBAL	msg_itemget_p07
+msg_itemget_p07:
+	.byte	za_,n_,ne_,n_,gyoe_
+	.byte	CR_
+	.byte	BA_,TTU_,GU_,ga_,spc_,i_,ttu_,pa_,i_,da_,tenten_,tenten_
+	.byte	EOM_
+
+//====================================================================
+//				グッズ入手
+// ●グッズゲットメッセージ
+//====================================================================
+msg_goodsget_p01:
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,te_,ni_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+msg_goodsget_p02:
+	.byte	za_,n_,ne_,n_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF1,wo_
+	.byte	CR_
+	.byte	i_,re_,ru_,spc_,ba_,si_,yyo_,ga_,spc_,i_,ttu_,pa_,i_,da_,tenten_,tenten_
+	.byte	EOM_
+
+msg_goodsget_p03:
+	.byte	I_MSG_,STR_TEMP_BUF1,ha_
+	.byte	CR_
+	.byte	PA_,SO_,KO_,N_,ni_,spc_,te_,n_,so_,u_,sa_,re_,ta_,gyoe_
+	.byte	EOM_
+//====================================================================
+// ●フレンドリィショップの看板。
+//====================================================================
+	.GLOBAL	msg_kanban_fdshop_01
+msg_kanban_fdshop_01:
+	.byte	be_,n_,ri_,na_,do_,u_,gu_,spc_,i_,ro_,i_,ro_,spc_,a_,ri_,ma_,su_
+	.byte	CR_
+	.byte	kako_,HU_,RE_,N_,DO_,RI_,II_,SI_,YYO_,TTU_,PU_,kakot_
+	.byte	EOM_
+
+
+//====================================================================
+// ●ポケセンの看板。
+//====================================================================
+	.GLOBAL	msg_kanban_pc_01
+msg_kanban_pc_01:
+	.byte	tu_,ka_,re_,ta_,spc_,PO_,KE_,MO_,N_,mo_,spc_,hi_,to_,ya_,su_,mi_,gyoe_
+	.byte	CR_
+	.byte	kako_,PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,kakot_
+	.byte	EOM_
+
+
+//===============================================================
+// メッセージ・アニメテスト
+// ●ポケモントレーナーズスクール
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_test06_p01
+msg_test06_p01:
+	.byte	HU_,HU_,HU_,tenten_,tenten_
+	.byte	EOM_
+
+// 
+	.GLOBAL	msg_test06_p02
+msg_test06_p02:
+	.byte	bu_,tu_,bu_,tu_
+	.byte	EOM_
+
+// 
+	.GLOBAL	msg_test06_p03
+msg_test06_p03:
+	.byte	o_,bou_,gyoe_
+	.byte	EOM_
+
+// 
+	.GLOBAL	msg_test06_p04
+msg_test06_p04:
+	.byte	ki_,yyo_,u_,ha_,spc_,ya_,su_,mi_,spc_,da_,ttu_,ta_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+
+
+//===============================================================
+// メッセージ・アニメテスト
+// ●オダマキ研究所	
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_test10_p02
+msg_test10_p02:
+	//.byte	ku_,sa_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	I_MSG_,STR_TEMP_BUF2,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ga_,spc_,ki_,ni_,spc_,i_,ttu_,ta_,n_,da_,ne_,gyoe_,hate_
+	.byte	EOM_
+
+	.GLOBAL	msg_test10_p07
+msg_test10_p07:
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,ha_,i_,ttu_,te_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+ 
+
+//===============================================================
+// メッセージ・テスト
+// ●育て屋・薬屋
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_zyunbi_01
+msg_zyunbi_01:
+	.byte	zi_,yyu_,n_,bi_,ti_,yyu_,u_,de_,su_,gyoe_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●ＴＶ用ジムリーダー
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_test_gymleader_01
+msg_test_gymleader_01:
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,yo_,u_,spc_,ka_,ri_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,de_,su_,gyoe_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●バトル一家
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_btl_test01
+msg_btl_test01:
+	.byte	TE_,SU_,TO_,spc_,se_,n_,to_,u_,ni_,spc_,ha_,i_,ri_,ma_,su_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●TVがやってないメッセージ
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_test01
+msg_TV_test01:
+/*
+	.byte	o_,mo_,si_,ro_,so_,u_,na_,spc_,ba_,n_,gu_,mi_,ha_
+	.byte	CR_
+	.byte	ya_,ttu_,te_,spc_,na_,sa_,so_,u_,da_
+	.byte	EOM_
+*/
+	.byte	I_MSG_,STR_TEMP_BUF0,ga_,spc_,su_,ki_,so_,u_,na_,spc_,ba_,n_,gu_,mi_,wo_,ya_,ttu_,te_,ru_,gyoe_
+	.byte	CR_
+	.byte	tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,ki_,wo_,spc_,i_,so_,ga_,na_,ki_,yya_,gyoe_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●コトキ少年
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_field_t102_test01
+msg_field_t102_test01:
+	.byte	ki_,yyo_,u_,ha_,spc_,na_,ni_,si_,te_,spc_,a_,so_,bo_,ttu_,ka_,na_,gyoe_
+	.byte	EOM_
+
+//===============================================================
+// エレベーター
+//===============================================================
+// ●ミナモ　デパートへ　ようこそ！▼
+// ●なんかいへ　いきますか？
+	.GLOBAL	msg_elevator_p02
+msg_elevator_p02:
+	.byte	MI_,NA_,MO_,spc_,DE_,PA_,bou_,TO_,he_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,ka_,i_,he_,spc_,i_,ki_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●バトルタワー
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+//バトルタワーに連れて行ってくれる
+	.GLOBAL	msg_tower_go
+msg_tower_go:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,WA_,bou_,PU_,si_,ma_,su_
+	.byte	EOM_
+
+//ミナモに連れて行ってくれる
+	.GLOBAL	msg_c102_go
+msg_c102_go:
+	.byte	MI_,NA_,MO_,ni_,spc_,WA_,bou_,PU_,si_,ma_,su_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●サイクリングロード(削除予定)
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_cycle_time
+msg_cycle_time:
+	.byte	TA_,I_,MU_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●殿堂入り呼び出し(削除予定)
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_dendou_call
+msg_dendou_call:
+	.byte	de_,n_,do_,u_,i_,ri_,ga_,spc_,yo_,ba_,re_,ma_,su_
+	.byte	EOM_
+
+//===============================================================
+// メッセージ・テスト
+// ●さばくに入れないメッセージ
+//===============================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+//	.GLOBAL	msg_sabaku_back
+msg_sabaku_back:
+	.byte	sa_,ba_,ku_,no_,spc_,su_,na_,a_,ra_,si_,ga_,spc_,hi_,do_,ku_,te_
+	.byte	CR_
+	.byte	sa_,ki_,ni_,spc_,su_,su_,me_,na_,i_,gyoe_
+	.byte	EOM_
+
+//===============================================================
+//	便利ボタンに登録されていない場合
+//===============================================================
+	.GLOBAL	msg_benri_item_no
+msg_benri_item_no:
+	.byte	BA_,TTU_,GU_,ni_,spc_,i_,re_,te_,a_,ru_,spc_,do_,u_,gu_,wo_
+	.byte	CR_
+	.byte	be_,n_,ri_,BO_,TA_,N_,ni_,spc_,to_,u_,ro_,ku_,spc_,de_,ki_,ma_,su_
+	.byte	EOM_
+
+
+
+// ●サポートのパソコン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_paso_no_watch
+msg_paso_no_watch:
+	.byte	PA_,SO_,KO_,N_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,ko_,u_,za_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ME_,bou_,RU_,ga_,spc_,ki_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,o_,bo_,e_,ra_,re_,ru_,spc_,wa_,za_,ha_,spc_,n4_,tu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,n_,na_,spc_,wa_,za_,wo_,spc_,o_,bo_,e_,sa_,se_,ru_,ka_,de_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,zi_,tu_,ri_,yyo_,ku_,ga_,spc_,to_,wa_,re_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+
+// ●パソコン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pasokon1_watch
+msg_pasokon1_watch:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,PA_,SO_,KO_,N_,no_
+	.byte	CR_
+	.byte	SU_,I_,TTU_,TI_,wo_,spc_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●その後、メニューウインドウを表示。
+// ●パソコン使用時の処理へ
+
+//====================================================================
+// ●タネブレンダーキャンセルメッセージ
+//====================================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_blend_common_end
+msg_blend_common_end:
+	.byte	tu_,u_,si_,n_,ha_,spc_,KI_,YYA_,N_,SE_,RU_,sa_,re_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+//====================================================================
+//ポケモン取得時メッセージ
+//====================================================================
+// ■□□□□□□□□□□□□□□□□□□□□■
+msg_nickname_yes_no:
+	.byte	mo_,ra_,ttu_,ta_,spc_,I_MSG_,STR_TEMP_BUF1,ni_
+	.byte	CR_
+	.byte	NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,ma_,su_,ka_,hate_
+	.byte	EOM_
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+
+//====================================================================
+//	毒状態での瀕死・ゲームオーバーのメッセージ
+//====================================================================
+	.GLOBAL	msg_poison_dead
+msg_poison_dead:
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_
+	.byte	CR_
+	.byte	ti_,ka_,ra_,tu_,ki_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	EOM_
+
+	.GLOBAL	msg_all_dead
+msg_all_dead:
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,te_,mo_,to_,ni_,ha_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,e_,ru_,PO_,KE_,MO_,N_,ga_,spc_,mo_,u_,i_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_
+	.byte	me_,no_,ma_,e_,ga_,spc_,ma_,ttu_,ku_,ra_,ni_,spc_,na_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+
+
+

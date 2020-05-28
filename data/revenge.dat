@@ -1,0 +1,573 @@
+/**********************************************************************/
+/*  再戦トレーナーデータ                                              */
+/*  ※このソースはコンバータが自動生成したものです                    */
+/*                                                             taya   */
+/**********************************************************************/
+#ifndef _REVENGE_DAT_
+#define _REVENGE_DAT_
+
+const REVENGE_DATA RevengeDataTbl[]={
+	{
+		{
+			AROMA_02,
+			AROMA_05,
+			AROMA_06,
+			AROMA_07,
+			AROMA_08,
+		},
+		FIELD, FIELD_R118
+	},
+	{
+		{
+			ISEKI_01,
+			ISEKI_04,
+			ISEKI_05,
+			ISEKI_06,
+			ISEKI_07,
+		},
+		FIELD, FIELD_R111
+	},
+	{
+		{
+			UKIWAW_01,
+			UKIWAW_04,
+			UKIWAW_05,
+			UKIWAW_06,
+			UKIWAW_07,
+		},
+		FIELD, FIELD_R109
+	},
+	{
+		{
+			UKIWAM_01,
+			UKIWAM_04,
+			UKIWAM_05,
+			UKIWAM_06,
+			UKIWAM_07,
+		},
+		FIELD, FIELD_R109
+	},
+	{
+		{
+			ANEOTOUTO_02,
+			ANEOTOUTO_03,
+			ANEOTOUTO_04,
+			ANEOTOUTO_05,
+			ANEOTOUTO_06,
+		},
+		FIELD, FIELD_R124
+	},
+	{
+		{
+			ELITEW_06,
+			ELITEW_13,
+			ELITEW_14,
+			ELITEW_15,
+			ELITEW_16,
+		},
+		FIELD, FIELD_R111
+	},
+	{
+		{
+			ELITEM_08,
+			ELITEM_14,
+			ELITEM_15,
+			ELITEM_16,
+			ELITEM_17,
+		},
+		FIELD, FIELD_R111
+	},
+	{
+		{
+			OKARUTO_04,
+			OKARUTO_06,
+			OKARUTO_07,
+			OKARUTO_08,
+			OKARUTO_09,
+		},
+		CAVE, CAVE_D0806
+	},
+	{
+		{
+			PRINCESS_01,
+			PRINCESS_07,
+			PRINCESS_08,
+			PRINCESS_09,
+			PRINCESS_10,
+		},
+		FIELD, FIELD_R104
+	},
+	{
+		{
+			SEXYW_04,
+			SEXYW_09,
+			SEXYW_10,
+			SEXYW_11,
+			SEXYW_12,
+		},
+		FIELD, FIELD_R121
+	},
+	{
+		{
+			PRINCE_01,
+			PRINCE_04,
+			PRINCE_05,
+			PRINCE_06,
+			PRINCE_07,
+		},
+		FIELD, FIELD_R104
+	},
+	{
+		{
+			MONSTERM_01,
+			MONSTERM_05,
+			MONSTERM_06,
+			MONSTERM_07,
+			MONSTERM_08,
+		},
+		FIELD, FIELD_R114
+	},
+	{
+		{
+			SWIMMERM_05,
+			SWIMMERM_25,
+			SWIMMERM_26,
+			SWIMMERM_27,
+			SWIMMERM_28,
+		},
+		FIELD, FIELD_R107
+	},
+	{
+		{
+			KARATE_05,
+			KARATE_06,
+			KARATE_07,
+			KARATE_08,
+			KARATE_09,
+		},
+		FIELD, FIELD_R115
+	},
+	{
+		{
+			GUITARIST_06,
+			GUITARIST_07,
+			GUITARIST_08,
+			GUITARIST_09,
+			GUITARIST_10,
+		},
+		FIELD, FIELD_R118
+	},
+	{
+		{
+			CAMPF_06,
+			CAMPF_07,
+			CAMPF_08,
+			CAMPF_09,
+			CAMPF_10,
+		},
+		FIELD, FIELD_R114
+	},
+	{
+		{
+			CAMPB_06,
+			CAMPB_09,
+			CAMPB_10,
+			CAMPB_11,
+			CAMPB_12,
+		},
+		CAVE, CAVE_D0702
+	},
+	{
+		{
+			GOLD_01,
+			GOLD_02,
+			GOLD_03,
+			GOLD_04,
+			GOLD_05,
+		},
+		CAVE, CAVE_D0102
+	},
+	{
+		{
+			MUSHIMASTER_04,
+			MUSHIMASTER_06,
+			MUSHIMASTER_07,
+			MUSHIMASTER_08,
+			MUSHIMASTER_09,
+		},
+		FIELD, FIELD_R120
+	},
+	{
+		{
+			ESPM_07,
+			ESPM_08,
+			ESPM_09,
+			ESPM_10,
+			ESPM_11,
+		},
+		FIELD, FIELD_R123
+	},
+	{
+		{
+			ESPW_07,
+			ESPW_08,
+			ESPW_09,
+			ESPW_10,
+			ESPW_11,
+		},
+		FIELD, FIELD_R123
+	},
+	{
+		{
+			GENTLEMAN_01,
+			GENTLEMAN_04,
+			GENTLEMAN_05,
+			GENTLEMAN_06,
+			GENTLEMAN_07,
+		},
+		FIELD, FIELD_R121
+	},
+	{
+		{
+			SCHOOLW_01,
+			SCHOOLW_03,
+			SCHOOLW_04,
+			SCHOOLW_05,
+			SCHOOLW_06,
+		},
+		FIELD, FIELD_R116
+	},
+	{
+		{
+			SCHOOLM_01,
+			SCHOOLM_04,
+			SCHOOLM_05,
+			SCHOOLM_06,
+			SCHOOLM_07,
+		},
+		FIELD, FIELD_R116
+	},
+	{
+		{
+			SENPAIKOUHAI_02,
+			SENPAIKOUHAI_03,
+			SENPAIKOUHAI_04,
+			SENPAIKOUHAI_05,
+			SENPAIKOUHAI_06,
+		},
+		FIELD, FIELD_R117
+	},
+	{
+		{
+			DAISUKIW_04,
+			DAISUKIW_05,
+			DAISUKIW_06,
+			DAISUKIW_07,
+			DAISUKIW_08,
+		},
+		FIELD, FIELD_R110
+	},
+	{
+		{
+			DAISUKIM_02,
+			DAISUKIM_04,
+			DAISUKIM_05,
+			DAISUKIM_06,
+			DAISUKIM_07,
+		},
+		FIELD, FIELD_R103
+	},
+	{
+		{
+			EXPERTM_01,
+			EXPERTM_02,
+			EXPERTM_03,
+			EXPERTM_04,
+			EXPERTM_05,
+		},
+		FIELD, FIELD_R115
+	},
+	{
+		{
+			EXPERTW_02,
+			EXPERTW_03,
+			EXPERTW_04,
+			EXPERTW_05,
+			EXPERTW_06,
+		},
+		CAVE, CAVE_D0701
+	},
+	{
+		{
+			TANPAN_01,
+			TANPAN_11,
+			TANPAN_12,
+			TANPAN_13,
+			TANPAN_14,
+		},
+		FIELD, FIELD_R102
+	},
+	{
+		{
+			FISHING_04,
+			FISHING_11,
+			FISHING_12,
+			FISHING_13,
+			FISHING_14,
+		},
+		FIELD, FIELD_R106
+	},
+	{
+		{
+			ATHLETEBW_01,
+			ATHLETEBW_03,
+			ATHLETEBW_04,
+			ATHLETEBW_05,
+			ATHLETEBW_06,
+		},
+		FIELD, FIELD_R110
+	},
+	{
+		{
+			ATHLETEBM_03,
+			ATHLETEBM_04,
+			ATHLETEBM_05,
+			ATHLETEBM_06,
+			ATHLETEBM_07,
+		},
+		FIELD, FIELD_R110
+	},
+	{
+		{
+			ATHLETESM_03,
+			ATHLETESM_06,
+			ATHLETESM_07,
+			ATHLETESM_08,
+			ATHLETESM_09,
+		},
+		FIELD, FIELD_R128
+	},
+	{
+		{
+			ATHLETESW_04,
+			ATHLETESW_06,
+			ATHLETESW_07,
+			ATHLETESW_08,
+			ATHLETESW_09,
+		},
+		FIELD, FIELD_R128
+	},
+	{
+		{
+			ATHLETERW_01,
+			ATHLETERW_02,
+			ATHLETERW_03,
+			ATHLETERW_04,
+			ATHLETERW_05,
+		},
+		FIELD, FIELD_R117
+	},
+	{
+		{
+			ATHLETERM_01,
+			ATHLETERM_02,
+			ATHLETERM_03,
+			ATHLETERM_04,
+			ATHLETERM_05,
+		},
+		FIELD, FIELD_R117
+	},
+	{
+		{
+			DRAGON_01,
+			DRAGON_02,
+			DRAGON_03,
+			DRAGON_04,
+			DRAGON_05,
+		},
+		CAVE, CAVE_D0102
+	},
+	{
+		{
+			BIRD_09,
+			BIRD_12,
+			BIRD_13,
+			BIRD_14,
+			BIRD_15,
+		},
+		FIELD, FIELD_R120
+	},
+	{
+		{
+			SHINOBI_05,
+			SHINOBI_07,
+			SHINOBI_08,
+			SHINOBI_09,
+			SHINOBI_10,
+		},
+		FIELD, FIELD_R113
+	},
+	{
+		{
+			BATTLEG_03,
+			BATTLEG_06,
+			BATTLEG_07,
+			BATTLEG_08,
+			BATTLEG_09,
+		},
+		FIELD, FIELD_R115
+	},
+	{
+		{
+			PARASOL_01,
+			PARASOL_04,
+			PARASOL_05,
+			PARASOL_06,
+			PARASOL_07,
+		},
+		FIELD, FIELD_R113
+	},
+	{
+		{
+			SWIMMERW_09,
+			SWIMMERW_25,
+			SWIMMERW_26,
+			SWIMMERW_27,
+			SWIMMERW_28,
+		},
+		FIELD, FIELD_R124
+	},
+	{
+		{
+			PICNICG_06,
+			PICNICG_09,
+			PICNICG_10,
+			PICNICG_11,
+			PICNICG_12,
+		},
+		CAVE, CAVE_D0702
+	},
+	{
+		{
+			FUTAGO_01,
+			FUTAGO_02,
+			FUTAGO_07,
+			FUTAGO_08,
+			FUTAGO_09,
+		},
+		FIELD, FIELD_R103
+	},
+	{
+		{
+			SAILOR_03,
+			SAILOR_08,
+			SAILOR_09,
+			SAILOR_10,
+			SAILOR_11,
+		},
+		FIELD, FIELD_R125
+	},
+	{
+		{
+			COLLECTOR_01,
+			COLLECTOR_04,
+			COLLECTOR_05,
+			COLLECTOR_06,
+			COLLECTOR_07,
+		},
+		FIELD, FIELD_R110
+	},
+	{
+		{
+			BREEDERW_01,
+			BREEDERW_04,
+			BREEDERW_05,
+			BREEDERW_06,
+			BREEDERW_07,
+		},
+		FIELD, FIELD_R117
+	},
+	{
+		{
+			BREEDERM_01,
+			BREEDERM_04,
+			BREEDERM_05,
+			BREEDERM_06,
+			BREEDERM_07,
+		},
+		FIELD, FIELD_R117
+	},
+	{
+		{
+			RANGERW_01,
+			RANGERW_04,
+			RANGERW_05,
+			RANGERW_06,
+			RANGERW_07,
+		},
+		FIELD, FIELD_R119
+	},
+	{
+		{
+			RANGERM_01,
+			RANGERM_04,
+			RANGERM_05,
+			RANGERM_06,
+			RANGERM_07,
+		},
+		FIELD, FIELD_R119
+	},
+	{
+		{
+			MINI_02,
+			MINI_05,
+			MINI_06,
+			MINI_07,
+			MINI_08,
+		},
+		FIELD, FIELD_R104
+	},
+	{
+		{
+			MUSHI_07,
+			MUSHI_08,
+			MUSHI_09,
+			MUSHI_10,
+			MUSHI_11,
+		},
+		CAVE, CAVE_D0601
+	},
+	{
+		{
+			MOUNT_02,
+			MOUNT_11,
+			MOUNT_12,
+			MOUNT_13,
+			MOUNT_14,
+		},
+		FIELD, FIELD_R112
+	},
+	{
+		{
+			LOVELOVE_03,
+			LOVELOVE_04,
+			LOVELOVE_05,
+			LOVELOVE_06,
+			LOVELOVE_07,
+		},
+		CAVE, CAVE_D1709
+	},
+	{
+		{
+			MITSURU_03,
+			MITSURU_04,
+			MITSURU_05,
+			MITSURU_06,
+			REVENGE_TRAINER_END,
+		},
+		CAVE, CAVE_D1301
+	},
+};
+
+
+#endif

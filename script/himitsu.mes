@@ -1,0 +1,81 @@
+// ●基地を作れる技マシンをくれる人
+// 「ひみつのちから」をくれる人
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_sp_base
+msg_boy1_01_p01_sp_base:
+	.byte	e_,ttu_,spc_,na_,ni_,wo_,spc_,si_,te_,ru_,ka_,ttu_,te_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,wo_,spc_,tu_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,ko_,ni_,spc_,bo_,ku_,da_,ke_,no_,spc_,he_,ya_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ku_,ro_,u_,to_,spc_,o_,mo_,ttu_,te_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,ttu_,spc_,ko_,no_,spc_,wa_,za_,MA_,SI_,N_,wo_,spc_,a_,ge_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	ki_,mi_,mo_,spc_,tu_,ku_,ttu_,te_,spc_,mi_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→バッグに技マシン「ひみつのちから」を加えて、☆「はい」を選択へ
+// ●「いいえ」の場合　→☆「いいえ」選択へ
+
+// ☆「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p02_sp_base
+msg_boy1_01_p02_sp_base:
+	.byte	TU_,RU_,ga_,spc_,o_,ti_,so_,u_,na_,spc_,ki_,ni_,mu_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	hi_,mi_,tu_,no_,ti_,ka_,ra_,wo_,spc_,tu_,ka_,ttu_,te_,go_,ra_,n_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	TU_,RU_,ga_,spc_,o_,ti_,te_,ki_,te_,spc_,ki_,no_,u_,e_,ni_,spc_,no_,bo_,re_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ne_,spc_,u_,e_,ni_,ha_,spc_,hi_,ro_,i_,he_,ya_,ga_,spc_,a_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	bo_,ku_,ha_,spc_,so_,ko_,ni_,spc_,su_,ki_,na_,mo_,no_,wo_,spc_,o_,ku_,n_,da_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,bu_,n_,da_,ke_,no_,spc_,hi_,mi_,tu_,no_,he_,ya_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	so_,u_,spc_,hi_,mi_,tu_,ki_,ti_,sa_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,tu_,ku_,ru_,to_,spc_,i_,i_,yo_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,so_,u_,spc_,hi_,mi_,tu_,ki_,ti_,wo_,spc_,tu_,ku_,re_,ru_,spc_,ba_,si_,yyo_,ha_
+	.byte	CR_
+	.byte	ki_,no_,u_,e_,spc_,da_,ke_,zi_,yya_,spc_,na_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,i_,sa_,na_,spc_,ku_,bo_,mi_,ga_,a_,ru_,spc_,ka_,be_,na_,n_,ka_,ni_,mo_
+	.byte	CR_
+	.byte	hi_,mi_,tu_,no_,ti_,ka_,ra_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,mi_,ru_,to_,i_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,mo_,spc_,ho_,ka_,no_,spc_,ba_,si_,yyo_,wo_,spc_,sa_,ga_,si_,te_,spc_,mi_,ru_,ne_
+	.byte	CR_
+	.byte	so_,re_,zi_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ☆「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p03_sp_base
+msg_boy1_01_p03_sp_base:
+	.byte	so_,u_,spc_,i_,ra_,na_,i_,n_,da_,tenten_
+	.byte	CR_
+	.byte	ho_,si_,ku_,na_,ttu_,ta_,ra_,spc_,ma_,ta_,spc_,ko_,e_,ka_,ke_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ☆技マシンが一杯のとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p04_sp_base
+msg_boy1_01_p04_sp_base:
+	.byte	a_,re_,hate_
+	.byte	CR_
+	.byte	so_,re_,i_,zi_,yyo_,u_,ha_,spc_,mo_,te_,na_,i_,spc_,mi_,ta_,i_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ko_,n_,do_,spc_,to_,ri_,ni_,spc_,ki_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

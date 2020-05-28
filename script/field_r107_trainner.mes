@@ -1,0 +1,273 @@
+// ▼107----------------------------------
+// ●かいパンやろう０４：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_04_01
+msg_swimmerm_04_01:
+	.byte	mu_,ni_,yya_,mu_,ni_,yya_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,mi_,ni_,spc_,yu_,ra_,re_,te_,ta_,ra_,spc_,ki_,mo_,ti_,yo_,ku_,na_,ttu_,te_
+	.byte	CR_
+	.byte	u_,ttu_,ka_,ri_,spc_,ne_,te_,si_,ma_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう０４：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_04_02
+msg_swimmerm_04_02:
+	.byte	a_,ha_,ha_,spc_,ma_,ke_,ta_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,ne_,ma_,su_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう０４：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_04_03
+msg_swimmerm_04_03:
+	.byte	u_,mi_,ni_,spc_,u_,ka_,n_,de_,spc_,na_,mi_,ni_,spc_,yu_,ra_,re_,te_,ru_,to_
+	.byte	CR_
+	.byte	hu_,ka_,hu_,ka_,no_,spc_,BE_,TTU_,DO_,de_,spc_,ne_,te_,ru_,spc_,mi_,ta_,i_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼107----------------------------------
+// ●かいパンやろう０５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_05_01
+msg_swimmerm_05_01:
+	.byte	u_,mi_,ha_,spc_,O_,RE_,no_,spc_,ni_,wa_,spc_,mi_,ta_,i_,na_,spc_,mo_,no_,gyoe_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,yo_,u_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_05_02
+msg_swimmerm_05_02:
+	.byte	HO_,bou_,MU_,GU_,RA_,U_,N_,DO_,de_,spc_,ma_,ke_,ta_,tenten_,tenten_
+	.byte	CR_
+	.byte	SI_,YYO_,TTU_,KU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_05_03
+msg_swimmerm_05_03:
+	.byte	o_,o_,ki_,na_,spc_,YU_,ME_,wo_,spc_,i_,ttu_,pa_,i_,spc_,tu_,me_,te_,bou_
+	.byte	CR_
+	.byte	de_,ttu_,ka_,i_,spc_,u_,mi_,wo_,spc_,hi_,to_,o_,yo_,gi_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,aa_,te_,spc_,ma_,da_,ma_,da_,spc_,o_,yo_,gu_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼107----------------------------------
+// ●かいパンやろう０５（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_05_04
+msg_swimmerm_05_04:
+	.byte	de_,ttu_,ka_,i_,spc_,u_,mi_,wo_,spc_,o_,yo_,i_,de_,i_,ta_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,su_,ttu_,go_,ku_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう０５（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_05_05
+msg_swimmerm_05_05:
+	.byte	SI_,YYO_,TTU_,KU_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,ga_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,o_,re_,ga_,spc_,yo_,wa_,i_,ma_,ma_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう０５（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_05_06
+msg_swimmerm_05_06:
+	.byte	ta_,ta_,ka_,i_,no_,spc_,na_,ka_,de_,spc_,o_,bo_,e_,ta_,ko_,to_,ga_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,to_,si_,te_,no_,spc_,tu_,yo_,sa_,ni_,spc_,tu_,na_,ga_,ru_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	de_,ttu_,ka_,i_,spc_,u_,mi_,ga_,spc_,so_,u_,spc_,i_,ttu_,te_,i_,ta_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼107----------------------------------
+// ●ビキニのおねえさん０４：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_04_01
+msg_swimmerw_04_01:
+	.byte	MU_,RO_,TA_,U_,N_,spc_,ttu_,te_,i_,u_
+	.byte	CR_
+	.byte	ti_,i_,sa_,na_,spc_,ma_,ti_,wo_,spc_,si_,ttu_,te_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん０４：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_04_02
+msg_swimmerw_04_02:
+	.byte	YA_,DA_,spc_,mo_,bou_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん０４：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_04_03
+msg_swimmerw_04_03:
+	.byte	MU_,RO_,TA_,U_,N_,no_,spc_,si_,yyu_,u_,ka_,i_,zi_,yyo_,de_
+	.byte	CR_
+	.byte	hu_,si_,gi_,na_,spc_,ko_,to_,ba_,ga_,spc_,ha_,ya_,ttu_,te_,spc_,i_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼107----------------------------------
+// ●ビキニのおねえさん０５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_05_01
+msg_swimmerw_05_01:
+	.byte	wa_,ta_,si_,to_,spc_,si_,yyo_,u_,bu_,ga_,spc_,si_,ta_,i_,no_,hate_
+	.byte	CR_
+	.byte	i_,i_,wa_,gyoe_,spc_,a_,i_,te_,ni_,spc_,na_,ttu_,te_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_05_02
+msg_swimmerw_05_02:
+	.byte	wa_,ta_,si_,zi_,yya_,spc_,a_,i_,te_,ni_,spc_,na_,ra_,na_,ka_,ttu_,ta_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_05_03
+msg_swimmerw_05_03:
+	.byte	a_,na_,ta_,spc_,ma_,da_,ma_,da_,spc_,tu_,yo_,ku_,spc_,na_,ri_,so_,u_,ne_
+	.byte	CR_
+	.byte	wa_,ta_,si_,mo_,spc_,ga_,n_,ba_,ro_,u_,ttu_,to_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼107----------------------------------
+// ●ユミ（大人のお姉さん）に話しかけたとき
+// ●うみきょうだい０７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_01
+msg_aneotouto_07_01:
+	.byte	YU_,MI_,kako2_,a_,ta_,si_,ta_,ti_,spc_,ki_,yyo_,u_,da_,i_,spc_,hu_,ta_,ri_,de_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,wo_,spc_,sa_,se_,te_,mo_,ra_,u_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うみきょうだい０７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_02
+msg_aneotouto_07_02:
+	.byte	YU_,MI_,kako2_,su_,go_,i_,wa_
+	.byte	CR_
+	.byte	tu_,yo_,sa_,no_,spc_,RE_,BE_,RU_,ga_,spc_,ti_,ga_,u_,no_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うみきょうだい０７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_03
+msg_aneotouto_07_03:
+	.byte	YU_,MI_,kako2_,a_,na_,ta_,ha_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	u_,mi_,ni_,spc_,a_,so_,bi_,ni_,spc_,i_,ku_,yo_,u_,na_
+	.byte	SCROLL_WAIT_
+	.byte	o_,to_,mo_,da_,ti_,spc_,i_,ru_,no_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うみきょうだい０７：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_04
+msg_aneotouto_07_04:
+	.byte	YU_,MI_,kako2_,A_,TA_,SI_,ta_,ti_,to_,spc_,ta_,ta_,ka_,u_,na_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,mo_,ttu_,to_,spc_,tu_,re_,te_,ki_,na_,sa_,i_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼107----------------------------------
+// ●シン（うきわボーイ）に話しかけたとき
+// ●うみきょうだい０７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_05
+msg_aneotouto_07_05:
+	.byte	SI_,N_,kako2_,i_,tu_,mo_,spc_,ki_,yyo_,u_,da_,i_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,si_,te_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,i_,ttu_,tu_,mo_,spc_,o_,re_,ga_,spc_,ma_,ke_,ru_,ke_,do_
+	.byte	CR_
+	.byte	n2_,ta_,i_,n2_,na_,ra_,spc_,ki_,mi_,ni_,spc_,ka_,te_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うみきょうだい０７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_06
+msg_aneotouto_07_06:
+	.byte	SI_,N_,kako2_,hi_,yya_,bou_
+	.byte	CR_
+	.byte	tu_,yo_,sa_,no_,spc_,RE_,BE_,RU_,ga_,spc_,ti_,ga_,i_,su_,gi_,ru_,ya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うみきょうだい０７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_07
+msg_aneotouto_07_07:
+	.byte	SI_,N_,kako2_,o_,re_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	ne_,e_,ti_,yya_,n_,ka_,ra_,spc_,mo_,ra_,ttu_,te_,spc_,so_,da_,te_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	da_,i_,zi_,na_,spc_,a_,i_,bo_,u_,spc_,na_,n_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うみきょうだい０７：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aneotouto_07_08
+msg_aneotouto_07_08:
+	.byte	SI_,N_,kako2_,O_,RE_,ra_,to_,spc_,ta_,ta_,ka_,u_,na_,ra_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,PO_,KE_,MO_,N_,spc_,tu_,re_,te_,ki_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

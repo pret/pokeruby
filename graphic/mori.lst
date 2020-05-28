@@ -1,0 +1,19 @@
+;==========================================================
+;
+;	森君用のグラフィック圧縮リスト
+;
+;==========================================================
+b_r.sch			0	2000	BG2CGX
+blendbak.sch	0	2000	BG2CGX
+blendbak.ssc	0	0800	BG2MAP
+s_uchu.scl		0	0020	COLOR
+s_uchu.sch		0	0400	BG2CGX
+s_uchu.ssc		0	0800	BG2MAP
+s_hataki.scl	0	0020	COLOR
+s_hataki.sch	0	1000	OBJCGX
+b_mist.ssc		0	0800	BG1MAP
+s_wball.scl		0	0020	COLOR
+s_wball.sch		0	0200	OBJCGX
+skowakao1.ssc   0   0800    BG1MAP
+skowakao2.ssc   0   0800    BG1MAP
+skowakao3.ssc   0   0800    BG1MAP

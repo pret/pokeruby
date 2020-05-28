@@ -1,0 +1,64 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆ハジツゲ：スーパーランク：ロビー
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ロビーうろつき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya2_01_p01_t105_r0101
+msg_boya2_01_p01_t105_r0101:
+	.byte	bo_,ku_,no_,spc_,PO_,KE_,MO_,N_,spc_,a_,so_,ko_,no_,spc_,ka_,be_,ni_
+	.byte	CR_
+	.byte	ni_,ga_,o_,e_,ga_,spc_,ha_,ttu_,te_,spc_,a_,ttu_,ta_,n_,da_,spc_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,ti_,ga_,u_,spc_,PO_,KE_,MO_,N_,no_,spc_,ya_,tu_,ni_
+	.byte	CR_
+	.byte	ka_,wa_,ttu_,ti_,yya_,ttu_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ga_,n_,ba_,ttu_,te_,spc_,bo_,ku_,no_,spc_,HA_,NA_,ti_,yya_,n_,wo_
+	.byte	CR_
+	.byte	ha_,ttu_,te_,spc_,mo_,ra_,u_,zo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ロビーうろつき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p01_t105_r0101
+msg_schoolw1_01_p01_t105_r0101:
+	.byte	PO_,RO_,TTU_,KU_,ha_,spc_,tu_,ku_,ttu_,te_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,do_,spc_,i_,ttu_,pa_,i_,spc_,ki_,no_,mi_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,o_,i_,de_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ホールの、絵のそばに固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_artist_01_p01_t105_r0101
+msg_artist_01_p01_t105_r0101:
+	.byte	ko_,ko_,ni_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	e_,ga_,spc_,ka_,za_,ttu_,te_,spc_,a_,ru_,da_,ro_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,spc_,bo_,ku_,ga_,spc_,ka_,i_,te_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_,ra_
+	.byte	CR_
+	.byte	ha_,ri_,ki_,ttu_,te_,spc_,ka_,ka_,se_,te_,spc_,mo_,ra_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・主人公、優勝してロビーに戻ってきた時のみ、
+// 　ロビーから外に一度でも出るまでこのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_artist_01_p02_t105_r0101
+msg_artist_01_p02_t105_r0101:
+	.byte	ya_,a_,spc_,yu_,u_,si_,yyo_,u_,spc_,o_,me_,de_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,ni_,ga_,o_,e_,ha_
+	.byte	CR_
+	.byte	ko_,ko_,ni_,spc_,BA_,TTU_,TI_,RI_,spc_,ka_,za_,ttu_,te_,spc_,o_,i_,ta_,ka_,ra_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

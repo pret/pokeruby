@@ -1,0 +1,13 @@
+// ●到着したトラックの荷台。荷物を調べたときのメッセージ。
+// ●増田さんからの指示により、下記以外は削除します。
+
+// ●白い段ボール箱（すべて共通）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_nimotsu_01_p01_sp_truck
+msg_nimotsu_01_p01_sp_truck:
+	.byte	ha_,ko_,ni_,ha_,spc_,PO_,KE_,MO_,N_,no_,spc_,e_,ga_,spc_,ka_,i_,te_,a_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,MA_,bou_,KU_,no_,spc_,hi_,ttu_,ko_,si_,ya_,sa_,n_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

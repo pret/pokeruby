@@ -1,0 +1,59 @@
+// ●ミナモシティ　デパート３Ｆ
+
+
+// ●スポーツマン１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sportsm1_01_p01_c106_r1103
+msg_sportsm1_01_p01_c106_r1103:
+	.byte	te_,ttu_,to_,ri_,ba_,ya_,ku_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,yo_,ku_,su_,ru_,na_,ra_
+	.byte	CR_
+	.byte	do_,u_,gu_,wo_,spc_,a_,ta_,e_,ru_,no_,ga_,spc_,i_,ti_,ba_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TA_,U_,RI_,N_,na_,ra_,spc_,ko_,u_,ge_,ki_,ri_,yyo_,ku_,spc_,A_,TTU_,PU_,gyoe_
+	.byte	CR_
+	.byte	RI_,ZO_,TI_,U_,MU_,na_,ra_,spc_,to_,ku_,ko_,u_,spc_,A_,TTU_,PU_,spc_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c106_r1103
+msg_middlem2_01_p01_c106_r1103:
+	.byte	zi_,yyo_,u_,bu_,na_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	na_,ttu_,te_,spc_,ho_,si_,i_,ka_,ra_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	BU_,RO_,MU_,HE_,KI_,SI_,N_,de_,spc_,bo_,u_,gi_,yyo_,ri_,yyo_,ku_,wo_,spc_,a_,ge_,ru_,ka_
+	.byte	CR_
+	.byte	KI_,TO_,SA_,N_,de_,spc_,to_,ku_,bo_,u_,wo_,spc_,a_,ge_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ma_,spc_,ka_,n_,ga_,e_,te_,i_,ru_,spc_,to_,ko_,ro_,spc_,na_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c106_r1103
+msg_trainerw1_01_p01_c106_r1103:
+	.byte	PO_,KE_,MO_,N_,ni_,ne_
+	.byte	CR_
+	.byte	I_,N_,DO_,ME_,TA_,SI_,N_,wo_,spc_,a_,ge_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	su_,ba_,ya_,sa_,ga_,spc_,a_,ga_,ttu_,ta_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_c106_r1103
+msg_kanban_01_p01_c106_r1103:
+	.byte	ma_,ke_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,hi_,tu_,zi_,yyu_,hi_,n_
+	.byte	CR_
+	.byte	n3_,ka_,i_,spc_,tenten_,tenten_,spc_,BA_,TO_,RU_,spc_,KO_,RE_,KU_,SI_,YYO_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

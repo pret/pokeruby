@@ -1,0 +1,325 @@
+//====================================================================
+//
+//							ＴＶメッセージ
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//					手紙型(ポケモンアンケート)
+//
+//						手紙型(最近の出来事)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_letter_poke[];
+extern const u8 	msg_TV_01_p02_letter_poke[];
+extern const u8 	msg_TV_01_p03_letter_poke[];
+extern const u8 	msg_TV_01_p04_letter_poke[];
+extern const u8 	msg_TV_01_p05_letter_poke[];
+extern const u8 	msg_TV_01_p06_letter_poke[];
+extern const u8 	msg_TV_01_p07_letter_poke[];
+extern const u8 	msg_TV_01_p08_letter_poke[];
+extern const u8 	msg_TV_01_p01_letter_recently[];
+extern const u8 	msg_TV_01_p02_letter_recently[];
+extern const u8 	msg_TV_01_p03_letter_recently[];
+extern const u8 	msg_TV_01_p04_letter_recently[];
+extern const u8 	msg_TV_01_p05_letter_recently[];
+extern const u8 	msg_TV_01_p06_letter_recently[];
+
+const u8 * const msg_letter_poke_buf[]={
+	msg_TV_01_p01_letter_poke,
+	msg_TV_01_p02_letter_poke,
+	msg_TV_01_p03_letter_poke,
+	msg_TV_01_p04_letter_poke,
+	msg_TV_01_p05_letter_poke,
+	msg_TV_01_p06_letter_poke,
+	msg_TV_01_p07_letter_poke,
+	msg_TV_01_p08_letter_poke,
+};
+
+const u8 * const msg_letter_recently_buf[]={
+	msg_TV_01_p01_letter_recently,
+	msg_TV_01_p02_letter_recently,
+	msg_TV_01_p03_letter_recently,
+	msg_TV_01_p04_letter_recently,
+	msg_TV_01_p05_letter_recently,
+	msg_TV_01_p06_letter_recently,
+};
+
+
+//--------------------------------------------------------------------
+//				手紙型(大好きクラブのインタビュー)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_daisukiclub[];
+extern const u8 	msg_TV_01_p02_daisukiclub[];
+extern const u8 	msg_TV_01_p03_daisukiclub[];
+extern const u8 	msg_TV_01_p04_daisukiclub[];
+extern const u8 	msg_TV_01_p05_daisukiclub[];
+
+const u8 * const msg_letter_club_buf[]={
+	msg_TV_01_p01_daisukiclub,
+	msg_TV_01_p02_daisukiclub,
+	msg_TV_01_p03_daisukiclub,
+	msg_TV_01_p04_daisukiclub,
+	msg_TV_01_p05_daisukiclub,
+};
+
+
+//--------------------------------------------------------------------
+//				手紙型(大量発生のインタビュー)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_tairyou[];
+
+const u8 * const msg_letter_generating_buf[]={
+	msg_TV_01_p01_tairyou,
+};
+
+
+//--------------------------------------------------------------------
+//					秘密型(捕まえたポケモンの紹介)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_nickname[];
+extern const u8 	msg_TV_01_p02_nickname[];
+extern const u8 	msg_TV_01_p03_nickname[];
+extern const u8 	msg_TV_01_p04_nickname[];
+extern const u8 	msg_TV_01_p05_nickname[];
+extern const u8 	msg_TV_01_p06_nickname[];
+extern const u8 	msg_TV_01_p07_nickname[];
+extern const u8 	msg_TV_01_p08_nickname[];
+extern const u8 	msg_TV_01_p09_nickname[];
+extern const u8 	msg_TV_01_p10_nickname[];
+extern const u8 	msg_TV_01_p11_nickname[];
+extern const u8 	msg_TV_01_p12_nickname[];
+
+const u8 * const msg_sec_btl_buf[]={
+	msg_TV_01_p01_nickname,
+	msg_TV_01_p02_nickname,
+	msg_TV_01_p03_nickname,
+	msg_TV_01_p04_nickname,
+	msg_TV_01_p05_nickname,
+	msg_TV_01_p06_nickname,
+	msg_TV_01_p07_nickname,
+	msg_TV_01_p08_nickname,
+	msg_TV_01_p09_nickname,
+	msg_TV_01_p10_nickname,
+	msg_TV_01_p11_nickname,
+	msg_TV_01_p12_nickname,
+};
+
+
+//--------------------------------------------------------------------
+//					秘密型(今日の買い物上手)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_buy[];
+extern const u8 	msg_TV_01_p02_buy[];
+extern const u8 	msg_TV_01_p03_buy[];
+extern const u8 	msg_TV_01_p04_buy[];
+extern const u8 	msg_TV_01_p05_buy[];
+extern const u8 	msg_TV_01_p06_buy[];
+extern const u8 	msg_TV_01_p07_buy[];
+extern const u8 	msg_TV_01_p08_buy[];
+extern const u8 	msg_TV_01_p09_buy[];
+extern const u8 	msg_TV_01_p10_buy[];
+extern const u8 	msg_TV_01_p11_buy[];
+extern const u8 	msg_TV_01_p12_buy[];
+extern const u8 	msg_TV_01_p13_buy[];
+
+const u8 * const msg_sec_shop_buf[]={
+	msg_TV_01_p01_buy,
+	msg_TV_01_p02_buy,
+	msg_TV_01_p03_buy,
+	msg_TV_01_p04_buy,
+	msg_TV_01_p05_buy,
+	msg_TV_01_p06_buy,
+	msg_TV_01_p07_buy,
+	msg_TV_01_p08_buy,
+	msg_TV_01_p09_buy,
+	msg_TV_01_p10_buy,
+	msg_TV_01_p11_buy,
+	msg_TV_01_p12_buy,
+	msg_TV_01_p13_buy,
+};
+
+
+//--------------------------------------------------------------------
+//					手紙型(コンテスト)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_contest[];
+extern const u8 	msg_TV_01_p02_contest[];
+extern const u8 	msg_TV_01_p03_contest[];
+extern const u8 	msg_TV_01_p04_contest[];
+extern const u8 	msg_TV_01_p05_contest[];
+extern const u8 	msg_TV_01_p06_contest[];
+extern const u8 	msg_TV_01_p07_contest[];
+extern const u8 	msg_TV_01_p08_contest[];
+extern const u8 	msg_TV_01_p09_contest[];
+
+const u8 * const msg_letter_contest_buf[]={
+	msg_TV_01_p01_contest,
+	msg_TV_01_p02_contest,
+	msg_TV_01_p03_contest,
+	msg_TV_01_p04_contest,
+	msg_TV_01_p05_contest,
+	msg_TV_01_p06_contest,
+	msg_TV_01_p07_contest,
+	msg_TV_01_p08_contest,
+	msg_TV_01_p09_contest,
+};
+
+
+//--------------------------------------------------------------------
+//					手紙型(バトルタワー)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_btlt[];
+extern const u8 	msg_TV_01_p02_btlt[];
+extern const u8 	msg_TV_01_p03_btlt[];
+extern const u8 	msg_TV_01_p04_btlt[];
+extern const u8 	msg_TV_01_p05_btlt[];
+extern const u8 	msg_TV_01_p06_btlt[];
+extern const u8 	msg_TV_01_p07_btlt[];
+extern const u8 	msg_TV_01_p08_btlt[];
+extern const u8 	msg_TV_01_p09_btlt[];
+extern const u8 	msg_TV_01_p10_btlt[];
+extern const u8 	msg_TV_01_p11_btlt[];
+extern const u8 	msg_TV_01_p12_btlt[];
+extern const u8 	msg_TV_01_p13_btlt[];
+extern const u8 	msg_TV_01_p14_btlt[];
+extern const u8 	msg_TV_01_p15_btlt[];
+
+const u8 * const msg_letter_tower_buf[]={
+	msg_TV_01_p01_btlt,
+	msg_TV_01_p02_btlt,
+	msg_TV_01_p03_btlt,
+	msg_TV_01_p04_btlt,
+	msg_TV_01_p05_btlt,
+	msg_TV_01_p06_btlt,
+	msg_TV_01_p07_btlt,
+	msg_TV_01_p08_btlt,
+	msg_TV_01_p09_btlt,
+	msg_TV_01_p10_btlt,
+	msg_TV_01_p11_btlt,
+	msg_TV_01_p12_btlt,
+	msg_TV_01_p13_btlt,
+	msg_TV_01_p14_btlt,
+	msg_TV_01_p15_btlt,
+};
+
+
+//--------------------------------------------------------------------
+//					手紙型(姓名判断氏)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_name_change[];
+extern const u8 	msg_TV_01_p02_name_change[];
+extern const u8 	msg_TV_01_p03_name_change[];
+extern const u8 	msg_TV_01_p04_name_change[];
+extern const u8 	msg_TV_01_p05_name_change[];
+extern const u8 	msg_TV_01_p06_name_change[];
+extern const u8 	msg_TV_01_p07_name_change[];
+extern const u8 	msg_TV_01_p08_name_change[];
+extern const u8 	msg_TV_01_p09_name_change[];
+extern const u8 	msg_TV_01_p10_name_change[];
+extern const u8 	msg_TV_01_p11_name_change[];
+extern const u8 	msg_TV_01_p12_name_change[];
+extern const u8 	msg_TV_01_p13_name_change[];
+extern const u8 	msg_TV_01_p14_name_change[];
+extern const u8 	msg_TV_01_p15_name_change[];
+extern const u8 	msg_TV_01_p16_name_change[];
+extern const u8 	msg_TV_01_p17_name_change[];
+extern const u8 	msg_TV_01_p18_name_change[];
+extern const u8 	msg_TV_01_p19_name_change[];
+
+const u8 * const msg_name_buf[]={
+	msg_TV_01_p01_name_change,
+	msg_TV_01_p02_name_change,
+	msg_TV_01_p03_name_change,
+	msg_TV_01_p04_name_change,
+	msg_TV_01_p05_name_change,
+	msg_TV_01_p06_name_change,
+	msg_TV_01_p07_name_change,
+	msg_TV_01_p08_name_change,
+	msg_TV_01_p09_name_change,
+	msg_TV_01_p10_name_change,
+	msg_TV_01_p11_name_change,
+	msg_TV_01_p12_name_change,
+	msg_TV_01_p13_name_change,
+	msg_TV_01_p14_name_change,
+	msg_TV_01_p15_name_change,
+	msg_TV_01_p16_name_change,
+	msg_TV_01_p17_name_change,
+	msg_TV_01_p18_name_change,
+	msg_TV_01_p19_name_change,
+};
+
+
+//--------------------------------------------------------------------
+//					秘密型(ポケモンゲット失敗)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_get_failed[];
+extern const u8 	msg_TV_01_p02_get_failed[];
+extern const u8 	msg_TV_01_p03_get_failed[];
+extern const u8 	msg_TV_01_p04_get_failed[];
+extern const u8 	msg_TV_01_p05_get_failed[];
+extern const u8 	msg_TV_01_p06_get_failed[];
+extern const u8 	msg_TV_01_p07_get_failed[];
+
+const u8 * const msg_sec_get_failed_buf[]={
+	msg_TV_01_p01_get_failed,
+	msg_TV_01_p02_get_failed,
+	msg_TV_01_p03_get_failed,
+	msg_TV_01_p04_get_failed,
+	msg_TV_01_p05_get_failed,
+	msg_TV_01_p06_get_failed,
+	msg_TV_01_p07_get_failed,
+};
+
+
+//--------------------------------------------------------------------
+//					秘密型(釣りしまくり)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_fish[];
+extern const u8 	msg_TV_01_p02_fish[];
+
+const u8 * const msg_sec_fish_buf[]={
+	msg_TV_01_p01_fish,
+	msg_TV_01_p02_fish,
+};
+
+
+//--------------------------------------------------------------------
+//					秘密型(一日で捕まえた数)
+//--------------------------------------------------------------------
+extern const u8 	msg_TV_01_p01_poke_get[];
+extern const u8 	msg_TV_01_p02_poke_get[];
+extern const u8 	msg_TV_01_p03_poke_get[];
+
+const u8 * const msg_sec_oneday_buf[]={
+	msg_TV_01_p01_poke_get,
+	msg_TV_01_p02_poke_get,
+	msg_TV_01_p03_poke_get,
+};
+
+
+//--------------------------------------------------------------------
+//					インタビュアー＆カメラマン
+//--------------------------------------------------------------------
+extern const u8 msg_TV_01_p01_camera[];
+extern const u8 msg_TV_01_p02_camera[];
+extern const u8 msg_TV_01_p03_camera[];
+extern const u8 msg_TV_01_p04_camera[];
+extern const u8 msg_TV_01_p05_camera[];
+extern const u8 msg_TV_01_p06_camera[];
+extern const u8 msg_TV_01_p07_camera[];
+extern const u8 msg_TV_01_p08_camera[];
+extern const u8 msg_TV_01_p09_camera[];
+
+const u8 * const camera_msg_buf[]={
+			msg_TV_01_p01_camera,
+			msg_TV_01_p02_camera,
+			msg_TV_01_p03_camera,
+			msg_TV_01_p04_camera,
+			msg_TV_01_p05_camera,
+			msg_TV_01_p06_camera,
+			msg_TV_01_p07_camera,
+			msg_TV_01_p08_camera,
+			msg_TV_01_p09_camera,
+};
+
+

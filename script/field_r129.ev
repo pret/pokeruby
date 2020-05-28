@@ -1,0 +1,53 @@
+//====================================================================
+//							field_r129
+//====================================================================
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r129_event_data
+EVENT_DATA_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_athletesm_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESM_05
+	_TRAINER_DATA2	msg_athletesm_05_01
+	_TRAINER_DATA3	msg_athletesm_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletesm_05_03
+	_END
+
+SCRIPT_LABEL	ev_athletesw_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESW_05
+	_TRAINER_DATA2	msg_athletesw_05_01
+	_TRAINER_DATA3	msg_athletesw_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletesw_05_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_29
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_29
+	_TRAINER_DATA2	msg_swimmerm_29_01
+	_TRAINER_DATA3	msg_swimmerm_29_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_29_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_29
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_29
+	_TRAINER_DATA2	msg_swimmerw_29_01
+	_TRAINER_DATA3	msg_swimmerw_29_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_29_03
+	_END
+

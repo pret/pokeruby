@@ -1,0 +1,90 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_KOKORO02	2
+#define EXITNUM_PARK_KOKORO02	2
+#define POSNUM_PARK_KOKORO02	0
+#define BGNUM_PARK_KOKORO02	1
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_park_kokoro02[];
+
+const evObjData	OBJ_park_kokoro02[] =
+{
+	{
+		DUMMY_01_PARK_KOKORO02,		//OBJ ID
+		WKOBJCODE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_DUMMY_01_PARK_KOKORO02,		//Event Flag
+	},
+
+	{
+		KOKORO_01_PARK_KOKORO02,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_KOKORO_01_PARK_KOKORO02,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_park_kokoro02[] =
+{
+	{
+		0x000d,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		PARK_KOKORO01_DOOR01,		//Door ID
+		PARK_KOKORO01,			//Map ID
+		PARK,				//Field ID
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		PARK_KOKORO01_DOOR02,		//Door ID
+		PARK_KOKORO01,			//Map ID
+		PARK,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_park_kokoro02[] =
+{
+	{
+		0x000d,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_01_p01_park_kokoro02,		//Script
+	},
+
+};
+
+const SXY_DATA	park_kokoro02_sxy_data =
+{
+OBJNUM_PARK_KOKORO02,			// field obj max
+EXITNUM_PARK_KOKORO02,		// exit max
+POSNUM_PARK_KOKORO02,			// pos event max
+BGNUM_PARK_KOKORO02,			// bg event max
+OBJ_park_kokoro02,			// field obj data
+EXIT_park_kokoro02,			// exit data
+NULL,			// pos event data
+BG_park_kokoro02,				// bg event data
+};

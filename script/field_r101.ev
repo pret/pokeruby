@@ -1,0 +1,380 @@
+//====================================================================
+//							field_r101
+//						フィールド・ロード101
+//====================================================================
+
+//--------------------------------------------------------------------
+//				   マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r101_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r101
+SP_SCRIPT_LABEL		scene_field_r101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r101:
+	_CALL			chk_odamaki_hyouka
+	_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_field_r101:
+	SP_SCRIPT_DATA	WK_SCENE_FIELD_R101,0,ev_scene_mapname_field_r101
+	SP_SCRIPT_END
+
+//マップ名を表示しない
+ev_scene_mapname_field_r101:
+	_FLAG_SET		CTRL_MAPNAME_HIDE
+	_LDVAL			WK_SCENE_FIELD_R101,1
+	_END
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						オダマキ博士イベント						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r101_pos01
+SCRIPT_LABEL	ev_field_r101_pos02
+	_TALK_START
+
+	_BGM_SET		MUS_EVENT0,TRUE
+
+	_TALK_KEYWAIT	msg_odamaki_01_p01_field_r101
+	_TALK_CLOSE
+
+	//右のposから入ったときOBJが出ていないので
+	//画面の上に配置しておいて座標を移動する
+	//(左右だと、まだOBJ表示されていないので)
+	_OBJ_POS_CHANGE		ODAMAKI_01_FIELD_R101,0,15
+	_OBJ_POS_CHANGE		POKE1_01_FIELD_R101,0,16
+
+	//草から出てくる感じを出す
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r101_anime10
+	_SET_OBJ_ANIME	ODAMAKI_01_FIELD_R101,odamaki_01_field_r101_anime10
+	_SET_OBJ_ANIME	POKE1_01_FIELD_R101,poke1_01_field_r101_anime10
+	_OBJ_ANIME_WAIT	
+
+	//オダマキ追いかけられる
+	_SET_OBJ_ANIME	POKE1_01_FIELD_R101,poke1_01_field_r101_anime01
+	_SET_OBJ_ANIME	ODAMAKI_01_FIELD_R101,odamaki_01_field_r101_anime01
+	_OBJ_ANIME_WAIT	
+
+	//オダマキ追いつめられる
+	_SET_OBJ_ANIME	ODAMAKI_01_FIELD_R101,turn_r_anime
+	_OBJ_ANIME_WAIT	
+
+	//少しバタバタを入れる
+	_SET_OBJ_ANIME	POKE1_01_FIELD_R101,poke1_01_field_r101_anime20
+	_SET_OBJ_ANIME	ODAMAKI_01_FIELD_R101,odamaki_01_field_r101_anime20
+	_OBJ_ANIME_WAIT	
+
+	_TALK_KEYWAIT	msg_odamaki_01_p02_field_r101
+	_TALK_CLOSE
+
+	//ポケモン選び中
+	_LDVAL			WK_SCENE_FIELD_R101,2
+
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//ポケモンをもらわないで出ようとした時
+//--------------------------------------------------------------------
+//上に一歩
+SCRIPT_LABEL	ev_field_r101_pos03
+SCRIPT_LABEL	ev_field_r101_pos04
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_odamaki_01_p03_field_r101
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r101_anime03
+	_OBJ_ANIME_WAIT	
+
+	_TALK_END
+	_END
+
+//右に一歩
+SCRIPT_LABEL	ev_field_r101_pos05
+SCRIPT_LABEL	ev_field_r101_pos06
+SCRIPT_LABEL	ev_field_r101_pos07
+SCRIPT_LABEL	ev_field_r101_pos08
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_odamaki_01_p03_field_r101
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r101_anime04
+	_OBJ_ANIME_WAIT	
+
+	_TALK_END
+	_END
+
+//下に一歩
+SCRIPT_LABEL	ev_field_r101_pos09
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_odamaki_01_p03_field_r101
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r101_anime20
+	_OBJ_ANIME_WAIT	
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	戻される
+//--------------------------------------------------------------------
+hero_01_field_r101_anime03:
+	.byte	AC_WALK_U_1		//上に一歩
+	.byte	ACMD_END
+
+hero_01_field_r101_anime04:
+	.byte	AC_WALK_R_1		//右に一歩
+	.byte	ACMD_END
+
+hero_01_field_r101_anime20:
+	.byte	AC_WALK_D_1		//下に一歩
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ポケモン	オダマキ博士を追いかける
+//--------------------------------------------------------------------
+poke1_01_field_r101_anime01:
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ポケモン	草むらから出る
+//--------------------------------------------------------------------
+poke1_01_field_r101_anime10:
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_U_2	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ポケモン	オダマキ博士を追いかける(2)
+//--------------------------------------------------------------------
+poke1_01_field_r101_anime11:
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ポケモン	じたばたする
+//--------------------------------------------------------------------
+poke1_01_field_r101_anime20:
+	.byte	AC_STAY_WALK_L_2	
+	.byte	AC_STAY_WALK_L_2	
+	.byte	AC_STAY_WALK_L_2	
+	.byte	AC_STAY_WALK_L_2	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	上に歩いていく
+//--------------------------------------------------------------------
+hero_01_field_r101_anime10:
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//オダマキ博士	ポケモンに追いかけられる
+//--------------------------------------------------------------------
+odamaki_01_field_r101_anime01:
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_D_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	AC_WALK_L_2	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//オダマキ博士	草むらから逃げ出す
+//--------------------------------------------------------------------
+odamaki_01_field_r101_anime10:
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_R_2	
+	.byte	AC_WALK_U_2	
+	.byte	AC_WALK_U_2	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//オダマキ博士	ポケモンに追いかけられる(2)
+//--------------------------------------------------------------------
+odamaki_01_field_r101_anime11:
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//オダマキ博士	じたばたする
+//--------------------------------------------------------------------
+odamaki_01_field_r101_anime20:
+	.byte	AC_STAY_WALK_R_2	
+	.byte	AC_STAY_WALK_R_2	
+	.byte	AC_STAY_WALK_R_2	
+	.byte	AC_STAY_WALK_R_2	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	強制で歩いていく
+//--------------------------------------------------------------------
+hero_01_field_r101_anime01:
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	強制で歩いていく(２)
+//--------------------------------------------------------------------
+hero_01_field_r101_anime05:
+	.byte	AC_WALK_U_1		
+	.byte	AC_WALK_L_1		
+	.byte	AC_WALK_U_1		
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							帽子少年								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_capboy1_01_p01_field_r101
+	_EASY_OBJ_MSG	msg_capboy1_01_p01_field_r101
+	_END
+
+
+/********************************************************************/
+/*							少年									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_field_r101
+	_EASY_OBJ_MSG	msg_boy2_01_p01_field_r101
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r101
+	_EASY_MSG       msg_kanban_02_p01_field_r101
+	_END
+
+
+/********************************************************************/
+/*							リュック								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bag1_01_p01_field_r101
+	_TALK_OBJ_START
+
+	//メニューに「ポケモン」を表示する
+	_FLAG_SET		SYS_POKEMON_GET		
+
+	//デバックメニューで始めてもいいようにポケモンゲットはこっちを見る
+	_FLAG_SET		FE_ODAMAKI_01_P01_T101_R0301
+
+	//リュック画面へ
+	_FLD_FADE_BLACKOUT
+	_OBJ_DELETE		POKE1_01_FIELD_R101
+	_OBJ_POS_CHANGE	EV_OBJ_SPID,6,13
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_PROGRAM		FIRST_BATTLE
+	_STOP_SCRIPT
+
+	//オダマキ近寄る
+	_SET_OBJ_ANIME	ODAMAKI_01_FIELD_R101,odamaki_01_field_r101_anime03
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_odamaki_01_p04_field_r101
+
+	//ポケモンの体力を回復する
+	_PROGRAM		PC_KAIFUKU
+
+	//研究所に戻る
+	_FLAG_SET		FV_ODAMAKI_01_FIELD_R101	//オダマキを消す
+	_FLAG_RESET		FV_ODAMAKI_01_T101_R0301	//オダマキ出現
+	_FLAG_SET		FV_BAG1_01_FIELD_R101
+	_LDVAL			WK_SCENE_T101_R0301,2
+	_LDVAL			WK_SCENE_FIELD_R101,3
+	_FLAG_RESET		CTRL_MAPNAME_HIDE
+
+	_MAP_CHANGE		T101,T101_R0301,6,5/*ワープ*/
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//オダマキ博士	近寄る
+//--------------------------------------------------------------------
+odamaki_01_field_r101_anime03:
+	.byte	AC_WALK_R_1	
+	.byte	ACMD_END
+
+

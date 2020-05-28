@@ -1,0 +1,78 @@
+// ●ミナモシティ　デパート１Ｆ
+
+
+// ●受付嬢（＝サラリーウーマン２）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_c106_r1101
+msg_workerw2_01_p01_c106_r1101:
+	.byte	i_,ra_,ttu_,si_,yya_,i_,ma_,se_,gyoe_
+	.byte	CR_
+	.byte	MI_,NA_,MO_,spc_,DE_,PA_,bou_,TO_,spc_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おばさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew2_01_p01_c106_r1101
+msg_middlew2_01_p01_c106_r1101:
+	.byte	DE_,PA_,bou_,TO_,ni_,spc_,ku_,ru_,to_,spc_,ta_,no_,si_,ku_,na_,ttu_,te_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,mo_,no_,wo_,spc_,ka_,ttu_,ti_,yya_,u_,no_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c106_r1101
+msg_ojyou2_01_p01_c106_r1101:
+	.byte	ki_,yyo_,u_,ha_,spc_,su_,te_,ki_,na_,spc_,ka_,gu_,wo_
+	.byte	CR_
+	.byte	o_,ka_,a_,sa_,n_,ni_,spc_,ka_,ttu_,te_,spc_,mo_,ra_,u_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c106_r1101
+msg_middlem2_01_p01_c106_r1101:
+	.byte	KO_,N_,TE_,SU_,TO_,de_,spc_,yu_,u_,si_,yyo_,u_,si_,ta_,spc_,go_,ho_,u_,bi_,ni_
+	.byte	CR_
+	.byte	MA_,RI_,RU_,RI_,ni_,spc_,na_,ni_,ka_,spc_,ka_,ttu_,te_,spc_,a_,ge_,ru_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・マリルリ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mariruri_01_p01_c106_r1101
+msg_mariruri_01_p01_c106_r1101:
+	.byte	MA_,RI_,RU_,RI_,kako2_,ma_,ri_,ri_,ru_,uu_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にマリルリの鳴き声をならす
+
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_c106_r1101
+msg_kanban_01_p01_c106_r1101:
+	.byte	n1_,ka_,i_,spc_,tenten_,tenten_,spc_,SA_,bou_,BI_,SU_,spc_,KA_,U_,N_,TA_,bou_
+	.byte	CR_
+	.byte	spc_,spc_,spc_,spc_,spc_,spc_,spc_,ti_,yyu_,u_,se_,n_,spc_,ka_,i_,zi_,yyo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	n2_,ka_,i_,spc_,tenten_,tenten_,spc_,TO_,RE_,bou_,NA_,bou_,ZU_,spc_,ZO_,bou_,N_
+	.byte	NORMAL_WAIT_
+	.byte	n3_,ka_,i_,spc_,tenten_,tenten_,spc_,BA_,TO_,RU_,spc_,KO_,RE_,KU_,SI_,YYO_,N_
+	.byte	NORMAL_WAIT_
+	.byte	n4_,ka_,i_,spc_,tenten_,tenten_,spc_,wa_,za_,MA_,SI_,N_,spc_,KO_,bou_,NA_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	n5_,ka_,i_,spc_,tenten_,tenten_,spc_,nu_,i_,gu_,ru_,mi_,spc_,HU_,RO_,A_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ku_,zi_,yyo_,u_,spc_,tenten_,tenten_,spc_,i_,ko_,i_,no_,spc_,hi_,ro_,ba_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,24 @@
+//==============================================================
+//	バトルルームメッセージ
+//==============================================================
+
+	.GLOBAL	msg_battle_room_kaifuku
+	.GLOBAL	msg_battle_room_next_battle
+	.GLOBAL	msg_battle_room_pause
+	.GLOBAL	msg_battle_room_giveup
+
+msg_battle_room_kaifuku:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,CR_
+	.byte	ka_,i_,hu_,ku_,si_,te_,spc_,sa_,si_,a_,ge_,ma_,su_,EOM_
+
+msg_battle_room_next_battle:
+	.byte	tu_,gi_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,ni_,n_,me_,no_,spc_,a_,i_,te_,de_,su_,CR_
+	.byte	zi_,yyu_,n_,bi_,ha_,spc_,i_,i_,de_,su_,ka_,hate_,EOM_
+
+msg_battle_room_pause:
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,i_,te_,spc_
+	.byte	si_,yyu_,u_,ri_,yyo_,u_,spc_,si_,ma_,su_,ka_,hate_,EOM_
+
+msg_battle_room_giveup:
+	.byte	BA_,TO_,RU_,RU_,bou_,MU_,no_,spc_,ti_,yyo_,u_,se_,n_,wo_,CR_
+	.byte	ti_,yyu_,u_,si_,spc_,si_,ma_,su_,ka_,hate_,EOM_

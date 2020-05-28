@@ -1,0 +1,110 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c107_r0701_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							研究員
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_c107_r0701
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//ポケモンを初めてから何週間たったかを取得する
+	_FUNC_CALL		ANSWORK,GET_START_WEEK
+	_GET_NUM_MSG	0,ANSWORK
+	_IFVAL_CALL		ANSWORK,EQ,0,case1_space_center_week	//0
+	_IFVAL_CALL		ANSWORK,GE,1,case2_space_center_week	//1以上
+
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+//0
+case1_space_center_week:
+	_TALK_KEYWAIT	msg_studym1_01_p01_c107_r0701
+	_RET
+
+//1以上
+case2_space_center_week:
+	_TALK_KEYWAIT	msg_studym1_01_p02_c107_r0701
+	_RET
+
+
+/********************************************************************/
+//							研究員
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_02_p01_c107_r0701
+	_EASY_OBJ_MSG	msg_studym1_02_p01_c107_r0701
+	_END
+
+
+/********************************************************************/
+//							船乗り
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_c107_r0701
+	_TALK_OBJ_START
+
+	//「つきのいし」を貰っているか
+	_IF_FLAGON_JUMP	FE_TUKINOISI_GET,ev_seaman1_01_p02_c107_r0701
+
+	_TALK_KEYWAIT	msg_seaman1_01_p01_c107_r0701
+
+	_ITEM_EVENT		ITEM_TAIYOUNOISI,1
+	_IF_ZERO_JUMP	ev_fail_item
+	_FLAG_SET		FE_TUKINOISI_GET
+
+	_TALK_KEYWAIT	msg_seaman1_01_p02_c107_r0701
+	_TALK_OBJ_END
+	_END
+
+//「つきのいし」を貰っている
+ev_seaman1_01_p02_c107_r0701:
+	_TALK_KEYWAIT	msg_seaman1_01_p02_c107_r0701
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							女性
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_c107_r0701
+	_EASY_OBJ_MSG	msg_woman2_01_p01_c107_r0701
+	_END
+
+
+/********************************************************************/
+//							老人
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_c107_r0701
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_oldman2_01_p01_c107_r0701
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+

@@ -1,0 +1,660 @@
+//====================================================================
+//							field_c108
+//						ルネシティ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_c108_event_data
+BG_CHANGE_LABEL		bg_change_field_c108
+FLAG_CHANGE_LABEL	ev_arrive_flag_set_c108
+INIT_CTRL_LABEL		ev_init_diving_c108
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+#define LOCKED_DOOR_CELL_CODE		584
+#define LOCKED_DOOR_GYM_CELL_CODE	592
+
+bg_change_field_c108:
+	//不思議な洞窟終了してない
+	_IF_FLAGOFF_CALL	FE_POKE1_01_CAVE_D1111,door_cell_chg_01_field_c108
+
+	//不思議な洞窟終了した
+	_IF_FLAGON_CALL		FE_POKE1_01_CAVE_D1111,door_cell_chg_02_field_c108
+	_END
+
+//不思議な洞窟終了してない
+door_cell_chg_01_field_c108:
+	_SXY_POS_CHANGE		OLDMAN1_01_FIELD_C108,31,18
+	_SET_CELL			31,32,LOCKED_DOOR_GYM_CELL_CODE,1		//ポケモンジム
+	_RET
+
+//不思議な洞窟終了した
+door_cell_chg_02_field_c108:
+	//超古代ポケモンイベント終了まで町のドアを閉めておく
+	_IF_FLAGOFF_CALL	FE_POKE1_01_CAVE_D1206,door_cell_chg_field_c108
+	_RET
+
+//超古代ポケモンイベント終了まで町のドアを閉めておく
+door_cell_chg_field_c108:
+	_SET_CELL			9,6,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			9,17,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			9,26,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			44,17,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			8,35,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			53,28,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			45,6,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			48,25,LOCKED_DOOR_CELL_CODE,1
+	_SET_CELL			31,32,LOCKED_DOOR_GYM_CELL_CODE,1		//ポケモンジム
+	_RET
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//到着フラグセット
+ev_arrive_flag_set_c108:
+	_FLAG_SET		SYS_C108_ARRIVE
+
+	//超古代ポケモンイベント終了している
+	_IF_FLAGON_CALL	FE_POKE1_01_CAVE_D1206,pos_chg_daigo_01_p01_field_c108
+
+	//大雨中だったらトレーナーの位置をずらす
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,pos_chg_trainer_field_c108
+	_END
+
+//大雨中だったらトレーナーの位置をずらす
+pos_chg_trainer_field_c108:
+	//大雨
+	_CALL			ctrl_weather_thunder
+
+	_SXY_POS_CHANGE		WORKERW2_01_FIELD_C108,29,19
+	_SXY_POS_CHANGE		WORKERW2_02_FIELD_C108,33,19
+
+	//まだ案内してなかったら
+	_IFVAL_CALL		WK_SCENE_FIELD_C108,EQ,1,pos_chg_mikuri_01_p02_field_c108
+	_RET
+
+//ミクリを洞窟の上の方に移動させる
+pos_chg_mikuri_01_p02_field_c108:
+	_SXY_POS_CHANGE		DAIGO_01_FIELD_C108,29,6
+	_SXY_SITE_CHANGE	DAIGO_01_FIELD_C108,MV_RIGHT
+	_SXY_POS_CHANGE		MIKURI_01_FIELD_C108,30,6
+	_SXY_SITE_CHANGE	MIKURI_01_FIELD_C108,MV_LEFT
+	_RET
+
+//超古代ポケモンイベント終了していたら、ダイゴをジムの前に移動する
+pos_chg_daigo_01_p01_field_c108:
+	_SXY_POS_CHANGE		DAIGO_01_FIELD_C108,31,33
+	_SXY_SITE_CHANGE	DAIGO_01_FIELD_C108,MV_DOWN
+	_RET
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//	※マップ初期化時に毎回呼ばれる
+//--------------------------------------------------------------------
+ev_init_diving_c108:
+	_SET_DIVING_MAP_ID	CAVE,CAVE_D0301,9,6
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								老人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_field_c108
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベント終了しているか
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1206,ev_oldman1_01_p02_field_c108
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_field_c108
+
+	_TALK_OBJ_END
+	_END
+
+//超古代ポケモンイベント終了しているか
+ev_oldman1_01_p02_field_c108:
+	_TALK_KEYWAIT	msg_oldman1_01_p02_field_c108
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_field_c108
+	_EASY_OBJ_MSG	msg_workerw2_01_p01_field_c108
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_02_p01_field_c108
+	_EASY_OBJ_MSG	msg_workerw2_02_p01_field_c108
+	_END
+
+
+/********************************************************************/
+/*							キリちゃん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_field_c108
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+	_PROGRAM		SET_SEX_NAME_01
+
+	//一日一回
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT_09,ev_girl2_01_p02_field_c108
+
+	_TALK_KEYWAIT	msg_girl2_01_p01_kinomi
+
+	_GET_RND		10
+	//_ADDWK			ANSWORK,21
+	_ADDWK			ANSWORK,20
+	_ADDWK			ANSWORK,ITEM_SEED_START
+	_ITEM_EVENT		ANSWORK,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		TMFLG_SEED_PRESENT_09
+
+	_TALK_KEYWAIT	msg_girl2_01_p02_kinomi
+	_GET_RND		2
+	_IFVAL_JUMP		ANSWORK,EQ,0,case0_girl2_01_kinomi
+	_IFVAL_JUMP		ANSWORK,EQ,1,case1_girl2_01_kinomi
+	_END
+
+//ランダムでどちらか貰える
+case0_girl2_01_kinomi:
+	_ITEM_EVENT		ITEM_FIRANOMI,1
+	_IF_ZERO_JUMP	ev_fail_item
+	_TALK_KEYWAIT	msg_girl2_01_p03_kinomi
+	_TALK_OBJ_END
+	_END
+
+case1_girl2_01_kinomi:
+	_ITEM_EVENT		ITEM_IANOMI,1
+	_IF_ZERO_JUMP	ev_fail_item
+	_TALK_KEYWAIT	msg_girl2_01_p03_kinomi
+	_TALK_OBJ_END
+	_END
+
+//一日一回
+ev_girl2_01_p02_field_c108:
+	_TALK_YES_NO	msg_girl2_01_p04_kinomi
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_girl2_01_p01_field_c108
+
+	_TALK_KEYWAIT	msg_girl2_01_p06_kinomi
+	_TALK_OBJ_END
+	_END
+
+//「はい」
+yes_girl2_01_p01_field_c108:
+	_TALK_KEYWAIT	msg_girl2_01_p05_kinomi
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								女性								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_field_c108
+	_TALK_OBJ_START
+
+	//ジムリーダーに勝利しているか
+	_IF_FLAGON_JUMP	FT_GYM_08_LEADER,ev_woman2_01_p02_field_c108
+
+	_TALK_KEYWAIT	msg_woman2_01_p01_field_c108
+
+	_TALK_OBJ_END
+	_END
+
+//ジムリーダーに勝利している
+ev_woman2_01_p02_field_c108:
+	_TALK_KEYWAIT	msg_woman2_01_p02_field_c108
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							おじさん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_field_c108
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベント終了しているか
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1206,ev_middlem1_01_p02_field_c108
+
+	_TALK_KEYWAIT	msg_middlem1_01_p01_field_c108
+	_TALK_OBJ_END
+	_END
+
+//超古代ポケモンイベント終了している
+ev_middlem1_01_p02_field_c108:
+	_TALK_KEYWAIT	msg_middlem1_01_p02_field_c108
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw_01_p01_field_c108
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベント終了しているか
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1206,ev_trainerw_01_p02_field_c108
+
+	_TALK_KEYWAIT	msg_trainerw_01_p01_field_c108
+	_TALK_OBJ_END
+	_END
+
+//超古代ポケモンイベント終了している
+ev_trainerw_01_p02_field_c108:
+	_TALK_KEYWAIT	msg_trainerw_01_p02_field_c108
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							坊や									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_field_c108
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベント終了しているか
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1206,ev_boya1_01_p02_field_c108
+
+	_TALK_KEYWAIT	msg_boya1_01_p01_field_c108
+	_TALK_OBJ_END
+	_END
+
+//超古代ポケモンイベント終了している
+ev_boya1_01_p02_field_c108:
+	_TALK_KEYWAIT	msg_boya1_01_p02_field_c108
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							少年									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_field_c108
+	_EASY_OBJ_MSG	msg_boy1_01_p01_field_c108
+	_END
+
+
+/********************************************************************/
+/*						ジムの看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_c108
+	_EASY_MSG		msg_kanban_01_p01_field_c108
+	_END
+
+
+/********************************************************************/
+/*						街の看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_c108
+	_EASY_MSG		msg_kanban_02_p01_field_c108
+	_END
+
+
+/********************************************************************/
+/*						開かないドア								*/
+/********************************************************************/
+SCRIPT_LABEL	locked_door_script
+	_EASY_MSG		msg_door_01_p01_field_c108
+	_END
+
+
+/********************************************************************/
+/*								POS									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_c108_pos01
+	_TALK_START
+
+	//振り向く
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,turn_l_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//近づいてくる
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,daigo_01_field_c108_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_daigo_01_p01_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_daigo_01_p01_field_c108r
+#endif
+
+	_TALK_CLOSE
+
+	//連れ歩き
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,daigo_01_field_c108_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c108_anime01
+	_OBJ_ANIME_WAIT DAIGO_01_FIELD_C108				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_mikuri_01_p01_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_mikuri_01_p01_field_c108r
+#endif
+
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	MIKURI_01_FIELD_C108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MIKURI_01_FIELD_C108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_mikuri_01_p02_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_mikuri_01_p02_field_c108r
+#endif
+
+	_TALK_CLOSE
+
+	_TIME_WAIT		30
+
+	//連れ歩き
+	_SET_OBJ_ANIME	MIKURI_01_FIELD_C108,mikuri_01_field_c108_anime01
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,daigo_01_field_c108_anime03
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c108_anime02
+	_OBJ_ANIME_WAIT
+
+	//上を向く
+	_SET_OBJ_ANIME	MIKURI_01_FIELD_C108,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		30
+
+	//下を向く
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_daigo_01_p02_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_daigo_01_p02_field_c108r
+#endif
+
+	_TALK_CLOSE
+
+	_TIME_WAIT		30
+
+	//連れ歩き
+	_SET_OBJ_ANIME	MIKURI_01_FIELD_C108,mikuri_01_field_c108_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c108_anime03
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_C108,daigo_01_field_c108_anime04
+	_OBJ_ANIME_WAIT
+
+	//左を向く
+	_SET_OBJ_ANIME	MIKURI_01_FIELD_C108,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_mikuri_01_p03_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_mikuri_01_p03_field_c108r
+#endif
+
+	//左を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_daigo_01_p03_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_daigo_01_p03_field_c108r
+#endif
+
+	//洞窟に入らないで、スクロールしてまた表示させるとまずいので
+	_SXY_POS_OVERWRITE		MIKURI_01_FIELD_C108
+	_SXY_SITE_CHANGE		MIKURI_01_FIELD_C108,MV_LEFT
+	_SXY_POS_OVERWRITE		DAIGO_01_FIELD_C108
+	_SXY_SITE_CHANGE		DAIGO_01_FIELD_C108,MV_RIGHT
+
+	_LDVAL			WK_SCENE_FIELD_C108,2
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ダイゴ	近づいてくる
+//--------------------------------------------------------------------
+daigo_01_field_c108_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	連れ歩き
+//--------------------------------------------------------------------
+daigo_01_field_c108_anime02:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	目覚めの祠に向かう
+//--------------------------------------------------------------------
+daigo_01_field_c108_anime03:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	目覚めの祠に向かう２
+//--------------------------------------------------------------------
+daigo_01_field_c108_anime04:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	連れ歩き
+//--------------------------------------------------------------------
+hero_01_field_c108_anime01:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	目覚めの祠に向かう
+//--------------------------------------------------------------------
+hero_01_field_c108_anime02:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	目覚めの祠に向かう２
+//--------------------------------------------------------------------
+hero_01_field_c108_anime03:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミクリ	目覚めの祠に向かう
+//--------------------------------------------------------------------
+mikuri_01_field_c108_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミクリ	目覚めの祠に向かう２
+//--------------------------------------------------------------------
+mikuri_01_field_c108_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							ミクリ									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_mikuri_01_p01_field_c108
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_OBJ_MSG	msg_mikuri_01_p04_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_OBJ_MSG	msg_mikuri_01_p04_field_c108r
+#endif
+	_END
+
+
+/********************************************************************/
+/*							ダイゴ									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_daigo_01_p01_field_c108
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベント終了していたら
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1206,ev_daigo_01_p02_field_c108
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_daigo_01_p04_field_c108s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_daigo_01_p04_field_c108r
+#endif
+
+	_TALK_OBJ_END
+	_END
+
+
+//超古代ポケモンイベント終了している
+ev_daigo_01_p02_field_c108:
+	_TALK_KEYWAIT	msg_daigo_01_p04_field_c108
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_TIME_WAIT		50
+
+	_SET_FE_WORK	0,1
+	_SET_FLD_EFF	FECODE_PokeSora
+
+	_TIME_WAIT		15
+	_OBJ_DELETE		TARGET_OBJ
+
+	_FLD_EFF_WAIT	FECODE_PokeSora
+
+	_TALK_OBJ_END
+	_END
+
+

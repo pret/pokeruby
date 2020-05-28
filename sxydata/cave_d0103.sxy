@@ -1,0 +1,75 @@
+//MapEditNH Ver.3.50 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D0103	0
+#define EXITNUM_CAVE_D0103	6
+#define POSNUM_CAVE_D0103	0
+#define BGNUM_CAVE_D0103	0
+
+const SXY_CONNECT	EXIT_cave_d0103[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0006,		//Ypos
+		0x04,		//Height
+		CAVE_D0102_STAIR01,		//Door ID
+		CAVE_D0102,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x000b,		//Ypos
+		0x05,		//Height
+		CAVE_D0102_STAIR02,		//Door ID
+		CAVE_D0102,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0012,		//Xpos
+		0x000f,		//Ypos
+		0x04,		//Height
+		CAVE_D0102_STAIR03,		//Door ID
+		CAVE_D0102,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0011,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		CAVE_D0104_DOOR01,		//Door ID
+		CAVE_D0104,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0017,		//Ypos
+		0x05,		//Height
+		CAVE_D0101_STAIR01,		//Door ID
+		CAVE_D0101,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0014,		//Xpos
+		0x0024,		//Ypos
+		0x03,		//Height
+		CAVE_D0101_DOOR04,		//Door ID
+		CAVE_D0101,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d0103_sxy_data =
+{
+OBJNUM_CAVE_D0103,			// field obj max
+EXITNUM_CAVE_D0103,		// exit max
+POSNUM_CAVE_D0103,			// pos event max
+BGNUM_CAVE_D0103,			// bg event max
+NULL,			// field obj data
+EXIT_cave_d0103,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

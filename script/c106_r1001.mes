@@ -1,0 +1,32 @@
+// ●ミナモシティ　民家５（街の南東）
+
+// ●若者男１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_c106_r1001
+msg_youngm1_01_p01_c106_r1001:
+	.byte	ko_,no_,spc_,ho_,si_,no_,spc_,sa_,i_,da_,i_,no_,spc_,na_,zo_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,ka_,i_,te_,i_,ni_,spc_,a_,ru_,to_,spc_,o_,mo_,u_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,to_,i_,u_,no_,ha_
+	.byte	CR_
+	.byte	da_,re_,ka_,ga_,spc_,i_,ttu_,te_,ta_,spc_,ko_,to_,na_,n_,da_,ke_,do_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●おじさん１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c106_r1001
+msg_middlem1_01_p01_c106_r1001:
+	.byte	so_,u_,i_,ya_,spc_,TO_,KU_,SA_,NE_,to_,spc_,RU_,NE_,no_,spc_,a_,i_,da_,ni_,ha_
+	.byte	CR_
+	.byte	hu_,ka_,i_,spc_,hu_,ka_,i_,spc_,ka_,i_,ko_,u_,ga_,spc_,a_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,so_,n_,na_,spc_,ha_,na_,si_,mo_
+	.byte	CR_
+	.byte	da_,re_,ka_,ga_,spc_,i_,ttu_,te_,ta_,spc_,ko_,to_,na_,n_,da_,ke_,do_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

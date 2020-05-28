@@ -1,0 +1,60 @@
+// ●コトキタウン　ポケモンセンター１Ｆ
+
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_t102_pc01
+msg_gentlem1_01_p01_t102_pc01:
+	.byte	su_,mi_,ttu_,ko_,ni_,spc_,o_,i_,te_,a_,ru_,spc_,PA_,SO_,KO_,N_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ta_,me_,no_,spc_,mo_,no_,na_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,zi_,yu_,u_,ni_,spc_,tu_,ka_,ttu_,te_,spc_,i_,i_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_t102_pc01
+msg_boy1_01_p01_t102_pc01:
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,ttu_,te_,spc_,su_,go_,i_,yo_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,na_,n_,bi_,ki_,spc_,a_,zu_,ke_,te_,mo_
+	.byte	CR_
+	.byte	o_,ka_,ne_,ga_,spc_,ka_,ka_,ra_,na_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	do_,n_,na_,spc_,to_,ki_,de_,mo_,spc_,a_,n_,si_,n_,spc_,da_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女３（エスカレータ付近）
+// ●ポケモン図鑑入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_t102_pc01
+msg_girl3_01_p01_t102_pc01:
+	.byte	n2_,ka_,i_,no_,spc_,PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_,ha_
+	.byte	CR_
+	.byte	tu_,i_,spc_,sa_,i_,ki_,n_,spc_,de_,ki_,ta_,no_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,ma_,da_
+	.byte	CR_
+	.byte	ti_,yyo_,u_,se_,i_,ti_,yyu_,u_,spc_,de_,su_,ttu_,te_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモン図鑑入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p02_t102_pc01
+msg_girl3_01_p02_t102_pc01:
+	.byte	n2_,ka_,i_,no_,spc_,PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_,ha_
+	.byte	CR_
+	.byte	tu_,i_,spc_,sa_,i_,ki_,n_,spc_,de_,ki_,ta_,no_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,sa_,ttu_,so_,ku_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ko_,u_,ka_,n_,spc_,si_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

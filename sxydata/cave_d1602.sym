@@ -1,0 +1,14 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 8
+#define BALL1_75	1
+#define BALL1_76	2
+#define BALL1_110	3
+#define BALL1_122	4
+#define BALL1_123	5
+#define BIRIRIDAMA1_CAVE_D1602	6
+#define BIRIRIDAMA2_CAVE_D1602	7
+#define BIRIRIDAMA3_CAVE_D1602	8
+
+//Exit ID = 1
+#define CAVE_D1602_DOOR01	0

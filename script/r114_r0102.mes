@@ -1,0 +1,64 @@
+// ●114番道路　化石マニアの家の洞窟（r0102）
+
+
+// ●化石マニア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_r114_r0102
+msg_freak1_01_p01_r114_r0102:
+	.byte	bo_,ku_,spc_,ka_,se_,ki_,MA_,NI_,A_,tenten_,tenten_
+	.byte	CR_
+	.byte	ka_,se_,ki_,spc_,da_,i_,su_,ki_,spc_,NA_,I_,SU_,GA_,I_,spc_,sa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,KA_,SE_,KI_,ga_,spc_,ho_,si_,i_,no_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,spc_,mi_,tu_,ka_,ru_,spc_,KA_,SE_,KI_,ha_
+	.byte	CR_
+	.byte	ze_,n_,bu_,spc_,bo_,ku_,no_,spc_,mo_,no_,da_,ka_,ra_,spc_,a_,ge_,na_,i_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,si_,te_,mo_,spc_,ho_,si_,ke_,re_,ba_
+	.byte	CR_
+	.byte	n1_,n1_,n1_,ba_,n_,do_,u_,ro_,no_,spc_,sa_,ba_,ku_,ni_,spc_,i_,ki_,na_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,i_,ta_,spc_,ha_,na_,si_,de_,ha_,spc_,su_,na_,a_,ra_,si_,de_
+	.byte	CR_
+	.byte	su_,na_,no_,spc_,na_,ka_,ni_,spc_,ne_,mu_,ttu_,te_,i_,ta_,spc_,KA_,SE_,KI_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,yyo_,u_,me_,n_,ni_,spc_,u_,ka_,bu_,ko_,to_,ga_,spc_,a_,ru_,so_,u_,da_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「ねっこのカセキ」（No286）もしくは
+// 　「ツメのカセキ」（No287）を持っているとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p02_r114_r0102
+msg_freak1_01_p02_r114_r0102:
+	.byte	ki_,mi_,mo_,spc_,KA_,SE_,KI_,wo_,spc_,mi_,tu_,ke_,ta_,n_,da_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	su_,te_,ki_,tenten_,tenten_,spc_,u_,ttu_,to_,ri_,spc_,si_,ti_,yya_,u_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,spc_,so_,no_,spc_,KA_,SE_,KI_,spc_,do_,u_,su_,ru_,no_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,i_,ta_,spc_,ha_,na_,si_,de_,ha_,spc_,DE_,BO_,N_,de_,ha_
+	.byte	CR_
+	.byte	KA_,SE_,KI_,wo_,spc_,PO_,KE_,MO_,N_,ni_,spc_,i_,ki_,ka_,e_,ra_,se_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	ke_,n_,ki_,yyu_,u_,wo_,spc_,si_,te_,i_,ru_,spc_,so_,u_,da_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,KA_,SE_,KI_,ga_,spc_,su_,ki_,da_,ka_,ra_
+	.byte	CR_
+	.byte	so_,n_,na_,ko_,to_,spc_,si_,na_,i_,ke_,do_,ne_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「カセキ」をポケモンに再生して以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p03_r114_r0102
+msg_freak1_01_p03_r114_r0102:
+	.byte	KA_,SE_,KI_,ttu_,te_,tenten_,tenten_
+	.byte	CR_
+	.byte	su_,te_,ki_,tenten_,tenten_,spc_,u_,ttu_,to_,ri_,spc_,si_,ti_,yya_,u_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

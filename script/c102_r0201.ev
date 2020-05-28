@@ -1,0 +1,201 @@
+//=================================================================== 
+//												
+//						c102_r0201.ev
+//					カイナ・コンテスト会場（受付）
+//												
+//=================================================================== 
+EVENT_DATA_START c102_r0201_event_data					
+FLAG_CHANGE_LABEL	flag_change_c102_r0201
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+/*							FLAG_CHANGE_LABEL						*/
+//--------------------------------------------------------------------
+flag_change_c102_r0201:
+	_CALL			tv_contest_chk
+	_END
+
+//--------------------------------------------------------------------
+/*							スクリプト本体							*/
+//--------------------------------------------------------------------
+/********************************************************************/
+/*						ポケモンコンテスト受付						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_pccable_01_p01_c102_r0201
+	_LDVAL		TMPWK3,HYPER				//文字列取得用
+	_LDVAL		CON_RANK,HYPER_RANK			//ハイパーランクに登録
+	_CALL		contest_script_before		//受付処理
+	_CALL		ev_hero_01_anime_c102_r0201	//アニメ移動処理
+	_PROGRAM	SET_BRD_OBJ					//ブリーダーを配置
+	_CALL		hero_sexcheck_sp_contest	//主人公配置
+	_LDVAL		WK_SCENE_SP_CONTEST03,3		//マップを記憶
+	_MAP_CHANGE	SP,SP_CONTEST03_1,7,5		//ワープ
+	_STOP_SCRIPT
+	_END
+
+
+/********************************************************************/
+/*						主人公のアニメ処理							*/
+/********************************************************************/
+ev_hero_01_anime_c102_r0201:
+	_TALK_START
+	_SET_OBJ_ANIME	PCCABLE_01_C102_R0201,pccable_01_anime01_c102_r0201
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		4,2,545,1	//カウンターセル書き換え
+	_SET_CELL		4,3,609,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+	_SET_OBJ_ANIME	PCCABLE_01_C102_R0201,pccable_01_anime02_c102_r0201
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		4,2,721,1	//カウンターセル書き換え
+	_SET_CELL		4,3,729,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+	
+	_TIME_WAIT	20
+	
+	_SET_OBJ_ANIME	PCCABLE_01_C102_R0201,pccable_01_anime04_c102_r0201
+	_OBJ_ANIME_WAIT	
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_anime02_c102_r0201
+	_OBJ_ANIME_WAIT	
+	
+	_TALK_KEYWAIT	msg_pccable_01_p11_sp_contest
+	_TALK_CLOSE
+	
+	_SET_OBJ_ANIME	PCCABLE_01_C102_R0201,pccable_01_anime03_c102_r0201
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_anime01_c102_r0201
+	_OBJ_ANIME_WAIT 
+	_TALK_END
+	_RET
+
+//-------------------------------------------------------------------
+//				主人公のアニメ
+//-------------------------------------------------------------------
+hero_01_anime01_c102_r0201:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+hero_01_anime02_c102_r0201:
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//-------------------------------------------------------------------
+//				受け付け嬢のアニメ
+//-------------------------------------------------------------------
+pccable_01_anime01_c102_r0201:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+pccable_01_anime02_c102_r0201:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+pccable_01_anime03_c102_r0201:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+pccable_01_anime04_c102_r0201:
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							trainerm1								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_c102_r0201
+	_EASY_OBJ_MSG	msg_trainerm_01_p01_c102_r0201
+	_END
+
+
+/********************************************************************/
+/*							girl1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_c102_r0201
+	_EASY_OBJ_MSG	msg_girl1_01_p01_c102_r0201
+	_END
+
+
+/********************************************************************/
+/*						女性１										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_c102_r0201
+	_EASY_OBJ_MSG	msg_woman1_01_p01_c102_r0201
+	_END
+
+
+/********************************************************************/
+/*						キューブケースをくれる人					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou2_01_p01_c102_r0201
+	_TALK_START
+
+	//すでにキューブケースもらっているか
+	_IF_FLAGON_JUMP	FE_CUBECASE_GET,ev_ojyou2_01_p02_c102_r0201
+
+	_SET_OBJ_ANIME	OJYOU2_01_C102_R0201,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_ojyou2_01_p01_c102_r0201
+
+	_ITEM_EVENT		ITEM_POROKKUKEESU,1
+	_FLAG_SET	FE_CUBECASE_GET
+
+	_TALK_END
+	_END
+
+ev_ojyou2_01_p02_c102_r0201:
+	_EASY_OBJ_MSG	msg_ojyou2_01_p02_c102_r0201
+	_END
+
+
+/********************************************************************/
+/*				似顔絵表示３										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_01_p01_c102_r0201
+	_TALK_START
+	_PUT_PORTRAIT	3
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//				１人用タネブレンダーをいっしょにする人
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_c102_r0201
+	_EASY_OBJ_MSG	msg_cubeboy_01_p01_contest
+	_END
+
+
+/********************************************************************/
+/*						タネブレンダー結果発表						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_score_01_p01_c102_r0201
+	_TALK_START
+	_PROGRAM			BLENDMACHINE_SCORE
+	_AB_KEYWAIT
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+
+

@@ -1,0 +1,1042 @@
+@===================================================================
+@
+@	「ひみつきち」イベントのスクリプト
+@
+@	2001/10/03 by nakahiro
+@	2001/10/22 by tama		別ファイルに切り離した
+@===================================================================
+
+	.GLOBAL	base_script2
+	.GLOBAL base_in_script
+	.GLOBAL base_char_script
+	.GLOBAL base_in_obj_goods_init
+	.GLOBAL obj_goods_set_init
+	.GLOBAL obj_goods_get_init
+
+	.GLOBAL pokelist_base_make_wall
+	.GLOBAL pokelist_base_make_tree
+	.GLOBAL pokelist_base_make_grass
+
+	.GLOBAL base_make_main
+	.GLOBAL base_in_move_check
+
+
+#include "../script/sp_base04.mes"
+#include "../script/sp_base05.mes"
+
+#include "../script/rusuban1.mes"
+#include "../script/rusuban2.mes"
+#include "../script/rusuban3.mes"
+#include "../script/rusuban4.mes"
+#include "../script/rusuban5.mes"
+
+
+//---------------------------------------------------------------
+//	ひみつきちの場所に話し掛けたとき
+//---------------------------------------------------------------
+base_script2:
+	// 基地の種類を取得
+	_PROGRAM	BASE_TYPE
+
+	// 自分の基地ありなし
+	_PROGRAM	MY_BASE_CHECK
+	_IFVAL_JUMP	ANSWORK, EQ, 1, yes_my_base		// あり
+
+	//「ひみつのちから」チェック
+	_WAZA_CHECK	WAZANO_HIMITUNOTIKARA
+	_SET_FE_WORK	0, ANSWORK
+
+	_GET_WAZANAME	1, WAZANO_HIMITUNOTIKARA
+
+	_IFVAL_JUMP	PARAM3, EQ, 1, base_make_wall	// 土
+	_IFVAL_JUMP	PARAM3, EQ, 2, base_make_wall	// 石
+	_IFVAL_JUMP	PARAM3, EQ, 3, base_make_wall	// 湿
+	_IFVAL_JUMP	PARAM3, EQ, 4, base_make_wall	// 砂
+	_IFVAL_JUMP	PARAM3, EQ, 5, base_make_tree	// 木
+	_IFVAL_JUMP	PARAM3, EQ, 6, base_make_grass	// 草
+
+	_END
+
+//---------------------------------------------------------------
+//	壁を掘って作成する処理
+//---------------------------------------------------------------
+base_make_wall:
+	_TALK_START
+
+	_IFVAL_JUMP	ANSWORK, EQ, 6, base_make_wall_no_poke	//「いいえ」
+
+	_GET_NICKNAME	0, ANSWORK
+
+	// 秘密の力を使うか
+	_TALK_YES_NO	msg_base_01_p02_sp_base01
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_end		//「いいえ」
+
+	_TALK_KEYWAIT	fe_iai_msg01
+	_TALK_CLOSE
+
+	_SET_FLD_EFF	11
+
+	_STOP_SCRIPT
+	_JUMP	base_make_wall_in
+
+	_END
+
+// ポケモンリストから
+pokelist_base_make_wall:
+	_TALK_START
+
+	_SET_FLD_EFF	11
+
+	_STOP_SCRIPT
+	_JUMP	base_make_wall_in
+
+	_END
+
+
+// 秘密の力を使えない
+base_make_wall_no_poke:
+	_EASY_MSG	msg_base_01_p01_sp_base01
+	_END
+
+// 基地の中へ
+base_make_wall_in:
+	_TALK_KEYWAIT	msg_base_01_p03_sp_base01
+	_JUMP	base_make
+	_END
+
+//---------------------------------------------------------------
+//	木を切って作成する処理
+//---------------------------------------------------------------
+base_make_tree:
+	_TALK_START
+
+	_IFVAL_JUMP	ANSWORK, EQ, 6, base_make_tree_no_poke	//「いいえ」
+
+	_GET_NICKNAME	0, ANSWORK
+
+	// 秘密の力を使うか
+	_TALK_YES_NO	msg_base_01_p02_sp_base04
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_end		//「いいえ」
+
+	_TALK_KEYWAIT	fe_iai_msg01
+	_TALK_CLOSE
+
+	_SET_FLD_EFF	26
+
+	_STOP_SCRIPT
+	_JUMP	base_make_tree_in
+
+	_END
+
+// ポケモンリストから
+pokelist_base_make_tree:
+	_TALK_START
+
+	_SET_FLD_EFF	26
+
+	_STOP_SCRIPT
+	_JUMP	base_make_tree_in
+
+	_END
+
+// 秘密の力を使えない
+base_make_tree_no_poke:
+	_EASY_MSG	msg_base_01_p01_sp_base04
+	_END
+
+// 基地の中へ
+base_make_tree_in:
+	_TALK_KEYWAIT	msg_base_01_p03_sp_base04
+	_JUMP	base_make
+	_END
+
+//---------------------------------------------------------------
+//	草を刈って作成する処理
+//---------------------------------------------------------------
+base_make_grass:
+	_TALK_START
+
+	_IFVAL_JUMP	ANSWORK, EQ, 6, base_make_grass_no_poke	//「いいえ」
+
+	_GET_NICKNAME	0, ANSWORK
+
+	// 秘密の力を使うか
+	_TALK_YES_NO	msg_base_01_p02_sp_base05
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_end		//「いいえ」
+
+	_TALK_KEYWAIT	fe_iai_msg01
+	_TALK_CLOSE
+
+	_SET_FLD_EFF	27
+
+	_STOP_SCRIPT
+	_JUMP	base_make_grass_in
+
+	_END
+
+// ポケモンリストから
+pokelist_base_make_grass:
+	_TALK_START
+
+	_SET_FLD_EFF	27
+
+	_STOP_SCRIPT
+	_JUMP	base_make_grass_in
+
+	_END
+
+// 秘密の力を使えない
+base_make_grass_no_poke:
+	_EASY_MSG	msg_base_01_p01_sp_base05
+	_END
+
+// 基地の中へ
+base_make_grass_in:
+	_TALK_KEYWAIT	msg_base_01_p03_sp_base05
+	_JUMP	base_make
+	_END
+
+//---------------------------------------------------------------
+//	基地作成共通処理
+//---------------------------------------------------------------
+base_make:
+	_TALK_CLOSE
+	_SE			SE_KAIDAN
+	_LDVAL		WK_SCENE_BASE_MAKE, 0
+	_FLAG_SET	FE_BASE_CHAR_FLAG
+	_PROGRAM	BASE_SET
+	_PROGRAM	CHANGE_BASE
+
+//	_JUMP		base_in_obj_goods_init
+
+	_LDVAL		PARAM0, 0
+	_LDVAL		PARAM1, 0
+	_PROGRAM	GOODS_OBJ_INIT
+	_LDVAL		WK_SCENE_BASE_GOODS, 1
+
+	_STOP_SCRIPT
+
+	_END
+
+// 基地を作るか
+base_make_main:
+	// ２歩移動
+	_SET_OBJ_ANIME	EV_OBJ_SPID, hero_base_make_anm
+	_OBJ_ANIME_WAIT
+	_LDVAL		WK_SCENE_BASE_MAKE, 1
+
+	// 作るかメッセージ
+	_TALK_YES_NO	msg_base_01_p04_sp_base01
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_make_end		//「はい」
+
+	_TALK_CLOSE
+	_SE			SE_KAIDAN
+	_PROGRAM	BASE_MOVE
+
+	_END
+
+// 基地を作る
+base_make_end:
+	_TALK_CLOSE
+	_FLAG_SET	FE_HIMITSU_GET
+	_PROGRAM	BASE_MAKE
+	_STOP_SCRIPT
+	_END
+
+// 主人公移動アニメテーブル
+hero_base_make_anm:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+
+//---------------------------------------------------------------
+//	ひみつきちに入る処理
+//---------------------------------------------------------------
+// 入る
+base_in_script:
+	
+	_TALK_START
+
+	_LDVAL		WK_SCENE_BASE_MAKE, 1
+	_SE			SE_KAIDAN
+	_PROGRAM	WHOSE_BASE
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_in_mine	//==０：自分の基地
+
+	_FLAG_RESET	FE_BASE_CHAR_FLAG
+	_PROGRAM	CHANGE_BASE
+
+//	_JUMP		base_in_obj_goods_init
+	_LDVAL		WK_SCENE_BASE_GOODS, 0
+
+	_STOP_SCRIPT
+
+	_END
+
+base_in_mine:
+	_FLAG_SET	FE_BASE_CHAR_FLAG
+	_PROGRAM	CHANGE_BASE
+
+//	_JUMP		base_in_obj_goods_init
+	_LDVAL		WK_SCENE_BASE_GOODS, 0
+
+	_STOP_SCRIPT
+
+	_END
+
+//---------------------------------------------------------------
+//	自分の基地があるとき
+//---------------------------------------------------------------
+yes_my_base:
+
+	//「ひみつのちから」チェック
+	_WAZA_CHECK	WAZANO_HIMITUNOTIKARA
+	_IFVAL_JUMP	ANSWORK, EQ, 6, base_new_make_no
+	_SET_FE_WORK	0, ANSWORK
+
+	_LDWKVAL	PARAM0, ANSWORK
+
+	_TALK_START
+
+	_PROGRAM	GET_BASE_MAPNO
+
+	// ひっこす？
+	_TALK_YES_NO	base_msg_no_make
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_end
+
+	// いい？
+	_TALK_YES_NO	base_msg_move
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_end
+
+	// ひっこし処理
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	BASE_NEW_MAKE_MOVE
+	_TALK_CLOSE
+	_FLD_FADE_BLACKIN
+
+	// 基地をつくる？
+	_TALK_YES_NO	base_msg_no_make2
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_end
+
+	_GET_NICKNAME	0, PARAM0
+	_GET_WAZANAME	1, WAZANO_HIMITUNOTIKARA
+	_TALK_KEYWAIT	fe_iai_msg01
+	_TALK_CLOSE
+
+	// 基地作成
+	_TALK_CLOSE
+	_IFVAL_JUMP	PARAM3, EQ, 1, pokelist_base_make_wall	// 土
+	_IFVAL_JUMP	PARAM3, EQ, 2, pokelist_base_make_wall	// 石
+	_IFVAL_JUMP	PARAM3, EQ, 3, pokelist_base_make_wall	// 湿
+	_IFVAL_JUMP	PARAM3, EQ, 4, pokelist_base_make_wall	// 砂
+	_IFVAL_JUMP	PARAM3, EQ, 5, pokelist_base_make_tree	// 木
+	_IFVAL_JUMP	PARAM3, EQ, 6, pokelist_base_make_grass	// 草
+
+	_TALK_END
+	_END
+
+//「ひみつのちから」無し
+base_new_make_no:
+	_IFVAL_JUMP	PARAM3, EQ, 1, base_make_wall_no_poke	// 土
+	_IFVAL_JUMP	PARAM3, EQ, 2, base_make_wall_no_poke	// 石
+	_IFVAL_JUMP	PARAM3, EQ, 3, base_make_wall_no_poke	// 湿
+	_IFVAL_JUMP	PARAM3, EQ, 4, base_make_wall_no_poke	// 砂
+	_IFVAL_JUMP	PARAM3, EQ, 5, base_make_tree_no_poke	// 木
+	_IFVAL_JUMP	PARAM3, EQ, 6, base_make_grass_no_poke	// 草
+	_END
+
+
+//---------------------------------------------------------------
+//	基地作成終了
+//---------------------------------------------------------------
+base_end:
+	_TALK_CLOSE
+	_TALK_END
+	_END
+
+
+//------------------------------
+//	OBJグッズを強制非表示
+//------------------------------
+base_in_obj_goods_all_reset:
+	_FLAG_SET	FE_BASE_GOODS_FLAG01
+	_FLAG_SET	FE_BASE_GOODS_FLAG02
+	_FLAG_SET	FE_BASE_GOODS_FLAG03
+	_FLAG_SET	FE_BASE_GOODS_FLAG04
+	_FLAG_SET	FE_BASE_GOODS_FLAG05
+	_FLAG_SET	FE_BASE_GOODS_FLAG06
+	_FLAG_SET	FE_BASE_GOODS_FLAG07
+	_FLAG_SET	FE_BASE_GOODS_FLAG08
+	_FLAG_SET	FE_BASE_GOODS_FLAG09
+	_FLAG_SET	FE_BASE_GOODS_FLAG10
+	_FLAG_SET	FE_BASE_GOODS_FLAG11
+	_FLAG_SET	FE_BASE_GOODS_FLAG12
+	_FLAG_SET	FE_BASE_GOODS_FLAG13
+	_FLAG_SET	FE_BASE_GOODS_FLAG14
+	_RET
+
+//------------------------------
+//		OBJグッズ初期配置
+// PARAM0  : Flg_No
+// PARAM1  : Goods_No
+// PARAM2  : PosX
+// PARAM3  : PosY
+// ANSWORK : OBJ_ID
+//------------------------------
+//02/03/04 changed nohara
+base_in_obj_goods_init:
+	_LDVAL		PARAM0, 0
+	_LDVAL		PARAM1, 0
+	_PROGRAM	GOODS_OBJ_INIT
+	_LDVAL		WK_SCENE_BASE_GOODS, 1
+	_END
+
+//--------------------------
+//		OBJグッズ配置
+//	PARAM1  : フラグ番号 / OBJ_ID
+//	PARAM2  : x
+//	PARAM3  : y
+//--------------------------
+//02/03/06 changed nohara
+obj_goods_set_init:
+	_LDVAL	PARAM1,0
+	_JUMP	obj_goods_set_main
+	_END
+
+obj_goods_set_main:
+	_PROGRAM	GOODS_OBJ_PUT
+	_END
+
+//--------------------------
+//		OBJグッズ回収
+//	PARAM0  : cnt
+//	PARAM1  : flg
+//--------------------------
+obj_goods_get_init:
+	_LDVAL	PARAM0, 0
+	_JUMP	obj_goods_get_main
+	_END
+
+obj_goods_get_main:
+	_PROGRAM	GET_GOODS2
+	_IFVAL_JUMP	ANSWORK, EQ, 1, obj_goods_get_end
+	_ADDWK	PARAM0, 1
+	_IFVAL_JUMP	PARAM1, EQ, 0, obj_goods_get_main
+	_OBJ_DELETE	PARAM2
+	_FLAG_SET	PARAM1
+	_JUMP	obj_goods_get_main
+	_END
+
+obj_goods_get_end:
+//	_LDVAL	PARAM0, FE_BASE_GOODS_FLAG01
+//	_JUMP	base_obj_goods_flg_set
+	_END
+
+
+//--------------------------------------------------------
+//	お留守番キャラ
+//--------------------------------------------------------
+base_char_script:
+	_PROGRAM	ORUSUBAN_CHECK
+
+	_IFVAL_JUMP	PARAM0, EQ, 0, base_char_man1
+	_IFVAL_JUMP	PARAM0, EQ, 1, base_char_man2
+	_IFVAL_JUMP	PARAM0, EQ, 2, base_char_man3
+	_IFVAL_JUMP	PARAM0, EQ, 3, base_char_man4
+	_IFVAL_JUMP	PARAM0, EQ, 4, base_char_man5
+	_IFVAL_JUMP	PARAM0, EQ, 5, base_char_woman1
+	_IFVAL_JUMP	PARAM0, EQ, 6, base_char_woman2
+	_IFVAL_JUMP	PARAM0, EQ, 7, base_char_woman3
+	_IFVAL_JUMP	PARAM0, EQ, 8, base_char_woman4
+	_IFVAL_JUMP	PARAM0, EQ, 9, base_char_woman5
+
+	_END
+
+//--------------------------------------------------------
+//	男キャラ１
+//--------------------------------------------------------
+base_char_man1:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_man1_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_man1_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_boy_01_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_man1_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_man1_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_boy_01_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_man1_not_clear:
+	_EASY_OBJ_MSG	msg_boy_01_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_man1_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_boy_01_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_man1_next:
+	_EASY_OBJ_MSG	msg_boy_01_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	男キャラ２
+//--------------------------------------------------------
+base_char_man2:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_man2_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_man2_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_boy_02_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_man2_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_man2_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_boy_02_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_man2_not_clear:
+	_EASY_OBJ_MSG	msg_boy_02_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_man2_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_boy_02_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_man2_next:
+	_EASY_OBJ_MSG	msg_boy_02_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	男キャラ３
+//--------------------------------------------------------
+base_char_man3:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_man3_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_man3_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_boy_03_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_man3_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_man3_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_boy_03_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_man3_not_clear:
+	_EASY_OBJ_MSG	msg_boy_03_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_man3_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_boy_03_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_man3_next:
+	_EASY_OBJ_MSG	msg_boy_03_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	男キャラ４
+//--------------------------------------------------------
+base_char_man4:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_man4_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_man4_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_boy_04_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_man4_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_man4_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_boy_04_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_man4_not_clear:
+	_EASY_OBJ_MSG	msg_boy_04_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_man4_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_boy_04_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_man4_next:
+	_EASY_OBJ_MSG	msg_boy_04_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	男キャラ５
+//--------------------------------------------------------
+base_char_man5:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_man5_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_man5_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_boy_05_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_man5_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_man5_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_boy_05_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_man5_not_clear:
+	_EASY_OBJ_MSG	msg_boy_05_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_man5_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_boy_05_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_man5_next:
+	_EASY_OBJ_MSG	msg_boy_05_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	女キャラ１
+//--------------------------------------------------------
+base_char_woman1:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_woman1_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_woman1_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_girl_01_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_woman1_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_woman1_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_girl_01_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_woman1_not_clear:
+	_EASY_OBJ_MSG	msg_girl_01_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_woman1_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_girl_01_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_woman1_next:
+	_EASY_OBJ_MSG	msg_girl_01_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	女キャラ２
+//--------------------------------------------------------
+base_char_woman2:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_woman2_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_woman2_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_girl_02_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_woman2_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_woman2_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_girl_02_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_woman2_not_clear:
+	_EASY_OBJ_MSG	msg_girl_02_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_woman2_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_girl_02_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_woman2_next:
+	_EASY_OBJ_MSG	msg_girl_02_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	女キャラ３
+//--------------------------------------------------------
+base_char_woman3:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_woman3_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_woman3_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_girl_03_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_woman3_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_woman3_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_girl_03_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_woman3_not_clear:
+	_EASY_OBJ_MSG	msg_girl_03_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_woman3_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_girl_03_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_woman3_next:
+	_EASY_OBJ_MSG	msg_girl_03_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	女キャラ４
+//--------------------------------------------------------
+base_char_woman4:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_woman4_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_woman4_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_girl_04_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_woman4_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_woman4_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_girl_04_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_woman4_not_clear:
+	_EASY_OBJ_MSG	msg_girl_04_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_woman4_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_girl_04_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_woman4_next:
+	_EASY_OBJ_MSG	msg_girl_04_p05_sp_base
+	_END
+
+//--------------------------------------------------------
+//	女キャラ５
+//--------------------------------------------------------
+base_char_woman5:
+
+	// ゲームクリアチェック
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR, base_char_woman5_not_clear
+
+	// 対戦チェック
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_char_woman5_next
+
+	// 対戦する？
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_girl_05_p01_sp_base
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_char_woman5_btl_not
+
+	// セーブ
+	_LDVAL		ANSWORK, 1
+	_PROGRAM	ORUSUBAN_FLAG
+	_CALL		FieldSaveScript
+	_IFVAL_JUMP	ANSWORK, EQ, FALSE, base_char_woman5_btl_not
+
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_TALK_KEYWAIT	msg_girl_05_p02_sp_base
+
+	// 戦闘へ
+	_JUMP	base_char_battle_start
+
+	_END
+
+// ゲームクリアしていない
+base_char_woman5_not_clear:
+	_EASY_OBJ_MSG	msg_girl_05_p06_sp_base
+	_END
+
+// 対戦しない
+base_char_woman5_btl_not:
+	_LDVAL			ANSWORK, 0
+	_PROGRAM		ORUSUBAN_FLAG
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_EASY_OBJ_MSG	msg_girl_05_p03_sp_base
+	_END
+
+// 対戦済み
+base_char_woman5_next:
+	_EASY_OBJ_MSG	msg_girl_05_p05_sp_base
+	_END
+
+//---------------------------------------------------------------
+//	お留守番対戦開始
+//---------------------------------------------------------------
+base_char_battle_start:
+	_PROGRAM		ORUSUBAN_SET
+
+	_LDVAL			PARAM0, BEF_ORUSUBAN
+	_LDVAL			PARAM1, 0
+	_PROGRAM		BATTLE_EVENT_FIGHT
+	_STOP_SCRIPT
+
+	_PROGRAM		PC_KAIFUKU
+
+	_TALK_OBJ_END
+
+	_END
+
+
+//---------------------------------------------------------------
+//	ひみつのちからをくれるOBJ	02/03/13 nohara
+//---------------------------------------------------------------
+#include "../script/himitsu.mes"
+
+SCRIPT_LABEL	base_make_waza_script
+	_TALK_OBJ_START
+
+	_TALK_YES_NO	msg_boy1_01_p01_sp_base
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_boy1_01_p01_sp_base	//「はい」
+
+	_TALK_KEYWAIT	msg_boy1_01_p03_sp_base
+	_TALK_OBJ_END
+	_END
+
+//ひみつのちからをもらう
+yes_boy1_01_p01_sp_base:
+	_ITEM_EVENT		ITEM_WAZAMASIN43,1
+	_IF_ZERO_JUMP	ev_boy1_01_p03_sp_base
+
+	_TALK_KEYWAIT	msg_boy1_01_p02_sp_base
+	_TALK_CLOSE
+
+	_FLAG_SET		FE_HIMITSU_GET
+
+	//カイナにOBJ出す
+	_FLAG_RESET		FV_SHOPM1_04_FIELD_C102
+
+	//去っていく
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_l_boy1_sp_base
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_r_boy1_sp_base
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_u_boy1_sp_base
+
+	_OBJ_DELETE		TARGET_OBJ
+	_TALK_OBJ_END
+	_END
+
+//去っていく
+//左右から話し掛け
+case_l_boy1_sp_base:
+case_r_boy1_sp_base:
+	_SET_OBJ_ANIME	TARGET_OBJ,boy1_01_sp_base_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+//下から話し掛け
+case_u_boy1_sp_base:
+	_SET_OBJ_ANIME	TARGET_OBJ,boy1_01_sp_base_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+//バッグがいっぱい
+ev_boy1_01_p03_sp_base:
+	_TALK_KEYWAIT	msg_boy1_01_p04_sp_base
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//ひみつのちからくれる人	去っていく
+//--------------------------------------------------------------------
+//左右から話し掛け
+boy1_01_sp_base_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	ACMD_END
+
+//下から話し掛け
+boy1_01_sp_base_anime02:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	ACMD_END
+

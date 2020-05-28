@@ -1,0 +1,13 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define DOOL1_01_R110_R0108	1
+#define DOOL1_02_R110_R0108	2
+#define DOOL1_03_R110_R0108	3
+#define DOOL1_04_R110_R0108	4
+#define DOOL1_05_R110_R0108	5
+
+//Exit ID = 3
+#define R110_R0108_MAT01	0
+#define R110_R0108_MAT02	1
+#define R110_R0108_DOOR01	2

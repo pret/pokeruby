@@ -1,0 +1,170 @@
+msg_test_oyaji01:
+	.byte	o_,ya_,zi_,TE_,SU_,TO_,ti_,yyu_,u_,de_,su_,gyoe_
+	.byte	EOM_
+
+
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+// ●シンガーソングおやじ（あいさつ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p01_singer
+msg_oyaji_01_p01_singer:
+	.byte	wa_,si_,spc_,SI_,N_,GA_,bou_,SO_,N_,GU_,o_,ya_,zi_
+	.byte	CR_
+	.byte	wa_,si_,no_,spc_,u_,ta_,spc_,ki_,i_,te_,ku_,re_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの分岐
+// 
+// ●いいえの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p02_singer
+msg_oyaji_01_p02_singer:
+	.byte	so_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●うたった後、歌詞を変更したことがあるのなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p04_singer
+msg_oyaji_01_p04_singer:
+	.byte	a_,aa_,spc_,i_,i_,spc_,u_,ta_,spc_,da_,na_,aa_
+	.byte	CR_
+	.byte	ho_,ka_,no_,spc_,hi_,to_,ni_,mo_,spc_,ki_,ka_,se_,te_,spc_,mi_,ta_,i_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●うたった後、歌詞を変更していないのなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p05_singer
+msg_oyaji_01_p05_singer:
+	.byte	do_,u_,hate_,spc_,wa_,si_,no_,spc_,u_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,ti_,yyo_,ttu_,to_,spc_,ka_,si_,ga_,spc_,ki_,ni_,i_,ra_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ki_,mi_,spc_,ti_,yyo_,ttu_,to_,spc_,ka_,e_,te_,ku_,re_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの分岐
+// 
+// ●いいえならば
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p06_singer
+msg_oyaji_01_p06_singer:
+	.byte	so_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●はいの場合（簡易会話の歌詞変更へ）
+// 
+// ●変更したあと
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p07_singer
+msg_oyaji_01_p07_singer:
+	.byte	a_,ri_,ga_,to_,u_,gyoe_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,u_,ta_,ttu_,te_,spc_,mi_,ru_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●簡易会話表示後に
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p08_singer
+msg_oyaji_01_p08_singer:
+	.byte	ko_,n_,na_,spc_,ka_,n_,zi_,de_,spc_,i_,i_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 　はい／いいえの分岐
+// 
+// ●いいえならば、歌詞を変更前のモノに戻して
+// 　簡易会話の歌詞変更へ戻る。
+// 
+// ●はいの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p09_singer
+msg_oyaji_01_p09_singer:
+	.byte	yo_,si_,spc_,wa_,ka_,ttu_,ta_,gyoe_
+	.byte	CR_
+	.byte	si_,ba_,ra_,ku_,spc_,ko_,no_,u_,ta_,wo_,spc_,u_,ta_,ttu_,te_,spc_,mi_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+
+
+
+
+
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ナウイおやじ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p01_naui
+msg_oyaji_01_p01_naui:
+	.byte	wa_,si_,spc_,NA_,U_,I_,o_,ya_,zi_
+	.byte	CR_
+	.byte	i_,ma_,do_,ki_,no_,spc_,NA_,U_,I_,ko_,to_,ba_,spc_,o_,si_,e_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ことば教えたチェック
+// 
+// ●もう教えてる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p02_naui
+msg_oyaji_01_p02_naui:
+	.byte	de_,mo_,spc_,ki_,mi_,ni_,ha_,spc_,ko_,no_,ma_,e_,spc_,o_,si_,e_,ta_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,do_,ha_,spc_,ho_,ka_,no_,spc_,hi_,to_,ni_,spc_,o_,si_,e_,ta_,i_,na_,aa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●隠しワード、埋まってるかチェック
+// 
+// ●全部埋まっている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p03_naui
+msg_oyaji_01_p03_naui:
+	.byte	de_,mo_,spc_,ki_,mi_,spc_,ko_,to_,ba_,spc_,ta_,ku_,sa_,n_,spc_,si_,ttu_,te_,ru_,ne_
+	.byte	CR_
+	.byte	o_,si_,e_,ru_,ko_,to_,spc_,ze_,n_,ze_,n_,spc_,na_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●教える隠しワードを決定（＠０）
+// 
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p04_naui
+msg_oyaji_01_p04_naui:
+	.byte	ki_,mi_,spc_,I_MSG_,STR_TEMP_BUF0,ttu_,te_
+	.byte	CR_
+	.byte	ko_,to_,ba_,spc_,si_,ttu_,te_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	i_,mi_,hate_,spc_,so_,re_,ha_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,to_,u_,sa_,n_,ka_,spc_,o_,ka_,a_,sa_,n_,ni_,spc_,ki_,i_,te_,mi_,te_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●教えた隠しワードのフラグが立って、使用可能になる
+
+

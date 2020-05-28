@@ -1,0 +1,455 @@
+//====================================================================
+//							field_t102
+//						コトキ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_t102_event_data
+FLAG_CHANGE_LABEL	ev_arrive_flag_set_t102
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+ev_arrive_flag_set_t102:
+	_CALL			set_support_char
+
+	//到着フラグセット
+	_FLAG_SET		SYS_T102_ARRIVE
+
+	//モンスターボールを貰っていないならマニアの位置を変更する
+	_IF_FLAGOFF_CALL	FE_MONSBALL_GET,ev_obj_pos_chg_field_t102
+
+	//案内されていないなら店員の位置を変更する
+	_IF_FLAGOFF_CALL	FE_BOY4_01_FIELD_T102,ev_shopm1_pos_field_t102
+
+	//すでにモンスタボール貰っていたらシーンを変更する
+	//セーブエリアが重なってしまった問題解決用(本当はt101_r0301でセットされている)
+	_IF_FLAGON_CALL		FE_MONSBALL_GET,ev_scene_chg_field_t102
+	_END
+
+//すでにモンスタボール貰っていたらシーンを変更する
+ev_scene_chg_field_t102:
+	_LDVAL				WK_SCENE_FIELD_T102,1
+	_RET
+
+//モンスターボール貰ってない
+ev_obj_pos_chg_field_t102:
+	_SXY_POS_CHANGE		FREAK1_01_FIELD_T102,1,11
+	_SXY_SITE_CHANGE	FREAK1_01_FIELD_T102,MV_LEFT
+	_RET
+
+//案内されていないなら
+ev_shopm1_pos_field_t102:
+	_SXY_POS_CHANGE		SHOPM1_01_FIELD_T102,13,14
+	_SXY_SITE_CHANGE	SHOPM1_01_FIELD_T102,MV_DOWN
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						中央の看板
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_t102
+	_EASY_MSG	msg_kanban_01_p01_field_t102
+	_END
+
+
+/********************************************************************/
+//							少女	
+/********************************************************************/
+SCRIPT_LABEL	ev_girl3_01_p01_field_t102
+	_EASY_OBJ_MSG		msg_girl3_01_p01_field_t102
+	_END
+
+
+/********************************************************************/
+//							ショップ店員男
+//
+//							FH_00使用
+/********************************************************************/
+SCRIPT_LABEL	ev_shopm1_01_p01_field_t102
+	_TALK_OBJ_START
+
+	//すでに案内されていたら(アイテム貰っていたら)
+	_IF_FLAGON_JUMP	FE_BOY4_01_FIELD_T102,ev_shopm1_01_p02_field_t102
+
+	//また案内しないようにするため(必要)
+	_IF_FLAGON_JUMP	FH_00,ev_shopm1_01_p02_field_t102
+	_FLAG_SET		FH_00
+
+	_BGM_SET		MUS_TSURETEK,0
+
+	_TALK_KEYWAIT	msg_shopm1_01_p01_field_t102
+	_TALK_CLOSE
+
+	_SWITCH			RG_SITE
+	_CASEJUMP		SITE_D,site_u_to_hero_field_t102			//上から話し掛け
+	_CASEJUMP		SITE_U,site_d_to_hero_field_t102			//下から話し掛け
+	_CASEJUMP		SITE_R,site_l_to_hero_field_t102			//左から話し掛け
+	_END
+
+//上から
+site_u_to_hero_field_t102:
+	_SET_OBJ_ANIME	SHOPM1_01_FIELD_T102,shopm1_01_field_t102_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t102_anime02
+	_OBJ_ANIME_WAIT 
+	_JUMP			end_shopm1_01_field_t102
+	_END
+
+//下から
+site_d_to_hero_field_t102:
+	_SET_OBJ_ANIME	SHOPM1_01_FIELD_T102,shopm1_01_field_t102_anime03
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t102_anime03
+	_OBJ_ANIME_WAIT 
+	_JUMP			end_shopm1_01_field_t102
+	_END
+
+//左から
+site_l_to_hero_field_t102:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t102_anime01
+	_SET_OBJ_ANIME	SHOPM1_01_FIELD_T102,shopm1_01_field_t102_anime01
+	_OBJ_ANIME_WAIT 
+	_JUMP			end_shopm1_01_field_t102
+	_END
+
+//共通終了処理
+end_shopm1_01_field_t102:
+	_TALK_KEYWAIT	msg_shopm1_01_p03_field_t102
+
+	_ITEM_EVENT		ITEM_KIZUGUSURI,1
+	_IF_ZERO_JUMP	ev_fail_item_field_t102
+
+	_TALK_KEYWAIT	msg_shopm1_01_p04_field_t102
+
+	//アイテム入手
+	_FLAG_SET		FE_BOY4_01_FIELD_T102
+	
+	_BGM_NOW_SET
+	_TALK_OBJ_END
+	_END
+
+//すでに案内されている(アイテム貰っている)
+ev_shopm1_01_p02_field_t102:
+	_TALK_KEYWAIT	msg_shopm1_01_p04_field_t102
+	_TALK_OBJ_END
+	_END
+
+//バッグがいっぱいだった時
+ev_fail_item_field_t102:
+	_TALK_KEYWAIT	msg_itemget_p07
+	_BGM_NOW_SET
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//少年	つれていく(左から)
+//--------------------------------------------------------------------
+shopm1_01_field_t102_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//少年	つれていく(上から)
+//--------------------------------------------------------------------
+shopm1_01_field_t102_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//少年	つれていく(下から)
+//--------------------------------------------------------------------
+shopm1_01_field_t102_anime03:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//少年	PCにつれていく
+//--------------------------------------------------------------------
+shopm1_01_field_t102_anime04:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ついていく(左から)
+//--------------------------------------------------------------------
+hero_01_field_t102_anime01:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ついていく(上から)
+//--------------------------------------------------------------------
+hero_01_field_t102_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ついていく(下から)
+//--------------------------------------------------------------------
+hero_01_field_t102_anime03:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	PCの方へついていく
+//--------------------------------------------------------------------
+hero_01_field_t102_anime04:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						マニアストッパー	
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_field_t102
+	_TALK_OBJ_START
+
+	//モンスターボールを貰っているか
+	_IF_FLAGON_JUMP	FE_MONSBALL_GET,ev_freak1_02_msg
+
+	_TALK_KEYWAIT	msg_freak1_01_p02_field_t102
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	FREAK1_01_FIELD_T102,default_site_anime
+	_OBJ_ANIME_WAIT 
+
+	_TALK_OBJ_END
+	_END
+
+//上のマス
+SCRIPT_LABEL	ev_field_t102_pos01
+	_TALK_START
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,ev_hero_01_field_t102_anime01
+	_SET_OBJ_ANIME	FREAK1_01_FIELD_T102,freak1_01_field_t102_anime01
+	_OBJ_ANIME_WAIT 
+
+	_TALK_KEYWAIT	msg_freak1_01_p01_field_t102
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	FREAK1_01_FIELD_T102,freak1_01_field_t102_anime02
+	_OBJ_ANIME_WAIT 
+
+	_TALK_END
+	_END
+
+//モンスターボールを貰って以降
+ev_freak1_02_msg:
+	_TALK_KEYWAIT	msg_freak1_01_p03_field_t102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						オダマキ博士の娘(息子)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_field_t102
+	_TALK_START
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T102,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_JUMP			support_common_02_field_t102
+	_END
+
+
+/********************************************************************/
+/*						オダマキ博士の娘(息子)用POS					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_field_t102_pos01
+	_TALK_START
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T102,ev_support_field_t102_anime01
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_JUMP			support_common_02_field_t102
+	_END
+
+SCRIPT_LABEL	ev_support_field_t102_pos02
+	_TALK_START
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T102,ev_support_field_t102_anime02
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_JUMP			support_common_02_field_t102
+	_END
+
+SCRIPT_LABEL	ev_support_field_t102_pos03
+	_TALK_START
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T102,ev_support_field_t102_anime03
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_JUMP			support_common_02_field_t102
+	_END
+
+//共通部分
+support_common_02_field_t102:
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_field_t102
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_field_t102
+	_END
+
+//主人公男の場合(相手が娘）
+my_sex_boy_field_t102:
+	_TALK_KEYWAIT	msg_heroine_01_p01_field_t102
+	_JUMP			support_common_03_field_t102
+	_END
+
+//主人公女の場合(相手は息子)
+my_sex_girl_field_t102:
+	_TALK_KEYWAIT	msg_hero_01_p01_field_t102
+	_JUMP			support_common_03_field_t102
+	_END
+
+//共通部分
+support_common_03_field_t102:
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T102,ev_support_field_t102_anime04
+	_OBJ_ANIME_WAIT
+
+	_OBJ_DELETE		SUPPORT_01_FIELD_T102
+	_LDVAL			WK_SCENE_02_FIELD_T102,2		//POSを無効化
+	_FLAG_SET		FV_SUPPORT_01_FIELD_T102		//コトキのサポーターを消す
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//サポート
+//--------------------------------------------------------------------
+//左２歩移動
+ev_support_field_t102_anime01:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//左１歩移動
+ev_support_field_t102_anime02:
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//左を向く
+ev_support_field_t102_anime03:
+	.byte	AC_SITE_L
+	.byte	ACMD_END
+
+//下６歩移動
+ev_support_field_t102_anime04:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	押しだされる
+//--------------------------------------------------------------------
+ev_hero_01_field_t102_anime01:
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マニア	邪魔する
+//--------------------------------------------------------------------
+freak1_01_field_t102_anime01:
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_TURN_L
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_R_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マニア	元の位置に戻る
+//--------------------------------------------------------------------
+freak1_01_field_t102_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+

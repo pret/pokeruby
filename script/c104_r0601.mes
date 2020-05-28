@@ -1,0 +1,67 @@
+// ●カナズミシティ　民家１（街の西・ＰＣの隣）
+// ●秘伝マシン「いあいぎり」
+
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c104_r0601
+msg_middlem2_01_p01_c104_r0601:
+	.byte	so_,no_,spc_,me_,tu_,ki_
+	.byte	CR_
+	.byte	si_,na_,ya_,ka_,na_,spc_,mi_,no_,spc_,ko_,na_,si_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	so_,si_,te_,spc_,ki_,ta_,e_,ra_,re_,ta_,spc_,PO_,KE_,MO_,N_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,de_,ki_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,mo_,spc_,i_,wa_,na_,ku_,te_,spc_,i_,i_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ni_,ha_,spc_,wa_,ka_,ru_,spc_,wa_,ka_,ru_,no_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,na_,ra_,ba_,spc_,ko_,no_,spc_,hi_,de_,n_,MA_,SI_,N_
+	.byte	CR_
+	.byte	u_,ma_,ku_,spc_,tu_,ka_,e_,ru_,da_,ro_,u_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,a_,spc_,e_,n_,ri_,yyo_,spc_,se_,zu_,ni_,spc_,mo_,ttu_,te_,i_,ki_,ta_,ma_,e_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●秘伝マシン「いあいぎり」（No339）入手処理
+// ●続けて、以下のメッセージ自動表示
+// 　（アイテム入手後も同じメッセージです）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p02_c104_r0601
+msg_middlem2_01_p02_c104_r0601:
+	.byte	so_,no_,spc_,hi_,de_,n_,MA_,SI_,N_,ha_,spc_,i_,a_,i_,gi_,ri_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hi_,de_,n_,ha_,spc_,ta_,ta_,ka_,ttu_,te_,i_,na_,i_,spc_,to_,ki_,de_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,tu_,ka_,e_,ru_,spc_,wa_,za_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,a_,i_,gi_,ri_,wo_,spc_,o_,bo_,e_,ta_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	SU_,TO_,bou_,N_,BA_,TTU_,ZI_,wo_,spc_,mo_,ttu_,te_,i_,re_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,so_,i_,spc_,ki_,wo_,spc_,ki_,re_,ru_,yo_,u_,ni_,spc_,na_,ru_,no_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,mo_,spc_,hi_,de_,n_,MA_,SI_,N_,ha_,spc_,wa_,za_,MA_,SI_,N_,to_,spc_,ti_,ga_,i_
+	.byte	CR_
+	.byte	tu_,ka_,ttu_,te_,mo_,spc_,na_,ku_,na_,ra_,na_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●学生女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p01_c104_r0601
+msg_schoolw1_01_p01_c104_r0601:
+	.byte	ko_,no_,spc_,KA_,NA_,ZU_,MI_,ga_,spc_,o_,o_,ki_,ku_,na_,ru_,to_,ki_
+	.byte	CR_
+	.byte	o_,to_,u_,sa_,n_,spc_,mi_,n_,na_,no_,spc_,ta_,me_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	i_,a_,i_,gi_,ri_,wo_,spc_,tu_,ka_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ta_,ri_,wo_,spc_,ki_,ri_,hi_,ra_,i_,ta_,n_,da_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

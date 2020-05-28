@@ -1,0 +1,158 @@
+//====================================================================
+//							c106_r1105
+//						ミナモ・ミナモデパート５F
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r1105_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							店員(ぬいぐるみ売り場)				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_01_p01_c106_r1105
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_FLOWER_SHOP_START	c106_r1105_menu_01
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1105_menu_01
+	_SHOP_MENU		GOODS_PITYUUDOORU
+	_SHOP_MENU		GOODS_PIKATYUUDOORU
+	_SHOP_MENU		GOODS_MARIRUDOORU		
+	_SHOP_MENU		GOODS_PURINDOORU		
+	_SHOP_MENU		GOODS_YOMAWARUDOORU
+	_SHOP_MENU		GOODS_SOONANODOORU
+	_SHOP_MENU		GOODS_YAZIRONDOORU
+	_SHOP_MENU		GOODS_KAKUREONDOORU
+	_SHOP_MENU		GOODS_RURIRIDOORU
+	_SHOP_MENU		GOODS_ENEKODOORU
+	_SHOP_MENU		GOODS_TIRUTTODOORU
+	_SHOP_MENU		GOODS_GOKURINDOORU
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							店員(クッション売り場)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_02_p01_c106_r1105
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_FLOWER_SHOP_START	c106_r1105_menu_02
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1105_menu_02
+	_SHOP_MENU		GOODS_PIKAKUSSYON
+	_SHOP_MENU		GOODS_MARUIKUSSYON
+	_SHOP_MENU		GOODS_ZIGUZAKUSSYON
+	_SHOP_MENU		GOODS_GURURUKUSSYON
+	_SHOP_MENU		GOODS_DAIYAKUSSYON
+	_SHOP_MENU		GOODS_BOORUKUSSYON
+	_SHOP_MENU		GOODS_KUSAKUSSYON
+	_SHOP_MENU		GOODS_HONOOKUSSYON
+	_SHOP_MENU		GOODS_MIZUKUSSYON
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							店員(ポスター売り)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_03_p01_c106_r1105
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_FLOWER_SHOP_START	c106_r1105_menu_03
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1105_menu_03
+	_SHOP_MENU		GOODS_BOORUPOSUTAA
+	_SHOP_MENU		GOODS_MIDORINOPOSUTAA
+	_SHOP_MENU		GOODS_AKAIPOSUTAA
+	_SHOP_MENU		GOODS_MIZUIROPOSUTAA
+	_SHOP_MENU		GOODS_KAWAIIPOSUTAA
+	_SHOP_MENU		GOODS_PIKAPIKAPOSUTAA
+	_SHOP_MENU		GOODS_NAGAIPOSUTAA
+	_SHOP_MENU		GOODS_UMINOPOSUTAA
+	_SHOP_MENU		GOODS_SORANOPOSUTAA
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							店員(マット売り場)				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_04_p01_c106_r1105
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_FLOWER_SHOP_START	c106_r1105_menu_04
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1105_menu_04
+	_SHOP_MENU		GOODS_NAMINORIMATTO			
+	_SHOP_MENU		GOODS_KAMINARIMATTO
+	_SHOP_MENU		GOODS_DAIMONZIMATTO	
+	_SHOP_MENU		GOODS_KONAYUKIMATTO	
+	_SHOP_MENU		GOODS_MEROMEROMATTO		
+	_SHOP_MENU		GOODS_ZIWAREMATTO		
+	_SHOP_MENU		GOODS_MAKIBISIMATTO	
+	_SHOP_MENU		GOODS_KIRAKIRAMATTO	
+	_SHOP_MENU		GOODS_ZYANPUMATTO	
+	_SHOP_MENU		GOODS_KURUTTOMATTO	
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//								おばさん
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew1_01_p01_c106_r1105
+	_EASY_OBJ_MSG	msg_middlew1_01_p01_c106_r1105
+	_END
+
+
+/********************************************************************/
+//								女性
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_c106_r1105
+	_EASY_OBJ_MSG	msg_woman1_01_p01_c106_r1105
+	_END
+
+
+/********************************************************************/
+//								お嬢
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou2_01_p01_c106_r1105
+	_EASY_OBJ_MSG	msg_ojyou2_01_p01_c106_r1105
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

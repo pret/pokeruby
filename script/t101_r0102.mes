@@ -1,0 +1,118 @@
+// ●ミシロタウン　自宅２階
+
+
+// ●ポケモンのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_poke1_01_p01_t101_r0102
+msg_poke1_01_p01_t101_r0102:
+	.byte	ga_,u_,ttu_,spc_,ga_,u_,ttu_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このポケモンは、このあと主人公が家から出ると消える。
+// （１階に降りただけでは消えない）
+
+// ●時計を調べたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_tokei1_01_p01_t101_r0102
+msg_tokei1_01_p01_t101_r0102:
+	.byte	ka_,be_,no_,spc_,to_,ke_,i_,ga_,spc_,to_,ma_,ttu_,te_,i_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,ka_,n_,wo_,spc_,a_,wa_,se_,te_,spc_,o_,ka_,na_,ku_,ti_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●時刻入力ウインドウ表示
+// ●時刻入力→時刻確認メッセージ→決定
+// ●時刻を入力すると、母親登場
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p01_t101_r0102
+msg_mama_01_p01_t101_r0102:
+	.byte	MA_,MA_,kako2_,I_MSG_,MY_NAME_BUF
+	.byte	CR_
+	.byte	do_,u_,spc_,a_,ta_,ra_,si_,i_,spc_,he_,ya_,ha_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	u_,n_,gyoe_,spc_,ki_,re_,i_,ni_,spc_,ka_,ta_,du_,i_,te_,ru_,wa_,ne_,gyoe_
+	.byte	CR_
+	.byte	si_,ta_,mo_,spc_,mo_,u_,spc_,ka_,ta_,du_,i_,ta_,wa_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,i_,ru_,to_,spc_,ho_,n_,to_,u_,ni_,spc_,ra_,ku_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,gyoe_,spc_,tu_,ku_,e_,no_,spc_,u_,e_,no_,spc_,mo_,no_,mo_
+	.byte	CR_
+	.byte	da_,i_,zi_,yyo_,u_,bu_,ka_,spc_,mi_,te_,o_,i_,te_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１Ｆに降りていく
+
+
+// ●本棚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hondana1_01_p01_t101_r0102
+msg_hondana1_01_p01_t101_r0102:
+	.byte	PO_,KE_,MO_,N_,ni_,tu_,i_,te_,spc_,ka_,ka_,re_,ta_,spc_,ho_,n_,ga_
+	.byte	CR_
+	.byte	zu_,ra_,ri_,to_,spc_,na_,ra_,n_,de_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,zi_,ma_,n_,no_,spc_,KO_,RE_,KU_,SI_,YYO_,N_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●パソコン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pasokon1_01_p01_t101_r0102
+msg_pasokon1_01_p01_t101_r0102:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,PA_,SO_,KO_,N_,no_
+	.byte	CR_
+	.byte	SU_,I_,TTU_,TI_,wo_,spc_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●その後、メニューウインドウを表示。
+// ●パソコン使用時の処理へ
+
+// ●ノート
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p01_t101_r0102
+msg_note1_01_p01_t101_r0102:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,NO_,bou_,TO_,wo_,spc_,hi_,ra_,i_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,n_,ke_,n_,no_,spc_,ko_,ko_,ro_,e_,spc_,so_,no_,n1_
+	.byte	CR_
+	.byte	SU_,TA_,bou_,TO_,BO_,TA_,N_,de_,spc_,ME_,NI_,YYU_,bou_,ga_,spc_,hi_,ra_,ku_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,n_,ke_,n_,no_,spc_,ko_,ko_,ro_,e_,spc_,so_,no_,n2_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,RE_,PO_,bou_,TO_,de_,spc_,ki_,ro_,ku_,spc_,de_,ki_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,to_,ha_,spc_,ma_,ttu_,si_,ro_,spc_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●地図
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_chizu1_01_p01_t101_r0102
+msg_chizu1_01_p01_t101_r0102:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,HO_,U_,E_,N_,ti_,ho_,u_,no_
+	.byte	CR_
+	.byte	TA_,U_,N_,MA_,TTU_,PU_,ni_,spc_,ka_,o_,wo_,spc_,ti_,ka_,du_,ke_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●実際にタウンマップが確認できる
+
+// ●ゲームキューブ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gc1_01_p01_t101_r0102
+msg_gc1_01_p01_t101_r0102:
+	.byte	GE_,bou_,MU_,KI_,YYU_,bou_,BU_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TO_,RO_,bou_,RA_,no_,spc_,ka_,wa_,ri_,ni_
+	.byte	CR_
+	.byte	GE_,bou_,MU_,BO_,bou_,I_,spc_,A_,DO_,BA_,N_,SU_,ga_,spc_,tu_,na_,ga_,ttu_,te_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

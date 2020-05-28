@@ -1,0 +1,148 @@
+//====================================================================
+//						r104_r0101
+//					ロード104・ハギ老人の小屋
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	r104_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_r104_r0101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r104_r0101:
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_HAGIHOUSE
+
+	//カナシダトンネルのイベント終了していたら
+	_IFVAL_CALL		WK_SCENE_R104_R0101,EQ,1,hagi_move_p01_r104_r0101
+
+	//ポケギア入手していたら
+	_IF_FLAGON_CALL	FE_POKEGEAR_GET,del_support_01_r104_r0101
+	_END
+
+//ポケギア入手している
+del_support_01_r104_r0101:
+	_FLAG_SET		FV_SUPPORT_01_FIELD_C104
+	_RET
+
+//カナシダトンネルのイベント終了していたらハギたちの位置を移動する
+hagi_move_p01_r104_r0101:
+	_SXY_POS_CHANGE		OLDMAN1_01_R104_R0101,9,3
+	_SXY_SITE_CHANGE	OLDMAN1_01_R104_R0101,MV_RTDL
+	_SXY_POS_CHANGE		CAMOME_01_R104_R0101,9,6
+	_SXY_SITE_CHANGE	CAMOME_01_R104_R0101,MV_RTLU
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ハギ老人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_r104_r0101
+	_TALK_OBJ_START			//自機の動作終了を待つ
+
+	//一回目？
+	_IF_FLAGOFF_CALL	FE_HAGI_01_R104_R0101,first_talk_oldman1_01_p01_r104_r0101
+
+	//手紙イベントクリアしてなかったら
+	_IF_FLAGOFF_JUMP	FE_TEGAMI_CLEAR,no_clear_letter_oldman1_01_r104_r0101
+
+	//デボンの荷物を返していない
+	_IF_FLAGOFF_JUMP	FE_AQUA_01_C102_R0502,no_clear_nimotsu_oldman1_01_r104_r0101
+
+	//通常時
+	_JUMP			normal_talk_oldman1_01_p01_r104_r0101
+	_END
+
+//一回目
+first_talk_oldman1_01_p01_r104_r0101:
+	_FLAG_SET		FE_HAGI_01_R104_R0101			//一度話した状態へ
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_r104_r0101
+
+	_TALK_YES_NO	msg_oldman1_01_p02_r104_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,cancel_oldman1_01_p01_r104_r0101
+	_JUMP			fune_go_end
+	_END
+
+//通常時
+normal_talk_oldman1_01_p01_r104_r0101:
+	_TALKMSG		msg_oldman1_01_p07_r104_r0101
+	_TALK_WAIT
+
+	_SELECT_WINDOW_CSR	21,8,HAGI_MENU02,1,0		//Bキャンセル有効
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,fune_go_end
+	_CASEJUMP		1,normal_cancel_oldman1_01_p01_r104_r0101
+	_CASECANCEL		normal_cancel_oldman1_01_p01_r104_r0101
+	_END
+
+//手紙イベントクリアしてなかったら
+no_clear_letter_oldman1_01_r104_r0101:
+	_TALK_YES_NO	msg_oldman1_01_p05_r104_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,cancel_oldman1_01_p01_r104_r0101
+	_JUMP			fune_go_end
+	_END
+
+//荷物イベントをクリアしていなかったら
+no_clear_nimotsu_oldman1_01_r104_r0101:
+	_TALK_YES_NO	msg_oldman1_01_p06_r104_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,cancel_oldman1_01_p01_r104_r0101
+	_JUMP			fune_go_end
+	_END
+
+//やめる
+cancel_oldman1_01_p01_r104_r0101:
+	_TALK_KEYWAIT	msg_oldman1_01_p04_r104_r0101
+	_TALK_OBJ_END
+	_END
+
+//やめる(荷物も届け終わった後以降ずっと）
+normal_cancel_oldman1_01_p01_r104_r0101:
+	_TALK_KEYWAIT	msg_oldman1_01_p08_r104_r0101
+	_TALK_OBJ_END
+	_END
+
+//出発処理エンド部分共通部分
+fune_go_end:
+	//"ムロタウン　か　... ピーコちゃん！"
+	_TALK_KEYWAIT	msg_oldman1_01_p03_r104_r0101
+
+	//クリアする
+	_CALL			ev_fune_pos_clear
+
+	//船に必要なイベントセット
+	_LDVAL			WK_SCENE_HAGI_FUNE,1	//船に乗る
+	_FLAG_RESET		FV_HAGI_01_FIELD_R104	//ロード１０４の船着場のハギ老人を出す
+	_FLAG_SET		FV_HAGI_01_R104_R0101	//小屋のハギ老人を消す
+	_FLAG_SET		FV_POKEMON_01_R104_R0101//小屋のピーコちゃんを消す
+
+	_MAP_CHANGE		FIELD,FIELD_R104,13,51/*ワープ*/
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							ピーコ									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_camome_01_p01_r104_r0101
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_KYAMOME,0
+	_TALK_KEYWAIT	msg_camome_01_p01_r104_r0101
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+

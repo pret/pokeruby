@@ -1,0 +1,28 @@
+// ●カナズミシティ　民家５／３Ｆ（街の南西）
+
+
+// ●デボン社員
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_01_p01_c104_r0803
+msg_devon1_01_p01_c104_r0803:
+	.byte	DE_,BO_,N_,no_,spc_,si_,yya_,ti_,yyo_,u_,ha_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,i_,si_,wo_,spc_,a_,tu_,me_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyu_,mi_,spc_,na_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl4_01_p01_c104_r0803
+msg_girl4_01_p01_c104_r0803:
+	.byte	ta_,si_,ka_,spc_,mu_,su_,ko_,sa_,n_,mo_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,i_,si_,wo_,spc_,a_,tu_,me_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyu_,mi_,spc_,da_,ttu_,ta_,ttu_,ke_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

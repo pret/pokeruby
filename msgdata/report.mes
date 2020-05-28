@@ -1,0 +1,45 @@
+
+//	ÇlÇrÇfÉfÅ[É^
+	.GLOBAL	save_start_msg
+save_start_msg:
+	.byte	ko_,ko_,ma_,de_,no_,spc_,ka_,tu_,ya_,ku_,wo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,RE_,PO_,bou_,TO_,ni_,spc_,ka_,ki_,ko_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+	.GLOBAL	save_check_msg
+save_check_msg:
+	.byte	ma_,e_,ni_,spc_,ka_,ka_,re_,ta_,spc_,RE_,PO_,bou_,TO_,ni_
+	.byte	CR_
+	.byte	u_,e_,ka_,ra_,spc_,ka_,i_,te_,mo_,spc_,i_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+	.GLOBAL	save_active_msg
+save_active_msg:
+	.byte	PO_,KE_,MO_,N_,RE_,PO_,bou_,TO_,ni_,spc_,ka_,ki_,ko_,n_,de_,i_,ma_,su_
+	.byte	CR_
+	.byte	de_,n_,ge_,n_,wo_,spc_,ki_,ra_,na_,i_,de_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+	.GLOBAL	save_end_msg
+save_end_msg:
+	.byte	I_MSG_,MY_NAME_BUF,spc_,ha_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,ni_,spc_,si_,ttu_,ka_,ri_,spc_,ka_,ki_,no_,ko_,si_,ta_,gyoe_
+	.byte	EOM_
+
+
+	.GLOBAL	save_fail_msg
+save_fail_msg:
+	.byte	SE_,bou_,BU_,ni_,spc_,si_,ttu_,pa_,i_,spc_,si_,ma_,si_,ta_,tenten_
+	.byte	EOM_
+
+	.GLOBAL save_other_check_msg
+save_other_check_msg:
+	.byte	be_,tu_,no_,spc_,bo_,u_,ke_,n_,no_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,ga_,spc_,ka_,ka_,re_,te_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,e_,ka_,ra_,spc_,ka_,i_,te_,mo_,spc_,i_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+

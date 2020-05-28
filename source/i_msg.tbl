@@ -1,0 +1,22 @@
+
+static const u8 * ( * const GetStrFuncList[])() =
+{									/*	NDW TABLE START */
+
+	Get_NumBuffer,					/* NUM_BUFFER0 */
+	Get_my_name,					/* MY_NAME_BUF */
+	Get_StrTemp0,					/* STR_TEMP_BUF0 */
+	Get_StrTemp1,					/* STR_TEMP_BUF1 */
+	Get_StrTemp2,					/* STR_TEMP_BUF2 */
+	Get_MyNameSuffix,				/* SUFIX_BUF */
+
+	Get_SupportCharacterName,		/* STR_SUPPORT_NPC */
+	Get_VersionString,				/* STR_VERSION */
+	Get_EnemyGroupName,				/* STR_ENE_GROUP */
+	Get_FriendlyGroupName,			/* STR_ENE_GROUP2 */
+	Get_EnemyLeaderName,			/* STR_ENE_LEADER */
+	Get_FriendlyLeaderName,			/* STR_ENE_LEADER2 */
+	Get_MainKeyPokemonName,			/* STR_KEY_POKEMON */
+	Get_SubKeyPokemonName,			/* STR_KEY_POKEMON2 */
+
+};									/*	NDW TABLE END	*/
+

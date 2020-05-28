@@ -1,0 +1,117 @@
+//===================================================================
+//							t105_r0201
+//						ハジツゲ・ルーム0201
+//===================================================================
+
+//-------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//-------------------------------------------------------------------
+EVENT_DATA_START	t105_r0201_event_data
+FLAG_CHANGE_LABEL	flag_change_t105_r0201
+EVENT_DATA_END
+
+
+//-------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//-------------------------------------------------------------------
+flag_change_t105_r0201:
+	_END
+
+//-------------------------------------------------------------------
+//							スクリプト本体
+//-------------------------------------------------------------------
+
+/********************************************************************/
+/*							ソライシ博士							*/
+//
+//							FH_01使用中
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_t105_r0201
+	_TALK_OBJ_START
+
+	//すでに「おんがえし」貰っているか
+	_IF_FLAGON_JUMP	FE_WAZAM27_GET,ev_studym1_01_p04_t105_r0201
+
+	//「いんせき」を持っているかチェック
+	_CHECK_ITEM		ITEM_INSEKI,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_studym1_01_p03_t105_r0201
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_t105_r0201
+	_TALK_OBJ_END
+	_END
+
+//「いんせき」を持っている
+ev_studym1_01_p03_t105_r0201:
+	//すでに「いいえ」を選んでいるか
+	_IF_FLAGOFF_CALL	FH_01,ev_studym1_01_p05_t105_r0201
+	_IF_FLAGON_CALL		FH_01,ev_studym1_01_p06_t105_r0201
+
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_studym1_01_t105_r0201
+
+	_TALK_KEYWAIT	msg_studym1_01_p03_t105_r0201
+
+	_ITEM_EVENT		ITEM_WAZAMASIN27,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_LDVAL			PARAM0,ITEM_INSEKI
+	_CALL			ev_item_return
+
+	_FLAG_SET		FE_WAZAM27_GET
+
+	_TALK_KEYWAIT	msg_studym1_01_p04_t105_r0201
+	_TALK_OBJ_END
+	_END
+	
+//「いいえ」をまだ選んでいない
+ev_studym1_01_p05_t105_r0201:
+	_TALK_KEYWAIT	msg_studym1_01_p01_t105_r0201
+	_TALK_YES_NO	msg_studym1_01_p02_t105_r0201
+	_RET
+
+//「いいえ」を選んでいる
+ev_studym1_01_p06_t105_r0201:
+	_TALK_YES_NO	msg_studym1_01_p06_t105_r0201
+	_RET
+
+//交換しない
+no_studym1_01_t105_r0201:
+	_FLAG_SET		FH_01
+	_TALK_KEYWAIT	msg_studym1_01_p05_t105_r0201
+	_TALK_OBJ_END
+	_END
+
+//「おんがえし」入手している
+ev_studym1_01_p04_t105_r0201:
+	_TALK_KEYWAIT	msg_studym1_01_p04_t105_r0201
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								女性								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_t105_r0201
+	_TALK_OBJ_START
+
+	//すでに「おんがえし」貰っているか
+	_IF_FLAGON_JUMP	FE_WAZAM27_GET,ev_woman1_01_p03_t105_r0201
+
+	//えんとつ山イベント終了していたら
+	_IF_FLAGON_JUMP	FE_BOSS_01_CAVE_D0701,ev_woman1_01_p02_t105_r0201
+
+	_TALK_KEYWAIT	msg_woman1_01_p01_t105_r0201
+	_TALK_OBJ_END
+	_END
+
+//えんとつ山イベント終了している
+ev_woman1_01_p02_t105_r0201:
+	_TALK_KEYWAIT	msg_woman1_01_p02_t105_r0201
+	_TALK_OBJ_END
+	_END
+
+//すでに「おんがえし」貰っている
+ev_woman1_01_p03_t105_r0201:
+	_TALK_KEYWAIT	msg_woman1_01_p03_t105_r0201
+	_TALK_OBJ_END
+	_END
+

@@ -1,0 +1,376 @@
+// ●トウカの森
+
+
+// ●ひとりで立っているデボン研究員
+// ●主人公が少し手前までくると（オート開始）、
+// 　その場でキョロキョロしながら以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_cave_d0601
+msg_workerm1_01_p01_cave_d0601:
+	.byte	u_,bou_,n_
+	.byte	CR_
+	.byte	i_,na_,i_,na_,a_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●その後、主人公の方を向いて、寄ってくる
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p02_cave_d0601
+msg_workerm1_01_p02_cave_d0601:
+	.byte	ne_,e_,spc_,ki_,mi_,ki_,mi_,spc_,ko_,no_,a_,ta_,ri_,de_
+	.byte	CR_
+	.byte	KI_,NO_,KO_,KO_,ttu_,te_,spc_,PO_,KE_,MO_,N_,spc_,mi_,na_,ka_,ttu_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,zi_,sa_,n_,spc_,a_,no_,spc_,PO_,KE_,MO_,N_,spc_,su_,ki_,spc_,na_,no_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで北方向からアクア団員が乱入してくる
+// ●画面内に姿を見せてから、以下のセリフを表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p01_cave_d0601
+msg_evilm1_01_p01_cave_d0601:
+	.byte	ma_,ti_,bu_,se_,spc_,si_,te_,i_,ta_,no_,ni_
+	.byte	CR_
+	.byte	i_,tu_,ma_,de_,mo_,spc_,TO_,U_,KA_,no_,mo_,ri_,de_,spc_,u_,ro_,u_,ro_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ti_,ku_,ta_,bi_,re_,ta_,ka_,ra_,spc_,ki_,te_,ya_,ttu_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●研究員の前に立ちふさがり、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p02_cave_d0601
+msg_evilm1_01_p02_cave_d0601:
+	.byte	ya_,i_,gyoe_,spc_,DE_,BO_,N_,no_,spc_,ke_,n_,ki_,yyu_,u_,i_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,si_,yyo_,ru_,i_,wo_,spc_,ko_,ttu_,ti_,ni_,spc_,yo_,ko_,si_,ya_,ga_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●研究員は主人公の背後に回りこみ
+// ●次のメッセージを自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p07_cave_d0601
+msg_workerm1_01_p07_cave_d0601:
+	.byte	hi_,ya_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,spc_,PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,spc_,da_,yo_,ne_
+	.byte	CR_
+	.byte	o_,zi_,sa_,n_,wo_,spc_,ta_,su_,ke_,te_,yo_,oo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……
+// ●アクア団員、主人公の前に立つ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p03_cave_d0601
+msg_evilm1_01_p03_cave_d0601:
+	.byte	tenten_,tenten_,n_,hate_,spc_,na_,n_,da_,spc_,o_,ma_,e_,hate_
+	.byte	CR_
+	.byte	so_,i_,tu_,wo_,spc_,ka_,ba_,o_,u_,spc_,ttu_,te_,no_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,zi_,yya_,ma_,wo_,spc_,su_,ru_,spc_,ya_,tu_,ha_
+	.byte	CR_
+	.byte	ko_,do_,mo_,de_,mo_,spc_,yo_,u_,si_,yya_,spc_,si_,ne_,e_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,ya_,ga_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団との戦闘に突入
+// ●アクア団、敗北時のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p04_cave_d0601
+msg_evilm1_01_p04_cave_d0601:
+	.byte	tenten_,tenten_,tu_,spc_,tu_,yo_,i_,spc_,zi_,yya_,ne_,bou_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードから抜けると、アクア団員は１歩うしろにさがり、
+// 　以下のセリフ 
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p05_cave_d0601
+msg_evilm1_01_p05_cave_d0601:
+	.byte	mu_,mu_,mu_,tenten_,tenten_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_
+	.byte	CR_
+	.byte	zi_,yya_,ma_,wo_,spc_,su_,ru_,to_,ha_,spc_,na_,n_,te_,spc_,ya_,tu_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,u_,spc_,i_,ttu_,ka_,i_,spc_,si_,yyo_,u_,bu_,spc_,si_,ro_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,to_,spc_,i_,i_,ta_,i_,spc_,to_,ko_,ro_,spc_,da_,ga_
+	.byte	CR_
+	.byte	mo_,u_,spc_,te_,mo_,ti_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,i_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ni_,spc_,KA_,NA_,ZU_,MI_,spc_,SI_,TE_,II_,ni_,mo_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ga_
+	.byte	CR_
+	.byte	ne_,ra_,ttu_,te_,i_,ru_,spc_,mo_,no_,ga_,spc_,a_,ru_,ka_,ra_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,ko_,re_,gu_,ra_,i_,ni_,spc_,si_,to_,i_,te_,ya_,ra_,aa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そういって北に走り去っていく
+// ●その後、主人公がデボンの研究員の方を振り向き、
+// 　研究員は以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p03_cave_d0601
+msg_workerm1_01_p03_cave_d0601:
+	.byte	tenten_,tenten_,hu_,uu_
+	.byte	CR_
+	.byte	a_,bu_,na_,i_,spc_,to_,ko_,ro_,spc_,da_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,o_,ka_,ge_,de_,spc_,da_,i_,zi_,na_,spc_,si_,yyo_,ru_,i_,wo_
+	.byte	CR_
+	.byte	u_,ba_,wa_,re_,na_,i_,de_,spc_,su_,n_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,so_,u_,da_,gyoe_,spc_,o_,re_,i_,ni_
+	.byte	CR_
+	.byte	SU_,bou_,PA_,bou_,BO_,bou_,RU_,wo_,spc_,a_,ge_,ti_,yya_,o_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●スーパーボール（No003）入手
+// ●もし道具を受け取れない場合は
+// 　→msg_workerm1_01_p06_cave_d0601:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p04_cave_d0601
+msg_workerm1_01_p04_cave_d0601:
+	.byte	tenten_,tenten_,so_,u_,i_,e_,ba_,spc_,sa_,ttu_,ki_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ha_
+	.byte	CR_
+	.byte	kako_,KA_,NA_,ZU_,MI_,ni_,mo_,spc_,ne_,ra_,ttu_,te_,i_,ru_,spc_,mo_,no_,ga_,a_,ru_,kakot_
+	.byte	SCROLL_WAIT_
+	.byte	to_,ka_,spc_,i_,ttu_,te_,ta_,yo_,ne_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで研究員は軽く飛び上がり、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p05_cave_d0601
+msg_workerm1_01_p05_cave_d0601:
+	.byte	ta_,i_,he_,n_,da_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	ko_,u_,si_,ti_,yya_,spc_,i_,ra_,re_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そう言って、研究員は北の方へ駆け去っていく（オート終了）
+
+// ●道具を受け取れない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p06_cave_d0601
+msg_workerm1_01_p06_cave_d0601:
+	.byte	do_,u_,gu_,spc_,i_,ttu_,pa_,i_,de_
+	.byte	CR_
+	.byte	SU_,bou_,PA_,bou_,BO_,bou_,RU_,spc_,a_,ge_,ra_,re_,na_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続きは　→　msg_workerm1_01_p04_cave_d0601:
+
+
+// ▼d0601----------------------------------
+// ●むしとりしょうねん０２：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_02_01
+msg_mushi_02_01:
+	.byte	PO_,KE_,MO_,N_,spc_,i_,ttu_,pa_,i_,spc_,tu_,ka_,ma_,e_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ra_,spc_,i_,ke_,gyoe_
+	.byte	CR_
+	.byte	bo_,ku_,no_,spc_,mu_,si_,PO_,KE_,MO_,N_,spc_,TI_,bou_,MU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●むしとりしょうねん０２：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_02_02
+msg_mushi_02_02:
+	.byte	ko_,n_,na_,ni_,spc_,PO_,KE_,MO_,N_,spc_,i_,ru_,no_,ni_
+	.byte	CR_
+	.byte	ka_,te_,na_,ka_,ttu_,ta_,no_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●むしとりしょうねん０２：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_02_03
+msg_mushi_02_03:
+	.byte	ta_,ku_,sa_,n_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ta_,ra_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,spc_,na_,ku_,na_,ttu_,ti_,yya_,ttu_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0601----------------------------------
+// ●むしとりしょうねん０７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_07_01
+msg_mushi_07_01:
+	.byte	mu_,si_,PO_,KE_,MO_,N_,wo_,spc_,ga_,ttu_,ko_,u_,ni_,spc_,mo_,ttu_,te_,i_,ku_,to_
+	.byte	CR_
+	.byte	so_,re_,da_,ke_,de_,spc_,ni_,n_,ki_,mo_,no_,spc_,da_,ro_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●むしとりしょうねん０７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_07_02
+msg_mushi_07_02:
+	.byte	ma_,ke_,ru_,to_,spc_,ni_,n_,ki_,mo_,no_,ni_,spc_,na_,re_,na_,i_,ya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●むしとりしょうねん０７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_07_03
+msg_mushi_07_03:
+	.byte	de_,ka_,i_,spc_,mu_,si_,PO_,KE_,MO_,N_,spc_,mo_,ttu_,te_,ru_,to_
+	.byte	CR_
+	.byte	so_,re_,da_,ke_,de_,spc_,so_,n_,ke_,bou_,spc_,sa_,re_,ru_,da_,ro_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0601----------------------------------
+// ●むしとりしょうねん０７（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_07_04
+msg_mushi_07_04:
+	.byte	bo_,ku_,no_,spc_,mu_,si_,PO_,KE_,MO_,N_,spc_,so_,da_,ttu_,ta_,zo_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,de_,spc_,ma_,ta_,spc_,ni_,n_,ki_,mo_,no_,spc_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●むしとりしょうねん０７（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_07_05
+msg_mushi_07_05:
+	.byte	ma_,ke_,ru_,to_,spc_,ni_,n_,ki_,mo_,no_,ni_,spc_,na_,re_,na_,i_,ya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●むしとりしょうねん０７（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mushi_07_06
+msg_mushi_07_06:
+	.byte	tu_,yo_,i_,spc_,PO_,KE_,MO_,N_,spc_,mo_,ttu_,te_,ru_,to_
+	.byte	CR_
+	.byte	ni_,n_,ki_,mo_,no_,ni_,spc_,na_,re_,ru_,da_,ro_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ga_,n_,ba_,ttu_,te_,spc_,so_,da_,te_,te_,ru_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_cave_d0601
+msg_boy2_01_p01_cave_d0601:
+	.byte	yo_,o_,gyoe_,spc_,o_,ma_,e_,no_,spc_,PO_,KE_,MO_,N_,spc_,ge_,n_,ki_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	te_,mo_,ti_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,yo_,wa_,ttu_,te_,i_,te_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,wa_,se_,ta_,ku_,spc_,na_,i_,to_,ki_,ha_,spc_,na_,ru_,be_,ku_
+	.byte	SCROLL_WAIT_
+	.byte	ku_,sa_,mu_,ra_,wo_,spc_,yo_,ke_,te_,spc_,a_,ru_,ku_,to_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年３
+// ●（Ｘ３０・Ｙ３４）辺りをウロウロと
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p01_cave_d0601
+msg_boy3_01_p01_cave_d0601:
+	.byte	mi_,e_,te_,spc_,i_,na_,ku_,te_,mo_
+	.byte	CR_
+	.byte	do_,u_,gu_,ga_,spc_,o_,ti_,te_,ru_,ko_,to_,ga_,spc_,a_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	a_,si_,mo_,to_,wo_,spc_,si_,ra_,be_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女２
+// ●（Ｘ３３Ｙ５）辺り
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_02_p01_cave_d0601
+msg_girl2_02_p01_cave_d0601:
+	.byte	so_,re_,ttu_,te_,spc_,KA_,NA_,ZU_,MI_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,spc_,TO_,RE_,bou_,NA_,bou_,na_,no_,ne_
+	.byte	CR_
+	.byte	ko_,no_,spc_,do_,u_,gu_,spc_,tu_,ka_,ttu_,te_,mi_,ta_,ra_,spc_,do_,u_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「きせきのタネ」（No205）入手処理
+// ●アイテム入手以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_02_p02_cave_d0601
+msg_girl2_02_p02_cave_d0601:
+	.byte	ki_,se_,ki_,no_,TA_,NE_,wo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,mo_,ta_,se_,te_,a_,ge_,ru_,to_,spc_,ku_,sa_,TA_,I_,PU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,no_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,se_,ki_,no_,TA_,NE_,no_,spc_,ho_,ka_,ni_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,mo_,ta_,se_,ru_,to_,spc_,be_,n_,ri_,na_
+	.byte	SCROLL_WAIT_
+	.byte	do_,u_,gu_,ga_,spc_,a_,ru_,ra_,si_,i_,wa_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●お得な掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_cave_d0601
+msg_kanban_01_p01_cave_d0601:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyo_,u_,bu_,no_,spc_,to_,ki_
+	.byte	CR_
+	.byte	i_,ti_,do_,spc_,de_,mo_,spc_,ka_,o_,wo_,da_,si_,ta_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ke_,i_,ke_,n_,ti_,ga_,spc_,mo_,ra_,e_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,wa_,i_,spc_,PO_,KE_,MO_,N_,wo_,spc_,RI_,SU_,TO_,no_,spc_,u_,e_,ni_,spc_,si_,te_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,no_,to_,ki_,spc_,su_,gu_,ni_,spc_,ko_,u_,ta_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,de_,spc_,yo_,wa_,i_,spc_,PO_,KE_,MO_,N_,mo_,spc_,so_,da_,ti_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お得な掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_cave_d0601
+msg_kanban_02_p01_cave_d0601:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,ha_,spc_,HI_,TTU_,TO_,PO_,I_,N_,TO_,no_,spc_,ho_,ka_,ni_
+	.byte	CR_
+	.byte	wa_,za_,wo_,spc_,ku_,ri_,da_,su_,spc_,ti_,ka_,ra_,no_,spc_,mo_,to_
+	.byte	SCROLL_WAIT_
+	.byte	PA_,WA_,bou_,PO_,I_,N_,TO_,spc_,to_,i_,u_,mo_,no_,ga_,spc_,a_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,za_,no_,spc_,PA_,WA_,bou_,PO_,I_,N_,TO_,ga_,spc_,na_,ku_,na_,ttu_,ta_,to_,ki_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,ni_,spc_,i_,ki_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

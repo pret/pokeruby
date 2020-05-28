@@ -1,0 +1,99 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START cave_d0504_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							デボン息子								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_daigo_01_p01_cave_d0504
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT   msg_daigo_01_p01_cave_d0504
+
+	_LDVAL			PARAM0,ITEM_DAIGOHENOTEGAMI
+	_CALL			ev_item_return
+
+	_FLAG_SET		FE_TEGAMI_CLEAR
+
+	_TALK_KEYWAIT   msg_daigo_01_p02_cave_d0504
+
+	//「技マシン４７」入手
+	_ITEM_EVENT		ITEM_WAZAMASIN47,1
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,ev_daigo_item_fail_cave_d0504
+
+	_TALK_KEYWAIT   msg_daigo_01_p03_cave_d0504
+	_TALK_CLOSE
+
+	//去っていく
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,site_u_01_cave_d0504
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,site_d_01_cave_d0504
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,site_l_01_cave_d0504
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,site_r_01_cave_d0504
+
+	//OBJ消す
+	_SE				SE_KAIDAN
+	_OBJ_DELETE		DAIGO_01_CAVE_D0504
+
+	_TALK_OBJ_END
+	_END
+
+//去っていく
+//左右下から
+site_u_01_cave_d0504:
+site_l_01_cave_d0504:
+site_r_01_cave_d0504:
+	_SET_OBJ_ANIME	DAIGO_01_CAVE_D0504,daigo_01_cave_d0504_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//上から
+site_d_01_cave_d0504:
+	_SET_OBJ_ANIME	DAIGO_01_CAVE_D0504,daigo_01_cave_d0504_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//バッグがいっぱいでもらえないとき
+ev_daigo_item_fail_cave_d0504:
+	_TALK_KEYWAIT   msg_daigo_01_p04_cave_d0504
+	_RET
+
+//--------------------------------------------------------------------
+//デボン息子	去っていく(左右下から)
+//--------------------------------------------------------------------
+daigo_01_cave_d0504_anime01:
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WAIT_8		//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//デボン息子	去っていく(上から)
+//--------------------------------------------------------------------
+daigo_01_cave_d0504_anime02:
+	.byte	AC_WALK_L_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_R_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WALK_U_1		//
+	.byte	AC_WAIT_8		//
+	.byte	ACMD_END
+
+

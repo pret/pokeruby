@@ -1,0 +1,1038 @@
+//====================================================================
+//							c103_r0401
+//						キンセツ・ルーム0401
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c103_r0401_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						サラリーウーマン							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_c103_r0401
+	_TALK_OBJ_START
+
+	//”いらっしゃいませ”
+	_TALK_KEYWAIT	msg_workerw2_01_p01_c103_r0401
+
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_workerw2_01_p02_c103_r0401
+
+	//”コインを買いますか？”
+	_TALKMSG	msg_workerw2_01_p03_c103_r0401
+	_TALK_WAIT
+
+	//お金表示
+	_GOLD_WIN_WRITE		0,0,0		//手持ち
+
+	//コインウインドウ
+	_COIN_WIN_WRITE		0,5
+
+	_JUMP				coin_select_menu_01_c103_r0401
+
+
+//繰り返しの時もあるので分離
+coin_select_menu_01_c103_r0401:
+	//コイン選択メニュー(50)
+	_SELECT_WINDOW_CSR	15,0,KEIHIN_COIN_MENU,0,0
+//_WINDOW_WRITE	15,0,29,7
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_coin_50_c103_r0401
+	_CASEJUMP		1,check_coin_500_c103_r0401
+
+	//いいえ（＋Bキャンセル）
+	_JUMP		ev_workerw2_01_p07_c103_r0401
+	_END
+
+//繰り返しの時もあるので分離
+coin_select_menu_02_c103_r0401:
+	//コイン選択メニュー(500)
+	_SELECT_WINDOW_CSR	15,0,KEIHIN_COIN_MENU,1,0
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_coin_50_c103_r0401
+	_CASEJUMP		1,check_coin_500_c103_r0401
+
+	//いいえ（＋Bキャンセル）
+	_JUMP		ev_workerw2_01_p07_c103_r0401
+	_END
+
+check_coin_50_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK1
+
+	//コイン数オーバー？
+	_IFVAL_JUMP	LOCALWORK1,GE,9950,ev_workerw2_01_p06_c103_r0401
+
+	_COMP_GOLD	1000	
+	//お金が足りない?
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE,ev_workerw2_01_p05_c103_r0401
+	
+	_ADD_COIN	50
+	_SUB_GOLD	1000
+
+	_GOLD_WRITE		0,0,0		//お金表示更新
+	_COIN_WRITE		0,5			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”コインです！どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_01_p04_c103_r0401
+
+#if 0		//増田さんからの指示で再購入処理はなしへ(02/08/28)
+	//”５０まい　１０００えん”
+	_TALKMSG	msg_workerw2_01_p08_c103_r0401
+	_TALK_WAIT
+	_JUMP		coin_select_menu_01_c103_r0401
+#endif
+
+	_GOLD_WIN_DEL	0,0
+	_COIN_WIN_DEL	0,5
+	_TALK_OBJ_END
+	_END
+
+check_coin_500_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK1
+
+	//コイン数オーバー？
+	_IFVAL_JUMP	LOCALWORK1,GE,9500,ev_workerw2_01_p06_c103_r0401
+
+	_COMP_GOLD	10000	
+	//お金が足りない?
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE,ev_workerw2_01_p05_c103_r0401
+	
+	_ADD_COIN	500
+	_SUB_GOLD	10000
+
+	_GOLD_WRITE		0,0,0		//お金表示更新
+	_COIN_WRITE		0,5			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”コインです！どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_01_p04_c103_r0401
+
+#if 0		//増田さんからの指示で再購入処理はなしへ(02/08/28)
+	//”５０まい　１０００えん”
+	_TALKMSG	msg_workerw2_01_p08_c103_r0401
+	_TALK_WAIT
+	_JUMP		coin_select_menu_02_c103_r0401
+#endif
+	_GOLD_WIN_DEL	0,0
+	_COIN_WIN_DEL	0,5
+	_TALK_OBJ_END
+	_END
+
+
+//「コインケース」を持っていない
+ev_workerw2_01_p02_c103_r0401:
+	//”コインケースが　ありませんよ”
+	_TALK_KEYWAIT	msg_workerw2_01_p02_c103_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//”おかねが　たりない”
+ev_workerw2_01_p05_c103_r0401:
+	//”おかねが　たりない”
+	_TALK_KEYWAIT	msg_workerw2_01_p05_c103_r0401
+
+	_GOLD_WIN_DEL	0,0
+	_COIN_WIN_DEL	0,5
+	_TALK_OBJ_END
+	_END
+
+//コインを買わない
+ev_workerw2_01_p07_c103_r0401:
+	//”いりませんか　.....またきてくださいね”
+	_TALK_KEYWAIT	msg_workerw2_01_p07_c103_r0401
+
+	_GOLD_WIN_DEL	0,0
+	_COIN_WIN_DEL	0,5
+	_TALK_OBJ_END
+	_END
+
+//ケースがいっぱい
+ev_workerw2_01_p06_c103_r0401:
+	//”ケースがいっぱい”
+	_TALK_KEYWAIT	msg_workerw2_01_p06_c103_r0401
+
+	_GOLD_WIN_DEL	0,0
+	_COIN_WIN_DEL	0,5
+	_TALK_OBJ_END
+	_END
+
+
+
+/********************************************************************/
+/*						サラリーウーマン２							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_02_p01_c103_r0401
+	_TALK_OBJ_START
+
+	//”いらっしゃいませ　交換します”
+	_TALK_KEYWAIT	msg_workerw2_02_p01_c103_r0401
+
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+
+	//ケースを持ってる？
+	_IFVAL_JUMP	ANSWORK,EQ,TRUE,ev_workerw2_02_p02_c103_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//コインケースを持っているとき
+ev_workerw2_02_p02_c103_r0401:
+	//”どれにしますか？”
+	_TALKMSG	msg_workerw2_02_p02_c103_r0401
+	_TALK_WAIT
+
+	//コインウインドウ
+	_COIN_WIN_WRITE		0,0
+
+	//選択メニューワーククリア
+	_LDVAL			LOCALWORK1,0
+	_JUMP			menu_select_c103_r0401
+
+//再度メニュー選択へ来たとき
+return_menu_c103_r0401:
+	//”どれにしますか？”
+	_TALKMSG	msg_workerw2_02_p02_c103_r0401
+	_TALK_WAIT
+	_JUMP			menu_select_c103_r0401
+
+//メニュー選択
+menu_select_c103_r0401:
+	//景品選択メニュー
+	_SELECT_WINDOW	12,0,KEIHIN_ITEM_MENU
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,ev_keihin_01_c103_r0401
+	_CASEJUMP		1,ev_keihin_02_c103_r0401
+	_CASEJUMP		2,ev_keihin_03_c103_r0401
+	_CASEJUMP		3,ev_workerw2_02_p07_c103_r0401
+
+	_JUMP			ev_workerw2_02_p07_c103_r0401
+	_END
+
+//景品１
+ev_keihin_01_c103_r0401:
+	_LDVAL			LOCALWORK1,1
+	_GET_GOODSNAME	0,GOODS_KIMORIDOORU
+	_JUMP			ev_workerw2_02_p03_c103_r0401
+
+//景品２
+ev_keihin_02_c103_r0401:
+	_LDVAL			LOCALWORK1,2
+	_GET_GOODSNAME	0,GOODS_ATYAMODOORU
+	_JUMP			ev_workerw2_02_p03_c103_r0401
+
+//景品３
+ev_keihin_03_c103_r0401:
+	_LDVAL			LOCALWORK1,3
+	_GET_GOODSNAME	0,GOODS_MIZUGOROUDOORU
+	_JUMP			ev_workerw2_02_p03_c103_r0401
+
+
+//”xxxでいいですね？”
+ev_workerw2_02_p03_c103_r0401:
+	_TALK_YES_NO	msg_workerw2_02_p03_c103_r0401
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_workerw2_02_p07_c103_r0401	// いいえ
+
+	//はい
+	_SWITCH	LOCALWORK1
+	_CASEJUMP		1,yes_keihin_01_c103_r0401
+	_CASEJUMP		2,yes_keihin_02_c103_r0401
+	_CASEJUMP		3,yes_keihin_03_c103_r0401
+	_END
+
+//YESで景品1
+yes_keihin_01_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,1000,ev_workerw2_02_p05_c103_r0401
+
+	//追加できるかチェック
+	_GET_GOODSNAME	1,GOODS_KIMORIDOORU			//※GOODS_EVENTでないので、アイテム名が取得できないとエラー時に名前が不明になるので
+	_ADD_GOODS_CHK	GOODS_KIMORIDOORU
+	_IF_ZERO_JUMP	ev_workerw2_02_p06_c103_r0401
+
+	_SUB_COIN	1000
+	_ADD_GOODS	GOODS_KIMORIDOORU
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_02_p04_c103_r0401
+	_JUMP			return_menu_c103_r0401
+	_END
+
+//YESで景品2
+yes_keihin_02_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,1000,ev_workerw2_02_p05_c103_r0401
+
+	//追加できるかチェック
+	_GET_GOODSNAME	1,GOODS_ATYAMODOORU			//※GOODS_EVENTでないので、アイテム名が取得できないとエラー時に名前が不明になるので
+	_ADD_GOODS_CHK	GOODS_ATYAMODOORU
+	_IF_ZERO_JUMP	ev_workerw2_02_p06_c103_r0401
+
+	_SUB_COIN	1000
+	_ADD_GOODS	GOODS_ATYAMODOORU
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_02_p04_c103_r0401
+	_JUMP			return_menu_c103_r0401
+	_END
+
+//YESで景品3
+yes_keihin_03_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,1000,ev_workerw2_02_p05_c103_r0401
+
+	//追加できるかチェック
+	_GET_GOODSNAME	1,GOODS_MIZUGOROUDOORU		//※GOODS_EVENTでないので、アイテム名が取得できないとエラー時に名前が不明になるので
+	_ADD_GOODS_CHK	GOODS_MIZUGOROUDOORU
+	_IF_ZERO_JUMP	ev_workerw2_02_p06_c103_r0401
+
+	_SUB_COIN	1000
+	_ADD_GOODS	GOODS_MIZUGOROUDOORU
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_02_p04_c103_r0401
+	_JUMP			return_menu_c103_r0401
+	_END
+
+//コイン不足->メニューへ戻る
+ev_workerw2_02_p05_c103_r0401:
+	_TALK_KEYWAIT	msg_workerw2_02_p05_c103_r0401
+	_JUMP			return_menu_c103_r0401
+	_END
+
+//荷物が一杯->メニューへ戻る
+ev_workerw2_02_p06_c103_r0401:
+	_CALL			ev_fail_goods_ret
+	_JUMP			return_menu_c103_r0401
+	_END
+
+//キャンセル
+ev_workerw2_02_p07_c103_r0401:
+	_TALK_KEYWAIT	msg_workerw2_02_p07_c103_r0401
+
+	_COIN_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/*						サラリーウーマン２							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_03_p01_c103_r0401
+	_TALK_OBJ_START
+
+	//”いらっしゃいませ　交換します”
+	_TALK_KEYWAIT	msg_workerw2_02_p01_c103_r0401
+
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+
+	//ケースを持ってる？
+	_IFVAL_JUMP	ANSWORK,EQ,TRUE,ev_workerw2_03_p02_c103_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//コインケースを持っているとき
+ev_workerw2_03_p02_c103_r0401:
+	//”どれにしますか？”
+	_TALKMSG	msg_workerw2_02_p02_c103_r0401
+	_TALK_WAIT
+
+	//コインウインドウ
+	_COIN_WIN_WRITE		0,0
+
+	//選択メニューワーククリア
+	_LDVAL			LOCALWORK1,0
+	_JUMP			menu_select_03_c103_r0401
+
+//再度メニュー選択へ来たとき
+return_menu_03_c103_r0401:
+	//”どれにしますか？”
+	_TALKMSG	msg_workerw2_02_p02_c103_r0401
+	_TALK_WAIT
+	_JUMP			menu_select_03_c103_r0401
+
+//メニュー選択
+menu_select_03_c103_r0401:
+	//景品選択メニュー
+	_SELECT_WINDOW	12,0,KEIHIN_WAZA_MENU
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,ev_keihin_waza_01_c103_r0401
+	_CASEJUMP		1,ev_keihin_waza_02_c103_r0401
+	_CASEJUMP		2,ev_keihin_waza_03_c103_r0401
+	_CASEJUMP		3,ev_keihin_waza_04_c103_r0401
+	_CASEJUMP		4,ev_keihin_waza_05_c103_r0401
+	_CASEJUMP		5,ev_workerw2_03_p07_c103_r0401
+
+	_JUMP			ev_workerw2_03_p07_c103_r0401
+	_END
+
+//技景品2
+ev_keihin_waza_01_c103_r0401:
+	_LDVAL			LOCALWORK1,1
+	_GET_ITEMNAME	0,ITEM_WAZAMASIN32
+	_JUMP			ev_workerw2_03_p03_c103_r0401
+
+//技景品2
+ev_keihin_waza_02_c103_r0401:
+	_LDVAL			LOCALWORK1,2
+	_GET_ITEMNAME	0,ITEM_WAZAMASIN29
+	_JUMP			ev_workerw2_03_p03_c103_r0401
+
+//技景品3
+ev_keihin_waza_03_c103_r0401:
+	_LDVAL			LOCALWORK1,3
+	_GET_ITEMNAME	0,ITEM_WAZAMASIN35
+	_JUMP			ev_workerw2_03_p03_c103_r0401
+
+//技景品4
+ev_keihin_waza_04_c103_r0401:
+	_LDVAL			LOCALWORK1,4
+	_GET_ITEMNAME	0,ITEM_WAZAMASIN24
+	_JUMP			ev_workerw2_03_p03_c103_r0401
+
+//技景品5
+ev_keihin_waza_05_c103_r0401:
+	_LDVAL			LOCALWORK1,5
+	_GET_ITEMNAME	0,ITEM_WAZAMASIN13
+	_JUMP			ev_workerw2_03_p03_c103_r0401
+
+
+//”xxxでいいですね？”
+ev_workerw2_03_p03_c103_r0401:
+	_TALK_YES_NO	msg_workerw2_02_p03_c103_r0401
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_workerw2_03_p07_c103_r0401	// いいえ
+
+	//はい
+	_SWITCH	LOCALWORK1
+	_CASEJUMP		1,yes_keihin_waza_01_c103_r0401
+	_CASEJUMP		2,yes_keihin_waza_02_c103_r0401
+	_CASEJUMP		3,yes_keihin_waza_03_c103_r0401
+	_CASEJUMP		4,yes_keihin_waza_04_c103_r0401
+	_CASEJUMP		5,yes_keihin_waza_05_c103_r0401
+	_END
+
+//YESで景品1
+yes_keihin_waza_01_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,1500,ev_workerw2_03_p05_c103_r0401
+
+	//追加できるかチェック
+	_ADD_ITEM_CHK	ITEM_WAZAMASIN32,1
+	_IF_ZERO_JUMP	ev_workerw2_03_p06_c103_r0401
+
+	_SUB_COIN	1500
+	_ADD_ITEM	ITEM_WAZAMASIN32,1
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_03_p04_c103_r0401
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+//YESで景品2
+yes_keihin_waza_02_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,3500,ev_workerw2_03_p05_c103_r0401
+
+	//追加できるかチェック
+	_ADD_ITEM_CHK	ITEM_WAZAMASIN29,1
+	_IF_ZERO_JUMP	ev_workerw2_03_p06_c103_r0401
+
+	_SUB_COIN	3500
+	_ADD_ITEM	ITEM_WAZAMASIN29,1
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_03_p04_c103_r0401
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+//YESで景品3
+yes_keihin_waza_03_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,4000,ev_workerw2_03_p05_c103_r0401
+
+	//追加できるかチェック
+	_ADD_ITEM_CHK	ITEM_WAZAMASIN35,1
+	_IF_ZERO_JUMP	ev_workerw2_03_p06_c103_r0401
+
+	_SUB_COIN	4000
+	_ADD_ITEM	ITEM_WAZAMASIN35,1
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_03_p04_c103_r0401
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+//YESで景品4
+yes_keihin_waza_04_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,4000,ev_workerw2_03_p05_c103_r0401
+
+	//追加できるかチェック
+	_ADD_ITEM_CHK	ITEM_WAZAMASIN24,1
+	_IF_ZERO_JUMP	ev_workerw2_03_p06_c103_r0401
+
+	_SUB_COIN	4000
+	_ADD_ITEM	ITEM_WAZAMASIN24,1
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_03_p04_c103_r0401
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+//YESで景品5
+yes_keihin_waza_05_c103_r0401:
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK2
+
+	//コイン数が足りない？
+	_IFVAL_JUMP	LOCALWORK2,LT,4000,ev_workerw2_03_p05_c103_r0401
+
+	//追加できるかチェック
+	_ADD_ITEM_CHK	ITEM_WAZAMASIN13,1
+	_IF_ZERO_JUMP	ev_workerw2_03_p06_c103_r0401
+
+	_SUB_COIN	4000
+	_ADD_ITEM	ITEM_WAZAMASIN13,1
+	_COIN_WRITE		0,0			//コイン表示更新
+
+	//レジ音
+	_SE			SE_REGI
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_workerw2_03_p04_c103_r0401
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+
+//コイン不足->メニューへ戻る
+ev_workerw2_03_p05_c103_r0401:
+	_TALK_KEYWAIT	msg_workerw2_02_p05_c103_r0401
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+//荷物が一杯->メニューへ戻る
+ev_workerw2_03_p06_c103_r0401:
+//	_TALK_KEYWAIT	msg_workerw2_03_p06_c103_r0401
+	_CALL			ev_fail_item_ret
+	_JUMP			return_menu_03_c103_r0401
+	_END
+
+//キャンセル
+ev_workerw2_03_p07_c103_r0401:
+	_TALK_KEYWAIT	msg_workerw2_02_p07_c103_r0401
+
+	_COIN_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/*							女性									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_02_p01_c103_r0401
+	_EASY_OBJ_MSG	msg_woman1_02_p01_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							紳士									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_c103_r0401
+	_EASY_OBJ_MSG	msg_gentlem1_01_p01_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							少女２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_c103_r0401
+	_TALK_OBJ_START
+
+	//既にグッズをもらっているとき
+	_IF_FLAGON_JUMP		FE_GOODS_GET_C103_R0401,ev_girl2_01_p05_c103_r0401
+
+	//”わけてあげようか？”
+	_TALK_YES_NO	msg_girl2_01_p01_c103_r0401
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_girl2_01_p04_c103_r0401	// いいえ
+
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_poke_c103_r0401
+	_CASEJUMP		1,case1_poke_c103_r0401
+	_CASEJUMP		2,case2_poke_c103_r0401
+	_END
+
+//キモリ
+case0_poke_c103_r0401:
+	//追加できるかチェック
+	_GET_GOODSNAME	1, GOODS_KIMORIDOORU	//※GOODS_EVENTでないので、アイテム名が取得できないとエラー時に名前が不明になるので
+	_ADD_GOODS_CHK	GOODS_KIMORIDOORU
+	_IF_ZERO_JUMP	ev_girl2_01_p03_c103_r0401			//無理なとき
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_girl2_01_p02_c103_r0401
+
+
+	_GOODS_EVENT	GOODS_KIMORIDOORU
+	_FLAG_SET		FE_GOODS_GET_C103_R0401
+
+	_JUMP			ev_girl2_01_p05_c103_r0401
+	_END
+
+//アチャモ
+case1_poke_c103_r0401:
+	//追加できるかチェック
+	_GET_GOODSNAME	1,GOODS_ATYAMODOORU		//※GOODS_EVENTでないので、アイテム名が取得できないとエラー時に名前が不明になるので
+	_ADD_GOODS_CHK	GOODS_ATYAMODOORU
+	_IF_ZERO_JUMP	ev_girl2_01_p03_c103_r0401			//無理なとき
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_girl2_01_p02_c103_r0401
+
+	_GOODS_EVENT	GOODS_ATYAMODOORU
+	_FLAG_SET		FE_GOODS_GET_C103_R0401
+
+	_JUMP			ev_girl2_01_p05_c103_r0401
+	_END
+
+//ミズゴロウ
+case2_poke_c103_r0401:
+	//追加できるかチェック
+	_GET_GOODSNAME	1,GOODS_MIZUGOROUDOORU		//※GOODS_EVENTでないので、アイテム名が取得できないとエラー時に名前が不明になるので
+	_ADD_GOODS_CHK	GOODS_MIZUGOROUDOORU
+	_IF_ZERO_JUMP	ev_girl2_01_p03_c103_r0401			//無理なとき
+
+	//”はい　どうぞ！”
+	_TALK_KEYWAIT	msg_girl2_01_p02_c103_r0401
+
+	_GOODS_EVENT	GOODS_MIZUGOROUDOORU
+	_FLAG_SET		FE_GOODS_GET_C103_R0401
+
+	_JUMP			ev_girl2_01_p05_c103_r0401
+	_END
+
+//”パソコンがいっぱい”
+ev_girl2_01_p03_c103_r0401:
+	_CALL				ev_fail_goods_ret
+	//”いまは　だめなのー？”
+	_TALK_KEYWAIT	msg_girl2_01_p03_c103_r0401
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+ev_girl2_01_p04_c103_r0401:
+	//”もらってよ！”
+	_TALK_KEYWAIT	msg_girl2_01_p04_c103_r0401
+	_TALK_OBJ_END
+	_END
+
+//アイテム入手後
+ev_girl2_01_p05_c103_r0401:
+	//”おおあたりを　ねらっているのよ！”
+	_TALK_KEYWAIT	msg_girl2_01_p05_c103_r0401
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/*							中年２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_02_p01_c103_r0401
+	_TALK_OBJ_START
+
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っている？
+	_IFVAL_JUMP	ANSWORK,EQ,TRUE,ev_middlem2_02_p02_c103_r0401
+
+	//”コインケースが　ひつよう　だぞ！”
+	_TALK_KEYWAIT	msg_middlem2_02_p01_c103_r0401
+
+	_JUMP			ev_common_c103_r0401
+	_END
+
+//コインケースがあるとき
+ev_middlem2_02_p02_c103_r0401:
+	//既にコインをもらっているとき
+	_IF_FLAGON_JUMP		FE_COIN_20_GET_C103_R0401,ev_middlem2_02_p03_c103_r0401
+
+	//コイン数をチェック
+	_CHECK_COIN	LOCALWORK1
+
+	//１枚以上の時は貰えない(０のみ）
+	_IFVAL_JUMP	LOCALWORK1,GE,1,ev_middlem2_02_p03_c103_r0401
+
+	_FLAG_SET		FE_COIN_20_GET_C103_R0401
+
+	_ADD_COIN		20
+	//”コインを　わけて　あげよう！”
+	_TALK_KEYWAIT	msg_middlem2_02_p02_c103_r0401
+
+	//レジ音
+	_SE			SE_REGI
+
+	_JUMP			ev_middlem2_02_p03_c103_r0401
+	_END
+
+//コインをもらって以降
+ev_middlem2_02_p03_c103_r0401:
+	//”このスロットで　あそぶんだ”
+	_TALK_KEYWAIT	msg_middlem2_02_p03_c103_r0401
+	_JUMP			ev_common_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							老人２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_c103_r0401
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_oldman2_01_p01_c103_r0401
+	_JUMP			ev_common_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							料理人									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cook1_01_p01_c103_r0401
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_cook1_01_p01_c103_r0401
+	_JUMP			ev_common_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_c103_r0401
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_trainerm1_01_p01_c103_r0401
+	_JUMP			ev_common_c103_r0401
+	_END
+
+//共通終了処理
+ev_common_c103_r0401:
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							マニア１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_c103_r0401
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_freak1_01_p01_c103_r0401
+	_JUMP			ev_common_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw1_01_p01_c103_r0401
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_trainerw_01_p01_c103_r0401
+	_JUMP			ev_common_c103_r0401
+	_END
+
+
+/********************************************************************/
+/*							スロット１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_01_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,0
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_02_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,1
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット３								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_03_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,2
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット４								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_04_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,3
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット５								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_05_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,4
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット６								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_06_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,5
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット７								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_07_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,6
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット８								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_08_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,7
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット９								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_09_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,8
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット１０							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_10_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,9
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット１１							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_11_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,10
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スロット１２							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_slot_12_p01_c103_r0401
+	_TALK_START
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL			PARAM0,11
+	_FUNC_CALL		ANSWORK,GET_SLOT_ATARI
+	_SLOT_MACHINE	ANSWORK
+
+	_TALK_END
+	_END
+
+
+//コインケースを持っていないときの処理(スロット、ルーレット共通）
+ev_no_coin_case_game_01_c103_r0401:
+	//コインケースがありません
+	_TALK_KEYWAIT	msg_coincase_01_p01_c103_r0401
+
+	_TALK_END
+	_END
+
+/********************************************************************/
+/********************************************************************/

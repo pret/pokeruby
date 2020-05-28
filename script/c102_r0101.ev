@@ -1,0 +1,126 @@
+//====================================================================
+//							c102_r0101
+//							カイナ・造船所１階
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c102_r0101_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ツガ名人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_c102_r0101
+	_TALK_START
+
+	//連絡船完成しているか(ゲームクリアしているか)
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_middlem1_01_p05_c102_r0101
+
+	//トクサネのバッチを取得しているか
+	_IF_FLAGON_JUMP	SYS_BATCH07_GET,ev_middlem1_01_p02_c102_r0101
+
+	//博物館のアクア団イベント終了しているか
+	_IF_FLAGON_JUMP	FE_AQUA_01_C102_R0502,ev_middlem1_01_p04_c102_r0101
+
+	//一度話しているか
+	_IF_FLAGON_JUMP	FE_MIDDLEM1_01_C102_R0101,ev_middlem1_01_p03_c102_r0101
+
+	_TALK_KEYWAIT	msg_middlem1_01_p01_c102_r0101
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_middlem1_01_p02_c102_r0101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//一度話した
+	_FLAG_SET		FE_MIDDLEM1_01_C102_R0101
+
+	//OBJ消す
+	_FLAG_SET		FV_EVIL_ALL_FIELD_C102
+	_TALK_END
+	_END
+
+//連絡船完成している(ゲームクリアしている)
+ev_middlem1_01_p05_c102_r0101:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_middlem1_01_p08_c102_r0101
+	_TALK_END
+	_END
+
+//トクサネのジムバッチを取得している
+ev_middlem1_01_p02_c102_r0101:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_middlem1_01_p07_c102_r0101
+	_TALK_END
+	_END
+
+//一度話している
+ev_middlem1_01_p03_c102_r0101:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_middlem1_01_p03_c102_r0101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_END
+	_END
+
+//博物館のアクア団イベント終了
+ev_middlem1_01_p04_c102_r0101:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C102_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_middlem1_01_p06_c102_r0101
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*								助手１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_c102_r0101
+	_EASY_OBJ_MSG	msg_studym1_01_p01_c102_r0101
+	_END
+
+
+/********************************************************************/
+/*								助手２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_02_p01_c102_r0101
+	_EASY_OBJ_MSG	msg_studym1_02_p01_c102_r0101
+	_END
+
+
+/********************************************************************/
+/*								ハギ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_c102_r0101
+	_EASY_OBJ_MSG	msg_oldman1_01_p01_c102_r0101
+	_END
+
+

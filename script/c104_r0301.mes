@@ -1,0 +1,253 @@
+// ●カナズミ　ポケモンスクール
+
+// ●黒板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p01_c104_r0301
+msg_board_01_p01_c104_r0301:
+	.byte	ko_,ku_,ba_,n_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,ta_,ta_,ka_,ttu_,te_,ru_,to_,ki_,ni_,spc_,o_,ko_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,i_,ti_,yyo_,u_,no_,spc_,he_,n_,ka_,ni_,spc_,tu_,i_,te_,spc_,ka_,ka_,re_,te_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ウインドウメッセージ自動オープン
+
+// ●黒板（検索）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p02_c104_r0301
+msg_board_01_p02_c104_r0301:
+	.byte	do_,no_,spc_,ko_,u_,mo_,ku_,wo_,spc_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ウインドウ開きます
+// ●「どく」　→msg_board_01_p03_c104_r0301:
+// ●「まひ」　→msg_board_01_p04_c104_r0301:
+// ●「ねむり」→msg_board_01_p05_c104_r0301:
+// ●「やけど」→msg_board_01_p06_c104_r0301:
+// ●「こおり」→msg_board_01_p07_c104_r0301:
+// ●「よむのを　やめる」→ウインドウ閉じます
+
+// ●「どく」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p03_c104_r0301
+msg_board_01_p03_c104_r0301:
+	.byte	do_,ku_,wo_,spc_,u_,ke_,ru_,to_
+	.byte	CR_
+	.byte	ta_,i_,ri_,yyo_,ku_,ga_,spc_,he_,ttu_,te_,i_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	se_,n_,to_,u_,no_,a_,to_,mo_,spc_,do_,ku_,ha_,spc_,no_,ko_,ru_,no_,de_
+	.byte	CR_
+	.byte	a_,ru_,ku_,ta_,bi_,ni_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,he_,ri_,ma_,su_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ku_,ke_,si_,de_,spc_,na_,o_,si_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けてmsg_board_01_p02_c104_r0301:
+
+// ●「まひ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p04_c104_r0301
+msg_board_01_p04_c104_r0301:
+	.byte	ma_,hi_,su_,ru_,to_,spc_,su_,ba_,ya_,sa_,ga_,spc_,sa_,ga_,ri_
+	.byte	CR_
+	.byte	to_,ki_,do_,ki_,spc_,wa_,za_,ga_,spc_,da_,se_,na_,ku_,na_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ta_,ka_,i_,spc_,o_,wa_,ttu_,te_,mo_,spc_,ma_,hi_,si_,ta_,spc_,ma_,ma_,de_,su_
+	.byte	CR_
+	.byte	ma_,hi_,na_,o_,si_,de_,spc_,na_,o_,si_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けてmsg_board_01_p02_c104_r0301:
+
+// ●「ねむり」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p05_c104_r0301
+msg_board_01_p05_c104_r0301:
+	.byte	ne_,mu_,ttu_,te_,spc_,si_,ma_,u_,to_
+	.byte	CR_
+	.byte	so_,no_,spc_,a_,i_,da_,spc_,ko_,u_,ge_,ki_,spc_,de_,ki_,ma_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,bu_,n_,de_,spc_,me_,za_,me_,ru_,ko_,to_,mo_,spc_,a_,ri_,ma_,su_,ga_
+	.byte	CR_
+	.byte	ne_,mu_,ttu_,ta_,ma_,ma_,spc_,se_,n_,to_,u_,ga_,spc_,o_,wa_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	zu_,ttu_,to_,spc_,ne_,mu_,ttu_,te_,i_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,mu_,ke_,za_,ma_,si_,de_,spc_,o_,ko_,si_,te_,spc_,a_,ge_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けてmsg_board_01_p02_c104_r0301:
+
+// ●「やけど」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p06_c104_r0301
+msg_board_01_p06_c104_r0301:
+	.byte	ya_,ke_,do_,ha_,spc_,ko_,u_,ge_,ki_,ri_,yyo_,ku_,ga_,spc_,sa_,ga_,ru_,da_,ke_,de_,na_,ku_
+	.byte	CR_
+	.byte	ta_,i_,ri_,yyo_,ku_,mo_,spc_,do_,n_,do_,n_,spc_,he_,ttu_,te_,i_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	se_,n_,to_,u_,ga_,spc_,o_,wa_,ttu_,te_,mo_,spc_,ya_,ke_,do_,no_,spc_,ma_,ma_,de_,su_
+	.byte	CR_
+	.byte	ya_,ke_,do_,na_,o_,si_,de_,spc_,na_,o_,si_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けてmsg_board_01_p02_c104_r0301:
+
+// ●「こおり」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_board_01_p07_c104_r0301
+msg_board_01_p07_c104_r0301:
+	.byte	ko_,o_,ttu_,te_,spc_,si_,ma_,u_,to_,spc_,na_,ni_,mo_,spc_,de_,ki_,na_,ku_,na_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ta_,ka_,i_,spc_,o_,wa_,ttu_,te_,mo_,spc_,ko_,o_,ri_,tu_,i_,ta_,spc_,ma_,ma_,de_,su_
+	.byte	CR_
+	.byte	ko_,o_,ri_,na_,o_,si_,de_,spc_,to_,ka_,si_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けてmsg_board_01_p02_c104_r0301:
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_c104_r0301
+msg_oldman2_01_p01_c104_r0301:
+	.byte	be_,n_,ki_,yyo_,u_,wo_,spc_,si_,na_,i_,spc_,se_,i_,to_,ha_
+	.byte	CR_
+	.byte	wa_,ta_,ku_,si_,no_,spc_,TU_,ME_,no_,spc_,a_,ka_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	se_,n_,zi_,te_,spc_,no_,ma_,se_,ru_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ga_,spc_,be_,n_,ki_,yyo_,u_,spc_,su_,ru_,spc_,si_,na_,i_,ha_
+	.byte	CR_
+	.byte	ko_,no_,spc_,do_,u_,gu_,wo_,spc_,tu_,ka_,i_,ko_,na_,se_,ru_,ka_,spc_,do_,u_,ka_,de_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ru_,ko_,to_,spc_,de_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「せんせいのツメ」（No183）入手処理
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p02_c104_r0301
+msg_oldman2_01_p02_c104_r0301:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,se_,n_,se_,i_,no_,TU_,ME_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	to_,ki_,do_,ki_,spc_,de_,su_,ga_,spc_,su_,ba_,ya_,ku_,na_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	se_,n_,se_,i_,spc_,ko_,u_,ge_,ki_,wo_,spc_,su_,ru_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,yo_,u_,ni_,spc_,PO_,KE_,MO_,N_,ni_,spc_,mo_,ta_,se_,ru_
+	.byte	CR_
+	.byte	do_,u_,gu_,no_,spc_,ko_,to_,spc_,da_,ke_,de_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	be_,n_,ki_,yyo_,u_,spc_,su_,ru_,ko_,to_,ha_,spc_,i_,ttu_,pa_,i_,spc_,na_,no_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アドバンス少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_agboy1_01_p01_c104_r0301
+msg_agboy1_01_p01_c104_r0301:
+	.byte	i_,ma_,spc_,to_,mo_,da_,ti_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アドバンス少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_agboy1_02_p01_c104_r0301
+msg_agboy1_02_p01_c104_r0301:
+	.byte	ho_,si_,ka_,ttu_,ta_,spc_,TA_,NE_,BO_,bou_,ti_,yya_,n_,spc_,ga_
+	.byte	CR_
+	.byte	ya_,ttu_,to_,spc_,te_,ni_,spc_,ha_,i_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy4_01_p01_c104_r0301
+msg_boy4_01_p01_c104_r0301:
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,do_,u_,gu_,spc_,mo_,te_,ru_,ke_,do_
+	.byte	CR_
+	.byte	KI_,ZU_,gu_,su_,ri_,to_,ka_,spc_,do_,ku_,ke_,si_,to_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,to_,ga_,spc_,tu_,ku_,ttu_,ta_,spc_,do_,u_,gu_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,i_,ka_,ta_,ga_,spc_,wa_,ka_,ra_,na_,i_,spc_,mi_,ta_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●学生女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p01_c104_r0301
+msg_schoolw1_01_p01_c104_r0301:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,de_
+	.byte	CR_
+	.byte	ko_,n_,ra_,n_,spc_,su_,ru_,ko_,to_,ga_,spc_,a_,ru_,de_,si_,yyo_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,ra_,n_,spc_,su_,ru_,to_,spc_,ta_,ma_,ni_,spc_,ma_,ti_,ga_,e_,te_
+	.byte	CR_
+	.byte	zi_,bu_,n_,wo_,spc_,ko_,u_,ge_,ki_,spc_,si_,ti_,yya_,u_,no_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,i_,ti_,do_,de_,mo_,spc_,se_,n_,to_,u_,ka_,ra_,spc_,ha_,na_,re_,ru_,to_
+	.byte	CR_
+	.byte	mo_,to_,ni_,spc_,mo_,do_,ru_,wa_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●学生男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p01_c104_r0301
+msg_schoolm1_01_p01_c104_r0301:
+	.byte	tenten_,tenten_,PO_,KE_,MO_,N_,ni_,spc_,ki_,no_,mi_,wo_,spc_,mo_,ta_,se_,ru_,to_
+	.byte	CR_
+	.byte	zi_,bu_,n_,de_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,mo_,te_,ru_,spc_,do_,u_,gu_,ha_
+	.byte	CR_
+	.byte	ho_,ka_,ni_,mo_,spc_,ta_,ku_,sa_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	NO_,bou_,TO_,wo_,spc_,ti_,yya_,n_,to_,spc_,to_,ru_,no_,ha_
+	.byte	CR_
+	.byte	ta_,i_,he_,n_,da_,na_,a_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ノート１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p01_c104_r0301
+msg_note1_01_p01_c104_r0301:
+	.byte	ko_,no_,ko_,no_,spc_,NO_,bou_,TO_,da_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,de_,spc_,tu_,ka_,ma_,e_,te_
+	.byte	CR_
+	.byte	do_,u_,zi_,ni_,spc_,n6_,pi_,ki_,spc_,mo_,ti_,a_,ru_,ke_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,si_,te_,spc_,tu_,ka_,ma_,e_,ta_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	so_,da_,te_,te_,spc_,ta_,ta_,ka_,wa_,se_,ru_,spc_,hi_,to_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,to_,spc_,i_,u_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,mo_,ku_,hi_,yyo_,u_,ha_
+	.byte	CR_
+	.byte	ka_,ku_,ti_,no_,spc_,PO_,KE_,MO_,N_,ZI_,MU_,ni_,spc_,i_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ni_,spc_,ka_,tu_,ko_,to_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

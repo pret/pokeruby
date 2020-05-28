@@ -1,0 +1,146 @@
+//====================================================================
+//							field_r124
+//						フィールド・ロード124
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r124_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r124
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r124:
+	//大雨
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,ctrl_weather_thunder
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							看板
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r124
+	_EASY_MSG	msg_kanban_01_p01_field_r124
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_09
+	_TRAINER_DATA2	msg_swimmerm_09_01
+	_TRAINER_DATA3	msg_swimmerm_09_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_09_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_10
+	_TRAINER_DATA2	msg_swimmerm_10_01
+	_TRAINER_DATA3	msg_swimmerm_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_10_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_09
+	_TRAINER_DATA2	msg_swimmerw_09_01
+	_TRAINER_DATA3	msg_swimmerw_09_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_swimmerw_09
+	_TRAINER_EASY_MSG	msg_swimmerw_09_03
+	_END
+
+_revenge_swimmerw_09:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_09
+	_TRAINER_DATA2	msg_swimmerw_09_04
+	_TRAINER_DATA3	msg_swimmerw_09_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_09_06
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_10
+	_TRAINER_DATA2	msg_swimmerw_10_01
+	_TRAINER_DATA3	msg_swimmerw_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_10_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_24
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_24
+	_TRAINER_DATA2	msg_swimmerm_24_01
+	_TRAINER_DATA3	msg_swimmerm_24_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_24_03
+	_END
+
+SCRIPT_LABEL	ev_aneotouto_02_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_02
+	_TRAINER_DATA2	msg_aneotouto_02_01
+	_TRAINER_DATA3	msg_aneotouto_02_02
+	_TRAINER_DATA4	msg_aneotouto_02_04
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_aneotouto_02_01
+	_TRAINER_EASY_MSG	msg_aneotouto_02_03
+	_END
+
+_revenge_aneotouto_02_01:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_02
+	_TRAINER_DATA2	msg_aneotouto_02_09
+	_TRAINER_DATA3	msg_aneotouto_02_10
+	_TRAINER_DATA4	msg_aneotouto_02_12
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aneotouto_02_11
+	_END
+
+SCRIPT_LABEL	ev_aneotouto_02_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_02
+	_TRAINER_DATA2	msg_aneotouto_02_05
+	_TRAINER_DATA3	msg_aneotouto_02_06
+	_TRAINER_DATA4	msg_aneotouto_02_08
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_aneotouto_02_02
+	_TRAINER_EASY_MSG	msg_aneotouto_02_07
+	_END
+	
+_revenge_aneotouto_02_02:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_02
+	_TRAINER_DATA2	msg_aneotouto_02_13
+	_TRAINER_DATA3	msg_aneotouto_02_14
+	_TRAINER_DATA4	msg_aneotouto_02_16
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aneotouto_02_15
+	_END
+

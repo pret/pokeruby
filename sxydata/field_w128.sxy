@@ -1,0 +1,50 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_W128	0
+#define EXITNUM_FIELD_W128	1
+#define POSNUM_FIELD_W128	0
+#define BGNUM_FIELD_W128	2
+
+const SXY_CONNECT	EXIT_field_w128[] =
+{
+	{
+		0x0026,		//Xpos
+		0x001a,		//Ypos
+		0x03,		//Height
+		CAVE_D1101_DOOR01,		//Door ID
+		CAVE_D1101,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_w128[] =
+{
+	{
+		0x0026,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		taurin_25,		//Script
+	},
+
+	{
+		0x0045,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		sinzyu_26,		//Script
+	},
+
+};
+
+const SXY_DATA	field_w128_sxy_data =
+{
+OBJNUM_FIELD_W128,			// field obj max
+EXITNUM_FIELD_W128,		// exit max
+POSNUM_FIELD_W128,			// pos event max
+BGNUM_FIELD_W128,			// bg event max
+NULL,			// field obj data
+EXIT_field_w128,			// exit data
+NULL,			// pos event data
+BG_field_w128,				// bg event data
+};

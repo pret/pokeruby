@@ -1,0 +1,30 @@
+// ●ミナモシティ　フレンドリィショップ
+
+// ●トレーナー男１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c106_fs01
+msg_trainerm1_01_p01_c106_fs01:
+	.byte	PU_,RA_,SU_,PA_,WA_,bou_,wo_,spc_,PO_,KE_,MO_,N_,ni_,spc_,tu_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,u_,ge_,ki_,ri_,yyo_,ku_,wo_,spc_,ta_,ka_,me_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,de_,spc_,si_,yyo_,u_,ri_,spc_,ma_,ti_,ga_,i_,na_,si_,spc_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●女性２　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c106_fs01
+msg_woman2_01_p01_c106_fs01:
+	.byte	ti_,yyo_,ttu_,to_,spc_,ta_,ka_,i_,ka_,mo_,spc_,si_,re_,na_,i_,ke_,do_
+	.byte	CR_
+	.byte	na_,n_,de_,mo_,na_,o_,si_,spc_,ttu_,te_,spc_,be_,n_,ri_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,do_,n_,na_,spc_,i_,zi_,yyo_,u_,mo_
+	.byte	CR_
+	.byte	ko_,re_,hi_,to_,tu_,de_,spc_,na_,o_,se_,ru_,n_,da_,mo_,n_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

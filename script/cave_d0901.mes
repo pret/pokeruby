@@ -1,0 +1,124 @@
+// ●ミナモ　アクア団のアジト１階
+
+
+// ●洞窟を入った途中をふさいでいるアクア団（左）
+// ●カイナの船盗難イベントフラグ成立前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p01_cave_d0901
+msg_evilm1_01_p01_cave_d0901:
+	.byte	na_,n_,da_,spc_,na_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,na_,n_,no_,spc_,yo_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,da_,ttu_,ta_,ra_,spc_,i_,ma_,spc_,da_,i_,zi_,na_,spc_,mo_,no_,wo_
+	.byte	CR_
+	.byte	bu_,n_,do_,ri_,ni_,spc_,de_,ka_,ke_,te_,i_,te_,spc_,ru_,su_,da_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,do_,ko_,ni_,spc_,i_,ttu_,ta_,no_,ka_,spc_,da_,ttu_,te_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ha_,ha_,ha_,ttu_,gyoe_,spc_,so_,n_,na_,spc_,da_,i_,zi_,na_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,si_,e_,ra_,re_,ru_,spc_,wa_,ke_,spc_,na_,i_,da_,ro_,u_,ga_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●洞窟を入った途中をふさいでいるアクア団（左）
+// ●カイナの船盗難イベントフラグ成立後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p02_cave_d0901
+msg_evilm1_01_p02_cave_d0901:
+	.byte	na_,n_,da_,spc_,na_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,na_,n_,no_,spc_,yo_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,da_,ttu_,ta_,ra_,spc_,i_,ma_,spc_,se_,n_,su_,i_,te_,i_,wo_
+	.byte	CR_
+	.byte	bu_,n_,do_,ri_,ni_,spc_,de_,ka_,ke_,te_,i_,te_,spc_,ru_,su_,da_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,do_,ko_,ni_,spc_,i_,ttu_,ta_,no_,ka_,spc_,da_,ttu_,te_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ha_,ha_,ha_,ttu_,gyoe_,spc_,so_,n_,na_,spc_,da_,i_,zi_,na_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,si_,e_,ra_,re_,ru_,spc_,wa_,ke_,spc_,na_,i_,da_,ro_,u_,ga_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナでのイベント（フラグ21）以後は、
+// 　このキャラクターは消える。
+
+// ●洞窟を入った途中をふさいでいるアクア団（右）
+// ●カイナの船盗難イベントフラグ成立前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_02_p01_cave_d0901
+msg_evilm1_02_p01_cave_d0901:
+	.byte	na_,n_,da_,spc_,na_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,na_,n_,no_,spc_,yo_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,ha_,spc_,i_,ma_,spc_,n1_,n2_,n2_,ba_,n_,spc_,su_,i_,do_,u_,no_
+	.byte	CR_
+	.byte	o_,ku_,ri_,bi_,ya_,ma_,ni_,spc_,mu_,ka_,ttu_,te_,i_,te_,spc_,ru_,su_,da_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,na_,ni_,si_,ni_,spc_,i_,ttu_,ta_,no_,ka_,spc_,da_,ttu_,te_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ha_,ha_,ha_,ttu_,gyoe_,spc_,so_,n_,na_,spc_,da_,i_,zi_,na_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,si_,e_,ra_,re_,ru_,spc_,wa_,ke_,spc_,na_,i_,da_,ro_,u_,ga_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●洞窟を入った途中をふさいでいるアクア団（右）
+// ●カイナの船盗難イベントフラグ成立後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_02_p02_cave_d0901
+msg_evilm1_02_p02_cave_d0901:
+	.byte	na_,n_,da_,spc_,na_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,na_,n_,no_,spc_,yo_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,ha_,spc_,i_,ma_,spc_,KA_,I_,NA_,SI_,TE_,II_,ni_
+	.byte	CR_
+	.byte	mu_,ka_,ttu_,te_,i_,te_,spc_,ru_,su_,da_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,na_,ni_,si_,ni_,spc_,i_,ttu_,ta_,no_,ka_,spc_,da_,ttu_,te_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ha_,ha_,ha_,ttu_,gyoe_,spc_,so_,n_,na_,spc_,da_,i_,zi_,na_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,si_,e_,ra_,re_,ru_,spc_,wa_,ke_,spc_,na_,i_,da_,ro_,u_,ga_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナでのイベント（フラグ21）以後は、
+// 　このキャラクターは消える。
+
+
+// ●以下のアクア団員は（フラグ21）以降に出現する。
+// ●アクア団員♂０１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_01_01
+msg_aquam_01_01:
+	.byte	ya_,ya_,ya_,gyoe_
+	.byte	CR_
+	.byte	a_,ya_,si_,i_,spc_,zi_,n_,bu_,tu_,wo_,spc_,ha_,ttu_,ke_,bou_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂０１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_01_02
+msg_aquam_01_02:
+	.byte	u_,bou_,mu_,spc_,ma_,ke_,ti_,ma_,ttu_,ta_,ka_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂０１：戦闘後メッセージ
+// （これは戦闘から抜けて強制的にしゃべらせる）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_01_03
+msg_aquam_01_03:
+	.byte	si_,yyo_,u_,bu_,ni_,ha_,spc_,ma_,ke_,ta_,ga_
+	.byte	CR_
+	.byte	o_,re_,ha_,spc_,ya_,ku_,me_,wo_,spc_,ha_,ta_,si_,ta_,no_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

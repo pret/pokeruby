@@ -1,0 +1,358 @@
+//====================================================================
+//							field_r103
+//						フィールド・ロード103
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r103_event_data
+FLAG_CHANGE_LABEL		flag_change_field_r103
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r103:
+	//サポートキャラをセットする
+	_CALL			set_support_char
+
+	_CALL			chk_odamaki_hyouka
+    _END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						オダマキ博士の娘(息子)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_field_r103
+	_TALK_START
+
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_field_r103
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_field_r103
+	_END
+
+//主人公男の場合(相手が娘）
+my_sex_boy_field_r103:
+	_TALK_KEYWAIT	msg_heroine_01_p01_field_r103
+
+	_BGM_SET		MUS_GIRL_SUP,1
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」びっくりする
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をおく
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_heroine_01_p02_field_r103
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_boy_battle
+	_CASEJUMP		1,case1_my_sex_boy_battle
+	_CASEJUMP		2,case2_my_sex_boy_battle
+	_END
+
+//主人公女の場合(相手は息子)
+my_sex_girl_field_r103:
+	_TALK_KEYWAIT	msg_hero_01_p01_field_r103
+
+	_BGM_SET		MUS_BOY_SUP,1
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」びっくりする
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をおく
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_hero_01_p02_field_r103
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_girl_battle
+	_CASEJUMP		1,case1_my_sex_girl_battle
+	_CASEJUMP		2,case2_my_sex_girl_battle
+	_END
+
+//--------------------------------------------------------------------
+//						トレーナー戦へ
+//--------------------------------------------------------------------
+//タイプ炎
+case0_my_sex_boy_battle:
+	_TRAINER_EVENT_FIGHT	SUPPORTW02_01,msg_heroine_01_p03_field_r103
+	_JUMP			flag_on_girl_field_r103
+	_END
+
+//タイプ水
+case1_my_sex_boy_battle:
+	_TRAINER_EVENT_FIGHT	SUPPORTW03_01,msg_heroine_01_p03_field_r103
+	_JUMP			flag_on_girl_field_r103
+	_END
+
+//タイプ草
+case2_my_sex_boy_battle:
+	_TRAINER_EVENT_FIGHT	SUPPORTW01_01,msg_heroine_01_p03_field_r103
+	_JUMP			flag_on_girl_field_r103
+	_END
+
+//トレーナー戦へ
+//タイプ炎
+case0_my_sex_girl_battle:
+	_TRAINER_EVENT_FIGHT	SUPPORTM02_01,msg_hero_01_p03_field_r103
+	_JUMP			flag_on_boy_field_r103
+	_END
+
+//タイプ水
+case1_my_sex_girl_battle:
+	_TRAINER_EVENT_FIGHT	SUPPORTM03_01,msg_hero_01_p03_field_r103
+	_JUMP			flag_on_boy_field_r103
+	_END
+
+//タイプ草
+case2_my_sex_girl_battle:
+	_TRAINER_EVENT_FIGHT	SUPPORTM01_01,msg_hero_01_p03_field_r103
+	_JUMP			flag_on_boy_field_r103
+	_END
+
+//共通処理
+//主人公男の場合
+//トレーナー戦に勝利した
+flag_on_girl_field_r103:
+	_TALK_KEYWAIT	msg_heroine_01_p04_field_r103
+	_JUMP			go_home_support_field_r103
+	_END
+
+//共通処理
+//主人公女の場合
+//トレーナー戦に勝利した
+flag_on_boy_field_r103:
+	_TALK_KEYWAIT	msg_hero_01_p04_field_r103
+	_JUMP			go_home_support_field_r103
+	_END
+
+//サポートキャラ家に帰るアニメ
+go_home_support_field_r103:
+	_TALK_CLOSE
+
+	_SWITCH			RG_SITE
+	_CASEJUMP		SITE_D,site_u_to_hero_field_r103		//上から話し掛け
+	_CASEJUMP		SITE_U,site_d_to_hero_field_r103		//下から話し掛け
+	_CASEJUMP		SITE_L,site_r_to_hero_field_r103		//右から話し掛け
+	_CASEJUMP		SITE_R,site_l_to_hero_field_r103		//左から話し掛け
+	_END
+
+//下から話し掛け
+site_d_to_hero_field_r103:
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,support_01_field_r103_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SE				SE_DANSA
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,support_01_field_r103_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_JUMP			support_common01
+	_END
+
+//左から話し掛け
+//右から話し掛け
+//上から話し掛け
+site_r_to_hero_field_r103:
+site_l_to_hero_field_r103:
+site_u_to_hero_field_r103:
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,support_01_field_r103_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SE				SE_DANSA
+
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R103,support_01_field_r103_anime11
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_JUMP			support_common01
+	_END
+
+//共通処理
+support_common01:
+	_OBJ_DELETE		SUPPORT_01_FIELD_R103
+	_LDVAL			WK_SCENE_FIELD_R103,1
+	_LDVAL			WK_SCENE_T101_R0301,4
+
+	//オダマキの家にオダマキ娘(息子)を出す
+	_FLAG_RESET		FV_SUPPORT_01_T101_R0301
+
+	//勝利した
+	_FLAG_SET		FE_SUPPORT_01_FIELD_R103
+
+	_LDVAL			WK_SCENE_02_FIELD_T102,1		//サポートをコトキへ配置
+	_FLAG_RESET		FV_SUPPORT_01_FIELD_T102		//コトキのサポーター
+	
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//サポートキャラ家に帰る(下から話し掛け)
+//--------------------------------------------------------------------
+support_01_field_r103_anime01:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+support_01_field_r103_anime10:	
+	.byte	AC_JUMP_D_2
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポートキャラ家に帰る(左右上から話し掛け)
+//--------------------------------------------------------------------
+support_01_field_r103_anime02:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+support_01_field_r103_anime11:	
+	.byte	AC_JUMP_D_2
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						少年1										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_field_r103
+	_EASY_OBJ_MSG	msg_boy1_01_p01_field_r103
+	_END
+
+
+/********************************************************************/
+/*						トレーナー1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_field_r103
+	_EASY_OBJ_MSG	msg_trainerm1_01_p01_field_r103
+	_END
+
+
+/********************************************************************/
+/*						左側の看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r103
+	_EASY_MSG		msg_kanban_01_p01_field_r103
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_aroma_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AROMA_01
+	_TRAINER_DATA2	msg_aroma_01_01
+	_TRAINER_DATA3	msg_aroma_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aroma_01_03
+	_END
+
+SCRIPT_LABEL	ev_futago_01_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_01
+	_TRAINER_DATA2	msg_futago_01_01
+	_TRAINER_DATA3	msg_futago_01_02
+	_TRAINER_DATA4	msg_futago_01_04
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_futago_01_01
+	_TRAINER_EASY_MSG	msg_futago_01_03
+	_END
+
+_revenge_futago_01_01:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	FUTAGO_01
+	_TRAINER_DATA2	msg_futago_01_09
+	_TRAINER_DATA3	msg_futago_01_10
+	_TRAINER_DATA4	msg_futago_01_12
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_01_11
+	_END
+
+SCRIPT_LABEL	ev_futago_01_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_01
+	_TRAINER_DATA2	msg_futago_01_05
+	_TRAINER_DATA3	msg_futago_01_06
+	_TRAINER_DATA4	msg_futago_01_08
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_futago_01_02
+	_TRAINER_EASY_MSG	msg_futago_01_07
+	_END
+	
+_revenge_futago_01_02:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	FUTAGO_01
+	_TRAINER_DATA2	msg_futago_01_13
+	_TRAINER_DATA3	msg_futago_01_14
+	_TRAINER_DATA4	msg_futago_01_16
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_01_15
+	_END
+
+SCRIPT_LABEL	ev_fishing_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_01
+	_TRAINER_DATA2	msg_fishing_01_01
+	_TRAINER_DATA3	msg_fishing_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_01_03
+	_END
+
+SCRIPT_LABEL	ev_daisukim_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIM_02
+	_TRAINER_DATA2	msg_daisukim_02_01
+	_TRAINER_DATA3	msg_daisukim_02_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_daisukim_02
+	_TRAINER_EASY_MSG	msg_daisukim_02_03
+	_END
+
+_revenge_daisukim_02:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIM_02
+	_TRAINER_DATA2	msg_daisukim_02_04
+	_TRAINER_DATA3	msg_daisukim_02_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_daisukim_02_06
+	_END
+

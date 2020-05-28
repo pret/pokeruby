@@ -1,0 +1,107 @@
+//**********************************************************************
+//		evobjsv.def
+//		ﾌｨｰﾙﾄﾞ OBJ ｾｰﾌﾞﾃﾞｰﾀ
+//**********************************************************************
+#ifndef	EVOBJSV_DEF
+#define	EVOBJSV_DEF
+
+//------------------------------------------
+//	定数
+//------------------------------------------
+#define	EV_OBJ_MAX		16					// ﾌｨｰﾙﾄﾞ OBJ 最大数
+
+//------------------------------------------
+//	ﾌｨｰﾙﾄﾞOBJ SXY
+//------------------------------------------
+typedef struct
+{
+	u8	id;									// OBJ ID(u16 -> u8 01/04/23)
+	u8	obj_code;							// ｷｬﾗｺｰﾄﾞ
+	u8	col_code;							// ｶﾗｰｺｰﾄﾞ
+	s16	pos_x;								// X
+	s16	pos_y;								// Y
+	u8	height;								// 高さ
+	u8	site;								// 移動属性
+	u8	mvlim_x:4;							// 移動範囲 X
+	u8	mvlim_y:4;							// 移動範囲 Y
+	u16 ev_type;							// ｲﾍﾞﾝﾄﾀｲﾌﾟ(ｲﾍﾞﾝﾄｺｰﾄﾞ)
+	u16 work;								// ﾜｰｸﾊﾟﾗﾒﾀ	(視線距離等)
+	const u8 *ev_label;						// ｲﾍﾞﾝﾄﾗﾍﾞﾙ
+	u16	ev_flag;							// ｲﾍﾞﾝﾄﾌﾗｸﾞ
+}evObjData;
+
+#define EVOBJDATA_SIZE (sizeof(evObjData))	// 24 byte
+
+//------------------------------------------
+//	ﾌｨｰﾙﾄﾞOBJﾜｰｸ
+//------------------------------------------
+typedef struct
+{
+	u32	sw:1;								// ｽｲｯﾁ
+	u32	move_sw:1;							// 動作ｽｲｯﾁ
+	u32	move_start_sw:1;					// 動作開始ﾌﾗｸﾞ
+	u32 move_end_sw:1;						// 動作終了ﾌﾗｸﾞ
+	u32 move_jump_start_sw:1;				// ｼﾞｬﾝﾌﾟｽﾀｰﾄ
+	u32 move_jump_end_sw:1;					// ｼﾞｬﾝﾌﾟｴﾝﾄﾞ
+	u32	acmd_sw:1;							// ｱﾆﾒｰｼｮﾝｺﾏﾝﾄﾞ
+	u32	acmd_end_sw:1;						// ｱﾆﾒｰｼｮﾝｺﾏﾝﾄﾞｴﾝﾄﾞ
+	u32	pause_sw:1;							// ﾎﾟｰｽﾞ
+	u32	site_pause_sw:1;					// 方向固定
+	u32	anm_pause_sw:1;						// ｾﾙｱﾆﾒﾎﾟｰｽﾞ
+	u32	anm_pause_clr_sw:1;					// ｾﾙｱﾆﾒﾎﾟｰｽﾞｸﾘｱ
+	u32	anm_change_sw:1;					// ｱﾆﾒｰｼｮﾝﾁｪﾝｼﾞｽｲｯﾁ
+	u32	banish_sw:1;						// 非表示ｽｲｯﾁ
+	u32	scr_banish_sw:1;					// ｽｸﾛｰﾙﾊﾞﾆｯｼｭ
+	u32	scr_main_sw:1;						// ｽｸﾛｰﾙ固定
+	u32 scr_del_sw:1;						// ｽｸﾛｰﾙ削除ｽｲｯﾁ
+	u32	attr_reflect_sw:1;					// ｱﾄﾘﾋﾞｭｰﾄ 映りこみ
+	u32 attr_grass_sw:1;					// ｱﾄﾘﾋﾞｭｰﾄ 草
+	u32 attr_shoal_sw:1;					// ｱﾄﾘﾋﾞｭｰﾄ 浅瀬
+	u32 attr_sand_sw:1;						// ｱﾄﾘﾋﾞｭｰﾄ 砂
+	u32 attr_onsen_sw:1;					// ｱﾄﾘﾋﾞｭｰﾄ 温泉
+	u32	shade_act_sw:1;						// 影ｱｸﾀｰｽｲｯﾁ
+	u32	anm_pause_save_sw:1;				// ｾﾙｱﾆﾒﾎﾟｰｽﾞ保存
+	u32	aff_pause_save_sw:1;				// ｱﾌｨﾝｱﾆﾒﾎﾟｰｽﾞ保存
+	u32	under_effect_sw:1;					// 足元ｴﾌｪｸﾄﾌﾗｸﾞ
+	u32 priority_hold_sw:1;					// ﾌﾟﾗｲｵﾘﾃｨ固定
+	u32	:5;									// ﾋﾞｯﾄ余り
+
+	u8	actno;								// ｱｸﾀｰﾅﾝﾊﾞ
+	u8	obj_code;							// ｷｬﾗｺｰﾄﾞ
+	u8	mv_code;							// 動作ｺｰﾄﾞ
+	u8	ev_type;							// ｲﾍﾞﾝﾄﾀｲﾌﾟ
+
+	u8	objID;								// OBJ ID
+	u8	mapID;								// MAP ID
+	u8	divID;								// DIV ID
+	u8	height:4;							// 高さ
+	u8	height_pri:4;						// 高さﾌﾟﾗｲｵﾘﾃｨ
+
+	s16	init_x;								// ｸﾞﾛｰﾊﾞﾙ初期座標
+	s16	init_y;
+	s16	gx;									// ｸﾞﾛｰﾊﾞﾙ現座標
+	s16	gy;
+	s16	old_gx;								// ｸﾞﾛｰﾊﾞﾙ過去座標
+	s16	old_gy;
+
+	u16	site:4;								// 向き格納
+	u16	mv_site:4;							// 移動方向
+	u16	mvlim_x:4;							// 移動範囲 X
+	u16	mvlim_y:4;							// 移動範囲 Y
+	u8	joint_actno[2];						// 共同ｱｸﾀｰﾅﾝﾊﾞ
+
+	u8	acmd;								// ｱﾆﾒｰｼｮﾝｺｰﾄﾞ格納
+	u8	ev_work;							// ｲﾍﾞﾝﾄﾜｰｸ
+	u8	now_attr;							// ﾏｯﾌﾟｱﾄﾘﾋﾞｭｰﾄ
+	u8	old_attr;							// ﾏｯﾌﾟｱﾄﾘﾋﾞｭｰﾄ
+
+	u8	old_site;							// 過去方向
+	u8	work0;								// ﾜｰｸ0
+	u8	work1;								// ﾜｰｸ1
+	u8	:8;									// 余り
+}EventOBJ;
+
+#define	EVOBJ_SIZE	(sizeof(EventOBJ))		// 36 byte
+
+#endif		// EVOBJSV_DEF
+

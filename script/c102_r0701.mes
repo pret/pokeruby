@@ -1,0 +1,45 @@
+// カイナシティ　民家１
+
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c102_r0701
+msg_middlem2_01_p01_c102_r0701:
+	.byte	wa_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,spc_,se_,ttu_,ka_,ti_,de_,ne_
+	.byte	CR_
+	.byte	ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,to_,spc_,ku_,ra_,be_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	su_,ba_,ya_,sa_,ga_,spc_,ta_,ka_,i_,n_,da_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	se_,i_,ka_,ku_,de_,spc_,so_,da_,ti_,ya_,su_,i_,spc_,no_,u_,ri_,yyo_,ku_,ni_
+	.byte	CR_
+	.byte	ti_,ga_,i_,ga_,spc_,a_,ru_,no_,ka_,mo_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女３
+// ●コンテストパス持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_c102_r0701
+msg_girl3_01_p01_c102_r0701:
+	.byte	KO_,N_,TE_,SU_,TO_,ni_,spc_,sa_,n_,ka_,spc_,su_,ru_,ni_,ha_
+	.byte	CR_
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,ga_,spc_,i_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,ttu_,te_,i_,ru_,spc_,hi_,to_,spc_,na_,ra_
+	.byte	CR_
+	.byte	da_,re_,de_,mo_,spc_,mo_,ra_,e_,ru_,ka_,ra_,spc_,a_,n_,si_,n_,spc_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●コンテストパス持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p02_c102_r0701
+msg_girl3_01_p02_c102_r0701:
+	.byte	a_,ra_,spc_,KO_,N_,TE_,SU_,TO_,PA_,SU_,gyoe_
+	.byte	CR_
+	.byte	hu_,bou_,n_,spc_,KO_,N_,TE_,SU_,TO_,ni_,spc_,sa_,n_,ka_,spc_,su_,ru_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

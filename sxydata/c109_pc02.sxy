@@ -1,0 +1,123 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_C109_PC02	3
+#define EXITNUM_C109_PC02	5
+#define POSNUM_C109_PC02	0
+#define BGNUM_C109_PC02	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_pccable_01_p01_c109_pc02[];
+extern const u8	ev_pccable_02_p01_c109_pc02[];
+extern const u8	ev_pccable_03_p01_c109_pc02[];
+
+const evObjData	OBJ_c109_pc02[] =
+{
+	{
+		PCCABLE_01_C109_PC02,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pccable_01_p01_c109_pc02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		PCCABLE_02_C109_PC02,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pccable_02_p01_c109_pc02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		PCCABLE_03_C109_PC02,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pccable_03_p01_c109_pc02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c109_pc02[] =
+{
+	{
+		0x0001,		//Xpos
+		0x0005,		//Ypos
+		0x04,		//Height
+		C109_PC01_STAIR01,		//Door ID
+		C109_PC01,			//Map ID
+		C109,				//Field ID
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		SP_PC03_MAT01,		//Door ID
+		SP_PC03,			//Map ID
+		SP,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		SP_PC04_MAT01,		//Door ID
+		SP_PC04,			//Map ID
+		SP,				//Field ID
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		SP_PC05_MAT01,		//Door ID
+		SP_PC05,			//Map ID
+		SP,				//Field ID
+	},
+
+	{
+		0x0000,		//Xpos
+		0x0000,		//Ypos
+		0x00,		//Height
+		SP_PC06_MAT01,		//Door ID
+		SP_PC06,			//Map ID
+		SP,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c109_pc02_sxy_data =
+{
+OBJNUM_C109_PC02,			// field obj max
+EXITNUM_C109_PC02,		// exit max
+POSNUM_C109_PC02,			// pos event max
+BGNUM_C109_PC02,			// bg event max
+OBJ_c109_pc02,			// field obj data
+EXIT_c109_pc02,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

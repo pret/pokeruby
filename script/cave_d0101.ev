@@ -1,0 +1,341 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d0101.ev
+//
+//============================================ 
+
+EVENT_DATA_START	cave_d0101_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d0101
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0101:
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						アクア団幹部
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0101_pos01
+	_TALK_START
+
+	//下を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+
+	//話しているのが誰かわかるように動かす
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquam1_01_p01_cave_d0101
+	_TALK_CLOSE
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,turn_u_anime
+	_SET_OBJ_ANIME	AQUAM1_02_CAVE_D0101,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//「！」
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//「！」ウェイト
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquam1_01_p02_cave_d0101
+	_TALK_CLOSE
+
+	//近づいてくる
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,aquam1_01_cave_d0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_cave_d0101
+	_TALK_CLOSE
+
+	//左を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,turn_l_anime
+	_SET_OBJ_ANIME	AQUAM1_02_CAVE_D0101,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_APPEAR		MAGMABOSS_01_CAVE_D0101
+	_OBJ_APPEAR		MAGMAM1_01_CAVE_D0101
+	_OBJ_APPEAR		MAGMAM1_02_CAVE_D0101
+
+	//近づいてくる
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0101,magmaboss_01_cave_d0101_anime01
+	_SET_OBJ_ANIME	MAGMAM1_01_CAVE_D0101,magmam1_01_cave_d0101_anime01
+	_SET_OBJ_ANIME	MAGMAM1_02_CAVE_D0101,magmam1_02_cave_d0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//左を向く
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,turn_l_anime
+	_SET_OBJ_ANIME	AQUAM1_02_CAVE_D0101,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquam1_01_p03_cave_d0101
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d0101_anime01
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0101,aquam1_01_cave_d0101_anime02
+	_SET_OBJ_ANIME	AQUAM1_02_CAVE_D0101,aquam1_02_cave_d0101_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//OBJ消す
+	_OBJ_DELETE		AQUAM1_01_CAVE_D0101
+	_OBJ_DELETE		AQUAM1_02_CAVE_D0101
+
+	//近づいてくる
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0101,magmaboss_01_cave_d0101_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_cave_d0101s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_cave_d0101r
+#endif
+	_TALK_CLOSE
+
+	//連絡しにくる
+	_SET_OBJ_ANIME	MAGMAM1_01_CAVE_D0101,magmam1_01_cave_d0101_anime03
+	_SET_OBJ_ANIME	MAGMAM1_02_CAVE_D0101,magmam1_02_cave_d0101_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p03_cave_d0101
+
+	//下を向く
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0101,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p04_cave_d0101
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0101,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p05_cave_d0101
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0101,magmaboss_01_cave_d0101_anime02
+	_SET_OBJ_ANIME	MAGMAM1_01_CAVE_D0101,magmam1_01_cave_d0101_anime02
+	_SET_OBJ_ANIME	MAGMAM1_02_CAVE_D0101,magmam1_02_cave_d0101_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//OBJ消す
+	_OBJ_DELETE		MAGMABOSS_01_CAVE_D0101
+	_OBJ_DELETE		MAGMAM1_01_CAVE_D0101
+	_OBJ_DELETE		MAGMAM1_02_CAVE_D0101
+
+	//ロープウェイ乗り場のドアを塞いでいるアクア団を消す
+	_FLAG_SET		FV_AKUA_01_FIELD_R112
+
+	_LDVAL			WK_SCENE_CAVE_D0101,1
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//アクア団幹部	近づいてくる
+//--------------------------------------------------------------------
+aquam1_01_cave_d0101_anime01:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクア団幹部	逃げ出す
+//--------------------------------------------------------------------
+aquam1_01_cave_d0101_anime02:	
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクア団		逃げ出す
+//--------------------------------------------------------------------
+aquam1_02_cave_d0101_anime02:	
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマボス	登場
+//--------------------------------------------------------------------
+magmaboss_01_cave_d0101_anime01:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団		登場
+//--------------------------------------------------------------------
+magmam1_01_cave_d0101_anime01:	
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団		登場
+//--------------------------------------------------------------------
+magmam1_02_cave_d0101_anime01:	
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団ボス	去っていく
+//--------------------------------------------------------------------
+magmaboss_01_cave_d0101_anime02:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団ボス	主人公に近づいてくる
+//--------------------------------------------------------------------
+magmaboss_01_cave_d0101_anime03:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団		去っていく
+//--------------------------------------------------------------------
+magmam1_01_cave_d0101_anime02:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団		連絡しにくる
+//--------------------------------------------------------------------
+magmam1_01_cave_d0101_anime03:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団		去っていく
+//--------------------------------------------------------------------
+magmam1_02_cave_d0101_anime02:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマ団		連絡しにくる
+//--------------------------------------------------------------------
+magmam1_02_cave_d0101_anime03:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公		ぶつかる
+//--------------------------------------------------------------------
+hero_01_cave_d0101_anime01:	
+	.byte	AC_WALK_TURN_D
+	.byte	AC_WAIT_4
+	.byte	AC_WALK_TURN_R
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_L_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//							ソライシ博士
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_cave_d0101
+	_TALK_OBJ_START
+
+	//すでに会話していたら
+	_IF_FLAGON_JUMP	FE_SORAISI_01_CAVE_D0101,ev_studym1_01_p02_cave_d0101
+
+	_FLAG_SET		FE_SORAISI_01_CAVE_D0101
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_cave_d0101
+	_TALK_OBJ_END
+	_END
+
+//すでに会話している
+ev_studym1_01_p02_cave_d0101:
+	_TALK_KEYWAIT	msg_studym1_01_p02_cave_d0101
+	_TALK_OBJ_END
+	_END
+
+

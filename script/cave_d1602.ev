@@ -1,0 +1,322 @@
+//====================================================================
+//						cave_d1602
+//						ニューキンセツ（地下都市）
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START cave_d1602_event_data
+INIT_CTRL_LABEL	init_ctrl_label_cave_d1602
+FLAG_CHANGE_LABEL	flag_change_cave_d1602
+BG_CHANGE_LABEL	bg_change_cave_d1602
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_label_cave_d1602:
+	_IFVAL_CALL		LOCALWORK1,EQ,1,map_cell_open_blue_cave_d1602
+	_IFVAL_CALL		LOCALWORK2,EQ,1,map_cell_open_green_cave_d1602
+
+	_IF_FLAGON_CALL	SYS_CTRL_OBJ_DELETE,pokemon_del_cave_d1602
+	_END
+
+//戦闘後のタイミングで削除
+pokemon_del_cave_d1602:
+	_OBJ_DELETE		TARGET_OBJ
+	_RET
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1602:
+	_LDVAL	LOCALWORK1,0		//スイッチ１有効
+	_LDVAL	LOCALWORK2,0		//スイッチ２有効
+	_END
+
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_cave_d1602:
+	_IFVAL_CALL		WK_SCENE_CAVE_D1602,EQ,2,hatsuden_push_cell_cave_d1602
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						スイッチ青
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1602_pos01
+	_TALK_START
+	_LDVAL	LOCALWORK1,1		//青のスイッチを押した状態へ
+	_LDVAL	LOCALWORK2,0		//緑のスイッチを離した状態へ
+
+	//スイッチ起動音
+	_SE	SE_PIN
+
+	//MAP CELL SET
+	_CALL	map_cell_open_blue_cave_d1602
+
+	_PROGRAM	MAKE_MAP_BG
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						スイッチ緑
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1602_pos02
+	_TALK_START
+	_LDVAL	LOCALWORK1,0		//青のスイッチを離した状態へ
+	_LDVAL	LOCALWORK2,1		//緑のスイッチを押した状態へ
+
+	//スイッチ起動音
+	_SE	SE_PIN
+
+	//MAP CELL SET
+	_CALL	map_cell_open_green_cave_d1602
+
+	_PROGRAM	MAKE_MAP_BG
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
+//青扉開放、緑扉閉鎖
+map_cell_open_blue_cave_d1602:
+	//青扉　開
+	_SET_CELL	23,34,617,1
+	_SET_CELL	23,35,625,1
+	_SET_CELL	23,36,621,0
+	_SET_CELL	23,37,641,0
+
+	_SET_CELL	10,16,617,1
+	_SET_CELL	10,17,625,1
+	_SET_CELL	10,18,621,0
+	_SET_CELL	10,19,641,0
+
+	_SET_CELL	10,0,617,1
+	_SET_CELL	10,1,625,1
+	_SET_CELL	10,2,621,0
+	_SET_CELL	10,3,641,0
+
+	//緑扉　閉
+	_SET_CELL	37,33,694,1
+	_SET_CELL	37,34,702,1
+	_SET_CELL	37,35,710,1
+	_SET_CELL	37,36,718,1
+
+	_SET_CELL	28,22,694,1
+	_SET_CELL	28,23,702,1
+	_SET_CELL	28,24,710,1
+	_SET_CELL	28,25,718,1
+
+	_SET_CELL	10,24,694,1
+	_SET_CELL	10,25,702,1
+	_SET_CELL	10,26,710,1
+	_SET_CELL	10,27,718,1
+
+	_SET_CELL	21,2,694,1
+	_SET_CELL	21,3,702,1
+	_SET_CELL	21,4,710,1
+	_SET_CELL	21,5,718,1
+
+	//ボタンを押した状態へ
+	_SET_CELL	6,11,591,0
+	_SET_CELL	13,10,591,0
+	_SET_CELL	16,22,591,0
+	_SET_CELL	4,26,591,0
+	_SET_CELL	30,38,591,0
+
+	//ボタンを離した状態へ
+	_SET_CELL	2,11,558,0
+	_SET_CELL	17,10,558,0
+	_SET_CELL	25,18,558,0
+	_SET_CELL	18,36,558,0
+
+	_RET
+
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
+//緑扉開放、青扉閉鎖
+map_cell_open_green_cave_d1602:
+	//青扉　閉
+	_SET_CELL	23,34,695,1
+	_SET_CELL	23,35,703,1
+	_SET_CELL	23,36,711,1
+	_SET_CELL	23,37,719,1
+
+	_SET_CELL	10,16,695,1
+	_SET_CELL	10,17,703,1
+	_SET_CELL	10,18,711,1
+	_SET_CELL	10,19,719,1
+
+	_SET_CELL	10,0,695,1
+	_SET_CELL	10,1,703,1
+	_SET_CELL	10,2,711,1
+	_SET_CELL	10,3,719,1
+
+	//緑扉　開
+	_SET_CELL	37,33,617,1
+	_SET_CELL	37,34,625,1
+	_SET_CELL	37,35,621,0
+	_SET_CELL	37,36,641,0
+
+	_SET_CELL	28,22,617,1
+	_SET_CELL	28,23,625,1
+	_SET_CELL	28,24,621,0
+	_SET_CELL	28,25,641,0
+
+	_SET_CELL	10,24,617,1
+	_SET_CELL	10,25,625,1
+	_SET_CELL	10,26,621,0
+	_SET_CELL	10,27,641,0
+
+	_SET_CELL	21,2,617,1
+	_SET_CELL	21,3,625,1
+	_SET_CELL	21,4,621,0
+	_SET_CELL	21,5,641,0
+
+	//ボタンを押した状態へ
+	_SET_CELL	2,11,591,0
+	_SET_CELL	17,10,591,0
+	_SET_CELL	25,18,591,0
+	_SET_CELL	18,36,591,0
+
+	//ボタンを離した状態へ
+	_SET_CELL	6,11,566,0
+	_SET_CELL	13,10,566,0
+	_SET_CELL	16,22,566,0
+	_SET_CELL	4,26,566,0
+	_SET_CELL	30,38,566,0
+
+	_RET
+
+
+/********************************************************************/
+//						発電機のスイッチ
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1602_pos03
+	_TALK_START
+	_TALK_KEYWAIT	msg_switch_01_p01_cave_d1602
+
+	_CALL			hatsuden_push_cell_cave_d1602
+
+	_LDVAL			WK_SCENE_CAVE_D1602,2
+	_TALK_END
+	_END
+
+//発電機前のボタンを押した時のセル書き換え
+hatsuden_push_cell_cave_d1602:
+	//ボタンを離した状態へ
+	_SET_CELL	33,6,591,0
+
+	//発電機本体
+	_SET_CELL	32,2,752,1
+	_SET_CELL	33,2,753,1
+	_SET_CELL	34,2,754,1
+	_SET_CELL	35,2,755,1
+	_SET_CELL	32,3,756,1
+	_SET_CELL	33,3,757,1
+	_SET_CELL	34,3,758,1
+	_SET_CELL	35,3,759,1
+
+	_PROGRAM	MAKE_MAP_BG
+	_RET
+
+
+/********************************************************************/
+//						発電機のスイッチ
+/********************************************************************/
+SCRIPT_LABEL	ev_machine_01_p01_cave_d1602
+	_TALK_START
+
+	//動作停止したか
+	_IFVAL_JUMP		WK_SCENE_CAVE_D1602,EQ,2,ev_machine_01_p02_cave_d1602
+
+	_TALK_KEYWAIT	msg_machine_01_p01_cave_d1602
+	_TALK_END
+	_END
+
+//動作停止した
+ev_machine_01_p02_cave_d1602:
+	_TALK_KEYWAIT	msg_machine_01_p02_cave_d1602
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//							ビリリダマ
+/********************************************************************/
+SCRIPT_LABEL	ev_biriridama_01_cave_d1602
+	_TALK_OBJ_START
+
+	_WILD_FIGHT_SET	MONSNO_BIRIRIDAMA,25,0
+	_VOICE_PLAY		MONSNO_BIRIRIDAMA,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	//通常戦闘なので負けてもOBJ消すようにする
+	_FLAG_SET		FV_BIRIRIDAMA_01
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							ビリリダマ
+/********************************************************************/
+SCRIPT_LABEL	ev_biriridama_02_cave_d1602
+	_TALK_OBJ_START
+
+	_WILD_FIGHT_SET	MONSNO_BIRIRIDAMA,25,0
+	_VOICE_PLAY		MONSNO_BIRIRIDAMA,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	//通常戦闘なので負けてもOBJ消すようにする
+	_FLAG_SET		FV_BIRIRIDAMA_02
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							ビリリダマ
+/********************************************************************/
+SCRIPT_LABEL	ev_biriridama_03_cave_d1602
+	_TALK_OBJ_START
+
+	_WILD_FIGHT_SET	MONSNO_BIRIRIDAMA,25,0
+	_VOICE_PLAY		MONSNO_BIRIRIDAMA,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	//通常戦闘なので負けてもOBJ消すようにする
+	_FLAG_SET		FV_BIRIRIDAMA_03
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

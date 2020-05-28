@@ -1,0 +1,676 @@
+// ■□□□□□□□□□□□□□□□□□□□□■■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●うるさいばあさん：ますだ担当
+// ●104番道路Ｘ37Ｙ8
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_kinomi
+msg_oldwoman1_01_p01_kinomi:
+	.byte	hu_,ka_,hu_,ka_,no_,spc_,tu_,ti_,ni_,spc_,ha_,e_,te_,i_,ru_,spc_,ki_,no_,mi_,ha_
+	.byte	CR_
+	.byte	zi_,yu_,u_,ni_,spc_,to_,ttu_,te_,mo_,spc_,yo_,i_,no_,zi_,yya_,ga_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	n1_,tu_,da_,ke_,spc_,ki_,no_,mi_,wo_,spc_,o_,na_,zi_,spc_,ba_,si_,yyo_,ni_,spc_,u_,me_,ru_
+	.byte	CR_
+	.byte	so_,re_,ga_,spc_,re_,i_,gi_,to_,spc_,i_,u_,mo_,no_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,re_,spc_,ko_,re_,wo_,spc_,wa_,ke_,te_,ya_,ro_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●木の実、２番カゴのみを１つ貰えます。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_kinomi
+msg_oldwoman1_01_p02_kinomi:
+	.byte	a_,n_,ta_,spc_,mi_,ta_,to_,ko_,ro_,spc_,TO_,RE_,bou_,NA_,bou_,zi_,yya_,ro_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,yo_,ku_,spc_,ki_,no_,mi_,wo_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	mo_,ta_,se_,to_,ru_,wa_,i_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ya_,su_,mo_,spc_,tu_,ka_,u_,mo_,spc_,a_,n_,ta_,spc_,si_,da_,i_,zi_,yya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●小さな女の子：ますだ担当
+// ●111番道路Ｘ23Ｙ8
+// ●時計機能使用、一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_kinomi
+msg_girl1_01_p01_kinomi:
+	.byte	i_,tu_,mo_,spc_,mi_,zu_,wo_,spc_,a_,ge_,te_,ta_,ra_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,ha_,na_,ga_,spc_,sa_,i_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,ta_,ra_,spc_,ki_,no_,mi_,mo_,spc_,ta_,ku_,sa_,n_,spc_,de_,ki_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,spc_,a_,ge_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●木の実を１つ貰えます。
+// ●１６番：ズリのみ
+// ●きのみポケットにしまいます。
+// ●＠０＝男：　おにいちゃん
+// ●＠０＝女：　おねえちゃん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p02_kinomi
+msg_girl1_01_p02_kinomi:
+	.byte	ga_,n_,ba_,ttu_,te_,spc_,a_,ka_,i_,PO_,RO_,TTU_,KU_,spc_,tu_,ku_,ru_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,mo_,spc_,ga_,n_,ba_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p03_kinomi
+msg_girl1_01_p03_kinomi:
+	.byte	ki_,yyo_,u_,ha_,spc_,na_,ni_,i_,ro_,no_,spc_,ki_,no_,mi_,wo_
+	.byte	CR_
+	.byte	sa_,ga_,so_,ttu_,ka_,na_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●キザな少年：ますだ担当
+// ●114番道路Ｘ29Ｙ43
+// ●時計機能使用、一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_kinomi
+msg_youngm1_01_p01_kinomi:
+	.byte	PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_,no_,spc_,yu_,u_,si_,yyo_,u_,wo_,spc_,me_,za_,si_,te_
+	.byte	CR_
+	.byte	ki_,no_,mi_,wo_,spc_,a_,tu_,me_,te_,i_,ru_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,ki_,mi_,ni_,mo_,spc_,wa_,ke_,te_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●木の実を１つ貰えます。
+// ●１６～２０番を乱数で１つくれる。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p02_kinomi
+msg_youngm1_01_p02_kinomi:
+	.byte	ki_,mi_,mo_,spc_,ga_,n_,ba_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p03_kinomi
+msg_youngm1_01_p03_kinomi:
+	.byte	ki_,yyo_,u_,ha_,spc_,do_,no_,spc_,ki_,no_,mi_,wo_,spc_,u_,me_,ru_,ka_,tenten_
+	.byte	CR_
+	.byte	so_,si_,te_,spc_,na_,ni_,i_,ro_,no_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ru_,ka_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ya_,mu_,no_,mo_,spc_,ma_,ta_,spc_,ta_,no_,si_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●愛の女の人：ますだ担当
+// ●120番道路Ｘ13Ｙ91
+// ●時計機能使用、一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_kinomi
+msg_workerw2_01_p01_kinomi:
+	.byte	KE_,bou_,SU_,wo_,spc_,hu_,ru_,to_,spc_,de_,te_,ku_,ru_,spc_,PO_,RO_,TTU_,KU_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,so_,re_,wo_,spc_,KI_,YYA_,TTU_,TI_,si_,te_
+	.byte	CR_
+	.byte	ta_,be_,te_,ku_,re_,ru_,spc_,PO_,KE_,MO_,N_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ttu_,te_,spc_,a_,i_,spc_,da_,yo_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」を表示。
+// ●はいの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_kinomi
+msg_workerw2_01_p02_kinomi:
+	.byte	u_,n_,spc_,u_,n_,gyoe_
+	.byte	CR_
+	.byte	ya_,ttu_,pa_,spc_,wa_,ka_,ru_,hi_,to_,ni_,ha_,spc_,wa_,ka_,ru_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,spc_,a_,ge_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●いいえの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_kinomi
+msg_workerw2_01_p03_kinomi:
+	.byte	so_,ttu_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	de_,mo_,spc_,ti_,ga_,u_,to_,spc_,ka_,n_,zi_,ru_,ko_,to_,mo_,spc_,ta_,i_,se_,tu_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,spc_,a_,ge_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい」でも「いいえ」でも１日１回木の実を貰えます。
+// ●ＩＤ下一桁＝０、５なら１１番の木の実を１つ貰える。
+// ●ＩＤ下一桁＝１、６なら１２番の木の実を１つ貰える。
+// ●ＩＤ下一桁＝２、７なら１３番の木の実を１つ貰える。
+// ●ＩＤ下一桁＝３、８なら１４番の木の実を１つ貰える。
+// ●ＩＤ下一桁＝４、９なら１５番の木の実を１つ貰える。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p04_kinomi
+msg_workerw2_01_p04_kinomi:
+	.byte	so_,no_,spc_,ki_,no_,mi_,ha_,spc_,me_,zu_,ra_,si_,i_,mo_,no_,spc_,ra_,si_,i_,ka_,ra_
+	.byte	CR_
+	.byte	ta_,i_,se_,tu_,ni_,spc_,so_,da_,te_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p05_kinomi
+msg_workerw2_01_p05_kinomi:
+	.byte	ma_,ta_,spc_,ki_,no_,mi_,me_,i_,zi_,n_,ni_,spc_,mo_,ra_,ttu_,te_,spc_,ko_,yo_,u_,ttu_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●似合う紳士：ますだ担当
+// ●ミナモＸ50Ｙ7
+// ●時計機能使用、一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_kinomi
+msg_gentlem1_01_p01_kinomi:
+	.byte	ya_,ttu_,pa_,ri_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ni_,spc_,SU_,bou_,TU_,ga_,spc_,ni_,a_,u_,yo_,u_,ni_
+	.byte	CR_
+	.byte	u_,mi_,ni_,ha_,spc_,si_,o_,ka_,ze_,ga_,spc_,ni_,a_,u_,na_
+	.byte	SCROLL_WAIT_
+	.byte	so_,si_,te_,spc_,ki_,mi_,ni_,ha_,spc_,ki_,no_,mi_,ga_,spc_,ni_,a_,i_,so_,u_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,de_,da_,ro_,u_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１～１０番を乱数で１つくれる。
+// ●１日１回木の実を貰えます。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_kinomi
+msg_gentlem1_01_p02_kinomi:
+	.byte	ya_,ttu_,pa_,ri_,spc_,so_,re_,ha_,tenten_,tenten_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ga_,spc_,TO_,RE_,bou_,NA_,bou_,da_,ka_,ra_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p03_kinomi
+msg_gentlem1_01_p03_kinomi:
+	.byte	ya_,ttu_,pa_,ri_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ni_,spc_,SI_,N_,PU_,RU_,sa_,ga_,spc_,ni_,a_,u_,yo_,u_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ni_,ha_,spc_,PO_,RO_,TTU_,KU_,ga_,spc_,ni_,a_,u_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●きのみめいじん（旧きのみじいさん）：ますだ担当
+// ●123番道路Ｘ22Ｙ4の家の中Ｘ４Ｙ４
+// ●一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_kinomi
+msg_oldman1_01_p01_kinomi:
+	.byte	wa_,si_,ha_,spc_,ki_,no_,mi_,me_,i_,zi_,n_,to_,spc_,yo_,ba_,re_,te_,o_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ha_,spc_,se_,ka_,i_,zi_,yyu_,u_,wo_,spc_,u_,tu_,ku_,si_,i_,spc_,ha_,na_,de_
+	.byte	CR_
+	.byte	u_,me_,tu_,ku_,so_,u_,to_,spc_,ki_,no_,mi_,wo_,spc_,so_,da_,te_,te_
+	.byte	SCROLL_WAIT_
+	.byte	so_,si_,te_,spc_,ku_,ba_,ri_,spc_,ma_,ku_,ttu_,te_,spc_,o_,ru_,no_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ni_,mo_,spc_,ki_,no_,mi_,wo_,spc_,wa_,ke_,te_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乱数で２１～３０の木の実が１日１回貰えます。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_kinomi
+msg_oldman1_01_p02_kinomi:
+	.byte	ho_,re_,spc_,e_,n_,ri_,yyo_,spc_,se_,zu_,ni_,spc_,mo_,u_,spc_,hi_,to_,tu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乱数で２１～３０の木の実が１日１回貰えます。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p03_kinomi
+msg_oldman1_01_p03_kinomi:
+	.byte	KA_,NA_,ZU_,MI_,no_,spc_,ti_,ka_,ku_,ni_,a_,ru_,spc_,SA_,N_,nakag_,TO_,U_,KA_,to_,i_,u_
+	.byte	CR_
+	.byte	HU_,RA_,WA_,bou_,SI_,YYO_,TTU_,PU_,mo_,spc_,yo_,ro_,si_,ku_,no_
+	.byte	NORMAL_WAIT_
+	.byte	se_,ka_,i_,ni_,spc_,ha_,na_,wo_,spc_,sa_,ka_,se_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p04_kinomi
+msg_oldman1_01_p04_kinomi:
+	.byte	ki_,yyo_,u_,ha_,spc_,mo_,u_,spc_,o_,si_,ma_,i_,zi_,yya_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,o_,i_,de_
+	.byte	NORMAL_WAIT_
+	.byte	se_,ka_,i_,ni_,spc_,ha_,na_,wo_,spc_,sa_,ka_,se_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そだてのめいじん妻：ますだ担当
+// ●123番道路Ｘ22Ｙ4の家の中Ｘ7Ｙ４
+// ●一日、一回、合い言葉で木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p01_kinomi
+msg_oldwoman2_01_p01_kinomi:
+	.byte	zi_,i_,sa_,n_,no_,spc_,ki_,no_,mi_,no_,spc_,so_,da_,te_,ka_,ta_,ha_
+	.byte	CR_
+	.byte	so_,ri_,yya_,a_,spc_,se_,ka_,i_,i_,ti_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,mo_,spc_,ha_,na_,ga_,spc_,ta_,ka_,i_,wa_,i_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,spc_,a_,n_,ta_
+	.byte	CR_
+	.byte	i_,i_,spc_,ko_,to_,ba_,wo_,spc_,ki_,i_,ta_,ko_,to_,ga_,spc_,na_,i_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●２文字入力の簡易会話画面を表示します。
+// ●簡易会話画面
+// ●　「いい　ことば」と表示。
+// ●　「２つの　ことばを　くみあわせて
+// ●　　いい　ことばを　おしえてあげよう！」を表示。
+// ●合い言葉をチェック。
+// ●Ａは、「チャレンジ」「コンテスト」で正解。
+// ●Ｂは、「すごすぎ」「ラティアス」で正解。
+// ●Ｃは、「わくわく」「ゆびをふる」で正解。
+// ●Ｄは、「すごい」「しょうぶ」で正解。
+// ●Ｅは、「モーレツ」「ハッスル」で正解。
+
+// ●正解の場合。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p02_kinomi
+msg_oldwoman2_01_p02_kinomi:
+	.byte	o_,o_,gyoe_,spc_,to_,te_,mo_,spc_,yo_,i_,spc_,ko_,to_,ba_,zi_,yya_,gyoe_
+	.byte	CR_
+	.byte	ka_,n_,do_,u_,spc_,si_,ta_,wa_,i_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,re_,spc_,ko_,re_,wo_,spc_,mo_,ttu_,te_,i_,ki_,na_,sa_,re_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●Ａは３１番の木の実が１つ貰える。
+// ●Ｂは３２番の木の実が１つ貰える。
+// ●Ｃは３３番の木の実が１つ貰える。
+// ●Ｄは３４番の木の実が１つ貰える。
+// ●Ｅは３５番の木の実が１つ貰える。
+
+// ●一度貰えると、同じ木の実は２度貰えない。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●不正解の場合。
+// ●＆正解でも１度木の実を貰った場合。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p03_kinomi
+msg_oldwoman2_01_p03_kinomi:
+	.byte	o_,o_,gyoe_,spc_,na_,ka_,na_,ka_,spc_,yo_,i_,spc_,ko_,to_,ba_,zi_,yya_
+	.byte	CR_
+	.byte	a_,n_,ta_,mo_,spc_,ta_,i_,si_,ta_,mo_,n_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,re_,spc_,ko_,re_,wo_,spc_,mo_,ttu_,te_,i_,ki_,na_,sa_,re_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１～１０の木の実が乱数で１日に１個だけ貰える
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●続けてこのメッセージ。
+// ●１日に２回目の話しかけもここ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p04_kinomi
+msg_oldwoman2_01_p04_kinomi:
+	.byte	ma_,go_,ta_,ti_,spc_,n4_,ni_,n_,mo_,spc_,zi_,i_,sa_,n_,wo_,spc_,si_,no_,gu_
+	.byte	CR_
+	.byte	o_,o_,mo_,no_,ni_,spc_,na_,ru_,zi_,yya_,ro_,u_,te_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,n_,se_,i_,spc_,ta_,no_,si_,i_,ko_,to_,ga_,spc_,tu_,ki_,n_,no_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●簡易会話で何も入力しなかったか、１単語だった場合。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p05_kinomi
+msg_oldwoman2_01_p05_kinomi:
+	.byte	ho_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ●この後msg_oldwoman2_01_p04_kinomiへジャンプ！
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●104番道路　花屋（r0201）の中
+// ●花屋の長女（ノリコ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_r104_r0201
+msg_woman1_01_p01_r104_r0201:
+	.byte	ko_,n_,ni_,ti_,ha_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,na_,wo_,spc_,se_,ka_,i_,ni_,spc_,hi_,ro_,me_,ru_
+	.byte	CR_
+	.byte	HU_,RA_,WA_,bou_,SI_,YYO_,TTU_,PU_,spc_,SA_,N_,nakag_,TO_,U_,KA_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●初めてあったか？→はい�@　　msg_woman1_01_p02_r104_r0201:
+// 　　　　　　　　　　いいえ�A　msg_woman1_01_p03_r104_r0201:
+
+// ●はじめてじゃない
+// ●�A
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p03_r104_r0201
+msg_woman1_01_p03_r104_r0201:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ki_,no_,mi_,no_,spc_,ko_,to_,spc_,si_,ri_,ta_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」を表示。→はい�B　　msg_woman1_01_p04_r104_r0201:
+// 　　　　　　　　　　　　　　いいえ�C　msg_woman1_01_p05_r104_r0201:
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はじめてあった
+// ●�@
+// ●最初のみ名前を聞いてくる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p02_r104_r0201
+msg_woman1_01_p02_r104_r0201:
+	.byte	a_,na_,ta_,no_,spc_,na_,ma_,e_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ne_,gyoe_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,spc_,i_,i_,spc_,na_,ma_,e_,da_,ne_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ki_,no_,mi_,no_,ko_,to_,spc_,si_,ri_,ta_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」を表示。
+// ●はいの場合
+// ●�B
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p04_r104_r0201
+msg_woman1_01_p04_r104_r0201:
+	.byte	ki_,no_,mi_,ha_,ne_,spc_,ku_,ro_,i_,spc_,hu_,ka_,hu_,ka_,no_,spc_,tu_,ti_,no_
+	.byte	CR_
+	.byte	to_,ko_,ro_,de_,spc_,ta_,ma_,ni_,spc_,to_,re_,ru_,no_
+	.byte	SCROLL_WAIT_
+	.byte	de_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ttu_,ta_,ra_,spc_,so_,no_,n1_,tu_,wo_,spc_,ma_,ta_,spc_,u_,me_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,su_,ru_,to_,spc_,so_,no_,spc_,ki_,no_,mi_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	me_,ga_,de_,te_,spc_,mi_,ki_,ga_,spc_,de_,ki_,te_,spc_,ha_,na_,ga_,sa_,i_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ta_,spc_,ki_,no_,mi_,spc_,ga_,spc_,de_,ki_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ya_,ttu_,te_,spc_,ha_,na_,wo_,spc_,hu_,ya_,si_,te_
+	.byte	CR_
+	.byte	se_,ka_,i_,zi_,yyu_,u_,wo_,spc_,ha_,na_,ni_,spc_,su_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ta_,si_,no_,spc_,yu_,me_,spc_,na_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,mo_,spc_,ki_,no_,mi_,wo_,spc_,u_,me_,te_
+	.byte	CR_
+	.byte	se_,ka_,i_,ni_,spc_,ha_,na_,wo_,spc_,hu_,ya_,si_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●いいえの場合
+// ●�C
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p05_r104_r0201
+msg_woman1_01_p05_r104_r0201:
+	.byte	o_,ha_,na_,ttu_,te_,spc_,to_,ttu_,te_,mo_,spc_,si_,a_,wa_,se_,na_,spc_,ki_,bu_,n_,ni_
+	.byte	CR_
+	.byte	si_,te_,ku_,re_,ru_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●花屋の次女（レイコ）
+// ●初めての会話では、まずじょうろを渡す。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_r104_r0201
+msg_girl3_01_p01_r104_r0201:
+	.byte	ko_,n_,ni_,ti_,ha_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ha_,na_,ha_,spc_,se_,wa_,wo_,spc_,su_,re_,ba_,spc_,su_,ru_,ho_,do_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,ki_,re_,i_,ni_,spc_,sa_,i_,te_,spc_,ku_,re_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,mo_,spc_,se_,wa_,wo_,spc_,si_,ta_,ku_,spc_,na_,ttu_,ta_,spc_,de_,si_,yyo_,hate_
+	.byte	CR_
+	.byte	ko_,re_,spc_,a_,ge_,ru_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●大切な道具に「じょうろ」を追加する
+// ●花屋の次女（じょうろを貰った後に、話しかけたときも共通）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p02_r104_r0201
+msg_girl3_01_p02_r104_r0201:
+	.byte	ki_,no_,mi_,ga_,spc_,so_,da_,tu_,spc_,ta_,bi_,ni_
+	.byte	CR_
+	.byte	zi_,yyo_,u_,ro_,de_,spc_,mi_,zu_,wo_,spc_,a_,ge_,te_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,to_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,no_,mi_,ha_,spc_,zu_,ttu_,to_,spc_,zu_,ttu_,to_,spc_,ho_,u_,ttu_,te_,o_,ku_,to_
+	.byte	CR_
+	.byte	zi_,me_,n_,ni_,spc_,o_,ti_,te_,si_,ma_,u_,no_
+	.byte	SCROLL_WAIT_
+	.byte	de_,mo_,ne_,spc_,so_,ko_,ka_,ra_,spc_,ma_,ta_,spc_,me_,ga_,de_,te_,spc_,ku_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	su_,go_,i_,yo_,ne_,gyoe_
+	.byte	CR_
+	.byte	i_,ki_,mo_,no_,no_,spc_,ti_,ka_,ra_,wo_,spc_,ka_,n_,zi_,ru_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●花屋の三女（ナオコ）
+// ●一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_r104_r0201
+msg_girl1_01_p01_r104_r0201:
+	.byte	o_,ne_,bou_,ti_,yya_,n_,ta_,ti_,wo_,spc_,mi_,na_,ra_,ttu_,te_
+	.byte	CR_
+	.byte	ga_,n_,ba_,ttu_,te_,spc_,o_,ha_,na_,wo_,spc_,so_,da_,te_,te_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,gyoe_,spc_,ko_,re_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日１回、乱数で１～８の木の実が１つ貰える。
+// ●きのみポケットにしまいます。
+
+// ●１日に２回目の話しかけもここ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p02_r104_r0201
+msg_girl1_01_p02_r104_r0201:
+	.byte	ki_,no_,mi_,ha_,spc_,u_,me_,te_,spc_,o_,o_,ki_,ku_,spc_,si_,ta_,ri_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,mo_,ta_,se_,ta_,ri_,spc_,de_,ki_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,sa_,i_,ki_,n_,spc_,ki_,no_,mi_,wo_,spc_,i_,ku_,tu_,ka_,spc_,ma_,ze_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,o_,ka_,si_,ni_,na_,ru_,spc_,ki_,ka_,i_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ru_,spc_,ra_,si_,i_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,mo_,spc_,o_,ka_,si_,spc_,ho_,si_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●小さな女の子：ますだ担当
+// ●知りたがり屋のキリちゃん
+// ●ルネシティＸ9Ｙ43
+// ●時計機能使用、一日、一回、木の実を分けてくれる。
+// ●＠０＝男：　おにいちゃん
+// ●＠０＝女：　おねえちゃん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_kinomi
+msg_girl2_01_p01_kinomi:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,na_,ma_,e_,spc_,na_,n_,te_,i_,u_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,tenten_,spc_,tenten_,tenten_,tenten_,spc_,tenten_,tenten_,tenten_
+	.byte	CR_
+	.byte	he_,bou_,spc_,i_,i_,ne_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,KI_,RI_,spc_,ttu_,te_,i_,u_,spc_,na_,ma_,e_,na_,no_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,PA_,to_,spc_,MA_,MA_,ga_,spc_,su_,ku_,su_,ku_,to_,spc_,so_,da_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,ko_,ro_,no_,spc_,a_,ta_,ta_,ka_,i_,spc_,o_,n_,na_,no_,ko_,ni_,spc_,na_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,si_,i_,ttu_,te_,i_,u_,spc_,ne_,ga_,i_,wo_,spc_,ko_,me_,ta_,n_,da_,ttu_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ni_,mo_,spc_,ko_,re_,spc_,a_,ge_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●木の実を１つ貰えます。
+// ●２１～３０番を乱数で１つ貰える。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p02_kinomi
+msg_girl2_01_p02_kinomi:
+	.byte	a_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ni_,ha_,spc_,KI_,RI_,no_,spc_,da_,i_,su_,ki_,na_
+	.byte	CR_
+	.byte	ko_,no_,spc_,ki_,no_,mi_,mo_,spc_,a_,ge_,ti_,yya_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●木の実を１つ貰えます。
+// ●１１、１５のどちらかを乱数で１つ貰えます。
+// ●きのみポケットにしまいます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p03_kinomi
+msg_girl2_01_p03_kinomi:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,na_,ma_,e_,ni_,ha_
+	.byte	CR_
+	.byte	do_,n_,na_,spc_,ne_,ga_,i_,ga_,spc_,ko_,me_,ra_,re_,te_,ru_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p04_kinomi
+msg_girl2_01_p04_kinomi:
+	.byte	ha_,ru_,spc_,na_,tu_,spc_,a_,ki_,spc_,hu_,yu_
+	.byte	CR_
+	.byte	ha_,ru_,ni_,spc_,u_,ma_,re_,ru_,to_,spc_,ha_,ru_,ga_,spc_,su_,ki_,de_
+	.byte	SCROLL_WAIT_
+	.byte	na_,tu_,ni_,spc_,u_,ma_,re_,ru_,to_,spc_,na_,tu_,ga_,spc_,su_,ki_,na_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」を表示。
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p05_kinomi
+msg_girl2_01_p05_kinomi:
+	.byte	zi_,yya_,a_,spc_,KI_,RI_,ha_,spc_,a_,ki_,ni_,spc_,u_,ma_,re_,ta_,ka_,ra_
+	.byte	CR_
+	.byte	a_,ki_,ga_,spc_,da_,i_,su_,ki_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,i_,tu_,ga_,spc_,su_,ki_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p06_kinomi
+msg_girl2_01_p06_kinomi:
+	.byte	so_,ttu_,ka_,tenten_
+	.byte	CR_
+	.byte	ka_,n_,ke_,i_,na_,i_,no_,ka_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ri_,ta_,i_,ko_,to_,ttu_,te_,spc_,ta_,ku_,sa_,n_,a_,ru_,na_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+

@@ -1,0 +1,60 @@
+// ●ルネシティ　民家３（街の西・上から２番目）
+
+
+// ●女性２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c108_r0401
+msg_woman2_01_p01_c108_r0401:
+	.byte	a_,na_,ta_,spc_,PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	RU_,NE_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_
+	.byte	CR_
+	.byte	MI_,KU_,RI_,sa_,ma_,ni_,ha_,spc_,HU_,AA_,N_,ga_,spc_,i_,ttu_,pa_,i_,da_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	a_,na_,ta_,ni_,spc_,HU_,AA_,N_,ha_,spc_,i_,ru_,no_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_woman2_01_p02_c108_r0401:
+// ●「いいえ」→msg_woman2_01_p03_c108_r0401:
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p02_c108_r0401
+msg_woman2_01_p02_c108_r0401:
+	.byte	he_,e_,bou_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,ke_,ttu_,ko_,u_,spc_,tu_,yo_,i_,no_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p03_c108_r0401
+msg_woman2_01_p03_c108_r0401:
+	.byte	a_,ra_,ra_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,ti_,yyo_,ttu_,to_,spc_,sa_,mi_,si_,i_,wa_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,AA_,N_,ga_,spc_,de_,ki_,ru_,yo_,u_,spc_,ga_,n_,ba_,ri_,na_,sa_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●少女２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_c108_r0401
+msg_girl2_01_p01_c108_r0401:
+	.byte	ne_,ttu_,si_,n_,na_,spc_,HU_,AA_,N_,da_,to_
+	.byte	CR_
+	.byte	KA_,N_,TO_,bou_,ya_,spc_,ZI_,YYO_,U_,TO_,ka_,ra_,mo_,spc_,ya_,ttu_,te_,ku_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,ga_,spc_,MI_,NA_,MO_,no_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,spc_,HU_,AA_,N_,KU_,RA_,BU_,ni_,spc_,i_,ttu_,ta_,to_,ki_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	to_,ttu_,te_,mo_,spc_,su_,go_,ka_,ttu_,ta_,mo_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

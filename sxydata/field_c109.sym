@@ -1,0 +1,9 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 0
+
+//Exit ID = 4
+#define FIELD_C109_DOOR01	0
+#define FIELD_C109_DOOR02	1
+#define FIELD_C109_DOOR03	2
+#define FIELD_C109_DOOR04	3

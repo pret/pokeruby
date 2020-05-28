@@ -1,0 +1,130 @@
+// ●ヒワマキシティ　民家２（街の北・左から２番目）
+
+
+// ●老婆１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_c105_r0301
+msg_oldwoman1_01_p01_c105_r0301:
+	.byte	hi_,to_,mo_,spc_,PO_,KE_,MO_,N_,mo_
+	.byte	CR_
+	.byte	si_,ze_,n_,no_,spc_,na_,ka_,de_,spc_,ku_,ra_,su_,ko_,to_,de_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,to_,mo_,to_,no_,spc_,PA_,WA_,bou_,ga_,spc_,me_,za_,me_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて　→　msg_oldwoman1_01_p02_c105_r0301:
+// ●技マシン入手前に再度話しかけたときはここから
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_c105_r0301
+msg_oldwoman1_01_p02_c105_r0301:
+	.byte	o_,nu_,si_,no_,spc_,PA_,WA_,bou_,ga_,spc_,me_,za_,me_,te_,i_,ru_,ka_
+	.byte	CR_
+	.byte	ta_,si_,ka_,me_,ru_,to_,spc_,su_,ru_,ka_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,tenten_,tenten_,spc_,wa_,si_,no_,spc_,mi_,gi_,te_,to_,spc_,hi_,da_,ri_,te_
+	.byte	CR_
+	.byte	do_,ti_,ra_,ni_,spc_,KO_,I_,N_,ga_,spc_,ha_,i_,ttu_,te_,o_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,ttu_,ka_,n_,de_,spc_,e_,ra_,n_,de_,spc_,mi_,na_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「みぎ／ひだり」の選択ウインドウ表示
+// ●「みぎ」　→ＯＫ　msg_oldwoman1_01_p03_c105_r0301:
+// ●「ひだり」→ＮＧ　msg_oldwoman1_01_p06_c105_r0301:
+
+// ●正解その１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p03_c105_r0301
+msg_oldwoman1_01_p03_c105_r0301:
+	.byte	o_,o_,gyoe_,spc_,se_,i_,ka_,i_,spc_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,gi_,ha_,spc_,mi_,gi_,te_,to_,spc_,hi_,da_,ri_,te_
+	.byte	CR_
+	.byte	do_,ti_,ra_,ni_,spc_,KO_,I_,N_,ga_,spc_,ha_,i_,ttu_,te_,o_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,ttu_,ka_,n_,de_,spc_,e_,ra_,n_,de_,spc_,mi_,na_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「みぎ／ひだり」の選択ウインドウ表示
+// ●「みぎ」　→ＯＫ　msg_oldwoman1_01_p04_c105_r0301:
+// ●「ひだり」→ＮＧ　msg_oldwoman1_01_p06_c105_r0301:
+
+// ●正解その２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p04_c105_r0301
+msg_oldwoman1_01_p04_c105_r0301:
+	.byte	o_,o_,gyoe_,spc_,se_,i_,ka_,i_,spc_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,gi_,ha_,spc_,mi_,gi_,te_,to_,spc_,hi_,da_,ri_,te_
+	.byte	CR_
+	.byte	do_,ti_,ra_,ni_,spc_,KO_,I_,N_,ga_,spc_,ha_,i_,ttu_,te_,o_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,ttu_,ka_,n_,de_,spc_,e_,ra_,n_,de_,spc_,mi_,na_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「みぎ／ひだり」の選択ウインドウ表示
+// ●「みぎ」　→ＮＧ　msg_oldwoman1_01_p06_c105_r0301:
+// ●「ひだり」→ＯＫ　msg_oldwoman1_01_p05_c105_r0301:
+
+// ●正解その３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p05_c105_r0301
+msg_oldwoman1_01_p05_c105_r0301:
+	.byte	o_,o_,gyoe_,spc_,mi_,go_,to_,spc_,zi_,yya_,gyoe_
+	.byte	CR_
+	.byte	o_,nu_,si_,no_,spc_,PA_,WA_,bou_,ha_,spc_,me_,za_,me_,te_,i_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,wo_,spc_,a_,ge_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	o_,nu_,si_,no_,spc_,PO_,KE_,MO_,N_,mo_,spc_,PA_,WA_,bou_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	me_,za_,me_,sa_,se_,te_,spc_,ya_,ru_,to_,spc_,e_,e_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン１０「めざめるパワー」（アイテムNo298）入手処理
+
+// ●技マシン入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p07_c105_r0301
+msg_oldwoman1_01_p07_c105_r0301:
+	.byte	me_,za_,me_,ru_,PA_,WA_,bou_,ha_,spc_,PO_,KE_,MO_,N_,ni_,yo_,ttu_,te_
+	.byte	CR_
+	.byte	i_,ri_,yyo_,ku_,ga_,spc_,ka_,wa_,ru_,spc_,wa_,za_,spc_,na_,n_,zi_,yya_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●はずれ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p06_c105_r0301
+msg_oldwoman1_01_p06_c105_r0301:
+	.byte	za_,n_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	ha_,zu_,re_,spc_,zi_,yya_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●以下の処理、削除してください
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_c105_r0301
+msg_boy2_01_p01_c105_r0301:
+	.byte	HI_,WA_,MA_,KI_,no_,spc_,ma_,wa_,ri_,ha_
+	.byte	CR_
+	.byte	ma_,ru_,de_,spc_,ZI_,YYA_,N_,GU_,RU_,spc_,da_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ru_,i_,te_,i_,ru_,to_,spc_,ku_,ta_,ku_,ta_,ni_,spc_,na_,ttu_,ti_,yya_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,to_,ki_,spc_,PO_,KE_,MO_,N_,no_,spc_,so_,ra_,wo_,to_,bu_,de_
+	.byte	CR_
+	.byte	i_,ttu_,ta_,spc_,ma_,ti_,spc_,ma_,de_,spc_,hi_,to_,ttu_,to_,bi_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

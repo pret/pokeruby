@@ -1,0 +1,10 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define SHOPMAN_01_C108_FS01	1
+#define BIGMAN1_01_C108_FS01	2
+#define GENTLEM1_01_C108_FS01	3
+
+//Exit ID = 2
+#define C108_FS01_MAT01	0
+#define C108_FS01_MAT02	1

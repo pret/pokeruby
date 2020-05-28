@@ -1,0 +1,91 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C109_R0105	3
+#define EXITNUM_C109_R0105	2
+#define POSNUM_C109_R0105	0
+#define BGNUM_C109_R0105	0
+
+const evObjData	OBJ_c109_r0105[] =
+{
+	{
+		SHITEN5_01_C109_R0105,		//OBJ ID
+		DAIGO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SUPPORT_01_C109_R0105,		//OBJ ID
+		WKOBJCODE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_SUPPORT_01_C109_R0105,		//Event Flag
+	},
+
+	{
+		ODAMAKI_01_C109_R0105,		//OBJ ID
+		ODAMAKI,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_ODAMAKI_01_C109_R0105,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c109_r0105[] =
+{
+	{
+		0x0006,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		C109_R0204_DOOR01,		//Door ID
+		C109_R0204,			//Map ID
+		C109,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		C109_R0301_MAT01,		//Door ID
+		C109_R0301,			//Map ID
+		C109,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c109_r0105_sxy_data =
+{
+OBJNUM_C109_R0105,			// field obj max
+EXITNUM_C109_R0105,		// exit max
+POSNUM_C109_R0105,			// pos event max
+BGNUM_C109_R0105,			// bg event max
+OBJ_c109_r0105,			// field obj data
+EXIT_c109_r0105,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

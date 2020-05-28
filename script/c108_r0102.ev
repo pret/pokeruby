@@ -1,0 +1,95 @@
+//====================================================================
+//							c108_r0102
+//						ルネ・ルーム0102
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c108_r0102_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mini_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MINI_11
+	_TRAINER_DATA2	msg_mini_11_01
+	_TRAINER_DATA3	msg_mini_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mini_11_03
+	_END
+
+SCRIPT_LABEL	ev_mini_12
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MINI_12
+	_TRAINER_DATA2	msg_mini_12_01
+	_TRAINER_DATA3	msg_mini_12_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mini_12_03
+	_END
+
+SCRIPT_LABEL	ev_princess_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCESS_05
+	_TRAINER_DATA2	msg_princess_05_01
+	_TRAINER_DATA3	msg_princess_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_princess_05_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_05
+	_TRAINER_DATA2	msg_sexyw_05_01
+	_TRAINER_DATA3	msg_sexyw_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_05_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_06
+	_TRAINER_DATA2	msg_sexyw_06_01
+	_TRAINER_DATA3	msg_sexyw_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_06_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_07
+	_TRAINER_DATA2	msg_sexyw_07_01
+	_TRAINER_DATA3	msg_sexyw_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_07_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_08
+	_TRAINER_DATA2	msg_sexyw_08_01
+	_TRAINER_DATA3	msg_sexyw_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_08_03
+	_END
+
+SCRIPT_LABEL	ev_daisukiw_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIW_03
+	_TRAINER_DATA2	msg_daisukiw_03_01
+	_TRAINER_DATA3	msg_daisukiw_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_daisukiw_03_03
+	_END
+

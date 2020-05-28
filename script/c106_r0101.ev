@@ -1,0 +1,148 @@
+//====================================================================
+//							c106_r0101
+//							ミナモの民宿１Ｆ
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r0101_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						ＴＶを見ている男							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_c106_r0101
+	_TALK_START
+
+	//ゲームクリア後
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_middlem1_01_p06_c106_r0101
+
+	//トクサネジム攻略以降
+	_IF_FLAGON_JUMP	SYS_BATCH07_GET,ev_middlem1_01_p02_c106_r0101
+
+	_TALK_KEYWAIT	msg_middlem1_01_p01_c106_r0101
+
+	//振り向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_middlem1_01_p02_c106_r0101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_END
+	_END
+
+//トクサネジム攻略以降
+ev_middlem1_01_p02_c106_r0101:
+	_TALK_KEYWAIT	msg_middlem1_01_p04_c106_r0101
+
+	//振り向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_middlem1_01_p05_c106_r0101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_END
+	_END
+
+	//ゲームクリア後
+ev_middlem1_01_p06_c106_r0101:
+	_TALK_KEYWAIT	msg_middlem1_01_p06_c106_r0101
+
+	//振り向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_middlem1_01_p07_c106_r0101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*			主人公がおじさんとＴＶとの間に入った場合				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_c106_r0101_pos01
+	_TALK_START				//自機の動作終了を待つ
+
+	//「！」びっくりする
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	//主人公おじさんの方を振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//ＴＶが見れないとのメッセージ
+	_TALK_KEYWAIT	msg_middlem1_01_p03_c106_r0101
+	_TALK_CLOSE
+
+	//一歩後退（主人公）
+	_SET_OBJ_ANIME	EV_OBJ_SPID,c106_r0101_pos01_anime01
+	//一歩進む（おじさん）
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,c106_r0101_pos01_anime02
+	_OBJ_ANIME_WAIT
+
+	//戻る（おじさん）
+	_SET_OBJ_ANIME	MIDDLEM1_01_C106_R0101,c106_r0101_pos01_anime03
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+//--------------------------------------------------------------------
+//主人公が一歩押される
+//--------------------------------------------------------------------
+c106_r0101_pos01_anime01:
+	.byte	AC_SITE_R			//右を向く
+	.byte	AC_SITE_PAUSE_ON	//向き固定
+	.byte	AC_WALK_L_1			//左へ一歩（後ろ歩き）
+	.byte	AC_SITE_PAUSE_OFF	//向き解除
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさんが一歩踏み出す
+//--------------------------------------------------------------------
+c106_r0101_pos01_anime02:
+	.byte	AC_WALK_U_1			//上へ一歩
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//おじさんが定位置へ戻る
+//--------------------------------------------------------------------
+c106_r0101_pos01_anime03:
+	.byte	AC_SITE_D			//下を向く
+	.byte	AC_WALK_D_1			//下へ一歩
+	.byte	AC_SITE_U			//上を向く
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/********************************************************************/

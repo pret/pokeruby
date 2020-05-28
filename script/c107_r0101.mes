@@ -1,0 +1,420 @@
+// ÅúÉgÉNÉTÉlÇÃÉWÉÄÉäÅ[É_Å[
+
+
+// ÅúÅuÉWÉÄì¸å˚ÇÃÇ–Ç∆ÅvÉäÅ[É_Å[Ç…èüÇ¬ëO
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_danpei_07_01
+msg_danpei_07_01:
+	.byte	ge_,n_,ki_,spc_,si_,to_,oo_,ya_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,wo_,spc_,me_,za_,su_,spc_,I_MSG_,MY_NAME_BUF,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ZI_,MU_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,ha_
+	.byte	CR_
+	.byte	E_,SU_,PA_,bou_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_,tu_,ka_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ku_,to_,u_,TA_,I_,PU_,ya_,spc_,do_,ku_,TA_,I_,PU_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,de_,spc_,i_,do_,mu_,to_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,no_,su_,go_,i_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,ku_,ra_,u_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,mo_,spc_,ba_,tu_,gu_,n_,no_
+	.byte	CR_
+	.byte	KO_,N_,BI_,NE_,bou_,SI_,YYO_,N_,de_,spc_,se_,me_,te_,ku_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ki_,mi_,mo_,spc_,ka_,tu_,ta_,me_,ni_,spc_,PO_,KE_,MO_,N_,to_,no_
+	.byte	CR_
+	.byte	ki_,zu_,na_,wo_,spc_,ki_,ba_,ttu_,te_,spc_,mi_,se_,te_,spc_,ya_,re_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÅuÉWÉÄì¸å˚ÇÃÇ–Ç∆ÅvÉäÅ[É_Å[Ç…èüÇ¡ÇΩÇ†Ç∆
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_danpei_07_02
+msg_danpei_07_02:
+	.byte	ko_,ri_,yya_,a_,spc_,ta_,ma_,ge_,ta_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,ha_,spc_,su_,go_,ka_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// å
+
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇQÅFêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_02_01
+msg_espm_02_01:
+	.byte	si_,yyo_,u_,bu_,ha_,spc_,ko_,ko_,ro_,no_,spc_,tu_,yo_,sa_,de_,spc_,ki_,ma_,ru_
+	.byte	CR_
+	.byte	ko_,ko_,ro_,spc_,yo_,wa_,ki_,spc_,mo_,no_,ha_,spc_,ka_,te_,na_,i_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇQÅFîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_02_02
+msg_espm_02_02:
+	.byte	ma_,ke_,ta_,ka_,gyoe_
+	.byte	CR_
+	.byte	O_,RE_,mo_,spc_,ki_,ta_,e_,spc_,na_,o_,sa_,ne_,ba_,ttu_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇQÅFêÌì¨å„ÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_02_03
+msg_espm_02_03:
+	.byte	ma_,yo_,ttu_,ta_,spc_,ho_,u_,ga_,spc_,ma_,ke_,ru_
+	.byte	CR_
+	.byte	O_,RE_,ka_,ra_,no_,spc_,ti_,yyu_,u_,ko_,ku_,da_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇRÅFêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_03_01
+msg_espm_03_01:
+	.byte	KI_,MI_,no_,spc_,sa_,i_,no_,u_,wo_,spc_,mi_,se_,te_,spc_,mo_,ra_,o_,u_,ka_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇRÅFîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_03_02
+msg_espm_03_02:
+	.byte	su_,ba_,ra_,si_,i_,spc_,sa_,i_,no_,u_,no_,spc_,mo_,ti_,nu_,si_,da_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇRÅFêÌì¨å„ÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_03_03
+msg_espm_03_03:
+	.byte	yo_,no_,na_,ka_,ni_,spc_,te_,n_,sa_,i_,ga_,spc_,i_,ru_,na_,ra_,ba_
+	.byte	CR_
+	.byte	ko_,ko_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,ga_,spc_,so_,u_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,mo_,si_,ka_,su_,ru_,to_,spc_,KI_,MI_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	sa_,i_,no_,u_,ha_,spc_,u_,e_,ka_,mo_,spc_,si_,re_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇSÅFêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_04_01
+msg_espm_04_01:
+	.byte	hu_,hu_,hu_,tenten_,tenten_
+	.byte	CR_
+	.byte	ne_,n_,ri_,ki_,de_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ku_,u_,ti_,yyu_,u_,ni_,spc_,u_,ka_,se_,te_,spc_,mi_,se_,yo_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	u_,o_,o_,oo_,oo_,oo_,oo_,oo_,tenten_,tenten_,gyoe_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,u_,si_,no_,spc_,wa_,ru_,i_,spc_,to_,ki_,mo_,spc_,a_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇSÅFîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_04_02
+msg_espm_04_02:
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,mo_
+	.byte	CR_
+	.byte	ti_,yyo_,u_,si_,spc_,wa_,ri_,bou_,ttu_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅâÇOÇSÅFêÌì¨å„ÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espm_04_03
+msg_espm_04_03:
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,ha_,spc_,o_,o_,ki_,su_,gi_,ta_
+	.byte	CR_
+	.byte	ko_,no_,spc_,wa_,ta_,bo_,ko_,ri_,spc_,na_,ra_,spc_,ze_,ttu_,ta_,i_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,u_,u_,u_,u_,u_,u_,ttu_,tenten_,tenten_,gyoe_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,ga_,u_,zo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,na_,i_,ki_,de_,spc_,to_,ba_,si_,te_,spc_,na_,n_,ka_,spc_,i_,na_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇQÅFêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_02_01
+msg_espw_02_01:
+	.byte	a_,na_,ta_,ga_,spc_,A_,TA_,SI_,ni_,spc_,ma_,ke_,ta_,spc_,to_,si_,te_,mo_
+	.byte	CR_
+	.byte	o_,ti_,ko_,ma_,na_,i_,spc_,ko_,to_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ga_,spc_,yo_,wa_,i_,spc_,wa_,ke_,zi_,yya_,spc_,na_,ku_,te_
+	.byte	CR_
+	.byte	A_,TA_,SI_,ga_,spc_,tu_,yo_,su_,gi_,ru_,spc_,ka_,ra_,yo_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇQÅFîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_02_02
+msg_espw_02_02:
+	.byte	a_,na_,ta_,ha_,spc_,sa_,ra_,ni_,spc_,tu_,yo_,su_,gi_,ta_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇQÅFêÌì¨å„ÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_02_03
+msg_espw_02_03:
+	.byte	ma_,ke_,ta_,ka_,ra_,spc_,ttu_,te_,spc_,KU_,YO_,KU_,YO_,spc_,si_,na_,i_,wa_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,si_,yyu_,gi_,yyo_,u_,spc_,su_,re_,ba_,spc_,i_,i_,n_,da_,mo_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,e_,mu_,ki_,na_,spc_,to_,ko_,ro_,ga_,spc_,A_,TA_,SI_,no_,spc_,to_,ri_,e_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇRÅFêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_03_01
+msg_espw_03_01:
+	.byte	mi_,e_,ru_,tenten_,tenten_
+	.byte	CR_
+	.byte	a_,na_,ta_,no_,spc_,mi_,ra_,i_,ga_,spc_,mi_,e_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,ku_,si_,ni_,spc_,ka_,te_,ta_,ra_
+	.byte	CR_
+	.byte	a_,na_,ta_,no_,spc_,mi_,ra_,i_,wo_,spc_,o_,si_,e_,te_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇRÅFîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_03_02
+msg_espw_03_02:
+	.byte	ma_,i_,ri_,ma_,si_,ta_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇRÅFêÌì¨å„ÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_03_03
+msg_espw_03_03:
+	.byte	a_,na_,ta_,to_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,sa_,ma_,no_,spc_,si_,yyo_,u_,bu_,tenten_,tenten_
+	.byte	CR_
+	.byte	mo_,no_,su_,go_,ku_,spc_,ha_,ge_,si_,i_,spc_,te_,n_,ka_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ke_,ttu_,ka_,ha_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,ta_,ku_,si_,no_,spc_,ku_,ti_,ka_,ra_,ha_,spc_,i_,e_,na_,i_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇSÅFêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_04_01
+msg_espw_04_01:
+	.byte	a_,na_,ta_,ga_,spc_,ko_,re_,ma_,de_,spc_,a_,yu_,n_,de_,ki_,ta_,spc_,mi_,ti_,no_,ri_
+	.byte	CR_
+	.byte	a_,na_,ta_,ga_,spc_,ke_,i_,ke_,n_,spc_,si_,te_,ki_,ta_,spc_,ko_,to_,ga_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	su_,be_,te_,wo_,spc_,bu_,tu_,ke_,te_,spc_,ki_,na_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇSÅFîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_04_02
+msg_espw_04_02:
+	.byte	su_,ba_,ra_,si_,i_,spc_,mi_,ti_,no_,ri_,spc_,da_,wa_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉTÉCÉLÉbÉJÅ[ÅäÇOÇSÅFêÌì¨å„ÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_espw_04_03
+msg_espw_04_03:
+	.byte	ga_,n_,ba_,ttu_,ta_,spc_,mo_,no_,ni_,ha_,spc_,a_,ka_,ru_,i_,spc_,mi_,ra_,i_,ga_
+	.byte	CR_
+	.byte	na_,ma_,ke_,ta_,spc_,mo_,no_,ni_,ha_,spc_,ze_,tu_,bo_,u_,no_,spc_,a_,si_,ta_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	i_,n_,ga_,o_,u_,ho_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	su_,be_,te_,ha_,spc_,zi_,bu_,n_,ni_,spc_,ha_,ne_,ka_,e_,ru_,spc_,mo_,no_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÅuÉWÉÄÉäÅ[É_Å[Å@ÉtÉEÅEÉâÉìÅvêÌì¨ëOÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_01
+msg_gymleader_07_01:
+	.byte	HU_,U_,kako2_,he_,he_,he_,tenten_,tenten_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	RA_,N_,kako2_,hu_,hu_,hu_,tenten_,tenten_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,hu_,ta_,ri_,mo_,spc_,i_,ru_,n_,de_,spc_,o_,do_,ro_,i_,ta_,hate_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,hu_,ta_,ri_,mo_,spc_,i_,ru_,n_,de_,spc_,o_,do_,ro_,i_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,bo_,ku_,ta_,ti_,spc_,hu_,ta_,go_,gyoe_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,a_,ta_,si_,ta_,ti_,spc_,hu_,ta_,go_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,na_,ni_,mo_,spc_,ko_,to_,ba_,ni_,spc_,si_,na_,ku_,te_,mo_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,o_,ta_,ga_,i_,no_,spc_,ka_,n_,ga_,e_,te_,spc_,i_,ru_,ko_,to_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,a_,ta_,ma_,no_,spc_,na_,ka_,ni_,spc_,u_,ka_,bu_,ka_,ra_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,tu_,u_,zi_,a_,u_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,so_,n_,na_,spc_,bo_,ku_,ta_,ti_,no_,spc_,KO_,N_,BI_,NE_,bou_,SI_,YYO_,N_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,ki_,mi_,ni_,spc_,ya_,bu_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,hate_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÅuÉWÉÄÉäÅ[É_Å[Å@ÉtÉEÅEÉâÉìÅvîsñkÉÅÉbÉZÅ[ÉW
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_02
+msg_gymleader_07_02:
+	.byte	HU_,U_,kako2_,bo_,ttu_,spc_,bo_,ku_,ta_,ti_,no_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,KO_,N_,BI_,NE_,bou_,SI_,YYO_,N_,ga_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,ya_,bu_,re_,ta_,spc_,ka_,ra_,ni_,ha_,spc_,si_,ka_,ta_,na_,i_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,ma_,ke_,wo_,spc_,mi_,to_,me_,te_,spc_,ko_,re_,wo_,spc_,a_,ge_,ru_,YO_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÇ±Ç±Ç≈êÌì¨âÊñ Ç©ÇÁî≤ÇØÇƒ
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_03
+msg_gymleader_07_03:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,HU_,U_,to_,spc_,RA_,N_,ka_,ra_
+	.byte	CR_
+	.byte	MA_,I_,N_,DO_,BA_,TTU_,ZI_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉtÉ@ÉìÉtÉ@Å[Éå
+// Åúë±Ç¢ÇƒÅcÅc
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_04
+msg_gymleader_07_04:
+	.byte	HU_,U_,kako2_,MA_,I_,N_,DO_,BA_,TTU_,ZI_,ni_,ha_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	to_,ku_,ko_,u_,to_,spc_,to_,ku_,bo_,u_,wo_,spc_,ta_,ka_,me_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,u_,ka_,ga_,spc_,hi_,me_,ra_,re_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RA_,N_,kako2_,so_,re_,ka_,ra_,spc_,DA_,I_,BI_,N_,GU_,spc_,to_,i_,u_
+	.byte	CR_
+	.byte	hi_,de_,n_,wa_,za_,mo_,spc_,tu_,ka_,e_,ru_,yo_,u_,ni_,spc_,na_,ru_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,a_,to_,spc_,ko_,re_,mo_,spc_,mo_,ttu_,te_,i_,ki_,na_,yo_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÉAÉCÉeÉÄì¸éËÉiÉåÅ[ÉVÉáÉì
+// ÅúãZÉ}ÉVÉìÇOÇSÅuÇﬂÇ¢ÇªÇ§ÅvÅiNo292Åj
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_05
+msg_gymleader_07_05:
+	.byte	HU_,U_,kako2_,so_,no_,spc_,wa_,za_,MA_,SI_,N_,n0_,n4_,ni_,ha_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,me_,i_,so_,u_,ga_,spc_,ha_,i_,ttu_,te_,ru_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,PO_,KE_,MO_,N_,no_,spc_,to_,ku_,ko_,u_,to_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,PO_,KE_,MO_,N_,no_,spc_,to_,ku_,bo_,u_,wo_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,ta_,ka_,me_,te_,ku_,re_,ru_,spc_,wa_,za_,spc_,na_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,E_,SU_,PA_,bou_,PO_,KE_,MO_,N_,ni_,spc_,pi_,ttu_,ta_,ri_,da_,YO_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+// ÅúÅuÉWÉÄÉäÅ[É_Å[Å@ÉtÉEÅEÉâÉìÅvçƒìxÅAâÔòb
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_06
+msg_gymleader_07_06:
+	.byte	HU_,U_,kako2_,ki_,yyo_,u_,da_,i_,no_,spc_,ki_,zu_,na_,spc_,yo_,ri_
+	.byte	CR_
+	.byte	ki_,mi_,to_,spc_,PO_,KE_,MO_,N_,to_,no_,spc_,ki_,zu_,na_,no_,spc_,ho_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,ru_,ka_,ni_,spc_,tu_,yo_,ka_,ttu_,ta_,spc_,mi_,ta_,i_,da_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	RA_,N_,kako2_,a_,na_,ta_,na_,ra_,spc_,mo_,ttu_,to_,spc_,tu_,yo_,ku_,na_,re_,ru_,gyoe_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,ttu_,ta_,spc_,a_,ta_,si_,ta_,ti_,ni_,ha_,spc_,wa_,ka_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúÅuÉWÉÄÉäÅ[É_Å[Å@ÉtÉEÅEÉâÉìÅv
+// ÅúÉ|ÉPÉÇÉìÇ™ÇPïCÇ≈êÌì¨Ç≈Ç´Ç»Ç¢
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gymleader_07_08
+msg_gymleader_07_08:
+	.byte	HU_,U_,kako2_,he_,he_,he_,tenten_,tenten_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	RA_,N_,kako2_,hu_,ta_,ri_,mo_,spc_,i_,ru_,n_,de_,spc_,o_,do_,ro_,i_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,a_,ra_,hate_,spc_,ta_,ta_,ka_,e_,ru_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,i_,ttu_,pi_,ki_,spc_,si_,ka_,spc_,i_,na_,i_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,kako2_,so_,re_,de_,ha_,spc_,ta_,ta_,ka_,e_,na_,i_,ne_,gyoe_
+	.byte	CR_
+	.byte	RA_,N_,kako2_,si_,yyo_,u_,bu_,wo_,spc_,ta_,no_,si_,mi_,ta_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,PO_,KE_,MO_,N_,spc_,tu_,re_,te_,ki_,te_,YO_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// ÅúÉ|ÉPÉÇÉìëúÅ@ÉoÉbÉWéÊìæëO
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_icon_01_p01_c107_r0101
+msg_icon_01_p01_c107_r0101:
+	.byte	TO_,KU_,SA_,NE_,SI_,TE_,II_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúÉ|ÉPÉÇÉìëúÅ@ÉoÉbÉWéÊìæå„
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_icon_01_p02_c107_r0101
+msg_icon_01_p02_c107_r0101:
+	.byte	TO_,KU_,SA_,NE_,SI_,TE_,II_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,U_,spc_,RA_,N_,spc_,ni_,n_,te_,i_,spc_,TO_,RE_,bou_,NA_,bou_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°

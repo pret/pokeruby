@@ -1,0 +1,37 @@
+// ●サイユウシティ　ポケモンセンター１Ｆ
+
+
+// ●トレーナー女１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c109_pc01
+msg_trainerw1_01_p01_c109_pc01:
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,ha_
+	.byte	CR_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,RO_,bou_,DO_,wo_,spc_,nu_,ke_,ru_,to_,spc_,su_,gu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ma_,de_,spc_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	ma_,e_,ni_,spc_,su_,su_,mu_,si_,ka_,na_,i_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●老人１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c109_pc01
+msg_oldman1_01_p01_c109_pc01:
+	.byte	TI_,YYA_,N_,PI_,O_,N_,RO_,bou_,DO_,no_
+	.byte	CR_
+	.byte	na_,ga_,ku_,te_,spc_,ke_,wa_,si_,i_,spc_,mi_,ti_,no_,ri_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ru_,de_,spc_,i_,ma_,ma_,de_,spc_,a_,ru_,i_,te_,ki_,ta_,spc_,mi_,ti_,wo_
+	.byte	CR_
+	.byte	o_,mo_,i_,da_,sa_,se_,ru_,ka_,no_,spc_,yo_,u_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,spc_,zi_,bu_,n_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_
+	.byte	CR_
+	.byte	si_,n_,zi_,te_,spc_,ga_,n_,ba_,ri_,ta_,ma_,e_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

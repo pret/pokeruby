@@ -1,0 +1,128 @@
+// ●南の孤島イベント
+
+
+// ●センリ
+// ●「むげんのチケット」入手時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_senri_01_p01_kokoro01
+msg_senri_01_p01_kokoro01:
+	.byte	PA_,PA_,kako2_,I_MSG_,MY_NAME_BUF,gyoe_,spc_,yo_,ku_,spc_,ki_,ta_,na_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,a_,te_,no_,spc_,te_,ga_,mi_,ga_,spc_,to_,do_,ke_,ra_,re_,ta_,zo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム「むげんのチケット」入手
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_senri_01_p02_kokoro01
+msg_senri_01_p02_kokoro01:
+	.byte	PA_,PA_,kako2_,wa_,ta_,si_,mo_,spc_,mi_,ta_,ko_,to_,no_,na_,i_
+	.byte	CR_
+	.byte	hu_,ne_,no_,spc_,TI_,KE_,TTU_,TO_,spc_,da_,na_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	MI_,NA_,MO_,ni_,spc_,i_,ttu_,te_,mi_,ru_,to_,spc_,i_,i_,da_,ro_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受付嬢
+// ●クリア前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_kokoro01
+msg_workerw2_01_p01_kokoro01:
+	.byte	KA_,I_,NA_,i_,ki_,spc_,re_,n_,ra_,ku_,se_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ra_,hate_
+	.byte	CR_
+	.byte	so_,no_,spc_,TI_,KE_,TTU_,TO_,ha_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●女性、あわてた様子で船の中に……
+// ●代わりに、船員が登場
+
+// ●船員
+// ●南の孤島に行くとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_kokoro01
+msg_seaman1_01_p01_kokoro01:
+	.byte	HE_,N_,TE_,KO_,na_,spc_,TI_,KE_,TTU_,TO_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,ki_,ta_,no_,ha_,spc_,o_,ma_,e_,sa_,n_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,ga_,spc_,i_,ko_,u_,to_,spc_,si_,te_,i_,ru_,no_,ha_
+	.byte	CR_
+	.byte	mi_,na_,mi_,no_,spc_,ha_,te_,no_,spc_,ti_,ttu_,po_,ke_,na_,spc_,si_,ma_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ko_,de_,ha_,spc_,na_,ni_,ga_,spc_,o_,ko_,ru_,no_,ka_
+	.byte	CR_
+	.byte	da_,re_,mo_,spc_,wa_,ka_,ra_,ne_,e_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	u_,u_,mu_,spc_,hu_,na_,no_,ri_,no_,spc_,ti_,ga_,spc_,sa_,wa_,gu_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,a_,spc_,no_,ri_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乗船処理、南の孤島に行く
+// ●このとき「むげんのチケット」をバッグから削除
+
+// ●南の孤島から帰るとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p02_kokoro01
+msg_seaman1_01_p02_kokoro01:
+	.byte	na_,ni_,mo_,ne_,e_,spc_,ti_,n_,ke_,na_,spc_,si_,ma_,spc_,da_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	MI_,NA_,MO_,he_,spc_,ka_,e_,ru_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_seaman1_01_p03_kokoro01:
+// ●「いいえ」→msg_seaman1_01_p04_kokoro01:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p03_kokoro01
+msg_seaman1_01_p03_kokoro01:
+	.byte	yo_,si_,gyoe_,spc_,ka_,e_,ru_,to_,spc_,su_,ru_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乗船処理、ミナモに帰る
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p04_kokoro01
+msg_seaman1_01_p04_kokoro01:
+	.byte	so_,u_,ka_,i_
+	.byte	CR_
+	.byte	ma_,a_,spc_,su_,ki_,ni_,su_,ru_,ga_,spc_,i_,i_,sa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●モニュメント
+// ●ラティオス・ラティアスイベント終了後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_monument_01_p01_kokoro01
+msg_monument_01_p01_kokoro01:
+	.byte	su_,be_,te_,no_,spc_,yu_,me_,ha_,spc_,mo_,u_,hi_,to_,tu_,no_,spc_,ge_,n_,zi_,tu_
+	.byte	CR_
+	.byte	so_,re_,wo_,spc_,wa_,su_,re_,ru_,be_,ka_,ra_,zu_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_kokoro01
+msg_kanban_01_p01_kokoro01:
+	.byte	ki_,o_,ku_,spc_,ka_,su_,mi_,si_,spc_,mo_,no_,ha_
+	.byte	CR_
+	.byte	ko_,ko_,ro_,ni_,spc_,ki_,za_,mi_,tu_,ke_,ru_,spc_,ko_,to_,wo_,spc_,no_,zo_,mu_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

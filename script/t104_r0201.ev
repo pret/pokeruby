@@ -1,0 +1,253 @@
+//====================================================================
+//							t104_r0201
+//							フエン・ジム
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t104_r0201_event_data
+FLAG_CHANGE_LABEL	ev_flag_set_t104_r0201
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+ev_flag_set_t104_r0201:
+	_CALL	ev_flag_sub_t104_r0201
+	_CALL	ev_flag_sub2_t104_r0201
+	_END
+
+ev_flag_sub_t104_r0201:
+	_LDVAL		LOCALWORK11,0
+	_LDVAL		LOCALWORK12,0
+	_LDVAL		LOCALWORK13,0
+	_LDVAL		LOCALWORK14,0
+	_LDVAL		LOCALWORK15,0
+
+_check_campf_01:
+	_IF_TR_FLAGON_JUMP	CAMPF_01,_check_campf_02
+	_LDVAL		LOCALWORK11,1
+_check_campf_02:
+	_IF_TR_FLAGON_JUMP	ELITEM_19,_check_campf_03
+	_LDVAL		LOCALWORK12,1
+_check_campf_03:
+	_IF_TR_FLAGON_JUMP	CAMPF_03,_check_campf_04
+	_LDVAL		LOCALWORK13,1
+_check_campf_04:
+	_IF_TR_FLAGON_JUMP	BATTLEG_10,_check_campf_05
+	_LDVAL		LOCALWORK14,1
+_check_campf_05:
+	_IF_TR_FLAGON_JUMP	CAMPF_05,_check_campf_end
+	_LDVAL		LOCALWORK15,1
+_check_campf_end:
+	_RET
+
+//戦っていないトレーナーを隠す
+ev_flag_sub2_t104_r0201:
+
+_check2_campf_01:
+	_IF_TR_FLAGON_JUMP	CAMPF_01,_check2_elitem_19
+	_SXY_SITE_CHANGE	TR_CAMPF_01,MV_HIDES
+_check2_elitem_19:
+	_IF_TR_FLAGON_JUMP	ELITEM_19,_check2_campf_03
+	_SXY_SITE_CHANGE	TR_ELITEM_19,MV_HIDES
+_check2_campf_03:
+	_IF_TR_FLAGON_JUMP	CAMPF_03,_check2_battleg_10
+	_SXY_SITE_CHANGE	TR_CAMPF_03,MV_HIDES
+_check2_battleg_10:
+	_IF_TR_FLAGON_JUMP	BATTLEG_10,_check2_campf_05
+	_SXY_SITE_CHANGE	TR_BATTLEG_10,MV_HIDES
+_check2_campf_05:
+	_IF_TR_FLAGON_JUMP	CAMPF_05,_check2_campf_end
+	_SXY_SITE_CHANGE	TR_CAMPF_05,MV_HIDES
+_check2_campf_end:
+	_RET
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_04_01
+	_LEADER_DATA_START
+	_TRAINER_DATA1	LEADERW_04
+	_TRAINER_DATA2	msg_gymleader_04_01
+	_TRAINER_DATA3	msg_gymleader_04_02
+	_TRAINER_DATA4	ev_gymleader_04_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシンを貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_T104_R0201,gymleader_04_wazam_get	
+
+	_TALK_KEYWAIT	msg_gymleader_04_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_04_end:
+	_TALKMSG	msg_gymleader_04_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_04_04
+
+	_FLAG_SET		FT_GYM_04_LEADER
+	_FLAG_SET		SYS_BATCH04_GET			//バッチゲット
+	_ADDWK			WK_SCENE_C101_R0201,1
+
+	//バッチを４つゲットした
+	_IFVAL_CALL		WK_SCENE_C101_R0201,EQ,6,papa_pos_change
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,4
+	_CALL			gym_trainer_all_flagon
+
+	//療養所のミツルを消す
+	_FLAG_SET		FV_MITSURU_01_T106_R0201
+
+	//サポートを登場させる
+	_LDVAL			WK_SCENE_FIELD_T104,1
+
+	//技マシンを貰う処理へ
+	_JUMP			gymleader_04_wazam_get
+	_END
+
+//技マシンを貰う
+gymleader_04_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN50,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_gymleader_04_05
+	_FLAG_SET		FE_WAZAM_01_T104_R0201	//技マシンを貰った
+	
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_campf_01
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	CAMPF_01, TR_CAMPF_01
+	_TRAINER_DATA2	msg_campf_01_01
+	_TRAINER_DATA3	msg_campf_01_02
+	_TRAINER_DATA4	ev_campf_01_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campf_01_03
+	_END
+
+ev_campf_01_end:
+	_CALL	ev_flag_sub_t104_r0201
+	_TALK_OBJ_END
+	_END
+
+SCRIPT_LABEL	ev_campf_03
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	CAMPF_03, TR_CAMPF_03
+	_TRAINER_DATA2	msg_campf_03_01
+	_TRAINER_DATA3	msg_campf_03_02
+	_TRAINER_DATA4	ev_campf_01_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campf_03_03
+	_END
+
+SCRIPT_LABEL	ev_campf_05
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	CAMPF_05, TR_CAMPF_05
+	_TRAINER_DATA2	msg_campf_05_01
+	_TRAINER_DATA3	msg_campf_05_02
+	_TRAINER_DATA4	ev_campf_01_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campf_05_03
+	_END
+
+SCRIPT_LABEL	ev_battleg_10
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	BATTLEG_10, TR_BATTLEG_10
+	_TRAINER_DATA2	msg_battleg_10_01
+	_TRAINER_DATA3	msg_battleg_10_02
+	_TRAINER_DATA4	ev_campf_01_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_battleg_10_03
+	_END
+
+SCRIPT_LABEL	ev_elitem_19
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_19, TR_ELITEM_19
+	_TRAINER_DATA2	msg_elitem_19_01
+	_TRAINER_DATA3	msg_elitem_19_02
+	_TRAINER_DATA4	ev_campf_01_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_19_03
+	_END
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_04_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_04_LEADER,ev_danpei_04_02
+
+	_TALK_KEYWAIT	msg_danpei_04_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_04_02:
+	_TALK_KEYWAIT	msg_danpei_04_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_t104_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH04_GET,batch_get_t104_r0201
+
+	_JUMP			batch_no_get_t104_r0201
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_t104_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH04_GET,batch_get_t104_r0201
+
+	_JUMP			batch_no_get_t104_r0201
+	_END
+
+//すでにリーダーを倒している
+batch_get_t104_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p02_t104_r0201
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_t104_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p01_t104_r0201
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,34 @@
+// ●ヒワマキシティ　グッズショップ
+
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c105_r0701
+msg_middlem2_01_p01_c105_r0701:
+	.byte	ko_,ko_,de_,spc_,ka_,ttu_,ta_,spc_,mo_,no_,ha_
+	.byte	CR_
+	.byte	PA_,SO_,KO_,N_,ni_,spc_,to_,do_,ke_,ra_,re_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,su_,ba_,ra_,si_,i_,gyoe_,spc_,tu_,i_,de_,ni_,spc_,wa_,si_,mo_
+	.byte	CR_
+	.byte	i_,e_,ma_,de_,spc_,to_,do_,ke_,te_,spc_,ku_,re_,na_,i_,mo_,no_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_c105_r0701
+msg_girl3_01_p01_c105_r0701:
+	.byte	su_,te_,ki_,na_,spc_,tu_,ku_,e_,wo_,spc_,ka_,ttu_,te_,spc_,so_,no_,u_,e_,ni_
+	.byte	CR_
+	.byte	ka_,wa_,i_,i_,spc_,nu_,i_,gu_,ru_,mi_,wo_,spc_,na_,ra_,be_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,si_,na_,i_,to_,spc_,hi_,mi_,tu_,ki_,ti_,ni_,spc_,o_,ku_,to_,ki_
+	.byte	CR_
+	.byte	tu_,ti_,de_,spc_,yo_,go_,re_,ta_,ri_,spc_,TO_,GE_,ga_,spc_,sa_,sa_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	nu_,i_,gu_,ru_,mi_,ga_,spc_,ka_,wa_,i_,so_,u_,spc_,da_,mo_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

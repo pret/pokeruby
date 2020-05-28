@@ -1,0 +1,414 @@
+// ●カイナシティ　船乗り場
+
+
+// ●受付嬢
+// 　おくりびやまイベントからトクサネのバッジ入手までのあいだは存在しない
+// ●ゲームクリア前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_c102_r0601
+msg_workerw2_01_p01_c102_r0601:
+	.byte	e_,ttu_,hate_,spc_,hu_,ne_,spc_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,si_,wa_,ke_,spc_,go_,za_,i_,ma_,se_,n_,spc_,ge_,n_,za_,i_
+	.byte	CR_
+	.byte	re_,n_,ra_,ku_,se_,n_,ha_,spc_,na_,i_,n_,de_,su_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ゲームクリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_c102_r0601
+msg_workerw2_01_p02_c102_r0601:
+	.byte	re_,n_,ra_,ku_,se_,n_,wo_,spc_,go_,ri_,yo_,u_,spc_,de_,su_,ne_,gyoe_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,ha_,spc_,o_,mo_,ti_,spc_,de_,si_,yyo_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ふねのチケット」を
+// 　持っていない　→msg_workerw2_01_p09_c102_r0601:
+// 　持っている　　→msg_workerw2_01_p08_c102_r0601:
+
+// ●「ふねのチケット」を持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p09_c102_r0601
+msg_workerw2_01_p09_c102_r0601:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,wo_,spc_,mo_,ttu_,te_,i_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,mo_,u_,si_,wa_,ke_,spc_,a_,ri_,ma_,se_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ne_,ni_,spc_,no_,re_,ru_,no_,ha_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,no_,spc_,a_,ru_,spc_,ka_,ta_,spc_,da_,ke_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「ふねのチケット」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p08_c102_r0601
+msg_workerw2_01_p08_c102_r0601:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	hu_,ne_,no_,TI_,KE_,TTU_,TO_,wo_,spc_,mi_,se_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,gyoe_,spc_,ke_,ttu_,ko_,u_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ki_,sa_,ki_,ha_,spc_,do_,ti_,ra_,spc_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+// 　やめる　　　　→msg_workerw2_01_p03_c102_r0601:
+// 　ミナモ　　　　→msg_workerw2_01_p04_c102_r0601:
+// 　バトルタワー　→msg_workerw2_01_p05_c102_r0601:
+
+// ●「やめる」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_c102_r0601
+msg_workerw2_01_p03_c102_r0601:
+	.byte	ma_,ta_,spc_,go_,ri_,yo_,u_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ミナモ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p04_c102_r0601
+msg_workerw2_01_p04_c102_r0601:
+	.byte	MI_,NA_,MO_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw2_01_p06_c102_r0601:
+// ●「いいえ」→msg_workerw2_01_p07_c102_r0601:
+
+// ●「バトルタワー」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p05_c102_r0601
+msg_workerw2_01_p05_c102_r0601:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw2_01_p06_c102_r0601:
+// ●「いいえ」→msg_workerw2_01_p07_c102_r0601:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p06_c102_r0601
+msg_workerw2_01_p06_c102_r0601:
+	.byte	re_,n_,ra_,ku_,se_,n_,ni_,spc_,no_,ttu_,te_,spc_,o_,ma_,ti_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乗船処理
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p07_c102_r0601
+msg_workerw2_01_p07_c102_r0601:
+	.byte	i_,ki_,sa_,ki_,ha_,spc_,do_,ti_,ra_,spc_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウを再度表示
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●船乗り１
+// 　おくりびやまイベントからトクサネのバッジ入手までのあいだは存在しない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c102_r0601
+msg_seaman1_01_p01_c102_r0601:
+	.byte	u_,mi_,no_,spc_,so_,ko_,spc_,ka_,a_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ttu_,ta_,i_,spc_,do_,n_,na_,hu_,u_,spc_,na_,no_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,mo_,spc_,i_,tu_,ka_,spc_,mo_,gu_,ttu_,te_,mi_,ta_,i_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●大男１
+// 　おくりびやまイベントからトクサネのバッジ入手までのあいだは存在しない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_c102_r0601
+msg_bigman1_01_p01_c102_r0601:
+	.byte	bo_,ku_,mo_,spc_,KU_,SU_,NO_,KI_,spc_,ka_,n_,ti_,yyo_,u_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	ka_,i_,te_,i_,spc_,ti_,yyo_,u_,sa_,ni_,spc_,i_,ki_,ta_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,se_,n_,su_,i_,te_,i_,no_,spc_,na_,ka_,ha_,spc_,se_,ma_,i_,ka_,ra_
+	.byte	CR_
+	.byte	bo_,ku_,ga_,spc_,no_,ttu_,ta_,ra_,spc_,ka_,n_,ti_,yyo_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	no_,re_,na_,ku_,spc_,na_,ttu_,ti_,yya_,u_,n_,da_,yo_,ne_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●「潜水艇強奪イベント」
+// （msg_studym1_01_p05_field_c102:　からの続き）
+// ●クスノキ艦長（Ｘ１２・Ｙ１３）左向き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_c102_r0601
+msg_studym1_01_p01_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,a_,i_,tu_,ra_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ze_,n_,spc_,ha_,ku_,bu_,tu_,ka_,n_,de_
+	.byte	CR_
+	.byte	DE_,BO_,N_,no_,ni_,mo_,tu_,wo_,spc_,u_,ba_,o_,u_,to_,spc_,si_,te_,i_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●潜水艇出発まで、上記メッセージを繰り返し
+
+// ●アクア団リーダーと団員が向き合っている
+// ●主人公がＰＯＳ（Ｘ８・Ｙ１１～１４）を踏むと
+// 　アクア団リーダーは下を向き、以下のメッセージを自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss1_01_p01_c102_r0601
+msg_aquaboss1_01_p01_c102_r0601:
+	.byte	I_MSG_,STR_ENE_LEADER,kako2_,HU_,HU_,HU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,ta_,i_,he_,n_,spc_,da_,na_
+	.byte	CR_
+	.byte	wa_,za_,wa_,za_,spc_,o_,ku_,ri_,bi_,ya_,ma_,spc_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,ko_,ma_,de_,spc_,o_,i_,ka_,ke_,te_,spc_,ki_,ta_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,mo_,u_,spc_,da_,re_,ni_,mo_
+	.byte	CR_
+	.byte	wa_,re_,wa_,re_,wo_,spc_,to_,me_,ra_,re_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	to_,me_,ra_,re_,ru_,to_,spc_,o_,mo_,u_,na_,ra_
+	.byte	CR_
+	.byte	MI_,NA_,MO_,no_,spc_,A_,ZI_,TO_,ma_,de_,spc_,ku_,ru_,ka_,ne_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	HU_,HU_,HU_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団２名は潜水艇に飛び乗り、そのまま逃げ去る
+// ●クスノキ
+// 　主人公に隣接して、以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_c102_r0601
+msg_studym1_01_p02_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,na_,ze_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,re_,n_,ti_,yyu_,u_,ga_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,se_,n_,su_,i_,te_,i_
+	.byte	SCROLL_WAIT_
+	.byte	kako_,ka_,i_,e_,n_,spc_,n1_,go_,u_,kakot_,wo_,spc_,u_,ba_,u_,no_,da_,ro_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,sa_,ka_,spc_,ka_,re_,ra_,mo_
+	.byte	CR_
+	.byte	ka_,i_,te_,i_,ni_,spc_,ne_,mu_,ru_,spc_,PO_,KE_,MO_,N_,wo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,wa_,ta_,si_,ga_,spc_,o_,i_,ka_,ke_,te_,mo_
+	.byte	CR_
+	.byte	a_,n_,na_,spc_,re_,n_,ti_,yyu_,u_,ni_,spc_,ka_,te_,ru_,spc_,wa_,ke_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジトでの潜水艇出発フラグ成立まで、上記メッセージを繰り返し
+
+
+// ●ミナモのアジトでリーダーが出発（フラグ22成立）したあとのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p07_c102_r0601
+msg_studym1_01_p07_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,a_,a_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,tenten_,tenten_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ha_
+	.byte	CR_
+	.byte	si_,yyu_,ttu_,pa_,tu_,spc_,si_,te_,spc_,si_,ma_,ttu_,ta_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,ki_,ni_,si_,na_,ku_,te_,spc_,i_,i_,yo_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,se_,ki_,ni_,n_,spc_,de_,ha_,spc_,na_,i_,ka_,ra_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	se_,n_,su_,i_,te_,i_,wo_,spc_,o_,i_,ka_,ke_,ru_,no_,ha_
+	.byte	CR_
+	.byte	hu_,tu_,u_,no_,spc_,hi_,to_,ni_,ha_,spc_,mu_,ri_,na_,spc_,ha_,na_,si_,spc_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,DA_,I_,BI_,N_,GU_,spc_,to_,i_,ttu_,te_
+	.byte	CR_
+	.byte	u_,mi_,ni_,spc_,mo_,gu_,re_,ru_,spc_,wa_,za_,wo_,spc_,o_,si_,e_,na_,i_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,KU_,SA_,NE_,ni_,spc_,i_,ke_,ba_
+	.byte	CR_
+	.byte	DA_,I_,BI_,N_,GU_,wo_,spc_,su_,ru_,spc_,hi_,to_,ga_,spc_,o_,o_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	o_,si_,e_,te_,spc_,mo_,ra_,e_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,ke_,do_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジトでの潜水艇出発フラグ成立まで、以下のメッセージを繰り返し
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p08_c102_r0601
+msg_studym1_01_p08_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,se_,n_,su_,i_,te_,i_,wo_,spc_,o_,i_,ka_,ke_,ru_,no_,ha_
+	.byte	CR_
+	.byte	hu_,tu_,u_,no_,spc_,hi_,to_,ni_,ha_,spc_,mu_,ri_,na_,spc_,ha_,na_,si_,spc_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,DA_,I_,BI_,N_,GU_,spc_,to_,i_,ttu_,te_
+	.byte	CR_
+	.byte	u_,mi_,ni_,spc_,mo_,gu_,re_,ru_,spc_,wa_,za_,wo_,spc_,o_,si_,e_,na_,i_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,KU_,SA_,NE_,ni_,spc_,i_,ke_,ba_
+	.byte	CR_
+	.byte	DA_,I_,BI_,N_,GU_,wo_,spc_,su_,ru_,spc_,hi_,to_,ga_,spc_,o_,o_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	o_,si_,e_,te_,spc_,mo_,ra_,e_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,ke_,do_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トクサネのジムバッジ入手以降のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p09_c102_r0601
+msg_studym1_01_p09_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,so_,u_,da_,gyoe_,spc_,HA_,GI_,ro_,u_,zi_,n_,ga_
+	.byte	CR_
+	.byte	zo_,u_,se_,n_,zi_,yyo_,ni_,spc_,ki_,te_,ku_,re_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,bou_,si_,gyoe_,spc_,ko_,re_,de_,spc_,re_,n_,ra_,ku_,se_,n_,ga_
+	.byte	CR_
+	.byte	ka_,n_,se_,i_,spc_,su_,ru_,no_,mo_,spc_,mo_,u_,su_,gu_,spc_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●連絡船が完成してからのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p11_c102_r0601
+msg_studym1_01_p11_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	re_,n_,ra_,ku_,se_,n_,spc_,TA_,I_,DO_,RI_,TTU_,PU_,go_,u_,ga_
+	.byte	CR_
+	.byte	tu_,i_,ni_,spc_,ka_,n_,se_,i_,spc_,si_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,si_,ri_,a_,i_,no_,spc_,HA_,GI_,ro_,u_,zi_,n_,ga_
+	.byte	CR_
+	.byte	te_,tu_,da_,ttu_,te_,spc_,ku_,re_,ta_,ka_,ra_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ze_,hi_,spc_,no_,ttu_,te_,mi_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●「たんちき」を持っているときは以下のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p14_c102_r0601
+msg_studym1_01_p14_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,o_,ya_,hate_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ga_,spc_,mo_,ttu_,te_,ru_,spc_,so_,re_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,n_,ti_,ki_,spc_,da_,ne_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,ga_,a_,ru_,to_,spc_,ti_,yyo_,u_,sa_,ga_,spc_,ha_,ka_,do_,ri_,so_,u_,da_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_,spc_,bo_,ku_,no_,spc_,mo_,ttu_,te_,ru_
+	.byte	CR_
+	.byte	si_,n_,ka_,i_,no_,KI_,BA_,ka_,spc_,si_,n_,ka_,i_,no_,U_,RO_,KO_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,n_,ti_,ki_,wo_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,ku_,re_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+// 　しんかいのキバ
+// 　しんかいのウロコ
+// 　やめる
+
+// ●「やめる」を選んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p20_c102_r0601
+msg_studym1_01_p20_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,so_,u_,ka_,i_,hate_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ga_,spc_,mo_,ttu_,te_,i_,te_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,i_,mi_,ti_,ga_,spc_,na_,i_,to_,spc_,o_,mo_,u_,ke_,do_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,i_,i_,ya_
+	.byte	CR_
+	.byte	ta_,n_,ti_,ki_,wo_,spc_,ko_,u_,ka_,n_,spc_,si_,ta_,ku_,na_,ttu_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ta_,spc_,ha_,na_,si_,ka_,ke_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけた場合は
+// 　msg_studym1_01_p14_c102_r0601:　のメッセージ表示です
+
+// ●「しんかいのキバ」を選んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p15_c102_r0601
+msg_studym1_01_p15_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,si_,n_,ka_,i_,no_,KI_,BA_,ga_,spc_,i_,i_,n_,da_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_studym1_01_p18_c102_r0601:
+// ●「いいえ」→msg_studym1_01_p17_c102_r0601:
+
+// ●「しんかいのウロコ」を選んだ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p16_c102_r0601
+msg_studym1_01_p16_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,si_,n_,ka_,i_,no_,U_,RO_,KO_,ni_,spc_,su_,ru_,n_,da_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_studym1_01_p18_c102_r0601:
+// ●「いいえ」→msg_studym1_01_p17_c102_r0601:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p17_c102_r0601
+msg_studym1_01_p17_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,do_,ttu_,ti_,ni_,spc_,su_,ru_,n_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、選択ウインドウを表示
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p18_c102_r0601
+msg_studym1_01_p18_c102_r0601:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_,ni_
+	.byte	CR_
+	.byte	ta_,n_,ti_,ki_,wo_,spc_,wa_,ta_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バッグから「たんちき」削除
+// ●選択したアイテム入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p19_c102_r0601
+msg_studym1_01_p19_c102_r0601:
+	.byte	KU_,SU_,NO_,KI_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,de_,spc_,ke_,n_,ki_,yyu_,u_,ga_,spc_,ha_,ka_,do_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●建物からでるまでは、このメッセージ繰り返し

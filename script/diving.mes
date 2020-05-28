@@ -1,0 +1,32 @@
+//===============================================================
+//		ÀÞ²ËÞÝ¸Þ
+//===============================================================
+msg_diving_below_look:
+	.byte	hu_,ka_,i_,spc_,u_,mi_,da_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,de_,spc_,mo_,gu_,re_,ru_,ka_,mo_,hate_
+	.byte	EOM_
+msg_diving_below_use0:
+	.byte	hu_,ka_,i_,spc_,u_,mi_,da_,gyoe_
+	.byte	CR_
+	.byte	DA_,I_,BI_,N_,GU_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+msg_diving_below_use1:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,ha_,spc_
+	.byte	DA_,I_,BI_,N_,GU_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	EOM_
+msg_diving_up_look:
+	.byte	u_,e_,ka_,ra_,spc_,hi_,ka_,ri_,ga_,spc_,sa_,si_,ko_,n_,de_,i_,ru_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,de_,spc_,hu_,zi_,yyo_,u_,de_,ki_,ru_,ka_,mo_,hate_
+	.byte	EOM_
+msg_diving_up_use:
+	.byte	u_,e_,ka_,ra_,spc_,hi_,ka_,ri_,ga_,spc_,sa_,si_,ko_,n_,de_,i_,ru_,gyoe_
+	.byte	CR_
+	.byte	DA_,I_,BI_,N_,GU_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+msg_diving_up_err:
+	.byte	u_,e_,ni_,spc_,na_,ni_,ka_,spc_,a_,ri_,ma_,su_,gyoe_
+	.byte	CR_
+	.byte	ko_,ko_,de_,ha_,DA_,I_,BI_,N_,GU_,wo_,spc_,tu_,ka_,e_,ma_,se_,n_
+	.byte	EOM_

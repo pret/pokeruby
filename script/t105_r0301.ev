@@ -1,0 +1,79 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//						ハジツゲ・ルーム0301
+//
+//=================================================================== 
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START t105_r0301_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+/*							技教えマニア							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_t105_r0301
+	_TALK_START
+	_SET_OBJ_ANIME	BIGMAN1_01_T105_R0301,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+	
+	_IF_FLAGON_JUMP	FH_00,ev_bigman1_01_p02_t105_r0301	//２回目以降の話かけ
+	_TALK_KEYWAIT	msg_bigman1_01_p01_t105_r0301
+	_FLAG_SET	FH_00
+	_JUMP	ev_bigman1_01_p02_t105_r0301
+	_END
+
+ev_bigman1_01_p02_t105_r0301://アイテム分岐
+	_CHECK_ITEM	ITEM_HAATONOUROKO,1	//ハートのウロコチェック
+	_IFVAL_JUMP	ANSWORK	EQ,0,ev_bigman1_01_end_t105_r0301
+	_TALK_YES_NO	msg_bigman1_01_p02_t105_r0301
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_bigman1_01_end_t105_r0301
+	_JUMP	ev_bigman1_01_p03_t105_r0301
+	_END
+	
+ev_bigman1_01_p03_t105_r0301://ポケモンリスト呼び出し
+	_TALK_KEYWAIT	msg_bigman1_01_p03_t105_r0301
+	_PROGRAM	WAZAOSIE_POKELIST	//ポケモンリスト呼び出し
+	_STOP_SCRIPT
+	_IFVAL_JUMP	PARAM0,EQ,0xff,ev_bigman1_01_end_t105_r0301	//キャンセル戻る
+	
+	_PROGRAM	WAZA_WASURE_TAMAGO//たまご？
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_bigman1_01_p06_t105_r0301
+	
+	_IFVAL_JUMP	PARAM1,EQ,0,ev_bigman1_01_p05_t105_r0301	//覚えられない
+	_JUMP	ev_bigman1_01_p04_t105_r0301
+	_END
+
+ev_bigman1_01_p04_t105_r0301://ポケモン技リスト呼び出し
+	_TALK_KEYWAIT	msg_bigman1_01_p04_t105_r0301
+	_PROGRAM		WAZA_OSHIE_MANIA						//技リスト呼び出し
+	_STOP_SCRIPT
+	_IFVAL_JUMP PARAM0,EQ,0,ev_bigman1_01_p03_t105_r0301		//キャンセル終わり
+	_TALK_KEYWAIT	msg_bigman1_01_p06_t105_r0301
+	_SUB_ITEM	ITEM_HAATONOUROKO,1	//ハートのウロコ1個減らす
+	_JUMP	ev_bigman1_01_end_t105_r0301	
+	_END
+	
+ev_bigman1_01_p05_t105_r0301://覚えさせる技がない
+	_TALK_KEYWAIT	msg_bigman1_01_p05_t105_r0301
+	_JUMP	ev_bigman1_01_p03_t105_r0301
+	_END
+
+ev_bigman1_01_p06_t105_r0301://たまご
+	_TALK_KEYWAIT	msg_bigman1_01_p08_t105_r0301
+	_JUMP	ev_bigman1_01_p03_t105_r0301
+	_END
+
+ev_bigman1_01_end_t105_r0301://終わり
+	_TALK_KEYWAIT	msg_bigman1_01_p07_t105_r0301
+	_TALK_END
+	_END
+
+
+

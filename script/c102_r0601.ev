@@ -1,0 +1,524 @@
+//====================================================================
+//							c102_r0601
+//							船乗り場
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c102_r0601_event_data
+FLAG_CHANGE_LABEL	flag_change_c102_r0601
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c102_r0601:
+	//あなぬけ接続先セット
+	_SET_ESCAPE_MAP_ID	FIELD,FIELD_C102,28,13
+
+	//深海アイテム入手後メッセージ用(入手後、建物から出るまで有効にさせる)
+	_LDVAL			LOCALWORK1,0
+
+	//潜水艦イベント
+	_IFVAL_CALL		WK_SCENE_C102_R0601,EQ,1,obj_all_del_c102_r0601
+
+	//連絡船を出す(ゲームクリア時のスクリプトでresetしているが一応)
+	_IF_FLAGON_CALL	SYS_GAME_CLEAR,appear_hiship_c102_r0601
+	_END
+
+//連絡船を出す
+appear_hiship_c102_r0601:
+	_FLAG_RESET		FV_HISHIP1_01_C102_R0601
+	_RET
+
+//OBJを消しておく
+obj_all_del_c102_r0601:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_BGM_SPECIAL_SET	MUS_AQA_0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_BGM_SPECIAL_SET	MUS_MGM0
+#endif
+
+	_SXY_POS_CHANGE		KUSUNOKI_01_C102_R0601,12,13
+	_SXY_SITE_CHANGE	KUSUNOKI_01_C102_R0601,MV_LEFT
+	_FLAG_SET		FV_OBJ_ALL_C102_R0601
+	_RET
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							潜水艦イベント
+/********************************************************************/
+SCRIPT_LABEL	ev_c102_r0601_pos01
+	_TALK_START
+	_LDVAL			TMPWK0,0
+	_JUMP			common_sensuitei_c102_r0601
+	_END
+
+SCRIPT_LABEL	ev_c102_r0601_pos02
+	_TALK_START
+	_LDVAL			TMPWK0,1
+	_JUMP			common_sensuitei_c102_r0601
+	_END
+
+SCRIPT_LABEL	ev_c102_r0601_pos03
+	_TALK_START
+	_LDVAL			TMPWK0,2
+	_JUMP			common_sensuitei_c102_r0601
+	_END
+
+SCRIPT_LABEL	ev_c102_r0601_pos04
+	_TALK_START
+	_LDVAL			TMPWK0,3
+
+	//潜水艇が見えないので一歩上に移動する
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c102_r0601_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_JUMP			common_sensuitei_c102_r0601
+	_END
+
+//共通処理
+common_sensuitei_c102_r0601:
+	//アオギリ下を向く
+	_SET_OBJ_ANIME	AQUABOSS_01_C102_R0601,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//主人公上を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquaboss1_01_p01_c102_r0601
+	_TALK_CLOSE
+
+	//アクア団潜水艦に乗り込む
+	_SET_OBJ_ANIME	EVILM1_01_C102_R0601,akua_01_c102_r0601_anime01
+	_SET_OBJ_ANIME	AQUABOSS_01_C102_R0601,akua_01_c102_r0601_anime01
+	_SET_OBJ_ANIME	SUBMARINE1_01_C102_R0601,fune_01_c102_r0601_anime01
+	_OBJ_ANIME_WAIT
+
+	//OBJを消す
+	_OBJ_DELETE		EVILM1_01_C102_R0601
+	_OBJ_DELETE		AQUABOSS_01_C102_R0601
+	_OBJ_DELETE		SUBMARINE1_01_C102_R0601
+
+	_LDVAL			WK_SCENE_C102_R0601,2
+
+	//主人公に近づく
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_kusunoki_c102_r0601
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_kusunoki_c102_r0601
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_kusunoki_c102_r0601
+	_IFVAL_CALL		TMPWK0,EQ,3,case2_kusunoki_c102_r0601	//主人公を一歩上に移動させたので
+
+	_TALK_KEYWAIT	msg_studym1_01_p02_c102_r0601
+	_TALK_CLOSE
+
+	//ミナモのアジトの見張りを消す
+	_FLAG_SET		FV_AKUA_01_CAVE_D0901
+	_FLAG_SET		FV_AKUA_02_CAVE_D0901
+
+	//位置情報を上書きしておく
+	_SXY_POS_OVERWRITE	KUSUNOKI_01_C102_R0601
+	_SXY_SITE_CHANGE	KUSUNOKI_01_C102_R0601,MV_RIGHT
+
+	_TALK_END
+	_END
+
+//主人公に近づく
+case0_kusunoki_c102_r0601:
+	_SET_OBJ_ANIME	KUSUNOKI_01_C102_R0601,kusunoki_01_c102_r0601_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case1_kusunoki_c102_r0601:
+	_SET_OBJ_ANIME	KUSUNOKI_01_C102_R0601,kusunoki_01_c102_r0601_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case2_kusunoki_c102_r0601:
+	_SET_OBJ_ANIME	KUSUNOKI_01_C102_R0601,kusunoki_01_c102_r0601_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//アクア団		船に飛び乗る
+//--------------------------------------------------------------------
+akua_01_c102_r0601_anime01:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_JUMP_U_1	//
+	.byte	AC_VANISH_ON	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクア団		船に飛び乗る
+//--------------------------------------------------------------------
+akua_02_c102_r0601_anime01:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_JUMP_U_1	//
+	.byte	AC_VANISH_ON	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//船	移動していく
+//--------------------------------------------------------------------
+fune_01_c102_r0601_anime01:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ		近づいてくる(pos1)
+//--------------------------------------------------------------------
+kusunoki_01_c102_r0601_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ		近づいてくる(pos2)
+//--------------------------------------------------------------------
+kusunoki_01_c102_r0601_anime02:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ		近づいてくる(pos3)
+//--------------------------------------------------------------------
+kusunoki_01_c102_r0601_anime03:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公		一歩上に移動する
+//--------------------------------------------------------------------
+hero_01_c102_r0601_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							受け付け								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_c102_r0601
+	_TALK_OBJ_START
+
+	//ゲームをクリアしているか
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_workerw2_01_p02_c102_r0601
+
+	_TALK_KEYWAIT	msg_workerw2_01_p01_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//ゲームをクリアしているか
+ev_workerw2_01_p02_c102_r0601:
+	_TALK_KEYWAIT	msg_workerw2_01_p02_c102_r0601
+
+	_CHECK_ITEM		ITEM_HUNENOTIKETTO,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,nothing_funenotikeeto_c102_r0601
+
+	_TALKMSG		msg_workerw2_01_p08_c102_r0601
+	_TALK_WAIT
+
+	//選択処理へ
+	_JUMP			ev_workerw2_01_p03_c102_r0601
+	_END
+
+//行き先を選択させる
+ev_workerw2_01_p03_c102_r0601:
+	_SELECT_WINDOW_CSR	18,6,RENRAKUSEN_MENU,2,0	//B有効
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case0_workerw2_01_p01_c102_r0601
+	_CASEJUMP		1,case1_workerw2_01_p01_c102_r0601
+	_CASEJUMP		2,case2_workerw2_01_p01_c102_r0601
+	_CASECANCEL		case2_workerw2_01_p01_c102_r0601
+	_END
+
+//「ふねのチケット」持っていなかったら
+nothing_funenotikeeto_c102_r0601:
+	_TALK_KEYWAIT	msg_workerw2_01_p09_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//「ミナモ」
+case0_workerw2_01_p01_c102_r0601:
+	_TALK_YES_NO	msg_workerw2_01_p04_c102_r0601
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,common_no_c102_r0601	//「いいえ」
+
+	_LDVAL			WK_SCENE_SP_SHIP01,1
+	_CALL			common_hiship1_c102_r0601
+	_MAP_CHANGE		SP,SP_SHIP01,1,10
+	_STOP_SCRIPT
+	_TALK_OBJ_END
+	_END
+
+//「バトルタワー」
+case1_workerw2_01_p01_c102_r0601:
+	_TALK_YES_NO	msg_workerw2_01_p05_c102_r0601
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,common_no_c102_r0601	//「いいえ」
+
+	_CALL			common_hiship1_c102_r0601
+	_MAP_CHANGE		PARK,PARK_TOWER01,19,23
+	_STOP_SCRIPT
+	_TALK_OBJ_END
+	_END
+
+//共通「いいえ」処理
+common_no_c102_r0601:
+	_TALKMSG		msg_workerw2_01_p07_c102_r0601
+	_TALK_WAIT
+
+	//選択処理へ
+	_JUMP			ev_workerw2_01_p03_c102_r0601
+	_END
+
+//共通処理
+common_hiship1_c102_r0601:
+	_TALK_KEYWAIT	msg_workerw2_01_p06_c102_r0601
+	_TALK_CLOSE
+
+	//船に乗り込む
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	TARGET_OBJ,C102,C102_R0601
+
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,site_u_hero_c102_r0601_anime01
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,site_r_hero_c102_r0601_anime01
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	EV_OBJ_SPID,0,0
+
+	_LDVAL			PARAM0,HISHIP1_01_C102_R0601
+	_CALL			ev_departure_demo
+	_RET
+
+//「やめる」
+case2_workerw2_01_p01_c102_r0601:
+	_TALK_KEYWAIT	msg_workerw2_01_p03_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//左から話し掛け
+site_r_hero_c102_r0601_anime01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c102_r0601_anime20
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛け
+site_u_hero_c102_r0601_anime01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c102_r0601_anime21
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	乗り込む(左から)
+//--------------------------------------------------------------------
+hero_01_c102_r0601_anime20:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	乗り込む(下から)
+//--------------------------------------------------------------------
+hero_01_c102_r0601_anime21:
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								船乗り								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_c102_r0601
+	_EASY_OBJ_MSG	msg_seaman1_01_p01_c102_r0601
+	_END
+
+
+/********************************************************************/
+/*								大男								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_c102_r0601
+	_EASY_OBJ_MSG	msg_bigman1_01_p01_c102_r0601
+	_END
+
+
+/********************************************************************/
+/*								クスノキ							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kusunoki_01_p01_c102_r0601
+	_TALK_OBJ_START
+
+	//トクサネのジムバッチ取得していたら
+	_IF_FLAGON_JUMP	SYS_BATCH07_GET,ev_kusunoki_01_p10_c102_r0601
+
+	//ミナモのアジトイベント後、一度話しているか
+	_IF_FLAGON_JUMP	FE_KUSUNOKI_01_C102_R0601,ev_kusunoki_01_p03_c102_r0601
+
+	//ミナモのアジトイベントが終了しているか
+	_IF_FLAGON_JUMP	FE_AKUA_01_CAVE_D0903,ev_kusunoki_01_p02_c102_r0601
+
+	//潜水艇が奪われたか
+	_IFVAL_JUMP		WK_SCENE_C102_R0601,EQ,2,ev_kusunoki_01_p04_c102_r0601
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_c102_r0601
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+	
+//潜水艇が奪われた
+ev_kusunoki_01_p04_c102_r0601:
+	_TALK_KEYWAIT	msg_studym1_01_p02_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//ミナモのアジトイベントが終了している
+ev_kusunoki_01_p02_c102_r0601:
+	_FLAG_SET		FE_KUSUNOKI_01_C102_R0601
+	_TALK_KEYWAIT	msg_studym1_01_p07_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//ミナモのアジトイベント後、一度話している
+ev_kusunoki_01_p03_c102_r0601:
+	_TALK_KEYWAIT	msg_studym1_01_p08_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//トクサネのジムバッチ取得している
+ev_kusunoki_01_p10_c102_r0601:
+	//深海アイテム入手後メッセージへ(入手後、建物から出るまで有効にさせる)
+	_IFVAL_JUMP		LOCALWORK1,EQ,1,ev_studym1_01_p19_c102_r0601
+
+	//探知機を持っている？
+	_CHECK_ITEM		ITEM_TANTIKI,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_kusunoki_01_p06_c102_r0601
+
+	//ゲームクリアしていたら(連絡船完成していたら)
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_kusunoki_01_p11_c102_r0601
+
+	_TALK_KEYWAIT	msg_studym1_01_p09_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//ゲームクリアしている(連絡船完成している)
+ev_kusunoki_01_p11_c102_r0601:
+	_TALK_KEYWAIT	msg_studym1_01_p11_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//深海アイテムと探知機交換
+ev_kusunoki_01_p06_c102_r0601:
+	//交換してくれない？
+	_TALKMSG		msg_studym1_01_p14_c102_r0601
+	_TALK_WAIT
+	_JUMP			select_item_c102_r0601
+	_END
+
+//交換アイテム選択
+select_item_c102_r0601:
+	_SELECT_WINDOW	0,0,SINKAI_ITEM_MENU,0
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case0_kiba_c106_r1106
+	_CASEJUMP		1,case1_uroko_c106_r1106
+	_CASEJUMP		2,case2_yameru_c106_r1106
+	_CASECANCEL		case2_yameru_c106_r1106
+	_END
+
+//きばを選択したとき
+case0_kiba_c106_r1106:
+	_TALK_YES_NO	msg_studym1_01_p15_c102_r0601
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_studym1_01_p17_c102_r0601		//「いいえ」
+
+	_ITEM_EVENT		ITEM_SINKAINOKIBA,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	//交換の時は、アイテムを渡す共通処理を呼ばない
+	//「たんちき」削除
+	_SUB_ITEM		ITEM_TANTIKI,1
+	_TALK_KEYWAIT	msg_studym1_01_p18_c102_r0601
+
+	_FLAG_SET		FE_TANTIKI_RETURN
+
+	//終了メッセージ
+	_JUMP			ev_studym1_01_p19_c102_r0601
+	_END
+
+//うろこを選択したとき
+case1_uroko_c106_r1106:
+	_TALK_YES_NO	msg_studym1_01_p16_c102_r0601
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_studym1_01_p17_c102_r0601		//「いいえ」
+
+	_ITEM_EVENT		ITEM_SINKAINOUROKO,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	//交換の時は、アイテムを渡す共通処理を呼ばない
+	//「たんちき」削除
+	_SUB_ITEM		ITEM_TANTIKI,1
+	_TALK_KEYWAIT	msg_studym1_01_p18_c102_r0601
+
+	_FLAG_SET		FE_TANTIKI_RETURN
+
+	//終了メッセージ
+	_JUMP			ev_studym1_01_p19_c102_r0601
+	_END
+
+//やめるを選択したとき
+case2_yameru_c106_r1106:
+	//使い道ないとおもうけど.....
+	_TALK_KEYWAIT	msg_studym1_01_p20_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+//再度選択（どっちにする？）へ
+ev_studym1_01_p17_c102_r0601:
+	_TALKMSG		msg_studym1_01_p17_c102_r0601
+	_TALK_WAIT
+	_JUMP			select_item_c102_r0601
+	_END
+
+//深海アイテム入手後メッセージ(入手後、建物から出るまで有効)
+ev_studym1_01_p19_c102_r0601:
+	_LDVAL			LOCALWORK1,1
+
+	//研究がはかどるよ
+	_TALK_KEYWAIT	msg_studym1_01_p19_c102_r0601
+	_TALK_OBJ_END
+	_END
+
+

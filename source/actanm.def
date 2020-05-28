@@ -1,0 +1,99 @@
+//**********************************************************************
+//		actanm.def
+//**********************************************************************
+#ifndef	ACTANM_DEF
+#define	ACTANM_DEF
+
+#define ACT_ANMEND		-1				// ±ÆÒ ´İÄŞ ºÏİÄŞ
+#define ACT_ANMLOOP		-2				// ±ÆÒ Ù°Ìß ºÏİÄŞ
+#define	ACT_ANMcLOOP	-3				// ±ÆÒ ¶³İÄÙ°Ìß ºÏİÄŞ
+
+#define	ACT_TMODE		0xffff			// “]‘—Œ^(±¸À°Í¯ÀŞ’è‹`)
+#define	ACT_OAMPAL		0xffff			// ÊßÚ¯Ä(±¸À°Í¯ÀŞ’è‹`)
+#define	ACT_NTRANS		0x0000			// ”ñ“]‘—Œ^±ÆÒÃŞ°À±ÄŞÚ½(±¸À°Í¯ÀŞ’è‹`)
+
+#define	ACT_AFEND		0x7fff			// Šgk±ÆÒEND ( 32767 )
+#define	ACT_AFLOOP		0x7ffe			// Šgk±ÆÒLOOP ( 32766 )
+#define	ACT_AFcLOOP		0x7ffd			// Šgk±ÆÒ¶³İÄÙ°Ìß ( 32765 )
+#define	ACT_AFSET		0x00			// Šgk±ÆÒ‰Šú‰»( wait w’è )
+
+#define	CELL_END		0x0000			// ¾ÙÏÈ°¼Ş¬“o˜^I—¹
+#define	OBJPAL_END		0x0000			// ÊßÚ¯ÄÏÈ°¼Ş¬“o˜^I—¹
+
+#define	NOT_OAMPAT		0x0000			// OAM Êß¯Ä–¢g—p
+#define	OAMPAT_OFF		0x00			// OAM Êß¯ÄOFF 
+#define	OAMPAT_ON		0x01			// OAM Êß¯ÄON
+#define	OAMPAT_PRIUNIT	0x02			// OAM Êß¯ÄÌß×²µØÃ¨“ˆê
+#define	OAMPAT_WORK		0x03			// OAM Êß¯Ä—\”õ
+
+//------------------------------------------
+//	ÃŞÊŞ¯¸Ş
+//------------------------------------------
+#define	OAM_PAT_TEST	0				// OAM ÊßÀ°İÃ°ÌŞÙÃ½Ä
+
+//------------------------------------------
+//	±¸À°Šgk±ÆÒ
+//------------------------------------------
+typedef struct
+{
+	s16	rx;								// Šgk—¦ x
+	s16	ry;								// Šgk—¦ y
+	u8	theta;							// ‰ñ“]Šp“x
+	u8	wait;							// ³ª²Ä
+} actAffAnm;
+
+//------------------------------------------
+//	ŠgkÜ°¸
+//------------------------------------------
+typedef struct
+{
+	u8	no;								// ±ÆÒÅİÊŞ
+	u8	offs;							// µÌ¾¯Ä
+	u8	wait;							// ³ª²Ä
+	u8	count;							// Ù°Ìß¶³İÄ
+	ObjAffineSrcData src;				// ŒvZÜ°¸
+}ObjAffinePatWork;
+
+//------------------------------------------
+//	¾ÙÏÈ°¼Ş¬“o˜^
+//------------------------------------------
+typedef struct
+{
+	const u8 *ch_data;					// ·¬×ÃŞ°À±ÄŞÚ½
+	u16	size;							// “]‘—»²½Ş
+	u16	act_num;						// “o˜^”Ô†
+}CellData;
+
+//------------------------------------------
+//	ÊßÚ¯ÄÏÈ°¼Ş¬“o˜^
+//------------------------------------------
+typedef struct
+{
+	const	u16	*pal_data;				// ÊßÚ¯ÄÃŞ°À±ÄŞÚ½
+	u16	reg_num;						// “o˜^”Ô†
+}PalData;
+
+//------------------------------------------
+//	OAM Êß¯ÄÃŞ°À
+//------------------------------------------
+typedef struct
+{
+	s8	x;								// X À•WµÌ¾¯Ä
+	s8	y;								// Y À•WµÌ¾¯Ä
+	u16	shape:2;						// OBJ Œ`ó
+	u16	size:2;							// OBJ »²½Ş
+	u16 ch_offs:10;						// ÅİÊŞµÌ¾¯Ä
+	u16 bg_pri:2;						// BG Ìß×²µØÃ¨
+}OAMPatData;
+
+//------------------------------------------
+//	OAM Êß¯Ä½Ã°À½
+//------------------------------------------
+typedef struct
+{
+	const u8 use;						// g—p”
+	const OAMPatData *pat;				// Êß¯Ä±ÄŞÚ½
+}OAMPatSt;
+
+#endif									// ACTANM_DEF
+

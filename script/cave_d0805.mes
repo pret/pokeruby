@@ -1,0 +1,42 @@
+// ●おくりび山　内部５Ｆ
+
+
+// ▼d0805----------------------------------
+// ●オカルトマニア０５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_okaruto_05_01
+msg_okaruto_05_01:
+	.byte	ko_,wa_,i_,mo_,no_,ga_,spc_,su_,ki_,de_,tenten_,tenten_
+	.byte	CR_
+	.byte	su_,ki_,de_,spc_,su_,ki_,de_,spc_,ta_,ma_,ra_,na_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,ko_,ko_,ni_,spc_,i_,ru_,to_
+	.byte	CR_
+	.byte	ko_,wa_,ku_,te_,spc_,hu_,ru_,e_,ru_,no_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●オカルトマニア０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_okaruto_05_02
+msg_okaruto_05_02:
+	.byte	ma_,ke_,ru_,no_,ha_,spc_,ki_,ra_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●オカルトマニア０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_okaruto_05_03
+msg_okaruto_05_03:
+	.byte	ko_,wa_,i_,mo_,no_,spc_,mi_,ta_,sa_,de_
+	.byte	CR_
+	.byte	ko_,ko_,ka_,ra_,spc_,ha_,na_,re_,ra_,re_,na_,i_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,e_,tenten_,tenten_
+	.byte	CR_
+	.byte	a_,na_,ta_,mo_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,i_,na_,i_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

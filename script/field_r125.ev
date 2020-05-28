@@ -1,0 +1,108 @@
+//====================================================================
+//							field_r125
+//							ロード・127
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r125_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r125
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r125:
+	//大雨
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,ctrl_weather_thunder
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_11
+	_TRAINER_DATA2	msg_swimmerm_11_01
+	_TRAINER_DATA3	msg_swimmerm_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_11_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_12
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_12
+	_TRAINER_DATA2	msg_swimmerm_12_01
+	_TRAINER_DATA3	msg_swimmerm_12_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_12_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_11
+	_TRAINER_DATA2	msg_swimmerw_11_01
+	_TRAINER_DATA3	msg_swimmerw_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_11_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_12
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_12
+	_TRAINER_DATA2	msg_swimmerw_12_01
+	_TRAINER_DATA3	msg_swimmerw_12_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_12_03
+	_END
+
+SCRIPT_LABEL	ev_sailor_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SAILOR_03
+	_TRAINER_DATA2	msg_sailor_03_01
+	_TRAINER_DATA3	msg_sailor_03_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_sailor_03
+	_TRAINER_EASY_MSG	msg_sailor_03_03
+	_END
+
+_revenge_sailor_03:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SAILOR_03
+	_TRAINER_DATA2	msg_sailor_03_04
+	_TRAINER_DATA3	msg_sailor_03_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sailor_03_06
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_07_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_07
+	_TRAINER_DATA2	msg_senpaikouhai_07_01
+	_TRAINER_DATA3	msg_senpaikouhai_07_02
+	_TRAINER_DATA4	msg_senpaikouhai_07_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_07_03
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_07_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_07
+	_TRAINER_DATA2	msg_senpaikouhai_07_05
+	_TRAINER_DATA3	msg_senpaikouhai_07_06
+	_TRAINER_DATA4	msg_senpaikouhai_07_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_07_07
+	_END
+

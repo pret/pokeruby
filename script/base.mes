@@ -1,0 +1,121 @@
+//=========================================================================================
+//		秘密の箱など
+//=========================================================================================
+base_msg_move:
+	.byte	hi_,mi_,tu_,ki_,ti_,no_,spc_,GU_,TTU_,ZU_,ha_,spc_,su_,be_,te_
+	.byte	CR_
+	.byte	PA_,SO_,KO_,N_,ni_,spc_,mo_,do_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,mo_,spc_,yo_,ro_,si_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+base_msg_entry:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,hi_,mi_,tu_,ki_,ti_,wo_
+	.byte	CR_
+	.byte	to_,u_,ro_,ku_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+base_msg_entry2:
+	.byte	su_,de_,ni_,spc_,to_,u_,ro_,ku_,sa_,re_,te_,i_,ma_,su_
+	.byte	CR_
+	.byte	to_,u_,ro_,ku_,wo_,spc_,ka_,i_,zi_,yyo_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+base_msg_entry3:
+	.byte	to_,u_,ro_,ku_,spc_,de_,ki_,ru_,spc_,ka_,zu_,ha_
+	.byte	CR_
+	.byte	n1_,n0_,ka_,si_,yyo_,spc_,ma_,de_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,ka_,spc_,ka_,i_,zi_,yyo_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	to_,u_,ro_,ku_,spc_,de_,ki_,ma_,su_
+	.byte	EOM_
+
+base_msg_entry4:
+	.byte	to_,u_,ro_,ku_,spc_,si_,ma_,si_,ta_,gyoe_
+	.byte	EOM_
+
+base_msg_entry5:
+	.byte	to_,u_,ro_,ku_,wo_,spc_,ka_,i_,zi_,yyo_,spc_,si_,ma_,si_,ta_,gyoe_
+	.byte	EOM_
+
+base_msg_no_rarng:
+	.byte	mo_,yo_,u_,ga_,e_,GU_,TTU_,ZU_,ga_,spc_,a_,ri_,ma_,se_,n_,tenten_
+	.byte	EOM_
+
+base_msg_box1:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	PA_,SO_,KO_,N_,no_,spc_,SU_,I_,TTU_,TI_,wo_,spc_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+base_msg_box2:
+	.byte	na_,ni_,wo_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+base_msg_entry_list_note:
+	.byte	to_,u_,ro_,ku_,si_,ta_,spc_,hi_,mi_,tu_,ki_,ti_,ha_
+	.byte	CR_
+	.byte	a_,i_,te_,ga_,spc_,hi_,ttu_,ko_,si_,wo_,spc_,si_,na_,i_,ka_,gi_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ku_,na_,ru_,spc_,ko_,to_,ha_,spc_,a_,ri_,ma_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,ro_,ku_,spc_,RI_,SU_,TO_,ka_,ra_,spc_,sa_,ku_,zi_,yyo_,su_,ru_,to_
+	.byte	CR_
+	.byte	ho_,ka_,no_,spc_,hi_,mi_,tu_,ki_,ti_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,wa_,ru_,ko_,to_,ga_,spc_,a_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,ro_,ku_,ha_,spc_,n1_,n0_,ka_,si_,yyo_,spc_,ma_,de_,spc_,de_,ki_,ma_,su_
+	.byte	CTRL_,C_TRGWAIT_
+	.byte	EOM_
+
+base_msg_tate:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,de_,spc_,I_MSG_,STR_TEMP_BUF0,ni_,n_,spc_,ka_,ti_,nu_,i_,ta_
+	.byte	CR_
+	.byte	ki_,ne_,n_,no_,spc_,I_MSG_,STR_TEMP_BUF1,no_,spc_,ta_,te_
+	.byte	EOM_
+
+base_msg_TV_00:
+	.byte	ho_,n_,mo_,no_,spc_,so_,ttu_,ku_,ri_,no_,spc_,O_,MO_,TI_,YYA_,no_,TE_,RE_,BI_
+	.byte	CR_
+	.byte	si_,ra_,na_,i_,spc_,hi_,to_,ga_,spc_,mi_,ta_,ra_,spc_,ma_,ti_,ga_,u_,ka_,mo_,gyoe_,hate_
+	.byte	EOM_
+
+base_msg_TV_01:
+	.byte	TA_,NE_,BO_,bou_,spc_,mi_,ta_,i_,na_,spc_,O_,MO_,TI_,YYA_,no_,TE_,RE_,BI_
+	.byte	CR_
+	.byte	na_,n_,da_,ka_,spc_,ko_,ro_,ga_,ri_,da_,si_,so_,u_,gyoe_,hate_
+	.byte	EOM_
+
+base_msg_TV_02:
+	.byte	E_,NE_,KO_,spc_,mi_,ta_,i_,na_,spc_,O_,MO_,TI_,YYA_,no_,TE_,RE_,BI_
+	.byte	CR_
+	.byte	na_,n_,da_,ka_,spc_,a_,ru_,ki_,da_,si_,so_,u_,gyoe_,hate_
+	.byte	EOM_
+
+
+//=========================================================================================
+//									その他メッセージ
+//=========================================================================================
+base_msg_no_make:
+	.byte	hi_,mi_,tu_,ki_,ti_,ha_,spc_,hi_,to_,tu_,si_,ka_,spc_,tu_,ku_,re_,ma_,se_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,ni_,a_,ru_
+	.byte	CR_
+	.byte	hi_,mi_,tu_,ki_,ti_,wo_,spc_,hi_,ttu_,ko_,si_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+/*
+	.byte	hi_,mi_,tu_,ki_,ti_,ha_,spc_,hi_,to_,tu_,si_,ka_,spc_,mo_,te_,ma_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ni_,spc_,hi_,mi_,tu_,ki_,ti_,wo_,spc_,tu_,ku_,ru_,na_,ra_
+	.byte	CR_
+	.byte	i_,ma_,no_,spc_,ba_,si_,yyo_,wo_,spc_,hi_,ttu_,ko_,si_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+*/
+
+base_msg_no_make2:
+	.byte	hi_,ttu_,ko_,si_,spc_,ka_,n_,ri_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hi_,mi_,tu_,no_,ti_,ka_,ra_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_

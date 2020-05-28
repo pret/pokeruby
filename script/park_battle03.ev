@@ -1,0 +1,81 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	park_battle03_event_data
+BG_CHANGE_LABEL		bg_change_park_battle03
+SP_SCRIPT_LABEL		ev_park_battle03
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_park_battle03:
+	//レベル１００だったら
+	_IFVAL_JUMP			PARAM2,EQ,1,ev_park_battle03_lv100_cell_chg
+
+	//レベル５０だったら
+	_SET_CELL		12,0,519,0
+	_SET_CELL		12,1,527,0
+	_END
+
+//レベル１００だったら
+ev_park_battle03_lv100_cell_chg:
+	_SET_CELL		15,0,519,0
+	_SET_CELL		15,1,527,0
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/********************************************************************/
+
+ev_park_battle03:
+	SP_SCRIPT_DATA		LOCALWORK0,0,ev_park_battle03_01
+	SP_SCRIPT_END
+
+ev_park_battle03_01:
+	_LDVAL				LOCALWORK0,1
+	_IFVAL_JUMP			PARAM2,EQ,1,ev_park_battle03_lv100
+ev_park_battle03_lv50:
+	_SET_OBJ_ANIME		BATTLE_TOWER_PC03,anm_battle03_pcw_50
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle03_mine_50
+	_OBJ_ANIME_WAIT
+	_JUMP				ev_park_battle03_end
+ev_park_battle03_lv100:
+	_SET_OBJ_ANIME		BATTLE_TOWER_PC03,anm_battle03_pcw_100
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle03_mine_100
+	_OBJ_ANIME_WAIT
+ev_park_battle03_end:
+	_LDVAL				LOCALWORK0,0
+	_MAP_CHANGE			PARK,PARK_BATTLE04,4,8
+	_STOP_SCRIPT
+	_END
+
+//=======================================================================
+//	OBJアニメーションデータ
+//=======================================================================
+
+anm_battle03_mine_100:
+	.byte	AC_WALK_R_1
+anm_battle03_pcw_100:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+anm_battle03_mine_50:
+	.byte	AC_WALK_R_1
+anm_battle03_pcw_50:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+

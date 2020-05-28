@@ -1,0 +1,37 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_BATTLE03	1
+#define EXITNUM_PARK_BATTLE03	0
+#define POSNUM_PARK_BATTLE03	0
+#define BGNUM_PARK_BATTLE03	0
+
+const evObjData	OBJ_park_battle03[] =
+{
+	{
+		BATTLE_TOWER_PC03,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_DATA	park_battle03_sxy_data =
+{
+OBJNUM_PARK_BATTLE03,			// field obj max
+EXITNUM_PARK_BATTLE03,		// exit max
+POSNUM_PARK_BATTLE03,			// pos event max
+BGNUM_PARK_BATTLE03,			// bg event max
+OBJ_park_battle03,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

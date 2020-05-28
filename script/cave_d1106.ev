@@ -1,0 +1,38 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d1106.ev
+//
+//============================================ 
+
+EVENT_DATA_START cave_d1106_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d1106
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1106:
+	_CALL			set_evil_char
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_aquam_08
+	_TRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAM_08
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAM_08
+#endif
+	_TRAINER_DATA2	msg_aquam_08_01
+	_TRAINER_DATA3	msg_aquam_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_08_03
+	_END
+

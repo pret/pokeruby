@@ -1,0 +1,123 @@
+// ◆◆ダンジョン４◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+
+
+// ・合い言葉を手に入れた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karakuri_01_p03_r110_r0107
+msg_karakuri_01_p03_r110_r0107:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,a_,i_,ko_,to_,ba_,wo_
+	.byte	CR_
+	.byte	to_,bi_,ra_,ni_,spc_,ka_,ki_,tu_,ke_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,KA_,RA_,KU_,RI_,da_,i_,o_,u_,spc_,sa_,ma_,spc_,ka_,ttu_,ko_,i_,i_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,gi_,no_,spc_,ha_,zu_,re_,ru_,spc_,o_,to_,ga_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・効果音・ロック解除
+
+
+
+// ・トレーナー　バトルガール
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_04_01
+msg_battleg_04_01:
+	.byte	ko_,u_,i_,u_,no_,spc_,ka_,n_,ga_,e_,ru_,no_,ttu_,te_,spc_,me_,n_,do_,u_,gyoe_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ha_,spc_,si_,yyo_,u_,bu_,da_,ke_,spc_,si_,ta_,i_,no_,ni_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_04_02
+msg_battleg_04_02:
+	.byte	ma_,ke_,ti_,yya_,ttu_,ta_,spc_,ke_,do_,spc_,ya_,ttu_,pa_,ri_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,ga_,spc_,i_,ti_,ba_,n_,spc_,ta_,no_,si_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_04_03
+msg_battleg_04_03:
+	.byte	TO_,RE_,bou_,NA_,bou_,ga_,spc_,i_,so_,u_,na_,spc_,to_,ko_,ro_,ha_
+	.byte	CR_
+	.byte	do_,ko_,ni_,de_,mo_,spc_,i_,ki_,ta_,ku_,spc_,na_,ru_,wa_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ・トレーナー　からておう
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_10_01
+msg_karate_10_01:
+	.byte	ko_,no_,ku_,ra_,i_,no_,spc_,i_,wa_,ha_
+	.byte	CR_
+	.byte	yu_,bi_,spc_,i_,ttu_,po_,n_,de_,spc_,ra_,ku_,si_,yyo_,u_,spc_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_10_02
+msg_karate_10_02:
+	.byte	i_,wa_,ga_,spc_,o_,se_,te_,mo_
+	.byte	CR_
+	.byte	PA_,ZU_,RU_,ga_,spc_,to_,ke_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_10_03
+msg_karate_10_03:
+	.byte	ti_,ka_,ra_,ga_,spc_,tu_,yo_,i_,da_,ke_,zi_,yya_,spc_,DA_,ME_,da_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	A_,TA_,MA_,spc_,tu_,ka_,wa_,na_,i_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ・トレーナー　バトルガール
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_05_01
+msg_battleg_05_01:
+	.byte	KA_,RA_,KU_,RI_,ya_,si_,ki_,mo_,spc_,da_,n_,da_,n_
+	.byte	CR_
+	.byte	mu_,zu_,ka_,si_,ku_,spc_,na_,ttu_,te_,ki_,ta_,wa_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_05_02
+msg_battleg_05_02:
+	.byte	a_,a_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_05_03
+msg_battleg_05_03:
+	.byte	sa_,i_,go_,ma_,de_,spc_,i_,ttu_,ta_
+	.byte	CR_
+	.byte	hi_,to_,ttu_,te_,spc_,i_,ru_,no_,ka_,si_,ra_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+

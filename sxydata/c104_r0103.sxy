@@ -1,0 +1,111 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C104_R0103	3
+#define EXITNUM_C104_R0103	1
+#define POSNUM_C104_R0103	0
+#define BGNUM_C104_R0103	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_oldman1_01_p01_c104_r0103[];
+extern const u8	ev_workerm1_01_p01_c104_r0103[];
+extern const u8	ev_oldman1_01_p01_c104_r0103[];
+
+//BG_SCRIPT
+extern const u8	ev_case_01_p01_c104_r0103[];
+extern const u8	ev_case_01_p01_c104_r0103[];
+
+const evObjData	OBJ_c104_r0103[] =
+{
+	{
+		OLDMAN1_01_C104_R0103,		//OBJ ID
+		GENTLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman1_01_p01_c104_r0103,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WORKERM1_01_C104_R0103,		//OBJ ID
+		WORKERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerm1_01_p01_c104_r0103,		//Event Lavel
+		FV_WORKERM1_01_C104_R0103,		//Event Flag
+	},
+
+	{
+		DMY_01_C104_R0103,		//OBJ ID
+		GENTLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000f,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_VANISH,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman1_01_p01_c104_r0103,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c104_r0103[] =
+{
+	{
+		0x0002,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C104_R0102_DOOR02,		//Door ID
+		C104_R0102,			//Map ID
+		C104,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c104_r0103[] =
+{
+	{
+		0x0001,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_case_01_p01_c104_r0103,		//Script
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_case_01_p01_c104_r0103,		//Script
+	},
+
+};
+
+const SXY_DATA	c104_r0103_sxy_data =
+{
+OBJNUM_C104_R0103,			// field obj max
+EXITNUM_C104_R0103,		// exit max
+POSNUM_C104_R0103,			// pos event max
+BGNUM_C104_R0103,			// bg event max
+OBJ_c104_r0103,			// field obj data
+EXIT_c104_r0103,			// exit data
+NULL,			// pos event data
+BG_c104_r0103,				// bg event data
+};

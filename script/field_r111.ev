@@ -1,0 +1,702 @@
+//====================================================================
+//							field_r111
+//							１１１番道路
+//====================================================================
+
+//--------------------------------------------------------------------
+//				   マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r111_event_data
+BG_CHANGE_LABEL		bg_change_field_r111
+FLAG_CHANGE_LABEL	flag_change_field_r111
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_field_r111:
+	//伝説の洞窟扉開いているか
+	_IF_FLAGOFF_CALL	FE_DENSETU_OPEN,bg_chg_01field_r111
+	_END
+
+bg_chg_01field_r111:
+	_SET_CELL		29,86,124,1
+	_SET_CELL		29,87,145,1
+	_RET
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r111:
+	_CALL			ctrl_field_r111				//BGM、天候のセット
+	_CALL			change_camera_obj			//カメラOBJ操作
+
+	//バトル一家のおばあちゃんに勝っていなかったらトレーナーフラグを戻す
+	_IF_TR_FLAGOFF_JUMP	EXPERTW_01,tr_flag_off_field_r111
+	_END
+
+//BGM、天候のセット
+ctrl_field_r111:
+	_GET_MAP_POS	LOCALWORK0,LOCALWORK1
+	_IFVAL_JUMP		LOCALWORK1,LT,34,	_ret_bgm_ctrl_field_r111
+	_IFVAL_JUMP		LOCALWORK1,GT,107,	_ret_bgm_ctrl_field_r111
+	_IFVAL_JUMP		LOCALWORK1,GT,72,	_set_bgm_ctrl_field_r111
+	_IFVAL_JUMP		LOCALWORK0,GT,2000, _ret_bgm_ctrl_field_r111
+	_IFVAL_JUMP		LOCALWORK0,LT,8,	_ret_bgm_ctrl_field_r111
+
+_set_bgm_ctrl_field_r111:
+	//BGMは天候を見て判断するようになったので指定はいらない
+	_SET_WEATHER		ID_WEATHER_STORM			/* 砂嵐 */
+_ret_bgm_ctrl_field_r111:
+	_RET
+
+//バトル一家のおばあちゃんに勝っていなかったらトレーナーフラグを戻す
+tr_flag_off_field_r111:
+	_FLAG_RESET			FV_MIDDLEM1_01_FIELD_R111
+
+	_FLAG_SET			FV_MIDDLEW1_01_FIELD_R111
+	_FLAG_SET			FV_SCHOOLW1_01_FIELD_R111
+	_FLAG_SET			FV_OLDWOMAN1_01_FIELD_R111
+
+	_TR_FLAG_RESET		DAISUKIM_01
+	_TR_FLAG_RESET		DAISUKIW_01
+	_TR_FLAG_RESET		MINI_04
+	_END
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ねっこのカセキ							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kaseki_01_p01_field_r111
+	_TALK_START
+
+	_TALK_YES_NO	msg_kaseki_01_p01_field_r111
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_kaseki_01_p02_field_r111	//「いいえ」
+
+	//「はい」
+	_ITEM_EVENT		ITEM_NEKKONOKASEKI,1
+	_TALK_CLOSE
+
+	_FLAG_SET		FV_KASEKI_01_FIELD_R111
+	_FLAG_SET		FV_KASEKI_02_FIELD_R111
+
+	_OBJ_DELETE		KASEKI_01_FIELD_R111
+
+	_TIME_WAIT		30
+
+	_SET_OBJ_ANIME	KASEKI_02_FIELD_R111,kaseki_01_field_r111_anime01
+	_OBJ_ANIME_WAIT
+
+	_OBJ_DELETE		KASEKI_02_FIELD_R111
+
+	_TALK_END
+	_END
+
+//「いいえ」
+ev_kaseki_01_p02_field_r111:
+	_TALK_KEYWAIT	msg_kaseki_01_p02_field_r111
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							ツメのカセキ							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kaseki_02_p01_field_r111
+	_TALK_START
+
+	_TALK_YES_NO	msg_kaseki_02_p01_field_r111
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_kaseki_02_p02_field_r111	//「いいえ」
+
+	//「はい」
+	_ITEM_EVENT		ITEM_TUMENOKASEKI,1
+	_TALK_CLOSE
+
+	_FLAG_SET		FV_KASEKI_02_FIELD_R111
+	_FLAG_SET		FV_KASEKI_01_FIELD_R111
+
+	_OBJ_DELETE		KASEKI_02_FIELD_R111
+
+	_TIME_WAIT		30
+
+	_SET_OBJ_ANIME	KASEKI_01_FIELD_R111,kaseki_01_field_r111_anime01
+	_OBJ_ANIME_WAIT
+
+	_OBJ_DELETE		KASEKI_01_FIELD_R111
+
+	_TALK_END
+	_END
+
+//「いいえ」
+ev_kaseki_02_p02_field_r111:
+	_TALK_KEYWAIT	msg_kaseki_02_p02_field_r111
+	_TALK_END
+	_END
+
+//徐々に消えるアニメ
+kaseki_01_field_r111_anime01:
+	.byte	AC_VANISH_OFF
+	.byte	AC_WAIT_4
+	.byte	AC_VANISH_ON
+	.byte	AC_WAIT_4
+	.byte	AC_VANISH_OFF
+	.byte	AC_WAIT_4
+	.byte	AC_VANISH_ON
+	.byte	AC_WAIT_4
+
+	.byte	AC_VANISH_OFF
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_OFF
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	AC_WAIT_8
+
+	.byte	AC_VANISH_OFF
+	.byte	AC_WAIT_16
+	.byte	AC_VANISH_ON
+	.byte	AC_WAIT_16
+
+	.byte	AC_VANISH_OFF
+	.byte	ACMD_END
+	
+
+/********************************************************************/
+/*								少女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_field_r111
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//一日一回
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT_03,ev_girl1_01_p02_field_r111
+
+	_TALK_KEYWAIT	msg_girl1_01_p01_kinomi
+
+	_ITEM_EVENT		ITEM_ZURINOMI,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		TMFLG_SEED_PRESENT_03
+
+	//お兄ちゃん、お姉ちゃん
+	_PROGRAM		SET_SEX_NAME_01
+	_TALK_KEYWAIT	msg_girl1_01_p02_kinomi
+
+	_TALK_OBJ_END
+	_END
+
+//一日一回
+ev_girl1_01_p02_field_r111:
+	_TALK_KEYWAIT	msg_girl1_01_p03_kinomi
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							BGM、天候操作							*/
+//
+//							LOCALWORK3使用中
+/********************************************************************/
+SCRIPT_LABEL	storm_set_field_r111_u
+	_TALK_START
+	_LDVAL			PARAM0,0
+	_JUMP			googuru_set_field_r111
+	_END
+
+SCRIPT_LABEL	storm_set_field_r111_d
+	_TALK_START
+	_LDVAL			PARAM0,1
+	_JUMP			googuru_set_field_r111
+	_END
+
+SCRIPT_LABEL	storm_set_field_r111_l
+	_TALK_START
+	_LDVAL			PARAM0,2
+	_JUMP			googuru_set_field_r111
+	_END
+
+SCRIPT_LABEL	storm_set_field_r111_r
+	_TALK_START
+	_LDVAL			PARAM0,3
+	_JUMP			googuru_set_field_r111
+	_END
+
+googuru_set_field_r111:
+	//「ゴーゴーゴーグル」を持っているか
+	_CHECK_ITEM		ITEM_GOOGOOGOOGURU,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,googuru_set_field_r111_end
+
+	_LDVAL			LOCALWORK3,1
+	_TALK_END
+	_END
+
+googuru_set_field_r111_end:
+	_TALK_KEYWAIT	msg_sabaku_back
+	_TALK_CLOSE
+
+	_IFVAL_CALL		PARAM0,EQ,0,case0_storm_field_r111
+	_IFVAL_CALL		PARAM0,EQ,1,case1_storm_field_r111
+	_IFVAL_CALL		PARAM0,EQ,2,case2_storm_field_r111
+	_IFVAL_CALL		PARAM0,EQ,3,case3_storm_field_r111
+	_TALK_END
+	_END
+
+//主人公戻す
+case0_storm_field_r111:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r111_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case1_storm_field_r111:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r111_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case2_storm_field_r111:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r111_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case3_storm_field_r111:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r111_anime04
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	下に戻す
+//--------------------------------------------------------------------
+hero_01_field_r111_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	上に戻す
+//--------------------------------------------------------------------
+hero_01_field_r111_anime02:
+	.byte	AC_WALK_D_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	左に戻す
+//--------------------------------------------------------------------
+hero_01_field_r111_anime03:
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	右に戻す
+//--------------------------------------------------------------------
+hero_01_field_r111_anime04:
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+SCRIPT_LABEL	shine_set_field_r111
+	_SET_WEATHER		ID_WEATHER_SHINE2
+	_BGM_FADE_CHG		MUS_DOORO_X1
+	_UPDATE_WEATHER
+
+	//「ゴーゴーゴーグル」ポスがもう一度反応するようにする
+	_LDVAL				LOCALWORK3,0
+	_END
+	
+SCRIPT_LABEL	storm_set_field_r111
+	_SET_WEATHER		ID_WEATHER_STORM		/* 砂嵐 */
+	_BGM_FADE_CHG		MUS_ASHROAD
+	_UPDATE_WEATHER
+	_END
+
+
+/********************************************************************/
+/*								おやじ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_field_r111
+	_TALK_OBJ_START
+
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_BATTLEFAMILY
+
+	_TALK_YES_NO	msg_middlem1_01_p01_field_r111
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_middlem1_01_p01_field_r111	//「はい」
+
+	_TALK_KEYWAIT	msg_middlem1_01_p02_field_r111
+	_TALK_OBJ_END
+	_END
+
+//戦闘承諾
+yes_middlem1_01_p01_field_r111:
+	//おやじ----------------------------------------------------------
+	_TALK_KEYWAIT	msg_middlem1_01_p03_field_r111
+	_TRAINER_EVENT_FIGHT	DAISUKIM_01,msg_middlem1_01_p04_field_r111
+
+	//後ろを向く
+	_SET_OBJ_ANIME	MIDDLEM1_01_FIELD_R111,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_open_battle_house
+
+	_TALK_KEYWAIT	msg_middlem1_01_p05_field_r111
+	_TALK_CLOSE
+
+	//家に入る
+	_SET_OBJ_ANIME	MIDDLEM1_01_FIELD_R111,field_r111_btl_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		MIDDLEM1_01_FIELD_R111
+
+	_CALL			ev_close_battle_house
+
+	//間
+	_SET_OBJ_ANIME	EV_OBJ_SPID,field_r111_btl_anime04
+	_OBJ_ANIME_WAIT
+
+	//はは--------------------------------------------------------------
+	_CALL			ev_open_battle_house
+
+	_OBJ_APPEAR		MIDDLEW1_01_FIELD_R111
+
+	//出てくる
+	_SET_OBJ_ANIME	MIDDLEW1_01_FIELD_R111,field_r111_btl_anime02
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_close_battle_house
+
+	_TALK_KEYWAIT	msg_middlew1_01_p01_field_r111
+	_TRAINER_EVENT_FIGHT	DAISUKIW_01,msg_middlew1_01_p02_field_r111
+
+	//後ろを向く
+	_SET_OBJ_ANIME	MIDDLEW1_01_FIELD_R111,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_open_battle_house
+
+	_TALK_KEYWAIT	msg_middlew1_01_p03_field_r111
+	_TALK_CLOSE
+
+	//家に入る
+	_SET_OBJ_ANIME	MIDDLEW1_01_FIELD_R111,field_r111_btl_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		MIDDLEW1_01_FIELD_R111
+
+	_CALL			ev_close_battle_house
+
+	//間
+	_SET_OBJ_ANIME	EV_OBJ_SPID,field_r111_btl_anime04
+	_OBJ_ANIME_WAIT
+
+	//まご------------------------------------------------------------
+	_CALL			ev_open_battle_house
+
+	_OBJ_APPEAR		SCHOOLW1_01_FIELD_R111
+
+	//出てくる
+	_SET_OBJ_ANIME	SCHOOLW1_01_FIELD_R111,field_r111_btl_anime02
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_close_battle_house
+
+	_TALK_KEYWAIT	msg_schoolw1_01_p01_field_r111
+	_TRAINER_EVENT_FIGHT	MINI_04,msg_schoolw1_01_p02_field_r111
+
+	//後ろを向く
+	_SET_OBJ_ANIME	SCHOOLW1_01_FIELD_R111,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_open_battle_house
+
+	_TALK_KEYWAIT	msg_schoolw1_01_p03_field_r111
+	_TALK_CLOSE
+
+	//家に入る
+	_SET_OBJ_ANIME	SCHOOLW1_01_FIELD_R111,field_r111_btl_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		SCHOOLW1_01_FIELD_R111
+
+	_CALL			ev_close_battle_house
+
+	//間
+	_SET_OBJ_ANIME	EV_OBJ_SPID,field_r111_btl_anime04
+	_OBJ_ANIME_WAIT
+
+	//婆さん----------------------------------------------------------
+	_CALL			ev_open_battle_house
+
+	_OBJ_APPEAR		OLDWOMAN1_01_FIELD_R111
+
+	//出てくる
+	_SET_OBJ_ANIME	OLDWOMAN1_01_FIELD_R111,field_r111_btl_anime02
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_close_battle_house
+
+	_TALK_KEYWAIT	msg_oldwoman1_01_p01_field_r111
+	_TRAINER_EVENT_FIGHT	EXPERTW_01,msg_oldwoman1_01_p02_field_r111
+
+	_TALK_KEYWAIT	msg_oldwoman1_01_p03_field_r111
+	_TALK_CLOSE
+
+	//後ろを向く
+	_SET_OBJ_ANIME	OLDWOMAN1_01_FIELD_R111,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_open_battle_house
+
+	//家に入る
+	_SET_OBJ_ANIME	OLDWOMAN1_01_FIELD_R111,field_r111_btl_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		OLDWOMAN1_01_FIELD_R111
+
+	_CALL			ev_close_battle_house
+
+	_TALK_OBJ_END
+	_END
+
+//ドアを開く
+ev_open_battle_house:
+	_OPEN_DOOR_ANIME	13,113
+	_DOOR_ANIME_WAIT
+	_RET
+
+//ドアを閉める
+ev_close_battle_house:
+	_CLOSE_DOOR_ANIME	13,113
+	_DOOR_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//家に入る			
+//--------------------------------------------------------------------
+field_r111_btl_anime01:	
+	.byte	AC_WALK_TURN_U	//
+	.byte	AC_WALK_U_1		//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//家から出てくる
+//--------------------------------------------------------------------
+field_r111_btl_anime02:	
+	.byte	AC_WALK_D_1		//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//間を置く
+//--------------------------------------------------------------------
+field_r111_btl_anime04:	
+	.byte	AC_WAIT_16		//
+	.byte	AC_WAIT_16		//
+	.byte	AC_WAIT_16		//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r111
+	_EASY_MSG       msg_kanban_01_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r111
+	_EASY_MSG       msg_kanban_02_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r111
+	_EASY_MSG       msg_kanban_03_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_r111
+	_EASY_MSG       msg_kanban_04_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_r111
+	_EASY_MSG       msg_kanban_05_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*							お得な掲示板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_06_p01_field_r111
+	_EASY_MSG       msg_kanban_06_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_field_r111
+	_EASY_OBJ_MSG	msg_trainerm1_01_p01_field_r111
+	_END
+
+
+/********************************************************************/
+/*							若者男１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm1_01_p01_field_r111
+	_EASY_OBJ_MSG	msg_youngm1_01_p01_field_r111
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_campb_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_01
+	_TRAINER_DATA2	msg_campb_01_01
+	_TRAINER_DATA3	msg_campb_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_01_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_01
+	_TRAINER_DATA2	msg_picnicg_01_01
+	_TRAINER_DATA3	msg_picnicg_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_01_03
+	_END
+
+SCRIPT_LABEL	ev_campb_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_02
+	_TRAINER_DATA2	msg_campb_02_01
+	_TRAINER_DATA3	msg_campb_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_02_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_02
+	_TRAINER_DATA2	msg_picnicg_02_01
+	_TRAINER_DATA3	msg_picnicg_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_02_03
+	_END
+
+SCRIPT_LABEL	ev_iseki_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ISEKI_01
+	_TRAINER_DATA2	msg_iseki_01_01
+	_TRAINER_DATA3	msg_iseki_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_iseki_01
+	_TRAINER_EASY_MSG	msg_iseki_01_03
+	_END
+
+_revenge_iseki_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ISEKI_01
+	_TRAINER_DATA2	msg_iseki_01_04
+	_TRAINER_DATA3	msg_iseki_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_iseki_01_06
+	_END
+
+SCRIPT_LABEL	ev_campb_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_08
+	_TRAINER_DATA2	msg_campb_08_01
+	_TRAINER_DATA3	msg_campb_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_08_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_08
+	_TRAINER_DATA2	msg_picnicg_08_01
+	_TRAINER_DATA3	msg_picnicg_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_08_03
+	_END
+
+SCRIPT_LABEL	ev_karate_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_11
+	_TRAINER_DATA2	msg_karate_11_01
+	_TRAINER_DATA3	msg_karate_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_11_03
+	_END
+	
+SCRIPT_LABEL	ev_elitem_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_08
+	_TRAINER_DATA2	msg_elitem_08_01
+	_TRAINER_DATA3	msg_elitem_08_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_elitem_08
+	_TRAINER_EASY_MSG	msg_elitem_08_03
+	_END
+
+_revenge_elitem_08:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_08
+	_TRAINER_DATA2	msg_elitem_08_04
+	_TRAINER_DATA3	msg_elitem_08_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_08_06
+	_END
+
+SCRIPT_LABEL	ev_elitew_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_06
+	_TRAINER_DATA2	msg_elitew_06_01
+	_TRAINER_DATA3	msg_elitew_06_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_elitew_06
+	_TRAINER_EASY_MSG	msg_elitew_06_03
+	_END
+
+_revenge_elitew_06:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_06
+	_TRAINER_DATA2	msg_elitew_06_04
+	_TRAINER_DATA3	msg_elitew_06_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_06_06
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

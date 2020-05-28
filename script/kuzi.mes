@@ -1,0 +1,238 @@
+// ●ポケモンくじ
+
+// ●受け付け
+// ●開始
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p01_kuzi
+msg_uketuke_01_p01_kuzi:
+	.byte	ko_,ti_,ra_,ha_,spc_,PO_,KE_,MO_,N_,ku_,zi_
+	.byte	CR_
+	.byte	ti_,yyu_,u_,se_,n_,spc_,KO_,bou_,NA_,bou_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,DE_,PA_,bou_,TO_,ni_,spc_,o_,ko_,si_,spc_,i_,ta_,da_,i_,ta_,spc_,ka_,ta_,ni_
+	.byte	CR_
+	.byte	mo_,re_,na_,ku_,spc_,PO_,KE_,MO_,N_,ku_,zi_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,i_,te_,spc_,i_,ta_,da_,i_,te_,spc_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hi_,i_,ta_,spc_,ku_,zi_,no_,spc_,NA_,N_,BA_,bou_,to_
+	.byte	CR_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,I__,D__,ga_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ttu_,te_,i_,ma_,si_,ta_,ra_,spc_,su_,te_,ki_,na_,spc_,si_,yyo_,u_,hi_,n_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	PU_,RE_,ZE_,N_,TO_,spc_,i_,ta_,si_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ku_,zi_,wo_,spc_,hi_,ka_,re_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●すでにくじを引いた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p02_kuzi
+msg_uketuke_01_p02_kuzi:
+	.byte	ma_,ta_,spc_,a_,si_,ta_,spc_,i_,ko_,u_
+	.byte	CR_
+	.byte	o_,ko_,si_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p03_kuzi
+msg_uketuke_01_p03_kuzi:
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,o_,ko_,si_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p04_kuzi
+msg_uketuke_01_p04_kuzi:
+	.byte	de_,ha_,spc_,ku_,zi_,wo_,spc_,hi_,i_,te_,spc_,ku_,da_,sa_,i_
+	.byte	CR_
+	.byte	tenten_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●ウェイト手打ち
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p20_kuzi
+msg_uketuke_01_p20_kuzi:
+	.byte	de_,ha_,spc_,ku_,zi_,wo_,spc_,hi_,i_,te_,spc_,ku_,da_,sa_,i_
+	.byte	CR_
+	.byte	tenten_,CTRL_,C_WAIT_,0x39,tenten_,CTRL_,C_WAIT_,0x39,tenten_,CTRL_,C_WAIT_,0x39
+	.byte	EOM_
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●「はい」続き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p05_kuzi
+msg_uketuke_01_p05_kuzi:
+	.byte	ku_,zi_,no_,spc_,NA_,N_,BA_,bou_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	NA_,N_,BA_,bou_,ga_,spc_,a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,I__,D__,to_
+	.byte	CR_
+	.byte	i_,ttu_,ti_,si_,te_,i_,ru_,ka_,spc_,o_,si_,ra_,be_,spc_,i_,ta_,si_,ma_,su_,no_,de_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,si_,yyo_,u_,spc_,o_,ma_,ti_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●当たり(手持ち)
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p06_kuzi
+msg_uketuke_01_p06_kuzi:
+	.byte	o_,me_,de_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ga_,spc_,tu_,re_,te_,i_,ru_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ti_,yya_,n_,no_,spc_,I__,D__,ga_,spc_,mi_,go_,to_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ku_,zi_,no_,spc_,NA_,N_,BA_,bou_,to_,spc_,i_,ttu_,ti_,spc_,si_,ma_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●当たり(パソコン)
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p07_kuzi
+msg_uketuke_01_p07_kuzi:
+	.byte	o_,me_,de_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,SO_,KO_,N_,ni_,spc_,a_,zu_,ke_,te_,i_,ru_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ti_,yya_,n_,no_,spc_,I__,D__,ga_,spc_,mi_,go_,to_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ku_,zi_,no_,spc_,NA_,N_,BA_,bou_,to_,spc_,i_,ttu_,ti_,spc_,si_,ma_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●はずれ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p08_kuzi
+msg_uketuke_01_p08_kuzi:
+	.byte	za_,n_,ne_,n_,de_,si_,ta_
+	.byte	CR_
+	.byte	su_,be_,te_,spc_,ha_,zu_,re_,no_,spc_,yo_,u_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●２桁当たり
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p09_kuzi
+msg_uketuke_01_p09_kuzi:
+	.byte	n2_,KE_,TA_,spc_,a_,ttu_,te_,spc_,i_,ma_,si_,ta_,no_,de_
+	.byte	CR_
+	.byte	n3_,to_,u_,spc_,de_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,sa_,si_,a_,ge_,ma_,su_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●受け付け
+// ●３桁当たり
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p10_kuzi
+msg_uketuke_01_p10_kuzi:
+	.byte	n3_,KE_,TA_,spc_,a_,ttu_,te_,spc_,i_,ma_,si_,ta_,no_,de_
+	.byte	CR_
+	.byte	n2_,to_,u_,spc_,de_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,sa_,si_,a_,ge_,ma_,su_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●４桁当たり
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p11_kuzi
+msg_uketuke_01_p11_kuzi:
+	.byte	n4_,KE_,TA_,spc_,a_,ttu_,te_,spc_,i_,ma_,si_,ta_,no_,de_
+	.byte	CR_
+	.byte	n1_,to_,u_,spc_,de_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,sa_,si_,a_,ge_,ma_,su_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●受け付け
+// ●５桁当たり
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p12_kuzi
+msg_uketuke_01_p12_kuzi:
+	.byte	na_,n_,to_,spc_,n5_,KE_,TA_,spc_,su_,be_,te_
+	.byte	CR_
+	.byte	a_,ttu_,te_,spc_,i_,ma_,si_,ta_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ku_,to_,u_,de_,su_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,sa_,si_,a_,ge_,ma_,su_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●どうぐがいっぱい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p13_kuzi
+msg_uketuke_01_p13_kuzi:
+	.byte	tenten_,tenten_,tenten_,a_,ra_,hate_
+	.byte	CR_
+	.byte	do_,u_,gu_,ga_,spc_,i_,ttu_,pa_,i_,no_,spc_,yo_,u_,de_,su_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,gu_,wo_,spc_,se_,i_,ri_,si_,te_,ka_,ra_,spc_,mo_,u_,i_,ti_,do_
+	.byte	CR_
+	.byte	o_,ko_,si_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●もう一度アイテムを渡す
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p14_kuzi
+msg_uketuke_01_p14_kuzi:
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,spc_,de_,su_,ne_
+	.byte	CR_
+	.byte	o_,ma_,ti_,si_,te_,spc_,o_,ri_,ma_,si_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,si_,yyo_,u_,hi_,n_,wo_
+	.byte	CR_
+	.byte	o_,wa_,ta_,si_,spc_,i_,ta_,si_,ma_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●受け付け
+// ●終了
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_uketuke_01_p15_kuzi
+msg_uketuke_01_p15_kuzi:
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,o_,ko_,si_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+

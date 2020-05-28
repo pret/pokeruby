@@ -1,0 +1,44 @@
+// ●ルネシティ　民家４（街の東側・上から２番目）
+
+
+// ●おじさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c108_r0501
+msg_middlem1_01_p01_c108_r0501:
+	.byte	i_,i_,ko_,to_,wo_,spc_,o_,si_,e_,te_,ya_,ro_,u_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,a_,ta_,ri_,no_,spc_,u_,mi_,no_,spc_,so_,ko_,ni_,ha_
+	.byte	CR_
+	.byte	ko_,da_,i_,no_,spc_,i_,se_,ki_,ga_,spc_,a_,ru_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hi_,yyo_,ttu_,to_,si_,ta_,ra_,spc_,mu_,ka_,si_,no_,spc_,o_,ta_,ka_,ra_,ga_
+	.byte	CR_
+	.byte	za_,ku_,za_,ku_,spc_,mi_,tu_,ka_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c108_r0501
+msg_woman2_01_p01_c108_r0501:
+	.byte	ta_,ka_,ra_,mo_,no_,spc_,ka_,aa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ru_,to_,spc_,i_,i_,ke_,do_
+	.byte	CR_
+	.byte	so_,u_,de_,na_,ku_,te_,mo_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,te_,i_,wo_,spc_,o_,sa_,n_,po_,spc_,na_,n_,te_,spc_,su_,nakag_,te_,nakag_,ki_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・マリルリ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mariruri_01_p01_c108_r0501
+msg_mariruri_01_p01_c108_r0501:
+	.byte	MA_,RI_,RU_,RI_,kako2_,ma_,ru_,ri_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にマリルリの鳴き声をならす

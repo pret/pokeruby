@@ -1,0 +1,57 @@
+//MapEditNH Ver.3.50 *.evt -> *.sxy Convert.
+#define OBJNUM_C109_R0205	0
+#define EXITNUM_C109_R0205	4
+#define POSNUM_C109_R0205	0
+#define BGNUM_C109_R0205	0
+
+const SXY_CONNECT	EXIT_c109_r0205[] =
+{
+	{
+		0x0005,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		C109_R0206_DOOR01,		//Door ID
+		C109_R0206,			//Map ID
+		C109,				//Field ID
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		C109_R0101_MAT01,		//Door ID
+		C109_R0101,			//Map ID
+		C109,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		C109_R0206_DOOR01,		//Door ID
+		C109_R0206,			//Map ID
+		C109,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		C109_R0206_DOOR01,		//Door ID
+		C109_R0206,			//Map ID
+		C109,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c109_r0205_sxy_data =
+{
+OBJNUM_C109_R0205,			// field obj max
+EXITNUM_C109_R0205,		// exit max
+POSNUM_C109_R0205,			// pos event max
+BGNUM_C109_R0205,			// bg event max
+NULL,			// field obj data
+EXIT_c109_r0205,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

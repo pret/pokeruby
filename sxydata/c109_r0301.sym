@@ -1,0 +1,7 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define DAIGO_01_C109_R0301	1
+
+//Exit ID = 1
+#define C109_R0301_MAT01	0

@@ -1,0 +1,12 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define SAFARI_ONESAN1_01	1
+#define SAFARI_ONISAN1_01	2
+#define SAFARI_UKETUKE_01	3
+
+//Exit ID = 4
+#define R121_R0101_MAT03	0
+#define R121_R0101_MAT04	1
+#define R121_R0101_MAT01	2
+#define R121_R0101_MAT02	3

@@ -1,0 +1,43 @@
+// ●ヒワマキシティ　民家１（街の北・左から３番目）
+
+
+// ●マニア１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_c105_r0401
+msg_freak1_01_p01_c105_r0401:
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,de_
+	.byte	CR_
+	.byte	o_,mo_,i_,da_,si_,ta_,spc_,ko_,to_,ga_,spc_,a_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	me_,zu_,ra_,si_,i_,spc_,i_,si_,wo_,spc_,sa_,ga_,si_,te_,ru_,to_,ki_
+	.byte	CR_
+	.byte	DA_,I_,GO_,ttu_,te_,spc_,TO_,RE_,bou_,NA_,bou_,to_,spc_,de_,a_,ttu_,ta_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	a_,i_,tu_,no_,spc_,PO_,KE_,MO_,N_,spc_,su_,go_,i_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	me_,zu_,ra_,si_,i_,spc_,da_,ke_,de_,na_,ku_
+	.byte	CR_
+	.byte	o_,so_,ro_,si_,i_,ho_,do_,spc_,ki_,ta_,e_,ra_,re_,te_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,ka_,si_,ta_,ra_,spc_,ko_,no_,spc_,ma_,ti_,no_
+	.byte	CR_
+	.byte	ZI_,MU_,RI_,bou_,DA_,bou_,yo_,ri_,mo_,spc_,tu_,yo_,i_,ka_,mo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●仮メッセージ
+
+// ●学生男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p01_c105_r0401
+msg_schoolm1_01_p01_c105_r0401:
+	.byte	ki_,mi_,no_,spc_,mo_,ttu_,te_,i_,ru_,spc_,so_,re_,spc_,na_,ni_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	he_,bou_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,spc_,ttu_,te_,i_,u_,n_,da_,hate_
+	.byte	CR_
+	.byte	su_,go_,i_,ne_,e_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,10 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 4
+#define SAFARI_DEGUTI_01	1
+#define SAFARI1_05_P01	2
+#define SAFARI1_06_P01	3
+#define SAFARI1_11_P01	4
+
+//Exit ID = 1
+#define PARK_SAFARI04_DOOR01	0

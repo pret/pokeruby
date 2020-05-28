@@ -1,0 +1,26 @@
+// ●ムロタウン　ポケモンセンター１Ｆ
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_t103_pc01
+msg_middlew1_01_p01_t103_pc01:
+	.byte	ma_,ti_,no_,spc_,ha_,zu_,re_,no_,spc_,i_,si_,no_,do_,u_,ku_,tu_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,i_,si_,ga_,spc_,a_,ru_,ttu_,te_,spc_,ki_,i_,ta_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_t103_pc01
+msg_trainerm1_01_p01_t103_pc01:
+	.byte	tu_,ka_,re_,te_,spc_,ta_,ta_,ka_,u_,ko_,to_,no_,spc_,de_,ki_,na_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,da_,ttu_,te_,spc_,hi_,de_,n_,to_,spc_,i_,wa_,re_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,za_,ha_,spc_,tu_,ka_,u_,ko_,to_,ga_,spc_,de_,ki_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

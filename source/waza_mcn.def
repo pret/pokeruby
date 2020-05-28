@@ -1,0 +1,72 @@
+//========================================================================================
+//									技マシンのテーブル
+//						pokelist.c から移動　2002/03/15 by nakahiro
+//========================================================================================
+static const u16 MachineNo[] = {
+
+	// 技マシン
+	WAZANO_KIAIPANTI,			// No.01 : きあいパンチ
+	WAZANO_DORAGONKUROO,		// No.02 : ドラゴンクロー
+	WAZANO_MIZUNOHADOU,			// No.03 : みずのはどう
+	WAZANO_MEISOU,				// No.04 : めいそう
+	WAZANO_HOERU,				// No.05 : ほえる
+	WAZANO_DOKUDOKU,			// No.06 : どくどく
+	WAZANO_ARARE,				// No.07 : あられ
+	WAZANO_BIRUDOAPPU,			// No.08 : ビルドアップ
+	WAZANO_TANEMASINGAN,		// No.09 : タネマシンガン
+	WAZANO_MEZAMERUPAWAA,		// No.10 : めざめるパワー
+
+	WAZANO_NIHONBARE,			// No.11 : にほんばれ
+	WAZANO_TYOUHATU,			// No.12 : ちょうはつ
+	WAZANO_REITOUBIIMU,			// No.13 : れいとうビーム
+	WAZANO_HUBUKI,				// No.14 : ふぶき
+	WAZANO_HAKAIKOUSEN,			// No.15 : はかいこうせん
+	WAZANO_HIKARINOKABE,		// No.16 : ひかりのかべ
+	WAZANO_MAMORU,				// No.17 : まもる
+	WAZANO_AMAGOI,				// No.18 : あまごい
+	WAZANO_GIGADOREIN,			// No.19 : ギガドレイン
+	WAZANO_SINPINOMAMORI,		// No.20 : しんぴのまもり
+
+	WAZANO_YATUATARI,			// No.21 : やつあたり
+	WAZANO_SOORAABIIMU,			// No.22 : ソーラービーム
+	WAZANO_AIANTEERU,			// No.23 : アイアンテール
+	WAZANO_10MANBORUTO,			// No.24 : １０まんボルト
+	WAZANO_KAMINARI,			// No.25 : かみなり
+	WAZANO_ZISIN,				// No.26 : じしん
+	WAZANO_ONGAESI,				// No.27 : おんがえし
+	WAZANO_ANAWOHORU,			// No.28 : あなをほる
+	WAZANO_SAIKOKINESISU,		// No.29 : サイコキネシス
+	WAZANO_SYADOOBOORU,			// No.30 : シャドーボール
+
+	WAZANO_KAWARAWARI,			// No.31 : かわらわり
+	WAZANO_KAGEBUNSIN,			// No.32 : かげぶんしん
+	WAZANO_RIHUREKUTAA,			// No.33 : リフレクター
+	WAZANO_DENGEKIHA,			// No.34 : でんげきは
+	WAZANO_KAENHOUSYA,			// No.35 : かえんほうしゃ
+	WAZANO_HEDOROBAKUDAN,		// No.36 : ヘドロばくだん
+	WAZANO_SUNAARASI,			// No.37 : すなあらし
+	WAZANO_DAIMONZI,			// No.38 : だいもんじ
+	WAZANO_GANSEKIHUUZI,		// No.39 : がんせきふうじ
+	WAZANO_TUBAMEGAESI,			// No.40 : つばめがえし
+
+	WAZANO_ITYAMON,				// No.41 : いちゃもん
+	WAZANO_KARAGENKI,			// No.42 : からげんき
+	WAZANO_HIMITUNOTIKARA,		// No.43 : ひみつのちから
+	WAZANO_NEMURU,				// No.44 : ねむる
+	WAZANO_MEROMERO,			// No.45 : メロメロ
+	WAZANO_DOROBOU,				// No.46 : どろぼう
+	WAZANO_HAGANENOTUBASA,		// No.47 : はがねのつばさ
+	WAZANO_SUKIRUSUWAPPU,		// No.48 : スキルスワップ
+	WAZANO_YOKODORI,			// No.49 : よこどり
+	WAZANO_OOBAAHIITO,			// No.50 : オーバーヒート
+
+	// 秘伝マシン
+	WAZANO_IAIGIRI,				// Ex.01 : いあいぎり
+	WAZANO_SORAWOTOBU,			// Ex.02 : そらをとぶ
+	WAZANO_NAMINORI,			// Ex.03 : なみのり
+	WAZANO_KAIRIKI,				// Ex.04 : かいりき
+	WAZANO_HURASSYU,			// Ex.05 : フラッシュ
+	WAZANO_IWAKUDAKI,			// Ex.06 : いわくだき
+	WAZANO_TAKINOBORI,			// Ex.07 : たきのぼり
+	WAZANO_DAIBINGU,			// Ex.08 : ダイビング
+};

@@ -1,0 +1,63 @@
+
+//====================================================================
+//							field_r133
+//====================================================================
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r133_event_data
+EVENT_DATA_END
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_20
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_20
+	_TRAINER_DATA2	msg_swimmerm_20_01
+	_TRAINER_DATA3	msg_swimmerm_20_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_20_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_20
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_20
+	_TRAINER_DATA2	msg_swimmerw_20_01
+	_TRAINER_DATA3	msg_swimmerw_20_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_20_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_21
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_21
+	_TRAINER_DATA2	msg_swimmerw_21_01
+	_TRAINER_DATA3	msg_swimmerw_21_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_21_03
+	_END
+
+SCRIPT_LABEL	ev_elitem_18
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_18
+	_TRAINER_DATA2	msg_elitem_18_01
+	_TRAINER_DATA3	msg_elitem_18_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_18_03
+	_END
+
+SCRIPT_LABEL	ev_bird_17
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_17
+	_TRAINER_DATA2	msg_bird_17_01
+	_TRAINER_DATA3	msg_bird_17_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_17_03
+	_END
+

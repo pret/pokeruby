@@ -1,0 +1,89 @@
+@===================================================================
+@
+@	秘伝技・怪力のスクリプト
+@
+@	2002/04/03 by nakahiro
+@===================================================================
+
+	.GLOBAL	talk_kairiki_obj
+	.GLOBAL	pokelist_kairiki_start
+
+//---------------------------------------------------------------
+//	話かけから
+//---------------------------------------------------------------
+talk_kairiki_obj:
+
+	_TALK_START
+
+	// バッジを持っていない
+	_IF_FLAGOFF_JUMP	SYS_BATCH04_GET, kairiki_no_poke
+
+	// 怪力をすでに使用している
+	_IF_FLAGON_JUMP		SYS_USE_WAZA_KAIRIKI, kairiki_on
+
+	// 怪力を使えるポケモンがいるか
+	_WAZA_CHECK	WAZANO_KAIRIKI
+	_IFVAL_JUMP	ANSWORK, EQ, 6, kairiki_no_poke		//「いいえ」
+	_SET_FE_WORK	0, ANSWORK
+
+	// 怪力を使うか
+	_TALK_YES_NO	fe_kairiki_msg00
+	_IFVAL_JUMP	ANSWORK, EQ, 0, talk_kairiki_end	//「いいえ」
+
+	_TALK_CLOSE
+
+	_SET_FLD_EFF	40
+
+	_STOP_SCRIPT
+	_JUMP	kairiki_set
+
+	_END
+
+//---------------------------------------------------------------
+//	ポケモンリストから
+//---------------------------------------------------------------
+pokelist_kairiki_start:
+
+	_TALK_START
+
+	_SET_FLD_EFF	40
+
+	_STOP_SCRIPT
+	_JUMP	kairiki_set
+
+	_END
+
+//---------------------------------------------------------------
+//	怪力発動
+//---------------------------------------------------------------
+kairiki_set:
+	_FLAG_SET	SYS_USE_WAZA_KAIRIKI	// 怪力フラグセット
+
+	_EASY_MSG	fe_kairiki_msg01
+
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//	怪力を使えるポケモンがいない
+//---------------------------------------------------------------
+kairiki_no_poke:
+	_EASY_MSG	fe_kairiki_msg02
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//	怪力をすでに使用している
+//---------------------------------------------------------------
+kairiki_on:
+	_EASY_MSG	fe_kairiki_msg03
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//	終了
+//---------------------------------------------------------------
+talk_kairiki_end:
+	_TALK_CLOSE
+	_TALK_END
+	_END

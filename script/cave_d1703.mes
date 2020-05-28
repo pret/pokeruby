@@ -1,0 +1,18 @@
+// ●座礁船
+// ●イベント前半部分
+
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_cave_d1703
+msg_gentlem1_01_p01_cave_d1703:
+	.byte	ko_,u_,i_,ttu_,ta_,spc_,hu_,ne_,ha_,spc_,me_,zu_,ra_,si_,i_,no_,de_
+	.byte	CR_
+	.byte	ke_,n_,ga_,ku_,spc_,si_,te_,o_,ru_,no_,de_,su_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,MU_,HU_,MU_,tenten_,tenten_
+	.byte	CR_
+	.byte	ho_,ka_,ni_,mo_,spc_,he_,ya_,ga_,spc_,a_,ri_,so_,u_,de_,su_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

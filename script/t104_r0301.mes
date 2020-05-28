@@ -1,0 +1,29 @@
+// ●フエンタウン　民家
+
+
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_t104_r0301
+msg_oldman2_01_p01_t104_r0301:
+	.byte	o_,n_,se_,n_,de_,spc_,TA_,MA_,GO_,wo_,spc_,a_,ta_,ta_,me_,te_,i_,ru_
+	.byte	CR_
+	.byte	ba_,a_,sa_,n_,ka_,ra_,spc_,ki_,i_,ta_,n_,zi_,yya_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,da_,te_,ya_,ni_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	n2_,hi_,ki_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,a_,zu_,ke_,ta_,ra_,no_
+	.byte	SCROLL_WAIT_
+	.byte	na_,n_,to_,spc_,TA_,MA_,GO_,ga_,spc_,mi_,tu_,ka_,ttu_,ta_,so_,u_,zi_,yya_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・ジグザグマ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_jiguma_01_p01_t104_r0301
+msg_jiguma_01_p01_t104_r0301:
+	.byte	ZI_,GU_,ZA_,GU_,MA_,kako2_,pu_,si_,yyu_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にジグザグマの鳴き声をならす

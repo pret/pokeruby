@@ -1,0 +1,86 @@
+//MapEditNH Ver.3.50 *.evt -> *.sxy Convert.
+#define OBJNUM_C107_R0801	1
+#define EXITNUM_C107_R0801	3
+#define POSNUM_C107_R0801	0
+#define BGNUM_C107_R0801	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_oldman1_01_p01_c107_r0801[];
+
+//BG_SCRIPT
+extern const u8	ev_tobira_01_p01_c107_r0801[];
+
+const evObjData	OBJ_c107_r0801[] =
+{
+	{
+		OLDMAN1_01_C107_R0801,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman1_01_p01_c107_r0801,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c107_r0801[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_C107_DOOR10,		//Door ID
+		FIELD_C107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_C107_DOOR10,		//Door ID
+		FIELD_C107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C107_R0802_STAIR01,		//Door ID
+		C107_R0802,			//Map ID
+		C107,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c107_r0801[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tobira_01_p01_c107_r0801,		//Script
+	},
+
+};
+
+const SXY_DATA	c107_r0801_sxy_data =
+{
+OBJNUM_C107_R0801,			// field obj max
+EXITNUM_C107_R0801,		// exit max
+POSNUM_C107_R0801,			// pos event max
+BGNUM_C107_R0801,			// bg event max
+OBJ_c107_r0801,			// field obj data
+EXIT_c107_r0801,			// exit data
+NULL,			// pos event data
+BG_c107_r0801,				// bg event data
+};

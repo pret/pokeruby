@@ -1,0 +1,93 @@
+//====================================================================
+//							c104_r0501
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c104_r0501_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							女性									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_c104_r0501
+	_TALK_OBJ_START
+
+	//すでに交換した
+	_IF_FLAGON_JUMP	FE_KOUKAN_01,already_koukan_01
+
+	//テーブルの参照番号(現状０のみ)
+	_LDVAL			TMPWK0,0
+	_LDWK			PARAM0,TMPWK0
+
+	//交換の準備
+	_FUNC_CALL		ANSWORK,KOUKAN_JUNBI
+	_LDWK			TMPWK1,ANSWORK
+
+	_TALK_YES_NO	msg_boya1_01_p01_c104_r0501
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_koukan_01_c104_r0501
+
+	//ポケモンを選ぶ画面
+	//PARAM0に入る
+	_PROGRAM		NAME_POKE_LIST
+	_STOP_SCRIPT
+	_LDWK			TMPWK2,PARAM0
+
+	//_IFVAL_JUMP	PARAM0,NE,0xff,yes_gentlemen_01_p03_c102_r0301//選んだ
+	_IFVAL_JUMP		PARAM0,EQ,0xff,no_koukan_01_c104_r0501	//「いいえ」
+
+	//手持ちの何番かからポケモンナンバーを取得する
+	_LDWK			PARAM1,TMPWK2
+	_FUNC_CALL		ANSWORK,TEMOTI_MONSNO
+	_LDWK			TMPWK3,ANSWORK
+
+	//条件に合うポケモンを選んだか
+	_IFWK_JUMP		ANSWORK,NE,TMPWK1,no_koukan_02_c104_r0501	//選んだポケモンが違う
+
+	//ポケモン交換
+	_LDWK			PARAM0,TMPWK0
+	_LDWK			PARAM1,TMPWK2
+	_PROGRAM		KOUKAN_POKE
+	_PROGRAM		KOUKAN_POKEDEMO
+	_STOP_SCRIPT
+	
+	_TALK_KEYWAIT	msg_boya1_01_p02_c104_r0501
+	_FLAG_SET		FE_KOUKAN_01
+
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_koukan_01_c104_r0501:
+	_TALK_KEYWAIT	msg_boya1_01_p04_c104_r0501
+	_TALK_OBJ_END
+	_END
+	
+//選んだポケモンが違う
+no_koukan_02_c104_r0501:
+	_GET_MONSNAME	0,TMPWK1
+	_TALK_KEYWAIT	msg_boya1_01_p03_c104_r0501
+	_TALK_OBJ_END
+	_END
+
+//交換終了後
+already_koukan_01:
+	_TALK_KEYWAIT	msg_boya1_01_p05_c104_r0501
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							山男									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_hill1_01_p01_c104_r0501
+	_EASY_OBJ_MSG	msg_hill1_01_p01_c104_r0501
+	_END
+
+

@@ -1,0 +1,91 @@
+// ●座礁船
+// ●イベント前半部分
+
+
+// ▼d1704----------------------------------
+// ●ふなのり０７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_07_01
+msg_sailor_07_01:
+	.byte	hu_,na_,no_,ri_,ha_,spc_,hu_,ne_,ni_,spc_,no_,ru_,to_,ki_
+	.byte	CR_
+	.byte	ka_,na_,ra_,zu_,spc_,PO_,KE_,MO_,N_,wo_,spc_,mo_,ttu_,te_,i_,ru_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,i_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ふなのり０７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_07_02
+msg_sailor_07_02:
+	.byte	ko_,ri_,yya_,spc_,ma_,i_,ttu_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ふなのり０７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sailor_07_03
+msg_sailor_07_03:
+	.byte	hu_,na_,zo_,ko_,ga_,spc_,mi_,zu_,no_,spc_,na_,ka_,ni_
+	.byte	CR_
+	.byte	si_,zu_,n_,de_,spc_,i_,ru_,n_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,mi_,zu_,ni_,spc_,mo_,gu_,re_,ru_,spc_,wa_,za_,wo_
+	.byte	CR_
+	.byte	tu_,ka_,e_,ta_,ra_,spc_,sa_,ki_,ni_,spc_,su_,su_,me_,ru_,n_,da_,ga_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●浮き輪坊や１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_beachboy1_01_p01_cave_d1704
+msg_beachboy1_01_p01_cave_d1704:
+	.byte	wa_,bou_,i_,gyoe_
+	.byte	CR_
+	.byte	hu_,ne_,spc_,da_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●倉庫の扉
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p01_cave_d1704
+msg_door_01_p01_cave_d1704:
+	.byte	KA_,GI_,ga_,spc_,ka_,ka_,ttu_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	to_,bi_,ra_,ni_,ha_,spc_,so_,u_,ko_,spc_,to_,spc_,ka_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●倉庫のカギを持っていて、
+// 　扉に話しかけたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p02_cave_d1704
+msg_door_01_p02_cave_d1704:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	so_,u_,ko_,no_,KA_,GI_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,si_,ko_,n_,da_,spc_,KA_,GI_,ha_,spc_,nu_,ke_,na_,ku_,na_,ttu_,ta_,ga_
+	.byte	CR_
+	.byte	to_,bi_,ra_,ha_,spc_,hi_,ra_,i_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●扉を開けた後で、
+// 　扉に話しかけたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p03_cave_d1704
+msg_door_01_p03_cave_d1704:
+	.byte	to_,bi_,ra_,ha_,spc_,a_,i_,te_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

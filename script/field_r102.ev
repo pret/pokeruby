@@ -1,0 +1,102 @@
+//====================================================================
+//							field_r102
+//						フィールド・ロード102
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r102_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							坊や2									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya2_01_p01_field_r102
+	_EASY_OBJ_MSG	msg_boya2_01_p01_field_r102
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r102
+	_EASY_MSG       msg_kanban_01_p01_field_r102
+	_END
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r102
+	_EASY_MSG       msg_kanban_02_p01_field_r102
+	_END
+
+
+/********************************************************************/
+/*							少年１									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_field_r102
+	_EASY_OBJ_MSG	msg_boy1_01_p01_field_r102
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_tanpan_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_01
+	_TRAINER_DATA2	msg_tanpan_01_01
+	_TRAINER_DATA3	msg_tanpan_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_tanpan_01
+	_TRAINER_EASY_MSG	msg_tanpan_01_03
+	_END
+
+_revenge_tanpan_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_01
+	_TRAINER_DATA2	msg_tanpan_01_04
+	_TRAINER_DATA3	msg_tanpan_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_01_06
+	_END
+
+SCRIPT_LABEL	ev_mushi_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_01
+	_TRAINER_DATA2	msg_mushi_01_01
+	_TRAINER_DATA3	msg_mushi_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_01_03
+	_END
+
+SCRIPT_LABEL	ev_mini_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MINI_01
+	_TRAINER_DATA2	msg_mini_01_01
+	_TRAINER_DATA3	msg_mini_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mini_01_03
+	_END
+
+SCRIPT_LABEL	ev_tanpan_16
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_16
+	_TRAINER_DATA2	msg_tanpan_16_01
+	_TRAINER_DATA3	msg_tanpan_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_16_03
+	_END
+

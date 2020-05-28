@@ -1,0 +1,217 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_T105	4
+#define EXITNUM_FIELD_T105	5
+#define POSNUM_FIELD_T105	0
+#define BGNUM_FIELD_T105	8
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_girl1_01_p01_field_t105[];
+extern const u8	ev_oldman1_01_p01_field_t105[];
+extern const u8	ev_gentlem1_01_p01_field_t105[];
+extern const u8	ev_ruriri_01_p01_field_t105[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_fdshop_01[];
+extern const u8	ev_kanban_pc_01[];
+extern const u8	ev_kanban_01_p01_field_t105[];
+extern const u8	ev_kanban_pc_01[];
+extern const u8	ev_kanban_02_p01_field_t105[];
+extern const u8	ev_kanban_fdshop_01[];
+extern const u8	ev_kanban_03_p01_field_t105[];
+
+const evObjData	OBJ_field_t105[] =
+{
+	{
+		GIRL1_01_FIELD_T105,		//OBJ ID
+		GIRL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_girl1_01_p01_field_t105,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OLDMAN1_01_FIELD_T105,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_HON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman1_01_p01_field_t105,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		GENTLEM1_01_FIELD_T105,		//OBJ ID
+		GENTLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x000f,		//Ypos
+		0x03,		//Height
+		MV_VON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_gentlem1_01_p01_field_t105,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		RURIRI_01_FIELD_T105,		//OBJ ID
+		RURIRI,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ruriri_01_p01_field_t105,		//Event Lavel
+		FV_POKE_01_FIELD_T105,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_field_t105[] =
+{
+	{
+		0x000f,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		T105_FS01_MAT01,		//Door ID
+		T105_FS01,			//Map ID
+		T105,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		T105_R0101_MAT01,		//Door ID
+		T105_R0101,			//Map ID
+		T105,				//Field ID
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		T105_PC01_MAT01,		//Door ID
+		T105_PC01,			//Map ID
+		T105,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0011,		//Ypos
+		0x00,		//Height
+		T105_R0201_MAT01,		//Door ID
+		T105_R0201,			//Map ID
+		T105,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		T105_R0301_MAT01,		//Door ID
+		T105_R0301,			//Map ID
+		T105,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_t105[] =
+{
+	{
+		0x0010,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_fdshop_01,		//Script
+	},
+
+	{
+		0x000f,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_pc_01,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_field_t105,		//Script
+	},
+
+	{
+		0x0010,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_pc_01,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x000b,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_02_p01_field_t105,		//Script
+	},
+
+	{
+		0x0011,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kanban_fdshop_01,		//Script
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_03_p01_field_t105,		//Script
+	},
+
+	{
+		0x0002,		//Xpos
+		0x000f,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		kinnotama_28,		//Script
+	},
+
+};
+
+const SXY_DATA	field_t105_sxy_data =
+{
+OBJNUM_FIELD_T105,			// field obj max
+EXITNUM_FIELD_T105,		// exit max
+POSNUM_FIELD_T105,			// pos event max
+BGNUM_FIELD_T105,			// bg event max
+OBJ_field_t105,			// field obj data
+EXIT_field_t105,			// exit data
+NULL,			// pos event data
+BG_field_t105,				// bg event data
+};

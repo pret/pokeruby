@@ -1,0 +1,12 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 6
+#define TR_AQUAM_20	1
+#define TR_AQUAM_21	2
+#define TR_AQUAW_02	3
+#define YOUNGM1_01_R119_R0102	4
+#define STUDYM1_01_R119_R0102	5
+#define YOUNGM1_02_R119_R0102	6
+
+//Exit ID = 1
+#define R119_R0102_STAIR01	0

@@ -1,0 +1,529 @@
+//====================================================================
+//						インタビュー＆カメラマン
+//====================================================================
+
+/********************************************************************/
+//						強制スクリプト処理
+/********************************************************************/
+change_camera_obj:
+	//ループ用クリア
+	_TR_FLAG_RESET	INTERVIEWER_06
+
+	_FUNC_CALL		ANSWORK,GET_CAMERA_VS
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case0_camera_obj
+	_CASEJUMP		1,case1_camera_obj
+	_CASEJUMP		2,case2_camera_obj
+	_CASEJUMP		3,case3_camera_obj
+	_CASEJUMP		4,case4_camera_obj
+	_CASEJUMP		5,case5_camera_obj
+	_CASEJUMP		6,case6_camera_obj
+	_CASEJUMP		7,case7_camera_obj
+	_CASEJUMP		8,case8_camera_obj
+	_END
+
+//r111	(0回)
+case0_camera_obj:
+	_CALL		flag_reset_camera_01
+	_RET
+
+//r118	(1回)
+case1_camera_obj:
+	_CALL		flag_reset_camera_02
+	_CALL		flag_set_camera_01
+	_RET
+
+//r120	(2回)
+case2_camera_obj:
+	_CALL		flag_reset_camera_03
+	_CALL		flag_set_camera_02
+	_RET
+
+//r111	(3回)
+case3_camera_obj:
+	_CALL		flag_reset_camera_04
+	_CALL		flag_set_camera_03
+	_RET
+
+//r118	(4回)
+case4_camera_obj:
+	_CALL		flag_reset_camera_05
+	_CALL		flag_set_camera_04
+	_RET
+
+//r120	(5回)
+case5_camera_obj:
+	_CALL		flag_reset_camera_06
+	_CALL		flag_set_camera_05
+	_RET
+
+//r111	(6回)
+case6_camera_obj:
+	_CALL		flag_reset_camera_07
+	_CALL		flag_set_camera_06
+	_RET
+
+//r118	(7回)
+case7_camera_obj:
+	_CALL		flag_reset_camera_08
+	_CALL		flag_set_camera_07
+	_RET
+
+//r120	(8回)
+case8_camera_obj:
+	_CALL		flag_reset_camera_06
+	_CALL		flag_set_camera_08
+	_RET
+
+//--------------------------------------------------------------------
+//						フラグセット・リセット
+//--------------------------------------------------------------------
+//r111	(0回)
+flag_set_camera_01:
+	_FLAG_SET		FV_INTERVW1_01_CAMERA
+	_RET
+
+flag_reset_camera_01:
+	_FLAG_RESET		FV_INTERVW1_01_CAMERA
+	_RET
+
+//r118	(1回)
+flag_set_camera_02:
+	_FLAG_SET		FV_INTERVW1_02_CAMERA
+	_RET
+
+flag_reset_camera_02:
+	_FLAG_RESET		FV_INTERVW1_02_CAMERA
+	_RET
+
+//r120	(2回)
+flag_set_camera_03:
+	_FLAG_SET		FV_INTERVW1_03_CAMERA
+	_RET
+
+flag_reset_camera_03:
+	_FLAG_RESET		FV_INTERVW1_03_CAMERA
+	_RET
+
+//r111	(3回)
+flag_set_camera_04:
+	_FLAG_SET		FV_INTERVW1_04_CAMERA
+	_RET
+
+flag_reset_camera_04:
+	_FLAG_RESET		FV_INTERVW1_04_CAMERA
+	_RET
+
+//r118	(4回)
+flag_set_camera_05:
+	_FLAG_SET		FV_INTERVW1_05_CAMERA
+	_RET
+
+flag_reset_camera_05:
+	_FLAG_RESET		FV_INTERVW1_05_CAMERA
+	_RET
+
+//r120	(5回)
+flag_set_camera_06:
+	_FLAG_SET		FV_INTERVW1_06_CAMERA
+	_RET
+
+flag_reset_camera_06:
+	_FLAG_RESET		FV_INTERVW1_06_CAMERA
+	_RET
+
+//r111	(6回)
+flag_set_camera_07:
+	_FLAG_SET		FV_INTERVW1_07_CAMERA
+	_RET
+
+flag_reset_camera_07:
+	_FLAG_RESET		FV_INTERVW1_07_CAMERA
+	_RET
+
+//r118	(7回)
+flag_set_camera_08:
+	_FLAG_SET		FV_INTERVW1_08_CAMERA
+	_RET
+
+flag_reset_camera_08:
+	_FLAG_RESET		FV_INTERVW1_08_CAMERA
+	_RET
+
+
+/********************************************************************/
+//						トレーナーデータ
+//
+//							FH_00使用
+/********************************************************************/
+
+//--------------------------------------------------------------------
+//							ロード１１１
+//--------------------------------------------------------------------
+//インタビュアー女
+SCRIPT_LABEL	ev_interviewer_01_1
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_01
+	_TRAINER_DATA2	msg_interview_01_p01_camera
+	_TRAINER_DATA3	msg_interview_01_p03_camera
+	_TRAINER_DATA4	msg_interview_01_p15_camera
+	_TRAINER_DATA5	ev_interview_01_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+//カメラマン
+SCRIPT_LABEL	ev_interviewer_01_2
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_01
+	_TRAINER_DATA2	msg_camera_01_p01_camera
+	_TRAINER_DATA3	msg_camera_01_p05_camera
+	_TRAINER_DATA4	msg_camera_01_p04_camera
+	_TRAINER_DATA5	ev_interview_01_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_camera_01_p03_camera
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							ロード１１８
+//--------------------------------------------------------------------
+//インタビュアー女
+SCRIPT_LABEL	ev_interviewer_02_1
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_02
+	_TRAINER_DATA2	msg_interview_01_p02_camera
+	_TRAINER_DATA3	msg_interview_01_p17_camera
+	_TRAINER_DATA4	msg_interview_01_p15_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+//カメラマン
+SCRIPT_LABEL	ev_interviewer_02_2
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_02
+	_TRAINER_DATA2	msg_camera_01_p02_camera
+	_TRAINER_DATA3	msg_camera_01_p06_camera
+	_TRAINER_DATA4	msg_camera_01_p04_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_camera_01_p03_camera
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							ロード１２０
+//--------------------------------------------------------------------
+//インタビュアー女
+SCRIPT_LABEL	ev_interviewer_03_1
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_03
+	_TRAINER_DATA2	msg_interview_01_p02_camera
+	_TRAINER_DATA3	msg_interview_01_p17_camera
+	_TRAINER_DATA4	msg_interview_01_p15_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+//カメラマン
+SCRIPT_LABEL	ev_interviewer_03_2
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_03
+	_TRAINER_DATA2	msg_camera_01_p02_camera
+	_TRAINER_DATA3	msg_camera_01_p06_camera
+	_TRAINER_DATA4	msg_camera_01_p04_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_camera_01_p03_camera
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							ロード１１１
+//--------------------------------------------------------------------
+//インタビュアー女
+SCRIPT_LABEL	ev_interviewer_04_1
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_04
+	_TRAINER_DATA2	msg_interview_01_p02_camera
+	_TRAINER_DATA3	msg_interview_01_p17_camera
+	_TRAINER_DATA4	msg_interview_01_p15_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+//カメラマン
+SCRIPT_LABEL	ev_interviewer_04_2
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_04
+	_TRAINER_DATA2	msg_camera_01_p02_camera
+	_TRAINER_DATA3	msg_camera_01_p06_camera
+	_TRAINER_DATA4	msg_camera_01_p04_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_camera_01_p03_camera
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							ロード１１８
+//--------------------------------------------------------------------
+//インタビュアー女
+SCRIPT_LABEL	ev_interviewer_05_1
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_05
+	_TRAINER_DATA2	msg_interview_01_p02_camera
+	_TRAINER_DATA3	msg_interview_01_p17_camera
+	_TRAINER_DATA4	msg_interview_01_p15_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+//カメラマン
+SCRIPT_LABEL	ev_interviewer_05_2
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_05
+	_TRAINER_DATA2	msg_camera_01_p02_camera
+	_TRAINER_DATA3	msg_camera_01_p06_camera
+	_TRAINER_DATA4	msg_camera_01_p04_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_camera_01_p03_camera
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							ロード１２０
+//--------------------------------------------------------------------
+//インタビュアー女
+SCRIPT_LABEL	ev_interviewer_06_1
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_06
+	_TRAINER_DATA2	msg_interview_01_p02_camera
+	_TRAINER_DATA3	msg_interview_01_p17_camera
+	_TRAINER_DATA4	msg_interview_01_p15_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+//カメラマン
+SCRIPT_LABEL	ev_interviewer_06_2
+	_EVTRAINER2vs2_DATA_START
+	_TRAINER_DATA1	INTERVIEWER_06
+	_TRAINER_DATA2	msg_camera_01_p02_camera
+	_TRAINER_DATA3	msg_camera_01_p06_camera
+	_TRAINER_DATA4	msg_camera_01_p04_camera
+	_TRAINER_DATA5	ev_interview_02_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_camera_01_p03_camera
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//				カメラマンのインタビュー開始(１度目)
+//--------------------------------------------------------------------
+ev_interview_01_end:
+	//戦闘のデータを保存
+	_PROGRAM		SET_CAMERA_VS
+
+	//インタビュアーのOBJ指定をゲットする
+	_PROGRAM		GET_CAMERA_OBJID
+
+	//主人公の方に向くようにする
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_camera
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_site_d_camera
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_site_r_camera
+
+	//もし何も技をださないで戦闘終了したら(砂嵐のみで、回復しつづけるなど)
+	//すでにインタビューを受けた状態に分岐
+	_IF_FLAGON_JUMP		FH_00,no_camera_01_p02
+
+	_TALK_YES_NO	msg_interview_01_p04_camera
+	_JUMP			camera_03_start
+	_END
+
+//下から話し掛け
+case_site_u_camera:
+	_SET_OBJ_ANIME	PARAM0,camera1_01_field_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//上から話し掛け
+case_site_d_camera:
+	_SET_OBJ_ANIME	PARAM0,camera1_01_field_anime02
+	_SET_OBJ_ANIME	PARAM1,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//左から話し掛け
+case_site_r_camera:
+	_SET_OBJ_ANIME	PARAM0,camera1_01_field_anime03
+	_SET_OBJ_ANIME	PARAM1,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//			カメラマンのインタビュー開始(２度目以降)
+//--------------------------------------------------------------------
+ev_interview_02_end:
+	//戦闘のデータを保存
+	_PROGRAM		SET_CAMERA_VS
+
+	//インタビュアーのOBJ指定をゲットする
+	_PROGRAM		GET_CAMERA_OBJID
+
+	//主人公の方に向くようにする
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_camera
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_site_d_camera
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_site_r_camera
+
+	//もし何も技をださないで戦闘終了したら(砂嵐のみで、回復しつづけるなど)
+	//すでにインタビューを受けた状態に分岐
+	_IF_FLAGON_JUMP		FH_00,no_camera_01_p02
+
+	//一言をセット(データがないかもチェック)
+	_FUNC_CALL		ANSWORK,SET_CAMERA_KAIWA
+	_IFVAL_JUMP		ANSWORK,EQ,0,nothing_camera_kaiwa
+	_TALK_KEYWAIT	msg_interview_01_p05_camera
+
+	//各フラグを見てメッセージの飛び先を変更する
+	_FUNC_CALL		ANSWORK,CHK_OLD_CAMERA
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case_camera_else
+	_CASEJUMP		1,case_camera_damage
+	_CASEJUMP		2,case_camera_throw
+	_CASEJUMP		3,case_camera_kaihuku
+	_CASEJUMP		4,case_camera_kizetsu
+	_END
+
+//--------------------------------------------------------------------
+//インタビュアー	動く(下から)
+//--------------------------------------------------------------------
+camera1_01_field_anime01:
+	.byte	AC_STAY_WALK_D_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//インタビュアー	動く(上から)
+//--------------------------------------------------------------------
+camera1_01_field_anime02:
+	.byte	AC_STAY_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//インタビュアー	動く(左から)
+//--------------------------------------------------------------------
+camera1_01_field_anime03:
+	.byte	AC_STAY_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//							共通処理
+//--------------------------------------------------------------------
+//前回のデータがない
+nothing_camera_kaiwa:
+	_TALK_YES_NO	msg_interview_01_p16_camera
+	_JUMP			camera_03_start
+	_END
+
+case_camera_else:
+	_TALK_YES_NO	msg_interview_01_p10_camera
+	_JUMP			camera_03_start
+	_END
+case_camera_damage:
+	_TALK_YES_NO	msg_interview_01_p06_camera
+	_JUMP			camera_03_start
+	_END
+case_camera_throw:
+	_TALK_YES_NO	msg_interview_01_p07_camera
+	_JUMP			camera_03_start
+	_END
+case_camera_kaihuku:
+	_TALK_YES_NO	msg_interview_01_p08_camera
+	_JUMP			camera_03_start
+	_END
+case_camera_kizetsu:
+	_TALK_YES_NO	msg_interview_01_p09_camera
+	_JUMP			camera_03_start
+	_END
+
+//--------------------------------------------------------------------
+//					カメラマンのインタビュー開始
+//--------------------------------------------------------------------
+camera_03_start:
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_camera_01_p01
+
+	_TALK_KEYWAIT	msg_interview_01_p11_camera
+
+	//一言インタビュー画面
+	_LDVAL			PARAM0,KAIWA_MODE_FIELDBATTLE
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_camera_01_p01	// 書いてない
+
+	_TALK_KEYWAIT	msg_interview_01_p12_camera
+	_PROGRAM		SET_CAMERA_DATA
+
+	//データ作成のチャンスは一度のみ
+	_FLAG_SET		FH_00
+
+	_TALK_OBJ_END
+	_END
+
+//インタビュー受けない
+//簡易会話で何も書かなかった
+no_camera_01_p01:
+	_TALK_KEYWAIT	msg_interview_01_p13_camera
+
+	//データ作成のチャンスは一度のみ
+	_FLAG_SET		FH_00
+
+	_TALK_OBJ_END
+	_END
+
+//もし何も技をださないで戦闘終了したら(砂嵐のみで、回復しつづけるなど)
+//すでにインタビューを受けた状態に分岐
+no_camera_01_p02:
+	_TALK_KEYWAIT	msg_interview_01_p14_camera
+	_TALK_OBJ_END
+	_END
+
+

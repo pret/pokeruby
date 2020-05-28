@@ -1,0 +1,154 @@
+// ●ミナモ　アジト地下２階
+
+
+// ▼d0903----------------------------------
+// ●３階のドックの艀にいるアクア団幹部♂
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_10_01
+msg_aquam_10_01:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,ko_,ko_,ma_,de_,spc_,ki_,ta_,no_,ka_,gyoe_
+	.byte	CR_
+	.byte	o_,mo_,ttu_,te_,spc_,i_,ta_,yo_,ri_,spc_,ya_,ru_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,ko_,ko_,ma_,de_,da_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ha_,spc_,ko_,re_,ma_,de_,no_,spc_,si_,ta_,ttu_,pa_,do_,mo_,spc_,to_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,to_,a_,zi_,spc_,ti_,ga_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,ka_,n_,ka_,se_,gi_,spc_,na_,n_,ka_,spc_,si_,ne_,e_,de_
+	.byte	CR_
+	.byte	o_,ma_,e_,wo_,spc_,KO_,TE_,N_,PA_,N_,ni_,spc_,si_,te_,ya_,ru_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_10_02
+msg_aquam_10_02:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,ke_,ti_,ma_,ttu_,ta_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘を抜けてから、一旦背後（潜水艇の方）を向き
+// 　また主人公の方に向き直り、以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_10_03
+msg_aquam_10_03:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,ga_,spc_,o_,ma_,e_,to_
+	.byte	CR_
+	.byte	a_,so_,n_,de_,spc_,ya_,ttu_,te_,i_,ru_,spc_,a_,i_,da_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,no_,spc_,zi_,yyu_,n_,bi_,ga_,spc_,to_,to_,no_,ttu_,ta_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●また背後を向く
+// ●ここで潜水艇が出発する演出
+// ●そしてまた主人公の方を向き、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_10_04
+msg_aquam_10_04:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,ha_,spc_,do_,ko_,ka_,no_,spc_,ka_,i_,te_,i_,ni_,a_,ru_
+	.byte	CR_
+	.byte	do_,u_,ku_,tu_,he_,spc_,si_,yyu_,ttu_,pa_,tu_,spc_,si_,ta_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,i_,ka_,ke_,ru_,spc_,tu_,mo_,ri_,na_,ra_,spc_,MI_,NA_,MO_,no_,spc_,sa_,ki_,ni_
+	.byte	CR_
+	.byte	hi_,ro_,ga_,ru_,spc_,de_,ttu_,ka_,i_,spc_,u_,mi_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ga_,si_,ma_,wa_,ttu_,te_,spc_,mi_,ru_,ga_,spc_,i_,i_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,spc_,mi_,tu_,ka_,re_,ba_,spc_,i_,i_,ke_,do_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	U_,HI_,YYO_,HI_,YYO_,HI_,YYO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●これでフラグ22が立ち、外のホエルコと団員は削除
+
+
+// ▼d0903----------------------------------
+// ●アクア団員：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_04_01
+msg_aquam_04_01:
+	.byte	wa_,ttu_,ha_,ttu_,ha_,spc_,ma_,ti_,ku_,ta_,bi_,re_,ta_,zo_,gyoe_
+	.byte	CR_
+	.byte	o_,i_,ra_,to_,mo_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,mo_,ra_,o_,u_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_04_02
+msg_aquam_04_02:
+	.byte	ma_,ti_,ku_,ta_,bi_,re_,te_
+	.byte	CR_
+	.byte	ma_,ke_,te_,spc_,ya_,bu_,re_,te_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員：戦闘後メッセージ
+// （これは戦闘から抜けて強制的にしゃべらせる）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_04_03
+msg_aquam_04_03:
+	.byte	RI_,bou_,DA_,bou_,aa_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,n_,na_,mo_,n_,de_,spc_,do_,u_,de_,si_,yyo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0903----------------------------------
+// ●アクア団員♀０４：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_04_01
+msg_aquaw_04_01:
+	.byte	A_,ZI_,TO_,spc_,zi_,ma_,n_,no_,spc_,WA_,bou_,PU_,PA_,NE_,RU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,spc_,zi_,bu_,n_,ga_,spc_,do_,ko_,ni_,spc_,i_,ru_,no_,ka_
+	.byte	CR_
+	.byte	wa_,ka_,ttu_,te_,spc_,na_,i_,de_,si_,yyo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ya_,ttu_,te_,spc_,tu_,ka_,re_,ha_,te_,ta_,spc_,a_,i_,te_,wo_
+	.byte	CR_
+	.byte	ta_,o_,su_,no_,ga_,spc_,sa_,ku_,se_,n_,spc_,na_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♀０４：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_04_02
+msg_aquaw_04_02:
+	.byte	na_,ni_,yo_,ttu_,gyoe_
+	.byte	CR_
+	.byte	ti_,ttu_,to_,mo_,spc_,tu_,ka_,re_,te_,na_,i_,spc_,zi_,yya_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♀０４：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_04_03
+msg_aquaw_04_03:
+	.byte	so_,u_,i_,e_,ba_,tenten_,tenten_,spc_,MA_,SU_,TA_,bou_,BO_,bou_,RU_,wo_
+	.byte	CR_
+	.byte	do_,ko_,ni_,spc_,o_,i_,ta_,no_,ka_,spc_,wa_,su_,re_,ti_,yya_,ttu_,ta_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	a_,re_,wo_,spc_,ma_,mo_,ttu_,te_,i_,na_,i_,to_
+	.byte	CR_
+	.byte	RI_,bou_,DA_,bou_,ni_,spc_,o_,ko_,ra_,re_,ru_,no_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

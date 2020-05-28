@@ -1,0 +1,136 @@
+//MapEditNH Ver.3.53 *.evt -> *.sxy Convert.
+#define OBJNUM_R119_R0102	6
+#define EXITNUM_R119_R0102	1
+#define POSNUM_R119_R0102	0
+#define BGNUM_R119_R0102	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_aquam_20[];
+extern const u8	ev_aquam_21[];
+extern const u8	ev_aquaw_02[];
+extern const u8	ev_studym1_01_p01_r119_r0102[];
+
+const evObjData	OBJ_r119_r0102[] =
+{
+	{
+		TR_AQUAM_20,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000f,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_aquam_20,		//Event Lavel
+		FV_AQUA_ALL_FIELD_R119,		//Event Flag
+	},
+
+	{
+		TR_AQUAM_21,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_V,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_aquam_21,		//Event Lavel
+		FV_AQUA_ALL_FIELD_R119,		//Event Flag
+	},
+
+	{
+		TR_AQUAW_02,		//OBJ ID
+		WKOBJCODE3,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_aquaw_02,		//Event Lavel
+		FV_AQUA_ALL_FIELD_R119,		//Event Flag
+	},
+
+	{
+		YOUNGM1_01_R119_R0102,		//OBJ ID
+		YOUNGM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_TENKI_01_R119_R0102,		//Event Flag
+	},
+
+	{
+		STUDYM1_01_R119_R0102,		//OBJ ID
+		STUDYM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0012,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x2,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_studym1_01_p01_r119_r0102,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		YOUNGM1_02_R119_R0102,		//OBJ ID
+		YOUNGM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_TENKI_01_R119_R0102,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r119_r0102[] =
+{
+	{
+		0x0011,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		R119_R0101_STAIR01,		//Door ID
+		R119_R0101,			//Map ID
+		R119,				//Field ID
+	},
+
+};
+
+const SXY_DATA	r119_r0102_sxy_data =
+{
+OBJNUM_R119_R0102,			// field obj max
+EXITNUM_R119_R0102,		// exit max
+POSNUM_R119_R0102,			// pos event max
+BGNUM_R119_R0102,			// bg event max
+OBJ_r119_r0102,			// field obj data
+EXIT_r119_r0102,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

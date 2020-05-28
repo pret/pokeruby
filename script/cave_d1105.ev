@@ -1,0 +1,37 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d1105.ev
+//
+//============================================ 
+
+EVENT_DATA_START cave_d1105_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d1105
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1105:
+	_CALL			set_evil_char
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_aquaw_05
+	_TRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAW_05
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAW_05
+#endif
+	_TRAINER_DATA2	msg_aquaw_05_01
+	_TRAINER_DATA3	msg_aquaw_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquaw_05_03
+	_END
+

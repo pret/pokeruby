@@ -1,0 +1,189 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START test_newtown_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							少年
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_test_newtown
+	_TALK_OBJ_START
+
+	_IF_TR_FLAGOFF_JUMP	PRINCESS_03,ev_newtown_01_boy
+	_IF_TR_FLAGOFF_JUMP	PRINCESS_04,ev_newtown_01_boy
+	_IF_TR_FLAGOFF_JUMP	FUTAGO_05,ev_newtown_01_boy
+	_IF_TR_FLAGOFF_JUMP	FUTAGO_06,ev_newtown_01_boy
+	_IF_TR_FLAGOFF_JUMP	MOUNT_08,ev_newtown_01_boy
+	_IF_TR_FLAGOFF_JUMP	MOUNT_09,ev_newtown_01_boy
+
+	//全てのトレーナー倒している
+	_FLAG_SET		FE_BOY1_FESTA
+	_TALK_KEYWAIT	msg_boy1_01_p02_test_newtown
+
+	_IF_FLAGON_JUMP	FE_GIRL1_FESTA,clear_newtown_01
+
+	_TALK_OBJ_END
+	_END
+
+//まだ全てのトレーナー倒していない
+ev_newtown_01_boy:
+	_TALK_KEYWAIT	msg_boy1_01_p01_test_newtown
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							少女
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_test_newtown
+	_TALK_OBJ_START
+
+	_IF_TR_FLAGOFF_JUMP	PRINCESS_03,ev_newtown_01_girl
+	_IF_TR_FLAGOFF_JUMP	PRINCESS_04,ev_newtown_01_girl
+	_IF_TR_FLAGOFF_JUMP	FUTAGO_05,ev_newtown_01_girl
+	_IF_TR_FLAGOFF_JUMP	FUTAGO_06,ev_newtown_01_girl
+	_IF_TR_FLAGOFF_JUMP	MOUNT_08,ev_newtown_01_girl
+	_IF_TR_FLAGOFF_JUMP	MOUNT_09,ev_newtown_01_girl
+
+	//全てのトレーナー倒している
+	_FLAG_SET		FE_GIRL1_FESTA
+	_TALK_KEYWAIT	msg_girl1_01_p02_test_newtown
+
+	_IF_FLAGON_JUMP	FE_BOY1_FESTA,clear_newtown_01
+
+	_TALK_OBJ_END
+	_END
+
+//まだ全てのトレーナー倒していない
+ev_newtown_01_girl:
+	_TALK_KEYWAIT	msg_girl1_01_p01_test_newtown
+	_TALK_OBJ_END
+	_END
+
+//フェスタクリア！
+clear_newtown_01:
+	_TALK_CLOSE
+	_TIME_WAIT		60
+
+	_FLD_FADE_BLACKOUT
+
+	_TIME_WAIT		60
+
+	//タイトル復帰処理
+	_PROGRAM		SOFT_RESET
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							おじさん
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_test_newtown
+	_EASY_OBJ_MSG	msg_middlem1_01_p01_test_newtown
+	_END
+
+
+/********************************************************************/
+//							少年
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_02_p01_test_newtown
+	_EASY_OBJ_MSG	msg_boy1_02_p01_test_newtown
+	_END
+
+
+/********************************************************************/
+//							看板
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_test_newtown
+	_EASY_MSG	msg_kanban_01_p01_test_newtown
+	_END
+
+
+/********************************************************************/
+//							看板
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_test_newtown
+	_EASY_MSG	msg_kanban_02_p01_test_newtown
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_princess_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCESS_04
+	_TRAINER_DATA2	msg_princess_04_01
+	_TRAINER_DATA3	msg_princess_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_princess_04_03
+	_END
+
+SCRIPT_LABEL	ev_futago_05
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_05
+	_TRAINER_DATA2	msg_futago_05_01
+	_TRAINER_DATA3	msg_futago_05_02
+	_TRAINER_DATA4	msg_futago_05_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_05_03
+	_END
+
+SCRIPT_LABEL	ev_futago_06
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_06
+	_TRAINER_DATA2	msg_futago_06_01
+	_TRAINER_DATA3	msg_futago_06_02
+	_TRAINER_DATA4	msg_futago_06_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_06_03
+	_END
+
+SCRIPT_LABEL	ev_mount_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_09
+	_TRAINER_DATA2	msg_mount_09_01
+	_TRAINER_DATA3	msg_mount_09_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_09_03
+	_END
+
+SCRIPT_LABEL	ev_princess_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCESS_03
+	_TRAINER_DATA2	msg_princess_03_01
+	_TRAINER_DATA3	msg_princess_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_princess_03_03
+	_END
+
+SCRIPT_LABEL	ev_mount_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_08
+	_TRAINER_DATA2	msg_mount_08_01
+	_TRAINER_DATA3	msg_mount_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_08_03
+	_END
+
+

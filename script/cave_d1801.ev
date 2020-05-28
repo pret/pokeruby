@@ -1,0 +1,141 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d1801_event_data
+INIT_CTRL_LABEL		init_ctrl_cave_d1801
+BG_CHANGE_LABEL		bg_change_cave_d1801
+FLAG_CHANGE_LABEL	flag_change_cave_d1801
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_cave_d1801:
+	_IF_FLAGON_CALL	SYS_CTRL_OBJ_DELETE,pokemon_del_cave_d1801
+	_END
+
+pokemon_del_cave_d1801:
+	_OBJ_DELETE		TARGET_OBJ
+	_RET
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_cave_d1801:
+	//壁を通れなくする
+	_IF_FLAGOFF_CALL	SYS_TENJI_WAIT,bg_chg_01_cave_d1801
+	_END
+
+bg_chg_01_cave_d1801:
+	_SET_CELL		7,19,553,1
+	_SET_CELL		8,19,553,1
+	_SET_CELL		9,19,553,1
+	_SET_CELL		7,20,565,1
+	_SET_CELL		8,20,565,1
+	_SET_CELL		9,20,565,1
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1801:
+	_FLAG_SET			SYS_ARRIVE_YOKOANA
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+SCRIPT_LABEL	bg_chg_02_cave_d1801
+	_SET_CELL		7,19,554,1
+	_SET_CELL		8,19,555,1
+	_SET_CELL		9,19,556,1
+	_SET_CELL		7,20,562,1
+	_SET_CELL		8,20,563,0
+	_SET_CELL		9,20,564,1
+	_PROGRAM		MAKE_MAP_BG
+	_SE				SE_BAN
+	_FLAG_SET		SYS_TENJI_WAIT
+	_END
+
+/********************************************************************/
+//							点字
+/********************************************************************/
+SCRIPT_LABEL	ev_tenji_01_p01_cave_d1801
+	_TALK_START
+
+	//すでに壁に穴を開けていたら
+	_IF_FLAGON_JUMP	SYS_TENJI_WAIT,ev_tenji_01_p02_cave_d1801
+
+	_PUT_TENJI		msg_tenji_01_p01_cave_d1801
+
+	_PROGRAM		TENJI_WAIT_START
+	_STOP_SCRIPT
+
+	_JUMP			ev_tenji_02_p02_cave_d1801
+	_END
+
+//すでに壁に穴を開けていたら
+ev_tenji_01_p02_cave_d1801:
+	_TALK_KEYWAIT	msg_tenji_ana
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//							点字
+//
+//				「壁に大きな穴が開いてる」にならない用
+/********************************************************************/
+SCRIPT_LABEL	ev_tenji_02_p01_cave_d1801
+	_TALK_START
+
+	_PUT_TENJI		msg_tenji_01_p01_cave_d1801
+
+	//すでに壁に穴を開けていたら
+	_IF_FLAGON_JUMP	SYS_TENJI_WAIT,ev_tenji_02_p02_cave_d1801
+
+	_PROGRAM		TENJI_WAIT_START
+	_STOP_SCRIPT
+
+	_JUMP			ev_tenji_02_p02_cave_d1801
+	_END
+
+//すでに壁に穴を開けていたら、プログラム起動させない
+ev_tenji_02_p02_cave_d1801:
+	_AB_KEYWAIT
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//							ポケモン	
+/********************************************************************/
+SCRIPT_LABEL	ev_poke_01_p01_cave_d1801
+	_TALK_OBJ_START
+	
+	_VOICE_PLAY		MONSNO_REZIAISU,2
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	_WILD_FIGHT_SET	MONSNO_REZIAISU,40,0
+
+	//通常戦なので負けてもOBJが消えているようにする
+	_FLAG_SET		FV_POKE_01_CAVE_D1801
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_PROGRAM		TENJI_POKE_FIGHT
+	_STOP_SCRIPT
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+

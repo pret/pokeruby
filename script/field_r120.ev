@@ -1,0 +1,510 @@
+//====================================================================
+//							field_r120
+//						フィールド・ロード120
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r120_event_data
+INIT_CTRL_LABEL		init_ctrl_field_r120
+FLAG_CHANGE_LABEL	flag_change_field_r120
+BG_CHANGE_LABEL		bg_change_field_r120
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_field_r120:
+	_IF_FLAGON_CALL	SYS_CTRL_OBJ_DELETE,pokemon_del_field_r120
+	_END
+
+//戦闘後のタイミングで削除
+pokemon_del_field_r120:
+	_IFVAL_CALL		PARAM0,EQ,0,case0_poke_del_field_r120
+	_IFVAL_CALL		PARAM0,EQ,1,case1_poke_del_field_r120
+	_IFVAL_CALL		PARAM0,EQ,2,case2_poke_del_field_r120
+	_IFVAL_CALL		PARAM0,EQ,3,case3_poke_del_field_r120
+	_IFVAL_CALL		PARAM0,EQ,4,case4_poke_del_field_r120
+	_IFVAL_CALL		PARAM0,EQ,5,case5_poke_del_field_r120
+	_RET
+
+case0_poke_del_field_r120:
+	_OBJ_DELETE		KAKURE_01_FIELD_R120
+	_OBJ_DELETE		KAKUREONB_01_FIELD_R120
+	_RET
+
+case1_poke_del_field_r120:
+	_OBJ_DELETE		KAKURE_02_FIELD_R120
+	_RET
+
+case2_poke_del_field_r120:
+	_OBJ_DELETE		KAKURE_03_FIELD_R120
+	_RET
+
+case3_poke_del_field_r120:
+	_OBJ_DELETE		KAKURE_04_FIELD_R120
+	_RET
+
+case4_poke_del_field_r120:
+	_OBJ_DELETE		KAKURE_05_FIELD_R120
+	_RET
+
+case5_poke_del_field_r120:
+	_OBJ_DELETE		KAKURE_06_FIELD_R120
+	_RET
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_field_r120:
+	//伝説の洞窟扉開いているか
+	_IF_FLAGOFF_CALL	FE_DENSETU_OPEN,bg_chg_01_field_r120
+
+	//デボンスコープをもっているか
+	_IF_FLAGON_CALL	FE_DEBONSUKOOPU_GET,bg_chg_02_field_r120
+
+	//デボンスコープをもっていなかったら
+	_IF_FLAGOFF_CALL	FE_DEBONSUKOOPU_GET,poc_chg_01_field_r120
+	_END
+
+bg_chg_01_field_r120:
+	_SET_CELL		7,54,124,1
+	_SET_CELL		7,55,145,1
+	_RET
+
+//デボンスコープをもっている
+bg_chg_02_field_r120:
+	_SET_CELL		13,15,663,0
+	_SET_CELL		12,16,671,0
+	_SET_CELL		12,17,161,0
+	_SET_CELL		13,17,161,0
+	_RET
+
+//デボンスコープをもっていなかったら
+poc_chg_01_field_r120:
+	_SXY_SITE_CHANGE	KAKUREONB_01_FIELD_R120,MV_RIGHT
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r120:
+	_CALL			change_camera_obj		//カメラOBJ操作
+	_CALL			ctrl_field_r120			//天候処理
+	_END
+
+ctrl_field_r120:
+	_GET_MAP_POS	LOCALWORK0,LOCALWORK1
+	_IFVAL_JUMP		LOCALWORK1,LE,14,_set_shine2_field_r120		//Y14以下
+	_IFVAL_JUMP		LOCALWORK1,LE,60,_chk_rain_field_r120		//Y60以下
+	_IFVAL_JUMP		LOCALWORK1,GE,61,_set_shine_field_r120		//Y61以上
+	_RET
+
+//SHINE
+_set_shine_field_r120:
+	_SET_WEATHER		ID_WEATHER_SHINE
+	_RET
+
+//SHINE2
+_set_shine2_field_r120:
+	_SET_WEATHER		ID_WEATHER_SHINE2
+	_RET
+
+//RAINチェック
+_chk_rain_field_r120:
+	_IFVAL_JUMP		LOCALWORK0,LE,7,_set_rain_field_r120		//X7以下
+	_IFVAL_JUMP		LOCALWORK0,LE,19,_set_shine2_field_r120		//X19以下
+	_JUMP			_set_rain_field_r120
+	_END
+
+//RAIN
+_set_rain_field_r120:
+	_SET_WEATHER		ID_WEATHER_RAIN
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							女の人									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_kinomi
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//一日一回
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT_05,ev_workerw2_01_p02_kinomi
+
+	_TALK_YES_NO	msg_workerw2_01_p01_kinomi
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,yes_workerw2_01_p01_kinomi
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,no_workerw2_01_p01_kinomi
+
+	//IDの下一桁を取得する
+	_FUNC_CALL		ANSWORK,GET_ID_NO
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,ptn0_get_item_field_r120
+	_CASEJUMP		5,ptn0_get_item_field_r120
+	_CASEJUMP		1,ptn1_get_item_field_r120
+	_CASEJUMP		6,ptn1_get_item_field_r120
+	_CASEJUMP		2,ptn2_get_item_field_r120
+	_CASEJUMP		7,ptn2_get_item_field_r120
+	_CASEJUMP		3,ptn3_get_item_field_r120
+	_CASEJUMP		8,ptn3_get_item_field_r120
+	_CASEJUMP		4,ptn4_get_item_field_r120
+	_CASEJUMP		9,ptn4_get_item_field_r120
+	_END
+
+//下一桁が０か５
+ptn0_get_item_field_r120:
+	_LDVAL			PARAM0,ITEM_FIRANOMI
+	_JUMP			common_get_item_field_r120
+	_END
+
+//下一桁が１か６
+ptn1_get_item_field_r120:
+	_LDVAL			PARAM0,ITEM_UINOMI
+	_JUMP			common_get_item_field_r120
+	_END
+
+//下一桁が２か７
+ptn2_get_item_field_r120:
+	_LDVAL			PARAM0,ITEM_MAGONOMI
+	_JUMP			common_get_item_field_r120
+	_END
+
+//下一桁が３か８
+ptn3_get_item_field_r120:
+	_LDVAL			PARAM0,ITEM_BANZINOMI
+	_JUMP			common_get_item_field_r120
+	_END
+
+//下一桁が４か９
+ptn4_get_item_field_r120:
+	_LDVAL			PARAM0,ITEM_IANOMI
+	_JUMP			common_get_item_field_r120
+	_END
+
+//アイテム取得共通処理
+common_get_item_field_r120:
+	_ITEM_EVENT		PARAM0,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		TMFLG_SEED_PRESENT_05
+
+	_TALK_KEYWAIT	msg_workerw2_01_p04_kinomi
+	_TALK_OBJ_END
+	_END
+
+//一日一回
+ev_workerw2_01_p02_kinomi:
+	_TALK_KEYWAIT	msg_workerw2_01_p05_kinomi
+	_TALK_OBJ_END
+	_END
+
+//「はい」
+yes_workerw2_01_p01_kinomi:
+	_TALK_KEYWAIT	msg_workerw2_01_p02_kinomi
+	_RET
+	
+//「いいえ」
+no_workerw2_01_p01_kinomi:
+	_TALK_KEYWAIT	msg_workerw2_01_p03_kinomi
+	_RET
+
+
+/********************************************************************/
+/*							ダイゴ									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_daigo_01_p01_field_r120
+	_TALK_OBJ_START
+
+	//再度の会話か？
+	_IF_FLAGON_JUMP	FE_DEBON_01_FIELD_R120,ev_daigo_01_p03_field_r120
+
+	//"たたかう　準備はできているかい？"
+	_TALK_YES_NO	msg_daigo_01_p01_field_r120
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_daigo_01_p02_field_r120	//いいえ
+
+	_JUMP			ev_daigo_01_p04_field_r120					//はい
+	_END
+
+//いいえ
+ev_daigo_01_p02_field_r120:
+	_TALK_KEYWAIT	msg_daigo_01_p02_field_r120
+
+	//一度話した状態へ
+	_FLAG_SET	FE_DEBON_01_FIELD_R120
+	_TALK_OBJ_END
+	_END
+
+//再度話しかけたとき
+ev_daigo_01_p03_field_r120:
+	_TALK_YES_NO	msg_daigo_01_p03_field_r120
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_daigo_01_p02_field_r120	//いいえ
+	_JUMP			ev_daigo_01_p04_field_r120					//はい
+	_END
+
+//はい
+ev_daigo_01_p04_field_r120:
+	_TALK_KEYWAIT	msg_daigo_01_p04_field_r120
+	_TALK_CLOSE
+
+	//ポケモンの方へ
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,hero_site_u_set_field_r120
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,hero_site_l_set_field_r120
+
+	//ダイゴ左を向く
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R120,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		20
+
+	_TALK_KEYWAIT	msg_daigo_01_p07_field_r120
+	_TALK_CLOSE
+
+	//右を向く
+	_SET_OBJ_ANIME	KAKURE_01_FIELD_R120,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//姿をあらわす
+	_SET_OBJ_ANIME	KAKURE_01_FIELD_R120,kakure_appear_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_VOICE_PLAY		MONSNO_KAKUREON,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	_WILD_FIGHT_SET	MONSNO_KAKUREON,30,0
+
+	_LDVAL			PARAM0,0		//消すOBJの判別用
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_JUMP			ev_daigo_01_p05_field_r120
+	_END
+
+//ダイゴからスコープを貰う
+ev_daigo_01_p05_field_r120:
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R120,turn_d_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//”あげよう”
+	_TALK_KEYWAIT	msg_daigo_01_p05_field_r120
+
+	_ITEM_EVENT		ITEM_DEBONSUKOOPU,1
+	_FLAG_SET		FE_DEBONSUKOOPU_GET
+
+	//”どこかで　あおう！”
+	_TALK_KEYWAIT	msg_daigo_01_p06_field_r120
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R120,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_TIME_WAIT		50
+
+	_SET_FE_WORK	0,1
+	_SET_FLD_EFF	FECODE_PokeSora
+
+	_TIME_WAIT		15
+	_OBJ_DELETE		DAIGO_01_FIELD_R120
+
+	_FLD_EFF_WAIT	FECODE_PokeSora
+
+	_SET_CELL		13,15,663,0
+	_SET_CELL		12,16,671,0
+	_SET_CELL		12,17,161,0
+	_SET_CELL		13,17,161,0
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+//ポケモンの方を向く
+hero_site_u_set_field_r120:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+hero_site_l_set_field_r120:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r120_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	右から話し掛けの場合は位置を移動する
+//--------------------------------------------------------------------
+hero_01_field_r120_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							カクレオン								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kakure_01_p01_field_r120
+	_EASY_OBJ_MSG	msg_kakure_01_p01_field_r120
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r120
+	_EASY_MSG       msg_kanban_01_p01_field_r120
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r120
+	_EASY_MSG       msg_kanban_02_p01_field_r120
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_bird_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_08
+	_TRAINER_DATA2	msg_bird_08_01
+	_TRAINER_DATA3	msg_bird_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_08_03
+	_END
+
+SCRIPT_LABEL	ev_bird_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_09
+	_TRAINER_DATA2	msg_bird_09_01
+	_TRAINER_DATA3	msg_bird_09_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_bird_09
+	_TRAINER_EASY_MSG	msg_bird_09_03
+	_END
+
+_revenge_bird_09:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_09
+	_TRAINER_DATA2	msg_bird_09_04
+	_TRAINER_DATA3	msg_bird_09_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_09_06
+	_END
+
+SCRIPT_LABEL	ev_rangerm_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	RANGERM_02
+	_TRAINER_DATA2	msg_rangerm_02_01
+	_TRAINER_DATA3	msg_rangerm_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_rangerm_02_03
+	_END
+
+SCRIPT_LABEL	ev_rangerw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	RANGERW_02
+	_TRAINER_DATA2	msg_rangerw_02_01
+	_TRAINER_DATA3	msg_rangerw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_rangerw_02_03
+	_END
+
+SCRIPT_LABEL	ev_mushimaster_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHIMASTER_04
+	_TRAINER_DATA2	msg_mushimaster_04_01
+	_TRAINER_DATA3	msg_mushimaster_04_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_mushimaster_04
+	_TRAINER_EASY_MSG	msg_mushimaster_04_03
+	_END
+
+_revenge_mushimaster_04:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHIMASTER_04
+	_TRAINER_DATA2	msg_mushimaster_04_04
+	_TRAINER_DATA3	msg_mushimaster_04_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushimaster_04_06
+	_END
+
+SCRIPT_LABEL	ev_elitew_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_07
+	_TRAINER_DATA2	msg_elitew_07_01
+	_TRAINER_DATA3	msg_elitew_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_07_03
+	_END
+
+SCRIPT_LABEL	ev_iseki_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ISEKI_02
+	_TRAINER_DATA2	msg_iseki_02_01
+	_TRAINER_DATA3	msg_iseki_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_iseki_02_03
+	_END
+
+SCRIPT_LABEL	ev_parasol_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PARASOL_02
+	_TRAINER_DATA2	msg_parasol_02_01
+	_TRAINER_DATA3	msg_parasol_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_parasol_02_03
+	_END
+
+SCRIPT_LABEL	ev_parasol_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PARASOL_03
+	_TRAINER_DATA2	msg_parasol_03_01
+	_TRAINER_DATA3	msg_parasol_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_parasol_03_03
+	_END
+
+SCRIPT_LABEL	ev_shinobi_12
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_12
+	_TRAINER_DATA2	msg_shinobi_12_01
+	_TRAINER_DATA3	msg_shinobi_12_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_12_03
+	_END
+
+SCRIPT_LABEL	ev_shinobi_13
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SHINOBI_13
+	_TRAINER_DATA2	msg_shinobi_13_01
+	_TRAINER_DATA3	msg_shinobi_13_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_shinobi_13_03
+	_END
+

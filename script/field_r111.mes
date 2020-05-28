@@ -1,0 +1,416 @@
+// ●111番道路　フィールド
+
+
+// ●小さな女の子：ますだ担当
+// ●111番道路Ｘ23Ｙ8
+// ●時計機能使用、一日、一回、木の実を分けてくれる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_field_r111
+msg_girl1_01_p01_field_r111:
+	.byte	i_,tu_,mo_,spc_,mi_,zu_,wo_,spc_,a_,ge_,te_,ta_,ra_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,ha_,na_,ga_,spc_,sa_,i_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,ta_,ra_,spc_,ki_,no_,mi_,mo_,spc_,ta_,ku_,sa_,n_,spc_,de_,ki_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,spc_,a_,ge_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●木の実を下記条件により１つ貰えます。
+// ●ＩＤの下一桁が０、１：１６番：ズリのみ
+// ●ＩＤの下一桁が２、３：１７番：ブズリのみ
+// ●ＩＤの下一桁が４、５：１８番：ナナのみ
+// ●ＩＤの下一桁が６、７：１９番：ナナヨのみ
+// ●ＩＤの下一桁が８、９：２０番：パイルのみ
+// ●きのみポケットにしまいます。
+
+// ●＠０＝男：　おにいちゃん
+// ●＠０＝女：　おねえちゃん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p02_field_r111
+msg_girl1_01_p02_field_r111:
+	.byte	ga_,n_,ba_,ttu_,te_,spc_,a_,ka_,i_,PO_,RO_,TTU_,KU_,spc_,tu_,ku_,ru_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,mo_,spc_,ga_,n_,ba_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バッグがいっぱいのとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p03_field_r111
+msg_girl1_01_p03_field_r111:
+	.byte	a_,re_,hate_,spc_,BA_,TTU_,GU_,no_,spc_,ki_,no_,mi_,PO_,KE_,TTU_,TO_,ga_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ko_,n_,do_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１日に２回目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p04_field_r111
+msg_girl1_01_p04_field_r111:
+	.byte	ki_,yyo_,u_,ha_,spc_,a_,ka_,i_,PO_,RO_,TTU_,KU_,no_,ta_,me_,ni_
+	.byte	CR_
+	.byte	a_,ka_,i_,spc_,ki_,no_,mi_,wo_,spc_,sa_,ga_,so_,ttu_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●適当な場所に一軒家が建っている。
+// ●家の前には、オヤジ１が立っていて、中には入れない。
+// ●カチヌキ一家の父
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_field_r111
+msg_middlem1_01_p01_field_r111:
+	.byte	ki_,mi_,gyoe_,spc_,ta_,bi_,no_,spc_,to_,ti_,yyu_,u_,spc_,da_,ro_,u_,ke_,re_,do_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,da_,hate_,spc_,ko_,ko_,ha_,spc_,hi_,to_,tu_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ta_,ti_,spc_,ka_,zo_,ku_,spc_,n4_,ni_,n_,to_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,wo_,spc_,si_,te_,mi_,na_,i_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→☆戦闘承諾メッセージ
+// ●「いいえ」→☆戦闘回避メッセージ
+
+// ☆戦闘回避メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_field_r111
+msg_middlem1_01_p02_field_r111:
+	.byte	a_,ttu_,so_,gyoe_
+	.byte	CR_
+	.byte	ki_,ga_,spc_,mu_,i_,ta_,ra_,spc_,ma_,ta_,spc_,o_,i_,de_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●初期状態にもどる。
+
+// ☆戦闘承諾メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_field_r111
+msg_middlem1_01_p03_field_r111:
+	.byte	i_,i_,spc_,do_,ki_,yyo_,u_,da_,gyoe_,spc_,ki_,ni_,i_,ttu_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードに突入。
+// ●敗北時のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p04_field_r111
+msg_middlem1_01_p04_field_r111:
+	.byte	ta_,ha_,bou_,ttu_,gyoe_
+	.byte	CR_
+	.byte	o_,mo_,ttu_,te_,i_,ta_,yo_,ri_,spc_,tu_,yo_,i_,n_,da_,ne_,spc_,ki_,mi_,ha_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜けて、フィールドでのセリフ
+// ●主人公に背を向け、家の方に向かって、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p05_field_r111
+msg_middlem1_01_p05_field_r111:
+	.byte	o_,bou_,i_,gyoe_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ga_,spc_,i_,ta_,zo_,bou_,gyoe_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と言って、家の中に駆け込んでいく。
+// ●少しの間をおいて、次のキャラ登場。
+
+// ●カチヌキ一家の母
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_field_r111
+msg_middlew1_01_p01_field_r111:
+	.byte	a_,re_,ma_,gyoe_,spc_,i_,ga_,i_,ni_,spc_,wa_,ka_,i_,no_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,ti_,no_,spc_,si_,yyu_,zi_,n_,ni_,spc_,ka_,ttu_,te_,si_,ma_,u_,spc_,to_,ha_
+	.byte	CR_
+	.byte	na_,n_,to_,spc_,su_,go_,u_,de_,no_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,na_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ko_,n_,do_,ha_,spc_,wa_,ta_,si_,to_,spc_,si_,yyo_,u_,bu_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードに突入。
+// ●敗北時のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p02_field_r111
+msg_middlew1_01_p02_field_r111:
+	.byte	n_,ma_,bou_,ttu_,gyoe_
+	.byte	CR_
+	.byte	a_,na_,ta_,ttu_,te_,spc_,na_,n_,te_,spc_,tu_,yo_,i_,no_,ka_,si_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜けて、フィールドでのセリフ
+// ●主人公に背を向け、家の方に向かって、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p03_field_r111
+msg_middlew1_01_p03_field_r111:
+	.byte	tu_,yo_,i_,wa_,yo_,bou_,gyoe_
+	.byte	CR_
+	.byte	ko_,no_,hi_,to_,spc_,su_,ttu_,go_,ku_,spc_,tu_,yo_,i_,wa_,yo_,bou_,gyoe_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と言って、家の中に駆け込んでいく。
+// ●少しの間をおいて、次のキャラ登場。
+
+// ●カチヌキ一家の孫
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p01_field_r111
+msg_schoolw1_01_p01_field_r111:
+	.byte	MA_,MA_,yo_,ri_,spc_,tu_,yo_,i_,na_,n_,te_,spc_,su_,go_,bou_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,a_,ta_,si_,spc_,da_,ttu_,te_,spc_,tu_,yo_,i_,n_,da_,ka_,ra_,gyoe_
+	.byte	CR_
+	.byte	ho_,n_,to_,spc_,na_,n_,da_,ttu_,te_,ba_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードに突入。
+// ●敗北時のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p02_field_r111
+msg_schoolw1_01_p02_field_r111:
+	.byte	e_,ttu_,spc_,mo_,si_,ka_,si_,te_,spc_,ma_,ke_,ti_,yya_,ttu_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜けて、フィールドでのセリフ
+// ●主人公に背を向け、家の方に向かって、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p03_field_r111
+msg_schoolw1_01_p03_field_r111:
+	.byte	ku_,ya_,si_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,gu_,ttu_,su_,n_,gyoe_,spc_,o_,ba_,a_,ti_,yya_,bou_,n_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と言って、家の中に駆け込んでいく。
+// ●少しの間をおいて、次のキャラ登場。
+
+// ●カチヌキ一家の婆さん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_field_r111
+msg_oldwoman1_01_p01_field_r111:
+	.byte	ko_,ra_,bou_,ttu_,gyoe_
+	.byte	CR_
+	.byte	wa_,si_,no_,spc_,ka_,wa_,i_,i_,spc_,ma_,go_,ni_,spc_,na_,ni_,su_,n_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,na_,ttu_,ta_,ra_,spc_,wa_,si_,ga_,spc_,o_,ma_,e_,sa_,n_,wo_
+	.byte	CR_
+	.byte	ME_,TA_,ME_,TA_,ni_,spc_,si_,te_,ya_,ru_,ka_,ra_,spc_,ka_,ku_,go_,se_,ee_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードに突入。
+// ●敗北時のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_field_r111
+msg_oldwoman1_01_p02_field_r111:
+	.byte	HU_,GA_,TTU_,gyoe_,spc_,tu_,yo_,i_,no_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,go_,no_,spc_,i_,u_,ko_,to_,ha_,spc_,ho_,n_,to_,u_,spc_,zi_,yya_,ttu_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜けて、フィールドでのセリフ
+// ●主人公に背を向け、家の方に向かって、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p03_field_r111
+msg_oldwoman1_01_p03_field_r111:
+	.byte	a_,n_,ta_,tenten_,tenten_,spc_,i_,so_,gi_,no_,ta_,bi_,de_,spc_,na_,i_,no_,na_,ra_
+	.byte	CR_
+	.byte	u_,ti_,ni_,spc_,yo_,ttu_,te_,i_,ttu_,te_,spc_,o_,ku_,re_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と言って、家の中に歩いていく。
+// ●以後、主人公は操作フリーになる。
+
+// ===============================
+
+// カセキ入手イベント
+// ●「ねっこのカセキ」（ポケモン・カセキに復元されます）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaseki_01_p01_field_r111
+msg_kaseki_01_p01_field_r111:
+	.byte	ne_,ttu_,ko_,no_,KA_,SE_,KI_,wo_,spc_,mi_,tu_,ke_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ttu_,ti_,no_,spc_,KA_,SE_,KI_,wo_,spc_,to_,ru_,to_
+	.byte	CR_
+	.byte	mo_,u_,spc_,hi_,to_,tu_,no_,spc_,KA_,SE_,KI_,ha_,spc_,si_,zu_,mi_,so_,u_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,ttu_,ko_,no_,KA_,SE_,KI_,wo_,spc_,to_,ri_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→「ねっこのカセキ」（No286）入手処理、
+// 　　　　　　　他方のアイテムを消去
+// ●「いいえ」→msg_kaseki_01_p02_field_r111:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaseki_01_p02_field_r111
+msg_kaseki_01_p02_field_r111:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,ne_,ttu_,ko_,no_,KA_,SE_,KI_,wo_
+	.byte	CR_
+	.byte	so_,no_,ma_,ma_,ni_,spc_,si_,te_,o_,i_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●「ツメのかせき」（ポケモン・タイコに復元されます）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaseki_02_p01_field_r111
+msg_kaseki_02_p01_field_r111:
+	.byte	TU_,ME_,no_,KA_,SE_,KI_,wo_,spc_,mi_,tu_,ke_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ttu_,ti_,no_,spc_,KA_,SE_,KI_,wo_,spc_,to_,ru_,to_
+	.byte	CR_
+	.byte	mo_,u_,spc_,hi_,to_,tu_,no_,spc_,KA_,SE_,KI_,ha_,spc_,si_,zu_,mi_,so_,u_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	TU_,ME_,no_,KA_,SE_,KI_,wo_,spc_,to_,ri_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→「ツメのかせき」（No287）入手処理、
+// 　　　　　　　他方のアイテムを消去
+// ●「いいえ」→msg_kaseki_02_p02_field_r111:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaseki_02_p02_field_r111
+msg_kaseki_02_p02_field_r111:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,TU_,ME_,no_,KA_,SE_,KI_,wo_
+	.byte	CR_
+	.byte	so_,no_,ma_,ma_,ni_,spc_,si_,te_,o_,i_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ===============================
+
+// ●トレーナー男１　……哲司作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_field_r111
+msg_trainerm1_01_p01_field_r111:
+	.byte	mo_,ttu_,to_,spc_,PO_,KE_,MO_,N_,spc_,ki_,ta_,e_,na_,i_,to_
+	.byte	CR_
+	.byte	ka_,ti_,nu_,ku_,no_,ha_,spc_,ki_,bi_,si_,so_,u_,da_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,ma_,de_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,yo_,ri_
+	.byte	CR_
+	.byte	ha_,ru_,ka_,ni_,spc_,tu_,yo_,i_,to_,spc_,ki_,ku_,ka_,ra_,na_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,ni_,i_,ru_,spc_,si_,te_,n_,no_,u_,ha_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●若者男１
+// 　（キンセツとカチヌキ一家の間）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_field_r111
+msg_youngm1_01_p01_field_r111:
+	.byte	KA_,TI_,NU_,KI_,i_,ttu_,ka_,ni_,spc_,i_,do_,n_,da_,ke_,re_,do_
+	.byte	CR_
+	.byte	n4_,ni_,n_,spc_,tu_,du_,ke_,te_,no_,spc_,PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,bi_,si_,i_,yo_,na_,tenten_,tenten_,spc_,BO_,RO_,ma_,ke_,spc_,si_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●キンセツ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r111
+msg_kanban_01_p01_field_r111:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n1_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowD__,spc_,KI_,N_,SE_,TU_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カチヌキ一家の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r111
+msg_kanban_02_p01_field_r111:
+	.byte	wa_,re_,ra_,spc_,ka_,zo_,ku_,no_,spc_,ko_,ko_,ro_,ha_,spc_,hi_,to_,tu_
+	.byte	CR_
+	.byte	kako_,KA_,TI_,NU_,KI_,spc_,HU_,AA_,MI_,RI_,bou_,no_,spc_,i_,e_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●112番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_r111
+msg_kanban_03_p01_field_r111:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n1_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,n1_,n1_,n2_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●113番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_04_p01_field_r111
+msg_kanban_04_p01_field_r111:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n1_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,n1_,n1_,n3_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●回復民家の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_05_p01_field_r111
+msg_kanban_05_p01_field_r111:
+	.byte	kako_,KE_,N_,KO_,bou_,ba_,a_,sa_,n_,no_,spc_,i_,e_,kakot_
+	.byte	CR_
+	.byte	tu_,ka_,re_,ta_,to_,spc_,o_,mo_,u_,na_,ra_,spc_,yo_,ttu_,te_,ra_,ttu_,si_,yya_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お得な掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_06_p01_field_r111
+msg_kanban_06_p01_field_r111:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,tu_,yo_,sa_,wo_,spc_,a_,ra_,wa_,su_,spc_,ko_,to_,ba_,de_
+	.byte	CR_
+	.byte	to_,ku_,ko_,u_,spc_,to_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	to_,ku_,si_,yyu_,spc_,ko_,u_,ge_,ki_,ri_,yyo_,ku_,spc_,no_,ko_,to_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ku_,bo_,u_,spc_,to_,ha_
+	.byte	CR_
+	.byte	to_,ku_,si_,yyu_,spc_,bo_,u_,gi_,yyo_,ri_,yyo_,ku_,spc_,no_,ko_,to_,spc_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

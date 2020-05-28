@@ -1,0 +1,43 @@
+// ●フエンタウン　ポケモンセンター１Ｆ
+
+
+// ●サラリーウーマン１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_t104_pc01
+msg_workerw1_01_p01_t104_pc01:
+	.byte	PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,a_,ru_,i_,te_,i_,ru_,to_
+	.byte	CR_
+	.byte	na_,n_,da_,ka_,spc_,PO_,KE_,MO_,N_,ga_,spc_,na_,tu_,i_,te_,ku_,re_,ru_,yo_,u_,na_
+	.byte	SCROLL_WAIT_
+	.byte	so_,n_,na_,spc_,ki_,ga_,spc_,su_,ru_,no_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●帽子男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy1_01_p01_t104_pc01
+msg_capboy1_01_p01_t104_pc01:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,a_,ka_,i_,PO_,RO_,TTU_,KU_,wo_,spc_,a_,ge_,ru_,to_
+	.byte	CR_
+	.byte	na_,n_,da_,ka_,spc_,ka_,ttu_,ko_,yo_,ku_,na_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,KU_,mo_,spc_,a_,ka_,i_,PO_,RO_,TTU_,KU_,spc_,ta_,be_,yo_,u_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老紳士
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_t104_pc01
+msg_gentlem1_01_p01_t104_pc01:
+	.byte	ho_,ttu_,ho_,ttu_,ho_,gyoe_,spc_,o_,wa_,ka_,i_,no_
+	.byte	CR_
+	.byte	ko_,ko_,ka_,ra_,spc_,o_,n_,se_,n_,ni_,spc_,i_,ke_,ma_,su_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,ko_,ko_,de_,spc_,ya_,su_,mu_,no_,na_,ra_
+	.byte	CR_
+	.byte	hi_,to_,mo_,spc_,o_,n_,se_,n_,de_,spc_,yu_,ttu_,ku_,ri_,spc_,si_,ma_,se_,n_,to_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

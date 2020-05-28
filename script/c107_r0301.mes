@@ -1,0 +1,39 @@
+// ●トクサネシティ　民家５（街の東）
+
+
+// ●若者男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_c107_r0301
+msg_youngm1_01_p01_c107_r0301:
+	.byte	o_,re_,no_,spc_,i_,mo_,u_,to_,ha_,spc_,HI_,WA_,MA_,KI_,no_
+	.byte	CR_
+	.byte	BO_,bou_,I_,HU_,RE_,N_,DO_,to_,spc_,bu_,n_,tu_,u_,spc_,si_,te_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,ttu_,to_,mo_,spc_,u_,ra_,ya_,ma_,si_,ku_,spc_,na_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢様１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou1_01_p01_c107_r0301
+msg_ojyou1_01_p01_c107_r0301:
+	.byte	HI_,WA_,MA_,KI_,no_,spc_,o_,to_,mo_,da_,ti_,ni_,spc_,a_,e_,na_,ku_,te_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,o_,te_,ga_,mi_,wo_,spc_,ha_,ko_,n_,de_,ku_,re_,ru_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,na_,re_,te_,i_,te_,mo_,spc_,sa_,mi_,si_,ku_,na_,i_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・キャモメ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camome_01_p01_c107_r0301
+msg_camome_01_p01_c107_r0301:
+	.byte	KI_,YYA_,MO_,ME_,kako2_,pi_,hi_,yyo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にキャモメの鳴き声をならす
+// ●そのあと下方向（出入り口）に向かって飛んでいく……

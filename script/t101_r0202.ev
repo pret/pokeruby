@@ -1,0 +1,309 @@
+//====================================================================
+//							t101_r0202
+//						ミシロ・ルーム0202
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t101_r0202_event_data
+FLAG_CHANGE_LABEL	flag_change_t101_r0202
+OBJ_CTRL_LABEL		obj_ctrl_t101_r0202
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_t101_r0202:
+	//ロード１０３でサポートに勝利するまで位置を移動する
+	_IF_FLAGOFF_CALL	FE_SUPPORT_01_FIELD_R103,support_move_p01_t101_r0202
+
+	//オープニングで初めて２階にきたら、シーンを５にする
+	_IFVAL_CALL		WK_SCENE_SP_OPENING,EQ,4,opening_first_zitaku_2kai
+
+	//模様替えグッズを非表示
+	_CALL			base_in_obj_goods_all_reset
+
+	_LDVAL			WK_SCENE_BASE_GOODS, 0
+	_END
+
+//--------------------------------------------------------------------
+//		ロード１０３でサポートに勝利するまで位置を移動する
+//--------------------------------------------------------------------
+support_move_p01_t101_r0202:
+	_SXY_POS_CHANGE		SUPPORTW_01_T101_R0202,7,2
+	_SXY_SITE_CHANGE	SUPPORTW_01_T101_R0202,MV_UP
+	_RET
+	
+//--------------------------------------------------------------------
+//						OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+//グッズを配置
+obj_ctrl_t101_r0202:
+	OBJ_CTRL_DATA	WK_SCENE_BASE_GOODS, 0, obj_goods_set_t101_r0202	// 2002/08/03 by nakahiro
+	OBJ_CTRL_END
+
+// 2002/08/03 by nakahiro
+obj_goods_set_t101_r0202:
+	_GET_MY_SEX
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_in_obj_goods_init
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						サポートキャラ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_t101_r0202
+	_TALK_START
+
+	//ミナモのサポートイベント終了していたら
+	_IF_FLAGON_JUMP	FE_SUPPORT_02_FIELD_C106,ev_support_01_p02_t101_r0202
+
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,my_sex_boy_01_t101_r0202
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,my_sex_girl_01_t101_r0202
+
+	_SE				SE_KAIDAN
+	_OBJ_DELETE		TARGET_OBJ
+
+	//会話した
+	_LDVAL			WK_SCENE_T101_R0202,3
+
+	//ミシロのストッパー解除する
+	_LDVAL			WK_SCENE_FIELD_T101,1
+
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公男
+//--------------------------------------------------------------------
+my_sex_boy_01_t101_r0202:
+	_TALK_KEYWAIT	msg_heroine_01_p01_t101_r0202
+
+	//セーブ後も流すようにする
+	_BGM_SET		MUS_GIRL_SUP,1		
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_heroine_01_p02_t101_r0202
+	_TALK_CLOSE
+
+	//出かける
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_r_support_t101_r0202
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_u_support_t101_r0202
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_l_support_t101_r0202
+	_RET
+
+//出かける
+case_r_support_t101_r0202:
+	_SET_OBJ_ANIME	TARGET_OBJ,support_01_t101_r0202_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+case_u_support_t101_r0202:
+	_SET_OBJ_ANIME	TARGET_OBJ,support_01_t101_r0202_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+case_l_support_t101_r0202:
+	_SET_OBJ_ANIME	TARGET_OBJ,support_01_t101_r0202_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//主人公女
+//--------------------------------------------------------------------
+my_sex_girl_01_t101_r0202:
+	_TALK_KEYWAIT	msg_hero_01_p01_t101_r0202
+
+	//セーブ後も流すようにする
+	_BGM_SET		MUS_BOY_SUP,1		
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_hero_01_p02_t101_r0202
+	_TALK_CLOSE
+
+	//出かける
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_r_support_02_t101_r0202
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_u_support_02_t101_r0202
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_l_support_02_t101_r0202
+	_RET
+
+//出かける
+case_r_support_02_t101_r0202:
+case_u_support_02_t101_r0202:
+	_SET_OBJ_ANIME	TARGET_OBJ,support_01_t101_r0202_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+
+case_l_support_02_t101_r0202:
+	_SET_OBJ_ANIME	TARGET_OBJ,support_01_t101_r0202_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//			ミナモのサポートイベント終了している
+//--------------------------------------------------------------------
+ev_support_01_p02_t101_r0202:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,my_sex_boy_02_t101_r0202
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,my_sex_girl_02_t101_r0202
+
+	_FLAG_SET		FE_SUPPORT_01_T101_R0202
+	_TALK_END
+	_END
+
+//主人公(男)
+my_sex_boy_02_t101_r0202:
+	_IF_FLAGON_JUMP	FE_SUPPORT_01_T101_R0202,my_sex_boy_03_t101_r0202
+	_TALK_KEYWAIT	msg_heroine_01_p03_t101_r0202
+	_RET
+
+//主人公(女)
+my_sex_girl_02_t101_r0202:
+	_IF_FLAGON_JUMP	FE_SUPPORT_01_T101_R0202,my_sex_girl_03_t101_r0202
+	_TALK_KEYWAIT	msg_hero_01_p03_t101_r0202
+	_RET
+
+//主人公(男)
+my_sex_boy_03_t101_r0202:
+	_TALK_KEYWAIT	msg_heroine_01_p04_t101_r0202
+	_RET
+
+//主人公(女)
+my_sex_girl_03_t101_r0202:
+	_TALK_KEYWAIT	msg_hero_01_p04_t101_r0202
+	_RET
+
+//--------------------------------------------------------------------
+//サポート女	出かける(左から話し掛け)
+//--------------------------------------------------------------------
+support_01_t101_r0202_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//サポート女	出かける(下右から話し掛け)
+//--------------------------------------------------------------------
+support_01_t101_r0202_anime02:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート男	出かける(右から話し掛け)
+//--------------------------------------------------------------------
+support_01_t101_r0202_anime03:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//サポート男	出かける(左下から話し掛け)
+//--------------------------------------------------------------------
+support_01_t101_r0202_anime04:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								パソコン							*/
+/********************************************************************/
+SCRIPT_LABEL     ev_pasokon1_01_p01_t101_r0202
+	_TALK_START
+
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,my_sex_boy_10_t101_r0202
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,my_sex_girl_10_t101_r0202
+    _END
+
+my_sex_boy_10_t101_r0202:
+	_TALK_KEYWAIT	msg_paso_no_watch
+	_TALK_END
+    _END
+
+my_sex_girl_10_t101_r0202:
+	//パソコンアニメ
+	_LDVAL			PARAM0,PASO_MY_HOME_GIRL
+	_PROGRAM		ADD_PASO_ANIME
+	_SE				SE_PC_ON
+
+	_TALK_KEYWAIT	msg_pasokon1_watch
+
+	_PROGRAM		MY_ROOM_MY_PC
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+// 「せつぞくをきる」	2002/08/20 by nakahiro
+.GLOBAL	my_sex_girl_11_t101_r0202
+
+my_sex_girl_11_t101_r0202:
+	_LDVAL			PARAM0,PASO_MY_HOME_GIRL
+	_SE				SE_PC_OFF
+	_PROGRAM		DEL_PASO_ANIME
+
+	_TALK_END
+    _END
+
+

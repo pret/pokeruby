@@ -1,0 +1,79 @@
+//MapEditNH Ver.3.51 *.evt -> *.sxy Convert.
+#define OBJNUM_C104_R0802	2
+#define EXITNUM_C104_R0802	2
+#define POSNUM_C104_R0802	0
+#define BGNUM_C104_R0802	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_oldman2_01_p01_c104_r0802[];
+extern const u8	ev_boya1_01_p01_c104_r0802[];
+
+const evObjData	OBJ_c104_r0802[] =
+{
+	{
+		OLDMAN2_01_P01_C104_R0802,		//OBJ ID
+		OLDMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman2_01_p01_c104_r0802,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOYA1_01_P01_C104_R0802,		//OBJ ID
+		BOYA1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_HON,		//Obj Mode Type
+		0x2,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boya1_01_p01_c104_r0802,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c104_r0802[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C104_R0801_STAIR01,		//Door ID
+		C104_R0801,			//Map ID
+		C104,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C104_R0803_STAIR01,		//Door ID
+		C104_R0803,			//Map ID
+		C104,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c104_r0802_sxy_data =
+{
+OBJNUM_C104_R0802,			// field obj max
+EXITNUM_C104_R0802,		// exit max
+POSNUM_C104_R0802,			// pos event max
+BGNUM_C104_R0802,			// bg event max
+OBJ_c104_r0802,			// field obj data
+EXIT_c104_r0802,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

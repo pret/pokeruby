@@ -1,0 +1,39 @@
+// ●ルネシティ　民家１（街の西・一番上）
+
+
+// ●格闘家１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p01_c108_r0201
+msg_fighter1_01_p01_c108_r0201:
+	.byte	u_,mu_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	RU_,NE_,SI_,TE_,II_,ni_,spc_,ko_,mo_,ru_,ko_,to_,spc_,n3_,n0_,ne_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ga_,spc_,a_,mi_,da_,si_,ta_,spc_,hi_,ttu_,sa_,tu_,no_,spc_,wa_,za_,MA_,SI_,N_,gyoe_
+	.byte	CR_
+	.byte	o_,ma_,e_,ni_,spc_,yu_,zu_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン３１「かわらわり」（アイテムNo319）入手処理
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p02_c108_r0201
+msg_fighter1_01_p02_c108_r0201:
+	.byte	wa_,za_,MA_,SI_,N_,n3_,n1_,ha_,spc_,ka_,wa_,ra_,wa_,ri_,gyoe_
+	.byte	CR_
+	.byte	se_,tu_,me_,i_,spc_,su_,ru_,no_,mo_,spc_,o_,so_,ro_,si_,i_,spc_,wa_,za_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ポケモン・カクレオン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakureon_01_p01_c108_r0201
+msg_kakureon_01_p01_c108_r0201:
+	.byte	KA_,KU_,RE_,O_,N_,kako2_,pu_,bou_,spc_,pu_,hi_,yya_,a_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にカクレオンの鳴き声をならす

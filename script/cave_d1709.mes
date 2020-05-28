@@ -1,0 +1,191 @@
+// ●座礁船
+// ●イベント後半部分
+
+
+// ▼d1709----------------------------------
+// ●ラブラブカップル０３：戦闘前メッセージ
+// ●男に話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_01
+msg_lovelove_03_01:
+	.byte	HU_,MI_,kako2_,o_,ta_,ka_,ra_,spc_,sa_,ga_,si_,te_,i_,ta_,ra_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,spc_,ha_,ttu_,ke_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_02
+msg_lovelove_03_02:
+	.byte	HU_,MI_,kako2_,bo_,ku_,ta_,ti_,spc_,hu_,ta_,ri_,no_,spc_,ti_,ka_,ra_,de_,mo_
+	.byte	CR_
+	.byte	ka_,te_,na_,ka_,ttu_,ta_,no_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_03
+msg_lovelove_03_03:
+	.byte	HU_,MI_,kako2_,o_,ta_,ka_,ra_,spc_,mi_,tu_,ka_,ra_,na_,i_,n_,da_,yo_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	mo_,u_,spc_,da_,re_,ka_,ga_,spc_,mo_,ttu_,te_,i_,ttu_,ta_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_04
+msg_lovelove_03_04:
+	.byte	HU_,MI_,kako2_,PO_,KE_,MO_,N_,spc_,n2_,hi_,ki_,spc_,i_,na_,i_,n_,da_,ne_
+	.byte	CR_
+	.byte	so_,re_,da_,to_,spc_,bo_,ku_,ta_,ti_,ni_,ha_,spc_,ka_,te_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：戦闘前メッセージ
+// ●女に話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_05
+msg_lovelove_03_05:
+	.byte	A_,YA_,kako2_,a_,ra_,hate_,spc_,o_,ta_,ka_,ra_,spc_,sa_,ga_,si_,te_,i_,ta_,no_,ni_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,spc_,ha_,ttu_,ke_,n_,spc_,si_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_06
+msg_lovelove_03_06:
+	.byte	A_,YA_,kako2_,tu_,yo_,i_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_07
+msg_lovelove_03_07:
+	.byte	A_,YA_,kako2_,o_,ta_,ka_,ra_,spc_,do_,ko_,ka_,na_,hate_
+	.byte	CR_
+	.byte	mi_,tu_,ka_,ttu_,ta_,ra_,spc_,na_,ni_,spc_,ka_,o_,u_,ka_,spc_,ki_,me_,te_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_08
+msg_lovelove_03_08:
+	.byte	A_,YA_,kako2_,a_,ra_,spc_,PO_,KE_,MO_,N_,spc_,n2_,hi_,ki_,spc_,i_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,si_,yyo_,u_,bu_,ha_,spc_,o_,a_,zu_,ke_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d1709----------------------------------
+// ●ラブラブカップル０３（再戦闘）：戦闘前メッセージ
+// ●男に話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_09
+msg_lovelove_03_09:
+	.byte	HU_,MI_,kako2_,zu_,ttu_,to_,spc_,o_,ta_,ka_,ra_,spc_,sa_,ga_,si_,te_,i_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,tu_,yo_,ku_,spc_,na_,ttu_,ta_,n_,da_,yo_,ne_,bou_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,ttu_,to_,spc_,a_,i_,te_,spc_,si_,te_,mi_,te_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_10
+msg_lovelove_03_10:
+	.byte	HU_,MI_,kako2_,a_,i_,ka_,wa_,ra_,zu_,spc_,tu_,yo_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_11
+msg_lovelove_03_11:
+	.byte	HU_,MI_,kako2_,o_,ta_,ka_,ra_,ha_,spc_,mi_,tu_,ka_,ra_,na_,i_,si_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,ma_,ke_,ru_,si_,spc_,i_,e_,ni_,spc_,ka_,e_,ri_,ta_,i_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,so_,n_,na_,ko_,to_,spc_,i_,u_,to_
+	.byte	CR_
+	.byte	ka_,no_,zi_,yyo_,spc_,o_,ko_,ri_,da_,su_,ka_,ra_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_12
+msg_lovelove_03_12:
+	.byte	HU_,MI_,kako2_,PO_,KE_,MO_,N_,spc_,n2_,hi_,ki_,spc_,i_,na_,i_,n_,da_,ne_
+	.byte	CR_
+	.byte	so_,re_,da_,to_,spc_,bo_,ku_,ta_,ti_,ni_,ha_,spc_,ka_,te_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：戦闘前メッセージ
+// ●女に話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_13
+msg_lovelove_03_13:
+	.byte	A_,YA_,kako2_,a_,ra_,hate_,spc_,ma_,ta_,spc_,de_,a_,ttu_,ta_,wa_,ne_,gyoe_
+	.byte	CR_
+	.byte	a_,ta_,si_,ta_,ti_,to_,spc_,i_,ttu_,si_,yyo_,de_,spc_,a_,ki_,ra_,me_,zu_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	o_,ta_,ka_,ra_,spc_,sa_,ga_,si_,te_,i_,ru_,no_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyo_,u_,bu_,si_,te_,spc_,ma_,ke_,ta_,spc_,ho_,u_,ha_
+	.byte	CR_
+	.byte	a_,ki_,ra_,me_,ru_,ko_,to_,ni_,spc_,si_,na_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_14
+msg_lovelove_03_14:
+	.byte	A_,YA_,kako2_,ma_,ta_,spc_,ma_,ke_,ti_,yya_,ttu_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_15
+msg_lovelove_03_15:
+	.byte	A_,YA_,kako2_,mo_,ttu_,to_,spc_,PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_
+	.byte	CR_
+	.byte	o_,ta_,ka_,ra_,spc_,mi_,tu_,ke_,ru_,ma_,de_,spc_,ka_,e_,ra_,na_,i_,wa_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ラブラブカップル０３（再戦闘）：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_lovelove_03_16
+msg_lovelove_03_16:
+	.byte	A_,YA_,kako2_,a_,ra_,spc_,PO_,KE_,MO_,N_,spc_,n2_,hi_,ki_,spc_,i_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,si_,yyo_,u_,bu_,ha_,spc_,o_,a_,zu_,ke_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

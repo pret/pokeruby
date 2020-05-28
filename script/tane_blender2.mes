@@ -1,0 +1,134 @@
+// ●通信用のきのみブレンダーをチェック
+// ●きのみが一つもない場合 →msg_cube_02_p07_contest:
+// ●ポロックケースがいっぱい（４０個）の場合 →msg_cube_02_p08_contest:
+// ●ポロックケースがない場合 →msg_cube_02_p09_contest:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p01_contest
+msg_cube_02_p01_contest:
+	.byte	ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,de_,spc_,to_,mo_,da_,ti_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	ki_,no_,mi_,ka_,ra_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,u_,si_,n_,ni_,spc_,ha_,i_,ru_,spc_,ma_,e_,ni_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,i_,te_,mo_,spc_,yo_,ro_,si_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●はい　　→msg_cube_02_p02_contest:
+// ●いいえ　→終わり
+
+
+// ●通信処理
+// ●ゲームをする人数を確認します
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p02_contest
+msg_cube_02_p02_contest:
+	.byte	to_,mo_,da_,ti_,wo_,spc_,sa_,ga_,si_,te_,i_,ma_,su_
+	.byte	CR_
+	.byte	tenten_,tenten_,B__,BO_,TA_,N_,de_,spc_,KI_,YYA_,N_,SE_,RU_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●通信成功
+// ●フェードアウト
+// ●フェードイン（人がそろっている）
+// ●＠０　通信できたプレイヤー名１
+// ●＠１　通信できたプレイヤー名２
+// ●＠２　通信できたプレイヤー名３
+// ●人数が１人だった場合　→msg_cube_02_p03_contest:	
+// ●人数が２人だった場合　→msg_cube_02_p04_contest:	
+// ●人数が３人だった場合　→msg_cube_02_p05_contest:	
+
+// ●通信失敗、タイムアウト	→msg_cube_02_p06_contest:
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■	
+	.GLOBAL	msg_cube_02_p03_contest
+msg_cube_02_p03_contest:
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ga_,spc_,ki_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■	
+// ●ゲーム画面へ移動	
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p04_contest
+msg_cube_02_p04_contest:
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF1,sa_,n_,ga_
+	.byte	CR_
+	.byte	ki_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ゲーム画面へ移動
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p05_contest
+msg_cube_02_p05_contest:
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,I_MSG_,STR_TEMP_BUF1,sa_,n_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,sa_,n_,ga_,spc_,ki_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ゲーム画面へ移動
+
+
+
+// ●通信失敗
+// ●タイムアウト
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p06_contest
+msg_cube_02_p06_contest:
+	.byte	da_,re_,mo_,spc_,ki_,ma_,se_,n_,de_,si_,ta_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●きのみが一つもない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p07_contest
+msg_cube_02_p07_contest:
+	.byte	ki_,no_,mi_,ga_,spc_,na_,i_,no_,de_
+	.byte	CR_
+	.byte	ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,ha_,spc_,tu_,ka_,e_,ma_,se_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●ポロックがいっぱいの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p08_contest
+msg_cube_02_p08_contest:
+	.byte	PO_,RO_,TTU_,KU_,KE_,bou_,SU_,ga_,spc_,i_,ttu_,pa_,i_,spc_,na_,no_,de_
+	.byte	CR_
+	.byte	ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,ha_,spc_,tu_,ka_,e_,ma_,se_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●ポロックケースがない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cube_02_p09_contest
+msg_cube_02_p09_contest:
+	.byte	PO_,RO_,TTU_,KU_,KE_,bou_,SU_,ga_,spc_,na_,i_,no_,de_
+	.byte	CR_
+	.byte	ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,ha_,spc_,tu_,ka_,e_,ma_,se_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり

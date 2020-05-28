@@ -1,0 +1,211 @@
+// ●119番道路　天気研究所２Ｆ
+// ●占拠時と解放時の２つの状態があります
+
+
+// ●占拠時
+// ▼r119r0102----------------------------------
+// ●アクア団員♂２０：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_20_01
+msg_aquam_20_01:
+	.byte	ko_,no_,spc_,ke_,n_,ki_,yyu_,u_,zi_,yyo_,de_,spc_,u_,mi_,da_,sa_,re_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,te_,n_,ki_,to_,spc_,ka_,n_,ke_,i_,a_,ru_,spc_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,i_,ta_,ka_,ra_,spc_,i_,ta_,da_,ki_,ni_,spc_,ki_,ta_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂２０：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_20_02
+msg_aquam_20_02:
+	.byte	ko_,n_,na_,spc_,ko_,do_,mo_,ni_,spc_,zi_,yya_,ma_,spc_,sa_,re_,ru_,no_,ka_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂２０：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_20_03
+msg_aquam_20_03:
+	.byte	ko_,ko_,de_,spc_,u_,mi_,da_,sa_,re_,ta_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	mo_,si_,spc_,te_,n_,ki_,wo_,spc_,zi_,yu_,u_,ni_,spc_,a_,ya_,tu_,re_,ru_,na_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ze_,ttu_,ta_,i_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,hi_,tu_,yo_,u_,spc_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♀０２に勝利したときの処理で削除されます
+
+// ▼r119r0102----------------------------------
+// ●アクア団員♂２１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_21_01
+msg_aquam_21_01:
+	.byte	o_,re_,ta_,ti_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,gyoe_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,mo_,no_,ga_,spc_,a_,ru_,spc_,to_,ko_,ro_,na_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ko_,ni_,de_,mo_,spc_,a_,ra_,wa_,re_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂２１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_21_02
+msg_aquam_21_02:
+	.byte	ko_,i_,tu_,ha_,spc_,ma_,i_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂２１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_21_03
+msg_aquam_21_03:
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,ri_,so_,u_,wo_,spc_,si_,ra_,na_,i_,ku_,se_,ni_
+	.byte	CR_
+	.byte	zi_,yya_,ma_,spc_,su_,ru_,n_,zi_,yya_,spc_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♀０２に勝利したときの処理で削除されます
+
+// ▼r119r0102----------------------------------
+// ●アクア団員♀０２：戦闘前メッセージ
+// ●女幹部
+// ●部屋の入口をふさいでいます
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_02_01
+msg_aquaw_02_01:
+	.byte	O_,bou_,TTU_,HO_,TTU_,HO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,re_,wa_,re_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_
+	.byte	CR_
+	.byte	zi_,yya_,ma_,wo_,spc_,si_,yo_,u_,to_,spc_,i_,u_,no_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,ko_,wa_,i_,mo_,no_,si_,ra_,zu_,spc_,to_,i_,o_,u_,ka_
+	.byte	CR_
+	.byte	ta_,da_,no_,spc_,o_,ro_,ka_,mo_,no_,to_,spc_,i_,o_,u_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,wa_,i_,su_,gi_,te_,spc_,ni_,ku_,ra_,si_,ku_,spc_,na_,ttu_,ti_,yya_,u_,gyoe_
+	.byte	CR_
+	.byte	ya_,ttu_,tu_,ke_,te_,spc_,a_,ge_,ru_,wa_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♀０２：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_02_02
+msg_aquaw_02_02:
+	.byte	O_,bou_,TTU_,HO_,TTU_,HO_,gyoe_
+	.byte	CR_
+	.byte	tu_,yo_,ku_,te_,spc_,ni_,ku_,ra_,si_,ku_,spc_,na_,ttu_,ti_,yya_,u_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて以下のメッセージ自動表示
+// ●アクア団員♀０２：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaw_02_03
+msg_aquaw_02_03:
+	.byte	O_,bou_,TTU_,HO_,TTU_,HO_,gyoe_
+	.byte	CR_
+	.byte	o_,mo_,wa_,nu_,spc_,zi_,yya_,ma_,ga_,spc_,ha_,i_,ttu_,ti_,yya_,ttu_,ta_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,ta_,na_,i_,wa_,ne_,gyoe_
+	.byte	CR_
+	.byte	ko_,ko_,ha_,spc_,i_,ti_,do_,spc_,hi_,ki_,a_,ge_,ti_,yya_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,ne_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,ka_,tu_,do_,u_,ha_
+	.byte	CR_
+	.byte	ma_,da_,ma_,da_,spc_,tu_,du_,ku_,n_,da_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	o_,bo_,e_,te_,spc_,o_,ki_,na_,sa_,bou_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●メッセージ表示後、画面フェイドアウトしてアクア団消えます
+// ●博士、オートで主人公に近づいてきて
+// 　msg_studym1_01_p01_r119_r0102:　のメッセージ展開
+
+// ●博士（＝研究員男１）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_r119_r0102
+msg_studym1_01_p01_r119_r0102:
+	.byte	a_,ri_,ga_,to_,u_,yo_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,o_,ka_,ge_,de_,spc_,ta_,su_,ka_,ttu_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,i_,to_,spc_,i_,ttu_,te_,ha_,spc_,na_,n_,da_,ga_
+	.byte	CR_
+	.byte	ko_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,mo_,ra_,ttu_,te_,spc_,o_,ku_,re_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモンをもらえる　　→msg_studym1_01_p03_r119_r0102:
+// ●ポケモンをもらえない　→msg_studym1_01_p02_r119_r0102:
+
+// ●博士（ポケモンをもらえない）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_r119_r0102
+msg_studym1_01_p02_r119_r0102:
+	.byte	a_,ra_,hate_,spc_,so_,re_,i_,zi_,yyo_,u_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,te_,na_,i_,yo_,u_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●博士（ポケモンをもらえる）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p03_r119_r0102
+msg_studym1_01_p03_r119_r0102:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	PO_,WA_,RU_,N_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●パーティに「ポワルン（No137）」を追加
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p04_r119_r0102
+msg_studym1_01_p04_r119_r0102:
+	.byte	so_,i_,tu_,ha_,spc_,so_,no_,to_,ki_,no_,spc_,te_,n_,ki_,ni_,spc_,yo_,ttu_,te_
+	.byte	CR_
+	.byte	su_,ga_,ta_,wo_,spc_,ka_,e_,ru_,spc_,PO_,KE_,MO_,N_,spc_,na_,n_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ke_,n_,ki_,yyu_,u_,zi_,yyo_,spc_,ni_,ha_,spc_,ta_,ku_,sa_,n_,spc_,i_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	e_,n_,ri_,yyo_,se_,zu_,ni_,spc_,mo_,ra_,ttu_,te_,spc_,o_,ku_,re_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●博士（ポケモンをもらったあと）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p05_r119_r0102
+msg_studym1_01_p05_r119_r0102:
+	.byte	wa_,ta_,si_,mo_,spc_,na_,ga_,i_,spc_,a_,i_,da_
+	.byte	CR_
+	.byte	a_,me_,no_,spc_,ke_,n_,ki_,yyu_,u_,wo_,spc_,si_,te_,ru_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	te_,n_,ki_,wo_,spc_,zi_,yu_,u_,zi_,za_,i_,ni_,spc_,ka_,e_,ru_,da_,na_,n_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ni_,n_,ge_,n_,ni_,ha_,spc_,mu_,ri_,na_,spc_,ha_,na_,si_,spc_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●占拠時、部屋の奥には
+// ●博士・助手・助手がいます
+// 　ＯＢＪは、studym1×１、youngm1×２です
+// ●主人公が一度、建物の外にでるとＯＢＪの位置を再設定します
+// ●博士は２Ｆに
+// 　助手２人は１Ｆに

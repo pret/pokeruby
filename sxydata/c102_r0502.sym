@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 7
+#define KUSUNOKI_01_C102_R0502	1
+#define AQUABOSS_01_C102_R0502	2
+#define EVILM1_01_C102_R0502	3
+#define EVILM1_02_C102_R0502	4
+#define OLDMAN2_01_C102_R0502	5
+#define MIDDLEW1_01_C102_R0502	6
+#define BOYA1_01_C102_R0502	7
+
+//Exit ID = 1
+#define C102_R0502_STAIR01	0

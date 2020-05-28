@@ -1,0 +1,12 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define MITSURU_01_T106_R0201	1
+#define FIGHTER1_01_T106_R0201	2
+#define MIDDLEM2_01_T106_R0201	3
+#define MIDDLEW1_01_T106_R0201	4
+#define WOMAN1_01_T106_R0201	5
+
+//Exit ID = 2
+#define T106_R0201_MAT01	0
+#define T106_R0201_MAT02	1

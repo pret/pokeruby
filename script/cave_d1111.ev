@@ -1,0 +1,445 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//						不思議な洞窟・最深部
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d1111_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d1111
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1111:
+	_CALL			set_evil_char
+	_CALL			set_kodai_char
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_CHANGE_MAP_SCREEN	MAPSCRNID_W128DUN01_11
+#elif ( PM_VERSION == VERSION_RUBY )
+	_CHANGE_MAP_SCREEN	MAPSCRNID_W128DUN01_12
+#endif
+
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								POS									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1111_pos01
+	_TALK_START
+
+	_LDVAL			PARAM0,AQUABOSS_01_CAVE_D1111
+	_LDVAL			PARAM1,MAGMABOSS_01_CAVE_D1111
+	_LDVAL			PARAM2,MAGMAM1_01_CAVE_D1111S
+	_LDVAL			PARAM3,MAGMAF1_01_CAVE_D1111S
+
+	//ポケモンを見る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ウェイト
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d1111_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_cave_d1111r
+#endif
+
+	_TALK_CLOSE
+
+	_OBJ_APPEAR		PARAM0
+
+	//声のした方に振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//近づいてくる
+	_SET_OBJ_ANIME	PARAM0,aogiri_01_cave_d1111_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_cave_d1111r
+#endif
+
+	//ポケモンの方を向く
+	_SET_OBJ_ANIME	PARAM0,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p03_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p03_cave_d1111r
+#endif
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	PARAM0,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p04_cave_d1111s
+
+	//戦闘になる
+	_TRAINER_EVENT_FIGHT	AQUABOSS_01,msg_aquaboss_01_p05_cave_d1111s
+
+	_TALK_KEYWAIT	msg_aquaboss_01_p06_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p04_cave_d1111r
+
+	//戦闘になる
+	_TRAINER_EVENT_FIGHT	MAGMABOSS_01,msg_magmaboss_01_p05_cave_d1111r
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p06_cave_d1111r
+#endif
+
+	_SET_WEATHER	ID_WEATHER_OFF
+	_UPDATE_WEATHER
+	_PROGRAM		BGM_FADEOUT_END		//BGMフェードアウト→終了呼び出し
+	_STOP_SCRIPT
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p07_cave_d1111s
+	_PROGRAM		WEATHER_CHG_WAIT			//天候変化終了待ち
+	_STOP_SCRIPT
+	_LDVAL			ANSWORK,1
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p07_cave_d1111r
+	_PROGRAM		WEATHER_CHG_WAIT			//天候変化終了待ち
+	_STOP_SCRIPT
+	_LDVAL			ANSWORK,0
+#endif
+
+	//「キラリ」エフェクト
+	_SE				SE_W197
+	_SET_FE_WORK	0,16			//X
+	_SET_FE_WORK	1,42			//Y
+	_SET_FE_WORK	2,0			//
+	_SET_FLD_EFF	FECODE_Kirari			//
+	_FLD_EFF_WAIT	FECODE_Kirari			//
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_LDVAL			ANSWORK,0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_LDVAL			ANSWORK,1
+#endif
+	_JINGLE			MUS_ME_TAMA
+	_SE				SE_TAMA
+	_PROGRAM		START_JEWEL_EFFECT			//宝玉エフェクト
+
+	//ポケモンの方を向く
+	_SET_OBJ_ANIME	PARAM0,turn_u_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//光が全体に広がってからOBJを切り替えるようにする
+	_TIME_WAIT		150
+	//モノクロから姿を見せる
+	_OBJ_DELETE		POKE1_02_CAVE_D1111
+	_OBJ_APPEAR		POKE1_01_CAVE_D1111
+	_STOP_SCRIPT
+
+	_TIME_WAIT		60
+
+	//古代ポケモンが目覚め、近づいてくる
+	_SET_OBJ_ANIME	POKE1_01_CAVE_D1111,poke1_01_cave_d1111_anime01
+	_OBJ_ANIME_WAIT
+
+	_PROGRAM		FINISH_JEWEL_EFFECT			//宝玉エフェクト終了
+	_STOP_SCRIPT
+
+	//揺らす処理
+	_LDVAL			PARAM0,1
+	_LDVAL			PARAM1,1
+	_PROGRAM		KODAI_POKE_SHAKE
+	_STOP_SCRIPT
+
+	//上に去っていく
+	_SET_OBJ_ANIME	POKE1_01_CAVE_D1111,poke1_01_cave_d1111_anime02
+	_OBJ_ANIME_WAIT
+
+	//古代ポケモンを消す
+	_OBJ_DELETE		POKE1_01_CAVE_D1111
+
+	_TIME_WAIT		4
+
+	//揺らす処理
+	_LDVAL			PARAM0,2
+	_LDVAL			PARAM1,2
+	_PROGRAM		KODAI_POKE_SHAKE
+	_STOP_SCRIPT
+
+	_TIME_WAIT		30
+
+	//パラメータを元に戻す(画面揺らしで書き換えられているので)
+	_LDVAL			PARAM0,AQUABOSS_01_CAVE_D1111
+	_LDVAL			PARAM1,MAGMABOSS_01_CAVE_D1111
+	_LDVAL			PARAM2,MAGMAM1_01_CAVE_D1111S
+	_LDVAL			PARAM3,MAGMAF1_01_CAVE_D1111S
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p08_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p08_cave_d1111r
+#endif
+
+	//無線がなる
+	_SE				SE_PC_LOGIN		//仮
+
+	//アオギリの方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p09_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p09_cave_d1111r
+#endif
+
+	_TALK_CLOSE
+
+	//一歩離れて背を向ける
+	_SET_OBJ_ANIME	PARAM0,aogiri_01_cave_d1111_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p10_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p10_cave_d1111r
+#endif
+
+	_TALK_CLOSE
+
+	//無線が切る
+	_SE				SE_PC_OFF
+	_TIME_WAIT		20
+
+	//下を向く
+	_SET_OBJ_ANIME	PARAM0,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p11_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p11_cave_d1111r
+#endif
+
+	_TALK_CLOSE
+
+	//マツブサ登場(部下２人)
+	_OBJ_APPEAR		PARAM1
+	_OBJ_APPEAR		PARAM2
+	_OBJ_APPEAR		PARAM3
+
+	_SET_OBJ_ANIME	PARAM3,evilw1_01_cave_d1111_anime01
+	_SET_OBJ_ANIME	PARAM2,evilw1_01_cave_d1111_anime01
+	_SET_OBJ_ANIME	PARAM1,matsubusa_01_cave_d1111_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//マツブサの方を向く
+	_SET_OBJ_ANIME	PARAM0,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_cave_d1111s
+
+	//驚く
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	PARAM0,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	PARAM0,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquaboss_01_p12_cave_d1111s
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_cave_d1111r
+
+	//驚く
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	PARAM0,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	PARAM0,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p12_cave_d1111r
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_cave_d1111r
+#endif
+
+	_TALK_CLOSE
+
+	//押しのけて主人公に話し掛ける
+	_SET_OBJ_ANIME	PARAM1,matsubusa_01_cave_d1111_anime02
+	_SET_OBJ_ANIME	PARAM0,aogiri_01_cave_d1111_anime12
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_magmaboss_01_p03_cave_d1111s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p03_cave_d1111r
+#endif
+
+	//強制イベントセット
+	_LDVAL			WK_SCENE_FIELD_R128,1
+
+	//祭壇前のストッパーを消す
+	//祭壇前にミクリを出す
+	_FLAG_RESET		FV_WORKERW2_01_FIELD_C108
+	_FLAG_RESET		FV_WORKERW2_02_FIELD_C108
+	_FLAG_RESET		FV_LEADER08_01_FIELD_C108
+	_FLAG_RESET		FV_DAIGO_01_FIELD_C108
+	_LDVAL			WK_SCENE_FIELD_C108,1
+
+	//ロード１２８にOBJを出す
+	_FLAG_RESET		FV_AQUABOSS_01_FIELD_R128
+	_FLAG_RESET		FV_MAGMABOSS_01_FIELD_R128
+
+	//大雨にする
+	_FLAG_SET		SYS_WEATHER_CTRL
+	_FLAG_SET		FV_OBJ_ALL_FIELD_C108
+
+	//イベント終了した
+	_FLAG_SET		FE_POKE1_01_CAVE_D1111
+
+	//トクサネのダイゴを消す
+	_FLAG_SET		FV_DAIGO_01_C107_R0501
+	_LDVAL			WK_SCENE_C107_R0501,1	//ダイゴの強制イベント終了させる
+
+	//超古代ポケモンに初めて会うイベント終了
+	//もう一度洞窟に入ってもいいように消しておく
+	_LDVAL			WK_SCENE_CAVE_D1111,1
+	_FLAG_SET		FV_AQUABOSS_01_CAVE_D1111
+	_FLAG_SET		FV_MAGMABOSS_01_CAVE_D1111
+	_FLAG_SET		FV_MAGMA_01_CAVE_D1111S
+	_FLAG_SET		FV_POKE1_01_CAVE_D1111
+	_FLAG_SET		FV_AQUA_ALL_CAVE_D1103
+
+	//脱出する
+	_MAP_CHANGE		FIELD,FIELD_R128,38,22
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//アオギリ	近づいてくる
+//--------------------------------------------------------------------
+aogiri_01_cave_d1111_anime01:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アオギリ	主人公に近づく
+//--------------------------------------------------------------------
+aogiri_01_cave_d1111_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アオギリ	一歩離れる
+//--------------------------------------------------------------------
+aogiri_01_cave_d1111_anime10:
+	.byte	AC_WALK_L_1
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アオギリ	近づく
+//--------------------------------------------------------------------
+aogiri_01_cave_d1111_anime11:
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アオギリ	マツブサに押しのけられる
+//--------------------------------------------------------------------
+aogiri_01_cave_d1111_anime12:
+	.byte	AC_SITE_U
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_D_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//古代ポケモン	暴れる
+//--------------------------------------------------------------------
+poke1_01_cave_d1111_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_05
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_05
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+poke1_01_cave_d1111_anime02:
+	.byte	AC_WALK_U_8
+	.byte	AC_WALK_U_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マツブサ	近づいてくる
+//--------------------------------------------------------------------
+matsubusa_01_cave_d1111_anime01:
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	//.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マツブサ	アオギリ押しのけて主人公の近づいてくる
+//--------------------------------------------------------------------
+matsubusa_01_cave_d1111_anime02:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//部下	近づいてくる
+//--------------------------------------------------------------------
+evilw1_01_cave_d1111_anime01:
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	//.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	間をおく
+//--------------------------------------------------------------------
+hero_01_cave_d1111_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+

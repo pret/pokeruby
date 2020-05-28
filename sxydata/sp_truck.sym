@@ -1,0 +1,11 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define CARGO1_01_SP_TRUCK	1
+#define CARGO1_02_SP_TRUCK	2
+#define CARGO1_03_SP_TRUCK	3
+
+//Exit ID = 3
+#define SP_TRUCK_MAT01	0
+#define SP_TRUCK_MAT02	1
+#define SP_TRUCK_MAT03	2

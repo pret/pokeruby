@@ -1,0 +1,57 @@
+//tr_ai.s waza_ai.cで使用（マクロでsideに指定する値）
+#define	CHECK_DEFENCE		0
+#define	CHECK_ATTACK		1
+#define	CHECK_DEFENCE_TYPE1	0
+#define	CHECK_ATTACK_TYPE1	1
+#define	CHECK_DEFENCE_TYPE2	2
+#define	CHECK_ATTACK_TYPE2	3
+#define	CHECK_WAZA			4
+
+//COMP_POWERで使用
+#define	COMP_POWER_NONE		0		//威力計算しない技
+#define	COMP_POWER_NOTOP	1		//ダメージ量がトップじゃない
+#define	COMP_POWER_TOP		2		//ダメージ量がトップ
+
+//IF_FIRSTで使用
+#define	IF_FIRST_ATTACK		0		//自分が早い
+#define	IF_FIRST_DEFENCE	1		//相手が早い
+#define	IF_FIRST_EQUAL		2		//同じ
+
+//AI_CHECK_AISYOUで使用
+//AI_CHECK_WAZA_AISYOUで使用
+#define	AISYOU_4BAI			160		//4倍効果
+#define	AISYOU_2BAI			80		//2倍効果
+#define	AISYOU_15BAI		60		//1.5倍効果
+#define	AISYOU_1BAI			40		//1倍効果
+#define	AISYOU_1_2BAI		20		//1/2倍効果
+#define	AISYOU_1_4BAI		10		//1/4倍効果
+#define	AISYOU_0BAI			0		//効果なし
+
+//AI_IF_PARA_UNDERで使用
+//AI_IF_PARA_OVERで使用
+//AI_IF_PARA_EQUALで使用
+//AI_IFN_PARA_EQUALで使用
+#define	PARA_HP					0x00			//体力
+#define	PARA_POW				0x01			//攻撃力
+#define	PARA_DEF				0x02			//防御力
+#define	PARA_AGI				0x03			//素早さ
+#define	PARA_SPEPOW				0x04			//特攻
+#define	PARA_SPEDEF				0x05			//特防
+#define	PARA_HIT				0x06			//命中率
+#define	PARA_AVOID				0x07			//回避率
+
+//AI_IF_POKE_CHECK_STATE,AI_IF_WAZA_CHECK_STATEで使用
+#define	STATE_KANASIBARI		0x00			//かなしばり
+#define	STATE_ENCORE			0x01			//アンコール
+
+//AI_CHECK_WEATHERで使用
+#define	WEATHER_HARE			0x00			//にほんばれ状態
+#define	WEATHER_AME				0x01			//あまごい状態
+#define	WEATHER_SUNAARASHI		0x02			//すなあらし状態
+#define	WEATHER_ARARE			0x03			//あられ状態
+
+//AI_IF_LEVELで使用
+#define	LEVEL_ATTACK			0x00			//アタックのレベルが高い
+#define	LEVEL_DEFENCE			0x01			//ディフェンスのレベルが高い
+#define	LEVEL_EQUAL				0x02			//レベルが一緒
+

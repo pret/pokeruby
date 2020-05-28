@@ -1,0 +1,172 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C108_R0102	8
+#define EXITNUM_C108_R0102	1
+#define POSNUM_C108_R0102	0
+#define BGNUM_C108_R0102	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_mini_11[];
+extern const u8	ev_sexyw_05[];
+extern const u8	ev_princess_05[];
+extern const u8	ev_sexyw_06[];
+extern const u8	ev_sexyw_08[];
+extern const u8	ev_daisukiw_03[];
+extern const u8	ev_mini_12[];
+extern const u8	ev_sexyw_07[];
+
+const evObjData	OBJ_c108_r0102[] =
+{
+	{
+		TR_MINI_11,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_mini_11,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_05,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_sexyw_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_PRINCESS_05,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_princess_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_06,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0005,		//work area
+		ev_sexyw_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_08,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_sexyw_08,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_DAISUKIW_03,		//OBJ ID
+		MIDDLEW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_daisukiw_03,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MINI_12,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_mini_12,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_07,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_sexyw_07,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c108_r0102[] =
+{
+	{
+		0x000b,		//Xpos
+		0x0016,		//Ypos
+		0x03,		//Height
+		C108_R0101_STAIR01,		//Door ID
+		C108_R0101,			//Map ID
+		C108,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c108_r0102_sxy_data =
+{
+OBJNUM_C108_R0102,			// field obj max
+EXITNUM_C108_R0102,		// exit max
+POSNUM_C108_R0102,			// pos event max
+BGNUM_C108_R0102,			// bg event max
+OBJ_c108_r0102,			// field obj data
+EXIT_c108_r0102,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

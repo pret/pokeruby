@@ -1,0 +1,248 @@
+// ●りゅうせいのたき１Ｆ（手前）
+
+
+// ●アクア団幹部♂（Ｘ１２ーＹ２１　下向き）
+// 　アクア団員　　（Ｘ１４ーＹ２２　左向き）
+
+// ●主人公が（Ｘ１４ーＹ１９）のＰＯＳを踏むと……
+// ●メッセージウインドウ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p01_cave_d0101
+msg_aquam1_01_p01_cave_d0101:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,i_,n_,se_,ki_,ga_,spc_,a_,re_,ba_
+	.byte	CR_
+	.byte	e_,n_,to_,tu_,ya_,ma_,ga_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「！」マーク表示
+// 　アクア団幹部♂、主人公の方を振り向き……
+// ●メッセージウインドウ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p02_cave_d0101
+msg_aquam1_01_p02_cave_d0101:
+	.byte	U_,HI_,YYO_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,ga_,spc_,da_,re_,da_,ka_,spc_,si_,ra_,na_,i_,ga_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,zi_,yya_,ma_,wo_,spc_,su_,ru_,na_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	yo_,u_,si_,yya_,ha_,spc_,si_,na_,i_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団幹部♂が（Ｘ１４ーＹ２１）に到達すると……
+// ●メッセージウインドウ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p01_cave_d0101
+msg_magmaboss_01_p01_cave_d0101:
+	.byte	ma_,te_,TTU_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,ra_,no_,spc_,a_,ku_,zi_,ha_
+	.byte	CR_
+	.byte	wa_,re_,wa_,re_,spc_,I_MSG_,STR_ENE_GROUP2,da_,n_,ga_,spc_,yu_,ru_,sa_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そういってマグマ団３人登場
+// 　（Ｘ１１ーＹ２１）
+// 　（Ｘ１１ーＹ２２）
+// 　（Ｘ１１ーＹ２３）に到達すると
+// ●アクア団幹部♂　画面左を振り向き（団員も左を向く）
+// ●メッセージウインドウ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p03_cave_d0101
+msg_aquam1_01_p03_cave_d0101:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP2,da_,n_,spc_,ma_,de_,spc_,ya_,ttu_,te_,ki_,ta_,no_,ka_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ti_,i_,ti_,spc_,a_,i_,te_,wo_,spc_,si_,te_,ya_,ru_,no_,mo_
+	.byte	CR_
+	.byte	me_,n_,do_,u_,da_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,i_,i_,ya_,gyoe_
+	.byte	CR_
+	.byte	i_,n_,se_,ki_,ha_,spc_,te_,ni_,spc_,i_,re_,ta_,si_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ttu_,sa_,to_,spc_,e_,n_,to_,tu_,ya_,ma_,ni_,spc_,i_,ku_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	U_,HI_,YYO_,HI_,YYO_,gyoe_
+	.byte	CR_
+	.byte	a_,ba_,yo_,gyoe_,spc_,ma_,nu_,ke_,na_,spc_,I_MSG_,STR_ENE_GROUP2,da_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団、主人公を押しのけ
+// 　ハジツゲ方面（画面右）に逃げていく
+
+// ●アクア団が逃げていくと
+// 　マグマ団リーダー、マツブサが移動して主人公に隣接
+// ●メッセージウインドウ自動表示
+// ●サファイアver→msg_magmaboss_01_p02_cave_d0101s:
+// ●ルビーver　　→msg_magmaboss_01_p02_cave_d0101r:
+
+// ●サファイアver
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p02_cave_d0101s
+msg_magmaboss_01_p02_cave_d0101s:
+	.byte	ki_,mi_,ha_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,to_,spc_,i_,u_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,MA_,TU_,BU_,SA_,gyoe_
+	.byte	CR_
+	.byte	MA_,GU_,MA_,da_,n_,wo_,spc_,hi_,ki_,i_,te_,spc_,A_,KU_,A_,da_,n_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ya_,bo_,u_,wo_,spc_,so_,si_,spc_,si_,te_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ze_,na_,ra_,spc_,a_,i_,tu_,ra_,spc_,A_,KU_,A_,da_,n_,ha_
+	.byte	CR_
+	.byte	u_,mi_,wo_,spc_,hu_,ya_,su_,spc_,to_,i_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ka_,i_,ka_,tu_,do_,u_,wo_,spc_,tu_,du_,ke_,ru_
+	.byte	CR_
+	.byte	ki_,ke_,n_,na_,spc_,si_,yyu_,u_,da_,n_,spc_,da_,ka_,ra_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,i_,ti_,wo_,spc_,ko_,yo_,na_,ku_,spc_,a_,i_,su_,ru_
+	.byte	CR_
+	.byte	wa_,re_,wa_,re_,spc_,MA_,GU_,MA_,da_,n_,no_,spc_,te_,ki_,spc_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ルビーver
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p02_cave_d0101r
+msg_aquaboss_01_p02_cave_d0101r:
+	.byte	ki_,mi_,ha_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,to_,spc_,i_,u_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,A_,O_,GI_,RI_,gyoe_
+	.byte	CR_
+	.byte	A_,KU_,A_,da_,n_,wo_,spc_,hi_,ki_,i_,te_,spc_,MA_,GU_,MA_,da_,n_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ya_,bo_,u_,wo_,spc_,so_,si_,spc_,si_,te_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ze_,na_,ra_,spc_,a_,i_,tu_,ra_,spc_,MA_,GU_,MA_,da_,n_,ha_
+	.byte	CR_
+	.byte	ri_,ku_,wo_,spc_,hu_,ya_,su_,spc_,to_,i_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ka_,i_,ka_,tu_,do_,u_,wo_,spc_,tu_,du_,ke_,ru_
+	.byte	CR_
+	.byte	ki_,ke_,n_,na_,spc_,si_,yyu_,u_,da_,n_,spc_,da_,ka_,ra_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	u_,mi_,wo_,spc_,ko_,yo_,na_,ku_,spc_,a_,i_,su_,ru_
+	.byte	CR_
+	.byte	wa_,re_,wa_,re_,spc_,A_,KU_,A_,da_,n_,no_,spc_,te_,ki_,spc_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マグマ団員、（Ｘ１４Ｙ２１）まで移動
+// 　マツブサと団員、顔を見合わせる
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p03_cave_d0101
+msg_magmaboss_01_p03_cave_d0101:
+	.byte	I_MSG_,STR_ENE_LEADER2,sa_,ma_
+	.byte	CR_
+	.byte	ni_,ge_,ta_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,wo_,spc_,o_,i_,ka_,ke_,na_,i_,to_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（団員の台詞ですけど一連の流れなので
+// 　　ラベルはmagmabossにしてあります）
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p04_cave_d0101
+msg_magmaboss_01_p04_cave_d0101:
+	.byte	I_MSG_,STR_ENE_LEADER2,kako2_,so_,u_,da_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,so_,ga_,ne_,ba_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,ya_,tu_,ra_
+	.byte	CR_
+	.byte	e_,n_,to_,tu_,ya_,ma_,de_,spc_,na_,ni_,wo_,spc_,su_,ru_,ka_,spc_,wa_,ka_,ra_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●マツブサ、主人公を向き
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p05_cave_d0101
+msg_magmaboss_01_p05_cave_d0101:
+	.byte	I_MSG_,STR_ENE_LEADER2,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ki_,mi_,mo_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ni_,ha_,spc_,ki_,wo_,spc_,tu_,ke_,ta_,ma_,e_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,sa_,ra_,ba_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●マツブサたちもハジツゲ方面に退場していく
+// ●えんとつやまのロープウェイのストッパー削除
+
+
+// ●ソライシ博士
+// ●（Ｘ１３ーＹ２３）辺り
+// ●イベント中も後もキョロキョロしている感じ？
+// 　（どうせ、メッセージウインドウに隠れるので……）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_cave_d0101
+msg_studym1_01_p01_cave_d0101:
+	.byte	bo_,ku_,tenten_,tenten_,spc_,SO_,RA_,I_,SI_
+	.byte	CR_
+	.byte	i_,tu_,mo_,ha_,spc_,HA_,ZI_,TU_,GE_,de_,spc_,i_,n_,se_,ki_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ke_,n_,ki_,yyu_,u_,wo_,spc_,si_,te_,i_,ru_,spc_,ha_,ka_,se_,spc_,da_,ke_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,spc_,to_,i_,u_,spc_,re_,n_,ti_,yyu_,u_,ga_
+	.byte	CR_
+	.byte	kako_,ri_,yyu_,u_,se_,i_,no_,ta_,ki_,ni_,spc_,a_,n_,na_,i_,spc_,si_,ro_,gyoe_,kakot_
+	.byte	SCROLL_WAIT_
+	.byte	kako_,i_,n_,se_,ki_,wo_,spc_,to_,ri_,da_,si_,te_,spc_,ya_,ru_,ka_,ra_,kakot_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	i_,u_,ka_,ra_,spc_,ko_,ko_,ni_,spc_,tu_,re_,te_,ki_,ta_,n_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ke_,do_,spc_,bo_,ku_,tenten_,tenten_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,da_,ma_,sa_,re_,ta_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,a_,tenten_,tenten_,spc_,mo_,u_,spc_,a_,no_,spc_,i_,n_,se_,ki_
+	.byte	CR_
+	.byte	bo_,ku_,no_,spc_,MO_,NO_,ni_,ha_,spc_,na_,ra_,na_,i_,yo_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,si_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	e_,n_,to_,tu_,ya_,ma_,de_,spc_,i_,n_,se_,ki_,wo_,spc_,tu_,ka_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,wo_,spc_,su_,ru_,n_,da_,ro_,u_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●えんとつやまイベント終了まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_cave_d0101
+msg_studym1_01_p02_cave_d0101:
+	.byte	SO_,RA_,I_,SI_,kako2_,I_MSG_,STR_ENE_GROUP,da_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	e_,n_,to_,tu_,ya_,ma_,de_,spc_,i_,n_,se_,ki_,wo_,spc_,tu_,ka_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,wo_,spc_,su_,ru_,n_,da_,ro_,u_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●えんとつやまイベントが終了すると
+// 　ハジツゲの研究所に出現する……

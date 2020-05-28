@@ -1,0 +1,90 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_R110_R0102	1
+#define EXITNUM_R110_R0102	2
+#define POSNUM_R110_R0102	1
+#define BGNUM_R110_R0102	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_middlem1_01_p01_r110_r0102[];
+
+//POS_SCRIPT
+extern const u8	ev_talk_stop_01_r110_r0102[];
+
+const evObjData	OBJ_r110_r0102[] =
+{
+	{
+		MIDDLEM1_01_R110_R0102,		//OBJ ID
+		MIDDLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem1_01_p01_r110_r0102,		//Event Lavel
+		FV_MIDDLEM1_01_R110_R0102,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r110_r0102[] =
+{
+	{
+		0x000a,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		R110_R0104_DOOR01,		//Door ID
+		R110_R0104,			//Map ID
+		R110,				//Field ID
+	},
+
+	{
+		0x0002,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		R110_R0103_MAT01,		//Door ID
+		R110_R0103,			//Map ID
+		R110,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_r110_r0102[] =
+{
+	{
+		0x0002,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		LOCALWORK2,		//Event Type
+		0x00,		//Scene
+		ev_talk_stop_01_r110_r0102,		//Script
+	},
+
+};
+
+const SXY_BG	BG_r110_r0102[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		kinnotama_1,		//Script
+	},
+
+};
+
+const SXY_DATA	r110_r0102_sxy_data =
+{
+OBJNUM_R110_R0102,			// field obj max
+EXITNUM_R110_R0102,		// exit max
+POSNUM_R110_R0102,			// pos event max
+BGNUM_R110_R0102,			// bg event max
+OBJ_r110_r0102,			// field obj data
+EXIT_r110_r0102,			// exit data
+POS_r110_r0102,			// pos event data
+BG_r110_r0102,				// bg event data
+};

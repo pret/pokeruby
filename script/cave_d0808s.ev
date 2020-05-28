@@ -1,0 +1,79 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam_26
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AQUAM_26
+	_TRAINER_DATA2	msg_aquam_26_01
+	_TRAINER_DATA3	msg_aquam_26_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_26_03
+	_END
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MAGMAM_26
+	_TRAINER_DATA2	msg_magmam_26_01
+	_TRAINER_DATA3	msg_magmam_26_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_magmam_26_03
+	_END
+#endif
+
+SCRIPT_LABEL	ev_aquam_27
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AQUAM_27
+	_TRAINER_DATA2	msg_aquam_27_01
+	_TRAINER_DATA3	msg_aquam_27_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_27_03
+	_END
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MAGMAM_27
+	_TRAINER_DATA2	msg_magmam_27_01
+	_TRAINER_DATA3	msg_magmam_27_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_magmam_27_03
+	_END
+#endif
+
+SCRIPT_LABEL	ev_aquam_28
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AQUAM_28
+	_TRAINER_DATA2	msg_aquam_28_01
+	_TRAINER_DATA3	msg_aquam_28_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_28_03
+	_END
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MAGMAM_28
+	_TRAINER_DATA2	msg_magmam_28_01
+	_TRAINER_DATA3	msg_magmam_28_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_magmam_28_03
+	_END
+#endif
+
+
+
+

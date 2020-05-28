@@ -1,0 +1,41 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d0806.ev
+//
+//============================================ 
+
+/* ダミーデータです */
+
+EVENT_DATA_START cave_d0806_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_okaruto_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	OKARUTO_04
+	_TRAINER_DATA2	msg_okaruto_04_01
+	_TRAINER_DATA3	msg_okaruto_04_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_okaruto_04
+	_TRAINER_EASY_MSG	msg_okaruto_04_03
+	_END
+
+_revenge_okaruto_04:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	OKARUTO_04
+	_TRAINER_DATA2	msg_okaruto_04_04
+	_TRAINER_DATA3	msg_okaruto_04_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_okaruto_04_06
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

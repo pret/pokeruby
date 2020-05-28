@@ -1,0 +1,332 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_R110_R0106	11
+#define EXITNUM_R110_R0106	3
+#define POSNUM_R110_R0106	7
+#define BGNUM_R110_R0106	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_campb_05[];
+extern const u8	ev_picnicg_05[];
+extern const u8	ev_mount_05[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	ev_ball1_64[];
+extern const u8	ev_ball1_63[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+
+//POS_SCRIPT
+extern const u8	ev_r110_r0106_pos01[];
+extern const u8	ev_r110_r0106_pos02[];
+extern const u8	ev_r110_r0106_pos03[];
+extern const u8	ev_r110_r0106_pos04[];
+extern const u8	ev_r110_r0106_pos05[];
+extern const u8	ev_r110_r0106_pos06[];
+extern const u8	ev_r110_r0106_pos07[];
+
+//BG_SCRIPT
+extern const u8	ev_karakuri_01_p01_r110_r0106[];
+
+const evObjData	OBJ_r110_r0106[] =
+{
+	{
+		TR_CAMPB_05,		//OBJ ID
+		BOYSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0010,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_campb_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_PICNICG_05,		//OBJ ID
+		GIRLSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_picnicg_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_05,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_mount_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		CRUSHROCK_01_R110_R0106,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+	{
+		CRUSHROCK_02_R110_R0106,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ01,		//Event Flag
+	},
+
+	{
+		CRUSHROCK_03_R110_R0106,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ02,		//Event Flag
+	},
+
+	{
+		CRUSHROCK_04_R110_R0106,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ03,		//Event Flag
+	},
+
+	{
+		BALL1_64,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_64,		//Event Lavel
+		FV_BALL1_64,		//Event Flag
+	},
+
+	{
+		BALL1_63,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_63,		//Event Lavel
+		FV_BALL1_63,		//Event Flag
+	},
+
+	{
+		CRUSHROCK_05_R110_R0106,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0014,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ04,		//Event Flag
+	},
+
+	{
+		CRUSHROCK_06_R110_R0106,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ05,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r110_r0106[] =
+{
+	{
+		0x0000,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		R110_R0101_DOOR01,		//Door ID
+		R110_R0101,			//Map ID
+		R110,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		R110_R0101_DOOR01,		//Door ID
+		R110_R0101,			//Map ID
+		R110,				//Field ID
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		R110_R0102_DOOR01,		//Door ID
+		R110_R0102,			//Map ID
+		R110,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_r110_r0106[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0014,		//Ypos
+		0x03,		//Height
+		LOCALWORK1,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos01,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		LOCALWORK2,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos02,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		LOCALWORK3,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos03,		//Script
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		LOCALWORK4,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos04,		//Script
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		LOCALWORK5,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos05,		//Script
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		LOCALWORK6,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos06,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		LOCALWORK7,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0106_pos07,		//Script
+	},
+
+};
+
+const SXY_BG	BG_r110_r0106[] =
+{
+	{
+		0x0000,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_karakuri_01_p01_r110_r0106,		//Script
+	},
+
+};
+
+const SXY_DATA	r110_r0106_sxy_data =
+{
+OBJNUM_R110_R0106,			// field obj max
+EXITNUM_R110_R0106,		// exit max
+POSNUM_R110_R0106,			// pos event max
+BGNUM_R110_R0106,			// bg event max
+OBJ_r110_r0106,			// field obj data
+EXIT_r110_r0106,			// exit data
+POS_r110_r0106,			// pos event data
+BG_r110_r0106,				// bg event data
+};

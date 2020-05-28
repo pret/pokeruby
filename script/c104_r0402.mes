@@ -1,0 +1,22 @@
+// ●カナズミシティ　民家１（街の西・一番上）２Ｆ
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c104_r0402
+msg_middlew1_01_p01_c104_r0402:
+	.byte	mo_,u_,ne_,spc_,ta_,i_,he_,n_,spc_,na_,no_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,ga_,spc_,ta_,i_,he_,n_,ttu_,te_
+	.byte	CR_
+	.byte	so_,n_,na_,no_,spc_,ki_,ma_,ttu_,te_,ru_,de_,si_,yyo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,i_,ni_,ti_,no_,spc_,o_,ko_,n_,da_,te_,spc_,yo_,TTU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,i_,ni_,ti_,spc_,ma_,i_,ni_,ti_,spc_,ka_,n_,ga_,e_,ru_,no_,ttu_,te_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,ni_,spc_,ta_,i_,he_,n_,spc_,na_,n_,da_,ka_,ra_,TTU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●意味のない人でいいそうなので……

@@ -1,0 +1,395 @@
+//=================================================================== 
+//						c102_r0401.ev
+//　　　				カイナ・ポケモン大好きクラブ
+//=================================================================== 
+
+//-------------------------------------------------------------------
+//				   マップでの特殊イベント指定
+//-------------------------------------------------------------------
+EVENT_DATA_START c102_r0401_event_data
+FLAG_CHANGE_LABEL	flag_change_c102_r0401
+EVENT_DATA_END
+	
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c102_r0401:
+	_END
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						大好きクラブ会長							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_c102_r0401
+	_TALK_OBJ_START
+
+	_SWITCH			WK_SCENE_01_C102_R0401
+	_CASEJUMP		0,ev_gentlem1_02_p01_c102_r0401
+	_CASEJUMP		1,ev_gentlem1_01_p02_c102_r0401
+	_CASEJUMP		2,ev_gentlem1_01_p12_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//話しかけ１回目
+ev_gentlem1_02_p01_c102_r0401:
+	//一回話しかけた状態へ
+	_LDVAL			WK_SCENE_01_C102_R0401,1
+
+	//”かいちょう　ですぞ！”
+	_TALK_KEYWAIT	msg_gentlem1_01_p01_c102_r0401
+
+	_JUMP			ev_gentlem1_01_p03_c102_r0401
+	_END
+
+//話しかけ２回目以降
+ev_gentlem1_01_p02_c102_r0401:
+
+	_LDVAL			LOCALWORK2,0					//0～4:一部残っている,5:全ての項目を満たした。
+	_IF_FLAGON_CALL	FE_DAISUKI_GOODS_FLAG05,koumoku_work_plus_c102_r0401
+	_IF_FLAGON_CALL	FE_DAISUKI_GOODS_FLAG04,koumoku_work_plus_c102_r0401
+	_IF_FLAGON_CALL	FE_DAISUKI_GOODS_FLAG03,koumoku_work_plus_c102_r0401
+	_IF_FLAGON_CALL	FE_DAISUKI_GOODS_FLAG02,koumoku_work_plus_c102_r0401
+	_IF_FLAGON_CALL	FE_DAISUKI_GOODS_FLAG01,koumoku_work_plus_c102_r0401
+
+	//全部のアイテムをもらった状態かチェック(入手時はフラグセット）
+	_IFVAL_CALL		LOCALWORK2,EQ,5,item_all_get_wk_set_c102_r0401
+
+	//全部のアイテムをもらっていたら、アイテム入手後の処理へ
+	_IFVAL_JUMP		WK_SCENE_01_C102_R0401,EQ,2,ev_gentlem1_01_p12_c102_r0401
+
+	//”そだって　ますかな？”
+	_TALK_KEYWAIT	msg_gentlem1_01_p02_c102_r0401
+
+	_JUMP			ev_gentlem1_01_p03_c102_r0401
+	_END
+
+//すべてのアイテム入手後
+ev_gentlem1_01_p12_c102_r0401:
+	//”あげる　どうぐは　ない”
+	_TALK_KEYWAIT	msg_gentlem1_01_p12_c102_r0401
+	_TALK_OBJ_END
+	_END
+
+//ポケモンチェック（挨拶以降の共通部分）
+ev_gentlem1_01_p03_c102_r0401:
+	//”ふむふむ　なるほど”
+	_TALK_KEYWAIT	msg_gentlem1_01_p03_c102_r0401
+
+	_LDVAL		LOCALWORK1,0					//0:該当なし,1～5:規定値に達した項目
+	//まだ獲得していないフラグの中で一定以上に達しているものがあるかをチェック
+	//別の項目もあった場合、ワークは上書き(Styleに向かって優先度が高くなるので）
+	_IF_FLAGOFF_CALL	FE_DAISUKI_GOODS_FLAG05,strong_status_check_c102_r0401
+	_IF_FLAGOFF_CALL	FE_DAISUKI_GOODS_FLAG04,clever_status_check_c102_r0401
+	_IF_FLAGOFF_CALL	FE_DAISUKI_GOODS_FLAG03,cute_status_check_c102_r0401
+	_IF_FLAGOFF_CALL	FE_DAISUKI_GOODS_FLAG02,beautiful_status_check_c102_r0401
+	_IF_FLAGOFF_CALL	FE_DAISUKI_GOODS_FLAG01,style_status_check_c102_r0401
+
+
+	//手持ちのポケモン名取得
+	_GET_TEMOTI_MONSNAME	0
+
+	_SWITCH	LOCALWORK1
+	_CASEJUMP		0,ev_gentlem1_01_p04_c102_r0401
+	_CASEJUMP		1,style_item_get_c104_r0401
+	_CASEJUMP		2,beautiful_item_get_c104_r0401
+	_CASEJUMP		3,cute_item_get_c104_r0401
+	_CASEJUMP		4,clever_item_get_c104_r0401
+	_CASEJUMP		5,strong_item_get_c104_r0401
+
+
+	_TALK_OBJ_END
+	_END
+
+//全部のアイテムをもらった状態へ
+item_all_get_wk_set_c102_r0401:
+	//全てもらった状態
+	_LDVAL			WK_SCENE_01_C102_R0401,2
+	_RET
+
+
+//work2を＋＋
+koumoku_work_plus_c102_r0401:
+	_ADDWK			LOCALWORK2,1
+	_RET
+
+
+//すべて一定以上でない（もらえないとき）
+ev_gentlem1_01_p04_c102_r0401:
+	//”わるくは　ないんだが　よくもない”
+	_TALK_KEYWAIT	msg_gentlem1_01_p04_c102_r0401
+	_TALK_OBJ_END
+	_END
+
+//かっこよさの取得処理
+style_item_get_c104_r0401:
+	//赤いバンダナゲット
+	_ADD_ITEM_CHK	ITEM_AKAIBANDANA,1
+	//アイテムが追加不可ならいっぱい処理へ
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_gentlem1_01_p05_c102_r0401
+
+	//"きみの　xxxx ですが たいした　ものです"
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_c102_r0401
+
+	//アイテム取得状態
+	_FLAG_SET		FE_DAISUKI_GOODS_FLAG01
+
+	_ITEM_EVENT		ITEM_AKAIBANDANA,1
+	_TALK_KEYWAIT	msg_gentlem1_01_p07_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+
+//美しさの取得処理
+beautiful_item_get_c104_r0401:
+	//青いバンダナゲット
+	_ADD_ITEM_CHK	ITEM_AOIBANDANA,1
+	//アイテムが追加不可ならいっぱい処理へ
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_gentlem1_01_p05_c102_r0401
+
+	//"きみの　xxxx ですが たいした　ものです"
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_c102_r0401
+
+	//アイテム取得状態
+	_FLAG_SET		FE_DAISUKI_GOODS_FLAG02
+
+	_ITEM_EVENT		ITEM_AOIBANDANA,1
+	_TALK_KEYWAIT	msg_gentlem1_01_p08_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//かわいらしさの取得処理
+cute_item_get_c104_r0401:
+	//ピンクのバンダナゲット
+	_ADD_ITEM_CHK	ITEM_PINKUNOBANDANA,1
+	//アイテムが追加不可ならいっぱい処理へ
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_gentlem1_01_p05_c102_r0401
+
+	//"きみの　xxxx ですが たいした　ものです"
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_c102_r0401
+
+	//アイテム取得状態
+	_FLAG_SET		FE_DAISUKI_GOODS_FLAG03
+
+	_ITEM_EVENT		ITEM_PINKUNOBANDANA,1
+	_TALK_KEYWAIT	msg_gentlem1_01_p09_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//賢さの取得処理
+clever_item_get_c104_r0401:
+	//緑のバンダナゲット
+	_ADD_ITEM_CHK	ITEM_MIDORINOBANDANA,1
+	//アイテムが追加不可ならいっぱい処理へ
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_gentlem1_01_p05_c102_r0401
+
+	//"きみの　xxxx ですが たいした　ものです"
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_c102_r0401
+
+	//アイテム取得状態
+	_FLAG_SET		FE_DAISUKI_GOODS_FLAG04
+
+	_ITEM_EVENT		ITEM_MIDORINOBANDANA,1
+	_TALK_KEYWAIT	msg_gentlem1_01_p10_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//たくましさの取得処理
+strong_item_get_c104_r0401:
+	//黄色のバンダナゲット
+	_ADD_ITEM_CHK	ITEM_KIIRONOBANDANA,1
+	//アイテムが追加不可ならいっぱい処理へ
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_gentlem1_01_p05_c102_r0401
+
+	//"きみの　xxxx ですが たいした　ものです"
+	_TALK_KEYWAIT	msg_gentlem1_01_p06_c102_r0401
+
+	//アイテム取得状態
+	_FLAG_SET		FE_DAISUKI_GOODS_FLAG05
+
+	_ITEM_EVENT		ITEM_KIIRONOBANDANA,1
+	_TALK_KEYWAIT	msg_gentlem1_01_p11_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//バッグが一杯
+ev_gentlem1_01_p05_c102_r0401:
+	//”バッグがいっぱい”
+	_TALK_KEYWAIT	msg_gentlem1_01_p05_c102_r0401
+	_TALK_OBJ_END
+	_END
+
+//かっこよさチェック
+style_status_check_c102_r0401:
+	_FUNC_CALL		ANSWORK,DAISUKI_STYLE_CHECK
+
+	_IFVAL_CALL		ANSWORK,EQ,1,style_flag_on_c102_r0401
+	_RET
+
+//今回かっこよさが一定以上だった
+style_flag_on_c102_r0401:
+	_LDVAL			LOCALWORK1,1
+	_RET
+
+//うつくしさチェック
+beautiful_status_check_c102_r0401:
+	_FUNC_CALL		ANSWORK,DAISUKI_BEAUTIFUL_CHECK
+
+	_IFVAL_CALL		ANSWORK,EQ,1,beautiful_flag_on_c102_r0401
+	_RET
+
+//今回がうつくしさ一定以上だった
+beautiful_flag_on_c102_r0401:
+	_LDVAL			LOCALWORK1,2
+	_RET
+
+
+//かわいさチェック
+cute_status_check_c102_r0401:
+	_FUNC_CALL		ANSWORK,DAISUKI_CUTE_CHECK
+
+	_IFVAL_CALL		ANSWORK,EQ,1,cute_flag_on_c102_r0401
+	_RET
+
+//今回がかわいさ一定以上だった
+cute_flag_on_c102_r0401:
+	_LDVAL			LOCALWORK1,3
+	_RET
+
+
+//賢さチェック
+clever_status_check_c102_r0401:
+	_FUNC_CALL		ANSWORK,DAISUKI_CLEVER_CHECK
+
+	_IFVAL_CALL		ANSWORK,EQ,1,clever_flag_on_c102_r0401
+	_RET
+
+//今回が賢さ一定以上だった
+clever_flag_on_c102_r0401:
+	_LDVAL			LOCALWORK1,4
+	_RET
+
+
+//たくましさチェック
+strong_status_check_c102_r0401:
+	_FUNC_CALL		ANSWORK,DAISUKI_STRONG_CHECK
+
+	_IFVAL_CALL		ANSWORK,EQ,1,strong_flag_on_c102_r0401
+	_RET
+
+//今回がたくましさ一定以上だった
+strong_flag_on_c102_r0401:
+	_LDVAL			LOCALWORK1,5
+	_RET
+
+
+
+/********************************************************************/
+/*							女性２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_c102_r0401
+	_TALK_OBJ_START
+
+	//すでにアイテムを貰っているか
+	_IF_FLAGON_JUMP	FE_YASURAGINOSUZU_GET,ev_woman2_01_p02_c102_r0401
+
+	_TALK_KEYWAIT	msg_woman2_01_p01_c102_r0401
+
+	//なつき度チェック
+	_FUNC_CALL		ANSWORK,GET_NATUKIDO_LEVEL
+	_IFVAL_JUMP		ANSWORK,GE,4,get_woman2_01_p01_c102_r0401
+
+	_TALK_OBJ_END
+	_END
+
+//なつき度がクリアしている
+get_woman2_01_p01_c102_r0401:
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_woman2_01_p02_c102_r0401
+
+	_ITEM_EVENT		ITEM_YASURAGINOSUZU,1
+	_IF_ZERO_JUMP	ev_fail_item
+	
+	_FLAG_SET		FE_YASURAGINOSUZU_GET
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテムを貰っている
+ev_woman2_01_p02_c102_r0401:
+	_TALK_KEYWAIT	msg_woman2_01_p03_c102_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							おやじ１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_c102_r0401
+	_EASY_OBJ_MSG	msg_middlem1_01_p01_c102_r0401
+	_END
+
+
+/********************************************************************/
+/*							お嬢１									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou1_01_p01_c102_r0401
+	_EASY_OBJ_MSG	msg_ojyou1_01_p01_c102_r0401
+	_END
+
+
+/********************************************************************/
+/*							エネコ									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_eneco_01_p01_c102_r0401
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_ENEKO,0
+	_TALK_KEYWAIT	msg_eneco_01_p01_c102_r0401
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ジグザグマ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_jiguma_01_p01_c102_r0401
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_ZIGUZAGUMA,0
+	_TALK_KEYWAIT	msg_jiguma_01_p01_c102_r0401
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							マリルリ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_mariruri_01_p01_c102_r0401
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_MARIRURI,0
+	_TALK_KEYWAIT	msg_mariruri_01_p01_c102_r0401
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+

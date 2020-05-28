@@ -1,0 +1,91 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R129	4
+#define EXITNUM_FIELD_R129	0
+#define POSNUM_FIELD_R129	0
+#define BGNUM_FIELD_R129	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_athletesm_05[];
+extern const u8	ev_athletesw_05[];
+extern const u8	ev_swimmerw_29[];
+extern const u8	ev_swimmerm_29[];
+
+const evObjData	OBJ_field_r129[] =
+{
+	{
+		TR_ATHLETESM_05,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000f,		//Xpos
+		0x0017,		//Ypos
+		0x01,		//Height
+		MV_RTDL,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x4,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_athletesm_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_ATHLETESW_05,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0023,		//Xpos
+		0x0009,		//Ypos
+		0x01,		//Height
+		MV_RTRD,		//Obj Mode Type
+		0x5,		//Move Limit X
+		0x2,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_athletesw_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERW_29,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x000e,		//Ypos
+		0x01,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_swimmerw_29,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERM_29,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001c,		//Xpos
+		0x0010,		//Ypos
+		0x01,		//Height
+		MV_SPINR,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_swimmerm_29,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_DATA	field_r129_sxy_data =
+{
+OBJNUM_FIELD_R129,			// field obj max
+EXITNUM_FIELD_R129,		// exit max
+POSNUM_FIELD_R129,			// pos event max
+BGNUM_FIELD_R129,			// bg event max
+OBJ_field_r129,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

@@ -1,0 +1,178 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START r119_r0102_event_data
+FLAG_CHANGE_LABEL	flag_change_r119_r0102
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r119_r0102:
+	_CALL			set_evil_char
+
+	//解放してなかったらOBJの位置を変更する
+	_IFVAL_CALL		WK_SCENE_R119_TENKI,EQ,0,sxy_chg_01_r119_r0102
+
+	//解放してまだフィールドにでていなかったら
+	_IFVAL_CALL		WK_SCENE_R119_TENKI,EQ,1,sxy_chg_02_r119_r0102
+	_END
+
+//解放してなかったらOBJの位置を変更する
+sxy_chg_01_r119_r0102:
+	_SXY_POS_CHANGE		STUDYM1_01_R119_R0102,1,6
+	_SXY_SITE_CHANGE	STUDYM1_01_R119_R0102,MV_RIGHT
+	_RET
+
+//解放してまだフィールドにでていなかったら
+sxy_chg_02_r119_r0102:
+	_SXY_POS_CHANGE		STUDYM1_01_R119_R0102,4,6
+	_SXY_SITE_CHANGE	STUDYM1_01_R119_R0102,MV_RIGHT
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam_20
+	_TRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAM_20
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAM_20
+#endif
+	_TRAINER_DATA2	msg_aquam_20_01
+	_TRAINER_DATA3	msg_aquam_20_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_20_03
+	_END
+
+SCRIPT_LABEL	ev_aquam_21
+	_TRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAM_21
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAM_21
+#endif
+	_TRAINER_DATA2	msg_aquam_21_01
+	_TRAINER_DATA3	msg_aquam_21_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_21_03
+	_END
+
+SCRIPT_LABEL	ev_aquaw_02
+	_EVTRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAW_02
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAW_02
+#endif
+	_TRAINER_DATA2	msg_aquaw_02_01
+	_TRAINER_DATA3	msg_aquaw_02_02
+	_TRAINER_DATA4	ev_aquaw_02_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquaw_02_03
+	_END
+
+//ボス倒しての処理
+ev_aquaw_02_end:
+	_TALK_KEYWAIT	msg_aquaw_02_03
+	_TALK_CLOSE
+
+	_LDVAL			WK_SCENE_R119_TENKI,1
+
+	//OBJ出す
+	_FLAG_RESET		FV_TENKI_01_R119_R0102
+
+	//解放時の曲に戻す
+	_BGM_NOW_SET
+	_FLD_FADE_BLACKOUT	
+
+	//アクア団を消す
+	_FLAG_SET		FV_AQUA_ALL_FIELD_R119
+	_OBJ_DELETE		TR_AQUAM_20
+	_OBJ_DELETE		TR_AQUAM_21
+	_OBJ_DELETE		TR_AQUAW_02
+
+	_FLD_FADE_BLACKIN
+
+	//画面が明るくなったら
+
+	//近づいてくる
+	_SET_OBJ_ANIME	STUDYM1_01_R119_R0102,studym1_01_r119_r0102_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//SXY上書き
+	_SXY_POS_OVERWRITE	STUDYM1_01_R119_R0102
+
+	_JUMP			ev_hakase_01_r119_r0102
+	_END
+
+//博士との会話
+ev_hakase_01_r119_r0102:
+	_TALK_KEYWAIT	msg_studym1_01_p01_r119_r0102
+
+	//手持ちのポケモン数取得
+	_GET_TEMOTI_NUM
+	_IFVAL_JUMP		ANSWORK,EQ,6,max_studym1_01_p01_r119_r0102
+
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_studym1_01_p03_r119_r0102
+	_JINGLE_WAIT
+
+	//ポワルン入手
+	_ADD_POKEMON	MONSNO_POWARUN,25,ITEM_SINPINOSIZUKU,0,0,0
+	_FLAG_SET		FE_POKE_GET_R119_R0101
+
+	_TALK_KEYWAIT	msg_studym1_01_p04_r119_r0102
+	_TALK_OBJ_END
+	_END
+
+//手持ちいっぱい
+max_studym1_01_p01_r119_r0102:
+	_TALK_KEYWAIT	msg_studym1_01_p02_r119_r0102
+	_TALK_OBJ_END
+	_END
+
+//すでにポワルン貰った
+ev_studym1_01_p02_r119_r0102:
+	_TALK_KEYWAIT	msg_studym1_01_p05_r119_r0102
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//博士	近づいてくる
+//--------------------------------------------------------------------
+studym1_01_r119_r0102_anime01:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//								博士
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_r119_r0102
+	_TALK_OBJ_START
+
+	//すでにポワルン貰ったか
+	_IF_FLAGON_JUMP		FE_POKE_GET_R119_R0101,ev_studym1_01_p02_r119_r0102
+
+	//博士との会話へ
+	_JUMP				ev_hakase_01_r119_r0102
+	_END
+

@@ -1,0 +1,238 @@
+//====================================================================
+//							c104_r0301
+//						カナズミ・ポケモンスクール
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c104_r0301_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								黒板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_board_01_p01_c104_r0301
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_board_01_p01_c104_r0301
+
+	_JUMP			select_blackboard
+	_END
+
+//黒板メニュー選択
+select_blackboard:
+	_TALKMSG		msg_board_01_p02_c104_r0301
+	_TALK_WAIT
+
+	_HV_WINDOW		8,1,BLACKBOARD_MENU01,3
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case0_board_01_p01_c104_r0301
+	_CASEJUMP		1,case1_board_01_p01_c104_r0301
+	_CASEJUMP		2,case2_board_01_p01_c104_r0301
+	_CASEJUMP		3,case3_board_01_p01_c104_r0301
+	_CASEJUMP		4,case4_board_01_p01_c104_r0301
+	_CASEJUMP		5,case5_board_01_p01_c104_r0301
+	_CASECANCEL		case5_board_01_p01_c104_r0301
+	_END
+
+//どく
+case0_board_01_p01_c104_r0301:
+	_TALK_KEYWAIT	msg_board_01_p03_c104_r0301
+	_JUMP			select_blackboard
+	_END
+
+//まひ
+case1_board_01_p01_c104_r0301:
+	_TALK_KEYWAIT	msg_board_01_p04_c104_r0301
+	_JUMP			select_blackboard
+	_END
+
+//ねむり
+case2_board_01_p01_c104_r0301:
+	_TALK_KEYWAIT	msg_board_01_p05_c104_r0301
+	_JUMP			select_blackboard
+	_END
+
+//やけど
+case3_board_01_p01_c104_r0301:
+	_TALK_KEYWAIT	msg_board_01_p06_c104_r0301
+	_JUMP			select_blackboard
+	_END
+
+//こおり
+case4_board_01_p01_c104_r0301:
+	_TALK_KEYWAIT	msg_board_01_p07_c104_r0301
+	_JUMP			select_blackboard
+	_END
+
+//よむのをやめる
+case5_board_01_p01_c104_r0301:
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*					アドバンス少年1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_agboy1_01_p01_c104_r0301
+	_EASY_OBJ_MSG	msg_agboy1_01_p01_c104_r0301
+	_END
+
+
+/********************************************************************/
+/*					アドバンス少年1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_agboy1_02_p01_c104_r0301
+	_EASY_OBJ_MSG	msg_agboy1_02_p01_c104_r0301
+	_END
+
+
+/********************************************************************/
+/*								少年								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy4_01_p01_c104_r0301
+	_EASY_OBJ_MSG	msg_boy4_01_p01_c104_r0301
+	_END
+
+
+/********************************************************************/
+/*								学生女１							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_schoolw1_01_p01_c104_r0301
+	_EASY_OBJ_MSG	msg_schoolw1_01_p01_c104_r0301
+	_END
+
+
+/********************************************************************/
+/*								学生男１							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_schoolm1_01_p01_c104_r0301
+	_EASY_OBJ_MSG	msg_schoolm1_01_p01_c104_r0301
+	_END
+
+
+/********************************************************************/
+/*								ノート								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_note1_01_p01_c104_r0301
+	_EASY_MSG		msg_note1_01_p01_c104_r0301
+	_END
+
+
+/********************************************************************/
+/*								先生								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_c104_r0301
+	_TALK_OBJ_START
+
+	//すでにアイテム入手していたら
+	_IF_FLAGON_JUMP	FE_SENSEINOTUME_GET,ev_oldman2_01_p02_c104_r0301
+
+	//机の周りを一周する
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_r_oldman2_c104_r0301
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_l_oldman2_c104_r0301
+
+	_TALK_KEYWAIT	msg_oldman2_01_p01_c104_r0301
+
+	_ITEM_EVENT		ITEM_SENSEINOTUME,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_CLOSE
+	//下の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_FLAG_SET		FE_SENSEINOTUME_GET
+	_TALK_OBJ_END
+	_END
+
+//机の周りを一周する
+case_r_oldman2_c104_r0301:
+	_SET_OBJ_ANIME	TARGET_OBJ,oldman2_01_c104_r0301_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case_l_oldman2_c104_r0301:
+	_SET_OBJ_ANIME	TARGET_OBJ,oldman2_01_c104_r0301_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//すでにアイテム入手している
+ev_oldman2_01_p02_c104_r0301:
+	_TALK_KEYWAIT	msg_oldman2_01_p02_c104_r0301
+	_TALK_CLOSE
+
+	//下の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//先生	一周する
+//--------------------------------------------------------------------
+//右から
+oldman2_01_c104_r0301_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//左から
+oldman2_01_c104_r0301_anime02:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/********************************************************************/

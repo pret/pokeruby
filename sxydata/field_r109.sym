@@ -1,0 +1,26 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 20
+#define FUNE_01_FIELD_R109	1
+#define OLDMAN1_01_FIELD_R109	2
+#define TR_SWIMMERM_08	3
+#define TR_SWIMMERW_08	4
+#define TR_SAILOR_01	5
+#define TR_SAILOR_02	6
+#define TR_UKIWAM_01	7
+#define TR_UKIWAW_01	8
+#define OJYOU2_01_FIELD_R109	9
+#define BALL1_5	10
+#define TR_UKIWAW_03	11
+#define TR_UKIWAW_02	12
+#define TR_FISHING_10	13
+#define BEACHBOY1_01_FIELD_R109	14
+#define BEACHGIRL1_01_FIELD_R109	15
+#define MIDDLEW1_01_FIELD_R109	16
+#define TR_LOVELOVE_08_02	17
+#define TR_LOVELOVE_08_01	18
+#define OLDMAN2_01_FIELD_R109	19
+#define JIGUMA_01_FIELD_R109	20
+
+//Exit ID = 1
+#define FIELD_R109_DOOR01	0

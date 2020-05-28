@@ -1,0 +1,28 @@
+// ●浅瀬の洞窟
+
+
+// ●格闘家１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p01_cave_d1404
+msg_fighter1_01_p01_cave_d1404:
+	.byte	ko_,no_,a_,ta_,ri_,ha_,spc_,ka_,ra_,da_,ga_,spc_,hi_,e_,ki_,ttu_,te_
+	.byte	CR_
+	.byte	si_,yyu_,gi_,yyo_,u_,spc_,su_,ru_,no_,mo_,spc_,ma_,ma_,na_,ra_,nu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,ki_,a_,i_,ga_,spc_,a_,re_,ba_,spc_,da_,i_,zi_,yyo_,u_,bu_,TTU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,nu_,si_,mo_,spc_,ko_,no_,spc_,ki_,a_,i_,no_,HA_,TI_,MA_,KI_,de_
+	.byte	CR_
+	.byte	sa_,mu_,sa_,ni_,spc_,ta_,e_,te_,mi_,se_,ru_,no_,da_,TTU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「きあいのハチマキ」（No196）入手処理
+// ●アイテム入手以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p02_cave_d1404
+msg_fighter1_01_p02_cave_d1404:
+	.byte	na_,ni_,go_,to_,mo_,spc_,ki_,a_,i_,spc_,na_,no_,da_,bou_,TTU_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

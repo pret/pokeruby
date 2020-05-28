@@ -1,0 +1,203 @@
+//====================================================================
+//						park_safari04
+//						サファリゾーン右下（入った直後あたり）
+//						LOCALWORK1使用
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START park_safari04_event_data
+FLAG_CHANGE_LABEL	flag_change_park_safari04
+SP_SCRIPT_LABEL		scene_park_safari04
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_park_safari04:
+	//ドアの前をふさぐ
+	SP_SCRIPT_DATA	WK_SCENE_SAFARI_ZONE,2,ev_scene_move_deguti_park_safari04
+	SP_SCRIPT_END
+
+//ドアの前をふさぐ
+ev_scene_move_deguti_park_safari04:
+	_TALK_START
+
+	_LDVAL		LOCALWORK1,0
+
+	//主人公一歩前に進む
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_park_safari04_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ドアの前をふさぐ
+	_SET_OBJ_ANIME	SAFARI_DEGUTI_01,safari_deguti_01_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//位置を修正(スクロール用)
+	_SXY_POS_CHANGE	SAFARI_DEGUTI_01,32,34
+
+	_LDVAL			WK_SCENE_SAFARI_ZONE,0
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_park_safari04:
+	//ドアの前をふさぐ
+	_IFVAL_CALL		WK_SCENE_SAFARI_ZONE,EQ,2,pos_safari_deguti_01
+	_END
+
+//ドアの前をふさぐ
+pos_safari_deguti_01:
+	_SXY_POS_CHANGE	SAFARI_DEGUTI_01,31,34
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	一歩前に進む
+//--------------------------------------------------------------------
+hero_01_park_safari04_anime01:
+	.byte	AC_WALK_D_1	//下に１歩
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//出口	ふさぐ
+//--------------------------------------------------------------------
+safari_deguti_01_anime01:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+	
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						ふうつの客（男の子）
+/********************************************************************/
+SCRIPT_LABEL	ev_safari1_05_p01
+	_EASY_OBJ_MSG		msg_safari_05_p01
+	_END
+
+
+/********************************************************************/
+//						ふうつの客（男）
+/********************************************************************/
+SCRIPT_LABEL	ev_safari1_06_p01
+	_EASY_OBJ_MSG		msg_safari_06_p01
+	_END
+
+
+/********************************************************************/
+//						ふうつの客（野球帽の男の子）
+/********************************************************************/
+SCRIPT_LABEL	ev_safari1_11_p01
+	_EASY_OBJ_MSG		msg_safari_11_p01
+	_END
+
+
+/********************************************************************/
+//						出口ふさぐ
+/********************************************************************/
+SCRIPT_LABEL	ev_safari_deguti_01
+	_TALK_OBJ_START
+
+	_IFVAL_JUMP		LOCALWORK1,EQ,0,first_deguti_01
+
+	_TALK_YES_NO	msg_safari_04_p01
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_safari_deguti_01
+
+	_TALK_KEYWAIT	msg_safari_04_p02
+	_TALK_OBJ_END
+	_END
+
+//最初に出ようとしたときはメッセージ(一回目専用)のみ
+first_deguti_01:
+	_LDVAL		LOCALWORK1,1
+
+	_TALK_KEYWAIT	msg_safari_04_p04
+	_TALK_OBJ_END
+	_END
+
+
+//「はい」
+yes_safari_deguti_01:
+	_TALK_KEYWAIT	msg_safari_04_p03
+	_TALK_CLOSE
+
+	_SWITCH			RG_SITE	
+	_CASEJUMP		SITE_U,site_d_to_hero_park_safari04			//下から話し掛け
+	_CASEJUMP		SITE_R,site_l_to_hero_park_safari04			//左から話し掛け
+	_END
+
+//下から話し掛け
+site_d_to_hero_park_safari04:
+	//横へどく
+	_SET_OBJ_ANIME	SAFARI_DEGUTI_01,safari_deguti_01_anime02
+	_OBJ_ANIME_WAIT
+
+	//中に入る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_park_safari04_anime02
+	_OBJ_ANIME_WAIT
+	_JUMP			end_safari_deguti_01
+	_END
+
+//左から話し掛け
+site_l_to_hero_park_safari04:
+	//横へどく
+	_SET_OBJ_ANIME	SAFARI_DEGUTI_01,safari_deguti_01_anime03
+	_OBJ_ANIME_WAIT
+
+	//中に入る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_park_safari04_anime03
+	_OBJ_ANIME_WAIT
+	_JUMP			end_safari_deguti_01
+	_END
+
+//共通処理
+end_safari_deguti_01:
+	_LDVAL			WK_SCENE_SAFARI_ZONE,1
+	_PROGRAM		SAFARI_END
+	_DOOR_MAP_CHANGE	R121,R121_R0101,2,5
+	_STOP_SCRIPT
+	_END
+
+//--------------------------------------------------------------------
+//主人公	中に入る(下)
+//--------------------------------------------------------------------
+hero_01_park_safari04_anime02:
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//主人公	中に入る(左)
+//--------------------------------------------------------------------
+hero_01_park_safari04_anime03:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//出口	どく(下)
+//--------------------------------------------------------------------
+safari_deguti_01_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//出口	どく(左)
+//--------------------------------------------------------------------
+safari_deguti_01_anime03:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/********************************************************************/

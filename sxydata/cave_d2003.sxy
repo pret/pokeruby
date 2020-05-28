@@ -1,0 +1,297 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D2003	0
+#define EXITNUM_CAVE_D2003	1
+#define POSNUM_CAVE_D2003	0
+#define BGNUM_CAVE_D2003	29
+
+//BG_SCRIPT
+extern const u8	ev_tenji_01_p01_cave_d2003[];
+extern const u8	ev_tenji_02_p01_cave_d2003[];
+extern const u8	ev_tenji_03_p01_cave_d2003[];
+extern const u8	ev_tenji_04_p01_cave_d2003[];
+extern const u8	ev_tenji_05_p01_cave_d2003[];
+extern const u8	ev_tenji_06_p01_cave_d2003[];
+extern const u8	ev_tenji_07_p01_cave_d2003[];
+extern const u8	ev_tenji_09_p01_cave_d2003[];
+extern const u8	ev_tenji_08_p01_cave_d2003[];
+extern const u8	ev_tenji_10_p01_cave_d2003[];
+extern const u8	ev_tenji_11_p01_cave_d2003[];
+extern const u8	ev_tenji_01_p01_cave_d2003[];
+extern const u8	ev_tenji_01_p01_cave_d2003[];
+extern const u8	ev_tenji_02_p01_cave_d2003[];
+extern const u8	ev_tenji_02_p01_cave_d2003[];
+extern const u8	ev_tenji_03_p01_cave_d2003[];
+extern const u8	ev_tenji_03_p01_cave_d2003[];
+extern const u8	ev_tenji_04_p01_cave_d2003[];
+extern const u8	ev_tenji_04_p01_cave_d2003[];
+extern const u8	ev_tenji_05_p01_cave_d2003[];
+extern const u8	ev_tenji_05_p01_cave_d2003[];
+extern const u8	ev_tenji_06_p01_cave_d2003[];
+extern const u8	ev_tenji_06_p01_cave_d2003[];
+extern const u8	ev_tenji_07_p01_cave_d2003[];
+extern const u8	ev_tenji_07_p01_cave_d2003[];
+extern const u8	ev_tenji_09_p01_cave_d2003[];
+extern const u8	ev_tenji_09_p01_cave_d2003[];
+extern const u8	ev_tenji_12_p01_cave_d2003[];
+extern const u8	ev_tenji_12_p01_cave_d2003[];
+
+const SXY_CONNECT	EXIT_cave_d2003[] =
+{
+	{
+		0x000a,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		CAVE_D2004_DOOR01,		//Door ID
+		CAVE_D2004,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_cave_d2003[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_02_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0005,		//Xpos
+		0x000c,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_03_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0005,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_04_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_05_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_06_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x000c,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_07_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_09_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0010,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_08_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0010,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_10_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_11_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_02_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_02_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000c,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_03_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x000c,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_03_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_04_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_04_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_05_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_05_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_06_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_06_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x000c,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_07_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x000c,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_07_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_09_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_09_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x0009,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_12_p01_cave_d2003,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_12_p01_cave_d2003,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d2003_sxy_data =
+{
+OBJNUM_CAVE_D2003,			// field obj max
+EXITNUM_CAVE_D2003,		// exit max
+POSNUM_CAVE_D2003,			// pos event max
+BGNUM_CAVE_D2003,			// bg event max
+NULL,			// field obj data
+EXIT_cave_d2003,			// exit data
+NULL,			// pos event data
+BG_cave_d2003,				// bg event data
+};

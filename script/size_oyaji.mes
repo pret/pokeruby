@@ -1,0 +1,117 @@
+
+// ポケモンの大きさを測るおやじ
+
+// 　123番道路の、木の実じいさんのいるところのとなりの家。
+// 　中には、おやじが一人。
+// 　ポケモンの大きさに、とても興味があるが
+// 　特定の好きなポケモン以外には、まったく興味がない！
+// 　（ここでは、とりあえずでキノココ）
+// 　興味のあるポケモンを持っていくと、大きさを測ってくれる。
+// 　ポケモンの大きさは、パワー乱数とＩＤを使って算出される。
+// 　（別書類参照）
+// 　初期記録が設定されていて
+// 　それを上回ると、ごほうび（未定）をもらえる。
+// 　上回った記録は、それぞれセーブデータに記録される。
+// 　セーブされるのは、記録とプレイヤー名。
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_size_oyaji_talk_start
+msg_size_oyaji_talk_start:
+	.byte	wa_,si_,ha_,spc_,o_,o_,ki_,na_,spc_,I_MSG_,STR_TEMP_BUF0,ni_
+	.byte	CR_
+	.byte	to_,te_,mo_,spc_,ki_,yyo_,u_,mi_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n_,hate_,spc_,ki_,mi_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,mo_,ttu_,te_,ru_,no_,hate_
+	.byte	CR_
+	.byte	ti_,yyo_,spc_,ti_,yyo_,spc_,ti_,yyo_,ttu_,to_,nakag_,nakag_,nakag_
+	.byte	SCROLL_WAIT_
+	.byte	o_,zi_,sa_,n_,ni_,spc_,mi_,se_,te_,spc_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+
+// （ポケモン選択画面へ）
+// キノココを選択：記録更新なら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_size_oyaji_new_record
+msg_size_oyaji_new_record:
+	.byte	o_,o_,gyoe_,spc_,ko_,i_,tu_,ha_,spc_,de_,ka_,i_,gyoe_
+	.byte	CR_
+	.byte	to_,te_,mo_,spc_,su_,ba_,ra_,si_,i_,spc_,I_MSG_,STR_TEMP_BUF0,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,se_,te_,spc_,ku_,re_,te_,spc_,a_,ri_,ga_,to_,u_
+	.byte	CR_
+	.byte	o_,re_,i_,ni_,spc_,ko_,re_,wo_,spc_,mo_,ttu_,te_,spc_,i_,ki_,na_,sa_,i_
+	.byte	EOM_
+
+
+// どうぐまだ持てるなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ＠０＝どうぐ
+	.GLOBAL	msg_size_oyaji_item_get
+msg_size_oyaji_item_get:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// 　（アイテムにごほうびを一個追加）
+
+
+// どうぐもう持てないなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_size_oyaji_item_full
+msg_size_oyaji_item_full:
+	.byte	a_,ri_,yya_,hate_
+	.byte	CR_
+	.byte	ki_,mi_,spc_,mo_,ti_,mo_,no_,spc_,i_,ttu_,pa_,i_,da_,ne_
+	.byte	EOM_
+
+
+// キノココを選択：記録更新してないなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_size_oyaji_not_new_record
+msg_size_oyaji_not_new_record:
+	.byte	u_,u_,mu_,spc_,wa_,si_,ha_,spc_,ko_,re_,yo_,ri_,spc_,o_,o_,ki_,i_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,mi_,ta_,ko_,to_,spc_,a_,ru_,na_,nakag_,nakag_,nakag_
+	.byte	EOM_
+
+
+// キノココ以外を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_size_oyaji_not_target_pokemon
+msg_size_oyaji_not_target_pokemon:
+	.byte	o_,o_,spc_,ko_,i_,tu_,ha_,spc_,na_,ka_,na_,ka_,nakag_,nakag_,nakag_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,re_,spc_,I_MSG_,STR_TEMP_BUF0,zi_,yya_,spc_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+
+// キャンセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_size_oyaji_cancel
+msg_size_oyaji_cancel:
+	.byte	o_,o_,ki_,i_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,mo_,ttu_,te_,na_,i_,no_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,ha_,spc_,za_,n_,ne_,n_,nakag_,nakag_,nakag_
+	.byte	CR_
+	.byte	ko_,n_,do_,spc_,o_,o_,ki_,i_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,mi_,se_,te_,ne_
+	.byte	EOM_
+
+
+
+
+// 　家のカベに　張り紙がある。
+// 　しらべると・・・
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ＠１＝記録保持者、一度更新された後は主人公になる
+// ＠２＝記録
+	.GLOBAL	msg_size_oyaji_record_board
+msg_size_oyaji_record_board:
+	.byte	si_,zi_,yyo_,u_,spc_,sa_,i_,da_,i_,no_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,I_MSG_,STR_TEMP_BUF2,c__,m__,no_,ya_,tu_,gyoe_
+	.byte	EOM_
+
+
+// 過去最高記録がわかる。

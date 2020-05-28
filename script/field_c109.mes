@@ -1,0 +1,33 @@
+// ●サイユウシティ　フィールド
+
+
+// ●チャンピオンロード入口の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_c109
+msg_kanban_01_p01_field_c109:
+	.byte	ko_,re_,yo_,ri_,spc_,TI_,YYA_,N_,PI_,O_,N_,spc_,RO_,bou_,DO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●リーグ入口の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_04_p01_field_c109
+msg_kanban_04_p01_field_c109:
+	.byte	ko_,re_,yo_,ri_,spc_,PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_
+	.byte	CR_
+	.byte	si_,yyo_,u_,me_,n_,spc_,GE_,bou_,TO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●町の入口の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_c109
+msg_kanban_02_p01_field_c109:
+	.byte	ko_,ko_,ha_,spc_,SA_,I_,YU_,U_,spc_,SI_,TE_,II_
+	.byte	CR_
+	.byte	ha_,na_,to_,spc_,u_,mi_,to_,spc_,PO_,KE_,MO_,N_,no_,spc_,ra_,ku_,e_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

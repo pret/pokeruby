@@ -1,0 +1,171 @@
+// ▼133----------------------------------
+// ●かいパンやろう２０：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_20_01
+msg_swimmerm_20_01:
+	.byte	KI_,MI_,mo_,spc_,si_,o_,ni_,spc_,na_,ga_,sa_,re_,te_,spc_,ki_,ta_,no_,hate_
+	.byte	CR_
+	.byte	ko_,re_,mo_,spc_,na_,ni_,ka_,no_,spc_,e_,n_,da_,ne_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,yo_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう２０：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_20_02
+msg_swimmerm_20_02:
+	.byte	tu_,yo_,i_,gyoe_
+	.byte	CR_
+	.byte	tu_,yo_,su_,gi_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいパンやろう２０：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerm_20_03
+msg_swimmerm_20_03:
+	.byte	KI_,MI_,mi_,ta_,i_,na_,spc_,tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ga_
+	.byte	CR_
+	.byte	na_,ga_,sa_,re_,te_,spc_,ku_,ru_,na_,n_,te_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	O_,RE_,mo_,spc_,TU_,KI_,ga_,spc_,na_,i_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼133----------------------------------
+// ●ビキニのおねえさん２０：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_20_01
+msg_swimmerw_20_01:
+	.byte	wa_,ta_,si_,ha_,spc_,ka_,na_,si_,i_,spc_,o_,n_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,ga_,re_,spc_,na_,ga_,re_,te_,spc_,ko_,ko_,ma_,de_,spc_,ki_,ta_,no_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん２０：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_20_02
+msg_swimmerw_20_02:
+	.byte	ma_,ke_,ta_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん２０：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_20_03
+msg_swimmerw_20_03:
+	.byte	na_,ga_,sa_,re_,ru_,spc_,da_,ke_,no_,spc_,zi_,n_,se_,i_,spc_,na_,n_,te_,tenten_,tenten_
+	.byte	CR_
+	.byte	mo_,u_,spc_,I_,YA_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼133----------------------------------
+// ●ビキニのおねえさん２１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_21_01
+msg_swimmerw_21_01:
+	.byte	i_,ra_,ttu_,si_,yya_,bou_,i_,gyoe_
+	.byte	CR_
+	.byte	o_,ma_,ti_,spc_,si_,te_,ma_,si_,ta_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん２１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_21_02
+msg_swimmerw_21_02:
+	.byte	i_,ya_,bou_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ビキニのおねえさん２１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_swimmerw_21_03
+msg_swimmerw_21_03:
+	.byte	tu_,yo_,i_,spc_,ko_,do_,mo_,no_,spc_,TO_,RE_,bou_,NA_,bou_,na_,n_,te_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,ne_,e_,sa_,n_,spc_,ko_,ma_,ttu_,ti_,yya_,u_,uu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼133----------------------------------
+// ●エリートトレーナー♂１８：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitem_18_01
+msg_elitem_18_01:
+	.byte	ka_,ti_,ta_,i_,ka_,ra_,spc_,ttu_,te_
+	.byte	CR_
+	.byte	hi_,to_,to_,spc_,o_,na_,zi_,yo_,u_,ni_,spc_,so_,da_,te_,ha_,spc_,si_,na_,i_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●エリートトレーナー♂１８：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitem_18_02
+msg_elitem_18_02:
+	.byte	ku_,so_,bou_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,no_,spc_,ya_,ri_,ka_,ta_,ha_,spc_,ma_,da_,ma_,da_,spc_,a_,ma_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●エリートトレーナー♂１８：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitem_18_03
+msg_elitem_18_03:
+	.byte	hi_,to_,to_,spc_,o_,na_,zi_,ko_,to_,spc_,su_,ru_,yo_,ri_
+	.byte	CR_
+	.byte	zi_,bu_,n_,no_,spc_,si_,ta_,i_,ko_,to_,spc_,si_,ta_,ho_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,no_,si_,i_,ni_,spc_,ki_,ma_,ttu_,te_,ru_,da_,ro_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼133----------------------------------
+// ●とりつかい１７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bird_17_01
+msg_bird_17_01:
+	.byte	to_,ri_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	ko_,n_,na_,spc_,to_,ko_,ro_,ma_,de_,spc_,ki_,ma_,si_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●とりつかい１７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bird_17_02
+msg_bird_17_02:
+	.byte	ki_,mi_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,n_,te_,spc_,ka_,ttu_,ko_,i_,i_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●とりつかい１７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bird_17_03
+msg_bird_17_03:
+	.byte	so_,ro_,so_,ro_,spc_,HI_,WA_,MA_,KI_,ni_,spc_,ka_,e_,ri_,ta_,i_,ke_,do_
+	.byte	CR_
+	.byte	na_,n_,to_,na_,ku_,spc_,ko_,ko_,spc_,su_,ki_,ni_,spc_,na_,ttu_,ti_,yya_,ttu_,ta_,zo_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

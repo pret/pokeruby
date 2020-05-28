@@ -1,0 +1,265 @@
+// ●カナズミのデボン社内３階
+
+
+// ●イベントの流れ
+// ●トンネルイベントクリア後、カナズミのフィールドで
+// 　研究員に話しかけるとここに来ることに
+// ●ここに来ると、まず研究員に「デボンのにもつ」を
+// 　カイナに届けるよう依頼される
+// ●次に社長に「ダイゴへのてがみ」を託される
+// 　そのお礼としてトレナビをもらう
+// ●最初は研究員としか話せないように配置してくだされ
+
+// ●ツワブキ社長
+// ●研究員と会話してから
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c104_r0103
+msg_oldman1_01_p01_c104_r0103:
+	.byte	wa_,si_,ga_,spc_,DE_,BO_,N_,spc_,KO_,bou_,PO_,RE_,bou_,SI_,YYO_,N_
+	.byte	CR_
+	.byte	si_,yya_,ti_,yyo_,u_,no_,spc_,TU_,WA_,BU_,KI_,spc_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,ko_,to_,ha_,spc_,sa_,ttu_,ki_,spc_,ki_,i_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,de_,mo_,spc_,u_,ti_,no_,spc_,ke_,n_,ki_,yyu_,u_,i_,n_,wo_
+	.byte	CR_
+	.byte	n2_,do_,mo_,spc_,ta_,su_,ke_,te_,ku_,re_,ta_,spc_,to_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,de_,spc_,so_,n_,na_,spc_,su_,go_,i_,spc_,ki_,mi_,ni_
+	.byte	CR_
+	.byte	ta_,no_,mi_,go_,to_,wo_,spc_,si_,ta_,i_,no_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,ni_,mo_,tu_,wo_,spc_,to_,do_,ke_,ni_
+	.byte	CR_
+	.byte	KA_,I_,NA_,no_,spc_,zo_,u_,se_,n_,zi_,yyo_,ni_,spc_,i_,ku_,n_,da_,ro_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,to_,ti_,yyu_,u_,ni_
+	.byte	CR_
+	.byte	MU_,RO_,TA_,U_,N_,ni_,mo_,spc_,yo_,ttu_,te_,spc_,ho_,si_,i_,no_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,bou_,spc_,MU_,RO_,TA_,U_,N_,ni_
+	.byte	CR_
+	.byte	DA_,I_,GO_,to_,i_,u_,spc_,o_,to_,ko_,ga_,spc_,i_,ru_,ha_,zu_,de_,ne_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,i_,to_,spc_,te_,ga_,mi_,wo_,spc_,to_,do_,ke_,te_,ho_,si_,i_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「大切な道具」に「ダイゴへのてがみ」を追加
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_c104_r0103
+msg_oldman1_01_p02_c104_r0103:
+	.byte	TU_,WA_,BU_,KI_,kako2_,mo_,ti_,ro_,n_,spc_,wa_,si_,ha_
+	.byte	CR_
+	.byte	su_,go_,bou_,i_,spc_,si_,yya_,ti_,yyo_,u_,de_,spc_,a_,ru_,ka_,ra_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,da_,de_,spc_,o_,ne_,ga_,i_,su_,ru_,to_,spc_,i_,u_,yo_,u_,na_
+	.byte	CR_
+	.byte	KE_,TI_,na_,spc_,ma_,ne_,ha_,spc_,si_,na_,i_,no_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ni_,spc_,ko_,i_,tu_,wo_,spc_,PU_,RE_,ZE_,N_,TO_,si_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ポケナビ」入手メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p03_c104_r0103
+msg_oldman1_01_p03_c104_r0103:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	PO_,KE_,NA_,BI_,wo_,spc_,te_,ni_,i_,re_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●引き続き、社長のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p04_c104_r0103
+msg_oldman1_01_p04_c104_r0103:
+	.byte	TU_,WA_,BU_,KI_,kako2_,so_,i_,tu_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,NA_,BI_,GE_,bou_,TA_,bou_,gyoe_
+	.byte	CR_
+	.byte	ri_,yya_,ku_,si_,te_,spc_,PO_,KE_,NA_,BI_,spc_,to_,i_,ttu_,te_,na_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,u_,ke_,n_,wo_,spc_,su_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	hi_,tu_,zi_,yyu_,hi_,n_,spc_,na_,no_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,i_,tu_,de_,spc_,HO_,U_,E_,N_,MA_,TTU_,PU_,wo_,spc_,mi_,re_,ba_
+	.byte	CR_
+	.byte	MU_,RO_,ya_,spc_,KA_,I_,NA_,no_,spc_,ba_,si_,yyo_,spc_,da_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ba_,ttu_,ti_,ri_,spc_,wa_,ka_,ru_,to_,spc_,i_,u_,mo_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ツワブキ社長（ダイゴに手紙を届けるまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p05_c104_r0103
+msg_oldman1_01_p05_c104_r0103:
+	.byte	TU_,WA_,BU_,KI_,kako2_,yo_,ro_,si_,ku_,spc_,ta_,no_,mu_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ツワブキ社長（ダイゴに手紙を渡したあと）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p06_c104_r0103
+msg_oldman1_01_p06_c104_r0103:
+	.byte	TU_,WA_,BU_,KI_,kako2_,te_,ga_,mi_,wo_,spc_,to_,do_,ke_,te_,spc_,ku_,re_,ta_,n_,da_,ne_
+	.byte	CR_
+	.byte	i_,ya_,i_,ya_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,i_,tu_,ha_,spc_,o_,re_,i_,spc_,da_,yo_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ki_,mi_,ni_,spc_,ya_,ku_,da_,tu_,spc_,ha_,zu_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「がくしゅうそうち」（No182）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p07_c104_r0103
+msg_oldman1_01_p07_c104_r0103:
+	.byte	TU_,WA_,BU_,KI_,kako2_,ga_,ku_,si_,yyu_,u_,so_,u_,ti_,wo_,spc_,mo_,ta_,se_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,si_,yyo_,u_,bu_,wo_,spc_,si_,na_,ku_,te_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	ke_,i_,ke_,n_,ti_,wo_,spc_,wa_,ke_,te_,spc_,mo_,ra_,e_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,wa_,i_,spc_,PO_,KE_,MO_,N_,wo_,spc_,so_,da_,te_,ru_,no_,ni_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,be_,n_,ri_,na_,spc_,do_,u_,gu_,spc_,na_,no_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●再度、話しかけた場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p08_c104_r0103
+msg_oldman1_01_p08_c104_r0103:
+	.byte	TU_,WA_,BU_,KI_,kako2_,wa_,ta_,si_,ha_,spc_,wa_,ka_,i_,ko_,ro_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	si_,go_,to_,spc_,ba_,ka_,ri_,spc_,da_,ttu_,ta_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ma_,i_,ti_,spc_,wa_,ka_,ra_,n_,no_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ka_,mo_,no_,ha_,spc_,ya_,ha_,ri_,spc_,TO_,RE_,bou_,NA_,bou_,to_,si_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,wo_,spc_,me_,za_,su_,spc_,mo_,no_,spc_,na_,no_,ka_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●研究員（主人公が２度も助けてあげた人）
+// ●主人公（Ｘ２・Ｙ２）
+// 　研究員（Ｘ３・Ｙ２）に出現
+// ●メッセージウインドウ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_c104_r0103
+msg_workerm1_01_p01_c104_r0103:
+	.byte	ko_,ko_,ga_,spc_,DE_,BO_,N_,spc_,KO_,bou_,PO_,RE_,bou_,SI_,YYO_,N_,spc_,n3_,ka_,i_
+	.byte	CR_
+	.byte	si_,yya_,ti_,yyo_,u_,no_,spc_,o_,he_,ya_,spc_,na_,no_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,bou_,gyoe_,spc_,ki_,mi_,ni_,ha_
+	.byte	CR_
+	.byte	ka_,n_,si_,yya_,spc_,ka_,n_,ge_,ki_,spc_,a_,me_,spc_,a_,ra_,re_,spc_,na_,no_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,tenten_,tenten_,spc_,ki_,mi_,ga_
+	.byte	CR_
+	.byte	to_,ri_,mo_,do_,si_,te_,ku_,re_,ta_,spc_,ni_,mo_,tu_
+	.byte	NORMAL_WAIT_
+	.byte	so_,i_,tu_,wo_,spc_,KA_,I_,NA_,SI_,TE_,II_,no_,spc_,zo_,u_,se_,n_,zi_,yyo_
+	.byte	CR_
+	.byte	tu_,ma_,ri_,spc_,hu_,ne_,no_,spc_,ko_,u_,zi_,yyo_,u_,he_
+	.byte	SCROLL_WAIT_
+	.byte	to_,do_,ke_,te_,spc_,ho_,si_,i_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,o_,ka_,si_,na_,spc_,ya_,tu_,ra_,ni_
+	.byte	CR_
+	.byte	u_,ba_,wa_,re_,te_,ha_,spc_,ta_,ma_,ri_,ma_,se_,n_,spc_,ka_,ra_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	e_,he_,he_,tenten_,tenten_
+	.byte	CR_
+	.byte	yo_,ro_,si_,ku_,spc_,o_,ne_,ga_,i_,spc_,si_,ma_,su_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,ttu_,to_,spc_,ma_,ttu_,te_,i_,te_,spc_,ku_,da_,sa_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●社員、一度社長の方に歩き出し
+// 　そして戻ってきて以下のメッセージ自動表示
+// 　（わりと早めにしたいです……）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p05_c104_r0103
+msg_workerm1_01_p05_c104_r0103:
+	.byte	si_,yya_,ti_,yyo_,u_,ga_,spc_,ze_,hi_
+	.byte	CR_
+	.byte	o_,ha_,na_,si_,spc_,si_,ta_,i_,so_,u_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ni_,spc_,tu_,i_,te_,spc_,ki_,te_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公を、社長の前に誘導
+// 　（Ｘ１５Ｙ３）で止まり、主人公を見て
+// 　以下のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p02_c104_r0103
+msg_workerm1_01_p02_c104_r0103:
+	.byte	sa_,sa_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公を、社長の前に誘導
+// 　続いて「msg_oldman1_01_p01_c104_r0103:」のメッセージ展開
+
+// ●研究員（ポケナビ入手以降）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p03_c104_r0103
+msg_workerm1_01_p03_c104_r0103:
+	.byte	KA_,I_,NA_,no_,spc_,zo_,u_,se_,n_,zi_,yyo_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	KU_,SU_,NO_,KI_,sa_,n_,spc_,to_,i_,u_,spc_,hi_,to_,ga_,spc_,i_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,re_,wo_,spc_,ta_,zu_,ne_,te_,i_,ku_,to_,spc_,i_,i_,de_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●以降、「デボンのにもつ」を届けるまで
+// 　上記メッセージを繰り返し
+
+// ●「デボンのにもつ」を届けて以降、ここから削除
+// 　１１６番道路に出現する
+// 　で、そこで主人公に道具を渡すとここに復帰
+
+// ●１１６番道路で主人公に道具を渡して以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p04_c104_r0103
+msg_workerm1_01_p04_c104_r0103:
+	.byte	DE_,BO_,N_,no_,spc_,si_,n_,se_,i_,hi_,n_
+	.byte	CR_
+	.byte	RI_,PI_,bou_,TO_,BO_,bou_,RU_,to_,spc_,TA_,I_,MA_,bou_,BO_,bou_,RU_
+	.byte	SCROLL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,ni_,spc_,da_,i_,ni_,n_,ki_,spc_,na_,no_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●ガラスケース（共通）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_case_01_p01_c104_r0103
+msg_case_01_p01_c104_r0103:
+	.byte	si_,yya_,ti_,yyo_,u_,no_,spc_,a_,tu_,me_,ta_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,i_,si_,ga_,spc_,ka_,za_,ttu_,te_,a_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

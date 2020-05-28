@@ -1,0 +1,83 @@
+//====================================================================
+//							field_r105
+//						フィールド・ロード105
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r105_event_data
+BG_CHANGE_LABEL		bg_change_field_r105
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_field_r105:
+	//伝説の洞窟扉開いているか
+	_IF_FLAGOFF_CALL	FE_DENSETU_OPEN,bg_chg_01field_r105
+	_END
+
+bg_chg_01field_r105:
+	_SET_CELL		9,19,124,1
+	_SET_CELL		9,20,145,1
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_iseki_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ISEKI_03
+	_TRAINER_DATA2	msg_iseki_03_01
+	_TRAINER_DATA3	msg_iseki_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_iseki_03_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_01
+	_TRAINER_DATA2	msg_swimmerm_01_01
+	_TRAINER_DATA3	msg_swimmerm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_01_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_02
+	_TRAINER_DATA2	msg_swimmerm_02_01
+	_TRAINER_DATA3	msg_swimmerm_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_02_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_01
+	_TRAINER_DATA2	msg_swimmerw_01_01
+	_TRAINER_DATA3	msg_swimmerw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_01_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_02
+	_TRAINER_DATA2	msg_swimmerw_02_01
+	_TRAINER_DATA3	msg_swimmerw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_02_03
+	_END
+

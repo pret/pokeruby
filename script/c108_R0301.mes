@@ -1,0 +1,42 @@
+// ●ルネシティ　民家２（街の東・一番上）
+
+
+// ●老婆１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_c108_r0301
+msg_oldwoman1_01_p01_c108_r0301:
+	.byte	o_,ku_,ri_,bi_,ya_,ma_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,u_,zi_,yyo_,u_,ni_,spc_,hu_,ta_,tu_,no_,ta_,ma_,ga_
+	.byte	CR_
+	.byte	o_,ka_,re_,te_,spc_,i_,ru_,no_,ha_,spc_,go_,zo_,n_,zi_,spc_,de_,su_,ka_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい」「いいえ」の選択
+// ●「はい」　→msg_oldwoman1_02_p01_c108_r0301:
+// ●「いいえ」→msg_oldwoman1_03_p01_c108_r0301:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_c108_r0301
+msg_oldwoman1_01_p02_c108_r0301:
+	.byte	so_,u_,tenten_,tenten_,spc_,hu_,ta_,tu_,no_,ta_,ma_,ga_
+	.byte	CR_
+	.byte	to_,na_,ri_,a_,wa_,se_,ni_,spc_,o_,ka_,re_,te_,i_,ru_,spc_,yo_,u_,su_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,ka_,spc_,ko_,ko_,ro_,ga_,spc_,ya_,su_,ra_,gi_,ma_,su_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p03_c108_r0301
+msg_oldwoman1_01_p03_c108_r0301:
+	.byte	so_,u_,de_,su_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ti_,do_,spc_,i_,ka_,re_,te_,ha_,spc_,do_,u_,de_,si_,yyo_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,627 @@
+//=================================================================== 
+//							cave_d0201
+//						カナシダトンネル
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d0201_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d0201
+SP_SCRIPT_LABEL		scene_cave_d0201
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_cave_d0201:
+	//岩砕きを使用したら発動する
+	SP_SCRIPT_DATA	WK_SCENE_CAVE_D0201,4,ev_cave_d0201_pos01
+	SP_SCRIPT_DATA	WK_SCENE_CAVE_D0201,5,ev_cave_d0201_pos01
+	SP_SCRIPT_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0201:
+	_CALL			set_evil_char
+
+	//アクア団をまだ後ずらせていない時は位置を移動させておく
+	_IFVAL_CALL		WK_SCENE_CAVE_D0201,EQ,2,move_aquam1_01_p01_cave_d0201
+	_END
+
+//アクア団をまだ後ずらせていない時は位置を移動させておく
+move_aquam1_01_p01_cave_d0201:
+	_SXY_POS_CHANGE	CAMOME_01_CAVE_D0201,13,4
+	_SXY_POS_CHANGE	AQUAM1_01_CAVE_D0201,13,5
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//
+//						FH_00使用中
+//						LOCALWORK1使用中
+//
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ミチル									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_cave_d0201
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_woman1_01_p01_cave_d0201
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					洞窟堀りをしている格闘家						*/
+/*							FH_00使用								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fighter1_01_p01_cave_d0201
+	_TALK_OBJ_START
+
+	//一度話した
+	_IF_FLAGON_JUMP	FH_00 ,ev_fighter1_01_p02_cave_d0201
+
+	_FLAG_SET		FH_00
+	_TALK_KEYWAIT	msg_fighter1_01_p01_cave_d0201
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+ev_fighter1_01_p02_cave_d0201:
+	_TALK_KEYWAIT	msg_fighter1_01_p02_cave_d0201
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					洞窟堀りをしている格闘家						*/
+/*							FH_00使用								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0201_pos01
+	_TALK_START
+
+	//主人公に近づいてくる
+	_IFVAL_CALL		LOCALWORK1,EQ,1,case1_fighter1_01_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,2,case2_fighter1_01_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,3,case3_fighter1_01_cave_d0201	
+
+	_CALL			common_iwa_01_cave_d0201
+
+	_TALK_KEYWAIT	msg_fighter1_01_p03_cave_d0201
+
+	//一歩近づいて
+	_IFVAL_CALL		LOCALWORK1,EQ,2,case20_fighter1_01_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,3,case20_fighter1_01_cave_d0201	
+
+	_ITEM_EVENT		ITEM_HIDENMASIN04,1
+	_FLAG_SET		FE_HWAZA04_01_T106_R0201
+
+	_TALK_KEYWAIT	msg_fighter1_01_p04_cave_d0201
+	_TALK_CLOSE
+
+	//ミチルに隣接する
+	_IFVAL_CALL		LOCALWORK1,EQ,1,case1_fighter1_02_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,2,case2_fighter1_02_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,3,case3_fighter1_02_cave_d0201	
+
+	_TALK_KEYWAIT	msg_fighter1_01_p05_cave_d0201
+	_TALK_CLOSE
+
+	//去っていく
+	_IFVAL_CALL		LOCALWORK1,EQ,1,case11_fighter1_01_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,2,case12_fighter1_01_cave_d0201	
+	_IFVAL_CALL		LOCALWORK1,EQ,3,case13_fighter1_01_cave_d0201	
+
+	_CALL			kanasida_kaitsuu_flag_set
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ミチルに隣接する
+//--------------------------------------------------------------------
+case1_fighter1_02_cave_d0201:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d0201_anime20
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime10
+	_OBJ_ANIME_WAIT
+	_RET
+case2_fighter1_02_cave_d0201:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d0201_anime21
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime11
+	_OBJ_ANIME_WAIT
+
+	//ミチル下を向く
+	_SET_OBJ_ANIME	WOMAN1_01_CAVE_D0201,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+case3_fighter1_02_cave_d0201:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d0201_anime21
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime11
+	_OBJ_ANIME_WAIT
+
+	//ミチル下を向く
+	_SET_OBJ_ANIME	WOMAN1_01_CAVE_D0201,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//主人公に近づいてくる
+case1_fighter1_01_cave_d0201:
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+case2_fighter1_01_cave_d0201:
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+case3_fighter1_01_cave_d0201:
+	_RET
+
+//一歩近づいてくる
+case20_fighter1_01_cave_d0201:
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime20
+	_OBJ_ANIME_WAIT
+	_RET
+
+//立ち去る
+case11_fighter1_01_cave_d0201:
+	_SET_OBJ_ANIME	WOMAN1_01_CAVE_D0201,woman1_01_cave_d0201_anime01
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+case12_fighter1_01_cave_d0201:
+	_SET_OBJ_ANIME	WOMAN1_01_CAVE_D0201,woman1_01_cave_d0201_anime02
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+case13_fighter1_01_cave_d0201:
+	_SET_OBJ_ANIME	WOMAN1_01_CAVE_D0201,woman1_01_cave_d0201_anime02
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,fighter1_01_cave_d0201_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+//共通処理１
+common_iwa_01_cave_d0201:
+	//「！」びっくりする
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	FIGHTER1_01_CAVE_D0201,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//ミチル	立ち去る(上の岩)
+//--------------------------------------------------------------------
+woman1_01_cave_d0201_anime01:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミチル	立ち去る(下の岩)
+//--------------------------------------------------------------------
+woman1_01_cave_d0201_anime02:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	空手家が進めるようにどく(上の岩)
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime01:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	空手家が進めるようにどく(上の岩)
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime02:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	空手家が進めるようにどく(下の岩)
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime03:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_D
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	空手家が進めるようにどく(上の岩)
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime20:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	空手家が進めるようにどく(下の岩)
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime21:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//空手家	主人公に近づいてくる(pos11)
+//--------------------------------------------------------------------
+fighter1_01_cave_d0201_anime01:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//空手家	立ち去る(上の岩)
+//--------------------------------------------------------------------
+fighter1_01_cave_d0201_anime02:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//空手家	立ち去る(下の岩)
+//--------------------------------------------------------------------
+fighter1_01_cave_d0201_anime03:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//空手家	一歩近づく
+//--------------------------------------------------------------------
+fighter1_01_cave_d0201_anime20:	
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//空手家	ミチルに隣接する(上の岩)
+//--------------------------------------------------------------------
+fighter1_01_cave_d0201_anime10:	
+	.byte	AC_STAY_WALK_U_2
+	.byte	AC_STAY_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//空手家	ミチルに隣接する(下の岩)
+//--------------------------------------------------------------------
+fighter1_01_cave_d0201_anime11:	
+	.byte	AC_STAY_WALK_R_2
+	.byte	AC_STAY_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*					どの岩の前に主人公がいるかセット				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0201_pos10
+	_LDVAL		LOCALWORK1,1
+	_END
+
+SCRIPT_LABEL	ev_cave_d0201_pos11
+	_LDVAL		LOCALWORK1,2
+	_END
+
+SCRIPT_LABEL	ev_cave_d0201_pos12
+	_LDVAL		LOCALWORK1,3
+	_END
+
+
+/********************************************************************/
+/*						ポケじちイベント							*/
+//						先にアクア団が見える
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0201_pos03
+SCRIPT_LABEL	ev_cave_d0201_pos04
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_aquam1_01_p01_cave_d0201
+	_TALK_CLOSE
+
+	//後ずさる
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0201,aquam1_01_cave_d0201_anime01
+	_SET_OBJ_ANIME	CAMOME_01_CAVE_D0201,aquam1_01_cave_d0201_anime01
+	_OBJ_ANIME_WAIT
+
+	//sxy情報上書き
+	_SXY_POS_OVERWRITE	AQUAM1_01_CAVE_D0201
+	_SXY_POS_OVERWRITE	CAMOME_01_CAVE_D0201
+
+	_LDVAL		WK_SCENE_CAVE_D0201,3
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//アクア団	後ずさる
+//--------------------------------------------------------------------
+aquam1_01_cave_d0201_anime01:	
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_R_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							ピーコちゃん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_camome_01_p01_cave_d0201
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_KYAMOME,0
+	_TALK_KEYWAIT	msg_camome_01_p01_cave_d0201
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_01_p01_cave_d0201
+	_TALK_OBJ_START
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_BGM_SET		MUS_AQA_0,0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_BGM_SET		MUS_MGM0,0
+#endif
+
+	_TALK_KEYWAIT	msg_aquam1_01_p02_cave_d0201
+
+	//戦闘へ
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_EVENT_FIGHT	AQUAM_18,msg_aquam1_01_p03_cave_d0201
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_EVENT_FIGHT	MAGMAM_18,msg_aquam1_01_p03_cave_d0201
+#endif
+
+	_TALK_KEYWAIT	msg_aquam1_01_p04_cave_d0201
+
+	//デボンのにもつを入手
+	_ITEM_EVENT	ITEM_DEBONNONIMOTU,1
+
+	_TALK_CLOSE
+
+	//逃げていく
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d0201_anime10
+	_SET_OBJ_ANIME	AQUAM1_01_CAVE_D0201,aquam1_01_cave_d0201_anime02
+	_OBJ_ANIME_WAIT
+
+	//OBJ消す
+	_OBJ_DELETE		AQUAM1_01_CAVE_D0201
+
+	//間
+	_TIME_WAIT		50
+
+	//ハギを出す
+	_OBJ_APPEAR		HAGI_01_CAVE_D0201
+
+	//近寄ってくる
+	_SET_OBJ_ANIME	HAGI_01_CAVE_D0201,hagi_01_cave_d0201_anime01
+	_OBJ_ANIME_WAIT
+
+	//ピーコの前をあける
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_cave_d0201_anime11
+	_SET_OBJ_ANIME	HAGI_01_CAVE_D0201,hagi_01_cave_d0201_anime03
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_cave_d0201
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	HAGI_01_CAVE_D0201,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALKMSG		msg_oldman1_01_p02_cave_d0201
+	_TALK_WAIT
+	_VOICE_PLAY		MONSNO_KYAMOME,0
+	_AB_KEYWAIT
+	_VOICE_WAIT
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	HAGI_01_CAVE_D0201,hagi_01_cave_d0201_anime02
+	_SET_OBJ_ANIME	CAMOME_01_CAVE_D0201,camome_01_cave_d0201_anime02
+	_OBJ_ANIME_WAIT
+
+	//OBJ消す
+	_OBJ_DELETE		HAGI_01_CAVE_D0201
+	_OBJ_DELETE		CAMOME_01_CAVE_D0201
+
+	//盗難イベント中を元に戻す
+	_FLAG_RESET		FE_DEBON_01_FIELD_C104
+
+	//コハクもらった(盗難イベント終了)
+	_FLAG_SET		FE_DEBON_02_FIELD_C104
+	_LDVAL			WK_SCENE_FIELD_C104,4
+
+	//ピーコ助けた
+	_LDVAL			WK_SCENE_R104_R0101,1
+	_FLAG_SET		FV_HAGI_01_FIELD_R116
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	どく
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime10:	
+	.byte	AC_SITE_D
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_U_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ピーコの前をあける
+//--------------------------------------------------------------------
+hero_01_cave_d0201_anime11:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクア団	逃げていく
+//--------------------------------------------------------------------
+aquam1_01_cave_d0201_anime02:	
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ハギ	近寄ってくる
+//--------------------------------------------------------------------
+hagi_01_cave_d0201_anime01:	
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	//.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ハギ	帰る
+//--------------------------------------------------------------------
+hagi_01_cave_d0201_anime02:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ハギ	ピーコによる
+//--------------------------------------------------------------------
+hagi_01_cave_d0201_anime03:	
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ピーコ	帰る
+//--------------------------------------------------------------------
+camome_01_cave_d0201_anime02:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mount_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_10
+	_TRAINER_DATA2	msg_mount_10_01
+	_TRAINER_DATA3	msg_mount_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_10_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

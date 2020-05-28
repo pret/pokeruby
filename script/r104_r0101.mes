@@ -1,0 +1,185 @@
+// ●１０４番道路　ハギ老人の小屋
+
+
+// ●ハギ老人
+// ●１回目の会話　　　　　　　　　　　→msg_oldman1_01_p01_r104_r0101:
+// ●「ダイゴへのてがみ」を届けていない→msg_oldman1_01_p05_r104_r0101:
+// ●「ダイゴへのてがみ」を届けたが
+// 　「デボンのにもつ」を届けていない　→msg_oldman1_01_p06_r104_r0101:
+// ●「デボンのにもつ」を届けた　　　　→msg_oldman1_01_p07_r104_r0101:
+
+// ●１回目の会話
+// ●待機中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_r104_r0101
+msg_oldman1_01_p01_r104_r0101:
+	.byte	HA_,GI_,kako2_,ko_,ra_,ko_,ra_,gyoe_
+	.byte	CR_
+	.byte	ma_,te_,spc_,ma_,te_,spc_,PI_,bou_,KO_,ti_,yya_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公の方を向き
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_r104_r0101
+msg_oldman1_01_p02_r104_r0101:
+	.byte	o_,ya_,hate_,spc_,ki_,mi_,ha_,spc_,ta_,si_,ka_,spc_,PI_,bou_,KO_,ti_,yya_,n_,wo_
+	.byte	CR_
+	.byte	ta_,su_,ke_,te_,spc_,ku_,re_,ta_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	so_,no_,se_,tu_,ha_,spc_,se_,wa_,ni_,spc_,na_,ttu_,ta_,no_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,na_,nu_,hate_,spc_,hu_,ne_,ni_,spc_,no_,ri_,ta_,i_,spc_,to_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,mu_,hu_,mu_,hate_
+	.byte	CR_
+	.byte	MU_,RO_,ni_,spc_,te_,ga_,mi_,wo_,spc_,to_,do_,ke_,te_
+	.byte	SCROLL_WAIT_
+	.byte	KA_,I_,NA_,he_,spc_,ni_,mo_,tu_,wo_,spc_,to_,do_,ke_,ru_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	na_,n_,da_,ka_,spc_,i_,so_,ga_,si_,i_,no_,u_,spc_,ki_,mi_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ga_,spc_,so_,re_,ku_,ra_,i_,spc_,o_,ya_,su_,i_,spc_,go_,yo_,u_,da_,gyoe_
+	.byte	CR_
+	.byte	wa_,si_,ni_,spc_,ma_,ka_,se_,te_,spc_,o_,ki_,na_,sa_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	de_,ha_,spc_,ma_,zu_,spc_,MU_,RO_,ni_,spc_,mu_,ka_,u_,to_,su_,ru_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_oldman1_01_p03_r104_r0101:
+// ●「いいえ」→msg_oldman1_01_p04_r104_r0101:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p03_r104_r0101
+msg_oldman1_01_p03_r104_r0101:
+	.byte	HA_,GI_,kako2_,MU_,RO_,TA_,U_,N_,spc_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ttu_,si_,yya_,gyoe_,spc_,i_,ku_,zo_,spc_,PI_,bou_,KO_,ti_,yya_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乗船・出発
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p04_r104_r0101
+msg_oldman1_01_p04_r104_r0101:
+	.byte	HA_,GI_,kako2_,so_,u_,ka_,ne_
+	.byte	CR_
+	.byte	ta_,no_,ma_,re_,go_,to_,ha_,spc_,i_,i_,no_,ka_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,hu_,ne_,ni_,spc_,no_,ru_,spc_,hi_,tu_,yo_,u_,ga_,spc_,a_,ru_,to_,ki_,ha_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,e_,n_,ri_,yyo_,na_,ku_,spc_,i_,ttu_,te_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「ダイゴへのてがみ」を届けていない
+// ●待機中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p05_r104_r0101
+msg_oldman1_01_p05_r104_r0101:
+	.byte	HA_,GI_,kako2_,ki_,mi_,no_,spc_,i_,i_,ta_,i_,ko_,to_,ha_,spc_,wa_,ka_,ttu_,to_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MU_,RO_,ni_,spc_,te_,ga_,mi_,wo_,spc_,to_,do_,ke_,te_
+	.byte	CR_
+	.byte	KA_,I_,NA_,he_,spc_,ni_,mo_,tu_,wo_,spc_,to_,do_,ke_,ru_,n_,da_,ro_,u_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ku_,ra_,i_,spc_,o_,ya_,su_,i_,spc_,go_,yo_,u_,da_,gyoe_
+	.byte	CR_
+	.byte	wa_,si_,ni_,spc_,ma_,ka_,se_,te_,spc_,o_,ki_,na_,sa_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	de_,ha_,spc_,ma_,zu_,spc_,MU_,RO_,ni_,spc_,mu_,ka_,u_,to_,su_,ru_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_oldman1_01_p03_r104_r0101:
+// ●「いいえ」→msg_oldman1_01_p04_r104_r0101:
+
+// ●「デボンのにもつ」を届けていない
+// ●待機中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p06_r104_r0101
+msg_oldman1_01_p06_r104_r0101:
+	.byte	HA_,GI_,kako2_,ki_,mi_,no_,spc_,i_,i_,ta_,i_,ko_,to_,ha_,spc_,wa_,ka_,ttu_,to_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,I_,NA_,no_,spc_,KU_,SU_,NO_,KI_,sa_,n_,ni_
+	.byte	CR_
+	.byte	ni_,mo_,tu_,wo_,spc_,to_,do_,ke_,ru_,n_,da_,ro_,u_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ku_,ra_,i_,spc_,o_,ya_,su_,i_,spc_,go_,yo_,u_,da_,gyoe_
+	.byte	CR_
+	.byte	wa_,si_,ni_,spc_,ma_,ka_,se_,te_,spc_,o_,ki_,na_,sa_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	de_,ha_,spc_,ma_,zu_,spc_,MU_,RO_,ni_,spc_,mu_,ka_,u_,to_,su_,ru_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_oldman1_01_p03_r104_r0101:
+// ●「いいえ」→msg_oldman1_01_p04_r104_r0101:
+
+// ●「デボンのにもつ」を届けた
+// ●待機中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p07_r104_r0101
+msg_oldman1_01_p07_r104_r0101:
+	.byte	HA_,GI_,kako2_,ya_,a_,gyoe_,spc_,ki_,mi_,no_,ta_,me_,spc_,na_,ra_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,hu_,ne_,wo_,spc_,da_,so_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ga_,spc_,i_,ki_,ta_,i_,no_,ha_,spc_,do_,ko_,spc_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウの表示
+// 　ムロ
+// 　やめる
+// ●「ムロ」　→msg_oldman1_01_p03_r104_r0101:
+// ●「やめる」→msg_oldman1_01_p08_r104_r0101:
+
+// ●「やめる」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p08_r104_r0101
+msg_oldman1_01_p08_r104_r0101:
+	.byte	HA_,GI_,kako2_,so_,u_,ka_,tenten_,tenten_,spc_,ki_,mi_,ha_
+	.byte	CR_
+	.byte	PI_,bou_,KO_,ti_,yya_,n_,no_,spc_,i_,no_,ti_,no_,spc_,o_,n_,zi_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ne_,ni_,spc_,no_,ru_,spc_,hi_,tu_,yo_,u_,ga_,spc_,a_,ru_,to_,ki_,ha_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,e_,n_,ri_,yyo_,na_,ku_,spc_,i_,ttu_,te_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トウカ到着時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p09_r104_r0101
+msg_oldman1_01_p09_r104_r0101:
+	.byte	HA_,GI_,kako2_,ho_,i_,gyoe_,spc_,TO_,U_,KA_,ni_,spc_,to_,u_,ti_,yya_,ku_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ne_,ni_,spc_,no_,ru_,spc_,hi_,tu_,yo_,u_,ga_,spc_,a_,ru_,to_,ki_,ha_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,e_,n_,ri_,yyo_,na_,ku_,spc_,i_,ttu_,te_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●ピーコちゃん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camome_01_p01_r104_r0101
+msg_camome_01_p01_r104_r0101:
+	.byte	PI_,bou_,KO_,ti_,yya_,n_,kako2_,PI_,bou_,spc_,PI_,hi_,yyo_,ro_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時に「キャモメ」の鳴き声ＳＥをならす

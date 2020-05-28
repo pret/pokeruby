@@ -1,0 +1,451 @@
+// ●サファリのおねえさん（配置：X-17,Y-11)
+// ●121番道路から、サファリの事務所に入って
+// ●すぐのところにいるお姉さん。
+// ●サファリゾーンのおおまかな説明をしてくれます。
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_01_p01
+msg_safari_01_p01:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,he_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,ha_,spc_,HO_,U_,E_,N_,de_,ha_,spc_,na_,ka_,na_,ka_
+	.byte	CR_
+	.byte	mi_,ru_,ko_,to_,no_,spc_,de_,ki_,na_,i_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ze_,n_,no_,spc_,su_,ga_,ta_,no_,spc_,ma_,ma_
+	.byte	CR_
+	.byte	me_,ni_,spc_,su_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	yo_,u_,bo_,u_,ni_,spc_,o_,ko_,ta_,e_,spc_,si_,te_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ru_,spc_,ko_,to_,mo_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,wo_,spc_,ta_,no_,si_,n_,de_,spc_,i_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリのおにいさん（配置：X-10,Y-2)
+// ●サファリ事務所のパソコンのそばにいるおにいさん。
+// ●サファリゾーンでの捕獲ゲームの説明をしてくれます。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_02_p01
+msg_safari_02_p01:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,he_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	CR_
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,ha_,spc_,ha_,zi_,me_,te_,spc_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい／いいえ）の選択
+// ●「いいえ」ならば→msg_safari_02_p02:
+// ●「はい」ならば　→msg_safari_02_p03:
+
+// ●「いいえ」ならば
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_02_p02
+msg_safari_02_p02:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,wo_,spc_,ta_,no_,si_,n_,de_,spc_,i_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」ならば
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_02_p03
+msg_safari_02_p03:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,de_,ha_
+	.byte	CR_
+	.byte	n3_,n0_,ko_,no_,spc_,SA_,HU_,AA_,RI_,BO_,bou_,RU_,wo_,spc_,tu_,ka_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	SA_,HU_,AA_,RI_,BO_,bou_,RU_,wo_,spc_,tu_,ka_,i_,ki_,ru_,ka_
+	.byte	CR_
+	.byte	n5_,n0_,n0_,po_,spc_,a_,ru_,ku_,to_
+	.byte	NORMAL_WAIT_
+	.byte	GE_,bou_,MU_,ha_,spc_,si_,yyu_,u_,ri_,yyo_,u_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,wo_,spc_,ta_,no_,si_,n_,de_,spc_,i_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●サファリのうけつけ（配置：X-8,Y-2)
+// ●ゲートの中にいるサファリ事務所のおにいさん。
+// ●このおにいさんの前（X-8,Y-4)に立つと
+// ●主人公がおにいさんの方を向いて、会話がはじまる。
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p01
+msg_safari_03_p01:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,he_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n5_,n0_,n0_,e_,n_,de_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ho_,u_,da_,i_,gyoe_
+	.byte	CR_
+	.byte	SA_,HU_,AA_,RI_,GE_,bou_,MU_,ni_,spc_,sa_,n_,ka_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●所持金ウインドウ表示
+// ●（はい／いいえ）の選択
+// ●「いいえ」なら　　　　　　　　　　→msg_safari_03_p02:
+// ●「はい」でポロックケースがない！　→msg_safari_03_p09:
+// ●「はい」で所持金500円未満なら　　→msg_safari_03_p03:
+// ●「はい」で所持金500円以上なら　　→msg_safari_03_p04:
+// ●「はい」で、ボックスがいっぱいなら→msg_safari_03_p08:
+
+// ●（いいえ）ならば
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p02
+msg_safari_03_p02:
+	.byte	so_,u_,de_,su_,ka_
+	.byte	CR_
+	.byte	ko_,n_,do_,spc_,ze_,hi_,spc_,sa_,n_,ka_,spc_,si_,te_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●所持金ウインドウ消す
+// ●主人公、一歩後ろに戻る。
+
+// ●「はい」で所持金５００円未満なら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p03
+msg_safari_03_p03:
+	.byte	o_,ka_,ne_,ga_,spc_,ta_,ri_,ma_,se_,n_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●所持金ウインドウ消す
+// ●主人公、一歩後ろに戻る。
+
+// ●「はい」で所持金５００円以上なら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p04
+msg_safari_03_p04:
+	.byte	so_,re_,de_,ha_,spc_,n5_,n0_,n0_,e_,n_,spc_,i_,ta_,da_,ki_,ma_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●所持金から-500円
+// ●所持金ウインドウ消す
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p05
+msg_safari_03_p05:
+	.byte	de_,ha_,spc_,SA_,HU_,AA_,RI_,BO_,bou_,RU_,wo_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p06
+msg_safari_03_p06:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,SA_,HU_,AA_,RI_,BO_,bou_,RU_,wo_
+	.byte	CR_
+	.byte	n3_,n0_,ko_,spc_,u_,ke_,to_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテムゲットファンファーレ（ＳＥ）
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p07
+msg_safari_03_p07:
+	.byte	zi_,ka_,n_,ni_,spc_,na_,ri_,ma_,si_,ta_,ra_
+	.byte	CR_
+	.byte	ko_,ti_,ra_,ka_,ra_,spc_,o_,si_,ra_,se_,spc_,si_,ma_,su_,no_,de_
+	.byte	NORMAL_WAIT_
+	.byte	zo_,n_,bu_,n_,ni_,spc_,o_,ta_,no_,si_,mi_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	CR_
+	.byte	de_,ha_,spc_,i_,ttu_,te_,ra_,ttu_,si_,yya_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公が自動的に、サファリ事務所の奥の扉まで
+// ●歩いていって、外にでる。
+// ●外に出たら、主人公が一歩前に進んで（X-32、Y-35）
+// ●ドアの隣にいる係員が、ドアをふさぐように移動。
+// ●そのあと、サファリゲーム開始！
+
+// ●入ろうとしたけど、ボックスがいっぱい！
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p08
+msg_safari_03_p08:
+	.byte	o_,ki_,yya_,ku_,sa_,n_,gyoe_
+	.byte	CR_
+	.byte	BO_,TTU_,KU_,SU_,ga_,spc_,i_,ttu_,pa_,i_,spc_,de_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、一歩後ろに戻る
+
+// ●入ろうとしたけど、ポロックケースがない！
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_03_p09
+msg_safari_03_p09:
+	.byte	a_,gyoe_,spc_,o_,ki_,yya_,ku_,sa_,n_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,KE_,bou_,SU_,wo_,spc_,o_,mo_,ti_,de_,spc_,na_,i_,de_,su_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,ha_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ka_,u_,to_
+	.byte	CR_
+	.byte	yo_,ri_,spc_,o_,ta_,no_,si_,mi_,spc_,i_,ta_,da_,ke_,ma_,su_,no_,de_
+	.byte	NORMAL_WAIT_
+	.byte	ze_,hi_,spc_,PO_,RO_,TTU_,KU_,KE_,bou_,SU_,wo_
+	.byte	CR_
+	.byte	o_,mo_,ti_,ni_,spc_,na_,ttu_,te_,spc_,o_,ko_,si_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、一歩後ろに戻る
+
+
+// ●サファリの出口のおにいさん（配置：X-31,Y-34)
+// ●サファリゾーンの中の、事務所の扉のとなりにいる。
+// ●主人公が、サファリゾーンに入ってくると
+// ●扉をふさぐように移動する。
+
+// ●サファリゾーンの中の係員（X-32,Y-34)
+// ●話しかけるのが、サファリゾーンに入って初めてなら　　→msg_safari_04_p04:
+// ●話しかけるのが、サファリゾーンに入って二回目以降なら→msg_safari_04_p01:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_04_p01
+msg_safari_04_p01:
+	.byte	ma_,da_,spc_,zi_,ka_,n_,ga_,spc_,no_,ko_,ttu_,te_,i_,ma_,su_,ga_
+	.byte	CR_
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,wo_,spc_,ya_,me_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// （デフォルトを「いいえ」にあわせる）
+// ●「いいえ」ならば→msg_safari_04_p02:
+// ●「はい」ならば　→msg_safari_04_p03:
+
+// ●「いいえ」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_04_p02
+msg_safari_04_p02:
+	.byte	de_,ha_,spc_,hi_,ki_,tu_,du_,ki_,spc_,o_,ta_,no_,si_,mi_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_04_p03
+msg_safari_04_p03:
+	.byte	wa_,ka_,ri_,ma_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,no_,ko_,ri_,no_,spc_,SA_,HU_,AA_,RI_,BO_,bou_,RU_,wo_
+	.byte	CR_
+	.byte	o_,a_,zu_,ka_,ri_,spc_,si_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	o_,tu_,ka_,re_,sa_,ma_,de_,si_,ta_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,go_,ri_,yo_,u_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●係員がヨコに動いて
+// ●主人公が、事務所の中に入る。
+// ●事務所の中に入って、受付の手前まで、
+// ●自動的に歩いて戻った後、通常の状態でゲーム再開。
+// ●サファリゾーン終了
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_04_p04
+msg_safari_04_p04:
+	.byte	so_,re_,de_,ha_,spc_,i_,ttu_,te_,ra_,ttu_,si_,yya_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,ka_,spc_,a_,ri_,ma_,si_,ta_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ni_,spc_,ko_,e_,wo_,spc_,ka_,ke_,te_,spc_,ku_,da_,sa_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（右下のゾーン：X-26,Y-28)
+// ●ふつうの客（男の子）：うろうろ（中心から上下左右に１マス）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_05_p01
+msg_safari_05_p01:
+	.byte	si_,ttu_,te_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,spc_,si_,ka_,ku_,i_,spc_,ha_,ko_,ni_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,o_,ku_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,a_,tu_,ma_,ttu_,te_,spc_,ku_,ru_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（右下のゾーン：X-16,Y-6)
+// ●ふつうの客（男）：固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_06_p01
+msg_safari_06_p01:
+	.byte	ko_,no_,spc_,sa_,ki_,ni_,spc_,i_,ki_,ta_,i_,spc_,ke_,do_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,spc_,mo_,ttu_,te_,spc_,ku_,ru_,no_,spc_,wa_,su_,re_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ku_,ni_,spc_,me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	i_,so_,u_,na_,spc_,ki_,ga_,spc_,su_,ru_,no_,ni_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（左下のゾーン：X-9,Y-27)
+// ●ふつうの客（女）：固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_07_p01
+msg_safari_07_p01:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,na_,ge_,te_,mo_
+	.byte	CR_
+	.byte	si_,ra_,n_,pu_,ri_,spc_,sa_,re_,ru_,spc_,to_,ki_,ga_,spc_,a_,ru_,no_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,mo_,spc_,su_,ki_,ki_,ra_,i_,ga_,spc_,a_,ru_,no_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（左上のゾーン：X-8,Y-8)
+// ●ふつうの客（おじさん）：固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_08_p01
+msg_safari_08_p01:
+	.byte	ze_,ee_,tenten_,tenten_,spc_,ze_,ee_,tenten_,tenten_
+	.byte	CR_
+	.byte	ya_,ttu_,to_,spc_,ko_,ko_,ma_,de_,spc_,ki_,ta_,ke_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ka_,re_,ti_,yya_,ttu_,te_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ru_
+	.byte	CR_
+	.byte	ge_,n_,ki_,mo_,spc_,no_,ko_,ttu_,te_,spc_,na_,i_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（右上のゾーン：X-22,Y-9)
+// ●ふつうの客（釣り人）：うろうろ（中心から上下左右に１マス）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_09_p01
+msg_safari_09_p01:
+	.byte	HO_,U_,E_,N_,ni_,spc_,i_,na_,i_,spc_,mi_,zu_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	sa_,ga_,si_,ni_,spc_,ki_,ta_,n_,da_,ke_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,zu_,u_,mi_,ha_,spc_,do_,ko_,ni_,a_,ru_,no_,ka_
+	.byte	CR_
+	.byte	ki_,mi_,spc_,si_,ttu_,te_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（右上のゾーン：X-6,Y-29)
+// ●ふつうの客（男）：うろうろ（中心から上下左右に１マス）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_10_p01
+msg_safari_10_p01:
+	.byte	ko_,ko_,de_,spc_,me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,tu_,ka_,ma_,e_,te_
+	.byte	SCROLL_WAIT_
+	.byte	to_,mo_,da_,ti_,to_,spc_,ko_,u_,ka_,n_,spc_,su_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の人：（右下のゾーン：X-15,Y-31)
+// ●ふつうの客（野球帽の男の子）：うろうろ（中心から上下左右に１マス）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_11_p01
+msg_safari_11_p01:
+	.byte	PO_,RO_,TTU_,KU_,o_,ki_,ba_,ni_,spc_,o_,i_,ta_,spc_,PO_,RO_,TTU_,KU_,ga_
+	.byte	CR_
+	.byte	i_,tu_,no_,ma_,ni_,ka_,spc_,na_,ku_,na_,ttu_,te_,i_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ra_,na_,i_,spc_,u_,ti_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,ta_,be_,ti_,yya_,ttu_,ta_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの中の張り紙：（事務所の中：X-15,Y-1)
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_12_p01
+msg_safari_12_p01:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,no_,spc_,o_,to_,ku_,na_,spc_,zi_,yyo_,u_,ho_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,a_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,na_,ge_,ru_,to_,spc_,ni_,ge_,ni_,ku_,ku_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●休憩所の看板：（左下のゾーン：X-32,Y-6)
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_13_p01
+msg_safari_13_p01:
+	.byte	a_,ru_,ki_,spc_,tu_,ka_,re_,ta_,ra_,spc_,ti_,yyo_,ttu_,to_,spc_,hi_,to_,i_,ki_,gyoe_
+	.byte	CR_
+	.byte	kako_,mi_,n_,na_,no_,spc_,ki_,yyu_,u_,ke_,i_,zi_,yyo_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●休憩所の中：（休憩所の中：X-7,Y-4)
+// ●相談している人（帽子男1(短パン)）：右向きで固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_14_p01
+msg_safari_14_p01:
+	.byte	o_,re_,spc_,PO_,RO_,TTU_,KU_,spc_,mo_,ttu_,te_,na_,i_,ke_,do_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,ta_,ku_,sa_,n_,spc_,tu_,ka_,ma_,e_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,ka_,du_,i_,te_,spc_,BO_,bou_,RU_,wo_,spc_,na_,ge_,ru_,spc_,da_,ke_,de_
+	.byte	CR_
+	.byte	ke_,ttu_,ko_,u_,spc_,tu_,ka_,ma_,e_,ra_,re_,ru_,spc_,mo_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●休憩所の中：（休憩所の中：X-8,Y-4)
+// ●相談している人（少年5(髪7:3)）：左向きで固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_15_p01
+msg_safari_15_p01:
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ka_,u_,to_,spc_,i_,tu_,mo_,yo_,ri_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,pi_,ri_,spc_,ni_,ge_,ni_,ku_,ku_,spc_,na_,ru_,mi_,ta_,i_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ni_,ge_,ni_,ku_,i_,spc_,PO_,KE_,MO_,N_,ni_,spc_,tu_,ka_,ttu_,te_,mo_
+	.byte	CR_
+	.byte	a_,n_,ma_,ri_,spc_,i_,mi_,ga_,spc_,na_,i_,ka_,mo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●休憩所の中：（休憩所の中：X-2,Y-5)
+// ●ふつうの客（大男１）：固定右向き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_safari_16_p01
+msg_safari_16_p01:
+	.byte	PO_,RO_,TTU_,KU_,o_,ki_,ba_,ni_,spc_,PO_,RO_,TTU_,KU_,spc_,o_,i_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ru_,to_
+	.byte	NORMAL_WAIT_
+	.byte	o_,na_,zi_,spc_,yo_,u_,na_,spc_,se_,i_,ka_,ku_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	a_,tu_,ma_,ru_,spc_,ki_,ga_,spc_,su_,ru_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+

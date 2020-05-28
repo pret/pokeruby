@@ -1,0 +1,119 @@
+// ●釣り成功数が５以上だった場合　→　msg_TV_01_p02_fish
+
+// ●＠０　名前
+// ●＠１　ポケモンの種類
+// ●＠２　釣りをした回数
+// ●ＴＶの釣り失敗の放送
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_fish
+msg_TV_01_p01_fish:
+	.byte	kako2_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ru_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	A_,NA_,U_,N_,SA_,bou_,kako_,ko_,n_,ni_,ti_,ha_,gyoe_,spc_,ki_,yyo_,u_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,tu_,ri_,wo_,spc_,o_,so_,wa_,ri_,ni_,spc_,ki_,ma_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,se_,n_,se_,i_,spc_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ru_,ni_,ha_
+	.byte	CR_
+	.byte	do_,n_,na_,spc_,KO_,TU_,ga_,spc_,i_,ru_,no_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	se_,n_,se_,i_,kako_,n_,hate_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ru_,spc_,KO_,TU_,ka_,i_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,ha_,ne_,spc_,zi_,bou_,ttu_,to_,spc_,ma_,tu_,ko_,to_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,ra_,spc_,a_,so_,ko_,ni_,i_,ru_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_
+	.byte	CR_
+	.byte	na_,n_,te_,spc_,i_,i_,spc_,mi_,ho_,n_,spc_,zi_,yya_,na_,i_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,ka_,re_,ko_,re_,tenten_,tenten_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,ka_,i_,ha_,spc_,ni_,ge_,ra_,re_,te_,spc_,i_,ru_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ki_,ra_,me_,zu_,spc_,zi_,bou_,ttu_,to_,spc_,ma_,ti_,tu_,du_,ke_,te_,spc_,i_,ru_,yo_
+	.byte	CR_
+	.byte	a_,re_,ga_,spc_,I_MSG_,STR_TEMP_BUF1,tu_,ri_,no_,spc_,go_,ku_,i_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	A_,NA_,U_,N_,SA_,bou_,kako_,na_,ru_,ho_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_
+	.byte	CR_
+	.byte	ya_,ttu_,to_,spc_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ri_,ma_,si_,ta_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ki_,so_,u_,na_,spc_,ka_,o_,si_,te_,spc_,yo_,ro_,ko_,n_,de_,spc_,ma_,su_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,wa_,ta_,si_,mo_,spc_,a_,n_,na_,spc_,u_,re_,si_,so_,u_,na_
+	.byte	CR_
+	.byte	ka_,o_,wo_,spc_,mi_,ta_,ra_,spc_,tu_,ri_,wo_,si_,ta_,ku_,spc_,na_,ri_,ma_,si_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,na_,sa_,n_,mo_,spc_,ko_,re_,wo_,spc_,ki_,ni_,spc_,I_MSG_,STR_TEMP_BUF1,tu_,ri_,wo_
+	.byte	CR_
+	.byte	si_,te_,mi_,te_,ha_,spc_,i_,ka_,ga_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,zi_,ka_,i_,no_
+	.byte	CR_
+	.byte	ho_,u_,so_,u_,de_,spc_,a_,i_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●＠０　名前
+// ●＠１　ポケモンの種類
+// ●＠２　釣りをした回数
+// ●ＴＶの釣り成功の放送
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_fish
+msg_TV_01_p02_fish:
+	.byte	kako2_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ru_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,ko_,n_,ni_,ti_,ha_,gyoe_,spc_,ki_,yyo_,u_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,tu_,ri_,wo_,spc_,o_,so_,wa_,ri_,ni_,spc_,ki_,ma_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,se_,n_,se_,i_,spc_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ru_,ni_,ha_
+	.byte	CR_
+	.byte	do_,n_,na_,spc_,KO_,TU_,ga_,spc_,i_,ru_,no_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	se_,n_,se_,i_,kako2_,n_,hate_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ru_,spc_,KO_,TU_,ka_,i_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,ha_,ne_,spc_,tu_,ri_,za_,o_,wo_,spc_,a_,ra_,si_,no_,spc_,go_,to_,ku_
+	.byte	CR_
+	.byte	a_,tu_,ka_,u_,spc_,ko_,to_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,ra_,spc_,a_,so_,ko_,ni_,i_,ru_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_
+	.byte	CR_
+	.byte	tu_,ri_,za_,o_,spc_,sa_,ba_,ki_,wo_,spc_,mi_,te_,mi_,na_,sa_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,I_MSG_,STR_TEMP_BUF2,hi_,ki_,ha_,spc_,re_,n_,zo_,ku_,de_
+	.byte	CR_
+	.byte	tu_,ttu_,te_,spc_,i_,ru_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,su_,ttu_,spc_,su_,go_,i_,gyoe_
+	.byte	CR_
+	.byte	ma_,sa_,ni_,spc_,a_,ra_,si_,no_,spc_,yo_,u_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,a_,n_,na_,ni_,spc_,su_,go_,i_,spc_,wa_,za_,wo_,spc_,mi_,ta_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,mo_,spc_,tu_,ri_,wo_,spc_,si_,ta_,ku_,na_,ttu_,te_,spc_,ki_,ma_,si_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,na_,sa_,n_,mo_,spc_,ko_,re_,wo_,spc_,ki_,ni_,spc_,I_MSG_,STR_TEMP_BUF1,tu_,ri_,wo_
+	.byte	CR_
+	.byte	si_,te_,mi_,te_,ha_,spc_,i_,ka_,ga_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,zi_,ka_,i_,no_
+	.byte	CR_
+	.byte	ho_,u_,so_,u_,de_,spc_,a_,i_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+
+

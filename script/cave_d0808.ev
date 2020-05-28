@@ -1,0 +1,509 @@
+//====================================================================
+//						cave_d0808
+//					おくりびやま・山頂
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d0808_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d0808
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0808:
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								POS									*/
+/* TMPWK0 = どのPOSか												*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0808_pos01
+	_TALK_START
+	_LDVAL		TMPWK0,0
+	_JUMP		ev_common_01_cave_d0808
+	_END
+
+SCRIPT_LABEL	ev_cave_d0808_pos02
+	_TALK_START
+	_LDVAL		TMPWK0,1
+	_JUMP		ev_common_01_cave_d0808
+	_END
+
+SCRIPT_LABEL	ev_cave_d0808_pos03
+	_TALK_START
+	_LDVAL		TMPWK0,2
+	_JUMP		ev_common_01_cave_d0808
+	_END
+
+//共通処理
+ev_common_01_cave_d0808:
+	//主人公上を向く(ダート自転車用)
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//振り向く
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		50
+
+	//近づいてくる
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_boss_01_cave_d0808
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_boss_01_cave_d0808
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_boss_01_cave_d0808
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_cave_d0808r
+#endif
+	_TALK_CLOSE
+
+	_FLD_FADE_BLACKOUT
+
+	_OBJ_DELETE		AQUABOSS_01_CAVE_D0808S
+	_OBJ_DELETE		TR_AQUAM_26
+	_OBJ_DELETE		TR_AQUAM_27
+	_OBJ_DELETE		TR_AQUAM_28
+	_FLAG_SET		FV_AQUABOSS_01_CAVE_D0808S
+	_FLAG_SET		FV_AQUA_ALL_CAVE_D0808S
+	
+	_FLD_FADE_BLACKIN
+
+	_TIME_WAIT		20
+
+	_CALL			flag_set_akua_cave_d0808
+
+	//近づいてくる
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_oldwoman1_01_cave_d0808
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_oldwoman1_01_cave_d0808
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_oldwoman1_01_cave_d0808
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p01_cave_d0808s
+	_ITEM_EVENT		ITEM_AIIRONOTAMA,1
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p01_cave_d0808r
+	_ITEM_EVENT		ITEM_BENIIRONOTAMA,1
+#endif
+
+	_FLAG_SET		FE_TAMA_GET
+	_TALK_END
+	_END
+
+//共通フラグセット処理
+flag_set_akua_cave_d0808:
+	//ボスが留守の話しを聞いた
+	_FLAG_SET		FE_AKUA_01_CAVE_D0901
+	_LDVAL			WK_SCENE_FIELD_C102,1
+
+	//船着場のクスノキ艦長を出す
+	_FLAG_RESET		FV_KUSUNOKI_01_FIELD_C102
+	_FLAG_RESET		FV_CAMERA1_01_FIELD_C102
+
+	//強制イベントセット
+	_LDVAL			WK_SCENE_C102_R0601,1
+
+	_LDVAL			WK_SCENE_CAVE_D0808,1
+	_RET
+
+//--------------------------------------------------------------------
+//アクアボス	近づいてくる
+//--------------------------------------------------------------------
+//左側のPOS
+case0_boss_01_cave_d0808:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//真中のPOS
+case1_boss_01_cave_d0808:
+	_RET
+
+//右側のPOS
+case2_boss_01_cave_d0808:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//老婆	近づいてくる
+//--------------------------------------------------------------------
+//左側のPOS
+case0_oldwoman1_01_cave_d0808:
+	_SET_OBJ_ANIME	OLDWOMAN1_01_CAVE_D0808,oldwoman1_01_cave_d0808_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//真中のPOS
+case1_oldwoman1_01_cave_d0808:
+	_SET_OBJ_ANIME	OLDWOMAN1_01_CAVE_D0808,oldwoman1_01_cave_d0808_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右側のPOS
+case2_oldwoman1_01_cave_d0808:
+	_SET_OBJ_ANIME	OLDWOMAN1_01_CAVE_D0808,oldwoman1_01_cave_d0808_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//老婆	近づいてくる(左側)
+//--------------------------------------------------------------------
+oldwoman1_01_cave_d0808_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//老婆	近づいてくる(真中)
+//--------------------------------------------------------------------
+oldwoman1_01_cave_d0808_anime02:
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//老婆	近づいてくる(右側)
+//--------------------------------------------------------------------
+oldwoman1_01_cave_d0808_anime03:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	近づいてくる(左側)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime01:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	近づいてくる(右側)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime03:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								老人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_cave_d0808
+	_TALK_OBJ_START
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_YES_NO	msg_oldman2_01_p01_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_YES_NO	msg_oldman2_01_p01_cave_d0808r
+#endif
+
+	_IFVAL_CALL	ANSWORK,EQ,TRUE,yes_oldman2_01_p01_cave_d0808	//「はい」
+	_IFVAL_CALL	ANSWORK,EQ,FALSE,no_oldman2_01_p01_cave_d0808	//「いいえ」
+
+	_TALK_OBJ_END
+	_END
+
+//「はい」
+yes_oldman2_01_p01_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldman2_01_p02_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldman2_01_p02_cave_d0808r
+#endif
+	_RET
+
+//「いいえ」
+no_oldman2_01_p01_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldman2_01_p03_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldman2_01_p03_cave_d0808r
+#endif
+	_RET
+
+
+/********************************************************************/
+/*								老婆								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_cave_d0808
+	_TALK_OBJ_START
+
+	//たまを返しているか
+	_IF_FLAGON_JUMP	FE_OLDWOMAN1_01_CAVE_D0808,ev_oldwoman1_01_p04_cave_d0808
+
+	//目覚めの祠イベント終了しているか
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1206,ev_oldwoman1_01_p05_cave_d0808
+
+	//海底洞窟イベント終了しているか
+	_IF_FLAGON_JUMP	FE_POKE1_01_CAVE_D1111,ev_oldwoman1_01_p02_cave_d0808
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p02_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p02_cave_d0808r
+#endif
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//目覚めの祠イベント終了している
+//--------------------------------------------------------------------
+ev_oldwoman1_01_p05_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_YES_NO	msg_oldwoman1_01_p04_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_YES_NO	msg_oldwoman1_01_p04_cave_d0808r
+#endif
+
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_oldwoman1_01_p01_cave_d0808
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_oldwoman1_01_p01_cave_d0808
+	_END
+
+//「はい」
+yes_oldwoman1_01_p01_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_LDVAL			PARAM0,ITEM_AIIRONOTAMA
+#elif ( PM_VERSION == VERSION_RUBY )
+	_LDVAL			PARAM0,ITEM_BENIIRONOTAMA
+#endif
+	_CALL			ev_item_return
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		40
+
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		10
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p07_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p07_cave_d0808r
+#endif
+
+	_FLAG_SET		FE_OLDWOMAN1_01_CAVE_D0808
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_oldwoman1_01_p01_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_YES_NO	msg_oldwoman1_01_p05_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_YES_NO	msg_oldwoman1_01_p05_cave_d0808r
+#endif
+
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_oldwoman1_01_p01_cave_d0808
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_oldwoman1_01_p01_cave_d0808
+	_END
+
+//--------------------------------------------------------------------
+//海底洞窟イベント終了している
+//--------------------------------------------------------------------
+ev_oldwoman1_01_p02_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p03_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p03_cave_d0808r
+#endif
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//たまを返している
+//--------------------------------------------------------------------
+ev_oldwoman1_01_p04_cave_d0808:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p08_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_oldwoman1_01_p08_cave_d0808r
+#endif
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								マツブサ							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0808_pos04
+	_TALK_START
+	_LDVAL		TMPWK0,0
+	_JUMP		ev_magmaboss_01_cave_d0808
+	_END
+
+SCRIPT_LABEL	ev_cave_d0808_pos05
+	_TALK_START
+	_LDVAL		TMPWK0,1
+	_JUMP		ev_magmaboss_01_cave_d0808
+	_END
+
+SCRIPT_LABEL	ev_cave_d0808_pos06
+	_TALK_START
+	_LDVAL		TMPWK0,2
+	_JUMP		ev_magmaboss_01_cave_d0808
+	_END
+
+//共通処理
+ev_magmaboss_01_cave_d0808:
+	//主人公上を向く(ダート自転車用)
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//振り向く
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		50
+
+	//近づいてくる
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_boss_01_cave_d0808_02
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_boss_01_cave_d0808_02
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_boss_01_cave_d0808_02
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_cave_d0808s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_cave_d0808r
+#endif
+	_TALK_CLOSE
+
+	//去っていく
+	_IFVAL_CALL		TMPWK0,EQ,0,case3_boss_01_cave_d0808_02
+	_IFVAL_CALL		TMPWK0,EQ,1,case4_boss_01_cave_d0808_02
+	_IFVAL_CALL		TMPWK0,EQ,2,case5_boss_01_cave_d0808_02
+
+	_OBJ_DELETE		AQUABOSS_01_CAVE_D0808S
+	_LDVAL			WK_SCENE_CAVE_D0808,3
+	_TALK_END	
+	_END
+
+//近づいてくる
+//左側のPOS
+case0_boss_01_cave_d0808_02:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//真中のPOS
+case1_boss_01_cave_d0808_02:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime11
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右側のPOS
+case2_boss_01_cave_d0808_02:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime12
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//去っていく
+//左側のPOS
+case3_boss_01_cave_d0808_02:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime13
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//真中のPOS
+case4_boss_01_cave_d0808_02:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime14
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右側のPOS
+case5_boss_01_cave_d0808_02:
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0808S,boss_01_cave_d0808_anime15
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//ボス	近づいてくる(左側)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime10:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	近づいてくる(真中)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime11:
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	近づいてくる(右側)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime12:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	去っていく(左側)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime13:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	去っていく(真中)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime14:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ボス	去っていく(右側)
+//--------------------------------------------------------------------
+boss_01_cave_d0808_anime15:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,622 @@
+//====================================================================
+//							field_r109
+//						フィールド・ロード109
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r109_event_data
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						１０９番道路での船乗り込み					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fune_01_p01_field_r109
+	//クリアする
+	_CALL			ev_fune_pos_clear
+
+	//船の上にOBJがくるようにプライオリティを操作する
+	_OBJ_PRI_CHG	OLDMAN1_01_FIELD_R109,FIELD,FIELD_R109,0
+	_OBJ_PRI_CHG	EV_OBJ_SPID,FIELD,FIELD_R109,0
+
+	//ハギ乗り込みアニメ
+	_SET_OBJ_ANIME	OLDMAN1_01_FIELD_R109,oldman1_01_field_r109_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		OLDMAN1_01_FIELD_R109
+
+	//現状は外に行くアニメ
+	_SWITCH			RG_SITE
+	_CASEJUMP		SITE_D,site_u_poke1_01_p01_field_r109	//上から話し掛け
+	_CASEJUMP		SITE_L,site_r_poke1_01_p01_field_r109	//右から話し掛け
+	_CASEJUMP		SITE_R,site_l_poke1_01_p01_field_r109	//左から話し掛け
+	_END
+
+site_u_poke1_01_p01_field_r109:	//上からの話
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r109_anime01
+	_OBJ_ANIME_WAIT
+	_JUMP			ev_fune_01_p02_field_r109
+	_END
+
+site_l_poke1_01_p01_field_r109:	//左から話し掛け
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r109_anime03
+	_OBJ_ANIME_WAIT
+	_JUMP			ev_fune_01_p02_field_r109
+	_END
+
+site_r_poke1_01_p01_field_r109:	//右から話し掛け
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r109_anime04
+	_OBJ_ANIME_WAIT
+	_JUMP			ev_fune_01_p02_field_r109
+	_END
+
+SCRIPT_LABEL	ev_fune_01_p02_field_r109
+	//主人公を見えなくする
+	_OBJ_INVISIBLE	EV_OBJ_SPID,FIELD,FIELD_R109	
+
+	_CALL			set_hagi_fune_bgm
+
+	//船で移動する
+	_SET_OBJ_ANIME	FUNE_01_FIELD_R109,fune_01_field_r109_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,fune_01_field_r109_anime01
+	_OBJ_ANIME_WAIT
+
+	_CALL			reset_hagi_fune_bgm
+
+	//主人公を見えるようにして降りる
+	_OBJ_VISIBLE	EV_OBJ_SPID,FIELD,FIELD_T103
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_r109_anime02
+	_OBJ_ANIME_WAIT
+
+	//ムロタウン
+	_OBJ_APPEAR		FUNE_01_FIELD_T103			//船を出す
+	_FLAG_RESET		FV_FUNE_01_FIELD_T103		//一応
+
+	_SXY_POS_CHANGE	OLDMAN1_01_FIELD_T103,12,8	//ハギ老人の座標移動
+	_OBJ_APPEAR		OLDMAN1_01_FIELD_T103		//ハギ老人を出す
+
+	//船の上にOBJがくるようにプライオリティを操作する
+	_OBJ_PRI_CHG	OLDMAN1_01_FIELD_T103,FIELD,FIELD_T103,0
+
+	//ハギ降りる
+	_SET_OBJ_ANIME	OLDMAN1_01_FIELD_T103,oldman1_01_field_r109_anime02
+	_OBJ_ANIME_WAIT
+
+	_FLAG_RESET		FV_HAGI_01_FIELD_T103		//一応
+
+	//ロード１０９
+	_FLAG_SET		FV_FUNE_01_FIELD_R109		//船を消す
+	_OBJ_INVISIBLE	FUNE_01_FIELD_R109,FIELD,FIELD_R109
+
+	_TALK_KEYWAIT	msg_oldman1_01_p05_field_t103
+	_TALK_CLOSE
+
+	_LDWK			WK_SCENE_FUNE_POS,TMPWK0	//元に戻す
+
+	//プライオリティを元に戻す
+	_OBJ_PRI_OFF	EV_OBJ_SPID,FIELD,FIELD_R109
+	_OBJ_PRI_OFF	OLDMAN1_01_FIELD_T103,FIELD,FIELD_T103
+
+	//sxy情報を上書きする
+	_SXY_POS_OVERWRITE	OLDMAN1_01_FIELD_T103
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//ルート(r109→r105)
+//--------------------------------------------------------------------
+fune_01_field_r109_anime01:
+	.byte	AC_WALK_TURN_D
+	.byte	AC_WALK_D_1//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_4	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_2	//左に1歩進む
+	.byte	AC_WALK_L_1	//左に1歩進む
+	.byte	AC_WALK_L_1	//左に1歩進む
+	.byte	AC_WALK_TURN_D	//左に1歩進む
+	.byte	ACMD_END
+
+hero_01_field_r109_anime01:
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	ACMD_END
+
+hero_01_field_r109_anime02:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	ACMD_END
+
+hero_01_field_r109_anime03:
+	.byte	AC_WALK_R_1	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	ACMD_END
+
+hero_01_field_r109_anime04:
+	.byte	AC_WALK_L_1	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	ACMD_END
+
+oldman1_01_field_r109_anime01:
+	.byte	AC_WALK_D_1	
+	.byte	ACMD_END
+
+oldman1_01_field_r109_anime02:
+	.byte	AC_WALK_D_1	
+	.byte	AC_WALK_TURN_L	
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							ハギ老人								*/
+/********************************************************************/
+SCRIPT_LABEL	hagi_script_field_r109
+	_TALK_OBJ_START
+	//デボンの荷物を返していない
+	_IF_FLAGOFF_JUMP	FE_AQUA_01_C102_R0502,no_clear_nimotsu_oldman1_01_field_r109
+
+	//通常時
+	_JUMP			normal_talk_oldman1_01_p01_field_r109
+	_END
+
+//荷物イベントをクリアしていなかったら
+no_clear_nimotsu_oldman1_01_field_r109:
+	_TALKMSG		msg_oldman1_01_p02_field_r109
+
+	_TALK_YES_NO	msg_oldman1_01_p02_field_r109
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,cancel_oldman1_01_p01_field_r109
+	_JUMP			go_oldman1_01_p01_field_r109
+	_END
+
+//通常時
+normal_talk_oldman1_01_p01_field_r109:
+	//ムロタウンに行きたいか
+	_TALKMSG		msg_oldman1_01_p06_field_r109
+	_TALK_WAIT
+
+	_SELECT_WINDOW_CSR	21,8,HAGI_MENU02,1,0	//B有効
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,go_oldman1_01_p01_field_r109
+	_CASEJUMP		1,normal_cancel_oldman1_01_p01_field_r109
+	_CASECANCEL		normal_cancel_oldman1_01_p01_field_r109
+	_END
+
+//ムロタウンに行く
+go_oldman1_01_p01_field_r109:
+	_TALK_KEYWAIT	msg_oldman1_01_p03_field_r109
+	_TALK_CLOSE
+	_JUMP			ev_fune_01_p01_field_r109
+	_END
+
+//ムロタウンに行かない
+cancel_oldman1_01_p01_field_r109:
+	_TALK_KEYWAIT	msg_oldman1_01_p04_field_r109
+	_TALK_OBJ_END
+	_END
+
+//ムロタウンに行かない(通常)
+normal_cancel_oldman1_01_p01_field_r109:
+	_TALK_KEYWAIT	msg_oldman1_01_p07_field_r109
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				お嬢２（「うみのいえ」の娘）						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou2_01_p01_field_r109
+	_EASY_OBJ_MSG	msg_ojyou2_01_p01_field_r109
+	_END
+
+
+/********************************************************************/
+/*							浮き輪坊や								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_beachboy1_01_p01_field_r109
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_beachboy1_01_p01_field_r109
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							浮き輪お嬢								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_beachgirl1_01_p01_field_r109
+	_TALK_OBJ_START
+
+	//おにいちゃん・おねえちゃんセット
+	_PROGRAM		SET_SEX_NAME_01
+
+	//すでにアイテム入手していたら
+	_IF_FLAGON_JUMP	FE_YAWARAKAISUNA_GET,ev_beachgirl1_01_p02_field_r109
+
+	_TALK_KEYWAIT	msg_beachgirl1_01_p01_field_r109
+
+	_ITEM_EVENT		ITEM_YAWARAKAISUNA,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_CLOSE
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_FLAG_SET		FE_YAWARAKAISUNA_GET
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテム入手している
+ev_beachgirl1_01_p02_field_r109:
+	_TALK_KEYWAIT	msg_beachgirl1_01_p02_field_r109
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							おばさん１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew1_01_p01_field_r109
+	_EASY_OBJ_MSG	msg_middlew1_01_p01_field_r109
+	_END
+
+
+/********************************************************************/
+/*							老人２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_field_r109
+	_EASY_OBJ_MSG	msg_oldman2_01_p01_field_r109
+	_END
+
+
+/********************************************************************/
+/*							ジグザグマ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_jiguma_01_p01_field_r109
+	_TALK_OBJ_START
+	_VOICE_PLAY		MONSNO_ZIGUZAGUMA,0
+	_TALK_KEYWAIT	msg_jiguma_01_p01_field_r109
+	_VOICE_WAIT
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							うみのいえの看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r109
+	_EASY_MSG		msg_kanban_01_p01_field_r109
+	_END
+
+
+/********************************************************************/
+/*							おとくなけいじばん						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r109
+	_EASY_MSG		msg_kanban_02_p01_field_r109
+	_END
+
+
+/********************************************************************/
+//					トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_08
+	_TRAINER_DATA2	msg_swimmerm_08_01
+	_TRAINER_DATA3	msg_swimmerm_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_08_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_08
+	_TRAINER_DATA2	msg_swimmerw_08_01
+	_TRAINER_DATA3	msg_swimmerw_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_08_03
+	_END
+
+SCRIPT_LABEL	ev_sailor_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SAILOR_01
+	_TRAINER_DATA2	msg_sailor_01_01
+	_TRAINER_DATA3	msg_sailor_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sailor_01_03
+	_END
+
+SCRIPT_LABEL	ev_sailor_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SAILOR_02
+	_TRAINER_DATA2	msg_sailor_02_01
+	_TRAINER_DATA3	msg_sailor_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sailor_02_03
+	_END
+
+SCRIPT_LABEL	ev_ukiwam_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAM_01
+	_TRAINER_DATA2	msg_ukiwam_01_01
+	_TRAINER_DATA3	msg_ukiwam_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_ukiwam_01
+	_TRAINER_EASY_MSG	msg_ukiwam_01_03
+	_END
+
+_revenge_ukiwam_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAM_01
+	_TRAINER_DATA2	msg_ukiwam_01_04
+	_TRAINER_DATA3	msg_ukiwam_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_ukiwam_01_06
+	_END
+
+SCRIPT_LABEL	ev_ukiwaw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAW_01
+	_TRAINER_DATA2	msg_ukiwaw_01_01
+	_TRAINER_DATA3	msg_ukiwaw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_ukiwaw_01
+	_TRAINER_EASY_MSG	msg_ukiwaw_01_03
+	_END
+
+_revenge_ukiwaw_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAW_01
+	_TRAINER_DATA2	msg_ukiwaw_01_04
+	_TRAINER_DATA3	msg_ukiwaw_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_ukiwaw_01_06
+	_END
+
+SCRIPT_LABEL	ev_ukiwaw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAW_02
+	_TRAINER_DATA2	msg_ukiwaw_02_01
+	_TRAINER_DATA3	msg_ukiwaw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_ukiwaw_02_03
+	_END
+
+SCRIPT_LABEL	ev_ukiwaw_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAW_03
+	_TRAINER_DATA2	msg_ukiwaw_03_01
+	_TRAINER_DATA3	msg_ukiwaw_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_ukiwaw_03_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_10
+	_TRAINER_DATA2	msg_fishing_10_01
+	_TRAINER_DATA3	msg_fishing_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_10_03
+	_END
+
+SCRIPT_LABEL	ev_lovelove_08_01		//男
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	LOVELOVE_08
+	_TRAINER_DATA2	msg_lovelove_08_01
+	_TRAINER_DATA3	msg_lovelove_08_02
+	_TRAINER_DATA4	msg_lovelove_08_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_lovelove_08_03
+	_END
+
+SCRIPT_LABEL	ev_lovelove_08_02		//女
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	LOVELOVE_08
+	_TRAINER_DATA2	msg_lovelove_08_05
+	_TRAINER_DATA3	msg_lovelove_08_06
+	_TRAINER_DATA4	msg_lovelove_08_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_lovelove_08_07
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

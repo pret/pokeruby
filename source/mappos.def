@@ -1,0 +1,15 @@
+/** マップ位置＆マップ名データ構造体の定義 */
+#ifndef _MAPPOS_DEF_
+#define _MAPPOS_DEF_
+
+typedef struct {
+	u8 x;
+	u8 y;
+	u8 width;
+	u8 height;
+	const u8 *name;
+}MAP_POS_DATA;
+
+extern const MAP_POS_DATA MapPositionData[];
+
+#endif

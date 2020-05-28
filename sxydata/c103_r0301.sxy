@@ -1,0 +1,62 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_C103_R0301	1
+#define EXITNUM_C103_R0301	2
+#define POSNUM_C103_R0301	0
+#define BGNUM_C103_R0301	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_studym1_01_p01_c103_r0301[];
+
+const evObjData	OBJ_c103_r0301[] =
+{
+	{
+		STUDYM1_01_C103_R0301,		//OBJ ID
+		STUDYM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_studym1_01_p01_c103_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c103_r0301[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_C103_DOOR05,		//Door ID
+		FIELD_C103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_C103_DOOR05,		//Door ID
+		FIELD_C103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c103_r0301_sxy_data =
+{
+OBJNUM_C103_R0301,			// field obj max
+EXITNUM_C103_R0301,		// exit max
+POSNUM_C103_R0301,			// pos event max
+BGNUM_C103_R0301,			// bg event max
+OBJ_c103_r0301,			// field obj data
+EXIT_c103_r0301,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

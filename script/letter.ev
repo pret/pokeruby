@@ -1,0 +1,574 @@
+//====================================================================
+//
+//							手紙型
+//
+//====================================================================
+
+
+/********************************************************************/
+//						簡易会話での使用状況
+//
+//	PARAM0		モード
+//	PARAM1		tv_eventの空いている場所
+//	PARAM2		easy_talkの要素数の何番目か
+//
+/********************************************************************/
+
+
+/********************************************************************/
+//						ＴＶでの使用状況(基本)
+//
+//	PARAM1		datatype(必要なときにタイプをセットして渡している)
+//	PARAM2		tv_eventの空いている場所 → TMPWK1に退避させている
+//
+/********************************************************************/
+
+
+/********************************************************************/
+//
+//						共通データセット
+//
+/********************************************************************/
+letter_data_set:
+	_PROGRAM		TV_DATA_SET
+	_INC_RECORD		CNT_INTERVIEW		//記録カウントアップ
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						ポケモンアンケート
+//
+//	PARAM0
+//	PARAM1				datatype
+//	PARAM2				tv_eventの空いている場所
+//	PARAM3
+//
+//	TMPWK0
+//	TMPWK1				tv_eventの空いている場所(保存)
+//	TMPWK2
+//	TMPWK3
+//
+/********************************************************************/
+SCRIPT_LABEL	letter_poke_script
+	//データ作成開始(letter_club_scriptですでにTALK_OBJ_STARTかけている)
+
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_POKEMON_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,letter_pokemon_nostart
+
+	//PARAM2に取得したtv_eventの空いている場所が入っている
+	_LDWK			TMPWK1,PARAM2
+
+	_TALK_YES_NO	msg_interview_01_p11_daisukiclub
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_poke_01_p03_c101_pc01	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_poke_01_p03_c101_pc01	//「いいえ」
+	_END
+
+//はい
+yes_letter_poke_01_p03_c101_pc01:
+	_TALK_KEYWAIT	msg_interview_01_p12_daisukiclub
+
+	_LDVAL			PARAM0,KAIWA_MODE_HAGAKI
+	_LDWK			PARAM1,TMPWK1				//tv_eventの要素数
+	_LDVAL			PARAM2,KAIWA_INTERVIEWER_WOMAN
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_poke_01_p04_c101_pc01	// 書いた
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_poke_01_p03_c101_pc01	// 書いてない
+	_END
+
+//いいえ(終了)
+no_letter_poke_01_p03_c101_pc01:
+	_TALK_KEYWAIT	msg_interview_01_p09_daisukiclub
+	_TALK_OBJ_END
+	_END
+
+//書き終わったら
+yes_letter_poke_01_p04_c101_pc01:
+	_TALK_KEYWAIT	msg_interview_01_p13_daisukiclub
+
+	//データセットを呼ぶ
+	_LDVAL			PARAM1,TV_POKEMON_TYPE1
+	_JUMP			letter_data_set
+	_END
+
+//手紙作れない
+letter_pokemon_nostart:
+	_TALK_KEYWAIT	msg_interview_01_p10_daisukiclub
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+
+
+/********************************************************************/
+//						さいきんのできごと
+//
+//	PARAM0
+//	PARAM1				datatype
+//	PARAM2				tv_eventの空いている場所
+//	PARAM3
+//
+//	TMPWK0
+//	TMPWK1				tv_eventの空いている場所(保存)
+//	TMPWK2
+//	TMPWK3
+//
+/********************************************************************/
+SCRIPT_LABEL	letter_recently_script
+	//データ作成開始
+	_TALK_OBJ_START
+
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_RECENTLY_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,letter_recently_nostart
+
+	//PARAM2に取得したtv_eventの空いている場所が入っている
+	_LDWK			TMPWK1,PARAM2
+
+	//一回話したことがあるか
+	_IF_FLAGON_JUMP	FE_LETTER_RECENTLY_01,letter_recently_01_p02_c102_pc01
+	_FLAG_SET		FE_LETTER_RECENTLY_01	//会話した
+
+	_TALK_YES_NO	msg_interview_02_p01_daisukiclub
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_recently_01_p03_c102_pc01	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_recently_01_p03_c102_pc01	//「いいえ」
+	_END
+
+//一回話したことがある
+letter_recently_01_p02_c102_pc01:
+	_TALK_YES_NO	msg_interview_02_p02_daisukiclub
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_recently_01_p03_c102_pc01	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_recently_01_p03_c102_pc01	//「いいえ」
+	_END
+
+//はい
+yes_letter_recently_01_p03_c102_pc01:
+	_TALK_KEYWAIT	msg_interview_02_p03_daisukiclub
+
+	_LDVAL			PARAM0,KAIWA_MODE_HAGAKI
+	_LDWK			PARAM1,TMPWK1				//tv_eventの要素数
+	_LDVAL			PARAM2,KAIWA_INTERVIEWER_MAN
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_recently_01_p04_c102_pc01	// 書いた
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_recently_01_p03_c102_pc01	// 書いてない
+	_END
+
+//いいえ(終了)
+no_letter_recently_01_p03_c102_pc01:
+	_TALK_KEYWAIT	msg_interview_02_p04_daisukiclub
+	_TALK_OBJ_END
+	_END
+
+//書き終わったら
+yes_letter_recently_01_p04_c102_pc01:
+	_TALK_KEYWAIT	msg_interview_02_p05_daisukiclub
+
+	//データセットを呼ぶ
+	_LDVAL			PARAM1,TV_RECENTLY_TYPE1
+	_JUMP			letter_data_set
+	_END
+
+//手紙作れない
+letter_recently_nostart:
+	_TALK_KEYWAIT	msg_interview_02_p06_daisukiclub
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+
+
+/********************************************************************/
+//					大好きクラブのインタビュー
+//
+//	PARAM0
+//	PARAM1			datatype
+//	PARAM2			tv_eventの空いている場所
+//	PARAM3			受け答えのデータ
+//
+//	TMPWK0
+//	TMPWK1			tv_eventの空いている場所(保存)
+//	TMPWK2			受け答えのデータ保存
+//	TMPWK3
+//
+/********************************************************************/
+SCRIPT_LABEL	letter_club_script
+	_TALK_OBJ_START
+
+	//ニックネームついてなかったら、アンケートになる
+	_FUNC_CALL		ANSWORK,TOP_POKE_NICK_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,0,letter_poke_script
+
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_CLUB_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,letter_club_nostart
+
+	//PARAM2に取得したtv_eventの空いている場所が入っている
+	_LDWK			TMPWK1,PARAM2
+
+	_TALK_YES_NO	msg_interview_01_p01_daisukiclub
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_club_01_p02_c102_r0401	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_club_01_p02_c102_r0401	//「いいえ」
+	_END
+
+//はい
+yes_letter_club_01_p02_c102_r0401:
+	_TALK_KEYWAIT	msg_interview_01_p02_daisukiclub
+
+	_GET_RND		3
+
+	//ランダムの質問番号を保存
+	_LDWK			TMPWK2,ANSWORK
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case0_letter_club_01
+	_CASEJUMP		1,case1_letter_club_01
+	_CASEJUMP		2,case2_letter_club_01
+	_END
+
+//ランダム質問1
+case0_letter_club_01:
+	_TALK_KEYWAIT	msg_interview_01_p03_daisukiclub
+	_JUMP			letter_club_01_p03_c102_r0401
+	_END
+
+//ランダム質問2
+case1_letter_club_01:
+	_TALK_KEYWAIT	msg_interview_01_p04_daisukiclub
+	_JUMP			letter_club_01_p03_c102_r0401
+	_END
+
+//ランダム質問3
+case2_letter_club_01:
+	_TALK_KEYWAIT	msg_interview_01_p05_daisukiclub
+	_JUMP			letter_club_01_p03_c102_r0401
+	_END
+
+letter_club_01_p03_c102_r0401:
+	_LDVAL			PARAM0,KAIWA_MODE_INTERVIEW
+	_LDWK			PARAM1,TMPWK1				//tv_eventの要素数
+	_LDVAL			PARAM2,0					//easytalk_noの要素数
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_club_01_p02_c102_r0401	// 書いてない
+
+	_TALK_KEYWAIT	msg_interview_01_p06_daisukiclub
+
+	_LDVAL			PARAM2,1					//easytalk_noの要素数
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP	ANSWORK,EQ,0,no_letter_club_01_p02_c102_r0401	// 書いてない
+	
+	_TALK_KEYWAIT	msg_interview_01_p08_daisukiclub
+
+	//データ作成
+	_LDWK			PARAM3,TMPWK2
+	_LDVAL			PARAM1,TV_CLUB_TYPE1
+	_JUMP			letter_data_set
+	_END
+
+//いいえ(終了)
+//簡易会話で何も書かなかった
+no_letter_club_01_p02_c102_r0401:
+	_TALK_KEYWAIT	msg_interview_01_p09_daisukiclub
+	_TALK_OBJ_END
+	_END
+
+//手紙作れない
+letter_club_nostart:
+	_TALK_KEYWAIT	msg_interview_01_p10_daisukiclub
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+/********************************************************************/
+
+
+/********************************************************************/
+//							コンテスト
+//
+//	PARAM0				
+//	PARAM1				datatype
+//	PARAM2				tv_eventの空いている場所
+//	PARAM3
+//
+//	TMPWK0			
+//	TMPWK1				tv_eventの空いている場所(保存)
+//	TMPWK2
+//	TMPWK3
+//
+/********************************************************************/
+SCRIPT_LABEL	letter_contest_script
+	//データ作成開始
+	_TALK_OBJ_START
+
+	//すでにインタビューを受けていたら
+	_IF_FLAGON_JUMP		FH_01,letter_con_nostart
+
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_CONTEST_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,letter_con_nostart
+
+	//PARAM2に取得したtv_eventの空いている場所が入っている
+	_LDWK			TMPWK1,PARAM2
+
+	_TALK_YES_NO	msg_interview_01_p01_contest
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_con_01_p03_c101_pc01	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_con_01_p03_c101_pc01		//「いいえ」
+	_END
+
+//はい
+yes_letter_con_01_p03_c101_pc01:
+	_TALK_KEYWAIT	msg_interview_01_p02_contest
+
+	_LDVAL			PARAM0,KAIWA_MODE_CONTEST
+	_LDWK			PARAM1,TMPWK1				//tv_eventの要素数
+	_LDVAL			PARAM2,0					//easytalk_noの要素数
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_con_01_p04_c101_pc01	// 書いた
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_con_01_p03_c101_pc01		// 書いてない
+	_END
+
+//いいえ(終了)
+no_letter_con_01_p03_c101_pc01:
+	_TALK_KEYWAIT	msg_interview_01_p05_contest
+	_TALK_OBJ_END
+	_END
+
+//書き終わったら
+yes_letter_con_01_p04_c101_pc01:
+	//確保領域にタイプが記録されているので要素数は24となる
+	//_LDWK			PARAM0,TMPWK1				//tv_eventの要素数
+	_LDVAL			PARAM0,24					//tv_eventの要素数
+	_PROGRAM		SET_TV_CON_TYPE
+	_TALK_KEYWAIT	msg_interview_01_p03_contest
+
+	_LDVAL			PARAM0,KAIWA_MODE_CONTEST
+	_LDWK			PARAM1,TMPWK1				//tv_eventの要素数
+	_LDVAL			PARAM2,1					//easytalk_noの要素数
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_con_01_p03_c101_pc01		// 書いてない
+
+	_TALK_KEYWAIT	msg_interview_01_p04_contest
+
+	//インタビューを受けた
+	_FLAG_SET		FH_01
+
+	//データセットを呼ぶ
+	_LDVAL			PARAM1,TV_CONTEST_TYPE1
+	_JUMP			letter_data_set
+	_END
+
+//手紙作れない
+letter_con_nostart:
+	_TALK_KEYWAIT	msg_interview_01_p06_contest
+	_TALK_OBJ_END
+	_END
+
+
+//--------------------------------------------------------------------
+//			コンテスト後にインタビュアーを出現させるかチェック
+//--------------------------------------------------------------------
+tv_contest_chk:
+	//コンテスト後か
+	_IFVAL_JUMP		WK_SCENE_SP_CONTEST,NE,2,tv_contest_chk_end
+	
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_CONTEST_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,tv_contest_chk_end
+
+	_SWITCH			WK_SCENE_SP_CONTEST03
+	_CASEJUMP		0,tv_contest_chk_end
+	_CASEJUMP		2,case1_tv_contest_obj		//ハジツゲ
+	_CASEJUMP		1,case2_tv_contest_obj		//シダケ
+	_CASEJUMP		3,case3_tv_contest_obj		//カイナ
+	_CASEJUMP		4,case4_tv_contest_obj		//ミナモ
+	_CASEJUMP		5,tv_contest_chk_end		//通信している
+	_END
+
+//ハジツゲ
+case1_tv_contest_obj:
+	_FLAG_RESET		FV_INTERVM1_01_T105_R0101
+	_RET
+
+//シダケ
+case2_tv_contest_obj:
+	_FLAG_RESET		FV_INTERVM1_01_T106_R0101
+	_RET
+
+//カイナ
+case3_tv_contest_obj:
+	_FLAG_RESET		FV_INTERVM1_01_C102_R0201
+	_RET
+
+//ミナモ
+case4_tv_contest_obj:
+	_FLAG_RESET		FV_INTERVM1_01_C106_R0301
+	_RET
+
+//終了
+tv_contest_chk_end:
+	_RET
+
+
+/********************************************************************/
+//							バトルタワー
+//
+//	PARAM0				受け答えのデータ
+//	PARAM1				datatype
+//	PARAM2				tv_eventの空いている場所
+//	PARAM3
+//
+//	TMPWK0				受け答えのデータ		
+//	TMPWK1				tv_eventの空いている場所(保存)
+//	TMPWK2
+//	TMPWK3
+//
+/********************************************************************/
+SCRIPT_LABEL	letter_tower_script
+	//データ作成開始
+	_TALK_OBJ_START
+
+	//すでにインタビューを受けていたら
+	_IF_FLAGON_JUMP		FH_01,letter_tower_nostart
+
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_TOWER_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,letter_tower_nostart
+
+	//PARAM2に取得したtv_eventの空いている場所が入っている
+	_LDWK			TMPWK1,PARAM2
+
+	_TALK_YES_NO	msg_interview_01_p01_btlt
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_btlt_01_p03	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_btlt_01_p03	//「いいえ」
+	_END
+
+//はい
+yes_letter_btlt_01_p03:
+	_TALKMSG		msg_interview_01_p02_btlt
+	_TALK_WAIT
+
+	_SELECT_WINDOW	20,8,TV_TOWER_MENU01,1		//B無効
+
+	//受け答えのデータを保存
+	_LDWK			TMPWK0,ANSWORK
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,case0_01_tv_tower	//まんぞく
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,case1_01_tv_tower	//ふまん
+
+	_TALK_KEYWAIT	msg_interview_01_p06_btlt
+	
+	_LDVAL			PARAM0,KAIWA_MODE_TOWER
+	_LDWK			PARAM1,TMPWK1				//tv_eventの要素数
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_letter_btlt_01_p04	// 書いた
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_btlt_01_p04	// 書いてない
+	_END
+
+//いいえ(終了)
+no_letter_btlt_01_p03:
+	_TALK_KEYWAIT	msg_interview_01_p03_btlt
+	_TALK_OBJ_END
+	_END
+
+//まんぞく
+case0_01_tv_tower:
+	_TALK_KEYWAIT	msg_interview_01_p04_btlt
+	_RET
+
+//ふまん
+case1_01_tv_tower:
+	_TALK_KEYWAIT	msg_interview_01_p05_btlt
+	_RET
+
+//書き終わったら
+yes_letter_btlt_01_p04:
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_letter_btlt_01_p04	// 書いてない
+
+	_TALK_KEYWAIT	msg_interview_01_p07_btlt
+
+	//一度インタビュー受けた
+	_FLAG_SET		FH_01
+
+	//データセットを呼ぶ
+	_LDWK			PARAM0,TMPWK0
+	_LDVAL			PARAM1,TV_TOWER_TYPE1
+	_JUMP			letter_data_set
+	_END
+
+//何も書かなかった(終了)
+no_letter_btlt_01_p04:
+	_TALK_KEYWAIT	msg_interview_01_p08_btlt
+	_TALK_OBJ_END
+	_END
+
+//一度インタビューを受けた
+letter_tower_nostart:
+	_TALK_KEYWAIT	msg_interview_01_p09_btlt
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//			バトルタワー後にインタビュアーを出現させるかチェック
+//--------------------------------------------------------------------
+tv_tower_chk:
+	//バトルタワー後か
+	_IFVAL_JUMP		WK_SCENE_BATTLE_TOWER,EQ,0,tv_tower_chk_end
+	
+	//手紙型チェック
+	_LDVAL			PARAM1,TV_TOWER_TYPE1
+	_PROGRAM		LETTER_TYPE_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,tv_tower_chk_end
+
+	_FLAG_RESET		FV_INTERVW1_01_PARK_BATTLE01
+	_RET
+
+//終了
+tv_tower_chk_end:
+	_FLAG_SET		FV_INTERVW1_01_PARK_BATTLE01
+	_RET
+
+

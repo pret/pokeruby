@@ -1,0 +1,174 @@
+//=========================================================================
+//
+//		コンテスト結果発表画面
+//												by matsuda 2002.06.24(月)
+//=========================================================================
+
+//=========================================================================
+//	メッセージウィンドウのCell＆Pal & Actor
+//=========================================================================
+static const ActOamData MsgWinObjOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	1,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	3,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	3,		//u32 Priority:2;         // 表示優先
+	2,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+
+const actHeader MsgWinObjHeader={
+	CELLID_MSGWIN0,
+	CELLID_MSGWIN0,
+	&MsgWinObjOamData,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+static const CellData MsgWinDataCell[]={	//領域確保の為だけのﾃﾞｰﾀ
+	//通常メッセージを表示するウィンドウ
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN0},
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN1},
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN2},
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN3},
+
+	//「つうしんたいきちゅう」を表示するウィンドウ
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN4},
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN5},
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN6},
+	{(void *)space64_Character,OBJ_SIZE16_32x64*1,	CELLID_MSGWIN7},
+};
+
+static const PalData MsgWinDataPal={
+	(void *)kekka_w_Palette,		CELLID_MSGWIN0
+};
+
+//----------------------------------------------------------
+//	紙ふぶき
+//----------------------------------------------------------
+static const ActOamData KamifubukiOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	0,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	0,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	0,		//u32 Priority:2;         // 表示優先
+	0,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+
+const actHeader CresKamifubukiHeader={
+	CELLID_KAMIFUBUKI,
+	CELLID_KAMIFUBUKI,
+	&KamifubukiOamData,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	CresKamifubukiSeq,
+};
+static const CellData KamifubukiDataCell={	//領域確保の為だけのﾃﾞｰﾀ
+	(void *)kamifubuki_pch_ADRS, OBJ_SIZE16_8x8*17, CELLID_KAMIFUBUKI
+};
+static const PalData KamifubukiDataPal={
+	(void *)kamifubuki_pcl_ADRS,		CELLID_KAMIFUBUKI
+};
+
+//=========================================================================
+//	画面上のタイトル部分のメッセージスクリーン
+//=========================================================================
+//ノーマルランク
+static const u16 CresNormal_Map[]={
+	0x0020,0x0021,0x0022,0x0023,0x0008,0x0009,0x000a,0x0010,    /* 0 */
+	0x0030,0x0031,0x0032,0x0033,0x0018,0x0019,0x001a,0x0010,
+};
+//スーパーランク
+static const u16 CresSuper_Map[]={
+	0x0024,0x0021,0x0025,0x0021,0x0008,0x0009,0x000a,0x0010,    /* 1 */
+	0x0034,0x0031,0x0035,0x0031,0x0018,0x0019,0x001a,0x0010,
+};
+//ハイパーランク
+static const u16 CresHyper_Map[]={
+	0x0026,0x0027,0x0025,0x0021,0x0008,0x0009,0x000a,0x0010,    /* 2 */
+	0x0036,0x0037,0x0035,0x0031,0x0018,0x0019,0x001a,0x0010,
+};
+//マスターランク
+static const u16 CresMaster_Map[]={
+	0x0022,0x0024,0x0028,0x0021,0x0008,0x0009,0x000a,0x0010,    /* 3 */
+	0x0032,0x0034,0x0038,0x0031,0x0018,0x0019,0x001a,0x0010,
+};
+//つうしんたいせん
+static const u16 CresSio_Map[]={
+	0x0001,0x0002,0x0003,0x0004,0x0005,0x0006,0x0007,0x0004,    /* 4 */
+	0x0011,0x0012,0x0013,0x0014,0x0015,0x0016,0x0017,0x0014,
+};
+
+//かっこよさ
+static const u16 CresStyle_Map[]={
+	0x0029,0x002a,0x002b,0x002c,0x002d,
+	0x0039,0x003a,0x003b,0x003c,0x003d,
+};
+//うつくしさ
+static const u16 CresBeautiful_Map[]={
+	0x1002,0x1001,0x102e,0x1003,0x102d,
+	0x1012,0x1011,0x103e,0x1013,0x103d,
+};
+//かわいさ
+static const u16 CresCute_Map[]={
+	0x2029,0x202f,0x2006,0x202d,0x2010,
+	0x2039,0x203f,0x2016,0x203d,0x2010,
+};
+//かしこさ
+static const u16 CresClever_Map[]={
+	0x3029,0x3003,0x302b,0x302d,0x3010,
+	0x3039,0x3013,0x303b,0x303d,0x3010,
+};
+//たくましさ
+static const u16 CresStrong_Map[]={
+	0x4005,0x402e,0x4040,0x4003,0x402d,
+	0x4015,0x403e,0x4050,0x4013,0x403d,
+};
+
+//コンテスト
+static const u16 CresContest_Map[]={
+	0x000b,0x000c,0x000d,0x000e,0x000f,
+	0x001b,0x001c,0x001d,0x001e,0x001f,
+};
+
+
+
+//=========================================================================
+//	メッセージデータ
+//=========================================================================
+static const u8 kekkahappyou_msg[] = {	//けっかはっぴょう！
+ke_,ttu_,ka_,spc_,ha_,ttu_,pi_,yyo_,u_,gyoe_,EOM_,
+};
+static const u8 itiji_kekka_msg[] = {	//１じしんさのけっか！
+n1_,zi_,si_,n_,sa_,no_,spc_,ke_,ttu_,ka_,gyoe_,EOM_,
+};
+static const u8 niji_kekka_msg[] = {	//２じしんさのけっか！
+n2_,zi_,si_,n_,sa_,no_,spc_,ke_,ttu_,ka_,gyoe_,EOM_,
+};
+static const u8 yuusyou_msg[] = {	//ゆうしょう！○○の××！
+yu_,u_,si_,yyo_,u_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF1,gyoe_,EOM_,
+};
+static const u8 tuusin_taiki_msg[] = {	//つうしんたいきちゅう
+tu_,u_,si_,n_,ta_,i_,ki_,ti_,yyu_,u_,EOM_,
+};
+

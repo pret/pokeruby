@@ -1,0 +1,678 @@
+//フィールド上のアイテムのラベル 
+
+
+//１０２道路	field	r102	11	15	キズぐすり	0		回復
+SCRIPT_LABEL		ev_ball1_0
+	_FLD_ITEM_EVENT	ITEM_KIZUGUSURI,1
+	_END
+
+//１０３道路	field	r103	63	8	エフェクトガード	114		補助
+SCRIPT_LABEL		ev_ball1_114
+	_FLD_ITEM_EVENT	ITEM_EFEKUTOGAADO,1
+	_END
+
+//１０４道路	field	r104	39	15	ポイントアップ	2		能力
+SCRIPT_LABEL		ev_ball1_2
+	_FLD_ITEM_EVENT	ITEM_POINTOAPPU,1
+	_END
+
+//１０４道路	field	r104	29	53	モンスターボール	57		ボール
+SCRIPT_LABEL		ev_ball1_57
+	_FLD_ITEM_EVENT	ITEM_MONSUTAABOORU,1
+	_END
+
+//１０４道路	field	r104	37	22	ヨクアタール	115		補助
+SCRIPT_LABEL		ev_ball1_115
+	_FLD_ITEM_EVENT	ITEM_YOKUATAARU,1
+	_END
+
+//１０４道路	field	r104	5	8	キズぐすり	135		回復
+SCRIPT_LABEL		ev_ball1_135
+	_FLD_ITEM_EVENT	ITEM_KIZUGUSURI,1
+	_END
+
+//１０５道路	field	r105	12	48	ブロムヘキシン	3		能力
+SCRIPT_LABEL		ev_ball1_3
+	_FLD_ITEM_EVENT	ITEM_BUROMUHEKISIN,1
+	_END
+
+//１０６道路	field	r106	29	14	タウリン	4		能力
+SCRIPT_LABEL		ev_ball1_4
+	_FLD_ITEM_EVENT	ITEM_TAURIN,1
+	_END
+
+//１０９道路	field	r109	26	47	ポイントアップ	5		能力
+SCRIPT_LABEL		ev_ball1_5
+	_FLD_ITEM_EVENT	ITEM_POINTOAPPU,1
+	_END
+
+//１１０道路	field	r110	27	48	ふしぎなアメ	6		能力
+SCRIPT_LABEL		ev_ball1_6
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//１１０道路	field	r110	30	69	クリティカッター	7		補助
+SCRIPT_LABEL		ev_ball1_7
+	_FLD_ITEM_EVENT	ITEM_KURITHIKATTAA,1
+	_END
+
+//１１１道路	field	r111	32	105	わざマシン３７	8	すなあらし	技
+SCRIPT_LABEL		ev_ball1_8
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN37,1
+	_END
+
+//１１１道路	field	r111	12	54	ほしのすな	9		その他
+SCRIPT_LABEL		ev_ball1_9
+	_FLD_ITEM_EVENT	ITEM_HOSINOSUNA,1
+	_END
+
+//１１１道路	field	r111	3	114	マックスアップ	10		能力
+SCRIPT_LABEL		ev_ball1_10
+	_FLD_ITEM_EVENT	ITEM_MAKKUSUAPPU,1
+	_END
+
+//１１２道路	field	r112	14	43	きんのたま	11		その他
+SCRIPT_LABEL		ev_ball1_11
+	_FLD_ITEM_EVENT	ITEM_KINNOTAMA,1
+	_END
+
+//１１３道路	field	r113	53	7	ピーピーリカバー	12		回復
+SCRIPT_LABEL		ev_ball1_12
+	_FLD_ITEM_EVENT	ITEM_PIIPIIRIKABAA,1
+	_END
+
+//１１３道路	field	r113	78	5	シルバースプレー	13		フィールド
+SCRIPT_LABEL		ev_ball1_13
+	_FLD_ITEM_EVENT	ITEM_SIRUBAASUPUREE,1
+	_END
+
+//１１４道路	field	r114	7	6	ふしぎなアメ	14		能力
+SCRIPT_LABEL		ev_ball1_14
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//１１４道路	field	r114	11	37	タウリン	15		能力
+SCRIPT_LABEL		ev_ball1_15
+	_FLD_ITEM_EVENT	ITEM_TAURIN,1
+	_END
+
+//１１５道路	field	r115	20	60	いいキズぐすり	16		回復
+SCRIPT_LABEL		ev_ball1_16
+	_FLD_ITEM_EVENT	ITEM_IIKIZUGUSURI,1
+	_END
+
+//１１５道路	field	r115	19	5	わざマシン０１	17	きあいぱんち	技
+SCRIPT_LABEL		ev_ball1_17
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN01,1
+	_END
+
+//１１５道路	field	r115	23	29	ブロムヘキシン	18		能力
+SCRIPT_LABEL		ev_ball1_18
+	_FLD_ITEM_EVENT	ITEM_BUROMUHEKISIN,1
+	_END
+
+//１１５道路	field	r115	31	56	スーパーボール	118		ボール
+SCRIPT_LABEL		ev_ball1_118
+	_FLD_ITEM_EVENT	ITEM_SUUPAABOORU,1
+	_END
+
+//１１６道路	field	r116	56	13	スペシャルアップ	1		補助
+SCRIPT_LABEL		ev_ball1_1
+	_FLD_ITEM_EVENT	ITEM_SUPESYARUAPPU,1
+	_END
+
+//１１６道路	field	r116	19	6	ピーピーエイド	19		回復
+SCRIPT_LABEL		ev_ball1_19
+	_FLD_ITEM_EVENT	ITEM_PIIPIIEIDO,1
+	_END
+
+//１１６道路	field	r116	10	17	むしよけスプレー	20		フィールド
+SCRIPT_LABEL		ev_ball1_20
+	_FLD_ITEM_EVENT	ITEM_MUSIYOKESUPUREE,1
+	_END
+
+//１１６道路	field	r116	80	8	マックスアップ	21		能力
+SCRIPT_LABEL		ev_ball1_21
+	_FLD_ITEM_EVENT	ITEM_MAKKUSUAPPU,1
+	_END
+
+//１１７道路	field	r117	16	18	スーパーボール	22		ボール
+SCRIPT_LABEL		ev_ball1_22
+	_FLD_ITEM_EVENT	ITEM_SUUPAABOORU,1
+	_END
+
+//１１７道路	field	r117	9	1	げんきのかけら	23		回復
+SCRIPT_LABEL		ev_ball1_23
+	_FLD_ITEM_EVENT	ITEM_GENKINOKAKERA,1
+	_END
+
+//１１８道路	field	r118	69	7	すごいキズぐすり	121		回復
+SCRIPT_LABEL		ev_ball1_121
+	_FLD_ITEM_EVENT	ITEM_SUGOIKIZUGUSURI,1
+	_END
+
+//１１９道路	field	r119	12	121	シルバースプレー	24		フィールド
+SCRIPT_LABEL		ev_ball1_24
+	_FLD_ITEM_EVENT	ITEM_SIRUBAASUPUREE,1
+	_END
+
+//１１９道路	field	r119	4	96	キトサン	25		能力
+SCRIPT_LABEL		ev_ball1_25
+	_FLD_ITEM_EVENT	ITEM_KITOSAN,1
+	_END
+
+//１１９道路	field	r119	29	53	ピーピーエイダー	26		回復
+SCRIPT_LABEL		ev_ball1_26
+	_FLD_ITEM_EVENT	ITEM_PIIPIIEIDAA,1
+	_END
+
+//１１９道路	field	r119	25	76	リーフのいし	27		石
+SCRIPT_LABEL		ev_ball1_27
+	_FLD_ITEM_EVENT	ITEM_RIIHUNOISI,1
+	_END
+
+//１１９道路	field	r119	8	18	ふしぎなアメ	28		能力
+SCRIPT_LABEL		ev_ball1_28
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//１１９道路	field	r119	33	117	すごいキズぐすり	29		回復
+SCRIPT_LABEL		ev_ball1_29
+	_FLD_ITEM_EVENT	ITEM_SUGOIKIZUGUSURI,1
+	_END
+
+//１１９道路	field	r119	3	56	すごいキズぐすり	106		回復
+SCRIPT_LABEL		ev_ball1_106
+	_FLD_ITEM_EVENT	ITEM_SUGOIKIZUGUSURI,1
+	_END
+
+//１２０道路	field	r120	20	55	きんのたま	30		その他
+SCRIPT_LABEL		ev_ball1_30
+	_FLD_ITEM_EVENT	ITEM_KINNOTAMA,1
+	_END
+
+//１２０道路	field	r120	7	89	なんでもなおし	31		回復
+SCRIPT_LABEL		ev_ball1_31
+	_FLD_ITEM_EVENT	ITEM_NANDEMONAOSI,1
+	_END
+
+//１２０道路	field	r120	23	82	すごいキズぐすり	107		回復
+SCRIPT_LABEL		ev_ball1_107
+	_FLD_ITEM_EVENT	ITEM_SUGOIKIZUGUSURI,1
+	_END
+
+//１２０道路	field	r120	22	13	ネストボール	108		ボール
+SCRIPT_LABEL		ev_ball1_108
+	_FLD_ITEM_EVENT	ITEM_NESUTOBOORU,1
+	_END
+
+//１２１道路	field	r121	55	10	インドメタシン	103		能力
+SCRIPT_LABEL		ev_ball1_103
+	_FLD_ITEM_EVENT	ITEM_INDOMETASIN,1
+	_END
+
+//１２３道路	field	r123	31	8	リゾチウム	32		能力
+SCRIPT_LABEL		ev_ball1_32
+	_FLD_ITEM_EVENT	ITEM_RIZOTIUMU,1
+	_END
+
+//１２３道路	field	r123	139	18	ふしぎなアメ	33		能力
+SCRIPT_LABEL		ev_ball1_33
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//１２３道路	field	r123	27	18	ハイパーボール	104		ボール
+SCRIPT_LABEL		ev_ball1_104
+	_FLD_ITEM_EVENT	ITEM_HAIPAABOORU,1
+	_END
+
+//１２３道路	field	r123	75	9	ピーピーエイダー	109		回復
+SCRIPT_LABEL		ev_ball1_109
+	_FLD_ITEM_EVENT	ITEM_PIIPIIEIDAA,1
+	_END
+
+//１２４道路	field	r124	28	12	あかいかけら	92		その他
+SCRIPT_LABEL		ev_ball1_92
+	_FLD_ITEM_EVENT	ITEM_AKAIKAKERA,1
+	_END
+
+//１２４道路	field	r124	31	53	あおいかけら	93		その他
+SCRIPT_LABEL		ev_ball1_93
+	_FLD_ITEM_EVENT	ITEM_AOIKAKERA,1
+	_END
+
+//１２４道路	field	r124	58	11	きいろいかけら	66		その他
+SCRIPT_LABEL		ev_ball1_66
+	_FLD_ITEM_EVENT	ITEM_KIIROIKAKERA,1
+	_END
+
+//１２６道路	field	r126	14	1	みどりのかけら	105		その他
+SCRIPT_LABEL		ev_ball1_105
+	_FLD_ITEM_EVENT	ITEM_MIDORINOKAKERA,1
+	_END
+
+//１２７道路	field	r127	10	7	キトサン	34		能力
+SCRIPT_LABEL		ev_ball1_34
+	_FLD_ITEM_EVENT	ITEM_KITOSAN,1
+	_END
+
+//１２７道路	field	r127	64	39	インドメタシン	35		能力
+SCRIPT_LABEL		ev_ball1_35
+	_FLD_ITEM_EVENT	ITEM_INDOMETASIN,1
+	_END
+
+//１３２道路	field	r132	10	11	ふしぎなアメ	36		能力
+SCRIPT_LABEL		ev_ball1_36
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//１３３道路	field	r133	58	15	おおきなしんじゅ	37		その他
+SCRIPT_LABEL		ev_ball1_37
+	_FLD_ITEM_EVENT	ITEM_OOKINASINZYU,1
+	_END
+
+//１３３道路	field	r133	8	10	ほしのかけら	38		その他
+SCRIPT_LABEL		ev_ball1_38
+	_FLD_ITEM_EVENT	ITEM_HOSINOKAKERA,1
+	_END
+
+//トウカシティ	field	c101	19	2	げんきのかたまり	39		回復
+SCRIPT_LABEL		ev_ball1_39
+	_FLD_ITEM_EVENT	ITEM_GENKINOKATAMARI,1
+	_END
+
+//トウカシティ	field	c101	3	28	ピーピーエイド	40		回復
+SCRIPT_LABEL		ev_ball1_40
+	_FLD_ITEM_EVENT	ITEM_PIIPIIEIDO,1
+	_END
+
+//キンセツシティ	field	c103	28	19	スピーダー	116		補助
+SCRIPT_LABEL		ev_ball1_116
+	_FLD_ITEM_EVENT	ITEM_SUPIIDAA,1
+	_END
+
+//カナズミシティ	field	c104	36	51	ディフェンダー	41		補助
+SCRIPT_LABEL		ev_ball1_41
+	_FLD_ITEM_EVENT	ITEM_DHIFENDAA,1
+	_END
+
+//ミナモシティ	field	c106	61	36	ゴールドスプレー	42		フィールド
+SCRIPT_LABEL		ev_ball1_42
+	_FLD_ITEM_EVENT	ITEM_GOORUDOSUPUREE,1
+	_END
+
+//トクサネシティ	field	c107	62	35	ネットボール	43		ボール
+SCRIPT_LABEL		ev_ball1_43
+	_FLD_ITEM_EVENT	ITEM_NETTOBOORU,1
+	_END
+
+//トウカの森	cave	d0601	35	20	プラスパワー	55		補助
+SCRIPT_LABEL		ev_ball1_55
+	_FLD_ITEM_EVENT	ITEM_PURASUPAWAA,1
+	_END
+
+//トウカの森	cave	d0601	45	7	スーパーボール	56		ボール
+SCRIPT_LABEL		ev_ball1_56
+	_FLD_ITEM_EVENT	ITEM_SUUPAABOORU,1
+	_END
+
+//トウカの森	cave	d0601	4	8	ピーピーエイド	58		回復
+SCRIPT_LABEL		ev_ball1_58
+	_FLD_ITEM_EVENT	ITEM_PIIPIIEIDO,1
+	_END
+
+//トウカの森	cave	d0601	4	26	まひなおし	117		回復
+SCRIPT_LABEL		ev_ball1_117
+	_FLD_ITEM_EVENT	ITEM_MAHINAOSI,1
+	_END
+
+//カナシダトンネル	cave	d0201	3	1	モンスターボール	48		ボール
+SCRIPT_LABEL		ev_ball1_48
+	_FLD_ITEM_EVENT	ITEM_MONSUTAABOORU,1
+	_END
+
+//カナシダトンネル	cave	d0201	30	2	ピーピーリカバー	49		回復
+SCRIPT_LABEL		ev_ball1_49
+	_FLD_ITEM_EVENT	ITEM_PIIPIIRIKABAA,1
+	_END
+
+//ムロの洞窟　1F	cave	d0501	17	7	あなぬけのヒモ	50		フィールド
+SCRIPT_LABEL		ev_ball1_50
+	_FLD_ITEM_EVENT	ITEM_ANANUKENOHIMO,1
+	_END
+
+//ムロの洞窟　B1	cave	d0502	15	12	モンスターボール	51		ボール
+SCRIPT_LABEL		ev_ball1_51
+	_FLD_ITEM_EVENT	ITEM_MONSUTAABOORU,1
+	_END
+
+//ムロの洞窟　B2	cave	d0503	4	4	むしよけスプレー	53		フィールド
+SCRIPT_LABEL		ev_ball1_53
+	_FLD_ITEM_EVENT	ITEM_MUSIYOKESUPUREE,1
+	_END
+
+//ムロの洞窟　B2	cave	d0503	29	4	ふしぎなアメ	54		能力
+SCRIPT_LABEL		ev_ball1_54
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//デコボコさんどう	cave	d0702	23	24	やけどなおし	70		回復
+SCRIPT_LABEL		ev_ball1_70
+	_FLD_ITEM_EVENT	ITEM_YAKEDONAOSI,1
+	_END
+
+//ほのおのぬけみち	cave	d0703	7	32	ほのおのいし	111		石
+SCRIPT_LABEL		ev_ball1_111
+	_FLD_ITEM_EVENT	ITEM_HONOONOISI,1
+	_END
+
+//ほのおのぬけみち	cave	d0703	8	3	わざマシン０６	91	どくどく	技
+SCRIPT_LABEL		ev_ball1_91
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN06,1
+	_END
+
+//りゅうせいの洞窟	cave	d0101	2	4	わざマシン２３	44	アイアンテール	技
+SCRIPT_LABEL		ev_ball1_44
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN23,1
+	_END
+
+//りゅうせいの洞窟	cave	d0101	27	5	なんでもなおし	45		回復
+SCRIPT_LABEL		ev_ball1_45
+	_FLD_ITEM_EVENT	ITEM_NANDEMONAOSI,1
+	_END
+
+//りゅうせいの洞窟	cave	d0101	2	14	つきのいし	46		石
+SCRIPT_LABEL		ev_ball1_46
+	_FLD_ITEM_EVENT	ITEM_TUKINOISI,1
+	_END
+
+//りゅうせいの洞窟	cave	d0101	26	32	ポイントアップ	47		能力
+SCRIPT_LABEL		ev_ball1_47
+	_FLD_ITEM_EVENT	ITEM_POINTOAPPU,1
+	_END
+
+//りゅうせいの洞窟	cave	d0104	5	3	わざマシン０２	80	ドラゴンクロー	技
+SCRIPT_LABEL		ev_ball1_80
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN02,1
+	_END
+
+//地下都市	cave	d1602	32	25	ハイパーボール	75		ボール
+SCRIPT_LABEL		ev_ball1_75
+	_FLD_ITEM_EVENT	ITEM_HAIPAABOORU,1
+	_END
+
+//地下都市	cave	d1602	16	22	あなぬけのヒモ	76		フィールド
+SCRIPT_LABEL		ev_ball1_76
+	_FLD_ITEM_EVENT	ITEM_ANANUKENOHIMO,1
+	_END
+
+//地下都市	cave	d1602	39	4	かみなりのいし	110		石
+SCRIPT_LABEL		ev_ball1_110
+	_FLD_ITEM_EVENT	ITEM_KAMINARINOISI,1
+	_END
+
+//地下都市	cave	d1602	17	10	なんでもなおし	122		回復
+SCRIPT_LABEL		ev_ball1_122
+	_FLD_ITEM_EVENT	ITEM_NANDEMONAOSI,1
+	_END
+
+//地下都市	cave	d1602	2	11	まひなおし	123		回復
+SCRIPT_LABEL		ev_ball1_123
+	_FLD_ITEM_EVENT	ITEM_MAHINAOSI,1
+	_END
+
+//沈没船	cave	d1703	4	5	ハーバーメール	95		メール
+SCRIPT_LABEL		ev_ball1_95
+	_FLD_ITEM_EVENT	ITEM_HAABAAMEERU,1
+	_END
+
+//沈没船	cave	d1705	6	7	あなぬけのヒモ	96		フィールド
+SCRIPT_LABEL		ev_ball1_96
+	_FLD_ITEM_EVENT	ITEM_ANANUKENOHIMO,1
+	_END
+
+//沈没船	cave	d1706	13	3	ダイブボール	97		ボール
+SCRIPT_LABEL		ev_ball1_97
+	_FLD_ITEM_EVENT	ITEM_DAIBUBOORU,1
+	_END
+
+//沈没船	cave	d1708	4	4	わざマシン１３	98	冷凍ビーム	技
+SCRIPT_LABEL		ev_ball1_98
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN13,1
+	_END
+
+//沈没船	cave	d1709	4	4	げんきのかけら	99		回復
+SCRIPT_LABEL		ev_ball1_99
+	_FLD_ITEM_EVENT	ITEM_GENKINOKAKERA,1
+	_END
+
+//沈没船	cave	d1710	0	6	そうこのカギ	100		その他
+SCRIPT_LABEL		ev_ball1_100
+	_FLD_ITEM_EVENT	ITEM_SOUKONOKAGI,1
+	_END
+
+//沈没船	cave	d1713	41	4	ゴージャスボール	77		ボール
+SCRIPT_LABEL		ev_ball1_77
+	_FLD_ITEM_EVENT	ITEM_GOOZYASUBOORU,1
+	_END
+
+//沈没船	cave	d1713	16	10	たんちき	78		その他
+SCRIPT_LABEL		ev_ball1_78
+	_FLD_ITEM_EVENT	ITEM_TANTIKI,1
+	_END
+
+//沈没船	cave	d1713	31	11	みずのいし	101		能力
+SCRIPT_LABEL		ev_ball1_101
+	_FLD_ITEM_EVENT	ITEM_MIZUNOISI,1
+	_END
+
+//沈没船	cave	d1713	5	11	わざマシン１８	102	あまごい	技
+SCRIPT_LABEL		ev_ball1_102
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN18,1
+	_END
+
+//ひでりのいわと	cave	d2101	7	5	わざマシン１１	79	にほんばれ	技
+SCRIPT_LABEL		ev_ball1_79
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN11,1
+	_END
+
+//サファリゾーン	park	safari01	33	7	わざマシン２２	94	ソーラービーム	技
+SCRIPT_LABEL		ev_ball1_94
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN22,1
+	_END
+
+//サファリゾーン	park	safari02	7	6	リゾチウム	119		能力
+SCRIPT_LABEL		ev_ball1_119
+	_FLD_ITEM_EVENT	ITEM_RIZOTIUMU,1
+	_END
+
+//サファリゾーン	park	safari03	0	37	げんきのかたまり	131		
+SCRIPT_LABEL		ev_ball1_131
+	_FLD_ITEM_EVENT	ITEM_GENKINOKATAMARI,1
+	_END
+
+//おくりび山	cave	d0802	0	10	ハイパーボール	129		ボール
+SCRIPT_LABEL		ev_ball1_129
+	_FLD_ITEM_EVENT	ITEM_HAIPAABOORU,1
+	_END
+
+//おくりび山	cave	d0803	0	11	シルバースプレー	120		フィールド	
+SCRIPT_LABEL		ev_ball1_120
+	_FLD_ITEM_EVENT	ITEM_SIRUBAASUPUREE,1
+	_END
+
+//おくりび山	cave	d0804	3	11	うしおのおこう	130		戦闘	
+SCRIPT_LABEL		ev_ball1_130
+	_FLD_ITEM_EVENT	ITEM_USIONOOKOU,1
+	_END
+
+//おくりび山	cave	d0805	6	11	のんきのおこう	52		戦闘	
+SCRIPT_LABEL		ev_ball1_52
+	_FLD_ITEM_EVENT	ITEM_NONKINOOKOU,1
+	_END
+
+//おくりび山	cave	d0806	6	9	わざマシン３０	89	シャドーボール	技	
+SCRIPT_LABEL		ev_ball1_89
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN30,1
+	_END
+
+//おくりび山	cave	d0807	27	15	まんたんのくすり	73		回復	
+SCRIPT_LABEL		ev_ball1_73
+	_FLD_ITEM_EVENT	ITEM_MANTANNOKUSURI,1
+	_END
+
+//おくりび山	cave	d0807	19	40	わざマシン４８	74	スキルスワップ	技	
+SCRIPT_LABEL		ev_ball1_74
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN48,1
+	_END
+
+//アジト地下１階	cave	d0902	15	9	マスターボール	124		ボール	サファイア
+SCRIPT_LABEL		ev_ball1_124
+	_FLD_ITEM_EVENT	ITEM_MASUTAABOORU,1
+	_END
+
+//アジト地下１階	cave	d0902	15	10	きんのたま	132		その他	サファイア
+SCRIPT_LABEL		ev_ball1_132
+	_FLD_ITEM_EVENT	ITEM_KINNOTAMA,1
+	_END
+
+//アジト地下１階	cave	d0902	29	12	ピーピーマックス	71		回復	サファイア
+SCRIPT_LABEL		ev_ball1_71
+	_FLD_ITEM_EVENT	ITEM_PIIPIIMAKKUSU,1
+	_END
+
+//アジト地下２階	cave	d0903	3	13	ネストボール	72		回復	サファイア
+SCRIPT_LABEL		ev_ball1_72
+	_FLD_ITEM_EVENT	ITEM_NESUTOBOORU,1
+	_END
+
+//アジト地下１階	cave	d2202	26	10	マスターボール	125		ボール	ルビー
+SCRIPT_LABEL		ev_ball1_125
+	_FLD_ITEM_EVENT	ITEM_MASUTAABOORU,1
+	_END
+
+//アジト地下１階	cave	d2202	26	11	きんのたま	134		その他	ルビー
+SCRIPT_LABEL		ev_ball1_134
+	_FLD_ITEM_EVENT	ITEM_KINNOTAMA,1
+	_END
+
+//アジト地下１階	cave	d2202	14	18	ピーピーマックス	126		回復	ルビー
+SCRIPT_LABEL		ev_ball1_126
+	_FLD_ITEM_EVENT	ITEM_PIIPIIMAKKUSU,1
+	_END
+
+//アジト地下２階	cave	d2203	31	20	ネストボール	127		回復	ルビー
+SCRIPT_LABEL		ev_ball1_127
+	_FLD_ITEM_EVENT	ITEM_NESUTOBOORU,1
+	_END
+
+//浅瀬の洞窟	cave	d1401	30	3	おおきなしんじゅ	81		その他	
+SCRIPT_LABEL		ev_ball1_81
+	_FLD_ITEM_EVENT	ITEM_OOKINASINZYU,1
+	_END
+
+//浅瀬の洞窟	cave	d1402	26	14	ふしぎなアメ	82		能力	
+SCRIPT_LABEL		ev_ball1_82
+	_FLD_ITEM_EVENT	ITEM_HUSIGINAAME,1
+	_END
+
+//浅瀬の洞窟	cave	d1403	13	12	こおりなおし	83		回復	
+SCRIPT_LABEL		ev_ball1_83
+	_FLD_ITEM_EVENT	ITEM_KOORINAOSI,1
+	_END
+
+//浅瀬の洞窟	cave	d1407	12	8	わざマシン０７	112	あられ	技	
+SCRIPT_LABEL		ev_ball1_112
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN07,1
+	_END
+
+//浅瀬の洞窟	cave	d1407	12	21	とけないこおり	113		戦闘	
+SCRIPT_LABEL		ev_ball1_113
+	_FLD_ITEM_EVENT	ITEM_TOKENAIKOORI,1
+	_END
+
+//海底どうくつ	cave	d1111	14	5	わざマシン２６	90	じしん	技	
+SCRIPT_LABEL		ev_ball1_90
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN26,1
+	_END
+
+//目覚めのほこら	cave	d1205	6	5	ひでんマシン０７	59	たきのぼり	技	
+SCRIPT_LABEL		ev_ball1_59
+	_FLD_ITEM_EVENT	ITEM_HIDENMASIN07,1
+	_END
+
+//カラクリ仕掛け１	r110	r0104	9	12	オレンジメール	60		メール	
+SCRIPT_LABEL		ev_ball1_60
+	_FLD_ITEM_EVENT	ITEM_ORENZIMEERU,1
+	_END
+
+//カラクリ仕掛け２	r110	r0105	0	2	ハーバーメール	61		メール	
+SCRIPT_LABEL		ev_ball1_61
+	_FLD_ITEM_EVENT	ITEM_HAABAAMEERU,1
+	_END
+
+//カラクリ仕掛け２	r110	r0105	5	19	クロスメール	62		メール	
+SCRIPT_LABEL		ev_ball1_62
+	_FLD_ITEM_EVENT	ITEM_KUROSUMEERU,1
+	_END
+
+//カラクリ仕掛け３	r110	r0106	7	2	シャドーメール	63		メール	
+SCRIPT_LABEL		ev_ball1_63
+	_FLD_ITEM_EVENT	ITEM_SYADOOMEERU,1
+	_END
+
+//カラクリ仕掛け３	r110	r0106	0	11	ウッディメール	64		メール	
+SCRIPT_LABEL		ev_ball1_64
+	_FLD_ITEM_EVENT	ITEM_UDDHIMEERU,1
+	_END
+
+//カラクリ仕掛け４	r110	r0107	4	4	メカニカルメール	65		メール	
+SCRIPT_LABEL		ev_ball1_65
+	_FLD_ITEM_EVENT	ITEM_MEKANIKARUMEERU,1
+	_END
+
+//カラクリ仕掛け６	r110	r0109	8	2	キラキラメール	67		メール	
+SCRIPT_LABEL		ev_ball1_67
+	_FLD_ITEM_EVENT	ITEM_KIRAKIRAMEERU,1
+	_END
+
+//カラクリ仕掛け７	r110	r0110	11	10	トロピカルメール	68		メール	
+SCRIPT_LABEL		ev_ball1_68
+	_FLD_ITEM_EVENT	ITEM_TOROPIKARUMEERU,1
+	_END
+
+//カラクリ仕掛け８	r110	r0111	2	11	トレジャーメール	69		メール	
+SCRIPT_LABEL		ev_ball1_69
+	_FLD_ITEM_EVENT	ITEM_TOREZYAAMEERU,1
+	_END
+
+//チャンピオンロード	cave	d1301	40	26	ピーピーマックス	84		回復	
+SCRIPT_LABEL		ev_ball1_84
+	_FLD_ITEM_EVENT	ITEM_PIIPIIMAKKUSU,1
+	_END
+
+//チャンピオンロード	cave	d1301	37	39	ポイントアップ	85		能力	
+SCRIPT_LABEL		ev_ball1_85
+	_FLD_ITEM_EVENT	ITEM_POINTOAPPU,1
+	_END
+
+//チャンピオンロード	cave	d1302	42	8	わざマシン２９	86	サイコキネシス	技	
+SCRIPT_LABEL		ev_ball1_86
+	_FLD_ITEM_EVENT	ITEM_WAZAMASIN29,1
+	_END
+
+//チャンピオンロード	cave	d1302	32	3	かいふくのくすり	87		回復	
+SCRIPT_LABEL		ev_ball1_87
+	_FLD_ITEM_EVENT	ITEM_KAIHUKUNOKUSURI,1
+	_END
+
+//チャンピオンロード	cave	d1303	13	8	なんでもなおし	88		回復	
+SCRIPT_LABEL		ev_ball1_88
+	_FLD_ITEM_EVENT	ITEM_NANDEMONAOSI,1
+	_END
+
+//ダイゴノ家	c107	r0501	1	1	ひでんマシン０８	133	ダイビング	技	ｲﾍﾞﾝﾄ
+SCRIPT_LABEL		ev_ball1_133
+	_FLD_ITEM_EVENT	ITEM_HIDENMASIN08,1
+	_END
+

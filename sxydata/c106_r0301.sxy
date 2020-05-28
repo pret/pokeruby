@@ -1,0 +1,359 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C106_R0301	14
+#define EXITNUM_C106_R0301	4
+#define POSNUM_C106_R0301	0
+#define BGNUM_C106_R0301	6
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_pccable_01_p01_c106_r0301[];
+extern const u8	ev_pccable_02_p01_c106_r0301[];
+extern const u8	ev_cube_oyaji_01_p01_c106_r0301[];
+extern const u8	ev_fighter1_01_p01_c106_r0301[];
+extern const u8	ev_girl2_01_p01_c106_r0301[];
+extern const u8	ev_artist_02_p01_c106_r0301[];
+extern const u8	letter_contest_script[];
+extern const u8	ev_boy1_01_p01_c106_r0301[];
+extern const u8	ev_girl1_01_p01_c106_r0301[];
+extern const u8	ev_fishing1_01_p01_c106_r0301[];
+extern const u8	ev_bigman1_01_p01_c106_r0301[];
+extern const u8	ev_boya1_01_p01_c106_r0301[];
+
+//BG_SCRIPT
+extern const u8	ev_tane_blender_comm_01_c106_r0301[];
+extern const u8	ev_tane_blender_01_c106_r0301[];
+extern const u8	ev_picture_01_p01_c106_r0301[];
+extern const u8	ev_picture_02_p01_c106_r0301[];
+extern const u8	ev_picture_03_p01_c106_r0301[];
+extern const u8	ev_score_01_p01_c106_r0301[];
+
+const evObjData	OBJ_c106_r0301[] =
+{
+	{
+		PCCABLE_01_C106_R0301,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pccable_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		PCCABLE_02_C106_R0301,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pccable_02_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		CUBEOYAJI_01_C106_R0301,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_cube_oyaji_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		ARTIST_01_C106_R0301,		//OBJ ID
+		ARTIST1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_ARTIST_01_C106_R0301,		//Event Flag
+	},
+
+	{
+		FIGHTER1_01_C106_R0301,		//OBJ ID
+		FIGHTER1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_fighter1_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		GIRL2_01_C106_R0301,		//OBJ ID
+		GIRL2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x2,		//Move Limit X
+		0x2,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_girl2_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		ARTIST_02_C106_R0301,		//OBJ ID
+		ARTIST1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0014,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_artist_02_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		INTERVM1_01_C106_R0301,		//OBJ ID
+		INTERVM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		letter_contest_script,		//Event Lavel
+		FV_INTERVM1_01_C106_R0301,		//Event Flag
+	},
+
+	{
+		BOY1_01_C106_R0301,		//OBJ ID
+		BOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0012,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy1_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		GIRL1_01_C106_R0301,		//OBJ ID
+		GIRL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_girl1_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		ARTIST_03_C106_R0301,		//OBJ ID
+		ARTIST1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_ARTIST_02_C106_R0301,		//Event Flag
+	},
+
+	{
+		FISHING1_01_C106_R0301,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_fishing1_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BIGMAN1_01_C106_R0301,		//OBJ ID
+		BIGMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_bigman1_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOYA1_01_C106_R0301,		//OBJ ID
+		BOYA1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_VON,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boya1_01_p01_c106_r0301,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c106_r0301[] =
+{
+	{
+		0x0006,		//Xpos
+		0x000b,		//Ypos
+		0x00,		//Height
+		FIELD_C106_DOOR05,		//Door ID
+		FIELD_C106,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x000b,		//Ypos
+		0x00,		//Height
+		FIELD_C106_DOOR05,		//Door ID
+		FIELD_C106,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C106_R0302_MAT01,		//Door ID
+		C106_R0302,			//Map ID
+		C106,				//Field ID
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C106_R0302_MAT02,		//Door ID
+		C106_R0302,			//Map ID
+		C106,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c106_r0301[] =
+{
+	{
+		0x0012,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tane_blender_comm_01_c106_r0301,		//Script
+	},
+
+	{
+		0x0012,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tane_blender_01_c106_r0301,		//Script
+	},
+
+	{
+		0x000f,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_picture_01_p01_c106_r0301,		//Script
+	},
+
+	{
+		0x0011,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_picture_02_p01_c106_r0301,		//Script
+	},
+
+	{
+		0x0013,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_picture_03_p01_c106_r0301,		//Script
+	},
+
+	{
+		0x0016,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_score_01_p01_c106_r0301,		//Script
+	},
+
+};
+
+const SXY_DATA	c106_r0301_sxy_data =
+{
+OBJNUM_C106_R0301,			// field obj max
+EXITNUM_C106_R0301,		// exit max
+POSNUM_C106_R0301,			// pos event max
+BGNUM_C106_R0301,			// bg event max
+OBJ_c106_r0301,			// field obj data
+EXIT_c106_r0301,			// exit data
+NULL,			// pos event data
+BG_c106_r0301,				// bg event data
+};

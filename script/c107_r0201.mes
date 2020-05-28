@@ -1,0 +1,55 @@
+// ●トクサネシティ　民家１（街の北・中央）
+
+
+// ●格闘家１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p01_c107_r0201
+msg_fighter1_01_p01_c107_r0201:
+	.byte	MU_,MU_,MU_,TTU_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,I_MSG_,STR_TEMP_BUF0,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝先頭のポケモン名
+// ●好きなポロックがある　→msg_fighter1_01_p02_c107_r0201:
+// ●好きなポロックがない　→msg_fighter1_01_p03_c107_r0201:
+
+// ●好きなポロックがある
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p02_c107_r0201
+msg_fighter1_01_p02_c107_r0201:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,ga_,spc_,su_,ki_,da_,ro_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,ma_,ti_,ga_,i_,na_,ku_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,ga_,spc_,su_,ki_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝あかい　　（からい）
+// 　　　　　　あおい　　（しぶい）
+// 　　　　　　ももいろ　（あまい）
+// 　　　　　　みどりの　（にがい）
+// 　　　　　　きいろの　（すっぱい）
+// ●（）内はメモです、表示の必要性はありません
+
+// ●好きなポロックがない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p03_c107_r0201
+msg_fighter1_01_p03_c107_r0201:
+	.byte	PO_,RO_,TTU_,KU_,no_,spc_,su_,ki_,ki_,ra_,i_,ha_,spc_,na_,i_,mi_,ta_,i_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c107_r0201
+msg_woman1_01_p01_c107_r0201:
+	.byte	da_,n_,na_,ttu_,ta_,ra_,spc_,mi_,ta_,da_,ke_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,su_,ki_,na_,spc_,PO_,RO_,TTU_,KU_,spc_,wa_,ka_,ru_,no_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

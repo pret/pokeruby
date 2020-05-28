@@ -1,0 +1,414 @@
+//====================================================================
+//						field_r116
+//					フィールド・ロード116
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r116_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r116
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//					      FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r116:
+	//カナシダトンネル終了していたら、トンネル男の位置を変更する
+	_IF_FLAGON_CALL	FE_DEBON_02_FIELD_C104,pos_chg_fighter1_01_p02_field_r116
+	_END
+
+//カナシダトンネル終了していたら、トンネル男の位置を変更する
+pos_chg_fighter1_01_p02_field_r116:
+	_SXY_POS_CHANGE	FIGHTER1_01_FIELD_R116,41,10
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								若者								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fighter1_01_p01_field_r116
+	_TALK_OBJ_START
+
+	//カナシダトンネル終了しているか
+	_IF_FLAGON_JUMP	FE_DEBON_02_FIELD_C104,ev_fighter1_01_p02_field_r116
+
+	//デボン盗難イベントが始まっているか
+	_IF_FLAGON_JUMP	FE_DEBON_01_FIELD_C104,ev_fighter1_01_p03_field_r116
+
+	_TALK_KEYWAIT	msg_fighter1_01_p03_field_r116
+	_TALK_OBJ_END
+	_END
+
+//カナシダトンネル終了している
+ev_fighter1_01_p02_field_r116:
+	_TALK_KEYWAIT	msg_fighter1_01_p02_field_r116
+	_TALK_OBJ_END
+	_END
+
+//デボン盗難イベントが始まっている
+ev_fighter1_01_p03_field_r116:
+	_TALK_KEYWAIT	msg_fighter1_01_p01_field_r116
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							デボン研究員							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_01_p01_field_r116
+	_TALK_OBJ_START
+
+	//すでに会話していたら
+	_IF_FLAGON_JUMP	FE_WORKERM1_01_FIELD_R116,ev_workerm1_01_p02_field_r116
+
+	_TALK_KEYWAIT	msg_workerm1_01_p01_field_r116
+	_JUMP			ev_common_workerm1_01_field_r116
+	_END
+
+//共通処理
+ev_common_workerm1_01_field_r116:
+	_FLAG_SET		FE_WORKERM1_01_FIELD_R116
+
+	_ITEM_EVENT		ITEM_RIPIITOBOORU,1
+	_IF_ZERO_JUMP	ev_fail_item_field_r116
+
+	_TALK_KEYWAIT	msg_workerm1_01_p02_field_r116
+	_TALK_CLOSE
+
+	//去っていく
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_u_workerm1_field_r116
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_d_workerm1_field_r116
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_l_workerm1_field_r116
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_r_workerm1_field_r116
+
+	//ロード１１６から消してデボン本社に戻る
+	_OBJ_DELETE		TARGET_OBJ
+	_FLAG_RESET		FV_WORKERM1_01_C104_R0103
+
+	_FLAG_SET		FE_SHOP_01_C104_FS01
+	_TALK_OBJ_END
+	_END
+
+//去っていく
+case_u_workerm1_field_r116:
+case_d_workerm1_field_r116:
+case_l_workerm1_field_r116:
+	_SET_OBJ_ANIME	TARGET_OBJ,workerm1_01_field_r116_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+case_r_workerm1_field_r116:
+	_SET_OBJ_ANIME	TARGET_OBJ,workerm1_01_field_r116_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+//すでに会話している
+ev_workerm1_01_p02_field_r116:
+	_TALK_KEYWAIT	msg_workerm1_01_p03_field_r116
+	_JUMP			ev_common_workerm1_01_field_r116
+	_END
+
+//バックがいっぱいでアイテムが貰えなかった
+ev_fail_item_field_r116:
+	_TALK_KEYWAIT	msg_workerm1_01_p04_field_r116
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//デボン社員	去っていく(下上右から話し掛け)
+//--------------------------------------------------------------------
+workerm1_01_field_r116_anime01:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//デボン社員	去っていく(左から話し掛け)
+//--------------------------------------------------------------------
+workerm1_01_field_r116_anime02:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r116
+	_EASY_MSG       msg_kanban_01_p01_field_r116
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r116
+	_EASY_MSG       msg_kanban_02_p01_field_r116
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r116
+	_EASY_MSG       msg_kanban_03_p01_field_r116
+	_END
+
+
+/********************************************************************/
+/*						おとくなけいじばん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_r116
+	_EASY_MSG       msg_kanban_04_p01_field_r116
+	_END
+
+
+/********************************************************************/
+/*						おとくなけいじばん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_r116
+	_EASY_MSG       msg_kanban_05_p01_field_r116
+	_END
+
+
+/********************************************************************/
+/*								ハギ老人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_hagi_01_p01_field_r116
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_field_r116
+
+	_LDVAL			WK_SCENE_FIELD_R116,2
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ハギ老人の前のポス							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r116_pos01
+	_TALK_START
+
+	//右を向く
+	_SET_OBJ_ANIME	HAGI_01_FIELD_R116,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_field_r116
+
+	_LDVAL			WK_SCENE_FIELD_R116,2
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*								マニア								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_field_r116
+	_TALK_OBJ_START
+
+	//「くろいメガネ」所持しているか
+	_CHECK_ITEM		ITEM_KUROIMEGANE,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_freak1_01_p02_field_r116
+
+	//隠しアイテムの「くろいメガネ」を入手しているか
+	_FUNC_CALL		ANSWORK,CHK_HIDE_MEGANE
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_freak1_01_p04_field_r116
+
+	//「くろいメガネ」を所持していなくて、隠しアイテムの「くろいメガネ」を入手していない
+	_TALK_KEYWAIT	msg_freak1_01_p01_field_r116
+	_TALK_OBJ_END
+	_END
+
+//「くろいメガネ」を所持していなくて、隠しアイテムの「くろいメガネ」を入手している
+ev_freak1_01_p04_field_r116:
+	_TALK_KEYWAIT	msg_freak1_01_p05_field_r116
+	_TALK_CLOSE
+	_JUMP			ev_common_freak1_01_field_r116
+	_END
+
+//「くろいメガネ」所持している
+ev_freak1_01_p02_field_r116:
+	_TALK_KEYWAIT	msg_freak1_01_p01_field_r116
+
+	_TALK_KEYWAIT	msg_freak1_01_p02_field_r116
+
+	//隠しアイテムの「くろいメガネ」を入手しているか
+	_FUNC_CALL		ANSWORK,CHK_HIDE_MEGANE
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_freak1_01_p03_field_r116
+
+	_TALK_KEYWAIT	msg_freak1_01_p04_field_r116
+	_TALK_OBJ_END
+	_END
+
+//隠しアイテムの「くろいメガネ」を入手している
+ev_freak1_01_p03_field_r116:
+	_TALK_KEYWAIT	msg_freak1_01_p03_field_r116
+	_TALK_CLOSE
+	_JUMP			ev_common_freak1_01_field_r116
+	_END
+
+//共通処理
+ev_common_freak1_01_field_r116:
+	_TIME_WAIT		20
+
+	//去っていく
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_u_freak1_field_r116
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_d_freak1_field_r116
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_l_freak1_field_r116
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_r_freak1_field_r116
+
+	_OBJ_DELETE		TARGET_OBJ
+	_TALK_OBJ_END
+	_END
+
+//去っていく
+case_u_freak1_field_r116:
+case_d_freak1_field_r116:
+case_l_freak1_field_r116:
+	_SET_OBJ_ANIME	TARGET_OBJ,freak1_01_field_r116_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case_r_freak1_field_r116:
+	_SET_OBJ_ANIME	TARGET_OBJ,freak1_01_field_r116_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//マニア	去っていく(上下右から話し掛け)
+//--------------------------------------------------------------------
+freak1_01_field_r116_anime01:	
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マニア	去っていく(左から話し掛け)
+//--------------------------------------------------------------------
+freak1_01_field_r116_anime02:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_tanpan_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_05
+	_TRAINER_DATA2	msg_tanpan_05_01
+	_TRAINER_DATA3	msg_tanpan_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_05_03
+	_END
+
+SCRIPT_LABEL	ev_mushi_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_03
+	_TRAINER_DATA2	msg_mushi_03_01
+	_TRAINER_DATA3	msg_mushi_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_03_03
+	_END
+
+SCRIPT_LABEL	ev_schoolm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SCHOOLM_01
+	_TRAINER_DATA2	msg_schoolm_01_01
+	_TRAINER_DATA3	msg_schoolm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_schoolm_01
+	_TRAINER_EASY_MSG	msg_schoolm_01_03
+	_END
+
+_revenge_schoolm_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SCHOOLM_01
+	_TRAINER_DATA2	msg_schoolm_01_04
+	_TRAINER_DATA3	msg_schoolm_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_schoolm_01_06
+	_END
+
+SCRIPT_LABEL	ev_mount_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_06
+	_TRAINER_DATA2	msg_mount_06_01
+	_TRAINER_DATA3	msg_mount_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_06_03
+	_END
+
+SCRIPT_LABEL	ev_mini_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MINI_03
+	_TRAINER_DATA2	msg_mini_03_01
+	_TRAINER_DATA3	msg_mini_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mini_03_03
+	_END
+
+SCRIPT_LABEL	ev_schoolw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SCHOOLW_01
+	_TRAINER_DATA2	msg_schoolw_01_01
+	_TRAINER_DATA3	msg_schoolw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_schoolw_01
+	_TRAINER_EASY_MSG	msg_schoolw_01_03
+	_END
+
+_revenge_schoolw_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	SCHOOLW_01
+	_TRAINER_DATA2	msg_schoolw_01_04
+	_TRAINER_DATA3	msg_schoolw_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_schoolw_01_06
+	_END
+

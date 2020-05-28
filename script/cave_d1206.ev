@@ -1,0 +1,163 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//						祭壇の洞窟(ルネ)
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d1206_event_data
+INIT_CTRL_LABEL		init_ctrl_cave_d1206
+FLAG_CHANGE_LABEL	flag_change_cave_d1206
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_cave_d1206:
+	_IF_FLAGON_CALL	SYS_CTRL_OBJ_DELETE,pokemon_del_cave_d1206
+	_END
+
+pokemon_del_cave_d1206:
+	_OBJ_DELETE		POKE1_01_CAVE_D1206
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1206:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_CHANGE_MAP_SCREEN	MAPSCRNID_C108DUN01_6
+#elif ( PM_VERSION == VERSION_RUBY )
+	_CHANGE_MAP_SCREEN	MAPSCRNID_C108DUN01_7
+#endif
+
+	_CALL			set_kodai_char
+
+	//すでにイベント終了していたら
+	_IF_FLAGON_CALL	FE_POKE1_01_CAVE_D1206,ev_kodai_pokemon_end
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						古代ポケモン(POS)
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1206_pos01
+	_TALK_START
+
+	//主人公　古代ポケモンを見る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_goods1_01_p01_cave_d1206s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_goods1_01_p01_cave_d1206r
+#endif
+
+	_TALK_CLOSE
+
+	_SET_WEATHER	ID_WEATHER_OFF
+	_UPDATE_WEATHER
+	_PROGRAM		WEATHER_CHG_WAIT			//天候変化終了待ち
+	_STOP_SCRIPT
+
+	//「キラリ」エフェクト
+	_SE				SE_W197
+	_SET_FE_WORK	0,9			//X
+	_SET_FE_WORK	1,13		//Y
+	_SET_FE_WORK	2,0			//
+	_SET_FLD_EFF	FECODE_Kirari			//
+	_FLD_EFF_WAIT	FECODE_Kirari			//
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_LDVAL			ANSWORK,3
+#elif ( PM_VERSION == VERSION_RUBY )
+	_LDVAL			ANSWORK,2
+#endif
+	_SE				SE_TAMA
+	_PROGRAM		START_JEWEL_EFFECT			//宝玉エフェクト
+	_STOP_SCRIPT
+
+	_PROGRAM		FINISH_JEWEL_EFFECT			//宝玉エフェクト終了
+	_STOP_SCRIPT
+
+	//主人公に近づいてくる
+	_SET_OBJ_ANIME	POKE1_01_CAVE_D1206,poke1_01_cave_d1206_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		60
+
+	//戦闘に入る
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_WILD_FIGHT_SET	MONSNO_KAIOOGA,45,0
+	_VOICE_PLAY		MONSNO_KAIOOGA,2
+#elif ( PM_VERSION == VERSION_RUBY )
+	_WILD_FIGHT_SET	MONSNO_GURAADON,45,0
+	_VOICE_PLAY		MONSNO_GURAADON,2
+#endif
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_PROGRAM		KODAI_POKE_FIGHT
+	_STOP_SCRIPT
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	//もし倒した場合
+	_FUNC_CALL		ANSWORK,GET_WIN_LOSE
+	_IFVAL_CALL		ANSWORK,EQ,FIGHT_WIN,fight_win_cave_d1206
+
+	//ミクリをジムに戻す
+	//周りのトレーナーを消す
+	_FLAG_SET		FV_LEADER08_01_FIELD_C108
+	_FLAG_SET		FV_WORKERW2_01_FIELD_C108
+	_FLAG_SET		FV_WORKERW2_02_FIELD_C108
+	_FLAG_RESET		FV_LEADER08_01_C108_R0101
+
+	_LDVAL			WK_SCENE_CAVE_D1206,1
+	_FLAG_SET		FE_POKE1_01_CAVE_D1206
+
+	//OBJ出す
+	_FLAG_RESET		FV_OBJ_ALL_FIELD_C108
+
+	//大雨終了
+	_FLAG_RESET		SYS_WEATHER_CTRL
+
+	//アオギリをおくりび山に出す
+	_LDVAL			WK_SCENE_CAVE_D0808,2
+	_FLAG_RESET		FV_AQUABOSS_01_CAVE_D0808S
+
+	_TALK_END
+	_END
+
+//捕獲せずに倒してしまった場合
+fight_win_cave_d1206:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_goods1_01_p02_cave_d1206s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_goods1_01_p02_cave_d1206r
+#endif
+
+	_TALK_CLOSE
+	_RET
+
+//--------------------------------------------------------------------
+//古代ポケモン	近づいてくる
+//--------------------------------------------------------------------
+poke1_01_cave_d1206_anime01:
+	.byte	AC_AFFUSE_ON
+	.byte	AC_KIOG_WALK_S_D_05
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_KIOG_WALK_D_05
+	.byte	ACMD_END
+
+

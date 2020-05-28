@@ -1,0 +1,32 @@
+// ●ルネシティ　民家７（街の西側・上から４番目）
+
+// ●老人２　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_c108_r0801
+msg_oldman2_01_p01_c108_r0801:
+	.byte	ka_,i_,te_,i_,ni_,spc_,a_,ttu_,ta_,spc_,ka_,za_,n_,ga_,spc_,hu_,n_,ka_,si_,te_
+	.byte	CR_
+	.byte	u_,mi_,no_,spc_,u_,e_,ma_,de_,spc_,mo_,ri_,a_,ga_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,hu_,n_,ka_,ko_,u_,ni_,spc_,a_,me_,ga_,spc_,ta_,ma_,ttu_,te_
+	.byte	CR_
+	.byte	de_,ki_,ta_,no_,ga_,spc_,ko_,no_,spc_,RU_,NE_,SI_,TE_,II_,spc_,na_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●おばさん１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c108_r0801
+msg_middlew1_01_p01_c108_r0801:
+	.byte	RU_,NE_,to_,spc_,so_,to_,no_,se_,ka_,i_,wo_,spc_,tu_,na_,gu_,spc_,do_,u_,ku_,tu_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ru_,de_,spc_,na_,ni_,ka_,wo_,spc_,ko_,ko_,ka_,ra_,spc_,da_,sa_,na_,i_,yo_,u_,ni_
+	.byte	CR_
+	.byte	tu_,ku_,ra_,re_,ta_,spc_,mi_,ta_,i_,spc_,da_,wa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,ka_,n_,ga_,e_,su_,gi_,spc_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

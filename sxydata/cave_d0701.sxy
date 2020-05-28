@@ -1,0 +1,563 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D0701	28
+#define EXITNUM_CAVE_D0701	4
+#define POSNUM_CAVE_D0701	0
+#define BGNUM_CAVE_D0701	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_magmaboss_01_p01_cave_d0701[];
+extern const u8	ev_aquaboss_01_p01_cave_d0701[];
+extern const u8	ev_aquam_15[];
+extern const u8	ev_aquam1_05_p01_cave_d0701[];
+extern const u8	ev_aquam1_04_p01_cave_d0701[];
+extern const u8	ev_magmam1_02_p01_cave_d0701[];
+extern const u8	ev_magmam1_01_p01_cave_d0701[];
+extern const u8	ev_magmam1_03_p01_cave_d0701[];
+extern const u8	ev_oldwoman2_01_p01_cave_d0701[];
+extern const u8	ev_aquam1_05_p01_cave_d0701[];
+extern const u8	ev_pokemon1_02_p01_cave_d0701[];
+extern const u8	ev_pokemon1_01_p01_cave_d0701[];
+extern const u8	ev_aquam1_01_p01_cave_d0701[];
+extern const u8	ev_pokemon1_01_p01_cave_d0701[];
+extern const u8	ev_pokemon1_01_p01_cave_d0701[];
+extern const u8	ev_aquam1_03_p01_cave_d0701[];
+extern const u8	ev_aquam1_01_p01_cave_d0701[];
+extern const u8	ev_pokemon1_02_p01_cave_d0701[];
+extern const u8	ev_pokemon1_01_p01_cave_d0701[];
+extern const u8	ev_pokemon1_02_p01_cave_d0701[];
+extern const u8	ev_pokemon1_01_p01_cave_d0701[];
+extern const u8	ev_aquam_16[];
+extern const u8	ev_pokemon1_02_p01_cave_d0701[];
+extern const u8	ev_pokemon1_01_p01_cave_d0701[];
+extern const u8	ev_expertw_02[];
+extern const u8	ev_sexyw_01[];
+extern const u8	ev_sexyw_02[];
+extern const u8	ev_sexyw_03[];
+
+//BG_SCRIPT
+extern const u8	ev_machine1_01_p01_cave_d0701[];
+extern const u8	ev_kanban_01_p01_cave_d0701[];
+
+const evObjData	OBJ_cave_d0701[] =
+{
+	{
+		MAGMABOSS_01_CAVE_D0701,		//OBJ ID
+		WKOBJCODE8,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0018,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_magmaboss_01_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUABOSS_01_CAVE_D0701,		//OBJ ID
+		WKOBJCODE7,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquaboss_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		TR_AQUAM_15,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_aquam_15,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUAM1_05_CAVE_D0701,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0020,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquam1_05_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUAM1_04_CAVE_D0701,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001c,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquam1_04_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		MAGMAM1_02_CAVE_D0701,		//OBJ ID
+		WKOBJCODE5,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x0027,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_magmam1_02_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		MAGMAM1_01_CAVE_D0701,		//OBJ ID
+		WKOBJCODE5,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001d,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_magmam1_01_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		MAGMAM1_03_CAVE_D0701,		//OBJ ID
+		WKOBJCODE5,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001f,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_magmam1_03_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		OLDWOMAN2_01_CAVE_D0701,		//OBJ ID
+		OLDWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0010,		//Xpos
+		0x0025,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldwoman2_01_p01_cave_d0701,		//Event Lavel
+		FV_ALL_01_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUAM1_06_CAVE_D0701,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x0027,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquam1_05_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_06_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK4L,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_02_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_07_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1D,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUAM1_02_CAVE_D0701,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquam1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_05_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0014,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1U,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_08_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1R,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUAM1_03_CAVE_D0701,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquam1_03_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		AQUAM1_01_CAVE_D0701,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0015,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_aquam1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_03_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001e,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1L,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_02_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_04_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001d,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1R,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_02_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001e,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1R,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_02_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_01_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001f,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1L,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		TR_AQUAM_16,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x000f,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_aquam_16,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_09_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0014,		//Xpos
+		0x0027,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1R,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_02_p01_cave_d0701,		//Event Lavel
+		FV_MAGMA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		POKEMON1_10_CAVE_D0701,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0015,		//Xpos
+		0x0027,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK1L,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pokemon1_01_p01_cave_d0701,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		TR_EXPERTW_02,		//OBJ ID
+		OLDWOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0010,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		MV_V,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_expertw_02,		//Event Lavel
+		FV_ALL_01_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_01,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_STAYWALK2L,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_sexyw_01,		//Event Lavel
+		FV_ALL_01_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_02,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001d,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_DL,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_sexyw_02,		//Event Lavel
+		FV_ALL_01_CAVE_D0701,		//Event Flag
+	},
+
+	{
+		TR_SEXYW_03,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		MV_UR,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_sexyw_03,		//Event Lavel
+		FV_ALL_01_CAVE_D0701,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d0701[] =
+{
+	{
+		0x0011,		//Xpos
+		0x0024,		//Ypos
+		0x00,		//Height
+		R112_R0102_MAT01,		//Door ID
+		R112_R0102,			//Map ID
+		R112,				//Field ID
+	},
+
+	{
+		0x0012,		//Xpos
+		0x0024,		//Ypos
+		0x00,		//Height
+		R112_R0102_MAT02,		//Door ID
+		R112_R0102,			//Map ID
+		R112,				//Field ID
+	},
+
+	{
+		0x0014,		//Xpos
+		0x0029,		//Ypos
+		0x03,		//Height
+		CAVE_D0702_DOOR03,		//Door ID
+		CAVE_D0702,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0015,		//Xpos
+		0x0029,		//Ypos
+		0x03,		//Height
+		CAVE_D0702_DOOR04,		//Door ID
+		CAVE_D0702,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_cave_d0701[] =
+{
+	{
+		0x000e,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_machine1_01_p01_cave_d0701,		//Script
+	},
+
+	{
+		0x0018,		//Xpos
+		0x0025,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_cave_d0701,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d0701_sxy_data =
+{
+OBJNUM_CAVE_D0701,			// field obj max
+EXITNUM_CAVE_D0701,		// exit max
+POSNUM_CAVE_D0701,			// pos event max
+BGNUM_CAVE_D0701,			// bg event max
+OBJ_cave_d0701,			// field obj data
+EXIT_cave_d0701,			// exit data
+NULL,			// pos event data
+BG_cave_d0701,				// bg event data
+};

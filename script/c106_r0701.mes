@@ -1,0 +1,27 @@
+// ●ミナモシティ　民家２（街の北・右側）
+
+
+// ●老人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c106_r0701
+msg_oldman1_01_p01_c106_r0701:
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,ni_,n_,ge_,n_,no_,spc_,PA_,bou_,TO_,NA_,bou_,de_,a_,ttu_,te_
+	.byte	CR_
+	.byte	ke_,ttu_,si_,te_,spc_,ni_,n_,ge_,n_,no_,spc_,do_,u_,gu_,spc_,zi_,yya_,na_,i_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ko_,wo_,spc_,ka_,n_,ti_,ga_,i_,spc_,si_,te_,o_,ru_
+	.byte	CR_
+	.byte	ni_,n_,ge_,n_,mo_,spc_,ta_,ma_,ni_,spc_,i_,ru_,n_,da_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・カクレオン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakureon_01_p01_c106_r0701
+msg_kakureon_01_p01_c106_r0701:
+	.byte	KA_,KU_,RE_,O_,N_,kako2_,ru_,ro_,ro_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カクレオンの鳴き声をならす

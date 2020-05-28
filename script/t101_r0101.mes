@@ -1,0 +1,389 @@
+// ●ミシロタウン　自宅１階
+
+// ●主人公と母親が玄関マットの上に横に並び立ち、
+// 　母が正面を向いたまま話す
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p01_t101_r0101
+msg_mama_01_p01_t101_r0101:
+	.byte	MA_,MA_,kako2_,ho_,ra_,spc_,I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	CR_
+	.byte	o_,u_,ti_,no_,spc_,na_,ka_,mo_,spc_,su_,te_,ki_,spc_,de_,si_,yyo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで主人公と母は向き合い、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p02_t101_r0101
+msg_mama_01_p02_t101_r0101:
+	.byte	o_,u_,ti_,no_,spc_,ka_,ta_,du_,ke_,ha_
+	.byte	CR_
+	.byte	hi_,ttu_,ko_,si_,ya_,sa_,n_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	te_,tu_,da_,ttu_,te_,spc_,ku_,re_,ru_,ka_,ra_,spc_,ra_,ku_,ti_,n_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,mo_,spc_,n2_,ka_,i_,ni_,spc_,a_,ru_
+	.byte	CR_
+	.byte	zi_,bu_,n_,no_,spc_,o_,he_,ya_,ni_,spc_,i_,ttu_,te_,go_,ra_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,PA_,ga_,spc_,hi_,ttu_,ko_,si_,no_,spc_,o_,i_,wa_,i_,ni_
+	.byte	CR_
+	.byte	ka_,ttu_,te_,ku_,re_,ta_,spc_,to_,ke_,i_,ga_,spc_,a_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,ka_,n_,wo_,spc_,a_,wa_,se_,te_,spc_,o_,ki_,na_,sa_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで、操作フリーになる
+
+// ●２階に行かずに家から出ようとすると母が以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p03_t101_r0101
+msg_mama_01_p03_t101_r0101:
+	.byte	MA_,MA_,kako2_,I_MSG_,MY_NAME_BUF
+	.byte	NORMAL_WAIT_
+	.byte	zi_,bu_,n_,no_,spc_,he_,ya_,wo_,spc_,mi_,te_,ko_,na_,i_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●時計を合わせずに家から出ようとすると母が以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p04_t101_r0101
+msg_mama_01_p04_t101_r0101:
+	.byte	MA_,MA_,kako2_,I_MSG_,MY_NAME_BUF
+	.byte	NORMAL_WAIT_
+	.byte	o_,he_,ya_,no_,spc_,to_,ke_,i_,spc_,a_,wa_,se_,te_,ki_,te_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、母親に押し戻されます
+
+// ●時計を合わせて２階から下りてくると、
+// 　主人公は階段を出て２マスほど進んで止まる
+// 　ポケモンはすでにいなくなっている
+// 　母はテレビの前あたりにいる状態から、主人公の前にやってきて、
+// 　以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p05_t101_r0101
+msg_mama_01_p05_t101_r0101:
+	.byte	MA_,MA_,kako2_,tenten_,tenten_,a_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,gyoe_,spc_,I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	CR_
+	.byte	ha_,ya_,ku_,spc_,ko_,ttu_,ti_,ni_,spc_,i_,ra_,ttu_,si_,yya_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p06_t101_r0101
+msg_mama_01_p06_t101_r0101:
+	.byte	MA_,MA_,kako2_,TO_,U_,KA_,no_,spc_,ZI_,MU_,ga_,spc_,u_,tu_,ttu_,te_,ru_,wa_
+	.byte	CR_
+	.byte	PA_,PA_,ga_,spc_,de_,ru_,ka_,mo_,yo_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ＴＶの感想
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p12_t101_r0101
+msg_mama_01_p12_t101_r0101:
+	.byte	MA_,MA_,kako2_,a_,ra_,ra_,tenten_,tenten_,spc_,o_,wa_,ttu_,ti_,yya_,ttu_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,PA_,ga_,spc_,de_,te_,ta_,mi_,ta_,i_,spc_,da_,ttu_,ta_,no_,ni_,spc_,za_,n_,ne_,n_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p07_t101_r0101
+msg_mama_01_p07_t101_r0101:
+	.byte	tenten_,tenten_,a_,spc_,so_,u_,so_,u_,gyoe_,spc_,ko_,no_,ma_,ti_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	O_,DA_,MA_,KI_,ha_,ka_,se_,spc_,ttu_,te_,i_,u_
+	.byte	SCROLL_WAIT_
+	.byte	PA_,PA_,no_,spc_,o_,to_,mo_,da_,ti_,ga_,spc_,i_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ka_,se_,no_,spc_,i_,e_,ha_,spc_,o_,to_,na_,ri_,spc_,da_,ka_,ra_
+	.byte	CR_
+	.byte	ki_,ti_,n_,to_,spc_,a_,i_,sa_,tu_,spc_,si_,te_,ku_,ru_,to_,spc_,i_,i_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●以後、主人公は家の出入りが自由になる
+// 　家をでるまでは→msg_mama_01_p15_t101_r0101:
+
+// ●母のセリフ（一度、家をでるまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p15_t101_r0101
+msg_mama_01_p15_t101_r0101:
+	.byte	MA_,MA_,kako2_,i_,ttu_,te_,ra_,ttu_,si_,yya_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●母のセリフ（博士からポケモンをもらうまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p08_t101_r0101
+msg_mama_01_p08_t101_r0101:
+	.byte	MA_,MA_,kako2_,O_,DA_,MA_,KI_,ha_,ka_,se_,spc_,ni_,ha_,spc_,a_,e_,ta_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●母のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p09_t101_r0101
+msg_mama_01_p09_t101_r0101:
+	.byte	MA_,MA_,kako2_,do_,u_,hate_,spc_,I_MSG_,MY_NAME_BUF
+	.byte	CR_
+	.byte	su_,ko_,si_,spc_,tu_,ka_,re_,ta_,n_,zi_,yya_,spc_,na_,i_,ka_,si_,ra_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,u_,ti_,de_,spc_,ya_,su_,n_,de_,i_,ku_,to_,spc_,i_,i_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面ブラックアウトして、ポケモンの回復
+// ●画面復帰して、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p10_t101_r0101
+msg_mama_01_p10_t101_r0101:
+	.byte	MA_,MA_,kako2_,zi_,yya_,a_,spc_,ki_,wo_,tu_,ke_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トウカのジムバッジ入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p11_t101_r0101
+msg_mama_01_p11_t101_r0101:
+	.byte	MA_,MA_,kako2_,a_,ra_
+	.byte	CR_
+	.byte	so_,no_,spc_,BA_,TTU_,ZI_,spc_,PA_,PA_,ka_,ra_,spc_,mo_,ra_,ttu_,ta_,no_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,MA_,MA_,mo_,spc_,ko_,re_,spc_,a_,ge_,yo_,u_,ka_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム「おまもりこばん」（No189）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p13_t101_r0101
+msg_mama_01_p13_t101_r0101:
+	.byte	a_,n_,ma_,ri_,spc_,mu_,ri_,ha_,spc_,si_,na_,i_,de_,ne_
+	.byte	CR_
+	.byte	na_,ni_,ka_,spc_,a_,re_,ba_,spc_,ka_,e_,ttu_,te_,spc_,ku_,re_,ba_,i_,i_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ga_,n_,ba_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●現時点でのイベントの優先順位は
+// 　「おまもりこばん」入手
+// 　ポケモンの回復、の順です
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●はたらいているポケモン１のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_poke1_01_p01_t101_r0101
+msg_poke1_01_p01_t101_r0101:
+	.byte	gi_,yya_,o_,spc_,gi_,yya_,o_,spc_,gi_,yya_,o_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にゴーリキーの鳴き声をならす
+// ●このポケモンは、主人公が２階で時刻を入力すると消える
+
+// ●はたらいているポケモン２のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_poke1_02_p01_t101_r0101
+msg_poke1_02_p01_t101_r0101:
+	.byte	gu_,wa_,ttu_,spc_,gu_,wa_,ttu_,spc_,gu_,wa_,ttu_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にゴーリキーの鳴き声をならす
+// ●このポケモンは、主人公が２階で時刻を入力すると消える
+
+
+// ●テレビは、時計を合わせて２階から下りてきたら
+// 　点滅させておいてください
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_terebi1_01_p01_t101_r0101
+msg_terebi1_01_p01_t101_r0101:
+	.byte	I_,N_,TA_,BI_,YYU_,A_,bou_,kako2_,tenten_,tenten_,spc_,i_,zi_,yyo_,u_
+	.byte	CR_
+	.byte	TO_,U_,KA_,ZI_,MU_,no_,spc_,ma_,e_,spc_,ka_,ra_,de_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●一度、家を出てから……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_terebi1_01_p02_t101_r0101
+msg_terebi1_01_p02_t101_r0101:
+	.byte	TE_,RE_,BI_,de_,spc_,e_,i_,ga_,wo_,spc_,ya_,ttu_,te_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,to_,na_,to_,spc_,ko_,do_,mo_,ga_,spc_,hu_,ta_,ri_,spc_,na_,ra_,n_,de_
+	.byte	CR_
+	.byte	o_,o_,ki_,na_,spc_,PI_,A_,NO_,no_,spc_,u_,e_,de_,spc_,o_,do_,ttu_,te_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,i_,ka_,na_,ki_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ノート
+// ●主人公がランニングシューズをもらうとテーブルの上に出現
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p02_t101_r0101
+msg_note1_01_p02_t101_r0101:
+	.byte	RA_,N_,NI_,N_,GU_,SI_,YYU_,bou_,ZU_,no_
+	.byte	CR_
+	.byte	se_,tu_,me_,i_,si_,yyo_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,RA_,N_,NI_,N_,GU_,SI_,YYU_,bou_,ZU_,ha_
+	.byte	CR_
+	.byte	spc_,BI_,bou_,BO_,TA_,N_,wo_,spc_,o_,su_,ko_,to_,de_,spc_,i_,ma_,ma_,de_,yo_,ri_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,ha_,ya_,ku_,spc_,ha_,si_,re_,ru_,yo_,u_,ni_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	spc_,RA_,N_,NI_,N_,GU_,SI_,YYU_,bou_,ZU_,wo_,spc_,ha_,i_,te_
+	.byte	CR_
+	.byte	spc_,o_,mo_,i_,ttu_,ki_,ri_,spc_,so_,to_,wo_,spc_,ha_,si_,ro_,u_,gyoe_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●ゲームクリア後
+
+// ●センリ
+// ●主人公がＰＯＳを踏むと隣接して
+// 　以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_senri_01_p01_t101_r0101
+msg_senri_01_p01_t101_r0101:
+	.byte	PA_,PA_,kako2_,n_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,zi_,yya_,spc_,na_,i_,ka_,gyoe_
+	.byte	CR_
+	.byte	hi_,sa_,si_,bu_,ri_,ni_,spc_,ka_,o_,wo_,spc_,mi_,ta_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ko_,ka_,spc_,ta_,ku_,ma_,si_,ku_,na_,ttu_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,ka_,n_,zi_,spc_,da_,na_
+	.byte	CR_
+	.byte	da_,ga_,spc_,wa_,ta_,si_,mo_,spc_,ma_,ke_,te_,i_,na_,i_,zo_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ttu_,to_,spc_,so_,u_,da_,ttu_,ta_
+	.byte	CR_
+	.byte	HA_,GI_,to_,i_,u_,spc_,hi_,to_,ka_,ra_,spc_,o_,ma_,e_,a_,te_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,ga_,spc_,to_,do_,i_,te_,i_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ふねのチケット」（No265）入手処理
+// ●入手後、続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_senri_01_p02_t101_r0101
+msg_senri_01_p02_t101_r0101:
+	.byte	PA_,PA_,kako2_,hu_,ne_,no_,TI_,KE_,TTU_,TO_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,si_,ka_,spc_,hu_,ne_,ni_,spc_,no_,ru_,na_,ra_
+	.byte	CR_
+	.byte	KA_,I_,NA_,ka_,spc_,MI_,NA_,MO_,ni_,spc_,hu_,ne_,no_,ri_,ba_,ga_,spc_,a_,ttu_,ta_,na_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,gyoe_,spc_,mo_,ttu_,to_,spc_,tu_,yo_,ku_,na_,ri_,ta_,i_,na_,ra_
+	.byte	CR_
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,i_,ttu_,te_,mi_,ru_,to_,spc_,i_,i_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,si_,yyu_,gi_,yyo_,u_,ni_
+	.byte	CR_
+	.byte	o_,wa_,ri_,ga_,spc_,na_,i_,ko_,to_,wo_,spc_,si_,ru_,da_,ro_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ママの方を向いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_senri_01_p03_t101_r0101
+msg_senri_01_p03_t101_r0101:
+	.byte	de_,ha_,spc_,wa_,ta_,si_,ha_
+	.byte	CR_
+	.byte	TO_,U_,KA_,no_,spc_,ZI_,MU_,ni_,spc_,mo_,do_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,MA_
+	.byte	CR_
+	.byte	i_,e_,no_,ko_,to_,spc_,ta_,no_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ママ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mama_01_p14_t101_r0101
+msg_mama_01_p14_t101_r0101:
+	.byte	MA_,MA_,kako2_,PA_,PA_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	hi_,sa_,si_,bu_,ri_,ni_,spc_,ka_,e_,ttu_,te_,spc_,ki_,ta_,no_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ha_,na_,si_,spc_,ba_,ttu_,ka_,ri_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,yu_,ttu_,ku_,ri_,spc_,su_,re_,ba_,spc_,i_,i_,no_,ni_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●一度ここからでるまでは、このメッセージを繰り返し表示
+
+
+// ●ＴＶメッセージ
+// ●ルビーver
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_terebi1_01_p03_t101_r0101r
+msg_terebi1_01_p03_t101_r0101r:
+	.byte	ri_,n_,zi_,spc_,NI_,YYU_,bou_,SU_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,no_,spc_,ka_,ku_,ti_,de_
+	.byte	CR_
+	.byte	a_,o_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,to_,n_,de_,i_,ku_,no_,wo_,spc_,mi_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,zi_,yyo_,u_,ho_,u_,ga_,spc_,yo_,se_,ra_,re_,te_,i_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,no_,to_,ko_,ro_,spc_,si_,yyo_,u_,ta_,i_,ha_
+	.byte	CR_
+	.byte	wa_,ka_,ttu_,te_,spc_,i_,na_,i_,yo_,u_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,hi_,ki_,tu_,du_,ki_
+	.byte	CR_
+	.byte	e_,i_,ga_,wo_,spc_,o_,ta_,no_,si_,mi_,spc_,ku_,da_,sa_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●移動ポケモン「ラティオス」フラグがセットされる
+// ●一度メッセージを見た後は　msg_terebi1_01_p02_t101_r0101:　に戻る
+
+// ●サファイアver
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_terebi1_01_p03_t101_r0101s
+msg_terebi1_01_p03_t101_r0101s:
+	.byte	ri_,n_,zi_,spc_,NI_,YYU_,bou_,SU_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,no_,spc_,ka_,ku_,ti_,de_
+	.byte	CR_
+	.byte	a_,ka_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,to_,n_,de_,i_,ku_,no_,wo_,spc_,mi_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,zi_,yyo_,u_,ho_,u_,ga_,spc_,yo_,se_,ra_,re_,te_,i_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,no_,to_,ko_,ro_,spc_,si_,yyo_,u_,ta_,i_,ha_
+	.byte	CR_
+	.byte	wa_,ka_,ttu_,te_,spc_,i_,na_,i_,yo_,u_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,hi_,ki_,tu_,du_,ki_
+	.byte	CR_
+	.byte	e_,i_,ga_,wo_,spc_,o_,ta_,no_,si_,mi_,spc_,ku_,da_,sa_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●移動ポケモン「ラティアス」フラグがセットされる
+// ●一度メッセージを見た後は　msg_terebi1_01_p02_t101_r0101:　に戻る

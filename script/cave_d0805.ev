@@ -1,0 +1,26 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d0805.ev
+//
+//============================================ 
+
+/* ダミーデータです */
+
+EVENT_DATA_START cave_d0805_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_okaruto_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	OKARUTO_05
+	_TRAINER_DATA2	msg_okaruto_05_01
+	_TRAINER_DATA3	msg_okaruto_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_okaruto_05_03
+	_END
+

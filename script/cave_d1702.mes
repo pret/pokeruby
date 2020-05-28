@@ -1,0 +1,46 @@
+// ●座礁船
+// ●イベント前半部分
+
+
+// ▼d1702----------------------------------
+// ●うきわボーイ０３：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ukiwam_03_01
+msg_ukiwam_03_01:
+	.byte	hu_,ne_,no_,spc_,na_,ka_,de_,mo_
+	.byte	CR_
+	.byte	u_,ki_,wa_,spc_,mo_,ttu_,te_,i_,ta_,ra_,spc_,o_,ka_,si_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うきわボーイ０３：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ukiwam_03_02
+msg_ukiwam_03_02:
+	.byte	u_,wa_,aa_,spc_,tu_,yo_,bou_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●うきわボーイ０３：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ukiwam_03_03
+msg_ukiwam_03_03:
+	.byte	u_,ki_,wa_,wo_,spc_,mo_,ttu_,ta_,ma_,ma_,da_,to_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,spc_,na_,ge_,ni_,ku_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●帽子少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy1_01_p01_cave_d1702
+msg_capboy1_01_p01_cave_d1702:
+	.byte	ko_,ko_,ttu_,te_,spc_,o_,mo_,si_,ro_,i_,ne_,gyoe_
+	.byte	CR_
+	.byte	i_,ru_,da_,ke_,de_,spc_,WA_,KU_,WA_,KU_,spc_,si_,te_,ku_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

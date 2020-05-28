@@ -1,0 +1,44 @@
+// ●ムロタウン　左上の家
+
+
+// ●中年男性（町の中央にいる女の子の父）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_t103_r0101
+msg_middlem1_01_p01_t103_r0101:
+	.byte	ko_,u_,i_,u_,spc_,ti_,i_,sa_,na_,spc_,si_,ma_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,to_,spc_,ka_,zo_,ku_,spc_,na_,ka_,yo_,ku_,spc_,ku_,ra_,su_,no_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,i_,i_,spc_,mo_,n_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●中年女性（町の中央にいる女の子の母）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_t103_r0101
+msg_middlew1_01_p01_t103_r0101:
+	.byte	wa_,ta_,si_,ha_,spc_,KA_,I_,NA_,SI_,TE_,II_,spc_,to_,i_,u_
+	.byte	CR_
+	.byte	o_,o_,ki_,na_,spc_,mi_,na_,to_,ma_,ti_,spc_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	o_,yo_,me_,sa_,n_,ni_,spc_,ki_,ta_,no_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	no_,n_,bi_,ri_,to_,si_,ta_,spc_,si_,ma_,spc_,da_,ke_,re_,do_
+	.byte	CR_
+	.byte	ki_,re_,i_,na_,spc_,u_,mi_,ni_,spc_,ka_,ko_,ma_,re_,te_,spc_,i_,re_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,da_,ke_,de_,spc_,si_,a_,wa_,se_,spc_,na_,n_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・ジグザグマ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_jiguma_01_p01_t103_r0101
+msg_jiguma_01_p01_t103_r0101:
+	.byte	ZI_,GU_,ZA_,GU_,MA_,kako2_,gu_,gu_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にジグザグマの鳴き声をならす

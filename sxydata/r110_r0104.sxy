@@ -1,0 +1,392 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_R110_R0104	19
+#define EXITNUM_R110_R0104	3
+#define POSNUM_R110_R0104	0
+#define BGNUM_R110_R0104	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_mini_09[];
+extern const u8	ev_tanpan_15[];
+extern const u8	ev_mini_10[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	talk_iai_tree[];
+extern const u8	ev_ball1_60[];
+extern const u8	talk_iai_tree[];
+
+//BG_SCRIPT
+extern const u8	ev_karakuri_01_p01_r110_r0104[];
+
+const evObjData	OBJ_r110_r0104[] =
+{
+	{
+		TR_MINI_09,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0005,		//work area
+		ev_mini_09,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_TANPAN_15,		//OBJ ID
+		CAPBOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_tanpan_15,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MINI_10,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_mini_10,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TREE1_03_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ02,		//Event Flag
+	},
+
+	{
+		TREE1_01_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+	{
+		TREE1_02_R110_R104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ01,		//Event Flag
+	},
+
+	{
+		TREE1_04_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0010,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ03,		//Event Flag
+	},
+
+	{
+		TREE1_07_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ06,		//Event Flag
+	},
+
+	{
+		TREE_06_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ05,		//Event Flag
+	},
+
+	{
+		TREE1_05_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ04,		//Event Flag
+	},
+
+	{
+		TREE1_09_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ08,		//Event Flag
+	},
+
+	{
+		TREE1_08_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ07,		//Event Flag
+	},
+
+	{
+		TREE_10_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ09,		//Event Flag
+	},
+
+	{
+		TREE_12_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ11,		//Event Flag
+	},
+
+	{
+		TREE_11_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ10,		//Event Flag
+	},
+
+	{
+		TREE_13_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ12,		//Event Flag
+	},
+
+	{
+		TREE1_14_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ13,		//Event Flag
+	},
+
+	{
+		BALL1_60,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_60,		//Event Lavel
+		FV_BALL1_60,		//Event Flag
+	},
+
+	{
+		TREE1_15_R110_R0104,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ14,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r110_r0104[] =
+{
+	{
+		0x0000,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		R110_R0101_DOOR01,		//Door ID
+		R110_R0101,			//Map ID
+		R110,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		R110_R0101_DOOR01,		//Door ID
+		R110_R0101,			//Map ID
+		R110,				//Field ID
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		R110_R0102_DOOR01,		//Door ID
+		R110_R0102,			//Map ID
+		R110,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_r110_r0104[] =
+{
+	{
+		0x000e,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_karakuri_01_p01_r110_r0104,		//Script
+	},
+
+};
+
+const SXY_DATA	r110_r0104_sxy_data =
+{
+OBJNUM_R110_R0104,			// field obj max
+EXITNUM_R110_R0104,		// exit max
+POSNUM_R110_R0104,			// pos event max
+BGNUM_R110_R0104,			// bg event max
+OBJ_r110_r0104,			// field obj data
+EXIT_r110_r0104,			// exit data
+NULL,			// pos event data
+BG_r110_r0104,				// bg event data
+};

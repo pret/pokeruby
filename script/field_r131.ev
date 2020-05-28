@@ -1,0 +1,88 @@
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r131_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r131
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//				※マップ遷移時に一度だけ呼ばれる
+//--------------------------------------------------------------------
+flag_change_field_r131:
+	//タイクーンの塔出現
+	_IF_FLAGON_CALL		SYS_GAME_CLEAR,chg_scrn_field_r131
+	_END
+
+//タイクーンの塔出現
+chg_scrn_field_r131:
+	_CHANGE_MAP_SCREEN	MAPSCRNID_R131DUN01_1
+	_RET
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_16
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_16
+	_TRAINER_DATA2	msg_swimmerm_16_01
+	_TRAINER_DATA3	msg_swimmerm_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_16_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_17
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_17
+	_TRAINER_DATA2	msg_swimmerm_17_01
+	_TRAINER_DATA3	msg_swimmerm_17_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_17_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_16
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_16
+	_TRAINER_DATA2	msg_swimmerw_16_01
+	_TRAINER_DATA3	msg_swimmerw_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_16_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_17
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_17
+	_TRAINER_DATA2	msg_swimmerw_17_01
+	_TRAINER_DATA3	msg_swimmerw_17_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_17_03
+	_END
+
+SCRIPT_LABEL	ev_aneotouto_01_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_01
+	_TRAINER_DATA2	msg_aneotouto_01_01
+	_TRAINER_DATA3	msg_aneotouto_01_02
+	_TRAINER_DATA4	msg_aneotouto_01_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aneotouto_01_03
+	_END
+
+SCRIPT_LABEL	ev_aneotouto_01_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	ANEOTOUTO_01
+	_TRAINER_DATA2	msg_aneotouto_01_05
+	_TRAINER_DATA3	msg_aneotouto_01_06
+	_TRAINER_DATA4	msg_aneotouto_01_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aneotouto_01_07
+	_END
+

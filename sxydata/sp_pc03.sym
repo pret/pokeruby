@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define WAITRESS1_01_SP_PC03	1
+
+//Exit ID = 2
+#define SP_PC03_MAT01	0
+#define SP_PC03_MAT02	1

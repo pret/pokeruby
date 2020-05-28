@@ -1,0 +1,26 @@
+// ●カナズミシティ　民家１（街の西・一番上）
+
+
+// ●トレーナー男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c104_r0401
+msg_trainerm1_01_p01_c104_r0401:
+	.byte	PO_,KE_,MO_,N_,ni_,ha_,spc_,so_,re_,zo_,re_
+	.byte	CR_
+	.byte	to_,ku_,se_,i_,spc_,to_,yo_,ba_,re_,ru_,spc_,hu_,si_,gi_,na_,spc_,ti_,ka_,ra_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	so_,na_,wa_,ttu_,te_,spc_,i_,ru_,n_,da_,yo_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c104_r0401
+msg_trainerw1_01_p01_c104_r0401:
+	.byte	ho_,n_,to_,u_,ni_,spc_,PO_,KE_,MO_,N_,ttu_,te_
+	.byte	CR_
+	.byte	hu_,si_,gi_,na_,spc_,i_,ki_,mo_,no_,spc_,na_,no_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

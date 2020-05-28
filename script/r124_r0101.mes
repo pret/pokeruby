@@ -1,0 +1,169 @@
+// ●124番道路　トレジャーハンターの小屋
+
+
+// ●トレジャーハンター
+// ●１回目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p01_r124_r0101
+msg_youngm2_01_p01_r124_r0101:
+	.byte	O_,RE_,ha_,spc_,DA_,I_,BI_,N_,GU_,spc_,TO_,RE_,ZI_,YYA_,bou_,HA_,N_,TA_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ka_,i_,spc_,u_,mi_,ni_,spc_,mo_,gu_,ttu_,te_,ha_
+	.byte	CR_
+	.byte	ka_,i_,te_,i_,ni_,spc_,ne_,mu_,ru_,spc_,o_,ta_,ka_,ra_,wo_,spc_,a_,tu_,me_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	su_,ge_,e_,spc_,ya_,ro_,u_,spc_,na_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●交換できる道具がない　→msg_youngm2_01_p03_r124_r0101:
+// ●交換できる道具がある　→msg_youngm2_01_p04_r124_r0101:
+// ●交換できる道具は……
+// ●主人公がわたすモノ　　　　　　　　　主人公がもらうモノ
+// 　「あかいかけら」　（No48）　←→　「ほのおのいし」　（No095）
+// 　「きいろのかけら」（No50）　←→　「かみなりのいし」（No096）
+// 　「あおいかけら」　（No49）　←→　「みずのいし」　　（No097）
+// 　「みどりのかけら」（No51）　←→　「リーフのいし」　（No098）
+
+// ●２回目
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p02_r124_r0101
+msg_youngm2_01_p02_r124_r0101:
+	.byte	o_,o_,mu_,ka_,si_,ni_,spc_,tu_,ku_,ra_,re_,ta_,spc_,to_,i_,u_
+	.byte	CR_
+	.byte	i_,ro_,i_,ro_,na_,spc_,ka_,ke_,ra_,spc_,mi_,tu_,ka_,ttu_,ta_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●交換できる道具がない　→msg_youngm2_01_p03_r124_r0101:
+// ●交換できる道具がある　→msg_youngm2_01_p04_r124_r0101:
+
+// ●交換できる道具がない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p03_r124_r0101
+msg_youngm2_01_p03_r124_r0101:
+	.byte	ki_,mi_,spc_,o_,ta_,ka_,ra_,spc_,mo_,ttu_,te_,na_,i_,no_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ka_,i_,ka_,ke_,ra_,spc_,to_,ka_
+	.byte	CR_
+	.byte	i_,ro_,i_,ro_,na_,spc_,ka_,ke_,ra_,wo_,spc_,mi_,tu_,ke_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,u_,ka_,n_,spc_,si_,te_,ku_,re_,yo_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●交換できる道具がある
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p04_r124_r0101
+msg_youngm2_01_p04_r124_r0101:
+	.byte	o_,o_,ttu_,gyoe_,spc_,so_,re_,ha_,gyoe_
+	.byte	CR_
+	.byte	O_,RE_,ga_,spc_,sa_,ga_,si_,te_,i_,ru_,spc_,ka_,ke_,ra_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ttu_,spc_,na_,ttu_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,mo_,ttu_,te_,ru_,spc_,o_,ta_,ka_,ra_,to_
+	.byte	SCROLL_WAIT_
+	.byte	O_,RE_,no_,spc_,o_,ta_,ka_,ra_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,ku_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p05_r124_r0101
+msg_youngm2_01_p05_r124_r0101:
+	.byte	do_,re_,wo_,spc_,ko_,u_,ka_,n_,spc_,su_,ru_,n_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択肢ウインドウ開きます
+// 　中身は、主人公がバッグに持っていて交換できる道具全種と「やめる」です
+// ●上下キーで選択、Ａボタンで決定
+// ●やめる　→msg_youngm2_01_p09_r124_r0101:
+
+// ●確認
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p06_r124_r0101
+msg_youngm2_01_p06_r124_r0101:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,wo_,spc_,I_MSG_,STR_TEMP_BUF1,ni_
+	.byte	CR_
+	.byte	ko_,u_,ka_,n_,spc_,su_,ru_,n_,da_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠１」＝主人公が交換してもらう道具
+// ●「はい／いいえ」の選択
+// ●「はい」　　　　　　→msg_youngm2_01_p07_r124_r0101:
+// ●「はい」だが道具一杯→msg_youngm2_01_p08_r124_r0101:
+// ●「いいえ」　　　　　→msg_youngm2_01_p09_r124_r0101:
+
+// ●「はい」
+// ●アイテム入手処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p07_r124_r0101
+msg_youngm2_01_p07_r124_r0101:
+	.byte	to_,ri_,hi_,ki_,spc_,se_,i_,ri_,tu_,gyoe_
+	.byte	CR_
+	.byte	da_,i_,zi_,ni_,spc_,tu_,ka_,ttu_,te_,spc_,ku_,re_,yo_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公のバッグから「＠０」を削除し道具を追加
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p10_r124_r0101
+msg_youngm2_01_p10_r124_r0101:
+	.byte	ma_,da_,spc_,ko_,u_,ka_,n_,spc_,su_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_youngm2_01_p05_r124_r0101:
+// ●「いいえ」→msg_youngm2_01_p09_r124_r0101:
+
+// ●「はい」だが道具一杯
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p08_r124_r0101
+msg_youngm2_01_p08_r124_r0101:
+	.byte	o_,ttu_,to_,spc_,BA_,TTU_,GU_,ga_,spc_,i_,ttu_,pa_,i_,spc_,da_,ze_
+	.byte	CR_
+	.byte	do_,u_,gu_,wo_,spc_,he_,ra_,si_,te_,spc_,ki_,na_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p09_r124_r0101
+msg_youngm2_01_p09_r124_r0101:
+	.byte	so_,i_,tu_,ha_,spc_,ga_,ttu_,ka_,ri_,da_
+	.byte	CR_
+	.byte	ki_,ga_,spc_,mu_,i_,ta_,ra_,spc_,ma_,ta_,spc_,ki_,te_,ku_,re_,yo_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●貼り紙
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_poster_01_p01_r124_r0101
+msg_poster_01_p01_r124_r0101:
+	.byte	ho_,si_,i_,MO_,NO_,spc_,spc_,spc_,spc_,spc_,spc_,spc_,a_,ge_,ru_,MO_,NO_
+	.byte	CR_
+	.byte	spc_,a_,ka_,i_,ka_,ke_,ra_,spc_,spc_,spc_,CTRL_,C_EXFONT_,ArrowL__,CTRL_,C_EXFONT_,ArrowR__,spc_,ho_,no_,o_,no_,i_,si_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,si_,i_,MO_,NO_,spc_,spc_,spc_,spc_,spc_,spc_,spc_,a_,ge_,ru_,MO_,NO_
+	.byte	CR_
+	.byte	spc_,ki_,i_,ro_,i_,ka_,ke_,ra_,spc_,spc_,CTRL_,C_EXFONT_,ArrowL__,CTRL_,C_EXFONT_,ArrowR__,spc_,ka_,mi_,na_,ri_,no_,i_,si_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,si_,i_,MO_,NO_,spc_,spc_,spc_,spc_,spc_,spc_,spc_,a_,ge_,ru_,MO_,NO_
+	.byte	CR_
+	.byte	spc_,a_,o_,i_,ka_,ke_,ra_,spc_,spc_,spc_,CTRL_,C_EXFONT_,ArrowL__,CTRL_,C_EXFONT_,ArrowR__,spc_,mi_,zu_,no_,i_,si_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,si_,i_,MO_,NO_,spc_,spc_,spc_,spc_,spc_,spc_,spc_,a_,ge_,ru_,MO_,NO_
+	.byte	CR_
+	.byte	spc_,mi_,do_,ri_,no_,ka_,ke_,ra_,spc_,spc_,CTRL_,C_EXFONT_,ArrowL__,CTRL_,C_EXFONT_,ArrowR__,spc_,RI_,bou_,HU_,no_,i_,si_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

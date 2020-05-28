@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define PCCABLE_03_T105_PC02	1
+#define PCCABLE_01_T105_PC02	2
+#define PCCABLE_02_T105_PC02	3
+
+//Exit ID = 5
+#define T105_PC02_STAIR01	0
+#define T105_PC02_MAT01	1
+#define T105_PC02_MAT02	2
+#define T105_PC02_MAT03	3
+#define T105_PC02_MAT04	4

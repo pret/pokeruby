@@ -1,0 +1,159 @@
+// ●共通メッセージファイル
+
+// ●common.mesに直接書いてしまっている
+// ●メッセージもあるので注意
+
+
+// ●「ひみつのちから」入手までの共通メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_himitsu_01_p01_common
+msg_himitsu_01_p01_common:
+	.byte	kako_,hi_,mi_,tu_,no_,ti_,ka_,ra_,kakot_,ttu_,te_
+	.byte	CR_
+	.byte	wa_,za_,MA_,SI_,N_,spc_,si_,ttu_,te_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,ra_,spc_,wa_,za_,MA_,SI_,N_,spc_,kako_,hi_,mi_,tu_,no_,ti_,ka_,ra_,kakot_,ga_
+	.byte	CR_
+	.byte	da_,i_,su_,ki_,spc_,na_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,ra_,no_,spc_,ME_,N_,BA_,bou_,ga_,spc_,do_,ko_,ka_,de_,spc_,ku_,re_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	so_,re_,wo_,spc_,mo_,ra_,ttu_,ta_,ra_,spc_,ma_,ta_,spc_,o_,i_,de_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,ME_,N_,BA_,bou_,to_,si_,te_
+	.byte	CR_
+	.byte	hi_,mi_,tu_,de_,spc_,i_,i_,mo_,no_,wo_,spc_,u_,ttu_,te_,a_,ge_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ポケセンメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heal_p02
+msg_heal_p02:
+	.byte	so_,re_,de_,ha_
+	.byte	CR_
+	.byte	o_,a_,zu_,ka_,ri_,spc_,i_,ta_,si_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケルスメッセージ
+// ●モンスターボール回復の後、次のセリフに行かずに
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heal_pokerus
+msg_heal_pokerus:
+	.byte	o_,a_,zu_,ka_,ri_,si_,ta_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,RU_,SU_,ga_,spc_,tu_,i_,te_,spc_,i_,ru_,yo_,u_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,wa_,si_,i_,ko_,to_,ha_,spc_,wa_,ka_,ttu_,te_,spc_,i_,na_,i_,no_,de_,su_,ga_
+	.byte	CR_
+	.byte	PO_,KE_,RU_,SU_,to_,spc_,i_,u_,no_,ha_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ku_,ttu_,tu_,ku_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,i_,sa_,na_,spc_,se_,i_,me_,i_,ta_,i_,de_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,ga_,spc_,tu_,i_,te_,i_,ru_,spc_,a_,i_,da_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,yo_,ku_,spc_,so_,da_,tu_,spc_,mi_,ta_,i_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●お辞儀処理はナシ
+// ●一度だけ
+
+// ●波乗り、話しかけメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_naminori_use
+msg_naminori_use:
+	.byte	mi_,zu_,ha_,spc_,hu_,ka_,i_,spc_,a_,o_,ni_,spc_,so_,ma_,ttu_,te_,i_,ru_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,mi_,no_,ri_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●波乗り開始
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_naminori_use_start
+msg_naminori_use_start:
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_
+	.byte	CR_
+	.byte	na_,mi_,no_,ri_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●点字洞窟が開くとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_tenji_open
+msg_tenji_open:
+	.byte	do_,ko_,ka_,spc_,to_,o_,ku_,no_,spc_,to_,bi_,ra_,ga_
+	.byte	CR_
+	.byte	hi_,ra_,i_,ta_,yo_,u_,na_,spc_,o_,to_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●点字洞窟　すでに穴が開いているとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_tenji_ana
+msg_tenji_ana:
+	.byte	ka_,be_,ni_,spc_,o_,o_,ki_,na_,spc_,a_,na_,ga_,spc_,a_,i_,te_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●コロシアム受付嬢
+// ●ポケモン図鑑入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_coliseum_nonusable
+msg_coliseum_nonusable:
+	.byte	mo_,u_,si_,wa_,ke_,spc_,go_,za_,i_,ma_,se_,n_
+	.byte	CR_
+	.byte	ta_,da_,i_,ma_,spc_,ko_,ti_,ra_,no_,spc_,KO_,RO_,SI_,A_,MU_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,u_,se_,i_,ti_,yyu_,u_,spc_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレードセンター受付嬢
+// ●ポケモン図鑑入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trade_nonusable
+msg_trade_nonusable:
+	.byte	mo_,u_,si_,wa_,ke_,spc_,go_,za_,i_,ma_,se_,n_
+	.byte	CR_
+	.byte	ta_,da_,i_,ma_,spc_,ko_,ti_,ra_,no_,spc_,TO_,RE_,bou_,DO_,SE_,N_,TA_,bou_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	te_,n_,ke_,n_,ti_,yyu_,u_,spc_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●レコードコーナー受付嬢
+// ●レコードコーナーが使用可能になるまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_rccounter_nonusable
+msg_rccounter_nonusable:
+	.byte	mo_,u_,si_,wa_,ke_,spc_,go_,za_,i_,ma_,se_,n_
+	.byte	CR_
+	.byte	ta_,da_,i_,ma_,spc_,ko_,ti_,ra_,no_,spc_,RE_,KO_,bou_,DO_,KO_,bou_,NA_,bou_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,yyu_,n_,bi_,ti_,yyu_,u_,spc_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アイテムを渡す
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_item_return
+msg_item_return:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,wa_,ta_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,7 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 0
+
+//Exit ID = 2
+#define CAVE_D2307_STAIR01	0
+#define CAVE_D2307_STAIR02	1

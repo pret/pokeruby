@@ -1,0 +1,897 @@
+//===============================================================
+//	つうしん対戦・交換
+//
+// ScriptParamter0(PARAM0)
+// WK_SCENE_SP_PC02
+//	プログラムへのモード通知に使用している
+//	※defineはev_comm.hを参照
+//		COMM_ID_NOTHING:	モードなし（通信失敗、キャンセルなど）
+//		COMM_ID_1VS1BATTLE:	通信対戦1vs1
+//		COMM_ID_2VS2BATTLE:	通信対戦2vs2
+//		COMM_ID_TRADE:		通信交換
+//		COMM_ID_RECORD:		レコードコーナー
+//		COMM_ID_4BATTLE:	通信対戦4人
+//
+// ScriptParamter3(PARAM3)
+//	OBJ指定の保存に使用している
+//	PARAM3 == 0 の場合は通信部屋内セーブからコンティニュー直後の状況
+//
+// ScriptParameter1(PARAM1)
+//	通信交換・対戦などを開始するときの場所データを渡す
+//===============================================================
+
+#define NO_GATE_CELL_CODE	0x202
+#define	GATE_CELL_CODE		0x25d
+
+
+//===============================================================
+//
+//
+//
+//===============================================================
+
+//---------------------------------------------------------------
+//	PC2階用　OBJ設定スクリプト
+//	※通信部屋からの復帰処理を行う
+//---------------------------------------------------------------
+SCRIPT_LABEL	obj_sp_pc
+	OBJ_CTRL_DATA	WK_SCENE_SP_PC02, COMM_ID_1VS1BATTLE,	ev_obj_sp_pc02_1vs1
+	OBJ_CTRL_DATA	WK_SCENE_SP_PC02, COMM_ID_2VS2BATTLE,	ev_obj_sp_pc02_2vs2
+	OBJ_CTRL_DATA	WK_SCENE_SP_PC02, COMM_ID_4BATTLE,		ev_obj_sp_pc02_4battle
+	OBJ_CTRL_DATA	WK_SCENE_SP_PC02, COMM_ID_TRADE,		ev_obj_sp_pc02_trade
+	OBJ_CTRL_DATA	WK_SCENE_SP_PC02, COMM_ID_RECORD,		ev_obj_sp_pc02_record
+
+	OBJ_CTRL_END
+
+ev_obj_sp_pc02_1vs1:
+ev_obj_sp_pc02_2vs2:
+ev_obj_sp_pc02_4battle:
+ev_obj_sp_pc02_trade:
+ev_obj_sp_pc02_record:
+	_OBJ_SITE_CHG		PARAM3,SITE_R		//右向きにする
+	_END
+
+//---------------------------------------------------------------
+//	PC2階用　BG設定スクリプト
+//	※通信部屋からの復帰時にゲートを開けておく
+//---------------------------------------------------------------
+SCRIPT_LABEL	bg_sp_pc
+	_IFVAL_JUMP		WK_SCENE_SP_PC02,EQ,COMM_ID_1VS1BATTLE, ev_bg_sp_pc_battle
+	_IFVAL_JUMP		WK_SCENE_SP_PC02,EQ,COMM_ID_2VS2BATTLE, ev_bg_sp_pc_battle
+	_IFVAL_JUMP		WK_SCENE_SP_PC02,EQ,COMM_ID_4BATTLE,	ev_bg_sp_pc_battle
+	_IFVAL_JUMP		WK_SCENE_SP_PC02,EQ,COMM_ID_TRADE,		ev_bg_sp_pc_trade
+	_IFVAL_JUMP		WK_SCENE_SP_PC02,EQ,COMM_ID_RECORD,		ev_bg_sp_pc_record
+	_END
+ev_bg_sp_pc_battle:
+	_SET_CELL			5,3,NO_GATE_CELL_CODE,0
+	_END
+ev_bg_sp_pc_trade:
+	_SET_CELL			8,3,NO_GATE_CELL_CODE,0
+	_END
+ev_bg_sp_pc_record:
+	_SET_CELL			11,3,NO_GATE_CELL_CODE,0
+	_END
+
+
+//---------------------------------------------------------------
+//	ＰＣ2階用シーン発動スクリプト
+//	※通信部屋からの復帰処理を行う
+//---------------------------------------------------------------
+SCRIPT_LABEL	scene_sp_pc
+	SP_SCRIPT_DATA	WK_SCENE_SP_PC02,COMM_ID_1VS1BATTLE,ev_pc_1vs1battle_return
+	SP_SCRIPT_DATA	WK_SCENE_SP_PC02,COMM_ID_2VS2BATTLE,ev_pc_2vs2battle_return
+	SP_SCRIPT_DATA	WK_SCENE_SP_PC02,COMM_ID_4BATTLE,	ev_pc_4battle_return
+	SP_SCRIPT_DATA	WK_SCENE_SP_PC02,COMM_ID_TRADE,		ev_pc_trade_return
+	SP_SCRIPT_DATA	WK_SCENE_SP_PC02,COMM_ID_RECORD,	ev_pc_record_return
+
+	SP_SCRIPT_END
+
+
+SCRIPT_LABEL	ev_pc_return_simple
+	_PROGRAM			COMM_END				//通信終了処理
+	_LDVAL				WK_SCENE_SP_PC02, COMM_ID_NOTHING
+
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_return
+	_OBJ_ANIME_WAIT
+	_IFVAL_JUMP			PARAM3,EQ,0,ev_pc_return_simple_end
+	_SET_OBJ_ANIME		PARAM3,anm_reception_turn_down
+	_OBJ_ANIME_WAIT
+ev_pc_return_simple_end:
+	_RET
+
+SCRIPT_LABEL	ev_pc_return_common
+	_PROGRAM			COMM_END				//通信終了処理
+	_LDVAL				WK_SCENE_SP_PC02, COMM_ID_NOTHING
+
+//	PARAM3 == 0 通信部屋内セーブからコンティニュー直後の場合、下記の処理は省かれる
+	_IFVAL_JUMP			PARAM3,EQ,0,ev_pc_return_common_end
+
+	_SET_OBJ_ANIME		PARAM3,anm_reception_turn_right
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_return
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME		PARAM3,anm_reception_turn_down
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_pc_return_common_end:
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_return
+	_OBJ_ANIME_WAIT
+	_RET
+
+
+SCRIPT_LABEL	ev_pc_trade_return		/* 交換から返った状態 */
+	_TALK_START
+	_CALL				ev_pc_trade_return_sub
+	_SET_CELL			8,3,GATE_CELL_CODE,1
+	_PROGRAM			MAKE_MAP_BG
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+
+SCRIPT_LABEL	ev_pc_trade_return_sub
+	_PROGRAM			COMM_END				//通信終了処理
+	_LDVAL				WK_SCENE_SP_PC02, COMM_ID_NOTHING
+
+//	PARAM3 == 0 通信部屋内セーブからコンティニュー直後の場合、下記の処理は省かれる
+	_IFVAL_JUMP			PARAM3,EQ,0,ev_pc_return_common_end
+
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_turn_left
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME		PARAM3,anm_reception_turn_right
+	_OBJ_ANIME_WAIT
+	_TALKMSG			msg_reception_exit_start
+	_TALK_WAIT
+	_SE					SE_PIN
+	_TALKMSG			msg_reception_exit_end
+	_TALK_WAIT
+
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_return
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME		PARAM3,anm_reception_turn_down
+	_OBJ_ANIME_WAIT
+	_RET
+
+
+SCRIPT_LABEL	ev_pc_record_return		/* レコードコーナーから返った状態 */
+	_CALL				ev_pc_return_simple
+	_SET_CELL			11,3,GATE_CELL_CODE,1
+	_PROGRAM			MAKE_MAP_BG
+	_END
+
+SCRIPT_LABEL	ev_pc_1vs1battle_return		/* 1vs1対戦から返った状態 */
+SCRIPT_LABEL	ev_pc_2vs2battle_return		/* 2vs2対戦から返った状態 */
+SCRIPT_LABEL	ev_pc_4battle_return
+	_TALK_START
+	_CALL				ev_pc_return_common
+	_SET_CELL			5,3,GATE_CELL_CODE,1
+	_PROGRAM			MAKE_MAP_BG
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+
+
+
+
+//===============================================================
+//
+//
+//
+//
+//===============================================================
+//---------------------------------------------------------------
+//つうしんたいせん　受け付け
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_reception_battle
+
+	_IF_FLAGOFF_JUMP	SYS_ZUKAN_GET,ev_reception_battle_nouse
+
+	_LDWK				PARAM3, TARGET_OBJ		//01/11/06 nohara
+
+	_TALK_OBJ_START
+	_TALKMSG			msg_reception_battle_p01
+	_TALK_WAIT
+
+_battle_yesno:
+	_SELECT_WINDOW		17,6,COMM_BATTLE_MENU01
+	_SWITCH				ANSWORK
+	_CASEJUMP			0, _battle_yes
+	_CASEJUMP			1, ev_reception_end
+	_CASEJUMP			2, _battle_explain
+	_CASECANCEL			ev_reception_end
+
+_battle_yes:
+	_CALL				FieldSaveScript
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE, ev_reception_end
+
+	_CALL				_battle_select
+	_IFVAL_JUMP			PARAM0,EQ,COMM_ID_NOTHING, ev_reception_end
+
+	_TALKMSG			msg_reception_wait_p01
+	_TALK_WAIT
+	_PROGRAM			CONNECT_BATTLE
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_OK,			_battle_ok
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_TIMEOUT,	ev_reception_fail
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_OTHERMODE,	ev_reception_differ
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_WRONG_NUM,	ev_reception_wrong_number_battle
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_CANCEL,		ev_reception_end
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_ERROR,		ev_reception_error
+
+_battle_ok:
+	_PROGRAM			PC_KAIFUKU							@ポケモン回復処理
+	_PROGRAM			TEMOTI_POKE_PUSH					@ポケモンデータ退避
+	_PROGRAM			PUSH_TEMOTI_ITEM					@手持ち道具退避
+	_LDWK				WK_SCENE_SP_PC02, PARAM0		@対戦復帰シーケンス
+
+	_SYSTALKMSG			msg_reception_common_p03
+	_TALK_WAIT
+	_SET_CELL			5,3,NO_GATE_CELL_CODE,0
+	_PROGRAM			MAKE_MAP_BG
+	_TIME_WAIT			60
+	_SET_OBJ_ANIME		TARGET_OBJ, anm_reception_turn_right
+	_OBJ_ANIME_WAIT
+	_TALK_CLOSE
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_go1
+	_OBJ_ANIME_WAIT
+	_OPEN_DOOR_ANIME	5,1
+	_DOOR_ANIME_WAIT
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_go2
+	_OBJ_ANIME_WAIT
+	_OBJ_INVISIBLE		EV_OBJ_SPID,0,0
+	_CLOSE_DOOR_ANIME	5,1
+	_DOOR_ANIME_WAIT
+	_TALK_OBJ_END
+
+	_IFVAL_JUMP			PARAM0,EQ,COMM_ID_4BATTLE,_to_4battle_room
+
+	_PROGRAM			SET_EXIT			/*足元からの遷移先をセット、特殊接続をセット*/
+	_COMM_MAP_CHANGE	SP,SP_PC03,6,8		/*1vs1対戦部屋を遷移先としてセット*/
+	_PROGRAM			FORCE_COMM_IN
+	_STOP_SCRIPT
+	_END
+
+_to_4battle_room:
+	_PROGRAM			SET_EXIT			/*足元からの遷移先をセット、特殊接続をセット*/
+	_COMM_MAP_CHANGE	SP,SP_PC06,5,8		/*4人対戦部屋を遷移先としてセット*/
+	_PROGRAM			FORCE_COMM_IN
+	_STOP_SCRIPT
+	_END
+
+@対戦内容の説明
+_battle_explain:
+	_TALKMSG			msg_reception_battle_p03
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALKMSG			msg_reception_battle_p05
+	_TALK_WAIT
+	_JUMP				_battle_yesno
+
+
+//---------------------------------------------------------------
+//	対戦の種類を選択
+//---------------------------------------------------------------
+_battle_select:
+	_TALKMSG			msg_reception_battle_p02
+	_TALK_WAIT
+	_SELECT_WINDOW		0,0,COMM_BATTLE_MENU02
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,_battle_single
+	_CASEJUMP			1,_battle_double
+	_CASEJUMP			2,_battle_multi
+	_CASEJUMP			3,_battle_cancel
+	_CASECANCEL			_battle_cancel
+
+_battle_cancel:
+	_LDVAL				PARAM0, COMM_ID_NOTHING
+	_RET
+
+_battle_multi:
+	_LDVAL				PARAM0,	COMM_ID_4BATTLE
+	_RET
+
+_battle_double:
+	_PROGRAM			POKE2VS2_CHK
+	_IFVAL_JUMP			ANSWORK,NE,0, _battle_double_wrong
+	_LDVAL				PARAM0, COMM_ID_2VS2BATTLE
+	_RET
+
+_battle_double_wrong:
+	_TALKMSG			msg_reception_battle_p06
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP				_battle_select
+
+_battle_single:
+	_LDVAL				PARAM0, COMM_ID_1VS1BATTLE
+	_RET
+
+//---------------------------------------------------------------
+//対戦選択時の人数間違い
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_reception_wrong_number_battle
+	_SWITCH				PARAM0
+	_CASEJUMP			COMM_ID_1VS1BATTLE,	ev_reception_wrong_number_single
+	_CASEJUMP			COMM_ID_2VS2BATTLE,	ev_reception_wrong_number_double
+	_CASEJUMP			COMM_ID_4BATTLE,	ev_reception_wrong_number_multi
+	_JUMP				ev_reception_wrong_number
+
+ev_reception_wrong_number_multi:
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_battle_uncorrect_multi
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP				ev_reception_uncorrect
+
+ev_reception_wrong_number_double:
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_battle_uncorrect_double
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP				ev_reception_uncorrect
+
+ev_reception_wrong_number_single:
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_battle_uncorrect_single
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP				ev_reception_uncorrect
+
+SCRIPT_LABEL	ev_reception_uncorrect
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_battle_uncorrect
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+//---------------------------------------------------------------
+//つうしんこうかん　受け付け
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_reception_trade
+
+	_IF_FLAGOFF_JUMP	SYS_ZUKAN_GET,ev_reception_trade_nouse
+
+	_LDWK				PARAM3, TARGET_OBJ		//01/11/06 nohara
+
+	_TALK_OBJ_START
+	_TALK_YES_NO		msg_reception_trade_p01
+	_IFVAL_JUMP			ANSWORK,EQ,0, ev_reception_end
+	_IFVAL_JUMP			ANSWORK,EQ,1, _trade_yes
+
+_trade_yes:
+	_CALL				trade_mons_check
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE, ev_reception_end
+
+	_CALL				FieldSaveScript
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE, ev_reception_end
+
+	_TALKMSG			msg_reception_wait_p01
+	_TALK_WAIT
+
+	_PROGRAM			CONNECT_TRADE
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_OK,			_trade_ok
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_TIMEOUT,	ev_reception_fail
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_OTHERMODE,	ev_reception_differ
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_WRONG_NUM,	ev_reception_wrong_number
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_CANCEL,		ev_reception_end
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_ERROR,		ev_reception_error
+
+_trade_ok:
+	_LDVAL				PARAM0, COMM_ID_TRADE
+	_LDWK				WK_SCENE_SP_PC02, PARAM0		@対戦復帰シーケンス
+
+	_SYSTALKMSG			msg_reception_common_p03
+	_TALK_WAIT
+	_SET_CELL			8,3,NO_GATE_CELL_CODE,0
+	_PROGRAM			MAKE_MAP_BG
+	_TIME_WAIT			60
+	_SET_OBJ_ANIME		TARGET_OBJ, anm_reception_turn_right
+	_OBJ_ANIME_WAIT
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_go1
+	_OBJ_ANIME_WAIT
+	_OPEN_DOOR_ANIME	8,1
+	_DOOR_ANIME_WAIT
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_go2
+	_OBJ_ANIME_WAIT
+	_OBJ_INVISIBLE		EV_OBJ_SPID,0,0
+	_CLOSE_DOOR_ANIME	8,1
+	_DOOR_ANIME_WAIT
+	_TALK_OBJ_END
+
+	_JUMP				ev_reception_next_room
+
+
+//	通信交換できる手持ちかどうかのチェック
+trade_mons_check:
+	//手持ちが２匹以上いるか？
+	_FUNC_CALL			ANSWORK,GET_POKE_COUNT
+	_IFVAL_JUMP			ANSWORK,LT,2,trade_mons_warning_num
+
+	//ＲＡＭ木の実を持っていないか？
+	_FUNC_CALL			ANSWORK,TRADE_DISABLE_ITEM_CHK
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,trade_mons_warning_item
+
+	_LDVAL				ANSWORK,TRUE
+	_RET
+
+trade_mons_warning_num:
+	_TALKMSG			msg_reception_trade_warning
+	_TALK_WAIT
+	_AB_KEYWAIT
+
+	_LDVAL				ANSWORK, FALSE
+	_RET
+
+trade_mons_warning_item:
+	_TALKMSG			msg_reception_trade_warning2
+	_TALK_WAIT
+	_AB_KEYWAIT
+
+	_LDVAL				ANSWORK, FALSE
+	_RET
+
+
+//---------------------------------------------------------------
+//レコードコーナー　受け付け
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_reception_record
+
+	_IF_FLAGOFF_JUMP	SYS_C103_ARRIVE,ev_reception_record_nouse
+
+	_LDWK				PARAM3, TARGET_OBJ
+
+	_TALK_OBJ_START
+	_TALK_YES_NO		msg_reception_record_p01
+	_IFVAL_JUMP			ANSWORK,EQ,0, ev_reception_end
+	_IFVAL_JUMP			ANSWORK,EQ,1, _record_yes
+
+_record_yes:
+	_CALL				FieldSaveScript
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE, ev_reception_end
+
+	_TALKMSG			msg_reception_wait_p01
+	_TALK_WAIT
+
+	_PROGRAM			CONNECT_RECORD
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_OK,			_record_ok
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_TIMEOUT,	ev_reception_fail
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_OTHERMODE,	ev_reception_differ
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_WRONG_NUM,	ev_reception_wrong_number
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_CANCEL,		ev_reception_end
+	_IFVAL_JUMP			ANSWORK,EQ,COMM_RES_ERROR,		ev_reception_error
+
+_record_ok:
+	_LDVAL				PARAM0, COMM_ID_RECORD
+	_LDWK				WK_SCENE_SP_PC02, PARAM0		@対戦復帰シーケンス
+
+	_SYSTALKMSG			msg_reception_common_p03
+	_TALK_WAIT
+	_SET_CELL			11,3,NO_GATE_CELL_CODE,0
+	_PROGRAM			MAKE_MAP_BG
+	_TIME_WAIT			60
+	_SET_OBJ_ANIME		TARGET_OBJ, anm_reception_turn_right
+	_OBJ_ANIME_WAIT
+	_TALK_CLOSE
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_go1
+	_OBJ_ANIME_WAIT
+	_OPEN_DOOR_ANIME	11,1
+	_DOOR_ANIME_WAIT
+	_SET_OBJ_ANIME		EV_OBJ_SPID, anm_reception_hero_go2
+	_OBJ_ANIME_WAIT
+	_OBJ_INVISIBLE		EV_OBJ_SPID,0,0
+	_CLOSE_DOOR_ANIME	11,1
+	_DOOR_ANIME_WAIT
+	_TALK_OBJ_END
+
+	_JUMP				ev_reception_next_room
+
+
+//---------------------------------------------------------------
+// 通信受け付け処理共通部分のスクリプト
+//---------------------------------------------------------------
+@通信エラー発生の場合
+SCRIPT_LABEL	ev_reception_error
+
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_error
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+@通信接続失敗(お友達の準備ができていない…)
+SCRIPT_LABEL	ev_reception_fail
+
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_common_p04
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+@通信選択が違う場合
+SCRIPT_LABEL	ev_reception_differ
+
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_common_p05
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+@通信接続をしない場合
+SCRIPT_LABEL	ev_reception_end
+
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_common_p06
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+@通信接続成功、通信部屋へ遷移
+SCRIPT_LABEL	ev_reception_next_room
+
+	_PROGRAM			SET_EXIT
+	_PROGRAM			FORCE_COMM_IN
+	_STOP_SCRIPT
+	_END
+
+
+@通信に参加した人数が正しくない場合
+SCRIPT_LABEL	ev_reception_wrong_number
+	_PROGRAM			COMM_END
+	_TALKMSG			msg_reception_common_p07
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+//---------------------------------------------------------------
+//		通信施設をつかえない間の対応メッセージ
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_reception_trade_nouse
+	_EASY_OBJ_MSG		msg_trade_nonusable
+	_END
+
+SCRIPT_LABEL	ev_reception_battle_nouse
+	_EASY_OBJ_MSG		msg_coliseum_nonusable
+	_END
+	
+SCRIPT_LABEL	ev_reception_record_nouse
+	_EASY_OBJ_MSG		msg_rccounter_nonusable
+	_END
+
+
+//---------------------------------------------------------------
+//	ＰＣ2階でのアニメーションデータ
+//---------------------------------------------------------------
+/* 案内係が右を向く */
+anm_reception_turn_down:
+	.byte	AC_SITE_D
+	.byte	ACMD_END
+
+/* 案内係が右を向く */
+anm_reception_turn_right:
+	.byte	AC_SITE_R
+	.byte	ACMD_END
+
+
+/* 自分がまっすぐ戻る */
+anm_reception_hero_return:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+/* 自分が通信部屋へ移動 */
+anm_reception_hero_go1:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+anm_reception_hero_go2:
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+anm_reception_hero_turn_left:
+	.byte	AC_SITE_L
+	.byte	ACMD_END
+
+//---------------------------------------------------------------
+//		対戦結果表の表示
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_taisen_score
+	_TALK_START
+	_PROGRAM			SCORE_WINDOW
+	_AB_KEYWAIT
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+
+//===============================================================
+//
+//
+//
+//		通信部屋でのスクリプト
+//
+//
+//
+//===============================================================
+//---------------------------------------------------------------
+//	対戦イベント起動スクリプト
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_comm_battle0_start
+	_LDVAL		PARAM1,0
+	_PROGRAM	COMM_BATTLE
+	_STOP_SCRIPT
+	_END
+
+SCRIPT_LABEL	ev_comm_battle1_start
+	_LDVAL		PARAM1,1
+	_PROGRAM	COMM_BATTLE
+	_STOP_SCRIPT
+	_END
+
+
+SCRIPT_LABEL	ev_comm_multi_battle0_start
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	BATTLE_POKE_SEL
+	_STOP_SCRIPT
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_comm_multi_battle_cancel
+
+	_LDVAL		PARAM1,0
+	_PROGRAM	COMM_BATTLE
+	_STOP_SCRIPT
+	//_PROGRAM	TEMOTI_POKE_POP
+	_END
+
+SCRIPT_LABEL	ev_comm_multi_battle1_start
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	BATTLE_POKE_SEL
+	_STOP_SCRIPT
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_comm_multi_battle_cancel
+
+	_LDVAL		PARAM1,1
+	_PROGRAM	COMM_BATTLE
+	_STOP_SCRIPT
+	//_PROGRAM	TEMOTI_POKE_POP
+	_END
+
+SCRIPT_LABEL	ev_comm_multi_battle2_start
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	BATTLE_POKE_SEL
+	_STOP_SCRIPT
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_comm_multi_battle_cancel
+
+	_LDVAL		PARAM1,2
+	_PROGRAM	COMM_BATTLE
+	_STOP_SCRIPT
+	//_PROGRAM	TEMOTI_POKE_POP
+	_END
+
+SCRIPT_LABEL	ev_comm_multi_battle3_start
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	BATTLE_POKE_SEL
+	_STOP_SCRIPT
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_comm_multi_battle_cancel
+
+	_LDVAL		PARAM1,3
+	_PROGRAM	COMM_BATTLE
+	_STOP_SCRIPT
+	//_PROGRAM	TEMOTI_POKE_POP
+	_END
+
+SCRIPT_LABEL	ev_comm_multi_battle_cancel
+	//_PROGRAM	TEMOTI_POKE_POP
+	_END
+
+
+
+//---------------------------------------------------------------
+//	交換イベント起動
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_comm_trade0_start
+	_LDVAL				PARAM1,0
+	_PROGRAM			COMM_TRADE
+	_STOP_SCRIPT
+	_END
+
+SCRIPT_LABEL	ev_comm_trade1_start
+	_LDVAL				PARAM1,1
+	_PROGRAM			COMM_TRADE
+	_STOP_SCRIPT
+	_END
+
+SCRIPT_LABEL	ev_comm_trade2_start
+	_LDVAL				PARAM1,2
+	_PROGRAM			COMM_TRADE
+	_STOP_SCRIPT
+	_END
+
+SCRIPT_LABEL	ev_comm_trade3_start
+	_LDVAL				PARAM1,3
+	_PROGRAM			COMM_TRADE
+	_STOP_SCRIPT
+	_END
+
+
+//---------------------------------------------------------------
+//	レコードコーナーイベント起動
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_comm_record0_start
+	_LDVAL				PARAM1,0
+	_PROGRAM			COMM_MIXER
+	_STOP_SCRIPT
+	_IFVAL_JUMP	LOCALWORK1,NE,0,ev_comm_record_item
+	_END
+
+SCRIPT_LABEL	ev_comm_record1_start
+	_LDVAL				PARAM1,1
+	_PROGRAM			COMM_MIXER
+	_STOP_SCRIPT
+	_IFVAL_JUMP	LOCALWORK1,NE,0,ev_comm_record_item
+	_END
+
+SCRIPT_LABEL	ev_comm_record2_start
+	_LDVAL				PARAM1,2
+	_PROGRAM			COMM_MIXER
+	_STOP_SCRIPT
+	_IFVAL_JUMP	LOCALWORK1,NE,0,ev_comm_record_item
+	_END
+
+SCRIPT_LABEL	ev_comm_record3_start
+	_LDVAL				PARAM1,3
+	_PROGRAM			COMM_MIXER
+	_STOP_SCRIPT
+	_IFVAL_JUMP	LOCALWORK1,NE,0,ev_comm_record_item
+	_END
+
+
+
+
+SCRIPT_LABEL	ev_comm_record_item
+	_GET_ITEMNAME	1,LOCALWORK1
+	_TALKMSG	msg_connect_get_item
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//	ほかのひとにはなしかけたとき
+//---------------------------------------------------------------
+//	カードをみせてもらう（ランクなし）
+SCRIPT_LABEL	ev_comm_look_normal_card
+//	_TALK_START
+	_TALKMSG			msg_connect_look_normal_card
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_FLD_FADE_BLACKOUT
+	_PROGRAM			COMM_TR_CARD
+	_STOP_SCRIPT
+//	_TALK_END
+	_END
+
+//	カードを見せてもらう（ランクあり）
+SCRIPT_LABEL	ev_comm_look_special_card
+//	_TALK_START
+	_TALKMSG			msg_connect_look_special_card
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_FLD_FADE_BLACKOUT
+	_PROGRAM			COMM_TR_CARD
+	_STOP_SCRIPT
+//	_TALK_END
+	_END
+
+//	『とりこみちゅうの　ようだ…』
+SCRIPT_LABEL	ev_comm_talk_busy
+//	_TALK_START
+	_TALKMSG			msg_connect_talk_busy_player
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_CLOSE
+//	_TALK_END
+	_END
+
+//対戦部屋の説明お姉さん
+SCRIPT_LABEL	ev_comm_talk_battle_guide
+//	_TALK_START
+	_PROGRAM			COMM_SET_TALK_OBJ
+	_TALKMSG			msg_connect_battle_guide
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_PROGRAM			COMM_RESET_TALK_OBJ
+	_TALK_CLOSE
+//	_TALK_END
+	_END
+
+//交換部屋の説明お姉さん
+SCRIPT_LABEL	ev_comm_talk_trade_guide
+//	_TALK_START
+	_PROGRAM			COMM_SET_TALK_OBJ
+	_TALKMSG			msg_connect_trade_guide
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_PROGRAM			COMM_RESET_TALK_OBJ
+	_TALK_CLOSE
+//	_TALK_END
+	_END
+
+//レコードコーナーの説明お姉さん
+SCRIPT_LABEL	ev_comm_talk_record_guide
+	_IFVAL_JUMP			LOCALWORK0,NE,0,ev_comm_talk_record_guide_after
+
+	_PROGRAM			COMM_SET_TALK_OBJ
+	_TALKMSG			msg_connect_record_guide
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_PROGRAM			COMM_RESET_TALK_OBJ
+	_TALK_CLOSE
+	_END
+
+ev_comm_talk_record_guide_after:
+	_PROGRAM			COMM_SET_TALK_OBJ
+	_TALKMSG			msg_connect_record_guide_after
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_PROGRAM			COMM_RESET_TALK_OBJ
+	_TALK_CLOSE
+	_END
+
+
+
+//---------------------------------------------------------------
+//
+//---------------------------------------------------------------
+
+
+
+//===============================================================
+//
+//
+//
+//===============================================================
+//---------------------------------------------------------------
+//
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_comm_exit_check
+
+	_TALK_YES_NO		msg_connect_end_check
+	_IFVAL_JUMP			ANSWORK,EQ,1, ev_comm_exit_start
+	_SCREEN_CLEAR
+	_END
+
+
+SCRIPT_LABEL	ev_comm_exit_start
+
+	_SYSTALKMSG			msg_connect_end
+	_TALK_WAIT
+	_PROGRAM			COMM_EXIT_WAIT
+	_END
+
+
+SCRIPT_LABEL	ev_comm_exit
+
+//	_PROGRAM			COMM_END
+	_PROGRAM			SET_COMM_EXIT
+	_PROGRAM			FORCE_COMM_OUT
+	_STOP_SCRIPT
+	_END
+
+
+

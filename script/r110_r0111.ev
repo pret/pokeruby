@@ -1,0 +1,68 @@
+//====================================================================
+//						r110_r0111
+//						カラクリ屋敷ステージ８
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0111_event_data
+EVENT_DATA_END			/* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						合い言葉の書
+/********************************************************************/
+SCRIPT_LABEL			ev_karakuri_01_p01_r110_r0111
+	_TALK_START
+	_IFVAL_JUMP			WK_SCENE_R110_R0111,EQ,0,get_aikotoba_r110_r0111
+	_JUMP				look_aikotoba_mes_r110_r0101
+	_END
+
+//あいことばを入手
+get_aikotoba_r110_r0111:
+	_LDVAL				WK_SCENE_R110_R0111,1
+	_JUMP				get_aikotoba_mes_r110_r0101
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL			ev_elitem_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		ELITEM_06
+	_TRAINER_DATA2		msg_elitem_06_01
+	_TRAINER_DATA3		msg_elitem_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_06_03
+	_END
+
+SCRIPT_LABEL			ev_elitew_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		ELITEW_05
+	_TRAINER_DATA2		msg_elitew_05_01
+	_TRAINER_DATA3		msg_elitew_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_05_03
+	_END
+
+SCRIPT_LABEL			ev_elitem_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		ELITEM_07
+	_TRAINER_DATA2		msg_elitem_07_01
+	_TRAINER_DATA3		msg_elitem_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_07_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,116 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R108	4
+#define EXITNUM_FIELD_R108	1
+#define POSNUM_FIELD_R108	0
+#define BGNUM_FIELD_R108	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_swimmerm_06[];
+extern const u8	ev_swimmerw_06[];
+extern const u8	ev_swimmerm_07[];
+extern const u8	ev_swimmerw_07[];
+
+const evObjData	OBJ_field_r108[] =
+{
+	{
+		TR_SWIMMERM_06,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x000d,		//Ypos
+		0x01,		//Height
+		MV_RTUL,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x3,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerm_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERW_06,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0006,		//Ypos
+		0x01,		//Height
+		MV_V,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerw_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERM_07,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0032,		//Xpos
+		0x000a,		//Ypos
+		0x01,		//Height
+		MV_SPINR,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerm_07,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERW_07,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0024,		//Xpos
+		0x000c,		//Ypos
+		0x01,		//Height
+		MV_RTLU,		//Obj Mode Type
+		0x6,		//Move Limit X
+		0x3,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerw_07,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_field_r108[] =
+{
+	{
+		0x001d,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		CAVE_D1701_MAT01,		//Door ID
+		CAVE_D1701,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_r108[] =
+{
+	{
+		0x0026,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		husiginaame_86,		//Script
+	},
+
+};
+
+const SXY_DATA	field_r108_sxy_data =
+{
+OBJNUM_FIELD_R108,			// field obj max
+EXITNUM_FIELD_R108,		// exit max
+POSNUM_FIELD_R108,			// pos event max
+BGNUM_FIELD_R108,			// bg event max
+OBJ_field_r108,			// field obj data
+EXIT_field_r108,			// exit data
+NULL,			// pos event data
+BG_field_r108,				// bg event data
+};

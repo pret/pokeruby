@@ -1,0 +1,48 @@
+// ●ルネシティ　フレンドリィショップ
+
+
+// ●大男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_c108_fs01
+msg_bigman1_01_p01_c108_fs01:
+	.byte	PO_,I_,N_,TO_,A_,TTU_,PU_,ha_,spc_,su_,go_,i_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,ta_,ttu_,te_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	PA_,WA_,bou_,PO_,I_,N_,TO_,wo_,spc_,hu_,ya_,se_,ru_,ka_,ra_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●超古代ポケモン覚醒中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p02_c108_fs01
+msg_bigman1_01_p02_c108_fs01:
+	.byte	i_,ttu_,ta_,i_,spc_,na_,ni_,ga_,spc_,o_,ko_,ttu_,te_,ru_,n_,da_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c108_fs01
+msg_gentlem1_01_p01_c108_fs01:
+	.byte	ka_,i_,hu_,ku_,no_,ku_,su_,ri_,spc_,go_,zo_,n_,zi_,spc_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ta_,i_,ri_,yyo_,ku_,spc_,ze_,n_,ka_,i_,gyoe_
+	.byte	CR_
+	.byte	zi_,yyo_,u_,ta_,i_,spc_,i_,zi_,yyo_,u_,mo_,spc_,su_,be_,te_,spc_,ka_,i_,hu_,ku_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,sa_,ni_,spc_,yu_,me_,no_,yo_,u_,na_,spc_,do_,u_,gu_,spc_,na_,no_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●超古代ポケモン覚醒中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_c108_fs01
+msg_gentlem1_01_p02_c108_fs01:
+	.byte	ko_,no_,spc_,te_,n_,ki_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,ni_,ka_,ga_,spc_,me_,za_,me_,ta_,no_,ka_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

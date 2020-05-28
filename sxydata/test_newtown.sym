@@ -1,0 +1,18 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 12
+#define TR_PRINCESS_04	1
+#define TR_FUTAGO_05	2
+#define TR_FUTAGO_06	3
+#define TR_MOUNT_09	4
+#define TR_PRINCESS_03	5
+#define TR_MOUNT_08	6
+#define BOY1_01_TEST_NEWTOWN	7
+#define GIRL1_01_TEST_NEWTOWN	8
+#define TR_FUTAGO_07	9
+#define TR_FUTAGO_08	10
+#define BOY1_02_TEST_NEWTOWN	11
+#define MIDDLEM1_01_TEST_NEWTOWN	12
+
+//Exit ID = 1
+#define TEST_NEWTOWN_DOOR01	0

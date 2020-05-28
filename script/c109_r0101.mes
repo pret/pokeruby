@@ -1,0 +1,53 @@
+// ●ポケモンリーグ　第１の部屋
+
+
+// ●カゲツ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kagetsu_01_p01_c109_r0101
+msg_kagetsu_01_p01_c109_r0101:
+	.byte	yo_,u_,ko_,so_,spc_,TI_,YYA_,RE_,N_,ZI_,YYA_,bou_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ha_,spc_,si_,te_,n_,no_,u_,no_,spc_,KA_,GE_,TU_
+	.byte	NORMAL_WAIT_
+	.byte	u_,bou_,n_,spc_,i_,i_,spc_,ka_,o_,spc_,si_,te_,ru_,na_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,ta_,no_,si_,ma_,se_,te_,spc_,ku_,re_,so_,u_,da_,zo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	i_,i_,zo_,gyoe_,spc_,i_,i_,spc_,ka_,n_,zi_,da_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,bou_,si_,gyoe_,spc_,o_,re_,to_,spc_,o_,ma_,e_,spc_,to_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_,de_,si_,ka_,spc_,de_,ki_,na_,i_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,ta_,ka_,i_,wo_,spc_,ta_,no_,si_,mu_,to_,spc_,si_,yo_,u_,ze_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘敗北のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kagetsu_01_p02_c109_r0101
+msg_kagetsu_01_p02_c109_r0101:
+	.byte	o_,ya_,o_,ya_,spc_,ma_,ke_,ti_,ma_,ttu_,ta_,yo_
+	.byte	CR_
+	.byte	ma_,ttu_,spc_,ta_,no_,si_,n_,da_,ka_,ra_,spc_,i_,i_,n_,da_,ke_,do_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘モードを抜けてのセリフ
+// ●メッセージウインドウ自動でオープン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kagetsu_01_p03_c109_r0101
+msg_kagetsu_01_p03_c109_r0101:
+	.byte	ma_,ke_,ta_,spc_,o_,re_,ka_,ra_,spc_,hi_,to_,ko_,to_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,na_,ra_,spc_,mo_,ttu_,to_,spc_,sa_,ki_,ni_,spc_,su_,su_,me_,ru_,ze_
+	.byte	CR_
+	.byte	sa_,a_,spc_,tu_,gi_,no_,spc_,he_,ya_,ni_,spc_,i_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,ta_,ka_,i_,wo_,spc_,ta_,no_,si_,n_,de_,spc_,ki_,na_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけたときも同じ

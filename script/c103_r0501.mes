@@ -1,0 +1,68 @@
+// ●キンセツシティ　民家１
+
+
+// ●サラリーウーマン１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_c103_r0501
+msg_workerw1_01_p01_c103_r0501:
+	.byte	a_,ta_,si_,ga_,spc_,zi_,te_,n_,si_,yya_,ni_,spc_,no_,re_,ta_,ra_
+	.byte	CR_
+	.byte	KA_,I_,NA_,ni_,spc_,i_,ku_,no_,mo_,spc_,su_,gu_,na_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,KA_,I_,NA_,no_,spc_,HU_,RE_,N_,DO_,RI_,II_,SI_,YYO_,TTU_,PU_,de_
+	.byte	CR_
+	.byte	HA_,bou_,BA_,bou_,ME_,bou_,RU_,wo_,spc_,ka_,e_,ru_,no_,ni_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ハーバーメール」（No）を持っていると
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p02_c103_r0501
+msg_workerw1_01_p02_c103_r0501:
+	.byte	so_,re_,gyoe_,spc_,HA_,bou_,BA_,bou_,ME_,bou_,RU_,de_,si_,yyo_,gyoe_
+	.byte	CR_
+	.byte	KO_,I_,N_,KE_,bou_,SU_,to_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,ku_,re_,na_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw1_01_p03_c103_r0501:
+// ●「いいえ」→msg_workerw1_01_p05_c103_r0501:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p03_c103_r0501
+msg_workerw1_01_p03_c103_r0501:
+	.byte	u_,re_,si_,i_,gyoe_
+	.byte	CR_
+	.byte	zi_,yya_,spc_,KO_,I_,N_,KE_,bou_,SU_,to_,spc_,ko_,u_,ka_,n_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バッグから「ハーバーメール」削除
+// ●アイテム入手ナレーション
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p04_c103_r0501
+msg_workerw1_01_p04_c103_r0501:
+	.byte	KO_,I_,N_,KE_,bou_,SU_,ga_,spc_,a_,re_,ba_,spc_,GE_,bou_,MU_,KO_,bou_,NA_,bou_,de_
+	.byte	CR_
+	.byte	RU_,bou_,RE_,TTU_,TO_,ya_,spc_,SU_,RO_,TTU_,TO_,wo_,spc_,ta_,no_,si_,me_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●以降、このメッセージを繰り返し
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p05_c103_r0501
+msg_workerw1_01_p05_c103_r0501:
+	.byte	so_,u_,tenten_,tenten_,spc_,za_,n_,ne_,n_,spc_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,I_,N_,KE_,bou_,SU_,ga_,spc_,a_,re_,ba_,spc_,GE_,bou_,MU_,KO_,bou_,NA_,bou_,de_
+	.byte	CR_
+	.byte	RU_,bou_,RE_,TTU_,TO_,ya_,spc_,SU_,RO_,TTU_,TO_,wo_,spc_,ta_,no_,si_,me_,ru_,no_,ni_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

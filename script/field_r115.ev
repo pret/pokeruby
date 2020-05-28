@@ -1,0 +1,140 @@
+//====================================================================
+//							field_r115
+//						フィールド・ロード115
+//====================================================================
+
+//--------------------------------------------------------------------
+//				  マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r115_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							女性1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_field_r115
+	_EASY_OBJ_MSG	msg_woman1_01_p01_field_r115
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r115
+	_EASY_MSG       msg_kanban_01_p01_field_r115
+	_END
+
+
+/********************************************************************/
+/*							看板									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r115
+	_EASY_MSG       msg_kanban_02_p01_field_r115
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_expertm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	EXPERTM_01
+	_TRAINER_DATA2	msg_expertm_01_01
+	_TRAINER_DATA3	msg_expertm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_expertm_01
+	_TRAINER_EASY_MSG	msg_expertm_01_03
+	_END
+
+_revenge_expertm_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	EXPERTM_01
+	_TRAINER_DATA2	msg_expertm_01_04
+	_TRAINER_DATA3	msg_expertm_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_expertm_01_06
+	_END
+
+SCRIPT_LABEL	ev_karate_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_04
+	_TRAINER_DATA2	msg_karate_04_01
+	_TRAINER_DATA3	msg_karate_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_04_03
+	_END
+
+SCRIPT_LABEL	ev_karate_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_05
+	_TRAINER_DATA2	msg_karate_05_01
+	_TRAINER_DATA3	msg_karate_05_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_karate_05
+	_TRAINER_EASY_MSG	msg_karate_05_03
+	_END
+
+_revenge_karate_05:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_05
+	_TRAINER_DATA2	msg_karate_05_04
+	_TRAINER_DATA3	msg_karate_05_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_05_06
+	_END
+
+SCRIPT_LABEL	ev_battleg_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BATTLEG_03
+	_TRAINER_DATA2	msg_battleg_03_01
+	_TRAINER_DATA3	msg_battleg_03_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_battleg_03
+	_TRAINER_EASY_MSG	msg_battleg_03_03
+	_END
+
+_revenge_battleg_03:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	BATTLEG_03
+	_TRAINER_DATA2	msg_battleg_03_04
+	_TRAINER_DATA3	msg_battleg_03_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_battleg_03_06
+	_END
+
+SCRIPT_LABEL	ev_collector_02
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	COLLECTOR_02
+	_TRAINER_DATA2	msg_collector_02_01
+	_TRAINER_DATA3	msg_collector_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_collector_02_03
+	_END
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	COLLECTOR_03
+	_TRAINER_DATA2	msg_collector_03_01
+	_TRAINER_DATA3	msg_collector_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_collector_03_03
+	_END
+#endif
+

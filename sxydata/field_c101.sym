@@ -1,0 +1,20 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 9
+#define WOMAN2_01_FIELD_C101	1
+#define MITSURU_01_FIELD_C101	2
+#define BOY1_01_FIELD_C101	3
+#define GENTLEM1_01_FIELD_C101	4
+#define MIDDLEM1_03_FIELD_C101	5
+#define MIDDLEW1_03_FIELD_C101	6
+#define BALL1_39	7
+#define BALL1_40	8
+#define BOY2_01_FIELD_C101	9
+
+//Exit ID = 6
+#define FIELD_C101_DOOR05	0
+#define FIELD_C101_DOOR01	1
+#define FIELD_C101_DOOR02	2
+#define FIELD_C101_DOOR04	3
+#define FIELD_C101_DOOR06	4
+#define FIELD_C101_DOOR03	5

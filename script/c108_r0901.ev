@@ -1,0 +1,165 @@
+//====================================================================
+//
+//						c108_r0901
+// ポケモンの大きさを測るおやじ
+// 　123番道路の、木の実じいさんのいるところのとなりの家。
+// 　中には、おやじが一人。
+// 　ポケモンの大きさに、とても興味があるが
+// 　特定の好きなポケモン以外には、まったく興味がない！
+// 　（ここでは、とりあえずでキノココ）
+// 　興味のあるポケモンを持っていくと、大きさを測ってくれる。
+// 　ポケモンの大きさは、パワー乱数とＩＤを使って算出される。
+// 　（別書類参照）
+// 　初期記録が設定されていて
+// 　それを上回ると、ごほうび（未定）をもらえる。
+// 　上回った記録は、それぞれセーブデータに記録される。
+// 　セーブされるのは、記録。
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c108_r0901_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*					キノココ計測オヤジ								*/
+/********************************************************************/
+SCRIPT_LABEL		ev_hill1_01_size_oyaji
+	_PROGRAM			KINOKOKO_OYAJI_SIZE_MSGSET
+
+	_TALK_OBJ_START
+	_TALK_KEYWAIT		msg_hill1_01_p01_c108_r0901
+
+	_PROGRAM			NAME_POKE_LIST
+	_STOP_SCRIPT
+
+	_LDWK				ANSWORK,PARAM0
+	_IFVAL_JUMP			ANSWORK,EQ,0xff, _kinokoko_size_oyaji_cancel
+
+	_PROGRAM			KINOKOKO_OYAJI_SIZE_CHECK
+	_IFVAL_JUMP			ANSWORK,EQ,1,_kinokoko_size_oyaji_not_target
+	_IFVAL_JUMP			ANSWORK,EQ,2,_kinokoko_size_oyaji_not_new_record
+	_IFVAL_JUMP			ANSWORK,EQ,3,_kinokoko_size_oyaji_new_record
+	
+	_TALK_OBJ_END
+	_END
+
+/* キャンセル */
+_kinokoko_size_oyaji_cancel:
+	_TALK_KEYWAIT		msg_hill1_01_p07_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+// 違うポケモンを選択
+_kinokoko_size_oyaji_not_target:
+	_TALK_KEYWAIT		msg_hill1_01_p06_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+/* 記録更新できなかった */
+_kinokoko_size_oyaji_not_new_record:
+	_TALK_KEYWAIT		msg_hill1_01_p05_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+/* 記録更新！！ */
+_kinokoko_size_oyaji_new_record:
+//RAMの記録更新
+	_TALK_KEYWAIT		msg_hill1_01_p02_c108_r0901
+	_ITEM_EVENT			ITEM_PIIPIIEIDAA,1
+	_IF_ZERO_JUMP		_kinokoko_size_oyaji_item_full
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+_kinokoko_size_oyaji_item_full:
+	_TALK_KEYWAIT		msg_hill1_01_p04_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/*					ドジョッチ計測オヤジ							*/
+/********************************************************************/
+SCRIPT_LABEL		ev_fishing1_01_size_oyaji
+	_PROGRAM			NAMAZO_OYAJI_SIZE_MSGSET
+
+	_TALK_OBJ_START
+	_TALK_KEYWAIT		msg_fishing1_01_p01_c108_r0901
+
+	_PROGRAM			NAME_POKE_LIST
+	_STOP_SCRIPT
+
+	_LDWK				ANSWORK,PARAM0
+	_IFVAL_JUMP			ANSWORK,EQ,0xff,_namazo_size_oyaji_cancel
+
+	_PROGRAM			NAMAZO_OYAJI_SIZE_CHECK
+	_IFVAL_JUMP			ANSWORK,EQ,1,_namazo_size_oyaji_not_target
+	_IFVAL_JUMP			ANSWORK,EQ,2,_namazo_size_oyaji_not_new_record
+	_IFVAL_JUMP			ANSWORK,EQ,3,_namazo_size_oyaji_new_record
+	
+	_TALK_OBJ_END
+	_END
+
+/* キャンセル */
+_namazo_size_oyaji_cancel:
+	_TALK_KEYWAIT		msg_fishing1_01_p07_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+// 違うポケモンを選択
+_namazo_size_oyaji_not_target:
+	_TALK_KEYWAIT		msg_fishing1_01_p06_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+/* 記録更新できなかった */
+_namazo_size_oyaji_not_new_record:
+	_TALK_KEYWAIT		msg_fishing1_01_p05_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+/* 記録更新！！ */
+_namazo_size_oyaji_new_record:
+//RAMの記録更新
+	_TALK_KEYWAIT		msg_fishing1_01_p02_c108_r0901
+	_ITEM_EVENT			ITEM_PIIPIIEIDAA,1
+	_IF_ZERO_JUMP		_namazo_size_oyaji_item_full
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+_namazo_size_oyaji_item_full:
+	_TALK_KEYWAIT		msg_fishing1_01_p04_c108_r0901
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*			キノココの記録が書かれた張り紙(BG)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_panel1_01_p02_c108_r0901
+	_PROGRAM			KINOKOKO_OYAJI_SIZE_MSGSET
+	_TALK_START
+	_TALK_KEYWAIT		msg_panel1_01_p02_c108_r0901
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*			ナマゾの記録が書かれた張り紙(BG)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_panel1_02_p02_c108_r0901
+	_PROGRAM			NAMAZO_OYAJI_SIZE_MSGSET
+	_TALK_START
+	_TALK_KEYWAIT		msg_panel1_02_p02_c108_r0901
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

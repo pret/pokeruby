@@ -1,0 +1,340 @@
+/********************************************************************/
+/*                                                                  */
+/*				スタッフロールデータ　								*/
+/*                                                                  */
+/********************************************************************/
+static	const u8	str_dummy[]	={EOM_}; 
+
+static	const u8	str_title[]		= {
+#if (PM_VERSION == VERSION_SAPPHIRE)
+CTRL_,C_PAL_,9,PO_,KE_,TTU_,TO_,MO_,N_,SU_,TA_,bou_,spc_,SA_,HU_,AA_,I_,A_,
+#elif (PM_VERSION == VERSION_RUBY)
+CTRL_,C_PAL_,9,PO_,KE_,TTU_,TO_,MO_,N_,SU_,TA_,bou_,spc_,RU_,BI_,bou_,
+#endif
+EOM_
+};
+static	const u8	str_list[]	= {CTRL_,C_PAL_,9,SU_,TA_,TTU_,HU_,RI_,SU_,TO_,EOM_};
+
+static	const u8	str_exdir[]	= 
+{CTRL_,C_PAL_,9,E_,GU_,ZE_,KU_,TE_,II_,BU_,spc_,DE_,II_,RE_,KU_,TA_,bou_,EOM_};
+static	const u8	str_dir[]		= 
+{CTRL_,C_PAL_,9,DE_,II_,RE_,KU_,TA_,bou_,EOM_};
+static	const u8	str_artdir[]	= 
+{CTRL_,C_PAL_,9,A_,bou_,TO_,spc_,DE_,II_,RE_,KU_,TA_,bou_,EOM_};
+static	const u8	str_btldir[]	= 
+{CTRL_,C_PAL_,9,BA_,TO_,RU_,spc_,DE_,II_,RE_,KU_,TA_,bou_,EOM_};
+static	const u8	str_mprog[]	= 
+{CTRL_,C_PAL_,9,ME_,I_,N_,spc_,PU_,RO_,GU_,RA_,MU_,EOM_};
+static	const u8	str_bprog[]	= 
+{CTRL_,C_PAL_,9,BA_,TO_,RU_,spc_,SI_,SU_,TE_,MU_,spc_,PU_,RO_,GU_,RA_,MU_,EOM_};
+static	const u8	str_fprog[]	= 
+{CTRL_,C_PAL_,9,HU_,II_,bou_,RU_,DO_,spc_,SI_,SU_,TE_,MU_,spc_,PU_,RO_,GU_,RA_,MU_,EOM_};
+static	const u8	str_prog[]	= 
+{CTRL_,C_PAL_,9,PU_,RO_,GU_,RA_,MU_,EOM_};
+static	const u8	str_mgraph[]	= 
+{CTRL_,C_PAL_,9,ME_,I_,N_,spc_,GU_,RA_,HU_,II_,TTU_,KU_,spc_,DE_,ZA_,I_,N_,EOM_};
+static	const u8	str_graph[]	= 
+{CTRL_,C_PAL_,9,PO_,KE_,MO_,N_,spc_,
+CTRL_,C_EXFONT_,Plus__,spc_,GU_,RA_,HU_,II_,TTU_,KU_,spc_,DE_,ZA_,I_,N_,EOM_};
+static	const u8	str_pdez[]	= 
+{CTRL_,C_PAL_,9,PO_,KE_,MO_,N_,spc_,DE_,ZA_,I_,N_,EOM_};
+static	const u8	str_music[]	= 
+{CTRL_,C_PAL_,9,o_,n_,ga_,ku_,EOM_};
+static	const u8	str_voice[]	= 
+{CTRL_,C_PAL_,9,SA_,U_,N_,DO_,spc_,E_,HU_,EE_,KU_,TO_,spc_,
+CTRL_,C_EXFONT_,Plus__,spc_,PO_,KE_,MO_,N_,spc_,BO_,I_,SU_,EOM_};
+static	const u8	str_gamedez[]	= 
+{CTRL_,C_PAL_,9,GE_,bou_,MU_,spc_,DE_,ZA_,I_,N_,EOM_};
+static	const u8	str_scenario_p[]= 
+{CTRL_,C_PAL_,9,SI_,NA_,RI_,O_,PU_,RO_,TTU_,TO_,EOM_};
+static	const u8	str_scenario[]= 
+{CTRL_,C_PAL_,9,SI_,NA_,RI_,O_,EOM_};
+static	const u8	str_script[]	=
+{CTRL_,C_PAL_,9,SU_,KU_,RI_,PU_,TO_,spc_,se_,ttu_,te_,i_,EOM_};
+static	const u8	str_map[]	= 
+{CTRL_,C_PAL_,9,MA_,TTU_,PU_,spc_,DE_,ZA_,I_,N_,EOM_};
+static	const u8	str_mapdata[]	=
+{CTRL_,C_PAL_,9,MA_,TTU_,PU_,DE_,bou_,TA_,spc_,se_,ttu_,te_,i_,EOM_};
+static	const u8	str_param[]	=
+{CTRL_,C_PAL_,9,PA_,RA_,ME_,bou_,TA_,bou_,spc_,se_,ttu_,te_,i_,EOM_};
+static	const u8	str_zukan[]	=
+{CTRL_,C_PAL_,9,zu_,ka_,n_,spc_,TE_,KI_,SU_,TO_,EOM_};
+static	const u8	str_tool[]	=
+{CTRL_,C_PAL_,9,ka_,n_,ki_,yyo_,u_,spc_,
+CTRL_,C_EXFONT_,Plus__,spc_,TU_,bou_,RU_,spc_,PU_,RO_,GU_,RA_,MU_,EOM_};
+static	const u8	str_debug[]	= 
+{CTRL_,C_PAL_,9,DE_,BA_,TTU_,GU_,PU_,RE_,I_,EOM_};
+static	const u8	str_spthx[]	= 
+{CTRL_,C_PAL_,9,SU_,PE_,SI_,YYA_,RU_,SA_,N_,KU_,SU_,EOM_};
+static	const u8	str_code[]	= 
+{CTRL_,C_PAL_,9,KO_,bou_,DE_,II_,NE_,bou_,TA_,bou_,EOM_};
+static	const u8	str_prod[]	= 
+{CTRL_,C_PAL_,9,PU_,RO_,DE_,YYU_,bou_,SA_,bou_,EOM_};
+static	const u8	str_exprod[]	= 
+{CTRL_,C_PAL_,9,E_,GU_,ZE_,KU_,TE_,II_,BU_,spc_,PU_,RO_,DE_,YYU_,bou_,SA_,bou_,EOM_};
+static	const u8	str_infowork[]	= 
+{CTRL_,C_PAL_,9,zi_,yyo_,u_,ho_,u_,spc_,ka_,n_,ri_,EOM_};
+static	const u8	str_manage[]	= 
+{CTRL_,C_PAL_,9,HU_,AA_,N_,KU_,SI_,YYO_,N_,spc_,MA_,NE_,bou_,ZI_,YYA_,bou_,EOM_};
+static	const u8	str_tenji[]	= 
+{CTRL_,C_PAL_,9,te_,n_,zi_,spc_,ka_,n_,si_,yyu_,u_,EOM_};
+
+static	const u8	str_tajiri[]	= {ta_,zi_,ri_,spc_,sa_,to_,si_,EOM_};
+static	const u8	str_jun[]		= {ma_,su_,da_,spc_,zi_,yyu_,n_,i_,ti_,EOM_};
+static	const u8	str_ken[]		= {su_,gi_,mo_,ri_,spc_,ke_,n_,EOM_};
+static	const u8	str_sige[]		= {mo_,ri_,mo_,to_,spc_,si_,ge_,ki_,EOM_};
+static	const u8	str_tetsu[]		= {wa_,ta_,na_,be_,spc_,te_,tu_,ya_,EOM_};
+static	const u8	str_soga[]		= {so_,ga_,be_,spc_,hi_,sa_,si_,EOM_};
+static	const u8	str_tama[]		= {ta_,ma_,da_,spc_,so_,u_,su_,ke_,EOM_};
+static	const u8	str_mori[]		= {mo_,ri_,spc_,a_,ki_,to_,EOM_};
+static	const u8	str_kagaya[]	= {ka_,ga_,ya_,spc_,ke_,i_,ta_,EOM_};
+static	const u8	str_matsuda[]	= {ma_,tu_,da_,spc_,yo_,si_,no_,ri_,EOM_};
+static	const u8	str_nakamura[]	= {na_,ka_,mu_,ra_,spc_,hi_,ro_,yu_,ki_,EOM_};
+static	const u8	str_taya[]		= {ta_,ya_,spc_,ma_,sa_,o_,EOM_};
+static	const u8	str_nohara[]	= {no_,ha_,ra_,spc_,sa_,to_,si_,EOM_};
+static	const u8	str_tomo[]		= {o_,o_,ta_,spc_,to_,mo_,mi_,ti_,EOM_};
+static	const u8	str_iwasawa[]	= {i_,wa_,sa_,wa_,spc_,mi_,yu_,ki_,EOM_};
+static	const u8	str_karate[]	= {o_,o_,ta_,spc_,ta_,ke_,no_,ri_,EOM_};
+static	const u8	str_piro[]		= {yo_,si_,da_,spc_,hi_,ro_,no_,bu_,EOM_};
+static	const u8	str_fujiwara[]	= {hu_,zi_,wa_,ra_,spc_,mo_,to_,hu_,mi_,EOM_};
+static	const u8	str_satoshi[]	= {o_,o_,ta_,spc_,sa_,to_,si_,EOM_};
+static	const u8	str_asuka[]		= {i_,wa_,si_,ta_,spc_,a_,su_,ka_,EOM_};
+static	const u8	str_tomita[]	= {to_,mi_,ta_,spc_,a_,i_,mi_,EOM_};
+static	const u8	str_unno[]		= {u_,n_,no_,spc_,ta_,ka_,o_,EOM_};
+static	const u8	str_eo[]		= {e_,o_,spc_,ka_,na_,ko_,EOM_};
+static	const u8	str_okutani[]	= {o_,ku_,ta_,ni_,spc_,zi_,yyu_,n_,EOM_};
+static	const u8	str_atsuko[]	= {ni_,si_,da_,spc_,a_,tu_,ko_,EOM_};
+static	const u8	str_muneo[]		= {sa_,i_,to_,u_,spc_,mu_,ne_,o_,EOM_};
+static	const u8	str_rena[]		= {yo_,si_,ka_,wa_,spc_,re_,na_,EOM_};
+static	const u8	str_go[]		= {i_,ti_,no_,se_,spc_,go_,u_,EOM_};
+static	const u8	str_aoki[]		= {a_,o_,ki_,spc_,mo_,ri_,ka_,zu_,EOM_};
+static	const u8	str_kabi[]		= {ni_,si_,no_,spc_,ko_,u_,zi_,EOM_};
+static	const u8	str_matsu[]		= {ma_,tu_,si_,ma_,spc_,ke_,n_,zi_,EOM_};
+static	const u8	str_tetsuji[]	= {o_,o_,ta_,spc_,te_,tu_,zi_,EOM_};
+static	const u8	str_satou[]		= {sa_,to_,u_,spc_,hi_,to_,mi_,EOM_};
+static	const u8	str_kawati[]	= {ka_,wa_,ti_,ma_,ru_,spc_,ta_,ke_,si_,EOM_};
+static	const u8	str_simo[]		= {si_,mo_,ya_,ma_,da_,spc_,te_,ru_,yu_,ki_,EOM_};
+static	const u8	str_oomori[]	= {o_,o_,mo_,ri_,spc_,si_,ge_,ru_,EOM_};
+static	const u8	str_takahashi[]	= {ta_,ka_,ha_,si_,spc_,ta_,da_,si_,EOM_};
+static	const u8	str_matsumiya[]	= {ma_,tu_,mi_,ya_,spc_,to_,si_,no_,bu_,EOM_};
+static	const u8	str_tomisawa[]	= {to_,mi_,sa_,wa_,spc_,a_,ki_,hi_,to_,EOM_};
+static	const u8	str_enomoto[]	= {e_,no_,mo_,to_,spc_,hi_,ro_,ki_,EOM_};
+static	const u8	str_terada[]	= {te_,ra_,da_,spc_,ka_,zu_,yu_,ki_,EOM_};
+static	const u8	str_sakurai[]	= {sa_,ku_,ra_,i_,spc_,yu_,u_,ri_,EOM_};
+static	const u8	str_sagawa[]	= {sa_,ga_,wa_,spc_,hi_,ro_,mi_,EOM_};
+static	const u8	str_tominaga[]	= {to_,mi_,na_,ga_,spc_,ke_,n_,zi_,EOM_};
+static	const u8	str_yoshio[]	= {ta_,zi_,ri_,spc_,yo_,si_,o_,EOM_};
+static	const u8	str_teiko[]		= {sa_,sa_,ki_,spc_,te_,i_,ko_,EOM_};
+static	const u8	str_hamano[]	= {ha_,ma_,no_,spc_,sa_,ti_,ko_,EOM_};
+static	const u8	str_kumatie[]	= {ma_,tu_,mi_,ya_,spc_,ti_,e_,EOM_};
+static	const u8	str_sinozaki[]	= {si_,no_,za_,ki_,spc_,a_,ki_,ko_,EOM_};
+static	const u8	str_fujii[]		= {hu_,zi_,i_,spc_,a_,tu_,ko_,EOM_};
+
+static	const u8	str_mario[]		= {SU_,bou_,PA_,bou_,MA_,RI_,O_,KU_,RA_,BU_,EOM_};
+static	const u8	str_tada[]		= {ta_,da_,spc_,a_,tu_,si_,EOM_};
+static	const u8	str_oonishi[]	= {o_,o_,ni_,si_,spc_,ta_,ka_,hi_,ro_,EOM_};
+static	const u8	str_okamura[]	= {o_,ka_,mu_,ra_,spc_,no_,ri_,hi_,de_,EOM_};
+static	const u8	str_nakamura_h[]= {na_,ka_,mu_,ra_,spc_,hi_,ro_,ki_,EOM_};
+static	const u8	str_uesugi[]	= {u_,e_,su_,gi_,spc_,hi_,ro_,yu_,ki_,EOM_};
+static	const u8	str_murakawa[]	= {mu_,ra_,ka_,wa_,spc_,te_,ru_,ki_,EOM_};
+static	const u8	str_kinashi[]	= {ki_,na_,si_,spc_,a_,ki_,ra_,EOM_};
+static	const u8	str_takizawa[]	= {ta_,ki_,za_,wa_,spc_,mi_,ti_,ko_,EOM_};
+static	const u8	str_takada[]	= {ta_,ka_,da_,spc_,ma_,ki_,ko_,EOM_};
+static	const u8	str_kondou[]	= {ko_,n_,do_,u_,spc_,ta_,ka_,na_,o_,EOM_};
+static	const u8	str_mashima[]	= {ma_,si_,ma_,spc_,a_,i_,EOM_};
+static	const u8	str_nomoto[]	= {no_,mo_,to_,spc_,ga_,ku_,zi_,EOM_};
+static	const u8	str_izushi[]	= {i_,zu_,si_,spc_,ta_,ke_,hi_,ro_,EOM_};
+static	const u8	str_yamagami[]	= {ya_,ma_,ga_,mi_,spc_,hi_,to_,si_,EOM_};
+static	const u8	str_watanabe[]	= {wa_,ta_,na_,be_,spc_,ki_,yyo_,u_,ko_,EOM_};
+static	const u8	str_nakano[]	= {na_,ka_,no_,spc_,ta_,ka_,o_,EOM_};
+static	const u8	str_jinnai[]	= {zi_,n_,na_,i_,spc_,hi_,ro_,yu_,ki_,EOM_};
+static	const u8	str_turu[]		= {tu_,ru_,spc_,hi_,ro_,a_,ki_,EOM_};
+static	const u8	str_ishihara[]	= {i_,si_,ha_,ra_,spc_,tu_,ne_,ka_,zu_,EOM_};
+static	const u8	str_iwata[]		= {i_,wa_,ta_,spc_,sa_,to_,ru_,EOM_};
+static	const u8	str_suyama[]	= {su_,ya_,ma_,spc_,ka_,zu_,ya_,EOM_};
+static	const u8	str_mitsuhara[]	= {mi_,tu_,ha_,ra_,spc_,sa_,to_,si_,EOM_};
+static	const u8	str_tosyo[]		= {ni_,ttu_,po_,n_,te_,n_,zi_,to_,si_,yyo_,ka_,n_,EOM_};
+static	const u8	str_komura[]	= {ko_,mu_,ra_,spc_,to_,mo_,ta_,ka_,EOM_};
+static	const u8	str_oohashi[]	= {o_,o_,ha_,si_,spc_,mi_,ki_,ko_,EOM_};
+
+/********************************************************************/
+static	const STAFFROLL_DATA	strd_dummy		= { 0,str_dummy}; 
+#if (PM_VERSION == VERSION_SAPPHIRE)
+static	const STAFFROLL_DATA	strd_title		= { 7,str_title};
+#elif (PM_VERSION == VERSION_RUBY)
+static	const STAFFROLL_DATA	strd_title		= { 8,str_title};
+#endif
+static	const STAFFROLL_DATA	strd_list		= {11,str_list};
+static	const STAFFROLL_DATA	strd_exdir		= { 8,str_exdir};
+static	const STAFFROLL_DATA	strd_dir		= {12,str_dir};
+static	const STAFFROLL_DATA	strd_artdir		= {10,str_artdir};
+static	const STAFFROLL_DATA	strd_btldir		= {10,str_btldir};
+static	const STAFFROLL_DATA	strd_mprog		= {10,str_mprog};
+static	const STAFFROLL_DATA	strd_bprog		= { 8,str_bprog};
+static	const STAFFROLL_DATA	strd_fprog		= { 7,str_fprog};
+static	const STAFFROLL_DATA	strd_prog		= {12,str_prog};
+static	const STAFFROLL_DATA	strd_mgraph		= { 7,str_mgraph};
+static	const STAFFROLL_DATA	strd_graph		= { 6,str_graph};
+static	const STAFFROLL_DATA	strd_pdez		= {10,str_pdez};
+static	const STAFFROLL_DATA	strd_music		= {13,str_music};
+static	const STAFFROLL_DATA	strd_voice		= { 4,str_voice};
+static	const STAFFROLL_DATA	strd_gamedez	= {11,str_gamedez};
+static	const STAFFROLL_DATA	strd_scena_p	= {11,str_scenario_p};
+static	const STAFFROLL_DATA	strd_scenario	= {13,str_scenario};
+static	const STAFFROLL_DATA	strd_script		= {10,str_script};
+static	const STAFFROLL_DATA	strd_map		= {11,str_map};
+static	const STAFFROLL_DATA	strd_mapdata	= { 9,str_mapdata};
+static	const STAFFROLL_DATA	strd_param		= { 9,str_param};
+static	const STAFFROLL_DATA	strd_zukan		= {11,str_zukan};
+static	const STAFFROLL_DATA	strd_tool		= { 6,str_tool};
+static	const STAFFROLL_DATA	strd_debug		= {11,str_debug};
+static	const STAFFROLL_DATA	strd_spthx		= {10,str_spthx}; 
+static	const STAFFROLL_DATA	strd_code		= {11,str_code}; 
+static	const STAFFROLL_DATA	strd_prod		= {11,str_prod};  
+static	const STAFFROLL_DATA	strd_exprod		= { 7,str_exprod};  
+static	const STAFFROLL_DATA	strd_infowork	= {10,str_infowork}; 
+static	const STAFFROLL_DATA	strd_manage		= { 8,str_manage}; 
+static	const STAFFROLL_DATA	strd_tenji		= {10,str_tenji};
+
+static	const STAFFROLL_DATA	strd_tajiri		= {11,str_tajiri};
+static	const STAFFROLL_DATA	strd_jun		= {11,str_jun};
+static	const STAFFROLL_DATA	strd_ken		= {11,str_ken};
+static	const STAFFROLL_DATA	strd_sige		= {11,str_sige};
+static	const STAFFROLL_DATA	strd_tetsu		= {11,str_tetsu};
+static	const STAFFROLL_DATA	strd_soga		= {11,str_soga};
+static	const STAFFROLL_DATA	strd_tama		= {11,str_tama};
+static	const STAFFROLL_DATA	strd_mori		= {11,str_mori};
+static	const STAFFROLL_DATA	strd_kagaya		= {11,str_kagaya};
+static	const STAFFROLL_DATA	strd_matsuda	= {11,str_matsuda};
+static	const STAFFROLL_DATA	strd_nakamura	= {11,str_nakamura};
+static	const STAFFROLL_DATA	strd_taya		= {11,str_taya};
+static	const STAFFROLL_DATA	strd_nohara		= {11,str_nohara};
+static	const STAFFROLL_DATA	strd_tomo		= {11,str_tomo};
+static	const STAFFROLL_DATA	strd_iwasawa	= {11,str_iwasawa};
+static	const STAFFROLL_DATA	strd_karate		= {11,str_karate};
+static	const STAFFROLL_DATA	strd_piro		= {11,str_piro};
+static	const STAFFROLL_DATA	strd_fujiwara	= {11,str_fujiwara};
+static	const STAFFROLL_DATA	strd_satoshi	= {11,str_satoshi};
+static	const STAFFROLL_DATA	strd_asuka		= {11,str_asuka};
+static	const STAFFROLL_DATA	strd_tomita		= {11,str_tomita};
+static	const STAFFROLL_DATA	strd_unno		= {11,str_unno};
+static	const STAFFROLL_DATA	strd_eo			= {11,str_eo};
+static	const STAFFROLL_DATA	strd_okutani	= {11,str_okutani};
+static	const STAFFROLL_DATA	strd_atsuko		= {11,str_atsuko};
+static	const STAFFROLL_DATA	strd_muneo		= {11,str_muneo};
+static	const STAFFROLL_DATA	strd_rena		= {11,str_rena};
+static	const STAFFROLL_DATA	strd_go			= {11,str_go};
+static	const STAFFROLL_DATA	strd_aoki		= {11,str_aoki};
+static	const STAFFROLL_DATA	strd_kabi		= {11,str_kabi};
+static	const STAFFROLL_DATA	strd_matsu		= {11,str_matsu};
+static	const STAFFROLL_DATA	strd_tetsuji	= {11,str_tetsuji};
+static	const STAFFROLL_DATA	strd_satou		= {11,str_satou};
+static	const STAFFROLL_DATA	strd_kawati		= {11,str_kawati};
+static	const STAFFROLL_DATA	strd_simo		= {11,str_simo};
+static	const STAFFROLL_DATA	strd_oomori		= {11,str_oomori};
+static	const STAFFROLL_DATA	strd_takahashi	= {11,str_takahashi};
+static	const STAFFROLL_DATA	strd_matsumiya	= {11,str_matsumiya};
+static	const STAFFROLL_DATA	strd_tomisawa	= {11,str_tomisawa};
+static	const STAFFROLL_DATA	strd_enomoto	= {11,str_enomoto};
+static	const STAFFROLL_DATA	strd_terada		= {11,str_terada};
+static	const STAFFROLL_DATA	strd_sakurai	= {11,str_sakurai};
+static	const STAFFROLL_DATA	strd_sagawa		= {11,str_sagawa};
+static	const STAFFROLL_DATA	strd_tominaga	= {11,str_tominaga};
+static	const STAFFROLL_DATA	strd_yoshio		= {11,str_yoshio};
+static	const STAFFROLL_DATA	strd_teiko		= {11,str_teiko};
+static	const STAFFROLL_DATA	strd_hamano		= {11,str_hamano};
+static	const STAFFROLL_DATA	strd_kumatie	= {11,str_kumatie};
+static	const STAFFROLL_DATA	strd_sinozaki	= {11,str_sinozaki};
+static	const STAFFROLL_DATA	strd_fujii		= {11,str_fujii};
+
+static	const STAFFROLL_DATA	strd_mario		= {11,str_mario};
+static	const STAFFROLL_DATA	strd_tada		= {11,str_tada};
+static	const STAFFROLL_DATA	strd_oonishi	= {11,str_oonishi};
+static	const STAFFROLL_DATA	strd_okamura	= {11,str_okamura};
+static	const STAFFROLL_DATA	strd_nakamura_h	= {11,str_nakamura_h};
+static	const STAFFROLL_DATA	strd_uesugi		= {11,str_uesugi};
+static	const STAFFROLL_DATA	strd_murakawa	= {11,str_murakawa};
+static	const STAFFROLL_DATA	strd_kinashi	= {11,str_kinashi};
+static	const STAFFROLL_DATA	strd_takizawa	= {11,str_takizawa};
+static	const STAFFROLL_DATA	strd_takada		= {11,str_takada};
+static	const STAFFROLL_DATA	strd_kondou		= {11,str_kondou};
+static	const STAFFROLL_DATA	strd_mashima	= {11,str_mashima};
+static	const STAFFROLL_DATA	strd_nomoto		= {11,str_nomoto};
+static	const STAFFROLL_DATA	strd_izushi		= {11,str_izushi};
+static	const STAFFROLL_DATA	strd_yamagami	= {11,str_yamagami};
+static	const STAFFROLL_DATA	strd_watanabe	= {11,str_watanabe};
+static	const STAFFROLL_DATA	strd_nakano		= {11,str_nakano};
+static	const STAFFROLL_DATA	strd_jinnai		= {11,str_jinnai};
+static	const STAFFROLL_DATA	strd_turu		= {11,str_turu};
+static	const STAFFROLL_DATA	strd_ishihara	= {11,str_ishihara};
+static	const STAFFROLL_DATA	strd_iwata		= {11,str_iwata};
+static	const STAFFROLL_DATA	strd_suyama		= {11,str_suyama};
+static	const STAFFROLL_DATA	strd_mitsuhara	= {11,str_mitsuhara};
+static	const STAFFROLL_DATA	strd_tosyo		= { 9,str_tosyo};
+static	const STAFFROLL_DATA	strd_komura		= {11,str_komura};
+static	const STAFFROLL_DATA	strd_oohashi	= {11,str_oohashi};
+
+/********************************************************************/
+#define	STAFFROLL_LISTCNT	(42)
+
+static	const STAFFROLL_LIST	StaffRollList[] = {
+{{&strd_dummy	,&strd_title	,&strd_list		,&strd_dummy	,&strd_dummy}},		//0
+{{&strd_dummy	,&strd_dir		,&strd_jun		,&strd_dummy	,&strd_dummy}},		//1
+{{&strd_dummy	,&strd_artdir	,&strd_ken		,&strd_dummy	,&strd_dummy}},		//2
+{{&strd_dummy	,&strd_btldir	,&strd_sige		,&strd_dummy	,&strd_dummy}},		//3
+{{&strd_dummy	,&strd_mprog	,&strd_tetsu	,&strd_dummy	,&strd_dummy}},		//4*
+{{&strd_bprog	,&strd_soga		,&strd_fprog	,&strd_tama		,&strd_dummy}},		//5
+{{&strd_prog	,&strd_mori		,&strd_kagaya	,&strd_matsuda	,&strd_dummy}},		//6
+{{&strd_prog	,&strd_nakamura	,&strd_taya		,&strd_nohara	,&strd_dummy}},		//7
+{{&strd_prog	,&strd_tomo		,&strd_iwasawa	,&strd_karate	,&strd_dummy}},		//8
+{{&strd_dummy	,&strd_mgraph	,&strd_piro		,&strd_dummy	,&strd_dummy}},		//9*
+{{&strd_graph	,&strd_ken		,&strd_piro		,&strd_dummy	,&strd_dummy}},		//10
+{{&strd_graph	,&strd_fujiwara	,&strd_satoshi	,&strd_asuka	,&strd_dummy}},		//11
+{{&strd_graph	,&strd_tomita	,&strd_unno		,&strd_eo		,&strd_dummy}},		//12
+{{&strd_pdez	,&strd_sige		,&strd_okutani	,&strd_atsuko	,&strd_dummy}},		//13
+{{&strd_pdez	,&strd_muneo	,&strd_rena		,&strd_dummy	,&strd_dummy}},		//14
+{{&strd_music	,&strd_go		,&strd_aoki		,&strd_jun		,&strd_dummy}},		//15*
+{{&strd_dummy	,&strd_voice	,&strd_aoki		,&strd_dummy	,&strd_dummy}},		//16
+{{&strd_gamedez	,&strd_jun		,&strd_sige		,&strd_kabi		,&strd_dummy}},		//17
+{{&strd_gamedez	,&strd_matsu	,&strd_tetsuji	,&strd_satou	,&strd_kawati}},	//18
+{{&strd_gamedez	,&strd_simo		,&strd_oomori	,&strd_takahashi,&strd_dummy}},		//19
+{{&strd_scena_p	,&strd_jun		,&strd_tomisawa	,&strd_kabi		,&strd_dummy}},		//20*
+{{&strd_scenario,&strd_matsumiya,&strd_tomisawa	,&strd_dummy	,&strd_dummy}},		//21
+{{&strd_script	,&strd_nohara	,&strd_tetsuji	,&strd_tomo		,&strd_dummy}},		//22
+{{&strd_map		,&strd_oomori	,&strd_tetsuji	,&strd_kabi		,&strd_dummy}},		//23
+{{&strd_mapdata	,&strd_tetsuji	,&strd_takahashi,&strd_dummy	,&strd_dummy}},		//24
+{{&strd_param	,&strd_kabi		,&strd_sige		,&strd_tetsuji	,&strd_simo}},		//25*
+{{&strd_dummy	,&strd_zukan	,&strd_matsu	,&strd_dummy	,&strd_dummy}},		//26
+{{&strd_tool	,&strd_soga		,&strd_tama		,&strd_nakamura	,&strd_mori}},		//27
+{{&strd_debug	,&strd_mario	,&strd_tada		,&strd_oonishi	,&strd_okamura}},	//28
+{{&strd_spthx	,&strd_tominaga	,&strd_yoshio	,&strd_teiko	,&strd_dummy}},		//29*
+{{&strd_spthx	,&strd_hamano	,&strd_kumatie	,&strd_sinozaki	,&strd_fujii}},		//30
+{{&strd_spthx	,&strd_nakamura_h,&strd_uesugi	,&strd_murakawa	,&strd_kinashi}},	//31
+{{&strd_spthx	,&strd_suyama	,&strd_mitsuhara,&strd_komura	,&strd_oohashi}},	//32
+{{&strd_spthx	,&strd_takizawa	,&strd_takada	,&strd_kondou	,&strd_mashima}},	//33
+{{&strd_dummy	,&strd_tenji	,&strd_tosyo	,&strd_dummy	,&strd_dummy}},		//34*
+{{&strd_infowork,&strd_enomoto	,&strd_terada	,&strd_sakurai	,&strd_sagawa}},	//35
+{{&strd_code	,&strd_watanabe	,&strd_nakano	,&strd_dummy	,&strd_dummy}},		//36
+{{&strd_manage	,&strd_yamagami	,&strd_nomoto	,&strd_dummy	,&strd_dummy}},		//37
+{{&strd_prod	,&strd_jinnai	,&strd_izushi	,&strd_turu		,&strd_dummy}},		//38
+{{&strd_dummy	,&strd_exdir	,&strd_tajiri	,&strd_dummy	,&strd_dummy}},		//39*
+{{&strd_dummy	,&strd_exprod	,&strd_iwata	,&strd_dummy	,&strd_dummy}},		//40
+{{&strd_dummy	,&strd_exprod	,&strd_ishihara	,&strd_dummy	,&strd_dummy}},		//41
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

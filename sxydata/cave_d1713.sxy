@@ -1,0 +1,268 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1713	4
+#define EXITNUM_CAVE_D1713	9
+#define POSNUM_CAVE_D1713	0
+#define BGNUM_CAVE_D1713	10
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_ball1_77[];
+extern const u8	ev_ball1_78[];
+extern const u8	ev_ball1_102[];
+extern const u8	ev_ball1_101[];
+
+//BG_SCRIPT
+extern const u8	garakuta_cave_d1713[];
+extern const u8	garakuta_cave_d1713[];
+extern const u8	garakuta_cave_d1713[];
+extern const u8	garakuta_cave_d1713[];
+extern const u8	garakuta_cave_d1713[];
+extern const u8	garakuta_cave_d1713[];
+
+const evObjData	OBJ_cave_d1713[] =
+{
+	{
+		BALL1_77,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0029,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_77,		//Event Lavel
+		FV_BALL1_77,		//Event Flag
+	},
+
+	{
+		BALL1_78,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0010,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_78,		//Event Lavel
+		FV_BALL1_78,		//Event Flag
+	},
+
+	{
+		BALL1_102,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_102,		//Event Lavel
+		FV_BALL1_102,		//Event Flag
+	},
+
+	{
+		BALL1_101,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001f,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_101,		//Event Lavel
+		FV_BALL1_101,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d1713[] =
+{
+	{
+		0x0006,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR01,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR01,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0015,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR02,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0016,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR02,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0024,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR03,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0025,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR03,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR04,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0015,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR05,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0024,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		CAVE_D1712_DOOR06,		//Door ID
+		CAVE_D1712,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_cave_d1713[] =
+{
+	{
+		0x002a,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		sp1gousitunokagi_31,		//Script
+	},
+
+	{
+		0x0014,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		sp2gousitunokagi_32,		//Script
+	},
+
+	{
+		0x0001,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		sp4gousitunokagi_33,		//Script
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ITEMPICK,		//Event Type
+		sp6gousitunokagi_34,		//Script
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		garakuta_cave_d1713,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		garakuta_cave_d1713,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		garakuta_cave_d1713,		//Script
+	},
+
+	{
+		0x0010,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		garakuta_cave_d1713,		//Script
+	},
+
+	{
+		0x0019,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		garakuta_cave_d1713,		//Script
+	},
+
+	{
+		0x0018,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		garakuta_cave_d1713,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d1713_sxy_data =
+{
+OBJNUM_CAVE_D1713,			// field obj max
+EXITNUM_CAVE_D1713,		// exit max
+POSNUM_CAVE_D1713,			// pos event max
+BGNUM_CAVE_D1713,			// bg event max
+OBJ_cave_d1713,			// field obj data
+EXIT_cave_d1713,			// exit data
+NULL,			// pos event data
+BG_cave_d1713,				// bg event data
+};

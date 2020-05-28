@@ -1,0 +1,20 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 15
+#define TRAINERM1_01_FIELD_R103	1
+#define SUPPORT_01_FIELD_R103	2
+#define TR_AROMA_01	3
+#define TR_FUTAGO_01_02	4
+#define TR_FUTAGO_01_01	5
+#define TR_FISHING_01	6
+#define SEED_01_FIELD_R103	7
+#define SEED_02_FIELD_R103	8
+#define SEED_03_FIELD_R103	9
+#define BOY1_01_FIELD_R103	10
+#define ODAMAKI_01_FIELD_R103	11
+#define TR_DAISUKIM_02	12
+#define BALL1_114	13
+#define TREE1_02_FIELD_R103	14
+#define TREE1_03_FIELD_R103	15
+
+//Exit ID = 0

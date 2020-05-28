@@ -1,0 +1,70 @@
+// ●座礁船
+// ●イベント後半部分
+
+
+// ●１号室の扉
+// ●対応したカギを持たずに扉を調べたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p01_cave_d1712
+msg_door_01_p01_cave_d1712:
+	.byte	KA_,GI_,ga_,spc_,ka_,ka_,ttu_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	to_,bi_,ra_,ni_,ha_,spc_,n1_,go_,u_,si_,tu_,to_,spc_,ka_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●２号室の扉
+// ●対応したカギを持たずに扉を調べたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_02_p01_cave_d1712
+msg_door_02_p01_cave_d1712:
+	.byte	KA_,GI_,ga_,spc_,ka_,ka_,ttu_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	to_,bi_,ra_,ni_,ha_,spc_,n2_,go_,u_,si_,tu_,to_,spc_,ka_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●４号室の扉
+// ●対応したカギを持たずに扉を調べたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_03_p01_cave_d1712
+msg_door_03_p01_cave_d1712:
+	.byte	KA_,GI_,ga_,spc_,ka_,ka_,ttu_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	to_,bi_,ra_,ni_,ha_,spc_,n4_,go_,u_,si_,tu_,to_,spc_,ka_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●６号室の扉
+// ●対応したカギを持たずに扉を調べたときのメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_04_p01_cave_d1712
+msg_door_04_p01_cave_d1712:
+	.byte	KA_,GI_,ga_,spc_,ka_,ka_,ttu_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	to_,bi_,ra_,ni_,ha_,spc_,n6_,go_,u_,si_,tu_,to_,spc_,ka_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●扉に対応したカギを持っていて、
+// 　その扉に話しかけたときのメッセージ（共通）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p02_cave_d1712
+msg_door_01_p02_cave_d1712:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	KA_,GI_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,si_,ko_,n_,da_,spc_,KA_,GI_,ha_,spc_,nu_,ke_,na_,ku_,na_,ttu_,ta_,ga_
+	.byte	CR_
+	.byte	to_,bi_,ra_,ha_,spc_,hi_,ra_,i_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バッグから、対応したカギを削除
+// ●以降、開けた扉は通行自由に

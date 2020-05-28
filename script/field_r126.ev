@@ -1,0 +1,64 @@
+//====================================================================
+//							field_r126
+//							ロード・127
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r126_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r126
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r126:
+	//大雨
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,ctrl_weather_thunder
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_13
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_13
+	_TRAINER_DATA2	msg_swimmerm_13_01
+	_TRAINER_DATA3	msg_swimmerm_13_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_13_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_14
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_14
+	_TRAINER_DATA2	msg_swimmerm_14_01
+	_TRAINER_DATA3	msg_swimmerm_14_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_14_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_13
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_13
+	_TRAINER_DATA2	msg_swimmerw_13_01
+	_TRAINER_DATA3	msg_swimmerw_13_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_13_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_14
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_14
+	_TRAINER_DATA2	msg_swimmerw_14_01
+	_TRAINER_DATA3	msg_swimmerw_14_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_14_03
+	_END
+

@@ -1,0 +1,71 @@
+// ●ムロタウン　民家１（街の北・中央）
+
+
+// ●トレーナー男１
+// ●シルクのスカーフをもらう
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm_01_p01_t103_r0401
+msg_trainerm_01_p01_t103_r0401:
+	.byte	ho_,ra_,gyoe_,spc_,ri_,yyu_,u_,ko_,u_,spc_,sa_,i_,se_,n_,ta_,n_,no_
+	.byte	CR_
+	.byte	ko_,no_,spc_,SI_,RU_,KU_,no_,SU_,KA_,bou_,HU_,spc_,SU_,TE_,KI_,da_,ro_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ttu_,spc_,me_,ga_,spc_,ka_,ga_,ya_,i_,te_,ru_,ne_,gyoe_
+	.byte	CR_
+	.byte	O_,RE_,no_,spc_,SE_,N_,SU_,ga_,spc_,wa_,ka_,ru_,n_,da_,na_,spc_,ki_,mi_,ha_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,re_,si_,i_,ne_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,ha_,spc_,PU_,RE_,ZE_,N_,TO_,spc_,su_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「シルクのスカーフ」（No218）入手処理
+// ●バッグがいっぱい→msg_trainerm_01_p02_t103_r0401:
+
+// ●バッグがいっぱい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm_01_p02_t103_r0401
+msg_trainerm_01_p02_t103_r0401:
+	.byte	e_,spc_,mo_,te_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,ni_,mo_,tu_,wo_,spc_,ze_,n_,bu_,spc_,u_,ttu_,te_,de_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,tu_,be_,ki_,spc_,SU_,KA_,bou_,HU_,da_,ze_,spc_,ko_,re_,ha_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm_01_p03_t103_r0401
+msg_trainerm_01_p03_t103_r0401:
+	.byte	SI_,RU_,KU_,no_,SU_,KA_,bou_,HU_,ha_,spc_,NO_,bou_,MA_,RU_,TA_,I_,PU_,no_
+	.byte	CR_
+	.byte	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,wo_,spc_,a_,ge_,te_,ku_,re_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,to_,n_,do_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ni_,a_,u_
+	.byte	CR_
+	.byte	su_,te_,ki_,na_,spc_,SU_,KA_,bou_,HU_,spc_,ttu_,te_,ko_,to_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_t103_r0401
+msg_boy2_01_p01_t103_r0401:
+	.byte	he_,e_,gyoe_,spc_,ki_,mi_,spc_,u_,mi_,wo_,spc_,ko_,e_,te_
+	.byte	CR_
+	.byte	wa_,za_,wa_,za_,spc_,MU_,RO_,ma_,de_,spc_,ki_,ta_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,ka_,si_,te_,spc_,TO_,U_,KI_,sa_,n_,no_,spc_,u_,wa_,sa_,wo_,spc_,ki_,i_,te_
+	.byte	CR_
+	.byte	a_,i_,ni_,spc_,ki_,ta_,n_,zi_,yya_,na_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,U_,KI_,sa_,n_,spc_,ka_,ttu_,ko_,yo_,ku_,te_
+	.byte	CR_
+	.byte	mi_,n_,na_,ga_,spc_,a_,ko_,ga_,re_,ru_,mo_,n_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

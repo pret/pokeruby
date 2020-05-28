@@ -1,0 +1,15 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define WOMAN1_01_FIELD_T103	1
+#define OLDMAN1_01_FIELD_T103	2
+#define FISHING1_01_FIELD_T103	3
+#define FUNE_01_FIELD_T103	4
+#define BOY1_01_FIELD_T103	5
+
+//Exit ID = 5
+#define FIELD_T103_DOOR04	0
+#define FIELD_T103_DOOR02	1
+#define FIELD_T103_DOOR03	2
+#define FIELD_T103_DOOR01	3
+#define FIELD_T103_DOOR05	4

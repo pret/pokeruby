@@ -1,0 +1,95 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	park_kokoro01_event_data
+FLAG_CHANGE_LABEL	flag_change_park_kokoro01
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LEBEL
+//--------------------------------------------------------------------
+flag_change_park_kokoro01:
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_ISLAND
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							船乗り
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_park_kokoro01
+	_TALK_OBJ_START
+
+	_TALK_YES_NO	msg_seaman1_01_p02_kokoro01
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_seaman1_01_p02_park_kokoro01
+
+	_TALK_KEYWAIT	msg_seaman1_01_p03_kokoro01
+	_TALK_CLOSE
+
+	//船に乗り込む
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	SEAMAN1_01_PARK_KOKORO01,PARK,PARK_KOKORO01
+	
+	_LDVAL			PARAM0,HISHIP1_01_PARK_KOKORO01
+	_CALL			ev_hiship_arrive_02
+
+	_MAP_CHANGE		C106,C106_R0501,8,11
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_seaman1_01_p02_park_kokoro01:
+	_TALK_KEYWAIT	msg_seaman1_01_p04_kokoro01
+	_TALK_OBJ_END
+	_END
+
+//船に乗り込む
+site_d_hero_park_kokoro01_anime01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_park_kokoro01_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+site_l_hero_park_kokoro01_anime01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_park_kokoro01_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	船に乗り込む(上から)
+//--------------------------------------------------------------------
+hero_01_park_kokoro01_anime01:
+	.byte	AC_WALK_D_1	
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//主人公	船に乗り込む(右から)
+//--------------------------------------------------------------------
+hero_01_park_kokoro01_anime02:
+	.byte	AC_WALK_L_1	
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+	
+
+/********************************************************************/
+//							看板
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_park_kokoro01
+	_EASY_MSG	msg_kanban_01_p01_kokoro01
+	_END
+
+

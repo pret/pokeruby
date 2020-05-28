@@ -1,0 +1,225 @@
+//====================================================================
+//						cave_d1713
+//						すてられぶね　船室奥１F（６部屋）
+//====================================================================
+
+//--------------------------------------------------------------------
+//					     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		cave_d1713_event_data
+SP_SCRIPT_LABEL			scene_cave_d1713
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_cave_d1713:
+	SP_SCRIPT_DATA		LOCALWORK1,0,kirari_effect_cave_d1713
+	SP_SCRIPT_END
+
+//最初のきらり
+kirari_effect_cave_d1713:
+	_LDVAL				LOCALWORK1,1
+
+	//主人公の出現位置チェック(この値から出てきた部屋を割り出す）
+	_GET_MAP_POS		LOCALWORK2,LOCALWORK3
+
+	//初期状態を１号室へ
+	_LDVAL				LOCALWORK4,1
+
+	//１号室or４号室のとき
+
+
+	//２号室or５号室のとき
+	_IFVAL_CALL			LOCALWORK2,EQ,21,plus_1_cave_d1713
+
+	//３号室or６号室のとき
+	_IFVAL_CALL			LOCALWORK2,EQ,36,plus_2_cave_d1713
+
+	//４号室or５号室or６号室のとき
+	_IFVAL_CALL			LOCALWORK3,EQ,2,plus_3_cave_d1713
+
+	_SWITCH				LOCALWORK4
+	_CASEJUMP			1,room_1_effect_cave_d1713
+	_CASEJUMP			2,room_2_effect_cave_d1713
+	_CASEJUMP			3,room_3_effect_cave_d1713
+	_CASEJUMP			4,room_4_effect_cave_d1713
+	_CASEJUMP			5,room_5_effect_cave_d1713
+	_CASEJUMP			6,room_6_effect_cave_d1713
+	_END
+
+//値をプラス１
+plus_1_cave_d1713:
+	_ADDWK				LOCALWORK4,1
+	_RET
+
+//値をプラス２
+plus_2_cave_d1713:
+	_ADDWK				LOCALWORK4,2
+	_RET
+
+//値をプラス３
+plus_3_cave_d1713:
+	_ADDWK				LOCALWORK4,3
+	_RET
+
+//ルーム１のときのエフェクト処理
+room_1_effect_cave_d1713:
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//がらくた
+	_SET_FE_WORK		0,10
+	_SET_FE_WORK		1,10
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+
+	_FUNC_CALL			ANSWORK,KEY_4_CHECK
+	//まだカギを取っていないとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,key_4_effect_set_cave_d1713
+
+	_FLD_EFF_WAIT		FECODE_Kirari
+
+	//少し間を置く
+	_TIME_WAIT			10
+	_END
+
+//ルーム２のときのエフェクト処理
+room_2_effect_cave_d1713:
+	_END
+
+//ルーム３のときのエフェクト処理
+room_3_effect_cave_d1713:
+	_FUNC_CALL			ANSWORK,KEY_1_CHECK
+	//カギを取った後は処理なし
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,room_3_no_effect_cave_d1713
+
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//まだカギを取っていないとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,key_1_effect_set_cave_d1713
+
+	_FLD_EFF_WAIT		FECODE_Kirari
+
+	//少し間を置く
+	_TIME_WAIT			10
+	_END
+
+room_3_no_effect_cave_d1713:
+	_END
+
+//ルーム４のときのエフェクト処理
+room_4_effect_cave_d1713:
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//がらくた
+	_SET_FE_WORK		0,8
+	_SET_FE_WORK		1,5
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+
+	//がらくた
+	_SET_FE_WORK		0,11
+	_SET_FE_WORK		1,3
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+
+	_FUNC_CALL			ANSWORK,KEY_6_CHECK
+	//まだカギを取っていないとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,key_6_effect_set_cave_d1713
+
+	_FLD_EFF_WAIT		FECODE_Kirari
+
+	//少し間を置く
+	_TIME_WAIT			10
+	_END
+
+//ルーム５のときのエフェクト処理
+room_5_effect_cave_d1713:
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//がらくた
+	_SET_FE_WORK		0,16
+	_SET_FE_WORK		1,3
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+
+	//がらくた
+	_SET_FE_WORK		0,25
+	_SET_FE_WORK		1,2
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+
+	//がらくた
+	_SET_FE_WORK		0,24
+	_SET_FE_WORK		1,6
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+
+	_FUNC_CALL			ANSWORK,KEY_2_CHECK
+	//まだカギを取っていないとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,key_2_effect_set_cave_d1713
+
+	_FLD_EFF_WAIT		FECODE_Kirari
+
+	//少し間を置く
+	_TIME_WAIT			10
+	_END
+
+//ルーム６のときのエフェクト処理
+room_6_effect_cave_d1713:
+	_END
+
+//１号室のカギ
+key_1_effect_set_cave_d1713:
+	_SET_FE_WORK		0,42
+	_SET_FE_WORK		1,10
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+	_RET
+
+//２号室のカギ
+key_2_effect_set_cave_d1713:
+	_SET_FE_WORK		0,20
+	_SET_FE_WORK		1,5
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+	_RET
+
+//４号室のカギ
+key_4_effect_set_cave_d1713:
+	_SET_FE_WORK		0,1
+	_SET_FE_WORK		1,12
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+	_RET
+
+//６号室のカギ
+key_6_effect_set_cave_d1713:
+	_SET_FE_WORK		0,1
+	_SET_FE_WORK		1,2
+	_SET_FE_WORK		2,0
+	_SET_FLD_EFF		FECODE_Kirari
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						がらくた
+/********************************************************************/
+SCRIPT_LABEL			garakuta_cave_d1713
+	_TALK_START
+	//”ただの　ゴミ　だった.....”
+	_TALK_KEYWAIT		msg_garakuta_01_p01_cave_d1713
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

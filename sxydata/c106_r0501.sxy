@@ -1,0 +1,129 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C106_R0501	4
+#define EXITNUM_C106_R0501	4
+#define POSNUM_C106_R0501	0
+#define BGNUM_C106_R0501	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_workerw2_01_p01_c106_r0501[];
+extern const u8	ev_seaman1_01_p01_c106_r0501[];
+
+const evObjData	OBJ_c106_r0501[] =
+{
+	{
+		WORKERW2_01_C106_R0501,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerw2_01_p01_c106_r0501,		//Event Lavel
+		FV_WORKERW2_01_C106_R0501,		//Event Flag
+	},
+
+	{
+		HISHIP1_01_C106_R0501,		//OBJ ID
+		HISHIP1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0009,		//Ypos
+		0x01,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_HISHIP1_01_C106_R0501,		//Event Flag
+	},
+
+	{
+		SEAMAN1_02_C106_R0501,		//OBJ ID
+		SEAMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_seaman1_01_p01_c106_r0501,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEAMAN1_01_C106_R0501,		//OBJ ID
+		SEAMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_SEAMAN1_01_C106_R0501,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c106_r0501[] =
+{
+	{
+		0x000b,		//Xpos
+		0x000e,		//Ypos
+		0x00,		//Height
+		FIELD_C106_DOOR13,		//Door ID
+		FIELD_C106,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x000c,		//Xpos
+		0x000e,		//Ypos
+		0x00,		//Height
+		FIELD_C106_DOOR13,		//Door ID
+		FIELD_C106,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0014,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		C106_R0502_DOOR01,		//Door ID
+		C106_R0502,			//Map ID
+		C106,				//Field ID
+	},
+
+	{
+		0x0015,		//Xpos
+		0x000f,		//Ypos
+		0x00,		//Height
+		C106_R0502_DOOR01,		//Door ID
+		C106_R0502,			//Map ID
+		C106,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c106_r0501_sxy_data =
+{
+OBJNUM_C106_R0501,			// field obj max
+EXITNUM_C106_R0501,		// exit max
+POSNUM_C106_R0501,			// pos event max
+BGNUM_C106_R0501,			// bg event max
+OBJ_c106_r0501,			// field obj data
+EXIT_c106_r0501,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

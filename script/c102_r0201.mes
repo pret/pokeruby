@@ -1,0 +1,71 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆カイナ：ハイパーランク：ロビー
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ロビーうろつき（この人もどしてください）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm_01_p01_c102_r0201
+msg_trainerm_01_p01_c102_r0201:
+	.byte	si_,yyo_,u_,bu_,de_,mo_,spc_,KO_,N_,TE_,SU_,TO_,de_,mo_
+	.byte	CR_
+	.byte	sa_,i_,ki_,yyo_,u_,spc_,sa_,i_,ko_,u_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	so_,da_,te_,ta_,i_,na_,a_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	o_,bo_,e_,sa_,se_,ru_,spc_,wa_,za_,ni_,spc_,na_,ya_,mu_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ロビーうろつき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_c102_r0201
+msg_girl1_01_p01_c102_r0201:
+	.byte	a_,na_,ta_,no_,spc_,o_,to_,mo_,da_,ti_,ha_,spc_,ki_,no_,mi_,spc_,mo_,ttu_,te_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,so_,ko_,ni_,spc_,a_,ru_,spc_,ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,de_
+	.byte	CR_
+	.byte	o_,to_,mo_,da_,ti_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,re_,ru_,no_,gyoe_,spc_,ta_,no_,si_,i_,wa_,yo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポロックケースをくれるお嬢２：哲司作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c102_r0201
+msg_ojyou2_01_p01_c102_r0201:
+	.byte	hu_,ta_,tu_,spc_,a_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	ko_,re_,spc_,hi_,to_,tu_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●たいせつな道具に「ポロックケース」追加する
+// ●「ポロックケース」入手以降に会話したとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p02_c102_r0201
+msg_ojyou2_01_p02_c102_r0201:
+	.byte	PO_,RO_,TTU_,KU_,spc_,tu_,ku_,ttu_,te_,spc_,i_,re_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ne_,spc_,PO_,RO_,TTU_,KU_,spc_,tu_,ku_,ru_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	mi_,n_,na_,ga_,spc_,ti_,ga_,u_,spc_,ki_,no_,mi_,de_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ku_,ra_,na_,i_,to_,spc_,DA_,ME_,spc_,na_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性１（絵の側なのでセリフ変更）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c102_r0201
+msg_woman1_01_p01_c102_r0201:
+	.byte	KO_,N_,TE_,SU_,TO_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,su_,ru_,to_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,be_,ni_,spc_,PO_,KE_,MO_,N_,no_,spc_,ni_,ga_,o_,e_,wo_
+	.byte	CR_
+	.byte	na_,ma_,e_,i_,ri_,de_,spc_,ha_,ttu_,te_,spc_,mo_,ra_,e_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

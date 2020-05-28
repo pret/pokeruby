@@ -1,0 +1,12 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define STUDYM1_01_C104_R0102	1
+#define STUDYM1_02_C104_R0102	2
+#define STUDYM1_03_C104_R0102	3
+#define STUDYM1_04_C104_R0102	4
+#define STUDYM1_05_C104_R0102	5
+
+//Exit ID = 2
+#define C104_R0102_DOOR01	0
+#define C104_R0102_DOOR02	1

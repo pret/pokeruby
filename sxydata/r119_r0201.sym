@@ -1,0 +1,14 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 7
+#define WOMAN2_01_R119_R0201	1
+#define CAMOME_01_R119_R0201	2
+#define CAMOME_02_R119_R0201	3
+#define CAMOME_04_R119_R0201	4
+#define CAMOME_05_R119_R0201	5
+#define CAMOME_03_R119_R0201	6
+#define CAMOME_06_R119_R0201	7
+
+//Exit ID = 2
+#define R119_R0201_MAT01	0
+#define R119_R0201_MAT02	1

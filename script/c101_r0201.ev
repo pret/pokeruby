@@ -1,0 +1,1396 @@
+//====================================================================
+//							c101_r0201
+//							トウカジム
+//====================================================================
+
+//--------------------------------------------------------------------
+//				      マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c101_r0201_event_data
+BG_CHANGE_LABEL		bg_change_c101_r0201
+FLAG_CHANGE_LABEL	flag_change_c101_r0201
+OBJ_CTRL_LABEL		obj_ctrl_c101_r0201
+SP_SCRIPT_LABEL		scene_c101_r0201
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//							BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_c101_r0201:
+	//バッチを４つもっている
+	_IFVAL_JUMP		WK_SCENE_C101_R0201,EQ,6,ev_bg_change_start_gym05
+	//父からバッチをもらった
+	_IFVAL_CALL		WK_SCENE_C101_R0201,GE,7,ev_bg_change_get_gym05_batch
+	_END
+
+//バッチを４つもっている
+ev_bg_change_start_gym05:
+	_LDVAL			PARAM1,1	//セル書き換えウェイトなし
+	_CALL			gym05_cell_change_ptn01	//始めの部屋の扉は開ける
+
+	//その部屋のトレーナーを倒しているか見て対応しているptnを呼ぶ
+	_IF_TR_FLAGON_CALL	ELITEM_01,gym05_cell_change_ptn02
+	_IF_TR_FLAGON_CALL	ELITEW_01,gym05_cell_change_ptn03
+	_IF_TR_FLAGON_CALL	ELITEM_02,gym05_cell_change_ptn04
+	_IF_TR_FLAGON_CALL	ELITEW_02,gym05_cell_change_ptn05
+	_IF_TR_FLAGON_CALL	ELITEM_03,gym05_cell_change_ptn06
+	_IF_TR_FLAGON_CALL	ELITEW_03,gym05_cell_change_ptn07
+	_IF_TR_FLAGON_CALL	ELITEM_04,gym05_cell_change_ptn08
+	_END
+
+//父からバッチをもらった
+ev_bg_change_get_gym05_batch:
+	_LDVAL			PARAM1,1	//セル書き換えウェイトなし
+	_CALL			gym05_cell_change_ptn01
+	_CALL			gym05_cell_change_ptn02
+	_CALL			gym05_cell_change_ptn03
+	_CALL			gym05_cell_change_ptn04
+	_CALL			gym05_cell_change_ptn05
+	_CALL			gym05_cell_change_ptn06
+	_CALL			gym05_cell_change_ptn07
+	_CALL			gym05_cell_change_ptn08
+	_RET
+
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c101_r0201:
+	//捕獲イベント後に戻ってきたときのミツルの配置
+	_IFVAL_CALL		WK_SCENE_C101_R0201,EQ,1,ev_mitsuru_move_c101_r0201
+
+	//バッチを４つ以下のときのパパの配置
+	_IFVAL_CALL		WK_SCENE_C101_R0201,LT,6,ev_papa_move_c101_r0201
+
+	//ゲームクリアしていたときのパパの配置
+	_IF_FLAGON_CALL	SYS_GAME_CLEAR,ev_papa_move_c101_r0201_02
+	_END
+
+//捕獲イベント後に戻ってきたときのミツルの配置
+ev_mitsuru_move_c101_r0201:
+	_SXY_POS_CHANGE		MITSURU_01_C101_R0201,5,108
+	_RET
+
+//バッチを４つ以下のときの時の配置
+ev_papa_move_c101_r0201:
+	_SXY_POS_CHANGE		PAPA_01_C101_R0201,4,107
+	_RET
+
+//ゲームクリアしていたときのパパの配置
+ev_papa_move_c101_r0201_02:
+	_SXY_POS_CHANGE		PAPA_01_C101_R0201,4,107
+	_RET
+
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_c101_r0201:
+	OBJ_CTRL_DATA	WK_SCENE_C101_R0201,1,ev_site_chg_c101_r0201
+	OBJ_CTRL_END
+
+//主人公の向きを変更
+ev_site_chg_c101_r0201:
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_U
+	_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c101_r0201:
+	//ミツルとポケモン捕獲イベント後に来た
+	SP_SCRIPT_DATA	WK_SCENE_C101_R0201,1,ev_scene_mitsuru_01_c101_r0201
+	SP_SCRIPT_END
+
+//ミツルとポケモン捕獲イベント後に来た
+ev_scene_mitsuru_01_c101_r0201:
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_gymleader_05_05
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p05_c101_r0201
+	_TALK_CLOSE
+
+	//帰っていく
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ミツル消す
+	_SE				SE_KAIDAN
+	_OBJ_DELETE		MITSURU_01_C101_R0201
+	_FLAG_SET		FV_MITSURU_01_FIELD_C101
+
+	_TIME_WAIT		30
+
+	//父の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_gymleader_05_06
+
+	_LDVAL			WK_SCENE_C101_R0201,2
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ミツル	帰っていく
+//--------------------------------------------------------------------
+mitsuru_01_c101_r0201_anime10:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//
+//	PARAM0		どのドアか
+//	PARAM1		ウェイトの有無
+//--------------------------------------------------------------------
+#define GYM05_MAT_X1		(1)
+#define GYM05_MAT_X2		(2)
+#define GYM05_MAT_X3		(6)
+#define GYM05_MAT_X4		(7)
+
+/********************************************************************/
+/*							主人公の父								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_05_01
+	_TALK_OBJ_START
+
+	_SWITCH			WK_SCENE_C101_R0201
+	_CASEJUMP		2,ev_papa_01_p02_c101_r0201	//ミツルが訪れるイベント終了
+	_CASEJUMP		3,ev_papa_01_p03_c101_r0201	//バッチ１つ
+	_CASEJUMP		4,ev_papa_01_p04_c101_r0201 //バッチ２つ
+	_CASEJUMP		5,ev_papa_01_p05_c101_r0201 //バッチ３つ
+	_CASEJUMP		6,ev_gymleader_05_02		//バッチ４つ
+	_CASEJUMP		7,already_papa_batch_get	//バッチをゲットした
+
+	_TALK_KEYWAIT	msg_gymleader_05_01
+	_TALK_CLOSE
+
+	_SWITCH			RG_SITE
+	_CASEJUMP		SITE_D,site_u_to_hero_c101_r0201			//上から話し掛け
+	_CASEJUMP		SITE_U,site_d_to_hero_c101_r0201			//下から話し掛け
+	_CASEJUMP		SITE_L,site_r_to_hero_c101_r0201			//右から話し掛け
+	_CASEJUMP		SITE_R,site_l_to_hero_c101_r0201			//左から話し掛け
+	_END
+
+//上から話し掛け
+site_u_to_hero_c101_r0201:
+	_LDVAL			TMPWK0,0		//動作コード
+	_JUMP			ev_common_gymleader_05_p01
+	_END
+
+//下から話し掛け
+site_d_to_hero_c101_r0201:
+	_LDVAL			TMPWK0,1		//動作コード
+	_JUMP			ev_common_gymleader_05_p01
+	_END
+
+//右から話し掛け
+site_r_to_hero_c101_r0201:
+	_LDVAL			TMPWK0,2		//動作コード
+	_JUMP			ev_common_gymleader_05_p01
+	_END
+
+//左から話し掛け
+site_l_to_hero_c101_r0201:
+	_LDVAL			TMPWK0,3		//動作コード
+	_JUMP			ev_common_gymleader_05_p01
+	_END
+
+//共通処理
+ev_common_gymleader_05_p01:
+	_OBJ_APPEAR		MITSURU_01_C101_R0201
+	_SE				SE_DOOR
+
+	//ドアの方を向く
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_gym_anime01
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_gym_anime01
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_gym_anime01
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_gym_anime01
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p01_c101_r0201
+
+	_TALK_KEYWAIT	msg_gymleader_05_02
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p02_c101_r0201
+
+	_TALK_KEYWAIT	msg_gymleader_05_03
+
+	//主人公と父が向き合う
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_gym_anime03
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_gym_anime03
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_gym_anime03
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_gym_anime03
+
+	_TALK_KEYWAIT	msg_gymleader_05_04
+
+	//父がミツルの方を向く
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_gym_anime04
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_gym_anime04
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_gym_anime04
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_gym_anime04
+
+	_TALK_KEYWAIT	msg_gymleader_05_18
+
+	//効果音は指摘が合ったらつけることになった
+	_TALK_KEYWAIT	msg_mitsuru_01_p06_c101_r0201
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p03_c101_r0201
+
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_gym_anime10
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_gym_anime10
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_gym_anime10
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_gym_anime10
+
+	//主人公の方を向く(下からの話し掛けがdefault_site_animeでうまくいかない？ので)
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_gym_anime05
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_gym_anime05
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_gym_anime05
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_gym_anime05
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p04_c101_r0201
+	_TALK_CLOSE
+
+	//マップ遷移のタイミングでのBGM変更を無効にする
+	_FLAG_SET		CTRL_BGM_CHANGE
+	_BGM_SET		MUS_TSURETEK,0	
+
+	//捕獲しに行く
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_gym_anime02
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_gym_anime02
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_gym_anime02
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_gym_anime02
+
+	//OBJ消す
+	_OBJ_DELETE		MITSURU_01_C101_R0201
+
+	//ミツル母を消しておく
+	_FLAG_SET		FV_WOMAN2_01_FIELD_C101
+
+	//ミツル訪れるイベント終了
+	_LDVAL			WK_SCENE_C101_R0201,1
+
+	//ミツルとの捕獲イベント開始
+	_LDVAL			WK_SCENE_FIELD_C101,2
+	_FLAG_RESET		FV_MITSURU_01_FIELD_C101
+
+	//ミツルを出す
+	_FLAG_RESET		FV_MITSURU_01_C101_R0201
+
+	//研究所のサポートを消す
+	_FLAG_SET		FV_SUPPORT_01_T101_R0301
+
+	//評価システム開始
+	_PROGRAM		HYOUKA_INIT
+
+	_MAP_CHANGE		FIELD,FIELD_C101,15,8
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//					ジムにミツルが入ってくる
+//--------------------------------------------------------------------
+//上から話し掛けのアニメ
+case0_gym_anime01:
+	//ミツルの方を向く
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛けのアニメ
+case1_gym_anime01:
+	//ミツルの方を向く
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右左から話し掛けのアニメ
+case2_gym_anime01:
+case3_gym_anime01:
+	//ミツルの方を向く
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//					ミツルとポケモンを捕獲しに行く
+//--------------------------------------------------------------------
+//上から話し掛けのアニメ
+case0_gym_anime02:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime45
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c101_r0201_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛けのアニメ
+case1_gym_anime02:
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime03
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c101_r0201_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右から話し掛けのアニメ
+case2_gym_anime02:
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime45
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c101_r0201_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//左から話し掛けのアニメ
+case3_gym_anime02:
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,mitsuru_01_c101_r0201_anime04
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c101_r0201_anime04
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//						主人公と父が向き合う
+//--------------------------------------------------------------------
+//上から話し掛けのアニメ
+case0_gym_anime03:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛けのアニメ
+case1_gym_anime03:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右から話し掛けのアニメ
+case2_gym_anime03:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//左から話し掛けのアニメ
+case3_gym_anime03:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_l_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//					父がミツルの方を向く
+//--------------------------------------------------------------------
+//上から話し掛けのアニメ
+case0_gym_anime04:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛けのアニメ
+case1_gym_anime04:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右から話し掛けのアニメ
+case2_gym_anime04:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//左から話し掛けのアニメ
+case3_gym_anime04:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//					ミツルが主人公の方を向く
+//--------------------------------------------------------------------
+//上右左から話し掛けのアニメ
+case0_gym_anime05:
+case2_gym_anime05:
+case3_gym_anime05:
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛けのアニメ
+case1_gym_anime05:
+	_SET_OBJ_ANIME	MITSURU_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//					ミツルが訪れるイベント終了
+//--------------------------------------------------------------------
+SCRIPT_LABEL	ev_papa_01_p02_c101_r0201
+	_TALK_KEYWAIT	msg_gymleader_05_07
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//				バッチの数によってメッセージ変わる
+//--------------------------------------------------------------------
+//バッチ１つ
+SCRIPT_LABEL	ev_papa_01_p03_c101_r0201
+	_TALK_KEYWAIT	msg_gymleader_05_08
+	_TALK_OBJ_END
+	_END
+
+//バッチ２つ
+SCRIPT_LABEL	ev_papa_01_p04_c101_r0201
+	_TALK_KEYWAIT	msg_gymleader_05_09
+	_TALK_OBJ_END
+	_END
+
+//バッチ３つ
+SCRIPT_LABEL	ev_papa_01_p05_c101_r0201
+	_TALK_KEYWAIT	msg_gymleader_05_09
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							父見送る
+//--------------------------------------------------------------------
+//上から話し掛けのアニメ
+case0_gym_anime10:
+	_RET
+
+//下から話し掛けのアニメ
+case1_gym_anime10:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右から話し掛けのアニメ
+case2_gym_anime10:
+	_RET
+
+//左から話し掛けのアニメ
+case3_gym_anime10:
+	_RET
+
+//--------------------------------------------------------------------
+//					バッチをゲットしている
+//--------------------------------------------------------------------
+already_papa_batch_get:
+	//「なぞの実」チェック
+	_CALL			ev_ram_kinomi_chk
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_ram_kinomi_get
+
+	//技マシン貰っているか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_C101_R0201,gymleader_05_wazam_get
+
+	//ゲームクリアしているか
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,game_clear_gymleader_05
+
+	_TALK_KEYWAIT	msg_gymleader_05_17
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//							RAM木の実
+//--------------------------------------------------------------------
+//貰えるかチェック
+ev_ram_kinomi_chk:
+	//「なぞの実」存在するか
+	_FUNC_CALL		ANSWORK,CHK_RAM_SEED
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_ram_kinomi_end
+
+	//バッグ、パソコンに「なぞの実」ないか
+	_CHECK_ITEM		ITEM_NAZONOMI,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_ram_kinomi_end
+	_CHECK_BOX_ITEM	ITEM_NAZONOMI,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_ram_kinomi_end
+
+	//許可ワークが１でなかったら
+	_IFVAL_JUMP		WK_RAM_SEED_GET,EQ,FALSE,ev_ram_kinomi_end
+
+	//RAM木の実貰える条件そろっている
+	_TALK_KEYWAIT	msg_gymleader_05_kinomi
+	_LDVAL			ANSWORK,TRUE
+	_RET
+
+//貰えない
+ev_ram_kinomi_end:
+	_LDVAL			ANSWORK,FALSE
+	_RET
+
+//取得処理
+ev_ram_kinomi_get:
+	_ITEM_EVENT		ITEM_NAZONOMI,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	//許可ワークを０にクリアする
+	_LDVAL			WK_RAM_SEED_GET,0
+
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//						お父さんと対戦(バッチ４つ)
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_05_02
+	_TALK_KEYWAIT	msg_gymleader_05_10
+
+	//戦闘へ
+	_TRAINER_EVENT_FIGHT	LEADERM_05,msg_gymleader_05_11
+
+	_TALKMSG		msg_gymleader_05_12
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_05_13
+
+	_FLAG_SET		FT_GYM_05_LEADER
+	_LDVAL			WK_SCENE_C101_R0201,7
+	_FLAG_SET		SYS_BATCH05_GET
+
+	//ハギ削除
+	_CALL			ev_hagi_del
+
+	//キンセツジムリーダー移動
+	_FLAG_SET		FV_TETTSUSEN_01_C103_R0101
+	_FLAG_RESET		FV_TETTSUSEN_01_FIELD_C103
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,5
+	_CALL			gym_trainer_all_flagon
+
+	//流行部屋に技マシンくれるOBJ表示する
+	_FLAG_RESET		FV_FREAK1_01_T103_R0301
+
+	//ジムのトラップを解除
+	_CALL			ev_bg_change_get_gym05_batch
+	_PROGRAM		MAKE_MAP_BG
+
+	_JUMP			gymleader_05_wazam_get
+	_END
+
+//アイテム貰う
+gymleader_05_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN42,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM_01_C101_R0201		//技マシン貰った
+
+	_TALK_KEYWAIT	msg_gymleader_05_14
+	_TALK_KEYWAIT	msg_gymleader_05_15
+	_TALK_CLOSE
+
+	//背を向ける
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case1_site_u_c101_r0201
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case1_site_d_c101_r0201
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case1_site_l_c101_r0201
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case1_site_r_c101_r0201
+
+	_TIME_WAIT		70
+
+	//振りかえる
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case2_site_u_c101_r0201
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case2_site_d_c101_r0201
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case2_site_l_c101_r0201
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case2_site_r_c101_r0201
+
+	_TALK_KEYWAIT	msg_gymleader_05_16
+
+	_TALK_OBJ_END
+	_END
+
+//背を向ける
+case1_site_u_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case1_site_d_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case1_site_l_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case1_site_r_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//振りかえる
+case2_site_u_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case2_site_d_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case2_site_l_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+case2_site_r_c101_r0201:
+	_SET_OBJ_ANIME	PAPA_01_C101_R0201,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//パパ	背を向けてまた振りかえる
+//--------------------------------------------------------------------
+leader05_01_c101_r0201_anime01:
+	.byte	AC_WALK_TURN_U
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	ジムに入ってくる(下から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_c101_r0201_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	ジムに入ってくる(左右上から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_c101_r0201_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	捕獲しに行く(下から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_c101_r0201_anime03:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	AC_WAIT_16
+	.byte	AC_STAY_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	捕獲しに行く(左から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_c101_r0201_anime04:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	AC_WAIT_16
+	.byte	AC_STAY_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	捕獲しに行く(右上から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_c101_r0201_anime45:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	AC_WAIT_16
+	.byte	AC_STAY_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	捕獲しに行く(下から話し掛け)
+//--------------------------------------------------------------------
+hero_01_c101_r0201_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	捕獲しに行く(上から話し掛け)
+//--------------------------------------------------------------------
+hero_01_c101_r0201_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	捕獲しに行く(右から話し掛け)
+//--------------------------------------------------------------------
+hero_01_c101_r0201_anime03:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	捕獲しに行く(左から話し掛け)
+//--------------------------------------------------------------------
+hero_01_c101_r0201_anime04:
+	.byte	AC_WALK_TURN_D
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//ゲームクリアしている
+game_clear_gymleader_05:
+	_TALK_KEYWAIT	msg_gymleader_05_19
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								扉１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_01_p01_c101_r0201
+	_TALK_START
+
+	//バッチを４つもっていない
+	_IFVAL_JUMP		WK_SCENE_C101_R0201,LT,6,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X4
+	_LDVAL			TMPWK1,85
+	_TALK_YES_NO	msg_tobira_02_02
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+//進む
+open_door_01_c101_r0201:
+	_TALK_CLOSE
+
+	//SE_SELECTが鳴り終わるのを待つ
+	_TIME_WAIT			30
+
+	_DOOR_MAP_CHANGE	C101,C101_R0201,TMPWK0,TMPWK1
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//進まない
+close_door_01_c101_r0201:
+	_TALK_END
+	_END
+
+//バッチを４つもっていない
+no_door_01_c101_r0201:
+	_TALK_KEYWAIT	msg_tobira_02_01
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*								扉２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_02_p01_c101_r0201
+	_TALK_START
+
+	//バッチを４つもっていない
+	_IFVAL_JUMP		WK_SCENE_C101_R0201,LT,6,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X1
+	_LDVAL			TMPWK1,98
+	_TALK_YES_NO	msg_tobira_03_02
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉３								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_03_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEM_01,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X4
+	_LDVAL			TMPWK1,46
+	_TALK_YES_NO	msg_tobira_05_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉４								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_04_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEM_01,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X1
+	_LDVAL			TMPWK1,59
+	_TALK_YES_NO	msg_tobira_06_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉５								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_05_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEW_01,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X4
+	_LDVAL			TMPWK1,59
+	_TALK_YES_NO	msg_tobira_06_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉６								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_06_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEW_01,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X1
+	_LDVAL			TMPWK1,72
+	_TALK_YES_NO	msg_tobira_08_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉７								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_07_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEM_02,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X1
+	_LDVAL			TMPWK1,20
+	_TALK_YES_NO	msg_tobira_10_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉８								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_08_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEW_02,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X4
+	_LDVAL			TMPWK1,20
+	_TALK_YES_NO	msg_tobira_10_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉９								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_09_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEW_02,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X1
+	_LDVAL			TMPWK1,33
+	_TALK_YES_NO	msg_tobira_12_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉１０								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_10_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEM_03,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X4
+	_LDVAL			TMPWK1,33
+	_TALK_YES_NO	msg_tobira_12_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉１１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_11_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEW_03,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X1
+	_LDVAL			TMPWK1,7
+	_TALK_YES_NO	msg_tobira_15_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+/*								扉１２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_door_12_p01_c101_r0201
+	_TALK_START
+
+	//部屋のトレーナーを倒していない
+	_IF_TR_FLAGOFF_JUMP	ELITEM_04,no_door_01_c101_r0201
+
+	_LDVAL			TMPWK0,GYM05_MAT_X4
+	_LDVAL			TMPWK1,7
+	_TALK_YES_NO	msg_tobira_15_01
+	_IFVAL_JUMP		ANSWORK,EQ,1,open_door_01_c101_r0201	// 進む
+	_IFVAL_JUMP		ANSWORK,EQ,0,close_door_01_c101_r0201	// 進まない
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_elitem_01
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_01
+	_TRAINER_DATA2	msg_elitem_01_01
+	_TRAINER_DATA3	msg_elitem_01_02
+	_TRAINER_DATA4	ev_elitem_01_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitem_01
+
+	_TRAINER_EASY_MSG	msg_elitem_01_03
+	_END
+
+ev_elitem_01_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn02
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitem_01:
+	_EASY_OBJ_MSG	msg_elitem_01_04
+	_END
+
+SCRIPT_LABEL	ev_elitem_02
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_02
+	_TRAINER_DATA2	msg_elitem_02_01
+	_TRAINER_DATA3	msg_elitem_02_02
+	_TRAINER_DATA4	ev_elitem_02_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitem_02
+
+	_TRAINER_EASY_MSG	msg_elitem_02_03
+	_END
+
+ev_elitem_02_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn04
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitem_02:
+	_EASY_OBJ_MSG	msg_elitem_02_04
+	_END
+
+SCRIPT_LABEL	ev_elitem_03
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_03
+	_TRAINER_DATA2	msg_elitem_03_01
+	_TRAINER_DATA3	msg_elitem_03_02
+	_TRAINER_DATA4	ev_elitem_03_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitem_03
+
+	_TRAINER_EASY_MSG	msg_elitem_03_03
+	_END
+
+ev_elitem_03_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn06
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitem_03:
+	_EASY_OBJ_MSG	msg_elitem_03_04
+	_END
+
+SCRIPT_LABEL	ev_elitem_04
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_04
+	_TRAINER_DATA2	msg_elitem_04_01
+	_TRAINER_DATA3	msg_elitem_04_02
+	_TRAINER_DATA4	ev_elitem_04_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitem_04
+
+	_TRAINER_EASY_MSG	msg_elitem_04_03
+	_END
+
+ev_elitem_04_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn08
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitem_04:
+	_EASY_OBJ_MSG	msg_elitem_04_04
+	_END
+
+SCRIPT_LABEL	ev_elitew_01
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_01
+	_TRAINER_DATA2	msg_elitew_01_01
+	_TRAINER_DATA3	msg_elitew_01_02
+	_TRAINER_DATA4	ev_elitew_01_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitew_01
+
+	_TRAINER_EASY_MSG	msg_elitew_01_03
+	_END
+
+ev_elitew_01_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn03
+	_PROGRAM		MAKE_MAP_BG
+	
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitew_01:
+	_EASY_OBJ_MSG	msg_elitew_01_04
+	_END
+
+SCRIPT_LABEL	ev_elitew_02
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_02
+	_TRAINER_DATA2	msg_elitew_02_01
+	_TRAINER_DATA3	msg_elitew_02_02
+	_TRAINER_DATA4	ev_elitew_02_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitew_02
+
+	_TRAINER_EASY_MSG	msg_elitew_02_03
+	_END
+
+ev_elitew_02_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn05
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitew_02:
+	_EASY_OBJ_MSG	msg_elitew_02_04
+	_END
+
+SCRIPT_LABEL	ev_elitew_03
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_03
+	_TRAINER_DATA2	msg_elitew_03_01
+	_TRAINER_DATA3	msg_elitew_03_02
+	_TRAINER_DATA4	ev_elitew_03_end
+	_TRAINER_DATA_END
+	/* */
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,batch_get_elitew_03
+
+	_TRAINER_EASY_MSG	msg_elitew_03_03
+	_END
+
+ev_elitew_03_end:
+	_LDVAL			PARAM1,0
+	_CALL			gym05_cell_change_ptn07
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_OBJ_END
+	_END
+
+batch_get_elitew_03:
+	_EASY_OBJ_MSG	msg_elitew_03_04
+	_END
+
+
+//--------------------------------------------------------------------
+//セルコード書き換え(ウェイト有り)
+//--------------------------------------------------------------------
+#define GYM05_MAT_L		(528)
+#define GYM05_MAT_R		(529)
+
+gym05_cell_change_ptn01:
+	//ドアを開ける
+	_LDVAL			PARAM0,1
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn01
+	_RET
+
+gym05_cell_change_ptn02:
+	_LDVAL			PARAM0,2
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn02
+	_RET
+
+gym05_cell_change_ptn03:
+	_LDVAL			PARAM0,3
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn03
+	_RET
+
+gym05_cell_change_ptn04:
+	_LDVAL			PARAM0,4
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn04
+	_RET
+
+gym05_cell_change_ptn05:
+	_LDVAL			PARAM0,5
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn05
+	_RET
+
+gym05_cell_change_ptn06:
+	_LDVAL			PARAM0,6
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn06
+	_RET
+
+gym05_cell_change_ptn07:
+	_LDVAL			PARAM0,7
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn07
+	_RET
+
+gym05_cell_change_ptn08:
+	_LDVAL			PARAM0,8
+	_IFVAL_CALL		PARAM1,EQ,0,gym05_anime_wait
+	_IFVAL_CALL		PARAM1,EQ,1,gym05_anime_nowait
+	_CALL			gym05_mat_change_ptn08
+	_RET
+
+//--------------------------------------------------------------------
+//マット
+//--------------------------------------------------------------------
+gym05_mat_change_ptn01:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X3,85,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X4,85,GYM05_MAT_R,0
+	_SET_CELL		GYM05_MAT_X1,98,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X2,98,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn02:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X3,46,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X4,46,GYM05_MAT_R,0
+	_SET_CELL		GYM05_MAT_X1,59,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X2,59,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn03:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X3,59,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X4,59,GYM05_MAT_R,0
+	_SET_CELL		GYM05_MAT_X1,72,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X2,72,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn04:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X1,20,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X2,20,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn05:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X3,20,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X4,20,GYM05_MAT_R,0
+	_SET_CELL		GYM05_MAT_X1,33,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X2,33,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn06:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X3,33,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X4,33,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn07:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X1,7,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X2,7,GYM05_MAT_R,0
+	_RET
+
+gym05_mat_change_ptn08:
+	//マットを貼りつける
+	_SET_CELL		GYM05_MAT_X3,7,GYM05_MAT_L,0
+	_SET_CELL		GYM05_MAT_X4,7,GYM05_MAT_R,0
+	_RET
+
+//アニメ有り
+gym05_anime_wait:
+	_PROGRAM		GYM05_DOOR_ANIME
+	_STOP_SCRIPT
+	_RET
+
+//アニメなし
+gym05_anime_nowait:
+	_PROGRAM		GYM05_DOOR_CHG_CELL
+	_RET
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_05_01
+	_TALK_OBJ_START
+
+	//すでにバッチをゲットしている
+	//_IF_FLAGON_JUMP	SYS_BATCH05_GET,ev_danpei_05_02
+
+	//すでにリーダー倒している
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,ev_danpei_05_02
+
+	_TALK_KEYWAIT		msg_danpei_05_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_05_02:
+	_TALK_KEYWAIT		msg_danpei_05_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_c101_r0201
+	_TALK_START
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH05_GET,batch_get_c101_r0201
+	_JUMP			batch_no_get_c101_r0201
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_c101_r0201
+	_TALK_START
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH05_GET,batch_get_c101_r0201
+	_JUMP			batch_no_get_c101_r0201
+	_END
+
+//すでにリーダーを倒している
+batch_get_c101_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p02_c101_r0201
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_c101_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p01_c101_r0201
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

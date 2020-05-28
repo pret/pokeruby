@@ -1,0 +1,332 @@
+// ●育て屋	フィールド
+
+// ■■■□□□□□□□□□□□□□□□□■■■
+// ■■□□□□□□□□□□□□□□□□□□■■
+// ●おじいさん
+// ■■□□□□□□□□□□□□□□□□□□■■
+// ■■■□□□□□□□□□□□□□□□□■■■
+
+// さいしょ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_01
+msg_sodateya_oldman_01:
+	.byte	wa_,si_,ha_,spc_,so_,da_,te_,ya_,spc_,zi_,i_,sa_,n_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,spc_,mi_,n_,na_,no_,spc_,da_,i_,zi_,na_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	me_,n_,do_,u_,wo_,spc_,mi_,te_,spc_,o_,ru_,no_,zi_,yya_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,ka_,spc_,so_,da_,te_,te_,spc_,ho_,si_,ke_,re_,ba_
+	.byte	CR_
+	.byte	ba_,a_,sa_,n_,ni_,spc_,ta_,no_,n_,de_,spc_,o_,ku_,re_
+	.byte	EOM_
+
+
+// タマゴがあったぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_02
+msg_sodateya_oldman_02:
+	.byte	o_,o_,gyoe_,spc_,a_,n_,ta_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	a_,zu_,ka_,ttu_,te_,i_,ta_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	so_,da_,te_,te_,i_,ta_,ra_,tenten_,tenten_,na_,n_,to_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,TA_,MA_,GO_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,o_,ttu_,ta_,n_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,ko_,ka_,ra_,spc_,mo_,ttu_,te_,ki_,ta_,ka_,spc_,wa_,ka_,ra_,n_,ga_
+	.byte	CR_
+	.byte	a_,n_,ta_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,mo_,ttu_,te_,ta_,n_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ttu_,pa_,ri_,spc_,ho_,si_,i_,zi_,yya_,ro_,hate_
+	.byte	EOM_
+
+// ○○○○はげんきじゃぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_03
+msg_sodateya_oldman_03:
+	.byte	o_,o_,spc_,a_,n_,ta_,ka_,gyoe_,spc_,yo_,ku_,ki_,ta_,na_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,ge_,n_,ki_,zi_,yya_,zo_
+	.byte	EOM_
+
+
+// それじゃわしがもらおう
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_04
+msg_sodateya_oldman_04:
+	.byte	so_,re_,zi_,yya_,spc_,wa_,si_,ga_,spc_,mo_,ra_,o_,u_
+	.byte	CR_
+	.byte	a_,ri_,ga_,to_,yo_
+	.byte	EOM_
+
+// てもちがいっぱいのようじゃな
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_05
+msg_sodateya_oldman_05:
+	.byte	te_,mo_,ti_,ga_,spc_,i_,ttu_,pa_,i_,no_,spc_,yo_,u_,zi_,yya_,na_,tenten_
+	.byte	CR_
+	.byte	te_,mo_,ti_,wo_,spc_,se_,i_,ri_,si_,te_,ka_,ra_,spc_,ma_,ta_,ki_,na_,sa_,i_
+	.byte	EOM_
+
+// ○○○はそだてやじいさんからタマゴをもらった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_06
+msg_sodateya_oldman_06:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,so_,da_,te_,ya_,spc_,zi_,i_,sa_,n_,ka_,ra_
+	.byte	CR_
+	.byte	TA_,MA_,GO_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+
+// だいじにそだてなさいよ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_07
+msg_sodateya_oldman_07:
+	.byte	da_,i_,zi_,ni_,so_,da_,te_,na_,sa_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ところであんたの○○○じゃが
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_08
+msg_sodateya_oldman_08:
+	.byte	to_,ko_,ro_,de_,spc_,a_,n_,ta_,no_,spc_,I_MSG_,STR_TEMP_BUF0,zi_,yya_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,ka_,spc_,I_MSG_,STR_TEMP_BUF1,to_,ko_,no_,spc_,I_MSG_,STR_TEMP_BUF2,to_
+	.byte	CR_
+	.byte	na_,ka_,yo_,ku_,spc_,a_,so_,n_,de_,spc_,o_,ttu_,ta_,zo_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,mo_,spc_,na_,ni_,ya_,ra_,spc_,ME_,bou_,RU_,wo_
+	.byte	CR_
+	.byte	mo_,ra_,ttu_,te_,o_,ttu_,ta_,spc_,yo_,u_,zi_,yya_
+	.byte	EOM_
+
+// ばあさんにいっておくれ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_09
+msg_sodateya_oldman_09:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,hi_,ki_,to_,ri_,ta_,i_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	ba_,sa_,n_,ni_,spc_,i_,ttu_,te_,spc_,o_,ku_,re_
+	.byte	EOM_
+
+
+// ○○○○と○○○○はげんきじゃぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldman_10
+msg_sodateya_oldman_10:
+	.byte	o_,o_,spc_,a_,n_,ta_,ka_,gyoe_,spc_,yo_,ku_,ki_,ta_,na_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,to_,spc_,I_MSG_,STR_TEMP_BUF1,ha_,spc_,ge_,n_,ki_,zi_,yya_,zo_
+	.byte	EOM_
+
+
+//ほんとうはほしいいんじゃろ？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL msg_sodateya_oldman_11
+msg_sodateya_oldman_11:
+	.byte wa_,si_,ga_,spc_,mo_,ra_,ttu_,te_,si_,ma_,u_,zo_
+	.byte CR_
+	.byte ho_,n_,to_,u_,ha_,spc_,ho_,si_,i_,n_,zi_,yya_,ro_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●おばあさん
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// さいしょ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_01
+msg_sodateya_oldwoman_01:
+	.byte	wa_,si_,ha_,spc_,so_,da_,te_,ya_,spc_,ba_,a_,sa_,n_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,sa_,n_,no_,spc_,ka_,wa_,ri_,ni_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	so_,da_,te_,te_,spc_,a_,ge_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,ka_,spc_,so_,da_,te_,te_,spc_,ho_,si_,i_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// どのこをそだててみるかね
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_02
+msg_sodateya_oldwoman_02:
+	.byte	do_,no_,ko_,wo_,spc_,so_,da_,te_,te_,spc_,mi_,ru_,ka_,ne_,hate_
+	.byte	EOM_
+
+// それではしばらくあずかるぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_03
+msg_sodateya_oldwoman_03:
+	.byte	so_,re_,de_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,wo_
+	.byte	CR_
+	.byte	si_,ba_,ra_,ku_,spc_,a_,zu_,ka_,ru_,zo_
+	.byte	NORMAL_WAIT_
+	.byte	te_,ki_,to_,u_,ni_,spc_,zi_,ka_,n_,ga_
+	.byte	CR_
+	.byte	ta_,ttu_,ta_,ra_,spc_,ma_,ta_,ki_,na_,sa_,i_
+	.byte	EOM_
+
+// もう１ぴきそだてるかい？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_04
+msg_sodateya_oldwoman_04:
+	.byte	n2_,hi_,ki_,spc_,ma_,de_,na_,ra_,spc_,a_,zu_,ka_,re_,ru_,ke_,do_
+	.byte	CR_
+	.byte	mo_,u_,spc_,n1_,pi_,ki_,spc_,so_,da_,te_,te_,mi_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// じいさんがさがしておったぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_05
+msg_sodateya_oldwoman_05:
+	.byte	zi_,i_,sa_,n_,ga_,spc_,a_,n_,ta_,wo_,spc_,sa_,ga_,si_,te_,spc_,o_,ttu_,ta_,zo_
+	.byte	EOM_
+
+// そうかいそれじゃまたきておくれ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_06
+msg_sodateya_oldwoman_06:
+	.byte	so_,u_,ka_,i_,spc_,so_,re_,zi_,yya_,spc_,ma_,ta_,spc_,ki_,te_,o_,ku_,re_
+	.byte	EOM_
+
+// おかねがたりないようじゃのう…
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_07
+msg_sodateya_oldwoman_07:
+	.byte	o_,ka_,ne_,ga_,spc_,ta_,ri_,na_,i_,spc_,yo_,u_,zi_,yya_,no_,u_,tenten_
+	.byte	EOM_
+
+// もう１ぴきもひきとるかい？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_08
+msg_sodateya_oldwoman_08:
+	.byte	mo_,u_,spc_,n1_,pi_,ki_,mo_,spc_,hi_,ki_,to_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// それじゃまたきておくれ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_09
+msg_sodateya_oldwoman_09:
+	.byte	so_,re_,zi_,yya_,spc_,ma_,ta_,spc_,ki_,te_,o_,ku_,re_
+	.byte	EOM_
+
+// おおあんたか！よくきたな
+// おまえさんのぽけもんはげんきじゃぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_10
+msg_sodateya_oldwoman_10:
+	.byte	o_,o_,spc_,a_,n_,ta_,ka_,gyoe_,spc_,yo_,ku_,ki_,ta_,na_
+	.byte	CR_
+	.byte	o_,ma_,e_,sa_,n_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,GE_,N_,KI_,zi_,yya_,zo_
+	.byte	EOM_
+
+// ○○○はレベルでいうと
+// ○○くらいそだっておるぞ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_11
+msg_sodateya_oldwoman_11:
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,RE_,BE_,RU_,de_,spc_,i_,u_,to_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,ku_,ra_,i_,spc_,so_,da_,ttu_,te_,spc_,o_,ru_,zo_
+	.byte	EOM_
+
+// てもちのポケモンがいっぱいじゃよ！
+// ポケモンをせいりしてからきなさい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_12
+msg_sodateya_oldwoman_12:
+	.byte	te_,mo_,ti_,no_,spc_,PO_,KE_,MO_,N_,ga_,i_,ttu_,pa_,i_,zi_,yya_,yo_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,se_,i_,ri_,si_,te_,ka_,ra_,spc_,ki_,na_,sa_,i_
+	.byte	EOM_
+
+
+// どっちのポケモンをひきとるかい？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_13
+msg_sodateya_oldwoman_13:
+	.byte	do_,ttu_,ti_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,hi_,ki_,to_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// ○○○をひきとるなら料金は○○円だよ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_14
+msg_sodateya_oldwoman_14:
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,hi_,ki_,to_,ru_,na_,ra_
+	.byte	CR_
+	.byte	ri_,yyo_,u_,ki_,n_,ha_,spc_,I_MSG_,STR_TEMP_BUF1,yen_,spc_,da_,yo_
+	.byte	EOM_
+
+
+// はいよ　たしかに！
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_15
+msg_sodateya_oldwoman_15:
+	.byte	ha_,i_,yo_,spc_,ta_,si_,ka_,ni_,gyoe_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,re_,te_,i_,ki_,na_,sa_,i_,gyoe_
+	.byte	EOM_
+
+	.GLOBAL	msg_sodateya_oldwoman_15b
+msg_sodateya_oldwoman_15b:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,so_,da_,te_,ya_,spc_,ba_,a_,sa_,n_,ka_,ra_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,hi_,ki_,to_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+
+
+// おやポケモンが１ぴきしかいないようだな
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_16
+msg_sodateya_oldwoman_16:
+	.byte	o_,ya_,hate_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	n1_,pi_,ki_,spc_,si_,ka_,spc_,i_,na_,i_,yo_,u_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ki_,na_,sa_,i_,yo_
+	.byte	EOM_
+
+
+// ポケモンをひきとるかい？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_17
+msg_sodateya_oldwoman_17:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,hi_,ki_,to_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+
+//  そのポケモンをあずけるとたたかえなくなるぞ						
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_oldwoman_18
+msg_sodateya_oldwoman_18:
+	.byte	so_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,a_,zu_,ke_,ru_,to_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,e_,na_,ku_,spc_,na_,ru_,zo_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ki_,na_,sa_,i_,yo_
+	.byte	EOM_
+
+
+// おや…？（タマゴが孵る）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sodateya_tamago_huka_01
+msg_sodateya_tamago_huka_01:
+	.byte	o_,ya_,tenten_,hate_
+	.byte	EOM_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ma_,go_,no_,spc_,yo_,u_,su_,ga_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,me_,de_,to_,u_,gyoe_
+	.byte	CR_
+	.byte	ta_,ma_,go_,ka_,ra_,spc_,I_MSG_,STR_TEMP_BUF0,ga_,spc_,u_,ma_,re_,ta_,gyoe_
+	.byte	EOM_
+

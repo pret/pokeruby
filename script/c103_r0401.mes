@@ -1,0 +1,442 @@
+// ●キンセツシティ　ゲームコーナー
+
+
+// ●サラリーウーマン２
+// ●コイン引き替え
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_c103_r0401
+msg_workerw2_01_p01_c103_r0401:
+	.byte	i_,ra_,ttu_,si_,yya_,i_,ma_,se_,gyoe_
+	.byte	CR_
+	.byte	KI_,N_,SE_,TU_,spc_,GE_,bou_,MU_,KO_,bou_,NA_,bou_,spc_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「コインケース」を持っていない　→msg_workerw2_01_p02_c103_r0401:
+// ●「コインケース」を持っている　　→msg_workerw2_01_p03_c103_r0401:
+
+// ●「コインケース」を持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_c103_r0401
+msg_workerw2_01_p02_c103_r0401:
+	.byte	GE_,bou_,MU_,yo_,u_,spc_,KO_,I_,N_,spc_,de_,su_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ra_,hate_,spc_,KO_,I_,N_,wo_,spc_,i_,re_,ru_
+	.byte	CR_
+	.byte	KO_,I_,N_,KE_,bou_,SU_,ga_,spc_,a_,ri_,ma_,se_,n_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「コインケース」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_c103_r0401
+msg_workerw2_01_p03_c103_r0401:
+	.byte	GE_,bou_,MU_,yo_,u_,spc_,KO_,I_,N_,spc_,de_,su_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	n5_,n0_,ma_,i_,spc_,n1_,n0_,n0_,n0_,e_,n_,ni_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	CR_
+	.byte	KO_,I_,N_,wo_,spc_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+// 　　５０まい　　１０００円
+// 　５００まい　１００００円
+// ●どちらかを選択　　　　　　　　　　　　　→msg_workerw2_01_p04_c103_r0401:
+// ●どちらかを選択したが、お金が足りない　　→msg_workerw2_01_p05_c103_r0401:
+// ●どちらかを選択したが、ケースがいっぱい　→msg_workerw2_01_p06_c103_r0401:
+// ●Ｂキャンセル　　　　　　　　　　　　　　→msg_workerw2_01_p07_c103_r0401:
+// .
+// ●どちらかを選択
+// ●端数は切り捨て、コイン９９５０枚以上は、すべていっぱいとみなします
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p04_c103_r0401
+msg_workerw2_01_p04_c103_r0401:
+	.byte	ha_,i_,spc_,a_,ri_,ga_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	CR_
+	.byte	KO_,I_,N_,spc_,de_,su_,gyoe_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●コインケースに、コインが５０枚加算されます
+
+// ●どちらかを選択したが、お金が足りない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p05_c103_r0401
+msg_workerw2_01_p05_c103_r0401:
+	.byte	a_,no_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,ka_,ne_,ga_,spc_,ta_,ri_,na_,i_,yo_,u_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●どちらかを選択したが、ケースがいっぱい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p06_c103_r0401
+msg_workerw2_01_p06_c103_r0401:
+	.byte	a_,ra_,hate_
+	.byte	CR_
+	.byte	KO_,I_,N_,KE_,bou_,SU_,ga_,spc_,ma_,n_,ta_,n_,spc_,de_,su_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●Ｂキャンセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p07_c103_r0401
+msg_workerw2_01_p07_c103_r0401:
+	.byte	tenten_,tenten_,spc_,i_,ri_,ma_,se_,n_,ka_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,ki_,te_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●繰り返しコインを買うとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p08_c103_r0401
+msg_workerw2_01_p08_c103_r0401:
+	.byte	n5_,n0_,ma_,i_,spc_,n1_,n0_,n0_,n0_,e_,n_,ni_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	CR_
+	.byte	KO_,I_,N_,wo_,spc_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●サラリーウーマン２
+// ●景品交換嬢（２人います）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p01_c103_r0401
+msg_workerw2_02_p01_c103_r0401:
+	.byte	i_,ra_,ttu_,si_,yya_,i_,ma_,se_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ti_,ra_,de_,ha_,spc_,GE_,bou_,MU_,de_,spc_,ta_,me_,ta_,spc_,KO_,I_,N_,wo_
+	.byte	CR_
+	.byte	o_,su_,ki_,na_,spc_,ke_,i_,hi_,n_,to_,spc_,ko_,u_,ka_,n_,spc_,si_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●コインケースを持っているときは続けて
+// 　→msg_workerw2_02_p01_c103_r0401:
+
+// ●コインケースを持っているとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p02_c103_r0401
+msg_workerw2_02_p02_c103_r0401:
+	.byte	do_,re_,ga_,spc_,i_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●景品リスト表示
+// ●いらない
+
+// ●選択した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p03_c103_r0401
+msg_workerw2_02_p03_c103_r0401:
+	.byte	I_MSG_,STR_TEMP_BUF0,de_,spc_,i_,i_,de_,su_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝選んだ景品
+// ●「はい」を選択　　　　　　→msg_workerw2_02_p04_c103_r0401:
+// ●「はい」を選択、コイン不足→msg_workerw2_02_p05_c103_r0401:
+// ●「はい」を選択、荷物が一杯→msg_workerw2_02_p06_c103_r0401:
+// ●「いいえ」を選択　　　　　→msg_workerw2_02_p07_c103_r0401:
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p04_c103_r0401
+msg_workerw2_02_p04_c103_r0401:
+	.byte	do_,u_,mo_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	CR_
+	.byte	zi_,ta_,ku_,no_,spc_,PA_,SO_,KO_,N_,ni_,spc_,o_,ku_,ttu_,te_,spc_,o_,ki_,ma_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……msg_workerw2_02_p02_c103_r0401:
+
+// ●「はい」を選択、コイン不足
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p05_c103_r0401
+msg_workerw2_02_p05_c103_r0401:
+	.byte	KO_,I_,N_,ga_,spc_,ta_,ri_,ma_,se_,n_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……msg_workerw2_02_p02_c103_r0401:
+
+// ●「はい」を選択、パソコンが一杯
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p06_c103_r0401
+msg_workerw2_02_p06_c103_r0401:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,wo_
+	.byte	CR_
+	.byte	i_,re_,ru_,spc_,ba_,si_,yyo_,ga_,spc_,i_,ttu_,pa_,i_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……msg_workerw2_02_p02_c103_r0401:
+
+// ●「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_02_p07_c103_r0401
+msg_workerw2_02_p07_c103_r0401:
+	.byte	a_,ra_,spc_,so_,u_,de_,su_,ka_
+	.byte	CR_
+	.byte	KO_,I_,N_,spc_,ta_,me_,te_,spc_,ki_,te_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●サラリーウーマン２
+// ●景品交換嬢（２人います）
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_03_p04_c103_r0401
+msg_workerw2_03_p04_c103_r0401:
+	.byte	ha_,i_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……msg_workerw2_02_p02_c103_r0401:
+
+// ●「はい」を選択、荷物が一杯
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_03_p06_c103_r0401
+msg_workerw2_03_p06_c103_r0401:
+	.byte	so_,re_,i_,zi_,yyo_,u_,spc_,mo_,te_,na_,i_,spc_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……msg_workerw2_02_p02_c103_r0401:
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
+// ●客（少女２）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_c103_r0401
+msg_girl2_01_p01_c103_r0401:
+	.byte	u_,ttu_,ka_,ri_,spc_,o_,n_,na_,zi_
+	.byte	CR_
+	.byte	nu_,i_,gu_,ru_,mi_,wo_,spc_,mo_,ra_,ttu_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hi_,to_,tu_,spc_,a_,na_,ta_,ni_,spc_,wa_,ke_,te_,a_,ge_,yo_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　　　　　　　　→msg_girl2_01_p02_c103_r0401:
+// ●「はい」だがパソコン一杯→msg_girl2_01_p03_c103_r0401:
+// ●「いいえ」　　　　　　　→msg_girl2_01_p04_c103_r0401:
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p02_c103_r0401
+msg_girl2_01_p02_c103_r0401:
+	.byte	ha_,i_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公が最初に選択したポケモンによってもらえるものが決まる
+// 　「キモリ」　　→ぬいぐるみの「キモリ」
+// 　「ミズゴロウ」→ぬいぐるみの「ミズゴロウ」
+// 　「アチャモ」　→ぬいぐるみの「アチャモ」
+// ●アイテム入手ナレーション
+// ●「はい」だがパソコン一杯
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p03_c103_r0401
+msg_girl2_01_p03_c103_r0401:
+	.byte	e_,bou_,spc_,ho_,si_,i_,ke_,do_
+	.byte	CR_
+	.byte	i_,ma_,ha_,spc_,DA_,ME_,na_,no_,bou_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p04_c103_r0401
+msg_girl2_01_p04_c103_r0401:
+	.byte	so_,n_,na_,ko_,to_,spc_,i_,wa_,zu_,ni_,spc_,mo_,ra_,ttu_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p05_c103_r0401
+msg_girl2_01_p05_c103_r0401:
+	.byte	ho_,si_,i_,spc_,ke_,i_,hi_,n_,ga_,spc_,a_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	o_,o_,a_,ta_,ri_,spc_,ne_,ra_,ttu_,te_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●おじさん２
+// ●（Ｘ１９・Ｙ４）に移動
+// ●コインケースを持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_02_p01_c103_r0401
+msg_middlem2_02_p01_c103_r0401:
+	.byte	ko_,ko_,de_,spc_,a_,so_,bu_,ni_,ha_
+	.byte	CR_
+	.byte	KO_,I_,N_,KE_,bou_,SU_,ga_,spc_,hi_,tu_,yo_,u_,spc_,da_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,si_,ka_,ttu_,ta_,ra_,spc_,to_,na_,ri_,no_,spc_,i_,e_,no_
+	.byte	CR_
+	.byte	o_,ne_,e_,sa_,n_,ni_,spc_,i_,ttu_,te_,mi_,ta_,ra_,spc_,do_,u_,da_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●コインケースを持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_02_p02_c103_r0401
+msg_middlem2_02_p02_c103_r0401:
+	.byte	ki_,yyo_,u_,ha_,spc_,ka_,ti_,ma_,ku_,ttu_,te_,spc_,i_,ru_,ka_,ra_,na_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,ni_,mo_,spc_,KO_,I_,N_,wo_,spc_,wa_,ke_,te_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●コインを２０枚くれます
+// ●コインをもらって以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_02_p03_c103_r0401
+msg_middlem2_02_p03_c103_r0401:
+	.byte	o_,zi_,sa_,n_,ha_,spc_,KI_,N_,SE_,TU_,ni_,spc_,ku_,ru_,to_
+	.byte	CR_
+	.byte	i_,tu_,mo_,spc_,GE_,bou_,MU_,KO_,bou_,NA_,bou_,de_,spc_,a_,so_,bu_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,da_,ka_,spc_,ho_,ka_,ni_,spc_,ku_,ra_,be_,te_
+	.byte	CR_
+	.byte	de_,ya_,su_,i_,yo_,u_,na_,spc_,ki_,ga_,spc_,su_,ru_,n_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人２（ルーレット側に配置）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_c103_r0401
+msg_oldman2_01_p01_c103_r0401:
+	.byte	RU_,bou_,RE_,TTU_,TO_,ha_,spc_,a_,so_,bu_,spc_,TE_,bou_,BU_,RU_,de_
+	.byte	CR_
+	.byte	RE_,bou_,TO_,ga_,spc_,ti_,ga_,u_,n_,zi_,yya_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ttu_,te_,i_,ru_,spc_,KO_,I_,N_,no_,spc_,ka_,zu_,de_
+	.byte	CR_
+	.byte	a_,so_,bu_,spc_,TE_,bou_,BU_,RU_,wo_,spc_,e_,ra_,bu_,to_,spc_,i_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●料理人（スロット側に配置）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cook1_01_p01_c103_r0401
+msg_cook1_01_p01_c103_r0401:
+	.byte	hi_,bou_,spc_,SU_,RO_,TTU_,TO_,wo_,spc_,si_,te_,ru_,to_
+	.byte	CR_
+	.byte	si_,go_,to_,wo_,spc_,wa_,su_,re_,te_,si_,ma_,u_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_02_p01_c103_r0401
+msg_woman1_02_p01_c103_r0401:
+	.byte	ko_,no_,spc_,GE_,bou_,MU_,KO_,bou_,NA_,bou_,de_,ha_
+	.byte	CR_
+	.byte	KO_,I_,N_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,a_,so_,bu_,no_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c103_r0401
+msg_gentlem1_01_p01_c103_r0401:
+	.byte	ko_,no_,spc_,RU_,bou_,RE_,TTU_,TO_,spc_,to_,i_,u_,spc_,ya_,tu_,ha_
+	.byte	CR_
+	.byte	o_,o_,ki_,ku_,spc_,ne_,ra_,o_,u_,to_,spc_,su_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,ka_,te_,na_,i_,ku_,se_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,ya_,me_,ra_,re_,na_,i_,spc_,ko_,ma_,ttu_,ta_,spc_,ya_,tu_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー男１
+// ●説明：３枚賭けて遊ぼう
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c103_r0401
+msg_trainerm1_01_p01_c103_r0401:
+	.byte	SU_,RO_,TTU_,TO_,ha_,spc_,KO_,I_,N_,spc_,n1_,ma_,i_,ka_,ra_,spc_,a_,so_,be_,ru_,ke_,do_
+	.byte	CR_
+	.byte	n3_,ma_,i_,spc_,ka_,ke_,ta_,spc_,ho_,u_,ga_,spc_,i_,i_,n_,zi_,yya_,na_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,o_,a_,ta_,ri_,no_,spc_,ka_,ku_,ri_,tu_,ga_,spc_,A_,TTU_,PU_,su_,ru_,ka_,ra_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マニア１
+// ●説明：ＢＤタイムについて
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_c103_r0401
+msg_freak1_01_p01_c103_r0401:
+	.byte	KI_,MI_,ha_,spc_,kako_,n7_,kakot_,wo_,spc_,ne_,ra_,ttu_,te_,spc_,to_,me_,ra_,re_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	B__,D__,TA_,I_,MU_,spc_,ttu_,te_,i_,u_,spc_,TI_,YYA_,N_,SU_,GE_,bou_,MU_,no_,to_,ki_
+	.byte	CR_
+	.byte	kako_,n7_,kakot_,wo_,spc_,ne_,ra_,ttu_,te_,spc_,ba_,ttu_,ti_,ri_,spc_,to_,me_,ra_,re_,re_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	KO_,I_,N_,wo_,spc_,ta_,ku_,sa_,n_,spc_,hu_,ya_,se_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ●（Ｘ４・Ｙ６）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw_01_p01_c103_r0401
+msg_trainerw_01_p01_c103_r0401:
+	.byte	SU_,RO_,TTU_,TO_,no_,spc_,o_,to_,ku_,na_,spc_,zi_,yyo_,u_,ho_,u_
+	.byte	CR_
+	.byte	a_,na_,ta_,ni_,spc_,o_,si_,e_,te_,spc_,a_,ge_,ru_,wa_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_,NA_,ZU_,MA_,ga_,spc_,ta_,ku_,sa_,n_,spc_,ta_,ma_,ttu_,te_,i_,ru_,ho_,do_
+	.byte	CR_
+	.byte	B__,D__,TA_,I_,MU_,no_,spc_,ka_,i_,su_,u_,ga_,spc_,hu_,e_,ya_,su_,i_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,i_,ko_,u_,spc_,n5_,ka_,i_,no_,spc_,B__,D__,TA_,I_,MU_,no_,spc_,GE_,bou_,MU_,de_
+	.byte	CR_
+	.byte	RE_,GI_,YYU_,RA_,bou_,BO_,bou_,NA_,SU_,wo_,spc_,n4_,ka_,i_,spc_,a_,te_,te_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	BI_,TTU_,GU_,BO_,bou_,NA_,SU_,wo_,spc_,a_,te_,ru_,ko_,to_,ga_,spc_,de_,ki_,re_,ba_
+	.byte	CR_
+	.byte	KO_,I_,N_,wo_,spc_,n6_,n6_,n0_,ma_,i_,mo_,spc_,ka_,se_,ge_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●コインケースを持たずに
+// 　ルーレットやスロットをしようとした場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_coincase_01_p01_c103_r0401
+msg_coincase_01_p01_c103_r0401:
+	.byte	KO_,I_,N_,KE_,bou_,SU_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,i_,na_,i_,no_,de_,spc_,a_,so_,be_,ma_,se_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

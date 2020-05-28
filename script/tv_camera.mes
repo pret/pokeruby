@@ -1,0 +1,687 @@
+// ●インタビュアー戦闘前のセリフ（エンカウント時のセリフ）
+// ●　２回目以降→msg_interview_01_p02_camera:
+// ●　２匹ポケモンを持ってない→msg_interview_01_p15_camera:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p01_camera
+msg_interview_01_p01_camera:
+	.byte	MA_,RI_,kako2_,o_,ttu_,spc_,ko_,n_,na_,to_,ko_,ro_,ni_
+	.byte	CR_
+	.byte	tu_,yo_,so_,u_,na_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,ha_,ttu_,ke_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,bou_,si_,spc_,KA_,ME_,RA_,wo_,spc_,ma_,wa_,si_,te_
+	.byte	CR_
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,spc_,ka_,i_,si_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+// ●２回目以降での戦闘前のセリフ（エンカウント時のセリフ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p02_camera
+msg_interview_01_p02_camera:
+	.byte	MA_,RI_,kako2_,a_,gyoe_,spc_,a_,na_,ta_,ha_
+	.byte	CR_
+	.byte	ko_,no_,a_,i_,da_,no_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,bou_,si_,spc_,do_,no_,ku_,ra_,i_,spc_,tu_,yo_,ku_,spc_,na_,ttu_,ta_,ka_
+	.byte	CR_
+	.byte	sa_,ttu_,so_,ku_,spc_,I_,N_,TA_,BI_,YYU_,bou_,spc_,ka_,i_,si_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+// ●戦闘に勝った後のメッセージ
+// ●　２回目以降→msg_interview_01_p17_camera:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p03_camera
+msg_interview_01_p03_camera:
+	.byte	MA_,RI_,kako2_,wa_,ta_,si_,no_,spc_,me_,ni_,spc_,ku_,ru_,i_,ha_,na_,i_,wa_
+	.byte	CR_
+	.byte	su_,go_,i_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,ttu_,ke_,n_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+// ●対戦後「インタビュアー女」に話しかける
+// ●　２回目以降→msg_interview_01_p05_camera:
+// ●　２回目以降で、前のデータがない→msg_interview_01_p16_camera:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p04_camera
+msg_interview_01_p04_camera:
+	.byte	MA_,RI_,kako2_,su_,go_,i_,gyoe_,spc_,su_,go_,i_,gyoe_
+	.byte	CR_
+	.byte	a_,na_,ta_,spc_,i_,ttu_,ta_,i_,spc_,na_,ni_,mo_,no_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,su_,ga_,spc_,wa_,ta_,si_,ta_,ti_,ga_
+	.byte	CR_
+	.byte	me_,wo_,spc_,tu_,ke_,ta_,da_,ke_,spc_,a_,ru_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,a_,ttu_,spc_,zi_,tu_,ha_,spc_,wa_,ta_,si_,ta_,ti_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,ba_,si_,yyo_,no_,spc_,i_,ro_,n_,na_,spc_,TO_,RE_,bou_,NA_,bou_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,si_,te_,spc_,ma_,wa_,ttu_,te_,i_,ru_,no_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,su_,ko_,si_,da_,ke_
+	.byte	CR_
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,spc_,sa_,se_,te_,spc_,mo_,ra_,e_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+
+// ●２回目以降で
+// ●対戦後「インタビュアー女」に話しかける
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p05_camera
+msg_interview_01_p05_camera:
+	.byte	MA_,RI_,kako2_,kako_,I_MSG_,STR_TEMP_BUF0,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	o_,bo_,e_,te_,ru_,hate_,spc_,ma_,e_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,to_,ki_
+	.byte	CR_
+	.byte	a_,na_,ta_,ga_,spc_,i_,ttu_,ta_,spc_,ki_,me_,ZE_,RI_,HU_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ta_,ti_,spc_,ti_,yya_,bou_,n_,to_
+	.byte	CR_
+	.byte	o_,bo_,e_,te_,ru_,n_,spc_,da_,ka_,ra_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ノーダメージフラグがある	　→msg_interview_01_p06_camera
+// ●ボールを投げた(入ってない）　→msg_interview_01_p07_camera
+// ●アイテムを使った			　→msg_interview_01_p08_camera
+// ●ポケモンが瀕死になった	　→msg_interview_01_p09_camera
+// ●どの条件にも当たらない	　→msg_interview_01_p10_camera
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p06_camera
+msg_interview_01_p06_camera:
+	.byte	so_,u_,so_,u_,spc_,ma_,e_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	te_,mo_,spc_,a_,si_,mo_,spc_,de_,na_,ka_,ttu_,ta_,spc_,no_,yo_,ne_,ee_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,spc_,do_,u_,hate_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,I_,N_,TA_,BI_,YYU_,bou_,spc_,u_,ke_,te_,mi_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p07_camera
+msg_interview_01_p07_camera:
+	.byte	so_,u_,so_,u_,spc_,ma_,e_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	BO_,bou_,RU_,wo_,spc_,na_,ge_,ra_,re_,spc_,ta_,n_,da_,ttu_,ke_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,bi_,ttu_,ku_,ri_,si_,te_,spc_,mi_,n_,na_,ni_
+	.byte	CR_
+	.byte	i_,i_,hu_,ra_,si_,spc_,ti_,yya_,ttu_,ta_,wa_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,spc_,do_,u_,hate_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,I_,N_,TA_,BI_,YYU_,bou_,spc_,u_,ke_,te_,mi_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p08_camera
+msg_interview_01_p08_camera:
+	.byte	so_,u_,so_,u_,spc_,ma_,e_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	do_,u_,gu_,wo_,spc_,u_,ma_,ku_,spc_,tu_,ka_,wa_,re_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ke_,ti_,yya_,ttu_,ta_,spc_,no_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,spc_,do_,u_,hate_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,I_,N_,TA_,BI_,YYU_,bou_,spc_,u_,ke_,te_,mi_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p09_camera
+msg_interview_01_p09_camera:
+	.byte	so_,u_,so_,u_,spc_,ma_,e_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	ke_,ttu_,ko_,u_,spc_,i_,i_,si_,yyo_,u_,bu_,spc_,da_,ttu_,ta_,n_,da_,yo_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,spc_,do_,u_,hate_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,I_,N_,TA_,BI_,YYU_,bou_,spc_,u_,ke_,te_,mi_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+// ●＠０以前の戦闘でつかってたポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p10_camera
+msg_interview_01_p10_camera:
+	.byte	to_,ko_,ro_,de_,spc_,do_,u_,hate_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,I_,N_,TA_,BI_,YYU_,bou_,spc_,u_,ke_,te_,mi_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+
+
+// ●はい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p11_camera
+msg_interview_01_p11_camera:
+	.byte	ho_,n_,to_,gyoe_,hate_
+	.byte	CR_
+	.byte	a_,ri_,ga_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ta_,ta_,ka_,i_,no_,spc_,a_,to_,no_
+	.byte	CR_
+	.byte	ka_,n_,so_,u_,wo_,spc_,BI_,SI_,TTU_,to_,spc_,hi_,to_,ko_,to_,de_
+	.byte	SCROLL_WAIT_
+	.byte	do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●一言インタビュー画面
+// ●答えた　　→msg_interview_01_p12_camera:
+// ●答えない　→msg_interview_01_p13_camera:
+
+
+
+
+// ●一言答えた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p12_camera
+msg_interview_01_p12_camera:
+	.byte	MA_,RI_,kako2_,n_,bou_,gyoe_
+	.byte	CR_
+	.byte	sa_,i_,ko_,u_,no_,spc_,ki_,me_,ZE_,RI_,HU_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,ka_,spc_,i_,i_,TE_,RE_,BI_,ba_,n_,gu_,mi_,ga_
+	.byte	CR_
+	.byte	de_,ki_,so_,u_,na_,spc_,yo_,ka_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,ka_,si_,ta_,ra_,spc_,ko_,no_,ko_,to_,wo_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,de_,spc_,ho_,u_,so_,u_,su_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	TE_,RE_,BI_,no_,spc_,TI_,EE_,TTU_,KU_,wo_,spc_,wa_,su_,re_,na_,i_,de_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,zi_,yya_,a_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,do_,ko_,ka_,de_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●キャンセルした
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p13_camera
+msg_interview_01_p13_camera:
+	.byte	MA_,RI_,kako2_,so_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,ko_,re_,ka_,ra_,mo_,spc_,ga_,n_,ba_,ttu_,te_,ne_,gyoe_
+	.byte	CR_
+	.byte	a_,na_,ta_,no_,ko_,to_,spc_,ti_,yyu_,u_,mo_,ku_,spc_,si_,te_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●再度話しかけた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p14_camera
+msg_interview_01_p14_camera:
+	.byte	MA_,RI_,kako2_,a_,na_,ta_,no_,spc_,ko_,to_
+	.byte	CR_
+	.byte	ti_,yyu_,u_,mo_,ku_,spc_,si_,te_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●２匹ポケモンを持ってない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p15_camera
+msg_interview_01_p15_camera:
+	.byte	MA_,RI_,kako2_,PO_,KE_,MO_,N_,wo_,spc_,i_,ttu_,pa_,i_,spc_,tu_,re_,te_,ru_
+	.byte	CR_
+	.byte	tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ttu_,te_,spc_,i_,na_,i_,spc_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●２回目以降で、前のデータがない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p16_camera
+msg_interview_01_p16_camera:
+	.byte	MA_,RI_,kako2_,u_,bou_,n_,spc_,sa_,su_,ga_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,e_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,to_,ki_,yo_,ri_
+	.byte	CR_
+	.byte	zu_,ttu_,to_,spc_,tu_,yo_,ku_,spc_,na_,ttu_,te_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ttu_,pa_,ri_,spc_,wa_,ta_,si_,ta_,ti_,ga_,spc_,mi_,tu_,ke_,ta_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,spc_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ko_,ro_,de_,spc_,do_,u_,hate_
+	.byte	CR_
+	.byte	ko_,n_,do_,ko_,so_,spc_,I_,N_,TA_,BI_,YYU_,bou_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	u_,ke_,te_,spc_,mo_,ra_,e_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●はい／いいえの選択
+// ●はい　　→msg_interview_01_p11_camera:
+// ●いいえ　→msg_interview_01_p13_camera:
+
+
+
+
+
+// ●戦闘に勝った後のメッセージ（２回目以降）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p17_camera
+msg_interview_01_p17_camera:
+	.byte	MA_,RI_,kako2_,su_,go_,i_,spc_,ta_,ta_,ka_,i_,da_,ttu_,ta_,wa_,gyoe_
+	.byte	CR_
+	.byte	ho_,ra_,spc_,ti_,yya_,n_,to_,spc_,KA_,ME_,RA_,ni_,to_,ttu_,ta_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+
+
+// ●カメラマン戦闘前のセリフ（エンカウント時のセリフ）
+// ●　２回目以降→msg_camera_01_p02_camera:
+// ●　２匹ポケモンを持ってない→msg_camera_01_p04_camera:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camera_01_p01_camera
+msg_camera_01_p01_camera:
+	.byte	DA_,I_,kako2_,o_,ttu_,spc_,ko_,n_,na_,to_,ko_,ro_,ni_
+	.byte	CR_
+	.byte	tu_,yo_,so_,u_,na_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,ha_,ttu_,ke_,n_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ttu_,so_,ku_,spc_,ro_,ku_,ga_,spc_,ka_,i_,si_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+// ●２回目以降での戦闘前のセリフ（エンカウント時のセリフ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camera_01_p02_camera
+msg_camera_01_p02_camera:
+	.byte	DA_,I_,kako2_,ki_,mi_,ha_,spc_,ko_,no_,a_,i_,da_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,bou_,si_,spc_,ko_,no_,spc_,ta_,ta_,ka_,i_,wo_
+	.byte	CR_
+	.byte	su_,be_,te_,spc_,KA_,ME_,RA_,ni_,spc_,o_,sa_,me_,te_,ya_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●対戦後「カメラマン男」に話しかける
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camera_01_p03_camera
+msg_camera_01_p03_camera:
+	.byte	DA_,I_,kako2_,sa_,su_,ga_,da_,na_,gyoe_
+	.byte	CR_
+	.byte	i_,i_,spc_,e_,i_,zo_,u_,wo_,spc_,to_,ru_,ko_,to_,ga_,spc_,de_,ki_,ta_,yo_,gyoe_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●２匹ポケモンをもってない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camera_01_p04_camera
+msg_camera_01_p04_camera:
+	.byte	DA_,I_,kako2_,ki_,mi_,ha_,spc_,n1_,pi_,ki_,si_,ka_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,spc_,na_,i_,no_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,i_,ttu_,pa_,i_,spc_,i_,ta_,ho_,u_,ga_
+	.byte	CR_
+	.byte	i_,i_,spc_,e_,i_,zo_,u_,ni_,spc_,na_,ru_,n_,da_,ga_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●戦闘に勝った後のメッセージ
+// ●　２回目以降→msg_camera_01_p06_camera:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camera_01_p05_camera
+msg_camera_01_p05_camera:
+	.byte	DA_,I_,kako2_,su_,go_,i_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,ttu_,ke_,n_,da_
+	.byte	CR_
+	.byte	ko_,re_,ha_,spc_,da_,i_,SU_,KU_,bou_,PU_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●戦闘に勝った後のメッセージ（２回目以降）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camera_01_p06_camera
+msg_camera_01_p06_camera:
+	.byte	DA_,I_,kako2_,i_,ma_,no_,spc_,ta_,ta_,ka_,i_,no_,spc_,su_,be_,te_,ga_
+	.byte	CR_
+	.byte	ko_,no_,spc_,KA_,ME_,RA_,no_,na_,ka_,ni_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+
+// ●ＴＶ放送
+// ●
+// ●
+// ●＠０　戦った場所（道路）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_camera
+msg_TV_01_p01_camera:
+	.byte	kako2_,TO_,RE_,bou_,NA_,bou_,wo_,spc_,mo_,to_,me_,te_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,RI_,kako2_,ha_,bou_,i_,spc_,wa_,ta_,si_,ha_,spc_,i_,ma_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ni_,spc_,ki_,te_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,ko_,ko_,de_,spc_,a_,ta_,ra_,si_,i_,spc_,sa_,i_,no_,u_,wo_
+	.byte	CR_
+	.byte	ha_,ttu_,ku_,tu_,spc_,si_,yo_,u_,to_,spc_,o_,mo_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,spc_,wa_,ta_,si_,ga_,spc_,ti_,yyu_,u_,mo_,ku_,spc_,si_,ta_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,ko_,no_,spc_,TO_,RE_,bou_,NA_,bou_,ni_
+	.byte	CR_
+	.byte	na_,ni_,ka_,wo_,spc_,ka_,n_,zi_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦った回数が２回以上　→msg_TV_01_p02_camera
+// ●戦った回数が１回以下　→msg_TV_01_p03_camera
+
+
+
+// ●戦った回数が２回以上
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_camera
+msg_TV_01_p02_camera:
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,to_,ha_,spc_,ma_,e_,ni_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,ttu_,ta_,spc_,ko_,to_,ga_,spc_,a_,ru_,no_,de_,su_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ku_,zi_,tu_,ni_,spc_,ma_,e_,yo_,ri_
+	.byte	CR_
+	.byte	tu_,yo_,ku_,spc_,na_,ttu_,te_,i_,ru_,spc_,ka_,n_,zi_,ga_,spc_,si_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,ttu_,su_,ga_,spc_,wa_,ta_,si_,no_
+	.byte	CR_
+	.byte	ti_,yyu_,u_,mo_,ku_,spc_,si_,ta_,spc_,TO_,RE_,bou_,NA_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p03_camera
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_camera
+msg_TV_01_p03_camera:
+	.byte	sa_,te_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,zi_,tu_,ri_,yyo_,ku_,wo_
+	.byte	CR_
+	.byte	mi_,ru_,ni_,ha_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ta_,ka_,ttu_,te_,spc_,mi_,ru_,no_,ga_,spc_,i_,ti_,ba_,n_,spc_,ha_,ya_,i_,gyoe_
+	.byte	CR_
+	.byte	sa_,ttu_,so_,ku_,spc_,ti_,yyo_,u_,sa_,wo_,spc_,ka_,i_,si_,spc_,si_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,spc_,i_,u_,wa_,ke_,de_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,ttu_,te_,spc_,mi_,ta_,no_,spc_,de_,su_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,go_,to_,ni_,spc_,BO_,KO_,BO_,KO_,ni_,spc_,sa_,re_,ma_,si_,ta_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,spc_,ya_,ta_,ra_,spc_,tu_,yo_,i_,de_,su_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	de_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,ka_,n_,so_,u_,wo_
+	.byte	CR_
+	.byte	i_,wa_,se_,te_,spc_,mo_,ra_,i_,ma_,su_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●優先順位↓
+// ●ノーダメージフラグがある	　→msg_TV_01_p05_camera
+// ●ボールを投げた（入ってない）　→msg_TV_01_p06_camera
+// ●アイテムを使った			　→msg_TV_01_p07_camera
+// ●ポケモンが瀕死になった	　→msg_TV_01_p08_camera
+// ●どの条件にも当たらない	　→msg_TV_01_p04_camera
+
+
+// ●条件にあてはまらない
+// ●＠０　使ったポケモンの種類
+// ●＠１　最後に使った技
+// ●＠２　使ったポケモンの種類2
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_camera
+msg_TV_01_p04_camera:
+	.byte	I_MSG_,STR_TEMP_BUF0,to_,spc_,I_MSG_,STR_TEMP_BUF2,no_
+	.byte	CR_
+	.byte	KO_,N_,BI_,ga_,spc_,sa_,i_,ko_,u_,spc_,de_,si_,ta_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,to_,spc_,I_MSG_,STR_TEMP_BUF2,ga_,spc_,o_,ta_,ga_,i_
+	.byte	CR_
+	.byte	ta_,su_,ke_,a_,ttu_,te_,spc_,ta_,ta_,ka_,u_,spc_,su_,ga_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,aa_,spc_,na_,n_,te_
+	.byte	CR_
+	.byte	su_,ba_,ra_,si_,i_,n_,de_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ta_,ti_,to_,no_,spc_,si_,yyo_,u_,bu_,de_
+	.byte	CR_
+	.byte	sa_,i_,go_,ni_,spc_,tu_,ka_,ttu_,ta_,spc_,kako_,I_MSG_,STR_TEMP_BUF1,kakot_,mo_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,to_,spc_,I_MSG_,STR_TEMP_BUF2,no_,spc_,yu_,u_,zi_,yyo_,u_,no_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF1,kakot_,na_,n_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p09_camera
+
+
+// ●ノーダメージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_camera
+msg_TV_01_p05_camera:
+	.byte	tenten_,tenten_,wa_,ta_,ku_,si_,spc_,zi_,si_,n_,wo_
+	.byte	CR_
+	.byte	na_,ku_,si_,te_,spc_,si_,ma_,i_,ma_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,ka_,i_,mo_,spc_,ko_,u_,ge_,ki_,su_,ru_,spc_,hi_,ma_,mo_,na_,ku_
+	.byte	CR_
+	.byte	su_,gu_,ni_,spc_,ma_,ke_,te_,spc_,si_,ma_,i_,ma_,si_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	a_,a_,spc_,GU_,SU_,N_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,no_,spc_,ta_,ta_,ka_,i_,ha_
+	.byte	CR_
+	.byte	i_,ttu_,ke_,n_,no_,ka_,ti_,spc_,a_,ri_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,si_,n_,no_,spc_,a_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,ha_,spc_,i_,ti_,do_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,ttu_,te_,spc_,mi_,ru_,ko_,to_,wo_,spc_,o_,su_,su_,me_,spc_,si_,ma_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p09_camera
+
+
+// ●ボールを投げた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p06_camera
+msg_TV_01_p06_camera:
+	.byte	TO_,RE_,bou_,NA_,bou_,to_,spc_,ta_,ta_,ka_,ttu_,te_,spc_,i_,ru_,to_,ki_,ha_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,wo_,spc_,na_,ge_,ru_,na_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,ko_,to_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,spc_,si_,yyo_,u_,bu_,ha_,spc_,tu_,yo_,i_,no_,ni_
+	.byte	CR_
+	.byte	ki_,ho_,n_,ga_,spc_,na_,ttu_,te_,spc_,ma_,se_,n_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,TE_,RE_,BI_,wo_,spc_,mi_,te_,ru_,spc_,mi_,n_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,ni_,spc_,a_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	ti_,yyu_,u_,i_,si_,te_,spc_,ya_,ttu_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p09_camera
+
+
+// ●アイテムを使った
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p07_camera
+msg_TV_01_p07_camera:
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,spc_,a_,i_,te_,no_,spc_,ko_,u_,do_,u_,wo_
+	.byte	CR_
+	.byte	yo_,mu_,no_,ga_,spc_,to_,te_,mo_,spc_,u_,ma_,i_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	A_,I_,TE_,MU_,wo_,spc_,tu_,ka_,u_,spc_,TA_,I_,MI_,N_,GU_,spc_,na_,n_,ka_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,no_,spc_,mo_,no_,de_,si_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p09_camera
+
+
+// ●ポケモンが瀕死したか	
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p08_camera
+msg_TV_01_p08_camera:
+	.byte	si_,yyo_,u_,zi_,ki_,spc_,wa_,ta_,si_,mo_,spc_,na_,ka_,na_,ka_
+	.byte	CR_
+	.byte	tu_,yo_,i_,ka_,mo_,spc_,to_,spc_,o_,mo_,ttu_,ti_,yya_,i_,spc_,ma_,si_,ta_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,i_,go_,ha_,spc_,ke_,ttu_,ki_,yyo_,ku_,spc_,ma_,ke_,ti_,yya_,ttu_,ta_,spc_,ke_,do_
+	.byte	CR_
+	.byte	i_,i_,spc_,si_,a_,i_,spc_,da_,ttu_,ta_,na_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,wa_,ta_,si_,ni_,spc_,ku_,se_,n_,spc_,si_,te_,ru_,yo_,u_,zi_,yya_
+	.byte	CR_
+	.byte	ma_,da_,ma_,da_,spc_,de_,su_,yo_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p09_camera
+
+
+// ●＠０　戦闘後の一言
+// ●＠１　使ったポケモンの種類
+// ●＠２　使ったポケモンの種類2
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p09_camera
+msg_TV_01_p09_camera:
+	.byte	ta_,i_,se_,n_,no_,spc_,a_,to_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,ni_
+	.byte	CR_
+	.byte	i_,ma_,no_,spc_,ta_,i_,se_,n_,no_,spc_,ka_,n_,so_,u_,wo_,spc_,ki_,ku_,to_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,ta_,e_,te_,spc_,ku_,re_,ma_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,no_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,to_,spc_,I_MSG_,STR_TEMP_BUF2
+	.byte	SCROLL_WAIT_
+	.byte	so_,si_,te_,spc_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	n_,bou_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	na_,n_,ka_,spc_,i_,mi_,no_,hu_,ka_,i_,spc_,ko_,to_,ba_,spc_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ha_,ri_,spc_,i_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ha_
+	.byte	CR_
+	.byte	i_,i_,ko_,to_,wo_,spc_,i_,ttu_,te_,spc_,ku_,re_,ma_,su_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,so_,re_,zi_,yya_,a_,spc_,ma_,ta_
+	.byte	CR_
+	.byte	zi_,ka_,i_,no_,spc_,ho_,u_,so_,u_,de_,spc_,o_,a_,i_,spc_,si_,ma_,si_,yyo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり

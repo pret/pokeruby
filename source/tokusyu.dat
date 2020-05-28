@@ -1,0 +1,704 @@
+const	u8	SpecialAbirityMsg[][8]={
+	{
+	bou_,bou_,bou_,bou_,bou_,bou_,bou_,EOM_
+	},
+	{
+//あくしゅう
+	a_,ku_,si_,yyu_,u_,EOM_
+	},
+	{
+//あめふらし
+	a_,me_,hu_,ra_,si_,EOM_
+	},
+	{
+//かそく
+	ka_,so_,ku_,EOM_
+	},
+	{
+//カブトアーマー
+	KA_,BU_,TO_,A_,bou_,MA_,bou_,EOM_
+	},
+	{
+//がんじょう
+	ga_,n_,zi_,yyo_,u_,EOM_
+	},
+	{
+//しめりけ
+	si_,me_,ri_,ke_,EOM_
+	},
+	{
+//じゅうなん
+	zi_,yyu_,u_,na_,n_,EOM_
+	},
+	{
+//すながくれ
+	su_,na_,ga_,ku_,re_,EOM_
+	},
+	{
+//せいでんき
+	se_,i_,de_,n_,ki_,EOM_
+	},
+	{
+//ちくでん
+	ti_,ku_,de_,n_,EOM_
+	},
+	{
+//ちょすい
+	ti_,yyo_,su_,i_,EOM_
+	},
+	{
+//どんかん
+	do_,n_,ka_,n_,EOM_
+	},
+	{
+//ノーてんき
+	NO_,bou_,te_,n_,ki_,EOM_
+	},
+	{
+//ふくがん
+	hu_,ku_,ga_,n_,EOM_
+	},
+	{
+//ふみん
+	hu_,mi_,n_,EOM_
+	},
+	{
+//へんしょく
+	he_,n_,si_,yyo_,ku_,EOM_
+	},
+	{
+//めんえき
+	me_,n_,e_,ki_,EOM_
+	},
+	{
+//もらいび
+	mo_,ra_,i_,bi_,EOM_
+	},
+	{
+//りんぷん
+	ri_,n_,pu_,n_,EOM_
+	},
+	{
+//マイペース
+	MA_,I_,PE_,bou_,SU_,EOM_
+	},
+	{
+//きゅうばん
+	ki_,yyu_,u_,ba_,n_,EOM_
+	},
+	{
+//いかく
+	i_,ka_,ku_,EOM_
+	},
+	{
+//かげふみ
+	ka_,ge_,hu_,mi_,EOM_
+	},
+	{
+//さめはだ
+	sa_,me_,ha_,da_,EOM_
+	},
+	{
+//ふしぎなまもり
+	hu_,si_,gi_,na_,ma_,mo_,ri_,EOM_
+	},
+	{
+//ふゆう
+	hu_,yu_,u_,EOM_
+	},
+	{
+//ほうし
+	ho_,u_,si_,EOM_
+	},
+	{
+//シンクロ
+	SI_,N_,KU_,RO_,EOM_
+	},
+	{
+//クリアボディ
+	KU_,RI_,A_,BO_,DE_,II_,EOM_
+	},
+	{
+//しぜんかいふく
+	si_,ze_,n_,ka_,i_,hu_,ku_,EOM_
+	},
+	{
+//ひらいしん
+	hi_,ra_,i_,si_,n_,EOM_
+	},
+	{
+//てんのめぐみ
+	te_,n_,no_,me_,gu_,mi_,EOM_
+	},
+	{
+//すいすい
+	su_,i_,su_,i_,EOM_
+	},
+	{
+//ようりょくそ
+	yo_,u_,ri_,yyo_,ku_,so_,EOM_
+	},
+	{
+//はっこう
+	ha_,ttu_,ko_,u_,EOM_
+	},
+	{
+//トレース
+	TO_,RE_,bou_,SU_,EOM_
+	},
+	{
+//ちからもち
+	ti_,ka_,ra_,mo_,ti_,EOM_
+	},
+	{
+//どくのトゲ
+	do_,ku_,no_,TO_,GE_,EOM_
+	},
+	{
+//せいしんりょく
+	se_,i_,si_,n_,ri_,yyo_,ku_,EOM_
+	},
+	{
+//マグマのよろい
+	MA_,GU_,MA_,no_,yo_,ro_,i_,EOM_
+	},
+	{
+//みずのベール
+	mi_,zu_,no_,BE_,bou_,RU_,EOM_
+	},
+	{
+//じりょく
+	zi_,ri_,yyo_,ku_,EOM_
+	},
+	{
+//ぼうおん
+	bo_,u_,o_,n_,EOM_
+	},
+	{
+//あめうけざら
+	a_,me_,u_,ke_,za_,ra_,EOM_
+	},
+	{
+//すなおこし
+	su_,na_,o_,ko_,si_,EOM_
+	},
+	{
+//プレッシャー
+	PU_,RE_,TTU_,SI_,YYA_,bou_,EOM_
+	},
+	{
+//あついしぼう
+	a_,tu_,i_,si_,bo_,u_,EOM_
+	},
+	{
+//はやおき
+	ha_,ya_,o_,ki_,EOM_
+	},
+	{
+//ほのおのからだ
+	ho_,no_,o_,no_,ka_,ra_,da_,EOM_
+	},
+	{
+//にげあし
+	ni_,ge_,a_,si_,EOM_
+	},
+	{
+//するどいめ
+	su_,ru_,do_,i_,me_,EOM_
+	},
+	{
+//かいりきバサミ
+	ka_,i_,ri_,ki_,BA_,SA_,MI_,EOM_
+	},
+	{
+//ものひろい
+	mo_,no_,hi_,ro_,i_,EOM_
+	},
+	{
+//なまけ
+	na_,ma_,ke_,EOM_
+	},
+	{
+//はりきり
+	ha_,ri_,ki_,ri_,EOM_
+	},
+	{
+//メロメロボディ
+	ME_,RO_,ME_,RO_,BO_,DE_,II_,EOM_
+	},
+	{
+//プラス
+	PU_,RA_,SU_,EOM_
+	},
+	{
+//マイナス
+	MA_,I_,NA_,SU_,EOM_
+	},
+	{
+//てんきや
+	te_,n_,ki_,ya_,EOM_
+	},
+	{
+//ねんちゃく
+	ne_,n_,ti_,yya_,ku_,EOM_
+	},
+	{
+//だっぴ
+	da_,ttu_,pi_,EOM_
+	},
+	{
+//こんじょう
+	ko_,n_,zi_,yyo_,u_,EOM_
+	},
+	{
+//ふしぎなうろこ
+	hu_,si_,gi_,na_,u_,ro_,ko_,EOM_
+	},
+	{
+//ヘドロえき
+	HE_,DO_,RO_,e_,ki_,EOM_
+	},
+	{
+//しんりょく
+	si_,n_,ri_,yyo_,ku_,EOM_
+	},
+	{
+//もうか
+	mo_,u_,ka_,EOM_
+	},
+	{
+//げきりゅう
+	ge_,ki_,ri_,yyu_,u_,EOM_
+	},
+	{
+//むしのしらせ
+	mu_,si_,no_,si_,ra_,se_,EOM_
+	},
+	{
+//いしあたま
+	i_,si_,a_,ta_,ma_,EOM_
+	},
+	{
+//ひでり
+	hi_,de_,ri_,EOM_
+	},
+	{
+//ありじごく
+	a_,ri_,zi_,go_,ku_,EOM_
+	},
+	{
+//やるき
+	ya_,ru_,ki_,EOM_
+	},
+	{
+//しろいけむり
+	si_,ro_,i_,ke_,mu_,ri_,EOM_
+	},
+	{
+//ヨガパワー
+	YO_,GA_,PA_,WA_,bou_,EOM_
+	},
+	{
+//シェルアーマー
+	SI_,EE_,RU_,A_,bou_,MA_,bou_,EOM_
+	},
+	{
+//そうおん
+	so_,u_,o_,n_,EOM_
+	},
+	{
+//エアロック
+	E_,A_,RO_,TTU_,KU_,EOM_
+	},
+};
+
+const	u8	SpecialAbirityInfoMsg[][19]={
+	{
+	to_,ku_,se_,i_,na_,si_,EOM_
+	},
+//001:あくしゅう
+//ポケモンが　よりつき　にくくなる
+	{
+	PO_,KE_,MO_,N_,ga_,spc_,yo_,ri_,tu_,ki_,spc_,ni_,ku_,ku_,na_,ru_,EOM_
+	},
+//002:あめふらし
+//せんとうに　でると　あめを　ふらす
+	{
+	se_,n_,to_,u_,ni_,spc_,de_,ru_,to_,spc_,a_,me_,wo_,spc_,hu_,ra_,su_,EOM_
+	},
+//003:かそく
+//ちょっとずつ　すばやく　なっていく
+	{
+	ti_,yyo_,ttu_,to_,zu_,tu_,spc_,su_,ba_,ya_,ku_,spc_,na_,ttu_,te_,i_,ku_,EOM_
+	},
+//004:カブトアーマー
+//わざを　きゅうしょに　うけない
+	{
+	wa_,za_,wo_,spc_,ki_,yyu_,u_,si_,yyo_,ni_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//005:がんじょう
+//いちげきひっさつが　きかない
+	{
+	i_,ti_,ge_,ki_,hi_,ttu_,sa_,tu_,ga_,spc_,ki_,ka_,na_,i_,EOM_
+	},
+//006:しめりけ
+//だれも　じばくが　できなくなる
+	{
+	da_,re_,mo_,spc_,zi_,ba_,ku_,ga_,spc_,de_,ki_,na_,ku_,na_,ru_,EOM_
+	},
+//007:じゅうなん
+//まひ　じょうたいに　ならない
+	{
+	ma_,hi_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//008:すながくれ
+//すなあらしで　かいひりつが　あがる
+	{
+	su_,na_,a_,ra_,si_,de_,spc_,ka_,i_,hi_,ri_,tu_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//009:せいでんき
+//さわった　あいてを　まひさせる
+	{
+	sa_,wa_,ttu_,ta_,spc_,a_,i_,te_,wo_,spc_,ma_,hi_,sa_,se_,ru_,EOM_
+	},
+//010:ちくでん
+//でんきを　うけると　かいふくする
+	{
+	de_,n_,ki_,wo_,spc_,u_,ke_,ru_,to_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+//011:ちょすい
+//みずを　うけると　かいふくする
+	{
+	mi_,zu_,wo_,spc_,u_,ke_,ru_,to_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+//012:どんかん
+//メロメロ　じょうたいに　ならない
+	{
+	ME_,RO_,ME_,RO_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//013:ノーてんき
+//てんきの　えいきょうが　なくなる
+	{
+	te_,n_,ki_,no_,spc_,e_,i_,ki_,yyo_,u_,ga_,spc_,na_,ku_,na_,ru_,EOM_
+	},
+//014:ふくがん
+//わざの　めいちゅうりつが　あがる
+	{
+	wa_,za_,no_,spc_,me_,i_,ti_,yyu_,u_,ri_,tu_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//015:ふみん
+//ねむり　じょうたいに　ならない
+	{
+	ne_,mu_,ri_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//016:へんしょく
+//うけた　わざの　タイプに　へんかする
+	{
+	u_,ke_,ta_,spc_,wa_,za_,no_,spc_,TA_,I_,PU_,ni_,spc_,he_,n_,ka_,su_,ru_,EOM_
+	},
+//017:めんえき
+//どく　じょうたいに　ならない
+	{
+	do_,ku_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//018:もらいび
+//ほのおを　うけると　つよくなる
+	{
+	ho_,no_,o_,wo_,spc_,u_,ke_,ru_,to_,spc_,tu_,yo_,ku_,na_,ru_,EOM_
+	},
+//019:りんぷん
+//わざの　ついかこうかを　うけない
+	{
+	wa_,za_,no_,spc_,tu_,i_,ka_,ko_,u_,ka_,wo_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//020:マイペース
+//こんらん　じょうたいに　ならない
+	{
+	ko_,n_,ra_,n_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//021:きゅうばん
+//きゅうばんで　じめんに　はりつく
+	{
+	ki_,yyu_,u_,ba_,n_,de_,spc_,zi_,me_,n_,ni_,spc_,ha_,ri_,tu_,ku_,EOM_
+	},
+//022:いかく
+//あいての　こうげきを　さげる
+	{
+	a_,i_,te_,no_,spc_,ko_,u_,ge_,ki_,wo_,spc_,sa_,ge_,ru_,EOM_
+	},
+//023:かげふみ
+//あいてを　にげられなくする
+	{
+	a_,i_,te_,wo_,spc_,ni_,ge_,ra_,re_,na_,ku_,su_,ru_,EOM_
+	},
+//024:さめはだ
+//さわった　あいてを　キズつける
+	{
+	sa_,wa_,ttu_,ta_,spc_,a_,i_,te_,wo_,spc_,KI_,ZU_,tu_,ke_,ru_,EOM_
+	},
+//025:ふしぎなまもり
+//こうか　ばつぐん　しか　あたらない
+	{
+	ko_,u_,ka_,spc_,ba_,tu_,gu_,n_,spc_,si_,ka_,spc_,a_,ta_,ra_,na_,i_,EOM_
+	},
+//026:ふゆう
+//じめんタイプの　わざを　うけない
+	{
+	zi_,me_,n_,TA_,I_,PU_,no_,spc_,wa_,za_,wo_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//027:ほうし
+//さわった　あいてに　ほうしがつく
+	{
+	sa_,wa_,ttu_,ta_,spc_,a_,i_,te_,ni_,spc_,ho_,u_,si_,ga_,tu_,ku_,EOM_
+	},
+//028:シンクロ
+//どく　まひ　やけどを　あいてにうつす
+	{
+	do_,ku_,spc_,ma_,hi_,spc_,ya_,ke_,do_,wo_,spc_,a_,i_,te_,ni_,u_,tu_,su_,EOM_
+	},
+//029:クリアボディ
+//あいてに　のうりょくを　さげられない
+	{
+	a_,i_,te_,ni_,spc_,no_,u_,ri_,yyo_,ku_,wo_,spc_,sa_,ge_,ra_,re_,na_,i_,EOM_
+	},
+//030:しぜんかいふく
+//ひっこむと　いじょうが　なおる
+	{
+	hi_,ttu_,ko_,mu_,to_,spc_,i_,zi_,yyo_,u_,ga_,spc_,na_,o_,ru_,EOM_
+	},
+//031:ひらいしん
+//でんきタイプの　わざが　じぶんにくる
+	{
+	de_,n_,ki_,TA_,I_,PU_,no_,spc_,wa_,za_,ga_,spc_,zi_,bu_,n_,ni_,ku_,ru_,EOM_
+	},
+//032:てんのめぐみ
+//わざの　ついかこうかが　でやすい
+	{
+	wa_,za_,no_,spc_,tu_,i_,ka_,ko_,u_,ka_,ga_,spc_,de_,ya_,su_,i_,EOM_
+	},
+//033:すいすい
+//あめのとき　すばやさが　はやくなる
+	{
+	a_,me_,no_,to_,ki_,spc_,su_,ba_,ya_,sa_,ga_,spc_,ha_,ya_,ku_,na_,ru_,EOM_
+	},
+//034:ようりょくそ
+//はれのとき　すばやさが　はやくなる
+	{
+	ha_,re_,no_,to_,ki_,spc_,su_,ba_,ya_,sa_,ga_,spc_,ha_,ya_,ku_,na_,ru_,EOM_
+	},
+//035:はっこう
+//ポケモンに　そうぐう　しやすくなる
+	{
+	PO_,KE_,MO_,N_,ni_,spc_,so_,u_,gu_,u_,spc_,si_,ya_,su_,ku_,na_,ru_,EOM_
+	},
+//036:トレース
+//あいてと　おなじ　とくせいになる
+	{
+	a_,i_,te_,to_,spc_,o_,na_,zi_,spc_,to_,ku_,se_,i_,ni_,na_,ru_,EOM_
+	},
+//037:ちからもち
+//こうげきりょくが　たかい
+	{
+	ko_,u_,ge_,ki_,ri_,yyo_,ku_,ga_,spc_,ta_,ka_,i_,EOM_
+	},
+//038:どくのトゲ
+//さわったあいてに　どくをあたえる
+	{
+	sa_,wa_,ttu_,ta_,a_,i_,te_,ni_,spc_,do_,ku_,wo_,a_,ta_,e_,ru_,EOM_
+	},
+//039:せいしんりょく
+//ひるまない
+	{
+	hi_,ru_,ma_,na_,i_,EOM_
+	},
+//040:マグマのよろい
+//こおり　じょうたいに　ならない
+	{
+	ko_,o_,ri_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//041:みずのベール
+//やけど　じょうたいに　ならない
+	{
+	ya_,ke_,do_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,i_,EOM_
+	},
+//042:じりょく
+//はがねタイプが　にげられなくなる
+	{
+	ha_,ga_,ne_,TA_,I_,PU_,ga_,spc_,ni_,ge_,ra_,re_,na_,ku_,na_,ru_,EOM_
+	},
+//043:ぼうおん
+//おとの　わざを　うけない
+	{
+	o_,to_,no_,spc_,wa_,za_,wo_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//044:あめうけざら
+//あめのとき　すこしずつ　かいふく
+	{
+	a_,me_,no_,to_,ki_,spc_,su_,ko_,si_,zu_,tu_,spc_,ka_,i_,hu_,ku_,EOM_
+	},
+//045:すなおこし
+//せんとうで　すなあらしを　おこす
+	{
+	se_,n_,to_,u_,de_,spc_,su_,na_,a_,ra_,si_,wo_,spc_,o_,ko_,su_,EOM_
+	},
+//046:プレッシャー
+//あいての　ＰＰが　へりやすくなる
+	{
+	a_,i_,te_,no_,spc_,P__,P__,ga_,spc_,he_,ri_,ya_,su_,ku_,na_,ru_,EOM_
+	},
+//047:あついしぼう
+//ほのお　こおりに　つよい
+	{
+	ho_,no_,o_,spc_,ko_,o_,ri_,ni_,spc_,tu_,yo_,i_,EOM_
+	},
+//048:はやおき
+//おきるのが　はやくなる
+	{
+	o_,ki_,ru_,no_,ga_,spc_,ha_,ya_,ku_,na_,ru_,EOM_
+	},
+//049:ほのおのからだ
+//さわった　あいてを　やけど　させる
+	{
+	sa_,wa_,ttu_,ta_,spc_,a_,i_,te_,wo_,spc_,ya_,ke_,do_,spc_,sa_,se_,ru_,EOM_
+	},
+//050:にげあし
+//せんとうから　にげやすい
+	{
+	se_,n_,to_,u_,ka_,ra_,spc_,ni_,ge_,ya_,su_,i_,EOM_
+	},
+//051:するどいめ
+//あいてに　めいちゅうを　さげられない
+	{
+	a_,i_,te_,ni_,spc_,me_,i_,ti_,yyu_,u_,wo_,spc_,sa_,ge_,ra_,re_,na_,i_,EOM_
+	},
+//052:かいりきバサミ
+//あいてに　こうげきを　さげられない
+	{
+	a_,i_,te_,ni_,spc_,ko_,u_,ge_,ki_,wo_,spc_,sa_,ge_,ra_,re_,na_,i_,EOM_
+	},
+//053:ものひろい
+//どうぐを　ひろってくる　ことがある
+	{
+	do_,u_,gu_,wo_,spc_,hi_,ro_,ttu_,te_,ku_,ru_,spc_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+//054:なまけ
+//こうげきが　れんぞくで　だせない
+	{
+	ko_,u_,ge_,ki_,ga_,spc_,re_,n_,zo_,ku_,de_,spc_,da_,se_,na_,i_,EOM_
+	},
+//055:はりきり
+//こうげきは　たかいが　はずれやすい
+	{
+	ko_,u_,ge_,ki_,ha_,spc_,ta_,ka_,i_,ga_,spc_,ha_,zu_,re_,ya_,su_,i_,EOM_
+	},
+//056:メロメロボディ
+//さわった　あいてを　メロメロにする
+	{
+	sa_,wa_,ttu_,ta_,spc_,a_,i_,te_,wo_,spc_,ME_,RO_,ME_,RO_,ni_,su_,ru_,EOM_
+	},
+//057:プラス
+//マイナスが　いると　つよくなる
+	{
+	MA_,I_,NA_,SU_,ga_,spc_,i_,ru_,to_,spc_,tu_,yo_,ku_,na_,ru_,EOM_
+	},
+//058:マイナス
+//プラスが　いると　つよくなる
+	{
+	PU_,RA_,SU_,ga_,spc_,i_,ru_,to_,spc_,tu_,yo_,ku_,na_,ru_,EOM_
+	},
+//059:てんきや
+//てんきで　ポワルンが　へんかする
+	{
+	te_,n_,ki_,de_,spc_,PO_,WA_,RU_,N_,ga_,spc_,he_,n_,ka_,su_,ru_,EOM_
+	},
+//060:ねんちゃく
+//どうぐを　とられない
+	{
+	do_,u_,gu_,wo_,spc_,to_,ra_,re_,na_,i_,EOM_
+	},
+//061:だっぴ
+//だっぴして　からだを　なおす
+	{
+	da_,ttu_,pi_,si_,te_,spc_,ka_,ra_,da_,wo_,spc_,na_,o_,su_,EOM_
+	},
+//062:こんじょう
+//いじょうのとき　こうげきが　あがる
+	{
+	i_,zi_,yyo_,u_,no_,to_,ki_,spc_,ko_,u_,ge_,ki_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//063:ふしぎなうろこ
+//いじょうのとき　ぼうぎょが　あがる
+	{
+	i_,zi_,yyo_,u_,no_,to_,ki_,spc_,bo_,u_,gi_,yyo_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//064:ヘドロえき
+//すいとると　たいりょくが　へる
+	{
+	su_,i_,to_,ru_,to_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,he_,ru_,EOM_
+	},
+//065:しんりょく
+//ピンチに　くさの　いりょくが　あがる
+	{
+	PI_,N_,TI_,ni_,spc_,ku_,sa_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//066:もうか
+//ピンチに　ほのおが　つよくなる
+	{
+	PI_,N_,TI_,ni_,spc_,ho_,no_,o_,ga_,spc_,tu_,yo_,ku_,na_,ru_,EOM_
+	},
+//067:げきりゅう
+//ピンチに　みずの　いりょくが　あがる
+	{
+	PI_,N_,TI_,ni_,spc_,mi_,zu_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//068:むしのしらせ
+//ピンチに　むしの　いりょくが　あがる
+	{
+	PI_,N_,TI_,ni_,spc_,mu_,si_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+//069:いしあたま
+//ぶつかっても　はんどうを　うけない
+	{
+	bu_,tu_,ka_,ttu_,te_,mo_,spc_,ha_,n_,do_,u_,wo_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//070:ひでり
+//せんとうで　ひざしを　つよくする
+	{
+	se_,n_,to_,u_,de_,spc_,hi_,za_,si_,wo_,spc_,tu_,yo_,ku_,su_,ru_,EOM_
+	},
+//071:ありじごく
+//あいてを　にげられなくする
+	{
+	a_,i_,te_,wo_,spc_,ni_,ge_,ra_,re_,na_,ku_,su_,ru_,EOM_
+	},
+//072:やるき
+//ねむらない
+	{
+	ne_,mu_,ra_,na_,i_,EOM_
+	},
+//073:しろいけむり
+//あいてに　のうりょくを　さげられない
+	{
+	a_,i_,te_,ni_,spc_,no_,u_,ri_,yyo_,ku_,wo_,spc_,sa_,ge_,ra_,re_,na_,i_,EOM_
+	},
+//074:ヨガパワー
+//こうげきりょくが　たかい
+	{
+	ko_,u_,ge_,ki_,ri_,yyo_,ku_,ga_,spc_,ta_,ka_,i_,EOM_
+	},
+//075:シェルアーマー
+//わざを　きゅうしょに　うけない
+	{
+	wa_,za_,wo_,spc_,ki_,yyu_,u_,si_,yyo_,ni_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//076:そうおん
+//おとの　わざを　うけない
+	{
+	o_,to_,no_,spc_,wa_,za_,wo_,spc_,u_,ke_,na_,i_,EOM_
+	},
+//077:エアロック
+//てんきの　えいきょうが　なくなる
+	{
+	te_,n_,ki_,no_,spc_,e_,i_,ki_,yyo_,u_,ga_,spc_,na_,ku_,na_,ru_,EOM_
+	},
+};

@@ -1,0 +1,1013 @@
+//====================================================================
+//						r110_r0101
+//						カラクリ屋敷居間
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0101_event_data
+FLAG_CHANGE_LABEL		flag_change_r110_r0101
+SP_SCRIPT_LABEL			scene_r110_r0101
+OBJ_CTRL_LABEL			obj_01_p01_r110_r0101
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r110_r0101:
+	//到着フラグセット
+	_FLAG_SET			SYS_ARRIVE_KARAKURIYASHIKI
+
+	//通路を通った直後(いなくなった状態へ)
+	_IFVAL_JUMP			WK_SCENE_R110_R0103,EQ,1,tuuro_flag_on_r110_r0101
+
+	//プレゼントをまだ貰っていない
+	_IFVAL_JUMP			WK_SCENE_R110_R0102,EQ,1,karakuri_present_01_r110_r0101
+
+	//カラクリ大王出現の暗転時のみ
+	_IFVAL_JUMP			WK_SCENE_R110_R0101,EQ,1,flag_change_karakuri_r110_r0101
+
+	//カラクリ大王初期状態をセット
+	_IFVAL_CALL			WK_KARAKURI_DAIOU,EQ,5,daiou_init_check_01_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_DAIOU,EQ,3,daiou_init_check_01_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_DAIOU,EQ,0,daiou_init_check_01_r110_r0101
+
+	//カラクリ大王の状態チェック
+	_SWITCH				WK_KARAKURI_DAIOU
+	_CASEJUMP			0,flag_change_00_r110_r0101
+	_CASEJUMP			1,flag_change_01_r110_r0101
+	_CASEJUMP			3,flag_change_02_r110_r0101
+	_CASEJUMP			4,flag_change_03_r110_r0101
+	_END
+
+//プレゼントをまだ貰っていない時の処理
+karakuri_present_01_r110_r0101:
+	//見つけた状態へ
+	_LDVAL				WK_SCENE_SHISEN,1
+
+	//クリアしてプレゼントを貰っていないとき
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,8,karakuri_present_02_r110_r0101
+
+	//ふつうにプレゼントを貰っていないとき
+	_LDVAL				WK_KARAKURI_DAIOU,2
+	_END
+
+//最終ステージクリア時にプレゼントをまだ貰っていない時の処理
+karakuri_present_02_r110_r0101:
+	_LDVAL				WK_KARAKURI_DAIOU,6
+	_END
+
+//通路通過直後の処理
+tuuro_flag_on_r110_r0101:
+	//通路通過状態初期化
+	_LDVAL				WK_SCENE_R110_R0103,0
+
+	//カラクリ大王を特別状態（準備中だけど画面にいない）
+	_LDVAL				WK_KARAKURI_DAIOU,5
+
+	//見つけた状態へ
+	_LDVAL				WK_SCENE_SHISEN,1
+	_END
+
+//カラクリ大王初期状態をセット
+daiou_init_check_01_r110_r0101:
+	//入れる状態へ
+	_LDVAL				WK_KARAKURI_DAIOU,0
+
+	//level1(値が0)の時は無条件
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,1,daiou_init_check_02_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,2,daiou_init_check_03_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,3,daiou_init_check_04_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,4,daiou_init_check_05_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,5,daiou_init_check_06_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,6,daiou_init_check_07_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,7,daiou_init_check_08_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,8,daiou_init_check_clear_r110_r0101
+	_RET
+
+//level2チェック
+daiou_init_check_02_r110_r0101:
+	// バッジを持っていない
+	_IF_FLAGOFF_CALL	SYS_BATCH03_GET,no_get_batch_r110_r0101
+	_RET
+
+//level3チェック
+daiou_init_check_03_r110_r0101:
+	// バッジを持っていない
+	_IF_FLAGOFF_CALL	SYS_BATCH04_GET,no_get_batch_r110_r0101
+	_RET
+
+//level4チェック
+daiou_init_check_04_r110_r0101:
+	// バッジを持っていない
+	_IF_FLAGOFF_CALL	SYS_BATCH05_GET,no_get_batch_r110_r0101
+	_RET
+
+//level5チェック
+daiou_init_check_05_r110_r0101:
+	// バッジを持っていない
+	_IF_FLAGOFF_CALL	SYS_BATCH06_GET,no_get_batch_r110_r0101
+	_RET
+
+//level6チェック
+daiou_init_check_06_r110_r0101:
+	// バッジを持っていない
+	_IF_FLAGOFF_CALL	SYS_BATCH07_GET,no_get_batch_r110_r0101
+	_RET
+
+//level7チェック
+daiou_init_check_07_r110_r0101:
+	// バッジを持っていない
+	_IF_FLAGOFF_CALL	SYS_BATCH08_GET,no_get_batch_r110_r0101
+	_RET
+
+//level8チェック
+daiou_init_check_08_r110_r0101:
+	// ゲームをクリアしていない
+	_IF_FLAGOFF_CALL	SYS_GAME_CLEAR,no_get_batch_r110_r0101
+	_RET
+
+//オールクリア
+daiou_init_check_clear_r110_r0101:
+	//カラクリ大王が去った状態へ
+	_LDVAL				WK_KARAKURI_DAIOU,4
+	_RET
+
+//バッチを持っていない（orゲームをクリアしていない）なら準備中へ
+no_get_batch_r110_r0101:
+	//条件を満たしていないので準備中へ
+	_LDVAL				WK_KARAKURI_DAIOU,3
+	_RET
+
+//カラクリ大王出現の暗転時のみ
+flag_change_karakuri_r110_r0101:
+	_SXY_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,5,2
+	_SXY_SITE_CHANGE	MIDDLEM1_01_P01_R110_R0101,SITE_R
+	_END
+
+//隠れている
+flag_change_00_r110_r0101:
+	//隠れ状態へ
+	_LDVAL				WK_SCENE_SHISEN,0
+	_END
+
+//ダンジョン内(内部進入許可状態）
+flag_change_01_r110_r0101:
+	//見つけた状態へ
+	_LDVAL				WK_SCENE_SHISEN,1
+
+	_END
+
+//仕掛け中
+flag_change_02_r110_r0101:
+	//見つけた状態へ
+	_LDVAL				WK_SCENE_SHISEN,1
+	_END
+
+//いなくなった
+flag_change_03_r110_r0101:
+	//見つけた状態へ
+	_LDVAL				WK_SCENE_SHISEN,1
+	_END
+
+
+//--------------------------------------------------------------------
+//						OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_01_p01_r110_r0101:
+	//カラクリ大王出現の暗転時のみ
+	OBJ_CTRL_DATA		WK_SCENE_R110_R0101,1,obj_ctrl_karakuri_r110_r0101
+
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,0,ev_obj_01_p01_r110_r0101
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,1,ev_obj_01_p02_r110_r0101
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,2,ev_obj_01_p03_r110_r0101
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,3,ev_obj_01_p03_r110_r0101
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,4,ev_obj_01_p02_r110_r0101
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,5,ev_obj_01_p02_r110_r0101
+	OBJ_CTRL_DATA		WK_KARAKURI_DAIOU,6,ev_obj_01_p04_r110_r0101
+	OBJ_CTRL_END
+
+//カラクリ大王出現の処理(特殊）
+obj_ctrl_karakuri_r110_r0101:
+	//強制画面出現(DELETEからの復帰対処)
+	_OBJ_APPEAR			MIDDLEM1_01_P01_R110_R0101
+	_OBJ_VISIBLE		MIDDLEM1_01_P01_R110_R0101,R110,R110_R0101
+	_OBJ_SITE_CHG		MIDDLEM1_01_P01_R110_R0101,SITE_R
+
+	//主人公をカラクリ大王の向きに
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_L
+	_END
+
+
+//カラクリ大王を隠す
+ev_obj_01_p01_r110_r0101:
+	//強制画面出現(DELETEからの復帰対処)
+	_OBJ_APPEAR			MIDDLEM1_01_P01_R110_R0101
+
+	//見えない状態へ
+	_OBJ_INVISIBLE		MIDDLEM1_01_P01_R110_R0101,R110,R110_R0101
+
+	//大王の位置チェック
+	_SWITCH				WK_KARAKURI_LEVEL
+	_CASEJUMP			0,_pos_tukue_ru_r110_r0101
+	_CASEJUMP			1,_pos_tree_r_r110_r0101
+	_CASEJUMP			2,_pos_tansu_r110_r0101
+	_CASEJUMP			3,_pos_mado_l_r110_r0101
+	_CASEJUMP			4,_pos_tree_l_r110_r0101
+	_CASEJUMP			5,_pos_tana_r_r110_r0101
+	_CASEJUMP			6,_pos_mado_r_r110_r0101
+	_CASEJUMP			7,_pos_zabuton_ld_r110_r0101
+	_END
+
+_pos_tukue_ru_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,6,3
+	_END
+
+_pos_tree_r_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,11,5
+	_END
+
+_pos_tana_r_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,11,1
+	_END
+
+_pos_mado_l_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,3,1
+	_END
+
+_pos_tree_l_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,0,5
+	_END
+
+_pos_tansu_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,9,1
+	_END
+
+_pos_mado_r_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,8,1
+	_END
+
+_pos_zabuton_ld_r110_r0101:
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,4,4
+	_END
+
+//カラクリ大王を消す
+ev_obj_01_p02_r110_r0101:
+	_OBJ_DELETE			MIDDLEM1_01_P01_R110_R0101
+	_END
+
+//カラクリ大王をカケジクの前に
+ev_obj_01_p03_r110_r0101:
+	//強制画面出現(DELETEからの復帰対処)
+	_OBJ_APPEAR			MIDDLEM1_01_P01_R110_R0101
+
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,5,2
+	_OBJ_SITE_CHG		MIDDLEM1_01_P01_R110_R0101,SITE_U
+	_END
+
+//カラクリ大王人形をカケジクの前に(前向き）
+ev_obj_01_p04_r110_r0101:
+	//強制画面出現(DELETEからの復帰対処)
+	_OBJ_APPEAR			MIDDLEM1_01_P01_R110_R0101
+
+	_OBJ_POS_CHANGE		MIDDLEM1_01_P01_R110_R0101,5,2
+	_OBJ_SITE_CHG		MIDDLEM1_01_P01_R110_R0101,SITE_D
+	_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_r110_r0101:
+	//カラクリ大王出現の暗転時のみ
+	SP_SCRIPT_DATA		WK_SCENE_R110_R0101,1,ev_scene_karakuri_syoukai_r110_r0101
+	SP_SCRIPT_END
+
+//カラクリ大王出現の処理(特殊）
+ev_scene_karakuri_syoukai_r110_r0101:
+	_TALK_START
+
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//はじめての会話（はじめてのとき）
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,0,first_message_r110_r0101
+
+	//いつもの会話
+	_TALK_KEYWAIT		msg_middlem1_01_p03_r110_r0101
+	_TALK_CLOSE
+
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//一回転
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,one_loop_anime
+	_OBJ_ANIME_WAIT
+
+	_SE	SE_W153
+	//ジャンプして飛び去る
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,karakuri_jump_anime
+	_OBJ_ANIME_WAIT
+
+	//OBJを消す
+	_OBJ_DELETE			MIDDLEM1_01_P01_R110_R0101
+
+	//カラクリ大王をダンジョン内へ
+	_LDVAL				WK_KARAKURI_DAIOU,1
+
+	//出現処理終了
+	_LDVAL				WK_SCENE_R110_R0101,0
+
+	_TALK_END
+	_END
+
+no_message_r110_r0101:
+	//一度メッセージを表示している
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						カラクリ大王								*/
+/********************************************************************/
+SCRIPT_LABEL			ev_middlem1_01_p01_r110_r0101
+	_TALK_START
+	_SWITCH				WK_KARAKURI_DAIOU				
+	_CASEJUMP			0,karakuri_daiou_00_r110_r0101
+	_CASEJUMP			2,karakuri_daiou_02_r110_r0101
+	_CASEJUMP			3,karakuri_daiou_01_r110_r0101
+	_CASEJUMP			6,karakuri_daiou_03_r110_r0101
+	_END
+
+//隠れているとき
+karakuri_daiou_00_r110_r0101:
+	//「！」びっくりする(会話スタートのＳＥがあるので！用ＳＥは使わない）
+	_SE		SE_GYOE_MARK
+
+	_SET_OBJ_ANIME		EV_OBJ_SPID,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//間をあける
+	_SET_OBJ_ANIME		EV_OBJ_SPID,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//隠れていた場所の説明等
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,0,level1_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,1,level2_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,2,level3_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,3,level4_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,4,level5_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,5,level6_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,6,level7_find_mes_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,7,level8_find_mes_r110_r0101
+	_TALK_CLOSE
+
+	_LDVAL				WK_SCENE_R110_R0101,1
+	_MAP_CHANGE			R110,R110_R0101,6,2
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//レベル１のときの見つかったメッセージ
+level1_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p01_r110_r0101
+	_RET
+
+//レベル２のときの見つかったメッセージ
+level2_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p11_r110_r0101
+	_RET
+
+//レベル３のときの見つかったメッセージ
+level3_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p12_r110_r0101
+	_RET
+
+//レベル４のときの見つかったメッセージ
+level4_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0101
+	_RET
+
+//レベル５のときの見つかったメッセージ
+level5_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0101
+	_RET
+
+//レベル６のときの見つかったメッセージ
+level6_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p15_r110_r0101
+	_RET
+
+//レベル７のときの見つかったメッセージ
+level7_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p16_r110_r0101
+	_RET
+
+//レベル８のときの見つかったメッセージ
+level8_find_mes_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p17_r110_r0101
+	_RET
+
+//一回転アニメ
+one_loop_anime:
+	.byte				AC_SITE_U
+	.byte				AC_WAIT_4
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_4
+	.byte				AC_SITE_D
+	.byte				AC_WAIT_4
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_4
+	.byte				ACMD_END
+
+//ジャンプして飛び去る
+karakuri_jump_anime:
+	.byte				AC_SITE_U
+	.byte				AC_ANM_CHG_HOLD_ON
+	.byte				AC_WALK_U_8
+	.byte				AC_WALK_U_8
+	.byte				AC_WALK_U_8
+	.byte				AC_WALK_U_8
+	.byte				AC_WALK_U_8
+	.byte				AC_WALK_U_8
+	.byte				ACMD_END
+
+//はじめての会話
+first_message_r110_r0101:
+	_TALK_KEYWAIT		msg_middlem1_01_p02_r110_r0101
+	_RET
+
+//仕掛けているとき
+karakuri_daiou_01_r110_r0101:
+	//こんどのしかけは....
+	_TALK_KEYWAIT		msg_middlem1_01_p04_r110_r0101
+	_TALK_CLOSE
+
+	//振り向き
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	//...またきてくれ！！
+	_TALK_KEYWAIT		msg_middlem1_01_p05_r110_r0101
+
+	//上向きへ
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_END
+	_END
+
+//プレゼント渡し待ち
+karakuri_daiou_02_r110_r0101:
+	//振り向き
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//”おお　あんた！....　いま　やろう！”
+	_TALK_KEYWAIT		msg_middlem1_01_p08_r110_r0101
+
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,1,present_check_01_r110_r0101
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,2,present_check_02_r110_r0101
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,3,present_check_03_r110_r0101
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,4,present_check_04_r110_r0101
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,5,present_check_05_r110_r0101
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,6,present_check_06_r110_r0101
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,7,present_check_07_r110_r0101
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_01_r110_r0101:
+	_ITEM_EVENT			ITEM_HUSIGINAAME,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_02_r110_r0101:
+	_ITEM_EVENT			ITEM_TAIMAABOORU,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_03_r110_r0101:
+	_ITEM_EVENT			ITEM_KATAIISI,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_04_r110_r0101:
+	_ITEM_EVENT			ITEM_KEMURIDAMA,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_05_r110_r0101:
+	_ITEM_EVENT			ITEM_WAZAMASIN12,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_06_r110_r0101:
+	_ITEM_EVENT			ITEM_ZISYAKU,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+//プレゼントを貰えるかチェック
+present_check_07_r110_r0101:
+	_ITEM_EVENT			ITEM_POINTOMAKKUSU,1
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_common_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret					//貰えなかったとき
+
+	//”あれ？　とりに　きたんじゃ　ないのか？”
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0101
+	_TALK_END
+	_END
+
+
+//アイテムを貰えたときの共通処理
+ev_item_get_common_r110_r0101:
+	_LDVAL				WK_SCENE_R110_R0102,0			//アイテムをゲットした状態
+	_LDVAL				WK_KARAKURI_DAIOU,3				//カラクリ仕掛け状態へ
+
+	//上向きに(仕掛け中と同じへ)
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,turn_u_anime
+	_OBJ_ANIME_WAIT 
+
+	_TALK_END
+	_END
+
+//プレゼント渡し待ち(最終ステージ分）
+karakuri_daiou_03_r110_r0101:
+	//振り向き
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//”ワガハイ　ハ　からくりニンギョウ　５ゴウ”
+	_TALK_KEYWAIT		msg_middlem1_01_p06_r110_r0101
+
+#if (PM_VERSION == VERSION_SAPPHIRE)
+	_GOODS_EVENT		GOODS_AOITENTO
+#elif (PM_VERSION == VERSION_RUBY)
+	_GOODS_EVENT		GOODS_AKAITENTO
+#endif
+	_IFVAL_JUMP			ANSWORK,EQ,TRUE,ev_item_get_final_r110_r0101		//貰えたとき
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_goods_ret					//貰えなかったとき
+
+	//”エッ！　マタ　ぱそこんが　イッパイ”
+	_TALK_KEYWAIT		msg_middlem1_01_p10_r110_r0101
+	_TALK_END
+	_END
+
+//アイテムを貰ったので、カラクリ大王人形が消える。
+ev_item_get_final_r110_r0101:
+	//”ぷれぜんとハ　ぱそこんニ　オクルヨ！”
+	_TALK_KEYWAIT		msg_middlem1_01_p07_r110_r0101
+	_TALK_CLOSE
+
+	//ブルブルアニメ
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,dool_buruburu_anime
+	_OBJ_ANIME_WAIT 
+
+	//一回転
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,one_loop_anime
+	_OBJ_ANIME_WAIT
+
+	_SE	SE_W153
+	//ジャンプして飛び去る
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,karakuri_jump_anime
+	_OBJ_ANIME_WAIT
+
+	//OBJを消す
+	_OBJ_DELETE			MIDDLEM1_01_P01_R110_R0101
+
+	_LDVAL				WK_SCENE_R110_R0102,0			//アイテムをゲットした状態
+	_LDVAL				WK_KARAKURI_DAIOU,5				//出現処理終了(最終クリア時の何もない状態へ。掛け軸も反応せず)
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*						掛け軸										*/
+/********************************************************************/
+SCRIPT_LABEL			ev_kakejiku_01_p01_r110_r0101
+	_TALK_START
+	_SWITCH				WK_KARAKURI_DAIOU
+	_CASEJUMP			0,kakejiku_01_r110_r0101
+	_CASEJUMP			1,kakejiku_02_r110_r0101
+	_CASEJUMP			4,kakejiku_03_r110_r0101
+	_CASEJUMP			5,kakejiku_04_r110_r0101
+	_END
+
+//かけじくだ！！
+kakejiku_01_r110_r0101:
+	_TALK_KEYWAIT		msg_kakejiku_01_p01_r110_r0101
+	_TALK_END
+	_END
+
+//奥に進みますか？
+kakejiku_02_r110_r0101:
+	_TALK_YES_NO		msg_kakejiku_01_p02_r110_r0101
+	//YES
+	_TALK_CLOSE
+	_IFVAL_JUMP			ANSWORK,EQ,1,yes_kakejiku_to_dungeon_r110_r0101
+	_TALK_END
+	_END
+
+//ダンジョンへ
+yes_kakejiku_to_dungeon_r110_r0101:
+	//まきじくを削除
+	_SET_CELL			5,1,537,0
+	_PROGRAM			MAKE_MAP_BG
+
+	//少し間を置く
+	_TIME_WAIT			20
+
+	//上へ進む
+	_SET_OBJ_ANIME		EV_OBJ_SPID,walk_u_anime01
+	_OBJ_ANIME_WAIT 
+
+	//扉の向こうへ消えた演出として主人公を消す
+	_SET_OBJ_ANIME		EV_OBJ_SPID, hero_vanish_anime
+	_OBJ_ANIME_WAIT 
+
+	_SWITCH				WK_KARAKURI_LEVEL
+	_CASEJUMP			0,dungeon_1_r110_r0101
+	_CASEJUMP			1,dungeon_2_r110_r0101
+	_CASEJUMP			2,dungeon_3_r110_r0101
+	_CASEJUMP			3,dungeon_4_r110_r0101
+	_CASEJUMP			4,dungeon_5_r110_r0101
+	_CASEJUMP			5,dungeon_6_r110_r0101
+	_CASEJUMP			6,dungeon_7_r110_r0101
+	_CASEJUMP			7,dungeon_8_r110_r0101
+	_END
+
+hero_vanish_anime:
+	.byte				AC_VANISH_ON 
+	.byte				ACMD_END
+
+
+//ダンジョン１
+dungeon_1_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0104,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン２
+dungeon_2_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0105,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン３
+dungeon_3_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0106,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン４
+dungeon_4_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0107,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン５
+dungeon_5_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0108,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン６
+dungeon_6_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0109,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン７
+dungeon_7_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0110,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//ダンジョン８
+dungeon_8_r110_r0101:
+	_MAP_CHANGE			R110,R110_R0111,0,21
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//たびに　でます.....
+kakejiku_03_r110_r0101:
+	_TALK_KEYWAIT		msg_kakejiku_01_p03_r110_r0101
+	_TALK_END
+	_END
+
+//通路から出た直後
+kakejiku_04_r110_r0101:
+	_IFVAL_JUMP			WK_KARAKURI_LEVEL,EQ,8,dungeon_clear_r110_r0101
+
+	//かけじくだ！
+	_TALK_KEYWAIT		msg_kakejiku_01_p01_r110_r0101
+	_TALK_END
+	_END
+
+dungeon_clear_r110_r0101:
+	//たびに　でます.....
+	_TALK_KEYWAIT		msg_kakejiku_01_p03_r110_r0101
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/
+//--------------------------------------------------------------------
+//					r110_r0104～11共通スクリプト
+//--------------------------------------------------------------------
+SCRIPT_LABEL			karakuri_gate_script
+	_TALK_START
+	_SWITCH				WK_KARAKURI_LEVEL
+	_CASEJUMP			0,karakuri_gate_1_r110_r0101
+	_CASEJUMP			1,karakuri_gate_2_r110_r0101
+	_CASEJUMP			2,karakuri_gate_3_r110_r0101
+	_CASEJUMP			3,karakuri_gate_4_r110_r0101
+	_CASEJUMP			4,karakuri_gate_5_r110_r0101
+	_CASEJUMP			5,karakuri_gate_6_r110_r0101
+	_CASEJUMP			6,karakuri_gate_7_r110_r0101
+	_CASEJUMP			7,karakuri_gate_8_r110_r0101
+	_END
+
+//※扉の座標等が１～８まで同じですが、別々になる可能性があるのであえて共通化していません（メッセージも同様）。
+karakuri_gate_1_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0104,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0104
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0104,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+
+karakuri_gate_2_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0105,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0105
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0105,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+karakuri_gate_3_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0106,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0106
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0106,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+karakuri_gate_4_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0107,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0107
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0107,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+
+	_TALK_END
+	_END
+
+karakuri_gate_5_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0108,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0108
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0108,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+karakuri_gate_6_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0109,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0109
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0109,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+karakuri_gate_7_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0110,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0110
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0110,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+karakuri_gate_8_r110_r0101:
+	_IFVAL_JUMP			WK_SCENE_R110_R0111,EQ,0,lock_gate_message
+
+	//あいことばを言った！
+	_TALK_KEYWAIT		msg_karakuri_01_p03_r110_r0111
+	//鍵解除音
+	_SE					SE_PIN
+
+	_LDVAL				WK_SCENE_R110_R0111,2
+
+	//扉を削除(奥へのグラフィックへ）
+	_SET_CELL			13,1,523,0
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+//共通で鍵が掛かっている状態
+lock_gate_message:
+	_TALK_KEYWAIT		msg_aikotoba_01_p04_r110_r0101
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//					r110_r0104～11共通巻物メッセージ
+//--------------------------------------------------------------------
+//巻物を見つけた（２回目以降）
+look_aikotoba_mes_r110_r0101:
+	//あいことばだ！
+	_TALK_KEYWAIT		msg_aikotoba_01_p03_r110_r0101
+	_TALK_END
+	_END
+
+//巻物を入手
+get_aikotoba_mes_r110_r0101:
+	_JINGLE		MUS_FANFA4
+	//あいことばを見つけた！
+	_TALKMSG			msg_aikotoba_01_p01_r110_r0101
+	_JINGLE_WAIT
+	_TALK_KEYWAIT		msg_aikotoba_01_p02_r110_r0101
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*						だれかの視線用ＰＯＳ						*/
+/********************************************************************/
+//誰かの視線処理
+SCRIPT_LABEL			ev_r110_r0101_pos01
+	_TALK_START
+	_TALK_KEYWAIT		msg_karakuri_01_p01_r110_r0101
+	_TALK_END
+
+	//level３まで光処理
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,0,ev_kirari_01_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,1,ev_kirari_02_r110_r0101
+	_IFVAL_CALL			WK_KARAKURI_LEVEL,EQ,2,ev_kirari_03_r110_r0101
+
+	//視線メッセージを見た状態へ
+	_LDVAL				WK_SCENE_SHISEN,1
+	_END
+
+//一瞬だけ光る処理
+ev_kirari_01_r110_r0101:
+	//一瞬だけ光
+	_LDVAL				PARAM0,6
+	_LDVAL				PARAM1,3
+	_LDVAL				PARAM2,0
+
+	_CALL				set_fe_common_r110_r0101
+	_RET
+
+//一瞬だけ光る処理
+ev_kirari_02_r110_r0101:
+	//一瞬だけ光
+	_LDVAL				PARAM0,11
+	_LDVAL				PARAM1,5
+	_LDVAL				PARAM2,0
+
+	_CALL				set_fe_common_r110_r0101
+	_RET
+
+//一瞬だけ光る処理
+ev_kirari_03_r110_r0101:
+	//一瞬だけ光
+	_LDVAL				PARAM0,9
+	_LDVAL				PARAM1,2
+	_LDVAL				PARAM2,0
+
+	_CALL				set_fe_common_r110_r0101
+	_RET
+
+//呼び出し共通部分
+set_fe_common_r110_r0101:
+	_SET_FE_WORK		0, PARAM0
+	_SET_FE_WORK		1, PARAM1
+	_SET_FE_WORK		2, PARAM2
+	_SET_FLD_EFF		FECODE_Kirari
+	_FLD_EFF_WAIT		FECODE_Kirari
+
+	//少し間を置く
+	_TIME_WAIT	10
+	_RET
+
+
+/********************************************************************/
+/********************************************************************/

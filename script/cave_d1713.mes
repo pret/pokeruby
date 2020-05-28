@@ -1,0 +1,14 @@
+// ●座礁船
+// ●イベント後半部分
+
+
+// ●がらくた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_garakuta_01_p01_cave_d1713
+msg_garakuta_01_p01_cave_d1713:
+	.byte	hi_,ka_,ttu_,te_,i_,ru_,da_,ke_,no_
+	.byte	CR_
+	.byte	ta_,da_,no_,spc_,GO_,MI_,spc_,da_,ttu_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

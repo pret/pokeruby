@@ -1,0 +1,11 @@
+//=========================== ポケット番号 ===============================
+#define	NORMAL_POCKET		1
+#define	IMPORTANT_POCKET	5
+#define	BALL_POCKET			2
+#define	SKILL_POCKET		3
+#define	SEED_POCKET			4
+//#define	NORMAL_POCKET		1
+//#define	IMPORTANT_POCKET	2
+//#define	BALL_POCKET			3
+//#define	SKILL_POCKET		4
+//#define	SEED_POCKET			5

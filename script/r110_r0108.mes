@@ -1,0 +1,483 @@
+// ◆◆ダンジョン５◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+
+// ・合い言葉を手に入れた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karakuri_01_p03_r110_r0108
+msg_karakuri_01_p03_r110_r0108:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,a_,i_,ko_,to_,ba_,wo_
+	.byte	CR_
+	.byte	to_,bi_,ra_,ni_,spc_,ka_,ki_,tu_,ke_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,KA_,RA_,KU_,RI_,da_,i_,o_,u_,spc_,sa_,ma_,spc_,te_,n_,sa_,i_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,gi_,no_,spc_,ha_,zu_,re_,ru_,spc_,o_,to_,ga_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・効果音・ロック解除
+
+
+// ・クイズ人形（カラクリ大王のカラクリ人形）
+// ポケモン勝負はなく、クイズで先へ進む。
+
+// ・一号～五号まで、順番に答える。
+// 主人公が人形の横か下に来た時、トレーナーの視線と
+// 同じように、「！」＆近づいてくる処理。
+
+// ・人形が近づいて来る所は、できれば
+// 歩かず、すべって来るような感じにしたい。（保留）
+
+
+// ●一号
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・クイズ前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_r110_r0108
+msg_middlem1_01_p01_r110_r0108:
+	.byte	KA_,TA_,KA_,TA_,tenten_
+	.byte	CR_
+	.byte	WA_,GA_,HA_,I_,spc_,HA_,spc_,ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n1_,GO_,U_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n5_,GO_,U_,NO_,spc_,TO_,KO_,RO_,MA_,DE_
+	.byte	CR_
+	.byte	TU_,DU_,KE_,TE_,spc_,ku_,i_,zu_,NI_,spc_,SE_,I_,KA_,I_,spc_,SU_,RE_,BA_
+	.byte	SCROLL_WAIT_
+	.byte	a_,i_,ko_,to_,ba_,NI_,spc_,TA_,DO_,RI_,TU_,KE_,RU_,ZO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いてクイズへ
+// ・クイズ…以下３問からランダム
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_r110_r0108
+msg_middlem1_01_p02_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n1_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,na_,ka_,de_,spc_,n1_,n0_,n3_,ba_,n_,do_,u_,ro_,ni_
+	.byte	CR_
+	.byte	i_,na_,i_,spc_,PO_,KE_,MO_,N_,ha_,spc_,do_,re_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ジグザグマ
+// ツチニン
+// ポチエナ
+// ・正解
+// ２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_r110_r0108
+msg_middlem1_01_p03_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n1_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,na_,ka_,de_,spc_,ku_,sa_,TA_,I_,PU_,ga_,spc_,ha_,i_,ttu_,te_,i_,na_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,do_,re_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ツチニン
+// ハスボー
+// ラビアン
+// ・正解
+// １
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p04_r110_r0108
+msg_middlem1_01_p04_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n1_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,na_,ka_,de_,spc_,hi_,ttu_,ka_,ku_,wo_
+	.byte	CR_
+	.byte	tu_,ka_,u_,spc_,PO_,KE_,MO_,N_,ha_,spc_,do_,re_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// キノココ
+// ツチニン
+// アメタマ
+// ・正解
+// ２
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公正解：ＳＥ３１
+// ・この後、話しかけてもこれ
+// ・全部の人形でおなじ処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p05_r110_r0108
+msg_middlem1_01_p05_r110_r0108:
+	.byte	O_,ME_,DE_,TO_,U_,spc_,SE_,I_,KA_,I_,spc_,DE_,bou_,SU_,gyoe_
+	.byte	CR_
+	.byte	O_,KU_,HE_,spc_,DO_,U_,ZO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公不正解：ＳＥ３２
+// ・全部の人形でおなじ処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p06_r110_r0108
+msg_middlem1_01_p06_r110_r0108:
+	.byte	ZA_,N_,NE_,N_,gyoe_
+	.byte	CR_
+	.byte	MA_,TI_,GA_,I_,spc_,DE_,bou_,bou_,bou_,SU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・５体の人形が一斉に小刻みに動き出す
+// ・と同時にコレ↓
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p07_r110_r0108
+msg_middlem1_01_p07_r110_r0108:
+	.byte	WA_,HA_,HA_,HA_,HA_,gyoe_,spc_,WA_,HA_,HA_,HA_,HA_,gyoe_,spc_,KA_,TA_,KA_,TA_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・人形の笑い、止まる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p08_r110_r0108
+msg_middlem1_01_p08_r110_r0108:
+	.byte	MA_,TA_,NO_,spc_,ti_,yya_,re_,n_,zi_,spc_,O_,MA_,TI_,SI_,TE_,MA_,bou_,SU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・暗転し、次の瞬間、主人公はダンジョンの入り口へ…。
+
+
+
+// ●二号
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・クイズ前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_02_p01_r110_r0108
+msg_middlem1_02_p01_r110_r0108:
+	.byte	KA_,TA_,KA_,TA_,tenten_
+	.byte	CR_
+	.byte	WA_,GA_,HA_,I_,spc_,HA_,spc_,ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n2_,GO_,U_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	n1_,GO_,U_,NO_,spc_,ku_,i_,zu_,HA_,spc_,YA_,SA_,SI_,SU_,GI_,RU_,YO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いてクイズへ
+// ・クイズ…以下３問からランダム
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_02_p02_r110_r0108
+msg_middlem1_02_p02_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n2_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	O_,DA_,MA_,KI_,ha_,ka_,se_,no_,spc_,ka_,ba_,n_,no_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,spc_,mi_,gi_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,na_,n_,da_,ttu_,ta_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ジュモリ
+// アチャモ
+// ミズゴロウ
+// ・正解
+// ３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_02_p03_r110_r0108
+msg_middlem1_02_p03_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n2_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,ZU_,spc_,SU_,KU_,bou_,RU_,de_
+	.byte	CR_
+	.byte	ko_,u_,ka_,n_,spc_,si_,te_,i_,ta_,spc_,PO_,KE_,MO_,N_,ha_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ダングリ
+// キノココ
+// パッチール
+// ・正解
+// １
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_02_p04_r110_r0108
+msg_middlem1_02_p04_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n2_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,U_,KA_,no_,mo_,ri_,de_,spc_,DE_,BO_,N_,no_,spc_,si_,yya_,i_,n_,ga_
+	.byte	CR_
+	.byte	sa_,ga_,si_,te_,i_,ta_,spc_,PO_,KE_,MO_,N_,ha_,spc_,na_,n_,da_,ttu_,ta_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// キノココ
+// ジグザグマ
+// ケムッソ
+// ・正解
+// １
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公正解：ＳＥ３１
+// ・この後、話しかけてもこれ
+// ・全部の人形でおなじ処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_02_p05_r110_r0108
+msg_middlem1_02_p05_r110_r0108:
+	.byte	O_,ME_,DE_,TO_,U_,spc_,SE_,I_,KA_,I_,spc_,DE_,bou_,SU_,gyoe_
+	.byte	CR_
+	.byte	O_,KU_,HE_,spc_,DO_,U_,ZO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公不正解：カラクリ１号と同じ処理
+
+
+
+// ●三号
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・クイズ前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_03_p01_r110_r0108
+msg_middlem1_03_p01_r110_r0108:
+	.byte	KA_,TA_,KA_,TA_,tenten_
+	.byte	CR_
+	.byte	WA_,GA_,HA_,I_,spc_,HA_,spc_,ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n3_,GO_,U_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	O_,KA_,NE_,NI_,HA_,spc_,U_,RU_,SA_,I_,NO_,DA_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いてクイズへ
+// ・クイズ…以下３問からランダム
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_03_p02_r110_r0108
+msg_middlem1_03_p02_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n3_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,spc_,n3_,tu_,spc_,ka_,u_,no_,to_
+	.byte	CR_
+	.byte	i_,i_,KI_,ZU_,gu_,su_,ri_,spc_,n1_,tu_,spc_,ka_,u_,no_,to_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ttu_,ti_,ga_,spc_,ta_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// モンスターボール
+// いいキズぐすり
+// おなじねだん
+// ・正解
+// ２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_03_p03_r110_r0108
+msg_middlem1_03_p03_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n3_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,nu_,ke_,no_,HI_,MO_,wo_,spc_,u_,ttu_,te_
+	.byte	CR_
+	.byte	do_,ku_,ke_,si_,wo_,spc_,ka_,u_,to_,spc_,i_,ku_,ra_,spc_,no_,ko_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// １３５えん
+// １５５えん
+// １７５えん
+// ・正解
+// ３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_03_p04_r110_r0108
+msg_middlem1_03_p04_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n3_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,de_,mo_,na_,o_,si_,spc_,to_,spc_,SU_,bou_,PA_,bou_,BO_,bou_,RU_,wo_,spc_,ka_,u_,to_
+	.byte	CR_
+	.byte	ge_,n_,ki_,no_,ka_,ke_,ra_,spc_,yo_,ri_,spc_,ta_,ka_,ku_,na_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// たかくなる
+// やすくなる
+// おなじねだん
+// ・正解
+// ２
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公正解：ＳＥ３１
+// ・この後、話しかけてもこれ
+// ・全部の人形でおなじ処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_03_p05_r110_r0108
+msg_middlem1_03_p05_r110_r0108:
+	.byte	O_,ME_,DE_,TO_,U_,spc_,SE_,I_,KA_,I_,spc_,DE_,bou_,SU_,gyoe_
+	.byte	CR_
+	.byte	O_,KU_,HE_,spc_,DO_,U_,ZO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公不正解：カラクリ１号と同じ処理
+
+
+
+// ●四号
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・クイズ前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_04_p01_r110_r0108
+msg_middlem1_04_p01_r110_r0108:
+	.byte	KA_,TA_,KA_,TA_,tenten_
+	.byte	CR_
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n4_,GO_,U_,spc_,YO_,bou_,N_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	U_,TU_,KU_,SI_,I_,spc_,WA_,TA_,SI_,NO_,spc_,ku_,i_,zu_,spc_,I_,KU_,WA_,YO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いてクイズへ
+// ・クイズ…以下３問からランダム
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_04_p02_r110_r0108
+msg_middlem1_04_p02_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n4_,GO_,U_,spc_,ku_,i_,zu_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,NA_,ZU_,MI_,ZI_,MU_,RI_,bou_,DA_,bou_,spc_,TU_,TU_,ZI_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	I_,SI_,TU_,BU_,TE_,ha_,spc_,O_,SU_,spc_,ME_,SU_,spc_,do_,ttu_,ti_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// オス
+// メス
+// どっちでもない
+// ・正解
+// １
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_04_p03_r110_r0108
+msg_middlem1_04_p03_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n4_,GO_,U_,spc_,ku_,i_,zu_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MU_,RO_,TA_,U_,N_,no_,spc_,si_,yyu_,u_,ka_,i_,zi_,yyo_,de_,ha_
+	.byte	CR_
+	.byte	da_,n_,se_,i_,spc_,zi_,yyo_,se_,i_,spc_,do_,ttu_,ti_,ga_,spc_,o_,o_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// だんせい
+// じょせい
+// おなじかず
+// ・正解…
+// １
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_04_p04_r110_r0108
+msg_middlem1_04_p04_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n4_,GO_,U_,spc_,ku_,i_,zu_,YO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MU_,RO_,TA_,U_,N_,no_,spc_,ZI_,MU_,de_,spc_,sa_,i_,si_,yyo_,ni_,spc_,ta_,ta_,ka_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,da_,n_,se_,i_,hate_,zi_,yyo_,se_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// だんせい
+// じょせい
+// きまってない
+// ・正解
+// ２
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公正解：ＳＥ３１
+// ・この後、話しかけてもこれ
+// ・全部の人形でおなじ処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_04_p05_r110_r0108
+msg_middlem1_04_p05_r110_r0108:
+	.byte	O_,ME_,DE_,TO_,U_,spc_,SE_,I_,KA_,I_,spc_,YO_,bou_,gyoe_
+	.byte	CR_
+	.byte	U_,HU_,TTU_,spc_,O_,KU_,HE_,spc_,DO_,U_,ZO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公不正解：カラクリ１号と同じ処理
+
+
+
+// ●五号
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・クイズ前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_05_p01_r110_r0108
+msg_middlem1_05_p01_r110_r0108:
+	.byte	KA_,TA_,KA_,TA_,tenten_
+	.byte	CR_
+	.byte	WA_,GA_,HA_,I_,spc_,HA_,spc_,ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n5_,GO_,U_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	DA_,I_,O_,U_,NO_,spc_,SA_,I_,KO_,U_,spc_,KE_,TTU_,SA_,KU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いてクイズへ
+// ・クイズ…以下３問からランダム
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_05_p02_r110_r0108
+msg_middlem1_05_p02_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n5_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MI_,SU_,TA_,bou_,KA_,ZE_,NO_,ga_,spc_,o_,mo_,te_,ni_
+	.byte	CR_
+	.byte	ka_,za_,ttu_,te_,i_,ru_,spc_,zi_,te_,n_,si_,yya_,ha_,spc_,na_,n_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ６だい
+// ８だい
+// １０だい
+// ・正解
+// ２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_05_p03_r110_r0108
+msg_middlem1_05_p03_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n5_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,RA_,WA_,bou_,SI_,YYO_,TTU_,PU_,spc_,SA_,N_,nakag_,TO_,U_,KA_,de_
+	.byte	CR_
+	.byte	ki_,no_,mi_,wo_,spc_,ku_,re_,ru_,no_,ha_,spc_,na_,n_,ni_,n_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ひとり
+// ふたり
+// さんにん
+// ・正解
+// １
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_05_p04_r110_r0108
+msg_middlem1_05_p04_r110_r0108:
+	.byte	ka_,ra_,ku_,ri_,NI_,N_,GI_,YYO_,U_,spc_,n5_,GO_,U_,spc_,ku_,i_,zu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MI_,NA_,MO_,SI_,TE_,II_,ni_,spc_,ka_,n_,ba_,n_,ha_
+	.byte	CR_
+	.byte	i_,ku_,tu_,spc_,a_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・三択ウインドウ
+// ６つ
+// ７つ
+// ８つ
+// ・正解
+// ３
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公正解：ＳＥ３１
+// ・この後、話しかけてもこれ
+// ・全部の人形でおなじ処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_05_p05_r110_r0108
+msg_middlem1_05_p05_r110_r0108:
+	.byte	O_,ME_,DE_,TO_,U_,spc_,SE_,I_,KA_,I_,spc_,DE_,bou_,SU_,gyoe_
+	.byte	CR_
+	.byte	O_,KU_,HE_,spc_,DO_,U_,ZO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公不正解：カラクリ１号と同じ処理

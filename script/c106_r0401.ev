@@ -1,0 +1,587 @@
+//====================================================================
+//							c106_r0401
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r0401_event_data
+SP_SCRIPT_LABEL		scene_c106_r0401
+FLAG_CHANGE_LABEL	flag_change_c106_r0401
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c106_r0401:
+	SP_SCRIPT_DATA	WK_SCENE_C106_R0401,1,ev_scene_fan_01_p01_c106_r0401
+	SP_SCRIPT_END
+
+//ファンが出迎えてくれる
+ev_scene_fan_01_p01_c106_r0401:
+	_TALK_START
+
+	//振り向く
+	_SET_OBJ_ANIME	SCHOOLW1_01_FAN,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_youngm1_01_p01_c106_r0401
+
+	//迎える
+	_SET_OBJ_ANIME	OJYOU2_01_FAN,ojyou2_01_c106_r0401_anime01
+	_SET_OBJ_ANIME	YOUNGM1_01_FAN,youngm1_01_c106_r0401_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_youngm1_01_p02_c106_r0401
+
+	//近づく
+	_SET_OBJ_ANIME	OJYOU2_01_FAN,ojyou2_01_c106_r0401_anime02
+	_OBJ_ANIME_WAIT
+
+	//主人公気づいて振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	//逃げる
+	_SET_OBJ_ANIME	OJYOU2_01_FAN,ojyou2_01_c106_r0401_anime03
+	_OBJ_ANIME_WAIT
+
+	_LDVAL			WK_SCENE_C106_R0401,2
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//若者	迎える
+//--------------------------------------------------------------------
+youngm1_01_c106_r0401_anime01:
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_TURN_D
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//女の子	迎える
+//--------------------------------------------------------------------
+ojyou2_01_c106_r0401_anime01:
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_D_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//女の子	近づく
+//--------------------------------------------------------------------
+ojyou2_01_c106_r0401_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//女の子	目が合って逃げる
+//--------------------------------------------------------------------
+ojyou2_01_c106_r0401_anime03:
+	.byte	AC_STAY_JUMP_R
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c106_r0401:
+	_IFVAL_JUMP		WK_SCENE_C106_R0401,EQ,1,ev_fan_move_first
+	_IFVAL_JUMP		WK_SCENE_C106_R0401,EQ,2,ev_fan_move
+	_END
+
+//--------------------------------------------------------------------
+//				ファンが出迎えてくれるアニメを見たあと
+//--------------------------------------------------------------------
+ev_fan_move:
+	//経過時間をチェックして、ファンの増減をする
+	_PROGRAM		CHK_FAN_TIME
+
+	//ファンの位置を移動
+	_LDVAL			PARAM0,FAN_SCHOOLW1
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_schoolw1
+
+	_LDVAL			PARAM0,FAN_MIDDLEM2
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_middlem2
+
+	_LDVAL			PARAM0,FAN_OJYOU2
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_ojyou2
+
+	_LDVAL			PARAM0,FAN_BOYA1
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_boya1
+
+	_LDVAL			PARAM0,FAN_BOY2
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_boy2
+
+	_LDVAL			PARAM0,FAN_YOUNGM1
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_youngm1
+
+	_LDVAL			PARAM0,FAN_WORKERW1
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_workerw1
+
+	_LDVAL			PARAM0,FAN_OLDWOMAN1
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_CALL		ANSWORK,EQ,0,ev_fan_move_oldwoman1
+
+	_END
+
+//--------------------------------------------------------------------
+//				自分のファンではないときの位置(奥)
+//--------------------------------------------------------------------
+ev_fan_move_schoolw1:
+	_SXY_POS_CHANGE			SCHOOLW1_01_FAN,7,5
+	_RET
+
+ev_fan_move_middlem2:
+	_SXY_POS_CHANGE			MIDDLEM2_01_FAN,3,4
+	_RET
+
+ev_fan_move_ojyou2:
+	_SXY_POS_CHANGE			OJYOU2_01_FAN,7,2
+	_RET
+
+ev_fan_move_boya1:
+	_SXY_POS_CHANGE			BOYA1_01_FAN,5,5
+	_RET
+
+ev_fan_move_boy2:
+	_SXY_POS_CHANGE			BOY2_01_FAN,5,2
+	_RET
+
+ev_fan_move_youngm1:
+	_SXY_POS_CHANGE			YOUNGM1_01_FAN,8,4
+	_RET
+
+ev_fan_move_workerw1:
+	_SXY_POS_CHANGE			WORKERW1_01_FAN,3,3
+	_RET
+
+ev_fan_move_oldwoman1:
+	_SXY_POS_CHANGE			OLDWOMAN1_01_FAN,8,3
+	_RET
+
+//ファンの位置を移動(始めの一回目)
+ev_fan_move_first:
+	_CALL			ev_fan_move_middlem2
+	_CALL			ev_fan_move_boya1
+	_CALL			ev_fan_move_boy2
+	_CALL			ev_fan_move_workerw1
+	_CALL			ev_fan_move_oldwoman1
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ファン若者								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm1_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_YOUNGM1
+	_PROGRAM		SET_FAN_NAME
+
+	//ファン企画スタートしているか
+	_IFVAL_JUMP		WK_SCENE_C106_R0401,EQ,0,nostart_fan_youngm1_01_p01_c106_r0401
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_youngm1_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_youngm1_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_youngm1_01_p05_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_youngm1_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_youngm1_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_youngm1_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_youngm1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_youngm1_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_youngm1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_youngm1_01_p06_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//まだファン企画スタートしてない
+nostart_fan_youngm1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_youngm1_01_p07_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファン女学生							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_schoolw1_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_SCHOOLW1
+	_PROGRAM		SET_FAN_NAME
+
+	//ファン企画スタートしているか
+	_IFVAL_JUMP		WK_SCENE_C106_R0401,EQ,0,nostart_fan_schoolw1_01_p01_c106_r0401
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_schoolw1_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_schoolw1_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_schoolw1_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_schoolw1_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_schoolw1_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_schoolw1_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_schoolw1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_schoolw1_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_schoolw1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_schoolw1_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//まだファン企画スタートしてない
+nostart_fan_schoolw1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_schoolw1_01_p05_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファンおやじ							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_MIDDLEM2
+	_PROGRAM		SET_FAN_NAME
+
+	//ファン企画スタートしているか
+	_IFVAL_JUMP		WK_SCENE_C106_R0401,EQ,0,nostart_fan_middlem2_01_p01_c106_r0401
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_middlem2_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_middlem2_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_middlem2_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_middlem2_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_middlem2_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_middlem2_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_middlem2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_middlem2_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_middlem2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_middlem2_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//まだファン企画スタートしてない
+nostart_fan_middlem2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_middlem2_01_p05_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファン女の子							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou2_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_OJYOU2
+	_PROGRAM		SET_FAN_NAME
+
+	//ファン企画スタートしているか
+	_IFVAL_JUMP		WK_SCENE_C106_R0401,EQ,0,nostart_fan_ojyou2_01_p01_c106_r0401
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_ojyou2_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_ojyou2_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_ojyou2_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_ojyou2_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_ojyou2_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_ojyou2_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_ojyou2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_ojyou2_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_ojyou2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_ojyou2_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//まだファン企画スタートしてない
+nostart_fan_ojyou2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_ojyou2_01_p05_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファン男の子							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_BOYA1
+	_PROGRAM		SET_FAN_NAME
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_boya1_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_boya1_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_boya1_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_boya1_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_boya1_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_boya1_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_boya1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_boya1_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_boya1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_boya1_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファン男子								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_BOY2
+	_PROGRAM		SET_FAN_NAME
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_boy2_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_boy2_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_boy2_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_boy2_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_boy2_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_boy2_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_boy2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_boy2_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_boy2_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_boy2_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファン女性								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw1_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_WORKERW1
+	_PROGRAM		SET_FAN_NAME
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_workerw1_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_workerw1_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_workerw1_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_workerw1_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_workerw1_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_workerw1_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_workerw1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_workerw1_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_workerw1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_workerw1_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ファン老婆								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_fan
+	_TALK_OBJ_START
+
+	_LDVAL			PARAM0,FAN_OLDWOMAN1
+	_PROGRAM		SET_FAN_NAME
+
+	_FUNC_CALL		ANSWORK,CHK_FAN_BIT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_oldwoman1_01_p01_c106_r0401	//ファン
+
+	//ファンではない
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,7,only_oldwoman1_01_p01_c106_r0401
+
+	//ファンじゃない人が、複数いる
+	_TALK_KEYWAIT	msg_oldwoman1_01_p03_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//自分のファン
+fan_oldwoman1_01_p01_c106_r0401:
+	_FUNC_CALL		ANSWORK,GET_FAN_COUNT
+	_IFVAL_JUMP		ANSWORK,EQ,1,fan_only_oldwoman1_01_p01_c106_r0401	//一人だけ
+
+	//複数ファンがいる
+	_TALK_KEYWAIT	msg_oldwoman1_01_p01_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//一人だけファン
+fan_only_oldwoman1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_oldwoman1_01_p02_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+//ファンじゃない人が自分しかいない
+only_oldwoman1_01_p01_c106_r0401:
+	_TALK_KEYWAIT	msg_oldwoman1_01_p04_c106_r0401
+	_TALK_OBJ_END
+	_END
+
+

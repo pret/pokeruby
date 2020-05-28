@@ -1,0 +1,16 @@
+// ●トクサネシティ　ポケモンセンター２Ｆ
+
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c107_pc02
+msg_trainerw1_01_p01_c107_pc02:
+	.byte	tu_,u_,si_,n_,spc_,ta_,i_,se_,n_,de_,spc_,ka_,ti_,ma_,ku_,ttu_,te_
+	.byte	CR_
+	.byte	mi_,n_,na_,ni_,spc_,a_,ta_,si_,no_,spc_,mi_,ri_,yyo_,ku_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	A_,PI_,bou_,RU_,si_,ta_,ra_,spc_,HU_,AA_,N_,ga_,spc_,hu_,e_,ti_,yya_,u_,ka_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+

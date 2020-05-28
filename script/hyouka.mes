@@ -1,0 +1,343 @@
+// ●図鑑評価メッセージ
+// ●チェック対象となるのは
+// 　ホウエンモードでのNo001～162までのポケモンの数です
+
+// ●オダマキ博士
+// ●ポケモン図鑑を評価できる状態
+// ●男なら「くん」、女なら「ちゃん」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p00_zukan
+msg_odamaki_01_p00_zukan:
+	.byte	O_,DA_,MA_,KI_,kako2_,o_,o_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,no_,spc_,yo_,u_,su_,wo_
+	.byte	CR_
+	.byte	mi_,se_,te_,spc_,ku_,re_,ru_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」を選択　→msg_odamaki_01_p02_zukan:
+// ●「いいえ」を選択→msg_odamaki_01_p01_zukan:
+
+// ●「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p01_zukan
+msg_odamaki_01_p01_zukan:
+	.byte	u_,n_,hate_,spc_,mi_,se_,ru_,ho_,do_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,te_,spc_,i_,na_,i_,no_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p02_zukan
+msg_odamaki_01_p02_zukan:
+	.byte	hu_,mu_,hu_,mu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,tu_,ke_,ta_,spc_,PO_,KE_,MO_,N_,spc_,I_MSG_,STR_TEMP_BUF0
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ta_,spc_,PO_,KE_,MO_,N_,spc_,I_MSG_,STR_TEMP_BUF1,spc_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝みつけたかず
+// ●「＠１」＝つかまえたかず
+// ●捕獲した数に応じて次のメッセージ展開
+
+
+// ●捕獲した数　……　１匹以上９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p03_zukan
+msg_odamaki_01_p03_zukan:
+	.byte	mo_,ttu_,to_,spc_,ku_,sa_,mu_,ra_,ni_,spc_,ha_,i_,ttu_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,sa_,ga_,si_,te_,mi_,ru_,to_,spc_,i_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１０匹以上１９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p04_zukan
+msg_odamaki_01_p04_zukan:
+	.byte	ti_,yyo_,u_,si_,ga_,spc_,de_,te_,ki_,ta_,spc_,mi_,ta_,i_,da_,ne_
+	.byte	CR_
+	.byte	de_,mo_,spc_,ko_,re_,ka_,ra_,ga_,spc_,ta_,i_,he_,n_,spc_,na_,n_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　２０匹以上２９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p05_zukan
+msg_odamaki_01_p05_zukan:
+	.byte	ki_,ma_,ttu_,ta_,spc_,ba_,si_,yyo_,de_,si_,ka_,spc_,mi_,tu_,ka_,ra_,na_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,si_,tu_,ko_,ku_,spc_,sa_,ga_,su_,si_,ka_,spc_,na_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　３０匹以上３９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p06_zukan
+msg_odamaki_01_p06_zukan:
+	.byte	BO_,RI_,YYU_,bou_,MU_,ha_,spc_,ma_,da_,ma_,da_,spc_,da_,ke_,do_
+	.byte	CR_
+	.byte	su_,ko_,si_,ha_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,spc_,ra_,si_,ku_,spc_,na_,ttu_,ta_,zo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　４０匹以上４９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p07_zukan
+msg_odamaki_01_p07_zukan:
+	.byte	na_,ka_,na_,ka_,spc_,i_,i_,spc_,ka_,n_,zi_,spc_,da_,na_,gyoe_
+	.byte	CR_
+	.byte	ko_,no_,spc_,ti_,yyo_,u_,si_,de_,spc_,ga_,n_,ba_,ttu_,te_,spc_,ku_,re_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　５０匹以上５９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p08_zukan
+msg_odamaki_01_p08_zukan:
+	.byte	tu_,ri_,za_,o_,ha_,spc_,tu_,ka_,ttu_,te_,spc_,i_,ru_,ka_,na_,hate_
+	.byte	CR_
+	.byte	u_,mi_,ni_,mo_,spc_,PO_,KE_,MO_,N_,ha_,spc_,ta_,ku_,sa_,n_,spc_,i_,ru_,ka_,ra_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　６０匹以上６９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p09_zukan
+msg_odamaki_01_p09_zukan:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ru_,spc_,da_,ke_,de_,na_,ku_
+	.byte	CR_
+	.byte	si_,n_,ka_,spc_,sa_,se_,ru_,no_,ha_,spc_,do_,u_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　７０匹以上７９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p10_zukan
+msg_odamaki_01_p10_zukan:
+	.byte	su_,ba_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,ni_,spc_,na_,ri_,so_,u_,da_
+	.byte	CR_
+	.byte	so_,n_,na_,spc_,yo_,ka_,n_,ga_,spc_,si_,te_,spc_,ta_,ma_,ra_,na_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　８０匹以上８９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p11_zukan
+msg_odamaki_01_p11_zukan:
+	.byte	ko_,ko_,ma_,de_,spc_,a_,tu_,me_,ru_,to_,ha_,tenten_,tenten_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,sa_,i_,no_,u_,ha_,spc_,ta_,i_,si_,ta_,spc_,mo_,no_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　９０匹以上９９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p12_zukan
+msg_odamaki_01_p12_zukan:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,ni_,ha_,spc_,i_,ttu_,ta_,ka_,i_,hate_
+	.byte	CR_
+	.byte	a_,so_,ko_,de_,si_,ka_,spc_,tu_,ka_,ma_,e_,ra_,re_,na_,i_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,i_,ru_,ttu_,te_,spc_,ha_,na_,si_,spc_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１００匹以上１０９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p13_zukan
+msg_odamaki_01_p13_zukan:
+	.byte	to_,u_,to_,u_,spc_,n1_,n0_,n0_,si_,yyu_,ru_,i_,spc_,ko_,e_,ta_,no_,ka_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,spc_,to_,si_,te_,spc_,mi_,go_,to_,na_,spc_,mo_,n_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１１０匹以上１１９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p14_zukan
+msg_odamaki_01_p14_zukan:
+	.byte	tenten_,tenten_,so_,u_,i_,e_,ba_,spc_,i_,wa_,ku_,da_,ki_,wo_,spc_,tu_,ka_,u_,ko_,to_,de_
+	.byte	CR_
+	.byte	mi_,tu_,ka_,ru_,spc_,PO_,KE_,MO_,N_,mo_,spc_,i_,ta_,ttu_,ke_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１２０匹以上１２９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p15_zukan
+msg_odamaki_01_p15_zukan:
+	.byte	PO_,KE_,MO_,N_,ko_,u_,ka_,n_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,a_,tu_,ma_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１３０匹以上１３９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p16_zukan
+msg_odamaki_01_p16_zukan:
+	.byte	na_,n_,de_,mo_,spc_,na_,tu_,i_,te_,i_,ru_,to_
+	.byte	CR_
+	.byte	si_,n_,ka_,spc_,su_,ru_,spc_,PO_,KE_,MO_,N_,mo_,spc_,i_,ru_,so_,u_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１４０匹以上１４９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p17_zukan
+msg_odamaki_01_p17_zukan:
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,spc_,ni_,ha_,spc_,ko_,n_,na_,ni_,mo_
+	.byte	CR_
+	.byte	o_,o_,ku_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ta_,no_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１５０匹以上１５９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p18_zukan
+msg_odamaki_01_p18_zukan:
+	.byte	to_,ki_,do_,ki_,spc_,ta_,i_,ri_,yyo_,u_,ha_,ttu_,se_,i_,spc_,su_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,i_,ru_,ra_,si_,i_
+	.byte	SCROLL_WAIT_
+	.byte	so_,no_,spc_,TI_,YYA_,N_,SU_,wo_,spc_,no_,ga_,sa_,na_,i_,yo_,u_,ni_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１６０匹以上１６９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p19_zukan
+msg_odamaki_01_p19_zukan:
+	.byte	ki_,mi_,no_,spc_,zu_,ka_,n_,wo_,spc_,mi_,re_,ba_
+	.byte	CR_
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,no_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	SCROLL_WAIT_
+	.byte	su_,be_,te_,ga_,spc_,wa_,ka_,ru_,yo_,u_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１７０匹以上１７９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p21_zukan
+msg_odamaki_01_p21_zukan:
+	.byte	ki_,mi_,ha_,spc_,PO_,KE_,MO_,N_,ha_,ka_,se_,spc_,to_,si_,te_,mo_
+	.byte	CR_
+	.byte	yu_,u_,si_,yyu_,u_,spc_,na_,n_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１８０匹以上１８９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p22_zukan
+msg_odamaki_01_p22_zukan:
+	.byte	ko_,ko_,ma_,de_,spc_,zu_,ka_,n_,ga_,spc_,de_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	mo_,ha_,ya_,spc_,PU_,RO_,HU_,EE_,TTU_,SI_,YYO_,NA_,RU_,spc_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　１９０匹以上１９９匹以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p23_zukan
+msg_odamaki_01_p23_zukan:
+	.byte	i_,yo_,i_,yo_,spc_,ka_,n_,se_,i_,ni_,spc_,ti_,ka_,du_,i_,ta_,gyoe_
+	.byte	CR_
+	.byte	so_,n_,na_,spc_,yo_,ka_,n_,ga_,spc_,si_,te_,ki_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●捕獲した数　……　２００匹以上
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p24_zukan
+msg_odamaki_01_p24_zukan:
+	.byte	o_,me_,de_,to_,u_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,no_,spc_,ka_,n_,se_,i_,spc_,da_,yo_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●全国モードになっている場合
+// 　続けてmsg_odamaki_01_p20_zukan:　表示
+
+// ●全国モード追加
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p20_zukan
+msg_odamaki_01_p20_zukan:
+	.byte	hu_,mu_,hu_,mu_,spc_,ze_,n_,ko_,ku_,te_,ki_,spc_,ni_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,tu_,ke_,ta_,spc_,PO_,KE_,MO_,N_,spc_,I_MSG_,STR_TEMP_BUF0
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ta_,spc_,PO_,KE_,MO_,N_,spc_,I_MSG_,STR_TEMP_BUF1,spc_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝全国モードでの「みつけたかず」
+// ●「＠１」＝全国モードでの「つかまえたかず」

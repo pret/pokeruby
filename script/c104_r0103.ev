@@ -1,0 +1,306 @@
+//====================================================================
+//							c104_r0103
+//							デボン本社３Ｆ
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c104_r0103_event_data
+FLAG_CHANGE_LABEL	flag_change_c104_r0103
+OBJ_CTRL_LABEL		obj_ctrl_c104_r0103
+SP_SCRIPT_LABEL		scene_c104_r0103
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c104_r0103:
+	_IFVAL_CALL			WK_SCENE_C104_R0103,EQ,0,pos_chg_workerm1_c104_r0103
+	_END
+
+//社長室に初めて入ったときにデボン社員の位置を変更する
+pos_chg_workerm1_c104_r0103:
+	_SXY_POS_CHANGE		WORKERM1_01_C104_R0103,3,2
+	_SXY_SITE_CHANGE	WORKERM1_01_C104_R0103,MV_LEFT
+	_RET
+
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_c104_r0103:
+	OBJ_CTRL_DATA		WK_SCENE_C104_R0103,0,ev_site_chg_c104_r0103
+	OBJ_CTRL_END
+
+//主人公の向きを変更
+ev_site_chg_c104_r0103:
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_R
+	_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c104_r0103:
+	//社長に初めて会う
+	SP_SCRIPT_DATA		WK_SCENE_C104_R0103,0,ev_scene_tegami_get
+	SP_SCRIPT_END
+
+//社長に初めて会う
+ev_scene_tegami_get:
+	_TALK_START
+
+	_TALK_KEYWAIT		msg_workerm1_01_p01_c104_r0103
+	_TALK_CLOSE
+
+	//社長の方に歩きだす
+	_SET_OBJ_ANIME		WORKERM1_01_C104_R0103,workerm1_01_c104_r0103_anime04
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT			80
+
+	//社長の方から戻ってくる
+	_SET_OBJ_ANIME		WORKERM1_01_C104_R0103,workerm1_01_c104_r0103_anime05
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT		msg_workerm1_01_p05_c104_r0103
+	_TALK_CLOSE
+
+	_BGM_SET			MUS_TSURETEK
+
+	//社長の前に案内する
+	_SET_OBJ_ANIME		WORKERM1_01_C104_R0103,workerm1_01_c104_r0103_anime02
+	_SET_OBJ_ANIME		EV_OBJ_SPID,hero_01_c104_r0103_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT		msg_workerm1_01_p02_c104_r0103
+	_TALK_CLOSE
+
+	_BGM_NOW_SET
+
+	//社長の前に案内する２
+	_SET_OBJ_ANIME		WORKERM1_01_C104_R0103,workerm1_01_c104_r0103_anime03
+	_SET_OBJ_ANIME		EV_OBJ_SPID,hero_01_c104_r0103_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT		msg_oldman1_01_p01_c104_r0103
+
+	//「ダイゴへのてがみ」入手
+	_ITEM_EVENT			ITEM_DAIGOHENOTEGAMI,1
+
+	_TALK_KEYWAIT		msg_oldman1_01_p02_c104_r0103
+
+	//トレナビ入手
+	_JINGLE				MUS_FANFA4
+	_TALKMSG			msg_oldman1_01_p03_c104_r0103
+	_JINGLE_WAIT
+	_FLAG_SET			SYS_POKEGEAR_GET
+	_FLAG_SET			FE_POKEGEAR_GET	//(デバック用)
+
+	_TALK_KEYWAIT		msg_oldman1_01_p04_c104_r0103
+
+	//ロード１１６の若者がカナシダトンネルに移動する
+	_FLAG_SET			FV_FIGHTER1_01_FIELD_R116
+	_FLAG_RESET			FV_FIGHTER1_01_CAVE_D0201
+	_FLAG_RESET			FV_WOMAN1_01_CAVE_D0201
+
+	//ハギをだす
+	_FLAG_RESET			FV_HAGI_01_R104_R0101
+	_FLAG_RESET			FV_POKEMON_01_R104_R0101
+
+	//ハギ船の位置をロード１０４に保存
+	_LDVAL				WK_SCENE_FUNE_POS,1
+
+	//サポートを出す
+	_FLAG_RESET			FV_SUPPORT_01_FIELD_C104
+
+	_LDVAL				WK_SCENE_C104_R0103,1
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//研究員	近づいてくる
+//--------------------------------------------------------------------
+workerm1_01_c104_r0103_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//研究員	社長の前に案内する
+//--------------------------------------------------------------------
+workerm1_01_c104_r0103_anime02:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//研究員	社長の前に案内する２
+//--------------------------------------------------------------------
+workerm1_01_c104_r0103_anime03:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//研究員	社長の方に歩きだす
+//--------------------------------------------------------------------
+workerm1_01_c104_r0103_anime04:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//研究員	社長の方から戻ってくる
+//--------------------------------------------------------------------
+workerm1_01_c104_r0103_anime05:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	社長の前に案内される
+//--------------------------------------------------------------------
+hero_01_c104_r0103_anime01:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//主人公	社長の前に案内される
+//--------------------------------------------------------------------
+hero_01_c104_r0103_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	ACMD_END
+	
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						社長										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_c104_r0103
+	_TALK_OBJ_START
+
+	//すでにアイテムを入手しているか
+	_IF_FLAGON_JUMP		FE_GAKUSYUUSOUTI_GET,ev_ev_oldman1_01_p03_c104_r0103
+
+	//てがみイベントクリア
+	_IF_FLAGON_JUMP		FE_TEGAMI_CLEAR,debon_02_c104_r0103
+
+	_TALK_KEYWAIT		msg_oldman1_01_p05_c104_r0103
+	_TALK_CLOSE
+
+	//元の向きを向く
+	_SET_OBJ_ANIME		TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+//てがみイベントクリア
+debon_02_c104_r0103:
+	_TALK_KEYWAIT		msg_oldman1_01_p06_c104_r0103
+
+	_ITEM_EVENT			ITEM_GAKUSYUUSOUTI,1
+	_IF_ZERO_JUMP		ev_fail_item
+
+	_FLAG_SET			FE_GAKUSYUUSOUTI_GET
+	_TALK_KEYWAIT		msg_oldman1_01_p07_c104_r0103
+	_TALK_CLOSE
+
+	//元の向きを向く
+	_SET_OBJ_ANIME		TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテムを入手している
+ev_ev_oldman1_01_p03_c104_r0103:
+	_TALK_KEYWAIT		msg_oldman1_01_p08_c104_r0103
+	_TALK_CLOSE
+
+	//元の向きを向く
+	_SET_OBJ_ANIME		TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//								研究員
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_01_p01_c104_r0103
+	_TALK_OBJ_START
+
+	//ロード１１６でのイベントが終了していたら
+	_IF_FLAGON_JUMP		FE_SHOP_01_C104_FS01,ev_workerm1_01_p02_c104_r0103
+
+	_TALK_KEYWAIT		msg_workerm1_01_p03_c104_r0103
+	_TALK_OBJ_END
+	_END
+
+//ロード１１６でのイベントが終了している
+ev_workerm1_01_p02_c104_r0103:
+	_TALK_KEYWAIT		msg_workerm1_01_p04_c104_r0103
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							ガラスケース	
+/********************************************************************/
+SCRIPT_LABEL	ev_case_01_p01_c104_r0103
+	_EASY_MSG			msg_case_01_p01_c104_r0103
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

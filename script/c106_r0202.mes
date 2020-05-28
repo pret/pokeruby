@@ -1,0 +1,288 @@
+// c106_r0201.msgの、※１から続く。
+// 主人公、館長のあとにつづいて、特別展示室へ入る
+// 特別展示室の中央で館長たちどまり、主人公の方を向き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c106_r0202
+msg_gentlem1_01_p01_c106_r0202:
+	.byte	ko_,ko_,ha_,spc_,to_,ku_,be_,tu_,spc_,te_,n_,zi_,si_,tu_,spc_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 壁の方を向いて
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_c106_r0202
+msg_gentlem1_01_p02_c106_r0202:
+	.byte	go_,ra_,n_,no_,spc_,to_,o_,ri_,spc_,ma_,da_
+	.byte	CR_
+	.byte	e_,ga_,spc_,ka_,za_,ra_,re_,te_,spc_,o_,ri_,ma_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ni_,ha_,spc_,n1_,ka_,i_,ni_,spc_,a_,ru_,yo_,u_,na_
+	.byte	CR_
+	.byte	i_,wa_,yu_,ru_,spc_,me_,i_,ga_,spc_,to_,i_,ttu_,ta_,spc_,mo_,no_,to_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,ga_,u_,spc_,e_,wo_,spc_,ka_,za_,ri_,ta_,i_,no_,spc_,de_,su_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ru_,i_,spc_,me_,i_,ga_,spc_,ba_,ka_,ri_,ga_
+	.byte	CR_
+	.byte	ge_,i_,zi_,yyu_,tu_,spc_,na_,no_,de_,ha_,spc_,a_,ri_,ma_,se_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,te_,n_,zi_,si_,tu_,spc_,ni_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,ni_,mo_,spc_,PO_,KE_,MO_,N_,ga_,spc_,to_,bi_,da_,si_,te_,spc_,ki_,so_,u_,na_
+	.byte	CR_
+	.byte	MO_,DA_,N_,de_,spc_,i_,ki_,i_,ki_,to_,si_,ta_,spc_,sa_,ku_,hi_,n_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,za_,ttu_,te_,spc_,mi_,ta_,i_,no_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 主人公の方を向き直って
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p03_c106_r0202
+msg_gentlem1_01_p03_c106_r0202:
+	.byte	tu_,i_,spc_,na_,ga_,na_,ga_,to_,spc_,si_,tu_,re_,i_,spc_,si_,ma_,si_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ha_,spc_,ma_,da_,spc_,o_,wa_,ka_,i_,si_
+	.byte	CR_
+	.byte	ta_,bi_,wo_,spc_,na_,sa_,ttu_,te_,spc_,i_,ru_,spc_,yo_,u_,da_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ki_,i_,ki_,to_,si_,ta_,spc_,PO_,KE_,MO_,N_,ya_
+	.byte	CR_
+	.byte	so_,re_,wo_,spc_,e_,ga_,i_,ta_,spc_,su_,te_,ki_,na_,spc_,sa_,ku_,hi_,n_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	de_,a_,wa_,re_,ru_,spc_,ka_,mo_,spc_,si_,re_,ma_,se_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,spc_,so_,n_,na_,spc_,sa_,ku_,hi_,n_,ni_,spc_,de_,a_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	so_,no_,e_,wo_,spc_,ko_,ko_,ni_,spc_,ka_,za_,re_,ru_,spc_,yo_,u_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	a_,na_,ta_,ka_,ra_,spc_,o_,ne_,ga_,i_,spc_,si_,te_,spc_,ku_,da_,sa_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,i_,he_,n_,spc_,u_,re_,si_,i_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// →館長と話したフラグたてる
+
+// 館長、以後ずっと特別展示室にいる
+// ◆絵が１枚もない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p04_c106_r0202
+msg_gentlem1_01_p04_c106_r0202:
+	.byte	ko_,no_,spc_,te_,n_,zi_,si_,tu_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	ge_,n_,da_,i_,no_,spc_,i_,ki_,i_,ki_,spc_,to_,si_,ta_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	SCROLL_WAIT_
+	.byte	e_,wo_,spc_,ka_,za_,ri_,ta_,i_,spc_,mo_,no_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ◆絵が１枚～４枚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p05_c106_r0202
+msg_gentlem1_01_p05_c106_r0202:
+	.byte	o_,ka_,ge_,sa_,ma_,de_,spc_,e_,wo_
+	.byte	CR_
+	.byte	ka_,za_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ma_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,spc_,na_,n_,de_,su_,ttu_,te_,spc_,ne_,gyoe_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,ni_,spc_,su_,ba_,ra_,si_,i_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,mo_,spc_,a_,ri_,ga_,to_,u_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ◆絵が５枚そろった
+// ◆初回
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p06_c106_r0202
+msg_gentlem1_01_p06_c106_r0202:
+	.byte	a_,spc_,a_,na_,ta_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 絵の方をむいて
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p07_c106_r0202
+msg_gentlem1_01_p07_c106_r0202:
+	.byte	do_,u_,de_,su_,spc_,mi_,te_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	CR_
+	.byte	ko_,no_,spc_,su_,ba_,ra_,si_,i_,spc_,sa_,ku_,hi_,n_,spc_,ta_,ti_,wo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,mo_,spc_,o_,ta_,ga_,i_,ni_
+	.byte	CR_
+	.byte	hi_,ke_,wo_,to_,ra_,na_,i_,spc_,su_,ba_,ra_,si_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,e_,no_,spc_,o_,ka_,ge_,de_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,ni_
+	.byte	CR_
+	.byte	ko_,ra_,re_,ru_,spc_,ka_,ta_,mo_,spc_,hu_,e_,ta_,n_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,n_,to_,u_,ni_,spc_,a_,ri_,ga_,to_,u_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,gyoe_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,yu_,me_,ga_,spc_,ka_,na_,i_,ma_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆もようがえグッズ「ガラスのオブジェ」をもらう
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p13_c106_r0202
+msg_gentlem1_01_p13_c106_r0202:
+	.byte	tenten_,tenten_,ko_,re_,ha_,spc_,wa_,ta_,si_,ka_,ra_,no_
+	.byte	CR_
+	.byte	o_,re_,i_,no_,spc_,ki_,mo_,ti_,spc_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 効果音。ガラスのオブジェをもらう処理
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p16_c106_r0202
+msg_gentlem1_01_p16_c106_r0202:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	GA_,RA_,SU_,no_,O_,BU_,ZI_,EE_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・グッズがいっぱいじゃなかった場合
+// 　模様替えグッズにオブジェをプラスする。
+// ・フィールドにもどる
+
+// ・グッズがいっぱいの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p15_c106_r0202
+msg_gentlem1_01_p15_c106_r0202:
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,i_,ra_,si_,ta_,spc_,to_,ki_,ni_
+	.byte	CR_
+	.byte	sa_,si_,a_,ge_,ma_,si_,yyo_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・この場合は、次回話しかけた場合も
+// 　「絵が５枚そろった　初回」の会話を繰り返す。
+
+// ◆絵が５枚そろった
+// ◆二回目以降（オブジェイベントおわっている）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p17_c106_r0202
+msg_gentlem1_01_p17_c106_r0202:
+	.byte	ya_,a_,spc_,ko_,re_,ha_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,i_,so_,ga_,si_,i_,spc_,ta_,bi_,no_,spc_,a_,i_,ma_,ni_
+	.byte	CR_
+	.byte	o_,ta_,ti_,yo_,ri_,spc_,ku_,da_,sa_,ttu_,te_,spc_,ko_,u_,e_,i_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,zo_,spc_,go_,yu_,ttu_,ku_,ri_,spc_,o_,su_,go_,si_,ku_,da_,sa_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ◆絵がまだ無い時（額ぶちだけオブジェ）
+// ◆絵（左）に話しかけると
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p08_c106_r0202
+msg_gentlem1_01_p08_c106_r0202:
+	.byte	mo_,mo_,i_,ro_,no_,spc_,ka_,za_,ri_,ga_,spc_,tu_,i_,ta_,spc_,ga_,ku_,bu_,ti_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆絵（左から二番目）に話しかけると
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p09_c106_r0202
+msg_gentlem1_01_p09_c106_r0202:
+	.byte	ki_,i_,ro_,no_,spc_,ka_,za_,ri_,ga_,spc_,tu_,i_,ta_,spc_,ga_,ku_,bu_,ti_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆絵（真ん中）に話しかけると
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p10_c106_r0202
+msg_gentlem1_01_p10_c106_r0202:
+	.byte	a_,o_,i_,spc_,ka_,za_,ri_,ga_,spc_,tu_,i_,ta_,spc_,ga_,ku_,bu_,ti_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆絵（右から二番目）に話しかけると
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p11_c106_r0202
+msg_gentlem1_01_p11_c106_r0202:
+	.byte	a_,ka_,i_,spc_,ka_,za_,ri_,ga_,spc_,tu_,i_,ta_,spc_,ga_,ku_,bu_,ti_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ◆絵（右）に話しかけると
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p12_c106_r0202
+msg_gentlem1_01_p12_c106_r0202:
+	.byte	mi_,do_,ri_,i_,ro_,no_,spc_,ka_,za_,ri_,ga_,spc_,tu_,i_,ta_,spc_,ga_,ku_,bu_,ti_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ◆絵が飾られている時（絵が入ってるオブジェ）
+// 絵に話しかけると
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_nigaoe_01_p01_c106_r0202
+msg_nigaoe_01_p01_c106_r0202:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,e_,ga_,spc_,ka_,za_,ttu_,te_,a_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 続いて、画面が切り替わり、絵を表示。
+// 絵の下には、以下のメッセージが、タイトルとして表示される。
+// ※絵の表示に関しては別仕様
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●以下、客…絵の数が増えると、客が増える
+// ステップ０：二階の絵が０枚
+// ステップ１：二階の絵が１枚
+// ステップ２：二階の絵が２枚
+// ステップ３：二階の絵が３枚
+// ステップ４：二階の絵が４枚
+// ステップ５：二階の絵が５枚
+// ●客：ステップ２：２Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_c106_r0202
+msg_girl2_01_p01_c106_r0202:
+	.byte	hi_,sa_,si_,bu_,ri_,ni_,spc_,ki_,te_,spc_,mi_,ta_,ra_,spc_,n2_,ka_,i_,ni_,mo_
+	.byte	CR_
+	.byte	e_,ga_,spc_,ka_,za_,ttu_,te_,spc_,a_,ttu_,te_,spc_,bi_,ttu_,ku_,ri_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,i_,na_,a_,spc_,a_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,mo_
+	.byte	CR_
+	.byte	ko_,n_,na_,hu_,u_,ni_,spc_,su_,te_,ki_,ni_,spc_,ka_,i_,te_,spc_,ho_,si_,i_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ５：２Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c106_r0202
+msg_oldman1_01_p01_c106_r0202:
+	.byte	ho_,u_,tenten_,tenten_,spc_,ko_,ko_,ga_,spc_,sa_,i_,ki_,n_,spc_,wa_,da_,i_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,e_,ga_,spc_,a_,ru_,spc_,to_,ko_,ro_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ru_,ho_,do_,spc_,a_,ta_,ra_,si_,i_,spc_,e_,ga_,spc_,i_,ttu_,pa_,i_,de_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,o_,mo_,si_,ro_,i_,spc_,no_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ５：２Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy4_01_p01_c106_r0202
+msg_boy4_01_p01_c106_r0202:
+	.byte	he_,e_,bou_,gyoe_,spc_,ko_,re_,ttu_,te_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,e_,na_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ttu_,te_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,to_,si_,te_
+	.byte	CR_
+	.byte	sa_,i_,ko_,u_,no_,spc_,si_,a_,wa_,se_,spc_,da_,yo_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+

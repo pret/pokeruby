@@ -1,0 +1,174 @@
+//===================================================================
+//							r109_r0101
+//							海の家
+//===================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START r109_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_r109_r0101
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r109_r0101:
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_MARINEHOUSE
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							海の家の主人
+//							FH_01使用中
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_r109_r0101
+	_TALK_OBJ_START
+
+	//すでにアイテムもらったか
+	_IF_FLAGON_JUMP	FE_ITEM_01_R109_R0101,ev_middlem2_01_p04_r109_r0101
+
+	//トレーナー全員に勝利しているか
+	_IF_FLAGON_JUMP	FE_WIN_01_R109_R0101,ev_middlem2_01_p03_r109_r0101
+
+	//一度話しを聞いたか
+	_IF_FLAGON_JUMP	FH_01,ev_middlem2_01_p02_r109_r0101
+
+	_TALK_KEYWAIT	msg_middlem2_01_p01_r109_r0101
+	_FLAG_SET		FH_01
+
+	_TALK_OBJ_END
+	_END
+
+//一度話しを聞いた
+ev_middlem2_01_p02_r109_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p02_r109_r0101
+	_TALK_OBJ_END
+	_END
+
+//トレーナー全員に勝利している
+ev_middlem2_01_p03_r109_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p03_r109_r0101
+
+	_ITEM_EVENT		ITEM_SAIKOSOODA,6
+	_IF_ZERO_JUMP	ev_fail_item_r109_r0101
+
+	_FLAG_SET		FE_ITEM_01_R109_R0101
+	_TALK_OBJ_END
+	_END
+
+//バッグがいっぱいで貰えない場合
+ev_fail_item_r109_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p09_r109_r0101
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテムもらっていたら
+ev_middlem2_01_p04_r109_r0101:
+	_GOLD_WIN_WRITE		0,0,0		//手持ち
+
+	_TALK_YES_NO	msg_middlem2_01_p04_r109_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_middlem2_01_p01_r109_r0101	//「はい」
+
+	_TALK_KEYWAIT	msg_middlem2_01_p07_r109_r0101
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+//「はい」
+yes_middlem2_01_p01_r109_r0101:
+	_COMP_GOLD		300
+
+	//お金が足りない
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_money_middlem2_01_r109_r0101
+
+	//追加できるかチェック
+	_ADD_ITEM_CHK	ITEM_SAIKOSOODA,1
+	_IF_ZERO_JUMP	ev_fail_item_r109_r0101_02			//無理なとき
+
+	_TALK_KEYWAIT	msg_middlem2_01_p05_r109_r0101
+
+	_SUB_GOLD		300
+	_GOLD_WRITE		0,0,0		//お金表示更新
+
+	_ITEM_EVENT		ITEM_SAIKOSOODA,1
+
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+//お金が足りない
+no_money_middlem2_01_r109_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p06_r109_r0101
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+//バッグがいっぱい
+ev_fail_item_r109_r0101_02:
+	_TALK_KEYWAIT	msg_itemget_p07
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_sailor_04
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	SAILOR_04
+	_TRAINER_DATA2	msg_sailor_04_01
+	_TRAINER_DATA3	msg_sailor_04_02
+	_TRAINER_DATA4	ev_tr_r109_r0101_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sailor_04_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_13
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_13
+	_TRAINER_DATA2	msg_sexyw_13_01
+	_TRAINER_DATA3	msg_sexyw_13_02
+	_TRAINER_DATA4	ev_tr_r109_r0101_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_13_03
+	_END
+
+SCRIPT_LABEL	ev_ukiwam_02
+	_EVTRAINER_DATA_START
+	_TRAINER_DATA1	UKIWAM_02
+	_TRAINER_DATA2	msg_ukiwam_02_01
+	_TRAINER_DATA3	msg_ukiwam_02_02
+	_TRAINER_DATA4	ev_tr_r109_r0101_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_ukiwam_02_03
+	_END
+
+//共通終了処理
+ev_tr_r109_r0101_end:
+	_IF_TR_FLAGOFF_JUMP	SAILOR_04,no_flag_r109_r0101
+	_IF_TR_FLAGOFF_JUMP	SEXYW_13,no_flag_r109_r0101
+	_IF_TR_FLAGOFF_JUMP	UKIWAM_02,no_flag_r109_r0101
+
+	//全て倒していたら
+	_FLAG_SET		FE_WIN_01_R109_R0101
+	_TALK_OBJ_END
+	_END
+
+no_flag_r109_r0101:
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

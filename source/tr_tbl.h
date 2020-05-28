@@ -1,0 +1,84 @@
+extern const u8 TRCellTbl[];
+extern const u8 TRTypeTbl[];
+
+enum{
+	TR_AQUABOSS,		//アクアだんリーダー
+	TR_AQUAM,		//アクアだん
+	TR_AQUAW,		//アクアだん
+	TR_AROMA,		//アロマなおねえさん
+	TR_ISEKI,		//いせきマニア
+	TR_INTERVIEWER,		//インタビュアー
+	TR_UKIWAW,		//うきわガール
+	TR_UKIWAM,		//うきわボーイ
+	TR_ELITEM,		//エリートトレーナー
+	TR_ELITEW,		//エリートトレーナー
+	TR_OKARUTO,		//オカルトマニア
+	TR_PRINCESS,		//おじょうさま
+	TR_SEXYW,		//おとなのおねえさん
+	TR_PRINCE,		//おぼっちゃま
+	TR_MONSTERM,		//かいじゅうマニア
+	TR_SWIMMERM,		//かいパンやろう
+	TR_KARATE,		//カラテおう
+	TR_GUITARIST,		//ギタリスト
+	TR_CAMPF,		//キャンプファイヤー
+	TR_CAMPB,		//キャンプボーイ
+	TR_MUSHIMASTER,		//こんちゅうマニア
+	TR_ESPM,		//サイキッカー
+	TR_ESPW,		//サイキッカー
+	TR_GENTLEMAN,		//ジェントルマン
+	TR_BIG4M,		//してんのう
+	TR_BIG4W,		//してんのう
+	TR_LEADERW,		//ジムリーダー
+	TR_LEADERM,		//ジムリーダー
+	TR_LEADER,		//ジムリーダー
+	TR_SCHOOLM,		//じゅくがえり
+	TR_SCHOOLW,		//じゅくがえり
+	TR_SENPAIKOUHAI,		//センパイとコウハイ
+	TR_DAISUKIM,		//だいすきクラブ
+	TR_DAISUKIW,		//だいすきクラブ
+	TR_EXPERTM,		//たつじん
+	TR_EXPERTW,		//たつじん
+	TR_TANPAN,		//たんぱんこぞう
+	TR_CHAMPION,		//チャンピオン
+	TR_FISHING,		//つりびと
+	TR_ATHLETEBM,		//トライアスリート
+	TR_ATHLETEBW,		//トライアスリート
+	TR_ATHLETERM,		//トライアスリート
+	TR_ATHLETERW,		//トライアスリート
+	TR_ATHLETESM,		//トライアスリート
+	TR_ATHLETESW,		//トライアスリート
+	TR_DRAGON,		//ドラゴンつかい
+	TR_BIRD,		//とりつかい
+	TR_SHINOBI,		//ニンジャごっこ
+	TR_BATTLEG,		//バトルガール
+	TR_PARASOL,		//パラソルおねえさん
+	TR_SWIMMERW,		//ビキニのおねえさん
+	TR_PICNICG,		//ピクニックガール
+	TR_FUTAGO,		//ふたごちゃん
+	TR_SAILOR,		//ふなのり
+	TR_GBOARD,		//ボーダー
+	TR_SBOARD,		//ボーダー
+	TR_COLLECTOR,		//ポケモンコレクター
+	TR_MITSURU,		//ポケモントレーナー
+	TR_SUPPORTM01,		//ポケモントレーナー
+	TR_SUPPORTM02,		//ポケモントレーナー
+	TR_SUPPORTM03,		//ポケモントレーナー
+	TR_SUPPORTW01,		//ポケモントレーナー
+	TR_SUPPORTW02,		//ポケモントレーナー
+	TR_SUPPORTW03,		//ポケモントレーナー
+	TR_BREEDERM,		//ポケモンブリーダー
+	TR_BREEDERW,		//ポケモンブリーダー
+	TR_RANGERM,		//ポケモンレンジャー
+	TR_RANGERW,		//ポケモンレンジャー
+	TR_MAGMABOSS,		//マグマだんリーダー
+	TR_MAGMAM,		//マグマだん
+	TR_MAGMAW,		//マグマだん
+	TR_MINI,		//ミニスカート
+	TR_MUSHI,		//むしとりしょうねん
+	TR_MOUNT,		//やまおとこ
+	TR_LOVELOVE,		//ラブラブカップル
+	TR_GOLD,		//きんこんしき
+	TR_ANEOTOUTO,		//うみきょうだい
+	TR_END,
+};
+

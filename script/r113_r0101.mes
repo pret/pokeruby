@@ -1,0 +1,263 @@
+// ●113番道路　ガラス細工
+
+
+// ●おじさん１
+// ●「はいぶくろ」入手前　→msg_middlem1_01_p01_r113_r0101:
+// ●「はいぶくろ」入手後　→msg_middlem1_01_p03_r113_r0101:
+// ●「道具（グッズ）」ができているとき
+// 　　　　　　　　　　　　→msg_middlem1_01_p09_r113_r0101:
+
+// ●「はいぶくろ」入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_r113_r0101
+msg_middlem1_01_p01_r113_r0101:
+	.byte	ko_,no_,spc_,a_,ta_,ri_,ha_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,spc_,da_,ra_,ke_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,spc_,su_,go_,i_,yo_,spc_,PE_,KO_,PE_,KO_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,za_,n_,ba_,i_,wo_,spc_,GA_,RA_,SU_,ni_,spc_,si_,te_,ne_
+	.byte	CR_
+	.byte	so_,re_,de_,spc_,do_,u_,gu_,spc_,tu_,ku_,ru_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,ko_,re_,de_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,wo_,spc_,a_,tu_,me_,na_,sa_,i_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はいぶくろ」（No269）入手処理
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_r113_r0101
+msg_middlem1_01_p02_r113_r0101:
+	.byte	so_,no_,spc_,hu_,ku_,ro_,wo_,spc_,mo_,ttu_,te_
+	.byte	CR_
+	.byte	ha_,i_,no_,spc_,tu_,mo_,ttu_,ta_,spc_,to_,ko_,ro_,wo_,spc_,a_,ru_,ku_,to_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ra_,spc_,hu_,si_,gi_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ku_,ro_,no_,spc_,na_,ka_,ni_,spc_,ka_,za_,n_,ba_,i_,ga_
+	.byte	CR_
+	.byte	do_,n_,do_,n_,spc_,ta_,ma_,ttu_,te_,i_,ku_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,za_,n_,ba_,i_,ga_,spc_,ta_,ma_,ttu_,ta_,to_,spc_,o_,mo_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,to_,ko_,ro_,ni_,spc_,ki_,na_,sa_,i_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●一度、建物からでるまでは
+// 　同じメッセージを繰り返し表示してください
+
+// ●「はいぶくろ」を持っている
+// ●パソコンに預けているときは→　msg_middlem1_01_p12_r113_r0101:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_r113_r0101
+msg_middlem1_01_p03_r113_r0101:
+	.byte	ka_,za_,n_,ba_,i_,spc_,a_,ru_,no_,ka_,ne_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	CR_
+	.byte	do_,re_,do_,re_,spc_,mi_,se_,te_,go_,ra_,n_,spc_,PE_,KO_,PO_,KO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はいぶくろ」の量をチェック
+// ●２５０未満　→msg_middlem1_01_p04_r113_r0101:
+// ●２５０以上　→msg_middlem1_01_p05_r113_r0101:
+// ●ちなみに「はいぶくろ」のマックスは９９９９です
+
+// ●２５０未満
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p04_r113_r0101
+msg_middlem1_01_p04_r113_r0101:
+	.byte	u_,bou_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,ga_,spc_,su_,ku_,na_,i_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	GA_,RA_,SU_,no_,do_,u_,gu_,spc_,de_,ki_,na_,i_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ho_,spc_,a_,ru_,ke_,ba_
+	.byte	CR_
+	.byte	a_,o_,i_,BI_,bou_,DO_,RO_,spc_,tu_,ku_,re_,ru_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝道具をつくるのに必要な火山灰量ー「はいぶくろ」の火山灰量
+
+// ●２５０以上
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p05_r113_r0101
+msg_middlem1_01_p05_r113_r0101:
+	.byte	o_,ho_,ttu_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,spc_,a_,tu_,ma_,ttu_,te_,ru_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	GA_,RA_,SU_,no_,do_,u_,gu_,spc_,tu_,ku_,ru_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,ga_,spc_,i_,i_,ka_,ne_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+// ●（道具名）　　　　（作成に必要な火山灰）
+// 　あおいビードロ　　　２５０
+// 　きいろビードロ　　　５００
+// 　あかいビードロ　　　５００
+// 　しろいビードロ　　１０００
+// 　くろいビードロ　　１０００
+// 　きれいなイス　　　６０００
+// 　きれいなつくえ　　８０００
+// 　やめる
+// ●表示するのは道具名と「やめる」だけです
+// 　作成に必要な火山灰の量は表示しません
+// 　（「はいぶくろ」を調べても火山灰の量はわかりませんので）
+
+// ●道具を選んだ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p13_r113_r0101
+msg_middlem1_01_p13_r113_r0101:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,da_,ne_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,ni_,spc_,so_,re_,de_,spc_,i_,i_,n_,da_,ne_,hate_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝選択した道具
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_middlem1_01_p06_r113_r0101:
+// ●「いいえ」→msg_middlem1_01_p14_r113_r0101:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p14_r113_r0101
+msg_middlem1_01_p14_r113_r0101:
+	.byte	do_,re_,ga_,spc_,i_,i_,ka_,ne_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p06_r113_r0101
+msg_middlem1_01_p06_r113_r0101:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,da_,ne_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,si_,ttu_,gyoe_,spc_,do_,u_,gu_,wo_,spc_,tu_,ku_,ru_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,ma_,ttu_,te_,na_,sa_,i_,yo_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝選択した道具
+// ●で、画面ブラックアウト後　→msg_middlem1_01_p10_r113_r0101:
+
+// ●選んだが火山灰が足りない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p07_r113_r0101
+msg_middlem1_01_p07_r113_r0101:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,da_,ne_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ke_,do_,spc_,so_,re_,wo_,spc_,tu_,ku_,ru_,ni_,ha_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,ga_,spc_,ta_,ri_,na_,i_,yo_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,za_,n_,ba_,i_,no_,spc_,tu_,mo_,ttu_,te_,i_,ru_,spc_,to_,ko_,ro_,wo_
+	.byte	CR_
+	.byte	a_,to_,spc_,I_MSG_,STR_TEMP_BUF1,ho_,spc_,a_,ru_,ka_,na_,i_,to_,spc_,PE_,KO_,PE_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,ga_,spc_,i_,i_,ka_,ne_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝選択した道具
+// ●「＠１」＝道具をつくるのに必要な火山灰量ー「はいぶくろ」の火山灰量
+// ●再度、道具を選ばせるように……
+
+// ●やめる・キャンセル
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p08_r113_r0101
+msg_middlem1_01_p08_r113_r0101:
+	.byte	se_,ttu_,ka_,ku_,spc_,ka_,za_,n_,ba_,i_,wo_,spc_,a_,tu_,me_,ta_,no_,ni_
+	.byte	CR_
+	.byte	ho_,si_,i_,spc_,mo_,no_,ha_,spc_,na_,i_,no_,ka_,ne_,spc_,PE_,KO_,PE_,KO_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●道具ができた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p09_r113_r0101
+msg_middlem1_01_p09_r113_r0101:
+	.byte	o_,o_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,de_,ki_,ta_,yo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,spc_,i_,ki_,na_,sa_,i_,yo_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝選択した道具
+// ●アイテム入手処理
+
+// ●道具ができた、でもバッグ一杯
+// ●（道具の場合の処理です）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p10_r113_r0101
+msg_middlem1_01_p10_r113_r0101:
+	.byte	a_,ra_,hate_
+	.byte	CR_
+	.byte	so_,re_,i_,zi_,yyo_,u_,spc_,mo_,te_,na_,i_,yo_,spc_,PE_,KO_,PE_,KO_
+	.byte	NORMAL_WAIT_
+	.byte	a_,zu_,ka_,ttu_,te_,spc_,o_,ku_,ka_,ra_
+	.byte	CR_
+	.byte	ko_,n_,do_,spc_,ki_,na_,sa_,i_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●道具をもらえる状態で話しかけるまで、この状態を保持
+
+// ●道具ができた、でもパソコン一杯
+// ●（グッズの場合の処理です）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p11_r113_r0101
+msg_middlem1_01_p11_r113_r0101:
+	.byte	a_,ra_,hate_
+	.byte	CR_
+	.byte	PA_,SO_,KO_,N_,spc_,i_,ttu_,pa_,i_,spc_,na_,no_,ka_,spc_,PE_,KO_,PE_,KO_
+	.byte	NORMAL_WAIT_
+	.byte	a_,zu_,ka_,ttu_,te_,spc_,o_,ku_,ka_,ra_
+	.byte	CR_
+	.byte	ko_,n_,do_,spc_,ki_,na_,sa_,i_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●道具をもらえる状態で話しかけるまで、ずっとこの状態
+
+// ●「はいぶくろ」をパソコンに預けている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p12_r113_r0101
+msg_middlem1_01_p12_r113_r0101:
+	.byte	a_,ra_,hate_
+	.byte	CR_
+	.byte	ha_,i_,bu_,ku_,ro_,spc_,mo_,ttu_,te_,i_,na_,i_,no_,ka_,spc_,PE_,KO_,PE_,KO_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ti_,a_,ru_,ka_,na_,i_,to_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,spc_,ta_,ma_,ra_,na_,i_,yo_,spc_,PE_,KO_,PE_,KO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●謎の坊主
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_r113_r0101
+msg_boya1_01_p01_r113_r0101:
+	.byte	o_,ya_,ka_,ta_,ga_,spc_,ha_,na_,su_,no_,ni_,spc_,a_,wa_,se_,te_
+	.byte	CR_
+	.byte	BI_,bou_,DO_,RO_,spc_,hu_,ku_,to_,spc_,ta_,no_,si_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PE_,KO_,PE_,KO_,gyoe_,spc_,PE_,KO_,PO_,KO_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

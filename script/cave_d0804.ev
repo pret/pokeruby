@@ -1,0 +1,26 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d0804.ev
+//
+//============================================ 
+
+/* ダミーデータです */
+
+EVENT_DATA_START cave_d0804_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_karate_12
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_12
+	_TRAINER_DATA2	msg_karate_12_01
+	_TRAINER_DATA3	msg_karate_12_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_12_03
+	_END
+

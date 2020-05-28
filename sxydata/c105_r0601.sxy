@@ -1,0 +1,96 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C105_R0601	3
+#define EXITNUM_C105_R0601	2
+#define POSNUM_C105_R0601	0
+#define BGNUM_C105_R0601	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_middlew1_01_p01_c105_r0601[];
+extern const u8	ev_jiguma_01_p01_c105_r0601[];
+extern const u8	ev_middlem1_01_p01_c105_r0601[];
+
+const evObjData	OBJ_c105_r0601[] =
+{
+	{
+		MIDDLEW1_01_C105_R0601,		//OBJ ID
+		MIDDLEW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RV,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlew1_01_p01_c105_r0601,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		JIGUMA_01_C105_R0601,		//OBJ ID
+		JIGUMA,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_jiguma_01_p01_c105_r0601,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		MIDDLEM1_01_C105_R0601,		//OBJ ID
+		MIDDLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem1_01_p01_c105_r0601,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c105_r0601[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		FIELD_C105_DOOR08,		//Door ID
+		FIELD_C105,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		FIELD_C105_DOOR08,		//Door ID
+		FIELD_C105,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c105_r0601_sxy_data =
+{
+OBJNUM_C105_R0601,			// field obj max
+EXITNUM_C105_R0601,		// exit max
+POSNUM_C105_R0601,			// pos event max
+BGNUM_C105_R0601,			// bg event max
+OBJ_c105_r0601,			// field obj data
+EXIT_c105_r0601,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

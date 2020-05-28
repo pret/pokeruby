@@ -1,0 +1,1180 @@
+//====================================================================
+//							field_t101
+//						ミシロ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_t101_event_data
+FLAG_CHANGE_LABEL	flag_change_field_t101
+SP_SCRIPT_LABEL		scene_opening_01_p01_field_t101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//到着フラグセット
+flag_change_field_t101:
+	_FLAG_SET		SYS_T101_ARRIVE
+
+	//パパの位置をずらす(女の子だったら)
+	_IFVAL_CALL		WK_SCENE_SP_OPENING,EQ,2,ev_opening_boy_papa_move
+
+	//ポケモンまだもらっていなかったら
+	_IF_FLAGOFF_CALL	FE_ODAMAKI_01_P01_T101_R0301,ev_stoper_field_t101_move_02
+
+	//図鑑入手したら、ママの位置を変更する
+	_IFVAL_CALL		WK_SCENE_FIELD_T101,EQ,3,ev_mama_dash_move
+
+	//ゲームクリア後、自宅から出たらシーンを切り替える
+	_IFVAL_CALL		WK_SCENE_T101_R0101,EQ,4,ev_papa_scene_chg
+	_IFVAL_CALL		WK_SCENE_T101_R0201,EQ,4,ev_papa_scene_chg
+
+	//コトキのサポートイベントを終了させる
+	_IFVAL_CALL		WK_SCENE_02_FIELD_T102,EQ,1,kotoki_event_end
+
+	//サポートと話してフィールドに出たタイミングでサポート母のメッセージを変更する
+	_IFVAL_CALL		WK_SCENE_T101_R0202,EQ,3,ev_suppot_mama_field_t101
+	_END
+
+//--------------------------------------------------------------------
+//サポートと話してフィールドに出たタイミングでサポート母のメッセージを変更する
+//--------------------------------------------------------------------
+ev_suppot_mama_field_t101:
+	_FLAG_SET		FE_SMAMA_01_T101_R0201
+	_RET
+
+//--------------------------------------------------------------------
+//				コトキのサポートイベントを終了させる
+//--------------------------------------------------------------------
+kotoki_event_end:
+	_LDVAL			WK_SCENE_02_FIELD_T102,2
+	_FLAG_SET		FV_SUPPORT_01_FIELD_T102
+	_RET
+
+//--------------------------------------------------------------------
+//		ゲームクリア後、自宅から出たらシーンを切り替える
+//--------------------------------------------------------------------
+ev_papa_scene_chg:
+	_LDVAL			WK_SCENE_T101_R0101,5
+	_LDVAL			WK_SCENE_T101_R0201,5
+	_RET
+
+//--------------------------------------------------------------------
+//				パパの位置をずらす(女の子だったら)
+//--------------------------------------------------------------------
+ev_opening_boy_papa_move:
+	_SXY_POS_CHANGE	MAMA_01_FIELD_T101,14,8
+	_RET
+
+//--------------------------------------------------------------------
+//				ポケモンをまだもらっていなかったら
+//--------------------------------------------------------------------
+ev_stoper_field_t101_move_02:
+	//サポートと会話していなかったら
+	_IFVAL_JUMP		WK_SCENE_FIELD_T101,EQ,0,ev_stoper_field_t101_move
+
+	//サポート弟の位置をロード１０１を見ている状態にする
+	_SXY_POS_CHANGE		SUPPORTM1_01_FIELD_T101,10,1
+	_SXY_SITE_CHANGE	SUPPORTM1_01_FIELD_T101,MV_UP
+	_RET
+
+//--------------------------------------------------------------------
+//					サポートと会話していなかったら
+//			ミシロから出られないようにストッパーが機能する
+//--------------------------------------------------------------------
+ev_stoper_field_t101_move:
+	_SXY_POS_CHANGE		SUPPORTM1_01_FIELD_T101,7,2
+	_SXY_SITE_CHANGE	SUPPORTM1_01_FIELD_T101,MV_DOWN
+	_RET
+
+//--------------------------------------------------------------------
+//							図鑑入手後
+//					ランニングシューズイベントで
+//						ママの位置を変更する
+//--------------------------------------------------------------------
+ev_mama_dash_move:
+	_FLAG_RESET		FV_MAMA_01_FIELD_T101
+	_SXY_SITE_CHANGE	MAMA_01_FIELD_T101,MV_DOWN
+
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_mama_pos_field_t101	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_mama_pos_field_t101	//女の子
+	_RET
+
+//男の子
+boy_mama_pos_field_t101:
+	_SXY_POS_CHANGE	MAMA_01_FIELD_T101,5,9
+	_RET
+
+//女の子
+girl_mama_pos_field_t101:
+	_SXY_POS_CHANGE	MAMA_01_FIELD_T101,14,9
+	_RET
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_opening_01_p01_field_t101:
+	//主人公ミシロタウンに引越してきた
+	SP_SCRIPT_DATA	WK_SCENE_SP_OPENING,1,ev_scene_opening_boy_field_t101 //男の子
+	SP_SCRIPT_DATA	WK_SCENE_SP_OPENING,2,ev_scene_opening_girl_field_t101//女の子
+
+	//自宅イベント後、家を出た
+	SP_SCRIPT_DATA	WK_SCENE_SP_OPENING,7,ev_scene_opening_poke_delete
+	SP_SCRIPT_END
+
+//--------------------------------------------------------------------
+//			主人公ミシロタウンに引越してきた(男の子)
+//--------------------------------------------------------------------
+ev_scene_opening_boy_field_t101:
+	_TALK_START
+
+	//ドアの座標をセットしておく
+	_LDVAL			PARAM0,5
+	_LDVAL			PARAM1,8
+
+	_CALL			opening_papa_go_home
+	_FLAG_SET		FV_TRUCK1_01_FIELD_T101
+	_MAP_CHG_SENOT	T101,T101_R0101,8,8/*ワープ*/
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//			主人公ミシロタウンに引越してきた(女の子)
+//--------------------------------------------------------------------
+ev_scene_opening_girl_field_t101:
+	_TALK_START
+
+	//ドアの座標をセットしておく
+	_LDVAL			PARAM0,14
+	_LDVAL			PARAM1,8
+
+	_CALL			opening_papa_go_home
+	_FLAG_SET		FV_TRUCK1_02_FIELD_T101
+	_MAP_CHG_SENOT	T101,T101_R0201,2,8/*ワープ*/
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//トラックから降りて、家の中に入る
+SCRIPT_LABEL	opening_papa_go_home
+	//段差を飛び降りる音
+	_TIME_WAIT		15
+	_SE				SE_DANSA
+
+	//トラックから降りる
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t101_anime30
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	PARAM0,PARAM1
+	_DOOR_ANIME_WAIT
+	_OBJ_APPEAR		MAMA_01_FIELD_T101
+
+	//ママ一歩出る
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ドアを閉じる
+	_CLOSE_DOOR_ANIME	PARAM0,PARAM1
+	_DOOR_ANIME_WAIT
+
+	_TIME_WAIT		10
+
+	//ママ近づく
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,papa_01_field_t101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_mama_01_p01_field_t101
+	_TALK_CLOSE
+
+	//部屋に入る
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,papa_01_field_t101_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t101_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ドアを開く
+	_OPEN_DOOR_ANIME	PARAM0,PARAM1
+	_DOOR_ANIME_WAIT
+
+	//部屋に入る
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime10
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t101_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ママのバニッシュフラグを立てておく
+	_FLAG_SET		FV_MAMA_01_FIELD_T101
+	_LDVAL			WK_SCENE_SP_OPENING,3
+
+	//主人公を消す
+	_OBJ_INVISIBLE	EV_OBJ_SPID,0,0
+
+	//ドアを閉める
+	_CLOSE_DOOR_ANIME	PARAM0,PARAM1
+	_DOOR_ANIME_WAIT
+
+	//bigmanを出すようにする
+	_FLAG_RESET		FV_BIGMAN1_01_FIELD_T101
+
+	//マップ名を表示する
+	_FLAG_RESET		CTRL_MAPNAME_HIDE
+	_RET
+
+//--------------------------------------------------------------------
+//母	一歩前に出る
+//--------------------------------------------------------------------
+mama_01_field_t101_anime01:	
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	家から出てくる
+//--------------------------------------------------------------------
+papa_01_field_t101_anime01:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//パパ	家の中に入る
+//--------------------------------------------------------------------
+papa_01_field_t101_anime02:	
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ママ	家の中に入る(ドア開けた後）
+//--------------------------------------------------------------------
+mama_01_field_t101_anime10:	
+	.byte	AC_WALK_U_1
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	家の中に入る
+//--------------------------------------------------------------------
+hero_01_field_t101_anime02:	
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	家の中に入る(ドア開けた後)
+//--------------------------------------------------------------------
+hero_01_field_t101_anime10:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	トラックから降りる
+//--------------------------------------------------------------------
+hero_01_field_t101_anime30:
+	.byte	AC_JUMP_R_1
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//					自宅イベント後、家を出た
+//--------------------------------------------------------------------
+ev_scene_opening_poke_delete:
+	_TALK_START
+	_LDVAL			WK_SCENE_SP_OPENING,8
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//						 スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							大男									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_field_t101
+	_EASY_OBJ_MSG	msg_bigman1_01_p01_field_t101
+	_END
+
+
+/********************************************************************/
+/*						研究所の右側の少年							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_field_t101
+	_EASY_OBJ_MSG	msg_boy2_01_p01_field_t101
+	_END
+
+
+/********************************************************************/
+/*							サポート弟								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_supportm1_01_p01_field_t101
+	_TALK_OBJ_START
+
+	//モンスターボールゲットしているか
+	_IF_FLAGON_JUMP	FE_MONSBALL_GET,ev_supportm1_01_p04_field_t101
+
+	//ポケモンゲットしているか
+	_IF_FLAGON_JUMP	FE_ODAMAKI_01_P01_T101_R0301,ev_supportm1_01_p03_field_t101
+
+	//ストッパー解除後か
+	_IFVAL_JUMP		WK_SCENE_FIELD_T101,NE,0,ev_supportm1_01_p02_field_t101
+
+	_TALK_KEYWAIT	msg_supportm1_01_p01_field_t101
+	_TALK_OBJ_END
+	_END
+
+//ストッパー解除後
+ev_supportm1_01_p02_field_t101:
+	_TALK_KEYWAIT	msg_supportm1_01_p03_field_t101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_LDVAL			WK_SCENE_FIELD_T101,2
+	_TALK_OBJ_END
+	_END
+
+//ポケモンゲットしている
+ev_supportm1_01_p03_field_t101:
+	//おにいちゃん、おねえちゃんセット
+	_PROGRAM		SET_SEX_NAME_01
+	_TALK_KEYWAIT	msg_supportm1_01_p04_field_t101
+	_TALK_OBJ_END
+	_END
+
+//モンスターボールゲットしている
+ev_supportm1_01_p04_field_t101:
+	_TALK_KEYWAIT	msg_supportm1_01_p05_field_t101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*			主人公が左側から出ようとする場合		NO.1			*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_t101_pos01
+	_TALK_START					//自機の動作終了を待つ
+
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,supportm1_01_field_t101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//連れ戻す処理
+	_CALL			ev_modosu_field_t101
+
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,supportm1_01_field_t101_anime03
+	_OBJ_ANIME_WAIT
+	
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//連れ戻す共通処理
+//--------------------------------------------------------------------
+SCRIPT_LABEL	ev_modosu_field_t101
+	_TALK_KEYWAIT	msg_supportm1_01_p01_field_t101
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,supportm1_01_field_t101_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_t101_anime01
+	_OBJ_ANIME_WAIT				//主人公移動アニメ待ち
+	
+	_TALK_KEYWAIT	msg_supportm1_01_p02_field_t101
+	_TALK_CLOSE
+	_RET
+
+//--------------------------------------------------------------------
+//ストッパー	主人公の前に立ちはだかる
+//--------------------------------------------------------------------
+supportm1_01_field_t101_anime01:	
+	.byte	AC_SITE_R
+	.byte	AC_WAIT_8	//ウエイト
+	.byte	AC_UNDER_EFFECT_OFF
+	.byte	AC_STAY_JUMP_R
+	.byte	AC_WAIT_8	//ウエイト
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_L_2	//
+	.byte	AC_SITE_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	連れ戻す
+//--------------------------------------------------------------------
+supportm1_01_field_t101_anime02:	
+	.byte	AC_WALK_D_1	//下に一歩
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	元の位置に戻る
+//--------------------------------------------------------------------
+supportm1_01_field_t101_anime03:	
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_D_1	//下に１歩
+	.byte	AC_WALK_D_1	//下に１歩
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//上に１歩
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	戻される
+//--------------------------------------------------------------------
+hero_01_field_t101_anime01:
+	.byte	AC_SITE_PAUSE_ON	//方向固定
+	.byte	AC_WALK_D_1			//下に２歩
+	.byte	AC_SITE_PAUSE_OFF	//固定解除
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*			主人公が右側から出ようとする場合		NO.2			*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_t101_pos02		
+	_TALK_START					//自機の動作終了を待つ
+	
+	//左を向く処理
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,supportm1_01_field_t101_anime04
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//連れ戻す処理
+	_CALL			ev_modosu_field_t101
+
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,supportm1_01_field_t101_anime05
+	_OBJ_ANIME_WAIT
+	
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ストッパー	主人公の前に立ちはだかる
+//--------------------------------------------------------------------
+supportm1_01_field_t101_anime04:	
+	.byte	AC_SITE_R	//
+	.byte	AC_WAIT_8	//ウエイト
+	.byte	AC_UNDER_EFFECT_OFF
+	.byte	AC_STAY_JUMP_R
+	.byte	AC_WAIT_8	//ウエイト
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_SITE_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	元の位置に戻る
+//--------------------------------------------------------------------
+supportm1_01_field_t101_anime05:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//下に１歩
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+	
+
+/********************************************************************/
+/*								ポス								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_t101_pos03		
+	_TALK_START					//自機の動作終了を待つ
+	
+	//向かい合う
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_supportm1_01_p03_field_t101
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	SUPPORTM1_01_FIELD_T101,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_LDVAL			WK_SCENE_FIELD_T101,2
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							町の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_t101
+	_EASY_MSG       msg_kanban_01_p01_field_t101
+	_END
+
+
+/********************************************************************/
+/*				オダマキ博士研究所にある看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_t101
+	_EASY_MSG       msg_kanban_02_p01_field_t101
+	_END
+
+
+/********************************************************************/
+/*						主人公の家の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_t101
+	_TALK_START
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_kanban_03_field_t101	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_kanban_03_field_t101	//女の子
+	_TALK_END
+    _END
+
+//男の子
+boy_kanban_03_field_t101:
+	_TALK_KEYWAIT   msg_kanban_03_p01_field_t101
+    _RET
+
+//女の子
+girl_kanban_03_field_t101:
+	_TALK_KEYWAIT   msg_kanban_04_p01_field_t101
+    _RET
+
+
+/********************************************************************/
+/*						オダマキの家の看板(0201)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_t101
+	_TALK_START
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_kanban_04_field_t101	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_kanban_04_field_t101	//女の子
+	_TALK_END
+    _END
+
+//男の子
+boy_kanban_04_field_t101:
+	_TALK_KEYWAIT   msg_kanban_04_p01_field_t101
+    _RET
+
+//女の子
+girl_kanban_04_field_t101:
+	_TALK_KEYWAIT   msg_kanban_03_p01_field_t101
+    _RET
+
+
+/********************************************************************/
+/*			ポス(図鑑手に入れた後、母がフィールドにいる)			*/
+/********************************************************************/
+//X10,Y2のPOS
+SCRIPT_LABEL	ev_field_t101_pos04
+	_TALK_START					//自機の動作終了を待つ
+	_LDVAL			TMPWK0,0
+	_OBJ_POS_CHANGE	MAMA_01_FIELD_T101,10,9
+	_JUMP			ev_common_mama_dash
+	_END
+	
+//X11,Y2のPOS
+SCRIPT_LABEL	ev_field_t101_pos05
+	_TALK_START					//自機の動作終了を待つ
+	_LDVAL			TMPWK0,1
+	_OBJ_POS_CHANGE	MAMA_01_FIELD_T101,11,9
+	_JUMP			ev_common_mama_dash
+	_END
+
+//X10,Y9のPOS
+SCRIPT_LABEL	ev_field_t101_pos06
+	_TALK_START					//自機の動作終了を待つ
+	_LDVAL			TMPWK0,2
+	_JUMP			ev_common_mama_dash
+	_END
+
+//X11,Y9のPOS
+SCRIPT_LABEL	ev_field_t101_pos07
+	_TALK_START					//自機の動作終了を待つ
+	_LDVAL			TMPWK0,3
+	_JUMP			ev_common_mama_dash
+	_END
+
+//X8,Y9のPOS
+SCRIPT_LABEL	ev_field_t101_pos08
+	_TALK_START					//自機の動作終了を待つ
+	_LDVAL			TMPWK0,4
+	_JUMP			ev_common_mama_dash
+	_END
+
+//X9,Y9のPOS
+SCRIPT_LABEL	ev_field_t101_pos09
+	_TALK_START					//自機の動作終了を待つ
+	_LDVAL			TMPWK0,5
+	_JUMP			ev_common_mama_dash
+	_END
+
+//共通処理
+ev_common_mama_dash:
+	//振り向く
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_dash_04_field_t101		//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_dash_04_field_t101	//女の子
+
+	//ドアの位置を取得しておく
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_dash_01_field_t101		//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_dash_01_field_t101	//女の子
+
+	_TALK_KEYWAIT	msg_mama_01_p02_field_t101
+	_TALK_CLOSE
+
+	//近づいてくる
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_dash_02_field_t101		//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_dash_02_field_t101	//女の子
+
+	_CALL			ev_mama_dash_common01
+
+	//帰っていく
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_dash_03_field_t101		//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_dash_03_field_t101	//女の子
+
+	_JUMP			ev_mama_dash_end
+	_END
+
+//男の子の家のドアの位置
+boy_dash_01_field_t101:
+	_LDVAL			TMPWK1,5
+	_LDVAL			TMPWK2,8
+    _RET
+
+//女の子の家のドアの位置
+girl_dash_01_field_t101:
+	_LDVAL			TMPWK1,14
+	_LDVAL			TMPWK2,8
+    _RET
+
+//--------------------------------------------------------------------
+//ママ	主人公の方を向く
+//--------------------------------------------------------------------
+//男の子
+boy_dash_04_field_t101:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//女の子
+girl_dash_04_field_t101:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//ママ	近づいてくる
+//--------------------------------------------------------------------
+//男の子
+boy_dash_02_field_t101:
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,4,case4_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,5,case5_01_mama_b_dash
+	_RET
+
+//女の子
+girl_dash_02_field_t101:
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,2,case6_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,3,case7_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,4,case8_01_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,5,case9_01_mama_b_dash
+	_RET
+
+//男の子
+case0_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime20
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case1_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime21
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case2_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime22
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case3_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime23
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case4_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime30
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case5_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime31
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//女の子
+case6_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime40
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case7_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime41
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case8_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime42
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case9_01_mama_b_dash:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime43
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//ママ	帰っていく
+//--------------------------------------------------------------------
+//男の子
+boy_dash_03_field_t101:
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,4,case4_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,5,case5_02_mama_b_dash
+	_RET
+
+//女の子
+girl_dash_03_field_t101:
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,2,case6_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,3,case7_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,4,case8_02_mama_b_dash
+	_IFVAL_CALL		TMPWK0,EQ,5,case9_02_mama_b_dash
+	_RET
+
+//帰っていく
+case0_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime24
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case1_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime25
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+case2_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime26
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+case3_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime27
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+case4_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime32
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+case5_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime33
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+//女の子
+case6_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime44
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+case7_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime45
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+case8_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime46
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+case9_02_mama_b_dash:
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime47
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//ママ	近づいてくる
+//--------------------------------------------------------------------
+//男の子
+mama_01_field_t101_anime20:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime21:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime22:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime23:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime30:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+mama_01_field_t101_anime31:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//女の子
+mama_01_field_t101_anime40:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime41:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime42:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+mama_01_field_t101_anime43:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ママ	帰っていく
+//--------------------------------------------------------------------
+//男の子
+mama_01_field_t101_anime24:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime25:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime26:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime27:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime32:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+mama_01_field_t101_anime33:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//女の子
+mama_01_field_t101_anime44:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime45:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+	
+mama_01_field_t101_anime46:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+mama_01_field_t101_anime47:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ママ	家に入る
+//--------------------------------------------------------------------
+mama_01_field_t101_anime28:
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+
+/********************************************************************/
+//							ママ(話し掛け)
+/********************************************************************/
+SCRIPT_LABEL	ev_mama_01_p01_field_t101
+	_TALK_OBJ_START
+
+	//ドアの位置を取得しておく
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,boy_dash_01_field_t101		//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,girl_dash_01_field_t101	//女の子
+
+	_CALL			ev_mama_dash_common01
+
+	//帰っていく
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OPEN_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MAMA_01_FIELD_T101,mama_01_field_t101_anime28
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_INVISIBLE	MAMA_01_FIELD_T101,FIELD,FIELD_T101
+
+	_CLOSE_DOOR_ANIME	TMPWK1,TMPWK2
+	_DOOR_ANIME_WAIT
+
+	_JUMP			ev_mama_dash_end
+	_END
+
+//共通終了処理
+ev_mama_dash_end:
+	_OBJ_DELETE		MAMA_01_FIELD_T101
+
+	//Bダッシュ許可
+	_FLAG_SET		SYS_B_DASH
+
+	_LDVAL			WK_SCENE_FIELD_T101,4
+	_TALK_OBJ_END
+	_END
+
+//共通処理
+ev_mama_dash_common01:
+	_TALK_KEYWAIT	msg_mama_01_p03_field_t101
+
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_mama_01_p04_field_t101
+	_JINGLE_WAIT
+	_FLAG_SET		FE_DASH_SHOES_GET
+
+	_TALK_KEYWAIT	msg_mama_01_p05_field_t101
+
+	_TALK_KEYWAIT	msg_mama_01_p06_field_t101
+	_TALK_CLOSE
+
+	_TIME_WAIT		30
+	_RET
+
+

@@ -1,0 +1,199 @@
+//====================================================================
+//							field_r123
+//						フィールド・ロード123
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r123_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r123
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//					      FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r123:
+	_PROGRAM		SET_WEATHER_R123
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								少年								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl3_01_p01_field_r123
+	_TALK_OBJ_START
+
+	//すでにアイテム入手しているか
+	_IF_FLAGON_JUMP	FE_WAZAM19_GET,ev_girl3_01_p03_field_r123
+
+	//"あたし　くさタイプ”
+	_TALK_KEYWAIT	msg_girl3_01_p01_field_r123
+
+	//くさポケモンがいるかチェック
+	_PROGRAM	TYPE_KUSA_ALL_CHECK
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,no_stock_kusa_poke_field_r123
+
+	_TALK_KEYWAIT	msg_girl3_01_p02_field_r123
+	_ITEM_EVENT		ITEM_WAZAMASIN19,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM19_GET
+	_TALK_KEYWAIT	msg_girl3_01_p03_field_r123
+	_TALK_OBJ_END
+	_END
+
+//くさポケモンを連れていないとき
+no_stock_kusa_poke_field_r123:
+	_TALK_OBJ_END
+	_END
+
+
+//すでにアイテム入手している
+ev_girl3_01_p03_field_r123:
+	_TALK_KEYWAIT	msg_girl3_01_p03_field_r123
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r123
+	_EASY_MSG       msg_kanban_01_p01_field_r123
+	_END
+
+
+/********************************************************************/
+/*								看板2								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r123
+	_EASY_MSG       msg_kanban_02_p01_field_r123
+	_END
+
+
+/********************************************************************/
+/*					看板3(きのみじいさん）							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r123
+	_EASY_MSG       msg_kanban_03_p01_field_r123
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_elitew_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_04
+	_TRAINER_DATA2	msg_elitew_04_01
+	_TRAINER_DATA3	msg_elitew_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_04_03
+	_END
+
+SCRIPT_LABEL	ev_elitem_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_05
+	_TRAINER_DATA2	msg_elitem_05_01
+	_TRAINER_DATA3	msg_elitem_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_05_03
+	_END
+
+SCRIPT_LABEL	ev_aroma_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AROMA_04
+	_TRAINER_DATA2	msg_aroma_04_01
+	_TRAINER_DATA3	msg_aroma_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aroma_04_03
+	_END
+
+SCRIPT_LABEL	ev_espm_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_07
+	_TRAINER_DATA2	msg_espm_07_01
+	_TRAINER_DATA3	msg_espm_07_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_espm_07
+	_TRAINER_EASY_MSG	msg_espm_07_03
+	_END
+
+_revenge_espm_07:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_07
+	_TRAINER_DATA2	msg_espm_07_04
+	_TRAINER_DATA3	msg_espm_07_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_07_06
+	_END
+
+SCRIPT_LABEL	ev_espw_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_07
+	_TRAINER_DATA2	msg_espw_07_01
+	_TRAINER_DATA3	msg_espw_07_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_espw_07
+	_TRAINER_EASY_MSG	msg_espw_07_03
+	_END
+
+_revenge_espw_07:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_07
+	_TRAINER_DATA2	msg_espw_07_04
+	_TRAINER_DATA3	msg_espw_07_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_07_06
+	_END
+
+SCRIPT_LABEL	ev_futago_04_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_04
+	_TRAINER_DATA2	msg_futago_04_01
+	_TRAINER_DATA3	msg_futago_04_02
+	_TRAINER_DATA4	msg_futago_04_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_04_03
+	_END
+
+SCRIPT_LABEL	ev_futago_04_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_04
+	_TRAINER_DATA2	msg_futago_04_05
+	_TRAINER_DATA3	msg_futago_04_06
+	_TRAINER_DATA4	msg_futago_04_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_futago_04_07
+	_END
+
+SCRIPT_LABEL	ev_okaruto_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	OKARUTO_02
+	_TRAINER_DATA2	msg_okaruto_02_01
+	_TRAINER_DATA3	msg_okaruto_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_okaruto_02_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

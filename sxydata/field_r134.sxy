@@ -1,0 +1,108 @@
+//MapEditNH Ver.3.53 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R134	5
+#define EXITNUM_FIELD_R134	0
+#define POSNUM_FIELD_R134	0
+#define BGNUM_FIELD_R134	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_swimmerm_22[];
+extern const u8	ev_swimmerw_23[];
+extern const u8	ev_dragon_06[];
+extern const u8	ev_bird_16[];
+extern const u8	ev_karate_02[];
+
+const evObjData	OBJ_field_r134[] =
+{
+	{
+		TR_SWIMMERM_22,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0034,		//Xpos
+		0x0009,		//Ypos
+		0x01,		//Height
+		MV_RTUR,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x5,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_swimmerm_22,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SWIMMERW_23,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x002d,		//Xpos
+		0x0005,		//Ypos
+		0x01,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_swimmerw_23,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_DRAGON_06,		//OBJ ID
+		TRAINERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0029,		//Xpos
+		0x0017,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_dragon_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_BIRD_16,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0041,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_DR,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_bird_16,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_KARATE_02,		//OBJ ID
+		FIGHTER1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0038,		//Xpos
+		0x0010,		//Ypos
+		0x03,		//Height
+		MV_RTL,		//Obj Mode Type
+		0xa,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_karate_02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_DATA	field_r134_sxy_data =
+{
+OBJNUM_FIELD_R134,			// field obj max
+EXITNUM_FIELD_R134,		// exit max
+POSNUM_FIELD_R134,			// pos event max
+BGNUM_FIELD_R134,			// bg event max
+OBJ_field_r134,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

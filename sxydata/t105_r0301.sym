@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define BIGMAN1_01_T105_R0301	1
+
+//Exit ID = 2
+#define T105_R0301_MAT01	0
+#define T105_R0301_MAT02	1

@@ -1,0 +1,487 @@
+//====================================================================
+//								sp_contest
+//								コンテスト会場共通
+//====================================================================
+
+//--------------------------------------------------------------------
+/*				マップでの特殊イベント指定							*/
+//--------------------------------------------------------------------
+EVENT_DATA_START	sp_contest_event_data
+//EVENT_DATA_END /* 特別なスクリプトなし */
+
+OBJ_CTRL_LABEL	obj_sp_contest
+SP_SCRIPT_LABEL	scene_contest_check_sp_contest
+FLAG_CHANGE_LABEL	flag_change_sp_contest
+INIT_CTRL_LABEL		ev_dmyhaiti_sp_contest
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+/*							強制イベント							*/
+//--------------------------------------------------------------------
+/********************************************************************/
+/*							一次審査の曲を鳴らす					*/
+/********************************************************************/
+flag_change_sp_contest:
+	_CALL	ev_musicset_sp_contest
+	_LDVAL	LOCALWORK0,1//オブジェキャラコードを配置するときに使用
+	_CALL	ev_kankyaku_01_put_sp_contest
+	_END
+
+ev_musicset_sp_contest://一次審査の曲鳴らす
+	_PROGRAM			SET_CON_MUS
+	_IFVAL_CALL	ANSWORK,EQ,0,ev_musicset_00_sp_contest	//通信親機１
+	_IFVAL_CALL	ANSWORK,EQ,1,ev_musicset_01_sp_contest	//通信子機１
+	_IFVAL_CALL	ANSWORK,EQ,2,ev_musicset_02_sp_contest	//通信子機２
+	_IFVAL_CALL	ANSWORK,EQ,3,ev_musicset_03_sp_contest	//通信子機３
+	_IFVAL_CALL	ANSWORK,EQ,4,ev_musicset_04_sp_contest	//一人プレイ
+	_RET
+
+ev_musicset_00_sp_contest:
+	_BGM_SPECIAL_SET	MUS_TEST1
+	_RET
+
+ev_musicset_01_sp_contest:
+	_BGM_SPECIAL_SET	MUS_TEST2
+	_RET
+
+ev_musicset_02_sp_contest:
+	_BGM_SPECIAL_SET	MUS_TEST3
+	_RET
+
+ev_musicset_03_sp_contest:
+	_BGM_SPECIAL_SET	MUS_TEST4
+	_RET
+
+ev_musicset_04_sp_contest:
+	_BGM_SPECIAL_SET	MUS_CONTEST0
+	_RET
+
+
+ev_dmyhaiti_sp_contest:
+	_IFVAL_CALL		LOCALWORK9,EQ,1,chg_contest
+	_END
+
+chg_contest:
+	_CALL	ev_kankyaku_dmy_sp_contest	//ダミーＯＢＪを配置呼び出し
+	_RET
+
+/********************************************************************/
+/*		WK_SCENE_SP_CONTESTに1が入るとコンテストが開始される。		*/
+/*		WK_SCENE_SP_CONTESTに0が入るとコンテストが終了される。		*/
+/********************************************************************/
+scene_contest_check_sp_contest:
+	SP_SCRIPT_DATA	WK_SCENE_SP_CONTEST,1,scene_contest_02_sp_contest
+	SP_SCRIPT_END
+
+/********************************************************************/
+/*			主人公のＯＢＪの表示を消す処理の呼び出し				*/
+/********************************************************************/
+obj_sp_contest:
+	OBJ_CTRL_DATA	WK_SCENE_SP_CONTEST,1,ev_sp_contest_init
+	OBJ_CTRL_END
+
+/********************************************************************/
+/*						ポケモンコンテスト							*/
+/*							■シーン１■							*/
+/********************************************************************/
+SCRIPT_LABEL	scene_contest_02_sp_contest
+	_CALL		contest_script_after	//コンテスト呼び出し
+	_CALL		ev_hero_01_gohome_sp_contest	//コンテストから帰る
+	_END
+
+
+ev_sp_contest_init:
+	_OBJ_INVISIBLE	EV_OBJ_SPID,FIELD,FIELD_T101	//主人公を消す map,div適当
+	_CALL	ev_kankyaku_dmy_sp_contest
+	_END	
+
+/********************************************************************/
+/*					観客のランダム配置(グループ化するかも)			*/
+/********************************************************************/
+ev_kankyaku_01_put_sp_contest:
+	_CALL	ev_kankyaku_01_rndset_sp_contest
+	_CALL	ev_kankyaku_01_chrset_sp_contest
+	_IFVAL_JUMP	LOCALWORK0,LT,8,ev_kankyaku_01_put_sp_contest
+	_RET
+
+ev_kankyaku_01_chrset_sp_contest:
+	_SWITCH	LOCALWORK0
+	_CASEJUMP	1,ev_kankyaku_01_n5_sp_contest
+	_CASEJUMP	2,ev_kankyaku_01_n6_sp_contest
+	_CASEJUMP	3,ev_kankyaku_01_n7_sp_contest
+	_CASEJUMP	4,ev_kankyaku_01_n8_sp_contest
+	_CASEJUMP	5,ev_kankyaku_01_n9_sp_contest
+	_CASEJUMP	6,ev_kankyaku_01_n10_sp_contest
+	_CASEJUMP	7,ev_kankyaku_01_n11_sp_contest
+	_END
+
+ev_kankyaku_01_n5_sp_contest:
+	_LDWK	OBJCHRWORK5,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+
+ev_kankyaku_01_n6_sp_contest:
+	_LDWK	OBJCHRWORK6,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+
+ev_kankyaku_01_n7_sp_contest:
+	_LDWK	OBJCHRWORK7,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+
+ev_kankyaku_01_n8_sp_contest:
+	_LDWK	OBJCHRWORK8,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+
+ev_kankyaku_01_n9_sp_contest:
+	_LDWK	OBJCHRWORK9,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+ev_kankyaku_01_n10_sp_contest:
+	_LDWK	OBJCHRWORK10,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+
+ev_kankyaku_01_n11_sp_contest:
+	_LDWK	OBJCHRWORK11,LOCALWORK1
+	_ADDWK	LOCALWORK0,1
+	_RET
+
+ev_kankyaku_01_rndset_sp_contest:	
+//	_GET_RND	32
+	_LDVAL	ANSWORK,32
+	_PROGRAM	GET_CONT_RND
+	_ADDWK	ANSWORK,1
+	_SWITCH	ANSWORK
+	_CASEJUMP	1,ev_kankyaku_01_p01_sp_contest
+	_CASEJUMP	2,ev_kankyaku_01_p02_sp_contest
+	_CASEJUMP	3,ev_kankyaku_01_p03_sp_contest
+	_CASEJUMP	4,ev_kankyaku_01_p04_sp_contest
+	_CASEJUMP	5,ev_kankyaku_01_p05_sp_contest
+	_CASEJUMP	6,ev_kankyaku_01_p06_sp_contest
+	_CASEJUMP	7,ev_kankyaku_01_p07_sp_contest
+	_CASEJUMP	8,ev_kankyaku_01_p08_sp_contest
+	_CASEJUMP	9,ev_kankyaku_01_p09_sp_contest
+	_CASEJUMP	10,ev_kankyaku_01_p10_sp_contest
+	_CASEJUMP	11,ev_kankyaku_01_p11_sp_contest
+	_CASEJUMP	12,ev_kankyaku_01_p12_sp_contest
+	_CASEJUMP	13,ev_kankyaku_01_p13_sp_contest
+	_CASEJUMP	14,ev_kankyaku_01_p14_sp_contest
+	_CASEJUMP	15,ev_kankyaku_01_p15_sp_contest
+	_CASEJUMP	16,ev_kankyaku_01_p16_sp_contest
+	_CASEJUMP	17,ev_kankyaku_01_p17_sp_contest
+	_CASEJUMP	18,ev_kankyaku_01_p18_sp_contest
+	_CASEJUMP	19,ev_kankyaku_01_p19_sp_contest
+	_CASEJUMP	20,ev_kankyaku_01_p20_sp_contest
+	_CASEJUMP	21,ev_kankyaku_01_p21_sp_contest
+	_CASEJUMP	22,ev_kankyaku_01_p22_sp_contest
+	_CASEJUMP	23,ev_kankyaku_01_p23_sp_contest
+	_CASEJUMP	24,ev_kankyaku_01_p24_sp_contest
+	_CASEJUMP	25,ev_kankyaku_01_p25_sp_contest
+	_CASEJUMP	26,ev_kankyaku_01_p26_sp_contest
+	_CASEJUMP	27,ev_kankyaku_01_p27_sp_contest
+	_CASEJUMP	28,ev_kankyaku_01_p28_sp_contest
+	_CASEJUMP	29,ev_kankyaku_01_p29_sp_contest
+	_CASEJUMP	30,ev_kankyaku_01_p30_sp_contest
+	_CASEJUMP	31,ev_kankyaku_01_p31_sp_contest
+	_CASEJUMP	32,ev_kankyaku_01_p32_sp_contest
+	_END
+	
+
+ev_kankyaku_01_p01_sp_contest:
+	_LDVAL	LOCALWORK1,BOYA1
+	_RET
+
+ev_kankyaku_01_p02_sp_contest:
+	_LDVAL	LOCALWORK1,OJYOU1
+	_RET
+
+ev_kankyaku_01_p03_sp_contest:
+	_LDVAL	LOCALWORK1,BOY1
+	_RET
+
+ev_kankyaku_01_p04_sp_contest:
+	_LDVAL	LOCALWORK1,GIRL1
+	_RET
+
+ev_kankyaku_01_p05_sp_contest:
+	_LDVAL	LOCALWORK1,GIRL2
+	_RET
+
+ev_kankyaku_01_p06_sp_contest:
+	_LDVAL	LOCALWORK1,BOYA2
+	_RET
+
+ev_kankyaku_01_p07_sp_contest:
+	_LDVAL	LOCALWORK1,OJYOU2
+	_RET
+
+ev_kankyaku_01_p08_sp_contest:
+	_LDVAL	LOCALWORK1,BOY3
+	_RET
+
+ev_kankyaku_01_p09_sp_contest:
+	_LDVAL	LOCALWORK1,GIRL3
+	_RET
+
+ev_kankyaku_01_p10_sp_contest:
+	_LDVAL	LOCALWORK1,BOY4
+	_RET
+
+ev_kankyaku_01_p11_sp_contest:
+	_LDVAL	LOCALWORK1,BIGMAN1
+	_RET
+
+ev_kankyaku_01_p12_sp_contest:
+	_LDVAL	LOCALWORK1,MIDDLEW1
+	_RET
+
+ev_kankyaku_01_p13_sp_contest:
+	_LDVAL	LOCALWORK1,MIDDLEM1
+	_RET
+
+ev_kankyaku_01_p14_sp_contest:
+	_LDVAL	LOCALWORK1,WOMAN1
+	_RET
+
+ev_kankyaku_01_p15_sp_contest:
+	_LDVAL	LOCALWORK1,OLDMAN1
+	_RET
+
+ev_kankyaku_01_p16_sp_contest:
+	_LDVAL	LOCALWORK1,OLDWOMAN1
+	_RET
+
+ev_kankyaku_01_p17_sp_contest:
+	_LDVAL	LOCALWORK1,MIDDLEM2
+	_RET
+
+ev_kankyaku_01_p18_sp_contest:
+	_LDVAL	LOCALWORK1,WOMAN2
+	_RET
+
+ev_kankyaku_01_p19_sp_contest:
+	_LDVAL	LOCALWORK1,COOK1
+	_RET
+
+ev_kankyaku_01_p20_sp_contest:
+	_LDVAL	LOCALWORK1,SCHOOLW1
+	_RET
+
+ev_kankyaku_01_p21_sp_contest:
+	_LDVAL	LOCALWORK1,OLDWOMAN2
+	_RET
+
+ev_kankyaku_01_p22_sp_contest:
+	_LDVAL	LOCALWORK1,BOYSCOUT1
+	_RET
+
+ev_kankyaku_01_p23_sp_contest:
+	_LDVAL	LOCALWORK1,GIRLSCOUT1
+	_RET
+
+ev_kankyaku_01_p24_sp_contest:
+	_LDVAL	LOCALWORK1,TRAINERM1
+	_RET
+
+ev_kankyaku_01_p25_sp_contest:
+	_LDVAL	LOCALWORK1,TRAINERW1
+	_RET
+
+ev_kankyaku_01_p26_sp_contest:
+	_LDVAL	LOCALWORK1,CAPBOY1
+	_RET
+
+ev_kankyaku_01_p27_sp_contest:
+	_LDVAL	LOCALWORK1,CAPBOY2
+	_RET
+
+ev_kankyaku_01_p28_sp_contest:
+	_LDVAL	LOCALWORK1,BOY5
+	_RET
+
+ev_kankyaku_01_p29_sp_contest:
+	_LDVAL	LOCALWORK1,SCHOOLM1
+	_RET
+
+
+ev_kankyaku_01_p30_sp_contest:
+	_LDVAL	LOCALWORK1,FIGHTER1
+	_RET
+
+
+ev_kankyaku_01_p31_sp_contest:
+	_LDVAL	LOCALWORK1,WORKERW2
+	_RET
+
+
+ev_kankyaku_01_p32_sp_contest:
+	_LDVAL	LOCALWORK1,STUDYM1
+	_RET
+
+
+/********************************************************************/
+/*							ダミーＯＢＪの追加						*/
+/********************************************************************/
+ev_kankyaku_dmy_sp_contest:
+	_SWITCH	WK_SCENE_SP_CONTEST03
+	_CASEJUMP	1,ev_kankyaku_dmy1_sp_contest//nomal
+	_CASEJUMP	2,ev_kankyaku_dmy2_sp_contest//super
+	_CASEJUMP	3,ev_kankyaku_dmy3_sp_contest//hyper
+	_CASEJUMP	4,ev_kankyaku_dmy4_sp_contest//master
+	_CASEJUMP	5,ev_kankyaku_dmy4_sp_contest//tusin
+	_RET
+	
+ev_kankyaku_dmy1_sp_contest://nomal
+	_DMY_OBJ_ADD	BOYA1,20,3,2,3,SITE_D//正面
+	_DMY_OBJ_ADD	STUDYM1,24,11,2,3,SITE_D
+	_RET
+
+ev_kankyaku_dmy2_sp_contest://super	
+	_DMY_OBJ_ADD	WORKERW2,0,2,3,3,SITE_R
+	_DMY_OBJ_ADD	YOUNGM2,1,2,4,3,SITE_R
+	_DMY_OBJ_ADD	HILL1,2,2,7,3,SITE_R
+	_DMY_OBJ_ADD	STUDYM1,3,2,8,3,SITE_R
+	
+	_DMY_OBJ_ADD	BOYA1,10,12,3,3,SITE_L
+	_DMY_OBJ_ADD	WOMAN1,11,12,4,3,SITE_L
+	_DMY_OBJ_ADD	WORKERW1,12,12,7,3,SITE_L
+	_DMY_OBJ_ADD	OJYOU2,13,12,8,3,SITE_L
+	
+	_DMY_OBJ_ADD	SCHOOLW1,20,3,2,3,SITE_D
+	_DMY_OBJ_ADD	STUDYM1,24,11,2,3,SITE_D
+	_RET
+
+ev_kankyaku_dmy3_sp_contest://hyper	
+	
+	_DMY_OBJ_ADD	WORKERW2,0,2,3,3,SITE_R//左サイド一列目
+	_DMY_OBJ_ADD	YOUNGM2,1,2,4,3,SITE_R
+	_DMY_OBJ_ADD	HILL1,2,2,7,3,SITE_R
+	_DMY_OBJ_ADD	GENTLEM1,3,2,8,3,SITE_R
+
+	_DMY_OBJ_ADD	BOYA1,10,12,3,3,SITE_L//右サイド一列目
+	_DMY_OBJ_ADD	WOMAN1,11,12,4,3,SITE_L
+	_DMY_OBJ_ADD	WORKERW1,12,12,7,3,SITE_L
+	_DMY_OBJ_ADD	WORKERW2,13,12,8,3,SITE_L
+
+	_DMY_OBJ_ADD	OLDWOMAN1,20,3,2,3,SITE_D//正面
+	_DMY_OBJ_ADD	WORKERM1,20,6,2,3,SITE_D
+	_DMY_OBJ_ADD	TRAINERW1,20,7,2,3,SITE_D
+	_DMY_OBJ_ADD	STUDYM1,24,8,2,3,SITE_D
+	_DMY_OBJ_ADD	GENTLEM1,24,11,2,3,SITE_D
+	
+	_DMY_OBJ_ADD	BOYA2,25,3,9,3,SITE_U//背面
+	_DMY_OBJ_ADD	CAPBOY1,26,4,9,3,SITE_U
+	_DMY_OBJ_ADD	BIGMAN1,27,5,9,3,SITE_U
+	_DMY_OBJ_ADD	EVILW1,28,9,9,3,SITE_U
+	_DMY_OBJ_ADD	SCHOOLM1,29,10,9,3,SITE_U
+	_DMY_OBJ_ADD	SHOPM1,30,11,9,3,SITE_U
+	_RET
+	
+ev_kankyaku_dmy4_sp_contest://master&tusin
+	
+	_DMY_OBJ_ADD	WORKERW2,0,2,3,3,SITE_R//左サイド一列目
+	_DMY_OBJ_ADD	YOUNGM2,1,2,4,3,SITE_R
+	_DMY_OBJ_ADD	HILL1,2,2,7,3,SITE_R
+	_DMY_OBJ_ADD	OJYOU2,3,2,8,3,SITE_R
+
+	_DMY_OBJ_ADD	FREAK1,4,1,3,3,SITE_R//左サイド二列目
+	//_DMY_OBJ_ADD	BOY5,5,1,4,3,SITE_R//*
+	_DMY_OBJ_ADD	TRAINERW1,6,1,5,3,SITE_R
+	_DMY_OBJ_ADD	WOMAN2,7,1,6,3,SITE_R
+	//_DMY_OBJ_ADD	GIRL3,8,1,7,3,SITE_R//*
+	_DMY_OBJ_ADD	GENTLEM1,9,1,8,3,SITE_R
+
+	_DMY_OBJ_ADD	BOYA1,10,12,3,3,SITE_L//右サイド一列目
+	_DMY_OBJ_ADD	WOMAN1,11,12,4,3,SITE_L
+	_DMY_OBJ_ADD	WORKERW1,12,12,7,3,SITE_L
+	_DMY_OBJ_ADD	WORKERW2,13,12,8,3,SITE_L
+
+	_DMY_OBJ_ADD	FISHING1,14,13,3,3,SITE_L//右サイド二列目
+	_DMY_OBJ_ADD	SPORTSW1,15,13,4,3,SITE_L
+	//_DMY_OBJ_ADD	EVILM1,16,13,5,3,SITE_L//*
+	_DMY_OBJ_ADD	YOUNGM1,17,13,6,3,SITE_L
+	_DMY_OBJ_ADD	SHOPM1,18,13,7,3,SITE_L
+	_DMY_OBJ_ADD	DEVON1,19,13,8,3,SITE_L
+
+	_DMY_OBJ_ADD	MIDDLEM2,20,3,2,3,SITE_D//正面
+	_DMY_OBJ_ADD	BOYSCOUT1,21,6,2,3,SITE_D
+	_DMY_OBJ_ADD	TRAINERM1,22,7,2,3,SITE_D
+	//_DMY_OBJ_ADD	GIRL4,23,8,2,3,SITE_D//*
+	_DMY_OBJ_ADD	STUDYM1,24,11,2,3,SITE_D
+
+	_DMY_OBJ_ADD	SEAMAN1,25,3,9,3,SITE_U//背面
+	_DMY_OBJ_ADD	CAPBOY1,26,4,9,3,SITE_U
+	_DMY_OBJ_ADD	GENTLEM1,27,5,9,3,SITE_U
+	_DMY_OBJ_ADD	EVILW1,28,9,9,3,SITE_U
+	_DMY_OBJ_ADD	SCHOOLM1,29,10,9,3,SITE_U
+	_DMY_OBJ_ADD	SHOPM1,30,11,9,3,SITE_U
+	_RET
+
+
+/********************************************************************/
+/*							★元の場所に帰る						*/
+/********************************************************************/
+ev_hero_01_gohome_sp_contest:
+	_SWITCH	WK_SCENE_SP_CONTEST03
+	_CASEJUMP	1,ev_hero_01_t106_sp_contest//シダケに帰る
+	_CASEJUMP	2,ev_hero_01_t105_sp_contest//ハジツゲに帰る
+	_CASEJUMP	3,ev_hero_01_c102_sp_contest//カイナに帰る
+	_CASEJUMP	4,ev_hero_01_c106_sp_contest//ミナモに帰る
+	_CASEJUMP	5,ev_hero_01_tusin_sp_contest//ミナモ(通信)に帰る
+	_RET
+
+
+ev_hero_01_t106_sp_contest:
+	_INC_RECORD	CNT_CONTEST	//伝説に出場回数プラス
+	_MAP_CHANGE	T106,T106_R0101,5,4/*ワープ*/
+	_STOP_SCRIPT
+	_END
+
+ev_hero_01_t105_sp_contest:
+	_INC_RECORD	CNT_CONTEST	//伝説に出場回数プラス
+	_MAP_CHANGE	T105,T105_R0101,5,4/*ワープ*/
+	_STOP_SCRIPT
+	_END
+
+ev_hero_01_c102_sp_contest:
+	_INC_RECORD	CNT_CONTEST	//伝説に出場回数プラス
+	_MAP_CHANGE	C102,C102_R0201,5,4/*ワープ*/
+	_STOP_SCRIPT
+	_END
+
+ev_hero_01_c106_sp_contest:
+	_INC_RECORD	CNT_CONTEST	//伝説に出場回数プラス
+	_MAP_CHANGE	C106,C106_R0301,6,4/*ワープ*/
+	_STOP_SCRIPT
+	_END
+
+ev_hero_01_tusin_sp_contest:
+	_MAP_CHANGE	C106,C106_R0301,7,4/*ワープ*/
+	_STOP_SCRIPT
+	_END
+
+
+/********************************************************************/
+/*						性別チェック								*/
+/********************************************************************/
+hero_sexcheck_sp_contest:
+	_GET_MY_SEX
+	_IFVAL_JUMP	ANSWORK,EQ,0,hero_boy_sp_contest	//男の子
+	_IFVAL_JUMP	ANSWORK,EQ,1,hero_girl_sp_contest	//女の子
+    _RET
+
+//男の子
+hero_boy_sp_contest:
+	_LDVAL		OBJCHRWORK4,HERO	//主人公の男キャラを登録
+    _RET
+
+//女の子
+hero_girl_sp_contest:
+	_LDVAL		OBJCHRWORK4,HEROINE	//主人公の女キャラを登録
+    _RET
+
+

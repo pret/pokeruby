@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 2
+#define TR_SAILOR_05	1
+#define TR_SAILOR_06	2
+
+//Exit ID = 1
+#define SP_SHIP02_STAIR01	0

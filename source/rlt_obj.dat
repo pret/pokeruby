@@ -1,0 +1,1081 @@
+//========================================================================================
+//								ミニゲーム・ルーレットのOBJ
+//									2002/03/28 by nakahiro
+//========================================================================================
+//========================================================================================
+//									シンボル定義
+//=======================================================================================
+#define CENTER_X_OBJ	(CENTER_X)
+#define CENTER_Y_OBJ	(CENTER_Y+BG2_DISP_OFSY)
+
+#define	ANGLE_SPACE		(30)		// 隣のOBJとの角度差(RPokeObj)
+#define	INIT_ANGLE		(15)		// RotatePokeObjの初期角度
+
+#define	POKE_WIDTH		(40)		// ルーレット盤のポケモンの中心からの距離
+#define	HOLE_WIDTH		(36)		// 玉が落ちる穴の中心からの距離
+
+// Rotate OBJ ActWork
+#define	ACT_ANGLE		0		// 角度
+#define	ACT_WIDTH		1		// 中心からの距離
+
+/////////////////////////////////////////
+//	オブジェクト数
+/////////////////////////////////////////
+#define WPOKE_OBJ_NUM		(12)	//ポケモン
+#define WIN_OBJ_NUM			(19)	//全部で19
+#define WAKU_OBJ_NUM		(5)
+
+////////////////////////////////////////////
+//	オブジェクトグラフィックデータの参照位置
+////////////////////////////////////////////
+#define OBJ_EVPOKE_SIZ		(0xE00)
+#define OBJ_BALL_SIZ		(0x200)
+#define OBJ_SHADOW_SIZ		(0x180)
+#define OBJ_EVPOKE_AREA		(RLT_UWORK_GROBJ)
+#define OBJ_BALL_AREA		(OBJ_EVPOKE_AREA+OBJ_EVPOKE_SIZ)
+#define OBJ_SHADOW_AREA		(OBJ_BALL_AREA+OBJ_BALL_SIZ)
+#define OBJ_EVPOKE_ADRS		((const u8 *)&(UserWork[OBJ_EVPOKE_AREA]))
+#define OBJ_BALL_ADRS		((const u8 *)&(UserWork[OBJ_BALL_AREA]))
+#define OBJ_SHADOW_ADRS		((const u8 *)&(UserWork[OBJ_SHADOW_AREA]))
+
+/////////////////////////////////////////
+//ルーレット盤関係
+/////////////////////////////////////////
+//ボール関係
+#define	RLT_BALL_X	(CENTER_X_OBJ)			//ボールの待機位置
+#define RLT_BALL_Y	(CENTER_Y_OBJ)
+
+#define BALL_OFS_R		(0)		//角度のオフセット
+#define BMAX_W			(68)	//半径の最大値
+#define BMIN_W			(32)	//最小値
+#define BMID_W			(46)	//ジャッジのときの半径
+
+#define BALL_IW			(68)		//半径の初期値
+#define BALL_IR			(0)			//角度の初期値
+#define BALL_FA			(0)			//加速度
+
+/////////////////////////////////////////
+//オブジェクトのパレットID
+/////////////////////////////////////////
+typedef enum{
+	ROULETTE_OBJ_PAL1 = 1,	//OBJのパレット数
+	ROULETTE_OBJ_PAL2 = 2,
+	ROULETTE_OBJ_PAL3 = 3,
+	ROULETTE_OBJ_PAL4 = 4,
+	ROULETTE_OBJ_PAL5 = 5,
+	ROULETTE_OBJ_PAL6 = 6,	//イベント00用POKE
+	ROULETTE_OBJ_PAL7 = 7,	//イベント01用POKE
+	ROULETTE_OBJ_PAL8 = 8,	//
+	ROULETTE_OBJ_PAL9 = 9,	//
+	ROULETTE_OBJ_PALA = 10,	//
+	ROULETTE_OBJ_PALB = 11,	//
+	ROULETTE_OBJ_PALC = 12,	//
+	ROULETTE_OBJ_PALD = 13,	//
+	ROULETTE_OBJ_PALE = 14,
+	ROULETTE_OBJ_PALF = 15,
+	ROULETTE_OBJ_PAL10 = 16,
+}RLT_OBJ_PAL_ID;
+
+//////////////////////////////////////////////////
+//	セルID管理
+///////////////////////////////////////////////////
+typedef enum{
+	CELL_RPOKE00,
+	CELL_RPOKE01,
+	CELL_RPOKE02,
+	CELL_RPOKE03,
+
+	CELL_WPOKE,
+	CELL_WPOKE2,
+
+	CELL_CTBL,
+	CELL_COIN,
+	CELL_NUM,
+	CELL_ODDS,
+	CELL_RBALL,
+	CELL_WAKU,
+}RLT_OBJ_CELL_ID;
+
+///////////////////////////////////////////////////
+//	オブジェクトのプライオリティ管理
+///////////////////////////////////////////////////
+typedef enum{
+	//BG1
+	PRI_NUM	 = 0,			//クレジット表示用の数字*4
+	PRI_WIN = 4,			//クレジット表示ウィンドウ
+	PRI_WAKU = 9,			//枠
+	PRI_STCELL = 10,		//ボールが落ちたセル
+	PRI_BETOBJ = 23,		//賭けた場所用のオブジェクト*1
+	PRI_WINPOKE = 30,		//賭けるウィンドウ表示用のポケモンたち*19
+
+	//BG2
+	PRI_EPOKE = 50,			//イベント用ポケモン
+	PRI_ESHADOW = 51,
+	PRI_BALL = 52,			//ボールのプライオリティ*6
+	PRI_ESHADOW2 = 59,
+	PRI_ROTPOKE = 60,		//ルーレット盤用ポケモンたち*12
+	PRI_CTBL = 81,			//センターテーブルオブジェクト
+	
+}RLT_OBJ_PRI;
+
+////////////////////////////////////////
+//アクターワーク
+////////////////////////////////////////
+
+// イベント用ポケモン
+#define EV_FLG		0
+#define EV_CNT		1
+#define EV_PTN		2
+#define EV_TIME		3
+#define EV_PMID		4
+#define EV_SBID		5
+#define EV_SCID		6
+#define EV_WORK		7
+
+//========================================================================================
+//									グローバル変数
+//========================================================================================
+//オブジェクト用パレット群
+static const PalData rlt_obj_Pal[] = {
+	{(void *)&(GD_OBJ_PAL[0x10*0]), ROULETTE_OBJ_PAL1},	//影
+	{(void *)&(GD_OBJ_PAL[0x10*1]), ROULETTE_OBJ_PAL2},	//センターテーブル
+	{(void *)&(GD_OBJ_PAL[0x10*2]), ROULETTE_OBJ_PAL3},	//ウィンドウPOKE
+	{(void *)&(GD_OBJ_PAL[0x10*3]), ROULETTE_OBJ_PAL4},	//ウィンドウ枠
+	{(void *)&(GD_OBJ_PAL[0x10*4]), ROULETTE_OBJ_PAL5},	//オッズOBJ
+	{(void *)&(GD_OBJ_PAL[0x10*5]), ROULETTE_OBJ_PAL6},	//イベント00用
+	{(void *)&(GD_OBJ_PAL[0x10*6]), ROULETTE_OBJ_PAL7},	//イベント01用
+	{(void *)&(GD_OBJ_PAL[0x10*7]), ROULETTE_OBJ_PAL8},	//ウィンドウ用
+	{(void *)&(GD_OBJ_PAL[0x10*8]), ROULETTE_OBJ_PAL9},	//回転盤POKE0
+	{(void *)&(GD_OBJ_PAL[0x10*9]), ROULETTE_OBJ_PALA},	//回転盤POKE1
+	{(void *)&(GD_OBJ_PAL[0x10*10]), ROULETTE_OBJ_PALB},//回転盤POKE2
+	{(void *)&(GD_OBJ_PAL[0x10*11]), ROULETTE_OBJ_PALC},//回転盤POKE3
+	{(void *)&(GD_OBJ_PAL[0x10*12]), ROULETTE_OBJ_PALD},//ボール
+	{(void *)&(GD_OBJ_PAL[0x10*13]), ROULETTE_OBJ_PALE},//ボール
+	{(void *)&(GD_OBJ_PAL[0x10*14]), ROULETTE_OBJ_PALF},//ボール
+	{(void *)&(GD_OBJ_PAL[0x10*15]), ROULETTE_OBJ_PAL10},//ボール
+	{OBJPAL_END,0}		//PalSets() 終了コード
+};
+
+//----------------------------------------------------------------------------------------
+//										ポケモン
+//----------------------------------------------------------------------------------------
+// ノーマル
+static const ActOamData rlt_poke_oam = {
+	0,		//Vﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾓｰﾄﾞ設定
+	0,		//OBJﾓｰﾄﾞ設定(Normal)
+	0,		//ﾓｻﾞｲｸ設定(OFF)
+	0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+	0,		//OBJ形状設定(正方形)
+	0,		//Hﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+	2,		//OBJサイズ設定	32x32
+	0,		//ｷｬﾗｸﾀｰ数
+	1,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第1優先 )
+	0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+	0,		//AffineParam
+};
+static const ActOamData rlt_poke_oam2 = {
+	0,		//Vﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾓｰﾄﾞ設定
+	0,		//OBJﾓｰﾄﾞ設定(Normal)
+	0,		//ﾓｻﾞｲｸ設定(OFF)
+	0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+	0,		//OBJ形状設定(正方形)
+	0,		//Hﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+	1,		//OBJサイズ設定	32x32
+	0,		//ｷｬﾗｸﾀｰ数
+	1,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第1優先 )
+	0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+	0,		//AffineParam
+};
+// 回転用
+static const ActOamData rlt_rotate_poke_oam = {
+	PRI_ROTPOKE,		//Vﾎﾟｼﾞｼｮﾝ
+	3,		//拡大縮小ﾓｰﾄﾞ設定(2倍角回転OBJ)
+	0,		//OBJﾓｰﾄﾞ設定(NORMAL)
+	0,		//ﾓｻﾞｲｸ設定(OFF)
+	0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+	2,		//OBJ形状設定(縦長方形)
+	0,		//Hﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+	2,		//OBJサイズ設定	16x32
+	0,		//ｷｬﾗｸﾀｰ数
+	2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+	0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+	0,		//AffineParam
+};
+
+static const actAnm rlt_poke_anm[] =
+{
+	{ 0, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 },
+};
+
+static const actAnm * const rlt_poke_AnmTbl[] = 
+{
+	rlt_poke_anm,
+};
+
+static const actAffAnm rlt_poke_AffAnm00[] =
+{
+	{ ACT_AFEND, 0, 0, 0 },
+};
+
+static const actAffAnm * const rlt_poke_AffTbl[] = {
+	rlt_poke_AffAnm00,
+};
+
+//回転盤用ポケモン、セルデータ
+static const CellData	rlt_rPokeCell = {
+	(void *)rlt_rPoke2_LZ,0x100*12,CELL_RPOKE00
+};
+static const actAnm rlt_rPokeAnm[] = {
+	{OBJ16_16x32*0,0,0,0},	//0 s_r
+	{OBJ16_16x32*4,0,0,0},	//1 r_g
+	{OBJ16_16x32*8,0,0,0},	//2 e_b
+	{OBJ16_16x32*9,0,0,0},	//0 t_r
+	
+	{OBJ16_16x32*1,0,0,0},	//1 s_g
+	{OBJ16_16x32*5,0,0,0},	//2 r_b
+	{OBJ16_16x32*6,0,0,0},	//0 e_r
+	{OBJ16_16x32*10,0,0,0},	//1 t_g
+	
+	{OBJ16_16x32*2,0,0,0},	//2 s_b
+	{OBJ16_16x32*3,0,0,0},	//0 r_r
+	{OBJ16_16x32*7,0,0,0},	//1 e_g
+	{OBJ16_16x32*11,0,0,0},	//2 t_b
+	{ACT_ANMEND,0,0,0},
+};
+static const actAnm* const	rlt_rPokeAnmTbl[] = {
+	&(rlt_rPokeAnm[0]),
+	&(rlt_rPokeAnm[1]),
+	&(rlt_rPokeAnm[2]),
+	&(rlt_rPokeAnm[3]),
+	&(rlt_rPokeAnm[4]),
+	&(rlt_rPokeAnm[5]),
+	&(rlt_rPokeAnm[6]),
+	&(rlt_rPokeAnm[7]),
+	&(rlt_rPokeAnm[8]),
+	&(rlt_rPokeAnm[9]),
+	&(rlt_rPokeAnm[10]),
+	&(rlt_rPokeAnm[11]),
+};
+
+//ウィンドウ用ポケモン、セルデータ
+static const CellData	rlt_wPokeCell = {
+	(void *)rlt_wPoke_pch_ADRS,0x200*11,CELL_WPOKE
+};
+static const CellData	rlt_wPoke2Cell = {
+	(void *)rlt_wPoke2_LZ,0x100*4,CELL_WPOKE2,
+};
+static const actAnm	rlt_wPokeAnm[] = {
+	{OBJ16_32x32*0,0,0,0},	//0
+	{OBJ16_32x32*1,0,0,0},	//1
+	{OBJ16_32x32*2,0,0,0},	//2
+	{OBJ16_32x32*3,0,0,0},	//3
+	{OBJ16_32x32*4,0,0,0},	//4
+	{OBJ16_32x32*5,0,0,0},	//5
+	{OBJ16_32x32*6,0,0,0},	//6
+	{OBJ16_32x32*7,0,0,0},	//7
+	{OBJ16_32x32*8,0,0,0},	//8
+	{OBJ16_32x32*9,0,0,0},	//9
+	{OBJ16_32x32*10,0,0,0},	//10
+	{ACT_ANMEND,0,0,0},
+};
+static const actAnm rlt_wPoke2Anm[] = {
+	{OBJ16_16x16*0,0,0,0},
+	{OBJ16_16x16*1,0,0,0},
+	{OBJ16_16x16*2,0,0,0},
+	{OBJ16_16x16*3,0,0,0},
+	{ACT_ANMEND,0,0,0},
+};
+static const actAnm* const	rlt_wPokeAnmTbl[] = 
+{
+	&(rlt_wPokeAnm[0]),
+	&(rlt_wPokeAnm[2]),
+	&(rlt_wPokeAnm[4]),
+	&(rlt_wPokeAnm[6]),
+	&(rlt_wPokeAnm[8]),
+	&(rlt_wPokeAnm[9]),
+	&(rlt_wPokeAnm[10]),
+};
+static const actAnm* const rlt_wPoke2AnmTbl[] = {
+	&(rlt_wPoke2Anm[0]),
+	&(rlt_wPoke2Anm[1]),
+	&(rlt_wPoke2Anm[2]),
+	&(rlt_wPoke2Anm[3]),
+};
+// ノーマル用ポケモン
+static const actHeader normal_poke_Header[] =
+{
+	{								//wPoke00
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[0]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{								//wPoke01
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[1]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{								//wPoke02
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[2]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{								//wPoke03
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[3]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{								//ms_ball_r
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[4]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{								//ms_ball_g
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[5]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{								//ms_ball_b
+		CELL_WPOKE,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam,
+		&(rlt_wPokeAnmTbl[6]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+};
+
+static const actHeader normal2_poke_Header[] =
+{
+	{									//ソーナノR
+		CELL_WPOKE2,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam2,
+		&(rlt_wPoke2AnmTbl[0]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{									//ルリリR
+		CELL_WPOKE2,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam2,
+		&(rlt_wPoke2AnmTbl[1]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{									//エネコR
+		CELL_WPOKE2,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam2,
+		&(rlt_wPoke2AnmTbl[2]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+	{									//タップンR
+		CELL_WPOKE2,
+		ROULETTE_OBJ_PAL8,
+		&rlt_poke_oam2,
+		&(rlt_wPoke2AnmTbl[3]),
+		0,
+		DummyActAffTbl,
+		Bg1_ScrollActMove,
+	},
+};
+
+// 回転盤用ポケモン
+static const actHeader rotate_poke_Header[] =
+{
+	{
+		CELL_RPOKE00,			//r
+		ROULETTE_OBJ_PAL9,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[0]),
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALA,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[1]),	//g
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALB,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[2]),	//b
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALC,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[3]),	//r
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PAL9,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[4]),	//g
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALA,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[5]),	//b
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALB,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[6]),	//r
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALC,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[7]),	//g
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PAL9,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[8]),	//b
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALA,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[9]),	//r
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALB,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[10]),	//g
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+	{
+		CELL_RPOKE00,
+		ROULETTE_OBJ_PALC,
+		&rlt_rotate_poke_oam,
+		&(rlt_rPokeAnmTbl[11]),	//b
+		0,
+		DummyActAffTbl,
+		RotatePokeActMove
+	},
+};
+
+//----------------------------------------------------------------------------------------
+//							BG1ウィンドウ用
+//----------------------------------------------------------------------------------------
+static const ActOamData rlt_bgo_oam[] = {
+	{	//クレジットウィンドウ
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(Normal)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		1,		//OBJ形状設定(横長方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		3,		//OBJサイズ設定	64*32
+		0,		//ｷｬﾗｸﾀｰ数
+		1,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},
+	{	//クレジットウィンドウの数字
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(Normal)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		2,		//OBJ形状設定(縦長方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		0,		//OBJサイズ設定	8*16
+		0,		//ｷｬﾗｸﾀｰ数
+		1,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},
+	{	//オッズ表示
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(Normal)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		1,		//OBJ形状設定(横長方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		2,		//OBJサイズ設定	32*16
+		0,		//ｷｬﾗｸﾀｰ数
+		1,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},	
+	{	//残り玉の表示
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(Normal)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		1,		//OBJ形状設定(横長方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		0,		//OBJサイズ設定	16*8
+		0,		//ｷｬﾗｸﾀｰ数
+		1,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},		
+};
+static const CellData	rlt_bgoCell[] = {
+	{(void *)rlt_bgo_coin_pch_ADRS,0x400*1,CELL_COIN },
+	{(void *)rlt_bgo_num_pch_ADRS ,0x40*10,CELL_NUM  },
+	{(void *)rlt_bgo_odds_pch_ADRS,0x100*5,CELL_ODDS },
+//	{(void *)rlt_bgo_ball_pch_ADRS,0x40*5 ,CELL_RBALL},
+	{(void *)rlt_bgo_ball_LZ,0x40*5 ,CELL_RBALL},
+	{(void *)rlt_waku_LZ,		   0x200*1,CELL_WAKU },
+	{CELL_END,0,0}
+};
+static const actAnm rlt_numAnm[] = {
+	{OBJ16_8x16*0,0,0,0},
+	{OBJ16_8x16*1,0,0,0},
+	{OBJ16_8x16*2,0,0,0},
+	{OBJ16_8x16*3,0,0,0},
+	{OBJ16_8x16*4,0,0,0},
+	{OBJ16_8x16*5,0,0,0},
+	{OBJ16_8x16*6,0,0,0},
+	{OBJ16_8x16*7,0,0,0},
+	{OBJ16_8x16*8,0,0,0},
+	{OBJ16_8x16*9,0,0,0},
+};
+static const actAnm* const rlt_numAnmTbl[] = {
+	rlt_numAnm,
+};
+static const actAnm	rlt_oddsAnm[] = {
+	{OBJ16_32x16*0,0,0,0},
+	{OBJ16_32x16*1,0,0,0},
+	{OBJ16_32x16*2,0,0,0},
+	{OBJ16_32x16*3,0,0,0},
+	{OBJ16_32x16*4,0,0,0},
+	{ACT_ANMEND,0,0,0},
+};
+static const actAnm* const rlt_oddsAnmTbl[] = {
+	rlt_oddsAnm,
+};
+static const actAnm	rlt_rballAnm[] = {
+	{OBJ16_16x8*0,0,0,0},
+	{OBJ16_16x8*1,0,0,0},
+	{OBJ16_16x8*2,0,0,0},
+	{OBJ16_16x8*3,0,0,0},
+	{OBJ16_16x8*4,0,0,0},
+	{ACT_ANMEND,0,0,0},
+};
+static const actAnm* const rlt_rballAnmTbl[] = {
+	rlt_rballAnm,
+};
+
+static const actHeader rlt_coin_Header[] = {
+	{
+		CELL_COIN,
+		ROULETTE_OBJ_PAL5,
+		&(rlt_bgo_oam[0]),
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,	
+	},
+	{
+		CELL_NUM,
+		ROULETTE_OBJ_PAL5,
+		&(rlt_bgo_oam[1]),
+		rlt_numAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	}
+};
+static const actHeader rlt_odds_Header = {
+	CELL_ODDS,
+	ROULETTE_OBJ_PAL5,
+	&(rlt_bgo_oam[2]),
+	rlt_oddsAnmTbl,
+	0,
+	DummyActAffTbl,
+	Bg1_ScrollActMove,
+};
+static const actHeader rlt_restball_Header = {
+	CELL_RBALL,
+	ROULETTE_OBJ_PAL3,
+	&(rlt_bgo_oam[3]),
+	rlt_rballAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+static const actHeader rlt_waku_Header = {
+	CELL_WAKU,
+	ROULETTE_OBJ_PAL5,
+	&(rlt_poke_oam),
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+//----------------------------------------------------------------------------------------
+//									玉
+//----------------------------------------------------------------------------------------
+static const ActOamData rlt_ball_oam = {
+	0,		//Vﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾓｰﾄﾞ設定
+	0,		//OBJﾓｰﾄﾞ設定(Normal)
+	0,		//ﾓｻﾞｲｸ設定(OFF)
+	0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+	0,		//OBJ形状設定(正方形)
+	0,		//Hﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+	1,		//OBJサイズ設定	16x16
+	0,		//ｷｬﾗｸﾀｰ数
+	2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第3優先 )
+	0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+	0,		//AffineParam
+};
+
+static const actAnmData rlt_ball_celltrans[] = 
+{
+	{ OBJ_BALL_ADRS, 0x80 },	
+	{ OBJ_BALL_ADRS+0x80*1, 0x80 },	
+	{ OBJ_BALL_ADRS+0x80*2, 0x80 },	
+	{ OBJ_BALL_ADRS+0x80*3, 0x80 },	
+};
+static const actAnm rlt_ball_anm00[] =
+{
+	{ 0, 5, 0, 0 },
+	{ 1, 5, 0, 0 },
+	{ 2, 5, 0, 0 },
+	{ 1, 5, 0, 0 },
+	{ ACT_ANMLOOP, 0, 0, 0 },
+};
+static const actAnm rlt_ball_anm01[] = {
+	{ 0, 10, 0, 0 },
+	{ 1, 10, 0, 0 },
+	{ 2, 10, 0, 0 },
+	{ 1, 10, 0, 0 },
+	{ ACT_ANMLOOP, 0, 0, 0 },	
+};
+static const actAnm rlt_ball_anm02[] = {
+	{ 0, 15, 0, 0 },
+	{ 1, 15, 0, 0 },
+	{ 2, 15, 0, 0 },
+	{ 1, 15, 0, 0 },
+	{ ACT_ANMLOOP, 0, 0, 0 },	
+};
+static const actAnm rlt_ball_anm03[] = {
+	{ 1, 2, 0, 0 },
+	{ 2, 5, 0, 0 },
+	{ 1, 5, 0, 0 },
+	{ 3, 5, 0, 0 },
+	{ ACT_ANMEND,0,0,0},	
+};
+static const actAnm rlt_ball_anm04[] = {
+	{ 1, 2, 0, 0 },
+	{ 0, 4, 0, 0 },
+	{ 1, 4, 0, 0 },
+	{ 2, 4, 0, 0 },
+	{ 3, 4, 0, 0 },
+	{ ACT_ANMEND,0,0,0},	
+};
+static const actAnm	rlt_ball_anm05[] = {
+	{ 0, 2, 0, 0 },
+	{ 1, 5, 0, 0 },
+	{ 2, 5, 0, 0 },
+	{ 3, 5, 0, 0 },
+	{ ACT_ANMEND,0,0,0},	
+};
+static const actAnm rlt_ball_anm06[] = 
+{
+	{ 3, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 },
+};
+static const actAnm rlt_ball_anm07[] = {
+	{ 2, 2, 0, 0 },
+	{ 1, 5, 0, 0 },
+	{ 0, 5, 0, 0 },
+	{ 3, 5, 0, 0 },
+	{ ACT_ANMEND,0,0,0},	
+};
+static const actAnm * const rlt_ball_AnmTbl[] = {
+	rlt_ball_anm00,
+	rlt_ball_anm01,
+	rlt_ball_anm02,
+	rlt_ball_anm03,
+	rlt_ball_anm07,
+	rlt_ball_anm04,
+	rlt_ball_anm05,
+	rlt_ball_anm05,
+	rlt_ball_anm06,
+};
+
+static const actHeader rlt_ball_Header = {
+	ACT_TMODE,
+	ROULETTE_OBJ_PAL2,
+	&rlt_ball_oam,
+	rlt_ball_AnmTbl,
+	rlt_ball_celltrans,
+	DummyActAffTbl,
+	DummyActMove,	
+};
+
+//----------------------------------------------------------------------------------------
+//						ルーレット盤の中央
+//----------------------------------------------------------------------------------------
+static const ActOamData rlt_ctbl_oam = {
+	PRI_CTBL,		//Vﾎﾟｼﾞｼｮﾝ
+	3,		//拡大縮小ﾓｰﾄﾞ設定
+	0,		//OBJﾓｰﾄﾞ設定(Noral)
+	0,		//ﾓｻﾞｲｸ設定(OFF)
+	0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+	0,		//OBJ形状設定(正方形)
+	0,		//Hﾎﾟｼﾞｼｮﾝ
+	0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+	3,		//OBJサイズ設定	64x64
+	0,		//ｷｬﾗｸﾀｰ数
+	2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第3優先 )
+	0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+	0,		//AffineParam
+};
+
+static const CellData	rlt_ctblCell = {
+	(void *)rlt_ctbl_pch_ADRS,0x800,CELL_CTBL 
+};
+//センターテーブル用のヘッダ
+static const actHeader rlt_ctbl_Header = {
+	CELL_CTBL,
+	ROULETTE_OBJ_PAL2,
+	&rlt_ctbl_oam,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	RotateCtblActMove,
+};
+
+//----------------------------------------------------------------------------------------
+//				イベント用ポケモン00
+//----------------------------------------------------------------------------------------
+static const ActOamData rlt_evPoke_oam[] = {
+	{
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(Normal)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		0,		//OBJ形状設定(正方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		2,		//OBJサイズ設定	32*32
+		0,		//ｷｬﾗｸﾀｰ数
+		2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第3優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},
+	{
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(Normal)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		0,		//OBJ形状設定(正方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		2,		//OBJサイズ設定	32*32
+		0,		//ｷｬﾗｸﾀｰ数
+		2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第3優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	}	
+};
+//////////////////////////////////////////////////
+//	キャラクタ01
+/////////////////////////////////////////////////
+//パターンアニメーション
+static const actAnmData rlt_evPoke_celltrans[] = 
+{
+	//イベント00用	キノココ
+	{ OBJ_EVPOKE_ADRS, 0x200 },			//正面
+	{ OBJ_EVPOKE_ADRS+0x200*1, 0x200 },	//DL
+	{ OBJ_EVPOKE_ADRS+0x200*2, 0x200 },	//L00
+	{ OBJ_EVPOKE_ADRS+0x200*3, 0x200 },	//L01
+	{ OBJ_EVPOKE_ADRS+0x200*4, 0x200 },	//L02
+
+	//イベント01用	スバメ
+	{ OBJ_EVPOKE_ADRS+0x200*5, 0x200},
+	{ OBJ_EVPOKE_ADRS+0x200*6, 0x200},
+};
+//イベント0用アニメ
+static const actAnm rlt_evPoke0_anm00[] =
+{
+	{ 0, 6, 0, 0 },
+	{ 1, 6, 0, 0 },
+	{ 2, 6, 0, 0 },
+	{ 3, 6, 0, 0 },
+	{ 2, 6, 0, 0 },
+	{ 4, 6, 0, 0 },
+	{ ACT_ANMLOOP, 2, 0, 0 },
+};
+
+//イベント1用アニメ
+static const actAnm rlt_evPoke1_anm00[] = {
+	{ 5, 10, 0, 0 },			//フラグ0
+	{ ACT_ANMEND, 0, 0, 0},
+};
+static const actAnm rlt_evPoke1_anm01[] = {
+	{ 5, 10, 1, 0},				//フラグ1	Hフリップ
+	{ ACT_ANMEND, 0, 0, 0},
+};
+static const actAnm rlt_evPoke1_anm02[] = {
+	{ 5, 20, 0, 0},				//フラグ0	羽ばたき遅
+	{ 6, 20, 0, 0},
+	{ ACT_ANMLOOP, 0, 0, 0},
+};
+static const actAnm rlt_evPoke1_anm03[] = {
+	{ 5, 20, 1, 0},				//フラグ1	羽ばたき遅
+	{ 6, 20, 1, 0},
+	{ ACT_ANMLOOP, 0 ,0 ,0}
+};
+static const actAnm rlt_evPoke1_anm04[] = {
+	{ 5, 10, 0, 0},				//フラグ0	羽ばたき早
+	{ 6, 10, 0, 0},
+	{ ACT_ANMLOOP, 0, 0, 0},
+};
+static const actAnm rlt_evPoke1_anm05[] = {
+	{ 5, 10, 1, 0},				//フラグ1	羽ばたき早
+	{ 6, 10, 1, 0},
+	{ ACT_ANMLOOP, 0 ,0 ,0}
+};
+
+static const actAnm * const rlt_evPoke0_AnmTbl[] = {
+	rlt_evPoke0_anm00,
+};
+static const actAnm * const rlt_evPoke1_AnmTbl[] = {
+	rlt_evPoke1_anm00,	//flg0	anm stop
+	rlt_evPoke1_anm01,	//flg1	anm stop	hfrip
+	rlt_evPoke1_anm02,	//flg0	anm	slow
+	rlt_evPoke1_anm03,	//flg1	anm	slow	hfrip
+	rlt_evPoke1_anm04,	//flg0	anm fast
+	rlt_evPoke1_anm05,	//flg1	anm fast	hfirp
+};
+
+//////////////////////////////////////////////////
+//	ヘッダ
+//////////////////////////////////////////////////
+static const actHeader rlt_evPoke_Header[] = {
+	{		//イベント00用	キノココ
+		ACT_TMODE,
+		ROULETTE_OBJ_PAL6,
+		&(rlt_evPoke_oam[0]),
+		rlt_evPoke0_AnmTbl,
+		rlt_evPoke_celltrans,
+		DummyActAffTbl,
+		DummyActMove,	
+	},
+	{		//イベント01用	スバメ
+		ACT_TMODE,
+		ROULETTE_OBJ_PAL7,
+		&(rlt_evPoke_oam[1]),
+		rlt_evPoke1_AnmTbl,
+		rlt_evPoke_celltrans,
+		DummyActAffTbl,
+		Ev1_MoveAct00,	
+	},	
+};
+
+//----------------------------------------------------------------------------------------
+//				イベント用の影
+//--------------------------------------------------------------------------------
+static const ActOamData rlt_evShadow_oam[] = {
+	{	//ボールの影
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(半透明)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		0,		//OBJ形状設定(正方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		1,		//OBJサイズ設定	16*16
+		0,		//ｷｬﾗｸﾀｰ数
+		2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第3優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},
+	{	//キャラクタの影
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(半透明)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		1,		//OBJ形状設定(横長方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		2,		//OBJサイズ設定	32*16
+		0,		//ｷｬﾗｸﾀｰ数
+		2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},
+	{	//キャラクタの影2
+		0,		//Vﾎﾟｼﾞｼｮﾝ
+		1,		//拡大縮小ﾓｰﾄﾞ設定
+		0,		//OBJﾓｰﾄﾞ設定(半透明)
+		0,		//ﾓｻﾞｲｸ設定(OFF)
+		0,		//ｶﾗｰﾓｰﾄﾞ設定(16色)
+		1,		//OBJ形状設定(横長方形)
+		0,		//Hﾎﾟｼﾞｼｮﾝ
+		0,		//拡大縮小ﾊﾟﾗﾒｰﾀﾅﾝﾊﾞｰ設定
+		2,		//OBJサイズ設定	32*16
+		0,		//ｷｬﾗｸﾀｰ数
+		2,		//表示ﾌﾟﾗｲｵﾘﾃｨｰ設定( 第2優先 )
+		0,		//ﾊﾟﾚｯﾄﾅﾝﾊﾞｰ
+		0,		//AffineParam
+	},		
+};
+static const actAnmData rlt_shadow_celltrans[] =
+{
+	//ボール
+	{ OBJ_SHADOW_ADRS		, 0x80},
+	//キャラクタ
+	{ OBJ_SHADOW_ADRS+0x80	,0x100},
+};
+
+///////////////////////////////////////////////////
+//	イベント影
+///////////////////////////////////////////////////
+//拡縮・回転アニメーション
+static const actAffAnm rlt_evSdc0_aff00[] = {
+	{0x0080,0x0080,0,ACT_AFSET},	//1/4
+	{0x0002,0x0002,0,60},
+	{ACT_AFEND,0,0}
+};
+static const actAffAnm rlt_evSdc1_aff00[] = {
+	{0x0100,0x0100,0,ACT_AFSET},
+	{0xFFFE,0x0000,0,15},
+	{0xFFFF,0xFFFE,0,15},
+	{0xFFFF,0xFFFB,0,24},
+	{ACT_AFEND,0,0}
+};
+static const actAffAnm *const rlt_evSdc0_AffTbl[] = {
+	rlt_evSdc0_aff00,
+};
+static const actAffAnm *const rlt_evSdc1_AffTbl[] = {
+	rlt_evSdc1_aff00,
+};
+
+//ボールの影
+static const actAffAnm rlt_evSdb0_aff00[] = {
+	{0x0100,0x0100,0,ACT_AFSET},
+	{ACT_AFEND,0,0}
+};
+static const actAffAnm *const rlt_evSdb0_AffTbl[] = {
+	rlt_evSdb0_aff00,
+};
+
+//////////////////////////////////////////////////
+//	ヘッダ
+//////////////////////////////////////////////////
+static const actHeader rlt_shadow_Header[] = {
+	{	//ボールの影
+		ACT_TMODE,
+		ROULETTE_OBJ_PAL1,
+		&(rlt_evShadow_oam[0]),
+		rlt_poke_AnmTbl,
+		&(rlt_shadow_celltrans[0]),
+		DummyActAffTbl,
+		DummyActMove,	
+	},
+	{	//イベント０、キャラクタの影
+		ACT_TMODE,
+		ROULETTE_OBJ_PAL1,
+		&(rlt_evShadow_oam[1]),
+		rlt_poke_AnmTbl,
+		&(rlt_shadow_celltrans[1]),
+		DummyActAffTbl,
+		Ev0_MoveAct00,	
+	},
+	{	//イベント1	キャラクタの影
+		ACT_TMODE,
+		ROULETTE_OBJ_PAL1,
+		&(rlt_evShadow_oam[2]),
+		rlt_poke_AnmTbl,
+		&(rlt_shadow_celltrans[1]),
+		rlt_evSdc1_AffTbl,
+		Ev1_MoveAct00,	
+	}
+};
+

@@ -1,0 +1,966 @@
+//====================================================================
+//							field_c102
+//						カイナ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//				      マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_c102_event_data
+FLAG_CHANGE_LABEL	flag_change_field_c102
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_c102:
+//藍バージョンの場合の処理を記述
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+
+	//敵の団をセットする
+	_LDVAL			OBJCHRWORK1,AQUALF1
+	_LDVAL			OBJCHRWORK2,AQUALM1
+
+//朱バージョンの場合の処理を記述
+#elif ( PM_VERSION == VERSION_RUBY )
+
+	//敵の団をセットする
+	_LDVAL			OBJCHRWORK1,MAGMAF1
+	_LDVAL			OBJCHRWORK2,MAGMAM1
+
+#endif
+
+	//博物館の入場料払ったをクリアする
+	_LDVAL			WK_SCENE_C102_R0501,0
+
+	_CALL			ev_arrive_flag_set_c102
+
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,obj_chg_field_c102
+
+	_END
+
+ev_arrive_flag_set_c102:
+	_FLAG_SET		SYS_C102_ARRIVE				//到着フラグセット
+	_LDVAL			WK_SCENE_SP_CONTEST,0		//コンテストしてない
+	_FLAG_SET		FV_INTERVM1_01_C102_R0201	//インタビュアーを消す
+	_RET
+
+obj_chg_field_c102:
+	_SXY_POS_CHANGE		KUSUNOKI_01_FIELD_C102,28,13
+
+	//やじうまに行く
+	_SXY_POS_CHANGE		OLDWOMAN2_01_FIELD_C102,25,13
+	_SXY_POS_CHANGE		BOY4_01_FIELD_C102,25,14
+	_SXY_POS_CHANGE		COOK1_01_FIELD_C102,27,16
+	_SXY_POS_CHANGE		GIRL1_01_FIELD_C102,28,16
+	_SXY_POS_CHANGE		BIGMAN1_01_FIELD_C102,29,16
+	_SXY_POS_CHANGE		MIDDLEM1_01_FIELD_C102,31,14
+
+	//移動制限を変更する
+	_SXY_SITE_CHANGE	KUSUNOKI_01_FIELD_C102,MV_DOWN
+
+	_SXY_SITE_CHANGE	OLDWOMAN2_01_FIELD_C102,MV_DR
+	_SXY_SITE_CHANGE	BOY4_01_FIELD_C102,MV_UR
+	_SXY_SITE_CHANGE	COOK1_01_FIELD_C102,MV_UP
+	_SXY_SITE_CHANGE	GIRL1_01_FIELD_C102,MV_UP
+	_SXY_SITE_CHANGE	BIGMAN1_01_FIELD_C102,MV_UP
+	_SXY_SITE_CHANGE	MIDDLEM1_01_FIELD_C102,MV_LEFT
+
+	_RET
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							がんばり屋(shop)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_middlem2_01_p01_field_c102
+	_TALK_WAIT
+
+	_SHOP_START		field_c102_menu_10
+
+	//ショップメニュー
+	_SHOP_MENU_START	field_c102_menu_10
+	_SHOP_MENU		ITEM_TAURIN
+	_SHOP_MENU		ITEM_BUROMUHEKISIN
+	_SHOP_MENU		ITEM_INDOMETASIN
+	_SHOP_MENU		ITEM_KITOSAN
+	_SHOP_MENU		ITEM_RIZOTIUMU
+	_SHOP_MENU		ITEM_MAKKUSUAPPU
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							がんばり屋								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw1_02_p01_field_c102
+	_TALK_OBJ_START
+
+	//手持ちの先頭のポケモン名取得
+	_GET_TEMOTI_MONSNAME	0
+	_TALK_KEYWAIT	msg_trainerw1_02_p01_field_c102
+
+	//手持ちの先頭のポケモンが「がんばリボン」を持っているか
+	_FUNC_CALL		ANSWORK,CHK_GANBA_RIBBON
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,already_get_ganba_ribbon_field_c102
+
+	//努力値の合計を取得する
+	_FUNC_CALL		ANSWORK,CHK_GANBA_RIBBON_PARA_EXP
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,no_trainerw1_02_p01_field_c102
+
+	_TALK_KEYWAIT	msg_trainerw1_02_p02_field_c102
+	
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_trainerw1_02_p03_field_c102
+	_JINGLE_WAIT
+
+	_TALK_KEYWAIT	msg_trainerw1_02_p04_field_c102
+
+	_PROGRAM		SET_GANBA_RIBBON
+	_TALK_OBJ_END
+	_END
+
+//努力値がMAXではない
+no_trainerw1_02_p01_field_c102:
+	_TALK_KEYWAIT	msg_trainerw1_02_p05_field_c102
+	_TALK_OBJ_END
+	_END
+
+//手持ちの先頭のポケモンが「がんばリボン」を持っている
+already_get_ganba_ribbon_field_c102:
+	_TALK_KEYWAIT	msg_trainerw1_02_p06_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							料理人1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cook1_01_p01_field_c102
+	_TALK_OBJ_START
+	
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,ev_cook1_01_p02_field_c102
+
+	_TALK_KEYWAIT	msg_cook1_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+ev_cook1_01_p02_field_c102:
+	_TALK_KEYWAIT	msg_cook1_01_p02_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							老婆2									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman2_01_p01_field_c102
+	_TALK_OBJ_START
+
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,ev_oldwoman2_01_p02_field_c102
+
+	_TALK_KEYWAIT	msg_oldwoman2_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+ev_oldwoman2_01_p02_field_c102:
+	_TALK_KEYWAIT	msg_oldwoman2_01_p02_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							女の子1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,ev_girl1_01_p02_field_c102
+
+	//「ひみつのちから」貰っていたら
+	_IF_FLAGON_JUMP	FE_HIMITSU_GET,ev_girl1_01_p03_field_c102
+
+	_TALK_KEYWAIT	msg_girl1_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+//クスノキ艦長が帰ってきていてインタビュー受けている
+ev_girl1_01_p02_field_c102:
+	_TALK_KEYWAIT	msg_girl1_01_p02_field_c102
+	_TALK_OBJ_END
+	_END
+
+//「ひみつのちから」貰っている
+ev_girl1_01_p03_field_c102:
+	_TALK_KEYWAIT	msg_girl1_01_p03_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				コンテスト会場の前にいる少年4						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy4_01_p01_field_c102
+	_TALK_OBJ_START
+
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,ev_boy4_01_p02_field_c102
+
+	_TALK_KEYWAIT	msg_boy4_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+ev_boy4_01_p02_field_c102:
+	_TALK_KEYWAIT	msg_boy4_01_p02_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					ポケセンのとなりに立つ大男						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_field_c102
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_JUMP		WK_SCENE_FIELD_C102,EQ,1,ev_bigman1_01_p02_field_c102
+
+	//振り向く
+	_EASY_OBJ_MSG	msg_bigman1_01_p01_field_c102
+	_END
+
+//振り向かない
+ev_bigman1_01_p02_field_c102:
+	_EASY_MSG		msg_bigman1_01_p02_field_c102
+	_END
+
+
+/********************************************************************/
+/*				海の科学博物館の前にいるおやじ1						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,ev_middlem1_01_p02_field_c102
+
+	_TALK_KEYWAIT	msg_middlem1_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+ev_middlem1_01_p02_field_c102:
+	_TALK_KEYWAIT	msg_middlem1_01_p02_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								女性２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_field_c102
+	_TALK_OBJ_START
+
+	//フィールドのアクア団いなくなっていたら
+	_IF_FLAGON_JUMP	FE_MIDDLEM1_01_C102_R0101,ev_woman2_01_p02_field_c102
+
+	_TALK_KEYWAIT	msg_woman2_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+//フィールドのアクア団いなくなっている
+ev_woman2_01_p02_field_c102:
+	_TALK_KEYWAIT	msg_woman2_01_p02_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						コンテスト会場の看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_c102
+	_EASY_MSG       msg_kanban_01_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							造船所の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_c102
+	_TALK_START
+
+	//ジェットボードが完成しているか
+	//今はゲームクリアフラグで判断している
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_kanban_01_p03_field_c102
+
+	//ハギ老人が造船所に来ているか
+	_IF_FLAGON_JUMP		SYS_BATCH07_GET,ev_kanban_01_p02_field_c102
+
+	_TALK_KEYWAIT       msg_kanban_02_p01_field_c102
+	_TALK_END
+	_END
+
+//ハギ老人が造船所に来ている
+ev_kanban_01_p02_field_c102:
+	_TALK_KEYWAIT       msg_kanban_02_p02_field_c102
+	_TALK_END
+	_END
+
+//ジェットボードが完成している
+ev_kanban_01_p03_field_c102:
+	_TALK_KEYWAIT       msg_kanban_02_p03_field_c102
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*					ポケモン大好きクラブの看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_c102
+	_EASY_MSG       msg_kanban_03_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*						海の科学博物館の看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_c102
+	_EASY_MSG       msg_kanban_04_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							町の中央の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_c102
+	_EASY_MSG       msg_kanban_05_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							市場の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_07_p01_field_c102
+	_EASY_MSG       msg_kanban_07_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							船着場の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_08_p01_field_c102
+	_TALK_START
+
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_kanban_08_p02_field_c102
+
+	_TALK_KEYWAIT	msg_kanban_08_p01_field_c102
+	_TALK_END
+	_END
+
+//ゲームクリア後
+ev_kanban_08_p02_field_c102:
+	_TALK_KEYWAIT	msg_kanban_08_p02_field_c102
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							姓名判断氏の看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_09_p01_field_c102
+	_EASY_MSG       msg_kanban_09_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							フリーク								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	//クスノキ艦長が帰ってきていてインタビュー受けている
+	_IFVAL_CALL		WK_SCENE_FIELD_C102,EQ,1,ev_freak1_01_p02_field_c102
+
+	_TALK_KEYWAIT       msg_freak1_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+ev_freak1_01_p02_field_c102:
+	_TALK_KEYWAIT       msg_freak1_01_p01_field_c102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							トレーナー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw1_01_p01_field_c102
+	_EASY_OBJ_MSG       msg_trainerw1_01_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							船乗り(灯台下)							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_03_p01_field_c102
+	_EASY_OBJ_MSG   msg_seaman1_03_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*								船乗り								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_field_c102
+	_EASY_OBJ_MSG   msg_seaman1_01_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*								おばさん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew1_01_p01_field_c102
+	_EASY_OBJ_MSG   msg_middlew1_01_p01_field_c102
+	_END
+
+
+/********************************************************************/
+/*							入り口の人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_field_c102
+	_EASY_OBJ_MSG   msg_trainerm1_01_p01_field_c102
+	_END
+
+/********************************************************************/
+/*						コンテスト会場近く							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_schoolm1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_YES_NO    msg_schoolm1_01_p01_field_c102
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,yes_schoolm1_01_p01_field_c102
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,no_schoolm1_01_p01_field_c102
+
+	_TALK_OBJ_END
+	_END
+
+//はい
+yes_schoolm1_01_p01_field_c102:
+	_TALK_KEYWAIT    msg_schoolm1_01_p02_field_c102
+	_RET
+
+//いいえ
+no_schoolm1_01_p01_field_c102:
+	_TALK_KEYWAIT    msg_schoolm1_01_p03_field_c102
+	_RET
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilw1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilw1_01_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILW1_01_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_01_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_01_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_02_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_02_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_02_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_03_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_03_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_03_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_04_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_04_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_04_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_05_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_05_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_05_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_06_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_06_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_06_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								アクア団							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_07_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_07_p01_field_c102
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	EVILM1_07_FIELD_C102,default_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							市場（人形）							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_01_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALKMSG	msg_shop_p01
+	_TALK_WAIT
+
+	_GOODS_SHOP_START			field_c102_menu_01
+
+	//ショップメニュー
+	_SHOP_MENU_START	field_c102_menu_01
+	_SHOP_MENU	GOODS_RURIRIDOORU
+	_SHOP_MENU	GOODS_MARIRUDOORU
+	_SHOP_MENU	GOODS_ENEKODOORU
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+//「ひみつのちから」貰っていない
+ev_shop1_common_field_c102:
+	_TALK_KEYWAIT	msg_himitsu_01_p01_common
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							市場（水風船＆ブロック）				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_02_p01_field_c102
+	_TALK_OBJ_START
+
+	//「ひみつのちから」貰っていなかったら
+	_IF_FLAGOFF_JUMP	FE_HIMITSU_GET,ev_shop1_common_field_c102
+
+	_TALKMSG	msg_shop_p01
+	_TALK_WAIT
+
+	_GOODS_SHOP_START			field_c102_menu_02
+
+	//ショップメニュー
+	_SHOP_MENU_START	field_c102_menu_02
+	_SHOP_MENU	GOODS_AKAIRENGA
+	_SHOP_MENU	GOODS_AOIRENGA
+	_SHOP_MENU	GOODS_KIIROIRENGA
+	_SHOP_MENU	GOODS_AKAIHUUSEN		
+	_SHOP_MENU	GOODS_AOIHUUSEN		
+	_SHOP_MENU	GOODS_KIIROIHUUSEN
+	
+	_SHOP_MENU	GOODS_ONPUMATTOcl
+	_SHOP_MENU	GOODS_ONPUMATTOd
+	_SHOP_MENU	GOODS_ONPUMATTOe
+	_SHOP_MENU	GOODS_ONPUMATTOf
+	_SHOP_MENU	GOODS_ONPUMATTOg
+	_SHOP_MENU	GOODS_ONPUMATTOa
+	_SHOP_MENU	GOODS_ONPUMATTOb
+	_SHOP_MENU	GOODS_ONPUMATTOch
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							市場（くさった板k）						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_03_p01_field_c102
+	_TALK_OBJ_START
+
+	//「ひみつのちから」貰っていなかったら
+	_IF_FLAGOFF_JUMP	FE_HIMITSU_GET,ev_shop1_common_field_c102
+
+	_TALKMSG	msg_shop_p01
+	_TALK_WAIT
+
+	_GOODS_SHOP_START	field_c102_menu_03
+
+	//ショップメニュー
+	_SHOP_MENU_START	field_c102_menu_03
+	_SHOP_MENU		GOODS_DORODANGO		
+	_SHOP_MENU		GOODS_SUBERIDAI
+	_SHOP_MENU		GOODS_TATENOSAKU		
+	_SHOP_MENU		GOODS_YOKONOSAKU		
+	_SHOP_MENU		GOODS_TAIYA		
+	_SHOP_MENU		GOODS_YABURERUDOA	
+	_SHOP_MENU		GOODS_ZYOUBUNAITA	
+	_SHOP_MENU		GOODS_OOKINADAI
+	_SHOP_MENU		GOODS_TEREBI
+	_SHOP_MENU		GOODS_MARUITEREBI
+	_SHOP_MENU		GOODS_KAWAIITEREBI
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							市場（技マシン）						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_04_p01_field_c102
+	_TALK_OBJ_START
+
+	_TALKMSG	msg_shop_p01
+	_TALK_WAIT
+
+	_SHOP_START			field_c102_menu_04
+	//ショップメニュー
+	_SHOP_MENU_START	field_c102_menu_04
+	_SHOP_MENU		ITEM_WAZAMASIN10		
+	_SHOP_MENU		ITEM_WAZAMASIN43
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							クスノキ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kusunoki_01_p01_field_c102
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_field_c102
+
+	_TALK_KEYWAIT	msg_intervw1_01_p02_field_c102
+	_TALK_CLOSE
+
+	//インタビュアーはカメラマンの方を向く
+	_SET_OBJ_ANIME	INTERVW1_01_FIELD_C102,turn_r_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TIME_WAIT		10
+
+	//カメラマンはインタビュアーの方を向く
+	_SET_OBJ_ANIME	CAMERA1_01_FIELD_C102,turn_d_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TIME_WAIT		25
+
+	//カメラマン去る
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,kusunoki_01_field_c102_anime03
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c102_anime02
+	_SET_OBJ_ANIME	INTERVW1_01_FIELD_C102,intervw1_01_field_c102_anime01
+	_SET_OBJ_ANIME	CAMERA1_01_FIELD_C102,camera_01_field_c102_anime01
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	//OBJ消す
+	_OBJ_DELETE		INTERVW1_01_FIELD_C102
+	_OBJ_DELETE		CAMERA1_01_FIELD_C102
+
+	_TALK_KEYWAIT	msg_studym1_01_p02_field_c102
+
+	//振り向く
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,turn_u_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_studym1_01_p03_field_c102
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_BGM_SET		MUS_AQA_0,0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_BGM_SET		MUS_MGM0,0
+#endif
+
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_field_c102
+
+	//きょろきょろさせる
+	_SET_OBJ_ANIME	COOK1_01_FIELD_C102,turn_l_anime
+	_SET_OBJ_ANIME	BIGMAN1_01_FIELD_C102,turn_l_anime
+	_SET_OBJ_ANIME	OLDWOMAN2_01_FIELD_C102,obj_01_field_c102_anime01
+	_SET_OBJ_ANIME	BOY4_01_FIELD_C102,hatena_mark_anime
+	_SET_OBJ_ANIME	MIDDLEM1_01_FIELD_C102,obj_01_field_c102_anime02
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	//下を向く
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,turn_d_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_studym1_01_p04_field_c102
+
+	//クスノキ「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,gyoe_mark_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	//クスノキウェイト
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_studym1_01_p05_field_c102
+
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,turn_hero_site_anime
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_studym1_01_p06_field_c102
+	_TALK_CLOSE
+
+	//部屋内に移動する
+	_SET_OBJ_ANIME	KUSUNOKI_01_FIELD_C102,kusunoki_01_field_c102_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c102_anime01
+	_OBJ_ANIME_WAIT 			//アニメ終了待ち
+
+	//OBJ消す
+	_OBJ_DELETE		KUSUNOKI_01_FIELD_C102
+
+	_FLAG_RESET		FV_KUSUNOKI_01_C102_R0601
+	_FLAG_RESET		FV_SUBMARINE1_01_C102_R0601
+	_FLAG_RESET		FV_EVILM1_01_C102_R0601
+	_FLAG_RESET		FV_AQUABOSS_01_C102_R0601
+
+	//ギャラリーを移動させる
+	_LDVAL			WK_SCENE_FIELD_C102,2
+
+	_MAP_CHANGE		C102,C102_R0601,11,14
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ギャラリー		きょろきょろする１
+//--------------------------------------------------------------------
+obj_01_field_c102_anime01:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_MARK_HATENA	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ギャラリー		きょろきょろする２
+//--------------------------------------------------------------------
+obj_01_field_c102_anime02:
+	.byte	AC_MARK_HATENA	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//インタビュアー		帰る
+//--------------------------------------------------------------------
+intervw1_01_field_c102_anime01:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//カメラマン		帰る
+//--------------------------------------------------------------------
+camera_01_field_c102_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ		気づいて一歩下がる
+//--------------------------------------------------------------------
+kusunoki_01_field_c102_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ		部屋内に入る
+//--------------------------------------------------------------------
+kusunoki_01_field_c102_anime02:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_VANISH_ON	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ		少し見送る
+//--------------------------------------------------------------------
+kusunoki_01_field_c102_anime03:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公		部屋内に入る
+//--------------------------------------------------------------------
+hero_01_field_c102_anime01:
+	.byte	AC_WALK_TURN_R	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公		クスノキの方を見る
+//--------------------------------------------------------------------
+hero_01_field_c102_anime02:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							カメラマン								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_camera1_01_p01_field_c102
+	_EASY_MSG		msg_camera1_01_p01_field_c102
+	_END
+	
+
+/********************************************************************/
+/*							インタビュアー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_intervw1_01_p01_field_c102
+	_EASY_MSG		msg_intervw1_01_p01_field_c102
+	_END
+
+
+/********************************************************************/
+//							若者男２	
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm2_01_p01_field_c102
+	_EASY_OBJ_MSG	msg_youngm2_01_p01_field_c102
+	_END
+
+

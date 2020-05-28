@@ -1,0 +1,46 @@
+/********************************************************************/
+/*							ルーレット								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_roulette_p01_c103_r0401
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL	PARAM0, 0		// レート
+
+	// CMデータチェック
+	_CM_EVENT_START_CHK	CM_CASINO_TYPE
+	_IFVAL_JUMP	ANSWORK, EQ, 0, ev_roulette_start
+
+	_ADDWK	PARAM0,	128
+
+	_JUMP	ev_roulette_start
+
+	_END
+
+SCRIPT_LABEL	ev_roulette_p02_c103_r0401
+	//コインケースチェック
+	_CHECK_ITEM		ITEM_KOINKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_no_coin_case_game_01_c103_r0401
+
+	_LDVAL	PARAM0, 1	// レート
+
+	// CMデータチェック
+	_CM_EVENT_START_CHK	CM_CASINO_TYPE
+	_IFVAL_JUMP	ANSWORK, EQ, 0, ev_roulette_start
+
+	_ADDWK	PARAM0,	128
+
+	_JUMP	ev_roulette_start
+
+	_END
+
+// ルーレット開始
+ev_roulette_start:
+	_PROGRAM	START_ROULETTE
+	_STOP_SCRIPT
+
+	_END
+

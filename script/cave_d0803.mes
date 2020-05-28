@@ -1,0 +1,72 @@
+// ●おくりび山　内部３Ｆ
+
+
+// ▼d0803----------------------------------
+// ●サイキッカー♂０５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_espm_05_01
+msg_espm_05_01:
+	.byte	re_,i_,ge_,n_,spc_,a_,ra_,ta_,ka_,na_,spc_,ya_,ma_,no_,spc_,ti_,ka_,ra_,de_
+	.byte	CR_
+	.byte	SA_,I_,KO_,PA_,WA_,bou_,no_,spc_,A_,TTU_,PU_,si_,ta_,spc_,wa_,ta_,si_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,do_,mo_,no_,spc_,o_,ma_,e_,ga_,spc_,ka_,te_,ru_,ka_,na_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サイキッカー♂０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_espm_05_02
+msg_espm_05_02:
+	.byte	A_,TTU_,PU_,spc_,A_,TTU_,PU_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サイキッカー♂０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_espm_05_03
+msg_espm_05_03:
+	.byte	wa_,ta_,si_,no_,spc_,SA_,I_,KO_,PA_,WA_,bou_,ha_,spc_,ka_,ku_,zi_,tu_,ni_
+	.byte	CR_
+	.byte	tu_,yo_,ku_,spc_,na_,ttu_,te_,i_,ru_,spc_,ha_,zu_,na_,no_,ni_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0803----------------------------------
+// ●サイキッカー♀０５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_espw_05_01
+msg_espw_05_01:
+	.byte	o_,ho_,ho_,ho_,ho_,ttu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ha_,spc_,a_,na_,ta_,no_,spc_,yo_,u_,na_,spc_,ko_,do_,mo_,ga_
+	.byte	CR_
+	.byte	ku_,ru_,spc_,ba_,si_,yyo_,spc_,de_,ha_,spc_,na_,i_,no_,yo_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サイキッカー♀０５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_espw_05_02
+msg_espw_05_02:
+	.byte	a_,ttu_,sa_,ri_,spc_,ma_,ke_,ta_,wa_,ttu_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サイキッカー♀０５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_espw_05_03
+msg_espw_05_03:
+	.byte	ma_,da_,ma_,da_,spc_,si_,yyu_,gi_,yyo_,u_,ga_,spc_,ta_,ri_,na_,i_,no_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	sa_,n_,ti_,yyo_,u_,wo_,spc_,me_,za_,su_,wa_,yo_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,AA_,I_,TO_,gyoe_,spc_,wa_,ta_,si_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,115 @@
+//====================================================================
+//							c105_r0501
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c105_r0501_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								女性								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_c105_r0501
+	_EASY_OBJ_MSG	msg_woman2_01_p01_c105_r0501
+	_END
+
+
+/********************************************************************/
+/*								少年３								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy3_01_p01_c105_r0501
+	_TALK_START
+
+	//アイテム貰っていたら
+	_IF_FLAGON_JUMP	FE_BOY3_02_C105_R0501,ev_boy3_01_p04_c105_r0501
+
+	//鳥ポケモンが戻ってきていたら
+	_IF_FLAGON_JUMP	FE_POKE_01_C107_R0301,ev_boy3_01_p03_c105_r0501
+
+	//鳥ポケモンが飛び立っていたら
+	_IF_FLAGON_JUMP	FE_BOY3_01_C105_R0501,ev_boy3_01_p02_c105_r0501
+
+	_TALK_KEYWAIT	msg_boy3_01_p01_c105_r0501
+	_TALK_CLOSE
+
+	_FLAG_SET		FE_BOY3_01_C105_R0501
+
+	//トクサネの鳥ポケモンを表示する
+	_FLAG_RESET		FV_POKE_01_C107_R0301
+
+	//飛び立つ
+	_SET_OBJ_ANIME	CAMOME_01_C105_R0501,camome_01_c105_r0501_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_DELETE		CAMOME_01_C105_R0501
+	_TALK_END
+	_END
+
+//鳥ポケモンが飛び立っている
+ev_boy3_01_p02_c105_r0501:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_boy3_01_p02_c105_r0501
+	_TALK_END
+	_END
+
+//鳥ポケモンが戻ってきている
+ev_boy3_01_p03_c105_r0501:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_boy3_01_p03_c105_r0501
+
+	_ITEM_EVENT		ITEM_MENTARUHAABU,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_BOY3_02_C105_R0501
+	_TALK_END
+	_END
+
+//アイテム貰っている
+ev_boy3_01_p04_c105_r0501:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_boy3_01_p04_c105_r0501
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//鳥ポケモン	飛び立つ
+//--------------------------------------------------------------------
+camome_01_c105_r0501_anime01:
+	.byte	AC_WALK_D_2	//
+	.byte	AC_WALK_D_2	//
+	.byte	AC_WALK_R_2	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							キャモメ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_camome_01_p01_c105_r0501
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_KYAMOME,0
+	_TALK_KEYWAIT	msg_camome_01_p01_c105_r0501
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+

@@ -1,0 +1,112 @@
+//====================================================================
+//							c101_r0101
+//						トウカ・ミツル宅
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c101_r0101_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ミツル父								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_c101_r0101
+	_TALK_OBJ_START
+
+	//チャンピオンロードでミツルに勝利した
+	_IF_FLAGON_JUMP	FE_MITSURU_01_CAVE_D1301,ev_middlem2_01_p06_c101_r0101
+
+	//すでに秘伝技貰っていたら
+	_IF_FLAGON_JUMP	FE_HWAZA03_GET,ev_middlem2_01_p03_c101_r0101
+
+	//トウカジムで父に勝っていたら
+	_IF_FLAGON_JUMP	FT_GYM_05_LEADER,ev_middlem2_01_p02_c101_r0101
+
+	//一度会話しているか
+	_IF_FLAGON_JUMP	FE_MIDDLEM2_01_C101_R0101,ev_middlem2_01_p05_c101_r0101
+
+	_TALK_KEYWAIT	msg_middlem2_01_p01_c101_r0101
+
+	//一度会話した
+	_FLAG_SET		FE_MIDDLEM2_01_C101_R0101
+
+	_TALK_OBJ_END
+	_END
+
+//チャンピオンロードでミツルに勝利した
+ev_middlem2_01_p06_c101_r0101:
+	//すでに秘伝マシン貰っていたら
+	_IF_FLAGON_JUMP	FE_HWAZA03_GET,ev_middlem2_01_p04_c101_r0101
+
+	//まだ秘伝マシン貰っていなかったら入手処理へ
+	_JUMP			ev_middlem2_01_p02_c101_r0101
+	_END
+
+//トウカジムで父に勝っている
+ev_middlem2_01_p02_c101_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p03_c101_r0101
+
+	//「なみのり」入手
+	_ITEM_EVENT		ITEM_HIDENMASIN03,1
+
+	_FLAG_SET		FE_HWAZA03_GET
+
+	_TALK_KEYWAIT	msg_middlem2_01_p04_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+//すでに秘伝技貰っている
+ev_middlem2_01_p03_c101_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p05_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+//チャンピオンロードでミツルに勝利した
+ev_middlem2_01_p04_c101_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p06_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+//一度会話している
+ev_middlem2_01_p05_c101_r0101:
+	_TALK_KEYWAIT	msg_middlem2_01_p02_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ミツル母								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_c101_r0101
+	_TALK_OBJ_START
+
+	//すでに秘伝技貰っていたら
+	_IF_FLAGON_JUMP	FE_HWAZA03_GET,ev_woman2_01_p03_c101_r0101
+
+	//トウカジムで父に勝っていたら
+	_IF_FLAGON_JUMP	FT_GYM_05_LEADER,ev_woman2_01_p02_c101_r0101
+
+	_TALK_KEYWAIT	msg_woman2_01_p01_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+//トウカジムで父に勝っている
+ev_woman2_01_p02_c101_r0101:
+	_TALK_KEYWAIT	msg_woman2_01_p02_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+//すでに秘伝技貰っている
+ev_woman2_01_p03_c101_r0101:
+	_TALK_KEYWAIT	msg_woman2_01_p03_c101_r0101
+	_TALK_OBJ_END
+	_END
+
+

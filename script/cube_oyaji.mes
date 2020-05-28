@@ -1,0 +1,89 @@
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p01_contest
+msg_oyaji_01_p01_contest:
+	.byte	wa_,si_,ha_,spc_,PO_,RO_,TTU_,KU_,wo_
+	.byte	CR_
+	.byte	tu_,ku_,ru_,no_,ga_,spc_,da_,i_,su_,ki_,de_
+	.byte	NORMAL_WAIT_
+	.byte	i_,tu_,mo_,spc_,ki_,no_,mi_,wo_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,spc_,ki_,te_,ru_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし種を持っていたら　　　→msg_oyaji_01_p02_contest:
+// ●もし種を持ってないで、今日種をもらってない　→msg_oyaji_01_p03_contest:
+// ●もし種を持ってないで、今日種をもらった　　　→msg_oyaji_01_p05_contest:
+
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p02_contest
+msg_oyaji_01_p02_contest:
+	.byte	mo_,si_,spc_,yo_,ka_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	i_,ttu_,si_,yyo_,ni_,spc_,ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,de_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ro_,u_,ya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●＠０　モモンのみ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p03_contest
+msg_oyaji_01_p03_contest:
+	.byte	a_,re_,hate_
+	.byte	CR_
+	.byte	ki_,no_,mi_,wo_,spc_,mo_,ttu_,te_,na_,i_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,ta_,na_,i_,na_,aa_,spc_,mo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	o_,zi_,sa_,n_,no_,spc_,a_,ma_,ttu_,ta_,spc_,ki_,no_,mi_,de_
+	.byte	CR_
+	.byte	yo_,ke_,re_,ba_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●モモンのみをおやじからもらいます。
+// ●一日フラグをたてます。
+// ●　→msg_oyaji_01_p04_contest:
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p04_contest
+msg_oyaji_01_p04_contest:
+	.byte	ko_,re_,de_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,de_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ro_,u_,ya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p05_contest
+msg_oyaji_01_p05_contest:
+	.byte	a_,re_,hate_
+	.byte	CR_
+	.byte	ki_,no_,mi_,wo_,spc_,mo_,ttu_,te_,na_,i_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,zi_,sa_,n_,no_,spc_,a_,ma_,ri_,ga_,spc_,a_,re_,ba_
+	.byte	CR_
+	.byte	a_,ge_,ru_,n_,spc_,da_,ke_,do_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,mo_,u_,spc_,a_,ma_,ttu_,te_
+	.byte	CR_
+	.byte	na_,i_,n_,da_,spc_,su_,ma_,n_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり

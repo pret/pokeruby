@@ -1,0 +1,253 @@
+a_normal.c
+	0x18000 ～ 0x187ff		800h byte	戦闘時
+	0x15000 ～ 0x157ff		800h byte	コンテスト時
+a_water.c
+	コメントアウトされているので使用していません
+b_pmlist.c
+	0x01609d ～ 0x01609d	1h byte
+	0x01606c ～ 0x01606f	4h byte
+b_return.c
+	0x1fffe ～ 0x1ffff		2h byte
+bag.c
+	0x1ffff ～ 0x1ffff		 1h byte	// グラフィック初期化処理用カウンタ
+	0x1e000 ～ 0x1e04f		50h byte	// 捕獲デモ用「道具ポケット」の道具退避場所
+	0x1f000 ～ 0x1f03f		40h byte	// 捕獲デモ用「ボールポケット」の道具退避場所
+	DecordCellSet
+	DecordPalSet
+bag_act.c
+	0x01000 ～ 0x0047f		480h byte	// DecordWRam ( 木の実の絵 )
+	0x00000 ～ 0x007ff		800h byte	// 木の実の絵 48x48 を 64x64 に展開
+	DecordPalSet
+blend_m.c
+	0x10000 ～ 0x18164		8164h byte // きのみブレンダー用ワーク
+
+box2.c
+	0x00000 ～ 0x05dff            5e00h byte
+
+bss.c
+	0x14000 ～ 0x15fff            2000h byte	//通信時のSendとRecv用のリングバッファ
+
+buc_chk.c
+bunpu.c
+	0x00000 ～ 0x015ff            1600h byte
+c_demo.c
+cable2.c
+client.c
+	0x1609d ～ 0x1609d	1h byte
+	0x1608b ～ 0x1608b	1h byte
+
+client_t.c
+	0x16400 ～ 0x1647f			0x0080 byte			// ポワワ用パレット
+
+clientai.c
+	server.cで定義されているものと重複します
+
+clientclm.c
+	server.cで定義されているものと重複し、現在はコメントアウトされているため、使用していません
+
+con_pic.c
+//計算用テンポラリィ
+	0x17e00 ～ 0x17fff		 200h byte
+	0x15e00 ～ 0x17dff		2000h byte
+//0x15dffより上位アドレスへ向けエリア取得(似顔絵関連共通)
+	0x15de0 ～ 0x15dff		20h byte
+	0x15ddf ～ 0x15ddf		 1h byte
+	0x15dde ～ 0x15dde		 1h byte
+con_tool.c
+conres.c
+conscr.c
+consio.c
+contest.c
+cubecase.c
+	0x1ffff ～ 0x1ffff		1h byte		// グラフィック初期化処理用カウンタ
+	0x1ffff ～ 0x1fffe		1h byte		// ポロックケースのアクター番号
+	DecordCellSet
+	DecordPalSet
+d_matsu.c
+d_ropeway.c
+d_taya.c
+	0x00000 ～ 0x00010              16 byte     // ポケモンくじの当たり番号設定
+	0x00000 ～ 0x00056              87 byte     // リボンを持たせるデバッグメニュー
+d_tomo.c
+//0x15dffより上位アドレスへ向けエリア取得(似顔絵関連共通) ※デバッグモードでのみ使用
+	0x15de0 ～ 0x15dff		20h byte
+	0x15ddf ～ 0x15ddf		 1h byte
+	0x15dde ～ 0x15dde		 1h byte
+
+decord.c
+	0x00000 ～ 0x07fff              0x8000 byte     // 圧縮データの展開用バッファ
+	0x08000 ～ 0x0ffff              0x8000 byte     // ポケモンデータの展開用バッファ
+
+dendou.c
+ec_eff.c
+	0xc000-0x10000	4000h byte // ﾌｨｰﾙﾄﾞｴﾝｶｳﾝﾄｴﾌｪｸﾄ
+ex_load.c
+	0x2000～0x3000、サンプルのデータを生成するのに使用している
+	（タイトル→デバッグメニューから呼ばれる）
+fd_shop.c
+	0x18000 ～ 0x187ff		800h byte	// BGスクリーン展開場所
+fe_iai.c
+	0x1fff0 ～ 0x1fff7		8h byte		// 葉っぱのアクター番号 ( x8 )
+
+fight.c
+	0x00000 ～ 0x00003		0x0004 byte		// 通信開始時の交換データの保存用ワーク
+	0x160cb					0x0001 byte		// 通信ID保存ワーク
+
+fight_d.c
+	0x00000 ～ 0x007ff		0x0800 byte		// メニュー画面の仮想VRAM領域
+	0x160a3					0x0001 byte		// デバッグ用トレーナーチェック
+
+fightmsg.c
+	0x16003					0x0001 byte		// メッセージ表示ClientNo保存ワーク
+	0x1605e					0x0001 byte		// メッセージ表示SelMonsNo保存ワーク
+	0x160a0					0x0001 byte		// fightmsg用技タイプ保存ワーク
+	0x160c1					0x0001 byte		// メッセージ表示用のオフセットワーク
+	0x160cb					0x0001 byte		// 通信ID保存ワーク
+
+flying.c
+	0x00000 ～ 0x00a6f               a70h  byte
+gauge.c
+gold.c
+	DecordCellSet
+	DecordPalSet
+husigi.c
+	0x00000 ～ 0x02000		2000h byte	//外部データ（主にカードＥ）受け取りバッファ
+hyousyou.c
+infomap.c
+	0x00000 ～ 0x008fb             90h byte
+k_demo.c
+	0x1f000 ～ 0x1f200				200h byte	//こうかんデモ用ワーク
+kaiwa.c
+	0x00000 ～ 0x00fff            1000h byte  // DecordCellSet
+	0x01000 ～ 0x09fff            9000h byte
+koukan.c
+	0x18000 ～ 0x188f0			  8f0h byte		//こうかんリスト画面用ワーク
+mailview.c
+	0x00000-0x00200		200h byte
+mazeru.c
+	0x08000 ～ 0x0a300				900h byte	//レコードコーナーデータ送信用バッファ
+	0x10000 ～ 0x14c00				2400h byte	//レコードコーナーデータ受信用バッファ
+multi_sio.c
+mystatus.c
+	0x0000-0x0074		74h byte // ﾄﾚｰﾅｰｶｰﾄﾞ表示
+namein.c
+	0x0000-0x0034		34h byte // 名前入力
+op_demo.c
+opening.c
+p_status.c
+	DecordCellSet
+	DecordPalSet
+
+poketool.c
+	0x16054		0x0001 byte		// 特性で入れ替えできないときの特性をもっているポケモンのClientNo
+	0x160c0		0x0001 byte		// 特性ナンバー保存ワーク
+	0x160fa		0x0001 byte		// ふしぎなあめでLVUPしたときのHPMAX増加分保存ワーク
+
+	0x160bc ～ 0x160bf		0x0004 byte		// ポケモン登場時のHP保存ワーク
+
+polock_d.c
+	0x1ffff ～ 0x1ffff		1h byte		// グラフィック初期化処理用カウンタ
+	0x1fffe ～ 0x1fffe		1h byte		// ポケモンのアクター番号
+	0x1fffd ～ 0x1fffd		1h byte		// ポロックケースのアクター番号
+	0x1fffc ～ 0x1fffc		1h byte		// ポロックのアクター番号
+	DecordCellSet
+	DecordPalSet
+popword.c
+	0x07800 ～ 0x078ff            100h byte      // 通信バッファのデータを取得
+	0x07900 ～ 0x079ff            100h byte      // 流行語データのソート用ワーク
+
+roulette.c/rlt_obj.c
+	0x00000-0xE00			E00 byte	//DecordCellSet用
+	0x17000-0x18180			1180h byte
+	0x18800-0x18AE0			2E0h byte
+	0x19000-0x19170			170h byte
+
+server.c
+	0x16000 ～ 0x16113		0x0114 byte	// いろいろなデータの保存領域です(server.defを参照）
+
+slot.c
+	0x0000-0x0084			84h byte // ｽﾛｯﾄｹﾞｰﾑ
+sodateya.c
+svld_ini.c
+svld_sys.c
+tag.c
+	0x1ffff ～ 0x1ffff		1h byte		// グラフィック初期化処理用カウンタ
+	DecordCellSet
+	DecordPalSet
+teach.c
+	0x17000 ～ 0x17120		120h byte	// 技教えマニア用ワーク
+tetsu.c
+tnavi.c
+	0x00000 ～ 0x137ff          13800h byte
+tokei.c
+townmap.c
+	// ﾜｰｸ構造体ﾎﾟｲﾝﾀのﾃﾞﾌｫﾙﾄ値として UserWorkの先頭を指定しているだけで、
+	// 実際に使う領域は、呼び出し側プロセスのワークに含まれます。
+tv_mix.c
+	0x7000 ～ 0x70ff		100h byte	// 通信時に全データをコピーしておく(CM) 4*16*4
+	0x7000 ～ 0x7e0f		e10h byte	// 通信時に全データをコピーしておく(TV) 36*25*4
+
+waza_ai.c
+	server.cで定義されているものと重複します
+
+weather.c
+	0x00000 ～ 0x0bfff             c000h byte       // 日照りｴﾌｪｸﾄ用のﾃｰﾌﾞﾙを作成
+z_naki.c
+zukan.c
+client.h
+common.h		 extern宣言のみ
+
+con_tool.h
+conres.h
+contest.h
+d_ropeway.h
+	0x00000-0x00800		800h byte	//DecordCellSet
+	0x17000-0x180AF		10AFh byte
+	0x19000-0x19A40		A40h byte
+
+decord.h
+	extern宣言のみ
+
+fightmsg.h
+	コメントに「UserWork」が含まれているだけです
+
+goods.h
+	0x1f000 ～ 0x1f009		ah byte		// 模様替え処理用データ	
+hyougen.h
+koukan.h
+my_pc.h
+	0x1fe00 ～ 0x1fe08		9h byte		// 道具預かり処理用データ
+p_status.h
+	0x18000 ～ 0x18084		85h byte	// 初期化・戻り先データ
+	0x1a000 ～ 0x1a01d		1eh byte	// アクター番号
+pokelist.h
+	0x1b000 ～ 0x1b029		2ah byte	// メイン処理用データ
+	0x1c000 ～ 0x1c015		16h byte	// アイテム使用処理用データ
+	0x01000 ～ 0x0100a		 bh byte	// 並び替え処理用データ
+
+server.h
+	0x17000 ～ 0x170ff		0x0100 byte	// お留守番対戦用ワーク（実際は0x100バイト要りません）
+	0x17100 ～ 0x1710f		0x0010 byte	// 特性発動用フラグワーク
+	0x17110 ～ 0x1713f		0x0030 byte	// アドレスプッシュ用ワーク（技シーケンス）
+	0x17140 ～ 0x1717f		0x0040 byte	// アドレスプッシュ用ワーク（サーバシーケンス）
+	0x17180 ～ 0x1718b		0x000c byte	// レベルアップ前のポケモンパラメータの保存用ワーク
+
+shinka.h
+	モーフィングデータ展開エリアでしたが、デモが変更になったので、
+	定義があるだけで、使用していません
+
+shinka2.h
+	cvsから、delされています
+
+server.def
+	コメントに「UserWork」が含まれているだけです
+
+waza_ai.def
+	0x16800 ～ 0x169ff		0x0200 byte	// 技AI用ワーク（実際は0x200バイト要りません）
+	0x16a00 ～ 0x16bff		0x0200 byte	// 技AI用ワーク２（実際は0x200バイト要りません）
+	0x16c00 ～ 0x16c20		0x0021 byte	// アドレスプッシュ用ワーク（技AIシーケンス）
+
+fldeff.c
+	0xc000-0x10000	4000h byte // DecordAdrs[0,1] ｶｯﾄｲﾝ等ﾌｨｰﾙﾄﾞでのﾎﾟｹﾓﾝOBJ展開
+
+

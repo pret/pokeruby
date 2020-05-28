@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 7
+#define TR_SWIMMERM_11	1
+#define TR_SWIMMERM_12	2
+#define TR_SWIMMERW_11	3
+#define TR_SWIMMERW_12	4
+#define TR_SAILOR_03	5
+#define TR_SENPAIKOUHAI_07_01	6
+#define TR_SENPAIKOUHAI_07_02	7
+
+//Exit ID = 1
+#define FIELD_R125_DOOR01	0

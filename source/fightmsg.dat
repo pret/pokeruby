@@ -1,0 +1,5686 @@
+
+//=======================================================================
+//	特殊な判定が必要ないメッセージ
+//=======================================================================
+
+const u8 TrainerLoseMsg[]={
+	I_MSG,TRAINER_LOSE,
+	EOM_
+};
+
+const u8 KeikentiGetMsg[]={
+	I_MSG,EV_STR_BUF0,
+	I_MSG,EV_STR_BUF1,spc_,ke_,i_,ke_,n_,ti_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 KeikentiGetNormalMsg[]={
+	ha_,CR_,EOM_
+};
+
+const u8 KeikentiGetOomeMsg[]={
+	ha_,spc_,o_,o_,me_,ni_,CR_,EOM_
+};
+
+const u8 LevelUpMsg[]={
+	I_MSG_,EV_STR_BUF0,ha_,CR_,
+	RE_,BE_,RU_,I_MSG_,EV_STR_BUF1,spc_,ni_,spc_,a_,ga_,ttu_,ta_,gyoe_,
+	CTRL_,C_SEWAIT_,NORMAL_WAIT_,EOM_
+};
+
+const u8 WazaOboeMsg[]={
+	I_MSG,EV_STR_BUF0,ha_,CR_,
+	I_MSG,EV_STR_BUF1,wo_,spc_,o_,bo_,e_,ta_,gyoe_,
+	CTRL_,C_SEWAIT_,NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 WazaOboeMsg2[]={
+	I_MSG,EV_STR_BUF0,ha_,spc_,a_,ta_,ra_,si_,ku_,CR_,
+	I_MSG,EV_STR_BUF1,wo_,spc_,o_,bo_,e_,ta_,i_,tenten_,tenten_,tenten_,gyoe_,
+	NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 WazaOboeMsg3[]={
+	si_,ka_,si_,spc_,I_MSG,EV_STR_BUF0,ha_,spc_,wa_,za_,wo_,spc_,n4_,tu_,CR_,
+	o_,bo_,e_,ru_,no_,de_,spc_,se_,i_,i_,ttu_,pa_,i_,da_,gyoe_,
+	NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 WazaWasureMsg[]={
+	I_MSG,EV_STR_BUF1,no_,spc_,ka_,wa_,ri_,ni_,CR_,
+	ho_,ka_,no_,spc_,wa_,za_,wo_,spc_,wa_,su_,re_,sa_,se_,ma_,su_,ka_,hate_,
+	EOM_
+};
+
+
+const u8 WazaWasureMsg3[]={
+	I_MSG,EV_STR_BUF0,ha_,spc_,I_MSG,EV_STR_BUF1,no_,CR_,
+	tu_,ka_,i_,ka_,ta_,wo_,spc_,ki_,re_,i_,ni_,spc_,wa_,su_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 WazaAkirameMsg[]={
+	CTRL_,C_WAIT_,0x20,
+	so_,re_,de_,ha_,tenten_,tenten_,spc_,I_MSG,EV_STR_BUF1,wo_,CR_,
+	o_,bo_,e_,ru_,no_,wo_,spc_,a_,ki_,ra_,me_,ma_,su_,ka_,hate_,
+	EOM_
+};
+
+const u8 WazaAkirameMsg2[]={
+	I_MSG,EV_STR_BUF0,ha_,spc_,I_MSG,EV_STR_BUF1,wo_,CR_,
+	o_,bo_,e_,zu_,ni_,spc_,o_,wa_,ttu_,ta_,gyoe_,
+	NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 NextPokeMsg[]={
+	tu_,gi_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_,
+	EOM_,
+};
+
+//=====================================================
+//		ノーヒット系のメッセージ郡
+//======================================================
+
+const u8 NoHitMsg[]={
+	si_,ka_,si_,spc_,I_MSG,ATTACK_MONS,no_,CR_,
+	ko_,u_,ge_,ki_,ha_,spc_,ha_,zu_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MamoruNoHitMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,ko_,u_,ge_,ki_,ka_,ra_,CR_,
+	mi_,wo_,spc_,ma_,mo_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HushiginamamoriNoHitMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	DA_,ME_,bou_,ZI_,wo_,spc_,u_,ke_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 HuyuuNoHitMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	zi_,me_,n_,TA_,I_,PU_,no_,spc_,wa_,za_,ga_,spc_,a_,ta_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 DoubleNoHitMsg[]={
+	I_MSG,DEFENCE_MONS,ni_,ha_,CR_,
+	a_,ta_,ra_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+//======================================================
+//		技効果系のメッセージ郡
+//======================================================
+
+const u8 KoukanaiMsg[]={
+	I_MSG,DEFENCE_MONS,ni_,ha_,CR_,
+	ko_,u_,ka_,ga_,spc_,na_,i_,spc_,mi_,ta_,i_,da_,tenten_,tenten_,
+	EOM_
+};
+
+const u8 KizetsuMsgA[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ta_,o_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 KizetsuMsgD[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,ta_,o_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 OkodukaiMsg[]={
+	I_MSG,MY_NAME,ha_,spc_,si_,yyo_,u_,ki_,n_,to_,si_,te_,CR_,
+	I_MSG,EV_STR_BUF0,yen_,spc_,te_,ni_,i_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 LoseMsg1[]={
+	I_MSG,MY_NAME,no_,spc_,te_,mo_,to_,ni_,ha_,CR_,
+	ta_,ta_,ka_,e_,ru_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 LoseMsg2[]={
+	I_MSG,MY_NAME,ha_,CR_,
+	me_,no_,ma_,e_,ga_,spc_,ma_,ttu_,ku_,ra_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	CTRL_,C_TRGWAIT_,EOM_
+};
+
+const u8 EscapeNGMsg3[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	ni_,ge_,ra_,re_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 EscapeNGMsg4[]={
+	ni_,ge_,ra_,re_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 EscapeNGMsg5[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ni_,ge_,ra_,re_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 RenzokuHitMsg[]={
+	I_MSG,EV_STR_BUF0,ka_,i_,spc_,a_,ta_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SleepBeginMsg[]={
+	I_MSG,TSUIKA_MONS,ha_,CR_,
+	ne_,mu_,ttu_,te_,si_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiSleepBeginMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,TSUIKA_MONS,ha_,spc_,ne_,mu_,ttu_,te_,si_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AlreadySleepMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,su_,de_,ni_,CR_,
+	ne_,mu_,ttu_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 AlreadySleepMsgA[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,su_,de_,ni_,CR_,
+	ne_,mu_,ttu_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 SippaiMsg[]={
+	si_,ka_,si_,spc_,I_MSG,DEFENCE_MONS,ni_,ha_,CR_,
+	ki_,ka_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DokuMsg1[]={
+	I_MSG,TSUIKA_MONS,ha_,spc_,do_,ku_,wo_,a_,bi_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiDokuMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,TSUIKA_MONS,ha_,spc_,do_,ku_,wo_,a_,bi_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DokuMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	do_,ku_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,u_,ke_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 DokuMsg3[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,su_,de_,ni_,CR_,
+	do_,ku_,wo_,spc_,a_,bi_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 DokuMsg4[]={
+	I_MSG,TSUIKA_MONS,ha_,CR_,
+	mo_,u_,do_,ku_,wo_,a_,bi_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SuckMsg[]={
+	I_MSG,DEFENCE_MONS,ka_,ra_,CR_,
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,su_,i_,to_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 YakedoMsg1[]={
+	I_MSG,TSUIKA_MONS,ha_,CR_,
+	ya_,ke_,do_,wo_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiYakedoMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,TSUIKA_MONS,ha_,spc_,ya_,ke_,do_,wo_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 YakedoMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ya_,ke_,do_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,u_,ke_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 AlreadyYakedoMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,su_,de_,ni_,CR_,
+	ya_,ke_,do_,wo_,spc_,o_,ttu_,te_,i_,ru_,
+	EOM_
+};
+
+
+const u8 KooriMsg1[]={
+	I_MSG,TSUIKA_MONS,ha_,CR_,
+	ko_,o_,ri_,du_,ke_,ni_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiKooriMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,TSUIKA_MONS,ha_,spc_,ko_,o_,ri_,du_,ke_,ni_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KooriMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ko_,o_,ttu_,te_,spc_,si_,ma_,ttu_,te_,spc_,u_,go_,ka_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 KooriMsg3[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	ko_,o_,ri_,ga_,spc_,to_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MeltMsg[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	ko_,o_,ri_,ga_,spc_,to_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MeltMsg2[]={
+	I_MSG,ATTACK_MONS,no_,spc_,ko_,o_,ri_,ga_,CR_,
+	I_MSG,WAZA_NAME,de_,spc_,to_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MahiMsg1[]={
+	I_MSG,TSUIKA_MONS,ha_,spc_,ma_,hi_,si_,te_,CR_,
+	wa_,za_,ga_,spc_,de_,ni_,ku_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiMahiMsg[]={
+	I_MSG,TSUIKA_MONS,ha_,CR_,
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,SCROLL_WAIT_,
+	ma_,hi_,si_,te_,spc_,wa_,za_,ga_,spc_,de_,ni_,ku_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MahiMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ka_,ra_,da_,ga_,spc_,si_,bi_,re_,te_,spc_,u_,go_,ke_,na_,i_,
+	EOM_
+};
+
+const u8 MahiMsg3[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,su_,de_,ni_,CR_,
+	ma_,hi_,si_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 NoMahiMsg[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	ma_,hi_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 YumekuiMsg[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	yu_,me_,wo_,spc_,ku_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KoreijouMsg1[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ha_,spc_,
+	mo_,u_,a_,ga_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 KoreijouMsg2[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ha_,spc_,
+	mo_,u_,sa_,ga_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 KoukagireMsg1[]={
+	mi_,ka_,ta_,no_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	ko_,u_,ka_,ga_,spc_,ki_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KoukagireMsg2[]={
+	a_,i_,te_,no_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	ko_,u_,ka_,ga_,spc_,ki_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KonranMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ko_,n_,ra_,n_,si_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+	
+const u8 KonranMsg3[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	ko_,n_,ra_,n_,ga_,spc_,to_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KonranMsg4[]={
+	I_MSG,TSUIKA_MONS,ha_,CR_,
+	ko_,n_,ra_,n_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KonranMsg5[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	su_,de_,ni_,spc_,ko_,n_,ra_,n_,spc_,si_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 MeromeroMsg1[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	ME_,RO_,ME_,RO_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MeromeroMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+//	I_MSG,DEFENCE_MONS,ni_,spc_,ME_,RO_,ME_,RO_,da_,gyoe_,
+	I_MSG,CLIENTNOWORK,ni_,spc_,ME_,RO_,ME_,RO_,da_,gyoe_,
+	EOM_
+};
+
+const u8 MeromeroMsg3[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ME_,RO_,ME_,RO_,de_,CR_,
+	wa_,za_,ga_,spc_,da_,se_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+//---------------------------------------------------------------
+//	技特有のメッセージ系
+//---------------------------------------------------------------
+
+const u8 FukitobasuMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	hu_,ki_,to_,ba_,sa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TextureMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,EV_STR_BUF0,TA_,I_,PU_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HirumuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,hi_,ru_,n_,de_,CR_,
+	u_,go_,ke_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 JikosaiseiMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,CR_,
+	ka_,i_,hu_,ku_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MantanMsg[]={
+	si_,ka_,si_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	ta_,i_,ri_,yyo_,ku_,ha_,spc_,ma_,n_,ta_,n_,da_,gyoe_,
+	EOM_
+};
+
+const u8 TokusyuGuardMsg[]={
+	I_MSG,SIDE_ATTACK_NAMEHA,spc_,I_MSG,WAZA_NAME,de_,CR_,
+	to_,ku_,ko_,u_,ni_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TokusyuGuardMsg2vs2[]={
+	I_MSG,SIDE_ATTACK_NAMEHA,spc_,I_MSG,WAZA_NAME,de_,CR_,
+	to_,ku_,ko_,u_,ni_,spc_,su_,ko_,si_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ButsuriGuardMsg[]={
+	I_MSG,SIDE_ATTACK_NAMEHA,spc_,I_MSG,WAZA_NAME,de_,CR_,
+	da_,ge_,ki_,ko_,u_,ge_,ki_,ni_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ButsuriGuardMsg2vs2[]={
+	I_MSG,SIDE_ATTACK_NAMEHA,spc_,I_MSG,WAZA_NAME,de_,CR_,
+	da_,ge_,ki_,ko_,u_,ge_,ki_,ni_,spc_,su_,ko_,si_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShinpiMsg[]={
+	I_MSG,SIDE_ATTACK_NAMEHA,CR_,
+	si_,n_,pi_,no_,BE_,bou_,RU_,ni_,spc_,tu_,tu_,ma_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShinpiGuardMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	si_,n_,pi_,no_,BE_,bou_,RU_,ni_,spc_,ma_,mo_,ra_,re_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 ShinpiEndMsg[]={
+	I_MSG,SIDE_ATTACK_NAMEWO,spc_,tu_,tu_,n_,de_,i_,ta_,CR_,
+	si_,n_,pi_,no_,spc_,BE_,bou_,RU_,ga_,spc_,na_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NemuruMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ne_,mu_,ri_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NemuruMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ke_,n_,ko_,u_,ni_,na_,ttu_,te_,spc_,ne_,mu_,ri_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KamaitachiMsg[]={
+	I_MSG,ATTACK_MONS,no_,spc_,ma_,wa_,ri_,de_,CR_,
+	ku_,u_,ki_,ga_,spc_,u_,zu_,wo_,spc_,ma_,ku_,gyoe_,
+	EOM_
+};
+
+const u8 SolarbeamMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	hi_,ka_,ri_,wo_,spc_,ki_,yyu_,u_,si_,yyu_,u_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 RocketzutukiMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ku_,bi_,wo_,spc_,hi_,ttu_,ko_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 GodbirdMsg[]={
+	I_MSG,ATTACK_MONS,wo_,CR_,
+	ha_,ge_,si_,i_,spc_,hi_,ka_,ri_,ga_,spc_,tu_,tu_,mu_,gyoe_,
+	EOM_
+};
+
+const u8 KyuukoukaMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	so_,ra_,ta_,ka_,ku_,spc_,to_,bi_,a_,ga_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AnawohoruMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	a_,na_,wo_,ho_,ttu_,te_,spc_,ti_,ti_,yyu_,u_,ni_,spc_,mo_,gu_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DaibinguMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	su_,i_,ti_,yyu_,u_,ni_,spc_,mi_,wo_,hi_,so_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 UkabuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	to_,bi_,ha_,ne_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShimeMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,ATTACK_MONS,ni_,CR_,
+	si_,me_,tu_,ke_,ra_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 UzuMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,u_,zu_,no_,spc_,na_,ka_,ni_,CR_,
+	to_,zi_,ko_,me_,ra_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SunazigokuMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,su_,na_,zi_,go_,ku_,ni_,CR_,
+	to_,ra_,wa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MakitsukiMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,ATTACK_MONS,ni_,CR_,
+	ma_,ki_,tu_,ka_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KaraMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,ATTACK_MONS,no_,CR_,
+	ka_,ra_,ni_,spc_,ha_,sa_,ma_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShimeKeizokuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	DA_,ME_,bou_,ZI_,wo_,spc_,u_,ke_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 ShimeEndMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,EV_STR_BUF0,ka_,ra_,spc_,ka_,i_,ho_,u_,sa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TobigeriMissMsg[]={
+	i_,ki_,o_,i_,spc_,a_,ma_,ttu_,te_,CR_,
+	I_MSG,ATTACK_MONS,ha_,spc_,zi_,me_,n_,ni_,spc_,bu_,tu_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShiroikiriMsg[]={
+	I_MSG,SIDE_ATTACK_NAMEHA,CR_,
+	si_,ro_,i_,ki_,ri_,ni_,spc_,tu_,tu_,ma_,re_,ta_,gyoe_,
+	EOM_
+};
+
+#if 0
+const u8 ShiroikiriMsgM[]={
+	mi_,ka_,ta_,ha_,CR_,
+	si_,ro_,i_,ki_,ri_,ni_,spc_,tu_,tu_,ma_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShiroikiriMsgE[]={
+	a_,i_,te_,ha_,CR_,
+	si_,ro_,i_,ki_,ri_,ni_,spc_,tu_,tu_,ma_,re_,ta_,gyoe_,
+	EOM_
+};
+#endif
+
+const u8 ShiroikiriGuardMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,si_,ro_,i_,ki_,ri_,ni_,CR_,
+	ma_,mo_,ra_,re_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 KiaidameMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ha_,ri_,ki_,ttu_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 HanekaeriMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ko_,u_,ge_,ki_,no_,CR_,
+	ha_,n_,do_,u_,wo_,spc_,u_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MamoruMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ma_,mo_,ri_,no_,spc_,ta_,i_,se_,i_,ni_,spc_,
+	ha_,i_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SunaarashiMsg2[]={
+	su_,na_,a_,ra_,si_,ga_,spc_,I_MSG,ATTACK_MONS,wo_,CR_,
+	o_,so_,u_,gyoe_,
+	EOM_
+};
+
+const u8 ArareMsg2[]={
+	a_,ra_,re_,ga_,spc_,I_MSG,ATTACK_MONS,wo_,CR_,
+	o_,so_,u_,gyoe_,
+	EOM_
+};
+
+const u8 WazaKoukaEndMsg[]={
+	I_MSG,SIDE_ATTACK_NAMENO,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	ko_,u_,ka_,ga_,spc_,ki_,re_,ta_,gyoe_,
+	EOM_
+};
+
+#if 0
+const u8 WazaKoukaEndMsg1[]={
+	mi_,ka_,ta_,no_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	ko_,u_,ka_,ga_,spc_,ki_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 WazaKoukaEndMsg2[]={
+	a_,i_,te_,no_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	ko_,u_,ka_,ga_,spc_,ki_,re_,ta_,gyoe_,
+	EOM_
+};
+#endif
+
+const u8 YadorigiMsg[]={
+	I_MSG,DEFENCE_MONS,ni_,CR_,
+	ta_,ne_,wo_,spc_,u_,e_,tu_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KawashitaMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	ko_,u_,ge_,ki_,wo_,spc_,ka_,wa_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 YadorigiMsg2[]={
+	ya_,do_,ri_,gi_,ga_,spc_,I_MSG,ATTACK_MONS,no_,CR_,
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,u_,ba_,u_,gyoe_,
+	EOM_
+};
+
+const u8 SleepMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	gu_,u_,gu_,u_,spc_,ne_,mu_,ttu_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 SleepMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,me_,wo_,spc_,sa_,ma_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SleepMsg3[]={
+	si_,ka_,si_,spc_,I_MSG,CLIENTNOWORK,ga_,CR_,
+	sa_,wa_,i_,de_,i_,te_,spc_,ne_,mu_,re_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SleepMsg4[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,sa_,wa_,ga_,si_,ku_,te_,CR_,
+	me_,ga_,spc_,sa_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SawaguMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,sa_,wa_,gi_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SawaguMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,sa_,wa_,i_,de_,i_,ru_,gyoe_,
+	EOM_
+};
+
+
+const u8 OtonashikuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,o_,to_,na_,si_,ku_,na_,ttu_,ta_,
+	EOM_
+};
+
+const u8 SawaguMsg3[]={
+	si_,ka_,si_,I_MSG,DEFENCE_MONS,ha_,CR_,
+	sa_,wa_,i_,de_,i_,te_,spc_,ne_,mu_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 TakuwaeruMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,tu_,ta_,ku_,wa_,e_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TakuwaeruMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,mo_,u_,spc_,ko_,re_,i_,zi_,yyo_,u_,CR_,
+	ta_,ku_,wa_,e_,ra_,re_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 SleepNGMsg1[]={
+	si_,ka_,si_,spc_,I_MSG,DEFENCE_MONS,ha_,CR_,
+	sa_,wa_,i_,de_,i_,te_,spc_,ne_,mu_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 SleepNGMsg2[]={
+	si_,ka_,si_,spc_,I_MSG,DEFENCE_MONS,ha_,CR_,
+	sa_,wa_,ga_,si_,ku_,te_,spc_,ne_,mu_,re_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 SleepNGMsg3[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	I_MSG,SPEABI_NAMED,de_,spc_,ne_,mu_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 GamanMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ga_,ma_,n_,si_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 GamanMsg2[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	ga_,ma_,n_,ga_,spc_,to_,ka_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AbareruEndMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	tu_,ka_,re_,ha_,te_,te_,spc_,ko_,n_,ra_,n_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NekonikobanMsg2[]={
+	I_MSG,MY_NAME,ha_,spc_,I_MSG,EV_STR_BUF0,yen_,CR_,
+	hi_,ro_,ttu_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 ZenzenMsg[]={
+	I_MSG,DEFENCE_MONS,ni_,ha_,CR_,
+	ze_,n_,ze_,n_,ki_,i_,te_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 HenshinMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,EV_STR_BUF0,ni_,spc_,he_,n_,si_,n_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MigawariMsg[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	bu_,n_,si_,n_,ga_,spc_,a_,ra_,wa_,re_,ta_,
+	EOM_
+};
+	
+const u8 MigawariAlreadyMsg[]={
+	si_,ka_,si_,spc_,I_MSG,ATTACK_MONS,no_,CR_,
+	mi_,ga_,wa_,ri_,ha_,spc_,su_,de_,ni_,spc_,de_,te_,i_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MigawariHitMsg[]={
+	I_MSG,DEFENCE_MONS,ni_,spc_,ka_,wa_,ttu_,te_,CR_,
+	bu_,n_,si_,n_,ga_,spc_,ko_,u_,ge_,ki_,wo_,spc_,u_,ke_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 MigawariEndMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,bu_,n_,si_,n_,ha_,CR_,
+	ki_,e_,te_,si_,ma_,ttu_,ta_,tenten_,tenten_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 HandouMsg[]={
+	ko_,u_,ge_,ki_,no_,spc_,ha_,n_,do_,u_,de_,CR_,
+	I_MSG,ATTACK_MONS,ha_,spc_,u_,go_,ke_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 IkariMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,i_,ka_,ri_,no_,CR_,
+	BO_,RU_,TE_,bou_,ZI_,ga_,spc_,a_,ga_,ttu_,te_,i_,ku_,gyoe_,
+	EOM_
+};
+
+const u8 KanashibariMsg[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,hu_,u_,zi_,ko_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KanashibariEndMsg[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	ka_,na_,si_,ba_,ri_,ga_,spc_,to_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 EncoreMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	A_,N_,KO_,bou_,RU_,wo_,spc_,u_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 EncoreEndMsg[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	A_,N_,KO_,bou_,RU_,zi_,yyo_,u_,ta_,i_,ga_,spc_,to_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 LockOnMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,ni_,CR_,
+	ne_,ra_,i_,wo_,spc_,sa_,da_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SketchMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,SU_,KE_,TTU_,TI_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MichidureMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,a_,i_,te_,wo_,CR_,
+	mi_,ti_,du_,re_,ni_,spc_,si_,yo_,u_,to_,si_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 MichidureMsg2[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,ATTACK_MONS,wo_,CR_,
+	mi_,ti_,du_,re_,ni_,spc_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 UramiMsg[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,I_MSG,EV_STR_BUF1,ke_,zu_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DorobouMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,ka_,ra_,CR_,
+	I_MSG,ITEM_NAME,wo_,spc_,u_,ba_,i_,to_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KuroimanazashiMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	mo_,u_,spc_,ni_,ge_,ra_,re_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 AkumuMsg1[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	a_,ku_,mu_,wo_,spc_,mi_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AkumuMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	a_,ku_,mu_,ni_,spc_,u_,na_,sa_,re_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 NoroiMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,CR_,
+	ke_,zu_,ttu_,te_,spc_,I_MSG,DEFENCE_MONS,ni_,spc_,no_,ro_,i_,wo_,spc_,ka_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NoroiMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	no_,ro_,wa_,re_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 MakibishiMsg1[]={
+	I_MSG,SIDE_DEFENCE_NAMENO,spc_,a_,si_,mo_,to_,ni_,CR_,
+	ma_,ki_,bi_,si_,ga_,spc_,ti_,ra_,ba_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MakibishiMsg2[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,ma_,ki_,bi_,si_,no_,CR_,
+	DA_,ME_,bou_,ZI_,wo_,spc_,u_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MiyaburuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	si_,yyo_,u_,ta_,i_,wo_,spc_,mi_,ya_,bu_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HorobinoutaMsg2[]={
+	I_MSG,ATTACK_MONS,no_,spc_,ho_,ro_,bi_,no_,CR_,
+	KA_,U_,N_,TO_,ga_,spc_,I_MSG,EV_STR_BUF0,ni_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KoraeruMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ko_,ra_,e_,ru_,CR_,
+	ta_,i_,se_,i_,ni_,spc_,ha_,i_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KoraetaMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,ko_,u_,ge_,ki_,wo_,CR_,
+	ko_,ra_,e_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MagnitudeMsg[]={
+	MA_,GU_,NI_,TI_,YYU_,bou_,DO_,I_MSG,EV_STR_BUF0,gyoe_,gyoe_,
+	EOM_
+};
+
+const u8 HaradaikoMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ke_,zu_,ttu_,te_,CR_,
+	PA_,WA_,bou_,ze_,n_,ka_,i_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 JikoanjiMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	ho_,zi_,yyo_,ko_,u_,ka_,wo_,spc_,KO_,PI_,bou_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShimeEscapeMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ka_,ra_,spc_,ka_,i_,ho_,u_,sa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 YadorigiEscapeMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ya_,do_,ri_,gi_,no_,TA_,NE_,wo_,spc_,hu_,ki_,to_,ba_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MakibishiEscapeMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ma_,ki_,bi_,si_,wo_,CR_,
+	hu_,ki_,to_,ba_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TeleportMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,se_,n_,to_,u_,ka_,ra_,CR_,
+	ri_,da_,tu_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MiraiyochiMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,mi_,ra_,i_,ni_,CR_,
+	ko_,u_,ge_,ki_,wo_,spc_,yo_,ti_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MiraiyochiMsg2[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	ko_,u_,ge_,ki_,wo_,spc_,u_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HametunonegaiMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,WAZA_NAME,wo_,CR_,
+	mi_,ra_,i_,ni_,spc_,ta_,ku_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HukurodatakiMsg[]={
+	I_MSG,EV_STR_BUF0,no_,spc_,ko_,u_,ge_,ki_,gyoe_,
+	EOM_
+};
+
+const u8 KonoyubitomareMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ti_,yyu_,u_,mo_,ku_,no_,spc_,ma_,to_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 JuudenMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	zi_,yyu_,u_,de_,n_,wo_,spc_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShizennochikaraMsg[]={
+	si_,ze_,n_,no_,ti_,ka_,ra_,ha_,CR_,
+	I_MSG,WAZA_NAME,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 RefleshMsg[]={
+	I_MSG,ATTACK_MONS,no_,spc_,zi_,yyo_,u_,ta_,i_,i_,zi_,yyo_,u_,ga_,CR_,
+	na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 IchamonMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,CR_,
+	i_,ti_,yya_,mo_,n_,wo_,spc_,tu_,ke_,ra_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KiaiPunchMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	si_,yyu_,u_,ti_,yyu_,u_,ri_,yyo_,ku_,wo_,spc_,ta_,ka_,me_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 ChouhatsuMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,CR_,
+	ti_,yyo_,u_,ha_,tu_,ni_,spc_,no_,ttu_,te_,si_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TedasukeMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,wo_,CR_,
+	te_,da_,su_,ke_,spc_,su_,ru_,spc_,ta_,i_,se_,i_,ni_,spc_,ha_,i_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrickMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,o_,ta_,ga_,i_,no_,CR_,
+	do_,u_,gu_,wo_,spc_,i_,re_,ka_,e_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrickMsg1[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,wo_,CR_,
+	te_,ni_,spc_,i_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrickMsg2[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,EV_STR_BUF1,wo_,CR_,
+	te_,ni_,spc_,i_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrickMsg3[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,wo_,CR_,
+	te_,ni_,spc_,i_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,EV_STR_BUF1,wo_,CR_,
+	te_,ni_,spc_,i_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NarikiriMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,SPEABI_NAMED,wo_,spc_,KO_,PI_,bou_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NegaigotoMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	ne_,ga_,i_,go_,to_,wo_,spc_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NegaigotoMsg2[]={
+	I_MSG,EV_STR_BUF0,no_,CR_,
+	ne_,ga_,i_,go_,to_,ga_,spc_,ka_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NewoharuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ne_,wo_,spc_,ha_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NewoharuMsg2[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ne_,ka_,ra_,CR_,
+	yo_,u_,bu_,n_,wo_,spc_,su_,i_,to_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NewoharareMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,ne_,wo_,spc_,ha_,ttu_,te_,CR_,
+	u_,go_,ka_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 AkubiMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	ne_,mu_,ke_,wo_,spc_,sa_,so_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HatakiotosuMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,ITEM_NAME,wo_,spc_,ha_,ta_,ki_,o_,to_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SkillSwapMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,o_,ta_,ga_,i_,no_,CR_,
+	to_,ku_,se_,i_,wo_,spc_,i_,re_,ka_,e_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HuuinMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,a_,i_,te_,no_,CR_,
+	wa_,za_,wo_,spc_,hu_,u_,i_,n_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 OnnenMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,a_,i_,te_,ni_,CR_,
+	o_,n_,ne_,n_,wo_,spc_,ka_,ke_,yo_,u_,to_,spc_,si_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 OnnenMsg2[]={
+	I_MSG,ATTACK_MONS,no_,spc_,I_MSG,EV_STR_BUF0,ha_,CR_,
+	o_,n_,ne_,n_,de_,spc_,wa_,za_,PO_,I_,N_,TO_,ga_,spc_,
+	n0_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MagicCortMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,WAZA_NAME,ni_,spc_,tu_,tu_,ma_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MagicCortMsg2[]={
+	I_MSG,ATTACK_MONS,no_,spc_,I_MSG,WAZA_NAME,ha_,CR_,
+	MA_,ZI_,TTU_,KU_,KO_,bou_,TO_,ni_,spc_,ha_,ne_,ka_,e_,sa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 YokodoriMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	a_,i_,te_,no_,spc_,de_,ka_,ta_,wo_,spc_,u_,ka_,ga_,ttu_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 YokodoriMsg2[]={
+//	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,ATTACK_MONS,no_,CR_,
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,CLIENTNOWORK,no_,CR_,
+	wa_,za_,wo_,spc_,yo_,ko_,do_,ri_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DoroasobiMsg[]={
+	de_,n_,ki_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,yo_,wa_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MizuasobiMsg[]={
+	ho_,no_,o_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,yo_,wa_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 RecycleMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,ITEM_NAME,wo_,CR_,
+	hi_,ro_,ttu_,te_,ki_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AromaMsg[]={
+	ko_,ko_,ti_,yo_,i_,spc_,ka_,o_,ri_,ga_,spc_,hi_,ro_,ga_,ttu_,ta_,gyoe_,EOM_
+};
+
+const u8 DouguAlertMsg[]={
+	ko_,ko_,de_,ha_,spc_,do_,u_,gu_,wo_,spc_,tu_,ka_,u_,ko_,to_,ha_,CR_,
+	de_,ki_,ma_,se_,n_,gyoe_,
+	CTRL_,C_WAIT_,0x40,
+	EOM_
+};
+
+const u8 SeedKonranMsg[]={
+	I_MSG,ITEM_NAME,ha_,spc_,I_MSG,CLIENTNOWORK,ni_,ha_,CR_,
+	I_MSG,EV_STR_BUF0,
+	EOM_
+};
+
+const u8 ItemCriticalUpMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+	ha_,ri_,ki_,ri_,spc_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KiaiPunchNoMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,si_,yyu_,u_,ti_,yyu_,u_,ri_,yyo_,ku_,ga_,CR_,
+	to_,gi_,re_,te_,spc_,wa_,za_,ga_,spc_,da_,se_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HikizuriMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,se_,n_,to_,u_,ni_,CR_,
+	hi_,ki_,zu_,ri_,da_,sa_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 KawarawariMsg[]={
+	ka_,be_,ga_,spc_,ko_,wa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 OkimiyageMigawariMsg[]={
+	si_,ka_,si_,spc_,ko_,u_,ka_,ga_,spc_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+//-----------------------------------------------------------
+//		アラートメッセージ
+//-----------------------------------------------------------
+
+const u8 WaruagakiMsg[]={
+	I_MSG,CLIENT_MONS,ha_,spc_,da_,su_,ko_,to_,no_,spc_,de_,ki_,ru_,CR_,
+	wa_,za_,ga_,spc_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 KanashibariMsg2[]={
+	I_MSG,CLIENT_MONS,ha_,spc_,ka_,na_,si_,ba_,ri_,de_,CR_,
+	I_MSG,WAZA_NAME,ga_,spc_,da_,se_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 IchamonMsg2[]={
+	I_MSG,CLIENT_MONS,ha_,spc_,i_,ti_,yya_,mo_,n_,wo_,spc_,tu_,ke_,ra_,re_,ta_,no_,de_,CR_,
+	tu_,du_,ke_,te_,spc_,o_,na_,zi_,spc_,wa_,za_,ga_,spc_,da_,se_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 ChouhatsuMsg2[]={
+	I_MSG,CLIENT_MONS,ha_,spc_,ti_,yyo_,u_,ha_,tu_,spc_,sa_,re_,te_,CR_,
+	I_MSG,WAZA_NAME,ga_,spc_,da_,se_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 HuuinMsg2[]={
+	I_MSG,CLIENT_MONS,ha_,spc_,hu_,u_,i_,n_,de_,CR_,
+	I_MSG,WAZA_NAME,ga_,spc_,da_,se_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+//-----------------------------------------------------------
+//		特殊能力系
+//-----------------------------------------------------------
+
+const u8 AmehurashiMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	a_,me_,ga_,spc_,hu_,ri_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KasokusoutiMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	su_,ba_,ya_,sa_,ga_,spc_,a_,ga_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 GanzyouMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ki_,ka_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ShimerikeMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,WAZA_NAME,ga_,spc_,de_,ki_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 HPKaifukuMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ka_,i_,hu_,ku_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NoHPKaifukuMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,WAZA_NAME,ha_,spc_,ko_,u_,ka_,ga_,spc_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HensyokuMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,EV_STR_BUF0,TA_,I_,PU_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 JuunanMsg[]={
+	I_MSG,TSUIKA_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ma_,hi_,si_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 DonkanMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ME_,RO_,ME_,RO_,ni_,spc_,na_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 MenekiMsg[]={
+	I_MSG,TSUIKA_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	do_,ku_,wo_,spc_,u_,ke_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 MypaceMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ko_,n_,ra_,n_,si_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 MoraibiMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ho_,no_,o_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KyuubanMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ha_,ri_,tu_,i_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 IkakuMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,DEFENCE_MONS,no_,spc_,ko_,u_,ge_,ki_,ri_,yyo_,ku_,ga_,spc_,
+	sa_,ga_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ClearBodyMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	no_,u_,ri_,yyo_,ku_,ga_,spc_,sa_,ga_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 SamehadaMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,ATTACK_MONS,ha_,spc_,ki_,zu_,tu_,i_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TraceMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,EV_STR_BUF0,no_,CR_,
+	I_MSG,EV_STR_BUF1,wo_,spc_,TO_,RE_,bou_,SU_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MizunobeeruMsg[]={
+	I_MSG,TSUIKA_MONS,ha_,spc_,I_MSG,SPEABI_NAMET,de_,CR_,
+	ya_,ke_,do_,si_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 BouonMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,WAZA_NAME,wo_,spc_,u_,ke_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 BouonMsg2[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,WAZA_NAME,wo_,spc_,u_,ke_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 AmeukezaraMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,I_MSG,SPEABI_NAMEA,de_,CR_,
+	su_,ko_,si_,spc_,ka_,i_,hu_,ku_,
+	EOM_
+};
+
+const u8 SunaokosiMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	su_,na_,a_,ra_,si_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HideriMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	hi_,za_,si_,ga_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NoCondDownMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,sa_,ga_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiMeromeroMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,ATTACK_MONS,ha_,spc_,ME_,RO_,ME_,RO_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+//特性で技がきかない
+const u8 TokuseiNoWazaMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,WAZA_NAME,ga_,spc_,ki_,ka_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 DappiMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,EV_STR_BUF0,zi_,yyo_,u_,ta_,i_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HedoroekiMsg[]={
+	HE_,DO_,RO_,e_,ki_,wo_,spc_,su_,i_,to_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TenkiyaMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,su_,ga_,ta_,ga_,CR_,
+	he_,n_,ka_,si_,ta_,gyoe_,EOM_
+};
+
+const u8 HiraishinMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	ko_,u_,ge_,ki_,wo_,spc_,u_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TokuseiNoReshuffleMsg[]={
+	I_MSG,EV_STR_BUF0,no_,spc_,I_MSG,SPEABI_NAME,de_,CR_,
+	I_MSG,EV_STR_BUF1,wo_,spc_,mo_,do_,su_,ko_,to_,ga_,spc_,de_,ki_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 ClearBodyNoIkakuMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,I_MSG,SPEABI_NAMED,de_,CR_,
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,EV_STR_BUF0,ha_,spc_,ki_,ka_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TokusyuUmakukimaranMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	u_,ma_,ku_,spc_,ki_,ma_,ra_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SeisinryokuMsg[]={
+	I_MSG,TSUIKA_MONS,ha_,spc_,I_MSG,SPEABI_NAMET,de_,CR_,
+	hi_,ru_,ma_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 TokuseiNoTokueiMsg[]={
+	I_MSG,ATTACK_MONS,no_,spc_,I_MSG,SPEABI_NAMEA,de_,CR_,
+	I_MSG,DEFENCE_MONS,no_,spc_,I_MSG,SPEABI_NAMED,ha_,spc_,ki_,ka_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 SpeabiNoJoutaiijouMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,SPEABI_NAMEC,de_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TokuseiNoTypeMsg[]={
+	I_MSG,CLIENTNOWORK,no_,spc_,I_MSG,SPEABI_NAMEC,ha_,CR_,
+	I_MSG,TSUIKA_MONS,ni_,spc_,ki_,ka_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+//-----------------------------------------------------------
+//		状態変化形
+//-----------------------------------------------------------
+
+const u8 GuntoMsg[]={
+	gu_,bou_,n_,to_,spc_,EOM_
+};
+
+const u8 AgattaMsg[]={
+	a_,ga_,ttu_,ta_,gyoe_,EOM_
+};
+
+const u8 GakuttoMsg[]={
+	ga_,ku_,ttu_,to_,spc_,EOM_
+};
+
+const u8 SagattaMsg[]={
+	sa_,ga_,ttu_,ta_,gyoe_,EOM_
+};
+
+const u8 CondUpMsgA[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,I_MSG,EV_STR_BUF1,
+	EOM_
+};
+
+const u8 CondUpMsgD[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,I_MSG,EV_STR_BUF1,
+	EOM_
+};
+
+const u8 ItemCondUpMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,I_MSG,EV_STR_BUF1,
+	EOM_
+};
+
+const u8 CondDownMsgA[]={
+	I_MSG,ATTACK_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,I_MSG,EV_STR_BUF1,
+	EOM_
+};
+
+const u8 CondDownMsgD[]={
+	I_MSG,DEFENCE_MONS,no_,CR_,
+	I_MSG,EV_STR_BUF0,ga_,spc_,I_MSG,EV_STR_BUF1,
+	EOM_
+};
+
+const u8 NouryokuNoUpMsg[]={
+	I_MSG,ATTACK_MONS,no_,spc_,no_,u_,ri_,yyo_,ku_,ha_,CR_,
+	mo_,u_,spc_,a_,ga_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 NouryokuNoDownMsg[]={
+	I_MSG,DEFENCE_MONS,no_,spc_,no_,u_,ri_,yyo_,ku_,ha_,CR_,
+	mo_,u_,spc_,sa_,ga_,ra_,na_,i_,gyoe_,
+	EOM_
+};
+
+//-----------------------------------------------------------
+//		そのまま表示できるメッセージ(I_MSGを使用していない)
+//-----------------------------------------------------------
+//soga
+
+const u8 CriticalMsg[]={
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,
+	a_,ta_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 IchigekiMsg[]={
+	i_,ti_,ge_,ki_,spc_,hi_,ttu_,sa_,tu_,gyoe_,
+	EOM_
+};
+
+const u8 WazaWasureMsg2[]={
+	CTRL_,C_WAIT_,0x20,
+	n1_,spc_,CTRL_,C_WAIT_,0xf,
+	n2_,no_,spc_,CTRL_,C_WAIT_,0xf,
+	tenten_,CTRL_,C_WAIT_,0xf,
+	tenten_,CTRL_,C_WAIT_,0xf,
+	tenten_,spc_,CTRL_,C_WAIT_,0xf,
+	CTRL_,C_SEPLAY_,(SE_KON&0xff),((SE_KON&0xff00)>>8),PO_,KA_,N_,gyoe_,
+	NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 WazaWasureMsg4[]={
+	so_,si_,te_,tenten_,tenten_,gyoe_,
+	NORMAL_WAIT_,
+	EOM_
+};
+
+const u8 NoWazaWasureMsg[]={
+	so_,re_,ha_,spc_,ta_,i_,se_,tu_,na_,spc_,wa_,za_,de_,su_,CR_,
+	wa_,su_,re_,sa_,se_,ru_,ko_,to_,ha_,spc_,de_,ki_,ma_,se_,n_,gyoe_,
+	NORMAL_WAIT_,EOM_,
+};
+
+const u8 ImahitotsuMsg[]={
+	ko_,u_,ka_,ha_,spc_,i_,ma_,hi_,to_,tu_,no_,spc_,yo_,u_,da_,
+	EOM_
+};
+
+const u8 BatsugunMsg[]={
+	ko_,u_,ka_,ha_,spc_,ba_,tu_,gu_,n_,da_,gyoe_,
+	EOM_
+};
+
+const u8 EscapeMsg[]={
+	CTRL_,C_SEPLAY_,(SE_NIGERU&0xff),((SE_NIGERU&0xff00)>>8),
+	u_,ma_,ku_,spc_,ni_,ge_,ki_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 ItemEscapeMsg[]={
+	CTRL_,C_SEPLAY_,(SE_NIGERU&0xff),((SE_NIGERU&0xff00)>>8),
+	I_MSG,ATTACK_MONS,ha_,spc_,mo_,ttu_,te_,i_,ta_,CR_,
+	I_MSG,ITEM_NAME,wo_,spc_,tu_,ka_,ttu_,te_,spc_,ni_,ge_,ta_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 SpeabiEscapeMsg[]={
+	CTRL_,C_SEPLAY_,(SE_NIGERU&0xff),((SE_NIGERU&0xff00)>>8),
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,SPEABI_NAMEA,wo_,spc_,tu_,ka_,ttu_,te_,spc_,ni_,ge_,ta_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 EnemyEscapeMsg[]={
+	CTRL_,C_SEPLAY_,(SE_NIGERU&0xff),((SE_NIGERU&0xff00)>>8),
+	ya_,se_,i_,no_,spc_,I_MSG,EV_STR_BUF0,ha_,spc_,ni_,ge_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinWinMsg[]={
+	I_MSG,TRAINER_ENENAME,to_,no_,CR_,
+	si_,yyo_,u_,bu_,ni_,spc_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinWinMsg2[]={
+	I_MSG,TRAINER_ENENAME,to_,spc_,I_MSG,TRAINER_ENENAME2,to_,no_,CR_,
+	si_,yyo_,u_,bu_,ni_,spc_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinLoseMsg[]={
+	I_MSG,TRAINER_ENENAME,to_,no_,CR_,
+	si_,yyo_,u_,bu_,ni_,spc_,ma_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinLoseMsg2[]={
+	I_MSG,TRAINER_ENENAME,to_,spc_,I_MSG,TRAINER_ENENAME2,to_,no_,CR_,
+	si_,yyo_,u_,bu_,ni_,spc_,ma_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinDrawMsg[]={
+	I_MSG,TRAINER_ENENAME,to_,no_,CR_,
+	si_,yyo_,u_,bu_,ni_,spc_,hi_,ki_,wa_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinDrawMsg2[]={
+	I_MSG,TRAINER_ENENAME,to_,spc_,I_MSG,TRAINER_ENENAME2,to_,no_,CR_,
+	si_,yyo_,u_,bu_,ni_,spc_,hi_,ki_,wa_,ke_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinEscapeMsg[]={
+	CTRL_,C_SEPLAY_,(SE_NIGERU&0xff),((SE_NIGERU&0xff00)>>8),
+	I_MSG,TRAINER_ENENAME,ha_,spc_,ni_,ge_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinEscapeMsg2[]={
+	CTRL_,C_SEPLAY_,(SE_NIGERU&0xff),((SE_NIGERU&0xff00)>>8),
+	I_MSG,TRAINER_ENENAME,to_,spc_,I_MSG,TRAINER_ENENAME2,ha_,CR_,
+	ni_,ge_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrainerEscapeMsg[]={
+	DA_,ME_,da_,gyoe_,spc_,si_,yyo_,u_,bu_,no_,spc_,sa_,i_,ti_,yyu_,u_,ni_,CR_,
+	a_,i_,te_,ni_,spc_,se_,na_,ka_,ha_,spc_,mi_,se_,ra_,re_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 EscapeNGMsg1[]={
+	ni_,ge_,ru_,ko_,to_,ga_,spc_,de_,ki_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 EscapeNGMsg2[]={
+	O_,DA_,MA_,KI_,kako2_,mi_,spc_,mi_,su_,te_,na_,i_,de_,ku_,re_,bou_,gyoe_,kakot2_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 NanimookoranMsg[]={
+	si_,ka_,si_,spc_,na_,ni_,mo_,o_,ko_,ra_,na_,i_,
+	EOM_
+};
+
+const u8 UmakukimaranMsg[]={
+	si_,ka_,si_,spc_,
+	u_,ma_,ku_,spc_,ki_,ma_,ra_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KonranMsg2[]={
+	wa_,ke_,mo_,spc_,wa_,ka_,ra_,zu_,CR_,
+	zi_,bu_,n_,wo_,spc_,ko_,u_,ge_,ki_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 OumuNGMsg[]={
+	si_,ka_,si_,spc_,O_,U_,MU_,ga_,e_,si_,ha_,CR_,
+	si_,ttu_,pa_,i_,ni_,o_,wa_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AmeMsg[]={
+	a_,me_,ga_,spc_,hu_,ri_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 OoAmeMsg[]={
+	o_,o_,a_,me_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AmagoiKeep1Msg[]={
+	a_,me_,ga_,spc_,hu_,ri_,tu_,du_,i_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 AmagoiKeep2Msg[]={
+	o_,o_,a_,me_,ga_,spc_,hu_,ri_,tu_,du_,i_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 AmagoiEndMsg[]={
+	a_,me_,ga_,spc_,hu_,ri_,ya_,n_,da_,gyoe_,
+	EOM_
+};
+
+const u8 SunaarashiMsg[]={
+	su_,na_,a_,ra_,si_,ga_,spc_,hu_,ki_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SunaarashiKeepMsg[]={
+	su_,na_,a_,ra_,si_,ga_,spc_,hu_,ki_,a_,re_,ru_,
+	EOM_
+};
+
+const u8 SunaarashiEndMsg[]={
+	su_,na_,a_,ra_,si_,ga_,spc_,o_,sa_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NihonbareMsg[]={
+	hi_,za_,si_,ga_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NihonbareKeepMsg[]={
+	hi_,za_,si_,ga_,spc_,tu_,yo_,i_,
+	EOM_
+};
+
+const u8 NihonbareEndMsg[]={
+	hi_,za_,si_,ga_,spc_,yo_,wa_,ku_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ArareMsg[]={
+	a_,ra_,re_,ga_,spc_,hu_,ri_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ArareKeepMsg[]={
+	a_,ra_,re_,ga_,spc_,hu_,ri_,tu_,du_,i_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 ArareEndMsg[]={
+	a_,ra_,re_,ga_,spc_,hu_,ri_,ya_,n_,da_,gyoe_,
+	EOM_
+};
+
+const u8 HakidasuMsg[]={
+	si_,ka_,si_,spc_,na_,ni_,mo_,spc_,ha_,ki_,da_,se_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NomikomuMsg[]={
+	si_,ka_,si_,spc_,na_,ni_,mo_,spc_,no_,mi_,ko_,me_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NeppuuMsg[]={
+	ka_,ze_,ha_,spc_,ne_,ttu_,pu_,u_,ni_,spc_,na_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KuroikiriMsg[]={
+	su_,be_,te_,no_,spc_,SU_,TE_,bou_,TA_,SU_,ga_,CR_,
+	mo_,to_,ni_,spc_,mo_,do_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NekonikobanMsg1[]={
+	ko_,ba_,n_,ga_,spc_,a_,ta_,ri_,ni_,spc_,
+	ti_,ra_,ba_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 MigawariNGMsg[]={
+	si_,ka_,si_,spc_,bu_,n_,si_,n_,wo_,spc_,da_,su_,ni_,ha_,CR_,
+	ta_,i_,ri_,yyo_,ku_,ga_,spc_,ta_,ri_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItamiwakeMsg[]={
+	o_,ta_,ga_,i_,no_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,CR_,
+	wa_,ka_,ti_,a_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 IyashinosuzuMsg[]={
+	su_,zu_,no_,ne_,ga_,spc_,hi_,bi_,ki_,wa_,ta_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 HorobinoutaMsg1[]={
+	o_,ta_,ga_,i_,no_,PO_,KE_,MO_,N_,ha_,CR_,
+	n3_,TA_,bou_,N_,go_,ni_,spc_,ho_,ro_,bi_,te_,si_,ma_,u_,gyoe_,
+	EOM_
+};
+
+const u8 PPNoneMsg[]={
+	wa_,za_,no_,spc_,no_,ko_,ri_,PO_,I_,N_,TO_,ga_,spc_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 PPNoneMsg2[]={
+	si_,ka_,si_,CR_,
+	wa_,za_,no_,spc_,no_,ko_,ri_,PO_,I_,N_,TO_,ga_,spc_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+//=======================================================================
+//	バッジ判定メッセージ
+//=======================================================================
+
+const	u8	OrderIgnoreSleepMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,ne_,mu_,ttu_,ta_,ma_,ma_,CR_,
+	me_,i_,re_,i_,wo_,spc_,mu_,si_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const	u8	OrderIgnoreMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,me_,i_,re_,i_,wo_,spc_,mu_,si_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const	u8	HiruneMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,hi_,ru_,ne_,wo_,spc_,ha_,zi_,me_,ta_,gyoe_,
+	EOM_
+};
+const	u8	NamaketeiruMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,na_,ma_,ke_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+const	u8	IukotowokikanaiMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,i_,u_,ko_,to_,wo_,spc_,ki_,ka_,na_,i_,gyoe_,
+	EOM_
+};
+const	u8	SoppowomuitaMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,so_,ttu_,po_,wo_,spc_,mu_,i_,ta_,gyoe_,
+	EOM_
+};
+const	u8	SiranpuriMsg[]={
+	I_MSG,ATTACK_MONS,ha_,spc_,si_,ra_,n_,pu_,ri_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const	u8	TorikaeruMsg[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ha_,CR_,
+	I_MSG,EV_STR_BUF1,wo_,spc_,ku_,ri_,da_,so_,u_,to_,spc_,si_,te_,i_,ru_,
+	NORMAL_WAIT_,
+	I_MSG,MY_NAME,mo_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+	i_,re_,ka_,e_,ma_,su_,ka_,hate_,
+	EOM_
+};
+
+const u8 MonomaneMsg[]={
+	I_MSG,ATTACK_MONS,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,o_,bo_,e_,ta_,gyoe_,
+	EOM_
+};
+
+const	u8	TrainerWinMsg[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,CR_,
+	to_,no_,spc_,si_,yyo_,u_,bu_,ni_,spc_,ka_,ttu_,ta_,gyoe_,NORMAL_WAIT_,
+	EOM_
+};
+
+//-----------------------------------------------------------
+//		サファリゾーンで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 NearMsg[]={
+	I_MSG,MY_NAME,ha_,CR_,
+	I_MSG,ENEMY_MONS,ni_,spc_,ti_,ka_,du_,i_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 NoNearMsg[]={
+	I_MSG,MY_NAME,ha_,CR_,
+	ko_,re_,i_,zi_,yyo_,u_,spc_,ti_,ka_,du_,ke_,na_,i_,gyoe_,
+	EOM_
+};
+
+const u8 YousuukagauMsg[]={
+	I_MSG,ENEMY_MONS,ha_,CR_,
+	ko_,ti_,ra_,no_,spc_,yo_,u_,su_,wo_,spc_,u_,ka_,ga_,ttu_,te_,i_,ru_,gyoe_,
+	EOM_
+};
+
+const u8 CubeEatMsg1[]={
+	I_MSG,ENEMY_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,ni_,CR_,
+	ki_,yyo_,u_,mi_,wo_,spc_,si_,me_,si_,te_,i_,ru_,spc_,yo_,u_,da_,gyoe_,
+	EOM_
+};
+
+const u8 CubeEatMsg2[]={
+	I_MSG,ENEMY_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,ni_,CR_,
+	mu_,ti_,yyu_,u_,ni_,spc_,na_,ttu_,te_,i_,ru_,spc_,yo_,u_,da_,gyoe_,
+	EOM_
+};
+
+
+const u8 CubeEatMsg3[]={
+	I_MSG,ENEMY_MONS,ha_,spc_,I_MSG,EV_STR_BUF0,ni_,CR_,
+	mi_,mu_,ki_,mo_,spc_,si_,na_,i_,spc_,yo_,u_,da_,gyoe_,
+	EOM_
+};
+
+const u8 CubeThrowMsg[]={
+	I_MSG,MY_NAME,ha_,CR_,
+	I_MSG,ENEMY_MONS,ni_,spc_,PO_,RO_,TTU_,KU_,wo_,spc_,na_,ge_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 SafariZoneFinishMsg[]={
+	CTRL_,C_SEPLAY_,(SE_PINPON&0xff),((SE_PINPON&0xff00)>>8),
+	A_,NA_,U_,N_,SU_,kako2_,PI_,N_,PO_,bou_,N_,gyoe_,spc_,SA_,HU_,AA_,RI_,BO_,bou_,RU_,ga_,CR_,
+	na_,ku_,na_,ttu_,ta_,no_,de_,spc_,si_,yyu_,u_,ri_,yyo_,u_,de_,bou_,su_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+//=======================================================================
+//	特殊な判定が必要なメッセージ
+//=======================================================================
+
+const u8 EncountMsg[]={
+	a_,gyoe_,spc_,ya_,se_,i_,no_,CR_,
+	I_MSG,ENEMY_MONS,ga_,spc_,to_,bi_,da_,si_,te_,ki_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 SpecialEncountMsg[]={
+	a_,gyoe_,spc_,ya_,se_,i_,no_,CR_,
+	I_MSG,ENEMY_MONS,ga_,spc_,a_,ra_,wa_,re_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 DemoEncountMsg[]={
+	a_,gyoe_,spc_,ya_,se_,i_,no_,CR_,
+	I_MSG,ENEMY_MONS,ga_,spc_,to_,bi_,da_,si_,te_,ki_,ta_,gyoe_,
+	CTRL_,C_WAIT_,0x7f,EOM_
+};
+
+const u8 EncountMsg2[]={
+	a_,gyoe_,spc_,ya_,se_,i_,no_,CR_,
+	I_MSG,ENEMY_MONS,to_,spc_,I_MSG,ENEMY_MONS2,ga_,spc_,
+	to_,bi_,da_,si_,te_,ki_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 TrainerMsg[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ga_,CR_,
+	si_,yyo_,u_,bu_,wo_,spc_,si_,ka_,ke_,te_,ki_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 TuushinTrainerMsg[]={
+	I_MSG,TRAINER_ENENAME,ga_,CR_,
+	si_,yyo_,u_,bu_,wo_,spc_,si_,ka_,ke_,te_,ki_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinTrainerMsg2[]={
+	I_MSG,TRAINER_ENENAME,to_,spc_,I_MSG,TRAINER_ENENAME2,ga_,CR_,
+	si_,yyo_,u_,bu_,wo_,spc_,si_,ka_,ke_,te_,ki_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KuridashiMsg[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ha_,CR_,
+	I_MSG,ENEMY_MONS,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KuridashiMsg2[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ha_,CR_,
+	I_MSG,ENEMY_MONS,to_,spc_,I_MSG,ENEMY_MONS2,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 KuridashiMsg3[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinKuridashiMsg[]={
+	I_MSG,TRAINER_ENENAME,ha_,CR_,
+	I_MSG,ENEMY_MONS,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinKuridashiMsg2[]={
+	I_MSG,TRAINER_ENENAME,ha_,CR_,
+	I_MSG,ENEMY_MONS,to_,spc_,I_MSG,ENEMY_MONS2,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinKuridashiMsg3[]={
+	I_MSG,TRAINER_ENENAME,ha_,spc_,I_MSG,ENEMY_TMONS,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,CR_,
+	I_MSG,TRAINER_ENENAME2,ha_,spc_,I_MSG,ENEMY_TMONS2,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinKuridashiMsg4_1[]={
+	I_MSG,TRAINER_ENENAME,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TuushinKuridashiMsg4_2[]={
+	I_MSG,TRAINER_CLIENTNO,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 AppearMsg[]={
+	yu_,ke_,ttu_,gyoe_,spc_,I_MSG,MY_MONS,gyoe_,EOM_
+};
+
+const u8 AppearMsg2[]={
+	yu_,ke_,ttu_,gyoe_,spc_,I_MSG,MY_MONS,to_,spc_,I_MSG,MY_MONS2,gyoe_,EOM_
+};
+
+
+const u8 AppearMsg_0[]={
+	yu_,ke_,ttu_,gyoe_,spc_,I_MSG,EV_STR_BUF0,gyoe_,EOM_
+};
+
+const u8 AppearMsg_1[]={
+	i_,ttu_,te_,ko_,i_,gyoe_,spc_,I_MSG,EV_STR_BUF0,gyoe_,EOM_
+};
+
+const u8 AppearMsg_2[]={
+	ga_,n_,ba_,re_,gyoe_,spc_,I_MSG,EV_STR_BUF0,gyoe_,EOM_
+};
+
+const u8 AppearMsg_3[]={
+	a_,i_,te_,ga_,spc_,yo_,wa_,ttu_,te_,i_,ru_,gyoe_,CR_,
+	TI_,YYA_,N_,SU_,da_,gyoe_,spc_,I_MSG,EV_STR_BUF0,gyoe_,EOM_
+};
+
+const u8 TuushinAppearMsg[]={
+	I_MSG,TRAINER_MYNAME2,ha_,spc_,I_MSG,MY_TMONS2,wo_,spc_,ku_,ri_,da_,si_,ta_,gyoe_,CR_,
+	yu_,ke_,ttu_,gyoe_,spc_,I_MSG,MY_TMONS,gyoe_,EOM_
+};
+
+const u8 IrekaeMsg_0[]={
+	I_MSG,EV_STR_BUF0,spc_,mo_,u_,i_,i_,gyoe_,CR_,
+	mo_,do_,re_,gyoe_,EOM_
+};
+
+const u8 IrekaeMsg_1[]={
+	I_MSG,EV_STR_BUF0,CR_,
+	mo_,do_,re_,gyoe_,EOM_
+};
+
+const u8 IrekaeMsg_2[]={
+	I_MSG,EV_STR_BUF0,spc_,i_,i_,zo_,gyoe_,CR_,
+	mo_,do_,re_,gyoe_,EOM_
+};
+
+const u8 IrekaeMsg_3[]={
+	I_MSG,EV_STR_BUF0,spc_,yo_,ku_,ya_,ttu_,ta_,gyoe_,CR_,
+	mo_,do_,re_,gyoe_,EOM_
+};
+
+const u8 IrekaeMsg2[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,hi_,ttu_,ko_,me_,ta_,gyoe_,EOM_
+};
+
+const u8 TuushinIrekaeMsg_1[]={
+	I_MSG,TRAINER_ENENAME,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,hi_,ttu_,ko_,me_,ta_,gyoe_,EOM_
+};
+
+const u8 TuushinIrekaeMsg_2[]={
+	I_MSG,TRAINER_CLIENTNO,ha_,CR_,
+	I_MSG,EV_STR_BUF0,wo_,spc_,hi_,ttu_,ko_,me_,ta_,gyoe_,EOM_
+};
+
+const u8 EnemyMsg[]={
+	ya_,se_,i_,no_,spc_,EOM_,
+};
+
+const u8 AiteMsg[]={
+	a_,i_,te_,no_,spc_,EOM_,
+};
+
+const u8 AitenoMsg[]={
+	a_,i_,te_,no_,EOM_,
+};
+
+const u8 MikatanoMsg[]={
+	mi_,ka_,ta_,no_,EOM_,
+};
+
+const u8 AitehaMsg[]={
+	a_,i_,te_,ha_,EOM_,
+};
+
+const u8 MikatahaMsg[]={
+	mi_,ka_,ta_,ha_,EOM_,
+};
+
+const u8 AitewoMsg[]={
+	a_,i_,te_,wo_,EOM_,
+};
+
+const u8 MikatawoMsg[]={
+	mi_,ka_,ta_,wo_,EOM_,
+};
+
+const u8 WazaMsg[]={
+	I_MSG,ATTACK_MONS,I_MSG,EV_STR_BUF0,CR_,
+	I_MSG,EV_STR_BUF1,EOM_
+};
+
+const u8 WazaMsg20[]={
+	wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_,EOM_
+};
+
+const u8 WazaMsg21[]={
+	si_,ta_,gyoe_,EOM_
+};
+
+const u8 WazaMsg22[]={
+	wo_,spc_,si_,ta_,gyoe_,EOM_
+};
+
+const u8 WazaMsg23[]={
+	spc_,ko_,u_,ge_,ki_,gyoe_,EOM_
+};
+
+const u8 WazaMsg24[]={
+		gyoe_,EOM_
+};
+
+const u8 TairyokuMsg[]={
+	ta_,i_,ri_,yyo_,ku_,EOM_
+};
+
+const u8 KougekiryokuMsg[]={
+	ko_,u_,ge_,ki_,ri_,yyo_,ku_,EOM_
+};
+
+const u8 BougyoryokuMsg[]={
+	bo_,u_,gi_,yyo_,ri_,yyo_,ku_,EOM_
+};
+
+const u8 SubayasaMsg[]={
+	su_,ba_,ya_,sa_,EOM_
+};
+
+const u8 TokusyukougekiryokuMsg[]={
+	to_,ku_,ko_,u_,EOM_
+};
+
+const u8 TokusyubougyoryokuMsg[]={
+	to_,ku_,bo_,u_,EOM_
+};
+
+const u8 MeichuritsuMsg[]={
+	me_,i_,ti_,yyu_,u_,ri_,tu_,EOM_
+};
+
+const u8 KaihiritsuMsg[]={
+	ka_,i_,hi_,ri_,tu_,EOM_
+};
+
+const u8 * const AbirityMsgTbl[]={
+		TairyokuMsg,
+		KougekiryokuMsg,
+		BougyoryokuMsg,
+		SubayasaMsg,
+		TokusyukougekiryokuMsg,
+		TokusyubougyoryokuMsg,
+		MeichuritsuMsg,
+		KaihiritsuMsg,
+};
+
+const u8 KarasugiMsg[]={
+	ka_,ra_,su_,gi_,ta_,gyoe_,EOM_
+};
+
+const u8 SibusugiMsg[]={
+	si_,bu_,su_,gi_,ta_,gyoe_,EOM_
+};
+
+const u8 AmasugiMsg[]={
+	a_,ma_,su_,gi_,ta_,gyoe_,EOM_
+};
+
+const u8 NigasugiMsg[]={
+	ni_,ga_,su_,gi_,ta_,gyoe_,EOM_
+};
+
+const u8 SuppasugiMsg[]={
+	su_,ttu_,pa_,su_,gi_,ta_,gyoe_,EOM_
+};
+
+const u8 * const TasteMsgTbl[]={
+	KarasugiMsg,
+	SibusugiMsg,
+	AmasugiMsg,
+	NigasugiMsg,
+	SuppasugiMsg,
+};
+
+//=========================================================================
+//		アイテム使用メッセージ
+//=========================================================================
+
+const u8 ItemUseMsg[]={
+	I_MSG,MY_NAME,ha_,spc_,CR_,
+	I_MSG,ITEM_NAME,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DemoItemUseMsg[]={
+	MI_,TU_,RU_,ha_,spc_,CR_,
+	I_MSG,ITEM_NAME,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrainerItemUseMsg[]={
+	I_MSG,TRAINER_TYPE,no_,spc_,I_MSG,TRAINER_NAME,ha_,CR_,
+	I_MSG,ITEM_NAME,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrainerMonsMsg1[]={
+	TO_,RE_,bou_,NA_,bou_,ni_,spc_,BO_,bou_,RU_,wo_,spc_,
+	ha_,zi_,ka_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 TrainerMonsMsg2[]={
+	hi_,to_,no_,spc_,mo_,no_,wo_,spc_,to_,ttu_,ta_,ra_,spc_,
+	do_,ro_,bo_,u_,gyoe_,
+	EOM_
+};
+
+const u8 GetFailMsg1[]={
+	yo_,ke_,ra_,re_,ta_,gyoe_,CR_,
+	ko_,i_,tu_,ha_,spc_,tu_,ka_,ma_,ri_,so_,u_,ni_,na_,i_,zo_,gyoe_,
+	EOM_
+};
+
+const u8 GetFailMsg2[]={
+	PO_,KE_,MO_,N_,ni_,CR_,
+	u_,ma_,ku_,spc_,a_,ta_,ra_,na_,ka_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 GetFailMsg3[]={
+	da_,me_,da_,gyoe_,spc_,PO_,KE_,MO_,N_,ga_,CR_,
+	BO_,bou_,RU_,ka_,ra_,spc_,de_,te_,si_,ma_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 GetFailMsg4[]={
+	a_,a_,gyoe_,CR_,
+	tu_,ka_,ma_,e_,ta_,to_,spc_,o_,mo_,ttu_,ta_,no_,ni_,gyoe_,
+	EOM_
+};
+
+const u8 GetFailMsg5[]={
+	za_,n_,ne_,n_,gyoe_,CR_,
+	mo_,u_,su_,ko_,si_,de_,spc_,
+	tu_,ka_,ma_,e_,ra_,re_,ta_,no_,ni_,gyoe_,
+	EOM_
+};
+
+const u8 GetFailMsg6[]={
+	o_,si_,i_,gyoe_,CR_,
+	a_,to_,spc_,ti_,yyo_,ttu_,to_,no_,
+	spc_,to_,ko_,ro_,da_,ttu_,ta_,no_,ni_,gyoe_,
+	EOM_
+};
+
+const u8 GetSuccessMsg[]={
+	ya_,ttu_,ta_,bou_,gyoe_,CR_,
+	I_MSG,ENEMY_MONS,wo_,spc_,tu_,ka_,ma_,e_,ta_,zo_,gyoe_,
+//	CTRL_,C_WAIT_,0xc0,CTRL_,C_MUSPLAY_,(MUS_KACHI22&0xff),((MUS_KACHI22&0xff00)>>8),
+	CTRL_,C_SEWAIT_,CTRL_,C_MUSPLAY_,(MUS_KACHI22&0xff),((MUS_KACHI22&0xff00)>>8),
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 DemoGetSuccessMsg[]={
+	ya_,ttu_,ta_,bou_,gyoe_,CR_,
+	I_MSG,ENEMY_MONS,wo_,spc_,tu_,ka_,ma_,e_,ta_,zo_,gyoe_,
+//	CTRL_,C_WAIT_,0xc0,CTRL_,C_MUSPLAY_,(MUS_KACHI22&0xff),((MUS_KACHI22&0xff00)>>8),
+	CTRL_,C_SEWAIT_,CTRL_,C_MUSPLAY_,(MUS_KACHI22&0xff),((MUS_KACHI22&0xff00)>>8),
+	CTRL_,C_WAIT_,0x7f,EOM_
+};
+
+const u8 NickNameMsg[]={
+	tu_,ka_,ma_,e_,ta_,spc_,I_MSG,ENEMY_MONS,ni_,CR_,
+	NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,ma_,su_,ka_,hate_,
+	EOM_
+};
+
+const u8 PasoTensouMsg[]={
+	I_MSG,ENEMY_MONS,ha_,spc_,I_MSG,PASO_NAME,spc_,PA_,SO_,KO_,N_,ni_,CR_,
+	te_,n_,so_,u_,sa_,re_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 DarekanoMsg[]={
+	da_,re_,ka_,no_,EOM_
+};
+const u8 MayuminoMsg[]={
+	MA_,YU_,MI_,no_,EOM_
+};
+
+const u8 ZukanSaveMsg[]={
+	I_MSG,ENEMY_MONS,no_,spc_,DE_,bou_,TA_,ga_,spc_,a_,ta_,ra_,si_,ku_,CR_,
+	PO_,KE_,MO_,N_,zu_,ka_,n_,ni_,spc_,SE_,bou_,BU_,sa_,re_,ma_,su_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 WetherRainMsg[]={
+	a_,me_,ga_,spc_,hu_,ttu_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 WetherStormMsg[]={
+	su_,na_,a_,ra_,si_,ga_,spc_,hu_,ki_,a_,re_,te_,i_,ru_,
+	EOM_
+};
+
+const u8 SafariBallNGMsg[]={
+	BO_,TTU_,KU_,SU_,ga_,spc_,i_,ttu_,pa_,i_,de_,CR_,
+	ko_,re_,i_,zi_,yyo_,u_,spc_,tu_,ka_,ma_,e_,ra_,re_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 NazoSeedMsg[]={
+	NA_,ZO_,no_,mi_,EOM_
+};
+
+const u8 SeedMsg[]={
+	no_,mi_,EOM_
+};
+
+#if 0
+sippai_msg1:
+	db	D_MSG
+	db	yo_,ke_,ra_,re_,ta_,gyoe@,home@
+	db	ko_,i_,tu_,ha_,spc@,tu_,ka_,ma_,ri_,so_,u_,ni_,na_,i_,zo_,gyoe@
+	db	EOMwaiteom
+
+sippai_msg2:
+	db	D_MSG
+	db	poke@,ni_,home@
+	db	u_,ma_,ku_,spc@,a_,ta_,ra_,na_,ka_,ttu_,ta_,gyoe@
+	db	EOMwaiteom
+
+sippai_msg3:
+	db	D_MSG
+	db	da_,me_,da_,gyoe@,spc@,poke@,ga_,home@
+	db	bo__,bou@,ru__,ka_,ra_,spc@,de_,te_,si_,ma_,ttu_,ta_,gyoe@
+	db	EOMwaiteom
+
+sippai_msg4:
+	db	D_MSG
+	db	a_,a_,gyoe@,home@
+	db	tu_,ka_,ma_,e_,ta_,to_,spc@,o_,mo_,ttu_,ta_,no_,ni_,gyoe@
+	db	EOMwaiteom
+
+sippai_msg5:
+	db	D_MSG
+	db	za_,n_,ne_,n_,gyoe@,home@
+	db	mo_,u_,su_,ko_,si_,de_,spc@
+	db	tu_,ka_,ma_,e_,ra_,re_,ta_,no_,ni_,gyoe@
+	db	EOMwaiteom
+
+sippai_msg6:
+	db	D_MSG
+	db	o_,si_,i_,gyoe@,home@
+	db	a_,to_,spc@,ti_,yyo_,ttu_,to_,no_
+	db	spc@,to_,ko_,ro_,da_,ttu_,ta_,no_,ni_
+	db	gyoe@
+	db	EOMwaiteom
+
+tukamae_msg1:
+	db	D_MSG
+	db	ya_,ttu_,ta_,bou@,gyoe@,home@
+	db	EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	wo_,spc@,tu_,ka_,ma_,e_,ta_,zo_,gyoe@
+	db	EOM
+	db	FANFARE5
+	db	CALL_MSG
+
+	call	SEwait
+	push	bc
+	extern	musstop
+	ld	de,musstop
+	extern	MusicPlay
+	call	MusicPlay
+	call	wait_vb
+	extern	musvictory22
+	ld	de,musvictory22
+	call	MusicPlay
+	pop	bc
+
+	ld	hl,_eom
+	ret
+
+_eom:
+	db	WAIT
+	db	EOM
+
+
+tukamae_msg2:
+	db	I_MSG
+	dw	name_copy_buf
+	db	D_MSG
+	db	ha_,spc@,ma__,sa__,ki__,no_,spc@,to_,ko_,ro_,he_,home@
+	db	te_,n_,so_,u_,sa_,re_,ta_,gyoe@
+	db	EOMwaiteom
+
+
+shinsyu_msg:
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	no_,spc@,de__,bou@,ta__,gaspc@,a_,ta_,ra_,si_,ku_,home@
+	db	poke@,zu_,ka_,n_,ni_,spc@
+	db	se__,bou@,bu__,sa_,re_,ma_,su_,gyoe@
+	db	EOM
+	db	FANFARE7
+	db	WAIT
+	db	EOM
+
+name_yes_no_msg:
+	db	D_MSG
+	db	tu_,ka_,ma_,e_,ta_,spc@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	ni_,home@
+	db	ni__,ttu__,ku__,ne__,bou@,mu__,wo_,spc@,tu_,ke_,ma_,su_,ka_,hate@
+	db	EOMeom
+
+
+
+recover_fight_scene:
+	BCALL	G_BANK09,recover_fight_scene_main
+	ret
+#endif
+
+const u8 ItemNoMahiMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	ma_,hi_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoDokuMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	do_,ku_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoYakedoMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	ya_,ke_,do_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoKooriMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	ko_,o_,ri_,zi_,yyo_,u_,ta_,i_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoNemuriMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	ne_,mu_,ri_,ka_,ra_,spc_,sa_,me_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoKonranMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	ko_,n_,ra_,n_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoJoutaiijouMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	I_MSG,EV_STR_BUF0,zi_,yyo_,u_,ta_,i_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemNoHukusuuMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	zi_,yyo_,u_,ta_,i_,i_,zi_,yyo_,u_,ga_,spc_,na_,o_,ttu_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemHPKaifukuMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemPPKaifukuMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	I_MSG,EV_STR_BUF0,no_,spc_,wa_,za_,PO_,I_,N_,TO_,wo_,spc_,ka_,i_,hu_,ku_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemAbiKaifukuMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	SU_,TE_,bou_,TA_,SU_,wo_,spc_,mo_,to_,ni_,spc_,mo_,do_,si_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 ItemHPKaifukuEveryTurnMsg[]={
+	I_MSG,CLIENTNOWORK,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	su_,ko_,si_,spc_,ka_,i_,hu_,ku_,
+	EOM_
+};
+
+const u8 ItemOnaziWazaOnlyMsg[]={
+	I_MSG,ITEM_NAME,no_,spc_,ko_,u_,ka_,de_,CR_,
+	I_MSG,WAZA_NAME,si_,ka_,spc_,da_,su_,ko_,to_,ga_,de_,ki_,na_,i_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 ItemKoraetaMsg[]={
+	I_MSG,DEFENCE_MONS,ha_,spc_,I_MSG,ITEM_NAME,de_,CR_,
+	mo_,ti_,ko_,ta_,e_,ta_,gyoe_,
+	EOM_
+};
+
+const u8 BlankMsg[]={
+	EOM_
+};
+
+//-----------------------------------------------------------
+//		捕獲デモで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 MitsuruMsg[]={
+	ko_,ko_,de_,spc_,BO_,bou_,RU_,wo_,spc_,na_,ge_,ru_,n_,da_,ne_,CR_,
+	bo_,ku_,tenten_,tenten_,spc_,ya_,ttu_,te_,mi_,ru_,yo_,gyoe_,
+	EOM_
+};
+
+//=======================================================================
+//	メッセージデータテーブル
+//=======================================================================
+
+const u8 * const FightMsgTbl[]={
+	TrainerLoseMsg,
+	KeikentiGetMsg,
+	LevelUpMsg,
+	WazaOboeMsg,
+	WazaOboeMsg2,
+	WazaOboeMsg3,
+	WazaWasureMsg,
+	WazaWasureMsg3,
+	WazaAkirameMsg,
+	WazaAkirameMsg2,
+	MonomaneMsg,
+	NoHitMsg,
+	MamoruNoHitMsg,
+	NouryokuNoUpMsg,
+	HushiginamamoriNoHitMsg,
+	KoukanaiMsg,
+	KizetsuMsgA,
+	KizetsuMsgD,
+	OkodukaiMsg,
+	LoseMsg1,
+	LoseMsg2,
+	EscapeNGMsg3,
+	RenzokuHitMsg,
+	SleepBeginMsg,
+	SpeabiSleepBeginMsg,
+	AlreadySleepMsg,
+	AlreadySleepMsgA,
+	SippaiMsg,
+	DokuMsg1,
+	SpeabiDokuMsg,
+	DokuMsg2,
+	DokuMsg3,
+	DokuMsg4,
+	SuckMsg,
+	YakedoMsg1,
+	SpeabiYakedoMsg,
+	YakedoMsg2,
+	KooriMsg1,
+	SpeabiKooriMsg,
+	KooriMsg2,
+	KooriMsg3,
+	MeltMsg,
+	MeltMsg2,
+	MahiMsg1,
+	SpeabiMahiMsg,
+	MahiMsg2,
+	MahiMsg3,
+	NoMahiMsg,
+	YumekuiMsg,
+	KoreijouMsg1,
+	KoreijouMsg2,
+	KoukagireMsg1,
+	KoukagireMsg2,
+	KonranMsg1,
+	KonranMsg3,
+	KonranMsg4,
+	KonranMsg5,
+	MeromeroMsg1,
+	MeromeroMsg2,
+	MeromeroMsg3,
+	FukitobasuMsg,
+	TextureMsg,
+	HirumuMsg,
+	JikosaiseiMsg,
+	MantanMsg,
+	TokusyuGuardMsg,
+	ButsuriGuardMsg,
+	ShinpiMsg,
+	ShinpiGuardMsg,
+	ShinpiEndMsg,
+	NemuruMsg1,
+	NemuruMsg2,
+	KamaitachiMsg,
+	SolarbeamMsg,
+	RocketzutukiMsg,
+	GodbirdMsg,
+	KyuukoukaMsg,
+	AnawohoruMsg,
+	ShimeMsg,
+	UzuMsg,
+	MakitsukiMsg,
+	KaraMsg,
+	ShimeKeizokuMsg,
+	ShimeEndMsg,
+	TobigeriMissMsg,
+	ShiroikiriMsg,
+	ShiroikiriGuardMsg,
+	KiaidameMsg,
+	HanekaeriMsg,
+	MamoruMsg,
+	SunaarashiMsg2,
+	ArareMsg2,
+	YadorigiMsg,
+	KawashitaMsg,
+	YadorigiMsg2,
+	SleepMsg1,
+	SleepMsg2,
+	SleepMsg3,
+	SleepMsg4,
+	SawaguMsg1,
+	SawaguMsg2,
+	OtonashikuMsg,
+	SawaguMsg3,
+	TakuwaeruMsg1,
+	TakuwaeruMsg2,
+	SleepNGMsg1,
+	SleepNGMsg2,
+	SleepNGMsg3,
+	GamanMsg1,
+	GamanMsg2,
+	AbareruEndMsg,
+	NekonikobanMsg2,
+	ZenzenMsg,
+	HenshinMsg,
+	MigawariMsg,
+	MigawariAlreadyMsg,
+	MigawariHitMsg,
+	MigawariEndMsg,
+	HandouMsg,
+	IkariMsg,
+	KanashibariMsg,
+	KanashibariMsg2,
+	KanashibariEndMsg,
+	EncoreMsg,
+	EncoreEndMsg,
+	LockOnMsg,
+	SketchMsg,
+	MichidureMsg1,
+	MichidureMsg2,
+	UramiMsg,
+	DorobouMsg,
+	KuroimanazashiMsg,
+	AkumuMsg1,
+	AkumuMsg2,
+	NoroiMsg1,
+	NoroiMsg2,
+	MakibishiMsg1,
+	MakibishiMsg2,
+	MiyaburuMsg,
+	HorobinoutaMsg2,
+	KoraeruMsg,
+	KoraetaMsg,
+	MagnitudeMsg,
+	HaradaikoMsg,
+	JikoanjiMsg,
+	ShimeEscapeMsg,
+	YadorigiEscapeMsg,
+	MakibishiEscapeMsg,
+	TeleportMsg,
+	MiraiyochiMsg1,
+	MiraiyochiMsg2,
+	HukurodatakiMsg,
+	KonoyubitomareMsg,
+	JuudenMsg,
+	ShizennochikaraMsg,
+	RefleshMsg,
+	WaruagakiMsg,
+	IchamonMsg,
+	IchamonMsg2,
+	KiaiPunchMsg,
+	ChouhatsuMsg,
+	ChouhatsuMsg2,
+	TedasukeMsg,
+	TrickMsg,
+	NarikiriMsg,
+	NegaigotoMsg,
+	NegaigotoMsg2,
+	NewoharuMsg,
+	NewoharuMsg2,
+	NewoharareMsg,
+	AkubiMsg,
+	HatakiotosuMsg,
+	SkillSwapMsg,
+	HuuinMsg,
+	HuuinMsg2,
+	OnnenMsg,
+	OnnenMsg2,
+	MagicCortMsg,
+	MagicCortMsg2,
+	YokodoriMsg,
+	YokodoriMsg2,
+	AmehurashiMsg,
+	KasokusoutiMsg,
+	GanzyouMsg,
+	ShimerikeMsg,
+	HPKaifukuMsg,
+	HensyokuMsg,
+	JuunanMsg,
+	DonkanMsg,
+	MenekiMsg,
+	MypaceMsg,
+	MoraibiMsg,
+	KyuubanMsg,
+	IkakuMsg,
+	ClearBodyMsg,
+	SamehadaMsg,
+	TraceMsg,
+	GuntoMsg,
+	AgattaMsg,
+	GakuttoMsg,
+	SagattaMsg,
+	CondUpMsgA,
+	CondUpMsgD,
+	CondDownMsgA,
+	CondDownMsgD,
+	CriticalMsg,
+	IchigekiMsg,
+	WazaWasureMsg2,
+	WazaWasureMsg4,
+	ImahitotsuMsg,
+	BatsugunMsg,
+	EscapeMsg,
+	EnemyEscapeMsg,
+	TrainerEscapeMsg,
+	EscapeNGMsg1,
+	EscapeNGMsg2,
+	NanimookoranMsg,
+	UmakukimaranMsg,
+	KonranMsg2,
+	OumuNGMsg,
+	AmeMsg,
+	OoAmeMsg,
+	AmagoiKeep1Msg,
+	AmagoiKeep2Msg,
+	AmagoiEndMsg,
+	SunaarashiMsg,
+	SunaarashiKeepMsg,
+	SunaarashiEndMsg,
+	NihonbareMsg,
+	NihonbareKeepMsg,
+	NihonbareEndMsg,
+	ArareMsg,
+	ArareKeepMsg,
+	ArareEndMsg,
+	HakidasuMsg,
+	NomikomuMsg,
+	NeppuuMsg,
+	KuroikiriMsg,
+	NekonikobanMsg1,
+	MigawariNGMsg,
+	ItamiwakeMsg,
+	IyashinosuzuMsg,
+	HorobinoutaMsg1,
+	PPNoneMsg,
+	PPNoneMsg2,
+	ItemUseMsg,
+	DemoItemUseMsg,
+	TrainerMonsMsg1,
+	TrainerMonsMsg2,
+	GetFailMsg1,
+	GetFailMsg2,
+	GetFailMsg3,
+	GetFailMsg4,
+	GetFailMsg5,
+	GetFailMsg6,
+	GetSuccessMsg,
+	DemoGetSuccessMsg,
+	NickNameMsg,
+	PasoTensouMsg,
+	ZukanSaveMsg,
+	WetherRainMsg,
+	WetherStormMsg,
+	EscapeNGMsg4,
+	OrderIgnoreSleepMsg,
+	OrderIgnoreMsg,
+	HiruneMsg,
+	NamaketeiruMsg,
+	IukotowokikanaiMsg,
+	SoppowomuitaMsg,
+	SiranpuriMsg,
+	TorikaeruMsg,
+	NearMsg,
+	NoNearMsg,
+	YousuukagauMsg,
+	CubeEatMsg1,
+	CubeEatMsg2,
+	CubeEatMsg3,
+	CubeThrowMsg,
+	SafariZoneFinishMsg,
+	ItemNoMahiMsg,
+	ItemNoDokuMsg,
+	ItemNoYakedoMsg,
+	ItemNoKooriMsg,
+	ItemNoNemuriMsg,
+	ItemNoKonranMsg,
+	ItemNoJoutaiijouMsg,
+	ItemHPKaifukuMsg,
+	ItemPPKaifukuMsg,
+	ItemAbiKaifukuMsg,
+	ItemHPKaifukuEveryTurnMsg,
+	ItemOnaziWazaOnlyMsg,
+	ItemKoraetaMsg,
+	BlankMsg,
+	MizunobeeruMsg,
+	BouonMsg,
+	AmeukezaraMsg,
+	SunaokosiMsg,
+	NoCondDownMsg,
+	SpeabiMeromeroMsg,
+	TokuseiNoWazaMsg,
+	DappiMsg,
+	HedoroekiMsg,
+	TenkiyaMsg,
+	DoroasobiMsg,
+	MizuasobiMsg,
+	DaibinguMsg,
+	UkabuMsg,
+	NoWazaWasureMsg,
+	RecycleMsg,
+	TrainerWinMsg,
+	AromaMsg,
+	DouguAlertMsg,
+	SeedKonranMsg,
+	ItemCondUpMsg,
+	ItemCriticalUpMsg,
+	NoHPKaifukuMsg,
+	SunazigokuMsg,
+	KeikentiGetNormalMsg,
+	KeikentiGetOomeMsg,
+	HideriMsg,
+	HuyuuNoHitMsg,
+	MitsuruMsg,
+	HiraishinMsg,
+	HametunonegaiMsg,
+	KiaiPunchNoMsg,
+	NextPokeMsg,
+	ItemEscapeMsg,
+	SpeabiEscapeMsg,
+	HikizuriMsg,
+	ClearBodyNoIkakuMsg,
+	ItemNoHukusuuMsg,
+	TrainerItemUseMsg,
+	SafariBallNGMsg,
+	DoubleNoHitMsg,
+	TokusyuUmakukimaranMsg,
+	SeisinryokuMsg,
+	AlreadyYakedoMsg,
+	NouryokuNoDownMsg,
+	BouonMsg2,
+	WazaKoukaEndMsg,
+	ButsuriGuardMsg2vs2,
+	TokusyuGuardMsg2vs2,
+	KawarawariMsg,
+	TokuseiNoTokueiMsg,
+	SpeabiNoJoutaiijouMsg,
+	EscapeNGMsg5,
+	TrickMsg1,
+	TrickMsg2,
+	TrickMsg3,
+	OkimiyageMigawariMsg,
+	TokuseiNoTypeMsg,
+};
+
+#if 1
+//-----------------------------------------------------------
+//		メッセージテーブル系
+//-----------------------------------------------------------
+
+const u16 NoHitMsgTbl[]={
+	NOHITMSGNO,
+	MAMORUNOHITMSGNO,
+	DOUBLENOHITMSGNO,
+	HUSHIGINAMAMORINOHITMSGNO,
+	HUYUUNOHITMSGNO,
+};
+
+const u16 EscapeNGMsgTbl[]={
+	ESCAPENGMSG1NO,
+	ESCAPENGMSG2NO,
+	ESCAPENGMSG3NO,
+	ESCAPENGMSG4NO,
+	ESCAPENGMSG5NO,
+};
+
+const u16 TenkouMsgTbl[]={
+	AMEMSGNO,
+	OOAMEMSGNO,
+	UMAKUKIMARANMSGNO,
+	SUNAARASHIMSGNO,
+	NIHONBAREMSGNO,
+	ARAREMSGNO,
+};
+
+const u16 WeatherKeepMsgTbl[]={
+	SUNAARASHIKEEPMSGNO,
+	ARAREKEEPMSGNO,
+};
+
+const u16 WeatherDamageMsgTbl[]={
+	SUNAARASHIMSG2NO,
+	ARAREMSG2NO,
+};
+
+const u16 WeatherDamageEndMsgTbl[]={
+	SUNAARASHIENDMSGNO,
+	ARAREENDMSGNO,
+};
+
+const u16 AmagoiKeepMsgTbl[]={	
+	AMAGOIKEEP1MSGNO,
+	AMAGOIKEEP2MSGNO,
+	AMAGOIENDMSGNO,
+};
+
+const u16 MamoruMsgTbl[]={
+	MAMORUMSGNO,
+	KORAERUMSGNO,
+	UMAKUKIMARANMSGNO,
+};
+
+const u16 ReflecMsgTbl[]={
+	UMAKUKIMARANMSGNO,
+	BUTSURIGUARDMSGNO,
+	BUTSURIGUARDMSG2VS2NO,
+	TOKUSYUGUARDMSGNO,
+	TOKUSYUGUARDMSG2VS2NO,
+	SHINPIMSGNO,
+};
+
+const u16 YadorigiMsgTbl[]={
+	YADORIGIMSGNO,
+	KAWASHITAMSGNO,
+	KOUKANAIMSGNO,
+	YADORIGIMSG2NO,
+	HEDOROEKIMSGNO,
+};
+
+const u16 NemuruMsgTbl[]={
+	NEMURUMSG1NO,
+	NEMURUMSG2NO,
+};
+
+const u16 SawaguMsgTbl[]={
+	SAWAGUMSG2NO,
+	OTONASHIKUMSGNO,
+};
+
+const u16 TakuwaeruMsgTbl[]={
+	TAKUWAERUMSG1NO,
+	TAKUWAERUMSG2NO,
+};
+
+const u16 SleepMsgTbl[]={
+	SLEEPMSG2NO,
+	SLEEPMSG4NO,
+};
+
+const u16 NomikomuMsgTbl[]={
+	NOMIKOMUMSGNO,
+	MANTANMSGNO,
+};
+
+#if 0
+const u16 PokeAppearMsgTbl[]={
+	APPEARMSG3NO,
+	KURIDASHIMSG3NO,
+};
+#endif
+
+const u16 SleepNGMsgTbl[]={
+	SLEEPNGMSG1NO,
+	SLEEPNGMSG2NO,
+	SLEEPNGMSG3NO,
+};
+
+const u16 CondUpMsgTbl[]={
+	CONDUPMSGANO,
+	CONDUPMSGDNO,
+	KOREIJOUMSG1NO,
+	BLANKMSGNO,
+	ITEMCONDUPMSGNO,
+	ITEMCRITICALUPMSGNO,
+};
+
+const u16 CondDownMsgTbl[]={
+	CONDDOWNMSGANO,
+	CONDDOWNMSGDNO,
+	KOREIJOUMSG2NO,
+	BLANKMSGNO,
+};
+
+const u16 TameMsgTbl[]={
+	KAMAITACHIMSGNO,
+	SOLARBEAMMSGNO,
+	ROCKETZUTUKIMSGNO,
+	GODBIRDMSGNO,
+	KYUUKOUKAMSGNO,
+	ANAWOHORUMSGNO,
+	DAIBINGUMSGNO,
+	UKABUMSGNO,
+};
+
+const u16 ShimeMsgTbl[]={
+	SHIMEMSGNO,
+	MAKITSUKIMSGNO,
+	UZUMSGNO,
+	KARAMSGNO,
+	UZUMSGNO,
+	SUNAZIGOKUMSGNO,
+};
+
+const u16 ShiroikiriMsgTbl[]={
+	SHIROIKIRIMSGNO,
+	UMAKUKIMARANMSGNO,
+};
+
+const u16 KiaidameMsgTbl[]={
+	KIAIDAMEMSGNO,
+	UMAKUKIMARANMSGNO,
+};
+
+const u16 HenshinMsgTbl[]={
+	HENSHINMSGNO,
+	UMAKUKIMARANMSGNO,
+};
+
+const u16 MigawariMsgTbl[]={
+	MIGAWARIMSGNO,
+	MIGAWARINGMSGNO,
+};
+
+const u16 AddDokuMsgTbl[]={
+	DOKUMSG1NO,
+	SPEABIDOKUMSGNO,
+};
+
+const u16 AddMahiMsgTbl[]={
+	MAHIMSG1NO,
+	SPEABIMAHIMSGNO,
+};
+
+const u16 AddNemuriMsgTbl[]={
+	SLEEPBEGINMSGNO,
+	SPEABISLEEPBEGINMSGNO,
+};
+
+const u16 AddYakedoMsgTbl[]={
+	YAKEDOMSG1NO,
+	SPEABIYAKEDOMSGNO,
+};
+
+const u16 AddKooriMsgTbl[]={
+	KOORIMSG1NO,
+	SPEABIKOORIMSGNO,
+};
+
+const u16 MeltMsgTbl[]={
+	MELTMSGNO,
+	MELTMSG2NO,
+};
+
+const u16 IchigekiMsgTbl[]={
+	NOHITMSGNO,
+	ZENZENMSGNO,
+};
+
+const u16 MeromeroMsgTbl[]={
+	MEROMEROMSG1NO,
+	SPEABIMEROMEROMSGNO,
+};
+
+const u16 SuitoriMsgTbl[]={
+	SUCKMSGNO,
+	HEDOROEKIMSGNO,
+};
+
+const u16 AsobiMsgTbl[]={
+	DOROASOBIMSGNO,
+	MIZUASOBIMSGNO,
+};
+
+const u16 IyashiNoSuzuMsgTbl[]={
+	IYASHINOSUZUMSGNO,
+	IYASHINOSUZUMSGNO,		//ぼうおんで防がれた判定用（表示されるメッセージは一緒）
+	IYASHINOSUZUMSGNO,		//ぼうおんで防がれた判定用（表示されるメッセージは一緒）
+	IYASHINOSUZUMSGNO,		//ぼうおんで防がれた判定用（表示されるメッセージは一緒）
+	AROMAMSGNO,
+};
+
+const u16 MiraiyochiMsgTbl[]={
+	MIRAIYOCHIMSG1NO,
+	HAMETUNONEGAIMSGNO,
+};
+
+//アイテムメッセージのメッセージテーブル
+const u16 GetFailMsgTbl[]={
+		GETFAILMSG3NO,
+		GETFAILMSG4NO,
+		GETFAILMSG5NO,
+		GETFAILMSG6NO,
+};
+
+//フィールドの天候を反映するメッセージテーブル
+const u16 WeatherMsgTbl[]={
+	WEATHERRAINMSGNO,		//WEATHER_OFF      (0)      // 天候エフェクトなし
+	WEATHERRAINMSGNO,		//WEATHER_SHINE    (1)      // 晴れ
+	WEATHERRAINMSGNO,		//WEATHER_SHINE2   (2)      // 晴れ（雲なし）
+	WEATHERRAINMSGNO,		//WEATHER_RAIN     (3)      // 雨
+	WEATHERRAINMSGNO,		//WEATHER_SNOW     (4)      // 雪
+	WEATHERRAINMSGNO,		//WEATHER_THUNDER  (5)      // カミナリ
+	WEATHERRAINMSGNO,		//WEATHER_MIST     (6)      // 霧
+	WEATHERRAINMSGNO,		//WEATHER_ASH      (7)      // 火山灰
+	WEATHERSTORMMSGNO,		//WEATHER_STORM    (8)      // 砂嵐
+	WEATHERRAINMSGNO,		//WEATHER_MIST2    (9)      // 霧２
+	WEATHERRAINMSGNO,		//WEATHER_SEA     (10)      // 海底
+	WEATHERRAINMSGNO,		//WEATHER_CLOUD   (11)      // 曇り
+	NIHONBAREKEEPMSGNO,		//WEATHER_SHINE3  (12)      // 晴れ（強い日差し）
+	WEATHERRAINMSGNO,		//WEATHER_HEAVYRAIN  (13)   // 大雨
+	WEATHERRAINMSGNO,		//WEATHER_MARINE  (14)      // 海底
+	WEATHERRAINMSGNO,		//WEATHER_MAX     (15)      /* 最大値 */
+};
+
+//なまけているメッセージテーブル
+const u16 NamaketeiruMsgTbl[]={
+	NAMAKETEIRUMSGNO,
+	IUKOTOWOKIKANAIMSGNO,
+	SOPPOWOMUITAMSGNO,
+	SIRANPURIMSGNO,
+};
+
+//サファリゾーンでのちかづくメッセージテーブル
+const u16 NearMsgTbl[]={
+	NEARMSGNO,
+	NONEARMSGNO,
+};
+
+//サファリゾーンでのキューブとポケモンの相性メッセージテーブル
+const u16 CubeEatMsgTbl[]={
+	CUBEEATMSG1NO,
+	CUBEEATMSG2NO,
+	CUBEEATMSG3NO,
+};						
+
+//アイテムを使って状態異常を回復するメッセージ
+const u16 ItemRecoverTbl[]={
+	ITEMNOKONRANMSGNO,
+	ITEMNOMAHIMSGNO,
+	ITEMNOKOORIMSGNO,
+	ITEMNOYAKEDOMSGNO,
+	ITEMNODOKUMSGNO,
+	ITEMNONEMURIMSGNO,
+};
+
+const u16 ItemMultiRecoverTbl[]={
+	ITEMNOJOUTAIIJOUMSGNO,
+	ITEMNOHUKUSUUMSGNO,
+};
+
+const u16 MizunobeeruMsgTbl[]={
+	MIZUNOBEERUMSGNO,
+	TOKUSEINOTOKUSEIMSGNO,
+	TOKUSEINOTYPEMSGNO,
+};
+
+const u16 JuunanMsgTbl[]={
+	JUUNANMSGNO,
+	TOKUSEINOTOKUSEIMSGNO,
+	TOKUSEINOTYPEMSGNO,
+};
+
+const u16 MenekiMsgTbl[]={
+	MENEKIMSGNO,
+	TOKUSEINOTOKUSEIMSGNO,
+	TOKUSEINOTYPEMSGNO,
+};
+
+const u16 TrickMsgTbl[]={
+	TRICKMSG1NO,
+	TRICKMSG2NO,
+	TRICKMSG3NO,
+};
+
+const u16 MoraibiMsgTbl[]={
+	MORAIBIMSGNO,
+	TOKUSEINOWAZAMSGNO,
+};
+			
+#else
+
+//-----------------------------------------------------------
+//		メッセージテーブル系
+//-----------------------------------------------------------
+
+const u8 * const NoHitMsgTbl[]={
+	NoHitMsg,
+	MamoruNoHitMsg,
+	DoubleNoHitMsg,
+	HushiginamamoriNoHitMsg,
+	HuyuuNoHitMsg,
+};
+
+const u8 * const EscapeNGMsgTbl[]={
+	EscapeNGMsg1,
+	EscapeNGMsg2,
+	EscapeNGMsg3,
+	EscapeNGMsg4,
+};
+
+const u8 * const TenkouMsgTbl[]={
+	AmeMsg,
+	OoAmeMsg,
+	UmakukimaranMsg,
+	SunaarashiMsg,
+	NihonbareMsg,
+	ArareMsg,
+};
+
+const u8 * const WeatherKeepMsgTbl[]={
+	SunaarashiKeepMsg,
+	ArareKeepMsg,
+};
+
+const u8 * const WeatherDamageMsgTbl[]={
+	SunaarashiMsg2,
+	ArareMsg2,
+};
+
+const u8 * const WeatherDamageEndMsgTbl[]={
+	SunaarashiEndMsg,
+	ArareEndMsg,
+};
+
+const u8 * const AmagoiKeepMsgTbl[]={	
+	AmagoiKeep1Msg,
+	AmagoiKeep2Msg,
+	AmagoiEndMsg,
+};
+
+const u8 * const MamoruMsgTbl[]={
+	MamoruMsg,
+	KoraeruMsg,
+	UmakukimaranMsg,
+};
+
+const u8 * const ReflecMsgTbl[]={
+	UmakukimaranMsg,
+	ButsuriGuardMsg1,
+	ButsuriGuardMsg2,
+	TokusyuGuardMsg1,
+	TokusyuGuardMsg2,
+	ShinpiMsg1,
+	ShinpiMsg2,
+};
+
+const u8 * const WazaKoukaEndMsgTbl[]={
+	WazaKoukaEndMsg1,
+	WazaKoukaEndMsg2,
+};
+
+const u8 * const YadorigiMsgTbl[]={
+	YadorigiMsg,
+	KawashitaMsg,
+	KoukanaiMsg,
+};
+
+const u8 * const NemuruMsgTbl[]={
+	NemuruMsg1,
+	NemuruMsg2,
+};
+
+const u8 * const SawaguMsgTbl[]={
+	SawaguMsg2,
+	OtonashikuMsg,
+};
+
+const u8 * const TakuwaeruMsgTbl[]={
+	TakuwaeruMsg1,
+	TakuwaeruMsg2,
+};
+
+const u8 * const SleepMsgTbl[]={
+	SleepMsg2,
+	SleepMsg4,
+};
+
+const u8 * const NomikomuMsgTbl[]={
+	NomikomuMsg,
+	MantanMsg,
+};
+
+const u8 * const PokeAppearMsgTbl[]={
+	AppearMsg3,
+	KuridashiMsg3,
+};
+
+const u8 * const SleepNGMsgTbl[]={
+	SleepNGMsg1,
+	SleepNGMsg2,
+	SleepNGMsg3,
+};
+
+const u8 * const CondUpMsgTbl[]={
+	CondUpMsgA,
+	CondUpMsgD,
+	KoreijouMsg1,
+};
+
+const u8 * const CondDownMsgTbl[]={
+	CondDownMsgA,
+	CondDownMsgD,
+	KoreijouMsg2,
+};
+
+const u8 * const TameMsgTbl[]={
+	KamaitachiMsg,
+	SolarbeamMsg,
+	RocketzutukiMsg,
+	GodbirdMsg,
+	KyuukoukaMsg,
+	AnawohoruMsg,
+	DaibinguMsg,
+	UkabuMsg,
+};
+
+const u8 * const ShimeMsgTbl[]={
+	ShimeMsg,
+	MakitsukiMsg,
+	UzuMsg,
+	KaraMsg,
+	UzuMsg,
+};
+
+const u8 * const ShiroikiriMsgTbl[]={
+	ShiroikiriMsg,
+	UmakukimaranMsg,
+};
+
+const u8 * const KiaidameMsgTbl[]={
+	KiaidameMsg,
+	UmakukimaranMsg,
+};
+
+const u8 * const HenshinMsgTbl[]={
+	HenshinMsg,
+	UmakukimaranMsg,
+};
+
+const u8 * const MigawariMsgTbl[]={
+	MigawariMsg,
+	MigawariNGMsg,
+};
+
+const u8 * const ShinpiEndMsgTbl[]={
+	ShinpiEndMsg1,
+	ShinpiEndMsg2,
+};
+
+const u8 * const AddDokuMsgTbl[]={
+	DokuMsg1,
+	SpeabiDokuMsg,
+};
+
+const u8 * const AddMahiMsgTbl[]={
+	MahiMsg1,
+	SpeabiMahiMsg,
+};
+
+const u8 * const AddNemuriMsgTbl[]={
+	SleepBeginMsg,
+	SpeabiSleepBeginMsg,
+};
+
+const u8 * const AddYakedoMsgTbl[]={
+	YakedoMsg1,
+	SpeabiYakedoMsg,
+};
+
+const u8 * const AddKooriMsgTbl[]={
+	KooriMsg1,
+	SpeabiKooriMsg,
+};
+
+const u8 * const MeltMsgTbl[]={
+	MeltMsg,
+	MeltMsg2,
+};
+
+//アイテムメッセージのメッセージテーブル
+
+const u8 * const GetFailMsgTbl[]={
+		GetFailMsg3,
+		GetFailMsg4,
+		GetFailMsg5,
+		GetFailMsg6,
+};
+
+#endif
+
+//-----------------------------------------------------------------------------
+//	しめ系の技の技ナンバーテーブル
+//-----------------------------------------------------------------------------
+
+const u16 ShimeWazaNo[]={
+	WAZANO_SIMETUKERU,			// shimetsukeru
+	WAZANO_MAKITUKU,			// makitsuku
+	WAZANO_HONOONOUZU,			// honou no uzu
+	WAZANO_KARADEHASAMU,		// kara de hasamu
+	WAZANO_UZUSIO,				// uzushio
+	WAZANO_SUNAZIGOKU,			// sunazigoku
+	-1,
+};
+
+//-----------------------------------------------------------------------------
+//	アタックメッセージ用のチェックテーブル
+//-----------------------------------------------------------------------------
+#if 0
+const u16 WazaMsgCheckTbl[]={
+//WoTukatta
+		 14, 74, 70,106,107,108,110,111,121,
+		123,125,148,150,151,155,156,159,164,
+		170,173,182,191,203,205,207,214,237,
+		244,245,
+		000,
+//Sita
+		105,100,117,120,133,175,
+		000,
+//WoSita
+		 96, 97,102,104,140,144,165,184,
+		256,
+		000,
+//Kougeki
+		  1, 10, 11, 17, 19, 20, 21, 30, 35,
+		 37, 39, 43, 44, 45, 46, 47,064,
+		 71, 81, 89, 90, 91, 92,103,
+		118,122,128,132,139,145,
+		163,169,171,174,193,204,213,249,
+		253,255,
+		000,
+};
+#endif
+//-----------------------------------------------------------
+//
+//		FightMsgCreateを使用しないメッセージ
+//		ローカライズを考えて
+//		メッセージデータは、fightmsg.datに統合
+//
+//-----------------------------------------------------------
+
+//-----------------------------------------------------------
+//		進化メッセージ
+//-----------------------------------------------------------
+
+const u8 ShinkaBeforeMsg[]={
+	tenten_,tenten_,o_,ya_,gyoe_,hate_,CR_,
+	I_MSG_,STR_TEMP_BUF0,no_,spc_,yo_,u_,su_,ga_,tenten_,tenten_,gyoe_,
+	EOM_
+};
+
+const u8 ShinkaAfterMsg[]={
+	o_,me_,de_,to_,u_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	I_MSG_,STR_TEMP_BUF1,ni_,spc_,si_,n_,ka_,si_,ta_,gyoe_,
+//	CTRL_,C_WAIT_,0xc0,
+	CTRL_,C_SEWAIT_,
+	NORMAL_WAIT_,EOM_
+};
+
+const u8 ShinkaCancelMsg[]={
+	a_,re_,tenten_,tenten_,hate_,CR_,
+	I_MSG_,STR_TEMP_BUF0,no_,spc_,he_,n_,ka_,ga_,spc_,to_,ma_,ttu_,ta_,gyoe_,
+	NORMAL_WAIT_,EOM_
+};
+
+//-----------------------------------------------------------
+//		client.cで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 DousuruMsg[]={
+	I_MSG,CLIENT_MONS,ha_,spc_,do_,u_,su_,ru_,hate_,EOM_
+};
+
+const u8 SafariDousuruMsg[]={
+	I_MSG,MY_NAME,ha_,spc_,do_,u_,su_,ru_,hate_,EOM_
+};
+
+const u8 DemoDousuruMsg[]={
+	MI_,TU_,RU_,ha_,spc_,do_,u_,su_,ru_,hate_,EOM_
+};
+
+const u8 TaikiMsg[]={
+	CTRL_,C_WAIT_,0x10,
+	tu_,u_,si_,n_,ta_,i_,ki_,ti_,yyu_,u_,tenten_,tenten_,EOM_
+};
+
+const u8 CommandMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,
+	ta_,ta_,ka_,u_,spc_,spc_,BA_,TTU_,GU_,CR_,
+	PO_,KE_,MO_,N_,spc_,spc_,ni_,ge_,ru_,EOM_
+};
+
+const u8 SafariCommandMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,
+	BO_,bou_,RU_,spc_,spc_,spc_,PO_,RO_,TTU_,KU_,CR_,
+	ti_,ka_,du_,ku_,spc_,spc_,ni_,ge_,ru_,EOM_
+};
+
+const u8 WazaInfoMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,
+	P__,P__,CR_,
+	wa_,za_,TA_,I_,PU_,sura_,EOM_
+};
+
+const u8 ColBlueMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,EOM_
+};
+
+const u8 WasureMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,
+	do_,no_,spc_,wa_,za_,wo_,CR_,
+	wa_,su_,re_,sa_,se_,ta_,i_,hate_,EOM_
+};
+
+const u8 YesNoMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,
+	ha_,i_,CR_,i_,i_,e_,EOM_
+};
+
+const u8 WazaSwapMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,
+	i_,re_,ka_,e_,ru_,spc_,wa_,za_,wo_,CR_,
+	e_,ra_,n_,de_,spc_,ku_,da_,sa_,i_,EOM_
+};
+
+const u8 LevelUpWindowMsg[]={
+	CTRL_,C_PAL_,0x05,CTRL_,C_ACOL_,0x0d,0x0e,0x0f,EOM_
+};
+
+const u8 LevelUpWindowMsgArrow[]={
+	CTRL_,C_EXFONT_,ArrowR__,EOM_
+};
+
+const u8 LevelUpWindowMsgPlus[]={
+	CTRL_,C_EXFONT_,Plus__,EOM_
+};
+
+const u8 LevelUpWindowMsgMinus[]={
+	bou_,EOM_
+};
+
+const u8 LevelUpWindowMsgHP[]={
+	H__,P__,spc_,spc_,EOM_
+};
+
+const u8 LevelUpWindowMsgPow[]={
+	ko_,u_,ge_,ki_,EOM_
+};
+
+const u8 LevelUpWindowMsgDef[]={
+	bo_,u_,gi_,yyo_,EOM_
+};
+
+const u8 LevelUpWindowMsgSpePow[]={
+	to_,ku_,ko_,u_,EOM_
+};
+
+const u8 LevelUpWindowMsgSpeDef[]={
+	to_,ku_,bo_,u_,EOM_
+};
+
+const u8 * const LevelUpWindowMsgTbl[]={
+	LevelUpWindowMsgHP,
+	LevelUpWindowMsgSpePow,
+	LevelUpWindowMsgPow,
+	LevelUpWindowMsgSpeDef,
+	LevelUpWindowMsgDef,
+	SubayasaMsg,
+};
+	
+//-----------------------------------------------------------
+//		gauge.cで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 SafariBallMsg[]={
+	CTRL_,C_BCOL_,0x2,SA_,HU_,AA_,RI_,BO_,bou_,RU_,EOM_
+};
+
+const u8 NokoriMsg[]={
+	CTRL_,C_BCOL_,0x2,no_,ko_,ri_,spc_,EOM_
+};
+
+const u8 NankoMsg[]={
+	CTRL_,C_BCOL_,0x2,ko_,EOM_
+};
+
+
+//-----------------------------------------------------------
+//		装備アイテムで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 NemuriMsg[]={
+	ne_,mu_,ri_,EOM_
+};
+
+const u8 DokuMsg[]={
+	do_,ku_,EOM_
+};
+
+const u8 YakedoMsg[]={
+	ya_,ke_,do_,EOM_
+};
+
+const u8 MahiMsg[]={
+	ma_,hi_,EOM_
+};
+
+const u8 KooriMsg[]={
+	ko_,o_,ri_,EOM_
+};
+
+const u8 KonranMsg[]={
+	ko_,n_,ra_,n_,EOM_
+};
+
+const u8 MeromeroMsg[]={
+	ME_,RO_,ME_,RO_,EOM_
+};
+
+//-----------------------------------------------------------
+//		バトルタワーで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 SpaceMsg[]={
+	spc_,EOM_
+};
+
+const u8 ScrollWaitMsg[]={
+	SCROLL_WAIT_,EOM_
+};
+
+const u8 CRMsg[]={
+	CR_,EOM_
+};
+
+const u8 HaMsg[]={
+	ha_,CR_,EOM_
+};
+
+const u8 HaScrollWaitMsg[]={
+	ha_,SCROLL_WAIT_,EOM_
+};
+
+//-----------------------------------------------------------
+//		poketool.cで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 HuseiNaTamagoMsg[]={
+	DA_,ME_,TA_,MA_,GO_,EOM_
+};
+
+const u8 MitsuruNameMsg[]={
+	MI_,TU_,RU_,EOM_
+};
+
+//-----------------------------------------------------------
+//		fight.cで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 FightWinMsg[]={
+	CTRL_,C_BCOL_,0x00,
+	ka_,ti_,EOM_
+};
+
+const u8 FightLoseMsg[]={
+	CTRL_,C_BCOL_,0x00,
+	ma_,ke_,EOM_
+};
+
+const u8 FightDrawMsg[]={
+	CTRL_,C_BCOL_,0x00,
+	hi_,ki_,wa_,ke_,EOM_
+};
+
+//-----------------------------------------------------------
+//		fightmsg.cで使用するメッセージ
+//-----------------------------------------------------------
+
+const u8 HaEomMsg[]={
+	ha_,EOM_
+};
+
+const u8 NoEomMsg[]={
+	no_,EOM_
+};
+
+//-----------------------------------------------------------
+//
+//		fightmsg.cで使用するメッセージ
+//	バージョン違い通信対戦で、ない技ナンバーがきたときに、
+//	技のタイプで表示するためのメッセージ
+//-----------------------------------------------------------
+
+const u8 ZokuseiWazaMsg[][7]={
+	{NO_,bou_,MA_,RU_,wa_,za_,EOM_},
+	{ka_,ku_,to_,u_,wa_,za_,EOM_},
+	{hi_,ko_,u_,wa_,za_,EOM_,EOM_},
+	{do_,ku_,wa_,za_,EOM_,EOM_,EOM_},
+	{zi_,me_,n_,wa_,za_,EOM_,EOM_},
+	{i_,wa_,wa_,za_,EOM_,EOM_,EOM_},
+	{mu_,si_,wa_,za_,EOM_,EOM_,EOM_},
+	{GO_,bou_,SU_,TO_,wa_,za_,EOM_},
+	{ha_,ga_,ne_,wa_,za_,EOM_,EOM_},
+	{ha_,te_,na_,wa_,za_,EOM_,EOM_},
+	{ho_,no_,o_,wa_,za_,EOM_,EOM_},
+	{mi_,zu_,wa_,za_,EOM_,EOM_,EOM_},
+	{ku_,sa_,wa_,za_,EOM_,EOM_,EOM_},
+	{de_,n_,ki_,wa_,za_,EOM_,EOM_},
+	{E_,SU_,PA_,bou_,wa_,za_,EOM_},
+	{ko_,o_,ri_,wa_,za_,EOM_,EOM_},
+	{DO_,RA_,GO_,N_,wa_,za_,EOM_},
+	{a_,ku_,wa_,za_,EOM_,EOM_,EOM_},
+};
+
+//GB版のポケモンのメッセージデータ（メッセージ作成の参考用）
+//------------------------------------ fighter.dmg -----------------------------------------
+
+#if 0
+
+#if 0
+const u8 GaCRMsg[]={
+	ga_,CR_,EOM_
+};
+
+const u8 HaCRMsg[]={
+	ha_,CR_,EOM_
+};
+#endif
+
+	public	nekonikoban_m02
+nekonikoban_m02:
+	db	D_MSG
+	db	myname@
+	db	haspc@,EOM
+	db	N_MSG
+	dw	nekonikoban 
+	db	036h
+	db	D_MSG
+	db	yen@,home@
+	db	hi_,ro_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	monster_m01
+monster_m01:
+	db	D_MSG
+	db	a_,gyoe@,spc@,ya_,se_,i_,no_,home@
+	db	EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	gaspc@,to_,bi_,da_,si_,te_,ki_,tagyoe@
+	db	EOMwaiteom
+
+	public	monster_m02
+monster_m02:
+	db	D_MSG
+	db	tu_,ri_,a_,ge_,ta_,spc@,EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	ga_,home@
+	db	to_,bi_,ka_,ka_,ttute@,ki_,tagyoe@
+	db	EOMwaiteom
+
+	public	monster_m03
+monster_m03:
+	db	D_MSG
+	db	yu_,ra_,si_,ta_,spc@,ki_,ka_,ra_,spc@,EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	ga_,home@
+	db	o_,ti_,te_,ki_,tagyoe@
+	db	EOMwaiteom
+
+	public	monster_m04
+monster_m04:					;追加 00/08/01 by matsuda
+	db	D_MSG
+	db	a_,gyoe@,spc@,ya_,se_,i_,no_,home@
+	db	EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	gaspc@,a_,ra_,wa_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	human_m01
+human_m01:
+	db	D_MSG
+	db	dealer@
+	db	ga_,home@
+	db	si_,yyo_,u_,bu_,wospc@,si_,ka_,ke_,te_,ki_,tagyoe@
+	db	EOMwaiteom
+
+;-------------------------------------- fight.dmg -----------------------------------------
+
+  ifn 0
+	public	announce_m01
+announce_m01:
+	db	D_MSG
+	db	a__,na__,u__,n__,su__,kako2@
+	db	pi__,n__,po__,bou@,n__,gyoe@
+	db	normal@
+	db	sa__,hu__,aa__,ri__,spc@,bo__,bou@,ru__,wo_
+	db	home@
+	db	ze_,n_,bu_,spc@,na_,ge_,ma_,si_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	nigeta_m01
+nigeta_m01:
+	db	D_MSG
+	db	ya_,se_,i_,no_,EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	haspc@,ni_,ge_,da_,si_,tagyoe@
+	db	EOMwaiteom
+	
+	public	nigeta_m02
+nigeta_m02:
+	db	D_MSG
+	db	te_,ki_,no_,EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	haspc@,ni_,ge_,da_,si_,tagyoe@
+	db	EOMwaiteom
+	
+	public	dokuuke_m01
+dokuuke_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	do_,ku_,nospc@,da__,me__,bou@,zi__,wospc@
+	db	u_,ke_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	yakeuke_m01
+yakeuke_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ya_,ke_,do_,nospc@,da__,me__,bou@,zi__,wospc@
+	db	u_,ke_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	yadorigi_m02
+yadorigi_m02:
+	db	D_MSG
+	db	ya_,do_,ri_,gi_,gaspc@
+	db	monsname2@,no_,home@
+	db	ta_,i_,ri_,yyo_,ku_,wospc@,u_,ba_,u_,gyoe@
+	db	EOMwaiteom
+
+	public	akumu_m02
+akumu_m02:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	a_,ku_,mu_,nispc@,u_,na_,sa_,re_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	noroi_m01
+noroi_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	no_,ro_,wa_,re_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	sunaarashi_m02
+sunaarashi_m02:
+	db	D_MSG
+	db	su_,na_,a_,ra_,si_,gaspc@
+	db	monsname2@
+	db	wo_,home@
+	db	o_,so_,u_,gyoe@
+	db	EOMwaiteom
+
+	public	count_m01
+count_m01:
+	db	D_MSG
+	db	monsname2@
+	db	nospc@,ho_,ro_,bi_,no_,home@
+	db	ka__,u__,n__,to__,gaspc@
+	db	EOM
+	db	N_MSG
+	dw	in_dat
+	db	011h				; 1 = byte 1 = ketasuu
+	db	D_MSG
+	db	ni_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	hp_add_m01
+hp_add_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	de_,spc@
+	db	su_,ko_,si_,spc@,ka_,i_,hu_,ku_
+	db	EOMwaiteom
+
+	public	pp_kaifuku_m01
+pp_kaifuku_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	de_,spc@
+	db	pi__,bou@,pi__,bou@,ka_,i_,hu_,ku_
+	db	EOMwaiteom
+
+	public	miraiyochi_m02
+miraiyochi_m02:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,mi_,ra_,i_,yo_,ti_,no_,home@
+	db	kougeki@,wospc@,u_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	kireta_m01
+kireta_m01:
+	db	D_MSG
+	db	monsname2@
+	db	wospc@,tu_,tu_,n_,de_,i_,ta_,home@
+	db	si_,n_,pi_,nospc@,be__,bou@,ru__,ga_
+	db	spc@,na_,ku_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	kabe_break_m01
+kabe_break_m01:
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+;	db	monsname2@
+	db	nospc@,hi_,ka_,ri_,no_,ka_,be_,no_,home@
+	db	ko_,u_,ka_,gaspc@,ki_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	ref_break_m01
+ref_break_m01:
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+;	db	monsname2@
+	db	nospc@,ri__,hu__,re__,ku__,ta__,bou@,no_,home@
+	db	ko_,u_,ka_,gaspc@,ki_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	amagoi_keep_m01
+amagoi_keep_m01:	
+	db	D_MSG
+	db	a_,me_,gaspc@,hu_,ri_,tu_,du_,i_,te_,i_,ru_
+	db	EOMwaiteom
+
+	public	hare_keep_m01	
+hare_keep_m01:	
+	db	D_MSG
+	db	hi_,za_,si_,gaspc@,tu_,yo_,i_
+	db	EOMwaiteom
+
+	public	suna_keep_m01	
+suna_keep_m01:	
+	db	D_MSG
+	db	su_,na_,a_,ra_,si_,gaspc@,hu_,ki_,a_,re_,ru_
+	db	EOMwaiteom
+
+	public	amagoi_end_m01	
+amagoi_end_m01:	
+	db	D_MSG
+	db	a_,me_,gaspc@,hu_,ri_,ya_,n_,da_,gyoe@
+	db	EOMwaiteom
+
+	public	hare_end_m01
+hare_end_m01:	
+	db	D_MSG
+	db	hi_,za_,si_,gaspc@,yo_,wa_,ku_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	suna_end_m01
+suna_end_m01:	
+	db	D_MSG
+	db	su_,na_,a_,ra_,si_,gaspc@,o_,sa_,ma_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	kachi_m01
+kachi_m01:
+	db	D_MSG
+	db	te_,ki_,nospc@
+	db	EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	haspc@,ta_,o_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	kachi_m02
+kachi_m02:
+	db	D_MSG
+	db	myname@
+	db	haspc@,si_,yyo_,u_,ki_,n_,to_,si_,te_,home@
+	db	EOM
+	db	N_MSG
+	dw	yuuichi_gold
+	db	036h
+	db	D_MSG
+	db	yen@,spc@,te_,ni_,i_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	kachi_m03
+kachi_m03:
+	db	D_MSG
+	db	dealer@
+	db	home@
+	db	to_,nospc@
+	db	si_,yyo_,u_,bu_,nispc@,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	hikiwake_m01
+hikiwake_m01:
+	db	D_MSG
+	db	dealer@
+	db	home@
+	db	to_,nospc@
+	db	si_,yyo_,u_,bu_,nispc@,hi_,ki_,wa_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	money_m01
+money_m01:
+	db	D_MSG
+	db	myname@
+	db	haspc@,si_,yyo_,u_,ki_,n_,to_,si_,te_,home@
+	db	EOM
+	db	N_MSG
+	dw	yuuichi_gold
+	db	036h
+	db	D_MSG
+	db	yen@,spc@,te_,ni_,i_,re_,tagyoe@
+	db	gyo3@
+	db	o_,ka_,a_,sa_,n_,nispc@,su_,ko_,si_,spc@,o_,ku_,ttu_,tagyoe@
+	db	EOMwaiteom
+	
+	public	money_m02
+money_m02:
+	db	D_MSG
+	db	o_,ka_,a_,sa_,n_,nispc@,ha_,n_,bu_,n_,spc@,o_,ku_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	money_m03
+money_m03:
+	db	D_MSG
+	db	o_,ka_,a_,sa_,n_,nispc@,ze_,n_,bu_,spc@,o_,ku_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+
+	public	rival_make_m01
+rival_make_m01:
+	db	D_MSG
+	db	rival@
+	db	kako2@,a_,re_,bou@,hate@
+	db	home@
+	db	o_,ma_,e_,nospc@,poke@,ni_,gyo3@
+	db	su_,ri_,yya_,a_,spc@,yo_,ka_,ttu_,ta_,no_,ka_,na_,a_,hate@
+	db	EOMwaiteom
+
+	public	make_m01
+make_m01:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,ta_,o_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	make_m02
+make_m02:
+	db	D_MSG
+	db	tu_,gi_,nospc@,poke@,wo_
+	db	tu_,ka_,i_,ma_,su_,ka_,hate@
+	db	057h
+
+	public	rival_m01
+rival_m01:
+	db	D_MSG
+	db	rival@
+	db	kako2@,ya_,ttu_,tagyoe@
+	db	home@
+	db	i_,i_,poke@,spc@,e_,ra_,n_,da_,ka_,mo_,gyoe@
+	db	EOMwaiteom
+
+  ifn 0
+	public	zenmetsu_m01
+zenmetsu_m01:
+	db	D_MSG
+	db	myname@
+	db	nospc@,te_,mo_,to_,ni_,ha_,home@
+	db	ta_,ta_,ka_,e_,ru_,spc@,poke@,gaspc@
+	db	i_,na_,i_,gyoe@,normal@
+	db	myname@
+	db	ha_,home@
+	db	me_,no_,ma_,e_,gaspc@,ma_,ttu_,ku_,ra_,nispc@
+	db	na_,ttu_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	zenmetsu_m02
+zenmetsu_m02:
+	db	D_MSG
+	db	dealer@
+	db	to_,no_,home@
+	db	si_,yyo_,u_,bu_,nispc@,ma_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	torikaeru_m01
+torikaeru_m01:
+	db	D_MSG
+	db	dealer@
+	db	ha_,home@
+	db	EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	wospc@
+	db	ku_,ri_,da_,so_,u_,to_,spc@,si_,te_,i_,ru_
+	db	normal@
+	db	myname@
+	db	mo_,spc@,poke@,wo_,home@
+	db	i_,re_,ka_,e_,ma_,su_,ka_,hate@
+	db	EOMeom
+
+	public	kuridashi_m01
+kuridashi_m01:
+	db	D_MSG
+	db	dealer@
+	db	ha_,home@
+	db	EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	wospc@,ku_,ri_,da_,si_,tagyoe@
+	db	EOMeom
+
+	public	chk_life_m01
+chk_life_m01:
+	db	D_MSG
+	db	ta_,ta_,ka_,u_,spc@,ki_,ri_,yyo_,ku_,gaspc@,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	chk_life_m02
+chk_life_m02:
+	db	D_MSG
+	db	ta__,ma__,go__,haspc@,ta_,ta_,ka_,e_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	nige_ng_m01
+nige_ng_m01:
+	db	D_MSG
+	db	ni_,ge_,ra_,re_,na_,i_,gyoe@
+	db	EOMwaiteom
+ 
+	public	nige_ng_m02
+nige_ng_m02:
+	db	D_MSG
+	db	da__,me__,da_,gyoe@,home@
+	db	si_,yyo_,u_,bu_,nospc@,sa_,i_,ti_,yyu_,u_,ni_
+	db	gyo3@
+	db	a_,i_,te_,nispc@,se_,na_,ka_,haspc@
+	db	mi_,se_,ra_,re_,na_,i_,gyoe@
+	db	EOMwaiteom
+	
+	public	nige_ok_m01
+nige_ok_m01:
+	db	D_MSG
+	db	u_,ma_,ku_,spc@,ni_,ge_,ki_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	nige_ok_m02
+nige_ok_m02:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,mo_,ttute@,i_,ta_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	wospc@,tu_,ka_,ttute@,spc@,ni_,ge_,ta_
+	db	EOMwaiteom
+	
+	public	nige_ng_m03
+nige_ng_m03:
+	db	D_MSG
+	db	ni_,ge_,ru_,ko_,to_,gaspc@,de_,ki_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	makibishi_m02
+makibishi_m02:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ma_,ki_,bi_,si_,no_,home@
+	db	da__,me__,bou@,zi__,wospc@,u_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	item_kaifuku_m01
+item_kaifuku_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,mo_,ttute@,i_,ta_,home@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	de_,spc@,ka_,i_,hu_,ku_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	power_up_m01
+power_up_m01:
+	db	D_MSG
+	db	monsname2@
+	db	gaspc@,mo_,ttute@,i_,ta_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	gaspc@,sa_,do_,u_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	dougu_dame_m01
+dougu_dame_m01:
+	db	D_MSG
+	db	ko_,ko_,de_,haspc@,do_,u_,gu_,wo_,home@
+	db	tu_,ka_,u_,ko_,to_,haspc@,de_,ki_,ma_,se_,n_
+	db	EOMwaiteom
+
+	public	tori_m01
+tori_m01:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	ha_,mo_,u_,de_,te_,i_,ma_,su_
+	db	EOMwaiteom
+
+	public	stalker_m02
+stalker_m02:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	wospc@,mo_,do_,su_,ko_,to_,ga_,home@
+	db	de_,ki_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	no_more_m01
+no_more_m01:
+	db	D_MSG
+	db	wa_,za_,nospc@,no_,ko_,ri_,po__,i__,n__,to__,ga_
+	db	spc@,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	kanashibari_m02
+kanashibari_m02:
+	db	D_MSG
+	db	wa_,za_,wospc@,hu_,u_,zi_,ra_,re_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	point_naiyo_m01
+point_naiyo_m01:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,da_,su_,ko_,to_,nospc@,de_,ki_,ru_,home@
+	db	wa_,za_,gaspc@,na_,i_,gyoe@
+	db	EOMeom
+
+	public	encore_end_m01
+encore_end_m01:
+	db	D_MSG
+	db	monsname1@
+	db	no_,home@
+	db	a__,n__,ko__,bou@,ru__,zi_,yyo_,u_,ta_,i_,ga_
+	db	spc@,to_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	level_up_m01
+level_up_m01:
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	ha_,home@,re__,be__,ru__
+	db	EOM
+	db	N_MSG
+	dw	mons_level
+	db	013h				; 1 = byte 3 = ketasuu
+	db	D_MSG
+	db	spc@,nispc@,a_,ga_,ttu_,tagyoe@
+	db	EOM
+	db	FANFARE
+	db	EOM
+
+	public	esa_m01
+esa_m01:
+	db	D_MSG
+	db	ya_,se_,i_,no_,EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	ha_,home@
+	db	e__,sa__,wospc@,ta_,be_,te_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	ishi_m01
+ishi_m01:
+	db	D_MSG
+	db	ya_,se_,i_,no_,EOM
+	db	I_MSG
+	dw	enemy_name
+	db	D_MSG
+	db	ha_,home@
+	db	o_,ko_,ttute@,ru_,gyoe@
+	db	EOMwaiteom
+
+  ifn 0
+	public	esa_use_msg01
+esa_use_msg01:
+	db	D_MSG
+	db	myname@,haspc@,e__,sa__,wospc@,na_,ge_,tagyoe@
+	db	EOMeom
+
+	public	ishi_use_msg01
+ishi_use_msg01:
+	db	D_MSG
+	db	myname@,haspc@,i_,si_,wospc@,na_,ge_,tagyoe@
+	db	EOMeom
+  endif
+
+
+;------------------------------------- kougeki.dmg -----------------------------------------
+
+	public	sleep_m01
+sleep_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	gu_,u_,gu_,u_,spc@,ne_,mu_,ttute@,i_,ru_
+	db	EOMwaiteom
+
+	public	sleep_m02
+sleep_m02:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,me_,wo_,sa_,ma_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	ice_m02
+ice_m02:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ko_,o_,ttute@,spc@,si_,ma_,ttute@,spc@
+	db	u_,go_,ka_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	kizetsu_m01
+kizetsu_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,hi_,ru_,n_,da_,gyoe@
+	db	EOMwaiteom
+
+	public	katamatteiru_m01
+katamatteiru_m01:
+	db	D_MSG
+	db	kougeki@,nospc@,ha_,n_,do_,u_,de_,home@
+	db	monsname2@
+	db	haspc@,u_,go_,ke_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	shibari_off_m01
+shibari_off_m01:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	ka_,na_,si_,ba_,ri_,gaspc@,to_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	konran_m01
+konran_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ko_,n_,ra_,n_,si_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+	
+	public	konran_m02
+konran_m02:
+	db	D_MSG
+	db	wa_,ke_,mo_,spc@,wa_,ka_,ra_,zu_,home@
+	db	zi_,bu_,n_,wospc@,kougeki@,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	konran_m03
+konran_m03:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	ko_,n_,ra_,n_,gaspc@,to_,ke_,tagyoe@
+	db	EOMwaiteom
+	
+	public	konran_m04
+konran_m04:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	ko_,n_,ra_,n_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	konran_m05
+konran_m05:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	de_
+	db	home@
+	db	ko_,n_,ra_,n_,wospc@,na_,o_,si_,tagyoe@	
+	db	EOMwaiteom
+
+	public	konran_m06
+konran_m06:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	su_,de_,nispc@,ko_,n_,ra_,n_,spc@,si_,te_,i_,ru_
+	db	EOMwaiteom
+
+
+	public	shimetsuke_m01
+shimetsuke_m01:
+  ifn 0
+	db	D_MSG
+	db	monsname2@
+	db	nospc@,kougeki@,ha_,home@
+	db	ma_,da_,spc@,tu_,du_,i_,te_,i_,ru_
+	db	EOMeom
+  endif
+	db	D_MSG
+	db	monsname2@
+	db	haspc@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	no_,home@
+	db	da__,me__,bou@,zi__,wospc@,u_,ke_,te_,i_,ru_
+	db	EOMwaiteom
+	
+
+	public	shimetsuke_m02
+shimetsuke_m02:
+  ifn 0
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	mi_,u_,go_,ki_,gaspc@,to_,re_,na_,i_,gyoe@
+	db	EOMwaiteom
+  endif
+
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	EOM		
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	ka_,ra_,spc@,ka_,i_,ho_,u_,sa_,re_,tagyoe@
+	db	EOMwaiteom
+
+
+	public	shime_m01
+shime_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@
+	db	monsname2@,ni_
+	db	home@
+	db	si_,me_,tu_,ke_,ra_,re_,tagyoe@
+	db	EOMwaiteom
+	
+	public	uzushio_m01
+uzushio_m01:
+	public	honou_m01
+honou_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@
+	db	u_,zu_,nospc@,na_,ka_,ni_
+	db	home@
+	db	to_,zi_,ko_,me_,ra_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	makitsuki_m01
+makitsuki_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@
+	db	monsname2@,ni_
+	db	home@
+	db	ma_,ki_,tu_,ka_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	kara_m01
+kara_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@
+	db	monsname2@,no_
+	db	home@
+	db	ka_,ra_,nispc@,ha_,sa_,ma_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	gaman_m01
+gaman_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ga_,ma_,n_,si_,te_,i_,ru_
+	db	EOMwaiteom
+
+	public	gaman_m02
+gaman_m02:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	ga_,ma_,n_,gaspc@,to_,ka_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	motikotaeta_m01
+motikotaeta_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	de_,spc@,mo_,ti_,ko_,ta_,e_,tagyoe@
+	db	EOMwaiteom
+
+	public	koraeta_m01
+koraeta_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,home@
+	db	kougeki@,wospc@,ko_,ra_,e_,tagyoe@
+	db	EOMwaiteom
+
+	public	meromero_m01
+meromero_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	monsname1@
+	db	nispc@,me__,ro__,me__,ro__,da_,gyoe@
+	db	EOMwaiteom
+
+	public	meromero_m02
+meromero_m02:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,me__,ro__,me__,ro__,de_,home@
+	db	wa_,za_,gaspc@,da_,se_,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	dasenai_m01
+dasenai_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ka_,na_,si_,ba_,ri_,de_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	ga_,da_,se_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	namake_m01
+namake_m01:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,na_,ma_,ke_,te_,i_,ru_
+	db	EOMwaiteom
+	
+	public	namake_m02
+namake_m02:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,hi_,ru_,ne_,wo_,ha_,zi_,me_,tagyoe@
+	db	EOMwaiteom
+
+	public	namake_m03
+namake_m03:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,i_,u_,ko_,to_,wospc@,ki_,ka_,na_,i_
+	db	EOMwaiteom
+
+	public	namake_m04
+namake_m04:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,so_,ttu_,po_,wospc@,mu_,i_,ta_
+	db	EOMwaiteom
+
+	public	namake_m05
+namake_m05:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,si_,ra_,n_,pu_,ri_,wo_,si_,ta_
+	db	EOMwaiteom
+
+	public	namake_m06
+namake_m06:
+	db	I_MSG
+	dw	mymons_name
+	db	D_MSG
+	db	haspc@,ne_,mu_,ttu_,ta_,ma_,ma_
+	db	home@
+	db	me_,i_,re_,i_,wospc@,mu_,si_,si_,ta_
+	db	EOMwaiteom
+
+	public	point_non_m01
+point_non_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@,wa_,za_,nospc@,po__,i__,n__,to__,ga_,home@
+	db	na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	point_non_m02
+point_non_m02:
+	db	D_MSG
+	db	monsname2@,haspc@,po__,i__,n__,to__,gi_,re_,de_
+	db	home@
+	db	EOM
+	db	I_MSG
+	dw	str_buf
+	db	D_MSG
+	db	gaspc@,da_,se_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	kaifuku_m01
+kaifuku_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ne_,mu_,ri_,ha_,zi_,me_,tagyoe@
+	db	EOMeom
+
+	public	kaifuku_m02
+kaifuku_m02:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ke_,n_,ko_,u_,ni_,na_,ttute@,spc@
+	db	ne_,mu_,ri_,ha_,zi_,me_,tagyoe@
+	db	EOMeom
+
+	public	kaifuku_m03
+kaifuku_m03:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ta_,i_,ri_,yyo_,ku_,wo_,home@
+	db	ka_,i_,hu_,ku_,si_,tagyoe@
+	db	EOMwaiteom
+
+
+	public	kawashi_m01
+kawashi_m01:
+  ifn	1
+	db	D_MSG
+	db	si_,ka_,si_,spc@
+	db	EOM
+
+	public	kawashi_m01_1
+kawashi_m01_1:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	kougeki@,haspc@,ha_,zu_,re_,tagyoe@
+	db	EOMwaiteom
+  else
+	db	D_MSG
+	db	si_,ka_,si_,spc@
+	db	monsname2@
+	db	no_,home@
+	db	kougeki@,haspc@,ha_,zu_,re_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	butukari_m01
+butukari_m01:
+	db	D_MSG
+	db	i_,ki_,o_,i_,spc@,a_,ma_,ttute@,home@
+	db	monsname2@
+	db	ha_
+	db	gyo3@
+	db	zi_,me_,n_,nispc@,bu_,tu_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	zenzen_m01
+zenzen_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ni_,ha_,home@
+	db	ze_,n_,ze_,n_,ki_,i_,te_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	koukanai_m01
+koukanai_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ni_,ha_,home@
+	db	ko_,u_,ka_,gaspc@,na_,i_,spc@,mi_,ta_,i_,da_,tenten2@
+	db	EOMwaiteom
+
+	public	critical_m01
+critical_m01:
+	db	D_MSG
+	db	ki_,yyu_,u_,si_,yyo_,nispc@
+	db	a_,ta_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	hissatsu_m01
+hissatsu_m01:
+	db	D_MSG
+	db	i_,ti_,ge_,ki_,spc@,hi_,ttu_,sa_,tu_,gyoe@
+	db	EOMwaiteom
+
+	public	batugun_m01
+batugun_m01:
+	db	D_MSG
+	db	ko_,u_,ka_,haspc@,ba_,tu_,gu_,n_,da_,gyoe@
+	db	EOMwaiteom
+
+	public	imahitotsu_m01
+imahitotsu_m01:
+	db	D_MSG
+	db	ko_,u_,ka_,haspc@,i_,ma_,hi_,to_,tu_,nospc@,yo_,u_,da_
+	db	EOMwaiteom
+
+	public	mitizure_m02
+mitizure_m02:
+	db	D_MSG
+	db	monsname1@,haspc@,monsname2@,wo_,home@
+	db	mi_,ti_,du_,re_,nispc@,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	ikari_m01
+ikari_m01:
+	db	D_MSG
+	db	monsname2@,nospc@
+	db	i_,ka_,ri_,no_,home@
+	db	bo__,ru__,te__,bou@,zi__,gaspc@
+	db	a_,ga_,ttute@,i_,ku_,gyoe@
+	db	EOMwaiteom
+
+	public	encore_m01
+encore_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	a__,n__,ko__,bou@,ru__,wospc@,u_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	itamiwake_m01
+itamiwake_m01:
+	db	D_MSG
+	db	o_,ta_,ga_,i_,nospc@,ta_,i_,ri_,yyo_,ku_,wo_,home@
+	db	wa_,ka_,ti_,a_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+  ifn 0
+	public	type_chg_m01
+type_chg_m01:
+	db	D_MSG
+	db	monsname2@
+	db	nospc@,ta__,i__,pu__,wo_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	nispc@,ka_,e_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	lock_on_m01
+lock_on_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@
+	db	monsname1@
+	db	ni_,home@
+	db	ne_,ra_,i_,wospc@,sa_,da_,me_,tagyoe@
+	db	EOMwaiteom
+
+	public	dubbing_m01
+dubbing_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	wospc@,su__,ke__,ttu__,ti__,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	mitizure_m01
+mitizure_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,a_,i_,te_,wo_,home@
+	db	mi_,ti_,du_,re_,nispc@,si_,yo_,u_,to_,si_,te_,i_,ru_
+	db	EOMwaiteom
+
+	public	pp_herasu_m01
+pp_herasu_m01:
+	db	D_MSG
+	db	monsname1@
+	db	no_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	wospc@,EOM
+	db	N_MSG
+	dw	in_dat
+	db	011h				; 1 = byte 1 = ketasuu
+	db	D_MSG
+	db	ke_,zu_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	tiryou_m01
+tiryou_m01:
+	db	D_MSG
+	db	su_,zu_,no_,ne_,gaspc@
+	db	hi_,bi_,ki_,wa_,ta_,ttu_,tagyoe@,home@
+	db	EOMwaiteom
+
+
+	public	sleep_begin_m01
+sleep_begin_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	ne_,mu_,ttute@,si_,ma_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	alreadysleep_m01
+alreadysleep_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,su_,de_,ni_,home@
+	db	ne_,mu_,ttute@,i_,ru_
+	db	EOMwaiteom
+
+	public	poison_m01
+poison_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,do_,ku_,wo_,a_,bi_,tagyoe@
+	db	EOMwaiteom
+
+	public	poison_m02
+poison_m02:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	mo_,u_,do_,ku_,wo_,a_,bi_,tagyoe@
+	db	EOMwaiteom
+
+	public	poison_m03
+poison_m03:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,su_,de_,ni_,home@
+	db	do_,ku_,wospc@,a_,bi_,te_,i_,ru_
+	db	EOMwaiteom
+
+	public	suck_m01
+suck_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ka_,ra_,home@
+	db	ta_,i_,ri_,yyo_,ku_,wospc@,su_,i_,to_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	yumekui_m01
+yumekui_m01:
+	db	D_MSG
+	db	monsname1@
+	db	no_,home@
+	db	yu_,me_,wospc@,ku_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	yakedo_m01
+yakedo_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	ya_,ke_,do_,wo_,o_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	melt_m01
+melt_m01:
+	db	D_MSG
+	db	monsname1@
+	db	no_,home@
+	db	ko_,o_,ri_,gaspc@,to_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	ice_m01
+ice_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	ko_,o_,ri_,du_,ke_,ni_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	koreijou_m01
+koreijou_m01:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	EOM
+	db	I_MSG
+	dw	str_buf
+	db	D_MSG
+	db	haspc@
+	db	mo_,u_,a_,ga_,ra_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	koreijou_m02
+koreijou_m02:
+	db	D_MSG
+	db	monsname1@
+	db	no_,home@
+	db	EOM
+	db	I_MSG
+	dw	str_buf
+	db	D_MSG
+	db	haspc@
+	db	mo_,u_,sa_,ga_,ra_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	ridatsu_m01
+ridatsu_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,se_,n_,to_,u_,ka_,ra_,home@
+	db	ri_,da_,tu_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	nigeru_m01
+nigeru_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,o_,zi_,ke_,du_,i_,te_,home@
+	db	ni_,ge_,da_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	fukitobasu_m01
+fukitobasu_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	hu_,ki_,to_,ba_,sa_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	renzokuhit_m01
+renzokuhit_m01:
+;	db	D_MSG
+;	db	a_,i_,te_,nispc@
+;	db	EOM
+	db	N_MSG
+	dw	m_gaman
+	db	011h				; 1 = byte 1 = ketasuu
+	db	D_MSG
+	db	ka_,i_,spc@,a_,ta_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	renzokuhit_m02
+renzokuhit_m02:
+;	db	D_MSG
+;	db	a_,i_,te_,nispc@
+;	db	EOM
+	db	N_MSG
+	dw	e_gaman 
+	db	011h				; 1 = byte 1 = ketasuu
+	db	D_MSG
+	db	ka_,i_,spc@,a_,ta_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+
+	public	effect_m01
+effect_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@	
+	db	si_,ro_,i_,ki_,ri_,nispc@,tu_,tu_,ma_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	effect_m02
+effect_m02:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@
+	db	si_,ro_,i_,ki_,ri_,ni_
+	db	home@
+	db	ma_,mo_,ra_,re_,te_,i_,ru_
+	db	EOMwaiteom
+
+	public	kiaidame_m01
+kiaidame_m01:
+	db	E_WAIT
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ha_,ri_,ki_,ttute@,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	handou_m01
+handou_m01:
+	db	D_MSG
+	db	monsname2@,haspc@
+	db	kougeki@,no_,home@
+	db	ha_,n_,do_,u_,wospc@
+	db	u_,ke_,tagyoe@
+	db	EOMwaiteom
+	
+	public	migawari_m01
+migawari_m01:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	bu_,n_,si_,n_,gaspc@,a_,ra_,wa_,re_,ta_
+	db	EOMwaiteom
+	
+	public	migawari_ng_m01
+migawari_ng_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@
+	db	monsname2@
+	db	no_,home@
+	db	mi_,ga_,wa_,ri_,haspc@,su_,de_,nispc@,de_,te_,i_,tagyoe@
+	db	EOMwaiteom
+
+	public	migawari_ng_m02
+migawari_ng_m02:
+	db	D_MSG
+	db	si_,ka_,si_,spc@,bu_,n_,si_,n_,wospc@,da_,su_,ni_,ha_,home@
+	db	ta_,i_,ri_,yyo_,ku_,gaspc@,ta_,ri_,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	migawari_m02
+migawari_m02:
+	db	D_MSG
+	db	059h
+	db	nispc@,ka_,wa_,ttute@,home@
+	db	bu_,n_,si_,n_,gaspc@,kougeki@,wospc@,u_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	migawari_die_m01
+migawari_die_m01:
+	db	D_MSG
+	db	059h
+	db	nospc@,bu_,n_,si_,n_,ha_,home@
+	db	ki_,e_,te_,si_,ma_,ttu_,ta_,tenten2@
+	db	EOMwaiteom
+
+	public	monomane_m01
+monomane_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	wospc@,o_,bo_,e_,tagyoe@
+	db	EOMwaiteom
+
+	public	yadorigi_m01
+yadorigi_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ni_,home@
+	db	ta_,ne_,wospc@,u_,e_,tu_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	kawashita_m01
+kawashita_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	kougeki@,wospc@,ka_,wa_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	kanashibari_m01
+kanashibari_m01:
+	db	D_MSG
+	db	monsname1@
+	db	no_,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	wospc@,hu_,u_,zi_,ko_,me_,tagyoe@
+	db	EOMwaiteom
+
+	public	nekonikoban_m01
+nekonikoban_m01:
+	db	D_MSG
+	db	ko_,ba_,n_,gaspc@,a_,ta_,ri_,nispc@
+	db	ti_,ra_,ba_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	harituke_m01
+harituke_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	ta__,i__,pu__,nispc@
+	db	na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	kuroikiri_m01
+kuroikiri_m01:
+	db	D_MSG
+	db	su_,be_,te_,nospc@,su__,te__,bou@,ta__,su__,ga_,home@
+	db	mo_,to_,nispc@,mo_,do_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	henshin_m01
+henshin_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	nispc@,he_,n_,si_,n_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	kabe_m01
+kabe_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@
+	db	hi_,ka_,ri_,no_,ka_,be_,de_,home@
+	db	to_,ku_,si_,yyu_,kougeki@,ni_
+	db	spc@,tu_,yo_,ku_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+	
+	public	kabe_m02
+kabe_m02:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@
+	db	ri__,hu__,re__,ku__,ta__,bou@,de_,home@
+	db	da_,ge_,ki_,kougeki@,ni_
+	db	spc@,tu_,yo_,ku_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+  ifn 0
+	public	koukanashi_m01
+koukanashi_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@,ko_,u_,ka_,gaspc@,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	nanimookoran_m01
+nanimookoran_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@,na_,ni_,mo_,o_,ko_,ra_,na_,i_
+	db	EOMwaiteom
+
+
+	public	umakukimaran_m01
+umakukimaran_m01:
+  ifn	1
+	db	D_MSG
+	db	si_,ka_,si_,spc@
+	db	EOM
+
+	public	umakukimaran_m01_1
+umakukimaran_m01_1:
+	db	D_MSG
+	db	u_,ma_,ku_,spc@
+	db	ki_,ma_,ra_,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+  else
+	db	D_MSG
+	db	si_,ka_,si_,spc@,u_,ma_,ku_,spc@
+	db	ki_,ma_,ra_,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	sippai_m01
+	public	sippai_m01_1
+sippai_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@
+	db	EOM
+sippai_m01_1:
+	db	D_MSG
+	db	monsname1@
+	db	ni_,ha_,home@
+	db	ki_,ka_,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	mantan_m01
+mantan_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@
+	db	monsname2@
+	db	no_,home@
+	db	ta_,i_,ri_,yyo_,ku_,haspc@,ma_,n_,ta_,n_,da_,gyoe@
+	db	EOMwaiteom
+
+	public	irekae_m01
+irekae_m01:
+	db	D_MSG
+	db	monsname2@
+	db	gaspc@,se_,n_,to_,u_,ni_,home@
+	db	hi_,ki_,zu_,ri_,da_,sa_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	mahi_m01
+mahi_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,ma_,hi_,si_,te_,home@
+	db	wa_,za_,gaspc@,de_,ni_,ku_,ku_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	mahi_m02
+mahi_m02:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ka_,ra_,da_,gaspc@,si_,bi_,re_,te_,spc@
+	db	u_,go_,ke_,na_,i_
+	db	EOMwaiteom
+
+	public	mahi_m03
+mahi_m03:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,su_,de_,ni_,home@
+	db	ma_,hi_,si_,te_,i_,ru_
+	db	EOMwaiteom
+
+	public	item_gird_m01
+item_gird_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,home@,EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	de_,spc@,ma_,mo_,ra_,re_,te_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	oumu_ng_m01
+oumu_ng_m01:
+	db	D_MSG
+	db	si_,ka_,si_,spc@,o__,u__,mu__,ga_,e_,si_,ha_,cr@
+	db	si_,ttu_,pa_,i_,ni_,o_,wa_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	dorobou_m01
+dorobou_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@
+	db	monsname1@
+	db	ka_,ra_,home@
+	db	EOM
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	wospc@,u_,ba_,i_,to_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	stalker_m01
+stalker_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	mo_,u_,spc@,ni_,ge_,ra_,re_,na_,i_,gyoe@
+	db	EOMwaiteom
+
+	public	akumu_m01
+akumu_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	a_,ku_,mu_,wospc@,mi_,ha_,zi_,me_,tagyoe@
+	db	EOMwaiteom
+
+	public	kaen_m01
+kaen_m01:
+	db	D_MSG
+	db	monsname2@
+	db	no_,home@
+	db	ko_,o_,ri_,gaspc@,to_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	kugi_m01
+kugi_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	zi_,bu_,n_,nospc@,ta_,i_,ri_,yyo_,ku_,wospc@,ke_,zu_,ttute@
+	db	normal@
+	db	monsname1@
+	db	ni_,home@
+	db	no_,ro_,i_,wospc@,ka_,ke_,tagyoe@
+	db	EOMwaiteom
+
+	public	mamoru_m01
+mamoru_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	ma_,mo_,ri_,nospc@,ta_,i_,se_,i_,nispc@
+	db	ha_,i_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	mamoru_m02
+mamoru_m02:
+  ifn	1
+	db	D_MSG
+	db	si_,ka_,si_
+	db	home@
+	db	monsname1@,haspc@
+	db	ma_,mo_,ttute@,i_,ru_,gyoe@
+	db	EOMeom
+  else
+	db	D_MSG
+	db	monsname1@
+	db	gaspc@,ma_,mo_,ttute@,i_,ru_,no_,de_
+	db	home@
+	db	kougeki@,gaspc@,ki_,ka_,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	makibishi_m01
+makibishi_m01:
+	db	D_MSG
+	db	monsname1@
+	db	nospc@,a_,si_,mo_,to_,ni_,home@
+	db	ma_,ki_,bi_,si_,gaspc@,ti_,ra_,ba_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	miyaburi_m01
+miyaburi_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@
+	db	monsname1@
+	db	no_,home@
+	db	si_,yyo_,u_,ta_,i_,wospc@,mi_,ya_,bu_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	horobi_m01
+horobi_m01:
+	db	D_MSG
+	db	o_,ta_,ga_,i_,no_
+	db	poke@,ha_,home@
+	db	n3@,ta__,bou@,n__,go_,nispc@
+	db	ho_,ro_,bi_,te_,si_,ma_,u_,gyoe@
+	db	EOMwaiteom
+
+	public	sunaarashi_m01
+sunaarashi_m01:
+	db	D_MSG
+	db	su_,na_,a_,ra_,si_,gaspc@,hu_,ki_,ha_,zi_,me_,tagyoe@
+	db	EOMwaiteom
+
+	public	koraeru_m01
+koraeru_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ko_,ra_,e_,ru_,home@
+	db	ta_,i_,se_,i_,nispc@,ha_,i_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	meromero_m03
+meromero_m03:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	me__,ro__,me__,ro__,nispc@,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	shinpi_m01
+shinpi_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_,home@
+	db	si_,n_,pi_,no_,be__,bou@,ru__,nispc@
+	db	tu_,tu_,ma_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	mamorareteru_m01
+mamorareteru_m01:
+	db	D_MSG
+	db	monsname1@
+	db	ha_,home@
+	db	si_,n_,pi_,no_,be__,bou@,ru__,nispc@
+	db	ma_,mo_,ra_,re_,te_,i_,ru_,gyoe@
+	db	EOMwaiteom
+
+	public	magnitude_m01
+magnitude_m01:
+	db	D_MSG
+	db	ma__,gu__,ni__,ti__,yyu__,bou@,do__
+	db	EOM
+	db	N_MSG
+	dw	in_dat
+	db	011h				; 1 = byte 1 = ketasuu
+	db	D_MSG
+	db	gyoe@,gyoe@
+	db	EOMwaiteom
+
+	public	spin_m01
+spin_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,monsname1@,no_,home@
+	db	kougeki@,ka_,ra_,spc@,ka_,i_,ho_,u_,sa_,re_,tagyoe@
+	db	EOMwaiteom
+
+	public	spin_m02
+spin_m02:
+  ifn	1
+	db	D_MSG
+	db	monsname2@
+	db	ha_
+	db	home@
+	db	ya_,do_,ri_,gi_,no_,ta__,ne__,wo_,spc@
+	db	hu_,ki_,to_,ba_,si_,tagyoe@
+	db	EOMwaiteom
+  else
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ya_,do_,ri_,gi_,no_,ta__,ne__,wo_
+	db	home@
+	db	hu_,ki_,to_,ba_,si_,tagyoe@
+	db	EOMwaiteom
+  endif
+
+	public	spin_m03
+spin_m03:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ma_,ki_,bi_,si_,wo_
+	db	home@
+	db	hu_,ki_,to_,ba_,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	amagoi_m01
+amagoi_m01:
+	db	D_MSG
+	db	o_,o_,a_,me_,nispc@,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	nihonbare_m01
+nihonbare_m01:
+	db	D_MSG
+	db	hi_,za_,si_,gaspc@,tu_,yo_,ku_,na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	haradaiko_m01
+haradaiko_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,ta_,i_,ri_,yyo_,ku_,wo_,home@
+	db	ke_,zu_,ttute@,spc@,pa__,wa__,bou@,ze_,n_,ka_,i_,nispc@
+	db	na_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	jikoanji_m01
+jikoanji_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,monsname1@,no_,home@
+	db	ho_,zi_,yyo_,ko_,u_,ka_,wospc@,ko__,pi__,bou@,si_,tagyoe@
+	db	EOMwaiteom
+
+	public	miraiyochi_m01
+miraiyochi_m01:
+	db	D_MSG
+	db	monsname2@
+	db	haspc@,mi_,ra_,i_,ni_,home@
+	db	kougeki@,wospc@,yo_,ti_,si_,tagyoe@
+	db	EOMwaiteom
+
+
+	public	fukuro_m01
+fukuro_m01:
+	db	I_MSG
+	dw	table_data
+	db	D_MSG
+	db	nospc@,kougeki@,gyoe@
+	db	EOMeom
+
+	public	present_ng_m01
+present_ng_m01:
+	db	D_MSG
+	db	monsname1@
+	db	haspc@,pu__,re__,ze__,n__,to__,wo_,home@
+	db	u_,ke_,to_,re_,spc@,na_,ka_,ttu_,tagyoe@
+	db	EOMwaiteom
+
+	public	meireimushi_m01
+meireimushi_m01:
+	db	D_MSG
+	db	monsname2@
+	db	ha_
+	db	home@
+	db	me_,i_,re_,i_,wospc@
+	db	mu_,si_,si_,tagyoe@
+	db	EOMwaiteom
+
+
+	public	ptp_error_m01		;00/08/25 by tama
+ptp_error_m01:
+	db	D_MSG
+	db	tu_,u_,si_,n_,e__,ra__,bou@,spc@,ni_,yo_,ttu_,te_,spc@,ta_,i_,se_,n_,ga_
+	db	home@
+	db	ti_,yyu_,u_,da_,n_,spc@,sa_,re_,ma_,si_,ta_,gyoe@
+	db	EOMwaiteom
+
+
+	public	ptp_limit_m01		;00/09/22 by tama
+ptp_limit_m01:
+	db	D_MSG
+	db	ki_,yyo_,u_,no_,spc@,no_,ko_,ri_,zi_,ka_,n_,ga_
+	db	home@
+	db	na_,ku_,na_,ri_,ma_,si_,ta_,gyoe@
+	db	EOMeom
+
+
+#endif

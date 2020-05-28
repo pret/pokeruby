@@ -1,0 +1,124 @@
+//====================================================================
+//								自己紹介
+//====================================================================
+/********************************************************************/
+/*							簡易会話受付							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_introduce_script
+	_TALK_OBJ_START
+	_IF_FLAGON_JUMP	SYS_KAIWA_USED,ev_boy4_01_p05_introduce
+	_TALK_KEYWAIT	msg_youngm1_01_p01_introduce
+	_JUMP	ev_boy4_01_p10_introduce
+	_END
+
+//説明を聞いた後。
+ev_boy4_01_p10_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p10_introduce
+	_SELECT_WINDOW	17,6,INTRODUCE_MENU01
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_boy4_01_p02_introduce
+	_CASEJUMP	1,ev_boy4_01_p03_introduce
+	_CASEJUMP	2,ev_boy4_01_p09_introduce
+	_CASECANCEL	ev_boy4_01_p03_introduce
+	_END
+
+//説明を聞く
+ev_boy4_01_p09_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p09_introduce
+	_JUMP	ev_boy4_01_p10_introduce
+	_END
+
+//はい
+ev_boy4_01_p02_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p02_introduce
+	_TALK_CLOSE
+
+	_LDVAL	PARAM0	0
+	_CALL	ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+	_IFVAL_CALL	PARAM0,EQ,1,ev_boy4_01_husigi_introduce//当りワード	
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_boy4_01_p04_introduce
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_boy4_01_p08_introduce
+	_END
+
+//会話更新していない
+ev_boy4_01_p04_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p04_introduce
+	_TALK_OBJ_END
+	_END
+
+//会話更新済み
+ev_boy4_01_p08_introduce:
+	_LDVAL	PARAM0	0
+	_PROGRAM	GET_KAIWA_MSG
+	_TALK_WAIT
+	_TIME_WAIT		80
+	_TALK_KEYWAIT	msg_youngm1_01_p08_introduce
+	_TALK_OBJ_END
+	_END
+
+//いいえ
+ev_boy4_01_p03_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p03_introduce
+	_TALK_OBJ_END
+	_END
+
+//作成２度目以降の話かけ
+ev_boy4_01_p05_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p05_introduce
+	_JUMP	ev_boy4_01_p11_introduce
+	_END
+
+//説明を聞いた後。
+ev_boy4_01_p11_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p11_introduce
+	_SELECT_WINDOW	17,6,INTRODUCE_MENU01
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_boy4_01_p06_introduce
+	_CASEJUMP	1,ev_boy4_01_p07_introduce
+	_CASEJUMP	2,ev_boy4_01_p09a_introduce
+	_CASECANCEL	ev_boy4_01_p07_introduce
+	_END
+
+//説明を聞く
+ev_boy4_01_p09a_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p09_introduce
+	_JUMP	ev_boy4_01_p11_introduce
+	_END
+
+//はい
+ev_boy4_01_p06_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p06_introduce
+	_TALK_CLOSE
+	_LDVAL	PARAM0	0
+	_CALL	ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+	_IFVAL_CALL	PARAM0,EQ,1,ev_boy4_01_husigi_introduce//当りワード	
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_boy4_01_p04_introduce
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_boy4_01_p08_introduce
+	_END
+
+//いいえ
+ev_boy4_01_p07_introduce:
+	_TALK_KEYWAIT	msg_youngm1_01_p07_introduce
+	_TALK_OBJ_END
+	_END
+
+//不思議な出来事当りワード入力
+ev_boy4_01_husigi_introduce:
+	_IF_FLAGOFF_JUMP	SYS_BATCH05_GET,ev_boy4_01_cancel_introduce
+	_IF_FLAGON_JUMP		SYS_EXDATA_ENABLE,ev_boy4_01_cancel_introduce
+	_FLAG_SET	SYS_EXDATA_ENABLE//ふしぎな出来事フラグセット
+	_EASY_MSG	msg_youngm1_01_p12_introduce
+	_TALK_OBJ_END
+	_END
+
+ev_boy4_01_cancel_introduce:
+	_RET
+
+
+
+
+
+	
+

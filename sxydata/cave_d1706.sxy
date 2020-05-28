@@ -1,0 +1,97 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1706	2
+#define EXITNUM_CAVE_D1706	4
+#define POSNUM_CAVE_D1706	0
+#define BGNUM_CAVE_D1706	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_boyscout1_01_p01_cave_d1706[];
+extern const u8	ev_ball1_97[];
+
+const evObjData	OBJ_cave_d1706[] =
+{
+	{
+		BOYSCOUT1_01_CAVE_D1706,		//OBJ ID
+		BOYSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boyscout1_01_p01_cave_d1706,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BALL1_97,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_97,		//Event Lavel
+		FV_BALL1_97,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d1706[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		CAVE_D1704_DOOR04,		//Door ID
+		CAVE_D1704,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		CAVE_D1704_DOOR04,		//Door ID
+		CAVE_D1704,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		CAVE_D1704_DOOR05,		//Door ID
+		CAVE_D1704,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		CAVE_D1704_DOOR05,		//Door ID
+		CAVE_D1704,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d1706_sxy_data =
+{
+OBJNUM_CAVE_D1706,			// field obj max
+EXITNUM_CAVE_D1706,		// exit max
+POSNUM_CAVE_D1706,			// pos event max
+BGNUM_CAVE_D1706,			// bg event max
+OBJ_cave_d1706,			// field obj data
+EXIT_cave_d1706,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

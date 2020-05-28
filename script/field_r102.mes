@@ -1,0 +1,118 @@
+// ●102番道路　フィールド
+
+
+// ●ミツルのポケモン捕獲イベント。
+// ●ミツルに先導されて主人公がやってくる。
+// ●適当な草むらに二人が立ち止まり、ミツルのセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mitsuru_01_p01_field_r102
+msg_mitsuru_01_p01_field_r102:
+	.byte	MI_,TU_,RU_,kako2_,I_MSG_,MY_NAME_BUF,sa_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ttu_,te_,spc_,ko_,u_,i_,u_,spc_,ku_,sa_,mu_,ra_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ta_,ri_,spc_,su_,ru_,n_,de_,si_,yyo_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ga_,spc_,zi_,yyo_,u_,zu_,ni_,spc_,tu_,ka_,ma_,e_,ra_,re_,ru_,ka_
+	.byte	CR_
+	.byte	so_,ko_,de_,spc_,mi_,te_,te_,spc_,ku_,da_,sa_,i_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,u_,wa_,ttu_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで戦闘突入。
+// ●ミツルがポケモンを捕獲するイベント戦闘。
+// ●戦闘終了後、フィールドに戻って以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mitsuru_01_p02_field_r102
+msg_mitsuru_01_p02_field_r102:
+	.byte	MI_,TU_,RU_,kako2_,ya_,ttu_,ta_,tenten_,tenten_,spc_,bo_,ku_,no_,tenten_,tenten_
+	.byte	CR_
+	.byte	bo_,ku_,no_,spc_,PO_,KE_,MO_,N_,da_,tenten_,tenten_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ミツル、主人公の方を振り向く
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mitsuru_01_p03_field_r102
+msg_mitsuru_01_p03_field_r102:
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	CR_
+	.byte	ZI_,MU_,ni_,spc_,mo_,do_,ro_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面ブラックアウトしてトウカのジムへ。
+
+
+// ●坊や２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya2_01_p01_field_r102
+msg_boya2_01_p01_field_r102:
+	.byte	bo_,ku_,tenten_,tenten_,spc_,se_,ga_,spc_,hi_,ku_,i_,ka_,ra_
+	.byte	CR_
+	.byte	ku_,sa_,mu_,ra_,wo_,spc_,a_,ru_,ku_,to_,spc_,mo_,gu_,ttu_,ti_,yya_,u_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	HA_,TTU_,PA_,ga_,spc_,ha_,na_,no_,spc_,a_,na_,ni_,spc_,ha_,i_,ttu_,te_
+	.byte	CR_
+	.byte	hu_,aa_,spc_,hu_,aa_,spc_,hu_,aa_,spc_,hu_,aa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	bu_,wa_,ttu_,ku_,si_,yyo_,bou_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●スポーツマン１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sportsm1_01_p01_field_r102
+msg_sportsm1_01_p01_field_r102:
+	.byte	hu_,hu_,hu_,spc_,mi_,te_,te_,spc_,go_,ra_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●段差を飛び降りるアクション
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_sportsm1_01_p02_field_r102
+msg_sportsm1_01_p02_field_r102:
+	.byte	do_,u_,da_,hate_,spc_,su_,go_,i_,da_,ro_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ga_,re_,na_,i_,spc_,da_,n_,sa_,mo_,spc_,u_,e_,ka_,ra_,spc_,na_,ra_,ba_
+	.byte	CR_
+	.byte	to_,bi_,o_,ri_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_field_r102
+msg_boy1_01_p01_field_r102:
+	.byte	PO_,KE_,MO_,N_,spc_,ta_,ku_,sa_,n_,spc_,tu_,ka_,ma_,e_,yo_,bou_,ttu_,to_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●コトキ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r102
+msg_kanban_01_p01_field_r102:
+	.byte	ko_,ko_,ha_,spc_,n1_,n0_,n2_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowR__,spc_,KO_,TO_,KI_,TA_,U_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トウカ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r102
+msg_kanban_02_p01_field_r102:
+	.byte	ko_,ko_,ha_,spc_,n1_,n0_,n2_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,TO_,U_,KA_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

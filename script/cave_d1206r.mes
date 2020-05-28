@@ -1,0 +1,63 @@
+// ●目覚めの祠　最深部
+// ●ルビーver
+
+
+// ●超古代ポケモン、グラードン
+// ●初期状態では、地底湖部分でグラードンは暴れ回っている。
+// （定期的にグラードンの鳴き声を鳴らしておきたい）
+// ●主人公が指定されたポスに乗ると、主人公は上を向く。
+// ●ここで以下のナレーション。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_goods1_01_p01_cave_d1206r
+msg_goods1_01_p01_cave_d1206r:
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,be_,ni_,i_,ro_,no_,ta_,ma_,ga_
+	.byte	CR_
+	.byte	to_,tu_,ze_,n_,spc_,ka_,ga_,ya_,ki_,spc_,ha_,zi_,me_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そうしてグラードンの動きがゆっくりになり、
+// 主人公の方へ寄ってきて、大きくひと鳴きしてから戦闘に突入する。
+
+// ●主人公が超古代ポケモンを捕獲せずに倒した場合のみ
+// 　以下のメッセージを展開
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_goods1_01_p02_cave_d1206r
+msg_goods1_01_p02_cave_d1206r:
+	.byte	GU_,RA_,bou_,DO_,N_,ha_,spc_,hu_,ta_,ta_,bi_
+	.byte	CR_
+	.byte	ne_,mu_,ri_,ni_,spc_,tu_,i_,ta_,spc_,yo_,u_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●底に沈んでいくような演出（ができるのかどうか知りませんが、とりあえず）
+
+// ●グラードンとの戦闘終了後、マツブサが途中で
+// 立ち止まったりしながら、ためらいがちにやってきて、
+// 主人公のとなりに立ち、以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p01_cave_d1206r
+msg_magmaboss_01_p01_cave_d1206r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,ko_,re_,wo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム入手メッセージを表示。
+// ●「あいいろのたま」を「たいせつなもの」に追加。
+// ●そしてマツブサは去っていく。
+// ●主人公から３マスほど離れたところで振り返り、
+// 以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p02_cave_d1206r
+msg_magmaboss_01_p02_cave_d1206r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	SA_,YO_,NA_,RA_,da_
+	.byte	CR_
+	.byte	mo_,u_,spc_,a_,u_,ko_,to_,ha_,spc_,na_,i_,da_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フラグ２５成立

@@ -1,0 +1,141 @@
+
+// ●職人
+// ●「あさせのしお」「あさせのかいがら」どちらも持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_cave_d1401
+msg_oldman1_01_p01_cave_d1401:
+	.byte	ko_,no_,sa_,ki_,ni_,spc_,su_,su_,mu_,no_,ka_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,de_,spc_,yo_,ka_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	a_,sa_,se_,no_,si_,o_,to_,spc_,a_,sa_,se_,no_,ka_,i_,ga_,ra_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,tu_,me_,te_,ki_,te_,spc_,ku_,re_,na_,i_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	za_,i_,ri_,yyo_,u_,ga_,spc_,a_,tu_,ma_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ga_,spc_,i_,i_,mo_,no_,spc_,tu_,ku_,ru_,n_,da_,ga_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ● 材料が足りない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_cave_d1401
+msg_oldman1_01_p02_cave_d1401:
+	.byte	a_,sa_,se_,no_,si_,o_,to_,spc_,a_,sa_,se_,no_,ka_,i_,ga_,ra_
+	.byte	CR_
+	.byte	so_,re_,zo_,re_,spc_,n4_,tu_,spc_,a_,re_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,ga_,ra_,no_,su_,zu_,ga_,spc_,tu_,ku_,re_,ru_,n_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,i_,ga_,ra_,no_,su_,zu_,no_,spc_,za_,i_,ri_,yyo_,u_,spc_,na_,ra_
+	.byte	CR_
+	.byte	ma_,i_,ni_,ti_,spc_,to_,re_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ● 「かいがらのすず」をつくる条件を満たしている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p03_cave_d1401
+msg_oldman1_01_p03_cave_d1401:
+	.byte	o_,gyoe_,spc_,a_,sa_,se_,no_,si_,o_,to_,spc_,a_,sa_,se_,no_,ka_,i_,ga_,ra_,gyoe_
+	.byte	CR_
+	.byte	ri_,yyo_,u_,mo_,spc_,zi_,yyu_,u_,bu_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,de_,spc_,ka_,i_,ga_,ra_,no_,su_,zu_
+	.byte	CR_
+	.byte	tu_,ku_,ttu_,te_,mo_,spc_,i_,i_,ka_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_oldman1_01_p04_cave_d1401:
+// ●「いいえ」→msg_oldman1_01_p06_cave_d1401:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p04_cave_d1401
+msg_oldman1_01_p04_cave_d1401:
+	.byte	ka_,i_,ga_,ra_,no_,su_,zu_
+	.byte	CR_
+	.byte	sa_,ttu_,so_,ku_,spc_,tu_,ku_,ra_,se_,te_,spc_,mo_,ra_,u_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,si_,spc_,de_,ki_,ta_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「かいがらのすず」入手処理
+// ●バッグから「あさせのしお」「あさせのかいがら」削除
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p05_cave_d1401
+msg_oldman1_01_p05_cave_d1401:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,mo_,ta_,se_,te_,a_,ge_,ru_,to_,spc_,yo_,ro_,ko_,bu_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,ta_,ttu_,te_,spc_,ka_,i_,ga_,ra_,no_,su_,zu_,no_,spc_,ne_,i_,ro_,ha_
+	.byte	CR_
+	.byte	te_,n_,ka_,spc_,i_,ttu_,pi_,n_,spc_,da_,ka_,ra_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,i_,ga_,ra_,no_,su_,zu_,no_,spc_,za_,i_,ri_,yyo_,u_,spc_,na_,ra_
+	.byte	CR_
+	.byte	ma_,i_,ni_,ti_,spc_,to_,re_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	so_,ro_,e_,ba_,spc_,ma_,ta_,spc_,tu_,ku_,ra_,se_,te_,spc_,mo_,ra_,u_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p06_cave_d1401
+msg_oldman1_01_p06_cave_d1401:
+	.byte	so_,u_,ka_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	ka_,i_,ga_,ra_,no_,su_,zu_,spc_,tu_,ku_,ri_,ta_,ka_,ttu_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●あさせのしお入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_salt_01_p01_cave_d1404
+msg_salt_01_p01_cave_d1404:
+	.byte	a_,sa_,se_,no_,si_,o_,wo_,spc_,to_,ttu_,ta_,spc_,a_,to_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ma_,ha_,spc_,na_,ni_,mo_,spc_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●あさせのかいがら入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_shell_01_p01_cave_d1402
+msg_shell_01_p01_cave_d1402:
+	.byte	a_,sa_,se_,no_,ka_,i_,ga_,ra_,wo_,spc_,mi_,tu_,ke_,ta_,spc_,a_,to_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ma_,ha_,spc_,na_,ni_,mo_,spc_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●しお、かいがらが両方５つ以上あって、バッグがいっぱい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p07_cave_d1401
+msg_oldman1_01_p07_cave_d1401:
+	.byte	tu_,ku_,ttu_,te_,mo_,spc_,BA_,TTU_,GU_,ga_,spc_,i_,ttu_,pa_,i_,de_
+	.byte	CR_
+	.byte	mo_,te_,na_,i_,spc_,yo_,u_,da_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	se_,i_,ri_,si_,te_,spc_,ma_,ta_,spc_,ku_,ru_,to_,spc_,i_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

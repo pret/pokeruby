@@ -1,0 +1,23 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 12
+#define EVILM1_01_FIELD_R112	1
+#define TR_MOUNT_01	2
+#define TR_CAMPB_03	3
+#define TR_PICNICG_03	4
+#define TR_MOUNT_02	5
+#define EVILM1_02_FIELD_R112	6
+#define SEED_04_FIELD_R112	7
+#define SEED_03_FIELD_R112	8
+#define SEED_02_FIELD_R112	9
+#define SEED_01_FIELD_R112	10
+#define HILL1_01_FIELD_R112	11
+#define BALL1_11	12
+
+//Exit ID = 6
+#define FIELD_R112_DOOR01	0
+#define FIELD_R112_DOOR02	1
+#define FIELD_R112_DOOR03	2
+#define FIELD_R112_DOOR04	3
+#define FIELD_R112_DOOR05	4
+#define FIELD_R112_DOOR06	5

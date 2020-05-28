@@ -1,0 +1,73 @@
+;==========================================================
+;
+;	岩澤さん用のグラフィック圧縮リスト
+;
+;==========================================================
+;技エフェクト関連
+el_ball.scl			0	20		COLOR		;86:じゅうまんボルト
+el_ball.sch			0	600		OBJCGX
+s_hane.scl			0	20		COLOR		;297:フェザーダンス
+s_hane.sch			0	400		OBJCGX
+s_gkaze.scl			0	20		COLOR		;318:ぎんいろのかぜ
+s_gkaze.sch			0	100		OBJCGX
+
+;ロープウェイデモ
+rwd_bg01.scl		0	80		NOCOMP
+rwd_obj01.scl		0	20		NOCOMP
+rwd_bg01.sch		0	4000	BG1CGX
+rwd_objRope00.sch	0	800		OBJCGX
+rwd_objRope01.sch	0	40		OBJCGX
+rwd_objRope02.sch	0	80		OBJCGX
+
+;ルーレット
+rlt_bg01.sch		0	2000	BG1CGX
+rlt_bg02.sch		0	4000	BG2CGX
+
+rlt_ctbl.sch		0	800		OBJCGX
+
+rlt_wPoke.sch		0	1600	OBJCGX
+
+rlt_bgo_coin.sch	0	400		OBJCGX
+rlt_bgo_num.sch		0	280		OBJCGX
+rlt_bgo_odds.sch	0	500		OBJCGX
+
+;メール描画
+m_orange.scl	0	20	NOCOMP
+m_harbor.scl	0	20	NOCOMP
+m_kira.scl		0	20	NOCOMP
+m_mecha.scl		0	20	NOCOMP
+m_wood.scl		0	20	NOCOMP
+m_cross.scl		0	20	NOCOMP
+m_treas.scl		0	20	NOCOMP
+m_shadow.scl	0	20	NOCOMP
+m_trop.scl		0	20	NOCOMP
+m_dream.scl		0	20	NOCOMP
+m_miracl.scl	0	20	NOCOMP
+m_retro.scl		0	20	NOCOMP
+
+m_orange.sch	0	2C0	BG1CGX
+m_harbor.sch	0	2E0	BG1CGX
+m_kira.sch		0	400	BG1CGX
+m_mecha.sch		0	1E0	BG1CGX
+m_wood.sch		0	3A0	BG1CGX
+m_cross.sch		0	300	BG1CGX
+m_treas.sch		0	140	BG1CGX
+m_shadow.sch	0	300	BG1CGX
+m_trop.sch		0	220	BG1CGX
+m_dream.sch		0	340	BG1CGX
+m_miracl.sch	0	2A0	BG1CGX
+m_retro.sch		0	540	BG1CGX
+
+m_orange.ssc	0	500	BG1MAP
+m_harbor.ssc	0	500	BG1MAP
+m_kira.ssc		0	500	BG1MAP
+m_mecha.ssc		0	500	BG1MAP
+m_wood.ssc		0	500	BG1MAP
+m_cross.ssc		0	500	BG1MAP
+m_treas.ssc		0	500	BG1MAP
+m_shadow.ssc	0	500	BG1MAP
+m_trop.ssc		0	500	BG1MAP
+m_dream.ssc		0	500	BG1MAP
+m_miracl.ssc	0	500	BG1MAP
+m_retro.ssc		0	500	BG1MAP
+

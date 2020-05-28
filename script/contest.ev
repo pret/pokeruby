@@ -1,0 +1,1398 @@
+//====================================================================
+//
+//					コンテスト(受け付け)
+//
+//====================================================================
+SCRIPT_LABEL	contest_script_before
+	_TALK_OBJ_START
+	_CHECK_ITEM	ITEM_KONTESUTOPASU,1	//持ってない場合２度目の話し掛け落とす
+	_IFVAL_CALL	ANSWORK	EQ,0,ev_pccable_01_fh00reset_contest
+	
+	_IFVAL_JUMP	WK_SCENE_SP_CONTESTITEM,NE,0,ev_pccable_01_p12_contest
+	_IF_FLAGON_JUMP	FH_00,ev_pccable_01_p02_contest
+	_SET_BUF		0,TMPWK3		//ランク名
+	_TALK_KEYWAIT	msg_pccable_01_p01_sp_contest
+	_CHECK_ITEM	ITEM_KONTESUTOPASU,1	//コンテストパスチェック
+	_IFVAL_JUMP	ANSWORK	EQ,0,ev_pccable_01_sankano_contest
+	_FLAG_SET	FH_00
+	_JUMP	ev_pccable_01_p02_contest
+	_END
+
+ev_pccable_01_fh00reset_contest:
+	//コンテパスがない場合フラグリセット
+	//一度話しかけて道具を預けた場合
+	_FLAG_RESET	FH_00
+	_RET
+
+ev_pccable_01_sankano_contest://コンテストパスがないので参加できません
+	_IFVAL_JUMP	CON_RANK,EQ,NORMAL_RANK,ev_pccable_01_pasget_contest//ノーマル？
+	_TALK_KEYWAIT	msg_pccable_01_p16_sp_contest
+	_TALK_END
+	_END
+	
+ev_pccable_01_pasget_contest://コンテストパス貰う
+	_TALK_YES_NO	msg_pccable_01_p18_sp_contest
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_pccable_01_pasgetyes_contest
+	_TALK_KEYWAIT	msg_pccable_01_p21_sp_contest//no
+	_TALK_END
+	_END
+
+ev_pccable_01_pasgetyes_contest://yes
+	_IF_FLAGON_JUMP	FE_KONTESUTOPASU_GET,ev_pccable_01_pasgetno_contest
+	_TALK_KEYWAIT	msg_pccable_01_p19_sp_contest
+	_ITEM_EVENT	ITEM_KONTESUTOPASU,1
+	_FLAG_SET	FE_KONTESUTOPASU_GET
+	_FLAG_SET	FH_00
+	_TALK_KEYWAIT	msg_pccable_01_p04_sp_contest
+	_JUMP	ev_pccable_01_p02_contest
+	_END
+
+ev_pccable_01_pasgetno_contest://１回貰ってる
+	_TALK_KEYWAIT	msg_pccable_01_p20_sp_contest
+	_TALK_END
+	_END
+
+ev_pccable_01_p12_contest://優勝の賞品を受け取っていない処理
+	_TALK_KEYWAIT	msg_pccable_01_p12_sp_contest
+	_SWITCH	WK_SCENE_SP_CONTESTITEM
+	_CASEJUMP	4,ev_pccable_01_master_contest
+	_END
+
+ev_pccable_01_master_contest:
+	_ITEM_EVENT	ITEM_GOOZYASUBOORU,1
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_pccable_01_p13_contest//満杯？
+	_LDVAL	WK_SCENE_SP_CONTESTITEM,0
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+ev_pccable_01_p13_contest://満杯のとき
+	_EASY_OBJ_MSG	msg_pccable_01_p13_sp_contest
+	_END
+
+ev_pccable_01_p02_contest:
+	_TALKMSG	msg_pccable_01_p02_sp_contest
+	_TALK_WAIT
+	_SELECT_WINDOW	0,0,CONTEST_MENU01
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_pccable_01_p08_contest//参加する
+	_CASEJUMP	1,ev_pccable_01_p03_contest//説明を聞く
+	_CASEJUMP	2,ev_pccable_01_end_contest//やめる
+	_CASECANCEL	ev_pccable_01_end_contest//やめる
+	_END
+
+ev_pccable_01_p03_contest://説明を聞く
+	_TALKMSG	msg_pccable_01_p03_sp_contest
+	_TALK_WAIT
+	_SELECT_WINDOW	0,0,CONTEST_MENU02
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_pccable_01_p04_contest
+	_CASEJUMP	1,ev_pccable_01_p05_contest
+	_CASEJUMP	2,ev_pccable_01_p06_contest
+	_CASEJUMP	3,ev_pccable_01_p02_contest
+	_CASECANCEL	ev_pccable_01_p02_contest//やめる
+	_END
+
+ev_pccable_01_p04_contest://ポケモンコンテストについて
+	_TALK_KEYWAIT	msg_pccable_01_p04_sp_contest
+	_JUMP	ev_pccable_01_p03_contest
+	_END
+
+ev_pccable_01_p05_contest://コンテストの種類について
+	_TALK_KEYWAIT	msg_pccable_01_p05_sp_contest
+	_JUMP	ev_pccable_01_p03_contest
+	_END
+
+ev_pccable_01_p06_contest://ランクについて
+	_TALK_KEYWAIT	msg_pccable_01_p06_sp_contest
+	_JUMP	ev_pccable_01_p03_contest
+	_END
+
+ev_pccable_01_end_contest://参加をやめる
+	_TALK_KEYWAIT	msg_pccable_02_p15_c106_r0301
+	_TALK_OBJ_END
+	_END
+
+ev_pccable_01_p14_contest://どのポケモンを参加させますか？
+	_TALK_KEYWAIT	msg_pccable_01_p14_sp_contest
+	_CON_POKELIST	/*リストの呼び出し*/
+	_IFVAL_JUMP	PARAM0,EQ,0xff,ev_pccable_01_p08_contest/*Ｂキャンセル*/
+	_PROGRAM	CONSANKA_CHECK
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_pccable_01_p09_contest
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_pccable_01_p15_contest
+	_IFVAL_JUMP	ANSWORK,EQ,2,ev_pccable_01_p22_contest//１回優勝してるよ。
+	_IFVAL_JUMP	ANSWORK,EQ,3,ev_pccable_01_p23_contest//タマゴだよ。
+	_IFVAL_JUMP	ANSWORK,EQ,4,ev_pccable_01_p24_contest//瀕死だよ。
+	_END
+
+ev_pccable_01_p08_contest://どのコンテストに参加しますか？
+	_TALKMSG	msg_pccable_01_p08_sp_contest
+	_TALK_WAIT
+	_SELECT_WINDOW	0,0,CONTEST_MENU03
+	_SWITCH	ANSWORK
+	_CASEJUMP	5,ev_pccable_01_end_contest
+	_CASECANCEL	ev_pccable_01_end_contest
+	_LDWK	CON_TYPE,ANSWORK
+	_JUMP	ev_pccable_01_p14_contest
+	_END
+
+ev_pccable_01_p09_contest://あなたは参加できません。
+	_TALK_KEYWAIT	msg_pccable_01_p09_sp_contest
+	_JUMP	ev_pccable_01_p14_contest
+	_TALK_OBJ_END
+	_END
+
+ev_pccable_01_p15_contest://そちらのポケモンでよろしいですか？
+	_TALK_YES_NO	msg_pccable_01_p15_sp_contest		
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_pccable_01_p14_contest
+	_CASEJUMP	1,ev_pccable_01_p10_contest
+	_END
+
+ev_pccable_01_p22_contest://１回優勝しているけどいいですか？
+	_TALK_YES_NO	msg_pccable_01_p22_sp_contest		
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_pccable_01_p14_contest
+	_CASEJUMP	1,ev_pccable_01_p10_contest
+	_END
+
+ev_pccable_01_p23_contest://タマゴだから無理です
+	_TALK_KEYWAIT	msg_pccable_01_p23_sp_contest
+	_JUMP	ev_pccable_01_p14_contest
+	_TALK_OBJ_END
+	_END
+
+ev_pccable_01_p24_contest://瀕死だから無理です
+	_TALK_KEYWAIT	msg_pccable_01_p24_sp_contest
+	_JUMP	ev_pccable_01_p14_contest
+	_TALK_OBJ_END
+	_END
+
+ev_pccable_01_p10_contest://まもなく始まります
+	_TALK_KEYWAIT	msg_pccable_01_p10_sp_contest
+	_TALK_CLOSE
+	_TALK_END	
+	_LDVAL	WK_SCENE_SP_CONTEST,1
+	_RET	//各受付に戻る
+
+
+//====================================================================
+//
+//						コンテスト(会場)
+//
+//====================================================================
+SCRIPT_LABEL	contest_script_after
+	_LDVAL	PARAM2,0/*カウンター初期化*/
+	_TALK_START	
+	_SET_OBJ_ANIME	HERO_01_SP_CONTEST,contest_anime_19
+	_OBJ_ANIME_WAIT
+	
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_01
+	_OBJ_ANIME_WAIT
+	_TALK_END	
+//debug一次審査飛ばし
+	_CALL	ev_contest_rankget_contest		//現在のランクの予約語呼び出し
+	_CALL	ev_contest_typeget_contest		//現在のタイプの予約語呼び出し
+	_CALL	ev_workerm1_01_back_contest		//開会宣言＆後ろに戻る
+	_CALL	ev_workerm1_01_syokai_contest	//コンテスト参加者の紹介
+//debug一次審査飛ばし	
+	_CALL	ev_workerm1_01_p10_contest		//アピール対戦の呼び出し
+	_CALL	ev_workerm1_01_p11_contest		//結果発表画面の呼び出し
+	_CALL	ev_workerm1_01_happyou_contest	//優勝者のナンバーとシンボルを取得
+	_CALL	ev_workerm1_01_p15_contest		//優勝者を発表
+	_CALL	ev_workerm1_01_kansei_contest		//観客のリアクション処理
+	_CALL	ev_workerm1_01_p16_contest			//賞品の取得処理
+	_LDVAL	WK_SCENE_SP_CONTEST,2				//コンテスト終了
+	_RET
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+/*		★現在参加しているコンテストランクから予約語を呼び出す		*/
+/********************************************************************/
+ev_contest_rankget_contest:
+	_SWITCH		CON_RANK
+	_CASEJUMP	0,ev_rank_normal_contest
+	_CASEJUMP	1,ev_rank_super_contest
+	_CASEJUMP	2,ev_rank_hyper_contest
+	_CASEJUMP	3,ev_rank_master_contest
+	_RET
+
+ev_rank_normal_contest://ノーマルランク
+	_LDVAL	TMPWK1,NORMAL
+	_RET
+	
+ev_rank_super_contest://スーパーランク
+	_LDVAL	TMPWK1,SUPER
+	_RET
+
+ev_rank_hyper_contest://ハイパーランク
+	_LDVAL	TMPWK1,HYPER
+	_RET
+
+ev_rank_master_contest://マスターランク
+	_LDVAL	TMPWK1,MASTER
+	_RET
+
+
+/********************************************************************/
+/*	★現在参加しているコンテストの種類からから予約語を呼び出す		*/
+/********************************************************************/
+ev_contest_typeget_contest://現在参加しているコンテストの選択
+	_SWITCH		CON_TYPE
+	_CASEJUMP	0,ev_contest_01_contest
+	_CASEJUMP	1,ev_contest_02_contest
+	_CASEJUMP	2,ev_contest_03_contest
+	_CASEJUMP	3,ev_contest_04_contest
+	_CASEJUMP	4,ev_contest_05_contest
+	_RET
+
+ev_contest_01_contest://かっこよさコンテスト
+	_LDVAL	TMPWK0,KAKKOYOSA
+	_RET
+
+ev_contest_02_contest://うつくしさコンテスト
+	_LDVAL	TMPWK0,UTSUKUSHISA
+	_RET
+
+ev_contest_03_contest://かわいさコンテスト
+	_LDVAL	TMPWK0,KAWAISA
+	_RET
+
+ev_contest_04_contest://かしこさコンテスト
+	_LDVAL	TMPWK0,KASHIKOSA
+	_RET
+
+ev_contest_05_contest://たくましさコンテスト
+	_LDVAL	TMPWK0,TAKUMASHISA
+	_RET
+
+
+/********************************************************************/
+/*			★司会者が予約語を入れた開会宣言＆後ろに戻る			*/
+/********************************************************************/
+ev_workerm1_01_back_contest:
+	_SET_BUF	1,TMPWK0
+	_SET_BUF	2,TMPWK1
+	
+	_CALL	conmsg_p01_contest	//メッセージ呼び出し
+	
+	_TALK_START
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_02
+	_OBJ_ANIME_WAIT
+	_TALK_END	
+	_RET
+
+conmsg_p01_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p01a_contest
+	_EASY_MSG	msg_workerw1_01_p01_sp_contest
+	_RET
+	
+conmsg_p01a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p21_sp_contest//通信専用メッセージ
+	_TALK_WAIT
+	_RET
+
+
+/********************************************************************/
+/*		　				★参加者の紹介処理							*/
+/*	エントリーナンバー、ブリーダー名、ポケモン名、ＣＧ表示、評価	*/
+/*　　			１番から４番まで紹介するループ処理					*/
+/*　　			　　PARAM2が４になるまで続く						*/
+/********************************************************************/
+ev_workerm1_01_syokai_contest:
+	_CALL	ev_workerm1_01_syokai00_contest//エントリーナンバー順に表示
+	_CALL	ev_workerm1_01_wcg_contest//ＣＧウインドウ表示
+	_CALL	ev_kankyaku_01_p00_contest//ハートの吹き出し
+	_CALL	ev_workerm1_01_act_contest//観客のアニメ
+	_CALL	ev_workerm1_01_close_contest//ＣＧウインドウを閉じる
+	_ADDWK	PARAM2,1//エントリーカウンターを+1
+	_IFVAL_JUMP	PARAM2,NE,4,ev_workerm1_01_syokai_contest//４になるまで続ける
+	_CALL	ev_workerm1_01_p03_contest//テロップ表示処理
+	_LDVAL	LOCALWORK1,6
+	_RET//メインに戻る
+
+/********************************************************************/
+/*				紹介処理：parm2の数値により紹介する人が変わる		*/
+/********************************************************************/
+ev_workerm1_01_syokai00_contest:
+	_IFVAL_JUMP	PARAM2,EQ,0,ev_workerm1_01_syokai01_contest
+	_IFVAL_JUMP	PARAM2,EQ,1,ev_workerm1_01_syokai02_contest
+	_IFVAL_JUMP	PARAM2,EQ,2,ev_workerm1_01_syokai03_contest
+	_IFVAL_JUMP	PARAM2,EQ,3,ev_workerm1_01_syokai04_contest
+	_RET
+
+
+ev_workerm1_01_syokai01_contest://エントリーナンバー１番
+	_TALK_START
+	_SET_OBJ_ANIME	STUDYM1_01_SP_CONTEST,contest_anime_23
+	_OBJ_ANIME_WAIT
+	_TALK_END 
+	_LDVAL	TMPWK3,STUDYM1_01_SP_CONTEST	//ＯＢＪのシンボル名を登録。後で動かす。
+	_RET
+	
+ev_workerm1_01_syokai02_contest://エントリーナンバー２番
+	_TALK_START
+	_SET_OBJ_ANIME	FIGHTER1_01_SP_CONTEST,contest_anime_25
+	_OBJ_ANIME_WAIT
+	_TALK_END 
+	_LDVAL	TMPWK3,FIGHTER1_01_SP_CONTEST
+	_RET
+
+ev_workerm1_01_syokai03_contest://エントリーナンバー３番
+	_TALK_START
+	_SET_OBJ_ANIME	GENTLEM1_01_SP_CONTEST,contest_anime_27
+	_OBJ_ANIME_WAIT
+	_TALK_END 
+	_LDVAL	TMPWK3,GENTLEM1_01_SP_CONTEST
+	_RET
+
+ev_workerm1_01_syokai04_contest://エントリーナンバー４番
+	_TALK_START
+	_SET_OBJ_ANIME	HERO_01_SP_CONTEST	,contest_anime_29
+	_OBJ_ANIME_WAIT
+	_TALK_END 
+	_LDVAL	TMPWK3,HERO_01_SP_CONTEST
+	_RET
+
+
+/********************************************************************/
+/*				紹介処理：ポケモンＣＧウインドウ表示				*/
+/*				_PROGRAM		SET_BRD_DATA						*/
+/*				＠2にparam2番のポケモン名を入れている				*/
+/*				＠0にparam2番のブリーダー名を入れている				*/
+/*			    param0にポケモンナンバーを入れている				*/
+/********************************************************************/
+ev_workerm1_01_wcg_contest://ＣＧ表示処理
+	_PROGRAM		SET_BRD_DATA
+	_ADDWK	PARAM2,1	//エントリーナンバーに変更
+	_GET_NUM_MSG	1,PARAM2	//＠１にエントリーナンバー
+
+	_TALK_START
+	_SET_OBJ_ANIME	TMPWK3,contest_anime_09//ボールが出るまでのウエイト
+	_OBJ_ANIME_WAIT
+	_TALK_END 
+
+	_OBJ_APPEAR	BALL_01_SP_CONTEST
+	_SE	SE_DANSA	//段差
+	_TALK_START
+	_SET_OBJ_ANIME	TMPWK3,contest_anime_09
+	_OBJ_ANIME_WAIT
+	_TALK_END 
+	
+	_ADDWK	PARAM2,-1	//元に戻す
+	_SE	SE_BOWA2	//ボワ2
+	_PROGRAM	OPEN_CONPOKE_CG
+	_CALL	conmsg_p02_contest	
+	_RET
+
+conmsg_p02_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p02a_contest
+	_TALKMSG	msg_workerw1_01_p02_sp_contest
+	_TALK_WAIT
+	_RET
+	
+conmsg_p02a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p02_sp_contest
+	_TALK_WAIT
+	_RET
+
+
+/********************************************************************/
+/*				紹介処理：ポイント計算テロップ表示					*/
+/********************************************************************/
+ev_workerm1_01_p03_contest://ポケモンの紹介
+	_CALL	conmsg_p03_contest
+	_CALL	conmsg_p04_contest
+	
+	_SE	SE_W227B	//歓声
+	_TALK_WAIT
+	_CALL	ev_workerm1_01_kansei_contest
+	
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_10	//司会右を向く
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME	WORKERW1_01_SP_CONTEST,contest_anime_11	//審査員左向く
+	_OBJ_ANIME_WAIT
+	_TIME_WAIT	20	//間
+	
+	//司会者＆審査員が正面を向くアニメ
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_05
+	_SET_OBJ_ANIME	WORKERW1_01_SP_CONTEST,contest_anime_05
+	_OBJ_ANIME_WAIT
+	_RET
+
+conmsg_p03_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p03a_contest
+	_TALK_KEYWAIT	msg_workerw1_01_p03_sp_contest
+	_RET
+	
+conmsg_p03a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p03_sp_contest
+	_TALK_WAIT
+	_RET
+
+conmsg_p04_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p04a_contest
+	_TALKMSG	msg_workerw1_01_p04_sp_contest
+	_RET
+	
+conmsg_p04a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p04_sp_contest
+	_RET
+
+
+/********************************************************************/
+/*				紹介処理：観客のリアクションアニメ					*/
+/*				アニメで間を持たせている。							*/
+/*				一度に動かせるＯＢＪは４体まで						*/
+/********************************************************************/
+ev_workerm1_01_act_contest:
+	//司会者の集計：左
+	//_TALK_START
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_15
+	_OBJ_ANIME_WAIT
+	_SE	SE_W227B	//歓声
+	_CALL	ev_dmyobj_anime_contest
+	//観衆が隣の人と囁きあっている
+	_SET_OBJ_ANIME	BOY4_01_SP_CONTEST,contest_anime_17//5
+	_SET_OBJ_ANIME	GIRL1_01_SP_CONTEST,contest_anime_18//2
+	_SET_OBJ_ANIME	BOYA2_01_SP_CONTEST,contest_anime_17//3
+	_OBJ_ANIME_WAIT	
+	//司会者の集計：右
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_17
+	_OBJ_ANIME_WAIT
+	//観衆が隣の人と囁きあっている
+	_SET_OBJ_ANIME	BIGMAN1_01_SP_CONTEST,contest_anime_15//6
+	_SET_OBJ_ANIME	MIDDLEW1_01_SP_CONTEST,contest_anime_18//8	
+	_SET_OBJ_ANIME	BOY1_01_SP_CONTEST,contest_anime_16//1
+	_SET_OBJ_ANIME	OJYOU2_01_SP_CONTEST,contest_anime_15//4
+	_OBJ_ANIME_WAIT	
+	//司会者の集計：後
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_20
+	_OBJ_ANIME_WAIT	
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_22
+	_SET_OBJ_ANIME	WORKERW1_01_SP_CONTEST,contest_anime_21
+	_OBJ_ANIME_WAIT	 
+	_TALK_END
+	_RET
+
+/********************************************************************/
+/*					★観客がハート飛び出し							*/
+/*					LOCALWORK0はハートを出す回数					*/
+/*			LOCALWORK1～LOCALWORK8はハートを出した観客に割り当て	*/
+/*			１度ハートを出した観客は２度出さない					*/
+/********************************************************************/
+ev_kankyaku_01_p00_contest://debug
+	_PROGRAM	GET_BP_NUM//ＢＰ値取得
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,EQ,1,ev_kankyaku_01_getnormal_contest//ノーマル
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,EQ,2,ev_kankyaku_01_getsuper_contest//スーパー
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,EQ,3,ev_kankyaku_01_gethyper_contest//ハイパー
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,EQ,4,ev_kankyaku_01_getmaster_contest//マスター
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,EQ,5,ev_kankyaku_01_gettusin_contest//マスター通信
+	
+	_LDVAL	LOCALWORK1,9
+	_LDVAL	LOCALWORK2,9
+	_LDVAL	LOCALWORK3,9
+	_LDVAL	LOCALWORK4,9
+	_LDVAL	LOCALWORK5,9
+	_LDVAL	LOCALWORK6,9
+	_LDVAL	LOCALWORK7,9
+	_LDVAL	LOCALWORK8,9
+	
+	_IFVAL_CALL	LOCALWORK0,GT,0,ev_kankyaku_01_heart_contest
+
+	_LDVAL	LOCALWORK1,0
+	_LDVAL	LOCALWORK2,0
+	_LDVAL	LOCALWORK3,0
+	_LDVAL	LOCALWORK4,0
+	_LDVAL	LOCALWORK5,0
+	_LDVAL	LOCALWORK6,0
+	_LDVAL	LOCALWORK7,0
+	_LDVAL	LOCALWORK8,0
+	_RET
+
+ev_kankyaku_01_heart_contest:
+//	_GET_RND	8
+	_LDVAL ANSWORK,8
+	_PROGRAM	GET_CONT_RND
+	_IFVAL_CALL	ANSWORK,EQ,0,ev_kankyaku_01_p01_contest
+	_IFVAL_CALL	ANSWORK,EQ,1,ev_kankyaku_01_p02_contest
+	_IFVAL_CALL	ANSWORK,EQ,2,ev_kankyaku_01_p03_contest
+	_IFVAL_CALL	ANSWORK,EQ,3,ev_kankyaku_01_p04_contest
+	_IFVAL_CALL	ANSWORK,EQ,4,ev_kankyaku_01_p05_contest
+	_IFVAL_CALL	ANSWORK,EQ,5,ev_kankyaku_01_p06_contest
+	_IFVAL_CALL	ANSWORK,EQ,6,ev_kankyaku_01_p07_contest
+	_IFVAL_CALL	ANSWORK,EQ,7,ev_kankyaku_01_p08_contest
+	
+	_IFVAL_JUMP	LOCALWORK0,GT,0,ev_kankyaku_01_heart_contest
+	_OBJ_ANIME_WAIT
+	
+	_RET
+
+
+ev_kankyaku_01_getnormal_contest://吹き出しを出す回数の取得:normal
+	_IFVAL_JUMP	PARAM0,GT,80,ev_kankyaku_01_gettime8_contest
+	_IFVAL_JUMP	PARAM0,GT,70,ev_kankyaku_01_gettime7_contest
+	_IFVAL_JUMP	PARAM0,GT,60,ev_kankyaku_01_gettime6_contest
+	_IFVAL_JUMP	PARAM0,GT,50,ev_kankyaku_01_gettime5_contest
+	_IFVAL_JUMP	PARAM0,GT,40,ev_kankyaku_01_gettime4_contest
+	_IFVAL_JUMP	PARAM0,GT,30,ev_kankyaku_01_gettime3_contest
+	_IFVAL_JUMP	PARAM0,GT,20,ev_kankyaku_01_gettime2_contest
+	_IFVAL_JUMP	PARAM0,GT,10,ev_kankyaku_01_gettime1_contest
+	_LDVAL	LOCALWORK0,0
+	_RET
+
+ev_kankyaku_01_getsuper_contest://吹き出しを出す回数の取得:super
+	_IFVAL_JUMP	PARAM0,GT,230,ev_kankyaku_01_gettime8_contest
+	_IFVAL_JUMP	PARAM0,GT,210,ev_kankyaku_01_gettime7_contest
+	_IFVAL_JUMP	PARAM0,GT,190,ev_kankyaku_01_gettime6_contest
+	_IFVAL_JUMP	PARAM0,GT,170,ev_kankyaku_01_gettime5_contest
+	_IFVAL_JUMP	PARAM0,GT,150,ev_kankyaku_01_gettime4_contest
+	_IFVAL_JUMP	PARAM0,GT,130,ev_kankyaku_01_gettime3_contest
+	_IFVAL_JUMP	PARAM0,GT,110,ev_kankyaku_01_gettime2_contest
+	_IFVAL_JUMP	PARAM0,GT,90,ev_kankyaku_01_gettime1_contest
+	_LDVAL	LOCALWORK0,0
+	_RET
+
+ev_kankyaku_01_gethyper_contest://吹き出しを出す回数の取得:hyper
+	_IFVAL_JUMP	PARAM0,GT,380,ev_kankyaku_01_gettime8_contest
+	_IFVAL_JUMP	PARAM0,GT,350,ev_kankyaku_01_gettime7_contest
+	_IFVAL_JUMP	PARAM0,GT,320,ev_kankyaku_01_gettime6_contest
+	_IFVAL_JUMP	PARAM0,GT,290,ev_kankyaku_01_gettime5_contest
+	_IFVAL_JUMP	PARAM0,GT,260,ev_kankyaku_01_gettime4_contest
+	_IFVAL_JUMP	PARAM0,GT,230,ev_kankyaku_01_gettime3_contest
+	_IFVAL_JUMP	PARAM0,GT,200,ev_kankyaku_01_gettime2_contest
+	_IFVAL_JUMP	PARAM0,GT,170,ev_kankyaku_01_gettime1_contest
+	_LDVAL	LOCALWORK0,0
+	_RET
+
+ev_kankyaku_01_getmaster_contest://吹き出しを出す回数の取得:master
+	_IFVAL_JUMP	PARAM0,GT,600,ev_kankyaku_01_gettime8_contest
+	_IFVAL_JUMP	PARAM0,GT,560,ev_kankyaku_01_gettime7_contest
+	_IFVAL_JUMP	PARAM0,GT,520,ev_kankyaku_01_gettime6_contest
+	_IFVAL_JUMP	PARAM0,GT,480,ev_kankyaku_01_gettime5_contest
+	_IFVAL_JUMP	PARAM0,GT,440,ev_kankyaku_01_gettime4_contest
+	_IFVAL_JUMP	PARAM0,GT,400,ev_kankyaku_01_gettime3_contest
+	_IFVAL_JUMP	PARAM0,GT,360,ev_kankyaku_01_gettime2_contest
+	_IFVAL_JUMP	PARAM0,GT,320,ev_kankyaku_01_gettime1_contest
+	_LDVAL	LOCALWORK0,0
+	_RET
+
+ev_kankyaku_01_gettusin_contest://吹き出しを出す回数の取得:tusin
+	_IFVAL_JUMP	PARAM0,GT,600,ev_kankyaku_01_gettime8_contest
+	_IFVAL_JUMP	PARAM0,GT,550,ev_kankyaku_01_gettime7_contest
+	_IFVAL_JUMP	PARAM0,GT,500,ev_kankyaku_01_gettime6_contest
+	_IFVAL_JUMP	PARAM0,GT,450,ev_kankyaku_01_gettime5_contest
+	_IFVAL_JUMP	PARAM0,GT,400,ev_kankyaku_01_gettime4_contest
+	_IFVAL_JUMP	PARAM0,GT,300,ev_kankyaku_01_gettime3_contest
+	_IFVAL_JUMP	PARAM0,GT,200,ev_kankyaku_01_gettime2_contest
+	_IFVAL_JUMP	PARAM0,GT,100,ev_kankyaku_01_gettime1_contest
+	_LDVAL	LOCALWORK0,0
+	_RET
+
+
+
+ev_kankyaku_01_gettime1_contest:
+	_LDVAL	LOCALWORK0,1
+	_RET
+	
+ev_kankyaku_01_gettime2_contest:
+	_LDVAL	LOCALWORK0,2
+	_RET
+
+ev_kankyaku_01_gettime3_contest:
+	_LDVAL	LOCALWORK0,3
+	_RET
+
+ev_kankyaku_01_gettime4_contest:
+	_LDVAL	LOCALWORK0,4
+	_RET
+
+ev_kankyaku_01_gettime5_contest:
+	_LDVAL	LOCALWORK0,5
+	_RET
+
+ev_kankyaku_01_gettime6_contest:
+	_LDVAL	LOCALWORK0,6
+	_RET
+
+ev_kankyaku_01_gettime7_contest:
+	_LDVAL	LOCALWORK0,7
+	_RET
+
+ev_kankyaku_01_gettime8_contest:
+	_LDVAL	LOCALWORK0,8
+	_RET
+
+
+ev_kankyaku_01_p01_contest:
+	_IFVAL_JUMP	LOCALWORK1,EQ,1,ev_kankyaku_01_p01a_contest
+	_SET_OBJ_ANIME	BOY1_01_SP_CONTEST,contest_anime_04//1
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK1,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+
+ev_kankyaku_01_p01a_contest:
+	_RET
+	
+ev_kankyaku_01_p02_contest:
+	_IFVAL_JUMP	LOCALWORK2,EQ,1,ev_kankyaku_01_p02a_contest
+	_SET_OBJ_ANIME	GIRL1_01_SP_CONTEST,contest_anime_04//2
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK2,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+
+ev_kankyaku_01_p02a_contest:
+	_RET
+
+ev_kankyaku_01_p03_contest:
+	_IFVAL_JUMP	LOCALWORK3,EQ,1,ev_kankyaku_01_p03a_contest
+	_SET_OBJ_ANIME	BOYA2_01_SP_CONTEST,contest_anime_04//3
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK3,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+	
+ev_kankyaku_01_p03a_contest:
+	_RET
+
+ev_kankyaku_01_p04_contest:
+	_IFVAL_JUMP	LOCALWORK4,EQ,1,ev_kankyaku_01_p04a_contest
+	_SET_OBJ_ANIME	OJYOU2_01_SP_CONTEST,contest_anime_04//4
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK4,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+
+ev_kankyaku_01_p04a_contest:
+	_RET
+
+ev_kankyaku_01_p05_contest:
+	_IFVAL_JUMP	LOCALWORK5,EQ,1,ev_kankyaku_01_p05a_contest
+	_SET_OBJ_ANIME	BOY4_01_SP_CONTEST,contest_anime_04//5
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK5,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+	
+ev_kankyaku_01_p05a_contest:
+	_RET
+
+ev_kankyaku_01_p06_contest:
+	_IFVAL_JUMP	LOCALWORK6,EQ,1,ev_kankyaku_01_p06a_contest
+	_SET_OBJ_ANIME	BIGMAN1_01_SP_CONTEST,contest_anime_04//6
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK6,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+	
+ev_kankyaku_01_p06a_contest:
+	_RET
+
+ev_kankyaku_01_p07_contest:
+	_IFVAL_JUMP	LOCALWORK7,EQ,1,ev_kankyaku_01_p07a_contest
+	_SET_OBJ_ANIME	MIDDLEW1_01_SP_CONTEST,contest_anime_04//7	
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK7,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+	
+ev_kankyaku_01_p07a_contest:
+	_RET
+
+ev_kankyaku_01_p08_contest:
+	_IFVAL_JUMP	LOCALWORK8,EQ,1,ev_kankyaku_01_p08a_contest
+	_SET_OBJ_ANIME	ARTIST1_01_SP_CONTEST,contest_anime_04//8
+	_SE	SE_PIN
+	_TIME_WAIT	14
+	_LDVAL	LOCALWORK8,1
+	_ADDWK	LOCALWORK0,-1
+	_RET
+
+ev_kankyaku_01_p08a_contest:
+	_RET
+
+
+/********************************************************************/
+/*				紹介処理：ポケモンＣＧウインドウを閉じる			*/
+/********************************************************************/
+ev_workerm1_01_close_contest://画像を閉じる	
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_OBJ_DELETE	BALL_01_SP_CONTEST
+	_PROGRAM	CLOSE_CONPOKE_CG	//ウインドウ閉じる
+	_SWITCH	PARAM2
+	_CASEJUMP	0,ev_workerm1_01_close01_contest
+	_CASEJUMP	1,ev_workerm1_01_close02_contest
+	_CASEJUMP	2,ev_workerm1_01_close03_contest
+	_CASEJUMP	3,ev_workerm1_01_close04_contest
+	_RET
+
+ev_workerm1_01_close01_contest:
+	_TALK_START
+	_SET_OBJ_ANIME	TMPWK3,contest_anime_24
+	_OBJ_ANIME_WAIT
+	_TALK_END
+	_RET
+	
+ev_workerm1_01_close02_contest:
+	_TALK_START
+	_SET_OBJ_ANIME	TMPWK3,contest_anime_26
+	_OBJ_ANIME_WAIT
+	_TALK_END
+	_RET
+
+ev_workerm1_01_close03_contest:
+	_TALK_START
+	_SET_OBJ_ANIME	TMPWK3,contest_anime_28
+	_OBJ_ANIME_WAIT
+	_TALK_END
+	_RET
+
+ev_workerm1_01_close04_contest:
+	_TALK_START
+	_SET_OBJ_ANIME	TMPWK3,contest_anime_30
+	_OBJ_ANIME_WAIT
+	_TALK_END
+	_RET
+
+/********************************************************************/
+/*			　★司会者正面を向いてアピール対戦を呼び出す			*/
+/********************************************************************/
+ev_workerm1_01_p10_contest://アピール開始
+	//司会者正面を向く
+	_TALK_START
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_12
+	_OBJ_ANIME_WAIT
+
+	_CALL	conmsg_p10_contest
+	_TALK_WAIT
+	
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_06
+	_SET_OBJ_ANIME	WORKERW1_01_SP_CONTEST,contest_anime_07	//審査員右へあるく
+	_OBJ_ANIME_WAIT
+	_TALK_END
+
+	/*アピール対戦を呼ぶ*/
+	_LDVAL		LOCALWORK9,1
+	_CON_NIJI_CALL
+	
+	_LDVAL	LOCALWORK9,0	
+	//後ろに戻る
+	_TALK_START
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_07
+	_SET_OBJ_ANIME	WORKERW1_01_SP_CONTEST,contest_anime_06	
+	_OBJ_ANIME_WAIT
+	_TALK_END
+	_RET
+
+conmsg_p10_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p10a_contest
+	_EASY_MSG	msg_workerw1_01_p10_sp_contest
+	_RET
+	
+conmsg_p10a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p10_sp_contest
+	_RET
+
+/********************************************************************/
+/*		　★コンテスト終了処理＆結果発表画面の呼び出し				*/
+/********************************************************************/
+ev_workerm1_01_p11_contest://コンテスト終了(司会者と審査員の掛け合い)
+	_CALL	conmsg_p11_contest
+	_CALL	conmsg_p12_contest
+	
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_03
+	_OBJ_ANIME_WAIT
+	
+	_CALL	conmsg_p13_contest
+	_CALL	conmsgm_p01_contest
+
+	_SET_OBJ_ANIME	WORKERM1_01_SP_CONTEST,contest_anime_05
+	_OBJ_ANIME_WAIT		
+	
+	_TALK_CLOSE
+	_TALK_END
+	
+	//コンテスト結果画面の表示
+	_LDVAL		LOCALWORK9,1
+	_CON_RESULTSCR
+	_LDVAL		LOCALWORK9,0
+	_BGM_SET	MUS_CON_FAN			
+	_RET
+
+conmsg_p11_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p11a_contest
+	_TALK_KEYWAIT	msg_workerw1_01_p11_sp_contest
+	_RET
+	
+conmsg_p11a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p11_sp_contest
+	_TALK_WAIT
+	_TIME_WAIT	30
+	_RET
+
+conmsg_p12_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p12a_contest
+	_TALK_KEYWAIT	msg_workerw1_01_p12_sp_contest
+	_RET
+	
+conmsg_p12a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p12_sp_contest
+	_TALK_WAIT
+	_TIME_WAIT	30
+	_RET
+
+conmsg_p13_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p13a_contest
+	_TALK_KEYWAIT	msg_workerw1_01_p13_sp_contest
+	_RET
+	
+conmsg_p13a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p13_sp_contest
+	_TALK_WAIT
+	_TIME_WAIT	30
+	_RET
+
+conmsgm_p01_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsgm_p01a_contest
+	_TALK_KEYWAIT	msg_workerm1_01_p01_sp_contest
+	_RET
+	
+conmsgm_p01a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerm1_01_p01_sp_contest
+	_TALK_WAIT
+	_TIME_WAIT	30
+	_RET
+	
+
+/********************************************************************/
+/*			★優勝者のナンバーとシンボル取得処理					*/
+/*	 _PROGRAM	GET_CHAMPENTNOで優勝者のナンバーを取得（param1）	*/
+/********************************************************************/
+ev_workerm1_01_happyou_contest:
+	_PROGRAM	GET_CHAMPENTNO
+	_SWITCH PARAM1
+	_CASEJUMP	0,ev_workerm1_01_ichi_contest
+	_CASEJUMP	1,ev_workerm1_01_ni_contest
+	_CASEJUMP	2,ev_workerm1_01_san_contest
+	_CASEJUMP	3,ev_workerm1_01_yon_contest
+	_RET
+
+ev_workerm1_01_ichi_contest://優勝者（１番）
+	_LDVAL	LOCALWORK3,STUDYM1_01_SP_CONTEST//優勝ＯＢＪシンボルを取得
+	_RET
+
+ev_workerm1_01_ni_contest://優勝者（２番）
+	_LDVAL	LOCALWORK3,FIGHTER1_01_SP_CONTEST//優勝ＯＢＪシンボルを取得
+	_RET
+
+ev_workerm1_01_san_contest://優勝者（３番）
+	_LDVAL	LOCALWORK3,GENTLEM1_01_SP_CONTEST//優勝ＯＢＪシンボルを取得
+	_RET
+
+ev_workerm1_01_yon_contest://優勝者（４番）
+	_LDVAL	LOCALWORK3,HERO_01_SP_CONTEST//優勝ＯＢＪシンボルを取得
+	_RET
+
+
+/********************************************************************/
+/*						★優勝者の呼び出し							*/
+/*	　　_PROGRAM	GET_CHAMP_NAME		/*優勝者の名前＠2			*/
+/*	　　_PROGRAM	GET_CHAMP_POKENAME	/*優勝者のポケモン＠0		*/
+/********************************************************************/
+ev_workerm1_01_p15_contest://優勝者の呼び出し
+	
+	_PROGRAM	GET_CHAMP_NAME		/*優勝者の名前*/
+	_PROGRAM	GET_CHAMP_POKENAME	/*優勝者のポケモン*/
+	
+	_ADDWK	PARAM1,1	//数値をエントリーナンバーに変更
+	_GET_NUM_MSG	1,PARAM1
+	_ADDWK	PARAM1,-1	//元に戻す
+	_CALL	conmsg_p14_contest
+	
+	//優勝者がジャンプ
+	_SET_OBJ_ANIME	LOCALWORK3,contest_anime_08
+	_OBJ_ANIME_WAIT		
+	_SE	SE_W227B	//歓声
+	_LDVAL	LOCALWORK1,0/*アニメのカウンターで使用*/
+	_RET
+
+conmsg_p14_contest://通常
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,conmsg_p14a_contest
+	_TALK_KEYWAIT	msg_workerw1_01_p14_sp_contest
+	_RET
+	
+conmsg_p14a_contest://ウエイトなし
+	_SYSTALKMSG	msg_workerw1_01_p14_sp_contest
+	_TALK_WAIT
+	_RET
+	
+
+/********************************************************************/
+/*							★観客の歓声							*/
+/********************************************************************/
+ev_workerm1_01_kansei_contest:
+	_ADDWK	LOCALWORK1,1
+	_TALK_START
+	//debug
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,GT,1	ev_dmyobj_anime_contest
+
+	_SET_OBJ_ANIME	BOY4_01_SP_CONTEST,contest_anime_17//5
+	_SET_OBJ_ANIME	GIRL1_01_SP_CONTEST,contest_anime_18//2
+	_SET_OBJ_ANIME	BOYA2_01_SP_CONTEST,contest_anime_17//3
+	_TIME_WAIT	30
+	_SET_OBJ_ANIME	BIGMAN1_01_SP_CONTEST,contest_anime_15//6
+	_SET_OBJ_ANIME	MIDDLEW1_01_SP_CONTEST,contest_anime_18//8	
+	_SET_OBJ_ANIME	BOY1_01_SP_CONTEST,contest_anime_16//1
+	_SET_OBJ_ANIME	OJYOU2_01_SP_CONTEST,contest_anime_15//4
+	_IFVAL_JUMP	LOCALWORK1,NE,4,ev_workerm1_01_kansei_contest//３回ループする
+	_TIME_WAIT	30
+	_RET
+	
+
+/********************************************************************/
+/*							★そのほかの歓声						*/
+/********************************************************************/
+ev_dmyobj_anime_contest:
+	_DMY_OBJ_SITE_CHG	0,SITE_D//左サイド①
+	_DMY_OBJ_SITE_CHG	2,SITE_D
+	_DMY_OBJ_SITE_CHG	4,SITE_R//*動かさない
+	_DMY_OBJ_SITE_CHG	6,SITE_D
+	_DMY_OBJ_SITE_CHG	8,SITE_D
+	
+	_DMY_OBJ_SITE_CHG	10,SITE_D//右サイド①
+	_DMY_OBJ_SITE_CHG	12,SITE_D
+	_DMY_OBJ_SITE_CHG	14,SITE_D
+	_DMY_OBJ_SITE_CHG	16,SITE_D
+	_DMY_OBJ_SITE_CHG	18,SITE_D
+
+	_DMY_OBJ_SITE_CHG	20,SITE_R//正面①
+	_DMY_OBJ_SITE_CHG	22,SITE_R
+
+	_DMY_OBJ_SITE_CHG	25,SITE_R//背面①
+	_DMY_OBJ_SITE_CHG	27,SITE_L
+	_DMY_OBJ_SITE_CHG	28,SITE_R
+	
+	_TIME_WAIT	10
+	
+	_DMY_OBJ_SITE_CHG	0,SITE_R//左サイド①
+	_DMY_OBJ_SITE_CHG	2,SITE_R
+	_DMY_OBJ_SITE_CHG	4,SITE_R
+	_DMY_OBJ_SITE_CHG	6,SITE_R
+	_DMY_OBJ_SITE_CHG	8,SITE_R
+	
+	_DMY_OBJ_SITE_CHG	10,SITE_L//右サイド①
+	_DMY_OBJ_SITE_CHG	12,SITE_L
+	_DMY_OBJ_SITE_CHG	14,SITE_L
+	_DMY_OBJ_SITE_CHG	16,SITE_L
+	_DMY_OBJ_SITE_CHG	18,SITE_L
+
+	_DMY_OBJ_SITE_CHG	20,SITE_D//正面①
+	_DMY_OBJ_SITE_CHG	22,SITE_D
+
+	_DMY_OBJ_SITE_CHG	25,SITE_U//背面①
+	_DMY_OBJ_SITE_CHG	27,SITE_U
+	_DMY_OBJ_SITE_CHG	28,SITE_U
+
+	_TIME_WAIT	10
+
+	_DMY_OBJ_SITE_CHG	1,SITE_U//左サイド②
+	_DMY_OBJ_SITE_CHG	3,SITE_U
+	_DMY_OBJ_SITE_CHG	5,SITE_U
+	_DMY_OBJ_SITE_CHG	7,SITE_U
+	_DMY_OBJ_SITE_CHG	9,SITE_R//*動かさない
+
+	_DMY_OBJ_SITE_CHG	11,SITE_U//右サイド②
+	_DMY_OBJ_SITE_CHG	15,SITE_U
+	_DMY_OBJ_SITE_CHG	13,SITE_U
+	_DMY_OBJ_SITE_CHG	17,SITE_U
+	_DMY_OBJ_SITE_CHG	19,SITE_U
+	
+	_DMY_OBJ_SITE_CHG	21,SITE_L//正面②
+	_DMY_OBJ_SITE_CHG	23,SITE_L
+	_DMY_OBJ_SITE_CHG	24,SITE_L
+	
+	_DMY_OBJ_SITE_CHG	26,SITE_R//背面②
+	_DMY_OBJ_SITE_CHG	29,SITE_L
+	_DMY_OBJ_SITE_CHG	30,SITE_L
+
+	_TIME_WAIT	10
+
+	_DMY_OBJ_SITE_CHG	1,SITE_R//左サイド②
+	_DMY_OBJ_SITE_CHG	3,SITE_R
+	_DMY_OBJ_SITE_CHG	5,SITE_R
+	_DMY_OBJ_SITE_CHG	7,SITE_R
+	_DMY_OBJ_SITE_CHG	9,SITE_R
+
+	_DMY_OBJ_SITE_CHG	11,SITE_L//右サイド②
+	_DMY_OBJ_SITE_CHG	15,SITE_L
+	_DMY_OBJ_SITE_CHG	13,SITE_L
+	_DMY_OBJ_SITE_CHG	17,SITE_L
+	_DMY_OBJ_SITE_CHG	19,SITE_L
+	
+	_DMY_OBJ_SITE_CHG	21,SITE_D//正面②
+	_DMY_OBJ_SITE_CHG	23,SITE_D
+	_DMY_OBJ_SITE_CHG	24,SITE_D
+	
+	_DMY_OBJ_SITE_CHG	26,SITE_U//背面②
+	_DMY_OBJ_SITE_CHG	29,SITE_U
+	_DMY_OBJ_SITE_CHG	30,SITE_U
+
+	_TIME_WAIT	10
+	_RET
+
+/********************************************************************/
+/*							★賞品を受け渡し処理					*/
+/********************************************************************/
+ev_workerm1_01_p16_contest:
+	_IFVAL_JUMP	WK_SCENE_SP_CONTEST03,EQ,5,ev_workerm1_01_tusin_contest//通信かどうか？
+	_CALL	ev_workerm1_01_ribbongetchk1_contest
+	_IF_FLAGON_JUMP	FH_01,ev_workerm1_01_haveribbon_contest	//リボンを持っている＆優勝している
+	_EASY_MSG	msg_workerw1_01_p15_sp_contest
+	_TALK_WAIT
+	
+	_CALL	ev_workerm1_01_idou_contest//優勝者の移動
+	_CALL	ev_workerm1_01_p17_contest//渡す
+	_SE	SE_W227B	//歓声
+	_LDVAL	LOCALWORK1,0	//アニメの回数セット
+	_CALL	ev_workerm1_01_kansei_contest//歓声
+	_TIME_WAIT	30
+	_PROGRAM	ART_COND_CHK	//高得点でマスターランク優勝したか？
+	_IFVAL_JUMP	PARAM0,EQ,1,ev_workerm1_01_hightscore_contest
+	_RET
+
+ev_workerm1_01_haveribbon_contest://リボンを持っている
+	_INC_RECORD	CNT_CONTEST_WIN		//コンテスト優勝回数カウント
+	_EASY_MSG	msg_workerw1_01_p16_sp_contest
+	_TIME_WAIT	90
+	_PROGRAM	ART_COND_CHK	//高得点でマスターランク優勝したか？
+	_IFVAL_JUMP	PARAM0,EQ,1,ev_workerm1_01_hightscore_contest
+	_RET
+
+ev_workerm1_01_ribbongetchk1_contest:
+	_FUNC_CALL	ANSWORK,CHK_RIBBON//リボンチェック
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_workerm1_01_ribbongetchk2_contest//リボン持ってる？
+	_RET
+
+ev_workerm1_01_ribbongetchk2_contest:
+	_PROGRAM	GET_CHAMPENTNO
+	_IFVAL_JUMP	PARAM1,EQ,3,ev_workerm1_01_ribbongetchk3_contest//優勝してる？
+	_RET
+
+ev_workerm1_01_ribbongetchk3_contest:
+	_IFVAL_JUMP	CON_RANK,EQ,MASTER_RANK,ev_workerm1_01_ribbongetchk4_contest//マスター？
+	_FLAG_SET	FH_01	//賞品渡さないフラグ
+	_RET
+
+ev_workerm1_01_ribbongetchk4_contest:
+	_RET
+
+ev_workerm1_01_winsuper_contest://スーパーランクに優勝
+	_FLAG_SET	FE_CONTEST_SUPER_WIN//イベント発生
+	_RET
+
+ev_workerm1_01_hightscore_contest:
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,1//画家イベント発動1
+	_RET
+
+ev_workerm1_01_tusin_contest://通信の場合受け渡しなしでそのまま戻る
+	_TIME_WAIT	60
+	_CALL	ev_workerm1_01_tusinwin_contest//優勝した？	
+	_PROGRAM	ART_COND_CHK	//高得点で通信優勝したか？
+	_IFVAL_JUMP	PARAM0,EQ,1,ev_workerm1_01_hightscore2_contest
+	_TALK_CLOSE
+	_RET
+
+ev_workerm1_01_hightscore2_contest:
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,2//画家イベント発動2
+	_RET
+
+ev_workerm1_01_tusinwin_contest://通信で優勝した?
+	_PROGRAM	GET_TUUSINENTNO	//優勝ナンバーーparam0
+	_PROGRAM	GET_CHAMPENTNO	//エントリーナンバーparam1
+	_IFWK_JUMP	PARAM0,EQ,PARAM1,ev_workerm1_01_mywin_contest
+	_RET
+
+ev_workerm1_01_mywin_contest:
+	_INC_RECORD	CNT_COMM_CONTEST_WIN	//通信コンテストで優勝した回数カウント
+	_RET
+
+ev_workerm1_01_idou_contest:
+	_SWITCH PARAM1
+	_CASEJUMP	0,ev_workerm1_01_idou1_contest
+	_CASEJUMP	1,ev_workerm1_01_idou2_contest
+	_CASEJUMP	2,ev_workerm1_01_idou3_contest
+	_CASEJUMP	3,ev_workerm1_01_idou4_contest
+	_RET
+
+ev_workerm1_01_idou1_contest://１番目移動
+	_TALK_START
+	_SET_OBJ_ANIME	LOCALWORK3,contest_anime_31
+	_OBJ_ANIME_WAIT		
+	_TALK_END
+	_RET
+	
+ev_workerm1_01_idou2_contest://２番目移動
+	_TALK_START
+	_SET_OBJ_ANIME	LOCALWORK3,contest_anime_32
+	_OBJ_ANIME_WAIT		
+	_TALK_END
+	_RET
+
+ev_workerm1_01_idou3_contest://３番目移動
+	_TALK_START
+	_SET_OBJ_ANIME	LOCALWORK3,contest_anime_13
+	_OBJ_ANIME_WAIT		
+	_TALK_END
+	_RET
+
+ev_workerm1_01_idou4_contest://４番目移動
+	_TALK_START
+	_SET_OBJ_ANIME	LOCALWORK3,contest_anime_14
+	_OBJ_ANIME_WAIT		
+	_TALK_END
+	_RET
+
+ev_workerm1_01_p17_contest://プレイヤーは優勝している？
+	_PROGRAM	GET_CHAMPENTNO
+	_IFVAL_JUMP	PARAM1,EQ,3,ev_workerm1_01_win_contest	
+	_EASY_MSG	msg_workerw1_01_p16_sp_contest
+	_RET
+
+ev_workerm1_01_win_contest://プレイヤーが優勝している場合
+	_IFVAL_CALL	WK_SCENE_SP_CONTEST03,EQ,2,ev_workerm1_01_winsuper_contest
+	_INC_RECORD	CNT_CONTEST_WIN		//コンテスト優勝回数カウント
+
+	_FUNC_CALL	ANSWORK,CHK_RIBBON//リボンチェック
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_workerm1_01_ribbon_contest//リボン持ってる？
+	_IFVAL_JUMP	CON_RANK,EQ,MASTER_RANK,ev_workerm1_01_gozyasuget_contest//マスター優勝？
+	_EASY_MSG	msg_workerw1_01_p16_sp_contest
+	_RET
+
+ev_workerm1_01_p18_contest://満杯のとき
+	_EASY_MSG	msg_workerw1_01_p17_sp_contest
+	_LDVAL	WK_SCENE_SP_CONTESTITEM,4
+	_RET
+
+//マスターランク優勝でゴージャスボールをゲット
+ev_workerm1_01_gozyasuget_contest:
+	_ITEM_EVENT	ITEM_GOOZYASUBOORU,1
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_workerm1_01_p18_contest//満杯？
+	_EASY_MSG	msg_workerw1_01_p16_sp_contest
+	_RET
+
+
+//はじめて優勝したとき
+ev_workerm1_01_ribbon_contest://リボンを貰った
+	_PROGRAM	SET_RIBBON//リボンフラグオン
+	_INC_RECORD	CNT_RIBBON//リボンを貰った回数
+	_FLAG_SET	SYS_RIBBON_GET //リボンを貰ったトレナビ関係
+	
+	_TALK_START
+	_TALK_KEYWAIT	msg_workerw1_01_p18_sp_contest
+	_JINGLE	MUS_FANFA4
+	_TALK_KEYWAIT	msg_workerw1_01_p19_sp_contest
+	_JINGLE_WAIT
+	_PROGRAM	GET_CHAMP_POKENAME	/*優勝者のポケモン*/
+	_TALK_KEYWAIT	msg_workerw1_01_p20_sp_contest
+	_TALK_END
+	_RET
+
+//--------------------------------------------------------------
+//	コンテスト中での専用アニメ
+//--------------------------------------------------------------
+contest_anime_01://↓へ一歩移動
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+contest_anime_02://前を見たまま後ろに一歩下がる
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_U_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	ACMD_END
+
+contest_anime_03://→を向く
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+contest_anime_04://heart表示
+	.byte	AC_MARK_HEART
+	.byte	ACMD_END
+
+contest_anime_05://↓を向く
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+contest_anime_06:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+	
+contest_anime_07:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+contest_anime_08://戻る
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+contest_anime_09://間
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+contest_anime_10://右に向く
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END	
+
+contest_anime_11://左に向く
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END	
+
+contest_anime_12://正面に向く
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END	
+
+contest_anime_13://エントリーナンバー③移動
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+contest_anime_14://エントリーナンバー④移動
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+contest_anime_15://左を見る
+	.byte	AC_SITE_L
+	.byte	AC_WAIT_16
+	.byte	AC_DEFAULT_SITE
+	.byte	ACMD_END
+
+contest_anime_16://上を見る
+	.byte	AC_SITE_U
+	.byte	AC_WAIT_16
+	.byte	AC_DEFAULT_SITE
+	.byte	ACMD_END
+
+contest_anime_17://右を見る
+	.byte	AC_SITE_R
+	.byte	AC_WAIT_16
+	.byte	AC_DEFAULT_SITE
+	.byte	ACMD_END
+
+contest_anime_18://下を見る
+	.byte	AC_SITE_D
+	.byte	AC_WAIT_16
+	.byte	AC_DEFAULT_SITE
+	.byte	ACMD_END
+
+contest_anime_19://上を見る
+	.byte	AC_SITE_U
+	.byte	ACMD_END
+
+contest_anime_20://上を見てウエイト
+	.byte	AC_SITE_U
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+contest_anime_21://左を見てウエイト
+	.byte	AC_WALK_TURN_L
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+contest_anime_22://右を見てウエイト
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+contest_anime_23://エントリーナンバー①前
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_24://エントリーナンバー①前
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_25://エントリーナンバー②前
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_26://エントリーナンバー②後
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_27://エントリーナンバー③前
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_28://エントリーナンバー③後
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_29://エントリーナンバー④前
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_30://エントリーナンバー④後
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+contest_anime_31://エントリーナンバー①移動
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+contest_anime_32://エントリーナンバー②移動
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+

@@ -1,0 +1,11 @@
+//MapEditNH Ver.3.10 *.evt -> *.sym Convert.
+
+//OBJ ID = 6
+#define CHAR00	1
+#define CHAR01	2
+#define CHAR02	3
+#define CHAR11	4
+#define CHAR20	5
+#define CHAR03	6
+
+//Exit ID = 0

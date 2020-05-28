@@ -1,0 +1,11 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define PCWOMAN_01_C109_PC01	1
+#define TRAINERW1_01_C109_PC01	2
+#define OLDMAN1_01_C109_PC01	3
+
+//Exit ID = 3
+#define C109_PC01_MAT01	0
+#define C109_PC01_MAT02	1
+#define C109_PC01_STAIR01	2

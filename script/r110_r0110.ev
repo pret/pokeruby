@@ -1,0 +1,333 @@
+//====================================================================
+//						r110_r0110
+//						カラクリ屋敷ステージ７
+//====================================================================
+
+//--------------------------------------------------------------------
+//					    マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0110_event_data
+INIT_CTRL_LABEL			init_ctrl_label_r110_r0110
+FLAG_CHANGE_LABEL		flag_change_r110_r0110
+BG_CHANGE_LABEL			bg_change_r110_r0110
+SP_SCRIPT_LABEL			scene_r110_r0110
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_label_r110_r0110:
+	_CALL				map_continue_bg_change_r110_r0110
+	_END
+
+//ワープ＆セーブからの復帰時
+map_continue_bg_change_r110_r0110:
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_01,switch_on_bg_set_01_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_02,switch_on_bg_set_02_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_03,switch_on_bg_set_03_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_04,switch_on_bg_set_04_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_05,switch_on_bg_set_05_r110_r0110
+	_RET
+
+//右608,左609,上610,下611
+switch_on_bg_set_01_r110_r0110:
+	_SET_CELL			13,17,610,0	//矢印の向きを変える（上へ）
+	_SET_CELL			12,16,575,1	//スイッチのセルを変える
+	_RET
+
+switch_on_bg_set_02_r110_r0110:
+	_SET_CELL			12,13,610,0	//矢印の向きを変える(上へ）
+	_SET_CELL			12,11,575,1	//スイッチのセルを変える
+	_RET
+
+switch_on_bg_set_03_r110_r0110:
+	_SET_CELL			7,12,610,0	//矢印の向きを変える（上へ）
+	_SET_CELL			5,10,575,1	//スイッチのセルを変える
+	_RET
+
+switch_on_bg_set_04_r110_r0110:
+	_SET_CELL			6,6,636,0	//矢印の向きを変える(右へ）背景の関係でこれだけ特殊なセル
+	_SET_CELL			4,4,575,1	//スイッチのセルを変える
+	_RET
+
+switch_on_bg_set_05_r110_r0110:
+	_SET_CELL			8,4,609,0	//矢印の向きを変える(左へ）
+	_SET_CELL			7,5,575,1	//スイッチのセルを変える
+	_RET
+
+//右608,左609,上610,下611
+switch_off_bg_set_01_r110_r0110:
+	_SET_CELL			13,17,611,0	//矢印の向きを変える
+	_SET_CELL			12,16,574,1	//スイッチのセルを変える
+	_RET
+
+switch_off_bg_set_02_r110_r0110:
+	_SET_CELL			12,13,609,0	//矢印の向きを変える
+	_SET_CELL			12,11,574,1	//スイッチのセルを変える
+	_RET
+
+switch_off_bg_set_03_r110_r0110:
+	_SET_CELL			7,12,611,0	//矢印の向きを変える
+	_SET_CELL			5,10,574,1	//スイッチのセルを変える
+	_RET
+
+switch_off_bg_set_04_r110_r0110:
+	_SET_CELL			6,6,635,0	//矢印の向きを変える 背景の関係でこれだけ特殊なセル
+	_SET_CELL			4,4,574,1	//スイッチのセルを変える
+	_RET
+
+switch_off_bg_set_05_r110_r0110:
+	_SET_CELL			8,4,608,0	//矢印の向きを変える
+	_SET_CELL			7,5,574,1	//スイッチのセルを変える
+	_RET
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r110_r0110:
+	//ワープからの復帰時
+	_IFVAL_JUMP			WK_SCENE_02_R110_R0110,EQ,1,map_continue_flag_change_r110_r0110
+
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_01
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_02
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_03
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_04
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_05
+	_END
+
+//ワープからの復帰時
+map_continue_flag_change_r110_r0110:
+	_END
+
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL	
+//--------------------------------------------------------------------
+bg_change_r110_r0110:
+	//ワープからの復帰時
+	_IFVAL_CALL			WK_SCENE_02_R110_R0110,EQ,1,map_continue_bg_change_r110_r0110
+	_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_r110_r0110:
+	SP_SCRIPT_DATA		WK_SCENE_02_R110_R0110,1,ev_scene_work_clear_r110_r0110
+	SP_SCRIPT_END
+
+//ワーククリア
+ev_scene_work_clear_r110_r0110:
+	_LDVAL				WK_SCENE_02_R110_R0110,0
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						合い言葉の書
+/********************************************************************/
+SCRIPT_LABEL			ev_karakuri_01_p01_r110_r0110
+	_TALK_START
+	_IFVAL_JUMP			WK_SCENE_R110_R0110,EQ,0,get_aikotoba_r110_r0110
+	_JUMP				look_aikotoba_mes_r110_r0101
+	_END
+
+//あいことばを入手
+get_aikotoba_r110_r0110:
+	_LDVAL				WK_SCENE_R110_R0110,1
+	_JUMP				get_aikotoba_mes_r110_r0101
+	_END
+
+
+/********************************************************************/
+/*						ワープ										*/
+/********************************************************************/
+SCRIPT_LABEL			ev_r110_r0110_pos01
+	_TALK_START
+	_LDVAL				WK_SCENE_02_R110_R0110,1			//ワープによるマップ切り替えモード
+	_MAP_CHANGE_WARP	R110,R110_R0110,3,19
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							スイッチ								*/
+/********************************************************************/
+//
+SCRIPT_LABEL			ev_switch_01_p01_r110_r0110
+	_TALK_START
+
+	//間をあける
+	_TIME_WAIT			32
+
+	_IF_FLAGOFF_CALL	FE_KARAKURI10_SWITCH_01,switch_on_bg_set_01_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_01,switch_off_bg_set_01_r110_r0110
+
+	_PROGRAM			MAKE_MAP_BG
+	_SE					SE_TK_KASYA
+
+	_IF_FLAGOFF_JUMP	FE_KARAKURI10_SWITCH_01,flag_on_01_r110_r0101
+	_IF_FLAGON_JUMP		FE_KARAKURI10_SWITCH_01,flag_off_01_r110_r0101
+	_END
+
+//
+SCRIPT_LABEL			ev_switch_02_p01_r110_r0110
+	_TALK_START
+
+	//間をあける
+	_TIME_WAIT			32
+
+	_IF_FLAGOFF_CALL	FE_KARAKURI10_SWITCH_02,switch_on_bg_set_02_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_02,switch_off_bg_set_02_r110_r0110
+
+	_PROGRAM			MAKE_MAP_BG
+	_SE					SE_TK_KASYA
+
+	_IF_FLAGOFF_JUMP	FE_KARAKURI10_SWITCH_02,flag_on_02_r110_r0101
+	_IF_FLAGON_JUMP		FE_KARAKURI10_SWITCH_02,flag_off_02_r110_r0101
+	_END
+
+//
+SCRIPT_LABEL			ev_switch_03_p01_r110_r0110
+	_TALK_START
+
+	//間をあける
+	_TIME_WAIT			32
+
+	_IF_FLAGOFF_CALL	FE_KARAKURI10_SWITCH_03,switch_on_bg_set_03_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_03,switch_off_bg_set_03_r110_r0110
+
+	_PROGRAM			MAKE_MAP_BG
+	_SE					SE_TK_KASYA
+
+	_IF_FLAGOFF_JUMP	FE_KARAKURI10_SWITCH_03,flag_on_03_r110_r0101
+	_IF_FLAGON_JUMP		FE_KARAKURI10_SWITCH_03,flag_off_03_r110_r0101
+	_END
+
+//
+SCRIPT_LABEL			ev_switch_04_p01_r110_r0110
+	_TALK_START
+
+	//間をあける
+	_TIME_WAIT	32
+
+	_IF_FLAGOFF_CALL	FE_KARAKURI10_SWITCH_04,switch_on_bg_set_04_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_04,switch_off_bg_set_04_r110_r0110
+
+	_PROGRAM			MAKE_MAP_BG
+	_SE					SE_TK_KASYA
+
+	_IF_FLAGOFF_JUMP	FE_KARAKURI10_SWITCH_04,flag_on_04_r110_r0101
+	_IF_FLAGON_JUMP		FE_KARAKURI10_SWITCH_04,flag_off_04_r110_r0101
+	_END
+
+//
+SCRIPT_LABEL			ev_switch_05_p01_r110_r0110
+	_TALK_START
+
+	//間をあける
+	_TIME_WAIT	32
+
+	_IF_FLAGOFF_CALL	FE_KARAKURI10_SWITCH_05,switch_on_bg_set_05_r110_r0110
+	_IF_FLAGON_CALL		FE_KARAKURI10_SWITCH_05,switch_off_bg_set_05_r110_r0110
+
+	_PROGRAM			MAKE_MAP_BG
+	_SE					SE_TK_KASYA
+
+	_IF_FLAGOFF_JUMP	FE_KARAKURI10_SWITCH_05,flag_on_05_r110_r0101
+	_IF_FLAGON_JUMP		FE_KARAKURI10_SWITCH_05,flag_off_05_r110_r0101
+	_END
+
+flag_on_01_r110_r0101:
+	_FLAG_SET			FE_KARAKURI10_SWITCH_01
+	_TALK_END
+	_END
+
+flag_off_01_r110_r0101:
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_01
+	_TALK_END
+	_END
+
+flag_on_02_r110_r0101:
+	_FLAG_SET			FE_KARAKURI10_SWITCH_02
+	_TALK_END
+	_END
+
+flag_off_02_r110_r0101:
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_02
+	_TALK_END
+	_END
+
+flag_on_03_r110_r0101:
+	_FLAG_SET			FE_KARAKURI10_SWITCH_03
+	_TALK_END
+	_END
+
+flag_off_03_r110_r0101:
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_03
+	_TALK_END
+	_END
+
+flag_on_04_r110_r0101:
+	_FLAG_SET			FE_KARAKURI10_SWITCH_04
+	_TALK_END
+	_END
+
+flag_off_04_r110_r0101:
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_04
+	_TALK_END
+	_END
+
+flag_on_05_r110_r0101:
+	_FLAG_SET			FE_KARAKURI10_SWITCH_05
+	_TALK_END
+	_END
+
+flag_off_05_r110_r0101:
+	_FLAG_RESET			FE_KARAKURI10_SWITCH_05
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL			ev_espm_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		ESPM_06
+	_TRAINER_DATA2		msg_espm_06_01
+	_TRAINER_DATA3		msg_espm_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_06_03
+	_END
+
+SCRIPT_LABEL			ev_okaruto_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		OKARUTO_01
+	_TRAINER_DATA2		msg_okaruto_01_01
+	_TRAINER_DATA3		msg_okaruto_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_okaruto_01_03
+	_END
+
+SCRIPT_LABEL			ev_espw_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		ESPW_06
+	_TRAINER_DATA2		msg_espw_06_01
+	_TRAINER_DATA3		msg_espw_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_06_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,6 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define BATTLE_TOWER_PC02	1
+
+//Exit ID = 0

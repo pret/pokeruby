@@ -1,0 +1,36 @@
+// ●シダケタウン　民家２（街の南東）
+
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_t106_r0401
+msg_trainerw1_01_p01_t106_r0401:
+	.byte	to_,o_,ku_,spc_,ha_,na_,re_,ta_
+	.byte	CR_
+	.byte	SA_,I_,YU_,U_,no_,spc_,o_,ku_,ti_,ni_,spc_,a_,ru_,spc_,to_,i_,u_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ko_,ni_,spc_,a_,tu_,ma_,ru_,no_,ha_
+	.byte	CR_
+	.byte	su_,go_,u_,de_,no_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,ba_,ka_,ri_,spc_,de_,su_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_02_p01_t106_r0401
+msg_trainerw1_02_p01_t106_r0401:
+	.byte	PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_,ha_
+	.byte	CR_
+	.byte	si_,te_,n_,no_,u_,spc_,n4_,ni_,n_,spc_,tu_,du_,ke_,te_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,su_,ru_,spc_,to_,i_,u_,spc_,RU_,bou_,RU_,ra_,si_,i_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ti_,yyu_,u_,de_,spc_,ma_,ke_,ta_,ra_,spc_,hi_,to_,ri_,me_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	ya_,ri_,na_,o_,si_,spc_,da_,na_,n_,te_,spc_,ki_,bi_,si_,i_,no_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

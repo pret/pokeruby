@@ -1,0 +1,139 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_C107_R0701	5
+#define EXITNUM_C107_R0701	3
+#define POSNUM_C107_R0701	0
+#define BGNUM_C107_R0701	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_studym1_01_p01_c107_r0701[];
+extern const u8	ev_studym1_02_p01_c107_r0701[];
+extern const u8	ev_seaman1_01_p01_c107_r0701[];
+extern const u8	ev_oldman2_01_p01_c107_r0701[];
+extern const u8	ev_woman2_01_p01_c107_r0701[];
+
+const evObjData	OBJ_c107_r0701[] =
+{
+	{
+		STUDYM1_01_C107_R0701,		//OBJ ID
+		STUDYM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_studym1_01_p01_c107_r0701,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		STUDYM1_02_C107_R0701,		//OBJ ID
+		STUDYM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_studym1_02_p01_c107_r0701,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEAMAN1_01_C107_R0701,		//OBJ ID
+		SEAMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_seaman1_01_p01_c107_r0701,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OLDMAN2_01_C107_R0701,		//OBJ ID
+		OLDMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman2_01_p01_c107_r0701,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WOMAN2_01_C107_R0701,		//OBJ ID
+		WOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_VON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_woman2_01_p01_c107_r0701,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c107_r0701[] =
+{
+	{
+		0x0007,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		FIELD_C107_DOOR09,		//Door ID
+		FIELD_C107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0009,		//Ypos
+		0x00,		//Height
+		FIELD_C107_DOOR09,		//Door ID
+		FIELD_C107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C107_R0702_STAIR01,		//Door ID
+		C107_R0702,			//Map ID
+		C107,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c107_r0701_sxy_data =
+{
+OBJNUM_C107_R0701,			// field obj max
+EXITNUM_C107_R0701,		// exit max
+POSNUM_C107_R0701,			// pos event max
+BGNUM_C107_R0701,			// bg event max
+OBJ_c107_r0701,			// field obj data
+EXIT_c107_r0701,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

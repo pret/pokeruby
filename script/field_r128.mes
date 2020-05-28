@@ -1,0 +1,180 @@
+// ●128番水道　フィールド
+// ●サファイアver.
+
+
+// ●海底洞窟のイベント終え、海上に出たところからの続き。
+// ●画面中央には主人公がいる。
+// ●主人公の左側にアオギリ、上にはマツブサ。
+
+// ●アオギリが周囲を見渡してから以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p01_field_r128
+msg_aquaboss_01_p01_field_r128:
+	.byte	I_MSG_,STR_ENE_LEADER,kako2_,na_,n_,da_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,no_,spc_,hi_,do_,i_,spc_,a_,ri_,sa_,ma_,ha_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,tenten_,tenten_
+	.byte	CR_
+	.byte	to_,n_,de_,mo_,na_,i_,spc_,ma_,ti_,ga_,i_,wo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで一歩あとずさって
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p02_field_r128
+msg_aquaboss_01_p02_field_r128:
+	.byte	wa_,ta_,si_,ha_,tenten_,tenten_
+	.byte	CR_
+	.byte	ta_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●マツブサ、アオギリの隣に移動して……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p01_field_r128
+msg_magmaboss_01_p01_field_r128:
+	.byte	I_MSG_,STR_ENE_LEADER2,kako2_,wa_,ka_,ttu_,ta_,ka_,spc_,I_MSG_,STR_ENE_LEADER,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,si_,ta_,ko_,to_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	do_,re_,ho_,do_,spc_,o_,ro_,ka_,na_,spc_,ko_,to_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,to_,ni_,ka_,ku_,spc_,i_,so_,gu_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,i_,zi_,yyo_,u_,spc_,hi_,do_,ku_,spc_,na_,ra_,na_,i_,spc_,u_,ti_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	na_,n_,to_,ka_,spc_,si_,na_,i_,to_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●マツブサ、今度は主人公の隣に移動して……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p02_field_r128
+msg_magmaboss_01_p02_field_r128:
+	.byte	I_MSG_,STR_ENE_LEADER2,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,re_,wa_,re_,spc_,I_MSG_,STR_ENE_GROUP2,da_,n_,ha_,spc_,ko_,u_,na_,ra_,na_,i_,yo_,u_,ni_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,wo_,spc_,o_,ttu_,te_,i_,ta_,no_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,yo_,ku_,spc_,ga_,n_,ba_,ttu_,te_,ku_,re_,ta_,ga_
+	.byte	CR_
+	.byte	sa_,i_,a_,ku_,no_,spc_,zi_,yyo_,u_,ki_,yyo_,u_,spc_,da_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,na_,ttu_,te_,ha_,spc_,ko_,do_,mo_,no_,spc_,ki_,mi_,ni_,ha_
+	.byte	CR_
+	.byte	na_,ni_,mo_,spc_,de_,ki_,na_,i_,da_,ro_,u_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,ko_,ha_,spc_,wa_,re_,wa_,re_,ni_,spc_,ma_,ka_,se_,te_,spc_,o_,ki_,ta_,ma_,e_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アオギリ、マツブサ、一緒に画面外に去っていく
+// ●途中、マツブサ立ち止まって振り返る
+// 　そして以下のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p03_field_r128
+msg_magmaboss_01_p03_field_r128:
+	.byte	I_MSG_,STR_ENE_LEADER2,kako2_,so_,re_,ni_,si_,te_,mo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,u_,spc_,ko_,da_,i_,PO_,KE_,MO_,N_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,n_,to_,i_,u_,spc_,PA_,WA_,bou_,da_
+	.byte	SCROLL_WAIT_
+	.byte	su_,be_,te_,no_,spc_,BA_,RA_,N_,SU_,ga_,spc_,ku_,zu_,re_,ta_,zo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そう言って、浅瀬づたいに画面外へ去っていく。
+
+
+// ●少しの間のあと、サイユウ方面からダイゴが波乗りでやってきて、
+// 　浅瀬に乗り上げ、主人公の右側に歩み寄ってくる。
+
+// ●主人公の方を見て
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo1_01_p01_field_r128s
+msg_daigo1_01_p01_field_r128s:
+	.byte	DA_,I_,GO_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,ha_,spc_,i_,ttu_,ta_,i_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●サファイア　→msg_daigo1_01_p01_field_r128s:
+// ●ルビー　　　→msg_daigo1_01_p01_field_r128r:
+
+// ●サファイアver
+// ●ルネ（画面上部）を見て
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo1_01_p02_field_r128s
+msg_daigo1_01_p02_field_r128s:
+	.byte	tenten_,tenten_,hi_,do_,i_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ma_,ma_,spc_,de_,ha_,spc_,HO_,U_,E_,N_,ti_,ho_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ya_,spc_,se_,ka_,i_,zi_,yyu_,u_,ga_,spc_,si_,zu_,mu_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,a_,me_,wo_,spc_,hu_,ra_,se_,te_,i_,ru_,spc_,ku_,mo_,ha_
+	.byte	CR_
+	.byte	RU_,NE_,no_,spc_,zi_,yyo_,u_,ku_,u_,wo_,spc_,ti_,yyu_,u_,si_,n_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,ro_,ga_,ttu_,te_,spc_,i_,ru_,no_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,ta_,i_,spc_,a_,so_,ko_,de_
+	.byte	CR_
+	.byte	na_,ni_,ga_,spc_,o_,ki_,te_,i_,ru_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,spc_,a_,re_,ko_,re_,spc_,ka_,n_,ga_,e_,ru_,yo_,ri_
+	.byte	CR_
+	.byte	RU_,NE_,ni_,spc_,i_,ke_,ba_,spc_,wa_,ka_,ru_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ルビーver
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo1_01_p02_field_r128r
+msg_daigo1_01_p02_field_r128r:
+	.byte	tenten_,tenten_,hi_,do_,i_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ma_,ma_,de_,ha_,spc_,HO_,U_,E_,N_,ti_,ho_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ya_,spc_,se_,ka_,i_,zi_,yyu_,u_,ga_,spc_,hi_,a_,ga_,ttu_,te_,si_,ma_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,ha_,ge_,si_,i_,spc_,hi_,de_,ri_,no_,spc_,ge_,n_,i_,n_
+	.byte	CR_
+	.byte	ma_,ttu_,ka_,na_,spc_,ta_,i_,yo_,u_,ha_,spc_,RU_,NE_,no_,spc_,zi_,yyo_,u_,ku_,u_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	u_,ka_,n_,de_,spc_,i_,ru_,no_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,ta_,i_,spc_,a_,so_,ko_,de_
+	.byte	CR_
+	.byte	na_,ni_,ga_,spc_,o_,ki_,te_,i_,ru_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,spc_,a_,re_,ko_,re_,spc_,ka_,n_,ga_,e_,ru_,yo_,ri_
+	.byte	CR_
+	.byte	RU_,NE_,ni_,spc_,i_,ke_,ba_,spc_,wa_,ka_,ru_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●再度、主人公を見て
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo1_01_p03_field_r128s
+msg_daigo1_01_p03_field_r128s:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,tenten_,tenten_
+	.byte	CR_
+	.byte	ki_,mi_,ga_,spc_,na_,ni_,wo_,spc_,su_,ru_,spc_,tu_,mo_,ri_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ra_,na_,i_,ke_,do_,spc_,MU_,RI_,da_,ke_,ha_,spc_,su_,ru_,na_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,zi_,yya_,a_
+	.byte	CR_
+	.byte	BO_,KU_,ha_,spc_,RU_,NE_,ni_,spc_,i_,ku_,ka_,ra_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ダイゴ、秘伝「そらをとぶ」で去っていく。
+// ●フラグ２４成立

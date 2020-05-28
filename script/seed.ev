@@ -1,0 +1,245 @@
+@===================================================================
+@
+@
+@	タネのイベントスクリプト
+@
+@
+@	2001.10.15	GAME FREAK Inc.
+@===================================================================
+
+//---------------------------------------------------------------
+//	GET_SEED_PARAMで取得できるパラメータ
+//
+//	PARAM0				育ち具合
+//	PARAM1				水やり回数（0～4）
+//	PARAM2				タネのなった個数
+//	文字列バッファ０	タネの名前文字列
+//---------------------------------------------------------------
+
+//---------------------------------------------------------------
+//
+//	タネのイベント
+//
+//---------------------------------------------------------------
+SCRIPT_LABEL	seed_script
+	_PROGRAM	GET_SEED_PARAM				/* タネのパラメータを取得　*/
+	_SWITCH	PARAM0
+	_CASEJUMP	SEEDSTAT_CHANGE		,_seed_change
+	_CASEJUMP	SEEDSTAT_NOTHING	,_seed_nothing
+	_CASEJUMP	SEEDSTAT_UNDERGROUND,_seed_ug
+	_CASEJUMP	SEEDSTAT_HUTABA		,_seed_hutaba
+	_CASEJUMP	SEEDSTAT_MIKI		,_seed_miki
+	_CASEJUMP	SEEDSTAT_FLOWER		,_seed_flower
+	_CASEJUMP	SEEDSTAT_FRUIT		,_seed_fruit
+	_END
+
+//---------------------------------------------------------------
+//	変化中の場合
+//---------------------------------------------------------------
+_seed_change:
+	_TALK_START
+	_TALKMSG		msg_seed_change				/* 『！』 */
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//　うえられていないとき
+//---------------------------------------------------------------
+_seed_nothing:
+	_TALK_OBJ_START
+
+	_FUNC_CALL	ANSWORK,CHK_SEED_POCKET			//ポケットにタネがあるか？
+	_IFVAL_JUMP	ANSWORK,EQ,TRUE,_seed_set_ask
+
+	_TALKMSG	msg_seed_nothing				// ふかふかのつちだ！
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+_seed_set_ask:
+	_TALK_YES_NO	msg_seed_ask				// きのみを植えますか?
+	_IFVAL_JUMP	ANSWORK,EQ,1,_seed_set
+	_IFVAL_JUMP	ANSWORK,EQ,0,_seed_set_end
+	_END
+
+_seed_set:
+	_FLD_FADE_BLACKOUT
+	_TALK_CLOSE
+	_PROGRAM	SEED_CHOICE						/* バッグからタネを選択 */
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP	ITEMNO,EQ,0,_seed_set_end		/* ==0のとき→キャンセル*/
+	_SUB_ITEM	ITEMNO,1
+
+	_CALL		seed_set_main_script
+
+_seed_set_end:
+	_TALK_OBJ_END
+	_END
+
+//---------------------------------------------------------------
+// まだ地面の下
+//---------------------------------------------------------------
+_seed_ug:
+	_TALK_START
+	_TALKMSG		msg_seed_underground
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP			seed_water_check_script
+
+//---------------------------------------------------------------
+//　芽が出た状態
+//---------------------------------------------------------------
+_seed_hutaba:
+	_TALK_START
+	_TALKMSG		msg_seed_hutaba
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP			seed_water_check_script
+
+//---------------------------------------------------------------
+// 幹の状態
+//---------------------------------------------------------------
+_seed_miki:
+	_TALK_START
+	_TALKMSG		msg_seed_miki
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP			seed_water_check_script
+
+//---------------------------------------------------------------
+//　花の状態
+//---------------------------------------------------------------
+_seed_flower:
+	_CALL		_seed_flower_sub
+	_TALK_START
+	_TALKMSG		msg_seed_flower
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP			seed_water_check_script
+
+//木の実の数で表現をかえる
+_seed_flower_sub:
+	_IFVAL_JUMP	PARAM1,EQ,0,			_seed_flower_min
+	_IFVAL_JUMP	PARAM1,EQ,SEEDWATER_MAX,_seed_flower_max
+_seed_flower_normal:
+	_COPY_BUF	1,msg_seed_f_normal
+	_RET
+_seed_flower_max:
+	_COPY_BUF	1,msg_seed_f_max
+	_RET
+_seed_flower_min:
+	_COPY_BUF	1,msg_seed_f_min
+	_RET
+
+//---------------------------------------------------------------
+// 実がなった状態
+//---------------------------------------------------------------
+_seed_fruit:
+	_GET_NUM_MSG	1,PARAM2				//個数をSTR_TEMP_BUF1にセット
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_seed_fruit			//『～のみをとりますか？』
+	_IFVAL_JUMP	ANSWORK,EQ,1,_seed_get
+	_IFVAL_JUMP	ANSWORK,EQ,0,_seed_not_get
+
+_seed_get:
+	_PROGRAM	SEED_GET					/* タネをとる */
+	_IFVAL_JUMP	PARAM0,EQ,0,_seed_full
+
+	_PROGRAM	SEED_CLEAR					/* 苗床を初期状態に */
+	_TALKMSG	msg_seed_fruit_get			//『～のみを　～こ　とった！』
+	_JINGLE		MUS_ME_KINOMI
+	_TALK_WAIT
+	_JINGLE_WAIT
+	_AB_KEYWAIT
+	_TALKMSG	msg_seed_reset				//『ふかふかにもどった！』
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+_seed_full:
+	_TALKMSG	msg_seed_fruit_full			//『バッグがいっぱいで～』
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+_seed_not_get:
+	_TALKMSG	msg_seed_fruit_not_get		//『そのままにしておいた』
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+//---------------------------------------------------------------
+//	バッグ画面からタネを植えたときのスクリプト
+//
+//	※バッグ画面内できのみの存在チェックをする際に
+//　　OBJ情報がセットされていることを前提としている
+//---------------------------------------------------------------
+SCRIPT_LABEL	seed_set_script
+
+	_TALK_START
+	_PROGRAM		GET_SEED_PARAM
+	_CALL			seed_set_main_script
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//	水やりのスクリプト
+//---------------------------------------------------------------
+SCRIPT_LABEL	seed_water_check_script
+
+	_CHECK_ITEM		ITEM_HOERUKOZYOURO,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,_not_water
+
+	_TALK_YES_NO	msg_seed_water_check
+	_IFVAL_JUMP	ANSWORK,EQ,1,seed_water_main_script
+	_IFVAL_JUMP	ANSWORK,EQ,0,_not_water
+_not_water:
+	_TALK_END
+	_END
+
+
+//---------------------------------------------------------------
+//	バッグ画面からじょうろを使ったときのスクリプト
+//
+//	※バッグ画面内できのみの存在チェックをする際に
+//　　OBJ情報がセットされていることを前提としている
+//---------------------------------------------------------------
+SCRIPT_LABEL	seed_watering_script
+	_PROGRAM	GET_SEED_PARAM				/* タネのパラメータを取得　*/
+	_TALK_START
+
+//	水やり共通処理
+seed_water_main_script:
+	_TALKMSG	msg_seed_water
+	_TALK_WAIT
+	_PROGRAM	SEED_WATER			@水やりフラグセット
+	_PROGRAM	ZYOURO_ANIME
+	_STOP_SCRIPT
+
+	_TALKMSG	msg_seed_water_end
+	_TALK_WAIT
+	_AB_KEYWAIT
+
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//		きのみを植えるスクリプト共通処理
+//---------------------------------------------------------------
+seed_set_main_script:
+	_PROGRAM			SEED_SET			//きのみを植える処理
+	_INC_RECORD			CNT_NUTS			//きのみを植えた回数を増やす
+	_TALKMSG			msg_seed_set		//『～のみをうえた！』
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_RET
+
+

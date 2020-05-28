@@ -1,0 +1,115 @@
+// ●ハジツゲタウン　技教えマニア
+
+
+// ●技教え
+// ●１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_t105_r0301
+msg_bigman1_01_p01_t105_r0301:
+	.byte	bo_,ku_,spc_,PO_,KE_,MO_,N_,spc_,wa_,za_,MA_,NI_,A_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,se_,i_,ti_,yyo_,u_,si_,te_,spc_,o_,bo_,e_,te_,i_,ku_
+	.byte	CR_
+	.byte	wa_,za_,wo_,spc_,su_,be_,te_,spc_,si_,ttu_,te_,i_,te_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,o_,si_,e_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ga_,spc_,i_,ma_,spc_,a_,tu_,me_,te_,i_,ru_
+	.byte	CR_
+	.byte	HA_,bou_,TO_,no_,U_,RO_,KO_,wo_,spc_,ku_,re_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	si_,ttu_,te_,ru_,spc_,wa_,za_,wo_,spc_,o_,si_,e_,te_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●２
+// ●話かけ２回目以降はここから
+// ●アイテム【ハートのウロコ】を持っていない場合→７へ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p02_t105_r0301
+msg_bigman1_01_p02_t105_r0301:
+	.byte	o_,o_,ttu_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,ha_,spc_,ma_,sa_,si_,ku_,spc_,HA_,bou_,TO_,no_,U_,RO_,KO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,za_,wo_,spc_,o_,bo_,e_,sa_,se_,ta_,i_,n_,da_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択肢：はい→３へ
+// 　　　　　いいえ→７へ
+// ●３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p03_t105_r0301
+msg_bigman1_01_p03_t105_r0301:
+	.byte	do_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,su_,ru_,n_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモン選択画面が呼び出し
+// ●覚えられるポケモンを選んだ→４へ
+// ●覚えられないポケモンを選んだ→５へ
+// ●タマゴを選んだ→８へ
+// ●Ｂキャンセルor戻る→７へ
+
+// ●４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p04_t105_r0301
+msg_bigman1_01_p04_t105_r0301:
+	.byte	do_,no_,spc_,wa_,za_,ni_,spc_,su_,ru_,n_,da_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技覚え画面が呼び出し
+// ●新規に技を覚えた→６へ
+// ●もどる、Ｂキャンセル→４へ
+
+// ●５
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p05_t105_r0301
+msg_bigman1_01_p05_t105_r0301:
+	.byte	go_,me_,n_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ga_,spc_,so_,no_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	o_,si_,e_,ra_,re_,ru_,spc_,wa_,za_,ha_,spc_,na_,i_,mi_,ta_,i_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// →３へ
+
+// ●６
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p06_t105_r0301
+msg_bigman1_01_p06_t105_r0301:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,o_,re_,i_,ni_
+	.byte	CR_
+	.byte	HA_,bou_,TO_,no_,U_,RO_,KO_,wo_,spc_,n1_,ma_,i_,spc_,a_,ge_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// →７へ
+
+// ●７
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p07_t105_r0301
+msg_bigman1_01_p07_t105_r0301:
+	.byte	o_,bo_,e_,sa_,se_,ta_,i_,spc_,wa_,za_,ga_,spc_,a_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	HA_,bou_,TO_,no_,U_,RO_,KO_,wo_,spc_,mo_,ttu_,te_,ki_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●８
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p08_t105_r0301
+msg_bigman1_01_p08_t105_r0301:
+	.byte	e_,ttu_,hate_
+	.byte	CR_
+	.byte	TA_,MA_,GO_,ni_,spc_,o_,si_,e_,ra_,re_,ru_,spc_,wa_,za_,ha_,spc_,na_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// →３へ

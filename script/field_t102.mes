@@ -1,0 +1,154 @@
+// ●コトキタウン　フィールド
+
+
+// ●少女３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_field_t102
+msg_girl3_01_p01_field_t102:
+	.byte	ti_,yyo_,ttu_,to_,spc_,hi_,to_,ya_,su_,mi_,spc_,si_,ta_,i_,ka_,ra_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,spc_,ka_,i_,te_,ru_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ショップ店員男１（Ｘ１３・Ｙ１５）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_shopm1_01_p01_field_t102
+msg_shopm1_01_p01_field_t102:
+	.byte	o_,re_,spc_,HU_,RE_,N_,DO_,RI_,II_,SI_,YYO_,TTU_,PU_,no_,spc_,te_,n_,i_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,gyoe_,spc_,ki_,mi_,gyoe_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,tu_,i_,te_,ki_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公を連れてフレンドリィショップの前まで移動（Ｘ１３・Ｙ７）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_shopm1_01_p03_field_t102
+msg_shopm1_01_p03_field_t102:
+	.byte	ko_,ko_,ga_,spc_,HU_,RE_,N_,DO_,RI_,II_,SI_,YYO_,TTU_,PU_,gyoe_
+	.byte	CR_
+	.byte	a_,o_,i_,spc_,ya_,ne_,ga_,spc_,me_,zi_,ru_,si_,spc_,na_,no_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ru_,spc_,BO_,bou_,RU_,to_,ka_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,GU_,TTU_,ZU_,wo_,spc_,u_,ttu_,te_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KI_,MI_,ni_,ha_,spc_,SA_,bou_,BI_,SU_,to_,si_,te_
+	.byte	CR_
+	.byte	ko_,re_,wo_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「キズぐすり」（No011）入手処理
+// ●続けて……
+// ●ショップ店員男１（「キズぐすり」入手以降も同様）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_shopm1_01_p04_field_t102
+msg_shopm1_01_p04_field_t102:
+	.byte	do_,n_,na_,spc_,to_,ki_,de_,mo_,spc_,tu_,ka_,e_,ru_
+	.byte	CR_
+	.byte	KI_,ZU_,gu_,su_,ri_,ha_,spc_,ba_,a_,i_,ni_,spc_,yo_,ttu_,te_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,yo_,ri_,spc_,ta_,yo_,ri_,ni_,spc_,na_,ru_,ka_,ra_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公がマップアウトしても、そのままで
+
+
+// ●マニア１（ストッパー）
+// ●横をすり抜けようとすると主人公を押し戻して以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_field_t102
+msg_freak1_01_p01_field_t102:
+	.byte	a_,bou_,bou_,gyoe_
+	.byte	CR_
+	.byte	ko_,ttu_,ti_,ni_,spc_,ha_,i_,ra_,na_,i_,de_,spc_,ku_,re_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,no_,spc_,a_,si_,a_,to_,wo_
+	.byte	CR_
+	.byte	ha_,ttu_,ke_,n_,spc_,si_,ta_,n_,da_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	SU_,KE_,TTU_,TI_,ga_,spc_,o_,wa_,ru_,ma_,de_,spc_,ma_,ttu_,te_,te_,ku_,re_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p02_field_t102
+msg_freak1_01_p02_field_t102:
+	.byte	me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,no_,spc_,a_,si_,a_,to_,wo_
+	.byte	CR_
+	.byte	ha_,ttu_,ke_,n_,spc_,si_,ta_,n_,da_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	SU_,KE_,TTU_,TI_,ga_,spc_,o_,wa_,ru_,ma_,de_,spc_,ma_,ttu_,te_,te_,ku_,re_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●オダマキ博士からモンスターボールをもらって以降は、
+// 　ストッパー機能をはずして、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p03_field_t102
+msg_freak1_01_p03_field_t102:
+	.byte	ka_,n_,se_,i_,spc_,sa_,se_,ta_,spc_,me_,zu_,ra_,si_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,a_,si_,a_,to_,no_,spc_,SU_,KE_,TTU_,TI_
+	.byte	SCROLL_WAIT_
+	.byte	yo_,ku_,mi_,ta_,ra_,spc_,zi_,bu_,n_,no_,spc_,a_,si_,a_,to_,spc_,da_,ttu_,ta_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●サポートキャラ♀「ハルカ」
+// ●１０３番道路のサポートとの戦闘が終わると
+// 　（Ｘ１１・Ｙ１９）に上向きで出現
+// ●主人公、ＰＯＳ（Ｘ８～１０・Ｙ１９）を踏むと
+// 　主人公に隣接、以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_field_t102
+msg_heroine_01_p01_field_t102:
+	.byte	HA_,RU_,KA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	CR_
+	.byte	ko_,ttu_,ti_,spc_,ko_,ttu_,ti_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,ya_,ku_,spc_,ka_,e_,ro_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面下部に去っていく
+
+// ●サポートキャラ♂「ユウキ」
+// ●１０３番道路のサポートとの戦闘が終わると
+// 　（Ｘ１１・Ｙ１９）に上向きで出現
+// ●主人公、ＰＯＳ（Ｘ８～１０・Ｙ１９）を踏むと
+// 　主人公に隣接、以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_field_t102
+msg_hero_01_p01_field_t102:
+	.byte	YU_,U_,KI_,kako2_,O_,RE_,spc_,sa_,ki_,ni_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,zi_,yyo_,ni_,spc_,mo_,do_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,mo_,spc_,ha_,ya_,ku_,spc_,ko_,i_,yo_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面下部に去っていく
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_t102
+msg_kanban_01_p01_field_t102:
+	.byte	ko_,ko_,ha_,spc_,KO_,TO_,KI_,spc_,TA_,U_,N_
+	.byte	CR_
+	.byte	na_,ni_,ka_,ga_,spc_,ka_,su_,ka_,ni_,spc_,ha_,zi_,ma_,ru_,spc_,to_,ko_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,7 @@
+//MapEditNH Ver.3.50 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define BALL1_79	1
+
+//Exit ID = 1
+#define CAVE_D2101_DOOR01	0

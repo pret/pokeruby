@@ -1,0 +1,171 @@
+//MapEditNH Ver.3.50 *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_BATTLE01	6
+#define EXITNUM_PARK_BATTLE01	3
+#define POSNUM_PARK_BATTLE01	0
+#define BGNUM_PARK_BATTLE01	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_pcwoman2_01_p01_park_battle01[];
+extern const u8	ev_youngm1_01_p01_park_battle01[];
+extern const u8	ev_trainerw1_01_p01_park_battle01[];
+extern const u8	ev_boy1_01_p01_park_battle01[];
+extern const u8	letter_tower_script[];
+extern const u8	ev_workerm1_01_p01_park_battle01[];
+
+//BG_SCRIPT
+extern const u8	ev_score_p01_park_battle01[];
+
+const evObjData	OBJ_park_battle01[] =
+{
+	{
+		PCWOMAN2_01_PARK_BATTLE01,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pcwoman2_01_p01_park_battle01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		YOUNGM1_01_PARK_BATTLE,		//OBJ ID
+		YOUNGM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_youngm1_01_p01_park_battle01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TRAINERW1_01_PARK_BATTLE01,		//OBJ ID
+		TRAINERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_trainerw1_01_p01_park_battle01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOY1_01_PARK_BATTLE01,		//OBJ ID
+		BOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy1_01_p01_park_battle01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		INTERVW1_01_PARK_BATTLE01,		//OBJ ID
+		INTERVW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		letter_tower_script,		//Event Lavel
+		FV_INTERVW1_01_PARK_BATTLE01,		//Event Flag
+	},
+
+	{
+		WORKERM1_01_PARK_BATTLE01,		//OBJ ID
+		WORKERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerm1_01_p01_park_battle01,		//Event Lavel
+		FV_OWNER_01_PARK_BATTLE01,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_park_battle01[] =
+{
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_TOWER01_DOOR01,		//Door ID
+		PARK_TOWER01,			//Map ID
+		PARK,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_TOWER01_DOOR01,		//Door ID
+		PARK_TOWER01,			//Map ID
+		PARK,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		PARK_BATTLE04_MAT01,		//Door ID
+		PARK_BATTLE04,			//Map ID
+		PARK,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_park_battle01[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		BG_D_SITE,		//Event Type
+		ev_score_p01_park_battle01,		//Script
+	},
+
+};
+
+const SXY_DATA	park_battle01_sxy_data =
+{
+OBJNUM_PARK_BATTLE01,			// field obj max
+EXITNUM_PARK_BATTLE01,		// exit max
+POSNUM_PARK_BATTLE01,			// pos event max
+BGNUM_PARK_BATTLE01,			// bg event max
+OBJ_park_battle01,			// field obj data
+EXIT_park_battle01,			// exit data
+NULL,			// pos event data
+BG_park_battle01,				// bg event data
+};

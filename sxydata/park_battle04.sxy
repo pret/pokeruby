@@ -1,0 +1,75 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_BATTLE04	2
+#define EXITNUM_PARK_BATTLE04	2
+#define POSNUM_PARK_BATTLE04	0
+#define BGNUM_PARK_BATTLE04	0
+
+const evObjData	OBJ_park_battle04[] =
+{
+	{
+		BATTLE_TOWER_TRAINER,		//OBJ ID
+		WKOBJCODE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_BATTLE_TOWER_TRAINER,		//Event Flag
+	},
+
+	{
+		BATTLE_TOWER_PC,		//OBJ ID
+		PCWOMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_park_battle04[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_BATTLE01_DOOR01,		//Door ID
+		PARK_BATTLE01,			//Map ID
+		PARK,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_BATTLE01_DOOR01,		//Door ID
+		PARK_BATTLE01,			//Map ID
+		PARK,				//Field ID
+	},
+
+};
+
+const SXY_DATA	park_battle04_sxy_data =
+{
+OBJNUM_PARK_BATTLE04,			// field obj max
+EXITNUM_PARK_BATTLE04,		// exit max
+POSNUM_PARK_BATTLE04,			// pos event max
+BGNUM_PARK_BATTLE04,			// bg event max
+OBJ_park_battle04,			// field obj data
+EXIT_park_battle04,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

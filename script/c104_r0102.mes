@@ -1,0 +1,228 @@
+// ●カナズミのデボン社内２階
+
+
+// ●デボン開発社員
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_c104_r0102
+msg_studym1_01_p01_c104_r0102:
+	.byte	i_,ma_,spc_,PO_,KE_,MO_,N_,to_,spc_,ha_,na_,se_,ru_,spc_,do_,u_,gu_,wo_
+	.byte	CR_
+	.byte	ka_,i_,ha_,tu_,spc_,si_,te_,i_,ru_,no_,de_,su_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,u_,ma_,ku_,spc_,i_,ka_,na_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デボン開発社員
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_02_p01_c104_r0102
+msg_studym1_02_p01_c104_r0102:
+	.byte	i_,ma_,spc_,si_,n_,ga_,ta_,no_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,wo_
+	.byte	CR_
+	.byte	ka_,i_,ha_,tu_,spc_,si_,te_,i_,ru_,no_,de_,su_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,u_,ma_,ku_,spc_,i_,ka_,na_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナに「デボンのにもつ」を届けることで
+// 　１１６番道路にデボン社員が出現して以降のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_02_p02_c104_r0102
+msg_studym1_02_p02_c104_r0102:
+	.byte	si_,n_,ga_,ta_,no_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,ga_
+	.byte	CR_
+	.byte	tu_,i_,ni_,spc_,ka_,n_,se_,i_,spc_,si_,ta_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,PI_,bou_,TO_,BO_,bou_,RU_,wo_,spc_,tu_,ka_,u_,to_
+	.byte	CR_
+	.byte	i_,ti_,do_,spc_,tu_,ka_,ma_,e_,ta_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,ma_,e_,ya_,su_,ku_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TA_,I_,MA_,bou_,BO_,bou_,RU_,ha_,spc_,PO_,KE_,MO_,N_,to_,no_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,i_,ga_,spc_,na_,ga_,bi_,ke_,ba_,spc_,na_,ga_,bi_,ku_,ho_,do_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,ma_,e_,ya_,su_,ku_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,ti_,ra_,mo_,spc_,wa_,ga_,si_,yya_,no_,spc_,zi_,si_,n_,sa_,ku_
+	.byte	CR_
+	.byte	ze_,hi_,spc_,tu_,ka_,ttu_,te_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デボン開発社員
+// ●トレナビ入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_03_p01_c104_r0102
+msg_studym1_03_p01_c104_r0102:
+	.byte	PO_,KE_,NA_,BI_,wo_,spc_,tu_,ku_,ttu_,ta_,no_,ha_,spc_,wa_,ta_,si_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,bou_,spc_,a_,n_,na_,spc_,su_,go_,i_,MO_,NO_,wo_,spc_,tu_,ku_,re_,ru_,to_
+	.byte	CR_
+	.byte	ka_,i_,ha_,tu_,si_,yya_,spc_,mi_,yyo_,u_,ri_,ni_,spc_,tu_,ki_,ma_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トレナビ入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_03_p02_c104_r0102
+msg_studym1_03_p02_c104_r0102:
+	.byte	o_,o_,gyoe_,spc_,so_,re_,ha_,spc_,PO_,KE_,NA_,BI_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ki_,mo_,ti_,wo_,spc_,si_,ri_,ta_,i_
+	.byte	CR_
+	.byte	to_,i_,u_,spc_,si_,yya_,ti_,yyo_,u_,no_,spc_,A_,I_,DE_,A_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,tu_,ge_,n_,spc_,si_,ta_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,wa_,si_,i_,spc_,se_,tu_,me_,i_,wo_,spc_,si_,ma_,si_,yyo_,u_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,i_,ya_,i_,ya_
+	.byte	CR_
+	.byte	so_,no_,u_,ti_,ni_,spc_,wa_,ka_,ru_,de_,si_,yyo_,u_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	do_,n_,do_,n_,spc_,PO_,KE_,NA_,BI_,wo_,spc_,tu_,ka_,ttu_,te_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デボン開発社員
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_04_p01_c104_r0102
+msg_studym1_04_p01_c104_r0102:
+	.byte	i_,ma_,spc_,PO_,KE_,MO_,N_,ga_,spc_,mi_,te_,i_,ru_
+	.byte	CR_
+	.byte	yu_,me_,wo_,spc_,u_,tu_,si_,da_,su_,spc_,do_,u_,gu_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,ha_,tu_,spc_,si_,te_,i_,ru_,no_,de_,su_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,u_,ma_,ku_,spc_,i_,ka_,na_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デボン開発社員
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p01_c104_r0102
+msg_studym1_05_p01_c104_r0102:
+	.byte	i_,ma_,spc_,PO_,KE_,MO_,N_,no_,spc_,ka_,se_,ki_,wo_
+	.byte	CR_
+	.byte	sa_,i_,se_,i_,spc_,su_,ru_,spc_,so_,u_,ti_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,ha_,tu_,spc_,si_,te_,i_,ta_,no_,de_,su_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ka_,na_,ka_,spc_,u_,ma_,ku_,spc_,i_,ki_,ma_,si_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ねっこのカセキ」（No286）もしくは
+// 　「ツメのカセキ」（No287）を持っているときは
+// 　「！」マーク表示後
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p02_c104_r0102
+msg_studym1_05_p02_c104_r0102:
+	.byte	ki_,mi_,no_,spc_,mo_,ttu_,te_,i_,ru_,spc_,so_,re_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ka_,se_,ki_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ke_,re_,ba_,spc_,wa_,ta_,si_,ga_,spc_,tu_,ku_,ttu_,ta_
+	.byte	CR_
+	.byte	KA_,SE_,KI_,spc_,sa_,i_,se_,i_,spc_,MA_,SI_,N_,de_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ki_,ka_,e_,ra_,se_,te_,spc_,mi_,ma_,si_,yyo_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_studym1_05_p04_c104_r0102:
+// ●「いいえ」→msg_studym1_05_p03_c104_r0102:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p03_c104_r0102
+msg_studym1_05_p03_c104_r0102:
+	.byte	a_,bou_,spc_,so_,u_,de_,su_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	DE_,BO_,N_,no_,spc_,gi_,zi_,yyu_,tu_,ha_,spc_,su_,go_,i_,no_,ni_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p04_c104_r0102
+msg_studym1_05_p04_c104_r0102:
+	.byte	wa_,ka_,ri_,ma_,si_,ta_,gyoe_
+	.byte	CR_
+	.byte	de_,ha_,spc_,sa_,ttu_,so_,ku_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,DE_,BO_,N_,no_,spc_,ke_,n_,ki_,yyu_,u_,i_,n_,ni_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,a_,zu_,ke_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝道具の名前
+// ●続けて……
+// 　カセキ再生までは同じメッセージを繰り替え表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p05_c104_r0102
+msg_studym1_05_p05_c104_r0102:
+	.byte	wa_,ta_,si_,ga_,spc_,tu_,ku_,ttu_,ta_
+	.byte	CR_
+	.byte	KA_,SE_,KI_,spc_,sa_,i_,se_,i_,spc_,MA_,SI_,N_,ha_,spc_,su_,go_,i_,no_,de_,su_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,ka_,n_,ga_,spc_,ka_,ka_,ru_,no_,ga_,spc_,ke_,ttu_,te_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	su_,ko_,si_,spc_,so_,ko_,ra_,he_,n_,wo_
+	.byte	CR_
+	.byte	ke_,n_,ga_,ku_,spc_,na_,sa_,re_,te_,ha_,spc_,i_,ka_,ga_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公が別のマップに行くか、誰かに話しかけると
+// 　カセキが再生される→msg_studym1_05_p06_c104_r0102:
+
+// ●カセキ再生
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p06_c104_r0102
+msg_studym1_05_p06_c104_r0102:
+	.byte	o_,ma_,ta_,se_,spc_,si_,ma_,si_,ta_,gyoe_
+	.byte	CR_
+	.byte	KA_,SE_,KI_,ga_,spc_,i_,ki_,ka_,e_,ri_,spc_,ma_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,SE_,KI_,ha_,spc_,o_,o_,mu_,ka_,si_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,spc_,de_,si_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠１」＝再生されたポケモンの名前
+
+// ●手持ちポケモンが５匹以下の時は続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p07_c104_r0102
+msg_studym1_05_p07_c104_r0102:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,DE_,BO_,N_,no_,spc_,ke_,n_,ki_,yyu_,u_,i_,n_,ka_,ra_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,u_,ke_,to_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公の手持ちポケモンに「＠１」を追加する
+
+// ●手持ちが一杯の時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_05_p08_c104_r0102
+msg_studym1_05_p08_c104_r0102:
+	.byte	a_,bou_,spc_,PO_,KE_,MO_,N_,spc_,i_,ttu_,pa_,i_,de_
+	.byte	CR_
+	.byte	mo_,te_,na_,i_,de_,su_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

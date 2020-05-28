@@ -1,0 +1,156 @@
+//MapEditNH Ver.3.53 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1107	6
+#define EXITNUM_CAVE_D1107	3
+#define POSNUM_CAVE_D1107	0
+#define BGNUM_CAVE_D1107	0
+
+//OBJ_EVENT_LABEL
+extern const u8	talk_kairiki_obj[];
+extern const u8	talk_kairiki_obj[];
+extern const u8	talk_kairiki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_kairiki_obj[];
+
+const evObjData	OBJ_cave_d1107[] =
+{
+	{
+		PUSHROCK1_01_CAVE_D1107,		//OBJ ID
+		PUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_kairiki_obj,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+	{
+		PUSHROCK1_02_CAVE_D1107,		//OBJ ID
+		PUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_kairiki_obj,		//Event Lavel
+		FH_OBJ01,		//Event Flag
+	},
+
+	{
+		PUSHROCK1_03_CAVE_D1107,		//OBJ ID
+		PUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_kairiki_obj,		//Event Lavel
+		FH_OBJ02,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_01_CAVE_D1107,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ04,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_02_CAVE_D1107,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ05,		//Event Flag
+	},
+
+	{
+		PUSHROCK1_04_CAVE_D1107,		//OBJ ID
+		PUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_kairiki_obj,		//Event Lavel
+		FH_OBJ03,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d1107[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		CAVE_D1103_DOOR02,		//Door ID
+		CAVE_D1103,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x000f,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		CAVE_D1106_DOOR02,		//Door ID
+		CAVE_D1106,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		CAVE_D1106_DOOR03,		//Door ID
+		CAVE_D1106,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d1107_sxy_data =
+{
+OBJNUM_CAVE_D1107,			// field obj max
+EXITNUM_CAVE_D1107,		// exit max
+POSNUM_CAVE_D1107,			// pos event max
+BGNUM_CAVE_D1107,			// bg event max
+OBJ_cave_d1107,			// field obj data
+EXIT_cave_d1107,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

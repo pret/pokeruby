@@ -1,0 +1,73 @@
+// ●117番道路　フィールド
+
+
+// ●少女２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_field_r117
+msg_girl2_01_p01_field_r117:
+	.byte	so_,da_,te_,ya_,ni_,spc_,PO_,KE_,MO_,N_,spc_,a_,zu_,ke_,te_,i_,ta_,no_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,ta_,ra_,spc_,a_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	i_,tu_,no_,ma_,ni_,ka_,spc_,si_,ra_,na_,i_,spc_,wa_,za_,spc_,o_,bo_,e_,te_,i_,te_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ta_,si_,ga_,spc_,to_,ma_,do_,ttu_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl4_01_p01_field_r117
+msg_girl4_01_p01_field_r117:
+	.byte	do_,o_,hate_
+	.byte	CR_
+	.byte	ki_,re_,i_,ni_,spc_,na_,ra_,n_,da_,spc_,ko_,no_,spc_,ha_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ze_,bou_,n_,bu_,spc_,wa_,ta_,si_,ga_,spc_,u_,e_,ta_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●坊や２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya2_01_p01_field_r117
+msg_boya2_01_p01_field_r117:
+	.byte	ku_,u_,ki_,ga_,spc_,u_,ma_,bou_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●シダケ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r117
+msg_kanban_01_p01_field_r117:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n7_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,SI_,DA_,KE_,TA_,U_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キンセツ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r117
+msg_kanban_02_p01_field_r117:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n7_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowR__,spc_,KI_,N_,SE_,TU_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●育て屋の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_r117
+msg_kanban_03_p01_field_r117:
+	.byte	kako_,PO_,KE_,MO_,N_,spc_,so_,da_,te_,ya_,kakot_
+	.byte	CR_
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,spc_,so_,da_,te_,ma_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

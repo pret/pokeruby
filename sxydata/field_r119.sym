@@ -1,0 +1,44 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 37
+#define SEED_01_FIELD_R119	1
+#define SEED_02_FIELD_R119	2
+#define SEED_03_FIELD_R119	3
+#define TR_MUSHI_05	4
+#define TR_MUSHIMASTER_03	5
+#define TR_NUSHIMASTER_02	6
+#define TR_RANGERM_01	7
+#define TR_MUSHIMASTER_01	8
+#define TR_RANGERW_01	9
+#define TR_MUSHI_04	10
+#define TR_MUSHI_06	11
+#define TR_SHINOBI_01	12
+#define TR_SHINOBI_02	13
+#define TR_BIRD_02	14
+#define TR_BIRD_03	15
+#define SUPPORT_01_FIELD_R119	16
+#define BALL1_24	17
+#define BALL1_25	18
+#define BALL1_26	19
+#define BALL1_27	20
+#define BALL1_28	21
+#define BALL1_29	22
+#define EVILM1_01_FIELD_R119	23
+#define EVILM1_02_FIELD_R119	24
+#define SUPPORT_02_FIELD_R119	25
+#define BOY3_01_FIELD_R119	26
+#define SEED_04_FIELD_R119	27
+#define SEED_05_FIELD_R119	28
+#define SEED_06_FIELD_R119	29
+#define SEED_07_FIELD_R119	30
+#define CYCLEM1_01_FIELD_R119	31
+#define BALL1_106	32
+#define BOY2_01_FIELD_R119	33
+#define TR_SHINOBI_11	34
+#define KAKURE_01_FIELD_R119	35
+#define KAKURE_02_FIELD_R119	36
+#define TR_FISHING_20	37
+
+//Exit ID = 2
+#define FIELD_R119_DOOR01	0
+#define FIELD_R119_DOOR02	1

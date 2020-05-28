@@ -1,0 +1,117 @@
+// ゲームコーナー：ルーレット
+
+// ●コインがあるときにルーレット台にはなしかけたとき
+// （はい/いいえのせんたくボックスを表示して下さい）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_01
+msg_roulette_01:
+	.byte	ko_,ko_,ha_,spc_,RE_,bou_,TO_,I_MSG_,STR_TEMP_BUF0,no_,spc_,RU_,bou_,RE_,TTU_,TO_,da_,i_,spc_,de_,su_
+	.byte	CR_
+	.byte	RU_,bou_,RE_,TTU_,TO_,de_,spc_,a_,so_,bi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ＠０：レート
+
+// ●台に話しかけたときに、コインがなかったとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_02
+msg_roulette_02:
+	.byte	KO_,I_,N_,ga_,spc_,ta_,ri_,ma_,se_,n_
+	.byte	EOM_
+
+// ●ボーナスタイム・レートアップ中メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_03
+msg_roulette_03:
+	.byte	ho_,n_,zi_,tu_,spc_,ko_,no_,da_,i_,de_,ha_
+	.byte	CR_
+	.byte	RE_,bou_,TO_,spc_,A_,TTU_,PU_,spc_,zi_,ttu_,si_,ti_,yyu_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●操作説明メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_04
+msg_roulette_04:
+	.byte	BE_,TTU_,TO_,su_,ru_,spc_,wa_,ku_,wo_,spc_,zi_,yyu_,u_,zi_,BO_,TA_,N_,de_,spc_,e_,ra_,n_,de_
+	.byte	CR_
+	.byte	A__,BO_,TA_,N_,de_,spc_,ke_,ttu_,te_,i_,spc_,si_,ma_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●当たったとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_05
+msg_roulette_05:
+	.byte	a_,ta_,ri_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●オッズが12倍のときに当たったら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_06
+msg_roulette_06:
+	.byte	o_,o_,a_,ta_,ri_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ●はずれたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_07
+msg_roulette_07:
+	.byte	ha_,zu_,re_,bou_,spc_
+	.byte	EOM_
+
+// ●コインゲットメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_08
+msg_roulette_08:
+	.byte	o_,me_,de_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	CR_
+	.byte	KO_,I_,N_,spc_,I_MSG_,STR_TEMP_BUF0,ma_,i_,spc_,ha_,i_,ri_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ＠０：当たったコインの総数
+
+// はずれたときにコインがなくなったとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_09
+msg_roulette_09:
+	.byte	KO_,I_,N_,ga_,spc_,na_,ku_,na_,ri_,ma_,si_,ta_
+	.byte	EOM_
+
+// 続けますか？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_10
+msg_roulette_10:
+	.byte	tu_,du_,ke_,te_,spc_,a_,so_,bi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// 台の上の玉をクリアするとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_11
+msg_roulette_11:
+	.byte	da_,i_,no_,spc_,u_,e_,no_,spc_,ta_,ma_,wo_
+	.byte	CR_
+	.byte	KU_,RI_,A_,spc_,si_,ma_,su_
+	.byte	EOM_
+
+// コインケースを持っていないとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_12
+msg_roulette_12:
+	.byte	KO_,I_,N_,KE_,bou_,SU_,wo_,spc_,mo_,ttu_,te_,i_,ma_,se_,n_,gyoe_
+	.byte	EOM_
+
+// コインがいっぱいのときの「景品と交換して！」メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_roulette_13
+msg_roulette_13:
+	.byte	KO_,I_,N_,ga_,spc_,i_,ttu_,pa_,i_,de_,su_,gyoe_
+	.byte	CR_
+	.byte	ke_,i_,hi_,n_,to_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_

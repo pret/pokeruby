@@ -1,0 +1,37 @@
+// ●ポケモンリーグ・殿堂入り部屋
+
+
+// ●入口を入ってきたダイゴと主人公。
+// 　部屋の途中で足を止め、ダイゴが主人公の方を向いて以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p01_c109_r0301
+msg_daigo_01_p01_c109_r0301:
+	.byte	DA_,I_,GO_,kako2_,ko_,ko_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ge_,si_,i_,spc_,ta_,ta_,ka_,i_,wo_,spc_,ka_,ti_,nu_,i_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,ki_,ro_,ku_,su_,ru_,spc_,ba_,si_,yyo_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,GU_,spc_,TI_,YYA_,N_,PI_,O_,N_,no_
+	.byte	CR_
+	.byte	e_,i_,ko_,u_,wo_,spc_,ta_,ta_,e_,ru_,ta_,me_,no_,spc_,he_,ya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび歩き出し、殿堂入りマシンの前で足を止め、
+// 　ダイゴが主人公の方を向いて以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p02_c109_r0301
+msg_daigo_01_p02_c109_r0301:
+	.byte	DA_,I_,GO_,kako2_,sa_,a_,gyoe_,spc_,PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_,wo_
+	.byte	CR_
+	.byte	ka_,ti_,nu_,i_,ta_,spc_,ki_,mi_,no_,spc_,na_,ma_,e_,to_
+	.byte	NORMAL_WAIT_
+	.byte	to_,mo_,ni_,spc_,ta_,ta_,ka_,ttu_,ta_,spc_,ki_,mi_,no_,spc_,PA_,bou_,TO_,NA_,bou_,wo_
+	.byte	CR_
+	.byte	ko_,no_,spc_,MA_,SI_,N_,ni_,spc_,ki_,ro_,ku_,spc_,si_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●殿堂入りのデモへ
+// ●続いてスタッフロール

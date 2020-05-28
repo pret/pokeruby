@@ -1,0 +1,73 @@
+// ●ポケモンリーグ　第４の部屋
+
+
+// ●ゲンジ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_genji_01_p01_c109_r0104
+msg_genji_01_p01_c109_r0104:
+	.byte	wa_,si_,ga_,spc_,PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_
+	.byte	CR_
+	.byte	si_,te_,n_,no_,u_,spc_,sa_,i_,go_,no_,spc_,hi_,to_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	DO_,RA_,GO_,N_,tu_,ka_,i_,no_,spc_,GE_,N_,ZI_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,mo_,to_,mo_,to_
+	.byte	CR_
+	.byte	zi_,yu_,u_,ki_,ma_,ma_,na_,spc_,ya_,se_,i_,no_,spc_,i_,ki_,mo_,no_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ki_,to_,si_,te_,spc_,hi_,to_,wo_,spc_,ko_,ma_,ra_,se_
+	.byte	CR_
+	.byte	to_,ki_,to_,si_,te_,spc_,hi_,to_,wo_,spc_,ta_,su_,ke_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,ta_,ta_,ka_,u_,no_,ni_
+	.byte	CR_
+	.byte	na_,ni_,ga_,spc_,hi_,tu_,yo_,u_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	o_,ma_,e_,spc_,wa_,ka_,ttu_,te_,spc_,i_,ru_,no_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ka_,ttu_,te_,i_,na_,ke_,re_,ba_
+	.byte	CR_
+	.byte	ko_,no_,spc_,wa_,si_,ni_,spc_,ka_,tu_,ko_,to_,ha_,spc_,de_,ki_,ru_,ma_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘敗北のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_genji_01_p02_c109_r0104
+msg_genji_01_p02_c109_r0104:
+	.byte	mi_,go_,to_,gyoe_,spc_,to_,i_,u_,be_,ki_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘モードを抜けてのセリフ
+// ●メッセージウインドウ自動でオープン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_genji_01_p03_c109_r0104
+msg_genji_01_p03_c109_r0104:
+	.byte	sa_,su_,ga_,ha_,spc_,ko_,ko_,ma_,de_
+	.byte	CR_
+	.byte	ya_,ttu_,te_,ki_,ta_,spc_,PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,tu_,yo_,u_,na_,spc_,mo_,no_,spc_,wa_,ka_,ttu_,te_,i_,ru_,spc_,yo_,u_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,gyoe_,spc_,TO_,RE_,bou_,NA_,bou_,ni_
+	.byte	CR_
+	.byte	hi_,tu_,yo_,u_,spc_,na_,no_,ha_,spc_,ta_,da_,si_,i_,spc_,ko_,ko_,ro_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	ta_,da_,si_,i_,spc_,ko_,ko_,ro_,ni_,spc_,hu_,re_,te_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,no_,go_,to_,no_,spc_,ze_,n_,a_,ku_,wo_,spc_,ha_,n_,da_,n_,si_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,da_,si_,i_,spc_,ko_,ko_,ro_,ni_,spc_,hu_,re_,te_,spc_,tu_,yo_,ku_,na_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,a_,spc_,tu_,gi_,ni_,spc_,su_,su_,me_,gyoe_
+	.byte	CR_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,ga_,spc_,ma_,ttu_,te_,spc_,o_,ru_,zo_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけたときも同じ

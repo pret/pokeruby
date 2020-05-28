@@ -1,0 +1,116 @@
+// ●101番道路　フィールド
+
+
+// ●主人公が初めて101番道路に出たときのイベント
+// ●主人公が特定の場所まで来ると、突然、以下のセリフが表示される
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p01_field_r101
+msg_odamaki_01_p01_field_r101:
+	.byte	ta_,ttu_,spc_,ta_,su_,ke_,te_,spc_,ku_,re_,bou_,ttu_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そしてオートで少し上に進んでいくと、
+// 　野生のポケモンに追われているオダマキ博士の姿が画面内に入ってくる
+// ●博士はしばらくポケモンに追われ、
+// 　やがて追いつめられると以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p02_field_r101
+msg_odamaki_01_p02_field_r101:
+	.byte	o_,bou_,i_,gyoe_,spc_,so_,ko_,no_,spc_,ki_,mi_,gyoe_
+	.byte	CR_
+	.byte	ta_,su_,ke_,te_,spc_,o_,ku_,re_,bou_,ttu_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ko_,ni_,spc_,a_,ru_,spc_,KA_,BA_,N_,ni_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,ga_,spc_,ha_,i_,ttu_,te_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●オート解除
+// 　主人公はカバンの前に行けるようになるが、
+// 　特定の範囲からはずれようとすると、以下のような警告のセリフが
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p03_field_r101
+msg_odamaki_01_p03_field_r101:
+	.byte	do_,ttu_,spc_,do_,ko_,he_,spc_,i_,ku_,n_,da_,gyoe_,hate_
+	.byte	CR_
+	.byte	wa_,ta_,si_,wo_,spc_,mi_,su_,te_,na_,i_,de_,spc_,o_,ku_,re_,bou_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カバンの前に立ち、カバンを調べるとポケモン選択画面に変わる
+// ●ポケモン選択→決定→戦闘開始→勝利
+// ●戦闘終了後、オダマキが主人公の隣にやってくる
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p04_field_r101
+msg_odamaki_01_p04_field_r101:
+	.byte	O_,DA_,MA_,KI_,kako2_,ha_,a_,spc_,ha_,a_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,se_,i_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,ti_,yyo_,u_,sa_,spc_,si_,yo_,u_,to_
+	.byte	CR_
+	.byte	ku_,sa_,mu_,ra_,ni_,spc_,ha_,i_,ttu_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	to_,tu_,ze_,n_,spc_,PO_,KE_,MO_,N_,ni_,spc_,o_,so_,wa_,re_,te_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ni_,ka_,ku_,spc_,ta_,su_,ka_,ttu_,ta_,yo_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,o_,ya_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,zi_,yya_,na_,i_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,na_,spc_,to_,ko_,ro_,de_,ha_,spc_,na_,n_,da_,ka_,ra_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,ke_,n_,ki_,yyu_,u_,zi_,yyo_,spc_,ma_,de_,spc_,ki_,te_,o_,ku_,re_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで画面はフェードアウト
+// ●「msg.town101」→「t101_r0301.msg」→
+// 「msg_odamaki_01_p01_t101_r0301:」に続く
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●帽子少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy1_01_p01_field_r101
+msg_capboy1_01_p01_field_r101:
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,yo_,wa_,ttu_,te_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,ni_,spc_,i_,ku_,to_,spc_,i_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,na_,ra_,spc_,su_,gu_,spc_,ti_,ka_,ku_
+	.byte	CR_
+	.byte	KO_,TO_,KI_,TA_,U_,N_,ni_,spc_,a_,ru_,ka_,ra_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年２
+// ●オダマキ救出イベント終了後
+// 　（Ｘ２・Ｙ１３）に出現、キョロキョロしている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_field_r101
+msg_boy2_01_p01_field_r101:
+	.byte	ya_,se_,i_,no_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	ku_,sa_,mu_,ra_,ka_,ra_,spc_,to_,bi_,da_,si_,te_,ku_,ru_,spc_,ka_,ra_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,si_,te_,spc_,ku_,sa_,mu_,ra_,no_,spc_,na_,ka_,ni_,spc_,ha_,i_,ttu_,te_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ta_,i_,spc_,PO_,KE_,MO_,N_,wo_,spc_,sa_,ga_,su_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●コトキ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r101
+msg_kanban_02_p01_field_r101:
+	.byte	ko_,ko_,ha_,spc_,n1_,n0_,n1_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowU__,spc_,KO_,TO_,KI_,TA_,U_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

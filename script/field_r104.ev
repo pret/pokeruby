@@ -1,0 +1,643 @@
+//====================================================================
+//							field_r104
+//						フィールド・ロード104
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r104_event_data
+SP_SCRIPT_LABEL		scene_hagi_01_p01_field_r104
+FLAG_CHANGE_LABEL	flag_change_field_r104
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_hagi_01_p01_field_r104:
+	SP_SCRIPT_DATA	WK_SCENE_HAGI_FUNE,1,ev_scene_hagi_01_p01_field_r104
+	SP_SCRIPT_END
+
+ev_scene_hagi_01_p01_field_r104:
+	_TALK_START
+	_JUMP			ev_fune_01_p01_field_r104
+	_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r104:
+	//花屋の前にトレーナー女をセット
+	_CALL	set_trainerw1_01_p01_field_r104
+	_END
+
+//花屋の前にトレーナー女を出す
+set_trainerw1_01_p01_field_r104:
+	//長女と話した
+	_IF_FLAGOFF_JUMP	FE_WOMAN1_01_R104_R0201,set_trainerw1_01_p02_field_r104
+
+	//キンセツバッチ持ってる
+	_IF_FLAGOFF_JUMP	SYS_BATCH03_GET,set_trainerw1_01_p02_field_r104
+
+	_FLAG_RESET		FV_TRAINERW1_01_FIELD_R104
+	_RET
+
+set_trainerw1_01_p02_field_r104:
+	_FLAG_SET	FV_TRAINERW1_01_FIELD_R104
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							うるさいばあさん						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_field_r104
+	_TALK_OBJ_START
+
+	//すでにアイテム貰っていたら
+	_IF_FLAGON_JUMP	FE_ORENNOMI_GET,ev_oldwoman1_01_p02_field_r104
+
+	_TALK_KEYWAIT	msg_oldwoman1_01_p01_kinomi
+
+	_ITEM_EVENT		ITEM_KAGONOMI,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_ORENNOMI_GET
+	_TALK_KEYWAIT	msg_oldwoman1_01_p02_kinomi
+	_TALK_OBJ_END
+	_END
+
+//アイテム貰っている
+ev_oldwoman1_01_p02_field_r104:
+	_TALK_KEYWAIT	msg_oldwoman1_01_p02_kinomi
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						トレイナー女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw1_01_p01_field_r104
+	_TALK_OBJ_START
+
+	//すでにアイテム入手していたら
+	_IF_FLAGON_JUMP	FE_SIROIHAABU_GET,ev_trainerw1_01_p02_field_r104
+
+	_TALK_KEYWAIT	msg_trainerw1_01_p01_field_r104
+
+	_ITEM_EVENT		ITEM_SIROIHAABU,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_SIROIHAABU_GET
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテム入手している
+ev_trainerw1_01_p02_field_r104:
+	_TALK_KEYWAIT	msg_trainerw1_01_p02_field_r104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						少女										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_field_r104
+	_EASY_OBJ_MSG	msg_girl2_01_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*							帽子男２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_capboy2_01_p01_field_r104
+	_EASY_MSG		msg_capboy2_01_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*						看板02	(ハギ老人の小屋)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r104
+	_EASY_MSG       msg_kanban_02_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*						看板03	(トウカシティより)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r104
+	_EASY_MSG       msg_kanban_03_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*						看板04	(カナズミシティより)				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_r104
+	_EASY_MSG       msg_kanban_04_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*						看板05	(花屋)								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_r104
+	_EASY_MSG       msg_kanban_05_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*					おとくなけいじばん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_06_p01_field_r104
+	_EASY_MSG       msg_kanban_06_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*								少年１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_field_r104
+	_EASY_OBJ_MSG	msg_boy1_01_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*								女性								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_field_r104
+	_EASY_OBJ_MSG	msg_woman1_01_p01_field_r104
+	_END
+
+
+/********************************************************************/
+//								少年２	
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_02_p01_field_r104
+	_TALK_OBJ_START
+	_IF_FLAGON_JUMP	FE_WAZAM09_GET,ev_boy2_02_p02_field_r104
+
+	_TALK_KEYWAIT	msg_boy2_02_p01_field_r104
+
+	_ITEM_EVENT		ITEM_WAZAMASIN09,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM09_GET
+	_TALK_OBJ_END
+	_END
+
+//入手後
+ev_boy2_02_p02_field_r104:
+	_TALK_KEYWAIT	msg_boy2_02_p02_field_r104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								少女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl3_01_p01_field_r104
+	_EASY_OBJ_MSG	msg_girl3_01_p01_field_r104
+	_END
+
+
+/********************************************************************/
+/*						１０４番道路での船乗り込み					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fune_01_p01_field_r104
+	//船の上にOBJがくるようにプライオリティを操作する
+	_OBJ_PRI_CHG	OLDMAN1_01_FIELD_R104,FIELD,FIELD_R104,0
+	_OBJ_PRI_CHG	EV_OBJ_SPID,FIELD,FIELD_R104,0
+
+	//じじい乗るアニメ
+	_SET_OBJ_ANIME	OLDMAN1_01_FIELD_R104,oldman1_01_field_r104_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE		OLDMAN1_01_FIELD_R104
+
+	//自機が乗るアニメ
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_02_field_r104_anime01
+	_OBJ_ANIME_WAIT
+	_OBJ_INVISIBLE	EV_OBJ_SPID,FIELD,FIELD_R104
+	
+	_CALL			set_hagi_fune_bgm
+
+	//船で移動
+	_SET_OBJ_ANIME	FUNE_01_FIELD_R104,fune_01_field_r104_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,fune_01_field_r104_anime01
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_02_field_r104_anime02
+	_OBJ_ANIME_WAIT
+
+	_CALL			reset_hagi_fune_bgm
+
+	//主人公を見えるようにする
+	_OBJ_VISIBLE	EV_OBJ_SPID,FIELD,FIELD_T103
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_02_field_r104_anime03
+	_OBJ_ANIME_WAIT
+
+	//ムロタウン
+	_SXY_POS_CHANGE	OLDMAN1_01_FIELD_T103,12,8//じじいの位置を変更
+	_OBJ_APPEAR		OLDMAN1_01_FIELD_T103		//ハギ老人を出す
+
+	//船の上にOBJがくるようにプライオリティを操作する
+	_OBJ_PRI_CHG	OLDMAN1_01_FIELD_T103,FIELD,FIELD_T103,0
+
+	_FLAG_RESET		FV_HAGI_01_FIELD_T103		//一応
+	_SET_OBJ_ANIME	OLDMAN1_01_FIELD_T103,oldman1_01_field_r104_anime02
+	_OBJ_ANIME_WAIT
+
+	_OBJ_APPEAR		FUNE_01_FIELD_T103			//船を出す
+	_FLAG_RESET		FV_FUNE_01_FIELD_T103		//一応
+	_CALL			reset_hagi_fune_bgm
+
+	//ロード１０４
+	_FLAG_SET		FV_FUNE_01_FIELD_R104		//船を消す
+	_OBJ_INVISIBLE	FUNE_01_FIELD_R104,FIELD,FIELD_R104
+
+	_LDWK			WK_SCENE_FUNE_POS,TMPWK0	//元に戻す
+
+	//プライオリティを元に戻す
+	_OBJ_PRI_OFF	EV_OBJ_SPID,FIELD,FIELD_R104
+	_OBJ_PRI_OFF	OLDMAN1_01_FIELD_T103,FIELD,FIELD_T103
+
+	//sxy情報を上書きする
+	_SXY_POS_OVERWRITE	OLDMAN1_01_FIELD_T103
+
+	//ロード１０４だけフェードなので
+	_LDVAL			WK_SCENE_HAGI_FUNE,0
+
+	//手紙イベントクリアしてなかったら
+	_IF_FLAGOFF_JUMP	FE_TEGAMI_CLEAR,ev_tegami_no_clear_field_t103
+	//手紙イベントクリアしている
+	_IF_FLAGON_JUMP		FE_TEGAMI_CLEAR,ev_tegami_clear_field_t103
+	_END
+
+//手紙イベントクリアしてなかったら
+ev_tegami_no_clear_field_t103:
+	_TALK_KEYWAIT	msg_oldman1_01_p01_field_t103
+	_TALK_END
+	_END
+
+//手紙イベントクリアしている
+ev_tegami_clear_field_t103:
+	_TALK_KEYWAIT	msg_oldman1_01_p05_field_t103
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ルート(r105→t103)
+//--------------------------------------------------------------------
+fune_01_field_r104_anime01:
+//ver3
+	.byte	AC_WALK_D_1	//上に1歩進む:24
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	
+	.byte	AC_WALK_R_2	//上に1歩進む:10
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+
+	.byte	AC_WALK_D_2	//上に1歩進む:91
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_4	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+
+	.byte	AC_WALK_R_2	//上に1歩進む:50
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_4	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_2	//上に1歩進む
+	.byte	AC_WALK_R_1	//上に1歩進む
+	.byte	AC_WALK_R_1	//上に1歩進む
+
+	.byte	AC_WALK_D_1	//上に1歩進む:19
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_2	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	AC_WALK_D_1	//上に1歩進む
+	.byte	ACMD_END
+
+hero_02_field_r104_anime01://乗る
+	.byte	AC_WALK_L_1	//下に1歩進む
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	ACMD_END
+
+hero_02_field_r104_anime02://乗る
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	ACMD_END
+
+hero_02_field_r104_anime03://降りる
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	AC_WALK_L_1	//下に1歩進む
+	.byte	AC_WALK_TURN_R	//下に1歩進む
+	.byte	ACMD_END
+
+oldman1_01_field_r104_anime01://乗る
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	ACMD_END
+	
+oldman1_01_field_r104_anime02://降りる
+	.byte	AC_WALK_D_1	//下に1歩進む
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_fishing_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_02
+	_TRAINER_DATA2	msg_fishing_02_01
+	_TRAINER_DATA3	msg_fishing_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_02_03
+	_END
+
+SCRIPT_LABEL	ev_tanpan_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_02
+	_TRAINER_DATA2	msg_tanpan_02_01
+	_TRAINER_DATA3	msg_tanpan_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_02_03
+	_END
+
+SCRIPT_LABEL	ev_mini_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MINI_02
+	_TRAINER_DATA2	msg_mini_02_01
+	_TRAINER_DATA3	msg_mini_02_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_mini_02
+	_TRAINER_EASY_MSG	msg_mini_02_03
+	_END
+
+_revenge_mini_02:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	MINI_02
+	_TRAINER_DATA2	msg_mini_02_04
+	_TRAINER_DATA3	msg_mini_02_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mini_02_06
+	_END
+
+SCRIPT_LABEL	ev_prince_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCE_01
+	_TRAINER_DATA2	msg_prince_01_01
+	_TRAINER_DATA3	msg_prince_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_prince_01
+	_TRAINER_EASY_MSG	msg_prince_01_03
+	_END
+
+_revenge_prince_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCE_01
+	_TRAINER_DATA2	msg_prince_01_04
+	_TRAINER_DATA3	msg_prince_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_prince_01_06
+	_END
+
+SCRIPT_LABEL	ev_princess_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCESS_01
+	_TRAINER_DATA2	msg_princess_01_01
+	_TRAINER_DATA3	msg_princess_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_princess_01
+	_TRAINER_EASY_MSG	msg_princess_01_03
+	_END
+
+_revenge_princess_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCESS_01
+	_TRAINER_DATA2	msg_princess_01_04
+	_TRAINER_DATA3	msg_princess_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_princess_01_06
+	_END
+
+SCRIPT_LABEL	ev_futago_03_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_03
+	_TRAINER_DATA2	msg_futago_03_01
+	_TRAINER_DATA3	msg_futago_03_02
+	_TRAINER_DATA4	msg_futago_03_04
+	_TRAINER_DATA_END
+	/* */
+	_PROGRAM		SET_SEX_NAME_01
+	_TALK_KEYWAIT	msg_futago_03_03
+	_TALK_OBJ_END
+	_END
+
+SCRIPT_LABEL	ev_futago_03_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	FUTAGO_03
+	_TRAINER_DATA2	msg_futago_03_05
+	_TRAINER_DATA3	msg_futago_03_06
+	_TRAINER_DATA4	msg_futago_03_08
+	_TRAINER_DATA_END
+	/* */
+	_PROGRAM		SET_SEX_NAME_01
+	_TALK_KEYWAIT	msg_futago_03_07
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

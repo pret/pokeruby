@@ -1,0 +1,57 @@
+// ÅúÉ~ÉiÉÇÉVÉeÉBÅ@ÉfÉpÅ[ÉgÇSÇe
+
+
+// ÅúòVêaém
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gentlem1_01_p01_c106_r1104
+msg_gentlem1_01_p01_c106_r1104:
+	.byte	u_,mu_,mu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,ge_,ki_,no_,spc_,wa_,za_,spc_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,mo_,ri_,no_,spc_,wa_,za_,spc_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	do_,no_,spc_,wa_,za_,MA_,SI_,N_,wo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,o_,bo_,e_,sa_,se_,ru_,ka_,spc_,na_,ya_,mu_,tenten_,tenten_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// Åúèóê´ÇP
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_woman1_01_p01_c106_r1104
+msg_woman1_01_p01_c106_r1104:
+	.byte	wa_,za_,MA_,SI_,N_,ttu_,te_,spc_,ta_,ku_,sa_,n_,spc_,a_,ru_,no_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,ka_,no_,spc_,KA_,TA_,RO_,GU_,ni_,ha_
+	.byte	CR_
+	.byte	ze_,n_,bu_,de_,spc_,n5_,n0_,si_,yyu_,ru_,i_,spc_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,te_,spc_,a_,ttu_,ta_,wa_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúñXéqíjÇP
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_capboy1_01_p01_c106_r1104
+msg_capboy1_01_p01_c106_r1104:
+	.byte	wa_,za_,MA_,SI_,N_,spc_,ze_,n_,bu_,spc_,ho_,si_,i_,ke_,do_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,n4_,tu_,si_,ka_,spc_,wa_,za_,spc_,o_,bo_,e_,na_,i_,mo_,n_,na_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// Åúä≈î¬
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_kanban_01_p01_c106_r1104
+msg_kanban_01_p01_c106_r1104:
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,spc_,he_,no_,spc_,ti_,ka_,mi_,ti_
+	.byte	CR_
+	.byte	n4_,ka_,i_,spc_,tenten_,tenten_,spc_,wa_,za_,MA_,SI_,N_,spc_,KO_,bou_,NA_,bou_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°

@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define PCWOMAN2_01_C106_R1201	1
+
+//Exit ID = 2
+#define C106_R1201_MAT01	0
+#define C106_R1201_MAT02	1

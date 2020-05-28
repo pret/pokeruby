@@ -1,0 +1,40 @@
+// ●ロープウェイ受付（上）
+
+
+// ●ロープウェイ受付（＝サラリーウーマン２）
+// チャンピオンロード入口の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_r112_r0101
+msg_workerw2_01_p01_r112_r0101:
+	.byte	no_,bo_,ri_,spc_,RO_,bou_,PU_,U_,EE_,I_
+	.byte	CR_
+	.byte	ma_,mo_,na_,ku_,spc_,si_,yyu_,ttu_,pa_,tu_,spc_,de_,su_
+	.byte	SCROLL_WAIT_
+	.byte	go_,ri_,yo_,u_,ni_,spc_,na_,ra_,re_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」
+// ●「はい」を選択　　→msg_workerw2_01_p02_r112_r0101:
+// ●「いいえ」を選択　→msg_workerw2_01_p03_r112_r0101:
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_r112_r0101
+msg_workerw2_01_p02_r112_r0101:
+	.byte	de_,ha_,spc_,ko_,ti_,ra_,ni_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、ロープウェイにのりこむ
+
+// ●「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_r112_r0101
+msg_workerw2_01_p03_r112_r0101:
+	.byte	ma_,ta_,no_,spc_,go_,ri_,yo_,u_,wo_
+	.byte	CR_
+	.byte	yo_,ro_,si_,ku_,spc_,o_,ne_,ga_,i_,spc_,si_,ma_,bou_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

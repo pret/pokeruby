@@ -1,0 +1,54 @@
+// ●キナギタウン　フィールド
+
+// ●少女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_field_t107
+msg_girl1_01_p01_field_t107:
+	.byte	KI_,NA_,GI_,ka_,ra_,spc_,KA_,I_,NA_,he_,ha_
+	.byte	CR_
+	.byte	si_,o_,no_,spc_,na_,ga_,re_,ga_,spc_,to_,te_,mo_,spc_,ha_,ge_,si_,i_,no_
+	.byte	NORMAL_WAIT_
+	.byte	u_,ka_,tu_,ni_,spc_,na_,mi_,no_,ri_,spc_,su_,ru_,to_
+	.byte	CR_
+	.byte	o_,mo_,wa_,nu_,spc_,ho_,u_,ko_,u_,ni_,spc_,na_,ga_,sa_,re_,ti_,yya_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●坊や１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_field_t107
+msg_boya1_01_p01_field_t107:
+	.byte	ne_,gyoe_,spc_,ne_,gyoe_,spc_,su_,go_,i_,de_,si_,yyo_,gyoe_
+	.byte	CR_
+	.byte	mi_,zu_,no_,spc_,u_,e_,ni_,spc_,o_,u_,ti_,ga_,spc_,ta_,ttu_,te_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,spc_,ko_,ko_,de_,spc_,u_,ma_,re_,ta_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●釣り人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p01_field_t107
+msg_fishing1_01_p01_field_t107:
+	.byte	KI_,NA_,GI_,no_,spc_,ni_,n_,ge_,n_,ha_
+	.byte	CR_
+	.byte	mi_,n_,na_,spc_,tu_,ri_,wo_,si_,ta_,ri_,spc_,mo_,gu_,ttu_,ta_,ri_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	se_,i_,ka_,tu_,spc_,si_,te_,ru_,n_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●街の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_t107
+msg_kanban_01_p01_field_t107:
+	.byte	ko_,ko_,ha_,spc_,KI_,NA_,GI_,spc_,TA_,U_,N_
+	.byte	CR_
+	.byte	a_,sa_,hi_,ga_,spc_,mi_,zu_,be_,wo_,spc_,te_,ra_,su_,spc_,ma_,ti_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

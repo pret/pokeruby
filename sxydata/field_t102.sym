@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 4
+#define GIRL3_01_FIELD_T102	1
+#define SHOPM1_01_FIELD_T102	2
+#define FREAK1_01_FIELD_T102	3
+#define SUPPORT_01_FIELD_T102	4
+
+//Exit ID = 4
+#define FIELD_T102_DOOR01	0
+#define FIELD_T102_DOOR02	1
+#define FIELD_T102_DOOR03	2
+#define FIELD_T102_DOOR04	3

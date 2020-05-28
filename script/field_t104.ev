@@ -1,0 +1,467 @@
+//====================================================================
+//							field_t104
+//							フエンタウン
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_t104_event_data
+FLAG_CHANGE_LABEL	ev_arrive_flag_set_t104
+SP_SCRIPT_LABEL		scene_field_t104
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+ev_arrive_flag_set_t104:
+	//到着フラグセット
+	_FLAG_SET		SYS_T104_ARRIVE
+
+	//えんとつ山にトレーナーを出す
+	_IF_FLAGON_CALL	FE_BOSS_01_CAVE_D0701,tr_appear_cave_d0701
+
+	_CALL			set_support_char
+	_CALL			set_support_cycle_char
+
+	//ジム内で毒で倒れて再度フエンタウンにきた時にサポートの位置を変更
+	_IFVAL_CALL		WK_SCENE_FIELD_T104,EQ,2,pos_chg_support_field_t104
+	_END
+
+//ジム内で毒で倒れて再度フエンタウンにきた時にサポートの位置を変更
+pos_chg_support_field_t104:
+	_SXY_POS_CHANGE	SUPPORT_01_FIELD_T104,11,9
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_T104,11,9
+	_RET
+
+//えんとつ山にトレーナーを出す
+tr_appear_cave_d0701:
+	_FLAG_RESET		FV_ALL_01_CAVE_D0701
+	_RET
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_field_t104:
+	//サポート登場
+	SP_SCRIPT_DATA	WK_SCENE_FIELD_T104,1,ev_scene_support_field_t104
+	SP_SCRIPT_END
+
+//サポート登場
+ev_scene_support_field_t104:
+	_TALK_START
+
+	_LDVAL			TMPWK0,1
+
+	_OPEN_DOOR_ANIME 12,15
+	_DOOR_ANIME_WAIT
+
+	_OBJ_APPEAR		SUPPORT_01_FIELD_T104
+
+	//一歩出る
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T104,support_01_field_t104_anime10
+	_OBJ_ANIME_WAIT
+
+	_CLOSE_DOOR_ANIME 12,15
+	_DOOR_ANIME_WAIT
+
+	//振り向く
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T104,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	//主人公右を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T104,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T104,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_GET_MY_SEX		//性別で曲を分ける
+	_IFVAL_CALL		ANSWORK,EQ,0,mus_boy_01_field_t104	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,mus_girl_01_field_t104	//女の子
+
+	//サポートキャラが近づいてくる:場所によりアニメ分岐
+	_IFVAL_CALL		TMPWK0,EQ,1,ev_support_anime_p01_field_t104
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,boy_01_field_t104	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,girl_01_field_t104	//女の子
+	_END
+
+//曲切り替え
+mus_boy_01_field_t104:
+	_BGM_SET	MUS_GIRL_SUP,1
+	_RET
+
+mus_girl_01_field_t104:
+	_BGM_SET	MUS_BOY_SUP,1
+	_RET
+
+
+/********************************************************************/
+//							サポート
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_field_t104
+	_TALK_OBJ_START
+
+	_LDVAL			TMPWK0,0
+
+	_GET_MY_SEX		//性別で曲を分ける
+	_IFVAL_CALL		ANSWORK,EQ,0,mus_boy_01_field_t104	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,mus_girl_01_field_t104	//女の子
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,boy_01_field_t104	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,girl_01_field_t104	//女の子
+	_END
+
+//--------------------------------------------------------------------
+//男の子
+//--------------------------------------------------------------------
+boy_01_field_t104:
+	_TALK_KEYWAIT   msg_heroine_01_p01_field_t104
+
+	//ゴーグル入手
+	_ITEM_EVENT		ITEM_GOOGOOGOOGURU,1
+	_FLAG_SET		FE_GOOGURU_GET	
+
+	//”またね！”
+	_TALK_KEYWAIT   msg_heroine_01_p02_field_t104
+
+	_JUMP			end_support_field_t104
+	_END
+
+//--------------------------------------------------------------------
+//女の子
+//--------------------------------------------------------------------
+girl_01_field_t104:
+	_TALK_KEYWAIT   msg_hero_01_p01_field_t104
+
+	//ゴーグル入手
+	_ITEM_EVENT		ITEM_GOOGOOGOOGURU,1
+	_FLAG_SET		FE_GOOGURU_GET	
+
+	//”じゃな！”
+	_TALK_KEYWAIT   msg_hero_01_p02_field_t104
+
+	_JUMP			end_support_field_t104
+	_END
+
+//共通終了処理
+end_support_field_t104:
+	_TALK_CLOSE
+
+	//自転車に乗り換え
+	_IFVAL_CALL		TMPWK0,EQ,1,ev_support_pos_p01_field_t104
+	_IFVAL_CALL		TMPWK0,EQ,0,ev_support_pos_p02_field_t104
+	_OBJ_DELETE		SUPPORT_01_FIELD_T104
+	_OBJ_APPEAR		SUPPORT_02_FIELD_T104
+
+	_TIME_WAIT		30
+
+	//サポートキャラが去っていく:場所によりアニメ分岐
+	_IFVAL_CALL		TMPWK0,EQ,1,ev_support_anime_p04_field_t104
+	_IFVAL_CALL		TMPWK0,EQ,0,ev_support_anime_p05_field_t104
+
+	//OBJ消す
+	_OBJ_DELETE		SUPPORT_02_FIELD_T104
+
+	//強制イベント終了
+	_LDVAL			WK_SCENE_FIELD_T104,2
+
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+
+	//TALKJ_OBJ_ENDで終了させるために分岐
+	_IFVAL_JUMP		TMPWK0,EQ,0,ev_support_end_field_t104
+
+	_TALK_END
+	_END
+
+//TALKJ_OBJ_ENDで終了させる
+ev_support_end_field_t104:
+	_TALK_OBJ_END
+	_END
+
+//サポートのsxyデータ書き換え
+ev_support_pos_p01_field_t104:
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_T104,6,16
+	_RET
+
+//サポートのsxyデータ書き換え(イレギュラー処理)
+ev_support_pos_p02_field_t104:
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_02_field_t104
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_site_d_02_field_t104
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_site_l_02_field_t104
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_site_r_02_field_t104
+	_RET
+
+//自転車の向きを正しくする
+case_site_u_02_field_t104:
+	_SXY_SITE_CHANGE	SUPPORT_02_FIELD_T104,MV_DOWN
+	_RET
+case_site_d_02_field_t104:
+	_SXY_SITE_CHANGE	SUPPORT_02_FIELD_T104,MV_UP
+	_RET
+case_site_l_02_field_t104:
+	_SXY_SITE_CHANGE	SUPPORT_02_FIELD_T104,MV_RIGHT
+	_RET
+case_site_r_02_field_t104:
+	_SXY_SITE_CHANGE	SUPPORT_02_FIELD_T104,MV_LEFT
+	_RET
+
+//サポートキャラの登場アニメ呼び出し
+ev_support_anime_p01_field_t104:
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_T104,support_01_field_t104_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+//サポートキャラ帰っていく
+ev_support_anime_p04_field_t104:
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_T104,support_01_field_t104_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+
+//サポートキャラ帰っていく(イレギュラー処理)
+ev_support_anime_p05_field_t104:
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_field_t104
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_site_d_field_t104
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,case_site_l_field_t104
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_site_r_field_t104
+	_RET
+
+//下上左から話し掛け
+case_site_u_field_t104:
+case_site_d_field_t104:
+case_site_r_field_t104:
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_T104,support_01_field_t104_anime05
+	_OBJ_ANIME_WAIT
+	_RET
+
+//右から話し掛け
+case_site_l_field_t104:
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_T104,support_01_field_t104_anime06
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//サポート	近づいてくる
+//--------------------------------------------------------------------
+support_01_field_t104_anime01:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート	去っていく
+//--------------------------------------------------------------------
+support_01_field_t104_anime04://pos01
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート	去っていく(下左上)
+//--------------------------------------------------------------------
+support_01_field_t104_anime05:
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート	去っていく(右)
+//--------------------------------------------------------------------
+support_01_field_t104_anime06:
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_R_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート	家から出て来る
+//--------------------------------------------------------------------
+support_01_field_t104_anime10:
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							温泉									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_t104_pos04
+	_FUNC_CALL		ANSWORK,GET_HERO_SITE
+	_IFVAL_JUMP		ANSWORK,EQ,01,ev_onsen_countup
+	_END
+
+ev_onsen_countup:
+	_INC_RECORD		CNT_ONSEN		@温泉に入った回数をカウント
+	_END
+
+
+/********************************************************************/
+/*					ポケセンの入り口付近の老人						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_field_t104
+	_EASY_OBJ_MSG	msg_oldman1_01_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*						砂風呂にいる								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_field_t104
+	_EASY_MSG	msg_oldman2_01_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*								お嬢								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou1_01_p01_field_t104
+	_EASY_OBJ_MSG	msg_ojyou1_01_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*								温泉内								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_onsenw1_01_p01_field_t104
+	_EASY_OBJ_MSG	msg_onsenw1_01_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*								温泉内								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_onsenw1_02_p01_field_t104
+	_EASY_OBJ_MSG	msg_onsenw1_02_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*					町の中央あたりにいる老婆						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_field_t104
+	_EASY_OBJ_MSG	msg_oldwoman1_01_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*					タマゴをくれる老婆								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_02_p01_field_t104
+	_TALK_OBJ_START
+
+	//既にタマゴを貰った
+	_IF_FLAGON_JUMP		FE_SOONANO_TAMAGO_GET,ev_oldwoman1_02_p05_field_t104	
+
+	_TALK_YES_NO		msg_oldwoman1_02_p01_field_t104
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,ev_oldwoman1_02_p04_field_t104	//「いいえ」
+
+	//手持ちのポケモン数取得
+	_GET_TEMOTI_NUM
+	_IFVAL_JUMP		ANSWORK,EQ,6,ev_oldwoman1_02_p03_field_t104	//６体既にいる
+
+	//"タマゴと　いっしょに..."
+	_TALK_KEYWAIT		msg_oldwoman1_02_p02_field_t104
+
+	_FLAG_SET		FE_SOONANO_TAMAGO_GET
+
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_oldwoman1_02_p06_field_t104
+	_JINGLE_WAIT
+
+	_ADD_TAMAGO		MONSNO_SOONANO
+
+	_TALK_OBJ_END
+	_END
+
+//既にタマゴを貰った
+ev_oldwoman1_02_p05_field_t104:
+	_TALK_KEYWAIT		msg_oldwoman1_02_p05_field_t104
+	_TALK_OBJ_END
+	_END
+
+//６体既にいる
+ev_oldwoman1_02_p03_field_t104:
+	_TALK_KEYWAIT		msg_oldwoman1_02_p03_field_t104
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+ev_oldwoman1_02_p04_field_t104:
+	_TALK_KEYWAIT		msg_oldwoman1_02_p04_field_t104
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						町の入り口の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_t104
+	_EASY_MSG	msg_kanban_01_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*						左の家(ジム)の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_t104
+	_EASY_MSG	msg_kanban_02_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*					上の家(育て屋・薬屋)の看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_t104
+	_EASY_MSG	msg_kanban_03_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_t104
+	_EASY_MSG	msg_kanban_03_p01_field_t104
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,383 @@
+// ●１１２番道路　えんとつやま山頂
+// ●サファイアver
+
+// ●アクア団
+// 　ボス（戦闘あり）　×１
+// 　団員（戦闘あり）　×２
+// 　団員（戦闘なし）　×６
+// 　ポケモン　　　　　×５
+// ●マグマ団
+// 　ボス　　　　　　　×１
+// 　団員　　　　　　　×３
+// 　ポケモン　　　　　×３
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●アオギリ（装置を見ている）
+// ●話しかけても装置を見たままで以下のメッセージ表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p01_cave_d0701s
+msg_aquaboss_01_p01_cave_d0701s:
+	.byte	i_,n_,se_,ki_,ni_,spc_,hi_,me_,ra_,re_,ta_,spc_,ti_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,so_,u_,ti_,de_,spc_,zo_,u_,hu_,ku_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	ta_,ti_,ma_,ti_,no_,spc_,u_,ti_,ni_,spc_,e_,n_,to_,tu_,ya_,ma_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,za_,n_,spc_,ka_,tu_,do_,u_,ha_,spc_,to_,ma_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,HU_,HU_,tenten_,tenten_,spc_,i_,zu_,re_
+	.byte	CR_
+	.byte	hi_,e_,ki_,ttu_,ta_,spc_,ka_,ko_,u_,ni_,spc_,a_,ma_,mi_,zu_,ga_,spc_,ta_,ma_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,zu_,PO_,KE_,MO_,N_,ga_,spc_,ku_,ra_,se_,ru_,da_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで主人公に気づく（「！」マークは不要）
+// ●続けて……
+// ●戦闘前：フィールド
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p02_cave_d0701s
+msg_aquaboss_01_p02_cave_d0701s:
+	.byte	A_,O_,GI_,RI_,kako2_,ma_,ta_,spc_,ki_,mi_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,i_,i_,ka_,spc_,su_,be_,te_,no_
+	.byte	CR_
+	.byte	i_,no_,ti_,ha_,spc_,u_,mi_,ka_,ra_,spc_,u_,ma_,re_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,spc_,u_,mi_,ko_,so_,ga_,spc_,su_,be_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,wa_,re_,wa_,re_,spc_,A_,KU_,A_,da_,n_,ha_
+	.byte	CR_
+	.byte	u_,mi_,wo_,spc_,hu_,ya_,su_,ko_,to_,de_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ra_,ta_,na_,spc_,PO_,KE_,MO_,N_,wo_,spc_,ta_,n_,zi_,yyo_,u_,spc_,sa_,se_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ta_,me_,ni_
+	.byte	CR_
+	.byte	si_,ze_,n_,wo_,spc_,to_,ri_,mo_,do_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ko_,so_,ga_,spc_,A_,KU_,A_,da_,n_,no_,spc_,ri_,so_,u_,gyoe_
+	.byte	CR_
+	.byte	na_,ni_,mo_,spc_,si_,ra_,na_,i_,spc_,ki_,mi_,no_,yo_,u_,na_,spc_,ko_,do_,mo_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,yya_,ma_,spc_,sa_,se_,ru_,spc_,wa_,ke_,ni_,ha_,spc_,i_,ka_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ma_,wo_,spc_,su_,ru_,na_,ra_,spc_,do_,u_,na_,ru_,ka_
+	.byte	CR_
+	.byte	ko_,no_,spc_,A_,O_,GI_,RI_,ga_,spc_,wa_,ka_,ra_,se_,te_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘後：戦闘画面
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p03_cave_d0701s
+msg_aquaboss_01_p03_cave_d0701s:
+	.byte	na_,ni_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,A_,O_,GI_,RI_,to_,mo_,spc_,a_,ro_,u_,spc_,mo_,no_,ga_
+	.byte	CR_
+	.byte	yu_,da_,n_,spc_,si_,ta_,ka_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘後：フィールド
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p04_cave_d0701s
+msg_aquaboss_01_p04_cave_d0701s:
+	.byte	A_,O_,GI_,RI_,kako2_,ma_,a_,spc_,i_,i_
+	.byte	CR_
+	.byte	ko_,no_,spc_,e_,n_,to_,tu_,ya_,ma_,ha_,spc_,hi_,to_,ma_,zu_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ki_,ra_,me_,yo_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,wa_,re_,wa_,re_,spc_,A_,KU_,A_,da_,n_,no_,spc_,ka_,tu_,do_,u_,wo_
+	.byte	CR_
+	.byte	to_,me_,ru_,ko_,to_,na_,do_,spc_,da_,re_,ni_,mo_,spc_,de_,ki_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,da_,ke_,ha_,spc_,wa_,su_,re_,na_,i_,de_,spc_,mo_,ra_,o_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●メッセージ表示後、画面ブラックアウト
+// ●アクア団員全て削除
+// ●マツブサが寄ってくる
+// 　「msg_magmaboss1_01_p03_cave_d0701s:」のメッセージを自動表示
+
+
+// ●アクア団：幹部♂
+// ●アクア団員♂１５：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_15_01
+msg_aquam_15_01:
+	.byte	U_,HI_,YYO_,HI_,YYO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,spc_,ko_,ko_,ma_,de_,spc_,ki_,ta_,no_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ke_,do_,spc_,o_,so_,ka_,ttu_,ta_,ze_
+	.byte	CR_
+	.byte	ri_,yyu_,u_,se_,i_,no_,ta_,ki_,de_,spc_,mi_,tu_,ke_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	i_,n_,se_,ki_,ha_,spc_,RI_,bou_,DA_,bou_,ni_,spc_,wa_,ta_,si_,ta_,ka_,ra_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂１５：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_15_02
+msg_aquam_15_02:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,ke_,te_,spc_,si_,ma_,ttu_,ta_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,to_,ki_,spc_,ri_,yyu_,u_,se_,i_,no_,ta_,ki_,de_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,wa_,na_,ku_,te_,spc_,yo_,ka_,ttu_,ta_,ze_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂１５：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_15_03
+msg_aquam_15_03:
+	.byte	U_,HI_,YYO_,HI_,YYO_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,ni_,spc_,ka_,te_,te_,mo_
+	.byte	CR_
+	.byte	RI_,bou_,DA_,bou_,ni_,ha_,spc_,ka_,te_,na_,i_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,ttu_,sa_,to_,spc_,ka_,e_,ttu_,ta_,ho_,u_,ga_
+	.byte	CR_
+	.byte	i_,ta_,i_,spc_,o_,mo_,i_,spc_,si_,na_,ku_,te_,spc_,su_,mu_,ze_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂１６：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_16_01
+msg_aquam_16_01:
+	.byte	o_,re_,ra_,spc_,A_,KU_,A_,da_,n_,ha_
+	.byte	CR_
+	.byte	mi_,n_,na_,no_,spc_,ta_,me_,ni_,spc_,ga_,n_,ba_,ttu_,te_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,mi_,zu_,ga_,spc_,hu_,e_,re_,ba_
+	.byte	CR_
+	.byte	mi_,zu_,PO_,KE_,MO_,N_,ta_,ti_,spc_,yo_,ro_,ko_,bu_,si_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,to_,da_,ttu_,te_,spc_,o_,yo_,ge_,te_,spc_,ki_,mo_,ti_,i_,i_,da_,ro_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂１６：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_16_02
+msg_aquam_16_02:
+	.byte	a_,re_,bou_,hate_
+	.byte	CR_
+	.byte	o_,re_,spc_,ma_,ke_,ta_,no_,bou_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂１６：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_16_03
+msg_aquam_16_03:
+	.byte	o_,re_,ra_,no_,spc_,RI_,bou_,DA_,bou_,ha_
+	.byte	CR_
+	.byte	kako_,mi_,n_,na_,ga_,spc_,yo_,ro_,ko_,bu_,spc_,ko_,to_,da_,kakot_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ttu_,te_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,no_,ni_,spc_,na_,n_,de_,spc_,mi_,n_,na_,spc_,ZI_,YYA_,MA_,su_,ru_,n_,da_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p01_cave_d0701s
+msg_aquam1_01_p01_cave_d0701s:
+	.byte	MA_,GU_,MA_,da_,n_,no_,spc_,ya_,tu_,ra_,me_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ti_,i_,ti_,spc_,o_,re_,ta_,ti_,no_,spc_,zi_,yya_,ma_,wo_,spc_,si_,ya_,ga_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_02_p01_cave_d0701s
+msg_aquam1_02_p01_cave_d0701s:
+	.byte	i_,n_,se_,ki_,ni_,ha_,spc_,su_,go_,i_,spc_,PA_,WA_,bou_,ga_,spc_,a_,ru_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_03_p01_cave_d0701s
+msg_aquam1_03_p01_cave_d0701s:
+	.byte	i_,ke_,bou_,gyoe_,spc_,MA_,GU_,MA_,da_,n_,wo_,spc_,bu_,ttu_,tu_,bu_,se_,gyoe_
+	.byte	CR_
+	.byte	to_,ni_,ka_,ku_,spc_,mi_,zu_,wo_,spc_,hu_,ya_,su_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_04_p01_cave_d0701s
+msg_aquam1_04_p01_cave_d0701s:
+	.byte	i_,i_,ka_,spc_,o_,re_,ta_,ti_,no_,spc_,zi_,yya_,ma_,wo_,spc_,su_,ru_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,ta_,ti_,ha_,spc_,mi_,n_,na_,no_,spc_,ta_,me_,ni_
+	.byte	CR_
+	.byte	u_,mi_,wo_,spc_,hu_,ya_,so_,u_,to_,spc_,si_,te_,ru_,n_,da_,ka_,ra_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_05_p01_cave_d0701s
+msg_aquam1_05_p01_cave_d0701s:
+	.byte	yo_,bou_,si_,gyoe_
+	.byte	CR_
+	.byte	mi_,zu_,wo_,spc_,bu_,ttu_,ka_,ke_,te_,ya_,re_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_06_p01_cave_d0701s
+msg_aquam1_06_p01_cave_d0701s:
+	.byte	mo_,ttu_,to_,spc_,mo_,ttu_,to_,spc_,u_,mi_,wo_,spc_,hu_,ya_,su_,ze_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団のポケモン（全て共通）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pokemon1_01_p01_cave_d0701s
+msg_pokemon1_01_p01_cave_d0701s:
+	.byte	pu_,si_,yya_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●マツブサ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p01_cave_d0701s
+msg_magmaboss_01_p01_cave_d0701s:
+	.byte	MA_,TU_,BU_,SA_,kako2_,o_,o_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	CR_
+	.byte	i_,i_,to_,ko_,ro_,ni_,spc_,ki_,te_,ku_,re_,ta_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ni_,spc_,ka_,wa_,ttu_,te_
+	.byte	CR_
+	.byte	A_,KU_,A_,da_,n_,wo_,spc_,to_,me_,te_,ku_,re_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,i_,tu_,ra_,spc_,u_,ba_,ttu_,ta_,spc_,i_,n_,se_,ki_,no_,spc_,PA_,WA_,bou_,de_
+	.byte	CR_
+	.byte	ko_,no_,spc_,ka_,za_,n_,no_,spc_,u_,go_,ki_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	to_,me_,yo_,u_,to_,spc_,ka_,n_,ga_,e_,te_,i_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●メッセージウインドウが閉じると、再び上を向かせてください
+// ●再度話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p02_cave_d0701s
+msg_magmaboss_01_p02_cave_d0701s:
+	.byte	MA_,TU_,BU_,SA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ni_,spc_,ka_,wa_,ttu_,te_
+	.byte	CR_
+	.byte	A_,KU_,A_,da_,n_,wo_,spc_,to_,me_,te_,ku_,re_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,i_,tu_,ra_,spc_,si_,ta_,ttu_,pa_,spc_,n3_,ni_,n_,no_,spc_,a_,i_,te_,ha_
+	.byte	CR_
+	.byte	sa_,su_,ga_,no_,spc_,wa_,ta_,si_,de_,mo_,spc_,ta_,i_,he_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●メッセージウインドウが閉じると、再び上を向かせてください
+
+// ●アオギリを倒してから
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p03_cave_d0701s
+msg_magmaboss_01_p03_cave_d0701s:
+	.byte	MA_,TU_,BU_,SA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_,spc_,a_,ri_,ga_,to_,u_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,o_,ka_,ke_,de_,spc_,A_,KU_,A_,da_,n_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,ka_,i_,ka_,tu_,do_,u_,wo_,spc_,hu_,se_,gu_,ko_,to_,ga_,spc_,de_,ki_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,tenten_,tenten_,spc_,ma_,da_,spc_,a_,i_,tu_,ra_,no_,spc_,ya_,bo_,u_,ha_
+	.byte	CR_
+	.byte	ko_,re_,de_,spc_,o_,wa_,ttu_,ta_,spc_,wa_,ke_,zi_,yya_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,re_,wa_,re_,ha_,spc_,hi_,ki_,tu_,du_,ki_,spc_,A_,KU_,A_,da_,n_,wo_
+	.byte	CR_
+	.byte	o_,i_,ka_,ke_,ru_,to_,spc_,si_,yo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	CR_
+	.byte	de_,ha_,spc_,ma_,ta_,spc_,a_,o_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●マツブサ、退場していく
+// ●マグマ団員退場する（画面外の奴は削除で）
+// ●火山イベント終了
+
+// ●マグマ団♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmam1_01_p01_cave_d0701s
+msg_magmam1_01_p01_cave_d0701s:
+	.byte	ku_,so_,u_,spc_,A_,KU_,A_,da_,n_,ga_,spc_,o_,o_,su_,gi_,ru_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,no_,ma_,ma_,de_,ha_,spc_,ma_,zu_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マグマ団♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmam1_02_p01_cave_d0701s
+msg_magmam1_02_p01_cave_d0701s:
+	.byte	u_,mi_,wo_,spc_,hu_,ya_,si_,ta_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ya_,spc_,hi_,to_,ga_,spc_,su_,mu_,spc_,ba_,si_,yyo_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	he_,ttu_,te_,si_,ma_,u_,spc_,zi_,yya_,ne_,bou_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マグマ団♂（メッセージのみ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmam1_03_p01_cave_d0701s
+msg_magmam1_03_p01_cave_d0701s:
+	.byte	A_,KU_,A_,da_,n_,me_
+	.byte	CR_
+	.byte	u_,mi_,wo_,spc_,hu_,ya_,so_,u_,spc_,na_,n_,te_,spc_,ba_,ka_,ge_,te_,ru_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マグマ団のポケモン（全て共通）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pokemon1_02_p01_cave_d0701s
+msg_pokemon1_02_p01_cave_d0701s:
+	.byte	bu_,hu_,oo_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

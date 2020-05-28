@@ -1,0 +1,207 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d1402.ev
+//
+//============================================ 
+
+EVENT_DATA_START	cave_d1402_event_data
+BG_CHANGE_LABEL		bg_change_cave_d1402
+FLAG_CHANGE_LABEL	flag_cave_d1402
+EVENT_DATA_END 
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_cave_d1402:
+	_IF_FLAGON_JUMP		SYS_ASASE_TIDE,_high_tide_cave_d1402
+	_JUMP				_low_tide_cave_d1402
+
+_high_tide_cave_d1402:
+	_CHANGE_MAP_SCREEN	MAPSCRNID_R125DUN02_2
+	_END
+
+_low_tide_cave_d1402:
+	_CHANGE_MAP_SCREEN	MAPSCRNID_R125DUN01_2
+	_END
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_cave_d1402:
+	//しお、かいがらをセットする
+	_CALL			bg_chg_01_sio
+	_END
+
+//しお、かいがらをセットする
+bg_chg_01_sio:
+	_IF_FLAGON_JUMP	FV_SIO_01_ASASE,bg_chg_02_sio
+	_IF_FLAGON_JUMP	SYS_ASASE_TIDE,bg_chg_02_sio
+	_SET_CELL		31,8,856,1
+	_JUMP			bg_chg_02_sio
+	_END
+
+bg_chg_02_sio:
+	_IF_FLAGON_JUMP	FV_SIO_02_ASASE,bg_chg_01_kai
+	_IF_FLAGON_JUMP	SYS_ASASE_TIDE,bg_chg_01_kai
+	_SET_CELL		14,26,856,1
+	_JUMP			bg_chg_01_kai
+	_END
+
+bg_chg_01_kai:
+	_IF_FLAGON_JUMP	FV_KAI_01_ASASE,bg_chg_02_kai
+	_SET_CELL		41,20,857,1
+	_JUMP			bg_chg_02_kai
+	_END
+
+bg_chg_02_kai:
+	_IF_FLAGON_JUMP	FV_KAI_02_ASASE,bg_chg_03_kai
+	_SET_CELL		41,10,857,1
+	_JUMP			bg_chg_03_kai
+	_END
+
+bg_chg_03_kai:
+	_IF_FLAGON_JUMP	FV_KAI_03_ASASE,bg_chg_04_kai
+	_SET_CELL		6,9,857,1
+	_JUMP			bg_chg_04_kai
+	_END
+
+bg_chg_04_kai:
+	_IF_FLAGON_JUMP	FV_KAI_04_ASASE,bg_chg_04_kai_end
+	_SET_CELL		16,13,857,1
+	_RET
+
+bg_chg_04_kai_end:
+	_RET
+
+
+//--------------------------------------------------------------------
+//							スクリプト	
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//								かい	
+/********************************************************************/
+SCRIPT_LABEL	ev_kai_01_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_KAI_01_ASASE,get_kai_01_asase
+
+	_ITEM_EVENT		ITEM_ASASENOKAIGARA,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		41,20,859,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_KAI_01_ASASE
+	_TALK_END
+	_END
+
+//すでにアイテムを貰っている
+get_kai_01_asase:
+	_TALK_KEYWAIT		msg_shell_01_p01_cave_d1402
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//								かい	
+/********************************************************************/
+SCRIPT_LABEL	ev_kai_02_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_KAI_02_ASASE,get_kai_01_asase
+
+	_ITEM_EVENT		ITEM_ASASENOKAIGARA,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		41,10,859,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_KAI_02_ASASE
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//								かい	
+/********************************************************************/
+SCRIPT_LABEL	ev_kai_03_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_KAI_03_ASASE,get_kai_01_asase
+
+	_ITEM_EVENT		ITEM_ASASENOKAIGARA,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		6,9,859,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_KAI_03_ASASE
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//								かい	
+/********************************************************************/
+SCRIPT_LABEL	ev_kai_04_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_KAI_04_ASASE,get_kai_01_asase
+
+	_ITEM_EVENT		ITEM_ASASENOKAIGARA,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		16,13,859,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_KAI_04_ASASE
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//								しお	
+/********************************************************************/
+SCRIPT_LABEL	ev_sio_01_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_SIO_01_ASASE,get_sio_01_asase
+
+	_ITEM_EVENT		ITEM_ASASENOSIO,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		31,8,858,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_SIO_01_ASASE
+	_TALK_END
+	_END
+
+
+//すでにアイテムを貰っている
+get_sio_01_asase:
+	_TALK_KEYWAIT		msg_salt_01_p01_cave_d1404
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//								しお	
+/********************************************************************/
+SCRIPT_LABEL	ev_sio_02_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_SIO_02_ASASE,get_sio_01_asase
+
+	_ITEM_EVENT		ITEM_ASASENOSIO,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		14,26,858,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_SIO_02_ASASE
+	_TALK_END
+	_END
+

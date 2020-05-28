@@ -1,0 +1,201 @@
+//====================================================================
+//							c105_r0201
+//							ヒワマキ・ジム
+//							LOCALWORK0～を@	使用しています。
+//====================================================================
+
+@+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@
+@	!!!!!!	注意	!!!!!!
+@
+@	このマップでは回転ドアの方向を保持するためのワークとして、
+@	LOCALWORK0～を@	使用しています。
+@	スクリプトで使用すると回転ドアが正常に動作しません！！
+@	よろしく！！！
+@
+@+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c105_r0201_event_data
+FLAG_CHANGE_LABEL	ev_door_param_init_c105_r0201
+OBJ_CTRL_LABEL		obj_ctrl_c105_r0201
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+ev_door_param_init_c105_r0201:
+	_PROGRAM		GYM_DOOR_INIT
+	_END
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_c105_r0201:
+	/* 常に一致する→必ず実行される */
+	OBJ_CTRL_DATA	LOCALWORK0, LOCALWORK0, ev_door_obj_init_c105_r0201
+	OBJ_CTRL_END
+
+ev_door_obj_init_c105_r0201:
+	_PROGRAM		GYM_DOOR_SET
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_06_01
+	//戦闘へ
+	_LEADER_DATA_START
+	_TRAINER_DATA1	LEADERW_06
+	_TRAINER_DATA2	msg_gymleader_06_01
+	_TRAINER_DATA3	msg_gymleader_06_02
+	_TRAINER_DATA4	ev_gymleader_06_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシンを貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_C105_R0201,gymleader_06_wazam_get
+
+	_TALK_KEYWAIT	msg_gymleader_06_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_06_end:
+	_TALKMSG	msg_gymleader_06_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_06_04
+
+	_FLAG_SET		FT_GYM_06_LEADER
+	_FLAG_SET		SYS_BATCH06_GET			//バッチゲット
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,6
+	_CALL			gym_trainer_all_flagon
+
+	//技マシン貰う処理へ
+	_JUMP			gymleader_06_wazam_get
+	_END
+
+//技マシン貰う
+gymleader_06_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN40,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_gymleader_06_05
+
+	_FLAG_SET		FE_WAZAM_01_C105_R0201
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_bird_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_04
+	_TRAINER_DATA2	msg_bird_04_01
+	_TRAINER_DATA3	msg_bird_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_04_03
+	_END
+
+SCRIPT_LABEL	ev_bird_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_07
+	_TRAINER_DATA2	msg_bird_07_01
+	_TRAINER_DATA3	msg_bird_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_07_03
+	_END
+
+SCRIPT_LABEL	ev_campb_13
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_13
+	_TRAINER_DATA2	msg_campb_13_01
+	_TRAINER_DATA3	msg_campb_13_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_13_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_13
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_13
+	_TRAINER_DATA2	msg_picnicg_13_01
+	_TRAINER_DATA3	msg_picnicg_13_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_13_03
+	_END
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_06_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_06_LEADER,ev_danpei_06_02
+
+	_TALK_KEYWAIT	msg_danpei_06_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_06_02:
+	_TALK_KEYWAIT	msg_danpei_06_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_c105_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH06_GET,batch_get_c105_r0201
+
+	_JUMP			batch_no_get_c105_r0201
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_c105_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH06_GET,batch_get_c105_r0201
+
+	_JUMP			batch_no_get_c105_r0201
+	_END
+
+//すでにリーダーを倒している
+batch_get_c105_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p02_c105_r0201
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_c105_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p01_c105_r0201
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

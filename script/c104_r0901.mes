@@ -1,0 +1,42 @@
+// ●カナズミシティ　民家６（街の南東）
+
+
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_c104_r0901
+msg_oldman2_01_p01_c104_r0901:
+	.byte	zi_,bu_,n_,no_,spc_,PO_,KE_,MO_,N_,ni_,ha_
+	.byte	CR_
+	.byte	pi_,ttu_,ta_,ri_,no_,spc_,NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,ru_,n_,zi_,yya_
+	.byte	SCROLL_WAIT_
+	.byte	i_,wa_,yu_,ru_,spc_,o_,ri_,zi_,na_,ri_,te_,ii_,spc_,zi_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老婆２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p01_c104_r0901
+msg_oldwoman2_01_p01_c104_r0901:
+	.byte	da_,ka_,ra_,ttu_,te_,spc_,PI_,KA_,TI_,YYU_,U_,ni_
+	.byte	CR_
+	.byte	kako_,PE_,KA_,TI_,YYU_,U_,kakot_,ttu_,te_,spc_,tu_,ke_,te_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,to_,n_,do_,spc_,ka_,wa_,ttu_,te_,spc_,na_,i_,de_,si_,yyo_,u_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,wa_,ka_,ri_,ya_,su_,i_,no_,mo_
+	.byte	CR_
+	.byte	NI_,TTU_,KU_,NE_,bou_,MU_,ni_,ha_,spc_,da_,i_,zi_,spc_,de_,su_,ke_,do_,ne_,ee_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・ピカチュウ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pikachuu_01_p01_c104_r0901
+msg_pikachuu_01_p01_c104_r0901:
+	.byte	PE_,KA_,TI_,YYU_,U_,kako2_,pe_,ka_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にピカチュウの鳴き声をならす

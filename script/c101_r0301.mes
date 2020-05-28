@@ -1,0 +1,42 @@
+// ●トウカシティ　民家１（左の家）
+
+
+// ●おじいさん
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c101_r0301
+msg_oldman1_01_p01_c101_r0301:
+	.byte	ta_,bi_,ha_,spc_,i_,i_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,mo_,spc_,wa_,ka_,i_,to_,ki_,ha_,spc_,a_,ti_,ko_,ti_,no_
+	.byte	CR_
+	.byte	u_,mi_,ya_,spc_,ya_,ma_,wo_,spc_,wa_,ta_,ri_,a_,ru_,i_,ta_,spc_,mo_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_c101_r0301
+msg_girl1_01_p01_c101_r0301:
+	.byte	a_,aa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,mo_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	bo_,u_,ke_,n_,no_,spc_,ta_,bi_,ni_,spc_,de_,ka_,ke_,te_,spc_,mi_,ta_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,me_,ttu_,ta_,spc_,ku_,sa_,mu_,ra_,ni_,spc_,mo_,gu_,ttu_,ta_,ri_
+	.byte	CR_
+	.byte	go_,tu_,go_,tu_,no_,spc_,i_,wa_,ya_,ma_,wo_,spc_,no_,bo_,ttu_,ta_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	u_,mi_,no_,spc_,a_,ra_,na_,mi_,wo_,spc_,wa_,ta_,ttu_,ta_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ttu_,ku_,ra_,na_,spc_,do_,u_,ku_,tu_,wo_,spc_,sa_,ma_,yo_,ttu_,ta_,ri_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,i_,te_,spc_,to_,ki_,ni_,ha_,spc_,zi_,bu_,n_,no_,spc_,o_,u_,ti_,ga_
+	.byte	CR_
+	.byte	ko_,i_,si_,ku_,spc_,na_,ttu_,ta_,ri_,si_,te_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,bi_,ttu_,te_,spc_,i_,i_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

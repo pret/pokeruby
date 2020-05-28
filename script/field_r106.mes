@@ -1,0 +1,15 @@
+// ●106番道路　フィールド
+
+
+// ●お得な掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r106
+msg_kanban_01_p01_field_r106:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,u_,ma_,ku_,spc_,tu_,ri_,a_,ge_,ru_,spc_,KO_,TU_,ha_
+	.byte	CR_
+	.byte	BI_,TTU_,KU_,RI_,spc_,si_,ta_,ra_,spc_,E_,bou_,BO_,TA_,N_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,352 @@
+//====================================================================
+//							c109_r0105
+//						チャンピオンの部屋
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c109_r0105_event_data
+FLAG_CHANGE_LABEL	flag_change_c109_R0105
+OBJ_CTRL_LABEL		obj_ctrl_c109_r0105
+SP_SCRIPT_LABEL		scene_c109_r0105
+EVENT_DATA_END
+
+#define C109_R0105_CELL_CODE03	(838)
+#define C109_R0105_CELL_CODE04	(839)
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c109_R0105:
+	_CALL			set_support_char
+	_END
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_c109_r0105:
+	OBJ_CTRL_DATA	LOCALWORK1,0,ev_site_chg_c109_r0105
+	OBJ_CTRL_END
+
+//主人公の向きを変更
+ev_site_chg_c109_r0105:
+	_OBJ_SITE_CHG	EV_OBJ_SPID,SITE_U
+	_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c109_r0105:
+	//ドア閉めて、部屋の中央まで移動
+	SP_SCRIPT_DATA	LOCALWORK1,0,ev_scene_start_c109_r0105
+	SP_SCRIPT_END
+
+//ドア閉めて、部屋の中央まで移動
+ev_scene_start_c109_r0105:
+	_TALK_START
+
+	//主人公部屋に入る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,league_start_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		40
+
+	//主人公部屋に入る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,league_start_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_LDVAL			LOCALWORK1,1
+
+	_JUMP			ev_shiten5_battle
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	部屋に入る(続き)
+//--------------------------------------------------------------------
+league_start_anime03:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							チャンピオン							*/
+/********************************************************************/
+ev_shiten5_battle:
+	_BGM_SET		MUS_DAIGO,0
+
+	_TALK_KEYWAIT	msg_daigo_01_p01_c109_r0105
+	_TRAINER_EVENT_FIGHT	CHAMPION_01,msg_daigo_01_p02_c109_r0105
+	_JUMP			ev_shiten5_01_end
+	_END
+
+ev_shiten5_01_end:
+	//ドアを開ける
+	_SE				SE_DOOR
+	_SET_CELL		6,1,C109_R0105_CELL_CODE03,0
+	_SET_CELL		6,2,C109_R0105_CELL_CODE04,0
+	_PROGRAM		MAKE_MAP_BG
+
+	_TALK_KEYWAIT	msg_daigo_01_p03_c109_r0105
+	_TALK_CLOSE
+
+	//サポート登場
+	_SE				SE_DOOR
+
+	//BGM変更
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,bgm_my_sex_boy_c109_r0105
+	_IFVAL_CALL		ANSWORK,EQ,1,bgm_my_sex_girl_c109_r0105
+
+	_OBJ_APPEAR		SUPPORT_01_C109_R0105
+
+	//登場
+	_CALL			cave_site_up_support_c109_r0105
+
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_c109_r0105
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_c109_r0105
+	_END
+
+//BGM変更
+bgm_my_sex_boy_c109_r0105:
+	_BGM_SET	MUS_GIRL_SUP,0
+	_RET
+bgm_my_sex_girl_c109_r0105:
+	_BGM_SET	MUS_BOY_SUP,0
+	_RET
+
+//主人公男の場合(相手が娘）
+my_sex_boy_c109_r0105:
+	_TALK_KEYWAIT	msg_heroine_01_p01_c109_r0105
+
+	_TIME_WAIT		40
+
+	//「！」
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//「！」ウェイト
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//きょろきょろする
+	_CALL			cave_site_up_support_c109_r0105_02
+
+	_TALK_KEYWAIT	msg_heroine_01_p02_c109_r0105
+
+	_JUMP			common_c109_r0105_01
+	_END
+
+//主人公女の場合(相手が息子）
+my_sex_girl_c109_r0105:
+	_TALK_KEYWAIT	msg_hero_01_p01_c109_r0105
+
+	_TIME_WAIT		40
+
+	//「！」
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//「！」ウェイト
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//きょろきょろする
+	_CALL			cave_site_up_support_c109_r0105_02
+
+	_TALK_KEYWAIT	msg_hero_01_p02_c109_r0105
+
+	_JUMP			common_c109_r0105_01
+	_END
+
+//共通終了処理
+common_c109_r0105_01:
+	_TALK_CLOSE
+
+	_OBJ_APPEAR		ODAMAKI_01_C109_R0105
+
+	//オダマキ登場
+	_SET_OBJ_ANIME	ODAMAKI_01_C109_R0105,odamaki_01_c109_r0105_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//右を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_odamaki_01_p01_c109_r0105
+
+	_CALL			ev_zukan_hyouka
+
+	_TALK_KEYWAIT	msg_odamaki_01_p02_c109_r0105
+
+	//ダイゴ上を向く
+	_SET_OBJ_ANIME	SHITEN5_01_C109_R0105,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		20
+
+	//ダイゴ下を向く
+	_SET_OBJ_ANIME	SHITEN5_01_C109_R0105,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_daigo_01_p04_c109_r0105
+	_TALK_CLOSE
+
+	_TIME_WAIT		30
+
+	//殿堂部屋へ
+	_SET_OBJ_ANIME	SHITEN5_01_C109_R0105,daigo_01_c109_r0105_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c109_r0105_anime01
+	_SET_OBJ_ANIME	ODAMAKI_01_C109_R0105,turn_u_anime
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,support_01_c109_r0105_anime09
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		20
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_daigo_01_p05_c109_r0105
+
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,my_sex_boy_c109_r0105_02
+	_IFVAL_CALL		ANSWORK,EQ,1,my_sex_girl_c109_r0105_02
+
+	_TALK_CLOSE
+
+	//殿堂部屋へ
+	_SET_OBJ_ANIME	SHITEN5_01_C109_R0105,daigo_01_c109_r0105_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c109_r0105_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//だんぺいを消しておく(トウカジムのみ)
+	_FLAG_SET		FV_DANPEI_01_C101_R0201
+
+	_MAP_CHANGE		C109,C109_R0301,7,16
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//主人公男の場合(相手が娘）
+my_sex_boy_c109_r0105_02:
+	_TALK_KEYWAIT	msg_heroine_01_p03_c109_r0105
+	_RET
+
+//主人公女の場合(相手が息子）
+my_sex_girl_c109_r0105_02:
+	_TALK_KEYWAIT	msg_hero_01_p03_c109_r0105
+	_RET
+
+//サポート登場
+cave_site_up_support_c109_r0105:
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,support_01_c109_r0105_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//サポートきょろきょろする
+cave_site_up_support_c109_r0105_02:
+	_SET_OBJ_ANIME	SUPPORT_01_C109_R0105,support_01_c109_r0105_anime05
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	でんどういりへ移動(下から)
+//--------------------------------------------------------------------
+hero_01_c109_r0105_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//主人公	でんどういりへ移動(上から)
+//--------------------------------------------------------------------
+hero_01_c109_r0105_anime02:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_VANISH_ON	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//サポート	登場(下から)
+//--------------------------------------------------------------------
+support_01_c109_r0105_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//サポート	きょろきょろ(下から)
+//--------------------------------------------------------------------
+support_01_c109_r0105_anime05:
+	.byte	AC_WALK_TURN_U	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	AC_WAIT_16	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//サポート	殿堂部屋へ(下から)
+//--------------------------------------------------------------------
+support_01_c109_r0105_anime09:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//ダイゴ	でんどういりへ移動(途中まで)
+//--------------------------------------------------------------------
+daigo_01_c109_r0105_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//ダイゴ	でんどういりへ移動
+//--------------------------------------------------------------------
+daigo_01_c109_r0105_anime02:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_VANISH_ON	//
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//オダマキ	登場(下から)
+//--------------------------------------------------------------------
+odamaki_01_c109_r0105_anime01:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+	
+

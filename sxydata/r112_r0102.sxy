@@ -1,0 +1,78 @@
+//MapEditNH Ver.3.53 *.evt -> *.sxy Convert.
+#define OBJNUM_R112_R0102	2
+#define EXITNUM_R112_R0102	2
+#define POSNUM_R112_R0102	0
+#define BGNUM_R112_R0102	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_workerw2_01_p01_r112_r0102[];
+
+const evObjData	OBJ_r112_r0102[] =
+{
+	{
+		WORKERW2_01_R112_R0102,		//OBJ ID
+		WORKERW2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerw2_01_p01_r112_r0102,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		ROPEWAY1_01_R112_R0102,		//OBJ ID
+		ROPEWAY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r112_r0102[] =
+{
+	{
+		0x0006,		//Xpos
+		0x000b,		//Ypos
+		0x00,		//Height
+		CAVE_D0701_DOOR01,		//Door ID
+		CAVE_D0701,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x000b,		//Ypos
+		0x00,		//Height
+		CAVE_D0701_DOOR02,		//Door ID
+		CAVE_D0701,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	r112_r0102_sxy_data =
+{
+OBJNUM_R112_R0102,			// field obj max
+EXITNUM_R112_R0102,		// exit max
+POSNUM_R112_R0102,			// pos event max
+BGNUM_R112_R0102,			// bg event max
+OBJ_r112_r0102,			// field obj data
+EXIT_r112_r0102,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

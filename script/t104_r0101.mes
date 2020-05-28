@@ -1,0 +1,64 @@
+// ●フエンタウン　薬屋（漢方薬の専門店）
+
+
+// ●女性１（店員）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t104_r0101
+msg_woman1_01_p01_t104_r0101:
+	.byte	do_,u_,mo_,gyoe_
+	.byte	CR_
+	.byte	ya_,su_,ku_,te_,spc_,yo_,ku_,spc_,ki_,ku_,spc_,ka_,n_,po_,u_,ya_,spc_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●商品リスト展開
+// 　ちからのこな　　　５００えん
+// 　ちからのねっこ　　８００えん
+// 　ばんのうごな　　　４５０えん
+// 　ふっかつそう　　２８００えん
+// 　やめる
+// ●これ以降はフラワーショップでの売買メッセージに
+
+
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_t104_r0101
+msg_oldman2_01_p01_t104_r0101:
+	.byte	HU_,E_,N_,no_,spc_,ka_,n_,po_,u_,ya_,ku_,wo_
+	.byte	CR_
+	.byte	mi_,ni_,ku_,ru_,to_,ha_,spc_,na_,ka_,na_,ka_,spc_,si_,bu_,i_,no_,u_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ni_,i_,ttu_,ta_,gyoe_,spc_,ko_,re_,wo_,spc_,mo_,ttu_,te_,ke_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「もくたん」（No215）入手処理
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p02_t104_r0101
+msg_oldman2_01_p02_t104_r0101:
+	.byte	o_,ma_,e_,sa_,n_,ni_,spc_,a_,ge_,ta_,spc_,mo_,ku_,ta_,n_,ha_
+	.byte	CR_
+	.byte	ka_,n_,po_,u_,ya_,ku_,wo_,spc_,tu_,ku_,ru_,no_,ni_,spc_,tu_,ka_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,mo_,ta_,se_,te_,mo_,spc_,su_,go_,i_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,no_,o_,TA_,I_,PU_,no_,spc_,wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,wo_
+	.byte	CR_
+	.byte	ta_,ka_,me_,te_,spc_,ku_,re_,ru_,no_,zi_,yya_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_t104_r0101
+msg_oldman1_01_p01_t104_r0101:
+	.byte	ka_,n_,po_,u_,ya_,ku_,no_,spc_,ki_,ki_,me_,ha_,spc_,su_,go_,i_,ga_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,no_,ma_,se_,ru_,to_,spc_,ki_,ra_,wa_,re_,ru_,zo_,yo_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,su_,ttu_,go_,ku_,spc_,ni_,ga_,i_,n_,zi_,yya_,ro_,u_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,99 @@
+//====================================================================
+//							c104_fs01
+//					カナズミ・フレンドリショップ
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c104_fs01_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						店員(OBJ名shopman)
+/********************************************************************/
+SCRIPT_LABEL	ev_shopman_01_p01_c104_fs01
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	//新型ボールの話を聞いているか(研究員と会話していたら)
+	_IF_FLAGOFF_JUMP	FE_WORKERM1_01_FIELD_R116,chg_menu_01_c104_fs01
+	_IF_FLAGON_JUMP		FE_WORKERM1_01_FIELD_R116,chg_menu_02_c104_fs01
+	_END
+
+//新型ボールの話を聞いていない
+chg_menu_01_c104_fs01:
+	_SHOP_START		c104_fs01_menu_01
+
+	//ショップメニュー
+	_SHOP_MENU_START	c104_fs01_menu_01
+	_SHOP_MENU		ITEM_MONSUTAABOORU
+	_SHOP_MENU		ITEM_KIZUGUSURI
+	_SHOP_MENU		ITEM_IIKIZUGUSURI
+	_SHOP_MENU		ITEM_DOKUKESI
+	_SHOP_MENU		ITEM_MAHINAOSI
+	_SHOP_MENU		ITEM_ANANUKENOHIMO
+	_SHOP_MENU		ITEM_MUSIYOKESUPUREE
+	_SHOP_MENU		ITEM_SUPIIDAA
+	_SHOP_MENU		ITEM_PURASUPAWAA		
+	_SHOP_MENU		ITEM_DHIFENDAA		
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+//新型ボールの話を聞いている
+chg_menu_02_c104_fs01:
+	_SHOP_START		c104_fs01_menu_02
+
+	//ショップメニュー
+	_SHOP_MENU_START	c104_fs01_menu_02
+	_SHOP_MENU		ITEM_MONSUTAABOORU
+	_SHOP_MENU		ITEM_TAIMAABOORU
+	_SHOP_MENU		ITEM_RIPIITOBOORU
+	_SHOP_MENU		ITEM_KIZUGUSURI
+	_SHOP_MENU		ITEM_IIKIZUGUSURI
+	_SHOP_MENU		ITEM_DOKUKESI
+	_SHOP_MENU		ITEM_MAHINAOSI
+	_SHOP_MENU		ITEM_ANANUKENOHIMO
+	_SHOP_MENU		ITEM_MUSIYOKESUPUREE
+	_SHOP_MENU		ITEM_SUPIIDAA
+	_SHOP_MENU		ITEM_PURASUPAWAA		
+	_SHOP_MENU		ITEM_DHIFENDAA		
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								おばさん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew1_01_p01_c104_fs01
+	_EASY_OBJ_MSG	msg_middlew1_01_p01_c104_fs01
+	_END
+
+
+/********************************************************************/
+/*								少年								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_c104_fs01
+	_EASY_OBJ_MSG	msg_boy1_01_p01_c104_fs01
+	_END
+
+
+/********************************************************************/
+/*								帽子男２							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_capboy2_01_p01_c104_fs01
+	_EASY_OBJ_MSG	msg_capboy2_01_p01_c104_fs01
+	_END
+
+

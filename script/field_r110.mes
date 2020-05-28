@@ -1,0 +1,600 @@
+// ●110番道路　フィールド
+
+
+// ●以下のアクア団４人、キンセツへのストッパーとなります
+// ●アクア団（幹部？）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p01_field_r110
+msg_evilm1_01_p01_field_r110:
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,ka_,tu_,do_,u_,ha_
+	.byte	CR_
+	.byte	i_,ma_,ha_,spc_,ma_,da_,spc_,da_,re_,ni_,mo_,spc_,i_,e_,na_,i_,no_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナの博物館イベント終了タイミングで削除
+
+// ●アクア団
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_02_p01_field_r110
+msg_evilm1_02_p01_field_r110:
+	.byte	ha_,ya_,ku_,spc_,KA_,I_,NA_,ni_,spc_,i_,ttu_,te_
+	.byte	CR_
+	.byte	hi_,to_,a_,ba_,re_,spc_,si_,ta_,i_,n_,da_,yo_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナの博物館イベント終了タイミングで削除
+
+// ●アクア団
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_03_p01_field_r110
+msg_evilm1_03_p01_field_r110:
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,ha_,i_,ttu_,te_
+	.byte	CR_
+	.byte	ha_,zi_,me_,te_,no_,spc_,si_,go_,to_,spc_,da_,ze_,tenten_,tenten_,spc_,do_,ki_,do_,ki_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナの博物館イベント終了タイミングで削除
+
+// ●アクア団
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_04_p01_field_r110
+msg_evilm1_04_p01_field_r110:
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,ka_,tu_,do_,u_,ha_
+	.byte	CR_
+	.byte	ki_,ttu_,to_,spc_,mi_,n_,na_,wo_,spc_,e_,ga_,o_,ni_,spc_,su_,ru_,da_,ro_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カイナの博物館イベント終了タイミングで削除
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●サポートキャラ♀「ハルカ」
+// ●（Ｘ３４・Ｙ５４）上向きにいる
+// ●ＰＯＳ（Ｘ３３～３５・Ｙ５７）を踏むと
+// 　下を向き「！」表示後、主人公に近づいてくる
+// ●サポートキャラ♀
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_field_r110
+msg_heroine_01_p01_field_r110:
+	.byte	HA_,RU_,KA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,hi_,sa_,si_,bu_,ri_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,i_,ro_,spc_,PO_,KE_,MO_,N_,spc_,sa_,ga_,si_,te_,ru_,spc_,a_,i_,da_,ni_
+	.byte	CR_
+	.byte	a_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,mo_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,tenten_,tenten_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,yo_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで戦闘突入
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p02_field_r110
+msg_heroine_01_p02_field_r110:
+	.byte	a_,ttu_,ti_,yya_,bou_,gyoe_
+	.byte	CR_
+	.byte	o_,mo_,ttu_,te_,ta_,yo_,ri_,spc_,tu_,yo_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜けてからのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p03_field_r110
+msg_heroine_01_p03_field_r110:
+	.byte	HA_,RU_,KA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,ru_,n_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,n_,spc_,zi_,yya_,a_,spc_,ko_,re_,ha_
+	.byte	CR_
+	.byte	a_,ta_,si_,ka_,ra_,no_,spc_,PU_,RE_,ZE_,N_,TO_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ダウジングマシン」（No261）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p04_field_r110
+msg_heroine_01_p04_field_r110:
+	.byte	HA_,RU_,KA_,kako2_,so_,re_,ha_,spc_,DA_,U_,ZI_,N_,GU_,MA_,SI_,N_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	DA_,U_,ZI_,N_,GU_,MA_,SI_,N_,wo_,spc_,tu_,ka_,u_,to_
+	.byte	CR_
+	.byte	me_,ni_,ha_,spc_,mi_,e_,na_,ku_,te_,mo_,spc_,o_,ti_,te_,i_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	do_,u_,gu_,ga_,spc_,a_,ru_,to_,spc_,ha_,n_,no_,u_,spc_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	o_,to_,de_,spc_,o_,si_,e_,te_,spc_,ku_,re_,ru_,no_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	CR_
+	.byte	ma_,ta_,spc_,do_,ko_,ka_,de_,spc_,a_,o_,u_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ke_,ta_,spc_,a_,ta_,si_,ga_,spc_,i_,u_,no_,mo_,spc_,na_,n_,da_,ke_,do_
+	.byte	CR_
+	.byte	so_,no_,to_,ki_,ma_,de_,ni_,spc_,mo_,ttu_,to_,spc_,PO_,KE_,MO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	so_,da_,te_,te_,spc_,o_,i_,ta_,spc_,ho_,u_,ga_,spc_,i_,i_,ka_,mo_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●キンセツ方面に自転車に乗った状態で去っていく
+
+// ●サポートキャラ♂
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_field_r110
+msg_hero_01_p01_field_r110:
+	.byte	YU_,U_,KI_,kako2_,I_MSG_,MY_NAME_BUF,ka_
+	.byte	CR_
+	.byte	ko_,n_,na_,to_,ko_,ro_,ni_,spc_,i_,ta_,n_,da_
+	.byte	SCROLL_WAIT_
+	.byte	ti_,yyo_,u_,si_,ha_,spc_,do_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,ru_,ka_,spc_,do_,u_,ka_
+	.byte	CR_
+	.byte	O_,RE_,ga_,spc_,ta_,si_,ka_,me_,te_,spc_,ya_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで戦闘突入
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p02_field_r110
+msg_hero_01_p02_field_r110:
+	.byte	hu_,u_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,ya_,ru_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜けてからのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p03_field_r110
+msg_hero_01_p03_field_r110:
+	.byte	YU_,U_,KI_,kako2_,I_MSG_,MY_NAME_BUF,mo_,spc_,i_,tu_,no_,ma_,ni_,ka_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,ta_,no_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,si_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,wo_,spc_,ya_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ダウジングマシン」（No261）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p04_field_r110
+msg_hero_01_p04_field_r110:
+	.byte	YU_,U_,KI_,kako2_,so_,i_,tu_,ha_,spc_,DA_,U_,ZI_,N_,GU_,MA_,SI_,N_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ka_,u_,to_,spc_,me_,ni_,ha_,spc_,mi_,e_,na_,ku_,te_,mo_
+	.byte	CR_
+	.byte	o_,ti_,te_,i_,ru_,spc_,do_,u_,gu_,ga_,spc_,a_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,n_,no_,u_,spc_,si_,te_,spc_,o_,to_,de_,spc_,o_,si_,e_,te_,ku_,re_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,spc_,O_,RE_,spc_,a_,ta_,ra_,si_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,sa_,ga_,si_,ni_,spc_,i_,ku_,ka_,ra_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●キンセツ方面に自転車に乗った状態で去っていく
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●少年３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p01_field_r110
+msg_boy3_01_p01_field_r110:
+	.byte	ko_,no_,spc_,SA_,I_,KU_,RI_,N_,GU_,spc_,RO_,bou_,DO_,wo_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,de_,spc_,ha_,si_,ri_,nu_,ke_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	da_,n_,ze_,n_,spc_,ki_,mo_,ti_,spc_,yo_,sa_,so_,u_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●自転車女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclew1_01_p01_field_r110
+msg_cyclew1_01_p01_field_r110:
+	.byte	do_,u_,hate_,spc_,ka_,ze_,ni_,na_,bi_,ku_,spc_,wa_,ta_,si_,no_,spc_,ku_,ro_,ka_,mi_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ta_,me_,spc_,da_,ke_,ni_,spc_,ka_,mi_,wo_,spc_,no_,ba_,si_,ta_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●自転車男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_01_p01_field_r110
+msg_cyclem1_01_p01_field_r110:
+	.byte	o_,ttu_,gyoe_,spc_,so_,no_,spc_,zi_,te_,n_,si_,yya_
+	.byte	CR_
+	.byte	MI_,SU_,TA_,bou_,KA_,ZE_,NO_,ni_,spc_,mo_,ra_,ttu_,ta_,n_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,re_,ba_,spc_,wa_,ka_,ru_,yo_
+	.byte	CR_
+	.byte	da_,ttu_,te_,spc_,ki_,mi_,no_,spc_,zi_,te_,n_,si_,yya_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	CR_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	CR_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	CR_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	CR_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_,spc_,KA_,ZE_,NO_
+	.byte	CR_
+	.byte	tenten_,tenten_,ttu_,te_,spc_,ka_,i_,te_,spc_,a_,ru_,n_,da_,mo_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ttu_,ti_,ko_,ttu_,ti_,spc_,no_,ri_,ma_,wa_,si_,te_
+	.byte	CR_
+	.byte	se_,n_,de_,n_,spc_,si_,te_,a_,ge_,ru_,to_,spc_,i_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_field_r110
+msg_oldman1_01_p01_field_r110:
+	.byte	u_,e_,to_,spc_,si_,ta_,spc_,n2_,tu_,no_,spc_,do_,u_,ro_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ni_,n_,ge_,n_,to_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	so_,re_,zo_,re_,no_,spc_,do_,u_,ro_,spc_,da_,to_,spc_,o_,mo_,e_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,mo_,a_,ri_,spc_,na_,no_,ka_,mo_,spc_,si_,re_,n_,no_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老婆１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_field_r110
+msg_oldwoman1_01_p01_field_r110:
+	.byte	a_,ta_,si_,ha_,spc_,zi_,te_,n_,si_,yya_,spc_,mo_,ttu_,te_,na_,i_,spc_,ka_,ra_,ne_,e_
+	.byte	CR_
+	.byte	si_,ta_,no_,spc_,mi_,ti_,wo_,spc_,no_,n_,bi_,ri_,spc_,a_,ru_,i_,te_,spc_,i_,ku_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●自転車男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_02_p01_field_r110
+msg_cyclem1_02_p01_field_r110:
+	.byte	i_,ro_,n_,na_,spc_,TE_,KU_,NI_,TTU_,KU_,wo_,spc_,o_,bo_,e_,ru_,to_
+	.byte	CR_
+	.byte	ma_,su_,ma_,su_,spc_,zi_,te_,n_,si_,yya_,ga_,spc_,ta_,no_,si_,ku_,na_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TE_,KU_,NI_,TTU_,KU_,wo_,spc_,tu_,ka_,wa_,na_,i_,to_
+	.byte	CR_
+	.byte	su_,su_,me_,na_,i_,spc_,ba_,si_,yyo_,mo_,spc_,a_,ru_,si_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ボーイスカウト１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boyscout1_01_p01_field_r110
+msg_boyscout1_01_p01_field_r110:
+	.byte	SA_,I_,KU_,RI_,N_,GU_,RO_,bou_,DO_,de_,spc_,KI_,N_,SE_,TU_,wo_,spc_,me_,za_,su_,ka_
+	.byte	CR_
+	.byte	si_,ta_,no_,spc_,mi_,ti_,de_,spc_,PO_,KE_,MO_,N_,wo_,spc_,sa_,ga_,su_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ttu_,ti_,ni_,spc_,si_,yo_,u_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●自転車男１（衝突回数＆時間をカウント）
+// ●カイナ側ゲートをでて、すぐの位置にいる
+// ●ゴール（計測結果）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p01_field_r110
+msg_cyclem1_03_p01_field_r110:
+	.byte	bu_,tu_,ka_,ttu_,ta_,spc_,ka_,i_,su_,u_
+	.byte	CR_
+	.byte	spc_,tenten_,tenten_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ka_,ttu_,ta_,spc_,TA_,I_,MU_
+	.byte	CR_
+	.byte	spc_,tenten_,tenten_,spc_,I_MSG_,STR_TEMP_BUF1,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」　衝突回数、１００回以上なら「９９かい　いじょう！」
+// ●「＠１」　所要時間、６０秒以上なら　「１ぷん　いじょう」と表示してください
+
+// ●続けて評価メッセージを表示します。
+// ●衝突回数（回）
+// 　　　　　　０　→　５
+// 　　　１～　３　→　４
+// 　　　４～　９　→　３
+// 　　１０～１９　→　２
+// 　　２０～９９　→　１
+// 　１００～　　　→　０
+// ※カウントの最大値は１００
+// ●所要時間（秒）
+// 　　　　～１０　→　５
+// 　　１１～１５　→　４
+// 　　１６～２０　→　３
+// 　　２１～４０　→　２
+// 　　４１～５９　→　１
+// 　　６０～　　　→　０
+// ※カウントの最大値は６０秒
+// ●合計して
+// 　　１０　→　msg_cyclem1_03_p02_field_r110:
+// 　７～９　→　msg_cyclem1_03_p03_field_r110:
+// 　４～６　→　msg_cyclem1_03_p04_field_r110:
+// 　１～３　→　msg_cyclem1_03_p05_field_r110:
+// 　　　０　→　msg_cyclem1_03_p06_field_r110:
+
+// ●評価点……　１０
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p02_field_r110
+msg_cyclem1_03_p02_field_r110:
+	.byte	BU_,RA_,BO_,bou_,gyoe_,gyoe_,spc_,su_,ba_,ra_,si_,i_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,zi_,te_,n_,si_,yya_,wo_,spc_,ko_,ko_,ro_,ka_,ra_
+	.byte	CR_
+	.byte	a_,i_,si_,te_,i_,ru_,gyoe_,spc_,ta_,ma_,si_,i_,wo_,spc_,yu_,sa_,bu_,ra_,re_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●評価点……　７～９
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p03_field_r110
+msg_cyclem1_03_p03_field_r110:
+	.byte	na_,ka_,na_,ka_,no_,spc_,TE_,KU_,NI_,TTU_,KU_,wo_,spc_,mo_,ttu_,te_,ru_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,SU_,PI_,bou_,DO_,wo_,spc_,da_,si_,su_,gi_,te_
+	.byte	CR_
+	.byte	A_,KU_,SI_,DE_,N_,TO_,wo_,spc_,o_,ko_,sa_,na_,i_,yo_,u_,ni_,spc_,si_,na_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●評価点……　４～６
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p04_field_r110
+msg_cyclem1_03_p04_field_r110:
+	.byte	ma_,da_,spc_,mi_,zi_,yyu_,ku_,na_,spc_,bu_,bu_,n_,mo_,spc_,a_,ru_,yo_,u_,da_,ga_
+	.byte	CR_
+	.byte	se_,ttu_,ka_,ku_,no_,spc_,zi_,te_,n_,si_,yya_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,no_,si_,mu_,spc_,ki_,mo_,ti_,wo_,spc_,wa_,su_,re_,na_,i_,de_,spc_,ku_,re_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●評価点……　１～３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p05_field_r110
+msg_cyclem1_03_p05_field_r110:
+	.byte	o_,i_,o_,i_,spc_,na_,n_,da_,ka_
+	.byte	CR_
+	.byte	a_,bu_,na_,ttu_,ka_,si_,i_,spc_,u_,n_,te_,n_,spc_,si_,te_,ru_,na_,a_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,re_,n_,si_,yyu_,u_,spc_,si_,ro_,yo_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●評価点……　０
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p06_field_r110
+msg_cyclem1_03_p06_field_r110:
+	.byte	u_,mu_,mu_,tenten_,tenten_,spc_,u_,mu_,mu_,mu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ni_,ha_,spc_,zi_,te_,n_,si_,yya_,ha_,spc_,mu_,i_,te_,i_,na_,i_,spc_,ka_,mo_,na_
+	.byte	CR_
+	.byte	MI_,SU_,TA_,bou_,KA_,ZE_,NO_,ni_,spc_,ka_,e_,si_,ta_,ra_,spc_,do_,u_,da_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カイナ側のゲートから入って話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p07_field_r110
+msg_cyclem1_03_p07_field_r110:
+	.byte	ko_,no_,spc_,SA_,I_,KU_,RI_,N_,GU_,RO_,bou_,DO_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KI_,N_,SE_,TU_,ka_,ra_,spc_,KA_,I_,NA_,ni_,spc_,mu_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,de_,spc_,ha_,si_,ri_,nu_,ke_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	RE_,bou_,SA_,bou_,no_,spc_,bu_,tu_,ka_,ttu_,ta_,spc_,ka_,i_,su_,u_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,ka_,ttu_,ta_,spc_,TA_,I_,MU_,wo_,spc_,ha_,ka_,ttu_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●計測結果を聞いた後、再度話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p08_field_r110
+msg_cyclem1_03_p08_field_r110:
+	.byte	do_,n_,na_,spc_,ke_,ttu_,ka_,spc_,da_,ro_,u_,ga_,spc_,sa_,ra_,ni_
+	.byte	CR_
+	.byte	u_,e_,wo_,spc_,me_,za_,si_,te_,no_,spc_,TI_,YYA_,RE_,N_,ZI_,spc_,ma_,ttu_,te_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●主人公がダート自転車に乗っているとき（他の条件よりも優先）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cyclem1_03_p09_field_r110
+msg_cyclem1_03_p09_field_r110:
+	.byte	ko_,no_,spc_,SA_,I_,KU_,RI_,N_,GU_,spc_,RO_,bou_,DO_,de_,ha_
+	.byte	CR_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,spc_,de_,spc_,ha_,si_,ri_,nu_,ke_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	RE_,bou_,SA_,bou_,no_,spc_,bu_,tu_,ka_,ttu_,ta_,spc_,ka_,i_,su_,u_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,ka_,ttu_,ta_,spc_,TA_,I_,MU_,wo_,spc_,ha_,ka_,ttu_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,spc_,da_,to_,spc_,ma_,ga_,ri_,ya_,su_,i_,ka_,ra_
+	.byte	CR_
+	.byte	ki_,ro_,ku_,ha_,spc_,ha_,ka_,ttu_,te_,spc_,a_,ge_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●カイナシティ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r110
+msg_kanban_01_p01_field_r110:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n0_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowD__,spc_,KA_,I_,NA_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●料金所の看板
+// 　カイナ寄り・キンセツ寄り共通
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r110
+msg_kanban_02_p01_field_r110:
+	.byte	kako_,SI_,bou_,SA_,I_,DO_,spc_,SA_,I_,KU_,RI_,N_,GU_,spc_,RO_,bou_,DO_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●小さな岬の草むらに立つ看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_r110
+msg_kanban_03_p01_field_r110:
+	.byte	kako_,I_MSG_,STR_ENE_GROUP,da_,n_,spc_,sa_,n_,zi_,yyo_,u_,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,ka_,n_,ba_,n_,ni_,spc_,ra_,ku_,ga_,ki_,ga_,spc_,si_,te_,a_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●103番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_04_p01_field_r110
+msg_kanban_04_p01_field_r110:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n0_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ハイウェイ中央の休憩所にある看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_05_p01_field_r110
+msg_kanban_05_p01_field_r110:
+	.byte	kako_,SI_,bou_,SA_,I_,DO_,spc_,PA_,bou_,KI_,N_,GU_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●キンセツシティ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_06_p01_field_r110
+msg_kanban_06_p01_field_r110:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n0_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowU__,spc_,KI_,N_,SE_,TU_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お得な掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_07_p01_field_r110
+msg_kanban_07_p01_field_r110:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,ne_,mu_,ra_,se_,ta_,ri_,spc_,ma_,hi_,sa_,se_,ru_,to_
+	.byte	CR_
+	.byte	a_,i_,te_,no_,spc_,zi_,yu_,u_,wo_,spc_,u_,ba_,e_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ha_,spc_,PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,no_
+	.byte	CR_
+	.byte	zi_,yyu_,u_,yo_,u_,na_,spc_,TE_,KU_,NI_,TTU_,KU_,spc_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お得な掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_08_p01_field_r110
+msg_kanban_08_p01_field_r110:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BA_,TTU_,GU_,ni_,spc_,i_,re_,ta_,spc_,do_,u_,gu_,ha_
+	.byte	CR_
+	.byte	SE_,RE_,KU_,TO_,BO_,TA_,N_,wo_,spc_,o_,su_,to_,spc_,zi_,yyu_,n_,ba_,n_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	i_,re_,ka_,e_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カラクリ屋敷
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_09_p01_field_r110
+msg_kanban_09_p01_field_r110:
+	.byte	ko_,ko_,yo_,ri_,spc_,CTRL_,C_EXFONT_,ArrowR__,he_,n3_,po_,spc_,CTRL_,C_EXFONT_,ArrowU__,he_,n2_,ho_,spc_,yu_,ke_,ba_
+	.byte	CR_
+	.byte	so_,ko_,ha_,spc_,su_,te_,ki_,na_,spc_,kako_,KA_,RA_,KU_,RI_,ya_,si_,ki_,kakot_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●記録掲示板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_10_p01_field_r110
+msg_kanban_10_p01_field_r110:
+	.byte	i_,ma_,ma_,de_,no_,spc_,sa_,i_,ko_,u_,spc_,ki_,ro_,ku_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	bu_,tu_,ka_,ttu_,ta_,spc_,ka_,i_,su_,u_
+	.byte	CR_
+	.byte	spc_,tenten_,tenten_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ka_,ttu_,ta_,spc_,TA_,I_,MU_
+	.byte	CR_
+	.byte	spc_,tenten_,tenten_,spc_,I_MSG_,STR_TEMP_BUF1,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●一度も挑戦するまでは以下のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_10_p02_field_r110
+msg_kanban_10_p02_field_r110:
+	.byte	i_,ma_,ma_,de_,no_,spc_,sa_,i_,ko_,u_,spc_,ki_,ro_,ku_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,da_,re_,mo_,spc_,ti_,yyo_,u_,se_,n_,spc_,si_,te_,i_,na_,i_,no_,ka_
+	.byte	CR_
+	.byte	na_,ni_,mo_,spc_,ki_,ro_,ku_,spc_,sa_,re_,te_,i_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

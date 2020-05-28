@@ -1,0 +1,26 @@
+
+//-- FightEffect用のID --//
+#define		FE_ID_HENGE				0		//変化
+#define		FE_ID_STATUS_UPDOWN		1		//ステータス上昇・下降エフェクト
+#define		FE_ID_MIGAWARI_KIZETU	2		//「みがわり」キャラ気絶
+#define		FE_ID_PIPPININGYOU		3		//ピッピ人形
+#define		FE_ID_POROC				4		//ポロック投げエフェクト
+#define		FE_ID_FUKURO			5		//「はたきおとす」で出る袋
+#define		FE_ID_SIMETUKE			6		//絞めつけ系エフェクト
+#define		FE_ID_KAIFUKU			7		//木の実系 回復エフェクト
+#define		FE_ID_KEMURIDAMA		8		//道具「けむりだま」
+#define		FE_ID_KIAINOHATIMAKI	9		//道具「きあいのハチマキ」
+#define		FE_ID_AMAGOI			10		//天気「あまごい」
+#define		FE_ID_NIHONBARE			11		//天気「晴れ」
+#define		FE_ID_SUNAARASI			12		//天気「砂嵐｣
+#define 	FE_ID_ARARE				13		//天気「あられ」
+#define		FE_ID_YADORIGI			14		//継続エフェクト「やどりぎのタネ」
+#define		FE_ID_HITEFFECT			15		//次ﾊﾞｰｼﾞｮﾝとの通信で新技を出された時のｴﾌｪｸﾄ
+#define		FE_ID_NUSUMU			16	//「どろぼう」「ほしがる」で成功した時のｴﾌｪｸﾄ
+#define		FE_ID_YOKODORI			17		//よこどり
+#define		FE_ID_MIRAIYOTI			18		//みらいよち
+#define		FE_ID_HAMETUNONEGAI		19		//はめつのねがい
+#define		FE_ID_KIAI_TURN1		20		//「きあいパンチ」の溜めエフェクト
+#define		FE_ID_NEWOHARU			21		//「ねをはる」の継続エフェクト
+#define		FE_ID_NEGAIGOTO			22		//「ねがいごと」の2ﾀｰﾝ後の回復ｴﾌｪｸﾄ
+

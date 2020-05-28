@@ -1,0 +1,103 @@
+// ●トクサネシティ　宇宙センター１Ｆ
+
+
+// ●「＠０」＝プレイ開始からの日数÷７の値
+// ●カウントの上限は９９９９回、らしいです（増田さん決定）
+// ●研究員男
+// ●「＠０」が１未満の時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_c107_r0701
+msg_studym1_01_p01_c107_r0701:
+	.byte	mo_,u_,su_,gu_,spc_,RO_,KE_,TTU_,TO_,ga_,spc_,ha_,ttu_,si_,yya_,spc_,su_,ru_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」が１以上
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_c107_r0701
+msg_studym1_01_p02_c107_r0701:
+	.byte	RO_,KE_,TTU_,TO_,ga_,spc_,ha_,ttu_,si_,yya_,spc_,si_,ta_,yo_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,de_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,spc_,u_,ti_,a_,ge_,spc_,se_,i_,ko_,u_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このメッセージで
+// 　プレイヤーがゲームを買って（最初に電源を入れて）から
+// 　何週間たっているか、わかる人がいいね、というのが目的です
+
+
+// ●研究員男
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_02_p01_c107_r0701
+msg_studym1_02_p01_c107_r0701:
+	.byte	RO_,KE_,TTU_,TO_,wo_,spc_,ha_,ttu_,si_,yya_,spc_,su_,ru_,ni_,ha_
+	.byte	CR_
+	.byte	n1_,PA_,bou_,SE_,N_,TO_,no_,spc_,MI_,SU_,mo_,spc_,yu_,ru_,sa_,re_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	n9_,n9_,PA_,bou_,SE_,N_,TO_,spc_,da_,i_,zi_,yyo_,u_,bu_,spc_,de_,mo_
+	.byte	CR_
+	.byte	n1_,PA_,bou_,SE_,N_,TO_,spc_,DA_,ME_,na_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	su_,be_,te_,ga_,spc_,DA_,ME_,ni_,na_,ru_,spc_,ki_,bi_,si_,i_,spc_,mo_,no_,da_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,mo_,spc_,ya_,ri_,to_,ge_,yo_,u_,to_,spc_,su_,ru_,no_,ha_
+	.byte	CR_
+	.byte	so_,ko_,ni_,spc_,RO_,MA_,N_,ga_,spc_,tu_,ma_,ttu_,te_,i_,ru_,spc_,ka_,ra_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c107_r0701
+msg_seaman1_01_p01_c107_r0701:
+	.byte	ka_,i_,ga_,n_,wo_,spc_,sa_,n_,po_,spc_,si_,te_,i_,te_
+	.byte	CR_
+	.byte	ko_,re_,wo_,spc_,mi_,tu_,ke_,ta_,n_,da_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,i_,ra_,na_,i_,ka_,ra_,spc_,ki_,mi_,ni_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「たいようのいし」（No093）入手処理
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p02_c107_r0701
+msg_seaman1_01_p02_c107_r0701:
+	.byte	mu_,ka_,si_,ka_,ra_,spc_,HO_,U_,E_,N_,ti_,ho_,u_,ha_
+	.byte	CR_
+	.byte	i_,n_,se_,ki_,no_,spc_,o_,o_,i_,spc_,ba_,si_,yyo_,spc_,to_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,u_,me_,i_,spc_,na_,n_,da_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性２（観光客）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c107_r0701
+msg_woman2_01_p01_c107_r0701:
+	.byte	hi_,to_,ni_,spc_,yo_,ttu_,te_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,u_,ti_,yyu_,u_,ka_,ra_,spc_,ya_,ttu_,te_,ki_,ta_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ttu_,te_,spc_,i_,u_,yo_,ne_,gyoe_,spc_,ho_,n_,to_,u_,spc_,ka_,na_,bou_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人２（観光客）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_c107_r0701
+msg_oldman2_01_p01_c107_r0701:
+	.byte	de_,ttu_,ka_,i_,spc_,te_,tu_,no_,spc_,ka_,ta_,ma_,ri_,ga_
+	.byte	CR_
+	.byte	o_,o_,zo_,ra_,wo_,spc_,tu_,ki_,nu_,ke_
+	.byte	SCROLL_WAIT_
+	.byte	u_,ti_,yyu_,u_,ma_,de_,spc_,to_,n_,de_,spc_,i_,ku_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ma_,ge_,ta_,spc_,mo_,n_,spc_,da_,wa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

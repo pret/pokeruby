@@ -1,0 +1,165 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1111	7
+#define EXITNUM_CAVE_D1111	1
+#define POSNUM_CAVE_D1111	1
+#define BGNUM_CAVE_D1111	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_ball1_90[];
+
+//POS_SCRIPT
+extern const u8	ev_cave_d1111_pos01[];
+
+const evObjData	OBJ_cave_d1111[] =
+{
+	{
+		POKE1_01_CAVE_D1111,		//OBJ ID
+		WKOBJCODE9,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x0026,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_POKE1_01_CAVE_D1111,		//Event Flag
+	},
+
+	{
+		AQUABOSS_01_CAVE_D1111,		//OBJ ID
+		WKOBJCODE7,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x002a,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_AQUABOSS_01_CAVE_D1111,		//Event Flag
+	},
+
+	{
+		MAGMABOSS_01_CAVE_D1111,		//OBJ ID
+		WKOBJCODE8,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x002a,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_MAGMABOSS_01_CAVE_D1111,		//Event Flag
+	},
+
+	{
+		MAGMAM1_01_CAVE_D1111S,		//OBJ ID
+		WKOBJCODE5,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0029,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_MAGMA_01_CAVE_D1111S,		//Event Flag
+	},
+
+	{
+		MAGMAF1_01_CAVE_D1111S,		//OBJ ID
+		WKOBJCODE6,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x002a,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_MAGMA_01_CAVE_D1111S,		//Event Flag
+	},
+
+	{
+		BALL1_90,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_90,		//Event Lavel
+		FV_BALL1_90,		//Event Flag
+	},
+
+	{
+		POKE1_02_CAVE_D1111,		//OBJ ID
+		WKOBJCODE10,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x0026,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_POKE1_02_CAVE_D1111,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d1111[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		CAVE_D1110_DOOR02,		//Door ID
+		CAVE_D1110,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_cave_d1111[] =
+{
+	{
+		0x0011,		//Xpos
+		0x002a,		//Ypos
+		0x03,		//Height
+		WK_SCENE_CAVE_D1111,		//Event Type
+		0x00,		//Scene
+		ev_cave_d1111_pos01,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d1111_sxy_data =
+{
+OBJNUM_CAVE_D1111,			// field obj max
+EXITNUM_CAVE_D1111,		// exit max
+POSNUM_CAVE_D1111,			// pos event max
+BGNUM_CAVE_D1111,			// bg event max
+OBJ_cave_d1111,			// field obj data
+EXIT_cave_d1111,			// exit data
+POS_cave_d1111,			// pos event data
+NULL,				// bg event data
+};

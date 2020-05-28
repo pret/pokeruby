@@ -1,0 +1,503 @@
+//====================================================================
+//							field_c103
+//						キンセツ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_c103_event_data
+FLAG_CHANGE_LABEL	ev_arrive_flag_set_c103
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//到着フラグセット
+ev_arrive_flag_set_c103:
+	_FLAG_SET		SYS_C103_ARRIVE
+
+	//カイナの博物館のOBJを出す
+	_FLAG_RESET		FV_OBJ_ALL_C102_R0501
+
+	//TV放送開始
+	_FLAG_SET		SYS_TV_START
+
+	//ジムトラップ初期化
+	_FLAG_RESET		FE_GYM03_DOOR
+	_LDVAL			WK_SCENE_C103_R0101,0
+
+	//「技マシン２４」入手していたら
+	_IF_FLAGON_CALL		FE_WAZAM24_GET,ev_tettsusen_apper_field_c103
+	_END
+
+//「かみなりのいし」入手している
+ev_tettsusen_apper_field_c103:
+	_FLAG_RESET		FV_TETTSUSEN_01_C103_R0101
+	_FLAG_SET		FV_TETTSUSEN_01_FIELD_C103
+	_RET
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						ジムの前にいる少年3							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy3_01_p01_field_c103
+	_EASY_OBJ_MSG	msg_boy3_01_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*				町の中央の花壇(?)の左側にいるおやじ1				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_field_c103
+	_EASY_OBJ_MSG	msg_freak1_01_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*				町の中央の花壇(?)の右側にいる女性2					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_field_c103
+	_EASY_OBJ_MSG	msg_woman2_01_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*				自転車屋の前にいる少年4								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy4_01_p01_field_c103
+	_EASY_OBJ_MSG	msg_boy4_01_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*						町の中央の看板(1)							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_c103
+	_EASY_MSG       msg_kanban_01_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*					ポケモンジムの看板(2)							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_c103
+	_EASY_MSG       msg_kanban_02_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*						自転車屋の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_c103
+	_EASY_MSG       msg_kanban_03_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*					キンセツゲームコーナーの看板					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_c103
+	_EASY_MSG       msg_kanban_05_p01_field_c103
+	_END
+
+
+/********************************************************************/
+/*							TV起動OBJ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_schoolm1_01_p01_field_c103
+	_TALK_OBJ_START
+
+	//会話したか
+	_IF_FLAGON_JUMP	FE_SCHOOLM1_01_P01_FIELD_C103,ev_schoolm1_01_p02_field_c103
+
+	_TALK_KEYWAIT	msg_schoolm1_01_p01_field_c103
+
+	_FLAG_SET		FE_SCHOOLM1_01_P01_FIELD_C103
+
+	_TALK_OBJ_END
+	_END
+
+//すでに一度話している
+ev_schoolm1_01_p02_field_c103:
+	_TALK_KEYWAIT	msg_schoolm1_01_p02_field_c103
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ミツルの伯父さん						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_field_c103
+	_TALK_OBJ_START
+
+	//ミツルと一度話したか
+	_IF_FLAGON_JUMP		FE_MITSURU_01_FIELD_C103,ev_middlem2_01_p02_field_c103
+
+	_TALK_KEYWAIT	msg_middlem2_01_p01_field_c103
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+//ミツルとすでに話している
+ev_middlem2_01_p02_field_c103:
+	_TALK_KEYWAIT	msg_middlem2_01_p03_field_c103
+	_TALK_CLOSE
+
+	//元の方を向く
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								ミツル								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_mitsuru_01_p01_field_c103
+	_TALK_START
+
+	//ミツルと一度話したか
+	_IF_FLAGON_JUMP		FE_MITSURU_01_FIELD_C103,ev_mitsuru_01_p02_field_c103
+
+	//おじさんの方を向く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mitsuru_02_01
+
+	_TALK_KEYWAIT	msg_middlem2_01_p02_field_c103
+
+	_TALK_KEYWAIT	msg_mitsuru_02_02
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//主人公に気づく
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_YES_NO	msg_mitsuru_02_03
+	_JUMP			common_mitsuru_01_field_c103
+	_END
+
+//共通処理
+common_mitsuru_01_field_c103:
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,yes_mitsuru_01_p02_field_c103	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_mitsuru_01_p02_field_c103	//「いいえ」
+
+	_TALK_CLOSE
+
+	//話し掛けられた方向によって向きを分ける
+	_SWITCH			RG_SITE
+	_CASEJUMP		SITE_U,site_d_mitsuru_field_c103			//下から話し掛け
+	_CASEJUMP		SITE_R,site_l_mitsuru_field_c103			//左から話し掛け
+	_END
+
+//下から話し掛け
+site_d_mitsuru_field_c103:
+	//シダケタウンに去っていく
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,mitsuru_01_field_c103_anime02
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,middlem2_01_field_c103_anime01
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		30
+
+	//主人公に話し掛けにくる
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,middlem2_01_field_c103_anime03
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_middlem2_01_p05_field_c103
+	_TALK_CLOSE
+
+	//シダケタウンに去っていく
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,mitsuru_01_field_c103_anime04
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,middlem2_01_field_c103_anime05
+	_OBJ_ANIME_WAIT
+
+	_JUMP			mitsuru_01_field_c103_end
+	_END
+
+//左から話し掛け
+site_l_mitsuru_field_c103:
+	//シダケタウンに去っていく
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,mitsuru_01_field_c103_anime03
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,middlem2_01_field_c103_anime02
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		30
+
+	//主人公に話し掛けにくる
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,middlem2_01_field_c103_anime04
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_middlem2_01_p05_field_c103
+	_TALK_CLOSE
+
+	//シダケタウンに去っていく
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,mitsuru_01_field_c103_anime05
+	_SET_OBJ_ANIME	MIDDLEM2_01_FIELD_C103,middlem2_01_field_c103_anime06
+	_OBJ_ANIME_WAIT
+
+	_JUMP			mitsuru_01_field_c103_end
+	_END
+
+//共通終了処理
+mitsuru_01_field_c103_end:
+	//OBJを消す
+	_OBJ_DELETE		MITSURU_01_FIELD_C103
+	_OBJ_DELETE		MIDDLEM2_01_FIELD_C103
+
+	//療養所のミツル・おじさんを出す
+	_FLAG_RESET		FV_MITSURU_01_T106_R0201
+	_FLAG_RESET		FV_MIDDLEM2_01_T106_R0201
+
+	_FLAG_SET		FE_MITSURU_02_FIELD_C103
+	_TALK_END
+	_END
+
+//たたかってください？「はい」
+yes_mitsuru_01_p02_field_c103:
+	_TALK_KEYWAIT	msg_mitsuru_02_06
+
+	//戦闘
+	_TRAINER_EVENT_FIGHT	MITSURU_02,msg_mitsuru_02_07
+
+	//おじさんの方を向く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mitsuru_02_08
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mitsuru_02_09
+
+	//おじさんの方を向く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_middlem2_01_p04_field_c103
+	_RET
+
+//たたかってください？「いいえ」
+no_mitsuru_01_p02_field_c103:
+	_FLAG_SET		FE_MITSURU_01_FIELD_C103
+	_TALK_KEYWAIT	msg_mitsuru_02_04
+	_TALK_OBJ_END
+	_END
+
+//ミツルと一度話した
+ev_mitsuru_01_p02_field_c103:
+	//主人公の方を向く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C103,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_YES_NO	msg_mitsuru_02_05
+	_JUMP			common_mitsuru_01_field_c103
+	_END
+
+//--------------------------------------------------------------------
+//ミツル	シダケタウンに去っていく(下から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_field_c103_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	シダケタウンに去っていく(左から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_field_c103_anime03:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	去っていく(下から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_field_c103_anime04:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	去っていく(左から話し掛け)
+//--------------------------------------------------------------------
+mitsuru_01_field_c103_anime05:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさん		シダケタウンに去っていく(下から話し掛け)
+//--------------------------------------------------------------------
+middlem2_01_field_c103_anime01:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさん		シダケタウンに去っていく(左から話し掛け)
+//--------------------------------------------------------------------
+middlem2_01_field_c103_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさん		話し掛けに近づいてくる(下から話し掛け)
+//--------------------------------------------------------------------
+middlem2_01_field_c103_anime03:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさん		話し掛けに近づいてくる(左から話し掛け)
+//--------------------------------------------------------------------
+middlem2_01_field_c103_anime04:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさん		去っていく(下から話し掛け)
+//--------------------------------------------------------------------
+middlem2_01_field_c103_anime05:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじさん		去っていく(左から話し掛け)
+//--------------------------------------------------------------------
+middlem2_01_field_c103_anime06:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							テッセン								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_tettsusen_01_p01_field_c103
+	_TALK_OBJ_START
+
+	//「技マシン２４」入手していたら
+	_IF_FLAGON_JUMP	FE_WAZAM24_GET,ev_tettsusen_01_p04_field_c103
+
+	//発電機のスイッチを押してから
+	_IFVAL_JUMP		WK_SCENE_CAVE_D1602,EQ,2,ev_tettsusen_01_p03_field_c103
+
+	//「ちかのカギ」入手していたら
+	_IF_FLAGON_JUMP	FE_TIKANOKAGI_GET,ev_tettsusen_01_p02_field_c103
+
+	_TALK_KEYWAIT	msg_tettsusen_01_p01_field_c103
+
+	//「ちかのカギ」入手
+	_ITEM_EVENT		ITEM_TIKANOKAGI,1
+	_FLAG_SET		FE_TIKANOKAGI_GET
+
+	_TALK_KEYWAIT	msg_tettsusen_01_p02_field_c103
+	_TALK_OBJ_END
+	_END
+
+//「ちかのカギ」入手している
+ev_tettsusen_01_p02_field_c103:
+	_TALK_KEYWAIT	msg_tettsusen_01_p02_field_c103
+	_TALK_OBJ_END
+	_END
+
+//発電機のスイッチを押している
+ev_tettsusen_01_p03_field_c103:
+	_TALK_KEYWAIT	msg_tettsusen_01_p03_field_c103
+
+	//「技マシン２４」入手
+	_ITEM_EVENT		ITEM_WAZAMASIN24,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM24_GET
+
+	_TALK_KEYWAIT	msg_tettsusen_01_p04_field_c103
+	_TALK_OBJ_END
+	_END
+
+//「技マシン２４」入手している
+ev_tettsusen_01_p04_field_c103:
+	_TALK_KEYWAIT	msg_tettsusen_01_p04_field_c103
+	_TALK_OBJ_END
+	_END
+
+

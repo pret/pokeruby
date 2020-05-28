@@ -1,0 +1,67 @@
+// ●キナギタウン　民家４（街の北西）
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t107_r0401
+msg_woman1_01_p01_t107_r0401:
+	.byte	HO_,U_,E_,N_,no_,spc_,so_,ra_,ta_,ka_,ku_,wo_,spc_,to_,n_,de_,i_,ku_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mi_,ta_,gyoe_,spc_,ttu_,te_,spc_,hi_,to_,ga_,spc_,i_,ru_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	zu_,ttu_,to_,spc_,to_,bi_,ma_,wa_,ttu_,te_,spc_,i_,ru_,no_,ka_,si_,ra_,hate_
+	.byte	CR_
+	.byte	do_,ko_,ka_,de_,spc_,ya_,su_,n_,da_,ri_,spc_,si_,so_,u_,da_,ke_,do_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_t107_r0401
+msg_ojyou2_01_p01_t107_r0401:
+	.byte	o_,so_,ra_,no_,spc_,PO_,KE_,MO_,N_,gyoe_
+	.byte	CR_
+	.byte	o_,so_,ra_,no_,spc_,PO_,KE_,MO_,N_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_t107_r0401
+msg_boy1_01_p01_t107_r0401:
+	.byte	ki_,mi_,spc_,do_,ko_,ka_,ra_,spc_,ki_,ta_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_boy1_01_p02_t107_r0401:
+// ●「いいえ」→msg_boy1_01_p03_t107_r0401:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p02_t107_r0401
+msg_boy1_01_p02_t107_r0401:
+	.byte	ha_,i_,tenten_,tenten_,hate_
+	.byte	CR_
+	.byte	HA_,I_,tenten_,spc_,TA_,U_,N_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ra_,na_,i_,na_,aa_,spc_,so_,n_,na_,spc_,ma_,ti_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p03_t107_r0401
+msg_boy1_01_p03_t107_r0401:
+	.byte	i_,i_,e_,spc_,ttu_,te_,spc_,so_,n_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	do_,ko_,ka_,ra_,mo_,spc_,ki_,te_,na_,i_,spc_,ha_,zu_,ga_,spc_,na_,i_,de_,si_,yyo_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,spc_,ma_,sa_,ka_,spc_,ki_,mi_,tenten_,tenten_
+	.byte	CR_
+	.byte	u_,mi_,no_,spc_,so_,ko_,de_,spc_,u_,ma_,re_,ta_,spc_,to_,ka_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

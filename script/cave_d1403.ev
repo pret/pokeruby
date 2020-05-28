@@ -1,0 +1,56 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d1403.ev
+//
+//============================================ 
+
+/* ダミーデータです */
+
+EVENT_DATA_START	cave_d1403_event_data
+BG_CHANGE_LABEL		bg_change_cave_d1403
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_cave_d1403:
+	//しおをセットする
+	_CALL			bg_chg_03_sio
+	_END
+
+//しおをセットする
+bg_chg_03_sio:
+	_IF_FLAGON_JUMP	FV_SIO_03_ASASE,bg_chg_03_sio_end
+	_SET_CELL		11,11,856,1
+	_RET
+
+bg_chg_03_sio_end:
+	_RET
+
+
+/********************************************************************/
+//								しお	
+/********************************************************************/
+SCRIPT_LABEL	ev_sio_03_asase
+	_TALK_START
+	
+	//すでにアイテムを貰っていたら
+	_IF_FLAGON_JUMP	FV_SIO_03_ASASE,get_sio_03_asase
+
+	_ITEM_EVENT		ITEM_ASASENOSIO,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_SET_CELL		11,11,858,0
+	_PROGRAM		MAKE_MAP_BG
+	_FLAG_SET		FV_SIO_03_ASASE
+	_TALK_END
+	_END
+
+
+//すでにアイテムを貰っている
+get_sio_03_asase:
+	_TALK_KEYWAIT		msg_salt_01_p01_cave_d1404
+	_TALK_END
+	_END
+

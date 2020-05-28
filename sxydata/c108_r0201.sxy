@@ -1,0 +1,79 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_C108_R0201	2
+#define EXITNUM_C108_R0201	2
+#define POSNUM_C108_R0201	0
+#define BGNUM_C108_R0201	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_fighter1_01_p01_c108_r0201[];
+extern const u8	ev_kakureon_01_p01_c108_r0201[];
+
+const evObjData	OBJ_c108_r0201[] =
+{
+	{
+		FIGHTER1_01_C108_R0201,		//OBJ ID
+		FIGHTER1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_fighter1_01_p01_c108_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		KAKUREON_01_C108_R0201,		//OBJ ID
+		KAKUREON,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_kakureon_01_p01_c108_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c108_r0201[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		FIELD_C108_DOOR05,		//Door ID
+		FIELD_C108,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		FIELD_C108_DOOR05,		//Door ID
+		FIELD_C108,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c108_r0201_sxy_data =
+{
+OBJNUM_C108_R0201,			// field obj max
+EXITNUM_C108_R0201,		// exit max
+POSNUM_C108_R0201,			// pos event max
+BGNUM_C108_R0201,			// bg event max
+OBJ_c108_r0201,			// field obj data
+EXIT_c108_r0201,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

@@ -1,0 +1,140 @@
+//====================================================================
+//						c106_r0901
+//						ミナモ・r0901
+//						LOCALWORK1使用
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r0901_event_data
+FLAG_CHANGE_LABEL	flag_change_c106_r0901
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c106_r0901:
+	_GET_RND		4
+	_LDWK			LOCALWORK1,ANSWORK
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							おばさん１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew1_01_p01_c106_r0901
+	_TALK_OBJ_START
+	
+	_TALK_YES_NO	msg_middlew1_01_p01_c106_r0901
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_middlew1_01_p01_c106_r0901
+
+	_TALK_KEYWAIT	msg_middlew1_01_p03_c106_r0901
+	_TALK_CLOSE
+
+	//元の向きに向きなおす
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_middlew1_01_p01_c106_r0901:
+	_TALK_KEYWAIT	msg_middlew1_01_p02_c106_r0901
+	_TALK_CLOSE
+
+	//元の向きに向きなおす
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							おじさん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem2_01_p01_c106_r0901
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_middlem2_01_p01_c106_r0901
+	_TALK_CLOSE
+
+	//元の向きに向きなおす
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+	
+
+/********************************************************************/
+/*							アドバンス少年							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_agboy1_01_p01_c106_r0901
+	_TALK_OBJ_START
+	_SWITCH		LOCALWORK1
+	_CASEJUMP	0,agboy1_mes_01_c106_r0901
+	_CASEJUMP	1,agboy1_mes_02_c106_r0901
+	_CASEJUMP	2,agboy1_mes_03_c106_r0901
+	_CASEJUMP	3,agboy1_mes_04_c106_r0901
+	_END
+
+SCRIPT_LABEL	ev_agboy1_02_p01_c106_r0901
+	_TALK_OBJ_START
+	_SWITCH		LOCALWORK1
+	_CASEJUMP	0,agboy1_mes_01_c106_r0901
+	_CASEJUMP	1,agboy1_mes_02_c106_r0901
+	_CASEJUMP	2,agboy1_mes_03_c106_r0901
+	_CASEJUMP	3,agboy1_mes_04_c106_r0901
+	_END
+
+SCRIPT_LABEL	ev_agboy1_03_p01_c106_r0901
+	_TALK_OBJ_START
+	_SWITCH		LOCALWORK1
+	_CASEJUMP	0,agboy1_mes_01_c106_r0901
+	_CASEJUMP	1,agboy1_mes_02_c106_r0901
+	_CASEJUMP	2,agboy1_mes_03_c106_r0901
+	_CASEJUMP	3,agboy1_mes_04_c106_r0901
+	_END
+
+SCRIPT_LABEL	ev_agboy1_04_p01_c106_r0901
+	_TALK_OBJ_START
+	_SWITCH		LOCALWORK1
+	_CASEJUMP	0,agboy1_mes_01_c106_r0901
+	_CASEJUMP	1,agboy1_mes_02_c106_r0901
+	_CASEJUMP	2,agboy1_mes_03_c106_r0901
+	_CASEJUMP	3,agboy1_mes_04_c106_r0901
+	_END
+
+//メッセージ１
+agboy1_mes_01_c106_r0901:
+	_TALK_KEYWAIT	msg_agboy1_01_p01_c106_r0901
+	_TALK_OBJ_END
+	_END
+
+//メッセージ２
+agboy1_mes_02_c106_r0901:
+	_TALK_KEYWAIT	msg_agboy1_01_p02_c106_r0901
+	_TALK_OBJ_END
+	_END
+
+//メッセージ３
+agboy1_mes_03_c106_r0901:
+	_TALK_KEYWAIT	msg_agboy1_01_p03_c106_r0901
+	_TALK_OBJ_END
+	_END
+
+//メッセージ４
+agboy1_mes_04_c106_r0901:
+	_TALK_KEYWAIT	msg_agboy1_01_p04_c106_r0901
+	_TALK_OBJ_END
+	_END
+
+
+

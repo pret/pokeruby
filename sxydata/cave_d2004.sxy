@@ -1,0 +1,117 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D2004	0
+#define EXITNUM_CAVE_D2004	1
+#define POSNUM_CAVE_D2004	0
+#define BGNUM_CAVE_D2004	9
+
+//BG_SCRIPT
+extern const u8	ev_tenji_01_p01_cave_d2004[];
+extern const u8	ev_tenji_02_p01_cave_d2004[];
+extern const u8	ev_tenji_03_p01_cave_d2004[];
+extern const u8	ev_tenji_04_p01_cave_d2004[];
+extern const u8	ev_tenji_05_p01_cave_d2004[];
+extern const u8	ev_tenji_06_p01_cave_d2004[];
+extern const u8	ev_tenji_07_p01_cave_d2004[];
+extern const u8	ev_tenji_01_p01_cave_d2004[];
+extern const u8	ev_tenji_01_p01_cave_d2004[];
+
+const SXY_CONNECT	EXIT_cave_d2004[] =
+{
+	{
+		0x000a,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		CAVE_D2003_DOOR01,		//Door ID
+		CAVE_D2003,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_cave_d2004[] =
+{
+	{
+		0x000a,		//Xpos
+		0x0004,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_02_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_03_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x000d,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_04_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x0010,		//Xpos
+		0x000d,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_05_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0012,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_06_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0012,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_07_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x0009,		//Xpos
+		0x0004,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2004,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0004,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d2004,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d2004_sxy_data =
+{
+OBJNUM_CAVE_D2004,			// field obj max
+EXITNUM_CAVE_D2004,		// exit max
+POSNUM_CAVE_D2004,			// pos event max
+BGNUM_CAVE_D2004,			// bg event max
+NULL,			// field obj data
+EXIT_cave_d2004,			// exit data
+NULL,			// pos event data
+BG_cave_d2004,				// bg event data
+};

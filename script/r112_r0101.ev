@@ -1,0 +1,146 @@
+//====================================================================
+//							r112_r0101
+//						ロープウェイ乗り場
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	r112_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_r112_R0101
+SP_SCRIPT_LABEL		scene_r112_r0101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r112_R0101:
+		//		穴抜け先に無条件でこの乗り場からでた位置をセットする(マップ表示の座標のため)
+		//		ただしこの値をセットすることは意味として間違っているわけでは
+		//		ないので他の問題はないはず
+	_SET_ESCAPE_MAP_ID	FIELD, FIELD_R112, 0x1c, 0x1c
+
+	//降りてきた時は配置をかえる
+	_IFVAL_CALL		WK_SCENE_ROPEWAY,EQ,2,flag_chg_ropeway_down
+	_END
+
+//配置を変える
+flag_chg_ropeway_down:
+	_SXY_POS_CHANGE		WORKERW2_01_R112_R0101,7,4
+	_SXY_SITE_CHANGE	WORKERW2_01_R112_R0101,MV_LEFT
+	_RET
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_r112_r0101:
+	//上から降りてきた
+	SP_SCRIPT_DATA	WK_SCENE_ROPEWAY,2,ev_scene_ropeway_down
+	SP_SCRIPT_END
+
+//上から降りてきた
+ev_scene_ropeway_down:
+	_TALK_START
+
+	//降りる
+	_SET_OBJ_ANIME	EV_OBJ_SPID,ev_hero_01_r112_r0101_anime02
+	_SET_OBJ_ANIME	WORKERW2_01_R112_R0101,ev_workerw2_01_r112_r0101_anime02
+	_OBJ_ANIME_WAIT 
+
+	_LDVAL			WK_SCENE_ROPEWAY,0
+
+	//スクロールして消えた時用
+	_SXY_POS_CHANGE		WORKERW2_01_R112_R0101,6,7
+	_SXY_SITE_CHANGE	WORKERW2_01_R112_R0101,MV_DOWN
+
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							受け付け	
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_r112_r0101
+	_TALK_OBJ_START
+
+	//上りロープウエィを利用する？
+	_TALK_YES_NO	msg_workerw2_01_p01_r112_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_workerw2_01_p02_r112_r0101	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_workerw2_01_p03_r112_r0101	//「いいえ」
+	_END
+
+//「はい」
+yes_workerw2_01_p02_r112_r0101:
+	_TALK_KEYWAIT	msg_workerw2_01_p02_r112_r0102
+
+	_TALK_CLOSE
+
+	//案内する
+	_SET_OBJ_ANIME	WORKERW2_01_R112_R0101,ev_workerw2_01_r112_r0101_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,ev_hero_01_r112_r0101_anime01
+	_OBJ_ANIME_WAIT 
+
+	_LDVAL			PARAM0,0						//上り
+	_LDVAL			WK_SCENE_ROPEWAY,1
+	_INC_RECORD		CNT_ROPEWAY						//ロープウェイに乗った回数をカウント
+	_PROGRAM		SET_ROPEWAY_ID					//移動先のマップ
+	_PROGRAM		ROPEWAY_START
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_workerw2_01_p03_r112_r0101:
+	_TALK_KEYWAIT	msg_workerw2_01_p03_r112_r0101
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//受け付け	案内する
+//--------------------------------------------------------------------
+ev_workerw2_01_r112_r0101_anime01:
+	//.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//受け付け	降りる
+//--------------------------------------------------------------------
+ev_workerw2_01_r112_r0101_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	//.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	案内する
+//--------------------------------------------------------------------
+ev_hero_01_r112_r0101_anime01:
+	//.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	降りる
+//--------------------------------------------------------------------
+ev_hero_01_r112_r0101_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+

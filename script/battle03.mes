@@ -1,0 +1,110 @@
+// ●「山男　052」戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p01_field_r999
+msg_hill1_01_p01_field_r999:
+	.byte	ke_,wa_,si_,i_,spc_,ya_,ma_,no_,na_,ka_,de_,spc_,ta_,yo_,re_,ru_,no_,ha_
+	.byte	CR_
+	.byte	zi_,bu_,n_,spc_,hi_,to_,ri_,da_,ke_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,a_,gyoe_,spc_,da_,i_,si_,ze_,n_,no_,spc_,na_,ka_,de_
+	.byte	CR_
+	.byte	se_,i_,se_,i_,spc_,do_,u_,do_,u_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,yo_,u_,gyoe_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●「山男　052」敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p02_field_r999
+msg_hill1_01_p02_field_r999:
+	.byte	so_,u_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,bu_,n_,spc_,hi_,to_,ri_,spc_,zi_,yya_,na_,ku_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,i_,ta_,n_,da_,ttu_,ke_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●「山男　052」戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p03_field_r999
+msg_hill1_01_p03_field_r999:
+	.byte	PO_,KE_,MO_,N_,to_,spc_,te_,wo_,spc_,to_,ri_,a_,e_,ba_
+	.byte	CR_
+	.byte	do_,n_,na_,ni_,spc_,ke_,wa_,si_,i_,spc_,ya_,ma_,mo_,spc_,no_,bo_,re_,ru_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// 
+// ●「つりびと　047」戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p01_field_r999
+msg_fishing1_01_p01_field_r999:
+	.byte	ki_,yyo_,u_,ha_,spc_,sa_,ttu_,pa_,ri_,spc_,tu_,re_,na_,i_,na_,aa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	te_,bu_,ra_,zi_,yya_,spc_,ka_,e_,re_,na_,i_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	bo_,ku_,to_,spc_,hi_,to_,si_,yyo_,u_,bu_,spc_,si_,te_,i_,ttu_,te_,spc_,o_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●「つりびと　047」敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p02_field_r999
+msg_fishing1_01_p02_field_r999:
+	.byte	mu_,mu_,uu_,tenten_,tenten_
+	.byte	CR_
+	.byte	ki_,yyo_,u_,ha_,spc_,si_,o_,no_,spc_,ka_,ge_,n_,ga_,spc_,wa_,ru_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●「つりびと　047」戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p03_field_r999
+msg_fishing1_01_p03_field_r999:
+	.byte	sa_,ttu_,ki_,spc_,ni_,ga_,si_,ta_,spc_,o_,o_,mo_,no_,wo_
+	.byte	CR_
+	.byte	tu_,ri_,a_,ge_,te_,spc_,i_,re_,ba_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ni_,spc_,ka_,te_,ta_,spc_,ha_,zu_,spc_,na_,n_,da_,ke_,do_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// 
+// ●「おとなのおねえさん　042」戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_field_r999
+msg_workerw2_01_p01_field_r999:
+	.byte	KA_,RE_,SI_,ni_,spc_,mo_,ra_,ttu_,ta_,spc_,ko_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,ku_,ra_,i_,spc_,tu_,yo_,i_,no_,ka_
+	.byte	CR_
+	.byte	ta_,si_,ka_,me_,spc_,sa_,se_,te_,spc_,ti_,yyo_,u_,da_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●「おとなのおねえさん　042」敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_field_r999
+msg_workerw2_01_p02_field_r999:
+	.byte	e_,bou_,spc_,ga_,ttu_,ka_,ri_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// ●「おとなのおねえさん　042」戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_field_r999
+msg_workerw2_01_p03_field_r999:
+	.byte	a_,ta_,ra_,si_,i_,spc_,KA_,RE_,SI_,de_,mo_,spc_,sa_,ga_,so_,ttu_,ka_,na_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 
+// 

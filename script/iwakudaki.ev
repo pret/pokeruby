@@ -1,0 +1,100 @@
+@===================================================================
+@
+@	秘伝技・岩砕きのスクリプト
+@
+@	2002/02/21 by nakahiro
+@===================================================================
+
+	.GLOBAL	talk_iwakudaki_obj
+	.GLOBAL	pokelist_iwakudaki_sutart
+
+//---------------------------------------------------------------
+//	話かけから
+//---------------------------------------------------------------
+talk_iwakudaki_obj:
+	
+	_TALK_START
+
+	// バッジを持っていない
+	_IF_FLAGOFF_JUMP	SYS_BATCH03_GET, iwa_no_poke
+
+	// 岩砕きを使えるポケモンがいるか
+	_WAZA_CHECK	WAZANO_IWAKUDAKI
+	_IFVAL_JUMP	ANSWORK, EQ, 6, iwa_no_poke		//「いいえ」
+	_SET_FE_WORK	0, ANSWORK
+
+	_GET_NICKNAME	0, ANSWORK
+	_GET_WAZANAME	1, WAZANO_IWAKUDAKI
+
+	// 岩砕きを使うか
+	_TALK_YES_NO	fe_iwa_msg00
+	_IFVAL_JUMP	ANSWORK, EQ, 0, talk_iwa_end	//「いいえ」
+
+	_TALK_KEYWAIT	fe_iai_msg01
+	_TALK_CLOSE
+
+	_SET_FLD_EFF	37
+
+	_STOP_SCRIPT
+	_JUMP	iwa_obj_del
+
+	_END
+
+//---------------------------------------------------------------
+//	ポケモンリストから
+//---------------------------------------------------------------
+pokelist_iwakudaki_sutart:
+
+	_TALK_START
+
+	_SET_FLD_EFF	37
+
+	_STOP_SCRIPT
+	_JUMP	iwa_obj_del
+
+	_END
+
+//---------------------------------------------------------------
+//	岩を消去
+//---------------------------------------------------------------
+iwa_obj_del:
+
+	_SET_OBJ_ANIME	TARGET_OBJ, iwa_obj_anim
+	_OBJ_ANIME_WAIT	
+
+	_OBJ_DELETE		TARGET_OBJ
+
+	//カナシダトンネルだったらシーンを切り替える
+	_FUNC_CALL		ANSWORK,CHK_KANASIDA_IWA
+	_IFVAL_JUMP		ANSWORK, EQ, TRUE, iwa_obj_del_end	// エンカウント無し
+
+	_PROGRAM		IWA_ENCOUNT
+	_IFVAL_JUMP	ANSWORK, EQ, 0, iwa_obj_del_end	// エンカウント無し
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+iwa_obj_del_end:
+	_TALK_END
+	_END
+
+iwa_obj_anim:
+	.byte	AC_ROCK_CRUSH
+	.byte	ACMD_END
+
+//---------------------------------------------------------------
+//	岩砕きを使えるポケモンがいない
+//---------------------------------------------------------------
+iwa_no_poke:
+	_EASY_MSG	fe_iwa_msg02
+	_TALK_END
+	_END
+
+//---------------------------------------------------------------
+//	終了
+//---------------------------------------------------------------
+talk_iwa_end:
+	_TALK_CLOSE
+	_TALK_END
+	_END

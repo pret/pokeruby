@@ -1,0 +1,185 @@
+//====================================================================
+//
+//							ＴＶ企画
+//
+//====================================================================
+
+//====================================================================
+//
+//							TV放送
+//
+//====================================================================
+SCRIPT_LABEL	ev_tv_broadcast_start
+	_TALK_START
+
+	//記録カウントアップ
+	_INC_RECORD		CNT_TV_WATCH
+
+	//初期化
+	_PROGRAM		TV_BROADCAST_INIT
+
+	//自宅TVが見れるか
+	_FUNC_CALL		ANSWORK,CHK_HOME_TV
+	_IFVAL_JUMP		ANSWORK,EQ,2,_home_tv_start				//自宅TVが見れる
+	_IFVAL_JUMP		ANSWORK,EQ,1,_home_tv_move_poke_start	//自宅TV移動ポケモンニュースが見れる
+
+	//TV放送許可フラグが立っているか(キンセツシティ到着時)
+	_IF_FLAGOFF_JUMP	SYS_TV_START,_tv_nostart
+
+	//部屋に入ってからTV見たか
+	_IF_FLAGON_JUMP		SYS_TV_WATCH,_tv_nostart
+
+	//インタビュアー＆カメラマンを放送できるか
+	_FUNC_CALL		ANSWORK,CHK_TV_CAMERA
+	_IFVAL_JUMP		ANSWORK,EQ,1,_camera_go
+
+	_JUMP			_cm_go					//TV放送(CM)
+	_END
+
+
+/********************************************************************/
+//
+//				TV放送スタート(データタイプを調べる)
+//
+//	PARAM0	放送出来るＴＶデータの要素数
+/********************************************************************/
+_tv_go:
+	//放送出来るＴＶデータが存在するかチェック
+	_FUNC_CALL		PARAM0,CHK_TV_WATCH_FLAG
+	//_IFVAL_JUMP		PARAM0,EQ,TV_NOTHING,_end_type1	//TV放送しない
+
+	//ここの処理に入る時は、
+	//部屋に入る時に放送できるデータがある！！ということなので、
+	//ここでＴＶ放送がないということは部屋内でＣＭデータが消えた
+	//ということになるので、ＴＶは点滅しているが放送がないので
+	//パパママ放送後にＴＶセルを戻すようにする
+	_IFVAL_JUMP		PARAM0,EQ,TV_NOTHING,_end_type2		//TV放送しない2
+
+	//大量発生していて、大量発生を放送しようとしていたときに
+	//要素数変更する、もしくは放送しない
+	_FUNC_CALL		ANSWORK,CHK_GENERATING
+	//_IFVAL_JUMP		ANSWORK,EQ,TV_NOTHING,_end_type1	//TV放送しない
+
+	//大量発生していて、ＣＭ１つもっていて、大量発生がもう１つあった時に、
+	//ＣＭがなくなると、この処理に入るのでパパママ放送後にＴＶセルを戻すようにする
+	_IFVAL_JUMP		ANSWORK,EQ,TV_NOTHING,_end_type2	//TV放送しない
+	_LDWK			PARAM0,ANSWORK
+
+	//PARAM0の場所のデータタイプを取得
+	_FUNC_CALL		ANSWORK,GET_TV_TYPE
+	_IFVAL_JUMP		ANSWORK,NE,TV_NODATA_TYPE1,_tv_broadcast_type1
+	_END
+
+//--------------------------------------------------------------------
+//TV放送なし
+//--------------------------------------------------------------------
+_tv_nostart:
+	_PROGRAM		SET_TV_PAPAMAMA
+	_TALK_KEYWAIT	msg_TV_test01	//「○○の好きそうな番組が・・・」
+	_PROGRAM		RETURN_TVCELL	//TVのセルを元に戻す
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//
+//							自宅TVが見れる
+//
+/********************************************************************/
+_home_tv_start:
+	_TALK_KEYWAIT	msg_terebi1_01_p02_t101_r0101
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//
+//					移動ポケモンニュースが流れている
+//
+/********************************************************************/
+_home_tv_move_poke_start:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_terebi1_01_p03_t101_r0101s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_terebi1_01_p03_t101_r0101r
+#endif
+
+	_PROGRAM		ADD_MOVE_POKE
+	_FLAG_RESET		SYS_MOVE_POKE_NEWS
+
+	//移動ポケモンニュースを一度見た
+	_FLAG_SET		FE_MOVE_POKE_WATCH
+	_PROGRAM		RETURN_TVCELL		//TVのセルを元に戻す
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//
+//						共通放送処理
+//
+/********************************************************************/
+_tv_broadcast_type1:
+	_PROGRAM		TV_BROADCAST
+	_TALK_WAIT
+	_AB_KEYWAIT
+
+	_IFVAL_JUMP		ANSWORK,NE,1,_tv_broadcast_type1
+
+	_JUMP			_end_type1
+	_END
+
+
+/********************************************************************/
+//
+//						共通終了処理
+//
+/********************************************************************/
+_end_type1:
+	_PROGRAM		RETURN_TVCELL		//TVのセルを元に戻す
+	_FLAG_SET		SYS_TV_WATCH		//一度ＴＶを見た
+	_TALK_END
+	_END
+
+/********************************************************************/
+//
+//						共通終了処理2
+//
+//				部屋内でＣＭデータが消えた時に
+//			パパママ放送後にＴＶセルを戻すようにする
+/********************************************************************/
+_end_type2:
+	_PROGRAM		SET_TV_PAPAMAMA
+	_TALK_KEYWAIT	msg_TV_test01	//「○○の好きそうな番組が・・・」
+	_JUMP			_end_type1
+	_END
+
+/********************************************************************/
+//
+//				CM放送スタート(データタイプを調べる)
+//
+/********************************************************************/
+_cm_go:
+	_PROGRAM		CM_BROADCAST
+	_IFVAL_JUMP		ANSWORK,EQ,0,_tv_go		//CM放送なし
+
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_JUMP			_end_type1
+	_END
+
+
+/********************************************************************/
+//
+//				インタビュアー＆カメラマン放送スタート
+//
+/********************************************************************/
+_camera_go:
+	_PROGRAM		CAMERA_BROADCAST
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_IFVAL_JUMP		ANSWORK,EQ,0,_camera_go
+	_JUMP			_end_type1
+	_END
+
+

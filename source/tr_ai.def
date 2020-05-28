@@ -1,0 +1,1105 @@
+
+@======================================================
+@	tr_ai.def
+@======================================================
+
+	.text
+	.code 32
+
+@======================================================
+@	extern宣言
+@======================================================
+
+@======================================================
+@	AIの動作シーケンス命令macro
+@======================================================
+
+	.MACRO	INIT_CMD
+DEF_CMD_COUNT	=	0
+	.ENDM
+
+	.MACRO	DEF_CMD	symname
+\symname	=	DEF_CMD_COUNT
+DEF_CMD_COUNT 	=	(DEF_CMD_COUNT + 1)
+	.ENDM
+
+	INIT_CMD
+@ランダム分岐
+	DEF_CMD		AI_IF_RND_UNDER
+	DEF_CMD		AI_IF_RND_OVER
+	DEF_CMD		AI_IF_RND_EQUAL
+	DEF_CMD		AI_IFN_RND_EQUAL
+
+@ポイント加減算
+	DEF_CMD		AI_INCDEC
+
+@HPでの分岐
+	DEF_CMD		AI_IF_HP_UNDER
+	DEF_CMD		AI_IF_HP_OVER
+	DEF_CMD		AI_IF_HP_EQUAL
+	DEF_CMD		AI_IFN_HP_EQUAL
+
+@状態異常をチェック
+	DEF_CMD		AI_IF_COND
+	DEF_CMD		AI_IFN_COND
+	DEF_CMD		AI_IF_COND2
+	DEF_CMD		AI_IFN_COND2
+	DEF_CMD		AI_IF_WAZAKOUKA
+	DEF_CMD		AI_IFN_WAZAKOUKA
+	DEF_CMD		AI_IF_SIDE_CONDITION
+	DEF_CMD		AI_IFN_SIDE_CONDITION
+
+@計算結果による分岐
+	DEF_CMD		AI_IF_UNDER
+	DEF_CMD		AI_IF_OVER
+	DEF_CMD		AI_IF_EQUAL
+	DEF_CMD		AI_IFN_EQUAL
+
+@計算結果による分岐
+	DEF_CMD		AI_IF_UNDER_ADRS
+	DEF_CMD		AI_IF_OVER_ADRS
+	DEF_CMD		AI_IF_EQUAL_ADRS
+	DEF_CMD		AI_IFN_EQUAL_ADRS
+
+@技ナンバーのチェック
+	DEF_CMD		AI_IF_WAZANO
+	DEF_CMD		AI_IFN_WAZANO
+
+@テーブル参照による分岐
+	DEF_CMD		AI_IF_TABLE_1BYTE_JUMP
+	DEF_CMD		AI_IFN_TABLE_1BYTE_JUMP
+	DEF_CMD		AI_IF_TABLE_2BYTE_JUMP
+	DEF_CMD		AI_IFN_TABLE_2BYTE_JUMP
+
+@自分がダメージ技を持っているか判断して分岐
+	DEF_CMD		AI_IF_HAVE_DAMAGE_WAZA
+	DEF_CMD		AI_IFN_HAVE_DAMAGE_WAZA
+
+@ターンのチェック
+	DEF_CMD		AI_CHECK_TURN
+
+@タイプのチェック
+	DEF_CMD		AI_CHECK_TYPE
+
+@攻撃技かどうかのチェック
+	DEF_CMD		AI_CHECK_IRYOKU
+
+@威力が一番高いかのチェック
+	DEF_CMD		AI_COMP_POWER
+
+@前のターンに使った技のチェック
+	DEF_CMD		AI_CHECK_LAST_WAZA
+
+@格納された技のタイプチェック
+	DEF_CMD		AI_IF_WAZA_TYPE
+	DEF_CMD		AI_IFN_WAZA_TYPE
+
+@どちらが先行かのチェック
+	DEF_CMD		AI_IF_FIRST
+	DEF_CMD		AI_IFN_FIRST
+
+@持っている技のオールチェックループ
+	DEF_CMD		AI_ALL_WAZA_CHECK
+	DEF_CMD		AI_WAZA_LOOP
+
+@控えが何体いるかのチェック
+	DEF_CMD		AI_CHECK_BENCH_COUNT
+
+@現在の技ナンバーのチェック
+	DEF_CMD		AI_CHECK_WAZANO
+
+@現在の技ナンバーのシーケンスナンバーのチェック
+	DEF_CMD		AI_CHECK_WAZASEQNO
+
+@特殊能力のチェック
+	DEF_CMD		AI_CHECK_TOKUSEI
+
+@自分と相手の相性チェック
+	DEF_CMD		AI_CHECK_AISYOU
+	DEF_CMD		AI_CHECK_WAZA_AISYOU
+
+@格納された技が強い技かどうかチェック
+	DEF_CMD		AI_IF_WAZA_STRONG
+	DEF_CMD		AI_IFN_WAZA_STRONG
+
+@控えの状態チェック
+	DEF_CMD		AI_IF_BENCH_COND
+	DEF_CMD		AI_IFN_BENCH_COND
+
+@天候チェック
+	DEF_CMD		AI_CHECK_WEATHER
+
+@技のシーケンスナンバーをチェックして、分岐
+	DEF_CMD		AI_IF_WAZA_SEQNO_JUMP
+	DEF_CMD		AI_IFN_WAZA_SEQNO_JUMP
+
+@自分や相手のパラメータ変化値を参照して分岐
+	DEF_CMD		AI_IF_PARA_UNDER
+	DEF_CMD		AI_IF_PARA_OVER
+	DEF_CMD		AI_IF_PARA_EQUAL
+	DEF_CMD		AI_IFN_PARA_EQUAL
+
+@技のダメージ計算をして相手が瀕死になるかチェック
+	DEF_CMD		AI_IF_WAZA_HINSHI
+	DEF_CMD		AI_IFN_WAZA_HINSHI
+
+@特定の技を持っているかのチェックをして分岐
+	DEF_CMD		AI_IF_HAVE_WAZA
+	DEF_CMD		AI_IFN_HAVE_WAZA
+
+@特定の技シーケンスを持っているかのチェックをして分岐
+	DEF_CMD		AI_IF_HAVE_WAZA_SEQNO
+	DEF_CMD		AI_IFN_HAVE_WAZA_SEQNO
+
+@ポケモンの状態をチェックをして分岐
+	DEF_CMD		AI_IF_POKE_CHECK_STATE
+
+@技の状態をチェックをして分岐
+	DEF_CMD		AI_IF_WAZA_CHECK_STATE
+
+@にげるをせんたく
+	DEF_CMD		AI_ESCAPE
+
+@サファリゾーンでの逃げる確率を計算して逃げるときのアドレスを指定
+	DEF_CMD		AI_SAFARI_ESCAPE_JUMP
+
+@サファリゾーンでの特殊アクションを選択
+	DEF_CMD		AI_SAFARI
+
+@装備アイテムのチェック
+	DEF_CMD		AI_CHECK_SOUBIITEM
+
+@ポケモンの性別のチェック
+	DEF_CMD		AI_CHECK_POKESEX
+
+@ねこだましカウンタのチェック
+	DEF_CMD		AI_CHECK_NEKODAMASI
+
+@たくわえるカウンタのチェック
+	DEF_CMD		AI_CHECK_TAKUWAERU
+
+@戦闘タイプのチェック
+	DEF_CMD		AI_CHECK_FIGHT_TYPE
+
+@リサイクルできるアイテムのチェック
+	DEF_CMD		AI_CHECK_RECYCLE_ITEM
+
+@ワークに入っている技ナンバーのタイプをチェック
+	DEF_CMD		AI_CHECK_WORKWAZA_TYPE
+
+@ワークに入っている技ナンバーの威力をチェック
+	DEF_CMD		AI_CHECK_WORKWAZA_POW
+
+@ワークに入っている技ナンバーのシーケンスナンバーをチェック
+	DEF_CMD		AI_CHECK_WORKWAZA_SEQNO
+
+@まもるカウンタをチェック
+	DEF_CMD		AI_CHECK_MAMORU_COUNT
+
+@格納アドレスに値を入れる
+	DEF_CMD		AI_SET_VALUE
+	DEF_CMD		AI_SET_WORK
+	DEF_CMD		AI_ADD_VALUE
+	DEF_CMD		AI_ADD_WORK
+	DEF_CMD		AI_SUB_VALUE
+	DEF_CMD		AI_SUB_WORK
+
+@汎用的な命令
+	DEF_CMD		AI_GOSUB
+	DEF_CMD		AI_JUMP
+	DEF_CMD		AI_AIEND
+
+@お互いのレベルをチェックして分岐
+	DEF_CMD		AI_IF_LEVEL
+
+@挑発状態かチェックして分岐
+	DEF_CMD		AI_IF_CHOUHATSU
+	DEF_CMD		AI_IFN_CHOUHATSU
+
+@------------------------------------------------------------
+@
+@	ランダム分岐
+@
+@	value:比較する値
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_RND_UNDER		value,adrs
+	.byte		AI_IF_RND_UNDER
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_RND_OVER			value,adrs
+	.byte		AI_IF_RND_OVER
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_RND_EQUAL		value,adrs
+	.byte		AI_IF_RND_EQUAL
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IFN_RND_EQUAL		value,adrs
+	.byte		AI_IFN_RND_EQUAL
+	.byte		\value
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	ポイント加減算
+@
+@	value:加減算する値
+@
+@------------------------------------------------------------
+
+	.macro		INCDEC				value
+	.byte		AI_INCDEC
+	.byte		\value
+	.endm
+
+@------------------------------------------------------------
+@
+@	HPでの分岐
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	value:比較する値
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_HP_UNDER			side,value,adrs
+	.byte		AI_IF_HP_UNDER
+	.byte		\side
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_HP_OVER			side,value,adrs
+	.byte		AI_IF_HP_OVER
+	.byte		\side
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_HP_EQUAL			side,value,adrs
+	.byte		AI_IF_HP_EQUAL
+	.byte		\side
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IFN_HP_EQUAL			side,value,adrs
+	.byte		AI_IFN_HP_EQUAL
+	.byte		\side
+	.byte		\value
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	状態異常をチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	condition:比較する値（server.defに定義）
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+@CONDITION_～系のチェック
+	.macro		IF_COND				side,condition,adrs
+	.byte		AI_IF_COND
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+	.macro		IFN_COND			side,condition,adrs
+	.byte		AI_IFN_COND
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+@CONDITION2_～系のチェック
+	.macro		IF_COND2			side,condition,adrs
+	.byte		AI_IF_COND2
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+	.macro		IFN_COND2			side,condition,adrs
+	.byte		AI_IFN_COND2
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+@WAZAKOUKA_～系のチェック
+	.macro		IF_WAZAKOUKA		side,condition,adrs
+	.byte		AI_IF_WAZAKOUKA
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+	.macro		IFN_WAZAKOUKA		side,condition,adrs
+	.byte		AI_IFN_WAZAKOUKA
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+@SODE_CONDITION_～系のチェック
+	.macro		IF_SIDE_CONDITION	side,condition,adrs
+	.byte		AI_IF_SIDE_CONDITION
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+	.macro		IFN_SIDE_CONDITION	side,condition,adrs
+	.byte		AI_IFN_SIDE_CONDITION
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	計算結果による分岐（ワークに格納する系の命令のあとに実行する）
+@
+@	value:比較する値
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_UNDER			value,adrs
+	.byte		AI_IF_UNDER
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_OVER				value,adrs
+	.byte		AI_IF_OVER
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_EQUAL			value,adrs
+	.byte		AI_IF_EQUAL
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IFN_EQUAL			value,adrs
+	.byte		AI_IFN_EQUAL
+	.byte		\value
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	計算結果による分岐（直値ではなくワークに格納された値と比較）
+@
+@	adrs1:比較する値が格納されたアドレス
+@	adrs2:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_UNDER_ADRS		adrs1,adrs2
+	.byte		AI_IF_UNDER_ADRS
+	.long		adrs1
+	.long		adrs2
+	.endm
+
+	.macro		IF_OVER_ADRS		adrs1,adrs2
+	.byte		AI_IF_OVER_ADRS
+	.long		adrs1
+	.long		adrs2
+	.endm
+
+	.macro		IF_EQUAL_ADRS		adrs1,adrs2
+	.byte		AI_IF_EQUAL_ADRS
+	.long		adrs1
+	.long		adrs2
+	.endm
+
+	.macro		IFN_EQUAL_ADRS		adrs1,adrs2
+	.byte		AI_IFN_EQUAL_ADRS
+	.long		adrs1
+	.long		adrs2
+	.endm
+
+@------------------------------------------------------------
+@	技ナンバーをチェックして分岐
+@------------------------------------------------------------
+
+	.macro		IF_WAZANO		wazano,adrs
+	.byte		AI_IF_WAZANO
+	.short		\wazano
+	.long		\adrs
+	.endm
+
+	.macro		IFN_WAZANO		wazano,adrs
+	.byte		AI_IF_WAZANO
+	.short		\wazano
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	指定されたテーブルを参照して一致、不一致で分岐
+@
+@	tableadrs:チェックするナンバーが羅列されたテーブルのアドレス
+@	jumpadrs:条件に合致したときのとび先	
+@
+@	テーブルの終端は1BYTEの方は0xff、2BYTEの方は0xffff
+@
+@------------------------------------------------------------
+
+	.macro		IF_TABLE_1BYTE_JUMP		tableadrs,jumpadrs	
+	.byte		AI_IF_TABLE_1BYTE_JUMP
+	.long		\tableadrs
+	.long		\jumpadrs	
+	.endm
+
+	.macro		IFN_TABLE_1BYTE_JUMP	tableadrs,jumpadrs
+	.byte		AI_IFN_TABLE_1BYTE_JUMP
+	.long		\tableadrs
+	.long		\jumpadrs	
+	.endm
+
+	.macro		IF_TABLE_2BYTE_JUMP		tableadrs,jumpadrs
+	.byte		AI_IF_TABLE_2BYTE_JUMP
+	.long		\tableadrs
+	.long		\jumpadrs	
+	.endm
+
+	.macro		IFN_TABLE_2BYTE_JUMP	tableadrs,jumpadrs
+	.byte		AI_IFN_TABLE_2BYTE_JUMP
+	.long		\tableadrs
+	.long		\jumpadrs	
+	.endm
+
+@------------------------------------------------------------
+@
+@	自分がダメージ技を持っているか判断して分岐
+@
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_HAVE_DAMAGE_WAZA		adrs
+	.byte		AI_IF_HAVE_DAMAGE_WAZA
+	.long		\adrs
+	.endm
+
+	.macro		IFN_HAVE_DAMAGE_WAZA	adrs
+	.byte		AI_IFN_HAVE_DAMAGE_WAZA
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@	ターンのチェック（今何ターン目かをワークに入れる）
+@------------------------------------------------------------
+
+	.macro		CHECK_TURN
+	.byte		AI_CHECK_TURN
+	.endm
+
+@------------------------------------------------------------
+@
+@	タイプのチェック(ポケモンあるいは技のタイプをワークに入れる）
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_TYPE			side
+	.byte		AI_CHECK_TYPE
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@	攻撃技かどうかのチェック（技の威力をワークに入れる)
+@------------------------------------------------------------
+
+	.macro		CHECK_IRYOKU
+	.byte		AI_CHECK_IRYOKU
+	.endm
+
+@------------------------------------------------------------
+@	威力が一番高いかのチェック
+@------------------------------------------------------------
+
+	.macro		COMP_POWER
+	.byte		AI_COMP_POWER
+	.endm
+
+@------------------------------------------------------------
+@
+@	前のターンに使った技のチェック（技のナンバーをワークに入れる）
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_LAST_WAZA		side
+	.byte		AI_CHECK_LAST_WAZA
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@
+@	格納された技のタイプチェック
+@
+@	type:チェックするタイプ（agbmons.defに定義）	
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_WAZA_TYPE		type,adrs
+	.byte		AI_IF_WAZA_TYPE
+	.byte		\type
+	.long		\adrs
+	.endm
+
+	.macro		IFN_WAZA_TYPE		type,adrs
+	.byte		AI_IFN_WAZA_TYPE
+	.byte		\type
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	どちらが先行かのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_FIRST			side,adrs
+	.byte		AI_IF_FIRST
+	.byte		\side
+	.long		\adrs
+	.endm
+
+	.macro		IFN_FIRST			side,adrs
+	.byte		AI_IFN_FIRST
+	.byte		\side
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@	持っている技のオールチェックループ
+@------------------------------------------------------------
+
+	.macro		ALL_WAZA_CHECK			@ループの開始
+	.byte		AI_ALL_WAZA_CHECK
+	.endm
+
+	.macro		WAZA_LOOP				@ループ地点
+	.byte		AI_WAZA_LOOP
+	.endm
+
+@------------------------------------------------------------
+@
+@	控えが何体いるかチェック（数をワークに入れる）
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_BENCH_COUNT			side
+	.byte		AI_CHECK_BENCH_COUNT
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@	現在の技ナンバーのチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_WAZANO
+	.byte		AI_CHECK_WAZANO
+	.endm
+
+@------------------------------------------------------------
+@	現在の技ナンバーのシーケンスナンバーのチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_WAZASEQNO
+	.byte		AI_CHECK_WAZASEQNO
+	.endm
+
+@------------------------------------------------------------
+@
+@	特殊能力のチェック（特殊能力ナンバーをワークに入れる）
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_TOKUSEI		side
+	.byte		AI_CHECK_TOKUSEI
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@
+@	自分と相手の相性チェックして一番いい倍率をワークに格納
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_AISYOU
+	.byte		AI_CHECK_AISYOU
+	.endm
+
+@------------------------------------------------------------
+@
+@	技と相手の相性をチェックしてしてアドレスにジャンプ
+@
+@	aisyou:技と相手の相性による倍率（ai_def.defに定義）
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_WAZA_AISYOU		aisyou,adrs
+	.byte		AI_CHECK_WAZA_AISYOU
+	.byte		\aisyou
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	格納された技が強い技かどうかチェック
+@
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_WAZA_STRONG		adrs
+	.byte		AI_IF_WAZA_STRONG
+	.byte		\adrs
+	.endm
+
+	.macro		IFN_WAZA_STRONG		adrs
+	.byte		AI_IFN_WAZA_STRONG
+	.byte		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	控えの状態チェック
+@
+@	IF_COND
+@
+@------------------------------------------------------------
+
+	.macro		IF_BENCH_COND		side,condition,adrs
+	.byte		AI_IF_BENCH_COND
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+	.macro		IFN_BENCH_COND		side,condition,adrs
+	.byte		AI_IFN_BENCH_COND
+	.byte		\side
+	.long		\condition
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	天候チェック（天候ナンバーをワークに入れる）
+@				（天候ナンバーはai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_WEATHER
+	.byte		AI_CHECK_WEATHER
+	.endm
+
+@------------------------------------------------------------
+@
+@	技のシーケンスナンバーをチェックして、分岐
+@
+@	seqno:技のシーケンスナンバー
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_WAZA_SEQNO_JUMP		seqno,adrs
+	.byte		AI_IF_WAZA_SEQNO_JUMP
+	.byte		\seqno
+	.long		\adrs
+	.endm
+
+	.macro		IFN_WAZA_SEQNO_JUMP		seqno,adrs
+	.byte		AI_IFN_WAZA_SEQNO_JUMP
+	.byte		\seqno
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	自分や相手のパラメータ変化値を参照して分岐
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	para:チェックするパラメータ（ai_def.defに定義）
+@	value:比較する値（０～１２）
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_PARA_UNDER		side,para,value,adrs
+	.byte		AI_IF_PARA_UNDER
+	.byte		\side
+	.byte		\para
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_PARA_OVER		side,para,value,adrs
+	.byte		AI_IF_PARA_OVER
+	.byte		\side
+	.byte		\para
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IF_PARA_EQUAL		side,para,value,adrs
+	.byte		AI_IF_PARA_EQUAL
+	.byte		\side
+	.byte		\para
+	.byte		\value
+	.long		\adrs
+	.endm
+
+	.macro		IFN_PARA_EQUAL		side,para,value,adrs
+	.byte		AI_IFN_PARA_EQUAL
+	.byte		\side
+	.byte		\para
+	.byte		\value
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	技のダメージ計算をして相手が瀕死になるかチェックして分岐
+@
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_WAZA_HINSHI		adrs
+	.byte		AI_IF_WAZA_HINSHI
+	.long		\adrs
+	.endm
+
+	.macro		IFN_WAZA_HINSHI		adrs
+	.byte		AI_IFN_WAZA_HINSHI
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	特定の技を持っているかのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	wazano:チェックする技ナンバー
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_HAVE_WAZA		side,wazano,adrs
+	.byte		AI_IF_HAVE_WAZA
+	.byte		\side
+	.short		\wazano
+	.long		\adrs
+	.endm
+
+	.macro		IFN_HAVE_WAZA		side,wazano,adrs
+	.byte		AI_IFN_HAVE_WAZA
+	.byte		\side
+	.short		\wazano
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	特定の技シーケンスを持っているかのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	seqno:チェックする技シーケンスナンバー
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_HAVE_WAZA_SEQNO		side,seqno,adrs
+	.byte		AI_IF_HAVE_WAZA_SEQNO
+	.byte		\side
+	.byte		\seqno
+	.long		\adrs
+	.endm
+
+	.macro		IFN_HAVE_WAZA_SEQNO		side,seqno,adrs
+	.byte		AI_IFN_HAVE_WAZA_SEQNO
+	.byte		\side
+	.byte		\seqno
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	ポケモンの状態をチェックして分岐（かなしばりとか、アンコールとか）
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@	id:チェックする状態ID(ai_def.defに定義）
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_POKE_CHECK_STATE		side,id,adrs
+	.byte		AI_IF_POKE_CHECK_STATE
+	.byte		\side
+	.byte		\id
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@
+@	今計算している技の状態をチェックして分岐
+@
+@	id:チェックする状態ID(ai_def.defに定義）
+@	adrs:飛び先
+@
+@------------------------------------------------------------
+
+	.macro		IF_WAZA_CHECK_STATE		id,adrs
+	.byte		AI_IF_WAZA_CHECK_STATE
+	.byte		\id
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@	にげるをせんたく
+@------------------------------------------------------------
+
+	.macro		ESCAPE
+	.byte		AI_ESCAPE
+	.endm
+
+@------------------------------------------------------------
+@	サファリゾーンでの逃げる確率を計算して逃げるときのアドレスを指定
+@------------------------------------------------------------
+
+	.macro		SAFARI_ESCAPE_JUMP		adrs
+	.byte		AI_SAFARI_ESCAPE_JUMP
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@	サファリゾーンでの特殊アクションを選択
+@------------------------------------------------------------
+
+	.macro		SAFARI
+	.byte		AI_SAFARI
+	.endm
+
+@------------------------------------------------------------
+@
+@		装備アイテムのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_SOUBIITEM		side
+	.byte		AI_CHECK_SOUBIITEM
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@
+@		ポケモンの性別のチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_POKESEX		side
+	.byte		AI_CHECK_POKESEX
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@
+@		ねこだましカウンタのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_NEKODAMASI	side
+	.byte		AI_CHECK_NEKODAMASI
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@
+@		たくわえるカウンタのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_TAKUWAERU		side
+	.byte		AI_CHECK_TAKUWAERU
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@		戦闘タイプのチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_FIGHT_TYPE
+	.byte		AI_CHECK_FIGHT_TYPE
+	.endm
+
+@------------------------------------------------------------
+@
+@		リサイクルできるアイテムのチェック
+@
+@	side:チェックする側を指定（ai_def.defに定義）
+@
+@------------------------------------------------------------
+
+	.macro		CHECK_RECYCLE_ITEM	side
+	.byte		AI_CHECK_RECYCLE_ITEM
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@	ワークに入っている技ナンバーのタイプをチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_WORKWAZA_TYPE
+	.byte		AI_CHECK_WORKWAZA_TYPE
+	.endm
+
+@------------------------------------------------------------
+@	ワークに入っている技ナンバーの威力をチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_WORKWAZA_POW
+	.byte		AI_CHECK_WORKWAZA_POW
+	.endm
+
+@------------------------------------------------------------
+@	ワークに入っている技ナンバーのシーケンスナンバーをチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_WORKWAZA_SEQNO
+	.byte		AI_CHECK_WORKWAZA_SEQNO
+	.endm
+
+@------------------------------------------------------------
+@	まもるカウンタをチェック
+@------------------------------------------------------------
+
+	.macro		CHECK_MAMORU_COUNT		side
+	.byte		AI_CHECK_MAMORU_COUNT
+	.byte		\side
+	.endm
+
+@------------------------------------------------------------
+@	格納アドレスに値を入れる
+@------------------------------------------------------------
+
+	.macro		SET_VALUE		work,value
+	.byte		AI_SET_VALUE
+	.long		\work
+	.byte		\value
+	.endm
+
+	.macro		SET_WORK		dest,src
+	.byte		AI_SET_WORK
+	.long		\dest
+	.long		\src
+	.endm
+
+	.macro		ADD_VALUE		work,value
+	.byte		AI_ADD_VALUE
+	.long		\work
+	.byte		\value
+	.endm
+
+	.macro		ADD_WORK		dest,src
+	.byte		AI_ADD_WORK
+	.long		\dest
+	.long		\src
+	.endm
+
+	.macro		SUB_VALUE		work,value
+	.byte		AI_SUB_VALUE
+	.long		\work
+	.byte		\value
+	.endm
+
+	.macro		SUB_WORK		dest,src
+	.byte		AI_SUB_WORK
+	.long		\dest
+	.long		\src
+	.endm
+
+@------------------------------------------------------------
+@	汎用的な命令群
+@------------------------------------------------------------
+
+@汎用的な命令
+	.macro		GOSUB		adrs
+	.byte		AI_GOSUB
+	.long		\adrs
+	.endm
+
+	.macro		JUMP		adrs
+	.byte		AI_JUMP
+	.long		\adrs
+	.endm
+
+	.macro		AIEND
+	.byte		AI_AIEND
+	.endm
+
+@------------------------------------------------------------
+@	お互いのレベルをチェックして分岐
+@------------------------------------------------------------
+
+	.macro		IF_LEVEL		value,adrs
+	.byte		AI_IF_LEVEL
+	.byte		\value
+	.long		\adrs
+	.endm
+
+@------------------------------------------------------------
+@	挑発状態かチェックして分岐
+@------------------------------------------------------------
+
+	.macro		IF_CHOUHATSU	adrs
+	.byte		AI_IF_CHOUHATSU
+	.long		\adrs
+	.endm
+
+	.macro		IFN_CHOUHATSU	adrs
+	.byte		AI_IFN_CHOUHATSU
+	.long		\adrs
+	.endm
+

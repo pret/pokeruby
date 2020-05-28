@@ -1,0 +1,244 @@
+// ●海底洞窟　最深部
+// ●ルビーver
+
+
+// ●地底湖の中央に超古代ポケモンがいる。
+// ●主人公が、ポケモンの正面あたりに行くと、
+// 背後からマグマ団のボス（マツブサ）が追いかけてくる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p01_cave_d1111r
+msg_magmaboss_01_p01_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,tenten_,tenten_,ma_,ti_,ta_,ma_,e_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ひと声かけたあと、主人公のとなりに来て、以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p02_cave_d1111r
+msg_magmaboss_01_p02_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,hu_,hu_,hu_,tenten_,tenten_
+	.byte	CR_
+	.byte	ya_,ha_,ri_,spc_,ki_,mi_,spc_,da_,ttu_,ta_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そういってポケモンの方を向き、ひとりしゃべり始める。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p03_cave_d1111r
+msg_magmaboss_01_p03_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,do_,u_,da_,spc_,mi_,ta_,ma_,e_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,u_,spc_,ko_,da_,i_,PO_,KE_,MO_,N_,spc_,GU_,RA_,bou_,DO_,N_,ga_
+	.byte	CR_
+	.byte	si_,zu_,ka_,ni_,spc_,ne_,mu_,ru_,spc_,u_,tu_,ku_,si_,i_,spc_,su_,ga_,ta_,wo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,ko_,no_,spc_,hi_,ga_,spc_,ku_,ru_,no_,wo_
+	.byte	CR_
+	.byte	na_,ga_,i_,spc_,a_,i_,da_,spc_,ma_,ttu_,te_,i_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、また主人公の方を向いて、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p04_cave_d1111r
+msg_magmaboss_01_p04_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,so_,re_,ni_,si_,te_,mo_,spc_,ma_,sa_,ka_,spc_,ki_,mi_,ga_
+	.byte	CR_
+	.byte	ko_,ko_,ma_,de_,spc_,ku_,i_,tu_,i_,te_,spc_,ku_,ru_,to_,ha_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,so_,re_,mo_,spc_,mo_,u_,spc_,o_,wa_,ri_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,mo_,ku_,te_,ki_,spc_,ta_,ttu_,se_,i_,no_,spc_,ta_,me_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,mi_,ni_,ha_,spc_,ko_,ko_,de_,spc_,ki_,e_,te_,mo_,ra_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そうしてマツブサとの戦闘。
+// ●マツブサの敗北時のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p05_cave_d1111r
+msg_magmaboss_01_p05_cave_d1111r:
+	.byte	ko_,no_,spc_,wa_,ta_,si_,ga_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,ta_,si_,te_,mo_,spc_,ma_,ke_,ru_,to_,ha_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘モードを抜け、さらにセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p06_cave_d1111r
+msg_magmaboss_01_p06_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,HU_,HU_,HU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,su_,ga_,spc_,to_,i_,u_,be_,ki_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,so_,no_,spc_,ti_,ka_,ra_,ha_,spc_,mi_,to_,me_,yo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,tenten_,tenten_,gyoe_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ni_,ha_,spc_,ko_,re_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,a_,i_,i_,ro_,no_,ta_,ma_,ga_,spc_,a_,re_,ba_
+	.byte	CR_
+	.byte	GU_,RA_,bou_,DO_,N_,wo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで突然のＳＥと共に珠が青く輝くエフェクト
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p07_cave_d1111r
+msg_magmaboss_01_p07_cave_d1111r:
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,ga_,tenten_,tenten_
+	.byte	CR_
+	.byte	ka_,ttu_,te_,ni_,spc_,ka_,ga_,ya_,ki_,spc_,ha_,zi_,me_,ta_,tenten_,tenten_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●少し間があってから、画面が揺れはじめる。
+// 　「どどどーん」という地響き。
+// 　グラードンが目覚めて、動き回ってどこかへ消える。
+// ●マツブサ、左右を見た後に
+// 　画面、上を向いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p08_cave_d1111r
+msg_magmaboss_01_p08_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,tenten_,tenten_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,na_,ni_,mo_,spc_,si_,te_,i_,na_,i_,no_,ni_
+	.byte	CR_
+	.byte	na_,ze_,spc_,a_,i_,i_,ro_,no_,ta_,ma_,ga_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	GU_,RA_,bou_,DO_,N_,ha_,spc_,do_,ko_,he_,spc_,ki_,e_,ta_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで一旦、メッセージウインドウを閉じ、
+// 無線機の受信音（ＳＥ：ピピー！　ピピー！）を鳴らす。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p09_cave_d1111r
+msg_magmaboss_01_p09_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,so_,to_,ni_,spc_,i_,ru_
+	.byte	CR_
+	.byte	da_,n_,i_,n_,spc_,ka_,ra_,no_,spc_,re_,n_,ra_,ku_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そう言ってマツブサは主人公に背を向け、一歩離れて、
+// 無線機と会話を始める。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p10_cave_d1111r
+msg_magmaboss_01_p10_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,do_,u_,si_,ta_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,MU_,tenten_,tenten_
+	.byte	CR_
+	.byte	ta_,i_,yo_,u_,ga_,spc_,ha_,ge_,si_,ku_,spc_,hi_,ka_,ttu_,te_,i_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,ro_,u_,tenten_,tenten_,spc_,so_,re_,ko_,so_,ga_
+	.byte	CR_
+	.byte	wa_,re_,wa_,re_,spc_,MA_,GU_,MA_,da_,n_,no_,spc_,mo_,ku_,te_,ki_
+	.byte	SCROLL_WAIT_
+	.byte	da_,i_,ti_,wo_,spc_,hu_,ya_,su_,ta_,me_,ni_,spc_,GU_,RA_,bou_,DO_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	me_,za_,me_,sa_,se_,ta_,spc_,ri_,yu_,u_,spc_,na_,no_,da_,ka_,ra_,na_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,da_,to_,gyoe_
+	.byte	CR_
+	.byte	yo_,so_,u_,spc_,i_,zi_,yyo_,u_,no_,spc_,a_,tu_,sa_,de_,spc_,ko_,no_,ma_,ma_,de_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,bu_,n_,ta_,ti_,mo_,spc_,a_,bu_,na_,i_,spc_,da_,to_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,ba_,ka_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,n_,na_,ko_,to_,spc_,a_,ri_,e_,na_,i_,spc_,ha_,zu_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ni_,ka_,ku_,spc_,yo_,u_,su_,wo_,spc_,mi_,te_,i_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「プッ！」というような電源が切れるようなＳＥ
+// ●ふたたびメッセージウインドウを閉じる
+// 　アオギリは画面下を向いて独り言のように……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p11_cave_d1111r
+msg_magmaboss_01_p11_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,o_,ka_,si_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,de_,spc_,GU_,RA_,bou_,DO_,N_,ga_,spc_,me_,za_,me_,ru_
+	.byte	CR_
+	.byte	so_,si_,te_,spc_,KO_,N_,TO_,RO_,bou_,RU_,spc_,de_,ki_,ru_,ha_,zu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,no_,ni_,tenten_,tenten_,spc_,do_,u_,si_,te_,tenten_,tenten_
+	.byte	CR_
+	.byte	GU_,RA_,bou_,DO_,N_,ha_,spc_,ko_,ko_,ka_,ra_,spc_,i_,na_,ku_,na_,ttu_,ta_,TTU_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ze_,na_,n_,da_,TTU_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、今度はここにアクア団（ボスのアオギリと部下２人）が登場。
+// アオギリがマツブサの前まで進み出て、以下のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p01_cave_d1111r
+msg_aquaboss_01_p01_cave_d1111r:
+	.byte	A_,O_,GI_,RI_,kako2_,na_,n_,te_,ko_,to_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,TU_,BU_,SA_,tenten_,tenten_,spc_,ki_,mi_,ha_,spc_,to_,u_,to_,u_
+	.byte	CR_
+	.byte	GU_,RA_,bou_,DO_,N_,wo_,spc_,me_,za_,me_,sa_,se_,te_,spc_,si_,ma_,ttu_,ta_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ma_,ma_,spc_,e_,i_,e_,n_,ni_
+	.byte	CR_
+	.byte	ni_,ttu_,ko_,u_,ga_,spc_,te_,ri_,tu_,du_,ke_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	se_,ka_,i_,ha_,spc_,i_,ttu_,ta_,i_,spc_,do_,u_,na_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	su_,be_,te_,no_,spc_,u_,mi_,ha_
+	.byte	CR_
+	.byte	hi_,a_,ga_,ttu_,te_,spc_,si_,ma_,u_,zo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここでマツブサの頭上に「！」を表示してセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_magmaboss_01_p12_cave_d1111r
+msg_magmaboss_01_p12_cave_d1111r:
+	.byte	MA_,TU_,BU_,SA_,kako2_,na_,n_,da_,to_,tenten_,tenten_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,ga_,spc_,a_,re_,ba_
+	.byte	CR_
+	.byte	GU_,RA_,bou_,DO_,N_,wo_,spc_,KO_,N_,TO_,RO_,bou_,RU_,spc_,de_,ki_,ru_,ha_,zu_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	so_,n_,na_,spc_,ko_,to_,ga_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●さらにアオギリのセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p02_cave_d1111r
+msg_aquaboss_01_p02_cave_d1111r:
+	.byte	A_,O_,GI_,RI_,kako2_,to_,ni_,ka_,ku_,spc_,i_,ma_,ha_,spc_,ko_,ko_,de_
+	.byte	CR_
+	.byte	i_,i_,a_,ra_,so_,i_,wo_,spc_,si_,te_,i_,ru_,spc_,hi_,ma_,ha_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,to_,ni_,spc_,de_,te_,spc_,ta_,si_,ka_,me_,ru_,to_,spc_,i_,i_,gyoe_
+	.byte	CR_
+	.byte	me_,no_,ma_,e_,ni_,spc_,hi_,ro_,ga_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,mi_,no_,spc_,no_,zo_,n_,da_,spc_,se_,ka_,i_,ka_,spc_,do_,u_,ka_,wo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アオギリ、マツブサを押しのけ（画面下部に１キャラ分）
+// 　主人公に隣接、メッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p03_cave_d1111r
+msg_aquaboss_01_p03_cave_d1111r:
+	.byte	A_,O_,GI_,RI_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,mo_
+	.byte	CR_
+	.byte	ha_,ya_,ku_,spc_,so_,to_,ni_,spc_,de_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面フェードアウトして海上へ。

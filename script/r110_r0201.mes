@@ -1,0 +1,38 @@
+// ●110番道路　自転車専用道路ゲート（キンセツ側）
+
+// ●「じてんしゃＳ」「じてんしゃＡ」を持っている場合
+// 　ゲート内に入った瞬間から「じてんしゃ」に乗せます。
+// ●ゲート内、サイクリングロードでは「じてんしゃ」から
+// 　降りることはできません。
+
+// ●係員（＝店員男１）
+// ●主人公が「じてんしゃＳ」「じてんしゃＡ」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_shopm1_01_p01_r110_r0201
+msg_shopm1_01_p01_r110_r0201:
+	.byte	SA_,I_,KU_,RI_,N_,GU_,spc_,RO_,bou_,DO_,de_,ha_
+	.byte	CR_
+	.byte	o_,mo_,i_,ttu_,ki_,ri_,spc_,SU_,PI_,bou_,DO_,wo_,spc_,da_,se_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,re_,ni_,mo_,spc_,bu_,tu_,ka_,ra_,zu_,ni_,spc_,ka_,ke_,nu_,ke_,ru_,to_
+	.byte	CR_
+	.byte	su_,go_,ku_,spc_,ki_,mo_,ti_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●係員（＝店員男１）
+// ●主人公が「じてんしゃＳ」「じてんしゃＡ」を持っていない
+// ●座標でメッセージを自動で表示します
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_shopm1_01_p02_r110_r0201
+msg_shopm1_01_p02_r110_r0201:
+	.byte	SA_,I_,KU_,RI_,N_,GU_,spc_,RO_,bou_,DO_,wo_
+	.byte	CR_
+	.byte	a_,ru_,i_,te_,spc_,su_,su_,mu_,no_,ha_,spc_,a_,bu_,na_,i_,spc_,de_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,te_,n_,si_,yya_,ni_,spc_,no_,ttu_,te_,spc_,ki_,te_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、一歩押し戻されます

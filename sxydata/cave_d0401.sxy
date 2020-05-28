@@ -1,0 +1,104 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D0401	1
+#define EXITNUM_CAVE_D0401	3
+#define POSNUM_CAVE_D0401	0
+#define BGNUM_CAVE_D0401	3
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_poke_01_p01_cave_d0401[];
+
+//BG_SCRIPT
+extern const u8	ev_tenji_01_p01_cave_d0401[];
+extern const u8	ev_tenji_02_p01_cave_d0401[];
+extern const u8	ev_tenji_02_p01_cave_d0401[];
+
+const evObjData	OBJ_cave_d0401[] =
+{
+	{
+		POKE_01_CAVE_D0401,		//OBJ ID
+		LEGEND1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_poke_01_p01_cave_d0401,		//Event Lavel
+		FV_POKE_01_CAVE_D0401,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d0401[] =
+{
+	{
+		0x0008,		//Xpos
+		0x001d,		//Ypos
+		0x03,		//Height
+		FIELD_R111_DOOR02,		//Door ID
+		FIELD_R111,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0014,		//Ypos
+		0x00,		//Height
+		CAVE_D0401_DOOR03,		//Door ID
+		CAVE_D0401,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		CAVE_D0401_DOOR02,		//Door ID
+		CAVE_D0401,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_cave_d0401[] =
+{
+	{
+		0x0008,		//Xpos
+		0x0014,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_01_p01_cave_d0401,		//Script
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0014,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_02_p01_cave_d0401,		//Script
+	},
+
+	{
+		0x0009,		//Xpos
+		0x0014,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_tenji_02_p01_cave_d0401,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d0401_sxy_data =
+{
+OBJNUM_CAVE_D0401,			// field obj max
+EXITNUM_CAVE_D0401,		// exit max
+POSNUM_CAVE_D0401,			// pos event max
+BGNUM_CAVE_D0401,			// bg event max
+OBJ_cave_d0401,			// field obj data
+EXIT_cave_d0401,			// exit data
+NULL,			// pos event data
+BG_cave_d0401,				// bg event data
+};

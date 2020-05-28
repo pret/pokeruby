@@ -1,0 +1,9 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 2
+#define WORKERW2_01_R112_R0102	1
+#define ROPEWAY1_01_R112_R0102	2
+
+//Exit ID = 2
+#define R112_R0102_MAT01	0
+#define R112_R0102_MAT02	1

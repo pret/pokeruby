@@ -1,0 +1,103 @@
+//MapEditNH Ver.3.48 *.evt -> *.sxy Convert.
+#define OBJNUM_R123_R0101	2
+#define EXITNUM_R123_R0101	2
+#define POSNUM_R123_R0101	0
+#define BGNUM_R123_R0101	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_hill1_01_p01_r123_r0101[];
+extern const u8	ev_fishing1_01_p01_r123_r0101[];
+
+//BG_SCRIPT
+extern const u8	ev_panel1_01_p02_r123_r0101[];
+extern const u8	ev_panel1_02_p02_r123_r0101[];
+
+const evObjData	OBJ_r123_r0101[] =
+{
+	{
+		HILL1_01_R123_R0101,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_hill1_01_p01_r123_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		FISHING1_01_R123_R0101,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_fishing1_01_p01_r123_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r123_r0101[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_R123_DOOR01,		//Door ID
+		FIELD_R123,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_R123_DOOR01,		//Door ID
+		FIELD_R123,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_r123_r0101[] =
+{
+	{
+		0x0007,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_panel1_01_p02_r123_r0101,		//Script
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_panel1_02_p02_r123_r0101,		//Script
+	},
+
+};
+
+const SXY_DATA	r123_r0101_sxy_data =
+{
+OBJNUM_R123_R0101,			// field obj max
+OBJ_r123_r0101,			// field obj data
+EXITNUM_R123_R0101,		// exit max
+EXIT_r123_r0101,			// exit data
+POSNUM_R123_R0101,			// pos event max
+NULL,			// pos event data
+BGNUM_R123_R0101,			// bg event max
+BG_r123_r0101,				// bg event data
+};

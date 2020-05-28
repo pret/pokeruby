@@ -1,0 +1,73 @@
+//====================================================================
+//						cave_d1709
+//						すてられぶね　船室１階左（２部屋）
+//====================================================================
+
+//--------------------------------------------------------------------
+//					     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		cave_d1709_event_data
+EVENT_DATA_END			/* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_lovelove_03_01		//男
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	LOVELOVE_03
+	_TRAINER_DATA2	msg_lovelove_03_01
+	_TRAINER_DATA3	msg_lovelove_03_02
+	_TRAINER_DATA4	msg_lovelove_03_04
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_lovelove_03_01
+	_TRAINER_EASY_MSG	msg_lovelove_03_03
+	_END
+
+//再戦闘時
+_revenge_lovelove_03_01:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	LOVELOVE_03
+	_TRAINER_DATA2	msg_lovelove_03_09
+	_TRAINER_DATA3	msg_lovelove_03_10
+	_TRAINER_DATA4	msg_lovelove_03_12
+	_TRAINER_DATA_END
+
+	_TRAINER_EASY_MSG	msg_lovelove_03_11
+	_END
+
+
+SCRIPT_LABEL	ev_lovelove_03_02		//女
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	LOVELOVE_03
+	_TRAINER_DATA2	msg_lovelove_03_05
+	_TRAINER_DATA3	msg_lovelove_03_06
+	_TRAINER_DATA4	msg_lovelove_03_08
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_lovelove_03_02
+	_TRAINER_EASY_MSG	msg_lovelove_03_07
+	_END
+
+//再戦闘時
+_revenge_lovelove_03_02:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	LOVELOVE_03
+	_TRAINER_DATA2	msg_lovelove_03_13
+	_TRAINER_DATA3	msg_lovelove_03_14
+	_TRAINER_DATA4	msg_lovelove_03_16
+	_TRAINER_DATA_END
+
+	_TRAINER_EASY_MSG	msg_lovelove_03_15
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,271 @@
+//====================================================================
+//							t101_r0201
+//						ミシロ・ルーム0201
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t101_r0201_event_data
+BG_CHANGE_LABEL		bg_change_t101_r0201
+FLAG_CHANGE_LABEL	flag_change_t101_r0201
+SP_SCRIPT_LABEL		scene_t101_r0202
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_t101_r0201:
+	//時計を合わせてないうちはダンボール配置する
+	_IFVAL_CALL		WK_SCENE_SP_OPENING,LT,6,ev_bg_change_t101_r0201
+
+	//ダッシュシューズを手に入れていたら説明書を配置
+	_IF_FLAGON_CALL	FE_DASH_SHOES_GET,ev_bg_change_02_check_t101_r0201
+	_END
+
+//時計を合わせてないうちはダンボール配置する
+ev_bg_change_t101_r0201:
+	_SET_CELL		5,4,624,1
+	_SET_CELL		5,2,616,1
+	_RET
+
+//ダッシュシューズを手に入れていたら説明書を配置
+ev_bg_change_02_check_t101_r0201:
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_bg_change_02_t101_r0201		//女の子
+	_RET
+
+ev_bg_change_02_t101_r0201:
+	_SET_CELL		6,7,659,1
+	_RET
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//母の位置を移動する
+flag_change_t101_r0201:
+	//初めて家に入ったとき
+	_IFVAL_CALL		WK_SCENE_SP_OPENING,EQ,3,ev_mama_move_03_t101_r0201
+
+	//時計セットするまで
+	_IFVAL_CALL		WK_SCENE_SP_OPENING,EQ,5,ev_mama_move_t101_r0201
+
+	//時計セットしたら
+	_IFVAL_CALL		WK_SCENE_SP_OPENING,EQ,6,ev_mama_move_02_t101_r0201
+	_END
+
+//時計セットするまで
+ev_mama_move_t101_r0201:
+	_SXY_POS_CHANGE	MAMA_01_T101_R0201,2,4
+	_SXY_SITE_CHANGE	MAMA_01_T101_R0201,MV_UP
+	_RET
+
+//時計セットしたら
+ev_mama_move_02_t101_r0201:
+	_SXY_POS_CHANGE	MAMA_01_T101_R0201,6,5
+	_SXY_SITE_CHANGE	MAMA_01_T101_R0201,MV_UP
+	_RET
+
+//初めて家に入ったとき
+ev_mama_move_03_t101_r0201:
+	_SXY_POS_CHANGE	MAMA_01_T101_R0201,1,8
+	_SXY_SITE_CHANGE	MAMA_01_T101_R0201,MV_UP
+	_RET
+
+//--------------------------------------------------------------------
+//							SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_t101_r0202:
+	//初めて家に入ったとき
+	SP_SCRIPT_DATA	WK_SCENE_SP_OPENING,3,ev_scene_opening_01_p01_t101_r0201
+
+	//時計セットするまで、母に２階に戻される
+	SP_SCRIPT_DATA	WK_SCENE_SP_OPENING,5,ev_scene_opening_01_p02_t101_r0201
+
+	//時計セットしたら
+	SP_SCRIPT_DATA	WK_SCENE_SP_OPENING,6,ev_scene_opening_01_p03_t101_r0201
+
+	//サポート母よってくる
+	SP_SCRIPT_DATA	WK_SCENE_T101_R0201,1,ev_support_mother_move_t101_r0201
+
+	//パパイベント開始
+	SP_SCRIPT_DATA	WK_SCENE_T101_R0101,3,ev_papa_hunenotiketto
+	SP_SCRIPT_END
+
+//--------------------------------------------------------------------
+//				時計セットするまで、母に２階に戻される
+//--------------------------------------------------------------------
+ev_scene_opening_01_p02_t101_r0201:
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_mama_01_p04_t101_r0101
+	_TALK_CLOSE
+
+	//戻される
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_t101_r0201_anime50
+	_SET_OBJ_ANIME	MAMA_01_T101_R0201,hero_01_t101_r0201_anime50
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_MAP_CHANGE		T101,T101_R0202,1,1/*ワープ*/
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	戻される
+//--------------------------------------------------------------------
+hero_01_t101_r0201_anime50:
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//			初めて家に入ったとき、部屋の中央まで歩いていく
+//--------------------------------------------------------------------
+ev_scene_opening_01_p01_t101_r0201:
+	_TALK_START
+	_LDVAL			PARAM0,MAMA_01_T101_R0201
+	_LDVAL			PARAM1,1
+	_JUMP			ev_opening_hero_room01
+	_END
+
+//--------------------------------------------------------------------
+//				時計セットしたら強制イベント開始
+//--------------------------------------------------------------------
+ev_scene_opening_01_p03_t101_r0201:
+	_TALK_START
+	_LDVAL			PARAM0,1
+	_LDVAL			PARAM1,MAMA_01_T101_R0201
+	_JUMP			opening_girl_papa_go_work
+	_END
+
+//--------------------------------------------------------------------
+//					サポート母よってくる
+//--------------------------------------------------------------------
+ev_support_mother_move_t101_r0201:
+	_TALK_START
+
+	//気づく
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	WOMAN2_01_T101_R0201,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ウェイト
+	_SET_OBJ_ANIME	WOMAN2_01_T101_R0201,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//主人公振り向く
+	//近づく
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_SET_OBJ_ANIME	WOMAN2_01_T101_R0201,woman2_01_t101_r0201_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//むすこ、むすめセット
+	_PROGRAM		SET_SEX_NAME_02
+	_TALK_KEYWAIT	msg_woman2_01_p01_t101_r0201
+
+	//一度話した
+	_FLAG_SET		FE_WOMAN2_01_P01_T101_R0201
+
+	//サポート母アニメ終了
+	_LDVAL			WK_SCENE_T101_R0201,2
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//サポート母	よってくる
+//--------------------------------------------------------------------
+woman2_01_t101_r0201_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							テレビ									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_terebi1_01_p01_t101_r0201
+	_TALK_START
+
+	//男女の性別を判断する
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,my_sex_boy_terebi1_t101_r0201
+	_IFVAL_CALL		ANSWORK,EQ,1,my_sex_girl_terebi1_t101_r0201
+	_TALK_END
+	_END
+
+//主人公男の場合
+my_sex_boy_terebi1_t101_r0201:
+	_RET
+
+//主人公女の場合
+my_sex_girl_terebi1_t101_r0201:
+	_TALK_KEYWAIT	msg_terebi1_01_p01_t101_r0101
+	_RET
+
+
+/********************************************************************/
+/*						オダマキ博士の妻							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_tonari_room01
+	_TALK_OBJ_START
+
+	//ロード１０３でサポートに勝利後か
+	_IF_FLAGON_JUMP	FE_SUPPORT_01_FIELD_R103,ev_woman2_01_p03_t101_r0201
+
+	//サポートと会話後、フィールドに出たら
+	_IF_FLAGON_JUMP	FE_SMAMA_01_T101_R0201,ev_woman2_01_p02_t101_r0201
+
+	//サポートと会話しているか
+	_IFVAL_JUMP		WK_SCENE_T101_R0202,EQ,3,ev_woman2_01_p04_t101_r0201
+
+	//むすこ、むすめセット
+	_PROGRAM		SET_SEX_NAME_02
+	_TALK_KEYWAIT	msg_woman2_01_p02_t101_r0201
+
+	_TALK_OBJ_END
+	_END
+
+//サポートと会話後、フィールドに出た
+ev_woman2_01_p02_t101_r0201:
+	_TALK_KEYWAIT	msg_woman2_01_p04_t101_r0201
+	_TALK_OBJ_END
+	_END
+
+//ロード１０３でサポートに勝利後
+ev_woman2_01_p03_t101_r0201:
+	_TALK_KEYWAIT	msg_woman2_01_p05_t101_r0201
+	_TALK_OBJ_END
+	_END
+
+//サポートと会話している
+ev_woman2_01_p04_t101_r0201:
+	_TALK_KEYWAIT	msg_woman2_01_p03_t101_r0201
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						母ストッパー								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_t101_r0201_pos01
+	_TALK_START
+	_LDVAL			PARAM0,MAMA_01_T101_R0201
+	_LDVAL			PARAM1,1		//動作コード(男女の判別でも出来る)
+
+	//ママ 右を向く
+	_SET_OBJ_ANIME	PARAM0,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_JUMP			ev_opening_mama_stoper
+	_END
+
+

@@ -1,0 +1,81 @@
+// Åú113î‘ìπòHÅ@ÉtÉBÅ[ÉãÉh
+
+
+// ÅúòVêaém
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_gentlem1_01_p01_field_r113
+msg_gentlem1_01_p01_field_r113:
+	.byte	WA_,HA_,HA_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	i_,ma_,no_,spc_,ka_,ga_,ku_,ri_,yyo_,ku_,ha_,spc_,su_,go_,i_,de_,su_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,ko_,no_,spc_,ka_,za_,n_,ba_,i_,wo_
+	.byte	CR_
+	.byte	GA_,RA_,SU_,ni_,spc_,ka_,e_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,de_,su_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúñVÇ‚ÇP
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_boya1_01_p01_field_r113
+msg_boya1_01_p01_field_r113:
+	.byte	ka_,za_,n_,ba_,i_,spc_,tu_,mo_,ttu_,ta_,spc_,ku_,sa_,mu_,ra_,no_,spc_,u_,e_
+	.byte	CR_
+	.byte	a_,ru_,ku_,to_,spc_,do_,ko_,wo_,spc_,to_,o_,ttu_,ta_,ka_,spc_,wa_,ka_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,no_,si_,ku_,spc_,na_,ttu_,ti_,yya_,u_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+
+// Åú111î‘ìπòHäÒÇËÇÃä≈î¬
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_kanban_01_p01_field_r113
+msg_kanban_01_p01_field_r113:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n3_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowR__,spc_,n1_,n1_,n1_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúÉnÉWÉcÉQÉ^ÉEÉìäÒÇËÇÃä≈î¬
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_kanban_02_p01_field_r113
+msg_kanban_02_p01_field_r113:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n3_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,HA_,ZI_,TU_,GE_,TA_,U_,N_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúÇ®ìæÇ»åfé¶î¬
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_kanban_03_p01_field_r113
+msg_kanban_03_p01_field_r113:
+	.byte	o_,to_,ku_,na_,spc_,ke_,i_,zi_,ba_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BA_,TTU_,GU_,no_,spc_,ta_,i_,se_,tu_,na_,mo_,no_,ni_,spc_,i_,re_,ta_
+	.byte	CR_
+	.byte	do_,u_,gu_,wo_,spc_,to_,u_,ro_,ku_,spc_,si_,te_,o_,ku_,to_
+	.byte	SCROLL_WAIT_
+	.byte	SE_,RE_,KU_,TO_,BO_,TA_,N_,wo_,spc_,o_,su_,da_,ke_,de_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,e_,ru_,yo_,u_,ni_,spc_,na_,ttu_,te_,spc_,be_,n_,ri_,spc_,de_,su_,gyoe_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// ÅúÉKÉâÉXç◊çHÇÃä≈î¬
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_kanban_04_p01_field_r113
+msg_kanban_04_p01_field_r113:
+	.byte	kako_,GA_,RA_,SU_,za_,i_,ku_,no_,spc_,o_,mi_,se_,kakot_
+	.byte	CR_
+	.byte	ka_,za_,n_,ba_,i_,spc_,ka_,ra_,spc_,GA_,RA_,SU_,no_,spc_,do_,u_,gu_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°

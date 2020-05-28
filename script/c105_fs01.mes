@@ -1,0 +1,41 @@
+// ●ヒワマキシティ　フレンドリィショップ
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c105_fs01
+msg_woman1_01_p01_c105_fs01:
+	.byte	SI_,RU_,BA_,bou_,SU_,PU_,RE_,bou_,ha_
+	.byte	CR_
+	.byte	ki_,ki_,me_,spc_,na_,ga_,mo_,ti_,gyoe_,spc_,ko_,u_,ka_,spc_,ba_,tu_,gu_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ma_,ri_,spc_,mu_,si_,yo_,ke_,SU_,PU_,RE_,bou_,spc_,yo_,ri_,mo_
+	.byte	CR_
+	.byte	su_,go_,i_,spc_,ttu_,te_,ko_,to_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_c105_fs01
+msg_girl3_01_p01_c105_fs01:
+	.byte	mo_,si_,mo_,spc_,ttu_,te_,ko_,to_,ga_,spc_,a_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,si_
+	.byte	CR_
+	.byte	do_,u_,gu_,ha_,spc_,o_,o_,me_,ni_,spc_,ka_,u_,yo_,u_,ni_,spc_,si_,te_,ru_,no_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_c105_fs01
+msg_boy2_01_p01_c105_fs01:
+	.byte	hu_,si_,gi_,na_,A_,ME_,wo_,spc_,a_,ge_,ru_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,i_,ttu_,ki_,ni_,spc_,so_,da_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	RE_,BE_,RU_,ga_,spc_,a_,ga_,ttu_,ti_,yya_,u_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

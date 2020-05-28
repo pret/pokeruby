@@ -1,0 +1,11 @@
+#define	GROUND_KUSA			0
+#define	GROUND_LONGKUSA		1
+#define	GROUND_SUNA			2
+#define	GROUND_MIZU			3
+#define	GROUND_UMI			4
+#define	GROUND_IKE			5
+#define	GROUND_IWA			6
+#define	GROUND_DOUKUTSU		7
+#define	GROUND_ROOM			8
+#define	GROUND_ALL			9
+

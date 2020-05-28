@@ -1,0 +1,27 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 19
+#define TR_MINI_09	1
+#define TR_TANPAN_15	2
+#define TR_MINI_10	3
+#define TREE1_03_R110_R0104	4
+#define TREE1_01_R110_R0104	5
+#define TREE1_02_R110_R104	6
+#define TREE1_04_R110_R0104	7
+#define TREE1_07_R110_R0104	8
+#define TREE_06_R110_R0104	9
+#define TREE1_05_R110_R0104	10
+#define TREE1_09_R110_R0104	11
+#define TREE1_08_R110_R0104	12
+#define TREE_10_R110_R0104	13
+#define TREE_12_R110_R0104	14
+#define TREE_11_R110_R0104	15
+#define TREE_13_R110_R0104	16
+#define TREE1_14_R110_R0104	17
+#define BALL1_60	18
+#define TREE1_15_R110_R0104	19
+
+//Exit ID = 3
+#define R110_R0104_MAT01	0
+#define R110_R0104_MAT02	1
+#define R110_R0104_DOOR01	2

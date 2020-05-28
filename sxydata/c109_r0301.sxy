@@ -1,0 +1,50 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C109_R0301	1
+#define EXITNUM_C109_R0301	1
+#define POSNUM_C109_R0301	0
+#define BGNUM_C109_R0301	0
+
+const evObjData	OBJ_c109_r0301[] =
+{
+	{
+		DAIGO_01_C109_R0301,		//OBJ ID
+		DAIGO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0010,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c109_r0301[] =
+{
+	{
+		0x0007,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		C109_R0105_DOOR01,		//Door ID
+		C109_R0105,			//Map ID
+		C109,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c109_r0301_sxy_data =
+{
+OBJNUM_C109_R0301,			// field obj max
+EXITNUM_C109_R0301,		// exit max
+POSNUM_C109_R0301,			// pos event max
+BGNUM_C109_R0301,			// bg event max
+OBJ_c109_r0301,			// field obj data
+EXIT_c109_r0301,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

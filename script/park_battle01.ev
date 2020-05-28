@@ -1,0 +1,549 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	park_battle01_event_data
+INIT_CTRL_LABEL		init_ctrl_park_battle01
+FLAG_CHANGE_LABEL	flag_change_park_battle01
+SP_SCRIPT_LABEL		ev_park_battle01
+OBJ_CTRL_LABEL		obj_ctrl_park_battle01
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//				※マップ初期化時に毎回呼ばれる
+//--------------------------------------------------------------------
+init_ctrl_park_battle01:
+	_PROGRAM		TV_TOWER_HUSEI_CHK
+
+	//オーナーを出す
+	_CALL			battle_tower_owner_chk
+	_END
+
+//オーナーを出すかのチェック
+battle_tower_owner_chk:
+	//CNT_TOWER_RENSHOUにバトルタワー用保存ワークの値をセット
+	_LDVAL			PARAM0,BATTLE_TOWER_RENSHOU_SET
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	//「きんのたて」貰っているか
+	_IF_FLAGON_JUMP	FE_KINNOTATE_GET,battle_tower_owner_end
+
+	//「ぎんのたて」貰っているか
+	_IF_FLAGON_JUMP	FE_GINNOTATE_GET,battle_tower_owner_chk2
+
+	_FUNC_CALL		PARAM3,BATTLE_TOWER_RENSHOU
+	_IFVAL_JUMP		PARAM3,LT,50,battle_tower_owner_end
+
+	//５０以上なのでオーナー出す
+	_FLAG_RESET		FV_OWNER_01_PARK_BATTLE01
+	_PROGRAM		ADD_TOWER_OWNER
+	_RET
+
+//「ぎんのたて」貰っていて連勝数が１００以上かチェック
+battle_tower_owner_chk2:
+	_FUNC_CALL		PARAM3,BATTLE_TOWER_RENSHOU
+	_IFVAL_JUMP		PARAM3,LT,100,battle_tower_owner_end
+
+	//１００以上なのでオーナー出す
+	_FLAG_RESET		FV_OWNER_01_PARK_BATTLE01
+	_PROGRAM		ADD_TOWER_OWNER
+	_RET
+
+//何もしない
+battle_tower_owner_end:
+	//オーナー消す
+	_FLAG_SET		FV_OWNER_01_PARK_BATTLE01
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//			※マップ遷移タイミングで一度だけ呼ばれる
+//--------------------------------------------------------------------
+flag_change_park_battle01:
+	//バトルタワー後ならインタビュアーを出す
+	_CALL			tv_tower_chk
+	_END
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+obj_ctrl_park_battle01:
+	OBJ_CTRL_DATA		LOCALWORK1,0,obj_ctrl_park_battle01_mine
+	OBJ_CTRL_END
+
+obj_ctrl_park_battle01_mine:
+	_LDVAL				LOCALWORK1,1
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_U
+	_END
+
+ev_park_battle01:
+	SP_SCRIPT_DATA		LOCALWORK0,0,ev_park_battle01_01
+	SP_SCRIPT_DATA		LOCALWORK0,1,ev_park_battle01_save_alert
+	SP_SCRIPT_DATA		LOCALWORK0,2,ev_park_battle01_finish_win
+	SP_SCRIPT_DATA		LOCALWORK0,3,ev_park_battle01_finish_lose
+	SP_SCRIPT_DATA		LOCALWORK0,4,ev_park_battle01_saikai
+	SP_SCRIPT_END
+
+/********************************************************************/
+//						セーブチェック
+/********************************************************************/
+
+ev_park_battle01_01:
+	_PROGRAM		BATTLE_TOWER_INIT
+	_END
+
+ev_park_battle01_save_alert:
+	_TALK_OBJ_START
+	_TALK_KEYWAIT	msg_battle_tower_savealert
+	_TALK_CLOSE
+	_LDVAL			LOCALWORK0,5
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//						対戦終了
+/********************************************************************/
+
+ev_park_battle01_finish_win:
+	_TALK_OBJ_START
+	_TALKMSG		msg_battle_tower_finish_win1
+	_TALK_WAIT
+	_LDVAL			PARAM0,BATTLE_TOWER_SEQ_NO
+	_PROGRAM		BATTLE_TOWER_WORK_GET	
+	_IFVAL_JUMP		ANSWORK,EQ,BATTLE_TOWER_NO_ITEM_GET,ev_park_battle01_geted_ribbon
+	_PROGRAM		BATTLE_TOWER_RIBBON_GET	
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_park_battle01_geted_ribbon
+	_TALKMSG		msg_battle_tower_ribbon_get1
+	_TALK_WAIT
+	_JINGLE			MUS_FANFA4
+	_JINGLE_WAIT
+	_TALK_KEYWAIT	msg_battle_tower_ribbon_get2
+ev_park_battle01_geted_ribbon:
+	_LDVAL			PARAM0,BATTLE_TOWER_SAVED
+	_PROGRAM		BATTLE_TOWER_WORK_GET	
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_park_battle01_finish_win_no_save
+	_TALKMSG		msg_battle_tower_finish_save
+	_TALK_WAIT
+	_LDVAL			PARAM0,BATTLE_TOWER_RENSHOU_NOW_SET
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_PROGRAM		BATTLE_TOWER_ITEM_SET
+	_LDVAL			PARAM0,BATTLE_TOWER_CONTINUE
+	_PROGRAM		BATTLE_TOWER_SAVE
+	_SE				SE_SAVE
+	_SE_WAIT
+ev_park_battle01_finish_win_no_save:
+	_LDVAL			PARAM0,BATTLE_TOWER_SEQ_NO
+	_LDVAL			PARAM1,BATTLE_TOWER_CONTINUE
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_TALKMSG		msg_battle_tower_finish_win2
+	_TALK_WAIT
+	_PROGRAM		BATTLE_TOWER_ITEM_GET
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,park_battle01_item_no_get
+park_battle01_item_get:
+	_TALKMSG		msg_battle_tower_item_get
+	_TALK_WAIT
+	_JINGLE			MUS_FANFA4
+	_JINGLE_WAIT
+	_LDVAL			PARAM0,BATTLE_TOWER_TOTAL_ROUND
+	_PROGRAM		BATTLE_TOWER_WORK_GET
+	_IFVAL_JUMP		ANSWORK,NE,49,ev_park_battle01_49_no_win
+	_TALK_KEYWAIT	msg_battle_tower_49_win
+ev_park_battle01_49_no_win:
+	_TALK_KEYWAIT	msg_battle_tower_03
+	_TALK_CLOSE
+	_LDVAL			LOCALWORK0,5
+	_TALK_OBJ_END
+	_END
+
+park_battle01_item_no_get:
+	_TALK_KEYWAIT	msg_battle_tower_item_noget
+	_TALK_WAIT
+	_TALK_CLOSE
+	_LDVAL			LOCALWORK0,5
+	_TALK_OBJ_END
+	_END
+
+ev_park_battle01_finish_lose:
+	_TALK_OBJ_START
+	_TALKMSG		msg_battle_tower_finish_lose
+	_TALK_WAIT
+	_TALKMSG		msg_battle_tower_finish_save
+	_TALK_WAIT
+	_LDVAL			PARAM0,BATTLE_TOWER_RENSHOU_NOW_SET
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_LDVAL			PARAM0,BATTLE_TOWER_NO_CHALLENGE
+	_PROGRAM		BATTLE_TOWER_SAVE
+	_SE				SE_SAVE
+	_SE_WAIT
+	_TALK_KEYWAIT	msg_battle_tower_03
+	_TALK_CLOSE
+	_LDVAL			LOCALWORK0,5
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//						対戦再開
+/********************************************************************/
+
+ev_park_battle01_saikai:
+	_TALK_OBJ_START
+
+	//バトルタワー開始	02/09/20	nohara
+	_LDVAL			WK_SCENE_BATTLE_TOWER,1
+
+	_TALKMSG		msg_battle_tower_saikai
+	_TALK_WAIT
+	_TALKMSG		msg_battle_tower_saikai_save
+	_TALK_WAIT
+	_LDVAL			PARAM0,BATTLE_TOWER_CHALLENGE
+	_PROGRAM		BATTLE_TOWER_SAVE
+	_SE				SE_SAVE
+	_SE_WAIT
+	_LDVAL			PARAM0,BATTLE_TOWER_SAVED
+	_LDVAL			PARAM1,0
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_LDVAL			LOCALWORK0,5
+	_PROGRAM		TEMOTI_POKE_PUSH
+	_PROGRAM		BATTLE_TOWER_MONS_SEL
+
+//バトルルームへ
+	_TALK_KEYWAIT	msg_battle_tower_start_04
+	_TALK_CLOSE
+
+	_CALL			battle_tower_anime01
+	//_SET_OBJ_ANIME	PCWOMAN2_01_PARK_BATTLE01,anm_battle01_pcwoman
+	//_SET_OBJ_ANIME	EV_OBJ_SPID,anm_battle01_mine
+	//_OBJ_ANIME_WAIT
+
+	_MAP_CHANGE		PARK,PARK_BATTLE02,1,6
+	_LDVAL			LOCALWORK0,0
+
+	_STOP_SCRIPT
+
+/********************************************************************/
+//							受け付け
+/********************************************************************/
+SCRIPT_LABEL		ev_pcwoman2_01_p01_park_battle01
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,BATTLE_TOWER_SEQ_NO
+	_PROGRAM		BATTLE_TOWER_WORK_GET	
+	_IFVAL_JUMP		ANSWORK,EQ,BATTLE_TOWER_NO_ITEM_GET,ev_park_battle01_finish_win
+	_PROGRAM		TEMOTI_POKE_PUSH				//手持ちポケモン退避
+	
+	_TALK_KEYWAIT   msg_battle_tower_01				//受付嬢挨拶
+park_battle01_start:
+	_TALKMSG		msg_battle_tower_02				//挑戦しますか?
+	_TALK_WAIT
+	_SELECT_WINDOW	17,06,BATTLE_TOWER_MENU
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,park_battle01_battle_start	//挑戦
+	_CASEJUMP		1,park_battle01_battle_info		//説明
+	_CASEJUMP		2,park_battle01_end				//やめる
+	_CASECANCEL		park_battle01_end				//やめる
+
+park_battle01_battle_start:
+//参加するレベルを選択
+	_TALKMSG		msg_battle_tower_start_02
+	_TALK_WAIT
+	_SELECT_WINDOW	18,06,BATTLE_TOWER_LEVEL_MENU
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		2,park_battle01_end
+	_CASECANCEL		park_battle01_end
+
+//手持ちのポケモンで選択したレベルの部屋に挑戦できるかチェック
+	_PROGRAM		BATTLE_TOWER_POKE_CHECK
+	_IFVAL_JUMP		PARAM0,EQ,1,park_battle01_alert
+
+	_LDVAL			PARAM0,BATTLE_TOWER_LEVEL
+	_LDWK			PARAM1,ANSWORK
+	_LDWK			PARAM2,ANSWORK
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+
+//手持ちのポケモンから挑戦するポケモンを3体選ぶ
+	_TALK_KEYWAIT	msg_battle_tower_start_03
+
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		BATTLE_TOWER_POKE_SEL
+	_STOP_SCRIPT
+	_IFVAL_JUMP		ANSWORK,EQ,0,park_battle01_pokepop
+
+//挑戦する前にセーブする?
+	_TALK_YES_NO	msg_battle_tower_start_01
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,park_battle01_pokepop
+	_CASEJUMP		1,park_battle01_battle_save
+	_CASECANCEL		park_battle01_pokepop
+
+//挑戦前セーブ
+park_battle01_battle_save:
+	_LDVAL			PARAM0,BATTLE_TOWER_SELECTPOKE
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_LDVAL			LOCALWORK0,0
+	_LDVAL			PARAM0,BATTLE_TOWER_CHALLENGE_INIT
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_LDVAL			PARAM0,BATTLE_TOWER_SEQ_NO
+	_LDVAL			PARAM1,BATTLE_TOWER_CHALLENGE
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_LDVAL			PARAM0,BATTLE_TOWER_SAVED
+	_LDVAL			PARAM1,0
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_PROGRAM		TEMOTI_POKE_POP
+	_TALK_CLOSE
+	_TIME_WAIT		0x02
+	_CALL			FieldSaveScript
+	_LDVAL			LOCALWORK0,5
+	_WINDOW_CLEAR	0, 0, 15, 10
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,park_battle01_save_cancel
+
+//バトルタワーへの挑戦記録カウントアップ
+	_INC_RECORD		CNT_TOWER_BATTLE
+
+park_battle01_battle_saikai:
+	_PROGRAM		TEMOTI_POKE_PUSH
+	_PROGRAM		BATTLE_TOWER_MONS_SEL
+
+//バトルルームへ
+	//バトルタワー開始	02/07/11	nohara
+	_LDVAL			WK_SCENE_BATTLE_TOWER,1
+
+	_TALK_KEYWAIT	msg_battle_tower_start_04
+	_TALK_CLOSE
+
+	_CALL			battle_tower_anime01
+	//_SET_OBJ_ANIME	PCWOMAN2_01_PARK_BATTLE01,anm_battle01_pcwoman
+	//_SET_OBJ_ANIME	EV_OBJ_SPID,anm_battle01_mine
+	//_OBJ_ANIME_WAIT
+
+	_MAP_CHANGE		PARK,PARK_BATTLE02,1,6
+	_LDVAL			LOCALWORK0,0
+
+	_STOP_SCRIPT
+
+//バトルタワー説明
+park_battle01_battle_info:
+	_TALK_KEYWAIT	msg_battle_tower_info
+	_JUMP			park_battle01_start
+
+//セーブしないで終了したときのアラート
+park_battle01_alert:
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,park_battle01_battle_lv50_alert
+	_CASEJUMP		1,park_battle01_battle_lv100_alert
+
+park_battle01_battle_lv50_alert:
+	_TALK_KEYWAIT	msg_battle_tower_alert50
+	_JUMP			park_battle01_end_01
+
+park_battle01_battle_lv100_alert:
+	_TALK_KEYWAIT	msg_battle_tower_alert100
+	_JUMP			park_battle01_end_01
+
+park_battle01_save_cancel:
+	_LDVAL			PARAM0,BATTLE_TOWER_SEQNO_POP
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+	_JUMP			park_battle01_end
+
+//退避していた手持ちポケモンを復帰
+park_battle01_pokepop:
+	_PROGRAM		TEMOTI_POKE_POP
+//バトルタワー終了処理
+park_battle01_end:
+	_TALK_KEYWAIT	msg_battle_tower_03
+	_LDVAL			PARAM0,BATTLE_TOWER_CHALLENGE_INIT
+	_PROGRAM		BATTLE_TOWER_WORK_SET	
+park_battle01_end_01:
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//	エレベータに乗り込む
+//--------------------------------------------------------------------
+battle_tower_anime01:
+	_SET_OBJ_ANIME	PCWOMAN2_01_PARK_BATTLE01,pcwoman2_01_park_battle01_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,pcwoman2_01_park_battle01_anime01
+	_OBJ_ANIME_WAIT
+
+	_OPEN_DOOR_ANIME	6,1
+	_DOOR_ANIME_WAIT
+
+	_SET_OBJ_ANIME	PCWOMAN2_01_PARK_BATTLE01,pcwoman2_01_park_battle01_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_park_battle01_anime01
+	_OBJ_ANIME_WAIT
+
+	_CLOSE_DOOR_ANIME	6,1
+	_DOOR_ANIME_WAIT
+	_RET
+
+//ドアの前まで進む
+pcwoman2_01_park_battle01_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//エレベータに入る
+pcwoman2_01_park_battle01_anime02:
+	.byte	AC_WALK_U_1
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+//エレベータに入る
+hero_01_park_battle01_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+//=======================================================================
+//	OBJアニメーションデータ
+//=======================================================================
+
+anm_battle01_mine:
+	.byte	AC_WALK_U_2
+anm_battle01_pcwoman:
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						簡易会話:バトルのあいさつ					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm1_01_p01_park_battle01
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_youngm1_01_p01_park_battle01
+	_SWITCH	ANSWORK
+	_CASEJUMP	1,ev_youngm1_01_p02_park_battle01
+	_CASEJUMP	0,ev_youngm1_01_p03_park_battle01
+	_TALK_OBJ_END
+	_END
+	
+
+//はい
+ev_youngm1_01_p02_park_battle01:
+	_TALK_KEYWAIT	msg_youngm1_01_p02_park_battle01
+	_LDVAL	PARAM0	1
+	_CALL	ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_youngm1_01_p04_park_battle01//更新してない
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_youngm1_01_p08_park_battle01//更新した
+	_END
+
+//いいえ
+ev_youngm1_01_p03_park_battle01:
+	_TALK_KEYWAIT	msg_youngm1_01_p03_park_battle01
+	_TALK_OBJ_END
+	_END
+
+//会話更新していない
+ev_youngm1_01_p04_park_battle01:
+	_TALK_KEYWAIT	msg_youngm1_01_p04_park_battle01
+	_TALK_OBJ_END
+	_END
+
+//会話更新済み
+ev_youngm1_01_p08_park_battle01:
+	_TALK_KEYWAIT	msg_youngm1_01_p08_park_battle01
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						バトルタワー客							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerw1_01_p01_park_battle01
+	_EASY_OBJ_MSG	msg_trainerw1_01_p01_park_battle01
+	_END
+
+/********************************************************************/
+/*						バトルタワー客							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_park_battle01
+	_EASY_OBJ_MSG	msg_boy1_01_p01_park_battle01
+	_END
+
+
+/********************************************************************/
+/*						バトルタワー成績表							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_score_p01_park_battle01
+	_TALK_START
+	_PROGRAM	PUT_BTOWER_SCORE
+	_AB_KEYWAIT
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+	
+
+/********************************************************************/
+/*								オーナー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_01_p01_park_battle01
+	_TALK_OBJ_START
+
+	//「きんのたて」貰っているか
+	_IF_FLAGON_JUMP	FE_KINNOTATE_GET,ev_workerm1_01_p03_park_battle01
+
+	//「ぎんのたて」貰っているか
+	_IF_FLAGON_JUMP	FE_GINNOTATE_GET,ev_workerm1_01_p02_park_battle01
+
+	//「ぎんたて」入手イベント
+	_TALK_KEYWAIT	msg_workerm1_01_p01_park_battle01
+
+	_LDVAL			TMPWK0,GOODS_GINNOTATE
+	_GOODS_EVENT	GOODS_GINNOTATE
+	_IF_ZERO_JUMP	bag_max_tate_event
+
+	_FLAG_SET		FE_GINNOTATE_GET
+	_TALK_KEYWAIT	msg_workerm1_01_p04_park_battle01
+	_TALK_OBJ_END
+	_END
+
+//すでに「ぎんのたて」貰っている
+ev_workerm1_01_p02_park_battle01:
+	//「ぎんのたて」貰って、再度話し掛けたときに連勝数が１００以上かを見て分岐
+	_FUNC_CALL		ANSWORK,BATTLE_TOWER_RENSHOU
+	_IFVAL_JUMP		ANSWORK,LT,100,ev_workerm1_01_p03_park_battle01
+
+	_TALK_KEYWAIT	msg_workerm1_01_p02_park_battle01
+
+	_LDVAL			TMPWK0,GOODS_KINNOTATE
+	_GOODS_EVENT	GOODS_KINNOTATE
+	_IF_ZERO_JUMP	bag_max_tate_event
+
+	_FLAG_SET		FE_KINNOTATE_GET
+	_TALK_KEYWAIT	msg_workerm1_01_p04_park_battle01
+	_TALK_OBJ_END
+	_END
+
+//グッズいっぱい
+bag_max_tate_event:
+	_GET_GOODSNAME	1,TMPWK0
+	_TALK_KEYWAIT	msg_goodsget_p02
+	_TALK_KEYWAIT	msg_workerm1_01_p05_park_battle01
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテムを貰っている
+ev_workerm1_01_p03_park_battle01:
+	_TALK_KEYWAIT	msg_workerm1_01_p06_park_battle01
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+
+

@@ -1,0 +1,7 @@
+//MapEditNH Ver.3.50 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define DAIGO_01_CAVE_D0504	1
+
+//Exit ID = 1
+#define CAVE_D0504_DOOR01	0

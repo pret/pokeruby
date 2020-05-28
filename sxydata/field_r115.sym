@@ -1,0 +1,22 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 16
+#define WOMAN1_01_FIELD_R115	1
+#define TR_EXPERTM_01	2
+#define TR_KARATE_05	3
+#define SEED_01_FIELD_R115	4
+#define SEED_02_FIELD_R115	5
+#define SEED_03_FIELD_R115	6
+#define TR_BATTLEG_03	7
+#define TR_KARATE_04	8
+#define TR_COLLECTOR_02	9
+#define BALL1_16	10
+#define BALL1_17	11
+#define BALL1_18	12
+#define SEED_04_FIELD_R115	13
+#define SEED_05_FIELD_R115	14
+#define CRUSHROCK1_01_FIELD_R115	15
+#define BALL1_118	16
+
+//Exit ID = 1
+#define FIELD_R115_DOOR01	0

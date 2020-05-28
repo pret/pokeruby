@@ -1,0 +1,77 @@
+@*******************************************************************
+@		fld_eff.def
+@*******************************************************************
+
+	.text
+	.code 32
+
+@---------------------------------------
+@	¼°¹İ½Ï¸Û
+@---------------------------------------
+	.macro	INIT_SEQ								@ ¶³İÄ¸Ø±
+DEF_COUNT	=	0
+	.endm
+
+	.macro	DEF_SEQ	name							@ ¾¯Ä¶³İÄ
+\name	=	DEF_COUNT
+DEF_COUNT 	=	(DEF_COUNT + 1)
+	.endm
+
+@---------------------------------------
+@	ºÏİÄŞ¼İÎŞÙ
+@---------------------------------------
+	INIT_SEQ
+	DEF_SEQ	SEQ_SET_CELL							@ 0 ¾Ù¾¯Ä
+	DEF_SEQ SEQ_SET_PAL								@ 1 ÊßÚ¯Ä¾¯Ä
+	DEF_SEQ	SEQ_SET_PAL_NW							@ 2 ÊßÚ¯Ä¾¯Ä,“VŒó’²®–³‚µ
+	DEF_SEQ SEQ_SET_SUB								@ 3 ±¸À°¾¯ÄÙ°Áİ
+	DEF_SEQ	SEQ_SET_END								@ 4 ¾¯Ä´İÄŞ
+	DEF_SEQ	SEQ_SET_ALL								@ 5 ¾Ù,ÊßÚ¯Ä,»ÌŞ¾¯Ä
+	DEF_SEQ	SEQ_SET_CELL_SUB						@ 6 ¾Ù,»ÌŞ¾¯Ä
+	DEF_SEQ	SEQ_SET_PAL_SUB							@ 7 ÊßÚ¯Ä,»ÌŞ¾¯Ä
+
+@---------------------------------------
+@	¾¯ÄÏ¸Û
+@---------------------------------------
+	.macro	CELL_SET	cellAdrs					@ ¾Ù¾¯Ä
+	.byte	SEQ_SET_CELL
+	.long	\cellAdrs
+	.endm
+	
+	.macro	PAL_SET		palAdrs						@ ÊßÚ¯Ä¾¯Ä
+	.byte	SEQ_SET_PAL
+	.long	\palAdrs
+	.endm
+
+	.macro	PAL_NW_SET	palAdrs						@ ÊßÚ¯Ä¾¯Ä
+	.byte	SEQ_SET_PAL_NW
+	.long	\palAdrs
+	.endm
+
+	.macro	SUB_SET		subAdrs						@ »ÌŞÙ°Áİ¾¯Ä
+	.byte	SEQ_SET_SUB
+	.long	\subAdrs
+	.endm
+
+	.macro	ALL_SET		cellAdrs,palAdrs,subAdrs	@ ¾Ù,ÊßÚ¯Ä,»ÌŞ¾¯Ä
+	.byte	SEQ_SET_ALL
+	.long	\cellAdrs
+	.long	\palAdrs
+	.long	\subAdrs
+	.endm
+	
+	.macro	CELL_SUB_SET	cellAdrs,subAdrs		@ ¾Ù,»ÌŞ¾¯Ä
+	.byte	SEQ_SET_CELL_SUB
+	.long	\cellAdrs
+	.long	\subAdrs
+	.endm
+	
+	.macro	PAL_SUB_SET		palAdrs,subAdrs			@ ÊßÚ¯Ä,»ÌŞ¾¯Ä
+	.byte	SEQ_SET_PAL_SUB
+	.long	\palAdrs
+	.long	\subAdrs
+	.endm
+
+	.macro	SET_END									@ ¾¯Ä´İÄŞ
+	.byte	SEQ_SET_END
+	.endm

@@ -1,0 +1,2480 @@
+const	u8	WazaInfo[][56]={
+	{
+//はたく
+//てや　しっぽなどを　つかい
+	te_,ya_,spc_,si_,ttu_,po_,na_,do_,wo_,spc_,tu_,ka_,i_,CR_,
+//てきを　はたいて　こうげき
+	te_,ki_,wo_,spc_,ha_,ta_,i_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//からてチョップ
+//チョップで　てきを　こうげき
+	TI_,YYO_,TTU_,PU_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//おうふくビンタ
+//てきを　おうふくビンタで
+	te_,ki_,wo_,spc_,o_,u_,hu_,ku_,BI_,N_,TA_,de_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//れんぞくパンチ
+//てきを　れんぞくで　なぐりつけ
+	te_,ki_,wo_,spc_,re_,n_,zo_,ku_,de_,spc_,na_,gu_,ri_,tu_,ke_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//メガトンパンチ
+//ものすごい　ちからをこめた　パンチで
+	mo_,no_,su_,go_,i_,spc_,ti_,ka_,ra_,wo_,ko_,me_,ta_,spc_,PA_,N_,TI_,de_,CR_,
+//てきを　なぐって　こうげき
+	te_,ki_,wo_,spc_,na_,gu_,ttu_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ネコにこばん
+//こばんをなげて　てきを　こうげき
+	ko_,ba_,n_,wo_,na_,ge_,te_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//せんとうごに　おかねが　てにはいる
+	se_,n_,to_,u_,go_,ni_,spc_,o_,ka_,ne_,ga_,spc_,te_,ni_,ha_,i_,ru_,EOM_
+	},
+	{
+//ほのおのパンチ
+//ほのおをこめた　パンチで　こうげき
+	ho_,no_,o_,wo_,ko_,me_,ta_,spc_,PA_,N_,TI_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//れいとうパンチ
+//れいきをこめた　パンチで　こうげき
+	re_,i_,ki_,wo_,ko_,me_,ta_,spc_,PA_,N_,TI_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こおらせることがある
+	te_,ki_,wo_,spc_,ko_,o_,ra_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//かみなりパンチ
+//でんげきをこめた　パンチで　こうげき
+	de_,n_,ge_,ki_,wo_,ko_,me_,ta_,spc_,PA_,N_,TI_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　まひさせることがある
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ひっかく
+//するどいツメを　つかい
+	su_,ru_,do_,i_,TU_,ME_,wo_,spc_,tu_,ka_,i_,CR_,
+//てきを　ひっかいて　こうげき
+	te_,ki_,wo_,spc_,hi_,ttu_,ka_,i_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//はさむ
+//おおきなハサミを　つかい
+	o_,o_,ki_,na_,HA_,SA_,MI_,wo_,spc_,tu_,ka_,i_,CR_,
+//てきを　はさんで　こうげき
+	te_,ki_,wo_,spc_,ha_,sa_,n_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ハサミギロチン
+//おおきなハサミを　つかって
+	o_,o_,ki_,na_,HA_,SA_,MI_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//てきを　はさみ　せんとうふのうにする
+	te_,ki_,wo_,spc_,ha_,sa_,mi_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,su_,ru_,EOM_
+	},
+	{
+//かまいたち
+//１ターンめで　かぜのやいばを　つくり
+	n1_,TA_,bou_,N_,me_,de_,spc_,ka_,ze_,no_,ya_,i_,ba_,wo_,spc_,tu_,ku_,ri_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//つるぎのまい
+//たたかいの　おどりを　おどって
+	ta_,ta_,ka_,i_,no_,spc_,o_,do_,ri_,wo_,spc_,o_,do_,ttu_,te_,CR_,
+//こうげきを　グーンとあげる
+	ko_,u_,ge_,ki_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//いあいぎり
+//するどいカマや　ツメなどを　つかって
+	su_,ru_,do_,i_,KA_,MA_,ya_,spc_,TU_,ME_,na_,do_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//てきを　きりつけて　こうげき
+	te_,ki_,wo_,spc_,ki_,ri_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//かぜおこし
+//つばさで　つよいかぜを　おこし
+	tu_,ba_,sa_,de_,spc_,tu_,yo_,i_,ka_,ze_,wo_,spc_,o_,ko_,si_,CR_,
+//それを　てきにぶつけて　こうげき
+	so_,re_,wo_,spc_,te_,ki_,ni_,bu_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//つばさでうつ
+//つばさを　おおきく　ひろげて
+	tu_,ba_,sa_,wo_,spc_,o_,o_,ki_,ku_,spc_,hi_,ro_,ge_,te_,CR_,
+//そのまま　てきに　たいあたりする
+	so_,no_,ma_,ma_,spc_,te_,ki_,ni_,spc_,ta_,i_,a_,ta_,ri_,su_,ru_,EOM_
+	},
+	{
+//ふきとばし
+//つよいかぜで　てきを　ふきとばす
+	tu_,yo_,i_,ka_,ze_,de_,spc_,te_,ki_,wo_,spc_,hu_,ki_,to_,ba_,su_,CR_,
+//ふきとばすと　せんとうは　おわる
+	hu_,ki_,to_,ba_,su_,to_,spc_,se_,n_,to_,u_,ha_,spc_,o_,wa_,ru_,EOM_
+	},
+	{
+//そらをとぶ
+//１ターンめで　そらに　とびたって
+	n1_,TA_,bou_,N_,me_,de_,spc_,so_,ra_,ni_,spc_,to_,bi_,ta_,ttu_,te_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//しめつける
+//２ー５ターンのあいだ　ながいからだや
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,na_,ga_,i_,ka_,ra_,da_,ya_,CR_,
+//つるを　つかって　てきを　しめつける
+	tu_,ru_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,te_,ki_,wo_,spc_,si_,me_,tu_,ke_,ru_,EOM_
+	},
+	{
+//たたきつける
+//ながいシッポや　ツルなどを
+	na_,ga_,i_,SI_,TTU_,PO_,ya_,spc_,TU_,RU_,na_,do_,wo_,CR_,
+//てきに　たたきつけて　こうげき
+	te_,ki_,ni_,spc_,ta_,ta_,ki_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//つるのムチ
+//ムチのように　ほそながい　つるを
+	MU_,TI_,no_,yo_,u_,ni_,spc_,ho_,so_,na_,ga_,i_,spc_,tu_,ru_,wo_,CR_,
+//てきに　たたきつけて　こうげき
+	te_,ki_,ni_,spc_,ta_,ta_,ki_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ふみつけ
+//おおきなあしで　ふみつけて　こうげき
+	o_,o_,ki_,na_,a_,si_,de_,spc_,hu_,mi_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//にどげり
+//２ほんの　あしをつかって　てきを
+	n2_,ho_,n_,no_,spc_,a_,si_,wo_,tu_,ka_,ttu_,te_,spc_,te_,ki_,wo_,CR_,
+//２かい　れんぞくで　こうげき
+	n2_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//メガトンキック
+//ものすごい　ちからをこめた　キックで
+	mo_,no_,su_,go_,i_,spc_,ti_,ka_,ra_,wo_,ko_,me_,ta_,spc_,KI_,TTU_,KU_,de_,CR_,
+//てきを　けっとばして　こうげき
+	te_,ki_,wo_,spc_,ke_,ttu_,to_,ba_,si_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//とびげり
+//ジャンプした　いきおいで　キックを
+	ZI_,YYA_,N_,PU_,si_,ta_,spc_,i_,ki_,o_,i_,de_,spc_,KI_,TTU_,KU_,wo_,CR_,
+//くりだす　はずすと　ダメージをうける
+	ku_,ri_,da_,su_,spc_,ha_,zu_,su_,to_,spc_,DA_,ME_,bou_,ZI_,wo_,u_,ke_,ru_,EOM_
+	},
+	{
+//まわしげり
+//からだを　すばやく　１かいてんさせ
+	ka_,ra_,da_,wo_,spc_,su_,ba_,ya_,ku_,spc_,n1_,ka_,i_,te_,n_,sa_,se_,CR_,
+//そのいきおいで　キックを　くりだす
+	so_,no_,i_,ki_,o_,i_,de_,spc_,KI_,TTU_,KU_,wo_,spc_,ku_,ri_,da_,su_,EOM_
+	},
+	{
+//すなかけ
+//てきの　かおなどに　すなをかけて
+	te_,ki_,no_,spc_,ka_,o_,na_,do_,ni_,spc_,su_,na_,wo_,ka_,ke_,te_,CR_,
+//めいちゅうりつを　さげさせる
+	me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//ずつき
+//あたまから　つっこんで　こうげき
+	a_,ta_,ma_,ka_,ra_,spc_,tu_,ttu_,ko_,n_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//つのでつく
+//とがった　つのを　つかい
+	to_,ga_,ttu_,ta_,spc_,tu_,no_,wo_,spc_,tu_,ka_,i_,CR_,
+//てきを　つついて　こうげき
+	te_,ki_,wo_,spc_,tu_,tu_,i_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//みだれづき
+//とがった　つのなどを　つかい
+	to_,ga_,ttu_,ta_,spc_,tu_,no_,na_,do_,wo_,spc_,tu_,ka_,i_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//つのドリル
+//つのを　ドリルのように　かいてんさせ
+	tu_,no_,wo_,spc_,DO_,RI_,RU_,no_,yo_,u_,ni_,spc_,ka_,i_,te_,n_,sa_,se_,CR_,
+//てきを　つつき　せんとうふのうにする
+	te_,ki_,wo_,spc_,tu_,tu_,ki_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,su_,ru_,EOM_
+	},
+	{
+//たいあたり
+//からだぜんたいを　つかって
+	ka_,ra_,da_,ze_,n_,ta_,i_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//てきに　たいあたりして　こうげき
+	te_,ki_,ni_,spc_,ta_,i_,a_,ta_,ri_,si_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//のしかかり
+//からだごと　たおれこんで　こうげき
+	ka_,ra_,da_,go_,to_,spc_,ta_,o_,re_,ko_,n_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　まひさせることがある
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//まきつく
+//２ー５ターンのあいだ　ながいからだや
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,na_,ga_,i_,ka_,ra_,da_,ya_,CR_,
+//ツルをつかって　てきを　しめつける
+	TU_,RU_,wo_,tu_,ka_,ttu_,te_,spc_,te_,ki_,wo_,spc_,si_,me_,tu_,ke_,ru_,EOM_
+	},
+	{
+//とっしん
+//いきおいをつけて　てきに　たいあたり
+	i_,ki_,o_,i_,wo_,tu_,ke_,te_,spc_,te_,ki_,ni_,spc_,ta_,i_,a_,ta_,ri_,CR_,
+//じぶんもすこし　ダメージをうける
+	zi_,bu_,n_,mo_,su_,ko_,si_,spc_,DA_,ME_,bou_,ZI_,wo_,u_,ke_,ru_,EOM_
+	},
+	{
+//あばれる
+//２ー３ターンのあいだ　あばれつづける
+	n2_,bou_,n3_,TA_,bou_,N_,no_,a_,i_,da_,spc_,a_,ba_,re_,tu_,du_,ke_,ru_,CR_,
+//あばれたあとは　こんらんしてしまう
+	a_,ba_,re_,ta_,a_,to_,ha_,spc_,ko_,n_,ra_,n_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//すてみタックル
+//いのちをかけて　てきに　たいあたり
+	i_,no_,ti_,wo_,ka_,ke_,te_,spc_,te_,ki_,ni_,spc_,ta_,i_,a_,ta_,ri_,CR_,
+//じぶんもすこし　ダメージをうける
+	zi_,bu_,n_,mo_,su_,ko_,si_,spc_,DA_,ME_,bou_,ZI_,wo_,u_,ke_,ru_,EOM_
+	},
+	{
+//しっぽをふる
+//てきに　しっぽをふって　ゆだんさせて
+	te_,ki_,ni_,spc_,si_,ttu_,po_,wo_,hu_,ttu_,te_,spc_,yu_,da_,n_,sa_,se_,te_,CR_,
+//ぼうぎょを　さげさせる
+	bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//どくばり
+//どくのある　ハリや　つので　こうげき
+	do_,ku_,no_,a_,ru_,spc_,HA_,RI_,ya_,spc_,tu_,no_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきに　どくをあたえることがある
+	te_,ki_,ni_,spc_,do_,ku_,wo_,a_,ta_,e_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ダブルニードル
+//りょうての　ハリを　つかって
+	ri_,yyo_,u_,te_,no_,spc_,HA_,RI_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//てきを　２かい　れんぞくで　こうげき
+	te_,ki_,wo_,spc_,n2_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ミサイルばり
+//するどいハリを　てきに　はっしゃして
+	su_,ru_,do_,i_,HA_,RI_,wo_,spc_,te_,ki_,ni_,spc_,ha_,ttu_,si_,yya_,si_,te_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//にらみつける
+//てきを　にらんで　おびえさせて
+	te_,ki_,wo_,spc_,ni_,ra_,n_,de_,spc_,o_,bi_,e_,sa_,se_,te_,CR_,
+//ぼうぎょを　さげさせる
+	bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//かみつく
+//するどい　はで　かみついて　こうげき
+	su_,ru_,do_,i_,spc_,ha_,de_,spc_,ka_,mi_,tu_,i_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//なきごえ
+//かわいくないて　てきを　ゆだんさせて
+	ka_,wa_,i_,ku_,na_,i_,te_,spc_,te_,ki_,wo_,spc_,yu_,da_,n_,sa_,se_,te_,CR_,
+//こうげきを　さげさせる
+	ko_,u_,ge_,ki_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//ほえる
+//ほえて　てきを　にげださせる
+	ho_,e_,te_,spc_,te_,ki_,wo_,spc_,ni_,ge_,da_,sa_,se_,ru_,CR_,
+//てきが　にげると　せんとうは　おわる
+	te_,ki_,ga_,spc_,ni_,ge_,ru_,to_,spc_,se_,n_,to_,u_,ha_,spc_,o_,wa_,ru_,EOM_
+	},
+	{
+//うたう
+//ここちよい　うたごえで
+	ko_,ko_,ti_,yo_,i_,spc_,u_,ta_,go_,e_,de_,CR_,
+//てきを　ふかいねむりへと　さそう
+	te_,ki_,wo_,spc_,hu_,ka_,i_,ne_,mu_,ri_,he_,to_,spc_,sa_,so_,u_,EOM_
+	},
+	{
+//ちょうおんぱ
+//からだから　かいおんぱを　はっして
+	ka_,ra_,da_,ka_,ra_,spc_,ka_,i_,o_,n_,pa_,wo_,spc_,ha_,ttu_,si_,te_,CR_,
+//てきを　こんらんさせることがある
+	te_,ki_,wo_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ソニックブーム
+//しょうげきはで　てきを　こうげき
+	si_,yyo_,u_,ge_,ki_,ha_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//２０の　きまったダメージを　あたえる
+	n2_,n0_,no_,spc_,ki_,ma_,ttu_,ta_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//かなしばり
+//ちょうのうりょくで　てきの　うごきを
+	ti_,yyo_,u_,no_,u_,ri_,yyo_,ku_,de_,spc_,te_,ki_,no_,spc_,u_,go_,ki_,wo_,CR_,
+//とめて　わざを　１つ　つかえなくする
+	to_,me_,te_,spc_,wa_,za_,wo_,spc_,n1_,tu_,spc_,tu_,ka_,e_,na_,ku_,su_,ru_,EOM_
+	},
+	{
+//ようかいえき
+//つよいさんで　てきの　ひふを　とかす
+	tu_,yo_,i_,sa_,n_,de_,spc_,te_,ki_,no_,spc_,hi_,hu_,wo_,spc_,to_,ka_,su_,CR_,
+//ぼうぎょを　さげることがある
+	bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ひのこ
+//ちいさな　ほのおで　こうげき
+	ti_,i_,sa_,na_,spc_,ho_,no_,o_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//かえんほうしゃ
+//すごい　ほのおで　こうげき
+	su_,go_,i_,spc_,ho_,no_,o_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//しろいきり
+//しろいきりで　からだを　おおい
+	si_,ro_,i_,ki_,ri_,de_,spc_,ka_,ra_,da_,wo_,spc_,o_,o_,i_,CR_,
+//のうりょくを　さげられないようにする
+	no_,u_,ri_,yyo_,ku_,wo_,spc_,sa_,ge_,ra_,re_,na_,i_,yo_,u_,ni_,su_,ru_,EOM_
+	},
+	{
+//みずでっぽう
+//みずを　はっしゃして
+	mi_,zu_,wo_,spc_,ha_,ttu_,si_,yya_,si_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ハイドロポンプ
+//みずを　ものすごい　いきおいで
+	mi_,zu_,wo_,spc_,mo_,no_,su_,go_,i_,spc_,i_,ki_,o_,i_,de_,CR_,
+//はっしゃして　てきを　こうげき
+	ha_,ttu_,si_,yya_,si_,te_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//なみのり
+//みずに　なみを　おこし　それを
+	mi_,zu_,ni_,spc_,na_,mi_,wo_,spc_,o_,ko_,si_,spc_,so_,re_,wo_,CR_,
+//ものすごい　ちからで　たたきつける
+	mo_,no_,su_,go_,i_,spc_,ti_,ka_,ra_,de_,spc_,ta_,ta_,ki_,tu_,ke_,ru_,EOM_
+	},
+	{
+//れいとうビーム
+//れいきを　はっしゃして　こうげき
+	re_,i_,ki_,wo_,spc_,ha_,ttu_,si_,yya_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こおらせることがある
+	te_,ki_,wo_,spc_,ko_,o_,ra_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ふぶき
+//ゆきを　つよいかぜにのせて　こうげき
+	yu_,ki_,wo_,spc_,tu_,yo_,i_,ka_,ze_,ni_,no_,se_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こおらせることがある
+	te_,ki_,wo_,spc_,ko_,o_,ra_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//サイケこうせん
+//ふしぎな　ひかりを　はっしゃする
+	hu_,si_,gi_,na_,spc_,hi_,ka_,ri_,wo_,spc_,ha_,ttu_,si_,yya_,su_,ru_,CR_,
+//てきを　こんらんさせることがある
+	te_,ki_,wo_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//バブルこうせん
+//あわを　いきおいよく　はっしゃする
+	a_,wa_,wo_,spc_,i_,ki_,o_,i_,yo_,ku_,spc_,ha_,ttu_,si_,yya_,su_,ru_,CR_,
+//てきの　すばやさを　さげることがある
+	te_,ki_,no_,spc_,su_,ba_,ya_,sa_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//オーロラビーム
+//にじいろの　ひかりを　はっしゃする
+	ni_,zi_,i_,ro_,no_,spc_,hi_,ka_,ri_,wo_,spc_,ha_,ttu_,si_,yya_,su_,ru_,CR_,
+//こうげきを　さげることがある
+	ko_,u_,ge_,ki_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//はかいこうせん
+//ダメージは　おおきいが　つかうと
+	DA_,ME_,bou_,ZI_,ha_,spc_,o_,o_,ki_,i_,ga_,spc_,tu_,ka_,u_,to_,CR_,
+//つぎのターン　うごけなくなってしまう
+	tu_,gi_,no_,TA_,bou_,N_,spc_,u_,go_,ke_,na_,ku_,na_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//つつく
+//くちばしなどを　つかって
+	ku_,ti_,ba_,si_,na_,do_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//てきを　つついて　こうげき
+	te_,ki_,wo_,spc_,tu_,tu_,i_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ドリルくちばし
+//くちばしを　ちゅうしんに　からだを
+	ku_,ti_,ba_,si_,wo_,spc_,ti_,yyu_,u_,si_,n_,ni_,spc_,ka_,ra_,da_,wo_,CR_,
+//かいてんさせて　てきに　とっしんする
+	ka_,i_,te_,n_,sa_,se_,te_,spc_,te_,ki_,ni_,spc_,to_,ttu_,si_,n_,su_,ru_,EOM_
+	},
+	{
+//じごくぐるま
+//じぶんごと　じめんに　たたきつける
+	zi_,bu_,n_,go_,to_,spc_,zi_,me_,n_,ni_,spc_,ta_,ta_,ki_,tu_,ke_,ru_,CR_,
+//じぶんにも　すこしダメージ
+	zi_,bu_,n_,ni_,mo_,spc_,su_,ko_,si_,DA_,ME_,bou_,ZI_,EOM_
+	},
+	{
+//けたぐり
+//おもい　ポケモンには　より
+	o_,mo_,i_,spc_,PO_,KE_,MO_,N_,ni_,ha_,spc_,yo_,ri_,CR_,
+//おおきな　ダメージを　あたえる
+	o_,o_,ki_,na_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//カウンター
+//てきからうけた　ぶつりこうげきの
+	te_,ki_,ka_,ra_,u_,ke_,ta_,spc_,bu_,tu_,ri_,ko_,u_,ge_,ki_,no_,CR_,
+//ダメージを　ばいにしてかえす
+	DA_,ME_,bou_,ZI_,wo_,spc_,ba_,i_,ni_,si_,te_,ka_,e_,su_,EOM_
+	},
+	{
+//ちきゅうなげ
+//いんりょくを　りようして　なげる
+	i_,n_,ri_,yyo_,ku_,wo_,spc_,ri_,yo_,u_,si_,te_,spc_,na_,ge_,ru_,CR_,
+//レベルぶんの　ダメージを　あたえる
+	RE_,BE_,RU_,bu_,n_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//かいりき
+//ぜんしんに　すごいちからを　ためて
+	ze_,n_,si_,n_,ni_,spc_,su_,go_,i_,ti_,ka_,ra_,wo_,spc_,ta_,me_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//すいとる
+//てきに　あたえた　ダメージの
+	te_,ki_,ni_,spc_,a_,ta_,e_,ta_,spc_,DA_,ME_,bou_,ZI_,no_,CR_,
+//はんぶん　たいりょくを　かいふくする
+	ha_,n_,bu_,n_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//メガドレイン
+//てきに　あたえた　ダメージの
+	te_,ki_,ni_,spc_,a_,ta_,e_,ta_,spc_,DA_,ME_,bou_,ZI_,no_,CR_,
+//はんぶん　たいりょくを　かいふくする
+	ha_,n_,bu_,n_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//やどりぎのタネ
+//てきの　からだに　タネをうえて
+	te_,ki_,no_,spc_,ka_,ra_,da_,ni_,spc_,TA_,NE_,wo_,u_,e_,te_,CR_,
+//ターンごとに　たいりょくを　すいとる
+	TA_,bou_,N_,go_,to_,ni_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,su_,i_,to_,ru_,EOM_
+	},
+	{
+//せいちょう
+//いっきに　からだを　せいちょうさせて
+	i_,ttu_,ki_,ni_,spc_,ka_,ra_,da_,wo_,spc_,se_,i_,ti_,yyo_,u_,sa_,se_,te_,CR_,
+//とくこうを　あげる
+	to_,ku_,ko_,u_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//はっぱカッター
+//はっぱで　てきを　きりつける
+	ha_,ttu_,pa_,de_,spc_,te_,ki_,wo_,spc_,ki_,ri_,tu_,ke_,ru_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//ソーラービーム
+//１ターンめで　ひかりを　きゅうしゅう
+	n1_,TA_,bou_,N_,me_,de_,spc_,hi_,ka_,ri_,wo_,spc_,ki_,yyu_,u_,si_,yyu_,u_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//どくのこな
+//どくそを　ふくんだ　こなを　ふりまき
+	do_,ku_,so_,wo_,spc_,hu_,ku_,n_,da_,spc_,ko_,na_,wo_,spc_,hu_,ri_,ma_,ki_,CR_,
+//てきに　どくをあたえる
+	te_,ki_,ni_,spc_,do_,ku_,wo_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//しびれごな
+//しびれる　こなを　ふりまき
+	si_,bi_,re_,ru_,spc_,ko_,na_,wo_,spc_,hu_,ri_,ma_,ki_,CR_,
+//てきを　まひさせてしまう
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ねむりごな
+//ねむくなる　こなを　ふりまき
+	ne_,mu_,ku_,na_,ru_,spc_,ko_,na_,wo_,spc_,hu_,ri_,ma_,ki_,CR_,
+//てきを　ねむらせてしまう
+	te_,ki_,wo_,spc_,ne_,mu_,ra_,se_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//はなびらのまい
+//２ー３ターンのあいだ　あばれつづける
+	n2_,bou_,n3_,TA_,bou_,N_,no_,a_,i_,da_,spc_,a_,ba_,re_,tu_,du_,ke_,ru_,CR_,
+//あばれたあとは　こんらんしてしまう
+	a_,ba_,re_,ta_,a_,to_,ha_,spc_,ko_,n_,ra_,n_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//いとをはく
+//いとを　てきの　からだに　まきつけ
+	i_,to_,wo_,spc_,te_,ki_,no_,spc_,ka_,ra_,da_,ni_,spc_,ma_,ki_,tu_,ke_,CR_,
+//すばやさを　さげさせる
+	su_,ba_,ya_,sa_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//りゅうのいかり
+//しょうげきはで　てきを　こうげき
+	si_,yyo_,u_,ge_,ki_,ha_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//４０の　きまったダメージを　あたえる
+	n4_,n0_,no_,spc_,ki_,ma_,ttu_,ta_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//ほのおのうず
+//２ー５ターンのあいだ　てきを
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,te_,ki_,wo_,CR_,
+//ほのおの　ちゅうしんに　とじこめる
+	ho_,no_,o_,no_,spc_,ti_,yyu_,u_,si_,n_,ni_,spc_,to_,zi_,ko_,me_,ru_,EOM_
+	},
+	{
+//でんきショック
+//でんげきを　あびせて　こうげき
+	de_,n_,ge_,ki_,wo_,spc_,a_,bi_,se_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　まひさせることがある
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//１０まんボルト
+//つよいでんげきを　あびせて　こうげき
+	tu_,yo_,i_,de_,n_,ge_,ki_,wo_,spc_,a_,bi_,se_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　まひさせることがある
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//でんじは
+//よわいでんげきを　てきに　ぶつけて
+	yo_,wa_,i_,de_,n_,ge_,ki_,wo_,spc_,te_,ki_,ni_,spc_,bu_,tu_,ke_,te_,CR_,
+//まひさせてしまう
+	ma_,hi_,sa_,se_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//かみなり
+//てきに　むかって　かみなりを　おとす
+	te_,ki_,ni_,spc_,mu_,ka_,ttu_,te_,spc_,ka_,mi_,na_,ri_,wo_,spc_,o_,to_,su_,CR_,
+//まひさせることがある
+	ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//いわおとし
+//ちいさな　いわを　なげつけて
+	ti_,i_,sa_,na_,spc_,i_,wa_,wo_,spc_,na_,ge_,tu_,ke_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//じしん
+//じめんを　ゆらして　こうげき
+	zi_,me_,n_,wo_,spc_,yu_,ra_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//とんでる　てきいがいに　だいダメージ
+	to_,n_,de_,ru_,spc_,te_,ki_,i_,ga_,i_,ni_,spc_,da_,i_,DA_,ME_,bou_,ZI_,EOM_
+	},
+	{
+//じわれ
+//じわれを　おこして　てきを　のみこむ
+	zi_,wa_,re_,wo_,spc_,o_,ko_,si_,te_,spc_,te_,ki_,wo_,spc_,no_,mi_,ko_,mu_,CR_,
+//のみこまれると　せんとうふのうになる
+	no_,mi_,ko_,ma_,re_,ru_,to_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,na_,ru_,EOM_
+	},
+	{
+//あなをほる
+//１ターンめで　じめんに　もぐり
+	n1_,TA_,bou_,N_,me_,de_,spc_,zi_,me_,n_,ni_,spc_,mo_,gu_,ri_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//どくどく
+//じょじょに　ダメージがふえる　どくを
+	zi_,yyo_,zi_,yyo_,ni_,spc_,DA_,ME_,bou_,ZI_,ga_,hu_,e_,ru_,spc_,do_,ku_,wo_,CR_,
+//てきに　あたえる
+	te_,ki_,ni_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//ねんりき
+//ちょうのうりょくで　こうげき
+	ti_,yyo_,u_,no_,u_,ri_,yyo_,ku_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こんらんさせることがある
+	te_,ki_,wo_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//サイコキネシス
+//つよいねんりきで　てきを　こうげき
+	tu_,yo_,i_,ne_,n_,ri_,ki_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//とくぼうを　さげることがある
+	to_,ku_,bo_,u_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//さいみんじゅつ
+//てきに　あんじを　かけて
+	te_,ki_,ni_,spc_,a_,n_,zi_,wo_,spc_,ka_,ke_,te_,CR_,
+//ふかい　ねむりへと　さそう
+	hu_,ka_,i_,spc_,ne_,mu_,ri_,he_,to_,spc_,sa_,so_,u_,EOM_
+	},
+	{
+//ヨガのポーズ
+//ヨガのポーズで　ねむった　ちからを
+	YO_,GA_,no_,PO_,bou_,ZU_,de_,spc_,ne_,mu_,ttu_,ta_,spc_,ti_,ka_,ra_,wo_,CR_,
+//ひきだし　こうげきを　あげる
+	hi_,ki_,da_,si_,spc_,ko_,u_,ge_,ki_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//こうそくいどう
+//ちからを　ぬいて　からだを　かるくし
+	ti_,ka_,ra_,wo_,spc_,nu_,i_,te_,spc_,ka_,ra_,da_,wo_,spc_,ka_,ru_,ku_,si_,CR_,
+//すばやさを　グーンとあげる
+	su_,ba_,ya_,sa_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//でんこうせっか
+//ものすごい　はやさで　うごいて　
+	mo_,no_,su_,go_,i_,spc_,ha_,ya_,sa_,de_,spc_,u_,go_,i_,te_,spc_,CR_,
+//せんせいこうげきする
+	se_,n_,se_,i_,ko_,u_,ge_,ki_,su_,ru_,EOM_
+	},
+	{
+//いかり
+//こうげきされるたびに　いかりで
+	ko_,u_,ge_,ki_,sa_,re_,ru_,ta_,bi_,ni_,spc_,i_,ka_,ri_,de_,CR_,
+//こうげきが　あがっていく
+	ko_,u_,ge_,ki_,ga_,spc_,a_,ga_,ttu_,te_,i_,ku_,EOM_
+	},
+	{
+//テレポート
+//ちょうのうりょくを　つかって
+	ti_,yyo_,u_,no_,u_,ri_,yyo_,ku_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//せんとうから　だっしゅつする
+	se_,n_,to_,u_,ka_,ra_,spc_,da_,ttu_,si_,yyu_,tu_,su_,ru_,EOM_
+	},
+	{
+//ナイトヘッド
+//てきに　おそろしい　まぼろしを　みせ
+	te_,ki_,ni_,spc_,o_,so_,ro_,si_,i_,spc_,ma_,bo_,ro_,si_,wo_,spc_,mi_,se_,CR_,
+//レベルぶんの　ダメージを　あたえる
+	RE_,BE_,RU_,bu_,n_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//ものまね
+//てきが　つかった　わざが
+	te_,ki_,ga_,spc_,tu_,ka_,ttu_,ta_,spc_,wa_,za_,ga_,CR_,
+//そのときだけ　じぶんの　わざになる
+	so_,no_,to_,ki_,da_,ke_,spc_,zi_,bu_,n_,no_,spc_,wa_,za_,ni_,na_,ru_,EOM_
+	},
+	{
+//いやなおと
+//いやなおとを　だして　てきの
+	i_,ya_,na_,o_,to_,wo_,spc_,da_,si_,te_,spc_,te_,ki_,no_,CR_,
+//ぼうぎょを　ガクッとさげさせる
+	bo_,u_,gi_,yyo_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//かげぶんしん
+//ぶんしんで　てきを　まどわせ
+	bu_,n_,si_,n_,de_,spc_,te_,ki_,wo_,spc_,ma_,do_,wa_,se_,CR_,
+//かいひりつを　あげる
+	ka_,i_,hi_,ri_,tu_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//じこさいせい
+//キズついた　からだを　たいりょくの
+	KI_,ZU_,tu_,i_,ta_,spc_,ka_,ra_,da_,wo_,spc_,ta_,i_,ri_,yyo_,ku_,no_,CR_,
+//はんぶんだけ　かいふくする
+	ha_,n_,bu_,n_,da_,ke_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//かたくなる
+//ぜんしんに　ちからをこめ　かたくなり
+	ze_,n_,si_,n_,ni_,spc_,ti_,ka_,ra_,wo_,ko_,me_,spc_,ka_,ta_,ku_,na_,ri_,CR_,
+//ぼうぎょを　あげる
+	bo_,u_,gi_,yyo_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//ちいさくなる
+//からだを　ちぢめて　ちいさくなり
+	ka_,ra_,da_,wo_,spc_,ti_,di_,me_,te_,spc_,ti_,i_,sa_,ku_,na_,ri_,CR_,
+//かいひりつを　あげる
+	ka_,i_,hi_,ri_,tu_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//えんまく
+//けむりや　スミなどで　てきの
+	ke_,mu_,ri_,ya_,spc_,SU_,MI_,na_,do_,de_,spc_,te_,ki_,no_,CR_,
+//めいちゅうりつを　さげさせる
+	me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//あやしいひかり
+//あやしいひかりで　てきを
+	a_,ya_,si_,i_,hi_,ka_,ri_,de_,spc_,te_,ki_,wo_,CR_,
+//まどわし　こんらんさせてしまう
+	ma_,do_,wa_,si_,spc_,ko_,n_,ra_,n_,sa_,se_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//からにこもる
+//かたいからに　もぐりこんで
+	ka_,ta_,i_,ka_,ra_,ni_,spc_,mo_,gu_,ri_,ko_,n_,de_,CR_,
+//ぼうぎょを　あげる
+	bo_,u_,gi_,yyo_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//まるくなる
+//からだを　まるめて　きゅうしょを
+	ka_,ra_,da_,wo_,spc_,ma_,ru_,me_,te_,spc_,ki_,yyu_,u_,si_,yyo_,wo_,CR_,
+//かくし　ぼうぎょを　あげる
+	ka_,ku_,si_,spc_,bo_,u_,gi_,yyo_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//バリアー
+//めのまえに　かべを　つくりだし
+	me_,no_,ma_,e_,ni_,spc_,ka_,be_,wo_,spc_,tu_,ku_,ri_,da_,si_,CR_,
+//ぼうぎょを　グーンとあげる
+	bo_,u_,gi_,yyo_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//ひかりのかべ
+//ひかりのかべを　つくり
+	hi_,ka_,ri_,no_,ka_,be_,wo_,spc_,tu_,ku_,ri_,CR_,
+//とくこうの　ダメージを　よわめる
+	to_,ku_,ko_,u_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,yo_,wa_,me_,ru_,EOM_
+	},
+	{
+//くろいきり
+//くろいきりに　おおわれ　のうりょくの
+	ku_,ro_,i_,ki_,ri_,ni_,spc_,o_,o_,wa_,re_,spc_,no_,u_,ri_,yyo_,ku_,no_,CR_,
+//いじょうを　もとにもどす
+	i_,zi_,yyo_,u_,wo_,spc_,mo_,to_,ni_,mo_,do_,su_,EOM_
+	},
+	{
+//リフレクター
+//かべを　つくって　ぶつり　こうげきの
+	ka_,be_,wo_,spc_,tu_,ku_,ttu_,te_,spc_,bu_,tu_,ri_,spc_,ko_,u_,ge_,ki_,no_,CR_,
+//ダメージを　よわめる
+	DA_,ME_,bou_,ZI_,wo_,spc_,yo_,wa_,me_,ru_,EOM_
+	},
+	{
+//きあいだめ
+//こうげきに　きあいを　こめて
+	ko_,u_,ge_,ki_,ni_,spc_,ki_,a_,i_,wo_,spc_,ko_,me_,te_,CR_,
+//きゅうしょに　あたりやすくする
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,ku_,su_,ru_,EOM_
+	},
+	{
+//がまん
+//２ターン　こうげきに　たえて
+	n2_,TA_,bou_,N_,spc_,ko_,u_,ge_,ki_,ni_,spc_,ta_,e_,te_,CR_,
+//うけたダメージを　ばいにしてかえす
+	u_,ke_,ta_,DA_,ME_,bou_,ZI_,wo_,spc_,ba_,i_,ni_,si_,te_,ka_,e_,su_,EOM_
+	},
+	{
+//ゆびをふる
+//ゆびを　ふって　のうを　しげきして
+	yu_,bi_,wo_,spc_,hu_,ttu_,te_,spc_,no_,u_,wo_,spc_,si_,ge_,ki_,si_,te_,CR_,
+//いろんな　ワザを　ランダムでくりだす
+	i_,ro_,n_,na_,spc_,WA_,ZA_,wo_,spc_,RA_,N_,DA_,MU_,de_,ku_,ri_,da_,su_,EOM_
+	},
+	{
+//オウムがえし
+//てきの　わざを　まねして
+	te_,ki_,no_,spc_,wa_,za_,wo_,spc_,ma_,ne_,si_,te_,CR_,
+//おなじわざで　てきを　こうげき
+	o_,na_,zi_,wa_,za_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//じばく
+//てきに　だいダメージを　あたえるが
+	te_,ki_,ni_,spc_,da_,i_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,ga_,CR_,
+//つかうと　せんとうふのうに　なる
+	tu_,ka_,u_,to_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,spc_,na_,ru_,EOM_
+	},
+	{
+//タマゴばくだん
+//タマゴを　おもいっきり　なげつけて
+	TA_,MA_,GO_,wo_,spc_,o_,mo_,i_,ttu_,ki_,ri_,spc_,na_,ge_,tu_,ke_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//したでなめる
+//ながいしたで　なめまわして　こうげき
+	na_,ga_,i_,si_,ta_,de_,spc_,na_,me_,ma_,wa_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　まひさせることがある
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//スモッグ
+//はいきガスを　ふきかけて　こうげき
+	ha_,i_,ki_,GA_,SU_,wo_,spc_,hu_,ki_,ka_,ke_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきに　どくをあたえることがある
+	te_,ki_,ni_,spc_,do_,ku_,wo_,a_,ta_,e_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ヘドロこうげき
+//ヘドロを　なげつけて　こうげき
+	HE_,DO_,RO_,wo_,spc_,na_,ge_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきに　どくをあたえることがある
+	te_,ki_,ni_,spc_,do_,ku_,wo_,a_,ta_,e_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ホネこんぼう
+//てにもった　ホネで　てきを　こうげき
+	te_,ni_,mo_,ttu_,ta_,spc_,HO_,NE_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//だいもんじ
+//だいの　もじが　すべてを　やきつくす
+	da_,i_,no_,spc_,mo_,zi_,ga_,spc_,su_,be_,te_,wo_,spc_,ya_,ki_,tu_,ku_,su_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//たきのぼり
+//たきを　さかのぼるような　いきおいで
+	ta_,ki_,wo_,spc_,sa_,ka_,no_,bo_,ru_,yo_,u_,na_,spc_,i_,ki_,o_,i_,de_,CR_,
+//てきに　とっしんする
+	te_,ki_,ni_,spc_,to_,ttu_,si_,n_,su_,ru_,EOM_
+	},
+	{
+//からではさむ
+//２ー５ターンのあいだ　てきを
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,te_,ki_,wo_,CR_,
+//からに　はさみこんでしまう
+	ka_,ra_,ni_,spc_,ha_,sa_,mi_,ko_,n_,de_,si_,ma_,u_,EOM_
+	},
+	{
+//スピードスター
+//ぜったいに　よけられない　ほしがたの
+	ze_,ttu_,ta_,i_,ni_,spc_,yo_,ke_,ra_,re_,na_,i_,spc_,ho_,si_,ga_,ta_,no_,CR_,
+//こうせんを　むすうに　はっしゃする
+	ko_,u_,se_,n_,wo_,spc_,mu_,su_,u_,ni_,spc_,ha_,ttu_,si_,yya_,su_,ru_,EOM_
+	},
+	{
+//ロケットずつき
+//１ターンめで　あたまを　ひっこめて
+	n1_,TA_,bou_,N_,me_,de_,spc_,a_,ta_,ma_,wo_,spc_,hi_,ttu_,ko_,me_,te_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//とげキャノン
+//するどいハリを　てきに　はっしゃして
+	su_,ru_,do_,i_,HA_,RI_,wo_,spc_,te_,ki_,ni_,spc_,ha_,ttu_,si_,yya_,si_,te_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//からみつく
+//てきに　からみついて　こうげきする
+	te_,ki_,ni_,spc_,ka_,ra_,mi_,tu_,i_,te_,spc_,ko_,u_,ge_,ki_,su_,ru_,CR_,
+//てきの　すばやさを　さげることがある
+	te_,ki_,no_,spc_,su_,ba_,ya_,sa_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ドわすれ
+//いっしゅん　なにかを　わすれることで
+	i_,ttu_,si_,yyu_,n_,spc_,na_,ni_,ka_,wo_,spc_,wa_,su_,re_,ru_,ko_,to_,de_,CR_,
+//とくぼうを　グーンとあげる
+	to_,ku_,bo_,u_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//スプーンまげ
+//てきの　めを　スプーンに　むけさせて
+	te_,ki_,no_,spc_,me_,wo_,spc_,SU_,PU_,bou_,N_,ni_,spc_,mu_,ke_,sa_,se_,te_,CR_,
+//めいちゅうりつを　さげさせる
+	me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//タマゴうみ
+//キズついた　からだを　たいりょくの
+	KI_,ZU_,tu_,i_,ta_,spc_,ka_,ra_,da_,wo_,spc_,ta_,i_,ri_,yyo_,ku_,no_,CR_,
+//はんぶんだけ　かいふくする
+	ha_,n_,bu_,n_,da_,ke_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//とびひざげり
+//ジャンプした　いきおいで　ひざげりを
+	ZI_,YYA_,N_,PU_,si_,ta_,spc_,i_,ki_,o_,i_,de_,spc_,hi_,za_,ge_,ri_,wo_,CR_,
+//くりだす　はずすと　ダメージをうける
+	ku_,ri_,da_,su_,spc_,ha_,zu_,su_,to_,spc_,DA_,ME_,bou_,ZI_,wo_,u_,ke_,ru_,EOM_
+	},
+	{
+//へびにらみ
+//おなかの　もようで　てきを　いかくし
+	o_,na_,ka_,no_,spc_,mo_,yo_,u_,de_,spc_,te_,ki_,wo_,spc_,i_,ka_,ku_,si_,CR_,
+//おびえさせて　まひさせてしまう
+	o_,bi_,e_,sa_,se_,te_,spc_,ma_,hi_,sa_,se_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ゆめくい
+//ねているてきに　あたえた　ダメージの
+	ne_,te_,i_,ru_,te_,ki_,ni_,spc_,a_,ta_,e_,ta_,spc_,DA_,ME_,bou_,ZI_,no_,CR_,
+//はんぶん　たいりょくを　かいふくする
+	ha_,n_,bu_,n_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//どくガス
+//どくガスを　てきに　ふきかけて
+	do_,ku_,GA_,SU_,wo_,spc_,te_,ki_,ni_,spc_,hu_,ki_,ka_,ke_,te_,CR_,
+//どくをあたえる
+	do_,ku_,wo_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//たまなげ
+//まるいものを　てきに　なげつけて
+	ma_,ru_,i_,mo_,no_,wo_,spc_,te_,ki_,ni_,spc_,na_,ge_,tu_,ke_,te_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//きゅうけつ
+//てきに　あたえた　ダメージの
+	te_,ki_,ni_,spc_,a_,ta_,e_,ta_,spc_,DA_,ME_,bou_,ZI_,no_,CR_,
+//はんぶん　たいりょくを　かいふくする
+	ha_,n_,bu_,n_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//あくまのキッス
+//こわい　かおで　キスを　せまる
+	ko_,wa_,i_,spc_,ka_,o_,de_,spc_,KI_,SU_,wo_,spc_,se_,ma_,ru_,CR_,
+//キスされると　ねむってしまう
+	KI_,SU_,sa_,re_,ru_,to_,spc_,ne_,mu_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ゴッドバード
+//１ターンめで　じゃくてんを　さがし
+	n1_,TA_,bou_,N_,me_,de_,spc_,zi_,yya_,ku_,te_,n_,wo_,spc_,sa_,ga_,si_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//へんしん
+//てきの　ポケモンと　おなじ　すがたに
+	te_,ki_,no_,spc_,PO_,KE_,MO_,N_,to_,spc_,o_,na_,zi_,spc_,su_,ga_,ta_,ni_,CR_,
+//さいぼうを　へんかさせ　へんしんする
+	sa_,i_,bo_,u_,wo_,spc_,he_,n_,ka_,sa_,se_,spc_,he_,n_,si_,n_,su_,ru_,EOM_
+	},
+	{
+//あわ
+//あわを　ふきかけて　こうげき
+	a_,wa_,wo_,spc_,hu_,ki_,ka_,ke_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきの　すばやさを　さげることがある
+	te_,ki_,no_,spc_,su_,ba_,ya_,sa_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ピヨピヨパンチ
+//リズミカルな　パンチで　こうげき
+	RI_,ZU_,MI_,KA_,RU_,na_,spc_,PA_,N_,TI_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こんらんさせることがある
+	te_,ki_,wo_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//キノコのほうし
+//さいみんこうかのある　ほうしを
+	sa_,i_,mi_,n_,ko_,u_,ka_,no_,a_,ru_,spc_,ho_,u_,si_,wo_,CR_,
+//ふりまき　てきを　ねむらせる
+	hu_,ri_,ma_,ki_,spc_,te_,ki_,wo_,spc_,ne_,mu_,ra_,se_,ru_,EOM_
+	},
+	{
+//フラッシュ
+//つよい　ひかりで　めを　くらませて
+	tu_,yo_,i_,spc_,hi_,ka_,ri_,de_,spc_,me_,wo_,spc_,ku_,ra_,ma_,se_,te_,CR_,
+//てきの　めいちゅうりつを　さげさせる
+	te_,ki_,no_,spc_,me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//サイコウェーブ
+//ふしぎな　ねんぱで　てきを　こうげき
+	hu_,si_,gi_,na_,spc_,ne_,n_,pa_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//つかうたびに　いりょくが　かわる
+	tu_,ka_,u_,ta_,bi_,ni_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,ka_,wa_,ru_,EOM_
+	},
+	{
+//はねる
+//はねるだけで　なにもおこらない……
+	ha_,ne_,ru_,da_,ke_,de_,spc_,na_,ni_,mo_,o_,ko_,ra_,na_,i_,tenten_,tenten_,CR_,
+//
+	EOM_
+	},
+	{
+//とける
+//からだを　えきじょうに　へんかさせて
+	ka_,ra_,da_,wo_,spc_,e_,ki_,zi_,yyo_,u_,ni_,spc_,he_,n_,ka_,sa_,se_,te_,CR_,
+//ぼうぎょを　グーンとあげる
+	bo_,u_,gi_,yyo_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//クラブハンマー
+//ハサミを　てきに　たたきつける
+	HA_,SA_,MI_,wo_,spc_,te_,ki_,ni_,spc_,ta_,ta_,ki_,tu_,ke_,ru_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//だいばくはつ
+//てきに　だいダメージを　あたえるが
+	te_,ki_,ni_,spc_,da_,i_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,ga_,CR_,
+//つかうと　せんとうふのうに　なる
+	tu_,ka_,u_,to_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,spc_,na_,ru_,EOM_
+	},
+	{
+//みだれひっかき
+//するどいツメやカマなどで　ひっかいて
+	su_,ru_,do_,i_,TU_,ME_,ya_,KA_,MA_,na_,do_,de_,spc_,hi_,ttu_,ka_,i_,te_,CR_,
+//２ー５かい　れんぞくで　こうげき
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ホネブーメラン
+//ホネを　なげつけて　いきと　かえりで
+	HO_,NE_,wo_,spc_,na_,ge_,tu_,ke_,te_,spc_,i_,ki_,to_,spc_,ka_,e_,ri_,de_,CR_,
+//２かい　れんぞくで　こうげき
+	n2_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ねむる
+//２ターン　ねむって　たいりょくと
+	n2_,TA_,bou_,N_,spc_,ne_,mu_,ttu_,te_,spc_,ta_,i_,ri_,yyo_,ku_,to_,CR_,
+//からだのいじょうを　かいふくする
+	ka_,ra_,da_,no_,i_,zi_,yyo_,u_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//いわなだれ
+//おおきな　いわを　なげつける
+	o_,o_,ki_,na_,spc_,i_,wa_,wo_,spc_,na_,ge_,tu_,ke_,ru_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ひっさつまえば
+//するどいまえばで　てきを　こうげき
+	su_,ru_,do_,i_,ma_,e_,ba_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//ひるませることがある
+	hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//かくばる
+//ポリゴンを　へらし　カクカクになって
+	PO_,RI_,GO_,N_,wo_,spc_,he_,ra_,si_,spc_,KA_,KU_,KA_,KU_,ni_,na_,ttu_,te_,CR_,
+//こうげきを　あげる
+	ko_,u_,ge_,ki_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//テクスチャー
+//おぼえている　わざの　タイプの
+	o_,bo_,e_,te_,i_,ru_,spc_,wa_,za_,no_,spc_,TA_,I_,PU_,no_,CR_,
+//どれかに　じぶんの　タイプを　かえる
+	do_,re_,ka_,ni_,spc_,zi_,bu_,n_,no_,spc_,TA_,I_,PU_,wo_,spc_,ka_,e_,ru_,EOM_
+	},
+	{
+//トライアタック
+//３しゅるいの　こうせんを
+	n3_,si_,yyu_,ru_,i_,no_,spc_,ko_,u_,se_,n_,wo_,CR_,
+//１つにまとめて　てきに　はっしゃする
+	n1_,tu_,ni_,ma_,to_,me_,te_,spc_,te_,ki_,ni_,spc_,ha_,ttu_,si_,yya_,su_,ru_,EOM_
+	},
+	{
+//いかりのまえば
+//するどいまえばで　こうげきして
+	su_,ru_,do_,i_,ma_,e_,ba_,de_,spc_,ko_,u_,ge_,ki_,si_,te_,CR_,
+//てきの　たいりょくを　はんぶんにする
+	te_,ki_,no_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ha_,n_,bu_,n_,ni_,su_,ru_,EOM_
+	},
+	{
+//きりさく
+//するどいカマや　ツメなどで　こうげき
+	su_,ru_,do_,i_,KA_,MA_,ya_,spc_,TU_,ME_,na_,do_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//みがわり
+//たいりょくの　４ぶんの１を　つかって
+	ta_,i_,ri_,yyo_,ku_,no_,spc_,n4_,bu_,n_,no_,n1_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//じぶんの　ぶんしんをだす
+	zi_,bu_,n_,no_,spc_,bu_,n_,si_,n_,wo_,da_,su_,EOM_
+	},
+	{
+//わるあがき
+//わざポイントがなくなると　でるわざ
+	wa_,za_,PO_,I_,N_,TO_,ga_,na_,ku_,na_,ru_,to_,spc_,de_,ru_,wa_,za_,CR_,
+//じぶんもすこし　ダメージをうける
+	zi_,bu_,n_,mo_,su_,ko_,si_,spc_,DA_,ME_,bou_,ZI_,wo_,u_,ke_,ru_,EOM_
+	},
+	{
+//スケッチ
+//てきが　つかったわざを　スケッチして
+	te_,ki_,ga_,spc_,tu_,ka_,ttu_,ta_,wa_,za_,wo_,spc_,SU_,KE_,TTU_,TI_,si_,te_,CR_,
+//そのわざを　じぶんのものに　する
+	so_,no_,wa_,za_,wo_,spc_,zi_,bu_,n_,no_,mo_,no_,ni_,spc_,su_,ru_,EOM_
+	},
+	{
+//トリプルキック
+//てきを　３かい　れんぞくで　こうげき
+	te_,ki_,wo_,spc_,n3_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//あてるたびに　ダメージが　あがる
+	a_,te_,ru_,ta_,bi_,ni_,spc_,DA_,ME_,bou_,ZI_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//どろぼう
+//こうげきの　さいちゅうに　すきをみて
+	ko_,u_,ge_,ki_,no_,spc_,sa_,i_,ti_,yyu_,u_,ni_,spc_,su_,ki_,wo_,mi_,te_,CR_,
+//てきが　もっている　どうぐを　ぬすむ
+	te_,ki_,ga_,spc_,mo_,ttu_,te_,i_,ru_,spc_,do_,u_,gu_,wo_,spc_,nu_,su_,mu_,EOM_
+	},
+	{
+//クモのす
+//ネバネバとした　いとを　からませて
+	NE_,BA_,NE_,BA_,to_,si_,ta_,spc_,i_,to_,wo_,spc_,ka_,ra_,ma_,se_,te_,CR_,
+//てきを　にげられなく　してしまう
+	te_,ki_,wo_,spc_,ni_,ge_,ra_,re_,na_,ku_,spc_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//こころのめ
+//てきの　うごきを　こころで　かんじて
+	te_,ki_,no_,spc_,u_,go_,ki_,wo_,spc_,ko_,ko_,ro_,de_,spc_,ka_,n_,zi_,te_,CR_,
+//つぎの　こうげきを　かならず　あてる
+	tu_,gi_,no_,spc_,ko_,u_,ge_,ki_,wo_,spc_,ka_,na_,ra_,zu_,spc_,a_,te_,ru_,EOM_
+	},
+	{
+//あくむ
+//てきが　ねてるあいだ　たいりょくを
+	te_,ki_,ga_,spc_,ne_,te_,ru_,a_,i_,da_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,CR_,
+//まいターン　４ぶんの１　へらしていく
+	ma_,i_,TA_,bou_,N_,spc_,n4_,bu_,n_,no_,n1_,spc_,he_,ra_,si_,te_,i_,ku_,EOM_
+	},
+	{
+//かえんぐるま
+//ほのおを　まとって　とっしんする
+	ho_,no_,o_,wo_,spc_,ma_,to_,ttu_,te_,spc_,to_,ttu_,si_,n_,su_,ru_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//いびき
+//ねているときだけ　つかえる　わざ
+	ne_,te_,i_,ru_,to_,ki_,da_,ke_,spc_,tu_,ka_,e_,ru_,spc_,wa_,za_,CR_,
+//すごいいびきで　てきを　こうげき
+	su_,go_,i_,i_,bi_,ki_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//のろい
+//ゴーストタイプと　それいがいとでは
+	GO_,bou_,SU_,TO_,TA_,I_,PU_,to_,spc_,so_,re_,i_,ga_,i_,to_,de_,ha_,CR_,
+//わざの　こうかが　ちがう
+	wa_,za_,no_,spc_,ko_,u_,ka_,ga_,spc_,ti_,ga_,u_,EOM_
+	},
+	{
+//じたばた
+//じぶんの　たいりょくが　すくないほど
+	zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,su_,ku_,na_,i_,ho_,do_,CR_,
+//てきに　おおきなダメージを　あたえる
+	te_,ki_,ni_,spc_,o_,o_,ki_,na_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//テクスチャー２
+//うけたわざの　タイプを　じぶんの
+	u_,ke_,ta_,wa_,za_,no_,spc_,TA_,I_,PU_,wo_,spc_,zi_,bu_,n_,no_,CR_,
+//ていこうりょくに　かえる
+	te_,i_,ko_,u_,ri_,yyo_,ku_,ni_,spc_,ka_,e_,ru_,EOM_
+	},
+	{
+//エアロブラスト
+//しんくうはを　はっしゃして　こうげき
+	si_,n_,ku_,u_,ha_,wo_,spc_,ha_,ttu_,si_,yya_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//わたほうし
+//ほうしを　まとわりつかせ　てきの
+	ho_,u_,si_,wo_,spc_,ma_,to_,wa_,ri_,tu_,ka_,se_,spc_,te_,ki_,no_,CR_,
+//すばやさを　ガクッとさげさせる
+	su_,ba_,ya_,sa_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//きしかいせい
+//じぶんの　たいりょくが　すくないほど
+	zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,su_,ku_,na_,i_,ho_,do_,CR_,
+//てきに　おおきなダメージを　あたえる
+	te_,ki_,ni_,spc_,o_,o_,ki_,na_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//うらみ
+//あいてが　だした　わざを　うらんで
+	a_,i_,te_,ga_,spc_,da_,si_,ta_,spc_,wa_,za_,wo_,spc_,u_,ra_,n_,de_,CR_,
+//その　わざポイントを　へらしてしまう
+	so_,no_,spc_,wa_,za_,PO_,I_,N_,TO_,wo_,spc_,he_,ra_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//こなゆき
+//ゆきを　かぜにのせて　こうげき
+	yu_,ki_,wo_,spc_,ka_,ze_,ni_,no_,se_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こおらせることがある
+	te_,ki_,wo_,spc_,ko_,o_,ra_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//まもる
+//そのターンの　こうげきを　うけない
+	so_,no_,TA_,bou_,N_,no_,spc_,ko_,u_,ge_,ki_,wo_,spc_,u_,ke_,na_,i_,CR_,
+//れんぞくで　だすと　しっぱいしやすい
+	re_,n_,zo_,ku_,de_,spc_,da_,su_,to_,spc_,si_,ttu_,pa_,i_,si_,ya_,su_,i_,EOM_
+	},
+	{
+//マッハパンチ
+//ものすごいはやさで　パンチをくりだし
+	mo_,no_,su_,go_,i_,ha_,ya_,sa_,de_,spc_,PA_,N_,TI_,wo_,ku_,ri_,da_,si_,CR_,
+//せんせいこうげきする
+	se_,n_,se_,i_,ko_,u_,ge_,ki_,su_,ru_,EOM_
+	},
+	{
+//こわいかお
+//こわいかおで　てきを　おびえさせて
+	ko_,wa_,i_,ka_,o_,de_,spc_,te_,ki_,wo_,spc_,o_,bi_,e_,sa_,se_,te_,CR_,
+//すばやさを　ガクッとさげさせる
+	su_,ba_,ya_,sa_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//だましうち
+//てきを　ゆだんさせて　ちかづき
+	te_,ki_,wo_,spc_,yu_,da_,n_,sa_,se_,te_,spc_,ti_,ka_,du_,ki_,CR_,
+//よけられない　こうげきを　くりだす
+	yo_,ke_,ra_,re_,na_,i_,spc_,ko_,u_,ge_,ki_,wo_,spc_,ku_,ri_,da_,su_,EOM_
+	},
+	{
+//てんしのキッス
+//かわいい　かおで　キスを　せまる
+	ka_,wa_,i_,i_,spc_,ka_,o_,de_,spc_,KI_,SU_,wo_,spc_,se_,ma_,ru_,CR_,
+//キスされると　こんらんしてしまう
+	KI_,SU_,sa_,re_,ru_,to_,spc_,ko_,n_,ra_,n_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//はらだいこ
+//じぶんの　たいりょくを　けずって
+	zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ke_,zu_,ttu_,te_,CR_,
+//こうげきを　さいだいまで　あげる
+	ko_,u_,ge_,ki_,wo_,spc_,sa_,i_,da_,i_,ma_,de_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//ヘドロばくだん
+//ヘドロを　なげつけて　こうげき
+	HE_,DO_,RO_,wo_,spc_,na_,ge_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきに　どくをあたえることがある
+	te_,ki_,ni_,spc_,do_,ku_,wo_,a_,ta_,e_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//どろかけ
+//てきの　かおなどに　ドロをかけて
+	te_,ki_,no_,spc_,ka_,o_,na_,do_,ni_,spc_,DO_,RO_,wo_,ka_,ke_,te_,CR_,
+//めいちゅうりつを　さげさせる
+	me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//オクタンほう
+//すみの　かたまりを　はっしゃして
+	su_,mi_,no_,spc_,ka_,ta_,ma_,ri_,wo_,spc_,ha_,ttu_,si_,yya_,si_,te_,CR_,
+//めいちゅうりつを　さげさせる
+	me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//まきびし
+//てきの　あしばに　わなを　しかけ
+	te_,ki_,no_,spc_,a_,si_,ba_,ni_,spc_,wa_,na_,wo_,spc_,si_,ka_,ke_,CR_,
+//こうたいした　てきを　こうげきする
+	ko_,u_,ta_,i_,si_,ta_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,su_,ru_,EOM_
+	},
+	{
+//でんじほう
+//あたりにくいが　ダメージは　おおきい
+	a_,ta_,ri_,ni_,ku_,i_,ga_,spc_,DA_,ME_,bou_,ZI_,ha_,spc_,o_,o_,ki_,i_,CR_,
+//あたれば　かならず　まひさせる
+	a_,ta_,re_,ba_,spc_,ka_,na_,ra_,zu_,spc_,ma_,hi_,sa_,se_,ru_,EOM_
+	},
+	{
+//みやぶる
+//わざが　あたりにくくなった　てきに
+	wa_,za_,ga_,spc_,a_,ta_,ri_,ni_,ku_,ku_,na_,ttu_,ta_,spc_,te_,ki_,ni_,CR_,
+//こうげきを　あてられるようになる
+	ko_,u_,ge_,ki_,wo_,spc_,a_,te_,ra_,re_,ru_,yo_,u_,ni_,na_,ru_,EOM_
+	},
+	{
+//みちづれ
+//このわざの　あとに　たおされると
+	ko_,no_,wa_,za_,no_,spc_,a_,to_,ni_,spc_,ta_,o_,sa_,re_,ru_,to_,CR_,
+//てきも　せんとうふのうになる
+	te_,ki_,mo_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,na_,ru_,EOM_
+	},
+	{
+//ほろびのうた
+//きいた　ポケモンは　３ターンごに
+	ki_,i_,ta_,spc_,PO_,KE_,MO_,N_,ha_,spc_,n3_,TA_,bou_,N_,go_,ni_,CR_,
+//せんとうふのうに　なってしまう
+	se_,n_,to_,u_,hu_,no_,u_,ni_,spc_,na_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//こごえるかぜ
+//すごい　れいきで　てきを　こうげき
+	su_,go_,i_,spc_,re_,i_,ki_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//すばやさを　さげさせる
+	su_,ba_,ya_,sa_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//みきり
+//てきの　こうげきを　かならずよける
+	te_,ki_,no_,spc_,ko_,u_,ge_,ki_,wo_,spc_,ka_,na_,ra_,zu_,yo_,ke_,ru_,CR_,
+//れんぞくで　だすと　しっぱいしやすい
+	re_,n_,zo_,ku_,de_,spc_,da_,su_,to_,spc_,si_,ttu_,pa_,i_,si_,ya_,su_,i_,EOM_
+	},
+	{
+//ボーンラッシュ
+//てにもった　ホネで　２ー５かい
+	te_,ni_,mo_,ttu_,ta_,spc_,HO_,NE_,de_,spc_,n2_,bou_,n5_,ka_,i_,CR_,
+//れんぞくで　てきを　こうげきする
+	re_,n_,zo_,ku_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,su_,ru_,EOM_
+	},
+	{
+//ロックオン
+//てきに　しょうじゅんを　あわせて
+	te_,ki_,ni_,spc_,si_,yyo_,u_,zi_,yyu_,n_,wo_,spc_,a_,wa_,se_,te_,CR_,
+//つぎの　こうげきを　かならずあてる
+	tu_,gi_,no_,spc_,ko_,u_,ge_,ki_,wo_,spc_,ka_,na_,ra_,zu_,a_,te_,ru_,EOM_
+	},
+	{
+//げきりん
+//２ー３ターンのあいだ　あばれつづける
+	n2_,bou_,n3_,TA_,bou_,N_,no_,a_,i_,da_,spc_,a_,ba_,re_,tu_,du_,ke_,ru_,CR_,
+//あばれたあとは　こんらんしてしまう
+	a_,ba_,re_,ta_,a_,to_,ha_,spc_,ko_,n_,ra_,n_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//すなあらし
+//すなあらしを　はっせいさせて
+	su_,na_,a_,ra_,si_,wo_,spc_,ha_,ttu_,se_,i_,sa_,se_,te_,CR_,
+//まいターン　ダメージを　あたえる
+	ma_,i_,TA_,bou_,N_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//ギガドレイン
+//てきに　あたえた　ダメージの
+	te_,ki_,ni_,spc_,a_,ta_,e_,ta_,spc_,DA_,ME_,bou_,ZI_,no_,CR_,
+//はんぶん　たいりょくを　かいふくする
+	ha_,n_,bu_,n_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//こらえる
+//そのターンで　こうげきを　うけても
+	so_,no_,TA_,bou_,N_,de_,spc_,ko_,u_,ge_,ki_,wo_,spc_,u_,ke_,te_,mo_,CR_,
+//かならず　たいりょくが　１のこる
+	ka_,na_,ra_,zu_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,n1_,no_,ko_,ru_,EOM_
+	},
+	{
+//あまえる
+//かわいくあまえて　てきを　ゆだんさせ
+	ka_,wa_,i_,ku_,a_,ma_,e_,te_,spc_,te_,ki_,wo_,spc_,yu_,da_,n_,sa_,se_,CR_,
+//こうげきを　ガクッとさげさせる
+	ko_,u_,ge_,ki_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//ころがる
+//５ターンのあいだ　てきを　こうげき
+	n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//あてるたびに　ダメージが　あがる
+	a_,te_,ru_,ta_,bi_,ni_,spc_,DA_,ME_,bou_,ZI_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//みねうち
+//かならず　たいりょくが　１のこるよう
+	ka_,na_,ra_,zu_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,n1_,no_,ko_,ru_,yo_,u_,CR_,
+//てかげんして　こうげき
+	te_,ka_,ge_,n_,si_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//いばる
+//てきを　おこらせて　こんらんさせるが
+	te_,ki_,wo_,spc_,o_,ko_,ra_,se_,te_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ga_,CR_,
+//こうげきも　グーンと　あげてしまう
+	ko_,u_,ge_,ki_,mo_,spc_,GU_,bou_,N_,to_,spc_,a_,ge_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ミルクのみ
+//キズついた　からだを　たいりょくの
+	KI_,ZU_,tu_,i_,ta_,spc_,ka_,ra_,da_,wo_,spc_,ta_,i_,ri_,yyo_,ku_,no_,CR_,
+//はんぶんだけ　かいふくする
+	ha_,n_,bu_,n_,da_,ke_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//スパーク
+//でんきを　まとって　とっしんする
+	de_,n_,ki_,wo_,spc_,ma_,to_,ttu_,te_,spc_,to_,ttu_,si_,n_,su_,ru_,CR_,
+//てきを　まひさせることがある
+	te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//れんぞくぎり
+//わざを　あてるたびに
+	wa_,za_,wo_,spc_,a_,te_,ru_,ta_,bi_,ni_,CR_,
+//いりょくが　ぞうだいしていく
+	i_,ri_,yyo_,ku_,ga_,spc_,zo_,u_,da_,i_,si_,te_,i_,ku_,EOM_
+	},
+	{
+//はがねのつばさ
+//かたいつばさを　おおきく　ひろげて
+	ka_,ta_,i_,tu_,ba_,sa_,wo_,spc_,o_,o_,ki_,ku_,spc_,hi_,ro_,ge_,te_,CR_,
+//そのまま　てきに　たいあたりする
+	so_,no_,ma_,ma_,spc_,te_,ki_,ni_,spc_,ta_,i_,a_,ta_,ri_,su_,ru_,EOM_
+	},
+	{
+//くろいまなざし
+//てきを　じーっと　みていると　なぜか
+	te_,ki_,wo_,spc_,zi_,bou_,ttu_,to_,spc_,mi_,te_,i_,ru_,to_,spc_,na_,ze_,ka_,CR_,
+//てきは　にげられなく　なってしまう
+	te_,ki_,ha_,spc_,ni_,ge_,ra_,re_,na_,ku_,spc_,na_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//メロメロ
+//オスなら　メスに　メスなら　オスに
+	O_,SU_,na_,ra_,spc_,ME_,SU_,ni_,spc_,ME_,SU_,na_,ra_,spc_,O_,SU_,ni_,CR_,
+//わざが　だしにくくなる
+	wa_,za_,ga_,spc_,da_,si_,ni_,ku_,ku_,na_,ru_,EOM_
+	},
+	{
+//ねごと
+//ねているときだけ　つかえる　わざ
+	ne_,te_,i_,ru_,to_,ki_,da_,ke_,spc_,tu_,ka_,e_,ru_,spc_,wa_,za_,CR_,
+//ランダムで　じぶんのわざを　くりだす
+	RA_,N_,DA_,MU_,de_,spc_,zi_,bu_,n_,no_,wa_,za_,wo_,spc_,ku_,ri_,da_,su_,EOM_
+	},
+	{
+//いやしのすず
+//ここちよい　すずのねを　きかせて
+	ko_,ko_,ti_,yo_,i_,spc_,su_,zu_,no_,ne_,wo_,spc_,ki_,ka_,se_,te_,CR_,
+//すべての　じょうたいを　かいふくする
+	su_,be_,te_,no_,spc_,zi_,yyo_,u_,ta_,i_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//おんがえし
+//よくしてくれる　トレーナーの　ために
+	yo_,ku_,si_,te_,ku_,re_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ta_,me_,ni_,CR_,
+//ぜんりょくで　てきを　こうげき
+	ze_,n_,ri_,yyo_,ku_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//プレゼント
+//てきに　ばくだんを　プレゼントする
+	te_,ki_,ni_,spc_,ba_,ku_,da_,n_,wo_,spc_,PU_,RE_,ZE_,N_,TO_,su_,ru_,CR_,
+//たまに　かいふくしてしまうことがある
+	ta_,ma_,ni_,spc_,ka_,i_,hu_,ku_,si_,te_,si_,ma_,u_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//やつあたり
+//むごい　しうちの　うさばらしに
+	mu_,go_,i_,spc_,si_,u_,ti_,no_,spc_,u_,sa_,ba_,ra_,si_,ni_,CR_,
+//てきを　ぜんりょくで　こうげき
+	te_,ki_,wo_,spc_,ze_,n_,ri_,yyo_,ku_,de_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//しんぴのまもり
+//ふしぎな　ちからで　まもられて
+	hu_,si_,gi_,na_,spc_,ti_,ka_,ra_,de_,spc_,ma_,mo_,ra_,re_,te_,CR_,
+//とくしゅ　じょうたいに　ならなくなる
+	to_,ku_,si_,yyu_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,na_,ra_,na_,ku_,na_,ru_,EOM_
+	},
+	{
+//いたみわけ
+//てきと　じぶんの　たいりょくを
+	te_,ki_,to_,spc_,zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,wo_,CR_,
+//たして　それを　なかよく　わける
+	ta_,si_,te_,spc_,so_,re_,wo_,spc_,na_,ka_,yo_,ku_,spc_,wa_,ke_,ru_,EOM_
+	},
+	{
+//せいなるほのお
+//しんぴてきな　ほのおで　こうげき
+	si_,n_,pi_,te_,ki_,na_,spc_,ho_,no_,o_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//マグニチュード
+//じめんを　ゆらして　てきを　こうげき
+	zi_,me_,n_,wo_,spc_,yu_,ra_,si_,te_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//ダメージは　ランダムで　かわる
+	DA_,ME_,bou_,ZI_,ha_,spc_,RA_,N_,DA_,MU_,de_,spc_,ka_,wa_,ru_,EOM_
+	},
+	{
+//ばくれつパンチ
+//あたりにくいが　ダメージは　おおきい
+	a_,ta_,ri_,ni_,ku_,i_,ga_,spc_,DA_,ME_,bou_,ZI_,ha_,spc_,o_,o_,ki_,i_,CR_,
+//あたれば　かならず　こんらんさせる
+	a_,ta_,re_,ba_,spc_,ka_,na_,ra_,zu_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,EOM_
+	},
+	{
+//メガホーン
+//かたいつのを　ものすごい　いきおいで
+	ka_,ta_,i_,tu_,no_,wo_,spc_,mo_,no_,su_,go_,i_,spc_,i_,ki_,o_,i_,de_,CR_,
+//つきだして　こうげき
+	tu_,ki_,da_,si_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//りゅうのいぶき
+//くちから　ものすごい　いきをはいて
+	ku_,ti_,ka_,ra_,spc_,mo_,no_,su_,go_,i_,spc_,i_,ki_,wo_,ha_,i_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//バトンタッチ
+//ついかこうかを　のこしたまま
+	tu_,i_,ka_,ko_,u_,ka_,wo_,spc_,no_,ko_,si_,ta_,ma_,ma_,CR_,
+//ほかの　ポケモンと　いれかわる
+	ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,re_,ka_,wa_,ru_,EOM_
+	},
+	{
+//アンコール
+//てきが　さいごに　つかった　わざを
+	te_,ki_,ga_,spc_,sa_,i_,go_,ni_,spc_,tu_,ka_,ttu_,ta_,spc_,wa_,za_,wo_,CR_,
+//２ー６かい　れんぞくで　ださせる
+	n2_,bou_,n6_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,da_,sa_,se_,ru_,EOM_
+	},
+	{
+//おいうち
+//あいてが　こうかんするときに
+	a_,i_,te_,ga_,spc_,ko_,u_,ka_,n_,su_,ru_,to_,ki_,ni_,CR_,
+//つかうと　だいダメージを　あたえる
+	tu_,ka_,u_,to_,spc_,da_,i_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//こうそくスピン
+//からだを　はやく　かいてんさせて
+	ka_,ra_,da_,wo_,spc_,ha_,ya_,ku_,spc_,ka_,i_,te_,n_,sa_,se_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//あまいかおり
+//あまいかおりで　きを　そらせて
+	a_,ma_,i_,ka_,o_,ri_,de_,spc_,ki_,wo_,spc_,so_,ra_,se_,te_,CR_,
+//てきの　かいひりつを　さげさせる
+	te_,ki_,no_,spc_,ka_,i_,hi_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//アイアンテール
+//かたい　シッポで　てきを　こうげき
+	ka_,ta_,i_,spc_,SI_,TTU_,PO_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきの　ぼうぎょを　さげることがある
+	te_,ki_,no_,spc_,bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//メタルクロー
+//かたいツメで　てきを　こうげき
+	ka_,ta_,i_,TU_,ME_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//こうげきが　あがることがある
+	ko_,u_,ge_,ki_,ga_,spc_,a_,ga_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//あてみなげ
+//あとぜめに　なるが　かならず
+	a_,to_,ze_,me_,ni_,spc_,na_,ru_,ga_,spc_,ka_,na_,ra_,zu_,CR_,
+//こうげきが　あたる
+	ko_,u_,ge_,ki_,ga_,spc_,a_,ta_,ru_,EOM_
+	},
+	{
+//あさのひざし
+//たいりょくを　かいふくする
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,CR_,
+//てんきで　かいふくりょうが　かわる
+	te_,n_,ki_,de_,spc_,ka_,i_,hu_,ku_,ri_,yyo_,u_,ga_,spc_,ka_,wa_,ru_,EOM_
+	},
+	{
+//こうごうせい
+//たいりょくを　かいふくする
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,CR_,
+//てんきで　かいふくりょうが　かわる
+	te_,n_,ki_,de_,spc_,ka_,i_,hu_,ku_,ri_,yyo_,u_,ga_,spc_,ka_,wa_,ru_,EOM_
+	},
+	{
+//つきのひかり
+//たいりょくを　かいふくする
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,CR_,
+//てんきで　かいふくりょうが　かわる
+	te_,n_,ki_,de_,spc_,ka_,i_,hu_,ku_,ri_,yyo_,u_,ga_,spc_,ka_,wa_,ru_,EOM_
+	},
+	{
+//めざめるパワー
+//ポケモンによって　てきに　あたえる
+	PO_,KE_,MO_,N_,ni_,yo_,ttu_,te_,spc_,te_,ki_,ni_,spc_,a_,ta_,e_,ru_,CR_,
+//ダメージの　りょうが　へんかする
+	DA_,ME_,bou_,ZI_,no_,spc_,ri_,yyo_,u_,ga_,spc_,he_,n_,ka_,su_,ru_,EOM_
+	},
+	{
+//クロスチョップ
+//りょうてチョップで　てきを　こうげき
+	ri_,yyo_,u_,te_,TI_,YYO_,TTU_,PU_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//たつまき
+//ものすごい　かぜを　おこして
+	mo_,no_,su_,go_,i_,spc_,ka_,ze_,wo_,spc_,o_,ko_,si_,te_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//あまごい
+//５ターンのあいだ　みずタイプの
+	n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,mi_,zu_,TA_,I_,PU_,no_,CR_,
+//わざの　いりょくが　あがる
+	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//にほんばれ
+//５ターンのあいだ　ほのおタイプの
+	n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,ho_,no_,o_,TA_,I_,PU_,no_,CR_,
+//わざの　いりょくが　あがる
+	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//かみくだく
+//するどい　はで　てきを　かみくだく
+	su_,ru_,do_,i_,spc_,ha_,de_,spc_,te_,ki_,wo_,spc_,ka_,mi_,ku_,da_,ku_,CR_,
+//とくぼうを　さげることがある
+	to_,ku_,bo_,u_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ミラーコート
+//てきから　うけた　とくこうの
+	te_,ki_,ka_,ra_,spc_,u_,ke_,ta_,spc_,to_,ku_,ko_,u_,no_,CR_,
+//ダメージを　ばいにして　かえす
+	DA_,ME_,bou_,ZI_,wo_,spc_,ba_,i_,ni_,si_,te_,spc_,ka_,e_,su_,EOM_
+	},
+	{
+//じこあんじ
+//てきに　かかっている　ほじょこうかを
+	te_,ki_,ni_,spc_,ka_,ka_,ttu_,te_,i_,ru_,spc_,ho_,zi_,yyo_,ko_,u_,ka_,wo_,CR_,
+//じぶんにも　かける
+	zi_,bu_,n_,ni_,mo_,spc_,ka_,ke_,ru_,EOM_
+	},
+	{
+//しんそく
+//ものすごい　はやさで　うごいて
+	mo_,no_,su_,go_,i_,spc_,ha_,ya_,sa_,de_,spc_,u_,go_,i_,te_,CR_,
+//ちからづよい　こうげきをする
+	ti_,ka_,ra_,du_,yo_,i_,spc_,ko_,u_,ge_,ki_,wo_,su_,ru_,EOM_
+	},
+	{
+//げんしのちから
+//げんしの　ちからを　よびさます
+	ge_,n_,si_,no_,spc_,ti_,ka_,ra_,wo_,spc_,yo_,bi_,sa_,ma_,su_,CR_,
+//のうりょくが　あがることがある
+	no_,u_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//シャドーボール
+//くろいかたまりを　なげて　こうげき
+	ku_,ro_,i_,ka_,ta_,ma_,ri_,wo_,spc_,na_,ge_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//とくぼうを　さげることがある
+	to_,ku_,bo_,u_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//みらいよち
+//せいしんりょくを　たかめて
+	se_,i_,si_,n_,ri_,yyo_,ku_,wo_,spc_,ta_,ka_,me_,te_,CR_,
+//２ターンごに　てきを　こうげきする
+	n2_,TA_,bou_,N_,go_,ni_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,su_,ru_,EOM_
+	},
+	{
+//いわくだき
+//いわを　くだく　いきおいで　こうげき
+	i_,wa_,wo_,spc_,ku_,da_,ku_,spc_,i_,ki_,o_,i_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきの　ぼうぎょを　さげることがある
+	te_,ki_,no_,spc_,bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//うずしお
+//２ー５ターンのあいだ　てきを
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,te_,ki_,wo_,CR_,
+//うずの　ちゅうしんに　とじこめる
+	u_,zu_,no_,spc_,ti_,yyu_,u_,si_,n_,ni_,spc_,to_,zi_,ko_,me_,ru_,EOM_
+	},
+	{
+//ふくろだたき
+//なかまの　ポケモンが
+	na_,ka_,ma_,no_,spc_,PO_,KE_,MO_,N_,ga_,CR_,
+//こうげきに　さんか　してくれる
+	ko_,u_,ge_,ki_,ni_,spc_,sa_,n_,ka_,spc_,si_,te_,ku_,re_,ru_,EOM_
+	},
+	{
+//ねこだまし
+//せんせいこうげきで　ひるませる
+	se_,n_,se_,i_,ko_,u_,ge_,ki_,de_,spc_,hi_,ru_,ma_,se_,ru_,CR_,
+//さいしょの　ターンにしか　つかえない
+	sa_,i_,si_,yyo_,no_,spc_,TA_,bou_,N_,ni_,si_,ka_,spc_,tu_,ka_,e_,na_,i_,EOM_
+	},
+	{
+//さわぐ
+//２ー５ターンのあいだ　さわいで
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,sa_,wa_,i_,de_,CR_,
+//だれも　ねむれない
+	da_,re_,mo_,spc_,ne_,mu_,re_,na_,i_,EOM_
+	},
+	{
+//たくわえる
+//さいだい　３かいまで
+	sa_,i_,da_,i_,spc_,n3_,ka_,i_,ma_,de_,CR_,
+//ちからを　たくわえる
+	ti_,ka_,ra_,wo_,spc_,ta_,ku_,wa_,e_,ru_,EOM_
+	},
+	{
+//はきだす
+//たくわえた　ちからを　はきだす
+	ta_,ku_,wa_,e_,ta_,spc_,ti_,ka_,ra_,wo_,spc_,ha_,ki_,da_,su_,CR_,
+//かいすうで　ダメージが　へんかする
+	ka_,i_,su_,u_,de_,spc_,DA_,ME_,bou_,ZI_,ga_,spc_,he_,n_,ka_,su_,ru_,EOM_
+	},
+	{
+//のみこむ
+//たくわえた　ちからを　のみこむ
+	ta_,ku_,wa_,e_,ta_,spc_,ti_,ka_,ra_,wo_,spc_,no_,mi_,ko_,mu_,CR_,
+//たいりょくを　かいふくする
+	ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//ねっぷう
+//あついいきを　あいてに　ふきかける
+	a_,tu_,i_,i_,ki_,wo_,spc_,a_,i_,te_,ni_,spc_,hu_,ki_,ka_,ke_,ru_,CR_,
+//てきを　やけどさせることがある
+	te_,ki_,wo_,spc_,ya_,ke_,do_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//あられ
+//あられを　ふらせて
+	a_,ra_,re_,wo_,spc_,hu_,ra_,se_,te_,CR_,
+//まいターン　ダメージを　あたえる
+	ma_,i_,TA_,bou_,N_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//いちゃもん
+//あいてに　いちゃもんを　つけて　
+	a_,i_,te_,ni_,spc_,i_,ti_,yya_,mo_,n_,wo_,spc_,tu_,ke_,te_,spc_,CR_,
+//おなじわざを　れんぞくで　ださせない
+	o_,na_,zi_,wa_,za_,wo_,spc_,re_,n_,zo_,ku_,de_,spc_,da_,sa_,se_,na_,i_,EOM_
+	},
+	{
+//おだてる
+//てきを　おだてて　こんらんさせるが
+	te_,ki_,wo_,spc_,o_,da_,te_,te_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ga_,CR_,
+//とくこうも　あげてしまう
+	to_,ku_,ko_,u_,mo_,spc_,a_,ge_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//おにび
+//おにのような　ひで
+	o_,ni_,no_,yo_,u_,na_,spc_,hi_,de_,CR_,
+//あいてを　やけど　させる
+	a_,i_,te_,wo_,spc_,ya_,ke_,do_,spc_,sa_,se_,ru_,EOM_
+	},
+	{
+//おきみやげ
+//じぶんは　ひんしに　なるが　
+	zi_,bu_,n_,ha_,spc_,hi_,n_,si_,ni_,spc_,na_,ru_,ga_,spc_,CR_,
+//あいての　のうりょくが　さがる
+	a_,i_,te_,no_,spc_,no_,u_,ri_,yyo_,ku_,ga_,spc_,sa_,ga_,ru_,EOM_
+	},
+	{
+//からげんき
+//どく　まひ　やけど　のとき
+	do_,ku_,spc_,ma_,hi_,spc_,ya_,ke_,do_,spc_,no_,to_,ki_,CR_,
+//こうげきの　いりょくが　あがる
+	ko_,u_,ge_,ki_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//きあいパンチ
+//いりょくの　たかい　こうこうわざ
+	i_,ri_,yyo_,ku_,no_,spc_,ta_,ka_,i_,spc_,ko_,u_,ko_,u_,wa_,za_,CR_,
+//こうげきを　もらうと　ひるむ
+	ko_,u_,ge_,ki_,wo_,spc_,mo_,ra_,u_,to_,spc_,hi_,ru_,mu_,EOM_
+	},
+	{
+//きつけ
+//まひしている　あいてに　だいダメージ
+	ma_,hi_,si_,te_,i_,ru_,spc_,a_,i_,te_,ni_,spc_,da_,i_,DA_,ME_,bou_,ZI_,CR_,
+//そのかわり　まひが　なおる
+	so_,no_,ka_,wa_,ri_,spc_,ma_,hi_,ga_,spc_,na_,o_,ru_,EOM_
+	},
+	{
+//このゆびとまれ
+//あいてを　じぶんに　ちゅうもくさせ
+	a_,i_,te_,wo_,spc_,zi_,bu_,n_,ni_,spc_,ti_,yyu_,u_,mo_,ku_,sa_,se_,CR_,
+//こうげきを　ぜんぶ　じぶんが　うける
+	ko_,u_,ge_,ki_,wo_,spc_,ze_,n_,bu_,spc_,zi_,bu_,n_,ga_,spc_,u_,ke_,ru_,EOM_
+	},
+	{
+//しぜんのちから
+//しぜんのちからを　かりて　こうげき
+	si_,ze_,n_,no_,ti_,ka_,ra_,wo_,spc_,ka_,ri_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//ばしょによって　でる　わざが　かわる
+	ba_,si_,yyo_,ni_,yo_,ttu_,te_,spc_,de_,ru_,spc_,wa_,za_,ga_,spc_,ka_,wa_,ru_,EOM_
+	},
+	{
+//じゅうでん
+//でんきを　たくわえることによって
+	de_,n_,ki_,wo_,spc_,ta_,ku_,wa_,e_,ru_,ko_,to_,ni_,yo_,ttu_,te_,CR_,
+//つぎにだす　でんきの　つよさをあげる
+	tu_,gi_,ni_,da_,su_,spc_,de_,n_,ki_,no_,spc_,tu_,yo_,sa_,wo_,a_,ge_,ru_,EOM_
+	},
+	{
+//ちょうはつ
+//あいてを　ちょうはつして　おこらせる
+	a_,i_,te_,wo_,spc_,ti_,yyo_,u_,ha_,tu_,si_,te_,spc_,o_,ko_,ra_,se_,ru_,CR_,
+//あいては　こうげき　しかできなくなる
+	a_,i_,te_,ha_,spc_,ko_,u_,ge_,ki_,spc_,si_,ka_,de_,ki_,na_,ku_,na_,ru_,EOM_
+	},
+	{
+//てだすけ
+//てだすけされた　あいては
+	te_,da_,su_,ke_,sa_,re_,ta_,spc_,a_,i_,te_,ha_,CR_,
+//わざの　いりょくが　あがる
+	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//トリック
+//トリックを　つかって
+	TO_,RI_,TTU_,KU_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+//どうぐを　こうかん　してしまう
+	do_,u_,gu_,wo_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//なりきり
+//あいてに　なりきって　あいての
+	a_,i_,te_,ni_,spc_,na_,ri_,ki_,ttu_,te_,spc_,a_,i_,te_,no_,CR_,
+//とくせいを　コピーする
+	to_,ku_,se_,i_,wo_,spc_,KO_,PI_,bou_,su_,ru_,EOM_
+	},
+	{
+//ねがいごと
+//ねがいごとをして　かいふくする
+	ne_,ga_,i_,go_,to_,wo_,si_,te_,spc_,ka_,i_,hu_,ku_,su_,ru_,CR_,
+//かなうまでに　ちょっと　かかる
+	ka_,na_,u_,ma_,de_,ni_,spc_,ti_,yyo_,ttu_,to_,spc_,ka_,ka_,ru_,EOM_
+	},
+	{
+//ねこのて
+//みかた　ポケモンの　わざで　こうげき
+	mi_,ka_,ta_,spc_,PO_,KE_,MO_,N_,no_,spc_,wa_,za_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//どの　わざが　でるかは　わからない
+	do_,no_,spc_,wa_,za_,ga_,spc_,de_,ru_,ka_,ha_,spc_,wa_,ka_,ra_,na_,i_,EOM_
+	},
+	{
+//ねをはる
+//ねをはって　ちょっとずつ　かいふく
+	ne_,wo_,ha_,ttu_,te_,spc_,ti_,yyo_,ttu_,to_,zu_,tu_,spc_,ka_,i_,hu_,ku_,CR_,
+//ねをはって　いるので　いれかわれない
+	ne_,wo_,ha_,ttu_,te_,spc_,i_,ru_,no_,de_,spc_,i_,re_,ka_,wa_,re_,na_,i_,EOM_
+	},
+	{
+//ばかぢから
+//すごい　ちからを　はっきするが　
+	su_,go_,i_,spc_,ti_,ka_,ra_,wo_,spc_,ha_,ttu_,ki_,su_,ru_,ga_,spc_,CR_,
+//つかれて　のうりょくが　さがる
+	tu_,ka_,re_,te_,spc_,no_,u_,ri_,yyo_,ku_,ga_,spc_,sa_,ga_,ru_,EOM_
+	},
+	{
+//マジックコート
+//とくしゅな　わざの　こうかを
+	to_,ku_,si_,yyu_,na_,spc_,wa_,za_,no_,spc_,ko_,u_,ka_,wo_,CR_,
+//はねかえして　あいてに　かけてしまう
+	ha_,ne_,ka_,e_,si_,te_,spc_,a_,i_,te_,ni_,spc_,ka_,ke_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//リサイクル
+//いちど　つかってしまった　どうぐを
+	i_,ti_,do_,spc_,tu_,ka_,ttu_,te_,si_,ma_,ttu_,ta_,spc_,do_,u_,gu_,wo_,CR_,
+//もういちど　つかうことが　できる
+	mo_,u_,i_,ti_,do_,spc_,tu_,ka_,u_,ko_,to_,ga_,spc_,de_,ki_,ru_,EOM_
+	},
+	{
+//リベンジ
+//あいてから　ダメージを　うけていると
+	a_,i_,te_,ka_,ra_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,u_,ke_,te_,i_,ru_,to_,CR_,
+//いりょくが　あがる
+	i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//かわらわり
+//リフレクター　などを　こわして
+	RI_,HU_,RE_,KU_,TA_,bou_,spc_,na_,do_,wo_,spc_,ko_,wa_,si_,te_,CR_,
+//あいてに　ダメージを　あたえる
+	a_,i_,te_,ni_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//あくび
+//あくびで　さそって　つぎの　ターンに
+	a_,ku_,bi_,de_,spc_,sa_,so_,ttu_,te_,spc_,tu_,gi_,no_,spc_,TA_,bou_,N_,ni_,CR_,
+//あいてを　ねむり　じょうたいに　する
+	a_,i_,te_,wo_,spc_,ne_,mu_,ri_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,su_,ru_,EOM_
+	},
+	{
+//はたきおとす
+//あいての　どうぐを　はたきおとして
+	a_,i_,te_,no_,spc_,do_,u_,gu_,wo_,spc_,ha_,ta_,ki_,o_,to_,si_,te_,CR_,
+//おわるまで　つかえなくする
+	o_,wa_,ru_,ma_,de_,spc_,tu_,ka_,e_,na_,ku_,su_,ru_,EOM_
+	},
+	{
+//がむしゃら
+//じぶんの　たいりょくが　あいてより
+	zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,a_,i_,te_,yo_,ri_,CR_,
+//すくないほど　ダメージを　あたえる
+	su_,ku_,na_,i_,ho_,do_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//ふんか
+//じぶんの　たいりょくが　おおいほど
+	zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,o_,o_,i_,ho_,do_,CR_,
+//おおきな　ダメージを　あたえる
+	o_,o_,ki_,na_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//スキルスワップ
+//おたがいの　とくせいを　
+	o_,ta_,ga_,i_,no_,spc_,to_,ku_,se_,i_,wo_,spc_,CR_,
+//いれかえることが　できる
+	i_,re_,ka_,e_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,EOM_
+	},
+	{
+//ふういん
+//じぶんが　おぼえて　いる　わざを
+	zi_,bu_,n_,ga_,spc_,o_,bo_,e_,te_,spc_,i_,ru_,spc_,wa_,za_,wo_,CR_,
+//あいては　つかうことが　できなくなる
+	a_,i_,te_,ha_,spc_,tu_,ka_,u_,ko_,to_,ga_,spc_,de_,ki_,na_,ku_,na_,ru_,EOM_
+	},
+	{
+//リフレッシュ
+//どく　まひ　やけど　じょうたいを
+	do_,ku_,spc_,ma_,hi_,spc_,ya_,ke_,do_,spc_,zi_,yyo_,u_,ta_,i_,wo_,CR_,
+//なおしてしまう
+	na_,o_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//おんねん
+//てきの　わざで　ひんしに　なったとき
+	te_,ki_,no_,spc_,wa_,za_,de_,spc_,hi_,n_,si_,ni_,spc_,na_,ttu_,ta_,to_,ki_,CR_,
+//その　わざの　ポイントを　０にする
+	so_,no_,spc_,wa_,za_,no_,spc_,PO_,I_,N_,TO_,wo_,spc_,n0_,ni_,su_,ru_,EOM_
+	},
+	{
+//よこどり
+//あいてが　つかおうとした　わざを
+	a_,i_,te_,ga_,spc_,tu_,ka_,o_,u_,to_,si_,ta_,spc_,wa_,za_,wo_,CR_,
+//うばって　じぶんに　つかってしまう
+	u_,ba_,ttu_,te_,spc_,zi_,bu_,n_,ni_,spc_,tu_,ka_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ひみつのちから
+//ひみつの　ちからを　よびさます
+	hi_,mi_,tu_,no_,spc_,ti_,ka_,ra_,wo_,spc_,yo_,bi_,sa_,ma_,su_,CR_,
+//ばしょによって　ついかこうかがちがう
+	ba_,si_,yyo_,ni_,yo_,ttu_,te_,spc_,tu_,i_,ka_,ko_,u_,ka_,ga_,ti_,ga_,u_,EOM_
+	},
+	{
+//ダイビング
+//１ターンめで　みずに　もぐり
+	n1_,TA_,bou_,N_,me_,de_,spc_,mi_,zu_,ni_,spc_,mo_,gu_,ri_,CR_,
+//つぎのターンで　てきを　こうげき
+	tu_,gi_,no_,TA_,bou_,N_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//つっぱり
+//２－５かい　れんぞくで　つっぱり
+	n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,spc_,tu_,ttu_,pa_,ri_,CR_,
+//てきを　こうげき
+	te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ほごしょく
+//ばしょに　あわせて　
+	ba_,si_,yyo_,ni_,spc_,a_,wa_,se_,te_,spc_,CR_,
+//ポケモンの　タイプが　へんかする
+	PO_,KE_,MO_,N_,no_,spc_,TA_,I_,PU_,ga_,spc_,he_,n_,ka_,su_,ru_,EOM_
+	},
+	{
+//ほたるび
+//ひかりを　てんめつさせて
+	hi_,ka_,ri_,wo_,spc_,te_,n_,me_,tu_,sa_,se_,te_,CR_,
+//とくこうを　グーンとあげる
+	to_,ku_,ko_,u_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//ラスターパージ
+//ひかりを　ほうしゅつして　こうげき
+	hi_,ka_,ri_,wo_,spc_,ho_,u_,si_,yyu_,tu_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//とくぼうを　さげることがある
+	to_,ku_,bo_,u_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ミストボール
+//きりじょうの　うもうで　こうげき
+	ki_,ri_,zi_,yyo_,u_,no_,spc_,u_,mo_,u_,de_,spc_,ko_,u_,ge_,ki_,CR_,
+//とくこうを　さげることがある
+	to_,ku_,ko_,u_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//フェザーダンス
+//うもうを　ふりまき　からみつかせて　
+	u_,mo_,u_,wo_,spc_,hu_,ri_,ma_,ki_,spc_,ka_,ra_,mi_,tu_,ka_,se_,te_,spc_,CR_,
+//こうげきを　ガクッとさげさせる
+	ko_,u_,ge_,ki_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//フラフラダンス
+//すべての　ポケモンを
+	su_,be_,te_,no_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+//こんらん　じょうたいに　する
+	ko_,n_,ra_,n_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,su_,ru_,EOM_
+	},
+	{
+//ブレイズキック
+//きゅうしょに　あたり　やすく
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,spc_,ya_,su_,ku_,CR_,
+//たまに　やけど　じょうたいに　する
+	ta_,ma_,ni_,spc_,ya_,ke_,do_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,su_,ru_,EOM_
+	},
+	{
+//どろあそび
+//どろどろに　なって
+	do_,ro_,do_,ro_,ni_,spc_,na_,ttu_,te_,CR_,
+//でんきタイプの　ダメージを　へらす
+	de_,n_,ki_,TA_,I_,PU_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,he_,ra_,su_,EOM_
+	},
+	{
+//アイスボール
+//５ターンのあいだ　てきを　こうげき
+	n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//あてるたびに　ダメージが　あがる
+	a_,te_,ru_,ta_,bi_,ni_,spc_,DA_,ME_,bou_,ZI_,ga_,spc_,a_,ga_,ru_,EOM_
+	},
+	{
+//ニードルアーム
+//トゲだらけの　うでで　なぐり　つける
+	TO_,GE_,da_,ra_,ke_,no_,spc_,u_,de_,de_,spc_,na_,gu_,ri_,spc_,tu_,ke_,ru_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//なまける
+//なまけて　からだを　たいりょくの
+	na_,ma_,ke_,te_,spc_,ka_,ra_,da_,wo_,spc_,ta_,i_,ri_,yyo_,ku_,no_,CR_,
+//はんぶんだけ　かいふくする
+	ha_,n_,bu_,n_,da_,ke_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//ハイパーボイス
+//おおごえの　しんどうで
+	o_,o_,go_,e_,no_,spc_,si_,n_,do_,u_,de_,CR_,
+//てきに　ダメージを　あたえる
+	te_,ki_,ni_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//どくどくのキバ
+//するどいキバで　こうげき　
+	su_,ru_,do_,i_,KI_,BA_,de_,spc_,ko_,u_,ge_,ki_,spc_,CR_,
+//たまに　もうどく　じょうたいに　する
+	ta_,ma_,ni_,spc_,mo_,u_,do_,ku_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,su_,ru_,EOM_
+	},
+	{
+//ブレイククロー
+//するどいツメで　てきを　きりさく
+	su_,ru_,do_,i_,TU_,ME_,de_,spc_,te_,ki_,wo_,spc_,ki_,ri_,sa_,ku_,CR_,
+//ぼうぎょを　さげることがある
+	bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ブラストバーン
+//ダメージは　おおきいが　つかうと
+	DA_,ME_,bou_,ZI_,ha_,spc_,o_,o_,ki_,i_,ga_,spc_,tu_,ka_,u_,to_,CR_,
+//つぎのターン　うごけなくなってしまう
+	tu_,gi_,no_,TA_,bou_,N_,spc_,u_,go_,ke_,na_,ku_,na_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ハイドロカノン
+//ダメージは　おおきいが　つかうと
+	DA_,ME_,bou_,ZI_,ha_,spc_,o_,o_,ki_,i_,ga_,spc_,tu_,ka_,u_,to_,CR_,
+//つぎのターン　うごけなくなってしまう
+	tu_,gi_,no_,TA_,bou_,N_,spc_,u_,go_,ke_,na_,ku_,na_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//コメットパンチ
+//すいせいのごとく　パンチを　くりだす
+	su_,i_,se_,i_,no_,go_,to_,ku_,spc_,PA_,N_,TI_,wo_,spc_,ku_,ri_,da_,su_,CR_,
+//こうげきが　あがることがある
+	ko_,u_,ge_,ki_,ga_,spc_,a_,ga_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//おどろかす
+//てきを　おどろかして　こうげき
+	te_,ki_,wo_,spc_,o_,do_,ro_,ka_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//ウェザーボール
+//てんきに　よって
+	te_,n_,ki_,ni_,spc_,yo_,ttu_,te_,CR_,
+//タイプと　いりょくが　へんかする
+	TA_,I_,PU_,to_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,he_,n_,ka_,su_,ru_,EOM_
+	},
+	{
+//アロマセラピー
+//ここちよい　かおりを　かがせて
+	ko_,ko_,ti_,yo_,i_,spc_,ka_,o_,ri_,wo_,spc_,ka_,ga_,se_,te_,CR_,
+//すべての　じょうたいを　かいふくする
+	su_,be_,te_,no_,spc_,zi_,yyo_,u_,ta_,i_,wo_,spc_,ka_,i_,hu_,ku_,su_,ru_,EOM_
+	},
+	{
+//うそなき
+//ないたふりで　あいてを　こまらせて
+	na_,i_,ta_,hu_,ri_,de_,spc_,a_,i_,te_,wo_,spc_,ko_,ma_,ra_,se_,te_,CR_,
+//とくぼうを　ガクッとさげさせる
+	to_,ku_,bo_,u_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//エアカッター
+//するどい　かぜを　おこして　こうげき
+	su_,ru_,do_,i_,spc_,ka_,ze_,wo_,spc_,o_,ko_,si_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//オーバーヒート
+//フルパワーで　こうげき　できるが
+	HU_,RU_,PA_,WA_,bou_,de_,spc_,ko_,u_,ge_,ki_,spc_,de_,ki_,ru_,ga_,CR_,
+//とくこうが　ガクッと　さがってしまう
+	to_,ku_,ko_,u_,ga_,spc_,GA_,KU_,TTU_,to_,spc_,sa_,ga_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//かぎわける
+//わざが　あたりにくくなった　てきに
+	wa_,za_,ga_,spc_,a_,ta_,ri_,ni_,ku_,ku_,na_,ttu_,ta_,spc_,te_,ki_,ni_,CR_,
+//こうげきを　あてられるようになる
+	ko_,u_,ge_,ki_,wo_,spc_,a_,te_,ra_,re_,ru_,yo_,u_,ni_,na_,ru_,EOM_
+	},
+	{
+//がんせきふうじ
+//いわで　うごきを　ふうじて　こうげき
+	i_,wa_,de_,spc_,u_,go_,ki_,wo_,spc_,hu_,u_,zi_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//あいての　すばやさも　さげる
+	a_,i_,te_,no_,spc_,su_,ba_,ya_,sa_,mo_,spc_,sa_,ge_,ru_,EOM_
+	},
+	{
+//ぎんいろのかぜ
+//かぜに　りんぷんを　のせて　こうげき
+	ka_,ze_,ni_,spc_,ri_,n_,pu_,n_,wo_,spc_,no_,se_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//のうりょくが　あがることがある
+	no_,u_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//きんぞくおん
+//いやなおとを　だして　てきの
+	i_,ya_,na_,o_,to_,wo_,spc_,da_,si_,te_,spc_,te_,ki_,no_,CR_,
+//とくぼうを　ガクッとさげさせる
+	to_,ku_,bo_,u_,wo_,spc_,GA_,KU_,TTU_,to_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//くさぶえ
+//ここちよい　くさぶえの　ねいろで
+	ko_,ko_,ti_,yo_,i_,spc_,ku_,sa_,bu_,e_,no_,spc_,ne_,i_,ro_,de_,CR_,
+//てきを　ふかいねむりへと　さそう
+	te_,ki_,wo_,spc_,hu_,ka_,i_,ne_,mu_,ri_,he_,to_,spc_,sa_,so_,u_,EOM_
+	},
+	{
+//くすぐる
+//あいてを　くすぐり　わらわせて
+	a_,i_,te_,wo_,spc_,ku_,su_,gu_,ri_,spc_,wa_,ra_,wa_,se_,te_,CR_,
+//こうげきと　ぼうぎょを　さげさせる
+	ko_,u_,ge_,ki_,to_,spc_,bo_,u_,gi_,yyo_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//コスモパワー
+//しんぴてきな　ちからで
+	si_,n_,pi_,te_,ki_,na_,spc_,ti_,ka_,ra_,de_,CR_,
+//ぼうぎょと　とくぼうを　あげる
+	bo_,u_,gi_,yyo_,to_,spc_,to_,ku_,bo_,u_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//しおふき
+//じぶんの　たいりょくが　おおいほど
+	zi_,bu_,n_,no_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,o_,o_,i_,ho_,do_,CR_,
+//おおきな　ダメージを　あたえる
+	o_,o_,ki_,na_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,EOM_
+	},
+	{
+//シグナルビーム
+//ふしぎな　ひかりを　はっしゃする
+	hu_,si_,gi_,na_,spc_,hi_,ka_,ri_,wo_,spc_,ha_,ttu_,si_,yya_,su_,ru_,CR_,
+//てきを　こんらんさせることがある
+	te_,ki_,wo_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//シャドーパンチ
+//かげにまぎれて　パンチを　くりだす
+	ka_,ge_,ni_,ma_,gi_,re_,te_,spc_,PA_,N_,TI_,wo_,spc_,ku_,ri_,da_,su_,CR_,
+//てきは　ぜったいに　よけられない
+	te_,ki_,ha_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,yo_,ke_,ra_,re_,na_,i_,EOM_
+	},
+	{
+//じんつうりき
+//ふしぎな　ちからで　てきを　こうげき
+	hu_,si_,gi_,na_,spc_,ti_,ka_,ra_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　ひるませることがある
+	te_,ki_,wo_,spc_,hi_,ru_,ma_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//スカイアッパー
+//そらに　むかうような　いきおいで
+	so_,ra_,ni_,spc_,mu_,ka_,u_,yo_,u_,na_,spc_,i_,ki_,o_,i_,de_,CR_,
+//アッパーを　くりだし　こうげき
+	A_,TTU_,PA_,bou_,wo_,spc_,ku_,ri_,da_,si_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//すなじごく
+//２ー５ターンのあいだ　てきを
+	n2_,bou_,n5_,TA_,bou_,N_,no_,a_,i_,da_,spc_,te_,ki_,wo_,CR_,
+//うずの　ちゅうしんに　とじこめる
+	u_,zu_,no_,spc_,ti_,yyu_,u_,si_,n_,ni_,spc_,to_,zi_,ko_,me_,ru_,EOM_
+	},
+	{
+//ぜったいれいど
+//ぜったいれいどで　てきを　おそう
+	ze_,ttu_,ta_,i_,re_,i_,do_,de_,spc_,te_,ki_,wo_,spc_,o_,so_,u_,CR_,
+//きまると　せんとうふのうになる
+	ki_,ma_,ru_,to_,spc_,se_,n_,to_,u_,hu_,no_,u_,ni_,na_,ru_,EOM_
+	},
+	{
+//だくりゅう
+//どろみずで　てきを　こうげき
+	do_,ro_,mi_,zu_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//たまに　めいちゅうりつを　さげさせる
+	ta_,ma_,ni_,spc_,me_,i_,ti_,yyu_,u_,ri_,tu_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//タネマシンガン
+//タネを　２－５かい　れんぞくで
+	TA_,NE_,wo_,spc_,n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,CR_,
+//はっしゃして　てきを　こうげき
+	ha_,ttu_,si_,yya_,si_,te_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//つばめがえし
+//すばやさで　ほんろうする
+	su_,ba_,ya_,sa_,de_,spc_,ho_,n_,ro_,u_,su_,ru_,CR_,
+//てきは　ぜったいに　よけられない
+	te_,ki_,ha_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,yo_,ke_,ra_,re_,na_,i_,EOM_
+	},
+	{
+//つららばり
+//つららを　２－５かい　れんぞくで
+	tu_,ra_,ra_,wo_,spc_,n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,CR_,
+//はっしゃして　てきを　こうげき
+	ha_,ttu_,si_,yya_,si_,te_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//てっぺき
+//からだの　ひょうめんを　かたくして
+	ka_,ra_,da_,no_,spc_,hi_,yyo_,u_,me_,n_,wo_,spc_,ka_,ta_,ku_,si_,te_,CR_,
+//ぼうぎょを　グーンとあげる
+	bo_,u_,gi_,yyo_,wo_,spc_,GU_,bou_,N_,to_,a_,ge_,ru_,EOM_
+	},
+	{
+//とおせんぼう
+//にげみちを　ふさいで
+	ni_,ge_,mi_,ti_,wo_,spc_,hu_,sa_,i_,de_,CR_,
+//てきを　にげられなく　してしまう
+	te_,ki_,wo_,spc_,ni_,ge_,ra_,re_,na_,ku_,spc_,si_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//とおぼえ
+//ほえて　きあいを　たかめることで
+	ho_,e_,te_,spc_,ki_,a_,i_,wo_,spc_,ta_,ka_,me_,ru_,ko_,to_,de_,CR_,
+//こうげきを　あげる
+	ko_,u_,ge_,ki_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//ドラゴンクロー
+//するどいツメを　つかい
+	su_,ru_,do_,i_,TU_,ME_,wo_,spc_,tu_,ka_,i_,CR_,
+//てきを　ひっかいて　こうげき
+	te_,ki_,wo_,spc_,hi_,ttu_,ka_,i_,te_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//ハードプラント
+//ダメージは　おおきいが　つかうと
+	DA_,ME_,bou_,ZI_,ha_,spc_,o_,o_,ki_,i_,ga_,spc_,tu_,ka_,u_,to_,CR_,
+//つぎのターン　うごけなくなってしまう
+	tu_,gi_,no_,TA_,bou_,N_,spc_,u_,go_,ke_,na_,ku_,na_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+	{
+//ビルドアップ
+//からだを　きたえて
+	ka_,ra_,da_,wo_,spc_,ki_,ta_,e_,te_,CR_,
+//こうげきと　ぼうぎょを　あげる
+	ko_,u_,ge_,ki_,to_,spc_,bo_,u_,gi_,yyo_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//とびはねる
+//１ターンめで　とびはね　２ターンめで
+	n1_,TA_,bou_,N_,me_,de_,spc_,to_,bi_,ha_,ne_,spc_,n2_,TA_,bou_,N_,me_,de_,CR_,
+//おちる　たまに　てきを　まひさせる
+	o_,ti_,ru_,spc_,ta_,ma_,ni_,spc_,te_,ki_,wo_,spc_,ma_,hi_,sa_,se_,ru_,EOM_
+	},
+	{
+//マッドショット
+//どろを　なげつけて　こうげき
+	do_,ro_,wo_,spc_,na_,ge_,tu_,ke_,te_,spc_,ko_,u_,ge_,ki_,CR_,
+//すばやさを　さげさせる
+	su_,ba_,ya_,sa_,wo_,spc_,sa_,ge_,sa_,se_,ru_,EOM_
+	},
+	{
+//ポイズンテール
+//たまに　どくを　あたえる　ことがあり
+	ta_,ma_,ni_,spc_,do_,ku_,wo_,spc_,a_,ta_,e_,ru_,spc_,ko_,to_,ga_,a_,ri_,CR_,
+//きゅうしょにも　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,mo_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//ほしがる
+//かわいく　あまえながら
+	ka_,wa_,i_,ku_,spc_,a_,ma_,e_,na_,ga_,ra_,CR_,
+//てきが　もっている　どうぐを　もらう
+	te_,ki_,ga_,spc_,mo_,ttu_,te_,i_,ru_,spc_,do_,u_,gu_,wo_,spc_,mo_,ra_,u_,EOM_
+	},
+	{
+//ボルテッカー
+//いのちをかけて　てきに　たいあたり
+	i_,no_,ti_,wo_,ka_,ke_,te_,spc_,te_,ki_,ni_,spc_,ta_,i_,a_,ta_,ri_,CR_,
+//じぶんもすこし　ダメージをうける
+	zi_,bu_,n_,mo_,su_,ko_,si_,spc_,DA_,ME_,bou_,ZI_,wo_,u_,ke_,ru_,EOM_
+	},
+	{
+//マジカルリーフ
+//ぜったいに　よけられない　
+	ze_,ttu_,ta_,i_,ni_,spc_,yo_,ke_,ra_,re_,na_,i_,spc_,CR_,
+//ふしぎな　はっぱで　てきを　こうげき
+	hu_,si_,gi_,na_,spc_,ha_,ttu_,pa_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//みずあそび
+//びしょびしょに　なって
+	bi_,si_,yyo_,bi_,si_,yyo_,ni_,spc_,na_,ttu_,te_,CR_,
+//ほのおタイプの　ダメージを　へらす
+	ho_,no_,o_,TA_,I_,PU_,no_,spc_,DA_,ME_,bou_,ZI_,wo_,spc_,he_,ra_,su_,EOM_
+	},
+	{
+//めいそう
+//せいしんを　しゅうちゅう　させて
+	se_,i_,si_,n_,wo_,spc_,si_,yyu_,u_,ti_,yyu_,u_,spc_,sa_,se_,te_,CR_,
+//とくこうと　とくぼうを　あげる
+	to_,ku_,ko_,u_,to_,spc_,to_,ku_,bo_,u_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//リーフブレード
+//とがった　はっぱで　きりつける
+	to_,ga_,ttu_,ta_,spc_,ha_,ttu_,pa_,de_,spc_,ki_,ri_,tu_,ke_,ru_,CR_,
+//きゅうしょに　あたりやすい
+	ki_,yyu_,u_,si_,yyo_,ni_,spc_,a_,ta_,ri_,ya_,su_,i_,EOM_
+	},
+	{
+//りゅうのまい
+//しんぴてきな　まいを　おどり
+	si_,n_,pi_,te_,ki_,na_,spc_,ma_,i_,wo_,spc_,o_,do_,ri_,CR_,
+//こうげきと　すばやさを　あげる
+	ko_,u_,ge_,ki_,to_,spc_,su_,ba_,ya_,sa_,wo_,spc_,a_,ge_,ru_,EOM_
+	},
+	{
+//ロックブラスト
+//いわを　２－５かい　れんぞくで
+	i_,wa_,wo_,spc_,n2_,bou_,n5_,ka_,i_,spc_,re_,n_,zo_,ku_,de_,CR_,
+//はっしゃして　てきを　こうげき
+	ha_,ttu_,si_,yya_,si_,te_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,EOM_
+	},
+	{
+//でんげきは
+//すばやく　でんげきを　くりだす
+	su_,ba_,ya_,ku_,spc_,de_,n_,ge_,ki_,wo_,spc_,ku_,ri_,da_,su_,CR_,
+//てきは　ぜったいに　よけられない
+	te_,ki_,ha_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,yo_,ke_,ra_,re_,na_,i_,EOM_
+	},
+	{
+//みずのはどう
+//ちょうおんぱで　てきを　こうげき
+	ti_,yyo_,u_,o_,n_,pa_,de_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,CR_,
+//てきを　こんらんさせることがある
+	te_,ki_,wo_,spc_,ko_,n_,ra_,n_,sa_,se_,ru_,ko_,to_,ga_,a_,ru_,EOM_
+	},
+	{
+//はめつのねがい
+//たくさんの　ひかりが　ふりそそぐ
+	ta_,ku_,sa_,n_,no_,spc_,hi_,ka_,ri_,ga_,spc_,hu_,ri_,so_,so_,gu_,CR_,
+//２ターンごに　てきを　こうげきする
+	n2_,TA_,bou_,N_,go_,ni_,spc_,te_,ki_,wo_,spc_,ko_,u_,ge_,ki_,su_,ru_,EOM_
+	},
+	{
+//サイコブースト
+//フルパワーで　こうげき　できるが
+	HU_,RU_,PA_,WA_,bou_,de_,spc_,ko_,u_,ge_,ki_,spc_,de_,ki_,ru_,ga_,CR_,
+//とくこうが　ガクッと　さがってしまう
+	to_,ku_,ko_,u_,ga_,spc_,GA_,KU_,TTU_,to_,spc_,sa_,ga_,ttu_,te_,si_,ma_,u_,EOM_
+	},
+};

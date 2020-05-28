@@ -1,0 +1,38 @@
+// ÅúÉLÉiÉMÉ^ÉEÉìÅ@ñØâ∆ÇPÅiäXÇÃñkìåÅj
+
+
+// Åúé·é“íjÇQ
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_youngm2_01_p01_t107_r0101
+msg_youngm2_01_p01_t107_r0101:
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	i_,wa_,tenten_,tenten_,spc_,ko_,o_,ri_,tenten_,tenten_,spc_,ha_,ga_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,zo_,re_,no_,spc_,ti_,ka_,ra_,wo_,spc_,tu_,ka_,sa_,do_,ru_
+	.byte	CR_
+	.byte	n3_,bi_,ki_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,zo_,re_,spc_,do_,ko_,ka_,no_,spc_,do_,u_,ku_,tu_,ni_,spc_,i_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,spc_,ti_,i_,sa_,na_,spc_,ko_,ro_,ni_
+	.byte	CR_
+	.byte	so_,n_,na_,spc_,ha_,na_,si_,wo_,spc_,ki_,i_,ta_,ko_,to_,ga_,spc_,a_,ru_,yo_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+
+// Åúèóê´ÇQ
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°
+	.GLOBAL	msg_woman2_01_p01_t107_r0101
+msg_woman2_01_p01_t107_r0101:
+	.byte	kako_,mu_,ttu_,tu_,no_,spc_,te_,n_,ga_
+	.byte	CR_
+	.byte	spc_,mi_,ttu_,tu_,no_,spc_,to_,bi_,ra_,wo_,spc_,a_,ke_,ru_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	o_,zi_,i_,ti_,yya_,n_,ga_,spc_,yo_,ku_,spc_,i_,ttu_,te_,i_,ta_,ke_,do_
+	.byte	CR_
+	.byte	i_,ma_,da_,ni_,spc_,na_,n_,no_,ko_,to_,da_,ka_,spc_,wa_,ka_,ra_,na_,i_,wa_
+	.byte	EOM_
+
+// Å°Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å†Å°

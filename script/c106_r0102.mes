@@ -1,0 +1,127 @@
+// ●ミナモ　民宿２階
+
+
+// ●ゲームクリア後、
+// 　ゲームフリークが社員旅行で、ここを訪れます
+
+// ●トレーナー男１
+// ●表彰状を１度も表示していない→msg_trainerm1_01_p01_c106_r0102:
+// ●表彰状を１度表示した　　　　→msg_trainerm1_01_p02_c106_r0102:
+
+// ●表彰状を１度も表示していない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c106_r0102
+msg_trainerm1_01_p01_c106_r0102:
+	.byte	bo_,ku_,ha_,spc_,GE_,bou_,MU_,spc_,DE_,ZA_,I_,NA_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	he_,bou_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,spc_,a_,tu_,me_,te_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ze_,n_,bu_,spc_,a_,tu_,me_,ru_,no_
+	.byte	CR_
+	.byte	ta_,i_,he_,n_,spc_,da_,ke_,do_,spc_,ga_,n_,ba_,ttu_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,spc_,ze_,n_,bu_,spc_,a_,tu_,me_,ta_,ra_,spc_,o_,si_,e_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモン図鑑のチェック
+// ●ホウエンモードでNo001～200がうまっている、
+// 　もしくは全国モードで全てうまっていると
+// 　以下のメッセージ
+// ●ファンファーレの効果音
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p02_c106_r0102
+msg_trainerm1_01_p02_c106_r0102:
+	.byte	su_,go_,i_,na_,bou_,gyoe_
+	.byte	CR_
+	.byte	i_,ya_,bou_,spc_,su_,go_,i_,yo_,spc_,ki_,mi_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_
+	.byte	CR_
+	.byte	ze_,n_,bu_,spc_,a_,tu_,ma_,ttu_,te_,spc_,i_,ru_,n_,da_,ne_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,da_,ke_,spc_,PO_,KE_,MO_,N_,wo_,spc_,a_,i_,si_,te_,ru_,n_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,n_,do_,u_,spc_,si_,ma_,si_,ta_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,wo_,spc_,hi_,yyo_,u_,si_,yyo_,u_,spc_,sa_,se_,te_,mo_,ra_,i_,ma_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●表彰状を表示
+// ●ジムで勝利したときの効果音
+// ●Ｂボタンを押すと画面復帰します
+// ●表彰状を１度表示して以降、再度話しかけた場合は
+// 　このメッセージ表示から処理をおこなってください
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●若者男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_c106_r0102
+msg_youngm1_01_p01_c106_r0102:
+	.byte	o_,re_,sa_,ma_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PU_,RO_,GU_,RA_,MA_,bou_,da_,yo_,gyoe_,spc_,ko_,ttu_,ti_,no_
+	.byte	CR_
+	.byte	SU_,RO_,TTU_,TO_,ha_,spc_,do_,n_,na_,no_,ka_,spc_,ta_,no_,si_,mi_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●助手
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_c106_r0102
+msg_studym1_01_p01_c106_r0102:
+	.byte	o_,re_,spc_,GU_,RA_,HU_,II_,TTU_,KA_,bou_,gyoe_
+	.byte	CR_
+	.byte	HO_,U_,E_,N_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,o_,mo_,si_,ro_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●大男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_c106_r0102
+msg_bigman1_01_p01_c106_r0102:
+	.byte	u_,ki_,wa_,GA_,bou_,RU_,spc_,ka_,wa_,i_,i_,spc_,de_,si_,yyo_,gyoe_
+	.byte	CR_
+	.byte	u_,ki_,wa_,GA_,bou_,RU_,to_,spc_,si_,yyo_,u_,bu_,spc_,na_,n_,te_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,bou_,gyoe_,spc_,ta_,ma_,ra_,n_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ta_,go_,ti_,yya_,n_,spc_,ka_,wa_,i_,i_,spc_,de_,si_,yyo_,gyoe_
+	.byte	CR_
+	.byte	hu_,ta_,go_,ti_,yya_,n_,to_,spc_,n2_,ta_,i_,n2_,spc_,na_,n_,te_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,bou_,gyoe_,spc_,ta_,ma_,ra_,n_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c106_r0102
+msg_woman1_01_p01_c106_r0102:
+	.byte	na_,n_,da_,ka_,spc_,si_,o_,ka_,ze_,ga_,spc_,ko_,ko_,ro_,wo_,spc_,ku_,su_,gu_,ttu_,te_
+	.byte	CR_
+	.byte	ki_,mo_,ti_,spc_,i_,i_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アドバンス少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_agboy1_01_p01_c106_r0102
+msg_agboy1_01_p01_c106_r0102:
+	.byte	i_,tu_,spc_,do_,ko_,de_,spc_,ta_,i_,se_,n_,ya_,spc_,si_,yyo_,u_,bu_,wo_
+	.byte	CR_
+	.byte	i_,do_,ma_,re_,ru_,ka_,spc_,wa_,ka_,ra_,na_,i_,ka_,ra_,na_
+	.byte	SCROLL_WAIT_
+	.byte	GE_,bou_,MU_,BO_,bou_,I_,spc_,A_,DO_,BA_,N_,SU_,ha_,spc_,te_,ba_,na_,se_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

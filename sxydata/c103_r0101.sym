@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 6
+#define TR_LEADER_03	1
+#define TR_GUITARIST_04	2
+#define TR_BATTLEG_11	3
+#define TR_TANPAN_06	4
+#define TR_GUITARIST_01	5
+#define WORKERM1_01_C103_R0101	6
+
+//Exit ID = 2
+#define C103_R0101_MAT01	0
+#define C103_R0101_MAT02	1

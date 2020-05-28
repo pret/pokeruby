@@ -1,0 +1,43 @@
+// ●カナズミシティ　フレンドリィショップ
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c104_fs01
+msg_middlew1_01_p01_c104_fs01:
+	.byte	TO_,U_,KA_,no_,mo_,ri_,de_,spc_,KI_,NO_,KO_,KO_,ga_
+	.byte	CR_
+	.byte	to_,bi_,da_,si_,te_,spc_,ki_,ta_,to_,ki_,no_,spc_,ta_,me_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,hi_,na_,o_,si_,ya_,spc_,do_,ku_,ke_,si_,wo_,spc_,ka_,ttu_,te_,o_,ku_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_c104_fs01
+msg_boy1_01_p01_c104_fs01:
+	.byte	PO_,KE_,MO_,N_,spc_,si_,n_,ka_,si_,te_,spc_,ta_,i_,ri_,yyo_,ku_,ga_
+	.byte	CR_
+	.byte	hu_,e_,ta_,ka_,ra_,spc_,KI_,ZU_,gu_,su_,ri_,spc_,zi_,yya_,na_,ku_,te_
+	.byte	SCROLL_WAIT_
+	.byte	i_,i_,KI_,ZU_,gu_,su_,ri_,wo_,spc_,ka_,ttu_,te_,a_,ge_,yo_,u_,ka_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●帽子男２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy2_01_p01_c104_fs01
+msg_capboy2_01_p01_c104_fs01:
+	.byte	do_,u_,ku_,tu_,de_,spc_,ma_,yo_,ttu_,ta_,spc_,to_,ki_,no_,ta_,me_
+	.byte	CR_
+	.byte	a_,na_,nu_,ke_,no_,HI_,MO_,wo_,spc_,ka_,ttu_,te_,o_,ko_,u_,spc_,ttu_,to_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ka_,u_,to_,spc_,i_,ttu_,si_,yyu_,n_,de_
+	.byte	CR_
+	.byte	i_,ri_,gu_,ti_,ni_,spc_,mo_,do_,re_,ru_,mo_,n_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,344 @@
+//====================================================================
+//							c103_r0101
+//							キンセツ・ジム
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c103_r0101_event_data
+BG_CHANGE_LABEL			bg_change_c103_r0101
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//							BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//セルを元の状態に戻す
+//どのスイッチが押されているかチェック
+bg_change_c103_r0101:
+	//ジムリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_03_LEADER,gym03_all_change_cell
+
+	_SWITCH			WK_SCENE_C103_R0101
+	_CASEJUMP		0,gym03_door_init
+	_CASEJUMP		1,gym03_switch_01_on
+	_CASEJUMP		2,gym03_switch_02_on
+	_CASEJUMP		3,gym03_switch_03_on
+	_END
+
+//ドアのセルを変える
+gym03_door_init:
+	_IF_FLAGON_JUMP	FE_GYM03_DOOR,gym03_door_init2
+	_END
+
+//スイッチを一回押している状態にする
+gym03_door_init2:
+	//横青あき
+	_SET_CELL		4,7,560,0
+	_SET_CELL		4,8,568,0
+	_SET_CELL		5,7,561,0
+	_SET_CELL		5,8,569,0
+
+	//縦青あき
+	_SET_CELL		3,8,578,1
+	_SET_CELL		3,9,538,0
+	_SET_CELL		3,10,593,0
+
+	//横赤
+	_SET_CELL		1,10,546,0
+	_SET_CELL		1,11,554,1
+	_SET_CELL		2,10,547,0
+	_SET_CELL		2,11,555,1
+	_SET_CELL		4,10,546,0
+	_SET_CELL		4,11,554,1
+	_SET_CELL		5,10,547,0
+	_SET_CELL		5,11,555,1
+
+	//縦青あき
+	_SET_CELL		6,11,578,1
+	_SET_CELL		6,12,538,0
+	_SET_CELL		6,13,593,0
+
+	//縦赤
+	_SET_CELL		3,11,577,1
+	_SET_CELL		3,12,585,1
+	_SET_CELL		3,13,592,1
+
+	//横青あき
+	_SET_CELL		4,13,560,0
+	_SET_CELL		4,14,568,0
+	_SET_CELL		5,13,561,0
+	_SET_CELL		5,14,569,0
+
+	_END
+
+//スイッチのセルを描きかえる
+gym03_switch_01_on:
+	_LDVAL			PARAM0,0			//１つ目のスイッチ
+	_PROGRAM		GYM03_SWITCH_CHANGE_CELL
+	_JUMP			gym03_door_init
+	_END
+gym03_switch_02_on:
+	_LDVAL			PARAM0,1			//２つ目のスイッチ
+	_PROGRAM		GYM03_SWITCH_CHANGE_CELL
+	_JUMP			gym03_door_init
+	_END
+gym03_switch_03_on:
+	_LDVAL			PARAM0,2			//３つ目のスイッチ
+	_PROGRAM		GYM03_SWITCH_CHANGE_CELL
+	_JUMP			gym03_door_init
+	_END
+
+//ジムリーダーを倒しているので全てのセルを変更する
+gym03_all_change_cell:
+	_PROGRAM		GYM03_ALL_CHANGE_CELL
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_03_01
+	_LEADER_DATA_START
+	_TRAINER_DATA1	LEADERM_03
+	_TRAINER_DATA2	msg_gymleader_03_01
+	_TRAINER_DATA3	msg_gymleader_03_02
+	_TRAINER_DATA4	ev_gymleader_03_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシンを貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_C103_R0101,gymleader_03_wazam_get
+
+	//発電機のスイッチを押してから
+	_IFVAL_JUMP		WK_SCENE_CAVE_D1602,EQ,2,ev_new_kinsetsu_clear
+
+	_TALK_KEYWAIT	msg_gymleader_03_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_03_end:
+	_TALKMSG		msg_gymleader_03_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_03_04
+
+	_FLAG_SET		FT_GYM_03_LEADER
+	_FLAG_SET		SYS_BATCH03_GET			//バッチゲット
+	_ADDWK			WK_SCENE_C101_R0201,1
+
+	//バッチを４つゲットした
+	_IFVAL_CALL		WK_SCENE_C101_R0201,EQ,6,papa_pos_change
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,3
+	_CALL			gym_trainer_all_flagon
+
+	//全てのドアを開ける、全てのスイッチをONにする
+	_PROGRAM		GYM03_ALL_CHANGE_CELL
+	_PROGRAM		MAKE_MAP_BG
+	_SE				SE_KI_GASYAN
+
+	_JUMP			gymleader_03_wazam_get
+	_END
+
+//技マシンを貰う
+gymleader_03_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN34,1	
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_gymleader_03_05
+
+	_FLAG_SET		FE_WAZAM_01_C103_R0101	//技マシンを貰った
+	_TALK_OBJ_END
+	_END
+
+//ニューキンセツイベントクリア
+ev_new_kinsetsu_clear:
+	_TALK_KEYWAIT	msg_gymleader_03_07
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							スイッチ								*/
+//
+//							LOCALWORK0使用
+//
+/********************************************************************/
+SCRIPT_LABEL	ev_c103_r0101_pos01
+	_TALK_START
+
+	//ジムリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_03_LEADER,gym03_no_switch
+
+	_IFVAL_JUMP		WK_SCENE_C103_R0101,EQ,1,gym03_no_switch
+	_LDVAL			WK_SCENE_C103_R0101,1
+	_LDVAL			PARAM0,0			//１つ目のスイッチ
+	_JUMP			gym03_cell_change
+	_END
+
+
+SCRIPT_LABEL	ev_c103_r0101_pos02
+	_TALK_START
+
+	//ジムリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_03_LEADER,gym03_no_switch
+
+	_IFVAL_JUMP		WK_SCENE_C103_R0101,EQ,2,gym03_no_switch
+	_LDVAL			WK_SCENE_C103_R0101,2
+	_LDVAL			PARAM0,1			//２つ目のスイッチ
+	_JUMP			gym03_cell_change
+	_END
+
+
+SCRIPT_LABEL	ev_c103_r0101_pos03
+	_TALK_START
+
+	//ジムリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_03_LEADER,gym03_no_switch
+
+	_IFVAL_JUMP		WK_SCENE_C103_R0101,EQ,3,gym03_no_switch
+	_LDVAL			WK_SCENE_C103_R0101,3
+	_LDVAL			PARAM0,2			//３つ目のスイッチ
+	_JUMP			gym03_cell_change
+	_END
+
+gym03_cell_change:
+	//セルコードチェンジを呼ぶ
+	_PROGRAM		GYM03_DOOR_CHANGE_CELL
+	_PROGRAM		GYM03_SWITCH_CHANGE_CELL
+	_PROGRAM		MAKE_MAP_BG
+	_SE				SE_KI_GASYAN
+
+	_IF_FLAGON_JUMP		FE_GYM03_DOOR,gym03_door_flag_change_off
+	_IF_FLAGOFF_JUMP	FE_GYM03_DOOR,gym03_door_flag_change_on
+	_TALK_END
+	_END
+
+//何も起きない
+gym03_no_switch:
+	_TALK_END
+	_END
+
+//フラグをオンにする
+gym03_door_flag_change_on:
+	_FLAG_SET	FE_GYM03_DOOR
+	_TALK_END
+	_END
+
+//フラグをオフにする
+gym03_door_flag_change_off:
+	_FLAG_RESET	FE_GYM03_DOOR
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_guitarist_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	GUITARIST_01
+	_TRAINER_DATA2	msg_guitarist_01_01
+	_TRAINER_DATA3	msg_guitarist_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_guitarist_01_03
+	_END
+
+SCRIPT_LABEL	ev_guitarist_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	GUITARIST_04
+	_TRAINER_DATA2	msg_guitarist_04_01
+	_TRAINER_DATA3	msg_guitarist_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_guitarist_04_03
+	_END
+
+SCRIPT_LABEL	ev_tanpan_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_06
+	_TRAINER_DATA2	msg_tanpan_06_01
+	_TRAINER_DATA3	msg_tanpan_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_06_03
+	_END
+
+SCRIPT_LABEL	ev_battleg_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BATTLEG_11
+	_TRAINER_DATA2	msg_battleg_11_01
+	_TRAINER_DATA3	msg_battleg_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_battleg_11_03
+	_END
+
+
+/********************************************************************/
+/*						ジム入り口の人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_03_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_03_LEADER,ev_danpei_03_02
+
+	_TALK_KEYWAIT	msg_danpei_03_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_03_02:
+	_TALK_KEYWAIT	msg_danpei_03_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_c103_r0101
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH03_GET,batch_get_c103_r0101
+
+	_JUMP			batch_no_get_c103_r0101
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_c103_r0101
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH03_GET,batch_get_c103_r0101
+
+	_JUMP			batch_no_get_c103_r0101
+	_END
+
+//すでにリーダーを倒している
+batch_get_c103_r0101:
+	_TALK_KEYWAIT	msg_icon_01_p02_c103_r0101
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_c103_r0101:
+	_TALK_KEYWAIT	msg_icon_01_p01_c103_r0101
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,11 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define CAPBOY2_01_PARK_TOWER01	1
+#define WOMAN2_01_P01_PARK_BATTLE01	2
+#define BOY2_02_PARK_TOWER01	3
+#define HISHIP1_01_PARK_TOWER01	4
+#define WORKERW2_01_PARK_TOWER01	5
+
+//Exit ID = 1
+#define PARK_TOWER01_DOOR01	0

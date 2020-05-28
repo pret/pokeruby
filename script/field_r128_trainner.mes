@@ -1,0 +1,239 @@
+// ▼128----------------------------------
+// ●トライアスリート（泳）♂０３：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesm_03_01
+msg_athletesm_03_01:
+	.byte	SA_,I_,YU_,U_,SI_,TE_,II_,ha_,spc_,ma_,da_,spc_,to_,o_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♂０３：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesm_03_02
+msg_athletesm_03_02:
+	.byte	BO_,KU_,no_,spc_,ha_,tu_,si_,yyo_,u_,ri_,mo_,spc_,to_,o_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♂０３：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesm_03_03
+msg_athletesm_03_03:
+	.byte	ma_,ke_,tu_,du_,ke_,te_,i_,ru_,spc_,zi_,n_,se_,i_,spc_,de_,su_,ga_
+	.byte	CR_
+	.byte	ke_,ttu_,si_,te_,spc_,a_,ki_,ra_,me_,ma_,se_,n_,yo_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼128----------------------------------
+// ●トライアスリート（泳）♂０３（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesm_03_04
+msg_athletesm_03_04:
+	.byte	ma_,da_,ma_,da_,spc_,ge_,n_,ki_,spc_,de_,su_,ka_,ra_,ne_
+	.byte	CR_
+	.byte	SA_,I_,YU_,U_,SI_,TE_,II_,spc_,me_,za_,si_,te_,spc_,o_,yo_,gi_,ma_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♂０３（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesm_03_05
+msg_athletesm_03_05:
+	.byte	ma_,ta_,spc_,ha_,tu_,si_,yyo_,u_,ri_,spc_,na_,ra_,zu_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♂０３（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesm_03_06
+msg_athletesm_03_06:
+	.byte	a_,ki_,ra_,me_,na_,ki_,yya_,spc_,i_,tu_,ka_,ha_,spc_,ka_,te_,ru_
+	.byte	CR_
+	.byte	SA_,I_,YU_,U_,SI_,TE_,II_,ni_,mo_,spc_,ta_,do_,ri_,tu_,ku_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼128----------------------------------
+// ●トライアスリート（泳）♀０４：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesw_04_01
+msg_athletesw_04_01:
+	.byte	TO_,RA_,I_,A_,SU_,RO_,N_,ha_
+	.byte	CR_
+	.byte	su_,i_,e_,i_,spc_,zi_,te_,n_,si_,yya_,spc_,MA_,RA_,SO_,N_
+	.byte	NORMAL_WAIT_
+	.byte	n3_,tu_,no_,spc_,si_,yyu_,mo_,ku_,wo_,spc_,tu_,du_,ke_,te_,spc_,ko_,na_,su_
+	.byte	CR_
+	.byte	ka_,ko_,ku_,na_,spc_,RE_,bou_,SU_,na_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♀０４：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesw_04_02
+msg_athletesw_04_02:
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,mo_,spc_,ka_,ko_,ku_,spc_,yo_,ne_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♀０４：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesw_04_03
+msg_athletesw_04_03:
+	.byte	tu_,gi_,ha_,spc_,zi_,te_,n_,si_,yya_,spc_,da_,ke_,do_,tenten_,tenten_
+	.byte	CR_
+	.byte	ku_,zi_,ke_,so_,u_,da_,wa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼128----------------------------------
+// ●トライアスリート（泳）♀０４（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesw_04_04
+msg_athletesw_04_04:
+	.byte	TO_,RA_,I_,A_,SU_,RO_,N_,mo_,spc_,na_,ga_,i_,ke_,do_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,TI_,YYA_,N_,PI_,O_,N_,wo_,spc_,me_,za_,su_,no_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ga_,i_,spc_,mi_,ti_,no_,ri_,spc_,na_,no_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♀０４（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesw_04_05
+msg_athletesw_04_05:
+	.byte	ho_,n_,to_,ttu_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,ttu_,te_,spc_,ki_,bi_,si_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トライアスリート（泳）♀０４（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_athletesw_04_06
+msg_athletesw_04_06:
+	.byte	so_,ro_,so_,ro_,spc_,TI_,YYA_,N_,PI_,O_,N_,RO_,bou_,DO_,ni_
+	.byte	CR_
+	.byte	ti_,yyo_,u_,se_,n_,spc_,si_,te_,mi_,ru_,no_,mo_,spc_,a_,ri_,spc_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼128----------------------------------
+// ●エリートトレーナー♀１７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitew_17_01
+msg_elitew_17_01:
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,ta_,me_
+	.byte	CR_
+	.byte	i_,ma_,ma_,de_,spc_,ga_,n_,ba_,ttu_,te_,spc_,ki_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,spc_,ma_,ke_,ru_,wa_,ke_,ni_,ha_,spc_,i_,ka_,na_,i_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●エリートトレーナー♀１７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitew_17_02
+msg_elitew_17_02:
+	.byte	a_,a_,ttu_,gyoe_
+	.byte	CR_
+	.byte	na_,n_,te_,ko_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●エリートトレーナー♀１７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitew_17_03
+msg_elitew_17_03:
+	.byte	ko_,ko_,ma_,de_,spc_,ki_,ta_,n_,de_,su_,mo_,no_
+	.byte	CR_
+	.byte	i_,ti_,do_,spc_,ma_,ke_,ta_,ka_,ra_,ttu_,te_,spc_,a_,ki_,ra_,me_,na_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼128----------------------------------
+// ●エリートトレーナー♂２０：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitem_20_01
+msg_elitem_20_01:
+	.byte	wa_,ta_,si_,no_,spc_,yo_,u_,ni_,spc_,tu_,yo_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,ha_,spc_,ho_,ka_,ni_,spc_,i_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●エリートトレーナー♂２０：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitem_20_02
+msg_elitem_20_02:
+	.byte	na_,n_,te_,spc_,ko_,to_,da_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●エリートトレーナー♂２０：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_elitem_20_03
+msg_elitem_20_03:
+	.byte	ki_,mi_,no_,spc_,yo_,u_,ni_,spc_,tu_,yo_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,ha_,spc_,ho_,ka_,ni_,spc_,i_,na_,i_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼128----------------------------------
+// ●つりびと１９：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing_19_01
+msg_fishing_19_01:
+	.byte	SA_,I_,YU_,U_,ni_,spc_,i_,ttu_,te_,mi_,ta_,i_,ka_,ra_
+	.byte	CR_
+	.byte	ta_,ki_,no_,bo_,ri_,wo_,spc_,o_,bo_,e_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ri_,a_,ge_,ta_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●つりびと１９：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing_19_02
+msg_fishing_19_02:
+	.byte	so_,no_,spc_,i_,ki_,o_,i_
+	.byte	CR_
+	.byte	ma_,sa_,ni_,spc_,ta_,ki_,no_,bo_,ri_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●つりびと１９：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing_19_03
+msg_fishing_19_03:
+	.byte	si_,ma_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ki_,no_,bo_,ri_,wo_,spc_,o_,bo_,e_,ta_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ttu_,te_,mo_
+	.byte	CR_
+	.byte	RU_,NE_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_,spc_,mo_,ttu_,te_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

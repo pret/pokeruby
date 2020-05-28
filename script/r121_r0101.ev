@@ -1,0 +1,221 @@
+//====================================================================
+//						r121_r0101
+//						サファリゾーン受付
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START r121_r0101_event_data
+SP_SCRIPT_LABEL		scene_r121_r0101
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_r121_r0101:
+	//ドアの前をふさぐ
+	SP_SCRIPT_DATA	WK_SCENE_SAFARI_ZONE,1,ev_scene_hero_move_r121_r0101
+	SP_SCRIPT_END
+
+//受け付けの前まで移動する
+ev_scene_hero_move_r121_r0101:
+	_TALK_START
+
+	//主人公受け付けの前まで移動する
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_r121_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//サファリ終了
+	_PROGRAM		SAFARI_END
+
+	_LDVAL			WK_SCENE_SAFARI_ZONE,0
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	受け付けの前まで移動する
+//--------------------------------------------------------------------
+hero_01_r121_r0101_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							お姉さん
+/********************************************************************/
+SCRIPT_LABEL	ev_safari_onesan1_01
+	_EASY_OBJ_MSG	msg_safari_01_p01
+	_END
+
+
+/********************************************************************/
+//							受付お兄さん（右側）
+/********************************************************************/
+SCRIPT_LABEL	ev_safari_onisan1_01
+	_TALK_OBJ_START
+
+	_TALK_YES_NO	msg_safari_02_p01
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_safari_onisan1_01
+
+	_TALK_KEYWAIT	msg_safari_02_p02
+	_TALK_OBJ_END
+	_END
+
+//「はい」
+yes_safari_onisan1_01:
+	_TALK_KEYWAIT	msg_safari_02_p03
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							受け付け
+/********************************************************************/
+SCRIPT_LABEL	ev_r121_r0101_pos01
+	_TALK_START
+
+	//受け付けの方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_GOLD_WIN_WRITE		0,0,0		//手持ち
+	_TALK_YES_NO	msg_safari_03_p01
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,yes_safari_uketuke_01
+
+	//「いいえ」
+	_TALK_KEYWAIT	msg_safari_03_p02
+	_JUMP	common_hairenai_end
+	_END
+
+//「はい」
+yes_safari_uketuke_01:
+	//ポロックケースチェック
+	_CHECK_ITEM		ITEM_POROKKUKEESU,1
+	//ケースを持っていない？
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,case_nothing_safari_uketuke_01
+
+	//ボックスがフル＆手持ちがいっぱいかチェック
+	_CALL	box_max_check_uketuke_01
+
+	_COMP_GOLD		500
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,gold_nothing_safari_uketuke_01
+
+	_TALK_KEYWAIT	msg_safari_03_p04
+
+	_SUB_GOLD		500
+
+	//再表示
+	_GOLD_WRITE	0,0,0
+
+	_TALK_KEYWAIT	msg_safari_03_p05
+
+	//サファリボールゲット
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_safari_03_p06
+	_JINGLE_WAIT
+
+	_TALK_KEYWAIT	msg_safari_03_p07
+	_TALK_CLOSE
+
+	_GOLD_WIN_DEL	0,0
+	
+	//奥の扉の前に移動する
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_safari_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//サファリスタート
+	_PROGRAM		SAFARI_START
+
+	_LDVAL			WK_SCENE_SAFARI_ZONE,2
+
+	_MAP_CHANGE		PARK,PARK_SAFARI04,32,33
+	_STOP_SCRIPT
+	_END
+
+//ボックスがフル＆手持ちがいっぱいかチェック
+box_max_check_uketuke_01:
+	//手持ちのポケモン数取得
+	_GET_TEMOTI_NUM
+	_IFVAL_JUMP		ANSWORK,NE,6,no_full_uketuke_01		//６体いない
+
+	_FUNC_CALL		ANSWORK,POKE_BOX_SPACE_CHECK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,no_full_uketuke_01		//空きがある(フルでない）
+
+	_TALK_KEYWAIT	msg_safari_03_p08
+	_JUMP	common_hairenai_end
+	_END
+
+//フルで持っていないとき(元のルーチンへ戻るためのもの）
+no_full_uketuke_01:
+	_RET
+
+//ポロックケースがない
+case_nothing_safari_uketuke_01:
+	_TALK_KEYWAIT	msg_safari_03_p09
+	_JUMP	common_hairenai_end
+	_END
+
+//お金が足りない
+gold_nothing_safari_uketuke_01:
+	_TALK_KEYWAIT	msg_safari_03_p03
+	_JUMP	common_hairenai_end
+	_END
+
+//入れないときの共通エンド
+common_hairenai_end:
+	_TALK_CLOSE
+	_GOLD_WIN_DEL	0,0
+
+	//一歩下がる
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_safari_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	一歩下がる
+//--------------------------------------------------------------------
+hero_01_safari_anime01:
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	奥の扉の前に移動する
+//--------------------------------------------------------------------
+hero_01_safari_anime02:
+	.byte	AC_WALK_L_1	//下に１歩
+	.byte	AC_WALK_L_1	//下に１歩
+	.byte	AC_WALK_L_1	//下に１歩
+	.byte	AC_WALK_L_1	//下に１歩
+	.byte	AC_WALK_L_1	//下に１歩
+	.byte	AC_WALK_L_1	//下に１歩
+	.byte	AC_WALK_D_1	//下に１歩
+	.byte	AC_WAIT_16	//下に１歩
+	.byte	ACMD_END
+
+
+
+/********************************************************************/
+/*					サファリゾーンの事務所の張り紙					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_safari_kanban_01_r121_r0101
+	_EASY_MSG	msg_safari_12_p01
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

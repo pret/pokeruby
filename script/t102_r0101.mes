@@ -1,0 +1,21 @@
+// ●コトキタウン　民家１（左側）
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t102_r0101
+msg_woman1_01_p01_t102_r0101:
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,no_,spc_,to_,ki_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,RI_,SU_,TO_,no_,spc_,hi_,da_,ri_,ni_,spc_,i_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,to_,bi_,da_,si_,te_,spc_,ta_,ta_,ka_,u_,no_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,tu_,re_,a_,ru_,ku_,spc_,PO_,KE_,MO_,N_,ga_,spc_,hu_,e_,te_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,zi_,yyu_,n_,ba_,n_,wo_,spc_,ka_,e_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,ga_,spc_,yu_,u_,ri_,ni_,spc_,na_,ru_,ka_,mo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

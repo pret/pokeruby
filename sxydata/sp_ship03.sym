@@ -1,0 +1,25 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 8
+#define TR_DAISUKIM_03	1
+#define TR_GENTLEMAN_02	2
+#define TR_GENTLEMAN_03	3
+#define TR_LOVELOVE_02_01	4
+#define TR_LOVELOVE_02_02	5
+#define TR_PRINCE_03	6
+#define TR_PRINCESS_06	7
+#define FREAK1_01_SP_SHIP03	8
+
+//Exit ID = 12
+#define SP_SHIP03_MAT01	0
+#define SP_SHIP03_MAT02	1
+#define SP_SHIP03_MAT03	2
+#define SP_SHIP03_MAT04	3
+#define SP_SHIP03_MAT05	4
+#define SP_SHIP03_MAT06	5
+#define SP_SHIP03_MAT07	6
+#define SP_SHIP03_MAT08	7
+#define SP_SHIP03_DOOR01	8
+#define SP_SHIP03_DOOR02	9
+#define SP_SHIP03_DOOR03	10
+#define SP_SHIP03_DOOR04	11

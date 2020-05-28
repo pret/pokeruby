@@ -1,0 +1,843 @@
+// ●キャラ
+// ●boya1,boy2,youngm1,middlem2,ojyou2,schoolw1,workerw1,oldwoman1
+
+// ●勝ったときにファンになりやすさ
+// ●schoolw1 >  middlem2 > ojyou2 > boya1 > boy2 > youngm1 > workerw1 > oldwoman1
+
+// ●負けたときの飽きやすさ
+// ●schoolw1 > youngm1 > workerw1 > boya1 > ojyou2 > boy2 > oldwoman1 > middlem2
+
+
+
+// ●ファン１　若者
+// ●ゲームクリアーした後に、部屋に入ると起きる強制イベント
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_c106_r0401
+msg_youngm1_01_p01_c106_r0401:
+	.byte	a_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,da_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公のところまでよってきて話しかける。
+// ●→msg_youngm1_01_p02_c106_r0401:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p02_c106_r0401
+msg_youngm1_01_p02_c106_r0401:
+	.byte	ki_,i_,ta_,yo_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,spc_,tu_,yo_,i_,n_,da_,ttu_,te_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,de_,ha_,spc_,mi_,n_,na_
+	.byte	CR_
+	.byte	da_,re_,ga_,spc_,i_,ti_,ba_,n_,spc_,tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,na_,si_,wo_,spc_,si_,te_,ru_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,spc_,ki_,mi_,no_,spc_,u_,wa_,sa_,wo_,spc_,ki_,i_,te_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,HU_,AA_,N_,ni_,spc_,na_,ru_,ko_,to_,ni_,spc_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ka_,ra_,mo_,spc_,tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,to_
+	.byte	CR_
+	.byte	BA_,N_,BA_,N_,spc_,ta_,ta_,ka_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,ta_,ti_,ni_,spc_,a_,tu_,i_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,i_,wo_,spc_,mi_,se_,te_,ku_,re_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,su_,re_,ba_,spc_,ki_,ttu_,to_,spc_,mi_,n_,na_,mo_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,ko_,to_,wo_,spc_,mi_,na_,o_,su_,to_,spc_,o_,mo_,u_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ki_,ta_,i_,spc_,si_,te_,ru_,yo_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フラグをたてて、通信による影響が出るようになる
+// ●終わり
+
+// ●２回目以降話かける
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p03_c106_r0401
+msg_youngm1_01_p03_c106_r0401:
+	.byte	o_,u_,spc_,I_MSG_,MY_NAME_BUF,gyoe_,gyoe_
+	.byte	CR_
+	.byte	o_,u_,e_,n_,spc_,si_,te_,ru_,zo_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p04_c106_r0401
+msg_youngm1_01_p04_c106_r0401:
+	.byte	a_,i_,tu_,ra_,ha_,spc_,si_,ra_,na_,i_,n_,da_
+	.byte	CR_
+	.byte	ki_,mi_,ga_,spc_,i_,ti_,ba_,n_,spc_,su_,go_,i_,ttu_,te_,spc_,ko_,to_,wo_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,ro_,spc_,I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	CR_
+	.byte	ko_,n_,zi_,yyo_,u_,spc_,mi_,se_,te_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ●＠０は　通信対戦表で一番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ミクリ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p05_c106_r0401
+msg_youngm1_01_p05_c106_r0401:
+	.byte	ki_,mi_,ni_,ha_,spc_,wa_,ru_,i_,ke_,do_,spc_,i_,ma_,spc_,i_,ti_,ba_,n_
+	.byte	CR_
+	.byte	ti_,yyu_,u_,mo_,ku_,no_,spc_,TO_,RE_,bou_,NA_,bou_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ti_,ga_,i_,na_,ku_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,spc_,tu_,yo_,sa_,ha_
+	.byte	CR_
+	.byte	da_,ta_,mo_,no_,zi_,yya_,spc_,na_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ●＠０は　通信対戦表で一番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ミクリ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p06_c106_r0401
+msg_youngm1_01_p06_c106_r0401:
+	.byte	ku_,so_,bou_,spc_,i_,ma_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,ga_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,spc_,tu_,yo_,i_,ttu_,te_,spc_,i_,ttu_,te_,ru_,no_,ni_
+	.byte	NORMAL_WAIT_
+	.byte	da_,re_,mo_,spc_,ki_,i_,te_,spc_,ku_,re_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●まだクリアーしてない時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p07_c106_r0401
+msg_youngm1_01_p07_c106_r0401:
+	.byte	sa_,i_,ki_,n_,spc_,tu_,gi_,tu_,gi_,to_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,wo_
+	.byte	CR_
+	.byte	ta_,o_,si_,te_,i_,ru_,spc_,ttu_,te_,i_,u_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ga_
+	.byte	CR_
+	.byte	a_,ra_,wa_,re_,ta_,spc_,ra_,si_,i_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,spc_,si_,ra_,na_,i_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+// ●ファン２　女学生
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p01_c106_r0401
+msg_schoolw1_01_p01_c106_r0401:
+	.byte	a_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ga_,n_,ba_,ttu_,te_,ne_
+	.byte	CR_
+	.byte	o_,u_,e_,n_,spc_,si_,te_,ru_,ka_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p02_c106_r0401
+msg_schoolw1_01_p02_c106_r0401:
+	.byte	TO_,U_,KI_,sa_,ma_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,gyoe_
+	.byte	CR_
+	.byte	ti_,ga_,u_,spc_,ti_,ga_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,a_,ku_,ma_,de_,spc_,a_,na_,ta_,no_
+	.byte	CR_
+	.byte	HU_,AA_,N_,spc_,na_,n_,da_,ka_,ra_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,a_,ta_,si_,no_,spc_,ta_,me_,ni_
+	.byte	CR_
+	.byte	ga_,n_,ba_,ttu_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p03_c106_r0401
+msg_schoolw1_01_p03_c106_r0401:
+	.byte	ya_,ttu_,pa_,ri_,spc_,wa_,ta_,si_,ha_,spc_,TO_,U_,KI_,sa_,ma_,spc_,si_,ka_
+	.byte	CR_
+	.byte	su_,ki_,ni_,spc_,na_,re_,na_,i_,spc_,no_,yo_,ne_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p04_c106_r0401
+msg_schoolw1_01_p04_c106_r0401:
+	.byte	da_,re_,mo_,spc_,TO_,U_,KI_,sa_,ma_,no_
+	.byte	CR_
+	.byte	mi_,ri_,yyo_,ku_,wo_,spc_,wa_,ka_,ttu_,te_,spc_,ku_,re_,na_,i_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,i_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,spc_,hi_,to_,ri_,de_,mo_,spc_,TO_,U_,KI_,sa_,ma_,no_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,u_,e_,n_,spc_,si_,tu_,du_,ke_,ru_,ka_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●まだクリアーしてない時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p05_c106_r0401
+msg_schoolw1_01_p05_c106_r0401:
+	.byte	wa_,ta_,si_,no_,spc_,i_,ti_,ba_,n_,spc_,su_,ki_,na_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,na_,n_,to_,spc_,i_,ttu_,te_,mo_
+	.byte	NORMAL_WAIT_
+	.byte	MU_,RO_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_
+	.byte	CR_
+	.byte	TO_,U_,KI_,sa_,ma_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+// ●ファン３　おやじ
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c106_r0401
+msg_middlem2_01_p01_c106_r0401:
+	.byte	ki_,mi_,ha_,spc_,tu_,i_,ni_,spc_,a_,ra_,yu_,ru_,spc_,me_,n_,de_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,o_,to_,u_,sa_,n_,wo_,spc_,ko_,e_,ta_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,wa_,si_,ga_,spc_,i_,ttu_,te_,spc_,i_,ru_,n_,da_,ka_,ra_
+	.byte	CR_
+	.byte	ma_,ti_,ga_,i_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p02_c106_r0401
+msg_middlem2_01_p02_c106_r0401:
+	.byte	ki_,mi_,no_,spc_,o_,to_,u_,sa_,n_,ha_,spc_,PI_,N_,TI_,ni_,spc_,na_,ttu_,te_,mo_
+	.byte	CR_
+	.byte	a_,ki_,ra_,me_,zu_,ni_,spc_,ta_,ta_,ka_,ttu_,te_,spc_,i_,ta_,yo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ha_,spc_,si_,ttu_,te_,i_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,i_,ku_,ra_,spc_,ma_,ke_,te_,mo_,spc_,ke_,ttu_,si_,te_
+	.byte	CR_
+	.byte	a_,ki_,ra_,me_,na_,i_,spc_,to_,i_,u_,spc_,ko_,to_,wo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ga_,n_,ba_,ttu_,te_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p03_c106_r0401
+msg_middlem2_01_p03_c106_r0401:
+	.byte	ki_,mi_,yo_,ri_,spc_,SE_,N_,RI_,sa_,n_,no_,spc_,ho_,u_,ga_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,tu_,yo_,ku_,te_,spc_,ka_,ttu_,ko_,yo_,ku_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,go_,ta_,e_,no_,spc_,a_,ru_,spc_,ta_,ta_,ka_,i_,wo_,spc_,si_,te_,i_,ta_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ku_,ra_,spc_,ki_,mi_,ga_,spc_,tu_,yo_,i_,to_
+	.byte	CR_
+	.byte	i_,wa_,re_,te_,spc_,i_,te_,mo_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,o_,to_,u_,sa_,n_,ni_,spc_,ku_,ra_,be_,ta_,ra_
+	.byte	CR_
+	.byte	ma_,da_,ma_,da_,spc_,da_,na_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p04_c106_r0401
+msg_middlem2_01_p04_c106_r0401:
+	.byte	ki_,mi_,mo_,spc_,SE_,N_,RI_,sa_,n_,to_,spc_,o_,na_,zi_,spc_,hu_,n_,i_,ki_
+	.byte	CR_
+	.byte	to_,i_,u_,ka_,spc_,ha_,ku_,ri_,yyo_,ku_,ga_,spc_,de_,te_,ki_,ta_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,si_,spc_,SE_,N_,RI_,sa_,n_,spc_,to_,ha_,spc_,ke_,ttu_,te_,i_,te_,ki_,ni_
+	.byte	CR_
+	.byte	ti_,ga_,u_,spc_,mo_,no_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,so_,re_,ha_,spc_,wa_,ta_,si_,ka_,ra_,ha_,spc_,i_,e_,na_,i_
+	.byte	CR_
+	.byte	zi_,bu_,n_,de_,spc_,sa_,ga_,si_,te_,spc_,mi_,ru_,n_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●まだクリアーしてない時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p05_c106_r0401
+msg_middlem2_01_p05_c106_r0401:
+	.byte	ko_,ko_,ni_,i_,ru_,spc_,mi_,n_,na_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,ga_,spc_,da_,i_,su_,ki_,de_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	da_,re_,ga_,spc_,i_,ti_,ba_,n_,spc_,tu_,yo_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ka_
+	.byte	CR_
+	.byte	ha_,na_,si_,wo_,spc_,si_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,yu_,u_,me_,i_,ni_,spc_,na_,re_,ba_
+	.byte	CR_
+	.byte	mi_,n_,na_,spc_,HU_,AA_,N_,ni_,spc_,na_,ru_,ka_,mo_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+// ●ファン４　女の子
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c106_r0401
+msg_ojyou2_01_p01_c106_r0401:
+	.byte	u_,wa_,bou_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,da_,bou_
+	.byte	CR_
+	.byte	ho_,n_,mo_,no_,spc_,da_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ku_,si_,yyu_,spc_,si_,te_,bou_
+	.byte	CR_
+	.byte	a_,ku_,si_,yyu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p02_c106_r0401
+msg_ojyou2_01_p02_c106_r0401:
+	.byte	tenten_,tenten_,wa_,ta_,si_,spc_,i_,tu_,ma_,de_,mo_,spc_,I_MSG_,MY_NAME_BUF,no_,spc_,ko_,to_
+	.byte	CR_
+	.byte	o_,u_,e_,n_,spc_,su_,ru_,spc_,ka_,ra_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,spc_,mo_,u_,spc_,I_MSG_,MY_NAME_BUF,no_,spc_,ma_,ke_,ru_
+	.byte	CR_
+	.byte	to_,ko_,na_,n_,te_,spc_,mi_,ta_,ku_,na_,i_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,spc_,ho_,n_,to_,ha_
+	.byte	CR_
+	.byte	tu_,yo_,i_,n_,da_,spc_,mo_,n_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ●＠０は　通信対戦表で１番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ダイゴ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p03_c106_r0401
+msg_ojyou2_01_p03_c106_r0401:
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,ttu_,te_,spc_,ka_,ttu_,ko_,i_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,e_,spc_,mi_,n_,na_,mo_
+	.byte	CR_
+	.byte	so_,u_,spc_,o_,mo_,u_,de_,si_,yyo_,bou_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ●＠０は　通信対戦表で１番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ダイゴ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p04_c106_r0401
+msg_ojyou2_01_p04_c106_r0401:
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,ttu_,te_,spc_,ho_,n_,to_,u_,ni_
+	.byte	CR_
+	.byte	ka_,ttu_,ko_,i_,i_,spc_,yo_,ne_,ee_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,spc_,hi_,to_,ri_,ni_,spc_,na_,ttu_,te_,mo_
+	.byte	CR_
+	.byte	zu_,u_,ttu_,to_,spc_,o_,u_,e_,n_,spc_,su_,ru_,n_,da_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●まだクリアーしてない時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p05_c106_r0401
+msg_ojyou2_01_p05_c106_r0401:
+	.byte	wa_,ta_,si_,no_,ne_
+	.byte	CR_
+	.byte	su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ttu_,ko_,yo_,ku_,te_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,yo_,ku_,te_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,i_,te_,spc_,ya_,sa_,si_,i_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,TO_,RE_,bou_,NA_,bou_,ga_,spc_,i_,i_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+// ●--------------------------------------
+
+
+
+
+// ●ファン５　男の子
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_c106_r0401
+msg_boya1_01_p01_c106_r0401:
+	.byte	a_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,da_,bou_,gyoe_
+	.byte	CR_
+	.byte	su_,ge_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,mo_,spc_,o_,o_,ki_,ku_,spc_,na_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,spc_,mi_,ta_,i_,ni_,spc_,tu_,yo_,ku_,spc_,na_,ri_,ta_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p02_c106_r0401
+msg_boya1_01_p02_c106_r0401:
+	.byte	tenten_,tenten_
+	.byte	CR_
+	.byte	bo_,ku_,spc_,hi_,to_,ri_,ni_,spc_,na_,ttu_,ta_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	zu_,ttu_,to_,spc_,I_MSG_,MY_NAME_BUF,no_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,u_,e_,n_,spc_,su_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,I_MSG_,MY_NAME_BUF,no_,spc_,ko_,to_
+	.byte	CR_
+	.byte	si_,n_,zi_,te_,ru_,mo_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ●＠０は　通信対戦表で１番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ダイゴ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p03_c106_r0401
+msg_boya1_01_p03_c106_r0401:
+	.byte	I_MSG_,STR_TEMP_BUF0,ttu_,te_,spc_,ka_,ttu_,ko_,i_,i_,yo_,ne_,bou_
+	.byte	CR_
+	.byte	bo_,ku_,spc_,a_,ku_,si_,yyu_,spc_,si_,te_,ho_,si_,i_,na_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ●＠０は　通信対戦表で１番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ダイゴ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p04_c106_r0401
+msg_boya1_01_p04_c106_r0401:
+	.byte	tenten_,tenten_
+	.byte	CR_
+	.byte	bo_,ku_,spc_,hi_,to_,ri_,ni_,spc_,na_,ttu_,ta_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	ze_,ttu_,ta_,i_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,HU_,AA_,N_,wo_
+	.byte	CR_
+	.byte	ya_,me_,na_,i_,spc_,ka_,ra_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,bo_,ku_,spc_,ki_,i_,ta_,n_,da_,mo_,n_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,ma_,ke_,na_,i_,ttu_,te_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+
+// ●ファン６　男子
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_c106_r0401
+msg_boy2_01_p01_c106_r0401:
+	.byte	I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	CR_
+	.byte	ya_,ttu_,pa_,ri_,spc_,su_,go_,i_,yo_,spc_,ki_,mi_,ha_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,ki_,mi_,wo_,spc_,ha_,zi_,me_,te_,spc_,mi_,ta_,to_,ki_,ka_,ra_
+	.byte	CR_
+	.byte	su_,go_,i_,spc_,ya_,tu_,da_,ttu_,te_,spc_,o_,mo_,ttu_,te_,ta_,yo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ya_,ha_,ri_,spc_,bo_,ku_,no_,me_,ha_,spc_,ta_,si_,ka_,na_,spc_,yo_,u_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p02_c106_r0401
+msg_boy2_01_p02_c106_r0401:
+	.byte	ma_,a_,spc_,ho_,ka_,no_,spc_,ya_,tu_,no_
+	.byte	CR_
+	.byte	ko_,to_,na_,n_,te_,spc_,ki_,ni_,su_,ru_,na_,yo_
+	.byte	SCROLL_WAIT_
+	.byte	bo_,ku_,ga_,spc_,tu_,i_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,si_,n_,pa_,i_,spc_,si_,na_,i_,de_,spc_,i_,tu_,mo_,do_,o_,ri_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,ttu_,te_,spc_,i_,re_,ba_,spc_,i_,i_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ●＠０は　通信対戦表で２番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ミクリ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p03_c106_r0401
+msg_boy2_01_p03_c106_r0401:
+	.byte	ki_,mi_,mo_,spc_,na_,ka_,na_,ka_
+	.byte	CR_
+	.byte	i_,i_,spc_,TO_,RE_,bou_,NA_,bou_,da_,to_,spc_,o_,mo_,u_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,ha_,spc_,ya_,ttu_,pa_,ri_,spc_,I_MSG_,STR_TEMP_BUF0,ga_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,da_,to_,spc_,o_,mo_,u_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,bo_,ku_,ga_,spc_,o_,mo_,ttu_,te_,i_,ru_,spc_,da_,ke_,da_,ka_,ra_
+	.byte	CR_
+	.byte	a_,ma_,ri_,spc_,ki_,ni_,si_,na_,ku_,te_,spc_,i_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ●＠０は　通信対戦表で２番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（ミクリ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p04_c106_r0401
+msg_boy2_01_p04_c106_r0401:
+	.byte	ki_,mi_,ha_,spc_,ho_,n_,to_,u_,ni_,spc_,tu_,yo_,i_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,yo_,ri_,spc_,tu_,yo_,i_,ka_,mo_,spc_,si_,re_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,ni_,ha_
+	.byte	CR_
+	.byte	bo_,ku_,ga_,spc_,hi_,tu_,yo_,u_,spc_,na_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,bo_,ku_,ga_,spc_,I_MSG_,STR_TEMP_BUF0,wo_
+	.byte	CR_
+	.byte	o_,u_,e_,n_,spc_,si_,na_,ki_,yya_
+	.byte	SCROLL_WAIT_
+	.byte	da_,re_,ga_,spc_,o_,u_,e_,n_,spc_,su_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+// ●ファン７　女性
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_c106_r0401
+msg_workerw1_01_p01_c106_r0401:
+	.byte	mi_,na_,o_,si_,ta_,wa_,gyoe_
+	.byte	CR_
+	.byte	a_,na_,ta_,ttu_,te_,spc_,ho_,n_,to_,u_,ni_,spc_,tu_,yo_,i_,no_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,si_,ta_,ra_,spc_,so_,n_,na_,ni_,spc_,tu_,yo_,ku_,spc_,na_,re_,ru_,no_,ka_
+	.byte	CR_
+	.byte	o_,si_,e_,te_,spc_,mo_,ra_,i_,ta_,i_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p02_c106_r0401
+msg_workerw1_01_p02_c106_r0401:
+	.byte	a_,na_,ta_,ttu_,te_,spc_,PI_,N_,TI_,ni_,spc_,na_,re_,ba_,spc_,na_,ru_,ho_,do_
+	.byte	CR_
+	.byte	mi_,ri_,yyo_,ku_,te_,ki_,na_,spc_,ta_,ta_,ka_,i_,wo_,spc_,su_,ru_,no_,yo_,ne_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,gi_,no_,spc_,ta_,i_,se_,n_,ga_,spc_,ta_,no_,si_,mi_,da_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ●＠０は　通信対戦表で2番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（トウキ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p03_c106_r0401
+msg_workerw1_01_p03_c106_r0401:
+	.byte	sa_,i_,ki_,n_,no_,spc_,TO_,RE_,bou_,NA_,bou_,ha_
+	.byte	CR_
+	.byte	ya_,ttu_,pa_,ri_,spc_,I_MSG_,STR_TEMP_BUF0,yo_,ne_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	a_,no_,spc_,tu_,yo_,sa_,ha_,spc_,ta_,da_,mo_,no_,spc_,zi_,yya_,na_,i_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,mo_,spc_,i_,i_,se_,n_,spc_,i_,ttu_,te_,ru_,ke_,do_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ni_,spc_,ku_,ra_,be_,ta_,ra_,spc_,ma_,da_,ma_,da_,ne_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ●＠０は　通信対戦表で2番上の人の名前
+// ●もし、名前がなければ、ジムリーダーの名前（トウキ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p04_c106_r0401
+msg_workerw1_01_p04_c106_r0401:
+	.byte	a_,na_,ta_,ttu_,te_,spc_,ho_,n_,to_,u_,ni_
+	.byte	CR_
+	.byte	ni_,n_,ki_,spc_,mo_,no_,yo_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,yo_,i_,si_,spc_,PO_,KE_,MO_,N_,ni_,mo_,spc_,ya_,sa_,si_,i_,si_
+	.byte	CR_
+	.byte	i_,u_,ko_,to_,spc_,na_,i_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,ne_,gyoe_,spc_,wa_,ta_,si_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,wo_,spc_,si_,n_,zi_,te_,i_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,ho_,u_,ga_,spc_,ze_,ttu_,ta_,i_,ni_
+	.byte	CR_
+	.byte	tu_,yo_,i_,ni_,spc_,ki_,ma_,ttu_,te_,ru_,n_,spc_,da_,ka_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+
+
+// ●ファン８　老婆
+// ●自分のファンの時
+// ●ファンが複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_c106_r0401
+msg_oldwoman1_01_p01_c106_r0401:
+	.byte	o_,nu_,si_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ru_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンの時
+// ●ファンが自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_c106_r0401
+msg_oldwoman1_01_p02_c106_r0401:
+	.byte	o_,nu_,si_,no_,spc_,si_,n_,no_,spc_,ti_,ka_,ra_,ha_
+	.byte	CR_
+	.byte	ko_,no_,spc_,wa_,si_,da_,ke_,ga_,spc_,si_,ttu_,te_,i_,re_,ba_,spc_,yo_,i_,no_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,na_,ni_,ha_,spc_,so_,no_,spc_,hi_,me_,ra_,re_,ta_,spc_,ti_,ka_,ra_
+	.byte	CR_
+	.byte	wa_,ka_,ru_,ma_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、複数人いる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p03_c106_r0401
+msg_oldwoman1_01_p03_c106_r0401:
+	.byte	u_,mu_,spc_,o_,nu_,si_,spc_,na_,ka_,na_,ka_,no_
+	.byte	CR_
+	.byte	me_,wo_,spc_,si_,te_,o_,ru_,na_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ga_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,u_,bou_,mu_
+	.byte	CR_
+	.byte	ma_,da_,ma_,da_,no_,spc_,yo_,u_,zi_,yya_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+// ●自分のファンではないとき
+// ●ファンじゃない人が、自分しかいない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p04_c106_r0401
+msg_oldwoman1_01_p04_c106_r0401:
+	.byte	ta_,si_,ka_,ni_,spc_,o_,nu_,si_,ha_
+	.byte	CR_
+	.byte	to_,te_,tu_,mo_,na_,ku_,spc_,tu_,yo_,i_,ka_,mo_,spc_,si_,re_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ga_,gyoe_
+	.byte	CR_
+	.byte	wa_,si_,ni_,ha_,spc_,wa_,ka_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,tu_,yo_,sa_,ha_,spc_,ma_,da_
+	.byte	CR_
+	.byte	si_,n_,no_,spc_,tu_,yo_,sa_,to_,ha_,spc_,i_,wa_,na_,i_,no_,zi_,yya_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	si_,n_,no_,spc_,tu_,yo_,sa_,to_,ha_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,tu_,ha_,spc_,wa_,si_,mo_
+	.byte	CR_
+	.byte	yo_,ku_,spc_,wa_,ka_,ra_,n_,no_,zi_,yya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり
+
+
+
+// ●--------------------------------------
+
+
+
+

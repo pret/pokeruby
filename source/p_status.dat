@@ -1,0 +1,667 @@
+#ifndef __P_STATUS_DAT__
+#define __P_STATUS_DAT__
+
+
+//=========================================================================
+//	パレット番号
+//=========================================================================
+#define	RC_POKE_PAL		8
+#define	M_OYA_PAL		9
+#define	F_OYA_PAL		10
+#define	BLUE_PAL		11
+#define	RED_PAL2		12
+#define	WHITE_PAL		13
+#define	RED_PAL			14
+#define	DEFO_PAL		15
+
+//=========================================================================
+//	性格
+//=========================================================================
+#include "chr.dat"
+
+static const u8	seikaku_plus_msg00[] = { na_,EOM_ };
+static const u8	seikaku_plus_msg01[] = { se_,i_,ka_,ku_,spc_,spc_,EOM_ };
+
+static const u8 no_toki[]   = { no_,to_,ki_,EOM_ };
+static const u8 de_deatta[] = {
+	CTRL_,C_PAL_,RED_PAL,I_MSG_,STR_TEMP_BUF0,CTRL_,C_PAL_,DEFO_PAL,de_,spc_,de_,a_,ttu_,ta_,EOM_
+};
+static const u8 de_kaetta[] = {
+	CTRL_,C_PAL_,RED_PAL,I_MSG_,STR_TEMP_BUF0,CTRL_,C_PAL_,DEFO_PAL,de_,spc_,ka_,e_,ttu_,ta_,EOM_
+};
+static const u8 keburukoukann[] = {
+	KE_,bou_,BU_,RU_,ko_,u_,ka_,n_,ni_,spc_,yo_,ttu_,te_,spc_,de_,a_,ttu_,ta_,EOM_
+};
+static const u8 unmeiteki[] = {
+	u_,n_,me_,i_,te_,ki_,na_,spc_,de_,a_,i_,wo_,spc_,si_,ta_,EOM_
+};
+static const u8 de_deattayouda[] = {
+	CTRL_,C_PAL_,RED_PAL,I_MSG_,STR_TEMP_BUF0,CTRL_,C_PAL_,DEFO_PAL,de_,spc_,a_,ttu_,ta_,yo_,u_,da_,EOM_
+};
+
+static const u8 msg_tr_memo_egg00[] = {
+	so_,da_,te_,ya_,spc_,hu_,u_,hu_,spc_,ka_,ra_,spc_,mo_,ra_,ttu_,ta_,CR_,
+	hu_,si_,gi_,na_,spc_,PO_,KE_,MO_,N_,no_,TA_,MA_,GO_,EOM_
+};
+static const u8 msg_tr_memo_egg01[] = {
+	SU_,TE_,KI_,na_,spc_,ba_,si_,yyo_,de_,spc_,te_,ni_,i_,re_,ta_,CR_,
+	hu_,si_,gi_,na_,spc_,hu_,si_,gi_,na_,spc_,PO_,KE_,MO_,N_,no_,TA_,MA_,GO_,EOM_
+};
+static const u8 msg_tr_memo_egg02[] = {
+	KE_,bou_,BU_,RU_,ko_,u_,ka_,n_,de_,spc_,te_,ni_,i_,re_,ta_,CR_,
+	hu_,si_,gi_,na_,spc_,PO_,KE_,MO_,N_,no_,TA_,MA_,GO_,EOM_
+};
+static const u8 msg_tr_memo_egg03[] = {
+	o_,n_,se_,n_,ba_,a_,sa_,n_,spc_,ka_,ra_,spc_,mo_,ra_,ttu_,ta_,CR_,
+	hu_,si_,gi_,na_,spc_,PO_,KE_,MO_,N_,no_,TA_,MA_,GO_,EOM_
+};
+
+
+//=========================================================================
+//	説明メッセージ
+//=========================================================================
+static const u8 * const st_comment[] = {
+	NULL,			// 00 : ダミー
+	str_pst_com01,	// 01 : ポケモンじょうほう
+	str_pst_com02,	// 02 : ポケモンのうりょく
+	str_pst_com03,	// 03 : たたかうわざ
+	str_pst_com04,	// 04 : コンテストわざ
+	str_pst_com00,	// 05 : いれかえ
+	str_pst_com05,	// 06 : きりかえ
+	str_yameru,		// 07 : やめる
+};
+
+enum {
+	PAGE_1_TITLE = 1,
+	PAGE_2_TITLE,
+	PAGE_3_TITLE,
+	PAGE_4_TITLE,
+
+	IREKAE_COM,
+	KIRIKAE_COM,
+	YAMERU_COM,
+
+/*
+	WASURE_COM,			// わすれる
+
+	SL_BTL_COM,			// バトル
+	SL_CON_COM,			// コンテスト
+*/
+
+};
+
+
+//----------------------------------------------------------
+//	ポケモン反転パラメータ
+//----------------------------------------------------------
+static const actAffAnm PmAffFlip[] =
+{
+	{ -0x100, 0x100, 0, ACT_AFSET },
+	{ ACT_AFEND, 0, 0, 0 },
+};
+
+static const actAffAnm * const PmAffTbl[] = {
+	PmAffFlip,
+};
+
+//----------------------------------------------------------
+//	属性
+//----------------------------------------------------------
+#define	ST_CURSOR_ID	30000
+#define	ST_IZYO_ID		( ST_CURSOR_ID + 1 )
+#define	ST_TYPE_ID		( ST_IZYO_ID + 1 )
+#define	ST_BOXMARK_ID	( ST_TYPE_ID + 1 )
+
+static const ActOamData ST_TYPE_32x16_OamData = {
+	0,		//u32 VPos:8;			// Ｙ座標
+	0,		//u32 AffineMode:2;		// アフィンモード
+	0,		//u32 ObjMode:2;		// ＯＢＪモード
+	OFF,	//u32 Mosaic:1;			// モザイク
+	0,		//u32 ColorMode:1;		// １６色/２５６色 選択
+	1,		//u32 Shape:2;			// ＯＢＪ形状
+
+	0,		//u32 HPos:9;			// Ｘ座標
+	0,		//u32 AffineParamNo:5;	// アフィン変換パラメータNo & H,VFlip
+	2,		//u32 Size:2;			// ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;		// キャラクタＮｏ
+	1,		//u32 Priority:2;		// 表示優先
+	0,		//u32 Pltt:4;			// パレットＮｏ
+	0,
+};
+
+static const actAnm ST_TYPE_Anm00[] =
+{
+	{ OBJ16_32x16 * 0, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm01[] =
+{
+	{ OBJ16_32x16 * 1, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm02[] =
+{
+	{ OBJ16_32x16 * 2, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm03[] =
+{
+	{ OBJ16_32x16 * 3, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm04[] =
+{
+	{ OBJ16_32x16 * 4, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm05[] =
+{
+	{ OBJ16_32x16 * 5, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm06[] =
+{
+	{ OBJ16_32x16 * 6, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm07[] =
+{
+	{ OBJ16_32x16 * 7, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm08[] =
+{
+	{ OBJ16_32x16 * 8, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm09[] =
+{
+	{ OBJ16_32x16 * 9, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm0A[] =
+{
+	{ OBJ16_32x16 * 10, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm0B[] =
+{
+	{ OBJ16_32x16 * 11, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm0C[] =
+{
+	{ OBJ16_32x16 * 12, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm0D[] =
+{
+	{ OBJ16_32x16 * 13, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm0E[] =
+{
+	{ OBJ16_32x16 * 14, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm0F[] =
+{
+	{ OBJ16_32x16 * 15, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm10[] =
+{
+	{ OBJ16_32x16 * 16, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm11[] =
+{
+	{ OBJ16_32x16 * 17, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm12[] =
+{
+	{ OBJ16_32x16 * 18, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm13[] =
+{
+	{ OBJ16_32x16 * 19, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm14[] =
+{
+	{ OBJ16_32x16 * 20, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm15[] =
+{
+	{ OBJ16_32x16 * 21, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_TYPE_Anm16[] =
+{
+	{ OBJ16_32x16 * 22, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+
+static const actAnm *const ST_TYPE_32x16_AnmTbl[] = {
+	ST_TYPE_Anm00,
+	ST_TYPE_Anm01,
+	ST_TYPE_Anm02,
+	ST_TYPE_Anm03,
+	ST_TYPE_Anm04,
+	ST_TYPE_Anm05,
+	ST_TYPE_Anm06,
+	ST_TYPE_Anm07,
+	ST_TYPE_Anm08,
+	ST_TYPE_Anm09,
+	ST_TYPE_Anm0A,
+	ST_TYPE_Anm0B,
+	ST_TYPE_Anm0C,
+	ST_TYPE_Anm0D,
+	ST_TYPE_Anm0E,
+	ST_TYPE_Anm0F,
+	ST_TYPE_Anm10,
+	ST_TYPE_Anm11,
+
+	ST_TYPE_Anm12,
+	ST_TYPE_Anm13,
+	ST_TYPE_Anm14,
+	ST_TYPE_Anm15,
+	ST_TYPE_Anm16,
+};
+
+static const CellData ST_TYPE_32x16_Cell = {
+	(void *)st_type1_pch_ADRS, OBJ_SIZE16_32x16 * 23, ST_TYPE_ID
+};
+
+//static const PalData ST_TYPE_Pal = { (void *)st_type_pcl_ADRS, ST_TYPE_ID };
+
+static const actHeader ST_TYPE_32x16_Header = {
+	ST_TYPE_ID,
+	ST_TYPE_ID,
+	&ST_TYPE_32x16_OamData,
+	ST_TYPE_32x16_AnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+// パレット番号テーブル
+static const u8 type_pal[] = {
+	13,13,14,14,13,13,15,14,13,15,13,14,15,13,14,14,15,13,13,14,14,15,13
+};
+
+
+
+//----------------------------------------------------------
+//	カーソル
+//----------------------------------------------------------
+static const ActOamData ST_CURSOR_OamData = {
+	0,		//u32 VPos:8;			// Ｙ座標
+	0,		//u32 AffineMode:2;		// アフィンモード
+	0,		//u32 ObjMode:2;		// ＯＢＪモード
+	OFF,	//u32 Mosaic:1;			// モザイク
+	0,		//u32 ColorMode:1;		// １６色/２５６色 選択
+	0,		//u32 Shape:2;			// ＯＢＪ形状
+
+	0,		//u32 HPos:9;			// Ｘ座標
+	0,		//u32 AffineParamNo:5;	// アフィン変換パラメータNo & H,VFlip
+	1,		//u32 Size:2;			// ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;		// キャラクタＮｏ
+	1,		//u32 Priority:2;		// 表示優先
+	0,		//u32 Pltt:4;			// パレットＮｏ
+	0,
+};
+
+static const actAnm ST_CURSOR_Anm00[] =
+{
+	{ OBJ16_16x16 * 0, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm01[] =
+{
+	{ OBJ16_16x16 * 1, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm02[] =
+{
+	{ OBJ16_16x16 * 2, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm03[] =
+{
+	{ OBJ16_16x16 * 3, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm04[] =
+{
+	{ OBJ16_16x16 * 4, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm05[] =
+{
+	{ OBJ16_16x16 * 4, 0, 1, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm06[] =
+{
+	{ OBJ16_16x16 * 5, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm07[] =
+{
+	{ OBJ16_16x16 * 6, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm08[] =
+{
+	{ OBJ16_16x16 * 6, 0, 1, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_CURSOR_Anm09[] =
+{
+	{ OBJ16_16x16 * 7, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+
+static const actAnm * const ST_CURSOR_AnmTbl[] = {
+	ST_CURSOR_Anm00,		// 上矢印
+	ST_CURSOR_Anm01,		// 下矢印
+	ST_CURSOR_Anm02,		// 左矢印
+	ST_CURSOR_Anm03,		// 右矢印
+	ST_CURSOR_Anm04,		// 技選択カーソル L
+	ST_CURSOR_Anm05,		// 技選択カーソル R
+	ST_CURSOR_Anm06,		// 技選択カーソル N
+	ST_CURSOR_Anm07,		// 技選択カーソル DL
+	ST_CURSOR_Anm08,		// 技選択カーソル DR
+	ST_CURSOR_Anm09,		// 技選択カーソル DN
+};
+
+static const CellData ST_CURSOR_Cell = {
+	(void *)p_st_cur_pch_ADRS, OBJ_SIZE16_16x16 * 8, ST_CURSOR_ID
+};
+
+static const PalData ST_CURSOR_Pal = { (void *)p_st_cur_pcl_ADRS, ST_CURSOR_ID };
+
+static const actHeader ST_CURSOR_Header = {
+	ST_CURSOR_ID,
+	ST_CURSOR_ID,
+	&ST_CURSOR_OamData,
+	ST_CURSOR_AnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+
+//----------------------------------------------------------
+//	状態異常アイコン
+//----------------------------------------------------------
+static const ActOamData ST_IZYO_OamData = {
+	0,		//u32 VPos:8;			// Ｙ座標
+	0,		//u32 AffineMode:2;		// アフィンモード
+	0,		//u32 ObjMode:2;		// ＯＢＪモード
+	OFF,	//u32 Mosaic:1;			// モザイク
+	0,		//u32 ColorMode:1;		// １６色/２５６色 選択
+	1,		//u32 Shape:2;			// ＯＢＪ形状
+
+	0,		//u32 HPos:9;			// Ｘ座標
+	0,		//u32 AffineParamNo:5;	// アフィン変換パラメータNo & H,VFlip
+	1,		//u32 Size:2;			// ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;		// キャラクタＮｏ
+	3,		//u32 Priority:2;		// 表示優先
+	0,		//u32 Pltt:4;			// パレットＮｏ
+	0,
+};
+
+static const actAnm ST_IZYO_Anm00[] =
+{
+	{ OBJ16_32x8 * 0, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_IZYO_Anm01[] =
+{
+	{ OBJ16_32x8 * 1, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_IZYO_Anm02[] =
+{
+	{ OBJ16_32x8 * 2, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_IZYO_Anm03[] =
+{
+	{ OBJ16_32x8 * 3, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_IZYO_Anm04[] =
+{
+	{ OBJ16_32x8 * 4, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_IZYO_Anm05[] =
+{
+	{ OBJ16_32x8 * 5, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+static const actAnm ST_IZYO_Anm06[] =
+{
+	{ OBJ16_32x8 * 6, 0, 0, 0 },
+	{ ACT_ANMEND, 0, 0, 0 }
+};
+
+static const actAnm * const ST_IZYO_AnmTbl[] = {
+	ST_IZYO_Anm00,
+	ST_IZYO_Anm01,
+	ST_IZYO_Anm02,
+	ST_IZYO_Anm03,
+	ST_IZYO_Anm04,
+	ST_IZYO_Anm05,
+	ST_IZYO_Anm06,
+};
+
+static const CellData ST_IZYO_Cell = {
+	(void *)st_cnd_pch_ADRS, OBJ_SIZE16_32x8 * 7, ST_IZYO_ID
+};
+
+static const PalData ST_IZYO_Pal = { (void *)st_cnd_pcl_ADRS, ST_IZYO_ID };
+
+static const actHeader ST_IZYO_Header = {
+	ST_IZYO_ID,
+	ST_IZYO_ID,
+	&ST_IZYO_OamData,
+	ST_IZYO_AnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+
+//=========================================================================
+//	ボックスマークのパレット
+//=========================================================================
+static const u16 box_mark_Palette[16]={
+	0x0000,0x6e54,0x7675,0x7fff,0x6739,0x0000,0x0000,0x0000,
+	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
+};
+
+
+//=========================================================================
+//	ウィンドウのスクリーンデータ
+//=========================================================================
+// 状態異常ウィンドウ
+static const u16 CnoditionWinScreen[] = {
+	0x004,0x004,0x004,0x004,0x004,0x004,0x817,0x817,0x817,0x00b,
+	0x804,0x804,0x804,0x804,0x804,0x804,0x017,0x017,0x017,0x80b,
+};
+
+// 技効果ウィンドウ
+static const u16 WazaParamWinScreen[] = {
+	0x302e,0x302d,0x302d,0x302d,0x302d,0x302d,0x302d,0x302d,0x302d,
+	0x303e,0x3432,0x3078,0x3079,0x307a,0x3031,0x3031,0x3032,0x3021,
+	0x3023,0x3024,0x3024,0x3024,0x3024,0x3024,0x3837,0x3837,0x3837,
+	0x3033,0x3034,0x3034,0x3034,0x3034,0x3034,0x3027,0x3027,0x3027,
+	0x3033,0x3034,0x3034,0x3034,0x3034,0x3034,0x3027,0x3027,0x3027,
+	0x3823,0x3824,0x3824,0x3824,0x3824,0x3824,0x3037,0x3037,0x3037,
+	0x382e,0x382d,0x382d,0x382d,0x382d,0x382d,0x382d,0x382d,0x382d,
+};
+
+// コンテスト効果ウィンドウ
+static const u16 ContestParamWinScreen[] = {
+	0x102e,0x102d,0x102d,0x102d,0x102d,0x102d,0x102d,0x102d,0x102d,
+	0x103e,0x1432,0x1078,0x1079,0x107a,0x1031,0x1031,0x1032,0x1021,
+	0x1023,0x1024,0x1024,0x1024,0x1024,0x1039,0x1039,0x1039,0x1039,
+	0x1033,0x1034,0x1034,0x1034,0x1034,0x1039,0x1039,0x1039,0x1039,
+	0x1033,0x1034,0x1034,0x1034,0x1034,0x103d,0x103d,0x103d,0x103d,
+	0x1823,0x1824,0x1824,0x1824,0x1824,0x103d,0x103d,0x103d,0x103d,
+	0x182e,0x182d,0x182d,0x182d,0x182d,0x182d,0x182d,0x182d,0x182d,
+};
+
+// ５個目の技ウィンドウ
+static const u16 FifthWazaWinScreen[] = {
+	0x026,0x027,0x027,0x027,0x027,0x034,0x034,0x034,0x034,0x034,0x034,0x034,0x027,0x027,0x027,0x027,0x027,0x027,0x027,0x028,
+	0x036,0x037,0x037,0x037,0x037,0x824,0x824,0x824,0x824,0x824,0x824,0x824,0x037,0x037,0x037,0x037,0x037,0x037,0x037,0x038,
+	0x03e,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,0x021,
+};
+
+
+//=========================================================================
+//	PP,ID,No,Lvなど特殊系ﾒｯｾｰｼﾞﾃﾞｰﾀ
+//=========================================================================
+const u8 statussub_Character[]={
+                                                        /*  0  =  0(0x0)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// ID
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0xf0,0xf9,0xff,0x09,
+	0xf0,0xf9,0x09,0x9f,0xf0,0xf9,0x09,0x9f,
+                                                        /*  1  =  32(0x20)  */
+	0xf0,0xf9,0x09,0x9f,0xf0,0xf9,0x09,0x9f,
+	0xf0,0xf9,0x09,0x9f,0xf0,0xf9,0x09,0x9f,
+	0xf0,0xf9,0xff,0x99,0x90,0x99,0x99,0x09,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  2  =  64(0x40)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// PP
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x11,0x08,0x11,0x08,
+	0x81,0x81,0x81,0x81,0x81,0x81,0x81,0x81,
+                                                        /*  3  =  96(0x60)  */
+	0x81,0x81,0x81,0x81,0x11,0x88,0x11,0x88,
+	0x81,0x08,0x81,0x08,0x81,0x00,0x81,0x00,
+	0x81,0x00,0x81,0x00,0x88,0x00,0x88,0x00,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  4  =  128(0x80)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// No
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x9f,0xf0,0x09,0x00,
+	0x9f,0xf0,0x09,0x00,0xff,0xf9,0xf9,0xff,
+                                                        /*  5  =  160(0xa0)  */
+	0xff,0xf9,0xf9,0xf9,0x9f,0xff,0xf9,0xf9,
+	0x9f,0xff,0xf9,0xf9,0x9f,0xf9,0xf9,0xf9,
+	0x9f,0xf0,0xf9,0xff,0x99,0x90,0x99,0x99,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  6  =  192(0xc0)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// Lv ( white )
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x9f,0x00,0x00,0x00,
+	0x9f,0x00,0x00,0x00,0x9f,0x00,0x00,0x00,
+                                                        /*  7  =  224(0xe0)  */
+	0x9f,0x00,0x00,0x00,0x9f,0x00,0x9f,0x9f,
+	0x9f,0x00,0x9f,0x9f,0x9f,0x00,0x9f,0x9f,
+	0xff,0xff,0xf9,0x99,0x99,0x99,0x99,0x09,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  8  =  256(0x100)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// Lv ( black )
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x81,0x00,0x00,0x00,
+	0x81,0x00,0x00,0x00,0x81,0x00,0x00,0x00,
+                                                        /*  9  =  288(0x120)  */
+	0x81,0x00,0x00,0x00,0x81,0x00,0x81,0x81,
+	0x81,0x00,0x81,0x81,0x81,0x00,0x81,0x81,
+	0x11,0x11,0x18,0x88,0x88,0x88,0x88,0x08,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+};
+
+const u8 keyinfo_Character[256]={
+                                                        /*  0  =  0(0x0)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x22,0x00,0x00,0x22,0x22,
+	0x00,0x20,0x22,0xff,0x00,0x20,0xf2,0xee,
+	0x00,0x22,0xf2,0x2e,0x00,0x22,0xf2,0x2e,
+                                                        /*  1  =  32(0x20)  */
+	0x00,0x22,0xf2,0xff,0x00,0x20,0xf2,0x2e,
+	0x00,0x20,0xe2,0x2e,0x00,0x00,0x22,0x22,
+	0x00,0x00,0x00,0x22,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  2  =  64(0x40)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x02,0x00,0x00,0x00,0x22,0x02,0x00,0x00,
+	0x2e,0x22,0x00,0x00,0xef,0x22,0x00,0x00,
+	0xef,0x22,0x02,0x00,0xef,0x22,0x02,0x00,
+                                                        /*  3  =  96(0x60)  */
+	0xef,0x22,0x02,0x00,0xef,0x22,0x00,0x00,
+	0xee,0x22,0x00,0x00,0x22,0x02,0x00,0x00,
+	0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  4  =  128(0x80)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x22,0x00,0x00,0x22,0x22,
+	0x00,0x20,0xf2,0xff,0x00,0x20,0xf2,0xee,
+	0x00,0x22,0xf2,0xff,0x00,0x22,0xf2,0xee,
+                                                        /*  5  =  160(0xa0)  */
+	0x00,0x22,0xf2,0x2e,0x00,0x20,0xf2,0xff,
+	0x00,0x20,0xe2,0xee,0x00,0x00,0x22,0x22,
+	0x00,0x00,0x00,0x22,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                                        /*  6  =  192(0xc0)  */
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x02,0x00,0x00,0x00,0x22,0x02,0x00,0x00,
+	0x2e,0x22,0x00,0x00,0xef,0x22,0x00,0x00,
+	0x2e,0x22,0x02,0x00,0xef,0x22,0x02,0x00,
+                                                        /*  7  =  224(0xe0)  */
+	0xef,0x22,0x02,0x00,0xee,0x22,0x00,0x00,
+	0x2e,0x22,0x00,0x00,0x22,0x02,0x00,0x00,
+	0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+};
+
+// フォントカラー
+static const u16 st_moji_pal[] = {
+	0x41ee,		// 00 : 追加文字用、白文字用　影
+	0x001f,		// 01 : 文字　赤
+	0x675a,		// 02 : 文字　赤（影）
+	0x7fff,		// 03 : 文字　白
+	0x7f28,		// 04 : 文字　青
+	0x5e20,		// 05 : 文字　青（影）
+	0x4a7f,		// 06 : 文字　赤2
+	0x2977,		// 07 : 文字　赤2（影）
+	0x5aff,		// 08 : 文字　女親
+	0x35da,		// 09 : 文字　女親（影）
+	0x7fac,		// 10 : 文字　男親
+	0x6a83,		// 11 : 文字　男親（影）
+	0x0014,		// 12 : ボタン用　影
+	0x57bd,		// 13 : レアカラー用
+	0x3294		// 14 : レアカラー用　影
+};
+
+//static const u16 st_rare_bg_pal[] = { 0x7b9b, 0x5251 };
+static const u16 st_rare_bg_pal[] = { 0x5f5a, 0x6fde };
+
+#define	SP_MOJI_ID		0
+#define	SP_MOJI_PP		1
+#define	SP_MOJI_NO		2
+#define	SP_MOJI_LV_W	3
+#define	SP_MOJI_LV_B	4
+
+#define	SP_A_BUTTON_L	5
+#define	SP_A_BUTTON_R	6
+#define	SP_B_BUTTON_L	7
+#define	SP_B_BUTTON_R	8
+
+
+
+#endif

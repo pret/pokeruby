@@ -1,0 +1,29 @@
+// ●119番道路　鳥ポケモン少年の家
+
+
+// ●部屋の奥にいる女性
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_r119_r0201
+msg_woman2_01_p01_r119_r0201:
+	.byte	do_,ko_,ka_,ni_,spc_,me_,za_,me_,no_,ho_,ko_,ra_,spc_,to_,yo_,ba_,re_,ru_
+	.byte	CR_
+	.byte	do_,u_,ku_,tu_,ga_,spc_,a_,ru_,n_,de_,su_,ttu_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ta_,ma_,si_,i_,ga_,spc_,yo_,mi_,ga_,e_,ru_,spc_,to_,ko_,ro_
+	.byte	CR_
+	.byte	to_,i_,u_,spc_,u_,wa_,sa_,spc_,da_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	so_,n_,na_,ko_,to_,spc_,ho_,n_,to_,u_,ni_,spc_,a_,ru_,no_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・キャモメ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camome_01_p01_r119_r0201
+msg_camome_01_p01_r119_r0201:
+	.byte	KI_,YYA_,MO_,ME_,kako2_,pi_,hi_,yyo_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にキャモメの鳴き声をならす

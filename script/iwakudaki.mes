@@ -1,0 +1,15 @@
+@===================================================================
+@	秘伝技・岩砕きのメッセージ
+@	2002/01/22 by nakahiro
+@===================================================================
+fe_iwa_msg00:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,de_,spc_,ko_,wa_,se_,so_,u_,da_,gyoe_
+	.byte	CR_
+	.byte	tenten_,tenten_,i_,wa_,ku_,da_,ki_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+fe_iwa_msg02:
+	.byte	ka_,ta_,so_,u_,na_,spc_,i_,wa_,spc_,da_,ke_,do_,tenten_,tenten_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,de_,spc_,ko_,wa_,se_,ru_,ka_,mo_,hate_
+	.byte	EOM_

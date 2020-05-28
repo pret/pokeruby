@@ -1,0 +1,108 @@
+// ●ハジツゲタウン　フィールド
+
+
+// ●おじいさん　（街の入り口付近）
+// ●えんとつやまイベント終了まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_field_t105
+msg_oldman1_01_p01_field_t105:
+	.byte	na_,n_,da_,spc_,na_,n_,da_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	SO_,RA_,I_,SI_,ha_,ka_,se_,no_,spc_,ke_,n_,ki_,yyu_,u_,zi_,yyo_,ni_
+	.byte	CR_
+	.byte	a_,ya_,si_,i_,spc_,o_,to_,ko_,ga_,spc_,de_,ha_,i_,ri_,spc_,si_,te_,o_,ttu_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●えんとつやまイベント終了から
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_field_t105
+msg_oldman1_01_p02_field_t105:
+	.byte	ko_,ko_,i_,ra_,spc_,i_,ttu_,ta_,i_,ha_
+	.byte	CR_
+	.byte	mu_,ka_,si_,ka_,ra_,spc_,i_,n_,se_,ki_,ga_,spc_,o_,o_,ku_,te_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ri_,yyu_,u_,se_,i_,no_,ta_,ki_,mo_,spc_,i_,n_,se_,ki_,ga_,spc_,o_,ti_,te_
+	.byte	CR_
+	.byte	de_,ki_,ta_,to_,ka_,spc_,so_,u_,spc_,i_,wa_,re_,te_,o_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女　（コンテスト会場入口付近）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_field_t105
+msg_girl1_01_p01_field_t105:
+	.byte	ho_,ra_,gyoe_,spc_,mi_,te_,ti_,yyo_,u_,da_,i_,gyoe_
+	.byte	CR_
+	.byte	wa_,ta_,si_,no_,spc_,ta_,i_,se_,tu_,na_,spc_,RU_,RI_,RI_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TU_,YA_,TU_,YA_,no_,spc_,NA_,DE_,NA_,DE_,no_,spc_,HU_,KA_,HU_,KA_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・ルリリ（上記の少女に隣接）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ruriri_01_p01_field_t105
+msg_ruriri_01_p01_field_t105:
+	.byte	RU_,RI_,RI_,kako2_,ru_,bou_,ri_,bou_,ru_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にルリリの鳴き声
+
+// ●老紳士
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_field_t105
+msg_gentlem1_01_p01_field_t105:
+	.byte	HU_,E_,N_,TA_,U_,N_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_
+	.byte	CR_
+	.byte	A_,SU_,NA_,to_,ha_,spc_,ta_,ta_,ka_,ttu_,ta_,ka_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,ko_,no_,spc_,o_,zi_,i_,sa_,n_,ha_,spc_,su_,go_,ka_,ttu_,ta_,yo_
+	.byte	CR_
+	.byte	na_,n_,de_,mo_,spc_,PO_,KE_,MO_,N_,RI_,bou_,GU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	si_,te_,n_,no_,u_,spc_,da_,ttu_,ta_,spc_,ra_,si_,i_,ka_,ra_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,A_,SU_,NA_,mo_,spc_,ko_,re_,ka_,ra_
+	.byte	CR_
+	.byte	su_,ba_,ra_,si_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ni_,spc_,na_,ru_,da_,ro_,u_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●コンテスト会場の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_t105
+msg_kanban_01_p01_field_t105:
+	.byte	PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_,spc_,SU_,bou_,PA_,bou_,RA_,N_,KU_,spc_,u_,ke_,tu_,ke_
+	.byte	CR_
+	.byte	ha_,zi_,ke_,ro_,gyoe_,spc_,PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●街の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_t105
+msg_kanban_02_p01_field_t105:
+	.byte	ko_,ko_,ha_,spc_,HA_,ZI_,TU_,GE_,spc_,TA_,U_,N_
+	.byte	CR_
+	.byte	ti_,i_,sa_,na_,spc_,ha_,ta_,ke_,ga_,spc_,a_,ru_,spc_,no_,u_,so_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●技教えの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_t105
+msg_kanban_03_p01_field_t105:
+	.byte	kako_,wa_,za_,o_,si_,e_,MA_,NI_,A_,no_,spc_,i_,e_,kakot_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,spc_,o_,si_,e_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

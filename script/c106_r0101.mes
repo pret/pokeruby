@@ -1,0 +1,138 @@
+// ●ミナモ　民宿１階
+
+
+// ●フロントでテレビを観ている男（テレビ点滅）
+// ●話しかけるとまずこのセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c106_r0101
+msg_middlem1_01_p01_c106_r0101:
+	.byte	ho_,ho_,u_,spc_,PO_,KE_,MO_,N_,no_,spc_,mi_,ri_,yyo_,ku_,de_
+	.byte	CR_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,ga_,spc_,ba_,i_,zo_,u_,spc_,si_,ta_,ttu_,te_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,a_,spc_,u_,ti_,mo_,spc_,ka_,wa_,i_,i_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	ri_,yyo_,ka_,n_,no_,spc_,MA_,SU_,KO_,TTU_,TO_,ni_,spc_,su_,re_,ba_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,ta_,ku_,sa_,n_,no_,spc_,o_,ki_,yya_,ku_,sa_,ma_,ga_
+	.byte	CR_
+	.byte	to_,ma_,ri_,ni_,spc_,ki_,te_,ku_,re_,ru_,yo_,u_,ni_,spc_,na_,ru_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで主人公の方を振り返って
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_c106_r0101
+msg_middlem1_01_p02_c106_r0101:
+	.byte	a_,spc_,go_,me_,n_,spc_,go_,me_,n_,gyoe_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,ni_,spc_,mu_,ti_,yyu_,u_,spc_,da_,ttu_,ta_,mo_,n_,de_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,spc_,to_,ka_,i_,u_,spc_,re_,n_,ti_,yyu_,u_,ga_
+	.byte	CR_
+	.byte	ma_,ti_,ni_,spc_,ya_,ttu_,te_,ki_,ta_,spc_,o_,ka_,ge_,de_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,ko_,u_,ki_,yya_,ku_,mo_,spc_,sa_,ttu_,pa_,ri_,spc_,na_,n_,da_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●また、テレビの方に向き直る以下、繰り返し
+
+// ●このおじさんとテレビの間に主人公が入ると、
+// まずおじさんの頭上に「！」を表示し、
+// 主人公は下方向（おじさんの方）を向き、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_c106_r0101
+msg_middlem1_01_p03_c106_r0101:
+	.byte	a_,bou_,spc_,ti_,yyo_,ttu_,to_,spc_,zi_,yya_,ma_,spc_,si_,na_,i_,de_,gyoe_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,ga_,spc_,mi_,e_,na_,i_,spc_,zi_,yya_,na_,i_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そうして主人公が（Ｘ９　Ｙ２）へ、
+// 　おじさんが（Ｘ１０　Ｙ２）へ動き、
+// 　その次におじさんだけ元の位置へ後退する
+
+// ●トクサネジムバッジ入手以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p04_c106_r0101
+msg_middlem1_01_p04_c106_r0101:
+	.byte	na_,n_,to_,gyoe_,spc_,na_,ku_,si_,ta_,spc_,do_,u_,gu_,wo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,hi_,ro_,ttu_,te_,spc_,ki_,ta_,ttu_,te_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,a_,spc_,u_,ti_,mo_,spc_,so_,n_,na_,spc_
+	.byte	CR_
+	.byte	ka_,si_,ko_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,te_,ku_,re_,re_,ba_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,na_,ku_,si_,ta_,spc_,mo_,no_,mo_
+	.byte	CR_
+	.byte	su_,gu_,ni_,spc_,mi_,tu_,ka_,ru_,no_,ni_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで主人公の方を振り返って
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p05_c106_r0101
+msg_middlem1_01_p05_c106_r0101:
+	.byte	a_,spc_,go_,me_,n_,spc_,go_,me_,n_,gyoe_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,ni_,spc_,mu_,ti_,yyu_,u_,spc_,da_,ttu_,ta_,mo_,n_,de_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,i_,e_,ba_,spc_,da_,re_,ka_,ga_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_
+	.byte	CR_
+	.byte	A_,ZI_,TO_,wo_,spc_,ka_,i_,me_,tu_,spc_,sa_,se_,ta_,spc_,ra_,si_,i_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ka_,ge_,de_,spc_,sa_,ttu_,ki_,spc_,da_,n_,ta_,i_,sa_,n_,spc_,ka_,ra_,no_
+	.byte	CR_
+	.byte	si_,yyu_,ku_,ha_,ku_,spc_,yo_,ya_,ku_,ga_,spc_,ha_,i_,ttu_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,si_,ka_,tenten_,tenten_,spc_,GE_,bou_,MU_,na_,n_,to_,ka_,spc_,ttu_,te_,i_,u_
+	.byte	CR_
+	.byte	ka_,i_,si_,yya_,spc_,da_,ttu_,ta_,ka_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●また、テレビの方に向き直る以下、繰り返し
+
+
+// ●ゲームクリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p06_c106_r0101
+msg_middlem1_01_p06_c106_r0101:
+	.byte	na_,n_,to_,gyoe_,spc_,si_,no_,bi_,ko_,n_,da_,spc_,do_,ro_,bo_,u_,wo_
+	.byte	CR_
+	.byte	ru_,su_,ba_,n_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,tu_,ka_,ma_,e_,ta_,ttu_,te_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,a_,spc_,u_,ti_,mo_,spc_,GA_,bou_,DO_,MA_,N_,no_,spc_,ka_,wa_,ri_,ni_
+	.byte	CR_
+	.byte	tu_,yo_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,te_,ku_,re_,re_,ba_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,a_,n_,ze_,n_,wo_
+	.byte	CR_
+	.byte	ma_,mo_,ru_,ko_,to_,ga_,spc_,de_,ki_,so_,u_,da_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と、ここで主人公の方を振り返って
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p07_c106_r0101
+msg_middlem1_01_p07_c106_r0101:
+	.byte	a_,spc_,go_,me_,n_,spc_,go_,me_,n_,gyoe_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,ni_,spc_,mu_,ti_,yyu_,u_,spc_,da_,ttu_,ta_,mo_,n_,de_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,i_,e_,ba_,spc_,sa_,ttu_,ki_
+	.byte	CR_
+	.byte	da_,n_,ta_,i_,sa_,n_,spc_,ga_,spc_,to_,u_,ti_,yya_,ku_,spc_,si_,ta_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	GE_,bou_,MU_,HU_,RI_,bou_,KU_,ttu_,te_,spc_,i_,u_,ka_,ra_
+	.byte	CR_
+	.byte	GE_,bou_,MU_,no_,spc_,ka_,i_,si_,yya_,no_,spc_,hi_,to_,ta_,ti_,spc_,ka_,na_,aa_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	a_,a_,spc_,go_,ha_,n_,no_,spc_,zi_,yyu_,n_,bi_,wo_,spc_,si_,na_,ku_,ti_,yya_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●また、テレビの方に向き直る以下、繰り返し

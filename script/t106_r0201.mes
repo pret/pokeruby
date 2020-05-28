@@ -1,0 +1,203 @@
+// ●シダケタウン　ミツルの伯父さんの家の中
+
+
+// ●ミツル
+// ●キンセツでミツルと勝負して以降、ここに出現
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mitsuru_01_p01_t106_r0201
+msg_mitsuru_01_p01_t106_r0201:
+	.byte	MI_,TU_,RU_,kako2_,I_MSG_,MY_NAME_BUF,sa_,n_,ni_,spc_,ma_,ke_,ta_,ke_,do_
+	.byte	CR_
+	.byte	mo_,u_,spc_,o_,ti_,ko_,n_,de_,na_,i_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,RA_,RU_,TO_,SU_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	a_,ti_,ko_,ti_,no_,spc_,ZI_,MU_,de_,spc_,u_,de_,da_,me_,si_,spc_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	su_,go_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ni_,spc_,na_,ru_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	mo_,ku_,hi_,yyo_,u_,ga_,spc_,de_,ki_,ta_,ka_,ra_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,tu_,ka_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,spc_,yo_,ri_,mo_
+	.byte	CR_
+	.byte	tu_,yo_,ku_,na_,ttu_,te_,spc_,mo_,u_,i_,ti_,do_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,wo_,spc_,o_,ne_,ga_,i_,spc_,su_,ru_,ka_,ra_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ヒートバッジを入手するまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mitsuru_01_p02_t106_r0201
+msg_mitsuru_01_p02_t106_r0201:
+	.byte	MI_,TU_,RU_,kako2_,i_,tu_,ka_,spc_,I_MSG_,MY_NAME_BUF,sa_,n_,spc_,yo_,ri_,mo_
+	.byte	CR_
+	.byte	tu_,yo_,ku_,na_,ttu_,te_,spc_,mo_,u_,i_,ti_,do_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,wo_,spc_,o_,ne_,ga_,i_,spc_,su_,ru_,ka_,ra_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ヒートバッジを入手すると削除
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●伯父さんのセリフ（Ｘ７・Ｙ２）下向き
+// ●キンセツでミツルと勝負して以降、ここに出現
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_t106_r0201
+msg_middlem2_01_p01_t106_r0201:
+	.byte	o_,zi_,sa_,n_,kako2_,o_,o_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	CR_
+	.byte	MI_,TU_,RU_,ku_,n_,ha_,spc_,to_,na_,ri_,ni_,spc_,i_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,si_,spc_,ta_,i_,si_,ta_,spc_,mo_,n_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ze_,n_,ni_,spc_,ka_,ko_,ma_,re_,ta_,spc_,ka_,n_,ki_,yyo_,u_,ga_
+	.byte	CR_
+	.byte	MI_,TU_,RU_,ku_,n_,wo_,spc_,ge_,n_,ki_,ni_,spc_,sa_,se_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,i_,ya_,spc_,mo_,si_,ka_,su_,ru_,to_
+	.byte	CR_
+	.byte	a_,no_,ko_,ni_,spc_,ki_,bo_,u_,wo_,spc_,a_,ta_,e_,te_,spc_,i_,ru_,no_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,na_,no_,ka_,mo_,spc_,si_,re_,na_,i_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ヒートバッジを入手して以降のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p02_t106_r0201
+msg_middlem2_01_p02_t106_r0201:
+	.byte	MI_,TU_,RU_,ku_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,tu_,no_,ma_,ni_,ka_,spc_,i_,na_,ku_,na_,ttu_,ti_,yya_,ttu_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●チャンピオンロードでミツルに勝利して以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p03_t106_r0201
+msg_middlem2_01_p03_t106_r0201:
+	.byte	o_,zi_,sa_,n_,kako2_,so_,u_,de_,su_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	a_,no_,spc_,MI_,TU_,RU_,ku_,n_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,to_,ri_,de_,spc_,so_,n_,na_,spc_,to_,o_,ku_,ma_,de_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,su_,ga_,ha_,spc_,wa_,ta_,si_,no_,spc_,o_,to_,u_,to_,no_,spc_,mu_,su_,ko_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ミチル姉さん（Ｘ４・Ｙ５）左向き
+// ●トンネル開通後、ここに出現
+// ●ミツルくんがいるとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t106_r0201
+msg_woman1_01_p01_t106_r0201:
+	.byte	MI_,TI_,RU_,kako2_,a_,na_,ta_,ha_,tenten_,tenten_,hate_
+	.byte	CR_
+	.byte	tenten_,tenten_,tenten_,a_,spc_,so_,u_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MI_,TU_,RU_,ku_,n_,ga_,spc_,i_,ttu_,te_,ta_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,ttu_,te_,spc_,a_,na_,ta_,no_,spc_,ko_,to_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,MI_,TU_,RU_,ku_,n_,no_,spc_,i_,to_,ko_,spc_,na_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,hate_,spc_,a_,no_,ko_,spc_,ko_,ttu_,ti_,ni_,spc_,ki_,te_,ka_,ra_
+	.byte	CR_
+	.byte	zu_,i_,bu_,n_,spc_,ge_,n_,ki_,ni_,spc_,na_,ttu_,ta_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ミツルくんがいないとき（＝ヒートバッジ入手後）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p02_t106_r0201
+msg_woman1_01_p02_t106_r0201:
+	.byte	MI_,TI_,RU_,kako2_,MI_,TU_,RU_,ku_,n_,no_,spc_,ko_,to_,na_,ra_
+	.byte	CR_
+	.byte	da_,i_,zi_,yyo_,u_,bu_,gyoe_,spc_,si_,n_,pa_,i_,spc_,na_,i_,wa_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,wa_,ta_,si_,no_,spc_,i_,to_,ko_,spc_,da_,si_
+	.byte	CR_
+	.byte	na_,ni_,yo_,ri_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ttu_,si_,yyo_,spc_,de_,su_,mo_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●トンネル男（Ｘ４・Ｙ４）下向き
+// ●トンネル開通後、ここに出現
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p01_t106_r0201
+msg_fighter1_01_p01_t106_r0201:
+	.byte	ki_,mi_,no_,spc_,o_,ka_,ge_,de_
+	.byte	CR_
+	.byte	ma_,i_,ni_,ti_,spc_,ka_,no_,zi_,yyo_,ni_,spc_,a_,e_,te_
+	.byte	SCROLL_WAIT_
+	.byte	o_,re_,ha_,spc_,HA_,TTU_,PI_,bou_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●伯母さんのセリフ（Ｘ１・Ｙ４）右向き
+// ●初期状態からトンネル開通（フラグ14成立）まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_t106_r0201
+msg_middlew1_01_p01_t106_r0201:
+	.byte	u_,ti_,no_,spc_,mu_,su_,me_,no_,spc_,ko_,i_,bi_,to_,ha_
+	.byte	CR_
+	.byte	zu_,i_,bu_,n_,spc_,zi_,yyo_,u_,ne_,tu_,te_,ki_,na_,spc_,hi_,to_,de_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	mu_,su_,me_,ni_,spc_,a_,u_,ta_,me_,spc_,da_,ke_,ni_
+	.byte	CR_
+	.byte	hi_,ta_,su_,ra_,spc_,TO_,N_,NE_,RU_,wo_,spc_,ho_,ttu_,te_,ru_,ttu_,te_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mu_,su_,me_,mo_,spc_,si_,n_,pa_,i_,spc_,na_,no_,ka_
+	.byte	CR_
+	.byte	i_,tu_,mo_,spc_,TO_,N_,NE_,RU_,ni_,spc_,a_,si_,wo_,spc_,ha_,ko_,n_,de_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トンネル開通（フラグ14成立）以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p02_t106_r0201
+msg_middlew1_01_p02_t106_r0201:
+	.byte	na_,n_,to_,gyoe_,spc_,mu_,su_,me_,no_,spc_,ko_,i_,bi_,to_,spc_,to_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	su_,de_,de_,spc_,TO_,N_,NE_,RU_,wo_,spc_,ho_,ttu_,te_,i_,ta_,ttu_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ri_,yya_,a_,spc_,ta_,ma_,ge_,ta_,spc_,mo_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ヒートバッジを入手して以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p03_t106_r0201
+msg_middlew1_01_p03_t106_r0201:
+	.byte	MI_,TU_,RU_,ku_,n_,ni_,spc_,mo_,si_,mo_,no_,ko_,to_,ga_,spc_,a_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	a_,ta_,si_,yya_,spc_,TO_,U_,KA_,ni_,i_,ru_,spc_,go_,ri_,yyo_,u_,si_,n_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	a_,wa_,se_,ru_,spc_,ka_,o_,ga_,spc_,na_,i_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●チャンピオンロードでミツルに勝利して以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p04_t106_r0201
+msg_middlew1_01_p04_t106_r0201:
+	.byte	MI_,TU_,RU_,ku_,n_,ga_,spc_,SA_,I_,YU_,U_,ni_,spc_,i_,ta_,ttu_,te_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ri_,yya_,spc_,TO_,U_,KA_,no_,spc_,go_,ri_,yyo_,u_,si_,n_,mo_
+	.byte	CR_
+	.byte	bi_,ttu_,ku_,ri_,spc_,su_,ru_,da_,ro_,u_,ne_,ee_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

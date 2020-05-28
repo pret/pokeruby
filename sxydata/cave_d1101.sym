@@ -1,0 +1,10 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 4
+#define SUBMARINE_06_01_CAVE_D1101	1
+#define SUBMARINE_06_02_CAVE_D1101	2
+#define SUBMARINE_06_03_CAVE_D1101	3
+#define SUBMARINE_06_04_CAVE_D1101	4
+
+//Exit ID = 1
+#define CAVE_D1101_DOOR01	0

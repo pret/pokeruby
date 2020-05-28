@@ -1,0 +1,66 @@
+
+//=========================================================================
+//	AI用の構造体宣言
+//=========================================================================
+
+typedef struct{
+	u8	AI_SEQNO;
+	u8	AI_WAZAPOS;
+	u16	AI_WAZANO;
+	s8	AI_WAZAPOINT[4];
+	u32	AI_CALC_WORK;
+	u32	AI_THINK_BIT;
+	u8	AI_STATUSFLAG;
+	u8	AI_THINK_NO;
+	u8	AI_ALL_WAZA_CHECK_LOOP_CNT;
+	u8	AI_ALL_WAZA_CHECK_PUSH_POS;
+	u8	*AI_ALL_WAZA_CHECK_LOOP_ADRS;
+	u8	AI_DAMAGELOSS[4];
+}AIWorkTbl;
+
+typedef struct{
+	u16	AI_DEFENCE_USE_WAZA[2][8];
+	u8	AI_TOKUSYUNO[2];
+	u8	AI_SOUBIITEM[2];
+	u16	AI_HAVEITEM[4];
+	u8	AI_ITEMCNT;
+}AIWorkTbl2;
+
+//=========================================================================
+//	UserWorkの配列の添え字宣言	0x16800~
+//=========================================================================
+
+#define	AIWT				((AIWorkTbl *)&UserWork[0x16800])
+#define	AIWT2				((AIWorkTbl2 *)&UserWork[0x16a00])
+#define	AI_PUSH_ADRS		((PushAdrs *)&UserWork[0x16c00])	//4バイト*8+1
+
+//=========================================================================
+//	AI_STATUSFLAG宣言
+//=========================================================================
+
+#define	AI_STATUSFLAG_END		0x01			//AIシーケンスの終了
+#define	AI_STATUSFLAG_ESCAPE	0x02			//にげるを選択
+#define	AI_STATUSFLAG_SAFARI	0x04			//サファリゾーン特有のアクション
+#define	AI_STATUSFLAG_FINISH	0x08			//チェックする技が残っていても終了
+
+#define	AI_STATUSFLAG_END_OFF		(0x01^0xff)
+#define	AI_STATUSFLAG_ESCAPE_OFF	(0x01^0xff)
+#define	AI_STATUSFLAG_SAFARI_OFF	(0x04^0xff)
+
+#define	AI_ENEMY_ESCAPE	4
+#define	AI_ENEMY_SAFARI	5
+
+//=========================================================================
+//	AI_THINK_BIT宣言
+//=========================================================================
+
+#define	AI_THINK_BIT_BASIC		0x00000001			//基本AI
+#define	AI_THINK_BIT_ATTACK		0x00000002			//攻撃型AI
+#define	AI_THINK_BIT_EXPERT		0x00000004			//エキスパートAI
+#define	AI_THINK_BIT_SLEEP		0x00000008			//ねむりAI
+#define	AI_THINK_BIT_POISON		0x00000010			//どくAI
+#define	AI_THINK_BIT_WARUAGAKI	0x00000020			//わるあがきAI
+#define	AI_THINK_BIT_MV_POKE	0x20000000			//移動ポケモン
+#define	AI_THINK_BIT_SAFARI		0x40000000			//サファリゾーン
+#define	AI_THINK_BIT_GUIDE		0x80000000			//ガイドバトル
+

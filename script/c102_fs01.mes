@@ -1,0 +1,30 @@
+// ●カイナシティ　フレンドリィショップ
+
+
+// ●格闘家１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fighter1_01_p01_c102_fs01
+msg_fighter1_01_p01_c102_fs01:
+	.byte	ta_,si_,ka_,ni_,spc_,i_,ti_,ba_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,ho_,ri_,da_,si_,mo_,no_,ga_,spc_,a_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,HU_,RE_,N_,DO_,RI_,II_,SI_,YYO_,TTU_,PU_,spc_,zi_,yya_,na_,i_,to_
+	.byte	CR_
+	.byte	ka_,e_,na_,i_,spc_,mo_,no_,mo_,spc_,a_,ru_,ka_,ra_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c102_fs01
+msg_trainerm1_01_p01_c102_fs01:
+	.byte	SU_,bou_,PA_,bou_,BO_,bou_,RU_,ha_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,yo_,ri_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ya_,su_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,na_,ra_,spc_,a_,no_,spc_,te_,go_,wa_,i_,spc_,PO_,KE_,MO_,N_,mo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

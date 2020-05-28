@@ -1,0 +1,94 @@
+//====================================================================
+//							field_r127
+//							ロード・127
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r127_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r127
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r127:
+	//大雨
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,ctrl_weather_thunder
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_athletesm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESM_01
+	_TRAINER_DATA2	msg_athletesm_01_01
+	_TRAINER_DATA3	msg_athletesm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletesm_01_03
+	_END
+
+SCRIPT_LABEL	ev_athletesw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESW_02
+	_TRAINER_DATA2	msg_athletesw_02_01
+	_TRAINER_DATA3	msg_athletesw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletesw_02_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_16
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_16
+	_TRAINER_DATA2	msg_fishing_16_01
+	_TRAINER_DATA3	msg_fishing_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_16_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_17
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_17
+	_TRAINER_DATA2	msg_fishing_17_01
+	_TRAINER_DATA3	msg_fishing_17_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_17_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_18
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_18
+	_TRAINER_DATA2	msg_fishing_18_01
+	_TRAINER_DATA3	msg_fishing_18_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_18_03
+	_END
+
+SCRIPT_LABEL	ev_karate_13
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	KARATE_13
+	_TRAINER_DATA2	msg_karate_13_01
+	_TRAINER_DATA3	msg_karate_13_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_13_03
+	_END
+
+SCRIPT_LABEL	ev_bird_18
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	BIRD_18
+	_TRAINER_DATA2	msg_bird_18_01
+	_TRAINER_DATA3	msg_bird_18_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_bird_18_03
+	_END
+

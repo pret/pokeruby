@@ -1,0 +1,103 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C103_R0201	2
+#define EXITNUM_C103_R0201	2
+#define POSNUM_C103_R0201	0
+#define BGNUM_C103_R0201	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_workerm1_01_p01_c103_r0201[];
+extern const u8	ev_youngm2_01_p01_c103_r0201[];
+
+//BG_SCRIPT
+extern const u8	ev_books_01_p01_c103_r0201[];
+extern const u8	ev_books_02_p01_c103_r0201[];
+
+const evObjData	OBJ_c103_r0201[] =
+{
+	{
+		WORKERM1_01_C103_R0201,		//OBJ ID
+		WORKERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_workerm1_01_p01_c103_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		YOUNGM2_01_C103_R0201,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_youngm2_01_p01_c103_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c103_r0201[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_C103_DOOR03,		//Door ID
+		FIELD_C103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_C103_DOOR03,		//Door ID
+		FIELD_C103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c103_r0201[] =
+{
+	{
+		0x0008,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_books_01_p01_c103_r0201,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_books_02_p01_c103_r0201,		//Script
+	},
+
+};
+
+const SXY_DATA	c103_r0201_sxy_data =
+{
+OBJNUM_C103_R0201,			// field obj max
+EXITNUM_C103_R0201,		// exit max
+POSNUM_C103_R0201,			// pos event max
+BGNUM_C103_R0201,			// bg event max
+OBJ_c103_r0201,			// field obj data
+EXIT_c103_r0201,			// exit data
+NULL,			// pos event data
+BG_c103_r0201,				// bg event data
+};

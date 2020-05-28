@@ -1,0 +1,279 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c107_r0801_event_data
+BG_CHANGE_LABEL		bg_change_c107_r0801
+FLAG_CHANGE_LABEL	flag_change_c107_r0801
+SP_SCRIPT_LABEL		scene_c107_r0801
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_c107_r0801:
+	//カードeトレーナーがなかったら
+	_PROGRAM		BATTLE_CARD_E_DATA_CHECK
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,bg_chg_01_c107_r0801
+
+	_END
+
+//カードeトレーナーがない
+bg_chg_01_c107_r0801:
+	//扉を閉める
+	_SET_CELL		3,0,653,1
+	_SET_CELL		3,1,661,1
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c107_r0801:
+	//カードeトレーナーがあったら
+	_PROGRAM		BATTLE_CARD_E_DATA_CHECK
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,flag_chg_01_c107_r0801
+
+	//おじいさんの位置を移動する
+	_IFVAL_CALL		WK_SCENE_TR_HOUSE,NE,0,ev_move_oldman1_01_c107_r0801
+	_END
+
+//カードeトレーナーがあったら
+flag_chg_01_c107_r0801:
+	//イベント開始許可
+	_LDVAL				LOCALWORK1,1
+
+	_SXY_POS_CHANGE		OLDMAN1_01_C107_R0801,3,2
+	_SXY_SITE_CHANGE	OLDMAN1_01_C107_R0801,MV_DOWN
+	_RET
+
+//おじいさんの位置を移動する
+ev_move_oldman1_01_c107_r0801:
+	_SXY_POS_CHANGE		OLDMAN1_01_C107_R0801,2,2
+	_SXY_SITE_CHANGE	OLDMAN1_01_C107_R0801,MV_RIGHT
+	_RET
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c107_r0801:
+	//降りてくる(1=勝った 2=負けた 3=引き分け)
+	SP_SCRIPT_DATA	WK_SCENE_TR_HOUSE,1,ev_scene_card_tr_battle_c107_r0801
+	SP_SCRIPT_DATA	WK_SCENE_TR_HOUSE,2,ev_scene_card_tr_battle_c107_r0801
+	SP_SCRIPT_DATA	WK_SCENE_TR_HOUSE,3,ev_scene_card_tr_battle_c107_r0801
+	SP_SCRIPT_END
+
+//カードeトレーナーとバトル
+ev_scene_card_tr_battle_c107_r0801:
+	_TALK_START
+
+	//階段下りる
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0801_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//階段ふさぐ
+	_SET_OBJ_ANIME	OLDMAN1_01_C107_R0801,oldman1_01_c107_r0801_anime10
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//sxy情報書き換え
+	_SXY_POS_OVERWRITE	OLDMAN1_01_C107_R0801
+
+	//上を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_IFVAL_CALL		WK_SCENE_TR_HOUSE,EQ,1,case_win_oldman1_c107_r0801
+	_IFVAL_CALL		WK_SCENE_TR_HOUSE,EQ,2,case_lose_oldman1_c107_r0801
+	_IFVAL_CALL		WK_SCENE_TR_HOUSE,EQ,3,case_draw_oldman1_c107_r0801
+
+	//手持ちを元に戻す
+	_PROGRAM		TEMOTI_POKE_POP
+	_LDVAL			WK_SCENE_TR_HOUSE,0
+	_TALK_END
+	_END
+
+//勝った場合のメッセージ
+case_win_oldman1_c107_r0801:
+	_TALK_KEYWAIT	msg_oldman1_01_p08_c107_r0801
+	_RET
+
+//負けた場合のメッセージ
+case_lose_oldman1_c107_r0801:
+	_TALK_KEYWAIT	msg_oldman1_01_p09_c107_r0801
+	_RET
+
+//引き分け場合のメッセージ
+case_draw_oldman1_c107_r0801:
+	_TALK_KEYWAIT	msg_oldman1_01_p07_c107_r0801
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	下に一歩進む
+//--------------------------------------------------------------------
+hero_01_c107_r0801_anime10:
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//おじいさん	階段ふさぐ
+//--------------------------------------------------------------------
+oldman1_01_c107_r0801_anime10:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							おじいさん
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_c107_r0801
+	_TALK_OBJ_START
+
+	//イベント開始許可がおりているか
+	_IFVAL_JUMP		LOCALWORK1,EQ,1,ev_oldman1_01_p02_c107_r0801
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_c107_r0801
+
+	_TALK_OBJ_END
+	_END
+
+//イベント開始許可がおりている
+ev_oldman1_01_p02_c107_r0801:
+	_PROGRAM		TEMOTI_POKE_PUSH		//手持ちポケモン退避
+
+	//トレーナー名を代入する
+	_PROGRAM		GET_CARD_TR_NAME
+	_TALK_YES_NO	msg_oldman1_01_p02_c107_r0801
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_oldman1_01_p01_c107_r0801
+
+	_CALL			ev_battle_poke_sel_c107_r0801
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_oldman1_01_p01_c107_r0801
+
+	//挑戦する前にセーブする?
+	_TALK_YES_NO	msg_oldman1_01_p05_c107_r0801
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,no_oldman1_01_p01_c107_r0801
+	//_IFVAL_CALL		1,park_battle01_battle_save
+	_CASECANCEL		no_oldman1_01_p01_c107_r0801
+
+	//セーブ処理
+	//3体選んだ後なので、そのままセーブすると手持ちが3体になってしまうので、
+	//元の手持ちに戻してからセーブ
+	_PROGRAM		TEMOTI_POKE_POP
+	_CALL			FieldSaveScript
+	_WINDOW_CLEAR	0,0,15,10
+
+	//セーブ後、もう一回手持ちを退避
+	_PROGRAM		TEMOTI_POKE_PUSH
+	//ポケモンを3体選択した状態に戻す
+	_PROGRAM		SORT_SELECT_POKEMON
+
+	_TALK_KEYWAIT	msg_oldman1_01_p06_c107_r0801
+	_TALK_CLOSE
+
+	//老人移動する
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,cave_site_u_01_c107_r0801
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,cave_site_r_01_c107_r0801
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,cave_site_l_01_c107_r0801
+
+	_MAP_CHANGE		C107,C107_R0802,3,1
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_oldman1_01_p01_c107_r0801:
+	_PROGRAM		TEMOTI_POKE_POP
+	_TALK_KEYWAIT	msg_oldman1_01_p03_c107_r0801
+	_TALK_OBJ_END
+	_END
+
+//戦闘に出すポケモンを選択する
+ev_battle_poke_sel_c107_r0801:
+	_TALK_KEYWAIT	msg_oldman1_01_p04_c107_r0801
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		BATTLE_POKE_SEL
+	_STOP_SCRIPT
+	_RET
+
+//下側からはなしかけ
+cave_site_u_01_c107_r0801:
+	_SET_OBJ_ANIME	TARGET_OBJ,oldman1_01_c107_r0801_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0801_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//左側からはなしかけ
+cave_site_r_01_c107_r0801:
+	_SET_OBJ_ANIME	TARGET_OBJ,oldman1_01_c107_r0801_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0801_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//右側からはなしかけ
+cave_site_l_01_c107_r0801:
+	_SET_OBJ_ANIME	TARGET_OBJ,oldman1_01_c107_r0801_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0801_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	上に一歩進む
+//--------------------------------------------------------------------
+hero_01_c107_r0801_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	右に一歩進む
+//--------------------------------------------------------------------
+hero_01_c107_r0801_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	左に一歩進む
+//--------------------------------------------------------------------
+hero_01_c107_r0801_anime03:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//老人	左に一歩進む
+//--------------------------------------------------------------------
+oldman1_01_c107_r0801_anime01:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//老人	右に一歩進む
+//--------------------------------------------------------------------
+oldman1_01_c107_r0801_anime02:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//							とびら
+/********************************************************************/
+SCRIPT_LABEL	ev_tobira_01_p01_c107_r0801
+	_EASY_MSG		msg_tobira_01_p01_c107_r0801
+	_END
+
+

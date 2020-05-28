@@ -1,0 +1,14 @@
+#define NUM_BUFFER0         	   0
+#define MY_NAME_BUF         	   1
+#define STR_TEMP_BUF0       	   2
+#define STR_TEMP_BUF1       	   3
+#define STR_TEMP_BUF2       	   4
+#define SUFIX_BUF           	   5
+#define STR_SUPPORT_NPC     	   6
+#define STR_VERSION         	   7
+#define STR_ENE_GROUP       	   8
+#define STR_ENE_GROUP2      	   9
+#define STR_ENE_LEADER      	  10
+#define STR_ENE_LEADER2     	  11
+#define STR_KEY_POKEMON     	  12
+#define STR_KEY_POKEMON2    	  13

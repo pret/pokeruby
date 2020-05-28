@@ -1,0 +1,277 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_SP_BASE05	15
+#define EXITNUM_SP_BASE05	1
+#define POSNUM_SP_BASE05	0
+#define BGNUM_SP_BASE05	0
+
+//OBJ_EVENT_LABEL
+extern const u8	base_char_script[];
+
+const evObjData	OBJ_sp_base05[] =
+{
+	{
+		BASE_CHAR,		//OBJ ID
+		WKOBJCODE16,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		base_char_script,		//Event Lavel
+		FE_BASE_CHAR_FLAG,		//Event Flag
+	},
+
+	{
+		BASE_GOODS01,		//OBJ ID
+		WKOBJCODE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0000,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG01,		//Event Flag
+	},
+
+	{
+		BASE_GOODS02,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG02,		//Event Flag
+	},
+
+	{
+		BASE_GOODS03,		//OBJ ID
+		WKOBJCODE3,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG03,		//Event Flag
+	},
+
+	{
+		BASE_GOODS04,		//OBJ ID
+		WKOBJCODE4,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG04,		//Event Flag
+	},
+
+	{
+		BASE_GOODS05,		//OBJ ID
+		WKOBJCODE5,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG05,		//Event Flag
+	},
+
+	{
+		BASE_GOODS06,		//OBJ ID
+		WKOBJCODE6,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG06,		//Event Flag
+	},
+
+	{
+		BASE_GOODS07,		//OBJ ID
+		WKOBJCODE7,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG07,		//Event Flag
+	},
+
+	{
+		BASE_GOODS08,		//OBJ ID
+		WKOBJCODE8,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0000,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG08,		//Event Flag
+	},
+
+	{
+		BASE_GOODS09,		//OBJ ID
+		WKOBJCODE9,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG09,		//Event Flag
+	},
+
+	{
+		BASE_GOODS10,		//OBJ ID
+		WKOBJCODE10,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG10,		//Event Flag
+	},
+
+	{
+		BASE_GOODS11,		//OBJ ID
+		WKOBJCODE11,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG11,		//Event Flag
+	},
+
+	{
+		BASE_GOODS12,		//OBJ ID
+		WKOBJCODE12,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG12,		//Event Flag
+	},
+
+	{
+		BASE_GOODS13,		//OBJ ID
+		WKOBJCODE13,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG13,		//Event Flag
+	},
+
+	{
+		BASE_GOODS14,		//OBJ ID
+		WKOBJCODE14,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FE_BASE_GOODS_FLAG14,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_sp_base05[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		SPFIELD_MAP_EXIT02,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	sp_base05_sxy_data =
+{
+OBJNUM_SP_BASE05,			// field obj max
+EXITNUM_SP_BASE05,		// exit max
+POSNUM_SP_BASE05,			// pos event max
+BGNUM_SP_BASE05,			// bg event max
+OBJ_sp_base05,			// field obj data
+EXIT_sp_base05,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

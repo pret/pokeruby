@@ -1,0 +1,30 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_C106_R0502	0
+#define EXITNUM_C106_R0502	1
+#define POSNUM_C106_R0502	0
+#define BGNUM_C106_R0502	0
+
+const SXY_CONNECT	EXIT_c106_r0502[] =
+{
+	{
+		0x0007,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		C106_R0501_MAT03,		//Door ID
+		C106_R0501,			//Map ID
+		C106,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c106_r0502_sxy_data =
+{
+OBJNUM_C106_R0502,			// field obj max
+EXITNUM_C106_R0502,		// exit max
+POSNUM_C106_R0502,			// pos event max
+BGNUM_C106_R0502,			// bg event max
+NULL,			// field obj data
+EXIT_c106_r0502,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

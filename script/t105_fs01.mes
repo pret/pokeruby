@@ -1,0 +1,44 @@
+// ●ハジツゲタウン　フレンドリィショップ
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t105_fs01
+msg_woman1_01_p01_t105_fs01:
+	.byte	a_,ta_,si_,no_,spc_,E_,NE_,KO_,ni_,ne_
+	.byte	CR_
+	.byte	tu_,ki_,no_,i_,si_,wo_,spc_,tu_,ka_,ttu_,te_,ne_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,n_,ka_,spc_,sa_,se_,ru_,ka_,spc_,do_,u_,ka_
+	.byte	CR_
+	.byte	su_,ttu_,go_,i_,spc_,ma_,yo_,ttu_,te_,ru_,no_,yo_,oo_
+	.byte	NORMAL_WAIT_
+	.byte	si_,n_,ka_,spc_,sa_,se_,ru_,to_,spc_,tu_,yo_,ku_,na_,ru_,ke_,do_
+	.byte	CR_
+	.byte	su_,ga_,ta_,ka_,ta_,ti_,spc_,ka_,wa_,ttu_,ti_,yya_,u_,si_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・エネコ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_eneco_01_p01_t105_fs01
+msg_eneco_01_p01_t105_fs01:
+	.byte	E_,NE_,KO_,kako2_,mi_,yya_,o_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にエネコの鳴き声をならす
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_t105_fs01
+msg_middlem2_01_p01_t105_fs01:
+	.byte	hi_,ro_,ttu_,ta_,spc_,ki_,n_,no_,ta_,ma_,tenten_,tenten_
+	.byte	CR_
+	.byte	ya_,ttu_,pa_,ri_,spc_,u_,ru_,si_,ka_,spc_,na_,i_,no_,ka_,na_,a_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,ka_,ni_,spc_,tu_,ka_,i_,mi_,ti_,mo_,spc_,na_,i_,ka_,ra_,na_,a_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

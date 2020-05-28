@@ -1,0 +1,262 @@
+// ●オダマキ博士の自宅２階
+
+
+// ●サポートキャラ♀「ハルカ」
+// ●自分のパソコンに向かったまま
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_t101_r0202
+msg_heroine_01_p01_t101_r0202:
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,ta_,i_,ri_,yyo_,ku_,spc_,ma_,n_,ta_,n_,gyoe_
+	.byte	CR_
+	.byte	do_,u_,gu_,mo_,spc_,ko_,re_,de_,spc_,yo_,si_,tenten_,tenten_,to_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公の方を向き「！」マーク表示の後、続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p02_t101_r0202
+msg_heroine_01_p02_t101_r0202:
+	.byte	e_,ttu_,tenten_,tenten_,gyoe_,hate_
+	.byte	CR_
+	.byte	a_,na_,ta_,spc_,da_,re_,tenten_,tenten_,spc_,na_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ga_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,u_,ka_,spc_,ki_,yyo_,u_,spc_,hi_,ttu_,ko_,si_,spc_,da_,ttu_,ta_,n_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,spc_,a_,ta_,si_,spc_,HA_,RU_,KA_,gyoe_
+	.byte	CR_
+	.byte	yo_,spc_,yo_,ro_,si_,ku_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,tenten_,tenten_
+	.byte	CR_
+	.byte	se_,ka_,i_,zi_,yyu_,u_,no_,spc_,PO_,KE_,MO_,N_,to_
+	.byte	SCROLL_WAIT_
+	.byte	to_,mo_,da_,ti_,ni_,spc_,na_,ru_,no_,ga_,spc_,yu_,me_,spc_,na_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	de_,spc_,de_,ne_
+	.byte	CR_
+	.byte	o_,to_,u_,sa_,n_,tenten_,tenten_,spc_,O_,DA_,MA_,KI_,ha_,ka_,se_,spc_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,no_,spc_,o_,na_,ha_,si_,spc_,ki_,i_,te_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,to_,mo_
+	.byte	CR_
+	.byte	o_,to_,mo_,da_,ti_,ni_,spc_,na_,re_,ta_,ra_,na_,a_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	na_,n_,te_,spc_,o_,mo_,ttu_,te_,ta_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ttu_,spc_,a_,ta_,si_,ttu_,ta_,ra_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,to_
+	.byte	CR_
+	.byte	ha_,zi_,me_,te_,spc_,o_,ha_,na_,si_,spc_,si_,te_,ru_,no_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,spc_,i_,ttu_,te_,n_,da_,ro_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	te_,he_,he_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ttu_,spc_,i_,ke_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,o_,to_,u_,sa_,n_,no_,spc_,o_,te_,tu_,da_,i_,de_
+	.byte	CR_
+	.byte	ya_,se_,i_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,ma_,e_,ni_,spc_,i_,ku_,to_,ko_,ro_,spc_,da_,ttu_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	CR_
+	.byte	ma_,ttu_,spc_,ma_,ta_,spc_,a_,to_,de_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公を避けて階下に……
+// ●これで、博士が101番道路で襲われるイベントの発生する
+// 　フラグ02が立つ
+
+
+// ●サポートキャラ♂「ユウキ」
+// ●自分のパソコンに向かったまま
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_t101_r0202
+msg_hero_01_p01_t101_r0202:
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,ta_,i_,ri_,yyo_,ku_,spc_,ma_,n_,ta_,n_
+	.byte	CR_
+	.byte	do_,u_,gu_,mo_,spc_,ko_,re_,de_,spc_,da_,i_,zi_,yyo_,u_,bu_,spc_,tenten_,tenten_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公の方を向き「！」マーク表示の後、続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p02_t101_r0202
+msg_hero_01_p02_t101_r0202:
+	.byte	o_,ma_,e_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,re_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ttu_,spc_,o_,ma_,e_,ga_,spc_,to_,na_,ri_,ni_
+	.byte	CR_
+	.byte	hi_,ttu_,ko_,si_,te_,spc_,ki_,ta_,spc_,I_MSG_,MY_NAME_BUF,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,u_,n_
+	.byte	CR_
+	.byte	o_,n_,na_,no_,ko_,spc_,da_,ttu_,ta_,n_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,sa_,n_,tenten_,tenten_,spc_,O_,DA_,MA_,KI_,ha_,ka_,se_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	to_,na_,ri_,ni_,spc_,hi_,ttu_,ko_,si_,te_,spc_,ku_,ru_,no_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ZI_,MU_,RI_,bou_,DA_,bou_,no_,spc_,ko_,do_,mo_,spc_,ttu_,te_,spc_,ki_,i_,te_,ta_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,ttu_,te_,ni_,spc_,o_,to_,ko_,spc_,da_,to_,spc_,o_,mo_,ttu_,te_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,ha_,spc_,YU_,U_,KI_
+	.byte	CR_
+	.byte	ma_,a_,spc_,o_,to_,na_,ri_,sa_,n_,ni_,spc_,na_,ttu_,ta_,ko_,to_,da_,si_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,ka_,ra_,spc_,yo_,ro_,si_,ku_,na_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ya_,hate_,spc_,I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,mo_,ttu_,te_,na_,i_,no_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,O_,RE_,ga_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,te_,ki_,te_,spc_,ya_,ro_,u_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ttu_,te_,spc_,wa_,su_,re_,te_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,spc_,to_,u_,sa_,n_,no_,spc_,te_,tu_,da_,i_,de_
+	.byte	CR_
+	.byte	ya_,se_,i_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,ma_,e_,ni_,spc_,i_,ku_,spc_,to_,ko_,ro_,spc_,da_,ttu_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ko_,n_,do_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公を避けて階下に……
+// ●これで、博士が101番道路で襲われるイベントの発生する
+// 　フラグ02が立つ
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●ミナモでの戦闘後、ここに出現
+
+// ●サポートキャラ♀「ハルカ」
+// ●自分のパソコンに向かったいる状態で配置
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p03_t101_r0202
+msg_heroine_01_p03_t101_r0202:
+	.byte	HA_,RU_,KA_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,i_,ma_,ne_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,wo_,spc_,na_,ga_,me_,te_,i_,ta_,no_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,tu_,ke_,ta_,spc_,da_,ke_,de_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,te_,i_,na_,i_,spc_,PO_,KE_,MO_,N_,ya_
+	.byte	SCROLL_WAIT_
+	.byte	si_,n_,ka_,spc_,si_,so_,u_,na_,spc_,PO_,KE_,MO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,da_,ma_,da_,spc_,i_,ttu_,pa_,i_,spc_,i_,ru_,n_,da_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,do_,ha_,spc_,do_,ko_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ni_,spc_,i_,ko_,u_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ミナモのデパートで「買い物してた」って話なので
+// 　なにかぬいぐるみが置かれているとうれしいかも、と
+// 　西野さんが言ってました……
+// 　ちなみにサポートのポケモンって
+// 　ホエルコとキノココです……
+// ●再度話しかけた場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p04_t101_r0202
+msg_heroine_01_p04_t101_r0202:
+	.byte	HA_,RU_,KA_,kako2_,ko_,n_,do_,ha_,spc_,do_,ko_,ni_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ni_,spc_,i_,ko_,u_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,ta_,spc_,sa_,ki_,de_,spc_,ma_,ta_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,to_,spc_,de_,a_,ttu_,ta_,ri_,si_,te_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サポートキャラ♂「ユウキ」
+// ●自分のパソコンに向かったいる状態で配置
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p03_t101_r0202
+msg_hero_01_p03_t101_r0202:
+	.byte	YU_,U_,KI_,kako2_,I_MSG_,MY_NAME_BUF,ka_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_,wo_
+	.byte	CR_
+	.byte	TI_,EE_,TTU_,KU_,spc_,si_,te_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,da_,ma_,da_,spc_,tu_,ka_,ma_,e_,te_,i_,na_,i_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,i_,ru_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,na_,ri_,spc_,i_,i_,spc_,ka_,n_,zi_,da_,ro_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,si_,te_,spc_,zu_,ka_,n_,wo_,spc_,mi_,te_,i_,ru_,to_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,bo_,u_,ke_,n_,ni_,spc_,i_,ki_,ta_,ku_,na_,ru_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●自分のパソコンに向かったいる状態で配置
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p04_t101_r0202
+msg_hero_01_p04_t101_r0202:
+	.byte	YU_,U_,KI_,kako2_,ko_,n_,do_,ha_,spc_,do_,ko_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ru_,ka_,spc_,na_,ya_,mu_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,te_,i_,ru_,to_,ki_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,to_,spc_,de_,a_,ttu_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,te_,ya_,ro_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●ベッドの上の本棚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hondana1_01_p01_t101_r0202
+msg_hondana1_01_p01_t101_r0202:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,e_,ho_,n_,ga_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,so_,ro_,ttu_,te_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●部屋の中央の本棚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hondana1_02_p01_t101_r0202
+msg_hondana1_02_p01_t101_r0202:
+	.byte	kako2_,PO_,KE_,MO_,N_,no_,spc_,si_,yyu_,ru_,i_,to_,spc_,bu_,n_,pu_,kakot2_
+	.byte	CR_
+	.byte	kako2_,HI_,TO_,to_,spc_,PO_,KE_,MO_,N_,no_,spc_,ki_,yyo_,u_,zo_,n_,kakot2_
+	.byte	SCROLL_WAIT_
+	.byte	kako2_,ha_,zi_,me_,te_,spc_,ma_,na_,bu_,spc_,PO_,KE_,MO_,N_,ga_,ku_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	O_,DA_,MA_,KI_,ha_,ka_,se_,ga_,spc_,ka_,i_,ta_,spc_,ho_,n_,ga_
+	.byte	CR_
+	.byte	ta_,ku_,sa_,n_,spc_,na_,ra_,n_,de_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

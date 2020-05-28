@@ -1,0 +1,2024 @@
+//====================================================================
+//
+//	共通スクリプト記述用ファイル
+//
+//	2001_09_03	GAME FREAK Inc.
+//====================================================================
+
+#include "kinomi.ev"			//始めからきのみ 大森さん更新ファイル
+
+/********************************************************************/
+//					オンにしておくフラグをおく
+/********************************************************************/
+SCRIPT_LABEL	ev_flag_on
+	_FLAG_SET	FE_BALL_01_P01_SP_CONTEST		//モンスターボール表示
+
+	//バトル一家
+	_FLAG_SET	FV_MIDDLEW1_01_FIELD_R111		//
+	_FLAG_SET	FV_SCHOOLW1_01_FIELD_R111		//
+	_FLAG_SET	FV_OLDWOMAN1_01_FIELD_R111		//
+
+	_FLAG_SET	FV_ODAMAKI_01_T101_R0301		//オダマキ(研究所)
+	_FLAG_SET	FV_SUPPORT_01_T101_R0301		//サポート(研究所)
+	
+	_FLAG_SET	FV_MITSURU_01_FIELD_C101		//ミツル
+	_FLAG_SET	FV_MITSURU_01_FIELD_R102		//ミツル(ロード１０２)
+
+	//カナズミ
+	_FLAG_SET	FV_SEAMAN1_02_FIELD_C104		//マリン団２(ポケモン盗難事件)
+	_FLAG_SET	FV_WORKERM1_04_FIELD_C104		//社員(ポケモン盗難事件)
+	_FLAG_SET	FV_SUPPORT_01_FIELD_C104		//サポート
+
+	_FLAG_SET	FV_BIGMAN1_01_FIELD_T101		//ビッグマン(引越しの時消しておく)
+
+	//ハギ部屋
+	_FLAG_SET	FV_HAGI_01_R104_R0101			//ハギ老人
+	_FLAG_SET	FV_POKEMON_01_R104_R0101		//ピーコ
+
+	_FLAG_SET	FV_HAGI_01_FIELD_R104			//ハギ老人
+	_FLAG_SET	FV_HAGI_01_FIELD_T103			//ハギ老人(ムロ)
+	_FLAG_SET	FV_HAGI_01_FIELD_R109			//ハギ老人(ロード１０９)
+	_FLAG_SET	FV_FUNE_01_FIELD_T103			//渡し船(ムロ)
+	_FLAG_SET	FV_FUNE_01_FIELD_R109			//渡し船(ロード１０９)
+	
+	_FLAG_SET	FV_TRAINERW1_01_FIELD_R104		//サン・トウカの前にいる人
+
+	_FLAG_SET	FV_POKE1_01_CAVE_D0601			//ピーコちゃん
+	_FLAG_SET	FV_EVILM1_01_CAVE_D0601			//トンネル団
+	_FLAG_SET	FV_POKE1_02_CAVE_D0601			//ピーコちゃん
+	_FLAG_SET	FV_EVILM1_02_CAVE_D0601			//トンネル団
+
+	_FLAG_SET	FV_PAPA_02_OPENING_ROOM01		//お父さん(時刻設定後)
+
+	_FLAG_SET	FV_ARTIST_01_C106_R0301			//コンテストの絵描き
+	_FLAG_SET	FV_ARTIST_02_C106_R0301			//コンテストの絵描き(通信)
+	_FLAG_SET	FV_GALLERY_01_C106_R0201		//美術館の客（ステップ１）
+	_FLAG_SET	FV_GALLERY_02_C106_R0201		//美術館の客（ステップ２）
+	_FLAG_SET	FV_GALLERY_03_C106_R0201		//美術館の客（ステップ３）
+	_FLAG_SET	FV_GALLERY_04_C106_R0201		//美術館の客（ステップ４）
+	_FLAG_SET	FV_GALLERY_05_C106_R0201		//美術館の客（ステップ５）
+
+	_FLAG_SET	FV_DANPEI_01_C101_R0201			//未来のチャンピォン言う人(トウカ)
+
+	//自宅
+	_FLAG_SET	FV_MAMA_02_T101_R0101			//母(時計を合わせた後移動する)
+	_FLAG_SET	FV_MAMA_02_T101_R0201			//母(時計を合わせた後移動する)
+	_FLAG_SET	FV_SENRI_01_T101_R0101			//センリ
+	_FLAG_SET	FV_DOLL1_01_T101_R0202			//ドール
+
+	_FLAG_SET	FV_FAN_01_C106_R0401			//ファン１
+	_FLAG_SET	FV_FAN_02_C106_R0401			//ファン２
+	_FLAG_SET	FV_FAN_03_C106_R0401			//ファン３
+	_FLAG_SET	FV_FAN_04_C106_R0401			//ファン４
+
+	_FLAG_SET	FV_INTERVW1_02_CAMERA			//インタビュアー＆カメラマン
+	_FLAG_SET	FV_INTERVW1_03_CAMERA			//インタビュアー＆カメラマン
+	_FLAG_SET	FV_INTERVW1_04_CAMERA			//インタビュアー＆カメラマン
+	_FLAG_SET	FV_INTERVW1_05_CAMERA			//インタビュアー＆カメラマン
+	_FLAG_SET	FV_INTERVW1_06_CAMERA			//インタビュアー＆カメラマン
+	_FLAG_SET	FV_INTERVW1_07_CAMERA			//インタビュアー＆カメラマン
+	_FLAG_SET	FV_INTERVW1_08_CAMERA			//インタビュアー＆カメラマン
+	//_FLAG_SET	FV_INTERVW1_09_CAMERA			//インタビュアー＆カメラマン
+
+	_FLAG_SET	FV_INTERVM1_01_T105_R0101		//コンテスト後のインタビュー
+	_FLAG_SET	FV_INTERVM1_01_T106_R0101		//コンテスト後のインタビュー
+	_FLAG_SET	FV_INTERVM1_01_C102_R0201		//コンテスト後のインタビュー
+	_FLAG_SET	FV_INTERVM1_01_C106_R0301		//コンテスト後のインタビュー
+
+	//親戚の家
+	_FLAG_SET	FV_MITSURU_01_T106_R0201		//ミツル
+	_FLAG_SET	FV_FIGHTER1_01_T106_R0201		//トンネル男
+	_FLAG_SET	FV_MIDDLEM2_01_T106_R0201		//伯父さん
+	_FLAG_SET	FV_WOMAN1_01_T106_R0201			//ミチル
+
+	_FLAG_SET	FV_MIDDLEM1_03_FIELD_C101		//ミツル父(ジム前)
+	_FLAG_SET	FV_MIDDLEW1_03_FIELD_C101		//ミツル母(ジム前)
+	_FLAG_SET	FV_MITSURU_01_C101_R0201		//ミツル(トウカジム)
+
+	_FLAG_SET	FV_LEADER08_01_C108_R0101		//ミクリ(ジム)
+	_FLAG_SET	FV_LEADER08_01_FIELD_C108		//ミクリ(祭壇前)
+
+	_FLAG_SET	FV_HAGI_01_C102_R0101			//ハギ老人(造船所)
+	_FLAG_SET	FV_KUSUNOKI_01_C102_R0102		//クスノキ艦長(造船所)
+
+	//海底洞窟
+	_FLAG_SET	FV_AQUABOSS_01_CAVE_D1111		//アオギリ
+	_FLAG_SET	FV_MAGMABOSS_01_CAVE_D1111		//マツブサ
+	_FLAG_SET	FV_MAGMA_01_CAVE_D1111S			//マグマ部下
+	_FLAG_SET	FV_POKE1_01_CAVE_D1111			//カイオーガ
+
+	_FLAG_SET	FV_KUSUNOKI_01_C102_R0601		//クスノキ(待合室)
+	_FLAG_SET	FV_INTERVW1_01_C102_R0601		//インタビュアー(待合室)
+	_FLAG_SET	FV_CAMERA1_01_C102_R0601		//カメラマン(待合室)
+	_FLAG_SET	FV_HAGI_01_C102_R0601			//ハギ(待合室)
+	_FLAG_SET	FV_EVILM1_01_C102_R0601			//アクア団(待合室)
+	_FLAG_SET	FV_AQUABOSS_01_C102_R0601		//アオギリ(待合室)
+	_FLAG_SET	FV_HISHIP1_01_C102_R0601		//高速船(待合室)
+	_FLAG_SET	FV_HISHIP1_01_C106_R0501		//高速船(待合室)
+
+	_FLAG_SET	FV_CAMERA1_01_FIELD_C102		//カメラマン(潜水艇前)
+	_FLAG_SET	FV_KUSUNOKI_01_FIELD_C102		//クスノキ(潜水艇前)
+	_FLAG_SET	FV_SUBMARINE1_01_C102_R0601		//船(潜水艇前)
+
+	_FLAG_SET	FV_SUPPORT_01_FIELD_R119		//サポート(ロード１１９)
+
+	_FLAG_SET	FV_WORKERW2_01_FIELD_C108		//トレーナー(祭壇前)
+	_FLAG_SET	FV_WORKERW2_02_FIELD_C108		//トレーナー(祭壇前)
+	_FLAG_SET	FV_DAIGO_01_FIELD_C108			//ダイゴ
+
+	_FLAG_SET	FV_MAYUMI_01_R114_R0201			//マユミ(ロード１１４)
+
+	_FLAG_SET	FV_MIDDLEM1_01_R110_R0101		//カラクリ大王
+
+	_FLAG_SET	FV_ALL_01_CAVE_D0701			//アクア、マグマ以外の人達
+
+	//カナシダトンネル
+	_FLAG_SET	FV_HAGI_01_CAVE_D0201			//ハギ
+	_FLAG_SET	FV_HAGI_01_FIELD_R116			//ハギ
+	_FLAG_SET	FV_POKEMON_01_CAVE_D0201		//ピーコ
+	_FLAG_SET	FV_AQUAM1_01_CAVE_D0201			//アクア団
+	_FLAG_SET	FV_FIGHTER1_01_CAVE_D0201		//トンネル男
+	_FLAG_SET	FV_WOMAN1_01_CAVE_D0201			//ミチル
+
+	//博物館
+	_FLAG_SET	FV_AQUABOSS_01_C102_R0502		//アクア団ボス
+	_FLAG_SET	FV_AQUAM1_01_C102_R0502			//アクア団
+	_FLAG_SET	FV_AQUAM1_02_C102_R0502			//アクア団
+	_FLAG_SET	FV_OBJ_ALL_C102_R0501			//ギャラリー
+
+	//バトルタワー
+	_FLAG_SET	FV_BATTLE_TOWER_TRAINER			//トレーナー
+	_FLAG_SET	FV_OWNER_01_PARK_BATTLE01		//オーナー
+
+	//ミシロ
+	_FLAG_SET	FV_MAMA_01_FIELD_T101			//母
+	_FLAG_SET	FV_MAMA_01_OPENING_ROOM02		//母
+
+	//お天気研究所
+	_FLAG_SET	FV_TENKI_01_R119_R0101			//１階の研究者達
+
+	//図鑑評価
+	_FLAG_SET	FV_ODAMAKI_HYOUKA_T101_R0301	//
+	_FLAG_SET	FV_ODAMAKI_HYOUKA_FIELD_R101	//
+	_FLAG_SET	FV_ODAMAKI_HYOUKA_FIELD_R103	//
+
+	//ミナモ船乗り場
+	_FLAG_SET	FV_SEAMAN1_01_C106_R0501		//船乗り
+
+	//南の孤島
+	_FLAG_SET	FV_DUMMY_01_PARK_KOKORO02		//ダミー
+	_FLAG_SET	FV_KOKORO_01_PARK_KOKORO02		//ラティアス・ラティオス
+
+	//おくりび山
+	_FLAG_SET	FV_TR_ALL_CAVE_D0803			//トレーナー
+
+	//キンセツ
+	_FLAG_SET	FV_TETTSUSEN_01_FIELD_C103		//テッセン
+
+	//チャンピオンの部屋
+	_FLAG_SET	FV_SUPPORT_01_C109_R0105		//サポート
+	_FLAG_SET	FV_ODAMAKI_01_C109_R0105		//オダマキ
+
+	//ロード１１０
+	_FLAG_SET	FV_SUPPORT_02_FIELD_R110		//サポート(自転車)
+
+	//ロード１１９
+	_FLAG_SET	FV_SUPPORT_02_FIELD_R119		//サポート(自転車)
+
+	//ミナミの民宿２F
+	_FLAG_SET	FV_GUEST_ALL_C106_R0102			//ミナモの民宿２Fのお客一括表示(ゲームクリアまで出さない）
+	//追加していく
+
+	//フエンタウン
+	_FLAG_SET	FV_SUPPORT_01_FIELD_T104		//サポート
+	_FLAG_SET	FV_SUPPORT_02_FIELD_T104		//サポート(自転車)
+
+	//ヒワマキタウン
+	_FLAG_SET	FV_POKE_01_C107_R0301			//鳥ポケモン
+
+	//流星の洞窟
+	_FLAG_SET	FV_MAGMA_ALL_CAVE_D0101			//マグマ団
+
+	//流行部屋
+	_FLAG_SET	FV_FREAK1_01_T103_R0301			//マニア
+
+	//ソライシ研究所
+	_FLAG_SET	FV_SORAISI_01_T105_R0201		//ソライシ博士
+
+	//ロード１２８
+	_FLAG_SET	FV_DAIGO_01_FIELD_R128			//ダイゴ
+	_FLAG_SET	FV_AQUABOSS_01_FIELD_R128		//アオギリ
+	_FLAG_SET	FV_MAGMABOSS_01_FIELD_R128		//マツブサ
+
+	//ロード１１６
+	_FLAG_SET	FV_WORKERM1_01_FIELD_R116		//研究員
+
+	//カイナ
+	_FLAG_SET	FV_SHOPM1_04_FIELD_C102			//店員
+
+	//チャンピオンロード
+	_FLAG_SET	FV_MITSURU_01_CAVE_D1301		//ミツル
+
+	//連絡船
+	_FLAG_SET	FV_HAGI_01_SP_SHIP01			//ハギ・ピーコ
+
+	//ダイゴの家
+	_FLAG_SET	FV_BALL_01_C107_R0501			//ダイコのモンスターボール
+	_FLAG_SET	FV_BALL1_133					//ダイビングのモンスターボール
+	_FLAG_SET	FV_NOTE_01_C107_R0501			//ダイコのノート
+
+	//コトキ
+	_FLAG_SET	FV_SUPPORT_01_FIELD_T102		//コトキのサポーター
+
+	//チャンピオンロード
+	_FLAG_SET	FV_MITSURU_02_CAVE_D1301		//ミツル(再戦)
+
+	//ロード１０１
+	_FLAG_SET	FV_BOY2_01_FIELD_R101			//少年
+
+
+
+//プレイアブルバージョン
+#ifdef PR_VER_ROM
+
+	_FLAG_SET	FV_POKE_01_FIELD_T105			//ポケモン
+
+#endif
+
+
+	//始めから花が咲いているもの
+	//きのみの種類は１から
+	//0はユーザーID(仮)
+	_CALL		kinomi_set						//kinomi.evに記述
+
+	_END
+
+
+/********************************************************************/
+//					ゲームクリア時に呼ばれる
+/********************************************************************/
+SCRIPT_LABEL	ev_flag_game_clear_set
+	_FLAG_RESET	FV_GUEST_ALL_C106_R0102	//ミナモの民宿２階
+	_CALL		ev_shiten_reset			//四天王のフラグを戻す
+	_FLAG_SET	FV_HAGI_01_C102_R0101	//造船所のハギを消す
+	_FLAG_RESET	FV_HAGI_01_SP_SHIP01	//連絡線のハギを出す
+
+	_FLAG_RESET	FV_NOTE_01_C107_R0501	//ダイコのノートを出す
+	_LDVAL		WK_SCENE_C107_R0501,1	//ダイゴの強制イベント終了させる
+
+	_FLAG_RESET	FV_MITSURU_02_CAVE_D1301//チャンピオンロードのミツル(再戦)を出す
+
+	//連絡船
+	_FLAG_RESET	FV_HISHIP1_01_C102_R0601
+	_FLAG_RESET	FV_HISHIP1_01_C106_R0501
+
+	_PROGRAM	FAN_START				//ファン企画スタート
+
+	//初めてクリアしたらパパイベントをセットする
+	_IF_FLAGOFF_CALL	FE_HUNENOTIKETTO_GET,scene_chg_t101_r0101
+
+	//移動ポケモンニュースフラグセット
+	_IF_FLAGOFF_CALL	FE_MOVE_POKE_WATCH,set_move_poke_news
+
+	//ダンバルゲットしていなかったら
+	_IF_FLAGOFF_CALL	FE_POKE1_01_C107_R0501,ev_poke_appear_c107_r0501
+
+	//秘伝マシン０８を取っていなかったら
+	_IF_FLAGOFF_CALL	FE_HWAZA08_GET,ev_ball_appear_c107_r0501
+	_RET
+
+//ダンバルゲットしていなかったら、ダンバルが入っているボール出現
+ev_poke_appear_c107_r0501:
+	_FLAG_RESET	FV_BALL_01_C107_R0501
+	_RET
+
+//秘伝マシン０８を取っていなかったら、ダイビングが入っているボール出現
+ev_ball_appear_c107_r0501:
+	_FLAG_RESET		FV_BALL1_133
+	_RET
+
+//初めてクリアしたらパパイベントをセットする
+scene_chg_t101_r0101:
+	_LDVAL		WK_SCENE_T101_R0101,3	//自宅パパイベント開始
+	_LDVAL		WK_SCENE_T101_R0201,3	//自宅パパイベント開始
+	_FLAG_RESET	FV_SENRI_01_T101_R0101	//センリ
+	_RET
+
+set_move_poke_news:
+	_FLAG_SET	SYS_MOVE_POKE_NEWS		//ニューススタート
+	_RET
+
+
+/********************************************************************/
+//					ゲームオーバー時に呼ばれる
+/********************************************************************/
+SCRIPT_LABEL	ev_flag_game_over_set
+	_CALL		ev_shiten_reset			//四天王のフラグを戻す
+
+	//フエンジムクリア後にフィールド出る前にゲームオーバーになったら
+	_CALL		ev_support_field_t104_reset
+
+	//注意 JUMPで呼んでいるので一番最後にする
+	_JUMP		ev_hagi_fune_reset		//ハギ老人の船の位置を戻す
+	_END
+
+//フエンジムクリア後にフィールド出る前にゲームオーバーになったら
+SCRIPT_LABEL	ev_support_field_t104_reset
+	//すでに「ゴーゴーゴーグル」入手していたら
+	_IF_FLAGON_JUMP	FE_GOOGURU_GET,ret_only_script
+
+	//まだフエンジムを攻略していなかったら
+	_IF_FLAGOFF_JUMP	FT_GYM_04_LEADER,ret_only_script
+
+	//シーンを切り替える
+	_FLAG_RESET		FV_SUPPORT_01_FIELD_T104
+	_LDVAL			WK_SCENE_FIELD_T104,2
+	_RET
+
+//ハギ老人の船の位置を戻す
+SCRIPT_LABEL	ev_hagi_fune_reset
+	_IFVAL_JUMP		WK_SCENE_FUNE_POS,EQ,1,reset_hune_pos_field_r104
+	_IFVAL_JUMP		WK_SCENE_FUNE_POS,EQ,2,reset_hune_pos_field_t103
+	_IFVAL_JUMP		WK_SCENE_FUNE_POS,EQ,3,reset_hune_pos_field_r109
+	_END
+
+//ロード１０４
+reset_hune_pos_field_r104:
+	_FLAG_SET		FV_HAGI_01_FIELD_T103
+	_FLAG_SET		FV_FUNE_01_FIELD_T103
+	_FLAG_SET		FV_HAGI_01_FIELD_R109
+	_FLAG_SET		FV_FUNE_01_FIELD_R109
+
+	_FLAG_RESET		FV_FUNE_01_FIELD_R104
+	_FLAG_RESET		FV_HAGI_01_R104_R0101
+	_FLAG_RESET		FV_POKEMON_01_R104_R0101
+	_END
+
+//ムロタウン
+reset_hune_pos_field_t103:
+	_FLAG_SET		FV_HAGI_01_FIELD_R109
+	_FLAG_SET		FV_FUNE_01_FIELD_R109
+	_FLAG_SET		FV_HAGI_01_FIELD_R104
+	_FLAG_SET		FV_FUNE_01_FIELD_R104
+	_FLAG_SET		FV_HAGI_01_R104_R0101
+	_FLAG_SET		FV_POKEMON_01_R104_R0101
+
+	_FLAG_RESET		FV_HAGI_01_FIELD_T103
+	_FLAG_RESET		FV_FUNE_01_FIELD_T103
+	_END
+
+//ロード１０９
+reset_hune_pos_field_r109:
+	_FLAG_SET		FV_HAGI_01_FIELD_R104
+	_FLAG_SET		FV_FUNE_01_FIELD_R104
+	_FLAG_SET		FV_HAGI_01_R104_R0101
+	_FLAG_SET		FV_POKEMON_01_R104_R0101
+	_FLAG_SET		FV_HAGI_01_FIELD_T103
+	_FLAG_SET		FV_FUNE_01_FIELD_T103
+
+	_FLAG_RESET		FV_HAGI_01_FIELD_R109
+	_FLAG_RESET		FV_FUNE_01_FIELD_R109
+	_END
+
+//四天王のフラグを戻す
+SCRIPT_LABEL	ev_shiten_reset
+	//倒したかフラグ
+	_FLAG_RESET		FT_SHITEN_01
+	_FLAG_RESET		FT_SHITEN_02
+	_FLAG_RESET		FT_SHITEN_03
+	_FLAG_RESET		FT_SHITEN_04
+
+	_LDVAL			WK_SCENE_POKE_LEAGUE,0
+	_RET
+
+
+/********************************************************************/
+//				ハギ老人の船の位置情報を更新する
+//
+//	t102-106	c101-c104のポケセンに入ったときに呼ばれる
+//
+//	ハギのバニッシュフラグ(ロード１０４に関しては船)を見て、
+//	現在ハギがどの位置にいるかを判断して、シーンを切り替える
+/********************************************************************/
+SCRIPT_LABEL	ev_hagi_fune_pos
+	//ポケギアを入手していなかったら何もしない
+	_IF_FLAGOFF_JUMP	FE_POKEGEAR_GET,ret_only_script
+
+	//トウカジムクリア後にハギのバニッシュフラグが
+	//たつので下の処理には入らないが一応
+	_IF_FLAGON_JUMP		FT_GYM_05_LEADER,ret_only_script
+
+	_IF_FLAGOFF_JUMP	FV_FUNE_01_FIELD_R104,scene_hune_pos_field_r104
+	_IF_FLAGOFF_JUMP	FV_HAGI_01_FIELD_T103,scene_hune_pos_field_t103
+	_IF_FLAGOFF_JUMP	FV_HAGI_01_FIELD_R109,scene_hune_pos_field_r109
+	_RET
+
+//ロード１０４
+scene_hune_pos_field_r104:
+	_LDVAL			WK_SCENE_FUNE_POS,1
+	_RET
+
+//ムロタウン
+scene_hune_pos_field_t103:
+	_LDVAL			WK_SCENE_FUNE_POS,2
+	_RET
+
+//ロード１０９
+scene_hune_pos_field_r109:
+	_LDVAL			WK_SCENE_FUNE_POS,3
+	_RET
+
+
+/********************************************************************/
+//				ジョーイさん(OBJ名pcwoman)
+/********************************************************************/
+SCRIPT_LABEL	ev_heal_p01
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_heal_p01
+	_IFVAL_JUMP		ANSWORK,EQ,1,_pc_kaifuku_yes
+	_IFVAL_JUMP		ANSWORK,EQ,0,_pc_kaifuku_no
+	_END
+
+//「はい」
+_pc_kaifuku_yes:
+	_INC_RECORD		CNT_KAIFUKU_PC	@ポケセンで回復した回数をカウント
+	_TALKMSG		msg_heal_p02
+	_TALK_WAIT
+
+	//左を向く
+	_SET_OBJ_ANIME	TMPWK3,turn_l_anime
+	_OBJ_ANIME_WAIT	
+
+	//ポケセン回復アニメセット
+	_SET_FLD_EFF	FECODE_PcRecover
+	_FLD_EFF_WAIT	FECODE_PcRecover
+
+	//下を向く
+	_SET_OBJ_ANIME	TMPWK3,turn_d_anime
+	_OBJ_ANIME_WAIT	
+
+	_PROGRAM		PC_KAIFUKU
+
+	//手持ちのポケモンの中にポケルスに感染しているポケモンがいるか
+	_IF_FLAGOFF_JUMP	FE_PC_POKERUS,ev_pc_pokerus_chk
+
+	_JUMP			ev_pc_kaihuku_after
+	_END
+
+//終了処理
+ev_pc_kaihuku_after:
+	_TALKMSG		msg_heal_p04
+	_TALK_WAIT
+
+	//おじぎをする
+	_SET_OBJ_ANIME	TMPWK3,pcwoman_bow_anime01
+	_OBJ_ANIME_WAIT	
+
+	_TALKMSG		msg_heal_p03
+	_RET
+
+//「いいえ」
+_pc_kaifuku_no:	
+	_TALKMSG		msg_heal_p03
+	_RET
+
+ev_pc_pokerus_chk:
+	_FUNC_CALL		ANSWORK,CHK_TEMOTI_POKERUS
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_pc_pokerus
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_pc_kaihuku_after
+	_END
+
+//手持ちのポケモンの中にポケルスに感染しているポケモンがいる
+ev_pc_pokerus:
+	_TALKMSG		msg_heal_pokerus
+	_FLAG_SET		FE_PC_POKERUS
+	_RET
+
+//-------
+//おじぎ
+//-------
+pcwoman_bow_anime01:
+	.byte	AC_PC_BOW
+	.byte	AC_WAIT_4
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//					アイテム取得共通イベント
+//
+//	PARAM3	成功か失敗か
+/********************************************************************/
+SCRIPT_LABEL	ev_item_event
+	_ADD_ITEM		RG0,RG1
+	_LDWK			PARAM3,ANSWORK						//保存
+	_CALL			ev_itemget_p01
+	_RET
+
+ev_itemget_p01:
+	_GET_ITEMNAME	1,RG0
+	_GET_POCKET_NO	RG0
+
+	_CALL			itemget_pocket_select
+
+	_IFVAL_CALL		PARAM3,EQ,TRUE,ev_itemget_p03	//成功
+	_IFVAL_CALL		PARAM3,EQ,FALSE,ev_itemget_p04	//失敗
+	_RET
+
+//ポケットを選ぶ
+itemget_pocket_select:
+	_SWITCH			ANSWORK
+	_CASEJUMP		NORMAL_POCKET,case1_normal_itemget		//normal
+	_CASEJUMP		IMPORTANT_POCKET,case2_important_itemget//important
+	_CASEJUMP		BALL_POCKET,case3_ball_itemget			//ball
+	_CASEJUMP		SKILL_POCKET,case4_skill_itemget		//skill
+	_CASEJUMP		SEED_POCKET,case5_cube_itemget			//seed
+	_END
+
+//効果音を選ぶ
+case1_normal_itemget:
+	_SET_BUF		2,DOUGU
+	_IFVAL_CALL		PARAM3,EQ,TRUE,set_mus_itemget_01
+	_RET
+
+case2_important_itemget:
+	_SET_BUF		2,TAISETUNAMONO
+	_IFVAL_CALL		PARAM3,EQ,TRUE,set_mus_itemget_01
+	_RET
+
+case3_ball_itemget:
+	_SET_BUF		2,BALL
+	_IFVAL_CALL		PARAM3,EQ,TRUE,set_mus_itemget_01
+	_RET
+
+case4_skill_itemget:
+	_SET_BUF		2,WAZAMACHINE
+	_IFVAL_CALL		PARAM3,EQ,TRUE,set_mus_itemget_02
+	_RET
+
+case5_cube_itemget:
+	_SET_BUF		2,KINOMI
+	_IFVAL_CALL		PARAM3,EQ,TRUE,set_mus_itemget_01
+	_RET
+
+//--------------------------------------------------------------------
+//							成功終了
+//--------------------------------------------------------------------
+ev_itemget_p03:
+	_TALKMSG		msg_itemget_p01
+	_JINGLE_WAIT
+
+	_TALK_KEYWAIT	msg_itemget_p05
+	_LDVAL			ANSWORK,TRUE
+	_RET
+
+//--------------------------------------------------------------------
+//							失敗終了
+//--------------------------------------------------------------------
+ev_itemget_p04:
+	//失敗
+	_LDVAL			ANSWORK,FALSE
+	_RET
+
+//--------------------------------------------------------------------
+//					成功だったら効果音鳴らす
+//--------------------------------------------------------------------
+set_mus_itemget_01:
+	_JINGLE			MUS_FANFA4
+	_RET
+
+set_mus_itemget_02:
+	_JINGLE			MUS_ME_WAZA
+	_RET
+
+/********************************************************************/
+//					グッズ取得共通イベント
+/********************************************************************/
+SCRIPT_LABEL	ev_goods_event
+	_ADD_GOODS		RG0
+	_LDWK			PARAM3,ANSWORK						//保存
+	_CALL			ev_goodsget_p01
+	_RET
+
+//--------------------------------------------------------------------
+//					グッズ取得メッセージ表示
+//--------------------------------------------------------------------
+SCRIPT_LABEL	ev_goodsget_p01
+	_GET_GOODSNAME	1,RG0
+
+	_IFVAL_CALL		PARAM3,EQ,TRUE,ev_goodsget_p03	//成功
+	_IFVAL_CALL		PARAM3,EQ,FALSE,ev_goodsget_p04	//失敗
+	_RET
+
+//--------------------------------------------------------------------
+//							成功終了
+//--------------------------------------------------------------------
+ev_goodsget_p03:
+
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_goodsget_p01
+	_JINGLE_WAIT
+
+	_TALK_KEYWAIT	msg_goodsget_p03
+
+	_LDVAL			ANSWORK,TRUE
+	_RET
+
+//--------------------------------------------------------------------
+//							失敗終了
+//--------------------------------------------------------------------
+ev_goodsget_p04:
+	//失敗
+	_LDVAL			ANSWORK,FALSE
+	_RET
+
+
+//********************************************************************
+//				フィールド上のモンスターボール
+//
+//	PARAM3	成功か失敗か
+//********************************************************************
+SCRIPT_LABEL	ev_fld_item_event
+	_TALK_OBJ_START
+
+	_SE_WAIT
+
+	_ADD_ITEM		RG0,RG1
+	_LDWK			PARAM3,ANSWORK
+
+	_GET_ITEMNAME	1,RG0
+	_GET_POCKET_NO	RG0
+
+	_CALL			itemget_pocket_select
+
+	_IFVAL_CALL		PARAM3,EQ,TRUE,ev_itemget_flditem_true		//成功
+	_IFVAL_CALL		PARAM3,EQ,FALSE,ev_itemget_flditem_false	//失敗
+	_TALK_OBJ_END
+	_RET
+
+//--------------------------------------------------------------------
+//							成功終了
+//--------------------------------------------------------------------
+ev_itemget_flditem_true:
+	_OBJ_DELETE		TARGET_OBJ
+
+	_TALKMSG		msg_itemget_p06
+	_JINGLE_WAIT
+
+	_TALK_KEYWAIT	msg_itemget_p05
+	_RET
+
+//--------------------------------------------------------------------
+//							失敗終了
+//--------------------------------------------------------------------
+ev_itemget_flditem_false:
+	_TALK_KEYWAIT	msg_itemget_p01
+	_TALK_KEYWAIT	msg_itemget_p07
+
+	//失敗
+	_LDVAL			ANSWORK,0
+
+	_RET
+
+
+/********************************************************************/
+//					隠しアイテム取得処理
+/********************************************************************/
+SCRIPT_LABEL	hide_item_script
+	_TALK_START
+
+	_SE_WAIT
+
+	_ADD_ITEM		PARAM1,1
+	_LDWK			PARAM3,ANSWORK
+
+	_GET_ITEMNAME	1,PARAM1
+	_GET_POCKET_NO	PARAM1
+
+	_CALL			itemget_pocket_select
+
+	_IFVAL_JUMP		PARAM3,EQ,TRUE,ev_itemget_hideitem_true		//成功
+	_IFVAL_JUMP		PARAM3,EQ,FALSE,ev_itemget_hideitem_false	//失敗
+	_END
+
+//--------------------------------------------------------------------
+//						隠しアイテム入手成功
+//--------------------------------------------------------------------
+ev_itemget_hideitem_true:
+	_TALKMSG		msg_itemget_p06
+	_JINGLE_WAIT
+
+	_TALK_KEYWAIT	msg_itemget_p05
+
+	//取得した
+	//フラグセットにワークを指定してはだめ
+	//_FLAG_SET	PARAM1
+
+	//PARAM0に入っている値のフラグナンバーをセットする
+	_PROGRAM		WK_FLAG_SET
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//						隠しアイテム入手失敗
+//--------------------------------------------------------------------
+ev_itemget_hideitem_false:
+	_TALK_KEYWAIT	msg_itemget_p06
+	_TALK_KEYWAIT	msg_itemget_p07
+
+	//失敗
+	_LDVAL			ANSWORK,0
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//					PC ２階のデータ交換の人
+/********************************************************************/
+SCRIPT_LABEL	ev_pccable_03_p01
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_mix_01
+	_IFVAL_JUMP	ANSWORK,EQ,1,_mix_yes
+	_IFVAL_JUMP	ANSWORK,EQ,0,_mix_no
+	_JUMP	_mix_no
+
+_mix_yes:			//「はい」
+	_PROGRAM	COMM_MIXER
+	_STOP_SCRIPT
+
+	_TALK_OBJ_START
+
+_mix_no:			//「いいえ」
+	_TALKMSG	msg_mix_02
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//					パソコンのインターフェイス
+/********************************************************************/
+SCRIPT_LABEL	paso_script
+	_TALK_START
+
+	//パソコンアニメ
+	_LDVAL			PARAM0,PASO_POKEMON_CENTER
+	_PROGRAM		ADD_PASO_ANIME
+	_SE				SE_PC_ON
+
+	_TALK_KEYWAIT	msg_paso_sw_on
+	_JUMP			select_paso_menu
+	_END
+
+//パソコンメニュー表示
+select_paso_menu:
+	_TALKMSG		msg_paso_start
+	_TALK_WAIT
+
+	_PROGRAM		PASO_MENU_WRITE
+	_STOP_SCRIPT
+	_JUMP			select_paso_menu2
+	_END
+
+select_paso_menu2:
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case1_paso_p01
+	_CASEJUMP		1,case0_paso_p01
+	_CASEJUMP		2,case3_paso_p01
+	_CASEJUMP		3,case2_paso_p01
+	_CASECANCEL		case2_paso_p01
+	_END
+
+//「＃のパソコン」
+case0_paso_p01:
+	_SE				SE_PC_LOGIN
+	_TALK_KEYWAIT	msg_paso_hero
+	_PROGRAM		GLOBAL_PC_MY_PC
+	_STOP_SCRIPT
+	_JUMP			select_paso_menu
+	_END
+
+//「だれかのパソコン」
+case1_paso_p01:
+	_SE				SE_PC_LOGIN
+	_IF_FLAGOFF_CALL	SYS_PASO_MAYUMI,dareka_paso_01
+	_IF_FLAGON_CALL		SYS_PASO_MAYUMI,mayumi_paso_01
+
+	_TALK_KEYWAIT	msg_paso_dareka2
+	_PROGRAM		PASO_BOX_MENU	/* パソコンインターフェイス起動 */
+	_STOP_SCRIPT					/* スクリプトをとめて制御を渡す */
+	_JUMP			select_paso_menu
+	_END
+
+dareka_paso_01:
+	_TALK_KEYWAIT	msg_paso_dareka
+	_RET
+
+mayumi_paso_01:
+	_TALK_KEYWAIT	msg_paso_mayumi
+	_RET
+
+//「スイッチをきる」またはBキャンセル
+case2_paso_p01:
+	_LDVAL			PARAM0,PASO_POKEMON_CENTER
+	_SE				SE_PC_OFF
+	_PROGRAM		DEL_PASO_ANIME
+	_TALK_END
+	_END
+
+//でんどういりを呼び出す
+case3_paso_p01:
+	//まだゲームクリアしてなかったら「スイッチをきる」またはBキャンセル
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR,case2_paso_p01
+
+	_SE				SE_PC_LOGIN
+
+	_PROGRAM		DENDOU_IRI
+	_STOP_SCRIPT
+
+	_JUMP			select_paso_menu2
+	_END
+
+
+/********************************************************************/
+//				フレンドリショップの看板のスクリプト	
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_fdshop_01
+	_EASY_MSG	msg_kanban_fdshop_01
+	_END
+
+
+/********************************************************************/
+//					ポケセンの看板のスクリプト	
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_pc_01
+	_EASY_MSG	msg_kanban_pc_01
+	_END
+
+
+/********************************************************************/
+//						簡易会話を呼ぶ
+/********************************************************************/
+SCRIPT_LABEL	ev_kaiwa_input_start
+	_FLD_FADE_BLACKOUT
+	_PROGRAM	KAIWA_INPUT
+	_FLD_FADE_BLACKIN
+	_RET
+
+
+/********************************************************************/
+//						父の位置を奥にする	
+/********************************************************************/
+SCRIPT_LABEL	papa_pos_change
+	_FLAG_RESET		FV_DANPEI_01_C101_R0201
+	_FLAG_SET		FE_BATCH_04_GET			//バッチを４つ取得した
+	_RET
+
+
+/********************************************************************/
+//					流行語を＠０にセットする
+//
+//	PARAM0 = 何番目の流行語か
+/********************************************************************/
+SCRIPT_LABEL	set_popword_buf0
+	_UPDATE_GAME_TIME		//ゲーム内時間＆関連フラグ更新
+	_LDVAL		PARAM0,0
+	_PROGRAM	SET_POPWORD
+	_RET
+
+
+/********************************************************************/
+//					船の場所ワークをクリアする
+/********************************************************************/
+SCRIPT_LABEL	ev_fune_pos_clear
+	_LDWK		TMPWK0,WK_SCENE_FUNE_POS		//保存
+	_LDVAL		WK_SCENE_FUNE_POS,0
+	_RET
+
+
+/********************************************************************/
+//					波乗りメッセージ
+/********************************************************************/
+SCRIPT_LABEL	naminori_use_msg
+	_WAZA_CHECK		WAZANO_NAMINORI
+	_IFVAL_JUMP		ANSWORK,EQ,6,_naminori_useless
+	_GET_NICKNAME	0,ANSWORK
+	_SET_FE_WORK	0,ANSWORK
+	_TALK_START	
+	_TALK_YES_NO	msg_naminori_use
+	_IFVAL_JUMP		ANSWORK,EQ,0,_naminori_not_use
+_naminori_use:
+	_TALK_KEYWAIT	msg_naminori_use_start
+	_SET_FLD_EFF	FECODE_HidenPokeSwim
+_naminori_not_use:
+	_TALK_END
+_naminori_useless:
+	_END
+
+
+/********************************************************************/
+//
+//						OBJCHRWORKセット
+//
+//	使用状況
+//	OBJCHRWORK1	 = サポート
+//	OBJCHRWORK2	 = 敵側の男(SAPPHIRE = AQUA)
+//	OBJCHRWORK3	 = 敵側の女
+//	OBJCHRWORK4	 = サポート自転車
+//	OBJCHRWORK5	 = 味方側の男(SAPPHIRE = MAGMA)
+//	OBJCHRWORK6	 = 味方側の女
+//	OBJCHRWORK7  = 敵側のボス(SAPPHIRE = アオギリ)
+//	OBJCHRWORK8  = 味方側のボス(SAPPHIRE = マツブサ)
+//	OBJCHRWORK9  = 超古代ポケモン(SAPPHIRE = カイオーガ)
+//	OBJCHRWORK10 = 超古代ポケモンシルエット(SAPPHIRE = カイオーガ)
+/********************************************************************/
+
+//--------------------------------------------------------------------
+//		主人公の性別を判断してOBJCHRWORKに反対の性別を入れる
+//				(サポートキャラのCHAR指定に使う)
+//--------------------------------------------------------------------
+set_support_char:
+	//主人公の性別を取得する
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,set_support_boy	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,set_support_girl	//女の子
+    _END
+
+//サポートキャラに女の子をセットする
+set_support_boy:
+	_LDVAL			OBJCHRWORK1,HEROINE
+    _RET
+
+//サポートキャラに男の子をセットする
+set_support_girl:
+	_LDVAL			OBJCHRWORK1,HERO
+	_RET
+
+//--------------------------------------------------------------------
+//		主人公の性別を判断してOBJCHRWORKに反対の性別を入れる
+//					自転車状態をセットする
+//				(サポートキャラのCHAR指定に使う)
+//--------------------------------------------------------------------
+set_support_cycle_char:
+	//主人公の性別を取得する
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,set_support_cycle_boy	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,set_support_cycle_girl	//女の子
+    _END
+
+//サポートキャラに女の子をセットする
+set_support_cycle_boy:
+	_LDVAL			OBJCHRWORK4,HINECYCLER
+    _RET
+
+//サポートキャラに男の子をセットする
+set_support_cycle_girl:
+	_LDVAL			OBJCHRWORK4,HEROCYCLER
+	_RET
+
+//--------------------------------------------------------------------
+//				アクア団のOBJCHRWORKセット
+//--------------------------------------------------------------------
+set_evil_char:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	//アクア団セット
+	_LDVAL			OBJCHRWORK2,AQUALM1
+	_LDVAL			OBJCHRWORK3,AQUALF1
+	_LDVAL			OBJCHRWORK5,MAGMAM1
+	_LDVAL			OBJCHRWORK6,MAGMAF1
+	_LDVAL			OBJCHRWORK7,AQUABOSS
+	_LDVAL			OBJCHRWORK8,MAGMABOSS
+#elif ( PM_VERSION == VERSION_RUBY )
+	//マグマ団セット
+	_LDVAL			OBJCHRWORK2,MAGMAM1
+	_LDVAL			OBJCHRWORK3,MAGMAF1
+	_LDVAL			OBJCHRWORK5,AQUALM1
+	_LDVAL			OBJCHRWORK6,AQUALF1
+	_LDVAL			OBJCHRWORK7,MAGMABOSS
+	_LDVAL			OBJCHRWORK8,AQUABOSS
+#endif
+	_RET
+
+//--------------------------------------------------------------------
+//				超古代ポケモンのOBJCHRWORKセット
+//--------------------------------------------------------------------
+set_kodai_char:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	//カイオーガセット
+	_LDVAL			OBJCHRWORK9,KAIOGA
+	_LDVAL			OBJCHRWORK10,KAIOGAMC
+#elif ( PM_VERSION == VERSION_RUBY )
+	//グラードンセット
+	_LDVAL			OBJCHRWORK9,GURADON
+	_LDVAL			OBJCHRWORK10,GURADONMC
+#endif
+	_RET
+
+
+/********************************************************************/
+//ジムリーダーを倒したら、ジム内の全てのトレーナーのフラグをonにする
+/********************************************************************/
+SCRIPT_LABEL	gym_trainer_all_flagon
+	_SWITCH			TMPWK0
+	_CASEJUMP		1,case1_trainer_all_flagon
+	_CASEJUMP		2,case2_trainer_all_flagon
+	_CASEJUMP		3,case3_trainer_all_flagon
+	_CASEJUMP		4,case4_trainer_all_flagon
+	_CASEJUMP		5,case5_trainer_all_flagon
+	_CASEJUMP		6,case6_trainer_all_flagon
+	_CASEJUMP		7,case7_trainer_all_flagon
+	_CASEJUMP		8,case8_trainer_all_flagon
+	_END
+
+//カナズミ
+case1_trainer_all_flagon:
+	_TR_FLAG_SET	TANPAN_03
+	_TR_FLAG_SET	TANPAN_04
+	_RET
+
+//ムロ
+case2_trainer_all_flagon:
+	_TR_FLAG_SET	KARATE_01
+	_TR_FLAG_SET	BATTLEG_01
+	_TR_FLAG_SET	BATTLEG_02
+	_RET
+
+//キンセツ
+case3_trainer_all_flagon:
+	_TR_FLAG_SET	GUITARIST_01
+	_TR_FLAG_SET	GUITARIST_04
+	_TR_FLAG_SET	TANPAN_06
+	_TR_FLAG_SET	BATTLEG_11
+	_RET
+
+//フエン
+case4_trainer_all_flagon:
+	_TR_FLAG_SET	CAMPF_01
+	_TR_FLAG_SET	CAMPF_03
+	_TR_FLAG_SET	CAMPF_05
+	_TR_FLAG_SET	ELITEM_19
+	_TR_FLAG_SET	BATTLEG_10
+	_RET
+
+//トウカ
+case5_trainer_all_flagon:
+	_TR_FLAG_SET	ELITEM_01
+	_TR_FLAG_SET	ELITEM_02
+	_TR_FLAG_SET	ELITEM_03
+	_TR_FLAG_SET	ELITEM_04
+	_TR_FLAG_SET	ELITEW_01
+	_TR_FLAG_SET	ELITEW_02
+	_TR_FLAG_SET	ELITEW_03
+	_RET
+
+//ヒワマキ
+case6_trainer_all_flagon:
+	_TR_FLAG_SET	BIRD_04
+	_TR_FLAG_SET	CAMPB_13
+	_TR_FLAG_SET	PICNICG_13
+	_TR_FLAG_SET	BIRD_07
+	_RET
+
+//トクサネ
+case7_trainer_all_flagon:
+	_TR_FLAG_SET	ESPM_02
+	_TR_FLAG_SET	ESPM_03
+	_TR_FLAG_SET	ESPM_04
+	_TR_FLAG_SET	ESPW_02
+	_TR_FLAG_SET	ESPW_03
+	_TR_FLAG_SET	ESPW_04
+	_RET
+
+//ルネ
+case8_trainer_all_flagon:
+	_TR_FLAG_SET	MINI_11
+	_TR_FLAG_SET	MINI_12
+	_TR_FLAG_SET	PRINCESS_05
+	_TR_FLAG_SET	SEXYW_05
+	_TR_FLAG_SET	SEXYW_06
+	_TR_FLAG_SET	SEXYW_07
+	_TR_FLAG_SET	SEXYW_08
+	_TR_FLAG_SET	DAISUKIW_03
+	_RET
+
+/********************************************************************/
+//					共通アイテム取得失敗処理
+/********************************************************************/
+ev_fail_item:
+	_TALK_KEYWAIT	msg_itemget_p07
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//					共通アイテム取得失敗処理(return版)
+/********************************************************************/
+ev_fail_item_ret:
+	_TALK_KEYWAIT	msg_itemget_p07
+	_RET
+
+/********************************************************************/
+//					共通グッズ取得失敗処理
+/********************************************************************/
+ev_fail_goods:
+	_TALK_KEYWAIT	msg_goodsget_p02
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//					共通グッズ取得失敗処理(return版)
+/********************************************************************/
+ev_fail_goods_ret:
+	_TALK_KEYWAIT	msg_goodsget_p02
+	_RET
+
+/********************************************************************/
+//						カイオーガの大雨
+/********************************************************************/
+//BGM、天候のセット
+ctrl_weather_thunder:
+	//BGMに関してはシステムでもっている
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_SET_WEATHER	ID_WEATHER_HEAVYRAIN
+#elif ( PM_VERSION == VERSION_RUBY )
+	_SET_WEATHER	ID_WEATHER_SHINE3
+#endif
+	_RET
+
+
+/********************************************************************/
+//					リーダーのジングルセット
+/********************************************************************/
+SCRIPT_LABEL	leader_jingle_set
+	_JINGLE			MUS_ME_BACHI
+	_JINGLE_WAIT
+	_RET
+
+
+/********************************************************************/
+//					回復（共通）
+/********************************************************************/
+SCRIPT_LABEL	normal_kaifuku
+	_FLD_FADE_BLACKOUT
+	_JINGLE			MUS_ME_ASA	
+	_JINGLE_WAIT
+
+	_PROGRAM		PC_KAIFUKU
+	_FLD_FADE_BLACKIN
+	_RET
+
+
+/********************************************************************/
+//						タウンマップ呼び出し
+/********************************************************************/
+SCRIPT_LABEL	town_map_script
+	_TALK_START
+
+    _TALK_KEYWAIT	msg_chizu1_01_p01_t101_r0102
+
+	//タウンマップ呼び出し
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		TOWN_MAP
+	_STOP_SCRIPT
+
+	_TALK_END
+    _END
+
+
+/********************************************************************/
+//						ハギ船のBGMセット
+/********************************************************************/
+SCRIPT_LABEL	set_hagi_fune_bgm
+	//マップ遷移のタイミングでのBGM変更を無効にする
+	_FLAG_SET		CTRL_BGM_CHANGE
+	_BGM_SET		MUS_M_BOAT,0
+	_RET
+
+//ハギ船のBGMリセット
+SCRIPT_LABEL	reset_hagi_fune_bgm
+	//マップ遷移のタイミングでのBGM変更を有効にする
+	_FLAG_RESET		CTRL_BGM_CHANGE
+	_BGM_NOW_SET	
+	_RET
+
+
+/********************************************************************/
+//						図鑑評価オダマキ表示
+/********************************************************************/
+SCRIPT_LABEL	chk_odamaki_hyouka
+	//まだトウカジムに行ってなかったら
+	_IFVAL_JUMP		WK_SCENE_C101_R0201,EQ,0,ret_only_script
+
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,0,odamaki_hyouka_01
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,1,odamaki_hyouka_01
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,2,odamaki_hyouka_02
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,3,odamaki_hyouka_02
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,4,odamaki_hyouka_03
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,5,odamaki_hyouka_03
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,6,odamaki_hyouka_01
+	_IFVAL_CALL		WK_HYOUKA_DAYS,EQ,7,odamaki_hyouka_01
+    _RET
+
+//オダマキ研究所
+odamaki_hyouka_01:
+	_FLAG_RESET		FV_ODAMAKI_01_T101_R0301
+	_FLAG_RESET		FV_ODAMAKI_HYOUKA_T101_R0301
+	_FLAG_SET		FV_ODAMAKI_HYOUKA_FIELD_R101
+	_FLAG_SET		FV_ODAMAKI_HYOUKA_FIELD_R103
+	_RET
+
+//r101
+odamaki_hyouka_02:
+	_FLAG_RESET		FV_ODAMAKI_HYOUKA_FIELD_R101
+	_FLAG_SET		FV_ODAMAKI_01_T101_R0301
+	_FLAG_SET		FV_ODAMAKI_HYOUKA_T101_R0301
+	_FLAG_SET		FV_ODAMAKI_HYOUKA_FIELD_R103
+	_RET
+
+//r103
+odamaki_hyouka_03:
+	_FLAG_RESET		FV_ODAMAKI_HYOUKA_FIELD_R103
+	_FLAG_SET		FV_ODAMAKI_HYOUKA_FIELD_R101
+	_FLAG_SET		FV_ODAMAKI_01_T101_R0301
+	_FLAG_SET		FV_ODAMAKI_HYOUKA_T101_R0301
+	_RET
+
+
+/********************************************************************/
+//							図鑑評価
+//
+//	TMPWK0	=	見つけた数
+//	TMPWK1	=	捕まえた数
+//	TMPWK2	=	ホウエン図鑑か全国図鑑か？
+//
+/********************************************************************/
+SCRIPT_LABEL	ev_odamaki_01_p01_zukan
+	_TALK_OBJ_START
+
+	_TALK_YES_NO	msg_odamaki_01_p00_zukan
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_odamaki_01_p01_zukan
+
+	_CALL			ev_zukan_hyouka
+
+	_TALK_OBJ_END
+	_END
+
+//評価してもらわない
+no_odamaki_01_p01_zukan:
+	_TALK_KEYWAIT	msg_odamaki_01_p01_zukan
+	_TALK_OBJ_END
+	_END
+
+//評価メッセージ表示
+ev_hyouka_msg_set:
+	_LDWK			PARAM0,TMPWK1
+	_PROGRAM		SET_HYOUKA_MSG
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_RET
+
+ev_zukan_hyouka:
+	//ホウエン図鑑
+	_LDVAL			PARAM0,0
+	_FUNC_CALL		ANSWORK,GET_ZUKAN_NUM
+	_LDWK			TMPWK0,PARAM1	//@0みつけた数
+	_LDWK			TMPWK1,PARAM2	//@0つかまえた数
+	_LDWK			TMPWK2,ANSWORK	//ホウエン図鑑か全国図鑑か？
+	_GET_NUM_MSG	0,TMPWK0
+	_GET_NUM_MSG	1,TMPWK1
+	_TALK_KEYWAIT	msg_odamaki_01_p02_zukan
+	
+	//評価メッセージ表示
+	_CALL			ev_hyouka_msg_set
+
+	//全国図鑑ではなかったらここまで
+	_IFVAL_JUMP		TMPWK2,EQ,FALSE,ret_only_script
+
+	//全国図鑑
+	_LDVAL			PARAM0,1
+	_FUNC_CALL		ANSWORK,GET_ZUKAN_NUM
+	_LDWK			TMPWK0,PARAM1	//@0みつけた数
+	_LDWK			TMPWK1,PARAM2	//@0つかまえた数
+	_GET_NUM_MSG	0,TMPWK0
+	_GET_NUM_MSG	1,TMPWK1
+	_TALK_KEYWAIT	msg_odamaki_01_p20_zukan
+	_RET
+
+
+/********************************************************************/
+//							出港デモ
+//
+//	PARAM0	=	OBJ指定
+/********************************************************************/
+SCRIPT_LABEL	ev_departure_demo
+	_TIME_WAIT		60
+
+	_SET_OBJ_ANIME	PARAM0,departure_demo_anime01
+	_OBJ_ANIME_WAIT	
+	_RET
+
+//--------------------------------------------------------------------
+//船	出港(右へ)						
+//--------------------------------------------------------------------
+departure_demo_anime01:
+	.byte	AC_WALK_R_05
+	.byte	AC_WALK_R_05
+	.byte	AC_WALK_R_05
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//			トウカジムでバッチ取得のタイミングでハギを消す
+/********************************************************************/
+ev_hagi_del:
+	//トウカ、ムロ、カイナ、自宅のハギ老人と船を消す
+	_FLAG_SET		FV_HAGI_01_FIELD_T103
+	_FLAG_SET		FV_FUNE_01_FIELD_T103
+	_FLAG_SET		FV_HAGI_01_FIELD_R109
+	_FLAG_SET		FV_FUNE_01_FIELD_R109
+	_FLAG_SET		FV_HAGI_01_FIELD_R104
+	_FLAG_SET		FV_FUNE_01_FIELD_R104
+	_FLAG_SET		FV_HAGI_01_R104_R0101
+	_FLAG_SET		FV_POKEMON_01_R104_R0101
+	_LDVAL			WK_SCENE_FUNE_POS,0
+	_RET
+
+
+/********************************************************************/
+//					カナシダトンネル開通処理
+/********************************************************************/
+//シーン切り替え
+kanasida_kaitsuu_flag_set:
+	_OBJ_DELETE		FIGHTER1_01_CAVE_D0201
+	_OBJ_DELETE		WOMAN1_01_CAVE_D0201
+	_FLAG_RESET		FV_FIGHTER1_01_T106_R0201		//療養所にいるトンネル男を出す
+	_FLAG_RESET		FV_WOMAN1_01_T106_R0201			//療養所にいるミチルを出す
+	_LDVAL			WK_SCENE_CAVE_D0201,6			//開通した
+	_FLAG_SET		FE_KANASIDA_GO					//開通した
+	_RET
+
+
+/********************************************************************/
+//							上陸処理
+//
+//						上に一歩進み上陸する
+/********************************************************************/
+ev_hiship_arrive_01:
+	_TIME_WAIT		30
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_VISIBLE	EV_OBJ_SPID,0,0
+	_TIME_WAIT		30
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hiship_arrive_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+	_RET
+
+//--------------------------------------------------------------------
+//							降りる
+//--------------------------------------------------------------------
+hiship_arrive_anime01:
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+/********************************************************************/
+//							出港処理
+//
+//						下に一歩進み出港する
+/********************************************************************/
+ev_hiship_arrive_02:
+	//船に乗り込む
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,site_d_hero_park_kokoro01_anime01
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,site_l_hero_park_kokoro01_anime01
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	EV_OBJ_SPID,0,0
+
+	_CALL			ev_departure_demo
+	_RET
+
+
+/********************************************************************/
+//							鳴き声(POS)
+/********************************************************************/
+SCRIPT_LABEL	voice_kodai_pokemon
+	_TALK_START
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_VOICE_PLAY		MONSNO_KAIOOGA,2
+#elif ( PM_VERSION == VERSION_RUBY )
+	_VOICE_PLAY		MONSNO_GURAADON,2
+#endif
+
+	_VOICE_WAIT
+	_LDVAL			LOCALWORK5,1
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//							画面揺らし(POS)
+/********************************************************************/
+SCRIPT_LABEL	shake_kodai_pokemon_01
+	_TALK_START
+	_LDVAL			LOCALWORK1,1
+	_JUMP			ev_shake_kodai_pokemon
+	_END
+
+SCRIPT_LABEL	shake_kodai_pokemon_02
+	_TALK_START
+	_LDVAL			LOCALWORK2,1
+	_JUMP			ev_shake_kodai_pokemon
+	_END
+
+SCRIPT_LABEL	shake_kodai_pokemon_03
+	_TALK_START
+	_LDVAL			LOCALWORK3,1
+	_JUMP			ev_shake_kodai_pokemon
+	_END
+
+ev_shake_kodai_pokemon:
+	//揺れ幅最小
+	_LDVAL			PARAM0,1
+	_LDVAL			PARAM1,1
+
+	_PROGRAM		KODAI_POKE_SHAKE
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//すでにイベント終了しているなら、POSを発動しないようにする
+ev_kodai_pokemon_end:
+	_LDVAL			LOCALWORK1,1
+	_LDVAL			LOCALWORK2,1
+	_LDVAL			LOCALWORK3,1
+	_LDVAL			LOCALWORK4,1
+	_LDVAL			LOCALWORK5,1
+	_RET
+
+
+/********************************************************************/
+//							マルマイン
+/********************************************************************/
+SCRIPT_LABEL	ev_marumain_script
+	_TALK_OBJ_START
+
+	_WILD_FIGHT_SET	MONSNO_MARUMAIN,30,0
+	_VOICE_PLAY		MONSNO_MARUMAIN,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	//通常戦闘なので負けてもOBJを消す
+	_FLAG_SET		FV_MARUMAIN_01
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							マルマイン
+/********************************************************************/
+SCRIPT_LABEL	ev_marumain_script_02
+	_TALK_OBJ_START
+
+	_WILD_FIGHT_SET	MONSNO_MARUMAIN,30,0
+	_VOICE_PLAY		MONSNO_MARUMAIN,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	//通常戦闘なので負けてもOBJを消す
+	_FLAG_SET		FV_MARUMAIN_02
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							カクレオン								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kakure_02_p01_field_r120
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,1
+	_JUMP			common_kakure_script
+	_END
+
+SCRIPT_LABEL	ev_kakure_03_p01_field_r120
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,2
+	_JUMP			common_kakure_script
+	_END
+
+SCRIPT_LABEL	ev_kakure_04_p01_field_r120
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,3
+	_JUMP			common_kakure_script
+	_END
+
+SCRIPT_LABEL	ev_kakure_05_p01_field_r120
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,4
+	_JUMP			common_kakure_script
+	_END
+
+SCRIPT_LABEL	ev_kakure_06_p01_field_r120
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,5
+	_JUMP			common_kakure_script
+	_END
+
+SCRIPT_LABEL	ev_kakure_01_p01_field_r119
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,6
+	_JUMP			common_kakure_script
+	_END
+
+SCRIPT_LABEL	ev_kakure_02_p01_field_r119
+	_TALK_OBJ_START
+	_LDVAL			PARAM0,7
+	_JUMP			common_kakure_script
+	_END
+
+//共通処理
+//共通処理
+//共通処理
+common_kakure_script:
+	//デボンスコープをもっているか
+	_CHECK_ITEM		ITEM_DEBONSUKOOPU,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_kakure_02_p02_field_r120
+
+	_TALK_KEYWAIT	msg_kakure_01_p01_field_r120
+	_TALK_OBJ_END
+	_END
+
+//デボンスコープをもっている
+ev_kakure_02_p02_field_r120:
+	_TALK_YES_NO	msg_kakure_01_p02_field_r120
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_kakure_02_p03_field_r120
+	_TALK_OBJ_END
+	_END
+
+//デボンスコープを使う
+ev_kakure_02_p03_field_r120:
+	_TALK_KEYWAIT	msg_kakure_01_p03_field_r120
+	_TALK_CLOSE
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//姿をあらわす
+	_SET_OBJ_ANIME	TARGET_OBJ,kakure_appear_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_VOICE_PLAY		MONSNO_KAKUREON,2
+
+	_TIME_WAIT		40
+	_VOICE_WAIT
+
+	_WILD_FIGHT_SET	MONSNO_KAKUREON,30,0
+
+	//通常戦なので負けてもOBJが消えているようにする
+	_IFVAL_CALL		PARAM0,EQ,1,case1_kakure_flag_on
+	_IFVAL_CALL		PARAM0,EQ,2,case2_kakure_flag_on
+	_IFVAL_CALL		PARAM0,EQ,3,case3_kakure_flag_on
+	_IFVAL_CALL		PARAM0,EQ,4,case4_kakure_flag_on
+	_IFVAL_CALL		PARAM0,EQ,5,case5_kakure_flag_on
+	_IFVAL_CALL		PARAM0,EQ,6,case6_kakure_flag_on
+	_IFVAL_CALL		PARAM0,EQ,7,case7_kakure_flag_on
+
+	_FLAG_SET		SYS_CTRL_OBJ_DELETE
+	_WILD_FIGHT_START
+	_FLAG_RESET		SYS_CTRL_OBJ_DELETE
+
+	_TALK_OBJ_END
+	_END
+
+case1_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_02_FIELD_R120
+	_RET
+
+case2_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_03_FIELD_R120
+	_RET
+
+case3_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_04_FIELD_R120
+	_RET
+
+case4_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_05_FIELD_R120
+	_RET
+
+case5_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_06_FIELD_R120
+	_RET
+
+case6_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_01_FIELD_R119
+	_RET
+
+case7_kakure_flag_on:
+	_FLAG_SET		FV_KAKURE_02_FIELD_R119
+	_RET
+
+//--------------------------------------------------------------------
+//カクレオン	姿をあらわす
+//--------------------------------------------------------------------
+kakure_appear_anime:
+	.byte	AC_VANISH_OFF	//
+	.byte	AC_WAIT_4	//
+	.byte	AC_VANISH_ON	//
+	.byte	AC_WAIT_4	//
+	.byte	AC_VANISH_OFF	//
+	.byte	AC_WAIT_4	//
+	.byte	AC_VANISH_ON	//
+	.byte	AC_WAIT_4	//
+
+	.byte	AC_VANISH_OFF	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_VANISH_ON	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_VANISH_OFF	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_VANISH_ON	//
+	.byte	AC_WAIT_8	//
+
+	.byte	AC_VANISH_OFF	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_VANISH_ON	//
+	.byte	AC_WAIT_16	//
+
+	.byte	AC_VANISH_OFF	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//				新規ポケモン取得時のニックネーム処理
+//
+//変更する前のニックネームを＠２に格納して、NameIn呼び出す(＠１も使用している)
+/********************************************************************/
+SCRIPT_LABEL	ev_new_poke_nick_name_script
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		CHANGE_NICKNAME
+	_STOP_SCRIPT
+	_RET
+
+
+/********************************************************************/
+//					アイテムを渡す効果音処理
+/********************************************************************/
+SCRIPT_LABEL	ev_item_return
+	_GET_ITEMNAME	0,PARAM0
+	_JINGLE			MUS_ITEM_RETURN
+	_TALKMSG		msg_item_return
+	_TALK_WAIT
+	_JINGLE_WAIT
+	_SUB_ITEM		PARAM0,1
+	_RET
+
+
+/********************************************************************/
+//					ポケモンリーグ共通処理01
+//
+//					勝利した後のドアが開く処理
+/********************************************************************/
+#define C109_R0101_CELL_CODE01	(518)
+#define C109_R0101_CELL_CODE02	(526)
+#define C109_R0101_CELL_CODE03	(836)
+#define C109_R0101_CELL_CODE04	(837)
+
+SCRIPT_LABEL	ev_league_common01
+	//間を置けてドアを開ける
+	_SET_OBJ_ANIME	EV_OBJ_SPID,league_wait_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//ドアを開ける
+	_SE				SE_DOOR
+	_SET_CELL		6,1,C109_R0101_CELL_CODE03,0
+	_SET_CELL		6,2,C109_R0101_CELL_CODE04,0
+
+	//壁書き換える
+	_SET_CELL		0,2,734,1
+	_SET_CELL		1,2,733,1
+	_SET_CELL		2,2,734,1
+	_SET_CELL		3,2,733,1
+	_SET_CELL		4,2,734,1
+
+	_SET_CELL		8,2,733,1
+	_SET_CELL		9,2,734,1
+	_SET_CELL		10,2,733,1
+	_SET_CELL		11,2,734,1
+	_SET_CELL		12,2,733,1
+
+	_PROGRAM		MAKE_MAP_BG
+	_RET
+
+/********************************************************************/
+//					ポケモンリーグ共通処理02
+//
+//				部屋に入ってオートで四天王の前に移動する
+/********************************************************************/
+SCRIPT_LABEL	ev_league_common02
+	//主人公部屋に入る
+	_SET_OBJ_ANIME	EV_OBJ_SPID,league_start_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SE				SE_TRACK_DOOR
+
+	//ドアを閉める
+	_SET_CELL		5,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		6,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		7,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		5,13,C109_R0101_CELL_CODE02,1
+	_SET_CELL		6,13,C109_R0101_CELL_CODE02,1
+	_SET_CELL		7,13,C109_R0101_CELL_CODE02,1
+
+	_PROGRAM		MAKE_MAP_BG
+	_RET
+
+/********************************************************************/
+//					ポケモンリーグ共通処理03
+//
+//					下のドア(壁を閉める)
+/********************************************************************/
+SCRIPT_LABEL	ev_league_common03
+	//ドアを開ける
+	_SET_CELL		6,1,C109_R0101_CELL_CODE03,0
+	_SET_CELL		6,2,C109_R0101_CELL_CODE04,0
+
+	//ドアを閉める
+	_SET_CELL		5,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		6,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		7,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		5,13,C109_R0101_CELL_CODE02,1
+	_SET_CELL		6,13,C109_R0101_CELL_CODE02,1
+	_SET_CELL		7,13,C109_R0101_CELL_CODE02,1
+
+	//壁書き換える
+	_SET_CELL		0,2,734,1
+	_SET_CELL		1,2,733,1
+	_SET_CELL		2,2,734,1
+	_SET_CELL		3,2,733,1
+	_SET_CELL		4,2,734,1
+
+	_SET_CELL		8,2,733,1
+	_SET_CELL		9,2,734,1
+	_SET_CELL		10,2,733,1
+	_SET_CELL		11,2,734,1
+	_SET_CELL		12,2,733,1
+	_RET
+
+/********************************************************************/
+//					ポケモンリーグ共通処理04
+//
+//	強制移動が終了した後に(四天王倒す前に)電源を切った時の復帰処理
+/********************************************************************/
+SCRIPT_LABEL	ev_league_common04
+	//ドアを閉める
+	_SET_CELL		5,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		6,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		7,12,C109_R0101_CELL_CODE01,1
+	_SET_CELL		5,13,C109_R0101_CELL_CODE02,1
+	_SET_CELL		6,13,C109_R0101_CELL_CODE02,1
+	_SET_CELL		7,13,C109_R0101_CELL_CODE02,1
+	_RET
+
+
+/********************************************************************/
+//						共通アニメーション
+/********************************************************************/
+
+//--------------------------------------------------------------------
+//						「？」マーク表示
+//--------------------------------------------------------------------
+hatena_mark_anime:
+	.byte	AC_MARK_HATENA
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//						「！」マーク表示
+//--------------------------------------------------------------------
+gyoe_mark_anime:
+	.byte	AC_MARK_GYOE
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//						「！」マーク表示ウェイト
+//--------------------------------------------------------------------
+gyoe_mark_wait_anime:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//						主人公の方に向く
+//			_SET_OBJ_ANIME	???,turn_hero_site_anime
+//--------------------------------------------------------------------
+turn_hero_site_anime:
+	.byte	AC_TURN_HERO_SITE
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//						主人公の逆を向く
+//			_SET_OBJ_ANIME	???,turn_rev_hero_site_anime
+//--------------------------------------------------------------------
+turn_rev_hero_site_anime:
+	.byte	AC_TURN_REV_HERO_SITE
+	.byte	ACMD_END
+
+//---------------------------------------------------------------
+//						元の向きに戻す
+//			_SET_OBJ_ANIME	???,default_site_anime
+//---------------------------------------------------------------
+default_site_anime:
+	.byte	AC_DEFAULT_SITE
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//左を向く
+//--------------------------------------------------------------------
+turn_l_anime:	
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//上を向く
+//--------------------------------------------------------------------
+turn_u_anime:	
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//右を向く
+//--------------------------------------------------------------------
+turn_r_anime:	
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//下を向く
+//--------------------------------------------------------------------
+turn_d_anime:	
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//部屋に入る(ポケモンリーグ共通)
+//--------------------------------------------------------------------
+league_start_anime01:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//部屋に入る(ポケモンリーグ共通・チャンピオンの部屋)
+//--------------------------------------------------------------------
+league_start_anime02:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//部屋に入る(ポケモンリーグ共通)
+//--------------------------------------------------------------------
+league_wait_anime01:	
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//部屋に入る(１歩、民家など)
+//--------------------------------------------------------------------
+walk_u_anime01:	
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//部屋に入る(２歩、民家など)
+//--------------------------------------------------------------------
+walk_u_anime02:	
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//							ＢＧスクリプト
+/********************************************************************/
+//小さい本棚(青い本棚)
+SCRIPT_LABEL	ev_bookrack_01
+	_EASY_MSG		msg_bookrack_01
+	_END
+
+//大きい本棚(民家の本棚)
+SCRIPT_LABEL	ev_bookrack_02
+	_EASY_MSG		msg_bookrack_02
+	_END
+
+//大きい本棚(ＰＣの本棚)
+SCRIPT_LABEL	ev_bookrack_03
+	_EASY_MSG		msg_bookrack_03
+	_END
+
+//つぼ
+SCRIPT_LABEL	ev_pot_01
+	_EASY_MSG		msg_pot_01
+	_END
+
+//ゴミ箱
+SCRIPT_LABEL	ev_trashbox_01
+	_EASY_MSG		msg_trashbox_01
+	_END
+
+//デパート・ショップの棚
+SCRIPT_LABEL	ev_glasscase_01
+	_EASY_MSG		msg_glasscase_01
+	_END
+
+//設計図
+SCRIPT_LABEL	ev_blueprint_01
+	_EASY_MSG		msg_blueprint_01
+	_END
+
+
+#include	"common.mes"
+#include	"common2.mes"
+
+
+//--------------------------------------------------------------------
+//	便利ボタンに登録されていない場合の処理 2002/08/02 by nakhiro
+//--------------------------------------------------------------------
+.GLOBAL benri_button_no_item
+
+benri_button_no_item:
+	_EASY_MSG	msg_benri_item_no
+	_END
+
+
+/********************************************************************/
+//	毒による瀕死状態
+/********************************************************************/
+
+//---------------------------------------------------------------
+//	『ちからつきた』メッセージ表示
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_poison_dead
+	_TALK_START
+	_PROGRAM		POISON_MSG
+	_STOP_SCRIPT
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_game_over
+	_TALK_END
+	_END
+
+
+//---------------------------------------------------------------
+//	『めのまえがまっくらになった』メッセージ表示
+//---------------------------------------------------------------
+SCRIPT_LABEL	ev_game_over
+
+	_TALKMSG			msg_all_dead
+	_TALK_WAIT
+	_AB_KEYWAIT
+
+	_PROGRAM			BGM_FADEOUT_END		//BGMフェードアウト→終了呼び出し
+	_STOP_SCRIPT
+
+	_FLD_FADE_BLACKOUT
+
+	_PROGRAM			GAME_OVER
+	_STOP_SCRIPT
+	_END
+
+
+/********************************************************************/
+//					RETのみ(共通で使用している)
+/********************************************************************/
+ret_only_script:
+	_RET
+
+

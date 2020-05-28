@@ -1,0 +1,135 @@
+//====================================================================
+//						sp_ship03
+//						連絡船（船室）
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START sp_ship03_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						マニア	
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_sp_ship03
+	_TALK_OBJ_START
+	_IF_FLAGON_JUMP	FE_WAZAM49_GET,ev_freak1_01_p02_sp_ship03
+
+	_TALK_KEYWAIT	msg_freak1_01_p01_sp_ship03
+
+	_ITEM_EVENT		ITEM_WAZAMASIN49,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM49_GET
+
+	_TALK_KEYWAIT	msg_freak1_01_p02_sp_ship03
+	_TALK_OBJ_END
+	_END
+
+//入手後
+ev_freak1_01_p02_sp_ship03:
+	_TALK_KEYWAIT	msg_freak1_01_p02_sp_ship03
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							ベッド
+/********************************************************************/
+SCRIPT_LABEL	ev_bed_01_p01_sp_ship03
+	_TALK_START
+
+	_TALK_KEYWAIT	msg_bed_01_p01_sp_ship03
+	_TALK_CLOSE
+
+	_CALL			normal_kaifuku
+	_CALL			ev_sp_ship_sleep
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_daisukim_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIM_03
+	_TRAINER_DATA2	msg_daisukim_03_01
+	_TRAINER_DATA3	msg_daisukim_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_daisukim_03_03
+	_END
+
+SCRIPT_LABEL	ev_gentleman_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	GENTLEMAN_02
+	_TRAINER_DATA2	msg_gentleman_02_01
+	_TRAINER_DATA3	msg_gentleman_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_gentleman_02_03
+	_END
+
+SCRIPT_LABEL	ev_gentleman_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	GENTLEMAN_03
+	_TRAINER_DATA2	msg_gentleman_03_01
+	_TRAINER_DATA3	msg_gentleman_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_gentleman_03_03
+	_END
+
+SCRIPT_LABEL	ev_lovelove_02_01		//男
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	LOVELOVE_02
+	_TRAINER_DATA2	msg_lovelove_02_01
+	_TRAINER_DATA3	msg_lovelove_02_02
+	_TRAINER_DATA4	msg_lovelove_02_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_lovelove_02_03
+	_END
+
+SCRIPT_LABEL	ev_lovelove_02_02		//女
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	LOVELOVE_02
+	_TRAINER_DATA2	msg_lovelove_02_05
+	_TRAINER_DATA3	msg_lovelove_02_06
+	_TRAINER_DATA4	msg_lovelove_02_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_lovelove_02_07
+	_END
+
+SCRIPT_LABEL	ev_prince_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCE_03
+	_TRAINER_DATA2	msg_prince_03_01
+	_TRAINER_DATA3	msg_prince_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_prince_03_03
+	_END
+
+SCRIPT_LABEL	ev_princess_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PRINCESS_06
+	_TRAINER_DATA2	msg_princess_06_01
+	_TRAINER_DATA3	msg_princess_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_princess_06_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

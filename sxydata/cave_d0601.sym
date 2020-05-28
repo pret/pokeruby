@@ -1,0 +1,24 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 13
+#define TREE1_01_R104_R0601	1
+#define TREE1_02_R104_D0601	2
+#define SEAMAN1_01_CAVE_D0601	3
+#define WORKERM1_01_CAVE_D0601	4
+#define BALL1_56	5
+#define BALL1_55	6
+#define BALL1_58	7
+#define BOY2_01_CAVE_D0601	8
+#define TR_MUSHI_02	9
+#define TR_MUSHI_07	10
+#define BOY3_01_P01_CAVE_D0601	11
+#define BALL1_117	12
+#define GIRL2_02_CAVE_D0601	13
+
+//Exit ID = 6
+#define CAVE_D0601_DOOR01	0
+#define CAVE_D0601_DOOR02	1
+#define CAVE_D0601_DOOR03	2
+#define CAVE_D0601_DOOR04	3
+#define CAVE_D0601_DOOR05	4
+#define CAVE_D0601_DOOR06	5

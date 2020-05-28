@@ -1,0 +1,32 @@
+;==========================================================
+;
+;	田谷君用のグラフィック圧縮リスト
+;
+;==========================================================
+s_arale.sch		0	0080	OBJCGX
+s_arale.scl		0	0020	COLOR
+s_narm.sch		0	0080	OBJCGX
+s_narm.scl		0	0020	COLOR
+s_purge.scl		0	0020	COLOR
+s_tamabl.scl	0	0020	COLOR
+s_recycle.sch	0	0800	OBJCGX
+s_recycle.scl	0	0020	COLOR
+s_gomi.sch		0	00A0	OBJCGX
+s_gomi.scl		0	0020	COLOR
+s_kakushi.sch	0	0200	OBJCGX
+s_kakushi.scl	0	0020	COLOR
+s_jiware.sch	0	0800	OBJCGX
+s_jiware.scl	0	0020	COLOR
+s_jiware.ssc	0	1000	BG1MAP
+s_gbird.sch		0	0800	OBJCGX
+s_gbird.scl		0	0020	COLOR
+s_xef.sch		0	0200	OBJCGX
+s_xef.scl		0	0020	COLOR
+s_tsuna.sch		0	2000	OBJCGX
+s_tsuna.scl		0	0020	COLOR
+s_tsuna1.ssc	0	1000	BG1MAP
+s_tsuna2.ssc	0	1000	BG1MAP
+s_tsuna3.ssc	0	1000	BG1MAP
+s_mine.scl		0	0020	COLOR
+s_michi.sch		0	0400	OBJCGX
+s_michi.scl		0	0020	COLOR

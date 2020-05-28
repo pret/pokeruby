@@ -1,0 +1,85 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_SAFARI03	2
+#define EXITNUM_PARK_SAFARI03	1
+#define POSNUM_PARK_SAFARI03	0
+#define BGNUM_PARK_SAFARI03	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_safari_07_p01[];
+extern const u8	ev_ball1_131[];
+
+//BG_SCRIPT
+extern const u8	ev_safari_13_p01[];
+
+const evObjData	OBJ_park_safari03[] =
+{
+	{
+		SAFARI_07_P01,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_safari_07_p01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BALL1_131,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0000,		//Xpos
+		0x0025,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_131,		//Event Lavel
+		FV_BALL1_131,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_park_safari03[] =
+{
+	{
+		0x001d,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		PARK_SAFARI05_MAT01,		//Door ID
+		PARK_SAFARI05,			//Map ID
+		PARK,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_park_safari03[] =
+{
+	{
+		0x0020,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_safari_13_p01,		//Script
+	},
+
+};
+
+const SXY_DATA	park_safari03_sxy_data =
+{
+OBJNUM_PARK_SAFARI03,			// field obj max
+EXITNUM_PARK_SAFARI03,		// exit max
+POSNUM_PARK_SAFARI03,			// pos event max
+BGNUM_PARK_SAFARI03,			// bg event max
+OBJ_park_safari03,			// field obj data
+EXIT_park_safari03,			// exit data
+NULL,			// pos event data
+BG_park_safari03,				// bg event data
+};

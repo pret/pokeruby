@@ -1,0 +1,194 @@
+// ●グッズこうかんオヤジ
+// ●＠０→もらおうとしているグッズの、前の持ち主
+// ●＠１→もらうとしているグッズのジャンル、こうかんで、自分が出そうとしたグッズの名前
+// ●＠２→こうかんで、もらおうとしたグッズの名前
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p01_trade
+msg_oyaji_01_p01_trade:
+	.byte	wa_,si_,spc_,GU_,TTU_,ZU_,ko_,u_,ka_,n_,O_,YA_,ZI_
+	.byte	CR_
+	.byte	wa_,si_,to_,spc_,GU_,TTU_,ZU_,no_,spc_,ko_,u_,ka_,n_,spc_,su_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい／いいえ）の選択
+// ●「いいえ」なら　　　　　　　　　　　→msg_oyaji_01_p02_trade:
+// ●「はい」でグッズ交換フラグＯＮなら　→msg_oyaji_01_p03_trade:
+// ●「はい」でグッズ交換フラグＯＦＦなら→msg_oyaji_01_p04_trade:
+
+// ●「いいえ」なら　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p02_trade
+msg_oyaji_01_p02_trade:
+	.byte	so_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」でグッズ交換フラグＯＮなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p03_trade
+msg_oyaji_01_p03_trade:
+	.byte	de_,mo_,spc_,ki_,mi_,to_,ha_,spc_,ko_,no_,ma_,e_
+	.byte	CR_
+	.byte	GU_,TTU_,ZU_,no_,spc_,ko_,u_,ka_,n_,spc_,si_,ta_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」でグッズ交換フラグＯＦＦなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p04_trade
+msg_oyaji_01_p04_trade:
+	.byte	ko_,re_,spc_,wa_,si_,ga_,spc_,mo_,ttu_,te_,ru_,spc_,GU_,TTU_,ZU_
+	.byte	CR_
+	.byte	na_,ni_,ka_,spc_,ho_,si_,i_,no_,spc_,a_,ttu_,ta_,ra_,spc_,i_,ttu_,te_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●オヤジが持っているグッズの一覧を表示
+// ●プレイヤーが欲しいグッズを選択する
+// ●「やめる」を選択、キャンセルしたなら→msg_oyaji_01_p05_trade:
+// ●選択したグッズが未来のグッズなら　　→msg_oyaji_01_p99_trade:
+// ●なにかグッズを選択したなら　　　　　→msg_oyaji_01_p06_trade:
+
+// ●「やめる」を選択、キャンセルしたなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p05_trade
+msg_oyaji_01_p05_trade:
+	.byte	ho_,si_,i_,spc_,GU_,TTU_,ZU_,spc_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●なにかグッズを選択したなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p06_trade
+msg_oyaji_01_p06_trade:
+	.byte	so_,re_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ga_
+	.byte	CR_
+	.byte	tu_,ka_,ttu_,te_,ta_,spc_,GU_,TTU_,ZU_,spc_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ni_,spc_,su_,ru_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい／いいえ）の選択
+// ●「いいえ」ならば　　　　　　　　　　　　　　　　　　→msg_oyaji_01_p04_trade:
+// ●「はい」で、プレイヤーが一個もグッズを持ってないなら→msg_oyaji_01_p07_trade:
+// ●「はい」で、プレイヤーがグッズを持っているなら　　　→msg_oyaji_01_p08_trade:
+
+// ●「はい」で、プレイヤーが一個もグッズを持ってないなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p07_trade
+msg_oyaji_01_p07_trade:
+	.byte	tenten_,tenten_,ttu_,te_,spc_,ki_,mi_,spc_,GU_,TTU_,ZU_
+	.byte	CR_
+	.byte	hi_,to_,tu_,mo_,spc_,mo_,ttu_,te_,na_,i_,spc_,zi_,yya_,n_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」で、プレイヤーがグッズを持っているなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p08_trade
+msg_oyaji_01_p08_trade:
+	.byte	zi_,yya_,a_,spc_,ko_,u_,ka_,n_,ni_,spc_,da_,si_,te_,ku_,re_,ru_
+	.byte	CR_
+	.byte	GU_,TTU_,ZU_,wo_,spc_,e_,ra_,n_,de_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●自分の持っているグッズのメニューを開く
+
+// ●「やめる」を選択、キャンセルしたなら→msg_oyaji_01_p09_trade:
+// ●交換するグッズのジャンルが同じなら　→msg_oyaji_01_p11_trade:
+// ●もらうグッズのジャンルに余裕ありなら→msg_oyaji_01_p11_trade:
+// ●もらうグッズのジャンルに余裕ないなら→msg_oyaji_01_p10_trade:
+// ●すでに置いているグッズを選んだなら　→msg_oyaji_01_p12_trade:
+
+// ●「やめる」を選択、キャンセルしたなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p09_trade
+msg_oyaji_01_p09_trade:
+	.byte	ko_,u_,ka_,n_,spc_,si_,te_,spc_,ku_,re_,na_,i_,no_,hate_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●もらうグッズのジャンルに余裕ないなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p10_trade
+msg_oyaji_01_p10_trade:
+	.byte	ki_,mi_,spc_,I_MSG_,STR_TEMP_BUF1,ga_,spc_,i_,ttu_,pa_,i_,de_
+	.byte	CR_
+	.byte	mo_,u_,spc_,mo_,te_,na_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●交換するグッズのジャンルが同じなら
+// ●もらうグッズのジャンルに余裕ありなら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p11_trade
+msg_oyaji_01_p11_trade:
+	.byte	zi_,yya_,a_,spc_,wa_,si_,no_,spc_,I_MSG_,STR_TEMP_BUF2,to_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,I_MSG_,STR_TEMP_BUF1,wo_,spc_,ko_,u_,ka_,n_,spc_,su_,ru_,yo_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「いいえ」なら→msg_oyaji_01_p08_trade:
+// ●「はい」なら　→msg_oyaji_01_p13_trade:
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p12_trade
+msg_oyaji_01_p12_trade:
+	.byte	ki_,mi_,spc_,i_,ma_,spc_,so_,no_,GU_,TTU_,ZU_,spc_,ka_,za_,ttu_,te_,ru_,ne_
+	.byte	CR_
+	.byte	ka_,za_,ttu_,te_,ru_,spc_,GU_,TTU_,ZU_,ha_,spc_,ko_,u_,ka_,n_,spc_,de_,ki_,na_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●交換に出すグッズを選び直し→msg_oyaji_01_p08_trade:
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p13_trade
+msg_oyaji_01_p13_trade:
+	.byte	zi_,yya_,a_,spc_,ko_,u_,ka_,n_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,mi_,no_,spc_,PA_,SO_,KO_,N_,ni_
+	.byte	CR_
+	.byte	GU_,TTU_,ZU_,wo_,spc_,o_,ku_,ttu_,te_,o_,ku_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●プレイヤーが引き取ったグッズを、おやじのリストから削除。
+// ●プレイヤーが出したグッズを、おやじのリストに登録。
+// ●プレイヤーが出したグッズを、グッズ箱から削除。
+// ●プレイヤーのグッズ箱に、選んだグッズを追加。
+// ●グッズこうかんしたフラグＯＮ
+
+// ●未来のグッズを選んだとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p99_trade
+msg_oyaji_01_p99_trade:
+	.byte	a_,a_,gyoe_,spc_,go_,me_,n_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,spc_,to_,ttu_,te_,mo_,spc_,RE_,A_,na_,spc_,GU_,TTU_,ZU_,spc_,da_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,u_,ka_,n_,spc_,de_,ki_,na_,i_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,ka_,ni_,spc_,ho_,si_,i_,spc_,GU_,TTU_,ZU_,spc_,a_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●グッズの選び直し処理へ

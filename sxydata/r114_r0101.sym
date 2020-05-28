@@ -1,0 +1,9 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define BOYA1_01_R114_R0101	1
+
+//Exit ID = 3
+#define R114_R0101_MAT01	0
+#define R114_R0101_MAT02	1
+#define R114_R0101_DOOR01	2

@@ -1,0 +1,670 @@
+
+// ●ポケモンコンテスト
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ロビー、コンテスト受付
+// ●話しかける
+// ●メッセージ１
+	.GLOBAL	msg_pccable_01_p01_sp_contest
+msg_pccable_01_p01_sp_contest:
+	.byte	ko_,n_,ni_,ti_,ha_,gyoe_
+	.byte	CR_
+	.byte	ko_,ti_,ra_,de_,ha_,spc_,PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,RA_,N_,KU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	u_,ke_,tu_,ke_,wo_,spc_,o_,ko_,na_,ttu_,te_,spc_,i_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ＠0=コンテストの名前
+// ●そのまま改ページで↓へ
+// ●メッセージ１-２
+	.GLOBAL	msg_pccable_01_p02_sp_contest
+msg_pccable_01_p02_sp_contest:
+	.byte	a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,mo_,spc_,KO_,N_,TE_,SU_,TO_,ni_
+	.byte	CR_
+	.byte	sa_,n_,ka_,spc_,sa_,se_,te_,spc_,mi_,ma_,se_,n_,ka_,hate_
+	.byte	EOM_
+
+// ●選択肢※エクセル-受付1
+// さんかする
+// せつめいをきく
+// やめる
+// ●選択肢表示中、Bまたは「やめる」でフィールドに戻る
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ☆せつめいをきく
+	.GLOBAL	msg_pccable_01_p03_sp_contest
+msg_pccable_01_p03_sp_contest:
+	.byte	do_,no_,spc_,se_,tu_,me_,i_,wo_,spc_,ki_,ki_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ●選択肢↑のセリフと同時に出す※エクセル-受付2
+// ポケモンコンテストって？
+// コンテストの　しゅるい
+// ランクについて
+// しんさいんについて
+
+// ●以下、各選択肢の説明
+// ●各説明は、終わったあと説明の選択肢へ戻す
+// ☆ポケモンコンテストって？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p04_sp_contest
+msg_pccable_01_p04_sp_contest:
+	.byte	PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_,ha_,spc_,n4_,ni_,n_,no_,spc_,TO_,RE_,bou_,NA_,bou_,ga_
+	.byte	CR_
+	.byte	n1_,pi_,ki_,zu_,tu_,spc_,PO_,KE_,MO_,N_,wo_,spc_,mo_,ti_,yo_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	n4_,hi_,ki_,de_,spc_,o_,ko_,na_,wa_,re_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,spc_,ni_,ha_,spc_,n1_,zi_,spc_,si_,n_,sa_,to_
+	.byte	CR_
+	.byte	n2_,zi_,spc_,si_,n_,sa_,ga_,spc_,a_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n1_,zi_,spc_,si_,n_,sa_,de_,ha_,spc_,ka_,i_,zi_,yyo_,u_,no_
+	.byte	CR_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,ga_,spc_,ki_,ni_,i_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	to_,u_,hi_,yyo_,u_,spc_,si_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n2_,zi_,spc_,si_,n_,sa_,de_,ha_,spc_,PO_,KE_,MO_,N_,ga_,spc_,zi_,yyu_,n_,ba_,n_,ni_
+	.byte	CR_
+	.byte	to_,ku_,i_,na_,spc_,wa_,za_,de_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ma_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	si_,n_,sa_,i_,n_,ni_,spc_,ti_,yyu_,u_,mo_,ku_,sa_,re_,ta_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,ni_,spc_,wa_,za_,wo_,spc_,ki_,ni_,i_,ra_,re_,ta_,ri_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	to_,ni_,ka_,ku_,spc_,ta_,ku_,sa_,n_,spc_,me_,da_,ttu_,te_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n1_,zi_,si_,n_,sa_,to_,spc_,n2_,zi_,si_,n_,sa_,no_,spc_,ke_,ttu_,ka_,ka_,ra_
+	.byte	CR_
+	.byte	so_,u_,go_,u_,PO_,I_,N_,TO_,wo_,spc_,da_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ti_,ba_,n_,spc_,ta_,ka_,ka_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,u_,si_,yyo_,u_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	EOM_
+
+
+// ☆コンテストの　しゅるい
+	.GLOBAL	msg_pccable_01_p05_sp_contest
+msg_pccable_01_p05_sp_contest:
+	.byte	KO_,N_,TE_,SU_,TO_,ni_,ha_,spc_,n5_,si_,yyu_,ru_,i_,spc_,a_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,ttu_,ko_,yo_,sa_,spc_,u_,tu_,ku_,si_,sa_,spc_,ka_,wa_,i_,sa_
+	.byte	CR_
+	.byte	ka_,si_,ko_,sa_,spc_,so_,si_,te_,spc_,ta_,ku_,ma_,si_,sa_
+	.byte	SCROLL_WAIT_
+	.byte	i_,zi_,yyo_,u_,no_,spc_,n5_,si_,yyu_,ru_,i_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	E_,N_,TO_,RI_,bou_,spc_,su_,ru_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	PI_,TTU_,TA_,RI_,no_,spc_,KO_,N_,TE_,SU_,TO_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	e_,ra_,n_,de_,spc_,a_,ge_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+
+// ☆ランクについて
+	.GLOBAL	msg_pccable_01_p06_sp_contest
+msg_pccable_01_p06_sp_contest:
+	.byte	PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	NO_,bou_,MA_,RU_,RA_,N_,KU_,spc_,SU_,bou_,PA_,bou_,RA_,N_,KU_
+	.byte	SCROLL_WAIT_
+	.byte	HA_,I_,PA_,bou_,RA_,N_,KU_,spc_,so_,si_,te_,MA_,SU_,TA_,bou_,RA_,N_,KU_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,n4_,tu_,no_,spc_,RA_,N_,KU_,ga_,spc_,a_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	NO_,bou_,MA_,RU_,RA_,N_,KU_,spc_,ni_,ha_,spc_,su_,be_,te_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,de_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	NO_,bou_,MA_,RU_,RA_,N_,KU_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,de_,ki_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,o_,na_,zi_,spc_,si_,yyu_,ru_,i_,no_
+	.byte	SCROLL_WAIT_
+	.byte	SU_,bou_,PA_,bou_,RA_,N_,KU_,no_,spc_,KO_,N_,TE_,SU_,TO_,ni_,spc_,de_,ra_,re_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	o_,na_,zi_,yo_,u_,ni_,spc_,SU_,bou_,PA_,bou_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,su_,re_,ba_
+	.byte	CR_
+	.byte	HA_,I_,PA_,bou_,ni_,spc_,HA_,I_,PA_,bou_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,su_,re_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	MA_,SU_,TA_,bou_,RA_,N_,KU_,ni_,spc_,de_,ra_,re_,ru_,no_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,SU_,TA_,bou_,RA_,N_,KU_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,na_,n_,do_,de_,mo_,spc_,MA_,SU_,TA_,bou_,RA_,N_,KU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,ni_,spc_,de_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ☆さんかする→ポケモン選択
+// ●以下ポケモンエントリーイベント
+// ●手持ちポケモン画面で選択※エクセル-受付3
+// どの　ポケモンを　さんか　させますか？
+// ●以上のテキストをメッセージウインドウに表示
+	.GLOBAL	msg_pccable_01_p14_sp_contest
+msg_pccable_01_p14_sp_contest:
+	.byte	do_,no_,PO_,KE_,MO_,N_,wo_,spc_,sa_,n_,ka_,spc_,sa_,se_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ●コンテストパスを持ってない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p16_sp_contest
+msg_pccable_01_p16_sp_contest:
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,wo_,spc_,o_,mo_,ti_,no_,spc_,ka_,ta_,ha_
+	.byte	CR_
+	.byte	do_,na_,ta_,de_,mo_,spc_,sa_,n_,ka_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,ha_,spc_,SI_,DA_,KE_,TA_,U_,N_,ni_,spc_,a_,ru_
+	.byte	CR_
+	.byte	NO_,bou_,MA_,RU_,RA_,N_,KU_,no_,spc_,KO_,N_,TE_,SU_,TO_,spc_,ka_,i_,zi_,yyo_,u_,de_
+	.byte	SCROLL_WAIT_
+	.byte	do_,na_,ta_,de_,mo_,spc_,mo_,ra_,e_,ma_,su_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,SU_,wo_,mo_,ttu_,te_,spc_,ma_,ta_,spc_,i_,ra_,si_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+
+// ●コンテストパスを持ってない場合（通信時）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p17_sp_contest
+msg_pccable_01_p17_sp_contest:
+	.byte	ko_,ti_,ra_,ha_,spc_,PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_,no_
+	.byte	CR_
+	.byte	n4_,me_,i_,sa_,ma_,spc_,se_,n_,yo_,u_,no_,spc_,u_,ke_,tu_,ke_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,wo_,spc_,o_,mo_,ti_,no_,spc_,ka_,ta_,ha_
+	.byte	CR_
+	.byte	do_,na_,ta_,de_,mo_,spc_,sa_,n_,ka_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,ha_,spc_,SI_,DA_,KE_,TA_,U_,N_,ni_,spc_,a_,ru_
+	.byte	CR_
+	.byte	NO_,bou_,MA_,RU_,RA_,N_,KU_,no_,spc_,KO_,N_,TE_,SU_,TO_,spc_,ka_,i_,zi_,yyo_,u_,de_
+	.byte	SCROLL_WAIT_
+	.byte	do_,na_,ta_,de_,mo_,spc_,mo_,ra_,e_,ma_,su_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,SU_,wo_,mo_,ttu_,te_,spc_,ma_,ta_,spc_,i_,ra_,si_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+
+// ●コンテストパスを持ってない場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p18_sp_contest
+msg_pccable_01_p18_sp_contest:
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,wo_,spc_,o_,mo_,ti_,no_,spc_,ka_,ta_,ha_
+	.byte	CR_
+	.byte	do_,na_,ta_,de_,mo_,spc_,sa_,n_,ka_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,mo_,ti_,de_,spc_,na_,i_,spc_,ka_,ta_,ha_
+	.byte	CR_
+	.byte	ko_,ti_,ra_,de_,spc_,ha_,ttu_,ko_,u_,spc_,i_,ta_,si_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,wo_
+	.byte	CR_
+	.byte	ha_,ttu_,ko_,u_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●はい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p19_sp_contest
+msg_pccable_01_p19_sp_contest:
+	.byte	so_,re_,de_,ha_,spc_,ko_,ti_,ra_,wo_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もらう処理
+// ●これに続いて、発行時のみ、コンテストの説明をする。
+// ●☆ポケモンコンテストって？（msg_pccable_01_p04_sp_contest:）を読む。
+// ●「あなたのポケモンもコンテストに参加させてみませんか？」に戻る
+
+// ●はい→既に持っている（FE_KONTESUTOPASU_GET）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p20_sp_contest
+msg_pccable_01_p20_sp_contest:
+	.byte	a_,ra_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,sa_,n_,no_,spc_,PA_,SU_,ha_
+	.byte	CR_
+	.byte	su_,de_,ni_,spc_,ha_,ttu_,ko_,u_,spc_,sa_,re_,te_,ma_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,PA_,SU_,wo_,spc_,o_,mo_,ti_,ni_,spc_,na_,ttu_,te_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,i_,ra_,si_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●いいえ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p21_sp_contest
+msg_pccable_01_p21_sp_contest:
+	.byte	sa_,n_,ka_,spc_,si_,ta_,i_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	i_,tu_,de_,mo_,spc_,i_,ra_,si_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●選択後※エクセル-受付4
+// ●再びフィールドに戻って
+	.GLOBAL	msg_pccable_01_p08_sp_contest
+msg_pccable_01_p08_sp_contest:
+	.byte	do_,no_,spc_,KO_,N_,TE_,SU_,TO_,ni_,spc_,sa_,n_,ka_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ●選択肢
+// かっこよさコンテスト
+// うつくしさコンテスト
+// かわいさコンテスト
+// かしこさコンテスト
+// たくましさコンテスト
+// ●出場の条件に満たなかった（ランクが不適切等）
+	.GLOBAL	msg_pccable_01_p09_sp_contest
+msg_pccable_01_p09_sp_contest:
+	.byte	mo_,u_,si_,wa_,ke_,spc_,na_,i_,no_,de_,su_,ga_
+	.byte	CR_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,PO_,KE_,MO_,N_,de_,su_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,no_,RA_,N_,KU_,ni_,ha_,spc_,ma_,da_,spc_,si_,yyu_,tu_,zi_,yyo_,u_
+	.byte	SCROLL_WAIT_
+	.byte	de_,ki_,na_,i_,yo_,u_,de_,su_,tenten_
+	.byte	EOM_
+
+// ●どのコンテストに参加しますか？に戻す
+
+// ●タマゴを指定してしまった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p23_sp_contest
+msg_pccable_01_p23_sp_contest:
+	.byte	go_,me_,n_,na_,sa_,i_,gyoe_
+	.byte	CR_
+	.byte	TA_,MA_,GO_,ha_,spc_,si_,yyu_,tu_,zi_,yyo_,u_,spc_,de_,ki_,na_,i_,n_,de_,su_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●瀕死を指定してしまった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p24_sp_contest
+msg_pccable_01_p24_sp_contest:
+	.byte	so_,ti_,ra_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,ge_,n_,ki_,ga_,na_,i_
+	.byte	CR_
+	.byte	yo_,u_,na_,no_,de_,spc_,si_,yyu_,tu_,zi_,yyo_,u_,spc_,de_,ki_,na_,i_,de_,su_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●すでにそのランクでは優勝している
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p22_sp_contest
+msg_pccable_01_p22_sp_contest:
+	.byte	a_,ra_,spc_,so_,ti_,ra_,no_,spc_,RI_,BO_,N_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,PO_,KE_,MO_,N_,ha_,spc_,mo_,u_
+	.byte	CR_
+	.byte	ko_,no_,spc_,KO_,N_,TE_,SU_,TO_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_,ko_,to_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ru_,no_,de_,su_,ne_,tenten_,spc_,so_,re_,de_,mo_,spc_,i_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●出場の条件にあっている
+	.GLOBAL	msg_pccable_01_p15_sp_contest
+msg_pccable_01_p15_sp_contest:
+	.byte	so_,ti_,ra_,no_,spc_,PO_,KE_,MO_,N_,de_,spc_,yo_,ro_,si_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ●選択肢
+// はい
+// いいえ
+
+	.GLOBAL	msg_pccable_01_p10_sp_contest
+msg_pccable_01_p10_sp_contest:
+	.byte	so_,re_,de_,ha_,spc_,o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	E_,N_,TO_,RI_,bou_,spc_,si_,ma_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	o_,ki_,yya_,ku_,sa_,ma_,no_,spc_,E_,N_,TO_,RI_,bou_,NA_,N_,BA_,bou_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	n4_,ba_,n_,spc_,ni_,spc_,na_,ri_,ma_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	KO_,N_,TE_,SU_,TO_,ha_,spc_,su_,gu_,ni_,spc_,ha_,zi_,ma_,ri_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ●通信以外、エントリーナンバーは常に４番
+// ●受付嬢左側を向く
+	.GLOBAL	msg_pccable_01_p11_sp_contest
+msg_pccable_01_p11_sp_contest:
+	.byte	so_,re_,de_,ha_,spc_,ko_,ti_,ra_,he_,spc_,do_,u_,zo_,gyoe_
+	.byte	CR_
+	.byte	ga_,n_,ba_,ttu_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ●主人公、受付の前を左側に通り過ぎ、そのまま
+// 右折してドアから出ていく（自動）
+// ●以上ポケモンエントリーイベント終了
+
+// ●コンテスト優勝者がまだプレゼントを受け取ってないとき
+	.GLOBAL	msg_pccable_01_p12_sp_contest
+msg_pccable_01_p12_sp_contest:
+	.byte	KO_,N_,TE_,SU_,TO_,de_,no_,spc_,yu_,u_,si_,yyo_,u_
+	.byte	CR_
+	.byte	o_,me_,de_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyo_,u_,hi_,n_,ha_,spc_,ko_,ti_,ra_,de_,spc_,o_,a_,zu_,ka_,ri_
+	.byte	CR_
+	.byte	si_,te_,spc_,a_,ri_,ma_,su_,yo_,gyoe_,spc_,sa_,a_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+
+// ●リックに賞品追加
+// ●またもリックが一杯だった
+// ●しかし　バックがいっぱい！の後
+	.GLOBAL	msg_pccable_01_p13_sp_contest
+msg_pccable_01_p13_sp_contest:
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,a_,to_,de_
+	.byte	CR_
+	.byte	to_,ri_,ni_,spc_,ki_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+
+
+// メッセージ・ポケモンコンテスト
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●各ステージの上に「司会者」「審査員」
+// ●ロビー受付でエントリーを終了したトレーナー、
+// 　自動的にステージの前に立っている
+// 司会者workerw
+// 審査員workerm
+
+// ●司会者のセリフよりスタート
+
+// ↓↓ここから
+// ＠１＝「かわいさ」「かしこさ」などの、コンテストの種類
+// ＠２＝「ノーマル」「ハイパー」などの、コンテストのランク
+// ●エントリー後：一次審査
+// ●司会者、一歩前へ出て
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_sp_contest
+msg_workerw1_01_p01_sp_contest:
+	.byte	si_,ka_,i_,kako2_,ha_,i_,gyoe_,spc_,ko_,re_,yo_,ri_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,spc_,RA_,N_,KU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,I_MSG_,STR_TEMP_BUF1,KO_,N_,TE_,SU_,TO_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,zi_,ma_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyu_,tu_,zi_,yyo_,u_,spc_,sa_,re_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,mi_,na_,sa_,n_,ha_,spc_,ko_,ti_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ※通信対戦時はこちら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p21_sp_contest
+msg_workerw1_01_p21_sp_contest:
+	.byte	si_,ka_,i_,kako2_,ha_,i_,gyoe_,spc_,ko_,re_,yo_,ri_
+	.byte	CR_
+	.byte	o_,to_,mo_,da_,ti_,spc_,n4_,ni_,n_,spc_,tu_,u_,si_,n_,no_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,I_MSG_,STR_TEMP_BUF1,KO_,N_,TE_,SU_,TO_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,zi_,ma_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyu_,tu_,zi_,yyo_,u_,spc_,sa_,re_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,mi_,na_,sa_,n_,ha_,spc_,ko_,ti_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●一歩後退（戻る）
+
+// ↓↓ここから
+// ＠０=トレーナー名
+// ＠１＝エントリーナンバー「１」～「４」（非通信時は常に４）
+// ＠２＝エントリーされたポケモン名
+
+// ●エントリーナンバー１のトレーナー一歩前進
+// ●こちらを向く
+
+// ●司会者、エントリーナンバー１番の紹介の時は左を向く
+// ●２番、３番のときはそのまま
+// ●４番の時は右を向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p02_sp_contest
+msg_workerw1_01_p02_sp_contest:
+	.byte	si_,ka_,i_,kako2_,E_,N_,TO_,RI_,bou_,NA_,N_,BA_,bou_,spc_,I_MSG_,STR_TEMP_BUF1,ba_,n_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,I_MSG_,STR_TEMP_BUF2,spc_,de_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トレーナー一歩前へ
+// ●スクリーンに、ポケモン表示
+// （アニメーションしない）
+// （レアポケモンのキラキラは、あり）
+// ●鳴き声出す
+// ●背景は、毛ヅヤ値ウインドウ（ステータス画面）と
+// 同様のウインドウカラー
+
+// ●一次審査の順位は出ているので（プログラム上）それを利用して…
+// 　ギャラリーを８人置き（絵描きを含むかどうかは未定、多分含まない）
+// 　ポケモンが紹介されたと同時に、一次審査の順位が
+// 　４位なら２人、３位なら４人、２位なら６人、１位なら８人が
+// 　（＋絵描きが）、何かしらのリアクションを取る。
+// 　リアクションは、隣の人の顔をみたり、飛んだり、ざわざわするという事
+// 　大きさを変えられる、拍手や口笛の音があればほしい…
+
+// ◆以後、１～４番まで、４体ぶん繰り返し
+
+
+// ●４番までの紹介が終わったら…
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p03_sp_contest
+msg_workerw1_01_p03_sp_contest:
+	.byte	si_,ka_,i_,kako2_,sa_,a_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,si_,yyo_,u_,ka_,i_,ga_,spc_,o_,wa_,ri_,ma_,si_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	n1_,zi_,spc_,si_,n_,sa_,ni_,spc_,ha_,i_,ri_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,i_,zi_,yyo_,u_,no_,spc_,o_,ki_,yya_,ku_,sa_,ma_,ni_,spc_,yo_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ni_,n_,ki_,spc_,to_,u_,hi_,yyo_,u_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,sa_,ttu_,so_,ku_,spc_,ha_,zi_,me_,ma_,si_,yyo_,u_,gyoe_
+	.byte	CR_
+	.byte	to_,u_,hi_,yyo_,u_,spc_,o_,ne_,ga_,i_,si_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面中央表示「ポイント　けいさんちゅう…」
+// 　司会者が、ギャラリーの間を回る（票を集める感じ）
+	.GLOBAL	msg_workerw1_01_p04_sp_contest
+msg_workerw1_01_p04_sp_contest:
+	.byte	spc_,spc_,spc_,spc_,to_,u_,hi_,yyo_,u_,spc_,ti_,yyu_,u_,tenten_
+	.byte	EOM_
+
+
+// 適当に時間がたったら、所定位置にもどって
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p10_sp_contest
+msg_workerw1_01_p10_sp_contest:
+	.byte	sa_,a_,gyoe_
+	.byte	CR_
+	.byte	i_,ma_,spc_,to_,u_,hi_,yyo_,u_,ga_,spc_,o_,wa_,ri_,ma_,si_,ta_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyu_,u_,ke_,i_,wo_,spc_,si_,te_,i_,ru_,spc_,a_,i_,da_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	n2_,zi_,spc_,si_,n_,sa_,ni_,spc_,u_,tu_,ri_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	n2_,zi_,spc_,si_,n_,sa_,ha_,spc_,i_,yo_,i_,yo_
+	.byte	CR_
+	.byte	o_,ma_,ti_,ka_,ne_,no_,spc_,A_,PI_,bou_,RU_,TA_,I_,MU_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,za_,de_,spc_,A_,PI_,bou_,RU_,spc_,si_,ma_,ku_,ri_,ma_,si_,yyo_,u_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,ha_,ri_,ki_,ttu_,te_,spc_,do_,u_,zo_,gyoe_
+	.byte	CR_
+	.byte	RE_,TTU_,TU_,gyoe_,spc_,A_,PI_,bou_,RU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘開始エフェクト
+// ●コンテスト、アピール対戦へ
+
+// ==================================================
+
+// ●アピール対戦終了
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p11_sp_contest
+msg_workerw1_01_p11_sp_contest:
+	.byte	si_,ka_,i_,kako2_,ha_,a_,i_,spc_,so_,ko_,ma_,de_,e_,bou_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ピピーッ、のような笛の音みたいなＳＥ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p12_sp_contest
+msg_workerw1_01_p12_sp_contest:
+	.byte	mi_,na_,sa_,n_,spc_,su_,ba_,ra_,si_,i_,spc_,A_,PI_,bou_,RU_,de_,si_,ta_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,de_,spc_,su_,be_,te_,spc_,si_,yyu_,u_,ri_,yyo_,u_,spc_,de_,su_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	o_,tu_,ka_,re_,sa_,ma_,de_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●司会、審査員の方を向き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p13_sp_contest
+msg_workerw1_01_p13_sp_contest:
+	.byte	sa_,te_,spc_,no_,ko_,ru_,ha_
+	.byte	CR_
+	.byte	DO_,KI_,DO_,KI_,no_,spc_,ke_,ttu_,ka_,ha_,ttu_,pi_,yyo_,u_,spc_,de_,su_,ne_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,ttu_,pi_,yyo_,u_,ha_,spc_,si_,n_,sa_,i_,n_,no_,spc_,ho_,u_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	o_,ko_,na_,wa_,re_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●審査員
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_sp_contest
+msg_workerm1_01_p01_sp_contest:
+	.byte	si_,n_,sa_,i_,n_,kako2_,de_,ha_,tenten_,spc_,ha_,ttu_,pi_,yyo_,u_,spc_,si_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●コンテスト、結果発表の画面へ
+
+// ●発表がおわったら
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ↓↓ここから
+// ＠１＝優勝したトレーナーのエントリーナンバー
+// ＠２＝優勝したトレーナーの名前
+// ＠０＝優勝したポケモンの名前
+// ●結果発表後
+	.GLOBAL	msg_workerw1_01_p14_sp_contest
+msg_workerw1_01_p14_sp_contest:
+	.byte	si_,ka_,i_,kako2_,E_,N_,TO_,RI_,bou_,NA_,N_,BA_,bou_,spc_,I_MSG_,STR_TEMP_BUF1,ba_,n_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,sa_,n_,gyoe_,spc_,so_,si_,te_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	o_,me_,de_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●優勝トレーナーは司会者の前に進み出て、こちら側を向く
+// ●一回、その場ジャンプ
+// ●会場に舞う花吹雪
+// ●優勝者以外は受付に戻る
+
+// ●ここで優勝ポケモンのリボンチェック
+// ☆ポケモンがリボンを持っていなければ
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●司会、優勝者に向かって
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p18_sp_contest
+msg_workerw1_01_p18_sp_contest:
+	.byte	si_,yyo_,u_,hi_,n_,to_,spc_,si_,te_
+	.byte	CR_
+	.byte	ko_,no_,spc_,RI_,BO_,N_,wo_,spc_,o_,u_,ke_,to_,ri_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ファンファーレと共に
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p19_sp_contest
+msg_workerw1_01_p19_sp_contest:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,RI_,BO_,N_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 続いて…＠０は優勝ポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p20_sp_contest
+msg_workerw1_01_p20_sp_contest:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,RI_,BO_,N_,wo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ni_,spc_,tu_,ke_,te_,spc_,a_,ge_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●賞品受け取り後へ
+
+// ☆ポケモンがリボンを持っていれば
+// ●司会、優勝者に向かって
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p15_sp_contest
+msg_workerw1_01_p15_sp_contest:
+	.byte	si_,ka_,i_,kako2_,sa_,a_,gyoe_
+	.byte	CR_
+	.byte	si_,yyo_,u_,hi_,n_,wo_,spc_,o_,u_,ke_,to_,ri_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●賞品、キズぐすりをもらう処理、道具ポッケに入れる
+// ●賞品受け取り後へ
+
+// ●賞品受け取り後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p16_sp_contest
+msg_workerw1_01_p16_sp_contest:
+	.byte	si_,ka_,i_,kako2_,o_,me_,de_,to_,u_,spc_,go_,za_,i_,ma_,su_,gyoe_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,sa_,n_,ka_,spc_,si_,te_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●優勝者、受付へ
+
+// ●リュックがいっぱい→いっぱいメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p17_sp_contest
+msg_workerw1_01_p17_sp_contest:
+	.byte	so_,re_,de_,ha_,spc_,si_,yyo_,u_,hi_,n_,ha_,spc_,a_,to_,de_
+	.byte	CR_
+	.byte	u_,ke_,tu_,ke_,de_,spc_,o_,u_,ke_,to_,ri_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ta_,no_,spc_,sa_,n_,ka_,wo_,spc_,o_,ma_,ti_,spc_,si_,te_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ●受付へ
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+
+
+
+

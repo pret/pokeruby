@@ -1,0 +1,17 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 7
+#define TR_ELITEM_09	1
+#define TR_ELITEW_08	2
+#define TR_ELITEM_10	3
+#define MITSURU_01_CAVE_D1301	4
+#define BALL1_84	5
+#define BALL1_85	6
+#define TR_MITSURU_03	7
+
+//Exit ID = 5
+#define CAVE_D1301_DOOR01	0
+#define CAVE_D1301_DOOR02	1
+#define CAVE_D1301_STAIR03	2
+#define CAVE_D1301_STAIR02	3
+#define CAVE_D1301_STAIR01	4

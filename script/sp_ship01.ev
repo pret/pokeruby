@@ -1,0 +1,309 @@
+//====================================================================
+//						sp_ship01
+//						連絡船（船内）
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START sp_ship01_event_data
+SP_SCRIPT_LABEL		sp_script_sp_ship01
+EVENT_DATA_END 
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+//	WK_SCENE_SP_SHIP01
+//	※具体的な定義はscr_tool.hを参照
+//
+//	SHIPSCENE_TAKEOFF_KAINA:	カイナからアクア号乗船直後
+//	SHIPSCENE_DEMO_RIGHT:		デモ中（カイナ→キナギ）
+//	SHIPSCENE_FREE_KAINA:		デモ終了後、フリー状態
+//	SHIPSCENE_ARRIVE_MINAMO:	ミナモ到着後
+//	SHIPSCENE_TAKEOFF_MINAMO:	ミナモからアクア号乗船直後
+//	SHIPSCENE_FREE_MINAMO:		フリー状態
+//	SHIPSCENE_DEMO_LEFT:		デモ中（キナギ→カイナ）
+//	SHIPSCENE_ARRIVE_KAINA:		カイナ到着後
+//	SHIPSCENE_END_DEMO_RIGHT:	デモ終了（カイナ→キナギ）
+//	SHIPSCENE_END_DEMO_LEFT:	デモ終了（キナギ→カイナ）
+
+/********************************************************************/
+//			特殊スクリプト起動
+/********************************************************************/
+SCRIPT_LABEL	sp_script_sp_ship01
+SP_SCRIPT_DATA	WK_SCENE_SP_SHIP01,SHIPSCENE_TAKEOFF_KAINA,	ev_sp_ship01_kaina_start
+SP_SCRIPT_DATA	WK_SCENE_SP_SHIP01,SHIPSCENE_TAKEOFF_MINAMO,ev_sp_ship01_minamo_start
+SP_SCRIPT_DATA	WK_SCENE_SP_SHIP01,SHIPSCENE_END_DEMO_RIGHT,ev_sp_ship_demo_end_kaina
+SP_SCRIPT_DATA	WK_SCENE_SP_SHIP01,SHIPSCENE_END_DEMO_LEFT,	ev_sp_ship_demo_end_minamo
+SP_SCRIPT_END
+
+
+/********************************************************************/
+//				カイナから出発→すぐにデモ開始
+/********************************************************************/
+ev_sp_ship01_kaina_start:
+	_PROGRAM		CRUISE_START
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_DEMO_RIGHT
+	_TALK_START
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p01_sp_ship01
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//				ミナモから出発→ベッドで休むまでフリー
+/********************************************************************/
+ev_sp_ship01_minamo_start:
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_FREE_MINAMO
+	_TALK_START
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p02_sp_ship01
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//				ミナモから出発→一晩経過してデモ開始
+/********************************************************************/
+ev_sp_ship_minamo_demo_start:
+	_PROGRAM		CRUISE_START
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_DEMO_LEFT
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p01_sp_ship01
+	_RET
+
+
+/********************************************************************/
+//				ミナモに到着
+/********************************************************************/
+ev_sp_ship_minamo_reach:
+	_PROGRAM		CRUISE_END
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_ARRIVE_MINAMO
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p04_sp_ship01
+	_RET
+
+
+/********************************************************************/
+//				歩数カウントによるデモ終了
+//	※イベントチェックシステムから呼ばれる
+/********************************************************************/
+SCRIPT_LABEL	ev_sp_ship_demo_end
+	_IFVAL_JUMP		WK_SCENE_SP_SHIP01,EQ,SHIPSCENE_DEMO_RIGHT,ev_sp_ship_demo_end_kaina
+	_IFVAL_JUMP		WK_SCENE_SP_SHIP01,EQ,SHIPSCENE_DEMO_LEFT,ev_sp_ship_demo_end_minamo
+	_END
+
+ev_sp_ship_demo_end_kaina:
+	_PROGRAM		CRUISE_END
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_FREE_KAINA
+	_TALK_START
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p02_sp_ship01
+	_TALK_END
+	_END
+
+ev_sp_ship_demo_end_minamo:
+	_PROGRAM		CRUISE_END
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_ARRIVE_KAINA
+	_TALK_START
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p03_sp_ship01
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//				カイナに到着→デモ終了
+/********************************************************************/
+ev_sp_ship_kaina_reach:
+	_PROGRAM		CRUISE_END
+	_LDVAL			WK_SCENE_SP_SHIP01,SHIPSCENE_ARRIVE_KAINA
+	_SE				SE_PINPON
+	_TALK_KEYWAIT	msg_aqua_01_p03_sp_ship01
+	_RET
+
+
+/********************************************************************/
+//				ベッドに寝たときのフラグ分岐処理
+/********************************************************************/
+SCRIPT_LABEL	ev_sp_ship_sleep
+	_SWITCH		WK_SCENE_SP_SHIP01
+	_CASEJUMP	SHIPSCENE_DEMO_RIGHT,ev_sp_ship_minamo_reach	@カイナ出発デモ中→ミナモ到着
+	_CASEJUMP	SHIPSCENE_FREE_KAINA,ev_sp_ship_minamo_reach	@カイナ出発デモ後→ミナモ到着
+	_CASEJUMP	SHIPSCENE_FREE_MINAMO,ev_sp_ship_minamo_demo_start	@ミナモ出発で一晩経過→デモ開始
+	_CASEJUMP	SHIPSCENE_DEMO_LEFT,ev_sp_ship_kaina_reach		@ミナモ出発でデモ中→カイナ到着
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							ハギ老人
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_sp_ship01
+	_EASY_OBJ_MSG	msg_oldman1_01_p01_sp_ship01
+	_END
+
+
+/********************************************************************/
+//							ピーコ
+/********************************************************************/
+SCRIPT_LABEL	ev_camome_01_p01_sp_ship01
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_KYAMOME,0
+	_TALK_KEYWAIT	msg_camome_01_p01_sp_ship01
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						部屋のプレート	
+/********************************************************************/
+SCRIPT_LABEL	ev_plate_01_p01_sp_ship01
+	_EASY_MSG	msg_plate_01_p01_sp_ship01
+	_END
+
+
+/********************************************************************/
+//						部屋のプレート	
+/********************************************************************/
+SCRIPT_LABEL	ev_plate_02_p01_sp_ship01
+	_EASY_MSG	msg_plate_02_p01_sp_ship01
+	_END
+
+
+/********************************************************************/
+//						部屋のプレート	
+/********************************************************************/
+SCRIPT_LABEL	ev_plate_03_p01_sp_ship01
+	_EASY_MSG	msg_plate_03_p01_sp_ship01
+	_END
+
+
+/********************************************************************/
+//						部屋のプレート	
+/********************************************************************/
+SCRIPT_LABEL	ev_plate_04_p01_sp_ship01
+	_EASY_MSG	msg_plate_04_p01_sp_ship01
+	_END
+
+
+/********************************************************************/
+//							ストッパー
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_sp_ship01
+	_TALK_OBJ_START
+
+	//ミナモについた
+	_IFVAL_JUMP		WK_SCENE_SP_SHIP01,EQ,SHIPSCENE_ARRIVE_MINAMO,minamo_go_sp_ship01
+
+	//カイナついた
+	_IFVAL_JUMP		WK_SCENE_SP_SHIP01,EQ,SHIPSCENE_ARRIVE_KAINA,kaina_go_sp_ship01
+
+	_TALK_KEYWAIT	msg_seaman_01_p01_sp_ship01
+	_TALK_OBJ_END
+	_END
+
+//ミナモについた
+minamo_go_sp_ship01:
+	//前にいたポケセンのIDをセット
+	_SET_WARP_ID	WP_C106_PC01
+
+	_TALK_KEYWAIT	msg_seaman_01_p02_sp_ship01
+
+	_IF_FLAGON_CALL	FE_WAZAM49_GET,qauqm1_01_del_sp_ship01
+
+	_MAP_CHANGE		C106,C106_R0501,8,11
+	_STOP_SCRIPT
+	_TALK_OBJ_END
+	_END
+
+//カイナについた
+kaina_go_sp_ship01:
+	//前にいたポケセンのIDをセット
+	_SET_WARP_ID	WP_C102_PC01
+
+	_TALK_KEYWAIT	msg_seaman_01_p02_sp_ship01
+
+	_IF_FLAGON_CALL	FE_WAZAM49_GET,qauqm1_01_del_sp_ship01
+
+	_MAP_CHANGE		C102,C102_R0601,8,11
+	_STOP_SCRIPT
+	_TALK_OBJ_END
+	_END
+
+//技マシンをくれるアクア団員消去
+qauqm1_01_del_sp_ship01:
+	_FLAG_SET		FV_FREAK1_01_SP_SHIP03
+	_RET
+
+
+/********************************************************************/
+//								窓
+/********************************************************************/
+SCRIPT_LABEL	ev_window_01_p01_sp_ship01
+	_TALK_START
+	_IFVAL_JUMP	WK_SCENE_SP_SHIP01,EQ,SHIPSCENE_DEMO_RIGHT,ev_sp_ship_demo
+	_IFVAL_JUMP	WK_SCENE_SP_SHIP01,EQ,SHIPSCENE_DEMO_LEFT,ev_sp_ship_demo
+
+	_TALK_KEYWAIT	msg_window_01_p01_sp_ship01
+	_TALK_END
+	_END
+
+ev_sp_ship_demo:
+	_PROGRAM		SHIP_EVENT_START
+	_STOP_SCRIPT
+	_END
+
+
+/********************************************************************/
+/*							船乗り									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman_02_p01_sp_ship01
+	_TALK_OBJ_START
+
+	//全てのトレーナーを倒していたら
+	_IF_FLAGON_JUMP		FE_WIN_01_SP_SHIP01,ev_seaman_02_p02_sp_ship01
+
+	_CALL				ev_tr_sp_ship_01_end_check
+
+	_TALK_KEYWAIT	msg_seaman_02_p01_sp_ship01
+	_TALK_OBJ_END
+	_END
+
+//全てのトレーナーに勝利後
+ev_seaman_02_p02_sp_ship01:
+	_TALK_KEYWAIT	msg_seaman_02_p02_sp_ship01
+	_TALK_OBJ_END
+	_END
+
+//全トレーナーを倒したかのチェック
+ev_tr_sp_ship_01_end_check:
+	_IF_TR_FLAGOFF_JUMP	SAILOR_05,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	SAILOR_06,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	DAISUKIM_03,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	GENTLEMAN_02,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	GENTLEMAN_03,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	LOVELOVE_02,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	PRINCE_03,no_flag_sp_ship01
+	_IF_TR_FLAGOFF_JUMP	PRINCESS_06,no_flag_sp_ship01
+
+	//全て倒していたら
+	_FLAG_SET		FE_WIN_01_SP_SHIP01
+
+	_JUMP			ev_seaman_02_p02_sp_ship01
+	_RET
+
+no_flag_sp_ship01:
+	_RET
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 2
+#define SAFARI_07_P01	1
+#define BALL1_131	2
+
+//Exit ID = 1
+#define PARK_SAFARI03_DOOR01	0

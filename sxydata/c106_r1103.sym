@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define SPORTSM1_01_C106_R1103	1
+#define MIDDLEM2_01_C106_R1103	2
+#define TRAINERW1_01_C106_R1103	3
+#define WORKERW1_01_C106_R1103	4
+#define WORKERW1_02_C106_R1103	5
+
+//Exit ID = 3
+#define C106_R1103_STAIR01	0
+#define C106_R1103_STAIR02	1
+#define C106_R1103_STAIR03	2

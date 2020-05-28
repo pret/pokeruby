@@ -1,0 +1,214 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//						チャンピオンロード
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d1301_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d1301
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1301:
+	_IF_FLAGON_CALL		FE_MITSURU_01_CAVE_D1301,mitsuru_del_cave_d1301
+	_END
+
+//ミツルを消す
+mitsuru_del_cave_d1301:
+	_FLAG_SET		FV_MITSURU_01_CAVE_D1301
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							ミツル(POS)
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1301_pos01
+	_TALK_START
+
+	//OBJ出す
+	_OBJ_APPEAR		MITSURU_01_CAVE_D1301
+
+	//近づいてくる
+	_SET_OBJ_ANIME	MITSURU_01_CAVE_D1301,mitsuru_01_cave_d1301_anime01
+	_OBJ_ANIME_WAIT
+
+	_JUMP			common_mitsuru_cave_d1301
+	_END
+
+SCRIPT_LABEL	ev_cave_d1301_pos02
+	_TALK_START
+
+	//OBJ出す
+	_OBJ_APPEAR		MITSURU_01_CAVE_D1301
+
+	//近づいてくる
+	_SET_OBJ_ANIME	MITSURU_01_CAVE_D1301,mitsuru_01_cave_d1301_anime02
+	_OBJ_ANIME_WAIT
+
+	_JUMP			common_mitsuru_cave_d1301
+	_END
+
+SCRIPT_LABEL	ev_cave_d1301_pos03
+	_TALK_START
+
+	//OBJ出す
+	_OBJ_APPEAR		MITSURU_01_CAVE_D1301
+
+	//近づいてくる
+	_SET_OBJ_ANIME	MITSURU_01_CAVE_D1301,mitsuru_01_cave_d1301_anime03
+	_OBJ_ANIME_WAIT
+
+	_JUMP			common_mitsuru_cave_d1301
+	_END
+
+//共通処理
+common_mitsuru_cave_d1301:
+	//振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mitsuru_01_01
+
+	_TRAINER_EVENT_FIGHT	MITSURU_01,msg_mitsuru_01_02
+
+	_TALK_KEYWAIT	msg_mitsuru_01_03
+
+	//sxy上書き
+	_FLAG_RESET		FV_MITSURU_01_CAVE_D1301		//おまじない
+	_SXY_POS_OVERWRITE	MITSURU_01_CAVE_D1301
+
+	//ミツルに勝利した
+	_FLAG_SET		FE_MITSURU_01_CAVE_D1301
+	_LDVAL			WK_SCENE_CAVE_D1301,1
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ミツル	近づいてくる(POS01)
+//--------------------------------------------------------------------
+mitsuru_01_cave_d1301_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	近づいてくる(POS02)
+//--------------------------------------------------------------------
+mitsuru_01_cave_d1301_anime02:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	近づいてくる(POS03)
+//--------------------------------------------------------------------
+mitsuru_01_cave_d1301_anime03:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//								ミツル
+/********************************************************************/
+SCRIPT_LABEL	ev_mitsuru_01_p01_cave_d1301
+	_EASY_OBJ_MSG	msg_mitsuru_01_03
+	_END
+
+
+/********************************************************************/
+//						ミツル(再戦トレーナー時)
+/********************************************************************/
+SCRIPT_LABEL	ev_mitsuru_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MITSURU_03
+	_TRAINER_DATA2	msg_mitsuru_01_04
+	_TRAINER_DATA3	msg_mitsuru_01_05
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_mitsuru_01
+	_TRAINER_EASY_MSG	msg_mitsuru_01_06
+	_END
+
+_revenge_mitsuru_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	MITSURU_03
+	_TRAINER_DATA2	msg_mitsuru_01_04
+	_TRAINER_DATA3	msg_mitsuru_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mitsuru_01_06
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_elitem_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_09
+	_TRAINER_DATA2	msg_elitem_09_01
+	_TRAINER_DATA3	msg_elitem_09_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_09_03
+	_END
+
+SCRIPT_LABEL	ev_elitem_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_10
+	_TRAINER_DATA2	msg_elitem_10_01
+	_TRAINER_DATA3	msg_elitem_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_10_03
+	_END
+
+SCRIPT_LABEL	ev_elitew_08
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_08
+	_TRAINER_DATA2	msg_elitew_08_01
+	_TRAINER_DATA3	msg_elitew_08_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_08_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

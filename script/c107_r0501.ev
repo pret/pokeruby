@@ -1,0 +1,211 @@
+//====================================================================
+//							c107_r0501
+//							ダイゴの家
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c107_r0501_event_data
+BG_CHANGE_LABEL		bg_change_c107_r0501
+FLAG_CHANGE_LABEL	flag_change_c107_r0501
+SP_SCRIPT_LABEL		scene_c107_r0501
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_c107_r0501:
+	_IF_FLAGOFF_CALL	SYS_GAME_CLEAR,bg_chg_c107_r0501
+	_END
+
+//ゲームクリアしていなかったらノートを消す
+bg_chg_c107_r0501:
+	_SET_CELL		6,4,753,1
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c107_r0501:
+	_IFVAL_CALL		WK_SCENE_C107_R0501,EQ,1,pos_set_c107_r0501
+	_END
+
+//椅子に座った状態へ
+pos_set_c107_r0501:
+	_SXY_POS_CHANGE		DAIGO_01_C107_R0501,6,5
+	_SXY_SITE_CHANGE	DAIGO_01_C107_R0501,MV_UP
+	_RET
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c107_r0501:
+	//ダイゴがやってくる
+	SP_SCRIPT_DATA	WK_SCENE_C107_R0501,0,ev_scene_daigo_c107_r0501
+	SP_SCRIPT_END
+
+//ダイゴやってくる
+ev_scene_daigo_c107_r0501:
+	_TALK_START
+
+	//気づく
+	_SET_OBJ_ANIME	DAIGO_01_C107_R0501,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	DAIGO_01_C107_R0501,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	DAIGO_01_C107_R0501,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	//近づいてくる
+	_SET_OBJ_ANIME	DAIGO_01_C107_R0501,daigo_01_c107_r0501_anime01
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_daigo_01_p01_c107_r0501
+
+	//ダイビング取得
+	_ITEM_EVENT		ITEM_HIDENMASIN08,1
+	_FLAG_SET		FE_HWAZA08_GET
+	_FLAG_SET		FE_HWAZA08_TALK_GET
+
+	_TALK_KEYWAIT	msg_daigo_01_p02_c107_r0501
+	_TALK_CLOSE
+
+	_TIME_WAIT		20
+
+	//席につく
+	_SET_OBJ_ANIME	DAIGO_01_C107_R0501,daigo_01_c107_r0501_anime02
+	_OBJ_ANIME_WAIT
+
+	_LDVAL			WK_SCENE_C107_R0501,1
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//ダイゴ	近づいてくる
+//--------------------------------------------------------------------
+daigo_01_c107_r0501_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ダイゴ	席につく
+//--------------------------------------------------------------------
+daigo_01_c107_r0501_anime02:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							アイテムボール							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ball_01_p01_c107_r0501
+	_TALK_START
+
+	_TALK_YES_NO	msg_ball_01_p01_c107_r0501
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_ball_01_p04_c107_r0501	//「いいえ」
+
+	//手持ちのポケモン数取得
+	_GET_TEMOTI_NUM
+	_IFVAL_JUMP		ANSWORK,EQ,6,ev_ball_01_p03_c107_r0501	//６体既にいる
+
+	_LDWK			PARAM0,ANSWORK			//新たな加わるポケモン位置を保存
+
+	_OBJ_DELETE		BALL_01_C107_R0501
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_ball_01_p02_c107_r0501
+	_JINGLE_WAIT
+
+	//ダンバル入手
+	_ADD_POKEMON	MONSNO_DANBARU,5,0,0,0,0
+
+	_GET_MONSNAME	1,MONSNO_DANBARU
+	_TALK_YES_NO	msg_nickname_yes_no
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,ev_new_poke_nick_name_script	//「はい」
+
+	_FLAG_SET		FV_BALL_01_C107_R0501
+
+	//「ダンバル」ゲット
+	_FLAG_SET		FE_POKE1_01_C107_R0501
+
+	_TALK_END
+	_END
+
+//６体既にいる
+ev_ball_01_p03_c107_r0501:
+	_TALK_KEYWAIT	msg_ball_01_p03_c107_r0501
+	_TALK_END
+	_END
+
+//「いいえ」
+ev_ball_01_p04_c107_r0501:
+	_TALK_KEYWAIT	msg_ball_01_p04_c107_r0501
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							ガラスケース							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_case_01_p01_c107_r0501
+	_EASY_MSG	msg_case_01_p01_c107_r0501
+	_END
+
+
+/********************************************************************/
+/*								ダイゴ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_daigo_01_p01_c107_r0501
+	_EASY_OBJ_MSG	msg_daigo_01_p03_c107_r0501
+	_END
+
+
+/********************************************************************/
+/*								手紙								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_note_01_p01_c107_r0501
+	_TALK_START
+
+	//技マシンをダイゴに直接もらっているか
+	_IF_FLAGON_JUMP	FE_HWAZA08_TALK_GET,ev_note_01_p02_c107_r0501
+
+	_TALK_KEYWAIT	msg_note_01_p02_c107_r0501
+	_TALK_END
+	_END
+
+//技マシン入手している
+ev_note_01_p02_c107_r0501:
+	_TALK_KEYWAIT	msg_note_01_p01_c107_r0501
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*					ダイビングが入っているボール					*/
+/********************************************************************/
+SCRIPT_LABEL		ev_ball1_133_p01_c107_r0501
+	_FLD_ITEM_EVENT	ITEM_HIDENMASIN08,1
+	_FLAG_SET		FE_HWAZA08_GET
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

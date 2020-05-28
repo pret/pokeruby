@@ -1,0 +1,40 @@
+// ●ヒワマキシティ　民家６（街の南西）
+
+
+// ●おばさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew1_01_p01_c105_r0601
+msg_middlew1_01_p01_c105_r0601:
+	.byte	HI_,WA_,MA_,KI_,no_,spc_,TU_,RI_,bou_,HA_,U_,SU_,ttu_,te_,spc_,sa_,i_,ko_,u_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,ku_,ra_,su_,na_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ti_,ba_,n_,no_,spc_,ma_,ti_,da_,to_,spc_,o_,mo_,ttu_,te_,i_,ru_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c105_r0601
+msg_middlem1_01_p01_c105_r0601:
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,hi_,to_,mo_
+	.byte	CR_
+	.byte	si_,ze_,n_,ni_,spc_,a_,wa_,se_,te_,spc_,ku_,ra_,si_,te_,ki_,ta_,ka_,ra_,na_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,sa_,ra_,spc_,zi_,bu_,n_,ra_,no_,spc_,tu_,go_,u_,ni_
+	.byte	CR_
+	.byte	si_,ze_,n_,wo_,spc_,a_,wa_,se_,na_,ku_,te_,spc_,i_,i_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・ジグザグマ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_jiguma_01_p01_c105_r0601
+msg_jiguma_01_p01_c105_r0601:
+	.byte	ZI_,GU_,ZA_,GU_,MA_,kako2_,bu_,hu_,u_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時に指定されたポケモンの鳴き声をならす

@@ -1,0 +1,10921 @@
+#include	"monsno.def"
+const	TrainerTypeNormalData	TrainerPokemonData001[]=
+{
+	{
+		0,
+		17,
+		MONSNO_HANTEERU,
+	},
+	{
+		0,
+		17,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData002[]=
+{
+	{
+		0,
+		32,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		32,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData003[]=
+{
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		30,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		30,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		30,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData004[]=
+{
+	{
+		0,
+		32,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		32,
+		MONSNO_ZUBATTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData005[]=
+{
+	{
+		0,
+		33,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData006[]=
+{
+	{
+		0,
+		37,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		37,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData007[]=
+{
+	{
+		0,
+		38,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData008[]=
+{
+	{
+		0,
+		36,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		36,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		36,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData009[]=
+{
+	{
+		0,
+		17,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData010[]=
+{
+	{
+		0,
+		9,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData011[]=
+{
+	{
+		0,
+		9,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		9,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData012[]=
+{
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData013[]=
+{
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData014[]=
+{
+	{
+		0,
+		20,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		20,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData015[]=
+{
+	{
+		0,
+		17,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		17,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData016[]=
+{
+	{
+		0,
+		11,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData017[]=
+{
+	{
+		0,
+		27,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		27,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData018[]=
+{
+	{
+		0,
+		27,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		27,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData019[]=
+{
+	{
+		0,
+		26,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		26,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		26,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData020[]=
+{
+	{
+		0,
+		15,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData021[]=
+{
+	{
+		0,
+		14,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		14,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData022[]=
+{
+	{
+		0,
+		17,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData023[]=
+{
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData024[]=
+{
+	{
+		0,
+		31,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		31,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData025[]=
+{
+	{
+		0,
+		31,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		31,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData026[]=
+{
+	{
+		0,
+		28,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData027[]=
+{
+	{
+		0,
+		31,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		31,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		31,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData028[]=
+{
+	{
+		0,
+		33,
+		MONSNO_ZUBATTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData029[]=
+{
+	{
+		50,
+		30,
+		MONSNO_HOERUKO,
+	},
+	{
+		50,
+		30,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData030[]=
+{
+	{
+		50,
+		32,
+		MONSNO_KIBANIA,
+	},
+	{
+		50,
+		32,
+		MONSNO_GURAENA,
+	},
+	{
+		50,
+		32,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData031[]=
+{
+	{
+		50,
+		20,
+		MONSNO_KIBANIA,
+	},
+	{
+		50,
+		20,
+		MONSNO_POTIENA,
+	},
+	{
+		50,
+		20,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData032[]=
+{
+	{
+		50,
+		28,
+		MONSNO_KIBANIA,
+	},
+	{
+		50,
+		28,
+		MONSNO_GURAENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData033[]=
+{
+	{
+		50,
+		38,
+		MONSNO_SAMEHADAA,
+	},
+	{
+		50,
+		38,
+		MONSNO_GURAENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData034[]=
+{
+	{
+		150,
+		41,
+		MONSNO_GURAENA,
+	},
+	{
+		150,
+		41,
+		MONSNO_KUROBATTO,
+	},
+	{
+		150,
+		43,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData035[]=
+{
+	{
+		150,
+		24,
+		MONSNO_GURAENA,
+	},
+	{
+		150,
+		24,
+		MONSNO_GORUBATTO,
+	},
+	{
+		150,
+		25,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData036[]=
+{
+	{
+		0,
+		16,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData037[]=
+{
+	{
+		0,
+		16,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		16,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData038[]=
+{
+	{
+		0,
+		17,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		17,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData039[]=
+{
+	{
+		0,
+		25,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		25,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		0,
+		25,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData040[]=
+{
+	{
+		10,
+		26,
+		MONSNO_KINOKOKO,
+	},
+	{
+		10,
+		26,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData041[]=
+{
+	{
+		20,
+		28,
+		MONSNO_KINOKOKO,
+	},
+	{
+		20,
+		28,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		20,
+		28,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData042[]=
+{
+	{
+		30,
+		31,
+		MONSNO_KINOKOKO,
+	},
+	{
+		30,
+		31,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		30,
+		31,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData043[]=
+{
+	{
+		40,
+		34,
+		MONSNO_KINOGASSA,
+	},
+	{
+		40,
+		34,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		40,
+		34,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData044[]=
+{
+	{
+		50,
+		24,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData045[]=
+{
+	{
+		50,
+		28,
+		MONSNO_SANDO,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+	{
+		50,
+		28,
+		MONSNO_SANDO,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+	{
+		50,
+		28,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData046[]=
+{
+	{
+		50,
+		26,
+		MONSNO_SANDO,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+	{
+		50,
+		26,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData047[]=
+{
+	{
+		60,
+		27,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData048[]=
+{
+	{
+		70,
+		30,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData049[]=
+{
+	{
+		80,
+		33,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData050[]=
+{
+	{
+		90,
+		36,
+		MONSNO_SANDOPAN,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_KIRISAKU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData051[]=
+{
+	{
+		50,
+		19,
+		MONSNO_KOIRU,
+	},
+	{
+		50,
+		19,
+		MONSNO_GONYONYO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData052[]=
+{
+	{
+		100,
+		27,
+		MONSNO_KOIRU,
+	},
+	{
+		100,
+		27,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData053[]=
+{
+	{
+		150,
+		30,
+		MONSNO_REAKOIRU,
+	},
+	{
+		150,
+		30,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData054[]=
+{
+	{
+		200,
+		33,
+		MONSNO_REAKOIRU,
+	},
+	{
+		200,
+		33,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData055[]=
+{
+	{
+		250,
+		36,
+		MONSNO_REAKOIRU,
+	},
+	{
+		250,
+		36,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData056[]=
+{
+	{
+		250,
+		39,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_SONIKKUBUUMU,
+			WAZANO_DENZIHA,
+			WAZANO_KINZOKUON,
+			WAZANO_10MANBORUTO,
+		},
+	},
+	{
+		250,
+		39,
+		MONSNO_BAKUONGU,
+		{
+			WAZANO_ODOROKASU,
+			WAZANO_HUMITUKE,
+			WAZANO_TYOUONPA,
+			WAZANO_HAIPAABOISU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData057[]=
+{
+	{
+		0,
+		13,
+		MONSNO_RURIRI,
+	},
+	{
+		0,
+		13,
+		MONSNO_RURIRI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData058[]=
+{
+	{
+		0,
+		27,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData059[]=
+{
+	{
+		0,
+		27,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData060[]=
+{
+	{
+		10,
+		26,
+		MONSNO_MARIRU,
+	},
+	{
+		10,
+		26,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData061[]=
+{
+	{
+		20,
+		29,
+		MONSNO_MARIRU,
+	},
+	{
+		20,
+		29,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData062[]=
+{
+	{
+		30,
+		32,
+		MONSNO_MARIRU,
+	},
+	{
+		30,
+		32,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData063[]=
+{
+	{
+		40,
+		35,
+		MONSNO_MARIRURI,
+	},
+	{
+		40,
+		35,
+		MONSNO_MARIRURI,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData064[]=
+{
+	{
+		0,
+		14,
+		MONSNO_ZIGUZAGUMA,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_ZUTUKI,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_NAMINORI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData065[]=
+{
+	{
+		0,
+		12,
+		MONSNO_RURIRI,
+	},
+	{
+		0,
+		12,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData066[]=
+{
+	{
+		0,
+		27,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData067[]=
+{
+	{
+		10,
+		27,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_MISAIRUBARI,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_NAMINORI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData068[]=
+{
+	{
+		20,
+		30,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_MISAIRUBARI,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_NAMINORI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData069[]=
+{
+	{
+		30,
+		33,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_MISAIRUBARI,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_NAMINORI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData070[]=
+{
+	{
+		40,
+		36,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_MISAIRUBARI,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_NAMINORI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData071[]=
+{
+	{
+		100,
+		27,
+		MONSNO_ENEKORORO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData072[]=
+{
+	{
+		100,
+		27,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData073[]=
+{
+	{
+		100,
+		27,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData074[]=
+{
+	{
+		100,
+		27,
+		MONSNO_ZANGUUSU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData075[]=
+{
+	{
+		100,
+		29,
+		MONSNO_OOSUBAME,
+		{
+			WAZANO_KIAIDAME,
+			WAZANO_DENKOUSEKKA,
+			WAZANO_TUBASADEUTU,
+			WAZANO_GAMUSYARA,
+		},
+	},
+	{
+		100,
+		29,
+		MONSNO_NAKKURAA,
+		{
+			WAZANO_KAMITUKU,
+			WAZANO_ANAWOHORU,
+			WAZANO_DAMASIUTI,
+			WAZANO_SUNAZIGOKU,
+		},
+	},
+	{
+		100,
+		29,
+		MONSNO_HOERUKO,
+		{
+			WAZANO_KOROGARU,
+			WAZANO_UZUSIO,
+			WAZANO_ODOROKASU,
+			WAZANO_MIZUNOHADOU,
+		},
+	},
+	{
+		100,
+		29,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_10MANBORUTO,
+			WAZANO_TYOUONPA,
+			WAZANO_DENZIHA,
+			WAZANO_SONIKKUBUUMU,
+		},
+	},
+	{
+		100,
+		29,
+		MONSNO_DAATENGU,
+		{
+			WAZANO_GIGADOREIN,
+			WAZANO_DAMASIUTI,
+			WAZANO_KAGEBUNSIN,
+			WAZANO_IBARU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData076[]=
+{
+	{
+		100,
+		44,
+		MONSNO_YAMIRAMI,
+	},
+	{
+		100,
+		44,
+		MONSNO_TYAAREMU,
+	},
+	{
+		100,
+		44,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData077[]=
+{
+	{
+		100,
+		46,
+		MONSNO_KUTIITO,
+	},
+	{
+		100,
+		46,
+		MONSNO_SUTAAMII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData078[]=
+{
+	{
+		100,
+		18,
+		MONSNO_RAKURAI,
+	},
+	{
+		100,
+		18,
+		MONSNO_HOERUKO,
+	},
+	{
+		100,
+		18,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData079[]=
+{
+	{
+		100,
+		44,
+		MONSNO_NOKUTASU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData080[]=
+{
+	{
+		100,
+		43,
+		MONSNO_RAIBORUTO,
+	},
+	{
+		100,
+		43,
+		MONSNO_BETOBETON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData081[]=
+{
+	{
+		100,
+		42,
+		MONSNO_DOODORIO,
+	},
+	{
+		100,
+		42,
+		MONSNO_KODORA,
+	},
+	{
+		100,
+		42,
+		MONSNO_YUNGERAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData082[]=
+{
+	{
+		100,
+		42,
+		MONSNO_OOSUBAME,
+	},
+	{
+		100,
+		42,
+		MONSNO_YUNGERAA,
+	},
+	{
+		100,
+		42,
+		MONSNO_RAIBORUTO,
+	},
+	{
+		100,
+		42,
+		MONSNO_DAATENGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData083[]=
+{
+	{
+		100,
+		42,
+		MONSNO_KAKUREON,
+	},
+	{
+		100,
+		42,
+		MONSNO_SAIHOON,
+	},
+	{
+		100,
+		42,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData084[]=
+{
+	{
+		110,
+		26,
+		MONSNO_RAKURAI,
+	},
+	{
+		110,
+		26,
+		MONSNO_HOERUKO,
+	},
+	{
+		110,
+		26,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData085[]=
+{
+	{
+		120,
+		29,
+		MONSNO_RAIBORUTO,
+	},
+	{
+		120,
+		29,
+		MONSNO_HOERUKO,
+	},
+	{
+		120,
+		29,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData086[]=
+{
+	{
+		130,
+		32,
+		MONSNO_RAIBORUTO,
+	},
+	{
+		130,
+		32,
+		MONSNO_HOERUKO,
+	},
+	{
+		130,
+		32,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData087[]=
+{
+	{
+		140,
+		35,
+		MONSNO_RAIBORUTO,
+	},
+	{
+		140,
+		35,
+		MONSNO_HOERUKO,
+	},
+	{
+		140,
+		35,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData088[]=
+{
+	{
+		100,
+		34,
+		MONSNO_GOROON,
+	},
+	{
+		100,
+		34,
+		MONSNO_MAGUKARUGO,
+	},
+	{
+		100,
+		34,
+		MONSNO_RUNPAPPA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData089[]=
+{
+	{
+		100,
+		27,
+		MONSNO_ENEKORORO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData090[]=
+{
+	{
+		100,
+		27,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData091[]=
+{
+	{
+		100,
+		27,
+		MONSNO_ZANGUUSU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData092[]=
+{
+	{
+		100,
+		31,
+		MONSNO_KUTIITO,
+		{
+			WAZANO_BATONTATTI,
+			WAZANO_DAMASIUTI,
+			WAZANO_USONAKI,
+			WAZANO_KAMITUKU,
+		},
+	},
+	{
+		100,
+		31,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_MEGADOREIN,
+			WAZANO_MAZIKARURIIHU,
+			WAZANO_KUSABUE,
+			WAZANO_YADORIGINOTANE,
+		},
+	},
+	{
+		100,
+		31,
+		MONSNO_PERIPPAA,
+		{
+			WAZANO_SORAWOTOBU,
+			WAZANO_MIZUDEPPOU,
+			WAZANO_SIROIKIRI,
+			WAZANO_MAMORU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData093[]=
+{
+	{
+		100,
+		45,
+		MONSNO_KODORA,
+	},
+	{
+		100,
+		45,
+		MONSNO_RAIBORUTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData094[]=
+{
+	{
+		100,
+		18,
+		MONSNO_KYAMOME,
+	},
+	{
+		100,
+		18,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		18,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData095[]=
+{
+	{
+		100,
+		31,
+		MONSNO_MIROKAROSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData096[]=
+{
+	{
+		100,
+		44,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData097[]=
+{
+	{
+		100,
+		44,
+		MONSNO_NENDOORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData098[]=
+{
+	{
+		100,
+		42,
+		MONSNO_NOZUPASU,
+	},
+	{
+		100,
+		42,
+		MONSNO_TYAAREMU,
+	},
+	{
+		100,
+		42,
+		MONSNO_RUNPAPPA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData099[]=
+{
+	{
+		100,
+		43,
+		MONSNO_KUTIITO,
+	},
+	{
+		100,
+		43,
+		MONSNO_YAMIRAMI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData100[]=
+{
+	{
+		100,
+		43,
+		MONSNO_SANDOPAN,
+	},
+	{
+		100,
+		43,
+		MONSNO_KYUUKON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData101[]=
+{
+	{
+		110,
+		26,
+		MONSNO_KYAMOME,
+	},
+	{
+		110,
+		26,
+		MONSNO_DONMERU,
+	},
+	{
+		110,
+		26,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData102[]=
+{
+	{
+		120,
+		29,
+		MONSNO_PERIPPAA,
+	},
+	{
+		120,
+		29,
+		MONSNO_DONMERU,
+	},
+	{
+		120,
+		29,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData103[]=
+{
+	{
+		130,
+		32,
+		MONSNO_PERIPPAA,
+	},
+	{
+		130,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		130,
+		32,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData104[]=
+{
+	{
+		140,
+		34,
+		MONSNO_PERIPPAA,
+	},
+	{
+		140,
+		34,
+		MONSNO_BAKUUDA,
+	},
+	{
+		140,
+		34,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData105[]=
+{
+	{
+		0,
+		42,
+		MONSNO_ZYUPETTA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData106[]=
+{
+	{
+		0,
+		31,
+		MONSNO_YOMAWARU,
+	},
+	{
+		0,
+		31,
+		MONSNO_KAGEBOUZU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData107[]=
+{
+	{
+		0,
+		30,
+		MONSNO_RARUTOSU,
+	},
+	{
+		0,
+		30,
+		MONSNO_YOMAWARU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData108[]=
+{
+	{
+		0,
+		32,
+		MONSNO_YAMIRAMI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData109[]=
+{
+	{
+		0,
+		31,
+		MONSNO_KAGEBOUZU,
+	},
+	{
+		0,
+		31,
+		MONSNO_YUNGERAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData110[]=
+{
+	{
+		10,
+		35,
+		MONSNO_YAMIRAMI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData111[]=
+{
+	{
+		20,
+		37,
+		MONSNO_BANEBUU,
+	},
+	{
+		20,
+		37,
+		MONSNO_YAMIRAMI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData112[]=
+{
+	{
+		30,
+		40,
+		MONSNO_BANEBUU,
+	},
+	{
+		30,
+		40,
+		MONSNO_YAMIRAMI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData113[]=
+{
+	{
+		40,
+		42,
+		MONSNO_YOMAWARU,
+	},
+	{
+		40,
+		42,
+		MONSNO_YAMIRAMI,
+	},
+	{
+		40,
+		42,
+		MONSNO_BUUPIGGU,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData114[]=
+{
+	{
+		0,
+		7,
+		MONSNO_ZIGUZAGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData115[]=
+{
+	{
+		0,
+		18,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData116[]=
+{
+	{
+		0,
+		10,
+		MONSNO_SOONANO,
+		{
+			WAZANO_AMAERU,
+			WAZANO_ANKOORU,
+			0,
+			0,
+		},
+	},
+	{
+		0,
+		10,
+		MONSNO_SUBAME,
+		{
+			WAZANO_DENKOUSEKKA,
+			WAZANO_NAKIGOE,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData117[]=
+{
+	{
+		0,
+		11,
+		MONSNO_ZIGUZAGUMA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_SIPPOWOHURU,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData118[]=
+{
+	{
+		100,
+		41,
+		MONSNO_AZUMAOU,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData119[]=
+{
+	{
+		100,
+		45,
+		MONSNO_ROZERIA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData120[]=
+{
+	{
+		10,
+		27,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData121[]=
+{
+	{
+		20,
+		30,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData122[]=
+{
+	{
+		30,
+		33,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData123[]=
+{
+	{
+		40,
+		36,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+		{
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DOROASOBI,
+			WAZANO_KAGIWAKERU,
+			WAZANO_SUNAKAKE,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData124[]=
+{
+	{
+		0,
+		22,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData125[]=
+{
+	{
+		0,
+		22,
+		MONSNO_KINOKOKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData126[]=
+{
+	{
+		0,
+		22,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData127[]=
+{
+	{
+		0,
+		30,
+		MONSNO_KAKUREON,
+		{
+			WAZANO_SIMETUKERU,
+			WAZANO_SITADENAMERU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		0,
+		30,
+		MONSNO_HABUNEEKU,
+		{
+			WAZANO_POIZUNTEERU,
+			WAZANO_IYANAOTO,
+			WAZANO_HEBINIRAMI,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData128[]=
+{
+	{
+		100,
+		40,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		100,
+		40,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData129[]=
+{
+	{
+		100,
+		41,
+		MONSNO_MARIRURI,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData130[]=
+{
+	{
+		100,
+		41,
+		MONSNO_HASUBURERO,
+		{
+			WAZANO_SAWAGU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_NEKODAMASI,
+			WAZANO_MIZUDEPPOU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData131[]=
+{
+	{
+		100,
+		39,
+		MONSNO_KIBANIA,
+	},
+	{
+		100,
+		39,
+		MONSNO_HOERUKO,
+	},
+	{
+		100,
+		39,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData132[]=
+{
+	{
+		10,
+		33,
+		MONSNO_KAKUREON,
+		{
+			WAZANO_SIMETUKERU,
+			WAZANO_SITADENAMERU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		10,
+		33,
+		MONSNO_HABUNEEKU,
+		{
+			WAZANO_POIZUNTEERU,
+			WAZANO_IYANAOTO,
+			WAZANO_HEBINIRAMI,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData133[]=
+{
+	{
+		20,
+		36,
+		MONSNO_KAKUREON,
+		{
+			WAZANO_SIMETUKERU,
+			WAZANO_SITADENAMERU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		20,
+		36,
+		MONSNO_HABUNEEKU,
+		{
+			WAZANO_POIZUNTEERU,
+			WAZANO_IYANAOTO,
+			WAZANO_HEBINIRAMI,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData134[]=
+{
+	{
+		30,
+		39,
+		MONSNO_KAKUREON,
+		{
+			WAZANO_SIMETUKERU,
+			WAZANO_SITADENAMERU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		30,
+		39,
+		MONSNO_HABUNEEKU,
+		{
+			WAZANO_POIZUNTEERU,
+			WAZANO_IYANAOTO,
+			WAZANO_HEBINIRAMI,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData135[]=
+{
+	{
+		40,
+		42,
+		MONSNO_KAKUREON,
+		{
+			WAZANO_SIMETUKERU,
+			WAZANO_SITADENAMERU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		40,
+		42,
+		MONSNO_HABUNEEKU,
+		{
+			WAZANO_POIZUNTEERU,
+			WAZANO_IYANAOTO,
+			WAZANO_HEBINIRAMI,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData136[]=
+{
+	{
+		0,
+		7,
+		MONSNO_ZIGUZAGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData137[]=
+{
+	{
+		0,
+		18,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData138[]=
+{
+	{
+		0,
+		45,
+		MONSNO_MARIRURI,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData139[]=
+{
+	{
+		0,
+		27,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData140[]=
+{
+	{
+		0,
+		30,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData141[]=
+{
+	{
+		0,
+		33,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData142[]=
+{
+	{
+		0,
+		36,
+		MONSNO_MASSUGUMA,
+		ITEM_KINNOTAMA,
+		{
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DOROASOBI,
+			WAZANO_KAGIWAKERU,
+			WAZANO_SUNAKAKE,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData143[]=
+{
+	{
+		0,
+		20,
+		MONSNO_KOKODORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData144[]=
+{
+	{
+		0,
+		23,
+		MONSNO_KODORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData145[]=
+{
+	{
+		0,
+		32,
+		MONSNO_KODORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData146[]=
+{
+	{
+		0,
+		25,
+		MONSNO_KODORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData147[]=
+{
+	{
+		10,
+		27,
+		MONSNO_KODORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData148[]=
+{
+	{
+		20,
+		29,
+		MONSNO_KODORA,
+	},
+	{
+		20,
+		29,
+		MONSNO_SAIHOON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData149[]=
+{
+	{
+		30,
+		32,
+		MONSNO_KODORA,
+	},
+	{
+		30,
+		32,
+		MONSNO_SAIHOON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData150[]=
+{
+	{
+		40,
+		35,
+		MONSNO_BOSUGODORA,
+	},
+	{
+		40,
+		35,
+		MONSNO_SAIDON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData151[]=
+{
+	{
+		0,
+		27,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData152[]=
+{
+	{
+		0,
+		25,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		25,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData153[]=
+{
+	{
+		0,
+		26,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		26,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData154[]=
+{
+	{
+		0,
+		27,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData155[]=
+{
+	{
+		0,
+		27,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData156[]=
+{
+	{
+		0,
+		26,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		26,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData157[]=
+{
+	{
+		0,
+		27,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData158[]=
+{
+	{
+		0,
+		26,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		26,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData159[]=
+{
+	{
+		0,
+		33,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		33,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		33,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData160[]=
+{
+	{
+		0,
+		35,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData161[]=
+{
+	{
+		0,
+		34,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		34,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData162[]=
+{
+	{
+		0,
+		35,
+		MONSNO_TATTUU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData163[]=
+{
+	{
+		0,
+		35,
+		MONSNO_GYARADOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData164[]=
+{
+	{
+		0,
+		33,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		33,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		33,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData165[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TATTUU,
+	},
+	{
+		0,
+		34,
+		MONSNO_GYARADOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData166[]=
+{
+	{
+		0,
+		35,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData167[]=
+{
+	{
+		0,
+		34,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		34,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData168[]=
+{
+	{
+		0,
+		38,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData169[]=
+{
+	{
+		0,
+		35,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData170[]=
+{
+	{
+		0,
+		34,
+		MONSNO_DOKUKURAGE,
+	},
+	{
+		0,
+		34,
+		MONSNO_TODOGURAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData171[]=
+{
+	{
+		0,
+		37,
+		MONSNO_DOKUKURAGE,
+	},
+	{
+		0,
+		37,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData172[]=
+{
+	{
+		0,
+		34,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		34,
+		MONSNO_GYARADOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData173[]=
+{
+	{
+		0,
+		33,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		33,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		33,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData174[]=
+{
+	{
+		0,
+		34,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		34,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData175[]=
+{
+	{
+		10,
+		30,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData176[]=
+{
+	{
+		20,
+		33,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData177[]=
+{
+	{
+		30,
+		34,
+		MONSNO_HITODEMAN,
+	},
+	{
+		30,
+		36,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData178[]=
+{
+	{
+		40,
+		37,
+		MONSNO_SUTAAMII,
+	},
+	{
+		40,
+		39,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData179[]=
+{
+	{
+		100,
+		14,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData180[]=
+{
+	{
+		100,
+		34,
+		MONSNO_GOORIKII,
+	},
+	{
+		100,
+		34,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData181[]=
+{
+	{
+		100,
+		33,
+		MONSNO_MAKUNOSITA,
+	},
+	{
+		100,
+		33,
+		MONSNO_MAKUNOSITA,
+	},
+	{
+		100,
+		33,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData182[]=
+{
+	{
+		100,
+		26,
+		MONSNO_WANRIKII,
+	},
+	{
+		100,
+		26,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData183[]=
+{
+	{
+		100,
+		20,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData184[]=
+{
+	{
+		110,
+		27,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData185[]=
+{
+	{
+		120,
+		29,
+		MONSNO_WANRIKII,
+	},
+	{
+		120,
+		29,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData186[]=
+{
+	{
+		130,
+		31,
+		MONSNO_WANRIKII,
+	},
+	{
+		130,
+		31,
+		MONSNO_GOORIKII,
+	},
+	{
+		130,
+		31,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData187[]=
+{
+	{
+		140,
+		33,
+		MONSNO_WANRIKII,
+		0,
+	},
+	{
+		140,
+		33,
+		MONSNO_GOORIKII,
+		0,
+	},
+	{
+		140,
+		33,
+		MONSNO_GOORIKII,
+		0,
+	},
+	{
+		140,
+		33,
+		MONSNO_KAIRIKII,
+		ITEM_KUROOBI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData188[]=
+{
+	{
+		100,
+		26,
+		MONSNO_MAKUNOSITA,
+	},
+	{
+		100,
+		26,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData189[]=
+{
+	{
+		100,
+		19,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData190[]=
+{
+	{
+		100,
+		30,
+		MONSNO_MAKUNOSITA,
+	},
+	{
+		100,
+		30,
+		MONSNO_GOORIKII,
+	},
+	{
+		100,
+		30,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData191[]=
+{
+	{
+		100,
+		18,
+		MONSNO_RAKURAI,
+	},
+	{
+		100,
+		18,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData192[]=
+{
+	{
+		100,
+		19,
+		MONSNO_RAKURAI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData193[]=
+{
+	{
+		100,
+		18,
+		MONSNO_KOIRU,
+	},
+	{
+		100,
+		18,
+		MONSNO_RAKURAI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData194[]=
+{
+	{
+		100,
+		17,
+		MONSNO_BIRIRIDAMA,
+	},
+	{
+		100,
+		17,
+		MONSNO_BIRIRIDAMA,
+	},
+	{
+		100,
+		17,
+		MONSNO_BIRIRIDAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData195[]=
+{
+	{
+		0,
+		13,
+		MONSNO_RAKURAI,
+	},
+	{
+		0,
+		13,
+		MONSNO_RAKURAI,
+	},
+	{
+		0,
+		13,
+		MONSNO_RAKURAI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData196[]=
+{
+	{
+		0,
+		15,
+		MONSNO_KOIRU,
+	},
+	{
+		0,
+		15,
+		MONSNO_GONYONYO,
+	},
+	{
+		0,
+		15,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData197[]=
+{
+	{
+		10,
+		25,
+		MONSNO_KOIRU,
+	},
+	{
+		10,
+		25,
+		MONSNO_GONYONYO,
+	},
+	{
+		10,
+		25,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData198[]=
+{
+	{
+		20,
+		28,
+		MONSNO_KOIRU,
+	},
+	{
+		20,
+		28,
+		MONSNO_DOGOOMU,
+	},
+	{
+		20,
+		28,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData199[]=
+{
+	{
+		30,
+		31,
+		MONSNO_REAKOIRU,
+	},
+	{
+		30,
+		31,
+		MONSNO_DOGOOMU,
+	},
+	{
+		30,
+		31,
+		MONSNO_REAKOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData200[]=
+{
+	{
+		40,
+		34,
+		MONSNO_REAKOIRU,
+	},
+	{
+		40,
+		34,
+		MONSNO_BAKUONGU,
+	},
+	{
+		40,
+		34,
+		MONSNO_REAKOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData201[]=
+{
+	{
+		100,
+		22,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		100,
+		22,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		100,
+		22,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData202[]=
+{
+	{
+		100,
+		24,
+		MONSNO_MAGUMAGGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData203[]=
+{
+	{
+		100,
+		23,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		23,
+		MONSNO_MAGUMAGGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData204[]=
+{
+	{
+		100,
+		24,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData205[]=
+{
+	{
+		100,
+		23,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		100,
+		23,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData206[]=
+{
+	{
+		0,
+		19,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		0,
+		19,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData207[]=
+{
+	{
+		10,
+		26,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		10,
+		26,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData208[]=
+{
+	{
+		20,
+		29,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		20,
+		29,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData209[]=
+{
+	{
+		30,
+		32,
+		MONSNO_MAGUMAGGU,
+	},
+	{
+		30,
+		32,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData210[]=
+{
+	{
+		40,
+		35,
+		MONSNO_MAGUKARUGO,
+	},
+	{
+		40,
+		35,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData211[]=
+{
+	{
+		0,
+		24,
+		MONSNO_SANDO,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+			WAZANO_KIRISAKU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData212[]=
+{
+	{
+		0,
+		22,
+		MONSNO_YAZIRON,
+		{
+			WAZANO_KOUSOKUSUPIN,
+			WAZANO_DOROKAKE,
+			WAZANO_SAIKEKOUSEN,
+			WAZANO_GANSEKIHUUZI,
+		},
+	},
+	{
+		0,
+		22,
+		MONSNO_SANDO,
+		{
+			WAZANO_DOKUBARI,
+			WAZANO_SUNAKAKE,
+			WAZANO_HIKKAKU,
+			WAZANO_ANAWOHORU,
+		},
+	},
+	{
+		0,
+		22,
+		MONSNO_YAZIRON,
+		{
+			WAZANO_KOUSOKUSUPIN,
+			WAZANO_DOROKAKE,
+			WAZANO_SAIKEKOUSEN,
+			WAZANO_GANSEKIHUUZI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData213[]=
+{
+	{
+		0,
+		18,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		18,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData214[]=
+{
+	{
+		0,
+		19,
+		MONSNO_SANDO,
+	},
+	{
+		0,
+		19,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData215[]=
+{
+	{
+		0,
+		24,
+		MONSNO_KAKUREON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData216[]=
+{
+	{
+		0,
+		21,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		21,
+		MONSNO_SUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData217[]=
+{
+	{
+		0,
+		9,
+		MONSNO_SUBAME,
+	},
+	{
+		0,
+		9,
+		MONSNO_KAKUREON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData218[]=
+{
+	{
+		0,
+		19,
+		MONSNO_SANDO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData219[]=
+{
+	{
+		10,
+		26,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		10,
+		26,
+		MONSNO_SUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData220[]=
+{
+	{
+		20,
+		29,
+		MONSNO_MASSUGUMA,
+	},
+	{
+		20,
+		29,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData221[]=
+{
+	{
+		30,
+		31,
+		MONSNO_SANDO,
+	},
+	{
+		30,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		30,
+		31,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData222[]=
+{
+	{
+		40,
+		34,
+		MONSNO_OOSUBAME,
+	},
+	{
+		40,
+		34,
+		MONSNO_SANDOPAN,
+	},
+	{
+		40,
+		34,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData223[]=
+{
+	{
+		100,
+		27,
+		MONSNO_AMETAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData224[]=
+{
+	{
+		100,
+		25,
+		MONSNO_KEMUSSO,
+	},
+	{
+		100,
+		25,
+		MONSNO_KARASARISU,
+	},
+	{
+		100,
+		25,
+		MONSNO_AGEHANTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData225[]=
+{
+	{
+		100,
+		25,
+		MONSNO_KEMUSSO,
+	},
+	{
+		100,
+		25,
+		MONSNO_MAYURUDO,
+	},
+	{
+		100,
+		25,
+		MONSNO_DOKUKEIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData226[]=
+{
+	{
+		0,
+		28,
+		MONSNO_AMETAMA,
+	},
+	{
+		0,
+		28,
+		MONSNO_AMETAMA,
+	},
+	{
+		0,
+		28,
+		MONSNO_AMETAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData227[]=
+{
+	{
+		100,
+		15,
+		MONSNO_TUTININ,
+	},
+	{
+		150,
+		15,
+		MONSNO_DOKUKEIRU,
+	},
+	{
+		150,
+		15,
+		MONSNO_AGEHANTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData228[]=
+{
+	{
+		10,
+		31,
+		MONSNO_AMETAMA,
+	},
+	{
+		10,
+		31,
+		MONSNO_AMETAMA,
+	},
+	{
+		10,
+		31,
+		MONSNO_AMETAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData229[]=
+{
+	{
+		20,
+		34,
+		MONSNO_AMETAMA,
+	},
+	{
+		20,
+		34,
+		MONSNO_AMETAMA,
+	},
+	{
+		20,
+		34,
+		MONSNO_AMEMOOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData230[]=
+{
+	{
+		30,
+		36,
+		MONSNO_AMETAMA,
+	},
+	{
+		30,
+		36,
+		MONSNO_KEMUSSO,
+	},
+	{
+		30,
+		36,
+		MONSNO_AMETAMA,
+	},
+	{
+		30,
+		36,
+		MONSNO_AMEMOOSU,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData231[]=
+{
+	{
+		40,
+		38,
+		MONSNO_AMETAMA,
+		0,
+	},
+	{
+		40,
+		38,
+		MONSNO_DOKUKEIRU,
+		0,
+	},
+	{
+		40,
+		38,
+		MONSNO_AMETAMA,
+		0,
+	},
+	{
+		40,
+		38,
+		MONSNO_AMEMOOSU,
+		ITEM_GINNOKONA,
+	},
+	{
+		40,
+		38,
+		MONSNO_AGEHANTO,
+		0,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData232[]=
+{
+	{
+		0,
+		16,
+		MONSNO_KEESHI,
+		{
+			WAZANO_MEZAMERUPAWAA,
+			0,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData233[]=
+{
+	{
+		100,
+		37,
+		MONSNO_KIRURIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData234[]=
+{
+	{
+		100,
+		36,
+		MONSNO_RARUTOSU,
+	},
+	{
+		100,
+		36,
+		MONSNO_YUNGERAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData235[]=
+{
+	{
+		100,
+		35,
+		MONSNO_NEITHI,
+	},
+	{
+		100,
+		35,
+		MONSNO_KIRINRIKI,
+	},
+	{
+		100,
+		35,
+		MONSNO_YUNGERAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData236[]=
+{
+	{
+		0,
+		31,
+		MONSNO_RARUTOSU,
+	},
+	{
+		0,
+		31,
+		MONSNO_KIRURIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData237[]=
+{
+	{
+		0,
+		41,
+		MONSNO_YUNGERAA,
+	},
+	{
+		0,
+		41,
+		MONSNO_SORUROKKU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData238[]=
+{
+	{
+		0,
+		31,
+		MONSNO_YUNGERAA,
+	},
+	{
+		0,
+		31,
+		MONSNO_SORUROKKU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData239[]=
+{
+	{
+		10,
+		34,
+		MONSNO_YUNGERAA,
+	},
+	{
+		10,
+		34,
+		MONSNO_SORUROKKU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData240[]=
+{
+	{
+		20,
+		37,
+		MONSNO_YUNGERAA,
+	},
+	{
+		20,
+		37,
+		MONSNO_SORUROKKU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData241[]=
+{
+	{
+		30,
+		40,
+		MONSNO_YUNGERAA,
+	},
+	{
+		30,
+		40,
+		MONSNO_SORUROKKU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData242[]=
+{
+	{
+		40,
+		43,
+		MONSNO_SORUROKKU,
+	},
+	{
+		40,
+		43,
+		MONSNO_HUUDHIN,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData243[]=
+{
+	{
+		0,
+		16,
+		MONSNO_KEESHI,
+		{
+			WAZANO_MEZAMERUPAWAA,
+			0,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData244[]=
+{
+	{
+		100,
+		36,
+		MONSNO_RARUTOSU,
+	},
+	{
+		100,
+		36,
+		MONSNO_KIRURIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData245[]=
+{
+	{
+		100,
+		37,
+		MONSNO_NEITHIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData246[]=
+{
+	{
+		100,
+		36,
+		MONSNO_YUNGERAA,
+	},
+	{
+		100,
+		36,
+		MONSNO_KIRURIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData247[]=
+{
+	{
+		0,
+		32,
+		MONSNO_YUNGERAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData248[]=
+{
+	{
+		0,
+		40,
+		MONSNO_KIRURIA,
+	},
+	{
+		0,
+		40,
+		MONSNO_NEITHIO,
+	},
+	{
+		0,
+		40,
+		MONSNO_YUNGERAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData249[]=
+{
+	{
+		0,
+		31,
+		MONSNO_YUNGERAA,
+	},
+	{
+		0,
+		31,
+		MONSNO_RUNATOON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData250[]=
+{
+	{
+		10,
+		34,
+		MONSNO_YUNGERAA,
+	},
+	{
+		10,
+		34,
+		MONSNO_RUNATOON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData251[]=
+{
+	{
+		20,
+		37,
+		MONSNO_YUNGERAA,
+	},
+	{
+		20,
+		37,
+		MONSNO_RUNATOON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData252[]=
+{
+	{
+		30,
+		40,
+		MONSNO_YUNGERAA,
+	},
+	{
+		30,
+		40,
+		MONSNO_RUNATOON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData253[]=
+{
+	{
+		40,
+		43,
+		MONSNO_RUNATOON,
+	},
+	{
+		40,
+		43,
+		MONSNO_HUUDHIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData254[]=
+{
+	{
+		0,
+		31,
+		MONSNO_RAIBORUTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData255[]=
+{
+	{
+		0,
+		44,
+		MONSNO_RAIBORUTO,
+	},
+	{
+		0,
+		44,
+		MONSNO_RAIBORUTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData256[]=
+{
+	{
+		0,
+		45,
+		MONSNO_ZANGUUSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData257[]=
+{
+	{
+		10,
+		34,
+		MONSNO_RAIBORUTO,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData258[]=
+{
+	{
+		20,
+		36,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_ZUTUKI,
+			WAZANO_SUNAKAKE,
+			WAZANO_KAGIWAKERU,
+			WAZANO_MIDAREHIKKAKI,
+		},
+	},
+	{
+		20,
+		36,
+		MONSNO_RAIBORUTO,
+		{
+			WAZANO_DENKOUSEKKA,
+			WAZANO_SUPAAKU,
+			WAZANO_KAGIWAKERU,
+			WAZANO_HOERU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData259[]=
+{
+	{
+		30,
+		39,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_ZUTUKI,
+			WAZANO_SUNAKAKE,
+			WAZANO_KAGIWAKERU,
+			WAZANO_MIDAREHIKKAKI,
+		},
+	},
+	{
+		30,
+		39,
+		MONSNO_RAIBORUTO,
+		{
+			WAZANO_DENKOUSEKKA,
+			WAZANO_SUPAAKU,
+			WAZANO_KAGIWAKERU,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData260[]=
+{
+	{
+		40,
+		41,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_ZUTUKI,
+			WAZANO_SUNAKAKE,
+			WAZANO_KAGIWAKERU,
+			WAZANO_MIDAREHIKKAKI,
+		},
+	},
+	{
+		40,
+		41,
+		MONSNO_GORUDAKKU,
+		{
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_KANASIBARI,
+			WAZANO_NENRIKI,
+			WAZANO_ZIKOANZI,
+		},
+	},
+	{
+		40,
+		41,
+		MONSNO_RAIBORUTO,
+		{
+			WAZANO_DENKOUSEKKA,
+			WAZANO_SUPAAKU,
+			WAZANO_KAGIWAKERU,
+			WAZANO_HOERU,
+		},
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData261[]=
+{
+	{
+		250,
+		46,
+		MONSNO_GURAENA,
+		0,
+		{
+			WAZANO_HOERU,
+			WAZANO_TOSSIN,
+			WAZANO_SUNAKAKE,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+	{
+		250,
+		48,
+		MONSNO_DAATENGU,
+		0,
+		{
+			WAZANO_NEKODAMASI,
+			WAZANO_KAGEBUNSIN,
+			WAZANO_IBARU,
+			WAZANO_ZINTUURIKI,
+		},
+	},
+	{
+		250,
+		46,
+		MONSNO_NOKUTASU,
+		0,
+		{
+			WAZANO_YADORIGINOTANE,
+			WAZANO_DAMASIUTI,
+			WAZANO_NIIDORUAAMU,
+			WAZANO_WATAHOUSI,
+		},
+	},
+	{
+		250,
+		48,
+		MONSNO_SAMEHADAA,
+		0,
+		{
+			WAZANO_KAMIKUDAKU,
+			WAZANO_IBARU,
+			WAZANO_NAMINORI,
+			WAZANO_KIRISAKU,
+		},
+	},
+	{
+		255,
+		49,
+		MONSNO_ABUSORU,
+		ITEM_OBONNOMI,
+		{
+			WAZANO_TUBAMEGAESI,
+			WAZANO_YOKODORI,
+			WAZANO_TURUGINOMAI,
+			WAZANO_KIRISAKU,
+		},
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData262[]=
+{
+	{
+		250,
+		48,
+		MONSNO_SAMAYOORU,
+		0,
+		{
+			WAZANO_SYADOOPANTI,
+			WAZANO_AYASIIHIKARI,
+			WAZANO_NOROI,
+			WAZANO_MIRAIYOTI,
+		},
+	},
+	{
+		250,
+		49,
+		MONSNO_ZYUPETTA,
+		0,
+		{
+			WAZANO_SYADOOBOORU,
+			WAZANO_URAMI,
+			WAZANO_ONIBI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		250,
+		50,
+		MONSNO_YAMIRAMI,
+		0,
+		{
+			WAZANO_SYADOOBOORU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_MEROMERO,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		250,
+		49,
+		MONSNO_ZYUPETTA,
+		0,
+		{
+			WAZANO_SYADOOBOORU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_DOKUDOKU,
+			WAZANO_SUKIRUSUWAPPU,
+		},
+	},
+	{
+		255,
+		51,
+		MONSNO_SAMAYOORU,
+		ITEM_OBONNOMI,
+		{
+			WAZANO_SYADOOBOORU,
+			WAZANO_REITOUBIIMU,
+			WAZANO_AYASIIHIKARI,
+			WAZANO_ZISIN,
+		},
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData263[]=
+{
+	{
+		250,
+		50,
+		MONSNO_ONIGOORI,
+		0,
+		{
+			WAZANO_HIKARINOKABE,
+			WAZANO_KAMIKUDAKU,
+			WAZANO_ARARE,
+			WAZANO_REITOUBIIMU,
+		},
+	},
+	{
+		250,
+		50,
+		MONSNO_TODOGURAA,
+		0,
+		{
+			WAZANO_NAMINORI,
+			WAZANO_NOSIKAKARI,
+			WAZANO_ARARE,
+			WAZANO_AISUBOORU,
+		},
+	},
+	{
+		250,
+		52,
+		MONSNO_TODOGURAA,
+		0,
+		{
+			WAZANO_MEROMERO,
+			WAZANO_DAIBINGU,
+			WAZANO_ARARE,
+			WAZANO_HUBUKI,
+		},
+	},
+	{
+		250,
+		52,
+		MONSNO_ONIGOORI,
+		0,
+		{
+			WAZANO_SYADOOBOORU,
+			WAZANO_KAMIKUDAKU,
+			WAZANO_ARARE,
+			WAZANO_REITOUBIIMU,
+		},
+	},
+	{
+		255,
+		53,
+		MONSNO_TODOZERUGA,
+		ITEM_OBONNOMI,
+		{
+			WAZANO_NAMINORI,
+			WAZANO_NOSIKAKARI,
+			WAZANO_HUBUKI,
+			WAZANO_ZETTAIREIDO,
+		},
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData264[]=
+{
+	{
+		250,
+		52,
+		MONSNO_KOMORUU,
+		0,
+		{
+			WAZANO_GANSEKIHUUZI,
+			WAZANO_DORAGONKUROO,
+			WAZANO_MAMORU,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+	{
+		250,
+		54,
+		MONSNO_TIRUTARISU,
+		0,
+		{
+			WAZANO_TOSSIN,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+			WAZANO_RIHURESSYU,
+		},
+	},
+	{
+		250,
+		53,
+		MONSNO_HURAIGON,
+		0,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_SORAWOTOBU,
+			WAZANO_SUNAARASI,
+		},
+	},
+	{
+		250,
+		53,
+		MONSNO_HURAIGON,
+		0,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_KAMIKUDAKU,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_SUNAKAKE,
+		},
+	},
+	{
+		255,
+		55,
+		MONSNO_BOOMANDA,
+		ITEM_OBONNOMI,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_DORAGONKUROO,
+			WAZANO_SORAWOTOBU,
+			WAZANO_KAMIKUDAKU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData265[]=
+{
+	{
+		150,
+		14,
+		MONSNO_ISITUBUTE,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_MARUKUNARU,
+			WAZANO_IWAOTOSI,
+			WAZANO_GANSEKIHUUZI,
+		},
+	},
+	{
+		200,
+		15,
+		MONSNO_NOZUPASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_KATAKUNARU,
+			WAZANO_IWAOTOSI,
+			WAZANO_GANSEKIHUUZI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData266[]=
+{
+	{
+		150,
+		17,
+		MONSNO_WANRIKII,
+		{
+			WAZANO_NIRAMITUKERU,
+			WAZANO_KARATETYOPPU,
+			WAZANO_TIKYUUNAGE,
+			WAZANO_BIRUDOAPPU,
+		},
+	},
+	{
+		200,
+		18,
+		MONSNO_MAKUNOSITA,
+		{
+			WAZANO_TUPPARI,
+			WAZANO_HATAKIOTOSU,
+			WAZANO_SUNAKAKE,
+			WAZANO_BIRUDOAPPU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData267[]=
+{
+	{
+		200,
+		22,
+		MONSNO_KOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_SONIKKUBUUMU,
+			WAZANO_DENKISYOKKU,
+			WAZANO_DENZIHA,
+		},
+	},
+	{
+		200,
+		20,
+		MONSNO_BIRIRIDAMA,
+		{
+			WAZANO_KOROGARU,
+			WAZANO_ZIBAKU,
+			WAZANO_SUPAAKU,
+			WAZANO_SONIKKUBUUMU,
+		},
+	},
+	{
+		250,
+		23,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_SONIKKUBUUMU,
+			WAZANO_DENGEKIHA,
+			WAZANO_DENZIHA,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData268[]=
+{
+	{
+		200,
+		26,
+		MONSNO_MAGUMAGGU,
+		{
+			WAZANO_OOBAAHIITO,
+			WAZANO_SUMOGGU,
+			WAZANO_HIKARINOKABE,
+			WAZANO_NIHONBARE,
+		},
+	},
+	{
+		200,
+		26,
+		MONSNO_MAGUMAGGU,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_IWANADARE,
+			WAZANO_HIKARINOKABE,
+			WAZANO_NIHONBARE,
+		},
+	},
+	{
+		250,
+		28,
+		MONSNO_KOOTASU,
+		{
+			WAZANO_OOBAAHIITO,
+			WAZANO_NOSIKAKARI,
+			WAZANO_ZITABATA,
+			WAZANO_MEROMERO,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData269[]=
+{
+	{
+		200,
+		28,
+		MONSNO_KEKKINGU,
+		{
+			WAZANO_ANKOORU,
+			WAZANO_KARAGENKI,
+			WAZANO_AKUBI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		200,
+		30,
+		MONSNO_YARUKIMONO,
+		{
+			WAZANO_KIRISAKU,
+			WAZANO_DAMASIUTI,
+			WAZANO_KARAGENKI,
+			WAZANO_ANKOORU,
+		},
+	},
+	{
+		250,
+		31,
+		MONSNO_KEKKINGU,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_NAMAKERU,
+			WAZANO_KARAGENKI,
+			WAZANO_DAMASIUTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData270[]=
+{
+	{
+		200,
+		31,
+		MONSNO_OOSUBAME,
+		{
+			WAZANO_DENKOUSEKKA,
+			WAZANO_TUBAMEGAESI,
+			WAZANO_KAGEBUNSIN,
+			WAZANO_GAMUSYARA,
+		},
+	},
+	{
+		200,
+		30,
+		MONSNO_PERIPPAA,
+		{
+			WAZANO_MIZUDEPPOU,
+			WAZANO_TYOUONPA,
+			WAZANO_MAMORU,
+			WAZANO_TUBAMEGAESI,
+		},
+	},
+	{
+		200,
+		32,
+		MONSNO_EAAMUDO,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_MIDAREDUKI,
+			WAZANO_HAGANENOTUBASA,
+			WAZANO_TUBAMEGAESI,
+		},
+	},
+	{
+		250,
+		33,
+		MONSNO_TIRUTARISU,
+		{
+			WAZANO_ZISIN,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+			WAZANO_TUBAMEGAESI,
+		},
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData271[]=
+{
+	{
+		250,
+		42,
+		MONSNO_RUNATOON,
+		0,
+		{
+			WAZANO_HIKARINOKABE,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_SAIMINZYUTU,
+			WAZANO_MEISOU,
+		},
+	},
+	{
+		250,
+		42,
+		MONSNO_SORUROKKU,
+		0,
+		{
+			WAZANO_NIHONBARE,
+			WAZANO_SOORAABIIMU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_KAENHOUSYA,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData272[]=
+{
+	{
+		200,
+		40,
+		MONSNO_RABUKASU,
+		{
+			WAZANO_MIZUNOHADOU,
+			WAZANO_MEROMERO,
+			WAZANO_TENSINOKISSU,
+			WAZANO_ZITABATA,
+		},
+	},
+	{
+		200,
+		42,
+		MONSNO_NAMAZUN,
+		{
+			WAZANO_AMAGOI,
+			WAZANO_MIZUNOHADOU,
+			WAZANO_DOWASURE,
+			WAZANO_ZISIN,
+		},
+	},
+	{
+		200,
+		40,
+		MONSNO_TODOGURAA,
+		{
+			WAZANO_ANKOORU,
+			WAZANO_NOSIKAKARI,
+			WAZANO_OORORABIIMU,
+			WAZANO_MIZUNOHADOU,
+		},
+	},
+	{
+		200,
+		42,
+		MONSNO_AZUMAOU,
+		{
+			WAZANO_MIZUNOHADOU,
+			WAZANO_AMAGOI,
+			WAZANO_MIDAREDUKI,
+			WAZANO_TUNODORIRU,
+		},
+	},
+	{
+		250,
+		43,
+		MONSNO_MIROKAROSU,
+		{
+			WAZANO_MIZUNOHADOU,
+			WAZANO_TATUMAKI,
+			WAZANO_ZIKOSAISEI,
+			WAZANO_REITOUBIIMU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData273[]=
+{
+	{
+		10,
+		10,
+		MONSNO_RARUTOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData274[]=
+{
+	{
+		10,
+		17,
+		MONSNO_RARUTOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData275[]=
+{
+	{
+		10,
+		15,
+		MONSNO_DONMERU,
+	},
+	{
+		10,
+		15,
+		MONSNO_NAZONOKUSA,
+	},
+	{
+		10,
+		15,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData276[]=
+{
+	{
+		20,
+		26,
+		MONSNO_RARUTOSU,
+	},
+	{
+		20,
+		26,
+		MONSNO_ASANAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData277[]=
+{
+	{
+		30,
+		29,
+		MONSNO_KIRURIA,
+	},
+	{
+		30,
+		29,
+		MONSNO_ASANAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData278[]=
+{
+	{
+		40,
+		32,
+		MONSNO_KIRURIA,
+	},
+	{
+		40,
+		32,
+		MONSNO_TYAAREMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData279[]=
+{
+	{
+		50,
+		34,
+		MONSNO_KIRURIA,
+	},
+	{
+		50,
+		34,
+		MONSNO_ZYUPETTA,
+	},
+	{
+		50,
+		34,
+		MONSNO_TYAAREMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData280[]=
+{
+	{
+		10,
+		9,
+		MONSNO_KINOKOKO,
+	},
+	{
+		10,
+		9,
+		MONSNO_GONYONYO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData281[]=
+{
+	{
+		10,
+		16,
+		MONSNO_KINOKOKO,
+	},
+	{
+		10,
+		16,
+		MONSNO_AGEHANTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData282[]=
+{
+	{
+		20,
+		26,
+		MONSNO_KINOKOKO,
+	},
+	{
+		20,
+		26,
+		MONSNO_GONYONYO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData283[]=
+{
+	{
+		30,
+		29,
+		MONSNO_KINOKOKO,
+	},
+	{
+		30,
+		29,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData284[]=
+{
+	{
+		40,
+		32,
+		MONSNO_KINOGASSA,
+	},
+	{
+		40,
+		32,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData285[]=
+{
+	{
+		50,
+		35,
+		MONSNO_KINOGASSA,
+	},
+	{
+		50,
+		35,
+		MONSNO_BAKUONGU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData286[]=
+{
+	{
+		0,
+		30,
+		MONSNO_PATTIIRU,
+		{
+			WAZANO_SAIMINZYUTU,
+			WAZANO_SAIKEKOUSEN,
+			WAZANO_PIYOPIYOPANTI,
+			WAZANO_HURAHURADANSU,
+		},
+	},
+	{
+		0,
+		32,
+		MONSNO_KEKKINGU,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_AKUBI,
+			WAZANO_NAMAKERU,
+			WAZANO_DAMASIUTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData287[]=
+{
+	{
+		0,
+		16,
+		MONSNO_ZIGUZAGUMA,
+		{
+			WAZANO_NAKIGOE,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_ZUTUKI,
+			WAZANO_KAGIWAKERU,
+		},
+	},
+	{
+		0,
+		18,
+		MONSNO_MAKUNOSITA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_KIAIDAME,
+			WAZANO_TUPPARI,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData288[]=
+{
+	{
+		10,
+		26,
+		MONSNO_ZIGUZAGUMA,
+		{
+			WAZANO_NAKIGOE,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_ZUTUKI,
+			WAZANO_KAGIWAKERU,
+		},
+	},
+	{
+		10,
+		28,
+		MONSNO_MAKUNOSITA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_KIAIDAME,
+			WAZANO_TUPPARI,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData289[]=
+{
+	{
+		20,
+		29,
+		MONSNO_ZIGUZAGUMA,
+		{
+			WAZANO_NAKIGOE,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_ZUTUKI,
+			WAZANO_KAGIWAKERU,
+		},
+	},
+	{
+		20,
+		31,
+		MONSNO_MAKUNOSITA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_KIAIDAME,
+			WAZANO_TUPPARI,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData290[]=
+{
+	{
+		30,
+		32,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_NAKIGOE,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_ZUTUKI,
+			WAZANO_KAGIWAKERU,
+		},
+	},
+	{
+		30,
+		34,
+		MONSNO_MAKUNOSITA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_KIAIDAME,
+			WAZANO_TUPPARI,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData291[]=
+{
+	{
+		40,
+		35,
+		MONSNO_MASSUGUMA,
+		{
+			WAZANO_NAKIGOE,
+			WAZANO_SIPPOWOHURU,
+			WAZANO_ZUTUKI,
+			WAZANO_KAGIWAKERU,
+		},
+	},
+	{
+		40,
+		37,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_KIAIDAME,
+			WAZANO_TUPPARI,
+			0,
+		},
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData292[]=
+{
+	{
+		25,
+		16,
+		MONSNO_SUBAME,
+		ITEM_ORENNOMI,
+	},
+	{
+		25,
+		16,
+		MONSNO_ZIGUZAGUMA,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData293[]=
+{
+	{
+		0,
+		16,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData294[]=
+{
+	{
+		0,
+		22,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+		{
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+			WAZANO_IYASINOSUZU,
+		},
+	},
+	{
+		0,
+		36,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+		{
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+			WAZANO_IYASINOSUZU,
+		},
+	},
+	{
+		0,
+		40,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+		{
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+			WAZANO_IYASINOSUZU,
+		},
+	},
+	{
+		0,
+		12,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+		{
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+			WAZANO_IYASINOSUZU,
+		},
+	},
+	{
+		0,
+		30,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+		{
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+			WAZANO_IYASINOSUZU,
+		},
+	},
+	{
+		0,
+		42,
+		MONSNO_ENEKORORO,
+		ITEM_ORENNOMI,
+		{
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+			WAZANO_IYASINOSUZU,
+		},
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData295[]=
+{
+	{
+		0,
+		27,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData296[]=
+{
+	{
+		0,
+		30,
+		MONSNO_ENEKO,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData297[]=
+{
+	{
+		0,
+		33,
+		MONSNO_ENEKORORO,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData298[]=
+{
+	{
+		0,
+		36,
+		MONSNO_ENEKORORO,
+		ITEM_OBONNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData299[]=
+{
+	{
+		50,
+		17,
+		MONSNO_ROZERIA,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData300[]=
+{
+	{
+		0,
+		31,
+		MONSNO_PIKATYUU,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData301[]=
+{
+	{
+		100,
+		36,
+		MONSNO_RURIRI,
+		ITEM_ORENNOMI,
+	},
+	{
+		100,
+		38,
+		MONSNO_MARIRU,
+		ITEM_ORENNOMI,
+	},
+	{
+		100,
+		40,
+		MONSNO_MARIRURI,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData302[]=
+{
+	{
+		0,
+		15,
+		MONSNO_PURASURU,
+		ITEM_ORENNOMI,
+	},
+	{
+		0,
+		15,
+		MONSNO_MAINAN,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData303[]=
+{
+	{
+		10,
+		26,
+		MONSNO_PURASURU,
+		ITEM_ORENNOMI,
+	},
+	{
+		10,
+		26,
+		MONSNO_MAINAN,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData304[]=
+{
+	{
+		20,
+		29,
+		MONSNO_PURASURU,
+		ITEM_ORENNOMI,
+	},
+	{
+		20,
+		29,
+		MONSNO_MAINAN,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData305[]=
+{
+	{
+		30,
+		32,
+		MONSNO_PURASURU,
+		ITEM_ORENNOMI,
+	},
+	{
+		30,
+		32,
+		MONSNO_MAINAN,
+		ITEM_ORENNOMI,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData306[]=
+{
+	{
+		40,
+		35,
+		MONSNO_PURASURU,
+		ITEM_OBONNOMI,
+	},
+	{
+		40,
+		35,
+		MONSNO_MAINAN,
+		ITEM_OBONNOMI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData307[]=
+{
+	{
+		200,
+		28,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData308[]=
+{
+	{
+		210,
+		31,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_TUPPARI,
+			WAZANO_HATAKIOTOSU,
+			WAZANO_SUNAKAKE,
+			WAZANO_ANAWOHORU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData309[]=
+{
+	{
+		220,
+		34,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_TUPPARI,
+			WAZANO_HATAKIOTOSU,
+			WAZANO_SUNAKAKE,
+			WAZANO_ANAWOHORU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData310[]=
+{
+	{
+		230,
+		37,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_TUPPARI,
+			WAZANO_HARADAIKO,
+			WAZANO_SUNAKAKE,
+			WAZANO_ANAWOHORU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData311[]=
+{
+	{
+		240,
+		40,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_TUPPARI,
+			WAZANO_HARADAIKO,
+			WAZANO_SUNAKAKE,
+			WAZANO_ANAWOHORU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData312[]=
+{
+	{
+		200,
+		18,
+		MONSNO_ASANAN,
+		{
+			WAZANO_TOBIHIZAGERI,
+			WAZANO_YOGANOPOOZU,
+			WAZANO_NENRIKI,
+			WAZANO_MIKIRI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData313[]=
+{
+	{
+		200,
+		22,
+		MONSNO_ASANAN,
+	},
+	{
+		200,
+		22,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData314[]=
+{
+	{
+		210,
+		30,
+		MONSNO_ASANAN,
+	},
+	{
+		210,
+		30,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData315[]=
+{
+	{
+		220,
+		33,
+		MONSNO_TYAAREMU,
+	},
+	{
+		220,
+		33,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData316[]=
+{
+	{
+		230,
+		36,
+		MONSNO_TYAAREMU,
+	},
+	{
+		230,
+		36,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData317[]=
+{
+	{
+		240,
+		39,
+		MONSNO_TYAAREMU,
+	},
+	{
+		240,
+		39,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData318[]=
+{
+	{
+		0,
+		5,
+		MONSNO_ZIGUZAGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData319[]=
+{
+	{
+		0,
+		6,
+		MONSNO_TANEBOO,
+	},
+	{
+		0,
+		8,
+		MONSNO_SUBAME,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData320[]=
+{
+	{
+		100,
+		10,
+		MONSNO_ISITUBUTE,
+		{
+			WAZANO_TAIATARI,
+			0,
+			0,
+			0,
+		},
+	},
+	{
+		100,
+		8,
+		MONSNO_ISITUBUTE,
+		{
+			WAZANO_TAIATARI,
+			0,
+			0,
+			0,
+		},
+	},
+	{
+		100,
+		6,
+		MONSNO_ISITUBUTE,
+		{
+			WAZANO_TAIATARI,
+			0,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData321[]=
+{
+	{
+		100,
+		11,
+		MONSNO_ISITUBUTE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData322[]=
+{
+	{
+		0,
+		8,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		10,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData323[]=
+{
+	{
+		100,
+		19,
+		MONSNO_ZIGUZAGUMA,
+		{
+			WAZANO_ZUTUKI,
+			WAZANO_SUNAKAKE,
+			WAZANO_NAKIGOE,
+			WAZANO_10MANBORUTO,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData324[]=
+{
+	{
+		0,
+		9,
+		MONSNO_TUTININ,
+	},
+	{
+		0,
+		9,
+		MONSNO_TUTININ,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData325[]=
+{
+	{
+		0,
+		9,
+		MONSNO_TUTININ,
+	},
+	{
+		0,
+		9,
+		MONSNO_TUTININ,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData326[]=
+{
+	{
+		0,
+		18,
+		MONSNO_NAKKURAA,
+	},
+	{
+		0,
+		20,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData327[]=
+{
+	{
+		0,
+		20,
+		MONSNO_KOKODORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData328[]=
+{
+	{
+		10,
+		27,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData329[]=
+{
+	{
+		20,
+		28,
+		MONSNO_OOSUBAME,
+	},
+	{
+		20,
+		30,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData330[]=
+{
+	{
+		30,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		30,
+		33,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData331[]=
+{
+	{
+		40,
+		34,
+		MONSNO_OOSUBAME,
+	},
+	{
+		40,
+		32,
+		MONSNO_YARUKIMONO,
+	},
+	{
+		40,
+		36,
+		MONSNO_MASSUGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData332[]=
+{
+	{
+		0,
+		14,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		16,
+		MONSNO_ZIGUZAGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData333[]=
+{
+	{
+		0,
+		5,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		3,
+		MONSNO_SUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData334[]=
+{
+	{
+		0,
+		12,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		16,
+		MONSNO_KOKODORA,
+	},
+	{
+		0,
+		14,
+		MONSNO_RAKURAI,
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData335[]=
+{
+	{
+		255,
+		57,
+		MONSNO_EAAMUDO,
+		0,
+		{
+			WAZANO_DOKUDOKU,
+			WAZANO_TUBAMEGAESI,
+			WAZANO_MAKIBISI,
+			WAZANO_HAGANENOTUBASA,
+		},
+	},
+	{
+		255,
+		55,
+		MONSNO_NENDOORU,
+		0,
+		{
+			WAZANO_RIHUREKUTAA,
+			WAZANO_HIKARINOKABE,
+			WAZANO_GENSINOTIKARA,
+			WAZANO_ZISIN,
+		},
+	},
+	{
+		255,
+		56,
+		MONSNO_BOSUGODORA,
+		0,
+		{
+			WAZANO_KAMINARI,
+			WAZANO_ZISIN,
+			WAZANO_SOORAABIIMU,
+			WAZANO_DORAGONKUROO,
+		},
+	},
+	{
+		255,
+		56,
+		MONSNO_YUREIDORU,
+		0,
+		{
+			WAZANO_GIGADOREIN,
+			WAZANO_GENSINOTIKARA,
+			WAZANO_HEDOROBAKUDAN,
+			WAZANO_AYASIIHIKARI,
+		},
+	},
+	{
+		255,
+		56,
+		MONSNO_AAMARUDO,
+		0,
+		{
+			WAZANO_MIZUNOHADOU,
+			WAZANO_GENSINOTIKARA,
+			WAZANO_TUBAMEGAESI,
+			WAZANO_KIRISAKU,
+		},
+	},
+	{
+		255,
+		58,
+		MONSNO_METAGUROSU,
+		ITEM_OBONNOMI,
+		{
+			WAZANO_ZISIN,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_KOMETTOPANTI,
+			WAZANO_HAKAIKOUSEN,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData336[]=
+{
+	{
+		0,
+		5,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		10,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		15,
+		MONSNO_KOIKINGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData337[]=
+{
+	{
+		0,
+		6,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		6,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		6,
+		MONSNO_KOIKINGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData338[]=
+{
+	{
+		0,
+		16,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		16,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		18,
+		MONSNO_DOZYOTTI,
+	},
+	{
+		0,
+		16,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData339[]=
+{
+	{
+		0,
+		11,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		8,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		11,
+		MONSNO_KOIKINGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData340[]=
+{
+	{
+		0,
+		12,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData341[]=
+{
+	{
+		0,
+		12,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		15,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		9,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		12,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData342[]=
+{
+	{
+		0,
+		20,
+		MONSNO_DOZYOTTI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData343[]=
+{
+	{
+		0,
+		26,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		26,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData344[]=
+{
+	{
+		0,
+		17,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData345[]=
+{
+	{
+		0,
+		23,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		24,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		24,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		25,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData346[]=
+{
+	{
+		10,
+		24,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		10,
+		27,
+		MONSNO_GYARADOSU,
+	},
+	{
+		10,
+		27,
+		MONSNO_GYARADOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData347[]=
+{
+	{
+		20,
+		29,
+		MONSNO_GYARADOSU,
+	},
+	{
+		20,
+		26,
+		MONSNO_KIBANIA,
+	},
+	{
+		20,
+		26,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		20,
+		29,
+		MONSNO_GYARADOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData348[]=
+{
+	{
+		30,
+		31,
+		MONSNO_GYARADOSU,
+	},
+	{
+		30,
+		30,
+		MONSNO_KIBANIA,
+	},
+	{
+		30,
+		30,
+		MONSNO_DOKUKURAGE,
+	},
+	{
+		31,
+		31,
+		MONSNO_GYARADOSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData349[]=
+{
+	{
+		40,
+		33,
+		MONSNO_GYARADOSU,
+	},
+	{
+		40,
+		33,
+		MONSNO_SAMEHADAA,
+	},
+	{
+		40,
+		33,
+		MONSNO_GYARADOSU,
+	},
+	{
+		40,
+		35,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData350[]=
+{
+	{
+		0,
+		34,
+		MONSNO_GYARADOSU,
+	},
+	{
+		0,
+		29,
+		MONSNO_GYARADOSU,
+	},
+	{
+		0,
+		25,
+		MONSNO_GYARADOSU,
+	},
+	{
+		0,
+		22,
+		MONSNO_GYARADOSU,
+	},
+	{
+		0,
+		20,
+		MONSNO_GYARADOSU,
+	},
+	{
+		0,
+		19,
+		MONSNO_KOIKINGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData351[]=
+{
+	{
+		0,
+		7,
+		MONSNO_BIRIRIDAMA,
+	},
+	{
+		0,
+		7,
+		MONSNO_BIRIRIDAMA,
+	},
+	{
+		160,
+		15,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData352[]=
+{
+	{
+		0,
+		16,
+		MONSNO_KOIRU,
+	},
+	{
+		0,
+		16,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData353[]=
+{
+	{
+		0,
+		17,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData354[]=
+{
+	{
+		10,
+		28,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData355[]=
+{
+	{
+		20,
+		31,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData356[]=
+{
+	{
+		30,
+		34,
+		MONSNO_REAKOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData357[]=
+{
+	{
+		40,
+		37,
+		MONSNO_REAKOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData358[]=
+{
+	{
+		0,
+		17,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData359[]=
+{
+	{
+		80,
+		15,
+		MONSNO_KOIRU,
+	},
+	{
+		80,
+		15,
+		MONSNO_KOIRU,
+	},
+	{
+		0,
+		7,
+		MONSNO_BIRIRIDAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData360[]=
+{
+	{
+		10,
+		28,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData361[]=
+{
+	{
+		20,
+		31,
+		MONSNO_KOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData362[]=
+{
+	{
+		30,
+		34,
+		MONSNO_REAKOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData363[]=
+{
+	{
+		40,
+		37,
+		MONSNO_REAKOIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData364[]=
+{
+	{
+		0,
+		18,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData365[]=
+{
+	{
+		10,
+		28,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData366[]=
+{
+	{
+		20,
+		31,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData367[]=
+{
+	{
+		30,
+		34,
+		MONSNO_DOODORIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData368[]=
+{
+	{
+		40,
+		37,
+		MONSNO_DOODORIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData369[]=
+{
+	{
+		0,
+		18,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData370[]=
+{
+	{
+		10,
+		28,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData371[]=
+{
+	{
+		20,
+		31,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData372[]=
+{
+	{
+		30,
+		34,
+		MONSNO_DOODORIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData373[]=
+{
+	{
+		40,
+		37,
+		MONSNO_DOODORIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData374[]=
+{
+	{
+		0,
+		33,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		33,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		33,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		33,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData375[]=
+{
+	{
+		0,
+		36,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData376[]=
+{
+	{
+		0,
+		36,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData377[]=
+{
+	{
+		0,
+		36,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData378[]=
+{
+	{
+		0,
+		27,
+		MONSNO_KYAMOME,
+	},
+	{
+		80,
+		35,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData379[]=
+{
+	{
+		10,
+		39,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData380[]=
+{
+	{
+		20,
+		42,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData381[]=
+{
+	{
+		30,
+		45,
+		MONSNO_SUTAAMII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData382[]=
+{
+	{
+		40,
+		48,
+		MONSNO_SUTAAMII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData383[]=
+{
+	{
+		0,
+		26,
+		MONSNO_KYAMOME,
+	},
+	{
+		160,
+		34,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		26,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData384[]=
+{
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+	{
+		160,
+		33,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+	{
+		160,
+		33,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData385[]=
+{
+	{
+		0,
+		36,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData386[]=
+{
+	{
+		0,
+		36,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData387[]=
+{
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+	{
+		240,
+		33,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData388[]=
+{
+	{
+		10,
+		39,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData389[]=
+{
+	{
+		20,
+		42,
+		MONSNO_HITODEMAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData390[]=
+{
+	{
+		30,
+		45,
+		MONSNO_SUTAAMII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData391[]=
+{
+	{
+		40,
+		48,
+		MONSNO_SUTAAMII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData392[]=
+{
+	{
+		100,
+		38,
+		MONSNO_TIRUTARISU,
+	},
+	{
+		100,
+		38,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData393[]=
+{
+	{
+		110,
+		41,
+		MONSNO_TIRUTARISU,
+	},
+	{
+		110,
+		41,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData394[]=
+{
+	{
+		120,
+		44,
+		MONSNO_TIRUTARISU,
+	},
+	{
+		120,
+		44,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData395[]=
+{
+	{
+		130,
+		46,
+		MONSNO_TATUBEI,
+	},
+	{
+		130,
+		46,
+		MONSNO_TIRUTARISU,
+	},
+	{
+		130,
+		46,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeItemData	TrainerPokemonData396[]=
+{
+	{
+		140,
+		49,
+		MONSNO_TIRUTARISU,
+		0,
+	},
+	{
+		140,
+		49,
+		MONSNO_TIRUTARISU,
+		0,
+	},
+	{
+		140,
+		49,
+		MONSNO_KOMORUU,
+		ITEM_RYUUNOKIBA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData397[]=
+{
+	{
+		100,
+		35,
+		MONSNO_TATUBEI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData398[]=
+{
+	{
+		0,
+		27,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData399[]=
+{
+	{
+		0,
+		27,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData400[]=
+{
+	{
+		0,
+		25,
+		MONSNO_SUBAME,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		25,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData401[]=
+{
+	{
+		100,
+		30,
+		MONSNO_DOODOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData402[]=
+{
+	{
+		100,
+		29,
+		MONSNO_KYAMOME,
+	},
+	{
+		100,
+		29,
+		MONSNO_SUBAME,
+	},
+	{
+		100,
+		29,
+		MONSNO_TIRUTTO,
+	},
+	{
+		100,
+		29,
+		MONSNO_SUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData403[]=
+{
+	{
+		100,
+		30,
+		MONSNO_TIRUTTO,
+	},
+	{
+		100,
+		30,
+		MONSNO_TIRUTTO,
+	},
+	{
+		100,
+		30,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData404[]=
+{
+	{
+		100,
+		28,
+		MONSNO_KYAMOME,
+	},
+	{
+		100,
+		28,
+		MONSNO_OOSUBAME,
+	},
+	{
+		100,
+		28,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData405[]=
+{
+	{
+		0,
+		29,
+		MONSNO_NEITHI,
+	},
+	{
+		0,
+		29,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData406[]=
+{
+	{
+		0,
+		30,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData407[]=
+{
+	{
+		0,
+		36,
+		MONSNO_OOSUBAME,
+	},
+	{
+		0,
+		36,
+		MONSNO_PERIPPAA,
+	},
+	{
+		0,
+		36,
+		MONSNO_NEITHIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData408[]=
+{
+	{
+		0,
+		26,
+		MONSNO_SUBAME,
+	},
+	{
+		0,
+		26,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData409[]=
+{
+	{
+		10,
+		32,
+		MONSNO_NEITHI,
+	},
+	{
+		10,
+		32,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData410[]=
+{
+	{
+		20,
+		35,
+		MONSNO_NEITHI,
+	},
+	{
+		20,
+		35,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData411[]=
+{
+	{
+		30,
+		38,
+		MONSNO_NEITHI,
+	},
+	{
+		30,
+		38,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData412[]=
+{
+	{
+		40,
+		41,
+		MONSNO_TIRUTARISU,
+	},
+	{
+		40,
+		41,
+		MONSNO_NEITHIO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData413[]=
+{
+	{
+		0,
+		32,
+		MONSNO_NEITHI,
+	},
+	{
+		0,
+		32,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		32,
+		MONSNO_OOSUBAME,
+	},
+	{
+		0,
+		32,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData414[]=
+{
+	{
+		0,
+		34,
+		MONSNO_PERIPPAA,
+	},
+	{
+		0,
+		34,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData415[]=
+{
+	{
+		0,
+		27,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData416[]=
+{
+	{
+		0,
+		25,
+		MONSNO_TUTININ,
+	},
+	{
+		0,
+		25,
+		MONSNO_DOGAASU,
+	},
+	{
+		0,
+		25,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData417[]=
+{
+	{
+		0,
+		23,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData418[]=
+{
+	{
+		0,
+		20,
+		MONSNO_TEKKANIN,
+	},
+	{
+		0,
+		20,
+		MONSNO_NUKENIN,
+	},
+	{
+		0,
+		20,
+		MONSNO_NAKKURAA,
+	},
+	{
+		0,
+		20,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData419[]=
+{
+	{
+		0,
+		17,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_SUMOGGU,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		0,
+		17,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_SUMOGGU,
+			0,
+		},
+	},
+	{
+		0,
+		17,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_SUMOGGU,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		0,
+		19,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_SUMOGGU,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData420[]=
+{
+	{
+		0,
+		19,
+		MONSNO_TUTININ,
+	},
+	{
+		0,
+		19,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData421[]=
+{
+	{
+		0,
+		24,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		0,
+		24,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+		},
+	},
+	{
+		0,
+		24,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		0,
+		26,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData422[]=
+{
+	{
+		20,
+		27,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		20,
+		27,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		20,
+		27,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+		},
+	},
+	{
+		20,
+		29,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData423[]=
+{
+	{
+		30,
+		30,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+		},
+	},
+	{
+		30,
+		30,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+		},
+	},
+	{
+		30,
+		30,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+		},
+	},
+	{
+		30,
+		32,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeMultiData	TrainerPokemonData424[]=
+{
+	{
+		40,
+		33,
+		MONSNO_DOGAASU,
+		0,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+		},
+	},
+	{
+		40,
+		33,
+		MONSNO_DOGAASU,
+		0,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		40,
+		33,
+		MONSNO_DOGAASU,
+		0,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ZIBAKU,
+		},
+	},
+	{
+		40,
+		35,
+		MONSNO_MATADOGASU,
+		ITEM_KEMURIDAMA,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData425[]=
+{
+	{
+		100,
+		12,
+		MONSNO_ASANAN,
+	},
+	{
+		100,
+		12,
+		MONSNO_WANRIKII,
+	},
+	{
+		100,
+		12,
+		MONSNO_ASANAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData426[]=
+{
+	{
+		100,
+		14,
+		MONSNO_ASANAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData427[]=
+{
+	{
+		100,
+		19,
+		MONSNO_ASANAN,
+	},
+	{
+		100,
+		19,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData428[]=
+{
+	{
+		100,
+		27,
+		MONSNO_ASANAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData429[]=
+{
+	{
+		100,
+		27,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData430[]=
+{
+	{
+		110,
+		26,
+		MONSNO_ASANAN,
+	},
+	{
+		110,
+		26,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData431[]=
+{
+	{
+		120,
+		29,
+		MONSNO_ASANAN,
+	},
+	{
+		120,
+		29,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData432[]=
+{
+	{
+		130,
+		32,
+		MONSNO_TYAAREMU,
+	},
+	{
+		130,
+		32,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData433[]=
+{
+	{
+		140,
+		35,
+		MONSNO_TYAAREMU,
+	},
+	{
+		140,
+		35,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData434[]=
+{
+	{
+		0,
+		20,
+		MONSNO_DONMERU,
+		{
+			WAZANO_HINOKO,
+			WAZANO_TAIATARI,
+			WAZANO_MAGUNITYUUDO,
+			WAZANO_NIHONBARE,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData435[]=
+{
+	{
+		0,
+		29,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		29,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData436[]=
+{
+	{
+		0,
+		30,
+		MONSNO_POWARUN,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData437[]=
+{
+	{
+		10,
+		27,
+		MONSNO_DONMERU,
+		{
+			WAZANO_HINOKO,
+			WAZANO_TAIATARI,
+			WAZANO_MAGUNITYUUDO,
+			WAZANO_NIHONBARE,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData438[]=
+{
+	{
+		20,
+		30,
+		MONSNO_DONMERU,
+		{
+			WAZANO_HINOKO,
+			WAZANO_TOSSIN,
+			WAZANO_MAGUNITYUUDO,
+			WAZANO_NIHONBARE,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData439[]=
+{
+	{
+		30,
+		32,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_YADORIGINOTANE,
+			WAZANO_MEGADOREIN,
+			WAZANO_KUSABUE,
+			WAZANO_NIHONBARE,
+		},
+	},
+	{
+		30,
+		32,
+		MONSNO_DONMERU,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_TOSSIN,
+			WAZANO_MAGUNITYUUDO,
+			WAZANO_NIHONBARE,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData440[]=
+{
+	{
+		40,
+		35,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_YADORIGINOTANE,
+			WAZANO_GIGADOREIN,
+			WAZANO_SOORAABIIMU,
+			WAZANO_NIHONBARE,
+		},
+	},
+	{
+		40,
+		35,
+		MONSNO_BAKUUDA,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_TOSSIN,
+			WAZANO_ZISIN,
+			WAZANO_NIHONBARE,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData441[]=
+{
+	{
+		0,
+		26,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		26,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData442[]=
+{
+	{
+		0,
+		27,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData443[]=
+{
+	{
+		0,
+		27,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData444[]=
+{
+	{
+		0,
+		27,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData445[]=
+{
+	{
+		0,
+		25,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		25,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData446[]=
+{
+	{
+		0,
+		26,
+		MONSNO_TATTUU,
+	},
+	{
+		0,
+		26,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData447[]=
+{
+	{
+		0,
+		24,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		24,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		24,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		24,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData448[]=
+{
+	{
+		0,
+		25,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		25,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		25,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData449[]=
+{
+	{
+		0,
+		35,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData450[]=
+{
+	{
+		0,
+		33,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		33,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		33,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData451[]=
+{
+	{
+		0,
+		35,
+		MONSNO_RABUKASU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData452[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		34,
+		MONSNO_AZUMAOU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData453[]=
+{
+	{
+		0,
+		32,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		32,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		32,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData454[]=
+{
+	{
+		0,
+		35,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData455[]=
+{
+	{
+		0,
+		33,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		33,
+		MONSNO_TYONTII,
+	},
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData456[]=
+{
+	{
+		0,
+		33,
+		MONSNO_TATTUU,
+	},
+	{
+		0,
+		33,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		33,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData457[]=
+{
+	{
+		0,
+		35,
+		MONSNO_AZUMAOU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData458[]=
+{
+	{
+		0,
+		33,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		33,
+		MONSNO_RABUKASU,
+	},
+	{
+		0,
+		33,
+		MONSNO_MARIRURI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData459[]=
+{
+	{
+		0,
+		38,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData460[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		34,
+		MONSNO_AZUMAOU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData461[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TATTUU,
+	},
+	{
+		0,
+		34,
+		MONSNO_SIIDORA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData462[]=
+{
+	{
+		0,
+		34,
+		MONSNO_RANTAAN,
+	},
+	{
+		0,
+		34,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData463[]=
+{
+	{
+		0,
+		33,
+		MONSNO_RABUKASU,
+	},
+	{
+		0,
+		33,
+		MONSNO_RABUKASU,
+	},
+	{
+		0,
+		33,
+		MONSNO_RABUKASU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData464[]=
+{
+	{
+		0,
+		13,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData465[]=
+{
+	{
+		0,
+		38,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData466[]=
+{
+	{
+		0,
+		41,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData467[]=
+{
+	{
+		0,
+		43,
+		MONSNO_HITODEMAN,
+	},
+	{
+		0,
+		43,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData468[]=
+{
+	{
+		0,
+		45,
+		MONSNO_RABUKASU,
+	},
+	{
+		0,
+		45,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		45,
+		MONSNO_SUTAAMII,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData469[]=
+{
+	{
+		0,
+		23,
+		MONSNO_SANDO,
+		{
+			WAZANO_ANAWOHORU,
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+			WAZANO_KIRISAKU,
+		},
+	},
+	{
+		0,
+		23,
+		MONSNO_YAZIRON,
+		{
+			WAZANO_KOUSOKUSUPIN,
+			WAZANO_DOROKAKE,
+			WAZANO_SAIKEKOUSEN,
+			WAZANO_GANSEKIHUUZI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData470[]=
+{
+	{
+		0,
+		24,
+		MONSNO_SANDO,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_DOKUBARI,
+			WAZANO_KIRISAKU,
+			WAZANO_ANAWOHORU,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData471[]=
+{
+	{
+		0,
+		18,
+		MONSNO_SUBAME,
+	},
+	{
+		0,
+		18,
+		MONSNO_HASUBURERO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData472[]=
+{
+	{
+		0,
+		19,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		19,
+		MONSNO_HASUBURERO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData473[]=
+{
+	{
+		0,
+		23,
+		MONSNO_ENEKO,
+	},
+	{
+		0,
+		23,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData474[]=
+{
+	{
+		0,
+		20,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		20,
+		MONSNO_NAZONOKUSA,
+	},
+	{
+		0,
+		20,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData475[]=
+{
+	{
+		0,
+		9,
+		MONSNO_TIRUTTO,
+	},
+	{
+		0,
+		9,
+		MONSNO_ZIGUZAGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData476[]=
+{
+	{
+		0,
+		18,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		18,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData477[]=
+{
+	{
+		10,
+		25,
+		MONSNO_KINOKOKO,
+	},
+	{
+		10,
+		25,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		10,
+		25,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData478[]=
+{
+	{
+		20,
+		28,
+		MONSNO_KINOGASSA,
+	},
+	{
+		20,
+		28,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		20,
+		28,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData479[]=
+{
+	{
+		30,
+		31,
+		MONSNO_KINOGASSA,
+	},
+	{
+		30,
+		31,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		30,
+		31,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData480[]=
+{
+	{
+		40,
+		40,
+		MONSNO_KINOGASSA,
+	},
+	{
+		40,
+		40,
+		MONSNO_RAHURESIA,
+	},
+	{
+		40,
+		40,
+		MONSNO_TIRUTARISU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData481[]=
+{
+	{
+		0,
+		16,
+		MONSNO_PURASURU,
+	},
+	{
+		0,
+		16,
+		MONSNO_MAINAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData482[]=
+{
+	{
+		10,
+		27,
+		MONSNO_PURASURU,
+	},
+	{
+		10,
+		27,
+		MONSNO_MAINAN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData483[]=
+{
+	{
+		0,
+		8,
+		MONSNO_HASUBOO,
+	},
+	{
+		0,
+		8,
+		MONSNO_TANEBOO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData484[]=
+{
+	{
+		0,
+		27,
+		MONSNO_AGEHANTO,
+	},
+	{
+		0,
+		27,
+		MONSNO_DOKUKEIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData485[]=
+{
+	{
+		0,
+		9,
+		MONSNO_PURASURU,
+	},
+	{
+		0,
+		9,
+		MONSNO_MAINAN,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData486[]=
+{
+	{
+		0,
+		10,
+		MONSNO_YOMAWARU,
+		{
+			WAZANO_NAITOHEDDO,
+			WAZANO_KANASIBARI,
+			0,
+			0,
+		},
+	},
+	{
+		0,
+		10,
+		MONSNO_KINOKOKO,
+		{
+			WAZANO_SUITORU,
+			WAZANO_YADORIGINOTANE,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData487[]=
+{
+	{
+		20,
+		30,
+		MONSNO_PURASURU,
+	},
+	{
+		20,
+		30,
+		MONSNO_MAINAN,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData488[]=
+{
+	{
+		30,
+		33,
+		MONSNO_PURASURU,
+		{
+			WAZANO_SUPAAKU,
+			WAZANO_ZYUUDEN,
+			WAZANO_USONAKI,
+			WAZANO_TEDASUKE,
+		},
+	},
+	{
+		30,
+		33,
+		MONSNO_MAINAN,
+		{
+			WAZANO_SUPAAKU,
+			WAZANO_ZYUUDEN,
+			WAZANO_AMAERU,
+			WAZANO_TEDASUKE,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData489[]=
+{
+	{
+		40,
+		36,
+		MONSNO_PURASURU,
+		{
+			WAZANO_KAMINARI,
+			WAZANO_ZYUUDEN,
+			WAZANO_USONAKI,
+			WAZANO_TEDASUKE,
+		},
+	},
+	{
+		40,
+		36,
+		MONSNO_MAINAN,
+		{
+			WAZANO_KAMINARI,
+			WAZANO_ZYUUDEN,
+			WAZANO_AMAERU,
+			WAZANO_TEDASUKE,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData490[]=
+{
+	{
+		0,
+		14,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData491[]=
+{
+	{
+		0,
+		12,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		12,
+		MONSNO_WANRIKII,
+	},
+	{
+		0,
+		12,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData492[]=
+{
+	{
+		0,
+		33,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		33,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		33,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData493[]=
+{
+	{
+		0,
+		11,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		11,
+		MONSNO_WANRIKII,
+	},
+	{
+		0,
+		11,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData494[]=
+{
+	{
+		0,
+		44,
+		MONSNO_DOKUKURAGE,
+	},
+	{
+		0,
+		44,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData495[]=
+{
+	{
+		0,
+		43,
+		MONSNO_WANRIKII,
+	},
+	{
+		0,
+		43,
+		MONSNO_PERIPPAA,
+	},
+	{
+		0,
+		43,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData496[]=
+{
+	{
+		0,
+		26,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		26,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData497[]=
+{
+	{
+		10,
+		36,
+		MONSNO_KYAMOME,
+	},
+	{
+		10,
+		36,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		10,
+		36,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData498[]=
+{
+	{
+		20,
+		39,
+		MONSNO_PERIPPAA,
+	},
+	{
+		20,
+		39,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		20,
+		39,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData499[]=
+{
+	{
+		30,
+		42,
+		MONSNO_PERIPPAA,
+	},
+	{
+		30,
+		42,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		30,
+		42,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData500[]=
+{
+	{
+		40,
+		45,
+		MONSNO_PERIPPAA,
+	},
+	{
+		40,
+		45,
+		MONSNO_GOORIKII,
+	},
+	{
+		40,
+		45,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData501[]=
+{
+	{
+		0,
+		22,
+		MONSNO_ROZERIA,
+	},
+	{
+		0,
+		22,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData502[]=
+{
+	{
+		0,
+		21,
+		MONSNO_ROZERIA,
+	},
+	{
+		0,
+		21,
+		MONSNO_ROZERIA,
+	},
+	{
+		0,
+		21,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData503[]=
+{
+	{
+		0,
+		23,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData504[]=
+{
+	{
+		0,
+		35,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData505[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		34,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData506[]=
+{
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData507[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		34,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData508[]=
+{
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		33,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData509[]=
+{
+	{
+		0,
+		35,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData510[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		34,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData511[]=
+{
+	{
+		0,
+		35,
+		MONSNO_TAMAZARASI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData512[]=
+{
+	{
+		0,
+		14,
+		MONSNO_HASUBURERO,
+	},
+	{
+		0,
+		14,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData513[]=
+{
+	{
+		0,
+		20,
+		MONSNO_ZANGUUSU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData514[]=
+{
+	{
+		0,
+		20,
+		MONSNO_HABUNEEKU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData515[]=
+{
+	{
+		0,
+		26,
+		MONSNO_HASUBURERO,
+	},
+	{
+		0,
+		26,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData516[]=
+{
+	{
+		0,
+		29,
+		MONSNO_HASUBURERO,
+	},
+	{
+		0,
+		29,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData517[]=
+{
+	{
+		0,
+		32,
+		MONSNO_HASUBURERO,
+	},
+	{
+		0,
+		32,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData518[]=
+{
+	{
+		0,
+		35,
+		MONSNO_RUNPAPPA,
+	},
+	{
+		0,
+		35,
+		MONSNO_DAATENGU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData519[]=
+{
+	{
+		150,
+		44,
+		MONSNO_TIRUTARISU,
+		{
+			WAZANO_TUBAMEGAESI,
+			WAZANO_SINPINOMAMORI,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+		},
+	},
+	{
+		150,
+		43,
+		MONSNO_ENEKORORO,
+		{
+			WAZANO_UTAU,
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		150,
+		44,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_MAZIKARURIIHU,
+			WAZANO_YADORIGINOTANE,
+			WAZANO_GIGADOREIN,
+			WAZANO_DOKUDOKU,
+		},
+	},
+	{
+		150,
+		41,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_10MANBORUTO,
+			WAZANO_TORAIATAKKU,
+			WAZANO_IYANAOTO,
+		},
+	},
+	{
+		250,
+		45,
+		MONSNO_SAANAITO,
+		{
+			WAZANO_KAGEBUNSIN,
+			WAZANO_MEISOU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_MIRAIYOTI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData520[]=
+{
+	{
+		0,
+		5,
+		MONSNO_KIMORI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData521[]=
+{
+	{
+		50,
+		18,
+		MONSNO_DONMERU,
+	},
+	{
+		50,
+		18,
+		MONSNO_HOERUKO,
+	},
+	{
+		100,
+		20,
+		MONSNO_ZYUPUTORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData522[]=
+{
+	{
+		100,
+		29,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		29,
+		MONSNO_HOERUKO,
+	},
+	{
+		150,
+		31,
+		MONSNO_ZYUPUTORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData523[]=
+{
+	{
+		0,
+		5,
+		MONSNO_ATYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData524[]=
+{
+	{
+		50,
+		18,
+		MONSNO_HOERUKO,
+	},
+	{
+		50,
+		18,
+		MONSNO_KINOKOKO,
+	},
+	{
+		100,
+		20,
+		MONSNO_WAKASYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData525[]=
+{
+	{
+		100,
+		29,
+		MONSNO_HOERUKO,
+	},
+	{
+		100,
+		29,
+		MONSNO_KINOKOKO,
+	},
+	{
+		150,
+		31,
+		MONSNO_WAKASYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData526[]=
+{
+	{
+		0,
+		5,
+		MONSNO_MIZUGOROU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData527[]=
+{
+	{
+		50,
+		18,
+		MONSNO_KINOKOKO,
+	},
+	{
+		50,
+		18,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		20,
+		MONSNO_NUMAKUROO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData528[]=
+{
+	{
+		100,
+		29,
+		MONSNO_KINOKOKO,
+	},
+	{
+		100,
+		29,
+		MONSNO_DONMERU,
+	},
+	{
+		150,
+		31,
+		MONSNO_NUMAKUROO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData529[]=
+{
+	{
+		0,
+		5,
+		MONSNO_KIMORI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData530[]=
+{
+	{
+		50,
+		18,
+		MONSNO_HOERUKO,
+	},
+	{
+		50,
+		18,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		20,
+		MONSNO_ZYUPUTORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData531[]=
+{
+	{
+		100,
+		29,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		29,
+		MONSNO_HOERUKO,
+	},
+	{
+		150,
+		31,
+		MONSNO_ZYUPUTORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData532[]=
+{
+	{
+		0,
+		5,
+		MONSNO_ATYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData533[]=
+{
+	{
+		50,
+		18,
+		MONSNO_HOERUKO,
+	},
+	{
+		50,
+		18,
+		MONSNO_KINOKOKO,
+	},
+	{
+		100,
+		20,
+		MONSNO_WAKASYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData534[]=
+{
+	{
+		100,
+		29,
+		MONSNO_HOERUKO,
+	},
+	{
+		100,
+		29,
+		MONSNO_KINOKOKO,
+	},
+	{
+		150,
+		31,
+		MONSNO_WAKASYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData535[]=
+{
+	{
+		0,
+		5,
+		MONSNO_MIZUGOROU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData536[]=
+{
+	{
+		50,
+		18,
+		MONSNO_KINOKOKO,
+	},
+	{
+		50,
+		18,
+		MONSNO_DONMERU,
+	},
+	{
+		100,
+		20,
+		MONSNO_NUMAKUROO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData537[]=
+{
+	{
+		100,
+		29,
+		MONSNO_KINOKOKO,
+	},
+	{
+		100,
+		29,
+		MONSNO_DONMERU,
+	},
+	{
+		150,
+		31,
+		MONSNO_NUMAKUROO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData538[]=
+{
+	{
+		0,
+		12,
+		MONSNO_GONYONYO,
+	},
+	{
+		0,
+		12,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		12,
+		MONSNO_KOKODORA,
+	},
+	{
+		0,
+		12,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		12,
+		MONSNO_SUBAME,
+	},
+	{
+		0,
+		12,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData539[]=
+{
+	{
+		0,
+		15,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		15,
+		MONSNO_PATTIIRU,
+	},
+	{
+		0,
+		15,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData540[]=
+{
+	{
+		0,
+		13,
+		MONSNO_TANEBOO,
+	},
+	{
+		0,
+		13,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData541[]=
+{
+	{
+		10,
+		22,
+		MONSNO_DOGOOMU,
+	},
+	{
+		10,
+		22,
+		MONSNO_MASSUGUMA,
+	},
+	{
+		10,
+		22,
+		MONSNO_KOKODORA,
+	},
+	{
+		10,
+		22,
+		MONSNO_GURAENA,
+	},
+	{
+		10,
+		22,
+		MONSNO_OOSUBAME,
+	},
+	{
+		10,
+		22,
+		MONSNO_MAKUNOSITA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData542[]=
+{
+	{
+		20,
+		25,
+		MONSNO_DOGOOMU,
+	},
+	{
+		20,
+		25,
+		MONSNO_MASSUGUMA,
+	},
+	{
+		20,
+		25,
+		MONSNO_KOKODORA,
+	},
+	{
+		20,
+		25,
+		MONSNO_GURAENA,
+	},
+	{
+		20,
+		25,
+		MONSNO_OOSUBAME,
+	},
+	{
+		20,
+		25,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData543[]=
+{
+	{
+		30,
+		28,
+		MONSNO_DOGOOMU,
+	},
+	{
+		30,
+		28,
+		MONSNO_MASSUGUMA,
+	},
+	{
+		30,
+		28,
+		MONSNO_KOKODORA,
+	},
+	{
+		30,
+		28,
+		MONSNO_GURAENA,
+	},
+	{
+		30,
+		28,
+		MONSNO_OOSUBAME,
+	},
+	{
+		30,
+		28,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData544[]=
+{
+	{
+		40,
+		31,
+		MONSNO_DOGOOMU,
+	},
+	{
+		40,
+		31,
+		MONSNO_MASSUGUMA,
+	},
+	{
+		40,
+		31,
+		MONSNO_KODORA,
+	},
+	{
+		40,
+		31,
+		MONSNO_GURAENA,
+	},
+	{
+		40,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		40,
+		31,
+		MONSNO_HARITEYAMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData545[]=
+{
+	{
+		0,
+		12,
+		MONSNO_KYAMOME,
+	},
+	{
+		0,
+		12,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		12,
+		MONSNO_MARIRU,
+	},
+	{
+		0,
+		12,
+		MONSNO_ROZERIA,
+	},
+	{
+		0,
+		12,
+		MONSNO_ENEKO,
+	},
+	{
+		0,
+		12,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData546[]=
+{
+	{
+		0,
+		13,
+		MONSNO_HASUBOO,
+	},
+	{
+		0,
+		13,
+		MONSNO_HASUBURERO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData547[]=
+{
+	{
+		0,
+		24,
+		MONSNO_ENEKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData548[]=
+{
+	{
+		10,
+		22,
+		MONSNO_KYAMOME,
+	},
+	{
+		10,
+		22,
+		MONSNO_KINOKOKO,
+	},
+	{
+		10,
+		22,
+		MONSNO_MARIRU,
+	},
+	{
+		10,
+		22,
+		MONSNO_ROZERIA,
+	},
+	{
+		10,
+		22,
+		MONSNO_ENEKO,
+	},
+	{
+		10,
+		22,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData549[]=
+{
+	{
+		20,
+		25,
+		MONSNO_PERIPPAA,
+	},
+	{
+		20,
+		25,
+		MONSNO_KINOGASSA,
+	},
+	{
+		20,
+		25,
+		MONSNO_MARIRU,
+	},
+	{
+		20,
+		25,
+		MONSNO_ROZERIA,
+	},
+	{
+		20,
+		25,
+		MONSNO_ENEKORORO,
+	},
+	{
+		20,
+		25,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData550[]=
+{
+	{
+		30,
+		28,
+		MONSNO_PERIPPAA,
+	},
+	{
+		30,
+		28,
+		MONSNO_KINOGASSA,
+	},
+	{
+		30,
+		28,
+		MONSNO_MARIRU,
+	},
+	{
+		30,
+		28,
+		MONSNO_ROZERIA,
+	},
+	{
+		30,
+		28,
+		MONSNO_ENEKORORO,
+	},
+	{
+		30,
+		28,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData551[]=
+{
+	{
+		40,
+		31,
+		MONSNO_PERIPPAA,
+	},
+	{
+		40,
+		31,
+		MONSNO_KINOGASSA,
+	},
+	{
+		40,
+		31,
+		MONSNO_MARIRURI,
+	},
+	{
+		40,
+		31,
+		MONSNO_ROZERIA,
+	},
+	{
+		40,
+		31,
+		MONSNO_ENEKORORO,
+	},
+	{
+		40,
+		31,
+		MONSNO_AZUMAOU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData552[]=
+{
+	{
+		50,
+		28,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData553[]=
+{
+	{
+		50,
+		29,
+		MONSNO_TANEBOO,
+	},
+	{
+		50,
+		29,
+		MONSNO_KONOHANA,
+	},
+	{
+		50,
+		29,
+		MONSNO_HASUBURERO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData554[]=
+{
+	{
+		50,
+		39,
+		MONSNO_NOKUTASU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData555[]=
+{
+	{
+		60,
+		31,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData556[]=
+{
+	{
+		70,
+		34,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData557[]=
+{
+	{
+		80,
+		37,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData558[]=
+{
+	{
+		90,
+		39,
+		MONSNO_KAKUREON,
+	},
+	{
+		90,
+		39,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData559[]=
+{
+	{
+		50,
+		27,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		50,
+		27,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData560[]=
+{
+	{
+		50,
+		29,
+		MONSNO_HASUBOO,
+	},
+	{
+		50,
+		29,
+		MONSNO_HASUBURERO,
+	},
+	{
+		50,
+		29,
+		MONSNO_KONOHANA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData561[]=
+{
+	{
+		50,
+		38,
+		MONSNO_TIRUTTO,
+	},
+	{
+		50,
+		38,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData562[]=
+{
+	{
+		60,
+		30,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		60,
+		30,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData563[]=
+{
+	{
+		70,
+		33,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		70,
+		33,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData564[]=
+{
+	{
+		80,
+		36,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		80,
+		36,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData565[]=
+{
+	{
+		90,
+		39,
+		MONSNO_KIREIHANA,
+	},
+	{
+		90,
+		39,
+		MONSNO_ROZERIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData566[]=
+{
+	{
+		0,
+		17,
+		MONSNO_KOOTASU,
+	},
+	{
+		0,
+		17,
+		MONSNO_BAKUUDA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData567[]=
+{
+	{
+		0,
+		32,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		32,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData568[]=
+{
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		30,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		30,
+		MONSNO_DONMERU,
+	},
+	{
+		0,
+		30,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData569[]=
+{
+	{
+		0,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		0,
+		32,
+		MONSNO_ZUBATTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData570[]=
+{
+	{
+		0,
+		33,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData571[]=
+{
+	{
+		0,
+		37,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		37,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData572[]=
+{
+	{
+		0,
+		38,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData573[]=
+{
+	{
+		0,
+		36,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		36,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		36,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData574[]=
+{
+	{
+		0,
+		17,
+		MONSNO_YAZIRON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData575[]=
+{
+	{
+		0,
+		9,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData576[]=
+{
+	{
+		0,
+		9,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		9,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData577[]=
+{
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData578[]=
+{
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		16,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData579[]=
+{
+	{
+		0,
+		20,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		20,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData580[]=
+{
+	{
+		0,
+		17,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		17,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData581[]=
+{
+	{
+		0,
+		11,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData582[]=
+{
+	{
+		0,
+		27,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		27,
+		MONSNO_POTIENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData583[]=
+{
+	{
+		0,
+		27,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		27,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData584[]=
+{
+	{
+		0,
+		26,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		26,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		26,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData585[]=
+{
+	{
+		0,
+		15,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData586[]=
+{
+	{
+		0,
+		14,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		14,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData587[]=
+{
+	{
+		0,
+		17,
+		MONSNO_YAZIRON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData588[]=
+{
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+	{
+		0,
+		30,
+		MONSNO_ZUBATTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData589[]=
+{
+	{
+		0,
+		31,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		31,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData590[]=
+{
+	{
+		0,
+		31,
+		MONSNO_DONMERU,
+	},
+	{
+		0,
+		31,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData591[]=
+{
+	{
+		0,
+		28,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData592[]=
+{
+	{
+		0,
+		31,
+		MONSNO_POTIENA,
+	},
+	{
+		0,
+		31,
+		MONSNO_DONMERU,
+	},
+	{
+		0,
+		31,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData593[]=
+{
+	{
+		0,
+		33,
+		MONSNO_ZUBATTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData594[]=
+{
+	{
+		50,
+		30,
+		MONSNO_KIBANIA,
+	},
+	{
+		50,
+		30,
+		MONSNO_GURAENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData595[]=
+{
+	{
+		50,
+		30,
+		MONSNO_POTIENA,
+	},
+	{
+		50,
+		30,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData596[]=
+{
+	{
+		50,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		50,
+		32,
+		MONSNO_GURAENA,
+	},
+	{
+		50,
+		32,
+		MONSNO_BAKUUDA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData597[]=
+{
+	{
+		50,
+		20,
+		MONSNO_DONMERU,
+	},
+	{
+		50,
+		20,
+		MONSNO_POTIENA,
+	},
+	{
+		50,
+		20,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData598[]=
+{
+	{
+		50,
+		21,
+		MONSNO_KIBANIA,
+	},
+	{
+		50,
+		21,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData599[]=
+{
+	{
+		50,
+		28,
+		MONSNO_DONMERU,
+	},
+	{
+		50,
+		28,
+		MONSNO_GURAENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData600[]=
+{
+	{
+		50,
+		38,
+		MONSNO_BAKUUDA,
+	},
+	{
+		50,
+		38,
+		MONSNO_GURAENA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData601[]=
+{
+	{
+		150,
+		41,
+		MONSNO_GURAENA,
+	},
+	{
+		150,
+		41,
+		MONSNO_KUROBATTO,
+	},
+	{
+		150,
+		43,
+		MONSNO_BAKUUDA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData602[]=
+{
+	{
+		150,
+		24,
+		MONSNO_GURAENA,
+	},
+	{
+		150,
+		24,
+		MONSNO_GORUBATTO,
+	},
+	{
+		150,
+		25,
+		MONSNO_BAKUUDA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData603[]=
+{
+	{
+		0,
+		4,
+		MONSNO_ZIGUZAGUMA,
+	},
+	{
+		0,
+		4,
+		MONSNO_ZIGUZAGUMA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData604[]=
+{
+	{
+		0,
+		7,
+		MONSNO_HASUBOO,
+	},
+	{
+		0,
+		7,
+		MONSNO_KINOKOKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData605[]=
+{
+	{
+		0,
+		10,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData606[]=
+{
+	{
+		100,
+		15,
+		MONSNO_MARIRU,
+	},
+	{
+		100,
+		15,
+		MONSNO_KINOKOKO,
+	},
+	{
+		100,
+		15,
+		MONSNO_DONMERU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData607[]=
+{
+	{
+		10,
+		26,
+		MONSNO_HASUBURERO,
+	},
+	{
+		10,
+		26,
+		MONSNO_KINOKOKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData608[]=
+{
+	{
+		20,
+		29,
+		MONSNO_HASUBURERO,
+	},
+	{
+		20,
+		29,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData609[]=
+{
+	{
+		30,
+		32,
+		MONSNO_HASUBURERO,
+	},
+	{
+		30,
+		32,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData610[]=
+{
+	{
+		40,
+		34,
+		MONSNO_OOSUBAME,
+	},
+	{
+		40,
+		34,
+		MONSNO_HASUBURERO,
+	},
+	{
+		40,
+		34,
+		MONSNO_KINOGASSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData611[]=
+{
+	{
+		0,
+		16,
+		MONSNO_NAZONOKUSA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData612[]=
+{
+	{
+		0,
+		14,
+		MONSNO_ENEKO,
+	},
+	{
+		0,
+		14,
+		MONSNO_KINOKOKO,
+	},
+	{
+		0,
+		14,
+		MONSNO_MARIRU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData613[]=
+{
+	{
+		100,
+		41,
+		MONSNO_RABUKASU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData614[]=
+{
+	{
+		100,
+		40,
+		MONSNO_HOERUKO,
+	},
+	{
+		100,
+		40,
+		MONSNO_HOERUKO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData615[]=
+{
+	{
+		0,
+		4,
+		MONSNO_KEMUSSO,
+	},
+	{
+		0,
+		4,
+		MONSNO_KEMUSSO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData616[]=
+{
+	{
+		0,
+		3,
+		MONSNO_KEMUSSO,
+	},
+	{
+		0,
+		3,
+		MONSNO_KEMUSSO,
+	},
+	{
+		0,
+		3,
+		MONSNO_KEMUSSO,
+	},
+	{
+		0,
+		3,
+		MONSNO_KEMUSSO,
+	},
+	{
+		0,
+		3,
+		MONSNO_KEMUSSO,
+	},
+	{
+		0,
+		3,
+		MONSNO_KEMUSSO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData617[]=
+{
+	{
+		50,
+		8,
+		MONSNO_KEMUSSO,
+	},
+	{
+		50,
+		8,
+		MONSNO_KARASARISU,
+	},
+	{
+		50,
+		8,
+		MONSNO_TUTININ,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData618[]=
+{
+	{
+		0,
+		26,
+		MONSNO_TUTININ,
+	},
+	{
+		0,
+		26,
+		MONSNO_TUTININ,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData619[]=
+{
+	{
+		0,
+		26,
+		MONSNO_BARUBIITO,
+	},
+	{
+		0,
+		26,
+		MONSNO_IRUMIIZE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData620[]=
+{
+	{
+		0,
+		26,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData621[]=
+{
+	{
+		0,
+		8,
+		MONSNO_TUTININ,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData622[]=
+{
+	{
+		10,
+		27,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData623[]=
+{
+	{
+		20,
+		29,
+		MONSNO_DOKUKEIRU,
+	},
+	{
+		20,
+		29,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData624[]=
+{
+	{
+		30,
+		31,
+		MONSNO_AMETAMA,
+	},
+	{
+		30,
+		31,
+		MONSNO_DOKUKEIRU,
+	},
+	{
+		30,
+		31,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData625[]=
+{
+	{
+		40,
+		33,
+		MONSNO_AMETAMA,
+	},
+	{
+		40,
+		33,
+		MONSNO_TEKKANIN,
+	},
+	{
+		40,
+		33,
+		MONSNO_DOKUKEIRU,
+	},
+	{
+		40,
+		33,
+		MONSNO_TEKKANIN,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData626[]=
+{
+	{
+		0,
+		18,
+		MONSNO_DONMERU,
+	},
+	{
+		0,
+		18,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData627[]=
+{
+	{
+		0,
+		16,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		16,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		16,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		16,
+		MONSNO_ISITUBUTE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData628[]=
+{
+	{
+		0,
+		19,
+		MONSNO_WANRIKII,
+	},
+	{
+		0,
+		19,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData629[]=
+{
+	{
+		0,
+		18,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		18,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		18,
+		MONSNO_ISITUBUTE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData630[]=
+{
+	{
+		0,
+		22,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		22,
+		MONSNO_NOZUPASU,
+	},
+	{
+		0,
+		22,
+		MONSNO_GOROON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData631[]=
+{
+	{
+		0,
+		8,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		8,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		8,
+		MONSNO_ISITUBUTE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData632[]=
+{
+	{
+		0,
+		21,
+		MONSNO_YAZIRON,
+	},
+	{
+		0,
+		21,
+		MONSNO_YAZIRON,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData633[]=
+{
+	{
+		0,
+		9,
+		MONSNO_HOERUKO,
+		{
+			WAZANO_HANERU,
+			WAZANO_MIZUDEPPOU,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData634[]=
+{
+	{
+		0,
+		10,
+		MONSNO_PERIPPAA,
+		{
+			WAZANO_KAZEOKOSI,
+			WAZANO_NAKIGOE,
+			0,
+			0,
+		},
+	},
+	{
+		0,
+		10,
+		MONSNO_POTIENA,
+		{
+			WAZANO_KAMITUKU,
+			WAZANO_KOWAIKAO,
+			0,
+			0,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData635[]=
+{
+	{
+		0,
+		16,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		16,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		0,
+		16,
+		MONSNO_WANRIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData636[]=
+{
+	{
+		10,
+		24,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		10,
+		24,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		10,
+		24,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		10,
+		24,
+		MONSNO_GOROON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData637[]=
+{
+	{
+		20,
+		27,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		20,
+		27,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		20,
+		27,
+		MONSNO_GOROON,
+	},
+	{
+		20,
+		27,
+		MONSNO_GOROON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData638[]=
+{
+	{
+		30,
+		30,
+		MONSNO_ISITUBUTE,
+	},
+	{
+		30,
+		30,
+		MONSNO_GOROON,
+	},
+	{
+		30,
+		30,
+		MONSNO_GOROON,
+	},
+	{
+		30,
+		30,
+		MONSNO_GOROON,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData639[]=
+{
+	{
+		40,
+		33,
+		MONSNO_GOROON,
+	},
+	{
+		40,
+		33,
+		MONSNO_GOROON,
+	},
+	{
+		40,
+		33,
+		MONSNO_GOROON,
+	},
+	{
+		40,
+		33,
+		MONSNO_GOROONYA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData640[]=
+{
+	{
+		0,
+		32,
+		MONSNO_ENEKORORO,
+	},
+	{
+		0,
+		32,
+		MONSNO_RAIBORUTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData641[]=
+{
+	{
+		0,
+		45,
+		MONSNO_RABUKASU,
+	},
+	{
+		0,
+		45,
+		MONSNO_RABUKASU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData642[]=
+{
+	{
+		0,
+		27,
+		MONSNO_BARUBIITO,
+	},
+	{
+		0,
+		27,
+		MONSNO_IRUMIIZE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData643[]=
+{
+	{
+		10,
+		30,
+		MONSNO_BARUBIITO,
+	},
+	{
+		10,
+		30,
+		MONSNO_IRUMIIZE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData644[]=
+{
+	{
+		20,
+		33,
+		MONSNO_BARUBIITO,
+	},
+	{
+		20,
+		33,
+		MONSNO_IRUMIIZE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData645[]=
+{
+	{
+		30,
+		36,
+		MONSNO_BARUBIITO,
+	},
+	{
+		30,
+		36,
+		MONSNO_IRUMIIZE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData646[]=
+{
+	{
+		40,
+		39,
+		MONSNO_BARUBIITO,
+	},
+	{
+		40,
+		39,
+		MONSNO_IRUMIIZE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData647[]=
+{
+	{
+		0,
+		13,
+		MONSNO_TOSAKINTO,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData648[]=
+{
+	{
+		100,
+		24,
+		MONSNO_KAKUREON,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_DAMASIUTI,
+			WAZANO_SIMETUKERU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData649[]=
+{
+	{
+		100,
+		19,
+		MONSNO_ASANAN,
+		{
+			WAZANO_GAMAN,
+			WAZANO_MIKIRI,
+			WAZANO_NENRIKI,
+			WAZANO_KAMINARIPANTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData650[]=
+{
+	{
+		100,
+		24,
+		MONSNO_ASANAN,
+		{
+			WAZANO_GAMAN,
+			WAZANO_MIKIRI,
+			WAZANO_NENRIKI,
+			WAZANO_HONOONOPANTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData651[]=
+{
+	{
+		0,
+		26,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_ZIBAKU,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ENMAKU,
+		},
+	},
+	{
+		0,
+		26,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_DOKUGASU,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ENMAKU,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData652[]=
+{
+	{
+		0,
+		29,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_DOKUGASU,
+			WAZANO_TAIATARI,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ENMAKU,
+		},
+	},
+	{
+		0,
+		29,
+		MONSNO_TEKKANIN,
+		{
+			WAZANO_SUNAKAKE,
+			WAZANO_KAGEBUNSIN,
+			WAZANO_RENZOKUGIRI,
+			WAZANO_TURUGINOMAI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData653[]=
+{
+	{
+		0,
+		28,
+		MONSNO_TUTININ,
+		{
+			WAZANO_KYUUKETU,
+			WAZANO_MIDAREHIKKAKI,
+			WAZANO_KOKORONOME,
+			WAZANO_ANAWOHORU,
+		},
+	},
+	{
+		0,
+		28,
+		MONSNO_DOGAASU,
+		{
+			WAZANO_TAIATARI,
+			WAZANO_ZIBAKU,
+			WAZANO_HEDOROKOUGEKI,
+			WAZANO_ENMAKU,
+		},
+	},
+	{
+		0,
+		28,
+		MONSNO_TEKKANIN,
+		{
+			WAZANO_KAGEBUNSIN,
+			WAZANO_RENZOKUGIRI,
+			WAZANO_IYANAOTO,
+			WAZANO_TURUGINOMAI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData654[]=
+{
+	{
+		100,
+		29,
+		MONSNO_SUBAME,
+	},
+	{
+		100,
+		29,
+		MONSNO_OOSUBAME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData655[]=
+{
+	{
+		100,
+		30,
+		MONSNO_TIRUTTO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData656[]=
+{
+	{
+		30,
+		16,
+		MONSNO_RARUTOSU,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData657[]=
+{
+	{
+		150,
+		47,
+		MONSNO_TIRUTARISU,
+		{
+			WAZANO_TUBAMEGAESI,
+			WAZANO_SINPINOMAMORI,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+		},
+	},
+	{
+		150,
+		46,
+		MONSNO_ENEKORORO,
+		{
+			WAZANO_UTAU,
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		150,
+		47,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_MAZIKARURIIHU,
+			WAZANO_YADORIGINOTANE,
+			WAZANO_GIGADOREIN,
+			WAZANO_DOKUDOKU,
+		},
+	},
+	{
+		150,
+		44,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_10MANBORUTO,
+			WAZANO_TORAIATAKKU,
+			WAZANO_IYANAOTO,
+		},
+	},
+	{
+		250,
+		48,
+		MONSNO_SAANAITO,
+		{
+			WAZANO_KAGEBUNSIN,
+			WAZANO_MEISOU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_MIRAIYOTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData658[]=
+{
+	{
+		150,
+		50,
+		MONSNO_TIRUTARISU,
+		{
+			WAZANO_TUBAMEGAESI,
+			WAZANO_SINPINOMAMORI,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+		},
+	},
+	{
+		150,
+		49,
+		MONSNO_ENEKORORO,
+		{
+			WAZANO_UTAU,
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		150,
+		50,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_MAZIKARURIIHU,
+			WAZANO_YADORIGINOTANE,
+			WAZANO_GIGADOREIN,
+			WAZANO_DOKUDOKU,
+		},
+	},
+	{
+		150,
+		47,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_10MANBORUTO,
+			WAZANO_TORAIATAKKU,
+			WAZANO_IYANAOTO,
+		},
+	},
+	{
+		250,
+		51,
+		MONSNO_SAANAITO,
+		{
+			WAZANO_KAGEBUNSIN,
+			WAZANO_MEISOU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_MIRAIYOTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData659[]=
+{
+	{
+		150,
+		53,
+		MONSNO_TIRUTARISU,
+		{
+			WAZANO_TUBAMEGAESI,
+			WAZANO_SINPINOMAMORI,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+		},
+	},
+	{
+		150,
+		52,
+		MONSNO_ENEKORORO,
+		{
+			WAZANO_UTAU,
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		150,
+		53,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_MAZIKARURIIHU,
+			WAZANO_YADORIGINOTANE,
+			WAZANO_GIGADOREIN,
+			WAZANO_DOKUDOKU,
+		},
+	},
+	{
+		150,
+		50,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_10MANBORUTO,
+			WAZANO_TORAIATAKKU,
+			WAZANO_IYANAOTO,
+		},
+	},
+	{
+		250,
+		54,
+		MONSNO_SAANAITO,
+		{
+			WAZANO_KAGEBUNSIN,
+			WAZANO_MEISOU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_MIRAIYOTI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData660[]=
+{
+	{
+		150,
+		56,
+		MONSNO_TIRUTARISU,
+		{
+			WAZANO_TUBAMEGAESI,
+			WAZANO_SINPINOMAMORI,
+			WAZANO_RYUUNOIBUKI,
+			WAZANO_RYUUNOMAI,
+		},
+	},
+	{
+		150,
+		55,
+		MONSNO_ENEKORORO,
+		{
+			WAZANO_UTAU,
+			WAZANO_NEKONOTE,
+			WAZANO_AMAERU,
+			WAZANO_DAMASIUTI,
+		},
+	},
+	{
+		150,
+		56,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_MAZIKARURIIHU,
+			WAZANO_YADORIGINOTANE,
+			WAZANO_GIGADOREIN,
+			WAZANO_DOKUDOKU,
+		},
+	},
+	{
+		150,
+		53,
+		MONSNO_REAKOIRU,
+		{
+			WAZANO_TYOUONPA,
+			WAZANO_10MANBORUTO,
+			WAZANO_TORAIATAKKU,
+			WAZANO_IYANAOTO,
+		},
+	},
+	{
+		250,
+		57,
+		MONSNO_SAANAITO,
+		{
+			WAZANO_KAGEBUNSIN,
+			WAZANO_MEISOU,
+			WAZANO_SAIKOKINESISU,
+			WAZANO_MIRAIYOTI,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData661[]=
+{
+	{
+		150,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		150,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		150,
+		32,
+		MONSNO_HOERUKO,
+	},
+	{
+		200,
+		34,
+		MONSNO_ZYUPUTORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData662[]=
+{
+	{
+		150,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		150,
+		32,
+		MONSNO_HOERUKO,
+	},
+	{
+		150,
+		32,
+		MONSNO_KINOKOKO,
+	},
+	{
+		200,
+		34,
+		MONSNO_WAKASYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData663[]=
+{
+	{
+		150,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		150,
+		32,
+		MONSNO_KINOKOKO,
+	},
+	{
+		150,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		200,
+		34,
+		MONSNO_NUMAKUROO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData664[]=
+{
+	{
+		150,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		150,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		150,
+		32,
+		MONSNO_HOERUKO,
+	},
+	{
+		200,
+		34,
+		MONSNO_ZYUPUTORU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData665[]=
+{
+	{
+		150,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		150,
+		32,
+		MONSNO_HOERUKO,
+	},
+	{
+		150,
+		32,
+		MONSNO_KINOKOKO,
+	},
+	{
+		200,
+		34,
+		MONSNO_WAKASYAMO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData666[]=
+{
+	{
+		150,
+		31,
+		MONSNO_OOSUBAME,
+	},
+	{
+		150,
+		32,
+		MONSNO_KINOKOKO,
+	},
+	{
+		150,
+		32,
+		MONSNO_DONMERU,
+	},
+	{
+		200,
+		34,
+		MONSNO_NUMAKUROO,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData667[]=
+{
+	{
+		0,
+		34,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		32,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		30,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		32,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData668[]=
+{
+	{
+		0,
+		31,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		33,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		35,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData669[]=
+{
+	{
+		0,
+		15,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		25,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		35,
+		MONSNO_GYARADOSU,
+	},
+	{
+		0,
+		45,
+		MONSNO_KOIKINGU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData670[]=
+{
+	{
+		100,
+		35,
+		MONSNO_KUSAIHANA,
+	},
+	{
+		100,
+		35,
+		MONSNO_MARIRURI,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData671[]=
+{
+	{
+		100,
+		34,
+		MONSNO_DAATENGU,
+	},
+	{
+		100,
+		34,
+		MONSNO_GOROON,
+	},
+	{
+		100,
+		34,
+		MONSNO_DOGOOMU,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData672[]=
+{
+	{
+		100,
+		34,
+		MONSNO_GOORIKII,
+	},
+	{
+		100,
+		34,
+		MONSNO_GOORIKII,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData673[]=
+{
+	{
+		0,
+		30,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		30,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		35,
+		MONSNO_HOERUKO,
+	},
+	{
+		0,
+		32,
+		MONSNO_DOKUKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData674[]=
+{
+	{
+		0,
+		34,
+		MONSNO_OOSUBAME,
+	},
+	{
+		0,
+		34,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData675[]=
+{
+	{
+		0,
+		32,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		32,
+		MONSNO_KIBANIA,
+	},
+	{
+		0,
+		32,
+		MONSNO_TAMAZARASI,
+	},
+	{
+		0,
+		32,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData676[]=
+{
+	{
+		0,
+		33,
+		MONSNO_TYONTII,
+	},
+	{
+		0,
+		33,
+		MONSNO_RABUKASU,
+	},
+	{
+		0,
+		33,
+		MONSNO_PERIPPAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData677[]=
+{
+	{
+		0,
+		20,
+		MONSNO_GONYONYO,
+	},
+	{
+		0,
+		20,
+		MONSNO_GONYONYO,
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData678[]=
+{
+	{
+		0,
+		34,
+		MONSNO_TIRUTTO,
+		{
+			WAZANO_UTAU,
+			WAZANO_MIDAREDUKI,
+			WAZANO_SINPINOMAMORI,
+			WAZANO_TUBAMEGAESI,
+		},
+	},
+	{
+		0,
+		36,
+		MONSNO_DONMERU,
+		{
+			WAZANO_KAENHOUSYA,
+			WAZANO_TOSSIN,
+			WAZANO_NEMURU,
+			WAZANO_ZISIN,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData679[]=
+{
+	{
+		0,
+		19,
+		MONSNO_ROZERIA,
+		{
+			WAZANO_SEITYOU,
+			WAZANO_SIBIREGONA,
+			WAZANO_MEGADOREIN,
+			WAZANO_YADORIGINOTANE,
+		},
+	},
+	{
+		0,
+		21,
+		MONSNO_GOROON,
+		{
+			WAZANO_MARUKUNARU,
+			WAZANO_KOROGARU,
+			WAZANO_DOROASOBI,
+			WAZANO_IWAOTOSI,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData680[]=
+{
+	{
+		0,
+		27,
+		MONSNO_DOKUKEIRU,
+		{
+			WAZANO_KAZEOKOSI,
+			WAZANO_SAIKEKOUSEN,
+			WAZANO_DOKUDOKU,
+			WAZANO_MAMORU,
+		},
+	},
+	{
+		0,
+		27,
+		MONSNO_AGEHANTO,
+		{
+			WAZANO_KAZEOKOSI,
+			WAZANO_MEGADOREIN,
+			WAZANO_MEROMERO,
+			WAZANO_SIBIREGONA,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData681[]=
+{
+	{
+		200,
+		40,
+		MONSNO_TYAAREMU,
+		{
+			WAZANO_SAIKOKINESISU,
+			WAZANO_HONOONOPANTI,
+			WAZANO_ZIKOANZI,
+			WAZANO_MAMORU,
+		},
+	},
+	{
+		200,
+		40,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_GANSEKIHUUZI,
+			WAZANO_NEMURU,
+			WAZANO_HARADAIKO,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData682[]=
+{
+	{
+		210,
+		43,
+		MONSNO_TYAAREMU,
+		{
+			WAZANO_SAIKOKINESISU,
+			WAZANO_HONOONOPANTI,
+			WAZANO_ZIKOANZI,
+			WAZANO_MAMORU,
+		},
+	},
+	{
+		210,
+		43,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_GANSEKIHUUZI,
+			WAZANO_NEMURU,
+			WAZANO_HARADAIKO,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData683[]=
+{
+	{
+		220,
+		46,
+		MONSNO_TYAAREMU,
+		{
+			WAZANO_SAIKOKINESISU,
+			WAZANO_HONOONOPANTI,
+			WAZANO_ZIKOANZI,
+			WAZANO_MAMORU,
+		},
+	},
+	{
+		220,
+		46,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_GANSEKIHUUZI,
+			WAZANO_NEMURU,
+			WAZANO_HARADAIKO,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData684[]=
+{
+	{
+		230,
+		49,
+		MONSNO_TYAAREMU,
+		{
+			WAZANO_SAIKOKINESISU,
+			WAZANO_HONOONOPANTI,
+			WAZANO_ZIKOANZI,
+			WAZANO_MAMORU,
+		},
+	},
+	{
+		230,
+		49,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_GANSEKIHUUZI,
+			WAZANO_NEMURU,
+			WAZANO_HARADAIKO,
+		},
+	},
+};
+const	TrainerTypeWazaData	TrainerPokemonData685[]=
+{
+	{
+		240,
+		52,
+		MONSNO_TYAAREMU,
+		{
+			WAZANO_SAIKOKINESISU,
+			WAZANO_HONOONOPANTI,
+			WAZANO_ZIKOANZI,
+			WAZANO_MAMORU,
+		},
+	},
+	{
+		240,
+		52,
+		MONSNO_HARITEYAMA,
+		{
+			WAZANO_KIAIPANTI,
+			WAZANO_GANSEKIHUUZI,
+			WAZANO_NEMURU,
+			WAZANO_HARADAIKO,
+		},
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData686[]=
+{
+	{
+		0,
+		36,
+		MONSNO_MARIRURI,
+	},
+	{
+		0,
+		34,
+		MONSNO_KYAMOME,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData687[]=
+{
+	{
+		0,
+		36,
+		MONSNO_TYONTII,
+	},
+	{
+		0,
+		34,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData688[]=
+{
+	{
+		0,
+		42,
+		MONSNO_TYONTII,
+	},
+	{
+		0,
+		40,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData689[]=
+{
+	{
+		0,
+		45,
+		MONSNO_RANTAAN,
+	},
+	{
+		0,
+		43,
+		MONSNO_KIBANIA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData690[]=
+{
+	{
+		0,
+		48,
+		MONSNO_RANTAAN,
+	},
+	{
+		0,
+		46,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData691[]=
+{
+	{
+		0,
+		51,
+		MONSNO_RANTAAN,
+	},
+	{
+		0,
+		49,
+		MONSNO_SAMEHADAA,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData692[]=
+{
+	{
+		0,
+		28,
+		MONSNO_TOSAKINTO,
+	},
+	{
+		0,
+		26,
+		MONSNO_MENOKURAGE,
+	},
+};
+const	TrainerTypeNormalData	TrainerPokemonData693[]=
+{
+	{
+		0,
+		30,
+		MONSNO_KOIKINGU,
+	},
+	{
+		0,
+		21,
+		MONSNO_MENOKURAGE,
+	},
+	{
+		0,
+		27,
+		MONSNO_HINBASU,
+	},
+	{
+		0,
+		24,
+		MONSNO_KIBANIA,
+	},
+};

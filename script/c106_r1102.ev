@@ -1,0 +1,102 @@
+//====================================================================
+//							c106_r1102
+//						ミナモ・ミナモデパート２F
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r1102_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								料理人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cook1_01_p01_c106_r1102
+	_EASY_OBJ_MSG	msg_cook1_01_p01_c106_r1102
+	_END
+
+
+/********************************************************************/
+/*								おばさん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew2_01_p01_c106_r1102
+	_EASY_OBJ_MSG	msg_middlew2_01_p01_c106_r1102
+	_END
+
+
+/********************************************************************/
+/*								船乗り								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_c106_r1102
+	_EASY_OBJ_MSG	msg_seaman1_01_p01_c106_r1102
+	_END
+
+
+/********************************************************************/
+/*								店員								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_01_p01_c106_r1102
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_SHOP_START		c106_r1102_menu
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1102_menu
+	_SHOP_MENU		ITEM_MONSUTAABOORU
+	_SHOP_MENU		ITEM_SUUPAABOORU
+	_SHOP_MENU		ITEM_HAIPAABOORU
+	_SHOP_MENU		ITEM_ANANUKENOHIMO
+	_SHOP_MENU		ITEM_NANDEMONAOSI
+	_SHOP_MENU		ITEM_DOKUKESI
+	_SHOP_MENU		ITEM_MAHINAOSI
+	_SHOP_MENU		ITEM_YAKEDONAOSI
+	_SHOP_MENU		ITEM_KOORINAOSI
+	_SHOP_MENU		ITEM_NEMUKEZAMASI
+	_SHOP_MENU		ITEM_ENEKONOSIPPO
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								店員								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shop1_02_p01_c106_r1102
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_SHOP_START		c106_r1102_menu_02
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1102_menu_02
+
+	_SHOP_MENU		ITEM_KIZUGUSURI
+	_SHOP_MENU		ITEM_IIKIZUGUSURI
+	_SHOP_MENU		ITEM_SUGOIKIZUGUSURI
+	_SHOP_MENU		ITEM_MANTANNOKUSURI
+	_SHOP_MENU		ITEM_GENKINOKAKERA
+	_SHOP_MENU		ITEM_MUSIYOKESUPUREE
+	_SHOP_MENU		ITEM_SIRUBAASUPUREE
+	_SHOP_MENU		ITEM_GOORUDOSUPUREE
+	_SHOP_MENU		ITEM_KUROSUMEERU
+	_SHOP_MENU		ITEM_MEKANIKARUMEERU
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,19 @@
+// ●キンセツシティ　ポケモンセンター２Ｆ
+
+
+// ●帽子男１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy1_01_p01_c103_pc02
+msg_capboy1_01_p01_c103_pc02:
+	.byte	ko_,ko_,no_,spc_,KO_,RO_,SI_,A_,MU_,de_
+	.byte	CR_
+	.byte	tu_,u_,si_,n_,ta_,i_,se_,n_,spc_,de_,ki_,ru_,no_,spc_,si_,ttu_,te_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,bu_,n_,no_,spc_,se_,i_,se_,ki_,spc_,ttu_,te_
+	.byte	CR_
+	.byte	ka_,be_,wo_,spc_,mi_,ru_,to_,spc_,wa_,ka_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ke_,te_,ba_,ka_,ri_,da_,to_,spc_,ha_,zu_,ka_,si_,ku_,na_,ttu_,ti_,yya_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

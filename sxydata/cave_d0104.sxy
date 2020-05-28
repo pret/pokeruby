@@ -1,0 +1,53 @@
+//MapEditNH Ver.3.51 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D0104	1
+#define EXITNUM_CAVE_D0104	1
+#define POSNUM_CAVE_D0104	0
+#define BGNUM_CAVE_D0104	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_ball1_80[];
+
+const evObjData	OBJ_cave_d0104[] =
+{
+	{
+		BALL1_80,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_80,		//Event Lavel
+		FV_BALL1_80,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d0104[] =
+{
+	{
+		0x0005,		//Xpos
+		0x000f,		//Ypos
+		0x03,		//Height
+		CAVE_D0103_DOOR01,		//Door ID
+		CAVE_D0103,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d0104_sxy_data =
+{
+OBJNUM_CAVE_D0104,			// field obj max
+EXITNUM_CAVE_D0104,		// exit max
+POSNUM_CAVE_D0104,			// pos event max
+BGNUM_CAVE_D0104,			// bg event max
+OBJ_cave_d0104,			// field obj data
+EXIT_cave_d0104,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

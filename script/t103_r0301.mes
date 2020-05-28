@@ -1,0 +1,499 @@
+// ●流行メッセージ
+// ●＠０　流行語
+
+
+// ●入り口付近　女の子	x4,y6
+// ●もし流行の流行値が　低くなってきたら　→msg_girl2_01_p02_t103_r0301:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_t103_r0301
+msg_girl2_01_p01_t103_r0301:
+	.byte	i_,ma_,no_,spc_,ha_,ya_,ri_,ttu_,te_,spc_,i_,ttu_,ta_,ra_,spc_,ya_,ttu_,pa_,ri_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_,spc_,na_,i_
+	.byte	CR_
+	.byte	se_,i_,ka_,tu_,spc_,na_,n_,ka_,spc_,ka_,n_,ga_,e_,ra_,re_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●流行値が低い
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p02_t103_r0301
+msg_girl2_01_p02_t103_r0301:
+	.byte	i_,ma_,no_,spc_,ha_,ya_,ri_,ttu_,te_,spc_,i_,ttu_,ta_,ra_,spc_,ya_,ttu_,pa_,ri_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,mo_,u_,spc_,so_,ro_,so_,ro_
+	.byte	CR_
+	.byte	a_,ki_,te_,ki_,ta_,na_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,ra_,si_,i_,spc_,ha_,ya_,ri_,de_,mo_,spc_,sa_,ga_,so_,ttu_,ka_,na_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●机付近　女性		x1,y5
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t103_r0301
+msg_woman1_01_p01_t103_r0301:
+	.byte	wa_,ta_,si_,ha_,spc_,PO_,KE_,MO_,N_,ni_,mo_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	o_,si_,e_,te_,ru_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ga_,spc_,na_,ka_,na_,ka_
+	.byte	CR_
+	.byte	ta_,i_,he_,n_,spc_,na_,no_,yo_,ne_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●机付近　おじさん		x5,y4
+// ●＠１　ランダムの　簡易文の単語
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_t103_r0301
+msg_middlem1_01_p01_t103_r0301:
+	.byte	i_,ma_,spc_,ha_,ya_,ri_,no_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_,ko_,to_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	si_,ra_,be_,te_,ru_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,to_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF1,kakot_,ttu_,te_,no_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ka_,i_,spc_,ka_,n_,ke_,i_,ga_,spc_,a_,ru_,ttu_,te_,spc_,i_,u_,no_,ha_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,no_,spc_,ko_,to_,na_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●はい　　→msg_middlem1_01_p02_t103_r0301:
+// ●いいえ　→msg_middlem1_01_p03_t103_r0301:
+
+// ●はい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_t103_r0301
+msg_middlem1_01_p02_t103_r0301:
+	.byte	o_,gyoe_
+	.byte	CR_
+	.byte	ya_,ttu_,pa_,ri_,spc_,so_,u_,na_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,de_,spc_,o_,zi_,sa_,n_,mo_,spc_,ma_,ta_,i_,ttu_,po_
+	.byte	CR_
+	.byte	ri_,yyu_,u_,ko_,u_,ni_,spc_,ti_,ka_,du_,i_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●いいえ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_t103_r0301
+msg_middlem1_01_p03_t103_r0301:
+	.byte	na_,ni_,gyoe_,hate_
+	.byte	CR_
+	.byte	so_,u_,na_,no_,ka_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,bou_,spc_,o_,zi_,sa_,n_,ga_,spc_,ri_,yyu_,u_,ko_,u_,ni_
+	.byte	CR_
+	.byte	tu_,i_,te_,spc_,i_,ku_,no_,ha_,spc_,ta_,i_,he_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●テレビ前にいる老人		x9,y3
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_t103_r0301
+msg_oldman1_01_p01_t103_r0301:
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,ttu_,te_,spc_,i_,u_,no_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ya_,ttu_,te_,na_,i_,no_,ka_,no_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●窓際、子供		x5,y1
+// ●窓の方を向いている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou1_01_p01_t103_r0301
+msg_ojyou1_01_p01_t103_r0301:
+	.byte	u_,mi_,no_,spc_,mu_,ko_,u_,de_,ha_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ga_
+	.byte	CR_
+	.byte	ha_,ya_,ttu_,te_,ru_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●棚の前のこども		x14,y7
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya2_01_p01_t103_r0301
+msg_boya2_01_p01_t103_r0301:
+	.byte	bo_,ku_,ha_,spc_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_
+	.byte	CR_
+	.byte	GU_,TTU_,ZU_,wo_,spc_,i_,ttu_,pa_,i_,spc_,a_,tu_,me_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ni_,n_,gi_,yyo_,u_
+	.byte	CR_
+	.byte	to_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,yo_,u_,hu_,ku_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_,spc_,e_,ho_,n_
+	.byte	CR_
+	.byte	na_,n_,ka_,mo_,spc_,mo_,ttu_,te_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	i_,i_,da_,ro_,bou_,gyoe_
+	.byte	CR_
+	.byte	ho_,si_,ku_,te_,mo_,spc_,a_,ge_,na_,i_,yo_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●本１		x0,y0
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hon_01_p01_t103_r0301
+msg_hon_01_p01_t103_r0301:
+	.byte	kako2_,yo_,i_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,to_
+	.byte	CR_
+	.byte	spc_,wa_,ru_,i_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	kako2_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,to_
+	.byte	CR_
+	.byte	spc_,PO_,KE_,MO_,N_,no_,spc_,ka_,n_,ke_,i_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	kako2_,ya_,ku_,ni_,ta_,tu_
+	.byte	CR_
+	.byte	spc_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ni_
+	.byte	CR_
+	.byte	tu_,i_,te_,no_,spc_,ho_,n_,ga_,spc_,zu_,ra_,ttu_,to_,spc_,na_,ra_,n_,de_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●絵		x7,y0
+// ●流行語データの合計の下位２bitを見て移動。（ランダムでなく、決まっている）
+// ●　００　→msg_kaiga_01_p01_t103_r0301:
+// ●　０１　→msg_kaiga_01_p02_t103_r0301:
+// ●　０１　→msg_kaiga_01_p03_t103_r0301:
+// ●　１１　→msg_kaiga_01_p04_t103_r0301:
+// ●絵1
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaiga_01_p01_t103_r0301
+msg_kaiga_01_p01_t103_r0301:
+	.byte	kako2_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_
+	.byte	CR_
+	.byte	spc_,sa_,ke_,bi_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	to_,i_,u_,spc_,da_,i_,me_,i_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●絵2
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaiga_01_p02_t103_r0301
+msg_kaiga_01_p02_t103_r0301:
+	.byte	kako2_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_
+	.byte	CR_
+	.byte	spc_,ho_,ho_,e_,mi_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	to_,i_,u_,spc_,da_,i_,me_,i_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●絵3
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaiga_01_p03_t103_r0301
+msg_kaiga_01_p03_t103_r0301:
+	.byte	kako2_,sa_,i_,go_,no_
+	.byte	CR_
+	.byte	spc_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	to_,i_,u_,spc_,da_,i_,me_,i_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●絵4
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kaiga_01_p04_t103_r0301
+msg_kaiga_01_p04_t103_r0301:
+	.byte	kako2_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_
+	.byte	CR_
+	.byte	spc_,ta_,n_,zi_,yyo_,u_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	to_,i_,u_,spc_,da_,i_,me_,i_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●男２人組	x12,y2	x15,y2
+// ●どちらに話しかけても同じ会話をします。
+// ●流行語データの合計の下位3bitを見て移動。（ランダムでなく、決まっている）
+// ●　000,001　→msg_schoolm1_01_p01_t103_r0301:
+// ●　010,011　→msg_schoolm1_01_p02_t103_r0301:
+// ●　100,101　→msg_schoolm1_01_p03_t103_r0301:
+// ●　110　 　　 →msg_schoolm1_01_p04_t103_r0301:
+// ●　111　　  　→msg_schoolm1_01_p05_t103_r0301:
+// ●会話１
+// ●右の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p01_t103_r0301
+msg_schoolm1_01_p01_t103_r0301:
+	.byte	bo_,ku_,spc_,sa_,i_,ki_,n_,spc_,ha_,ya_,ri_,no_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,wo_
+	.byte	CR_
+	.byte	mi_,ta_,n_,da_,spc_,i_,i_,da_,ro_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	su_,go_,ka_,ttu_,ta_,yo_
+	.byte	CR_
+	.byte	ho_,n_,mo_,no_,spc_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●↓
+// ●左の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p01_t103_r0301
+msg_boy5_01_p01_t103_r0301:
+	.byte	i_,ya_,spc_,ki_,mi_,no_,spc_,mi_,ta_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,n_,mo_,no_,spc_,zi_,yya_,na_,i_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,n_,mo_,no_,ha_,spc_,mo_,ttu_,to_
+	.byte	CR_
+	.byte	KI_,RE_,ga_,spc_,a_,ru_,to_,i_,u_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	u_,tu_,ku_,si_,i_,spc_,to_,i_,u_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,to_,ni_,ka_,ku_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,su_,go_,i_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●会話２
+// ●右の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p02_t103_r0301
+msg_schoolm1_01_p02_t103_r0301:
+	.byte	bo_,ku_,spc_,sa_,i_,ki_,n_,spc_,ha_,ya_,ttu_,te_,ru_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,no_
+	.byte	SCROLL_WAIT_
+	.byte	TE_,bou_,MA_,spc_,ki_,yyo_,ku_,wo_,spc_,ka_,n_,ga_,e_,ta_,n_,da_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,i_,te_,ku_,re_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,bou_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	su_,ba_,ra_,si_,i_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,bou_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●↓
+// ●左の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p02_t103_r0301
+msg_boy5_01_p02_t103_r0301:
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,spc_,yo_,ri_,mo_
+	.byte	NORMAL_WAIT_
+	.byte	u_,ta_,no_,spc_,be_,n_,ki_,yyo_,u_,wo_
+	.byte	CR_
+	.byte	si_,ta_,ho_,u_,ga_,spc_,i_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●会話３
+// ●右の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p03_t103_r0301
+msg_schoolm1_01_p03_t103_r0301:
+	.byte	sa_,ttu_,ki_,no_,spc_,ha_,na_,si_
+	.byte	CR_
+	.byte	na_,n_,da_,ke_,do_,sa_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,do_,spc_,ko_,no_,spc_,si_,ma_,de_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_
+	.byte	SCROLL_WAIT_
+	.byte	PA_,bou_,TE_,II_,bou_,wo_,spc_,hi_,ra_,ko_,u_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●↓
+// ●左の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p03_t103_r0301
+msg_boy5_01_p03_t103_r0301:
+	.byte	o_,spc_,i_,i_,ne_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,re_,ga_,spc_,i_,ti_,ba_,n_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	u_,ma_,i_,ka_,wo_,spc_,ki_,me_,ru_,n_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ki_,yyo_,u_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_
+	.byte	CR_
+	.byte	za_,n_,ma_,i_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●会話４
+// ●右の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p04_t103_r0301
+msg_schoolm1_01_p04_t103_r0301:
+	.byte	tenten_,tenten_,so_,u_,da_,na_,aa_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ha_,spc_,mo_,u_
+	.byte	CR_
+	.byte	ri_,yyu_,u_,ko_,u_,spc_,zi_,yya_,na_,ku_,te_
+	.byte	NORMAL_WAIT_
+	.byte	se_,i_,ka_,tu_,no_,spc_,i_,ti_,bu_
+	.byte	CR_
+	.byte	to_,i_,u_,spc_,ka_,n_,zi_,ka_,na_,aa_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●↓
+// ●左の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p04_t103_r0301
+msg_boy5_01_p04_t103_r0301:
+	.byte	e_,hate_
+	.byte	CR_
+	.byte	so_,n_,na_,ni_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,ne_,te_,mo_,spc_,sa_,me_,te_,mo_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,spc_,no_,ko_,to_
+	.byte	SCROLL_WAIT_
+	.byte	ba_,ttu_,ka_,ri_,spc_,ka_,n_,ga_,e_,te_,ru_,spc_,ka_,ra_,na_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,spc_,ha_,ka_,se_,kakot_
+	.byte	CR_
+	.byte	da_,ne_,spc_,ma_,ttu_,ta_,ku_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●会話５
+// ●右の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p05_t103_r0301
+msg_schoolm1_01_p05_t103_r0301:
+	.byte	bo_,ku_,to_,spc_,ki_,mi_,ga_
+	.byte	CR_
+	.byte	KO_,N_,BI_,wo_,spc_,ku_,me_,ba_
+	.byte	NORMAL_WAIT_
+	.byte	kako2_,I_MSG_,STR_TEMP_BUF0,kakot2_,de_,ha_
+	.byte	CR_
+	.byte	mo_,u_,spc_,mu_,te_,ki_,ttu_,te_,spc_,ko_,to_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●↓
+// ●左の男
+// ●主人公がそっちを向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p05_t103_r0301
+msg_boy5_01_p05_t103_r0301:
+	.byte	so_,no_,to_,o_,ri_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,spc_,KO_,N_,BI_,kakot_
+	.byte	CR_
+	.byte	ttu_,te_,i_,u_,spc_,ka_,n_,zi_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HA_,HA_,HA_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●マニア１
+// ●トウカのジムバッジを取得すると出現
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_t103_r0301
+msg_freak1_01_p01_t103_r0301:
+	.byte	sa_,i_,ki_,n_,spc_,bo_,ku_,no_,spc_,na_,ka_,de_,ha_
+	.byte	CR_
+	.byte	kako_,HE_,DO_,RO_,ba_,ku_,da_,n_,kakot_,ga_,spc_,da_,i_,BU_,bou_,MU_,spc_,na_,no_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	e_,bou_,spc_,ki_,mi_
+	.byte	CR_
+	.byte	kako_,HE_,DO_,RO_,ba_,ku_,da_,n_,kakot_,spc_,si_,ra_,na_,i_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ha_,spc_,ka_,wa_,i_,so_,u_,da_,na_
+	.byte	CR_
+	.byte	yo_,si_,gyoe_,spc_,bo_,ku_,ga_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン３６「ヘドロばくだん」（No324）入手処理
+// ●アイテム入手以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p02_t103_r0301
+msg_freak1_01_p02_t103_r0301:
+	.byte	kako_,HE_,DO_,RO_,ba_,ku_,da_,n_,kakot_,mo_,spc_,i_,i_,ke_,do_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,za_,wo_,spc_,tu_,ka_,e_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,i_,i_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,190 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//						ポケモンリーグPC
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c109_r0206_event_data
+FLAG_CHANGE_LABEL	flag_change_c109_r0206
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c109_r0206:
+	//前にいたポケセンのIDをセット
+	_SET_WARP_ID	WP_FIELD_C109
+
+	_FLAG_SET		SYS_ARRIVE_LEAGUE
+
+	//ストッパーの位置を移動する
+	_IF_FLAGOFF_CALL	FE_TRAINERM1_01_C109_R0206,move_trainerm1_01_c109_r0206
+
+	_END
+	
+//ストッパーの位置を移動する
+move_trainerm1_01_c109_r0206:
+	_SXY_POS_CHANGE		TRAINERM1_01_C109_R0206,9,2
+	_SXY_POS_CHANGE		TRAINERM1_02_C109_R0206,10,2
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						ジョーイさん(OBJ名pcwoman)
+/********************************************************************/
+SCRIPT_LABEL	ev_pcwoman_01_p01_c109_r0206
+	_LDVAL		TMPWK3,PCWOMAN1_01_C109_R0206
+	_CALL		ev_heal_p01
+	_TALK_WAIT						// MSG終了待ち
+	_AB_KEYWAIT
+	_TALK_OBJ_END
+	_END							// スクリプト終了
+
+
+/********************************************************************/
+//						店員(OBJ名shopman)
+/********************************************************************/
+SCRIPT_LABEL	ev_shopman_01_p01_c109_r0206
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_SHOP_START		c109_r0206_menu
+
+	//ショップメニュー
+	_SHOP_MENU_START	c109_r0206_menu
+	_SHOP_MENU		ITEM_HAIPAABOORU		
+	_SHOP_MENU		ITEM_SUGOIKIZUGUSURI
+	_SHOP_MENU		ITEM_MANTANNOKUSURI
+	_SHOP_MENU		ITEM_KAIHUKUNOKUSURI
+	_SHOP_MENU		ITEM_NANDEMONAOSI
+	_SHOP_MENU		ITEM_GENKINOKAKERA
+	_SHOP_MENU		ITEM_GOORUDOSUPUREE	
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							トレーナー男
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_c109_r0206
+	_TALK_START
+
+	//ストッパー解除されているか
+	_IF_FLAGON_JUMP	FE_TRAINERM1_01_C109_R0206,ev_trainerm1_01_p02_c109_r0206
+
+	//現在座標を取得してトレーナーの前にくるように移動させる
+	_GET_MAP_POS	LOCALWORK0,LOCALWORK1
+	_IFVAL_CALL		LOCALWORK0,GE,11,move_hero_01_c109_r0206
+	_IFVAL_CALL		LOCALWORK0,LE,8,move_hero_02_c109_r0206
+
+	_TALKMSG		msg_trainerm1_01_p01_c109_r0206
+	_TALK_WAIT
+	
+	_TIME_WAIT		75
+
+	//バッチ０６を取得していなかったら
+	_IF_FLAGOFF_JUMP	SYS_BATCH06_GET,nothing_batch_01_p01_c109_r0206
+
+	_TALK_CLOSE
+
+	//扉の前からどく
+	_SET_OBJ_ANIME	TRAINERM1_01_C109_R0206,trainerm1_01_c109_r0206_anime01
+	_SET_OBJ_ANIME	TRAINERM1_02_C109_R0206,trainerm1_02_c109_r0206_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	
+	_TIME_WAIT		10
+
+	_JINGLE			MUS_ME_BACHI
+	_TALKMSG		msg_trainerm1_01_p03_c109_r0206
+	_TALK_WAIT
+	_JINGLE_WAIT
+
+	_TALK_CLOSE
+
+	_SXY_POS_OVERWRITE	TRAINERM1_01_C109_R0206
+	_SXY_POS_OVERWRITE	TRAINERM1_02_C109_R0206
+	_FLAG_SET		FE_TRAINERM1_01_C109_R0206
+
+	_TALK_END
+	_END
+
+//現在座標を取得してトレーナーの前にくるように移動させる
+move_hero_01_c109_r0206:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c109_r0206_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+move_hero_02_c109_r0206:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c109_r0206_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//バッチ０６を取得していない
+nothing_batch_01_p01_c109_r0206:
+	_SE				SE_HAZURE
+	_TALK_KEYWAIT	msg_trainerm1_01_p02_c109_r0206
+	_TALK_END
+	_END
+
+//バッチを全て集めている
+ev_trainerm1_01_p02_c109_r0206:
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_trainerm1_01_p03_c109_r0206
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	ストッパーの前に移動する(右から)
+//--------------------------------------------------------------------
+hero_01_c109_r0206_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ストッパーの前に移動する(左から)
+//--------------------------------------------------------------------
+hero_01_c109_r0206_anime02:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	左に移動する
+//--------------------------------------------------------------------
+trainerm1_01_c109_r0206_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+	
+//--------------------------------------------------------------------
+//ストッパー	左に移動する
+//--------------------------------------------------------------------
+trainerm1_02_c109_r0206_anime01:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+	
+
+
+

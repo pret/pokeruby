@@ -1,0 +1,63 @@
+// ●トクサネシティ　民家４（街の西・上から２番目）
+
+
+// ●女性１
+// ●ゲームクリア前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c107_r0601
+msg_woman1_01_p01_c107_r0601:
+	.byte	o_,to_,u_,to_,spc_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	hi_,to_,no_,spc_,hi_,mi_,tu_,ki_,ti_,wo_,spc_,sa_,ga_,su_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,no_,si_,mi_,spc_,na_,n_,da_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ゲームクリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p02_c107_r0601
+msg_woman1_01_p02_c107_r0601:
+	.byte	o_,to_,u_,to_,spc_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	to_,mo_,da_,ti_,no_,spc_,hi_,mi_,tu_,ki_,ti_,ni_,spc_,i_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,wo_,spc_,su_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,no_,si_,mi_,spc_,na_,n_,da_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●坊や１
+// ●主人公が秘密基地をつくっている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_c107_r0601
+msg_boya1_01_p01_c107_r0601:
+	.byte	hi_,yyo_,ttu_,to_,si_,te_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,ni_
+	.byte	CR_
+	.byte	hi_,mi_,tu_,ki_,ti_,spc_,tu_,ku_,ttu_,ta_,no_,spc_,ki_,mi_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝秘密基地のある場所
+// ●主人公が秘密基地をつくっていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p02_c107_r0601
+msg_boya1_01_p02_c107_r0601:
+	.byte	ki_,mi_,spc_,do_,ko_,ka_,ni_,spc_,hi_,mi_,tu_,ki_,ti_,spc_,tu_,ku_,ri_,na_,yo_,gyoe_
+	.byte	CR_
+	.byte	bo_,ku_,ga_,spc_,sa_,ga_,si_,da_,si_,te_,spc_,mi_,se_,ru_,ka_,ra_,sa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・エネコロロ（エネコ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_eneco_01_p01_c107_r0601
+msg_eneco_01_p01_c107_r0601:
+	.byte	E_,NE_,KO_,RO_,RO_,kako2_,mi_,yya_,a_,n_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にエネコロロの鳴き声をならす

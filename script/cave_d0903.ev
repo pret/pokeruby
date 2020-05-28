@@ -1,0 +1,188 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//						ミナモ・アジト３階
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START cave_d0903_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d0903
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0903:
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							中ボス(POS)								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0903_pos01
+SCRIPT_LABEL	ev_cave_d0903_pos02
+	_TALK_START
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_LDVAL			TMPWK0,EVILM1_01_CAVE_D0903
+#elif ( PM_VERSION == VERSION_RUBY )
+	_LDVAL			TMPWK0,EVILM1_01_CAVE_D2203
+#endif
+
+	//「！」気づく
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	TMPWK0,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//主人公の方を向く
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_SET_OBJ_ANIME	TMPWK0,turn_hero_site_anime
+#elif ( PM_VERSION == VERSION_RUBY )
+	_SET_OBJ_ANIME	TMPWK0,turn_u_anime
+#endif
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_LDVAL			LOCALWORK1,1
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							中ボス									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_01_p01_cave_d0903
+	//戦闘へ
+	_EVTRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAM_10
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAM_10
+#endif
+	_TRAINER_DATA2	msg_aquam_10_01
+	_TRAINER_DATA3	msg_aquam_10_02
+	_TRAINER_DATA4	ev_evilm1_01_cave_d0903_end
+	_TRAINER_DATA_END
+	/* */
+
+	_TALK_KEYWAIT	msg_aquam_10_04
+	_TALK_OBJ_END
+	_END
+
+ev_evilm1_01_cave_d0903_end:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_LDVAL			TMPWK0,EVILM1_01_CAVE_D0903
+	_LDVAL			TMPWK1,SUBMARINE1_01_CAVE_D0903
+#elif ( PM_VERSION == VERSION_RUBY )
+	_LDVAL			TMPWK0,EVILM1_01_CAVE_D2203
+	_LDVAL			TMPWK1,SUBMARINE1_01_CAVE_D2203
+#endif
+
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_SET_OBJ_ANIME	TMPWK0,turn_l_anime
+#elif ( PM_VERSION == VERSION_RUBY )
+	_SET_OBJ_ANIME	TMPWK0,turn_r_anime
+#endif
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		20
+
+	_SET_OBJ_ANIME	TMPWK0,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquam_10_03
+	_TALK_CLOSE
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_SET_OBJ_ANIME	TMPWK0,turn_l_anime
+	_SET_OBJ_ANIME	TMPWK1,submarine1_01_cave_d0903_anime01
+#elif ( PM_VERSION == VERSION_RUBY )
+	_SET_OBJ_ANIME	TMPWK0,turn_r_anime
+	_SET_OBJ_ANIME	TMPWK1,submarine1_01_cave_d0903_anime02
+#endif
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_OBJ_DELETE		TMPWK1
+	_TIME_WAIT		20
+
+	_SET_OBJ_ANIME	TMPWK0,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquam_10_04
+
+	//外のホエルコを消す(現在BG)
+	_FLAG_SET		FE_AKUA_01_CAVE_D0903	//中ボス倒した
+	
+	//OBJ消す
+	_FLAG_SET		FV_EVILM1_ALL_FIELD_C106
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//潜水艦	発進する(SAPPHIRE)
+//--------------------------------------------------------------------
+submarine1_01_cave_d0903_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//潜水艦	発進する(RUBY)
+//--------------------------------------------------------------------
+submarine1_01_cave_d0903_anime02:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam_04
+	_EVTRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAM_04
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAM_04
+#endif
+	_TRAINER_DATA2	msg_aquam_04_01
+	_TRAINER_DATA3	msg_aquam_04_02
+	_TRAINER_DATA4	ev_aquam_04_end
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_04_03
+	_END
+
+ev_aquam_04_end:
+	_TALK_KEYWAIT	msg_aquam_04_03
+	_TALK_OBJ_END
+	_END
+
+SCRIPT_LABEL	ev_aquaw_04
+	_TRAINER_DATA_START
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA1	AQUAW_04
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA1	MAGMAW_04
+#endif
+	_TRAINER_DATA2	msg_aquaw_04_01
+	_TRAINER_DATA3	msg_aquaw_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquaw_04_03
+	_END
+

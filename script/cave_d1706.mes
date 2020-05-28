@@ -1,0 +1,16 @@
+// ●座礁船
+// ●イベント前半部分
+
+
+// ●ボーイスカウト１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boyscout1_01_p01_cave_d1706
+msg_boyscout1_01_p01_cave_d1706:
+	.byte	ta_,n_,ke_,n_,ni_,spc_,pi_,ttu_,ta_,ri_,no_,spc_,ba_,si_,yyo_,da_,ka_,ra_
+	.byte	CR_
+	.byte	na_,n_,da_,ka_,spc_,wa_,ku_,wa_,ku_,spc_,si_,te_,ku_,ru_,yo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,su_,ttu_,go_,i_,spc_,ta_,ka_,ra_,mo_,no_,ga_,spc_,a_,ru_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

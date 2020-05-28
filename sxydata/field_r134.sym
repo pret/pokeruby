@@ -1,0 +1,10 @@
+//MapEditNH Ver.3.53 *.evt -> *.sym Convert.
+
+//OBJ ID = 5
+#define TR_SWIMMERM_22	1
+#define TR_SWIMMERW_23	2
+#define TR_DRAGON_06	3
+#define TR_BIRD_16	4
+#define TR_KARATE_02	5
+
+//Exit ID = 0

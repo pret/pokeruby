@@ -1,0 +1,819 @@
+//====================================================================
+//						field_r110
+//					フィールド・ロード110
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r110_event_data
+INIT_CTRL_LABEL		init_ctrl_field_r110
+FLAG_CHANGE_LABEL	flag_change_field_r110
+SP_SCRIPT_LABEL		scene_field_r110
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_field_r110:
+	//前のマップがゲートだったか
+	_PROGRAM		BEFORE_MAP_CYCLE
+	_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r110:
+	_CALL			set_evil_char
+	_CALL			set_support_char
+	_CALL			set_support_cycle_char
+
+	//サイクリングロード計測時は曲を変更する
+	_IFVAL_CALL		WK_SCENE_CYCLE_ROAD,EQ,1,ev_mus_chg_field_r110
+
+	_END
+
+//サイクリングロード計測時は曲を変更する
+ev_mus_chg_field_r110:
+	_BGM_SPECIAL_SET	MUS_CYCLING
+	_RET
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_field_r110:
+	//自転車Sに乗ってゲートを通過していたら
+	SP_SCRIPT_DATA	WK_SCENE_CYCLE_ROAD,1,ev_scene_cycle_start_02
+	SP_SCRIPT_END
+
+ev_scene_cycle_start_02:
+	_PROGRAM		START_CYCLE_ROAD
+	_LDVAL			WK_SCENE_CYCLE_ROAD,2
+	_RET
+
+
+//--------------------------------------------------------------------
+//					     スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_01_p01_field_r110
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_01_p01_field_r110
+
+	//元の方向を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_02_p01_field_r110
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_02_p01_field_r110
+
+	//元の方向を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_03_p01_field_r110
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_03_p01_field_r110
+
+	//元の方向を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_04_p01_field_r110
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_evilm1_04_p01_field_r110
+
+	//元の方向を向く
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							少年3									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy3_01_p01_field_r110
+	_EASY_OBJ_MSG	msg_boy3_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*						自転車女1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cyclew1_01_p01_field_r110
+	_EASY_OBJ_MSG	msg_cyclew1_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*						自転車男1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cyclem1_01_p01_field_r110
+	_EASY_OBJ_MSG	msg_cyclem1_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							老人1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_field_r110
+	_EASY_OBJ_MSG	msg_oldman1_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							老婆1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_field_r110
+	_EASY_OBJ_MSG	msg_oldwoman1_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*				自転車男1(ダニエルをしている)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cyclem1_02_p01_field_r110
+	_EASY_OBJ_MSG	msg_cyclem1_02_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*						ボーイスカウト1								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boyscout1_01_p01_field_r110
+	_EASY_OBJ_MSG	msg_boyscout1_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							看板01									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r110
+	_EASY_MSG       msg_kanban_01_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							看板02									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r110
+	_EASY_MSG       msg_kanban_02_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							看板03									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r110
+	_EASY_MSG       msg_kanban_03_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							看板04									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_r110
+	_EASY_MSG       msg_kanban_04_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							看板05									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_r110
+	_EASY_MSG       msg_kanban_05_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							看板06									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_06_p01_field_r110
+	_EASY_MSG       msg_kanban_06_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							おとくなけいじばん						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_07_p01_field_r110
+	_EASY_MSG       msg_kanban_07_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*							おとくなけいじばん						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_08_p01_field_r110
+	_EASY_MSG       msg_kanban_08_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*					カラクリ屋敷の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_09_p01_field_r110
+	_EASY_MSG       msg_kanban_09_p01_field_r110
+	_END
+
+
+/********************************************************************/
+/*					サイクリングロードの看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_10_p01_field_r110
+	_TALK_START
+
+	//記録をセットする(記録があるかのチェックもする)
+	_FUNC_CALL		ANSWORK,SET_CYCLE_RECORD
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,end_kanban_10_p01_field_r110
+
+	_TALK_KEYWAIT   msg_kanban_10_p01_field_r110
+	_TALK_END
+	_END
+
+//記録なし
+end_kanban_10_p01_field_r110:
+	_TALK_KEYWAIT   msg_kanban_10_p02_field_r110
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							自転車男(時間計測）						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_cyclem1_03_p01_field_r110
+	_TALK_OBJ_START
+
+	_FUNC_CALL		ANSWORK,CHK_CYCLE_ROAD
+	//ダート自転車の場合、専用説明
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_cyclem1_03_p09_field_r110
+
+	//カイナ側(反対側)から入ってきたとき
+	_IFVAL_JUMP		WK_SCENE_CYCLE_ROAD,EQ,0,ev_cyclem1_03_p02_field_r110
+
+	//サイクリングロード終了している
+	_TALK_KEYWAIT	msg_cyclem1_03_p08_field_r110
+	_TALK_OBJ_END
+	_END
+
+//カイナ側(反対側)から入ってきたとき
+ev_cyclem1_03_p02_field_r110:
+	_TALK_KEYWAIT	msg_cyclem1_03_p07_field_r110
+	_TALK_OBJ_END
+	_END
+
+//ダート自転車の時
+ev_cyclem1_03_p09_field_r110:
+	_TALK_KEYWAIT	msg_cyclem1_03_p09_field_r110
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_espm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_01
+	_TRAINER_DATA2	msg_espm_01_01
+	_TRAINER_DATA3	msg_espm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_01_03
+	_END
+
+SCRIPT_LABEL	ev_espw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_01
+	_TRAINER_DATA2	msg_espw_01_01
+	_TRAINER_DATA3	msg_espw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_01_03
+	_END
+
+SCRIPT_LABEL	ev_collector_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	COLLECTOR_01
+	_TRAINER_DATA2	msg_collector_01_01
+	_TRAINER_DATA3	msg_collector_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_collector_01
+	_TRAINER_EASY_MSG	msg_collector_01_03
+	_END
+
+_revenge_collector_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	COLLECTOR_01
+	_TRAINER_DATA2	msg_collector_01_04
+	_TRAINER_DATA3	msg_collector_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_collector_01_06
+	_END
+
+SCRIPT_LABEL	ev_fishing_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_06
+	_TRAINER_DATA2	msg_fishing_06_01
+	_TRAINER_DATA3	msg_fishing_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_06_03
+	_END
+
+SCRIPT_LABEL	ev_athletebm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBM_01
+	_TRAINER_DATA2	msg_athletebm_01_01
+	_TRAINER_DATA3	msg_athletebm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletebm_01_03
+	_END
+
+SCRIPT_LABEL	ev_athletebm_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBM_02
+	_TRAINER_DATA2	msg_athletebm_02_01
+	_TRAINER_DATA3	msg_athletebm_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletebm_02_03
+	_END
+
+SCRIPT_LABEL	ev_athletebm_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBM_03
+	_TRAINER_DATA2	msg_athletebm_03_01
+	_TRAINER_DATA3	msg_athletebm_03_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_athletebm_03
+	_TRAINER_EASY_MSG	msg_athletebm_03_03
+	_END
+
+_revenge_athletebm_03:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBM_03
+	_TRAINER_DATA2	msg_athletebm_03_04
+	_TRAINER_DATA3	msg_athletebm_03_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletebm_03_06
+	_END
+
+SCRIPT_LABEL	ev_athletebw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBW_02
+	_TRAINER_DATA2	msg_athletebw_02_01
+	_TRAINER_DATA3	msg_athletebw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletebw_02_03
+	_END
+	
+SCRIPT_LABEL	ev_athletebw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBW_01
+	_TRAINER_DATA2	msg_athletebw_01_01
+	_TRAINER_DATA3	msg_athletebw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_athletebw_01
+	_TRAINER_EASY_MSG	msg_athletebw_01_03
+	_END
+
+_revenge_athletebw_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETEBW_01
+	_TRAINER_DATA2	msg_athletebw_01_04
+	_TRAINER_DATA3	msg_athletebw_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletebw_01_06
+	_END
+
+SCRIPT_LABEL	ev_daisukiw_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIW_04
+	_TRAINER_DATA2	msg_daisukiw_04_01
+	_TRAINER_DATA3	msg_daisukiw_04_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_daisukiw_04
+	_TRAINER_EASY_MSG	msg_daisukiw_04_03
+	_END
+
+_revenge_daisukiw_04:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	DAISUKIW_04
+	_TRAINER_DATA2	msg_daisukiw_04_04
+	_TRAINER_DATA3	msg_daisukiw_04_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_daisukiw_04_06
+	_END
+
+SCRIPT_LABEL	ev_tanpan_17
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_17
+	_TRAINER_DATA2	msg_tanpan_17_01
+	_TRAINER_DATA3	msg_tanpan_17_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_17_03
+	_END
+
+/********************************************************************/
+/*							ポス(ゴール)							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r110_pos01
+SCRIPT_LABEL	ev_field_r110_pos02
+	_TALK_START
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	CYCLEM1_03_FIELD_R110,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL		keisoku_obj_script
+	_TALK_END
+	_END
+
+keisoku_obj_script:
+	//タイムをゲットする
+	_PROGRAM		GOAL_CYCLE_ROAD
+	_TALK_KEYWAIT	msg_cyclem1_03_p01_field_r110
+
+	//評価点により分岐
+	_SWITCH			ANSWORK
+	_CASEJUMP		10,case0_cycle_goal
+	_CASEJUMP		9,case1_cycle_goal
+	_CASEJUMP		8,case1_cycle_goal
+	_CASEJUMP		7,case1_cycle_goal
+	_CASEJUMP		6,case2_cycle_goal
+	_CASEJUMP		5,case2_cycle_goal
+	_CASEJUMP		4,case2_cycle_goal
+	_CASEJUMP		3,case3_cycle_goal
+	_CASEJUMP		2,case3_cycle_goal
+	_CASEJUMP		1,case3_cycle_goal
+	_CASEJUMP		0,case4_cycle_goal
+	_END
+
+//10
+case0_cycle_goal:
+	_TALK_KEYWAIT	msg_cyclem1_03_p02_field_r110
+	_JUMP			common_cycle_end
+	_END
+//7-9
+case1_cycle_goal:
+	_TALK_KEYWAIT	msg_cyclem1_03_p03_field_r110
+	_JUMP			common_cycle_end
+	_END
+//4-6
+case2_cycle_goal:
+	_TALK_KEYWAIT	msg_cyclem1_03_p04_field_r110
+	_JUMP			common_cycle_end
+	_END
+//1-3
+case3_cycle_goal:
+	_TALK_KEYWAIT	msg_cyclem1_03_p05_field_r110
+	_JUMP			common_cycle_end
+	_END
+//0
+case4_cycle_goal:
+	_TALK_KEYWAIT	msg_cyclem1_03_p06_field_r110
+	_JUMP			common_cycle_end
+	_END
+
+//共通終了処理
+common_cycle_end:
+	//計測結果終了
+	_LDVAL			WK_SCENE_CYCLE_ROAD,3
+
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+	_RET
+
+
+/********************************************************************/
+/*							サポート								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_r110_pos03
+	_LDVAL			TMPWK0,1
+	_JUMP			ev_r110_poscommon
+	_END
+
+SCRIPT_LABEL	ev_field_r110_pos04
+	_LDVAL			TMPWK0,2
+	_JUMP			ev_r110_poscommon
+	_END
+
+SCRIPT_LABEL	ev_field_r110_pos05
+	_LDVAL			TMPWK0,3
+	_JUMP			ev_r110_poscommon
+	_END
+
+ev_r110_poscommon:	
+	_TALK_START
+
+	_GET_MY_SEX		//性別で曲を分ける
+	_IFVAL_CALL		ANSWORK,EQ,0,mus_boy_01_field_r110	//男の子
+	_IFVAL_CALL		ANSWORK,EQ,1,mus_girl_01_field_r110	//女の子
+
+	//振り向く
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R110,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//「！」
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R110,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R110,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		30
+
+	//サポートキャラが近づいてくる:場所によりアニメ分岐
+	_IFVAL_CALL	TMPWK0,EQ,1,ev_support_anime_p01_field_r110
+	_IFVAL_CALL	TMPWK0,EQ,2,ev_support_anime_p02_field_r110
+	_IFVAL_CALL	TMPWK0,EQ,3,ev_support_anime_p03_field_r110
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,boy_01_field_r110	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,girl_01_field_r110	//女の子
+	_TALK_END
+    _END
+
+//曲切り替え
+mus_boy_01_field_r110:
+	_BGM_SET	MUS_GIRL_SUP,1
+	_RET
+
+mus_girl_01_field_r110:
+	_BGM_SET	MUS_BOY_SUP,1
+	_RET
+
+//男の子
+boy_01_field_r110:
+	_TALK_KEYWAIT   msg_heroine_01_p01_field_r110
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_boy_battle_field_r110
+	_CASEJUMP		1,case1_my_sex_boy_battle_field_r110
+	_CASEJUMP		2,case2_my_sex_boy_battle_field_r110
+	_END
+
+//トレーナー戦へ
+//タイプ炎
+case0_my_sex_boy_battle_field_r110:
+	_TRAINER_EVENT_FIGHT	SUPPORTW02_02,msg_heroine_01_p02_field_r110
+	_JUMP			common_heroine_battle_field_r110
+	_END
+
+//タイプ水
+case1_my_sex_boy_battle_field_r110:
+	_TRAINER_EVENT_FIGHT	SUPPORTW03_02,msg_heroine_01_p02_field_r110
+	_JUMP			common_heroine_battle_field_r110
+	_END
+
+//タイプ草
+case2_my_sex_boy_battle_field_r110:
+	_TRAINER_EVENT_FIGHT	SUPPORTW01_02,msg_heroine_01_p02_field_r110
+	_JUMP			common_heroine_battle_field_r110
+	_END
+
+//共通処理
+common_heroine_battle_field_r110:
+	_TALK_KEYWAIT   msg_heroine_01_p03_field_r110
+
+	//共通アイテム取得処理
+	_CALL			item_get_field_r110
+
+	_TALK_KEYWAIT   msg_heroine_01_p04_field_r110
+
+	//共通終了処理
+	_JUMP			end_support_field_r110
+    _END
+
+//--------------------------------------------------------------------
+//女の子
+//--------------------------------------------------------------------
+girl_01_field_r110:
+	_TALK_KEYWAIT   msg_hero_01_p01_field_r110
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_girl_battle_field_r110
+	_CASEJUMP		1,case1_my_sex_girl_battle_field_r110
+	_CASEJUMP		2,case2_my_sex_girl_battle_field_r110
+	_END
+
+//トレーナー戦へ
+//タイプ炎
+case0_my_sex_girl_battle_field_r110:
+	_TRAINER_EVENT_FIGHT	SUPPORTM02_02,msg_hero_01_p02_field_r110
+	_JUMP			common_hero_battle_field_r110
+	_END
+
+//タイプ水
+case1_my_sex_girl_battle_field_r110:
+	_TRAINER_EVENT_FIGHT	SUPPORTM03_02,msg_hero_01_p02_field_r110
+	_JUMP			common_hero_battle_field_r110
+	_END
+
+//タイプ草
+case2_my_sex_girl_battle_field_r110:
+	_TRAINER_EVENT_FIGHT	SUPPORTM01_02,msg_hero_01_p02_field_r110
+	_JUMP			common_hero_battle_field_r110
+	_END
+
+//共通処理
+common_hero_battle_field_r110:
+	_TALK_KEYWAIT   msg_hero_01_p03_field_r110
+
+	//共通アイテム取得処理
+	_CALL			item_get_field_r110
+
+	_TALK_KEYWAIT   msg_hero_01_p04_field_r110
+
+	//共通終了処理
+	_JUMP			end_support_field_r110
+    _END
+
+//共通アイテム取得処理
+item_get_field_r110:
+	_ITEM_EVENT		ITEM_DAUZINGUMASIN,1
+	_RET
+
+//共通終了処理
+end_support_field_r110:
+	_TALK_CLOSE
+
+	//自転車に乗り換え
+	_IFVAL_CALL		TMPWK0,EQ,1,ev_support_pos_p01_field_r110
+	_IFVAL_CALL		TMPWK0,EQ,2,ev_support_pos_p02_field_r110
+	_IFVAL_CALL		TMPWK0,EQ,3,ev_support_pos_p03_field_r110
+
+	//右向きにする
+	_SXY_SITE_CHANGE	SUPPORT_01_FIELD_R110,MV_RIGHT
+	_SXY_SITE_CHANGE	SUPPORT_02_FIELD_R110,MV_RIGHT
+
+	_OBJ_DELETE		SUPPORT_01_FIELD_R110
+	_OBJ_APPEAR		SUPPORT_02_FIELD_R110
+
+	_TIME_WAIT		45
+
+	//サポートキャラが去っていく:場所によりアニメ分岐
+	_IFVAL_CALL		TMPWK0,EQ,1,ev_support_anime_p04_field_r110
+	_IFVAL_CALL		TMPWK0,EQ,2,ev_support_anime_p05_field_r110
+	_IFVAL_CALL		TMPWK0,EQ,3,ev_support_anime_p06_field_r110
+
+	//OBJ消す
+	_OBJ_DELETE		SUPPORT_02_FIELD_R110
+
+	//強制イベント終了
+	_LDVAL			WK_SCENE_FIELD_R110,1
+
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+
+	_TALK_END
+	_END
+
+//サポートキャラの登場アニメ呼び出し
+ev_support_anime_p01_field_r110://登場するときpos01
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R110,support_01_field_r110_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p02_field_r110://登場するときpos02
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R110,support_01_field_r110_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p03_field_r110://登場するときpos03
+	_SET_OBJ_ANIME	SUPPORT_01_FIELD_R110,support_01_field_r110_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p04_field_r110://退場するときpos01
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R110,support_01_field_r110_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p05_field_r110://退場するときpos02
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R110,support_01_field_r110_anime05
+	_OBJ_ANIME_WAIT
+	_RET
+
+ev_support_anime_p06_field_r110://退場するときpos03
+	_SET_OBJ_ANIME	SUPPORT_02_FIELD_R110,support_01_field_r110_anime06
+	_OBJ_ANIME_WAIT
+	_RET
+
+//サポートのsxyデータ書き換え
+ev_support_pos_p01_field_r110:
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_R110,33,55
+	_RET
+
+ev_support_pos_p02_field_r110:
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_R110,34,55
+	_RET
+
+ev_support_pos_p03_field_r110:
+	_SXY_POS_CHANGE	SUPPORT_02_FIELD_R110,35,55
+	_RET
+
+//--------------------------------------------------------------------
+//サポート	近づいてくる
+//--------------------------------------------------------------------
+support_01_field_r110_anime01://pos01
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+support_01_field_r110_anime02://pos02
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+support_01_field_r110_anime03://pos03
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//サポート	去っていく
+//--------------------------------------------------------------------
+support_01_field_r110_anime04://pos01
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+support_01_field_r110_anime05://pos02
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_D_2
+	.byte	ACMD_END
+
+support_01_field_r110_anime06://pos03
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+

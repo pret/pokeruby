@@ -1,0 +1,264 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_TEST_NEWTOWN	12
+#define EXITNUM_TEST_NEWTOWN	1
+#define POSNUM_TEST_NEWTOWN	0
+#define BGNUM_TEST_NEWTOWN	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_princess_04[];
+extern const u8	ev_futago_06[];
+extern const u8	ev_futago_06[];
+extern const u8	ev_mount_09[];
+extern const u8	ev_princess_03[];
+extern const u8	ev_mount_08[];
+extern const u8	ev_boy1_01_p01_test_newtown[];
+extern const u8	ev_girl1_01_p01_test_newtown[];
+extern const u8	ev_futago_05[];
+extern const u8	ev_futago_05[];
+extern const u8	ev_boy1_02_p01_test_newtown[];
+extern const u8	ev_middlem1_01_p01_test_newtown[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_test_newtown[];
+extern const u8	ev_kanban_02_p01_test_newtown[];
+
+const evObjData	OBJ_test_newtown[] =
+{
+	{
+		TR_PRINCESS_04,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_SPINL,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_princess_04,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FUTAGO_05,		//OBJ ID
+		OJYOU1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_futago_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FUTAGO_06,		//OBJ ID
+		OJYOU1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_futago_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_09,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0019,		//Xpos
+		0x0015,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_mount_09,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_PRINCESS_03,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0010,		//Xpos
+		0x001e,		//Ypos
+		0x03,		//Height
+		MV_SPINR,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_princess_03,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_08,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0022,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_mount_08,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOY1_01_TEST_NEWTOWN,		//OBJ ID
+		BOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000f,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy1_01_p01_test_newtown,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		GIRL1_01_TEST_NEWTOWN,		//OBJ ID
+		GIRL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_girl1_01_p01_test_newtown,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FUTAGO_07,		//OBJ ID
+		OJYOU1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x001d,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_futago_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FUTAGO_08,		//OBJ ID
+		OJYOU1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001a,		//Xpos
+		0x001d,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_futago_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BOY1_02_TEST_NEWTOWN,		//OBJ ID
+		BOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x0025,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_boy1_02_p01_test_newtown,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		MIDDLEM1_01_TEST_NEWTOWN,		//OBJ ID
+		MIDDLEM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x001c,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem1_01_p01_test_newtown,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_test_newtown[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0018,		//Ypos
+		0x00,		//Height
+		TEST_NEWTOWN2_MAT01,		//Door ID
+		TEST_NEWTOWN2,			//Map ID
+		TEST,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_test_newtown[] =
+{
+	{
+		0x0007,		//Xpos
+		0x001a,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_test_newtown,		//Script
+	},
+
+	{
+		0x0012,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_02_p01_test_newtown,		//Script
+	},
+
+};
+
+const SXY_DATA	test_newtown_sxy_data =
+{
+OBJNUM_TEST_NEWTOWN,			// field obj max
+EXITNUM_TEST_NEWTOWN,		// exit max
+POSNUM_TEST_NEWTOWN,			// pos event max
+BGNUM_TEST_NEWTOWN,			// bg event max
+OBJ_test_newtown,			// field obj data
+EXIT_test_newtown,			// exit data
+NULL,			// pos event data
+BG_test_newtown,				// bg event data
+};

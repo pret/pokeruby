@@ -1,0 +1,96 @@
+// ●オダマキ博士の自宅
+
+// ●１階にいる博士の奥さん（最初の状態）。
+// 主人公が初めて家に入ってくると、頭上に「！」を
+// 表示して、オートで寄ってきて以下のセリフ。
+// ２度目以降は寄ってこないけど、話しかければ同じセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_t101_r0201
+msg_woman2_01_p01_t101_r0201:
+	.byte	e_,bou_,to_,spc_,do_,na_,ta_,spc_,ka_,si_,ra_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,spc_,a_,na_,ta_,ga_,spc_,o_,to_,na_,ri_,ni_
+	.byte	CR_
+	.byte	hi_,ttu_,ko_,si_,te_,ki_,ta_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,ti_,ni_,mo_,spc_,a_,na_,ta_,to_,spc_,o_,na_,zi_,spc_,to_,si_,go_,ro_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ga_,spc_,i_,ru_,no_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,a_,ta_,ra_,si_,i_,spc_,o_,to_,mo_,da_,ti_,ga_,spc_,de_,ki_,ru_,gyoe_,kakot_
+	.byte	CR_
+	.byte	na_,n_,te_,spc_,to_,te_,mo_,spc_,ta_,no_,si_,mi_,ni_,spc_,si_,te_,ta_,no_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	n2_,ka_,i_,no_,spc_,he_,ya_,ni_,spc_,i_,ru_,to_,spc_,o_,mo_,u_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝主人公が男なら「むすめ」、女なら「むすこ」
+
+// ●一度話してから、サポートと話すまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p02_t101_r0201
+msg_woman2_01_p02_t101_r0201:
+	.byte	I_MSG_,STR_TEMP_BUF0,na_,ra_
+	.byte	CR_
+	.byte	n2_,ka_,i_,no_,spc_,he_,ya_,ni_,spc_,i_,ru_,to_,spc_,o_,mo_,u_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サポートと話してから、家を出るまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p03_t101_r0201
+msg_woman2_01_p03_t101_r0201:
+	.byte	o_,to_,u_,sa_,n_,spc_,ttu_,ta_,ra_,spc_,do_,ko_,ka_,si_,ra_,hate_
+	.byte	CR_
+	.byte	se_,ttu_,ka_,ku_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ga_
+	.byte	SCROLL_WAIT_
+	.byte	a_,i_,sa_,tu_,ni_,spc_,ki_,te_,ku_,re_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,spc_,hi_,to_,spc_,o_,ti_,tu_,ki_,ga_,spc_,na_,i_,ka_,ra_
+	.byte	CR_
+	.byte	mo_,si_,ka_,si_,ta_,ra_,spc_,ke_,n_,ki_,yyu_,u_,zi_,yyo_,ni_,spc_,i_,ru_,ka_,mo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●博士の奥さん（フラグ03以降）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p04_t101_r0201
+msg_woman2_01_p04_t101_r0201:
+	.byte	a_,ra_,spc_,I_MSG_,STR_SUPPORT_NPC,spc_,da_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	do_,ko_,ka_,he_,spc_,de_,ka_,ke_,te_,spc_,i_,ttu_,ta_,wa_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ttu_,ta_,ku_,spc_,o_,to_,u_,sa_,n_,ni_,spc_,ni_,te_
+	.byte	CR_
+	.byte	o_,u_,ti_,de_,spc_,zi_,ttu_,to_,si_,te_,spc_,i_,ra_,re_,na_,i_,no_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●博士の奥さん（フラグ04以降）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p05_t101_r0201
+msg_woman2_01_p05_t101_r0201:
+	.byte	PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	bo_,u_,ke_,n_,spc_,su_,ru_,no_,mo_,spc_,i_,i_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ma_,ni_,ha_,spc_,o_,u_,ti_,ni_,spc_,ka_,e_,ttu_,te_,spc_,o_,ka_,a_,sa_,n_,ni_
+	.byte	CR_
+	.byte	ge_,n_,ki_,na_,spc_,ka_,o_,wo_,spc_,mi_,se_,te_,a_,ge_,te_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ro_,no_,spc_,na_,ka_,de_,ha_,spc_,ki_,ttu_,to_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,no_,spc_,ko_,to_
+	.byte	SCROLL_WAIT_
+	.byte	si_,n_,pa_,i_,spc_,si_,te_,ru_,spc_,ha_,zu_,da_,ka_,ra_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

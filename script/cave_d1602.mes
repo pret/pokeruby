@@ -1,0 +1,47 @@
+// ●ニューキンセツ
+
+
+// ●発電機
+// ●動作中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p01_cave_d1602
+msg_machine_01_p01_cave_d1602:
+	.byte	ha_,tu_,de_,n_,so_,u_,ti_,ni_,spc_,ti_,ka_,du_,i_,ta_,spc_,da_,ke_,de_
+	.byte	CR_
+	.byte	ne_,ttu_,ki_,ga_,spc_,tu_,ta_,wa_,ttu_,te_,ku_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ya_,ku_,spc_,to_,me_,ta_,ho_,u_,ga_,spc_,yo_,sa_,so_,u_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●動作停止
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_machine_01_p02_cave_d1602
+msg_machine_01_p02_cave_d1602:
+	.byte	ha_,tu_,de_,n_,so_,u_,ti_,ha_,spc_,si_,zu_,ka_,ni_,spc_,na_,ttu_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●発電機のスイッチ
+// ●ＰＯＳを踏むと以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_switch_01_p01_cave_d1602
+msg_switch_01_p01_cave_d1602:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	SU_,I_,TTU_,TI_,wo_,spc_,hu_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,PO_,TI_,TTU_,to_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,tu_,de_,n_,so_,u_,ti_,spc_,ha_
+	.byte	CR_
+	.byte	to_,ma_,ttu_,ta_,spc_,yo_,u_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フラグ成立

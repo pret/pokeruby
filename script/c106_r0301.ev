@@ -1,0 +1,910 @@
+//====================================================================
+//					ミナモシティ・コンテスト受付
+//							c106_r0301.ev
+//==================================================================== 
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+
+EVENT_DATA_START	c106_r0301_event_data
+FLAG_CHANGE_LABEL	flag_change_c106_r0301
+SP_SCRIPT_LABEL		scene_contest_check_c106_r0301
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+/*							強制イベント							*/
+//--------------------------------------------------------------------
+/********************************************************************/
+//						FLAG_CHANGE_LABEL
+/********************************************************************/
+flag_change_c106_r0301:
+	_CALL			tv_contest_chk
+	_END
+
+
+/********************************************************************/
+/*		WK_SCENE_ARTIST_C106_R0301に１が入ると画家登場				*/
+/*		WK_SCENE_ARTIST_C106_R0301に２が入ると画家登場（通信）		*/
+/*		WK_SCENE_ARTIST_C106_R0301に０が入ると画家退場				*/
+/********************************************************************/
+scene_contest_check_c106_r0301:
+	SP_SCRIPT_DATA	WK_SCENE_ARTIST_C106_R0301,1,scene_artist_flagon_01_p01_c106_r0301
+	SP_SCRIPT_DATA	WK_SCENE_ARTIST_C106_R0301,2,scene_artist_flagon_02_p01_c106_r0301
+	SP_SCRIPT_END
+
+
+/********************************************************************/
+/*							scene1									*/
+/*							絵描きイベント							*/
+/********************************************************************/
+scene_artist_flagon_01_p01_c106_r0301://館長に会った？
+	_IF_FLAGON_JUMP	FV_GENTLEM1_01_C106_R0201,scene_artist_01_p01_c106_r0301
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,0
+	_END
+
+scene_artist_01_p01_c106_r0301://この絵飾る？
+	_TALK_START
+	_OBJ_APPEAR	ARTIST_01_C106_R0301
+	_SET_OBJ_ANIME	ARTIST_01_C106_R0301,artist_01_c106_r0301_anime01
+	_OBJ_ANIME_WAIT	ARTIST_01_C106_R0301
+	_SET_OBJ_ANIME	EV_OBJ_SPID,artist_01_c106_r0301_anime03
+	_OBJ_ANIME_WAIT	
+	_TALK_KEYWAIT	msg_artist_01_p01_c106_r0301
+	
+	//プレビューの呼び出し
+	_TALK_START
+	_PUT_PORTRAIT	0
+	//_STOP_SCRIPT
+
+	_TALK_START
+	_TALK_YES_NO	msg_artist_01_p02_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,1,scene_artist_01_p03_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,0,scene_artist_01_p04_c106_r0301
+	_TALK_END
+	_END
+
+scene_artist_01_p03_c106_r0301://はい
+	_TALK_KEYWAIT		msg_artist_01_p03_c106_r0301
+	_TALK_CLOSE
+	_PROGRAM	SET_NEW_ART//書き換え
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,0//終了
+	
+	_FUNC_CALL	ANSWORK,CHK_BROMIDE_RIBBON//プロマイドイベント
+	_IFVAL_CALL	ANSWORK,EQ,1,scene_artist_01_p06_c106_r0301
+	
+	_SET_OBJ_ANIME	ARTIST_01_C106_R0301,artist_01_c106_r0301_anime02
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE	ARTIST_01_C106_R0301
+	_CALL	scene_artist_01_cnt_c106_r0301//観客フラグの呼び出し
+	_CALL	scene_artist_01_picflag_c106_r0301//絵をおく
+	_TALK_END
+	_END
+
+scene_artist_01_p04_c106_r0301://いいえ
+	_TALK_YES_NO	msg_artist_01_p04_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,1,scene_artist_01_p03_c106_r0301
+	_TALK_KEYWAIT	msg_artist_01_p05_c106_r0301
+	_TALK_CLOSE
+	_SET_OBJ_ANIME	ARTIST_01_C106_R0301,artist_01_c106_r0301_anime02
+	_OBJ_ANIME_WAIT
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,0//終了
+	_OBJ_DELETE	ARTIST_01_C106_R0301
+	_TALK_END
+	_END
+
+scene_artist_01_p06_c106_r0301://プロマイドりぼんを渡す
+	_INC_RECORD	CNT_RIBBON//リボンを貰った回数をプラス
+	_PROGRAM	GET_CHAMP_POKENAME	//優勝者のポケモン
+	_SET_OBJ_ANIME	ARTIST_01_C106_R0301,artist_01_c106_r0301_anime04
+	_OBJ_ANIME_WAIT
+
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	ARTIST_01_C106_R0301,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	ARTIST_01_C106_R0301,artist_01_c106_r0301_anime05
+	_OBJ_ANIME_WAIT
+	_TALK_KEYWAIT	msg_artist_01_p06_c106_r0301
+	_JINGLE	MUS_FANFA4
+	_TALK_KEYWAIT	msg_artist_01_p07_c106_r0301
+	_JINGLE_WAIT
+	_TALK_KEYWAIT	msg_artist_01_p08_c106_r0301
+	_TALK_KEYWAIT	msg_artist_01_p09_c106_r0301
+	_TALK_CLOSE
+	_RET
+
+
+scene_artist_01_cnt_c106_r0301://絵の飾られている枚数に従い観客増やす
+	_FUNC_CALL	PARAM0,	ART_COUNT_CHK
+	_SWITCH	PARAM0
+	_CASEJUMP	1,scene_artist_01_s1_c106_r0301
+	_CASEJUMP	2,scene_artist_01_s2_c106_r0301
+	_CASEJUMP	3,scene_artist_01_s3_c106_r0301
+	_CASEJUMP	4,scene_artist_01_s4_c106_r0301
+	_CASEJUMP	5,scene_artist_01_s5_c106_r0301
+	_RET
+
+scene_artist_01_s1_c106_r0301://step1
+	_FLAG_RESET	FV_GALLERY_01_C106_R0201
+	_RET
+
+scene_artist_01_s2_c106_r0301://step2
+	_FLAG_RESET	FV_GALLERY_02_C106_R0201
+	_RET
+
+scene_artist_01_s3_c106_r0301://step3
+	_FLAG_RESET	FV_GALLERY_03_C106_R0201
+	_RET
+
+scene_artist_01_s4_c106_r0301://step4
+	_FLAG_RESET	FV_GALLERY_04_C106_R0201
+	_RET
+
+scene_artist_01_s5_c106_r0301://step5
+	_FLAG_RESET	FV_GALLERY_05_C106_R0201
+	_RET
+
+
+scene_artist_01_picflag_c106_r0301://登録した絵のflagをセットして表示させる
+	_SWITCH	CON_TYPE
+	_CASEJUMP	0,scene_artist_01_pic1on_c106_r0301
+	_CASEJUMP	1,scene_artist_01_pic2on_c106_r0301
+	_CASEJUMP	2,scene_artist_01_pic3on_c106_r0301
+	_CASEJUMP	3,scene_artist_01_pic4on_c106_r0301
+	_CASEJUMP	4,scene_artist_01_pic5on_c106_r0301
+	_RET
+
+scene_artist_01_pic1on_c106_r0301://かっこいい絵on
+	_FLAG_SET	FE_PICTURE_01_C106_R0202
+	_RET
+
+scene_artist_01_pic2on_c106_r0301://美しい絵on
+	_FLAG_SET	FE_PICTURE_02_C106_R0202
+	_RET
+
+scene_artist_01_pic3on_c106_r0301://かわいい絵on
+	_FLAG_SET	FE_PICTURE_03_C106_R0202
+	_RET
+
+scene_artist_01_pic4on_c106_r0301://かしこい絵on
+	_FLAG_SET	FE_PICTURE_04_C106_R0202
+	_RET
+
+scene_artist_01_pic5on_c106_r0301://たくましい絵on
+	_FLAG_SET	FE_PICTURE_05_C106_R0202
+	_RET
+
+//-------------------------------------------------------------------
+//						  絵描きの登場アニメ
+//-------------------------------------------------------------------
+artist_01_c106_r0301_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+artist_01_c106_r0301_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+artist_01_c106_r0301_anime03:
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+artist_01_c106_r0301_anime04:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+artist_01_c106_r0301_anime05:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+/********************************************************************/
+/*							scene2									*/
+/*							絵描きイベント（通信）					*/
+/********************************************************************/
+scene_artist_flagon_02_p01_c106_r0301://館長に会った？
+	_IF_FLAGON_JUMP	FV_GENTLEM1_01_C106_R0201,scene_artist_02_p01_c106_r0301
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,0
+	_END
+
+scene_artist_02_p01_c106_r0301://この絵飾る？
+	_TALK_START
+	_OBJ_APPEAR	ARTIST_03_C106_R0301
+	_SET_OBJ_ANIME	ARTIST_03_C106_R0301,artist_02_c106_r0301_anime01
+	_OBJ_ANIME_WAIT	ARTIST_03_C106_R0301
+	_SET_OBJ_ANIME	EV_OBJ_SPID,artist_02_c106_r0301_anime03
+	_OBJ_ANIME_WAIT	
+	_TALK_KEYWAIT	msg_artist_01_p01_c106_r0301
+	
+	//プレビューの呼び出し
+	_TALK_START
+	_PUT_PORTRAIT	0
+	//_STOP_SCRIPT
+
+	_TALK_YES_NO	msg_artist_01_p02_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,1,scene_artist_02_p03_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,0,scene_artist_02_p04_c106_r0301
+	_END
+
+scene_artist_02_p03_c106_r0301://はい
+	_TALK_KEYWAIT		msg_artist_01_p03_c106_r0301
+	_TALK_CLOSE
+	_PROGRAM	SET_NEW_ART//書き換え
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,0//終了
+		
+	_FUNC_CALL	ANSWORK,CHK_BROMIDE_RIBBON//プロマイドイベント
+	_IFVAL_CALL	ANSWORK,EQ,1,scene_artist_02_p06_c106_r0301
+	
+	_SET_OBJ_ANIME	ARTIST_03_C106_R0301,artist_02_c106_r0301_anime02
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE	ARTIST_03_C106_R0301
+	_CALL	scene_artist_01_cnt_c106_r0301//観客フラグの呼び出し
+	_CALL	scene_artist_01_picflag_c106_r0301//絵をおく
+	_TALK_END
+	_END
+
+scene_artist_02_p04_c106_r0301://いいえ
+	_TALK_YES_NO	msg_artist_01_p04_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,1,scene_artist_02_p03_c106_r0301
+	_TALK_KEYWAIT	msg_artist_01_p05_c106_r0301
+	_TALK_CLOSE
+	_SET_OBJ_ANIME	ARTIST_03_C106_R0301,artist_02_c106_r0301_anime02
+	_OBJ_ANIME_WAIT
+	_LDVAL	WK_SCENE_ARTIST_C106_R0301,0//終了
+	_OBJ_DELETE	ARTIST_03_C106_R0301
+	_TALK_END
+	_END
+
+scene_artist_02_p06_c106_r0301://プロマイドりぼんを渡す
+	_INC_RECORD	CNT_RIBBON//リボンを貰った回数プラス
+
+	_PROGRAM	GET_CHAMP_POKENAME	//優勝者のポケモン
+	_SET_OBJ_ANIME	ARTIST_03_C106_R0301,artist_02_c106_r0301_anime04
+	_OBJ_ANIME_WAIT
+
+	_SE		SE_GYOE_MARK
+	_SET_OBJ_ANIME	ARTIST_03_C106_R0301,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	ARTIST_03_C106_R0301,artist_02_c106_r0301_anime05
+	_OBJ_ANIME_WAIT
+	_TALK_KEYWAIT	msg_artist_01_p06_c106_r0301
+	_JINGLE	MUS_FANFA4
+	_TALK_KEYWAIT	msg_artist_01_p07_c106_r0301
+	_JINGLE_WAIT
+	_TALK_KEYWAIT	msg_artist_01_p08_c106_r0301
+	_TALK_KEYWAIT	msg_artist_01_p09_c106_r0301
+	_TALK_CLOSE
+	_RET
+
+//-------------------------------------------------------------------
+//						  絵描きの登場アニメ
+//-------------------------------------------------------------------
+artist_02_c106_r0301_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+artist_02_c106_r0301_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+artist_02_c106_r0301_anime03:
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+artist_02_c106_r0301_anime04:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+artist_02_c106_r0301_anime05:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+/********************************************************************/
+//				ポケモンコンテスト受付（通信）						*/
+//				FH_01は２度目の話しかけを表す汎用フラグ				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_pccable_02_p01_c106_r0301
+	_TALK_START
+	
+	_CHECK_ITEM	ITEM_KONTESUTOPASU,1	//パスチェック
+	_IFVAL_JUMP	ANSWORK	EQ,0,ev_pccable_01_sankano_c106_r0301
+	
+	_IF_FLAGON_JUMP	FH_01,ev_pccable_02_p12_c106_r0301
+	_TALKMSG	msg_pccable_02_p01_c106_r0301
+	_TALK_WAIT
+
+	_FLAG_SET	FH_01
+	_JUMP	ev_pccable_02_select_c106_r0301
+	_END
+
+ev_pccable_02_p12_c106_r0301:
+	_TALKMSG	msg_pccable_02_p12_c106_r0301
+	_TALK_WAIT
+	_JUMP	ev_pccable_02_select_c106_r0301
+	_END
+
+ev_pccable_01_sankano_c106_r0301://参加できません
+	_TALK_KEYWAIT	msg_pccable_01_p17_sp_contest
+	_TALK_END
+	_END
+
+ev_pccable_02_save_c106_r0301://saveする？
+	_TALK_YES_NO	msg_pccable_02_p14_c106_r0301
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_pccable_02_end_c106_r0301	
+	_CALL	FieldSaveScript
+	_WINDOW_CLEAR	0,0,15,9
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_pccable_02_end_c106_r0301
+	_FLAG_SET	FH_02	//セーブフラグ
+	_RET
+	
+
+ev_pccable_02_select_c106_r0301:
+	_SELECT_WINDOW	0,0,CONTEST_MENU01
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_pccable_02_p05_c106_r0301//参加する
+	_CASEJUMP	1,ev_pccable_02_p02_c106_r0301//説明を聞く
+	_CASEJUMP	2,ev_pccable_02_end_c106_r0301//やめる
+	_CASECANCEL	ev_pccable_02_end_c106_r0301//やめる
+	_END
+
+//説明を聞く
+ev_pccable_02_p02_c106_r0301:
+	_TALK_KEYWAIT	msg_pccable_02_p02_c106_r0301
+	_JUMP	ev_pccable_02_p01_c106_r0301
+	_END
+
+//やめる
+ev_pccable_02_end_c106_r0301:
+	_TALK_KEYWAIT	msg_pccable_02_p15_c106_r0301
+	_TALK_END
+	_FLAG_RESET	FH_02	//セーブフラグクリア
+	_END
+
+//ポケモンを選ぶ
+ev_pccable_02_p03_c106_r0301:
+	_TALK_KEYWAIT	msg_pccable_02_p05_c106_r0301
+	_LDVAL			CON_RANK,0
+	_CON_POKELIST	//リストの呼び出し
+	_IFVAL_JUMP	PARAM0,EQ,0xff,ev_pccable_02_p05_c106_r0301//Ｂキャンセル
+	
+	_PROGRAM	CONSANKA_CHECK
+	_IFVAL_JUMP	ANSWORK,EQ,0,ev_pccable_02_no_c106_r0301		//参加できない
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_pccable_02_yesno_c106_r0301		//参加可能
+	_IFVAL_JUMP	ANSWORK,EQ,2,ev_pccable_02_yesno_c106_r0301		//参加可能
+	_IFVAL_JUMP	ANSWORK,EQ,3,ev_pccable_02_tamago_c106_r0301	//タマゴ
+	_IFVAL_JUMP	ANSWORK,EQ,4,ev_pccable_02_hinsi_c106_r0301		//瀕死
+	_END
+
+ev_pccable_02_no_c106_r0301://あなたは参加できません。
+	_TALK_KEYWAIT	msg_pccable_01_p09_sp_contest
+	_JUMP	ev_pccable_02_p03_c106_r0301
+	_END
+
+ev_pccable_02_tamago_c106_r0301://タマゴだから参加できません。
+	_TALK_KEYWAIT	msg_pccable_01_p23_sp_contest
+	_JUMP	ev_pccable_02_p03_c106_r0301
+	_END
+
+ev_pccable_02_hinsi_c106_r0301://瀕死だから参加できません。
+	_TALK_KEYWAIT	msg_pccable_01_p24_sp_contest
+	_JUMP	ev_pccable_02_p03_c106_r0301
+	_END
+
+ev_pccable_02_yesno_c106_r0301:
+	_LDWK	TMPWK0,PARAM0	//参加させる手持ちポケモンＮｏ（0-5）を保存
+	_TALKMSG	msg_pccable_01_p15_sp_contest
+	_TALK_WAIT	
+	_YES_NO_WINDOW	20,8
+	_SWITCH	ANSWORK
+	_CASEJUMP	0,ev_pccable_02_p03_c106_r0301
+	_CASEJUMP	1,ev_pccable_02_tushin_c106_r0301
+	_END
+
+//コンテストを選ぶ
+ev_pccable_02_p05_c106_r0301:
+	_IF_FLAGOFF_CALL	FH_02,ev_pccable_02_save_c106_r0301
+	_TALKMSG	msg_pccable_02_p04_c106_r0301
+	_TALK_WAIT	
+	_SELECT_WINDOW	0,0,CONTEST_MENU03
+	_SWITCH	ANSWORK
+	_CASEJUMP	5,ev_pccable_02_end_c106_r0301
+	_CASECANCEL	ev_pccable_02_end_c106_r0301
+	_LDWK	CON_TYPE,ANSWORK
+	_JUMP	ev_pccable_02_p03_c106_r0301
+	_END
+
+//通信の呼び出し
+ev_pccable_02_tushin_c106_r0301:
+	//通信待ち
+	_TALKMSG	msg_pccable_02_p17_c106_r0301
+	_TALK_WAIT
+	_LDWK	PARAM0,ANSWORK	//コンテストタイプを入れる
+	_PROGRAM			CHK_SIO_CONTEST
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP	ANSWORK,EQ,COMM_RES_OTHERMODE,ev_pccable_02_notsusin_c106_r0301//部屋違うよ。
+	_IFVAL_JUMP	ANSWORK,EQ,COMM_RES_CANCEL,ev_pccable_02_ng0_c106_r0301//Bｷｬﾝｾﾙ
+	_IFVAL_JUMP	ANSWORK,EQ,COMM_RES_ERROR,ev_pccable_02_ng1_c106_r0301//通信エラー
+	
+	_SYSTALKMSG	msg_pccable_02_p13_c106_r0301
+	_TALK_WAIT
+	
+	_CON_TUUSIN_INIT
+	_SWITCH		PARAM0
+	_CASEJUMP	0,ev_pccable_02_p07_c106_r0301
+	_CASEJUMP	1,ev_pccable_02_p06_c106_r0301
+	_CASEJUMP	2,ev_pccable_02_ng_c106_r0301
+	_END
+	
+//選んだコンテストが違う
+ev_pccable_02_p06_c106_r0301:
+	_TALK_KEYWAIT	msg_pccable_02_p06_c106_r0301
+	_JUMP	ev_pccable_02_p05_c106_r0301
+	_END
+
+//選んだ通信の部屋が違うようです
+ev_pccable_02_notsusin_c106_r0301:
+	_PROGRAM			COMM_END				//通信終了処理
+	_TALK_KEYWAIT	msg_pccable_02_p16_c106_r0301
+	_TALK_CLOSE
+	_TALK_END
+	_FLAG_RESET	FH_02	//セーブフラグクリア
+	_END
+
+//Ｂキャンセル
+ev_pccable_02_ng0_c106_r0301:
+	_PROGRAM			COMM_END				//通信終了処理
+	_TALK_KEYWAIT	msg_pccable_02_p18_c106_r0301
+	_TALK_CLOSE
+	_TALK_END
+	_FLAG_RESET	FH_02	//セーブフラグクリア
+	_END
+
+//通信エラー
+ev_pccable_02_ng1_c106_r0301:
+	_PROGRAM			COMM_END				//通信終了処理
+	_TALK_KEYWAIT	msg_pccable_02_p19_c106_r0301
+	_TALK_CLOSE
+	_TALK_END
+	_FLAG_RESET	FH_02	//セーブフラグクリア
+	_END
+
+
+ev_pccable_02_ng_c106_r0301:
+	_TALK_KEYWAIT	msg_pccable_02_p11_c106_r0301
+	_JUMP	ev_pccable_02_p05_c106_r0301
+	_END
+
+
+ev_pccable_02_p07_c106_r0301:
+	_PROGRAM	GET_TUUSINENTNO
+	_ADDWK	PARAM0,1
+	_GET_NUM_MSG	1,PARAM0	//＠1にエントリーナンバーを出力
+	_SYSTALKMSG		msg_pccable_02_p07_c106_r0301
+	_TALK_WAIT
+	
+	_ADDWK	PARAM0,-1	//元に戻す（念のため)
+	_JUMP	ev_pccable_02_p09_c106_r0301
+	_END
+
+//主人公の移動
+ev_pccable_02_p09_c106_r0301:			//まもなく始まります
+	_CALL	ev_hero_02_anime_c106_r0301//主人公移動アニメ
+	_LDVAL	WK_SCENE_SP_CONTEST,1		//コンテスト開始
+	_PROGRAM	SET_CON_SIO_OBJ			//自機を性別にＯＢＪ配置
+	_LDVAL		WK_SCENE_SP_CONTEST03,5	//マップを記憶
+	_LDVAL		CON_RANK,MASTER_RANK	//マスターランクに登録
+	_CALL	map_change_p00_c106_r0301	//ワープ処理
+	_END
+
+/********************************************************************/
+/*						主人公のアニメ処理通信時					*/
+/********************************************************************/
+ev_hero_02_anime_c106_r0301:
+	_TALK_START
+	_SYSTALKMSG		msg_pccable_02_p09_c106_r0301
+	_TALK_WAIT
+	_TIME_WAIT	20
+	_TALK_CLOSE
+	
+	//カウンターの前にくる
+	_SET_OBJ_ANIME	PCCABLE_02_C106_R0301,pccable_02_anime01_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		9,2,545,1	//カウンターセル書き換え
+	_SET_CELL		9,3,609,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+	
+	//カウンターを出る
+	_SET_OBJ_ANIME	PCCABLE_02_C106_R0301,pccable_02_anime02_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		9,2,721,1	//カウンターセル書き換え
+	_SET_CELL		9,3,729,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+	
+	_TIME_WAIT	20
+	
+	_SET_OBJ_ANIME	PCCABLE_02_C106_R0301,pccable_02_anime04_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	
+	//受付嬢の前にいく
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_02_anime02_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	_SYSTALKMSG		msg_pccable_01_p11_sp_contest
+	_TALK_WAIT
+	_TIME_WAIT	20
+	_TALK_CLOSE
+
+	//一緒に歩く
+	_SET_OBJ_ANIME	PCCABLE_02_C106_R0301,pccable_02_anime03_c106_r0301
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_02_anime01_c106_r0301
+	_OBJ_ANIME_WAIT 
+	_TALK_END
+	_RET
+//-------------------------------------------------------------------
+//				主人公のアニメ
+//-------------------------------------------------------------------
+hero_02_anime01_c106_r0301:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+hero_02_anime02_c106_r0301:
+	.byte	AC_WALK_TURN_R
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//-------------------------------------------------------------------
+//				受け付け嬢のアニメ
+//-------------------------------------------------------------------
+pccable_02_anime01_c106_r0301:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+pccable_02_anime02_c106_r0301:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+pccable_02_anime03_c106_r0301:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+pccable_02_anime04_c106_r0301:
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//				ポケモンコンテスト受付(マスターランク)				*/
+/********************************************************************/
+SCRIPT_LABEL	ev_pccable_01_p01_c106_r0301
+	_FUNC_CALL	ANSWORK,CHK_D_CON	//デバックモード呼び出し
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_pccable_debug_p01_c106_r0301
+	
+	_LDVAL		TMPWK3,MASTER				//文字列取得用
+	_LDVAL		CON_RANK,MASTER_RANK		//master登録
+	_CALL		contest_script_before		//コンテスト受付
+	_CALL		ev_hero_01_anime_c106_r0301//アニメ移動処理
+	_PROGRAM	SET_BRD_OBJ					//ブリーダーを配置
+	_CALL		hero_sexcheck_sp_contest	//主人公配置
+	_LDVAL		WK_SCENE_SP_CONTEST03,4		//マップを記憶
+	_CALL	map_change_p00_c106_r0301		//ワープ処理
+	_STOP_SCRIPT
+	_END
+
+/**********************************************************************/	
+//					簡易絵描きイベント呼び出し：デバックモード
+/**********************************************************************/	
+ev_pccable_debug_p01_c106_r0301:
+	_FLAG_SET	FV_GENTLEM1_01_C106_R0201	//館長消す
+	_LDWK	WK_SCENE_C106_R0202,1			//館長と話した
+	_ADD_ITEM	ITEM_KONTESUTOPASU,1		//パスを貰った
+	_LDVAL		TMPWK3,MASTER				//文字列取得用
+	_LDVAL		CON_RANK,MASTER_RANK		//nomalに登録debug
+	_LDVAL		WK_SCENE_ARTIST_C106_R0301,1//絵描きを呼び出すdebug
+	//_LDVAL		WK_SCENE_ARTIST_C106_R0301,2//絵描きを呼び出す（通信）debug
+	_FLAG_SET	SYS_RIBBON_GET //リボンを貰ったトレナビ関係
+	_END
+
+
+/********************************************************************/
+//				選んだコンテストで行う台を替える					*/
+/********************************************************************/
+map_change_p00_c106_r0301:
+	_SWITCH		CON_TYPE
+	_CASEJUMP	0,map_change_p01_c106_r0301
+	_CASEJUMP	1,map_change_p02_c106_r0301
+	_CASEJUMP	2,map_change_p03_c106_r0301
+	_CASEJUMP	3,map_change_p04_c106_r0301
+	_CASEJUMP	4,map_change_p05_c106_r0301
+	_RET
+
+map_change_p01_c106_r0301:
+	_MAP_CHANGE_CONTEST	SP,SP_CONTEST03_10,7,5/*かっこよさワープ*/
+	_RET
+	
+map_change_p02_c106_r0301:
+	_MAP_CHANGE_CONTEST	SP,SP_CONTEST03_8,7,5/*うつくしさワープ*/
+	_RET
+
+map_change_p03_c106_r0301:
+	_MAP_CHANGE_CONTEST	SP,SP_CONTEST03_12,7,5/*かわいさワープ*/
+	_RET
+
+map_change_p04_c106_r0301:
+	_MAP_CHANGE_CONTEST	SP,SP_CONTEST03_11,7,5/*かしこさワープ*/
+	_RET
+
+map_change_p05_c106_r0301:
+	_MAP_CHANGE_CONTEST	SP,SP_CONTEST03_9,7,5/*たくましさワープ*/
+	_RET
+
+/********************************************************************/
+/*						主人公のアニメ処理							*/
+/********************************************************************/
+ev_hero_01_anime_c106_r0301:
+	_TALK_START
+	_SET_OBJ_ANIME	PCCABLE_01_C106_R0301,pccable_01_anime01_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		4,2,545,1	//カウンターセル書き換え
+	_SET_CELL		4,3,609,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+
+	_SET_OBJ_ANIME	PCCABLE_01_C106_R0301,pccable_01_anime02_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	_SE	SE_HASHI	//開いた音
+	_SET_CELL		4,2,721,1	//カウンターセル書き換え
+	_SET_CELL		4,3,729,1	//カウンターセル書き換え
+	_PROGRAM		MAKE_MAP_BG
+
+	_TIME_WAIT	20
+	
+	_SET_OBJ_ANIME	PCCABLE_01_C106_R0301,pccable_01_anime04_c106_r0301
+	_OBJ_ANIME_WAIT
+	
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_anime02_c106_r0301
+	_OBJ_ANIME_WAIT		
+	
+	_TALK_KEYWAIT	msg_pccable_01_p11_sp_contest
+	_TALK_CLOSE
+	
+	_SET_OBJ_ANIME	PCCABLE_01_C106_R0301,pccable_01_anime03_c106_r0301
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_anime01_c106_r0301
+	_OBJ_ANIME_WAIT 
+	_TALK_END
+	_RET
+
+//-------------------------------------------------------------------
+//				主人公のアニメ
+//-------------------------------------------------------------------
+hero_01_anime01_c106_r0301:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+hero_01_anime02_c106_r0301:
+	.byte	AC_WALK_TURN_L
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//-------------------------------------------------------------------
+//				受け付け嬢のアニメ
+//-------------------------------------------------------------------
+pccable_01_anime01_c106_r0301:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+pccable_01_anime02_c106_r0301:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+pccable_01_anime03_c106_r0301:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+pccable_01_anime04_c106_r0301:
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						fighter1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fighter1_01_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_fighter1_01_p01_c106_r0301
+	_END
+
+
+/********************************************************************/
+/*						girl2										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_c106_r0301
+	_IF_FLAGOFF_JUMP	FE_KONTESUTOPASU_GET,ev_girl2_01_p02_c106_r0301
+	_EASY_OBJ_MSG	msg_girl2_01_p01_c106_r0301
+	_END
+
+ev_girl2_01_p02_c106_r0301:
+	_EASY_OBJ_MSG	msg_girl2_01_p02_c106_r0301
+	_END
+
+
+/********************************************************************/
+/*						artist										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_artist_02_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_artist_02_p01_c106_r0301
+	_END
+
+
+/********************************************************************/
+/*						bigman1										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_bigman1_01_p01_c106_r0301
+	_END
+
+
+/********************************************************************/
+/*						fishing1									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_fishing1_01_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_fishing1_01_p01_c106_r0301
+	_END
+
+
+/********************************************************************/
+/*						boya1										*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_boya1_01_p01_c106_r0301
+	_END
+
+
+/********************************************************************/
+/*							似顔絵6表示								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_01_p01_c106_r0301
+	_TALK_START
+	_PUT_PORTRAIT	6
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							似顔絵7表示								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_02_p01_c106_r0301
+	_TALK_START
+	_PUT_PORTRAIT	7
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							似顔絵8表示								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_picture_03_p01_c106_r0301
+	_TALK_START
+	_PUT_PORTRAIT	8
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//				１人用タネブレンダーをいっしょにする人
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_cubeboy_01_p01_contest
+	_END
+
+
+/********************************************************************/
+//				１人用タネブレンダーをいっしょにする人
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_c106_r0301
+	_EASY_OBJ_MSG	msg_cubegirl_01_p01_contest
+	_END
+
+
+/********************************************************************/
+/*						タネブレンダー結果発表						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_score_01_p01_c106_r0301
+	_TALK_START
+	_PROGRAM			BLENDMACHINE_SCORE
+	_AB_KEYWAIT
+	_SCREEN_CLEAR
+	_TALK_END
+	_END
+

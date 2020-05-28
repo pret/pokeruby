@@ -1,0 +1,79 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_R104_R0101	2
+#define EXITNUM_R104_R0101	2
+#define POSNUM_R104_R0101	0
+#define BGNUM_R104_R0101	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_oldman1_01_p01_r104_r0101[];
+extern const u8	ev_camome_01_p01_r104_r0101[];
+
+const evObjData	OBJ_r104_r0101[] =
+{
+	{
+		OLDMAN1_01_R104_R0101,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_RTDL,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x3,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman1_01_p01_r104_r0101,		//Event Lavel
+		FV_HAGI_01_R104_R0101,		//Event Flag
+	},
+
+	{
+		CAMOME_01_R104_R0101,		//OBJ ID
+		CAMOME,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x3,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_camome_01_p01_r104_r0101,		//Event Lavel
+		FV_POKEMON_01_R104_R0101,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r104_r0101[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_R104_DOOR01,		//Door ID
+		FIELD_R104,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_R104_DOOR01,		//Door ID
+		FIELD_R104,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	r104_r0101_sxy_data =
+{
+OBJNUM_R104_R0101,			// field obj max
+EXITNUM_R104_R0101,		// exit max
+POSNUM_R104_R0101,			// pos event max
+BGNUM_R104_R0101,			// bg event max
+OBJ_r104_r0101,			// field obj data
+EXIT_r104_r0101,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

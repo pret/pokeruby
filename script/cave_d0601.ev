@@ -1,0 +1,488 @@
+//====================================================================
+//							cave_d0601
+//							トウカの森・d0601
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d0601_event_data
+FLAG_CHANGE_LABEL	flag_change_cave_d0601
+EVENT_DATA_END		/*特別なイベントなし*/
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0601:
+	//アクア団charセット
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						西の池の下辺の研究員		左側
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d0601_pos01
+	_TALK_START	//自機の動作終了を待つ
+	
+	//きょろきょろする
+	_CALL			ev_cave_d0601_pos01_code01
+
+	//主人公に近づく
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime03
+	_OBJ_ANIME_WAIT
+	
+	_TALK_KEYWAIT	msg_workerm1_01_p02_cave_d0601
+	_TALK_CLOSE
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_BGM_SET		MUS_AQA_0,0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_BGM_SET		MUS_MGM0,0
+#endif
+
+	//マリン団イベント発生(近づいてくる)
+	//一歩
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime05
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p01_cave_d0601
+	_TALK_CLOSE
+
+	//近づく
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime01
+	_OBJ_ANIME_WAIT
+
+	//マリン団の方を向く
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p02_cave_d0601
+	_TALK_CLOSE
+
+	//研究員隠れる
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime06
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_workerm1_01_p07_cave_d0601
+
+	//アクア団	一歩前に出る
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime06
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p03_cave_d0601
+
+	//戦闘へ
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_EVENT_FIGHT		AQUAM_11,msg_evilm1_01_p04_cave_d0601
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_EVENT_FIGHT		MAGMAM_11,msg_evilm1_01_p04_cave_d0601
+#endif
+
+	//マリン団イベント発生(逃げていく)
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime02
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_cave_d0601_pos01_code02
+
+	//去っていく
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime02
+	_OBJ_ANIME_WAIT
+
+	_JUMP			end_cave_d0601_pos01
+	_END
+
+//--------------------------------------------------------------------
+//西の池の下辺の研究員		右側
+//--------------------------------------------------------------------
+SCRIPT_LABEL	ev_cave_d0601_pos02
+	_TALK_START	//自機の動作終了を待つ
+	
+	//きょろきょろする
+	_CALL		ev_cave_d0601_pos01_code01
+
+	//主人公に近づく
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime04
+	_OBJ_ANIME_WAIT
+
+	//主人公が相手の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_workerm1_01_p02_cave_d0601
+	_TALK_CLOSE
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_BGM_SET		MUS_AQA_0,0
+#elif ( PM_VERSION == VERSION_RUBY )
+	_BGM_SET		MUS_MGM0,0
+#endif
+
+	//マリン団イベント発生(近づいてくる)
+	//一歩
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime05
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p01_cave_d0601
+	_TALK_CLOSE
+
+	//近づく
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime04
+	_OBJ_ANIME_WAIT
+
+	//マリン団の方を向く
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p02_cave_d0601
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime07
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_workerm1_01_p07_cave_d0601
+
+	//主人公上を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p03_cave_d0601
+
+	//戦闘へ
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_EVENT_FIGHT		AQUAM_11,msg_evilm1_01_p04_cave_d0601
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_EVENT_FIGHT		MAGMAM_11,msg_evilm1_01_p04_cave_d0601
+#endif
+
+	//マリン団イベント発生(逃げていく)
+	//主人公上を向く
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime02
+	_OBJ_ANIME_WAIT
+
+	_CALL			ev_cave_d0601_pos01_code02
+
+	//去っていく
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime05
+	_OBJ_ANIME_WAIT
+
+	_JUMP			end_cave_d0601_pos01
+	_END
+
+//共通処理01
+ev_cave_d0601_pos01_code01:
+	//きょろきょろする
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime01
+	_OBJ_ANIME_WAIT 
+
+	_TALK_KEYWAIT	msg_workerm1_01_p01_cave_d0601
+	_TALK_CLOSE
+	_RET
+
+//共通処理02
+ev_cave_d0601_pos01_code02:
+	_TALK_KEYWAIT	msg_evilm1_01_p05_cave_d0601
+	_TALK_CLOSE
+
+	//マリン団イベント発生(逃げていく２)
+	_SET_OBJ_ANIME	SEAMAN1_01_CAVE_D0601,seaman1_01_cave_d0601_anime03
+	_OBJ_ANIME_WAIT
+
+	//マリン団を消す
+	_OBJ_DELETE		SEAMAN1_01_CAVE_D0601
+
+	//主人公下を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_workerm1_01_p03_cave_d0601
+
+	//通信しまくってバッグがいっぱいの時がある！！
+	_ITEM_EVENT		ITEM_SUUPAABOORU,1
+	_IF_ZERO_JUMP	ev_fail_01_cave_d0601
+
+	_JUMP			ev_workerm1_01_p02_cave_d0601
+	_END
+
+//アイテムもらえなかったとき
+ev_fail_01_cave_d0601:
+	_TALK_KEYWAIT	msg_workerm1_01_p06_cave_d0601
+	_JUMP			ev_workerm1_01_p02_cave_d0601
+	_END
+
+ev_workerm1_01_p02_cave_d0601:
+	_TALK_KEYWAIT	msg_workerm1_01_p04_cave_d0601
+
+	//少し考える
+	_SET_OBJ_ANIME	WORKERM1_01_CAVE_D0601,workerm1_01_cave_d0601_anime08
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_workerm1_01_p05_cave_d0601
+	_TALK_CLOSE
+	_RET
+
+//共通終了処理
+end_cave_d0601_pos01:
+	//研究員を消す
+	_OBJ_DELETE		WORKERM1_01_CAVE_D0601
+
+	_LDVAL			WK_SCENE_CAVE_D0601,1	//シーン１に切り替え
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//きょろきょろする
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime01:	
+	.byte	AC_SITE_U
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_R
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_L
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_D
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_R
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_U
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//去っていく
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime02:	
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公の方に近づいてくる(左側)
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime03:
+	.byte	AC_WAIT_16
+	.byte	AC_TURN_HERO_SITE
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公の方に近づいてくる(右側)
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime04:
+	.byte	AC_WAIT_16
+	.byte	AC_TURN_HERO_SITE
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//去っていく(右側)
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime05:	
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//回り込む(左側)
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime06:	
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_L_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//回り込む(右側)
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime07:	
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_R_2
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//デボン社員	考える
+//--------------------------------------------------------------------
+workerm1_01_cave_d0601_anime08:	
+	.byte	AC_WALK_TURN_D
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マリン団イベント(近づいてくる)
+//--------------------------------------------------------------------
+seaman1_01_cave_d0601_anime01:
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マリン団	後ずさりする
+//--------------------------------------------------------------------
+seaman1_01_cave_d0601_anime02:
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_U_1
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マリン団	逃げていく
+//--------------------------------------------------------------------
+seaman1_01_cave_d0601_anime03:
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WALK_U_2
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マリン団イベント(近づいてくる右側)
+//--------------------------------------------------------------------
+seaman1_01_cave_d0601_anime04:
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//様子を見る
+//--------------------------------------------------------------------
+seaman1_01_cave_d0601_anime05:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マリン団	一歩前に出る
+//--------------------------------------------------------------------
+seaman1_01_cave_d0601_anime06:
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							少年２									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_cave_d0601
+	_EASY_OBJ_MSG   msg_boy2_01_p01_cave_d0601
+	_END
+
+
+/********************************************************************/
+/*							少年３									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy3_01_p01_cave_d0601
+	_EASY_OBJ_MSG   msg_boy3_01_p01_cave_d0601
+	_END
+
+
+/********************************************************************/
+/*							少女									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_02_p01_cave_d0601
+	_TALK_OBJ_START
+
+	//すでにアイテム入手しているか
+	_IF_FLAGON_JUMP	FE_KISEKINOTANE_GET,ev_girl2_02_p02_cave_d0601
+
+	_TALK_KEYWAIT	msg_girl2_02_p01_cave_d0601
+
+	_ITEM_EVENT		ITEM_KISEKINOTANE,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_KISEKINOTANE_GET
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテム入手している
+ev_girl2_02_p02_cave_d0601:
+	_TALK_KEYWAIT	msg_girl2_02_p02_cave_d0601
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						おとくなけいじばん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_cave_d0601
+	_EASY_MSG       msg_kanban_01_p01_cave_d0601
+	_END
+
+
+/********************************************************************/
+/*						おとくなけいじばん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_cave_d0601
+	_EASY_MSG       msg_kanban_02_p01_cave_d0601
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mushi_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_02
+	_TRAINER_DATA2	msg_mushi_02_01
+	_TRAINER_DATA3	msg_mushi_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_02_03
+	_END
+
+SCRIPT_LABEL	ev_mushi_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_07
+	_TRAINER_DATA2	msg_mushi_07_01
+	_TRAINER_DATA3	msg_mushi_07_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_mushi_07
+	_TRAINER_EASY_MSG	msg_mushi_07_03
+	_END
+
+_revenge_mushi_07:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	MUSHI_07
+	_TRAINER_DATA2	msg_mushi_07_04
+	_TRAINER_DATA3	msg_mushi_07_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mushi_07_06
+	_END
+
+

@@ -1,0 +1,56 @@
+// ●121番道路　フィールド
+
+
+// ●アクア団員３人配置（Ｘ３１・Ｙ６辺り）
+// ●主人公がＰＯＳを踏むと以下のメッセージ、自動で表示
+// ●ＰＯＳ＝Ｘ２６・Ｙ２～６
+// ●アクア団員♂
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p01_field_r121
+msg_aquam1_01_p01_field_r121:
+	.byte	yo_,si_,gyoe_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,mo_,spc_,o_,ku_,ri_,bi_,ya_,ma_,ni_,spc_,mu_,ka_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●おくりびやまの方に去っていく
+
+
+// ●サラリーウーマン１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_field_r121
+msg_workerw1_01_p01_field_r121:
+	.byte	ko_,no_,sa_,ki_,ni_,spc_,a_,ru_,no_,ha_,spc_,o_,ku_,ri_,bi_,ya_,ma_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yyu_,mi_,yyo_,u_,wo_,spc_,o_,e_,ta_,spc_,PO_,KE_,MO_,N_,ta_,ti_,no_
+	.byte	CR_
+	.byte	ta_,ma_,si_,i_,ga_,spc_,ma_,tu_,ra_,re_,ru_,spc_,to_,ko_,ro_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r121
+msg_kanban_01_p01_field_r121:
+	.byte	o_,ku_,ri_,bi_,ya_,ma_,spc_,sa_,n_,ba_,si_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,na_,ga_,i_,spc_,a_,i_,da_,spc_,tu_,ka_,wa_,re_,te_,spc_,i_,na_,i_,no_,ka_
+	.byte	CR_
+	.byte	mo_,zi_,ga_,spc_,ki_,e_,so_,u_,ni_,spc_,na_,ttu_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●サファリゾーンの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r121
+msg_kanban_02_p01_field_r121:
+	.byte	me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,spc_,ta_,ku_,sa_,n_,gyoe_
+	.byte	CR_
+	.byte	kako_,SA_,HU_,AA_,RI_,ZO_,bou_,N_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

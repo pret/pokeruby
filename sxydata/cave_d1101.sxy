@@ -1,0 +1,104 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1101	4
+#define EXITNUM_CAVE_D1101	1
+#define POSNUM_CAVE_D1101	0
+#define BGNUM_CAVE_D1101	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_submarine_06_p01_cave_d1101[];
+extern const u8	ev_submarine_06_p01_cave_d1101[];
+extern const u8	ev_submarine_06_p01_cave_d1101[];
+extern const u8	ev_submarine_06_p01_cave_d1101[];
+
+const evObjData	OBJ_cave_d1101[] =
+{
+	{
+		SUBMARINE_06_01_CAVE_D1101,		//OBJ ID
+		HERO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_VANISH,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_submarine_06_p01_cave_d1101,		//Event Lavel
+		FV_SUBMARINE_06_CAVE_D1101,		//Event Flag
+	},
+
+	{
+		SUBMARINE_06_02_CAVE_D1101,		//OBJ ID
+		HERO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_VANISH,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_submarine_06_p01_cave_d1101,		//Event Lavel
+		FV_SUBMARINE_06_CAVE_D1101,		//Event Flag
+	},
+
+	{
+		SUBMARINE_06_03_CAVE_D1101,		//OBJ ID
+		HERO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_VANISH,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_submarine_06_p01_cave_d1101,		//Event Lavel
+		FV_SUBMARINE_06_CAVE_D1101,		//Event Flag
+	},
+
+	{
+		SUBMARINE_06_04_CAVE_D1101,		//OBJ ID
+		HERO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_VANISH,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_submarine_06_p01_cave_d1101,		//Event Lavel
+		FV_SUBMARINE_06_CAVE_D1101,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d1101[] =
+{
+	{
+		0x0006,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_W128_DOOR01,		//Door ID
+		FIELD_W128,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d1101_sxy_data =
+{
+OBJNUM_CAVE_D1101,			// field obj max
+EXITNUM_CAVE_D1101,		// exit max
+POSNUM_CAVE_D1101,			// pos event max
+BGNUM_CAVE_D1101,			// bg event max
+OBJ_cave_d1101,			// field obj data
+EXIT_cave_d1101,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

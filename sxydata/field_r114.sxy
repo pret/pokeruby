@@ -1,0 +1,550 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R114	23
+#define EXITNUM_FIELD_R114	3
+#define POSNUM_FIELD_R114	0
+#define BGNUM_FIELD_R114	12
+
+//OBJ_EVENT_LABEL
+extern const u8	seed_script[];
+extern const u8	seed_script[];
+extern const u8	ev_mount_03[];
+extern const u8	ev_mount_04[];
+extern const u8	ev_campb_04[];
+extern const u8	ev_picnicg_04[];
+extern const u8	ev_monsterm_01[];
+extern const u8	seed_script[];
+extern const u8	ev_ball1_14[];
+extern const u8	ev_ball1_15[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	ev_gentlem1_01_p01_field_r114[];
+extern const u8	ev_attack1_01_p01_field_r114[];
+extern const u8	ev_youngm1_01_p01_kinomi[];
+extern const u8	ev_fishing_07[];
+extern const u8	ev_fishing_03[];
+extern const u8	ev_campf_06[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	ev_senpaikouhai_08_02[];
+extern const u8	ev_senpaikouhai_08_01[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_field_r114[];
+extern const u8	ev_kanban_02_p01_field_r114[];
+extern const u8	ev_kanban_03_p01_field_r114[];
+
+const evObjData	OBJ_field_r114[] =
+{
+	{
+		SEED_01_FIELD_R114,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001f,		//Xpos
+		0x002b,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x004d,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_02_FIELD_R114,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001f,		//Xpos
+		0x002c,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x004e,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_03,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000f,		//Xpos
+		0x0041,		//Ypos
+		0x07,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0006,		//work area
+		ev_mount_03,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_04,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001e,		//Xpos
+		0x0048,		//Ypos
+		0x05,		//Height
+		MV_UL,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_mount_04,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_CAMPBOY_04,		//OBJ ID
+		BOYSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x0032,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_campb_04,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_PICNICG_04,		//OBJ ID
+		GIRLSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x0023,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_picnicg_04,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MONSTERM_01,		//OBJ ID
+		FREAK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0014,		//Xpos
+		0x0038,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_monsterm_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_03_FIELD_R114,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001f,		//Xpos
+		0x002d,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0044,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BALL1_14,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_14,		//Event Lavel
+		FV_BALL1_14,		//Event Flag
+	},
+
+	{
+		BALL1_15,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0025,		//Ypos
+		0x04,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_15,		//Event Lavel
+		FV_BALL1_15,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_01_FIELD_R114,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x002b,		//Ypos
+		0x04,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+	{
+		GENTLEM1_01_FIELD_R114,		//OBJ ID
+		GENTLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_gentlem1_01_p01_field_r114,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		ATTACK1_01_FIELD_R114,		//OBJ ID
+		ATTACK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x000c,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_attack1_01_p01_field_r114,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		YOUNGM1_01_KINOMI,		//OBJ ID
+		YOUNGM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x002a,		//Ypos
+		0x03,		//Height
+		MV_VON,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_youngm1_01_p01_kinomi,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FISHING_07,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0014,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_fishing_07,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FISHING_03,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0013,		//Xpos
+		0x001a,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_fishing_03,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_CAMPF_06,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001e,		//Xpos
+		0x003a,		//Ypos
+		0x05,		//Height
+		MV_SPINL,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_campf_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_02_FIELD_R114,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001d,		//Xpos
+		0x0035,		//Ypos
+		0x05,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ01,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_03_FIELD_R114,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001e,		//Xpos
+		0x0036,		//Ypos
+		0x05,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ02,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_04_FIELD_R114,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x0045,		//Ypos
+		0x07,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ03,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_05_FIELD_R114,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000b,		//Xpos
+		0x0040,		//Ypos
+		0x05,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ04,		//Event Flag
+	},
+
+	{
+		TR_SENPAIKOUHAI_08_02,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0018,		//Xpos
+		0x002c,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_senpaikouhai_08_02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SENPAIKOUHAI_08_01,		//OBJ ID
+		SCHOOLW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x002c,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_senpaikouhai_08_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_field_r114[] =
+{
+	{
+		0x0008,		//Xpos
+		0x003f,		//Ypos
+		0x00,		//Height
+		CAVE_D0101_DOOR01,		//Door ID
+		CAVE_D0101,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x001d,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		R114_R0101_MAT01,		//Door ID
+		R114_R0101,			//Map ID
+		R114,				//Field ID
+	},
+
+	{
+		0x001b,		//Xpos
+		0x0024,		//Ypos
+		0x00,		//Height
+		R114_R0201_MAT01,		//Door ID
+		R114_R0201,			//Map ID
+		R114,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_r114[] =
+{
+	{
+		0x0007,		//Xpos
+		0x0040,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_field_r114,		//Script
+	},
+
+	{
+		0x001f,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_02_p01_field_r114,		//Script
+	},
+
+	{
+		0x0009,		//Xpos
+		0x002f,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)41,		//Script
+	},
+
+	{
+		0x001e,		//Xpos
+		0x0033,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)51,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x003e,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)61,		//Script
+	},
+
+	{
+		0x0013,		//Xpos
+		0x0046,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)71,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x001b,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)182,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x001b,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)192,		//Script
+	},
+
+	{
+		0x0019,		//Xpos
+		0x0026,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_03_p01_field_r114,		//Script
+	},
+
+	{
+		0x0014,		//Xpos
+		0x0039,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		indometasin_4,		//Script
+	},
+
+	{
+		0x0020,		//Xpos
+		0x0039,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)73,		//Script
+	},
+
+	{
+		0x0007,		//Xpos
+		0x001e,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		genkinokakera_42,		//Script
+	},
+
+};
+
+const SXY_DATA	field_r114_sxy_data =
+{
+OBJNUM_FIELD_R114,			// field obj max
+EXITNUM_FIELD_R114,		// exit max
+POSNUM_FIELD_R114,			// pos event max
+BGNUM_FIELD_R114,			// bg event max
+OBJ_field_r114,			// field obj data
+EXIT_field_r114,			// exit data
+NULL,			// pos event data
+BG_field_r114,				// bg event data
+};

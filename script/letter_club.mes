@@ -1,0 +1,643 @@
+// ●手持ちポケモンのアンケートをする
+// ●インタビュアー女
+
+// ●
+// ●データがいっぱい、同じデータがある→　msg_interview_01_p10_daisukiclub
+// ●先頭にいるポケモンにニックネームが付いてなくて、データがあまってるとき
+// ●												→　msg_interview_01_p11_daisukiclub
+// ●先頭にいるポケモンにニックネームが付いていて、データがあまってるとき
+// ●＠０　先頭にいるポケモンの種類
+// ●＠１　先頭にいるポケモンのニックネーム
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p01_daisukiclub
+msg_interview_01_p01_daisukiclub:
+	.byte	wa_,a_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,spc_,so_,no_,spc_,I_MSG_,STR_TEMP_BUF0,wo_,spc_,to_,te_,mo_
+	.byte	CR_
+	.byte	da_,i_,zi_,ni_,spc_,si_,te_,i_,ru_,spc_,mi_,ta_,i_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,spc_,ttu_,te_,spc_,i_,u_,n_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,spc_,wa_,ta_,si_,spc_,TE_,RE_,BI_,no_,spc_,si_,yyu_,za_,i_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,A_,N_,KE_,bou_,TO_,wo_,spc_,si_,te_,ru_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	su_,ko_,si_,da_,ke_,spc_,si_,tu_,mo_,n_,ni_
+	.byte	CR_
+	.byte	ko_,ta_,e_,te_,spc_,ku_,re_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→msg_interview_01_p02_daisukiclub
+// ●「いいえ」の場合　→msg_interview_01_p09_daisukiclub
+
+
+// ●質問をうける
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p02_daisukiclub
+msg_interview_01_p02_daisukiclub:
+	.byte	a_,ri_,ga_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ki_,ku_,ne_
+	.byte	CR_
+	.byte	zu_,ba_,ri_,spc_,hi_,to_,ko_,to_,de_,spc_,ko_,ta_,e_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　ランダムで質問を変える
+// ●　質問の種類のデータを保存
+// ●　→msg_interview_01_p03_daisukiclub
+// ●　→msg_interview_01_p04_daisukiclub
+// ●　→msg_interview_01_p05_daisukiclub
+
+
+// ●質問内容１
+// ●＠０　先頭のポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p03_daisukiclub
+msg_interview_01_p03_daisukiclub:
+	.byte	ki_,mi_,ga_,spc_,I_MSG_,STR_TEMP_BUF0,to_
+	.byte	CR_
+	.byte	de_,a_,ttu_,ta_,to_,ki_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,ka_,spc_,ka_,n_,zi_,ta_,hate_
+	.byte	CR_
+	.byte	do_,u_,spc_,o_,mo_,ttu_,ta_,ka_,spc_,o_,si_,e_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　簡易文で１ワードを選ぶ
+// ●　選択された物の記録
+// ●→msg_interview_01_p06_daisukiclub
+// ●何も書かない、止めるを選んだ場合　→msg_interview_01_p09_daisukiclub
+
+
+
+// ●質問内容２
+// ●＠０　先頭のポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p04_daisukiclub
+msg_interview_01_p04_daisukiclub:
+	.byte	ki_,mi_,no_,spc_,ka_,wa_,i_,ga_,ttu_,te_,ru_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,spc_,na_,ni_,ka_,spc_,su_,ki_,na_,mo_,no_,ni_,spc_,ta_,to_,e_,ru_,to_
+	.byte	CR_
+	.byte	su_,re_,ba_,spc_,na_,n_,da_,to_,spc_,o_,mo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　簡易文で１ワードを選ぶ
+// ●　選択された物の記録
+// ●→msg_interview_01_p06_daisukiclub
+// ●何も書かない、止めるを選んだ場合　→msg_interview_01_p09_daisukiclub
+
+
+// ●質問内容３
+// ●＠０　先頭のポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p05_daisukiclub
+msg_interview_01_p05_daisukiclub:
+	.byte	ki_,mi_,no_,spc_,ka_,wa_,i_,ga_,ttu_,te_,ru_,spc_,I_MSG_,STR_TEMP_BUF0,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,do_,ko_,ni_
+	.byte	CR_
+	.byte	hi_,ka_,re_,ta_,no_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　簡易文で１ワードを選ぶ
+// ●　選択された物の記録
+// ●→msg_interview_01_p06_daisukiclub
+// ●何も書かない、止めるを選んだ場合　→msg_interview_01_p09_daisukiclub
+
+
+
+// ●２回目の質問（２回目は全て同じ質問）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p06_daisukiclub
+msg_interview_01_p06_daisukiclub:
+	.byte	u_,bou_,n_,spc_,na_,ru_,ho_,do_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,tu_,gi_,ha_,spc_,ti_,yyo_,ttu_,to_
+	.byte	CR_
+	.byte	mu_,zu_,ka_,si_,i_,spc_,si_,tu_,mo_,n_,wo_,spc_,su_,ru_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ni_,spc_,to_,ttu_,te_,spc_,PO_,KE_,MO_,N_,ttu_,te_
+	.byte	CR_
+	.byte	hi_,to_,ko_,to_,de_,spc_,i_,u_,to_,spc_,na_,n_,da_,to_,spc_,o_,mo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　簡易文で１ワードを選ぶ
+// ●　選択された物の記録
+// ●→msg_interview_01_p08_daisukiclub
+// ●何も書かない、止めるを選んだ場合　→msg_interview_01_p09_daisukiclub
+
+
+
+// ●会話終了
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p08_daisukiclub
+msg_interview_01_p08_daisukiclub:
+	.byte	na_,ru_,ho_,do_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,mu_,hu_,mu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	a_,gyoe_
+	.byte	CR_
+	.byte	ki_,yyo_,u_,ri_,yyo_,ku_,spc_,a_,ri_,ga_,to_,u_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,i_,ro_,spc_,ha_,na_,si_,ga_,spc_,ki_,ke_,te_,spc_
+	.byte	CR_
+	.byte	o_,mo_,si_,ro_,spc_,ka_,ttu_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ha_,na_,si_,spc_,mo_,si_,ka_,si_,ta_,ra_,spc_,TE_,RE_,BI_,de_,spc_
+	.byte	CR_
+	.byte	na_,ga_,su_,ka_,mo_,spc_,si_,re_,na_,i_,ka_,ra_,spc_,ki_,ta_,i_,spc_,si_,te_,te_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,ne_
+	.byte	CR_
+	.byte	BA_,I_,BA_,I_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ＴＶデータを作り会話終了
+
+
+
+// ●質問をうけない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p09_daisukiclub
+msg_interview_01_p09_daisukiclub:
+	.byte	so_,ttu_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ma_,ta_,spc_,PO_,KE_,MO_,N_,no_,spc_,ko_,to_,wo_
+	.byte	CR_
+	.byte	ha_,na_,si_,ta_,ku_,spc_,na_,ttu_,ta_,ra_,spc_,i_,tu_,de_,mo_,spc_,ki_,te_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●会話終了
+// ●データは作られず
+
+
+
+// ●データがいっぱい、データがある
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p10_daisukiclub
+msg_interview_01_p10_daisukiclub:
+	.byte	ko_,ko_,ni_,spc_,i_,ru_,to_,spc_,i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	ha_,na_,si_,ga_,spc_,ki_,ke_,ru_,ka_,ra_,spc_,o_,mo_,si_,ro_,i_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●会話終了
+
+
+
+// ●先頭にいるポケモンにニックネームが付いてなくて、データがあまってるとき
+// ●
+// ●＠０　先頭のポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p11_daisukiclub
+msg_interview_01_p11_daisukiclub:
+	.byte	ki_,mi_,no_,spc_,so_,no_,spc_,I_MSG_,STR_TEMP_BUF0,to_
+	.byte	CR_
+	.byte	to_,te_,mo_,spc_,na_,ka_,ga_,spc_,yo_,sa_,so_,u_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,gyoe_,spc_,i_,ma_,spc_,wa_,ta_,si_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,no_,spc_,si_,yyu_,za_,i_,de_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,no_,spc_,ha_,na_,si_,wo_
+	.byte	CR_
+	.byte	ki_,i_,te_,spc_,ma_,wa_,ttu_,te_,ru_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,ki_,mi_,no_,spc_,I_MSG_,STR_TEMP_BUF0,no_
+	.byte	CR_
+	.byte	ha_,na_,si_,wo_,spc_,ki_,ka_,se_,te_,spc_,ku_,re_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_interview_01_p12_daisukiclub
+// ●「いいえ」→msg_interview_01_p09_daisukiclub
+
+
+// ●はい
+// ●＠０　先頭のポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p12_daisukiclub
+msg_interview_01_p12_daisukiclub:
+	.byte	wa_,a_,gyoe_
+	.byte	CR_
+	.byte	a_,ri_,ga_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,ha_,na_,si_
+	.byte	CR_
+	.byte	na_,n_,de_,mo_,spc_,i_,i_,no_,de_,spc_,ki_,ka_,se_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●簡易文を書く画面
+// ●書き終わったら　→msg_interview_01_p13_daisukiclub
+// ●もし何も書かなかったら→msg_interview_01_p09_daisukiclub
+
+
+
+// ●会話終了
+// ●＠０　先頭のポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p13_daisukiclub
+msg_interview_01_p13_daisukiclub:
+	.byte	he_,bou_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,mo_,si_,ro_,i_,spc_,ha_,na_,si_,spc_,da_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,ho_,n_,to_,u_,ni_,spc_,I_MSG_,STR_TEMP_BUF0,to_
+	.byte	CR_
+	.byte	na_,ka_,ga_,spc_,i_,i_,n_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	u_,bou_,n_,spc_,na_,n_,ka_,spc_,ko_,no_,ha_,na_,si_,de_
+	.byte	CR_
+	.byte	i_,i_,spc_,ba_,n_,gu_,mi_,ga_,spc_,de_,ki_,so_,u_,na_,spc_,yo_,ka_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,o_,mo_,si_,ro_,i_,spc_,ba_,n_,gu_,mi_,ni_
+	.byte	CR_
+	.byte	su_,ru_,ka_,ra_,spc_,ta_,no_,si_,mi_,ni_,spc_,ma_,ttu_,te_,te_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,a_,ri_,ga_,to_,u_,ne_
+	.byte	CR_
+	.byte	BA_,I_,BA_,I_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ＴＶデータを作り会話終了
+
+
+
+
+// ●↓
+// ●↓
+// ●↓
+
+
+
+// ●ＴＶの大好きクラブの放送
+// ●＠０→　自分のなまえ
+// ●＠１→　ポケモンの種類
+// ●＠２→　ポケモンのニックネーム
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_daisukiclub
+msg_TV_01_p01_daisukiclub:
+	.byte	kako2_,bo_,ku_,ta_,ti_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,da_,i_,su_,ki_,KU_,RA_,BU_,gyoe_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,spc_,ha_,zi_,ma_,ri_,ma_,si_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ba_,n_,gu_,mi_,ha_,spc_,mi_,na_,sa_,n_,no_
+	.byte	CR_
+	.byte	i_,ke_,n_,wo_,spc_,ko_,no_,wa_,ta_,si_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,wa_,ri_,ni_,spc_,sa_,ke_,n_,de_,spc_,si_,ma_,o_,u_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,su_,go_,i_,spc_,ba_,n_,gu_,mi_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,ki_,yyo_,u_,ha_,spc_,PO_,KE_,MO_,N_,da_,i_,su_,ki_,KU_,RA_,BU_,spc_,ni_
+	.byte	CR_
+	.byte	i_,ttu_,te_,spc_,i_,ro_,n_,na_,spc_,ha_,na_,si_,wo_,spc_,ki_,i_,te_,ki_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	RI_,PO_,bou_,TA_,bou_,ka_,ra_,no_,spc_,zi_,yyo_,u_,ho_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,ki_,yyo_,u_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,da_,i_,su_,ki_,spc_,ni_,n_,ge_,n_,ha_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	n_,bou_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,da_,bou_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,go_,zi_,bu_,n_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ni_
+	.byte	CR_
+	.byte	tu_,i_,te_,no_,spc_,a_,tu_,i_,spc_,ki_,mo_,ti_,wo_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,wa_,ri_,ni_,spc_,ko_,no_,spc_,wa_,ta_,ku_,si_,ga_,spc_,TE_,RE_,BI_,ni_
+	.byte	CR_
+	.byte	mu_,ka_,ttu_,te_,spc_,sa_,ke_,n_,de_,spc_,a_,ge_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,bou_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RE_,TTU_,TU_,spc_,SI_,YYA_,U_,TO_,gyoe_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●質問の内容で分岐
+// ●→msg_TV_01_p02_daisukiclub
+// ●→msg_TV_01_p03_daisukiclub
+// ●→msg_TV_01_p04_daisukiclub
+
+
+
+// ●＠０→　自分のなまえ
+// ●＠１→　ポケモンの種類
+// ●＠２→　簡易文の１ワード　１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_daisukiclub
+msg_TV_01_p02_daisukiclub:
+	.byte	sa_,te_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ga_,spc_,ha_,zi_,me_,te_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,to_,spc_,a_,ttu_,ta_,to_,ki_,spc_,ti_,yyo_,ttu_,ka_,n_,te_,ki_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	o_,mo_,ttu_,ta_,spc_,ko_,to_,ha_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,gyoe_,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	n_,bou_,spc_,i_,i_,spc_,sa_,ke_,bi_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ru_,de_,spc_,so_,no_,to_,ki_,no_,spc_,o_,mo_,i_,de_,ga_
+	.byte	CR_
+	.byte	yo_,mi_,ga_,e_,ru_,spc_,yo_,u_,da_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p05_daisukiclub
+
+
+// ●＠０→　自分のなまえ
+// ●＠１→　ポケモンの種類
+// ●＠２→　簡易文の１ワード　１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_daisukiclub
+msg_TV_01_p03_daisukiclub:
+	.byte	sa_,te_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,da_,i_,su_,ki_,na_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,na_,ni_,ka_,ni_,spc_,ta_,to_,e_,ru_,to_,spc_,si_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,gyoe_,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	n_,bou_,spc_,su_,go_,i_,spc_,ha_,ttu_,so_,u_,da_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,ge_,si_,i_,spc_,I_MSG_,STR_TEMP_BUF1,he_,no_,spc_,o_,mo_,i_,ko_,mi_,ga_
+	.byte	CR_
+	.byte	ka_,n_,zi_,ra_,re_,ru_,ne_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p05_daisukiclub
+
+
+// ●＠０→　自分のなまえ
+// ●＠１→　ポケモンの種類
+// ●＠２→　簡易文の１ワード　１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_daisukiclub
+msg_TV_01_p04_daisukiclub:
+	.byte	sa_,te_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ga_,spc_,I_MSG_,STR_TEMP_BUF1,ni_
+	.byte	CR_
+	.byte	hi_,ka_,re_,ta_,spc_,ri_,yu_,u_,ha_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,gyoe_,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	o_,bou_,gyoe_,gyoe_,spc_,su_,n_,ba_,ra_,si_,i_,spc_,i_,ke_,n_,da_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,do_,n_,na_,ni_,spc_,su_,ki_,ka_
+	.byte	CR_
+	.byte	BI_,N_,BI_,N_,spc_,tu_,ta_,wa_,ttu_,te_,spc_,ku_,ru_,ne_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p05_daisukiclub
+
+
+// ●＠０→　自分のなまえ
+// ●＠２→　簡易文の１ワード　２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_daisukiclub
+msg_TV_01_p05_daisukiclub:
+	.byte	n_,bou_,hate_,spc_,ma_,da_,spc_,tu_,du_,ki_,ga_,spc_,a_,ri_,ma_,su_,ne_,bou_
+	.byte	CR_
+	.byte	yo_,n_,de_,spc_,mi_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	e_,bou_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ni_,spc_,to_,ttu_,te_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	hi_,to_,ko_,to_,de_,spc_,ta_,to_,e_,ru_,to_,spc_,su_,re_,ba_,spc_,so_,re_,ha_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,gyoe_,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	BU_,RA_,BO_,bou_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ma_,ma_,de_,no_,spc_,na_,ka_,de_,spc_,i_,ti_,ba_,n_
+	.byte	CR_
+	.byte	i_,i_,spc_,sa_,ke_,bi_,spc_,da_,ttu_,ta_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,gyoe_,gyoe_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,do_,mo_,spc_,sa_,ke_,bi_,ta_,ku_,na_,ru_,spc_,ko_,to_,ba_,da_,ne_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,i_,i_,sa_,ke_,bi_,to_,spc_,de_,a_,ttu_,ta_,spc_,to_,ko_,ro_,de_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,zi_,ka_,i_,spc_,o_,a_,i_,si_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,i_,go_,ni_,spc_,mo_,u_,i_,ti_,do_
+	.byte	CR_
+	.byte	mi_,n_,na_,de_,spc_,sa_,ke_,bi_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,gyoe_,gyoe_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終了
+
+
+
+
+
+
+
+// ●手紙
+// ●ＴＶのポケモンアンケートの放送
+// ●＠０　主人公の名前
+// ●＠１　何のポケモンについての手紙か
+// ●
+// ●芸人風のナレーター？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_letter_poke
+msg_TV_01_p01_letter_poke:
+	.byte	kako2_,bo_,ku_,ta_,ti_,gyoe_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,da_,i_,su_,ki_,KU_,RA_,BU_,gyoe_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,spc_,ha_,zi_,ma_,ri_,ma_,si_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ki_,yyo_,u_,ha_,spc_,PO_,KE_,MO_,N_,A_,N_,KE_,bou_,TO_,no_
+	.byte	CR_
+	.byte	KO_,bou_,NA_,bou_,ka_,ra_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,zu_,a_,ru_,spc_,PO_,KE_,MO_,N_,to_,spc_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	ha_,na_,si_,no_,spc_,na_,ka_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,do_,n_,na_,spc_,ha_,na_,si_,ga_
+	.byte	CR_
+	.byte	to_,bi_,da_,si_,te_,spc_,ku_,ru_,no_,de_,si_,yyo_,u_,ka_,gyoe_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,te_,spc_,ki_,yyo_,u_,no_,spc_,ha_,na_,si_,ha_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	n_,bou_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,te_,ga_,mi_,no_,spc_,si_,yyo_,u_,ka_,i_,spc_,ka_,ra_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,ko_,to_,ni_,spc_,tu_,i_,te_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,ka_,ra_,no_,spc_,o_,te_,ga_,mi_,da_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,do_,re_,da_,ke_,spc_,I_MSG_,STR_TEMP_BUF1,he_,no_
+	.byte	CR_
+	.byte	a_,tu_,i_,spc_,i_,ke_,n_,ga_,spc_,ka_,i_,te_,a_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	yo_,ma_,se_,te_,spc_,mo_,ra_,i_,ma_,si_,yyo_,u_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	e_,bou_,to_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●この後、簡易文を表示
+// ●→msg_TV_01_p02_letter_poke
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_letter_poke
+msg_TV_01_p02_letter_poke:
+	.byte	o_,bou_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	na_,n_,te_,spc_,su_,ba_,ra_,si_,i_,spc_,te_,ga_,mi_,na_,n_,da_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ランダムで
+// ●→msg_TV_01_p03_letter_poke
+// ●→msg_TV_01_p05_letter_poke
+// ●→msg_TV_01_p06_letter_poke
+// ●→msg_TV_01_p07_letter_poke
+
+
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_letter_poke
+msg_TV_01_p03_letter_poke:
+	.byte	ki_,ni_,i_,ttu_,ta_,ka_,ra_,spc_,mo_,u_,i_,ti_,do_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●この後、簡易文を表示
+// ●→msg_TV_01_p04_letter_poke
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_letter_poke
+msg_TV_01_p04_letter_poke:
+	.byte	i_,i_,spc_,te_,ga_,mi_,ha_
+	.byte	CR_
+	.byte	na_,n_,do_,spc_,ki_,i_,te_,mo_,spc_,i_,i_,ne_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ランダムで
+// ●→msg_TV_01_p05_letter_poke
+// ●→msg_TV_01_p06_letter_poke
+// ●→msg_TV_01_p07_letter_poke
+
+
+// ●＠２　簡易文の中の適当な１ワード
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_letter_poke
+msg_TV_01_p05_letter_poke:
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,kakot_,spc_,ttu_,te_,i_,u_,spc_,ko_,to_,ba_,no_
+	.byte	CR_
+	.byte	o_,ka_,ge_,de_,spc_,GU_,TTU_,to_,spc_,ko_,ko_,ro_,ni_,spc_,tu_,ta_,wa_,ttu_,te_,ku_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	i_,i_,spc_,te_,ga_,mi_,ni_,spc_,na_,ttu_,te_,i_,ru_,ne_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p08_letter_poke
+
+
+// ●＠２　簡易文の中の適当な１ワード
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p06_letter_poke
+msg_TV_01_p06_letter_poke:
+	.byte	to_,ku_,ni_,kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ttu_,te_,spc_,to_,ko_,ro_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ttu_,te_,i_,u_,spc_,to_,ko_,ro_,ga_
+	.byte	CR_
+	.byte	ki_,ni_,i_,ttu_,ta_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p08_letter_poke
+
+
+// ●＠２　簡易文の中の適当な１ワード
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p07_letter_poke
+msg_TV_01_p07_letter_poke:
+	.byte	to_,ko_,ro_,de_,spc_,a_,n_,ma_,ri_,spc_,ka_,n_,ke_,i_,spc_,na_,i_,ke_,do_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ttu_,te_,spc_,i_,i_,ko_,to_,ba_,spc_,da_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,tu_,ha_,spc_,o_,re_,mo_,spc_,kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,to_,ba_,spc_,sa_,i_,ki_,n_,spc_,yo_,ku_,spc_,tu_,ka_,u_,n_,da_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p08_letter_poke
+
+
+// ●＠０　主人公の名前
+// ●＠２はランダムのてんすう　７０～１００の間
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p08_letter_poke
+msg_TV_01_p08_letter_poke:
+	.byte	ko_,no_,te_,ga_,mi_,spc_,zi_,bu_,n_,te_,ki_,ni_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF2,te_,n_,spc_,te_,i_,u_,spc_,ka_,n_,zi_,ka_,na_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,gi_,ha_,spc_,mo_,ttu_,to_,spc_,i_,i_,spc_,te_,ga_,mi_,wo_
+	.byte	CR_
+	.byte	ki_,ta_,i_,spc_,si_,te_,ru_,yo_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ttu_,to_,spc_,mo_,u_,spc_,ko_,n_,na_,zi_,ka_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,zi_,ka_,i_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,na_,sa_,ma_,spc_,o_,a_,i_,spc_,si_,ma_,si_,yyo_,u_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+

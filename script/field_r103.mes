@@ -1,0 +1,180 @@
+// ●103番道路　フィールド
+
+
+// ●サポートキャラ♀「ハルカ」
+// ●話しかけても向きを変えずにそのままの位置で、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_field_r103
+msg_heroine_01_p01_field_r103:
+	.byte	HA_,RU_,KA_,kako2_,e_,bou_,to_,spc_,n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_,ni_,spc_,i_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,a_,re_,to_,spc_,a_,re_,ne_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで頭上に「！」を表示させ、
+// 　主人公に向かって以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p02_field_r103
+msg_heroine_01_p02_field_r103:
+	.byte	a_,ra_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,so_,u_,ka_,gyoe_,spc_,o_,to_,u_,sa_,n_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,PU_,RE_,ZE_,N_,TO_,si_,te_,spc_,mo_,ra_,ttu_,ta_,no_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	se_,ttu_,ka_,ku_,da_,ka_,ra_,spc_,ti_,yyo_,ttu_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,si_,yo_,u_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,ttu_,te_,spc_,do_,n_,na_,spc_,mo_,no_,ka_
+	.byte	CR_
+	.byte	a_,ta_,si_,ga_,spc_,o_,si_,e_,te_,spc_,a_,ge_,ru_,ka_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘突入
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p03_field_r103
+msg_heroine_01_p03_field_r103:
+	.byte	u_,wa_,ttu_,gyoe_,spc_,su_,go_,i_,spc_,su_,go_,i_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,tu_,yo_,i_,spc_,zi_,yya_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●勝利後のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p04_field_r103
+msg_heroine_01_p04_field_r103:
+	.byte	HA_,RU_,KA_,kako2_,a_,ta_,si_,spc_,o_,to_,u_,sa_,n_,ga_
+	.byte	CR_
+	.byte	a_,na_,ta_,no_,spc_,ko_,to_,wo_,spc_,ti_,yyu_,u_,mo_,ku_,spc_,su_,ru_,no_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ru_,yo_,u_,na_,spc_,ki_,ga_,spc_,su_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,mo_,ra_,ttu_,te_,spc_,su_,gu_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	mo_,u_,spc_,a_,na_,ta_,ni_,spc_,na_,tu_,i_,te_,i_,ru_,mo_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,na_,ra_,spc_,do_,n_,na_,spc_,PO_,KE_,MO_,N_,to_,de_,mo_
+	.byte	CR_
+	.byte	na_,ka_,yo_,ku_,spc_,na_,re_,ru_,ka_,mo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,zi_,yyo_,ni_,spc_,ka_,e_,ro_,ttu_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面下部に歩いて去っていく
+// 　以後は、t101_r0202に移動する
+
+// ●サポートキャラ♂「ユウキ」
+// ●話しかけても向きを変えずにそのままの位置で、以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_field_r103
+msg_hero_01_p01_field_r103:
+	.byte	YU_,U_,KI_,kako2_,so_,u_,ka_,spc_,a_,i_,tu_,to_,spc_,a_,i_,tu_,ga_
+	.byte	CR_
+	.byte	n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_,ni_,spc_,i_,ru_,spc_,PO_,KE_,MO_,N_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで頭上に「！」を表示させ、
+// 　主人公に向かって以下のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p02_field_r103
+msg_hero_01_p02_field_r103:
+	.byte	o_,ya_,hate_,spc_,I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,so_,u_,ka_,spc_,to_,u_,sa_,n_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,ra_,ttu_,ta_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,tu_,i_,de_,da_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,si_,te_,ya_,ro_,u_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,ttu_,te_,spc_,do_,n_,na_,spc_,mo_,no_,ka_
+	.byte	CR_
+	.byte	O_,RE_,ga_,spc_,o_,si_,e_,te_,ya_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘突入
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p03_field_r103
+msg_hero_01_p03_field_r103:
+	.byte	hu_,u_,n_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,ttu_,te_,spc_,tu_,yo_,i_,n_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●勝利後のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p04_field_r103
+msg_hero_01_p04_field_r103:
+	.byte	YU_,U_,KI_,kako2_,to_,u_,sa_,n_,ga_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,ko_,to_,wo_,spc_,ti_,yyu_,u_,mo_,ku_,spc_,su_,ru_,no_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ttu_,ta_,yo_,u_,na_,spc_,ki_,ga_,spc_,su_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ra_,ttu_,te_,spc_,su_,gu_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	mo_,u_,spc_,na_,tu_,i_,te_,i_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,na_,ra_,spc_,do_,n_,na_,spc_,PO_,KE_,MO_,N_,to_,de_,mo_
+	.byte	CR_
+	.byte	na_,ka_,yo_,ku_,spc_,na_,re_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,na_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,zi_,yyo_,ni_,spc_,mo_,do_,ro_,u_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面下部に歩いて去っていく
+// 　以後は、t101_r0202に移動する
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_field_r103
+msg_boy1_01_p01_field_r103:
+	.byte	bo_,ku_,no_,spc_,PO_,KE_,MO_,N_,spc_,mo_,u_,spc_,he_,ro_,he_,ro_,tenten_,tenten_
+	.byte	CR_
+	.byte	KI_,ZU_,gu_,su_,ri_,spc_,mo_,ttu_,te_,ku_,re_,ba_,spc_,yo_,ka_,ttu_,ta_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー男１（１１０番道路側）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_field_r103
+msg_trainerm1_01_p01_field_r103:
+	.byte	ko_,ko_,ka_,ra_,spc_,u_,mi_,wo_,spc_,wa_,ta_,ttu_,te_,i_,ke_,ba_
+	.byte	CR_
+	.byte	KO_,TO_,KI_,TA_,U_,N_,ma_,de_,spc_,ti_,ka_,mi_,ti_,ga_,spc_,de_,ki_,ru_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,hu_,hu_,spc_,o_,to_,ku_,na_,spc_,zi_,yyo_,u_,ho_,u_,spc_,da_,ro_,hate_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●コトキ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r103
+msg_kanban_01_p01_field_r103:
+	.byte	ko_,ko_,ha_,spc_,n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowD__,spc_,KO_,TO_,KI_,TA_,U_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,220 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R127	9
+#define EXITNUM_FIELD_R127	0
+#define POSNUM_FIELD_R127	0
+#define BGNUM_FIELD_R127	5
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_athletesm_01[];
+extern const u8	ev_athletesw_02[];
+extern const u8	ev_ball1_34[];
+extern const u8	ev_ball1_35[];
+extern const u8	ev_fishing_16[];
+extern const u8	ev_fishing_18[];
+extern const u8	ev_fishing_17[];
+extern const u8	ev_bird_18[];
+extern const u8	ev_karate_13[];
+
+const evObjData	OBJ_field_r127[] =
+{
+	{
+		TR_ATHLETESM_01,		//OBJ ID
+		SWIMERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0012,		//Xpos
+		0x0044,		//Ypos
+		0x01,		//Height
+		MV_H,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_athletesm_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_ATHLETESW_02,		//OBJ ID
+		SWIMERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x002d,		//Xpos
+		0x002c,		//Ypos
+		0x01,		//Height
+		MV_UH,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_athletesw_02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BALL1_34,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_34,		//Event Lavel
+		FV_BALL1_34,		//Event Flag
+	},
+
+	{
+		BALL1_35,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0040,		//Xpos
+		0x0027,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_35,		//Event Lavel
+		FV_BALL1_35,		//Event Flag
+	},
+
+	{
+		TR_FISHING_16,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0035,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_fishing_16,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FISHING_18,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0034,		//Xpos
+		0x0019,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_fishing_18,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FISHING_17,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0040,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_fishing_17,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_BIRD_18,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0012,		//Ypos
+		0x03,		//Height
+		MV_SPINR,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_bird_18,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_KARATE_13,		//OBJ ID
+		FIGHTER1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x003f,		//Xpos
+		0x003f,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_karate_13,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_BG	BG_field_r127[] =
+{
+	{
+		0x003b,		//Xpos
+		0x0043,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)31,		//Script
+	},
+
+	{
+		0x003b,		//Xpos
+		0x0048,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)142,		//Script
+	},
+
+	{
+		0x0043,		//Xpos
+		0x003f,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)151,		//Script
+	},
+
+	{
+		0x003d,		//Xpos
+		0x0015,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)143,		//Script
+	},
+
+	{
+		0x002d,		//Xpos
+		0x0018,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)123,		//Script
+	},
+
+};
+
+const SXY_DATA	field_r127_sxy_data =
+{
+OBJNUM_FIELD_R127,			// field obj max
+EXITNUM_FIELD_R127,		// exit max
+POSNUM_FIELD_R127,			// pos event max
+BGNUM_FIELD_R127,			// bg event max
+OBJ_field_r127,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+BG_field_r127,				// bg event data
+};

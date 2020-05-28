@@ -1,0 +1,867 @@
+//====================================================================
+//						r110_r0108
+//						カラクリ屋敷ステージ５
+//						LOCALWORK1使用
+//						LOCALWORK2使用
+//						LOCALWORK3使用
+//						LOCALWORK4使用
+//						LOCALWORK5使用
+//						LOCALWORK8使用
+//						LOCALWORK9使用
+//===================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0108_event_data
+FLAG_CHANGE_LABEL		flag_change_r110_r0108
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r110_r0108:
+	_LDVAL				LOCALWORK1,0		//カラクリ人形1
+	_LDVAL				LOCALWORK2,0		//カラクリ人形2
+	_LDVAL				LOCALWORK3,0		//カラクリ人形3
+	_LDVAL				LOCALWORK4,0		//カラクリ人形4
+	_LDVAL				LOCALWORK5,0		//カラクリ人形5
+
+	_LDVAL				LOCALWORK8,0		//0:移動中,1-5:カラクリ人形1-5との会話スタート
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						合い言葉の書
+/********************************************************************/
+SCRIPT_LABEL			ev_karakuri_01_p01_r110_r0108
+	_TALK_START
+	_IFVAL_JUMP			WK_SCENE_R110_R0108,EQ,0,get_aikotoba_r110_r0108
+	_JUMP				look_aikotoba_mes_r110_r0101
+	_END
+
+//あいことばを入手
+get_aikotoba_r110_r0108:
+	_LDVAL				WK_SCENE_R110_R0108,1
+	_JUMP				get_aikotoba_mes_r110_r0101
+	_END
+
+
+/********************************************************************/
+//						人形１
+/********************************************************************/
+SCRIPT_LABEL			ev_dool1_01_r110_r0108
+	_TALK_START
+	//振り向く
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_JUMP			LOCALWORK1,EQ,1,clear_message_set_r110_r0108
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_01_r110_r0108
+	_END
+
+
+/********************************************************************/
+//						人形２
+/********************************************************************/
+SCRIPT_LABEL			ev_dool1_02_r110_r0108
+	_TALK_START
+	//振り向く
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_JUMP			LOCALWORK2,EQ,1,clear_message_set_r110_r0108
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_02_r110_r0108
+	_END
+
+
+/********************************************************************/
+//						人形３
+/********************************************************************/
+SCRIPT_LABEL			ev_dool1_03_r110_r0108
+	_TALK_START
+	//振り向く
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_JUMP			LOCALWORK3,EQ,1,clear_message_set_r110_r0108
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_03_r110_r0108
+	_END
+
+
+/********************************************************************/
+//						人形４
+/********************************************************************/
+SCRIPT_LABEL			ev_dool1_04_r110_r0108
+	_TALK_START
+	//振り向く
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_JUMP			LOCALWORK4,EQ,1,clear_message_set_r110_r0108
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_04_r110_r0108
+	_END
+
+
+/********************************************************************/
+//						人形５
+/********************************************************************/
+SCRIPT_LABEL			ev_dool1_05_r110_r0108
+	_TALK_START
+	//振り向く
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_JUMP			LOCALWORK5,EQ,1,clear_message_set_r110_r0108
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_05_r110_r0108
+	_END
+
+
+/********************************************************************/
+//						ＰＯＳ
+/********************************************************************/
+SCRIPT_LABEL			ev_r110_r0108_pos11
+	_TALK_START
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_01_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos12
+	_TALK_START
+	_LDVAL				LOCALWORK9,1		//近寄らせる歩数
+	_JUMP				quiz_01_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos13
+	_TALK_START
+	_LDVAL				LOCALWORK9,2		//近寄らせる歩数
+	_JUMP				quiz_01_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos14
+	_TALK_START
+	_LDVAL				LOCALWORK9,3		//近寄らせる歩数
+	_JUMP				quiz_01_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos21
+	_TALK_START
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_02_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos22
+	_TALK_START
+	_LDVAL				LOCALWORK9,1		//近寄らせる歩数
+	_JUMP				quiz_02_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos31
+	_TALK_START
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_03_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos32
+	_TALK_START
+	_LDVAL				LOCALWORK9,1		//近寄らせる歩数
+	_JUMP				quiz_03_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos33
+	_TALK_START
+	_LDVAL				LOCALWORK9,2		//近寄らせる歩数
+	_JUMP				quiz_03_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos41
+	_TALK_START
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_04_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos42
+	_TALK_START
+	_LDVAL				LOCALWORK9,1		//近寄らせる歩数
+	_JUMP				quiz_04_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos51
+	_TALK_START
+	_LDVAL				LOCALWORK9,0		//近寄らせる歩数
+	_JUMP				quiz_05_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos52
+	_TALK_START
+	_LDVAL				LOCALWORK9,1		//近寄らせる歩数
+	_JUMP				quiz_05_r110_r0108
+	_END
+
+SCRIPT_LABEL			ev_r110_r0108_pos53
+	_TALK_START
+	_LDVAL				LOCALWORK9,2		//近寄らせる歩数
+	_JUMP				quiz_05_r110_r0108
+	_END
+
+//クイズ１
+quiz_01_r110_r0108:
+	_LDVAL				LOCALWORK1,1		//カラクリ人形1監視停止
+	_LDVAL				LOCALWORK8,1		//カラクリ人形1起動中
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_CALL			LOCALWORK9,EQ,1,left_walk_01_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,2,left_walk_02_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,3,left_walk_03_r110_r0108
+
+	//ワガハイハ
+	_TALK_KEYWAIT		msg_middlem1_01_p01_r110_r0108
+
+	//各クイズへ
+	_GET_RND			3
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,quiz_01_01_r110_r0108
+	_CASEJUMP			1,quiz_01_02_r110_r0108
+	_CASEJUMP			2,quiz_01_03_r110_r0108
+	_END
+
+//クイズ２
+quiz_02_r110_r0108:
+	_LDVAL				LOCALWORK2,1		//カラクリ人形2監視停止
+	_LDVAL				LOCALWORK8,2		//カラクリ人形2起動中
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_CALL			LOCALWORK9,EQ,1,right_walk_01_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,2,right_walk_02_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,3,right_walk_03_r110_r0108
+
+	//ワガハイハ
+	_TALK_KEYWAIT		msg_middlem1_02_p01_r110_r0108
+
+	//各クイズへ
+	_GET_RND			3
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,quiz_02_01_r110_r0108
+	_CASEJUMP			1,quiz_02_02_r110_r0108
+	_CASEJUMP			2,quiz_02_03_r110_r0108
+	_END
+
+//クイズ３
+quiz_03_r110_r0108:
+	_LDVAL				LOCALWORK3,1		//カラクリ人形3監視停止
+	_LDVAL				LOCALWORK8,3		//カラクリ人形3起動中
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_CALL			LOCALWORK9,EQ,1,left_walk_01_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,2,left_walk_02_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,3,left_walk_03_r110_r0108
+
+	//ワガハイハ
+	_TALK_KEYWAIT		msg_middlem1_03_p01_r110_r0108
+
+	//各クイズへ
+	_GET_RND			3
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,quiz_03_01_r110_r0108
+	_CASEJUMP			1,quiz_03_02_r110_r0108
+	_CASEJUMP			2,quiz_03_03_r110_r0108
+	_END
+
+//クイズ４
+quiz_04_r110_r0108:
+	_LDVAL				LOCALWORK4,1		//カラクリ人形5監視停止
+	_LDVAL				LOCALWORK8,4		//カラクリ人形5起動中
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_CALL			LOCALWORK9,EQ,1,left_walk_01_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,2,left_walk_02_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,3,left_walk_03_r110_r0108
+
+	//ワガハイハ
+	_TALK_KEYWAIT		msg_middlem1_04_p01_r110_r0108
+
+	//各クイズへ
+	_GET_RND			3
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,quiz_04_01_r110_r0108
+	_CASEJUMP			1,quiz_04_02_r110_r0108
+	_CASEJUMP			2,quiz_04_03_r110_r0108
+	_END
+
+
+//クイズ５
+quiz_05_r110_r0108:
+	_LDVAL				LOCALWORK5,1		//カラクリ人形5監視停止
+	_LDVAL				LOCALWORK8,5		//カラクリ人形5起動中
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_IFVAL_CALL			LOCALWORK9,EQ,1,right_walk_01_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,2,right_walk_02_r110_r0108
+	_IFVAL_CALL			LOCALWORK9,EQ,3,right_walk_03_r110_r0108
+
+	//ワガハイハ
+	_TALK_KEYWAIT		msg_middlem1_05_p01_r110_r0108
+
+	//各クイズへ
+	_GET_RND			3
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,quiz_05_01_r110_r0108
+	_CASEJUMP			1,quiz_05_02_r110_r0108
+	_CASEJUMP			2,quiz_05_03_r110_r0108
+	_END
+
+//人形１、クイズ１
+quiz_01_01_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_01_p02_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_11_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形１、クイズ２
+quiz_01_02_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_01_p03_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_12_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			0,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形１、クイズ３
+quiz_01_03_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_01_p04_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_13_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形２、クイズ１
+quiz_02_01_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_02_p02_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_21_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			2,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形２、クイズ２
+quiz_02_02_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_02_p03_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_22_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			0,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形２、クイズ３
+quiz_02_03_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_02_p04_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_23_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			0,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形３、クイズ１
+quiz_03_01_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_03_p02_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_31_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形３、クイズ２
+quiz_03_02_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_03_p03_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_32_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			2,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形３、クイズ３
+quiz_03_03_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_03_p04_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_33_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形４、クイズ１
+quiz_04_01_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_04_p02_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_41_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形４、クイズ２
+quiz_04_02_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_04_p03_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_42_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			0,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形４、クイズ３
+quiz_04_03_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_04_p04_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_43_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形５、クイズ１
+quiz_05_01_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_05_p02_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_51_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			1,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形５、クイズ２
+quiz_05_02_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_05_p03_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_52_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			0,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//人形５、クイズ３
+quiz_05_03_r110_r0108:
+	//質問
+	_TALK_KEYWAIT		msg_middlem1_05_p04_r110_r0108
+
+	_SELECT_WINDOW		0,0,KARAKURI_QUIZ_53_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP			2,ev_quiz_seikai_r110_r0108
+	_JUMP				ev_quiz_hazure_r110_r0108
+	_END
+
+//ハズレの時の処理
+ev_quiz_hazure_r110_r0108:
+	//不正解音
+	_SE_WAIT
+	_SE					SE_HAZURE
+
+	//”ザンネン　マチガイ”
+	_TALK_KEYWAIT		msg_middlem1_01_p06_r110_r0108
+
+	//全人形ブルブル動く
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,dool_buruburu_anime
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,dool_buruburu_anime
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,dool_buruburu_anime
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,dool_buruburu_anime
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,dool_buruburu_anime
+	//"ワハハハ！”
+	_TALK_KEYWAIT		msg_middlem1_01_p07_r110_r0108
+
+	_OBJ_ANIME_WAIT 
+	_TALK_CLOSE
+
+	//"マタノ　ちゃれんじ”
+	_TALK_KEYWAIT		msg_middlem1_01_p08_r110_r0108
+	_TALK_CLOSE
+
+	//画面暗転入り口へ
+	_MAP_CHANGE			R110,R110_R0108,0,21
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//正解の時の処理
+ev_quiz_seikai_r110_r0108:
+	//正解音
+	_SE_WAIT
+	_SE					SE_SEIKAI
+
+	_JUMP				clear_message_set_r110_r0108
+	_END
+
+//クリア時の共通メッセージ
+clear_message_set_r110_r0108:
+	//オクヘ　ドウゾ
+	_TALK_KEYWAIT		msg_middlem1_01_p05_r110_r0108
+	_TALK_END
+	_END
+
+//左へ１歩、歩かせる
+left_walk_01_r110_r0108:
+	_IFVAL_CALL			LOCALWORK8,EQ,1,left_walk_01_dool_01
+	_IFVAL_CALL			LOCALWORK8,EQ,2,left_walk_01_dool_02
+	_IFVAL_CALL			LOCALWORK8,EQ,3,left_walk_01_dool_03
+	_IFVAL_CALL			LOCALWORK8,EQ,4,left_walk_01_dool_04
+	_IFVAL_CALL			LOCALWORK8,EQ,5,left_walk_01_dool_05
+	_RET
+
+//左へ２歩、歩かせる
+left_walk_02_r110_r0108:
+	_IFVAL_CALL			LOCALWORK8,EQ,1,left_walk_02_dool_01
+	_IFVAL_CALL			LOCALWORK8,EQ,2,left_walk_02_dool_02
+	_IFVAL_CALL			LOCALWORK8,EQ,3,left_walk_02_dool_03
+	_IFVAL_CALL			LOCALWORK8,EQ,4,left_walk_02_dool_04
+	_IFVAL_CALL			LOCALWORK8,EQ,5,left_walk_02_dool_05
+	_RET
+
+//左へ３歩、歩かせる
+left_walk_03_r110_r0108:
+	_IFVAL_CALL			LOCALWORK8,EQ,1,left_walk_03_dool_01
+	_IFVAL_CALL			LOCALWORK8,EQ,2,left_walk_03_dool_02
+	_IFVAL_CALL			LOCALWORK8,EQ,3,left_walk_03_dool_03
+	_IFVAL_CALL			LOCALWORK9,EQ,4,left_walk_03_dool_04
+	_IFVAL_CALL			LOCALWORK9,EQ,5,left_walk_03_dool_05
+	_RET
+
+//右へ１歩、歩かせる
+right_walk_01_r110_r0108:
+	_IFVAL_CALL			LOCALWORK8,EQ,1,right_walk_01_dool_01
+	_IFVAL_CALL			LOCALWORK8,EQ,2,right_walk_01_dool_02
+	_IFVAL_CALL			LOCALWORK8,EQ,3,right_walk_01_dool_03
+	_IFVAL_CALL			LOCALWORK8,EQ,4,right_walk_01_dool_04
+	_IFVAL_CALL			LOCALWORK8,EQ,5,right_walk_01_dool_05
+	_RET
+
+//右へ２歩、歩かせる
+right_walk_02_r110_r0108:
+	_IFVAL_CALL			LOCALWORK8,EQ,1,right_walk_02_dool_01
+	_IFVAL_CALL			LOCALWORK8,EQ,2,right_walk_02_dool_02
+	_IFVAL_CALL			LOCALWORK8,EQ,3,right_walk_02_dool_03
+	_IFVAL_CALL			LOCALWORK8,EQ,4,right_walk_02_dool_04
+	_IFVAL_CALL			LOCALWORK8,EQ,5,right_walk_02_dool_05
+	_RET
+
+//右へ３歩、歩かせる
+right_walk_03_r110_r0108:
+	_IFVAL_CALL			LOCALWORK8,EQ,1,right_walk_03_dool_01
+	_IFVAL_CALL			LOCALWORK8,EQ,2,right_walk_03_dool_02
+	_IFVAL_CALL			LOCALWORK8,EQ,3,right_walk_03_dool_03
+	_IFVAL_CALL			LOCALWORK8,EQ,4,right_walk_03_dool_04
+	_IFVAL_CALL			LOCALWORK8,EQ,5,right_walk_03_dool_05
+	_RET
+
+left_walk_01_dool_01:
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,left_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_01_dool_02:
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,left_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_01_dool_03:
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,left_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_01_dool_04:
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,left_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_01_dool_05:
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,left_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_02_dool_01:
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,left_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_02_dool_02:
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,left_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_02_dool_03:
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,left_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_02_dool_04:
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,left_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_02_dool_05:
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,left_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_03_dool_01:
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,left_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_03_dool_02:
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,left_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_03_dool_03:
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,left_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_03_dool_04:
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,left_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+left_walk_03_dool_05:
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,left_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_01_dool_01:
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,right_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_01_dool_02:
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,right_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_01_dool_03:
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,right_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_01_dool_04:
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,right_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_01_dool_05:
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,right_walk_01_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_02_dool_01:
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,right_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_02_dool_02:
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,right_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_02_dool_03:
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,right_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_02_dool_04:
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,right_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_02_dool_05:
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,right_walk_02_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_03_dool_01:
+	_SET_OBJ_ANIME		DOOL1_01_R110_R0108,right_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_03_dool_02:
+	_SET_OBJ_ANIME		DOOL1_02_R110_R0108,right_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_03_dool_03:
+	_SET_OBJ_ANIME		DOOL1_03_R110_R0108,right_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_03_dool_04:
+	_SET_OBJ_ANIME		DOOL1_04_R110_R0108,right_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+right_walk_03_dool_05:
+	_SET_OBJ_ANIME		DOOL1_05_R110_R0108,right_walk_03_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//左１歩アニメ
+left_walk_01_anime:
+	.byte				AC_WALK_L_1
+	.byte				ACMD_END
+
+//左２歩アニメ
+left_walk_02_anime:
+	.byte				AC_WALK_L_1
+	.byte				AC_WALK_L_1
+	.byte				ACMD_END
+
+//左３歩アニメ
+left_walk_03_anime:
+	.byte				AC_WALK_L_1
+	.byte				AC_WALK_L_1
+	.byte				AC_WALK_L_1
+	.byte				ACMD_END
+
+//右１歩アニメ
+right_walk_01_anime:
+	.byte				AC_WALK_R_1
+	.byte				ACMD_END
+
+//右２歩アニメ
+right_walk_02_anime:
+	.byte				AC_WALK_R_1
+	.byte				AC_WALK_R_1
+	.byte				ACMD_END
+
+//右３歩アニメ
+right_walk_03_anime:
+	.byte				AC_WALK_R_1
+	.byte				AC_WALK_R_1
+	.byte				AC_WALK_R_1
+	.byte				ACMD_END
+
+//ブルブルアニメ
+dool_buruburu_anime:
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_L
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_R
+	.byte				AC_WAIT_2
+	.byte				AC_SITE_D
+	.byte				ACMD_END
+
+
+/********************************************************************/
+/********************************************************************/

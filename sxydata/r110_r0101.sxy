@@ -1,0 +1,132 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_R110_R0101	1
+#define EXITNUM_R110_R0101	3
+#define POSNUM_R110_R0101	4
+#define BGNUM_R110_R0101	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_middlem1_01_p01_r110_r0101[];
+
+//POS_SCRIPT
+extern const u8	ev_r110_r0101_pos01[];
+extern const u8	ev_r110_r0101_pos01[];
+extern const u8	ev_r110_r0101_pos01[];
+extern const u8	ev_r110_r0101_pos01[];
+
+//BG_SCRIPT
+extern const u8	ev_kakejiku_01_p01_r110_r0101[];
+
+const evObjData	OBJ_r110_r0101[] =
+{
+	{
+		MIDDLEM1_01_P01_R110_R0101,		//OBJ ID
+		MIDDLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem1_01_p01_r110_r0101,		//Event Lavel
+		FV_MIDDLEM1_01_R110_R0101,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_r110_r0101[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		FIELD_R110_DOOR02,		//Door ID
+		FIELD_R110,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		FIELD_R110_DOOR02,		//Door ID
+		FIELD_R110,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		R110_R0104_MAT01,		//Door ID
+		R110_R0104,			//Map ID
+		R110,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_r110_r0101[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		WK_SCENE_SHISEN,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0101_pos01,		//Script
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		WK_SCENE_SHISEN,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0101_pos01,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		WK_SCENE_SHISEN,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0101_pos01,		//Script
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		WK_SCENE_SHISEN,		//Event Type
+		0x00,		//Scene
+		ev_r110_r0101_pos01,		//Script
+	},
+
+};
+
+const SXY_BG	BG_r110_r0101[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_kakejiku_01_p01_r110_r0101,		//Script
+	},
+
+};
+
+const SXY_DATA	r110_r0101_sxy_data =
+{
+OBJNUM_R110_R0101,			// field obj max
+EXITNUM_R110_R0101,		// exit max
+POSNUM_R110_R0101,			// pos event max
+BGNUM_R110_R0101,			// bg event max
+OBJ_r110_r0101,			// field obj data
+EXIT_r110_r0101,			// exit data
+POS_r110_r0101,			// pos event data
+BG_r110_r0101,				// bg event data
+};

@@ -1,0 +1,11 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define AKUA_01_CAVE_D0901	1
+#define AKUA_02_CAVE_D0901	2
+#define TR_AQUAM_01	3
+
+//Exit ID = 3
+#define CAVE_D0901_DOOR01	0
+#define CAVE_D0901_DOOR02	1
+#define CAVE_D0901_DOOR03	2

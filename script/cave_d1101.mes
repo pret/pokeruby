@@ -1,0 +1,22 @@
+// œŠC’ê“´ŒA
+
+
+// œö…’ø
+// ¡                    ¡
+	.GLOBAL	msg_submarine_06_p01_cave_d1101
+msg_submarine_06_p01_cave_d1101:
+	.byte	se_,n_,su_,i_,te_,i_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	kako_,ka_,i_,e_,n_,spc_,n1_,go_,u_,kakot_,to_,spc_,ka_,ka_,re_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ga_,spc_,KA_,I_,NA_,ka_,ra_
+	.byte	CR_
+	.byte	u_,ba_,ttu_,te_,spc_,i_,ttu_,ta_,spc_,se_,n_,su_,i_,te_,i_,spc_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ha_
+	.byte	CR_
+	.byte	ko_,ko_,ka_,ra_,spc_,u_,e_,ni_,spc_,a_,ga_,ttu_,ta_,mi_,ta_,i_,da_
+	.byte	EOM_
+
+// ¡                    ¡
+// œ’´ŒÃ‘ãƒ|ƒPƒ‚ƒ“‚ª–ÚŠo‚ß‚é‚Æíœ

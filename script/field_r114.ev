@@ -1,0 +1,242 @@
+//====================================================================
+//							field_r114
+//						フィールド・ロード114
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r114_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								少年								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm1_01_p01_kinomi
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//一日一回
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT_02,ev_youngm1_01_p02_kinomi
+
+	_TALK_KEYWAIT	msg_youngm1_01_p01_kinomi
+
+	//16-20の木の実を一つくれる
+	_GET_RND		5
+	//_ADDWK			ANSWORK,16
+	_ADDWK			ANSWORK,15
+	_ADDWK			ANSWORK,ITEM_SEED_START
+
+	_ITEM_EVENT		ANSWORK,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		TMFLG_SEED_PRESENT_02
+
+	_TALK_KEYWAIT	msg_youngm1_01_p02_kinomi
+	_TALK_OBJ_END
+	_END
+
+//一日一回
+ev_youngm1_01_p02_kinomi:
+	_TALK_KEYWAIT	msg_youngm1_01_p03_kinomi
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								紳士								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_field_r114
+	_TALK_OBJ_START
+
+	//すでにアイテム入手していたら
+	_IF_FLAGON_JUMP		FE_WAZAM05_GET,ev_gentlem1_01_p02_field_r114
+
+	_TALK_KEYWAIT       msg_gentlem1_01_p01_field_r114
+
+	_ITEM_EVENT			ITEM_WAZAMASIN05,1
+	_IF_ZERO_JUMP		ev_fail_item
+
+	_FLAG_SET			FE_WAZAM05_GET
+	_TALK_KEYWAIT       msg_gentlem1_01_p02_field_r114
+	_TALK_OBJ_END
+	_END
+	
+//すでにアイテム入手している
+ev_gentlem1_01_p02_field_r114:
+	_TALK_KEYWAIT       msg_gentlem1_01_p02_field_r114
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								ポケモン							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_attack1_01_p01_field_r114
+	_TALK_OBJ_START
+	_VOICE_PLAY		MONSNO_POTIENA,2	//ほえているので怒ったときのSE(2)を使用
+	_TALK_KEYWAIT   msg_attack1_01_p01_field_r114
+	_VOICE_WAIT
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r114
+	_EASY_MSG       msg_kanban_01_p01_field_r114
+	_END
+	
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_r114
+	_EASY_MSG       msg_kanban_02_p01_field_r114
+	_END
+	
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_r114
+	_EASY_MSG       msg_kanban_03_p01_field_r114
+	_END
+	
+
+/********************************************************************/
+//							トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_mount_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_03
+	_TRAINER_DATA2	msg_mount_03_01
+	_TRAINER_DATA3	msg_mount_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_03_03
+	_END
+
+SCRIPT_LABEL	ev_mount_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MOUNT_04
+	_TRAINER_DATA2	msg_mount_04_01
+	_TRAINER_DATA3	msg_mount_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_mount_04_03
+	_END
+
+SCRIPT_LABEL	ev_campb_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPB_04
+	_TRAINER_DATA2	msg_campb_04_01
+	_TRAINER_DATA3	msg_campb_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campb_04_03
+	_END
+
+SCRIPT_LABEL	ev_picnicg_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	PICNICG_04
+	_TRAINER_DATA2	msg_picnicg_04_01
+	_TRAINER_DATA3	msg_picnicg_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_picnicg_04_03
+	_END
+
+SCRIPT_LABEL	ev_monsterm_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MONSTERM_01
+	_TRAINER_DATA2	msg_monsterm_01_01
+	_TRAINER_DATA3	msg_monsterm_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_monsterm_01
+	_TRAINER_EASY_MSG	msg_monsterm_01_03
+	_END
+
+_revenge_monsterm_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	MONSTERM_01
+	_TRAINER_DATA2	msg_monsterm_01_04
+	_TRAINER_DATA3	msg_monsterm_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_monsterm_01_06
+	_END
+
+SCRIPT_LABEL	ev_campf_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPF_06
+	_TRAINER_DATA2	msg_campf_06_01
+	_TRAINER_DATA3	msg_campf_06_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_campf_06
+	_TRAINER_EASY_MSG	msg_campf_06_03
+	_END
+
+_revenge_campf_06:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	CAMPF_06
+	_TRAINER_DATA2	msg_campf_06_04
+	_TRAINER_DATA3	msg_campf_06_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_campf_06_06
+	_END
+
+SCRIPT_LABEL	ev_fishing_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_03
+	_TRAINER_DATA2	msg_fishing_03_01
+	_TRAINER_DATA3	msg_fishing_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_03_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_07
+	_TRAINER_DATA2	msg_fishing_07_01
+	_TRAINER_DATA3	msg_fishing_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_07_03
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_08_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_08
+	_TRAINER_DATA2	msg_senpaikouhai_08_01
+	_TRAINER_DATA3	msg_senpaikouhai_08_02
+	_TRAINER_DATA4	msg_senpaikouhai_08_04
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_08_03
+	_END
+
+SCRIPT_LABEL	ev_senpaikouhai_08_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	SENPAIKOUHAI_08
+	_TRAINER_DATA2	msg_senpaikouhai_08_05
+	_TRAINER_DATA3	msg_senpaikouhai_08_06
+	_TRAINER_DATA4	msg_senpaikouhai_08_08
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_senpaikouhai_08_07
+	_END
+

@@ -1,0 +1,145 @@
+//<rlt_com.dat>
+///////////////////////////////////////////////////////
+//
+//		ミニゲーム・ルーレットで使用するシンボル定義
+//
+////////////////////////////////////////////////////////
+
+#ifndef _RLT_COMMON_DAT_
+#define _RLT_COMMON_DAT_
+
+//===================================================
+//	フラグ関係
+//===================================================
+#define RLT_IF_BONUS	(0x0080)	//ボーナスタイムかどうか？
+#define RLT_CHECK_RATE	(0x0001)	//レートのチェック用
+#define RLT_PROV_RATE	(0x0000)	//レートのデフォルト値
+#define IF_NORMAL	0				//デバッグ用
+
+//==================================================
+//	タスク管理・アクター管理
+//==================================================
+//シンボル定義
+#define RLT_STASK_MAIN	0			//サブタスクのメイン
+#define RLT_STASK_KEY	1			//共通キー入力
+
+//==========================================================
+//	グローバルメモリの参照
+//==========================================================
+//使用するワークエリア
+#define	MG_RLT	( (ROULETTE *)&UserWork[ RLT_UWORK_PROG ] )
+
+//カレントボールのナンバーを返す
+#define GetPreBallNo(id)	(TaskTable[(id)].work[LOOP_WORK])
+#define GetMoveBallNo(id)	(TaskTable[(id)].work[LOOP_WORK])
+
+//保存用IDから、使用したいアクターワークのポインタをGET
+#define GetPreActwork(no){	\
+	MG_RLT->pAct = &(ActWork[ MG_RLT->act_id[(no)] ]);		\
+}
+
+//==================================================
+//	ゲームで使用するリテラル
+//==================================================
+//バージョンの個数(0-3 数値が小さいほど当たり易い)
+#define RLT_VER_MAX		(4)
+#define RLT_GAME_MAX	(6)			//1セットのゲーム回数
+
+//回転用のパラメータ
+#define FF_MAG1000		(0x00000010)	//回転時の拡大率
+
+//勝ち負け判定
+typedef enum{
+	RLT_RET_ROSE = 0,
+	RLT_RET_WIN,
+	RLT_BONUS_WIN,
+	RLT_NO_BET,
+}RLT_WIN_CHECK;
+
+//ルーレット盤のエリア関連(盤の外側から順に)
+#define	RLT_AREA0_SIZ	(4.0f)		//エリアサイズ(ドット)
+#define RLT_AREA1_SIZ	(8.0f)
+#define RLT_AREA2_SIZ	(20.0f)
+#define RLT_AREA3_SIZ	(4.0f)
+#define RLT_AREA4_SIZ	(16.0f)
+
+#define RLT_AREA0_OFS	(76)				//盤の中心からのオフセット(ドット)
+#define RLT_AREA1_OFS	(RLT_AREA0_OFS-8)	//ボールがはじめに入る場所
+#define RLT_AREA2_OFS	(RLT_AREA1_OFS-RLT_AREA1_SIZ)
+#define RLT_AREA3_OFS	(RLT_AREA2_OFS-RLT_AREA2_SIZ)
+#define RLT_AREA4_OFS	(RLT_AREA3_OFS-RLT_AREA3_SIZ)
+#define RLT_AREA5_OFS	(24)
+
+//ボール関連
+#define RLT_STOP_TIME	(5)		//ボールがストップするまでの秒数
+#define RLT_BALL_MAX	RLT_GAME_MAX
+#define RLT_BALL_SIZ	(16)
+#define RLT_BALL_SIZH	(8)
+
+// Ball ActWork
+#define BALL_FLG		0		// フラグエリア
+#define BALL_STAT		1		// ボールのステート
+#define BALL_TIME		2		// タイマー
+#define BALL_R			3		// 現在の角度
+#define BALL_W			4		// 現在のセンターからのオフセット
+#define BALL_HIT		5		// ヒットした場所
+#define BGROT_OFS		6		// 盤のROTとのオフセット
+#define BALL_WORK		7		// 汎用
+
+//===================================
+//	固定座標関係
+//===================================
+//BGの参照中心点
+#define BG2_DISP_OFSY	(-4)		// BG2のディスプレイ表示オフセット(Y) 
+#define	CENTER_X		116			// 回転OBJ中心X座標
+#define	CENTER_Y		84			// 回転OBJ中心Y座標
+
+//メッセージウィンドウの表示場所
+#define	YESNO_WINX		20			//YesNo Window
+#define	YESNO_WINY		8
+
+#define	BET_WINX		23			//Bet Window
+#define	BET_WINY		4
+
+//固定のウェイト値
+#define RLT_WAIT_SYNC_1	(32)
+
+//==============================================================
+//	グラフィックデータの参照
+//==============================================================
+//グラフィックデータのサイズ
+#define BGS_NUM_SIZ	(16*2*2)	//BG数字のスクリーンデータ
+#define BGS_WIN_SIZ	(9*14*2)	//BGウィンドウ用のスクリーンデータ
+
+#define OBJN_RPOKE_SIZ	(2*4*32*4)		//ルーレット盤のポケモン
+#define OBJN_WPOKE_SIZ	(4*4*32*11)		//ベットテーブルのポケモン
+#define OBJN_CTBL_SIZ	(8*8*32*1)		//センターテーブル
+#define OBJN_WAKU_SIZ	(4*4*32*5)		//選択枠用OBJ
+#define OBJN_SHADOW_SIZ	(2*2*32*3)		//影用
+
+#define	OBJA_BALL_SIZ	(2*2*32*2)		//ボール
+#define OBJA_EV00P_SIZ	(4*4*32*2)		//ジグザグマ
+#define OBJA_EV01P_SIZ	(4*4*32*2)		//スバメ
+
+#define GD_BG_PAL	(minig_r_Palette)
+#define GD_OBJ_PAL	(rlt_obj_Palette)
+
+//BG01
+#define GD_BGS_WIN	(rlt_bg_win_Map)
+
+//OBJ
+#define GD_OBJN_RPOKE00	(rlt_poke00_Character)
+#define GD_OBJN_RPOKE01	(rlt_poke01_Character)
+#define GD_OBJN_RPOKE02	(rlt_poke02_Character)
+#define GD_OBJN_RPOKE03	(rlt_poke03_Character)
+
+#define GD_OBJN_WPOKE	(rlt_wPoke_Character)
+#define GD_OBJN_CTBL	(rlt_ctbl_Character)
+#define GD_OBJN_WAKU	(rlt_waku_Character)
+
+#define GD_OBJN_SHADOW	(rlt_shadow_Character)
+
+#define GD_OBJA_BALL	(rlt_ball_Character)
+#define GD_OBJA_EV00P	(rlt_ev00_Character)
+
+#endif //_RLT_COMMON_DAT_

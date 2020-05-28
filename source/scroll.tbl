@@ -1,0 +1,13 @@
+
+const Vector SiteVector[] = {	/* NDW TABLE START	*/
+		{0,0},					/* SITE_NOTHING		*/
+		{0,1},					/* SITE_DOWN		*/
+		{0,-1},					/* SITE_UP			*/
+		{-1,0},					/* SITE_LEFT		*/
+		{1,0},					/* SITE_RIGHT		*/
+		{-1,1},					/* SITE_DOWNLEFT	*/
+		{1,1},					/* SITE_DOWNRIGHT	*/
+		{-1,-1},				/* SITE_UPLEFT		*/
+		{1,-1},					/* SITE_UPRIGHT		*/
+};								/* NDW TABLE END	*/
+

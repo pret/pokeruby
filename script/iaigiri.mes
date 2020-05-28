@@ -1,0 +1,23 @@
+@===================================================================
+@	”é“`‹ZE‹‡a‚è‚ÌƒƒbƒZ[ƒW
+@	2002/01/22 by nakahiro
+@===================================================================
+fe_iai_msg00:
+	.byte	tenten_,tenten_,ko_,no_,ki_,ha_,spc_,na_,n_,da_,ka_
+	.byte	CR_
+	.byte	ki_,re_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,a_,i_,gi_,ri_,de_,spc_,ki_,ri_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+fe_iai_msg01:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+fe_iai_msg02:
+	.byte	ko_,no_,ki_,ha_,spc_,na_,n_,da_,ka_
+	.byte	CR_
+	.byte	ki_,re_,so_,u_,da_,gyoe_
+	.byte	EOM_

@@ -1,0 +1,264 @@
+//====================================================================
+//							c104_r0102
+//							デボン本社２Ｆ
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c104_r0102_event_data
+FLAG_CHANGE_LABEL	flag_change_c104_r0102
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c104_r0102:
+	//タマゴが再生前
+	_IFVAL_CALL		WK_SCENE_C104_R0102,EQ,1,add_kaseki_work_c104_r0102
+	_END
+
+//タマゴを再生後へ
+add_kaseki_work_c104_r0102:
+	_LDVAL			WK_SCENE_C104_R0102,2
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							研究員									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_01_p01_c104_r0102
+	_TALK_OBJ_START
+	//タマゴが再生前
+	_IFVAL_CALL		WK_SCENE_C104_R0102,EQ,1,add_kaseki_work_c104_r0102
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							研究員									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_02_p01_c104_r0102
+	_TALK_OBJ_START
+	//タマゴが再生前
+	_IFVAL_CALL		WK_SCENE_C104_R0102,EQ,1,add_kaseki_work_c104_r0102
+
+	//新型ボールの話を聞いているか(研究員と会話しているか)
+	_IF_FLAGON_JUMP		FE_WORKERM1_01_FIELD_R116,ev_studym1_01_p02_c104_r0102
+
+	_TALK_KEYWAIT	msg_studym1_02_p01_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+//新型ボールの話を聞いている(研究員と会話している)
+ev_studym1_01_p02_c104_r0102:
+	_TALK_KEYWAIT	msg_studym1_02_p02_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							研究員									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_03_p01_c104_r0102
+	_TALK_OBJ_START
+	//タマゴが再生前
+	_IFVAL_CALL		WK_SCENE_C104_R0102,EQ,1,add_kaseki_work_c104_r0102
+
+	//トレナビを入手している？
+	_IF_FLAGON_JUMP	FE_POKEGEAR_GET,ev_studym1_03_p02_c104_r0102
+
+	//トレナビ入手前
+	_TALK_KEYWAIT	msg_studym1_03_p01_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+//トレナビ入手後
+ev_studym1_03_p02_c104_r0102:
+	_TALK_KEYWAIT	msg_studym1_03_p02_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/*							研究員									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_04_p01_c104_r0102
+	_TALK_OBJ_START
+	//タマゴが再生前
+	_IFVAL_CALL		WK_SCENE_C104_R0102,EQ,1,add_kaseki_work_c104_r0102
+
+	_TALK_KEYWAIT	msg_studym1_04_p01_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							研究員									*/
+/*				カセキを持っているとき再生してくれます。			*/
+/********************************************************************/
+SCRIPT_LABEL	ev_studym1_05_p01_c104_r0102
+	_TALK_OBJ_START
+	//カセキが再生した？
+	_IFVAL_JUMP		WK_SCENE_C104_R0102,EQ,2,ev_studym1_05_p06_c104_r0102
+
+	//再生待ち？
+	_IFVAL_JUMP		WK_SCENE_C104_R0102,EQ,1,ev_studym1_05_p05_c104_r0102
+
+	//"いま　ポケモンの　かせきを...."
+	_TALK_KEYWAIT	msg_studym1_05_p01_c104_r0102
+
+	//ねっこのカセキを持っている
+	_CHECK_ITEM		ITEM_NEKKONOKASEKI,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ari_nekkokaseki_c104_r0102
+
+	//ツメのカセキを持っている
+	_CHECK_ITEM		ITEM_TUMENOKASEKI,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ari_tumekaseki_c104_r0102
+
+	_TALK_OBJ_END
+	_END
+
+//カセキをもっているとき(ねっこ）
+ari_nekkokaseki_c104_r0102:
+	_TALK_CLOSE
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		STUDYM1_05_C104_R0102,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		STUDYM1_05_C104_R0102,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	//さいせいする？
+	_TALK_YES_NO	msg_studym1_05_p02_c104_r0102
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_studym1_05_p03_c104_r0102	//「いいえ」
+
+	_GET_ITEMNAME	0,ITEM_NEKKONOKASEKI
+	//"あずけた！"
+	_TALK_KEYWAIT	msg_studym1_05_p04_c104_r0102
+
+	_SUB_ITEM		ITEM_NEKKONOKASEKI,1
+	//預けた状態へ
+	_LDVAL			WK_SCENE_C104_R0102,1
+	_LDVAL			WK_KASEKI_TYPE,1
+
+	_TALK_OBJ_END
+	_END
+
+//カセキをもっているとき(ツメ）
+ari_tumekaseki_c104_r0102:
+	_TALK_CLOSE
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		STUDYM1_05_C104_R0102,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_SET_OBJ_ANIME		STUDYM1_05_C104_R0102,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	//さいせいする？
+	_TALK_YES_NO	msg_studym1_05_p02_c104_r0102
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_studym1_05_p03_c104_r0102	//「いいえ」
+
+	_GET_ITEMNAME	0,ITEM_TUMENOKASEKI
+	//"あずけた！"
+	_TALK_KEYWAIT	msg_studym1_05_p04_c104_r0102
+
+	_SUB_ITEM		ITEM_TUMENOKASEKI,1
+	//預けた状態へ
+	_LDVAL			WK_SCENE_C104_R0102,1
+	_LDVAL			WK_KASEKI_TYPE,2
+
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+ev_studym1_05_p03_c104_r0102:
+	_TALK_KEYWAIT	msg_studym1_05_p03_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+//再生待ち
+ev_studym1_05_p05_c104_r0102:
+	_TALK_KEYWAIT	msg_studym1_05_p05_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+//カセキが再生した
+ev_studym1_05_p06_c104_r0102:
+	_IFVAL_JUMP		WK_KASEKI_TYPE,EQ,1,kaseki_get_01_c104_r0102
+	_IFVAL_JUMP		WK_KASEKI_TYPE,EQ,2,taiko_get_01_c104_r0102
+	_END
+
+//ポケモン「カセキ」取得処理
+kaseki_get_01_c104_r0102:
+	_GET_MONSNAME	1,MONSNO_RIRIIRA
+	_TALK_KEYWAIT	msg_studym1_05_p06_c104_r0102
+
+	//手持ちのポケモン数取得
+	_GET_TEMOTI_NUM
+	_IFVAL_JUMP		ANSWORK,EQ,6,ev_studym1_05_p08_c104_r0102	//６体既にいる
+
+	_LDWK			PARAM0,ANSWORK			//新たな加わるポケモン位置を保存
+	_LDVAL			WK_SCENE_C104_R0102,0
+	_FLAG_SET		FE_KASEKI_RETURN
+
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_studym1_05_p07_c104_r0102
+	_JINGLE_WAIT
+
+	//カセキ入手
+	_ADD_POKEMON	MONSNO_RIRIIRA,20,0,0,0,0
+
+	_TALK_YES_NO	msg_nickname_yes_no
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,ev_new_poke_nick_name_script	//「はい」
+
+	_TALK_OBJ_END
+	_END
+
+//ポケモン「タイコ」取得処理
+taiko_get_01_c104_r0102:
+	_GET_MONSNAME	1,MONSNO_ANOPUSU	
+	_TALK_KEYWAIT	msg_studym1_05_p06_c104_r0102
+
+	//手持ちのポケモン数取得
+	_GET_TEMOTI_NUM
+	_IFVAL_JUMP		ANSWORK,EQ,6,ev_studym1_05_p08_c104_r0102	//６体既にいる
+
+	_LDWK			PARAM0,ANSWORK			//新たな加わるポケモン位置を保存
+	_LDVAL			WK_SCENE_C104_R0102,0
+	_FLAG_SET		FE_KASEKI_RETURN
+
+	_JINGLE			MUS_FANFA4
+	_TALKMSG		msg_studym1_05_p07_c104_r0102
+	_JINGLE_WAIT
+
+	//タイコ入手
+	_ADD_POKEMON	MONSNO_ANOPUSU,20,0,0,0,0
+
+	_TALK_YES_NO	msg_nickname_yes_no
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,ev_new_poke_nick_name_script	//「はい」
+
+	_TALK_OBJ_END
+	_END
+
+//手持ちが一杯の時
+ev_studym1_05_p08_c104_r0102:
+	_TALK_KEYWAIT	msg_studym1_05_p08_c104_r0102
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

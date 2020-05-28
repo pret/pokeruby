@@ -1,0 +1,14 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 4
+#define PCCABLE_01_C103_PC02	1
+#define PCCABLE_02_C103_PC02	2
+#define PCCABLE_03_C103_PC02	3
+#define CAPBOY1_01_C103_PC02	4
+
+//Exit ID = 5
+#define C103_PC02_STAIR01	0
+#define C103_PC02_MAT01	1
+#define C103_PC02_MAT02	2
+#define C103_PC02_MAT03	3
+#define C103_PC02_MAT04	4

@@ -1,0 +1,96 @@
+//====================================================================
+//							t106_r0301
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t106_r0301_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							女性１									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_t106_r0301
+	_TALK_OBJ_START
+
+	//あなたの　ポケモン
+	_TALK_KEYWAIT	msg_woman1_01_p01_t106_r0301
+
+	//なつき度チェック
+	_FUNC_CALL		ANSWORK,GET_NATUKIDO_LEVEL
+
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,natukido0_t106_r0301					//最低
+	_CASEJUMP		1,natukido1_t106_r0301
+	_CASEJUMP		2,natukido2_t106_r0301
+	_CASEJUMP		3,natukido3_t106_r0301
+	_CASEJUMP		4,natukido4_t106_r0301
+	_CASEJUMP		5,natukido5_t106_r0301
+	_CASEJUMP		6,natukido6_t106_r0301					//最高
+
+	_TALK_OBJ_END
+	_END
+
+//なつき度最低
+natukido0_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p08_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+//なつき度中
+natukido1_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p07_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+//なつき度中
+natukido2_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p06_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+//なつき度中
+natukido3_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p05_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+//なつき度中
+natukido4_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p04_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+//なつき度中
+natukido5_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p03_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+//なつき度最高
+natukido6_t106_r0301:
+	_TALK_KEYWAIT	msg_woman1_01_p02_t106_r0301
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ピカチュウ								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_pikachuu_01_p01_t106_r0301
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_PIKATYUU,0
+	_TALK_KEYWAIT	msg_pikachuu_01_p01_t106_r0301
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+

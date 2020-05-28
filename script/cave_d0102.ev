@@ -1,0 +1,88 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d0102.ev
+//
+//============================================ 
+
+EVENT_DATA_START cave_d0102_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_dragon_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	DRAGON_01
+	_TRAINER_DATA2	msg_dragon_01_01
+	_TRAINER_DATA3	msg_dragon_01_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_dragon_01
+	_TRAINER_EASY_MSG	msg_dragon_01_03
+	_END
+
+_revenge_dragon_01:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	DRAGON_01
+	_TRAINER_DATA2	msg_dragon_01_04
+	_TRAINER_DATA3	msg_dragon_01_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_dragon_01_06
+	_END
+
+SCRIPT_LABEL	ev_gold_01_01
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	GOLD_01
+	_TRAINER_DATA2	msg_gold_01_01
+	_TRAINER_DATA3	msg_gold_01_02
+	_TRAINER_DATA4	msg_gold_01_04
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_gold_01_01
+	_TRAINER_EASY_MSG	msg_gold_01_03
+	_END
+
+_revenge_gold_01_01:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1  GOLD_01
+	_TRAINER_DATA2	msg_gold_01_09
+	_TRAINER_DATA3	msg_gold_01_10
+	_TRAINER_DATA4	msg_gold_01_12
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_gold_01_11
+	_END
+
+SCRIPT_LABEL	ev_gold_01_02
+	_TRAINER2vs2_DATA_START
+	_TRAINER_DATA1	GOLD_01
+	_TRAINER_DATA2	msg_gold_01_05
+	_TRAINER_DATA3	msg_gold_01_06
+	_TRAINER_DATA4	msg_gold_01_08
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_gold_01_02
+	_TRAINER_EASY_MSG	msg_gold_01_07
+	_END
+	
+_revenge_gold_01_02:
+	_REVENGE2vs2_TRAINER_DATA_START
+	_TRAINER_DATA1	GOLD_01
+	_TRAINER_DATA2	msg_gold_01_13
+	_TRAINER_DATA3	msg_gold_01_14
+	_TRAINER_DATA4	msg_gold_01_16
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_gold_01_15
+	_END
+

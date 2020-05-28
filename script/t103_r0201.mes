@@ -1,0 +1,271 @@
+// ●ムロ・ジム
+
+
+// ●「ジム入口のひと」リーダーに勝つ前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_danpei_02_01
+msg_danpei_02_01:
+	.byte	ge_,n_,ki_,spc_,si_,to_,oo_,ya_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,wo_,spc_,me_,za_,su_,spc_,I_MSG_,MY_NAME_BUF,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MU_,RO_,TA_,U_,N_,spc_,ZI_,MU_,no_,spc_,RI_,bou_,DA_,bou_,spc_,TO_,U_,KI_,ha_
+	.byte	CR_
+	.byte	ka_,ku_,to_,u_,TA_,I_,PU_,spc_,PO_,KE_,MO_,N_,no_,spc_,tu_,ka_,i_,te_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	NO_,bou_,MA_,RU_,TA_,I_,PU_,de_,spc_,mu_,ka_,u_,to_
+	.byte	CR_
+	.byte	ki_,bi_,si_,ii_,bou_,spc_,i_,ti_,ge_,ki_,wo_,spc_,ku_,ra_,u_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,wo_,spc_,tu_,ke_,ta_,ho_,u_,ga_,spc_,i_,i_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,mo_,gyoe_,spc_,ko_,no_,spc_,ZI_,MU_,no_,spc_,na_,ka_,ha_
+	.byte	CR_
+	.byte	u_,mi_,no_,so_,ko_,spc_,mi_,ta_,i_,ni_,spc_,ku_,ra_,i_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,gyoe_,spc_,TO_,RE_,bou_,NA_,bou_,wo_,spc_,hi_,to_,ri_,spc_,ta_,o_,su_,go_,to_,ni_
+	.byte	CR_
+	.byte	da_,n_,da_,n_,spc_,a_,ka_,ru_,ku_,spc_,na_,ttu_,te_,spc_,i_,ku_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,spc_,ki_,ba_,ttu_,te_,ko_,OO_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ジム入口のひと」リーダーに勝ったあと
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_danpei_02_02
+msg_danpei_02_02:
+	.byte	u_,o_,OO_,gyoe_,spc_,zu_,i_,bu_,n_,spc_,a_,ka_,ru_,ku_,spc_,na_,ttu_,ta_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,mi_,ra_,i_,mo_,spc_,a_,ka_,ru_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カラテおう１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_01_01
+msg_karate_01_01:
+	.byte	ti_,ka_,ra_,spc_,ko_,so_,spc_,se_,i_,gi_,ttu_,gyoe_
+	.byte	CR_
+	.byte	DO_,RI_,YYA_,bou_,TTU_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カラテおう１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_01_02
+msg_karate_01_02:
+	.byte	ti_,ka_,ra_,bu_,so_,ku_,spc_,da_,ttu_,ta_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カラテおう１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_01_03
+msg_karate_01_03:
+	.byte	zi_,yyu_,u_,spc_,yo_,ku_,spc_,go_,u_,wo_,spc_,se_,i_,su_,gyoe_
+	.byte	CR_
+	.byte	mi_,go_,to_,na_,spc_,ta_,ta_,ka_,i_,bu_,ri_,spc_,da_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●バトルガール１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_01_01
+msg_battleg_01_01:
+	.byte	TO_,U_,KI_,sa_,ma_,to_,spc_,ta_,ta_,ka_,u_,ma_,de_,mo_,spc_,na_,i_,wa_,gyoe_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ga_,spc_,ta_,o_,si_,te_,spc_,a_,ge_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルガール１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_01_02
+msg_battleg_01_02:
+	.byte	ma_,sa_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,n_,na_,ni_,spc_,ka_,n_,ta_,n_,ni_,spc_,ya_,ra_,re_,ru_,na_,n_,te_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルガール１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_01_03
+msg_battleg_01_03:
+	.byte	ko_,no_,spc_,ma_,ke_,wo_,spc_,mu_,da_,ni_,spc_,si_,na_,i_,ta_,me_
+	.byte	CR_
+	.byte	mo_,ttu_,to_,spc_,to_,ttu_,ku_,n_,spc_,su_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,i_,tu_,ka_,ha_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,e_,spc_,PO_,KE_,MO_,N_,RI_,bou_,GU_,no_
+	.byte	CR_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,ni_,spc_,na_,ru_,wa_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●バトルガール２：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_02_01
+msg_battleg_02_01:
+	.byte	a_,ta_,si_,wo_,spc_,a_,ma_,ku_,spc_,mi_,na_,i_,spc_,ko_,to_,ne_,gyoe_
+	.byte	CR_
+	.byte	na_,i_,te_,mo_,spc_,si_,ra_,na_,i_,wa_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルガール２：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_02_02
+msg_battleg_02_02:
+	.byte	wa_,aa_,bou_,bou_,bou_,n_,gyoe_
+	.byte	CR_
+	.byte	ma_,ke_,ta_,bou_,bou_,bou_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルガール２：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_battleg_02_03
+msg_battleg_02_03:
+	.byte	ku_,ra_,ya_,mi_,no_,spc_,na_,ka_,de_,spc_,ta_,ta_,ka_,u_,ko_,to_,de_
+	.byte	CR_
+	.byte	ko_,ko_,ro_,wo_,spc_,ki_,ta_,e_,ru_,no_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,ma_,ttu_,ku_,ra_,spc_,da_,ka_,ra_
+	.byte	CR_
+	.byte	TO_,U_,KI_,sa_,ma_,no_,spc_,o_,ka_,o_,wo_,spc_,mi_,ra_,re_,na_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●「ジムリーダー　トウキ」戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_02_01
+msg_gymleader_02_01:
+	.byte	BO_,KU_,ha_,spc_,MU_,RO_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	CR_
+	.byte	RI_,bou_,DA_,bou_,no_,spc_,TO_,U_,KI_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,a_,ta_,ri_,no_
+	.byte	CR_
+	.byte	ha_,ge_,si_,i_,spc_,na_,mi_,ni_,spc_,mo_,ma_,re_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,ra_,i_,spc_,do_,u_,ku_,tu_,de_
+	.byte	CR_
+	.byte	si_,yyu_,gi_,yyo_,u_,spc_,si_,te_,spc_,i_,ru_,no_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,KU_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,si_,yo_,u_,spc_,to_,i_,u_
+	.byte	CR_
+	.byte	KI_,MI_,no_,spc_,zi_,tu_,ri_,yyo_,ku_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	do_,re_,ho_,do_,no_,spc_,mo_,no_,ka_,spc_,mi_,sa_,se_,te_,mo_,ra_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ジムリーダー　トウキ」敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_02_02
+msg_gymleader_02_02:
+	.byte	u_,u_,bou_,n_,spc_,yo_,so_,u_,spc_,si_,te_,i_,ta_,yo_,ri_
+	.byte	CR_
+	.byte	KI_,MI_,ha_,spc_,BI_,TTU_,GU_,U_,EE_,bou_,BU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ka_,ttu_,ta_,gyoe_
+	.byte	CR_
+	.byte	ko_,no_,spc_,BA_,TTU_,ZI_,wo_,spc_,mo_,ttu_,te_,i_,ki_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで戦闘画面から抜けて
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_02_03
+msg_gymleader_02_03:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,TO_,U_,KI_,ka_,ra_
+	.byte	CR_
+	.byte	NA_,TTU_,KU_,RU_,BA_,TTU_,ZI_,wo_,spc_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ファンファーレ
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_02_04
+msg_gymleader_02_04:
+	.byte	NA_,TTU_,KU_,RU_,BA_,TTU_,ZI_,ni_,ha_
+	.byte	CR_
+	.byte	RE_,BE_,RU_,n3_,n0_,ma_,de_,no_,spc_,PO_,KE_,MO_,N_,na_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,to_,ka_,ra_,spc_,mo_,ra_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,de_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	su_,na_,o_,ni_,spc_,su_,ru_,spc_,ko_,u_,ka_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ni_,spc_,ta_,ta_,ka_,ttu_,te_,spc_,i_,na_,ku_,te_,mo_
+	.byte	CR_
+	.byte	hi_,de_,n_,wa_,za_,no_,spc_,HU_,RA_,TTU_,SI_,YYU_,wo_,spc_,tu_,ka_,e_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,wa_,za_,MA_,SI_,N_
+	.byte	CR_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,tu_,ka_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム入手ナレーション
+// ●技マシン０８「ビルドアップ」（No295）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_02_05
+msg_gymleader_02_05:
+	.byte	so_,no_,spc_,wa_,za_,MA_,SI_,N_,n0_,n8_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	BI_,RU_,DO_,A_,TTU_,PU_,ga_,spc_,ha_,i_,ttu_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,ge_,ki_,ri_,yyo_,ku_,to_,spc_,bo_,u_,gi_,yyo_,ri_,yyo_,ku_,wo_
+	.byte	CR_
+	.byte	a_,ge_,ru_,spc_,wa_,za_,spc_,na_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ジムリーダー　トウキ」再度、会話
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_02_06
+msg_gymleader_02_06:
+	.byte	KI_,MI_,no_,spc_,sa_,i_,no_,u_,ha_
+	.byte	CR_
+	.byte	i_,tu_,no_,hi_,ka_,spc_,o_,o_,ki_,na_,spc_,na_,mi_,to_,spc_,na_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,ta_,ti_,no_,spc_,a_,i_,da_,ni_
+	.byte	CR_
+	.byte	o_,do_,ro_,ki_,no_,spc_,a_,ra_,si_,wo_,spc_,ma_,ki_,o_,ko_,su_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ポケモン像　バッジ取得前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_icon_01_p01_t103_r0201
+msg_icon_01_p01_t103_r0201:
+	.byte	MU_,RO_,TA_,U_,N_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン像　バッジ取得後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_icon_01_p02_t103_r0201
+msg_icon_01_p02_t103_r0201:
+	.byte	MU_,RO_,TA_,U_,N_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,U_,KI_,spc_,ni_,n_,te_,i_,spc_,TO_,RE_,bou_,NA_,bou_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

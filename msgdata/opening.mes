@@ -1,0 +1,171 @@
+// 【オープニングメッセージ　２月末ＲＯＭ用】
+// 
+// ●電源ＯＮで「タイトル画面」表示。
+// 
+// ●スタートボタンで「メニュー画面」へ。
+// 
+// ●初めてのプレイの場合は以下の項目のみ。
+// 　「さいしょから　はじめる」
+// 
+// ●セーブデータがある場合は
+// 　「さいしょから　はじめる」
+// 　「つづきから　はじめる」
+// 
+// ●「さいしょから」を選択するとオダマキ博士が登場。
+// ●博士が自己紹介をはじめる。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p01_opening
+msg_odamaki_01_p01_opening:
+	.byte	i_,ya_,bou_,spc_,o_,ma_,ta_,se_,spc_,o_,ma_,ta_,se_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,TTU_,TO_,MO_,N_,SU_,TA_,bou_,no_,spc_,se_,ka_,i_,he_
+	.byte	CR_
+	.byte	yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,no_,spc_,na_,ma_,e_,ha_,spc_,O_,DA_,MA_,KI_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,mi_,n_,na_,spc_,ka_,ra_,ha_
+	.byte	CR_
+	.byte	kako_,PO_,KE_,MO_,N_,ha_,ka_,se_,kakot_,to_,spc_,yo_,ba_,re_,te_,spc_,i_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●博士のとなりにモンスターボールが出現。
+// ●その後、ボールが消えてポケモンが出現。
+// ※出現エフェクトあり。
+// ※どのポケモンかは未定。
+// 
+// ●博士によるポケモンの説明。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p02_opening
+	.GLOBAL	msg_odamaki_01_p02_1_opening
+msg_odamaki_01_p02_opening:
+	.byte	PO_,KE_,TTU_,TO_,MO_,N_,SU_,TA_,bou_
+	.byte	CR_
+	.byte	tenten_,tenten_,su_,na_,wa_,ti_,spc_,PO_,KE_,MO_,N_
+	.byte	NORMAL_WAIT_
+	.byte	EOM_
+msg_odamaki_01_p02_1_opening:
+	.byte	ko_,no_,spc_,se_,ka_,i_,ni_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,to_,spc_,yo_,ba_,re_,ru_,spc_,i_,ki_,mo_,no_,spc_,ta_,ti_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ta_,ru_,to_,ko_,ro_,ni_,spc_,su_,n_,de_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,re_,wa_,re_,spc_,ni_,n_,ge_,n_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,to_,spc_,na_,ka_,yo_,ku_,spc_,a_,so_,n_,da_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,su_,ke_,a_,ttu_,te_,spc_,si_,go_,to_,wo_,spc_,si_,ta_,ri_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ki_,ni_,ha_,spc_,ti_,ka_,ra_,wo_,spc_,a_,wa_,se_,te_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,ttu_,ta_,ri_,spc_,si_,na_,ga_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,si_,yyo_,ni_,spc_,ku_,ra_,si_,te_,spc_,i_,ru_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,si_,ka_,si_,spc_,wa_,re_,wa_,re_,ha_,spc_,PO_,KE_,MO_,N_,no_
+	.byte	CR_
+	.byte	su_,be_,te_,wo_,spc_,si_,ttu_,te_,i_,ru_,spc_,wa_,ke_,de_,ha_,spc_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,hi_,mi_,tu_,ha_
+	.byte	CR_
+	.byte	ma_,da_,ma_,da_,spc_,i_,ttu_,pa_,i_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,hi_,mi_,tu_,wo_,spc_,to_,ki_,a_,ka_,su_,spc_,ta_,me_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ha_,spc_,ke_,n_,ki_,yyu_,u_,wo_,spc_,tu_,du_,ke_,te_,i_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,wa_,ke_,na_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●博士の横のポケモンの絵がフェードアウトする。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p03_opening
+msg_odamaki_01_p03_opening:
+	.byte	to_,ko_,ro_,de_,spc_,ki_,mi_,ha_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●博士の絵が消え、主人公の絵を表示する。
+// ●性別選択ウインドウを表示。「おとこ／おんな」
+// ●メッセージウインドウにはオダマキからの問いかけ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p04_opening
+msg_odamaki_01_p04_opening:
+	.byte	o_,to_,ko_,no_,ko_,hate_
+	.byte	CR_
+	.byte	so_,re_,to_,mo_,spc_,o_,n_,na_,no_,ko_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●どちらかを選択して決定。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p05_opening
+msg_odamaki_01_p05_opening:
+	.byte	na_,ma_,e_,mo_,spc_,o_,si_,e_,te_,spc_,ku_,re_,ru_,ka_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●名前を選択するか、文字入力をするかして決定。
+// ※男の子なら「くん」、女の子なら「ちゃん」。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p06_opening
+msg_odamaki_01_p06_opening:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,da_,ne_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「いいえ」ならmsg_odamaki_01_p04_opening:にもどる。
+// ●「はい」を選択すると、主人公の絵が消え、
+// ふたたびオダマキ博士の絵が表示される。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p07_opening
+msg_odamaki_01_p07_opening:
+	.byte	tenten_,tenten_,so_,u_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ga_,spc_,ko_,n_,do_,spc_,wa_,ta_,si_,no_,spc_,su_,mu_,spc_,ma_,ti_
+	.byte	CR_
+	.byte	MI_,SI_,RO_,TA_,U_,N_,ni_,spc_,hi_,ttu_,ko_,si_,te_,spc_,ku_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,da_,ttu_,ta_,no_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●博士の絵が消え、ふたたび主人公の絵が表示される。
+// ●オダマキ博士のセリフ。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_odamaki_01_p08_opening
+msg_odamaki_01_p08_opening:
+	.byte	yo_,bou_,si_,spc_,zi_,yyu_,n_,bi_,ha_,spc_,i_,i_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ka_,ra_,spc_,ki_,mi_,spc_,da_,ke_,no_,spc_,mo_,no_,ga_,ta_,ri_,ga_
+	.byte	CR_
+	.byte	ha_,zi_,ma_,ro_,u_,to_,spc_,si_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yu_,me_,to_,spc_,bo_,u_,ke_,n_,to_,spc_,de_,a_,i_,ni_,spc_,mi_,ti_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,TTU_,TO_,MO_,N_,SU_,TA_,bou_,no_,spc_,se_,ka_,i_,he_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,u_,ki_,wo_,spc_,mo_,ttu_,te_,spc_,to_,bi_,ko_,n_,de_,spc_,mi_,te_,ku_,re_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,ma_,ta_,spc_,a_,to_,de_,spc_,a_,o_,u_,gyoe_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,zi_,yyo_,de_,spc_,ma_,ttu_,te_,spc_,i_,ru_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公の絵を縮小しながら、フェードアウト。
+// 
+// ●画面は真っ暗。少ししてトラックのエンジン音がきこえてくる。
+// ●トラックの荷台の画面がフェードイン。中央に主人公ＯＢＪ。
+// ●画面の揺れ、ブレーキ音、荷台扉の開閉音、光、などの演出。
+// 
+// ●トラックの外に出たあとは、
+// 「t101」→「field_t101.msg」→「msg_papa_01_p01_field_t101:」に続く。

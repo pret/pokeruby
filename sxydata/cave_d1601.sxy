@@ -1,0 +1,55 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1601	0
+#define EXITNUM_CAVE_D1601	2
+#define POSNUM_CAVE_D1601	1
+#define BGNUM_CAVE_D1601	0
+
+//POS_SCRIPT
+extern const u8	ev_cave_d1601_pos01[];
+
+const SXY_CONNECT	EXIT_cave_d1601[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		FIELD_R110_DOOR01,		//Door ID
+		FIELD_R110,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		CAVE_D1602_DOOR01,		//Door ID
+		CAVE_D1602,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_cave_d1601[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		WK_SCENE_CAVE_D1602,		//Event Type
+		0x00,		//Scene
+		ev_cave_d1601_pos01,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d1601_sxy_data =
+{
+OBJNUM_CAVE_D1601,			// field obj max
+EXITNUM_CAVE_D1601,		// exit max
+POSNUM_CAVE_D1601,			// pos event max
+BGNUM_CAVE_D1601,			// bg event max
+NULL,			// field obj data
+EXIT_cave_d1601,			// exit data
+POS_cave_d1601,			// pos event data
+NULL,				// bg event data
+};

@@ -1,0 +1,18 @@
+// ●座礁船
+// ●イベント前半部分
+
+
+// ●大男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_cave_d1705
+msg_bigman1_01_p01_cave_d1705:
+	.byte	u_,uu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,da_,ka_,spc_,hu_,ne_,no_,spc_,na_,ka_,ni_,spc_,i_,ru_,da_,ke_,de_
+	.byte	CR_
+	.byte	yo_,ttu_,te_,ki_,ti_,yya_,ttu_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ne_,ha_,spc_,ti_,ttu_,to_,mo_,spc_,u_,go_,i_,te_,na_,i_,no_,ni_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

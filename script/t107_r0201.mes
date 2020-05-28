@@ -1,0 +1,162 @@
+// ●キナギタウン　民家２（街の南西）
+
+
+// ●わざマシンをもらうのは１日１個まで
+// 　もらうまでは、何度でも、なつき度のチェックをしてもらえる
+// ●一度技マシンをもらうと一週間（正確には６日）はもらえない
+
+
+// ●老紳士１
+// ●技マシンをもらえる日　　→msg_gentlem1_01_p01_t107_r0201:
+// ●技マシンをもらえない日　→msg_gentlem1_01_p07_t107_r0201:
+
+// ●なつき度のチェック
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_t107_r0201
+msg_gentlem1_01_p01_t107_r0201:
+	.byte	U_,OO_,TTU_,HO_,N_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ga_,spc_,PO_,KE_,MO_,N_,spc_,da_,i_,su_,ki_,KU_,RA_,BU_,de_
+	.byte	CR_
+	.byte	i_,ti_,ba_,bou_,n_,spc_,e_,ra_,i_,spc_,ka_,i_,ti_,yyo_,u_,no_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,to_,u_,to_,spc_,de_,su_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,ko_,ko_,de_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	BA_,KA_,N_,SU_,wo_,spc_,ta_,no_,si_,n_,de_,spc_,o_,ru_,no_,de_,su_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p05_t107_r0201
+msg_gentlem1_01_p05_t107_r0201:
+	.byte	ho_,u_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●先頭のポケモンのなつき度をチェック
+// ●なつき度１５０以上　　　　→msg_gentlem1_01_p02_t107_r0201:
+// ●なつき度５０以上１４９以下→msg_gentlem1_01_p03_t107_r0201:
+// ●なつき度４９以下　　　　　→msg_gentlem1_01_p04_t107_r0201:
+
+// ●なつき度１５０以上
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_t107_r0201
+msg_gentlem1_01_p02_t107_r0201:
+	.byte	to_,ttu_,te_,mo_,spc_,na_,tu_,i_,te_,spc_,i_,ma_,su_,na_,a_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,ka_,wa_,i_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,ni_,ha_
+	.byte	CR_
+	.byte	ko_,no_,spc_,wa_,za_,MA_,SI_,N_,spc_,do_,u_,de_,su_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●わざマシン２７「おんがえし」（No315）入手処理
+// ●続けて→msg_gentlem1_01_p06_t107_r0201:
+
+// ●なつき度５０以上１４９以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p03_t107_r0201
+msg_gentlem1_01_p03_t107_r0201:
+	.byte	hu_,mu_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,ru_,ku_,ha_,spc_,na_,i_,n_,da_,ga_,spc_,yo_,ku_,mo_,na_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ya_,no_,spc_,TO_,RE_,bou_,NA_,bou_,de_,a_,ru_,spc_,ki_,mi_,no_
+	.byte	CR_
+	.byte	do_,ri_,yyo_,ku_,ga_,spc_,hi_,tu_,yo_,u_,spc_,de_,su_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけたとき
+// 　→msg_gentlem1_01_p05_t107_r0201:
+// 　技マシンをもらうまでは、何度でもチェックしてもらえる
+
+// ●なつき度４９以下
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p04_t107_r0201
+msg_gentlem1_01_p04_t107_r0201:
+	.byte	na_,n_,da_,ka_,spc_,me_,tu_,ki_,ga_,spc_,wa_,ru_,i_,de_,su_,no_,u_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,ko_,wa_,so_,u_,na_,spc_,PO_,KE_,MO_,N_,ni_,ha_
+	.byte	CR_
+	.byte	ko_,no_,spc_,wa_,za_,MA_,SI_,N_,spc_,do_,u_,de_,su_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●わざマシン２１「やつあたり」（No309）入手処理
+// ●続けて→msg_gentlem1_01_p06_t107_r0201:
+
+// ●技マシン入手後に再度話しかけた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p06_t107_r0201
+msg_gentlem1_01_p06_t107_r0201:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,na_,tu_,ki_,do_,ga_,spc_,ta_,ka_,i_,to_
+	.byte	CR_
+	.byte	o_,n_,ga_,e_,si_,no_,spc_,i_,ri_,yyo_,ku_,mo_,spc_,ta_,ka_,ku_,na_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	na_,tu_,ki_,do_,ga_,spc_,hi_,ku_,i_,to_
+	.byte	CR_
+	.byte	ya_,tu_,a_,ta_,ri_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,tu_,yo_,ma_,ru_,n_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●技マシンをもらえない日
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p07_t107_r0201
+msg_gentlem1_01_p07_t107_r0201:
+	.byte	so_,u_,so_,u_,spc_,a_,to_,I_MSG_,STR_TEMP_BUF0,ni_,ti_,spc_,ta_,te_,ba_
+	.byte	CR_
+	.byte	i_,i_,spc_,wa_,za_,MA_,SI_,N_,ga_,spc_,te_,ni_,spc_,ha_,i_,ru_,n_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,to_,ki_,spc_,ma_,ta_,spc_,a_,so_,bi_,ni_,spc_,ki_,ta_,ma_,e_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,a_,ttu_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	su_,te_,ki_,na_,spc_,wa_,za_,MA_,SI_,N_,wo_,spc_,a_,ge_,ru_,ka_,ra_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「＠０」＝残り日数
+
+
+// ●ポケモン・ルリリ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ruriri_01_p01_t107_r0201
+msg_ruriri_01_p01_t107_r0201:
+	.byte	RU_,RI_,RI_,kako2_,ru_,ri_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にルリリの鳴き声をならす
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ruriri_01_p02_t107_r0201
+msg_ruriri_01_p02_t107_r0201:
+	.byte	to_,ttu_,te_,mo_,spc_,na_,tu_,i_,te_,spc_,i_,ru_,yo_,u_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・ルリリ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ruriri_02_p01_t107_r0201
+msg_ruriri_02_p01_t107_r0201:
+	.byte	RU_,RI_,RI_,kako2_,RU_,RU_,RI_,TTU_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にルリリの鳴き声をならす
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ruriri_02_p02_t107_r0201
+msg_ruriri_02_p02_t107_r0201:
+	.byte	a_,n_,ma_,ri_,spc_,na_,tu_,i_,te_,spc_,i_,na_,i_,yo_,u_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

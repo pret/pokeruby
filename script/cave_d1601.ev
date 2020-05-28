@@ -1,0 +1,85 @@
+//===================================================================
+//
+//					イベントスクリプトファイル
+//
+//===================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START cave_d1601_event_data
+BG_CHANGE_LABEL		bg_change_cave_d1601
+FLAG_CHANGE_LABEL	flag_change_cave_d1601
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_cave_d1601:
+	//「ちかのカギ」を使っていなかったら
+	_IFVAL_CALL		WK_SCENE_CAVE_D1602,EQ,0,bg_chg_door_cave_d1601
+	_END
+
+//「ちかのカギ」を使っていない
+bg_chg_door_cave_d1601:
+	_SET_CELL			3,0,788,1
+	_SET_CELL			4,0,789,1
+	_SET_CELL			5,0,790,1
+	_SET_CELL			3,1,796,1
+	_SET_CELL			4,1,797,1
+	_SET_CELL			5,1,798,1
+	_RET
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d1601:
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_NEWKINSETSU
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							POS
+/********************************************************************/
+SCRIPT_LABEL	ev_cave_d1601_pos01
+	_TALK_START
+
+	//上を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_door_01_p01_cave_d1601
+
+	//「ちかのカギ」をもっていなかったら
+	_CHECK_ITEM		ITEM_TIKANOKAGI,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,nothing_item_cave_d1601
+
+	_TALK_YES_NO	msg_door_01_p02_cave_d1601
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,nothing_item_cave_d1601
+
+	_TALK_KEYWAIT	msg_door_01_p03_cave_d1601
+
+	//ドアを開ける
+	_SET_CELL		3,0,707,0
+	_SET_CELL		4,0,708,0
+	_SET_CELL		5,0,709,0
+	_SET_CELL		3,1,715,1
+	_SET_CELL		4,1,716,0
+	_SET_CELL		5,1,717,1
+	_PROGRAM		MAKE_MAP_BG
+	_SE				SE_BAN
+
+	_LDVAL			WK_SCENE_CAVE_D1602,1
+	_TALK_END
+	_END
+
+//「ちかのカギ」をもっていない
+nothing_item_cave_d1601:
+	_TALK_END
+	_END
+

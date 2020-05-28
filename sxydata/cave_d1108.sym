@@ -1,0 +1,8 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 0
+
+//Exit ID = 3
+#define CAVE_D1108_DOOR01	0
+#define CAVE_D1108_DOOR02	1
+#define CAVE_D1108_DOOR03	2

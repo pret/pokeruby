@@ -1,0 +1,392 @@
+//====================================================================
+//
+//						７人のおやじ	
+//
+//====================================================================
+SCRIPT_LABEL	oyaji_script
+
+	_PROGRAM	GET_OYAJI_TYPE
+
+	_SWITCH		ANSWORK
+	_CASEJUMP	OYAJITYPE_SINGER,oyaji_singer_script	//シンガーソング
+	_CASEJUMP	OYAJITYPE_NOW,oyaji_naui_script			//ナウイ
+	_CASEJUMP	OYAJITYPE_RECYCLE,oyaji_recycle_script	//リサイクル
+	_CASEJUMP	OYAJITYPE_LEGEND,oyaji_densetsu_script	//デンセツ
+	_CASEJUMP	OYAJITYPE_MARCHEN,oyaji_marchen_script	//メルヘン
+	_END
+
+
+/********************************************************************/
+//						シンガーソングおやじ	
+/********************************************************************/
+SCRIPT_LABEL	oyaji_singer_script
+	_TALK_OBJ_START
+
+	_TALK_YES_NO	msg_oyaji_01_p01_singer
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_singer_01_p01	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_singer_01_p01	//「いいえ」
+	_END
+
+yes_singer_01_p01:
+	//持ち歌表示
+	_LDVAL			PARAM0,0
+	_PROGRAM		SET_OYAJI_SING_WORD
+	_TIME_WAIT	60
+
+	_PROGRAM		OYAJI_SING_CHK				//変更フラグチェック
+	_IFVAL_JUMP		ANSWORK,EQ,0,singer_flag_off	//立っていない
+
+	_TALK_KEYWAIT	msg_oyaji_01_p04_singer
+	_TALK_OBJ_END
+	_END
+
+no_singer_01_p01:
+	_TALK_KEYWAIT	msg_oyaji_01_p02_singer
+	_TALK_OBJ_END
+	_END
+
+singer_flag_off:
+	_TALK_YES_NO	msg_oyaji_01_p05_singer
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_singer_01_p02	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_singer_01_p02	//「いいえ」
+	_END
+
+yes_singer_01_p02:
+	//簡易会話へ
+	_LDVAL			PARAM0,KAIWA_MODE_SONG
+	_CALL			ev_kaiwa_input_start
+	_TALK_OBJ_RECOVER
+
+	//何も書かなかったらで分岐
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_singer_01_p02	// 書いてない
+
+	_TALK_KEYWAIT	msg_oyaji_01_p07_singer
+
+	_LDVAL			PARAM0,1
+	_PROGRAM		SET_OYAJI_SING_WORD
+	_TIME_WAIT	60
+
+	_TALK_YES_NO	msg_oyaji_01_p08_singer
+	_IFVAL_JUMP		ANSWORK,EQ,0,yes_singer_01_p02	// 戻る
+
+	_PROGRAM		OYAJI_SING_DONE
+	_TALK_KEYWAIT	msg_oyaji_01_p09_singer
+	_TALK_OBJ_END
+	_END
+
+no_singer_01_p02:
+	_TALK_KEYWAIT	msg_oyaji_01_p06_singer
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							ナウイおやじ	
+/********************************************************************/
+SCRIPT_LABEL	oyaji_naui_script
+
+	_TALK_OBJ_START
+
+
+	_FLAG_SET		SYS_NOW_OYAJI_MEET		
+
+	_TALK_KEYWAIT	msg_oyaji_01_p01_naui
+
+	_PROGRAM		OYAJI_NAUI_CHK				//変更フラグが立っているか
+	_IFVAL_JUMP		ANSWORK,EQ,0,naui_flag_off		//立っていない
+
+	_TALK_KEYWAIT	msg_oyaji_01_p02_naui
+	_TALK_OBJ_END
+	_END
+
+naui_flag_off:
+
+	//隠しワードチェック
+	_PROGRAM		OYAJI_NAUI_WORD
+
+	//隠しワード全部埋まっているか
+	_IFVAL_JUMP		ANSWORK,EQ,1,naui_word_add	//埋まっていない
+
+	_TALK_KEYWAIT	msg_oyaji_01_p03_naui
+	_TALK_OBJ_END
+	_END
+
+naui_word_add:
+
+	//抜けている隠しワードの中から一つを抜き出す
+	//抜き出したワードのフラグを立てる
+	_TALK_KEYWAIT	msg_oyaji_01_p04_naui
+
+	_PROGRAM		OYAJI_NAUI_DONE			//ワードを教わったフラグを立てる
+
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//						リサイクルおやじ	
+/********************************************************************/
+#include "../script/oyaji_trade.mes"
+
+SCRIPT_LABEL	oyaji_recycle_script
+
+	_TALK_OBJ_START
+
+	// グッズ交換するか
+	_TALK_YES_NO	msg_oyaji_01_p01_trade
+	_IFVAL_JUMP		ANSWORK, EQ, 0, oyaji_trade_interest_no	//「いいえ」
+
+	// グッズ交換したチェック
+	_PROGRAM		OYAJI_TRADE_CHANGE
+	_IFVAL_JUMP		ANSWORK, EQ, 1, oyaji_trade_change		// グッズ交換している
+
+	// グッズウィンドウ表示へ
+	_TALKMSG		msg_oyaji_01_p04_trade
+	_TALK_WAIT
+	_JUMP			oyaji_trade_win_select
+
+	_END
+
+// 交換しない
+oyaji_trade_interest_no:
+	_EASY_MSG		msg_oyaji_01_p02_trade
+	_END
+
+// グッズを交換している
+oyaji_trade_change:
+	_EASY_MSG		msg_oyaji_01_p03_trade
+	_END
+
+
+// グッズを選択
+SCRIPT_LABEL	oyaji_trade_win_select
+
+	//_RECYCLE_OYAJI_SELECT
+	_PROGRAM		OYAJI_RECYCLE_SELECT
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP		PARAM0, EQ, 0, oyaji_trade_win_cancel	// グッズ選択をキャンセル
+	_IFVAL_JUMP		PARAM0, EQ, 0xffff, oyaji_trade_rea_goods	// 未知のグッズを選択
+
+	_TALK_YES_NO	msg_oyaji_01_p06_trade
+	_IFVAL_JUMP		ANSWORK, EQ, 0, oyaji_recycle_select_no	//「いいえ」
+
+	// グッズを持っているか
+	_PROGRAM		OYAJI_TRADE_GOODS_CHECK
+	_IFVAL_JUMP		ANSWORK, EQ, 1, oyaji_trade_no_goods	// 持っていない
+
+	_JUMP			oyaji_trade_my_goods_select
+
+	_END
+
+// グッズ選択をキャンセル
+oyaji_trade_win_cancel:
+	_EASY_MSG		msg_oyaji_01_p05_trade
+	_END
+
+// 未知のグッズを選択
+oyaji_trade_rea_goods:
+	_TALKMSG		msg_oyaji_01_p99_trade
+	_TALK_WAIT
+	_JUMP			oyaji_trade_win_select
+	_END
+
+// いいえ
+oyaji_recycle_select_no:
+	_TALKMSG		msg_oyaji_01_p04_trade
+	_TALK_WAIT
+	_JUMP			oyaji_trade_win_select
+	_END
+
+// グッズを持っていない
+oyaji_trade_no_goods:
+	_EASY_MSG		msg_oyaji_01_p07_trade
+	_END
+
+
+// 交換するグッズを選ぶ
+SCRIPT_LABEL	oyaji_trade_my_goods_select
+
+	_TALK_KEYWAIT	msg_oyaji_01_p08_trade
+	_PROGRAM		OYAJI_TRADE_MY_GOODS_SELECT
+	_STOP_SCRIPT
+
+	_IFVAL_JUMP		PARAM2, EQ, 0, oyaji_trade_my_goods_cancel	// グッズ交換をキャンセル
+	_IFVAL_JUMP		PARAM2, EQ, 0xffff, oyaji_trade_goods_put	// グッズが置かれている
+
+	// グッズの項目チェック
+	_PROGRAM		OYAJI_TRADE_GENRE_CHECK
+	_IFVAL_JUMP		ANSWORK, EQ, 1, oyaji_trade_goods_max	// 項目のグッズがいっぱい
+
+	// 交換確認
+	_TALK_YES_NO	msg_oyaji_01_p11_trade
+	_IFVAL_JUMP		ANSWORK, EQ, 0, oyaji_trade_my_goods_select	//「いいえ」
+
+	// グッズ交換
+	_PROGRAM		OYAJI_TRADE_ADD
+	_EASY_MSG		msg_oyaji_01_p13_trade
+	_END
+
+// グッズ交換をキャンセル
+oyaji_trade_my_goods_cancel:
+	_EASY_MSG		msg_oyaji_01_p09_trade
+	_END
+
+// グッズが置かれている
+oyaji_trade_goods_put:
+	_TALK_KEYWAIT	msg_oyaji_01_p12_trade
+	_JUMP			oyaji_trade_my_goods_select
+	_END
+
+
+// 項目のグッズがいっぱい
+oyaji_trade_goods_max:
+	_EASY_MSG		msg_oyaji_01_p10_trade
+	_END
+
+
+
+/********************************************************************/
+//						デンセツおやじ	
+/********************************************************************/
+#include "../script/oyaji_legend.mes"
+
+//TMPWK0	デンセツをみた
+
+SCRIPT_LABEL	oyaji_densetsu_script
+
+	_LDVAL			TMPWK0,0
+	_LDVAL			TMPWK1,0
+	_LDVAL			TMPWK2,0
+	_LDVAL			TMPWK3,0
+	_TALK_OBJ_START
+	_TALK_YES_NO	msg_oyaji_01_p01_legend			@"ハナシ　ききたい？"
+	_IFVAL_JUMP		ANSWORK,EQ,0,_densetsu_end
+
+	_FUNC_CALL		ANSWORK,OYAJI_DEN_GET_CNT		@でんせつ数取得
+	_IFVAL_JUMP		ANSWORK,EQ,0,_densetsu_nothing
+
+//でんせつ選択ウィンドウ
+_densetsu_window:
+	_TALKMSG		msg_oyaji_01_p03_legend			@"どのでんせつ？"
+	_TALK_WAIT
+	_PROGRAM		OYAJI_DEN_WINDOW				@でんせつ選択
+	_STOP_SCRIPT
+	_IFVAL_JUMP		ANSWORK,EQ,0,_densetsu_window_cancel
+
+	_LDVAL			TMPWK0,1
+	_PROGRAM		OYAJI_DEN_MSGPUT				@でんせつ内容ＭＳＧ表示
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_FUNC_CALL		ANSWORK,OYAJI_DEN_RENEW_CHK		@でんせつ更新チェック
+	_IFVAL_JUMP		ANSWORK,EQ,0,_densetsu_again
+
+	_JUMP			_densetsu_new					@→"あたらしいでんせつのはじまりだ！"
+
+_densetsu_window_cancel:
+	_IFVAL_JUMP		TMPWK0,EQ,0,_densetsu_end		@でんせつを一度も見ていない
+													@	→"そう　ざんねん…"
+	_JUMP			_densetsu_add_chk				@でんせつを見た
+													@	→追加チェックへ
+
+_densetsu_again:
+	_TALK_KEYWAIT	msg_oyaji_01_p06_legend			@"どこかにいないかなあ…"
+	_TALK_YES_NO	msg_oyaji_01_p08_legend			@"まだききたい？"
+	_IFVAL_JUMP		ANSWORK,EQ,1,_densetsu_window
+	
+_densetsu_add_chk:
+//でんせつを追加するかどうかのチェック
+	_FUNC_CALL		ANSWORK,OYAJI_DEN_ADD_CHK		@でんせつ追加フラグチェック
+	_IFVAL_JUMP		ANSWORK,EQ,1,_densetsu_end2
+	_FUNC_CALL		ANSWORK,OYAJI_DEN_GET_CNT		@でんせつ数取得
+	_IFVAL_JUMP		ANSWORK,EQ,4,_densetsu_end2
+	_JUMP			_densetsu_new_chk
+
+//でんせつがひとつもない場合
+_densetsu_nothing:
+	_TALK_KEYWAIT	msg_oyaji_01_p04_legend			@"でもなにもしらない"
+
+_densetsu_new_chk:
+	_TALK_YES_NO	msg_oyaji_01_p07_legend			@"きみ　トレーナー？"
+	_IFVAL_JUMP		ANSWORK,EQ,0,_densetsu_end
+
+	_FUNC_CALL		ANSWORK,OYAJI_DEN_NEW_CHK		@新規でんせつ追加チェック
+	_IFVAL_JUMP		ANSWORK,EQ,1,_densetsu_new
+
+	_TALK_KEYWAIT	msg_oyaji_01_p09_legend			@"…ものたりないなあ"
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+_densetsu_new:
+	_TALK_KEYWAIT	msg_oyaji_01_p05_legend			@"あたらしいでんせつのはじまりだ！"
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+_densetsu_end:
+	_TALK_KEYWAIT	msg_oyaji_01_p02_legend			@"そう…ざんねん…"
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+_densetsu_end2:
+	_TALK_KEYWAIT	msg_oyaji_01_p11_legend			@"そして　この　でんせつを…"
+	_TALK_CLOSE
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+//							メルヘンおやじ	
+/********************************************************************/
+#include "../script/oyaji_marchen.mes"
+
+SCRIPT_LABEL	oyaji_marchen_script
+	_TALK_OBJ_START
+
+	_TALK_YES_NO	msg_oyaji_01_p01_marchen
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_talk_start_marchen	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_talk_start_marchen	//「いいえ」
+	_END
+
+//話聞く「はい」
+yes_talk_start_marchen:
+	_PROGRAM		OYAJI_MARCHEN_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_marchen_01_p02	// 続く
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_marchen_01_p02	// 終了
+	_END
+
+end_chk_marchen:
+	_PROGRAM		OYAJI_MARCHEN_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,continue_marchen	// 続く
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_marchen_01_p02	// 終了
+	_END
+
+//話を続けようとする
+continue_marchen:
+	_TALK_KEYWAIT	msg_oyaji_01_p03_marchen
+	_JUMP			yes_marchen_01_p02	// 続く
+	_END
+
+//メルヘン話をする
+yes_marchen_01_p02:
+	_PROGRAM		OYAJI_MARCHEN_WORD
+	_PROGRAM		MSGEXPANDBUF
+	_TALK_WAIT
+	_YES_NO_NORMAL_WIN
+	_IFVAL_JUMP		ANSWORK,EQ,1,end_chk_marchen	//飛び先同じ
+	_IFVAL_JUMP		ANSWORK,EQ,0,end_chk_marchen	//飛び先同じ
+	_END
+
+//話聞く「いいえ」
+no_talk_start_marchen:
+	_TALK_KEYWAIT	msg_oyaji_01_p02_marchen
+	_TALK_OBJ_END
+	_END
+
+//終了
+no_marchen_01_p02:
+	_TALK_KEYWAIT	msg_oyaji_01_p04_marchen
+	_TALK_OBJ_END
+	_END
+
+

@@ -1,0 +1,280 @@
+//**********************************************************************
+//		evobj.def
+//**********************************************************************
+#ifndef	EVOBJ_DEF
+#define	EVOBJ_DEF
+
+#include "common.h"
+#include "actor.h"
+#include "actanm.h"
+#include "fld_eff.h"
+#include "evobjsv.def"
+#include "evobjdef.h"
+
+//------------------------------------------
+//	Ìß×²µØÃ¨
+//------------------------------------------
+enum										// ±¸À°ŠÔ
+{
+	EVOBJ_HI_ACTPRI = 82,					// 82 ‚
+
+	EVOBJ_ACTPRI0 = 83,						// 83
+	EVOBJ_ACTPRI1 = 115,					// 115
+
+	// 83 ~ 147 Ì¨°ÙÄÞOBJ 
+
+	EVOBJ_LOW_ACTPRI0 = 148,				// 148 ‰e‚È‚Ç
+	EVOBJ_LOW_ACTPRI1,						// 149 ‘«Õ‚È‚Ç
+	EVOBJ_LOW_ACTPRI2,						// 150 ”gæ‚èÎß¹ÓÝ‚È‚Ç
+	EVOBJ_LOW_ACTPRI3,						// 151 …”g–ä‚È‚Ç
+
+	EVOBJ_BELONG_ACTPRI,					// 152 ‰f‚èž‚Ý‚È‚Ç
+};
+
+enum										// BG Ìß×²µØÃ¨
+{
+	BGPRI0 = 0,								// 0
+	BGPRI1,									// 1
+	BGPRI2,									// 2
+	BGPRI3,									// 3
+};
+
+//------------------------------------------
+//	“®ìó‘Ô
+//------------------------------------------
+enum
+{
+	EV_M_OFF = 0,							// 0	“®ì–³‚µ
+	EV_M_ON,								// 1	“®ì’†
+	EV_M_END,								// 2	“®ìI—¹(ˆÚ“®’¼Œã)
+};
+
+enum
+{
+	EV_M_STOP = 0,							// 0	’âŽ~ó‘Ô
+	EV_M_TURN,								// 1	U‚èŒü‚«
+	EV_M_WALK,								// 2	•à‚«
+};
+
+//------------------------------------------
+//@Ž©‹@“®ìËÞ¯ÄÌ×¸Þ
+//------------------------------------------
+#define	MY_MV_BIT_NORMAL	0x01			// 1	“k•à
+#define	MY_MV_BIT_CYCLE_R	0x02			// 2	Ú°½ Ž©“]ŽÔ
+#define	MY_MV_BIT_CYCLE_S	0x04			// 3	½Îß°Â Ž©“]ŽÔ
+#define	MY_MV_BIT_SWIM		0x08			// 4	ŠC
+#define MY_MV_BIT_DIVING	0x10			// 5	ÀÞ²ËÞÝ¸Þ
+#define	MY_MV_BIT_UNDER		0x20			// 6	‘«Œ³
+#define	MY_MV_BIT_FORCE		0x40			// 7	‹­§ˆÚ“®
+#define MY_MV_BIT_B_DASH	0x80			// 8	B DASH
+#define	MY_MV_BIT_AND		0xe0			// “®ìËÞ¯Ä
+#define	MY_MV_BIT_CYCLE_AND	(MY_MV_BIT_CYCLE_R|MY_MV_BIT_CYCLE_S)
+#define MY_MV_BIT_SWIM_AND	(MY_MV_BIT_SWIM|MY_MV_BIT_DIVING)
+
+//------------------------------------------
+//	SXY OBJ ÃÞ°À OBJ ²ÍÞÝÄº°ÄÞ
+//------------------------------------------
+enum
+{
+	OTYPE_NORMAL = 0,						// 0	’Êí
+	OTYPE_TRAINER,							// 1	ÄÚ°Å°
+	OTYPE_ITEM,								// 2	±²ÃÑ
+	OTYPE_TRAINER_EYEALL,					// 3	ÄÚ°Å°‘S•ûŒü
+};
+
+//------------------------------------------
+//	OBJ ÊßÚ¯ÄNo ŠÇ—¼ÝÎÞÙ
+//------------------------------------------
+enum
+{
+	MINE_OBJ_PALNO = 0,						// 0	Ž©‹@
+	MINE_REF_OBJ_PALNO,						// 1	Ž©‹@‰f‚èž‚Ý
+	OTHERS_OBJ_PALNO_0,						// 2	Ì¨°ÙÄÞOBJ				8
+	OTHERS_OBJ_PALNO_1,						// 3		;;					9
+	OTHERS_OBJ_PALNO_2,						// 4		;;					a
+	OTHERS_OBJ_PALNO_3,						// 5		;;					b
+	OTHERS_REF_OBJ_PALNO_0,					// 6	Ì¨°ÙÄÞOBJ‰f‚èž‚Ý		c
+	OTHERS_REF_OBJ_PALNO_1,					// 7		;;					d
+	OTHERS_REF_OBJ_PALNO_2,					// 8		;;					e
+	OTHERS_REF_OBJ_PALNO_3,					// 9		;;					f
+	SP_OBJ_PALNO,							// 10	“ÁŽêÌ¨°ÙÄÞOBJ
+	SP_REF_OBJ_PALNO,						// 11	“ÁŽêÌ¨°ÙÄÞOBJ
+	EFF_OBJ_PALNO_0,						// 12	´Ìª¸ÄOBJ
+	EFF_OBJ_PALNO_1,						// 13	´Ìª¸ÄOBJ
+	WETHER_OBJ_PALNO_0,						// 14	“VŒóOBJ
+	WETHER_OBJ_PALNO_1,						// 15	“VŒóOBJ
+};
+											// OBJ ÊßÚ¯ÄÏÈ°¼Þ¬ ŠÇ—ŠJŽnˆÊ’u
+#define	EVOBJ_PALMAN_START_NO	EFF_OBJ_PALNO_0
+
+//------------------------------------------
+//	±¸À “®ìº°ÄÞ
+//------------------------------------------
+enum
+{
+	EVACT_MV_1 = 0,							// 1dot ˆÚ“®
+	EVACT_MV_2,
+	EVACT_MV_3,
+	EVACT_MV_4,
+	EVACT_MV_8,
+};
+
+enum
+{
+	EVACT_MV_STAY_JUMP = 0,					// ‚»‚Ìê¼Þ¬ÝÌß
+	EVACT_MV_JUMP_1,						// 1¾Ù¼Þ¬ÝÌß
+	EVACT_MV_JUMP_2,						// 2¾Ù¼Þ¬ÝÌß
+};
+
+enum
+{
+	EVACT_MV_JUMP_V_12 = 0,					// ¼Þ¬ÝÌß 12
+	EVACT_MV_JUMP_V_6,						// 6
+	EVACT_MV_JUMP_V_8						// 8
+};
+
+//------------------------------------------
+//	OBJ Ë¯ÄÁª¯¸
+//------------------------------------------
+enum										// ‘S”Ê
+{
+	EVOBJHIT_NOTHING = 0,					// Ë¯Ä–³‚µ
+	EVOBJHIT_LIMIT,							// ˆÚ“®§ŒÀË¯Ä
+	EVOBJHIT_ATR,							// ±ÄØËÞ­°ÄË¯Ä
+	EVOBJHIT_HEIGHT,						// ‚’á·Ë¯Ä
+	EVOBJHIT_OBJ,							// OBJË¯Ä
+};
+
+enum										// Ž©‹@
+{
+	HEROHIT_SWIM = EVOBJHIT_OBJ+1,			// ”gæ‚èË¯Ä
+	HEROHIT_JUMP,							// ¼Þ¬ÝÌßË¯Ä
+	HEROHIT_KAIRIKI,						// ‰ö—ÍË¯Ä
+	HEROHIT_DOOR,							// ÄÞ±Ë¯Ä
+	HEROHIT_JSTONE,							// ”ò‚ÑÎ
+	HEROHIT_VBOARD,							// c”Â
+	HEROHIT_HBOARD,							// ‰¡”Â
+	HEROHIT_VBRIDGE,						// cˆê–{‹´
+	HEROHIT_HBRIDGE,						// ‰¡ˆê–{‹´
+};
+
+#define HEROHIT_START HEROHIT_SWIM			// “ÁŽêË¯ÄŽ¯•Ê
+#define HEROHIT_CYCLE_START HEROHIT_JSTONE	// “ÁŽêË¯ÄŽ©“]ŽÔŽ¯•Ê
+
+//------------------------------------------
+//	ºÏÝÄÞº°ÄÞ
+//------------------------------------------
+#define	ACMD_CODE	const u8 				// ºÏÝÄÞº°ÄÞÃÞ°ÀŒ^
+
+enum
+{
+	ACMD_MODE_OFF = 0,						// ’âŽ~
+	ACMD_MODE_SITE,							// •ûŒü•ÏŠ·
+	ACMD_MODE_WALK_1,						// 1ÄÞ¯ÄˆÚ“®
+	ACMD_MODE_WALK_2,						// 2ÄÞ¯ÄˆÚ“®
+	ACMD_MODE_WALK_4,						// 2ÄÞ¯ÄˆÚ“®
+	ACMD_MODE_WALK_8,						// 2ÄÞ¯ÄˆÚ“®
+	ACMD_MODE_STAY_JUMP,					// ‚»‚Ìê¼Þ¬ÝÌß
+	ACMD_MODE_JUMP_1,						// 1¾Ù¼Þ¬ÝÌßˆÚ“®
+	ACMD_MODE_JUMP_2,						// 2¾Ù¼Þ¬ÝÌßˆÚ“®
+	ACMD_MODE_SW,							// Ì×¸Þ‘€ì
+	ACMD_MODE_SP,							// “ÁŽê‘€ì
+};
+
+//------------------------------------------
+//	ŽålŒö OBJ º°ÄÞŽ¯•Ê
+//------------------------------------------
+enum
+{
+	H_NORMAL = 0,							// •’Ê
+	H_CYCLER,								// Ž©“]ŽÔR
+	H_CYCLES,								// Ž©“]ŽÔS
+	H_SWIM,									// ”gæ‚è
+	H_DIV,									// ÀÞ²ËÞÝ¸Þ
+	H_HIDEN,								// ”é“`‹Z
+	H_FISHING,								// ’Þ‚è
+	H_JORRO,								// ”@‰J˜I
+};
+
+//------------------------------------------
+//	SXY OBJ Í¯ÀÞ
+//------------------------------------------
+typedef	struct
+{
+	const u16	cellNo;						// ¾Ù
+	const u16	palNo;						// ÊßÚ¯Ä
+	const u16	sp_reflect_palNo;			// “ÁŽê‰f‚è‚±‚ÝÊßÚ¯Ä
+	const u16	celltrans_size;				// ¾Ù “]‘—Å‘å»²½Þ
+
+	const s16	x_size;						// X »²½Þ
+	const s16	y_size;						// Y »²½Þ
+
+	const u8	oampalNo:4;					// OAMÊßÚ¯ÄÅÝÊÞ
+	const u8	shade:2;					// ‰eŽí—Þ
+	const u8	anm_change_sw:1;			// ¾ÙÃÞÌ«ÙÄÁªÝ¼Þ½²¯Á
+	const u8	reflect_change_sw:1;		// ‰f‚èž‚Ý‘€ì
+	const u8	footprint;					// ‘«ÕŽí—Þ
+#if 0										// Ü°ÆÝ¸Þ–³Œø‰»‚Ìˆ×ŠO‚·
+	const u8	:8;
+	const u8	:8;
+#endif
+
+	const ActOamData *oamData_p;			// OAM
+	const OAMPatSt *oamPat;					// OAMÊß¯Ä
+	const actAnm * const *anmData_p;		// ±ÆÒ
+	const actAnmData *anmTrans_p;			// ±ÆÒÄ×Ý½
+	const actAffAnm	* const *affData_p;		// Šgk±ÆÒ
+}SXYObjHead;
+
+//------------------------------------------
+//@“®ìŠÇ—	
+//------------------------------------------
+typedef struct
+{
+	u8	flag;								// Ì×¸Þ
+	u8	req_flag;							// Ø¸´½ÄÌ×¸Þ
+	u8	mv_val;								// ˆÚ“®ó‘Ô
+	u8	mv_state;							// “®ìó‘Ô
+	u8	actno;								// ±¸À°Ü°¸ÅÝÊÞ
+	u8	evobjno;							// ²ÍÞÝÄOBJ Ü°¸ÅÝÊÞ
+	u8	mv_pause;							// “ü—Í’âŽ~
+	u8	sex;								// «•Ê
+
+	u8	work0;								// Ü°¸
+	u8  work1;								// Ü°¸
+	u8	cycle_speed;						// ‘¬“x
+	u8	cycle_brake;						// §“®‹——£
+
+	u32	command;							// ºÏÝÄÞŠi”[
+	u32 button;								// ÎÞÀÝŠi”[
+	u8	command_count[8];					// ºÏÝÄÞ¶³ÝÄ
+	u8	button_count[8];					// ÎÞÀÝ¶³ÝÄ
+}MvCmd;
+
+#define MvCmd_SIZE (sizeof(MvCmd))
+
+//------------------------------------------
+//	À•W
+//------------------------------------------
+typedef struct
+{
+	s16	x;									// x
+	s16	y;									// y
+}POINT;
+
+//------------------------------------------
+//	ID ŠÇ—
+//------------------------------------------
+typedef struct
+{
+	const u16	id;							// Ò²Ý ID
+	const u16	*com_id;					// “K‡ ID
+}STDATA;
+
+//------------------------------------------
+//	ÃÞÊÞ¯¸Þ
+//------------------------------------------
+#define LONGGRASS_DEBUG 1					// ’·‚¢‘ÃÞÊÞ¯¸Þ
+
+#endif										// EVOBJ_DEF
+

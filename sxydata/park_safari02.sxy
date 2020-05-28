@@ -1,0 +1,176 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_SAFARI02	9
+#define EXITNUM_PARK_SAFARI02	0
+#define POSNUM_PARK_SAFARI02	0
+#define BGNUM_PARK_SAFARI02	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_safari1_09_p01[];
+extern const u8	ev_safari1_10_p01[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	talk_iwakudaki_obj[];
+extern const u8	ev_ball1_119[];
+
+const evObjData	OBJ_park_safari02[] =
+{
+	{
+		SAFARI1_09_P01,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_safari1_09_p01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SAFARI1_10_P01,		//OBJ ID
+		YOUNGM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x001d,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_safari1_10_p01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_01_SP_SAFARI02,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0019,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_02_SP_SAFARI02,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0019,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ01,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_03_SP_SAFARI02,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001c,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ02,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_04_SP_SAFARI02,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0017,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ03,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_05_SP_SAFARI02,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0014,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ04,		//Event Flag
+	},
+
+	{
+		CRUSHROCK1_06_SP_SAFARI02,		//OBJ ID
+		CRUSHROCK1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iwakudaki_obj,		//Event Lavel
+		FH_OBJ05,		//Event Flag
+	},
+
+	{
+		BALL1_119,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_119,		//Event Lavel
+		FV_BALL1_119,		//Event Flag
+	},
+
+};
+
+const SXY_DATA	park_safari02_sxy_data =
+{
+OBJNUM_PARK_SAFARI02,			// field obj max
+EXITNUM_PARK_SAFARI02,		// exit max
+POSNUM_PARK_SAFARI02,			// pos event max
+BGNUM_PARK_SAFARI02,			// bg event max
+OBJ_park_safari02,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

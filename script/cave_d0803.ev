@@ -1,0 +1,39 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d0803.ev
+//
+//============================================ 
+
+/* ダミーデータです */
+
+EVENT_DATA_START cave_d0803_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_espm_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_05
+	_TRAINER_DATA2	msg_espm_05_01
+	_TRAINER_DATA3	msg_espm_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_05_03
+	_END
+
+SCRIPT_LABEL	ev_espw_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_05
+	_TRAINER_DATA2	msg_espw_05_01
+	_TRAINER_DATA3	msg_espw_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_05_03
+	_END
+

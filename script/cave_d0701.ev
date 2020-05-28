@@ -1,0 +1,676 @@
+//====================================================================
+//							cave_d0701
+//							えんとつ山
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	cave_d0701_event_data
+INIT_CTRL_LABEL		ev_effect_cave_d0701
+FLAG_CHANGE_LABEL	flag_change_cave_d0701
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//					      FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_cave_d0701:
+	//でこぼこ山を通ったときに火山灰を降らすようにする
+	_LDVAL			WK_SCENE_CAVE_D0702,1
+
+	_CALL			set_evil_char
+	_END
+
+//--------------------------------------------------------------------
+//					      INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+ev_effect_cave_d0701:
+	//灰エフェクトセット
+	_SET_MAP_EFFECT		MAP_EFFECT_ASH
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+#define ITEM_CAVE_D0701_GOLD	(200)
+/********************************************************************/
+//							老婆
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman2_01_p01_cave_d0701
+	_TALK_OBJ_START
+
+	_GOLD_WIN_WRITE		0,0,0		//手持ち
+
+	_TALK_YES_NO	msg_oldwoman2_01_p02_cave_d0701
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_oldwoman2_01_p01_cave_d0701
+
+	_COMP_GOLD		ITEM_CAVE_D0701_GOLD
+
+	//お金が足りなかったら
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,gold_nothing_01_p01_cave_d0701
+
+	_TALK_KEYWAIT	msg_oldwoman2_01_p03_cave_d0701
+
+	//アイテムを加えられるかのチェックをして、
+	//大丈夫だったらこのタイミングでおこづかいウィンドウを更新する
+	_ADD_ITEM_CHK	ITEM_HUENSENBEI,1
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,gold_sub_cave_d0701
+
+	_ITEM_EVENT		ITEM_HUENSENBEI,1
+	_IF_ZERO_JUMP	ev_fail_item_cave_d0701
+
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+//バッグがいっぱい
+ev_fail_item_cave_d0701:
+	_TALK_KEYWAIT	msg_itemget_p07
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+//おこづかいウィンドウ更新
+gold_sub_cave_d0701:
+	_SUB_GOLD		ITEM_CAVE_D0701_GOLD
+	_GOLD_WRITE		0,0,0
+	_RET
+
+//「いいえ」
+no_oldwoman2_01_p01_cave_d0701:
+	_TALK_KEYWAIT	msg_oldwoman2_01_p05_cave_d0701
+
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+//お金が足りない
+gold_nothing_01_p01_cave_d0701:
+	_TALK_KEYWAIT	msg_oldwoman2_01_p04_cave_d0701
+
+	_GOLD_WIN_DEL	0,0
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							共通アニメ
+/********************************************************************/
+
+//--------------------------------------------------------------------
+//味方側ボス	近づいてくる(左から)
+//--------------------------------------------------------------------
+mboss_01_cave_d0701_anime01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方側ボス	去っていく(左から)
+//--------------------------------------------------------------------
+mboss_01_cave_d0701_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方側ボス	近づいてくる(下から)
+//--------------------------------------------------------------------
+mboss_01_cave_d0701_anime03:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方側ボス	去っていく(下から)
+//--------------------------------------------------------------------
+mboss_01_cave_d0701_anime04:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員１(ボスに近い位置右上)	去っていく
+//--------------------------------------------------------------------
+mmem1_01_cave_d0701_anime01:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員１	去っていく(POS)
+//--------------------------------------------------------------------
+mmem1_01_cave_d0701_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員１	画面外まで去っていく(POS)
+//--------------------------------------------------------------------
+mmem1_01_cave_d0701_anime03:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員２(一番遠い位置)	去っていく
+//--------------------------------------------------------------------
+mmem1_02_cave_d0701_anime01:
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_D_2
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員２	去っていく(POS)
+//--------------------------------------------------------------------
+mmem1_02_cave_d0701_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員２	画面外まで去っていく(POS)
+//--------------------------------------------------------------------
+mmem1_02_cave_d0701_anime03:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員３(右下のOBJ)	去っていく
+//--------------------------------------------------------------------
+mmem1_03_cave_d0701_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員３	去っていく(POS)
+//--------------------------------------------------------------------
+mmem1_03_cave_d0701_anime02:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//味方団員３	画面外まで去っていく(POS)
+//--------------------------------------------------------------------
+mmem1_03_cave_d0701_anime03:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//敵側ボス	一歩前に出る
+//--------------------------------------------------------------------
+eboss_01_cave_d0701_anime01:
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//敵側ボス	去っていく
+//--------------------------------------------------------------------
+eboss_01_cave_d0701_anime02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//敵団員３	去っていく
+//--------------------------------------------------------------------
+emem1_03_cave_d0701_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_L
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//敵団員２	去っていく
+//--------------------------------------------------------------------
+emem1_02_cave_d0701_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_L
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	飛ばされる
+//--------------------------------------------------------------------
+hero_01_cave_d0701_anime01:
+	.byte	AC_SITE_PAUSE_ON
+	.byte	AC_WALK_L_2
+	.byte	AC_SITE_PAUSE_OFF
+	.byte	AC_SITE_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	道をあける
+//--------------------------------------------------------------------
+hero_01_cave_d0701_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_R
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//							マグマ団１
+/********************************************************************/
+SCRIPT_LABEL	ev_magmam1_01_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_magmam1_01_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_aquam1_01_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//							マグマ団２
+/********************************************************************/
+SCRIPT_LABEL	ev_magmam1_02_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_magmam1_02_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_aquam1_02_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//							マグマ団３
+/********************************************************************/
+SCRIPT_LABEL	ev_magmam1_03_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_magmam1_03_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_aquam1_03_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//							アクア団１
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam_15
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AQUAM_15
+	_TRAINER_DATA2	msg_aquam_15_01
+	_TRAINER_DATA3	msg_aquam_15_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_15_03
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MAGMAM_15
+	_TRAINER_DATA2	msg_magmam_15_01
+	_TRAINER_DATA3	msg_magmam_15_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_magmam_15_03
+#endif
+	_END
+
+
+/********************************************************************/
+//							アクア団２
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam_16
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	AQUAM_16
+	_TRAINER_DATA2	msg_aquam_16_01
+	_TRAINER_DATA3	msg_aquam_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_aquam_16_03
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	MAGMAM_16
+	_TRAINER_DATA2	msg_magmam_16_01
+	_TRAINER_DATA3	msg_magmam_16_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_magmam_16_03
+#endif
+	_END
+
+
+/********************************************************************/
+//						アクア団戦闘なし１
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_01_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_aquam1_01_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_magmam1_01_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//						アクア団戦闘なし２
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_02_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_aquam1_02_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_magmam1_02_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//						アクア団戦闘なし３
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_03_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_aquam1_03_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_magmam1_03_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//						アクア団戦闘なし４
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_04_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_aquam1_04_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_magmam1_04_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//						アクア団戦闘なし５
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_05_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_aquam1_05_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_magmam1_05_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//							ポケモン	
+/********************************************************************/
+SCRIPT_LABEL	ev_pokemon1_01_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_pokemon1_01_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_pokemon1_01_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//							ポケモン	
+/********************************************************************/
+SCRIPT_LABEL	ev_pokemon1_02_p01_cave_d0701
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_EASY_MSG		msg_pokemon1_02_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_EASY_MSG		msg_pokemon1_02_p01_cave_d0701r
+#endif
+	_END
+
+
+/********************************************************************/
+//							装置
+/********************************************************************/
+SCRIPT_LABEL	ev_machine1_01_p01_cave_d0701
+	_TALK_START
+
+	//えんとつ山イベント終了していなかったら
+	_IF_FLAGOFF_JUMP	FE_BOSS_01_CAVE_D0701,ev_machine1_01_p03_cave_d0701
+
+	//「いんせき」入手していたら
+	_IF_FLAGON_JUMP	FE_INSEKI_GET,ev_machine1_01_p02_cave_d0701
+
+	_TALK_YES_NO	msg_machine1_01_p01_cave_d0701
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_machine1_01_cave_d0701
+
+	_TALK_KEYWAIT	msg_machine1_01_p02_cave_d0701
+	_ITEM_EVENT		ITEM_INSEKI,1
+	_FLAG_SET		FE_INSEKI_GET
+	_TALK_END
+	_END
+
+//「いいえ」
+no_machine1_01_cave_d0701:
+	_TALK_KEYWAIT	msg_machine1_01_p03_cave_d0701
+	_TALK_END
+	_END
+
+//「いんせき」入手している
+ev_machine1_01_p02_cave_d0701:
+	_TALK_KEYWAIT	msg_machine1_01_p04_cave_d0701
+	_TALK_END
+	_END
+
+//えんとつ山イベント終了していない
+ev_machine1_01_p03_cave_d0701:
+	_TALK_KEYWAIT	msg_machine1_01_p05_cave_d0701
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//								看板
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_cave_d0701
+	_EASY_MSG	msg_kanban_01_p01_cave_d0701
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_expertw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	EXPERTW_02
+	_TRAINER_DATA2	msg_expertw_02_01
+	_TRAINER_DATA3	msg_expertw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_expertw_02
+	_TRAINER_EASY_MSG	msg_expertw_02_03
+	_END
+
+_revenge_expertw_02:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	EXPERTW_02
+	_TRAINER_DATA2	msg_expertw_02_04
+	_TRAINER_DATA3	msg_expertw_02_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_expertw_02_06
+	_END
+
+SCRIPT_LABEL	ev_sexyw_01
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_01
+	_TRAINER_DATA2	msg_sexyw_01_01
+	_TRAINER_DATA3	msg_sexyw_01_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_01_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_02
+	_TRAINER_DATA2	msg_sexyw_02_01
+	_TRAINER_DATA3	msg_sexyw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_02_03
+	_END
+
+SCRIPT_LABEL	ev_sexyw_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SEXYW_03
+	_TRAINER_DATA2	msg_sexyw_03_01
+	_TRAINER_DATA3	msg_sexyw_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_sexyw_03_03
+	_END
+

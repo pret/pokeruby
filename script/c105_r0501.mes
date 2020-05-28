@@ -1,0 +1,83 @@
+// ●ヒワマキシティ　民家５（街の北・北東）
+
+
+// ●女性２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c105_r0501
+msg_woman2_01_p01_c105_r0501:
+	.byte	PO_,KE_,MO_,N_,to_,spc_,i_,ru_,ko_,to_,de_
+	.byte	CR_
+	.byte	na_,ka_,no_,spc_,i_,i_,spc_,to_,mo_,da_,ti_,ga_,spc_,hu_,e_,te_,i_,ku_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,si_,te_,spc_,se_,ka_,i_,ha_,spc_,tu_,na_,ga_,ttu_,te_,spc_,i_,ku_,no_,ne_,gyoe_
+	.byte	CR_
+	.byte	su_,te_,ki_,da_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年３
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p01_c105_r0501
+msg_boy3_01_p01_c105_r0501:
+	.byte	so_,re_,ttu_,gyoe_
+	.byte	CR_
+	.byte	yu_,ke_,ttu_,spc_,to_,ri_,PO_,KE_,MO_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●鳥ポケモンのＯＢＪが下方向へ飛んでいく
+// ●鳥ポケモン戻ってくるまで
+// 　（トクサネの民家　c107_r0301で鳥ポケモンに話しかけるまで）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p02_c105_r0501
+msg_boy3_01_p02_c105_r0501:
+	.byte	e_,he_,he_,spc_,KI_,YYA_,MO_,ME_,ni_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,spc_,o_,tu_,ka_,i_,wo_,spc_,ta_,no_,n_,da_,no_,sa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●鳥ポケモンが戻ってきた
+// 　（トクサネの民家　c107_r0301で鳥ポケモンに話しかけてから）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p03_c105_r0501
+msg_boy3_01_p03_c105_r0501:
+	.byte	yo_,bou_,si_,gyoe_
+	.byte	CR_
+	.byte	o_,ka_,e_,ri_,spc_,KI_,YYA_,MO_,ME_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,re_,e_,hate_,spc_,na_,ni_,spc_,mo_,ttu_,te_,ru_,n_,da_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ME_,N_,TA_,RU_,HA_,bou_,BU_,spc_,ka_,a_,tenten_,tenten_
+	.byte	CR_
+	.byte	do_,ko_,ka_,de_,spc_,hi_,ro_,ttu_,ta_,n_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,bo_,ku_,spc_,TO_,RE_,bou_,NA_,bou_,zi_,yya_,spc_,na_,i_,ka_,ra_,na_
+	.byte	CR_
+	.byte	ki_,mi_,ni_,spc_,a_,ge_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「メンタルハーブ」（No184）入手ナレーション
+// ●アイテム入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy3_01_p04_c105_r0501
+msg_boy3_01_p04_c105_r0501:
+	.byte	KI_,YYA_,MO_,ME_,no_,spc_,o_,ka_,ge_,de_
+	.byte	CR_
+	.byte	to_,o_,ku_,no_,spc_,to_,mo_,da_,ti_,to_,mo_,spc_,na_,ka_,yo_,si_,spc_,na_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・キャモメ
+// 　上記少年のメッセージ状態に応じて表示オン／オフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_camome_01_p01_c105_r0501
+msg_camome_01_p01_c105_r0501:
+	.byte	KI_,YYA_,MO_,ME_,kako2_,pi_,hi_,yyo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にキャモメの鳴き声をならす

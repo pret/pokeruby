@@ -1,0 +1,161 @@
+//=========================================================================
+//
+//		ﾎﾟｹﾓﾝ拡縮テーブル群
+//														
+//=========================================================================
+#ifndef __PM_AFF_DAT__
+#define __PM_AFF_DAT__
+
+#include "pm_aff.h"
+
+//=========================================================================
+//	共通
+//=========================================================================
+static const actAffAnm PmAffNormal[] = {
+//	{ 拡縮x, 拡縮y, 角度, ｳｪｲﾄ }
+
+	//{0,0,0,1},	changed by matsuda 2002.08.29(木)
+	{0x0100,0x0100,0,ACT_AFSET},
+	
+	{ACT_AFEND, 0, 0, 0 },
+};
+static const actAffAnm PmAffNormalFlip[] = {
+//	{ 拡縮x, 拡縮y, 角度, ｳｪｲﾄ }
+	{-0x100,0x100,0,ACT_AFSET},
+	{ACT_AFEND, 0, 0, 0 },
+};
+static const actAffAnm BallOut[] = 	//ﾎﾞｰﾙから出るとき
+{
+	{ PBL_OUT_AFF, PBL_OUT_AFF, 0, ACT_AFSET },				//最初小さい
+	{ PBL_OUT_SP, PBL_OUT_SP, 0, PBL_OUT_LOOP},	//だんだん大きく
+	{ACT_AFEND,0,0,0},
+};
+static const actAffAnm BallIn[] = 	//ﾎﾞｰﾙに入るとき
+{
+	{-2, -2, 0, 18},
+//	{0,0,0,2},
+//	{ PBL_IN_SP, PBL_IN_SP, 0, PBL_IN_LOOP},
+	{-16,-16,0,15},
+	{ACT_AFEND,0,0,0},
+};
+static const actAffAnm Hasamu[] = 	//「はさむ」
+{
+	{ HASAMU_SET, 0x100, 0, ACT_AFSET},
+	{ HASAMU_SP, 0, 0, HASAMU_LOOP},
+	{ -HASAMU_SP, 0, 0, HASAMU_LOOP},
+	{ACT_AFLOOP,1,0,0},
+};
+static const actAffAnm SeityouUp[] = 	//「せいちょう」大きく
+{
+	{ SEITYOU_SP, SEITYOU_SP, 0, SEITYOU_LOOP},
+	//{ACT_AFLOOP,0,0,0},
+	{ACT_AFEND,0,0,0},
+};
+static const actAffAnm SeityouDown[] = 	//「せいちょう」小さく
+{
+	{ -SEITYOU_SP, -SEITYOU_SP, 0, SEITYOU_LOOP},
+	//{ACT_AFLOOP,0,0,0},
+	{ACT_AFEND,0,0,0},
+};
+
+static const actAffAnm TiisakuNaruAff[] = //ちいさくなる
+{
+	{POKE_DEFA_AFFINE, POKE_DEFA_AFFINE, 0, ACT_AFSET	},
+	{ -0x10, -0x10, 0, 9			},
+	{ACT_AFEND,0,0,0},
+};
+//=========================================================================
+//	バック用(味方ﾎﾟｹﾓﾝ用)
+//=========================================================================
+static const actAffAnm HukitobasiUp[] = //「ふきとばし」大きく
+{
+	//{ HUKITOBASI_SP, HUKITOBASI_SP, HUKITOBASI_THETA, HUKITOBASI_LOOP},
+	{ HUKITOBASI_SP, HUKITOBASI_SP, 0, HUKITOBASI_LOOP},
+	{ACT_AFEND,0,0,0},
+};
+static const actAffAnm ZutukiR[] = 	//「ずつき」右回り
+{
+	{ 0, 0, -ZUTUKI_THETA, ZUTUKI_LOOP},
+	{ 0, 0, ZUTUKI_THETA, ZUTUKI_LOOP},
+	{ACT_AFEND,0,0,0},
+};
+
+//=========================================================================
+//	アフィンテーブル(味方ﾎﾟｹﾓﾝ用)
+//=========================================================================
+const actAffAnm * const PmAffAnmTblB[] = {
+	PmAffNormal,
+	BallOut,
+	BallIn,
+	Hasamu,
+	SeityouUp,
+	SeityouDown,
+	HukitobasiUp,
+	ZutukiR,
+	TiisakuNaruAff,
+};
+
+
+
+//=========================================================================
+//	フロント用(敵ﾎﾟｹﾓﾝ用)
+//=========================================================================
+static const actAffAnm HukitobasiDown[] = 	//「ふきとばし」小さく
+{
+	{ -HUKITOBASI_SP, -HUKITOBASI_SP, HUKITOBASI_THETA, HUKITOBASI_LOOP},
+	{ACT_AFEND,0,0,0},
+};
+static const actAffAnm ZutukiL[] = 			//「ずつき」左回り
+{
+	{ 0, 0, ZUTUKI_THETA, ZUTUKI_LOOP},
+	{ 0, 0, -ZUTUKI_THETA, ZUTUKI_LOOP},
+	{ACT_AFEND,0,0,0},
+};
+
+static const actAffAnm Ateminage[]=			//あてみなげ
+{
+	{0,0,	ATEMINAGE2_THETA,	ATEMINAGE_LOOP},
+	{0,0,	0,					ATEMINAGE_LOOP},
+	{0,0,	ATEMINAGE1_THETA,	ATEMINAGE_LOOP},
+	{ACT_AFEND,0,0,0},
+};
+
+static const actAffAnm JigokuGuruma[] =		//じごくぐるま
+{
+	{0,0, JIGOKUGURUMA_THETA, JIGOKUGURUMA_LOOP},
+	{ACT_AFEND,0,0,0},
+};
+
+//=========================================================================
+//	アフィンテーブル(敵ﾎﾟｹﾓﾝ用)
+//=========================================================================
+const actAffAnm * const PmAffAnmTblF[] = {
+	PmAffNormal,
+	BallOut,
+	BallIn,
+	Hasamu,
+	SeityouUp,
+	SeityouDown,
+	HukitobasiDown,
+	ZutukiL,
+	Ateminage,
+	TiisakuNaruAff,
+	JigokuGuruma,
+};
+//コンテスト用逆向きバージョン
+const actAffAnm * const PmAffAnmTblF2[] = {
+	PmAffNormalFlip,
+	BallOut,
+	BallIn,
+	Hasamu,
+	SeityouUp,
+	SeityouDown,
+	HukitobasiDown,
+	ZutukiL,
+	Ateminage,
+	TiisakuNaruAff,
+	JigokuGuruma,
+};
+
+
+#endif	//__PM_AFF_DAT__

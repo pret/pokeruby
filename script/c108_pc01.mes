@@ -1,0 +1,62 @@
+// ●ルネシティ　ポケモンセンター１Ｆ
+
+
+// ●老紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c108_pc01
+msg_gentlem1_01_p01_c108_pc01:
+	.byte	ko_,no_,spc_,ma_,ti_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_,spc_,MI_,KU_,RI_,ha_
+	.byte	CR_
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,spc_,de_,mo_,spc_,i_,ti_,ba_,n_,to_
+	.byte	SCROLL_WAIT_
+	.byte	u_,wa_,sa_,spc_,sa_,re_,ru_,spc_,zi_,tu_,ri_,yyo_,ku_,si_,yya_,spc_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	si_,ka_,si_,spc_,MI_,KU_,RI_,yo_,ri_,mo_,spc_,tu_,yo_,i_,to_,spc_,i_,wa_,re_,ru_
+	.byte	CR_
+	.byte	si_,te_,n_,no_,u_,no_,spc_,tu_,yo_,sa_
+	.byte	SCROLL_WAIT_
+	.byte	do_,re_,ho_,do_,no_,spc_,mo_,no_,da_,ro_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●超古代ポケモン覚醒中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_c108_pc01
+msg_gentlem1_01_p02_c108_pc01:
+	.byte	ko_,no_,spc_,ma_,ti_,no_,spc_,mi_,n_,na_,ga_,spc_,mi_,n_,na_
+	.byte	CR_
+	.byte	i_,e_,ni_,spc_,to_,zi_,ko_,mo_,ttu_,te_,spc_,de_,te_,ko_,na_,i_,n_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,te_,n_,ki_,tenten_,tenten_
+	.byte	CR_
+	.byte	na_,ni_,ka_,no_,spc_,ma_,e_,bu_,re_,spc_,na_,no_,de_,si_,yyo_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c108_pc01
+msg_trainerw1_01_p01_c108_pc01:
+	.byte	do_,n_,na_,spc_,to_,ki_,de_,mo_
+	.byte	CR_
+	.byte	do_,n_,na_,spc_,ko_,to_,ga_,spc_,a_,ttu_,te_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ta_,si_,spc_,PO_,KE_,MO_,N_,to_,spc_,to_,mo_,da_,ti_,de_,spc_,i_,ru_,wa_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,da_,to_
+	.byte	CR_
+	.byte	su_,go_,ku_,spc_,ta_,no_,si_,i_,mo_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●超古代ポケモン覚醒中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p02_c108_pc01
+msg_trainerw1_01_p02_c108_pc01:
+	.byte	ri_,yu_,u_,ha_,spc_,wa_,ka_,ra_,na_,i_,ke_,re_,do_,tenten_,tenten_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,tenten_,tenten_,spc_,hu_,a_,n_,spc_,na_,no_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

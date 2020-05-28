@@ -1,0 +1,157 @@
+// ●114番道路　マユミの家
+
+
+// ●マユミ
+// ●男なら「くん」、女なら「ちゃん」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mayumi_01_p01_r114_r0201
+msg_mayumi_01_p01_r114_r0201:
+	.byte	MA_,YU_,MI_,kako2_,a_,ttu_,gyoe_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	NORMAL_WAIT_
+	.byte	ti_,ra_,ka_,ttu_,te_,i_,te_,spc_,go_,me_,n_,na_,sa_,i_,tenten_,tenten_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,ni_,spc_,mu_,ti_,yyu_,u_,ni_,spc_,na_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,i_,spc_,ko_,u_,spc_,na_,ttu_,ti_,yya_,u_,n_,de_,su_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,zu_,ka_,si_,i_,ka_,ra_,spc_,HI_,MI_,TU_,ni_,spc_,si_,te_,ku_,da_,sa_,i_,ne_
+	.byte	CR_
+	.byte	ko_,re_,spc_,a_,ge_,ma_,su_,ka_,ra_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ルビーver　　　→「タネボードール」
+// 　サファイアver　→「ハスボードール」
+// ●会話終了でフラグ成立
+// ●パソコンのメニュー表示が「だれかのパソコン」から
+// 「マユミのパソコン」に変更されます。
+
+// ●マユミ（再度会話）
+// ●男なら「くん」、女なら「ちゃん」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_mayumi_01_p02_r114_r0201
+msg_mayumi_01_p02_r114_r0201:
+	.byte	a_,zu_,ka_,ri_,SI_,SU_,TE_,MU_,wo_,spc_,tu_,ku_,ttu_,ta_
+	.byte	CR_
+	.byte	a_,ta_,si_,ka_,ra_,no_,spc_,A_,DO_,BA_,I_,SU_,spc_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	do_,no_,spc_,BO_,TTU_,KU_,SU_,ni_,spc_,do_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	a_,zu_,ke_,ta_,ka_,spc_,wa_,ka_,ru_,yo_,u_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,ti_,n_,to_,spc_,se_,i_,ri_,spc_,si_,ta_,ho_,u_,ga_,spc_,i_,i_,de_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ノート
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p01_r114_r0201
+msg_note1_01_p01_r114_r0201:
+	.byte	ke_,n_,ki_,yyu_,u_,spc_,yo_,u_,no_,spc_,NO_,bou_,TO_,da_
+	.byte	CR_
+	.byte	BO_,TTU_,KU_,SU_,ni_,spc_,tu_,i_,te_,spc_,ka_,ka_,re_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,TTU_,KU_,SU_,n1_,tu_,ni_,spc_,n3_,n0_,pi_,ki_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,a_,zu_,ke_,ra_,re_,ru_,spc_,yo_,u_,ni_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,SO_,KO_,N_,ni_,ha_,spc_,ze_,n_,bu_,de_,spc_,n4_,n2_,n0_,hi_,ki_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,a_,zu_,ke_,ra_,re_,ru_,spc_,yo_,u_,ni_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,du_,ki_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_note1_01_p03_r114_r0201:
+// ●「いいえ」→msg_note1_01_p02_r114_r0201:
+
+// ●ノート　「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p03_r114_r0201
+msg_note1_01_p03_r114_r0201:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,MA_,bou_,KI_,N_,GU_,su_,ru_,to_,spc_,BO_,TTU_,KU_,SU_,ga_
+	.byte	CR_
+	.byte	se_,i_,ri_,spc_,si_,ya_,su_,ku_,na_,ru_,spc_,yo_,u_,ni_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,TTU_,KU_,SU_,no_,spc_,na_,ma_,e_,spc_,ka_,be_,ga_,mi_,wo_
+	.byte	CR_
+	.byte	ka_,e_,ra_,re_,ru_,spc_,yo_,u_,ni_,si_,te_,spc_,a_,zu_,ke_,ra_,re_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,yo_,ro_,ko_,bu_,spc_,yo_,u_,ni_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,du_,ki_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_note1_01_p04_r114_r0201:
+// ●「いいえ」→msg_note1_01_p02_r114_r0201:
+
+// ●ノート　「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p04_r114_r0201
+msg_note1_01_p04_r114_r0201:
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,te_,n_,so_,u_,spc_,sa_,re_,ru_,spc_,BO_,TTU_,KU_,SU_,ha_
+	.byte	CR_
+	.byte	sa_,i_,go_,ni_,spc_,mi_,ta_,spc_,BO_,TTU_,KU_,SU_,ni_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,BO_,TTU_,KU_,SU_,ga_,spc_,i_,ttu_,pa_,i_,no_,spc_,to_,ki_,ha_
+	.byte	CR_
+	.byte	tu_,gi_,no_,spc_,BO_,TTU_,KU_,SU_,ni_,spc_,te_,n_,so_,u_,spc_,su_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ma_,ri_,spc_,BO_,TTU_,KU_,SU_,wo_,spc_,mi_,ru_,ko_,to_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,te_,n_,so_,u_,spc_,si_,ta_,i_,spc_,BO_,TTU_,KU_,SU_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,ri_,ka_,e_,ra_,re_,ru_,spc_,yo_,u_,ni_,su_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ノート　「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_note1_01_p02_r114_r0201
+msg_note1_01_p02_r114_r0201:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,NO_,bou_,TO_,wo_,spc_,to_,zi_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●パソコン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pasokon1_01_p01_r114_r0201
+msg_pasokon1_01_p01_r114_r0201:
+	.byte	PA_,SO_,KO_,N_,wo_,spc_,mi_,ru_,to_
+	.byte	CR_
+	.byte	na_,n_,to_,spc_,de_,n_,si_,ME_,bou_,RU_,ga_,spc_,ki_,te_,i_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,a_,zu_,ka_,ri_,spc_,SI_,SU_,TE_,MU_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,be_,n_,ri_,spc_,ya_,na_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,n_,na_,spc_,to_,ko_,ro_,ni_
+	.byte	CR_
+	.byte	zi_,yyo_,se_,i_,spc_,ra_,si_,i_,spc_,ki_,ku_,ba_,ri_,ga_,spc_,a_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,ttu_,te_,te_,spc_,ta_,no_,si_,i_,si_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,si_,yyo_,ni_,spc_,ka_,i_,ha_,tu_,spc_,si_,ta_
+	.byte	CR_
+	.byte	na_,ka_,ma_,spc_,to_,si_,te_,spc_,u_,re_,si_,i_,wa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,na_,spc_,ko_,re_,ka_,ra_,mo_,spc_,a_,zu_,ka_,ri_,SI_,SU_,TE_,MU_,no_
+	.byte	CR_
+	.byte	ke_,n_,ki_,yyu_,u_,spc_,ga_,n_,ba_,ttu_,te_,na_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+

@@ -1,0 +1,198 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●	きのみイベント各種メッセージ（仮）
+// ●	ＭＳＧ中の＃は主人公の名前を表します。
+// ●　＠０，＠１，＠２は単語埋め込みです。
+// ●　コメントで埋め込む単語の内容を指定して下さい。
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●土アトリビュートで会話ボタン。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_nothing
+msg_seed_nothing:
+	.byte	hu_,ka_,hu_,ka_,no_,spc_,tu_,ti_,da_,gyoe_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_seed_ask
+msg_seed_ask:
+	.byte	hu_,ka_,hu_,ka_,no_,spc_,tu_,ti_,da_,gyoe_
+	.byte	CR_
+	.byte	ki_,no_,mi_,wo_,spc_,u_,me_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●
+// ●「はい・いいえ」
+// ●
+// ●いいえ→ウインドウクリア
+// ●はい→バッグのきのみ部分を表示。
+// ●「どの　きのみを　うめますか？」選択。
+// ●＃＝主人公名、＠０＝きのみ名
+// ●ＳＥあり。
+// ●主人公種まきアニメあり。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_set
+msg_seed_set:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,hu_,ka_,hu_,ka_,no_,spc_,tu_,ti_,ni_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_,spc_,u_,me_,ta_,gyoe_
+	.byte	EOM_
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●きのみが埋めてある場所で会話ボタン。
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_underground
+msg_seed_underground:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_,spc_,u_,me_,ta_,spc_,ba_,si_,yyo_,da_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●芽が生えている場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_hutaba
+msg_seed_hutaba:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,me_,ga_,spc_,de_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●幹の段階の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_miki
+msg_seed_miki:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,mi_,ki_,ga_,spc_,o_,o_,ki_,ku_,spc_,na_,ttu_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●花が咲いている場合
+// ●＠１＝MAXのとき　「とても　うつくしく」
+// ●　　　MINのとき「かわいく」
+// ●　　　それ以外のとき「きれいに」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_flower
+msg_seed_flower:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,ha_,na_,ga_,spc_,I_MSG_,STR_TEMP_BUF1,spc_,sa_,i_,te_,ru_,gyoe_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_seed_f_max
+msg_seed_f_max:
+	.byte	to_,te_,mo_,u_,tu_,ku_,si_,ku_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_seed_f_min
+msg_seed_f_min:
+	.byte	ka_,wa_,i_,ku_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_seed_f_normal
+msg_seed_f_normal:
+	.byte	ki_,re_,i_,ni_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●きのみができている場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_fruit
+msg_seed_fruit:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,ga_,spc_,I_MSG_,STR_TEMP_BUF1,ko_,spc_,de_,ki_,te_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_,spc_,to_,ri_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●
+// ●「はい・いいえ」
+// ●　はい→
+// ●　＠０＝きのみ名
+// ●　ＳＥあり：ファンファーレ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_fruit_get
+msg_seed_fruit_get:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_,spc_,I_MSG_,STR_TEMP_BUF1,ko_,spc_,to_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ●ＳＥ入る
+	.GLOBAL	msg_seed_reset
+msg_seed_reset:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_
+	.byte	CR_
+	.byte	ki_,no_,mi_,PO_,KE_,TTU_,TO_,ni_,spc_,si_,ma_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ti_,ha_,spc_,mo_,to_,no_,spc_,hu_,ka_,hu_,ka_,ni_,spc_,mo_,do_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バッグのきのみがいっぱいの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_fruit_full
+msg_seed_fruit_full:
+	.byte	BA_,TTU_,GU_,no_,spc_,ki_,no_,mi_,PO_,KE_,TTU_,TO_,ga_,spc_,i_,ttu_,pa_,i_,da_,ttu_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_,spc_,a_,ki_,ra_,me_,ta_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　いいえ→
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_fruit_not_get
+msg_seed_fruit_not_get:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_
+	.byte	CR_
+	.byte	so_,no_,ma_,ma_,ni_,spc_,si_,te_,o_,i_,ta_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　水をあげるかどうかの問いかけ
+// ●　＠０＝きのみ名
+// ●	はい→水をあげたときの処理
+// ●　いいえ→ウィンドウをクリアして終了
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_water_check
+msg_seed_water_check:
+	.byte	mo_,ttu_,te_,i_,ru_,spc_,HO_,E_,RU_,KO_,zi_,yyo_,u_,ro_,spc_,de_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ni_,spc_,mi_,zu_,wo_,spc_,a_,ge_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　水をあげたとき
+// ●　＃＝主人公名、＠０＝きのみ名
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_water
+msg_seed_water:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,I_MSG_,STR_TEMP_BUF0,ni_,spc_,mi_,zu_,wo_,spc_,a_,ge_,ta_,gyoe_
+	.byte	EOM_
+
+// …………………………………▼
+
+	.GLOBAL	msg_seed_water_end
+msg_seed_water_end:
+	.byte	to_,ttu_,te_,mo_,spc_,yo_,ro_,ko_,n_,de_,ru_,spc_,mi_,ta_,i_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●	きのみが変化しているとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seed_change
+msg_seed_change:
+	.byte	gyoe_
+	.byte	EOM_
+

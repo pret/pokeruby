@@ -1,0 +1,244 @@
+// ●ＴＶのポケモンニックネームの放送
+// ●教育ＴＶ風
+// ●
+// ●
+// ●＠０→　主人公の名前
+// ●＠１　→　ポケモンの種類（捕まえた）
+// ●＠２　→　ポケモンのニックネーム（捕まえた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_nickname
+msg_TV_01_p01_nickname:
+	.byte	ko_,n_,ni_,ti_,ha_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako2_,ki_,yyo_,u_,no_,spc_,PO_,KE_,MO_,N_,kakot2_,no_
+	.byte	CR_
+	.byte	zi_,ka_,n_,da_,yo_,bou_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,ko_,n_,ni_,ti_,ha_,spc_,mi_,n_,na_,spc_,ge_,n_,ki_,gyoe_
+	.byte	CR_
+	.byte	ki_,yyo_,u_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,si_,yyo_,u_,ka_,i_,wo_,spc_,su_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,su_,ru_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　マスターボールで捕まえてない→msg_TV_01_p02_nickname
+// ●　マスターボールを投げた→msg_TV_01_p06_nickname
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_nickname
+msg_TV_01_p02_nickname:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,ni_,spc_,kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,te_,spc_,ta_,i_,se_,tu_,ni_,spc_
+	.byte	CR_
+	.byte	so_,da_,te_,te_,spc_,ru_,n_,da_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p03_nickname
+
+
+// ●＠１　→　ボールの種類
+// ●＠２　→　ボールを投げた数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_nickname
+msg_TV_01_p03_nickname:
+	.byte	o_,ni_,i_,sa_,n_,kako2_,ti_,na_,mi_,ni_
+	.byte	CR_
+	.byte	BO_,bou_,RU_,wo_,spc_,ze_,n_,bu_,de_,spc_,I_MSG_,STR_TEMP_BUF2,ko_,spc_,na_,ge_,te_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,i_,go_,ha_,spc_,I_MSG_,STR_TEMP_BUF1,de_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ta_,ttu_,te_,spc_,u_,wa_,sa_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　モンスターボール等を投げた回数が３回以下→msg_TV_01_p04_nickname
+// ●　モンスターボール等を投げた回数が４回以上→msg_TV_01_p05_nickname
+
+
+// ●＠０→　主人公の名前
+// ●＠１　→　ポケモンの種類（捕まえた）
+// ●＠２　→　ポケモンのニックネーム（捕まえた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_nickname
+msg_TV_01_p04_nickname:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,so_,n_,na_,ni_,spc_,ka_,n_,ta_,n_,ni_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ru_,spc_,na_,n_,te_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF1,no_
+	.byte	CR_
+	.byte	de_,a_,i_,ha_,spc_,ki_,ttu_,to_,spc_,u_,n_,me_,i_,spc_,da_,ttu_,ta_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p07_nickname
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_nickname
+msg_TV_01_p05_nickname:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,ku_,ro_,u_,si_,te_,spc_,ya_,ttu_,to_
+	.byte	CR_
+	.byte	tu_,ka_,ma_,e_,ta_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	da_,i_,zi_,ni_,spc_,sa_,re_,ru_,ttu_,te_,spc_,i_,u_,si_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p07_nickname
+
+
+// ●＠０→　主人公の名前
+// ●＠１　→　ポケモンの種類（捕まえた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p06_nickname
+msg_TV_01_p06_nickname:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,ha_,spc_,da_,i_,zi_,na_,spc_,MA_,SU_,TA_,bou_,BO_,bou_,RU_,wo_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ka_,ttu_,te_,spc_,ya_,ttu_,to_,spc_,tu_,ka_,ma_,e_,ta_
+	.byte	CR_
+	.byte	o_,mo_,i_,de_,no_,spc_,PO_,KE_,MO_,N_,spc_,na_,n_,da_,ttu_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,e_,bou_,gyoe_,spc_,su_,go_,i_,ne_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,ho_,n_,to_,u_,ni_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,tu_,ka_,ma_,e_,spc_,ta_,ka_,ttu_,ta_,n_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p07_nickname
+
+
+// ●＠０→　主人公の名前
+// ●＠１　→　ポケモンの種類（捕まえた）
+// ●＠２　→　ポケモンのニックネーム（捕まえた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p07_nickname
+msg_TV_01_p07_nickname:
+	.byte	o_,ni_,i_,sa_,n_,kako2_,de_,mo_,spc_,so_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,ni_,spc_,kako_,I_MSG_,STR_TEMP_BUF2,kakot_,ttu_,te_
+	.byte	NORMAL_WAIT_
+	.byte	NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,ru_,a_,ta_,ri_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,SE_,N_,SU_,ga_,spc_,wa_,ka_,ru_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,so_,u_,da_,ne_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ランダムで選ぶ
+// ●　→msg_TV_01_p08_nickname
+// ●　→msg_TV_01_p09_nickname
+// ●　→msg_TV_01_p10_nickname
+// ●　→msg_TV_01_p11_nickname
+
+
+// ●＠０　→　ポケモンの種類（捕まえた）
+// ●＠１　→　ポケモンのニックネーム（捕まえた）
+// ●＠２はランダムのポケモンの種類（＠０と、かぶらないようにする）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p08_nickname
+msg_TV_01_p08_nickname:
+	.byte	wa_,ta_,si_,na_,ra_,spc_,I_MSG_,STR_TEMP_BUF2,spc_,to_,ka_,ni_
+	.byte	CR_
+	.byte	so_,no_,NI_,TTU_,KU_,NE_,bou_,MU_,wo_,spc_,tu_,ke_,ti_,yya_,u_,spc_,ke_,do_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,o_,bou_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,spc_,na_,ka_,na_,ka_,spc_,a_,ta_,ra_,si_,i_,ka_,mo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p12_nickname
+// ●
+
+
+// ●＠０　→　ポケモンの種類（捕まえた）
+// ●＠１　→　ポケモンのニックネーム（捕まえた）
+// ●＠２はランダムのポケモンの種類（＠０と、かぶらないようにする）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p09_nickname
+msg_TV_01_p09_nickname:
+	.byte	kako_,I_MSG_,STR_TEMP_BUF1,kakot_,ka_,bou_
+	.byte	CR_
+	.byte	ma_,sa_,ni_,spc_,I_MSG_,STR_TEMP_BUF0,ttu_,te_,spc_,ka_,n_,zi_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,ra_,gyoe_,spc_,mo_,zi_,no_,spc_,hu_,n_,i_,ki_,to_,ka_,spc_,na_,n_,to_,na_,ku_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ttu_,te_,spc_,ka_,n_,zi_,ga_,spc_,su_,ru_,mo_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,tenten_,tenten_,so_,u_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p12_nickname
+// ●
+
+// ●＠０　→　ポケモンの種類（捕まえた）
+// ●＠１　→　ポケモンのニックネーム（捕まえた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p10_nickname
+msg_TV_01_p10_nickname:
+	.byte	wa_,ta_,si_,no_,spc_,si_,ttu_,te_,ru_,ka_,gi_,ri_,spc_,I_MSG_,STR_TEMP_BUF0,ni_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF1,kakot_,ttu_,te_,spc_,NI_,TTU_,KU_,NE_,bou_,MU_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ke_,te_,i_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,na_,n_,te_,spc_,i_,na_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,so_,re_,da_,ke_,spc_,NI_,TTU_,KU_,NE_,bou_,MU_,wo_,tu_,ke_,ru_
+	.byte	CR_
+	.byte	SE_,N_,SU_,ga_,spc_,i_,i_,ttu_,te_,spc_,ko_,to_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p12_nickname
+// ●
+
+
+// ●＠０　→　ポケモンの種類（捕まえた）
+// ●＠１　→　ポケモンのニックネーム（捕まえた）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p11_nickname
+msg_TV_01_p11_nickname:
+	.byte	wa_,ta_,si_,mo_,spc_,ko_,n_,do_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ta_,ra_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF1,kakot_,ttu_,te_,spc_,tu_,ke_,te_,spc_,mi_,yo_,u_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,e_,hate_,spc_,zi_,yya_,a_,spc_,bo_,ku_,mo_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF1,kakot_,ttu_,te_,spc_,tu_,ke_,yo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　→msg_TV_01_p12_nickname
+// ●
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p12_nickname
+msg_TV_01_p12_nickname:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,a_,gyoe_,spc_,mo_,u_,spc_,ko_,n_,na_,zi_,ka_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,zi_,ka_,i_,no_
+	.byte	CR_
+	.byte	ho_,u_,so_,u_,de_,spc_,o_,a_,i_,si_,ma_,si_,yyo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,tu_,gi_,ha_,spc_,a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	si_,yyo_,u_,ka_,i_,spc_,su_,ru_,ka_,mo_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終了

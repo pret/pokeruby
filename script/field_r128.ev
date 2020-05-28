@@ -1,0 +1,366 @@
+//====================================================================
+//							field_r128
+//							ロード・128
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r128_event_data
+FLAG_CHANGE_LABEL	flag_change_field_r128
+SP_SCRIPT_LABEL		scene_field_r128
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_r128:
+	//大雨
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,ctrl_weather_thunder
+
+	_CALL			set_evil_char
+	_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_field_r128:
+	//デボン息子イベント
+	SP_SCRIPT_DATA	WK_SCENE_FIELD_R128,1,ev_scene_debon_01_field_r128
+	SP_SCRIPT_END
+
+//デボン息子イベント
+ev_scene_debon_01_field_r128:
+	_TALK_START
+
+	_TIME_WAIT		20
+
+#if ( PM_VERSION == VERSION_RUBY )
+	_PROGRAM		HIDERI_FLASH
+	_STOP_SCRIPT
+#endif
+
+	//周りを見渡す
+	_SET_OBJ_ANIME	AQUABOSS_01_FIELD_R128,aquaboss_01_field_r128_anime01
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_field_r128
+
+	//一歩後ずさる
+	_SET_OBJ_ANIME	AQUABOSS_01_FIELD_R128,aquaboss_01_field_r128_anime02
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_field_r128
+	_TALK_CLOSE
+
+	//マツブサ、アオギリに近づいてくる
+	_SET_OBJ_ANIME	MAGMABOSS_01_FIELD_R128,magmaboss_01_field_r128_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//上を向く
+	_SET_OBJ_ANIME	AQUABOSS_01_FIELD_R128,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_field_r128
+	_TALK_CLOSE
+
+	//マツブサ、主人公に近づいてくる
+	_SET_OBJ_ANIME	MAGMABOSS_01_FIELD_R128,magmaboss_01_field_r128_anime04
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//上を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_field_r128
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	AQUABOSS_01_FIELD_R128,aquaboss_01_field_r128_anime03
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_SET_OBJ_ANIME	MAGMABOSS_01_FIELD_R128,magmaboss_01_field_r128_anime01
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_magmaboss_01_p03_field_r128
+	_TALK_CLOSE
+
+	_TIME_WAIT		40
+
+	//去っていく２
+	_SET_OBJ_ANIME	MAGMABOSS_01_FIELD_R128,magmaboss_01_field_r128_anime03
+	_SET_OBJ_ANIME	AQUABOSS_01_FIELD_R128,aquaboss_01_field_r128_anime04
+	_OBJ_ANIME_WAIT
+
+	//OBJ消す
+	_OBJ_DELETE		MAGMABOSS_01_FIELD_R128
+	_OBJ_DELETE		AQUABOSS_01_FIELD_R128
+
+	_TIME_WAIT		100
+
+	_SET_FE_WORK	0,1
+	_SET_FLD_EFF	FECODE_PokeSora
+	_FLD_EFF_WAIT	FECODE_PokeSora
+
+	_OBJ_APPEAR		DAIGO_01_FIELD_R128
+
+	//近づいてくる
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R128,daigo_01_field_r128_anime04
+	_OBJ_ANIME_WAIT
+
+	//主人公右を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_daigo1_01_p01_field_r128s
+	_TALK_CLOSE
+
+	//一歩出る
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R128,daigo_01_field_r128_anime03
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_daigo1_01_p02_field_r128s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_daigo1_01_p02_field_r128r
+#endif
+
+	//主人公を見る
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R128,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_daigo1_01_p03_field_r128s
+	_TALK_CLOSE
+
+	//そらをとぶ
+	_SET_OBJ_ANIME	DAIGO_01_FIELD_R128,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_TIME_WAIT		50
+
+	_SET_FE_WORK	0,1
+	_SET_FLD_EFF	FECODE_PokeSora
+
+	_TIME_WAIT		15
+	_OBJ_DELETE		DAIGO_01_FIELD_R128
+
+	_FLD_EFF_WAIT	FECODE_PokeSora
+
+	//強制イベント終了
+	_LDVAL			WK_SCENE_FIELD_R128,2
+
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//デボン息子	近づいてくる
+//--------------------------------------------------------------------
+daigo_01_field_r128_anime01:
+	.byte	AC_WALK_L_2	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//デボン息子	去っていく
+//--------------------------------------------------------------------
+daigo_01_field_r128_anime02:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//デボン息子	上に移動する
+//--------------------------------------------------------------------
+daigo_01_field_r128_anime03:
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//デボン息子	近づいてくる
+//--------------------------------------------------------------------
+daigo_01_field_r128_anime04:
+	.byte	AC_WALK_L_2	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクアボス		周囲を見渡す
+//--------------------------------------------------------------------
+aquaboss_01_field_r128_anime01:
+	.byte	AC_WALK_D_2	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_R	//
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクアボス		後ずさる
+//--------------------------------------------------------------------
+aquaboss_01_field_r128_anime02:
+	.byte	AC_SITE_PAUSE_ON	//
+	.byte	AC_WALK_U_05	//
+	.byte	AC_WAIT_16
+	.byte	AC_SITE_PAUSE_OFF	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクアボス		去っていく
+//--------------------------------------------------------------------
+aquaboss_01_field_r128_anime03:
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_TURN_R	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アクアボス		去っていく２
+//--------------------------------------------------------------------
+aquaboss_01_field_r128_anime04:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマボス		去っていく
+//--------------------------------------------------------------------
+magmaboss_01_field_r128_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマボス		アオギリに近づいてくる
+//--------------------------------------------------------------------
+magmaboss_01_field_r128_anime02:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマボス		去っていく２
+//--------------------------------------------------------------------
+magmaboss_01_field_r128_anime03:
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_L_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	AC_WALK_U_2	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//マグマボス		主人公に近づいてくる
+//--------------------------------------------------------------------
+magmaboss_01_field_r128_anime04:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_athletesm_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESM_03
+	_TRAINER_DATA2	msg_athletesm_03_01
+	_TRAINER_DATA3	msg_athletesm_03_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_athletesm_03
+	_TRAINER_EASY_MSG	msg_athletesm_03_03
+	_END
+
+_revenge_athletesm_03:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESM_03
+	_TRAINER_DATA2	msg_athletesm_03_04
+	_TRAINER_DATA3	msg_athletesm_03_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletesm_03_06
+	_END
+
+SCRIPT_LABEL	ev_athletesw_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESW_04
+	_TRAINER_DATA2	msg_athletesw_04_01
+	_TRAINER_DATA3	msg_athletesw_04_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_athletesw_04
+	_TRAINER_EASY_MSG	msg_athletesw_04_03
+	_END
+
+_revenge_athletesw_04:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	ATHLETESW_04
+	_TRAINER_DATA2	msg_athletesw_04_04
+	_TRAINER_DATA3	msg_athletesw_04_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_athletesw_04_06
+	_END
+
+SCRIPT_LABEL	ev_elitew_17
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_17
+	_TRAINER_DATA2	msg_elitew_17_01
+	_TRAINER_DATA3	msg_elitew_17_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_17_03
+	_END
+
+SCRIPT_LABEL	ev_elitem_20
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_20
+	_TRAINER_DATA2	msg_elitem_20_01
+	_TRAINER_DATA3	msg_elitem_20_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_20_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_19
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_19
+	_TRAINER_DATA2	msg_fishing_19_01
+	_TRAINER_DATA3	msg_fishing_19_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_19_03
+	_END
+

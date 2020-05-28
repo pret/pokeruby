@@ -1,0 +1,63 @@
+// ●ポケモンリーグ　第２の部屋
+
+
+// ●フヨウ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fuyou_01_p01_c109_r0102
+msg_fuyou_01_p01_c109_r0102:
+	.byte	A_,HA_,HA_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	A_,TA_,SI_,spc_,si_,te_,n_,no_,u_,no_,spc_,HU_,YO_,U_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ku_,ri_,bi_,ya_,ma_,de_,spc_,si_,yyu_,gi_,yyo_,u_,spc_,su_,ru_,u_,ti_,ni_
+	.byte	CR_
+	.byte	GO_,bou_,SU_,TO_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_,to_,spc_,ki_,mo_,ti_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,yo_,wa_,se_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,yo_,u_,ni_,spc_,na_,ttu_,ta_,no_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,spc_,A_,TA_,SI_,to_,spc_,PO_,KE_,MO_,N_,no_,spc_,ki_,zu_,na_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,spc_,tu_,yo_,i_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,A_,TA_,SI_,no_,spc_,PO_,KE_,MO_,N_,ta_,ti_,ni_
+	.byte	CR_
+	.byte	DA_,ME_,bou_,ZI_,wo_,spc_,a_,ta_,e_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,me_,si_,te_,spc_,go_,ra_,n_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘敗北のセリフ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fuyou_01_p02_c109_r0102
+msg_fuyou_01_p02_c109_r0102:
+	.byte	a_,bou_,a_
+	.byte	CR_
+	.byte	ma_,ke_,ti_,yya_,ttu_,ta_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●戦闘モードを抜けてのセリフ
+// ●メッセージウインドウ自動でオープン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fuyou_01_p03_c109_r0102
+msg_fuyou_01_p03_c109_r0102:
+	.byte	a_,na_,ta_,to_,spc_,PO_,KE_,MO_,N_,to_,no_,spc_,a_,i_,da_,ni_,mo_
+	.byte	CR_
+	.byte	ta_,si_,ka_,na_,spc_,ki_,zu_,na_,ga_,spc_,a_,ttu_,ta_,no_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ga_,spc_,wa_,ka_,ra_,na_,ka_,ttu_,ta_
+	.byte	CR_
+	.byte	A_,TA_,SI_,ga_,spc_,ma_,ke_,ta_,no_,ha_,spc_,to_,u_,ze_,n_
+	.byte	NORMAL_WAIT_
+	.byte	U_,N_,spc_,a_,na_,ta_,ta_,ti_,no_,spc_,ki_,zu_,na_,ga_
+	.byte	CR_
+	.byte	do_,ko_,ma_,de_,spc_,tu_,u_,zi_,ru_,ka_,spc_,mi_,te_,mi_,ta_,i_,na_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,gi_,no_,spc_,he_,ya_,ni_,spc_,su_,su_,mi_,na_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけたときも同じ

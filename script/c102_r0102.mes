@@ -1,0 +1,50 @@
+// œ‘¢‘DŠ‚QŠK
+
+
+// œƒcƒK–¼l‚Ì•è‚P
+// ¡                    ¡
+	.GLOBAL	msg_studym1_01_p01_c102_r0102
+msg_studym1_01_p01_c102_r0102:
+	.byte	o_,o_,ki_,na_,spc_,hu_,ne_,wo_,spc_,tu_,ku_,ru_,spc_,to_,i_,u_,no_,ha_
+	.byte	CR_
+	.byte	no_,ri_,mo_,no_,wo_,spc_,tu_,ku_,ru_,spc_,to_,i_,u_,yo_,ri_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,te_,mo_,no_,wo_,spc_,tu_,ku_,ru_,no_,ni_,spc_,ni_,te_,i_,ru_,n_,da_,yo_
+	.byte	EOM_
+
+// ¡                    ¡
+
+// œƒcƒK–¼l‚Ì•è‚Q
+// ¡                    ¡
+	.GLOBAL	msg_studym1_02_p01_c102_r0102
+msg_studym1_02_p01_c102_r0102:
+	.byte	o_,mo_,ta_,i_,spc_,te_,tu_,de_,spc_,de_,ki_,te_,i_,ru_,spc_,hu_,ne_,ga_
+	.byte	CR_
+	.byte	u_,mi_,ni_,spc_,u_,ku_,na_,n_,te_,spc_,hu_,si_,gi_,spc_,da_,ro_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,re_,ha_,spc_,kako_,hu_,ri_,yyo_,ku_,kakot_,spc_,to_,i_,u_,spc_,ge_,n_,ri_,wo_
+	.byte	CR_
+	.byte	o_,u_,yo_,u_,spc_,si_,te_,i_,ru_,n_,da_
+	.byte	EOM_
+
+// ¡                    ¡
+
+// œˆÈ‰º‚Ì‚n‚a‚i‚ğíœ‚µ‚Ä‚­‚¾‚³‚¢
+// œƒcƒK–¼l‚Ì•è‚R
+// ¡                    ¡
+	.GLOBAL	msg_studym1_03_p01_c102_r0102
+msg_studym1_03_p01_c102_r0102:
+	.byte	KA_,I_,NA_,to_,spc_,KI_,NA_,GI_,no_,spc_,a_,i_,da_,no_,spc_,u_,mi_,ha_
+	.byte	CR_
+	.byte	si_,o_,no_,spc_,na_,ga_,re_,ga_,spc_,tu_,yo_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	hu_,tu_,u_,no_,spc_,hu_,ne_,de_,ha_,spc_,na_,ga_,sa_,re_,te_,si_,ma_,u_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,na_,ri_,spc_,tu_,yo_,i_,spc_,su_,i_,si_,n_,ri_,yyo_,ku_,ga_,spc_,na_,ke_,re_,ba_
+	.byte	CR_
+	.byte	a_,no_,spc_,u_,mi_,wo_,spc_,su_,su_,n_,de_,i_,ku_,no_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	mu_,zu_,ka_,si_,i_,spc_,da_,ro_,u_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ¡                    ¡

@@ -1,0 +1,311 @@
+/******************************************************************************/
+/*                                                                            */
+/*  マップデータ詳細                                                          */
+/*                                                                   taya     */
+/******************************************************************************/
+#ifndef _MAP_INST_DAT_
+#define _MAP_INST_DAT_
+
+#include "fntequ.h"
+#include "mappos.h"
+#include "sysflag.h"
+
+static const u8 FlowerShop[]  = {  HU_, RA_, WA_,bou_, SI_,YYO_,TTU_, PU_,EOM_, };  // フラワーショップ
+static const u8 ToukaForest[] = { TO_, U_, KA_, no_, mo_, ri_, EOM_, };  // トウカのもり
+static const u8 HagiHouse[]  =  {  HA_, GI_, ro_,  u_, zi_,  n_, no_,  ko_,  ya_,EOM_, };  // ハギろうじんのこや
+static const u8 ThrewShip[] =   {  su_, te_, ra_, re_, bu_, ne_,EOM_, };  // すてられぶね
+static const u8 MarineHouse[] = {   u_, mi_, no_,  i_,  e_,EOM_, };  // うみのいえ
+static const u8 KainaBeach[] =  {  KA_,  I_, NA_, no_, su_, na_, ha_, ma_,EOM_, };  // カイナのすなはま
+static const u8 CyclingRoad[] = {  SA_,  I_, KU_, RI_,  N_, GU_,spc_, RO_,bou_, DO_,EOM_, };  // サイクリング　ロード
+static const u8 NewKinsetsu[] = {  NI_,YYU_,bou_, KI_,  N_, SE_, TU_,EOM_, };  // ニューキンセツ
+static const u8 KarakuriYashiki[] = {  KA_, RA_, KU_, RI_, ya_, si_, ki_,EOM_, };  // カラクリやしき
+static const u8 GenkiHouse[] =  {  KE_, N_, KO_, bou_, ba_, a_, sa_, n_, EOM_, };  // ケンコーばあさん
+static const u8 Desert[] =      {  sa_, ba_, ku_,EOM_, };  // さばく
+static const u8 BattleFamily[] ={ KA_, TI_, NU_, KI_, spc_, HU_, AA_, MI_, RI_, bou_, EOM_ }; // カチヌキ　ファミリー
+static const u8 RopewaySta[] =  {  RO_,bou_, PU_,  U_, EE_,  I_, no_, ri_, ba_,EOM_, };  // ロープウェイのりば
+static const u8 GrassShop[] =   {  GA_, RA_, SU_, za_,  i_, ku_, no_, mi_, se_,EOM_, };  // ガラスざいくのみせ
+static const u8 WeatherLabo[] =  {  te_, n_, ki_, ke_,  n_, ki_,yyu_,  u_, zi_,yyo_,EOM_, };  // てんきけんきゅうじょ
+static const u8 RyuseiFalls[] = {  ri_,yyu_,  u_, se_,  i_, no_, ta_, ki_,EOM_, };  // りゅうせいのたき
+static const u8 WorkerHouse[] = {  sa_, gi_,yyo_,  u_,  i_,  n_, tu_, me_, si_,yyo_,EOM_, };  // さぎょういんつめしょ
+static const u8 KanashidaTunnel[] = {  KA_, NA_, SI_, DA_, TO_,  N_, NE_, RU_,EOM_, };  // カナシダトンネル
+static const u8 PokeBreeder[] = {  PO_, KE_, MO_,  N_, so_, da_, te_, ya_,EOM_, };  // ポケモンそだてや
+static const u8 SafariZoneGate[] =  {  SA_, HU_, AA_, RI_, ZO_,bou_,  N_, i_, ri_, gu_, ti_, EOM_, };  // サファリゾーンいりぐち
+static const u8 MtOkuribi[] =   {   o_, ku_, ri_, bi_, ya_, ma_,EOM_, };  // おくりびやま
+static const u8 CaveAsase[] =   {  a_, sa_, se_, no_, ho_, ra_, a_, na_, EOM_ };  // あさせのほらあな
+static const u8 CaveMarine[] =  {  ka_, i_, te_, i_, do_,  u_, ku_, tu_,EOM_, };  // かいていどうくつ
+static const u8 CaveStone[] =    {  i_, si_, no_, do_,  u_, ku_, tu_,EOM_, };  // いしのどうくつ
+static const u8 Current[] =     {  ka_,  i_, ri_,yyu_,  u_,EOM_, };  // かいりゅう
+static const u8 MayumiHouse[] = { MA_, YU_, MI_, no_, i_, e_, EOM_ }; // マユミのいえ
+static const u8 FireRoad[] = { ho_, no_, o_, no_, nu_, ke_, mi_, ti_, EOM_ }; // ほのおのぬけみち
+static const u8 DekobokoRoad[] = { DE_, KO_, BO_, KO_, sa_, n_, do_, u_, EOM_ }; // デコボコさんどう
+static const u8 SoraNoHashira[] = { so_, ra_, no_, ha_, si_, ra_, EOM_ }; // そらのはしら
+static const u8 KinomiMeijin[] = { ki_, no_, mi_, spc_, me_, i_, zi_, n_, no_, i_, e_, EOM_ }; // きのみ　めいじんのいえ
+
+static const u8 CaveKojima[] = {  ko_, zi_, ma_, no_, yo_, ko_,  a_, na_,EOM_, };  // こじまのよこあな
+static const u8 CaveRuin[] = {  sa_, ba_, ku_,  i_, se_, ki_,EOM_, };  // さばくいせき
+static const u8 CaveHideri[] = {  hi_, de_, ri_, no_,  i_, wa_, to_,EOM_, };  // ひでりのいわと
+static const u8 CaveKodaiduka[] = {  ko_, da_,  i_, du_, ka_,EOM_, };  // こだいづか
+static const u8 CaveOfure[] = {   o_, hu_, re_, no_, se_, ki_, si_, tu_,EOM_, };  // おふれのせきしつ
+static const u8 ManiaHouse[] = {  ka_, se_, ki_, MA_, NI_,  A_, no_,  i_,  e_,EOM_, };  // かせきマニアのいえ
+static const u8 HunterHouse[] = {  HA_,  N_, TA_,bou_, no_, ko_, ya_,EOM_, };  // ハンターのこや
+
+
+typedef struct {
+	const u8 *name;
+	u16       flag;
+}PLACE;
+
+static const  PLACE   Place_FlowerShop =  { FlowerShop,  SYS_ARRIVE_FROWERSHOP };
+static const  PLACE   Place_ToukaForest = { ToukaForest, 0xffff };
+static const  PLACE   Place_HagiHouse =   { HagiHouse,   SYS_ARRIVE_HAGIHOUSE };
+static const  PLACE   Place_ThrewShip =   { ThrewShip,   SYS_ARRIVE_JUNKSHIP };
+static const  PLACE   Place_MarineHouse = { MarineHouse, SYS_ARRIVE_MARINEHOUSE};
+static const  PLACE   Place_KainaBeach =  { KainaBeach,  0xffff };
+static const  PLACE   Place_CyclingRoad = { CyclingRoad, 0xffff };
+static const  PLACE   Place_NewKinsetsu = { NewKinsetsu, SYS_ARRIVE_NEWKINSETSU };
+static const  PLACE   Place_KarakuriYashiki = { KarakuriYashiki, SYS_ARRIVE_KARAKURIYASHIKI };
+static const  PLACE   Place_GenkiHouse =  { GenkiHouse,  SYS_ARRIVE_GENKIHOUSE };
+static const  PLACE   Place_Desert =      { Desert,      0xffff };
+static const  PLACE   Place_BattleFamily ={ BattleFamily,SYS_ARRIVE_BATTLEFAMILY };
+static const  PLACE   Place_RopewaySta =  { RopewaySta,  0xffff };
+static const  PLACE   Place_GrassShop =   { GrassShop,   SYS_ARRIVE_GRASSSHOP };
+static const  PLACE   Place_WeatherLabo = { WeatherLabo,  0xffff };
+static const  PLACE   Place_RyuseiFalls = { RyuseiFalls, 0xffff };
+static const  PLACE   Place_WorkerHouse = { WorkerHouse, SYS_ARRIVE_TUMESYO };
+static const  PLACE   Place_KanashidaTunnel = { KanashidaTunnel, 0xffff };
+static const  PLACE   Place_PokeBreeder = { PokeBreeder, SYS_ARRIVE_POKEMONBREEDER };
+static const  PLACE   Place_SafariZoneGate =  { SafariZoneGate, 0xffff };
+static const  PLACE   Place_MtOkuribi =   { MtOkuribi, 0xffff };
+static const  PLACE   Place_CaveAsase =   { CaveAsase, 0xffff };
+static const  PLACE   Place_CaveMarine =  { CaveMarine, SYS_ARRIVE_SUBMARINECAVE };
+static const  PLACE   Place_CaveStone =    { CaveStone, 0xffff };
+static const  PLACE   Place_Current =     { Current, 0xffff };
+static const  PLACE   Place_MayumiHouse = { MayumiHouse, SYS_ARRIVE_MAYUMIHOUSE };
+static const  PLACE   Place_FireRoad =     { FireRoad, SYS_ARRIVE_FIREROAD };
+static const  PLACE   Place_DekobokoRoad = { DekobokoRoad, 0xffff };
+static const  PLACE   Place_KinomiMeijin = { KinomiMeijin, SYS_ARRIVE_KINOMIMEIJIN };
+
+static const PLACE Place_CaveKojima = { CaveKojima, SYS_ARRIVE_YOKOANA };
+static const PLACE Place_CaveRuin = { CaveRuin, SYS_ARRIVE_ISEKI };
+static const PLACE Place_CaveHideri = { CaveHideri, SYS_ARRIVE_IWATO };
+static const PLACE Place_CaveKodaiduka = { CaveKodaiduka, SYS_ARRIVE_KODAIDUKA };
+static const PLACE Place_CaveOfure = { CaveOfure, SYS_ARRIVE_SEKISITSU };
+static const PLACE Place_ManiaHouse = { ManiaHouse, SYS_ARRIVE_KASEKIMANIA };
+static const PLACE Place_HunterHouse = { HunterHouse, SYS_ARRIVE_HUNTER };
+static const PLACE Place_SoraNoHashira = { SoraNoHashira, SYS_ARRIVE_SORANOHASHIRA };
+
+
+static const PLACE* const Place104_0[] = {
+	&Place_FlowerShop,
+	NULL,
+};
+static const PLACE * const Place104_1[] = {
+	&Place_ToukaForest,
+	&Place_HagiHouse,
+	NULL,
+};
+static const PLACE * const Place105_0[] = {
+	&Place_CaveKojima,
+	NULL,
+};
+static const PLACE * const Place106_1[] = {
+	&Place_CaveStone,
+	NULL,
+};
+static const PLACE * const Place108_0[] = {
+	&Place_ThrewShip,
+	NULL,
+};
+static const PLACE * const Place109_0[] = {
+	&Place_MarineHouse,
+	&Place_KainaBeach,
+	NULL,
+};
+static const PLACE * const Place110_0[] = {
+	&Place_CyclingRoad,
+	&Place_NewKinsetsu,
+	NULL,
+};
+static const PLACE * const Place110_1[] = {
+	&Place_CyclingRoad,
+	NULL,
+};
+static const PLACE * const Place110_2[] = {
+	&Place_CyclingRoad,
+	&Place_KarakuriYashiki,
+	NULL,
+};
+static const PLACE * const Place111_0[] = {
+	&Place_GenkiHouse,
+	NULL,
+};
+static const PLACE * const Place111_1[] = {  // 111_1,111_2,111_4 共通
+	&Place_Desert,
+	NULL,
+};
+static const PLACE * const Place111_3[] = {
+	&Place_CaveRuin,
+	&Place_Desert,
+	NULL,
+};
+static const PLACE * const Place111_4[] = {
+	&Place_BattleFamily,
+	&Place_Desert,
+	NULL,
+};
+static const PLACE * const Place112_0[] = {
+	&Place_FireRoad,
+	&Place_DekobokoRoad,
+	NULL,
+};
+static const PLACE * const Place112_1[] = {  // 112_1, D_ENTOTSU_1 共通
+	&Place_RopewaySta,
+	&Place_FireRoad,
+	NULL,
+};
+static const PLACE * const Place113_1[] = {
+	&Place_GrassShop,
+	NULL,
+};
+static const PLACE * const Place114_1[] = {
+	&Place_ManiaHouse,
+	NULL,
+};
+static const PLACE * const Place114_2[] = {
+	&Place_MayumiHouse,
+	NULL,
+};
+static const PLACE * const Place114_3[] = {  // 114_3, 115_0～115_1 共通
+	&Place_RyuseiFalls,
+	NULL,
+};
+static const PLACE * const Place116_1[] = {
+	&Place_WorkerHouse,
+	&Place_KanashidaTunnel,
+	NULL,
+};
+static const PLACE * const Place116_2[] = {
+	&Place_KanashidaTunnel,
+	NULL,
+};
+static const PLACE * const Place117_2[] = {
+	&Place_PokeBreeder,
+	NULL,
+};
+static const PLACE * const Place119_1[] = {
+	&Place_WeatherLabo,
+	NULL,
+};
+static const PLACE * const Place120_0[] = {
+	&Place_CaveHideri,
+	NULL,
+};
+static const PLACE * const Place120_2[] = {
+	&Place_CaveKodaiduka,
+	NULL,
+};
+static const PLACE * const Place121_2[] = {
+	&Place_SafariZoneGate,
+	NULL,
+};
+static const PLACE * const Place122_0[] = {  // 122_0～122_1 共通
+	&Place_MtOkuribi,
+	NULL,
+};
+static const PLACE * const Place123_0[] = {
+	&Place_KinomiMeijin,
+	NULL,
+};
+static const PLACE * const Place124_7[] = {
+	&Place_HunterHouse,
+	NULL,
+};
+static const PLACE * const Place125_2[] = {
+	&Place_CaveAsase,
+	NULL,
+};
+static const PLACE * const Place128_1[] = {
+	&Place_CaveMarine,
+	NULL,
+};
+static const PLACE * const Place131_1[] = {
+	&Place_SoraNoHashira,
+	NULL,
+};
+
+static const PLACE * const Place132_0[] = {  // 132_0～134_2 共通
+	&Place_Current,
+	NULL,
+};
+static const PLACE * const Place134_2[] = {
+	&Place_CaveOfure,
+	&Place_Current,
+	NULL,
+};
+
+static const PLACE * const PlaceEntotsu_2[] = {
+	&Place_RopewaySta,
+	&Place_DekobokoRoad,
+	NULL,
+};
+
+
+typedef struct {
+	u8 mapno;
+	u8 subno;
+	const PLACE * const * place;
+}INSTITUTION;
+
+
+// mapno 降順で並べること
+static const INSTITUTION InstitutionData[] = {
+	{  MAPPOS_R_104, 0, Place104_0 },
+	{  MAPPOS_R_104, 1, Place104_1 },
+	{  MAPPOS_R_105, 0, Place105_0 },
+	{  MAPPOS_R_106, 1, Place106_1 },
+	{  MAPPOS_R_108, 0, Place108_0 },
+	{  MAPPOS_R_109, 0, Place109_0 },
+	{  MAPPOS_R_110, 0, Place110_0 },
+	{  MAPPOS_R_110, 1, Place110_1 },
+	{  MAPPOS_R_110, 2, Place110_2 },
+	{  MAPPOS_R_111, 0, Place111_0 },
+	{  MAPPOS_R_111, 1, Place111_1 },
+	{  MAPPOS_R_111, 2, Place111_1 },
+	{  MAPPOS_R_111, 3, Place111_3 },
+	{  MAPPOS_R_111, 4, Place111_4 },
+	{  MAPPOS_R_112, 0, Place112_0 },
+	{  MAPPOS_R_112, 1, Place112_1 },
+	{  MAPPOS_R_113, 1, Place113_1 },
+	{  MAPPOS_R_114, 1, Place114_1 },
+	{  MAPPOS_R_114, 2, Place114_2 },
+	{  MAPPOS_R_114, 3, Place114_3 },
+	{  MAPPOS_R_115, 0, Place114_3 },
+	{  MAPPOS_R_115, 1, Place114_3 },
+	{  MAPPOS_R_116, 1, Place116_1 },
+	{  MAPPOS_R_116, 2, Place116_2 },
+	{  MAPPOS_R_117, 2, Place117_2 },
+	{  MAPPOS_R_119, 1, Place119_1 },
+	{  MAPPOS_R_120, 0, Place120_0 },
+	{  MAPPOS_R_120, 2, Place120_2 },
+	{  MAPPOS_R_121, 2, Place121_2 },
+	{  MAPPOS_R_122, 0, Place122_0 },
+	{  MAPPOS_R_123, 0, Place123_0 },
+	{  MAPPOS_R_122, 1, Place122_0 },
+	{  MAPPOS_R_124, 7, Place124_7 },
+	{  MAPPOS_R_125, 2, Place125_2 },
+	{  MAPPOS_R_128, 1, Place128_1 },
+	{  MAPPOS_R_131, 1, Place131_1 },
+	{  MAPPOS_R_132, 0, Place132_0 },
+	{  MAPPOS_R_132, 1, Place132_0 },
+	{  MAPPOS_R_133, 0, Place132_0 },
+	{  MAPPOS_R_133, 1, Place132_0 },
+	{  MAPPOS_R_133, 2, Place132_0 },
+	{  MAPPOS_R_134, 0, Place132_0 },
+	{  MAPPOS_R_134, 1, Place132_0 },
+	{  MAPPOS_R_134, 2, Place134_2 },
+	{  MAPPOS_D_ENTOTSU, 2, PlaceEntotsu_2 },
+	{  MAPPOS_END, 0, NULL },  // 終端
+};
+
+
+#endif

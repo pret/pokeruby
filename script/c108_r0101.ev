@@ -1,0 +1,247 @@
+//====================================================================
+//							c108_r0101
+//							ルネ・ジム
+//
+//	踏んでひびが入った氷の床の場所を覚えておく領域として
+//	プログラム中からLOCALWORK0～を使用している。
+//	スクリプト内で使用しないように注意すること。
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c108_r0101_event_data
+SP_SCRIPT_LABEL		sp_script_ice_event
+INIT_CTRL_LABEL		ev_effect_ice_effect
+BG_CHANGE_LABEL		ev_write_ice_step
+FLAG_CHANGE_LABEL	ev_init_ice_event
+EVENT_DATA_END
+
+
+#define ICE_STEP_CELL_ID	519
+
+#define	NUM_ICE_1ST		7+1
+#define	NUM_ICE_2ND		NUM_ICE_1ST+1+19
+#define NUM_ICE_3RD		NUM_ICE_2ND+1+40
+
+//--------------------------------------------------------------------
+//			FLAG_CHANGE_LABEL（マップ遷移時に一度だけ呼ばれる)
+//--------------------------------------------------------------------
+ev_init_ice_event:
+	/* 踏んだ氷のカウントを初期化 */
+	_LDVAL			WK_ICE_COUNT,1
+	_END
+
+
+//--------------------------------------------------------------------
+//			INIT_CTRL_LABEL（フィールド復帰時に毎回呼ばれる）
+//--------------------------------------------------------------------
+ev_effect_ice_effect:
+	/* 氷エフェクト常駐プログラムを追加 */
+	_SET_MAP_EFFECT	MAP_EFFECT_ICETRAP
+	_END
+
+
+//--------------------------------------------------------------------
+//			BG_CHANGE_LABEL（仮想マップ生成タイミングで呼ばれる）
+//--------------------------------------------------------------------
+ev_write_ice_step:
+	_CALL		_set_ice_step
+	_PROGRAM	SET_CRACKED_ICE	//ひび割れの反映
+	_END
+
+/* 踏んだ氷のカウントで階段の書き換え処理 */
+_set_ice_step:
+	_IFVAL_JUMP		WK_ICE_COUNT,LT,NUM_ICE_1ST,_set_ice_step_end
+	_IFVAL_JUMP		WK_ICE_COUNT,LT,NUM_ICE_2ND,_set_ice_step_1st
+	_IFVAL_JUMP		WK_ICE_COUNT,LT,NUM_ICE_3RD,_set_ice_step_2nd
+
+_set_ice_step_3rd:
+	_SET_CELL		8,4,ICE_STEP_CELL_ID,0
+	_SET_CELL		8,5,ICE_STEP_CELL_ID,0
+_set_ice_step_2nd:
+	_SET_CELL		8,10,ICE_STEP_CELL_ID,0
+	_SET_CELL		8,11,ICE_STEP_CELL_ID,0
+_set_ice_step_1st:
+	_SET_CELL		8,15,ICE_STEP_CELL_ID,0
+	_SET_CELL		8,16,ICE_STEP_CELL_ID,0
+_set_ice_step_end:
+	_RET
+
+
+//--------------------------------------------------------------------
+//			SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+SCRIPT_LABEL	sp_script_ice_event
+	SP_SCRIPT_DATA	WK_ICE_COUNT,NUM_ICE_1ST,ev_set_ice_step_1st
+	SP_SCRIPT_DATA	WK_ICE_COUNT,NUM_ICE_2ND,ev_set_ice_step_2nd
+	SP_SCRIPT_DATA	WK_ICE_COUNT,NUM_ICE_3RD,ev_set_ice_step_3rd
+	SP_SCRIPT_DATA	WK_ICE_COUNT,0			,ev_ice_trap_script
+	SP_SCRIPT_END
+
+/* 踏んだ氷の数で階段出現イベントを発生 */
+SCRIPT_LABEL	ev_set_ice_step_1st
+	_ADDWK		WK_ICE_COUNT,1
+
+	_TIME_WAIT	40
+	_SE			SE_RU_GASHIN
+	_CALL		_set_ice_step
+	_PROGRAM	MAKE_MAP_BG
+	_END
+
+SCRIPT_LABEL	ev_set_ice_step_2nd
+	_ADDWK		WK_ICE_COUNT,1
+
+	_TIME_WAIT	40
+	_SE			SE_RU_GASHIN
+	_CALL		_set_ice_step
+	_PROGRAM	MAKE_MAP_BG
+	_END
+
+SCRIPT_LABEL	ev_set_ice_step_3rd
+	_ADDWK		WK_ICE_COUNT,1
+
+	_TIME_WAIT	40
+	_SE			SE_RU_GASHIN
+	_CALL		_set_ice_step
+	_PROGRAM	MAKE_MAP_BG
+	_END
+
+SCRIPT_LABEL	ev_ice_trap_script
+	_TALK_START
+	_TIME_WAIT		20
+	_SET_OBJ_ANIME	EV_OBJ_SPID,_anm_ice_fall
+	_OBJ_ANIME_WAIT
+	_SE				SE_RU_HYUU
+	_TIME_WAIT		60
+
+	_MAP_CHANGE_FALL	C108,C108_R0102
+	_STOP_SCRIPT
+	_END
+
+_anm_ice_fall:
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_08_01
+	//戦闘へ
+	_LEADER_DATA_START
+	_TRAINER_DATA1	LEADERM_08
+	_TRAINER_DATA2	msg_gymleader_08_01
+	_TRAINER_DATA3	msg_gymleader_08_02
+	_TRAINER_DATA4	ev_gymleader_08_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシン貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_C108_R0101,gymleader_08_wazam_get
+
+	//バッチ０６を取得していなかったら
+	_IF_FLAGOFF_JUMP	SYS_BATCH06_GET,nothing_batch_01_p01_gymleader_08
+
+	_TALK_KEYWAIT	msg_gymleader_08_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_08_end:
+	_TALKMSG		msg_gymleader_08_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_08_04
+
+	_FLAG_SET		FT_GYM_08_LEADER
+	_FLAG_SET		SYS_BATCH08_GET			//バッチゲット
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,8
+	_CALL			gym_trainer_all_flagon
+
+	_JUMP			gymleader_08_wazam_get
+	_END
+
+//技マシン貰う
+gymleader_08_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN03,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_gymleader_08_05
+
+	_FLAG_SET		FE_WAZAM_01_C108_R0101	//技マシン貰った
+	_TALK_OBJ_END
+	_END
+
+//バッチ０６を取得していない
+nothing_batch_01_p01_gymleader_08:
+	_TALK_KEYWAIT	msg_gymleader_08_07
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_08_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_08_LEADER,ev_danpei_08_02
+
+	_TALK_KEYWAIT	msg_danpei_08_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_08_02:
+	_TALK_KEYWAIT	msg_danpei_08_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_c108_r0101
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH08_GET,batch_get_c108_r0101
+
+	_JUMP			batch_no_get_c108_r0101
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_c108_r0101
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH08_GET,batch_get_c108_r0101
+
+	_JUMP			batch_no_get_c108_r0101
+	_END
+
+//すでにリーダーを倒している
+batch_get_c108_r0101:
+	_TALK_KEYWAIT	msg_icon_01_p02_c108_r0101
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_c108_r0101:
+	_TALK_KEYWAIT	msg_icon_01_p01_c108_r0101
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,41 @@
+// ●キナギタウン　民家５（街の南東）
+
+// ●老人１　……　松宮作成
+// ●マボロシ島が出現していない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_t107_r0501
+msg_oldman1_01_p01_t107_r0501:
+	.byte	ki_,yyo_,u_,ha_,spc_,MA_,BO_,RO_,SI_,zi_,ma_,spc_,mi_,e_,n_,no_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マボロシ島が出現している
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_t107_r0501
+msg_oldman1_01_p02_t107_r0501:
+	.byte	na_,ttu_,spc_,na_,n_,to_,gyoe_
+	.byte	CR_
+	.byte	ki_,yyo_,u_,ha_,spc_,MA_,BO_,RO_,SI_,zi_,ma_,spc_,mi_,e_,ru_,no_,zi_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●現状、p1までの処理でいいと思います。
+
+
+// ●老紳士１　……　松宮作成
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_t107_r0501
+msg_gentlem1_01_p01_t107_r0501:
+	.byte	MA_,BO_,RO_,SI_,zi_,ma_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,so_,ra_,ku_,spc_,si_,n_,ki_,ro_,u_,no_,spc_,ka_,n_,ke_,i_,de_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,e_,ta_,ri_,spc_,mi_,e_,na_,ka_,ttu_,ta_,ri_,spc_,su_,ru_,n_,da_,ro_,u_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,hi_,yyo_,ttu_,to_,si_,ta_,ra_,spc_,ho_,n_,to_,u_,ni_
+	.byte	CR_
+	.byte	a_,ra_,wa_,re_,ta_,ri_,spc_,ki_,e_,ta_,ri_,spc_,si_,te_,i_,ru_,no_,ka_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

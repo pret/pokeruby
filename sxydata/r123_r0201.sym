@@ -1,0 +1,9 @@
+//MapEditNH Ver.3.50 *.evt -> *.sym Convert.
+
+//OBJ ID = 2
+#define OLDMAN1_01_KINOMI	1
+#define OLDWOMAN2_01_KONOMI	2
+
+//Exit ID = 2
+#define R123_R0201_MAT01	0
+#define R123_R0201_MAT02	1

@@ -1,0 +1,43 @@
+// ●シダケタウン　フレンドリィショップ
+
+
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_t106_fs01
+msg_boy2_01_p01_t106_fs01:
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,ni_
+	.byte	CR_
+	.byte	SU_,PE_,SI_,YYA_,RU_,A_,TTU_,PU_,ha_,spc_,ka_,ka_,se_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ta_,ka_,i_,no_,spc_,to_,ki_,da_,ke_,spc_,to_,ha_,i_,e_
+	.byte	CR_
+	.byte	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,a_,ga_,ru_,n_,da_,ka_,ra_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老婆１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_t106_fs01
+msg_oldwoman1_01_p01_t106_fs01:
+	.byte	KO_,N_,TE_,SU_,TO_,ni_,spc_,ka_,te_,ru_,yo_,u_,na_
+	.byte	CR_
+	.byte	do_,u_,gu_,ha_,spc_,u_,ttu_,te_,na_,i_,spc_,de_,su_,ne_,e_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ha_,ri_,spc_,hu_,da_,n_,ka_,ra_
+	.byte	CR_
+	.byte	da_,i_,zi_,ni_,spc_,so_,da_,te_,na_,i_,to_,spc_,DA_,ME_,na_,n_,de_,su_,ne_,e_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●学生女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolw1_01_p01_t106_fs01
+msg_schoolw1_01_p01_t106_fs01:
+	.byte	SI_,DA_,KE_,de_,si_,ka_,spc_,ka_,e_,na_,i_,spc_,NE_,SU_,TO_,BO_,bou_,RU_
+	.byte	CR_
+	.byte	yo_,wa_,i_,spc_,PO_,KE_,MO_,N_,ho_,do_,spc_,tu_,ka_,ma_,e_,spc_,ya_,su_,ku_,na_,ru_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,1353 @@
+// ●キンセツシティ　ポケモンセンター
+
+// ●でんせつオヤジ
+// ●＠０　……　指定の自分のカウント数
+// ●＠１　……　該当するmsg_legend_action、現在の記録
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p01_legend
+msg_oyaji_01_p01_legend:
+	.byte	wa_,si_,spc_,de_,n_,se_,tu_,o_,ya_,zi_
+	.byte	CR_
+	.byte	de_,n_,se_,tu_,no_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,su_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,no_,spc_,HA_,NA_,SI_,spc_,ki_,ki_,ta_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい／いいえ）の選択
+// ●「いいえ」なら　　　　　　　　　　　　　　　→msg_oyaji_01_p02_legend:
+// ●「はい」かつ「持ってるでんせつが１以上」なら→msg_oyaji_01_p03_legend:
+// ●「はい」だが「持ってるでんせつが０」なら　　→msg_oyaji_01_p04_legend:
+
+// ●「いいえ」なら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p02_legend
+msg_oyaji_01_p02_legend:
+	.byte	so_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」かつ「持ってるでんせつが１以上」なら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p03_legend
+msg_oyaji_01_p03_legend:
+	.byte	wa_,si_,ga_,spc_,si_,ttu_,te_,ru_,spc_,de_,n_,se_,tu_,ha_,spc_,ko_,re_,da_,ke_
+	.byte	CR_
+	.byte	do_,no_,spc_,de_,n_,se_,tu_,ga_,spc_,ki_,ki_,ta_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●おやじが持っているでんせつが一覧で出る。
+// ●キャンセルしたなら→msg_oyaji_01_p02_legend:
+// ●項目を選択　　　　→msg_oyaji_01_p10_legend_@@@
+// ●　　（@@@は、選んだ項目のmsg_legend_title_@@@）
+
+// ●「はい」だが「持ってるでんせつが０」なら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p04_legend
+msg_oyaji_01_p04_legend:
+	.byte	de_,mo_,spc_,wa_,si_,tenten_,tenten_
+	.byte	CR_
+	.byte	de_,n_,se_,tu_,no_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,mo_,spc_,si_,ra_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	do_,ko_,ka_,ni_,spc_,de_,n_,se_,tu_,ni_,spc_,no_,ko_,ru_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,i_,na_,i_,ka_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_oyaji_01_p07_legend:
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p05_legend
+msg_oyaji_01_p05_legend:
+	.byte	tenten_,tenten_,e_,gyoe_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,spc_,mo_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,spc_,no_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,u_,u_,mu_,spc_,so_,re_,ha_,spc_,su_,go_,i_,gyoe_
+	.byte	CR_
+	.byte	a_,ta_,ra_,si_,i_,spc_,de_,n_,se_,tu_,no_,spc_,ha_,zi_,ma_,ri_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の追加
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p06_legend
+msg_oyaji_01_p06_legend:
+	.byte	ko_,re_,yo_,ri_,spc_,mo_,ttu_,to_,su_,go_,i_
+	.byte	CR_
+	.byte	de_,n_,se_,tu_,wo_,spc_,mo_,ttu_,te_,ru_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ko_,ka_,ni_,spc_,i_,na_,i_,spc_,ka_,na_,a_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●おやじが持ってる伝説の数と、伝説を追加したフラグを確認
+// ●伝説の数が４未満で、追加フラグがＯＦＦなら　　→msg_oyaji_01_p07_legend:
+// ●伝説を４つ持ってる、または追加フラグがＯＮなら→msg_oyaji_01_p11_legend:
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p07_legend
+msg_oyaji_01_p07_legend:
+	.byte	tenten_,tenten_,ki_,mi_,spc_,TO_,RE_,bou_,NA_,bou_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,ta_,ra_,spc_,na_,ni_,ka_,spc_,de_,n_,se_,tu_,ttu_,po_,i_,spc_,ha_,na_,si_
+	.byte	CR_
+	.byte	ki_,ka_,se_,te_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい／いいえ）の選択
+// ●「いいえ」なら　　　　　　　　　　　→msg_oyaji_01_p02_legend:
+// ●「はい」なら、伝説ピックアップをして→msg_oyaji_01_p05_legend:
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p08_legend
+msg_oyaji_01_p08_legend:
+	.byte	to_,ko_,ro_,de_,tenten_
+	.byte	CR_
+	.byte	ma_,da_,spc_,de_,n_,se_,tu_,spc_,ki_,ki_,ta_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい／いいえ）の選択
+// ●「はい」ならば　→msg_oyaji_01_p03_legend:
+// ●「いいえ」ならば→msg_oyaji_01_p02_legend:
+
+// でんせつ追加のとき
+// 追加できるでんせつがないと・・・
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p09_legend
+msg_oyaji_01_p09_legend:
+	.byte	tenten_,tenten_,u_,bou_,n_,spc_,mo_,no_,ta_,ri_,na_,i_,spc_,na_,a_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ttu_,to_,spc_,su_,go_,i_,spc_,ha_,na_,si_,wo_
+	.byte	CR_
+	.byte	ki_,ka_,se_,te_,spc_,ho_,si_,i_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●伝説の数がすで４つ、もしくは追加済みで、追加できない！
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oyaji_01_p11_legend
+msg_oyaji_01_p11_legend:
+	.byte	mo_,ttu_,to_,spc_,ta_,ku_,sa_,n_,no_,spc_,hi_,to_,ni_
+	.byte	CR_
+	.byte	de_,n_,se_,tu_,no_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,i_,te_,spc_,ho_,si_,i_,na_,a_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■■■■■■■■■■■■■■■■■■■■■
+// ●
+// ●でんせつの種類メッセージ
+// ●
+// ■■■■■■■■■■■■■■■■■■■■■
+// ●＠０　……　現在の記録
+// ●＠２　……　記録保持者の名前
+
+// ●でんせつメニューの項目名→msg_legend_title_#:	
+// ●＠１に代入される文字列　→msg_legend_action_#:
+// ●でんせつの内容　　　　　→msg_oyaji_01_p10_legend_#:
+
+// ●でんせつ００：レポートを　かいた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_report
+msg_legend_title_report:
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,ki_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_report
+msg_legend_action_report:
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,i_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_report
+msg_oyaji_01_p10_legend_report:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,i_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ho_,do_,spc_,yo_,u_,zi_,n_,spc_,bu_,ka_,i_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,i_,na_,i_,spc_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+
+// ●でんせつ０２：りゅうこうを　つくった	
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_trend
+msg_legend_title_trend:
+	.byte	ri_,yyu_,u_,ko_,u_,spc_,ha_,ttu_,si_,n_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_trend
+msg_legend_action_trend:
+	.byte	ri_,yyu_,u_,ko_,u_,wo_,spc_,tu_,ku_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_trend
+msg_oyaji_01_p10_legend_trend:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	ri_,yyu_,u_,ko_,u_,wo_,spc_,u_,mi_,da_,si_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,so_,ga_,spc_,tu_,gi_,tu_,gi_,to_
+	.byte	CR_
+	.byte	HO_,U_,E_,N_,no_,spc_,ri_,yyu_,u_,ko_,u_,wo_,spc_,u_,mi_,da_,si_,te_,i_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ０３：きのみを　うえた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_nuts
+msg_legend_title_nuts:
+	.byte	ki_,no_,mi_,wo_,spc_,u_,e_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_nuts
+msg_legend_action_nuts:
+	.byte	ki_,no_,mi_,wo_,spc_,u_,e_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_nuts
+msg_oyaji_01_p10_legend_nuts:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	ki_,no_,mi_,wo_,spc_,u_,me_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,de_,n_,se_,tu_,no_
+	.byte	CR_
+	.byte	ki_,no_,mi_,spc_,zu_,ki_,spc_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ０４：じてんしゃを　こうかんした
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_bicycle_trade
+msg_legend_title_bicycle_trade:
+	.byte	zi_,te_,n_,si_,yya_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_bicycle_trade
+msg_legend_action_bicycle_trade:
+	.byte	zi_,te_,n_,si_,yya_,wo_,spc_,ko_,u_,ka_,n_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_bicycle_trade
+msg_oyaji_01_p10_legend_bicycle_trade:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,wo_,spc_,ko_,u_,ka_,n_,si_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,yo_,ho_,do_,no_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ０６：インタビューに　こたえた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_interview
+msg_legend_title_interview:
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,ni_,spc_,ko_,ta_,e_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_interview
+msg_legend_action_interview:
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,ni_,spc_,ko_,ta_,e_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_interview
+msg_oyaji_01_p10_legend_interview:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	I_,N_,TA_,BI_,YYU_,bou_,wo_,spc_,u_,ke_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,to_,te_,mo_
+	.byte	CR_
+	.byte	ti_,yyu_,u_,mo_,ku_,spc_,sa_,re_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ０９：しょうぶ　した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_trainer_battle
+msg_legend_title_trainer_battle:
+	.byte	si_,yyo_,u_,bu_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_trainer_battle
+msg_legend_action_trainer_battle:
+	.byte	si_,yyo_,u_,bu_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_rainer_battle
+msg_oyaji_01_p10_legend_rainer_battle:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,wo_,spc_,si_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,TO_,RE_,bou_,NA_,bou_,wo_,spc_,mi_,ru_,to_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,spc_,se_,zu_,ni_,spc_,o_,re_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１１：ポケモンを　つかまえた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_catch_poke
+msg_legend_title_catch_poke:
+	.byte	tu_,ka_,ma_,e_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_catch_poke
+msg_legend_action_catch_poke:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_catch_poke
+msg_oyaji_01_p10_legend_catch_poke:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,hi_,ki_,spc_,mo_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,so_,spc_,de_,n_,se_,tu_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,spc_,zi_,yyo_,u_,zu_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１２：ポケモンを　つった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_turi
+msg_legend_title_turi:
+	.byte	tu_,ri_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_turi
+msg_legend_action_turi:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_turi
+msg_oyaji_01_p10_legend_turi:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,hi_,ki_,spc_,mo_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ttu_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,so_,spc_,de_,n_,se_,tu_,no_
+	.byte	CR_
+	.byte	tu_,ri_,spc_,me_,i_,zi_,n_,spc_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１３：タマゴを　かえした
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_tamago
+msg_legend_title_tamago:
+	.byte	TA_,MA_,GO_,wo_,spc_,a_,ta_,ta_,me_,spc_,tu_,du_,ke_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_tamago
+msg_legend_action_tamago:
+	.byte	TA_,MA_,GO_,wo_,spc_,ka_,e_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_tamago
+msg_oyaji_01_p10_legend_tamago:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ko_,spc_,mo_,no_,spc_,TA_,MA_,GO_,wo_
+	.byte	CR_
+	.byte	ka_,e_,si_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,so_,spc_,de_,n_,se_,tu_,no_
+	.byte	CR_
+	.byte	TA_,MA_,GO_,spc_,a_,ta_,ta_,me_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１４：しんか　させた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_shinka
+msg_legend_title_shinka:
+	.byte	si_,n_,ka_,spc_,sa_,se_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_shinka
+msg_legend_action_shinka:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,si_,n_,ka_,spc_,sa_,se_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_shinka
+msg_oyaji_01_p10_legend_shinka:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,hi_,ki_,mo_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,si_,n_,ka_,spc_,sa_,se_,ta_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ko_,so_,spc_,sa_,i_,ko_,u_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,si_,n_,ka_,spc_,MA_,SU_,TA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１５：ポケセンで　かいふくした
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_kaifuku_pc
+msg_legend_title_kaifuku_pc:
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_kaifuku_pc
+msg_legend_action_kaifuku_pc:
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,de_,spc_,ka_,i_,hu_,ku_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_kaifuku_pc
+msg_oyaji_01_p10_legend_kaifuku_pc:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,de_,spc_,ka_,i_,hu_,ku_,spc_,si_,ta_,no_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ho_,do_,spc_,PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,ga_
+	.byte	CR_
+	.byte	su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,mo_,spc_,i_,na_,i_,spc_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１６：じぶんの　いえで　かいふく
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_kaifuku_home
+msg_legend_title_kaifuku_home:
+	.byte	sa_,to_,ga_,e_,ri_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_kaifuku_home
+msg_legend_action_kaifuku_home:
+	.byte	zi_,bu_,n_,no_,spc_,i_,e_,de_,spc_,ka_,i_,hu_,ku_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_kaifuku_home
+msg_oyaji_01_p10_legend_kaifuku_home:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	zi_,bu_,n_,no_,spc_,i_,e_,de_,spc_,ka_,i_,hu_,ku_,spc_,si_,ta_,no_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ho_,do_,spc_,sa_,to_,ga_,e_,ri_,ga_
+	.byte	CR_
+	.byte	su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,mo_,spc_,i_,na_,i_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１７：サファリゾーンに　はいった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_safari
+msg_legend_title_safari:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,ni_,spc_,i_,ri_,bi_,ta_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_safari
+msg_legend_action_safari:
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,ni_,spc_,ha_,i_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_safari
+msg_oyaji_01_p10_legend_safari:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	SA_,HU_,AA_,RI_,ZO_,bou_,N_,ni_,spc_,ha_,i_,ttu_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,SA_,HU_,AA_,RI_,ZO_,bou_,N_,de_,ha_
+	.byte	CR_
+	.byte	ya_,se_,i_,no_,spc_,ti_,ga_,spc_,sa_,wa_,gu_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１８：いあいぎりを　つかった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_iaigiri
+msg_legend_title_iaigiri:
+	.byte	i_,a_,i_,gi_,ri_,wo_,spc_,si_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_iaigiri
+msg_legend_action_iaigiri:
+	.byte	i_,a_,i_,gi_,ri_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_aigiri
+msg_oyaji_01_p10_legend_aigiri:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	i_,a_,i_,gi_,ri_,wo_,spc_,tu_,ka_,ttu_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,i_,a_,i_,gi_,ri_,ga_
+	.byte	CR_
+	.byte	su_,ki_,de_,spc_,si_,yyo_,u_,ga_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,na_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ１９：いわくだきを　つかった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_iwakudaki
+msg_legend_title_iwakudaki:
+	.byte	i_,wa_,wo_,spc_,ku_,da_,ka_,zu_,ni_,spc_,o_,re_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_iwakudaki
+msg_legend_action_iwakudaki:
+	.byte	i_,wa_,ku_,da_,ki_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_iwakudaki
+msg_oyaji_01_p10_legend_iwakudaki:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	i_,wa_,ku_,da_,ki_,wo_,spc_,tu_,ka_,ttu_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,i_,wa_,wo_,spc_,mi_,ta_,ra_
+	.byte	CR_
+	.byte	ku_,da_,ka_,zu_,ni_,spc_,o_,re_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,na_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ２０：ひみつきちを　ひっこし　した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_agittrans
+msg_legend_title_agittrans:
+	.byte	hi_,ttu_,ko_,si_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_agittrans
+msg_legend_action_agittrans:
+	.byte	hi_,ttu_,ko_,si_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_agittrans
+msg_oyaji_01_p10_legend_agittrans:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	hi_,mi_,tu_,ki_,ti_,wo_,spc_,hi_,ttu_,ko_,si_,spc_,si_,ta_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,hi_,ttu_,ko_,si_,ga_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,spc_,su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,na_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ２６：はねるを　つかった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_waza_haneru
+msg_legend_title_waza_haneru:
+	.byte	ha_,ne_,ma_,ku_,ri_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_waza_haneru
+msg_legend_action_waza_haneru:
+	.byte	ha_,ne_,ru_,wo_,spc_,tu_,ka_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_waza_haneru
+msg_oyaji_01_p10_legend_waza_haneru:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	ha_,ne_,ru_,wo_,spc_,tu_,ka_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,ha_,ne_,ru_,spc_,no_,ga_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,spc_,su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,na_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ２７：わるあがきを　つかった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_waza_waruagaki
+msg_legend_title_waza_waruagaki:
+	.byte	a_,ki_,ra_,me_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_waza_waruagaki
+msg_legend_action_waza_waruagaki:
+	.byte	wa_,ru_,a_,ga_,ki_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_waza_waruagaki
+msg_oyaji_01_p10_legend_waza_waruagaki:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	wa_,ru_,a_,ga_,ki_,wo_,spc_,si_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,do_,n_,na_,spc_,zi_,yyo_,u_,ki_,yyo_,u_,spc_,de_,mo_
+	.byte	CR_
+	.byte	ke_,ttu_,si_,te_,spc_,a_,ki_,ra_,me_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ２８：スロットで　おおあたり　した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_slot
+msg_legend_title_slot:
+	.byte	SU_,RO_,TTU_,TO_,no_,spc_,me_,i_,zi_,n_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_slot
+msg_legend_action_slot:
+	.byte	SU_,RO_,TTU_,TO_,de_,spc_,o_,o_,a_,ta_,ri_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_slot
+msg_oyaji_01_p10_legend_slot:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	SU_,RO_,TTU_,TO_,de_,spc_,o_,o_,a_,ta_,ri_,spc_,si_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,SU_,RO_,TTU_,TO_,MA_,SI_,N_,wo_
+	.byte	CR_
+	.byte	si_,ri_,tu_,ku_,si_,te_,spc_,i_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ２９：ルーレットを　れんぞくで　あてた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_roulette
+msg_legend_title_roulette:
+	.byte	RU_,bou_,RE_,TTU_,TO_,no_,spc_,me_,i_,zi_,n_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_roulette
+msg_legend_action_roulette:
+	.byte	RU_,bou_,RE_,TTU_,TO_,wo_,spc_,re_,n_,zo_,ku_,de_,spc_,a_,te_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_roulette
+msg_oyaji_01_p10_legend_roulette:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	RU_,bou_,RE_,TTU_,TO_,wo_,spc_,re_,n_,zo_,ku_,de_,spc_,a_,te_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,ha_,ttu_,ki_,ri_,spc_,i_,ttu_,te_
+	.byte	CR_
+	.byte	RU_,bou_,RE_,TTU_,TO_,wo_,spc_,mi_,ki_,ttu_,te_,i_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ３０：バトルタワーに　いどんだ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_tower_battle
+msg_legend_title_tower_battle:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,no_,spc_,ti_,yyo_,u_,se_,n_,si_,yya_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_tower_battle
+msg_legend_action_tower_battle:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_tower_battle
+msg_oyaji_01_p10_legend_tower_battle:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,i_,do_,n_,da_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,ni_
+	.byte	CR_
+	.byte	ko_,da_,wa_,ri_,wo_,spc_,mo_,ttu_,te_,i_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ３３：ポロックを　つくった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_cubemake
+msg_legend_title_cubemake:
+	.byte	BU_,RE_,N_,DO_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_cubemake
+msg_legend_action_cubemake:
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_cubemake
+msg_oyaji_01_p10_legend_cubemake:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	PO_,RO_,TTU_,KU_,wo_,spc_,tu_,ku_,ttu_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ni_,spc_,ki_,no_,mi_,BU_,RE_,N_,DA_,bou_,wo_
+	.byte	CR_
+	.byte	tu_,ka_,wa_,se_,ta_,ra_,spc_,mi_,gi_,ni_,spc_,de_,ru_,mo_,no_,ha_,spc_,na_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ３６：コンテストに　さんか　した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_contest
+msg_legend_title_contest:
+	.byte	KO_,N_,TE_,SU_,TO_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_contest
+msg_legend_action_contest:
+	.byte	KO_,N_,TE_,SU_,TO_,ni_,spc_,sa_,n_,ka_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_contest
+msg_oyaji_01_p10_legend_contest:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	KO_,N_,TE_,SU_,TO_,ni_,spc_,sa_,n_,ka_,spc_,si_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,zi_,bu_,n_,no_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	hi_,to_,ni_,spc_,mi_,se_,ru_,no_,ga_,spc_,da_,i_,su_,ki_,spc_,na_,n_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ３７：コンテストで　ゆうしょう　した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_contestwin
+msg_legend_title_contestwin:
+	.byte	KO_,N_,TE_,SU_,TO_,no_,spc_,ta_,tu_,zi_,n_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_contestwin
+msg_legend_action_contestwin:
+	.byte	KO_,N_,TE_,SU_,TO_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_contestwin
+msg_oyaji_01_p10_legend_contestwin:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	KO_,N_,TE_,SU_,TO_,de_,spc_,yu_,u_,si_,yyo_,u_,spc_,si_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,to_,te_,tu_,mo_,spc_,na_,i_
+	.byte	CR_
+	.byte	KO_,N_,TE_,SU_,TO_,spc_,MA_,SU_,TA_,bou_,spc_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ３８：かいものを　した
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_shoping
+msg_legend_title_shoping:
+	.byte	ka_,i_,mo_,no_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_shoping
+msg_legend_action_shoping:
+	.byte	ka_,i_,mo_,no_,wo_,spc_,si_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_shoping
+msg_oyaji_01_p10_legend_shoping:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	o_,mi_,se_,de_,spc_,ka_,i_,mo_,no_,wo_,spc_,si_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,o_,mi_,se_,ni_,spc_,ha_,i_,ru_,to_
+	.byte	CR_
+	.byte	tu_,i_,tu_,i_,spc_,ka_,i_,mo_,no_,spc_,su_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ３９：ダウジングマシンを　つかった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_dowsing
+msg_legend_title_dowsing:
+	.byte	DA_,U_,ZI_,N_,GU_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_dowsing
+msg_legend_action_dowsing:
+	.byte	DA_,U_,ZI_,N_,GU_,MA_,SI_,N_,wo_,spc_,tu_,ka_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_dowsing
+msg_oyaji_01_p10_legend_dowsing:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	DA_,U_,ZI_,N_,GU_,MA_,SI_,N_,wo_,spc_,tu_,ka_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_
+	.byte	CR_
+	.byte	sa_,ga_,si_,mo_,no_,ga_,spc_,da_,i_,su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４０：あめに　ふられた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_rain
+msg_legend_title_rain:
+	.byte	a_,me_,ni_,spc_,hu_,ra_,re_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_rain
+msg_legend_action_rain:
+	.byte	a_,me_,ni_,spc_,hu_,ra_,re_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_rain
+msg_oyaji_01_p10_legend_rain:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	a_,me_,de_,spc_,zu_,bu_,nu_,re_,ni_,spc_,na_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,mi_,zu_,mo_,spc_,si_,ta_,ta_,ru_
+	.byte	CR_
+	.byte	i_,i_,spc_,TO_,RE_,bou_,NA_,bou_,ttu_,te_,i_,u_,spc_,ka_,n_,zi_,spc_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４１：ずかんを　みた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_pokedex
+msg_legend_title_pokedex:
+	.byte	zu_,ka_,n_,de_,spc_,si_,ra_,be_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_pokedex
+msg_legend_action_pokedex:
+	.byte	zu_,ka_,n_,wo_,spc_,mi_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_pokedex
+msg_oyaji_01_p10_legend_pokedex:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	zu_,ka_,n_,wo_,spc_,mi_,ta_,spc_,so_,u_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,zu_,ka_,n_,de_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	si_,ra_,be_,ru_,no_,ga_,spc_,da_,i_,su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４２：リボンを　もらった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_ribbon
+msg_legend_title_ribbon:
+	.byte	RI_,BO_,N_,wo_,spc_,ta_,ku_,sa_,n_,spc_,a_,tu_,me_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_ribbon
+msg_legend_action_ribbon:
+	.byte	RI_,BO_,N_,wo_,spc_,mo_,ra_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_ribbon
+msg_oyaji_01_p10_legend_ribbon:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	RI_,BO_,N_,wo_,spc_,mo_,ra_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,RI_,BO_,N_,wo_,spc_,a_,tu_,me_,ru_,no_,ga_
+	.byte	CR_
+	.byte	to_,te_,mo_,spc_,da_,i_,su_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４３：だんさを　とびおりた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_jump
+msg_legend_title_jump:
+	.byte	da_,n_,sa_,wo_,spc_,to_,bi_,o_,ri_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_jump
+msg_legend_action_jump:
+	.byte	da_,n_,sa_,wo_,spc_,to_,bi_,o_,ri_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_jump
+msg_oyaji_01_p10_legend_jump:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	da_,n_,sa_,wo_,spc_,to_,bi_,o_,ri_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,da_,n_,sa_,wo_,spc_,mi_,ru_,to_
+	.byte	CR_
+	.byte	to_,bi_,o_,ri_,zu_,ni_,spc_,o_,re_,na_,i_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４４：テレビを　みた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_tv_watch
+msg_legend_title_tv_watch:
+	.byte	de_,n_,se_,tu_,no_,spc_,TE_,RE_,BI_,spc_,U_,OO_,TTU_,TI_,YYA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_tv_watch
+msg_legend_action_tv_watch:
+	.byte	TE_,RE_,BI_,wo_,spc_,mi_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_tv_watch
+msg_oyaji_01_p10_legend_tv_watch:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,wo_,spc_,mi_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_
+	.byte	CR_
+	.byte	TE_,RE_,BI_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４５：とけいを　みた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_clock_watch
+msg_legend_title_clock_watch:
+	.byte	zi_,ka_,n_,wo_,spc_,ki_,ni_,spc_,su_,ru_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_clock_watch
+msg_legend_action_clock_watch:
+	.byte	to_,ke_,i_,wo_,spc_,mi_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_clock_watch
+msg_oyaji_01_p10_legend_clock_watch:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	to_,ke_,i_,wo_,spc_,mi_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,zi_,ka_,n_,wo_,spc_,ki_,ni_,spc_,su_,ru_
+	.byte	CR_
+	.byte	ki_,ti_,yyo_,u_,me_,n_,na_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４６：ポケモンくじで　あたった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_poke_loto
+msg_legend_title_poke_loto:
+	.byte	PO_,KE_,MO_,N_,ku_,zi_,ni_,spc_,a_,ta_,ri_,ma_,ku_,ttu_,ta_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_poke_loto
+msg_legend_action_poke_loto:
+	.byte	PO_,KE_,MO_,N_,ku_,zi_,de_,spc_,a_,ta_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_poke_loto
+msg_oyaji_01_p10_legend_poke_loto:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ku_,zi_,de_,spc_,a_,ta_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,PO_,KE_,MO_,N_,wo_,spc_,ko_,u_,ka_,n_,spc_,su_,ru_
+	.byte	CR_
+	.byte	to_,mo_,da_,ti_,ga_,spc_,to_,te_,mo_,spc_,o_,o_,i_,spc_,TO_,RE_,bou_,NA_,bou_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４７：そだてやに　あずけた
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_sodateya
+msg_legend_title_sodateya:
+	.byte	so_,da_,te_,ya_,wo_,spc_,tu_,ka_,i_,ko_,na_,su_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_sodateya
+msg_legend_action_sodateya:
+	.byte	so_,da_,te_,ya_,ni_,spc_,PO_,KE_,MO_,N_,wo_,spc_,a_,zu_,ke_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_sodateya
+msg_oyaji_01_p10_legend_sodateya:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	so_,da_,te_,ya_,ni_,spc_,a_,zu_,ke_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,to_,ni_,ka_,ku_,spc_,so_,da_,te_,ma_,ku_,ru_
+	.byte	CR_
+	.byte	MO_,bou_,RE_,TU_,na_,spc_,TO_,RE_,bou_,NA_,bou_,ni_,spc_,ti_,ga_,i_,na_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４８：ロープウェイに　のった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_ropeway
+msg_legend_title_ropeway:
+	.byte	RO_,bou_,PU_,U_,EE_,I_,spc_,da_,i_,su_,ki_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_ropeway
+msg_legend_action_ropeway:
+	.byte	RO_,bou_,PU_,U_,EE_,I_,ni_,spc_,no_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_ropeway
+msg_oyaji_01_p10_legend_ropeway:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	RO_,bou_,PU_,U_,EE_,I_,ni_,spc_,no_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,u_,e_,ni_,spc_,si_,ta_,ni_,to_
+	.byte	CR_
+	.byte	o_,o_,i_,so_,ga_,si_,no_,spc_,TO_,RE_,bou_,NA_,bou_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:
+
+// ●でんせつ４９：おんせんに　はいった
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_legend_title_onsen
+msg_legend_title_onsen:
+	.byte	o_,n_,se_,n_,ni_,spc_,ka_,yo_,i_,du_,me_,no_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_legend_action_onsen
+msg_legend_action_onsen:
+	.byte	o_,n_,se_,n_,ni_,spc_,ha_,i_,ttu_,ta_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_oyaji_01_p10_legend_onsen
+msg_oyaji_01_p10_legend_onsen:
+	.byte	I_MSG_,STR_TEMP_BUF2,to_,i_,u_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,na_,si_,spc_,da_,ga_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,i_,mo_
+	.byte	CR_
+	.byte	o_,n_,se_,n_,ni_,spc_,ha_,i_,ttu_,ta_,spc_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF2,ha_,spc_,ki_,ttu_,to_
+	.byte	CR_
+	.byte	o_,ha_,da_,ga_,spc_,TU_,RU_,TU_,RU_,no_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,da_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●伝説の更新チェック
+// ●伝説を更新したなら→msg_oyaji_01_p05_legend:

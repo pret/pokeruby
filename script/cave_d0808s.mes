@@ -1,0 +1,406 @@
+// ●122番道路　おくりびやま頂上
+// ●サファイアver
+
+
+// ●アクア団員♂２６：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_26_01
+msg_aquam_26_01:
+	.byte	A_,KU_,A_,da_,n_,no_,spc_,ho_,n_,to_,u_,no_,spc_,o_,so_,ro_,si_,sa_
+	.byte	CR_
+	.byte	o_,ma_,e_,ni_,spc_,o_,si_,e_,te_,ya_,ru_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂２６：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_26_02
+msg_aquam_26_02:
+	.byte	na_,ru_,ho_,do_,spc_,hi_,to_,ri_,de_,spc_,A_,KU_,A_,da_,n_,ni_
+	.byte	CR_
+	.byte	sa_,ka_,ra_,o_,u_,ttu_,te_,spc_,wa_,ke_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂２６：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_26_03
+msg_aquam_26_03:
+	.byte	ta_,si_,ka_,ni_,spc_,o_,ma_,e_,ha_,spc_,tu_,yo_,i_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	da_,ke_,do_,spc_,o_,re_,ta_,ti_,ha_,spc_,ta_,ku_,sa_,n_,spc_,i_,ru_,n_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂２７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_27_01
+msg_aquam_27_01:
+	.byte	na_,n_,da_,spc_,o_,ma_,e_,hate_
+	.byte	CR_
+	.byte	ko_,do_,mo_,ga_,spc_,hi_,to_,ri_,de_,spc_,na_,ni_,si_,yo_,u_,spc_,ttu_,te_,n_,da_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂２７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_27_02
+msg_aquam_27_02:
+	.byte	ku_,so_,u_,spc_,tu_,yo_,i_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂２７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_27_03
+msg_aquam_27_03:
+	.byte	na_,ni_,mo_,spc_,si_,ra_,na_,i_,ku_,se_,ni_
+	.byte	CR_
+	.byte	o_,re_,ta_,ti_,no_,spc_,zi_,yya_,ma_,wo_,spc_,su_,ru_,n_,zi_,yya_,na_,i_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂２８：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_28_01
+msg_aquam_28_01:
+	.byte	o_,ma_,e_,tenten_,tenten_,spc_,e_,n_,to_,tu_,ya_,ma_,de_,spc_,a_,ttu_,ta_,na_,gyoe_
+	.byte	CR_
+	.byte	so_,no_,spc_,si_,ka_,e_,si_,spc_,sa_,se_,te_,mo_,ra_,u_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂２８：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_28_02
+msg_aquam_28_02:
+	.byte	gu_,gu_,gu_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,bou_,ta_,spc_,ko_,do_,mo_,ni_,spc_,ma_,ke_,ti_,ma_,ttu_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団員♂２８：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_28_03
+msg_aquam_28_03:
+	.byte	ma_,a_,i_,i_,sa_,spc_,zi_,ka_,n_,ha_,spc_,ka_,se_,ge_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	RI_,bou_,DA_,bou_,no_,spc_,mo_,ku_,te_,ki_,no_,spc_,mo_,no_
+	.byte	CR_
+	.byte	u_,ba_,e_,ta_,spc_,ha_,zu_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●アオギリ
+// ●主人公がＰＯＳを踏むと
+// 　主人公の上に移動して以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p01_cave_d0808s
+msg_aquaboss_01_p01_cave_d0808s:
+	.byte	A_,O_,GI_,RI_,kako2_,ma_,ta_,spc_,ki_,mi_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ni_,ha_,spc_,ko_,re_,ma_,de_,spc_,na_,n_,do_,mo_
+	.byte	CR_
+	.byte	zi_,yya_,ma_,wo_,spc_,sa_,re_,ta_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,n_,do_,spc_,ba_,ka_,ri_,ha_,spc_,o_,so_,ka_,ttu_,ta_,spc_,yo_,u_,da_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,o_,ku_,ri_,bi_,ya_,ma_,ni_,spc_,ma_,tu_,ra_,re_,te_,i_,ta_
+	.byte	CR_
+	.byte	be_,ni_,i_,ro_,no_,ta_,ma_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,si_,ka_,ni_,spc_,ko_,no_,spc_,A_,O_,GI_,RI_,ga_,spc_,i_,ta_,da_,i_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,HU_,HU_,tenten_,tenten_,spc_,ko_,re_,de_,spc_,wa_,ta_,si_,no_,spc_,mo_,ku_,te_,ki_,mo_
+	.byte	CR_
+	.byte	ta_,ttu_,se_,i_,spc_,de_,ki_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,gi_,ha_,spc_,KA_,I_,NA_,spc_,da_,gyoe_
+	.byte	CR_
+	.byte	i_,so_,gu_,zo_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面ブラックアウト
+// ●おくりびやまにいるマグマ団員のＯＢＪ、全て削除
+// ●カイナの船盗難イベントフラグ成立
+
+// ●画面復帰後、老婆が主人公に近づいて、以下のメッセージ展開
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_cave_d0808s
+msg_oldwoman1_01_p01_cave_d0808s:
+	.byte	a_,a_,spc_,na_,n_,to_,i_,u_,spc_,ko_,to_,zi_,yya_,tenten_,tenten_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	be_,ni_,i_,ro_,no_,ta_,ma_,spc_,ga_,tenten_,tenten_
+	.byte	CR_
+	.byte	u_,ba_,wa_,re_,te_,spc_,si_,ma_,u_,to_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	be_,ni_,i_,ro_,no_,ta_,ma_,spc_,to_,spc_,a_,i_,i_,ro_,no_,ta_,ma_,spc_,ga_
+	.byte	CR_
+	.byte	ha_,na_,re_,ba_,na_,re_,ni_,spc_,na_,ttu_,te_,spc_,si_,ma_,u_,na_,do_
+	.byte	SCROLL_WAIT_
+	.byte	ke_,ttu_,si_,te_,spc_,a_,ttu_,te_,ha_,spc_,na_,ra_,na_,i_,ko_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,tenten_,spc_,tenten_,tenten_,tenten_,spc_,tenten_,tenten_,tenten_
+	.byte	CR_
+	.byte	u_,u_,mu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,si_,gyoe_,spc_,o_,ma_,e_,sa_,n_,ni_,spc_,no_,ko_,sa_,re_,ta_
+	.byte	CR_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,wo_,spc_,a_,zu_,ke_,yo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,ttu_,ki_,no_,spc_,o_,to_,ko_,wo_,spc_,o_,i_,ka_,ke_,te_
+	.byte	CR_
+	.byte	ta_,ma_,wo_,spc_,to_,ri_,ka_,e_,si_,te_,spc_,o_,ku_,re_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム「あいいろのたま」（No277）入手。
+// 　これでフラグ20成立。
+// ●海底洞窟でカイオーガ覚醒まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_cave_d0808s
+msg_oldwoman1_01_p02_cave_d0808s:
+	.byte	o_,ma_,e_,sa_,n_,ni_,spc_,wa_,ta_,si_,ta_,spc_,a_,i_,i_,ro_,no_,ta_,ma_,to_
+	.byte	CR_
+	.byte	u_,ba_,wa_,re_,ta_,spc_,be_,ni_,i_,ro_,no_,ta_,ma_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,na_,re_,ba_,na_,re_,spc_,de_,ha_
+	.byte	CR_
+	.byte	ki_,ttu_,to_,spc_,yo_,ku_,na_,i_,ko_,to_,ga_,spc_,o_,ko_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●海底洞窟でカイオーガ覚醒から
+// 　目覚めの祠でのカイオーガとの戦闘が終わるまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p03_cave_d0808s
+msg_oldwoman1_01_p03_cave_d0808s:
+	.byte	so_,u_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	KA_,I_,O_,bou_,GA_,ga_,spc_,me_,za_,me_,ta_,no_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,tu_,te_,spc_,KA_,I_,O_,bou_,GA_,no_,spc_,i_,ka_,ri_,wo_
+	.byte	CR_
+	.byte	si_,zu_,me_,ta_,spc_,hu_,si_,gi_,na_,spc_,ta_,ma_,spc_,to_,i_,u_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	so_,no_,spc_,a_,i_,i_,ro_,no_,ta_,ma_,spc_,to_,i_,wa_,re_,te_,o_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,so_,no_,spc_,ta_,ma_,ga_,spc_,ho_,ri_,da_,sa_,re_,ta_,no_,ha_
+	.byte	CR_
+	.byte	RU_,NE_,ni_,a_,ru_,spc_,me_,za_,me_,no_,ho_,ko_,ra_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,I_,O_,bou_,GA_,to_,spc_,me_,za_,me_,no_,ho_,ko_,ra_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	na_,ni_,ka_,si_,ra_,spc_,ka_,n_,ke_,i_,ga_,spc_,a_,ru_,no_,ka_,mo_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●目覚めの祠でのカイオーガとの戦闘後から
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p04_cave_d0808s
+msg_oldwoman1_01_p04_cave_d0808s:
+	.byte	sa_,ttu_,ki_,no_,spc_,o_,to_,ko_
+	.byte	CR_
+	.byte	be_,ni_,i_,ro_,no_,ta_,ma_,wo_,spc_,ka_,e_,si_,ni_,spc_,ki_,yo_,ttu_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,sa_,n_,mo_
+	.byte	CR_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,wo_,spc_,ka_,e_,su_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の確認
+// ●「はい」　→msg_oldwoman1_01_p06_cave_d0808s:
+// ●「いいえ」→msg_oldwoman1_01_p05_cave_d0808s:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p05_cave_d0808s
+msg_oldwoman1_01_p05_cave_d0808s:
+	.byte	na_,n_,to_,gyoe_,hate_
+	.byte	CR_
+	.byte	ko_,no_,ma_,ma_,spc_,BA_,RA_,N_,SU_,ga_,spc_,ku_,zu_,re_,ta_,spc_,ma_,ma_,de_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,ga_,spc_,o_,ki_,ru_,ka_,spc_,wa_,ka_,ra_,n_,zo_,yo_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,sa_,n_
+	.byte	CR_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,wo_,spc_,mo_,do_,su_,zi_,yya_,ro_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_oldwoman1_01_p06_cave_d0808s:
+// ●「いいえ」→msg_oldwoman1_01_p05_cave_d0808s:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p06_cave_d0808s
+msg_oldwoman1_01_p06_cave_d0808s:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,ro_,u_,ba_,ni_
+	.byte	CR_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,wo_,spc_,wa_,ta_,si_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「あいいろのたま」削除
+// ●老婆、一度上を向いてから再度下を向き……
+// ●続けて、以下のメッセージを表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p07_cave_d0808s
+msg_oldwoman1_01_p07_cave_d0808s:
+	.byte	u_,mu_,tenten_,tenten_
+	.byte	CR_
+	.byte	n2_,tu_,no_,spc_,ta_,ma_,ha_,spc_,ko_,ko_,ni_,spc_,o_,i_,te_,o_,ko_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ga_,spc_,ko_,no_,HO_,U_,E_,N_,no_,spc_,ta_,me_,ni_,mo_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,spc_,yo_,i_,spc_,su_,ga_,ta_,spc_,da_,ro_,u_,te_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「あいいろのたま」を返して以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p08_cave_d0808s
+msg_oldwoman1_01_p08_cave_d0808s:
+	.byte	u_,mi_,no_,spc_,ke_,si_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,re_,ga_,spc_,KA_,I_,O_,bou_,GA_,no_,spc_,si_,yyo_,u_,ta_,i_,spc_,to_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	i_,wa_,re_,te_,o_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ra_,spc_,ni_,n_,ge_,n_,ya_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	i_,no_,ti_,ga_,spc_,a_,ru_,yo_,u_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,no_,spc_,u_,mi_,da_,ttu_,te_,spc_,i_,ki_,te_,i_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,I_,O_,bou_,GA_,ha_,spc_,wa_,si_,ta_,ti_,ni_,spc_,so_,no_,ko_,to_,wo_
+	.byte	CR_
+	.byte	o_,si_,e_,te_,spc_,ku_,re_,ta_,no_,zi_,yya_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_cave_d0808s
+msg_oldman2_01_p01_cave_d0808s:
+	.byte	o_,ku_,ri_,bi_,ya_,ma_,ha_,spc_,PO_,KE_,MO_,N_,no_,spc_,ta_,ma_,si_,i_,wo_
+	.byte	CR_
+	.byte	na_,gu_,sa_,me_,ru_,spc_,ta_,me_,no_,spc_,to_,ko_,ro_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ha_,spc_,ta_,ka_,i_,spc_,ba_,si_,yyo_,ni_,spc_,a_,ttu_,te_
+	.byte	CR_
+	.byte	HO_,U_,E_,N_,wo_,spc_,mi_,wa_,ta_,su_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ta_,ti_,no_,spc_,ta_,ma_,si_,i_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	ya_,su_,ra_,gi_,wo_,spc_,o_,bo_,e_,ru_,no_,spc_,zi_,yya_,ro_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ma_,e_,sa_,n_,ga_,spc_,ko_,ko_,ni_,spc_,ki_,ta_,no_,mo_
+	.byte	CR_
+	.byte	na_,ni_,ka_,no_,spc_,e_,n_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,ni_,spc_,tu_,ta_,wa_,ru_,spc_,ha_,na_,si_,wo_
+	.byte	CR_
+	.byte	ki_,i_,te_,spc_,i_,ki_,na_,sa_,re_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_oldman2_01_p02_cave_d0808s:
+// ●「いいえ」→msg_oldman2_01_p03_cave_d0808s:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p02_cave_d0808s
+msg_oldman2_01_p02_cave_d0808s:
+	.byte	to_,o_,i_,spc_,to_,o_,i_,spc_,o_,o_,mu_,ka_,si_,no_,spc_,ko_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	se_,ka_,i_,de_,ha_,spc_,u_,mi_,to_,spc_,ri_,ku_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	ha_,ge_,si_,i_,spc_,ta_,ta_,ka_,i_,wo_,spc_,ku_,ri_,hi_,ro_,ge_,te_,i_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	u_,mi_,no_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	a_,ra_,na_,mi_,wo_,spc_,o_,ko_,si_,te_,spc_,u_,mi_,wo_,spc_,hi_,ro_,ge_
+	.byte	NORMAL_WAIT_
+	.byte	ri_,ku_,no_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	da_,i_,ti_,wo_,spc_,mo_,ri_,a_,ge_,spc_,zi_,me_,n_,wo_,spc_,hi_,ro_,ge_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	n2_,hi_,ki_,no_,spc_,ta_,ta_,ka_,i_,ha_,spc_,o_,wa_,ru_,ko_,to_,na_,ku_
+	.byte	CR_
+	.byte	ko_,no_,spc_,se_,ka_,i_,ha_,spc_,mo_,e_,sa_,ka_,ru_,spc_,ho_,no_,o_,to_
+	.byte	SCROLL_WAIT_
+	.byte	hu_,ki_,a_,re_,ru_,spc_,a_,ra_,si_,de_,spc_,u_,me_,tu_,ku_,sa_,re_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,wo_,spc_,si_,zu_,me_,ta_,no_,ga_
+	.byte	CR_
+	.byte	a_,i_,i_,ro_,no_,ta_,ma_,spc_,to_,spc_,be_,ni_,i_,ro_,no_,ta_,ma_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ta_,tu_,no_,spc_,ta_,ma_,ka_,ra_,spc_,hi_,ro_,ga_,ru_,spc_,hi_,ka_,ri_,ga_
+	.byte	CR_
+	.byte	n2_,hi_,ki_,no_,spc_,i_,ka_,ri_,wo_,spc_,si_,zu_,me_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	so_,si_,te_,spc_,o_,to_,na_,si_,ku_,na_,ttu_,ta_,spc_,n2_,hi_,ki_,ha_
+	.byte	CR_
+	.byte	ka_,i_,te_,i_,spc_,hu_,ka_,ku_,spc_,mo_,gu_,ttu_,te_,i_,ki_
+	.byte	SCROLL_WAIT_
+	.byte	ya_,ga_,te_,spc_,so_,no_,su_,ga_,ta_,wo_,spc_,ke_,si_,ta_,no_,zi_,yya_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p03_cave_d0808s
+msg_oldman2_01_p03_cave_d0808s:
+	.byte	so_,u_,ka_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	ma_,a_,spc_,so_,re_,mo_,spc_,yo_,i_,zi_,yya_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// ●アオギリ
+// ●目覚めの祠でカイオーガと戦闘して以降、出現
+// ●主人公がＰＯＳを踏むと
+// 　主人公の上に移動して以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquaboss_01_p02_cave_d0808s
+msg_aquaboss_01_p02_cave_d0808s:
+	.byte	A_,O_,GI_,RI_,kako2_,ki_,mi_,ga_,tenten_,tenten_
+	.byte	CR_
+	.byte	KA_,I_,O_,bou_,GA_,wo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,su_,ga_,spc_,da_,na_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyo_,se_,n_,spc_,ni_,n_,ge_,n_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	u_,mi_,to_,spc_,da_,i_,ti_,no_,spc_,BA_,RA_,N_,SU_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,yu_,u_,ni_,spc_,a_,ya_,tu_,ru_,spc_,na_,n_,te_,spc_,de_,ki_,na_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ko_,ko_,ni_
+	.byte	CR_
+	.byte	be_,ni_,i_,ro_,no_,ta_,ma_,wo_,spc_,ka_,e_,si_,ni_,spc_,ki_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,ki_,mi_,to_,spc_,a_,u_,ko_,to_,ha_,spc_,na_,i_,da_,ro_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	sa_,ra_,ba_,spc_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アオギリ、画面下部へ歩いて去っていく……

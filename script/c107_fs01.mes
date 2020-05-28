@@ -1,0 +1,55 @@
+// ●トクサネシティ　フレンドリィショップ
+
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c107_fs01
+msg_trainerw1_01_p01_c107_fs01:
+	.byte	ge_,n_,ki_,no_,ka_,ke_,ra_,spc_,ttu_,te_,spc_,su_,go_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,wo_,spc_,a_,ta_,e_,ru_,to_
+	.byte	CR_
+	.byte	hi_,n_,si_,no_,spc_,PO_,KE_,MO_,N_,mo_,spc_,me_,za_,me_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,PA_,WA_,bou_,PO_,I_,N_,TO_,ha_
+	.byte	CR_
+	.byte	ka_,i_,hu_,ku_,spc_,si_,na_,i_,ka_,ra_,spc_,ki_,wo_,tu_,ke_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_c107_fs01
+msg_boy2_01_p01_c107_fs01:
+	.byte	GO_,bou_,RU_,DO_,SU_,PU_,RE_,bou_,ha_
+	.byte	CR_
+	.byte	yo_,wa_,i_,spc_,PO_,KE_,MO_,N_,wo_,spc_,yo_,se_,tu_,ke_,na_,i_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,zu_,a_,ru_,spc_,SU_,PU_,RE_,bou_,no_,spc_,na_,ka_,de_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,spc_,na_,ga_,mo_,ti_,spc_,su_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c107_fs01
+msg_seaman1_01_p01_c107_fs01:
+	.byte	NE_,TTU_,TO_,BO_,bou_,RU_,to_,spc_,DA_,I_,BU_,BO_,bou_,RU_,ha_
+	.byte	CR_
+	.byte	ko_,ko_,spc_,TO_,KU_,SA_,NE_,de_,si_,ka_,spc_,tu_,ku_,ttu_,te_,i_,na_,i_
+	.byte	SCROLL_WAIT_
+	.byte	me_,zu_,ra_,si_,i_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	NE_,TTU_,TO_,BO_,bou_,RU_,ha_,spc_,mu_,si_,TA_,I_,PU_,ya_
+	.byte	CR_
+	.byte	mi_,zu_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ko_,u_,ka_,te_,ki_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	DA_,I_,BU_,BO_,bou_,RU_,ha_,spc_,ka_,i_,te_,i_,ni_,spc_,i_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,spc_,ya_,su_,i_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

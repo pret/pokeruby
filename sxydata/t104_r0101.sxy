@@ -1,0 +1,96 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_T104_R0101	3
+#define EXITNUM_T104_R0101	2
+#define POSNUM_T104_R0101	0
+#define BGNUM_T104_R0101	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_drug_01_p01_t104_r0101[];
+extern const u8	ev_oldman2_01_p01_t104_r0101[];
+extern const u8	ev_oldman1_01_p01_t104_r0101[];
+
+const evObjData	OBJ_t104_r0101[] =
+{
+	{
+		WOMAN1_01_T104_R0101,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_drug_01_p01_t104_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OLDMAN2_01_T104_R0101,		//OBJ ID
+		OLDMAN2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman2_01_p01_t104_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		OLDMAN1_01_T104_R0101,		//OBJ ID
+		OLDMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_HON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_oldman1_01_p01_t104_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_t104_r0101[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_T104_DOOR01,		//Door ID
+		FIELD_T104,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_T104_DOOR01,		//Door ID
+		FIELD_T104,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	t104_r0101_sxy_data =
+{
+OBJNUM_T104_R0101,			// field obj max
+EXITNUM_T104_R0101,		// exit max
+POSNUM_T104_R0101,			// pos event max
+BGNUM_T104_R0101,			// bg event max
+OBJ_t104_r0101,			// field obj data
+EXIT_t104_r0101,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

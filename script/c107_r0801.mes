@@ -1,0 +1,189 @@
+// ●トクサネシティ：カードｅトレーナーとの戦闘小屋
+
+// ●カードｅトレーナーが入っていない場合
+// ●ジジイ（X-4,Y-4)：固定（右向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c107_r0801
+msg_oldman1_01_p01_c107_r0801:
+	.byte	wa_,si_,mo_,spc_,wa_,ka_,i_,ko_,ro_,ha_,spc_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,to_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	se_,ka_,i_,zi_,yyu_,u_,wo_,spc_,ta_,bi_,spc_,si_,te_,i_,ta_,no_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	ZI_,ZI_,I_,to_,na_,ttu_,ta_,spc_,i_,ma_,de_,ha_
+	.byte	CR_
+	.byte	wa_,ka_,i_,spc_,TO_,RE_,bou_,NA_,bou_,no_,spc_,si_,yyo_,u_,bu_,wo_,spc_,mi_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,i_,i_,tu_,no_,spc_,ta_,no_,si_,mi_,spc_,zi_,yya_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カードｅトレーナーが入っていない場合
+// ●トビラ（X-3,Y-1)：固定
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_tobira_01_p01_c107_r0801
+msg_tobira_01_p01_c107_r0801:
+	.byte	to_,bi_,ra_,ni_,ha_,spc_,ka_,gi_,ga_,spc_,ka_,ka_,ttu_,te_,spc_,i_,ru_,yo_,u_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●カードｅトレーナーが入っている場合
+// ●トビラのところ(X-3,Y-1)が、階段にチェンジ！
+// ●階段のマエ(X-3,Y-2)にジジイが立っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p02_c107_r0801
+msg_oldman1_01_p02_c107_r0801:
+	.byte	i_,ma_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,to_,i_,u_,spc_,TO_,RE_,bou_,NA_,bou_,ga_
+	.byte	CR_
+	.byte	wa_,si_,no_,spc_,i_,e_,ni_,spc_,ki_,te_,o_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,mi_,ta_,i_,no_,zi_,yya_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい・いいえ）の選択
+// ●「いいえ」の場合→msg_jiji_01_p03_c107_r0801:
+// ●「はい」の場合　→msg_jiji_01_p04_c107_r0801:
+
+// ●「いいえ」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p03_c107_r0801
+msg_oldman1_01_p03_c107_r0801:
+	.byte	si_,yyo_,u_,bu_,spc_,se_,n_,no_,ka_,tenten_,tenten_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,wo_,spc_,mi_,ra_,re_,na_,ku_,te_,spc_,GA_,TTU_,KA_,RI_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p04_c107_r0801
+msg_oldman1_01_p04_c107_r0801:
+	.byte	o_,o_,spc_,so_,u_,ka_,spc_,so_,u_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ga_,spc_,ko_,no_,spc_,i_,e_,ha_
+	.byte	CR_
+	.byte	a_,n_,ma_,ri_,spc_,ga_,n_,zi_,yyo_,u_,spc_,zi_,yya_,na_,i_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	se_,me_,te_,spc_,n3_,ta_,i_,n3_,no_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,ni_,spc_,si_,te_,spc_,ku_,re_,n_,ka_,no_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●３ｖｓ３に出すポケモンのセレクト（バトルタワーのものと同じ）
+// ●選択をキャンセルしたら→msg_oldman1_01_p03_c107_r0801:
+// ●選択が無事に終わったら→msg_oldman1_01_p05_c107_r0801:
+
+// ●ポケモン選択終了
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p05_c107_r0801
+msg_oldman1_01_p05_c107_r0801:
+	.byte	zi_,yya_,a_,spc_,si_,yyo_,u_,bu_,no_,spc_,ma_,e_,ni_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,i_,te_,spc_,o_,i_,ta_,ho_,u_,ga_,spc_,yo_,i_,zo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（はい・いいえ）の選択
+// ●「いいえ」の場合→msg_oldman1_01_p03_c107_r0801:
+// ●「はい」の場合　→セーブ処理
+// ●セーブ処理をキャンセルしたら→msg_oldman1_01_p03_c107_r0801:
+// ●セーブを完了したら　　　　　→msg_oldman1_01_p06_c107_r0801:
+
+// ●戦闘へ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p06_c107_r0801
+msg_oldman1_01_p06_c107_r0801:
+	.byte	yo_,i_,spc_,si_,yyo_,u_,bu_,wo_,spc_,ki_,ta_,i_,spc_,si_,te_,o_,ru_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ジジイがヨコに右に一歩動いて主人公、地下に降りていく
+// ●地下の部屋の(X-7,Y-5）の位置に左向きで、カードｅトレーナーのオブジェ
+// ●主人公は、階段を降りてきて（X-3,Y-5)の位置まで来て、右を向く
+// ●＠０＝カードｅトレーナーのあいさつ簡易会話
+// ●＠１＝カードｅトレーナーの名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_carde_01_p01_c107_r0802
+msg_carde_01_p01_c107_r0802:
+	.byte	I_MSG_,STR_TEMP_BUF0
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘開始！（バトルタワーの戦闘と同じ）
+// ●勝っても負けても、戦闘終了したらポケモンは回復
+// ●戦闘で勝ったら　→msg_carde_01_p02_c107_r0802:
+// ●戦闘で負けたら　→msg_carde_01_p03_c107_r0802:
+// ●引き分けだったら→msg_hikiwake_01_p01_c107_r0802:
+
+// ●引き分けだった！
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hikiwake_01_p01_c107_r0802
+msg_hikiwake_01_p01_c107_r0802:
+	.byte	si_,yyo_,u_,bu_,ha_,spc_,hi_,ki_,wa_,ke_,ni_,spc_,o_,wa_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●階段をのぼって、r0801の(X-3,Y-3)まで戻る
+// ●(X-4,Y-2)にいたジジイが、(X-3,Y-2)に移動
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p07_c107_r0801
+msg_oldman1_01_p07_c107_r0801:
+	.byte	hi_,ki_,wa_,ke_,spc_,zi_,yya_,ttu_,ta_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ta_,ga_,i_,spc_,i_,ttu_,po_,mo_,spc_,yu_,zu_,ra_,nu_
+	.byte	CR_
+	.byte	su_,ba_,ra_,si_,i_,spc_,si_,yyo_,u_,bu_,spc_,zi_,yya_,ttu_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナーに勝った！
+// ●＠０＝トレーナーの負けセリフ（簡易会話）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_carde_01_p02_c107_r0802
+msg_carde_01_p02_c107_r0802:
+	.byte	I_MSG_,STR_TEMP_BUF0
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●階段をのぼって、r0801の(X-3,Y-3)まで戻る
+// ●(X-4,Y-2)にいたジジイが、(X-3,Y-2)に移動
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p08_c107_r0801
+msg_oldman1_01_p08_c107_r0801:
+	.byte	mi_,go_,to_,spc_,zi_,yya_,ttu_,ta_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ru_,de_,spc_,wa_,si_,no_,spc_,wa_,ka_,i_,spc_,ko_,ro_,wo_
+	.byte	CR_
+	.byte	mi_,te_,i_,ru_,spc_,yo_,u_,zi_,yya_,wa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナーに負けた！
+// ●＠０＝トレーナーの勝ちセリフ（簡易会話）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_carde_01_p03_c107_r0802
+msg_carde_01_p03_c107_r0802:
+	.byte	I_MSG_,STR_TEMP_BUF0
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●階段をのぼって、r0801の(X-3,Y-3)まで戻る
+// ●(X-4,Y-2)にいたジジイが、(X-3,Y-2)に移動
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p09_c107_r0801
+msg_oldman1_01_p09_c107_r0801:
+	.byte	za_,n_,ne_,n_,spc_,zi_,yya_,ttu_,ta_,no_,u_
+	.byte	CR_
+	.byte	zi_,yya_,ga_,spc_,yo_,i_,spc_,si_,yyo_,u_,bu_,spc_,zi_,yya_,ttu_,ta_,zo_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,gi_,ko_,so_,ha_,spc_,ka_,te_,ru_,to_,spc_,yo_,i_,no_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

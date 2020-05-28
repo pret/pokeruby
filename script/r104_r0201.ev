@@ -1,0 +1,160 @@
+//=================================================================== 
+//							r104_r0201
+//					フラワーショップ　サン・トウカ
+//=================================================================== 
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	r104_r0201_event_data
+FLAG_CHANGE_LABEL	ev_goodsshop_open_r104_r0201
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//グッズショップオープンイベント
+ev_goodsshop_open_r104_r0201:
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_FROWERSHOP
+
+	//長女と話した
+	_IF_FLAGOFF_JUMP	FE_WOMAN1_01_R104_R0201,ev_goodsshop_close_r104_r0201
+
+	//キンセツバッチ取得していなかったら
+	_IF_FLAGOFF_JUMP	SYS_BATCH03_GET,ev_goodsshop_close_r104_r0201
+
+	//ショップが開く（入りなおした後に）
+	_FLAG_SET		FH_00
+
+	_END
+
+//ショップオープンしない
+ev_goodsshop_close_r104_r0201:
+	_SXY_POS_CHANGE	WOMAN1_01_R104_R0201,4,6	
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+/*							花屋の長女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_r104_r0201
+	_TALK_OBJ_START
+	
+	//グッズ屋チェック（FH_00がオンなら開く）	
+	_IF_FLAGON_JUMP	FH_00,ev_woman1_01_shopopen_r104_r0201
+
+	_TALK_KEYWAIT	msg_woman1_01_p01_r104_r0201
+
+	//すでに話しているか
+	_IF_FLAGON_JUMP	FE_WOMAN1_01_R104_R0201,ev_woman1_01_p03_r104_r0201
+
+	_FLAG_SET		FE_WOMAN1_01_R104_R0201
+
+	//初めて
+	_TALK_YES_NO	msg_woman1_01_p02_r104_r0201
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,yes_woman_01_p01_r104_r0201
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,no_woman_01_p01_r104_r0201
+	_TALK_OBJ_END
+	_END
+
+//すでに話している
+ev_woman1_01_p03_r104_r0201:
+	_TALK_YES_NO	msg_woman1_01_p03_r104_r0201
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,yes_woman_01_p01_r104_r0201
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,no_woman_01_p01_r104_r0201
+	_TALK_OBJ_END
+	_END
+
+//はい
+yes_woman_01_p01_r104_r0201:
+	_TALK_KEYWAIT	msg_woman1_01_p04_r104_r0201
+	_RET
+
+//いいえ
+no_woman_01_p01_r104_r0201:
+	_TALK_KEYWAIT	msg_woman1_01_p05_r104_r0201
+	_RET
+
+//長女話たことがあればショップが開く
+ev_woman1_01_shopopen_r104_r0201:
+	//○くん　いらっしゃい！
+	//おかいものね！
+	_TALKMSG		msg_shop_p04
+	_TALK_WAIT
+
+	_FLOWER_SHOP_START		r104_r0201_menu01
+	//ショップメニュー
+	_SHOP_MENU_START	r104_r0201_menu01
+	_SHOP_MENU		GOODS_MAKKANAUEKI	
+	_SHOP_MENU		GOODS_NANGOKUNOUEKI	
+	_SHOP_MENU		GOODS_KAWAIIHANA	
+	_SHOP_MENU		GOODS_KARAHURUNAUEKI	
+	_SHOP_MENU		GOODS_OKKINAUEKI	
+	_SHOP_MENU		GOODS_RIPPANAUEKI	
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							花屋の次女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl3_01_p01_r104_r0201
+	_TALK_OBJ_START
+
+	//ジョウロをまだもらっていない
+	_IF_FLAGOFF_JUMP	FE_ZYOURO_GET,ev_girl3_01_p03_r104_r0201
+
+	_TALK_KEYWAIT	msg_girl3_01_p02_r104_r0201
+	_TALK_OBJ_END
+	_END
+
+//ジョウロをまだもらってない
+ev_girl3_01_p03_r104_r0201:
+	_TALK_KEYWAIT	msg_girl3_01_p01_r104_r0201
+
+	_ITEM_EVENT		ITEM_HOERUKOZYOURO,1
+
+	_TALK_KEYWAIT	msg_girl3_01_p02_r104_r0201
+
+	_FLAG_SET		FE_ZYOURO_GET
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							花屋の三女								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_r104_r0201
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//一日一回
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT_07,ev_girl1_01_p02_r104_r0201
+
+	_TALK_KEYWAIT	msg_girl1_01_p01_r104_r0201
+
+	//1-8
+	_GET_RND		8
+	//_ADDWK			ANSWORK,1
+	_ADDWK			ANSWORK,ITEM_SEED_START
+	_ITEM_EVENT		ANSWORK,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		TMFLG_SEED_PRESENT_07
+	_TALK_KEYWAIT	msg_girl1_01_p02_r104_r0201
+	_TALK_OBJ_END
+	_END
+
+//一日一回アイテム貰った
+ev_girl1_01_p02_r104_r0201:
+	_TALK_KEYWAIT	msg_girl1_01_p02_r104_r0201
+	_TALK_OBJ_END
+	_END
+
+

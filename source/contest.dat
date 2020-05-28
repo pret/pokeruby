@@ -1,0 +1,347 @@
+//=========================================================================
+//
+//		コンテスト用データ
+//												2001.09.21(金)	by matsuda
+//=========================================================================
+
+//----------------------------------------------------------
+//	プレイヤー情報表示座標
+//----------------------------------------------------------
+//-- 持ちﾎﾟｹﾓﾝﾆｯｸﾈｰﾑ --//
+const u8 C_PokeNamePos[][2] = {
+	{19,0},		// X, Y
+	{19,5},
+	{19,10},
+	{19,15},
+};
+//-- ﾌﾞﾘｰﾀﾞｰ名 --//
+const u8 C_BreederPos[][2] = {
+	{25,0},
+	{25,5},
+	{25,10},
+	{25,15},
+};
+//-- 「じゅんい」 --//
+const u8 C_RankingPos[][2] = {
+	{20,2},
+	{20,7},
+	{20,12},
+	{20,17},
+};
+//-- 順位の結果 --//
+const u8 C_RankingNoPos[][2] = {
+	{24,2},
+	{24,7},
+	{24,12},
+	{24,17},
+};
+//-- ﾎﾟｹﾓﾝｱｲｺﾝ --//
+const u8 C_IconPos[][2] = {	//ここの座標だけ適当に(多分あってる?)あわせてる
+	{220, 20+4},
+	{220, 60+4},
+	{220,100+4},
+	{220,140+4},
+};
+//-- 順位ｱｲｺﾝ --//
+const u8 C_JyunniIconPos[][2] = {
+	{224,24},
+	{224,64},
+	{224,104},
+	{224,144},
+};
+//-- ハートアイコンのY座標 --//
+const u8 HeartIconYPos[] = {36+0*40, 36+1*40, 36+2*40, 36+3*40};
+
+//-- ソートアイコンのY座標 --//
+const u8 SortIconYPos[] = {36+0*40, 36+1*40, 36+2*40, 36+3*40};
+
+//----------------------------------------------------------
+//	技選択リスト　各技の名前座標
+//----------------------------------------------------------
+const u8 C_WazaList[4][2] = {
+	{2, 20+11},		// 20 = 次のｽｸﾘｰﾝまでの差分
+	{2, 20+13},
+	{2, 20+15},
+	{2, 20+17},
+};
+
+
+
+
+//=========================================================================
+//	トータルAPを示すハートのキャラクター
+//=========================================================================
+#if 0	// 2002.06.22(土)
+static const u8 heart_Character[32]={
+                                                        /*  0  =  0(0x0)  */
+	0x00,0x00,0x00,0x00,0xc0,0x0d,0xd0,0x0c,
+	0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,
+	0xcd,0xcc,0xcc,0xdc,0xd0,0xcc,0xcc,0x0d,
+	0x00,0xcd,0xdc,0x00,0x00,0xd0,0x0d,0x00,
+};
+
+static const u16 heart_Palette[16]={
+	0x7ff8,0x2fde,0x2339,0x5bff,0x0ed6,0x2909,0x7fff,0x4e73,
+	0x0000,0x0000,0x7fff,0x4a5f,0x31ff,0x001f,0x4a52,0x0000,
+};
+const PalData HeartIconPal={
+	(void *)heart_Palette,	CELLID_HEARTICON
+};
+#endif
+
+const CellData HeartIconCell={
+//	heart_Character, OBJ_SIZE16_8x8*1,	CELLID_HEARTICON
+	(void*)heart_icon_pch_ADRS, OBJ_SIZE16_8x8*1, CELLID_HEARTICON
+};
+static const ActOamData HeartIconOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	0,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	0,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	0,		//u32 Priority:2;         // 表示優先
+	0,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+#define HEARTICON_AFFLOOP	20
+#define HEARTICON_ADDAFF	10
+#define HEARTICON_ADDSEC	(-20)
+static const actAffAnm HeartIconAff0[] = {
+//	{ 拡縮x, 拡縮y, 角度, ｳｪｲﾄ }
+	{0x0100,0x0100,0,ACT_AFSET},
+	{ACT_AFEND, 0, 0, 0 },
+};
+static const actAffAnm HeartIconAff1[] = {	//小さくなる
+//	{ 拡縮x, 拡縮y, 角度, ｳｪｲﾄ }
+	{0x0100,0x0100,0,ACT_AFSET},
+	{-HEARTICON_ADDAFF, -HEARTICON_ADDAFF, HEARTICON_ADDSEC, HEARTICON_AFFLOOP},
+	{ACT_AFEND, 0, 0, 0 },
+};
+static const actAffAnm HeartIconAff2[] = {	//小さい状態から大きくする
+//	{ 拡縮x, 拡縮y, 角度, ｳｪｲﾄ }
+	{0x0100-HEARTICON_ADDAFF*HEARTICON_AFFLOOP,0x0100-HEARTICON_ADDAFF*HEARTICON_AFFLOOP,0,ACT_AFSET},
+	{HEARTICON_ADDAFF, HEARTICON_ADDAFF, -HEARTICON_ADDSEC, HEARTICON_AFFLOOP},
+	{ACT_AFEND, 0, 0, 0 },
+};
+static const actAffAnm * const HeartIconAffTbl[] = {
+	HeartIconAff0,
+	HeartIconAff1,
+	HeartIconAff2,
+};
+const actHeader HeartIconHeader={
+	CELLID_HEARTICON,
+	//CELLID_HEARTICON,
+	FUKIDASI_ID,
+	&HeartIconOamData,
+	DummyActAnmTbl,
+	0,
+	HeartIconAffTbl,
+	DummyActMove,
+};
+
+//=========================================================================
+//	順番表示アイコン
+//=========================================================================
+const CellData SortIconCell[]={
+	{(void*)tugi_pch_ADRS, OBJ_SIZE16_8x8*5, CELLID_SORTICON0},
+	{(void*)tugi_pch_ADRS, OBJ_SIZE16_8x8*5, CELLID_SORTICON1},
+	{(void*)tugi_pch_ADRS, OBJ_SIZE16_8x8*5, CELLID_SORTICON2},
+	{(void*)tugi_pch_ADRS, OBJ_SIZE16_8x8*5, CELLID_SORTICON3},
+};
+const PalData SortIconPal={
+	(void *)con_obj_pcl_ADRS,	CELLID_SORTICON0
+};
+static const ActOamData SortIconOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	1,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	1,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	0,		//u32 Priority:2;         // 表示優先
+	0,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+const actHeader SortIconHeader[]={
+	{
+		CELLID_SORTICON0,
+		CELLID_SORTICON0,
+		&SortIconOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+	{
+		CELLID_SORTICON1,
+		CELLID_SORTICON0,
+		&SortIconOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+	{
+		CELLID_SORTICON2,
+		CELLID_SORTICON0,
+		&SortIconOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+	{
+		CELLID_SORTICON3,
+		CELLID_SORTICON0,
+		&SortIconOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+};
+
+static const OAMPatData SortIconPatData[] = 
+{
+	{-20, -4, 1, 1, 0, 0},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+12, -4, 0, 0, 4, 0},
+};
+const OAMPatSt SortIconPat = {2, SortIconPatData};
+
+
+//=========================================================================
+//	ボルテージアイコン
+//=========================================================================
+const CellData VoltageIconCell={
+	(void*)voltage_pch_ADRS, OBJ_SIZE16_16x16*3, VOLTAGEICON_ID
+};
+static const ActOamData VoltageIconOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	0,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	1,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	0,		//u32 Priority:2;         // 表示優先
+	0,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+const actHeader VoltageIconHeader={
+	VOLTAGEICON_ID,
+	FUKIDASI_ID,
+	&VoltageIconOamData,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+//----------------------------------------------------------
+//	ボルテージゲージ
+//----------------------------------------------------------
+const CellData VoltageGaugeCell={
+	(void*)excite_pch_ADRS, OBJ_SIZE16_32x64, VOLTAGEGAUGE_ID
+};
+const PalData VoltageGaugePal={
+	(void *)con_obj_pcl_ADRS,	VOLTAGEGAUGE_ID
+};
+static const ActOamData VoltageGaugeOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	1,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	3,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	0,		//u32 Priority:2;         // 表示優先
+	0,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+const actHeader VoltageGaugeHeader={
+	VOLTAGEGAUGE_ID,
+	VOLTAGEGAUGE_ID,
+	&VoltageGaugeOamData,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+
+//=========================================================================
+//	審査員のOBJデータ
+//=========================================================================
+static const ActOamData JudgeOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	0,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	3,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	3,		//u32 Priority:2;         // 表示優先
+	2,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+
+const actHeader JudgeHeader={
+	CELLID_SINSAIN,
+	CELLID_SINSAIN,
+	&JudgeOamData,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+const CellData JudgeCell={
+	(void*)shinsain_pch_ADRS, OBJ_SIZE16_64x64*1,	CELLID_SINSAIN
+};
+
+
+//-- 審判のふきだしアイコン --//
+const CellData FukidasiCell = {
+	(void *)fukidasi_pch_ADRS,OBJ_SIZE16_16x16*7, FUKIDASI_ID
+};
+const PalData FukidasiPal = {
+	(void *)fukidasi_pcl_ADRS, FUKIDASI_ID
+};
+const	actHeader FukidasiHeader={
+	FUKIDASI_ID,
+	FUKIDASI_ID,
+	&WazaOamDataNormal[1],
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+

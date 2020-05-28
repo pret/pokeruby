@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define SHITEN4_01_C109_R0104	1
+
+//Exit ID = 2
+#define C109_R0104_MAT01	0
+#define C109_R0104_DOOR01	1

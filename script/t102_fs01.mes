@@ -1,0 +1,39 @@
+// ●コトキタウン　フレンドリィショップ
+
+
+// ●トレーナー女１
+// ●オダマキ博士からモンスターボールをもらうまで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_t102_fs01
+msg_trainerw1_01_p01_t102_fs01:
+	.byte	na_,n_,de_,mo_,spc_,u_,ri_,ki_,re_,spc_,ra_,si_,ku_,te_
+	.byte	CR_
+	.byte	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,spc_,ka_,e_,na_,i_,no_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●オダマキ博士からモンスターボールをもらってから
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p02_t102_fs01
+msg_trainerw1_01_p02_t102_fs01:
+	.byte	do_,n_,do_,n_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,spc_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	do_,n_,do_,n_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,ti_,yya_,u_,wa_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_t102_fs01
+msg_boy1_01_p01_t102_fs01:
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,ta_,i_,ri_,yyo_,ku_,ga_,spc_,na_,ku_,na_,ru_,to_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,u_,spc_,ge_,n_,ki_,mo_,spc_,na_,ku_,na_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,to_,ki_,ha_,spc_,KI_,ZU_,gu_,su_,ri_,wo_,spc_,tu_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	ta_,i_,ri_,yyo_,ku_,wo_,spc_,ka_,i_,hu_,ku_,spc_,si_,te_,a_,ge_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

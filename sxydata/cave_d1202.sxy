@@ -1,0 +1,75 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1202	0
+#define EXITNUM_CAVE_D1202	2
+#define POSNUM_CAVE_D1202	3
+#define BGNUM_CAVE_D1202	0
+
+//POS_SCRIPT
+extern const u8	shake_kodai_pokemon_01[];
+extern const u8	shake_kodai_pokemon_01[];
+extern const u8	shake_kodai_pokemon_01[];
+
+const SXY_CONNECT	EXIT_cave_d1202[] =
+{
+	{
+		0x000b,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		CAVE_D1201_DOOR02,		//Door ID
+		CAVE_D1201,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x000e,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		CAVE_D1203_DOOR01,		//Door ID
+		CAVE_D1203,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_cave_d1202[] =
+{
+	{
+		0x0007,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		LOCALWORK1,		//Event Type
+		0x00,		//Scene
+		shake_kodai_pokemon_01,		//Script
+	},
+
+	{
+		0x0006,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		LOCALWORK1,		//Event Type
+		0x00,		//Scene
+		shake_kodai_pokemon_01,		//Script
+	},
+
+	{
+		0x0005,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		LOCALWORK1,		//Event Type
+		0x00,		//Scene
+		shake_kodai_pokemon_01,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d1202_sxy_data =
+{
+OBJNUM_CAVE_D1202,			// field obj max
+EXITNUM_CAVE_D1202,		// exit max
+POSNUM_CAVE_D1202,			// pos event max
+BGNUM_CAVE_D1202,			// bg event max
+NULL,			// field obj data
+EXIT_cave_d1202,			// exit data
+POS_cave_d1202,			// pos event data
+NULL,				// bg event data
+};

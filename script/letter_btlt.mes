@@ -1,0 +1,496 @@
+// ●バトルタワー後のインタビュー
+// ●外に出たらインタビュアーがいる
+// ●
+// ●
+// ●バトルタワー終了後
+// ●インタビュアー女に話しかける
+// ●話かけるのが２回目以上だった場合→msg_interview_01_p09_btlt
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p01_btlt
+msg_interview_01_p01_btlt:
+	.byte	a_,gyoe_,spc_,i_,ma_,spc_,ta_,ta_,ka_,ttu_,te_,i_,ta_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ka_,ta_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,spc_,i_,ma_,spc_,i_,ro_,n_,na_,spc_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	ha_,na_,si_,wo_,spc_,ki_,i_,te_,spc_,ma_,wa_,ttu_,te_,ru_,n_,da_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ta_,ka_,i_,o_,wa_,ttu_,ta_,spc_,ka_,n_,so_,u_,wo_
+	.byte	CR_
+	.byte	su_,ko_,si_,da_,ke_,spc_,ki_,ka_,se_,te_,spc_,mo_,ra_,e_,ma_,se_,n_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「はい」の場合　→msg_interview_01_p02_btlt
+// ●「いいえ」の場合　→msg_interview_01_p03_btlt
+
+
+// ●「はい」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p02_btlt
+msg_interview_01_p02_btlt:
+	.byte	ho_,n_,to_,gyoe_,hate_
+	.byte	CR_
+	.byte	a_,ri_,ga_,to_,u_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	e_,ttu_,to_,spc_,so_,re_,zi_,yya_,a_,ne_,ee_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,ka_,i_,no_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,no_
+	.byte	CR_
+	.byte	ta_,i_,se_,n_,ha_,spc_,do_,u_,de_,si_,ta_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,n_,zo_,ku_,spc_,de_,si_,ta_,ka_,gyoe_
+	.byte	CR_
+	.byte	so_,re_,to_,mo_,spc_,hu_,ma_,n_,spc_,de_,su_,ka_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「まんぞく／ふまん」の選択。
+// ●「まんぞく」の場合　→msg_interview_01_p04_btlt
+// ●「ふまん」の場合　→msg_interview_01_p05_btlt
+
+
+
+// ●「いいえ」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p03_btlt
+msg_interview_01_p03_btlt:
+	.byte	a_,aa_,gyoe_
+	.byte	CR_
+	.byte	go_,me_,n_,na_,sa_,i_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ma_,ta_,ko_,n_,do_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	ki_,ka_,se_,te_,spc_,ku_,da_,sa_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終了
+
+
+// ●「まんぞく」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p04_btlt
+msg_interview_01_p04_btlt:
+	.byte	sa_,ttu_,su_,ga_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,ma_,n_,zo_,ku_,si_,ta_,spc_,ka_,o_,wo_,spc_,mi_,re_,ba_
+	.byte	CR_
+	.byte	do_,n_,na_,ni_,spc_,i_,i_,si_,a_,i_,da_,ttu_,ta_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ka_,ri_,ma_,su_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●受け答えのデータを取る
+// ●　→msg_interview_01_p06_btlt
+
+
+
+// ●「ふまん」の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p05_btlt
+msg_interview_01_p05_btlt:
+	.byte	u_,bou_,n_,spc_,so_,u_,de_,su_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,mo_,i_,do_,o_,ri_,ni_,spc_,si_,yyo_,u_,bu_,wo_,spc_,su_,ru_,no_,ttu_,te_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,spc_,mu_,zu_,ka_,si_,i_,spc_,de_,su_,ka_,ra_,ne_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●受け答えのデータを取る
+// ●　→msg_interview_01_p06_btlt
+
+
+
+// ●質問の次
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p06_btlt
+msg_interview_01_p06_btlt:
+	.byte	a_,aa_,ttu_,spc_,a_,to_
+	.byte	CR_
+	.byte	mo_,u_,spc_,hi_,to_,tu_,da_,ke_,spc_,i_,i_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,ta_,ta_,ka_,i_,no_,spc_,ka_,n_,so_,u_,wo_
+	.byte	CR_
+	.byte	hi_,to_,ko_,to_,de_,spc_,BI_,SI_,TTU_,to_,spc_,ki_,ka_,se_,te_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●簡易会話、一言を選んで感想を言います
+// ●　→msg_interview_01_p07_btlt
+// ●　何も書かなかった、もしくはやめるを選んだ→msg_interview_01_p08_btlt
+
+
+
+// ●簡易会話の次
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p07_btlt
+msg_interview_01_p07_btlt:
+	.byte	ka_,ttu_,ko_,i_,bou_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,i_,spc_,ki_,me_,ZE_,RI_,HU_,spc_,de_,su_,ne_
+	.byte	CR_
+	.byte	tu_,gi_,no_,spc_,ta_,ta_,ka_,i_,mo_,spc_,ki_,ta_,i_,spc_,si_,te_,ma_,su_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ＴＶデータを作り会話終了
+
+
+
+// ●簡易会話を入れなかった場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p08_btlt
+msg_interview_01_p08_btlt:
+	.byte	so_,u_,de_,su_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,na_,ni_,mo_,spc_,i_,wa_,na_,i_,no_,mo_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,ka_,ttu_,ko_,i_,i_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,zi_,yya_,a_,spc_,ma_,ta_,no_,spc_,ki_,ka_,i_,ni_
+	.byte	CR_
+	.byte	ka_,n_,so_,u_,wo_,spc_,ki_,ka_,se_,te_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終了
+// ●データは作られず
+
+
+
+// ●２回目以降の会話
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_interview_01_p09_btlt
+msg_interview_01_p09_btlt:
+	.byte	tu_,gi_,no_,spc_,ta_,ta_,ka_,i_,mo_
+	.byte	CR_
+	.byte	ki_,ta_,i_,spc_,si_,te_,ma_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終了
+
+
+
+
+// ●↓
+// ●↓
+// ●↓
+
+
+
+
+
+// ●ＴＶのバトルタワーの放送
+// ●＠０　主人公の名前
+// ●＠１　手持ちポケモン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_btlt
+msg_TV_01_p01_btlt:
+	.byte	I_,YA_,bou_,gyoe_
+	.byte	CR_
+	.byte	kako2_,BU_,RA_,BO_,bou_,spc_,TO_,RE_,bou_,NA_,bou_,kakot2_,no_,spc_,zi_,ka_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,ha_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,ti_,yyo_,u_,se_,n_,si_,ta_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,si_,yyo_,u_,ka_,i_,da_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ha_,spc_,I_MSG_,STR_TEMP_BUF1,wo_
+	.byte	CR_
+	.byte	tu_,ka_,ttu_,ta_,spc_,ta_,ta_,ka_,i_,wo_,si_,te_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●連勝数が７以上ならば→msg_TV_01_p02_btlt
+// ●連勝数が６以下ならば→msg_TV_01_p03_btlt
+
+
+
+// ●＠０　レベル
+// ●＠１　連勝数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_btlt
+msg_TV_01_p02_btlt:
+	.byte	na_,n_,to_,spc_,RE_,BE_,RU_,I_MSG_,STR_TEMP_BUF0,no_,spc_,he_,ya_,de_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,re_,n_,si_,yyo_,u_,spc_,to_,i_,u_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,ro_,ku_,wo_,spc_,u_,ti_,ta_,te_,ta_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●最後の戦いで勝った　→msg_TV_01_p04_btlt
+// ●最後の戦いで負けた　→msg_TV_01_p05_btlt
+
+
+// ●＠０　最後のトレーナーの名前
+// ●＠１　連勝数＋１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_btlt
+msg_TV_01_p03_btlt:
+	.byte	o_,si_,ku_,mo_,spc_,I_MSG_,STR_TEMP_BUF1,ni_,n_,me_,de_,spc_,ta_,ta_,ka_,ttu_,ta_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ni_,spc_,ma_,ke_,te_,spc_,si_,ma_,i_,ma_,si_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	u_,bou_,n_,gyoe_,spc_,za_,n_,ne_,n_,da_,ne_,ee_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,spc_,ko_,n_,na_,ha_,zi_,me_,ni_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ni_
+	.byte	CR_
+	.byte	a_,ta_,ru_,to_,ha_,spc_,u_,n_,ga_,na_,i_,to_,si_,ka_,spc_,i_,e_,na_,i_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,so_,no_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,to_,no_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,no_,spc_,ka_,n_,so_,u_,wo_,spc_,ki_,i_,ta_,to_,ko_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルタワー戦の感想が「まんぞく」だった　→msg_TV_01_p06_btlt
+// ●バトルタワー戦の感想が「ふまん」だった　→msg_TV_01_p07_btlt
+
+
+
+// ●＠０　最後のトレーナーの名前
+// ●＠１　最後のポケモンの種類
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_btlt
+msg_TV_01_p04_btlt:
+	.byte	sa_,i_,go_,ni_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,wo_,spc_,mi_,go_,to_,ni_,spc_,ta_,o_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,ri_,spc_,si_,ta_,n_,de_,su_,ne_,ee_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,ni_,spc_,ka_,tu_,na_,n_,te_
+	.byte	CR_
+	.byte	su_,go_,i_,to_,si_,ka_,spc_,i_,i_,yo_,u_,ga_,na_,i_,yo_,spc_,ma_,ttu_,ta_,ku_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,te_,spc_,so_,no_,si_,yyo_,u_,ri_,wo_,spc_,tu_,ka_,n_,da_
+	.byte	CR_
+	.byte	si_,yyu_,n_,ka_,n_,no_,spc_,ka_,n_,so_,u_,wo_,spc_,ki_,i_,ta_,to_,ko_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルタワー戦の感想が「まんぞく」だった　→msg_TV_01_p06_btlt
+// ●バトルタワー戦の感想が「ふまん」だった　→msg_TV_01_p07_btlt
+
+
+// ●＠０　最後のトレーナーの名前
+// ●＠１　最後のポケモンの種類
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_btlt
+msg_TV_01_p05_btlt:
+	.byte	si_,ka_,si_,spc_,sa_,i_,go_,ni_,spc_,to_,u_,zi_,yyo_,u_,si_,ta_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,I_MSG_,STR_TEMP_BUF1,ni_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,i_,ni_,spc_,ma_,ke_,te_,spc_,si_,ma_,ttu_,ta_,n_,de_,su_,ne_,ee_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,kako_,I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF1,kakot_
+	.byte	CR_
+	.byte	to_,i_,e_,ba_,spc_,yu_,u_,me_,i_,na_,spc_,KO_,N_,BI_,spc_,de_,su_,ka_,ra_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,sa_,te_,spc_,so_,no_,spc_,yu_,u_,me_,i_,zi_,n_,to_,no_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,no_,spc_,ka_,n_,so_,u_,wo_,spc_,ki_,i_,ta_,to_,ko_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルタワー戦の感想が「まんぞく」だった　→msg_TV_01_p06_btlt
+// ●バトルタワー戦の感想が「ふまん」だった　→msg_TV_01_p07_btlt
+
+
+
+// ●＠０　倒されたトレーナーの名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p06_btlt
+msg_TV_01_p06_btlt:
+	.byte	ma_,n_,zo_,ku_,spc_,si_,ta_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,spc_,su_,ga_,su_,ga_,si_,ku_,spc_,ko_,ta_,e_,te_,ku_,re_,ta_,yo_
+	.byte	CR_
+	.byte	sa_,su_,ga_,da_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,n_,zo_,ku_,i_,ku_,spc_,ta_,ta_,ka_,i_,ga_,spc_,de_,ki_,ru_,na_,n_,te_
+	.byte	CR_
+	.byte	ho_,n_,to_,spc_,su_,go_,i_,yo_,ne_,ee_,spc_,ma_,ttu_,ta_,ku_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,spc_,ma_,n_,zo_,ku_,ka_,n_,ha_,spc_,tu_,gi_,no_,spc_,hi_,to_,ko_,to_,wo_
+	.byte	CR_
+	.byte	ki_,i_,ta_,to_,ki_,spc_,su_,be_,te_,spc_,wa_,ka_,ttu_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし　プレイヤーがまだ　バトルタワーで記録を出していなかったら　→msg_TV_01_p12_btlt
+// ●もし　プレイヤーの連勝記録が　ＴＶの連勝記録とおなじなら→msg_TV_01_p12_btlt
+// ●もし　プレイヤーの連勝記録が　ＴＶの連勝記録より下なら　→msg_TV_01_p08_btlt
+// ●もし　プレイヤーの連勝記録が　ＴＶの連勝記録より上なら　→msg_TV_01_p09_btlt
+
+
+// ●＠０　倒されたトレーナーの名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p07_btlt
+msg_TV_01_p07_btlt:
+	.byte	hu_,ma_,n_,da_,ttu_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,spc_,bi_,mi_,yyo_,u_,ni_,spc_,o_,ti_,ko_,mi_,na_,ga_,ra_
+	.byte	CR_
+	.byte	ko_,ta_,e_,te_,spc_,ku_,re_,ta_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,ma_,a_,spc_,ma_,n_,zo_,ku_,i_,ku_,spc_,ta_,ta_,ka_,i_,ttu_,te_
+	.byte	CR_
+	.byte	na_,ka_,na_,ka_,de_,ki_,ru_,spc_,mo_,n_,zi_,yya_,na_,i_,ka_,ra_,ne_,bou_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,to_,ki_,no_,spc_,ku_,ya_,si_,sa_,ha_
+	.byte	CR_
+	.byte	tu_,gi_,no_,spc_,hi_,to_,ko_,to_,ga_,spc_,yo_,ku_,a_,ra_,wa_,si_,te_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●もし　プレイヤーがまだ　バトルタワーで記録を出していなかったら　→msg_TV_01_p12_btlt
+// ●もし　プレイヤーの連勝記録が　ＴＶの連勝記録とおなじなら→msg_TV_01_p12_btlt
+// ●もし　プレイヤーの連勝記録が　ＴＶの連勝記録より下なら　→msg_TV_01_p10_btlt
+// ●もし　プレイヤーの連勝記録が　ＴＶの連勝記録より上なら　→msg_TV_01_p11_btlt
+
+
+// ●自分の記録があるなら、それと比べる
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p08_btlt
+msg_TV_01_p08_btlt:
+	.byte	na_,si_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p12_btlt
+
+
+// ●自分の記録があるなら、それと比べる
+// ●＠０　主人公の名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p09_btlt
+msg_TV_01_p09_btlt:
+	.byte	na_,si_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p12_btlt
+
+
+// ●自分の記録があるなら、それと比べる
+// ●＠０　主人公の名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p10_btlt
+msg_TV_01_p10_btlt:
+	.byte	na_,si_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p12_btlt
+
+
+// ●自分の記録があるなら、それと比べる
+// ●＠０　主人公の名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p11_btlt
+msg_TV_01_p11_btlt:
+	.byte	na_,si_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p12_btlt
+
+
+// ●＠０　簡易文の１ワード
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p12_btlt
+msg_TV_01_p12_btlt:
+	.byte	so_,no_,spc_,ko_,to_,ba_,ha_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,gyoe_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バトルタワー戦の感想が「まんぞく」だった　→msg_TV_01_p13_btlt
+// ●バトルタワー戦の感想が「ふまん」だった　→msg_TV_01_p14_btlt
+
+
+
+// ●＠０　簡易文の１ワード
+// ●＠１　主人公の名前
+// ●＠２　最後のトレーナーの名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p13_btlt
+msg_TV_01_p13_btlt:
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,gyoe_,kakot_
+	.byte	CR_
+	.byte	u_,bou_,n_,spc_,spc_,i_,i_,spc_,ko_,to_,ba_,da_,ne_,ee_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,sa_,n_,no_,spc_,u_,re_,si_,sa_,wo_
+	.byte	CR_
+	.byte	ko_,no_,ko_,to_,ba_,ga_,spc_,yo_,ku_,spc_,a_,ra_,wa_,si_,te_,i_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,si_,ka_,ni_,spc_,I_MSG_,STR_TEMP_BUF2,sa_,n_,to_,no_,spc_,ta_,ta_,ka_,i_,ha_
+	.byte	CR_
+	.byte	ma_,sa_,ni_,spc_,kako_,I_MSG_,STR_TEMP_BUF0,kakot_,spc_,to_,i_,u_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,zi_,spc_,da_,ttu_,ta_,ka_,ra_,ne_,ee_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p15_btlt
+
+
+
+// ●＠０　簡易文の１ワード
+// ●＠１　主人公の名前
+// ●＠２　最後のトレーナーの名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p14_btlt
+msg_TV_01_p14_btlt:
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,gyoe_,kakot_
+	.byte	CR_
+	.byte	na_,ru_,ho_,do_,ne_,ee_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,si_,ka_,ni_,spc_,I_MSG_,STR_TEMP_BUF2,sa_,n_,to_,no_,spc_,ta_,ta_,ka_,i_,ha_
+	.byte	CR_
+	.byte	kako_,I_MSG_,STR_TEMP_BUF0,kakot_,spc_,to_,si_,ka_,spc_,i_,i_,yo_,u_,ga_,na_,i_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,ta_,ka_,i_,spc_,de_,si_,ta_,ka_,ra_,ne_,ee_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,sa_,n_,no_,spc_,ku_,ya_,si_,sa_,ga_
+	.byte	CR_
+	.byte	yo_,ku_,spc_,tu_,ta_,wa_,ttu_,te_,ku_,ru_,yo_,gyoe_,spc_,ku_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●→msg_TV_01_p15_btlt
+
+
+
+// ●＠０　主人公の名前
+// ●＠１　ポケモンの種類
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p15_btlt
+msg_TV_01_p15_btlt:
+	.byte	BU_,RA_,BO_,bou_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF0
+	.byte	CR_
+	.byte	BU_,RA_,BO_,bou_,gyoe_,gyoe_,spc_,I_MSG_,STR_TEMP_BUF1
+	.byte	NORMAL_WAIT_
+	.byte	ko_,n_,go_,no_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,ka_,tu_,ya_,ku_,ni_
+	.byte	CR_
+	.byte	ki_,ta_,i_,spc_,si_,ta_,i_,ne_,ee_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,zi_,yya_,a_,spc_,ma_,ta_,spc_,zi_,ka_,i_,no_
+	.byte	CR_
+	.byte	ho_,u_,so_,u_,de_,spc_,a_,i_,ma_,si_,yyo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　終了
+

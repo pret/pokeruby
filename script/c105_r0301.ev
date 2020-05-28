@@ -1,0 +1,81 @@
+//====================================================================
+//							c105_r0301
+//							ヒワマキ・r0301
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c105_r0301_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							老婆１									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_c105_r0301
+	_TALK_OBJ_START
+
+	//アイテム貰っているか
+	_IF_FLAGON_JUMP	FE_WAZAM10_GET,ev_oldwoman1_01_p07_c105_r0301
+
+	//初回のみのメッセージ
+	_IF_FLAGOFF_CALL	FE_WOMAN1_01_C105_R0301,first_mes_oldwoman1_c105_r0301
+
+	//"えらんで　みなさい”(コイン選択１）
+	_TALK_KEYWAIT	msg_oldwoman1_01_p02_c105_r0301			
+
+	_SELECT_WINDOW	21,8,RIGHT_LEFT_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP		1,ev_oldwoman1_01_p06_c105_r0301
+
+	//"えらんで　みなさい”(コイン選択2）
+	_TALK_KEYWAIT	msg_oldwoman1_01_p03_c105_r0301			
+
+	_SELECT_WINDOW	21,8,RIGHT_LEFT_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP		1,ev_oldwoman1_01_p06_c105_r0301
+
+	//"えらんで　みなさい”(コイン選択3）
+	_TALK_KEYWAIT	msg_oldwoman1_01_p04_c105_r0301			
+
+	_SELECT_WINDOW	21,8,RIGHT_LEFT_MENU,1
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,ev_oldwoman1_01_p06_c105_r0301
+
+	//”おお！　みごと　じゃ！”
+	_TALK_KEYWAIT	msg_oldwoman1_01_p05_c105_r0301
+
+	_ITEM_EVENT		ITEM_WAZAMASIN10,1			//めざめるパワー item No298
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM10_GET
+
+	_TALK_KEYWAIT	msg_oldwoman1_01_p07_c105_r0301
+	_TALK_OBJ_END
+	_END
+
+
+//初回のみのメッセージ
+first_mes_oldwoman1_c105_r0301:
+	_TALK_KEYWAIT	msg_oldwoman1_01_p01_c105_r0301
+	_FLAG_SET		FE_WOMAN1_01_C105_R0301
+	_RET
+
+//アイテムすでに貰っている
+ev_oldwoman1_01_p07_c105_r0301:
+	_TALK_KEYWAIT	msg_oldwoman1_01_p07_c105_r0301
+	_TALK_OBJ_END
+	_END
+
+//はずれ
+ev_oldwoman1_01_p06_c105_r0301:
+	_TALK_KEYWAIT	msg_oldwoman1_01_p06_c105_r0301
+	_TALK_OBJ_END
+	_END
+
+

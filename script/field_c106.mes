@@ -1,0 +1,793 @@
+// ●ミナモシティ　フィールド
+
+
+// ●サポートキャラ♀「ハルカ」
+// ●デパート入口の前（Ｘ２７・Ｙ７）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p01_field_c106
+msg_heroine_01_p01_field_c106:
+	.byte	HA_,RU_,KA_,kako2_,a_,ra_,gyoe_,hate_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,mo_,spc_,o_,ka_,i_,mo_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,nu_,i_,gu_,ru_,mi_,to_,ka_,spc_,PO_,SU_,TA_,bou_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,spc_,ka_,ttu_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,ti_,ro_,n_,spc_,PO_,KE_,MO_,N_,spc_,i_,ttu_,pa_,i_,spc_,tu_,ka_,ma_,e_,ta_,si_
+	.byte	CR_
+	.byte	ti_,yya_,n_,to_,spc_,so_,da_,te_,te_,spc_,i_,ru_,n_,da_,ka_,ra_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,si_,spc_,to_,si_,te_,ha_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ga_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,ru_,ka_,spc_,si_,n_,pa_,i_,spc_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,te_,a_,ge_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,no_,spc_,PO_,KE_,MO_,N_,spc_,mi_,se_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」
+// ●「はい」　→msg_heroine_01_p04_field_c106:
+// ●「いいえ」→msg_heroine_01_p02_field_c106:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p02_field_c106
+msg_heroine_01_p02_field_c106:
+	.byte	HA_,RU_,KA_,kako2_,e_,bou_,spc_,na_,n_,de_,hate_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,i_,na_,i_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,zi_,yya_,a_,spc_,TO_,RE_,bou_,NA_,bou_,to_,si_,te_
+	.byte	CR_
+	.byte	ma_,da_,ma_,da_,spc_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p03_field_c106
+msg_heroine_01_p03_field_c106:
+	.byte	HA_,RU_,KA_,kako2_,si_,yyo_,u_,bu_,spc_,si_,te_,a_,ge_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,no_,spc_,PO_,KE_,MO_,N_,spc_,mi_,se_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」
+// ●「はい」　→msg_heroine_01_p04_field_c106:
+// ●「いいえ」→msg_heroine_01_p02_field_c106:
+
+// ●戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p04_field_c106
+msg_heroine_01_p04_field_c106:
+	.byte	HA_,RU_,KA_,kako2_,a_,ta_,si_,no_,spc_,so_,da_,te_,ta_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,no_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ke_,ru_,wa_,ke_,spc_,na_,i_,n_,da_,ka_,ra_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘突入
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p05_field_c106
+msg_heroine_01_p05_field_c106:
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	n1_,n0_,n3_,ba_,n_,spc_,do_,u_,ro_,de_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,ta_,ko_,to_
+	.byte	SCROLL_WAIT_
+	.byte	o_,mo_,i_,da_,si_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,no_,spc_,si_,yyo_,u_,bu_,ga_,spc_,a_,ttu_,ta_,ka_,ra_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ko_,ko_,ma_,de_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,yo_,ku_,spc_,na_,ttu_,ta_,n_,da_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘後メッセージ、自動で表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p06_field_c106
+msg_heroine_01_p06_field_c106:
+	.byte	HA_,RU_,KA_,kako2_,a_,ta_,si_,spc_,so_,ro_,so_,ro_
+	.byte	CR_
+	.byte	MI_,SI_,RO_,TA_,U_,N_,ni_,spc_,ka_,e_,ru_,spc_,tu_,mo_,ri_,na_,no_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,i_,ro_,spc_,PO_,KE_,MO_,N_,spc_,tu_,ka_,ma_,e_,te_
+	.byte	CR_
+	.byte	zu_,ka_,n_,mo_,spc_,ke_,ttu_,ko_,u_,spc_,de_,ki_,te_,ki_,ta_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	o_,to_,u_,sa_,n_,ni_,spc_,mi_,se_,ru_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて……
+// ●バッジ８個入手前→msg_heroine_01_p07_field_c106:
+// ●バッジ８個入手後→msg_heroine_01_p08_field_c106:
+// ●ゲームクリア後　→msg_heroine_01_p09_field_c106:
+
+// ●バッジ８個入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p07_field_c106
+msg_heroine_01_p07_field_c106:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ha_,spc_,do_,u_,su_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ti_,ko_,ti_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_,wo_,spc_,a_,tu_,me_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,a_,ta_,si_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ga_
+	.byte	CR_
+	.byte	BA_,TTU_,ZI_,wo_,spc_,a_,tu_,me_,te_,i_,ru_,spc_,a_,i_,da_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,wo_,spc_,ka_,n_,se_,i_,spc_,sa_,se_,ti_,yya_,o_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ●バッジ８個入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p08_field_c106
+msg_heroine_01_p08_field_c106:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ha_,spc_,do_,u_,su_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,to_,mo_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,se_,i_,spc_,sa_,se_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,zi_,yya_,spc_,ma_,ke_,ti_,yya_,ttu_,ta_,ke_,do_
+	.byte	CR_
+	.byte	zu_,ka_,n_,ha_,spc_,a_,ta_,si_,no_,spc_,ho_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ki_,ni_,spc_,ka_,n_,se_,i_,spc_,sa_,se_,ru_,n_,da_,ka_,ra_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ●ゲームクリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_heroine_01_p09_field_c106
+msg_heroine_01_p09_field_c106:
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ha_,spc_,do_,u_,su_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,to_,mo_,spc_,PO_,KE_,MO_,N_,zu_,ka_,n_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,se_,i_,spc_,sa_,se_,ru_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,spc_,zi_,yya_,spc_,ma_,ke_,ti_,yya_,ttu_,ta_,ke_,do_
+	.byte	CR_
+	.byte	zu_,ka_,n_,ha_,spc_,a_,ta_,si_,no_,spc_,ho_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ki_,ni_,spc_,ka_,n_,se_,i_,spc_,sa_,se_,ru_,n_,da_,ka_,ra_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●サポートキャラ♂「ユウキ」
+// ●デパート入口の前（Ｘ２７・Ｙ７）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p01_field_c106
+msg_hero_01_p01_field_c106:
+	.byte	YU_,U_,KI_,kako2_,na_,n_,da_,spc_,I_MSG_,MY_NAME_BUF,ka_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,spc_,to_,u_,sa_,n_,ni_,spc_,ta_,no_,ma_,re_,ta_
+	.byte	CR_
+	.byte	ka_,i_,mo_,no_,wo_,spc_,si_,te_,ta_,n_,da_
+	.byte	SCROLL_WAIT_
+	.byte	be_,tu_,ni_,spc_,nu_,i_,gu_,ru_,mi_,spc_,na_,n_,ka_,spc_,ka_,ttu_,te_,na_,i_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,yo_,ri_,mo_,spc_,hi_,sa_,si_,bu_,ri_,ni_,spc_,a_,ttu_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	do_,ttu_,ti_,ga_,spc_,u_,ma_,ku_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,i_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,te_,ya_,ro_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」
+// ●「はい」　→msg_hero_01_p04_field_c106:
+// ●「いいえ」→msg_hero_01_p02_field_c106:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p02_field_c106
+msg_hero_01_p02_field_c106:
+	.byte	YU_,U_,KI_,kako2_,na_,n_,da_,yo_
+	.byte	CR_
+	.byte	zi_,si_,n_,ga_,spc_,na_,i_,no_,ka_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p03_field_c106
+msg_hero_01_p03_field_c106:
+	.byte	YU_,U_,KI_,kako2_,do_,ttu_,ti_,ga_,spc_,u_,ma_,ku_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,te_,i_,ru_,ka_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,spc_,si_,te_,ya_,ro_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」
+// ●「はい」　→msg_hero_01_p04_field_c106:
+// ●「いいえ」→msg_hero_01_p02_field_c106:
+
+// ●戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p04_field_c106
+msg_hero_01_p04_field_c106:
+	.byte	YU_,U_,KI_,kako2_,ma_,a_,spc_,O_,RE_,ga_
+	.byte	CR_
+	.byte	I_MSG_,MY_NAME_BUF,ni_,spc_,ma_,ke_,ru_,wa_,ke_,spc_,na_,i_,n_,da_,ke_,do_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘突入
+// ●敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p05_field_c106
+msg_hero_01_p05_field_c106:
+	.byte	hu_,u_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	ka_,na_,ri_,spc_,so_,da_,te_,te_,ru_,n_,da_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,ttu_,to_,spc_,ku_,ya_,si_,i_,na_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,to_,si_,te_,ha_,spc_,O_,RE_,no_,spc_,ho_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	SE_,N_,PA_,I_,spc_,da_,ttu_,ta_,no_,ni_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●戦闘後メッセージ、自動で表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p06_field_c106
+msg_hero_01_p06_field_c106:
+	.byte	YU_,U_,KI_,kako2_,O_,RE_,tenten_,tenten_
+	.byte	CR_
+	.byte	MI_,SI_,RO_,TA_,U_,N_,ni_,spc_,mo_,do_,ru_,tu_,mo_,ri_,spc_,na_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,sa_,n_,no_,spc_,te_,tu_,da_,i_,de_,spc_,tu_,ku_,ttu_,te_,i_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,zu_,ka_,n_,mo_,spc_,ke_,ttu_,ko_,u_,spc_,de_,ki_,te_,ki_,ta_,si_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ti_,do_,spc_,to_,u_,sa_,n_,ni_,spc_,mi_,se_,te_,o_,ka_,na_,i_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●続いて……
+// ●バッジ８個入手前→msg_hero_01_p07_field_c106:
+// ●バッジ８個入手後→msg_hero_01_p08_field_c106:
+// ●ゲームクリア後　→msg_hero_01_p09_field_c106:
+
+// ●バッジ８個入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p07_field_c106
+msg_hero_01_p07_field_c106:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,do_,u_,su_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ya_,ttu_,pa_,ri_,spc_,ze_,n_,bu_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_,spc_,a_,tu_,me_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,no_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,mo_,spc_,so_,u_,si_,yo_,u_,ka_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,i_,i_,ya_
+	.byte	CR_
+	.byte	to_,ni_,ka_,ku_,spc_,ga_,n_,ba_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ●バッジ８個入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p08_field_c106
+msg_hero_01_p08_field_c106:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,do_,u_,su_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,ni_,spc_,tu_,yo_,i_,n_,da_,ka_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,RI_,bou_,GU_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,no_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,da_,ttu_,te_,spc_,mo_,u_,ti_,yyo_,ttu_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,re_,ba_,spc_,I_MSG_,MY_NAME_BUF,yo_,ri_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,yo_,ku_,na_,re_,ru_,spc_,ha_,zu_,da_,ka_,ra_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,i_,i_,ya_
+	.byte	CR_
+	.byte	to_,ni_,ka_,ku_,spc_,ga_,n_,ba_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ●ゲームクリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hero_01_p09_field_c106
+msg_hero_01_p09_field_c106:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,do_,u_,su_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,ni_,spc_,tu_,yo_,i_,n_,da_,ka_,ra_
+	.byte	CR_
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,ti_,yyo_,u_,se_,n_,spc_,su_,ru_,no_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,da_,ttu_,te_,spc_,mo_,u_,ti_,yyo_,ttu_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,so_,da_,te_,re_,ba_,spc_,I_MSG_,MY_NAME_BUF,yo_,ri_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,yo_,ku_,na_,re_,ru_,spc_,ha_,zu_,da_,ka_,ra_,na_
+	.byte	SCROLL_WAIT_
+	.byte	O_,RE_,mo_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,i_,ko_,u_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,a_,spc_,i_,i_,ya_
+	.byte	CR_
+	.byte	to_,ni_,ka_,ku_,spc_,ga_,n_,ba_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●アクア団♂（aquam1_02と隣り合わせ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p01_field_c106
+msg_aquam1_01_p01_field_c106:
+	.byte	hu_,hu_,hu_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,yyo_,u_,mo_,spc_,u_,ba_,ttu_,ta_,spc_,BU_,TU_,wo_
+	.byte	CR_
+	.byte	A_,ZI_,TO_,ni_,spc_,ha_,ko_,bi_,ko_,n_,da_,zo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ttu_,spc_,na_,n_,da_,spc_,o_,ma_,e_,gyoe_
+	.byte	CR_
+	.byte	i_,ttu_,spc_,i_,ma_,no_,ha_,spc_,hi_,to_,ri_,go_,to_,spc_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジトで潜水艇が発進するとＯＢＪ削除
+
+// ●アクア団♂（aquam1_01と隣り合わせ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_02_p01_field_c106
+msg_aquam1_02_p01_field_c106:
+	.byte	RI_,bou_,DA_,bou_,ga_,spc_,na_,ni_,spc_,ka_,n_,ga_,e_,te_,ru_,no_,ka_
+	.byte	CR_
+	.byte	si_,ta_,ttu_,pa_,no_,spc_,O_,RE_,ni_,ha_,spc_,wa_,ka_,ra_,n_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,i_,ru_,to_
+	.byte	CR_
+	.byte	su_,go_,i_,ko_,to_,spc_,de_,ki_,so_,u_,da_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ttu_,spc_,na_,n_,da_,spc_,o_,ma_,e_,gyoe_
+	.byte	CR_
+	.byte	i_,ttu_,spc_,i_,ma_,no_,ha_,spc_,hi_,to_,ri_,go_,to_,spc_,da_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジトで潜水艇が発進するとＯＢＪ削除
+
+// ●アクア団♂
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_03_p01_field_c106
+msg_aquam1_03_p01_field_c106:
+	.byte	o_,i_,spc_,o_,ma_,e_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ri_,e_,ni_,spc_,a_,ru_
+	.byte	CR_
+	.byte	do_,u_,ku_,tu_,ni_,ha_,spc_,ti_,ka_,du_,ku_,na_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ze_,ttu_,te_,hate_,spc_,ri_,yu_,u_,ha_,spc_,do_,u_,de_,mo_,spc_,i_,i_,n_,da_,gyoe_
+	.byte	CR_
+	.byte	o_,to_,na_,no_,spc_,i_,u_,ko_,to_,spc_,ki_,ke_,yo_,na_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジトで潜水艇が発進するとＯＢＪ削除
+
+// ●アクア団♂
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_04_p01_field_c106
+msg_aquam1_04_p01_field_c106:
+	.byte	ko_,no_,spc_,hi_,ro_,i_,spc_,se_,ka_,i_,spc_,su_,be_,te_,ga_
+	.byte	CR_
+	.byte	o_,re_,ra_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,mo_,no_,ni_,spc_,na_,ttu_,ta_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,si_,a_,wa_,se_,ni_,spc_,na_,re_,ru_,ha_,zu_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジトで潜水艇が発進するとＯＢＪ削除
+
+
+// ●入り江でホエルコのトレーニングをしているアクア団員
+// 　話しかけても振り向かない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p01_field_c106
+msg_evilm1_01_p01_field_c106:
+	.byte	so_,re_,ttu_,gyoe_,spc_,HO_,E_,RU_,KO_,gyoe_
+	.byte	CR_
+	.byte	so_,ko_,de_,spc_,su_,i_,me_,n_,ka_,ra_,spc_,ZI_,YYA_,N_,PU_,su_,ru_,no_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで主人公の方を向いてセリフの続き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p02_field_c106
+msg_evilm1_01_p02_field_c106:
+	.byte	tenten_,tenten_,n_,hate_,spc_,na_,n_,da_,spc_,o_,ma_,e_,ha_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NI_,N_,GU_,no_,spc_,zi_,yya_,ma_,ni_,spc_,na_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	a_,ttu_,ti_,ni_,spc_,i_,ttu_,te_,te_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●と言って、またホエルコの方を向く
+// 　ふたたび話しかければ「msg_evilm1_01_p01_field_c106:」を繰り返し
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●おじさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_field_c106
+msg_middlem1_01_p01_field_c106:
+	.byte	ko_,no_,spc_,KO_,N_,TE_,SU_,TO_,spc_,ka_,i_,zi_,yyo_,u_,spc_,ni_,ha_
+	.byte	CR_
+	.byte	ze_,n_,ko_,ku_,spc_,ka_,ra_,spc_,ka_,ti_,nu_,i_,te_,ki_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,a_,tu_,ma_,ttu_,te_,spc_,i_,ru_,n_,da_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,no_,spc_,HA_,bou_,TO_,ha_,spc_,wa_,ku_,wa_,ku_,spc_,na_,n_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_field_c106
+msg_girl1_01_p01_field_c106:
+	.byte	ma_,ti_,no_,spc_,ha_,zu_,re_,no_,spc_,i_,ri_,e_,ni_
+	.byte	CR_
+	.byte	o_,ka_,si_,na_,spc_,do_,u_,ku_,tu_,ga_,spc_,a_,ru_,no_,spc_,mi_,ta_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トクサネジムバッジ入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p02_field_c106
+msg_girl1_01_p02_field_c106:
+	.byte	a_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	KO_,N_,TE_,SU_,TO_,no_,spc_,ta_,me_,ni_,spc_,a_,ta_,ra_,si_,i_,spc_,wa_,za_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	o_,bo_,e_,sa_,se_,ru_,spc_,tu_,mo_,ri_,na_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,ne_,spc_,wa_,za_,wa_,su_,re_,spc_,zi_,i_,sa_,n_,ni_,spc_,ta_,no_,n_,de_
+	.byte	CR_
+	.byte	hi_,de_,n_,wa_,za_,wo_,spc_,wa_,su_,re_,sa_,se_,te_,spc_,mo_,ra_,u_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy4_01_p01_field_c106
+msg_boy4_01_p01_field_c106:
+	.byte	bo_,ku_,ha_,spc_,KA_,N_,TO_,bou_,ka_,ra_,spc_,ki_,ma_,si_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	HO_,U_,E_,N_,spc_,ti_,ho_,u_,ha_,spc_,mi_,zu_,to_,spc_,mi_,do_,ri_,ni_
+	.byte	CR_
+	.byte	a_,hu_,re_,ta_,spc_,u_,tu_,ku_,si_,i_,spc_,to_,ko_,ro_,spc_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,n_,hate_,spc_,to_,i_,u_,ko_,to_,ha_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,to_,ti_,spc_,da_,ke_,ni_,spc_,se_,i_,so_,ku_,su_,ru_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ru_,no_,ka_,mo_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_field_c106
+msg_seaman1_01_p01_field_c106:
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,re_,n_,ti_,yyu_,u_,ga_
+	.byte	CR_
+	.byte	i_,ri_,e_,de_,spc_,HO_,E_,RU_,KO_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	TO_,RE_,bou_,NI_,N_,GU_,spc_,si_,te_,ru_,n_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,i_,ra_,ta_,ti_,spc_,hu_,na_,no_,ri_
+	.byte	CR_
+	.byte	ko_,no_,ma_,ma_,zi_,yya_,spc_,u_,mi_,ni_,spc_,de_,ra_,re_,na_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団のアジトで勝利（フラグ22）して以降のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p02_field_c106
+msg_seaman1_01_p02_field_c106:
+	.byte	a_,n_,ta_,spc_,si_,ttu_,te_,ru_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	da_,re_,ka_,ga_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,wo_
+	.byte	CR_
+	.byte	ke_,ti_,ra_,si_,te_,ku_,re_,ta_,spc_,ra_,si_,i_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ka_,ge_,de_,spc_,HO_,E_,RU_,KO_,spc_,i_,na_,ku_,na_,ttu_,te_
+	.byte	CR_
+	.byte	u_,mi_,ni_,spc_,de_,ra_,re_,ru_,yo_,u_,ni_,spc_,na_,ttu_,ta_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_field_c106
+msg_woman1_01_p01_field_c106:
+	.byte	u_,mi_,be_,no_,spc_,ya_,do_,de_,spc_,na_,mi_,no_,spc_,o_,to_,wo_
+	.byte	CR_
+	.byte	ki_,ki_,na_,ga_,ra_,spc_,no_,n_,bi_,ri_,spc_,o_,hi_,ru_,ne_
+	.byte	SCROLL_WAIT_
+	.byte	tenten_,tenten_,wo_,spc_,si_,te_,i_,ta_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_,spc_,to_,ra_,re_,ti_,yya_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,n_,ni_,n_,ha_,spc_,da_,re_,bou_,gyoe_,hate_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,hate_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,spc_,na_,no_,bou_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アクア団のアジトで勝利（フラグ22）して以降のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p02_field_c106
+msg_woman1_01_p02_field_c106:
+	.byte	i_,na_,ku_,na_,ttu_,te_,ta_,spc_,wa_,ta_,si_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	i_,tu_,no_,ma_,ni_,ka_,spc_,ka_,e_,ttu_,te_,ki_,ta_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●会社員１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_field_c106
+msg_workerm1_01_p01_field_c106:
+	.byte	wa_,ta_,si_,ha_,spc_,GA_,SI_,YYO_,U_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,so_,u_,i_,u_,spc_,na_,ma_,e_,spc_,na_,no_,de_,ha_,na_,ku_
+	.byte	CR_
+	.byte	ka_,ti_,no_,a_,ru_,spc_,e_,wo_,spc_,ka_,ttu_,ta_,ri_,spc_,u_,ttu_,ta_,ri_,su_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,ku_,gi_,yyo_,u_,no_,spc_,na_,ma_,e_,spc_,na_,n_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,ma_,ti_,no_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,ni_,spc_,su_,ba_,ra_,si_,i_
+	.byte	CR_
+	.byte	me_,i_,ga_,spc_,ga_,spc_,a_,ru_,to_,spc_,ki_,i_,ta_,no_,spc_,de_,su_,ga_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人１
+// ●話しかけても振り向かない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_field_c106
+msg_oldman1_01_p01_field_c106:
+	.byte	wa_,si_,ra_,ga_,spc_,si_,wa_,ku_,ti_,yya_,ni_,spc_,na_,ttu_,te_,mo_
+	.byte	CR_
+	.byte	ko_,no_,u_,mi_,ha_,spc_,i_,tu_,ma_,de_,mo_,spc_,wa_,ka_,wa_,ka_,si_,ku_
+	.byte	SCROLL_WAIT_
+	.byte	i_,no_,ti_,no_,spc_,ka_,ga_,ya_,ki_,ni_,spc_,a_,hu_,re_,to_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ho_,ho_,spc_,hu_,ho_,ho_,ho_,ho_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老婆１
+// ●話しかけても振り向かない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_field_c106
+msg_oldwoman1_01_p01_field_c106:
+	.byte	n6_,n0_,ne_,n_,ma_,e_,spc_,ko_,ko_,de_,spc_,o_,zi_,i_,si_,yya_,n_,ga_
+	.byte	CR_
+	.byte	wa_,si_,ni_,spc_,PU_,RO_,PO_,bou_,ZU_,spc_,si_,te_,ku_,re_,ta_,spc_,to_,ki_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,no_,u_,mi_,ha_,spc_,u_,tu_,ku_,si_,i_,ma_,ma_,spc_,de_,su_,no_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	mu_,hu_,hu_,spc_,mu_,hu_,hu_,hu_,hu_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●老人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_02_p01_field_c106
+msg_oldman1_02_p01_field_c106:
+	.byte	ko_,no_,spc_,i_,ri_,e_,no_,spc_,to_,ko_,ro_,ni_,spc_,o_,ka_,si_,na_
+	.byte	CR_
+	.byte	do_,u_,ku_,tu_,no_,spc_,i_,ri_,gu_,ti_,ga_,spc_,a_,ru_,spc_,zi_,yya_,ro_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ze_,n_,ha_,spc_,te_,n_,ne_,n_,no_,spc_,do_,u_,ku_,tu_,spc_,da_,ttu_,ta_,ga_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,spc_,to_,ka_,i_,u_,spc_,re_,n_,ti_,yyu_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,i_,zo_,u_,si_,te_,spc_,a_,n_,na_,hu_,u_,ni_,spc_,si_,ta_,n_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,si_,ze_,n_,wo_,spc_,a_,i_,su_,ru_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,gyoe_,kakot_
+	.byte	CR_
+	.byte	tenten_,tenten_,to_,spc_,i_,ttu_,te_,o_,ru_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	i_,u_,ko_,to_,to_,spc_,ya_,ru_,ko_,to_,ga_,spc_,ti_,ga_,ttu_,to_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トクサネジムバッジ入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_02_p02_field_c106
+msg_oldman1_02_p02_field_c106:
+	.byte	i_,ri_,e_,ni_,spc_,a_,ttu_,ta_,spc_,do_,u_,ku_,tu_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,tu_,no_,ma_,ni_,ya_,ra_,spc_,i_,ri_,gu_,ti_,ga_,spc_,na_,ku_,na_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ka_,ni_,spc_,ha_,i_,re_,na_,ku_,spc_,na_,ttu_,te_,o_,ru_,n_,zi_,yya_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,re_,n_,ti_,yyu_,u_
+	.byte	CR_
+	.byte	do_,ko_,ka_,spc_,to_,o_,ku_,he_,spc_,i_,ttu_,te_,spc_,si_,ma_,ttu_,ta_,n_,zi_,yya_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ショップとポケセンの前にある看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_c106
+msg_kanban_01_p01_field_c106:
+	.byte	ko_,ko_,ha_,spc_,MI_,NA_,MO_,spc_,SI_,TE_,II_
+	.byte	CR_
+	.byte	ri_,ku_,ti_,no_,spc_,sa_,i_,ha_,te_,spc_,u_,mi_,no_,spc_,ha_,zi_,ma_,ri_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●コンテスト会場の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_c106
+msg_kanban_02_p01_field_c106:
+	.byte	PO_,KE_,MO_,N_,KO_,N_,TE_,SU_,TO_,spc_,MA_,SU_,TA_,bou_,RA_,N_,KU_,spc_,u_,ke_,tu_,ke_
+	.byte	CR_
+	.byte	o_,to_,mo_,da_,ti_,spc_,to_,mo_,spc_,i_,ttu_,si_,yyo_,ni_,spc_,de_,ra_,re_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●民宿の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_c106
+msg_kanban_03_p01_field_c106:
+	.byte	kako_,mi_,n_,si_,yyu_,ku_,spc_,MO_,NA_,MI_,kakot_
+	.byte	CR_
+	.byte	MI_,NA_,MO_,no_,MO_,NA_,MI_,spc_,to_,spc_,o_,bo_,e_,te_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●美術館の看板（最初の状態）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_04_p01_field_c106
+msg_kanban_04_p01_field_c106:
+	.byte	kako_,MI_,NA_,MO_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,kakot_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,me_,i_,ga_,te_,n_,spc_,ka_,i_,sa_,i_,spc_,ti_,yyu_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●美術館の看板（自分の絵が１枚以上ある場合）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_04_p02_field_c106
+msg_kanban_04_p02_field_c106:
+	.byte	kako_,MI_,NA_,MO_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,no_,spc_,PO_,KE_,MO_,N_,spc_,KO_,RE_,KU_,SI_,YYO_,N_
+	.byte	CR_
+	.byte	ka_,i_,sa_,i_,spc_,ti_,yyu_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り場の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_05_p01_field_c106
+msg_kanban_05_p01_field_c106:
+	.byte	kako_,MI_,NA_,MO_,spc_,SI_,TE_,II_,spc_,hu_,ne_,no_,ri_,ba_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	re_,n_,ra_,ku_,se_,n_,spc_,TA_,I_,DO_,RI_,TTU_,PU_,go_,u_,spc_,ha_
+	.byte	CR_
+	.byte	KA_,I_,NA_,SI_,TE_,II_,ni_,te_,spc_,ke_,n_,zo_,u_,spc_,ti_,yyu_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,si_,ba_,ra_,ku_,spc_,o_,ma_,ti_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●船完成後（ゲームクリア後）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_05_p02_field_c106
+msg_kanban_05_p02_field_c106:
+	.byte	kako_,MI_,NA_,MO_,spc_,SI_,TE_,II_,spc_,hu_,ne_,no_,ri_,ba_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	re_,n_,ra_,ku_,se_,n_,spc_,TA_,I_,DO_,RI_,TTU_,PU_,go_,u_,de_
+	.byte	CR_
+	.byte	hu_,ne_,no_,spc_,ta_,bi_,wo_,spc_,o_,ta_,no_,si_,mi_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ファンクラブの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_06_p01_field_c106
+msg_kanban_06_p01_field_c106:
+	.byte	kako_,PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,HU_,AA_,N_,KU_,RA_,BU_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,n_,ba_,n_,ni_,spc_,i_,ro_,n_,na_,spc_,TO_,RE_,bou_,NA_,bou_,no_
+	.byte	CR_
+	.byte	na_,ma_,e_,ga_,spc_,ra_,ku_,ga_,ki_,spc_,sa_,re_,te_,i_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デパートの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_07_p01_field_c106
+msg_kanban_07_p01_field_c106:
+	.byte	kako_,MI_,NA_,MO_,spc_,DE_,PA_,bou_,TO_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	GU_,TTU_,ZU_,spc_,i_,ttu_,pa_,i_,gyoe_,spc_,DO_,KI_,DO_,KI_,spc_,i_,ttu_,pa_,i_,gyoe_
+	.byte	CR_
+	.byte	na_,ni_,ka_,ga_,spc_,mi_,tu_,ka_,ru_,spc_,su_,te_,ki_,na_,spc_,to_,ko_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●技忘れオヤジ　の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_09_p01_field_c106
+msg_kanban_09_p01_field_c106:
+	.byte	kako_,wa_,za_,wa_,su_,re_,spc_,zi_,i_,sa_,n_,no_,spc_,i_,e_,kakot_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,wa_,za_,spc_,wa_,su_,re_,sa_,se_,ma_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

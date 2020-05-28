@@ -1,0 +1,2330 @@
+//============================================================
+//
+//É|ÉPÉÇÉìÇ∏Ç©ÇÒÉfÅ[É^Å@ÉeÉLÉXÉgÇa(ÇrÇ`ÇoÇoÇgÇhÇqÇdÅj
+//
+//============================================================
+const	u8	noget_text[] = {
+	EOM_,
+};
+
+const	u8	textdmy[] = {
+	a_,ta_,ra_,si_,ku_,spc_,ha_,ttu_,ke_,n_,sa_,re_,ta_,PO_,KE_,MO_,N_,CR_,
+	ge_,n_,za_,i_,spc_,ti_,yyo_,u_,sa_,ti_,yyu_,u_,EOM_,
+};
+
+const	u8	text1[] = {
+	hi_,na_,ta_,de_,spc_,hi_,ru_,ne_,wo_,spc_,su_,ru_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ka_,ke_,ru_,kten_,CR_,
+	ta_,i_,yo_,u_,no_,spc_,hi_,ka_,ri_,wo_,spc_,i_,ttu_,pa_,i_,spc_,a_,bi_,ru_,ko_,to_,de_,CR_,
+	se_,na_,ka_,no_,spc_,TA_,NE_,ga_,spc_,o_,o_,ki_,ku_,spc_,so_,da_,tu_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text2[] = {
+	tu_,bo_,mi_,wo_,spc_,sa_,sa_,e_,ru_,ta_,me_,spc_,a_,si_,ko_,si_,ga_,spc_,tu_,yo_,ku_,na_,ru_,kten_,CR_,
+	hi_,na_,ta_,de_,spc_,zi_,ttu_,to_,su_,ru_,spc_,zi_,ka_,n_,ga_,spc_,na_,ga_,ku_,na_,re_,ba_,CR_,
+	i_,yo_,i_,yo_,spc_,ta_,i_,ri_,n_,no_,spc_,ha_,na_,ga_,spc_,sa_,ku_,ko_,ro_,da_,kten_,EOM_,
+};
+
+const	u8	text3[] = {
+	zi_,yyu_,u_,bu_,n_,na_,spc_,e_,i_,yo_,u_,to_,spc_,ta_,i_,yo_,u_,no_,spc_,hi_,ka_,ri_,ga_,CR_,
+	ha_,na_,no_,spc_,i_,ro_,wo_,spc_,a_,za_,ya_,ka_,ni_,spc_,su_,ru_,to_,spc_,i_,wa_,re_,ru_,kten_,CR_,
+	ha_,na_,no_,spc_,ka_,o_,ri_,ha_,spc_,hi_,to_,no_,spc_,ko_,ko_,ro_,wo_,spc_,i_,ya_,su_,kten_,EOM_,
+};
+
+const	u8	text4[] = {
+	si_,ttu_,po_,no_,spc_,ho_,no_,o_,ha_,spc_,ki_,bu_,n_,wo_,spc_,hi_,yyo_,u_,ge_,n_,kten_,CR_,
+	ta_,no_,si_,i_,spc_,to_,ki_,ni_,ha_,spc_,yu_,ra_,yu_,ra_,spc_,ho_,no_,o_,ga_,spc_,yu_,re_,te_,CR_,
+	o_,ko_,ttu_,ta_,spc_,to_,ki_,ni_,ha_,spc_,me_,ra_,me_,ra_,spc_,sa_,ka_,n_,ni_,spc_,mo_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text5[] = {
+	su_,ru_,do_,i_,spc_,TU_,ME_,de_,spc_,yo_,u_,si_,yya_,na_,ku_,spc_,ta_,ta_,ki_,no_,me_,su_,kten_,CR_,
+	ki_,yyo_,u_,te_,ki_,to_,spc_,mu_,ka_,i_,a_,u_,to_,spc_,ki_,bu_,n_,ga_,spc_,ta_,ka_,bu_,ri_,CR_,
+	si_,ttu_,po_,no_,spc_,ho_,no_,o_,ga_,spc_,a_,o_,zi_,ro_,ku_,spc_,mo_,e_,a_,ga_,ru_,kten_,EOM_,
+};
+
+const	u8	text6[] = {
+	tu_,yo_,i_,spc_,a_,i_,te_,wo_,spc_,mo_,to_,me_,te_,spc_,so_,ra_,wo_,spc_,to_,bi_,ma_,wa_,ru_,kten_,CR_,
+	na_,n_,de_,mo_,spc_,to_,ka_,si_,te_,spc_,si_,ma_,u_,spc_,ko_,u_,ne_,tu_,no_,spc_,ho_,no_,o_,wo_,CR_,
+	zi_,bu_,n_,yo_,ri_,spc_,yo_,wa_,i_,mo_,no_,ni_,spc_,mu_,ke_,ru_,ko_,to_,ha_,spc_,si_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text7[] = {
+	ko_,u_,ra_,no_,spc_,ya_,ku_,me_,ha_,spc_,mi_,wo_,spc_,ma_,mo_,ru_,spc_,da_,ke_,de_,ha_,na_,i_,kten_,CR_,
+	ma_,ru_,i_,spc_,ka_,ta_,ti_,to_,spc_,hi_,yyo_,u_,me_,n_,no_,spc_,mi_,zo_,ga_,spc_,mi_,zu_,no_,CR_,
+	te_,i_,ko_,u_,wo_,spc_,he_,ra_,su_,no_,de_,spc_,ha_,ya_,ku_,spc_,o_,yo_,ge_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text8[] = {
+	hu_,sa_,hu_,sa_,no_,spc_,ke_,de_,spc_,o_,o_,wa_,re_,ta_,spc_,o_,o_,ki_,na_,spc_,si_,ttu_,po_,ha_,CR_,
+	na_,ga_,i_,ki_,spc_,su_,ru_,ho_,do_,spc_,hu_,ka_,i_,spc_,i_,ro_,a_,i_,ni_,spc_,ka_,wa_,ru_,kten_,CR_,
+	ko_,u_,ra_,no_,spc_,KI_,ZU_,ha_,spc_,tu_,wa_,mo_,no_,no_,spc_,a_,ka_,si_,kten_,EOM_,
+};
+
+const	u8	text9[] = {
+	ko_,u_,ra_,no_,spc_,hu_,n_,si_,yya_,ko_,u_,no_,spc_,ne_,ra_,i_,ha_,spc_,se_,i_,ka_,ku_,kten_,CR_,
+	mi_,zu_,no_,spc_,da_,n_,ga_,n_,wo_,spc_,n5_,n0_,ME_,bou_,TO_,RU_,spc_,ha_,na_,re_,ta_,CR_,
+	a_,ki_,ka_,n_,ni_,spc_,me_,i_,ti_,yyu_,u_,sa_,se_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text10[] = {
+	ka_,ra_,da_,spc_,yo_,ri_,mo_,spc_,o_,o_,ki_,na_,spc_,ha_,ttu_,pa_,wo_,spc_,mi_,ru_,mi_,ru_,CR_,
+	ta_,be_,tu_,ku_,si_,te_,spc_,si_,ma_,u_,ho_,do_,no_,spc_,si_,yyo_,ku_,yo_,ku_,wo_,spc_,mo_,tu_,kten_,CR_,
+	si_,yyo_,ttu_,ka_,ku_,ka_,ra_,spc_,ki_,yyo_,u_,re_,tu_,na_,spc_,ni_,o_,i_,wo_,spc_,da_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text11[] = {
+	ka_,ra_,da_,no_,spc_,KA_,RA_,ha_,spc_,te_,ttu_,pa_,n_,no_,spc_,yo_,u_,ni_,spc_,ka_,ta_,i_,kten_,CR_,
+	a_,ma_,ri_,spc_,u_,go_,ka_,na_,i_,no_,ha_,spc_,KA_,RA_,no_,na_,ka_,de_,spc_,ya_,wa_,ra_,ka_,i_,CR_,
+	na_,ka_,mi_,ga_,spc_,si_,n_,ka_,no_,spc_,zi_,yyu_,n_,bi_,wo_,spc_,si_,te_,i_,ru_,ka_,ra_,da_,kten_,EOM_,
+};
+
+const	u8	text12[] = {
+	o_,i_,si_,i_,spc_,ha_,na_,no_,spc_,MI_,TU_,wo_,spc_,sa_,ga_,su_,spc_,no_,u_,ri_,yyo_,ku_,ni_,CR_,
+	su_,gu_,re_,spc_,su_,mi_,ka_,ka_,ra_,spc_,n1_,n0_,KI_,RO_,ha_,na_,re_,ta_,spc_,ba_,si_,yyo_,ni_,CR_,
+	sa_,ku_,spc_,ha_,na_,ka_,ra_,spc_,MI_,TU_,wo_,spc_,a_,tu_,me_,te_,spc_,ha_,ko_,n_,de_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text13[] = {
+	to_,te_,mo_,spc_,su_,ru_,do_,i_,spc_,ki_,yyu_,u_,ka_,ku_,wo_,spc_,mo_,ttu_,te_,i_,ru_,kten_,CR_,
+	ko_,u_,bu_,tu_,no_,spc_,ha_,ttu_,pa_,ka_,spc_,ki_,ra_,i_,na_,spc_,ha_,ttu_,pa_,ka_,CR_,
+	o_,o_,ki_,na_,spc_,a_,ka_,i_,spc_,ha_,na_,de_,spc_,ka_,gi_,wa_,ke_,ru_,kten_,EOM_,
+};
+
+const	u8	text14[] = {
+	ho_,to_,n_,do_,spc_,u_,go_,ka_,zu_,spc_,ki_,ni_,spc_,tu_,ka_,ma_,ttu_,te_,i_,ru_,ga_,CR_,
+	na_,ka_,de_,ha_,spc_,si_,n_,ka_,no_,spc_,zi_,yyu_,n_,bi_,de_,spc_,o_,o_,i_,so_,ga_,si_,kten_,CR_,
+	so_,no_,spc_,si_,yyo_,u_,ko_,ni_,spc_,ka_,ra_,da_,ga_,spc_,a_,tu_,ku_,na_,ttu_,te_,i_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text15[] = {
+	na_,wa_,ba_,ri_,i_,si_,ki_,ga_,spc_,to_,te_,mo_,spc_,tu_,yo_,i_,no_,de_,spc_,SU_,PI_,A_,bou_,no_,CR_,
+	su_,mi_,ka_,ni_,ha_,spc_,ti_,ka_,du_,ka_,na_,i_,spc_,ho_,u_,ga_,spc_,mi_,no_,spc_,ta_,me_,da_,kten_,CR_,
+	o_,ko_,ru_,to_,spc_,si_,yyu_,u_,da_,n_,de_,spc_,o_,so_,ttu_,te_,spc_,ku_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text16[] = {
+	ho_,u_,ko_,u_,spc_,ka_,n_,ka_,ku_,ni_,spc_,to_,te_,mo_,spc_,su_,gu_,re_,te_,i_,ru_,no_,de_,CR_,
+	do_,n_,na_,ni_,spc_,ha_,na_,re_,ta_,spc_,ba_,si_,yyo_,ka_,ra_,de_,mo_,spc_,ma_,yo_,wa_,zu_,ni_,CR_,
+	zi_,bu_,n_,no_,spc_,su_,spc_,ma_,de_,spc_,ka_,e_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,EOM_,
+};
+
+const	u8	text17[] = {
+	hi_,ro_,i_,spc_,na_,wa_,ba_,ri_,wo_,spc_,to_,n_,de_,spc_,mi_,ma_,wa_,ri_,wo_,spc_,su_,ru_,kten_,CR_,
+	na_,wa_,ba_,ri_,wo_,spc_,a_,ra_,su_,spc_,a_,i_,te_,ha_,spc_,yo_,u_,si_,yya_,spc_,si_,na_,i_,kten_,CR_,
+	su_,ru_,do_,i_,spc_,TU_,ME_,de_,spc_,te_,ttu_,te_,i_,te_,ki_,ni_,spc_,ko_,ra_,si_,me_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text18[] = {
+	u_,tu_,ku_,si_,i_,spc_,ko_,u_,ta_,ku_,no_,spc_,ha_,ne_,wo_,spc_,mo_,tu_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	a_,ta_,ma_,no_,spc_,ha_,ne_,no_,spc_,u_,tu_,ku_,si_,sa_,ni_,spc_,ko_,ko_,ro_,spc_,u_,ba_,wa_,re_,CR_,
+	PI_,ZI_,YYO_,TTU_,TO_,wo_,spc_,so_,da_,te_,ru_,spc_,TO_,RE_,bou_,NA_,bou_,mo_,spc_,o_,o_,i_,kten_,EOM_,
+};
+
+const	u8	text19[] = {
+	ke_,i_,ka_,i_,si_,n_,ga_,spc_,to_,te_,mo_,spc_,tu_,yo_,ku_,spc_,ne_,te_,i_,ru_,spc_,to_,ki_,mo_,CR_,
+	mi_,mi_,wo_,spc_,u_,go_,ka_,si_,spc_,ma_,wa_,ri_,no_,spc_,o_,to_,wo_,spc_,ki_,i_,te_,i_,ru_,kten_,CR_,
+	do_,ko_,ni_,de_,mo_,spc_,su_,mi_,tu_,ki_,spc_,su_,spc_,wo_,spc_,tu_,ku_,ru_,kten_,EOM_,
+};
+
+const	u8	text20[] = {
+	zi_,yyo_,u_,bu_,na_,spc_,KI_,BA_,ha_,spc_,do_,n_,do_,n_,spc_,no_,bi_,ru_,no_,de_,CR_,
+	i_,wa_,ya_,spc_,ta_,i_,bo_,ku_,wo_,spc_,ka_,zi_,ttu_,te_,spc_,ke_,zu_,ttu_,te_,i_,ru_,kten_,CR_,
+	i_,e_,no_,spc_,KA_,BE_,wo_,spc_,ka_,zi_,ra_,re_,ru_,spc_,ko_,to_,mo_,spc_,a_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text21[] = {
+	o_,o_,ki_,na_,spc_,na_,ki_,go_,e_,ha_,spc_,n1_,KI_,RO_,spc_,sa_,ki_,ma_,de_,spc_,to_,do_,ku_,kten_,CR_,
+	a_,ti_,ko_,ti_,de_,spc_,KA_,N_,da_,ka_,i_,spc_,ko_,e_,ga_,spc_,ki_,ko_,e_,ru_,spc_,to_,ki_,ha_,CR_,
+	na_,ka_,ma_,ta_,ti_,ni_,spc_,ki_,ke_,n_,wo_,spc_,si_,ra_,se_,te_,i_,ru_,spc_,a_,i_,zu_,da_,kten_,EOM_,
+};
+
+const	u8	text22[] = {
+	na_,ga_,i_,spc_,ku_,bi_,to_,spc_,ku_,ti_,ba_,si_,ha_,spc_,tu_,ti_,ya_,spc_,mi_,zu_,no_,CR_,
+	na_,ka_,ni_,spc_,i_,ru_,spc_,E_,SA_,wo_,spc_,tu_,ka_,ma_,e_,ru_,no_,ni_,spc_,be_,n_,ri_,kten_,CR_,
+	ho_,so_,na_,ga_,i_,spc_,ku_,ti_,ba_,si_,de_,spc_,ki_,yo_,u_,ni_,spc_,tu_,ma_,mu_,zo_,kten_,EOM_,
+};
+
+const	u8	text23[] = {
+	gu_,ru_,gu_,ru_,spc_,ka_,ra_,da_,wo_,spc_,ma_,i_,te_,spc_,ya_,su_,n_,de_,i_,ru_,no_,ha_,CR_,
+	do_,no_,spc_,ho_,u_,ko_,u_,ka_,ra_,spc_,te_,ki_,ga_,spc_,o_,so_,ttu_,te_,ki_,te_,mo_,CR_,
+	to_,ttu_,sa_,ni_,spc_,a_,ta_,ma_,wo_,spc_,mu_,ke_,te_,spc_,i_,ka_,ku_,de_,ki_,ru_,ka_,ra_,da_,kten_,EOM_,
+};
+
+const	u8	text24[] = {
+	si_,me_,tu_,ke_,ru_,spc_,ti_,ka_,ra_,ha_,spc_,to_,te_,mo_,spc_,ki_,yyo_,u_,ri_,yyo_,ku_,kten_,CR_,
+	DO_,RA_,MU_,ka_,n_,mo_,spc_,pe_,si_,yya_,n_,ko_,ni_,spc_,si_,te_,si_,ma_,u_,zo_,kten_,CR_,
+	ma_,ki_,tu_,ka_,re_,ta_,ra_,spc_,ni_,ge_,da_,su_,spc_,ko_,to_,ha_,spc_,hu_,ka_,no_,u_,da_,kten_,EOM_,
+};
+
+const	u8	text25[] = {
+	ho_,ttu_,pe_,no_,spc_,de_,n_,ki_,bu_,ku_,ro_,no_,spc_,de_,n_,ki_,ha_,spc_,ma_,yo_,na_,ka_,CR_,
+	ne_,te_,i_,ru_,spc_,a_,i_,da_,ni_,spc_,ta_,me_,ra_,re_,te_,i_,ru_,spc_,ra_,si_,i_,yo_,kten_,CR_,
+	ne_,bo_,ke_,te_,spc_,ho_,u_,de_,n_,si_,te_,si_,ma_,u_,spc_,ko_,to_,ga_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text26[] = {
+	yo_,wa_,i_,spc_,de_,n_,ki_,wo_,spc_,ze_,n_,si_,n_,ka_,ra_,spc_,da_,si_,te_,i_,ru_,no_,de_,CR_,
+	ku_,ra_,ya_,mi_,de_,ha_,spc_,u_,ttu_,su_,ra_,spc_,hi_,ka_,ttu_,te_,spc_,mi_,e_,ru_,yo_,kten_,CR_,
+	SI_,TTU_,PO_,wo_,spc_,zi_,me_,n_,ni_,spc_,sa_,si_,te_,spc_,de_,n_,ki_,wo_,spc_,ni_,ga_,su_,kten_,EOM_,
+};
+
+const	u8	text27[] = {
+	ka_,ra_,ka_,ra_,ni_,spc_,ka_,wa_,i_,ta_,spc_,hi_,hu_,ha_,spc_,to_,te_,mo_,spc_,ka_,ta_,ku_,CR_,
+	ma_,ru_,ku_,na_,ru_,to_,spc_,do_,n_,na_,spc_,ko_,u_,ge_,ki_,de_,mo_,spc_,ha_,ne_,ka_,e_,su_,kten_,CR_,
+	yo_,na_,ka_,ha_,spc_,sa_,ba_,ku_,no_,spc_,su_,na_,ni_,spc_,mo_,gu_,ttu_,te_,spc_,ne_,mu_,ru_,kten_,EOM_,
+};
+
+const	u8	text28[] = {
+	se_,na_,ka_,wo_,spc_,ma_,ru_,me_,ru_,to_,spc_,TO_,GE_,TO_,GE_,no_,spc_,BO_,bou_,RU_,mi_,ta_,i_,kten_,CR_,
+	TO_,GE_,ni_,spc_,sa_,sa_,re_,te_,spc_,hi_,ru_,n_,da_,spc_,a_,i_,te_,ni_,spc_,to_,bi_,ka_,ka_,ri_,CR_,
+	su_,ru_,do_,i_,spc_,TU_,ME_,de_,spc_,ba_,ri_,ba_,ri_,spc_,hi_,ttu_,ka_,ki_,ma_,ku_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text29[] = {
+	ti_,i_,sa_,i_,spc_,ka_,ra_,da_,wo_,spc_,ma_,mo_,ru_,ta_,me_,spc_,ki_,yyo_,u_,ri_,yyo_,ku_,na_,CR_,
+	do_,ku_,ba_,ri_,ga_,spc_,ha_,ttu_,ta_,tu_,si_,ta_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,kten_,CR_,
+	o_,ko_,ru_,to_,spc_,TU_,NO_,no_,spc_,sa_,ki_,ka_,ra_,spc_,mo_,u_,do_,ku_,wo_,spc_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text30[] = {
+	na_,ka_,ma_,ya_,spc_,ka_,zo_,ku_,to_,spc_,i_,ttu_,si_,yyo_,no_,spc_,to_,ki_,ha_,spc_,o_,ta_,ga_,i_,CR_,
+	ki_,zu_,tu_,ka_,na_,i_,yo_,u_,ni_,spc_,TO_,GE_,ga_,spc_,hi_,ttu_,ko_,n_,de_,i_,ru_,kten_,CR_,
+	na_,ka_,ma_,ka_,ra_,spc_,ha_,na_,re_,ru_,to_,spc_,hu_,a_,n_,ni_,spc_,na_,ru_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text31[] = {
+	ka_,ta_,i_,spc_,U_,RO_,KO_,de_,spc_,o_,o_,wa_,re_,ta_,spc_,ka_,ra_,da_,wo_,spc_,bu_,tu_,ke_,te_,CR_,
+	a_,i_,te_,wo_,spc_,ha_,zi_,ki_,to_,ba_,su_,spc_,ko_,u_,ge_,ki_,ga_,spc_,to_,ku_,i_,da_,kten_,CR_,
+	ko_,do_,mo_,wo_,spc_,ma_,mo_,ru_,spc_,to_,ki_,ga_,spc_,i_,ti_,ba_,n_,spc_,tu_,yo_,i_,kten_,EOM_,
+};
+
+const	u8	text32[] = {
+	mi_,mi_,wo_,spc_,u_,go_,ka_,su_,spc_,ki_,n_,ni_,ku_,ga_,spc_,ha_,ttu_,ta_,tu_,si_,te_,i_,te_,CR_,
+	do_,n_,na_,spc_,mu_,ki_,ni_,mo_,spc_,zi_,za_,i_,ni_,spc_,mi_,mi_,wo_,spc_,u_,go_,ka_,se_,ru_,kten_,CR_,
+	ka_,su_,ka_,na_,spc_,mo_,no_,o_,to_,mo_,spc_,ki_,ki_,mo_,ra_,sa_,na_,i_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text33[] = {
+	DA_,I_,YA_,MO_,N_,DO_,yo_,ri_,mo_,spc_,ka_,ta_,i_,spc_,TU_,NO_,wo_,spc_,mo_,tu_,kten_,CR_,
+	te_,ki_,no_,spc_,ke_,ha_,i_,wo_,spc_,ka_,n_,zi_,ru_,to_,spc_,se_,na_,ka_,no_,spc_,TO_,GE_,ga_,CR_,
+	i_,ttu_,se_,i_,ni_,spc_,sa_,ka_,da_,ti_,spc_,ze_,n_,ri_,yyo_,ku_,de_,spc_,ta_,ti_,mu_,ka_,u_,kten_,EOM_,
+};
+
+const	u8	text34[] = {
+	hu_,to_,i_,spc_,si_,ttu_,po_,no_,spc_,hi_,to_,hu_,ri_,ha_,spc_,ga_,n_,zi_,yyo_,u_,na_,CR_,
+	te_,ttu_,to_,u_,mo_,spc_,he_,si_,o_,ru_,spc_,su_,sa_,ma_,zi_,i_,spc_,ha_,ka_,i_,ri_,yyo_,ku_,kten_,CR_,
+	i_,ti_,do_,spc_,a_,ba_,re_,da_,su_,to_,spc_,te_,ga_,spc_,tu_,ke_,ra_,re_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text35[] = {
+	ma_,n_,ge_,tu_,no_,spc_,yo_,ru_,ha_,spc_,ge_,n_,ki_,spc_,i_,ttu_,pa_,i_,ni_,spc_,a_,so_,bu_,kten_,CR_,
+	a_,ke_,ga_,ta_,spc_,tu_,ka_,re_,ta_,spc_,PI_,TTU_,PI_,ta_,ti_,ha_,spc_,si_,zu_,ka_,na_,CR_,
+	ya_,ma_,o_,ku_,de_,spc_,na_,ka_,ma_,ta_,ti_,to_,spc_,yo_,ri_,so_,ttu_,te_,spc_,ne_,mu_,ru_,kten_,EOM_,
+};
+
+const	u8	text36[] = {
+	tu_,ba_,sa_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,to_,bu_,yo_,u_,ni_,spc_,SU_,KI_,TTU_,PU_,kten_,CR_,
+	su_,i_,me_,n_,wo_,spc_,a_,ru_,ku_,spc_,ko_,to_,da_,ttu_,te_,spc_,de_,ki_,ru_,no_,da_,kten_,CR_,
+	si_,zu_,ka_,na_,spc_,tu_,ki_,yo_,ni_,spc_,mi_,zu_,u_,mi_,wo_,spc_,a_,ru_,ku_,kten_,EOM_,
+};
+
+const	u8	text37[] = {
+	ka_,ra_,da_,no_,spc_,na_,ka_,de_,spc_,ho_,no_,o_,ga_,spc_,i_,tu_,mo_,spc_,mo_,e_,te_,i_,ru_,kten_,CR_,
+	hi_,ru_,ma_,spc_,ki_,o_,n_,ga_,spc_,a_,ga_,ru_,to_,spc_,ta_,i_,o_,n_,mo_,spc_,ta_,ka_,ku_,CR_,
+	na_,ttu_,te_,si_,ma_,u_,no_,de_,spc_,ku_,ti_,ka_,ra_,spc_,ho_,no_,o_,wo_,spc_,ni_,ga_,su_,kten_,EOM_,
+};
+
+const	u8	text38[] = {
+	n9_,ni_,n_,no_,spc_,se_,i_,na_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,ttu_,ta_,spc_,se_,n_,ni_,n_,ga_,CR_,
+	ga_,ttu_,ta_,i_,si_,te_,spc_,u_,ma_,re_,ta_,to_,i_,u_,spc_,de_,n_,se_,tu_,ga_,spc_,a_,ru_,kten_,CR_,
+	ti_,no_,u_,ga_,spc_,ta_,ka_,ku_,spc_,hi_,to_,no_,spc_,ko_,to_,ba_,wo_,spc_,ri_,ka_,i_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text39[] = {
+	u_,ta_,u_,spc_,to_,ki_,ha_,spc_,i_,ti_,do_,mo_,spc_,i_,ki_,tu_,gi_,wo_,si_,na_,i_,kten_,CR_,
+	na_,ka_,na_,ka_,spc_,ne_,mu_,ra_,na_,i_,spc_,te_,ki_,wo_,spc_,a_,i_,te_,ni_,spc_,si_,ta_,CR_,
+	to_,ki_,ha_,spc_,i_,ki_,wo_,spc_,de_,ki_,na_,i_,spc_,PU_,RI_,N_,mo_,spc_,i_,no_,ti_,ga_,ke_,kten_,EOM_,
+};
+
+const	u8	text40[] = {
+	da_,n_,ri_,yyo_,ku_,se_,i_,ni_,spc_,su_,gu_,re_,ta_,spc_,ka_,ra_,da_,ha_,spc_,o_,o_,ki_,ku_,CR_,
+	i_,ki_,wo_,spc_,su_,i_,ko_,mu_,to_,spc_,do_,ko_,ma_,de_,mo_,spc_,hu_,ku_,re_,te_,i_,ku_,kten_,CR_,
+	hu_,ku_,ra_,n_,da_,spc_,PU_,KU_,RI_,N_,ha_,spc_,hu_,n_,wa_,ri_,spc_,ha_,ne_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text41[] = {
+	ta_,i_,yo_,u_,no_,spc_,hi_,ka_,ri_,wo_,spc_,a_,bi_,ru_,to_,spc_,ta_,i_,ti_,yyo_,u_,ga_,CR_,
+	wa_,ru_,ku_,na_,ru_,no_,de_,spc_,hi_,ru_,ma_,ha_,spc_,do_,u_,ku_,tu_,ya_,spc_,hu_,ru_,bi_,ta_,CR_,
+	i_,e_,no_,spc_,no_,ki_,si_,ta_,ni_,spc_,bu_,ra_,sa_,ga_,ttu_,te_,spc_,ne_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text42[] = {
+	n4_,ho_,n_,no_,spc_,KI_,BA_,de_,spc_,ka_,mi_,tu_,ki_,spc_,ke_,tu_,e_,ki_,wo_,spc_,no_,mu_,kten_,CR_,
+	tu_,ki_,no_,spc_,de_,te_,na_,i_,spc_,ma_,ttu_,ku_,ra_,na_,spc_,yo_,ru_,ha_,spc_,ka_,ttu_,pa_,tu_,ni_,CR_,
+	to_,bi_,ma_,wa_,ri_,spc_,hi_,to_,ya_,spc_,PO_,KE_,MO_,N_,wo_,spc_,o_,so_,u_,zo_,kten_,EOM_,
+};
+
+const	u8	text43[] = {
+	e_,i_,yo_,u_,spc_,ta_,ttu_,pu_,ri_,no_,spc_,tu_,ti_,wo_,spc_,sa_,ga_,si_,te_,spc_,u_,ma_,ru_,kten_,CR_,
+	hi_,ru_,ma_,spc_,tu_,ti_,ni_,spc_,u_,ma_,ttu_,te_,i_,ru_,spc_,to_,ki_,ni_,ha_,spc_,a_,si_,ga_,CR_,
+	ki_,no_,spc_,ne_,ttu_,ko_,no_,yo_,u_,na_,spc_,ka_,ta_,ti_,wo_,spc_,si_,te_,i_,ru_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text44[] = {
+	do_,u_,ya_,ra_,spc_,KU_,SA_,I_,HA_,NA_,ha_,spc_,ku_,ti_,ka_,ra_,spc_,ta_,ra_,si_,te_,i_,ru_,CR_,
+	mo_,u_,re_,tu_,ni_,spc_,ku_,sa_,i_,spc_,NI_,O_,I_,ga_,spc_,da_,i_,su_,ki_,spc_,ra_,si_,i_,kten_,CR_,
+	NI_,O_,I_,wo_,spc_,ka_,i_,de_,spc_,sa_,ra_,ni_,spc_,mi_,tu_,wo_,spc_,a_,hu_,re_,sa_,se_,ru_,kten_,EOM_,
+};
+
+const	u8	text45[] = {
+	se_,ka_,i_,i_,ti_,spc_,o_,o_,ki_,na_,spc_,ha_,na_,bi_,ra_,de_,spc_,e_,mo_,no_,wo_,CR_,
+	o_,bi_,ki_,yo_,se_,spc_,do_,ku_,no_,spc_,ka_,hu_,n_,wo_,spc_,a_,bi_,se_,ka_,ke_,ru_,kten_,CR_,
+	u_,go_,ke_,na_,ku_,na_,ttu_,ta_,spc_,e_,mo_,no_,wo_,spc_,tu_,ka_,ma_,e_,te_,spc_,ta_,be_,ru_,kten_,EOM_,
+};
+
+const	u8	text46[] = {
+	PA_,RA_,SU_,ka_,ra_,spc_,yo_,u_,bu_,n_,wo_,spc_,su_,i_,to_,ttu_,te_,spc_,o_,o_,ki_,ku_,na_,ru_,CR_,
+	KI_,NO_,KO_,ha_,spc_,to_,u_,ti_,yyu_,u_,ka_,so_,u_,spc_,to_,spc_,yo_,ba_,re_,te_,i_,ru_,kten_,CR_,
+	ti_,yyo_,u_,zi_,yyu_,no_,spc_,ku_,su_,ri_,ni_,na_,ru_,spc_,ki_,ti_,yyo_,u_,na_,spc_,KI_,NO_,KO_,kten_,EOM_,
+};
+
+const	u8	text47[] = {
+	PA_,RA_,SE_,KU_,TO_,ha_,spc_,si_,yyu_,u_,da_,n_,de_,spc_,ta_,i_,bo_,ku_,no_,spc_,ne_,mo_,to_,ni_,CR_,
+	ku_,ttu_,tu_,i_,te_,spc_,e_,i_,yo_,u_,wo_,spc_,su_,i_,to_,ttu_,te_,si_,ma_,u_,kten_,CR_,
+	ka_,re_,ru_,to_,spc_,i_,ttu_,se_,i_,ni_,spc_,be_,tu_,no_,spc_,ki_,ni_,spc_,i_,do_,u_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text48[] = {
+	mi_,wo_,spc_,ma_,mo_,ru_,ta_,me_,ni_,spc_,ho_,so_,ku_,spc_,ka_,ta_,i_,spc_,ta_,i_,mo_,u_,ga_,CR_,
+	ze_,n_,si_,n_,wo_,spc_,o_,o_,u_,yo_,u_,ni_,spc_,na_,ttu_,ta_,to_,spc_,i_,wa_,re_,ru_,kten_,CR_,
+	ti_,i_,sa_,na_,spc_,e_,mo_,no_,mo_,spc_,mi_,no_,ga_,sa_,na_,i_,spc_,me_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text49[] = {
+	ya_,ko_,u_,se_,i_,de_,spc_,yo_,ru_,ni_,spc_,ka_,tu_,do_,u_,wo_,spc_,ha_,zi_,me_,ru_,kten_,CR_,
+	ga_,i_,to_,u_,no_,spc_,a_,ka_,ri_,ni_,spc_,sa_,so_,wa_,re_,spc_,a_,tu_,ma_,ttu_,ta_,CR_,
+	ti_,i_,sa_,na_,spc_,mu_,si_,wo_,spc_,ko_,no_,n_,de_,spc_,ta_,be_,ru_,kten_,EOM_,
+};
+
+const	u8	text50[] = {
+	ho_,to_,n_,do_,no_,spc_,no_,u_,ka_,ha_,spc_,DE_,II_,GU_,DA_,wo_,spc_,so_,da_,te_,te_,i_,ru_,kten_,CR_,
+	DE_,II_,GU_,DA_,ga_,spc_,a_,na_,wo_,spc_,ho_,ttu_,ta_,spc_,to_,ti_,ha_,spc_,ho_,do_,yo_,ku_,CR_,
+	ta_,ga_,ya_,sa_,re_,spc_,o_,i_,si_,i_,spc_,ya_,sa_,i_,ga_,spc_,tu_,ku_,re_,ru_,ka_,ra_,da_,kten_,EOM_,
+};
+
+const	u8	text51[] = {
+	mo_,to_,mo_,to_,spc_,hi_,to_,tu_,no_,spc_,ka_,ra_,da_,ka_,ra_,spc_,n3_,tu_,go_,ni_,CR_,
+	na_,ttu_,ta_,no_,de_,spc_,mi_,n_,na_,spc_,ka_,n_,ga_,e_,ru_,ko_,to_,ha_,spc_,o_,na_,zi_,kten_,CR_,
+	ti_,ka_,ra_,wo_,spc_,a_,wa_,se_,spc_,do_,ko_,ma_,de_,mo_,spc_,ho_,ri_,su_,su_,mu_,kten_,EOM_,
+};
+
+const	u8	text52[] = {
+	su_,ru_,do_,i_,spc_,TU_,ME_,wo_,spc_,hi_,ttu_,ko_,me_,te_,spc_,nu_,ki_,a_,si_,spc_,sa_,si_,a_,si_,CR_,
+	a_,si_,o_,to_,wo_,spc_,ta_,te_,zu_,ni_,spc_,a_,ru_,ku_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	KI_,RA_,KI_,RA_,spc_,hi_,ka_,ru_,spc_,KO_,I_,N_,ga_,spc_,na_,ze_,ka_,spc_,da_,i_,su_,ki_,da_,kten_,EOM_,
+};
+
+const	u8	text53[] = {
+	ta_,ku_,ma_,si_,i_,spc_,n6_,po_,n_,no_,spc_,HI_,GE_,ha_,spc_,ku_,u_,ki_,no_,spc_,u_,go_,ki_,de_,CR_,
+	ma_,wa_,ri_,no_,spc_,yo_,u_,su_,wo_,spc_,KI_,YYA_,TTU_,TI_,su_,ru_,spc_,ya_,ku_,wa_,ri_,kten_,CR_,
+	HI_,GE_,wo_,spc_,tu_,ka_,ma_,re_,ru_,to_,spc_,o_,to_,na_,si_,ku_,na_,ttu_,te_,spc_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text54[] = {
+	hu_,si_,gi_,na_,spc_,ti_,ka_,ra_,wo_,spc_,tu_,ka_,ttu_,ta_,spc_,ki_,o_,ku_,ga_,spc_,na_,i_,no_,ha_,CR_,
+	ti_,ka_,ra_,wo_,spc_,ha_,ttu_,ki_,si_,ta_,spc_,to_,ki_,ha_,spc_,zi_,yyu_,ku_,su_,i_,si_,te_,i_,ru_,CR_,
+	to_,ki_,to_,spc_,o_,na_,zi_,spc_,zi_,yyo_,u_,ta_,i_,da_,ka_,ra_,spc_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text55[] = {
+	o_,yo_,gu_,spc_,SU_,PI_,bou_,DO_,ha_,spc_,PO_,KE_,MO_,N_,zi_,yyu_,u_,de_,spc_,i_,ti_,ba_,n_,kten_,CR_,
+	a_,ra_,si_,de_,spc_,o_,o_,a_,re_,no_,spc_,u_,mi_,de_,mo_,spc_,he_,ttu_,ti_,yya_,ra_,kten_,CR_,
+	na_,n_,pa_,se_,n_,ka_,ra_,spc_,hi_,to_,wo_,spc_,ta_,su_,ke_,ru_,spc_,ko_,to_,mo_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text56[] = {
+	ka_,ra_,da_,ga_,spc_,hu_,ru_,e_,spc_,ha_,na_,i_,ki_,ga_,spc_,a_,ra_,ku_,na_,re_,ba_,CR_,
+	o_,ko_,ri_,da_,su_,spc_,ma_,e_,bu_,re_,spc_,na_,no_,da_,ga_,spc_,a_,ttu_,to_,i_,u_,ma_,ni_,CR_,
+	ha_,ge_,si_,ku_,spc_,o_,ko_,ru_,no_,de_,spc_,ni_,ge_,da_,su_,spc_,hi_,ma_,ha_,spc_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text57[] = {
+	ha_,ge_,si_,ku_,spc_,o_,ko_,ru_,spc_,ko_,to_,de_,spc_,ke_,ttu_,ko_,u_,ga_,spc_,yo_,ku_,na_,ri_,CR_,
+	ki_,n_,ni_,ku_,no_,spc_,ti_,ka_,ra_,wo_,spc_,tu_,yo_,ku_,su_,ru_,no_,da_,kten_,CR_,
+	ta_,da_,si_,spc_,a_,ta_,ma_,no_,spc_,ka_,i_,te_,n_,ha_,spc_,o_,so_,ku_,na_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text58[] = {
+	ki_,yyu_,u_,ka_,ku_,ni_,spc_,su_,gu_,re_,spc_,i_,ti_,do_,spc_,ka_,i_,da_,spc_,ni_,o_,i_,ha_,CR_,
+	na_,ni_,ga_,spc_,a_,ttu_,te_,mo_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,wa_,su_,re_,na_,i_,kten_,CR_,
+	a_,i_,te_,no_,spc_,ki_,mo_,ti_,wo_,spc_,ni_,o_,i_,de_,spc_,sa_,ttu_,ti_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text59[] = {
+	n1_,n0_,n0_,n0_,n0_,KI_,RO_,no_,spc_,ki_,yyo_,ri_,wo_,spc_,i_,ttu_,ti_,yyu_,u_,ya_,de_,CR_,
+	ha_,si_,ru_,to_,spc_,i_,wa_,re_,te_,i_,ru_,spc_,ka_,i_,so_,ku_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ta_,i_,na_,i_,de_,spc_,mo_,e_,sa_,ka_,ru_,spc_,ho_,no_,o_,ga_,spc_,PA_,WA_,bou_,to_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text60[] = {
+	u_,zu_,ma_,ki_,spc_,mo_,yo_,u_,no_,spc_,na_,i_,zo_,u_,ga_,spc_,su_,ke_,te_,si_,ma_,u_,ho_,do_,CR_,
+	u_,su_,i_,spc_,hi_,hu_,da_,ga_,spc_,su_,ru_,do_,i_,spc_,KI_,BA_,wo_,spc_,ha_,ne_,ka_,e_,su_,CR_,
+	da_,n_,ri_,yyo_,ku_,wo_,spc_,mo_,ttu_,te_,i_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text61[] = {
+	i_,tu_,mo_,spc_,ka_,ra_,da_,no_,spc_,hi_,yyo_,u_,me_,n_,ga_,spc_,e_,ki_,ta_,i_,de_,CR_,
+	nu_,ru_,nu_,ru_,spc_,nu_,re_,te_,i_,ru_,ta_,me_,spc_,te_,ki_,ni_,spc_,tu_,ka_,ma_,ttu_,te_,mo_,CR_,
+	nu_,ru_,ri_,to_,spc_,su_,ri_,nu_,ke_,spc_,ni_,ge_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text62[] = {
+	ha_,ttu_,ta_,tu_,si_,ta_,spc_,ki_,yyo_,u_,zi_,n_,na_,spc_,ki_,n_,ni_,ku_,ha_,spc_,do_,n_,na_,ni_,CR_,
+	u_,n_,do_,u_,si_,te_,mo_,spc_,tu_,ka_,re_,ru_,spc_,ko_,to_,ha_,spc_,na_,i_,kten_,CR_,
+	ta_,i_,he_,i_,yo_,u_,mo_,spc_,ka_,ru_,ku_,spc_,o_,u_,da_,n_,spc_,de_,ki_,ru_,ho_,do_,da_,kten_,EOM_,
+};
+
+const	u8	text63[] = {
+	ma_,i_,ni_,ti_,spc_,n1_,n8_,zi_,ka_,n_,spc_,ne_,mu_,ra_,na_,i_,to_,spc_,ne_,bu_,so_,ku_,de_,CR_,
+	ti_,yyo_,u_,no_,u_,ri_,yyo_,ku_,ga_,spc_,tu_,ka_,e_,na_,ku_,na_,ttu_,te_,si_,ma_,u_,kten_,CR_,
+	o_,so_,wa_,re_,ru_,to_,spc_,ne_,ta_,ma_,ma_,spc_,TE_,RE_,PO_,bou_,TO_,de_,spc_,ni_,ge_,ru_,kten_,EOM_,
+};
+
+const	u8	text64[] = {
+	gi_,n_,no_,spc_,SU_,PU_,bou_,N_,ha_,spc_,A_,RU_,HU_,AA_,ha_,wo_,spc_,ta_,ka_,me_,ru_,kten_,CR_,
+	SU_,PU_,bou_,N_,ga_,spc_,na_,i_,to_,spc_,i_,tu_,mo_,no_,spc_,ha_,n_,bu_,n_,si_,ka_,CR_,
+	ti_,yyo_,u_,no_,u_,ri_,yyo_,ku_,wo_,spc_,tu_,ka_,e_,na_,ku_,na_,ru_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text65[] = {
+	mu_,ge_,n_,ni_,spc_,hu_,e_,ru_,spc_,no_,u_,sa_,i_,bo_,u_,ga_,spc_,ti_,no_,u_,si_,su_,u_,CR_,
+	n5_,n0_,n0_,n0_,no_,spc_,SU_,bou_,PA_,bou_,zu_,no_,u_,wo_,spc_,tu_,ku_,ri_,da_,si_,ta_,kten_,CR_,
+	se_,ka_,i_,no_,spc_,de_,ki_,go_,to_,wo_,spc_,su_,be_,te_,spc_,ki_,o_,ku_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text66[] = {
+	GO_,RO_,bou_,N_,wo_,spc_,mo_,ti_,a_,ge_,te_,spc_,ka_,ra_,da_,wo_,spc_,ki_,ta_,e_,ru_,kten_,CR_,
+	su_,be_,te_,no_,spc_,ka_,ku_,to_,u_,gi_,wo_,spc_,MA_,SU_,TA_,bou_,su_,ru_,ta_,me_,ni_,CR_,
+	se_,ka_,i_,zi_,yyu_,u_,wo_,spc_,ta_,bi_,su_,ru_,spc_,WA_,N_,RI_,KI_,bou_,mo_,spc_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text67[] = {
+	ni_,n_,ge_,n_,no_,spc_,ti_,ka_,ra_,si_,go_,to_,wo_,spc_,te_,tu_,da_,i_,na_,ga_,ra_,CR_,
+	ka_,ra_,da_,wo_,spc_,ma_,i_,ni_,ti_,spc_,ki_,ta_,e_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ya_,su_,mi_,no_,spc_,hi_,ni_,ha_,spc_,no_,ya_,ma_,de_,spc_,ka_,ra_,da_,wo_,spc_,ki_,ta_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text68[] = {
+	a_,ra_,yu_,ru_,spc_,ka_,ku_,to_,u_,gi_,wo_,spc_,MA_,SU_,TA_,bou_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	n4_,ho_,n_,no_,spc_,u_,de_,de_,spc_,tu_,ka_,ma_,re_,ta_,ra_,spc_,mo_,u_,spc_,o_,wa_,ri_,kten_,CR_,
+	ti_,he_,i_,se_,n_,no_,spc_,mu_,ko_,u_,ma_,de_,spc_,na_,ge_,to_,ba_,sa_,re_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text69[] = {
+	ho_,so_,ku_,spc_,si_,na_,ya_,ka_,na_,spc_,ka_,ra_,da_,ha_,spc_,do_,n_,na_,spc_,tu_,yo_,i_,CR_,
+	ko_,u_,ge_,ki_,de_,mo_,spc_,si_,na_,ttu_,te_,spc_,yo_,ke_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	ku_,ti_,ka_,ra_,spc_,te_,tu_,mo_,spc_,to_,ka_,si_,te_,si_,ma_,u_,spc_,e_,ki_,wo_,spc_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text70[] = {
+	yo_,ru_,ni_,spc_,na_,ru_,to_,spc_,o_,si_,ri_,no_,spc_,HU_,TTU_,KU_,wo_,spc_,ki_,no_,spc_,e_,da_,ni_,CR_,
+	hi_,ttu_,ka_,ke_,te_,spc_,bu_,ra_,sa_,ga_,ri_,spc_,ne_,mu_,ri_,ni_,spc_,tu_,ku_,kten_,CR_,
+	ne_,zo_,u_,ga_,spc_,wa_,ru_,i_,to_,spc_,a_,sa_,spc_,o_,ttu_,ko_,ti_,te_,i_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text71[] = {
+	a_,ta_,ma_,ni_,spc_,tu_,i_,te_,i_,ru_,spc_,na_,ga_,i_,spc_,tu_,ru_,wo_,spc_,ti_,i_,sa_,na_,CR_,
+	i_,ki_,mo_,no_,ni_,spc_,mi_,e_,ru_,spc_,u_,go_,ki_,de_,spc_,e_,mo_,no_,wo_,spc_,sa_,so_,i_,CR_,
+	ti_,ka_,du_,i_,te_,ki_,ta_,spc_,to_,ko_,ro_,wo_,spc_,pa_,ku_,ri_,to_,spc_,hi_,to_,no_,mi_,kten_,EOM_,
+};
+
+const	u8	text72[] = {
+	ta_,i_,yo_,u_,ko_,u_,se_,n_,wo_,spc_,ka_,ra_,da_,no_,spc_,na_,ka_,no_,spc_,su_,i_,bu_,n_,de_,CR_,
+	ku_,ttu_,se_,tu_,sa_,se_,te_,spc_,BI_,bou_,MU_,no_,spc_,E_,NE_,RU_,GI_,bou_,ni_,spc_,ka_,e_,ru_,kten_,CR_,
+	su_,i_,si_,yyo_,u_,no_,spc_,yo_,u_,na_,spc_,me_,da_,ma_,ka_,ra_,spc_,ha_,ttu_,si_,yya_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text73[] = {
+	zi_,yu_,u_,ni_,spc_,no_,bi_,ti_,di_,mi_,su_,ru_,spc_,si_,yyo_,ku_,si_,yyu_,de_,spc_,e_,mo_,no_,wo_,CR_,
+	ka_,ra_,me_,to_,ri_,spc_,mo_,u_,do_,ku_,wo_,spc_,a_,ta_,e_,te_,spc_,yo_,wa_,ra_,se_,ru_,kten_,CR_,
+	i_,ttu_,pe_,n_,ni_,spc_,n8_,n0_,pi_,ki_,no_,spc_,e_,mo_,no_,wo_,spc_,tu_,ka_,ma_,e_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text74[] = {
+	zi_,me_,n_,ni_,spc_,ha_,n_,bu_,n_,spc_,u_,ma_,ri_,spc_,gu_,ttu_,su_,ri_,spc_,ne_,mu_,ru_,kten_,CR_,
+	to_,za_,n_,si_,yya_,ni_,spc_,hu_,ma_,re_,te_,mo_,spc_,ma_,ttu_,ta_,ku_,spc_,o_,ki_,na_,i_,yo_,kten_,CR_,
+	a_,sa_,spc_,E_,SA_,wo_,spc_,sa_,ga_,si_,te_,spc_,sa_,ka_,wo_,spc_,ko_,ro_,ga_,ri_,o_,ti_,ru_,kten_,EOM_,
+};
+
+const	u8	text75[] = {
+	ya_,ma_,no_,spc_,hu_,mo_,to_,ka_,ra_,spc_,sa_,n_,ti_,yyo_,u_,ma_,de_,spc_,no_,bo_,ru_,CR_,
+	a_,i_,da_,ni_,spc_,da_,i_,su_,ki_,na_,spc_,i_,wa_,wo_,spc_,GA_,RI_,GA_,RI_,spc_,ta_,be_,ru_,kten_,CR_,
+	ti_,yyo_,u_,zi_,yyo_,u_,ni_,spc_,tu_,ku_,to_,spc_,ma_,ta_,spc_,ko_,ro_,ga_,ri_,o_,ti_,ru_,kten_,EOM_,
+};
+
+const	u8	text76[] = {
+	ya_,ma_,no_,spc_,si_,yya_,me_,n_,ni_,spc_,ho_,ttu_,te_,a_,ru_,spc_,mi_,zo_,ha_,spc_,ko_,ro_,ga_,ri_,CR_,
+	o_,ti_,te_,ki_,ta_,spc_,GO_,RO_,bou_,NI_,YYA_,ga_,spc_,mi_,n_,ka_,ni_,spc_,bu_,tu_,ka_,ra_,na_,i_,CR_,
+	yo_,u_,ni_,spc_,su_,ru_,ta_,me_,no_,spc_,to_,o_,ri_,mi_,ti_,ni_,spc_,na_,ttu_,te_,i_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text77[] = {
+	u_,ma_,re_,te_,spc_,su_,gu_,ha_,spc_,ta_,ti_,a_,ga_,ru_,no_,mo_,spc_,ya_,ttu_,to_,da_,ga_,CR_,
+	ko_,ro_,bi_,na_,ga_,ra_,spc_,o_,ya_,no_,spc_,a_,to_,wo_,spc_,o_,i_,ka_,ke_,te_,i_,ru_,CR_,
+	u_,ti_,ni_,spc_,zi_,yyo_,u_,bu_,na_,spc_,a_,si_,ko_,si_,ni_,spc_,so_,da_,tu_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text78[] = {
+	i_,tu_,mo_,ha_,spc_,no_,n_,bi_,ri_,spc_,no_,ha_,ra_,wo_,spc_,ka_,ke_,ma_,wa_,ttu_,te_,i_,ru_,ga_,CR_,
+	hi_,to_,ta_,bi_,spc_,ho_,n_,ki_,wo_,spc_,da_,su_,to_,spc_,ta_,te_,ga_,mi_,no_,spc_,ho_,no_,o_,ga_,CR_,
+	mo_,e_,a_,ga_,ri_,spc_,zi_,so_,ku_,n2_,n4_,n0_,KI_,RO_,de_,spc_,ha_,si_,ri_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text79[] = {
+	si_,ttu_,po_,wo_,spc_,ka_,wa_,ni_,spc_,i_,re_,te_,spc_,E_,SA_,wo_,spc_,tu_,ttu_,te_,i_,ru_,ga_,CR_,
+	so_,no_,u_,ti_,spc_,na_,ni_,wo_,spc_,si_,te_,i_,ru_,no_,ka_,spc_,wa_,su_,re_,te_,si_,ma_,i_,CR_,
+	ka_,wa_,be_,ri_,ni_,spc_,ne_,so_,be_,ttu_,ta_,ma_,ma_,spc_,n1_,ni_,ti_,wo_,spc_,o_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text80[] = {
+	SI_,EE_,RU_,DA_,bou_,ga_,spc_,ka_,mi_,tu_,i_,te_,spc_,i_,ru_,no_,de_,spc_,si_,ttu_,po_,de_,CR_,
+	E_,SA_,wo_,spc_,tu_,re_,na_,ku_,na_,ttu_,ta_,spc_,YA_,DO_,RA_,N_,ha_,spc_,si_,bu_,si_,bu_,CR_,
+	su_,i_,ti_,yyu_,u_,wo_,spc_,o_,yo_,i_,de_,spc_,E_,SA_,wo_,spc_,tu_,ka_,ma_,e_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text81[] = {
+	sa_,yu_,u_,no_,spc_,YU_,NI_,TTU_,TO_,ka_,ra_,spc_,de_,n_,zi_,ha_,wo_,spc_,da_,su_,spc_,ko_,to_,de_,CR_,
+	zi_,yyu_,u_,ri_,yyo_,ku_,wo_,spc_,sa_,e_,gi_,ri_,spc_,ku_,u_,ti_,yyu_,u_,ni_,spc_,u_,ka_,bu_,kten_,CR_,
+	ta_,i_,na_,i_,no_,spc_,de_,n_,ki_,ga_,spc_,na_,ku_,na_,ru_,to_,spc_,to_,be_,na_,ku_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text82[] = {
+	ki_,yyo_,u_,ri_,yyo_,ku_,na_,spc_,zi_,ri_,yyo_,ku_,se_,n_,de_,spc_,se_,i_,mi_,tu_,ki_,ka_,i_,wo_,CR_,
+	ko_,wa_,si_,te_,si_,ma_,u_,ta_,me_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,ni_,spc_,i_,re_,te_,CR_,
+	o_,ka_,na_,i_,to_,spc_,ti_,yyu_,u_,i_,sa_,re_,ru_,spc_,ma_,ti_,mo_,spc_,a_,ru_,to_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text83[] = {
+	mo_,ttu_,te_,i_,ru_,spc_,si_,yyo_,ku_,bu_,tu_,no_,spc_,KU_,KI_,ni_,mo_,spc_,yo_,i_,mo_,no_,to_,CR_,
+	so_,u_,de_,na_,i_,spc_,mo_,no_,ga_,spc_,a_,ru_,ra_,si_,ku_,spc_,KA_,MO_,NE_,GI_,do_,u_,si_,ga_,CR_,
+	KU_,KI_,wo_,spc_,me_,gu_,ttu_,te_,spc_,ta_,ta_,ka_,u_,spc_,ko_,to_,ga_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text84[] = {
+	n2_,tu_,no_,spc_,a_,ta_,ma_,ha_,spc_,o_,na_,zi_,spc_,no_,u_,mi_,so_,wo_,spc_,mo_,tu_,kten_,CR_,
+	ma_,re_,ni_,spc_,be_,tu_,be_,tu_,no_,spc_,no_,u_,wo_,spc_,mo_,ttu_,ta_,spc_,DO_,bou_,DO_,bou_,ga_,CR_,
+	u_,ma_,re_,te_,ku_,ru_,to_,spc_,ke_,n_,ki_,yyu_,u_,de_,spc_,ho_,u_,ko_,ku_,sa_,re_,ta_,kten_,EOM_,
+};
+
+const	u8	text85[] = {
+	n3_,tu_,a_,ru_,no_,ha_,spc_,a_,ta_,ma_,da_,ke_,de_,ha_,spc_,na_,i_,ra_,si_,i_,kten_,CR_,
+	si_,n_,zo_,u_,to_,spc_,ha_,i_,mo_,spc_,n3_,tu_,na_,no_,de_,spc_,i_,ki_,gi_,re_,si_,na_,i_,de_,CR_,
+	na_,ga_,i_,spc_,ki_,yyo_,ri_,wo_,spc_,ha_,si_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text86[] = {
+	ko_,o_,ri_,ni_,spc_,o_,o_,wa_,re_,ta_,spc_,u_,mi_,de_,spc_,E_,SA_,wo_,spc_,to_,ru_,kten_,CR_,
+	i_,ki_,tu_,gi_,wo_,spc_,su_,ru_,to_,ki_,ha_,spc_,a_,ta_,ma_,no_,spc_,de_,ttu_,pa_,ri_,de_,CR_,
+	ko_,o_,ri_,wo_,spc_,wa_,ttu_,te_,spc_,u_,mi_,ka_,ra_,spc_,ka_,o_,wo_,spc_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text87[] = {
+	tu_,me_,ta_,i_,spc_,ko_,o_,ri_,no_,spc_,u_,e_,de_,spc_,ne_,ru_,no_,ga_,spc_,da_,i_,su_,ki_,kten_,CR_,
+	mu_,ka_,si_,spc_,hi_,yyo_,u_,za_,n_,de_,spc_,ne_,mu_,ru_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ta_,CR_,
+	hu_,na_,no_,ri_,ga_,spc_,ni_,n_,gi_,yyo_,to_,spc_,ma_,ti_,ga_,e_,ta_,kten_,EOM_,
+};
+
+const	u8	text88[] = {
+	o_,se_,n_,sa_,re_,ta_,spc_,ka_,i_,te_,i_,no_,spc_,HE_,DO_,RO_,ka_,ra_,spc_,u_,ma_,re_,ta_,kten_,CR_,
+	ki_,ta_,na_,i_,spc_,mo_,no_,ga_,spc_,da_,i_,su_,ki_,de_,spc_,ka_,ra_,da_,zi_,yyu_,u_,ka_,ra_,CR_,
+	BA_,I_,KI_,N_,da_,ra_,ke_,no_,spc_,e_,ki_,ta_,i_,wo_,spc_,ta_,re_,na_,ga_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text89[] = {
+	ki_,ta_,na_,i_,spc_,mo_,no_,ga_,spc_,da_,i_,ko_,u_,bu_,tu_,na_,no_,de_,spc_,GO_,MI_,wo_,CR_,
+	mi_,ti_,ba_,ta_,ni_,spc_,su_,te_,ru_,spc_,yo_,u_,na_,spc_,hi_,to_,ga_,spc_,su_,n_,de_,i_,ru_,CR_,
+	ma_,ti_,ni_,ha_,spc_,BE_,TO_,BE_,TO_,N_,ga_,spc_,a_,tu_,ma_,ttu_,te_,ku_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text90[] = {
+	yo_,ru_,ni_,spc_,na_,ru_,to_,spc_,o_,o_,ki_,na_,spc_,BE_,RO_,de_,spc_,ka_,i_,te_,i_,no_,CR_,
+	su_,na_,ni_,spc_,a_,na_,wo_,spc_,ho_,ri_,spc_,so_,no_,na_,ka_,de_,spc_,ne_,mu_,ru_,kten_,CR_,
+	KA_,RA_,wo_,spc_,to_,zi_,te_,spc_,ne_,mu_,ru_,ga_,spc_,BE_,RO_,ha_,spc_,da_,si_,ta_,ma_,ma_,kten_,EOM_,
+};
+
+const	u8	text91[] = {
+	no_,mi_,ko_,n_,da_,spc_,ka_,i_,su_,i_,wo_,spc_,u_,si_,ro_,he_,spc_,i_,ki_,o_,i_,spc_,yo_,ku_,CR_,
+	hu_,n_,si_,yya_,su_,ru_,spc_,ko_,to_,de_,spc_,u_,mi_,no_,spc_,na_,ka_,wo_,spc_,o_,yo_,gu_,kten_,CR_,
+	TO_,GE_,wo_,spc_,ha_,ttu_,si_,yya_,su_,ru_,spc_,si_,ku_,mi_,mo_,spc_,o_,na_,zi_,kten_,EOM_,
+};
+
+const	u8	text92[] = {
+	ki_,yyo_,u_,hu_,u_,wo_,spc_,u_,ke_,ru_,to_,spc_,GA_,SU_,zi_,yyo_,u_,no_,spc_,ka_,ra_,da_,ha_,CR_,
+	mi_,ru_,mi_,ru_,spc_,hu_,ki_,to_,ba_,sa_,re_,spc_,ti_,i_,sa_,ku_,na_,ttu_,te_,spc_,si_,ma_,u_,kten_,CR_,
+	ka_,ze_,wo_,spc_,sa_,ke_,ta_,spc_,GO_,bou_,SU_,ga_,spc_,no_,ki_,si_,ta_,ni_,spc_,a_,tu_,ma_,ru_,kten_,EOM_,
+};
+
+const	u8	text93[] = {
+	ya_,mi_,ni_,spc_,u_,ka_,bu_,spc_,GO_,bou_,SU_,TO_,ga_,spc_,te_,ma_,ne_,ki_,si_,te_,mo_,CR_,
+	ze_,ttu_,ta_,i_,ni_,spc_,ti_,ka_,yo_,ttu_,te_,ha_,spc_,i_,ke_,na_,i_,yo_,kten_,CR_,
+	PE_,RO_,RI_,to_,spc_,na_,me_,ra_,re_,spc_,i_,no_,ti_,wo_,spc_,su_,wa_,re_,te_,si_,ma_,u_,zo_,kten_,EOM_,
+};
+
+const	u8	text94[] = {
+	ma_,yo_,na_,ka_,spc_,ga_,i_,to_,u_,no_,spc_,a_,ka_,ri_,de_,spc_,de_,ki_,ta_,spc_,ka_,ge_,ga_,CR_,
+	zi_,bu_,n_,wo_,spc_,o_,i_,ko_,si_,te_,spc_,i_,ku_,no_,ha_,spc_,GE_,N_,GA_,bou_,ga_,CR_,
+	ka_,ge_,ni_,spc_,na_,ri_,su_,ma_,si_,te_,spc_,ha_,si_,ttu_,te_,spc_,i_,ku_,ka_,ra_,da_,kten_,EOM_,
+};
+
+const	u8	text95[] = {
+	no_,u_,mi_,so_,ni_,spc_,zi_,si_,yya_,ku_,ga_,spc_,a_,ru_,no_,de_,spc_,tu_,ti_,no_,spc_,na_,ka_,wo_,CR_,
+	ho_,ri_,spc_,su_,su_,n_,de_,i_,te_,mo_,spc_,ho_,u_,ko_,u_,wo_,spc_,ma_,ti_,ga_,e_,na_,i_,kten_,CR_,
+	to_,si_,wo_,spc_,to_,ru_,ho_,do_,spc_,ka_,ra_,da_,ha_,spc_,ma_,ru_,mi_,wo_,spc_,o_,bi_,ru_,kten_,EOM_,
+};
+
+const	u8	text96[] = {
+	ne_,mu_,ttu_,te_,i_,ru_,to_,ki_,spc_,KI_,MI_,no_,spc_,ha_,na_,ga_,spc_,MU_,ZU_,MU_,ZU_,si_,ta_,ra_,CR_,
+	ma_,ku_,ra_,mo_,to_,ni_,spc_,ta_,ttu_,ta_,spc_,SU_,RI_,bou_,PU_,ga_,spc_,ha_,na_,no_,CR_,
+	a_,na_,ka_,ra_,spc_,yu_,me_,wo_,spc_,ta_,be_,yo_,u_,to_,si_,te_,i_,ru_,spc_,a_,i_,zu_,kten_,EOM_,
+};
+
+const	u8	text97[] = {
+	te_,ni_,spc_,mo_,ttu_,te_,i_,ru_,spc_,hu_,ri_,ko_,no_,spc_,u_,go_,ki_,to_,spc_,ka_,ga_,ya_,ki_,ga_,CR_,
+	a_,i_,te_,wo_,spc_,hu_,ka_,i_,spc_,sa_,i_,mi_,n_,zi_,yyo_,u_,ta_,i_,ni_,spc_,o_,to_,su_,kten_,CR_,
+	e_,mo_,no_,wo_,spc_,sa_,ga_,si_,na_,ga_,ra_,spc_,hu_,ri_,ko_,wo_,spc_,mi_,ga_,i_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text98[] = {
+	su_,na_,ha_,ma_,ni_,spc_,a_,na_,wo_,spc_,ho_,ri_,spc_,so_,ko_,de_,spc_,ku_,ra_,si_,te_,i_,ru_,kten_,CR_,
+	E_,SA_,no_,spc_,su_,ku_,na_,i_,spc_,su_,na_,ha_,ma_,de_,ha_,spc_,ba_,si_,yyo_,to_,ri_,wo_,su_,ru_,CR_,
+	KU_,RA_,BU_,ta_,ti_,no_,spc_,a_,ra_,so_,i_,wo_,spc_,mi_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,EOM_,
+};
+
+const	u8	text99[] = {
+	KI_,N_,GU_,RA_,bou_,ha_,spc_,ki_,yyo_,da_,i_,na_,spc_,HA_,SA_,MI_,wo_,spc_,hu_,ttu_,te_,CR_,
+	na_,ka_,ma_,do_,u_,si_,de_,spc_,a_,i_,zu_,wo_,spc_,o_,ku_,ri_,a_,ttu_,te_,i_,ru_,ga_,CR_,
+	HA_,SA_,MI_,ga_,spc_,o_,mo_,su_,gi_,te_,spc_,su_,gu_,ni_,spc_,tu_,ka_,re_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text100[] = {
+	su_,ko_,si_,no_,spc_,SI_,YYO_,TTU_,KU_,de_,spc_,su_,gu_,ni_,spc_,ba_,ku_,ha_,tu_,su_,ru_,kten_,CR_,
+	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,ni_,spc_,ki_,yyo_,u_,ri_,yyo_,ku_,na_,spc_,PA_,RU_,SU_,wo_,CR_,
+	a_,bi_,se_,ta_,spc_,to_,ki_,ni_,spc_,u_,ma_,re_,ta_,to_,spc_,U_,WA_,SA_,sa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text101[] = {
+	de_,n_,ki_,ni_,spc_,hi_,ki_,yo_,se_,ra_,re_,ru_,spc_,se_,i_,si_,tu_,wo_,spc_,mo_,tu_,kten_,CR_,
+	o_,mo_,ni_,spc_,ha_,tu_,de_,n_,si_,yyo_,ni_,spc_,a_,tu_,ma_,ttu_,te_,ki_,te_,spc_,tu_,ku_,ttu_,ta_,CR_,
+	ba_,ka_,ri_,no_,spc_,de_,n_,ki_,wo_,spc_,ta_,be_,te_,si_,ma_,u_,spc_,ko_,ma_,ri_,mo_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text102[] = {
+	na_,ka_,ma_,o_,mo_,i_,no_,spc_,n6_,ko_,no_,spc_,ta_,ma_,go_,ha_,spc_,o_,ta_,ga_,i_,ni_,CR_,
+	hi_,ki_,tu_,ke_,a_,i_,spc_,ku_,ru_,ku_,ru_,spc_,ka_,i_,te_,n_,si_,te_,i_,ru_,kten_,CR_,
+	KA_,RA_,no_,spc_,HI_,BI_,ga_,spc_,hu_,e_,ru_,to_,spc_,si_,n_,ka_,ha_,spc_,ma_,di_,ka_,da_,kten_,EOM_,
+};
+
+const	u8	text103[] = {
+	na_,n_,go_,ku_,spc_,u_,ma_,re_,no_,spc_,NA_,TTU_,SI_,bou_,no_,spc_,a_,ta_,ma_,ha_,spc_,tu_,yo_,i_,CR_,
+	hi_,za_,si_,wo_,spc_,i_,ttu_,pa_,i_,spc_,a_,bi_,te_,spc_,do_,n_,do_,n_,spc_,so_,da_,ti_,CR_,
+	zi_,me_,n_,ni_,spc_,o_,ti_,ru_,to_,spc_,TA_,MA_,TA_,MA_,ni_,spc_,na_,ru_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text104[] = {
+	n2_,do_,to_,spc_,a_,e_,na_,i_,spc_,ha_,ha_,o_,ya_,no_,spc_,o_,mo_,ka_,ge_,wo_,CR_,
+	ma_,n_,ge_,tu_,ni_,spc_,mi_,tu_,ke_,te_,spc_,na_,ki_,go_,e_,wo_,spc_,a_,ge_,ru_,kten_,CR_,
+	ka_,bu_,ttu_,te_,i_,ru_,spc_,HO_,NE_,no_,spc_,si_,mi_,ha_,spc_,na_,mi_,da_,no_,spc_,a_,to_,kten_,EOM_,
+};
+
+const	u8	text105[] = {
+	ha_,ha_,o_,ya_,ni_,spc_,a_,e_,na_,i_,spc_,ka_,na_,si_,mi_,wo_,spc_,no_,ri_,ko_,e_,ta_,CR_,
+	KA_,RA_,KA_,RA_,ga_,spc_,ta_,ku_,ma_,si_,ku_,spc_,si_,n_,ka_,si_,ta_,spc_,su_,ga_,ta_,kten_,CR_,
+	ki_,ta_,e_,ra_,re_,ta_,spc_,ko_,ko_,ro_,ha_,spc_,ka_,n_,ta_,n_,ni_,spc_,ku_,zi_,ke_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text106[] = {
+	zi_,za_,i_,ni_,spc_,no_,bi_,ti_,di_,mi_,su_,ru_,spc_,a_,si_,de_,spc_,ki_,yyo_,u_,re_,tu_,na_,CR_,
+	KI_,TTU_,KU_,wo_,spc_,ha_,na_,ti_,spc_,a_,i_,te_,wo_,spc_,ke_,ri_,ta_,o_,su_,kten_,CR_,
+	ta_,ta_,ka_,i_,no_,spc_,a_,to_,spc_,tu_,ka_,re_,ta_,spc_,a_,si_,wo_,spc_,mo_,mi_,ho_,gu_,su_,kten_,EOM_,
+};
+
+const	u8	text107[] = {
+	se_,ka_,i_,TI_,YYA_,N_,PI_,O_,N_,wo_,spc_,me_,za_,si_,te_,i_,ta_,spc_,BO_,KU_,SA_,bou_,no_,CR_,
+	ta_,ma_,si_,i_,ga_,spc_,ya_,do_,ttu_,ta_,to_,spc_,i_,wa_,re_,ru_,spc_,E_,BI_,WA_,RA_,bou_,ha_,CR_,
+	hu_,ku_,tu_,no_,spc_,se_,i_,si_,n_,de_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,he_,ko_,ta_,re_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text108[] = {
+	ha_,zi_,me_,te_,spc_,me_,ni_,spc_,su_,ru_,spc_,mo_,no_,ha_,spc_,ka_,na_,ra_,zu_,spc_,PE_,RO_,RI_,kten_,CR_,
+	si_,ta_,za_,wa_,ri_,to_,spc_,a_,zi_,de_,spc_,ki_,o_,ku_,si_,te_,i_,ru_,no_,da_,kten_,CR_,
+	de_,mo_,spc_,su_,ttu_,pa_,i_,spc_,mo_,no_,ha_,spc_,ti_,yyo_,ttu_,to_,spc_,ni_,ga_,te_,kten_,EOM_,
+};
+
+const	u8	text109[] = {
+	na_,ma_,GO_,MI_,to_,spc_,ka_,ra_,da_,no_,spc_,do_,ku_,so_,wo_,spc_,ka_,ga_,ku_,ha_,n_,no_,u_,CR_,
+	sa_,se_,ru_,spc_,ko_,to_,de_,spc_,mo_,u_,do_,ku_,no_,spc_,GA_,SU_,wo_,spc_,tu_,ku_,ri_,da_,su_,kten_,CR_,
+	ki_,o_,n_,ga_,spc_,ta_,ka_,i_,ho_,do_,spc_,GA_,SU_,ga_,spc_,ta_,ku_,sa_,n_,spc_,de_,ki_,ru_,kten_,EOM_,
+};
+
+const	u8	text110[] = {
+	hu_,ta_,go_,no_,spc_,ka_,ra_,da_,wo_,spc_,ko_,u_,go_,ni_,spc_,si_,bo_,ma_,se_,ta_,ri_,CR_,
+	hu_,ku_,ra_,ma_,se_,ta_,ri_,si_,te_,spc_,do_,ku_,GA_,SU_,wo_,spc_,ma_,ze_,te_,i_,ru_,kten_,CR_,
+	ma_,ze_,ru_,ho_,do_,spc_,do_,ku_,so_,ga_,spc_,tu_,yo_,ma_,ri_,spc_,ku_,sa_,ku_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text111[] = {
+	ha_,si_,ttu_,te_,i_,ru_,u_,ti_,ni_,spc_,mo_,ku_,te_,ki_,wo_,spc_,wa_,su_,re_,ru_,ho_,do_,CR_,
+	no_,u_,mi_,so_,ga_,spc_,ti_,i_,sa_,ku_,spc_,a_,ta_,ma_,ga_,spc_,wa_,ru_,i_,zo_,kten_,CR_,
+	na_,ni_,ka_,wo_,spc_,ko_,wa_,su_,to_,spc_,ta_,ma_,ni_,spc_,o_,mo_,i_,da_,su_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text112[] = {
+	DO_,RI_,RU_,ni_,spc_,na_,ru_,spc_,TU_,NO_,de_,spc_,ga_,n_,se_,ki_,wo_,spc_,ha_,ka_,i_,su_,ru_,kten_,CR_,
+	MA_,GU_,MA_,wo_,spc_,hu_,ki_,da_,sa_,se_,te_,si_,ma_,u_,spc_,ko_,to_,mo_,spc_,a_,ru_,ga_,CR_,
+	yo_,ro_,i_,no_,spc_,yo_,u_,na_,spc_,hi_,hu_,ha_,spc_,a_,tu_,sa_,wo_,spc_,ka_,n_,zi_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text113[] = {
+	e_,i_,yo_,u_,spc_,ma_,n_,te_,n_,no_,spc_,TA_,MA_,GO_,wo_,spc_,ma_,i_,ni_,ti_,spc_,u_,mu_,kten_,CR_,
+	si_,yyo_,ku_,yo_,ku_,wo_,spc_,na_,ku_,si_,ta_,spc_,hi_,to_,de_,mo_,spc_,PE_,RO_,RI_,to_,CR_,
+	ta_,be_,te_,si_,ma_,u_,ho_,do_,spc_,o_,i_,si_,i_,spc_,TA_,MA_,GO_,da_,kten_,EOM_,
+};
+
+const	u8	text114[] = {
+	te_,ki_,ni_,spc_,tu_,ka_,ma_,re_,ru_,to_,spc_,TU_,RU_,ha_,spc_,pu_,ti_,ttu_,to_,spc_,ki_,re_,ru_,kten_,CR_,
+	ze_,n_,ze_,n_,spc_,i_,ta_,ku_,na_,i_,no_,de_,spc_,so_,no_,spc_,SU_,KI_,ni_,spc_,ni_,ge_,ru_,kten_,CR_,
+	yo_,ku_,zi_,tu_,ni_,ha_,spc_,a_,ta_,ra_,si_,i_,spc_,TU_,RU_,ga_,spc_,ha_,e_,so_,ro_,u_,zo_,kten_,EOM_,
+};
+
+const	u8	text115[] = {
+	GA_,RU_,bou_,RA_,no_,spc_,ko_,do_,mo_,ga_,spc_,n1_,pi_,ki_,de_,spc_,a_,so_,n_,de_,i_,te_,mo_,CR_,
+	ze_,ttu_,ta_,i_,ni_,spc_,tu_,ka_,ma_,e_,ta_,ri_,si_,te_,ha_,spc_,i_,ke_,na_,i_,yo_,kten_,CR_,
+	ti_,ka_,ku_,ni_,spc_,i_,ru_,spc_,o_,ya_,ga_,spc_,ha_,ge_,si_,ku_,spc_,o_,ko_,ri_,da_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text116[] = {
+	ki_,ke_,n_,wo_,spc_,ka_,n_,zi_,ru_,to_,spc_,ha_,n_,si_,yya_,te_,ki_,ni_,spc_,ku_,ti_,ka_,ra_,CR_,
+	ma_,ttu_,ku_,ro_,i_,spc_,SU_,MI_,wo_,spc_,ha_,ki_,da_,si_,te_,spc_,ni_,ge_,ru_,zo_,kten_,CR_,
+	se_,bi_,re_,wo_,spc_,ki_,yo_,u_,ni_,spc_,u_,go_,ka_,si_,te_,spc_,o_,yo_,gu_,kten_,EOM_,
+};
+
+const	u8	text117[] = {
+	ka_,ra_,da_,wo_,spc_,ka_,i_,te_,n_,sa_,se_,te_,spc_,u_,zu_,ma_,ki_,wo_,spc_,tu_,ku_,ru_,kten_,CR_,
+	gi_,yyo_,se_,n_,mo_,spc_,no_,mi_,ko_,ma_,re_,ru_,spc_,ho_,do_,no_,spc_,ge_,ki_,ri_,yyu_,u_,de_,CR_,
+	e_,mo_,no_,wo_,spc_,yo_,wa_,ra_,se_,te_,ka_,ra_,spc_,ma_,ru_,go_,to_,spc_,no_,mi_,ko_,mu_,kten_,EOM_,
+};
+
+const	u8	text118[] = {
+	ka_,wa_,ya_,spc_,i_,ke_,wo_,spc_,o_,yo_,gu_,spc_,ko_,to_,ga_,spc_,da_,i_,su_,ki_,na_,no_,de_,CR_,
+	su_,i_,so_,u_,spc_,na_,n_,ka_,ni_,spc_,i_,re_,te_,i_,ta_,ra_,spc_,bu_,a_,tu_,i_,CR_,
+	GA_,RA_,SU_,mo_,spc_,TU_,NO_,no_,spc_,hi_,to_,tu_,ki_,de_,spc_,wa_,ttu_,te_,spc_,ni_,ge_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text119[] = {
+	TA_,MA_,GO_,wo_,spc_,ma_,mo_,ru_,ta_,me_,spc_,O_,SU_,to_,spc_,ME_,SU_,ha_,spc_,ko_,u_,ta_,i_,de_,CR_,
+	su_,no_,spc_,ma_,wa_,ri_,wo_,spc_,o_,yo_,gi_,ma_,wa_,ri_,spc_,PA_,TO_,RO_,bou_,RU_,su_,ru_,kten_,CR_,
+	TA_,MA_,GO_,ga_,spc_,ka_,e_,ru_,ma_,de_,spc_,hi_,to_,tu_,ki_,i_,zi_,yyo_,u_,spc_,tu_,du_,ku_,kten_,EOM_,
+};
+
+const	u8	text120[] = {
+	ti_,yyu_,u_,si_,n_,no_,spc_,a_,ka_,i_,spc_,KO_,A_,wo_,spc_,te_,n_,me_,tu_,sa_,se_,te_,CR_,
+	yo_,zo_,ra_,no_,spc_,ho_,si_,to_,spc_,ko_,u_,si_,n_,spc_,si_,te_,i_,ru_,spc_,ra_,si_,i_,kten_,CR_,
+	ka_,ra_,da_,ha_,spc_,ti_,gi_,re_,te_,mo_,spc_,zi_,ko_,sa_,i_,se_,i_,spc_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text121[] = {
+	ho_,si_,ga_,ta_,no_,spc_,ka_,ra_,da_,wo_,spc_,SU_,KU_,RI_,YYU_,bou_,no_,spc_,yo_,u_,ni_,CR_,
+	ka_,i_,te_,n_,sa_,se_,te_,spc_,su_,i_,ti_,yyu_,u_,wo_,spc_,o_,yo_,gi_,ma_,wa_,ru_,kten_,CR_,
+	ti_,yyu_,u_,o_,u_,ni_,spc_,a_,ru_,spc_,KO_,A_,ga_,spc_,na_,na_,i_,ro_,ni_,spc_,hi_,ka_,ru_,kten_,EOM_,
+};
+
+const	u8	text122[] = {
+	me_,ni_,spc_,mi_,e_,na_,i_,spc_,mo_,no_,wo_,spc_,mi_,bu_,ri_,de_,spc_,so_,ko_,ni_,spc_,a_,ru_,to_,CR_,
+	si_,n_,zi_,ko_,ma_,se_,ru_,spc_,PA_,N_,TO_,MA_,I_,MU_,no_,spc_,ta_,tu_,zi_,n_,kten_,CR_,
+	si_,n_,zi_,sa_,se_,ta_,spc_,mo_,no_,ha_,spc_,ho_,n_,to_,u_,ni_,spc_,a_,ra_,wa_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text123[] = {
+	me_,ni_,mo_,spc_,to_,ma_,ra_,nu_,spc_,SU_,PI_,bou_,DO_,ga_,spc_,ri_,yyo_,u_,u_,de_,no_,CR_,
+	KA_,MA_,no_,spc_,ki_,re_,a_,zi_,wo_,spc_,sa_,ra_,ni_,spc_,su_,ru_,do_,ku_,spc_,su_,ru_,no_,da_,kten_,CR_,
+	hi_,to_,hu_,ri_,spc_,su_,re_,ba_,spc_,ta_,i_,bo_,ku_,mo_,spc_,ma_,ttu_,pu_,ta_,tu_,da_,kten_,EOM_,
+};
+
+const	u8	text124[] = {
+	o_,do_,ru_,yo_,u_,na_,spc_,ko_,si_,tu_,ki_,de_,spc_,RI_,ZU_,MI_,KA_,RU_,ni_,spc_,a_,ru_,ku_,kten_,CR_,
+	so_,no_,spc_,u_,go_,ki_,ha_,spc_,mi_,te_,i_,ru_,spc_,hi_,to_,mo_,spc_,o_,mo_,wa_,zu_,CR_,
+	ko_,si_,wo_,spc_,hu_,ttu_,te_,si_,ma_,u_,ho_,do_,spc_,ka_,ro_,ya_,ka_,na_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text125[] = {
+	a_,ra_,si_,ga_,spc_,ku_,ru_,to_,spc_,ki_,no_,spc_,u_,e_,spc_,na_,do_,spc_,KA_,MI_,NA_,RI_,no_,CR_,
+	o_,ti_,so_,u_,na_,spc_,ta_,ka_,i_,spc_,ba_,si_,yyo_,he_,spc_,ki_,so_,ttu_,te_,spc_,no_,bo_,ru_,kten_,CR_,
+	hi_,ra_,i_,si_,n_,spc_,ga_,wa_,ri_,ni_,spc_,su_,ru_,spc_,ma_,ti_,mo_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text126[] = {
+	ta_,ta_,ka_,i_,ni_,spc_,na_,ru_,to_,spc_,ka_,ra_,da_,ka_,ra_,spc_,si_,yya_,ku_,ne_,tu_,no_,CR_,
+	ho_,no_,o_,wo_,spc_,hu_,ki_,a_,ge_,spc_,a_,i_,te_,wo_,spc_,i_,ka_,ku_,su_,ru_,kten_,CR_,
+	so_,no_,spc_,ne_,ttu_,pu_,u_,de_,spc_,ma_,wa_,ri_,no_,spc_,ku_,sa_,ki_,mo_,spc_,mo_,ya_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text127[] = {
+	ta_,ku_,ma_,si_,i_,spc_,n2_,ho_,n_,no_,spc_,TU_,NO_,no_,spc_,hi_,yyo_,u_,me_,n_,ni_,spc_,a_,ru_,CR_,
+	TO_,GE_,ga_,spc_,a_,i_,te_,no_,spc_,ka_,ra_,da_,ni_,spc_,hu_,ka_,ku_,spc_,ku_,i_,ko_,mu_,no_,de_,CR_,
+	ha_,sa_,ma_,re_,ru_,to_,spc_,ka_,n_,ta_,n_,ni_,spc_,ha_,zu_,se_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text128[] = {
+	i_,tu_,mo_,spc_,a_,ba_,re_,te_,spc_,i_,na_,i_,to_,spc_,ki_,ga_,spc_,su_,ma_,na_,i_,kten_,CR_,
+	ta_,ta_,ka_,u_,spc_,a_,i_,te_,ga_,spc_,i_,na_,i_,spc_,to_,ki_,ha_,spc_,ta_,i_,bo_,ku_,ni_,CR_,
+	bu_,ti_,a_,ta_,ri_,spc_,na_,gi_,ta_,o_,su_,spc_,ko_,to_,de_,spc_,ki_,wo_,spc_,si_,zu_,me_,ru_,kten_,EOM_,
+};
+
+const	u8	text129[] = {
+	ha_,ne_,te_,i_,ru_,spc_,da_,ke_,de_,spc_,ma_,n_,zo_,ku_,ni_,spc_,ta_,ta_,ka_,e_,na_,i_,ta_,me_,CR_,
+	yo_,wa_,i_,to_,spc_,o_,mo_,wa_,re_,te_,i_,ru_,ga_,spc_,do_,n_,na_,ni_,spc_,yo_,go_,re_,ta_,CR_,
+	mi_,zu_,de_,mo_,spc_,ku_,ra_,se_,ru_,spc_,si_,bu_,to_,i_,spc_,PO_,KE_,MO_,N_,na_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text130[] = {
+	i_,ti_,do_,spc_,a_,ba_,re_,ha_,zi_,me_,ru_,to_,spc_,su_,be_,te_,wo_,spc_,mo_,ya_,sa_,na_,i_,to_,CR_,
+	ki_,yyo_,u_,bo_,u_,na_,spc_,ti_,ga_,spc_,o_,sa_,ma_,ra_,na_,ku_,spc_,na_,ttu_,te_,si_,ma_,u_,kten_,CR_,
+	hi_,to_,tu_,ki_,spc_,a_,ba_,re_,tu_,du_,ke_,ta_,spc_,ki_,ro_,ku_,ga_,spc_,no_,ko_,ru_,kten_,EOM_,
+};
+
+const	u8	text131[] = {
+	hi_,to_,ga_,spc_,ze_,tu_,me_,tu_,no_,spc_,ki_,ki_,ni_,spc_,o_,i_,ko_,n_,de_,si_,ma_,ttu_,ta_,kten_,CR_,
+	yu_,u_,gu_,re_,do_,ki_,ni_,na_,ru_,to_,spc_,su_,ku_,na_,ku_,na_,ttu_,ta_,spc_,na_,ka_,ma_,wo_,CR_,
+	sa_,ga_,si_,te_,spc_,ka_,na_,si_,so_,u_,na_,spc_,ko_,e_,de_,spc_,u_,ta_,u_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text132[] = {
+	ka_,ra_,da_,no_,spc_,sa_,i_,bo_,u_,wo_,spc_,ku_,mi_,ka_,e_,te_,spc_,he_,n_,si_,n_,su_,ru_,kten_,CR_,
+	o_,mo_,i_,da_,si_,na_,ga_,ra_,spc_,i_,ze_,n_,spc_,mi_,ta_,spc_,mo_,no_,ni_,spc_,ka_,wa_,ru_,to_,CR_,
+	ti_,yyo_,ttu_,to_,spc_,ti_,ga_,u_,spc_,ka_,ta_,ti_,ni_,spc_,na_,ttu_,te_,si_,ma_,u_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text133[] = {
+	ku_,ra_,si_,te_,i_,ru_,spc_,ka_,n_,ki_,yyo_,u_,de_,spc_,to_,tu_,ze_,n_,he_,n_,i_,spc_,su_,ru_,CR_,
+	hu_,a_,n_,te_,i_,na_,spc_,i_,de_,n_,si_,wo_,spc_,mo_,tu_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	i_,si_,no_,spc_,ho_,u_,si_,yya_,se_,n_,ga_,spc_,si_,n_,ka_,wo_,spc_,hi_,ki_,o_,ko_,su_,kten_,EOM_,
+};
+
+const	u8	text134[] = {
+	to_,tu_,ze_,n_,he_,n_,i_,ni_,spc_,yo_,ri_,spc_,su_,i_,ti_,yyu_,u_,de_,spc_,se_,i_,ka_,tu_,CR_,
+	de_,ki_,ru_,spc_,yo_,u_,ni_,spc_,HI_,RE_,to_,spc_,E_,RA_,ga_,spc_,ha_,e_,te_,ki_,ta_,kten_,CR_,
+	mi_,zu_,wo_,spc_,zi_,za_,i_,ni_,spc_,a_,ya_,tu_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text135[] = {
+	sa_,i_,bo_,u_,no_,spc_,da_,su_,spc_,yo_,wa_,i_,spc_,de_,n_,ki_,wo_,spc_,ta_,i_,mo_,u_,no_,CR_,
+	se_,i_,de_,n_,ki_,de_,spc_,zo_,u_,hu_,ku_,sa_,se_,spc_,KA_,MI_,NA_,RI_,wo_,spc_,o_,to_,su_,kten_,CR_,
+	sa_,ka_,da_,ttu_,ta_,spc_,ta_,i_,mo_,u_,ha_,spc_,de_,n_,ki_,wo_,spc_,o_,bi_,ta_,spc_,ha_,ri_,kten_,EOM_,
+};
+
+const	u8	text136[] = {
+	hu_,sa_,hu_,sa_,no_,spc_,ta_,i_,mo_,u_,ha_,spc_,a_,ga_,ri_,su_,gi_,ta_,spc_,ta_,i_,o_,n_,wo_,CR_,
+	ku_,u_,ki_,ni_,spc_,ho_,u_,ne_,tu_,si_,te_,spc_,sa_,ge_,ru_,spc_,ki_,no_,u_,wo_,spc_,mo_,tu_,kten_,CR_,
+	ta_,i_,o_,n_,ha_,spc_,sa_,i_,ko_,u_,spc_,n9_,n0_,n0_,do_,spc_,ma_,de_,spc_,a_,ga_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text137[] = {
+	ze_,n_,si_,n_,wo_,spc_,PU_,RO_,GU_,RA_,MU_,spc_,DE_,bou_,TA_,ni_,spc_,mo_,do_,si_,te_,CR_,
+	de_,n_,si_,spc_,ku_,u_,ka_,n_,ni_,spc_,ha_,i_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	KO_,PI_,bou_,GA_,bou_,DO_,sa_,re_,te_,spc_,i_,ru_,no_,de_,spc_,KO_,PI_,bou_,spc_,de_,ki_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text138[] = {
+	o_,o_,mu_,ka_,si_,ni_,spc_,ze_,tu_,me_,tu_,si_,ta_,ga_,spc_,ni_,n_,ge_,n_,no_,spc_,te_,de_,CR_,
+	ka_,se_,ki_,ka_,ra_,spc_,hu_,ttu_,ka_,tu_,sa_,se_,ta_,spc_,PO_,KE_,MO_,N_,no_,spc_,hi_,to_,tu_,kten_,CR_,
+	te_,ki_,ni_,spc_,o_,so_,wa_,re_,ru_,to_,spc_,ka_,ta_,i_,spc_,KA_,RA_,ni_,spc_,ka_,ku_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text139[] = {
+	si_,yyo_,ku_,si_,yyu_,wo_,spc_,a_,ya_,tu_,ri_,spc_,e_,mo_,no_,wo_,spc_,tu_,ka_,ma_,e_,ru_,kten_,CR_,
+	KA_,RA_,ga_,spc_,o_,o_,ki_,ku_,spc_,na_,ri_,su_,gi_,ta_,spc_,ko_,to_,de_,spc_,u_,go_,ki_,ga_,CR_,
+	ni_,bu_,ku_,na_,ri_,spc_,ze_,tu_,me_,tu_,si_,ta_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text140[] = {
+	ka_,se_,ki_,ka_,ra_,spc_,hu_,ttu_,ka_,tu_,si_,ta_,spc_,PO_,KE_,MO_,N_,da_,ga_,spc_,ma_,re_,ni_,CR_,
+	i_,ki_,tu_,du_,ke_,te_,i_,ru_,spc_,KA_,BU_,TO_,wo_,spc_,ha_,ttu_,ke_,n_,spc_,de_,ki_,ru_,kten_,CR_,
+	so_,no_,spc_,su_,ga_,ta_,ha_,spc_,n3_,o_,ku_,ne_,n_,spc_,ka_,wa_,ttu_,te_,i_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text141[] = {
+	su_,i_,ti_,yyu_,u_,wo_,spc_,o_,yo_,gi_,spc_,e_,mo_,no_,wo_,spc_,to_,ra_,e_,te_,i_,ta_,kten_,CR_,
+	mi_,zu_,no_,spc_,se_,i_,ka_,tu_,ka_,ra_,spc_,ti_,zi_,yyo_,u_,de_,spc_,ku_,ra_,se_,ru_,yo_,u_,ni_,CR_,
+	E_,RA_,ya_,spc_,a_,si_,spc_,na_,do_,ga_,spc_,he_,n_,ka_,wo_,spc_,ha_,zi_,me_,te_,i_,ta_,kten_,EOM_,
+};
+
+const	u8	text142[] = {
+	KO_,HA_,KU_,ka_,ra_,spc_,to_,ri_,da_,si_,ta_,spc_,i_,de_,n_,si_,wo_,spc_,sa_,i_,se_,i_,si_,te_,CR_,
+	hu_,ttu_,ka_,tu_,si_,ta_,spc_,ki_,yyo_,u_,ri_,yyu_,u_,spc_,zi_,da_,i_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	so_,ra_,no_,spc_,o_,u_,zi_,yya_,da_,ttu_,ta_,to_,spc_,so_,u_,zo_,u_,sa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text143[] = {
+	ta_,be_,te_,spc_,ne_,te_,no_,spc_,ku_,ri_,ka_,e_,si_,de_,spc_,n1_,ni_,ti_,ga_,spc_,o_,wa_,ru_,kten_,CR_,
+	o_,o_,ki_,na_,spc_,o_,na_,ka_,no_,spc_,u_,e_,wo_,spc_,a_,so_,bi_,ba_,ni_,spc_,si_,te_,i_,ru_,CR_,
+	ko_,do_,mo_,ta_,ti_,mo_,spc_,i_,ru_,ho_,do_,spc_,o_,to_,na_,si_,i_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text144[] = {
+	ko_,o_,ri_,wo_,spc_,a_,ya_,tu_,ru_,spc_,de_,n_,se_,tu_,no_,spc_,to_,ri_,PO_,KE_,MO_,N_,kten_,CR_,
+	ha_,ba_,ta_,ku_,spc_,ko_,to_,de_,spc_,ku_,u_,ki_,wo_,spc_,tu_,me_,ta_,ku_,spc_,hi_,ya_,su_,no_,de_,CR_,
+	HU_,RI_,bou_,ZA_,bou_,ga_,spc_,to_,bu_,to_,spc_,yu_,ki_,ga_,spc_,hu_,ru_,to_,spc_,i_,wa_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text145[] = {
+	de_,n_,ki_,wo_,spc_,a_,ya_,tu_,ru_,spc_,de_,n_,se_,tu_,no_,spc_,to_,ri_,PO_,KE_,MO_,N_,kten_,CR_,
+	hu_,da_,n_,ha_,spc_,KA_,MI_,NA_,RI_,gu_,mo_,no_,spc_,na_,ka_,de_,spc_,ku_,ra_,si_,te_,i_,ru_,kten_,CR_,
+	KA_,MI_,NA_,RI_,ni_,spc_,u_,ta_,re_,ru_,to_,spc_,ti_,ka_,ra_,ga_,spc_,wa_,i_,te_,ku_,ru_,kten_,EOM_,
+};
+
+const	u8	text146[] = {
+	ho_,no_,o_,wo_,spc_,a_,ya_,tu_,ru_,spc_,de_,n_,se_,tu_,no_,spc_,to_,ri_,PO_,KE_,MO_,N_,kten_,CR_,
+	ka_,ra_,da_,ga_,spc_,ki_,zu_,tu_,ku_,to_,spc_,ka_,ko_,u_,no_,spc_,MA_,GU_,MA_,ni_,spc_,ha_,i_,ri_,CR_,
+	ze_,n_,si_,n_,wo_,spc_,mo_,ya_,si_,te_,spc_,ki_,zu_,wo_,spc_,i_,ya_,su_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text147[] = {
+	MI_,NI_,RI_,YYU_,U_,ga_,spc_,da_,ttu_,pi_,wo_,spc_,ku_,ri_,ka_,e_,si_,te_,spc_,i_,ru_,no_,ha_,CR_,
+	ka_,ra_,da_,no_,spc_,na_,ka_,de_,spc_,se_,i_,me_,i_,no_,spc_,E_,NE_,RU_,GI_,bou_,ga_,CR_,
+	do_,n_,do_,n_,spc_,hu_,ku_,ra_,mi_,spc_,o_,sa_,e_,ki_,re_,na_,ku_,spc_,na_,ru_,ka_,ra_,da_,kten_,EOM_,
+};
+
+const	u8	text148[] = {
+	o_,o_,ki_,na_,spc_,E_,NE_,RU_,GI_,bou_,wo_,spc_,ka_,ra_,da_,ni_,spc_,ta_,me_,te_,i_,ru_,kten_,CR_,
+	ku_,bi_,to_,spc_,si_,ttu_,po_,no_,spc_,su_,i_,si_,yyo_,u_,ka_,ra_,spc_,E_,NE_,RU_,GI_,bou_,wo_,CR_,
+	to_,ki_,ha_,na_,ti_,spc_,a_,ta_,ri_,no_,spc_,te_,n_,ki_,wo_,spc_,ka_,e_,ru_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text149[] = {
+	n1_,n6_,zi_,ka_,n_,de_,spc_,ti_,ki_,yyu_,u_,wo_,spc_,n1_,si_,yyu_,u_,de_,ki_,ru_,kten_,CR_,
+	a_,ra_,si_,de_,spc_,na_,n_,pa_,si_,ka_,ke_,ta_,spc_,hu_,ne_,wo_,spc_,mi_,tu_,ke_,ru_,to_,CR_,
+	ri_,ku_,ti_,ma_,de_,spc_,yu_,u_,do_,u_,su_,ru_,spc_,ya_,sa_,si_,i_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text150[] = {
+	i_,de_,n_,si_,so_,u_,sa_,ni_,spc_,yo_,ttu_,te_,spc_,tu_,ku_,ra_,re_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ni_,n_,ge_,n_,no_,spc_,ka_,ga_,ku_,ri_,yyo_,ku_,de_,spc_,ka_,ra_,da_,ha_,spc_,tu_,ku_,re_,te_,mo_,CR_,
+	ya_,sa_,si_,i_,spc_,ko_,ko_,ro_,wo_,spc_,tu_,ku_,ru_,ko_,to_,ha_,spc_,de_,ki_,na_,ka_,ttu_,ta_,kten_,EOM_,
+};
+
+const	u8	text151[] = {
+	su_,be_,te_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,i_,de_,n_,si_,wo_,spc_,mo_,tu_,to_,spc_,i_,u_,kten_,CR_,
+	zi_,yu_,u_,zi_,za_,i_,ni_,spc_,su_,ga_,ta_,wo_,spc_,ke_,su_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,de_,CR_,
+	hi_,to_,ni_,spc_,ti_,ka_,du_,i_,te_,mo_,spc_,ma_,ttu_,ta_,ku_,spc_,ki_,du_,ka_,re_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text152[] = {
+	ha_,ttu_,pa_,wo_,spc_,hu_,ri_,ma_,wa_,si_,te_,spc_,a_,i_,te_,wo_,spc_,i_,ka_,ku_,su_,ru_,ga_,CR_,
+	ha_,ttu_,pa_,ka_,ra_,spc_,a_,ma_,i_,spc_,ka_,o_,ri_,ga_,spc_,ta_,da_,yo_,u_,no_,de_,CR_,
+	o_,ta_,ga_,i_,ni_,spc_,na_,go_,ya_,ka_,na_,spc_,hu_,n_,i_,ki_,ni_,spc_,na_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text153[] = {
+	ku_,bi_,no_,spc_,ma_,wa_,ri_,no_,spc_,ku_,ru_,ri_,to_,spc_,ma_,i_,ta_,spc_,ha_,ttu_,pa_,no_,CR_,
+	na_,ka_,ni_,ha_,spc_,ti_,i_,sa_,na_,spc_,ki_,no_,me_,ga_,spc_,n1_,ko_,spc_,na_,ttu_,te_,i_,ru_,kten_,CR_,
+	so_,no_,spc_,ka_,o_,ri_,ha_,spc_,hi_,to_,wo_,spc_,ge_,n_,ki_,ni_,spc_,sa_,se_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text154[] = {
+	ha_,na_,no_,spc_,ka_,o_,ri_,ha_,spc_,ki_,mo_,ti_,wo_,spc_,o_,da_,ya_,ka_,ni_,su_,ru_,kten_,CR_,
+	ta_,ta_,ka_,i_,no_,spc_,to_,ki_,ha_,spc_,ka_,o_,ri_,wo_,spc_,ha_,ttu_,sa_,n_,sa_,se_,te_,CR_,
+	a_,i_,te_,no_,spc_,ta_,ta_,ka_,u_,spc_,ki_,mo_,ti_,wo_,spc_,ni_,bu_,ra_,se_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text155[] = {
+	se_,na_,ka_,ka_,ra_,spc_,ho_,no_,o_,wo_,spc_,hu_,ki_,a_,ge_,te_,spc_,mi_,wo_,spc_,ma_,mo_,ru_,kten_,CR_,
+	o_,ko_,ttu_,ta_,spc_,to_,ki_,no_,spc_,ho_,no_,o_,ha_,spc_,i_,ki_,o_,i_,ga_,spc_,i_,i_,ga_,CR_,
+	tu_,ka_,re_,te_,i_,ru_,spc_,to_,ki_,ha_,spc_,hu_,ka_,n_,ze_,n_,ne_,n_,si_,yyo_,u_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text156[] = {
+	ho_,no_,o_,no_,spc_,i_,ki_,o_,i_,to_,spc_,ne_,ttu_,pu_,u_,de_,spc_,i_,ka_,ku_,su_,ru_,kten_,CR_,
+	su_,ba_,ya_,i_,spc_,mi_,no_,ko_,na_,si_,de_,spc_,a_,i_,te_,no_,spc_,ko_,u_,ge_,ki_,wo_,CR_,
+	ka_,wa_,si_,na_,ga_,ra_,spc_,do_,u_,zi_,ni_,spc_,ho_,no_,o_,de_,spc_,mo_,ya_,su_,kten_,EOM_,
+};
+
+const	u8	text157[] = {
+	si_,yya_,ku_,ne_,tu_,no_,spc_,ho_,no_,o_,de_,spc_,ma_,wa_,ri_,ni_,spc_,ka_,ge_,ro_,u_,wo_,CR_,
+	tu_,ku_,ri_,da_,si_,te_,spc_,su_,ga_,ta_,wo_,spc_,ka_,ku_,su_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	mo_,e_,a_,ga_,ru_,spc_,ba_,ku_,hu_,u_,ha_,spc_,su_,be_,te_,wo_,spc_,ya_,ki_,tu_,ku_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text158[] = {
+	ti_,i_,sa_,na_,spc_,ka_,ra_,da_,de_,mo_,spc_,A_,GO_,no_,spc_,ti_,ka_,ra_,ha_,spc_,tu_,yo_,i_,kten_,CR_,
+	WA_,NI_,NO_,KO_,zi_,si_,n_,ha_,spc_,a_,ma_,ga_,mi_,spc_,si_,te_,i_,ru_,spc_,tu_,mo_,ri_,de_,mo_,CR_,
+	o_,o_,ke_,ga_,wo_,spc_,si_,te_,si_,ma_,u_,spc_,ho_,do_,no_,spc_,ti_,ka_,ra_,ga_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text159[] = {
+	i_,ti_,do_,spc_,ka_,mi_,tu_,i_,ta_,ra_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,ha_,na_,sa_,na_,i_,kten_,CR_,
+	KI_,BA_,no_,spc_,sa_,ki_,ga_,spc_,tu_,ri_,ba_,ri_,spc_,mi_,ta_,i_,ni_,spc_,so_,ri_,ka_,e_,ttu_,te_,CR_,
+	i_,ru_,no_,de_,spc_,i_,ti_,do_,spc_,sa_,sa_,ru_,to_,spc_,nu_,ke_,na_,ku_,spc_,na_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text160[] = {
+	o_,o_,ki_,na_,spc_,ku_,ti_,wo_,spc_,a_,ke_,te_,spc_,a_,i_,te_,wo_,spc_,i_,ka_,ku_,su_,ru_,kten_,CR_,
+	ki_,yyo_,u_,zi_,n_,na_,spc_,u_,si_,ro_,a_,si_,de_,spc_,zi_,me_,n_,wo_,spc_,ke_,ttu_,te_,CR_,
+	mo_,no_,su_,go_,i_,spc_,SU_,PI_,bou_,DO_,de_,spc_,to_,ttu_,si_,n_,spc_,si_,te_,ku_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text161[] = {
+	ne_,mu_,ru_,spc_,to_,ki_,ni_,ha_,spc_,ko_,u_,ta_,i_,de_,spc_,mi_,ha_,ri_,wo_,su_,ru_,kten_,CR_,
+	ki_,ke_,n_,wo_,spc_,sa_,ttu_,ti_,su_,ru_,to_,spc_,na_,ka_,ma_,wo_,spc_,o_,ko_,su_,no_,da_,kten_,CR_,
+	mu_,re_,ka_,ra_,spc_,ha_,gu_,re_,ru_,to_,spc_,ko_,wa_,ku_,te_,spc_,ne_,mu_,re_,na_,ku_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text162[] = {
+	te_,ki_,ni_,spc_,o_,so_,wa_,re_,te_,mo_,spc_,ho_,so_,i_,spc_,su_,ki_,ma_,ni_,CR_,
+	su_,ru_,ri_,to_,spc_,mo_,gu_,ri_,ko_,n_,de_,spc_,ni_,ge_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	te_,a_,si_,ha_,spc_,mi_,zi_,ka_,i_,ga_,spc_,to_,te_,mo_,spc_,su_,ba_,si_,ttu_,ko_,i_,kten_,EOM_,
+};
+
+const	u8	text163[] = {
+	ka_,ra_,da_,no_,spc_,na_,ka_,ni_,ha_,spc_,ti_,ki_,yyu_,u_,no_,spc_,zi_,te_,n_,wo_,CR_,
+	ka_,n_,zi_,to_,ru_,spc_,ki_,ka_,n_,wo_,spc_,mo_,ttu_,te_,i_,ru_,no_,de_,spc_,ma_,i_,ni_,ti_,CR_,
+	o_,na_,zi_,spc_,zi_,ka_,n_,ni_,spc_,na_,ru_,to_,spc_,na_,ki_,go_,e_,wo_,spc_,a_,ge_,ru_,kten_,EOM_,
+};
+
+const	u8	text164[] = {
+	wa_,zu_,ka_,na_,spc_,hi_,ka_,ri_,de_,mo_,spc_,mi_,e_,ru_,spc_,su_,gu_,re_,ta_,spc_,me_,to_,CR_,
+	ha_,o_,to_,wo_,spc_,ta_,te_,na_,i_,spc_,ya_,wa_,ra_,ka_,i_,spc_,ha_,ne_,no_,spc_,o_,ka_,ge_,de_,CR_,
+	ku_,ra_,ya_,mi_,de_,ha_,spc_,e_,mo_,no_,wo_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,ni_,ga_,sa_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text165[] = {
+	a_,si_,no_,spc_,tu_,ke_,ne_,ka_,ra_,spc_,da_,su_,spc_,e_,ki_,ta_,i_,no_,spc_,ni_,o_,i_,de_,CR_,
+	na_,ka_,ma_,to_,spc_,KO_,MI_,YYU_,NI_,KE_,bou_,SI_,YYO_,N_,wo_,spc_,to_,ttu_,te_,i_,ru_,kten_,CR_,
+	ni_,o_,i_,no_,spc_,ti_,ga_,i_,de_,spc_,ki_,mo_,ti_,wo_,spc_,tu_,ta_,e_,ru_,to_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text166[] = {
+	ho_,si_,ga_,spc_,ta_,ku_,sa_,n_,spc_,mi_,e_,ru_,spc_,ku_,u_,ki_,no_,spc_,ki_,re_,i_,na_,CR_,
+	to_,ti_,ni_,ha_,spc_,RE_,DE_,II_,A_,N_,ga_,spc_,ta_,ku_,sa_,n_,spc_,su_,mu_,to_,spc_,i_,u_,kten_,CR_,
+	ho_,si_,a_,ka_,ri_,wo_,spc_,E_,NE_,RU_,GI_,bou_,ni_,spc_,si_,te_,i_,ru_,ka_,ra_,da_,kten_,EOM_,
+};
+
+const	u8	text167[] = {
+	i_,to_,de_,spc_,tu_,ku_,ttu_,ta_,spc_,WA_,NA_,ha_,spc_,da_,i_,n2_,no_,spc_,si_,n_,ke_,i_,kten_,CR_,
+	i_,to_,wo_,spc_,tu_,ta_,wa_,ru_,spc_,wa_,zu_,ka_,na_,spc_,si_,n_,do_,u_,spc_,da_,ke_,de_,CR_,
+	e_,mo_,no_,no_,spc_,si_,yyu_,ru_,i_,ga_,spc_,wa_,ka_,ru_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text168[] = {
+	a_,si_,no_,spc_,se_,n_,ta_,n_,ni_,ha_,spc_,ti_,i_,sa_,na_,spc_,KA_,GI_,DU_,ME_,ga_,spc_,a_,ri_,CR_,
+	te_,n_,zi_,yyo_,u_,ya_,spc_,su_,i_,ti_,yyo_,ku_,no_,spc_,ka_,be_,mo_,spc_,a_,ru_,ke_,ru_,kten_,CR_,
+	ho_,so_,ku_,spc_,zi_,yyo_,u_,bu_,na_,spc_,i_,to_,de_,spc_,te_,ki_,wo_,spc_,si_,me_,a_,ge_,ru_,kten_,EOM_,
+};
+
+const	u8	text169[] = {
+	mi_,mi_,wo_,spc_,su_,ma_,sa_,na_,i_,to_,spc_,ki_,ko_,e_,na_,i_,ho_,do_,spc_,ti_,i_,sa_,na_,CR_,
+	ha_,o_,to_,de_,spc_,ne_,ra_,ttu_,ta_,spc_,e_,mo_,no_,ni_,spc_,si_,no_,bi_,yo_,ru_,zo_,kten_,CR_,
+	u_,si_,ro_,a_,si_,no_,spc_,HA_,NE_,de_,spc_,e_,da_,ni_,spc_,tu_,ka_,ma_,ri_,spc_,ya_,su_,mu_,kten_,EOM_,
+};
+
+const	u8	text170[] = {
+	tu_,yo_,i_,spc_,de_,n_,ki_,wo_,spc_,ha_,ttu_,se_,i_,sa_,se_,ru_,spc_,sa_,i_,bo_,u_,ga_,CR_,
+	n2_,ho_,n_,no_,spc_,si_,yyo_,ku_,si_,yyu_,no_,spc_,na_,ka_,ni_,spc_,tu_,ma_,ttu_,te_,i_,ru_,kten_,CR_,
+	zi_,bu_,n_,mo_,spc_,ti_,yyo_,ttu_,to_,spc_,PI_,RI_,PI_,RI_,spc_,si_,bi_,re_,ru_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text171[] = {
+	yo_,na_,ka_,ni_,spc_,hu_,ne_,ka_,ra_,spc_,ku_,ra_,i_,spc_,u_,mi_,wo_,spc_,no_,zo_,ki_,ko_,mu_,to_,CR_,
+	si_,n_,ka_,i_,wo_,spc_,o_,yo_,gu_,spc_,RA_,N_,TA_,bou_,N_,no_,spc_,hi_,ka_,ri_,ga_,CR_,
+	ho_,si_,zo_,ra_,no_,spc_,yo_,u_,ni_,spc_,mi_,e_,ru_,spc_,ko_,to_,ga_,spc_,a_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text172[] = {
+	na_,ka_,ma_,to_,spc_,a_,so_,n_,de_,i_,ru_,to_,ki_,spc_,o_,ta_,ga_,i_,no_,spc_,de_,n_,ki_,ga_,CR_,
+	SI_,YYO_,bou_,TO_,si_,te_,spc_,hi_,ba_,na_,wo_,spc_,da_,su_,spc_,ko_,to_,ga_,spc_,a_,ru_,zo_,kten_,CR_,
+	hi_,ba_,na_,ni_,spc_,bi_,ttu_,ku_,ri_,spc_,su_,ru_,to_,spc_,na_,ki_,da_,si_,te_,si_,ma_,u_,yo_,kten_,EOM_,
+};
+
+const	u8	text173[] = {
+	na_,ga_,re_,bo_,si_,no_,spc_,o_,o_,i_,spc_,yo_,ru_,ha_,spc_,wa_,spc_,ni_,spc_,na_,ttu_,te_,CR_,
+	o_,do_,ru_,spc_,PI_,II_,no_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	hi_,no_,de_,ma_,de_,spc_,o_,do_,ri_,spc_,yo_,tu_,yu_,de_,spc_,no_,do_,wo_,spc_,u_,ru_,o_,su_,kten_,EOM_,
+};
+
+const	u8	text174[] = {
+	MA_,SI_,YYU_,MA_,RO_,spc_,mi_,ta_,i_,na_,spc_,sa_,wa_,ri_,go_,ko_,ti_,no_,spc_,ka_,ra_,da_,ka_,ra_,CR_,
+	ho_,n_,no_,ri_,spc_,a_,ma_,i_,spc_,ni_,o_,i_,ga_,spc_,ta_,da_,yo_,ttu_,te_,ku_,ru_,yo_,kten_,CR_,
+	ni_,o_,i_,ha_,spc_,te_,ki_,no_,spc_,ki_,mo_,ti_,wo_,spc_,o_,da_,ya_,ka_,ni_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text175[] = {
+	hi_,to_,ya_,spc_,PO_,KE_,MO_,N_,ga_,spc_,ha_,ttu_,si_,te_,i_,ru_,spc_,ya_,sa_,si_,sa_,ya_,CR_,
+	ta_,no_,si_,i_,spc_,ki_,mo_,ti_,wo_,spc_,E_,NE_,RU_,GI_,bou_,ni_,spc_,si_,te_,i_,ru_,kten_,CR_,
+	KA_,RA_,no_,spc_,na_,ka_,ni_,spc_,ta_,me_,ta_,spc_,si_,a_,wa_,se_,wo_,spc_,wa_,ke_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text176[] = {
+	ko_,u_,u_,n_,wo_,spc_,mo_,ta_,ra_,su_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	zi_,yyu_,n_,su_,i_,na_,spc_,ko_,ko_,ro_,no_,spc_,mo_,ti_,nu_,si_,wo_,spc_,mi_,tu_,ke_,ru_,to_,CR_,
+	su_,ga_,ta_,wo_,spc_,a_,ra_,wa_,si_,spc_,si_,a_,wa_,se_,wo_,spc_,wa_,ke_,a_,ta_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text177[] = {
+	ZI_,YYA_,N_,PU_,ri_,yyo_,ku_,no_,spc_,ha_,ttu_,ta_,tu_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	o_,to_,na_,no_,spc_,se_,ta_,ke_,spc_,i_,zi_,yyo_,u_,a_,ru_,spc_,ta_,ka_,sa_,no_,spc_,e_,da_,ni_,CR_,
+	hi_,ra_,ri_,to_,spc_,to_,bi_,no_,ri_,spc_,ki_,no_,me_,wo_,spc_,tu_,i_,ba_,mu_,kten_,EOM_,
+};
+
+const	u8	text178[] = {
+	n1_,ni_,ti_,zi_,yyu_,u_,spc_,ta_,i_,yo_,u_,wo_,spc_,mi_,tu_,me_,te_,spc_,u_,go_,ka_,na_,i_,kten_,CR_,
+	mi_,ra_,i_,wo_,spc_,mi_,to_,o_,su_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,to_,spc_,si_,n_,zi_,ra_,re_,CR_,
+	se_,i_,na_,ru_,spc_,PO_,KE_,MO_,N_,to_,si_,te_,spc_,ma_,tu_,ru_,spc_,hi_,to_,mo_,spc_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text179[] = {
+	ta_,i_,mo_,u_,ga_,spc_,ko_,su_,re_,te_,spc_,se_,i_,de_,n_,ki_,ga_,spc_,ta_,ma_,ru_,kten_,CR_,
+	de_,n_,ri_,yyo_,ku_,ga_,spc_,ta_,ku_,sa_,n_,spc_,ta_,ma_,ru_,ho_,do_,spc_,si_,ttu_,po_,no_,CR_,
+	sa_,ki_,ni_,spc_,tu_,i_,ta_,spc_,de_,n_,ki_,yyu_,u_,ga_,spc_,a_,ka_,ru_,ku_,spc_,hi_,ka_,ru_,kten_,EOM_,
+};
+
+const	u8	text180[] = {
+	ta_,i_,mo_,u_,no_,spc_,se_,i_,si_,tu_,ga_,spc_,he_,n_,ka_,su_,ru_,no_,de_,spc_,su_,ku_,na_,i_,CR_,
+	ri_,yyo_,u_,de_,mo_,spc_,ta_,ku_,sa_,n_,no_,spc_,de_,n_,ki_,wo_,spc_,tu_,ku_,ri_,da_,se_,ru_,kten_,CR_,
+	de_,n_,ki_,wo_,spc_,sa_,e_,gi_,ru_,spc_,tu_,ru_,tu_,ru_,no_,spc_,ha_,da_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text181[] = {
+	DE_,N_,RI_,YYU_,U_,no_,spc_,a_,ka_,ri_,ha_,spc_,u_,ti_,yyu_,u_,ka_,ra_,mo_,spc_,mi_,e_,ru_,kten_,CR_,
+	mu_,ka_,si_,no_,spc_,hi_,to_,ha_,spc_,DE_,N_,RI_,YYU_,U_,no_,spc_,a_,ka_,ri_,wo_,spc_,tu_,ka_,i_,CR_,
+	to_,o_,ku_,no_,spc_,na_,ka_,ma_,to_,spc_,a_,i_,zu_,wo_,spc_,o_,ku_,ri_,a_,ttu_,te_,i_,ta_,kten_,EOM_,
+};
+
+const	u8	text182[] = {
+	yo_,ri_,spc_,ku_,sa_,i_,spc_,KU_,SA_,I_,HA_,NA_,ka_,ra_,spc_,si_,n_,ka_,si_,ta_,spc_,ho_,u_,ga_,CR_,
+	ki_,re_,i_,na_,spc_,ha_,na_,wo_,spc_,tu_,ke_,ta_,spc_,KI_,RE_,I_,HA_,NA_,ni_,spc_,na_,ru_,yo_,kten_,CR_,
+	yo_,ru_,ni_,spc_,na_,ru_,to_,spc_,ha_,na_,bi_,ra_,wo_,spc_,tu_,bo_,me_,te_,spc_,ne_,mu_,ru_,kten_,EOM_,
+};
+
+const	u8	text183[] = {
+	na_,ga_,re_,no_,spc_,ha_,ya_,i_,spc_,ka_,wa_,de_,spc_,E_,SA_,wo_,spc_,to_,ru_,spc_,to_,ki_,ha_,CR_,
+	si_,ttu_,po_,wo_,spc_,ka_,wa_,be_,ri_,no_,spc_,ki_,no_,spc_,mi_,ki_,ni_,spc_,ma_,ki_,tu_,ke_,ru_,kten_,CR_,
+	si_,ttu_,po_,ha_,spc_,da_,n_,ri_,yyo_,ku_,ga_,a_,ttu_,te_,spc_,no_,bi_,ru_,spc_,si_,ku_,mi_,kten_,EOM_,
+};
+
+const	u8	text184[] = {
+	ku_,u_,ki_,no_,spc_,hu_,u_,se_,n_,wo_,spc_,tu_,ku_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	PO_,KE_,MO_,N_,ga_,spc_,o_,bo_,re_,te_,i_,ru_,to_,spc_,ku_,u_,ki_,da_,ma_,wo_,spc_,da_,si_,te_,CR_,
+	ko_,ki_,yyu_,u_,ga_,spc_,de_,ki_,ru_,spc_,yo_,u_,ni_,spc_,si_,te_,a_,ge_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text185[] = {
+	te_,ki_,ni_,spc_,o_,so_,wa_,re_,na_,i_,spc_,yo_,u_,ni_,spc_,ki_,no_,spc_,hu_,ri_,wo_,su_,ru_,kten_,CR_,
+	ri_,yyo_,u_,te_,ha_,spc_,n1_,ne_,n_,zi_,yyu_,u_,spc_,mi_,do_,ri_,i_,ro_,na_,no_,de_,CR_,
+	hu_,yu_,ha_,spc_,ni_,se_,mo_,no_,da_,to_,spc_,su_,gu_,ni_,spc_,ba_,re_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text186[] = {
+	a_,ta_,ma_,no_,spc_,ma_,ki_,ge_,ha_,spc_,o_,u_,zi_,yya_,no_,spc_,a_,ka_,si_,da_,kten_,CR_,
+	na_,ga_,ku_,spc_,ki_,re_,i_,ni_,spc_,ma_,i_,te_,i_,ru_,spc_,NI_,YYO_,RO_,TO_,NO_,ho_,do_,CR_,
+	na_,ka_,ma_,no_,spc_,so_,n_,ke_,i_,wo_,spc_,a_,tu_,me_,ru_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text187[] = {
+	ka_,ze_,ni_,spc_,no_,ttu_,te_,spc_,hu_,wa_,hu_,wa_,spc_,ta_,da_,yo_,u_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ki_,yyo_,u_,hu_,u_,no_,spc_,ke_,ha_,i_,wo_,spc_,ka_,n_,zi_,ru_,to_,spc_,na_,ka_,ma_,do_,u_,si_,CR_,
+	ha_,ttu_,pa_,wo_,spc_,ka_,ra_,me_,spc_,to_,ba_,sa_,re_,na_,i_,spc_,zi_,yyu_,n_,bi_,wo_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text188[] = {
+	ki_,o_,n_,ga_,spc_,n1_,n8_,do_,wo_,spc_,ko_,e_,ru_,to_,spc_,ha_,na_,ga_,spc_,hi_,ra_,ku_,kten_,CR_,
+	o_,n_,do_,ni_,spc_,yo_,ri_,spc_,ha_,na_,no_,spc_,hi_,ra_,ki_,ka_,ta_,ga_,spc_,ka_,wa_,ru_,no_,de_,CR_,
+	o_,n_,do_,ke_,i_,no_,spc_,ka_,wa_,ri_,ni_,spc_,su_,ru_,ko_,to_,mo_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text189[] = {
+	a_,ta_,ta_,ka_,i_,spc_,mi_,na_,mi_,ka_,ze_,ni_,spc_,no_,ttu_,te_,spc_,u_,mi_,wo_,spc_,ko_,e_,CR_,
+	ga_,i_,ko_,ku_,ma_,de_,spc_,to_,n_,de_,i_,ttu_,te_,si_,ma_,u_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	tu_,me_,ta_,i_,spc_,ku_,u_,ki_,ni_,spc_,hu_,re_,ru_,to_,spc_,zi_,me_,n_,ni_,spc_,o_,ri_,ru_,kten_,EOM_,
+};
+
+const	u8	text190[] = {
+	ki_,yo_,u_,ni_,spc_,u_,go_,ku_,spc_,si_,ttu_,po_,no_,spc_,sa_,ki_,wo_,spc_,te_,no_,hi_,ra_,no_,CR_,
+	ka_,wa_,ri_,ni_,spc_,tu_,ka_,ttu_,te_,i_,ta_,ra_,spc_,ha_,n_,ta_,i_,ni_,spc_,ri_,yyo_,u_,te_,ga_,CR_,
+	bu_,ki_,yo_,u_,ni_,spc_,na_,ttu_,te_,si_,ma_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text191[] = {
+	ka_,ra_,da_,ni_,spc_,ta_,me_,ta_,spc_,e_,i_,yo_,u_,ha_,spc_,si_,n_,ka_,no_,spc_,to_,ki_,ma_,de_,CR_,
+	to_,ttu_,te_,o_,ku_,ta_,me_,spc_,ho_,to_,n_,do_,spc_,u_,go_,ko_,u_,to_,si_,na_,i_,kten_,CR_,
+	na_,ni_,mo_,spc_,ta_,be_,zu_,ni_,spc_,a_,sa_,tu_,yu_,spc_,da_,ke_,wo_,spc_,no_,n_,de_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text192[] = {
+	ta_,i_,yo_,u_,E_,NE_,RU_,GI_,bou_,ka_,ra_,spc_,e_,i_,yo_,u_,wo_,spc_,tu_,ku_,ri_,da_,su_,kten_,CR_,
+	ki_,o_,n_,no_,spc_,ta_,ka_,i_,spc_,ni_,ttu_,ti_,yyu_,u_,spc_,ka_,ttu_,pa_,tu_,ni_,spc_,u_,go_,ki_,CR_,
+	ta_,i_,yo_,u_,ga_,spc_,si_,zu_,mu_,to_,spc_,pa_,ttu_,ta_,ri_,spc_,u_,go_,ka_,na_,ku_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text193[] = {
+	me_,da_,ma_,wo_,spc_,u_,go_,ka_,sa_,zu_,ni_,spc_,n3_,n6_,n0_,do_,spc_,mi_,wa_,ta_,se_,ru_,kten_,CR_,
+	ki_,yyu_,u_,BU_,RE_,bou_,KI_,ya_,spc_,ho_,u_,ko_,u_,te_,n_,ka_,n_,ga_,spc_,to_,ku_,i_,kten_,CR_,
+	ne_,ra_,ttu_,ta_,spc_,e_,mo_,no_,wo_,spc_,su_,ba_,ya_,ku_,spc_,o_,i_,tu_,me_,te_,i_,ku_,kten_,EOM_,
+};
+
+const	u8	text194[] = {
+	hu_,da_,n_,ha_,spc_,mi_,zu_,no_,spc_,na_,ka_,de_,spc_,ku_,ra_,si_,te_,i_,ru_,ga_,spc_,E_,SA_,wo_,CR_,
+	sa_,ga_,su_,to_,ki_,na_,do_,spc_,ta_,ma_,ni_,spc_,ti_,zi_,yyo_,u_,ni_,spc_,de_,te_,ku_,ru_,kten_,CR_,
+	ri_,ku_,de_,ha_,spc_,do_,ku_,no_,spc_,ne_,n_,e_,ki_,de_,spc_,ka_,ra_,da_,wo_,spc_,o_,o_,u_,kten_,EOM_,
+};
+
+const	u8	text195[] = {
+	mi_,zu_,no_,spc_,na_,ka_,de_,spc_,ku_,ti_,wo_,spc_,a_,ke_,te_,spc_,E_,SA_,ga_,spc_,gu_,u_,ze_,n_,CR_,
+	to_,bi_,ko_,n_,de_,spc_,ku_,ru_,no_,wo_,spc_,ta_,da_,ta_,da_,spc_,ma_,ttu_,te_,i_,ru_,kten_,CR_,
+	u_,go_,ka_,na_,i_,no_,de_,spc_,a_,ma_,ri_,spc_,o_,na_,ka_,ga_,spc_,su_,ka_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text196[] = {
+	mi_,to_,me_,ta_,spc_,TO_,RE_,bou_,NA_,bou_,ni_,ha_,spc_,ki_,wa_,me_,te_,spc_,ti_,yyu_,u_,zi_,tu_,kten_,CR_,
+	TO_,RE_,bou_,NA_,bou_,wo_,spc_,ki_,ke_,n_,ka_,ra_,spc_,ma_,mo_,ru_,spc_,ta_,me_,ni_,CR_,
+	yo_,ti_,no_,u_,ri_,yyo_,ku_,ga_,spc_,ha_,ttu_,ta_,tu_,si_,ta_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text197[] = {
+	tu_,ki_,no_,spc_,ha_,do_,u_,wo_,spc_,u_,ke_,te_,spc_,si_,n_,ka_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ku_,ra_,ya_,mi_,ni_,spc_,zi_,ttu_,to_,spc_,hi_,so_,mi_,spc_,a_,i_,te_,wo_,spc_,u_,ka_,ga_,u_,kten_,CR_,
+	o_,so_,i_,ka_,ka_,ru_,spc_,to_,ki_,spc_,ka_,ra_,da_,no_,spc_,wa_,ttu_,ka_,ga_,spc_,hi_,ka_,ru_,kten_,EOM_,
+};
+
+const	u8	text198[] = {
+	hu_,ko_,u_,wo_,spc_,ha_,ko_,bu_,to_,spc_,i_,wa_,re_,spc_,o_,so_,re_,ra_,re_,te_,i_,ta_,kten_,CR_,
+	KI_,RA_,KI_,RA_,spc_,hi_,ka_,ru_,spc_,mo_,no_,ni_,spc_,ki_,yyo_,u_,mi_,wo_,spc_,si_,me_,si_,CR_,
+	zi_,yyo_,se_,i_,no_,spc_,yu_,bi_,wa_,wo_,spc_,to_,ttu_,te_,i_,ko_,u_,to_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text199[] = {
+	se_,ka_,i_,no_,spc_,hu_,si_,gi_,wo_,spc_,ka_,i_,me_,i_,spc_,su_,ru_,ta_,me_,spc_,ma_,i_,ni_,ti_,CR_,
+	ke_,n_,ki_,yyu_,u_,spc_,si_,te_,i_,ru_,ga_,spc_,a_,ta_,ma_,no_,spc_,SI_,EE_,RU_,DA_,bou_,ga_,CR_,
+	ha_,zu_,re_,ru_,to_,spc_,ze_,n_,bu_,spc_,wa_,su_,re_,te_,si_,ma_,u_,spc_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text200[] = {
+	su_,su_,ri_,na_,ku_,spc_,yo_,u_,na_,spc_,na_,ki_,go_,e_,de_,spc_,ko_,wa_,ga_,ra_,se_,ru_,kten_,CR_,
+	a_,i_,te_,no_,spc_,ko_,wa_,ga_,ru_,spc_,ko_,ko_,ro_,wo_,spc_,a_,ka_,i_,spc_,ta_,ma_,de_,CR_,
+	ki_,yyu_,u_,si_,yyu_,u_,si_,te_,spc_,e_,i_,yo_,u_,ni_,spc_,si_,te_,i_,ru_,spc_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text201[] = {
+	ko_,da_,i_,no_,spc_,mo_,zi_,ni_,spc_,ni_,ta_,spc_,su_,ga_,ta_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	sa_,ki_,ni_,spc_,u_,ma_,re_,ta_,no_,ha_,spc_,mo_,zi_,ka_,spc_,A_,N_,NO_,bou_,N_,na_,no_,ka_,kten_,CR_,
+	ke_,n_,ki_,yyu_,u_,ti_,yyu_,u_,da_,ga_,spc_,i_,ma_,da_,ni_,spc_,na_,zo_,de_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text202[] = {
+	hi_,ta_,su_,ra_,spc_,ga_,ma_,n_,su_,ru_,spc_,PO_,KE_,MO_,N_,da_,ga_,spc_,si_,ttu_,po_,wo_,CR_,
+	ko_,u_,ge_,ki_,sa_,re_,ru_,spc_,ko_,to_,da_,ke_,ha_,spc_,ga_,ma_,n_,spc_,de_,ki_,na_,i_,kten_,CR_,
+	a_,i_,te_,wo_,spc_,mi_,ti_,du_,re_,ni_,su_,ru_,spc_,TI_,YYA_,N_,SU_,wo_,spc_,u_,ka_,ga_,u_,kten_,EOM_,
+};
+
+const	u8	text203[] = {
+	si_,ttu_,po_,no_,spc_,no_,u_,ha_,spc_,ka_,n_,ga_,e_,go_,to_,ga_,spc_,de_,ki_,na_,i_,ho_,do_,CR_,
+	ti_,i_,sa_,i_,ke_,do_,spc_,ne_,mu_,ra_,na_,ku_,te_,mo_,spc_,he_,i_,ki_,spc_,na_,no_,de_,CR_,
+	n2_,n4_,zi_,ka_,n_,spc_,a_,ta_,ri_,wo_,spc_,mi_,ha_,ri_,tu_,du_,ke_,te_,spc_,i_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text204[] = {
+	ki_,no_,spc_,e_,da_,ni_,spc_,bu_,ra_,sa_,ga_,ri_,spc_,e_,mo_,no_,wo_,spc_,ma_,ttu_,te_,i_,ru_,kten_,CR_,
+	ki_,wo_,spc_,yu_,ra_,sa_,re_,te_,spc_,si_,yyo_,ku_,zi_,no_,spc_,zi_,yya_,ma_,wo_,spc_,sa_,re_,ru_,to_,CR_,
+	zi_,me_,n_,ni_,spc_,o_,ti_,te_,ka_,ra_,spc_,i_,ki_,na_,ri_,spc_,ba_,ku_,ha_,tu_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text205[] = {
+	ko_,u_,te_,tu_,no_,spc_,KA_,RA_,no_,spc_,na_,ka_,ni_,spc_,ho_,n_,ta_,i_,ga_,spc_,i_,ru_,kten_,CR_,
+	e_,mo_,no_,wo_,spc_,tu_,ka_,ma_,e_,ru_,spc_,to_,ki_,ni_,spc_,KA_,RA_,ga_,spc_,hi_,ra_,ku_,ga_,CR_,
+	a_,ma_,ri_,no_,spc_,ha_,ya_,sa_,ni_,spc_,na_,ka_,mi_,ha_,spc_,mi_,e_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text206[] = {
+	DO_,RI_,RU_,no_,spc_,SI_,TTU_,PO_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,u_,si_,ro_,mu_,ki_,ni_,CR_,
+	zi_,me_,n_,wo_,spc_,ho_,ri_,su_,su_,mi_,spc_,hu_,ku_,za_,tu_,na_,spc_,ka_,ta_,ti_,no_,CR_,
+	su_,a_,na_,wo_,spc_,ti_,ti_,yyu_,u_,spc_,hu_,ka_,ku_,ni_,spc_,tu_,ku_,ru_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text207[] = {
+	o_,to_,wo_,spc_,ta_,te_,zu_,spc_,su_,be_,ru_,spc_,yo_,u_,ni_,spc_,ka_,ttu_,ku_,u_,su_,ru_,kten_,CR_,
+	ri_,yyo_,u_,u_,de_,no_,spc_,o_,o_,ki_,na_,spc_,TU_,ME_,to_,spc_,a_,si_,no_,spc_,TU_,ME_,de_,CR_,
+	e_,mo_,no_,no_,spc_,ka_,o_,ni_,spc_,si_,ga_,mi_,tu_,ki_,spc_,do_,ku_,ba_,ri_,wo_,spc_,sa_,su_,kten_,EOM_,
+};
+
+const	u8	text208[] = {
+	I_,WA_,bou_,KU_,yo_,ri_,mo_,spc_,hu_,ka_,i_,spc_,ti_,ti_,yyu_,u_,ni_,spc_,su_,n_,de_,i_,ru_,kten_,CR_,
+	ti_,ki_,yyu_,u_,no_,spc_,ti_,yyu_,u_,si_,n_,ni_,spc_,mu_,ka_,ttu_,te_,spc_,ho_,ri_,su_,su_,mi_,CR_,
+	hu_,ka_,sa_,spc_,n1_,KI_,RO_,ni_,spc_,ta_,ttu_,su_,ru_,spc_,ko_,to_,mo_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text209[] = {
+	KI_,BA_,wo_,spc_,mu_,ki_,da_,si_,te_,spc_,ko_,wa_,i_,spc_,ka_,o_,wo_,spc_,su_,re_,ba_,CR_,
+	ti_,i_,sa_,na_,spc_,PO_,KE_,MO_,N_,na_,ra_,spc_,o_,bi_,e_,te_,spc_,ni_,ge_,da_,su_,kten_,CR_,
+	ni_,ge_,ra_,re_,ta_,spc_,BU_,RU_,bou_,ha_,spc_,ti_,yyo_,ttu_,to_,spc_,sa_,mi_,si_,so_,u_,kten_,EOM_,
+};
+
+const	u8	text210[] = {
+	si_,ta_,A_,GO_,ga_,spc_,to_,te_,mo_,spc_,ha_,ttu_,ta_,tu_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	KI_,BA_,ga_,spc_,o_,mo_,ta_,i_,no_,de_,spc_,ku_,bi_,wo_,spc_,ka_,si_,ge_,te_,i_,ru_,kten_,CR_,
+	o_,do_,ro_,ka_,sa_,na_,ke_,re_,ba_,spc_,mu_,ya_,mi_,ni_,spc_,ka_,mi_,tu_,ka_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text211[] = {
+	no_,mi_,ko_,n_,da_,spc_,mi_,zu_,no_,spc_,ti_,ka_,ra_,wo_,spc_,ri_,yo_,u_,si_,te_,CR_,
+	ze_,n_,si_,n_,no_,spc_,do_,ku_,ba_,ri_,wo_,spc_,i_,ttu_,se_,i_,ni_,spc_,u_,ti_,da_,su_,kten_,CR_,
+	o_,yo_,gu_,no_,ha_,spc_,ti_,yyo_,ttu_,to_,spc_,ni_,ga_,te_,na_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text212[] = {
+	ha_,ga_,ne_,no_,spc_,ka_,ta_,sa_,wo_,spc_,mo_,tu_,spc_,ka_,ra_,da_,ha_,spc_,ti_,yyo_,ttu_,to_,ya_,CR_,
+	so_,ttu_,to_,no_,spc_,ko_,u_,ge_,ki_,de_,ha_,spc_,bi_,ku_,to_,mo_,spc_,si_,na_,i_,zo_,kten_,CR_,
+	HA_,NE_,wo_,spc_,ha_,ba_,ta_,ka_,se_,spc_,ta_,i_,o_,n_,wo_,spc_,ti_,yyo_,u_,se_,tu_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text213[] = {
+	i_,wa_,no_,spc_,si_,ta_,de_,spc_,ko_,u_,ra_,no_,spc_,na_,ka_,ni_,spc_,ta_,ku_,wa_,e_,ta_,CR_,
+	ki_,no_,mi_,wo_,spc_,ta_,be_,na_,ga_,ra_,spc_,mi_,wo_,spc_,hi_,so_,me_,te_,i_,ru_,kten_,CR_,
+	ta_,i_,e_,ki_,to_,spc_,ma_,za_,ri_,spc_,ki_,no_,mi_,ha_,spc_,ZI_,YYU_,bou_,SU_,ni_,spc_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text214[] = {
+	te_,a_,si_,no_,spc_,su_,ru_,do_,i_,spc_,TU_,ME_,ga_,spc_,zi_,me_,n_,ya_,spc_,zi_,yyu_,mo_,ku_,ni_,CR_,
+	hu_,ka_,ku_,spc_,ku_,i_,ko_,mu_,no_,de_,spc_,zi_,ma_,n_,no_,spc_,TU_,NO_,de_,spc_,a_,i_,te_,wo_,CR_,
+	na_,ge_,to_,ba_,su_,spc_,to_,ki_,spc_,o_,mo_,i_,ttu_,ki_,ri_,spc_,hu_,n_,ba_,re_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text215[] = {
+	te_,a_,si_,no_,spc_,KA_,GI_,DU_,ME_,wo_,spc_,tu_,ki_,ta_,te_,te_,spc_,ki_,wo_,spc_,no_,bo_,ru_,kten_,CR_,
+	o_,ya_,no_,spc_,i_,na_,i_,spc_,su_,ki_,wo_,spc_,ne_,ra_,ttu_,te_,spc_,ki_,no_,spc_,u_,e_,ni_,CR_,
+	a_,ru_,spc_,su_,spc_,ka_,ra_,spc_,TA_,MA_,GO_,wo_,spc_,nu_,su_,n_,de_,spc_,ta_,be_,ru_,kten_,EOM_,
+};
+
+const	u8	text216[] = {
+	HA_,TI_,MI_,TU_,no_,spc_,si_,mi_,ko_,n_,da_,spc_,te_,no_,hi_,ra_,wo_,spc_,na_,me_,te_,i_,ru_,kten_,CR_,
+	HI_,ME_,GU_,MA_,no_,spc_,HA_,TI_,MI_,TU_,ha_,spc_,ku_,da_,mo_,no_,to_,spc_,SU_,PI_,A_,bou_,no_,CR_,
+	a_,tu_,me_,ta_,spc_,ka_,hu_,n_,ga_,spc_,BU_,RE_,N_,DO_,sa_,re_,te_,spc_,tu_,ku_,ra_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text217[] = {
+	mo_,ri_,no_,spc_,na_,ka_,ni_,ha_,spc_,RI_,N_,GU_,MA_,ga_,spc_,E_,SA_,a_,tu_,me_,wo_,spc_,su_,ru_,CR_,
+	ta_,i_,bo_,ku_,ya_,spc_,o_,ga_,wa_,ga_,spc_,a_,ti_,ko_,ti_,ni_,spc_,a_,ru_,to_,spc_,i_,u_,kten_,CR_,
+	ma_,i_,ni_,ti_,spc_,E_,SA_,wo_,spc_,a_,tu_,me_,te_,spc_,mo_,ri_,wo_,spc_,a_,ru_,ku_,kten_,EOM_,
+};
+
+const	u8	text218[] = {
+	ka_,ra_,da_,no_,spc_,na_,ka_,de_,ha_,spc_,ke_,tu_,e_,ki_,no_,spc_,ka_,wa_,ri_,ni_,CR_,
+	hi_,tu_,yo_,u_,na_,spc_,e_,i_,yo_,u_,to_,spc_,sa_,n_,so_,wo_,spc_,ha_,ko_,bu_,ta_,me_,ni_,CR_,
+	si_,yya_,ku_,ne_,tu_,no_,spc_,MA_,GU_,MA_,ga_,spc_,zi_,yyu_,n_,ka_,n_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text219[] = {
+	ta_,i_,o_,n_,ga_,spc_,ya_,ku_,n1_,ma_,n_,do_,mo_,spc_,a_,ru_,no_,de_,spc_,a_,ma_,tu_,bu_,ni_,CR_,
+	u_,ta_,re_,ru_,to_,spc_,zi_,yyo_,u_,ki_,ga_,spc_,mo_,u_,mo_,u_,to_,spc_,ta_,ti_,ko_,me_,te_,CR_,
+	a_,ta_,ri_,ha_,spc_,hu_,ka_,i_,spc_,ki_,ri_,ni_,spc_,o_,o_,wa_,re_,ru_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text220[] = {
+	zi_,me_,n_,ni_,spc_,ha_,na_,wo_,spc_,ko_,su_,ri_,tu_,ke_,te_,spc_,E_,SA_,wo_,spc_,sa_,ga_,su_,kten_,CR_,
+	ka_,re_,ku_,sa_,no_,spc_,si_,ta_,ni_,spc_,ha_,e_,ta_,spc_,KI_,NO_,KO_,ga_,spc_,ko_,u_,bu_,tu_,kten_,CR_,
+	ta_,ma_,ni_,spc_,o_,n_,se_,n_,wo_,spc_,ho_,ri_,a_,te_,ru_,spc_,ko_,to_,ga_,spc_,a_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text221[] = {
+	ko_,go_,e_,ru_,spc_,sa_,mu_,sa_,ni_,mo_,spc_,ta_,e_,ra_,re_,ru_,spc_,yo_,u_,ni_,CR_,
+	a_,tu_,ku_,te_,spc_,na_,ga_,i_,spc_,ke_,ga_,wa_,ni_,spc_,o_,o_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	ko_,o_,ri_,ni_,spc_,u_,ma_,ttu_,ta_,spc_,E_,SA_,wo_,spc_,KI_,BA_,de_,spc_,ho_,ri_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text222[] = {
+	a_,ta_,ta_,ka_,i_,spc_,u_,mi_,ni_,spc_,a_,tu_,ma_,ttu_,ta_,spc_,SA_,NI_,bou_,GO_,ha_,CR_,
+	ti_,i_,sa_,i_,spc_,PO_,KE_,MO_,N_,ta_,ti_,no_,spc_,ka_,ku_,re_,ga_,ni_,spc_,na_,ru_,kten_,CR_,
+	su_,i_,o_,n_,ga_,spc_,sa_,ga_,ru_,to_,spc_,mi_,na_,mi_,he_,spc_,i_,do_,u_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text223[] = {
+	no_,n_,da_,spc_,mi_,zu_,wo_,spc_,hu_,ttu_,ki_,n_,wo_,spc_,tu_,ka_,i_,spc_,i_,ki_,o_,i_,yo_,ku_,CR_,
+	hu_,ki_,da_,si_,te_,spc_,so_,ra_,wo_,spc_,to_,bu_,spc_,e_,mo_,no_,wo_,spc_,si_,to_,me_,ru_,kten_,CR_,
+	si_,n_,ka_,ga_,spc_,ti_,ka_,du_,ku_,to_,spc_,ka_,wa_,wo_,spc_,ku_,da_,ttu_,te_,i_,ku_,kten_,EOM_,
+};
+
+const	u8	text224[] = {
+	ki_,yyu_,u_,ba_,n_,no_,spc_,u_,de_,de_,spc_,a_,i_,te_,ni_,spc_,ka_,ra_,mi_,tu_,ku_,kten_,CR_,
+	u_,go_,ke_,na_,ku_,na_,ttu_,ta_,spc_,to_,ko_,ro_,wo_,spc_,si_,to_,me_,ru_,no_,da_,kten_,CR_,
+	ka_,na_,wa_,na_,i_,spc_,to_,ki_,ha_,spc_,SU_,MI_,wo_,spc_,ha_,i_,te_,spc_,ni_,ge_,ru_,kten_,EOM_,
+};
+
+const	u8	text225[] = {
+	si_,ttu_,po_,de_,spc_,E_,SA_,wo_,spc_,tu_,tu_,mi_,spc_,mo_,ti_,ha_,ko_,bu_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	DE_,RI_,BA_,bou_,DO_,ni_,spc_,E_,SA_,wo_,spc_,wa_,ke_,te_,mo_,ra_,ttu_,ta_,spc_,o_,ka_,ge_,de_,CR_,
+	E_,BE_,RE_,SU_,TO_,wo_,spc_,no_,bo_,ri_,ki_,re_,ta_,spc_,bo_,u_,ke_,n_,ka_,ga_,spc_,i_,ta_,kten_,EOM_,
+};
+
+const	u8	text226[] = {
+	ha_,re_,ta_,spc_,hi_,ni_,ha_,spc_,u_,mi_,no_,spc_,u_,e_,wo_,spc_,yu_,u_,ga_,ni_,spc_,ha_,ne_,ru_,CR_,
+	MA_,N_,TA_,I_,N_,no_,spc_,mu_,re_,wo_,spc_,mi_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,yo_,kten_,CR_,
+	TE_,TTU_,PO_,U_,O_,ga_,spc_,ku_,ttu_,tu_,i_,te_,i_,te_,mo_,spc_,ki_,ni_,si_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text227[] = {
+	ta_,ta_,ka_,i_,wo_,spc_,ku_,ri_,ka_,e_,si_,te_,spc_,BO_,RO_,BO_,RO_,ni_,spc_,na_,ttu_,ta_,CR_,
+	ha_,ga_,ne_,no_,spc_,HA_,NE_,ha_,spc_,n1_,ne_,n_,ni_,spc_,n1_,ka_,i_,spc_,ha_,e_,ka_,wa_,ri_,CR_,
+	mo_,to_,do_,o_,ri_,no_,spc_,ki_,re_,a_,zi_,wo_,spc_,to_,ri_,mo_,do_,su_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text228[] = {
+	sa_,ma_,za_,ma_,na_,spc_,na_,ki_,go_,e_,wo_,spc_,tu_,ka_,i_,wa_,ke_,spc_,na_,ka_,ma_,to_,CR_,
+	re_,n_,ra_,ku_,wo_,spc_,to_,ri_,a_,i_,spc_,e_,mo_,no_,wo_,spc_,o_,i_,ko_,n_,de_,i_,ku_,kten_,CR_,
+	TI_,bou_,MU_,WA_,bou_,KU_,no_,spc_,mi_,go_,to_,sa_,ha_,spc_,PO_,KE_,MO_,N_,zu_,i_,i_,ti_,kten_,EOM_,
+};
+
+const	u8	text229[] = {
+	a_,ta_,ma_,no_,spc_,TU_,NO_,ga_,spc_,o_,o_,ki_,ku_,spc_,so_,ri_,ka_,e_,ttu_,te_,spc_,i_,ru_,CR_,
+	HE_,RU_,GA_,bou_,ga_,spc_,GU_,RU_,bou_,PU_,no_,spc_,RI_,bou_,DA_,bou_,te_,ki_,spc_,so_,n_,za_,i_,kten_,CR_,
+	na_,ka_,ma_,spc_,do_,u_,si_,de_,spc_,a_,ra_,so_,i_,spc_,RI_,bou_,DA_,bou_,ga_,spc_,ki_,ma_,ru_,kten_,EOM_,
+};
+
+const	u8	text230[] = {
+	i_,ki_,mo_,no_,no_,spc_,su_,ma_,na_,i_,spc_,ka_,i_,te_,i_,de_,spc_,ne_,mu_,ttu_,te_,i_,ru_,kten_,CR_,
+	ta_,i_,hu_,u_,ga_,spc_,ya_,ttu_,te_,ku_,ru_,to_,spc_,me_,wo_,spc_,sa_,ma_,si_,te_,CR_,
+	e_,mo_,no_,wo_,spc_,sa_,ga_,si_,ni_,spc_,u_,ro_,tu_,ki_,ma_,wa_,ru_,to_,spc_,i_,wa_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text231[] = {
+	na_,ga_,i_,spc_,ha_,na_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,mi_,zu_,a_,bi_,wo_,spc_,su_,ru_,kten_,CR_,
+	na_,ka_,ma_,ga_,spc_,a_,tu_,ma_,ttu_,te_,ku_,ru_,to_,spc_,mi_,zu_,wo_,spc_,ka_,ke_,a_,u_,kten_,CR_,
+	zu_,bu_,nu_,re_,no_,spc_,ka_,ra_,da_,wo_,spc_,mi_,zu_,be_,de_,spc_,ka_,wa_,ka_,su_,yo_,kten_,EOM_,
+};
+
+const	u8	text232[] = {
+	ka_,ta_,i_,spc_,ka_,ra_,da_,de_,spc_,bu_,tu_,ka_,re_,ba_,spc_,i_,e_,mo_,spc_,ko_,wa_,re_,ru_,kten_,CR_,
+	so_,no_,spc_,ti_,ka_,ra_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,ya_,ma_,mi_,ti_,wo_,spc_,hu_,sa_,i_,da_,CR_,
+	do_,si_,yya_,ku_,zu_,re_,wo_,spc_,do_,ka_,su_,spc_,si_,go_,to_,wo_,spc_,te_,tu_,da_,u_,yo_,kten_,EOM_,
+};
+
+const	u8	text233[] = {
+	ni_,n_,ge_,n_,ga_,spc_,ka_,ga_,ku_,no_,spc_,ti_,ka_,ra_,de_,spc_,tu_,ku_,ri_,da_,si_,ta_,kten_,CR_,
+	zi_,n_,ko_,u_,spc_,ti_,no_,u_,wo_,spc_,mo_,ta_,se_,ta_,no_,de_,spc_,a_,ta_,ra_,si_,i_,CR_,
+	si_,gu_,sa_,ya_,spc_,ka_,n_,zi_,yyo_,u_,wo_,spc_,hi_,to_,ri_,de_,spc_,o_,bo_,e_,te_,i_,ku_,kten_,EOM_,
+};
+
+const	u8	text234[] = {
+	mi_,go_,to_,na_,spc_,ka_,ta_,ti_,no_,spc_,TU_,NO_,ha_,spc_,bi_,zi_,yyu_,tu_,hi_,n_,spc_,to_,si_,te_,CR_,
+	ta_,ka_,ku_,spc_,u_,re_,ta_,spc_,ta_,me_,ni_,spc_,ze_,tu_,me_,tu_,spc_,su_,n_,ze_,n_,ma_,de_,CR_,
+	ra_,n_,ka_,ku_,sa_,re_,ta_,spc_,ko_,to_,no_,a_,ru_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text235[] = {
+	si_,ttu_,po_,no_,spc_,sa_,ki_,ka_,ra_,spc_,ni_,zi_,mi_,de_,ru_,spc_,ta_,i_,e_,ki_,de_,CR_,
+	na_,wa_,ba_,ri_,no_,spc_,ma_,wa_,ri_,ni_,spc_,zi_,bu_,n_,no_,spc_,MA_,bou_,KU_,wo_,spc_,ka_,ku_,kten_,CR_,
+	n5_,n0_,n0_,n0_,spc_,si_,yyu_,ru_,i_,no_,spc_,MA_,bou_,KU_,ga_,spc_,mi_,tu_,ka_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text236[] = {
+	ma_,i_,ni_,ti_,spc_,TO_,RE_,bou_,NI_,N_,GU_,spc_,si_,na_,i_,to_,spc_,SU_,TO_,RE_,SU_,ga_,CR_,
+	ta_,ma_,ttu_,te_,si_,ma_,u_,no_,de_,spc_,TO_,RE_,bou_,NA_,bou_,ha_,spc_,so_,da_,te_,ru_,spc_,to_,ki_,CR_,
+	SU_,KE_,ZI_,YYU_,bou_,RU_,ka_,n_,ri_,ni_,spc_,ku_,hu_,u_,ga_,spc_,hi_,tu_,yo_,u_,da_,kten_,EOM_,
+};
+
+const	u8	text237[] = {
+	ko_,u_,so_,ku_,spc_,ka_,i_,te_,n_,si_,na_,ga_,ra_,spc_,ha_,na_,tu_,spc_,KI_,TTU_,KU_,ha_,CR_,
+	ko_,u_,ge_,ki_,to_,spc_,bo_,u_,gi_,yyo_,wo_,spc_,ka_,ne_,ta_,spc_,mi_,go_,to_,na_,spc_,wa_,za_,kten_,CR_,
+	a_,ru_,ku_,spc_,yo_,ri_,mo_,spc_,ka_,i_,te_,n_,si_,ta_,spc_,ho_,u_,ga_,spc_,ha_,ya_,i_,kten_,EOM_,
+};
+
+const	u8	text238[] = {
+	ge_,n_,ki_,spc_,i_,ttu_,pa_,i_,spc_,u_,go_,ki_,ma_,wa_,ru_,ga_,spc_,yo_,ku_,spc_,ko_,ro_,bu_,kten_,CR_,
+	mu_,ttu_,ku_,ri_,spc_,o_,ki_,a_,ga_,ru_,to_,spc_,mi_,zu_,u_,mi_,no_,spc_,su_,i_,me_,n_,ni_,CR_,
+	ka_,o_,wo_,spc_,u_,tu_,si_,te_,spc_,yo_,go_,re_,te_,i_,na_,i_,ka_,spc_,si_,ra_,be_,ru_,kten_,EOM_,
+};
+
+const	u8	text239[] = {
+	ki_,n_,zo_,ku_,ni_,spc_,sa_,wa_,ttu_,te_,spc_,ka_,ra_,da_,ni_,spc_,ta_,me_,ta_,spc_,de_,n_,ki_,ga_,CR_,
+	ho_,u_,de_,n_,spc_,si_,te_,si_,ma_,u_,to_,spc_,ri_,yyo_,u_,u_,de_,wo_,spc_,gu_,ru_,gu_,ru_,CR_,
+	ma_,wa_,si_,te_,spc_,hu_,ta_,ta_,bi_,spc_,de_,n_,ki_,wo_,spc_,ta_,me_,ru_,kten_,EOM_,
+};
+
+const	u8	text240[] = {
+	ki_,i_,ro_,i_,spc_,ho_,no_,o_,wo_,spc_,ku_,ti_,ka_,ra_,spc_,hu_,i_,te_,i_,ru_,spc_,to_,ki_,ha_,CR_,
+	ke_,n_,ko_,u_,na_,spc_,si_,yyo_,u_,ko_,da_,ga_,spc_,tu_,ka_,re_,te_,i_,ru_,to_,spc_,ku_,ro_,i_,CR_,
+	ke_,mu_,ri_,ga_,spc_,ma_,za_,ru_,spc_,yo_,u_,ni_,spc_,na_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text241[] = {
+	ma_,i_,ni_,ti_,spc_,n2_,n0_,RI_,TTU_,TO_,RU_,no_,spc_,MI_,RU_,KU_,wo_,spc_,da_,su_,kten_,CR_,
+	a_,ma_,i_,spc_,MI_,RU_,KU_,ha_,spc_,o_,to_,na_,mo_,spc_,ko_,do_,mo_,mo_,spc_,da_,i_,su_,ki_,kten_,CR_,
+	ni_,ga_,te_,na_,spc_,hi_,to_,ha_,spc_,YO_,bou_,GU_,RU_,TO_,ni_,si_,te_,spc_,ta_,be_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text242[] = {
+	hu_,wa_,hu_,wa_,no_,spc_,ta_,i_,mo_,u_,de_,spc_,ka_,na_,si_,n_,de_,i_,ru_,spc_,ko_,ko_,ro_,wo_,CR_,
+	KI_,YYA_,TTU_,TI_,su_,ru_,to_,spc_,do_,n_,na_,ni_,spc_,to_,o_,ku_,de_,mo_,spc_,ka_,ke_,tu_,ke_,te_,CR_,
+	e_,ga_,o_,ni_,spc_,na_,ru_,spc_,si_,a_,wa_,se_,TA_,MA_,GO_,wo_,spc_,wa_,ke_,te_,a_,ge_,ru_,kten_,EOM_,
+};
+
+const	u8	text243[] = {
+	ka_,mi_,na_,ri_,no_,spc_,SU_,PI_,bou_,DO_,wo_,spc_,ya_,do_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	so_,no_,spc_,to_,o_,bo_,e_,ha_,spc_,ka_,mi_,na_,ri_,ga_,spc_,o_,ti_,ta_,spc_,to_,ki_,no_,CR_,
+	yo_,u_,ni_,spc_,ku_,u_,ki_,wo_,spc_,hu_,ru_,wa_,se_,spc_,da_,i_,ti_,wo_,spc_,yu_,ru_,ga_,su_,kten_,EOM_,
+};
+
+const	u8	text244[] = {
+	MA_,GU_,MA_,no_,spc_,zi_,yyo_,u_,ne_,tu_,wo_,spc_,ya_,do_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ka_,za_,n_,no_,spc_,hu_,n_,ka_,ka_,ra_,spc_,u_,ma_,re_,ta_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,CR_,
+	su_,be_,te_,wo_,spc_,ya_,ki_,tu_,ku_,su_,spc_,ho_,no_,o_,wo_,spc_,hu_,ki_,a_,ge_,ru_,kten_,EOM_,
+};
+
+const	u8	text245[] = {
+	wa_,ki_,mi_,zu_,no_,spc_,ya_,sa_,si_,sa_,wo_,spc_,ya_,do_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	su_,be_,ru_,spc_,yo_,u_,na_,spc_,mi_,no_,ko_,na_,si_,de_,spc_,da_,i_,ti_,wo_,spc_,ha_,si_,ri_,CR_,
+	ni_,go_,ttu_,ta_,spc_,mi_,zu_,wo_,spc_,ki_,yo_,me_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text246[] = {
+	ti_,ti_,yyu_,u_,spc_,hu_,ka_,ku_,de_,spc_,u_,ma_,re_,ru_,spc_,YO_,bou_,GI_,RA_,SU_,ha_,CR_,
+	tu_,ti_,wo_,spc_,ta_,be_,tu_,ku_,si_,te_,spc_,ti_,zi_,yyo_,u_,he_,spc_,de_,na_,i_,to_,CR_,
+	o_,ya_,no_,spc_,ka_,o_,wo_,spc_,mi_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text247[] = {
+	ta_,i_,na_,i_,de_,spc_,tu_,ku_,ri_,da_,si_,ta_,spc_,GA_,SU_,wo_,spc_,a_,ttu_,si_,yyu_,ku_,si_,te_,CR_,
+	i_,ki_,o_,i_,yo_,ku_,spc_,hu_,n_,si_,yya_,su_,ru_,spc_,ko_,to_,de_,spc_,to_,n_,de_,i_,ku_,kten_,CR_,
+	ko_,u_,te_,tu_,ni_,spc_,bu_,tu_,ka_,ttu_,te_,mo_,spc_,he_,i_,ki_,na_,spc_,BO_,DE_,II_,da_,kten_,EOM_,
+};
+
+const	u8	text248[] = {
+	zi_,bu_,n_,no_,spc_,su_,mi_,ka_,wo_,spc_,tu_,ku_,ru_,spc_,ta_,me_,ni_,spc_,ya_,ma_,spc_,hi_,to_,tu_,CR_,
+	ku_,zu_,si_,te_,si_,ma_,u_,spc_,ho_,do_,no_,spc_,tu_,yo_,i_,spc_,PA_,WA_,bou_,wo_,spc_,mo_,tu_,kten_,CR_,
+	ta_,ta_,ka_,u_,spc_,a_,i_,te_,wo_,spc_,mo_,to_,me_,te_,spc_,ya_,ma_,wo_,spc_,sa_,ma_,yo_,u_,kten_,EOM_,
+};
+
+const	u8	text249[] = {
+	tu_,ba_,sa_,wo_,spc_,ka_,ru_,ku_,spc_,ha_,ba_,ta_,ka_,se_,ta_,spc_,da_,ke_,de_,spc_,mi_,n_,ka_,wo_,CR_,
+	hu_,ki_,to_,ba_,su_,spc_,ha_,ka_,i_,ri_,yyo_,ku_,wo_,spc_,mo_,ttu_,te_,i_,ru_,spc_,ta_,me_,ni_,CR_,
+	ka_,i_,te_,i_,de_,spc_,hi_,to_,si_,re_,zu_,spc_,ku_,ra_,su_,spc_,yo_,u_,ni_,spc_,na_,ttu_,ta_,kten_,EOM_,
+};
+
+const	u8	text250[] = {
+	hi_,ka_,ri_,no_,spc_,a_,ta_,ru_,spc_,ka_,ku_,do_,ni_,spc_,yo_,ttu_,te_,spc_,na_,na_,i_,ro_,ni_,CR_,
+	ka_,ga_,ya_,ku_,spc_,HA_,NE_,ha_,spc_,si_,a_,wa_,se_,wo_,spc_,mo_,ta_,ra_,su_,to_,spc_,i_,u_,kten_,CR_,
+	ni_,zi_,no_,spc_,hu_,mo_,to_,ni_,spc_,su_,mu_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text251[] = {
+	to_,ki_,wo_,spc_,ko_,e_,spc_,mi_,ra_,i_,ka_,ra_,spc_,ya_,ttu_,te_,ki_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	SE_,RE_,BI_,II_,ga_,spc_,su_,ga_,ta_,wo_,spc_,a_,ra_,wa_,su_,spc_,ka_,gi_,ri_,spc_,a_,ka_,ru_,i_,CR_,
+	mi_,ra_,i_,ga_,spc_,ma_,ttu_,te_,i_,ru_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text252[] = {
+	ti_,n_,ti_,yya_,ku_,spc_,re_,i_,se_,i_,spc_,na_,ni_,go_,to_,ni_,mo_,spc_,do_,u_,zi_,na_,i_,kten_,CR_,
+	ka_,ra_,da_,no_,spc_,o_,o_,ki_,na_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ni_,ra_,ma_,re_,te_,mo_,CR_,
+	i_,ttu_,po_,mo_,spc_,hi_,ka_,zu_,ni_,spc_,ni_,ra_,mi_,ka_,e_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text253[] = {
+	e_,da_,ka_,ra_,spc_,e_,da_,he_,spc_,mi_,ga_,ru_,ni_,spc_,to_,bi_,ma_,wa_,ru_,kten_,CR_,
+	do_,n_,na_,ni_,spc_,su_,ba_,ya_,i_,spc_,PO_,KE_,MO_,N_,mo_,spc_,mo_,ri_,no_,spc_,na_,ka_,de_,CR_,
+	ZI_,YYU_,PU_,TO_,RU_,wo_,spc_,tu_,ka_,ma_,e_,ru_,spc_,ko_,to_,ha_,spc_,hu_,ka_,no_,u_,da_,kten_,EOM_,
+};
+
+const	u8	text254[] = {
+	se_,na_,ka_,no_,spc_,TA_,NE_,ni_,ha_,spc_,zi_,yyu_,mo_,ku_,wo_,spc_,ge_,n_,ki_,ni_,su_,ru_,CR_,
+	e_,i_,yo_,u_,ga_,spc_,ta_,ku_,sa_,n_,spc_,tu_,ma_,ttu_,te_,i_,ru_,to_,spc_,i_,wa_,re_,ru_,kten_,CR_,
+	mo_,ri_,no_,spc_,ki_,wo_,spc_,da_,i_,zi_,ni_,spc_,so_,da_,te_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text255[] = {
+	ta_,i_,na_,i_,ni_,spc_,ho_,no_,o_,wo_,spc_,mo_,ya_,su_,spc_,ba_,si_,yyo_,ga_,spc_,a_,ru_,no_,de_,CR_,
+	da_,ki_,si_,me_,ru_,to_,spc_,po_,ka_,po_,ka_,spc_,to_,ttu_,te_,mo_,spc_,a_,ta_,ta_,ka_,i_,kten_,CR_,
+	ze_,n_,si_,n_,spc_,hu_,ka_,hu_,ka_,no_,spc_,u_,mo_,u_,ni_,spc_,o_,o_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text256[] = {
+	KU_,TI_,BA_,SI_,ka_,ra_,spc_,ha_,ki_,da_,su_,spc_,si_,yya_,ku_,ne_,tu_,no_,spc_,ho_,no_,o_,to_,CR_,
+	ha_,ka_,i_,ri_,yyo_,ku_,spc_,ba_,tu_,gu_,n_,no_,spc_,KI_,TTU_,KU_,de_,spc_,ta_,ta_,ka_,u_,kten_,CR_,
+	na_,ki_,go_,e_,ga_,spc_,o_,o_,ki_,i_,no_,de_,spc_,to_,te_,mo_,spc_,ya_,ka_,ma_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text257[] = {
+	ki_,yyo_,u_,zi_,n_,na_,spc_,a_,si_,ko_,si_,wo_,spc_,mo_,ti_,spc_,n3_,n0_,ka_,i_,spc_,da_,te_,no_,CR_,
+	BI_,RU_,mo_,spc_,ra_,ku_,ra_,ku_,spc_,to_,bi_,ko_,su_,spc_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	ho_,no_,o_,no_,spc_,PA_,N_,TI_,de_,spc_,a_,i_,te_,wo_,spc_,ku_,ro_,ko_,ge_,ni_,spc_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text258[] = {
+	su_,i_,ti_,yyu_,u_,de_,ha_,spc_,ho_,ttu_,pe_,no_,spc_,E_,RA_,de_,spc_,ko_,ki_,yyu_,u_,su_,ru_,kten_,CR_,
+	PI_,N_,TI_,ni_,spc_,na_,ru_,to_,spc_,ka_,ra_,da_,yo_,ri_,spc_,o_,o_,ki_,na_,spc_,i_,wa_,wo_,CR_,
+	ko_,na_,go_,na_,ni_,spc_,ku_,da_,ku_,spc_,PA_,WA_,bou_,wo_,spc_,ha_,ttu_,ki_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text259[] = {
+	su_,i_,ti_,yyu_,u_,wo_,spc_,o_,yo_,gu_,yo_,ri_,spc_,do_,ro_,no_,spc_,na_,ka_,wo_,CR_,
+	su_,su_,mu_,spc_,ho_,u_,ga_,spc_,da_,n_,ze_,n_,spc_,ha_,ya_,ku_,spc_,i_,do_,u_,de_,ki_,ru_,kten_,CR_,
+	a_,si_,ko_,si_,ga_,spc_,ha_,ttu_,ta_,tu_,si_,te_,spc_,n2_,ho_,n_,a_,si_,de_,spc_,a_,ru_,ku_,kten_,EOM_,
+};
+
+const	u8	text260[] = {
+	RA_,GU_,RA_,bou_,ZI_,ha_,spc_,na_,mi_,o_,to_,ya_,spc_,si_,o_,ka_,ze_,no_,spc_,wa_,zu_,ka_,na_,CR_,
+	ti_,ga_,i_,wo_,spc_,HI_,RE_,de_,spc_,ka_,n_,zi_,spc_,a_,ra_,si_,wo_,spc_,yo_,ka_,n_,su_,ru_,kten_,CR_,
+	a_,ra_,si_,ni_,na_,ru_,to_,spc_,i_,wa_,wo_,spc_,tu_,mi_,a_,ge_,spc_,su_,wo_,spc_,ma_,mo_,ru_,kten_,EOM_,
+};
+
+const	u8	text261[] = {
+	na_,n_,de_,mo_,spc_,ta_,be_,ru_,spc_,za_,ttu_,si_,yyo_,ku_,se_,i_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ka_,ra_,da_,ni_,spc_,ku_,ra_,be_,spc_,o_,o_,ki_,na_,spc_,KI_,BA_,ga_,spc_,to_,ku_,ti_,yyo_,u_,kten_,CR_,
+	si_,ttu_,po_,no_,spc_,ke_,wo_,spc_,sa_,ka_,da_,te_,te_,spc_,te_,ki_,wo_,spc_,i_,ka_,ku_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text262[] = {
+	GU_,RU_,bou_,PU_,de_,spc_,ko_,u_,do_,u_,si_,te_,i_,ta_,spc_,ya_,se_,i_,no_,spc_,ti_,ga_,CR_,
+	no_,ko_,ttu_,te_,i_,ru_,no_,de_,spc_,su_,gu_,re_,ta_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,da_,ke_,wo_,CR_,
+	RI_,bou_,DA_,bou_,to_,spc_,mi_,to_,me_,te_,spc_,me_,i_,re_,i_,ni_,spc_,si_,ta_,ga_,u_,kten_,EOM_,
+};
+
+const	u8	text263[] = {
+	se_,na_,ka_,no_,spc_,ka_,ta_,i_,spc_,ke_,wo_,spc_,zi_,yyu_,mo_,ku_,ni_,spc_,ko_,su_,ri_,tu_,ke_,CR_,
+	zi_,bu_,n_,no_,spc_,na_,wa_,ba_,ri_,de_,spc_,a_,ru_,spc_,si_,ru_,si_,wo_,spc_,tu_,ke_,ru_,kten_,CR_,
+	si_,n_,da_,spc_,hu_,ri_,wo_,spc_,si_,te_,spc_,te_,ki_,no_,spc_,me_,wo_,spc_,go_,ma_,ka_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text264[] = {
+	e_,mo_,no_,spc_,me_,ga_,ke_,te_,spc_,i_,ttu_,ti_,yyo_,ku_,se_,n_,ni_,spc_,tu_,ttu_,pa_,si_,ru_,kten_,CR_,
+	zi_,so_,ku_,spc_,n1_,n0_,n0_,KI_,RO_,wo_,spc_,ko_,e_,ru_,spc_,SU_,PI_,bou_,DO_,wo_,spc_,da_,su_,ga_,CR_,
+	i_,ti_,do_,spc_,ki_,yyu_,u_,te_,i_,si_,spc_,si_,na_,i_,to_,spc_,ma_,ga_,re_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text265[] = {
+	E_,SA_,ni_,si_,yo_,u_,to_,spc_,tu_,ka_,ma_,e_,ni_,ki_,ta_,spc_,O_,O_,SU_,BA_,ME_,ni_,CR_,
+	o_,si_,ri_,no_,spc_,TO_,GE_,wo_,spc_,mu_,ke_,te_,spc_,te_,i_,ko_,u_,su_,ru_,kten_,CR_,
+	si_,mi_,da_,si_,ta_,spc_,do_,ku_,de_,spc_,a_,i_,te_,wo_,spc_,yo_,wa_,ra_,se_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text266[] = {
+	si_,n_,ka_,su_,ru_,ma_,de_,spc_,na_,ni_,mo_,spc_,ta_,be_,zu_,ni_,spc_,ta_,e_,te_,i_,ru_,to_,CR_,
+	ka_,n_,ga_,e_,ra_,re_,te_,i_,ta_,ga_,spc_,do_,u_,ya_,ra_,spc_,i_,to_,ni_,spc_,tu_,i_,ta_,CR_,
+	a_,ma_,mi_,zu_,de_,spc_,ka_,wa_,ki_,wo_,spc_,i_,ya_,si_,te_,i_,ru_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text267[] = {
+	ku_,ru_,ri_,to_,spc_,ma_,i_,ta_,spc_,ha_,ri_,no_,spc_,yo_,u_,na_,spc_,na_,ga_,i_,spc_,ku_,ti_,ha_,CR_,
+	ka_,hu_,n_,wo_,spc_,a_,tu_,me_,ru_,spc_,to_,ki_,ni_,spc_,to_,te_,mo_,spc_,be_,n_,ri_,kten_,CR_,
+	ha_,ru_,ka_,ze_,ni_,spc_,no_,ttu_,te_,spc_,ka_,hu_,n_,wo_,spc_,a_,tu_,me_,te_,spc_,ma_,wa_,ru_,kten_,EOM_,
+};
+
+const	u8	text268[] = {
+	u_,go_,ku_,to_,spc_,tu_,yo_,i_,spc_,ka_,ra_,da_,ni_,spc_,si_,n_,ka_,spc_,de_,ki_,na_,i_,no_,de_,CR_,
+	do_,n_,na_,ni_,spc_,i_,ta_,me_,tu_,ke_,ra_,re_,te_,mo_,spc_,zi_,ttu_,to_,spc_,si_,te_,i_,ru_,kten_,CR_,
+	so_,no_,to_,ki_,spc_,u_,ke_,ta_,spc_,i_,ta_,mi_,ha_,spc_,zu_,ttu_,to_,spc_,wa_,su_,re_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text269[] = {
+	ha_,ba_,ta_,ku_,to_,spc_,ko_,ma_,ka_,i_,spc_,ko_,na_,ga_,spc_,ma_,i_,a_,ga_,ru_,kten_,CR_,
+	su_,i_,ko_,mu_,to_,spc_,PU_,RO_,RE_,SU_,RA_,bou_,mo_,spc_,ne_,ko_,mu_,spc_,mo_,u_,do_,ku_,da_,kten_,CR_,
+	si_,yyo_,ttu_,ka_,ku_,no_,spc_,RE_,bou_,DA_,bou_,de_,spc_,E_,SA_,wo_,spc_,sa_,ga_,su_,kten_,EOM_,
+};
+
+const	u8	text270[] = {
+	mo_,to_,mo_,to_,ha_,spc_,ti_,zi_,yyo_,u_,de_,spc_,se_,i_,ka_,tu_,si_,te_,i_,ta_,ga_,CR_,
+	a_,ta_,ma_,no_,spc_,ha_,ttu_,pa_,ga_,spc_,o_,mo_,ku_,na_,ttu_,ta_,no_,de_,spc_,mi_,zu_,ni_,CR_,
+	u_,ka_,n_,de_,spc_,ku_,ra_,su_,yo_,u_,ni_,na_,ttu_,ta_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text271[] = {
+	ka_,ra_,da_,zi_,yyu_,u_,spc_,NU_,RU_,NU_,RU_,si_,ta_,spc_,ne_,n_,e_,ki_,de_,spc_,o_,o_,wa_,re_,CR_,
+	so_,no_,spc_,te_,de_,spc_,sa_,wa_,ra_,re_,ru_,to_,spc_,to_,te_,mo_,spc_,ki_,mo_,ti_,wa_,ru_,i_,kten_,CR_,
+	ni_,n_,ge_,n_,no_,spc_,ko_,do_,mo_,to_,spc_,yo_,ku_,spc_,ma_,ti_,ga_,e_,ra_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text272[] = {
+	yo_,u_,ki_,na_,spc_,RI_,ZU_,MU_,wo_,spc_,ki_,ku_,to_,spc_,ka_,ra_,da_,no_,spc_,sa_,i_,bo_,u_,ga_,CR_,
+	ka_,ttu_,pa_,tu_,ni_,spc_,ka_,tu_,do_,u_,wo_,spc_,ha_,zi_,me_,ru_,spc_,ta_,i_,si_,tu_,kten_,CR_,
+	ta_,ta_,ka_,i_,de_,mo_,spc_,su_,go_,i_,spc_,PA_,WA_,bou_,wo_,spc_,ha_,ttu_,ki_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text273[] = {
+	e_,da_,ni_,spc_,bu_,ra_,sa_,ga_,ru_,spc_,su_,ga_,ta_,ha_,spc_,ki_,no_,mi_,spc_,so_,ttu_,ku_,ri_,kten_,CR_,
+	i_,ki_,na_,ri_,spc_,u_,go_,i_,te_,spc_,PO_,KE_,MO_,N_,wo_,spc_,BI_,TTU_,KU_,RI_,sa_,se_,ru_,kten_,CR_,
+	n1_,ni_,ti_,spc_,n1_,ka_,i_,spc_,ha_,ttu_,pa_,de_,spc_,ka_,ra_,da_,wo_,spc_,mi_,ga_,ku_,yo_,kten_,EOM_,
+};
+
+const	u8	text274[] = {
+	a_,ta_,ma_,no_,spc_,ha_,ttu_,pa_,wo_,spc_,nu_,i_,te_,spc_,ku_,sa_,bu_,e_,wo_,spc_,tu_,ku_,ru_,kten_,CR_,
+	KO_,NO_,HA_,NA_,ga_,spc_,ka_,na_,de_,ru_,spc_,ku_,sa_,bu_,e_,no_,spc_,ne_,i_,ro_,ha_,CR_,
+	mo_,ri_,de_,spc_,ma_,yo_,ttu_,ta_,spc_,hi_,to_,wo_,spc_,hu_,a_,n_,ni_,sa_,se_,ru_,kten_,EOM_,
+};
+
+const	u8	text275[] = {
+	o_,o_,ki_,na_,spc_,u_,ti_,wa_,ha_,spc_,hu_,u_,so_,ku_,spc_,n3_,n0_,ME_,bou_,TO_,RU_,no_,CR_,
+	ki_,yyo_,u_,hu_,u_,wo_,spc_,o_,ko_,si_,spc_,na_,n_,de_,mo_,spc_,hu_,ki_,to_,ba_,su_,kten_,CR_,
+	mo_,ri_,no_,spc_,o_,ku_,de_,spc_,hi_,ttu_,so_,ri_,spc_,ku_,ra_,su_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text276[] = {
+	su_,da_,ti_,wo_,spc_,o_,e_,ta_,ba_,ka_,ri_,spc_,na_,no_,de_,spc_,yo_,ru_,ni_,spc_,na_,ru_,to_,CR_,
+	sa_,mi_,si_,ku_,spc_,na_,ttu_,te_,spc_,na_,i_,te_,si_,ma_,u_,spc_,ko_,to_,mo_,spc_,a_,ru_,kten_,CR_,
+	mo_,ri_,ni_,spc_,su_,mu_,spc_,KE_,MU_,TTU_,SO_,wo_,spc_,tu_,ka_,ma_,e_,te_,spc_,ta_,be_,ru_,kten_,EOM_,
+};
+
+const	u8	text277[] = {
+	TU_,YA_,no_,spc_,a_,ru_,spc_,ha_,ne_,no_,spc_,te_,i_,re_,ha_,spc_,o_,ko_,ta_,ra_,na_,i_,kten_,CR_,
+	O_,O_,SU_,BA_,ME_,ga_,spc_,n2_,hi_,ki_,spc_,a_,tu_,ma_,ru_,to_,spc_,ka_,na_,ra_,zu_,CR_,
+	o_,ta_,ga_,i_,no_,spc_,ha_,ne_,wo_,spc_,ki_,re_,i_,ni_,spc_,te_,i_,re_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text278[] = {
+	u_,mi_,ka_,ra_,spc_,hu_,ku_,spc_,zi_,yyo_,u_,si_,yyo_,u_,spc_,ki_,ri_,yyu_,u_,ni_,spc_,no_,ri_,CR_,
+	ho_,so_,na_,ga_,i_,spc_,tu_,ba_,sa_,wo_,spc_,no_,ba_,si_,te_,spc_,ka_,ttu_,ku_,u_,su_,ru_,kten_,CR_,
+	na_,ga_,i_,spc_,ku_,ti_,ba_,si_,ha_,spc_,E_,SA_,wo_,spc_,to_,ru_,to_,ki_,ni_,spc_,be_,n_,ri_,kten_,EOM_,
+};
+
+const	u8	text279[] = {
+	ka_,i_,me_,n_,spc_,su_,re_,su_,re_,wo_,spc_,to_,bi_,spc_,E_,SA_,wo_,spc_,sa_,ga_,su_,kten_,CR_,
+	o_,o_,ki_,na_,spc_,KU_,TI_,BA_,SI_,wo_,spc_,u_,mi_,no_,spc_,na_,ka_,he_,spc_,i_,re_,te_,CR_,
+	E_,SA_,wo_,spc_,su_,ku_,i_,to_,ri_,spc_,hi_,to_,no_,mi_,de_,spc_,ta_,be_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text280[] = {
+	hi_,to_,no_,spc_,ka_,n_,zi_,yyo_,u_,wo_,spc_,sa_,ttu_,ti_,su_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,ti_,CR_,
+	TO_,RE_,bou_,NA_,bou_,ga_,spc_,a_,ka_,ru_,i_,spc_,ki_,bu_,n_,no_,spc_,to_,ki_,ni_,ha_,CR_,
+	i_,ttu_,si_,yyo_,ni_,spc_,na_,ttu_,te_,spc_,yo_,ro_,ko_,bu_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text281[] = {
+	a_,ta_,ma_,no_,spc_,TU_,NO_,de_,spc_,zo_,u_,hu_,ku_,sa_,re_,ta_,spc_,SA_,I_,KO_,PA_,WA_,bou_,ga_,CR_,
+	tu_,ka_,wa_,re_,ru_,to_,ki_,spc_,ma_,wa_,ri_,no_,spc_,ku_,u_,ka_,n_,ga_,spc_,ne_,zi_,ma_,ga_,ri_,CR_,
+	ge_,n_,zi_,tu_,ni_,ha_,spc_,na_,i_,spc_,ke_,si_,ki_,ga_,spc_,mi_,e_,ru_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text282[] = {
+	SA_,I_,KO_,PA_,WA_,bou_,de_,spc_,ku_,u_,ka_,n_,wo_,spc_,ne_,zi_,ma_,ge_,spc_,ti_,i_,sa_,na_,CR_,
+	BU_,RA_,TTU_,KU_,HO_,bou_,RU_,wo_,spc_,tu_,ku_,ri_,da_,su_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,CR_,
+	i_,no_,ti_,ga_,ke_,de_,spc_,TO_,RE_,bou_,NA_,bou_,wo_,spc_,ma_,mo_,ru_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text283[] = {
+	ki_,ke_,n_,wo_,spc_,ka_,n_,zi_,ru_,to_,spc_,a_,ta_,ma_,no_,spc_,sa_,ki_,ttu_,po_,ka_,ra_,CR_,
+	mi_,zu_,a_,me_,no_,yo_,u_,na_,spc_,a_,ma_,i_,spc_,e_,ki_,ta_,i_,wo_,spc_,da_,su_,kten_,CR_,
+	ko_,re_,ga_,spc_,ko_,u_,bu_,tu_,no_,spc_,PO_,KE_,MO_,N_,mo_,spc_,i_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text284[] = {
+	o_,ko_,ttu_,ta_,spc_,hi_,yyo_,u_,zi_,yyo_,u_,no_,spc_,me_,da_,ma_,spc_,mo_,yo_,u_,ga_,CR_,
+	ka_,na_,si_,so_,u_,ni_,spc_,ta_,re_,sa_,ga_,ttu_,te_,i_,ru_,spc_,to_,ki_,ha_,CR_,
+	yu_,u_,da_,ti_,no_,spc_,hu_,ri_,da_,su_,spc_,ze_,n_,ti_,yyo_,u_,to_,spc_,i_,wa_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text285[] = {
+	ki_,ke_,n_,wo_,spc_,ka_,n_,zi_,ru_,to_,spc_,ka_,ra_,da_,wo_,spc_,hu_,ru_,wa_,se_,te_,CR_,
+	a_,ta_,ma_,no_,spc_,te_,ttu_,pe_,n_,ka_,ra_,spc_,ho_,u_,si_,wo_,spc_,ba_,ra_,ma_,ku_,zo_,kten_,CR_,
+	ku_,sa_,ki_,mo_,spc_,si_,o_,re_,te_,si_,ma_,u_,ho_,do_,no_,spc_,mo_,u_,do_,ku_,da_,kten_,EOM_,
+};
+
+const	u8	text286[] = {
+	SI_,TTU_,PO_,no_,spc_,TA_,NE_,ha_,spc_,do_,ku_,no_,spc_,ho_,u_,si_,ga_,spc_,ka_,ta_,ma_,ttu_,te_,CR_,
+	de_,ki_,ta_,spc_,mo_,no_,na_,no_,de_,spc_,ta_,be_,ta_,ra_,spc_,ta_,i_,he_,n_,da_,kten_,CR_,
+	hi_,to_,ku_,ti_,de_,spc_,o_,na_,ka_,ga_,spc_,GU_,RU_,GU_,RU_,spc_,na_,ri_,da_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text287[] = {
+	si_,n_,zo_,u_,no_,spc_,ko_,do_,u_,ha_,spc_,n1_,pu_,n_,ka_,n_,ni_,spc_,n1_,ka_,i_,kten_,CR_,
+	to_,ni_,ka_,ku_,spc_,zi_,ttu_,to_,spc_,ne_,so_,be_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,de_,CR_,
+	u_,go_,ku_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ru_,ko_,to_,ha_,spc_,ho_,to_,n_,do_,spc_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text288[] = {
+	zi_,ttu_,to_,si_,te_,i_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,na_,i_,spc_,PO_,KE_,MO_,N_,da_,kten_,CR_,
+	ne_,mu_,ro_,u_,to_,si_,te_,mo_,spc_,ka_,ra_,da_,no_,spc_,ti_,ga_,spc_,ta_,gi_,ttu_,te_,si_,ma_,i_,CR_,
+	mo_,ri_,zi_,yyu_,u_,wo_,spc_,ka_,ke_,ma_,wa_,ra_,na_,i_,to_,spc_,o_,sa_,ma_,ra_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text289[] = {
+	so_,u_,ge_,n_,ni_,spc_,ki_,za_,ma_,re_,ta_,spc_,ha_,n_,ke_,i_,spc_,n1_,ME_,bou_,TO_,RU_,no_,CR_,
+	wa_,ttu_,ka_,ha_,spc_,KE_,TTU_,KI_,N_,GU_,ga_,spc_,ne_,so_,be_,ttu_,ta_,ma_,ma_,spc_,ma_,wa_,ri_,no_,CR_,
+	ku_,sa_,wo_,spc_,ta_,be_,tu_,ku_,si_,te_,spc_,de_,ki_,ta_,spc_,mo_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text290[] = {
+	su_,ru_,do_,i_,spc_,TU_,ME_,de_,spc_,zi_,yyu_,mo_,ku_,no_,spc_,ne_,ttu_,ko_,wo_,spc_,ke_,zu_,ri_,CR_,
+	su_,i_,bu_,n_,ya_,spc_,e_,i_,yo_,u_,wo_,spc_,ki_,yyu_,u_,si_,yyu_,u_,su_,ru_,kten_,CR_,
+	ta_,i_,yo_,u_,no_,spc_,hi_,ka_,ri_,ha_,spc_,ma_,bu_,si_,i_,no_,de_,spc_,ni_,ga_,te_,kten_,EOM_,
+};
+
+const	u8	text291[] = {
+	zi_,yyo_,u_,zu_,ni_,spc_,so_,da_,te_,na_,i_,to_,spc_,i_,u_,ko_,to_,wo_,spc_,ki_,ka_,zu_,CR_,
+	o_,o_,go_,e_,de_,spc_,na_,ki_,tu_,du_,ke_,ru_,no_,de_,spc_,TO_,RE_,bou_,NA_,bou_,no_,CR_,
+	u_,de_,ga_,spc_,ta_,me_,sa_,re_,ru_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text292[] = {
+	TU_,TI_,NI_,N_,ga_,spc_,si_,n_,ka_,si_,ta_,to_,ki_,spc_,na_,ze_,ka_,spc_,ka_,ttu_,te_,ni_,CR_,
+	MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,ni_,spc_,ha_,i_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,da_,kten_,CR_,
+	ka_,ra_,da_,ha_,spc_,ma_,ttu_,ta_,ku_,spc_,u_,go_,ka_,zu_,spc_,i_,ki_,mo_,spc_,si_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text293[] = {
+	hi_,to_,ta_,bi_,spc_,o_,o_,go_,e_,de_,spc_,na_,ki_,da_,su_,to_,spc_,zi_,bu_,n_,no_,CR_,
+	ko_,e_,ni_,spc_,bi_,ttu_,ku_,ri_,si_,te_,spc_,sa_,ra_,ni_,spc_,ha_,ge_,si_,ku_,spc_,na_,ku_,kten_,CR_,
+	na_,ki_,ya_,mu_,to_,spc_,tu_,ka_,re_,te_,spc_,ne_,mu_,ttu_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text294[] = {
+	a_,si_,wo_,spc_,hu_,mi_,na_,ra_,si_,na_,ga_,ra_,spc_,o_,o_,go_,e_,wo_,spc_,da_,su_,kten_,CR_,
+	o_,o_,go_,e_,wo_,spc_,da_,si_,ta_,a_,to_,ha_,spc_,si_,ba_,ra_,ku_,no_,spc_,a_,i_,da_,CR_,
+	na_,ni_,mo_,spc_,ki_,ko_,e_,na_,ku_,na_,ttu_,te_,si_,ma_,u_,no_,ga_,spc_,zi_,yya_,ku_,te_,n_,kten_,EOM_,
+};
+
+const	u8	text295[] = {
+	ka_,ra_,da_,no_,spc_,a_,na_,ka_,ra_,spc_,hu_,e_,no_,spc_,yo_,u_,na_,spc_,o_,to_,wo_,CR_,
+	da_,si_,te_,spc_,na_,ka_,ma_,ni_,spc_,ki_,mo_,ti_,wo_,spc_,tu_,ta_,e_,te_,i_,ru_,kten_,CR_,
+	o_,o_,go_,e_,ha_,spc_,ta_,ta_,ka_,u_,spc_,to_,ki_,si_,ka_,spc_,da_,sa_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text296[] = {
+	ze_,ttu_,ta_,i_,ni_,spc_,a_,ki_,ra_,me_,na_,i_,spc_,ko_,n_,zi_,yyo_,u_,wo_,spc_,mo_,tu_,kten_,CR_,
+	ta_,ku_,sa_,n_,spc_,ta_,be_,spc_,yo_,ku_,spc_,ne_,te_,spc_,u_,n_,do_,u_,su_,ru_,spc_,ko_,to_,de_,CR_,
+	ka_,ra_,da_,no_,spc_,na_,ka_,ni_,spc_,E_,NE_,RU_,GI_,bou_,ga_,spc_,zi_,yyu_,u_,ma_,n_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text297[] = {
+	hu_,to_,ttu_,ta_,spc_,ka_,ra_,da_,ha_,spc_,ki_,n_,ni_,ku_,no_,spc_,ka_,ta_,ma_,ri_,kten_,CR_,
+	gu_,gu_,ttu_,to_,spc_,ze_,n_,si_,n_,ni_,spc_,ti_,ka_,ra_,wo_,spc_,ko_,me_,ru_,to_,CR_,
+	ki_,n_,ni_,ku_,ha_,spc_,i_,wa_,to_,spc_,o_,na_,zi_,spc_,ka_,ta_,sa_,ni_,na_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text298[] = {
+	si_,ttu_,po_,ni_,ha_,spc_,se_,i_,ti_,yyo_,u_,su_,ru_,spc_,ta_,me_,ni_,spc_,hi_,tu_,yo_,u_,na_,CR_,
+	e_,i_,yo_,u_,ga_,spc_,ta_,ttu_,pu_,ri_,spc_,tu_,ma_,ttu_,te_,i_,ru_,zo_,kten_,CR_,
+	da_,n_,ri_,yyo_,ku_,no_,spc_,a_,ru_,spc_,si_,ttu_,po_,ni_,spc_,no_,ttu_,te_,spc_,a_,so_,bu_,kten_,EOM_,
+};
+
+const	u8	text299[] = {
+	zi_,si_,yya_,ku_,no_,spc_,ha_,na_,wo_,spc_,ki_,ta_,ni_,spc_,mu_,ke_,ta_,ma_,ma_,spc_,ma_,ttu_,ta_,ku_,CR_,
+	u_,go_,ka_,na_,i_,to_,spc_,i_,wa_,re_,te_,i_,ta_,ga_,spc_,n1_,ne_,n_,ni_,spc_,n1_,SE_,N_,TI_,CR_,
+	i_,do_,u_,spc_,si_,te_,i_,ru_,spc_,ko_,to_,ga_,spc_,ka_,n_,so_,ku_,sa_,re_,ta_,kten_,EOM_,
+};
+
+const	u8	text300[] = {
+	zi_,bu_,n_,no_,spc_,SI_,TTU_,PO_,wo_,spc_,o_,i_,ka_,ke_,ma_,wa_,su_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ya_,se_,i_,ha_,spc_,mo_,ri_,no_,spc_,zi_,yyu_,mo_,ku_,no_,spc_,a_,na_,de_,spc_,ku_,ra_,su_,kten_,CR_,
+	a_,i_,ku_,ru_,si_,i_,spc_,ka_,o_,de_,spc_,PE_,TTU_,TO_,to_,si_,te_,spc_,da_,i_,ni_,n_,ki_,kten_,EOM_,
+};
+
+const	u8	text301[] = {
+	ki_,ma_,ttu_,ta_,spc_,su_,mi_,ka_,wo_,spc_,mo_,ta_,zu_,ni_,spc_,ku_,ra_,su_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,ne_,do_,ko_,ni_,spc_,ti_,ka_,yo_,ttu_,te_,spc_,ki_,te_,mo_,CR_,
+	ke_,ttu_,si_,te_,spc_,a_,ra_,so_,wa_,zu_,spc_,ne_,ru_,spc_,ba_,si_,yyo_,wo_,spc_,ka_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text302[] = {
+	su_,ru_,do_,i_,spc_,TU_,ME_,de_,spc_,tu_,ti_,wo_,spc_,ho_,ri_,spc_,i_,si_,wo_,spc_,ta_,be_,ru_,kten_,CR_,
+	i_,si_,ni_,spc_,hu_,ku_,ma_,re_,ta_,spc_,se_,i_,bu_,n_,ha_,spc_,ke_,ttu_,si_,yyo_,u_,to_,na_,ri_,CR_,
+	ka_,ra_,da_,no_,spc_,hi_,yyo_,u_,me_,n_,ni_,spc_,u_,ka_,bi_,a_,ga_,ttu_,te_,ku_,ru_,kten_,EOM_,
+};
+
+const	u8	text303[] = {
+	a_,i_,te_,wo_,spc_,yu_,da_,n_,sa_,se_,spc_,o_,o_,ki_,na_,spc_,a_,go_,de_,spc_,ga_,bu_,ri_,kten_,CR_,
+	ka_,wa_,i_,i_,spc_,ka_,o_,ni_,spc_,da_,ma_,sa_,re_,ru_,to_,spc_,ki_,ke_,n_,da_,yo_,kten_,CR_,
+	ha_,ga_,ne_,no_,spc_,a_,go_,ha_,spc_,TU_,NO_,ga_,spc_,he_,n_,ke_,i_,si_,ta_,spc_,mo_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text304[] = {
+	ko_,u_,te_,tu_,no_,spc_,ka_,ra_,da_,de_,spc_,o_,mo_,i_,ttu_,ki_,ri_,spc_,bu_,tu_,ka_,re_,ba_,CR_,
+	o_,o_,ki_,na_,spc_,DA_,N_,PU_,KA_,bou_,mo_,spc_,i_,ti_,ge_,ki_,de_,spc_,BA_,RA_,BA_,RA_,da_,kten_,CR_,
+	ko_,wa_,re_,ta_,spc_,DA_,N_,PU_,KA_,bou_,wo_,spc_,mu_,si_,yya_,mu_,si_,yya_,spc_,ta_,be_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text305[] = {
+	i_,si_,ya_,spc_,mi_,zu_,ni_,spc_,hu_,ku_,ma_,re_,ru_,spc_,te_,tu_,bu_,n_,wo_,spc_,ta_,be_,ru_,kten_,CR_,
+	te_,ttu_,ko_,u_,se_,ki_,no_,spc_,u_,mo_,re_,ta_,spc_,ya_,ma_,ni_,spc_,su_,wo_,spc_,tu_,ku_,ru_,ga_,CR_,
+	te_,tu_,wo_,spc_,to_,ri_,ni_,ku_,ru_,spc_,ni_,n_,ge_,n_,to_,spc_,a_,ra_,so_,i_,ni_,na_,ru_,kten_,EOM_,
+};
+
+const	u8	text306[] = {
+	do_,si_,yya_,ku_,zu_,re_,ya_,spc_,ya_,ma_,ka_,zi_,de_,spc_,ya_,ma_,ga_,spc_,a_,re_,ru_,to_,CR_,
+	se_,ttu_,se_,to_,spc_,tu_,ti_,wo_,spc_,ha_,ko_,bi_,spc_,ki_,no_,spc_,na_,e_,wo_,spc_,u_,e_,te_,CR_,
+	zi_,bu_,n_,no_,spc_,na_,wa_,ba_,ri_,wo_,spc_,ki_,re_,i_,ni_,spc_,so_,u_,zi_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text307[] = {
+	me_,i_,so_,u_,de_,spc_,se_,i_,si_,n_,E_,NE_,RU_,GI_,bou_,wo_,spc_,ta_,ka_,me_,te_,i_,ru_,kten_,CR_,
+	n1_,ni_,ti_,ni_,spc_,ki_,no_,mi_,wo_,spc_,n1_,ko_,da_,ke_,si_,ka_,spc_,ta_,be_,na_,i_,kten_,CR_,
+	a_,ma_,ri_,spc_,ta_,be_,na_,i_,spc_,ko_,to_,mo_,spc_,si_,yyu_,gi_,yyo_,u_,no_,spc_,hi_,to_,tu_,kten_,EOM_,
+};
+
+const	u8	text308[] = {
+	YO_,GA_,no_,spc_,ti_,ka_,ra_,de_,spc_,da_,i_,n6_,ka_,n_,ga_,spc_,ha_,ttu_,ta_,tu_,si_,te_,CR_,
+	SA_,I_,KO_,PA_,WA_,bou_,wo_,spc_,a_,ya_,tu_,re_,ru_,spc_,yo_,u_,ni_,spc_,na_,ttu_,ta_,kten_,CR_,
+	n1_,ka_,ge_,tu_,ka_,n_,spc_,na_,ni_,mo_,spc_,ta_,be_,zu_,ni_,spc_,me_,i_,so_,u_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text309[] = {
+	me_,ni_,mo_,spc_,to_,ma_,ra_,nu_,spc_,SU_,PI_,bou_,DO_,de_,spc_,ha_,si_,ru_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ku_,u_,ki_,no_,spc_,ma_,sa_,tu_,de_,spc_,de_,n_,ki_,wo_,spc_,ha_,ttu_,se_,i_,sa_,se_,te_,CR_,
+	ze_,n_,si_,n_,no_,spc_,ta_,i_,mo_,u_,ni_,spc_,ta_,ku_,wa_,e_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text310[] = {
+	ta_,te_,ga_,mi_,ka_,ra_,spc_,tu_,yo_,i_,spc_,de_,n_,ki_,wo_,spc_,ha_,ttu_,si_,te_,i_,ru_,kten_,CR_,
+	ku_,u_,ki_,ti_,yyu_,u_,no_,spc_,de_,n_,ki_,wo_,spc_,ta_,te_,ga_,mi_,ni_,spc_,a_,tu_,me_,CR_,
+	a_,ta_,ma_,no_,spc_,u_,e_,ni_,spc_,ka_,mi_,na_,ri_,gu_,mo_,wo_,spc_,tu_,ku_,ri_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text311[] = {
+	na_,ka_,ma_,wo_,spc_,o_,u_,e_,n_,su_,ru_,spc_,to_,ki_,ha_,spc_,ze_,n_,si_,n_,ka_,ra_,CR_,
+	de_,n_,ki_,no_,spc_,hi_,ba_,na_,wo_,spc_,da_,si_,te_,spc_,PA_,TI_,PA_,TI_,spc_,hi_,ka_,ru_,kten_,CR_,
+	na_,ka_,ma_,ga_,spc_,ma_,ke_,ru_,to_,spc_,o_,o_,go_,e_,de_,spc_,na_,i_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text312[] = {
+	na_,ka_,ma_,no_,spc_,o_,u_,e_,n_,ga_,spc_,da_,i_,su_,ki_,na_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	na_,ka_,ma_,ga_,spc_,ma_,ke_,so_,u_,ni_,spc_,na_,ru_,to_,spc_,ka_,ra_,da_,ka_,ra_,spc_,de_,ru_,CR_,
+	hi_,ba_,na_,no_,spc_,ka_,zu_,ga_,spc_,do_,n_,do_,n_,spc_,hu_,e_,te_,i_,ku_,yo_,kten_,EOM_,
+};
+
+const	u8	text313[] = {
+	si_,ttu_,po_,no_,spc_,a_,ka_,ri_,wo_,spc_,tu_,ka_,ttu_,te_,spc_,si_,yyu_,u_,da_,n_,de_,CR_,
+	yo_,zo_,ra_,ni_,spc_,ki_,ka_,ga_,ku_,te_,ki_,na_,spc_,zu_,ke_,i_,wo_,spc_,e_,ga_,ku_,kten_,CR_,
+	I_,RU_,MI_,bou_,ZE_,no_,spc_,da_,su_,spc_,a_,ma_,i_,spc_,ka_,o_,ri_,ga_,spc_,da_,i_,su_,ki_,kten_,EOM_,
+};
+
+const	u8	text314[] = {
+	BA_,RU_,BI_,bou_,TO_,wo_,spc_,yu_,u_,do_,u_,si_,te_,spc_,SA_,I_,N_,wo_,spc_,e_,ga_,ku_,kten_,CR_,
+	hu_,ku_,za_,tu_,na_,spc_,SA_,I_,N_,wo_,spc_,e_,ga_,ku_,spc_,I_,RU_,MI_,bou_,ZE_,ho_,do_,CR_,
+	na_,ka_,ma_,ka_,ra_,spc_,so_,n_,ke_,i_,sa_,re_,ru_,to_,spc_,i_,wa_,re_,te_,i_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text315[] = {
+	go_,ku_,spc_,ma_,re_,ni_,spc_,me_,zu_,ra_,si_,i_,spc_,i_,ro_,no_,spc_,ha_,na_,wo_,CR_,
+	sa_,ka_,se_,te_,i_,ru_,spc_,RO_,ZE_,RI_,A_,ga_,spc_,i_,ru_,to_,spc_,i_,wa_,re_,ru_,kten_,CR_,
+	a_,ta_,ma_,no_,spc_,TO_,GE_,ha_,spc_,mo_,u_,do_,ku_,wo_,spc_,mo_,ttu_,te_,i_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text316[] = {
+	ka_,ra_,da_,no_,spc_,da_,i_,bu_,bu_,n_,ga_,spc_,i_,bu_,ku_,ro_,de_,spc_,de_,ki_,te_,i_,te_,CR_,
+	si_,n_,zo_,u_,ya_,spc_,no_,u_,mi_,so_,ha_,spc_,to_,te_,mo_,spc_,ti_,i_,sa_,i_,kten_,CR_,
+	na_,n_,de_,mo_,spc_,to_,ka_,su_,spc_,to_,ku_,si_,yyu_,na_,spc_,i_,e_,ki_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text317[] = {
+	ha_,ga_,spc_,n1_,po_,n_,mo_,spc_,na_,i_,no_,de_,spc_,na_,n_,de_,mo_,spc_,ma_,ru_,no_,mi_,kten_,CR_,
+	i_,ttu_,pa_,i_,ni_,spc_,a_,ke_,ta_,spc_,ku_,ti_,ha_,spc_,to_,te_,mo_,spc_,o_,o_,ki_,ku_,CR_,
+	zi_,do_,u_,si_,yya_,no_,spc_,TA_,I_,YA_,da_,ttu_,te_,spc_,su_,ttu_,po_,ri_,spc_,ha_,i_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text318[] = {
+	TE_,RI_,TO_,RI_,bou_,wo_,spc_,a_,ra_,su_,spc_,mo_,no_,ni_,ha_,spc_,si_,yyu_,u_,da_,n_,de_,CR_,
+	o_,so_,i_,ka_,ka_,ri_,spc_,to_,ga_,ttu_,ta_,spc_,KI_,BA_,de_,spc_,ya_,tu_,za_,ki_,ni_,su_,ru_,kten_,CR_,
+	n1_,pi_,ki_,ni_,spc_,na_,ru_,to_,spc_,to_,ta_,n_,ni_,spc_,yo_,wa_,go_,si_,ni_,spc_,na_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text319[] = {
+	ka_,i_,su_,i_,wo_,spc_,o_,si_,ri_,no_,spc_,a_,na_,ka_,ra_,spc_,hu_,ki_,da_,si_,te_,CR_,
+	zi_,so_,ku_,n1_,n2_,n0_,KI_,RO_,de_,spc_,o_,yo_,gu_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	na_,ga_,i_,spc_,ki_,yyo_,ri_,wo_,spc_,o_,yo_,ge_,na_,i_,no_,ga_,spc_,zi_,yya_,ku_,te_,n_,da_,kten_,EOM_,
+};
+
+const	u8	text320[] = {
+	ka_,ra_,da_,ni_,spc_,ka_,i_,su_,i_,wo_,spc_,ta_,me_,ru_,to_,spc_,BO_,bou_,RU_,no_,spc_,yo_,u_,ni_,CR_,
+	zi_,me_,n_,de_,spc_,to_,bi_,ha_,ne_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,yo_,u_,ni_,spc_,na_,ru_,kten_,CR_,
+	ta_,ku_,sa_,n_,spc_,ta_,me_,ru_,to_,spc_,ta_,ka_,ku_,spc_,ZI_,YYA_,N_,PU_,de_,ki_,ru_,kten_,EOM_,
+};
+
+const	u8	text321[] = {
+	e_,mo_,no_,wo_,spc_,o_,i_,ta_,te_,ru_,spc_,ta_,me_,ni_,spc_,su_,i_,ti_,yyu_,u_,ka_,ra_,CR_,
+	ZI_,YYA_,N_,PU_,si_,te_,spc_,o_,o_,ki_,na_,spc_,mi_,zu_,si_,bu_,ki_,wo_,spc_,a_,ge_,ru_,kten_,CR_,
+	mu_,re_,de_,spc_,ZI_,YYA_,N_,PU_,su_,ru_,spc_,su_,ga_,ta_,ha_,spc_,da_,i_,ha_,ku_,ri_,yyo_,ku_,kten_,EOM_,
+};
+
+const	u8	text322[] = {
+	n1_,n2_,n0_,n0_,do_,no_,spc_,MA_,GU_,MA_,wo_,spc_,ka_,ra_,da_,ni_,spc_,ta_,me_,te_,i_,ru_,kten_,CR_,
+	mi_,zu_,ni_,spc_,nu_,re_,ru_,to_,spc_,MA_,GU_,MA_,ga_,spc_,hi_,e_,te_,spc_,ka_,ta_,ma_,ri_,CR_,
+	o_,mo_,ta_,ku_,na_,ru_,no_,de_,spc_,u_,go_,ki_,ga_,spc_,ni_,bu_,ttu_,te_,spc_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text323[] = {
+	se_,na_,ka_,no_,spc_,KO_,BU_,ha_,spc_,ho_,ne_,ga_,spc_,ka_,ta_,ti_,wo_,spc_,ka_,e_,ta_,mo_,no_,kten_,CR_,
+	ni_,e_,ta_,gi_,ttu_,ta_,spc_,MA_,GU_,MA_,wo_,spc_,to_,ki_,do_,ki_,spc_,hu_,ki_,a_,ge_,ru_,kten_,CR_,
+	o_,ko_,ttu_,ta_,spc_,to_,ki_,ni_,spc_,yo_,ku_,spc_,hu_,n_,ka_,su_,ru_,spc_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text324[] = {
+	se_,ki_,ta_,n_,wo_,spc_,mo_,ya_,si_,te_,spc_,E_,NE_,RU_,GI_,bou_,wo_,spc_,tu_,ku_,ri_,da_,su_,kten_,CR_,
+	hi_,no_,spc_,i_,ki_,o_,i_,ga_,spc_,yo_,wa_,ma_,ru_,to_,spc_,ge_,n_,ki_,ga_,spc_,na_,ku_,na_,ri_,CR_,
+	ta_,ta_,ka_,u_,spc_,to_,ki_,ha_,spc_,se_,ki_,ta_,n_,wo_,spc_,ta_,ku_,sa_,n_,spc_,mo_,ya_,su_,kten_,EOM_,
+};
+
+const	u8	text325[] = {
+	a_,ta_,ma_,ni_,spc_,no_,se_,ta_,spc_,si_,n_,zi_,yyu_,ga_,spc_,BA_,NE_,BU_,bou_,no_,CR_,
+	SA_,I_,KO_,PA_,WA_,bou_,wo_,spc_,ta_,ka_,me_,ru_,spc_,ha_,ta_,ra_,ki_,wo_,su_,ru_,kten_,CR_,
+	o_,o_,ki_,na_,spc_,si_,n_,zi_,yyu_,wo_,spc_,i_,tu_,mo_,spc_,sa_,ga_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text326[] = {
+	ku_,ro_,si_,n_,zi_,yyu_,wo_,spc_,ri_,yo_,u_,si_,te_,spc_,hu_,si_,gi_,na_,spc_,ti_,ka_,ra_,wo_,CR_,
+	tu_,ka_,u_,to_,ki_,spc_,ki_,mi_,yyo_,u_,na_,spc_,SU_,TE_,TTU_,PU_,de_,spc_,o_,do_,ri_,da_,su_,kten_,CR_,
+	ku_,ro_,si_,n_,zi_,yyu_,ha_,spc_,bi_,zi_,yyu_,tu_,hi_,n_,no_,spc_,ka_,ti_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text327[] = {
+	o_,na_,zi_,spc_,BU_,TI_,mo_,yo_,u_,ha_,spc_,na_,i_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	i_,tu_,mo_,spc_,me_,wo_,spc_,ma_,wa_,si_,te_,i_,ru_,spc_,yo_,u_,na_,spc_,HU_,RA_,HU_,RA_,si_,ta_,CR_,
+	u_,go_,ki_,ni_,ha_,spc_,te_,ki_,wo_,spc_,ma_,do_,wa_,se_,ru_,spc_,ko_,u_,ka_,ga_,spc_,a_,ru_,kten_,EOM_,
+};
+
+const	u8	text328[] = {
+	da_,ttu_,si_,yyu_,tu_,spc_,hu_,ka_,no_,u_,na_,spc_,a_,na_,wo_,spc_,sa_,ba_,ku_,ni_,spc_,tu_,ku_,ri_,CR_,
+	e_,mo_,no_,ga_,spc_,ku_,ru_,no_,wo_,spc_,hi_,ta_,su_,ra_,spc_,ma_,ti_,ka_,ma_,e_,te_,i_,ru_,kten_,CR_,
+	mi_,zu_,ga_,spc_,na_,ku_,te_,mo_,spc_,n1_,si_,yyu_,u_,ka_,n_,ha_,spc_,he_,ttu_,ti_,yya_,ra_,kten_,EOM_,
+};
+
+const	u8	text329[] = {
+	BI_,BU_,RA_,bou_,BA_,no_,spc_,HA_,NE_,ha_,spc_,ma_,da_,spc_,se_,i_,ti_,yyo_,u_,to_,ti_,yyu_,u_,kten_,CR_,
+	na_,ga_,i_,spc_,ki_,yyo_,ri_,wo_,spc_,to_,bu_,spc_,yo_,ri_,mo_,spc_,si_,n_,do_,u_,sa_,se_,te_,CR_,
+	ti_,yyo_,u_,o_,n_,pa_,wo_,spc_,da_,su_,spc_,ho_,u_,ga_,spc_,to_,ku_,i_,na_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text330[] = {
+	ha_,ba_,ta_,ki_,de_,spc_,o_,ko_,su_,spc_,su_,na_,a_,ra_,si_,no_,spc_,na_,ka_,ka_,ra_,CR_,
+	u_,ta_,go_,e_,no_,spc_,yo_,u_,na_,spc_,ha_,o_,to_,spc_,da_,ke_,ga_,spc_,ki_,ko_,e_,ru_,ta_,me_,CR_,
+	HU_,RA_,I_,GO_,N_,ha_,spc_,sa_,ba_,ku_,no_,spc_,se_,i_,re_,i_,to_,spc_,i_,wa_,re_,ta_,kten_,EOM_,
+};
+
+const	u8	text331[] = {
+	a_,me_,no_,spc_,su_,ku_,na_,i_,spc_,ki_,bi_,si_,i_,spc_,ka_,n_,ki_,yyo_,u_,spc_,ho_,do_,CR_,
+	ki_,re_,i_,de_,spc_,ka_,o_,ri_,no_,spc_,tu_,yo_,i_,spc_,ha_,na_,wo_,spc_,sa_,ka_,se_,ru_,kten_,CR_,
+	TO_,GE_,no_,spc_,tu_,i_,ta_,spc_,u_,de_,wo_,spc_,hu_,ri_,ma_,wa_,si_,te_,spc_,ta_,ta_,ka_,u_,kten_,EOM_,
+};
+
+const	u8	text332[] = {
+	ma_,yo_,na_,ka_,spc_,sa_,ba_,ku_,wo_,spc_,a_,ru_,ku_,spc_,ta_,bi_,bi_,to_,no_,spc_,u_,si_,ro_,wo_,CR_,
+	zo_,ro_,zo_,ro_,to_,spc_,si_,yyu_,u_,da_,n_,de_,spc_,ku_,ttu_,tu_,i_,te_,spc_,a_,ru_,ku_,kten_,CR_,
+	tu_,ka_,re_,te_,spc_,u_,go_,ke_,na_,ku_,spc_,na_,ru_,no_,wo_,spc_,ma_,ttu_,te_,i_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text333[] = {
+	yo_,go_,re_,ta_,mo_,no_,wo_,spc_,mi_,ru_,to_,spc_,wa_,ta_,no_,spc_,yo_,u_,na_,spc_,tu_,ba_,sa_,de_,CR_,
+	se_,ttu_,se_,to_,spc_,hu_,ki_,to_,ru_,spc_,ki_,re_,i_,zu_,ki_,na_,spc_,PO_,KE_,MO_,N_,da_,kten_,CR_,
+	tu_,ba_,sa_,ga_,spc_,yo_,go_,re_,ru_,to_,spc_,ka_,wa_,de_,spc_,mi_,zu_,a_,bi_,wo_,spc_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text334[] = {
+	u_,tu_,ku_,si_,i_,spc_,SO_,PU_,RA_,NO_,de_,spc_,u_,ta_,u_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	wa_,ta_,gu_,mo_,no_,spc_,yo_,u_,na_,spc_,tu_,ba_,sa_,de_,spc_,zi_,yyo_,u_,si_,yyo_,u_,CR_,
+	ki_,ri_,yyu_,u_,wo_,spc_,u_,ke_,te_,spc_,o_,o_,zo_,ra_,he_,spc_,ma_,i_,a_,ga_,ru_,kten_,EOM_,
+};
+
+const	u8	text335[] = {
+	hu_,da_,n_,ha_,spc_,n4_,ho_,n_,a_,si_,de_,spc_,ko_,u_,do_,u_,si_,te_,spc_,i_,ru_,ga_,CR_,
+	o_,ko_,ru_,to_,spc_,u_,si_,ro_,a_,si_,de_,spc_,ta_,ti_,spc_,TU_,ME_,ga_,spc_,to_,bi_,da_,su_,kten_,CR_,
+	HA_,BU_,NE_,bou_,KU_,to_,ha_,spc_,se_,n_,zo_,ka_,ra_,spc_,tu_,du_,ku_,spc_,RA_,I_,BA_,RU_,da_,kten_,EOM_,
+};
+
+const	u8	text336[] = {
+	ka_,ta_,na_,no_,spc_,yo_,u_,na_,spc_,si_,ttu_,po_,ha_,spc_,te_,ki_,wo_,spc_,ki_,ri_,sa_,ku_,no_,to_,CR_,
+	do_,u_,zi_,ni_,spc_,si_,mi_,da_,si_,ta_,spc_,mo_,u_,do_,ku_,wo_,spc_,a_,bi_,se_,ru_,zo_,kten_,CR_,
+	si_,yyu_,ku_,te_,ki_,spc_,ZA_,N_,GU_,bou_,SU_,to_,spc_,ta_,ta_,ka_,i_,spc_,tu_,du_,ke_,ru_,kten_,EOM_,
+};
+
+const	u8	text337[] = {
+	ma_,n_,ge_,tu_,no_,spc_,zi_,ki_,spc_,ka_,ttu_,pa_,tu_,ni_,na_,ru_,spc_,si_,yyu_,u_,se_,i_,kten_,CR_,
+	ku_,u_,ti_,yyu_,u_,ni_,spc_,u_,i_,te_,spc_,i_,do_,u_,si_,spc_,a_,ka_,i_,spc_,hi_,to_,mi_,ha_,CR_,
+	mi_,ta_,mo_,no_,no_,spc_,ka_,ra_,da_,wo_,spc_,su_,ku_,ma_,se_,ru_,spc_,ha_,ku_,ri_,yyo_,ku_,kten_,EOM_,
+};
+
+const	u8	text338[] = {
+	ta_,i_,yo_,u_,spc_,ko_,u_,se_,n_,ga_,spc_,PA_,WA_,bou_,no_,spc_,mi_,na_,mo_,to_,kten_,CR_,
+	a_,i_,te_,no_,spc_,ko_,ko_,ro_,wo_,spc_,yo_,mi_,to_,ru_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	ka_,ra_,da_,wo_,spc_,ka_,i_,te_,n_,sa_,se_,te_,spc_,ko_,u_,ne_,tu_,wo_,spc_,ha_,na_,tu_,kten_,EOM_,
+};
+
+const	u8	text339[] = {
+	ka_,ra_,da_,ga_,spc_,NU_,RU_,NU_,RU_,no_,spc_,ma_,ku_,de_,spc_,o_,o_,wa_,re_,te_,i_,ru_,no_,de_,CR_,
+	te_,ki_,ni_,spc_,tu_,ka_,ma_,re_,te_,mo_,spc_,NU_,RU_,RI_,to_,spc_,ni_,ge_,da_,se_,ru_,no_,da_,kten_,CR_,
+	NU_,RU_,NU_,RU_,ga_,spc_,ka_,wa_,ku_,to_,spc_,ka_,ra_,da_,ga_,spc_,yo_,wa_,ttu_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text340[] = {
+	o_,o_,a_,ba_,re_,spc_,su_,ru_,to_,spc_,nu_,ma_,no_,spc_,si_,yyu_,u_,i_,spc_,n5_,KI_,RO_,no_,CR_,
+	ha_,n_,i_,de_,spc_,zi_,si_,n_,no_,spc_,yo_,u_,na_,spc_,yu_,re_,ga_,spc_,o_,ko_,ru_,kten_,CR_,
+	ho_,n_,to_,u_,no_,spc_,zi_,si_,n_,wo_,spc_,yo_,ti_,su_,ru_,spc_,ti_,ka_,ra_,mo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text341[] = {
+	su_,ru_,do_,i_,spc_,HA_,SA_,MI_,de_,spc_,e_,mo_,no_,wo_,spc_,tu_,ka_,ma_,e_,ru_,kten_,CR_,
+	su_,ki_,spc_,ki_,ra_,i_,ga_,spc_,na_,i_,no_,de_,spc_,na_,n_,de_,mo_,spc_,ta_,be_,ru_,zo_,kten_,CR_,
+	ki_,ta_,na_,i_,spc_,mi_,zu_,de_,mo_,spc_,he_,ttu_,ti_,yya_,ra_,na_,spc_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+const	u8	text342[] = {
+	da_,ttu_,pi_,si_,ta_,spc_,ti_,yyo_,ku_,go_,ha_,spc_,ko_,u_,ra_,ga_,spc_,ya_,wa_,ra_,ka_,i_,kten_,CR_,
+	ko_,u_,ra_,ga_,spc_,ka_,ta_,ku_,na_,ru_,ma_,de_,spc_,te_,ki_,no_,spc_,ko_,u_,ge_,ki_,wo_,CR_,
+	sa_,ke_,ru_,ta_,me_,spc_,ka_,wa_,zo_,ko_,no_,spc_,a_,na_,ni_,spc_,ka_,ku_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text343[] = {
+	na_,ka_,ma_,wo_,spc_,mi_,tu_,ke_,ru_,to_,spc_,su_,gu_,ni_,spc_,a_,tu_,ma_,ttu_,te_,spc_,ki_,te_,CR_,
+	i_,ttu_,se_,i_,ni_,spc_,na_,ki_,go_,e_,wo_,spc_,a_,ge_,ru_,no_,de_,spc_,u_,ru_,sa_,i_,kten_,CR_,
+	i_,ttu_,po_,n_,a_,si_,de_,spc_,ki_,yo_,u_,ni_,spc_,ta_,ttu_,ta_,ma_,ma_,spc_,ne_,mu_,ru_,kten_,EOM_,
+};
+
+const	u8	text344[] = {
+	n2_,ma_,n_,ne_,n_,ma_,e_,ni_,spc_,sa_,ka_,e_,ta_,spc_,ko_,da_,i_,spc_,bu_,n_,me_,i_,no_,CR_,
+	do_,ro_,ni_,n_,gi_,yyo_,u_,ka_,ra_,spc_,u_,ma_,re_,ta_,spc_,NA_,ZO_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ri_,yyo_,u_,te_,ka_,ra_,spc_,BI_,bou_,MU_,wo_,spc_,ha_,ttu_,si_,yya_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text345[] = {
+	ka_,se_,ki_,ka_,ra_,spc_,sa_,i_,se_,i_,si_,ta_,spc_,ko_,da_,i_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	i_,wa_,ni_,spc_,ku_,ttu_,tu_,ki_,spc_,a_,ru_,ku_,spc_,ko_,to_,ga_,spc_,de_,ki_,na_,i_,kten_,CR_,
+	n2_,tu_,no_,spc_,me_,de_,spc_,zi_,ttu_,to_,spc_,e_,mo_,no_,wo_,spc_,sa_,ga_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text346[] = {
+	ka_,ra_,da_,ga_,spc_,o_,mo_,ri_,ga_,wa_,ri_,ni_,spc_,na_,ttu_,te_,i_,ru_,no_,de_,CR_,
+	u_,mi_,ga_,spc_,a_,re_,te_,mo_,spc_,na_,ga_,sa_,re_,ru_,spc_,ko_,to_,ha_,spc_,na_,i_,kten_,CR_,
+	si_,yyo_,ku_,si_,yyu_,ka_,ra_,spc_,tu_,yo_,i_,spc_,si_,yyo_,u_,ka_,e_,ki_,wo_,spc_,da_,su_,kten_,EOM_,
+};
+
+const	u8	text347[] = {
+	PO_,KE_,MO_,N_,no_,spc_,se_,n_,zo_,no_,spc_,i_,ttu_,si_,yyu_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	ka_,ra_,da_,no_,spc_,yo_,ko_,ni_,spc_,tu_,i_,ta_,spc_,n8_,ma_,i_,no_,spc_,ha_,ne_,wo_,CR_,
+	ku_,ne_,ra_,se_,te_,spc_,ta_,i_,ko_,no_,spc_,u_,mi_,wo_,spc_,o_,yo_,i_,de_,i_,ta_,kten_,EOM_,
+};
+
+const	u8	text348[] = {
+	o_,o_,mu_,ka_,si_,spc_,ze_,tu_,me_,tu_,si_,ta_,spc_,PO_,KE_,MO_,N_,no_,spc_,i_,ttu_,si_,yyu_,kten_,CR_,
+	ti_,zi_,yyo_,u_,de_,spc_,ku_,ra_,su_,to_,ki_,spc_,be_,n_,ri_,na_,spc_,yo_,u_,ni_,CR_,
+	n2_,ho_,n_,no_,spc_,a_,si_,de_,spc_,a_,ru_,ku_,yo_,u_,ni_,spc_,na_,ttu_,ta_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text349[] = {
+	ka_,ra_,da_,ha_,spc_,BO_,RO_,BO_,RO_,da_,ga_,spc_,do_,ko_,de_,mo_,spc_,i_,ki_,te_,i_,ke_,ru_,CR_,
+	si_,bu_,to_,i_,spc_,se_,i_,me_,i_,ri_,yyo_,ku_,wo_,spc_,mo_,tu_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	si_,ka_,si_,spc_,NO_,RO_,MA_,na_,no_,de_,spc_,su_,gu_,ni_,spc_,tu_,ka_,ma_,ttu_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text350[] = {
+	o_,o_,ki_,na_,spc_,mi_,zu_,u_,mi_,no_,spc_,so_,ko_,ni_,spc_,su_,n_,de_,i_,ru_,kten_,CR_,
+	ka_,ra_,da_,ga_,spc_,a_,za_,ya_,ka_,na_,spc_,PI_,N_,KU_,i_,ro_,ni_,spc_,ka_,ga_,ya_,ku_,to_,ki_,CR_,
+	su_,sa_,n_,da_,spc_,ko_,ko_,ro_,wo_,spc_,i_,ya_,su_,spc_,ha_,do_,u_,wo_,spc_,ha_,na_,tu_,kten_,EOM_,
+};
+
+const	u8	text351[] = {
+	si_,ze_,n_,no_,spc_,ti_,ka_,ra_,wo_,spc_,u_,ke_,te_,spc_,ta_,i_,yo_,u_,spc_,a_,ma_,mi_,zu_,CR_,
+	yu_,ki_,gu_,mo_,ni_,spc_,su_,ga_,ta_,wo_,spc_,ka_,e_,ru_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ki_,si_,yyo_,u_,ga_,spc_,ka_,wa_,ru_,to_,spc_,ki_,si_,yyo_,u_,mo_,spc_,ka_,wa_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text352[] = {
+	ka_,ra_,da_,wo_,spc_,ke_,si_,ki_,to_,spc_,o_,na_,zi_,spc_,i_,ro_,ni_,spc_,ka_,e_,te_,CR_,
+	e_,mo_,no_,ni_,spc_,ki_,du_,ka_,re_,na_,i_,spc_,yo_,u_,ni_,spc_,si_,no_,bi_,yo_,ru_,kten_,CR_,
+	na_,ga_,ku_,spc_,no_,bi_,ru_,spc_,BE_,RO_,de_,spc_,su_,ba_,ya_,ku_,spc_,tu_,ka_,ma_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text353[] = {
+	hi_,to_,no_,spc_,ko_,ko_,ro_,ni_,spc_,a_,ru_,spc_,u_,ra_,mi_,ya_,spc_,ne_,ta_,mi_,spc_,na_,do_,no_,CR_,
+	ka_,n_,zi_,yyo_,u_,wo_,spc_,ta_,be_,te_,spc_,se_,i_,ti_,yyo_,u_,su_,ru_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	u_,ra_,mu_,spc_,ko_,ko_,ro_,wo_,spc_,sa_,ga_,si_,te_,spc_,ma_,ti_,wo_,spc_,sa_,ma_,yo_,u_,kten_,EOM_,
+};
+
+const	u8	text354[] = {
+	su_,te_,ra_,re_,ta_,spc_,nu_,i_,gu_,ru_,mi_,no_,spc_,wa_,ta_,ni_,spc_,no_,ro_,i_,no_,CR_,
+	E_,NE_,RU_,GI_,bou_,ga_,spc_,si_,mi_,ko_,n_,de_,spc_,PO_,KE_,MO_,N_,ni_,spc_,na_,ttu_,ta_,kten_,CR_,
+	ku_,ti_,wo_,spc_,a_,ke_,ru_,to_,spc_,E_,NE_,RU_,GI_,bou_,ga_,spc_,ni_,ge_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+const	u8	text355[] = {
+	ma_,yo_,na_,ka_,spc_,ya_,mi_,ni_,spc_,ma_,gi_,re_,te_,spc_,sa_,ma_,yo_,ttu_,te_,i_,ru_,kten_,CR_,
+	MA_,MA_,ni_,spc_,si_,ka_,ra_,re_,ru_,yo_,u_,na_,spc_,wa_,ru_,i_,ko_,ha_,spc_,YO_,MA_,WA_,RU_,ni_,CR_,
+	sa_,ra_,wa_,re_,ru_,to_,i_,u_,spc_,i_,i_,tu_,ta_,e_,ga_,spc_,no_,ko_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text356[] = {
+	do_,n_,na_,spc_,o_,o_,ki_,sa_,no_,spc_,mo_,no_,mo_,spc_,su_,i_,ko_,n_,de_,spc_,si_,ma_,u_,kten_,CR_,
+	a_,ya_,si_,ge_,na_,spc_,te_,no_,spc_,u_,go_,ki_,to_,spc_,hi_,to_,tu_,me_,no_,spc_,ti_,ka_,ra_,de_,CR_,
+	a_,i_,te_,wo_,spc_,sa_,i_,mi_,n_,spc_,zi_,yyo_,u_,ta_,i_,ni_,si_,te_,spc_,a_,ya_,tu_,ru_,kten_,EOM_,
+};
+
+const	u8	text357[] = {
+	na_,n_,go_,ku_,no_,spc_,ko_,do_,mo_,ta_,ti_,ha_,spc_,TO_,RO_,PI_,U_,SU_,no_,spc_,ku_,bi_,ni_,CR_,
+	na_,ttu_,ta_,spc_,ku_,da_,mo_,no_,no_,spc_,HU_,SA_,wo_,spc_,o_,ya_,tu_,ni_,spc_,ta_,be_,ru_,yo_,kten_,CR_,
+	se_,na_,ka_,no_,spc_,ha_,ttu_,pa_,wo_,spc_,ha_,ba_,ta_,ka_,se_,te_,spc_,so_,ra_,wo_,spc_,to_,bu_,kten_,EOM_,
+};
+
+const	u8	text358[] = {
+	ka_,ze_,ga_,spc_,tu_,yo_,ku_,na_,ru_,to_,spc_,ki_,no_,spc_,e_,da_,ya_,spc_,no_,ki_,si_,ta_,ni_,CR_,
+	a_,ta_,ma_,no_,spc_,ki_,yyu_,u_,ba_,n_,de_,spc_,bu_,ra_,sa_,ga_,ri_,spc_,na_,ki_,da_,su_,kten_,CR_,
+	na_,ga_,i_,spc_,SI_,TTU_,PO_,de_,spc_,ki_,no_,mi_,wo_,spc_,tu_,ma_,n_,de_,spc_,ta_,be_,ru_,kten_,EOM_,
+};
+
+const	u8	text359[] = {
+	si_,ze_,n_,sa_,i_,ga_,i_,wo_,spc_,KI_,YYA_,TTU_,TI_,su_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,CR_,
+	ke_,wa_,si_,i_,spc_,sa_,n_,ga_,ku_,ti_,ta_,i_,ni_,spc_,se_,i_,so_,ku_,si_,CR_,
+	me_,ttu_,ta_,ni_,spc_,ya_,ma_,no_,spc_,hu_,mo_,to_,ni_,ha_,spc_,o_,ri_,te_,ko_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text360[] = {
+	tu_,ki_,no_,yo_,ru_,spc_,na_,ka_,ma_,ta_,ti_,to_,spc_,o_,si_,ku_,ra_,ma_,n_,zi_,yyu_,u_,kten_,CR_,
+	gi_,yyu_,u_,gi_,yyu_,u_,spc_,o_,sa_,re_,te_,spc_,ga_,ma_,n_,du_,yo_,ku_,na_,ru_,kten_,CR_,
+	ki_,yyo_,u_,re_,tu_,na_,spc_,KA_,U_,N_,TA_,bou_,wo_,spc_,ku_,ri_,da_,su_,spc_,ku_,n_,re_,n_,kten_,EOM_,
+};
+
+const	u8	text361[] = {
+	yu_,ki_,ya_,spc_,ko_,o_,ri_,da_,ke_,wo_,spc_,ta_,be_,te_,spc_,ku_,ra_,si_,te_,i_,ru_,kten_,CR_,
+	YU_,KI_,WA_,RA_,SI_,no_,spc_,o_,to_,zu_,re_,ta_,spc_,i_,e_,ha_,spc_,da_,i_,da_,i_,CR_,
+	sa_,ka_,e_,ru_,to_,i_,u_,spc_,i_,i_,tu_,ta_,e_,ga_,spc_,no_,ko_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text362[] = {
+	ko_,o_,ri_,wo_,spc_,zi_,za_,i_,ni_,spc_,a_,tu_,ka_,u_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,CR_,
+	e_,mo_,no_,wo_,spc_,i_,ttu_,si_,yyu_,n_,de_,spc_,ko_,o_,ra_,se_,te_,spc_,u_,go_,ke_,na_,ku_,CR_,
+	na_,ttu_,ta_,spc_,to_,ko_,ro_,wo_,spc_,o_,i_,si_,ku_,spc_,i_,ta_,da_,ku_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text363[] = {
+	i_,tu_,mo_,spc_,ko_,ro_,ga_,ttu_,te_,spc_,i_,do_,u_,su_,ru_,spc_,PO_,KE_,MO_,N_,da_,kten_,CR_,
+	ri_,yyu_,u_,hi_,yyo_,u_,no_,spc_,ki_,se_,tu_,ni_,spc_,ko_,o_,ri_,no_,spc_,u_,e_,wo_,CR_,
+	ko_,ro_,ga_,ri_,spc_,u_,mi_,wo_,spc_,wa_,ta_,ru_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ka_,ke_,ru_,kten_,EOM_,
+};
+
+const	u8	text364[] = {
+	si_,yyo_,ttu_,ti_,yyu_,u_,spc_,ha_,na_,de_,spc_,na_,ni_,ka_,wo_,spc_,ma_,wa_,si_,te_,i_,ru_,kten_,CR_,
+	ma_,wa_,si_,na_,ga_,ra_,spc_,ni_,o_,i_,ya_,spc_,ka_,n_,si_,yyo_,ku_,wo_,spc_,ta_,si_,ka_,me_,te_,CR_,
+	su_,ki_,na_,spc_,mo_,no_,to_,spc_,ki_,ra_,i_,na_,spc_,mo_,no_,wo_,spc_,wa_,ke_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text365[] = {
+	o_,o_,ki_,na_,spc_,KI_,BA_,de_,spc_,hi_,yyo_,u_,za_,n_,wo_,spc_,ku_,da_,ki_,na_,ga_,ra_,CR_,
+	hi_,yyo_,u_,te_,n_,ka_,no_,spc_,u_,mi_,wo_,spc_,o_,yo_,gi_,ma_,wa_,ru_,kten_,CR_,
+	bu_,a_,tu_,i_,spc_,si_,bo_,u_,ga_,spc_,ko_,u_,ge_,ki_,wo_,spc_,ha_,ne_,ka_,e_,su_,kten_,EOM_,
+};
+
+const	u8	text366[] = {
+	ka_,ta_,i_,spc_,ka_,i_,ga_,ra_,ni_,spc_,ma_,mo_,ra_,re_,te_,spc_,se_,i_,ti_,yyo_,u_,su_,ru_,kten_,CR_,
+	ho_,n_,ta_,i_,ga_,spc_,KA_,RA_,ni_,spc_,o_,sa_,ma_,ri_,spc_,ki_,ra_,na_,ku_,na_,ru_,to_,CR_,
+	si_,n_,ka_,no_,spc_,si_,yyu_,n_,ka_,n_,ga_,spc_,ti_,ka_,du_,i_,ta_,spc_,si_,yyo_,u_,ko_,kten_,EOM_,
+};
+
+const	u8	text367[] = {
+	sa_,ka_,na_,no_,spc_,ka_,ta_,ti_,wo_,si_,ta_,spc_,SI_,TTU_,PO_,de_,spc_,o_,bi_,ki_,yo_,se_,CR_,
+	o_,o_,ki_,na_,spc_,ku_,ti_,de_,spc_,E_,SA_,wo_,spc_,ma_,ru_,no_,mi_,spc_,su_,ru_,kten_,CR_,
+	HE_,BI_,no_,yo_,u_,ni_,spc_,ka_,ra_,da_,wo_,spc_,ku_,ne_,ra_,se_,te_,spc_,o_,yo_,gu_,kten_,EOM_,
+};
+
+const	u8	text368[] = {
+	o_,yo_,gu_,spc_,su_,ga_,ta_,ha_,spc_,yu_,u_,ga_,de_,spc_,to_,te_,mo_,spc_,ki_,re_,i_,da_,ga_,CR_,
+	e_,mo_,no_,wo_,spc_,mi_,tu_,ke_,ru_,to_,spc_,ho_,so_,i_,spc_,ku_,ti_,wo_,spc_,ka_,ra_,da_,ni_,CR_,
+	sa_,si_,ko_,n_,de_,spc_,ta_,i_,e_,ki_,wo_,spc_,zu_,ru_,zu_,ru_,spc_,su_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text369[] = {
+	si_,n_,ka_,i_,spc_,ti_,yyo_,u_,sa_,de_,spc_,ha_,ttu_,ke_,n_,sa_,re_,ta_,spc_,ti_,n_,si_,yyu_,kten_,CR_,
+	go_,tu_,go_,tu_,si_,ta_,spc_,i_,wa_,no_,spc_,yo_,u_,na_,spc_,u_,ro_,ko_,de_,spc_,o_,o_,wa_,re_,CR_,
+	ka_,i_,te_,i_,no_,spc_,su_,i_,a_,tu_,ni_,spc_,ta_,e_,ru_,spc_,ka_,ra_,da_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text370[] = {
+	HA_,bou_,TO_,ga_,ta_,no_,spc_,ka_,ra_,da_,ha_,spc_,a_,i_,zi_,yyo_,u_,no_,spc_,SI_,N_,BO_,RU_,kten_,CR_,
+	RA_,BU_,KA_,SU_,ni_,spc_,de_,a_,ttu_,ta_,spc_,KA_,TTU_,PU_,RU_,ha_,spc_,e_,i_,e_,n_,no_,CR_,
+	a_,i_,ga_,spc_,ya_,ku_,so_,ku_,sa_,re_,ru_,to_,spc_,i_,wa_,re_,te_,i_,ru_,yo_,kten_,EOM_,
+};
+
+const	u8	text371[] = {
+	o_,o_,zo_,ra_,wo_,spc_,to_,bu_,ko_,to_,wo_,spc_,yu_,me_,mi_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	to_,be_,na_,i_,spc_,ku_,ya_,si_,sa_,wo_,spc_,ha_,ra_,su_,spc_,yo_,u_,ni_,spc_,o_,o_,i_,wa_,ni_,CR_,
+	i_,si_,a_,ta_,ma_,wo_,spc_,u_,ti_,tu_,ke_,te_,ha_,spc_,KO_,NA_,GO_,NA_,ni_,spc_,ku_,da_,ku_,kten_,EOM_,
+};
+
+const	u8	text372[] = {
+	ka_,ra_,da_,wo_,spc_,o_,o_,ttu_,te_,i_,ru_,no_,ha_,spc_,HO_,NE_,no_,yo_,u_,na_,spc_,mo_,no_,kten_,CR_,
+	to_,te_,mo_,spc_,ka_,ta_,ku_,spc_,te_,ki_,no_,spc_,ko_,u_,ge_,ki_,wo_,spc_,ha_,ne_,ka_,e_,su_,kten_,CR_,
+	ho_,ra_,a_,na_,de_,spc_,mi_,wo_,spc_,hi_,so_,me_,spc_,si_,n_,ka_,wo_,spc_,ma_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text373[] = {
+	yu_,me_,ni_,ma_,de_,spc_,mi_,ta_,spc_,tu_,ba_,sa_,ga_,spc_,ya_,ttu_,to_,spc_,ha_,e_,te_,ki_,ta_,kten_,CR_,
+	u_,re_,si_,i_,spc_,ki_,mo_,ti_,wo_,spc_,a_,ra_,wa_,su_,ta_,me_,spc_,o_,o_,zo_,ra_,wo_,CR_,
+	to_,bi_,ma_,wa_,ri_,spc_,ho_,no_,o_,wo_,spc_,ha_,i_,te_,spc_,yo_,ro_,ko_,n_,de_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text374[] = {
+	ka_,ra_,da_,ka_,ra_,spc_,de_,te_,i_,ru_,spc_,zi_,ri_,yyo_,ku_,to_,spc_,ti_,ki_,yyu_,u_,no_,CR_,
+	zi_,ri_,yyo_,ku_,wo_,spc_,ha_,n_,pa_,tu_,sa_,se_,te_,spc_,ti_,yyu_,u_,ni_,spc_,u_,ka_,bu_,kten_,CR_,
+	o_,si_,ri_,no_,spc_,TU_,ME_,wo_,spc_,ga_,ke_,ni_,spc_,ku_,i_,ko_,ma_,se_,te_,spc_,ne_,mu_,ru_,kten_,EOM_,
+};
+
+const	u8	text375[] = {
+	n2_,hi_,ki_,no_,spc_,DA_,N_,BA_,RU_,ga_,spc_,ga_,ttu_,ta_,i_,si_,ta_,to_,ki_,spc_,n2_,tu_,no_,CR_,
+	no_,u_,ga_,spc_,zi_,ri_,yyo_,ku_,no_,spc_,si_,n_,ke_,i_,de_,spc_,mu_,su_,ba_,re_,ru_,kten_,CR_,
+	u_,de_,wo_,spc_,u_,si_,ro_,he_,spc_,ma_,wa_,si_,spc_,ko_,u_,so_,ku_,de_,spc_,i_,do_,u_,kten_,EOM_,
+};
+
+const	u8	text376[] = {
+	n2_,hi_,ki_,no_,spc_,ME_,TA_,N_,GU_,ga_,spc_,ga_,ttu_,ta_,i_,si_,ta_,spc_,su_,ga_,ta_,kten_,CR_,
+	ki_,yyo_,ta_,i_,de_,spc_,e_,mo_,no_,wo_,spc_,o_,sa_,e_,tu_,ke_,na_,ga_,ra_,CR_,
+	o_,na_,ka_,ni_,spc_,a_,ru_,spc_,o_,o_,ki_,na_,spc_,ku_,ti_,de_,spc_,ta_,be_,ru_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text377[] = {
+	ka_,ra_,da_,wo_,spc_,tu_,ku_,ttu_,te_,i_,ru_,spc_,ga_,n_,se_,ki_,ha_,spc_,su_,be_,te_,CR_,
+	ti_,ga_,u_,spc_,to_,ti_,ka_,ra_,spc_,ho_,ri_,da_,sa_,re_,ta_,spc_,mo_,no_,de_,a_,ru_,to_,CR_,
+	sa_,i_,ki_,n_,no_,spc_,ke_,n_,ki_,yyu_,u_,de_,spc_,ha_,n_,me_,i_,si_,ta_,kten_,EOM_,
+};
+
+const	u8	text378[] = {
+	MA_,I_,NA_,SU_,n2_,n0_,n0_,do_,no_,spc_,re_,i_,ki_,ga_,spc_,ka_,ra_,da_,wo_,spc_,tu_,tu_,mu_,kten_,CR_,
+	ti_,ka_,du_,i_,ta_,spc_,da_,ke_,de_,mo_,spc_,ko_,o_,ri_,tu_,i_,te_,spc_,si_,ma_,u_,zo_,kten_,CR_,
+	MA_,GU_,MA_,de_,mo_,spc_,to_,ke_,na_,i_,spc_,ko_,o_,ri_,no_,spc_,ka_,ra_,da_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text379[] = {
+	mu_,ka_,si_,spc_,hi_,to_,ni_,yo_,ttu_,te_,spc_,hu_,u_,i_,n_,sa_,re_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ka_,ra_,da_,wo_,spc_,tu_,ku_,ru_,spc_,ki_,n_,zo_,ku_,ha_,spc_,ti_,ki_,yyu_,u_,zi_,yyo_,u_,ni_,CR_,
+	so_,n_,za_,i_,si_,na_,i_,spc_,bu_,ttu_,si_,tu_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text380[] = {
+	ti_,no_,u_,ga_,spc_,ta_,ka_,ku_,spc_,hi_,to_,no_,spc_,ko_,to_,ba_,wo_,spc_,ri_,ka_,i_,su_,ru_,kten_,CR_,
+	GA_,RA_,SU_,no_,spc_,yo_,u_,na_,spc_,u_,mo_,u_,de_,spc_,ka_,ra_,da_,wo_,spc_,tu_,tu_,mi_,ko_,mi_,CR_,
+	hi_,ka_,ri_,wo_,spc_,ku_,ttu_,se_,tu_,sa_,se_,te_,spc_,su_,ga_,ta_,wo_,spc_,ka_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text381[] = {
+	ya_,sa_,si_,i_,spc_,ko_,ko_,ro_,no_,spc_,mo_,ti_,nu_,si_,ni_,si_,ka_,spc_,na_,tu_,ka_,na_,i_,kten_,CR_,
+	u_,de_,wo_,spc_,o_,ri_,ta_,ta_,mu_,to_,spc_,ku_,u_,ki_,te_,i_,ko_,u_,ga_,spc_,he_,ttu_,te_,CR_,
+	ZI_,EE_,TTU_,TO_,ki_,spc_,yo_,ri_,mo_,spc_,ha_,ya_,ku_,spc_,so_,ra_,wo_,spc_,to_,be_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text382[] = {
+	o_,o_,a_,me_,to_,spc_,o_,o_,na_,mi_,de_,spc_,da_,i_,ti_,wo_,spc_,o_,o_,i_,spc_,u_,mi_,wo_,CR_,
+	hi_,ro_,ge_,ta_,spc_,PO_,KE_,MO_,N_,to_,spc_,si_,n_,wa_,de_,spc_,ka_,ta_,ra_,re_,te_,i_,ru_,kten_,CR_,
+	GU_,RA_,bou_,DO_,N_,to_,spc_,si_,to_,u_,no_,spc_,su_,e_,spc_,ne_,mu_,ri_,ni_,spc_,tu_,i_,ta_,kten_,EOM_,
+};
+
+const	u8	text383[] = {
+	a_,ma_,gu_,mo_,wo_,spc_,hu_,ki_,ha_,ra_,i_,spc_,hi_,ka_,ri_,to_,spc_,ne_,tu_,de_,spc_,mi_,zu_,wo_,CR_,
+	zi_,yyo_,u_,ha_,tu_,sa_,se_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ko_,u_,zu_,i_,ni_,spc_,ku_,ru_,si_,mu_,spc_,hi_,to_,bi_,to_,wo_,spc_,su_,ku_,ttu_,ta_,kten_,EOM_,
+};
+
+const	u8	text384[] = {
+	na_,n_,o_,ku_,ne_,n_,mo_,spc_,i_,ki_,tu_,du_,ke_,te_,i_,ru_,to_,spc_,i_,wa_,re_,ru_,kten_,CR_,
+	ku_,mo_,no_,spc_,u_,e_,ni_,spc_,hi_,ro_,ga_,ru_,spc_,O_,ZO_,N_,so_,u_,no_,spc_,na_,ka_,wo_,CR_,
+	to_,n_,de_,i_,ru_,ta_,me_,spc_,da_,re_,mo_,spc_,ha_,ttu_,ke_,n_,spc_,de_,ki_,na_,ka_,ttu_,ta_,kten_,EOM_,
+};
+
+const	u8	text385[] = {
+	ki_,yo_,ra_,ka_,na_,spc_,ko_,e_,de_,spc_,u_,ta_,wo_,spc_,ki_,ka_,se_,te_,spc_,a_,ge_,ru_,to_,CR_,
+	n1_,n0_,n0_,n0_,ne_,n_,no_,spc_,ne_,mu_,ri_,ka_,ra_,spc_,me_,wo_,spc_,sa_,ma_,su_,kten_,CR_,
+	hi_,to_,no_,spc_,ne_,ga_,i_,wo_,spc_,na_,n_,de_,mo_,spc_,ka_,na_,e_,ru_,to_,spc_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text386[] = {
+	u_,ti_,yyu_,u_,U_,II_,RU_,SU_,ka_,ra_,spc_,ta_,n_,zi_,yyo_,u_,si_,ta_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ti_,no_,u_,ga_,spc_,ta_,ka_,ku_,spc_,ti_,yyo_,u_,no_,u_,ri_,yyo_,ku_,wo_,spc_,a_,ya_,tu_,ru_,kten_,CR_,
+	mu_,ne_,no_,spc_,su_,i_,si_,yyo_,u_,ta_,i_,ka_,ra_,spc_,RE_,bou_,ZA_,bou_,wo_,spc_,da_,su_,kten_,EOM_,
+};
+

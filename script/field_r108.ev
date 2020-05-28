@@ -1,0 +1,58 @@
+//====================================================================
+//							field_r108
+//						フィールド・ロード108
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r108_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_06
+	_TRAINER_DATA2	msg_swimmerm_06_01
+	_TRAINER_DATA3	msg_swimmerm_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_06_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerm_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_07
+	_TRAINER_DATA2	msg_swimmerm_07_01
+	_TRAINER_DATA3	msg_swimmerm_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_07_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_06
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_06
+	_TRAINER_DATA2	msg_swimmerw_06_01
+	_TRAINER_DATA3	msg_swimmerw_06_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_06_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_07
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_07
+	_TRAINER_DATA2	msg_swimmerw_07_01
+	_TRAINER_DATA3	msg_swimmerw_07_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_07_03
+	_END

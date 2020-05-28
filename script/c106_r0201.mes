@@ -1,0 +1,310 @@
+// ◆ミナモ美術館◆
+
+// 美術館は、受付、メイン展示室、特別展示室（別室）がある
+// 受付＆メイン展示室は１Ｆ、特別展示室は２Ｆ
+
+// ニビ博物館みたいなイメージ
+// メイン展示室は、伝説のポケモンの絵や、名画
+// 特別展示室は、新人作家のポケモンの絵
+// を飾る。
+
+// 必要なセーブデータ
+// １）館長と話した事があるフラグ
+
+// ●受付
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_pccable_01_p01_c106_r0201
+msg_pccable_01_p01_c106_r0201:
+	.byte	MI_,NA_,MO_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,spc_,he_,spc_,yo_,u_,ko_,so_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ta_,ti_,wo_,spc_,e_,ga_,i_,ta_
+	.byte	CR_
+	.byte	su_,ba_,ra_,si_,i_,spc_,me_,i_,ga_,no_,spc_,ka_,zu_,ka_,zu_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,ttu_,ku_,ri_,spc_,go_,ra_,n_,ni_,spc_,na_,ttu_,te_,spc_,ku_,da_,sa_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●館長、特別展示室への階段前、ストッパーとなっている
+// 館長ジェントルマン
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_c106_r0201
+msg_gentlem1_01_p01_c106_r0201:
+	.byte	wa_,ta_,si_,ha_,spc_,ko_,no_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,no_
+	.byte	CR_
+	.byte	ka_,n_,ti_,yyo_,u_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ha_,spc_,o_,wa_,ka_,i_,no_,ni_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,ni_
+	.byte	CR_
+	.byte	i_,ra_,ttu_,si_,yya_,ru_,spc_,to_,ha_,spc_,ka_,n_,si_,n_,spc_,de_,su_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,e_,ha_,spc_,go_,ra_,n_,ni_,spc_,na_,ri_,ma_,si_,ta_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ☆選択肢「みました」「これから」
+
+// ☆「これから」選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p02_c106_r0201
+msg_gentlem1_01_p02_c106_r0201:
+	.byte	de_,ha_,spc_,o_,zi_,yya_,ma_,spc_,i_,ta_,si_,ma_,se_,n_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	yu_,ttu_,ku_,ri_,spc_,mi_,te_,i_,ttu_,te_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 会話終了
+
+// ☆みました選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p03_c106_r0201
+msg_gentlem1_01_p03_c106_r0201:
+	.byte	o_,ya_,hate_,spc_,a_,na_,ta_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,sa_,n_,spc_,mi_,ta_,i_,spc_,de_,su_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	e_,ni_,mo_,spc_,ki_,yyo_,u_,mi_,ga_,spc_,o_,a_,ri_,spc_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ☆はい、いいえ選択
+
+// ☆いいえ選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p04_c106_r0201
+msg_gentlem1_01_p04_c106_r0201:
+	.byte	so_,u_,de_,su_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,na_,no_,ni_,spc_,wa_,za_,wa_,za_,spc_,o_,i_,de_,spc_,ku_,da_,sa_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,u_,e_,i_,spc_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 会話終了
+
+// ☆はい選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p05_c106_r0201
+msg_gentlem1_01_p05_c106_r0201:
+	.byte	so_,u_,de_,su_,ka_,gyoe_,spc_,e_,ga_,spc_,o_,su_,ki_,spc_,de_,su_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,ha_,spc_,ti_,yyo_,ttu_,to_,spc_,wa_,ta_,si_,ni_
+	.byte	CR_
+	.byte	tu_,i_,te_,ki_,te_,spc_,ku_,da_,sa_,i_,spc_,ma_,se_,n_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 主人公、館長の後をついて二階へ。
+// ２階のシナリオc106_r0202.msg※１へ。
+
+
+// ●名画の数々（曖昧な感じ。古さを強調）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_01_p01_c106_r0201
+msg_picture_01_p01_c106_r0201:
+	.byte	mu_,ka_,si_,no_,spc_,hi_,to_,ga_,spc_,ka_,i_,ta_,spc_,e_,da_,gyoe_
+	.byte	CR_
+	.byte	to_,ko_,ro_,do_,ko_,ro_,spc_,e_,no_,gu_,ga_,spc_,ha_,ga_,re_,te_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_02_p01_c106_r0201
+msg_picture_02_p01_c106_r0201:
+	.byte	mi_,ta_,ko_,to_,mo_,spc_,na_,i_,yo_,u_,na_,spc_,hu_,si_,gi_,na_
+	.byte	CR_
+	.byte	ke_,si_,ki_,ga_,spc_,e_,ga_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_03_p01_c106_r0201
+msg_picture_03_p01_c106_r0201:
+	.byte	hi_,za_,ni_,spc_,PO_,KE_,MO_,N_,wo_,spc_,no_,se_,te_,spc_,ho_,ho_,e_,mu_
+	.byte	CR_
+	.byte	u_,tu_,ku_,si_,i_,spc_,zi_,yyo_,se_,i_,ga_,spc_,e_,ga_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_04_p01_c106_r0201
+msg_picture_04_p01_c106_r0201:
+	.byte	mu_,ka_,si_,no_,spc_,hi_,to_,ga_,spc_,so_,u_,zo_,u_,de_,spc_,ka_,i_,ta_
+	.byte	CR_
+	.byte	de_,n_,se_,tu_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,e_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_05_p01_c106_r0201
+msg_picture_05_p01_c106_r0201:
+	.byte	ka_,ze_,ni_,spc_,na_,bi_,i_,te_,spc_,ki_,mo_,ti_,spc_,yo_,sa_,so_,u_,ni_
+	.byte	CR_
+	.byte	yu_,re_,te_,i_,ru_,spc_,ku_,sa_,PO_,KE_,MO_,N_,ga_,spc_,e_,ga_,ka_,re_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_06_p01_c106_r0201
+msg_picture_06_p01_c106_r0201:
+	.byte	o_,i_,si_,so_,u_,na_,spc_,ki_,no_,mi_,ga_,spc_,e_,ga_,ka_,re_,te_,i_,ru_
+	.byte	CR_
+	.byte	o_,na_,ka_,ga_,spc_,su_,i_,te_,spc_,ki_,so_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// 置物（鳥）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_07_p01_c106_r0201
+msg_picture_07_p01_c106_r0201:
+	.byte	ko_,da_,i_,no_,spc_,to_,ri_,PO_,KE_,MO_,N_,wo_,spc_,ho_,ttu_,ta_
+	.byte	CR_
+	.byte	yu_,u_,me_,i_,na_,spc_,ti_,yyo_,u_,ko_,ku_,no_,spc_,RE_,PU_,RI_,KA_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 置物（ボール）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_08_p01_c106_r0201
+msg_picture_08_p01_c106_r0201:
+	.byte	ku_,ro_,i_,spc_,i_,si_,de_,spc_,tu_,ku_,ra_,re_,ta_
+	.byte	CR_
+	.byte	o_,o_,ki_,i_,spc_,MO_,N_,SU_,TA_,bou_,BO_,bou_,RU_,da_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	mu_,ka_,si_,spc_,o_,ma_,tu_,ri_,ni_,spc_,tu_,ka_,ttu_,te_,spc_,i_,ta_,ra_,si_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 置物（でかいの。石版の前３キャラ分）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_picture_09_p01_c106_r0201
+msg_picture_09_p01_c106_r0201:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,su_,ga_,ta_,to_,spc_,si_,ra_,na_,i_,spc_,mo_,zi_,ga_
+	.byte	CR_
+	.byte	ko_,ma_,ka_,ku_,spc_,ho_,ra_,re_,te_,a_,ru_,spc_,se_,ki_,ba_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●以下、客…絵の数が増えると、客が増える
+// ステップ０：二階の絵が０枚
+// ステップ１：二階の絵が１枚
+// ステップ２：二階の絵が２枚
+// ステップ３：二階の絵が３枚
+// ステップ４：二階の絵が４枚
+// ステップ５：二階の絵が５枚
+// ●客：ステップ０：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c106_r0201
+msg_middlem1_01_p01_c106_r0201:
+	.byte	u_,bou_,n_,spc_,su_,ba_,ra_,si_,i_,spc_,sa_,ku_,hi_,n_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ０：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_schoolm1_01_p01_c106_r0201
+msg_schoolm1_01_p01_c106_r0201:
+	.byte	PO_,KE_,MO_,N_,spc_,si_,yyo_,u_,bu_,mo_,spc_,i_,i_,ke_,do_
+	.byte	NORMAL_WAIT_
+	.byte	ge_,i_,zi_,yyu_,tu_,wo_,spc_,a_,i_,su_,ru_,spc_,ki_,mo_,ti_,mo_
+	.byte	CR_
+	.byte	wa_,su_,re_,zu_,ni_,spc_,i_,na_,i_,to_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ０：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cook1_01_p01_c106_r0201
+msg_cook1_01_p01_c106_r0201:
+	.byte	ko_,no_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,ha_
+	.byte	CR_
+	.byte	su_,go_,i_,spc_,e_,ga_,spc_,ta_,ku_,sa_,n_,spc_,mi_,ra_,re_,ru_,si_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,ti_,yyo_,u_,mo_,spc_,su_,ba_,ra_,si_,i_,spc_,hi_,to_,da_,si_
+	.byte	SCROLL_WAIT_
+	.byte	bo_,ku_,ta_,ti_,spc_,ga_,ka_,no_,spc_,a_,i_,da_,spc_,de_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ko_,ga_,re_,no_,spc_,ba_,si_,yyo_,spc_,na_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ０：１Ｆ
+// ↓以下２人は親子、女性の絵（picture_03）を並んで見ている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_c106_r0201
+msg_boya1_01_p01_c106_r0201:
+	.byte	ko_,no_,spc_,o_,n_,na_,no_,spc_,hi_,to_,spc_,ki_,re_,bou_,i_,gyoe_
+	.byte	CR_
+	.byte	MA_,MA_,mi_,ta_,bou_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c106_r0201
+msg_woman1_01_p01_c106_r0201:
+	.byte	ko_,no_,spc_,PO_,KE_,MO_,N_,spc_,ka_,wa_,i_,i_,wa_,gyoe_
+	.byte	CR_
+	.byte	u_,ti_,no_,spc_,bo_,u_,ya_,spc_,mi_,ta_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ１：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_c106_r0201
+msg_woman2_01_p01_c106_r0201:
+	.byte	ko_,no_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,ni_,spc_,a_,ta_,ra_,si_,i_,spc_,e_,ga_
+	.byte	CR_
+	.byte	ha_,i_,ttu_,ta_,ttu_,te_,spc_,ki_,i_,ta_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,ttu_,so_,ku_,spc_,mi_,ni_,ki_,te_,spc_,mi_,ta_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,ta_,ra_,si_,i_,spc_,e_,ha_,spc_,n2_,ka_,i_,spc_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ３：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy5_01_p01_c106_r0201
+msg_boy5_01_p01_c106_r0201:
+	.byte	sa_,i_,ki_,n_,spc_,ka_,n_,ti_,yyo_,u_,no_,spc_,go_,ki_,ge_,n_,ga_
+	.byte	CR_
+	.byte	to_,te_,mo_,spc_,i_,i_,mi_,ta_,i_
+	.byte	NORMAL_WAIT_
+	.byte	i_,i_,ko_,to_,spc_,a_,ttu_,ta_,n_,da_,ne_,spc_,ki_,ttu_,to_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ４：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cook1_02_p01_c106_r0201
+msg_cook1_02_p01_c106_r0201:
+	.byte	ko_,ko_,de_,spc_,i_,i_,spc_,e_,wo_,spc_,ta_,ku_,sa_,n_,spc_,mi_,te_
+	.byte	CR_
+	.byte	be_,n_,ki_,yyo_,u_,spc_,si_,na_,i_,to_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ni_,spc_,i_,tu_,ka_,spc_,zi_,bu_,n_,no_,spc_,sa_,ku_,hi_,n_,wo_
+	.byte	CR_
+	.byte	ka_,za_,ttu_,te_,spc_,mo_,ra_,u_,no_,ga_,spc_,yu_,me_,spc_,na_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客：ステップ５：１Ｆ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_c106_r0201
+msg_bigman1_01_p01_c106_r0201:
+	.byte	ko_,no_,spc_,bi_,zi_,yyu_,tu_,ka_,n_,mo_,spc_,su_,ttu_,ka_,ri_,spc_,MI_,NA_,MO_,no_
+	.byte	CR_
+	.byte	tenten_,tenten_,i_,ya_,spc_,HO_,U_,E_,N_,ti_,ho_,u_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ka_,n_,ko_,u_,spc_,me_,i_,si_,yyo_,ni_,spc_,na_,ttu_,ta_,ne_,e_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,i_,ta_,spc_,ha_,na_,si_,da_,to_
+	.byte	CR_
+	.byte	hi_,to_,ri_,no_,spc_,TO_,RE_,bou_,NA_,bou_,ga_,spc_,n2_,ka_,i_,no_,spc_,e_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	so_,ro_,e_,te_,spc_,ku_,re_,ta_,spc_,ra_,si_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

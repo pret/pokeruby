@@ -1,0 +1,460 @@
+//====================================================================
+//							c102_r0502
+//						カイナシティ・海の博物館２Ｆ
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c102_r0502_event_data
+FLAG_CHANGE_LABEL	flag_change_c102_r0502
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c102_r0502:
+	_CALL			set_evil_char
+    _END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						クスノキ艦長								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kusunoki_01_p01_c102_r0502
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_studym1_01_p01_c102_r0502
+	_TALK_CLOSE
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_BGM_SET		MUS_AQA_0,1
+#elif ( PM_VERSION == VERSION_RUBY )
+	_BGM_SET		MUS_MGM0,1
+#endif
+
+	//階段から出てくる
+	_OBJ_APPEAR		EVILM1_01_C102_R0502
+	_SET_OBJ_ANIME	EVILM1_01_C102_R0502,evilm1_01_c102_r0502_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//階段から出てくる
+	_OBJ_APPEAR		EVILM1_02_C102_R0502
+	_SET_OBJ_ANIME	EVILM1_02_C102_R0502,evilm1_02_c102_r0502_anime03
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//近づいてくる
+	_SET_OBJ_ANIME	EVILM1_01_C102_R0502,evilm1_01_c102_r0502_anime04
+	_SET_OBJ_ANIME	EVILM1_02_C102_R0502,evilm1_02_c102_r0502_anime04
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//アクア団の方を向く
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,site_chg_kusunoki_01_p01_c102_r0502
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,site_chg_kusunoki_01_p01_c102_r0502
+	
+	_TALK_KEYWAIT	msg_aquam_23_01
+
+	//クスノキ	アクア団の方を向く
+	_IFVAL_CALL		RG_SITE,NE,SITE_R,site_chg_kusunoki_01_p02_c102_r0502
+
+	_TALK_KEYWAIT	msg_studym1_01_p02_c102_r0502
+
+	_TALK_KEYWAIT	msg_aquam_23_02
+	_TALK_CLOSE
+
+	//子分一歩前に出る
+	_SET_OBJ_ANIME	EVILM1_02_C102_R0502,evilm1_01_c102_r0502_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//主人公ボスの前に出る
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,site_chg_kusunoki_01_p03_c102_r0502
+	_IFVAL_CALL		RG_SITE,EQ,SITE_L,site_chg_kusunoki_01_p04_c102_r0502
+
+	//戦闘へ(子分)
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_EVENT_FIGHT	AQUAM_23,msg_aquam_23_03
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_EVENT_FIGHT	MAGMAM_23,msg_aquam_23_03
+#endif
+
+	_TALK_KEYWAIT	msg_aquam_23_04
+	_TALK_CLOSE
+
+	//子分後退
+	_SET_OBJ_ANIME	EVILM1_02_C102_R0502,evilm1_01_c102_r0502_anime05
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//子分一歩前に出る
+	_SET_OBJ_ANIME	EVILM1_01_C102_R0502,evilm1_01_c102_r0502_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//戦闘へ(子分)
+	_TALK_KEYWAIT	msg_aquam_24_01
+
+	_BGM_SPECIAL_CLR
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_EVENT_FIGHT	AQUAM_24,msg_aquam_24_02
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_EVENT_FIGHT	MAGMAM_24,msg_aquam_24_02
+#endif
+
+	//子分後退
+	_SET_OBJ_ANIME	EVILM1_01_C102_R0502,evilm1_01_c102_r0502_anime05
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//顔を見合わせる
+	_SET_OBJ_ANIME	EVILM1_01_C102_R0502,turn_d_anime
+	_SET_OBJ_ANIME	EVILM1_02_C102_R0502,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquam_24_03
+	_TALK_CLOSE
+
+	_TIME_WAIT		35
+
+	//アオギリ登場
+	_OBJ_APPEAR		AQUABOSS_01_C102_R0502
+	_SET_OBJ_ANIME	AQUABOSS_01_C102_R0502,aquaboss_01_c102_r0502_anime05
+	_SET_OBJ_ANIME	EVILM1_02_C102_R0502,evilm1_02_c102_r0502_anime06
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_c102_r0502
+
+	//一歩前に出る
+	_SET_OBJ_ANIME	AQUABOSS_01_C102_R0502,aquaboss_01_c102_r0502_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_c102_r0502s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_c102_r0502r
+#endif
+	_TALK_CLOSE
+
+	_FLD_FADE_BLACKOUT
+
+	//OBJ消す
+	_OBJ_DELETE		AQUABOSS_01_C102_R0502
+	_OBJ_DELETE		EVILM1_01_C102_R0502
+	_OBJ_DELETE		EVILM1_02_C102_R0502
+
+	_FLD_FADE_BLACKIN
+
+	_TIME_WAIT		30
+
+	//１階のアクア団をけす
+	_FLAG_SET		FV_AQUA_ALL_C102_R0501
+
+	//主人公振り向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_studym1_01_p03_c102_r0502
+
+	//「デボンのにもつ」を渡す
+	_LDVAL			PARAM0,ITEM_DEBONNONIMOTU
+	_CALL			ev_item_return
+
+	_TALK_KEYWAIT	msg_studym1_01_p05_c102_r0502
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	KUSUNOKI_01_C102_R0502,kusunoki_01_c102_r0502_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//OBJ消す
+	_SE				SE_KAIDAN
+	_OBJ_DELETE		KUSUNOKI_01_C102_R0502
+
+	//ロード１１０のアクア団消す
+	_FLAG_SET		FV_EVIL_ALL_FIELD_R110
+
+	//イベント終了
+	_FLAG_SET		FE_AQUA_01_C102_R0502
+
+	//新型のボールのことを教えてくれるOBJを出す
+	_FLAG_RESET		FV_WORKERM1_01_FIELD_R116
+	_FLAG_SET		FV_WORKERM1_01_C104_R0103
+
+	_TALK_OBJ_END
+	_END
+
+//アクア団の方を向く
+site_chg_kusunoki_01_p01_c102_r0502:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//アクア団の方を向く
+site_chg_kusunoki_01_p02_c102_r0502:
+	_SET_OBJ_ANIME	KUSUNOKI_01_C102_R0502,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//ボスの前に出る(上から話し掛け)
+site_chg_kusunoki_01_p03_c102_r0502:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c102_r0502_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//ボスの前に出る(右から話し掛け)
+site_chg_kusunoki_01_p04_c102_r0502:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c102_r0502_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	ボスの前に出る(上から話し掛け)
+//--------------------------------------------------------------------
+hero_01_c102_r0502_anime01:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ボスの前に出る(右から話し掛け)
+//--------------------------------------------------------------------
+hero_01_c102_r0502_anime02:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_TURN_L	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//クスノキ	去っていく
+//--------------------------------------------------------------------
+kusunoki_01_c102_r0502_anime02:
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アオギリ	一歩前に出る
+//--------------------------------------------------------------------
+aquaboss_01_c102_r0502_anime01:
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//アオギリ	近づいてくる
+//--------------------------------------------------------------------
+aquaboss_01_c102_r0502_anime05:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分	一歩前に出る
+//--------------------------------------------------------------------
+evilm1_01_c102_r0502_anime01:
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分	階段から出てくる
+//--------------------------------------------------------------------
+evilm1_01_c102_r0502_anime03:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_D	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分	近づいてくる
+//--------------------------------------------------------------------
+evilm1_01_c102_r0502_anime04:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分	後退する
+//--------------------------------------------------------------------
+evilm1_01_c102_r0502_anime05:
+	.byte	AC_SITE_PAUSE_ON	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_SITE_PAUSE_OFF	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分(2)	階段から出てくる
+//--------------------------------------------------------------------
+evilm1_02_c102_r0502_anime03:
+	.byte	AC_WALK_D_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分(2)	近づいてくる
+//--------------------------------------------------------------------
+evilm1_02_c102_r0502_anime04:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//子分(2)	下に押し出される
+//--------------------------------------------------------------------
+evilm1_02_c102_r0502_anime06:
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_16	//
+	.byte	AC_WAIT_8	//
+	.byte	AC_WALK_D_2	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+
+/********************************************************************/
+// ●円筒形水槽（上側）
+/********************************************************************/
+SCRIPT_LABEL	ev_suisou1_01_p01_c102_r0502
+	_EASY_MSG	msg_suisou1_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●円筒形水槽（下側）
+/********************************************************************/
+SCRIPT_LABEL	ev_suisou1_02_p01_c102_r0502
+	_EASY_MSG	msg_suisou1_02_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●壁へのはめ込み型水槽
+/********************************************************************/
+SCRIPT_LABEL	ev_suisou6_01_p01_c102_r0502
+	_EASY_MSG	msg_suisou6_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●壁からせり出した四角い陳列ケース
+/********************************************************************/
+SCRIPT_LABEL	ev_suisou3_02_p01_c102_r0502
+	_EASY_MSG	msg_suisou3_02_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●床置き型大型水槽（左側）
+/********************************************************************/
+SCRIPT_LABEL	ev_suisou7_01_p01_c102_r0502
+	_EASY_MSG	msg_suisou7_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●床置き型大型水槽（右側）
+/********************************************************************/
+SCRIPT_LABEL	ev_suisou7_02_p01_c102_r0502
+	_EASY_MSG	msg_suisou7_02_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●豪華船の模型
+/********************************************************************/
+SCRIPT_LABEL	ev_mokei1_01_p01_c102_r0502
+	_EASY_MSG	msg_mokei1_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●潜水艇の模型
+/********************************************************************/
+SCRIPT_LABEL	ev_mokei2_01_p01_c102_r0502
+	_EASY_MSG	msg_mokei2_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●潜水ポッドの模型
+/********************************************************************/
+SCRIPT_LABEL	ev_mokei3_01_p01_c102_r0502
+	_EASY_MSG	msg_mokei3_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+// ●謎の船の模型
+/********************************************************************/
+SCRIPT_LABEL	ev_mokei4_01_p01_c102_r0502
+	_EASY_MSG	msg_mokei4_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+/*							おじいさん２							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman2_01_p01_c102_r0502
+	_EASY_OBJ_MSG	msg_oldman2_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+/*							おばさん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlew1_01_p01_c102_r0502
+	_EASY_OBJ_MSG	msg_middlew1_01_p01_c102_r0502
+	_END
+
+
+/********************************************************************/
+/*								坊や								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_c102_r0502
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_boya1_01_p01_c102_r0502
+	_TALK_CLOSE
+
+	//元の向きに戻す
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_OBJ_END
+	_END
+
+

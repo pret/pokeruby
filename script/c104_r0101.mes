@@ -1,0 +1,105 @@
+// ●カナズミのデボン社内１階
+
+
+// ●受付嬢１
+// ●盗難イベント発生前・発生後（Ｘ５－Ｙ３）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p01_c104_r0101
+msg_workerw1_01_p01_c104_r0101:
+	.byte	i_,ra_,ttu_,si_,yya_,i_,ma_,se_,gyoe_
+	.byte	CR_
+	.byte	DE_,BO_,N_,spc_,KO_,bou_,PO_,RE_,bou_,SI_,YYO_,N_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,na_,sa_,ma_,no_,spc_,se_,i_,ka_,tu_,ni_,spc_,ya_,ku_,da_,tu_
+	.byte	CR_
+	.byte	do_,u_,gu_,ya_,spc_,ku_,su_,ri_,wo_,spc_,o_,tu_,ku_,ri_,si_,te_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●盗難イベント発生中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw1_01_p02_c104_r0101
+msg_workerw1_01_p02_c104_r0101:
+	.byte	DO_,ZI_,na_,spc_,ke_,n_,ki_,yyu_,u_,i_,n_,ga_
+	.byte	CR_
+	.byte	ni_,mo_,tu_,wo_,spc_,to_,ra_,re_,ti_,yya_,ttu_,te_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デボン社員１
+// ●盗難イベント発生前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_01_p01_c104_r0101
+msg_devon1_01_p01_c104_r0101:
+	.byte	o_,ttu_,gyoe_,spc_,RA_,N_,NI_,N_,GU_,SI_,YYU_,bou_,ZU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,bu_,n_,ta_,ti_,no_,spc_,ka_,i_,si_,yya_,no_,spc_,si_,yyo_,u_,hi_,n_,wo_
+	.byte	CR_
+	.byte	zi_,ttu_,sa_,i_,ni_,spc_,tu_,ka_,ttu_,te_,i_,ru_,spc_,hi_,to_,wo_,spc_,mi_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	su_,go_,ku_,spc_,u_,re_,si_,ku_,na_,ru_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●盗難イベント発生中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_01_p02_c104_r0101
+msg_devon1_01_p02_c104_r0101:
+	.byte	ta_,si_,ka_,ni_,spc_,a_,no_,spc_,ni_,mo_,tu_,ha_
+	.byte	CR_
+	.byte	da_,i_,zi_,na_,spc_,mo_,no_,spc_,da_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,ka_,no_,spc_,hi_,to_,ga_,spc_,nu_,su_,n_,de_,i_,ttu_,te_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ka_,e_,na_,i_,to_,spc_,o_,mo_,u_,n_,da_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,no_,spc_,su_,i_,ri_,de_,ha_,spc_,a_,no_,spc_,do_,ro_,bo_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	ta_,n_,na_,ru_,spc_,MA_,NU_,KE_,spc_,na_,n_,zi_,yya_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●デボン社員１（盗難イベント発生後）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_01_p03_c104_r0101
+msg_devon1_01_p03_c104_r0101:
+	.byte	do_,u_,ya_,ra_,spc_,DE_,BO_,N_,no_,ni_,mo_,tu_,ha_
+	.byte	CR_
+	.byte	mo_,do_,ttu_,te_,ki_,ta_,spc_,ra_,si_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●デボン社員１
+// ●２階へのストッパー
+// ●盗難イベント発生前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_02_p01_c104_r0101
+msg_devon1_02_p01_c104_r0101:
+	.byte	o_,ttu_,to_,spc_,ka_,n_,ke_,i_,si_,yya_,spc_,i_,ga_,i_,no_,spc_,ka_,ta_,ha_
+	.byte	CR_
+	.byte	ko_,ko_,ka_,ra_,spc_,sa_,ki_,ni_,ha_,spc_,ha_,i_,re_,ma_,se_,n_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●盗難イベント発生中
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_02_p02_c104_r0101
+msg_devon1_02_p02_c104_r0101:
+	.byte	do_,ro_,bo_,u_,ni_,spc_,ni_,mo_,tu_,wo_,spc_,u_,ba_,wa_,re_,ru_,na_,n_,te_
+	.byte	CR_
+	.byte	na_,n_,te_,spc_,DO_,ZI_,na_,n_,da_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●盗難イベント発生後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_devon1_02_p03_c104_r0101
+msg_devon1_02_p03_c104_r0101:
+	.byte	ya_,a_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,na_,ra_,spc_,i_,tu_,de_,mo_,spc_,da_,i_,ka_,n_,ge_,i_,spc_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

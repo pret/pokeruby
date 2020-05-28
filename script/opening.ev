@@ -1,0 +1,763 @@
+//====================================================================
+//						オープニング関連	02/02/05	nohara
+//====================================================================
+
+/********************************************************************/
+//					初めて自宅２階に上がった	
+//
+//					FLAG_CHANGE_LABELで呼ばれる
+/********************************************************************/
+opening_first_zitaku_2kai:
+	_LDVAL			WK_SCENE_SP_OPENING,5
+	_RET
+
+
+/********************************************************************/
+//						初めて自宅に入った
+//
+//					SP_SCRIPT_LABELで呼ばれる
+/********************************************************************/
+SCRIPT_LABEL	ev_opening_hero_room01
+	_TALK_KEYWAIT	msg_mama_01_p01_t101_r0101
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	PARAM0,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	//男女で分岐
+	_IFVAL_CALL		PARAM1,EQ,0,case0_opening_hero_room01
+	_IFVAL_CALL		PARAM1,EQ,1,case1_opening_hero_room01
+
+	_TALK_KEYWAIT	msg_mama_01_p02_t101_r0101
+	_TALK_CLOSE
+	
+	_LDVAL			WK_SCENE_SP_OPENING,4
+
+	//上に移動する
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_opening_anime10
+	_SET_OBJ_ANIME	PARAM0,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_END
+	_END
+
+//主人公(男)
+case0_opening_hero_room01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//主人公(女)
+case1_opening_hero_room01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	一歩前に出る
+//--------------------------------------------------------------------
+hero_01_opening_anime10:
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//							母ストッパー
+//					自宅から出ようとすると止められる
+/********************************************************************/
+SCRIPT_LABEL	ev_opening_mama_stoper
+	_TALK_KEYWAIT	msg_mama_01_p03_t101_r0101
+	_TALK_CLOSE
+
+	//主人公１歩上に移動する
+	//ママ 上を向く
+	_SET_OBJ_ANIME	PARAM0,turn_u_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_opening_anime02
+	_OBJ_ANIME_WAIT
+
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						時計を合わせる
+/********************************************************************/
+//t101_r0102
+SCRIPT_LABEL	ev_opening_clock_set_01
+	_TALK_START
+	_LDVAL		PARAM0,0			//時計画面で使用する
+	_JUMP		ev_common_clock
+	_END
+
+//t101_r0202
+SCRIPT_LABEL	ev_opening_clock_set_02
+	_TALK_START
+	_LDVAL		PARAM0,1			//時計画面で使用する
+	_JUMP		ev_common_clock
+	_END
+
+//共通処理
+ev_common_clock:
+	//時刻設定をしているか
+	_IF_FLAGON_JUMP	FE_CLOCK_SET,already_clock_set
+
+    _TALK_KEYWAIT	msg_tokei1_01_p01_t101_r0102
+
+	//時刻設定画面へ
+	_CALL			ev_clock_set
+
+	_TIME_WAIT		30
+
+	_LDVAL			WK_SCENE_SP_OPENING,6
+	_FLAG_SET		FE_CLOCK_SET
+	_FLAG_SET		FV_POKE1_01_OPENING_ROOM01
+	_FLAG_SET		FV_POKE1_02_OPENING_ROOM01
+
+	//男女の性別を判断する
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,my_sex_boy_sp_opening
+	_IFVAL_CALL		ANSWORK,EQ,1,my_sex_girl_sp_opening
+
+	_SE				SE_KAIDAN
+
+	//母を消す
+	_OBJ_DELETE		TMPWK0
+
+	_TALK_END
+	_END
+
+//主人公(男)
+my_sex_boy_sp_opening:
+	_LDVAL			TMPWK0,MAMA_01_T101_R0102
+
+	//母を出す
+	_OBJ_APPEAR		TMPWK0
+
+	//近づいてくる
+	_SET_OBJ_ANIME	TMPWK0,mama_01_sp_opening_anime50
+	_OBJ_ANIME_WAIT
+
+	//母の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+	
+	_TALK_KEYWAIT	msg_mama_01_p01_t101_r0102
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	TMPWK0,mama_01_sp_opening_anime51
+	_OBJ_ANIME_WAIT
+	_RET
+
+//主人公(女)
+my_sex_girl_sp_opening:
+	_LDVAL			TMPWK0,MAMA_01_T101_R0202
+
+	//母を出す
+	_OBJ_APPEAR		TMPWK0
+
+	//近づいてくる
+	_SET_OBJ_ANIME	TMPWK0,mama_01_sp_opening_anime52
+	_OBJ_ANIME_WAIT
+
+	//母の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mama_01_p01_t101_r0102
+	_TALK_CLOSE
+
+	//去っていく
+	_SET_OBJ_ANIME	TMPWK0,mama_01_sp_opening_anime53
+	_OBJ_ANIME_WAIT
+	_RET
+
+//時刻設定をしている
+already_clock_set:
+	//記録カウントアップ
+	_INC_RECORD		CNT_CLOCK_WATCH
+
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		TIME_CHK_WINDOW
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+SCRIPT_LABEL	ev_clock_set
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		TIME_SET_WINDOW
+	_STOP_SCRIPT
+	_RET
+
+//--------------------------------------------------------------------
+//母	近づいてくる(男)
+//--------------------------------------------------------------------
+mama_01_sp_opening_anime50:
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_L
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	去っていく(男)
+//--------------------------------------------------------------------
+mama_01_sp_opening_anime51:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	近づいてくる(女)
+//--------------------------------------------------------------------
+mama_01_sp_opening_anime52:
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_R
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	去っていく(女)
+//--------------------------------------------------------------------
+mama_01_sp_opening_anime53:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+
+/********************************************************************/
+//						時計設定後の自宅１階
+/********************************************************************/
+SCRIPT_LABEL	ev_opening_papa_go_work
+	_LDVAL			WK_SCENE_SP_OPENING,7
+	_TALK_END
+	_END
+
+//主人公(男)
+opening_boy_papa_go_work:
+	//右向く
+	_SET_OBJ_ANIME	PARAM1,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL			common_opening_tv_event_01
+
+	//進む
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_opening_anime01
+	_OBJ_ANIME_WAIT
+
+	_BGM_SET		MUS_INTER_V,0
+
+	_TALK_KEYWAIT	msg_mama_01_p06_t101_r0101
+	_TALK_CLOSE
+
+	//一歩引く
+	_SET_OBJ_ANIME	PARAM1,mama_01_t101_r0201_anime01
+	_OBJ_ANIME_WAIT
+
+	//TVの前に行く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_opening_anime61
+	_OBJ_ANIME_WAIT
+
+	_CALL			common_opening_tv_event_02
+
+	//母の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mama_01_p12_t101_r0101
+
+	_TALK_KEYWAIT	msg_mama_01_p07_t101_r0101
+	_TALK_CLOSE
+
+	//一度部屋を出るまで特定のメッセージを流すため
+	_LDVAL			LOCALWORK1,1
+
+	//席に座る
+	_SET_OBJ_ANIME	PARAM1,mama_01_t101_r0201_anime62
+	_OBJ_ANIME_WAIT
+
+	_JUMP			ev_opening_papa_go_work
+	_END
+
+//女の子の家
+opening_girl_papa_go_work:
+	//左向く
+	_SET_OBJ_ANIME	PARAM1,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+	_CALL			common_opening_tv_event_01
+
+	//進む
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_opening_anime60
+	_OBJ_ANIME_WAIT
+
+	_BGM_SET		MUS_INTER_V,0
+
+	_TALK_KEYWAIT	msg_mama_01_p06_t101_r0101
+	_TALK_CLOSE
+
+	//一歩引く
+	_SET_OBJ_ANIME	PARAM1,mama_01_t101_r0201_anime61
+	_OBJ_ANIME_WAIT
+
+	//TVの前に行く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_opening_anime62
+	_OBJ_ANIME_WAIT
+
+	_CALL			common_opening_tv_event_02
+
+	//母の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mama_01_p12_t101_r0101
+
+	_TALK_KEYWAIT	msg_mama_01_p07_t101_r0101
+	_TALK_CLOSE
+
+	//一度部屋を出るまで特定のメッセージを流すため
+	_LDVAL			LOCALWORK1,1
+
+	//席に座る
+	_SET_OBJ_ANIME	PARAM1,mama_01_t101_r0201_anime63
+	_OBJ_ANIME_WAIT
+
+	_JUMP			ev_opening_papa_go_work
+	_END
+
+//母がＴＶを見ていて、主人公に気づく
+common_opening_tv_event_01:
+	//気づく
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	PARAM1,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//気づく
+	_SET_OBJ_ANIME	PARAM1,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_mama_01_p05_t101_r0101
+	_TALK_CLOSE
+	_RET
+
+//主人公ＴＶを見る
+common_opening_tv_event_02:
+	//TVの方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_terebi1_01_p01_t101_r0101
+
+	_BGM_NOW_SET
+
+	//TVの点滅を消す
+	_PROGRAM		RETURN_TVCELL
+	_FLAG_SET		SYS_TV_HOME
+
+	_TIME_WAIT		35
+	_RET
+
+//--------------------------------------------------------------------
+//母	一歩引く(男)
+//--------------------------------------------------------------------
+mama_01_t101_r0201_anime01:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	一歩引く(女)
+//--------------------------------------------------------------------
+mama_01_t101_r0201_anime61:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	座る(男)
+//--------------------------------------------------------------------
+mama_01_t101_r0201_anime62:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//母	座る(女)
+//--------------------------------------------------------------------
+mama_01_t101_r0201_anime63:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*							母親									*/
+//
+//		部屋を出るまで有効用にLOCALWORK1を使用しているので注意
+/********************************************************************/
+SCRIPT_LABEL	ev_opening_mama_talk
+	_TALK_OBJ_START
+
+	//初めてのゲームクリアからフィールドに出るまで
+	_IFVAL_JUMP		WK_SCENE_T101_R0101,EQ,4,ev_mama_hunenotikette
+	_IFVAL_JUMP		WK_SCENE_T101_R0201,EQ,4,ev_mama_hunenotikette
+
+	//トウカのジムバッジ入手後か
+	_IF_FLAGON_JUMP		SYS_BATCH05_GET,ev_mama_item_get_01
+
+	//博士からポケモンをもらった後
+	_IF_FLAGON_JUMP		FE_ODAMAKI_01_P01_T101_R0301,ev_woman1_01_get_ball_after
+
+	//まだ一度も外へ出ていない
+	_IFVAL_JUMP		LOCALWORK1,EQ,1,ev_not_exit
+
+	//自宅イベントが終了した
+	_IFVAL_JUMP		WK_SCENE_SP_OPENING,GE,7,ev_opening_end
+
+	_TALK_KEYWAIT	msg_mama_01_p01_t101_r0101
+	_TALK_OBJ_END
+	_END
+
+//初めてのゲームクリアからフィールドに出るまで
+ev_mama_hunenotikette:
+	_TALK_KEYWAIT	msg_mama_01_p14_t101_r0101
+	_TALK_OBJ_END
+	_END
+
+//トウカのジムバッジ入手後
+ev_mama_item_get_01:
+	_IF_FLAGON_JUMP	FE_OMAMORIKOBAN_GET,ev_woman1_01_get_ball_after
+
+	_TALK_KEYWAIT	msg_mama_01_p11_t101_r0101
+
+	_ITEM_EVENT		ITEM_OMAMORIKOBAN,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_mama_01_p13_t101_r0101
+	_FLAG_SET		FE_OMAMORIKOBAN_GET
+	_TALK_OBJ_END
+	_END
+
+//博士からポケモンをもらった後
+ev_woman1_01_get_ball_after:
+	_TALK_KEYWAIT	msg_mama_01_p09_t101_r0101
+	_JUMP			ev_mama_normal_kaihuku
+	_END
+
+//まだ一度も外へ出ていない
+ev_not_exit:
+	_TALK_KEYWAIT	msg_mama_01_p15_t101_r0101
+	_TALK_OBJ_END
+	_END
+
+//自宅で回復
+ev_mama_normal_kaihuku:
+	_TALK_CLOSE
+	_CALL			normal_kaifuku
+	_INC_RECORD		CNT_KAIFUKU_HOME	//自宅で回復した回数をカウント
+
+	_TALK_KEYWAIT	msg_mama_01_p10_t101_r0101
+	_TALK_OBJ_END
+	_END
+
+//自宅イベントが終了した
+SCRIPT_LABEL	ev_opening_end
+	_TALK_KEYWAIT	msg_mama_01_p08_t101_r0101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					自宅１階引越し手伝いポケモン(1)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_poke1_01_opening_room01
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_GOORIKII,0
+	_TALK_KEYWAIT	msg_poke1_01_p01_t101_r0101
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					自宅１階引越し手伝いポケモン(2)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_poke1_02_opening_room01
+	_TALK_OBJ_START
+
+	_VOICE_PLAY		MONSNO_GOORIKII,0
+	_TALK_KEYWAIT	msg_poke1_02_p01_t101_r0101
+	_VOICE_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公、母の前まで行く
+//--------------------------------------------------------------------
+hero_01_opening_anime01:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公、一歩前に行く
+//--------------------------------------------------------------------
+hero_01_opening_anime61:	
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公、母の前まで行く(女)
+//--------------------------------------------------------------------
+hero_01_opening_anime60:	
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公、一歩前に行く(女)
+//--------------------------------------------------------------------
+hero_01_opening_anime62:	
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公１歩上に移動する
+//--------------------------------------------------------------------
+hero_01_opening_anime02:	
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*					パパの「船のチケット」イベント					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_papa_hunenotiketto
+	_TALK_START
+
+	//男女の性別を判断する
+	_GET_MY_SEX
+	_IFVAL_CALL		ANSWORK,EQ,0,my_sex_boy_papa_hune
+	_IFVAL_CALL		ANSWORK,EQ,1,my_sex_girl_papa_hune
+
+	//下に進む
+	_IFVAL_CALL		TMPWK0,EQ,0,case3_boy_papa_t101_r0101
+	_IFVAL_CALL		TMPWK0,EQ,1,case3_girl_papa_t101_r0101
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	TMPWK1,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	TMPWK1,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+	
+	_SET_OBJ_ANIME	TMPWK1,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT		20
+
+	//主人公に近づいてくる
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_boy_papa_t101_r0101
+	_IFVAL_CALL		TMPWK0,EQ,1,case0_girl_papa_t101_r0101
+
+	_TALK_KEYWAIT	msg_senri_01_p01_t101_r0101
+
+	_ITEM_EVENT		ITEM_HUNENOTIKETTO,1
+
+	_TALK_KEYWAIT	msg_senri_01_p02_t101_r0101
+	_TALK_CLOSE
+
+	//出かける
+	_IFVAL_CALL		TMPWK0,EQ,0,case1_boy_papa_t101_r0101
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_girl_papa_t101_r0101
+
+	_TALK_KEYWAIT	msg_senri_01_p03_t101_r0101
+	_TALK_CLOSE
+
+	//出かける２
+	_IFVAL_CALL		TMPWK0,EQ,0,case2_boy_papa_t101_r0101
+	_IFVAL_CALL		TMPWK0,EQ,1,case2_girl_papa_t101_r0101
+
+	_SE				SE_DOOR
+
+	//センリを消す
+	_OBJ_DELETE		TMPWK1
+
+	_FLAG_SET		FE_HUNENOTIKETTO_GET
+	_LDVAL			WK_SCENE_T101_R0101,4
+	_LDVAL			WK_SCENE_T101_R0201,4
+	_TALK_END
+	_END
+
+//主人公男の場合
+my_sex_boy_papa_hune:
+	_LDVAL			TMPWK0,0
+	_LDVAL			TMPWK1,SENRI_01_T101_R0101
+	_LDVAL			TMPWK2,MAMA_01_T101_R0101
+	_RET
+
+//主人公女の場合
+my_sex_girl_papa_hune:
+	_LDVAL			TMPWK0,1
+	_LDVAL			TMPWK1,SENRI_01_T101_R0201
+	_LDVAL			TMPWK2,MAMA_01_T101_R0201
+	_RET
+
+//近づいてくる
+case0_boy_papa_t101_r0101:
+	_SET_OBJ_ANIME	TMPWK1,papa_01_t101_r0101_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+case0_girl_papa_t101_r0101:
+	_SET_OBJ_ANIME	TMPWK1,papa_01_t101_r0101_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+//出かける
+case1_boy_papa_t101_r0101:
+	_SET_OBJ_ANIME	TMPWK1,papa_01_t101_r0101_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+case1_girl_papa_t101_r0101:
+	_SET_OBJ_ANIME	TMPWK1,papa_01_t101_r0101_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+
+//出かける２
+case2_boy_papa_t101_r0101:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_t101_r0101_anime71
+	_SET_OBJ_ANIME	TMPWK1,papa_01_t101_r0101_anime05
+	_OBJ_ANIME_WAIT
+	_RET
+
+case2_girl_papa_t101_r0101:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_t101_r0101_anime71
+	_SET_OBJ_ANIME	TMPWK1,papa_01_t101_r0101_anime06
+	_OBJ_ANIME_WAIT
+	_RET
+
+//下に進む
+case3_boy_papa_t101_r0101:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_t101_r0101_anime70
+	_OBJ_ANIME_WAIT
+	_RET
+
+case3_girl_papa_t101_r0101:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_t101_r0101_anime72
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//パパ	近づいてくる(男)
+//--------------------------------------------------------------------
+papa_01_t101_r0101_anime01:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//パパ	近づいてくる(女)
+//--------------------------------------------------------------------
+papa_01_t101_r0101_anime02:
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//パパ	出かける(男)
+//--------------------------------------------------------------------
+papa_01_t101_r0101_anime03:
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//パパ	出かける(女)
+//--------------------------------------------------------------------
+papa_01_t101_r0101_anime04:
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//パパ	出かける２(男)
+//--------------------------------------------------------------------
+papa_01_t101_r0101_anime05:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//パパ	出かける２(女)
+//--------------------------------------------------------------------
+papa_01_t101_r0101_anime06:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WAIT_8
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	下に進む(男)
+//--------------------------------------------------------------------
+hero_01_t101_r0101_anime70:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	見送る
+//--------------------------------------------------------------------
+hero_01_t101_r0101_anime71:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	下に進む(女)
+//--------------------------------------------------------------------
+hero_01_t101_r0101_anime72:
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						シューズ説明(r0101,r0201共通)				*/
+/********************************************************************/
+SCRIPT_LABEL	dash_note_script
+	_EASY_MSG	msg_note1_01_p02_t101_r0101
+	_END
+
+

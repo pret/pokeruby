@@ -1,0 +1,478 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R118	20
+#define EXITNUM_FIELD_R118	0
+#define POSNUM_FIELD_R118	3
+#define BGNUM_FIELD_R118	9
+
+//OBJ_EVENT_LABEL
+extern const u8	seed_script[];
+extern const u8	seed_script[];
+extern const u8	seed_script[];
+extern const u8	ev_bird_01[];
+extern const u8	ev_interviewer_02_1[];
+extern const u8	ev_interviewer_02_2[];
+extern const u8	ev_girl2_01_p01_field_r118[];
+extern const u8	ev_interviewer_05_1[];
+extern const u8	ev_interviewer_05_2[];
+extern const u8	ev_interviewer_06_1[];
+extern const u8	ev_interviewer_06_2[];
+extern const u8	talk_iai_tree[];
+extern const u8	ev_fishing1_01_p01_field_r118[];
+extern const u8	ev_aroma_02[];
+extern const u8	ev_fishing_09[];
+extern const u8	ev_bird_11[];
+extern const u8	ev_fishing_08[];
+extern const u8	ev_guitarist_06[];
+extern const u8	ev_ball1_121[];
+
+//POS_SCRIPT
+extern const u8	ev_field_r118_pos01[];
+extern const u8	ev_field_r118_pos02[];
+extern const u8	ev_field_r118_pos03[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_01_p01_field_r118[];
+extern const u8	ev_kanban_02_p01_field_r118[];
+
+const evObjData	OBJ_field_r118[] =
+{
+	{
+		SEED_01_FIELD_R118,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0023,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x001f,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_02_FIELD_R118,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0024,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0020,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_03_FIELD_R118,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0025,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0021,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_BIRD_01,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0040,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_bird_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		INTERVW1_01_FIELD_R118,		//OBJ ID
+		INTERVW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0021,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_interviewer_02_1,		//Event Lavel
+		FV_INTERVW1_02_CAMERA,		//Event Flag
+	},
+
+	{
+		CAMERA1_01_FIELD_R118,		//OBJ ID
+		CAMERA1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0022,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_interviewer_02_2,		//Event Lavel
+		FV_INTERVW1_02_CAMERA,		//Event Flag
+	},
+
+	{
+		GIRL2_01_FIELD_R118,		//OBJ ID
+		GIRL2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_ON,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_girl2_01_p01_field_r118,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		INTERVW1_02_FIELD_R118,		//OBJ ID
+		INTERVW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0021,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_interviewer_05_1,		//Event Lavel
+		FV_INTERVW1_05_CAMERA,		//Event Flag
+	},
+
+	{
+		CAMERA1_02_FIELD_R118,		//OBJ ID
+		CAMERA1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0022,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_interviewer_05_2,		//Event Lavel
+		FV_INTERVW1_05_CAMERA,		//Event Flag
+	},
+
+	{
+		INTERVW1_03_FIELD_R118,		//OBJ ID
+		INTERVW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0021,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_interviewer_06_1,		//Event Lavel
+		FV_INTERVW1_08_CAMERA,		//Event Flag
+	},
+
+	{
+		CAMERA1_03_FIELD_R118,		//OBJ ID
+		CAMERA1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0022,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_interviewer_06_2,		//Event Lavel
+		FV_INTERVW1_08_CAMERA,		//Event Flag
+	},
+
+	{
+		TREE1_01_FIELD_R118,		//OBJ ID
+		TREE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0026,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		talk_iai_tree,		//Event Lavel
+		FH_OBJ00,		//Event Flag
+	},
+
+	{
+		FISHING1_01_FIELD_R118,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001c,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_fishing1_01_p01_field_r118,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_AROMA_02,		//OBJ ID
+		WOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_SPINR,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_aroma_02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FISHING_09,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0000,		//work area
+		ev_fishing_09,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_BIRD_11,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0038,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_UR,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_bird_11,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_FISHING_08,		//OBJ ID
+		FISHING1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0027,		//Xpos
+		0x000f,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_fishing_08,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_GUITARIST_06,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_UL,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_guitarist_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		DAIGO_01_FIELD_R118,		//OBJ ID
+		DAIGO,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x002c,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_DAIGO_01_FIELD_R118,		//Event Flag
+	},
+
+	{
+		BALL1_121,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0045,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_121,		//Event Lavel
+		FV_BALL1_121,		//Event Flag
+	},
+
+};
+
+const SXY_POS	POS_field_r118[] =
+{
+	{
+		0x002b,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		WK_SCENE_FIELD_R118,		//Event Type
+		0x00,		//Scene
+		ev_field_r118_pos01,		//Script
+	},
+
+	{
+		0x002c,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		WK_SCENE_FIELD_R118,		//Event Type
+		0x00,		//Scene
+		ev_field_r118_pos02,		//Script
+	},
+
+	{
+		0x002d,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		WK_SCENE_FIELD_R118,		//Event Type
+		0x00,		//Scene
+		ev_field_r118_pos03,		//Script
+	},
+
+};
+
+const SXY_BG	BG_field_r118[] =
+{
+	{
+		0x002f,		//Xpos
+		0x000e,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)1,		//Script
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_field_r118,		//Script
+	},
+
+	{
+		0x0038,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_02_p01_field_r118,		//Script
+	},
+
+	{
+		0x0043,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)11,		//Script
+	},
+
+	{
+		0x001d,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)122,		//Script
+	},
+
+	{
+		0x002f,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)163,		//Script
+	},
+
+	{
+		0x002e,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		BG_BASE,		//Event Type
+		(u8 *)171,		//Script
+	},
+
+	{
+		0x001f,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		buromuhekisin_67,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x000e,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		haatonouroko_66,		//Script
+	},
+
+};
+
+const SXY_DATA	field_r118_sxy_data =
+{
+OBJNUM_FIELD_R118,			// field obj max
+EXITNUM_FIELD_R118,		// exit max
+POSNUM_FIELD_R118,			// pos event max
+BGNUM_FIELD_R118,			// bg event max
+OBJ_field_r118,			// field obj data
+NULL,			// exit data
+POS_field_r118,			// pos event data
+BG_field_r118,				// bg event data
+};

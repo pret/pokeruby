@@ -1,0 +1,133 @@
+// ●トウカシティ　フィールド
+
+
+// ●ミツル関連イベント
+// ●初期状態では、町の入口（r-102側）付近にミツルの母がいる
+// ●ミツルの母（ＯＢＪ＝woman2）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_field_c101
+msg_woman2_01_p01_field_c101:
+	.byte	u_,ti_,no_,spc_,MI_,TU_,RU_,ha_,spc_,do_,ko_,ma_,de_
+	.byte	CR_
+	.byte	a_,so_,bi_,ni_,spc_,i_,ttu_,ti_,yya_,ttu_,ta_,no_,spc_,ka_,si_,ra_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,spc_,so_,ro_,so_,ro_,spc_,SI_,DA_,KE_,TA_,U_,N_,ni_
+	.byte	CR_
+	.byte	de_,ka_,ke_,ru_,spc_,zi_,ka_,n_,spc_,da_,ttu_,te_,spc_,i_,u_,no_,ni_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公がジムで父と話したら、このミツル母は消す
+
+
+// ●少年２
+// ●ジム前のＰＯＳを踏むと、頭上に「！」を表示してから寄ってきて、
+// 　主人公に話かける
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_field_c101
+msg_boy2_01_p01_field_c101:
+	.byte	ki_,mi_,gyoe_,spc_,mo_,si_,ka_,si_,te_,tenten_,tenten_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,ni_,spc_,na_,ri_,ta_,te_,spc_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ra_,spc_,PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,ha_
+	.byte	CR_
+	.byte	a_,ta_,ra_,si_,i_,spc_,ma_,ti_,ni_,spc_,to_,u_,ti_,yya_,ku_,spc_,si_,ta_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,zu_,ha_,spc_,so_,ko_,ni_,spc_,do_,n_,na_,spc_,ZI_,MU_,ga_,a_,ru_,no_,ka_
+	.byte	CR_
+	.byte	ka_,ku_,ni_,n_,spc_,si_,te_,o_,ku_,spc_,mo_,no_,na_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで主人公は右を向き、少年２とともに右側へ進み、
+// 　ジム入口の正面まで来たら２人揃って上を向く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p02_field_c101
+msg_boy2_01_p02_field_c101:
+	.byte	ho_,ra_,spc_,ko_,ko_,ga_,spc_,TO_,U_,KA_,SI_,TE_,II_,no_,spc_,ZI_,MU_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここで２人揃って右の看板の方を向いて、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p03_field_c101
+msg_boy2_01_p03_field_c101:
+	.byte	ko_,re_,ga_,spc_,ZI_,MU_,no_,spc_,ka_,n_,ba_,n_,spc_,da_,ka_,ra_
+	.byte	CR_
+	.byte	ka_,ta_,ti_,wo_,spc_,yo_,ku_,spc_,o_,bo_,e_,te_,o_,ku_,to_,spc_,i_,i_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●そう言って、少年２だけが初期位置に戻っていく
+// 　以後は操作フリーになるこのあとまた主人公が
+// 　ＰＯＳを踏むと、同じことの繰り返し
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_field_c101
+msg_boy1_01_p01_field_c101:
+	.byte	bo_,ku_,no_,spc_,ka_,o_,ga_,spc_,su_,i_,me_,n_,ni_,spc_,u_,tu_,ttu_,te_,ru_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,bo_,u_,ni_,spc_,a_,hu_,re_,ta_
+	.byte	CR_
+	.byte	ka_,ga_,ya_,ku_,spc_,e_,ga_,o_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,a_,n_,to_,spc_,ta_,ta_,ka_,u_
+	.byte	CR_
+	.byte	si_,zu_,ka_,na_,spc_,ti_,n_,mo_,ku_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,ka_,o_,ha_,spc_,do_,n_,na_,hu_,u_,ni_,spc_,u_,tu_,ttu_,te_,ru_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●話し終えると、また池の方に視線をもどす
+
+// ●紳士１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gentlem1_01_p01_field_c101
+msg_gentlem1_01_p01_field_c101:
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,su_,de_,ni_,spc_,n6_,pi_,ki_,spc_,mo_,ttu_,te_,ru_,to_,ki_,ni_
+	.byte	CR_
+	.byte	a_,ta_,ra_,si_,ku_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,ka_,ma_,e_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	su_,ru_,to_,spc_,PA_,SO_,KO_,N_,spc_,tu_,u_,si_,n_,de_,spc_,zi_,do_,u_,te_,ki_,ni_
+	.byte	CR_
+	.byte	BO_,TTU_,KU_,SU_,ni_,spc_,o_,ku_,ra_,re_,ru_,no_,da_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ジムの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_c101
+msg_kanban_01_p01_field_c101:
+	.byte	TO_,U_,KA_,spc_,SI_,TE_,II_,spc_,PO_,KE_,MO_,N_,ZI_,MU_
+	.byte	CR_
+	.byte	RI_,bou_,DA_,bou_,spc_,SE_,N_,RI_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,yo_,sa_,wo_,spc_,o_,i_,mo_,to_,me_,ru_,spc_,o_,to_,ko_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●街の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_c101
+msg_kanban_02_p01_field_c101:
+	.byte	ko_,ko_,ha_,spc_,TO_,U_,KA_,spc_,SI_,TE_,II_
+	.byte	CR_
+	.byte	si_,ze_,n_,to_,spc_,hi_,to_,ga_,spc_,hu_,re_,a_,u_,spc_,ma_,ti_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ミツルの家の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_c101
+msg_kanban_03_p01_field_c101:
+	.byte	kako_,MI_,TU_,RU_,no_,spc_,i_,e_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

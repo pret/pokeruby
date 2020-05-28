@@ -1,0 +1,48 @@
+// ●座礁船
+// ●イベント前半部分
+
+
+// ●助手男１探知機入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_cave_d1710
+msg_studym1_01_p01_cave_d1710:
+	.byte	KU_,SU_,NO_,KI_,spc_,ka_,n_,ti_,yyo_,u_,ni_,spc_,ta_,no_,ma_,re_,te_,ne_
+	.byte	CR_
+	.byte	ko_,no_,hu_,ne_,no_,spc_,ti_,yyo_,u_,sa_,wo_,spc_,si_,te_,i_,ru_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,i_,de_,ni_,spc_,ta_,n_,ti_,ki_,wo_,spc_,sa_,ga_,si_,te_,ki_,te_,spc_
+	.byte	CR_
+	.byte	ho_,si_,i_,ttu_,te_,spc_,i_,wa_,re_,ta_,n_,da_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,a_,ta_,ra_,na_,i_,na_,a_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●助手男１探知機入手後、探知機を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_cave_d1710
+msg_studym1_01_p02_cave_d1710:
+	.byte	a_,gyoe_,spc_,ta_,n_,ti_,ki_,spc_,zi_,yya_,na_,i_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,yo_,ka_,ttu_,ta_,ra_,spc_,so_,re_
+	.byte	CR_
+	.byte	KU_,SU_,NO_,KI_,spc_,ka_,n_,ti_,yyo_,u_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ta_,si_,te_,ki_,te_,spc_,ku_,re_,na_,i_,ka_,na_,a_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,su_,ko_,si_,spc_,ko_,no_,hu_,ne_,spc_,si_,ra_,be_,ta_,i_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●助手男１探知機入手後、探知機を持っていない（預ける、渡す）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p03_cave_d1710
+msg_studym1_01_p03_cave_d1710:
+	.byte	ko_,no_,spc_,hu_,ne_,ha_,spc_,KA_,KU_,TA_,SU_,go_,u_,to_,spc_,i_,ttu_,te_,ne_
+	.byte	CR_
+	.byte	ti_,yyo_,i_,to_,spc_,mu_,ka_,si_,no_,spc_,hu_,ne_,spc_,ra_,si_,i_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

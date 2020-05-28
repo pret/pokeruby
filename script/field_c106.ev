@@ -1,0 +1,637 @@
+//====================================================================
+//						field_c106
+//						ミナモ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//      			マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_c106_event_data
+FLAG_CHANGE_LABEL	flag_change_field_c106
+BG_CHANGE_LABEL		bg_change_field_c106
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_field_c106:
+	_FLAG_SET		SYS_C106_ARRIVE				//到着フラグセット
+	_LDVAL			WK_SCENE_SP_CONTEST,0		//コンテストしてない
+	_FLAG_SET		FV_INTERVM1_01_C106_R0301	//インタビュアーを消す
+
+	//大雨
+	_IF_FLAGON_CALL		SYS_WEATHER_CTRL,ctrl_weather_thunder
+
+	_CALL			set_evil_char
+	_CALL			set_support_char
+	_END
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_field_c106:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	//特になし
+#elif ( PM_VERSION == VERSION_RUBY )
+	_SET_CELL		69,4,169,1
+	_SET_CELL		70,4,680,1
+	_SET_CELL		71,4,681,1
+	_SET_CELL		72,4,682,1
+	_SET_CELL		69,5,145,1
+	_SET_CELL		70,5,688,1
+	_SET_CELL		71,5,689,0
+	_SET_CELL		72,5,690,1
+	_SET_CELL		69,6,446,0
+	_SET_CELL		70,6,447,0
+	_SET_CELL		71,6,368,0
+	_SET_CELL		72,6,445,0
+#endif
+
+	//アジトクリアしていなったらホエルコを出す
+	_IF_FLAGOFF_CALL	FE_AKUA_01_CAVE_D0903,poke_bg_change_01_field_c106
+
+	//トクサネのジムバッチを取得していたらアジトの入り口を塞ぐ
+	_IF_FLAGON_CALL	SYS_BATCH07_GET,close_azito_field_c106
+	_END
+
+//アジトクリアしていなったらホエルコを出す
+poke_bg_change_01_field_c106:
+	_SET_CELL		76,12,656,1
+	_SET_CELL		77,12,657,1
+	_SET_CELL		76,13,672,1
+	_SET_CELL		77,13,673,1
+
+	_SET_CELL		76,14,664,1
+	_SET_CELL		77,14,665,1
+	_SET_CELL		76,15,672,1
+	_SET_CELL		77,15,673,1
+
+	_SET_CELL		77,16,664,1
+	_SET_CELL		78,16,665,1
+	_SET_CELL		77,17,672,1
+	_SET_CELL		78,17,673,1
+	_RET
+
+//トクサネのジムバッチを取得していたらアジトの入り口を塞ぐ
+close_azito_field_c106:
+	_SET_CELL		69,4,169,1
+	_SET_CELL		70,4,169,1
+	_SET_CELL		71,4,169,1
+	_SET_CELL		72,4,169,1
+	_SET_CELL		69,5,145,1
+	_SET_CELL		70,5,145,1
+	_SET_CELL		71,5,145,1
+	_SET_CELL		72,5,145,1
+	_RET
+
+
+//--------------------------------------------------------------------
+//       				スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								紳士								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_kinomi
+	_TALK_OBJ_START
+
+	_UPDATE_GAME_TIME
+
+	//一日一回
+	_IF_FLAGON_JUMP	TMFLG_SEED_PRESENT_06,ev_gentlem1_01_p02_kinomi
+
+	_TALK_KEYWAIT	msg_gentlem1_01_p01_kinomi
+
+	_GET_RND		10
+	//_ADDWK			ANSWORK,1
+	_ADDWK			ANSWORK,ITEM_SEED_START
+	_ITEM_EVENT		ANSWORK,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		TMFLG_SEED_PRESENT_06
+
+	_TALK_KEYWAIT	msg_gentlem1_01_p02_kinomi
+	_TALK_OBJ_END
+	_END
+
+//一日一回
+ev_gentlem1_01_p02_kinomi:
+	_TALK_KEYWAIT	msg_gentlem1_01_p03_kinomi
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						町の西側にいるおやじ1						*/		
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_field_c106
+	_EASY_OBJ_MSG	msg_middlem1_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*						ポケセンの前にいる少女1						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl1_01_p01_field_c106
+	_TALK_OBJ_START
+
+	//トクサネジムバッチを取得していたら
+	_IF_FLAGON_JUMP	SYS_BATCH07_GET,ev_girl1_01_p02_field_c106
+
+	_TALK_KEYWAIT	msg_girl1_01_p01_field_c106
+	_TALK_OBJ_END
+	_END
+
+//トクサネジムバッチを取得している
+ev_girl1_01_p02_field_c106:
+	_TALK_KEYWAIT	msg_girl1_01_p02_field_c106
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*					コンテスト会場の前にいる少年4					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy4_01_p01_field_c106
+	_EASY_OBJ_MSG	msg_boy4_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*					民宿(r0101)の斜め左下にいる男					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_field_c106
+	_TALK_OBJ_START
+
+	//アジトで中ボス倒していたら
+	_IF_FLAGON_JUMP	FE_AKUA_01_CAVE_D0903,ev_seaman1_01_p02_field_c106
+
+	_TALK_KEYWAIT	msg_seaman1_01_p01_field_c106
+
+	_TALK_OBJ_END
+	_END
+
+//アジトで中ボス倒した
+ev_seaman1_01_p02_field_c106:
+	_TALK_KEYWAIT	msg_seaman1_01_p02_field_c106
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				民宿(r0101)の入り口付近にいる女性1					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_field_c106
+	_TALK_OBJ_START
+
+	//アジトで中ボス倒していたら
+	_IF_FLAGON_JUMP	FE_AKUA_01_CAVE_D0903,ev_woman1_01_p02_field_c106
+
+	_TALK_KEYWAIT	msg_woman1_01_p01_field_c106
+
+	_TALK_OBJ_END
+	_END
+
+//アジトで中ボス倒した
+ev_woman1_01_p02_field_c106:
+	_TALK_KEYWAIT	msg_woman1_01_p02_field_c106
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*				美術館(r0201)の左わきにいる大男1					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_01_p01_field_c106
+	_EASY_OBJ_MSG	msg_workerm1_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*			町の北東の海辺で海を見ている老人1						*/
+/*			話し掛けても振り向かない(_EASY_MSG使用)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_field_c106
+	_EASY_MSG	msg_oldman1_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*			町の北東の海辺で海を見ている老婆1						*/
+/*			話し掛けても振り向かない(_EASY_MSG使用)					*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldwoman1_01_p01_field_c106
+	_EASY_MSG	msg_oldwoman1_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*						町の東の端にいる老人						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_02_p01_field_c106
+	_TALK_OBJ_START
+
+	//トクサネジムバッチを取得していたら
+	_IF_FLAGON_JUMP	SYS_BATCH07_GET,ev_oldman1_02_p02_field_c106
+
+	_TALK_KEYWAIT	msg_oldman1_02_p01_field_c106
+	_TALK_OBJ_END
+	_END
+
+//トクサネジムバッチを取得している
+ev_oldman1_02_p02_field_c106:
+	_TALK_KEYWAIT	msg_oldman1_02_p02_field_c106
+	_TALK_OBJ_END
+	_END
+
+	
+/********************************************************************/
+/*				ショップとポケセンの間の看板(1)						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_c106
+	_EASY_MSG       msg_kanban_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*						コンテスト会場の看板						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_c106
+	_EASY_MSG       msg_kanban_02_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*						町の右上の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_c106
+	_EASY_MSG       msg_kanban_03_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*						美術館(r0201)の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_04_p01_field_c106
+	_TALK_START
+	_FUNC_CALL	PARAM0,	ART_COUNT_CHK
+	_SWITCH	PARAM0
+    _CASEJUMP	0,ev_kanban_04_p02_field_c106
+	_TALK_KEYWAIT	msg_kanban_04_p02_field_c106
+	_TALK_END
+	_END
+
+ev_kanban_04_p02_field_c106://０枚のとき
+	_TALK_KEYWAIT       msg_kanban_04_p01_field_c106
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							船乗り場の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_05_p01_field_c106
+	_TALK_START
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_kanban_05_p02_field_c106
+	_TALK_KEYWAIT	msg_kanban_05_p01_field_c106
+	_TALK_END
+	_END
+
+//ゲームクリア後
+ev_kanban_05_p02_field_c106:
+	_TALK_KEYWAIT	msg_kanban_05_p02_field_c106
+	_TALK_END
+	_END
+
+/********************************************************************/
+/*						ファンクラブの看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_06_p01_field_c106
+	_EASY_MSG       msg_kanban_06_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*						デパートの看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_07_p01_field_c106
+	_EASY_MSG       msg_kanban_07_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*								看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_09_p01_field_c106
+	_EASY_MSG       msg_kanban_09_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*				ホエルコのトレーニングをしているアクア団			*/		
+/********************************************************************/
+SCRIPT_LABEL	ev_evilm1_01_p01_field_c106
+	_TALK_START
+
+	//すでに会話していたら
+	_IF_FLAGON_JUMP	FE_EVILM1_01_FIELD_C106,ev_evilm1_01_p02_field_c106
+
+	_TALK_KEYWAIT	msg_evilm1_01_p01_field_c106
+
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_evilm1_01_p02_field_c106
+
+	_SET_OBJ_ANIME	TARGET_OBJ,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_FLAG_SET		FE_EVILM1_01_FIELD_C106
+	_TALK_END
+	_END
+
+//すでに会話していたら
+ev_evilm1_01_p02_field_c106:
+	_TALK_KEYWAIT	msg_evilm1_01_p01_field_c106
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*							アクア団								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_01_p01_field_c106
+	_EASY_OBJ_MSG	msg_aquam1_01_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*							アクア団２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_02_p01_field_c106
+	_EASY_OBJ_MSG	msg_aquam1_02_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*							アクア団３								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_03_p01_field_c106
+	_EASY_OBJ_MSG	msg_aquam1_03_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*							アクア団４								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_aquam1_04_p01_field_c106
+	_EASY_OBJ_MSG	msg_aquam1_04_p01_field_c106
+	_END
+
+
+/********************************************************************/
+/*							サポート								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_support_01_p01_field_c106
+	_TALK_OBJ_START
+
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,my_sex_boy_field_c106
+	_IFVAL_JUMP		ANSWORK,EQ,1,my_sex_girl_field_c106
+	_END
+
+
+//主人公男の場合(相手が娘）
+my_sex_boy_field_c106:
+	_BGM_SET	MUS_GIRL_SUP,1
+
+	//一度話したかで分岐させる
+	_IF_FLAGON_CALL		FE_SUPPORT_01_FIELD_C106,flagon_my_sex_boy_field_c106
+	_IF_FLAGOFF_CALL	FE_SUPPORT_01_FIELD_C106,flagoff_my_sex_boy_field_c106
+
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_heroine_01_p01_field_c106
+
+	_TALK_KEYWAIT	msg_heroine_01_p04_field_c106
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_boy_battle_field_c106
+	_CASEJUMP		1,case1_my_sex_boy_battle_field_c106
+	_CASEJUMP		2,case2_my_sex_boy_battle_field_c106
+	_END
+
+//一度話したかで分岐させる
+flagon_my_sex_boy_field_c106:
+	_TALK_YES_NO	msg_heroine_01_p03_field_c106
+	_RET
+
+flagoff_my_sex_boy_field_c106:
+	_TALK_YES_NO	msg_heroine_01_p01_field_c106
+	_RET
+
+//「いいえ」
+no_heroine_01_p01_field_c106:
+	_FLAG_SET		FE_SUPPORT_01_FIELD_C106
+	_TALK_KEYWAIT	msg_heroine_01_p02_field_c106
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+	_TALK_OBJ_END
+	_END
+
+//主人公女の場合(相手は息子)
+my_sex_girl_field_c106:
+	_BGM_SET	MUS_BOY_SUP,1
+
+	//一度話したかで分岐させる
+	_IF_FLAGON_CALL		FE_SUPPORT_01_FIELD_C106,flagon_my_sex_girl_field_c106
+	_IF_FLAGOFF_CALL	FE_SUPPORT_01_FIELD_C106,flagoff_my_sex_girl_field_c106
+
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_hero_01_p01_field_c106
+
+	_TALK_KEYWAIT	msg_hero_01_p04_field_c106
+
+	//相手のポケモンを変更する
+	_SWITCH			WK_FIRST_POKE
+	_CASEJUMP		0,case0_my_sex_girl_battle_field_c106
+	_CASEJUMP		1,case1_my_sex_girl_battle_field_c106
+	_CASEJUMP		2,case2_my_sex_girl_battle_field_c106
+	_END
+
+//一度話したかで分岐させる
+flagon_my_sex_girl_field_c106:
+	_TALK_YES_NO	msg_hero_01_p03_field_c106
+	_RET
+
+flagoff_my_sex_girl_field_c106:
+	_TALK_YES_NO	msg_hero_01_p01_field_c106
+	_RET
+
+//「いいえ」
+no_hero_01_p01_field_c106:
+	_FLAG_SET		FE_SUPPORT_01_FIELD_C106
+	_TALK_KEYWAIT	msg_hero_01_p02_field_c106
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//						トレーナー戦へ
+//--------------------------------------------------------------------
+//タイプ炎
+case0_my_sex_boy_battle_field_c106:
+	_TRAINER_EVENT_FIGHT	SUPPORTW02_04,msg_heroine_01_p05_field_c106
+	_JUMP			common_support_girl_battle_field_c106
+	_END
+
+//タイプ水
+case1_my_sex_boy_battle_field_c106:
+	_TRAINER_EVENT_FIGHT	SUPPORTW03_04,msg_heroine_01_p05_field_c106
+	_JUMP			common_support_girl_battle_field_c106
+	_END
+
+//タイプ草
+case2_my_sex_boy_battle_field_c106:
+	_TRAINER_EVENT_FIGHT	SUPPORTW01_04,msg_heroine_01_p05_field_c106
+	_JUMP			common_support_girl_battle_field_c106
+	_END
+
+//タイプ炎
+case0_my_sex_girl_battle_field_c106:
+	_TRAINER_EVENT_FIGHT	SUPPORTM02_04,msg_hero_01_p05_field_c106
+	_JUMP			common_support_boy_battle_field_c106
+	_END
+
+//タイプ水
+case1_my_sex_girl_battle_field_c106:
+	_TRAINER_EVENT_FIGHT	SUPPORTM03_04,msg_hero_01_p05_field_c106
+	_JUMP			common_support_boy_battle_field_c106
+	_END
+
+//タイプ草
+case2_my_sex_girl_battle_field_c106:
+	_TRAINER_EVENT_FIGHT	SUPPORTM01_04,msg_hero_01_p05_field_c106
+	_JUMP			common_support_boy_battle_field_c106
+	_END
+
+//--------------------------------------------------------------------
+//							共通処理(男)
+//--------------------------------------------------------------------
+//主人公男の場合
+common_support_girl_battle_field_c106:
+	_TALK_KEYWAIT	msg_heroine_01_p06_field_c106
+
+	_LDVAL			ANSWORK,0			//クリア
+
+	//トクサネジムバッチ「そらをとぶ」もっているか
+	_IF_FLAGON_CALL	SYS_BATCH06_GET,chk_batch06_get
+
+	//すべてのバッチを取得していない
+	_IFVAL_CALL		ANSWORK,EQ,0,no_get_batch06_get_girl
+
+	//すべてのバッチを取得している
+	_IFVAL_CALL		ANSWORK,EQ,1,yes_get_batch06_get_girl
+
+	//サポート宅に移動する
+	_FLAG_RESET		FV_SUPPORTW_01_T101_R0202
+	_FLAG_RESET		FV_DOLL1_01_T101_R0202
+
+	_JUMP			go_home_support_field_c106
+	_END
+
+//トクサネジムバッチ「そらをとぶ」もっている
+chk_batch06_get:
+	//ルネジムバッチ「たきのぼり」もっているか
+	_IF_FLAGON_JUMP	SYS_BATCH08_GET,chk_batch08_get
+	_RET
+
+//すべてのバッチを取得している
+chk_batch08_get:
+	_LDVAL			ANSWORK,1
+	_RET
+
+//すべてのバッチを取得していない
+no_get_batch06_get_girl:
+	_TALK_KEYWAIT		msg_heroine_01_p07_field_c106
+	_RET
+
+//すべてのバッチを取得している
+yes_get_batch06_get_girl:
+	//ゲームクリアしていたら
+	_IF_FLAGON_JUMP		SYS_GAME_CLEAR,clear_girl_01_field_c106
+
+	_TALK_KEYWAIT		msg_heroine_01_p08_field_c106
+	_RET
+
+//ゲームクリアしている
+clear_girl_01_field_c106:
+	_TALK_KEYWAIT		msg_heroine_01_p09_field_c106
+	_RET
+
+//--------------------------------------------------------------------
+//							共通処理(女)
+//--------------------------------------------------------------------
+//主人公女の場合
+common_support_boy_battle_field_c106:
+	_TALK_KEYWAIT	msg_hero_01_p06_field_c106
+
+	_LDVAL			ANSWORK,0			//クリア
+
+	//トクサネジムバッチ「そらをとぶ」もっているか
+	_IF_FLAGON_CALL	SYS_BATCH06_GET,chk_batch06_get
+
+	//すべてのバッチを取得していない
+	_IFVAL_CALL		ANSWORK,EQ,0,no_get_batch06_get_boy
+
+	//すべてのバッチを取得している
+	_IFVAL_CALL		ANSWORK,EQ,1,yes_get_batch06_get_boy
+
+	//サポート宅に移動する
+	_FLAG_RESET		FV_SUPPORTM_01_T101_R0102
+
+	_JUMP			go_home_support_field_c106
+	_END
+
+//すべてのバッチを取得していない
+no_get_batch06_get_boy:
+	_TALK_KEYWAIT		msg_hero_01_p07_field_c106
+	_RET
+
+//すべてのバッチを取得している
+yes_get_batch06_get_boy:
+	//ゲームクリアしていたら
+	_IF_FLAGON_JUMP		SYS_GAME_CLEAR,clear_boy_01_field_c106
+
+	_TALK_KEYWAIT		msg_hero_01_p08_field_c106
+	_RET
+
+//ゲームクリアしている
+clear_boy_01_field_c106:
+	_TALK_KEYWAIT		msg_hero_01_p09_field_c106
+	_RET
+
+go_home_support_field_c106:
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_d_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_TIME_WAIT		50
+
+	_SET_FE_WORK	0,1
+	_SET_FLD_EFF	FECODE_PokeSora
+
+	_TIME_WAIT		15
+	_OBJ_DELETE		TARGET_OBJ
+
+	_FLD_EFF_WAIT	FECODE_PokeSora
+
+	_BGM_SPECIAL_CLR
+	_BGM_NOW_SET
+
+	//ミナモのサポートイベント終了
+	_FLAG_SET		FE_SUPPORT_02_FIELD_C106
+
+	_TALK_OBJ_END
+	_END
+
+

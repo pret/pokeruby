@@ -1,0 +1,105 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D0901	3
+#define EXITNUM_CAVE_D0901	3
+#define POSNUM_CAVE_D0901	0
+#define BGNUM_CAVE_D0901	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_akua_01_p01_cave_d0901[];
+extern const u8	ev_akua_02_p01_cave_d0901[];
+extern const u8	ev_aquam_01[];
+
+const evObjData	OBJ_cave_d0901[] =
+{
+	{
+		AKUA_01_CAVE_D0901,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000d,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_akua_01_p01_cave_d0901,		//Event Lavel
+		FV_AKUA_01_CAVE_D0901,		//Event Flag
+	},
+
+	{
+		AKUA_02_CAVE_D0901,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x000b,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_akua_02_p01_cave_d0901,		//Event Lavel
+		FV_AKUA_02_CAVE_D0901,		//Event Flag
+	},
+
+	{
+		TR_AQUAM_01,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0014,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RTDL,		//Obj Mode Type
+		0xd,		//Move Limit X
+		0x5,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_aquam_01,		//Event Lavel
+		FV_AQUA_ALL_CAVE_D0901,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d0901[] =
+{
+	{
+		0x000d,		//Xpos
+		0x001b,		//Ypos
+		0x01,		//Height
+		FIELD_C106_DOOR07,		//Door ID
+		FIELD_C106,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x000e,		//Xpos
+		0x001b,		//Ypos
+		0x01,		//Height
+		FIELD_C106_DOOR07,		//Door ID
+		FIELD_C106,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0016,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		CAVE_D0902_DOOR01,		//Door ID
+		CAVE_D0902,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_DATA	cave_d0901_sxy_data =
+{
+OBJNUM_CAVE_D0901,			// field obj max
+EXITNUM_CAVE_D0901,		// exit max
+POSNUM_CAVE_D0901,			// pos event max
+BGNUM_CAVE_D0901,			// bg event max
+OBJ_cave_d0901,			// field obj data
+EXIT_cave_d0901,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

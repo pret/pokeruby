@@ -1,0 +1,130 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c109_r0301_event_data
+SP_SCRIPT_LABEL		scene_c109_r0301
+OBJ_CTRL_LABEL		obj_ctrl_c109_r0301
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_c109_r0301:
+	OBJ_CTRL_DATA	LOCALWORK1,0,ev_site_chg_c109_r0301
+	OBJ_CTRL_END
+
+//主人公の向きを変更
+ev_site_chg_c109_r0301:
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_U
+	_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c109_r0301:
+	//部屋の奥まで移動
+	SP_SCRIPT_DATA	LOCALWORK1,0,ev_scene_start_c109_r0301
+	SP_SCRIPT_END
+
+//部屋の奥まで移動
+ev_scene_start_c109_r0301:
+	_TALK_START
+
+	//奥に進む
+	_SET_OBJ_ANIME	DAIGO_01_C109_R0301,hero_01_c109_r0301_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c109_r0301_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	DAIGO_01_C109_R0301,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_daigo_01_p01_c109_r0301
+	_TALK_CLOSE
+
+	//奥に進む
+	_SET_OBJ_ANIME	DAIGO_01_C109_R0301,hero_01_c109_r0301_anime02
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c109_r0301_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		20
+
+	_SET_OBJ_ANIME	DAIGO_01_C109_R0301,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_daigo_01_p02_c109_r0301
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	DAIGO_01_C109_R0301,turn_u_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		20
+
+	_SET_FLD_EFF	FECODE_DendouBall
+	_FLD_EFF_WAIT	FECODE_DendouBall
+
+	_TIME_WAIT		40
+
+	_LDVAL			LOCALWORK1,1
+
+	//ゲームクリアしたタイミングでフラグをセットする
+	_CALL			ev_flag_game_clear_set
+
+	//男女の判別をする
+	_GET_MY_SEX
+	_IFVAL_JUMP		ANSWORK,EQ,0,boy_game_clear_set_c109_r0301	//男の子
+	_IFVAL_JUMP		ANSWORK,EQ,1,girl_game_clear_set_c109_r0301	//女の子
+    _END
+
+//男の子
+boy_game_clear_set_c109_r0301:
+	_SET_WARP_ID	WP_BOY_START
+
+	_FLD_FADE_WAIT	FIELD_BLACK_OUT,24
+	_PROGRAM		GAME_CLEAR
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//女の子
+girl_game_clear_set_c109_r0301:
+	_SET_WARP_ID	WP_GIRL_START
+
+	_FLD_FADE_WAIT	FIELD_BLACK_OUT,24
+	_PROGRAM		GAME_CLEAR
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	奥に進む
+//--------------------------------------------------------------------
+hero_01_c109_r0301_anime01:
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	奥に進む２
+//--------------------------------------------------------------------
+hero_01_c109_r0301_anime02:
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	AC_WALK_U_1	
+	.byte	ACMD_END
+
+

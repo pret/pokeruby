@@ -1,0 +1,289 @@
+// カラクリ大王イベント
+// ◆◆奥の間◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+
+// ・主人公、奥の間にたどり着いた。出口閉まる
+// ・大王、上座（主人公が右上から入ってくるので左の座布団）にいる
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_r110_r0102
+msg_middlem1_01_p01_r110_r0102:
+	.byte	a_,ttu_,gyoe_
+	.byte	CR_
+	.byte	a_,n_,ta_,spc_,ko_,ko_,ma_,de_,spc_,ko_,ra_,re_,ta_,no_,ka_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	u_,bou_,mu_,tenten_,tenten_,spc_,de_,ki_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いて
+// ・レベル１クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p02_r110_r0102
+msg_middlem1_01_p02_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,ki_,wo_,spc_,u_,e_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_
+	.byte	CR_
+	.byte	tu_,gi_,no_,spc_,tu_,gi_,spc_,ku_,ra_,i_,ni_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル２クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p03_r110_r0102
+msg_middlem1_01_p03_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,me_,i_,ro_,wo_,spc_,tu_,ku_,ttu_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_
+	.byte	CR_
+	.byte	tu_,gi_,spc_,ku_,ra_,i_,ni_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル３クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p04_r110_r0102
+msg_middlem1_01_p04_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,i_,wa_,wo_,spc_,ha_,ko_,bi_,spc_,ko_,n_,da_,no_,ni_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_
+	.byte	CR_
+	.byte	ku_,ra_,i_,ni_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル４クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p05_r110_r0102
+msg_middlem1_01_p05_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,i_,wa_,wo_,spc_,o_,si_,te_,spc_,ki_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_
+	.byte	CR_
+	.byte	ku_,ra_,i_,ni_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル５クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p06_r110_r0102
+msg_middlem1_01_p06_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,ni_,n_,gi_,yyo_,u_,spc_,tu_,ku_,ttu_,te_
+	.byte	CR_
+	.byte	te_,tu_,ya_,de_,spc_,KU_,I_,ZU_,mo_,spc_,ka_,n_,ga_,e_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,tu_,gi_,no_,spc_,tu_,gi_
+	.byte	CR_
+	.byte	ku_,ra_,i_,ni_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル６クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p07_r110_r0102
+msg_middlem1_01_p07_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,to_,bi_,ra_,wo_,spc_,to_,ri_,tu_,ke_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,tu_,gi_
+	.byte	CR_
+	.byte	ku_,ra_,i_,ni_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル７クリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p08_r110_r0102
+msg_middlem1_01_p08_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,ya_,zi_,ru_,si_,wo_,spc_,na_,ra_,be_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,to_,spc_,o_,na_,zi_,spc_,ku_,ra_,i_,spc_,su_,go_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いて、ご褒美の処理へ
+
+// ・レベル８クリア＝オールクリア
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p09_r110_r0102
+msg_middlem1_01_p09_r110_r0102:
+	.byte	te_,tu_,ya_,de_,spc_,yu_,ka_,wo_,spc_,mi_,ga_,i_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,spc_,yo_,ri_,spc_,su_,go_,i_,gyoe_,spc_,no_,ka_,mo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いて、後ろをむいて
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p10_r110_r0102
+msg_middlem1_01_p10_r110_r0102:
+	.byte	do_,spc_,do_,u_,si_,yo_,u_,tenten_,tenten_
+	.byte	CR_
+	.byte	mo_,u_,spc_,KA_,RA_,KU_,RI_,no_,spc_,NE_,TA_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	tu_,ki_,te_,spc_,si_,ma_,ttu_,ta_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ta_,spc_,ze_,n_,ko_,ku_,spc_,ka_,ku_,ti_,wo_,spc_,ma_,wa_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	si_,ka_,ke_,wo_,spc_,i_,ro_,i_,ro_,spc_,ka_,n_,ga_,e_,te_,spc_,ku_,ru_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・ふたたび、主人公の方を向き
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p11_r110_r0102
+msg_middlem1_01_p11_r110_r0102:
+	.byte	mi_,to_,me_,ta_,ku_,ha_,spc_,na_,i_,n_,da_,ga_
+	.byte	CR_
+	.byte	a_,n_,ta_,ni_,ha_,spc_,ma_,ke_,ta_,tenten_,tenten_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,a_,spc_,na_,n_,do_,mo_,spc_,ki_,te_,ku_,re_,ta_,spc_,a_,ta_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	yo_,ttu_,po_,do_,spc_,wa_,ga_,ha_,i_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,ri_,yyo_,ku_,wo_,spc_,ka_,n_,zi_,ta_,no_,spc_,da_,ro_,u_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,to_,spc_,wa_,ga_,ha_,i_,no_,spc_,ma_,ke_,ha_,spc_,ka_,n_,ke_,i_,na_,si_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,gyoe_
+	.byte	CR_
+	.byte	ga_,n_,ba_,ri_,ya_,no_,spc_,a_,n_,ta_,to_
+	.byte	SCROLL_WAIT_
+	.byte	te_,n_,sa_,i_,no_,spc_,wa_,ga_,ha_,i_,no_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,u_,zi_,yyo_,u_,wo_,spc_,ki_,ne_,n_,si_,te_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,wo_,spc_,u_,ke_,to_,ttu_,te_,spc_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・レベル８のご褒美をもらう・効果音
+// あかいテント（ルビー）、あおいテント（サファイア）
+
+// ・パソコンに余裕がなかったら
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p17_r110_r0102
+msg_middlem1_01_p17_r110_r0102:
+	.byte	na_,ni_,spc_,PA_,SO_,KO_,N_,ni_,spc_,ha_,i_,ri_,ki_,ra_,na_,i_,hate_
+	.byte	CR_
+	.byte	so_,n_,na_,no_,spc_,wa_,ga_,ha_,i_,ga_,spc_,si_,ru_,ka_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,to_,spc_,i_,i_,ta_,i_,spc_,to_,ko_,ro_,da_,ke_,do_
+	.byte	CR_
+	.byte	wa_,ga_,ha_,i_,ha_,spc_,ya_,sa_,si_,i_,no_,de_,spc_,a_,to_,de_,spc_,ya_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・続いて（もらってももらわなくても）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p12_r110_r0102
+msg_middlem1_01_p12_r110_r0102:
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ga_,ha_,i_,ha_,spc_,ko_,re_,ka_,ra_
+	.byte	CR_
+	.byte	a_,ra_,ta_,na_,spc_,si_,ka_,ke_,wo_,spc_,mo_,to_,me_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,bi_,ni_,spc_,de_,ru_,spc_,ko_,to_,ni_,spc_,su_,ru_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	a_,n_,ta_,mo_,spc_,i_,tu_,ka_,spc_,ko_,ko_,ni_,ki_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ta_,spc_,a_,so_,n_,de_,spc_,i_,ttu_,te_,ku_,re_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,sa_,ra_,ba_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・大王、いつものように飛んでいなくなる
+
+// ・続いて、ご褒美をもらう
+// レベル１～７まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p13_r110_r0102
+msg_middlem1_01_p13_r110_r0102:
+	.byte	yo_,si_,ttu_,spc_,a_,n_,ta_,ni_
+	.byte	CR_
+	.byte	ho_,u_,bi_,wo_,spc_,ya_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・つづいて、ご褒美の処理（別途）
+// ・効果音
+// ・バッグがいっぱい
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p18_r110_r0102
+msg_middlem1_01_p18_r110_r0102:
+	.byte	na_,ni_,ttu_,spc_,mo_,ti_,ki_,re_,na_,i_,hate_
+	.byte	CR_
+	.byte	so_,n_,na_,ni_,spc_,na_,ni_,wo_,spc_,mo_,ti_,a_,ru_,i_,te_,ru_,n_,da_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,a_,spc_,se_,ttu_,ka_,ku_,spc_,ko_,ko_,ma_,de_,spc_,ko_,ra_,re_,ta_,n_,da_,si_
+	.byte	SCROLL_WAIT_
+	.byte	ho_,u_,bi_,ha_,spc_,a_,to_,de_,spc_,ya_,ro_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// そのまま↓へ
+
+// ・ご褒美をもらったあと
+// レベル１～７まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p14_r110_r0102
+msg_middlem1_01_p14_r110_r0102:
+	.byte	na_,n_,da_,spc_,to_,ku_,i_,so_,u_,na_,spc_,ka_,o_,spc_,si_,te_,ka_,ra_,ni_
+	.byte	CR_
+	.byte	wa_,ga_,ha_,i_,ni_,spc_,ka_,ttu_,ta_,spc_,ki_,ni_,spc_,na_,ru_,no_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,da_,spc_,ha_,ya_,i_,wa_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,no_,a_,to_,mo_,spc_,ma_,ta_,spc_,si_,ka_,ke_,wo_,spc_,tu_,ku_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,ga_,spc_,o_,wa_,ttu_,te_,ka_,ra_,spc_,wa_,ga_,ha_,i_,wo_,spc_,wa_,ra_,e_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,ha_,spc_,zi_,ka_,i_,wo_,spc_,o_,ta_,no_,si_,mi_,ni_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ・大王、日本間の時と同じく、ジャンプして消える。
+
+// ・レベル８クリア後の時のみ、大王のいた座布団に話しかけると
+// 　金の玉がおちている。
+// ・効果音
+// ・アイテムをもらう処理
+
+// ・全レベル共通、ご褒美をもらわずに出ようとすると
+// カラクリだいおうが、主人公の方を向き、１どジャンプ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p15_r110_r0102
+msg_middlem1_01_p15_r110_r0102:
+	.byte	o_,i_,o_,i_
+	.byte	CR_
+	.byte	wa_,ga_,ha_,i_,no_,spc_,ko_,to_,ha_,spc_,mu_,si_,spc_,ka_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	zu_,i_,bu_,n_,spc_,sa_,mi_,si_,i_,spc_,zi_,yya_,na_,i_,ka_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// 主人公は、一歩下げられる。
+
+// カラクリ屋敷ご褒美一覧
+// ■大王からもらうご褒美
+// １：ふしぎなアメ
+// ２：タイマーボール
+// ３：かたいいし
+// ４：けむりだま
+// ５：わざマシン
+// ６：じしゃく
+// ７：ポイントマックス
+// ８ルビー：ひろいテント
+// ８サファイア：キャンプテント
+// ■ダンジョンに落ちているアイテム
+// １：むしよけスプレー
+// ２：ディフェンダー＆プラスパワー
+// ３：スピーダー＆トレジャーメール
+// ４：キトサン
+// ６：ゴールドスプレー
+// ７：タウリン
+// ８：トレジャーメール
+// ■その他
+// クリア後、座布団に金の玉
+

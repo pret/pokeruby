@@ -1,0 +1,9 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 2
+#define SEAMAN1_01_PARK_KOKORO01	1
+#define HISHIP1_01_PARK_KOKORO01	2
+
+//Exit ID = 2
+#define PARK_KOKORO01_DOOR01	0
+#define PARK_KOKORO01_DOOR02	1

@@ -1,0 +1,233 @@
+//====================================================================
+//							c103_r0201
+//						キンセツ・サイクルショップ
+//====================================================================
+
+//--------------------------------------------------------------------
+//				     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c103_r0201_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//				       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*					サイクルショップ　カゼノ						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_01_p01_c103_r0201
+	_TALK_OBJ_START
+
+	//すでに自転車もらった
+	_IF_FLAGON_JUMP	FE_CYCLE_01_P01_C103_R0201 ,ev_workerm1_01_p03_c103_r0201
+
+	//一度会話しているか
+	_IF_FLAGON_JUMP	FE_WORKERM1_01_C103_R0201 ,ev_workerm1_01_p04_c103_r0201
+
+	_TALK_KEYWAIT	msg_workerm1_01_p01_c103_r0201
+
+	_TALK_YES_NO	msg_workerm1_01_p02_c103_r0201
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_workerm1_01_p02_c103_r0201	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_workerm1_01_p02_c103_r0201	//「いいえ」
+	_END
+
+//一度会話している
+ev_workerm1_01_p04_c103_r0201:
+	_TALK_YES_NO	msg_workerm1_01_p02_c103_r0201
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_workerm1_01_p02_c103_r0201	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_workerm1_01_p02_c103_r0201	//「いいえ」
+	_END
+
+//自転車のタイプを選ぶ
+ev_workerm1_01_p02_c103_r0201:
+	_TALKMSG		msg_workerm1_01_p04_c103_r0201
+	_TALK_WAIT
+
+	_SELECT_WINDOW	21,8,BICYCLE_MENU01,1		//B無効
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case0_speed_01				//スピードタイプ選択
+	_CASEJUMP		1,case1_action_01				//アクションタイプ選択
+	_END
+
+//自転車は好きかい？「いいえ」
+no_workerm1_01_p02_c103_r0201:
+	_FLAG_SET		FE_WORKERM1_01_C103_R0201
+	_TALK_KEYWAIT	msg_workerm1_01_p03_c103_r0201
+	_TALK_OBJ_END
+	_END
+
+//自転車は好きかい？「はい」
+yes_workerm1_01_p02_c103_r0201:
+	_FLAG_SET		FE_CYCLE_01_P01_C103_R0201
+	_JUMP			ev_workerm1_01_p02_c103_r0201
+	_END
+
+//スピードタイプ選択
+case0_speed_01:
+	_TALK_KEYWAIT	msg_workerm1_01_p05_c103_r0201
+	_ITEM_EVENT		ITEM_MAHHAZITENSYA,1				//自転車R入手
+	_JUMP			ev_get_bicycle
+	_END
+
+//アクションタイプ選択
+case1_action_01:
+	_TALK_KEYWAIT	msg_workerm1_01_p06_c103_r0201
+	_ITEM_EVENT		ITEM_DAATOZITENSYA,1				//自転車S入手
+	_JUMP			ev_get_bicycle
+	_END
+
+ev_get_bicycle:
+	_TALK_KEYWAIT	msg_workerm1_01_p07_c103_r0201
+
+	//便利ボタン交換
+	_PROGRAM		CHANGE_CNVBTN
+
+	_TALK_OBJ_END
+	_END
+
+//すでに自転車をもらっている(タイプを変えたい？)
+ev_workerm1_01_p03_c103_r0201:
+	_TALK_YES_NO	msg_workerm1_01_p08_c103_r0201
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_workerm1_01_p04_c103_r0201	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_workerm1_01_p04_c103_r0201	//「いいえ」
+	_END
+
+//タイプを変更する「はい」
+yes_workerm1_01_p04_c103_r0201:
+	_TALK_KEYWAIT	msg_workerm1_01_p09_c103_r0201
+
+	_CHECK_ITEM		ITEM_DAATOZITENSYA,1
+	_IFVAL_JUMP		ANSWORK,EQ,1,S_change
+
+	_CHECK_ITEM		ITEM_MAHHAZITENSYA,1
+	_IFVAL_JUMP		ANSWORK,EQ,1,R_change
+
+	//自転車を預けている
+	_TALK_KEYWAIT	msg_workerm1_01_p13_c103_r0201
+	_TALK_OBJ_END
+	_END
+
+//タイプを変更する「いいえ」
+no_workerm1_01_p04_c103_r0201:
+	_TALK_KEYWAIT	msg_workerm1_01_p12_c103_r0201
+	_TALK_OBJ_END
+	_END
+
+S_change:
+	//記録カウントアップ
+	_INC_RECORD		CNT_BICYCLE_TRADE
+
+	_TALK_KEYWAIT	msg_workerm1_01_p11_c103_r0201
+	_SUB_ITEM		ITEM_DAATOZITENSYA,1
+	_ITEM_EVENT		ITEM_MAHHAZITENSYA,1				//自転車R入手
+	_JUMP			ev_get_bicycle
+	_END
+
+R_change:
+	//記録カウントアップ
+	_INC_RECORD		CNT_BICYCLE_TRADE
+
+	_TALK_KEYWAIT	msg_workerm1_01_p10_c103_r0201
+	_SUB_ITEM		ITEM_MAHHAZITENSYA,1
+	_ITEM_EVENT		ITEM_DAATOZITENSYA,1				//自転車S入手
+	_JUMP			ev_get_bicycle
+	_END
+
+
+/********************************************************************/
+/*							若者男									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm2_01_p01_c103_r0201
+	_EASY_OBJ_MSG	msg_youngm2_01_p01_c103_r0201
+	_END
+
+
+/********************************************************************/
+/*						マッハ自転車説明書							*/
+/********************************************************************/
+//「マッハじてんしゃ」の説明
+SCRIPT_LABEL	ev_books_01_p01_c103_r0201
+	_TALKMSG		msg_books_01_p01_c103_r0201
+	_TALK_WAIT
+	_JUMP			mahha_setsumei_go
+	_END
+
+mahha_setsumei_go:
+	_SELECT_WINDOW	0,0,KAZENO_MENU01,0		//B有効
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case_mahha_hasirikata			//はしりかた
+	_CASEJUMP		1,case_mahha_magarukotsu		//まがるコツ
+	_CASEJUMP		2,case_mahha_sunanosaka			//すなのさか
+	_CASEJUMP		3,case_mahha_yameru				//やめる
+	_CASECANCEL		case_mahha_yameru
+	_END
+
+case_mahha_hasirikata:
+	_TALKMSG		msg_books_01_p02_c103_r0201
+	_TALK_WAIT
+	_JUMP			mahha_setsumei_go
+	_END
+
+case_mahha_magarukotsu:
+	_TALKMSG		msg_books_01_p03_c103_r0201
+	_TALK_WAIT
+	_JUMP			mahha_setsumei_go
+	_END
+
+case_mahha_sunanosaka:
+	_TALKMSG		msg_books_01_p04_c103_r0201
+	_TALK_WAIT
+	_JUMP			mahha_setsumei_go
+	_END
+
+case_mahha_yameru:
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/*						ダート自転車説明書							*/
+/********************************************************************/
+//「ダートじてんしゃ」の説明
+
+SCRIPT_LABEL	ev_books_02_p01_c103_r0201
+	_TALKMSG		msg_books_02_p01_c103_r0201
+	_TALK_WAIT
+	_JUMP			daato_setsumei_go
+	_END
+
+daato_setsumei_go:
+	_SELECT_WINDOW	0,0,KAZENO_MENU02,0		//B有効
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case_daato_uirii			//ウィリー
+	_CASEJUMP		1,case_daato_danieru		//ダニエル
+	_CASEJUMP		2,case_daato_jump			//ジャンプ
+	_CASEJUMP		3,case_daato_yameru			//やめる
+	_CASECANCEL		case_daato_yameru
+	_END
+
+case_daato_uirii:
+	_TALKMSG		msg_books_02_p02_c103_r0201
+	_TALK_WAIT
+	_JUMP			daato_setsumei_go
+	_END
+
+case_daato_danieru:
+	_TALKMSG		msg_books_02_p03_c103_r0201
+	_TALK_WAIT
+	_JUMP			daato_setsumei_go
+	_END
+
+case_daato_jump:
+	_TALKMSG		msg_books_02_p04_c103_r0201
+	_TALK_WAIT
+	_JUMP			daato_setsumei_go
+	_END
+
+case_daato_yameru:
+	_TALK_OBJ_END
+	_END
+
+

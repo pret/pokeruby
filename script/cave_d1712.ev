@@ -1,0 +1,230 @@
+//====================================================================
+//						cave_d1712
+//						すてられぶね　船室１階奥
+//====================================================================
+
+//--------------------------------------------------------------------
+//					     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		cave_d1712_event_data
+INIT_CTRL_LABEL			ev_init_diving_cave_d1712
+BG_CHANGE_LABEL			bg_change_cave_d1712
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//						※マップ初期化時に毎回呼ばれる
+//--------------------------------------------------------------------
+ev_init_diving_cave_d1712:
+	_SET_DIVING_MAP_ID	CAVE,CAVE_D1707,5,4
+	_END
+
+
+//--------------------------------------------------------------------
+//						BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//すでに扉を開けた後かをチェック
+bg_change_cave_d1712:
+	//閉じている状態
+	_IF_FLAGOFF_CALL	FE_DOOR_OPEN_01_CAVE_D1712,gate_01_set_cave_d1712
+	_IF_FLAGOFF_CALL	FE_DOOR_OPEN_02_CAVE_D1712,gate_02_set_cave_d1712
+	_IF_FLAGOFF_CALL	FE_DOOR_OPEN_04_CAVE_D1712,gate_04_set_cave_d1712
+	_IF_FLAGOFF_CALL	FE_DOOR_OPEN_06_CAVE_D1712,gate_06_set_cave_d1712
+
+	//開いている状態
+	_IF_FLAGON_CALL		FE_DOOR_OPEN_01_CAVE_D1712,gate_01_del_cave_d1712
+	_IF_FLAGON_CALL		FE_DOOR_OPEN_02_CAVE_D1712,gate_02_del_cave_d1712
+	_IF_FLAGON_CALL		FE_DOOR_OPEN_04_CAVE_D1712,gate_04_del_cave_d1712
+	_IF_FLAGON_CALL		FE_DOOR_OPEN_06_CAVE_D1712,gate_06_del_cave_d1712
+	_END
+
+gate_01_del_cave_d1712:
+	//開いている状態
+	_SET_CELL			3,8,555,1
+	_RET
+
+gate_02_del_cave_d1712:
+	//開いている状態
+	_SET_CELL			6,8,555,1
+	_RET
+
+gate_04_del_cave_d1712:
+	//開いている状態
+	_SET_CELL			3,3,538,0
+	_RET
+
+gate_06_del_cave_d1712:
+	//開いている状態
+	_SET_CELL			9,3,538,0
+	_RET
+
+
+gate_01_set_cave_d1712:
+	//開いていない状態
+	_SET_CELL			3,8,563,1
+	_RET
+
+gate_02_set_cave_d1712:
+	//開いていない状態
+	_SET_CELL			6,8,563,1
+	_RET
+
+gate_04_set_cave_d1712:
+	//開いていない状態
+	_SET_CELL			3,3,564,0
+	_RET
+
+gate_06_set_cave_d1712:
+	//開いていない状態
+	_SET_CELL			9,3,564,0
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						１号室のドア
+/********************************************************************/
+SCRIPT_LABEL			ev_door_01_p01_cave_d1712
+	_TALK_START
+
+	_IF_FLAGON_JUMP		FE_DOOR_OPEN_01_CAVE_D1712,open_gate_message_cave_d1712
+
+	//鍵があるかチェック
+	_CHECK_ITEM			ITEM_1GOUSITUNOKAGI,1
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE,lock_gate_01_message_cave_d1712
+
+	//”カギを　つかった！”
+	_TALK_KEYWAIT		msg_door_01_p02_cave_d1712
+	//鍵解除音
+	_SE	SE_PIN
+
+	//倉庫のカギを消す（使用したので）
+	_SUB_ITEM			ITEM_1GOUSITUNOKAGI,1
+
+	_FLAG_SET			FE_DOOR_OPEN_01_CAVE_D1712
+
+	_CALL				gate_01_del_cave_d1712
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+/********************************************************************/
+//						２号室のドア
+/********************************************************************/
+SCRIPT_LABEL			ev_door_02_p01_cave_d1712
+	_TALK_START
+
+	_IF_FLAGON_JUMP		FE_DOOR_OPEN_02_CAVE_D1712,open_gate_message_cave_d1712
+
+	//鍵があるかチェック
+	_CHECK_ITEM			ITEM_2GOUSITUNOKAGI,1
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE,lock_gate_02_message_cave_d1712
+
+	//”カギを　つかった！”
+	_TALK_KEYWAIT		msg_door_01_p02_cave_d1712
+	//鍵解除音
+	_SE	SE_PIN
+
+	//倉庫のカギを消す（使用したので）
+	_SUB_ITEM			ITEM_2GOUSITUNOKAGI,1
+
+	_FLAG_SET			FE_DOOR_OPEN_02_CAVE_D1712
+	_CALL				gate_02_del_cave_d1712
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+/********************************************************************/
+//						４号室のドア
+/********************************************************************/
+SCRIPT_LABEL			ev_door_03_p01_cave_d1712
+	_TALK_START
+
+	_IF_FLAGON_JUMP		FE_DOOR_OPEN_04_CAVE_D1712,open_gate_message_cave_d1712
+
+	//鍵があるかチェック
+	_CHECK_ITEM			ITEM_4GOUSITUNOKAGI,1
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE,lock_gate_04_message_cave_d1712
+
+	//”カギを　つかった！”
+	_TALK_KEYWAIT		msg_door_01_p02_cave_d1712
+	//鍵解除音
+	_SE	SE_PIN
+
+	//倉庫のカギを消す（使用したので）
+	_SUB_ITEM			ITEM_4GOUSITUNOKAGI,1
+
+	_FLAG_SET			FE_DOOR_OPEN_04_CAVE_D1712
+	_CALL				gate_04_del_cave_d1712
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+/********************************************************************/
+//						６号室のドア
+/********************************************************************/
+SCRIPT_LABEL			ev_door_04_p01_cave_d1712
+	_TALK_START
+
+	_IF_FLAGON_JUMP		FE_DOOR_OPEN_06_CAVE_D1712,open_gate_message_cave_d1712
+
+	//鍵があるかチェック
+	_CHECK_ITEM			ITEM_6GOUSITUNOKAGI,1
+	_IFVAL_JUMP			ANSWORK,EQ,FALSE,lock_gate_06_message_cave_d1712
+
+	//”カギを　つかった！”
+	_TALK_KEYWAIT		msg_door_01_p02_cave_d1712
+	//鍵解除音
+	_SE	SE_PIN
+
+	//倉庫のカギを消す（使用したので）
+	_SUB_ITEM			ITEM_6GOUSITUNOKAGI,1
+
+	_FLAG_SET			FE_DOOR_OPEN_06_CAVE_D1712
+	_CALL				gate_06_del_cave_d1712
+	_PROGRAM			MAKE_MAP_BG
+	_TALK_END
+	_END
+
+//鍵がないとき
+lock_gate_01_message_cave_d1712:
+	//”カギが　かかっている”
+	_TALK_KEYWAIT		msg_door_01_p01_cave_d1712
+	_TALK_END
+	_END
+
+//鍵がないとき
+lock_gate_02_message_cave_d1712:
+	//”カギが　かかっている”
+	_TALK_KEYWAIT		msg_door_02_p01_cave_d1712
+	_TALK_END
+	_END
+
+//鍵がないとき
+lock_gate_04_message_cave_d1712:
+	//”カギが　かかっている”
+	_TALK_KEYWAIT		msg_door_03_p01_cave_d1712
+	_TALK_END
+	_END
+
+//鍵がないとき
+lock_gate_06_message_cave_d1712:
+	//”カギが　かかっている”
+	_TALK_KEYWAIT		msg_door_04_p01_cave_d1712
+	_TALK_END
+	_END
+
+//開いた後のメッセージ
+open_gate_message_cave_d1712:
+	//”とびらは　あいている！”
+	_TALK_KEYWAIT		msg_door_01_p03_cave_d1704
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

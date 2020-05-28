@@ -1,0 +1,66 @@
+//====================================================================
+//						r110_r0107
+//						カラクリ屋敷ステージ４
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0107_event_data
+EVENT_DATA_END		 /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						合い言葉の書
+/********************************************************************/
+SCRIPT_LABEL			ev_karakuri_01_p01_r110_r0107
+	_TALK_START
+	_IFVAL_JUMP			WK_SCENE_R110_R0107,EQ,0,get_aikotoba_r110_r0107
+	_JUMP				look_aikotoba_mes_r110_r0101
+	_END
+
+//あいことばを入手
+get_aikotoba_r110_r0107:
+	_LDVAL				WK_SCENE_R110_R0107,1
+	_JUMP				get_aikotoba_mes_r110_r0101
+	_END
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL			ev_battleg_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		BATTLEG_04
+	_TRAINER_DATA2		msg_battleg_04_01
+	_TRAINER_DATA3		msg_battleg_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_battleg_04_03
+	_END
+
+SCRIPT_LABEL			ev_karate_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		KARATE_10
+	_TRAINER_DATA2		msg_karate_10_01
+	_TRAINER_DATA3		msg_karate_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_karate_10_03
+	_END
+
+SCRIPT_LABEL			ev_battleg_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1		BATTLEG_05
+	_TRAINER_DATA2		msg_battleg_05_01
+	_TRAINER_DATA3		msg_battleg_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_battleg_05_03
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

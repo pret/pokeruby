@@ -1,0 +1,30 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 22
+#define SEED_01_FIELD_R116	1
+#define SEED_02_FIELD_R116	2
+#define TR_TANPAN_05	3
+#define TREE1_01_FIELD_R116	4
+#define TREE1_02_FIELD_R116	5
+#define TR_MUSHI_03	6
+#define BALL1_19	7
+#define BALL1_20	8
+#define SEED_03_FIELD_R116	9
+#define SEED_04_FIELD_R116	10
+#define HAGI_01_FIELD_R116	11
+#define TREE1_03_FIELD_R116	12
+#define TR_MOUNT_06	13
+#define TREE1_04_FIELD_R116	14
+#define BALL1_21	15
+#define TR_MINI_03	16
+#define TR_SCHOOLW_01	17
+#define TR_SCHOOLM_01	18
+#define WORKERM1_01_FIELD_R116	19
+#define BALL1_1	20
+#define FIGHTER1_01_FIELD_R116	21
+#define FREAK1_01_FIELD_R116	22
+
+//Exit ID = 3
+#define FIELD_R116_DOOR01	0
+#define FIELD_R116_DOOR02	1
+#define FIELD_R116_DOOR03	2

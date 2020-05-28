@@ -1,0 +1,123 @@
+//rwd_act.dat
+///////////////////////////////////////////////////////////////////////
+//
+//		ロープウェイデモ用アクターデータ
+//
+//////////////////////////////////////////////////////////////////////
+
+typedef enum{			//セル＆パレットID
+	RWD_CELL0 = 1,
+	RWD_CELL1,
+	RWD_CELL2,
+	RWD_CELL3,
+	RWD_CELL4,
+	RWD_CELL5,
+}RWD_CELL_NAME;
+
+//オブジェクト同士のプライオリティ
+typedef enum{
+	RWD_OPRI_POLE = 100,
+	RWD_OPRI_G2,
+	RWD_OPRI_HERO,
+	RWD_OPRI_G1,
+	RWD_OPRI_CABLE,
+	RWD_OPRI_ELSE0,
+	RWD_OPRI_MAN,
+}RWD_OBJ_PRI;
+
+const CellData RWD_DataCell[]={
+	{(void *)GD_OBJ_ROPE1,OBJ_SIZE16_64x64*1,	RWD_CELL0},
+	{(void *)GD_OBJ_ROPE2,OBJ_SIZE16_16x8*1,	RWD_CELL1},
+	{(void *)GD_OBJ_ROPE3,OBJ_SIZE16_16x16*1,	RWD_CELL2},
+	{CELL_END,0,0},
+};
+const PalData RWD_DataPal[]={
+	{(void *)GD_OBJ01_PAL,	RWD_CELL0},
+	{OBJPAL_END,0},
+};
+
+const ActOamData RWD_OamData[] = 
+{
+	{	//64*64 ゴンドラ0	アフィン２倍角
+		0,		//u32 VPos:8;             // Ｙ座標
+		3,		//u32 AffineMode:2;       // アフィンモード ※
+		0,		//u32 ObjMode:2;          // ＯＢＪモード ※
+		OFF,	//u32 Mosaic:1;           // モザイク		※
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択	※
+		0,		//u32 Shape:2;            // ＯＢＪ形状		※
+
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		3,		//u32 Size:2;             // ＯＢＪサイズ	※
+
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		2,		//u32 Priority:2;         // 表示優先		※
+		0,		//u32 Pltt:4;             // パレットＮｏ
+		0,
+	},	
+	{	//16*8 ゴンドラ1	アフィン２倍角
+		0,		//u32 VPos:8;             // Ｙ座標
+		3,		//u32 AffineMode:2;       // アフィンモード ※
+		0,		//u32 ObjMode:2;          // ＯＢＪモード ※
+		OFF,	//u32 Mosaic:1;           // モザイク		※
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択	※
+		1,		//u32 Shape:2;            // ＯＢＪ形状		※
+
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		0,		//u32 Size:2;             // ＯＢＪサイズ	※
+
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		2,		//u32 Priority:2;         // 表示優先		※
+		0,		//u32 Pltt:4;             // パレットＮｏ
+		0,
+	},
+	{	//16*16 ケーブル用	アフィン２倍角
+		0,		//u32 VPos:8;             // Ｙ座標
+		3,		//u32 AffineMode:2;       // アフィンモード ※
+		0,		//u32 ObjMode:2;          // ＯＢＪモード ※
+		OFF,	//u32 Mosaic:1;           // モザイク		※
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択	※
+		0,		//u32 Shape:2;            // ＯＢＪ形状		※
+
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		1,		//u32 Size:2;             // ＯＢＪサイズ	※
+
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		2,		//u32 Priority:2;         // 表示優先		※
+		0,		//u32 Pltt:4;             // パレットＮｏ
+		0,
+	},
+	
+};
+static const actHeader RWD_Header[] ={
+	{	//ゴンドラ1
+		RWD_CELL0,			//cellナンバー
+		RWD_CELL0,			//pallナンバー
+		&(RWD_OamData[0]),	//Oam基本データアドレス
+		DummyActAnmTbl,		//アクター構成パターンテーブルアドレス(struct ActAnm*
+		0,					//アニメトランスデータアドレス(struc ActAnmData*
+		DummyActAffTbl,		//アフィンアニメパターンテーブルアドレス(struct actAffAnm*
+		rwd_dondola_move,	//Actor動作パターン関数アドレス
+	},
+	{	//ゴンドラ2
+		RWD_CELL1,			//cellナンバー
+		RWD_CELL0,			//pallナンバー
+		&(RWD_OamData[1]),	//Oam基本データアドレス
+		DummyActAnmTbl,		//アクター構成パターンテーブルアドレス(struct ActAnm*
+		0,					//アニメトランスデータアドレス(struc ActAnmData*
+		DummyActAffTbl,		//アフィンアニメパターンテーブルアドレス(struct actAffAnm*
+		rwd_dondola_move,	//Actor動作パターン関数アドレス
+	},
+	{	//ケーブル0
+		RWD_CELL2,				//cellナンバー
+		RWD_CELL0,				//pallナンバー
+		&(RWD_OamData[2]),		//Oam基本データアドレス
+		DummyActAnmTbl,			//アクター構成パターンテーブルアドレス(struct ActAnm*
+		0,						//アニメトランスデータアドレス(struc ActAnmData*
+		DummyActAffTbl,			//アフィンアニメパターンテーブルアドレス(struct actAffAnm*
+		DummyMoveSeq,				//Actor動作パターン関数アドレス
+	},
+};
+

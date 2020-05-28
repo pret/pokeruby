@@ -1,0 +1,105 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_T103_PC01	3
+#define EXITNUM_T103_PC01	3
+#define POSNUM_T103_PC01	0
+#define BGNUM_T103_PC01	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_pcwoman_01_p01_t103_pc01[];
+extern const u8	ev_middlew1_01_p01_t103_pc01[];
+extern const u8	ev_trainerm1_01_p01_t103_pc01[];
+
+const evObjData	OBJ_t103_pc01[] =
+{
+	{
+		PCWOMAN_01_T103_PC01,		//OBJ ID
+		PCWOMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_pcwoman_01_p01_t103_pc01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		MIDDLEW1_01_T103_PC01,		//OBJ ID
+		MIDDLEW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlew1_01_p01_t103_pc01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TRAINERM1_01_T103_PC01,		//OBJ ID
+		TRAINERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0005,		//Xpos
+		0x0005,		//Ypos
+		0x00,		//Height
+		MV_HON,		//Obj Mode Type
+		0x2,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_trainerm1_01_p01_t103_pc01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_t103_pc01[] =
+{
+	{
+		0x0007,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		FIELD_T103_DOOR02,		//Door ID
+		FIELD_T103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		FIELD_T103_DOOR02,		//Door ID
+		FIELD_T103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0001,		//Xpos
+		0x0006,		//Ypos
+		0x04,		//Height
+		T103_PC02_STAIR01,		//Door ID
+		T103_PC02,			//Map ID
+		T103,				//Field ID
+	},
+
+};
+
+const SXY_DATA	t103_pc01_sxy_data =
+{
+OBJNUM_T103_PC01,			// field obj max
+EXITNUM_T103_PC01,		// exit max
+POSNUM_T103_PC01,			// pos event max
+BGNUM_T103_PC01,			// bg event max
+OBJ_t103_pc01,			// field obj data
+EXIT_t103_pc01,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

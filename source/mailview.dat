@@ -1,0 +1,254 @@
+#include <agbtypes.h>
+
+//イメージタイプ定義
+typedef enum{
+	MLIMG_00 = 0,		//オレンジメール
+	MLIMG_01,			//ハーバーメール
+	MLIMG_02,			//きらきらメール
+	MLIMG_03,			//メカニカルメール
+	MLIMG_04,			//ウッディメール
+	MLIMG_05,			//クロスメール
+	MLIMG_06,			//トレジャーメール:portrait1
+	MLIMG_07,			//シャドウメール
+	MLIMG_08,			//トロピカルメール
+	MLIMG_09,			//ドリームメール:portrait2
+	MLIMG_10,			//ミラクルメール
+	MLIMG_11,			//レトロメール
+	MLIMG_NON = 0xFF,	//無効なイメージタイプ
+}MAIL_IMG_TYPE;
+
+//レイアウトタイプ定義
+#define LOTYPE_JP	0	//レイアウトタイプ_日本語(7*9)
+#define LOTYPE_AL	1	//レイアウトタイプ_アルファベット(12*9)
+
+//国別コードによる、会話コード２WORDの変換関数の定義
+#if	(PM_LANG == LANG_JAPAN)
+	#define	FUNC_KAIWA2WORD			(KaiwaCopyWord)
+	#define FUNC_KAIWA2SENTENCE		(KaiwaCopySentence)
+	#define MAIL_LOTYPE				LOTYPE_JP
+#else
+	#define	FUNC_KAIWA2WORD			(KaiwaCopyWord)
+	#define FUNC_KAIWA2SENTENCE		(KaiwaCopySentence)
+	#define MAIL_LOTYPE				LOTYPE_AL
+#endif
+
+//背景画像の男の子・女の子別パレットデータ
+static const u16 palData[2][2] = {
+	{0x6ACD,0x51A5},
+	{0x45FC,0x38D4},
+};
+//メールイメージのデータ配列
+static const struct {
+	const void *pal_addr;
+	const void *char_addr;
+	const void *map_addr;
+	u32 char_size;
+	u16 font_color;
+	u16 shadow_color;
+}MailImageTbl[] = {
+	{	//item_no	1
+		(void*)m_orange_pcl_ADRS, (void*)m_orange_pch_ADRS, (void*)m_orange_psc_ADRS,
+		0x2C0, 0x294A, 0x6739
+	},
+	{	//item_no	2
+		(void*)m_harbor_pcl_ADRS, (void*)m_harbor_pch_ADRS, (void*)m_harbor_psc_ADRS,
+		0x2E0, 0x7FFF, 0x4631
+	},
+	{	//item_no	3
+		(void*)m_kira_pcl_ADRS, (void*)m_kira_pch_ADRS, (void*)m_kira_psc_ADRS,
+		0x400, 0x294A, 0x6739
+	},
+	{	//item_no	4
+		(void*)m_mecha_pcl_ADRS, (void*)m_mecha_pch_ADRS, (void*)m_mecha_psc_ADRS,
+		0x1E0, 0x7FFF, 0x4631
+	},
+	{	//item_no	5
+		(void*)m_wood_pcl_ADRS, (void*)m_wood_pch_ADRS, (void*)m_wood_psc_ADRS,
+		0x2E0, 0x7FFF, 0x4631
+	},
+	{	//item_no	6
+		(void*)m_cross_pcl_ADRS, (void*)m_cross_pch_ADRS, (void*)m_cross_psc_ADRS,
+		0x300, 0x294A, 0x6739
+	},
+	{	//item_no	7
+		(void*)m_treas_pcl_ADRS, (void*)m_treas_pch_ADRS, (void*)m_treas_psc_ADRS,
+		0x140, 0x7FFF, 0x4631
+	},
+	{	//item_no	8
+		(void*)m_shadow_pcl_ADRS, (void*)m_shadow_pch_ADRS, (void*)m_shadow_psc_ADRS,
+		0x300, 0x7FFF, 0x4631
+	},
+	{	//item_no	9
+		(void*)m_trop_pcl_ADRS, (void*)m_trop_pch_ADRS, (void*)m_trop_psc_ADRS,
+		0x220, 0x294A, 0x6739
+	},
+	{	//item_no	10
+		(void*)m_dream_pcl_ADRS, (void*)m_dream_pch_ADRS, (void*)m_dream_psc_ADRS,
+		0x340, 0x294A, 0x6739
+	},
+	{	//item_no	11
+		(void*)m_miracl_pcl_ADRS, (void*)m_miracl_pch_ADRS, (void*)m_miracl_psc_ADRS,
+		0x2A0, 0x294A, 0x6739
+	},
+	{	//item_no	12
+		(void*)m_retro_pcl_ADRS, (void*)m_retro_pch_ADRS, (void*)m_retro_psc_ADRS,
+		0x520, 0x294A, 0x6739
+	},
+};
+
+///////////////////////////////////////////////////////////////
+//	メール表示のレイアウト関連データ
+//////////////////////////////////////////////////////////////
+//1行のレイアウト
+typedef struct{
+	u8	ofsY :2;	//前行からの表示オフセット_デフォルトは0
+	u8	nCode:2;	//1行中のコード数
+	u8	ofsX :4;	//行の表示オフセット_メール表示オフセットからのオフセット
+}MailRowLayout;
+
+//メール全体の表示レイアウト
+typedef struct{
+	u8	nRow;		//メール表示の分割行数_(3-8)
+	u8	ofs_ny;		//差出人の表示オフセットY_char_(0-15)
+	u8	ofs_nx;		//差出人の表示オフセット(右端)X_char
+
+	u8	ofs_y:4;	//メール表示オフセットY_char
+	u8	ofs_x:4;	//メール表示オフセットX_char
+
+	const MailRowLayout* const p_mrLO;	//行のレイアウトデータの配列へのポインタ
+}MailLayout;
+
+//メールレイアウトのデータ配列
+//////////////////////////////////////////////////////////////////
+//日本語レイアウト版
+static const MailRowLayout	mrLO_jp00[] = {
+{0,3,0},
+{0,3,0},
+{0,3,0},
+};
+
+static const MailLayout	mLO_jp[] = {
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//0
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//1
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//2
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//3
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//4
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//5
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//6
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//7
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//8
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//9
+	{ 3,16,27, 4, 3, mrLO_jp00 },	//10
+	{ 3,15,27, 4, 3, mrLO_jp00 },	//11
+};
+///////////////////////////////////////////////////////////////////////
+//アルファベット版
+static const MailRowLayout	mrLO_al00[] = { 
+{0,2,0},
+{0,2,0},
+{0,2,0},
+{0,2,0},
+{0,1,0},
+};
+static const MailLayout mLO_al[] = {
+	{ 5,15,15, 4, 3, mrLO_al00 },	//0
+	{ 5,15,15, 4, 3, mrLO_al00 },	//1
+	{ 5,15,16, 4, 3, mrLO_al00 },	//2
+	{ 5,15,15, 4, 3, mrLO_al00 },	//3
+	{ 5,15,15, 4, 3, mrLO_al00 },	//4
+	{ 5,15,16, 4, 3, mrLO_al00 },	//5
+	{ 5,15,16, 4, 3, mrLO_al00 },	//6
+	{ 5,15,15, 4, 3, mrLO_al00 },	//7
+	{ 5,15,15, 4, 3, mrLO_al00 },	//8
+	{ 5,15,15, 4, 3, mrLO_al00 },	//9
+	{ 5,16,15, 4, 3, mrLO_al00 },	//10
+	{ 5,15,15, 4, 3, mrLO_al00 },	//11
+};
+
+/////////////////////////////////////////////////////////////////
+//	デバック用仮メッセージデータ
+////////////////////////////////////////////////////////////////
+#ifdef PM_DEBUG
+
+/* 会話ウィンドウ関連定義 */
+#define MWIN_XPOS		1			//MSGウィンドウの表示Ｘ位置
+#define MWIN_YPOS		14			//MSGウィンドウの表示Ｙ位置
+#define	MWIN_XMARGIN	3			//実際のメッセージ表示位置とウィンドウ位置の差分(Ｘ)
+#define	MWIN_YMARGIN	1			//実際のメッセージ表示位置とウィンドウ位置の差分(Ｙ)
+#define MWIN_MSGXPOS	(MWIN_XPOS+MWIN_XMARGIN)	//MSG表示開始X位置
+#define MWIN_MSGYPOS	(MWIN_YPOS+MWIN_YMARGIN)	//MSG表示開始Y位置
+
+//メッセージ表示補助マクロ
+#define MsgWrite(msg){									\
+	NMenuTalkWinWrite();								\
+	NMenuMsgWrite((msg), MWIN_MSGXPOS, MWIN_MSGYPOS);	\
+}
+#define MsgReWrite(msg){								\
+	NMenuTalkMsgClr();									\
+	NMenuMsgWrite((msg), MWIN_MSGXPOS, MWIN_MSGYPOS);	\
+}
+#define SetMsgWrite(id,msg,nextadrs){					\
+	NMenuTalkWinWrite();								\
+	NMenuMsgWrite((msg), MWIN_MSGXPOS, MWIN_MSGYPOS);	\
+	TaskTable[(id)].TaskAdrs = (nextadrs);				\
+}
+#define MsgBoxWrite(){									\
+	NMenuTalkWinWrite();								\
+}
+
+//===============================================================
+//	レイアウトは にほんごで いいですか？
+//===============================================================
+static const u8	msg_selectLang[] = {
+	RE_,I_,A_,U_,TO_,wo_,spc_,ni_,ho_,n_,go_,de_,spc_,hi_,yyo_,u_,zi_,hate_,EOM_,	
+};
+
+static const u8 msg_jp[] = {ni_,ho_,n_,go_,spc_,EOM_};
+static const u8 msg_al[] = {ka_,i_,ga_,i_,spc_,EOM_};
+static const u8* const msg_lang[] = {msg_jp,msg_al};
+
+//===============================================================
+//	イメージ タイプを えらんでね
+//===============================================================
+static const u8	msg_imgSelect[] = {
+	I_,ME_,bou_,ZI_,spc_,TA_,I_,PU_,wo_,spc_,e_,ra_,n_,de_,ne_,EOM_,	
+};
+static const u8	msg_select[] = {
+	I_MSG_,STR_TEMP_BUF0,EOM_,	
+};
+
+static const u8	msg_orange[]	= {O_,RE_,N_,ZI_,spc_,EOM_};
+static const u8	msg_harbor[]	= {HA_,bou_,BA_,bou_,spc_,EOM_};
+static const u8	msg_kira[]		= {KI_,RA_,KI_,RA_,spc_,EOM_};
+static const u8	msg_mecha[]		= {ME_,KA_,NI_,KA_,RU_,EOM_};
+static const u8	msg_wood[]		= {U_,TTU_,DE_,II_,bou_,EOM_};
+static const u8	msg_cross[]		= {KU_,RO_,SU_,spc_,spc_,EOM_};
+static const u8	msg_treas[]		= {TO_,RE_,ZI_,YYA_,bou_,EOM_};
+static const u8	msg_shadow[]	= {SI_,YYA_,DO_,U_,spc_,EOM_};
+static const u8	msg_trop[]		= {TO_,RO_,PI_,KA_,RU_,EOM_};
+static const u8	msg_dream[]		= {DO_,RI_,bou_,MU_,spc_,EOM_};
+static const u8	msg_miracle[]	= {MI_,RA_,KU_,RU_,spc_,EOM_};
+static const u8	msg_retro[]		= {RE_,TO_,RO_,spc_,spc_,EOM_};
+
+static const u8* const msg_imgType[] = {
+	msg_orange,
+	msg_harbor,
+	msg_kira,
+	msg_mecha,
+	msg_wood,
+	msg_cross,
+	msg_treas,
+	msg_shadow,
+	msg_trop,
+	msg_dream,
+	msg_miracle,
+	msg_retro,
+};
+
+//d_mailview_menuset
+static const u8 dmvm_view[] = {  ME_,bou_,RU_,wo_,mi_,ru_,EOM_, };		// メールをみる
+static const u8 dmvm_mailset[] = {  ME_,bou_,RU_,to_,u_,ro_,ku_,EOM_, };	// メールとうろく
+static const u8 dmvm_pmset[] = {  mo_,ta_,se_,ru_,EOM_, };				// もたせる
+static const u8 dmvm_delmail[] = { ME_,bou_,RU_,wo_,ke_,su_,EOM_};		// メールをけす
+#endif	//PM_DEBUG
+

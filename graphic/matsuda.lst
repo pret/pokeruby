@@ -1,0 +1,52 @@
+;==========================================================
+;
+;	松田君用のグラフィック圧縮リスト
+;
+;==========================================================
+s_araob.sch		0	0200	OBJCGX
+s_arashi.ssc	0	0800	BG1MAP
+s_arashi.sch	0	0800	BG1CGX
+s_arashi.scl	0	0020	COLOR
+s_onpa.sch		0	0400	OBJCGX
+s_onpa.scl		0	0020	COLOR
+s_ice.sch		0	1000	OBJCGX
+s_ice.scl		0	0020	COLOR
+s_ice.ssc		0	0800	BG1MAP
+tsurahari.sch	0	0200	OBJCGX
+tsurahari.scl	0	0020	COLOR
+tugi.sch		0	00a0	OBJCGX
+;tugi.scl		0	0020	COLOR
+tugi_num.sch	0	00a0	NOCOMP
+s_mtama.sch		0	0020	OBJCGX
+s_tamare.scl	0	0020	COLOR
+s_tamagr.scl	0	0020	COLOR
+ef_502n.scl		0	0020	COLOR
+ef_502s.scl		0	0020	COLOR
+excite.sch		0	0400	OBJCGX
+excite2.sch		0	0080	NOCOMP
+con_obj.scl		160	0020	NOCOMP
+s_dive.sch		0	0800	OBJCGX
+s_dive.scl		0	0020	COLOR
+s_splash.sch	0	0020	OBJCGX
+btcube.sch		0	0080	OBJCGX
+btcube.scl		0	0020	COLOR
+s_magic0.sch	0	0800	OBJCGX
+s_magic1.sch	0	0800	OBJCGX
+s_magic2.sch	0	0800	OBJCGX
+s_magic.scl		0	0020	COLOR
+s_tatesc.sch	0	0400	BG1CGX
+s_tatesc.scl	0	0020	COLOR
+s_tatesc.ssc	0	0800	BG1MAP
+s_mamokabe.sch	0	0800	OBJCGX
+s_mamokouka.scl	0	0020	COLOR
+dakuryuu.scl	100	0020	COLOR
+kage.sch		0	0080	OBJCGX
+gauge_ar.sch	0	0200	OBJCGX
+icon_tam.sch	0	0400	NOCOMP
+s_ghost.sch		0	2000	BG1CGX
+s_ghost.scl		0	0020	COLOR
+s_ghost.ssc		0	0800	BG1MAP
+ef_011g.scl		0	0020	COLOR
+solar_bg.scl	40	0020	COLOR
+solar_bg.ssc	0	0500	BG1MAP
+

@@ -1,0 +1,79 @@
+//====================================================================
+//							c106_r0601
+//====================================================================
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r0601_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+/*							技忘れじいさん							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_c106_r0601
+	_TALK_START
+	_SET_OBJ_ANIME	OLDMAN1_01_C106_R0601,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+	
+	_TALK_YES_NO	msg_oldman1_01_p01_c106_r0601
+	_SWITCH	ANSWORK
+	_CASEJUMP	1,ev_oldman1_01_yes_c106_r0601
+	_CASEJUMP	0,ev_oldman1_01_end_c106_r0601
+	_TALK_END
+	_END
+
+ev_oldman1_01_yes_c106_r0601://はい
+	_TALK_KEYWAIT	msg_oldman1_01_p02_c106_r0601
+	_PROGRAM	NAME_POKE_LIST
+	_STOP_SCRIPT
+	_IFVAL_JUMP	PARAM0,EQ,0xff,ev_oldman1_01_end_c106_r0601
+	
+	_PROGRAM	WAZA_WASURE_TAMAGO//たまご？
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_oldman1_01_p04_c106_r0601
+
+	_PROGRAM	WAZA_WASURE_CHECK//わざ１つ？
+	_IFVAL_JUMP	ANSWORK,EQ,1,ev_oldman1_01_p03_c106_r0601
+	
+	_TALK_KEYWAIT	msg_oldman1_01_p03_c106_r0601
+	_FLD_FADE_BLACKOUT	//フェードアウト
+	_PROGRAM	ST_WAZAWASURE
+	_FLD_FADE_BLACKIN	//フェードイン
+	_IFVAL_JUMP	PARAM1,EQ,4,ev_oldman1_01_yes_c106_r0601
+	
+	_PROGRAM	WAZA_WASURE_NAME//ポケモン名と技名呼び出し
+	_TALK_YES_NO	msg_oldman1_01_p05_c106_r0601
+	_SWITCH	ANSWORK
+	_CASEJUMP	1,ev_oldman1_01_p02_c106_r0601
+	_CASEJUMP	0,ev_oldman1_01_end_c106_r0601
+	_TALK_END
+	_END
+
+ev_oldman1_01_p02_c106_r0601://忘れさせ中
+	_PROGRAM	WAZA_WASURE_MAIN//技忘れ処理
+	_JINGLE	MUS_ME_WASURE	//忘れるジングル
+	_JINGLE_WAIT
+	_TALK_KEYWAIT	msg_oldman1_01_p06_c106_r0601
+	_TALK_END
+	_END
+
+ev_oldman1_01_p03_c106_r0601://１つしか持っていない
+	_PROGRAM	WAZA_WASURE_NAME//ポケモン名と技名呼び出し
+	_TALK_KEYWAIT	msg_oldman1_01_p04_c106_r0601
+	_TALK_END
+	_END
+
+ev_oldman1_01_p04_c106_r0601://卵を選んだ
+	_TALK_KEYWAIT	msg_oldman1_01_p08_c106_r0601
+	_TALK_END
+	_END
+
+ev_oldman1_01_end_c106_r0601://技を忘れさせなかった
+	_TALK_KEYWAIT	msg_oldman1_01_p07_c106_r0601
+	_TALK_END
+	_END
+
+

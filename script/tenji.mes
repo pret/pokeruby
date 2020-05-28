@@ -1,0 +1,320 @@
+	.GLOBAL	msg_tenji_01_p01_cave_d2002
+msg_tenji_01_p01_cave_d2002:
+//	ウィンドウ位置指定
+	.byte	4,6,26,13
+//	メッセージ位置指定
+	.byte	7,9
+//　メッセージデータ開始
+// 『ここで　あがれ』
+	.byte	TEN_KO_,TEN_KO_,TEN_DAKU,TEN_TE_,TEN_SPACE,TEN_A_,TEN_DAKU,TEN_KA_,TEN_RE_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_01_p01_cave_d2003
+msg_tenji_01_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『あいうえお』
+	.byte	TEN_A_,TEN_I_,TEN_U_,TEN_E_,TEN_O_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_02_p01_cave_d2003
+msg_tenji_02_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『かきくけこ』
+	.byte	TEN_KA_,TEN_KI_,TEN_KU_,TEN_KE_,TEN_KO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_03_p01_cave_d2003
+msg_tenji_03_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『さしすせそ』
+	.byte	TEN_SA_,TEN_SI_,TEN_SU_,TEN_SE_,TEN_SO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_04_p01_cave_d2003
+msg_tenji_04_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『たちつてと』
+	.byte	TEN_TA_,TEN_TI_,TEN_TU_,TEN_TE_,TEN_TO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_05_p01_cave_d2003
+msg_tenji_05_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『なにぬねの』
+	.byte	TEN_NA_,TEN_NI_,TEN_NU_,TEN_NE_,TEN_NO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_06_p01_cave_d2003
+msg_tenji_06_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『はひふへほ』
+	.byte	TEN_HA_,TEN_HI_,TEN_HU_,TEN_HE_,TEN_HO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_07_p01_cave_d2003
+msg_tenji_07_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『まみむめも』
+	.byte	TEN_MA_,TEN_MI_,TEN_MU_,TEN_ME_,TEN_MO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_08_p01_cave_d2003
+msg_tenji_08_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	9,6,19,13
+//	メッセージ位置指定
+	.byte	12,9
+//　メッセージデータ開始
+// 『やゆよ』
+	.byte	TEN_YA_,TEN_YU_,TEN_YO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_09_p01_cave_d2003
+msg_tenji_09_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,6,21,13
+//	メッセージ位置指定
+	.byte	10,9
+//　メッセージデータ開始
+// 『らりるれろ』
+	.byte	TEN_RA_,TEN_RI_,TEN_RU_,TEN_RE_,TEN_RO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_10_p01_cave_d2003
+msg_tenji_10_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	9,6,19,13
+//	メッセージ位置指定
+	.byte	12,9
+//　メッセージデータ開始
+// 『わをん』
+	.byte	TEN_WA_,TEN_WO_,TEN_N_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_11_p01_cave_d2003
+msg_tenji_11_p01_cave_d2003:
+//	ウィンドウ位置指定
+	.byte	7,4,23,15
+//	メッセージ位置指定
+	.byte	10,7
+//　メッセージデータ開始
+// 『ここで』
+	.byte	TEN_KO_,TEN_KO_,TEN_DAKU,TEN_TE_
+	.byte	CR_
+// 『あなを　ほれ』
+	.byte	TEN_A_,TEN_NA_,TEN_WO_,TEN_SPACE,TEN_HO_,TEN_RE_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_01_p01_cave_d2004
+msg_tenji_01_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	0,0,29,19
+//	メッセージ位置指定
+	.byte	3,3
+//　メッセージデータ開始
+// 『はじめに　じーらんす』
+	.byte	TEN_HA_,TEN_DAKU,TEN_SI_,TEN_ME_,TEN_NI_,TEN_SPACE,TEN_DAKU,TEN_SI_,TEN_bou_,TEN_RA_,TEN_N_,TEN_SU_
+	.byte	CR_
+// 『おわりに　ほえるおー』
+	.byte	TEN_O_,TEN_WA_,TEN_RI_,TEN_NI_,TEN_SPACE,TEN_HO_,TEN_E_,TEN_RU_,TEN_O_,TEN_bou_
+	.byte	CR_
+// 『そして　すべてが』
+	.byte	TEN_SO_,TEN_SI_,TEN_TE_,TEN_SPACE,TEN_SU_,TEN_DAKU,TEN_HE_,TEN_TE_,TEN_DAKU,TEN_KA_
+	.byte	CR_
+// 『ひらかれる』
+	.byte	TEN_HI_,TEN_RA_,TEN_KA_,TEN_RE_,TEN_RU_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_02_p01_cave_d2004
+msg_tenji_02_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	2,0,26,19
+//	メッセージ位置指定
+	.byte	5,3
+//　メッセージデータ開始
+// 『わたしたちわ』
+	.byte	TEN_WA_,TEN_TA_,TEN_SI_,TEN_TA_,TEN_TI_,TEN_WA_
+	.byte	CR_
+// 『この　あなで』
+	.byte	TEN_KO_,TEN_NO_,TEN_SPACE,TEN_A_,TEN_NA_,TEN_DAKU,TEN_TE_
+	.byte	CR_
+// 『くらし　せいかつ　し』
+	.byte	TEN_KU_,TEN_RA_,TEN_SI_,TEN_SPACE,TEN_SE_,TEN_I_,TEN_KA_,TEN_TU_,TEN_SPACE,TEN_SI_
+	.byte	CR_
+// 『そして　いきて　きた』
+	.byte	TEN_SO_,TEN_SI_,TEN_TE_,TEN_SPACE,TEN_I_,TEN_KI_,TEN_TE_,TEN_SPACE,TEN_KI_,TEN_TA_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_03_p01_cave_d2004
+msg_tenji_03_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	7,2,23,17
+//	メッセージ位置指定
+	.byte	10,5
+//　メッセージデータ開始
+// 『すべてわ』
+	.byte	TEN_SU_,TEN_DAKU,TEN_HE_,TEN_TE_,TEN_WA_
+	.byte	CR_
+// 『ぽけもんの』
+	.byte	TEN_HANDAKU,TEN_HO_,TEN_KE_,TEN_MO_,TEN_N_,TEN_NO_
+	.byte	CR_
+// 『おかげだ』
+	.byte	TEN_O_,TEN_KA_,TEN_DAKU,TEN_KE_,TEN_DAKU,TEN_TA_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_04_p01_cave_d2004
+msg_tenji_04_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	3,0,25,19
+//	メッセージ位置指定
+	.byte	6,3
+//　メッセージデータ開始
+// 『だが』
+	.byte	TEN_DAKU,TEN_TA_,TEN_DAKU,TEN_KA_
+	.byte	CR_
+// 『わたしたちわ』
+	.byte	TEN_WA_,TEN_TA_,TEN_SI_,TEN_TA_,TEN_TI_,TEN_WA_
+	.byte	CR_
+// 『あの　ぽけもんを』
+	.byte	TEN_A_,TEN_NO_,TEN_SPACE,TEN_HANDAKU,TEN_HO_,TEN_KE_,TEN_MO_,TEN_N_,TEN_WO_
+	.byte	CR_
+// 『とじこめた』
+	.byte	TEN_TO_,TEN_DAKU,TEN_SI_,TEN_KO_,TEN_ME_,TEN_TA_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_05_p01_cave_d2004
+msg_tenji_05_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	5,6,25,13
+//	メッセージ位置指定
+	.byte	8,9
+//　メッセージデータ開始
+// 『こわかったのだ』
+	.byte	TEN_KO_,TEN_WA_,TEN_KA_,TEN_TTU_,TEN_TA_,TEN_NO_,TEN_DAKU,TEN_TA_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_06_p01_cave_d2004
+msg_tenji_06_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	6,0,24,19
+//	メッセージ位置指定
+	.byte	9,3
+//　メッセージデータ開始
+// 『ゆーき　ある』
+	.byte	TEN_YU_,TEN_bou_,TEN_KI_,TEN_SPACE,TEN_A_,TEN_RU_
+	.byte	CR_
+// 『ものよ』
+	.byte	TEN_MO_,TEN_NO_,TEN_YO_
+	.byte	CR_
+// 『きぼーに』
+	.byte	TEN_KI_,TEN_DAKU,TEN_HO_,TEN_bou_,TEN_NI_
+	.byte	CR_
+// 『みちた　ものよ』
+	.byte	TEN_MI_,TEN_TI_,TEN_TA_,TEN_SPACE,TEN_MO_,TEN_NO_,TEN_YO_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_07_p01_cave_d2004
+msg_tenji_07_p01_cave_d2004:
+//	ウィンドウ位置指定
+	.byte	3,2,27,17
+//	メッセージ位置指定
+	.byte	6,5
+//　メッセージデータ開始
+// 『とびらを　あけよ』
+	.byte	TEN_TO_,TEN_DAKU,TEN_HI_,TEN_RA_,TEN_WO_,TEN_SPACE,TEN_A_,TEN_KE_,TEN_YO_
+	.byte	CR_
+// 『そこに　えいえんの』
+	.byte	TEN_SO_,TEN_KO_,TEN_NI_,TEN_SPACE,TEN_E_,TEN_I_,TEN_E_,TEN_N_,TEN_NO_
+	.byte	CR_
+// 『ぽけもんが　いる』
+	.byte	TEN_HANDAKU,TEN_HO_,TEN_KE_,TEN_MO_,TEN_N_,TEN_DAKU,TEN_KA_,TEN_SPACE,TEN_I_,TEN_RU_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_01_p01_cave_d0401
+msg_tenji_01_p01_cave_d0401:
+//	ウィンドウ位置指定
+	.byte	3,0,25,19
+//	メッセージ位置指定
+	.byte	6,3
+//　メッセージデータ開始
+// 『みぎ　みぎ』
+	.byte	TEN_MI_,TEN_DAKU,TEN_KI_,TEN_SPACE,TEN_MI_,TEN_DAKU,TEN_KI_
+	.byte	CR_
+// 『した　した』
+	.byte	TEN_SI_,TEN_TA_,TEN_SPACE,TEN_SI_,TEN_TA_
+	.byte	CR_
+// 『そこで』
+	.byte	TEN_SO_,TEN_KO_,TEN_DAKU,TEN_TE_
+	.byte	CR_
+// 『かいりきを　つかえ』
+	.byte	TEN_KA_,TEN_I_,TEN_RI_,TEN_KI_,TEN_WO_,TEN_SPACE,TEN_TU_,TEN_KA_,TEN_E_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_01_p01_cave_d1801
+msg_tenji_01_p01_cave_d1801:
+//	ウィンドウ位置指定
+	.byte	7,0,23,19
+//	メッセージ位置指定
+	.byte	10,3
+//　メッセージデータ開始
+// 『このまま』
+	.byte	TEN_KO_,TEN_NO_,TEN_MA_,TEN_MA_
+	.byte	CR_
+// 『うごかず』
+	.byte	TEN_U_,TEN_DAKU,TEN_KO_,TEN_KA_,TEN_DAKU,TEN_SU_
+	.byte	CR_
+// 『ふたつの』
+	.byte	TEN_HU_,TEN_TA_,TEN_TU_,TEN_NO_
+	.byte	CR_
+// 『ときを　まて』
+	.byte	TEN_TO_,TEN_KI_,TEN_WO_,TEN_SPACE,TEN_MA_,TEN_TE_
+	.byte	EOM_
+
+	.GLOBAL	msg_tenji_01_p01_cave_d1901
+msg_tenji_01_p01_cave_d1901:
+//	ウィンドウ位置指定
+	.byte	0,0,29,19
+//	メッセージ位置指定
+	.byte	3,3
+//　メッセージデータ開始
+// 『あらたなる　ときと』
+	.byte	TEN_A_,TEN_RA_,TEN_TA_,TEN_NA_,TEN_RU_,TEN_SPACE,TEN_TO_,TEN_KI_,TEN_TO_
+	.byte	CR_
+// 『きぼーと　あいを　もち』
+	.byte	TEN_KI_,TEN_DAKU,TEN_HO_,TEN_bou_,TEN_TO_,TEN_SPACE,TEN_A_,TEN_I_,TEN_WO_,TEN_SPACE,TEN_MO_,TEN_TI_
+	.byte	CR_
+// 『まんなかで　そらを』
+	.byte	TEN_MA_,TEN_N_,TEN_NA_,TEN_KA_,TEN_DAKU,TEN_TE_,TEN_SPACE,TEN_SO_,TEN_RA_,TEN_WO_
+	.byte	CR_
+// 『めざせ』
+	.byte	TEN_ME_,TEN_DAKU,TEN_SA_,TEN_SE_
+	.byte	EOM_
+

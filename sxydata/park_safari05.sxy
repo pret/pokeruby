@@ -1,0 +1,96 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_PARK_SAFARI05	3
+#define EXITNUM_PARK_SAFARI05	2
+#define POSNUM_PARK_SAFARI05	0
+#define BGNUM_PARK_SAFARI05	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_safari_14_p01[];
+extern const u8	ev_safari_15_p01[];
+extern const u8	ev_safari_16_p01[];
+
+const evObjData	OBJ_park_safari05[] =
+{
+	{
+		SAFARI_14_P01,		//OBJ ID
+		CAPBOY1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0004,		//Ypos
+		0x00,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_safari_14_p01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SAFARI_15_P01,		//OBJ ID
+		BOY5,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0004,		//Ypos
+		0x00,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_safari_15_p01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SAFARI_16_P01,		//OBJ ID
+		BIGMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_safari_16_p01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_park_safari05[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_SAFARI03_DOOR01,		//Door ID
+		PARK_SAFARI03,			//Map ID
+		PARK,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		PARK_SAFARI03_DOOR01,		//Door ID
+		PARK_SAFARI03,			//Map ID
+		PARK,				//Field ID
+	},
+
+};
+
+const SXY_DATA	park_safari05_sxy_data =
+{
+OBJNUM_PARK_SAFARI05,			// field obj max
+EXITNUM_PARK_SAFARI05,		// exit max
+POSNUM_PARK_SAFARI05,			// pos event max
+BGNUM_PARK_SAFARI05,			// bg event max
+OBJ_park_safari05,			// field obj data
+EXIT_park_safari05,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

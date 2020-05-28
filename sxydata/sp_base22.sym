@@ -1,0 +1,21 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 15
+#define BASE_CHAR	1
+#define BASE_GOODS01	2
+#define BASE_GOODS02	3
+#define BASE_GOODS03	4
+#define BASE_GOODS04	5
+#define BASE_GOODS05	6
+#define BASE_GOODS06	7
+#define BASE_GOODS07	8
+#define BASE_GOODS08	9
+#define BASE_GOODS09	10
+#define BASE_GOODS10	11
+#define BASE_GOODS11	12
+#define BASE_GOODS12	13
+#define BASE_GOODS13	14
+#define BASE_GOODS14	15
+
+//Exit ID = 1
+#define SP_BASE22_MAT00	0

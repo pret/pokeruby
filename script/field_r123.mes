@@ -1,0 +1,79 @@
+// ●123番道路　フィールド
+
+
+// ●少女３（おくりびやまの近くに配置）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p01_field_r123
+msg_girl3_01_p01_field_r123:
+	.byte	a_,ta_,si_,spc_,ku_,sa_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	da_,i_,su_,ki_,spc_,na_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,ha_,spc_,ku_,sa_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,spc_,i_,na_,i_,no_,tenten_,tenten_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公の手持ちにくさタイプのポケモンがいるときは
+// 　続けて　→　msg_girl3_01_p02_field_r123:
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p02_field_r123
+msg_girl3_01_p02_field_r123:
+	.byte	a_,ra_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	a_,na_,ta_,mo_,spc_,ku_,sa_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	da_,i_,su_,ki_,spc_,na_,no_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,re_,si_,i_,ka_,ra_,spc_,ko_,re_,spc_,a_,ge_,ti_,yya_,u_,gyoe_
+	.byte	CR_
+	.byte	to_,mo_,da_,ti_,no_,spc_,si_,ru_,si_,spc_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン１９「ギガドレイン」（No307）入手処理
+
+// ●技マシン入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl3_01_p03_field_r123
+msg_girl3_01_p03_field_r123:
+	.byte	ku_,sa_,PO_,KE_,MO_,N_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	ki_,no_,spc_,yo_,u_,su_,wo_,spc_,mi_,te_,ma_,wa_,ttu_,te_,ru_,no_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ttu_,te_,mi_,re_,ba_,spc_,ki_,no_,spc_,o_,i_,si_,yya_,sa_,n_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●118番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r123
+msg_kanban_01_p01_field_r123:
+	.byte	CTRL_,C_EXFONT_,ArrowR__,spc_,n1_,n2_,n3_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,n1_,n1_,n8_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●122番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r123
+msg_kanban_02_p01_field_r123:
+	.byte	CTRL_,C_EXFONT_,ArrowU__,tenten_,tenten_,spc_,o_,ku_,ri_,bi_,ya_,ma_
+	.byte	CR_
+	.byte	ko_,ko_,ro_,spc_,yo_,wa_,ki_,mo_,no_,spc_,ti_,ka_,yo_,ru_,spc_,be_,ka_,ra_,zu_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きのみめいじんの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_r123
+msg_kanban_03_p01_field_r123:
+	.byte	kako_,ki_,no_,mi_,spc_,me_,i_,zi_,n_,no_,spc_,i_,e_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

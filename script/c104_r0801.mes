@@ -1,0 +1,23 @@
+// ●カナズミシティ　民家５／１Ｆ（街の南西）
+
+
+// ●老婆２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman2_01_p01_c104_r0801
+msg_oldwoman2_01_p01_c104_r0801:
+	.byte	ko_,ko_,ni_,ha_,spc_,DE_,BO_,N_,spc_,KO_,bou_,PO_,RE_,bou_,SI_,YYO_,N_,no_
+	.byte	CR_
+	.byte	si_,yya_,i_,n_,no_,spc_,mi_,na_,sa_,n_,ga_,spc_,su_,n_,de_,ru_,no_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン・エネコ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_eneco_01_p01_c104_r0801
+msg_eneco_01_p01_c104_r0801:
+	.byte	E_,NE_,KO_,kako2_,gi_,yya_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●同時にエネコの鳴き声

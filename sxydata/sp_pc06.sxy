@@ -1,0 +1,103 @@
+//Sxy Data Converter *.evt -> *.sxy Convert.
+#define OBJNUM_SP_PC06	0
+#define EXITNUM_SP_PC06	4
+#define POSNUM_SP_PC06	4
+#define BGNUM_SP_PC06	0
+
+//POS_SCRIPT
+extern const u8	ev_comm_multi_battle0_start[];
+extern const u8	ev_comm_multi_battle2_start[];
+extern const u8	ev_comm_multi_battle1_start[];
+extern const u8	ev_comm_multi_battle3_start[];
+
+const SXY_CONNECT	EXIT_sp_pc06[] =
+{
+	{
+		0x0005,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		SPFIELD_MAP_EXIT01,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		SPFIELD_MAP_EXIT01,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		SPFIELD_MAP_EXIT01,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+	{
+		0x0008,		//Xpos
+		0x0008,		//Ypos
+		0x03,		//Height
+		SPFIELD_MAP_EXIT01,		//Door ID
+		SPFIELD_MAP,			//Map ID
+		SPFIELD,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_sp_pc06[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		LOCALWORK0,		//Event Type
+		0x00,		//Scene
+		ev_comm_multi_battle0_start,		//Script
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		LOCALWORK0,		//Event Type
+		0x00,		//Scene
+		ev_comm_multi_battle2_start,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		LOCALWORK0,		//Event Type
+		0x00,		//Scene
+		ev_comm_multi_battle1_start,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		LOCALWORK0,		//Event Type
+		0x00,		//Scene
+		ev_comm_multi_battle3_start,		//Script
+	},
+
+};
+
+const SXY_DATA	sp_pc06_sxy_data =
+{
+OBJNUM_SP_PC06,			// field obj max
+EXITNUM_SP_PC06,		// exit max
+POSNUM_SP_PC06,			// pos event max
+BGNUM_SP_PC06,			// bg event max
+NULL,			// field obj data
+EXIT_sp_pc06,			// exit data
+POS_sp_pc06,			// pos event data
+NULL,				// bg event data
+};

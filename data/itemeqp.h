@@ -1,0 +1,75 @@
+//=========================================================================================
+//								アイテム装備効果シンボルファイル
+//=========================================================================================
+#ifndef ITEMEQP_H
+#define ITEMEQP_H
+
+
+#define	SOUBI_HPKAIHUKU						1
+#define	SOUBI_MAHINAOSI						2
+#define	SOUBI_NEMUKEZAMASI					3
+#define	SOUBI_DOKUKESI						4
+#define	SOUBI_YAKEDONAOSI					5
+#define	SOUBI_KOORINAOSI					6
+#define	SOUBI_PPKAIHUKU						7
+#define	SOUBI_KONRANNAOSI					8
+#define	SOUBI_GYOUTAIIGYOUNAOSI				9
+#define	SOUBI_KARAIKONRAN					10
+#define	SOUBI_SIBUIKONRAN					11
+#define	SOUBI_AMAIKONRAN					12
+#define	SOUBI_NIGAIKONRAN					13
+#define	SOUBI_SUPPAIKONRAN					14
+#define	SOUBI_KOUGEKIUP						15
+#define	SOUBI_BOUGYOUP						16
+#define	SOUBI_SUBAYASAUP					17
+#define	SOUBI_TOKUKOUUP						18
+#define	SOUBI_TOKUBOUUP						19
+#define	SOUBI_KURITHIKARUUP					20
+#define	SOUBI_NOURYOKURNDUP					21
+#define	SOUBI_MEITYUURITUDOWN				22
+#define	SOUBI_NOURYOKUKAIHUKU				23
+#define	SOUBI_DORYOKUTINIBAI				24
+#define	SOUBI_KEIKENTIGET					25
+#define	SOUBI_SENSEIKOUGEKI					26
+#define	SOUBI_NATUKIDOUP					27
+#define	SOUBI_MEROMERONAOSI					28
+#define	SOUBI_ONAZIWAZAONLY					29
+#define	SOUBI_HIRUMASERU					30
+#define	SOUBI_MUSIIRYOKUUP					31
+#define	SOUBI_OKANENIBAI					32
+#define	SOUBI_ENCOUNTRITUDOWN				33
+#define	SOUBI_TOKUKOUTOKUBOUUP				34
+#define	SOUBI_PAARURUTOKUKOUNIBAI			35
+#define	SOUBI_PAARURUTOKUBOUNIBAI			36
+#define	SOUBI_KANARAZUNIGERARERU			37
+#define	SOUBI_SINKASINAI					38
+#define	SOUBI_HPITIDETAERU					39
+#define	SOUBI_KEIKENTIHUERU					40
+#define	SOUBI_KYUUSYONIATARIYASUI			41
+#define	SOUBI_HAGANEIRYOKUUP				42
+#define	SOUBI_HPKAIHUKUMAITURN				43
+#define	SOUBI_DORAGONTUUSINSINKA			44
+#define	SOUBI_PIKATYUUTOKUKOUNIBAI			45
+#define	SOUBI_ZIMENUP						46
+#define	SOUBI_IWAUP							47
+#define	SOUBI_KUSAUP						48
+#define	SOUBI_AKUUP							49
+#define	SOUBI_KAKUTOUUP						50
+#define	SOUBI_DENKIUP						51
+#define	SOUBI_MIZUUP						52
+#define	SOUBI_TORIUP						53
+#define	SOUBI_DOKUBARIUP					54
+#define	SOUBI_KOORIUP						55
+#define	SOUBI_GOOSUTOUP						56
+#define	SOUBI_ESUPAAUP						57
+#define	SOUBI_HONOOUP						58
+#define	SOUBI_DORAGONUP						59
+#define	SOUBI_NOOMARUUP						60
+#define	SOUBI_PORIGONSINKA					61
+#define	SOUBI_HPKAIHUKUDAMEEZIRITU			62
+#define	SOUBI_RAKKIIDATOKYUUSYONIATARIYASUI	63
+#define	SOUBI_METAMONDATOBOUGYORYOKUUP		64
+#define	SOUBI_KARAGARADATOKOUGEKINIBAI		65
+#define	SOUBI_KAMONEGIKYUUSYOATARIYASUI		66
+
+#endif /* ITEMEQP_H */

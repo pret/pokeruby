@@ -1,0 +1,195 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START park_battle04_event_data
+	SP_SCRIPT_LABEL		ev_park_battle04
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/********************************************************************/
+ev_park_battle04:
+	SP_SCRIPT_DATA		LOCALWORK0,0,ev_park_battle04_01
+	SP_SCRIPT_END
+
+ev_park_battle04_01:
+	_LDVAL				LOCALWORK0,1
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle04_mine
+	_OBJ_ANIME_WAIT
+ev_park_battle04_01_start:
+	_PROGRAM			BATTLE_TOWER_TRAINER_SET
+//	_LDVAL				OBJCHRWORK1,BOY1
+	_OBJ_APPEAR			BATTLE_TOWER_TRAINER
+	_SET_OBJ_ANIME		BATTLE_TOWER_TRAINER,anm_battle04_trainerD
+	_OBJ_ANIME_WAIT
+	_PROGRAM			BATTLE_TOWER_KAIWA_GET
+	_TALK_KEYWAIT		MsgExpandBuffer
+	_TALK_WAIT
+	_TALK_CLOSE
+
+	_PROGRAM			PC_KAIFUKU				//対戦前には必ず回復状態に
+
+	_LDVAL				PARAM0,BEF_BATTLE_TOWER	//イベントバトルタイプ指定
+	_LDVAL				PARAM1,0				//暫定（エンカウントエフェクト指定）
+	_PROGRAM			BATTLE_EVENT_FIGHT
+	_STOP_SCRIPT
+
+	_SWITCH				ANSWORK
+	_CASEJUMP			FIGHT_WIN,ev_park_battle04_win
+
+ev_park_battle04_lose:
+	_PROGRAM			TEMOTI_POKE_POP
+	_LDVAL				PARAM0,BATTLE_TOWER_SEQ_NO
+	_LDVAL				PARAM1,BATTLE_TOWER_LOSE
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+	_LDVAL				PARAM0,BATTLE_TOWER_LEVEL_COPY
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+//ファン企画用のファンポイントをインクリメント
+	_LDVAL				PARAM0,FAN_BATTLE_TOWER_TYPE
+	_PROGRAM			ADD_FAN_POINT
+	_MAP_CHANGE			PARK,PARK_BATTLE01,6,6
+	_STOP_SCRIPT
+
+ev_park_battle04_win:
+//バトルタワーで勝った回数（変数が変更になったので不要）
+//	_INC_RECORD			CNT_TOWER_KACHI
+	_LDVAL				PARAM0,BATTLE_TOWER_ADD_ROUND
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+
+	_SWITCH				ANSWORK
+	_CASEJUMP			8,ev_park_battle04_7_win
+
+	_SET_OBJ_ANIME		BATTLE_TOWER_TRAINER,anm_battle04_trainerU
+	_OBJ_ANIME_WAIT
+	_OBJ_DELETE			BATTLE_TOWER_TRAINER
+	_SET_OBJ_ANIME		BATTLE_TOWER_PC,anm_battle04_pcwoman_kaifuku
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle04_mine_kaifuku
+	_OBJ_ANIME_WAIT
+	_TALK_KEYWAIT		msg_battle_room_kaifuku
+	_PROGRAM			TEMOTI_POKE_POP
+	_PROGRAM			TEMOTI_POKE_PUSH
+	_PROGRAM			BATTLE_TOWER_MONS_SEL
+	_JINGLE				MUS_ME_ASA
+	_JINGLE_WAIT
+	_PROGRAM			PC_KAIFUKU
+
+ev_park_battle04_next_battle:
+	_TALK_YES_NO		msg_battle_room_next_battle
+
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,ev_park_battle04_pause
+	_CASEJUMP			1,ev_park_battle04_continue
+	_CASECANCEL			ev_park_battle04_pause
+
+ev_park_battle04_pause:
+	_TALK_YES_NO		msg_battle_room_pause
+
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,ev_park_battle04_giveup
+	_CASEJUMP			1,ev_park_battle04_pause_act
+	_CASECANCEL			ev_park_battle04_giveup
+
+ev_park_battle04_giveup:
+	_TALK_YES_NO		msg_battle_room_giveup
+
+	_SWITCH				ANSWORK
+	_CASEJUMP			0,ev_park_battle04_next_battle
+	_CASEJUMP			1,ev_park_battle04_giveup_act
+	_CASECANCEL			ev_park_battle04_next_battle
+
+ev_park_battle04_continue:
+	_TALK_CLOSE
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle04_mine_kaifuku_after
+	_OBJ_ANIME_WAIT
+	_SET_OBJ_ANIME		BATTLE_TOWER_PC,anm_battle04_pcwoman_kaifuku_after
+	_OBJ_ANIME_WAIT
+	_JUMP				ev_park_battle04_01_start
+
+ev_park_battle04_7_win:
+	_PROGRAM			TEMOTI_POKE_POP
+	_LDVAL				PARAM0,BATTLE_TOWER_SEQ_NO
+	_LDVAL				PARAM1,BATTLE_TOWER_WIN
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+	_LDVAL				PARAM0,BATTLE_TOWER_ROUND
+	_LDVAL				PARAM1,1
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+	_LDVAL				PARAM0,BATTLE_TOWER_ADD_STAGE
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+	_LDVAL				PARAM0,BATTLE_TOWER_LEVEL_COPY
+	_PROGRAM			BATTLE_TOWER_WORK_SET	
+//ファン企画用のファンポイントをインクリメント
+	_LDVAL				PARAM0,FAN_BATTLE_TOWER_TYPE
+	_PROGRAM			ADD_FAN_POINT
+	_MAP_CHANGE			PARK,PARK_BATTLE01,6,6
+	_STOP_SCRIPT
+
+ev_park_battle04_pause_act:
+	_LDVAL				PARAM0,BATTLE_TOWER_PAUSE
+	_PROGRAM			BATTLE_TOWER_SAVE
+	_SE					SE_SAVE
+	_SE_WAIT
+ev_park_battle04_giveup_act:
+	_FLD_FADE_BLACKOUT
+	_PROGRAM			BATTLE_TOWER_RESET
+
+	_END
+
+//=======================================================================
+//	OBJアニメーションデータ
+//=======================================================================
+
+anm_battle04_mine:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_SITE_R
+	.byte	ACMD_END
+
+anm_battle04_mine_kaifuku:
+	.byte	AC_SITE_D
+	.byte	ACMD_END
+
+anm_battle04_mine_kaifuku_after:
+	.byte	AC_SITE_R
+	.byte	ACMD_END
+
+anm_battle04_trainerD:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_SITE_L
+	.byte	ACMD_END
+
+anm_battle04_trainerU:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+anm_battle04_pcwoman_kaifuku:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+anm_battle04_pcwoman_kaifuku_after:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_SITE_R
+	.byte	ACMD_END

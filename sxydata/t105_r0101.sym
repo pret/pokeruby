@@ -1,0 +1,14 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 6
+#define PCCABLE_01_T105_R0101	1
+#define BOYA2_01_T105_R0101	2
+#define SCHOOLW1_01_T105_R0101	3
+#define CUBEOYAJI_01_T105_R0101	4
+#define INTERVM1_01_T105_R0101	5
+#define ARTIST_01_T105_R0101	6
+
+//Exit ID = 3
+#define T105_R0101_MAT01	0
+#define T105_R0101_MAT02	1
+#define T105_R0101_DOOR01	2

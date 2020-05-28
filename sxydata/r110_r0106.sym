@@ -1,0 +1,19 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 11
+#define TR_CAMPB_05	1
+#define TR_PICNICG_05	2
+#define TR_MOUNT_05	3
+#define CRUSHROCK_01_R110_R0106	4
+#define CRUSHROCK_02_R110_R0106	5
+#define CRUSHROCK_03_R110_R0106	6
+#define CRUSHROCK_04_R110_R0106	7
+#define BALL1_64	8
+#define BALL1_63	9
+#define CRUSHROCK_05_R110_R0106	10
+#define CRUSHROCK_06_R110_R0106	11
+
+//Exit ID = 3
+#define R110_R0106_MAT01	0
+#define R110_R0106_MAT02	1
+#define R110_R0106_DOOR01	2

@@ -1,0 +1,138 @@
+// ●ハジツゲタウン　ソライシ研究所
+
+
+// ●ソライシ博士
+// ●えんとつやまイベント終了後に出現
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p01_t105_r0201
+msg_studym1_01_p01_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,kako2_,a_,a_,tenten_,tenten_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ni_,spc_,da_,ma_,sa_,re_,ta_,ka_,ra_,to_,spc_,i_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	i_,n_,se_,ki_,ga_,spc_,te_,ni_,spc_,ha_,i_,ru_,spc_,ba_,si_,yyo_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	o_,si_,e_,te_,si_,ma_,ttu_,ta_,ra_,spc_,da_,me_,spc_,da_,na_,a_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ri_,yyu_,u_,se_,i_,no_,ta_,ki_,spc_,no_,spc_,i_,n_,se_,ki_
+	.byte	CR_
+	.byte	mo_,u_,spc_,bo_,ku_,no_,spc_,MO_,NO_,ni_,ha_,spc_,na_,ra_,na_,i_,yo_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「いんせき」を持っているときは続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p02_t105_r0201
+msg_studym1_01_p02_t105_r0201:
+	.byte	o_,o_,gyoe_,spc_,e_,e_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,si_,ka_,si_,te_,spc_,mo_,si_,ka_,su_,ru_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,ga_,spc_,ri_,yyu_,u_,se_,i_,no_,ta_,ki_,spc_,ka_,ra_
+	.byte	CR_
+	.byte	mo_,ttu_,te_,i_,ttu_,ta_,spc_,i_,n_,se_,ki_,spc_,de_,su_,ka_,tenten_,tenten_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,bo_,ku_,ni_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,da_,de_,spc_,to_,ha_,spc_,i_,i_,ma_,se_,n_
+	.byte	CR_
+	.byte	ka_,wa_,ri_,ni_,spc_,ko_,no_,spc_,wa_,za_,MA_,SI_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ge_,ma_,su_,ka_,ra_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_studym1_01_p03_t105_r0201:
+// ●「いいえ」→msg_studym1_01_p05_t105_r0201:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p03_t105_r0201
+msg_studym1_01_p03_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,kako2_,ko_,no_,spc_,wa_,za_,MA_,SI_,N_,ha_
+	.byte	CR_
+	.byte	bo_,ku_,no_,spc_,ki_,mo_,ti_,de_,su_
+	.byte	SCROLL_WAIT_
+	.byte	ze_,hi_,spc_,tu_,ka_,ttu_,te_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●わざマシン２７「おんがえし」（No315）入手
+// ●続いて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p04_t105_r0201
+msg_studym1_01_p04_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,kako2_,i_,ya_,bou_,spc_,su_,go_,ku_,spc_,u_,re_,si_,i_,na_
+	.byte	CR_
+	.byte	ko_,re_,de_,spc_,bo_,ku_,no_,spc_,ke_,n_,ki_,yyu_,u_,mo_,spc_,ha_,ka_,do_,ri_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p05_t105_r0201
+msg_studym1_01_p05_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,kako2_,so_,n_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	mo_,no_,su_,go_,ku_,spc_,ga_,ttu_,ka_,ri_,da_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」を選んで再度話しかけたとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_studym1_01_p06_t105_r0201
+msg_studym1_01_p06_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,kako2_,so_,no_,spc_,i_,n_,se_,ki_,tenten_,tenten_
+	.byte	CR_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,bo_,ku_,ni_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,da_,de_,spc_,to_,ha_,spc_,i_,i_,ma_,se_,n_
+	.byte	CR_
+	.byte	ka_,wa_,ri_,ni_,spc_,ko_,no_,spc_,wa_,za_,MA_,SI_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ge_,ma_,su_,ka_,ra_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●ソライシ博士の？？（入口近くに配置）
+// ●えんとつやまイベント終了まで
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_t105_r0201
+msg_woman1_01_p01_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,ha_,ka_,se_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,no_,spc_,hi_,to_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	n1_,n1_,n4_,ba_,n_,spc_,do_,u_,ro_,ni_,spc_,a_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	ri_,yyu_,u_,se_,i_,no_,ta_,ki_,ni_,spc_,i_,ki_,ma_,si_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●えんとつやまイベント終了後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p02_t105_r0201
+msg_woman1_01_p02_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,ha_,ka_,se_,tenten_,tenten_
+	.byte	CR_
+	.byte	a_,n_,na_,ni_,spc_,o_,ti_,ko_,n_,de_,spc_,ka_,wa_,i_,so_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン「おんがえし」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p03_t105_r0201
+msg_woman1_01_p03_t105_r0201:
+	.byte	SO_,RA_,I_,SI_,ha_,ka_,se_,spc_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	a_,n_,na_,ni_,spc_,yo_,ro_,ko_,n_,de_,spc_,ka_,wa_,i_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

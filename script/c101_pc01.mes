@@ -1,0 +1,94 @@
+// ●トウカシティ　ポケモンセンター１Ｆ
+
+
+// ●大男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_01_p01_c101_pc01
+msg_bigman1_01_p01_c101_pc01:
+	.byte	PA_,SO_,KO_,N_,de_,spc_,tu_,ka_,e_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,spc_,a_,zu_,ka_,ri_,spc_,SI_,SU_,TE_,MU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	tu_,ku_,ttu_,ta_,spc_,ya_,tu_,ha_
+	.byte	CR_
+	.byte	su_,ge_,bou_,spc_,ka_,ga_,ku_,ni_,spc_,ku_,wa_,si_,i_,n_,da_,ro_,u_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●帽子男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy1_01_p01_c101_pc01
+msg_capboy1_01_p01_c101_pc01:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,O_,RE_,N_,no_,mi_,spc_,wo_,spc_,ta_,be_,sa_,se_,ta_,ra_
+	.byte	CR_
+	.byte	ta_,i_,ri_,yyo_,ku_,ga_,spc_,ka_,i_,hu_,ku_,spc_,si_,ta_,n_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「きのみ」の名称は今後対応
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c101_pc01
+msg_trainerw1_01_p01_c101_pc01:
+	.byte	PO_,KE_,MO_,N_,ni_,ha_
+	.byte	CR_
+	.byte	i_,ro_,i_,ro_,spc_,TA_,I_,PU_,ga_,spc_,a_,ru_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,spc_,TA_,I_,PU_,ni_,ha_,spc_,a_,i_,si_,yyo_,u_,ga_,spc_,a_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,no_,spc_,to_,ki_
+	.byte	SCROLL_WAIT_
+	.byte	yu_,u_,ri_,spc_,da_,ttu_,ta_,ri_,spc_,hu_,ri_,spc_,da_,ttu_,ta_,ri_,su_,ru_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公が以下のポケモンを持っているとき
+// 　続けて、それぞれのメッセージを表示
+// 　キモリ　　　→msg_trainerw1_01_p02_c101_pc01:
+// 　アチャモ　　→msg_trainerw1_01_p03_c101_pc01:
+// 　ミズゴロウ　→msg_trainerw1_01_p04_c101_pc01:
+
+// ●キモリを持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p02_c101_pc01
+msg_trainerw1_01_p02_c101_pc01:
+	.byte	ta_,to_,e_,ba_,spc_,a_,na_,ta_,no_,spc_,KI_,MO_,RI_,ha_
+	.byte	CR_
+	.byte	ku_,sa_,TA_,I_,PU_,spc_,de_,si_,yyo_
+	.byte	NORMAL_WAIT_
+	.byte	mi_,zu_,TA_,I_,PU_,ya_,spc_,zi_,me_,n_,TA_,I_,PU_,ni_,spc_,tu_,yo_,ku_,te_
+	.byte	CR_
+	.byte	ho_,no_,o_,TA_,I_,PU_,ga_,spc_,ni_,ga_,te_,spc_,na_,no_,yo_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アチャモを持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p03_c101_pc01
+msg_trainerw1_01_p03_c101_pc01:
+	.byte	ta_,to_,e_,ba_,spc_,a_,na_,ta_,no_
+	.byte	CR_
+	.byte	A_,TI_,YYA_,MO_,ha_,spc_,ho_,no_,o_,TA_,I_,PU_,spc_,de_,si_,yyo_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,sa_,TA_,I_,PU_,ya_,spc_,mu_,si_,TA_,I_,PU_,ni_,spc_,tu_,yo_,ku_,te_
+	.byte	CR_
+	.byte	mi_,zu_,TA_,I_,PU_,ga_,spc_,ni_,ga_,te_,spc_,na_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ミズゴロウを持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p04_c101_pc01
+msg_trainerw1_01_p04_c101_pc01:
+	.byte	ta_,to_,e_,ba_,spc_,a_,na_,ta_,no_
+	.byte	CR_
+	.byte	MI_,ZU_,GO_,RO_,U_,ha_,spc_,mi_,zu_,TA_,I_,PU_,spc_,da_,yo_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,no_,o_,TA_,I_,PU_,ni_,spc_,tu_,yo_,ku_,te_
+	.byte	CR_
+	.byte	ku_,sa_,TA_,I_,PU_,ya_,spc_,de_,n_,ki_,TA_,I_,PU_,ga_,spc_,ni_,ga_,te_,spc_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

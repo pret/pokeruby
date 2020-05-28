@@ -1,0 +1,46 @@
+// ●ミナモシティ　ポケモンセンター１Ｆ
+
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_c106_pc01
+msg_boy1_01_p01_c106_pc01:
+	.byte	ko_,no_,spc_,se_,ka_,i_,ni_,ha_
+	.byte	CR_
+	.byte	do_,re_,da_,ke_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ru_,no_,ka_,na_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	i_,tu_,no_,hi_,ka_,spc_,u_,mi_,wo_,spc_,ko_,e_,te_
+	.byte	CR_
+	.byte	to_,o_,i_,spc_,ku_,ni_,no_,spc_,hi_,to_,to_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,ko_,u_,ka_,n_,spc_,si_,ta_,i_,na_,a_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マニア１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_c106_pc01
+msg_freak1_01_p01_c106_pc01:
+	.byte	ti_,ka_,go_,ro_,spc_,hi_,to_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,u_,ba_,ttu_,ta_,ri_
+	.byte	CR_
+	.byte	i_,n_,se_,ki_,wo_,spc_,yo_,ko_,do_,ri_,spc_,si_,ta_,ri_,su_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	ro_,ku_,de_,mo_,na_,i_,spc_,ya_,tu_,ra_,ga_,spc_,i_,ru_,ra_,si_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アジト封鎖（＝トクサネのジムバッジ取得）後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p02_c106_pc01
+msg_freak1_01_p02_c106_pc01:
+	.byte	hi_,to_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,u_,ba_,ttu_,ta_,ri_
+	.byte	CR_
+	.byte	i_,n_,se_,ki_,wo_,spc_,yo_,ko_,do_,ri_,spc_,si_,te_,i_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	ro_,ku_,de_,mo_,na_,i_,spc_,ya_,tu_,ra_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,ka_,go_,ro_,spc_,su_,ga_,ta_,wo_,spc_,mi_,na_,ku_,na_,ttu_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

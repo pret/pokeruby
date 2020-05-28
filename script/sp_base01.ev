@@ -1,0 +1,255 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	sp_base01.ev
+//
+//============================================ 
+
+/* ダミーデータです */
+
+EVENT_DATA_START sp_base01_event_data
+//EVENT_DATA_END /* 特別なスクリプトなし */
+
+OBJ_CTRL_LABEL		base_obj_goods_set
+FLAG_CHANGE_LABEL	base_obj_goods_flag_reset
+SP_SCRIPT_LABEL		sp_script_base_make_hero_move
+INIT_CTRL_LABEL		ev_init_sp_base
+EVENT_DATA_END
+
+ev_init_sp_base:
+	_SET_MAP_EFFECT		MAP_EFFECT_BASE
+	_END
+
+
+/********************************************************************/
+/*						OBJグッズを非表示							*/
+/********************************************************************/
+base_obj_goods_flag_reset:
+	_CALL		base_in_obj_goods_all_reset
+	_PROGRAM	ORUSUBAN_CODE
+	_END
+
+/********************************************************************/
+/*				OGJのグッズを配置する処理の呼び出し					*/
+/********************************************************************/
+base_obj_goods_set:
+	OBJ_CTRL_DATA	WK_SCENE_BASE_GOODS, 0, base_in_obj_goods_init
+	OBJ_CTRL_END
+
+/********************************************************************/
+/*				秘密基地作成時の主人公の移動						*/
+/********************************************************************/
+sp_script_base_make_hero_move:
+	SP_SCRIPT_DATA	WK_SCENE_BASE_MAKE, 0, base_make_main
+	SP_SCRIPT_END
+
+//=========================================================================================
+//										秘密基地
+//=========================================================================================
+
+//-----------------------------------------------
+//		掲示板処理	2001/10/05 by nakahiro
+//-----------------------------------------------
+// 自分の基地の処理
+SCRIPT_LABEL mine_base_board_init
+	_TALK_START
+	_SE				SE_PC_LOGIN
+	_TALKMSG		base_msg_box1
+	_SET_FLD_EFF	61
+	_STOP_SCRIPT
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_SE		SE_SELECT
+	_JUMP	mine_base_board
+	_END
+
+SCRIPT_LABEL mine_base_board
+	_TALKMSG	base_msg_box2
+	_TALK_WAIT
+
+	_IF_FLAGON_JUMP	FE_BASE_ENTRY, mine_base_pc_entry_on
+	_JUMP	mine_base_pc_entry_off
+
+	_END
+
+SCRIPT_LABEL return_mine_base_board
+	_TALK_START
+	_JUMP mine_base_board
+	_END
+
+// 登録したことがある
+SCRIPT_LABEL mine_base_pc_entry_on
+	_SELECT_WINDOW	0, 0, MINEBOARD_MENU01, 0
+
+	_SWITCH	ANSWORK
+	_CASEJUMP	0, base_rearrange		//「もようがえ」
+	_CASEJUMP	1, base_move			//「ひっこし」
+	_CASEJUMP	2, base_entry_list		//「とうろくリスト」
+	_CASEJUMP	3, base_board_end		//「やめる」
+	_CASECANCEL	base_board_end			// キャンセル
+
+	_END
+
+// 登録したことがない
+SCRIPT_LABEL mine_base_pc_entry_off
+	_SELECT_WINDOW	0, 0, MINEBOARD_MENU02, 0
+
+	_SWITCH	ANSWORK
+	_CASEJUMP	0, base_rearrange		//「もようがえ」
+	_CASEJUMP	1, base_move			//「ひっこし」
+	_CASEJUMP	2, base_board_end		//「やめる」
+	_CASECANCEL	base_board_end			// キャンセル
+
+	_END
+
+// 引越し処理
+SCRIPT_LABEL base_move
+
+	//引っ越すかどうか
+	_TALK_YES_NO	base_msg_move
+	_IFVAL_JUMP	ANSWORK, EQ, 0, mine_base_board	//「いいえ」
+
+	_TALK_CLOSE
+	_PROGRAM	BASE_MOVE2
+	_TALK_END
+	_END
+
+// 模様替え処理
+SCRIPT_LABEL base_rearrange
+	_PROGRAM	B_RARNG_CHECK	//グッズがあるか
+//	_TALK_END
+	_END
+
+// 登録リスト表示処理へ
+SCRIPT_LABEL base_entry_list
+	_PROGRAM	B_ENTRY_INIT
+//	_TALK_END
+	_END
+
+
+// 他の人の基地処理
+SCRIPT_LABEL other_base_board
+	_TALK_START
+	_TALKMSG	base_msg_box1
+	_SE			SE_PC_LOGIN
+	_SET_FLD_EFF	61
+	_STOP_SCRIPT
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_SE			SE_SELECT
+	_JUMP	other_base_pc
+	_END
+
+// メニュー選択
+SCRIPT_LABEL other_base_pc
+	_TALKMSG	base_msg_box2
+	_TALK_WAIT
+
+	_SELECT_WINDOW	0, 0, OTHERBOARD_MENU01, 0
+
+	_SWITCH	ANSWORK
+	_CASEJUMP	0, base_entry			//「とうろく」
+	_CASEJUMP	1, base_entry_list		//「とうろくリスト」
+	_CASEJUMP	2, base_entry_list_note	//「とうろくせつめい」
+	_CASEJUMP	3, base_board_end		//「やめる」
+	_CASECANCEL	base_board_end			// キャンセル
+
+	_END
+
+SCRIPT_LABEL return_other_base_pc
+	_TALK_START
+	_JUMP other_base_pc
+	_END
+
+//登録処理
+SCRIPT_LABEL base_entry
+	_PROGRAM	B_ENTRY_CHECK
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_entry_del	//「削除」
+	_IFVAL_JUMP	ANSWORK, EQ, 2, base_entry_max	//「できない」
+
+	_PROGRAM	BASE_ENTRY_NAME
+
+	_TALK_YES_NO	base_msg_entry
+	_IFVAL_JUMP	ANSWORK, EQ, 0, other_base_pc	//「いいえ」
+
+	_EASY_MSG	base_msg_entry4
+	_PROGRAM	B_ENTRY_CHANGE
+	_PROGRAM	BASE_PC_OFF_ANM
+	_TALK_END
+	_END
+
+//登録削除
+SCRIPT_LABEL base_entry_del
+	_TALK_YES_NO	base_msg_entry2
+	_IFVAL_JUMP	ANSWORK, EQ, 0, other_base_pc	//「いいえ」
+
+	_EASY_MSG	base_msg_entry5
+	_PROGRAM	B_ENTRY_CHANGE
+	_PROGRAM	BASE_PC_OFF_ANM
+	_TALK_END
+	_END
+
+//登録できない
+SCRIPT_LABEL base_entry_max
+	_EASY_MSG	base_msg_entry3
+	_PROGRAM	BASE_PC_OFF_ANM
+	_TALK_CLOSE
+	_TALK_END
+	_END
+
+// 登録説明
+SCRIPT_LABEL base_entry_list_note
+	_TALKMSG	base_msg_entry_list_note
+	_TALK_WAIT
+	_JUMP	other_base_pc
+	_END
+
+
+//終了
+SCRIPT_LABEL base_board_end
+	_PROGRAM	BASE_PC_OFF_ANM
+	_TALK_CLOSE
+	_TALK_END
+	_END
+
+//----------------------------------------------
+//	砂の置物
+//----------------------------------------------
+SCRIPT_LABEL snd_obj_goods_script
+	_SET_FLD_EFF	FECODE_SndObjGoods
+	_STOP_SCRIPT
+	_END
+
+//----------------------------------------------
+//	話しかけメッセージ表示グッズ
+//----------------------------------------------
+SCRIPT_LABEL tate_goods_script
+	_PROGRAM	BASE_GOODS_TATE
+
+	_IFVAL_JUMP	ANSWORK, EQ, 0, base_msg_put_tate	// 金の盾・銀の盾
+	_IFVAL_JUMP	ANSWORK, EQ, 1, base_msg_put_TV_00	// テレビ
+	_IFVAL_JUMP	ANSWORK, EQ, 2, base_msg_put_TV_01	// まるいテレビ
+	_IFVAL_JUMP	ANSWORK, EQ, 3, base_msg_put_TV_02	// かわいいテレビ
+
+	_END
+
+// 金の盾・銀の盾
+SCRIPT_LABEL base_msg_put_tate
+	_EASY_MSG	base_msg_tate
+	_END
+
+// テレビ
+SCRIPT_LABEL base_msg_put_TV_00
+	_EASY_MSG	base_msg_TV_00
+	_END
+
+// まるいテレビ
+SCRIPT_LABEL base_msg_put_TV_01
+	_EASY_MSG	base_msg_TV_01
+	_END
+
+// かわいいテレビ
+SCRIPT_LABEL base_msg_put_TV_02
+	_EASY_MSG	base_msg_TV_02
+	_END
+

@@ -1,0 +1,96 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_T103_R0101	3
+#define EXITNUM_T103_R0101	2
+#define POSNUM_T103_R0101	0
+#define BGNUM_T103_R0101	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_middlew1_01_p01_t103_r0101[];
+extern const u8	ev_middlem1_01_p01_t103_r0101[];
+extern const u8	ev_jiguma_01_p01_t103_r0101[];
+
+const evObjData	OBJ_t103_r0101[] =
+{
+	{
+		MIDDLEW1_01_T103_R0101,		//OBJ ID
+		WORKERW1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlew1_01_p01_t103_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		MIDDLEM1_01_T103_R0101,		//OBJ ID
+		MIDDLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0003,		//Ypos
+		0x03,		//Height
+		MV_RIGHT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_middlem1_01_p01_t103_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		JIGUMA_01_T103_R0101,		//OBJ ID
+		JIGUMA,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x3,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_jiguma_01_p01_t103_r0101,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_t103_r0101[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_T103_DOOR01,		//Door ID
+		FIELD_T103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0007,		//Ypos
+		0x00,		//Height
+		FIELD_T103_DOOR01,		//Door ID
+		FIELD_T103,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	t103_r0101_sxy_data =
+{
+OBJNUM_T103_R0101,			// field obj max
+EXITNUM_T103_R0101,		// exit max
+POSNUM_T103_R0101,			// pos event max
+BGNUM_T103_R0101,			// bg event max
+OBJ_t103_r0101,			// field obj data
+EXIT_t103_r0101,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

@@ -1,0 +1,150 @@
+//====================================================================
+//
+//						えんとつ山(藍バージョン)
+//
+//====================================================================
+
+
+
+/********************************************************************/
+//							マツブサ
+/********************************************************************/
+SCRIPT_LABEL	ev_magmaboss_01_p01_cave_d0701
+	_TALK_OBJ_START	//自機の動作終了を待つ
+
+	//すでに会話しているか
+	_IF_FLAGOFF_CALL	FE_MAGMABOSS_01_CAVE_D0701_TALK,ev_magmaboss_01_p02_cave_d0701
+	_IF_FLAGON_CALL		FE_MAGMABOSS_01_CAVE_D0701_TALK,ev_magmaboss_01_p03_cave_d0701
+
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0701,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_FLAG_SET		FE_MAGMABOSS_01_CAVE_D0701_TALK
+	_TALK_OBJ_END
+	_END
+
+//まだ会話していない
+ev_magmaboss_01_p02_cave_d0701:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_cave_d0701r
+#endif
+	_RET
+
+//すでに会話している
+ev_magmaboss_01_p03_cave_d0701:
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_cave_d0701r
+#endif
+	_RET
+
+
+/********************************************************************/
+//							アオギリ
+/********************************************************************/
+SCRIPT_LABEL	ev_aquaboss_01_p01_cave_d0701
+	_TALK_START
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p01_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p01_cave_d0701r
+#endif
+
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0701,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0701,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	_SET_OBJ_ANIME	AQUABOSS_01_CAVE_D0701,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_aquaboss_01_p02_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_magmaboss_01_p02_cave_d0701r
+#endif
+
+	//戦闘へ
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TRAINER_EVENT_FIGHT	AQUABOSS_02,msg_aquaboss_01_p03_cave_d0701s
+	_TALK_KEYWAIT	msg_aquaboss_01_p04_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TRAINER_EVENT_FIGHT	MAGMABOSS_02,msg_magmaboss_01_p03_cave_d0701r
+	_TALK_KEYWAIT	msg_magmaboss_01_p04_cave_d0701r
+#endif
+
+	_TALK_CLOSE
+
+	_TIME_WAIT		30
+
+	_FLD_FADE_BLACKOUT
+	_OBJ_DELETE		AQUABOSS_01_CAVE_D0701
+	_OBJ_DELETE		TR_AQUAM_15
+	_OBJ_DELETE		TR_AQUAM_16
+	_FLAG_SET		FV_AQUA_ALL_CAVE_D0701
+	_FLD_FADE_BLACKIN
+
+	//マグマ団ボス登場
+	_SXY_POS_CHANGE	MAGMABOSS_01_CAVE_D0701,10,12
+	_OBJ_APPEAR		MAGMABOSS_01_CAVE_D0701
+
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_site_r_mboss_01_cave_d0701
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_mboss_01_cave_d0701
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+
+#if ( PM_VERSION == VERSION_SAPPHIRE )
+	_TALK_KEYWAIT	msg_magmaboss_01_p03_cave_d0701s
+#elif ( PM_VERSION == VERSION_RUBY )
+	_TALK_KEYWAIT	msg_aquaboss_01_p03_cave_d0701r
+#endif
+
+	_TALK_CLOSE
+
+	//去っていく
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,case_site_r_mboss_02_cave_d0701
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_mboss_02_cave_d0701
+	_OBJ_DELETE		MAGMABOSS_01_CAVE_D0701
+	_FLAG_SET		FV_MAGMA_ALL_CAVE_D0701
+
+	//えんとつ山イベント終了
+	_FLAG_SET		FE_BOSS_01_CAVE_D0701
+	_FLAG_RESET		FV_SORAISI_01_T105_R0201
+	_FLAG_SET		FV_SORAISI_01_CAVE_D0101
+
+	_TALK_END
+	_END
+
+//登場(左から)
+case_site_r_mboss_01_cave_d0701:
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0701,mboss_01_cave_d0701_anime01
+	_OBJ_ANIME_WAIT
+	_RET
+
+//登場(下から)
+case_site_u_mboss_01_cave_d0701:
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0701,mboss_01_cave_d0701_anime03
+	_OBJ_ANIME_WAIT
+	_RET
+
+//去っていく(左から)
+case_site_r_mboss_02_cave_d0701:
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0701,mboss_01_cave_d0701_anime02
+	_OBJ_ANIME_WAIT
+	_RET
+
+//去っていく(下から)
+case_site_u_mboss_02_cave_d0701:
+	_SET_OBJ_ANIME	MAGMABOSS_01_CAVE_D0701,mboss_01_cave_d0701_anime04
+	_OBJ_ANIME_WAIT
+	_RET
+

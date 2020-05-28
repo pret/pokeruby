@@ -1,0 +1,409 @@
+// ●カイナシティ　海の博物館　１階
+
+
+// ●受付嬢（２人いる、セリフは共通）
+// ●主人公が受付嬢の前に立つとメッセージウインドウが自動で開く
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_c102_r0501
+msg_workerw2_01_p01_c102_r0501:
+	.byte	u_,mi_,no_,spc_,ka_,ga_,ku_,spc_,ha_,ku_,bu_,tu_,ka_,n_,he_
+	.byte	CR_
+	.byte	yo_,u_,ko_,so_,spc_,i_,ra_,ttu_,si_,yya_,i_,ma_,se_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ni_,yyu_,u_,zi_,yyo_,u_,ri_,yyo_,u_,spc_,n5_,n0_,e_,n_,ni_,spc_,na_,ri_,ma_,su_
+	.byte	CR_
+	.byte	ke_,n_,ga_,ku_,spc_,si_,te_,spc_,i_,ki_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」を選択　　→msg_workerw2_01_p02_c102_r0501:
+// ●「はい」を選択、お金が足りない
+// 　　　　　　　　　　→msg_workerw2_01_p03_c102_r0501:
+// ●「はい」を選択、お金が足りない（「デボンのにもつ」を届ける前）
+// 　　　　　　　　　　→msg_workerw2_01_p05_c102_r0501:
+// ●「いいえ」を選択　→msg_workerw2_01_p04_c102_r0501:
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_c102_r0501
+msg_workerw2_01_p02_c102_r0501:
+	.byte	go_,yu_,ttu_,ku_,ri_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、中に入れるようになります
+
+// ●「はい」を選択、お金が足りない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_c102_r0501
+msg_workerw2_01_p03_c102_r0501:
+	.byte	tenten_,tenten_,a_,ra_,spc_,o_,ka_,ne_,ga_,spc_,ta_,ri_,ma_,se_,n_,wa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、一歩押し戻されます
+
+// ●「はい」を選択、お金が足りない（「デボンのにもつ」を届ける前）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p05_c102_r0501
+msg_workerw2_01_p05_c102_r0501:
+	.byte	tenten_,tenten_,a_,ra_,spc_,sa_,ttu_,ki_,no_,spc_,da_,n_,ta_,i_,sa_,n_,hate_
+	.byte	CR_
+	.byte	a_,na_,ta_,da_,ke_,spc_,o_,ku_,re_,ti_,yya_,ttu_,te_,spc_,si_,ka_,ta_,na_,i_,wa_,ne_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,ya_,ku_,spc_,to_,o_,ttu_,ti_,yya_,ttu_,te_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、中に入れるようになります
+
+// ●「いいえ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p04_c102_r0501
+msg_workerw2_01_p04_c102_r0501:
+	.byte	ma_,ta_,spc_,ki_,te_,ku_,da_,sa_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●主人公、一歩押し戻されます
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// ●アクア団イベント
+// （「c102_r0502.msg」のイベント終了後はアクア団は全員消滅する）
+
+// ●アクア団♀１（Ｘ３　Ｙ２　右向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilw1_01_p01_c102_r0501
+msg_evilw1_01_p01_c102_r0501:
+	.byte	mi_,n_,na_,no_,spc_,ta_,me_,ni_
+	.byte	CR_
+	.byte	wa_,re_,wa_,re_,spc_,I_MSG_,STR_ENE_GROUP,da_,n_,ha_,spc_,i_,ru_,no_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団♂１（Ｘ０　Ｙ８　右向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_01_p01_c102_r0501
+msg_evilm1_01_p01_c102_r0501:
+	.byte	ge_,n_,ti_,si_,yyu_,u_,go_,u_,spc_,de_
+	.byte	CR_
+	.byte	ko_,ko_,ni_,spc_,a_,tu_,ma_,ttu_,ta_,no_,ha_,spc_,i_,i_,ke_,do_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ka_,n_,zi_,n_,no_,spc_,RI_,bou_,DA_,bou_,ga_,spc_,ma_,da_,spc_,ko_,na_,i_,n_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団♂１（Ｘ１６　Ｙ７　左向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_02_p01_c102_r0501
+msg_evilm1_02_p01_c102_r0501:
+	.byte	ko_,ko_,ni_,spc_,o_,i_,te_,a_,ru_,spc_,mo_,no_
+	.byte	CR_
+	.byte	ka_,ttu_,pa_,ra_,u_,to_,spc_,mo_,u_,ka_,ru_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団♂１（Ｘ１３　Ｙ３　下向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_03_p01_c102_r0501
+msg_evilm1_03_p01_c102_r0501:
+	.byte	ko_,no_,spc_,ti_,si_,ki_,wo_,spc_,i_,ka_,si_,te_
+	.byte	CR_
+	.byte	wa_,ru_,i_,ko_,to_,spc_,si_,te_,ya_,ru_,ka_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団♂１（Ｘ１８　Ｙ２　上向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_04_p01_c102_r0501
+msg_evilm1_04_p01_c102_r0501:
+	.byte	na_,ka_,ma_,ga_,spc_,KA_,NA_,ZU_,MI_,de_,spc_,DO_,ZI_,ra_,na_,ke_,re_,ba_
+	.byte	CR_
+	.byte	ko_,ko_,ni_,spc_,ko_,na_,ku_,te_,spc_,su_,n_,da_,no_,ni_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団♂１（Ｘ８　Ｙ３　下向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_05_p01_c102_r0501
+msg_evilm1_05_p01_c102_r0501:
+	.byte	sa_,ttu_,ki_,spc_,n5_,n0_,e_,n_,ga_,spc_,na_,ku_,te_
+	.byte	CR_
+	.byte	u_,ke_,tu_,ke_,de_,spc_,su_,go_,i_,spc_,zi_,ka_,n_,spc_,ka_,ka_,ttu_,ta_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// ●通常の客
+// ●アクア団イベント終了後
+// 　主人公がキンセツに到着するとセットされる
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c102_r0501
+msg_trainerw1_01_p01_c102_r0501:
+	.byte	u_,mi_,no_,ko_,to_,spc_,be_,n_,ki_,yyo_,u_,spc_,si_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,ni_,spc_,ya_,ku_,da_,te_,ta_,i_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●マニア１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_freak1_01_p01_c102_r0501
+msg_freak1_01_p01_c102_r0501:
+	.byte	wa_,ta_,ku_,si_,TTU_
+	.byte	CR_
+	.byte	u_,mi_,wo_,spc_,mi_,ru_,to_,spc_,ko_,u_,hu_,n_,spc_,su_,ru_,no_,de_,su_,TTU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,n_,na_,spc_,wa_,ta_,ku_,si_,ni_,spc_,to_,ttu_,te_
+	.byte	CR_
+	.byte	KU_,SU_,NO_,KI_,ka_,n_,ti_,yyo_,u_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ko_,ga_,re_,no_,spc_,hi_,to_,spc_,NA_,N_,BA_,bou_,n1_,spc_,na_,no_,de_,su_,TTU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_c102_r0501
+msg_middlem2_01_p01_c102_r0501:
+	.byte	u_,mi_,ha_,spc_,ha_,te_,si_,na_,ku_,spc_,hi_,ro_,ku_
+	.byte	CR_
+	.byte	do_,ko_,ma_,de_,mo_,spc_,hu_,ka_,i_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,ttu_,to_,spc_,wa_,re_,wa_,re_,ga_,spc_,si_,ra_,na_,i_,spc_,PO_,KE_,MO_,N_,mo_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,spc_,i_,ru_,no_,da_,ro_,u_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●お嬢２（親子なので上記ＯＢＪの近く）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_ojyou2_01_p01_c102_r0501
+msg_ojyou2_01_p01_c102_r0501:
+	.byte	a_,ta_,si_,spc_,u_,mi_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,ho_,si_,i_,no_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,te_,spc_,hi_,n_,ya_,ri_,to_,spc_,si_,te_,te_
+	.byte	CR_
+	.byte	da_,ki_,si_,me_,ta_,ra_,spc_,ki_,mo_,ti_,yo_,sa_,so_,u_,spc_,da_,mo_,no_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団♂１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_06_p01_c102_r0501
+msg_evilm1_06_p01_c102_r0501:
+	.byte	hi_,e_,bou_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	na_,n_,de_,spc_,o_,ma_,e_,spc_,ko_,ko_,ni_,spc_,i_,ru_,n_,da_,yo_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,hate_
+	.byte	CR_
+	.byte	o_,re_,ha_,spc_,o_,ma_,e_,ni_,spc_,KO_,TE_,N_,PA_,N_,ni_,sa_,re_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_ENE_GROUP,da_,n_,spc_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,wo_,spc_,ya_,ru_,ka_,ra_,spc_,yu_,ru_,si_,te_,ku_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン４６「どろぼう」（No334）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_06_p02_c102_r0501
+msg_evilm1_06_p02_c102_r0501:
+	.byte	ku_,so_,bou_,gyoe_,spc_,o_,ma_,e_,no_,spc_,se_,i_,de_
+	.byte	CR_
+	.byte	sa_,ku_,se_,n_,spc_,si_,ttu_,pa_,i_,spc_,si_,ta_,ka_,ra_,spc_,ka_,wa_,ri_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	na_,ni_,ka_,wo_,spc_,nu_,su_,mo_,u_,to_,spc_,si_,te_,ta_,no_,ni_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ku_,so_,bou_,gyoe_,spc_,o_,bo_,e_,te_,ro_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●博物館の外にダッシュで逃げていく
+
+// ●バッグ一杯の時
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_evilm1_06_p03_c102_r0501
+msg_evilm1_06_p03_c102_r0501:
+	.byte	ta_,no_,mu_,ka_,ra_
+	.byte	CR_
+	.byte	na_,n_,to_,ka_,si_,te_,spc_,u_,ke_,to_,ttu_,te_,ku_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●円筒形水槽（下側）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou1_01_p01_c102_r0501
+msg_suisou1_01_p01_c102_r0501:
+	.byte	GA_,RA_,SU_,no_,spc_,na_,ka_,de_,spc_,a_,o_,i_,spc_,mi_,zu_,ga_
+	.byte	CR_
+	.byte	ku_,ru_,ku_,ru_,to_,spc_,ma_,wa_,ttu_,te_,spc_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ko_,re_,ha_,spc_,ka_,ze_,no_,spc_,ti_,ka_,ra_,de_,spc_,zi_,n_,ko_,u_,te_,ki_,ni_
+	.byte	CR_
+	.byte	spc_,u_,zu_,si_,o_,wo_,spc_,o_,ko_,su_,spc_,zi_,ttu_,ke_,n_,spc_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●円筒形水槽（上側）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou1_02_p01_c102_r0501
+msg_suisou1_02_p01_c102_r0501:
+	.byte	GA_,RA_,SU_,no_,spc_,na_,ka_,de_,spc_,a_,ka_,i_,spc_,BO_,bou_,RU_,ga_
+	.byte	CR_
+	.byte	u_,ka_,n_,da_,ri_,spc_,si_,zu_,n_,da_,ri_,spc_,si_,te_,i_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ko_,re_,ha_,spc_,BO_,bou_,RU_,no_,spc_,hu_,ri_,yyo_,ku_,wo_,spc_,ri_,yo_,u_,si_,ta_
+	.byte	CR_
+	.byte	spc_,ta_,ki_,no_,bo_,ri_,no_,spc_,ge_,n_,ri_,no_,spc_,zi_,ttu_,ke_,n_,spc_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●六角形ガラスケース（右側）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou2_01_p01_c102_r0501
+msg_suisou2_01_p01_c102_r0501:
+	.byte	u_,mi_,no_,spc_,so_,ko_,no_,spc_,tu_,ti_,no_,spc_,mi_,ho_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ka_,i_,te_,i_,ni_,ha_,spc_,na_,ga_,i_,spc_,ne_,n_,ge_,tu_,wo_,spc_,ka_,ke_,te_
+	.byte	CR_
+	.byte	spc_,se_,i_,bu_,tu_,no_,spc_,si_,ga_,i_,ga_,spc_,hu_,ri_,tu_,mo_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,ti_,so_,u_,ga_,spc_,ka_,ta_,ti_,spc_,du_,ku_,ra_,re_,te_,spc_,i_,ki_,ma_,su_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ko_,re_,ra_,wo_,spc_,bu_,n_,se_,ki_,spc_,su_,ru_,ko_,to_,de_
+	.byte	CR_
+	.byte	spc_,to_,o_,i_,spc_,mu_,ka_,si_,no_,spc_,ko_,to_,ga_,spc_,wa_,ka_,ru_,no_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●六角形ガラスケース（左側）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou2_02_p01_c102_r0501
+msg_suisou2_02_p01_c102_r0501:
+	.byte	u_,mi_,be_,no_,spc_,su_,na_,no_,spc_,mi_,ho_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ya_,ma_,ka_,ra_,spc_,ka_,wa_,wo_,spc_,tu_,ta_,ttu_,te_,spc_,ki_,ta_,spc_,i_,si_,ha_
+	.byte	CR_
+	.byte	spc_,mi_,zu_,no_,spc_,na_,ka_,de_,spc_,ko_,ro_,ga_,ru_,spc_,u_,ti_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,ku_,da_,ka_,re_,ta_,ri_,spc_,ke_,zu_,re_,ta_,ri_,spc_,si_,te_,i_,ki_,ma_,su_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,so_,re_,ra_,ga_,spc_,ti_,i_,sa_,na_,spc_,tu_,bu_,ni_,spc_,na_,ttu_,te_
+	.byte	CR_
+	.byte	spc_,u_,mi_,be_,no_,spc_,su_,na_,ga_,spc_,de_,ki_,te_,spc_,i_,ku_,no_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●小型の四角い水槽（左上）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou5_01_p01_c102_r0501
+msg_suisou5_01_p01_c102_r0501:
+	.byte	kako_,u_,mi_,no_,spc_,ma_,me_,ti_,si_,ki_,spc_,so_,no_,n1_
+	.byte	CR_
+	.byte	spc_,na_,ze_,spc_,u_,mi_,no_,spc_,mi_,zu_,ha_,spc_,a_,o_,i_,no_,hate_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,hi_,ka_,ri_,ni_,ha_,spc_,i_,ku_,tu_,mo_,no_,spc_,i_,ro_,ga_,spc_,a_,ttu_,te_
+	.byte	CR_
+	.byte	spc_,ho_,to_,n_,do_,no_,spc_,hi_,ka_,ri_,ha_,spc_,mi_,zu_,ni_,spc_,ha_,i_,ru_,to_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,so_,no_,spc_,i_,ro_,ga_,spc_,na_,ku_,na_,ttu_,te_,spc_,i_,ki_,ma_,su_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ke_,re_,do_,spc_,a_,o_,i_,spc_,hi_,ka_,ri_,spc_,da_,ke_,ha_
+	.byte	CR_
+	.byte	spc_,so_,no_,ma_,ma_,no_,spc_,i_,ro_,de_,spc_,no_,ko_,ru_,spc_,ta_,me_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,u_,mi_,ha_,spc_,a_,o_,ku_,spc_,mi_,e_,ru_,no_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●小型の四角い水槽（右上）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou5_02_p01_c102_r0501
+msg_suisou5_02_p01_c102_r0501:
+	.byte	kako_,u_,mi_,no_,spc_,ma_,me_,ti_,si_,ki_,spc_,so_,no_,n2_
+	.byte	CR_
+	.byte	spc_,na_,ze_,spc_,u_,mi_,no_,spc_,mi_,zu_,ha_,spc_,si_,yyo_,ttu_,pa_,i_,no_,hate_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,ka_,i_,su_,i_,spc_,ni_,ha_,spc_,i_,wa_,ka_,ra_,spc_,ni_,zi_,mi_,de_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	spc_,si_,o_,no_,spc_,mo_,to_,ni_,spc_,na_,ru_
+	.byte	CR_
+	.byte	spc_,NA_,TO_,RI_,U_,MU_,I_,O_,N_,spc_,to_,spc_,e_,n_,so_,I_,O_,N_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,to_,i_,u_,spc_,bu_,ttu_,si_,tu_,ga_,spc_,o_,o_,ku_,spc_,hu_,ku_,ma_,re_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,da_,ka_,ra_,spc_,na_,me_,ru_,to_,spc_,si_,yyo_,ttu_,pa_,i_,no_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●小型の四角い水槽（右下）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou5_03_p01_c102_r0501
+msg_suisou5_03_p01_c102_r0501:
+	.byte	kako_,u_,mi_,no_,spc_,ma_,me_,ti_,si_,ki_,spc_,so_,no_,n3_
+	.byte	CR_
+	.byte	spc_,u_,mi_,to_,spc_,ri_,ku_,ha_,spc_,do_,ti_,ra_,ga_,spc_,hi_,ro_,i_,no_,hate_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,da_,i_,ta_,i_,spc_,u_,mi_,ga_,spc_,n7_,n0_,PA_,bou_,SE_,N_,TO_,de_
+	.byte	CR_
+	.byte	spc_,ri_,ku_,ga_,spc_,n3_,n0_,PA_,bou_,SE_,N_,TO_,spc_,ku_,ra_,i_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	spc_,ri_,ku_,ti_,ni_,spc_,ku_,ra_,be_,te_,spc_,u_,mi_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,so_,no_,spc_,n2_,ba_,i_,spc_,i_,zi_,yyo_,u_,mo_,spc_,a_,ru_,no_,de_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●壁からせり出した四角い陳列ケース
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou7_01_p01_c102_r0501
+msg_suisou7_01_p01_c102_r0501:
+	.byte	DE_,KO_,BO_,KO_,ni_,spc_,na_,mi_,u_,ttu_,ta_,spc_,ka_,se_,ki_,ga_,spc_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,u_,mi_,no_,spc_,so_,ko_,ni_,spc_,ta_,ma_,ttu_,ta_,spc_,tu_,ti_,ni_,ha_
+	.byte	CR_
+	.byte	spc_,ka_,i_,su_,i_,ga_,spc_,na_,ga_,re_,ru_,spc_,e_,i_,ki_,yyo_,u_,de_
+	.byte	SCROLL_WAIT_
+	.byte	spc_,na_,mi_,no_,spc_,yo_,u_,na_,spc_,mo_,yo_,u_,ga_,spc_,de_,ki_,ma_,su_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	kako_,so_,re_,ga_,spc_,so_,no_,ma_,ma_,spc_,ka_,se_,ki_,ni_,spc_,na_,ttu_,ta_,mo_,no_,wo_
+	.byte	CR_
+	.byte	spc_,RI_,TTU_,PU_,RU_,MA_,bou_,KU_,to_,spc_,yo_,n_,de_,i_,ma_,su_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドーム型水槽
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_suisou4_01_p01_c102_r0501
+msg_suisou4_01_p01_c102_r0501:
+	.byte	ma_,ru_,i_,spc_,DO_,bou_,MU_,no_,spc_,na_,ka_,de_,spc_,na_,n_,da_,ka_
+	.byte	CR_
+	.byte	yo_,ku_,spc_,wa_,ka_,ra_,na_,i_,spc_,ki_,ka_,i_,ga_,spc_,ma_,wa_,ttu_,te_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	na_,ni_,ka_,no_,spc_,hu_,ka_,sa_,wo_,spc_,si_,ra_,be_,ru_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

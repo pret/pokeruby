@@ -1,0 +1,40 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 34
+#define SEED_01_FIELD_R123	1
+#define SEED_02_FIELD_R123	2
+#define SEED_03_FIELD_R123	3
+#define SEED_04_FIELD_R123	4
+#define SEED_05_FIELD_R123	5
+#define SEED_06_FIELD_R123	6
+#define SEED_07_FIELD_R123	7
+#define TR_ELITEW_04	8
+#define TR_ELITEM_05	9
+#define SEED_12_FIELD_R123	10
+#define SEED_13_FIELD_R123	11
+#define SEED_14_FIELD_R123	12
+#define SEED_15_FIELD_R123	13
+#define SEED_08_FIELD_R123	14
+#define SEED_09_FIELD_R123	15
+#define SEED_10_FIELD_R123	16
+#define SEED_11_FIELD_R123	17
+#define TREE1_01_FIELD_R123	18
+#define TREE1_02_FIELD_R123	19
+#define TREE1_03_FIELD_R123	20
+#define BALL1_32	21
+#define BALL1_33	22
+#define GIRL3_01_FIELD_R123	23
+#define SEED_16_FIELD_R123	24
+#define SEED_17_FIELD_R123	25
+#define SEED_18_FIELD_R123	26
+#define TR_AROMA_04	27
+#define TR_FUTAGO_04_02	28
+#define TR_FUTAGO_04_01	29
+#define TR_ESPM_07	30
+#define TR_ESPW_07	31
+#define TR_OKARUTO_02	32
+#define BALL1_104	33
+#define BALL1_109	34
+
+//Exit ID = 1
+#define FIELD_R123_DOOR02	0

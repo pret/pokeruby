@@ -1,0 +1,356 @@
+
+//=========================================================================
+//
+//		技説明文メッセージ
+//												by matsuda 2002.04.10(水)
+//=========================================================================
+static const u8 waza_setumei0_msg[] = {
+ta_,ku_,sa_,n_,spc_,A_,PI_,bou_,RU_,spc_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei1_msg[] = {
+ko_,no_,spc_,A_,PI_,bou_,RU_,no_,spc_,a_,to_,CR_,
+bi_,ttu_,ku_,ri_,spc_,si_,ya_,su_,ku_,spc_,na_,ttu_,te_,si_,ma_,u_,EOM_,
+};
+
+static const u8 waza_setumei2_msg[] = {
+su_,go_,i_,A_,PI_,bou_,RU_,ni_,spc_,na_,ru_,ga_,spc_,ko_,no_,a_,to_,CR_,
+sa_,i_,go_,ma_,de_,spc_,na_,ni_,mo_,spc_,de_,ki_,na_,ku_,na_,ru_,EOM_,
+};
+
+static const u8 waza_setumei3_msg[] = {
+tu_,du_,ke_,te_,spc_,da_,si_,te_,mo_,spc_,si_,n_,sa_,i_,n_,ni_,CR_,
+a_,ki_,ra_,re_,zu_,ni_,spc_,A_,PI_,bou_,RU_,spc_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei4_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,o_,do_,ka_,sa_,re_,te_,mo_,CR_,
+n1_,do_,spc_,ku_,ra_,i_,ha_,spc_,ga_,ma_,n_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei5_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,o_,do_,ka_,sa_,re_,te_,mo_,CR_,
+ga_,ma_,n_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei6_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,o_,do_,ka_,sa_,re_,te_,mo_,CR_,
+su_,ko_,si_,spc_,ku_,ra_,i_,na_,ra_,spc_,ga_,ma_,n_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei7_msg[] = {
+ko_,no_,spc_,wa_,za_,wo_,spc_,da_,si_,ta_,spc_,a_,to_,ha_,CR_,
+a_,ma_,ri_,spc_,bi_,ttu_,ku_,ri_,spc_,si_,na_,ku_,na_,ru_,EOM_,
+};
+
+static const u8 waza_setumei8_msg[] = {
+zi_,bu_,n_,no_,spc_,ma_,e_,ni_,spc_,A_,PI_,bou_,RU_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ti_,yyo_,ttu_,to_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei9_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,o_,wa_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,ti_,yyo_,ttu_,to_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei10_msg[] = {
+zi_,bu_,n_,no_,spc_,ma_,e_,ni_,spc_,A_,PI_,bou_,RU_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei11_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,o_,wa_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei12_msg[] = {
+zi_,bu_,n_,no_,spc_,ma_,e_,ni_,spc_,A_,PI_,bou_,RU_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei13_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,o_,wa_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei14_msg[] = {
+zi_,bu_,n_,no_,spc_,ma_,e_,ni_,spc_,A_,PI_,bou_,RU_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei15_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,o_,wa_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei16_msg[] = {
+si_,n_,sa_,i_,n_,no_,spc_,ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,he_,no_,CR_,
+ti_,yyu_,u_,mo_,ku_,wo_,spc_,so_,ra_,su_,ko_,to_,ga_,spc_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei17_msg[] = {
+si_,n_,sa_,i_,n_,ni_,spc_,ti_,yyu_,u_,mo_,ku_,spc_,sa_,re_,te_,i_,ru_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,to_,ku_,ni_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei18_msg[] = {
+mi_,n_,na_,no_,spc_,zi_,yya_,ma_,wo_,spc_,si_,ma_,ku_,ttu_,te_,CR_,
+tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,ha_,spc_,sa_,n_,ka_,spc_,si_,na_,i_,EOM_,
+};
+
+static const u8 waza_setumei19_msg[] = {
+o_,na_,zi_,spc_,TA_,I_,PU_,no_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,to_,ku_,ni_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei20_msg[] = {
+ka_,ttu_,ko_,i_,i_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei21_msg[] = {
+u_,tu_,ku_,si_,i_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei22_msg[] = {
+ka_,wa_,i_,i_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei23_msg[] = {
+ka_,si_,ko_,i_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei24_msg[] = {
+ta_,ku_,ma_,si_,i_,spc_,A_,PI_,bou_,RU_,wo_,spc_,si_,ta_,CR_,
+PO_,KE_,MO_,N_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei25_msg[] = {
+ko_,no_,a_,to_,spc_,A_,PI_,bou_,RU_,su_,ru_,spc_,PO_,KE_,MO_,N_,CR_,
+n1_,hi_,ki_,wo_,spc_,ki_,n_,ti_,yyo_,u_,spc_,sa_,se_,ru_,EOM_,
+};
+
+static const u8 waza_setumei26_msg[] = {
+ko_,no_,a_,to_,spc_,A_,PI_,bou_,RU_,su_,ru_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,ki_,n_,ti_,yyo_,u_,spc_,sa_,se_,ru_,EOM_,
+};
+
+static const u8 waza_setumei27_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,o_,wa_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,no_,CR_,
+ti_,yyo_,u_,si_,wo_,spc_,sa_,ge_,ru_,EOM_,
+};
+
+static const u8 waza_setumei28_msg[] = {
+ti_,yyo_,u_,si_,no_,spc_,i_,i_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei29_msg[] = {
+n1_,ba_,n_,spc_,ha_,zi_,me_,ni_,spc_,A_,PI_,bou_,RU_,su_,ru_,to_,CR_,
+A_,PI_,bou_,RU_,ga_,spc_,su_,go_,ku_,spc_,u_,ma_,ku_,i_,ku_,EOM_,
+};
+
+static const u8 waza_setumei30_msg[] = {
+n1_,ba_,n_,spc_,sa_,i_,go_,ni_,spc_,A_,PI_,bou_,RU_,su_,ru_,to_,CR_,
+A_,PI_,bou_,RU_,ga_,spc_,su_,go_,ku_,spc_,u_,ma_,ku_,i_,ku_,EOM_,
+};
+
+static const u8 waza_setumei31_msg[] = {
+so_,re_,ma_,de_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,A_,PI_,bou_,RU_,to_,CR_,
+o_,na_,zi_,ku_,ra_,i_,no_,spc_,A_,PI_,bou_,RU_,ni_,spc_,mi_,se_,ru_,EOM_,
+};
+
+static const u8 waza_setumei32_msg[] = {
+n1_,tu_,ma_,e_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,A_,PI_,bou_,RU_,to_,CR_,
+o_,na_,zi_,ku_,ra_,i_,spc_,u_,ma_,ku_,spc_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei33_msg[] = {
+mi_,n_,na_,no_,spc_,a_,to_,de_,spc_,A_,PI_,bou_,RU_,su_,ru_,ho_,do_,CR_,
+su_,go_,i_,spc_,A_,PI_,bou_,RU_,ni_,spc_,mi_,se_,ra_,re_,ru_,EOM_,
+};
+
+static const u8 waza_setumei34_msg[] = {
+da_,su_,to_,ki_,ni_,spc_,yo_,ttu_,te_,spc_,A_,PI_,bou_,RU_,no_,CR_,
+de_,ki_,gu_,a_,i_,ga_,spc_,i_,ro_,i_,ro_,to_,spc_,ka_,wa_,ru_,EOM_,
+};
+
+static const u8 waza_setumei35_msg[] = {
+n1_,tu_,ma_,e_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,A_,PI_,bou_,RU_,to_,CR_,
+TA_,I_,PU_,ga_,spc_,o_,na_,zi_,na_,ra_,spc_,ki_,ni_,i_,ra_,re_,ru_,EOM_,
+};
+
+static const u8 waza_setumei36_msg[] = {
+n1_,tu_,ma_,e_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,A_,PI_,bou_,RU_,to_,CR_,
+TA_,I_,PU_,ga_,spc_,ti_,ga_,u_,na_,ra_,spc_,ki_,ni_,i_,ra_,re_,ru_,EOM_,
+};
+
+static const u8 waza_setumei37_msg[] = {
+n1_,tu_,ma_,e_,no_,spc_,PO_,KE_,MO_,N_,no_,spc_,A_,PI_,bou_,RU_,no_,CR_,
+u_,ma_,sa_,ni_,spc_,e_,i_,ki_,yyo_,u_,spc_,sa_,re_,ru_,EOM_,
+};
+
+static const u8 waza_setumei38_msg[] = {
+A_,PI_,bou_,RU_,no_,spc_,ti_,yyo_,u_,si_,ga_,spc_,a_,ga_,ru_,CR_,
+ki_,n_,ti_,yyo_,u_,mo_,spc_,si_,ni_,ku_,ku_,na_,ru_,EOM_,
+};
+
+static const u8 waza_setumei39_msg[] = {
+ti_,yyo_,u_,si_,ga_,spc_,i_,i_,to_,ki_,ni_,spc_,da_,su_,to_,CR_,
+A_,PI_,bou_,RU_,ga_,spc_,to_,te_,mo_,spc_,u_,ma_,ku_,i_,ku_,EOM_,
+};
+
+static const u8 waza_setumei40_msg[] = {
+ko_,no_,tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,wo_,CR_,
+ha_,zi_,me_,no_,spc_,ho_,u_,ni_,spc_,da_,su_,ko_,to_,ga_,spc_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei41_msg[] = {
+ko_,no_,tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,wo_,CR_,
+o_,wa_,ri_,no_,spc_,ho_,u_,ni_,spc_,da_,su_,ko_,to_,ga_,spc_,de_,ki_,ru_,EOM_,
+};
+
+static const u8 waza_setumei42_msg[] = {
+ko_,no_,tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,no_,CR_,
+zi_,yyu_,n_,ba_,n_,ga_,spc_,ka_,wa_,ri_,ya_,su_,ku_,spc_,na_,ru_,EOM_,
+};
+
+static const u8 waza_setumei43_msg[] = {
+ko_,no_,tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,no_,CR_,
+zi_,yyu_,n_,ba_,n_,wo_,spc_,me_,ti_,yya_,ku_,ti_,yya_,ni_,spc_,su_,ru_,EOM_,
+};
+
+static const u8 waza_setumei44_msg[] = {
+do_,no_,spc_,KO_,N_,TE_,SU_,TO_,de_,spc_,mi_,se_,te_,mo_,CR_,
+ka_,na_,ra_,zu_,spc_,mo_,ri_,a_,ga_,ru_,spc_,A_,PI_,bou_,RU_,spc_,EOM_,
+};
+
+static const u8 waza_setumei45_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,u_,ma_,ku_,i_,ttu_,ta_,spc_,PO_,KE_,MO_,N_,CR_,
+mi_,n_,na_,wo_,spc_,ka_,na_,ri_,spc_,o_,do_,ro_,ka_,su_,EOM_,
+};
+
+static const u8 waza_setumei46_msg[] = {
+ka_,i_,zi_,yyo_,u_,ga_,spc_,mo_,ri_,a_,ga_,ttu_,te_,i_,ru_,spc_,ho_,do_,CR_,
+A_,PI_,bou_,RU_,ga_,spc_,ki_,ni_,i_,ra_,re_,ru_,EOM_,
+};
+
+static const u8 waza_setumei47_msg[] = {
+ko_,no_,A_,PI_,bou_,RU_,no_,a_,to_,spc_,ka_,i_,zi_,yyo_,u_,ga_,CR_,
+si_,ba_,ra_,ku_,spc_,mo_,ri_,a_,ga_,ra_,na_,ku_,spc_,na_,ru_,EOM_,
+};
+
+
+const u8 *const WazaSetumeiMsgTbl[] = {
+	waza_setumei0_msg,
+	waza_setumei1_msg,
+	waza_setumei2_msg,
+	waza_setumei3_msg,
+	waza_setumei4_msg,
+	waza_setumei5_msg,
+	waza_setumei6_msg,
+	waza_setumei7_msg,
+	waza_setumei8_msg,
+	waza_setumei9_msg,
+	waza_setumei10_msg,
+	waza_setumei11_msg,
+	waza_setumei12_msg,
+	waza_setumei13_msg,
+	waza_setumei14_msg,
+	waza_setumei15_msg,
+	waza_setumei16_msg,
+	waza_setumei17_msg,
+	waza_setumei18_msg,
+	waza_setumei19_msg,
+	waza_setumei20_msg,
+	waza_setumei21_msg,
+	waza_setumei22_msg,
+	waza_setumei23_msg,
+	waza_setumei24_msg,
+	waza_setumei25_msg,
+	waza_setumei26_msg,
+	waza_setumei27_msg,
+	waza_setumei28_msg,
+	waza_setumei29_msg,
+	waza_setumei30_msg,
+	waza_setumei31_msg,
+	waza_setumei32_msg,
+	waza_setumei33_msg,
+	waza_setumei34_msg,
+	waza_setumei35_msg,
+	waza_setumei36_msg,
+	waza_setumei37_msg,
+	waza_setumei38_msg,
+	waza_setumei39_msg,
+	waza_setumei40_msg,
+	waza_setumei41_msg,
+	waza_setumei42_msg,
+	waza_setumei43_msg,
+	waza_setumei44_msg,
+	waza_setumei45_msg,
+	waza_setumei46_msg,
+	waza_setumei47_msg,
+};
+
+
+//=========================================================================
+//	コンボコメントI_MSG_に挿入する技名テーブル
+//=========================================================================
+static const u8 amagoi_msg[] = {a_,ma_,go_,i_,EOM_};
+static const u8 ikari_msg[] = {i_,ka_,ri_,EOM_};
+static const u8 kiaidame_msg[] = {ki_,a_,i_,da_,me_,EOM_};
+static const u8 saiminjyutu_msg[] = {sa_,i_,mi_,n_,zi_,yyu_,tu_,EOM_};
+static const u8 tamagoumi_msg[] = {TA_,MA_,GO_,u_,mi_,EOM_};
+static const u8 tunodetuku_msg[] = {tu_,no_,de_,tu_,ku_,EOM_};
+static const u8 turuginomai_msg[] = {tu_,ru_,gi_,no_,ma_,i_,EOM_};
+static const u8 tekusutya_msg[] = {TE_,KU_,SU_,TI_,YYA_,bou_,EOM_};
+static const u8 nihonbare_msg[] = {ni_,ho_,n_,ba_,re_,EOM_};
+static const u8 nemuru_msg[] = {ne_,mu_,ru_,EOM_};
+static const u8 hasamu_msg[] = {ha_,sa_,mu_,EOM_};
+static const u8 marukunaru_msg[] = {ma_,ru_,ku_,na_,ru_,EOM_};
+static const u8 rockon_msg[] = {RO_,TTU_,KU_,O_,N_,EOM_};
+
+const u8 *const ComboIMSG_Tbl[] = {
+	amagoi_msg,		//ﾀﾞﾐｰ
+	amagoi_msg,
+	ikari_msg,
+	kiaidame_msg,
+	saiminjyutu_msg,
+	tamagoumi_msg,
+	tunodetuku_msg,
+	turuginomai_msg,
+	tekusutya_msg,
+	nihonbare_msg,
+	nemuru_msg,
+	hasamu_msg,
+	marukunaru_msg,
+	rockon_msg,
+};
+
+
+
+
+
+
+
+
+//=========================================================================
+//	技の属性テキスト(かっこいい、かわいい等)
+//=========================================================================
+static const u8 kakkoii_msg[] = {ka_,ttu_,ko_,i_,i_,EOM_,};
+static const u8 utukusii_msg[] = {u_,tu_,ku_,si_,i_,EOM_,};
+static const u8 kawaii_msg[] = {ka_,wa_,i_,i_,EOM_,};
+static const u8 kasikoi_msg[] = {ka_,si_,ko_,i_,EOM_,};
+static const u8 takumasii_msg[] = {ta_,ku_,ma_,si_,i_,EOM_,};
+
+const u8 *const ConTypeMsgTbl[] = {
+	kakkoii_msg,
+	utukusii_msg,
+	kawaii_msg,
+	kasikoi_msg,
+	takumasii_msg,
+};
+

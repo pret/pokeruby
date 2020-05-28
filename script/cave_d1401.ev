@@ -1,0 +1,142 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	cave_d1401.ev
+//
+//============================================ 
+
+
+EVENT_DATA_START	cave_d1401_event_data
+FLAG_CHANGE_LABEL	flag_cave_d1401
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_cave_d1401:
+	@マップ遷移直後はUpdateTimeEventが呼ばれているので
+	@ここではUPDATE_GAME_TIMEは不要
+
+	_PROGRAM			ASASE_TIDE_CHECK
+	_IF_FLAGON_JUMP		SYS_ASASE_TIDE,_high_tide_cave_d1401
+	_JUMP				_low_tide_cave_d1401
+
+_high_tide_cave_d1401:
+	_CHANGE_MAP_SCREEN	MAPSCRNID_R125DUN02_1
+	_END
+
+_low_tide_cave_d1401:
+	_CHANGE_MAP_SCREEN	MAPSCRNID_R125DUN01_1
+	_END
+
+
+/********************************************************************/
+//							おじいさん	
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_cave_d1401
+	_TALK_OBJ_START
+	
+	_UPDATE_GAME_TIME
+
+	//アイテム戻す許可
+	_IF_FLAGON_CALL		SYS_ASASE_ITEM,asase_item_recover
+
+	//「あさせのしお」４つ持っているか
+	_CHECK_ITEM		ITEM_ASASENOSIO,4
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_oldman1_01_p02_cave_d1401
+
+	//「あさせのかいがら」４つ持っているか
+	_CHECK_ITEM		ITEM_ASASENOKAIGARA,4
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_oldman1_01_p02_cave_d1401
+
+	_TALK_YES_NO	msg_oldman1_01_p03_cave_d1401
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,no_oldman1_01_p01_cave_d1401
+
+	//数は足りている-------------------------------------------------------
+
+	//「かいがらのすず」を入手することができるか
+	_ADD_ITEM_CHK	ITEM_KAIGARANOSUZU,1
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,ev_chk_asase_item_num
+
+	//「あさせのしお」「あさせのかいがら」が５つ以上の時は失敗
+	_IFVAL_JUMP		ANSWORK,EQ,2,ev_fail_item_asase
+
+	_TALK_KEYWAIT	msg_oldman1_01_p04_cave_d1401
+
+	_SUB_ITEM		ITEM_ASASENOSIO,4
+	_SUB_ITEM		ITEM_ASASENOKAIGARA,4
+	
+	_ITEM_EVENT		ITEM_KAIGARANOSUZU,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_oldman1_01_p05_cave_d1401
+
+	_FLAG_SET		FH_01
+	_TALK_OBJ_END
+	_END
+
+//「かいがらのすず」を入手することができない場合の分岐
+ev_chk_asase_item_num:
+	_CHECK_ITEM		ITEM_ASASENOSIO,5
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_chk_asase_item_num_02
+	_RET
+
+//「あさせのしお」を５つ以上もっている
+ev_chk_asase_item_num_02:
+	_CHECK_ITEM		ITEM_ASASENOKAIGARA,5
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_chk_asase_item_num_03
+	_RET
+
+//「あさせのしお」「あさせのかいがら」が５つ以上の時は失敗
+ev_chk_asase_item_num_03:
+	_LDVAL			ANSWORK,2
+	_RET
+
+//「あさせのしお」「あさせのかいがら」が５つ以上の時は失敗
+ev_fail_item_asase:
+	_TALK_KEYWAIT	msg_oldman1_01_p07_cave_d1401
+	_TALK_OBJ_END
+	_END
+
+//「かいがらのすず」もらえない
+ev_oldman1_01_p02_cave_d1401:
+	//「あさせのしお」持っているか
+	_CHECK_ITEM		ITEM_ASASENOSIO,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,katahou_asase_item
+
+	//「あさせのかいがら」持っているか
+	_CHECK_ITEM		ITEM_ASASENOKAIGARA,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,katahou_asase_item
+
+	_TALK_KEYWAIT	msg_oldman1_01_p01_cave_d1401
+	_TALK_OBJ_END
+	_END
+
+//片方持っている(材料が足りない)
+katahou_asase_item:
+	_TALK_KEYWAIT	msg_oldman1_01_p02_cave_d1401
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_oldman1_01_p01_cave_d1401:
+	_TALK_KEYWAIT	msg_oldman1_01_p06_cave_d1401
+	_TALK_OBJ_END
+	_END
+
+//アイテム戻す許可
+asase_item_recover:
+	//OBJ復活させる
+	_FLAG_RESET		FV_SIO_01_ASASE
+	_FLAG_RESET		FV_SIO_02_ASASE
+	_FLAG_RESET		FV_SIO_03_ASASE
+	_FLAG_RESET		FV_SIO_04_ASASE
+	_FLAG_RESET		FV_KAI_01_ASASE
+	_FLAG_RESET		FV_KAI_02_ASASE
+	_FLAG_RESET		FV_KAI_03_ASASE
+	_FLAG_RESET		FV_KAI_04_ASASE
+
+	_FLAG_RESET		SYS_ASASE_ITEM
+	_RET
+
+

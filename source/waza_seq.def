@@ -1,0 +1,1509 @@
+
+@======================================================
+@	waza_seq.def
+@======================================================
+
+	.text
+	.code 32
+
+@======================================================
+@	extern宣言
+@======================================================
+
+	.extern		WazaStatusFlag
+	.extern		WinLoseFlag
+
+@======================================================
+@	技の動作シーケンス命令macro
+@======================================================
+
+	.MACRO	INIT_CMD
+DEF_CMD_COUNT	=	0
+	.ENDM
+
+	.MACRO	DEF_CMD	symname
+\symname	=	DEF_CMD_COUNT
+DEF_CMD_COUNT 	=	(DEF_CMD_COUNT + 1)
+	.ENDM
+
+	INIT_CMD
+	DEF_CMD	WS_BADGECHECK
+	DEF_CMD	WS_HITCHECK
+	DEF_CMD	WS_ATTACK_MESSAGE
+	DEF_CMD	WS_PP_DEC
+	DEF_CMD	WS_CRITICAL_CHECK
+	DEF_CMD	WS_DAMAGE_CALC
+	DEF_CMD	WS_TYPE_CHECK
+	DEF_CMD	WS_DAMAGE_LOSS
+	DEF_CMD	WS_DAMAGE_LOSS_ONLY
+	DEF_CMD	WS_WAZA_EFFECT
+	DEF_CMD	WS_WAZA_EFFECT_WAIT
+	DEF_CMD	WS_HP_DEC
+	DEF_CMD	WS_HP_DEC_WAIT
+	DEF_CMD	WS_CRITICAL_MESSAGE
+	DEF_CMD	WS_WAZAKOUKA_SE
+	DEF_CMD	WS_WAZAKOUKA_MESSAGE
+	DEF_CMD	WS_MESSAGE
+	DEF_CMD	WS_ALERT_MESSAGE
+	DEF_CMD	WS_MESSAGE_WAIT
+	DEF_CMD	WS_MESSAGE_TBL
+	DEF_CMD	WS_ALERT_MESSAGE_TBL
+	DEF_CMD	WS_TSUIKA_CHECK
+	DEF_CMD	WS_TSUIKA_DIRECT_ACT
+	DEF_CMD	WS_TSUIKA_INDIRECT_ACT
+	DEF_CMD	WS_SAKUJO
+	DEF_CMD	WS_KIZETSU_CHECK
+	DEF_CMD	WS_KIZETSU
+	DEF_CMD	WS_KIZETSU_WAIT
+	DEF_CMD	WS_CONDITION_CHECK
+	DEF_CMD	WS_CONDITION2_CHECK
+	DEF_CMD	WS_SPEABI_CHECK
+	DEF_CMD	WS_SIDECONDITION_CHECK
+	DEF_CMD	WS_CONDCHG_CHECK
+	DEF_CMD	WS_WAZAKOUKA_CHECK
+	DEF_CMD	WS_CHECK_TYPE
+	DEF_CMD	WS_GET_EXP
+	DEF_CMD	WS_ZENMETSU_CHECK
+	DEF_CMD	WS_LOOPINIT
+	DEF_CMD	WS_LOOPCNT
+	DEF_CMD	WS_LOOP
+	DEF_CMD	WS_JUMP
+	DEF_CMD	WS_IF8
+	DEF_CMD	WS_IF16
+	DEF_CMD	WS_IF32
+	DEF_CMD	WS_IFWEQ
+	DEF_CMD	WS_IFWNE
+	DEF_CMD	WS_SETVALUE
+	DEF_CMD	WS_ADDVALUE
+	DEF_CMD	WS_SUBVALUE
+	DEF_CMD	WS_SETWORK
+	DEF_CMD	WS_SETWORKOFS
+	DEF_CMD	WS_SET8BIT
+	DEF_CMD	WS_SET16BIT
+	DEF_CMD	WS_SET32BIT
+	DEF_CMD	WS_RESET8BIT
+	DEF_CMD	WS_RESET16BIT
+	DEF_CMD	WS_RESET32BIT
+	DEF_CMD	WS_WAIT
+	DEF_CMD	WS_CLIENT_BIT_WAIT
+	DEF_CMD	WS_HP_GAUGE_REDRAW
+	DEF_CMD	WS_SEQRET
+	DEF_CMD	WS_WAZAEND
+	DEF_CMD	WS_SEQEND
+	DEF_CMD	WS_SPEABIEND
+	DEF_CMD	WS_GUARDCHECK
+	DEF_CMD	WS_GOSUB
+	DEF_CMD	WS_MONS_TYPE
+	DEF_CMD	WS_SPEABI_HAVE_HP_CHECK
+	DEF_CMD	WS_ALERTEND
+	DEF_CMD	WS_FIGHT_EFFECT
+	DEF_CMD	WS_FIGHT_EFFECT2
+	DEF_CMD	WS_COND_CHG_WORK_SET
+	DEF_CMD	WS_COND_CHG_BIT_CHECK
+	DEF_CMD	WS_WKC_ACT
+	DEF_CMD	WS_TYPE_CHECK_NO_HIT
+@特殊アクション
+	DEF_CMD WS_MODOSU_EFFECT
+	DEF_CMD WS_APPEAR_EFFECT_INIT
+	DEF_CMD WS_APPEAR_EFFECT
+	DEF_CMD WS_APPEAR_EFFECT_WAIT
+	DEF_CMD WS_RESHUFFLE_CHECK
+	DEF_CMD WS_POKE_RESHUFFLE
+	DEF_CMD WS_POKE_RESHUFFLE_WAIT
+	DEF_CMD WS_POKE_RESHUFFLE_END
+	DEF_CMD WS_TRAINER_APPEAR
+	DEF_CMD WS_SE_PLAY
+	DEF_CMD WS_ME_PLAY
+	DEF_CMD WS_VOICE
+	DEF_CMD WS_END_FIGHT
+	DEF_CMD WS_POKEDELACTOR
+	DEF_CMD WS_WAZAOBOE_CHECK
+	DEF_CMD WS_WAZAWASURE_CHECK
+	DEF_CMD WS_WAZAAKIRAME_CHECK
+	DEF_CMD WS_POKE_BLINK
+	DEF_CMD WS_OKODUKAI_CALC
+	DEF_CMD WS_WAZA_GET
+	DEF_CMD WS_SWITCH_A_D
+	DEF_CMD WS_INC_RECORD
+	DEF_CMD WS_BALL_GAUGE_SET
+	DEF_CMD WS_BALL_GAUGE_OFF
+	DEF_CMD	WS_WAZASEQADRS
+	DEF_CMD	WS_STATUS_EFFECT
+	DEF_CMD	WS_STATUS_EFFECT2
+	DEF_CMD	WS_STATUS_EFFECT_DIRECT
+	DEF_CMD	WS_YES_NO_WINDOW
+	DEF_CMD	WS_SCA_END_SET
+	DEF_CMD	WS_KORAERU_CHECK
+	DEF_CMD	WS_KILLITEM
+	DEF_CMD	WS_RESHUFFLE_NICKNAME
+	DEF_CMD	WS_STATUS_WINDOW
+	DEF_CMD	WS_EXPFLAG_CLEAR
+	DEF_CMD	WS_GET_RESHUFFLE_CLIENT
+	DEF_CMD	WS_VANISH_OFF
+	DEF_CMD	WS_TOKUSYUNO_SET
+	DEF_CMD	WS_OBOEWAZANO_SET
+	DEF_CMD	WS_ESCAPE_CHECK
+	DEF_CMD	WS_POKE_HPMAX_RATE
+	DEF_CMD	WS_POKE_HPDEC_RATE
+	DEF_CMD	WS_STATUS_RECOVER
+	DEF_CMD	WS_SUBROUTINE_CALL
+@技使用シーケンス
+	DEF_CMD	WS_GUARD_SUCCESS_CHECK
+	DEF_CMD	WS_JIBAKU_INIT
+	DEF_CMD	WS_JIBAKU
+	DEF_CMD	WS_JIBAKU_LOOP
+	DEF_CMD	WS_KAIFUKU
+	DEF_CMD	WS_OUMU_CHECK
+	DEF_CMD	WS_AMAGOI
+	DEF_CMD	WS_REFLEC
+	DEF_CMD	WS_YADORIGI
+	DEF_CMD	WS_DAMAGE_CHG
+	DEF_CMD	WS_NEMURU
+	DEF_CMD	WS_NEKODAMASHI
+	DEF_CMD	WS_SAWAGU
+	DEF_CMD	WS_SAWAGU_CHECK
+	DEF_CMD	WS_TAKUWAERU
+	DEF_CMD	WS_HAKIDASU
+	DEF_CMD	WS_NOMIKOMU
+	DEF_CMD	WS_SUITORI
+	DEF_CMD	WS_CONDCHG
+	DEF_CMD	WS_KUROIKIRI
+	DEF_CMD	WS_GAMAN
+	DEF_CMD	WS_ABARERU
+	DEF_CMD	WS_RENZOKU
+	DEF_CMD	WS_RENZOKU_NUM_INIT
+	DEF_CMD	WS_HUKITOBASHI
+	DEF_CMD	WS_TEXTURE
+	DEF_CMD	WS_KOBAN_CHECK
+	DEF_CMD	WS_HIKARINOKABE
+	DEF_CMD	WS_ICHIGEKI
+	DEF_CMD	WS_HPHALF
+	DEF_CMD	WS_SUNAARASHI
+	DEF_CMD	WS_WEATHER_KEEP
+	DEF_CMD	WS_MEROMERO
+	DEF_CMD	WS_CONDITION_GAUGE
+	DEF_CMD	WS_SHIROIKIRI
+	DEF_CMD	WS_KIAIDAME
+	DEF_CMD	WS_HENSHIN
+	DEF_CMD	WS_MIGAWARI
+	DEF_CMD	WS_MONOMANE
+	DEF_CMD	WS_YUBIWOHURU
+	DEF_CMD	WS_CHIKYUUNAGE
+	DEF_CMD	WS_PSYCHOWAVE
+	DEF_CMD	WS_COUNTER
+	DEF_CMD	WS_MIRRORCOAT
+	DEF_CMD	WS_KANASHIBARI
+	DEF_CMD	WS_ENCORE
+	DEF_CMD	WS_ITAMIWAKE
+	DEF_CMD	WS_TEXTURE2
+	DEF_CMD	WS_LOCKON
+	DEF_CMD	WS_SKETCH
+	DEF_CMD	WS_NEGOTO
+	DEF_CMD	WS_MICHIDURE
+	DEF_CMD	WS_MICHIDURE_CHECK
+	DEF_CMD	WS_JITABATA
+	DEF_CMD	WS_URAMI
+	DEF_CMD	WS_IYASHINOSUZU
+	DEF_CMD	WS_NOROI
+	DEF_CMD	WS_MAKIBISHI
+	DEF_CMD	WS_MIYABURU
+	DEF_CMD	WS_HOROBINOUTA
+	DEF_CMD	WS_KOROGARU
+	DEF_CMD	WS_IBARU
+	DEF_CMD	WS_RENZOKUGIRI
+	DEF_CMD	WS_NATSUKI
+	DEF_CMD	WS_PRESENT
+	DEF_CMD	WS_SHINPINOMAMORI		
+	DEF_CMD	WS_MAGNITUDE		
+	DEF_CMD	WS_OIUCHI_CHECK		
+	DEF_CMD	WS_NIHONBARE
+	DEF_CMD	WS_HARADAIKO
+	DEF_CMD	WS_JIKOANJI
+	DEF_CMD	WS_KOUSOKUSPIN
+	DEF_CMD	WS_MARUKUNARU
+	DEF_CMD	WS_WEATHERKAIFUKU
+	DEF_CMD	WS_MEZAMERUPOWER
+	DEF_CMD	WS_JISIN
+	DEF_CMD	WS_MIRAIYOCHI
+	DEF_CMD	WS_HUKURODATAKI
+	DEF_CMD	WS_KIERUTAME
+	DEF_CMD	WS_KIERUTAME_AFTAR
+	DEF_CMD	WS_CHIISAKUNARU
+	DEF_CMD	WS_ARARE
+	DEF_CMD	WS_OKIMIYAGE
+	DEF_CMD	WS_KONOYUBITOMARE
+	DEF_CMD	WS_JUUDEN
+	DEF_CMD	WS_SHIZENNOCHIKARA
+	DEF_CMD	WS_REFLESH
+	DEF_CMD	WS_ICHAMON
+	DEF_CMD	WS_KIAIPUNCH
+	DEF_CMD	WS_CHOUHATSU
+	DEF_CMD	WS_TEDASUKE
+	DEF_CMD	WS_TRICK
+	DEF_CMD	WS_NARIKIRI
+	DEF_CMD	WS_NEGAIGOTO
+	DEF_CMD	WS_NEWOHARU
+	DEF_CMD	WS_REVENGE
+	DEF_CMD	WS_AKUBI
+	DEF_CMD	WS_GAMUSYARA
+	DEF_CMD	WS_HUNKA
+	DEF_CMD	WS_SKILLSWAP
+	DEF_CMD	WS_HUUIN
+	DEF_CMD	WS_ONNEN
+	DEF_CMD	WS_KETAGURI
+	DEF_CMD	WS_NEKONOTE
+	DEF_CMD	WS_MAGICCORT
+	DEF_CMD	WS_YOKODORI
+	DEF_CMD	WS_IKAKU
+	DEF_CMD	WS_SIZENKAIHUKU
+	DEF_CMD	WS_HP_CHECK
+	DEF_CMD	WS_HIMITUNOTIKARA
+	DEF_CMD	WS_MONOHIROI
+	DEF_CMD	WS_TENKIYA
+	DEF_CMD	WS_TENKIYA_CHECK
+	DEF_CMD	WS_ASOBI
+	DEF_CMD	WS_WEATHER_BALL
+	DEF_CMD	WS_RECYCLE
+	DEF_CMD	WS_HOGOSYOKU
+	DEF_CMD	WS_HUKITOBASHI_OIUCHI
+	DEF_CMD	WS_YOKODORI_CLIENT_SET
+	DEF_CMD	WS_KAWARAWARI
+@アイテム使用シーケンス
+	DEF_CMD	WS_BALL_THROW
+	DEF_CMD	WS_ADD_POKE
+	DEF_CMD	WS_ZUKAN_CHECK
+	DEF_CMD	WS_ZUKAN
+	DEF_CMD	WS_NICKNAME
+	DEF_CMD	WS_ITEM_HP_KAIFUKU
+	DEF_CMD	WS_ITEM_CONDITION_RECOVER
+	DEF_CMD	WS_ITEMEND
+	DEF_CMD	WS_GETEND
+
+	.macro	BADGECHECK
+	.byte	WS_BADGECHECK
+	.endm
+
+	.macro	HITCHECK		adrs,wazano
+	.byte	WS_HITCHECK
+	.long	\adrs
+	.short	\wazano
+	.endm
+
+	.macro	ATTACK_MESSAGE
+	.byte	WS_ATTACK_MESSAGE
+	.endm
+
+	.macro	PP_DEC
+	.byte	WS_PP_DEC
+	.endm
+
+	.macro	CRITICAL_CHECK
+	.byte	WS_CRITICAL_CHECK
+	.endm
+
+	.macro	DAMAGE_CALC
+	.byte	WS_DAMAGE_CALC
+	.endm
+
+	.macro	TYPE_CHECK
+	.byte	WS_TYPE_CHECK
+	.endm
+
+	.macro	DAMAGE_LOSS
+	.byte	WS_DAMAGE_LOSS
+	.endm
+
+@みねうちチェックのないもの
+	.macro	DAMAGE_LOSS_ONLY
+	.byte	WS_DAMAGE_LOSS_ONLY
+	.endm
+
+	.macro	WAZA_EFFECT
+	.byte	WS_WAZA_EFFECT
+	.endm
+
+	.macro	WAZA_EFFECT_WAIT
+	.byte	WS_WAZA_EFFECT_WAIT
+	.endm
+
+	.macro	HP_DEC		side
+	.byte	WS_HP_DEC
+	.byte	\side
+	.endm
+
+	.macro	HP_DEC_WAIT		side
+	.byte	WS_HP_DEC_WAIT
+	.byte	\side
+	.endm
+
+	.macro	CRITICAL_MESSAGE
+	.byte	WS_CRITICAL_MESSAGE
+	.endm
+
+	.macro	WAZAKOUKA_SE
+	.byte	WS_WAZAKOUKA_SE
+	.endm
+
+	.macro	WAZAKOUKA_MESSAGE
+	.byte	WS_WAZAKOUKA_MESSAGE
+	.endm
+
+@	.macro	MESSAGE		msg
+@	.byte	WS_MESSAGE
+@	.long	\msg
+@	.endm
+
+	.macro	MESSAGE		msgid
+	.byte	WS_MESSAGE
+	.short	\msgid
+	.endm
+
+	.macro	ALERT_MESSAGE	msgid
+	.byte	WS_ALERT_MESSAGE
+	.short	\msgid
+	.endm
+
+	.macro	MESSAGE_WAIT	wait
+	.byte	WS_MESSAGE_WAIT
+	.short	\wait
+	.endm
+
+@ServerWork[5]にテーブルのインデックスを代入しておく
+	.macro	MESSAGE_TBL	msg
+	.byte	WS_MESSAGE_TBL
+	.long	\msg
+	.endm
+
+@ServerWork[5]にテーブルのインデックスを代入しておく
+	.macro	ALERT_MESSAGE_TBL	msg
+	.byte	WS_ALERT_MESSAGE_TBL
+	.long	\msg
+	.endm
+
+	.macro	TSUIKA_CHECK
+	.byte	WS_TSUIKA_CHECK
+	.endm
+
+@ServerWork[3]に追加するコンディションのインデックスを代入しておく
+	.macro	TSUIKA_DIRECT_ACT
+	.byte	WS_TSUIKA_DIRECT_ACT
+	.endm
+
+@ServerWork[3]に追加するコンディションのインデックスを代入しておく
+	.macro	TSUIKA_INDIRECT_ACT
+	.byte	WS_TSUIKA_INDIRECT_ACT
+	.endm
+
+@ServerWork[3]に削除するコンディションのインデックスを代入しておく
+	.macro	SAKUJO			side
+	.byte	WS_SAKUJO
+	.byte	\side
+	.endm
+
+	.macro	KIZETSU_CHECK	side,flag,adrs
+	.byte	WS_KIZETSU_CHECK
+	.byte	\side
+	.byte	\flag
+	.long	\adrs
+	.endm
+
+	.macro	KIZETSU			side
+	.byte	WS_KIZETSU
+	.byte	\side
+	.endm
+
+	.macro	KIZETSU_WAIT	side
+	.byte	WS_KIZETSU_WAIT
+	.byte	\side
+	.endm
+
+	.macro	CONDITION_CHECK		side,bit,adrs
+	.byte	WS_CONDITION_CHECK
+	.byte	\side
+	.long	\bit
+	.long	\adrs
+	.endm
+
+	.macro	CONDITION2_CHECK	side,bit,adrs
+	.byte	WS_CONDITION2_CHECK
+	.byte	\side
+	.long	\bit
+	.long	\adrs
+	.endm
+
+	.macro	SPEABI_CHECK	side,data,adrs
+	.byte	WS_SPEABI_CHECK
+	.byte	\side
+	.byte	\data
+	.long	\adrs
+	.endm
+
+	.macro	SIDECONDITION_CHECK		side,bit,adrs
+	.byte	WS_SIDECONDITION_CHECK
+	.byte	\side
+	.short	\bit
+	.long	\adrs
+	.endm
+
+	.macro	CONDCHG_CHECK			side,flag,cond,value,adrs
+	.byte	WS_CONDCHG_CHECK
+	.byte	\side
+	.byte	\flag
+	.byte	\cond
+	.byte	\value
+	.long	\adrs
+	.endm
+
+	.macro	WAZAKOUKA_CHECK			side,bit,flag,adrs
+	.byte	WS_WAZAKOUKA_CHECK
+	.byte	\side
+	.long	\bit
+	.byte	\flag
+	.long	\adrs
+	.endm
+
+	.macro	CHECK_TYPE		side,data,adrs
+	.byte	WS_CHECK_TYPE
+	.byte	\side
+	.byte	\data
+	.long	\adrs
+	.endm
+
+	.macro	GET_EXP			side
+	.byte	WS_GET_EXP
+	.byte	\side
+	.endm
+
+	.macro	ZENMETSU_CHECK		adrs
+	.byte	WS_ZENMETSU_CHECK
+	.long	\adrs
+	.endm
+
+	.macro	LOOPINIT
+	.byte	WS_LOOPINIT
+	.endm
+
+	.macro	LOOPCNT	cnt
+	.byte	WS_LOOPCNT
+	.byte	\cnt
+	.endm
+
+	.macro	LOOP	adrs
+	.byte	WS_LOOP
+	.long	\adrs
+	.endm
+
+	.macro	JUMP	adrs
+	.byte	WS_JUMP
+	.long	\adrs
+	.endm
+
+	.macro	IF8		flg,adrs,work,jump
+	.byte	WS_IF8
+	.byte	\flg
+	.long	\adrs
+	.byte	\work
+	.long	\jump
+	.endm
+
+	.macro	IF16	flg,adrs,work,jump
+	.byte	WS_IF16
+	.byte	\flg
+	.long	\adrs
+	.short	\work
+	.long	\jump
+	.endm
+
+	.macro	IF32	flg,adrs,work,jump
+	.byte	WS_IF32
+	.byte	\flg
+	.long	\adrs
+	.long	\work
+	.long	\jump
+	.endm
+
+	.macro	IFWEQ	adrs1,adrs2,size,jump
+	.byte	WS_IFWEQ
+	.long	\adrs1
+	.long	\adrs2
+	.byte	\size
+	.long	\jump
+	.endm
+
+	.macro	IFWNE	adrs1,adrs2,size,jump
+	.byte	WS_IFWNE
+	.long	\adrs1
+	.long	\adrs2
+	.byte	\size
+	.long	\jump
+	.endm
+
+	.macro	SETVALUE	work,data
+	.byte	WS_SETVALUE
+	.long	\work
+	.byte	\data
+	.endm
+
+	.macro	ADDVALUE	work,data
+	.byte	WS_ADDVALUE
+	.long	\work
+	.byte	\data
+	.endm
+
+	.macro	SUBVALUE	work,data
+	.byte	WS_SUBVALUE
+	.long	\work
+	.byte	\data
+	.endm
+
+	.macro	SETWORK		dest,src,size
+	.byte	WS_SETWORK
+	.long	\dest
+	.long	\src
+	.byte	\size
+	.endm
+
+	.macro	SETWORKOFS	dest,src,ofs,size
+	.byte	WS_SETWORKOFS
+	.long	\dest
+	.long	\src
+	.long	\ofs
+	.byte	\size
+	.endm
+
+	.macro	SET8BIT		work,bit
+	.byte	WS_SET8BIT
+	.long	\work
+	.byte	\bit
+	.endm
+
+	.macro	SET16BIT	work,bit
+	.byte	WS_SET16BIT
+	.long	\work
+	.short	\bit
+	.endm
+
+	.macro	SET32BIT	work,bit
+	.byte	WS_SET32BIT
+	.long	\work
+	.long	\bit
+	.endm
+
+	.macro	RESET8BIT	work,bit
+	.byte	WS_RESET8BIT
+	.long	\work
+	.byte	\bit
+	.endm
+
+	.macro	RESET16BIT	work,bit
+	.byte	WS_RESET16BIT
+	.long	\work
+	.short	\bit
+	.endm
+
+	.macro	RESET32BIT	work,bit
+	.byte	WS_RESET32BIT
+	.long	\work
+	.long	\bit
+	.endm
+
+	.macro	WAIT		wait
+	.byte	WS_WAIT
+	.short	\wait
+	.endm
+
+	.macro	CLIENT_BIT_WAIT
+	.byte	WS_CLIENT_BIT_WAIT
+	.endm
+
+	.macro	HP_GAUGE_REDRAW	side
+	.byte	WS_HP_GAUGE_REDRAW
+	.byte	\side
+	.endm
+
+	.macro	SEQRET
+	.byte	WS_SEQRET
+	.endm
+
+	.macro	WAZAEND
+	.byte	WS_WAZAEND
+	.endm
+
+	.macro	SEQEND
+	.byte	WS_SEQEND
+	.endm
+
+	.macro	SPEABIEND
+	.byte	WS_SPEABIEND
+	.endm
+
+	.macro	GUARDCHECK		adrs
+	.byte	WS_GUARDCHECK
+	.long	\adrs
+	.endm
+
+	.macro	GOSUB			adrs
+	.byte	WS_GOSUB
+	.long	\adrs
+	.endm
+
+	.macro	MONS_TYPE		side,type,adrs
+	.byte	WS_MONS_TYPE
+	.byte	\side
+	.byte	\type
+	.long	\adrs
+	.endm
+
+	.macro	SPEABI_HAVE_HP_CHECK		speabi,adrs
+	.byte	WS_SPEABI_HAVE_HP_CHECK
+	.byte	\speabi
+	.long	\adrs
+	.endm
+
+	.macro	ALERTEND
+	.byte	WS_ALERTEND
+	.endm
+
+	.macro	FIGHT_EFFECT			side,fe_no,fe_para
+	.byte	WS_FIGHT_EFFECT
+	.byte	\side
+	.byte	\fe_no
+	.long	\fe_para
+	.endm
+
+	.macro	FIGHT_EFFECT2			side,fe_para1,fe_para2
+	.byte	WS_FIGHT_EFFECT2
+	.byte	\side
+	.long	\fe_para1
+	.long	\fe_para2
+	.endm
+
+	.macro	COND_CHG_WORK_SET
+	.byte	WS_COND_CHG_WORK_SET
+	.endm
+
+	.macro	COND_CHG_BIT_CHECK		side,bit,flag
+	.byte	WS_COND_CHG_BIT_CHECK
+	.byte	\side
+	.byte	\bit
+	.byte	\flag
+	.endm
+
+	.macro	WKC_ACT					flag,no
+	.byte	WS_WKC_ACT
+	.byte	\flag
+	.byte	\no
+	.endm
+
+	.macro	TYPE_CHECK_NO_HIT
+	.byte	WS_TYPE_CHECK_NO_HIT
+	.endm
+
+@特殊アクション
+	.macro	MODOSU_EFFECT
+	.byte	WS_MODOSU_EFFECT
+	.endm
+
+	.macro	APPEAR_EFFECT_INIT	side
+	.byte	WS_APPEAR_EFFECT_INIT
+	.byte	\side
+	.endm
+
+	.macro	APPEAR_EFFECT	side
+	.byte	WS_APPEAR_EFFECT
+	.byte	\side
+	.endm
+
+	.macro	APPEAR_EFFECT_WAIT	side,flag
+	.byte	WS_APPEAR_EFFECT_WAIT
+	.byte	\side
+	.byte	\flag
+	.endm
+
+	.macro	RESHUFFLE_CHECK		side,adrs
+	.byte	WS_RESHUFFLE_CHECK
+	.byte	\side
+	.long	\adrs
+	.endm
+
+	.macro	POKE_RESHUFFLE		side,adrs
+	.byte	WS_POKE_RESHUFFLE
+	.byte	\side
+	.long	\adrs
+	.endm
+
+	.macro	POKE_RESHUFFLE_WAIT	side,flag
+	.byte	WS_POKE_RESHUFFLE_WAIT
+	.byte	\side
+	.byte	\flag
+	.endm
+
+	.macro	POKE_RESHUFFLE_END	side
+	.byte	WS_POKE_RESHUFFLE_END
+	.byte	\side
+	.endm
+
+	.macro	TRAINER_APPEAR		side
+	.byte	WS_TRAINER_APPEAR
+	.byte	\side
+	.endm
+
+	.macro 	SE_PLAY			seno
+	.byte	WS_SE_PLAY
+	.short	\seno
+	.endm
+
+	.macro 	ME_PLAY			meno
+	.byte	WS_ME_PLAY
+	.short	\meno
+	.endm
+
+	.macro	VOICE			side
+	.byte	WS_VOICE
+	.byte	\side
+	.endm
+
+	.macro	END_FIGHT
+	.byte	WS_END_FIGHT
+	.endm
+
+	.macro	POKEDELACTOR	side
+	.byte	WS_POKEDELACTOR
+	.byte	\side
+	.endm
+
+	.macro	WAZAOBOE_CHECK	adrs1,adrs2,flg
+	.byte	WS_WAZAOBOE_CHECK
+	.long	\adrs1
+	.long	\adrs2
+	.byte	\flg
+	.endm
+
+	.macro	WAZAWASURE_CHECK	adrs
+	.byte	WS_WAZAWASURE_CHECK
+	.long	\adrs
+	.endm
+
+	.macro	WAZAAKIRAME_CHECK	adrs
+	.byte	WS_WAZAAKIRAME_CHECK
+	.long	\adrs
+	.endm
+
+
+	.macro	POKE_BLINK			side
+	.byte	WS_POKE_BLINK
+	.byte	\side
+	.endm
+
+	.macro	OKODUKAI_CALC
+	.byte	WS_OKODUKAI_CALC
+	.endm
+
+	.macro	WAZA_GET
+	.byte	WS_WAZA_GET
+	.endm
+
+	.macro	SWITCH_A_D
+	.byte	WS_SWITCH_A_D
+	.endm
+
+	.macro	INC_RECORD		id
+	.byte	WS_INC_RECORD
+	.byte	\id
+	.endm
+
+	.macro	BALL_GAUGE_SET	side
+	.byte	WS_BALL_GAUGE_SET
+	.byte	\side
+	.endm
+
+	.macro	BALL_GAUGE_OFF	side
+	.byte	WS_BALL_GAUGE_OFF
+	.byte	\side
+	.endm
+
+	.macro	WAZASEQADRS		flag
+	.byte	WS_WAZASEQADRS
+	.byte	\flag
+	.endm
+
+	.macro	STATUS_EFFECT	side
+	.byte	WS_STATUS_EFFECT
+	.byte	\side
+	.endm
+
+	.macro	STATUS_EFFECT2	side,condition
+	.byte	WS_STATUS_EFFECT2
+	.byte	\side
+	.long	\condition
+	.endm
+
+	.macro	STATUS_EFFECT_DIRECT	side,condno,condition
+	.byte	WS_STATUS_EFFECT_DIRECT
+	.byte	\side
+	.byte	\condno
+	.long	\condition
+	.endm
+
+@ServerWork[0]がシーケンスナンバーになるので、0初期化しておくこと
+	.macro	YES_NO_WINDOW
+	.byte	WS_YES_NO_WINDOW
+	.endm
+
+	.macro	SCA_END_SET
+	.byte	WS_SCA_END_SET
+	.endm
+
+	.macro	KORAERU_CHECK
+	.byte	WS_KORAERU_CHECK
+	.endm
+
+	.macro	KILLITEM			side
+	.byte	WS_KILLITEM
+	.byte	\side
+	.endm
+
+	.macro	RESHUFFLE_NICKNAME
+	.byte	WS_RESHUFFLE_NICKNAME
+	.endm
+
+	.macro	STATUS_WINDOW
+	.byte	WS_STATUS_WINDOW
+	.endm
+
+	.macro	EXPFLAG_CLEAR
+	.byte	WS_EXPFLAG_CLEAR
+	.endm
+
+	.macro	GET_RESHUFFLE_CLIENT
+	.byte	WS_GET_RESHUFFLE_CLIENT
+	.endm
+
+	.macro	VANISH_OFF			side
+	.byte	WS_VANISH_OFF
+	.byte	\side
+	.endm
+
+	.macro	TOKUSYUNO_SET		side
+	.byte	WS_TOKUSYUNO_SET
+	.endm
+
+	.macro	OBOEWAZANO_SET
+	.byte	WS_OBOEWAZANO_SET
+	.endm
+
+	.macro	ESCAPE_CHECK		adrs
+	.byte	WS_ESCAPE_CHECK
+	.long	\adrs
+	.endm
+
+	.macro	POKE_HPMAX_RATE		side
+	.byte	WS_POKE_HPMAX_RATE
+	.byte	\side
+	.endm
+
+	.macro	POKE_HPDEC_RATE		side
+	.byte	WS_POKE_HPDEC_RATE
+	.byte	\side
+	.endm
+
+	.macro	STATUS_RECOVER
+	.byte	WS_STATUS_RECOVER
+	.endm
+
+	.macro	SUBROUTINE_CALL		side,no
+	.byte	WS_SUBROUTINE_CALL
+	.byte	\side
+	.byte	\no
+	.endm
+
+@技使用シーケンス
+	.macro	GUARD_SUCCESS_CHECK
+	.byte	WS_GUARD_SUCCESS_CHECK
+	.endm
+
+	.macro	JIBAKU_INIT
+	.byte	WS_JIBAKU_INIT
+	.endm
+
+	.macro	JIBAKU
+	.byte	WS_JIBAKU
+	.endm
+
+	.macro	JIBAKU_LOOP		adrs
+	.byte	WS_JIBAKU_LOOP
+	.long	\adrs
+	.endm
+
+	.macro	KAIFUKU			adrs,side
+	.byte	WS_KAIFUKU
+	.long	\adrs
+	.byte	\side
+	.endm
+
+	.macro	OUMU_CHECK
+	.byte	WS_OUMU_CHECK
+	.endm
+
+	.macro	AMAGOI
+	.byte	WS_AMAGOI
+	.endm
+
+	.macro	REFLEC
+	.byte	WS_REFLEC
+	.endm
+
+	.macro	YADORIGI
+	.byte	WS_YADORIGI
+	.endm
+
+@noによってシーケンスが変わる
+@0:プラスマイナス反転
+@1:ダメージを半分にする
+	.macro	DAMAGE_CHG		no
+	.byte	WS_DAMAGE_CHG
+	.byte	\no
+	.endm
+
+	.macro	NEMURU			adrs
+	.byte	WS_NEMURU
+	.long	\adrs
+	.endm
+
+	.macro	NEKODAMASHI		adrs
+	.byte	WS_NEKODAMASHI
+	.long	\adrs
+	.endm
+
+	.macro	SAWAGU
+	.byte	WS_SAWAGU
+	.endm
+
+	.macro	SAWAGU_CHECK	adrs
+	.byte	WS_SAWAGU_CHECK
+	.long	\adrs
+	.endm
+
+	.macro	TAKUWAERU
+	.byte	WS_TAKUWAERU
+	.endm
+
+	.macro	HAKIDASU	adrs
+	.byte	WS_HAKIDASU
+	.long	\adrs
+	.endm
+
+	.macro	NOMIKOMU	adrs
+	.byte	WS_NOMIKOMU
+	.long	\adrs
+	.endm
+
+	.macro	SUITORI
+	.byte	WS_SUITORI
+	.endm
+
+	.macro	CONDCHG		flag,adrs
+	.byte	WS_CONDCHG
+	.byte	\flag
+	.long	\adrs
+	.endm
+
+	.macro	KUROIKIRI
+	.byte	WS_KUROIKIRI
+	.endm
+
+	.macro	GAMAN
+	.byte	WS_GAMAN
+	.endm
+
+	.macro	ABARERU
+	.byte	WS_ABARERU
+	.endm
+
+	.macro	RENZOKU			count
+	.byte	WS_RENZOKU
+	.byte	\count
+	.endm
+
+	.macro	RENZOKU_NUM_INIT
+	.byte	WS_RENZOKU_NUM_INIT
+	.endm
+
+	.macro	HUKITOBASHI		adrs
+	.byte	WS_HUKITOBASHI
+	.long	\adrs
+	.endm
+
+	.macro	TEXTURE			adrs
+	.byte	WS_TEXTURE
+	.long	\adrs
+	.endm
+
+	.macro	KOBAN_CHECK
+	.byte	WS_KOBAN_CHECK
+	.endm
+
+	.macro	HIKARINOKABE
+	.byte	WS_HIKARINOKABE
+	.endm
+
+	.macro	ICHIGEKI		adrs
+	.byte	WS_ICHIGEKI
+	.long	\adrs
+	.endm
+
+	.macro	HPHALF
+	.byte	WS_HPHALF
+	.endm
+
+	.macro	SUNAARASHI
+	.byte	WS_SUNAARASHI
+	.endm
+
+	.macro	WEATHER_KEEP
+	.byte	WS_WEATHER_KEEP
+	.endm
+
+	.macro	MEROMERO		adrs
+	.byte	WS_MEROMERO
+	.long	\adrs
+	.endm
+
+	.macro	CONDITION_GAUGE		side
+	.byte	WS_CONDITION_GAUGE
+	.byte	\side
+	.endm
+
+	.macro	SHIROIKIRI
+	.byte	WS_SHIROIKIRI
+	.endm
+
+	.macro	KIAIDAME
+	.byte	WS_KIAIDAME
+	.endm
+
+	.macro	HENSHIN
+	.byte	WS_HENSHIN
+	.endm
+
+	.macro	MIGAWARI
+	.byte	WS_MIGAWARI
+	.endm
+
+	.macro	MONOMANE		adrs
+	.byte	WS_MONOMANE
+	.long	\adrs
+	.endm
+
+	.macro	YUBIWOHURU
+	.byte	WS_YUBIWOHURU
+	.endm
+
+	.macro	CHIKYUUNAGE
+	.byte	WS_CHIKYUUNAGE
+	.endm
+
+	.macro	PSYCHOWAVE
+	.byte	WS_PSYCHOWAVE
+	.endm
+
+	.macro	COUNTER			adrs
+	.byte	WS_COUNTER
+	.long	\adrs
+	.endm
+
+	.macro	MIRRORCOAT		adrs
+	.byte	WS_MIRRORCOAT
+	.long	\adrs
+	.endm
+
+	.macro	KANASHIBARI		adrs
+	.byte	WS_KANASHIBARI
+	.long	\adrs
+	.endm
+
+	.macro	ENCORE		adrs
+	.byte	WS_ENCORE
+	.long	\adrs
+	.endm
+
+	.macro	ITAMIWAKE		adrs
+	.byte	WS_ITAMIWAKE
+	.long	\adrs
+	.endm
+
+	.macro	TEXTURE2		adrs
+	.byte	WS_TEXTURE2
+	.long	\adrs
+	.endm
+
+	.macro	LOCKON
+	.byte	WS_LOCKON
+	.endm
+
+	.macro	SKETCH			adrs
+	.byte	WS_SKETCH
+	.long	\adrs
+	.endm
+
+	.macro	NEGOTO			adrs
+	.byte	WS_NEGOTO
+	.long	\adrs
+	.endm
+
+	.macro	MICHIDURE
+	.byte	WS_MICHIDURE
+	.endm
+
+	.macro	MICHIDURE_CHECK
+	.byte	WS_MICHIDURE_CHECK
+	.endm
+
+	.macro	JITABATA
+	.byte	WS_JITABATA
+	.endm
+
+	.macro	URAMI			adrs
+	.byte	WS_URAMI
+	.long	\adrs
+	.endm
+
+	.macro	IYASHINOSUZU
+	.byte	WS_IYASHINOSUZU
+	.endm
+
+	.macro	NOROI			adrs
+	.byte	WS_NOROI
+	.long	\adrs
+	.endm
+
+	.macro	MAKIBISHI		adrs
+	.byte	WS_MAKIBISHI
+	.long	\adrs
+	.endm
+
+	.macro	MIYABURU
+	.byte	WS_MIYABURU
+	.endm
+
+	.macro	HOROBINOUTA		adrs
+	.byte	WS_HOROBINOUTA
+	.long	\adrs
+	.endm
+
+	.macro	KOROGARU
+	.byte	WS_KOROGARU
+	.endm
+
+	.macro	IBARU			check,adrs
+	.byte	WS_IBARU
+	.byte	\check
+	.long	\adrs
+	.endm
+
+	.macro	RENZOKUGIRI
+	.byte	WS_RENZOKUGIRI
+	.endm
+
+	.macro	NATSUKI
+	.byte	WS_NATSUKI
+	.endm
+
+	.macro	PRESENT
+	.byte	WS_PRESENT
+	.endm
+
+	.macro	SHINPINOMAMORI		
+	.byte	WS_SHINPINOMAMORI		
+	.endm
+
+	.macro	MAGNITUDE		
+	.byte	WS_MAGNITUDE		
+	.endm
+
+	.macro	OIUCHI_CHECK		adrs
+	.byte	WS_OIUCHI_CHECK
+	.long	\adrs
+	.endm
+
+	.macro	NIHONBARE
+	.byte	WS_NIHONBARE
+	.endm
+
+	.macro	HARADAIKO		adrs
+	.byte	WS_HARADAIKO
+	.long	\adrs
+	.endm
+
+	.macro	JIKOANJI		adrs
+	.byte	WS_JIKOANJI
+	.long	\adrs
+	.endm
+
+	.macro	KOUSOKUSPIN
+	.byte	WS_KOUSOKUSPIN
+	.endm
+
+	.macro	MARUKUNARU
+	.byte	WS_MARUKUNARU
+	.endm
+
+	.macro	WEATHERKAIFUKU		adrs
+	.byte	WS_WEATHERKAIFUKU
+	.long	\adrs
+	.endm
+
+	.macro	MEZAMERUPOWER
+	.byte	WS_MEZAMERUPOWER
+	.endm
+
+	.macro	JISIN
+	.byte	WS_JISIN
+	.endm
+
+	.macro	MIRAIYOCHI			adrs
+	.byte	WS_MIRAIYOCHI
+	.long	\adrs
+	.endm
+
+	.macro	HUKURODATAKI		adrs1,adrs2
+	.byte	WS_HUKURODATAKI
+	.long	\adrs1
+	.long	\adrs2
+	.endm
+
+	.macro	KIERUTAME
+	.byte	WS_KIERUTAME
+	.endm
+
+	.macro	KIERUTAME_AFTAR
+	.byte	WS_KIERUTAME_AFTAR
+	.endm
+
+	.macro	CHIISAKUNARU
+	.byte	WS_CHIISAKUNARU
+	.endm
+
+	.macro	ARARE
+	.byte	WS_ARARE
+	.endm
+
+	.macro	OKIMIYAGE		adrs
+	.byte	WS_OKIMIYAGE
+	.long	\adrs
+	.endm
+
+	.macro	KONOYUBITOMARE
+	.byte	WS_KONOYUBITOMARE
+	.endm
+
+	.macro	JUUDEN
+	.byte	WS_JUUDEN
+	.endm
+
+	.macro	SHIZENNOCHIKARA
+	.byte	WS_SHIZENNOCHIKARA
+	.endm
+
+	.macro	REFLESH			adrs
+	.byte	WS_REFLESH
+	.long	\adrs
+	.endm
+
+	.macro	ICHAMON			adrs
+	.byte	WS_ICHAMON
+	.long	\adrs
+	.endm
+
+	.macro	KIAIPUNCH		adrs
+	.byte	WS_KIAIPUNCH
+	.long	\adrs
+	.endm
+
+	.macro	CHOUHATSU		adrs
+	.byte	WS_CHOUHATSU
+	.long	\adrs
+	.endm
+
+	.macro	TEDASUKE		adrs
+	.byte	WS_TEDASUKE
+	.long	\adrs
+	.endm
+
+	.macro	TRICK			adrs
+	.byte	WS_TRICK
+	.long	\adrs
+	.endm
+
+	.macro	NARIKIRI		adrs
+	.byte	WS_NARIKIRI
+	.long	\adrs
+	.endm
+
+	.macro	NEGAIGOTO		seq,adrs
+	.byte	WS_NEGAIGOTO
+	.byte	\seq
+	.long	\adrs
+	.endm
+
+	.macro	NEWOHARU		adrs
+	.byte	WS_NEWOHARU
+	.long	\adrs
+	.endm
+
+	.macro	REVENGE
+	.byte	WS_REVENGE
+	.endm
+
+	.macro	AKUBI			adrs
+	.byte	WS_AKUBI
+	.long	\adrs
+	.endm
+
+	.macro	GAMUSYARA		adrs
+	.byte	WS_GAMUSYARA
+	.long	\adrs
+	.endm
+
+	.macro	HUNKA
+	.byte	WS_HUNKA
+	.endm
+
+	.macro	SKILLSWAP		adrs
+	.byte	WS_SKILLSWAP
+	.long	\adrs
+	.endm
+
+	.macro	HUUIN		adrs
+	.byte	WS_HUUIN
+	.long	\adrs
+	.endm
+
+	.macro	ONNEN		adrs
+	.byte	WS_ONNEN
+	.long	\adrs
+	.endm
+
+	.macro	KETAGURI
+	.byte	WS_KETAGURI
+	.endm
+
+	.macro	NEKONOTE	adrs
+	.byte	WS_NEKONOTE
+	.long	\adrs
+	.endm
+
+	.macro	MAGICCORT	adrs
+	.byte	WS_MAGICCORT
+	.long	\adrs
+	.endm
+
+	.macro	YOKODORI	adrs
+	.byte	WS_YOKODORI
+	.long	\adrs
+	.endm
+
+	.macro	IKAKU		adrs
+	.byte	WS_IKAKU
+	.long	\adrs
+	.endm
+
+	.macro	SIZENKAIHUKU	side
+	.byte	WS_SIZENKAIHUKU
+	.byte	\side
+	.endm
+
+	.macro	HP_CHECK	side,adrs
+	.byte	WS_HP_CHECK
+	.byte	\side
+	.long	\adrs
+	.endm
+
+	.macro	HIMITUNOTIKARA
+	.byte	WS_HIMITUNOTIKARA
+	.endm
+
+	.macro	MONOHIROI
+	.byte	WS_MONOHIROI
+	.endm
+
+	.macro	TENKIYA
+	.byte	WS_TENKIYA
+	.endm
+
+	.macro	TENKIYA_CHECK
+	.byte	WS_TENKIYA_CHECK
+	.endm
+
+	.macro	ASOBI		adrs
+	.byte	WS_ASOBI
+	.long	\adrs
+	.endm
+
+	.macro	WEATHER_BALL
+	.byte	WS_WEATHER_BALL
+	.endm
+
+	.macro	RECYCLE		adrs
+	.byte	WS_RECYCLE
+	.long	\adrs
+	.endm
+
+	.macro	HOGOSYOKU	adrs
+	.byte	WS_HOGOSYOKU
+	.long	\adrs
+	.endm
+
+	.macro	HUKITOBASHI_OIUCHI		adrs
+	.byte	WS_HUKITOBASHI_OIUCHI
+	.long	\adrs
+	.endm
+
+	.macro	YOKODORI_CLIENT_SET
+	.byte	WS_YOKODORI_CLIENT_SET
+	.endm
+
+	.macro	KAWARAWARI
+	.byte	WS_KAWARAWARI
+	.endm
+
+@アイテム使用シーケンス
+
+	.macro	BALL_THROW
+	.byte	WS_BALL_THROW
+	.endm
+
+	.macro	ADD_POKE
+	.byte	WS_ADD_POKE
+	.endm
+
+	.macro	ZUKAN_CHECK		adrs
+	.byte	WS_ZUKAN_CHECK
+	.long	\adrs
+	.endm
+
+	.macro	ZUKAN
+	.byte	WS_ZUKAN
+	.endm
+
+	.macro	NICKNAME		adrs
+	.byte	WS_NICKNAME
+	.long	\adrs
+	.endm
+
+	.macro	ITEM_HP_KAIFUKU
+	.byte	WS_ITEM_HP_KAIFUKU
+	.endm
+
+	.macro	ITEM_CONDITION_RECOVER
+	.byte	WS_ITEM_CONDITION_RECOVER
+	.endm
+
+	.macro	ITEMEND
+	.byte	WS_ITEMEND
+	.endm
+
+	.macro	GETEND
+	.byte	WS_GETEND
+	.endm
+

@@ -1,0 +1,74 @@
+//=================================================================== 
+//
+//					イベントスクリプトファイル
+//
+//=================================================================== 
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START field_r130_event_data
+FLAG_CHANGE_LABEL	ev_flag_field_r130
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//	※マップ遷移時に一度だけ呼ばれる
+//--------------------------------------------------------------------
+ev_flag_field_r130:
+
+	_FUNC_CALL		ANSWORK,MABOROSHI_CHECK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_maborosi_map_field_r130
+
+_normal_map_field_r130:
+// 壊せる岩、切れる木、押せる岩などを表示しないよう
+// フラグをクリアする
+	_FLAG_SET		FH_OBJ00
+	_FLAG_SET		FH_OBJ01
+	_FLAG_SET		FH_OBJ02
+	_FLAG_SET		FH_OBJ03
+	_FLAG_SET		FH_OBJ04
+	_FLAG_SET		FH_OBJ05
+	_FLAG_SET		FH_OBJ06
+	_FLAG_SET		FH_OBJ07
+	_FLAG_SET		FH_OBJ08
+	_FLAG_SET		FH_OBJ09
+	_FLAG_SET		FH_OBJ10
+	_FLAG_SET		FH_OBJ11
+	_FLAG_SET		FH_OBJ12
+	_FLAG_SET		FH_OBJ13
+	_FLAG_SET		FH_OBJ14
+	_FLAG_SET		FH_OBJ15
+
+	_CHANGE_MAP_SCREEN	MAPSCRNID_ROAD130
+	_END
+
+_maborosi_map_field_r130:
+	_CHANGE_MAP_SCREEN	MAPSCRNID_R130DUN01_1
+	_END
+
+
+/********************************************************************/
+//							トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_15
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_15
+	_TRAINER_DATA2	msg_swimmerm_15_01
+	_TRAINER_DATA3	msg_swimmerm_15_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_15_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_15
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_15
+	_TRAINER_DATA2	msg_swimmerw_15_01
+	_TRAINER_DATA3	msg_swimmerw_15_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_15_03
+	_END
+

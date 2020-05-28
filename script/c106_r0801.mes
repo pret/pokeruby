@@ -1,0 +1,28 @@
+// ●ミナモシティ　民家３（街の東）
+
+
+// ●大男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_02_p01_c106_r0801
+msg_bigman1_02_p01_c106_r0801:
+	.byte	mu_,ni_,yya_,mu_,ni_,yya_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,spc_,ne_,bo_,ke_,te_,spc_,i_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	ko_,re_,wo_,spc_,a_,ge_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン４４「ねむる」（No332）入手処理
+// ●アイテム入手以降
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_bigman1_02_p02_c106_r0801
+msg_bigman1_02_p02_c106_r0801:
+	.byte	mu_,ni_,yya_,mu_,ni_,yya_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,ru_,spc_,ko_,ha_,spc_,so_,da_,tu_,tenten_,tenten_
+	.byte	CR_
+	.byte	ne_,mu_,ttu_,te_,spc_,ta_,i_,ri_,yyo_,ku_,spc_,ka_,i_,hu_,ku_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

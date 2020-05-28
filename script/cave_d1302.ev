@@ -1,0 +1,53 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START cave_d1302_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+
+SCRIPT_LABEL	ev_elitem_11
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEM_11
+	_TRAINER_DATA2	msg_elitem_11_01
+	_TRAINER_DATA3	msg_elitem_11_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitem_11_03
+	_END
+
+SCRIPT_LABEL	ev_elitew_09
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_09
+	_TRAINER_DATA2	msg_elitew_09_01
+	_TRAINER_DATA3	msg_elitew_09_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_09_03
+	_END
+
+SCRIPT_LABEL	ev_elitew_10
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ELITEW_10
+	_TRAINER_DATA2	msg_elitew_10_01
+	_TRAINER_DATA3	msg_elitew_10_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_elitew_10_03
+	_END
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,37 @@
+// Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°
+	.GLOBAL	msg_oyaji_01_p01_marchen
+msg_oyaji_01_p01_marchen:
+	.byte	wa_,si_,spc_,ME_,RU_,HE_,N_,o_,ya_,zi_
+	.byte	CR_
+	.byte	to_,te_,mo_,spc_,i_,i_,spc_,ha_,na_,si_,spc_,su_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,no_,spc_,HA_,NA_,SI_,spc_,ki_,ki_,ta_,i_,hate_
+	.byte	EOM_
+
+
+// Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°
+	.GLOBAL	msg_oyaji_01_p02_marchen
+msg_oyaji_01_p02_marchen:
+	.byte	so_,u_,tenten_
+	.byte	CR_
+	.byte	wa_,si_,spc_,za_,n_,ne_,n_,tenten_
+	.byte	EOM_
+
+
+// Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°
+	.GLOBAL	msg_oyaji_01_p03_marchen
+msg_oyaji_01_p03_marchen:
+	.byte	a_,to_,spc_,o_,mo_,ttu_,ta_,n_,da_,ke_,do_,sa_,tenten_
+	.byte	EOM_
+
+
+// Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°Å°
+	.GLOBAL	msg_oyaji_01_p04_marchen
+msg_oyaji_01_p04_marchen:
+	.byte	so_,no_,gu_,ra_,i_,spc_,ka_,na_,nakag_,nakag_,nakag_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ta_,spc_,ha_,na_,si_,spc_,si_,yo_,u_,ne_,gyoe_
+	.byte	CR_
+	.byte	ba_,i_,ba_,i_,gyoe_
+	.byte	EOM_
+

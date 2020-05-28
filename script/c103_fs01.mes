@@ -1,0 +1,38 @@
+// ●キンセツシティ　フレンドリィショップ
+
+
+// ●老人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman1_01_p01_c103_fs01
+msg_oldman1_01_p01_c103_fs01:
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,ta_,ta_,ka_,ttu_,te_,i_,ru_,to_,ki_
+	.byte	CR_
+	.byte	no_,u_,ri_,yyo_,ku_,wo_,spc_,i_,ti_,zi_,te_,ki_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,ka_,me_,ru_,spc_,do_,u_,gu_,ga_,spc_,a_,ru_,no_,zi_,yya_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ga_,spc_,si_,ttu_,te_,i_,ru_,no_,ha_
+	.byte	CR_
+	.byte	PU_,RA_,SU_,PA_,WA_,bou_
+	.byte	SCROLL_WAIT_
+	.byte	DE_,II_,HU_,EE_,N_,DA_,bou_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,si_,ka_,spc_,ho_,ka_,ni_,mo_,spc_,a_,ttu_,ta_,no_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c103_fs01
+msg_trainerm1_01_p01_c103_fs01:
+	.byte	wa_,za_,wo_,spc_,ku_,ri_,da_,su_,no_,ka_
+	.byte	CR_
+	.byte	so_,re_,to_,mo_,spc_,do_,u_,gu_,wo_,spc_,tu_,ka_,u_,no_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,no_,spc_,ha_,n_,da_,n_,de_
+	.byte	CR_
+	.byte	si_,yyo_,u_,bu_,ga_,spc_,ki_,ma_,ru_,no_,ka_,mo_,spc_,si_,re_,na_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

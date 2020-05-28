@@ -1,0 +1,37 @@
+// ●ニューキンセツ　入口
+
+
+// ●扉（「ちかのカギ」を持っていない）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p01_cave_d1601
+msg_door_01_p01_cave_d1601:
+	.byte	to_,bi_,ra_,ha_,spc_,si_,ma_,ttu_,te_,i_,ru_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ちかのカギ」を持っているときは続けて以下のメッセージ
+
+// ●扉（「ちかのカギ」を持っている）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p02_cave_d1601
+msg_door_01_p02_cave_d1601:
+	.byte	ti_,ka_,no_,KA_,GI_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_door_01_p03_cave_d1601:
+// ●「いいえ」→メッセージ終了
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_door_01_p03_cave_d1601
+msg_door_01_p03_cave_d1601:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	ti_,ka_,no_,KA_,GI_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,bi_,ra_,ha_,spc_,hi_,ra_,i_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

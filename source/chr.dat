@@ -1,0 +1,79 @@
+//‚ª‚ñ‚Î‚è‚â
+const	u8	seikaku00_msg[]={ga_,n_,ba_,ri_,ya_,EOM_};
+//‚³‚Ý‚µ‚ª‚è
+const	u8	seikaku01_msg[]={sa_,mi_,si_,ga_,ri_,EOM_};
+//‚ä‚¤‚©‚ñ
+const	u8	seikaku02_msg[]={yu_,u_,ka_,n_,EOM_};
+//‚¢‚¶‚Á‚Ï‚è
+const	u8	seikaku03_msg[]={i_,zi_,ttu_,pa_,ri_,EOM_};
+//‚â‚ñ‚¿‚á
+const	u8	seikaku04_msg[]={ya_,n_,ti_,yya_,EOM_};
+//‚¸‚Ô‚Æ‚¢
+const	u8	seikaku05_msg[]={zu_,bu_,to_,i_,EOM_};
+//‚·‚È‚¨
+const	u8	seikaku06_msg[]={su_,na_,o_,EOM_};
+//‚Ì‚ñ‚«
+const	u8	seikaku07_msg[]={no_,n_,ki_,EOM_};
+//‚í‚ñ‚Ï‚­
+const	u8	seikaku08_msg[]={wa_,n_,pa_,ku_,EOM_};
+//‚Ì‚¤‚Ä‚ñ‚«
+const	u8	seikaku09_msg[]={no_,u_,te_,n_,ki_,EOM_};
+//‚¨‚­‚Ñ‚å‚¤
+const	u8	seikaku10_msg[]={o_,ku_,bi_,yyo_,u_,EOM_};
+//‚¹‚Á‚©‚¿
+const	u8	seikaku11_msg[]={se_,ttu_,ka_,ti_,EOM_};
+//‚Ü‚¶‚ß
+const	u8	seikaku12_msg[]={ma_,zi_,me_,EOM_};
+//‚æ‚¤‚«
+const	u8	seikaku13_msg[]={yo_,u_,ki_,EOM_};
+//‚Þ‚¶‚á‚«
+const	u8	seikaku14_msg[]={mu_,zi_,yya_,ki_,EOM_};
+//‚Ð‚©‚¦‚ß
+const	u8	seikaku15_msg[]={hi_,ka_,e_,me_,EOM_};
+//‚¨‚Á‚Æ‚è
+const	u8	seikaku16_msg[]={o_,ttu_,to_,ri_,EOM_};
+//‚ê‚¢‚¹‚¢
+const	u8	seikaku17_msg[]={re_,i_,se_,i_,EOM_};
+//‚Ä‚ê‚â
+const	u8	seikaku18_msg[]={te_,re_,ya_,EOM_};
+//‚¤‚Á‚©‚è‚â
+const	u8	seikaku19_msg[]={u_,ttu_,ka_,ri_,ya_,EOM_};
+//‚¨‚¾‚â‚©
+const	u8	seikaku20_msg[]={o_,da_,ya_,ka_,EOM_};
+//‚¨‚Æ‚È‚µ‚¢
+const	u8	seikaku21_msg[]={o_,to_,na_,si_,i_,EOM_};
+//‚È‚Ü‚¢‚«
+const	u8	seikaku22_msg[]={na_,ma_,i_,ki_,EOM_};
+//‚µ‚ñ‚¿‚å‚¤
+const	u8	seikaku23_msg[]={si_,n_,ti_,yyo_,u_,EOM_};
+//‚«‚Ü‚®‚ê
+const	u8	seikaku24_msg[]={ki_,ma_,gu_,re_,EOM_};
+
+const	u8	* const SeikakuMsgTbl[]={
+	seikaku00_msg,
+	seikaku01_msg,
+	seikaku02_msg,
+	seikaku03_msg,
+	seikaku04_msg,
+	seikaku05_msg,
+	seikaku06_msg,
+	seikaku07_msg,
+	seikaku08_msg,
+	seikaku09_msg,
+	seikaku10_msg,
+	seikaku11_msg,
+	seikaku12_msg,
+	seikaku13_msg,
+	seikaku14_msg,
+	seikaku15_msg,
+	seikaku16_msg,
+	seikaku17_msg,
+	seikaku18_msg,
+	seikaku19_msg,
+	seikaku20_msg,
+	seikaku21_msg,
+	seikaku22_msg,
+	seikaku23_msg,
+	seikaku24_msg,
+};
+

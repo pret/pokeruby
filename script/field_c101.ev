@@ -1,0 +1,595 @@
+//====================================================================
+//							field_c101
+//						トウカ・フィールド
+//====================================================================
+
+//--------------------------------------------------------------------
+//				      マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_c101_event_data
+FLAG_CHANGE_LABEL	ev_arrive_flag_set_c101
+SP_SCRIPT_LABEL		scene_field_c101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//到着フラグセット
+ev_arrive_flag_set_c101:
+	_FLAG_SET		SYS_C101_ARRIVE
+
+	//ジム案内位置変更
+	_IFVAL_CALL		WK_SCENE_FIELD_C101,EQ,0,move_stoper_01_field_c101
+
+	//ミツルとポケモン捕まえに行くイベント開始
+	_IFVAL_CALL		WK_SCENE_FIELD_C101,EQ,2,mus_chg_mitsuru_01_field_c101
+	_END
+
+//ジム案内位置変更
+move_stoper_01_field_c101:
+	_SXY_POS_CHANGE		BOY2_01_FIELD_C101,5,11
+	_RET
+
+//曲を連れ歩きにする
+mus_chg_mitsuru_01_field_c101:
+	_BGM_SPECIAL_SET	MUS_TSURETEK
+	_RET
+
+//--------------------------------------------------------------------
+//							SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_field_c101:
+	//ミツルとポケモン捕まえに行くイベント開始
+	SP_SCRIPT_DATA	WK_SCENE_FIELD_C101,2,ev_scene_mitsuru_01_field_c101
+	SP_SCRIPT_END
+
+//ミツルとポケモン捕まえに行くイベント開始
+ev_scene_mitsuru_01_field_c101:
+	_TALK_START
+
+	//とりあえずマップ名表示しない
+	//今だとメッセージを表示する時にぶつかってしまうので
+	_FLAG_SET		CTRL_MAPNAME_HIDE
+
+	_PROGRAM		TEMOTI_POKE_PUSH		//手持ちポケモン退避
+	_PROGRAM		MITSURU_POKE_SET		//ミツルの借りたポケモンセット
+
+	//ミツルとポケモンを捕まえに行く
+	_SET_OBJ_ANIME	MITSURU_01_FIELD_C101,mitsuru_01_field_c101_anime01
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c101_anime02
+	_OBJ_ANIME_WAIT
+	
+	_TALK_KEYWAIT	msg_mitsuru_01_p01_field_r102
+
+	//ここでイベントバトルを呼ぶ
+	_PROGRAM		CAPUTURE_DEMO
+	_STOP_SCRIPT
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p02_field_r102
+
+	//主人公の方を向く
+	_SP_SET_OBJ_ANIME	MITSURU_01_FIELD_C101,turn_l_anime,FIELD,FIELD_C101
+	_SP_OBJ_ANIME_WAIT	FIELD,FIELD_C101,MITSURU_01_FIELD_C101
+
+	_TALK_KEYWAIT	msg_mitsuru_01_p03_field_r102
+	_TALK_CLOSE
+
+	//マップ名表示解除
+	_FLAG_RESET		CTRL_MAPNAME_HIDE
+
+	_LDVAL			WK_SCENE_FIELD_C101,3
+
+	_BGM_NOW_SET	
+
+	//マップ遷移のタイミングでのBGM変更を有効にする
+	_FLAG_RESET		CTRL_BGM_CHANGE
+
+	_PROGRAM		TEMOTI_POKE_POP
+
+	//ジムに戻る
+	_LDVAL			WK_SCENE_C101_R0201,1
+	_MAP_CHANGE		C101,C101_R0201,4,108
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						池を見つめる少年							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy1_01_p01_field_c101
+	_TALK_OBJ_START
+
+	_TALK_KEYWAIT	msg_boy1_01_p01_field_c101
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	BOY1_01_FIELD_C101,default_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ミツルくんの母親							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman2_01_p01_field_c101
+	_EASY_OBJ_MSG	msg_woman2_01_p01_field_c101
+	_END
+
+
+//--------------------------------------------------------------------
+//主人公	ミツルとポケモンを捕まえに行く
+//--------------------------------------------------------------------
+hero_01_field_c101_anime02:	
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ミツル	主人公とポケモンを捕まえに行く
+//--------------------------------------------------------------------
+mitsuru_01_field_c101_anime01:	
+	.byte	AC_WAIT_8
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_U
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_TURN_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						ジム(r0201)の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_c101
+	_EASY_MSG       msg_kanban_01_p01_field_c101
+	_END
+
+
+/********************************************************************/
+/*						町の中央の看板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_02_p01_field_c101
+	_EASY_MSG       msg_kanban_02_p01_field_c101
+	_END
+
+
+/********************************************************************/
+/*							紳士									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_field_c101
+	_EASY_OBJ_MSG	msg_gentlem1_01_p01_field_c101
+	_END
+
+
+/********************************************************************/
+/*						ミツルの家の看板							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_03_p01_field_c101
+	_EASY_MSG       msg_kanban_03_p01_field_c101
+	_END
+
+
+/********************************************************************/
+/*							ポス									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_field_c101_pos01
+	_TALK_START
+	_LDVAL		TMPWK0,0
+	_JUMP		ev_gym_go_field_c101
+	_END
+
+SCRIPT_LABEL	ev_field_c101_pos02
+	_TALK_START
+	_LDVAL		TMPWK0,1
+	_JUMP		ev_gym_go_field_c101
+	_END
+
+SCRIPT_LABEL	ev_field_c101_pos03
+	_TALK_START
+	_LDVAL		TMPWK0,2
+	_JUMP		ev_gym_go_field_c101
+	_END
+
+SCRIPT_LABEL	ev_field_c101_pos04
+	_TALK_START
+	_LDVAL		TMPWK0,3
+	_JUMP		ev_gym_go_field_c101
+	_END
+
+//ジムへつれていく
+ev_gym_go_field_c101:
+	//気づく
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_BGM_SET		MUS_TSURETEK,0
+
+	//「！」
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//ウェイト
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT
+
+	//近づく
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_boy2_01_field_c101
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_boy2_01_field_c101
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_boy2_01_field_c101
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_boy2_01_field_c101
+
+	_TALK_KEYWAIT	msg_boy2_01_p01_field_c101
+	_TALK_CLOSE
+
+	//ジム前に行く
+	_IFVAL_CALL		TMPWK0,EQ,0,case0_boy2_p02_field_c101
+	_IFVAL_CALL		TMPWK0,EQ,1,case1_boy2_p02_field_c101
+	_IFVAL_CALL		TMPWK0,EQ,2,case2_boy2_p02_field_c101
+	_IFVAL_CALL		TMPWK0,EQ,3,case3_boy2_p02_field_c101
+
+	_TALK_KEYWAIT	msg_boy2_01_p02_field_c101
+
+	//看板の方を向く
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,turn_r_anime
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_KEYWAIT	msg_boy2_01_p03_field_c101
+	_TALK_CLOSE
+
+	//元の位置に戻す
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime10
+	_OBJ_ANIME_WAIT
+
+	_BGM_NOW_SET
+	_TALK_END
+	_END
+
+//pos01
+case0_boy2_01_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime02
+	_OBJ_ANIME_WAIT
+
+	//少年の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//pos02
+case1_boy2_01_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime03
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//pos03
+case2_boy2_01_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime04
+	_OBJ_ANIME_WAIT
+
+	//少年の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//pos04
+case3_boy2_01_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime05
+	_OBJ_ANIME_WAIT
+
+	//少年の方を向く
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//ジムの前に行く
+//pos01
+case0_boy2_p02_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime06
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c101_anime30
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//pos02
+case1_boy2_p02_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime07
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c101_anime31
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//pos03
+case2_boy2_p02_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime08
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c101_anime32
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//pos04
+case3_boy2_p02_field_c101:
+	_SET_OBJ_ANIME	BOY2_01_FIELD_C101,boy2_01_field_c101_anime09
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_field_c101_anime33
+	_OBJ_ANIME_WAIT
+
+	_RET
+
+//--------------------------------------------------------------------
+//ストッパー	ウェイト
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	近づく(pos01)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime02:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	近づく(pos02)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime03:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	近づく(pos03)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime04:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	近づく(pos04)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime05:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_D
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	ジム前に行く(pos01)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime06:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	ジム前に行く(pos02)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime07:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	ジム前に行く(pos03)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime08:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	ジム前に行く(pos04)
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime09:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_TURN_U
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//ストッパー	元の位置に戻す
+//--------------------------------------------------------------------
+boy2_01_field_c101_anime10:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	AC_WALK_L_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ジム前に行く(pos01)
+//--------------------------------------------------------------------
+hero_01_field_c101_anime30:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ジム前に行く(pos02)
+//--------------------------------------------------------------------
+hero_01_field_c101_anime31:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ジム前に行く(pos03)
+//--------------------------------------------------------------------
+hero_01_field_c101_anime32:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	ジム前に行く(pos04)
+//--------------------------------------------------------------------
+hero_01_field_c101_anime33:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								少年								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boy2_01_p01_field_c101
+	_EASY_OBJ_MSG	msg_boy2_01_p01_field_c101
+	_END
+
+

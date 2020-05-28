@@ -1,0 +1,32 @@
+
+//バトルタワーシーケンスナンバー
+#define	BATTLE_TOWER_NO_CHALLENGE	0		//バトルタワーに未挑戦
+#define	BATTLE_TOWER_CHALLENGE		1		//バトルタワーに挑戦中
+#define	BATTLE_TOWER_PAUSE			2		//バトルタワー一時中断
+#define	BATTLE_TOWER_CONTINUE		3		//バトルタワーで連勝中
+#define	BATTLE_TOWER_WIN			4		//バトルタワーで勝ち
+#define	BATTLE_TOWER_LOSE			5		//バトルタワーで負け
+#define	BATTLE_TOWER_NO_ITEM_GET	6		//バトルタワーで勝ったけど道具がいっぱいで
+											//商品がもらえなかった
+
+//BattleTowerWorkSet用のIDNo
+#define	BATTLE_TOWER_SEQ_NO				0
+#define	BATTLE_TOWER_LEVEL				1	//バトルタワーのレベル
+#define	BATTLE_TOWER_ROUND				2	//今何人目？
+#define	BATTLE_TOWER_STAGE				3	//今何周目？
+#define	BATTLE_TOWER_TRAINERNO			4	//バトルタワートレーナーナンバー
+#define	BATTLE_TOWER_SELECTPOKE			5	//選択したポケモンの位置
+#define	BATTLE_TOWER_ADD_ROUND			6	//今何人目？
+#define	BATTLE_TOWER_ADD_STAGE			7	//今何周目？
+#define	BATTLE_TOWER_SAVED				8	//セーブ済み？
+#define	BATTLE_TOWER_TOTAL_ROUND		9	//通算何人目？
+#define	BATTLE_TOWER_RENSHOU_SET		10	//連勝記録をCNT_TOWER_RENSOUにSet
+#define	BATTLE_TOWER_CHALLENGE_INIT		11	//ステージ、ラウンドを初期化
+#define	BATTLE_TOWER_SEQNO_POP			12	//退避しておいたSeqNoのPOP
+#define	BATTLE_TOWER_RENSHOU_NOW_SET	13	//現在or前回の連勝数をストック
+#define	BATTLE_TOWER_LEVEL_COPY			14	//インタービュー用のLevelワークにコピー
+
+//BattleEventFight用のナンバー
+#define	BEF_BATTLE_TOWER			0	//バトルタワー戦闘
+#define	BEF_ORUSUBAN				1	//お留守番対戦
+#define	BEF_CARD_E					2	//カードｅ対戦

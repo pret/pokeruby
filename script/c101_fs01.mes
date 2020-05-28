@@ -1,0 +1,46 @@
+// ●トウカシティ　フレンドリィショップ
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c101_fs01
+msg_woman1_01_p01_c101_fs01:
+	.byte	i_,ma_,ha_,spc_,yo_,wa_,i_,spc_,PO_,KE_,MO_,N_,de_,mo_
+	.byte	CR_
+	.byte	so_,da_,te_,te_,a_,ge_,re_,ba_,spc_,ki_,ttu_,to_,spc_,tu_,yo_,ku_,na_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,i_,zi_,spc_,na_,no_,ha_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,he_,no_,spc_,a_,i_,zi_,yyo_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少年１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy1_01_p01_c101_fs01
+msg_boy1_01_p01_c101_fs01:
+	.byte	mu_,si_,yo_,ke_,SU_,PU_,RE_,bou_,spc_,tu_,ka_,ttu_,te_,ru_,hate_
+	.byte	CR_
+	.byte	tu_,ka_,u_,to_,spc_,PO_,KE_,MO_,N_,ga_,spc_,yo_,ttu_,te_,ko_,na_,i_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	i_,so_,gu_,to_,ki_,spc_,be_,n_,ri_,spc_,na_,n_,da_,ze_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem1_01_p01_c101_fs01
+msg_middlem1_01_p01_c101_fs01:
+	.byte	ki_,mi_,spc_,do_,ku_,ke_,si_,spc_,mo_,ttu_,te_,ru_,ka_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,do_,ku_,wo_,spc_,ku_,ra_,ttu_,ta_,ma_,ma_
+	.byte	CR_
+	.byte	a_,ru_,i_,te_,i_,ru_,to_,spc_,ta_,i_,ri_,yyo_,ku_,spc_,na_,ku_,na_,ttu_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ta_,o_,re_,ti_,yya_,u_,ka_,ra_,spc_,mo_,ttu_,te_,o_,ku_,to_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+

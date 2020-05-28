@@ -1,0 +1,202 @@
+// ●簡易会話・自己紹介エントリーの人
+// ●初めての話しかけ
+// （もしくは、自己紹介エントリーをまだした事ない時の話しかけ）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p01_introduce
+msg_youngm1_01_p01_introduce:
+	.byte	ko_,n_,ni_,ti_,ha_
+	.byte	CR_
+	.byte	e_,ga_,o_,no_,spc_,su_,te_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,sa_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,PO_,KE_,MO_,N_,TO_,RE_,bou_,NA_,bou_,sa_,n_,spc_,ta_,ti_,no_
+	.byte	CR_
+	.byte	PU_,RO_,HU_,II_,bou_,RU_,wo_,spc_,a_,tu_,me_,ru_,no_,ga_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyu_,mi_,spc_,na_,n_,da_,ke_,do_,tenten_,tenten_
+	.byte	EOM_
+
+
+// ●説明を聞いた後は、ここに戻る
+	.GLOBAL	msg_youngm1_01_p10_introduce
+msg_youngm1_01_p10_introduce:
+	.byte	do_,u_,ka_,na_,hate_,spc_,ki_,mi_,no_,spc_,PU_,RO_,HU_,II_,bou_,RU_
+	.byte	CR_
+	.byte	bo_,ku_,ni_,spc_,o_,si_,e_,te_,spc_,mo_,ra_,e_,na_,i_,ka_,na_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ／せつめいをきく」の選択。
+// ●「はい」　の場合　→☆「はい１」のメッセージへ
+// ●「いいえ」の場合　→☆「いいえ１」のメッセージへ
+
+// ☆「せつめいをきく」のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p09_introduce
+msg_youngm1_01_p09_introduce:
+	.byte	PU_,RO_,HU_,II_,bou_,RU_,ha_,spc_,su_,ki_,na_,spc_,ko_,to_,ba_,wo_
+	.byte	CR_
+	.byte	n4_,tu_,spc_,ku_,mi_,a_,wa_,se_,te_,spc_,tu_,ku_,ru_,n_,da_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ka_,ra_,spc_,bo_,ku_,ga_
+	.byte	CR_
+	.byte	te_,ki_,to_,u_,na_,spc_,n4_,tu_,no_,spc_,ko_,to_,ba_,de_,spc_,tu_,ku_,ttu_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	PU_,RO_,HU_,II_,bou_,RU_,wo_,spc_,mi_,se_,ru_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,so_,no_,spc_,ko_,to_,ba_,wo_
+	.byte	CR_
+	.byte	su_,ki_,na_,mo_,no_,ni_,spc_,i_,re_,ka_,e_,te_
+	.byte	SCROLL_WAIT_
+	.byte	ki_,mi_,da_,ke_,no_,spc_,PU_,RO_,HU_,II_,bou_,RU_,ni_,spc_,si_,te_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	e_,ra_,be_,ru_,spc_,ko_,to_,ba_,ha_
+	.byte	CR_
+	.byte	su_,go_,ku_,spc_,ta_,ku_,sa_,n_,spc_,a_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	GU_,RU_,bou_,PU_,ni_,spc_,wa_,ka_,re_,te_,spc_,i_,ru_,n_,da_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,to_,ka_,spc_,se_,i_,ka_,tu_,spc_,to_,ka_,spc_,si_,yyu_,mi_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	to_,i_,u_,spc_,gu_,a_,i_,ni_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ma_,zu_,ha_
+	.byte	CR_
+	.byte	GU_,RU_,bou_,PU_,wo_,spc_,e_,ra_,n_,de_,tenten_,tenten_
+	.byte	SCROLL_WAIT_
+	.byte	so_,no_,a_,to_,ni_,spc_,e_,ra_,n_,da_,spc_,GU_,RU_,bou_,PU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,to_,ba_,ga_,spc_,i_,ku_,tu_,mo_,spc_,de_,te_,ku_,ru_,ka_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	so_,ko_,ka_,ra_,spc_,su_,ki_,na_,spc_,ko_,to_,ba_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,tu_,ke_,te_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.byte	EOM_
+
+// ☆「はい１」のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p02_introduce
+msg_youngm1_01_p02_introduce:
+	.byte	ya_,ttu_,ta_,gyoe_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	CR_
+	.byte	zi_,yya_,spc_,sa_,ttu_,so_,ku_,spc_,ki_,ka_,se_,te_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●入力画面へ
+
+// ☆「いいえ１」のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p03_introduce
+msg_youngm1_01_p03_introduce:
+	.byte	so_,n_,na_,a_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,PU_,RO_,HU_,II_,bou_,RU_,ha_,spc_,sa_,zo_,ka_,si_
+	.byte	CR_
+	.byte	su_,te_,ki_,da_,to_,spc_,o_,mo_,u_,n_,da_,ke_,do_,spc_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フィールドへ
+
+// ●途中でやめちゃってる場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p04_introduce
+msg_youngm1_01_p04_introduce:
+	.byte	a_,re_,hate_,spc_,i_,ma_,ha_,spc_,ki_,ga_,spc_,no_,ra_,na_,i_,n_,da_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ttu_,ta_,ra_,spc_,i_,tu_,de_,mo_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●二度目の話しかけ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p05_introduce
+msg_youngm1_01_p05_introduce:
+	.byte	ko_,n_,ni_,ti_,ha_
+	.byte	CR_
+	.byte	e_,ga_,o_,no_,spc_,su_,te_,ki_,na_,spc_,TO_,RE_,bou_,NA_,bou_,sa_,n_,gyoe_
+	.byte	EOM_
+
+// ●説明を聞いた後は、ここに戻る
+	.GLOBAL	msg_youngm1_01_p11_introduce
+msg_youngm1_01_p11_introduce:
+	.byte	ki_,mi_,no_,spc_,a_,ta_,ra_,si_,i_,spc_,PU_,RO_,HU_,II_,bou_,RU_,wo_
+	.byte	CR_
+	.byte	o_,si_,e_,te_,spc_,ku_,re_,ru_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択。
+// ●「はい」　の場合　→☆「はい２」のメッセージへ
+// ●「いいえ」の場合　→☆「いいえ２」のメッセージへ
+
+// ☆「はい２」のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p06_introduce
+msg_youngm1_01_p06_introduce:
+	.byte	ya_,ttu_,ta_,gyoe_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_,spc_,ma_,e_,ni_,mo_,spc_,ma_,si_,te_
+	.byte	CR_
+	.byte	su_,te_,ki_,na_,spc_,ya_,tu_,wo_,spc_,ki_,ta_,i_,spc_,si_,te_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●入力画面へ
+
+// ☆「いいえ２」のメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p07_introduce
+msg_youngm1_01_p07_introduce:
+	.byte	i_,ma_,no_,spc_,ma_,ma_,ga_,spc_,i_,i_,n_,da_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,yo_,ne_,spc_,to_,te_,mo_,spc_,su_,te_,ki_,na_
+	.byte	CR_
+	.byte	PU_,RO_,HU_,II_,bou_,RU_,spc_,da_,mo_,no_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フィールドへ
+
+// ●入力後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p08_introduce
+msg_youngm1_01_p08_introduce:
+	.byte	su_,ttu_,spc_,su_,ba_,ra_,si_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,sa_,ni_,spc_,ki_,mi_,spc_,so_,no_,mo_,no_,spc_,ttu_,te_,spc_,ka_,n_,zi_,no_
+	.byte	CR_
+	.byte	su_,te_,ki_,na_,spc_,PU_,RO_,HU_,II_,bou_,RU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,wo_,spc_,ki_,i_,ta_,spc_,hi_,to_,ha_
+	.byte	CR_
+	.byte	da_,re_,mo_,ga_,spc_,ki_,mi_,no_,spc_,to_,ri_,ko_,ni_,spc_,na_,ru_,da_,ro_,u_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,u_,mo_,spc_,a_,ri_,ga_,to_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●フィールドへ
+
+// ●ふしぎなできごと（当たりの言葉:）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm1_01_p12_introduce
+msg_youngm1_01_p12_introduce:
+	.byte	ya_,ya_,ttu_,gyoe_
+	.byte	CR_
+	.byte	so_,no_,spc_,ko_,to_,ba_,wo_,spc_,si_,ttu_,te_,i_,ru_,spc_,to_,ha_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	to_,i_,u_,spc_,ko_,to_,ha_,spc_,ki_,mi_,mo_
+	.byte	CR_
+	.byte	hu_,si_,gi_,na_,spc_,de_,ki_,go_,to_,spc_,KU_,RA_,BU_,no_,spc_,na_,ka_,ma_,spc_,da_,ne_,gyoe_
+	.byte	EOM_
+
+
+
+
+

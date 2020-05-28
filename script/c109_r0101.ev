@@ -1,0 +1,101 @@
+//====================================================================
+//							c109_r0101
+//						ポケモンリーグ・１階
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c109_r0101_event_data
+BG_CHANGE_LABEL		bg_change_c109_r0101
+OBJ_CTRL_LABEL		obj_ctrl_c109_r0101
+SP_SCRIPT_LABEL		scene_c109_r0101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+bg_change_c109_r0101:
+	_IF_FLAGON_CALL		FT_SHITEN_01,ev_bg_change_c109_r0101
+
+	//強制移動が終了した後に電源を切った時の対処
+	_IFVAL_CALL		WK_SCENE_POKE_LEAGUE,EQ,1,ev_bg_change_02_c109_r0101
+	_END
+
+//下に行けないようにする
+ev_bg_change_c109_r0101:
+	_CALL			ev_league_common03
+	_RET
+
+//強制移動が終了した後に電源を切った時の対処
+ev_bg_change_02_c109_r0101:
+	_CALL			ev_league_common04
+	_RET
+
+//--------------------------------------------------------------------
+//							OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_ctrl_c109_r0101:
+	OBJ_CTRL_DATA	LOCALWORK1,0,ev_site_chg_c109_r0101
+	OBJ_CTRL_END
+
+//主人公の向きを変更
+ev_site_chg_c109_r0101:
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_U
+	_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c109_r0101:
+	//ドア閉めて、部屋の中央まで移動
+	SP_SCRIPT_DATA	WK_SCENE_POKE_LEAGUE,0,ev_scene_start_c109_r0101
+	SP_SCRIPT_END
+
+//ドア閉めて、部屋の中央まで移動
+ev_scene_start_c109_r0101:
+	_TALK_START
+	_CALL			ev_league_common02
+	_LDVAL			WK_SCENE_POKE_LEAGUE,1
+	_TALK_END
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*								四天王								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_shiten1_01_p01_c109_r0101
+	_TALK_OBJ_START
+	
+	//すでに勝利しているか
+	_IF_FLAGON_JUMP	FT_SHITEN_01,ev_shiten1_01_p02_c109_r0101
+	
+	_BGM_SET		MUS_SITENNOU,0
+
+	_TALK_KEYWAIT	msg_kagetsu_01_p01_c109_r0101
+
+	_TRAINER_EVENT_FIGHT	BIG4M_01,msg_kagetsu_01_p02_c109_r0101
+
+	_JUMP			ev_shiten1_01_end
+	_END
+
+//すでに勝利している
+ev_shiten1_01_p02_c109_r0101:
+	_TALK_KEYWAIT	msg_kagetsu_01_p03_c109_r0101
+	_TALK_OBJ_END
+	_END
+
+ev_shiten1_01_end:
+	//四天王を倒した
+	_FLAG_SET		FT_SHITEN_01
+	_CALL			ev_league_common01
+
+	_TALK_KEYWAIT	msg_kagetsu_01_p03_c109_r0101
+	_TALK_OBJ_END
+	_END
+
+

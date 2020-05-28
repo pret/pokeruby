@@ -1,0 +1,152 @@
+// ●ミナモシティ　船着き場
+
+
+// ●受付嬢
+// ●クリア前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_c106_r0501
+msg_workerw2_01_p01_c106_r0501:
+	.byte	e_,ttu_,hate_,spc_,hu_,ne_,spc_,de_,su_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,si_,wa_,ke_,spc_,go_,za_,i_,ma_,se_,n_,spc_,ge_,n_,za_,i_
+	.byte	CR_
+	.byte	re_,n_,ra_,ku_,se_,n_,ha_,spc_,na_,i_,n_,de_,su_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●クリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_c106_r0501
+msg_workerw2_01_p02_c106_r0501:
+	.byte	re_,n_,ra_,ku_,se_,n_,wo_,spc_,go_,ri_,yo_,u_,spc_,de_,su_,ne_,gyoe_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,ha_,spc_,o_,mo_,ti_,spc_,de_,si_,yyo_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ふねのチケット」を
+// 　持っていない　→msg_workerw2_01_p09_c106_r0501:
+// 　持っている　　→msg_workerw2_01_p08_c106_r0501:
+
+// ●「ふねのチケット」を持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p09_c106_r0501
+msg_workerw2_01_p09_c106_r0501:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,wo_,spc_,mo_,ttu_,te_,i_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,mo_,u_,si_,wa_,ke_,spc_,a_,ri_,ma_,se_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ne_,ni_,spc_,no_,re_,ru_,no_,ha_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,no_,spc_,a_,ru_,spc_,ka_,ta_,spc_,da_,ke_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「ふねのチケット」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p08_c106_r0501
+msg_workerw2_01_p08_c106_r0501:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	hu_,ne_,no_,TI_,KE_,TTU_,TO_,wo_,spc_,mi_,se_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,gyoe_,spc_,ke_,ttu_,ko_,u_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ki_,sa_,ki_,ha_,spc_,do_,ti_,ra_,spc_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+// 　やめる　　　　→msg_workerw2_01_p03_c106_r0501:
+// 　カイナ　　　　→msg_workerw2_01_p04_c106_r0501:
+// 　バトルタワー　→msg_workerw2_01_p05_c106_r0501:
+
+// ●「やめる」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_c106_r0501
+msg_workerw2_01_p03_c106_r0501:
+	.byte	ma_,ta_,spc_,go_,ri_,yo_,u_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「カイナ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p04_c106_r0501
+msg_workerw2_01_p04_c106_r0501:
+	.byte	KA_,I_,NA_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw2_01_p06_c106_r0501:
+// ●「いいえ」→msg_workerw2_01_p07_c106_r0501:
+
+// ●「バトルタワー」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p05_c106_r0501
+msg_workerw2_01_p05_c106_r0501:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw2_01_p06_c106_r0501:
+// ●「いいえ」→msg_workerw2_01_p07_c106_r0501:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p06_c106_r0501
+msg_workerw2_01_p06_c106_r0501:
+	.byte	re_,n_,ra_,ku_,se_,n_,ni_,spc_,no_,ttu_,te_,spc_,o_,ma_,ti_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乗船処理
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p07_c106_r0501
+msg_workerw2_01_p07_c106_r0501:
+	.byte	i_,ki_,sa_,ki_,ha_,spc_,do_,ti_,ra_,spc_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウを再度表示
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●船乗り１
+// ●クリア前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c106_r0501
+msg_seaman1_01_p01_c106_r0501:
+	.byte	re_,n_,ra_,ku_,se_,n_,ga_,spc_,ka_,n_,se_,i_,spc_,si_,na_,i_,to_
+	.byte	CR_
+	.byte	hu_,na_,no_,ri_,spc_,to_,i_,u_,mo_,no_,ha_,spc_,HI_,MA_,da_,ze_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,I_,NA_,no_,spc_,zo_,u_,se_,n_,zi_,yyo_,no_,spc_,re_,n_,ti_,yyu_,u_
+	.byte	CR_
+	.byte	si_,yya_,ka_,ri_,ki_,ni_,spc_,ga_,n_,ba_,ttu_,te_,spc_,ku_,re_,yo_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●クリア後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p02_c106_r0501
+msg_seaman1_01_p02_c106_r0501:
+	.byte	ya_,ttu_,to_,spc_,re_,n_,ra_,ku_,se_,n_,spc_,TA_,I_,DO_,RI_,TTU_,PU_,go_,u_,ga_
+	.byte	CR_
+	.byte	u_,n_,ko_,u_,spc_,su_,ru_,yo_,u_,ni_,spc_,na_,ttu_,ta_,n_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	KA_,I_,NA_,no_,spc_,zo_,u_,se_,n_,zi_,yyo_,no_,spc_,mi_,n_,na_
+	.byte	CR_
+	.byte	ta_,i_,he_,n_,spc_,da_,ttu_,ta_,ro_,u_,na_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,re_,ka_,ra_,ha_,spc_,o_,re_,ga_,spc_,i_,so_,ga_,si_,ku_,na_,ru_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

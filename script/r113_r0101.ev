@@ -1,0 +1,428 @@
+//====================================================================
+//							r113_r0101
+//						ガラス細工おやじの家
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	r113_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_r113_r0101
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r113_r0101:
+	//到着フラグセット
+	_FLAG_SET		SYS_ARRIVE_GRASSSHOP
+
+	//「はいぶくろ」をすでに貰っていたらシーンを変更する
+	_IFVAL_CALL		WK_SCENE_R113_R0101,EQ,1,chg_middlem1_01_r113_r0101
+	_END
+
+//「はいぶくろ」をすでに貰っていたらシーンを変更する
+chg_middlem1_01_r113_r0101:
+	_LDVAL			WK_SCENE_R113_R0101,2
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+#define	AOIBIIDORO_ASH				250		// あおいビードロに交換するときの灰
+#define	KIIROBIIDORO_ASH			500		// きいろビードロに交換するときの灰
+#define	AKAIBIIDORO_ASH				500		// あかいビードロに交換するときの灰
+#define	SIROIBIIDORO_ASH			1000	// しろいビードロに交換するときの灰
+#define	KUROIBIIDORO_ASH			1000	// くろいビードロに交換するときの灰
+#define	KIREINAISU_ASH				6000	// きれいないすに交換するときの灰
+#define	KIREINATUKUE_ASH			8000	// きれいなつくえに交換するときの灰
+
+/********************************************************************/
+/*							おじさん								*/
+//
+//	TMPWK0 = アイテム名(グッズ名)
+//	TMPWK1 = アイテムかグッズかの判断用
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_r113_r0101
+	_TALK_OBJ_START
+
+	//アイテムが貰える状態か
+	_IFVAL_JUMP		WK_SCENE_R113_R0101,GE,10,ev_middlem1_01_p04_r113_r0101
+	
+	//シーンが変更している
+	_IFVAL_JUMP		WK_SCENE_R113_R0101,EQ,2,ev_middlem1_01_p03_r113_r0101
+
+	//「はいぶくろ」貰っているか
+	_IFVAL_JUMP		WK_SCENE_R113_R0101,EQ,1,ev_middlem1_01_p02_r113_r0101
+
+	_TALK_KEYWAIT	msg_middlem1_01_p01_r113_r0101
+
+	//「はいぶくろ」入手
+	_ITEM_EVENT		ITEM_HAIBUKURO,1
+	//_IF_ZERO_JUMP	ev_fail_item
+	_LDVAL			WK_SCENE_R113_R0101,1
+
+	_TALK_KEYWAIT	msg_middlem1_01_p02_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//「はいぶくろ」貰っている
+ev_middlem1_01_p02_r113_r0101:
+	_TALK_KEYWAIT	msg_middlem1_01_p02_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//シーンが変更している
+ev_middlem1_01_p03_r113_r0101:
+	//バッグに「はいぶくろ」あるか
+	_CHECK_ITEM		ITEM_HAIBUKURO,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,nothing_haibukuro_r113_r0101
+
+	_TALK_KEYWAIT	msg_middlem1_01_p03_r113_r0101
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,AOIBIIDORO_ASH,ev_miman_01_r113_r0101		//250未満
+
+	_TALKMSG		msg_middlem1_01_p05_r113_r0101
+	_TALK_WAIT
+	_JUMP			select_menu_r113_r0101
+	_END
+
+//バッグに「はいぶくろ」なかったら
+nothing_haibukuro_r113_r0101:
+	_TALK_KEYWAIT	msg_middlem1_01_p12_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//選択肢
+select_menu_r113_r0101:
+	//アイテムかグッズかの判断用初期化
+	_LDVAL			TMPWK1,0
+
+	_PROGRAM		KAZANBAI_MENU
+	_STOP_SCRIPT
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case_item_01_r113_r0101
+	_CASEJUMP		1,case_item_02_r113_r0101
+	_CASEJUMP		2,case_item_03_r113_r0101
+	_CASEJUMP		3,case_item_04_r113_r0101
+	_CASEJUMP		4,case_item_05_r113_r0101
+	_CASEJUMP		5,case_item_06_r113_r0101
+	_CASEJUMP		6,case_item_07_r113_r0101
+	_CASEJUMP		7,case_yameru_r113_r0101
+	_CASECANCEL		case_yameru_r113_r0101
+	_END
+	
+case_item_01_r113_r0101:
+	_LDVAL			TMPWK0,ITEM_AOIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,AOIBIIDORO_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,AOIBIIDORO_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,10
+	_SUBWK			WK_ASH_GATHER_COUNT,AOIBIIDORO_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+case_item_02_r113_r0101:
+	_LDVAL			TMPWK0,ITEM_KIIROBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,KIIROBIIDORO_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,KIIROBIIDORO_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,11
+	_SUBWK			WK_ASH_GATHER_COUNT,KIIROBIIDORO_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+case_item_03_r113_r0101:
+	_LDVAL			TMPWK0,ITEM_AKAIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,AKAIBIIDORO_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,AKAIBIIDORO_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,12
+	_SUBWK			WK_ASH_GATHER_COUNT,AKAIBIIDORO_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+case_item_04_r113_r0101:
+	_LDVAL			TMPWK0,ITEM_SIROIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,SIROIBIIDORO_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,SIROIBIIDORO_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,13
+	_SUBWK			WK_ASH_GATHER_COUNT,SIROIBIIDORO_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+case_item_05_r113_r0101:
+	_LDVAL			TMPWK0,ITEM_KUROIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,KUROIBIIDORO_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,KUROIBIIDORO_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,14
+	_SUBWK			WK_ASH_GATHER_COUNT,KUROIBIIDORO_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+case_item_06_r113_r0101:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,1
+
+	_LDVAL			TMPWK0,GOODS_KIREINAISU
+	_GET_GOODSNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,KIREINAISU_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,KIREINAISU_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,15
+	_SUBWK			WK_ASH_GATHER_COUNT,KIREINAISU_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+case_item_07_r113_r0101:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,1
+
+	_LDVAL			TMPWK0,GOODS_KIREINATUKUE
+	_GET_GOODSNAME	0,TMPWK0
+
+	//足りない量を取得用
+	_LDVAL			TMPWK2,KIREINATUKUE_ASH
+
+	_IFVAL_JUMP		WK_ASH_GATHER_COUNT,LT,KIREINATUKUE_ASH,tarinai_item_r113_r0101
+
+	//「作りますか？」
+	_TALK_YES_NO	msg_middlem1_01_p13_r113_r0101
+	_IFVAL_JUMP	ANSWORK,EQ,FALSE,make_item_no_r113_r0101		//「いいえ」
+
+	_LDVAL			WK_SCENE_R113_R0101,16
+	_SUBWK			WK_ASH_GATHER_COUNT,KIREINATUKUE_ASH
+	_JUMP			make_item_r113_r0101
+	_END
+
+//やめる
+case_yameru_r113_r0101:
+	_TALK_KEYWAIT	msg_middlem1_01_p08_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//250未満
+ev_miman_01_r113_r0101:
+	_LDVAL			TMPWK2,AOIBIIDORO_ASH
+	_SUBWK			TMPWK2,WK_ASH_GATHER_COUNT		//足りない分
+	_GET_NUM_MSG	0,TMPWK2
+
+	_TALK_KEYWAIT	msg_middlem1_01_p04_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//火山灰が足りない
+tarinai_item_r113_r0101:
+	_SUBWK			TMPWK2,WK_ASH_GATHER_COUNT		//足りない分
+	_GET_NUM_MSG	1,TMPWK2
+
+	_TALKMSG		msg_middlem1_01_p07_r113_r0101
+	_TALK_WAIT
+	_JUMP			select_menu_r113_r0101
+	_END
+
+//「いいえ」
+make_item_no_r113_r0101:
+	_TALKMSG		msg_middlem1_01_p14_r113_r0101
+	_TALK_WAIT
+	_JUMP			select_menu_r113_r0101
+	_END
+
+//火山灰が足りる
+make_item_r113_r0101:
+	_TALK_KEYWAIT	msg_middlem1_01_p06_r113_r0101
+	_TALK_CLOSE
+
+	_FLD_FADE_BLACKOUT
+	_SE				SE_SELECT
+	_TIME_WAIT		30
+	_FLD_FADE_BLACKIN
+
+	_TALK_KEYWAIT	msg_middlem1_01_p09_r113_r0101
+
+	//アイテムかグッズかの判断用
+	_IFVAL_CALL		TMPWK1,EQ,0,item_event_go_r113_r0101
+	_IFVAL_CALL		TMPWK1,EQ,1,goods_event_go_r113_r0101
+
+	_LDVAL			WK_SCENE_R113_R0101,2
+	_TALK_OBJ_END
+	_END
+
+//アイテム取得処理
+item_event_go_r113_r0101:
+	_ITEM_EVENT		TMPWK0,1
+	_IF_ZERO_JUMP	ev_fail_item_r113_r0101
+	_RET
+
+//グッズ取得処理
+goods_event_go_r113_r0101:
+	_GOODS_EVENT	TMPWK0
+	_IF_ZERO_JUMP	ev_fail_goods_r113_r0101
+	_RET
+
+//バックがいっぱい
+ev_fail_item_r113_r0101:
+	_CALL			ev_fail_item_ret
+	_TALK_KEYWAIT	msg_middlem1_01_p10_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//パソコンがいっぱい
+ev_fail_goods_r113_r0101:
+	_CALL			ev_fail_goods_ret
+	_TALK_KEYWAIT	msg_middlem1_01_p11_r113_r0101
+	_TALK_OBJ_END
+	_END
+
+//アイテムが貰える状態
+ev_middlem1_01_p04_r113_r0101:
+	_SWITCH			WK_SCENE_R113_R0101
+	_CASEJUMP		10,case_item_get_r113_r0101_01
+	_CASEJUMP		11,case_item_get_r113_r0101_02
+	_CASEJUMP		12,case_item_get_r113_r0101_03
+	_CASEJUMP		13,case_item_get_r113_r0101_04
+	_CASEJUMP		14,case_item_get_r113_r0101_05
+	_CASEJUMP		15,case_item_get_r113_r0101_06
+	_CASEJUMP		16,case_item_get_r113_r0101_07
+	_END
+
+//貰えるアイテムナンバーをTMPWK0にセットする
+case_item_get_r113_r0101_01:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,0
+
+	_LDVAL			TMPWK0,ITEM_AOIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+case_item_get_r113_r0101_02:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,0
+
+	_LDVAL			TMPWK0,ITEM_KIIROBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+case_item_get_r113_r0101_03:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,0
+
+	_LDVAL			TMPWK0,ITEM_AKAIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+case_item_get_r113_r0101_04:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,0
+
+	_LDVAL			TMPWK0,ITEM_SIROIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+case_item_get_r113_r0101_05:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,0
+
+	_LDVAL			TMPWK0,ITEM_KUROIBIIDORO
+	_GET_ITEMNAME	0,TMPWK0
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+case_item_get_r113_r0101_06:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,1
+
+	_LDVAL			TMPWK0,GOODS_KIREINAISU
+	_GET_GOODSNAME	0,GOODS_KIREINAISU
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+case_item_get_r113_r0101_07:
+	//アイテムかグッズかの判断用
+	_LDVAL			TMPWK1,1
+
+	_LDVAL			TMPWK0,GOODS_KIREINATUKUE
+	_GET_GOODSNAME	0,GOODS_KIREINATUKUE
+	_JUMP			uketori_item_r113_r0101
+	_END
+
+//受け取りに来たとき
+uketori_item_r113_r0101:
+	//できたよ　もっていきなよ
+	_TALK_KEYWAIT	msg_middlem1_01_p09_r113_r0101
+
+	//アイテムかグッズかの判断用
+	_IFVAL_CALL		TMPWK1,EQ,0,item_event_go_r113_r0101
+	_IFVAL_CALL		TMPWK1,EQ,1,goods_event_go_r113_r0101
+
+	_LDVAL			WK_SCENE_R113_R0101,2
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								謎の坊主							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya1_01_p01_r113_r0101
+	_EASY_OBJ_MSG	msg_boya1_01_p01_r113_r0101
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

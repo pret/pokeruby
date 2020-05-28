@@ -1,0 +1,53 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_W127	0
+#define EXITNUM_FIELD_W127	0
+#define POSNUM_FIELD_W127	0
+#define BGNUM_FIELD_W127	4
+
+const SXY_BG	BG_field_w127[] =
+{
+	{
+		0x000c,		//Xpos
+		0x002a,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		hosinokakera_21,		//Script
+	},
+
+	{
+		0x0032,		//Xpos
+		0x0024,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		makkusuappu_22,		//Script
+	},
+
+	{
+		0x0022,		//Xpos
+		0x0048,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		haatonouroko_23,		//Script
+	},
+
+	{
+		0x0048,		//Xpos
+		0x0014,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		akaikakera_24,		//Script
+	},
+
+};
+
+const SXY_DATA	field_w127_sxy_data =
+{
+OBJNUM_FIELD_W127,			// field obj max
+EXITNUM_FIELD_W127,		// exit max
+POSNUM_FIELD_W127,			// pos event max
+BGNUM_FIELD_W127,			// bg event max
+NULL,			// field obj data
+NULL,			// exit data
+NULL,			// pos event data
+BG_field_w127,				// bg event data
+};

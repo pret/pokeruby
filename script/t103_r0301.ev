@@ -1,0 +1,382 @@
+//====================================================================
+//						t103_r0301
+//						ムロ・ルーム0301
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	t103_r0301_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							女の子									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_girl2_01_p01_t103_r0301
+	_TALK_OBJ_START
+
+	_CALL			set_popword_buf0
+
+	//流行値が低くなっていたら
+	_PROGRAM		POPWORD_COMING_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_girl2_01_p02_t103_r0301	// 替わりそう
+
+	_TALK_KEYWAIT   msg_girl2_01_p01_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+//流行語がもうすぐ替わりそう
+ev_girl2_01_p02_t103_r0301:
+	_TALK_KEYWAIT   msg_girl2_01_p02_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								女性								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_woman1_01_p01_t103_r0301
+	_TALK_OBJ_START
+	_CALL			set_popword_buf0
+	_TALK_KEYWAIT   msg_woman1_01_p01_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							おじさん								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_middlem1_01_p01_t103_r0301
+	_TALK_OBJ_START
+
+	_CALL			set_popword_buf0
+
+	//ランダムの簡易文の単語
+	_PROGRAM		RAND_WORD_COPY
+
+	_TALK_YES_NO    msg_middlem1_01_p01_t103_r0301
+	_IFVAL_JUMP		ANSWORK,EQ,1,yes_middlem1_01_p01_t103_r0301	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,0,no_middlem1_01_p01_t103_r0301	//「いいえ」
+	_END
+
+//「はい」
+yes_middlem1_01_p01_t103_r0301:
+	_TALK_KEYWAIT   msg_middlem1_01_p02_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+no_middlem1_01_p01_t103_r0301:
+	_TALK_KEYWAIT   msg_middlem1_01_p03_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								老人								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_oldman1_01_p01_t103_r0301
+	_TALK_OBJ_START
+
+	_CALL			set_popword_buf0
+
+	_TALK_KEYWAIT   msg_oldman1_01_p01_t103_r0301
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	OLDMAN1_01_T103_R0301,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								子供								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_ojyou1_01_p01_t103_r0301
+	_TALK_OBJ_START
+
+	_CALL			set_popword_buf0
+
+	_TALK_KEYWAIT   msg_ojyou1_01_p01_t103_r0301
+	_TALK_CLOSE
+
+	_SET_OBJ_ANIME	OJYOU1_01_T103_R0301,turn_u_anime
+	_OBJ_ANIME_WAIT
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								子供								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_boya2_01_p01_t103_r0301
+	_TALK_OBJ_START
+
+	_CALL			set_popword_buf0
+
+	_TALK_KEYWAIT   msg_boya2_01_p01_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								本									*/
+/********************************************************************/
+SCRIPT_LABEL	ev_hon_01_p01_t103_r0301
+	_TALK_START
+
+	_CALL			set_popword_buf0
+
+	_TALK_KEYWAIT   msg_hon_01_p01_t103_r0301
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*								絵画								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kaiga_01_p01_t103_r0301
+	_TALK_START
+
+	_CALL			set_popword_buf0
+
+	_PROGRAM		GET_POPWORD_VALUE
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case0_kaiga_01_p01_t103_r0301		//0
+	_CASEJUMP		4,case0_kaiga_01_p01_t103_r0301		//0
+	_CASEJUMP		1,case1_kaiga_01_p01_t103_r0301		//1
+	_CASEJUMP		5,case0_kaiga_01_p01_t103_r0301		//0
+	_CASEJUMP		2,case2_kaiga_01_p01_t103_r0301		//2
+	_CASEJUMP		6,case2_kaiga_01_p01_t103_r0301		//2
+	_CASEJUMP		3,case3_kaiga_01_p01_t103_r0301		//3
+	_CASEJUMP		7,case2_kaiga_01_p01_t103_r0301		//2
+	_END
+
+//0
+case0_kaiga_01_p01_t103_r0301:
+	_TALK_KEYWAIT   msg_kaiga_01_p01_t103_r0301
+	_TALK_END
+	_END
+
+//1
+case1_kaiga_01_p01_t103_r0301:
+	_TALK_KEYWAIT   msg_kaiga_01_p02_t103_r0301
+	_TALK_END
+	_END
+
+//2
+case2_kaiga_01_p01_t103_r0301:
+	_TALK_KEYWAIT   msg_kaiga_01_p03_t103_r0301
+	_TALK_END
+	_END
+
+//3
+case3_kaiga_01_p01_t103_r0301:
+	_TALK_KEYWAIT   msg_kaiga_01_p04_t103_r0301
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/*								男２人組							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_schoolm1_01_p01_t103_r0301			//左の男
+	_TALK_START
+	_LDVAL			TMPWK0,0							//動作コード
+	_JUMP			ev_hutari_01_p01_t103_r0301
+	_END
+
+SCRIPT_LABEL	ev_boy5_01_p01_t103_r0301				//右の男
+	_TALK_START
+	_LDVAL			TMPWK0,1							//動作コード
+	_JUMP			ev_hutari_01_p01_t103_r0301
+	_END
+
+//共通処理
+ev_hutari_01_p01_t103_r0301:
+	_CALL			set_popword_buf0
+
+	_PROGRAM		GET_POPWORD_VALUE
+	_SWITCH			ANSWORK
+	_CASEJUMP		0,case0_schoolm1_01_p01_t103_r0301		//0
+	_CASEJUMP		1,case0_schoolm1_01_p01_t103_r0301		//1
+	_CASEJUMP		2,case1_schoolm1_01_p01_t103_r0301		//2
+	_CASEJUMP		3,case1_schoolm1_01_p01_t103_r0301		//3
+	_CASEJUMP		4,case2_schoolm1_01_p01_t103_r0301		//4
+	_CASEJUMP		5,case2_schoolm1_01_p01_t103_r0301		//5
+	_CASEJUMP		6,case3_schoolm1_01_p01_t103_r0301		//6
+	_CASEJUMP		7,case4_schoolm1_01_p01_t103_r0301		//7
+	_END
+
+//0,1
+case0_schoolm1_01_p01_t103_r0301:
+	_CALL			common_anime_01_t103_r0301
+	_TALK_KEYWAIT   msg_schoolm1_01_p01_t103_r0301
+
+	_CALL			common_anime_02_t103_r0301
+	_TALK_KEYWAIT   msg_boy5_01_p01_t103_r0301
+
+	_TALK_END
+	_END
+
+//2,3
+case1_schoolm1_01_p01_t103_r0301:
+	_CALL			common_anime_01_t103_r0301
+	_TALK_KEYWAIT   msg_schoolm1_01_p02_t103_r0301
+
+	_CALL			common_anime_02_t103_r0301
+	_TALK_KEYWAIT   msg_boy5_01_p02_t103_r0301
+
+	_TALK_END
+	_END
+
+//4,5
+case2_schoolm1_01_p01_t103_r0301:
+	_CALL			common_anime_01_t103_r0301
+	_TALK_KEYWAIT   msg_schoolm1_01_p03_t103_r0301
+
+	_CALL			common_anime_02_t103_r0301
+	_TALK_KEYWAIT   msg_boy5_01_p03_t103_r0301
+
+	_TALK_END
+	_END
+
+//6
+case3_schoolm1_01_p01_t103_r0301:
+	_CALL			common_anime_01_t103_r0301
+	_TALK_KEYWAIT   msg_schoolm1_01_p04_t103_r0301
+
+	_CALL			common_anime_02_t103_r0301
+	_TALK_KEYWAIT   msg_boy5_01_p04_t103_r0301
+
+	_TALK_END
+	_END
+
+//7
+case4_schoolm1_01_p01_t103_r0301:
+	_CALL			common_anime_01_t103_r0301
+	_TALK_KEYWAIT   msg_schoolm1_01_p05_t103_r0301
+
+	_CALL			common_anime_02_t103_r0301
+	_TALK_KEYWAIT   msg_boy5_01_p05_t103_r0301
+
+	_TALK_END
+	_END
+
+//何もしない
+ret_hutari_01_t103_r0301:
+	_RET
+
+//--------------------------------------------------------------------
+//右の男の方を向く
+//--------------------------------------------------------------------
+common_anime_01_t103_r0301:
+	_SET_OBJ_ANIME	BOY5_01_T103_R0301,boy5_01_t103_r0301_anime01
+	_OBJ_ANIME_WAIT
+
+	//どちらの男に話し掛けているか
+	_IFVAL_JUMP		TMPWK0,EQ,0,case0_hutari_01_p01_t103_r0301	//左
+	_IFVAL_JUMP		TMPWK0,EQ,1,case1_hutari_01_p01_t103_r0301	//右
+	_END
+
+//左の男に話し掛けた
+case0_hutari_01_p01_t103_r0301:
+	//左側から話し掛けたときは何もしない
+	_IFVAL_JUMP		RG_SITE,EQ,SITE_R,ret_hutari_01_t103_r0301
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_r_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//右の男に話し掛けた
+case1_hutari_01_p01_t103_r0301:
+	_RET
+
+//--------------------------------------------------------------------
+//左の男の方を向く
+//--------------------------------------------------------------------
+common_anime_02_t103_r0301:
+	_SET_OBJ_ANIME	SCHOOLM1_01_T103_R0301,schoolm1_01_t103_r0301_anime01
+	_OBJ_ANIME_WAIT
+
+	//どちらの男に話し掛けているか
+	_IFVAL_JUMP		TMPWK0,EQ,0,case0_hutari_01_p02_t103_r0301	//左
+	_IFVAL_JUMP		TMPWK0,EQ,1,case1_hutari_01_p02_t103_r0301	//右
+	_END
+
+//左の男に話し掛けた
+case0_hutari_01_p02_t103_r0301:
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,case_site_u_01_p02_t103_r0301	//下側から話し掛け
+	_IFVAL_CALL		RG_SITE,EQ,SITE_D,case_site_d_01_p02_t103_r0301	//上側から話し掛け
+	_RET
+
+//下側から話し掛けた
+case_site_u_01_p02_t103_r0301:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//上側から話し掛けた
+case_site_d_01_p02_t103_r0301:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//右の男に話し掛けた
+case1_hutari_01_p02_t103_r0301:
+	//右側から話し掛けたときは何もしない
+	_IFVAL_JUMP		RG_SITE,EQ,SITE_L,ret_hutari_01_t103_r0301
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,turn_l_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+//--------------------------------------------------------------------
+//その場歩きをする
+//--------------------------------------------------------------------
+boy5_01_t103_r0301_anime01:
+	.byte	AC_STOP_WALK_L
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//その場歩きをする
+//--------------------------------------------------------------------
+schoolm1_01_t103_r0301_anime01:
+	.byte	AC_STOP_WALK_R
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*								マニア								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_freak1_01_p01_t103_r0301
+	_TALK_OBJ_START
+
+	_CALL			set_popword_buf0
+
+	//すでにアイテム入手しているか
+	_IF_FLAGON_JUMP	FE_WAZAM36_GET,ev_freak1_01_p02_t103_r0301
+
+	_TALK_KEYWAIT   msg_freak1_01_p01_t103_r0301
+
+	_ITEM_EVENT		ITEM_WAZAMASIN36,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM36_GET
+	_TALK_OBJ_END
+	_END
+
+//すでにアイテム入手している
+ev_freak1_01_p02_t103_r0301:
+	_TALK_KEYWAIT   msg_freak1_01_p02_t103_r0301
+	_TALK_OBJ_END
+	_END
+
+

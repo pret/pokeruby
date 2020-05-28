@@ -1,0 +1,80 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START park_battle02_event_data
+SP_SCRIPT_LABEL		ev_park_battle02
+OBJ_CTRL_LABEL		obj_ctrl_park_battle02
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/********************************************************************/
+
+ev_park_battle02:
+	SP_SCRIPT_DATA		LOCALWORK0,0,ev_park_battle02_01
+	SP_SCRIPT_END
+
+ev_park_battle02_01:
+	_LDVAL				LOCALWORK0,1
+	_SET_OBJ_ANIME		BATTLE_TOWER_PC02,anm_battle02_pcw_01
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle02_mine_01
+	_OBJ_ANIME_WAIT
+//本来はエレベータエフェクト
+	_PROGRAM			ELEVATOR_MOVE
+	_STOP_SCRIPT
+	_TIME_WAIT			0x40
+	_SET_OBJ_ANIME		BATTLE_TOWER_PC02,anm_battle02_pcw_02
+	_SET_OBJ_ANIME		EV_OBJ_SPID,anm_battle02_mine_02
+	_OBJ_ANIME_WAIT
+	_LDVAL				LOCALWORK0,0
+	_MAP_CHANGE			PARK,PARK_BATTLE03,8,1
+
+	_STOP_SCRIPT
+	_END
+
+obj_ctrl_park_battle02:
+	OBJ_CTRL_DATA		LOCALWORK1,0,obj_ctrl_park_battle02_mine
+	OBJ_CTRL_END
+
+obj_ctrl_park_battle02_mine:
+	_LDVAL				LOCALWORK1,1
+	_OBJ_SITE_CHG		EV_OBJ_SPID,SITE_U
+	_END
+
+//=======================================================================
+//	OBJアニメーションデータ
+//=======================================================================
+
+anm_battle02_pcw_01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_R_1
+	.byte	AC_SITE_D
+	.byte	ACMD_END
+
+anm_battle02_mine_01:
+	.byte	AC_WALK_U_1
+	.byte	AC_WALK_U_1
+	.byte	AC_SITE_D
+	.byte	ACMD_END
+
+anm_battle02_pcw_02:
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	AC_VANISH_ON
+	.byte	ACMD_END
+
+anm_battle02_mine_02:
+	.byte	AC_WALK_R_1
+	.byte	AC_WALK_D_1
+	.byte	AC_WALK_D_1
+	.byte	ACMD_END

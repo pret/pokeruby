@@ -1,0 +1,9 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 0
+
+//Exit ID = 4
+#define SP_PC06_MAT01	0
+#define SP_PC06_MAT02	1
+#define SP_PC06_MAT03	2
+#define SP_PC06_MAT04	3

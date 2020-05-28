@@ -1,0 +1,154 @@
+// ●118番道路　フィールド
+
+
+// ●ダイゴ
+// ●ＰＯＳを踏むと近寄ってくる
+// 　ＰＯＳ（Ｘ４３～４５・Ｙ１１）辺り？
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p01_field_r118
+msg_daigo_01_p01_field_r118:
+	.byte	DA_,I_,GO_,kako2_,ya_,a_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,MU_,RO_,de_,spc_,de_,a_,ttu_,ta_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,spc_,da_,yo_,ne_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,to_,spc_,i_,u_,no_,ka_
+	.byte	CR_
+	.byte	u_,n_,spc_,o_,bo_,e_,te_,o_,ku_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	NORMAL_WAIT_
+	.byte	ko_,no_,spc_,hi_,ro_,i_,spc_,se_,ka_,i_,ni_,ha_
+	.byte	CR_
+	.byte	sa_,ma_,za_,ma_,na_,spc_,PO_,KE_,MO_,N_,ga_,i_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	so_,re_,zo_,re_,spc_,sa_,ma_,za_,ma_,na_,spc_,TA_,I_,PU_,wo_,spc_,mo_,ttu_,te_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,n_,na_,spc_,TA_,I_,PU_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,so_,da_,te_,ru_,ka_
+	.byte	CR_
+	.byte	so_,re_,to_,mo_,spc_,su_,ki_,na_,spc_,TA_,I_,PU_,no_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ba_,ka_,ri_,spc_,so_,da_,te_,ru_,ka_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ha_,spc_,PO_,KE_,MO_,N_,spc_,TO_,RE_,bou_,NA_,bou_,to_,si_,te_
+	.byte	CR_
+	.byte	do_,u_,spc_,ka_,n_,ga_,e_,te_,ru_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,KU_,ga_,spc_,ki_,ni_,spc_,su_,ru_,ko_,to_,spc_,na_,i_,ke_,do_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,a_,e_,ru_,to_,spc_,i_,i_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ダイゴ、１１９番道路の方に去っていく……
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●釣り人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p01_field_r118
+msg_fishing1_01_p01_field_r118:
+	.byte	u_,mu_,gyoe_
+	.byte	CR_
+	.byte	i_,i_,tu_,ri_,za_,o_,ha_,spc_,ho_,n_,to_,u_,ni_,spc_,i_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,mo_,spc_,so_,u_,spc_,o_,mo_,u_,de_,si_,yyo_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_fishing1_01_p02_field_r118:
+// ●「いいえ」→msg_fishing1_01_p04_field_r118:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p02_field_r118
+msg_fishing1_01_p02_field_r118:
+	.byte	u_,mu_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,to_,ha_,spc_,ki_,ga_,spc_,a_,u_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,mu_,gyoe_
+	.byte	CR_
+	.byte	i_,i_,tu_,ri_,za_,o_,wo_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「いいつりざお」（No262）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p03_field_r118
+msg_fishing1_01_p03_field_r118:
+	.byte	mi_,zu_,no_,spc_,a_,ru_,spc_,to_,ko_,ro_,na_,ra_
+	.byte	CR_
+	.byte	do_,ko_,de_,mo_,spc_,tu_,ri_,wo_,spc_,su_,ru_,to_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p04_field_r118
+msg_fishing1_01_p04_field_r118:
+	.byte	tu_,ri_,ha_,spc_,ki_,ra_,i_,spc_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいつりざお」入手後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_fishing1_01_p05_field_r118
+msg_fishing1_01_p05_field_r118:
+	.byte	i_,i_,tu_,ri_,za_,o_,de_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,wo_,spc_,tu_,ru_,to_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ===============================
+
+// ●少女２（キンセツ側）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl2_01_p01_field_r118
+msg_girl2_01_p01_field_r118:
+	.byte	hu_,ne_,wo_,spc_,mo_,ttu_,te_,spc_,i_,na_,ku_,te_,mo_
+	.byte	CR_
+	.byte	na_,mi_,no_,ri_,wo_,spc_,o_,bo_,e_,ta_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,re_,ba_
+	.byte	SCROLL_WAIT_
+	.byte	u_,mi_,ya_,spc_,ka_,wa_,wo_,spc_,wa_,ta_,ttu_,te_,spc_,i_,ke_,ti_,yya_,u_,no_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ttu_,te_,spc_,ta_,no_,mo_,si_,bou_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●キンセツ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r118
+msg_kanban_01_p01_field_r118:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n8_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,KI_,N_,SE_,TU_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●119番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r118
+msg_kanban_02_p01_field_r118:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n8_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowU__,spc_,n1_,n1_,n9_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

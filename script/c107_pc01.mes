@@ -1,0 +1,28 @@
+// ●トクサネシティ　ポケモンセンター１Ｆ
+
+
+// ●女性１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman1_01_p01_c107_pc01
+msg_woman1_01_p01_c107_pc01:
+	.byte	ko_,no_,spc_,ma_,ti_,no_,spc_,ZI_,MU_,RI_,bou_,DA_,bou_
+	.byte	CR_
+	.byte	na_,n_,to_,i_,ttu_,te_,mo_,spc_,a_,no_,spc_,KO_,N_,BI_,NE_,bou_,SI_,YYO_,N_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	sa_,i_,ko_,u_,gyoe_,spc_,sa_,su_,ga_,gyoe_,spc_,ttu_,te_,spc_,ka_,n_,zi_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●少女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl1_01_p01_c107_pc01
+msg_girl1_01_p01_c107_pc01:
+	.byte	PO_,KE_,MO_,N_,no_,spc_,to_,ku_,se_,i_,ni_,spc_,yo_,ttu_,te_,ha_
+	.byte	CR_
+	.byte	wa_,za_,no_,spc_,i_,ri_,yyo_,ku_,ga_,spc_,ka_,wa_,ttu_,ta_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,ttu_,ta_,ku_,spc_,ki_,ka_,na_,ka_,ttu_,ta_,ri_,spc_,su_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

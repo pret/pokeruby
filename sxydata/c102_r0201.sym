@@ -1,0 +1,16 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 8
+#define PCCABLE_01_C102_R0201	1
+#define CUBEOYAJI_01_C102_R0201	2
+#define TRAINERM1_01_C102_R0201	3
+#define GIRL1_01_C102_R0201	4
+#define INTERVM1_01_C102_R0201	5
+#define BOY1_01_C102_R0201	6
+#define OJYOU2_01_C102_R0201	7
+#define WOMAN1_01_C102_R0201	8
+
+//Exit ID = 3
+#define C102_R0201_MAT01	0
+#define C102_R0201_MAT02	1
+#define C102_R0201_DOOR01	2

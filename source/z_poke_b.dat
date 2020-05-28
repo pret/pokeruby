@@ -1,0 +1,775 @@
+//============================================================
+//
+//ポケモンずかんデータＢ
+//
+//============================================================
+const	u8	noget_text[] = {
+	EOM_,
+};
+
+const	u8	textdmy[] = {
+	a_,ta_,ra_,si_,ku_,spc_,ha_,ttu_,ke_,n_,sa_,re_,ta_,PO_,KE_,MO_,N_,CR_,
+	ge_,n_,za_,i_,spc_,ti_,yyo_,u_,sa_,ti_,yyu_,u_,EOM_,
+};
+
+const	u8	text252[] = {
+	ti_,n_,ti_,yya_,ku_,spc_,re_,i_,se_,i_,spc_,na_,ni_,go_,to_,ni_,mo_,spc_,do_,u_,zi_,na_,i_,kten_,CR_,
+	ka_,ra_,da_,no_,spc_,o_,o_,ki_,na_,spc_,PO_,KE_,MO_,N_,ni_,spc_,ni_,ra_,ma_,re_,te_,mo_,CR_,
+	i_,ttu_,po_,mo_,spc_,hi_,ka_,zu_,ni_,spc_,ni_,ra_,mi_,ka_,e_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text253[] = {
+	U_,RO_,KO_,no_,spc_,ha_,ne_,ha_,spc_,to_,te_,mo_,spc_,ka_,ta_,ku_,spc_,su_,ru_,do_,i_,kten_,CR_,
+	te_,ttu_,pa_,n_,wo_,spc_,ki_,ri_,sa_,ku_,spc_,ki_,yyo_,u_,ri_,yyo_,ku_,na_,spc_,bu_,ki_,da_,kten_,CR_,
+	n1_,n0_,pi_,ki_,ho_,do_,no_,spc_,mu_,re_,de_,spc_,ko_,u_,do_,u_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text255[] = {
+	ta_,i_,na_,i_,ni_,spc_,ho_,no_,o_,wo_,spc_,mo_,ya_,su_,spc_,ba_,si_,yyo_,ga_,spc_,a_,ru_,no_,de_,CR_,
+	da_,ki_,si_,me_,ru_,to_,spc_,po_,ka_,po_,ka_,spc_,to_,ttu_,te_,mo_,spc_,a_,ta_,ta_,ka_,i_,kten_,CR_,
+	ze_,n_,si_,n_,spc_,hu_,ka_,hu_,ka_,no_,spc_,u_,mo_,u_,ni_,spc_,o_,o_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text257[] = {
+	su_,u_,ne_,n_,go_,to_,ni_,spc_,ze_,n_,si_,n_,ga_,spc_,ho_,no_,u_,ni_,spc_,tu_,tu_,ma_,re_,CR_,
+	a_,ta_,ra_,si_,i_,spc_,ha_,ne_,ni_,spc_,ha_,e_,ka_,wa_,ru_,kten_,CR_,
+	ma_,ke_,te_,mo_,spc_,a_,ki_,ra_,me_,na_,i_,spc_,ko_,n_,zi_,yyo_,u_,no_,spc_,mo_,ti_,nu_,si_,kten_,EOM_,
+};
+
+const	u8	text258[] = {
+	su_,i_,ti_,yyu_,u_,de_,ha_,spc_,ho_,ttu_,pe_,no_,spc_,E_,RA_,de_,spc_,ko_,ki_,yyu_,u_,su_,ru_,kten_,CR_,
+	PI_,N_,TI_,ni_,spc_,na_,ru_,to_,spc_,ka_,ra_,da_,yo_,ri_,spc_,o_,o_,ki_,na_,spc_,i_,wa_,wo_,CR_,
+	ko_,na_,go_,na_,ni_,spc_,ku_,da_,ku_,spc_,PA_,WA_,bou_,wo_,spc_,ha_,ttu_,ki_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text277[] = {
+	no_,n_,bi_,ri_,si_,ta_,spc_,se_,i_,ka_,ku_,no_,spc_,PO_,KE_,MO_,N_,da_,kten_,CR_,
+	de_,mo_,spc_,hi_,to_,ta_,bi_,spc_,o_,ko_,ru_,to_,spc_,se_,na_,ka_,no_,spc_,KO_,BU_,ka_,ra_,CR_,
+	se_,ttu_,si_,spc_,n1_,ma_,n_,do_,no_,spc_,yo_,u_,ga_,n_,wo_,spc_,hu_,ki_,da_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text278[] = {
+	ka_,i_,me_,n_,spc_,su_,re_,su_,re_,wo_,spc_,to_,bi_,spc_,E_,SA_,wo_,spc_,sa_,ga_,su_,kten_,CR_,
+	o_,o_,ki_,na_,spc_,KU_,TI_,BA_,SI_,wo_,spc_,u_,mi_,no_,spc_,na_,ka_,he_,spc_,i_,re_,te_,CR_,
+	E_,SA_,wo_,spc_,su_,ku_,i_,to_,ri_,spc_,hi_,to_,no_,mi_,de_,spc_,ta_,be_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text282[] = {
+	a_,me_,a_,ga_,ri_,ni_,spc_,nu_,re_,ta_,spc_,ka_,ra_,da_,wo_,spc_,ha_,ttu_,pa_,de_,CR_,
+	go_,si_,go_,si_,spc_,ko_,su_,ttu_,te_,spc_,mi_,ga_,ku_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ka_,ke_,ru_,kten_,CR_,
+	ku_,ro_,bi_,ka_,ri_,spc_,su_,ru_,to_,spc_,ma_,n_,zo_,ku_,su_,ru_,spc_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text283[] = {
+	si_,ttu_,po_,ni_,ha_,spc_,se_,i_,ti_,yyo_,u_,su_,ru_,spc_,ta_,me_,ni_,spc_,hi_,tu_,yo_,u_,na_,CR_,
+	e_,i_,yo_,u_,ga_,spc_,ta_,ttu_,pu_,ri_,spc_,tu_,ma_,ttu_,te_,i_,ru_,zo_,kten_,CR_,
+	da_,n_,ri_,yyo_,ku_,no_,spc_,a_,ru_,spc_,si_,ttu_,po_,no_,spc_,no_,ttu_,te_,spc_,a_,so_,bu_,kten_,EOM_,
+};
+
+const	u8	text284[] = {
+	i_,tu_,mo_,ha_,spc_,hi_,n_,ya_,ri_,spc_,tu_,me_,ta_,i_,spc_,hi_,hu_,ga_,CR_,
+	ka_,ra_,da_,no_,spc_,i_,ro_,wo_,spc_,ka_,e_,ru_,to_,ki_,spc_,a_,ta_,ta_,ka_,ku_,na_,ru_,kten_,CR_,
+	o_,na_,ka_,no_,spc_,GI_,ZA_,GI_,ZA_,da_,ke_,ha_,spc_,ka_,e_,ra_,re_,na_,i_,zo_,kten_,EOM_,
+};
+
+const	u8	text285[] = {
+	ka_,ra_,da_,ni_,spc_,ka_,i_,su_,i_,wo_,spc_,ta_,me_,ru_,to_,spc_,BO_,bou_,RU_,no_,spc_,yo_,u_,ni_,CR_,
+	zi_,me_,n_,de_,spc_,to_,bi_,ha_,ne_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,yo_,u_,ni_,spc_,na_,ru_,kten_,CR_,
+	ta_,ku_,sa_,n_,spc_,ta_,me_,ru_,to_,spc_,ta_,ka_,ku_,spc_,ZI_,YYA_,N_,PU_,de_,ki_,ru_,kten_,EOM_,
+};
+
+const	u8	text286[] = {
+	ka_,ra_,da_,zi_,yyu_,u_,spc_,NU_,RU_,NU_,RU_,si_,ta_,spc_,ne_,n_,e_,ki_,de_,spc_,o_,o_,wa_,re_,CR_,
+	so_,no_,spc_,te_,de_,spc_,sa_,wa_,ra_,re_,ru_,to_,spc_,ki_,mo_,ti_,wa_,ru_,i_,kten_,CR_,
+	ni_,n_,ge_,n_,no_,spc_,ko_,do_,mo_,to_,spc_,yo_,ku_,spc_,ma_,ti_,ga_,e_,ra_,re_,ru_,kten_,EOM_,
+};
+
+const	u8	text288[] = {
+	ki_,ke_,n_,wo_,spc_,ka_,n_,zi_,ru_,to_,spc_,a_,ta_,ma_,no_,spc_,sa_,ki_,ttu_,po_,ka_,ra_,CR_,
+	mi_,zu_,a_,me_,no_,yo_,u_,na_,spc_,a_,ma_,i_,spc_,e_,ki_,ta_,i_,wo_,spc_,da_,su_,kten_,CR_,
+	ko_,re_,ga_,spc_,ko_,u_,bu_,tu_,no_,spc_,PO_,KE_,MO_,N_,mo_,spc_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text290[] = {
+	ri_,yyo_,u_,me_,ha_,spc_,ho_,u_,se_,ki_,no_,spc_,ka_,ga_,ya_,ki_,wo_,spc_,ha_,na_,tu_,kten_,CR_,
+	so_,no_,spc_,u_,tu_,ku_,si_,sa_,ni_,spc_,hi_,ka_,re_,ta_,spc_,hi_,to_,no_,spc_,ta_,ma_,si_,i_,wo_,CR_,
+	u_,ba_,u_,to_,spc_,i_,wa_,re_,spc_,o_,so_,re_,ra_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text291[] = {
+	ka_,i_,su_,i_,wo_,spc_,o_,si_,ri_,no_,spc_,a_,na_,ka_,ra_,spc_,hu_,ki_,da_,si_,te_,CR_,
+	zi_,so_,ku_,n1_,n2_,n0_,KI_,RO_,de_,spc_,o_,yo_,gu_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+	na_,ga_,i_,spc_,ki_,yyo_,ri_,wo_,spc_,o_,yo_,ge_,na_,i_,no_,ga_,spc_,zi_,yya_,ku_,te_,n_,da_,kten_,EOM_,
+};
+
+const	u8	text292[] = {
+	n2_,ma_,n_,ne_,n_,ma_,e_,ni_,spc_,sa_,ka_,e_,ta_,spc_,ko_,da_,i_,spc_,bu_,n_,me_,i_,no_,CR_,
+	DO_,RO_,ni_,n_,gi_,yyo_,u_,ka_,ra_,spc_,u_,ma_,re_,ta_,spc_,NA_,ZO_,no_,spc_,PO_,KE_,MO_,N_,kten_,CR_,
+	ri_,yyo_,u_,te_,ka_,ra_,spc_,BI_,bou_,MU_,wo_,spc_,ha_,ttu_,si_,yya_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text294[] = {
+	n5_,n0_,ME_,bou_,TO_,RU_,wo_,spc_,n7_,bi_,yyo_,u_,de_,spc_,ha_,si_,ru_,spc_,si_,yyu_,n_,so_,ku_,kten_,CR_,
+	ta_,ma_,ni_,spc_,ko_,do_,mo_,wo_,spc_,o_,to_,si_,te_,si_,ma_,u_,spc_,ko_,to_,ga_,a_,ru_,zo_,kten_,CR_,
+	ka_,ta_,i_,mo_,no_,wo_,spc_,ka_,zi_,ri_,spc_,ha_,mi_,ga_,ki_,wo_,spc_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text296[] = {
+	o_,ko_,ru_,to_,spc_,ka_,ra_,da_,wo_,spc_,BU_,RU_,BU_,RU_,spc_,hu_,ru_,wa_,se_,te_,CR_,
+	a_,ta_,ma_,ka_,ra_,spc_,do_,ku_,no_,spc_,ho_,u_,si_,wo_,spc_,ba_,ra_,ma_,ku_,kten_,CR_,
+	PU_,RO_,RE_,SU_,RA_,bou_,mo_,spc_,mi_,ttu_,ka_,ha_,spc_,ne_,ko_,mu_,spc_,mo_,u_,do_,ku_,da_,kten_,EOM_,
+};
+
+const	u8	text297[] = {
+	a_,ta_,ma_,no_,spc_,ha_,na_,bi_,ra_,wo_,spc_,ka_,ta_,o_,mo_,i_,no_,spc_,a_,i_,te_,ni_,CR_,
+	wa_,ta_,su_,to_,spc_,ko_,i_,ga_,spc_,ka_,na_,u_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	ha_,na_,bi_,ra_,wo_,spc_,to_,ro_,u_,to_,su_,ru_,to_,spc_,mo_,u_,re_,tu_,ni_,spc_,o_,ko_,ru_,kten_,EOM_,
+};
+
+const	u8	text298[] = {
+	n1_,ni_,ti_,spc_,n1_,n0_,n0_,RI_,TTU_,TO_,RU_,spc_,i_,zi_,yyo_,u_,spc_,mi_,zu_,wo_,spc_,no_,mu_,kten_,CR_,
+	ka_,ra_,da_,ni_,spc_,ta_,me_,ta_,spc_,mi_,zu_,ga_,spc_,su_,ku_,na_,ku_,na_,ru_,to_,CR_,
+	ri_,yyo_,u_,te_,no_,spc_,ha_,ttu_,pa_,ga_,spc_,si_,o_,re_,te_,si_,ma_,u_,zo_,kten_,EOM_,
+};
+
+const	u8	text299[] = {
+	a_,ta_,ma_,wo_,spc_,sa_,yu_,u_,ni_,spc_,hu_,ttu_,te_,spc_,mo_,ttu_,ki_,n_,no_,spc_,yo_,u_,na_,CR_,
+	ki_,re_,i_,na_,spc_,ne_,i_,ro_,wo_,spc_,hi_,bi_,ki_,wa_,ta_,ra_,se_,ru_,kten_,CR_,
+	ne_,i_,ro_,no_,spc_,o_,n_,ka_,i_,de_,spc_,na_,ka_,ma_,to_,spc_,ka_,i_,wa_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text305[] = {
+	KA_,MI_,NA_,RI_,no_,spc_,o_,ti_,ta_,spc_,ba_,si_,yyo_,ni_,spc_,a_,ra_,wa_,re_,ru_,kten_,CR_,
+	a_,ta_,ma_,no_,spc_,TU_,NO_,ha_,spc_,n1_,ne_,n_,ni_,spc_,n1_,ka_,i_,spc_,ha_,e_,ka_,wa_,ri_,CR_,
+	o_,o_,ki_,i_,ho_,do_,spc_,na_,ka_,ma_,ka_,ra_,spc_,so_,n_,ke_,i_,sa_,re_,ru_,ra_,si_,i_,kten_,EOM_,
+};
+
+const	u8	text306[] = {
+	si_,me_,ttu_,ta_,spc_,hi_,ka_,ge_,de_,spc_,yo_,ku_,spc_,mi_,ka_,ke_,ru_,kten_,CR_,
+	ki_,re_,i_,na_,spc_,ki_,i_,ro_,i_,spc_,ha_,na_,wo_,spc_,sa_,ka_,se_,ru_,ga_,CR_,
+	GO_,MI_,no_,yo_,u_,na_,spc_,ku_,sa_,i_,spc_,ni_,o_,i_,ga_,spc_,su_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text307[] = {
+	zi_,bu_,n_,no_,spc_,ka_,ra_,da_,ya_,spc_,ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+	wa_,ta_,no_,yo_,u_,na_,spc_,tu_,ba_,sa_,de_,spc_,hu_,ki_,to_,ru_,no_,ga_,spc_,da_,i_,su_,ki_,kten_,CR_,
+	tu_,ba_,sa_,ga_,spc_,yo_,go_,re_,ru_,to_,spc_,mi_,zu_,de_,spc_,se_,n_,ta_,ku_,wo_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text312[] = {
+	tu_,ki_,no_,yo_,ru_,spc_,na_,ka_,ma_,de_,spc_,o_,si_,ku_,ra_,ma_,n_,zi_,yyu_,u_,kten_,CR_,
+	gi_,yyu_,u_,gi_,yyu_,u_,spc_,o_,sa_,re_,te_,spc_,ga_,ma_,n_,du_,yo_,ku_,na_,ru_,kten_,CR_,
+	ki_,yyo_,u_,re_,tu_,na_,spc_,KA_,U_,N_,TA_,bou_,wo_,spc_,ku_,ri_,da_,su_,spc_,ku_,n_,re_,n_,kten_,EOM_,
+};
+
+const	u8	text313[] = {
+	ma_,yo_,na_,ka_,spc_,ku_,ra_,ya_,mi_,ni_,spc_,ka_,ku_,re_,spc_,a_,ru_,ki_,ma_,wa_,ru_,kten_,CR_,
+	MA_,MA_,ni_,spc_,si_,ka_,ra_,re_,ru_,yo_,u_,na_,spc_,wa_,ru_,i_,ko_,ha_,spc_,YO_,MA_,WA_,RU_,ni_,CR_,
+	sa_,ra_,wa_,re_,ru_,to_,i_,u_,spc_,i_,i_,tu_,ta_,e_,ga_,spc_,no_,ko_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text314[] = {
+	o_,o_,ki_,na_,spc_,A_,GO_,ha_,spc_,i_,wa_,wo_,mo_,spc_,ku_,da_,ku_,spc_,i_,ri_,yyo_,ku_,kten_,CR_,
+	na_,n_,ni_,de_,mo_,spc_,ka_,mi_,tu_,ki_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,ha_,na_,so_,u_,to_,CR_,
+	si_,na_,i_,spc_,to_,ttu_,te_,mo_,spc_,GA_,N_,KO_,na_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text317[] = {
+	ha_,na_,no_,spc_,i_,ro_,ha_,spc_,ko_,ta_,i_,ni_,yo_,ttu_,te_,spc_,ti_,ga_,u_,no_,de_,CR_,
+	me_,zu_,ra_,si_,i_,spc_,i_,ro_,wo_,spc_,mo_,to_,me_,ru_,spc_,hi_,to_,ha_,spc_,o_,o_,i_,kten_,CR_,
+	ki_,re_,i_,na_,spc_,i_,ke_,no_,spc_,ho_,to_,ri_,de_,spc_,yo_,ku_,spc_,mi_,ka_,ke_,ru_,kten_,EOM_,
+};
+
+const	u8	text318[] = {
+	ka_,ze_,ma_,ka_,se_,de_,spc_,ta_,da_,yo_,i_,na_,ga_,ra_,spc_,i_,do_,u_,su_,ru_,kten_,CR_,
+	ka_,ze_,no_,spc_,tu_,yo_,i_,to_,ki_,ha_,spc_,si_,ttu_,po_,wo_,spc_,ki_,no_,e_,da_,ni_,CR_,
+	ma_,ki_,tu_,ke_,te_,spc_,ka_,ze_,ga_,spc_,o_,sa_,ma_,ru_,no_,wo_,spc_,ma_,tu_,kten_,EOM_,
+};
+
+const	u8	text319[] = {
+	su_,ru_,do_,i_,spc_,TU_,ME_,de_,spc_,zi_,yyu_,mo_,ku_,no_,spc_,ne_,ttu_,ko_,wo_,spc_,ke_,zu_,ri_,CR_,
+	su_,i_,bu_,n_,ya_,spc_,e_,i_,yo_,u_,wo_,spc_,ki_,yyu_,u_,si_,yyu_,u_,su_,ru_,kten_,CR_,
+	si_,yyo_,ttu_,ka_,ku_,de_,spc_,ma_,wa_,ri_,no_,spc_,zi_,yyo_,u_,ki_,yyo_,u_,wo_,spc_,sa_,gu_,ru_,kten_,EOM_,
+};
+
+const	u8	text321[] = {
+	zi_,me_,n_,wo_,spc_,a_,ru_,ku_,to_,spc_,su_,gu_,ni_,spc_,KO_,RO_,KO_,RO_,spc_,ko_,ro_,ga_,ru_,kten_,CR_,
+	sa_,ka_,mi_,ti_,de_,spc_,ko_,ro_,ga_,ru_,to_,spc_,na_,ka_,na_,ka_,spc_,to_,ma_,re_,na_,i_,kten_,CR_,
+	hi_,to_,na_,tu_,ttu_,ko_,i_,spc_,se_,i_,ka_,ku_,no_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text322[] = {
+	ha_,ga_,spc_,n1_,po_,n_,mo_,spc_,na_,i_,no_,de_,spc_,na_,n_,de_,mo_,spc_,ma_,ru_,no_,mi_,kten_,CR_,
+	i_,ttu_,pa_,i_,ni_,spc_,a_,ke_,ta_,spc_,ku_,ti_,ha_,spc_,to_,te_,mo_,spc_,o_,o_,ki_,ku_,CR_,
+	zi_,do_,u_,si_,yya_,no_,spc_,TA_,I_,YA_,de_,mo_,spc_,ma_,ru_,go_,to_,spc_,no_,mi_,ko_,mu_,zo_,kten_,EOM_,
+};
+
+const	u8	text323[] = {
+	se_,na_,ka_,no_,spc_,ha_,ttu_,pa_,wo_,spc_,ha_,ba_,ta_,ka_,se_,te_,spc_,so_,ra_,wo_,spc_,to_,bu_,kten_,CR_,
+	o_,mo_,ta_,i_,spc_,ka_,ra_,da_,de_,spc_,no_,si_,ka_,ka_,re_,ba_,spc_,ga_,n_,zi_,yyo_,u_,na_,CR_,
+	TO_,RA_,TTU_,KU_,mo_,spc_,i_,ti_,ge_,ki_,de_,spc_,pe_,si_,yya_,n_,ko_,da_,kten_,EOM_,
+};
+
+const	u8	text325[] = {
+	hi_,to_,no_,spc_,ko_,ko_,ro_,wo_,spc_,yo_,mi_,to_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,CR_,
+	a_,ka_,ru_,i_,spc_,hi_,to_,ni_,spc_,so_,da_,te_,ra_,re_,ru_,to_,spc_,su_,ku_,su_,ku_,to_,CR_,
+	se_,i_,ti_,yyo_,u_,si_,spc_,ki_,re_,i_,na_,spc_,ha_,na_,wo_,spc_,tu_,ke_,ru_,to_,i_,u_,kten_,EOM_,
+};
+
+const	u8	text327[] = {
+	sa_,ka_,na_,no_,spc_,ka_,ta_,ti_,wo_,si_,ta_,spc_,SI_,TTU_,PO_,de_,spc_,o_,bi_,ki_,yo_,se_,CR_,
+	o_,o_,ki_,na_,spc_,ku_,ti_,de_,spc_,E_,SA_,wo_,spc_,ma_,ru_,no_,mi_,spc_,su_,ru_,kten_,CR_,
+	HE_,BI_,no_,yo_,u_,ni_,spc_,ka_,ra_,da_,wo_,spc_,ku_,ne_,ra_,se_,te_,spc_,o_,yo_,gu_,kten_,EOM_,
+};
+
+const	u8	text330[] = {
+	hu_,to_,ttu_,ta_,spc_,ka_,ra_,da_,ha_,spc_,ki_,n_,ni_,ku_,no_,spc_,ka_,ta_,ma_,ri_,kten_,CR_,
+	PO_,KE_,MO_,N_,de_,spc_,i_,ti_,ba_,n_,no_,spc_,ti_,ka_,ra_,mo_,ti_,to_,spc_,i_,wa_,re_,CR_,
+	n1_,n0_,TO_,N_,spc_,TO_,RA_,TTU_,KU_,wo_,spc_,ka_,ru_,ga_,ru_,spc_,mo_,ti_,a_,ge_,ru_,zo_,kten_,EOM_,
+};
+
+const	u8	text331[] = {
+	mi_,zu_,ku_,sa_,no_,spc_,si_,ge_,ttu_,ta_,spc_,ti_,i_,sa_,na_,spc_,i_,ke_,ni_,spc_,su_,mu_,kten_,CR_,
+	na_,ka_,ma_,ga_,spc_,a_,tu_,ma_,ru_,to_,spc_,mi_,zu_,be_,ni_,spc_,a_,ga_,ttu_,te_,CR_,
+	yo_,u_,ki_,na_,spc_,o_,n_,ga_,ku_,wo_,spc_,ka_,na_,de_,ha_,zi_,me_,ru_,kten_,EOM_,
+};
+
+const	u8	text334[] = {
+	o_,da_,ya_,ka_,na_,spc_,se_,i_,ka_,ku_,de_,spc_,a_,ra_,so_,i_,wo_,spc_,ko_,no_,ma_,na_,i_,kten_,CR_,
+	TU_,NO_,ni_,ha_,spc_,zi_,si_,yya_,ku_,no_,spc_,yo_,u_,na_,spc_,sa_,i_,bo_,u_,ga_,spc_,a_,ri_,CR_,
+	KO_,N_,PA_,SU_,no_,spc_,ya_,ku_,wa_,ri_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+const	u8	text335[] = {
+	zi_,yyu_,mo_,ku_,ni_,spc_,a_,na_,wo_,spc_,a_,ke_,spc_,ku_,ra_,si_,te_,i_,ru_,kten_,CR_,
+	ki_,ma_,gu_,re_,na_,spc_,se_,i_,ka_,ku_,de_,spc_,hi_,to_,ni_,spc_,na_,tu_,ki_,spc_,ni_,ku_,i_,ga_,CR_,
+	a_,i_,ku_,ru_,si_,i_,spc_,ka_,o_,de_,spc_,PE_,TTU_,TO_,to_,si_,te_,spc_,da_,i_,ni_,n_,ki_,kten_,EOM_,
+};
+
+const	u8	text336[] = {
+	ta_,be_,ha_,zi_,me_,ru_,to_,spc_,to_,ma_,ra_,na_,i_,spc_,ku_,i_,si_,n_,bo_,u_,kten_,CR_,
+	ta_,ta_,ka_,re_,te_,mo_,spc_,ki_,ga_,tu_,ka_,na_,i_,spc_,ni_,bu_,sa_,da_,ga_,CR_,
+	ku_,u_,hu_,ku_,ha_,spc_,n1_,bi_,yyo_,u_,de_,mo_,spc_,ta_,e_,ra_,re_,na_,i_,no_,da_,kten_,EOM_,
+};
+
+const	u8	text342[] = {
+	zi_,yyo_,u_,zu_,ni_,spc_,so_,da_,te_,na_,i_,to_,spc_,i_,u_,ko_,to_,wo_,spc_,ki_,ka_,zu_,CR_,
+	o_,o_,go_,e_,de_,spc_,na_,ki_,tu_,du_,ke_,ru_,no_,de_,spc_,TO_,RE_,bou_,NA_,bou_,no_,CR_,
+	u_,de_,ga_,spc_,ta_,me_,sa_,re_,ru_,spc_,PO_,KE_,MO_,N_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text343[] = {
+	ka_,ra_,da_,ha_,spc_,ma_,ttu_,ta_,ku_,spc_,i_,ta_,mi_,wo_,spc_,ka_,n_,zi_,na_,i_,kten_,CR_,
+	a_,ta_,ma_,no_,spc_,u_,e_,ni_,a_,ru_,spc_,wa_,ttu_,ka_,ga_,spc_,ho_,n_,ta_,i_,da_,to_,CR_,
+	ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,spc_,na_,zo_,no_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text344[] = {
+	mo_,to_,mo_,to_,ha_,spc_,ti_,zi_,yyo_,u_,de_,spc_,se_,i_,ka_,tu_,si_,te_,i_,ta_,ga_,CR_,
+	a_,ta_,ma_,no_,spc_,ha_,ttu_,pa_,ga_,spc_,o_,mo_,ku_,na_,ttu_,ta_,no_,de_,spc_,mi_,zu_,ni_,CR_,
+	u_,ka_,n_,de_,spc_,ku_,ra_,su_,yo_,u_,ni_,na_,ttu_,ta_,to_,spc_,i_,wa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text345[] = {
+	ma_,ttu_,ta_,ku_,spc_,o_,na_,zi_,spc_,BU_,TI_,mo_,yo_,u_,no_,spc_,TA_,TTU_,PU_,RU_,ha_,CR_,
+	so_,n_,za_,i_,spc_,si_,na_,i_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,kten_,CR_,
+	o_,bo_,tu_,ka_,na_,i_,spc_,a_,yu_,mi_,ga_,spc_,o_,do_,ri_,no_,yo_,u_,ni_,spc_,mi_,e_,ru_,kten_,EOM_,
+};
+
+const	u8	text346[] = {
+	ma_,n_,ge_,tu_,no_,spc_,zi_,ki_,spc_,ka_,ttu_,pa_,tu_,ni_,na_,ru_,spc_,si_,yyu_,u_,se_,i_,kten_,CR_,
+	ku_,u_,ti_,yyu_,u_,ni_,spc_,u_,i_,te_,spc_,i_,do_,u_,si_,spc_,a_,ka_,i_,spc_,hi_,to_,mi_,ha_,CR_,
+	mi_,ta_,mo_,no_,no_,spc_,ka_,ra_,da_,wo_,spc_,su_,ku_,ma_,se_,ru_,spc_,ha_,ku_,ri_,yyo_,ku_,kten_,EOM_,
+};
+
+const	u8	text347[] = {
+	a_,ta_,ma_,ka_,ra_,spc_,si_,ttu_,po_,ma_,de_,spc_,ko_,u_,te_,tu_,no_,spc_,YO_,RO_,I_,de_,CR_,
+	o_,o_,wa_,re_,spc_,do_,n_,na_,spc_,ko_,u_,ge_,ki_,mo_,spc_,ha_,ne_,ka_,e_,su_,zo_,kten_,CR_,
+	ka_,ta_,i_,spc_,a_,ta_,ma_,wo_,spc_,tu_,ka_,i_,spc_,ya_,ma_,ni_,spc_,a_,na_,wo_,spc_,ho_,ru_,kten_,EOM_,
+};
+
+const	u8	text350[] = {
+	se_,i_,ta_,i_,ga_,spc_,ho_,to_,n_,do_,spc_,ka_,i_,me_,i_,sa_,re_,te_,i_,na_,i_,kten_,CR_,
+	ku_,ti_,ya_,spc_,mi_,mi_,ga_,spc_,mi_,a_,ta_,ra_,na_,i_,ga_,spc_,o_,to_,ya_,spc_,hi_,ka_,ri_,ni_,CR_,
+	ha_,n_,no_,u_,su_,ru_,spc_,ko_,to_,da_,ke_,ha_,spc_,ka_,ku_,ni_,n_,sa_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text359[] = {
+	si_,ze_,n_,sa_,i_,ga_,i_,wo_,spc_,KI_,YYA_,TTU_,TI_,su_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,CR_,
+	ke_,wa_,si_,i_,spc_,sa_,n_,ga_,ku_,ti_,ta_,i_,ni_,spc_,se_,i_,so_,ku_,si_,CR_,
+	me_,ttu_,ta_,ni_,spc_,ya_,ma_,no_,spc_,hu_,mo_,to_,ni_,ha_,spc_,o_,ri_,te_,ko_,na_,i_,kten_,EOM_,
+};
+
+const	u8	text362[] = {
+	ze_,n_,si_,n_,ga_,spc_,si_,ro_,i_,spc_,U_,RO_,KO_,ni_,spc_,o_,o_,wa_,re_,te_,i_,ru_,kten_,CR_,
+	so_,ra_,wo_,spc_,to_,bu_,to_,spc_,U_,RO_,KO_,ga_,spc_,to_,bi_,ti_,ri_,CR_,
+	KI_,RA_,KI_,RA_,to_,spc_,hi_,ka_,ri_,no_,spc_,o_,bi_,wo_,spc_,so_,ra_,ni_,spc_,tu_,ku_,ru_,kten_,EOM_,
+};
+
+const	u8	text368[] = {
+	na_,n_,de_,mo_,spc_,ta_,be_,te_,si_,ma_,u_,spc_,za_,ttu_,si_,yyo_,ku_,se_,i_,kten_,CR_,
+	si_,tu_,ko_,i_,spc_,se_,i_,ka_,ku_,de_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,a_,ki_,ra_,me_,na_,i_,kten_,CR_,
+	a_,si_,ga_,spc_,mi_,zi_,ka_,i_,no_,de_,spc_,ha_,si_,ru_,spc_,so_,ku_,do_,ha_,spc_,o_,so_,i_,kten_,EOM_,
+};
+
+const	u8	text369[] = {
+	ya_,sa_,si_,i_,spc_,se_,i_,ka_,ku_,de_,spc_,a_,ra_,so_,i_,wo_,spc_,ki_,ra_,u_,ga_,CR_,
+	i_,ti_,do_,spc_,o_,ko_,ru_,to_,spc_,su_,go_,i_,spc_,PA_,WA_,bou_,wo_,spc_,ha_,ttu_,ki_,su_,ru_,kten_,CR_,
+	i_,tu_,mo_,spc_,RA_,TE_,II_,O_,SU_,to_,spc_,ko_,u_,do_,u_,wo_,spc_,to_,mo_,ni_,su_,ru_,kten_,EOM_,
+};
+
+const	u8	text370[] = {
+	o_,ti_,tu_,i_,ta_,spc_,se_,i_,ka_,ku_,de_,spc_,si_,n_,ra_,i_,su_,ru_,spc_,ni_,n_,ge_,n_,no_,CR_,
+	i_,u_,ko_,to_,wo_,spc_,su_,na_,o_,ni_,spc_,ki_,ku_,spc_,PO_,KE_,MO_,N_,da_,kten_,CR_,
+	ZI_,EE_,TTU_,TO_,ki_,spc_,yo_,ri_,mo_,spc_,ha_,ya_,ku_,spc_,so_,ra_,wo_,spc_,to_,bu_,kten_,EOM_,
+};
+
+const	u8	text372[] = {
+	se_,na_,ka_,no_,spc_,ka_,ta_,i_,spc_,ke_,wo_,spc_,zi_,yyu_,mo_,ku_,ni_,spc_,ko_,su_,ri_,tu_,ke_,CR_,
+	zi_,bu_,n_,no_,spc_,na_,wa_,ba_,ri_,de_,spc_,a_,ru_,spc_,si_,ru_,si_,wo_,spc_,tu_,ke_,ru_,kten_,CR_,
+	si_,n_,da_,spc_,hu_,ri_,wo_,spc_,si_,te_,spc_,te_,ki_,no_,spc_,me_,wo_,spc_,go_,ma_,ka_,su_,zo_,kten_,EOM_,
+};
+
+const	u8	text374[] = {
+	U_,RO_,KO_,no_,spc_,ha_,ne_,ha_,spc_,to_,te_,mo_,spc_,ka_,ta_,ku_,spc_,su_,ru_,do_,i_,kten_,CR_,
+	te_,ttu_,pa_,n_,wo_,spc_,ki_,ri_,sa_,ku_,spc_,ki_,yyo_,u_,ri_,yyo_,ku_,na_,spc_,bu_,ki_,da_,kten_,CR_,
+	n1_,n0_,pi_,ki_,ho_,do_,no_,spc_,mu_,re_,de_,spc_,ko_,u_,do_,u_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+const	u8	text382[] = {
+	mi_,zu_,ka_,ra_,spc_,sa_,n_,so_,wo_,spc_,su_,i_,to_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,de_,CR_,
+	su_,i_,ti_,yyu_,u_,de_,spc_,ka_,tu_,do_,u_,su_,ru_,spc_,ko_,to_,mo_,spc_,a_,ru_,kten_,CR_,
+	i_,ke_,no_,spc_,bi_,se_,i_,bu_,tu_,ha_,spc_,da_,i_,ko_,u_,bu_,tu_,da_,kten_,EOM_,
+};
+
+const	u8	text385[] = {
+	o_,do_,ru_,spc_,yo_,u_,na_,spc_,mi_,no_,ko_,na_,si_,to_,spc_,hu_,ka_,i_,spc_,ma_,na_,za_,si_,de_,CR_,
+	a_,i_,te_,wo_,spc_,sa_,i_,mi_,n_,spc_,zi_,yyo_,u_,ta_,i_,ni_,spc_,si_,te_,si_,ma_,u_,kten_,CR_,
+	ME_,SU_,si_,ka_,spc_,ka_,ku_,ni_,n_,sa_,re_,te_,i_,na_,i_,spc_,PO_,KE_,MO_,N_,da_,kten_,EOM_,
+};
+
+const	u8	text392[] = {
+	ku_,ra_,i_,to_,ki_,ni_,ha_,spc_,si_,yyo_,ttu_,ka_,ku_,wo_,spc_,tu_,ka_,ttu_,te_,CR_,
+	si_,yyo_,u_,ga_,i_,bu_,tu_,ya_,spc_,E_,SA_,wo_,spc_,sa_,ttu_,ti_,su_,ru_,zo_,kten_,CR_,
+	yo_,zo_,ra_,ni_,spc_,si_,yyu_,u_,da_,n_,de_,spc_,zu_,ke_,i_,wo_,spc_,e_,ga_,ku_,kten_,EOM_,
+};
+
+const	u8	text393[] = {
+	n2_,ho_,n_,no_,spc_,si_,yyo_,ttu_,ka_,ku_,ha_,spc_,to_,te_,mo_,spc_,be_,n_,ri_,kten_,CR_,
+	ku_,ra_,i_,to_,ki_,ni_,spc_,ma_,wa_,ri_,no_,spc_,yo_,u_,su_,wo_,spc_,sa_,gu_,ttu_,ta_,ri_,CR_,
+	ti_,i_,sa_,i_,spc_,mo_,no_,na_,ra_,spc_,mo_,ti_,a_,ge_,ru_,spc_,ko_,to_,mo_,spc_,de_,ki_,ru_,kten_,EOM_,
+};
+
+const	ZUKAN_DATA	zukanData[] = {
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //0
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //1
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //2
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //3
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //4
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //5
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //6
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //7
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //8
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //9
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //10
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //11
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //12
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //13
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //14
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //15
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //16
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //17
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //18
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //19
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //20
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //21
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //22
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //23
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //24
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //25
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //26
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //27
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //28
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //29
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //30
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //31
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //32
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //33
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //34
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //35
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //36
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //37
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //38
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //39
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //40
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //41
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //42
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //43
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //44
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //45
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //46
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //47
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //48
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //49
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //50
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //51
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //52
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //53
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //54
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //55
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //56
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //57
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //58
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //59
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //60
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //61
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //62
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //63
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //64
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //65
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //66
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //67
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //68
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //69
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //70
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //71
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //72
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //73
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //74
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //75
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //76
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //77
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //78
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //79
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //80
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //81
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //82
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //83
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //84
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //85
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //86
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //87
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //88
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //89
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //90
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //91
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //92
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //93
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //94
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //95
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //96
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //97
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //98
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //99
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //100
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //101
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //102
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //103
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //104
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //105
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //106
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //107
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //108
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //109
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //110
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //111
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //112
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //113
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //114
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //115
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //116
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //117
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //118
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //119
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //120
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //121
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //122
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //123
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //124
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //125
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //126
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //127
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //128
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //129
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //130
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //131
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //132
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //133
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //134
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //135
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //136
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //137
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //138
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //139
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //140
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //141
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //142
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //143
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //144
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //145
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //146
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //147
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //148
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //149
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //150
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //151
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //152
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //153
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //154
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //155
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //156
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //157
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //158
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //159
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //160
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //161
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //162
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //163
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //164
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //165
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //166
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //167
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //168
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //169
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //170
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //171
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //172
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //173
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //174
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //175
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //176
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //177
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //178
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //179
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //180
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //181
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //182
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //183
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //184
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //185
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //186
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //187
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //188
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //189
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //190
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //191
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //192
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //193
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //194
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //195
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //196
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //197
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //198
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //199
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //200
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //201
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //202
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //203
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //204
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //205
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //206
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //207
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //208
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //209
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //210
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //211
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //212
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //213
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //214
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //215
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //216
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //217
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //218
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //219
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //220
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //221
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //222
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //223
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //224
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //225
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //226
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //227
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //228
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //229
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //230
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //231
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //232
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //233
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //234
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //235
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //236
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //237
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //238
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //239
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //240
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //241
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //242
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //243
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //244
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //245
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //246
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //247
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //248
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //249
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //250
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //251
+	{{mo_,ri_,TO_,KA_,GE_},5,50,text252,0,0x0100,0x0000,0x0100,0x0000},	 //252
+	{{mi_,tu_,ri_,n_,spc_},13,350,text253,0,0x0100,0x0000,0x0100,0x0000},	 //253
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //254
+	{{hi_,yo_,ko_,spc_,spc_},4,25,text255,0,0x0100,0x0000,0x0100,0x0000},	 //255
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //256
+	{{to_,u_,ke_,i_,spc_},20,520,text257,0,0x0100,0x0003,0x0130,0x0001},	 //257
+	{{nu_,ma_,u_,o_,spc_},4,76,text258,0,0x0100,0x0000,0x0100,0x0000},	 //258
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //259
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //260
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //261
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //262
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //263
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //264
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //265
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //266
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //267
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //268
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //269
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //270
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //271
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //272
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //273
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //274
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //275
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //276
+	{{hu_,n_,ka_,spc_,spc_},19,2200,text277,0,0x0100,0x0000,0x0148,0x0006},	 //277
+	{{mi_,zu_,to_,ri_,spc_},14,140,text278,0,0x0100,0x0001,0x0142,0xFFFB},	 //278
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //279
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //280
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //281
+	{{ku_,ro_,i_,si_,spc_},5,230,text282,0,0x01AC,0x0012,0x0100,0x0000},	 //282
+	{{mi_,zu_,ta_,ma_,spc_},2,20,text283,0,0x0181,0x0011,0x0100,0x0000},	 //283
+	{{i_,ro_,he_,n_,ge_},10,220,text284,0,0x0143,0x000A,0x0100,0x0000},	 //284
+	{{ta_,ma_,ku_,zi_,ra_},20,1300,text285,0,0x0100,0xFFFC,0x01BA,0x0001},	 //285
+	{{i_,ta_,zu_,ra_,spc_},8,145,text286,0,0x0146,0x000F,0x0100,0x0000},	 //286
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //287
+	{{a_,me_,n_,bo_,spc_},5,17,text288,0,0x0149,0x000B,0x0100,0x0000},	 //288
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //289
+	{{ku_,ra_,ya_,mi_,spc_},5,110,text290,0,0x0175,0x0010,0x0100,0x0000},	 //290
+	{{ki_,yyo_,u_,bo_,u_},20,820,text291,0,0x0100,0x0000,0x013D,0x0003},	 //291
+	{{do_,gu_,u_,spc_,spc_},15,1080,text292,0,0x0100,0x0002,0x011E,0x0002},	 //292
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //293
+	{{ko_,du_,re_,spc_,spc_},8,125,text294,0,0x015B,0x000C,0x0100,0x0000},	 //294
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //295
+	{{ki_,no_,ko_,spc_,spc_},4,45,text296,0,0x0154,0x0010,0x0100,0x0000},	 //296
+	{{to_,ko_,na_,tu_,spc_},7,80,text297,0,0x017E,0x000F,0x0100,0x0000},	 //297
+	{{ka_,n_,bo_,ku_,spc_},14,700,text298,0,0x0100,0x0003,0x0100,0x0000},	 //298
+	{{se_,i_,re_,i_,spc_},2,15,text299,0,0x01DD,0x0014,0x0100,0x0000},	 //299
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //300
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //301
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //302
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //303
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //304
+	{{ko_,o_,ni_,spc_,spc_},10,375,text305,0,0x0140,0x0008,0x0100,0x0000},	 //305
+	{{mi_,zu_,go_,ke_,spc_},3,50,text306,0,0x019D,0x0012,0x0100,0x0000},	 //306
+	{{wa_,ta_,do_,ri_,spc_},4,12,text307,0,0x0139,0x000A,0x0100,0x0000},	 //307
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //308
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //309
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //310
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //311
+	{{ho_,ga_,ra_,ka_,spc_},6,140,text312,0,0x0135,0x000E,0x0100,0x0000},	 //312
+	{{o_,mu_,ka_,e_,spc_},8,15,text313,0,0x0169,0x0010,0x0100,0x0000},	 //313
+	{{a_,ri_,zi_,go_,ku_},10,150,text314,0,0x0100,0x000B,0x0100,0x0000},	 //314
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //315
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //316
+	{{i_,ba_,ra_,spc_,spc_},3,20,text317,0,0x01CE,0x000F,0x0100,0x0000},	 //317
+	{{hu_,u_,ri_,n_,spc_},6,2,text318,0,0x01F9,0x0010,0x0100,0x0000},	 //318
+	{{si_,ta_,du_,mi_,spc_},4,55,text319,0,0x016C,0x000F,0x0100,0x0000},	 //319
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //320
+	{{a_,za_,ra_,si_,spc_},15,400,text321,0,0x0100,0x0008,0x01AD,0x0009},	 //321
+	{{ki_,n_,ti_,yya_,ku_},17,800,text322,0,0x0100,0x0001,0x0154,0x0005},	 //322
+	{{BA_,NA_,NA_,spc_,spc_},20,1000,text323,0,0x0100,0x0000,0x0163,0x0009},	 //323
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //324
+	{{HU_,RA_,WA_,bou_,spc_},5,15,text325,0,0x01AB,0x0012,0x0100,0x0000},	 //325
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //326
+	{{si_,n_,ka_,i_,spc_},17,270,text327,0,0x0132,0x0006,0x0100,0x0000},	 //327
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //328
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //329
+	{{tu_,ttu_,pa_,ri_,spc_},23,2538,text330,0,0x0100,0x0000,0x0157,0x0007},	 //330
+	{{o_,n_,ka_,i_,spc_},4,25,text331,0,0x01CA,0x0012,0x0100,0x0000},	 //331
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //332
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //333
+	{{yu_,u_,ra_,n_,spc_},20,1100,text334,0,0x0100,0xFFFD,0x017A,0x0005},	 //334
+	{{ko_,ne_,ko_,spc_,spc_},6,110,text335,0,0x016A,0x000F,0x0100,0x0000},	 //335
+	{{do_,n_,ka_,n_,spc_},7,240,text336,0,0x0118,0x0010,0x0100,0x0000},	 //336
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //337
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //338
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //339
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //340
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //341
+	{{ni_,n_,zi_,yya_,spc_},8,120,text342,0,0x010D,0x0007,0x0100,0x0000},	 //342
+	{{nu_,ke_,ga_,ra_,spc_},8,12,text343,0,0x010D,0x0007,0x0100,0x0000},	 //343
+	{{u_,ki_,ku_,sa_,spc_},5,15,text344,0,0x017D,0x0013,0x0100,0x0000},	 //344
+	{{ti_,do_,ri_,a_,si_},11,50,text345,0,0x0156,0x000C,0x0100,0x0000},	 //345
+	{{i_,n_,se_,ki_,spc_},10,1000,text346,0,0x0133,0x0004,0x0100,0x0000},	 //346
+	{{ko_,u_,te_,tu_,spc_},15,1200,text347,0,0x0100,0x0000,0x0166,0x0004},	 //347
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //348
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //349
+	{{ku_,zi_,bi_,ki_,spc_},4,80,text350,0,0x017B,0x0010,0x0100,0x0000},	 //350
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //351
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //352
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //353
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //354
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //355
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //356
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //357
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //358
+	{{wa_,za_,wa_,i_,spc_},12,470,text359,0,0x012D,0x0007,0x0100,0x0000},	 //359
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //360
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //361
+	{{ha_,ku_,ri_,yyu_,u_},36,1750,text362,0,0x0100,0x0000,0x019E,0x0006},	 //362
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //363
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //364
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //365
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //366
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //367
+	{{ka_,mi_,tu_,ki_,spc_},10,240,text368,0,0x0119,0x000B,0x0100,0x0000},	 //368
+	{{mu_,ge_,n_,spc_,spc_},14,400,text369,0,0x0145,0x0005,0x0100,0x0000},	 //369
+	{{mu_,ge_,n_,spc_,spc_},20,600,text370,0,0x0100,0x0000,0x0126,0x0003},	 //370
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //371
+	{{ma_,me_,da_,nu_,ki_},10,250,text372,0,0x0100,0x000A,0x0100,0x0000},	 //372
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //373
+	{{si_,so_,ti_,yyo_,u_},13,350,text374,0,0x0100,0x0006,0x0100,0x0000},	 //374
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //375
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //376
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //377
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //378
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //379
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //380
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //381
+	{{to_,n_,bo_,spc_,spc_},14,820,text382,0,0x0100,0x0000,0x0122,0xFFFD},	 //382
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //383
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //384
+	{{hi_,ga_,n_,ba_,na_},13,270,text385,0,0x011E,0x0002,0x0100,0x0000},	 //385
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //386
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //387
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //388
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //389
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //390
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //391
+	{{ho_,ta_,ru_,spc_,spc_},7,177,text392,0,0x0100,0x0000,0x0100,0x0000},	 //392
+	{{ho_,ta_,ru_,spc_,spc_},6,177,text393,0,0x0100,0x0000,0x0100,0x0000},	 //393
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //394
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //395
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //396
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //397
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //398
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //399
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //400
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //401
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //402
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //403
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //404
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //405
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //406
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //407
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //408
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //409
+	{{mi_,ka_,ku_,ni_,n_},0,0,textdmy,0,0x0100,0,0x0100,0},	 //410
+};

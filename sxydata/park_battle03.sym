@@ -1,0 +1,6 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define BATTLE_TOWER_PC03	1
+
+//Exit ID = 0

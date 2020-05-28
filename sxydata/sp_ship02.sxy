@@ -1,0 +1,82 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_SP_SHIP02	2
+#define EXITNUM_SP_SHIP02	1
+#define POSNUM_SP_SHIP02	0
+#define BGNUM_SP_SHIP02	1
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_sailor_05[];
+extern const u8	ev_sailor_06[];
+
+const evObjData	OBJ_sp_ship02[] =
+{
+	{
+		TR_SAILOR_05,		//OBJ ID
+		SEAMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000a,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RTDR,		//Obj Mode Type
+		0x4,		//Move Limit X
+		0x4,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_sailor_05,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_SAILOR_06,		//OBJ ID
+		SEAMAN1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0007,		//Xpos
+		0x0004,		//Ypos
+		0x03,		//Height
+		MV_RTDL,		//Obj Mode Type
+		0x7,		//Move Limit X
+		0x4,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_sailor_06,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_sp_ship02[] =
+{
+	{
+		0x000f,		//Xpos
+		0x0002,		//Ypos
+		0x03,		//Height
+		SP_SHIP01_STAIR01,		//Door ID
+		SP_SHIP01,			//Map ID
+		SP,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_sp_ship02[] =
+{
+	{
+		0x0000,		//Xpos
+		0x0002,		//Ypos
+		0x00,		//Height
+		BG_ITEMPICK,		//Event Type
+		tabenokosi_35,		//Script
+	},
+
+};
+
+const SXY_DATA	sp_ship02_sxy_data =
+{
+OBJNUM_SP_SHIP02,			// field obj max
+EXITNUM_SP_SHIP02,		// exit max
+POSNUM_SP_SHIP02,			// pos event max
+BGNUM_SP_SHIP02,			// bg event max
+OBJ_sp_ship02,			// field obj data
+EXIT_sp_ship02,			// exit data
+NULL,			// pos event data
+BG_sp_ship02,				// bg event data
+};

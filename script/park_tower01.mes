@@ -1,0 +1,158 @@
+// バトルタワー・島
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_park_tower01
+msg_kanban_01_p01_park_tower01:
+	.byte	ko_,ko_,ha_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,gyoe_
+	.byte	CR_
+	.byte	ka_,ti_,nu_,ke_,gyoe_,spc_,sa_,i_,ki_,yyo_,u_,spc_,TO_,RE_,bou_,NA_,bou_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_capboy2_01_p01_park_tower01
+msg_capboy2_01_p01_park_tower01:
+	.byte	ko_,ko_,ha_,spc_,BA_,TO_,RU_,TA_,WA_,bou_,spc_,sa_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,ha_,spc_,ki_,ta_,e_,a_,ge_,ta_,spc_,PO_,KE_,MO_,N_,de_
+	.byte	CR_
+	.byte	hi_,ta_,su_,ra_,spc_,ka_,ti_,nu_,i_,te_,spc_,i_,ku_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●受付嬢
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p01_park_tower01
+msg_workerw2_01_p01_park_tower01:
+	.byte	re_,n_,ra_,ku_,se_,n_,wo_,spc_,go_,ri_,yo_,u_,spc_,de_,su_,ne_,gyoe_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,ha_,spc_,o_,mo_,ti_,spc_,de_,si_,yyo_,u_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ふねのチケット」を
+// 　持っていない　→msg_workerw2_01_p06_park_tower01:
+// 　持っている　　→msg_workerw2_01_p05_park_tower01:
+
+// ●「ふねのチケット」を持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p06_park_tower01
+msg_workerw2_01_p06_park_tower01:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,wo_,spc_,mo_,ttu_,te_,i_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,mo_,u_,si_,wa_,ke_,spc_,a_,ri_,ma_,se_,n_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	hu_,ne_,ni_,spc_,no_,re_,ru_,no_,ha_
+	.byte	CR_
+	.byte	TI_,KE_,TTU_,TO_,no_,spc_,a_,ru_,spc_,ka_,ta_,spc_,da_,ke_,de_,su_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「ふねのチケット」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p05_park_tower01
+msg_workerw2_01_p05_park_tower01:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	hu_,ne_,no_,TI_,KE_,TTU_,TO_,wo_,spc_,mi_,se_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,i_,gyoe_,spc_,ke_,ttu_,ko_,u_,spc_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ki_,sa_,ki_,ha_,spc_,do_,ti_,ra_,spc_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウ表示
+// 　カイナ
+// 　ミナモ
+// 　やめる
+// ●「カイナ」→msg_workerw2_01_p02_park_tower01:
+// ●「ミナモ」→msg_workerw2_01_p03_park_tower01:
+// ●「やめる」→msg_workerw2_01_p04_park_tower01:
+
+// ●「カイナ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p02_park_tower01
+msg_workerw2_01_p02_park_tower01:
+	.byte	KA_,I_,NA_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw2_01_p07_park_tower01:
+// ●「いいえ」→msg_workerw2_01_p08_park_tower01:
+
+// ●「ミナモ」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p03_park_tower01
+msg_workerw2_01_p03_park_tower01:
+	.byte	MI_,NA_,MO_,spc_,de_,su_,ne_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_workerw2_01_p07_park_tower01:
+// ●「いいえ」→msg_workerw2_01_p08_park_tower01:
+
+// ●「やめる」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p04_park_tower01
+msg_workerw2_01_p04_park_tower01:
+	.byte	ma_,ta_,spc_,go_,ri_,yo_,u_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p07_park_tower01
+msg_workerw2_01_p07_park_tower01:
+	.byte	re_,n_,ra_,ku_,se_,n_,ni_,spc_,no_,ttu_,te_,spc_,o_,ma_,ti_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●乗船処理
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerw2_01_p08_park_tower01
+msg_workerw2_01_p08_park_tower01:
+	.byte	i_,ki_,sa_,ki_,ha_,spc_,do_,ti_,ra_,spc_,de_,si_,yyo_,u_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●選択ウインドウを再度表示
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_woman2_01_p01_park_tower01
+msg_woman2_01_p01_park_tower01:
+	.byte	ki_,yyo_,u_,ha_,spc_,n3_,n5_,ni_,n_,nu_,ki_,spc_,de_,ki_,ru_,ma_,de_,ha_
+	.byte	CR_
+	.byte	ka_,e_,ri_,ma_,se_,n_,wa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●客
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boy2_01_p01_park_tower01
+msg_boy2_01_p01_park_tower01:
+	.byte	su_,go_,ku_,spc_,tu_,yo_,so_,u_,na_,spc_,TO_,RE_,bou_,NA_,bou_,ga_
+	.byte	CR_
+	.byte	i_,ttu_,pa_,i_,spc_,da_,ne_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	bo_,ku_,ha_,spc_,ma_,da_,spc_,de_,ra_,re_,so_,u_,ni_,spc_,na_,i_,ya_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,590 @@
+//=========================================================================
+//	
+//	Œﬂπ”›Ç∏Ç©ÇÒ√ﬁ∞¿
+//
+//=========================================================================
+static	const	u8	noget_text[] = {
+	EOM_,
+};
+
+static	const	u8	textdmy[] = {
+	a_,ta_,ra_,si_,ku_,spc_,ha_,ttu_,ke_,n_,sa_,re_,ta_,PO_,KE_,MO_,N_,CR_,
+	ge_,n_,za_,i_,spc_,ti_,yyo_,u_,sa_,ti_,yyu_,u_,EOM_,
+};
+
+static	const	u8	text277[] = {
+se_,na_,ka_,no_,spc_,KO_,BU_,ha_,spc_,ho_,ne_,ga_,spc_,ka_,ta_,ti_,wo_,spc_,ka_,e_,ta_,mo_,no_,kten_,to_,si_,wo_,CR_,
+to_,ru_,to_,spc_,do_,n_,do_,n_,spc_,o_,o_,ki_,ku_,spc_,na_,ru_,zo_,kten_,a_,ma_,ri_,ni_,mo_,spc_,KO_,BU_,ga_,CR_,
+o_,o_,ki_,ku_,na_,ru_,to_,spc_,ka_,ra_,da_,ga_,spc_,o_,mo_,ku_,na_,ri_,spc_,u_,go_,ki_,ga_,spc_,ni_,bu_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text278[] = {
+KU_,TI_,BA_,SI_,ni_,spc_,ha_,i_,ru_,mo_,no_,na_,ra_,spc_,na_,n_,de_,mo_,spc_,i_,re_,te_,si_,ma_,u_,kten_,CR_,
+ti_,i_,sa_,i_,spc_,PO_,KE_,MO_,N_,ya_,spc_,TA_,MA_,GO_,wo_,spc_,KU_,TI_,BA_,SI_,ni_,spc_,i_,re_,te_,CR_,
+ha_,ko_,n_,de_,i_,ru_,spc_,su_,ga_,ta_,wo_,spc_,mi_,ka_,ke_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,zo_,kten_,EOM_,
+};
+
+static	const	u8	text283[] = {
+i_,so_,i_,de_,i_,ru_,spc_,to_,ki_,ha_,spc_,na_,ge_,na_,wa_,no_,spc_,yo_,u_,ri_,yyo_,u_,de_,spc_,si_,ttu_,po_,wo_,CR_,
+na_,ge_,te_,spc_,ka_,ra_,da_,go_,to_,spc_,to_,n_,de_,i_,ku_,kten_,sa_,i_,ko_,u_,spc_,n1_,n0_,ME_,bou_,TO_,RU_,CR_,
+to_,n_,da_,spc_,to_,i_,u_,spc_,ki_,ro_,ku_,ga_,spc_,no_,ko_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text284[] = {
+ka_,ra_,da_,no_,spc_,i_,ro_,wo_,spc_,ha_,i_,ke_,i_,to_,spc_,o_,na_,zi_,ni_,si_,te_,spc_,na_,n_,zi_,ka_,n_,mo_,CR_,
+u_,go_,ka_,na_,i_,kten_,e_,mo_,no_,ga_,spc_,ti_,ka_,zu_,ku_,to_,spc_,na_,ga_,i_,spc_,BE_,RO_,wo_,spc_,no_,ba_,si_,CR_,
+tu_,ka_,ma_,e_,ru_,kten_,BE_,RO_,no_,spc_,u_,go_,ki_,ha_,spc_,me_,ni_,mo_,spc_,to_,ma_,ra_,nu_,spc_,ha_,ya_,sa_,kten_,EOM_,
+};
+
+static	const	u8	text285[] = {
+a_,ta_,ma_,no_,spc_,u_,e_,ni_,a_,ru_,spc_,ha_,na_,no_,a_,na_,ka_,ra_,spc_,mi_,zu_,de_,ttu_,po_,u_,wo_,CR_,
+to_,ba_,su_,kten_,ha_,ma_,be_,ni_,spc_,a_,ga_,ttu_,te_,spc_,hi_,to_,wo_,spc_,o_,do_,ro_,ka_,su_,no_,ga_,CR_,
+da_,i_,su_,ki_,kten_,ka_,ra_,da_,ga_,spc_,ka_,n_,so_,u_,su_,ru_,to_,spc_,yo_,wa_,ttu_,te_,si_,ma_,u_,kten_,EOM_,
+};
+
+static	const	u8	text288[] = {
+a_,me_,a_,ga_,ri_,no_,spc_,ha_,re_,ta_,spc_,hi_,spc_,ni_,ha_,spc_,mi_,zu_,ta_,ma_,ri_,ni_,spc_,ta_,i_,ri_,yyo_,u_,CR_,
+ha_,ttu_,se_,i_,su_,ru_,kten_,tu_,ma_,sa_,ki_,ka_,ra_,spc_,a_,bu_,ra_,wo_,spc_,da_,su_,ko_,to_,de_,CR_,
+su_,i_,me_,n_,no_,spc_,u_,e_,wo_,spc_,su_,be_,ru_,yo_,u_,ni_,spc_,a_,ru_,ku_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text290[] = {
+do_,u_,ku_,tu_,no_,spc_,ku_,ra_,ya_,mi_,ni_,spc_,hi_,so_,mi_,spc_,e_,mo_,no_,wo_,spc_,ma_,ti_,bu_,se_,su_,ru_,kten_,CR_,
+do_,n_,na_,ni_,spc_,ku_,ra_,ku_,te_,mo_,spc_,n1_,n0_,n0_,ME_,bou_,TO_,RU_,spc_,sa_,ki_,ni_,a_,ru_,CR_,
+ko_,i_,si_,wo_,spc_,mi_,wa_,ke_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,spc_,si_,ri_,yyo_,ku_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+static	const	u8	text292[] = {
+DO_,RO_,ni_,n_,gi_,yyo_,u_,ga_,spc_,u_,ti_,yyu_,u_,ka_,ra_,spc_,hu_,ri_,so_,so_,gu_,spc_,ko_,u_,se_,n_,wo_,CR_,
+a_,bi_,te_,spc_,se_,i_,me_,i_,wo_,spc_,ya_,do_,si_,ta_,no_,ga_,spc_,ha_,zi_,ma_,ri_,to_,spc_,i_,wa_,re_,ru_,kten_,CR_,
+a_,si_,ha_,spc_,na_,ku_,spc_,ku_,u_,ti_,yyu_,u_,wo_,spc_,hu_,yu_,u_,si_,te_,spc_,i_,do_,u_,su_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text294[] = {
+zi_,bu_,n_,no_,spc_,ko_,do_,mo_,zi_,yya_,spc_,na_,ku_,te_,mo_,spc_,ti_,i_,sa_,na_,spc_,i_,ki_,mo_,no_,wo_,CR_,
+mi_,tu_,ke_,ru_,to_,spc_,se_,na_,ka_,ni_,spc_,no_,se_,ru_,spc_,si_,yyu_,u_,se_,i_,wo_,spc_,mo_,tu_,kten_,CR_,
+ka_,ta_,i_,mo_,no_,wo_,spc_,ka_,zi_,ru_,ko_,to_,de_,spc_,ha_,mi_,ga_,ki_,wo_,spc_,si_,te_,i_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text299[] = {
+mo_,ri_,no_,spc_,na_,ka_,de_,spc_,mi_,ti_,ni_,spc_,ma_,yo_,u_,to_,spc_,KO_,MA_,RI_,ga_,spc_,TU_,NO_,wo_,CR_,
+na_,ra_,si_,te_,spc_,ka_,e_,ri_,mi_,ti_,wo_,spc_,o_,si_,e_,te_,ku_,re_,ru_,to_,i_,u_,kten_,ko_,no_,to_,ki_,CR_,
+su_,ga_,ta_,wo_,spc_,mi_,ru_,to_,spc_,si_,a_,wa_,se_,ni_,na_,ru_,to_,spc_,tu_,ta_,e_,ra_,re_,te_,i_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text312[] = {
+na_,ni_,wo_,spc_,ki_,ka_,re_,te_,mo_,spc_,he_,n_,zi_,ha_,spc_,kako_,so_,bou_,na_,no_,kakot_,kten_,CR_,
+ti_,ga_,u_,to_,ki_,ha_,spc_,si_,ttu_,po_,wo_,spc_,sa_,yu_,u_,ni_,spc_,hu_,ttu_,te_,i_,ru_,kten_,CR_,
+zi_,me_,n_,wo_,spc_,ta_,ta_,i_,te_,i_,ru_,to_,ki_,ha_,spc_,o_,ko_,ttu_,te_,i_,ru_,spc_,a_,i_,zu_,da_,kten_,EOM_,
+};
+
+static	const	u8	text313[] = {
+do_,n_,na_,ni_,spc_,a_,tu_,i_,spc_,KA_,BE_,de_,mo_,spc_,to_,o_,ri_,nu_,ke_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,kten_,CR_,
+YO_,MA_,WA_,RU_,ni_,spc_,ne_,ra_,wa_,re_,ta_,ra_,spc_,sa_,i_,go_,spc_,a_,sa_,ni_,na_,ri_,spc_,ta_,i_,yo_,u_,ga_,CR_,
+no_,bo_,ru_,ma_,de_,spc_,zu_,ttu_,to_,spc_,o_,i_,ka_,ke_,ra_,ru_,ko_,to_,ni_,na_,ru_,zo_,kten_,EOM_,
+};
+
+static	const	u8	text314[] = {
+u_,si_,ro_,a_,si_,de_,spc_,a_,na_,wo_,spc_,ho_,ri_,spc_,o_,si_,ri_,ka_,ra_,spc_,su_,na_,ni_,spc_,mo_,gu_,ru_,kten_,CR_,
+ti_,ti_,yyu_,u_,spc_,se_,i_,ka_,tu_,ga_,spc_,na_,ga_,i_,ta_,me_,spc_,me_,ga_,wa_,ru_,i_,kten_,CR_,
+si_,ta_,ni_,spc_,mo_,no_,ga_,spc_,hu_,re_,ru_,to_,spc_,ha_,n_,si_,yya_,te_,ki_,ni_,spc_,ka_,mi_,tu_,ku_,kten_,EOM_,
+};
+
+static	const	u8	text316[] = {
+o_,o_,ki_,na_,spc_,tu_,ba_,sa_,ha_,spc_,hu_,u_,so_,ku_,n3_,n0_,ME_,bou_,TO_,RU_,no_,spc_,ki_,yyo_,u_,hu_,u_,wo_,CR_,
+ma_,ki_,o_,ko_,su_,kten_,ku_,mo_,wo_,spc_,hu_,ki_,to_,ba_,si_,spc_,hi_,to_,bi_,to_,ni_,spc_,ta_,i_,yo_,u_,no_,CR_,
+hi_,ka_,ri_,wo_,spc_,a_,ta_,e_,ta_,spc_,to_,i_,u_,spc_,de_,n_,se_,tu_,ga_,spc_,no_,ko_,ttu_,te_,i_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text317[] = {
+i_,ke_,no_,ho_,to_,ri_,ni_,spc_,se_,i_,so_,ku_,si_,spc_,i_,ti_,ni_,ti_,no_,u_,ti_,spc_,n1_,n8_,zi_,ka_,n_,ha_,CR_,
+ne_,mu_,ttu_,te_,i_,ru_,kten_,o_,to_,na_,si_,i_,spc_,se_,i_,ka_,ku_,da_,ga_,spc_,ha_,na_,wo_,spc_,ne_,ra_,u_,CR_,
+te_,ki_,ni_,ha_,spc_,do_,ku_,wo_,mo_,tu_,spc_,a_,ta_,ma_,no_,spc_,TO_,GE_,de_,spc_,ko_,u_,ge_,ki_,su_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text318[] = {
+ka_,ra_,da_,no_,spc_,ku_,u_,do_,u_,wo_,spc_,tu_,ka_,i_,spc_,ki_,re_,i_,na_,spc_,na_,ki_,go_,e_,wo_,CR_,
+hi_,bi_,ka_,se_,ru_,kten_,o_,ko_,ttu_,ta_,to_,ki_,no_,spc_,na_,ki_,go_,e_,ha_,spc_,hi_,to_,no_,spc_,mi_,mi_,ni_,ha_,CR_,
+ki_,ko_,e_,na_,i_,spc_,ti_,yyo_,u_,o_,n_,pa_,to_,na_,ri_,spc_,a_,i_,te_,wo_,spc_,hu_,ki_,to_,ba_,su_,kten_,EOM_,
+};
+
+static	const	u8	text319[] = {
+zi_,yyu_,mo_,ku_,no_,spc_,ne_,ttu_,ko_,ka_,ra_,spc_,e_,i_,yo_,u_,wo_,spc_,ki_,yyu_,u_,si_,yyu_,u_,su_,ru_,kten_,CR_,
+ku_,ra_,i_,spc_,tu_,ti_,no_,na_,ka_,de_,spc_,se_,i_,ka_,tu_,si_,te_,i_,ru_,ta_,me_,spc_,ta_,i_,yo_,u_,ga_,CR_,
+ni_,ga_,te_,kten_,ma_,yo_,na_,ka_,spc_,zi_,me_,n_,ka_,ra_,spc_,de_,te_,spc_,u_,go_,ki_,ma_,wa_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text321[] = {
+ka_,i_,ga_,n_,no_,i_,wa_,ba_,ni_,spc_,se_,i_,so_,ku_,kten_,se_,n_,su_,i_,ga_,spc_,to_,ku_,i_,de_,CR_,
+hu_,ka_,sa_,spc_,n1_,n0_,n0_,ME_,bou_,TO_,RU_,ma_,de_,spc_,mo_,gu_,ri_,spc_,E_,SA_,wo_,spc_,tu_,ka_,ma_,e_,ru_,kten_,CR_,
+o_,yo_,gi_,ha_,spc_,u_,ma_,i_,ga_,spc_,zi_,me_,n_,wo_,spc_,a_,ru_,ku_,to_,spc_,to_,te_,mo_,spc_,o_,so_,i_,kten_,EOM_,
+};
+
+static	const	u8	text342[] = {
+ko_,u_,so_,ku_,de_,spc_,u_,go_,ki_,ma_,wa_,ru_,ta_,me_,spc_,so_,no_,su_,ga_,ta_,wo_,spc_,mi_,ru_,ko_,to_,ha_,CR_,
+to_,te_,mo_,spc_,mu_,zu_,ka_,si_,i_,kten_,na_,ki_,go_,e_,si_,ka_,spc_,ki_,ko_,e_,te_,ko_,na_,i_,no_,de_,CR_,
+na_,ga_,i_,a_,i_,da_,spc_,to_,u_,me_,i_,na_,PO_,KE_,MO_,N_,to_,spc_,ka_,n_,ga_,e_,ra_,re_,te_,i_,ta_,kten_,EOM_,
+};
+
+static	const	u8	text343[] = {
+ka_,ra_,da_,ha_,spc_,a_,ru_,ga_,spc_,ta_,ma_,si_,i_,wo_,spc_,mo_,ta_,na_,i_,spc_,na_,zo_,no_,PO_,KE_,MO_,N_,kten_,CR_,
+a_,ta_,ma_,no_,u_,e_,ni_,a_,ru_,spc_,wa_,ttu_,ka_,ga_,spc_,zi_,tu_,ha_,ho_,n_,ta_,i_,na_,no_,de_,ha_,to_,CR_,
+ka_,n_,ga_,e_,ra_,re_,te_,i_,ru_,kten_,hu_,wa_,hu_,wa_,to_,spc_,u_,i_,te_,spc_,i_,do_,u_,su_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text344[] = {
+o_,da_,ya_,ka_,na_,spc_,mi_,zu_,u_,mi_,no_,spc_,ho_,to_,ri_,de_,spc_,a_,ta_,ma_,no_,spc_,ha_,ttu_,pa_,wo_,CR_,
+su_,i_,me_,n_,ni_,spc_,da_,si_,te_,spc_,u_,ka_,n_,de_,i_,ru_,kten_,ti_,i_,sa_,na_,spc_,i_,ki_,mo_,no_,ga_,CR_,
+ha_,ttu_,pa_,ni_,spc_,no_,ru_,to_,spc_,to_,tu_,ze_,n_,spc_,u_,go_,ki_,da_,si_,te_,spc_,o_,do_,ro_,ka_,se_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text345[] = {
+yo_,u_,ki_,na_,spc_,o_,n_,ga_,ku_,wo_,spc_,ki_,ku_,to_,spc_,o_,do_,ri_,da_,su_,spc_,si_,yyu_,u_,se_,i_,wo_,CR_,
+mo_,tu_,kten_,HA_,I_,KI_,N_,GU_,wo_,si_,te_,i_,ru_,spc_,ko_,do_,mo_,ta_,ti_,ga_,spc_,ga_,ttu_,si_,yyo_,u_,wo_,CR_,
+su_,ru_,to_,spc_,u_,ta_,go_,e_,ni_,spc_,hi_,ka_,re_,te_,spc_,su_,ga_,ta_,wo_,spc_,a_,ra_,wa_,su_,to_,i_,u_,kten_,EOM_,
+};
+
+static	const	u8	text347[] = {
+ko_,u_,za_,n_,ni_,spc_,a_,na_,wo_,spc_,ho_,ri_,spc_,su_,mi_,tu_,i_,te_,i_,ru_,kten_,se_,ki_,ta_,n_,ya_,CR_,
+te_,ttu_,ko_,u_,se_,ki_,ga_,spc_,da_,i_,ko_,u_,bu_,tu_,kten_,hu_,da_,n_,ha_,spc_,o_,to_,na_,si_,i_,ga_,CR_,
+se_,ki_,ta_,n_,wo_,spc_,to_,ri_,ni_,ku_,ru_,spc_,ni_,n_,ge_,n_,wo_,spc_,mi_,ru_,to_,spc_,i_,ka_,ku_,su_,ru_,kten_,EOM_,
+};
+
+static	const	u8	text369[] = {
+ti_,no_,u_,ga_,spc_,to_,te_,mo_,spc_,ta_,ka_,ku_,spc_,hi_,to_,no_,spc_,ko_,to_,ba_,wo_,spc_,ri_,ka_,i_,su_,ru_,kten_,CR_,
+GA_,RA_,SU_,no_,yo_,u_,na_,spc_,u_,mo_,u_,de_,spc_,ka_,ra_,da_,wo_,spc_,tu_,tu_,mi_,ko_,mi_,spc_,hi_,ka_,ri_,wo_,CR_,
+ha_,n_,si_,yya_,sa_,se_,ru_,ko_,to_,de_,spc_,su_,ga_,ta_,wo_,spc_,ka_,e_,ru_,ru_,spc_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,kten_,EOM_,
+};
+
+static	const	u8	text370[] = {
+ti_,no_,u_,ga_,spc_,to_,te_,mo_,spc_,ta_,ka_,ku_,spc_,hi_,to_,no_,spc_,ko_,to_,ba_,wo_,spc_,ri_,ka_,i_,su_,ru_,kten_,CR_,
+a_,ta_,ma_,ni_,spc_,u_,ka_,n_,da_,spc_,I_,ME_,bou_,ZI_,wo_,spc_,a_,i_,te_,ni_,spc_,e_,i_,zo_,u_,to_,si_,te_,CR_,
+mi_,se_,ru_,spc_,to_,ku_,si_,yyu_,na_,ti_,ka_,ra_,wo_,spc_,mo_,tu_,spc_,ma_,bo_,ro_,si_,no_,PO_,KE_,MO_,N_,kten_,EOM_,
+};
+
+static	const	u8	text372[] = {
+ki_,no_,mi_,ga_,spc_,da_,i_,su_,ki_,kten_,se_,na_,ka_,no_,spc_,ka_,ta_,i_,spc_,ke_,de_,spc_,ki_,no_,mi_,ki_,wo_,CR_,
+ke_,zu_,ri_,spc_,si_,ru_,si_,wo_,spc_,tu_,ke_,ru_,kten_,ki_,no_,mi_,wo_,spc_,to_,ra_,re_,ru_,to_,spc_,o_,ko_,ri_,CR_,
+to_,ri_,ka_,e_,su_,ma_,de_,spc_,ze_,ttu_,ta_,i_,ni_,spc_,a_,ki_,ra_,me_,na_,i_,kten_,EOM_,
+};
+
+
+
+
+
+
+//static	const	ZUKAN_DATA	zukanData[] = {
+const	ZUKAN_DATA	zukanData[] = {
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//0
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//1
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//2
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//3
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//4
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//5
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//6
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//7
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//8
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//9
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//10
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//11
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//12
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//13
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//14
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//15
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//16
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//17
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//18
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//19
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//20
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//21
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//22
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//23
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//24
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//25
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//26
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//27
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//28
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//29
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//30
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//31
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//32
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//33
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//34
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//35
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//36
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//37
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//38
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//39
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//40
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//41
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//42
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//43
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//44
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//45
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//46
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//47
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//48
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//49
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//50
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//51
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//52
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//53
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//54
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//55
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//56
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//57
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//58
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//59
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//60
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//61
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//62
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//63
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//64
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//65
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//66
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//67
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//68
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//69
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//70
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//71
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//72
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//73
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//74
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//75
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//76
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//77
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//78
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//79
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//80
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//81
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//82
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//83
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//84
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//85
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//86
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//87
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//88
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//89
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//90
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//91
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//92
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//93
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//94
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//95
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//96
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//97
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//98
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//99
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//100
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//101
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//102
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//103
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//104
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//105
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//106
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//107
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//108
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//109
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//110
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//111
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//112
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//113
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//114
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//115
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//116
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//117
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//118
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//119
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//120
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//121
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//122
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//123
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//124
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//125
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//126
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//127
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//128
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//129
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//130
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//131
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//132
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//133
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//134
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//135
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//136
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//137
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//138
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//139
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//140
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//141
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//142
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//143
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//144
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//145
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//146
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//147
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//148
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//149
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//150
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//151
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//152
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//153
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//154
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//155
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//156
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//157
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//158
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//159
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//160
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//161
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//162
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//163
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//164
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//165
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//166
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//167
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//168
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//169
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//170
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//171
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//172
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//173
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//174
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//175
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//176
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//177
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//178
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//179
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//180
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//181
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//182
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//183
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//184
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//185
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//186
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//187
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//188
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//189
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//190
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//191
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//192
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//193
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//194
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//195
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//196
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//197
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//198
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//199
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//200
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//201
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//202
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//203
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//204
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//205
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//206
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//207
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//208
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//209
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//210
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//211
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//212
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//213
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//214
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//215
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//216
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//217
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//218
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//219
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//220
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//221
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//222
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//223
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//224
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//225
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//226
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//227
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//228
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//229
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//230
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//231
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//232
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//233
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//234
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//235
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//236
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//237
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//238
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//239
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//240
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//241
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//242
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//243
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//244
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//245
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//246
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//247
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//248
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//249
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//250
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//251
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//252
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//253
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//254
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//255
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//256
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//257
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//258
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//259
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//260
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//261
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//262
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//263
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//264
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//265
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//266
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//267
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//268
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//269
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//270
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//271
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//272
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//273
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//274
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//275
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//276
+		{{hu_,n_,ka_,spc_,spc_},19,2200,text277},	//277
+		{{mi_,zu_,to_,ri_,spc_},14,140,text278},	//278
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//279
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//280
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//281
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//282
+		{{mi_,zu_,ta_,ma_,spc_},2,20,text283},	//283
+		{{i_,ro_,he_,n_,ge_},10,220,text284},	//284
+		{{ta_,ma_,ku_,zi_,ra_},20,1300,text285},	//285
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//286
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//287
+		{{a_,me_,n_,bo_,spc_},5,17,text288},	//288
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//289
+		{{ku_,ra_,ya_,mi_,spc_},5,110,text290},	//290
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//291
+		{{do_,gu_,u_,spc_,spc_},15,1080,text292},	//292
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//293
+		{{ko_,zu_,re_,spc_,spc_},8,125,text294},	//294
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//295
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//296
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//297
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//298
+		{{se_,i_,re_,i_,spc_},2,15,text299},	//299
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//300
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//301
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//302
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//303
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//304
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//305
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//306
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//307
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//308
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//309
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//310
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//311
+		{{ho_,ga_,ra_,ka_,spc_},6,140,text312},	//312
+		{{o_,mu_,ka_,e_,spc_},8,15,text313},	//313
+		{{a_,ri_,zi_,go_,ku_},10,150,text314},	//314
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//315
+		{{o_,o_,ta_,ka_,spc_},20,520,text316},	//316
+		{{i_,ba_,ra_,spc_,spc_},3,20,text317},	//317
+		{{hu_,u_,ri_,n_,spc_},6,2,text318},	//318
+		{{si_,ta_,zu_,mi_,spc_},4,55,text319},	//319
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//320
+		{{a_,za_,ra_,si_,spc_},15,400,text321},	//321
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//322
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//323
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//324
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//325
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//326
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//327
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//328
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//329
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//330
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//331
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//332
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//333
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//334
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//335
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//336
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//337
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//338
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//339
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//340
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//341
+		{{ni_,n_,zi_,yya_,spc_},8,120,text342},	//342
+		{{nu_,ke_,ga_,ra_,spc_},8,12,text343},	//343
+		{{u_,ki_,ku_,sa_,spc_},5,15,text344},	//344
+		{{ti_,do_,ri_,a_,si_},4,50,text345},	//345
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//346
+		{{ko_,u_,te_,tu_,spc_},15,1200,text347},	//347
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//348
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//349
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//350
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//351
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//352
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//353
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//354
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//355
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//356
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//357
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//358
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//359
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//360
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//361
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//362
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//363
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//364
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//365
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//366
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//367
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//368
+		{{mu_,ge_,n_,spc_,spc_},14,400,text369},	//369
+		{{mu_,ge_,n_,spc_,spc_},20,600,text370},	//370
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//371
+		{{ma_,me_,da_,nu_,ki_},10,250,text372},	//372
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//373
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//374
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//375
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//376
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//377
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//378
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//379
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//380
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//381
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//382
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//383
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//384
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//385
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//386
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//387
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//388
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//389
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//390
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//391
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//392
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//393
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//394
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//395
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//396
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//397
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//398
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//399
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//400
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//401
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//402
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//403
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//404
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//405
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//406
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//407
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//408
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//409
+		{{mi_,ka_,ku_,ni_,n_},0,0,textdmy},	//410
+};
+

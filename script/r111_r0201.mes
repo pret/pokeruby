@@ -1,0 +1,61 @@
+// ●111番道路　回復ハウス
+
+// ●老婆
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p01_r111_r0201
+msg_oldwoman1_01_p01_r111_r0201:
+	.byte	a_,ra_,a_,ra_,spc_,a_,na_,ta_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	tu_,ka_,re_,te_,ru_,n_,zi_,yya_,spc_,na_,i_,ka_,e_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ka_,ttu_,ta_,ra_,spc_,ya_,su_,n_,de_,spc_,o_,i_,ki_,gyoe_
+	.byte	CR_
+	.byte	so_,u_,da_,spc_,so_,re_,ga_,i_,i_,gyoe_,spc_,so_,u_,si_,na_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」を選択　　→msg_oldwoman1_01_p03_r111_r0201:
+// ●「いいえ」を選択　→msg_oldwoman1_01_p02_r111_r0201:
+
+// ●老婆（「はい」を選択）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p03_r111_r0201
+msg_oldwoman1_01_p03_r111_r0201:
+	.byte	so_,u_,so_,u_
+	.byte	CR_
+	.byte	ko_,ko_,de_,spc_,yu_,ttu_,ku_,ri_,spc_,si_,te_,spc_,o_,i_,ki_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●画面ブラックアウトしてポケモンの回復
+// ●画面復帰後、続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p04_r111_r0201
+msg_oldwoman1_01_p04_r111_r0201:
+	.byte	a_,ra_,a_,ra_
+	.byte	CR_
+	.byte	ma_,da_,spc_,tu_,ka_,re_,te_,ru_,n_,zi_,yya_,spc_,na_,i_,ka_,e_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,i_,ti_,do_,spc_,ya_,su_,n_,de_,spc_,o_,i_,ki_,gyoe_
+	.byte	CR_
+	.byte	so_,u_,da_,spc_,so_,re_,ga_,i_,i_,gyoe_,spc_,so_,u_,si_,na_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度「はい／いいえ」の選択
+// ●「はい」を選択　　→msg_oldwoman1_01_p03_r111_r0201:
+// ●「いいえ」を選択　→msg_oldwoman1_01_p02_r111_r0201:
+
+// ●老婆（「いいえ」を選択）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldwoman1_01_p02_r111_r0201
+msg_oldwoman1_01_p02_r111_r0201:
+	.byte	so_,u_,ka_,ne_,tenten_,tenten_
+	.byte	CR_
+	.byte	ho_,n_,to_,u_,ni_,spc_,da_,i_,zi_,yyo_,u_,bu_,spc_,ka_,e_,hate_
+	.byte	SCROLL_WAIT_
+	.byte	e_,n_,ri_,yyo_,spc_,si_,na_,ku_,ta_,ttu_,te_,spc_,i_,i_,n_,da_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,306 @@
+//**********************************************************************
+//		evobjdat.def
+//**********************************************************************
+#ifndef	EVOBJDAT_DEF
+#define	EVOBJDAT_DEF
+
+#include "fld_eff.h"
+
+//------------------------------------------
+//	SXY ｷｬﾗ設定 ｼﾝﾎﾞﾙ(旧)
+//------------------------------------------
+#define	STAY_HERO			HERO
+#define	STAY_CYCLE_HERO		CYCLE_HERO
+#define	STAY_BOY1			BOYA1
+#define	STAY_GURL1			OJYOU1
+#define	STAY_BOY2			BOY1
+#define	STAY_GURL2			GIRL1
+#define	STAY_BOY3			BOY2
+#define	STAY_SWIM_HERO		SWIM_HERO
+#define	STAY_HIDEN_HERO		HIDEN_HERO
+#define	BIGMAN				BIGMAN1
+
+//------------------------------------------
+//	潜水艦ｷｬﾗ
+//------------------------------------------
+#define SUBM_CHMODE_IWA		0
+#define SUBM_CHMODE_OHM		1
+//#define SUBMARINE_CHMODE	SUBM_CHMODE_IWA
+#define SUBMARINE_CHMODE	SUBM_CHMODE_OHM
+
+//------------------------------------------
+//	ｱｸﾀｰﾍｯﾀﾞﾃｰﾌﾞﾙｼｰｹﾝｽﾅﾝﾊﾞ
+//------------------------------------------
+enum
+{
+	EVACT_SHADE8x8 = 0,						// 0	影8x8
+	EVACT_SHADE16x8,						// 1	影16x8
+	EVACT_SHADE32x8,						// 2	影32x8
+	EVACT_SHADE64x32,						// 3	影64x32
+	EVACT_SHORTGRASS_SHAKE,					// 4	短い草
+	EVACT_RIPPLE,							// 5	水波紋
+	EVACT_ASH,								// 6	灰
+	EVACT_POKE_SWIM,						// 7	波乗りﾎﾟｹﾓﾝ
+	EVACT_EXIT_CURSOR,						// 8	出口ｶｰｿﾙ
+	EVACT_HOKORI,							// 9	砂埃
+	EVACT_SHORTGRASS_FALL,					// 10	短い草
+	EVACT_FOOTPRINT,						// 11	足跡
+	EVACT_SPLASH_SEA,						// 12	水飛沫3
+	EVACT_SPLASH,							// 13	水飛沫1
+	EVACT_SPLASH_WATER,						// 14	水飛沫2
+	EVACT_LONGGRASS_SHAKE,					// 15	長い草
+	EVACT_LONGGRASS_FALL,					// 16	長い草
+	EVACT_SHORTGRASS_ENCOUNT,				// 17	短い草
+	EVACT_LONGGRASS_ENCOUNT,				// 18	長い草
+	EVACT_SAND_ENCOUNT,						// 19	砂
+	EVACT_WATER_ENCOUNT,					// 20	水
+	EVACT_REFAFF,							// 21	映りこみ拡縮
+	EVACT_SEEDEFFECT,						// 22	種ｴﾌｪｸﾄ0
+	EVACT_FOOTPRINT_DEEP,					// 23	足跡
+	EVACT_HIDEWOOD,							// 24	隠れ蓑木
+	EVACT_HIDEROCK,							// 25	隠れ蓑岩
+	EVACT_POKESORA,							// 26	そらとびﾎﾟｹﾓﾝ
+	EVACT_FOOTPRINT_CYCLE,					// 27	足跡
+	EVACT_HIDESAND,							// 28	隠れ蓑砂
+	EVACT_DEEPSAND,							// 29	深い巣
+	EVACT_SMALLGRASS,						// 30	更に短い草
+	EVACT_ONSEN,							// 31	温泉
+	EVACT_GYMSAND,							// 32	ｼﾞﾑ砂煙
+	EVACT_GAYSER,							// 33	間欠泉
+	EVACT_AWA,								// 34	泡
+	EVACT_KIRARI,							// 35	星ｷﾗﾘ
+};
+
+//------------------------------------------
+//	OAM ﾊﾟｯﾄﾅﾝﾊﾞ
+//------------------------------------------
+enum
+{
+	EV_OAMPAT_OFF = 0,						// 0 OAM ﾊﾟｯﾄ ｵﾌ
+	EV_OAMPAT_NORMAL,						// 1 OAM ﾊﾟｯﾄ 通常
+	EV_OAMPAT_HEIGHT,						// 2 OAM ﾊﾟｯﾄ ﾌﾟﾗｲｵﾘﾃｨ高
+	EV_OAMPAT_SHORT_GRASS,					// 3 OAM ﾊﾟｯﾄ 短い草むら
+	EV_OAMPAT_LONG_GRASS_BGPRI2,			// 4 OAM ﾊﾟｯﾄ 長い草むら
+	EV_OAMPAT_LONG_GRASS_BGPRI1,			// 5 OAM ﾊﾟｯﾄ 長い草むら
+};
+
+//------------------------------------------
+//	ｾﾙID
+//------------------------------------------
+enum
+{
+	shade8x8_CELLID = 0,
+	shade16x8_CELLID,
+	shade32x8_CELLID,
+	shade64x32_CELLID,
+};
+
+//------------------------------------------
+//	OBJ ﾊﾟﾚｯﾄ ID
+//------------------------------------------
+#define	EVOBJ_DMY_PAL	0
+
+enum
+{
+	EVOBJ_HERO_PALID_0 =
+			FLD_PalID_EVOBJ_START,			// 主人公
+	EVOBJ_HERO_REF_PALID_0,					// 主人公映り込み
+	EVOBJ_HERO_REF_PALID_1,					// 主人公橋映りこみ
+	EVOBJ_OTHERS_PALID_0_0,					// 他人
+	EVOBJ_OTHERS_PALID_0_1,
+	EVOBJ_OTHERS_PALID_0_2,
+	EVOBJ_OTHERS_PALID_0_3,
+	EVOBJ_OTHERS_REF_PALID_0_0,				// 他人映り込み
+	EVOBJ_OTHERS_REF_PALID_0_1,
+	EVOBJ_OTHERS_REF_PALID_0_2,
+	EVOBJ_OTHERS_REF_PALID_0_3,
+	EVOBJ_BIGMAN_PALID,						// 大男
+	EVOBJ_BIGMAN_REF_PALID,					// 大男映り込み
+	EVOBJ_TRUCK_PALID,						// ﾄﾗｯｸ
+	EVOBJ_MOVER_PALID,						// 引越しﾎﾟｹﾓﾝ
+	EVOBJ_ATTACK_PALID,						// 襲うﾎﾟｹﾓﾝ
+	EVOBJ_HINE_PALID_0,						// 女主人公
+	EVOBJ_HINE_REF_PALID_0,					// 女主人公映り込み
+	EVOBJ_CARGO_PALID,						// 荷物
+	EVOBJ_ROPEWAY_PALID,					// ﾛｰﾌﾟｳｪｲ
+	EVOBJ_HISHIP_PALID,						// 高速船
+	EVOBJ_HERO_DIVING_PALID,				// 主人公ﾀﾞｲﾋﾞﾝｸﾞ
+	EVOBJ_KAIOGA_MC_PALID,					// ｶｲｵｰｶﾞ
+	EVOBJ_KAIOGA_MC_REF_PALID,				// ｶｲｵｰｶﾞ
+	EVOBJ_GURADON_MC_PALID,					// ｸﾞﾗｰﾄﾞﾝ
+	EVOBJ_GURADON_MC_REF_PALID,				// ｸﾞﾗｰﾄﾞﾝ
+
+#if (SUBMARINE_CHMODE == SUBM_CHMODE_OHM)
+	EVOBJ_SUBMARINE_PALID,
+#endif
+
+	EVOBJ_PALEND = FLD_PalID_EVOBJ_END,		// 終了
+	NOT_SP_REF_PALID = EVOBJ_PALEND,		// 特殊映り込みﾊﾟﾚｯﾄ無し
+};
+
+// 他で使っているところがあるので残しておく
+#define	EVOBJ_EFF_GRASS_PALID	(EVOBJ_PALEND - 1)
+
+//------------------------------------------
+//	ｱﾆﾒｰｼｮﾝ ｵﾌｾｯﾄNo 
+//------------------------------------------
+enum
+{
+	EV_ANMNO_MOVE0 = 0,						// 歩き
+	EV_ANMNO_STOP0,							// 停止
+	EV_ANMNO_MOVE1,							// 歩き
+	EV_ANMNO_STOP1,							// 停止
+};
+
+//------------------------------------------
+//	影種類
+//------------------------------------------
+enum
+{
+	SHADE_KIND_8x8 = 0,						// 0	8x8
+	SHADE_KIND_16x8,						// 1	16x8
+	SHADE_KIND_32x8,						// 2	32x8
+	SHADE_KIND_64x32,						// 3	64x32
+};
+
+//------------------------------------------
+//	足跡種類
+//------------------------------------------
+enum
+{
+	FOOT_KIND_NOTHING = 0,					// 足跡無し
+	FOOT_KIND_NORMAL,						// 2本脚
+	FOOT_KIND_CYCLE,						// 自転車
+};
+
+enum
+{
+	FOOT_SITE_UR = 5,						// 上右
+	FOOT_SITE_RD,							// 右下
+	FOOT_SITE_DL,							// 下左
+	FOOT_SITE_LU,							// 左上
+};
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No 基本
+//------------------------------------------
+enum
+{
+	STOP_D_ST = 0,							// 00	下停止
+	STOP_U_ST,								// 01	上
+	STOP_L_ST,								// 02	左
+	STOP_R_ST,								// 03	右
+	
+	WALK_D_1_ST,							// 04	下 1ﾄﾞｯﾄ 移動
+	WALK_U_1_ST,							// 05	上
+	WALK_L_1_ST,							// 06	左
+	WALK_R_1_ST,							// 07	右
+	
+	WALK_D_2_ST,							// 08	下 2ﾄﾞｯﾄ 移動
+	WALK_U_2_ST,							// 09	上
+	WALK_L_2_ST,							// 10	左
+	WALK_R_2_ST,							// 11	右
+
+	WALK_D_4_ST,							// 08	下 4ﾄﾞｯﾄ 移動
+	WALK_U_4_ST,							// 09	上
+	WALK_L_4_ST,							// 10	左
+	WALK_R_4_ST,							// 11	右
+	
+	WALK_D_8_ST,							// 12	下 8ﾄﾞｯﾄ 移動
+	WALK_U_8_ST,							// 13	上
+	WALK_L_8_ST,							// 14	左
+	WALK_R_8_ST,							// 15	右
+};
+
+#define DEF_ANM_END_ST (WALK_R_8_ST+1)
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No 主人公ﾀﾞｯｼｭ
+//------------------------------------------
+enum
+{
+	HERO_DASH_D_ST = DEF_ANM_END_ST,		// ﾀﾞｯｼｭ下
+	HERO_DASH_U_ST,							// ﾀﾞｯｼｭ上
+	HERO_DASH_L_ST,							// ﾀﾞｯｼｭ左
+	HERO_DASH_R_ST,							// ﾀﾞｯｼｭ右
+};
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No 波乗りｼﾞｬﾝﾌﾟ(主人公用)
+//------------------------------------------
+enum
+{
+	SWIM_JUMP_D_ST = DEF_ANM_END_ST,		// 泳ぎｼﾞｬﾝﾌﾟ下
+	SWIM_JUMP_U_ST,							// 泳ぎｼﾞｬﾝﾌﾟ上
+	SWIM_JUMP_L_ST,							// 泳ぎｼﾞｬﾝﾌﾟ左
+	SWIM_JUMP_R_ST,							// 泳ぎｼﾞｬﾝﾌﾟ右
+};
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No 自転車 S
+//------------------------------------------
+enum
+{
+	CYCLE_S_FTUP_D_ST = DEF_ANM_END_ST,		// ﾌﾛﾝﾄｱｯﾌﾟ 下
+	CYCLE_S_FTUP_U_ST,						// ﾌﾛﾝﾄｱｯﾌﾟ 上
+	CYCLE_S_FTUP_L_ST,						// ﾌﾛﾝﾄｱｯﾌﾟ 左
+	CYCLE_S_FTUP_R_ST,						// ﾌﾛﾝﾄｱｯﾌﾟ 右
+	CYCLE_S_RTUP_D_ST,						// ﾘｱｱｯﾌﾟ	下
+	CYCLE_S_RTUP_U_ST,						// ﾘｱｱｯﾌﾟ	上
+	CYCLE_S_RTUP_L_ST,						// ﾘｱｱｯﾌﾟ	左
+	CYCLE_S_RTUP_R_ST,						// ﾘｱｱｯﾌﾟ	右
+	CYCLE_S_FTDW_D_ST,						// ﾌﾛﾝﾄﾀﾞｳﾝ 下
+	CYCLE_S_FTDW_U_ST,						// ﾌﾛﾝﾄﾀﾞｳﾝ 上
+	CYCLE_S_FTDW_L_ST,						// ﾌﾛﾝﾄﾀﾞｳﾝ 左
+	CYCLE_S_FTDW_R_ST,						// ﾌﾛﾝﾄﾀﾞｳﾝ 右
+	CYCLE_S_RTDW_D_ST,						// ﾘｱﾀﾞｳﾝ 	下
+	CYCLE_S_RTDW_U_ST,						// ﾘｱﾀﾞｳﾝ 	上
+	CYCLE_S_RTDW_L_ST,						// ﾘｱﾀﾞｳﾝ 	左
+	CYCLE_S_RTDW_R_ST,						// ﾘｱﾀﾞｳﾝ 	右
+	CYCLE_S_WHEELIE_D_ST,					// ｳｲﾘｰ		下
+	CYCLE_S_WHEELIE_U_ST,					// ｳｲﾘｰ		上
+	CYCLE_S_WHEELIE_L_ST,					// ｳｲﾘｰ		左
+	CYCLE_S_WHEELIE_R_ST,					// ｳｲﾘｰ		右
+};
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No 釣り
+//------------------------------------------
+enum
+{
+	FISH_START_D_ST = 0,					// 下 釣り開始
+	FISH_START_U_ST,						// 上
+	FISH_START_L_ST,						// 左
+	FISH_START_R_ST,						// 右
+	FISH_END_D_ST,							// 下 釣り終了
+	FISH_END_U_ST,							// 上
+	FISH_END_L_ST,							// 左
+	FISH_END_R_ST,							// 右
+	FISH_HIT_D_ST,							// 下 釣りﾋｯﾄ
+	FISH_HIT_U_ST,							// 上
+	FISH_HIT_L_ST,							// 左
+	FISH_HIT_R_ST,							// 右
+};
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No PCお辞儀
+//------------------------------------------
+enum
+{
+	PC_BOW_ST = DEF_ANM_END_ST,				// PC お辞儀
+};
+
+//------------------------------------------
+//	ｾﾙｱﾆﾒｰｼｮﾝ No 岩砕き,居合切り
+//------------------------------------------
+#define ROCK_CRUSH_ST 1
+#define CUT_TREE_ST 1
+
+//------------------------------------------
+//	ｱﾆﾒｵﾌｾｯﾄﾅﾝﾊﾞ
+//------------------------------------------
+#define GRASS_ANMOFFS_ENDNO	4				// 短い草ｱﾆﾒ終了ﾅﾝﾊﾞ
+#define	SAND_ANMOFFS_ENDNO 2				// 深い砂ｱﾆﾒ終了ﾅﾝﾊﾞ
+#define LONG_GRASS_ANMOFFS_ENDNO 6			// 長い草ｱﾆﾒ終了ﾅﾝﾊﾞ
+
+#endif	// EVOBJDAT_H

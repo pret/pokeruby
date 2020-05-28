@@ -1,0 +1,19 @@
+// ●「ジムリーダー　＃パパ」RAM木の実をくれる
+// ●バッジが５個以上
+// ●バッグ、パソコンの中にRAM木の実が入っていない
+// ●RAM木の実をもらったフラグが０
+// ●上記の三条件を満たしていれば
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gymleader_05_kinomi
+msg_gymleader_05_kinomi:
+	.byte	PA_,PA_,kako2_,ya_,a_,spc_,I_MSG_,MY_NAME_BUF,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	me_,zu_,ra_,si_,i_,spc_,ki_,no_,mi_,wo_,spc_,te_,ni_,spc_,i_,re_,ta_,ka_,ra_
+	.byte	CR_
+	.byte	PU_,RE_,ZE_,N_,TO_,spc_,su_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●アイテム入手ナレーション
+// ●RAM木の実ひとつを、主人公のバッグに。
+// ●RAM木の実をもらったフラグを１に。

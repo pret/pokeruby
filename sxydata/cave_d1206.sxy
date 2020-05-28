@@ -1,0 +1,86 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_CAVE_D1206	1
+#define EXITNUM_CAVE_D1206	1
+#define POSNUM_CAVE_D1206	3
+#define BGNUM_CAVE_D1206	0
+
+//POS_SCRIPT
+extern const u8	ev_cave_d1206_pos01[];
+extern const u8	voice_kodai_pokemon[];
+extern const u8	voice_kodai_pokemon[];
+
+const evObjData	OBJ_cave_d1206[] =
+{
+	{
+		POKE1_01_CAVE_D1206,		//OBJ ID
+		WKOBJCODE9,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x000a,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		FV_POKE1_01_CAVE_D1206,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_cave_d1206[] =
+{
+	{
+		0x000c,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		CAVE_D1205_DOOR02,		//Door ID
+		CAVE_D1205,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_POS	POS_cave_d1206[] =
+{
+	{
+		0x0009,		//Xpos
+		0x000d,		//Ypos
+		0x03,		//Height
+		WK_SCENE_CAVE_D1206,		//Event Type
+		0x00,		//Scene
+		ev_cave_d1206_pos01,		//Script
+	},
+
+	{
+		0x000d,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		LOCALWORK5,		//Event Type
+		0x00,		//Scene
+		voice_kodai_pokemon,		//Script
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		LOCALWORK5,		//Event Type
+		0x00,		//Scene
+		voice_kodai_pokemon,		//Script
+	},
+
+};
+
+const SXY_DATA	cave_d1206_sxy_data =
+{
+OBJNUM_CAVE_D1206,			// field obj max
+EXITNUM_CAVE_D1206,		// exit max
+POSNUM_CAVE_D1206,			// pos event max
+BGNUM_CAVE_D1206,			// bg event max
+OBJ_cave_d1206,			// field obj data
+EXIT_cave_d1206,			// exit data
+POS_cave_d1206,			// pos event data
+NULL,				// bg event data
+};

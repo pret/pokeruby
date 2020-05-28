@@ -1,0 +1,122 @@
+//====================================================================
+//							c104_r0101
+//							デボン本社１Ｆ
+//====================================================================
+
+//--------------------------------------------------------------------
+//				      マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c104_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_c104_r0101
+EVENT_DATA_END
+
+//--------------------------------------------------------------------
+//							FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c104_r0101:
+	//社長にアイテムを返してなかったら
+	_IF_FLAGOFF_CALL	FE_DEBON_NIMOTSU_RETURN,move_devon1_02_c104_r0101
+	_END
+
+//社長にアイテムを返してなかったら階段ふさぐ
+move_devon1_02_c104_r0101:
+	_SXY_POS_CHANGE		DEVON1_02_C104_R0101,14,2
+	_SXY_SITE_CHANGE	DEVON1_02_C104_R0101,MV_DOWN
+	_RET
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//							デボン研究員
+/********************************************************************/
+SCRIPT_LABEL	ev_devon1_01_p01_c104_r0101
+	_TALK_OBJ_START
+
+	//社長にアイテムを返してやったか
+	_IF_FLAGON_JUMP		FE_DEBON_NIMOTSU_RETURN,ev_devon1_01_p03_c104_r0101
+
+	//盗難イベント中だったら
+	_IF_FLAGON_JUMP		FE_DEBON_01_FIELD_C104,ev_devon1_01_p02_c104_r0101
+
+	_TALK_KEYWAIT		msg_devon1_01_p01_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+//盗難イベント中
+ev_devon1_01_p02_c104_r0101:
+	_TALK_KEYWAIT		msg_devon1_01_p02_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+//社長にアイテムを返してやった
+ev_devon1_01_p03_c104_r0101:
+	_TALK_KEYWAIT		msg_devon1_01_p03_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							デボン研究員２
+/********************************************************************/
+SCRIPT_LABEL	ev_devon1_02_p01_c104_r0101
+	_TALK_OBJ_START
+
+	//社長にアイテムを返してやったか
+	_IF_FLAGON_JUMP		FE_DEBON_NIMOTSU_RETURN,ev_devon1_02_p03_c104_r0101
+
+	//盗難イベント中・盗難イベント終了していたら
+	_IF_FLAGON_JUMP		FE_DEBON_02_FIELD_C104,ev_devon1_02_p02_c104_r0101
+	_IF_FLAGON_JUMP		FE_DEBON_01_FIELD_C104,ev_devon1_02_p02_c104_r0101
+
+	_TALK_KEYWAIT		msg_devon1_02_p01_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+//社長にアイテムを返した
+ev_devon1_02_p03_c104_r0101:
+	_TALK_KEYWAIT		msg_devon1_02_p03_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+//盗難イベント中
+ev_devon1_02_p02_c104_r0101:
+	_TALK_KEYWAIT		msg_devon1_02_p02_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//							受け付け
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw1_01_p01_c104_r0101
+	_TALK_OBJ_START
+
+	//社長にアイテムを返してやったか
+	_IF_FLAGON_JUMP		FE_DEBON_NIMOTSU_RETURN,ev_workerw1_01_p03_c104_r0101
+
+	//盗難イベント中・盗難イベント終了していたら
+	_IF_FLAGON_JUMP		FE_DEBON_02_FIELD_C104,ev_workerw1_01_p02_c104_r0101
+	_IF_FLAGON_JUMP		FE_DEBON_01_FIELD_C104,ev_workerw1_01_p02_c104_r0101
+
+	_TALK_KEYWAIT		msg_workerw1_01_p01_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+//社長にアイテムを返した
+ev_workerw1_01_p03_c104_r0101:
+	_TALK_KEYWAIT		msg_workerw1_01_p01_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+//盗難イベント中
+ev_workerw1_01_p02_c104_r0101:
+	_TALK_KEYWAIT		msg_workerw1_01_p02_c104_r0101
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

@@ -1,0 +1,490 @@
+//=========================================================================
+//	ゲージ用データ
+//=========================================================================
+
+//----------------------------------------------------------
+//	戦闘用ゲージ本体セル
+//----------------------------------------------------------
+
+#if GAUGE_CHANGE	//+++++++++++++++++ 2002.04.23(火) ++++++++++++++++++++
+
+//-- 1vs1用 --//
+const CellData BattleGaugeDataCell_1vs1 =
+{
+	(void*)gauge5a_pch_ADRS,OBJ_SIZE16_8x8*128, CELLID_BattleGaugeMine1
+};
+//-- 2vs2用 --//
+const CellData BattleGaugeDataCellMine2[]=
+{
+	{(void*)gauge5a2_pch_ADRS,OBJ_SIZE16_32x64*1+OBJ_SIZE16_32x32, CELLID_BattleGaugeMine1},
+	{(void*)gauge5a2_pch_ADRS,OBJ_SIZE16_32x64*1+OBJ_SIZE16_32x32, CELLID_BattleGaugeMine2},
+};
+const CellData BattleGaugeDataCellEnemy2[]=
+{
+	{(void*)gauge5a2_pch_ADRS,OBJ_SIZE16_32x64*1+OBJ_SIZE16_32x32, CELLID_BattleGaugeEnemy1},
+	{(void*)gauge5a2_pch_ADRS,OBJ_SIZE16_32x64*1+OBJ_SIZE16_32x32, CELLID_BattleGaugeEnemy2},
+};
+
+#else	//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//-- 1vs1用 --//
+const CellData MineGaugeCell_1vs1 =
+{
+	(void*)gauge_m1_pch_ADRS,OBJ_SIZE16_64x64*2, CELLID_BattleGaugeMine1
+};
+const CellData EnemyGaugeCell_1vs1 =
+{
+	(void*)gauge_e1_pch_ADRS,OBJ_SIZE16_64x64*2, CELLID_BattleGaugeEnemy1
+};
+
+//-- 2vs2用 --//
+const CellData MineGaugeCell_2vs2[]=
+{
+	{(void*)gauge_m2_pch_ADRS,OBJ_SIZE16_32x64*2, CELLID_BattleGaugeMine1},
+	{(void*)gauge_m2_pch_ADRS,OBJ_SIZE16_32x64*2, CELLID_BattleGaugeMine2},
+};
+const CellData EnemyGaugeCell_2vs2[]=
+{
+	{(void*)gauge_e2_pch_ADRS,OBJ_SIZE16_32x64*2, CELLID_BattleGaugeEnemy1},
+	{(void*)gauge_e2_pch_ADRS,OBJ_SIZE16_32x64*2, CELLID_BattleGaugeEnemy2},
+};
+
+#endif	//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//add by soga 2002.06.01
+//-- サファリゾーン用 --//
+const CellData MineGaugeCell_Safari =
+{
+	(void*)gauge_s_pch_ADRS,OBJ_SIZE16_64x64*2, CELLID_BattleGaugeSafari
+};
+
+//-- パーツ用 --//
+const CellData BattleGaugePartsCell[]=
+{
+	{(void*)space64_pch_ADRS,OBJ_SIZE16_32x8*2, CELLID_BattleGaugeParts0},
+	{(void*)space64_pch_ADRS,OBJ_SIZE16_32x8*2+32, CELLID_BattleGaugeParts1},
+	{(void*)space64_pch_ADRS,OBJ_SIZE16_32x8*2, CELLID_BattleGaugeParts2},
+	{(void*)space64_pch_ADRS,OBJ_SIZE16_32x8*2+32, CELLID_BattleGaugeParts3},
+};
+
+const PalData BattleGaugeDataPal[] = 
+{
+#if 0	//2002.07.05(金) 非圧縮に変えたので展開の必要がなくなった PalDataの方も変えた
+	{(void*)gauge55_pcl_ADRS, CELLID_BattleGaugeMine1},	//本体
+	{(void*)gauge55_pcl_ADRS+0x20, CELLID_BattleGaugeParts0},	//HPやﾎﾞｰﾙなどのﾊﾟｰﾂ部分
+#else
+	{(void*)gauge55_pcl_ADRS, CELLID_BattleGaugeMine1},	//本体
+	{(void*)gauge55_pcl_ADRS+0x20, CELLID_BattleGaugeParts0},	//HPやﾎﾞｰﾙなどのﾊﾟｰﾂ部分
+#endif
+};
+
+const ActOamData BattleGaugeOamData = 
+{
+		0,		//u32 VPos:8;             // Ｙ座標
+		0,		//u32 AffineMode:2;       // アフィンモード
+		0,		//u32 ObjMode:2;          // ＯＢＪモード
+		OFF,	//u32 Mosaic:1;           // モザイク
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+		1,		//u32 Shape:2;            // ＯＢＪ形状
+	
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		3,		//u32 Size:2;             // ＯＢＪサイズ
+	
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		GAUGE_OAM_PRI,	//u32 Priority:2;         // 表示優先
+		0,		//u32 Pltt:4;             // パレットＮｏ
+};
+
+const actHeader GaugeMineHeader[] = 
+{
+	{
+		CELLID_BattleGaugeMine1,
+		CELLID_BattleGaugeMine1,
+		&BattleGaugeOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+	{
+		CELLID_BattleGaugeMine2,
+		CELLID_BattleGaugeMine1,
+		&BattleGaugeOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+};
+const actHeader GaugeEnemyHeader[] = 
+{
+	{
+		CELLID_BattleGaugeEnemy1,
+		CELLID_BattleGaugeMine1,
+		&BattleGaugeOamData,
+	//	&BattleGaugeOamData2,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+	{
+		CELLID_BattleGaugeEnemy2,
+		CELLID_BattleGaugeMine1,
+		&BattleGaugeOamData,
+	//	&BattleGaugeOamData2,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		DummyActMove,
+	},
+};
+
+//add by soga 2002.06.01
+const actHeader GaugeSafariHeader = 
+{
+	CELLID_BattleGaugeSafari,
+	CELLID_BattleGaugeMine1,
+	&BattleGaugeOamData,
+	DummyActAnmTbl,
+	0,
+	DummyActAffTbl,
+	DummyActMove,
+};
+
+//-- パーツ --//
+const ActOamData BattleGaugePartsOamData = 
+{
+		0,		//u32 VPos:8;             // Ｙ座標
+		0,		//u32 AffineMode:2;       // アフィンモード
+		0,		//u32 ObjMode:2;          // ＯＢＪモード
+		OFF,	//u32 Mosaic:1;           // モザイク
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+		1,		//u32 Shape:2;            // ＯＢＪ形状
+	
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		1,		//u32 Size:2;             // ＯＢＪサイズ
+	
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		GAUGE_OAM_PRI,	//u32 Priority:2;         // 表示優先
+		0,		//u32 Pltt:4;             // パレットＮｏ
+};
+const actHeader GaugePartsHeader[] = 
+{
+	{
+		CELLID_BattleGaugeParts0,
+		CELLID_BattleGaugeParts0,
+		&BattleGaugePartsOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		GaugePartsSeq,
+	},
+	{
+		CELLID_BattleGaugeParts1,
+		CELLID_BattleGaugeParts0,
+		&BattleGaugePartsOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		GaugePartsSeq,
+	},
+	{
+		CELLID_BattleGaugeParts2,
+		CELLID_BattleGaugeParts0,
+		&BattleGaugePartsOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		GaugePartsSeq,
+	},
+	{
+		CELLID_BattleGaugeParts3,
+		CELLID_BattleGaugeParts0,
+		&BattleGaugePartsOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		GaugePartsSeq,
+	},
+};
+
+//----------------------------------------------------------
+//	パットデータ
+//----------------------------------------------------------
+//-- 1vs1用 --//
+static const OAMPatData GaugePatDataMine1[] =
+{
+	//味方ゲージ本体	左側と右側
+	{-16, 0, 1, 3, 0, 1},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+48, 0, 0, 2, 32, 1},
+	{-16, 32, 1, 1, 48, 1},
+	{+16, 32, 1, 1, 52, 1},
+	{+48, 32, 1, 1, 56, 1},
+};
+static const OAMPatData GaugePatDataEnemy1[] =
+{
+	//敵ゲージ本体	左側と右側
+	{-16, 0, 1, 3, 0+64, 1},//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+48, 0, 0, 2, 32+64, 1},
+	{-16, 32, 1, 1, 48+64, 1},
+	{+16, 32, 1, 1, 52+64, 1},
+	{+48, 32, 1, 1, 56+64, 1},
+};
+//-- 2vs2用 --//
+static const OAMPatData GaugePatDataMine2[] = 	//2vs2用
+{
+	//味方ゲージ本体	左側と右側
+	{-16, 0, 1, 3, 0, 1},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+48, 0, 0, 2, 32, 1},
+};
+static const OAMPatData GaugePatDataEnemy2[] = //2vs2用
+{
+	//敵ゲージ本体	左側と右側
+	{-16, 0, 1, 3, 0, 1},//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+48, 0, 0, 2, 32, 1},
+};
+//-- パーツ用 --//
+static const OAMPatData GaugePatDataParts[] =
+{
+	//左側と右側
+	{-16, 0, 1, 1, 0, GAUGE_OAM_PRI},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+16, 0, 1, 1, 4, GAUGE_OAM_PRI},
+};
+static const OAMPatData GaugePatDataPartsEnemy[] =	//敵側　ゲットボール付き
+{
+	//左側と右側
+	{-16, 0, 1, 1, 0, GAUGE_OAM_PRI},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{+16, 0, 1, 1, 4, GAUGE_OAM_PRI},
+	{-32, 0, 0, 0, 8, GAUGE_OAM_PRI},
+};
+
+static const OAMPatSt GaugePatMine[] = 
+{
+	{5, GaugePatDataMine1},
+	{2, GaugePatDataMine2},
+};
+static const OAMPatSt GaugePatEnemy[] =
+{
+	{5, GaugePatDataEnemy1},
+	{2, GaugePatDataEnemy2},
+};
+static const OAMPatSt GaugePatParts[] = 
+{
+	{2, GaugePatDataParts},
+	{3, GaugePatDataPartsEnemy},
+};
+
+//-- 手持ちゲージ --//
+static const OAMPatData TemotiGaugePatData[] =	//ｽﾗｲﾄﾞｲﾝしてくる最初の状態
+{
+	{-96, 0, 1, 1, 0, GAUGE_OAM_PRI},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{-64, 0, 1, 1, 4, GAUGE_OAM_PRI},
+	{-32, 0, 1, 1, 8, GAUGE_OAM_PRI},
+	{0, 0, 1, 1, 12, GAUGE_OAM_PRI},
+};
+
+static const OAMPatData TemotiGaugePatData2[] =	//ﾄﾚｰﾅｰ方向に消えていく時
+{
+	{-96, 0, 1, 1, 0, GAUGE_OAM_PRI},	//ｱｸﾀｰ中心からのXoffs,Yoffs, Shape,Size,CharNoOffs, pri
+	{-64, 0, 1, 1, 4, GAUGE_OAM_PRI},
+	{-32, 0, 1, 1, 8, GAUGE_OAM_PRI},
+	{0, 0, 1, 1, 8, GAUGE_OAM_PRI},
+	{32, 0, 1, 1, 8, GAUGE_OAM_PRI},
+	{64, 0, 1, 1, 12, GAUGE_OAM_PRI},
+};
+
+static const OAMPatSt TemotiGaugePatTbl[] = 
+{
+	{4, TemotiGaugePatData},
+	{6, TemotiGaugePatData2},
+};
+
+
+
+
+
+
+
+
+
+
+//=========================================================================
+//	戦闘用ゲージの濁点つきｳｨﾝﾄﾞｳ頭
+//=========================================================================
+/*------dakuten.sch--------------------------------------------*/
+/* 16色ﾓｰﾄﾞ ｷｬﾗｸﾀ数: 4  					*/
+/*  8 x 4 x 1 x 4= 128 (0x80)			*/
+
+const u8 dakuten_Character[]={
+                                                        /*  0  =  0(0x0)  */
+	0x00,0x00,0x00,0x00,0x33,0x33,0x33,0x33,	//ノーマル
+	0x44,0x44,0x44,0x44,0x22,0x22,0x22,0x22,
+	0x77,0x77,0x77,0x77,0x77,0x77,0x77,0x77,
+	0x77,0x77,0x77,0x77,0x77,0x77,0x77,0x77,
+                                                        /*  1  =  32(0x20)  */
+	0x00,0x00,0x00,0x00,0x33,0x33,0x33,0x33,	//濁点
+	0x44,0x44,0x44,0x44,0x22,0x22,0x22,0x22,
+	0x77,0x77,0x77,0x77,0x77,0x77,0x17,0x77,
+	0x77,0x17,0x77,0x71,0x77,0x77,0x71,0x77,
+                                                        /*  2  =  64(0x40)  */
+	0x00,0x00,0x00,0x00,0x33,0x33,0x33,0x33,	//半濁点
+	0x44,0x44,0x44,0x44,0x22,0x22,0x22,0x22,
+	0x77,0x77,0x77,0x77,0x77,0x77,0x11,0x71,
+	0x77,0x77,0x71,0x71,0x77,0x77,0x11,0x71,
+};
+
+
+
+
+
+
+
+
+
+//=========================================================================
+//
+//		手持ちポケモン表示のゲージ
+//												by matsuda 2002.04.25(木)
+//=========================================================================
+#if 0	//キャラが変わった	2002.07.08(月)
+const CellData TemotiGaugeCell[]=
+{
+	{(void*)gaugeb_m_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_MINE_TEMOTIGAUGE},
+	{(void*)gaugeb_e_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_ENEMY_TEMOTIGAUGE},
+};
+#elif 0
+const CellData TemotiGaugeCell[]=
+{
+	{(void*)gauge_m3_pch_ADRS, OBJ_SIZE16_64x64*2, CELLID_MINE_TEMOTIGAUGE},
+	{(void*)gaugeb_e3_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_ENEMY_TEMOTIGAUGE},
+	{(void*)gauge_m4_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_MINE2_TEMOTIGAUGE},
+	{(void*)gaugeb_e4_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_ENEMY2_TEMOTIGAUGE},
+};
+#elif 0	//ｽﾗｲﾄﾞｴﾌｪｸﾄをつけるとなるとﾙｰﾁﾝ自体も変わるのでｷｬﾗ差し替えの今はこれだけで
+const CellData TemotiGaugeCell[]=
+{
+	{(void*)gauge_m4_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_MINE_TEMOTIGAUGE},
+	{(void*)gauge_e4_pch_ADRS, OBJ_SIZE16_32x64*2, CELLID_ENEMY_TEMOTIGAUGE},
+};
+#else
+const CellData TemotiGaugeCell[]=
+{
+	{(void*)gauge_ar_pch_ADRS, OBJ_SIZE16_8x32*4, CELLID_MINE_TEMOTIGAUGE},
+	{(void*)gauge_ar_pch_ADRS, OBJ_SIZE16_8x32*4, CELLID_ENEMY_TEMOTIGAUGE},
+};
+#endif
+
+#if 0	//2002.07.05(金) 非圧縮に変えたので展開の必要がなくなった PalDataの方も変えた
+const PalData TemotiGaugePal[] = 
+{
+	{(void*)GAUGE_DECORD_ADR, CELLID_MINE_TEMOTIGAUGE_PAL},	//ｹﾞｰｼﾞ
+	{(void*)GAUGE_DECORD_ADR, CELLID_ENEMY_TEMOTIGAUGE_PAL},	//ｹﾞｰｼﾞ
+};
+
+const PalData TemotiBallPal[] = 
+{
+	{(void*)GAUGE_DECORD_ADR+0x20, CELLID_MINE_TEMOTIBALL_PAL},	//ﾎﾞｰﾙ
+	{(void*)GAUGE_DECORD_ADR+0x20, CELLID_ENEMY_TEMOTIBALL_PAL},	//ﾎﾞｰﾙ
+};
+#else
+const PalData TemotiGaugePal[] = 
+{
+	{(void*)gauge55_pcl_ADRS, CELLID_MINE_TEMOTIGAUGE_PAL},	//ｹﾞｰｼﾞ
+	{(void*)gauge55_pcl_ADRS, CELLID_ENEMY_TEMOTIGAUGE_PAL},	//ｹﾞｰｼﾞ
+};
+
+const PalData TemotiBallPal[] = 
+{
+	{(void*)gauge55_pcl_ADRS+0x20, CELLID_MINE_TEMOTIBALL_PAL},	//ﾎﾞｰﾙ
+	{(void*)gauge55_pcl_ADRS+0x20, CELLID_ENEMY_TEMOTIBALL_PAL},	//ﾎﾞｰﾙ
+};
+#endif
+const CellData TemotiBallCell[] = {
+//	{&gauge5b_Character[GP_BALLON*0x20], OBJ_SIZE16_8x8*4, CELLID_MINE_TEMOTIBALL},
+//	{&gauge5b_Character[GP_BALLON*0x20], OBJ_SIZE16_8x8*4, CELLID_ENEMY_TEMOTIBALL},
+	{(u8*)gauge5b_pch_ADRS+GP_BALLON*0x20, OBJ_SIZE16_8x8*4, CELLID_MINE_TEMOTIBALL},
+	{(u8*)gauge5b_pch_ADRS+GP_BALLON*0x20, OBJ_SIZE16_8x8*4, CELLID_ENEMY_TEMOTIBALL},
+};
+
+const ActOamData TemotiGaugeOamData = 
+{
+		0,		//u32 VPos:8;             // Ｙ座標
+		0,		//u32 AffineMode:2;       // アフィンモード
+		0,		//u32 ObjMode:2;          // ＯＢＪモード
+		OFF,	//u32 Mosaic:1;           // モザイク
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+		1,		//u32 Shape:2;            // ＯＢＪ形状
+	
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		3,		//u32 Size:2;             // ＯＢＪサイズ
+	
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		GAUGE_OAM_PRI,	//u32 Priority:2;         // 表示優先
+		0,		//u32 Pltt:4;             // パレットＮｏ
+};
+const ActOamData TemotiBallOamData = 
+{
+		0,		//u32 VPos:8;             // Ｙ座標
+		0,		//u32 AffineMode:2;       // アフィンモード
+		0,		//u32 ObjMode:2;          // ＯＢＪモード
+		OFF,	//u32 Mosaic:1;           // モザイク
+		0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+		0,		//u32 Shape:2;            // ＯＢＪ形状
+	
+		0,		//u32 HPos:9;             // Ｘ座標
+		0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+		0,		//u32 Size:2;             // ＯＢＪサイズ
+	
+		0,		//u32 CharNo:10;          // キャラクタＮｏ
+		GAUGE_OAM_PRI,	//u32 Priority:2;         // 表示優先
+		0,		//u32 Pltt:4;             // パレットＮｏ
+};
+
+const actHeader TemotiGaugeHeader[] = 
+{
+	{	//自分
+		CELLID_MINE_TEMOTIGAUGE,
+		CELLID_MINE_TEMOTIGAUGE_PAL,
+		&BattleGaugeOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		TemotiGaugeSeq,
+	},
+	{	//敵
+		CELLID_ENEMY_TEMOTIGAUGE,
+		CELLID_ENEMY_TEMOTIGAUGE_PAL,
+		&BattleGaugeOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		TemotiGaugeSeq,
+	},
+};
+
+const actHeader TemotiBallHeader[] = 
+{
+	{	//自分
+		CELLID_MINE_TEMOTIBALL,
+		CELLID_MINE_TEMOTIBALL_PAL,
+		&TemotiBallOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		TemotiBallSeq,
+	},
+	{	//敵
+		CELLID_ENEMY_TEMOTIBALL,
+		CELLID_ENEMY_TEMOTIBALL_PAL,
+		&TemotiBallOamData,
+		DummyActAnmTbl,
+		0,
+		DummyActAffTbl,
+		TemotiBallSeq,
+	},
+};
+

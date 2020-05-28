@@ -1,0 +1,178 @@
+/**********************************************************************
+**	通常リボン
+**********************************************************************/
+
+static const u8 ribbonmsg_champ0[] = {  TI_,YYA_,  N_, PI_,  O_,  N_, wo_,spc_, ta_,  o_, si_, te_,EOM_, };  // チャンピオンを　たおして
+static const u8 ribbonmsg_champ1[] = {  de_,  n_, do_,  u_,  i_, ri_,spc_, si_, ta_,spc_, ki_, ne_,  n_, RI_, BO_,  N_,EOM_, };  // でんどういり　した　きねんリボン
+static const u8 ribbonmsg_cool_com[] = {  ka_,ttu_, ko_, yo_, sa_, KO_,  N_, TE_,  SU_, TO_,EOM_, };  // かっこよさコンテスト
+static const u8 ribbonmsg_beauty_com[] = {   u_, tu_, ku_, si_, sa_, KO_,  N_, TE_, SU_, TO_,EOM_, };  // うつくしさコンテスト
+static const u8 ribbonmsg_cute_com[] = {  ka_, wa_,  i_, sa_, KO_,  N_, TE_, SU_, TO_,EOM_, };  // かわいさコンテスト
+static const u8 ribbonmsg_genius_com[] = {  ka_, si_, ko_, sa_, KO_,  N_, TE_, SU_, TO_,EOM_, };  // かしこさコンテスト
+static const u8 ribbonmsg_powerful_com[] = {  ta_, ku_, ma_, si_, sa_, KO_,  N_, TE_, SU_, TO_,EOM_, };  // たくましさコンテスト
+static const u8 ribbonmsg_normal_com[] = {  NO_,bou_, MA_, RU_, RA_,  N_, KU_,spc_, yu_,  u_, si_,yyo_,  u_,gyoe_,EOM_, };  // ノーマルランク　ゆうしょう！
+static const u8 ribbonmsg_super_com[] = {  SU_,bou_, PA_,bou_, RA_,  N_, KU_,spc_, yu_,  u_, si_,yyo_,  u_,gyoe_,EOM_, };  // スーパーランク　ゆうしょう！
+static const u8 ribbonmsg_hyper_com[] = {  HA_,  I_, PA_,bou_, RA_,  N_, KU_,spc_, yu_,  u_, si_,yyo_,  u_,gyoe_,EOM_, };  // ハイパーランク　ゆうしょう！
+static const u8 ribbonmsg_master_com[] = {  MA_, SU_, TA_,bou_, RA_,  N_, KU_,spc_, yu_,  u_, si_,yyo_,  u_,gyoe_,EOM_, };  // マスターランク　ゆうしょう！
+static const u8 ribbonmsg_winning0[] = {  BA_, TO_, RU_, TA_, WA_,bou_,spc_, RE_, BE_, RU_, n5_, n0_, wo_,EOM_, };  // バトルタワー　レベル５０を
+static const u8 ribbonmsg_winning1[] = {  ka_, ti_, nu_,  i_, ta_,spc_, ki_, ne_,  n_, no_, RI_, BO_,  N_,EOM_, };  // かちぬいた　きねんのリボン
+static const u8 ribbonmsg_victory0[] = {  BA_, TO_, RU_, TA_, WA_,bou_,spc_, RE_, BE_, RU_, n1_, n0_, n0_, wo_,EOM_, };  // バトルタワー　レベル１００を
+static const u8 ribbonmsg_victory1[] = {  ka_, ti_, nu_,  i_, ta_,spc_, ki_, ne_,  n_, no_, RI_, BO_,  N_,EOM_, };  // かちぬいた　きねんのリボン
+static const u8 ribbonmsg_bromide0[] ={  go_,  u_, ka_, na_,spc_, ni_, ga_,  o_,  e_, no_,spc_, MO_, DE_, RU_, ni_,EOM_, };  // ごうかな　にがおえの　モデルに
+static const u8 ribbonmsg_bromide1[] ={  na_,ttu_, ta_,spc_, ki_, ne_,  n_, no_,spc_, RI_, BO_,  N_,EOM_, };  // なった　きねんの　リボン
+static const u8 ribbonmsg_ganba0[] = {  ta_, ku_, sa_,  n_,spc_, do_, ri_,yyo_, ku_,spc_, si_, te_,  i_, ru_,EOM_, };  // たくさん　どりょく　している
+static const u8 ribbonmsg_ganba1[] = {  PO_, KE_, MO_,  N_, ni_,spc_,  o_, ku_, ra_, re_, ru_,spc_, RI_, BO_,  N_,EOM_, };  // ポケモンに　おくられる　リボン
+
+// 通常リボンのみ（イベントリボンは含まれない）
+static const u8 * const RibbonMsgTbl[][2] = {
+	{ ribbonmsg_champ0, ribbonmsg_champ1 },
+
+	{ ribbonmsg_cool_com, ribbonmsg_normal_com },
+	{ ribbonmsg_cool_com, ribbonmsg_super_com },
+	{ ribbonmsg_cool_com, ribbonmsg_hyper_com },
+	{ ribbonmsg_cool_com, ribbonmsg_master_com },
+
+	{ ribbonmsg_beauty_com, ribbonmsg_normal_com },
+	{ ribbonmsg_beauty_com, ribbonmsg_super_com },
+	{ ribbonmsg_beauty_com, ribbonmsg_hyper_com },
+	{ ribbonmsg_beauty_com, ribbonmsg_master_com },
+
+	{ ribbonmsg_cute_com, ribbonmsg_normal_com },
+	{ ribbonmsg_cute_com, ribbonmsg_super_com },
+	{ ribbonmsg_cute_com, ribbonmsg_hyper_com },
+	{ ribbonmsg_cute_com, ribbonmsg_master_com },
+
+	{ ribbonmsg_genius_com, ribbonmsg_normal_com },
+	{ ribbonmsg_genius_com, ribbonmsg_super_com },
+	{ ribbonmsg_genius_com, ribbonmsg_hyper_com },
+	{ ribbonmsg_genius_com, ribbonmsg_master_com },
+
+	{ ribbonmsg_powerful_com, ribbonmsg_normal_com },
+	{ ribbonmsg_powerful_com, ribbonmsg_super_com },
+	{ ribbonmsg_powerful_com, ribbonmsg_hyper_com },
+	{ ribbonmsg_powerful_com, ribbonmsg_master_com },
+
+	{ ribbonmsg_winning0, ribbonmsg_winning1 },
+	{ ribbonmsg_victory0, ribbonmsg_victory1 },
+	{ ribbonmsg_bromide0, ribbonmsg_bromide1 },
+	{ ribbonmsg_ganba0, ribbonmsg_ganba1 },
+};
+
+
+//==============================================================
+// このファイルはコンバータで自動生成されています               
+//                                                        taya  
+//==============================================================
+static const u8 EventRibbonInfo0[] = {n2_,n0_,n0_,n3_,ne_,n_,spc_,ti_,ho_,u_,spc_,ta_,i_,ka_,i_,EOM_}; // ２００３ねん　ちほう　たいかい
+static const u8 EventRibbonInfo1[] = {yu_,u_,si_,yyo_,u_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // ゆうしょう　きねんリボン
+static const u8 EventRibbonInfo2[] = {n2_,n0_,n0_,n3_,ne_,n_,spc_,ze_,n_,ko_,ku_,spc_,ta_,i_,ka_,i_,EOM_}; // ２００３ねん　ぜんこく　たいかい
+static const u8 EventRibbonInfo3[] = {n2_,n0_,n0_,n3_,ne_,n_,spc_,WA_,bou_,RU_,DO_,KA_,TTU_,PU_,EOM_}; // ２００３ねん　ワールドカップ
+static const u8 EventRibbonInfo4[] = {zi_,yyu_,n_,yu_,u_,si_,yyo_,u_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // じゅんゆうしょう　きねんリボン
+static const u8 EventRibbonInfo5[] = {BE_,SU_,TO_,n4_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // ベスト４　きねんリボン
+static const u8 EventRibbonInfo6[] = {n2_,n0_,n0_,n4_,ne_,n_,spc_,ti_,ho_,u_,spc_,ta_,i_,ka_,i_,EOM_}; // ２００４ねん　ちほう　たいかい
+static const u8 EventRibbonInfo7[] = {n2_,n0_,n0_,n4_,ne_,n_,spc_,ze_,n_,ko_,ku_,spc_,ta_,i_,ka_,i_,EOM_}; // ２００４ねん　ぜんこく　たいかい
+static const u8 EventRibbonInfo8[] = {n2_,n0_,n0_,n4_,ne_,n_,spc_,WA_,bou_,RU_,DO_,KA_,TTU_,PU_,EOM_}; // ２００４ねん　ワールドカップ
+static const u8 EventRibbonInfo9[] = {n2_,n0_,n0_,n5_,ne_,n_,spc_,ti_,ho_,u_,spc_,ta_,i_,ka_,i_,EOM_}; // ２００５ねん　ちほう　たいかい
+static const u8 EventRibbonInfo10[] = {n2_,n0_,n0_,n5_,ne_,n_,spc_,ze_,n_,ko_,ku_,spc_,ta_,i_,ka_,i_,EOM_}; // ２００５ねん　ぜんこく　たいかい
+static const u8 EventRibbonInfo11[] = {n2_,n0_,n0_,n5_,ne_,n_,spc_,WA_,bou_,RU_,DO_,KA_,TTU_,PU_,EOM_}; // ２００５ねん　ワールドカップ
+static const u8 EventRibbonInfo12[] = {PO_,KE_,MO_,N_,spc_,BA_,TO_,RU_,spc_,KA_,TTU_,PU_,EOM_}; // ポケモン　バトル　カップ
+static const u8 EventRibbonInfo13[] = {sa_,n_,ka_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // さんか　きねんリボン
+static const u8 EventRibbonInfo14[] = {PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_,EOM_}; // ポケモン　リーグ
+static const u8 EventRibbonInfo15[] = {A_,DO_,BA_,N_,SU_,spc_,KA_,TTU_,PU_,EOM_}; // アドバンス　カップ
+static const u8 EventRibbonInfo16[] = {PO_,KE_,MO_,N_,no_,spc_,ta_,i_,ka_,i_,ni_,EOM_}; // ポケモンの　たいかいに
+static const u8 EventRibbonInfo17[] = {sa_,n_,ka_,si_,ta_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // さんかした　きねんリボン
+static const u8 EventRibbonInfo18[] = {PO_,KE_,MO_,N_,no_,spc_,I_,BE_,N_,TO_,ni_,EOM_}; // ポケモンの　イベントに
+static const u8 EventRibbonInfo19[] = {PO_,KE_,MO_,N_,no_,spc_,o_,ma_,tu_,ri_,ni_,EOM_}; // ポケモンの　おまつりに
+static const u8 EventRibbonInfo20[] = {ko_,n_,na_,n_,ni_,spc_,u_,ti_,ka_,ttu_,ta_,EOM_}; // こんなんに　うちかった
+static const u8 EventRibbonInfo21[] = {ki_,ne_,n_,RI_,BO_,N_,EOM_}; // きねんリボン
+static const u8 EventRibbonInfo22[] = {su_,be_,te_,no_,spc_,ko_,n_,na_,n_,wo_,EOM_}; // すべての　こんなんを
+static const u8 EventRibbonInfo23[] = {no_,ri_,ko_,e_,ta_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // のりこえた　きねんリボン
+static const u8 EventRibbonInfo24[] = {n1_,n0_,n0_,ni_,n_,nu_,ki_,spc_,ta_,ttu_,se_,i_,EOM_}; // １００にんぬき　たっせい
+static const u8 EventRibbonInfo25[] = {ku_,ra_,ya_,mi_,no_,to_,u_,spc_,KU_,RI_,A_,EOM_}; // くらやみのとう　クリア
+static const u8 EventRibbonInfo26[] = {ku_,re_,na_,i_,no_,to_,u_,spc_,KU_,RI_,A_,EOM_}; // くれないのとう　クリア
+static const u8 EventRibbonInfo27[] = {ku_,ro_,ga_,ne_,no_,to_,u_,spc_,KU_,RI_,A_,EOM_}; // くろがねのとう　クリア
+static const u8 EventRibbonInfo28[] = {sa_,i_,go_,no_,to_,u_,spc_,KU_,RI_,A_,EOM_}; // さいごのとう　クリア
+static const u8 EventRibbonInfo29[] = {de_,n_,se_,tu_,wo_,spc_,tu_,ku_,ttu_,ta_,EOM_}; // でんせつを　つくった
+static const u8 EventRibbonInfo30[] = {PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,TO_,U_,KI_,YYO_,bou_,EOM_}; // ポケモンセンタートウキョー
+static const u8 EventRibbonInfo31[] = {PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,O_,bou_,SA_,KA_,EOM_}; // ポケモンセンターオーサカ
+static const u8 EventRibbonInfo32[] = {PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,NA_,GO_,YA_,EOM_}; // ポケモンセンターナゴヤ
+static const u8 EventRibbonInfo33[] = {PO_,KE_,MO_,N_,SE_,N_,TA_,bou_,NI_,YYU_,bou_,YO_,bou_,KU_,EOM_}; // ポケモンセンターニューヨーク
+static const u8 EventRibbonInfo34[] = {na_,tu_,ya_,su_,mi_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // なつやすみ　きねんリボン
+static const u8 EventRibbonInfo35[] = {EOM_}; // 
+static const u8 EventRibbonInfo36[] = {hu_,yu_,ya_,su_,mi_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // ふゆやすみ　きねんリボン
+static const u8 EventRibbonInfo37[] = {ha_,ru_,ya_,su_,mi_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // はるやすみ　きねんリボン
+static const u8 EventRibbonInfo38[] = {KU_,RI_,SU_,MA_,SU_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // クリスマス　きねんリボン
+static const u8 EventRibbonInfo39[] = {ki_,ne_,n_,bi_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // きねんび　きねんリボン
+static const u8 EventRibbonInfo40[] = {ga_,n_,ba_,ttu_,ta_,spc_,ki_,ne_,n_,no_,spc_,RI_,BO_,N_,EOM_}; // がんばった　きねんの　リボン
+static const u8 EventRibbonInfo41[] = {to_,mo_,da_,ti_,spc_,i_,ttu_,pa_,i_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // ともだち　いっぱい　きねんリボン
+static const u8 EventRibbonInfo42[] = {ge_,n_,ki_,spc_,i_,ttu_,pa_,i_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // げんき　いっぱい　きねんリボン
+static const u8 EventRibbonInfo43[] = {da_,i_,su_,ki_,na_,spc_,PO_,KE_,MO_,N_,ni_,EOM_}; // だいすきな　ポケモンに
+static const u8 EventRibbonInfo44[] = {tu_,ke_,te_,a_,ge_,ru_,spc_,ki_,ne_,n_,RI_,BO_,N_,EOM_}; // つけてあげる　きねんリボン
+static const u8 EventRibbonInfo45[] = {PO_,KE_,MO_,N_,ga_,spc_,da_,i_,su_,ki_,na_,spc_,ko_,to_,wo_,EOM_}; // ポケモンが　だいすきな　ことを
+static const u8 EventRibbonInfo46[] = {si_,yyo_,u_,me_,i_,su_,ru_,spc_,RI_,BO_,N_,EOM_}; // しょうめいする　リボン
+
+static const u8 * const EventRibbonInfoTbl[64][2] = {
+	{ EventRibbonInfo0, EventRibbonInfo1, },
+	{ EventRibbonInfo2, EventRibbonInfo1, },
+	{ EventRibbonInfo3, EventRibbonInfo1, },
+	{ EventRibbonInfo0, EventRibbonInfo4, },
+	{ EventRibbonInfo2, EventRibbonInfo4, },
+	{ EventRibbonInfo3, EventRibbonInfo4, },
+	{ EventRibbonInfo0, EventRibbonInfo5, },
+	{ EventRibbonInfo2, EventRibbonInfo5, },
+	{ EventRibbonInfo3, EventRibbonInfo5, },
+	{ EventRibbonInfo6, EventRibbonInfo1, },	// 10
+	{ EventRibbonInfo7, EventRibbonInfo1, },
+	{ EventRibbonInfo8, EventRibbonInfo1, },
+	{ EventRibbonInfo6, EventRibbonInfo4, },
+	{ EventRibbonInfo7, EventRibbonInfo4, },
+	{ EventRibbonInfo8, EventRibbonInfo4, },
+	{ EventRibbonInfo6, EventRibbonInfo5, },
+	{ EventRibbonInfo7, EventRibbonInfo5, },
+	{ EventRibbonInfo8, EventRibbonInfo5, },
+	{ EventRibbonInfo9, EventRibbonInfo1, },
+	{ EventRibbonInfo10, EventRibbonInfo1, },	// 20
+	{ EventRibbonInfo11, EventRibbonInfo1, },
+	{ EventRibbonInfo9, EventRibbonInfo4, },
+	{ EventRibbonInfo10, EventRibbonInfo4, },
+	{ EventRibbonInfo11, EventRibbonInfo4, },
+	{ EventRibbonInfo9, EventRibbonInfo5, },
+	{ EventRibbonInfo10, EventRibbonInfo5, },
+	{ EventRibbonInfo11, EventRibbonInfo5, },
+	{ EventRibbonInfo12, EventRibbonInfo1, },
+	{ EventRibbonInfo12, EventRibbonInfo4, },
+	{ EventRibbonInfo12, EventRibbonInfo5, },	// 30
+	{ EventRibbonInfo12, EventRibbonInfo13, },
+	{ EventRibbonInfo14, EventRibbonInfo1, },
+	{ EventRibbonInfo14, EventRibbonInfo4, },
+	{ EventRibbonInfo14, EventRibbonInfo5, },
+	{ EventRibbonInfo14, EventRibbonInfo13, },
+	{ EventRibbonInfo15, EventRibbonInfo1, },
+	{ EventRibbonInfo15, EventRibbonInfo4, },
+	{ EventRibbonInfo15, EventRibbonInfo5, },
+	{ EventRibbonInfo15, EventRibbonInfo13, },
+	{ EventRibbonInfo16, EventRibbonInfo17, },	// 40
+	{ EventRibbonInfo18, EventRibbonInfo17, },
+	{ EventRibbonInfo19, EventRibbonInfo17, },
+	{ EventRibbonInfo20, EventRibbonInfo21, },
+	{ EventRibbonInfo22, EventRibbonInfo23, },
+	{ EventRibbonInfo24, EventRibbonInfo21, },
+	{ EventRibbonInfo25, EventRibbonInfo21, },
+	{ EventRibbonInfo26, EventRibbonInfo21, },
+	{ EventRibbonInfo27, EventRibbonInfo21, },
+	{ EventRibbonInfo28, EventRibbonInfo21, },
+	{ EventRibbonInfo29, EventRibbonInfo21, },	// 50
+	{ EventRibbonInfo30, EventRibbonInfo21, },
+	{ EventRibbonInfo31, EventRibbonInfo21, },
+	{ EventRibbonInfo32, EventRibbonInfo21, },
+	{ EventRibbonInfo33, EventRibbonInfo21, },
+	{ EventRibbonInfo34, EventRibbonInfo35, },
+	{ EventRibbonInfo36, EventRibbonInfo35, },
+	{ EventRibbonInfo37, EventRibbonInfo35, },
+	{ EventRibbonInfo38, EventRibbonInfo35, },
+	{ EventRibbonInfo39, EventRibbonInfo35, },
+	{ EventRibbonInfo40, EventRibbonInfo35, },	// 60
+	{ EventRibbonInfo41, EventRibbonInfo35, },
+	{ EventRibbonInfo42, EventRibbonInfo35, },
+	{ EventRibbonInfo43, EventRibbonInfo44, },
+	{ EventRibbonInfo45, EventRibbonInfo46, },
+};

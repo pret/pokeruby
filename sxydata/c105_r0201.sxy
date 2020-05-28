@@ -1,0 +1,171 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C105_R0201	6
+#define EXITNUM_C105_R0201	2
+#define POSNUM_C105_R0201	0
+#define BGNUM_C105_R0201	2
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_gymleader_06_01[];
+extern const u8	ev_bird_04[];
+extern const u8	ev_campb_13[];
+extern const u8	ev_picnicg_13[];
+extern const u8	ev_bird_07[];
+extern const u8	ev_danpei_06_01[];
+
+//BG_SCRIPT
+extern const u8	ev_icon_01_p01_c105_r0201[];
+extern const u8	ev_icon_02_p01_c105_r0201[];
+
+const evObjData	OBJ_c105_r0201[] =
+{
+	{
+		TR_LEADER_06,		//OBJ ID
+		NAGI,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0004,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_gymleader_06_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_BIRD_04,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000c,		//Xpos
+		0x0016,		//Ypos
+		0x03,		//Height
+		MV_UP,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_bird_04,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_CAMPB_13,		//OBJ ID
+		BOYSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0009,		//Xpos
+		0x0009,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_campb_13,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_PICNICG_13,		//OBJ ID
+		GIRLSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0012,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_picnicg_13,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_BIRD_07,		//OBJ ID
+		YOUNGM2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0012,		//Xpos
+		0x0001,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0001,		//work area
+		ev_bird_07,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		WORKERM1_01_C105_R0201,		//OBJ ID
+		WORKERM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0002,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_danpei_06_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c105_r0201[] =
+{
+	{
+		0x0002,		//Xpos
+		0x0018,		//Ypos
+		0x00,		//Height
+		FIELD_C105_DOOR04,		//Door ID
+		FIELD_C105,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0003,		//Xpos
+		0x0018,		//Ypos
+		0x00,		//Height
+		FIELD_C105_DOOR04,		//Door ID
+		FIELD_C105,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_c105_r0201[] =
+{
+	{
+		0x0001,		//Xpos
+		0x0015,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_icon_01_p01_c105_r0201,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0015,		//Ypos
+		0x00,		//Height
+		BG_D_SITE,		//Event Type
+		ev_icon_02_p01_c105_r0201,		//Script
+	},
+
+};
+
+const SXY_DATA	c105_r0201_sxy_data =
+{
+OBJNUM_C105_R0201,			// field obj max
+EXITNUM_C105_R0201,		// exit max
+POSNUM_C105_R0201,			// pos event max
+BGNUM_C105_R0201,			// bg event max
+OBJ_c105_r0201,			// field obj data
+EXIT_c105_r0201,			// exit data
+NULL,			// pos event data
+BG_c105_r0201,				// bg event data
+};

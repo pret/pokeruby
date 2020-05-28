@@ -1,0 +1,52 @@
+// ●ポケモンリーグ
+
+
+// ●トレーナー男１
+// 　（Ｘ９・Ｙ２）（Ｘ１０・Ｙ２）に２人配置
+// 　２人ともメッセージは共通
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p01_c109_r0206
+msg_trainerm1_01_p01_c109_r0206:
+	.byte	ko_,re_,yo_,ri_,spc_,sa_,ki_,ha_
+	.byte	CR_
+	.byte	su_,be_,te_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_,wo_,spc_,a_,tu_,me_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,da_,ke_,ga_,spc_,su_,su_,me_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TO_,RE_,bou_,NA_,bou_,yo_,gyoe_,spc_,ki_,mi_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_
+	.byte	CR_
+	.byte	ka_,ku_,ni_,n_,spc_,sa_,se_,te_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●バッジが７コ　→msg_trainerm1_01_p02_c109_r0206:
+// ●バッジが８コ　→msg_trainerm1_01_p03_c109_r0206:
+
+// ●バッジが７コ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p02_c109_r0206
+msg_trainerm1_01_p02_c109_r0206:
+	.byte	ki_,mi_,ha_,spc_,ma_,da_
+	.byte	CR_
+	.byte	su_,be_,te_,no_,spc_,ZI_,MU_,BA_,TTU_,ZI_,wo_,spc_,mo_,ttu_,te_,i_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,spc_,RI_,bou_,GU_,wo_,spc_,me_,za_,su_,na_,ra_
+	.byte	CR_
+	.byte	de_,na_,o_,si_,te_,spc_,ki_,na_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●バッジが８コ
+// ●それぞれのＯＢＪ、（Ｘ８・Ｙ２）（Ｘ１１・Ｙ２）に移動
+// 　以降は、その状態を保持してください
+// 　メッセージも以下のモノを表示してください
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerm1_01_p03_c109_r0206
+msg_trainerm1_01_p03_c109_r0206:
+	.byte	TO_,RE_,bou_,NA_,bou_,yo_,gyoe_,spc_,o_,no_,re_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,si_,n_,zi_,te_,spc_,su_,su_,mi_,ta_,ma_,e_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

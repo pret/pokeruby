@@ -1,0 +1,70 @@
+// ●海底洞窟
+
+
+// ▼d1103----------------------------------
+// ●アクア団員♂０６：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_06_01
+msg_aquam_06_01:
+	.byte	ko_,do_,mo_,ni_,spc_,yo_,u_,ha_,spc_,ne_,bou_,n_,da_
+	.byte	CR_
+	.byte	ho_,ra_,spc_,sa_,ttu_,sa_,to_,spc_,ka_,e_,re_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂０６：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_06_02
+msg_aquam_06_02:
+	.byte	o_,re_,ga_,spc_,ka_,e_,ri_,ta_,i_,yo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂０６：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_06_03
+msg_aquam_06_03:
+	.byte	ha_,ya_,ku_,spc_,ka_,n_,bu_,ni_,spc_,na_,ttu_,te_
+	.byte	CR_
+	.byte	si_,ta_,ttu_,pa_,wo_,spc_,si_,go_,i_,te_,spc_,ya_,ri_,ta_,i_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d1103----------------------------------
+// ●アクア団員♂０７：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_07_01
+msg_aquam_07_01:
+	.byte	se_,n_,su_,i_,te_,i_,spc_,ti_,ttu_,ti_,yya_,i_,ka_,ra_,yo_,bou_
+	.byte	CR_
+	.byte	ka_,ra_,da_,no_,spc_,a_,ti_,ko_,ti_,ga_,spc_,i_,ta_,i_,spc_,zi_,yya_,ne_,bou_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂０７：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_07_02
+msg_aquam_07_02:
+	.byte	ma_,ke_,ta_,ra_
+	.byte	CR_
+	.byte	i_,ta_,i_,spc_,zi_,yya_,ne_,bou_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●アクア団員♂０７：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam_07_03
+msg_aquam_07_03:
+	.byte	u_,ba_,ttu_,ta_,spc_,se_,n_,su_,i_,te_,i_,no_,spc_,no_,ri_,go_,ko_,ti_
+	.byte	CR_
+	.byte	a_,ri_,yya_,spc_,sa_,i_,a_,ku_,spc_,da_,na_,gyoe_
+	.byte	SCROLL_WAIT_
+	.byte	to_,ni_,ka_,ku_,spc_,se_,ma_,su_,gi_,spc_,zi_,yya_,ne_,bou_,ka_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

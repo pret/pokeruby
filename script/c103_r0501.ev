@@ -1,0 +1,84 @@
+//===================================================================
+//							c103_r0501
+//						キンセツ・ルーム0501
+//===================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START c103_r0501_event_data
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+
+//--------------------------------------------------------------------
+//					スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*					サラリーウーマン１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw1_01_p01_c103_r0501
+	_TALK_OBJ_START
+
+	//ケースをもらっている？
+	_IF_FLAGON_JUMP	FE_KOINKEESU_GET,ev_workerw1_01_p04_c103_r0501
+
+	//”じてんしゃに　のれたら”
+	_TALK_KEYWAIT	msg_workerw1_01_p01_c103_r0501
+
+	//ハーバーメール
+	_CHECK_ITEM		ITEM_HAABAAMEERU,1
+	//持っている？
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_workerw1_01_p02_c103_r0501
+
+	_TALK_OBJ_END
+	_END
+
+//ハーバーメールがあるとき
+ev_workerw1_01_p02_c103_r0501:
+	//気づく
+	_SE				SE_GYOE_MARK
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_OBJ_ANIME	TARGET_OBJ,gyoe_mark_wait_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//”こうかん　してくれない？”
+	_TALK_YES_NO	msg_workerw1_01_p02_c103_r0501
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_workerw1_01_p03_c103_r0501	//「はい」
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_workerw1_01_p05_c103_r0501	//「いいえ」
+	_END
+
+//「はい」
+ev_workerw1_01_p03_c103_r0501:
+	_TALK_KEYWAIT	msg_workerw1_01_p03_c103_r0501
+
+	//交換の時は、アイテムを渡す共通処理を呼ばない
+	_SUB_ITEM		ITEM_HAABAAMEERU,1
+
+	//交換
+	_ITEM_EVENT		ITEM_KOINKEESU,1
+
+	//コインケースを貰った状態へ
+	_FLAG_SET		FE_KOINKEESU_GET
+
+	_JUMP			ev_workerw1_01_p04_c103_r0501
+	_END
+
+//コインケースがあるとき
+ev_workerw1_01_p04_c103_r0501:
+	//”コインケースが　あれば　たのしめるわ！”
+	_TALK_KEYWAIT	msg_workerw1_01_p04_c103_r0501
+	_TALK_OBJ_END
+	_END
+
+//「いいえ」
+ev_workerw1_01_p05_c103_r0501:
+	//”そう　ざんねん
+	_TALK_KEYWAIT	msg_workerw1_01_p05_c103_r0501
+	_TALK_OBJ_END
+	_END
+
+/********************************************************************/
+/********************************************************************/

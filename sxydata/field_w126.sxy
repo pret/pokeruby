@@ -1,0 +1,98 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_W126	0
+#define EXITNUM_FIELD_W126	1
+#define POSNUM_FIELD_W126	0
+#define BGNUM_FIELD_W126	8
+
+const SXY_CONNECT	EXIT_field_w126[] =
+{
+	{
+		0x002d,		//Xpos
+		0x0041,		//Ypos
+		0x00,		//Height
+		CAVE_D0301_DOOR01,		//Door ID
+		CAVE_D0301,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_w126[] =
+{
+	{
+		0x001e,		//Xpos
+		0x0011,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		haatonouroko_14,		//Script
+	},
+
+	{
+		0x0029,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		haipaabooru_15,		//Script
+	},
+
+	{
+		0x003f,		//Xpos
+		0x0013,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		hosinosuna_16,		//Script
+	},
+
+	{
+		0x000a,		//Xpos
+		0x0024,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		sinzyu_17,		//Script
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0027,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		buromuhekisin_19,		//Script
+	},
+
+	{
+		0x000c,		//Xpos
+		0x0023,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		kiiroikakera_18,		//Script
+	},
+
+	{
+		0x0041,		//Xpos
+		0x003c,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		ookinasinzyu_20,		//Script
+	},
+
+	{
+		0x0009,		//Xpos
+		0x004d,		//Ypos
+		0x03,		//Height
+		BG_ITEMPICK,		//Event Type
+		aoikakera_12,		//Script
+	},
+
+};
+
+const SXY_DATA	field_w126_sxy_data =
+{
+OBJNUM_FIELD_W126,			// field obj max
+EXITNUM_FIELD_W126,		// exit max
+POSNUM_FIELD_W126,			// pos event max
+BGNUM_FIELD_W126,			// bg event max
+NULL,			// field obj data
+EXIT_field_w126,			// exit data
+NULL,			// pos event data
+BG_field_w126,				// bg event data
+};

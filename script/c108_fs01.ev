@@ -1,0 +1,92 @@
+//====================================================================
+//							c108_fs01
+//					ルネ・フレンドリショップ
+//====================================================================
+
+//--------------------------------------------------------------------
+//					マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c108_fs01_event_data
+EVENT_DATA_END			/* 特別なイベントデータなし */
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						店員(OBJ名shopman)
+/********************************************************************/
+SCRIPT_LABEL	ev_shopman_01_p01_c108_fs01
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_SHOP_START		c108_fs01_menu
+
+	//ショップメニュー
+	_SHOP_MENU_START	c108_fs01_menu
+	_SHOP_MENU		ITEM_HAIPAABOORU		
+	_SHOP_MENU		ITEM_SUGOIKIZUGUSURI
+	_SHOP_MENU		ITEM_MANTANNOKUSURI
+	_SHOP_MENU		ITEM_NANDEMONAOSI
+	_SHOP_MENU		ITEM_GENKINOKAKERA
+	_SHOP_MENU		ITEM_GOORUDOSUPUREE	
+	_SHOP_MENU		ITEM_PURASUPAWAA		
+	_SHOP_MENU		ITEM_DHIFENDAA		
+	_SHOP_MENU		ITEM_SYADOOMEERU
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*								大男								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_bigman1_01_p01_c108_fs01
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベントが終了しているか
+	_IF_FLAGON_JUMP		FE_POKE1_01_CAVE_D1206,normal_bigman1_01_message_c108_fs01
+
+	//超古代ポケモンが覚醒していない
+	_IF_FLAGOFF_JUMP	FE_POKE1_01_CAVE_D1111,normal_bigman1_01_message_c108_fs01
+
+	//超古代ポケモン覚醒中メッセージ
+	_TALK_KEYWAIT	msg_bigman1_01_p02_c108_fs01
+	_TALK_OBJ_END
+	_END
+
+//通常時のメッセージ
+normal_bigman1_01_message_c108_fs01:
+	_TALK_KEYWAIT	msg_bigman1_01_p01_c108_fs01
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//								老紳士	
+/********************************************************************/
+SCRIPT_LABEL	ev_gentlem1_01_p01_c108_fs01
+	_TALK_OBJ_START
+
+	//超古代ポケモンイベントが終了しているか
+	_IF_FLAGON_JUMP		FE_POKE1_01_CAVE_D1206,normal_gentlem1_01_message_c108_fs01
+
+	//超古代ポケモンが覚醒していない
+	_IF_FLAGOFF_JUMP	FE_POKE1_01_CAVE_D1111,normal_gentlem1_01_message_c108_fs01
+
+	//超古代ポケモン覚醒中メッセージ
+	_TALK_KEYWAIT	msg_gentlem1_01_p02_c108_fs01
+	_TALK_OBJ_END
+	_END
+
+//通常時のメッセージ
+normal_gentlem1_01_message_c108_fs01:
+	_TALK_KEYWAIT	msg_gentlem1_01_p01_c108_fs01
+	_TALK_OBJ_END
+	_END
+
+

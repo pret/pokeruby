@@ -1,0 +1,34 @@
+// ●カイナシティ　ポケモンセンター１Ｆ
+
+
+// ●船乗り１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c102_pc01
+msg_seaman1_01_p01_c102_pc01:
+	.byte	si_,yyo_,u_,bu_,no_,spc_,KO_,TU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	BA_,RA_,N_,SU_,yo_,ku_,spc_,so_,da_,te_,ru_,ko_,to_,zi_,yya_,spc_,na_,i_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ttu_,pi_,ki_,da_,ke_,spc_,tu_,yo_,ku_,te_,mo_
+	.byte	CR_
+	.byte	ni_,ga_,te_,na_,spc_,PO_,KE_,MO_,N_,ni_,spc_,de_,a_,ttu_,te_,si_,ma_,u_,to_
+	.byte	SCROLL_WAIT_
+	.byte	te_,mo_,spc_,a_,si_,mo_,spc_,de_,na_,ku_,na_,ri_,so_,u_,da_,ze_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●トレーナー女１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_trainerw1_01_p01_c102_pc01
+msg_trainerw1_01_p01_c102_pc01:
+	.byte	to_,mo_,da_,ti_,to_,spc_,PO_,KE_,MO_,N_,ko_,u_,ka_,n_,spc_,su_,ru_,de_,si_,yyo_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,do_,u_,gu_,wo_,spc_,mo_,ttu_,te_,i_,ru_,to_
+	.byte	CR_
+	.byte	n2_,ba_,i_,spc_,u_,re_,si_,ku_,spc_,na_,ru_,yo_,ne_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

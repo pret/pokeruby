@@ -1,0 +1,155 @@
+//====================================================================
+//							c104_r0201
+//							カナズミジム
+//====================================================================
+
+//--------------------------------------------------------------------
+//				      マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c104_r0201_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_01_01
+	//戦闘へ
+	_LEADER_DATA_START
+	_TRAINER_DATA1	LEADERW_01
+	_TRAINER_DATA2	msg_gymleader_01_01
+	_TRAINER_DATA3	msg_gymleader_01_02
+	_TRAINER_DATA4	ev_gymleader_01_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシンを貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_C104_R0201,gymleader_01_wazam_get
+
+	_TALK_KEYWAIT	msg_gymleader_01_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_01_end:
+	//勝利した
+	_TALKMSG		msg_gymleader_01_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_01_04
+	
+	_FLAG_SET		FT_GYM_01_LEADER		//ジムリーダー倒した
+	_FLAG_SET		SYS_BATCH01_GET			//バッチゲット
+	_LDVAL			WK_SCENE_FIELD_C104,1
+	_ADDWK			WK_SCENE_C101_R0201,1
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,1
+	_CALL			gym_trainer_all_flagon
+
+	//バッチを４つゲットした
+	_IFVAL_CALL		WK_SCENE_C101_R0201,EQ,6,papa_pos_change
+
+	//技マシンを貰う処理へ
+	_JUMP			gymleader_01_wazam_get
+	_END
+
+//技マシンを貰う
+gymleader_01_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN39,1
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_FLAG_SET		FE_WAZAM_01_C104_R0201	//技マシン貰った
+
+	_TALK_KEYWAIT	msg_gymleader_01_05
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*                         ジムトレーナー                           */
+/********************************************************************/
+SCRIPT_LABEL	ev_tanpan_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_03
+	_TRAINER_DATA2	msg_tanpan_03_01
+	_TRAINER_DATA3	msg_tanpan_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_03_03
+	_END
+
+SCRIPT_LABEL	ev_tanpan_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	TANPAN_04
+	_TRAINER_DATA2	msg_tanpan_04_01
+	_TRAINER_DATA3	msg_tanpan_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_tanpan_04_03
+	_END
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_01_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_01_LEADER,ev_danpei_01_02
+
+	_TALK_KEYWAIT	msg_danpei_01_01
+	_TALK_OBJ_END
+	_END
+
+//倒している
+ev_danpei_01_02:
+	_TALK_KEYWAIT	msg_danpei_01_02
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_c104_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH01_GET,batch_get_c104_r0201
+
+	_JUMP			batch_no_get_c104_r0201
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_c104_r0201
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH01_GET,batch_get_c104_r0201
+
+	_JUMP			batch_no_get_c104_r0201
+	_END
+
+//すでにリーダーを倒している
+batch_get_c104_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p02_c104_r0201
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_c104_r0201:
+	_TALK_KEYWAIT	msg_icon_01_p01_c104_r0201
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

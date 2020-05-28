@@ -1,0 +1,39 @@
+// ●カナズミシティ　民家５／２Ｆ（街の南西）
+
+
+// ●老人２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_oldman2_01_p01_c104_r0802
+msg_oldman2_01_p01_c104_r0802:
+	.byte	DE_,BO_,N_,mo_,na_,spc_,mu_,ka_,si_,ha_
+	.byte	CR_
+	.byte	ti_,i_,sa_,na_,spc_,ti_,i_,sa_,na_,spc_,ka_,i_,si_,yya_,spc_,da_,ttu_,ta_,wa_,i_,spc_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●坊や１（アイテムをくれる前）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_c104_r0802
+msg_boya1_01_p01_c104_r0802:
+	.byte	o_,to_,u_,sa_,n_,ha_,spc_,ka_,i_,si_,yya_,de_,spc_,o_,si_,go_,to_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,spc_,o_,to_,u_,sa_,n_,ga_,spc_,tu_,ku_,ttu_,ta_,n_,da_,ze_,gyoe_
+	.byte	CR_
+	.byte	de_,mo_,spc_,bo_,ku_,spc_,ma_,da_,spc_,tu_,ka_,e_,na_,i_,ka_,ra_,spc_,a_,ge_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「プレミアボール」（No012）入手
+// ●（アイテムをくれた後）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p02_c104_r0802
+msg_boya1_01_p02_c104_r0802:
+	.byte	o_,to_,u_,sa_,n_,ha_,spc_,ka_,i_,si_,yya_,de_,spc_,o_,si_,go_,to_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	bo_,ku_,mo_,spc_,o_,o_,ki_,ku_,spc_,na_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	DE_,BO_,N_,de_,spc_,ha_,ta_,ra_,ku_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,74 @@
+//===============================================================
+//		¿ﬁ≤Àﬁ›∏ﬁ
+//===============================================================
+//------------------------------------------
+//	¿ﬁ≤Àﬁ›∏ﬁ êˆÇË
+//------------------------------------------
+SCRIPT_LABEL	diving_below_use
+	_TALK_START
+	_WAZA_CHECK		WAZANO_DAIBINGU
+	_IFVAL_JUMP		ANSWORK,EQ,6,_diving_below_useless
+	_GET_NICKNAME	0,ANSWORK
+	_SET_FE_WORK	0,ANSWORK
+	_SET_FE_WORK	1,1
+	_TALK_YES_NO	msg_diving_below_use0
+	_IFVAL_JUMP		ANSWORK,EQ,0,_diving_below_end
+_diving_below_use:
+	_TALK_KEYWAIT	msg_diving_below_use1
+	_SET_FLD_EFF	FECODE_Diving
+	_JUMP			_diving_below_end
+
+//------------------------------------------
+//	êˆÇË ñ≥Çµ
+//------------------------------------------
+SCRIPT_LABEL	diving_below_look
+	_TALK_START
+_diving_below_useless:
+	_TALK_KEYWAIT	msg_diving_below_look
+
+//------------------------------------------
+//	êˆÇË èIóπ
+//------------------------------------------
+_diving_below_end:
+	_TALK_END
+	_END
+
+//------------------------------------------
+//	¿ﬁ≤Àﬁ›∏ﬁ ïÇè„
+//------------------------------------------
+SCRIPT_LABEL	diving_up_use
+	_TALK_START
+	_WAZA_CHECK		WAZANO_DAIBINGU
+	_IFVAL_JUMP		ANSWORK,EQ,6,diving_up_look
+	_GET_NICKNAME	0,ANSWORK
+	_SET_FE_WORK	0,ANSWORK
+	_SET_FE_WORK	1,1
+	_TALK_YES_NO	msg_diving_up_use
+	_IFVAL_JUMP		ANSWORK,EQ,0,_diving_up_end
+_diving_up_use:
+	_TALK_KEYWAIT	msg_diving_below_use1
+	_SET_FLD_EFF	FECODE_Diving
+	_JUMP			_diving_up_end
+
+//------------------------------------------
+//	ïÇè„ ñ≥Çµ
+//------------------------------------------
+SCRIPT_LABEL	diving_up_look
+	_TALK_START
+	_TALK_KEYWAIT	msg_diving_up_look
+	_JUMP			_diving_up_end
+
+//------------------------------------------
+//	ïÇè„ ïsâ¬
+//------------------------------------------
+SCRIPT_LABEL		diving_up_err
+	_TALK_START
+	_TALK_KEYWAIT	msg_diving_up_err
+	
+//------------------------------------------
+//	ïÇè„ èIóπ
+//------------------------------------------
+_diving_up_end:
+	_TALK_END
+	_END
+

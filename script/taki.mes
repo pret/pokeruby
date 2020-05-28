@@ -1,0 +1,17 @@
+//===============================================================
+//		‘ê“o‚è
+//===============================================================
+msg_taki:
+	.byte	o_,o_,ki_,na_,spc_,o_,to_,wo_,spc_,ta_,te_,te_
+	.byte	CR_
+	.byte	mi_,zu_,ga_,spc_,na_,ga_,re_,o_,ti_,te_,i_,ru_,gyoe_
+	.byte	EOM_
+msg_takinobori_use0:
+	.byte	o_,o_,ki_,na_,spc_,ta_,ki_,da_,gyoe_
+	.byte	CR_
+	.byte	tenten_,tenten_,ta_,ki_,no_,bo_,ri_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+msg_takinobori_use1:
+	.byte	I_MSG_,STR_TEMP_BUF0,spc_,ha_,spc_
+	.byte	ta_,ki_,no_,bo_,ri_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	EOM_

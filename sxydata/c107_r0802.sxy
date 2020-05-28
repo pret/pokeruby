@@ -1,0 +1,50 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_C107_R0802	1
+#define EXITNUM_C107_R0802	1
+#define POSNUM_C107_R0802	0
+#define BGNUM_C107_R0802	0
+
+const evObjData	OBJ_c107_r0802[] =
+{
+	{
+		CARD_E_C107_R0802,		//OBJ ID
+		WKOBJCODE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0006,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_LEFT,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		NULL,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_c107_r0802[] =
+{
+	{
+		0x0003,		//Xpos
+		0x0001,		//Ypos
+		0x00,		//Height
+		C107_R0801_STAIR01,		//Door ID
+		C107_R0801,			//Map ID
+		C107,				//Field ID
+	},
+
+};
+
+const SXY_DATA	c107_r0802_sxy_data =
+{
+OBJNUM_C107_R0802,			// field obj max
+EXITNUM_C107_R0802,		// exit max
+POSNUM_C107_R0802,			// pos event max
+BGNUM_C107_R0802,			// bg event max
+OBJ_c107_r0802,			// field obj data
+EXIT_c107_r0802,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

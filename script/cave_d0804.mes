@@ -1,0 +1,40 @@
+// ●おくりび山　内部４Ｆ
+
+
+// ▼d0804----------------------------------
+// ●からておう１２：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_12_01
+msg_karate_12_01:
+	.byte	o_,si_,si_,yyo_,u_,sa_,ma_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ma_,no_,spc_,wa_,ta_,si_,no_,spc_,zi_,tu_,ri_,yyo_,ku_
+	.byte	SCROLL_WAIT_
+	.byte	mi_,te_,i_,te_,spc_,ku_,da_,sa_,i_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●からておう１２：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_12_02
+msg_karate_12_02:
+	.byte	o_,si_,si_,yyo_,u_,sa_,ma_,tenten_,tenten_
+	.byte	CR_
+	.byte	su_,n_,ma_,se_,n_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●からておう１２：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_karate_12_03
+msg_karate_12_03:
+	.byte	mo_,ttu_,to_,spc_,tu_,yo_,ku_,na_,ra_,na_,i_,to_
+	.byte	CR_
+	.byte	ko_,ko_,ni_,spc_,ne_,mu_,ru_,spc_,o_,si_,si_,yyo_,u_,sa_,ma_,mo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,n_,si_,n_,spc_,de_,ki_,na_,i_,yo_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

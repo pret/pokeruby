@@ -1,0 +1,63 @@
+// ●114番道路　化石マニアの家（r0101）
+
+
+// ●化石マニアの弟（坊や１）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_r114_r0101
+msg_boya1_01_p01_r114_r0101:
+	.byte	bo_,ku_,no_,spc_,ni_,i_,ti_,yya_,n_,spc_,ka_,se_,ki_,MA_,NI_,A_,tenten_,tenten_
+	.byte	CR_
+	.byte	ka_,se_,ki_,spc_,da_,i_,su_,ki_,spc_,NA_,I_,SU_,GA_,I_,spc_,sa_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,na_,mi_,ni_,spc_,a_,na_,wo_,spc_,ho_,ru_,no_,mo_,spc_,da_,i_,su_,ki_,de_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,no_,spc_,a_,na_,mo_,spc_,zi_,bu_,n_,de_,spc_,ho_,ttu_,ta_,n_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,wo_,spc_,a_,ge_,ru_,ka_,ra_,tenten_,tenten_
+	.byte	CR_
+	.byte	ki_,mi_,mo_,spc_,ni_,i_,ti_,yya_,n_,spc_,mi_,ta_,i_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	a_,na_,wo_,spc_,ho_,ttu_,te_,mi_,na_,yo_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●技マシン２８「あなをほる」（No316）入手
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p02_r114_r0101
+msg_boya1_01_p02_r114_r0101:
+	.byte	ti_,na_,mi_,ni_,spc_,PO_,KE_,MO_,N_,ga_,spc_,a_,na_,wo_,ho_,ru_,to_
+	.byte	CR_
+	.byte	do_,u_,ku_,tu_,no_,spc_,i_,ri_,gu_,ti_,spc_,ma_,de_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ttu_,si_,yyu_,n_,de_,spc_,mo_,do_,re_,ru_,n_,da_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●化石イベントによっては変更あります
+
+
+// ●左側のガラスケース
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_case_01_p01_r114_r0101
+msg_case_01_p01_r114_r0101:
+	.byte	KE_,bou_,SU_,no_,na_,ka_,ni_,spc_,ka_,wa_,ttu_,ta_,spc_,ka_,ta_,ti_,no_,spc_,i_,si_,ga_
+	.byte	CR_
+	.byte	i_,ku_,tu_,mo_,spc_,ka_,za_,ttu_,te_,a_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●右側の大きな本棚
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hondana1_01_p01_r114_r0101
+msg_hondana1_01_p01_r114_r0101:
+	.byte	kako2_,ti_,so_,u_,ga_,spc_,de_,ki_,ru_,ma_,de_,kakot2_
+	.byte	CR_
+	.byte	kako2_,a_,me_,spc_,hu_,ttu_,te_,spc_,zi_,me_,n_,spc_,ka_,ta_,ma_,ru_,kakot2_
+	.byte	SCROLL_WAIT_
+	.byte	kako2_,i_,si_,to_,spc_,tu_,ti_,to_,spc_,ga_,n_,se_,ki_,to_,kakot2_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,ku_,sa_,n_,no_,spc_,ho_,n_,ga_,spc_,na_,ra_,n_,de_,ru_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

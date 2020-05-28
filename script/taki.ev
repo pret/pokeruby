@@ -1,0 +1,33 @@
+//===============================================================
+//		‘ê“o‚è
+//===============================================================
+//------------------------------------------
+//	‘ê“o‚è
+//------------------------------------------
+SCRIPT_LABEL	takinobori_use
+	_TALK_START
+	_WAZA_CHECK		WAZANO_TAKINOBORI
+	_IFVAL_JUMP		ANSWORK,EQ,6,_takinobori_useless
+	_GET_NICKNAME	0,ANSWORK
+	_SET_FE_WORK	0,ANSWORK
+	_TALK_YES_NO	msg_takinobori_use0
+	_IFVAL_JUMP		ANSWORK,EQ,0,_takinobori_end
+_takinobori_use:
+	_TALK_KEYWAIT	msg_takinobori_use1
+	_SET_FLD_EFF	FECODE_Takinobori
+	_JUMP			_takinobori_end
+
+//------------------------------------------
+//	‘ê‚ðŒ©‚é
+//------------------------------------------
+SCRIPT_LABEL	takinobori_look
+	_TALK_START
+_takinobori_useless:
+	_TALK_KEYWAIT	msg_taki
+
+//------------------------------------------
+//	‚¨‚µ‚Ü‚¢
+//------------------------------------------
+_takinobori_end:
+	_TALK_END
+	_END

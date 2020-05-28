@@ -1,0 +1,11 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 3
+#define DEVON1_01_C104_R0101	1
+#define DEVON1_02_C104_R0101	2
+#define WORKERW1_01_C104_R0101	3
+
+//Exit ID = 3
+#define C104_R0101_MAT01	0
+#define C104_R0101_MAT02	1
+#define C104_R0101_DOOR01	2

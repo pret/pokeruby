@@ -1,0 +1,377 @@
+//====================================================================
+//							r124_r0101
+//						トレジャーハンターの家
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START r124_r0101_event_data
+FLAG_CHANGE_LABEL	flag_change_r124_r0101
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r124_r0101:
+	_FLAG_SET		SYS_ARRIVE_HUNTER
+	_END
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+//						トレジャーハンター
+/********************************************************************/
+SCRIPT_LABEL	ev_youngm2_01_p01_r124_r0101
+	_TALK_OBJ_START
+
+	_IF_FLAGON_JUMP		FE_TREASURE_HUNTER,ev_youngm2_01_p02_r124_r0101
+
+	//１回目の挨拶
+	_TALK_KEYWAIT	msg_youngm2_01_p01_r124_r0101
+
+	//１回話した状態へ
+	_FLAG_SET		FE_TREASURE_HUNTER
+
+	_JUMP			check_exchange_item_r124_r0101
+	_END
+
+//２回目以降の挨拶
+ev_youngm2_01_p02_r124_r0101:
+	_TALK_KEYWAIT	msg_youngm2_01_p02_r124_r0101
+	_JUMP			check_exchange_item_r124_r0101
+	_END
+
+//アイテム交換できるかチェック
+check_exchange_item_r124_r0101:
+	//アイテムがあるかチェック
+	_CALL			kakera_ari_check_r124_r0101
+
+	//持っていないとき
+	_IFVAL_JUMP		LOCALWORK1,EQ,0,ev_youngm2_01_p03_r124_r0101
+	//何かもってるとき
+	_JUMP			ev_youngm2_01_p04_r124_r0101
+	_END
+
+//アイテムがあるかチェック
+kakera_ari_check_r124_r0101:
+	_LDVAL			LOCALWORK1,0
+	_CHECK_ITEM		ITEM_AKAIKAKERA,1
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,item_aka_ari_r124_r0101
+	_CHECK_ITEM		ITEM_KIIROIKAKERA,1
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,item_kiiro_ari_r124_r0101
+	_CHECK_ITEM		ITEM_AOIKAKERA,1
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,item_aoi_ari_r124_r0101
+	_CHECK_ITEM		ITEM_MIDORINOKAKERA,1
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,item_midori_ari_r124_r0101
+	_RET
+
+
+//赤いかけらがあるとき
+item_aka_ari_r124_r0101:
+	_ADDWK			LOCALWORK1,1
+	_RET
+
+//黄色いかけらがあるとき
+item_kiiro_ari_r124_r0101:
+	_ADDWK			LOCALWORK1,2
+	_RET
+
+//青いかけらがあるとき
+item_aoi_ari_r124_r0101:
+	_ADDWK			LOCALWORK1,4
+	_RET
+
+//緑のけらがあるとき
+item_midori_ari_r124_r0101:
+	_ADDWK			LOCALWORK1,8
+	_RET
+
+
+//何か持っているとき
+ev_youngm2_01_p04_r124_r0101:
+	//”こうかん　しようぜ！”
+	_TALK_KEYWAIT	msg_youngm2_01_p04_r124_r0101
+	_JUMP			ev_youngm2_01_p05_r124_r0101
+	_END
+
+//交換品目選択
+ev_youngm2_01_p05_r124_r0101:
+	//”どれを　こうかん　するんだい？”
+	_TALKMSG		msg_youngm2_01_p05_r124_r0101
+	_TALK_WAIT
+
+	_SWITCH	LOCALWORK1
+	_CASEJUMP		1 ,kakera_menu_rnnn_r124_r0101
+	_CASEJUMP		2 ,kakera_menu_nynn_r124_r0101
+	_CASEJUMP		3 ,kakera_menu_rynn_r124_r0101
+	_CASEJUMP		4 ,kakera_menu_nnbn_r124_r0101
+	_CASEJUMP		5 ,kakera_menu_rnbn_r124_r0101
+	_CASEJUMP		6 ,kakera_menu_nybn_r124_r0101
+	_CASEJUMP		7 ,kakera_menu_rybn_r124_r0101
+	_CASEJUMP		8 ,kakera_menu_nnng_r124_r0101
+	_CASEJUMP		9 ,kakera_menu_rnng_r124_r0101
+	_CASEJUMP		10,kakera_menu_nyng_r124_r0101
+	_CASEJUMP		11,kakera_menu_ryng_r124_r0101
+	_CASEJUMP		12,kakera_menu_nnbg_r124_r0101
+	_CASEJUMP		13,kakera_menu_rnbg_r124_r0101
+	_CASEJUMP		14,kakera_menu_nybg_r124_r0101
+	_CASEJUMP		15,kakera_menu_rybg_r124_r0101
+	_END
+
+//赤ＸＸＸ
+kakera_menu_rnnn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RNNN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//Ｘ黄ＸＸ
+kakera_menu_nynn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NYNN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_yellow_r124_r0101
+	_CASEJUMP		1,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤黄ＸＸ
+kakera_menu_rynn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RYNN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_yellow_r124_r0101
+	_CASEJUMP		2,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//ＸＸ青Ｘ
+kakera_menu_nnbn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NNBN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_blue_r124_r0101
+	_CASEJUMP		1,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤Ｘ青Ｘ
+kakera_menu_rnbn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RNBN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_blue_r124_r0101
+	_CASEJUMP		2,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//Ｘ黄青Ｘ
+kakera_menu_nybn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NYBN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_yellow_r124_r0101
+	_CASEJUMP		1,check_blue_r124_r0101
+	_CASEJUMP		2,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤黄青Ｘ
+kakera_menu_rybn_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RYBN
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_yellow_r124_r0101
+	_CASEJUMP		2,check_blue_r124_r0101
+	_CASEJUMP		3,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//ＸＸＸ緑
+kakera_menu_nnng_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NNNG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_green_r124_r0101
+	_CASEJUMP		1,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤ＸＸ緑
+kakera_menu_rnng_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RNNG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_green_r124_r0101
+	_CASEJUMP		2,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//Ｘ黄Ｘ緑
+kakera_menu_nyng_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NYNG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_yellow_r124_r0101
+	_CASEJUMP		1,check_green_r124_r0101
+	_CASEJUMP		2,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤黄Ｘ緑
+kakera_menu_ryng_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RYNG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_yellow_r124_r0101
+	_CASEJUMP		2,check_green_r124_r0101
+	_CASEJUMP		3,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//ＸＸ青緑
+kakera_menu_nnbg_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NNBG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_blue_r124_r0101
+	_CASEJUMP		1,check_green_r124_r0101
+	_CASEJUMP		2,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤Ｘ青緑
+kakera_menu_rnbg_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RNBG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_blue_r124_r0101
+	_CASEJUMP		2,check_green_r124_r0101
+	_CASEJUMP		3,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//Ｘ黄青緑
+kakera_menu_nybg_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_NYBG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_yellow_r124_r0101
+	_CASEJUMP		1,check_blue_r124_r0101
+	_CASEJUMP		2,check_green_r124_r0101
+	_CASEJUMP		3,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//赤黄青緑
+kakera_menu_rybg_r124_r0101:
+	_SELECT_WINDOW	0,0,TREASURE_EXCHANGE_MENU_RYBG
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,check_red_r124_r0101
+	_CASEJUMP		1,check_yellow_r124_r0101
+	_CASEJUMP		2,check_blue_r124_r0101
+	_CASEJUMP		3,check_green_r124_r0101
+	_CASEJUMP		4,ev_youngm2_01_p09_r124_r0101
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+
+//赤いかけら
+check_red_r124_r0101:
+	_LDVAL			TMPWK0,ITEM_AKAIKAKERA
+	_LDVAL			TMPWK1,ITEM_HONOONOISI
+	_JUMP			common_check_r124_r0101
+
+//黄色いかけら
+check_yellow_r124_r0101:
+	_LDVAL			TMPWK0,ITEM_KIIROIKAKERA
+	_LDVAL			TMPWK1,ITEM_KAMINARINOISI
+	_JUMP			common_check_r124_r0101
+
+//青いかけら
+check_blue_r124_r0101:
+	_LDVAL			TMPWK0,ITEM_AOIKAKERA
+	_LDVAL			TMPWK1,ITEM_MIZUNOISI
+	_JUMP			common_check_r124_r0101
+
+//緑のかけら
+check_green_r124_r0101:
+	_LDVAL			TMPWK0,ITEM_MIDORINOKAKERA
+	_LDVAL			TMPWK1,ITEM_RIIHUNOISI
+	_JUMP			common_check_r124_r0101
+
+//共通チェック部分
+common_check_r124_r0101:
+	_GET_ITEMNAME	0,TMPWK0
+	_GET_ITEMNAME	1,TMPWK1
+
+	//交換するんだな？
+	_TALK_YES_NO	msg_youngm2_01_p06_r124_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,0,ev_youngm2_01_p09_r124_r0101	// いいえ
+
+	_ADD_ITEM_CHK	TMPWK1,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,common_change_r124_r0101		//手に入れられるときは無条件で交換処理
+
+	//２個より少ない(１個なので交換するとオーバーしない）かチェック
+	_CHECK_ITEM		TMPWK0,2
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,common_change_r124_r0101			//１個の時は＋－がゼロなので交換処理
+
+	_JUMP			ev_youngm2_01_p08_r124_r0101			//道具が一杯
+	_END
+
+//共通チェンジ処理
+common_change_r124_r0101:
+	_SUB_ITEM		TMPWK0,1
+	_ITEM_EVENT		TMPWK1,1
+
+	//とりひき　せいりつ
+	_TALK_KEYWAIT	msg_youngm2_01_p07_r124_r0101
+
+	//アイテムがあるかチェック
+	_CALL			kakera_ari_check_r124_r0101
+
+	//もうストックがないとき終了
+	_IFVAL_JUMP		LOCALWORK1,EQ,0,ev_exchange_end_r124_r0101
+
+	//まだ　こうかん　するかい？
+	_TALK_YES_NO	msg_youngm2_01_p10_r124_r0101
+	_IFVAL_JUMP		ANSWORK,EQ,1,ev_youngm2_01_p05_r124_r0101	//はい
+
+	//いいえ
+	_JUMP			ev_youngm2_01_p09_r124_r0101
+	_END
+
+//どうぐが一杯
+ev_youngm2_01_p08_r124_r0101:
+	_TALK_KEYWAIT	msg_youngm2_01_p08_r124_r0101
+	_TALK_OBJ_END
+	_END
+
+//いいえ
+ev_youngm2_01_p09_r124_r0101:
+	_TALK_KEYWAIT	msg_youngm2_01_p09_r124_r0101
+	_TALK_OBJ_END
+	_END
+
+//交換できる道具がない
+ev_youngm2_01_p03_r124_r0101:
+	_TALK_KEYWAIT	msg_youngm2_01_p03_r124_r0101
+	_TALK_OBJ_END
+	_END
+
+//取引終わり
+ev_exchange_end_r124_r0101:
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+//						張り紙
+/********************************************************************/
+SCRIPT_LABEL	ev_poster_01_p01_r124_r0101
+	_EASY_MSG		msg_poster_01_p01_r124_r0101
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

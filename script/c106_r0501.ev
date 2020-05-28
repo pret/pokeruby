@@ -1,0 +1,247 @@
+//============================================ 
+//
+// イベントスクリプトファイル
+//	c106_r0501.ev
+//
+//============================================ 
+
+EVENT_DATA_START	c106_r0501_event_data
+FLAG_CHANGE_LABEL	flag_change_c106_r0501
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//					      FLAG_CHANGE_LABEL 
+//--------------------------------------------------------------------
+flag_change_c106_r0501:
+	//あなぬけ接続先セット
+	_SET_ESCAPE_MAP_ID	FIELD,FIELD_C106,12,33
+	_END
+
+
+//--------------------------------------------------------------------
+//					       スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							受け付け								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerw2_01_p01_c106_r0501
+	_TALK_OBJ_START
+
+	//「むげんのチケット」をもっていたら
+	_CHECK_ITEM		ITEM_MUGENNOTIKETTO,1
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,ev_workerw2_01_p03_c106_r0501
+
+	_JUMP			common_workerw2_01_p01_c106_r0501
+	_END
+
+//共通処理
+common_workerw2_01_p01_c106_r0501:
+	//ゲームをクリアしているか
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_workerw2_01_p02_c106_r0501
+
+	_TALK_KEYWAIT	msg_workerw2_01_p01_c106_r0501
+	_TALK_OBJ_END
+	_END
+
+//ゲームをクリアしているか
+ev_workerw2_01_p02_c106_r0501:
+	_TALK_KEYWAIT	msg_workerw2_01_p02_c106_r0501
+
+	_CHECK_ITEM		ITEM_HUNENOTIKETTO,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,nothing_funenotikeeto_c106_r0501
+
+	_TALKMSG		msg_workerw2_01_p08_c106_r0501
+	_TALK_WAIT
+	_JUMP			ev_workerw2_01_p04_c106_r0501
+	_END
+
+//選択肢
+ev_workerw2_01_p04_c106_r0501:
+	_SELECT_WINDOW_CSR	18,6,RENRAKUSEN2_MENU,2,0	//B有効
+
+	_SWITCH	ANSWORK
+	_CASEJUMP		0,case0_workerw2_01_p01_c106_r0501
+	_CASEJUMP		1,case1_workerw2_01_p01_c106_r0501
+	_CASEJUMP		2,case2_workerw2_01_p01_c106_r0501
+	_CASECANCEL		case2_workerw2_01_p01_c106_r0501
+	_END
+
+//「ふねのチケット」持っていなかったら
+nothing_funenotikeeto_c106_r0501:
+	_TALK_KEYWAIT	msg_workerw2_01_p09_c106_r0501
+	_TALK_OBJ_END
+	_END
+
+//「カイナ」
+case0_workerw2_01_p01_c106_r0501:
+	_TALK_YES_NO	msg_workerw2_01_p04_c106_r0501
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,common_no_c106_r0501	//「いいえ」
+
+	_LDVAL			WK_SCENE_SP_SHIP01,5
+	_CALL			common_hiship1_c106_r0501
+	_MAP_CHANGE		SP,SP_SHIP01,1,10
+	_STOP_SCRIPT
+	_TALK_OBJ_END
+	_END
+
+//「バトルタワー」
+case1_workerw2_01_p01_c106_r0501:
+	_TALK_YES_NO	msg_workerw2_01_p05_c106_r0501
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,common_no_c106_r0501	//「いいえ」
+
+	_CALL			common_hiship1_c106_r0501
+	_MAP_CHANGE		PARK,PARK_TOWER01,19,23
+	_STOP_SCRIPT
+	_TALK_OBJ_END
+	_END
+
+//共通「いいえ」処理
+common_no_c106_r0501:
+	_TALKMSG		msg_workerw2_01_p07_c106_r0501
+	_TALK_WAIT
+
+	//選択処理へ戻る
+	_JUMP			ev_workerw2_01_p04_c106_r0501
+	_END
+
+//共通処理
+common_hiship1_c106_r0501:
+	_TALK_KEYWAIT	msg_workerw2_01_p06_c106_r0501
+	_TALK_CLOSE
+
+	//船に乗り込む
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	TARGET_OBJ,C106,C106_R0501
+
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,site_u_hero_c106_r0501_anime01
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,site_r_hero_c106_r0501_anime01
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	EV_OBJ_SPID,0,0
+
+	_LDVAL			PARAM0,HISHIP1_01_C106_R0501
+	_CALL			ev_departure_demo
+	_RET
+
+//左から話し掛け
+site_r_hero_c106_r0501_anime01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c106_r0501_anime20
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//下から話し掛け
+site_u_hero_c106_r0501_anime01:
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c106_r0501_anime21
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+	_RET
+
+//「やめる」
+case2_workerw2_01_p01_c106_r0501:
+	_TALK_KEYWAIT	msg_workerw2_01_p03_c106_r0501
+	_TALK_OBJ_END
+	_END
+
+//「むげんのチケット」をもっている
+ev_workerw2_01_p03_c106_r0501:
+	//ゲームをクリアしていなかったら
+	_IF_FLAGOFF_JUMP	SYS_GAME_CLEAR,common_workerw2_01_p01_c106_r0501
+
+	//ラティアスイベント終了していたら
+	_IF_FLAGON_JUMP	FE_KOKORO_BATTLE,common_workerw2_01_p01_c106_r0501
+
+	//南の孤島イベント許可されていない場合
+	_IF_FLAGOFF_JUMP	SYS_KOKORO_EVENT,common_workerw2_01_p01_c106_r0501
+
+	_TALK_KEYWAIT	msg_workerw2_01_p01_kokoro01
+	_TALK_CLOSE
+
+	//船に乗り込む
+	_SET_OBJ_ANIME	TARGET_OBJ,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	TARGET_OBJ,C106,C106_R0501
+
+	_TIME_WAIT		60
+
+	_OBJ_APPEAR		SEAMAN1_01_C106_R0501
+	_TIME_WAIT		30
+
+	//主人公の方を向く
+	_SET_OBJ_ANIME	SEAMAN1_01_C106_R0501,turn_hero_site_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TALK_KEYWAIT	msg_seaman1_01_p01_kokoro01
+	_TALK_CLOSE
+
+	//船に乗り込む
+	_SET_OBJ_ANIME	SEAMAN1_01_C106_R0501,turn_u_anime
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_TIME_WAIT		30
+	_OBJ_DELETE		SEAMAN1_01_C106_R0501
+
+	//船に乗り込む
+	_IFVAL_CALL		RG_SITE,EQ,SITE_U,site_u_hero_c106_r0501_anime01
+	_IFVAL_CALL		RG_SITE,EQ,SITE_R,site_r_hero_c106_r0501_anime01
+
+	_TIME_WAIT		30
+	_OBJ_INVISIBLE	EV_OBJ_SPID,0,0
+
+	_PROGRAM		PC_KAIFUKU
+
+	_LDVAL			PARAM0,HISHIP1_01_C106_R0501
+	_CALL			ev_departure_demo
+	_MAP_CHANGE		PARK,PARK_KOKORO01,13,22
+	_STOP_SCRIPT
+
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//主人公	乗り込む(左から)
+//--------------------------------------------------------------------
+hero_01_c106_r0501_anime20:
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_TURN_U	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	乗り込む(下から)
+//--------------------------------------------------------------------
+hero_01_c106_r0501_anime21:
+	.byte	AC_WALK_U_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	船の中に入る
+//--------------------------------------------------------------------
+hero_01_c106_r0501_anime01:
+	.byte	AC_WALK_U_1
+	.byte	ACMD_END
+	
+
+/********************************************************************/
+/*								船乗り								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_seaman1_01_p01_c106_r0501
+	_TALK_OBJ_START
+	
+	//ゲームをクリアしているか
+	_IF_FLAGON_JUMP	SYS_GAME_CLEAR,ev_seaman1_01_p02_c106_r0501
+
+	_TALK_KEYWAIT	msg_seaman1_01_p01_c106_r0501
+	_TALK_OBJ_END
+	_END
+
+//ゲームをクリアしている
+ev_seaman1_01_p02_c106_r0501:
+	_TALK_KEYWAIT	msg_seaman1_01_p02_c106_r0501
+	_TALK_OBJ_END
+	_END
+
+

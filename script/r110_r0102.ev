@@ -1,0 +1,404 @@
+//====================================================================
+//						r110_r0102
+//						カラクリ屋敷奥間
+//						LOCALWORK1使用
+//						LOCALWORK2使用
+//====================================================================
+
+//--------------------------------------------------------------------
+//					    マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START		r110_r0102_event_data
+INIT_CTRL_LABEL			init_ctrl_label_r110_r0102
+FLAG_CHANGE_LABEL		flag_change_r110_r0102
+SP_SCRIPT_LABEL			scene_r110_r0102
+OBJ_CTRL_LABEL			obj_01_p01_r110_r0102
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						INIT_CTRL_LABEL
+//--------------------------------------------------------------------
+init_ctrl_label_r110_r0102:
+	//閉じた扉を書き込む
+	_IFVAL_CALL			LOCALWORK1,EQ,1,set_cell_01_r110_r0102
+	_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_r110_r0102:
+	_LDVAL				LOCALWORK1,0						//右側の扉制御用
+	_LDVAL				LOCALWORK2,0						//左側の扉ストッパー用
+
+	_PROGRAM			KARAKURI_HIDE_ITEM_OFF				//隠しアイテムを消去
+	_END
+
+
+//--------------------------------------------------------------------
+//						OBJ_CTRL_LABEL
+//--------------------------------------------------------------------
+obj_01_p01_r110_r0102:
+	OBJ_CTRL_DATA		LOCALWORK2,0,obj_ctrl_init_r110_r0102
+	OBJ_CTRL_END
+
+obj_ctrl_init_r110_r0102:
+	//強制画面出現(DELETEからの復帰対処.バグ対処のため)
+	_OBJ_APPEAR			MIDDLEM1_01_R110_R0102
+	_OBJ_VISIBLE		MIDDLEM1_01_R110_R0102,R110,R110_R0102
+	_OBJ_SITE_CHG		MIDDLEM1_01_R110_R0102,SITE_R
+	_END
+
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_r110_r0102:
+	SP_SCRIPT_DATA		LOCALWORK1,0,ev_scene_gate_close_r110_r0102
+	SP_SCRIPT_END
+
+//扉を閉じる
+ev_scene_gate_close_r110_r0102:
+	_LDVAL				LOCALWORK1,1
+	_CALL				set_cell_01_r110_r0102
+	_PROGRAM			MAKE_MAP_BG
+	_END
+
+//セルを書き込む
+set_cell_01_r110_r0102:
+	//扉を閉じる
+	_SET_CELL			10,1,539,1
+	_RET
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*						カラクリ大王								*/
+/********************************************************************/
+SCRIPT_LABEL			ev_middlem1_01_p01_r110_r0102
+	_TALK_OBJ_START
+
+	//ここまで　こられたか！
+	_TALK_KEYWAIT		msg_middlem1_01_p01_r110_r0102
+
+	//扉の前のストッパー解除
+	_LDVAL				LOCALWORK2,1
+
+	_SWITCH				WK_KARAKURI_LEVEL
+	_CASEJUMP			0,karakuri_message_01_r110_r0102			//ステージ１終了後
+	_CASEJUMP			1,karakuri_message_02_r110_r0102			//ステージ２終了後
+	_CASEJUMP			2,karakuri_message_03_r110_r0102			//ステージ３終了後
+	_CASEJUMP			3,karakuri_message_04_r110_r0102			//ステージ４終了後
+	_CASEJUMP			4,karakuri_message_05_r110_r0102			//ステージ５終了後
+	_CASEJUMP			5,karakuri_message_06_r110_r0102			//ステージ６終了後
+	_CASEJUMP			6,karakuri_message_07_r110_r0102			//ステージ７終了後
+	_CASEJUMP			7,karakuri_message_08_r110_r0102			//ステージ８（最終）終了後
+	_END
+
+karakuri_message_01_r110_r0102:
+	//てつやで　きをうえたのに
+	_TALK_KEYWAIT		msg_middlem1_01_p02_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_HUSIGINAAME,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_02_r110_r0102:
+	//てつやで　めいろを
+	_TALK_KEYWAIT		msg_middlem1_01_p03_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_TAIMAABOORU,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_03_r110_r0102:
+	//てつやで　いわを　はこび
+	_TALK_KEYWAIT		msg_middlem1_01_p04_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_KATAIISI,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_04_r110_r0102:
+	//てつやで　いわを　おして
+	_TALK_KEYWAIT		msg_middlem1_01_p05_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_KEMURIDAMA,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_05_r110_r0102:
+	//てつやで　にんぎょうを
+	_TALK_KEYWAIT		msg_middlem1_01_p06_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_WAZAMASIN12,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_06_r110_r0102:
+	//てつやで　とびらを
+	_TALK_KEYWAIT		msg_middlem1_01_p07_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_ZISYAKU,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_07_r110_r0102:
+	//てつやで　やじるしを
+	_TALK_KEYWAIT		msg_middlem1_01_p08_r110_r0102
+
+	//あんたに　ほうぼをやろう（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p13_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+	_ITEM_EVENT			ITEM_POINTOMAKKUSU,1
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_item_ret_r110_r0102
+
+	//それでは　じかいを　おたのしみに（共通（１－７））
+	_TALK_KEYWAIT		msg_middlem1_01_p14_r110_r0102
+	_TALK_CLOSE
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+	_TALK_OBJ_END
+	_END
+
+karakuri_message_08_r110_r0102:
+	//徹夜で床を磨いたのに...
+	_TALK_KEYWAIT		msg_middlem1_01_p09_r110_r0102
+	_TALK_CLOSE
+
+	//後ろ振り向き処理
+	_IFVAL_CALL			RG_SITE,EQ,SITE_D,turn_d_anime_r110_r0102
+	_IFVAL_CALL			RG_SITE,EQ,SITE_U,turn_u_anime_r110_r0102
+	_IFVAL_CALL			RG_SITE,EQ,SITE_L,turn_l_anime_r110_r0102
+	_IFVAL_CALL			RG_SITE,EQ,SITE_R,turn_r_anime_r110_r0102
+
+	_TIME_WAIT			30
+
+	//どうしよう
+	_TALK_KEYWAIT		msg_middlem1_01_p10_r110_r0102
+	_TALK_CLOSE
+
+	//主人公へ向く
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,turn_hero_site_anime
+	_OBJ_ANIME_WAIT
+
+	_TIME_WAIT			30
+	//これを受け取ってくれ
+	_TALK_KEYWAIT		msg_middlem1_01_p11_r110_r0102
+
+	//ご褒美処理
+	_LDVAL				WK_SCENE_R110_R0102,0
+#if (PM_VERSION == VERSION_SAPPHIRE)
+	_GOODS_EVENT		GOODS_AOITENTO
+#elif (PM_VERSION == VERSION_RUBY)
+	_GOODS_EVENT		GOODS_AKAITENTO
+#endif
+	_IFVAL_CALL			ANSWORK,EQ,FALSE,ev_fail_goods_ret_r110_r0102
+
+	//旅に出る
+	_TALK_KEYWAIT		msg_middlem1_01_p12_r110_r0102
+
+	//大王が消える処理
+	_CALL				daiou_jump_del_effect_r110_r0102
+
+	//ITEM発見用のフラグセット
+	_PROGRAM			KARAKURI_HIDE_ITEM_ON			//隠しアイテムを登場
+	_TALK_OBJ_END
+	_END
+
+//大王がジャンプしていなくなる（共通処理）
+daiou_jump_del_effect_r110_r0102:
+	//一回転
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,one_loop_anime
+	_OBJ_ANIME_WAIT
+
+	_SE					SE_W153
+	//ジャンプして飛び去る
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,karakuri_jump_anime
+	_OBJ_ANIME_WAIT
+
+	//OBJを消す
+	_OBJ_DELETE			MIDDLEM1_01_R110_R0102
+
+	_ADDWK				WK_KARAKURI_LEVEL,1				//levelを＋＋(０～７->１～８）
+	_RET
+
+//	共通アイテム取得失敗処理(リターン版)
+ev_fail_item_ret_r110_r0102:
+	//失敗メッセージ
+	_CALL				ev_fail_item_ret
+
+	//”なに　もちきれない？”
+	_TALK_KEYWAIT		msg_middlem1_01_p18_r110_r0102
+	_LDVAL				WK_SCENE_R110_R0102,1
+	_RET
+
+//	共通グッズ取得失敗処理(リターン版)
+ev_fail_goods_ret_r110_r0102:
+	//失敗メッセージ
+	_CALL				ev_fail_goods_ret
+
+	//”なに　パソコンに　はいりきらない？”
+	_TALK_KEYWAIT		msg_middlem1_01_p17_r110_r0102
+	_LDVAL				WK_SCENE_R110_R0102,1
+	_RET
+
+turn_d_anime_r110_r0102:
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,turn_d_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+turn_u_anime_r110_r0102:
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,turn_u_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+turn_l_anime_r110_r0102:
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,turn_l_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+turn_r_anime_r110_r0102:
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,turn_r_anime
+	_OBJ_ANIME_WAIT
+	_RET
+
+
+/********************************************************************/
+/*					カラクリ大王と話をさせる為のストッパー			*/
+/********************************************************************/
+SCRIPT_LABEL			ev_talk_stop_01_r110_r0102
+	_TALK_START
+
+	//向きを主人公の方へ
+	_OBJ_SITE_CHG		MIDDLEM1_01_R110_R0102,SITE_L
+
+	//「！」びっくりする
+	_SE					SE_GYOE_MARK
+	_SET_OBJ_ANIME		MIDDLEM1_01_R110_R0102,gyoe_mark_anime
+	_OBJ_ANIME_WAIT
+
+	//間をあける
+	_TIME_WAIT			20
+
+	//ジャンプ
+	_SET_OBJ_ANIME		MIDDLEM1_01_P01_R110_R0101,karakuri_little_jump
+	_OBJ_ANIME_WAIT
+
+	_SE					SE_W153
+
+	//下（カラクリ大王）の方を向かせる
+	_SET_OBJ_ANIME		EV_OBJ_SPID,turn_d_anime
+	_OBJ_ANIME_WAIT
+
+	//おいおい　わがはいを...
+	_TALK_KEYWAIT		msg_middlem1_01_p15_r110_r0102
+	_TALK_CLOSE
+
+	//一歩後退(前進？)
+	_SET_OBJ_ANIME		EV_OBJ_SPID,one_step_down_r110_r0102
+	_OBJ_ANIME_WAIT
+
+	//間をあける(小）
+	_TIME_WAIT			4
+
+	//向きを戻す
+	_OBJ_SITE_CHG		MIDDLEM1_01_R110_R0102,SITE_R
+	_TALK_END
+	_END
+
+one_step_down_r110_r0102:
+	.byte				AC_WALK_D_1
+	.byte				ACMD_END
+
+karakuri_little_jump:
+	.byte				AC_STAY_JUMP_L
+	.byte				ACMD_END
+
+
+/********************************************************************/
+/********************************************************************/

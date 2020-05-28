@@ -1,0 +1,415 @@
+// ●キンセツシティ　サイクルショップのなか
+
+
+// ●ミスターカゼノ
+// ●自転車入手前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p01_c103_r0201
+msg_workerm1_01_p01_c103_r0201:
+	.byte	tenten_,tenten_,o_,ya_,hate_,spc_,ko_,ri_,yya_,ma_,ta_,spc_,zu_,i_,bu_,n_
+	.byte	CR_
+	.byte	ge_,n_,ki_,so_,u_,na_,spc_,o_,ki_,yya_,ku_,sa_,n_,ga_,spc_,ki_,ta_,no_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,ha_,spc_,hi_,to_,yo_,n_,de_,spc_,MI_,SU_,TA_,bou_,KA_,ZE_,NO_
+	.byte	CR_
+	.byte	ko_,no_,spc_,SA_,I_,KU_,RU_,SI_,YYO_,TTU_,PU_,no_,spc_,O_,bou_,NA_,bou_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ここでカゼノは、
+// 　壁際に並んでいる自転車のところまで行き、
+// 　主人公の方を振り向いて、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p02_c103_r0201
+msg_workerm1_01_p02_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,ki_,mi_,no_,spc_,RA_,N_,NI_,N_,GU_,SI_,YYU_,bou_,ZU_
+	.byte	CR_
+	.byte	mo_,no_,su_,go_,ku_,spc_,yo_,go_,re_,te_,spc_,i_,ru_,ke_,do_
+	.byte	SCROLL_WAIT_
+	.byte	do_,ko_,ka_,spc_,to_,o_,ku_,ka_,ra_,spc_,ya_,ttu_,te_,ki_,ta_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択ウインドウ表示
+// ●「はい」　→msg_workerm1_01_p04_c103_r0201:
+// ●「いいえ」→msg_workerm1_01_p03_c103_r0201:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p03_c103_r0201
+msg_workerm1_01_p03_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,so_,u_,ka_,i_,hate_
+	.byte	CR_
+	.byte	zi_,yya_,a_,spc_,wa_,ta_,si_,no_,spc_,zi_,te_,n_,si_,yya_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	hi_,tu_,yo_,u_,spc_,na_,sa_,so_,u_,da_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度話しかけた場合は
+// 　→msg_workerm1_01_p02_c103_r0201:
+// ●カゼノの位置は、この状態を保持（マップをでても）
+
+// ●「はい」
+// ●カゼノが主人公の前に走り寄ってきて、次のメッセージを表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p04_c103_r0201
+msg_workerm1_01_p04_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,HU_,MU_,HU_,MU_,tenten_,tenten_
+	.byte	CR_
+	.byte	tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_,spc_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	na_,n_,to_,spc_,MI_,SI_,RO_,TA_,U_,N_,ka_,ra_,spc_,ha_,ru_,ba_,ru_,to_,gyoe_,hate_
+	.byte	CR_
+	.byte	su_,go_,i_,spc_,to_,o_,ku_,spc_,zi_,yya_,na_,i_,ka_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ta_,si_,no_,spc_,zi_,te_,n_,si_,yya_,ga_,spc_,a_,re_,ba_
+	.byte	CR_
+	.byte	ko_,ko_,ti_,yo_,i_,spc_,ka_,ze_,wo_,spc_,ka_,n_,zi_,na_,ga_,ra_
+	.byte	SCROLL_WAIT_
+	.byte	ra_,ku_,ni_,spc_,i_,ro_,n_,na_,spc_,to_,ko_,ro_,he_,spc_,i_,ke_,ru_,no_,ni_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,bou_,si_,gyoe_
+	.byte	CR_
+	.byte	ki_,mi_,ni_,spc_,zi_,te_,n_,si_,yya_,wo_,spc_,a_,ge_,yo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	i_,ya_,spc_,ti_,yyo_,ttu_,to_,spc_,ma_,te_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,te_,n_,si_,yya_,spc_,ni_,ha_,spc_,n2_,si_,yyu_,ru_,i_,no_
+	.byte	CR_
+	.byte	TA_,I_,PU_,ga_,spc_,a_,ru_,no_,wo_,spc_,wa_,su_,re_,to_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ha_,na_,tenten_,tenten_
+	.byte	CR_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,to_,spc_,DA_,bou_,TO_,zi_,te_,n_,si_,yya_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,ha_
+	.byte	CR_
+	.byte	ze_,n_,si_,n_,de_,spc_,ka_,ze_,wo_,spc_,ka_,n_,zi_,ta_,i_,spc_,hi_,to_,ni_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,ha_
+	.byte	CR_
+	.byte	TE_,KU_,NI_,TTU_,KU_,wo_,spc_,ta_,no_,si_,mi_,ta_,i_,spc_,hi_,to_,ni_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,zi_,sa_,n_,spc_,si_,n_,se_,tu_,spc_,da_,ka_,ra_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,su_,ki_,na_,spc_,ho_,u_,wo_,spc_,a_,ge_,ti_,yya_,u_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	sa_,a_,gyoe_,spc_,do_,ti_,ra_,wo_,spc_,e_,ra_,bu_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「マッハ／ダート」の２択表示
+// ●決定したら「たいせつなもの」に選んだ自転車を加え、
+// それぞれのメッセージを表示
+
+// ☆マッハじてんしゃ場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p05_c103_r0201
+msg_workerm1_01_p05_c103_r0201:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,wo_,spc_,e_,ra_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ☆ダートじてんしゃの場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p06_c103_r0201
+msg_workerm1_01_p06_c103_r0201:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,wo_,spc_,e_,ra_,n_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●引き続き……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p07_c103_r0201
+msg_workerm1_01_p07_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,mo_,si_,mo_,spc_,be_,tu_,no_,spc_,TA_,I_,PU_,to_
+	.byte	CR_
+	.byte	ko_,u_,ka_,n_,spc_,si_,ta_,ku_,na_,ttu_,ta_,spc_,to_,ki_,ni_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	i_,tu_,de_,mo_,spc_,wa_,ta_,si_,ni_,spc_,ko_,e_,wo_,spc_,ka_,ke_,te_,ku_,re_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●最初の自転車の受け取りmsgは、ここまで
+// ●一度マップアウトしてから話しかけると、
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p08_c103_r0201
+msg_workerm1_01_p08_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,o_,ya_,hate_,spc_,ti_,ga_,u_,spc_,TA_,I_,PU_,no_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,ni_,spc_,no_,ri_,ka_,e_,ta_,ku_,spc_,na_,ttu_,ta_,no_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　の場合　→☆自転車の交換
+// ●「いいえ」の場合　→☆いいえメッセージ
+
+// ☆自転車の交換
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p09_c103_r0201
+msg_workerm1_01_p09_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,zi_,yya_,a_,spc_,ki_,mi_,ga_,spc_,i_,ma_,spc_,mo_,ttu_,te_,i_,ru_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,wo_,spc_,ko_,u_,ka_,n_,spc_,si_,te_,a_,ge_,yo_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●プレイヤーの所持自転車のチェック
+
+// ☆マッハじてんしゃを持っている場合のナレーション
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p10_c103_r0201
+msg_workerm1_01_p10_c103_r0201:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,wo_
+	.byte	CR_
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,ni_,spc_,ka_,e_,te_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このあとは「msg_workerm1_01_p07_c103_r0201:」へ
+
+// ☆ダートじてんしゃを持っている場合のナレーション
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p11_c103_r0201
+msg_workerm1_01_p11_c103_r0201:
+	.byte	I_MSG_,MY_NAME_BUF,ha_,spc_,DA_,bou_,TO_,zi_,te_,n_,si_,yya_,wo_
+	.byte	CR_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,ni_,spc_,ka_,e_,te_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このあとは「msg_workerm1_01_p07_c103_r0201:」へ
+
+// ☆いいえメッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p12_c103_r0201
+msg_workerm1_01_p12_c103_r0201:
+	.byte	KA_,ZE_,NO_,kako2_,so_,u_,ka_,spc_,so_,u_,ka_,gyoe_
+	.byte	CR_
+	.byte	ki_,ni_,i_,ttu_,te_,ku_,re_,te_,spc_,u_,re_,si_,i_,zo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このメッセージはマップアウトしなくても繰り返し
+
+// ☆じてんしゃをパソコンに預けてる場合のナレーション
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_workerm1_01_p13_c103_r0201
+msg_workerm1_01_p13_c103_r0201:
+	.byte	tenten_,tenten_,o_,ya_,hate_
+	.byte	CR_
+	.byte	ki_,mi_,ni_,spc_,a_,ge_,ta_,spc_,zi_,te_,n_,si_,yya_,spc_,do_,u_,si_,ta_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,ka_,spc_,PA_,SO_,KO_,N_,ni_,spc_,a_,zu_,ke_,te_,a_,ru_,no_,ka_
+	.byte	NORMAL_WAIT_
+	.byte	PA_,SO_,KO_,N_,ka_,ra_,spc_,to_,ri_,da_,si_,te_,spc_,mo_,ttu_,te_,ki_,ta_,ra_
+	.byte	CR_
+	.byte	ko_,u_,ka_,n_,si_,te_,spc_,a_,ge_,ru_,spc_,ka_,ra_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,spc_,bo_,u_,ke_,n_,ni_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,i_,ka_,ze_,ga_,spc_,hu_,ku_,ko_,to_,wo_,spc_,i_,no_,ttu_,te_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●このあとは「msg_workerm1_01_p07_c103_r0201:」へ
+
+
+// ●若者男２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_youngm2_01_p01_c103_r0201
+msg_youngm2_01_p01_c103_r0201:
+	.byte	bo_,ku_,ha_,spc_,ko_,ko_,de_,spc_,ha_,ta_,ra_,ki_,spc_,na_,ga_,ra_
+	.byte	CR_
+	.byte	zi_,te_,n_,si_,yya_,no_,spc_,be_,n_,ki_,yyo_,u_,wo_,spc_,si_,te_,ru_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,te_,n_,si_,yya_,no_,spc_,no_,ri_,ka_,ta_,de_
+	.byte	CR_
+	.byte	na_,ni_,ka_,spc_,wa_,ka_,ra_,na_,i_,ko_,to_,ga_,spc_,a_,ttu_,ta_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ku_,no_,he_,ya_,ni_,spc_,ka_,i_,se_,tu_,si_,yyo_,ga_,spc_,a_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	so_,re_,wo_,spc_,yo_,n_,de_,mi_,ru_,to_,spc_,i_,i_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●自転車屋の奥の小部屋（机の上のノート左）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_01_p01_c103_r0201
+msg_books_01_p01_c103_r0201:
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,no_
+	.byte	CR_
+	.byte	ka_,i_,se_,tu_,si_,yyo_,ga_,spc_,o_,i_,te_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mo_,u_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はしりかた／まがるコツ／すなのたき／やめる」の４択
+// ☆「はしりかた」　→　msg_books_01_p02_c103_r0201:
+// ☆「まがるコツ」　→　msg_books_01_p03_c103_r0201:
+// ☆「すなのさか」　→　msg_books_01_p04_c103_r0201:
+// ☆「やめる」　　　→　フィールドにもどる
+
+// ☆「はしりかた」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_01_p02_c103_r0201
+msg_books_01_p02_c103_r0201:
+	.byte	zi_,te_,n_,si_,yya_,ni_,spc_,no_,ttu_,te_,spc_,zi_,yyu_,u_,zi_,BO_,TA_,N_,wo_
+	.byte	CR_
+	.byte	o_,si_,ta_,ho_,u_,ni_,spc_,zi_,te_,n_,si_,yya_,ha_,spc_,ha_,si_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	su_,ko_,si_,spc_,ha_,si_,ttu_,te_,i_,ku_,spc_,u_,ti_,ni_
+	.byte	CR_
+	.byte	SU_,PI_,bou_,DO_,ga_,spc_,a_,ga_,ttu_,te_,i_,ku_,spc_,de_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,ma_,ri_,ta_,i_,to_,ki_,ha_,spc_,zi_,yyu_,u_,zi_,BO_,TA_,N_,ka_,ra_
+	.byte	CR_
+	.byte	te_,wo_,spc_,ha_,na_,se_,ba_,spc_,SU_,PI_,bou_,DO_,ga_,spc_,o_,ti_,te_
+	.byte	SCROLL_WAIT_
+	.byte	si_,ze_,n_,ni_,spc_,to_,ma_,ttu_,te_,spc_,ku_,re_,ru_,ha_,zu_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,be_,tu_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび４択ウインドウ表示
+
+// ☆「まがるコツ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_01_p03_c103_r0201
+msg_books_01_p03_c103_r0201:
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,ha_,spc_,SU_,PI_,bou_,DO_,ga_,spc_,ha_,ya_,ku_,te_
+	.byte	CR_
+	.byte	ki_,yyu_,u_,ni_,spc_,to_,ma_,ru_,ko_,to_,ha_,spc_,de_,ki_,ma_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ka_,ra_,spc_,ka_,do_,wo_,spc_,ma_,ga_,ru_,to_,ki_,ni_,ha_
+	.byte	CR_
+	.byte	ti_,yyo_,ttu_,to_,si_,ta_,spc_,KO_,TU_,ga_,spc_,hi_,tu_,yo_,u_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ma_,ga_,ri_,ta_,i_,spc_,ka_,do_,no_,spc_,su_,ko_,si_,spc_,te_,ma_,e_,de_
+	.byte	CR_
+	.byte	zi_,yyu_,u_,zi_,BO_,TA_,N_,ka_,ra_,spc_,te_,wo_,spc_,ha_,na_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	SU_,PI_,bou_,DO_,wo_,spc_,o_,to_,si_,te_,spc_,ma_,ga_,ri_,ma_,si_,yyo_,u_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,be_,tu_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび４択ウインドウ表示
+
+// ☆「すなのさか」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_01_p04_c103_r0201
+msg_books_01_p04_c103_r0201:
+	.byte	HO_,U_,E_,N_,ti_,ho_,u_,ni_,ha_,spc_,to_,ko_,ro_,do_,ko_,ro_,ni_
+	.byte	CR_
+	.byte	ti_,i_,sa_,na_,spc_,su_,na_,no_,sa_,ka_,ga_,spc_,a_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,ko_,ha_,spc_,su_,na_,ga_,spc_,ku_,zu_,re_,ya_,su_,i_,spc_,ta_,me_,ni_
+	.byte	CR_
+	.byte	hu_,tu_,u_,ha_,spc_,no_,bo_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,se_,n_,ga_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,TTU_,HA_,zi_,te_,n_,si_,yya_,ni_,spc_,no_,ttu_,te_,i_,re_,ba_
+	.byte	CR_
+	.byte	no_,bo_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,be_,tu_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび４択ウインドウ表示
+
+
+// ●自転車屋の奥の小部屋（机の上のノート右）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_02_p01_c103_r0201
+msg_books_02_p01_c103_r0201:
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,no_
+	.byte	CR_
+	.byte	ka_,i_,se_,tu_,si_,yyo_,ga_,spc_,o_,i_,te_,a_,ru_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	do_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mo_,u_,ka_,na_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「ウイリー／ダニエル／ジャンプ／やめる」の４択
+// ☆「ウイリー」　→　msg_books_02_p02_c103_r0201:
+// ☆「ダニエル」　→　msg_books_02_p03_c103_r0201:
+// ☆「ジャンプ」　→　msg_books_02_p04_c103_r0201:
+// ☆「やめる」　　→　フィールドにもどる
+
+// ☆「ウイリー」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_02_p02_c103_r0201
+msg_books_02_p02_c103_r0201:
+	.byte	zi_,te_,n_,si_,yya_,ni_,spc_,no_,ttu_,te_,spc_,BI_,bou_,BO_,TA_,N_,wo_,spc_,o_,su_,to_
+	.byte	CR_
+	.byte	so_,no_,ba_,de_,spc_,ze_,n_,ri_,n_,ga_,spc_,mo_,ti_,a_,ga_,ri_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,no_,ma_,ma_,de_,spc_,zi_,yyu_,u_,zi_,BO_,TA_,N_,wo_,spc_,o_,se_,ba_
+	.byte	CR_
+	.byte	ze_,n_,ri_,n_,wo_,spc_,a_,ge_,ta_,spc_,zi_,yyo_,u_,ta_,i_,de_
+	.byte	SCROLL_WAIT_
+	.byte	ha_,si_,ru_,ko_,to_,ga_,spc_,de_,ki_,ru_,no_,de_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ga_,spc_,U_,I_,RI_,bou_,to_,i_,u_,spc_,TE_,KU_,NI_,TTU_,KU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,be_,tu_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび４択ウインドウ表示
+
+// ☆「ダニエル」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_02_p03_c103_r0201
+msg_books_02_p03_c103_r0201:
+	.byte	BI_,bou_,BO_,TA_,N_,wo_,spc_,o_,si_,ta_,ma_,ma_,ni_,spc_,si_,te_,i_,ru_,to_
+	.byte	CR_
+	.byte	U_,I_,RI_,bou_,si_,na_,ga_,ra_,spc_,so_,no_,ba_,de_,spc_,PI_,YYO_,N_,PI_,YYO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	to_,bi_,ha_,ne_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ga_,spc_,DA_,NI_,E_,RU_,to_,i_,u_,spc_,TE_,KU_,NI_,TTU_,KU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	DA_,NI_,E_,RU_,no_,ma_,ma_,spc_,ha_,si_,ru_,ko_,to_,mo_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,be_,tu_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび４択ウインドウ表示
+
+// ☆「ジャンプ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_books_02_p04_c103_r0201
+msg_books_02_p04_c103_r0201:
+	.byte	DA_,bou_,TO_,zi_,te_,n_,si_,yya_,ni_,spc_,no_,ttu_,te_,i_,ru_,to_,ki_
+	.byte	CR_
+	.byte	zi_,yyu_,u_,zi_,BO_,TA_,N_,to_,spc_,BI_,bou_,BO_,TA_,N_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	do_,u_,zi_,ni_,spc_,o_,su_,to_,spc_,ZI_,YYA_,N_,PU_,si_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	yo_,ko_,he_,spc_,o_,se_,ba_,spc_,yo_,ko_,ni_,spc_,ZI_,YYA_,N_,PU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	u_,si_,ro_,he_,spc_,o_,se_,ba_,spc_,ZI_,YYA_,N_,PU_,si_,na_,ga_,ra_
+	.byte	CR_
+	.byte	ho_,u_,ko_,u_,wo_,spc_,ka_,e_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	tenten_,tenten_,be_,tu_,no_,spc_,PE_,bou_,ZI_,wo_,spc_,yo_,mi_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ふたたび４択ウインドウ表示

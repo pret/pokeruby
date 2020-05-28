@@ -1,0 +1,202 @@
+// ●ポケモンゲット失敗時のＴＶメッセージ
+// ●ポケモンを捕まえてニックネームを付けた番組と同じ番組
+// ●教育ＴＶ風
+// ●
+// ●必要データ
+// ●＠　主人公の名前　　　　　　　１０
+// ●＠　投げたボールの合計数　　　１
+// ●＠　逃げられたポケモンの種類　２
+// ●＠　手持ちポケモンの種類　　　２
+// ●＠　必要			　　　　７
+// ●＠　倒した／逃げられた　　　　１
+// ●＠　場所（～番道路）	　　　　２
+// ●
+// ●発生条件
+// ●ボールを３回以上投げた
+// ●トレーナー戦では作られない。
+
+
+
+// ●＠０　主人公の名前　　
+// ●＠１　自分のポケモンの種類
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p01_get_failed
+msg_TV_01_p01_get_failed:
+	.byte	ko_,n_,ni_,ti_,ha_,bou_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	kako2_,ki_,yyo_,u_,no_,spc_,PO_,KE_,MO_,N_,kakot2_,no_
+	.byte	CR_
+	.byte	zi_,ka_,n_,da_,yo_,bou_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,ko_,n_,ni_,ti_,ha_,spc_,mi_,n_,na_,spc_,ge_,n_,ki_,gyoe_
+	.byte	CR_
+	.byte	ki_,yyo_,u_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,spc_,si_,yyo_,u_,ka_,i_,wo_,spc_,su_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,su_,ru_,zo_,bou_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　　→msg_TV_01_p02_get_failed
+
+
+// ●＠０　主人公の名前
+// ●＠１　主人公がいた地名
+// ●＠２　捕まえ損ねたポケモンの種類
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p02_get_failed
+msg_TV_01_p02_get_failed:
+	.byte	a_,gyoe_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,spc_,to_,i_,e_,ba_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,spc_,ko_,no_,ma_,e_
+	.byte	CR_
+	.byte	bo_,ku_,spc_,mi_,ti_,yya_,ttu_,ta_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,mi_,ti_,yya_,ttu_,ta_,spc_,ttu_,te_,spc_
+	.byte	CR_
+	.byte	na_,ni_,wo_,spc_,mi_,ti_,yya_,ttu_,ta_,no_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,ko_,no_,ma_,e_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,ni_,spc_,de_,ka_,ke_,ta_,to_,ki_
+	.byte	SCROLL_WAIT_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,wo_,spc_,mi_,ka_,ke_,ta_,n_,da_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,yyo_,u_,do_,spc_,I_MSG_,STR_TEMP_BUF2,wo_,spc_,tu_,ka_,ma_,e_,te_,ru_
+	.byte	CR_
+	.byte	to_,ko_,ro_,spc_,da_,ttu_,ta_,n_,spc_,da_,ke_,do_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●ポケモンに逃げられた　　→msg_TV_01_p03_get_failed
+// ●ポケモンを倒した　　　　→msg_TV_01_p04_get_failed
+
+
+// ●＠０　主人公の名前
+// ●＠１　ボールを投げた総数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p03_get_failed
+msg_TV_01_p03_get_failed:
+	.byte	to_,ti_,yyu_,u_,de_,spc_,PO_,KE_,MO_,N_,ni_,spc_
+	.byte	CR_
+	.byte	ni_,ge_,ra_,re_,spc_,ti_,yya_,ttu_,ta_,n_,da_,yo_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,bou_,RU_,wo_,spc_,I_MSG_,STR_TEMP_BUF1,ko_,mo_,spc_,na_,ge_,ta_,no_,ni_
+	.byte	CR_
+	.byte	ze_,n_,bu_,spc_,mu_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,ni_,ge_,ra_,re_,ta_,spc_,to_,ki_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,ku_,ya_,si_,ga_,ttu_,ta_,spc_,ka_,o_
+	.byte	SCROLL_WAIT_
+	.byte	su_,go_,ka_,ttu_,ta_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　ランダム移動
+// ●　　高確率→msg_TV_01_p05_get_failed
+// ●　　低確率→msg_TV_01_p06_get_failed
+
+
+// ●＠０　主人公の名前
+// ●＠１　ボールを投げた総数
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p04_get_failed
+msg_TV_01_p04_get_failed:
+	.byte	to_,ti_,yyu_,u_,de_,spc_,ma_,ti_,ga_,ttu_,te_,spc_,PO_,KE_,MO_,N_,wo_
+	.byte	CR_
+	.byte	ta_,o_,si_,spc_,ti_,yya_,ttu_,ta_,n_,da_,yo_,gyoe_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,bou_,RU_,wo_,spc_,I_MSG_,STR_TEMP_BUF1,ko_,mo_,spc_,na_,ge_,ta_,no_,ni_
+	.byte	CR_
+	.byte	ze_,n_,bu_,spc_,mu_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,ta_,o_,si_,ti_,yya_,ttu_,ta_,spc_,to_,ki_,no_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,no_,spc_,a_,ze_,n_,to_,spc_,si_,ta_,spc_,ka_,o_
+	.byte	SCROLL_WAIT_
+	.byte	na_,n_,to_,mo_,spc_,i_,e_,na_,ka_,ttu_,ta_,na_,aa_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　ランダム移動
+// ●　　高確率→msg_TV_01_p05_get_failed
+// ●　　低確率→msg_TV_01_p06_get_failed
+
+
+
+// ●＠０　主人公の名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p05_get_failed
+msg_TV_01_p05_get_failed:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,ko_,ra_,ko_,ra_,ttu_,gyoe_
+	.byte	CR_
+	.byte	ta_,ni_,n_,no_,spc_,hu_,ko_,u_,wo_,spc_,wa_,ra_,ttu_,ti_,yya_,spc_,da_,me_,da_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	a_,aa_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,spc_,ka_,wa_,i_,so_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,ha_,bou_,i_,gyoe_
+	.byte	CR_
+	.byte	wa_,ra_,ttu_,te_,spc_,su_,i_,ma_,se_,bou_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　　→msg_TV_01_p07_get_failed
+
+
+
+// ●＠０　主人公の名前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p06_get_failed
+msg_TV_01_p06_get_failed:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,PU_,TTU_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,a_,gyoe_,spc_,i_,ma_
+	.byte	CR_
+	.byte	wa_,ra_,ttu_,ta_,de_,si_,yyo_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,e_,gyoe_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,ra_,ttu_,te_,na_,i_
+	.byte	CR_
+	.byte	wa_,ra_,ttu_,te_,na_,i_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	a_,aa_,spc_,I_MSG_,STR_TEMP_BUF0,sa_,n_
+	.byte	CR_
+	.byte	to_,ttu_,te_,mo_,spc_,ka_,wa_,i_,so_,u_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　　→msg_TV_01_p07_get_failed
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_TV_01_p07_get_failed
+msg_TV_01_p07_get_failed:
+	.byte	o_,ne_,e_,sa_,n_,kako2_,zi_,yya_,a_,spc_,ki_,wo_,spc_,to_,ri_,na_,o_,si_,te_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,si_,yyo_,u_,ka_,i_,wo_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	e_,hate_
+	.byte	CR_
+	.byte	mo_,u_,spc_,zi_,ka_,n_,ga_,spc_,na_,i_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	mo_,u_,gyoe_,spc_,PO_,KE_,MO_,N_,no_,spc_,si_,yyo_,u_,ka_,i_,ga_
+	.byte	CR_
+	.byte	de_,ki_,na_,ka_,ttu_,ta_,spc_,zi_,yya_,na_,i_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ni_,i_,sa_,n_,kako2_,ma_,ta_,spc_,zi_,ka_,i_,spc_,a_,o_,u_,ze_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	o_,ne_,e_,sa_,n_,kako2_,ka_,ttu_,te_,ni_,spc_,si_,me_,ru_,na_,bou_,gyoe_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●終わり

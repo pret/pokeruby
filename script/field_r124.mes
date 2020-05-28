@@ -1,0 +1,11 @@
+// ●124番道路　フィールド
+
+
+// ●トレジャーハンターの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r124
+msg_kanban_01_p01_field_r124:
+	.byte	kako_,TO_,RE_,ZI_,YYA_,bou_,HA_,N_,TA_,bou_,no_,spc_,ko_,ya_,kakot_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

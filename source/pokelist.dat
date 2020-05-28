@@ -1,0 +1,537 @@
+#ifndef	__POKELIST_DAT__
+#define __POKELIST_DAT__
+
+
+//----------------------------------------------------------
+//	ｱｲﾃﾑ、ﾒｰﾙアイコン
+//----------------------------------------------------------
+static const CellData ItemIconCellTbl = {
+	(void *)itemicon_Character, OBJ_SIZE16_8x8 * 2, CELLID_ItemIcon
+};
+static const PalData ItemIconPalTbl={
+	(void *)itemicon_Palette,	CELLID_ItemIcon
+};
+static const ActOamData ItemIconOamData = {
+	0,		//u32 VPos:8;             // Ｙ座標
+	0,		//u32 AffineMode:2;       // アフィンモード
+	0,		//u32 ObjMode:2;          // ＯＢＪモード
+	OFF,	//u32 Mosaic:1;           // モザイク
+	0,		//u32 ColorMode:1;        // １６色/２５６色 選択
+	0,		//u32 Shape:2;            // ＯＢＪ形状
+
+	0,		//u32 HPos:9;             // Ｘ座標
+	0,		//u32 AffineParamNo:5;  // アフィン変換パラメータNo & H,VFlip
+	0,		//u32 Size:2;             // ＯＢＪサイズ
+
+	0,		//u32 CharNo:10;          // キャラクタＮｏ
+	1,//u32 Priority:2;         // 表示優先
+	0,		//u32 Pltt:4;             // パレットＮｏ
+	0,
+};
+static const actAnm ItemIconAnm0[]={
+	{OBJ16_8x8*0, 1, 0,0},
+	{ACT_ANMEND,0,0,0}
+};
+static const actAnm ItemIconAnm1[]={
+	{OBJ16_8x8*1, 1, 0,0},
+	{ACT_ANMEND,0,0,0}
+};
+static const actAnm *const ItemIconAnmTbl[]={
+	ItemIconAnm0,
+	ItemIconAnm1,
+};
+
+static const actHeader ItemIconHeader = 
+{
+	CELLID_ItemIcon,
+	CELLID_ItemIcon,
+	&ItemIconOamData,
+	ItemIconAnmTbl,
+	0,
+	DummyActAffTbl,
+	ItemIconSeq,
+};
+
+
+//=========================================================================
+//	画面下のウィンドウ内、定型メッセージ文
+//=========================================================================
+static const u8 * const PokeListWinFixMsg[] = {
+	msg_poke_com00,
+	msg_poke_com01,
+	msg_poke_com02,
+	msg_poke_com03,
+	msg_poke_com04,
+	msg_poke_com05,
+	msg_poke_com06,
+	msg_poke_com07,
+	msg_poke_com08,
+	msg_poke_com09,
+	msg_poke_com10,
+	msg_poke_com11,
+	str_dummy,
+	msg_poke_com12,
+	msg_poke_com13,
+	msg_poke_com14,
+	msg_poke_com15,
+	msg_poke_com16,
+	msg_poke_com17,
+	msg_poke_com18,
+	msg_poke_com19,
+};
+
+
+//=========================================================================
+//	ﾎﾟｹﾓﾝﾘｽﾄ表示関係 座標データ
+//=========================================================================
+typedef struct{
+	u8 x;
+	u8 y;
+}plpd;		//PokeListPosData;
+typedef struct{
+	u8 s_x;
+	u8 s_y;
+	u8 e_x;
+	u8 e_y;
+}plpd2;
+
+#define POKEPATA_INTER1			24	//1対1用
+#define POKEPATA_INTER2			32	//2対2用
+#define	MULTI_SCR_CNT			29 * 8
+static const plpd PataChrDefaultPos[][6] = //ﾊﾟﾀｷｬﾗ初期座標
+{
+	{	//1対1用
+		{24,		40},
+		{112,		16+2+POKEPATA_INTER1*0},
+		{112,		16+2+POKEPATA_INTER1*1},
+		{112,		16+2+POKEPATA_INTER1*2},
+		{112,		16+2+POKEPATA_INTER1*3},
+		{112,		16+2+POKEPATA_INTER1*4},
+	},
+	{	//2対2用
+		{24,		24},
+		{24,		80},
+		{112,		16+2+POKEPATA_INTER2*0},
+		{112,		16+2+POKEPATA_INTER2*1},
+		{112,		16+2+POKEPATA_INTER2*2},
+		{112,		16+2+POKEPATA_INTER2*3},
+	},
+	{	//マルチ
+		{24,		24},						// 0
+		{24,		80},						// 3
+		{112,		24+2+POKEPATA_INTER2*0},	// 1
+		{112,		16+2+POKEPATA_INTER2*1},	// 2
+		{112,		16+2+POKEPATA_INTER2*2},	// 4
+		{112,		 8+2+POKEPATA_INTER2*3},	// 5
+	},
+	{	//マルチバトル前のスクロール処理
+		{24,		24},						// 0
+		{112,		24+2+POKEPATA_INTER2*0},	// 1
+		{112,		16+2+POKEPATA_INTER2*1},	// 2
+		{24,        80},						// 3
+		{112,       16+2+POKEPATA_INTER2*2},	// 4
+		{112,        8+2+POKEPATA_INTER2*3},	// 5
+	},
+
+};
+
+#define POKENAME_INTER1			3
+#define POKENAME_INTER2			4
+static const plpd NameDefaultPos[][6] = //名前初期座標
+{
+	{	//1対1用
+		{5,			4},
+		{16,		1+POKENAME_INTER1*0},
+		{16,		1+POKENAME_INTER1*1},
+		{16,		1+POKENAME_INTER1*2},
+		{16,		1+POKENAME_INTER1*3},
+		{16,		1+POKENAME_INTER1*4},
+	},
+	{	//2対2用
+		{5,			2},
+		{5,			9},
+		{16,		1+POKENAME_INTER2*0},
+		{16,		1+POKENAME_INTER2*1},
+		{16,		1+POKENAME_INTER2*2},
+		{16,		1+POKENAME_INTER2*3},
+	},
+	{	//マルチ
+		{5,			2},
+		{5,			9},
+		{16,		2+POKENAME_INTER2*0},
+		{16,		1+POKENAME_INTER2*1},
+		{16,		1+POKENAME_INTER2*2},
+		{16,		  POKENAME_INTER2*3},
+	},
+	{	//マルチ
+		{5,			2},
+		{16,		2+POKENAME_INTER2*0},
+		{16,		1+POKENAME_INTER2*1},
+		{5,			9},
+		{16,		1+POKENAME_INTER2*2},
+		{16,		  POKENAME_INTER2*3},
+	},
+};
+
+#define POKELV_INTER1			3
+#define POKELV_INTER2			4
+static const plpd LvDefaultPos[][6] = //ﾚﾍﾞﾙ初期座標
+{
+	{	//1対1用
+		{6,			5},
+		{0x11,		2+POKELV_INTER1*0},
+		{0x11,		2+POKELV_INTER1*1},
+		{0x11,		2+POKELV_INTER1*2},
+		{0x11,		2+POKELV_INTER1*3},
+		{0x11,		2+POKELV_INTER1*4},
+	},
+	{	//2対2用
+		{6,			3},
+		{6,			10},
+		{0x11,		2+POKELV_INTER2*0},
+		{0x11,		2+POKELV_INTER2*1},
+		{0x11,		2+POKELV_INTER2*2},
+		{0x11,		2+POKELV_INTER2*3},
+	},	
+	{	//マルチ
+		{6,			3},
+		{6,			10},
+		{0x11,		3+POKELV_INTER2*0},
+		{0x11,		2+POKELV_INTER2*1},
+		{0x11,		2+POKELV_INTER2*2},
+		{0x11,		1+POKELV_INTER2*3},
+	},	
+	{	//マルチ
+		{6,			3},
+		{0x11,		3+POKELV_INTER2*0},
+		{0x11,		2+POKELV_INTER2*1},
+		{6,			10},
+		{0x11,		2+POKELV_INTER2*2},
+		{0x11,		1+POKELV_INTER2*3},
+	},	
+};
+
+#define POKEHP_INTER1			3
+#define POKEHP_INTER2			4
+static const plpd HpDefaultPos[][6] = //HP初期座標
+{
+	{	//1対1用
+		{3,			7},
+		{0x16,		2+POKEHP_INTER1*0},
+		{0x16,		2+POKEHP_INTER1*1},
+		{0x16,		2+POKEHP_INTER1*2},
+		{0x16,		2+POKEHP_INTER1*3},
+		{0x16,		2+POKEHP_INTER1*4},
+	},
+	{	//2対2用
+		{3,			5},
+		{3,			12},
+		{0x16,		2+POKEHP_INTER2*0},
+		{0x16,		2+POKEHP_INTER2*1},
+		{0x16,		2+POKEHP_INTER2*2},
+		{0x16,		2+POKEHP_INTER2*3},
+	},
+	{	//マルチ
+		{3,			5},
+		{3,			12},
+		{0x16,		3+POKEHP_INTER2*0},
+		{0x16,		2+POKEHP_INTER2*1},
+		{0x16,		2+POKEHP_INTER2*2},
+		{0x16,		1+POKEHP_INTER2*3},
+	},
+	{	//マルチ
+		{3,			5},
+		{0x16,		3+POKEHP_INTER2*0},
+		{0x16,		2+POKEHP_INTER2*1},
+		{3,			12},
+		{0x16,		2+POKEHP_INTER2*2},
+		{0x16,		1+POKEHP_INTER2*3},
+	},
+};
+
+#define POKEHPMAX_INTER1		3
+#define POKEHPMAX_INTER2		4
+static const plpd MaxHpDefaultPos[][6] = //MAXHP初期座標
+{
+	{	//1対1用
+		{7,			7},
+		{0x1a,		2+POKEHPMAX_INTER1*0},
+		{0x1a,		2+POKEHPMAX_INTER1*1},
+		{0x1a,		2+POKEHPMAX_INTER1*2},
+		{0x1a,		2+POKEHPMAX_INTER1*3},
+		{0x1a,		2+POKEHPMAX_INTER1*4},
+	},
+	{	//1対1用
+		{7,			5},
+		{7,			12},
+		{0x1a,		2+POKEHPMAX_INTER2*0},
+		{0x1a,		2+POKEHPMAX_INTER2*1},
+		{0x1a,		2+POKEHPMAX_INTER2*2},
+		{0x1a,		2+POKEHPMAX_INTER2*3},
+	},
+	{	//マルチ
+		{7,			5},
+		{7,			12},
+		{0x1a,		3+POKEHPMAX_INTER2*0},
+		{0x1a,		2+POKEHPMAX_INTER2*1},
+		{0x1a,		2+POKEHPMAX_INTER2*2},
+		{0x1a,		1+POKEHPMAX_INTER2*3},
+	},
+	{	//マルチ
+		{7,			5},
+		{0x1a,		3+POKEHPMAX_INTER2*0},
+		{0x1a,		2+POKEHPMAX_INTER2*1},
+		{7,			12},
+		{0x1a,		2+POKEHPMAX_INTER2*2},
+		{0x1a,		1+POKEHPMAX_INTER2*3},
+	},
+};
+
+#define GAUGE_SCRN_ADRS			(SCREEN_BASE30_ADDR)
+#define POKEGAUGE_INTER1			3
+#define POKEGAUGE_INTER2			4
+static const u32 GaugeDefaultPos[][6] =	//ｹﾞｰｼﾞ初期座標
+{
+	{	//1対1用		  ↓X  ↓Y
+		GAUGE_SCRN_ADRS + (4 + 7 * 32) * 2,
+		//				   ↓X    ↓Y
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER1 * 0) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER1 * 1) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER1 * 2) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER1 * 3) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER1 * 4) * 32) * 2,
+	},
+	{	//2対2用		  ↓X  ↓Y
+		GAUGE_SCRN_ADRS + (4 + 5 * 32) * 2,
+		GAUGE_SCRN_ADRS + (4 + 0xc * 32) * 2,
+		//				   ↓X    ↓Y
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 0) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 1) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 2) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 3) * 32) * 2,
+	},
+	{	//マルチ		  ↓X  ↓Y
+		GAUGE_SCRN_ADRS + (4 + 5 * 32) * 2,
+		GAUGE_SCRN_ADRS + (4 + 0xc * 32) * 2,
+		//				   ↓X    ↓Y
+		GAUGE_SCRN_ADRS + (0x17 + (3 + POKEGAUGE_INTER2 * 0) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 1) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 2) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (1 + POKEGAUGE_INTER2 * 3) * 32) * 2,
+	},
+	{	//マルチ		  ↓X  ↓Y
+		GAUGE_SCRN_ADRS + (4 + 5 * 32) * 2,
+		//				   ↓X    ↓Y
+		GAUGE_SCRN_ADRS + (0x17 + (3 + POKEGAUGE_INTER2 * 0) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 1) * 32) * 2,
+		GAUGE_SCRN_ADRS + (4 + 0xc * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 2) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (1 + POKEGAUGE_INTER2 * 3) * 32) * 2,
+	},
+};
+
+#define POKECURSOR_INTER1			24
+#define POKECURSOR_INTER2			32
+static const plpd PokeCursorPos[][8] = //ｶｰｿﾙ座標
+{
+	{	//1対1用
+		{8,			44},
+		{92,		22+POKECURSOR_INTER1*0},
+		{92,		22+POKECURSOR_INTER1*1},
+		{92,		22+POKECURSOR_INTER1*2},
+		{92,		22+POKECURSOR_INTER1*3},
+		{92,		22+POKECURSOR_INTER1*4},
+
+		{ 196, 136 },		// けってい
+		{ 196, 152 },		// もどる
+	},
+	{	//2対2用
+		{8,			28},
+		{8,			84},
+		{92,		22+POKECURSOR_INTER2*0},
+		{92,		22+POKECURSOR_INTER2*1},
+		{92,		22+POKECURSOR_INTER2*2},
+		{92,		22+POKECURSOR_INTER2*3},
+
+		{ 196, 136 },		// けってい
+		{ 196, 152 },		// もどる
+	},
+	{	//マルチ
+		{8,			28},
+		{8,			84},
+		{92,		30+POKECURSOR_INTER2*0},
+		{92,		22+POKECURSOR_INTER2*1},
+		{92,		22+POKECURSOR_INTER2*2},
+		{92,		14+POKECURSOR_INTER2*3},
+
+		{ 196, 136 },		// けってい
+		{ 196, 152 },		// もどる
+	},
+};
+
+#define POKEGAUGE_INTER1			3
+#define POKEGAUGE_INTER2			4
+static const u32 CardMojiDefaultPos[][6] =	//カード上文字初期座標
+{
+	{	//1対1用		  ↓X  ↓Y
+		GAUGE_SCRN_ADRS + (3 + 7 * 32) * 2,
+		//				   ↓X    ↓Y
+		GAUGE_SCRN_ADRS + (0x16 + (1 + POKEGAUGE_INTER1 * 0) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x16 + (1 + POKEGAUGE_INTER1 * 1) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x16 + (1 + POKEGAUGE_INTER1 * 2) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x16 + (1 + POKEGAUGE_INTER1 * 3) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x16 + (1 + POKEGAUGE_INTER1 * 4) * 32) * 2,
+	},
+	{	//2対2用		  ↓X  ↓Y
+		GAUGE_SCRN_ADRS + (4 + 5 * 32) * 2,
+		GAUGE_SCRN_ADRS + (4 + 0xc * 32) * 2,
+		//				   ↓X    ↓Y
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 0) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 1) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 2) * 32) * 2,
+		GAUGE_SCRN_ADRS + (0x17 + (2 + POKEGAUGE_INTER2 * 3) * 32) * 2,
+	},
+};
+
+
+#define STATUS_AREA_INTERVAL1	3
+#define STATUS_AREA_INTERVAL2	4
+static const plpd2 StAreaClearPos[][6] = //ｽﾃｰﾀｽ表示ｴﾘｱｸﾘｱ範囲
+{
+	{	//1対1用
+		{2,		4,							10,		9},
+		{16,	1+STATUS_AREA_INTERVAL1*0,	0x1d,	3+STATUS_AREA_INTERVAL1*0},
+		{16,	1+STATUS_AREA_INTERVAL1*1,	0x1d,	3+STATUS_AREA_INTERVAL1*1},
+		{16,	1+STATUS_AREA_INTERVAL1*2,	0x1d,	3+STATUS_AREA_INTERVAL1*2},
+		{16,	1+STATUS_AREA_INTERVAL1*3,	0x1d,	3+STATUS_AREA_INTERVAL1*3},
+		{16,	1+STATUS_AREA_INTERVAL1*4,	0x1d,	3+STATUS_AREA_INTERVAL1*4},
+	},
+	{	//2対2用
+		{2,		2,							10,		7},
+		{2,		9,							10,		14},
+		{16,	1+STATUS_AREA_INTERVAL2*0,	0x1d,	3+STATUS_AREA_INTERVAL2*0},
+		{16,	1+STATUS_AREA_INTERVAL2*1,	0x1d,	3+STATUS_AREA_INTERVAL2*1},
+		{16,	1+STATUS_AREA_INTERVAL2*2,	0x1d,	3+STATUS_AREA_INTERVAL2*2},
+		{16,	1+STATUS_AREA_INTERVAL2*3,	0x1d,	3+STATUS_AREA_INTERVAL2*3},
+	},
+};
+
+#define STATUS_AREA_INTERVAL1	3
+#define STATUS_AREA_INTERVAL2	4
+static const plpd2 StHPAreaClearPos[][6] = // HPクリア範囲
+{
+	{	//1対1用
+		{2,		7,							10,		9},
+		{21,	1+STATUS_AREA_INTERVAL1*0,	0x1d,	3+STATUS_AREA_INTERVAL1*0},
+		{21,	1+STATUS_AREA_INTERVAL1*1,	0x1d,	3+STATUS_AREA_INTERVAL1*1},
+		{21,	1+STATUS_AREA_INTERVAL1*2,	0x1d,	3+STATUS_AREA_INTERVAL1*2},
+		{21,	1+STATUS_AREA_INTERVAL1*3,	0x1d,	3+STATUS_AREA_INTERVAL1*3},
+		{21,	1+STATUS_AREA_INTERVAL1*4,	0x1d,	3+STATUS_AREA_INTERVAL1*4},
+	},
+	{	//2対2用
+		{2,		2,							10,		7},
+		{2,		9,							10,		14},
+		{16,	1+STATUS_AREA_INTERVAL2*0,	0x1d,	3+STATUS_AREA_INTERVAL2*0},
+		{16,	1+STATUS_AREA_INTERVAL2*1,	0x1d,	3+STATUS_AREA_INTERVAL2*1},
+		{16,	1+STATUS_AREA_INTERVAL2*2,	0x1d,	3+STATUS_AREA_INTERVAL2*2},
+		{16,	1+STATUS_AREA_INTERVAL2*3,	0x1d,	3+STATUS_AREA_INTERVAL2*3},
+	},
+};
+
+// カード表示位置
+static const u8 PokeCardPos[] =
+{
+	// 1 vs 1
+	0x01, 0x03,		0x0c, 0x01,		0x0c, 0x04,
+	0x0c, 0x07,		0x0c, 0x0a,		0x0c, 0x0d,
+
+	// 2 vs 2
+	0x01, 0x01,		0x01, 0x08,		0x0c, 0x01,
+	0x0c, 0x05,		0x0c, 0x09,		0x0c, 0x0d,
+
+	// multi
+	0x01, 0x01,		0x01, 0x08,		0x0c, 0x02,
+	0x0c, 0x05,		0x0c, 0x09,		0x0c, 0x0c,
+};
+
+
+//=======================================================================================
+//		BG02データ
+//=======================================================================================
+// 先頭のポケモンのカード
+static const u8 card_BG02_00[] = {
+	0x24,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x27,
+	0x34,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x37,
+	0x34,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x37,
+	0x34,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x37,
+	0x44,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x47,
+	0x44,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x47,
+	0x54,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x57,
+};
+
+// 先頭以外のポケモンのカード
+static const u8 card_BG02_01[] = {
+	0x50,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x53,
+	0x60,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x63,
+	0x70,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x73,
+};
+
+// ポケモンがいないときのカード
+static const u8 card_BG02_02[] = {
+	0x20,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x23,
+	0x30,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x33,
+	0x40,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x43,
+};
+
+// Bもどる
+static const u8 cancel_BG02[] = { 0x0c,0x0d,0x0e,0x0f };
+
+// 文字
+static const u8 card_msg_BG02[] = {
+	0x00,0x01,0x02,0x03,0x04,0x05,0x0f,	// つかえません	
+	0x10,0x11,0x12,0x13,0x14,0x15,0x0f,
+
+	0x06,0x05,0x01,0x07,0x08,0x09,0x0f,	// さんかしない
+	0x16,0x15,0x11,0x17,0x18,0x19,0x0f,
+
+	0x09,0x0a,0x0b,0x05,0x0c,0x0f,0x0f,	// いちばんめ
+	0x19,0x1a,0x1b,0x15,0x1c,0x0f,0x0f,
+
+	0x0d,0x0b,0x05,0x0c,0x0f,0x0f,0x0f,	// にばんめ
+	0x1d,0x1b,0x15,0x1c,0x0f,0x0f,0x0f,
+
+	0x06,0x05,0x0b,0x05,0x0c,0x0f,0x0f,	// さんばんめ
+	0x16,0x15,0x1b,0x15,0x1c,0x0f,0x0f,
+
+	0x0f,0x0f,0x20,0x0c,0x09,0x0f,0x0f,	// ..ふめい
+	0x0f,0x1f,0x30,0x1c,0x19,0x0f,0x0f,
+
+	0x0f,0x25,0x0f,0x22,0x24,0x0f,0x0f,	// ♂..オス
+	0x0f,0x35,0x41,0x32,0x34,0x0f,0x0f,
+
+	0x0f,0x26,0x0f,0x23,0x0e,0x0f,0x0f,	// ♀..メス
+	0x0f,0x36,0x43,0x33,0x1e,0x0f,0x0f,
+
+	0x27,0x28,0x29,0x03,0x2a,0x0f,0x0f,	// でられます
+	0x37,0x38,0x39,0x13,0x3a,0x0f,0x0f,
+
+	0x27,0x28,0x29,0x03,0x04,0x05,0x0f,	// でられません
+	0x37,0x38,0x39,0x13,0x14,0x15,0x0f,
+
+	0x2b,0x2c,0x02,0x28,0x29,0x2d,0x21,	// おぼえられる！
+	0x3b,0x3c,0x12,0x38,0x39,0x3d,0x31,
+
+	0x2b,0x2c,0x02,0x28,0x29,0x08,0x09,	// おぼえられない
+	0x3b,0x3c,0x12,0x38,0x39,0x18,0x19,
+
+	0x2e,0x2f,0x2b,0x2c,0x02,0x27,0x2d,	// もうおぼえてる
+	0x3e,0x3f,0x3b,0x3c,0x12,0x45,0x3d,
+};
+
+#define	LV_MOJI_CHAR_NO		0x40	// Lv
+#define	OSU_MOJI_CHAR_NO	0x42	// ♂
+#define	MESU_MOJI_CHAR_NO	0x44	// ♀
+
+
+
+#endif	//__POKELIST_DAT__

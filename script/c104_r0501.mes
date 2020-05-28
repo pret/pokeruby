@@ -1,0 +1,90 @@
+// ●カナズミシティ　民家２（街の北）
+
+
+// ●坊や１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p01_c104_r0501
+msg_boya1_01_p01_c104_r0501:
+	.byte	PO_,KE_,MO_,N_,ni_,spc_,NI_,TTU_,KU_,NE_,bou_,MU_,spc_,tu_,ke_,te_,ru_,hate_
+	.byte	CR_
+	.byte	bo_,ku_,spc_,ka_,ttu_,ko_,i_,i_,no_,spc_,tu_,ke_,te_,ru_,yo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	de_,mo_,ne_,spc_,bo_,ku_,ga_,spc_,so_,no_,PO_,KE_,MO_,N_,wo_,spc_,yo_,bu_,to_
+	.byte	CR_
+	.byte	mi_,n_,na_,spc_,ku_,su_,ku_,su_,spc_,wa_,ra_,u_,n_,da_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,de_,mo_,spc_,yo_,ka_,ttu_,ta_,ra_,spc_,bo_,ku_,no_,spc_,I_MSG_,STR_TEMP_BUF1,to_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,ko_,u_,ka_,n_,spc_,si_,na_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい／いいえ」の選択
+// ●「はい」を選択　→　ポケモン選択画面へ
+// ●「いいえ」を選択→　msg_boya1_01_p04_c104_r0501:
+
+// ●「はい」を選択
+// ●ポケモン選択画面で条件を満たすポケモンを選択
+// ●交換デモ開始
+// 　終了後、以下のメッセージを自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p02_c104_r0501
+msg_boya1_01_p02_c104_r0501:
+	.byte	de_,he_,he_,gyoe_,gyoe_
+	.byte	CR_
+	.byte	na_,n_,da_,ka_,spc_,wa_,ku_,wa_,ku_,spc_,su_,ru_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「はい」を選択
+// ●ポケモン選択画面で条件を満たしていないポケモンを選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p03_c104_r0501
+msg_boya1_01_p03_c104_r0501:
+	.byte	so_,i_,tu_,spc_,I_MSG_,STR_TEMP_BUF0,spc_,zi_,yya_,na_,i_,yo_,ne_,hate_
+	.byte	CR_
+	.byte	ti_,ee_,spc_,ga_,ttu_,ka_,ri_,spc_,da_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「いいえ」を選択
+// 　もしくはポケモン選択画面で「やめる」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p04_c104_r0501
+msg_boya1_01_p04_c104_r0501:
+	.byte	i_,i_,spc_,PO_,KE_,MO_,N_,spc_,na_,n_,da_,ke_,do_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ポケモン交換終了後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_boya1_01_p05_c104_r0501
+msg_boya1_01_p05_c104_r0501:
+	.byte	hi_,to_,no_,spc_,PO_,KE_,MO_,N_,ttu_,te_,spc_,do_,n_,na_
+	.byte	CR_
+	.byte	NI_,TTU_,KU_,NE_,bou_,MU_,ka_,spc_,ki_,ni_,spc_,na_,ru_,yo_,ne_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●山男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p01_c104_r0501
+msg_hill1_01_p01_c104_r0501:
+	.byte	i_,ro_,n_,na_,spc_,ba_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ru_
+	.byte	SCROLL_WAIT_
+	.byte	i_,ro_,n_,na_,spc_,hi_,to_,mo_,spc_,i_,ru_
+	.byte	NORMAL_WAIT_
+	.byte	so_,re_,ga_,spc_,ta_,no_,si_,mi_,de_,spc_,wa_,si_,mo_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,spc_,to_,ko_,ro_,ni_,spc_,de_,ka_,ke_,ru_,no_,sa_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

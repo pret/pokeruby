@@ -1,0 +1,102 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●
+// ●	外部データ追加時のメッセージデータ
+// ●
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// 	はじめてラムきのみを手に入れたとき
+	.GLOBAL	msg_exdata_ramseed_get_first
+msg_exdata_ramseed_get_first:
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,mi_,wo_,spc_,te_,ni_,spc_,i_,re_,ta_,gyoe_
+	.byte	CR_
+	.byte	TO_,U_,KA_,ZI_,MU_,no_,spc_,PA_,PA_,ka_,ra_,spc_,u_,ke_,to_,ro_,u_,gyoe_
+	.byte	EOM_
+
+
+// 	ラム木の実入手、２回目以降
+	.GLOBAL	msg_exdata_ramseed_get
+msg_exdata_ramseed_get:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,ha_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,no_,mi_,ni_,spc_,he_,n_,ka_,si_,ta_,gyoe_
+	.byte	EOM_
+
+
+// 	ラム木の実入手、同じものだった…
+	.GLOBAL	msg_exdata_ramseed_get_already
+msg_exdata_ramseed_get_already:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,ha_,spc_,su_,de_,ni_
+	.byte	CR_
+	.byte	ha_,i_,ttu_,te_,i_,ta_
+	.byte	EOM_
+
+
+// 	リボンを手に入れたとき
+	.GLOBAL	msg_exdata_ribbon_set
+msg_exdata_ribbon_set:
+	.byte	te_,mo_,ti_,no_,PO_,KE_,MO_,N_,ni_
+	.byte	CR_
+	.byte	to_,ku_,be_,tu_,na_,RI_,BO_,N_,ga_,spc_,a_,ta_,e_,ra_,re_,ta_,gyoe_
+	.byte	EOM_
+
+
+// 	全国ずかんモードが使用可能になったとき
+	.GLOBAL	msg_exdata_zenkoku_zukan
+msg_exdata_zenkoku_zukan:
+	.byte	zu_,ka_,n_,ni_,spc_,ze_,n_,ko_,ku_,MO_,bou_,DO_,ga_
+	.byte	CR_
+	.byte	tu_,i_,ka_,spc_,sa_,re_,ta_,gyoe_
+	.byte	EOM_
+
+
+// 	簡易会話カテゴリ・単語を追加したとき
+	.GLOBAL	msg_exdata_kaiwa_word
+msg_exdata_kaiwa_word:
+	.byte	me_,zu_,ra_,si_,i_,spc_,ko_,to_,ba_,wo_,spc_,tu_,i_,ka_,si_,ma_,si_,ta_
+	.byte	EOM_
+
+
+// 	ポケモンをもらったとき
+	.GLOBAL	msg_exdata_pokemon_get
+msg_exdata_pokemon_get:
+	.byte	I_MSG_,STR_TEMP_BUF0,ga_,spc_,o_,ku_,ra_,re_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+
+// 	ポケモンがもらえなかったとき
+	.GLOBAL	msg_exdata_pokemon_full
+msg_exdata_pokemon_full:
+	.byte	te_,mo_,ti_,ga_,spc_,i_,ttu_,pa_,i_,na_,no_,de_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF0,ha_,spc_,mo_,ra_,e_,na_,ka_,ttu_,ta_,tenten_
+	.byte	EOM_
+
+
+// 	対戦トレーナーデータを受け取ったとき
+	.GLOBAL	msg_exdata_trainer_get
+msg_exdata_trainer_get:
+	.byte	a_,ra_,ta_,na_,spc_,TO_,RE_,bou_,NA_,bou_,ga_
+	.byte	CR_
+	.byte	HO_,U_,E_,N_,ni_,spc_,ya_,ttu_,te_,ki_,ta_
+	.byte	EOM_
+
+
+// 	バトルタワーデータを受け取ったとき
+	.GLOBAL	msg_exdata_btower_data_get
+msg_exdata_btower_data_get:
+	.byte	BA_,TO_,RU_,TA_,WA_,bou_,ni_,spc_,a_,ra_,ta_,na_
+	.byte	CR_
+	.byte	ta_,i_,se_,n_,si_,yya_,ga_,spc_,a_,ra_,wa_,re_,ta_,gyoe_
+	.byte	EOM_
+
+
+// 	バージョン、言語コードでエラーが出たとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_exdata_vercheck_error
+msg_exdata_vercheck_error:
+	.byte	ko_,no_,DE_,bou_,TA_,ha_,spc_,ko_,no_,BA_,bou_,ZI_,YYO_,N_,de_,ha_
+	.byte	CR_
+	.byte	si_,yo_,u_,spc_,de_,ki_,ma_,se_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

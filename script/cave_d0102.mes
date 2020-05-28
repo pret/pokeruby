@@ -1,0 +1,300 @@
+// ●りゅうせいのたき１Ｆ（奥）
+
+
+// ▼d0102----------------------------------
+// ●ドラゴンつかい０１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_dragon_01_01
+msg_dragon_01_01:
+	.byte	ko_,ko_,ha_,spc_,O_,RE_,ta_,ti_
+	.byte	CR_
+	.byte	DO_,RA_,GO_,N_,tu_,ka_,i_,no_,spc_,si_,yyu_,gi_,yyo_,u_,no_,spc_,ba_,si_,yyo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	TI_,YYA_,N_,PI_,O_,N_,mo_,spc_,ku_,ru_,spc_,ba_,si_,yyo_,spc_,to_,i_,ttu_,ta_,ra_
+	.byte	CR_
+	.byte	so_,no_,spc_,su_,go_,sa_,spc_,wa_,ka_,ru_,da_,ro_,u_,ka_,gyoe_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドラゴンつかい０１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_dragon_01_02
+msg_dragon_01_02:
+	.byte	ku_,ttu_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,ho_,do_,spc_,tu_,yo_,i_,to_,ha_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドラゴンつかい０１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_dragon_01_03
+msg_dragon_01_03:
+	.byte	ma_,da_,ma_,da_,spc_,mi_,ti_,ha_,spc_,na_,ga_,ku_,spc_,ke_,wa_,si_,i_
+	.byte	NORMAL_WAIT_
+	.byte	O_,RE_,to_,spc_,O_,RE_,no_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	i_,ti_,ba_,n_,ni_,spc_,na_,re_,ru_,no_,ha_,spc_,i_,tu_,da_,ro_,u_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0102----------------------------------
+// ●ドラゴンつかい０１（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_dragon_01_04
+msg_dragon_01_04:
+	.byte	a_,re_,ka_,ra_,spc_,i_,ti_,ba_,n_,spc_,me_,za_,si_,te_
+	.byte	CR_
+	.byte	ka_,na_,ri_,spc_,zi_,bu_,n_,ta_,ti_,wo_,spc_,ki_,ta_,e_,ta_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	do_,re_,ho_,do_,spc_,tu_,yo_,ku_,na_,ttu_,ta_,ka_
+	.byte	CR_
+	.byte	ki_,mi_,de_,spc_,ta_,si_,ka_,me_,sa_,se_,te_,spc_,mo_,ra_,o_,u_,TTU_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドラゴンつかい０１（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_dragon_01_05
+msg_dragon_01_05:
+	.byte	ku_,ttu_,gyoe_
+	.byte	CR_
+	.byte	ko_,re_,ho_,do_,spc_,tu_,yo_,i_,to_,ha_,tenten_,tenten_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●ドラゴンつかい０１（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_dragon_01_06
+msg_dragon_01_06:
+	.byte	a_,i_,ka_,wa_,ra_,zu_,spc_,PO_,KE_,MO_,N_,wo_,spc_,ki_,ta_,e_,te_,ru_,na_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,ga_,spc_,so_,no_,spc_,tu_,yo_,sa_,de_,spc_,a_,ru_,ka_,gi_,ri_
+	.byte	CR_
+	.byte	O_,RE_,mo_,spc_,tu_,yo_,ku_,na_,re_,ru_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0102----------------------------------
+// ●ゲン（たつじん♂）に話しかけたとき
+// ●きんこんしき０１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_01
+msg_gold_01_01:
+	.byte	GE_,N_,kako2_,wa_,si_,ra_,ha_,spc_,i_,tu_,mo_,spc_,hu_,u_,hu_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,si_,te_,o_,ru_,ka_,ra_,no_,u_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,ni_,mo_,spc_,zi_,si_,n_,ga_,spc_,a_,ru_,n_,zi_,yya_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_02
+msg_gold_01_02:
+	.byte	GE_,N_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	ma_,ke_,ta_,yo_,spc_,ba_,a_,sa_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_03
+msg_gold_01_03:
+	.byte	GE_,N_,kako2_,ke_,ttu_,ko_,n_,si_,te_,spc_,n5_,n0_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,u_,i_,ya_,spc_,i_,ti_,do_,mo_,spc_,ba_,a_,sa_,n_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,de_,spc_,ka_,ttu_,te_,na_,i_,no_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき？０１：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_04
+msg_gold_01_04:
+	.byte	GE_,N_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	wa_,ka_,i_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,zi_,yya_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ra_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,ku_,re_,ru_,no_,na_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,ttu_,to_,spc_,tu_,re_,te_,ki_,na_,sa_,re_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0102----------------------------------
+// ●ハツ（たつじん♀）に話しかけたとき
+// ●きんこんしき０１：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_05
+msg_gold_01_05:
+	.byte	HA_,TU_,kako2_,ke_,ttu_,ko_,n_,si_,te_,spc_,n5_,n0_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	wa_,ta_,si_,ra_,spc_,hu_,u_,hu_,no_,spc_,ki_,zu_,na_,ha_
+	.byte	SCROLL_WAIT_
+	.byte	do_,n_,na_,spc_,mo_,no_,de_,mo_,spc_,ki_,re_,ma_,se_,n_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_06
+msg_gold_01_06:
+	.byte	HA_,TU_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	ma_,ke_,ma_,si_,ta_,yo_,spc_,zi_,i_,sa_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_07
+msg_gold_01_07:
+	.byte	HA_,TU_,kako2_,ke_,ttu_,ko_,n_,si_,te_,spc_,n5_,n0_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	hu_,u_,hu_,ge_,n_,ka_,ni_,spc_,na_,ru_,ta_,bi_
+	.byte	SCROLL_WAIT_
+	.byte	PO_,KE_,MO_,N_,si_,yyo_,u_,bu_,wo_,spc_,si_,te_,i_,ma_,si_,ta_,ne_,e_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_08
+msg_gold_01_08:
+	.byte	HA_,TU_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	wa_,ka_,i_,spc_,TO_,RE_,bou_,NA_,bou_,sa_,n_,spc_,de_,su_,ne_,e_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ra_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,ku_,re_,ru_,no_,na_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,ttu_,to_,spc_,tu_,re_,te_,o_,i_,de_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0102----------------------------------
+// ●ゲン（たつじん♂）に話しかけたとき
+// ●きんこんしき０１（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_09
+msg_gold_01_09:
+	.byte	GE_,N_,kako2_,wa_,si_,ra_,ha_,spc_,i_,tu_,mo_,spc_,hu_,u_,hu_,de_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,ta_,no_,si_,n_,de_,o_,ru_,spc_,ka_,ra_,no_,u_
+	.byte	SCROLL_WAIT_
+	.byte	si_,yyo_,u_,bu_,ni_,mo_,spc_,zi_,si_,n_,ga_,spc_,a_,ru_,n_,zi_,yya_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_10
+msg_gold_01_10:
+	.byte	GE_,N_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	ma_,ke_,ta_,yo_,spc_,ba_,a_,sa_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_11
+msg_gold_01_11:
+	.byte	GE_,N_,kako2_,ke_,ttu_,ko_,n_,si_,te_,spc_,n5_,n0_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	so_,u_,i_,ya_,spc_,ma_,i_,ni_,ti_,spc_,ma_,i_,ni_,ti_
+	.byte	SCROLL_WAIT_
+	.byte	ba_,a_,sa_,n_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,i_,ta_,no_,u_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき？０１（再戦闘）：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_12
+msg_gold_01_12:
+	.byte	GE_,N_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	wa_,ka_,i_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,zi_,yya_,na_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ra_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,ku_,re_,ru_,no_,na_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,ttu_,to_,spc_,tu_,re_,te_,ki_,na_,sa_,re_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0102----------------------------------
+// ●ハツ（たつじん♀）に話しかけたとき
+// ●きんこんしき０１（再戦闘）：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_13
+msg_gold_01_13:
+	.byte	HA_,TU_,kako2_,ke_,ttu_,ko_,n_,si_,te_,spc_,n5_,n0_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,ta_,ga_,i_,wo_,spc_,sa_,sa_,e_,a_,ttu_,te_,ki_,ta_
+	.byte	SCROLL_WAIT_
+	.byte	wa_,ta_,si_,ra_,spc_,hu_,u_,hu_,ha_,spc_,tu_,yo_,i_,de_,su_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１（再戦闘）：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_14
+msg_gold_01_14:
+	.byte	HA_,TU_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	ma_,ke_,ma_,si_,ta_,yo_,spc_,zi_,i_,sa_,n_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１（再戦闘）：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_15
+msg_gold_01_15:
+	.byte	HA_,TU_,kako2_,ke_,ttu_,ko_,n_,si_,te_,spc_,n5_,n0_,ne_,n_,tenten_,tenten_
+	.byte	CR_
+	.byte	i_,ro_,n_,na_,ko_,to_,ga_,spc_,a_,ri_,ma_,si_,ta_,ne_,e_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,re_,ka_,ra_,mo_,spc_,zi_,i_,sa_,n_,to_,spc_,i_,ttu_,si_,yyo_,ni_
+	.byte	CR_
+	.byte	ta_,no_,si_,i_,ko_,to_,ga_,spc_,tu_,du_,ku_,to_,spc_,i_,i_,de_,su_,wa_,ne_,e_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●きんこんしき０１（再戦闘）：戦闘できない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_gold_01_16
+msg_gold_01_16:
+	.byte	HA_,TU_,kako2_,o_,ya_,o_,ya_
+	.byte	CR_
+	.byte	wa_,ka_,i_,spc_,TO_,RE_,bou_,NA_,bou_,sa_,n_,spc_,de_,su_,ne_,e_
+	.byte	NORMAL_WAIT_
+	.byte	wa_,si_,ra_,to_,spc_,si_,yyo_,u_,bu_,spc_,si_,te_,ku_,re_,ru_,no_,na_,ra_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,mo_,ttu_,to_,spc_,tu_,re_,te_,o_,i_,de_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

@@ -1,0 +1,1593 @@
+//=========================================================================
+//
+//		コンテスト用メッセージデータ
+//												by matsuda 2002.04.11(木)
+//=========================================================================
+
+#define CONMSG_WAIT		60		//ﾒｯｾｰｼﾞ消去までのｳｪｲﾄ
+
+
+// ?回目のアピール！どの技を出す？
+static const u8 turn_msg[] = {
+	ka_,i_,me_,no_,spc_,A_,PI_,bou_,RU_,gyoe_,CR_,
+	do_,no_,spc_,wa_,za_,wo_,spc_,da_,su_,hate_,EOM_,
+};
+//？回目のアピール！しかし参加できない！
+static const u8 fusanka_msg[] = {
+	ka_,i_,me_,no_,spc_,A_,PI_,bou_,RU_,gyoe_,CR_,
+	si_,ka_,si_,spc_,sa_,n_,ka_,spc_,de_,ki_,na_,i_,gyoe_,EOM_,
+};
+//フシギダネは体当たりでアピール！
+static const u8 wazaput_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	I_MSG_,STR_TEMP_BUF1,de_,spc_,A_,PI_,bou_,RU_,gyoe_,EOM_,
+};
+//他のポケモンは技を使った！
+static const u8 hokawaza_msg[] = {
+	ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ha_,CR_,
+	wa_,za_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+//フシギダネはみんなを見ていた！
+static const u8 miteita_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	mi_,n_,na_,wo_,spc_,mi_,te_,i_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+//アピールタイム終了！
+static const u8 syuuryou_msg[] = {
+	A_,PI_,bou_,RU_,TA_,I_,MU_,spc_,si_,yyu_,u_,ri_,yyo_,u_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+//フシギダネの○○効果！(トリック、スペシャル)
+static const u8 appealkouka_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF1,gyoe_,CR_,
+	I_MSG_,STR_TEMP_BUF2,spc_,ko_,u_,ka_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+//トリック
+static const u8 torikku_msg[] = {TO_,RI_,TTU_,KU_,EOM_,};
+//スペシャル
+static const u8 special_msg[] = {SU_,PE_,SI_,YYA_,RU_,EOM_,};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=========================================================================
+//
+//		コンテスト　技を受けたとき表示させるメッセージ
+//											by matsuda  2001.10.03(水)
+//=========================================================================
+
+//しかし　じゃまを　された！。
+static const u8 SikasiJyama_msg[] = {
+	si_,ka_,si_,spc_,zi_,yya_,ma_,wo_,spc_,sa_,re_,ta_,gyoe_,EOM_,
+};
+
+//ほかの　ポケモンに　つられた！。
+static const u8 HokanoPoke_msg[] = {
+	ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ni_,spc_,tu_,ra_,re_,ta_,gyoe_,EOM_,
+};
+
+//しかし　しっぱいして　しまった！。
+static const u8 SikasiSippai_msg[] = {
+	si_,ka_,si_,spc_,si_,ttu_,pa_,i_,si_,te_,CR_,si_,ma_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//いつもより　うまく　いった！。
+static const u8 Itumoyori_msg[] = {
+	i_,tu_,mo_,yo_,ri_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//しんさいんが　なぜか　めを　そらした！。
+static const u8 MewoSorasita_msg[] = {
+	si_,n_,sa_,i_,n_,ga_,spc_,na_,ze_,ka_,CR_,me_,wo_,spc_,so_,ra_,si_,ta_,gyoe_,EOM_,
+};
+
+//これまでの　しっぱいを　いかして　がんばってみた！。
+static const u8 Koremadeno_msg[] = {
+	ko_,re_,ma_,de_,no_,spc_,si_,ttu_,pa_,i_,wo_,CR_,
+	i_,ka_,si_,te_,spc_,ga_,n_,ba_,ttu_,te_,mi_,ta_,gyoe_,EOM_,
+};
+
+//これいじょう　わざを　だせなくなった！。
+static const u8 Koreijyou_msg[] = {
+	ko_,re_,i_,zi_,yyo_,u_,spc_,wa_,za_,wo_,CR_,da_,se_,na_,ku_,na_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//こわいくらい　うまく　いった！。
+static const u8 Kowaikurai_msg[] = {
+	ko_,wa_,i_,ku_,ra_,i_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//めだっている　ポケモンと　おなじくらい　がんばった！。
+static const u8 MedatteiruPoke_msg[] = {
+	me_,da_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,to_,CR_,
+	o_,na_,zi_,ku_,ra_,i_,spc_,ga_,n_,ba_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//しんさいんが　きたいを　こめた　めで　みつめた！。
+static const u8 KitaiwoKometa_msg[] = {
+	si_,n_,sa_,i_,n_,ga_,spc_,ki_,ta_,i_,wo_,CR_,
+	ko_,me_,ta_,spc_,me_,de_,spc_,mi_,tu_,me_,ta_,gyoe_,EOM_,
+};
+
+//かなり　うまく　いった！。
+static const u8 KanariUmaku_msg[] = {
+	ka_,na_,ri_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//ふつうより　ちょっと　うまく　いった！。
+static const u8 Futuuyori_msg[] = {
+	hu_,tu_,u_,yo_,ri_,spc_,ti_,yyo_,ttu_,to_,CR_,
+	u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+
+const u8 * const ConWazaDamejiMsgTbl[] = {
+	SikasiJyama_msg,
+	HokanoPoke_msg,
+	SikasiSippai_msg,
+	Itumoyori_msg,		//←↓ﾒｯｾｰｼﾞ自体は一緒だけどﾒｯｾｰｼﾞ管理の性質が別なので
+	Itumoyori_msg,		//次のﾀｰﾝ以降ずっとﾒｯｾｰｼﾞを出す
+	MewoSorasita_msg,
+	Koremadeno_msg,
+	Koreijyou_msg,
+	Kowaikurai_msg,
+	MedatteiruPoke_msg,
+	KitaiwoKometa_msg,
+	KanariUmaku_msg,
+	Futuuyori_msg,
+};
+
+
+
+
+//=========================================================================
+//	このターンどれだけ目立ったか結果を出すメッセージ
+//=========================================================================
+
+//ぜんぜん　めだたなかった…
+static const u8 Zenzen_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	ze_,n_,ze_,n_,spc_,me_,da_,ta_,na_,ka_,ttu_,ta_,tenten_,CTRL_,C_TRGWAIT_,EOM_,
+};
+
+//あんまり　めだたなかった…
+static const u8 Anmari_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	a_,n_,ma_,ri_,spc_,me_,da_,ta_,na_,ka_,ttu_,ta_,tenten_,CTRL_,C_TRGWAIT_,EOM_,
+};
+
+//まあまあ　めだった！
+static const u8 Maamaa_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	ma_,a_,ma_,a_,spc_,me_,da_,ttu_,ta_,gyoe_,CTRL_,C_TRGWAIT_,EOM_,
+};
+
+//かなり　めだった！
+static const u8 Kanari_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	ka_,na_,ri_,spc_,me_,da_,ttu_,ta_,gyoe_,CTRL_,C_TRGWAIT_,EOM_,
+};
+
+//ものすごく　めだった！
+static const u8 Monosugoku_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	mo_,no_,su_,go_,ku_,spc_,me_,da_,ttu_,ta_,gyoe_,CTRL_,C_TRGWAIT_,EOM_,
+};
+
+//アピール　していない！
+static const u8 AppealSitenai_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+	A_,PI_,bou_,RU_,spc_,si_,te_,i_,na_,i_,gyoe_,CTRL_,C_TRGWAIT_,EOM_,
+};
+
+const u8 * const TurnKekkaMsgTbl[] = {
+	Zenzen_msg,
+	Anmari_msg,
+	Maamaa_msg,
+	Kanari_msg,
+	Monosugoku_msg,
+	AppealSitenai_msg,
+};
+
+
+
+
+
+
+//=========================================================================
+//	コンボ技を出したときのメッセージ
+//=========================================================================
+//つぎの　＠１の　アピールに
+//きたいが　たかまった！
+//コンボ１を出したときのメッセージ
+//２３４５６７８９０１２３４５６（＠１：ポケモン名）
+static const u8 Combo1Kouka_msg[] = {
+	tu_,gi_,no_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ni_,CR_,
+	ki_,ta_,i_,ga_,spc_,ta_,ka_,ma_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//しんさいんは　
+//とっても　まんぞくした！
+//コンボ２を出したときのメッセージ
+//２３４５６７８９０１２３４５６
+static const u8 Combo2Kouka_msg[] = {
+	si_,n_,sa_,i_,n_,ha_,CR_,
+	to_,ttu_,te_,mo_,spc_,ma_,n_,zo_,ku_,si_,ta_,gyoe_,EOM_,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=========================================================================
+//
+//		アピール効果を受けた時のメッセージ
+//												by matsuda 2002.04.11(木)
+//=========================================================================
+//ダミー
+static const u8 AppealKoukaDummy_msg[] = {
+	EOM_
+};
+
+
+//管理No０番(＠1：この技を出しているポケモン)
+//２３４５６７８９０１２３
+static const u8 AppealKouka0_msg[] = {
+	si_,n_,sa_,i_,n_,no_,spc_,I_MSG_,STR_TEMP_BUF0,he_,no_,CR_,
+	i_,n_,si_,yyo_,u_,ha_,spc_,ka_,wa_,ra_,na_,i_,gyoe_,EOM_,
+};
+
+
+//管理No１番(＠1：この技を出しているポケモン、＠２：その技名)
+//２３４５６７８９０１２３
+static const u8 AppealKouka1_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF2,ha_,CR_,
+	i_,n_,si_,yyo_,u_,wo_,spc_,ha_,ne_,ka_,e_,si_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No３番（＠1：妨害を与えた相手）
+//２３４５６７８９０１２３
+static const u8 AppealKouka3_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,no_,CR_,
+	A_,PI_,bou_,RU_,ko_,u_,ka_,ga_,spc_,na_,ku_,na_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No４番
+//２３４５６７８９０１２３
+static const u8 AppealKouka4_msg[] = {
+	SU_,PE_,SI_,YYA_,RU_,spc_,A_,PI_,bou_,RU_,no_,spc_,CR_,
+	ko_,u_,ka_,ga_,spc_,na_,ku_,na_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//管理No５番
+//２３４５６７８９０１２３
+static const u8 AppealKouka5_msg[] = {
+	ze_,n_,i_,n_,no_,spc_,A_,PI_,bou_,RU_,wo_,CR_,
+	o_,na_,zi_,ku_,ra_,i_,ni_,spc_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No６番（＠1：妨害を与えた相手）
+//２３４５６７８９０１２３
+static const u8 AppealKouka6_msg[] = {
+	I_MSG_,STR_TEMP_BUF1,no_,spc_,CR_,
+	A_,PI_,bou_,RU_,wo_,spc_,hi_,ku_,ku_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No７番（＠1：技を出したポケモン）
+//２３４５６７８９０１２３
+static const u8 AppealKouka7_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,yo_,ri_,spc_,me_,da_,tu_,spc_,CR_,
+	A_,PI_,bou_,RU_,wo_,spc_,hi_,ku_,ku_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No８番（＠1：妨害を与えた相手）
+//２３４５６７８９０１２３
+static const u8 AppealKouka8_msg[] = {
+	I_MSG_,STR_TEMP_BUF1,no_,CR_,
+	ti_,yyu_,u_,mo_,ku_,wo_,spc_,u_,ba_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No９番（＠1：妨害を与えた相手）
+//２３４５６７８９０１２３
+static const u8 AppealKouka9_msg[] = {
+	I_MSG_,STR_TEMP_BUF1,no_,CR_,
+	A_,PI_,bou_,RU_,wo_,spc_,hi_,ku_,ku_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No10番
+//２３４５６７８９０１２３
+static const u8 AppealKouka10_msg[] = {
+	mi_,n_,na_,no_,spc_,A_,PI_,bou_,RU_,wo_,spc_,CR_,
+	o_,o_,ha_,ba_,ni_,spc_,hi_,ku_,ku_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No11番
+//２３４５６７８９０１２３
+static const u8 AppealKouka11_msg[] = {
+	tu_,gi_,no_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ni_,CR_,
+	ki_,ta_,i_,ga_,spc_,ta_,ka_,ma_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No12番
+//２３４５６７８９０１２３
+static const u8 AppealKouka12_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,yo_,ri_,spc_,me_,da_,ttu_,te_,i_,ru_,CR_,
+	A_,PI_,bou_,RU_,wo_,spc_,hi_,ku_,ku_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No13番
+//２３４５６７８９０１２３
+static const u8 AppealKouka13_msg[] = {
+	si_,n_,sa_,i_,n_,no_,spc_,su_,ki_,na_,A_,PI_,bou_,RU_,wo_,CR_,
+	i_,tu_,mo_,yo_,ri_,spc_,hi_,ku_,ku_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No14番
+//２３４５６７８９０１２３
+static const u8 AppealKouka14_msg[] = {
+	zi_,bu_,n_,i_,ga_,i_,no_,spc_,A_,PI_,bou_,RU_,wo_,CR_,
+	ha_,n_,bu_,n_,no_,spc_,de_,ki_,ni_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+
+
+//管理No15番
+//２３４５６７８９０１２３
+static const u8 AppealKouka15_msg[] = {
+	i_,ma_,ma_,de_,spc_,zi_,yya_,ma_,sa_,re_,ta_,CR_,
+	u_,ttu_,pu_,n_,wo_,spc_,ha_,ra_,si_,te_,spc_,me_,da_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No16番
+//２３４５６７８９０１２３
+static const u8 AppealKouka16_msg[] = {
+	mo_,u_,spc_,A_,PI_,bou_,RU_,ni_,spc_,CR_,
+	sa_,n_,ka_,spc_,de_,ki_,na_,ku_,na_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No17番
+//２３４５６７８９０１２３
+static const u8 AppealKouka17_msg[] = {
+	si_,n_,sa_,i_,n_,no_,spc_,ko_,ko_,ro_,ni_,spc_,u_,ttu_,ta_,e_,CR_,
+	su_,go_,i_,spc_,A_,PI_,bou_,RU_,ni_,na_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+//管理No18番
+//２３４５６７８９０１２３
+static const u8 AppealKouka18_msg[] = {
+	tu_,gi_,ka_,ra_,no_,spc_,A_,PI_,bou_,RU_,ni_,spc_,CR_,
+	su_,ko_,si_,spc_,ki_,ta_,i_,ga_,spc_,ta_,ka_,ma_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No19番
+//２３４５６７８９０１２３
+static const u8 AppealKouka19_msg[] = {
+	SU_,PE_,SI_,YYA_,RU_,spc_,A_,PI_,bou_,RU_,ga_,a_,ru_,CR_,
+	ka_,zu_,da_,ke_,spc_,me_,da_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+
+//管理No20番（＠1：アピールで１番のポケモン）
+//２３４５６７８９０１２３
+static const u8 AppealKouka20_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,to_,CR_,
+	o_,na_,zi_,ku_,ra_,i_,spc_,me_,da_,ttu_,ta_,gyoe_,EOM_,
+};
+
+//管理No24番
+//２３４５６７８９０１２３
+static const u8 AppealKouka24_msg[] = {
+	zi_,yya_,ma_,sa_,re_,ta_,spc_,A_,PI_,bou_,RU_,wo_,CR_,
+	sa_,ra_,ni_,spc_,me_,da_,ta_,na_,ku_,si_,ta_,gyoe_,EOM_,
+};
+
+//管理No25番
+//２３４５６７８９０１２３
+static const u8 AppealKouka25_msg[] = {
+	ze_,n_,i_,n_,no_,spc_,A_,PI_,bou_,RU_,to_,CR_,
+	o_,na_,zi_,ku_,ra_,i_,ni_,spc_,mi_,se_,ta_,gyoe_,EOM_,
+};
+
+
+//同じターンに同じ技があったときに最後に出るメッセージ
+//２３４５６７８９０１２３（＠1：その技名）
+static const u8 OnajiWazaIppai_msg[] = {
+	I_MSG_,STR_TEMP_BUF0,ha_,spc_,i_,ttu_,pa_,i_,de_,CR_,
+	i_,n_,si_,yyo_,u_,ga_,spc_,sa_,ga_,ttu_,ta_,gyoe_,EOM_,
+};
+
+
+
+
+const u8 * const AppealKoukaMsgTbl[] = {
+	AppealKouka0_msg,
+	AppealKouka1_msg,
+	AppealKoukaDummy_msg,
+	AppealKouka3_msg,
+	AppealKouka4_msg,
+	AppealKouka5_msg,
+	AppealKouka6_msg,
+	AppealKouka7_msg,
+	AppealKouka8_msg,
+	AppealKouka9_msg,
+	AppealKouka10_msg,
+	AppealKouka11_msg,
+	AppealKouka12_msg,
+	AppealKouka13_msg,
+	AppealKouka14_msg,
+	AppealKouka15_msg,
+	AppealKouka16_msg,
+	AppealKouka17_msg,
+	AppealKouka18_msg,
+	AppealKouka19_msg,
+	AppealKouka20_msg,
+	AppealKoukaDummy_msg,
+	AppealKoukaDummy_msg,
+	AppealKoukaDummy_msg,
+	AppealKouka24_msg,
+	AppealKouka25_msg,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=========================================================================
+//
+//		技を出した時に表示されるメッセージ
+//												by matsuda 2002.04.12(金)
+//=========================================================================
+
+//----------------------------------------------------------
+//	STR_TEMP_BUF0 : 今表示してるﾒｯｾｰｼﾞのmsgidを所持してるﾎﾟｹﾓﾝ名
+//	STR_TEMP_BUF1 : 技名
+//	STR_TEMP_BUF2 : その他のﾒｯｾｰｼﾞ
+//----------------------------------------------------------
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+＠０＝ポケモン名
+＠１＝技名
+*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+０：とくになし
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+１：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンが　いつもより
+きに　なって　きた！
+<END>*/
+static const u8 Appeal1_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,tu_,mo_,yo_,ri_,CR_,
+ki_,ni_,spc_,na_,ttu_,te_,spc_,ki_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+２：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　このあと
+アピール　できなく　なった！
+<END>
+*/
+static const u8 Appeal2_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ko_,no_,a_,to_,CR_,
+A_,PI_,bou_,RU_,spc_,de_,ki_,na_,ku_,spc_,na_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３：とくになし
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+４：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ちょっと　だけ
+きもちが　おちついた！
+<END>*/
+static const u8 Appeal4_0_msg[] = {
+ti_,yyo_,ttu_,to_,spc_,da_,ke_,CR_,
+ki_,mo_,ti_,ga_,spc_,o_,ti_,tu_,i_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+５：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンが　ぜんぜん
+きに　ならなく　なった！
+<END>*/
+static const u8 Appeal5_0_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,ze_,n_,ze_,n_,CR_,
+ki_,ni_,spc_,na_,ra_,na_,ku_,spc_,na_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+６：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンが　あまり
+きに　ならなく　なった！
+<END>*/
+static const u8 Appeal6_0_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,ga_,spc_,a_,ma_,ri_,CR_,
+ki_,ni_,spc_,na_,ra_,na_,ku_,spc_,na_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+７：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンを　あまり
+きに　しないように　なった！
+<END>*/
+static const u8 Appeal7_0_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,wo_,spc_,a_,ma_,ri_,CR_,
+ki_,ni_,spc_,si_,na_,i_,yo_,u_,ni_,spc_,na_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+８～15：妨害メッセージ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンを
+びっくり　させようと　した！
+<END>
+この後に各妨害の数に応じてメッセージを流します。*/
+static const u8 Appeal8_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+bi_,ttu_,ku_,ri_,spc_,sa_,se_,yo_,u_,to_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+１６：＠0＝被害を受けたポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+みんなの　めを
+くらませようと　した！
+<END>
+//↑を流した後に、↓被害を受けたキャラのメッセージを流します。
+<START>
+しんさいんは　＠０から
+めを　そらして　しまった！
+<END>
+*/
+static const u8 Appeal16_0_msg[] = {
+mi_,n_,na_,no_,spc_,me_,wo_,CR_,
+ku_,ra_,ma_,se_,yo_,u_,to_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+static const u8 Appeal16_1_msg[] = {
+si_,n_,sa_,i_,n_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,ka_,ra_,CR_,
+me_,wo_,spc_,so_,ra_,si_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+１７：妨害メッセージ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンを
+びっくり　させようと　した！
+<END>
+//この後に各妨害の数に応じてメッセージを流します。
+*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+１８：＠0は技をやったポケモンの名前
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンを
+びっくり　させようと　した！
+<END>
+
+//この後に各妨害の数に応じてメッセージを流したら…
+
+<START>
+＠０は　つぎの　アピールに
+さんか　できなくなった！
+<END>*/
+//この後、妨害をした相手の妨害メッセージを流します。*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+１９～２４：妨害メッセージ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ほかの　ポケモンを
+びっくり　させようと　した！
+<END>
+
+//この後に各妨害の数に応じてメッセージを流します。
+*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+２５：＠0＝緊張したポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+つぎに　まっている　ポケモンを
+きんちょう　させようと　した！
+<END>
+<START>
+＠０は
+きんちょう　してしまった！
+<END>
+
+//対象ポケモンが緊張しなかっときのたメッセージ
+<START>
+＠０は
+へいき　だった！
+<END>
+
+//対象ポケモンがいなかったときの失敗メッセージ
+//その１：４番目にアピールしたとき。
+//その２：対象ポケモン全員が休んでいるとき。
+<START>
+でも　しっぱい　してしまった！
+<END>
+*/
+static const u8 Appeal25_0_msg[] = {
+tu_,gi_,ni_,spc_,ma_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+ki_,n_,ti_,yyo_,u_,spc_,sa_,se_,yo_,u_,to_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+static const u8 Appeal25_1_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+ki_,n_,ti_,yyo_,u_,spc_,si_,te_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+２６：＠0＝緊張したポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+アピールが　まだの　ポケモンを
+きんちょう　させようと　した！
+<END>
+<START>
+＠０は
+きんちょう　してしまった！
+<END>
+
+//対象ポケモンが緊張しなかっときのたメッセージ
+<START>
+＠０は
+へいき　だった！
+<END>
+
+//対象ポケモンがいなかったときの失敗メッセージ
+//その１：４番目にアピールしたとき。
+//その２：対象ポケモン全員が休んでいるとき。
+<START>
+でも　しっぱい　してしまった！
+<END>
+*/
+static const u8 Appeal26_msg[] = {
+A_,PI_,bou_,RU_,ga_,spc_,ma_,da_,no_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+ki_,n_,ti_,yyo_,u_,spc_,sa_,se_,yo_,u_,to_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+２７：＠０＝ボーナスを消したポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ちょうしが　いい　ポケモンを
+からかってみた！
+<END>
+…流した後に
+
+<START>
+＠０の　ちょうしが
+もとに　もどって　しまった！
+<END>*/
+static const u8 Appeal27_0_msg[] = {
+ti_,yyo_,u_,si_,ga_,spc_,i_,i_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+ka_,ra_,ka_,ttu_,te_,mi_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+static const u8 Appeal27_1_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,ti_,yyo_,u_,si_,ga_,CR_,
+mo_,to_,ni_,spc_,mo_,do_,ttu_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+２８：妨害メッセージ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+ちょうしが　いい　ポケモンの
+じゃまを　しようと　した！
+<END>
+
+//この後に各妨害の数に応じてメッセージを流します。*/
+static const u8 Appeal28_msg[] = {
+ti_,yyo_,u_,si_,ga_,spc_,i_,i_,spc_,PO_,KE_,MO_,N_,no_,CR_,
+zi_,yya_,ma_,wo_,spc_,si_,yo_,u_,to_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+２９：１位で条件を満たしているとき
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+めだっている　＠０は
+さらに　はりきった！
+<END>*/
+static const u8 Appeal29_msg[] = {
+me_,da_,ttu_,te_,i_,ru_,spc_,I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+sa_,ra_,ni_,spc_,ha_,ri_,ki_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３０：４位で条件を満たしているとき
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+めだっていない　＠０は
+がんばりまくった！
+<END>*/
+static const u8 Appeal30_msg[] = {
+me_,da_,ttu_,te_,i_,na_,i_,spc_,I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+ga_,n_,ba_,ri_,ma_,ku_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３１：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+まえの　ポケモンたちに
+まけないくらい　はりきった！
+<END>*/
+static const u8 Appeal31_0_msg[] = {
+ma_,e_,no_,spc_,PO_,KE_,MO_,N_,ta_,ti_,ni_,CR_,
+ma_,ke_,na_,i_,ku_,ra_,i_,spc_,ha_,ri_,ki_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３１：１番目にやったとき＝0
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　アピールを
+うまく　みせられなかった！
+<END>*/
+static const u8 Appeal31_1_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,A_,PI_,bou_,RU_,wo_,CR_,
+u_,ma_,ku_,spc_,mi_,se_,ra_,re_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３２：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+まえの　ポケモンと
+おなじくらい　はりきった！
+<END>*/
+static const u8 Appeal32_0_msg[] = {
+ma_,e_,no_,spc_,PO_,KE_,MO_,N_,to_,CR_,
+o_,na_,zi_,ku_,ra_,i_,spc_,ha_,ri_,ki_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３２：１番目にやったとき＝0
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+うまく　みせられなかった！
+<END>*/
+static const u8 Appeal32_1_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+u_,ma_,ku_,spc_,mi_,se_,ra_,re_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３３：0
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+うまく　みせられなかった！
+<END>*/
+static const u8 Appeal33_0_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+u_,ma_,ku_,spc_,mi_,se_,ra_,re_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３３：10
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+すこし　うまく　いった！
+<END>*/
+static const u8 Appeal33_1_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+su_,ko_,si_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３３：30
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+まあまあ　うまく　いった！
+<END>*/
+static const u8 Appeal33_2_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+ma_,a_,ma_,a_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３３：60
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+とても　うまく　いった！
+<END>*/
+static const u8 Appeal33_3_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+to_,te_,mo_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３４：０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+しっぱい　して　しまった！
+<END>*/
+static const u8 Appeal34_0_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+si_,ttu_,pa_,i_,spc_,si_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３４：１０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+あまり　うまく　いかなかった！
+<END>*/
+static const u8 Appeal34_1_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+a_,ma_,ri_,spc_,u_,ma_,ku_,spc_,i_,ka_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３４：２０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+すこし　うまく　いった！
+<END>*/
+static const u8 Appeal34_2_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+su_,ko_,si_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３４：４０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+まあまあ　うまく　いった！
+<END>*/
+static const u8 Appeal34_3_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+ma_,a_,ma_,a_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３４：６０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+かなり　うまく　いった！
+<END>*/
+static const u8 Appeal34_4_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+ka_,na_,ri_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３４：８０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　アピールは
+とても　うまく　いった！
+<END>*/
+static const u8 Appeal34_5_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,A_,PI_,bou_,RU_,ha_,CR_,
+to_,te_,mo_,spc_,u_,ma_,ku_,spc_,i_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３５：３倍になった
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+まえの　ポケモンと
+おなじタイプで　きにいられた！
+<END>*/
+static const u8 Appeal35_msg[] = {
+ma_,e_,no_,spc_,PO_,KE_,MO_,N_,to_,CR_,
+o_,na_,zi_,TA_,I_,PU_,de_,spc_,ki_,ni_,i_,ra_,re_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３６：３倍になった
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+まえの　ポケモンと
+ちがうタイプで　きにいられた！
+<END>*/
+static const u8 Appeal36_msg[] = {
+ma_,e_,no_,spc_,PO_,KE_,MO_,N_,to_,CR_,
+ti_,ga_,u_,TA_,I_,PU_,de_,spc_,ki_,ni_,i_,ra_,re_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３７：２倍になった
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+まえの　ポケモンより
+だいぶ　めだった！
+<END>*/
+static const u8 Appeal37_0_msg[] = {
+ma_,e_,no_,spc_,PO_,KE_,MO_,N_,yo_,ri_,CR_,
+da_,i_,bu_,spc_,me_,da_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３７：0倍になった
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+まえの　ポケモンより
+うまく　できなかった！
+<END>*/
+static const u8 Appeal37_1_msg[] = {
+ma_,e_,no_,spc_,PO_,KE_,MO_,N_,yo_,ri_,CR_,
+u_,ma_,ku_,spc_,de_,ki_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３８：ボーナスがついた　ついたポケモン＠０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　ちょうしが
+いつもより　あがった！
+<END>*/
+static const u8 Appeal38_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,ti_,yyo_,u_,si_,ga_,CR_,
+i_,tu_,mo_,yo_,ri_,spc_,a_,ga_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+３９：ボーナスポケモン＠０
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　ちょうしが　よくて
+ぜっこうの　アピールに　なった！
+<END>*/
+static const u8 Appeal39_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ti_,yyo_,u_,si_,ga_,spc_,yo_,ku_,te_,CR_,
+ze_,ttu_,ko_,u_,no_,spc_,A_,PI_,bou_,RU_,ni_,spc_,na_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+４０：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+つぎの　アピールを　はやく
+しようと　まえに　でた！
+<END>*/
+static const u8 Appeal40_msg[] = {
+tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,wo_,spc_,ha_,ya_,ku_,CR_,
+si_,yo_,u_,to_,spc_,ma_,e_,ni_,spc_,de_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+４１：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+つぎの　アピールを　おそく
+しようと　１ぽ　さがった！
+<END>*/
+static const u8 Appeal41_msg[] = {
+tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,wo_,spc_,o_,so_,ku_,CR_,
+si_,yo_,u_,to_,spc_,n1_,po_,spc_,sa_,ga_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+４２：なし
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+４３：
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+つぎの　ターンの　じゅんばんを
+おかしく　した！
+<END>*/
+static const u8 Appeal43_msg[] = {
+tu_,gi_,no_,spc_,TA_,bou_,N_,no_,spc_,zi_,yyu_,n_,ba_,n_,wo_,CR_,
+o_,ka_,si_,ku_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+
+
+//=========================================================================
+//	ｺﾝﾎﾞ状態のメッセージ
+//=========================================================================
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+コンボ１発生：＠０＝コンボ１をやったポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+しんさいんが　きたいして
+＠０を　みつめた！
+<END>*/
+static const u8 Combo_msg[] = {
+si_,n_,sa_,i_,n_,ga_,spc_,ki_,ta_,i_,si_,te_,CR_,
+I_MSG_,STR_TEMP_BUF0,wo_,spc_,mi_,tu_,me_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+コンボレベル１発生
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+アピールの　くみあわせが
+きに　いって　もらえた！
+<END>*/
+static const u8 Combo1_msg[] = {
+A_,PI_,bou_,RU_,no_,spc_,ku_,mi_,a_,wa_,se_,ga_,CR_,
+ki_,ni_,spc_,i_,ttu_,te_,spc_,mo_,ra_,e_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+コンボレベル２発生
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+アピールの　くみあわせが
+かなり　きに　いられた！
+<END>*/
+static const u8 Combo2_msg[] = {
+A_,PI_,bou_,RU_,no_,spc_,ku_,mi_,a_,wa_,se_,ga_,CR_,
+ka_,na_,ri_,spc_,ki_,ni_,spc_,i_,ra_,re_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+コンボレベル３発生
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+アピールの　くみあわせが
+ものすごく　きに　いられた！
+<END>*/
+static const u8 Combo3_msg[] = {
+A_,PI_,bou_,RU_,no_,spc_,ku_,mi_,a_,wa_,se_,ga_,CR_,
+mo_,no_,su_,go_,ku_,spc_,ki_,ni_,spc_,i_,ra_,re_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+
+
+//=========================================================================
+//	◎妨害を受けたときに防御状態のメッセージ
+//=========================================================================
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+４：＠０＝防御をしているポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　なんとか
+めを　そらした！
+<END>*/
+static const u8 Appeal4_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,na_,n_,to_,ka_,CR_,
+me_,wo_,spc_,so_,ra_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+５：＠０＝防御をしているポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は
+そっちを　みずに　すんだ！
+<END>*/
+static const u8 Appeal5_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+so_,ttu_,ti_,wo_,spc_,mi_,zu_,ni_,spc_,su_,n_,da_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+６：＠０＝防御をしているポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は
+このくらいは　へいきだった！
+<END>*/
+static const u8 Appeal6_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+ko_,no_,ku_,ra_,i_,ha_,spc_,he_,i_,ki_,da_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+７：＠０＝防御をしているポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　ちょっと
+きを　とられて　しまった！
+<END>*/
+static const u8 Appeal7_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ti_,yyo_,ttu_,to_,CR_,
+ki_,wo_,spc_,to_,ra_,re_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+
+
+//----------------------------------------------------------
+//	妨害技を出したポケモンのメッセージ
+//----------------------------------------------------------
+/*<START>
+ほかの　ポケモンを
+びっくり　させようと　した！
+<END>*/
+static const u8 BikkuriSaseyoutosita_msg[] = {
+ho_,ka_,no_,spc_,PO_,KE_,MO_,N_,wo_,CR_,
+bi_,ttu_,ku_,ri_,spc_,sa_,se_,yo_,u_,to_,spc_,si_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+
+
+//----------------------------------------------------------
+//	妨害を受けたときのメッセージ
+//	対象ポケモンを１体ずつメッセージを流します。
+//	＠０＝妨害を受けたポケモン名
+//	＠１＝妨害技を出したアピールのコンテストタイプにより変化
+//	　　　かっこいい＝モジモジ
+//	　　　うつくしい＝ドキドキ
+//	　　　かわいい＝デレデレ
+//	　　　かしこい＝オロオロ
+//	　　　たくましい＝ビクビク
+//----------------------------------------------------------
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+妨害10
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　きを　とられて
+したを　むいて　しまった！
+<END>*/
+static const u8 Bougai10_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ki_,wo_,spc_,to_,ra_,re_,te_,CR_,
+si_,ta_,wo_,spc_,mu_,i_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+妨害20
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　きを　とられて
+ふりかえって　しまった！
+<END>*/
+static const u8 Bougai20_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ki_,wo_,spc_,to_,ra_,re_,te_,CR_,
+hu_,ri_,ka_,e_,ttu_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+妨害30
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　おもわず
+こえを　あげて　しまった！
+<END>*/
+static const u8 Bougai30_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,o_,mo_,wa_,zu_,CR_,
+ko_,e_,wo_,spc_,a_,ge_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+妨害40
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　おもわず
+とびあがって　しまった！
+<END>*/
+static const u8 Bougai40_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,o_,mo_,wa_,zu_,CR_,
+to_,bi_,a_,ga_,ttu_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+妨害60以上
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　きを　とられて
+ひっくり　かえって　しまった！
+<END>*/
+static const u8 Bougai60_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ki_,wo_,spc_,to_,ra_,re_,te_,CR_,
+hi_,ttu_,ku_,ri_,spc_,ka_,e_,ttu_,te_,spc_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+
+
+//=========================================================================
+//	緊張状態のとき：＠0＝緊張したポケモン名
+//=========================================================================
+/*<START>
+＠０は　きんちょうして
+アピールが　できなかった！
+<END>*/
+const u8 Kintyou_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,ki_,n_,ti_,yyo_,u_,si_,te_,CR_,
+A_,PI_,bou_,RU_,ga_,spc_,de_,ki_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+//=========================================================================
+//	技効果 不発時のﾒｯｾｰｼﾞ
+//=========================================================================
+/*<START>
+でも　しっぱい　してしまった！
+<END>*/
+const u8 DemoSippai_msg[] = {
+de_,mo_,spc_,si_,ttu_,pa_,i_,spc_,si_,te_,si_,ma_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*<START>
+でも　きんちょう
+させられなかった！
+<END>*/
+const u8 DemoKintyou_msg[] = {
+de_,mo_,spc_,ki_,n_,ti_,yyo_,u_,CR_,
+sa_,se_,ra_,re_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*<START>
+でも　だれも
+きんちょう　しなかった！
+<END>*/
+const u8 DemoDaremoKintyou_msg[] = {
+de_,mo_,spc_,da_,re_,mo_,CR_,
+ki_,n_,ti_,yyo_,u_,spc_,si_,na_,ka_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*<START>
+でも　むし　されて　しまった…
+<END>*/
+const u8 DemoMusi_msg[] = {
+de_,mo_,spc_,mu_,si_,spc_,sa_,re_,te_,spc_,si_,ma_,ttu_,ta_,tenten_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*<START>
+でも　ちょうしは
+あがらなかった…
+<END>*/
+const u8 DemoTyousiha_msg[] = {
+de_,mo_,spc_,ti_,yyo_,u_,si_,ha_,CR_,
+a_,ga_,ra_,na_,ka_,ttu_,ta_,tenten_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*<START>
+ちょうしが　よく　なくて
+あまり　うまく　できなかった…
+<END>*/
+const u8 TyousigaYokunakute_msg[] = {
+ti_,yyo_,u_,si_,ga_,spc_,yo_,ku_,spc_,na_,ku_,te_,CR_,
+a_,ma_,ri_,spc_,u_,ma_,ku_,spc_,de_,ki_,na_,ka_,ttu_,ta_,tenten_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*//対象ポケモンが緊張しなかっときのたメッセージ
+<START>
+＠０は
+へいき　だった！
+<END>*/
+static const u8 HeikiDatta_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,CR_,
+he_,i_,ki_,spc_,da_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_
+};
+
+//=========================================================================
+//	●ペナルティ発生
+//=========================================================================
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+同じ技を連続使用：＠０＝この技を出したポケモン名
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０は　おなじアピールを
+つづけて　がっかり　された！
+<END>*/
+const u8 Penalty_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,o_,na_,zi_,A_,PI_,bou_,RU_,wo_,CR_,
+tu_,du_,ke_,te_,spc_,ga_,ttu_,ka_,ri_,spc_,sa_,re_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+//=========================================================================
+//	テンション発生
+//=========================================================================
+
+/*●テンション＋1発生（テンション+10未満のとき）
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+＠０＝この技を出したポケモン名
+＠１＝出したコンテストタイプ
+　　　かっこよさ、うつくしさ、かわいさ、かしこさ、たくましさ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　＠１が
+まわりに　とても　うけた！　
+<END>*/
+const u8 TensionUp_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF2,ga_,CR_,
+ma_,wa_,ri_,ni_,spc_,to_,te_,mo_,spc_,u_,ke_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*●テンションが下がったとき
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+＠０＝この技を出したポケモン名
+＠１＝出した技のコンテストタイプ
+　　　かっこよさ、うつくしさ、かわいさ、かしこさ、たくましさ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　＠２は
+ここでは　うけなかった…
+<END>*/
+const u8 TensionDown_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF2,ha_,CR_,
+ko_,ko_,de_,ha_,spc_,u_,ke_,na_,ka_,ttu_,ta_,tenten_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+
+/*●テンション+10になったとき
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+＠０＝この技を出したポケモン名
+＠２＝出したコンテストタイプ
+　　　かっこよさ、うつくしさ、かわいさ、かしこさ、たくましさ
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+<START>
+＠０の　＠２に
+まわりが　もりあがった！　
+<END>*/
+const u8 TensionMax_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF2,ni_,CR_,
+ma_,wa_,ri_,ga_,spc_,mo_,ri_,a_,ga_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+//=========================================================================
+//	つぎのターン休みになった
+//=========================================================================
+/*<START>
+＠０は　つぎの　アピールに
+さんか　できなくなった！
+<END>*/
+//この後、妨害をした相手の妨害メッセージを流します。*/
+const u8 TugiYasumi_msg[] = {
+I_MSG_,STR_TEMP_BUF0,ha_,spc_,tu_,gi_,no_,spc_,A_,PI_,bou_,RU_,ni_,CR_,
+sa_,n_,ka_,spc_,de_,ki_,na_,ku_,na_,ttu_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+//=========================================================================
+//	テンション停止技を使用された時
+//=========================================================================
+/*	かんきゃくの
+	ちゅうもくを　あつめた！
+*/
+const u8 TyuumokuwoAtumeta_msg[] = {
+ka_,n_,ki_,yya_,ku_,no_,CR_,
+ti_,yyu_,u_,mo_,ku_,wo_,spc_,a_,tu_,me_,ta_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*	かんきゃくは
+	＠２を　みつづけている！*/
+const u8 Mituduketeiru_msg[] = {
+ka_,n_,ki_,yya_,ku_,ha_,CR_,
+I_MSG_,STR_TEMP_BUF2,wo_,spc_,mi_,tu_,du_,ke_,te_,i_,ru_,gyoe_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+/*	＠０の　＠１は
+	めを　むけられなかった…*/
+const u8 Mewomukerare_msg[] = {
+I_MSG_,STR_TEMP_BUF0,no_,spc_,I_MSG_,STR_TEMP_BUF1,ha_,CR_,
+me_,wo_,spc_,mu_,ke_,ra_,re_,na_,ka_,ttu_,ta_,tenten_,CTRL_,C_WAIT_,CONMSG_WAIT,EOM_,
+};
+
+
+const u8 *const AppealMsgTbl[] = {
+	Appeal1_msg,
+	Appeal2_msg,
+	Appeal4_0_msg,
+	Appeal5_0_msg,
+	Appeal6_0_msg,
+	Appeal7_0_msg,
+	Appeal8_msg,
+	Appeal16_0_msg,
+	Appeal16_1_msg,
+	Appeal25_0_msg,
+	Appeal25_1_msg,
+	Appeal26_msg,
+	Appeal27_0_msg,
+	Appeal27_1_msg,
+	Appeal28_msg,
+	Appeal29_msg,
+	Appeal30_msg,
+	Appeal31_0_msg,
+	Appeal31_1_msg,
+	Appeal32_0_msg,
+	Appeal32_1_msg,
+	Appeal33_0_msg,
+	Appeal33_1_msg,
+	Appeal33_2_msg,
+	Appeal33_3_msg,
+	Appeal34_0_msg,
+	Appeal34_1_msg,
+	Appeal34_2_msg,
+	Appeal34_3_msg,
+	Appeal34_4_msg,
+	Appeal34_5_msg,
+	Appeal35_msg,
+	Appeal36_msg,
+	Appeal37_0_msg,
+	Appeal37_1_msg,
+	Appeal38_msg,
+	Appeal39_msg,
+	Appeal40_msg,
+	Appeal41_msg,
+	Appeal43_msg,
+	Combo_msg,
+	Combo1_msg,
+	Combo2_msg,
+	Combo3_msg,
+	Appeal4_msg,
+	Appeal5_msg,
+	Appeal6_msg,
+	Appeal7_msg,
+	BikkuriSaseyoutosita_msg,
+	Bougai10_msg,
+	Bougai20_msg,
+	Bougai30_msg,
+	Bougai40_msg,
+	Bougai60_msg,
+	DemoSippai_msg,
+	DemoKintyou_msg,
+	DemoDaremoKintyou_msg,
+	DemoMusi_msg,
+	DemoTyousiha_msg,
+	TyousigaYokunakute_msg,
+	HeikiDatta_msg,
+	TyuumokuwoAtumeta_msg,
+};
+
+
+const u8 mojimoji_msg[] = {MO_,ZI_,MO_,ZI_,EOM_,};
+const u8 dokidoki_msg[] = {DO_,KI_,DO_,KI_,EOM_,};
+const u8 deredere_msg[] = {DE_,RE_,DE_,RE_,EOM_,};
+const u8 orooro_msg[] = {O_,RO_,O_,RO_,EOM_,};
+const u8 bikubiku_msg[] = {BI_,KU_,BI_,KU_,EOM_,};
+
+//----------------------------------------------------------
+//	テンション発生時のI_MSG部分
+//----------------------------------------------------------
+static const u8 kakkoyosa_msg[] = {ka_,ttu_,ko_,yo_,sa_,EOM_,};
+static const u8 utukusisa_msg[] = {u_,tu_,ku_,si_,sa_,EOM_,};
+static const u8 kawaisa_msg[] = {ka_,wa_,i_,sa_,EOM_,};
+static const u8 kasikosa_msg[] = {ka_,si_,ko_,sa_,EOM_,};
+static const u8 takumasisa_msg[] = {ta_,ku_,ma_,si_,sa_,EOM_,};
+
+const u8 *const TensyonKindMsgTbl[] = {
+	kakkoyosa_msg,
+	utukusisa_msg,
+	kawaisa_msg,
+	kasikosa_msg,
+	takumasisa_msg,
+};
+
+const u8 Tensyon_msg[] = {TE_,N_,SI_,YYO_,N_,colon_,EOM_,};
+
+
+
+
+
+
+//=========================================================================
+//	未知の技Noが入ってきた時は、技名の変わりにタイプを表示する
+//=========================================================================
+static const u8 con_style_msg[] = {ka_,ttu_,ko_,i_,i_,spc_,wa_,za_,EOM_,};
+static const u8 con_beautiful_msg[] = {u_,tu_,ku_,si_,i_,spc_,wa_,za_,EOM_,};
+static const u8 con_cute_msg[] = {ka_,wa_,i_,i_,spc_,wa_,za_,EOM_,};
+static const u8 con_clever_msg[] = {ka_,si_,ko_,i_,spc_,wa_,za_,EOM_,};
+static const u8 con_strong_msg[] = {ta_,ku_,ma_,si_,i_,spc_,wa_,za_,EOM_,};
+static const u8 con_hatehate_msg[] = {hate_,hate_,hate_,EOM_,};
+
+const u8 *const ConTypeWazaMsgTbl[] = {
+	con_style_msg,
+	con_beautiful_msg,
+	con_cute_msg,
+	con_clever_msg,
+	con_strong_msg,
+	con_hatehate_msg,	//未知のｺﾝﾃｽﾄﾀｲﾌﾟが来た時のﾒｯｾｰｼﾞ
+};
+
+
+
+
+
+
+
+//=========================================================================
+//
+//		con_tool.c, conres.cで使っていたもの
+//												by matsuda 2002.04.11(木)
+//=========================================================================
+//----------------------------------------------------------
+//	con_tool.c
+//----------------------------------------------------------
+const u8 jyuni_msg[] = {zi_,yyu_,n_,i_,EOM_,};
+const u8 ranking_no_msg[] = {CTRL_,C_BCOL_,COL_NUKE,CTRL_,C_FCOL_,COL_PURPLE,spc_,EOM_};
+const u8 yasumi_msg[] = {ya_,su_,mi_,EOM_};
+const u8 tuusintyuu_msg[] = {
+	tu_,u_,si_,n_,spc_,ta_,i_,ki_,ti_,yyu_,u_,gyoe_,EOM_,
+};
+
+//----------------------------------------------------------
+//	conres.c
+//----------------------------------------------------------
+const u8 WhiteCode_msg[] = {CTRL_,C_FCOL_,COL_WHITE,EOM_};
+const u8 yuusyou_msg[] = {
+	yu_,u_,si_,yyo_,u_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,no_,spc_,
+	I_MSG_,STR_TEMP_BUF1,gyoe_,CR_,
+	o_,me_,de_,to_,u_,gyoe_,EOM_,
+};
+

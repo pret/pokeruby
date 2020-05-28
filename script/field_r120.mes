@@ -1,0 +1,207 @@
+// ●120番道路　フィールド
+
+
+// ●ダイゴ
+// ●（Ｘ１４・Ｙ１５）（下向き）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p01_field_r120
+msg_daigo_01_p01_field_r120:
+	.byte	DA_,I_,GO_,kako2_,n_,hate_,spc_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,ka_
+	.byte	CR_
+	.byte	hi_,sa_,si_,bu_,ri_,spc_,da_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ko_,ni_,spc_,mi_,e_,na_,i_,spc_,na_,ni_,ka_,ga_,spc_,i_,ru_,yo_,ne_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	de_,spc_,mi_,e_,na_,i_,spc_,na_,ni_,ka_,ni_,spc_,mu_,ka_,ttu_,te_
+	.byte	CR_
+	.byte	ko_,no_,spc_,do_,u_,gu_,wo_,spc_,tu_,ka_,u_,to_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ti_,ga_,u_,na_,tenten_,tenten_,spc_,se_,tu_,me_,i_,spc_,su_,ru_,yo_,ri_,mo_
+	.byte	CR_
+	.byte	zi_,ttu_,sa_,i_,ni_,spc_,tu_,ka_,ttu_,ta_,spc_,ho_,u_,ga_,spc_,ta_,no_,si_,so_,u_,da_
+	.byte	NORMAL_WAIT_
+	.byte	I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ki_,mi_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,u_,spc_,zi_,yyu_,n_,bi_,ha_,spc_,de_,ki_,te_,spc_,i_,ru_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_daigo_01_p04_field_r120:
+// ●「いいえ」→msg_daigo_01_p02_field_r120:
+
+// ●「いいえ」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p02_field_r120
+msg_daigo_01_p02_field_r120:
+	.byte	DA_,I_,GO_,kako2_,so_,u_,hate_
+	.byte	NORMAL_WAIT_
+	.byte	BO_,KU_,ha_,spc_,ko_,ko_,de_,spc_,ma_,ttu_,te_,i_,ru_,ka_,ra_
+	.byte	CR_
+	.byte	zi_,yyu_,n_,bi_,wo_,spc_,su_,ru_,to_,spc_,i_,i_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●再度、話しかけた場合は
+// 　→msg_daigo_01_p03_field_r120:
+
+// ●再度、話しかけた場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p03_field_r120
+msg_daigo_01_p03_field_r120:
+	.byte	DA_,I_,GO_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF,spc_,ki_,mi_,no_,spc_,PO_,KE_,MO_,N_
+	.byte	CR_
+	.byte	ta_,ta_,ka_,u_,spc_,zi_,yyu_,n_,bi_,ha_,spc_,de_,ki_,te_,spc_,i_,ru_,no_,ka_,i_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_daigo_01_p04_field_r120:
+// ●「いいえ」→msg_daigo_01_p02_field_r120:
+
+// ●「はい」
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p04_field_r120
+msg_daigo_01_p04_field_r120:
+	.byte	DA_,I_,GO_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,TO_,RE_,bou_,NA_,bou_,spc_,to_,si_,te_,no_
+	.byte	SCROLL_WAIT_
+	.byte	zi_,tu_,ri_,yyo_,ku_,spc_,mi_,se_,te_,mo_,ra_,u_,yo_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（場合によっては主人公移動）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p07_field_r120
+msg_daigo_01_p07_field_r120:
+	.byte	DA_,I_,GO_,ha_
+	.byte	CR_
+	.byte	DE_,BO_,N_,SU_,KO_,bou_,PU_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,me_,i_,ni_,spc_,na_,ttu_,te_,i_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,su_,ga_,ta_,ga_,spc_,ma_,ru_,wa_,ka_,ri_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	o_,do_,ro_,i_,te_,spc_,o_,so_,i_,ka_,ka_,ttu_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●カクレオンとの戦闘に……
+
+// ●（Ｘ１４・Ｙ１６）のカクレオンとの戦闘後
+// 　フィールド画面に復帰すると
+// 　主人公に隣接して、以下のメッセージ自動表示
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p05_field_r120
+msg_daigo_01_p05_field_r120:
+	.byte	DA_,I_,GO_,kako2_,na_,ru_,ho_,do_
+	.byte	CR_
+	.byte	ki_,mi_,no_,spc_,ta_,ta_,ka_,i_,ka_,ta_,spc_,o_,mo_,si_,ro_,i_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,zi_,me_,te_,spc_,MU_,RO_,de_,spc_,de_,a_,ttu_,ta_,spc_,to_,ki_,yo_,ri_,mo_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,mo_,spc_,so_,da_,ttu_,te_,i_,ru_,si_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	so_,u_,da_,ne_
+	.byte	CR_
+	.byte	ko_,no_,spc_,DE_,BO_,N_,SU_,KO_,bou_,PU_,ha_,spc_,ki_,mi_,ni_,spc_,a_,ge_,yo_,u_
+	.byte	NORMAL_WAIT_
+	.byte	ho_,ka_,ni_,mo_,spc_,su_,ga_,ta_,wo_,spc_,ka_,ku_,si_,te_,i_,ru_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ha_,spc_,i_,ru_,ka_,mo_,spc_,si_,re_,na_,i_,ka_,ra_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「デボンスコープ」（No288）入手処理
+// ●続けて……
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_daigo_01_p06_field_r120
+msg_daigo_01_p06_field_r120:
+	.byte	DA_,I_,GO_,kako2_,I_MSG_,MY_NAME_BUF,I_MSG_,SUFIX_BUF
+	.byte	NORMAL_WAIT_
+	.byte	BO_,KU_,ha_,spc_,ga_,n_,ba_,ttu_,te_,i_,ru_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,NA_,bou_,to_,spc_,PO_,KE_,MO_,N_,ga_,spc_,su_,ki_,da_,ka_,ra_
+	.byte	NORMAL_WAIT_
+	.byte	ki_,mi_,no_,ko_,to_,spc_,i_,i_,to_,spc_,o_,mo_,u_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yya_,a_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,do_,ko_,ka_,de_,spc_,a_,o_,u_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「そらをとぶ」演出で去っていく
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+// ●カクレオン
+// ●「デボンスコープ」を持っていない
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakure_01_p01_field_r120
+msg_kakure_01_p01_field_r120:
+	.byte	mi_,e_,na_,i_,spc_,na_,ni_,ka_,ga_,spc_,i_,ru_,yo_,u_,da_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●「デボンスコープ」を持っている
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakure_01_p02_field_r120
+msg_kakure_01_p02_field_r120:
+	.byte	mi_,e_,na_,i_,spc_,na_,ni_,ka_,ga_,spc_,i_,ru_,yo_,u_,da_
+	.byte	NORMAL_WAIT_
+	.byte	DE_,BO_,N_,SU_,KO_,bou_,PU_,wo_,spc_,tu_,ka_,i_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●「はい／いいえ」の選択
+// ●「はい」　→msg_kakure_01_p03_field_r120:
+// ●「いいえ」→メッセージ終了
+
+// ●「はい」を選択
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kakure_01_p03_field_r120
+msg_kakure_01_p03_field_r120:
+	.byte	I_MSG_,MY_NAME_BUF,ha_
+	.byte	CR_
+	.byte	DE_,BO_,N_,SU_,KO_,bou_,PU_,wo_,spc_,tu_,ka_,ttu_,ta_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	to_,u_,me_,i_,ni_,spc_,na_,ttu_,te_,i_,ta_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,su_,ga_,ta_,ga_,spc_,ma_,ru_,wa_,ka_,ri_,da_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	o_,do_,ro_,i_,te_,spc_,o_,so_,i_,ka_,ka_,ttu_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●レベル２９のカクレオンと戦闘になる
+// ●戦闘終了後、カクレオンがいた場所は通行可能になる
+
+
+// ●ヒワマキ寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r120
+msg_kanban_01_p01_field_r120:
+	.byte	ko_,ko_,ha_,spc_,n1_,n2_,n0_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,HI_,WA_,MA_,KI_,SI_,TE_,II_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●121番道路寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r120
+msg_kanban_02_p01_field_r120:
+	.byte	CTRL_,C_EXFONT_,ArrowR__,spc_,n1_,n2_,n1_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,n1_,n2_,n0_,ba_,n_,spc_,do_,u_,ro_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

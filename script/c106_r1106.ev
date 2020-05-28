@@ -1,0 +1,304 @@
+//====================================================================
+//							c106_r1106
+//							ミナモデパート屋上
+//
+//							LOCALWORK0使用
+//							LOCALWORK1使用
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c106_r1106_event_data
+FLAG_CHANGE_LABEL	flag_change_c106_r1106
+EVENT_DATA_END
+
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c106_r1106:
+	//掘り出しものが開催しているか
+	_CM_EVENT_START_CHK	CM_FIND_ITEM_TYPE
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,ev_find_01_p01_c106_r1106
+	_IFVAL_CALL		ANSWORK,EQ,FALSE,ev_find_01_p02_c106_r1106
+	_END
+	
+//掘り出しものが開催している
+ev_find_01_p01_c106_r1106:
+	_FLAG_RESET		FV_HORIDASI_01_C106_R1106
+	_RET
+
+//掘り出しものが開催していない
+ev_find_01_p02_c106_r1106:
+	_FLAG_SET		FV_HORIDASI_01_C106_R1106
+	_RET
+
+
+//--------------------------------------------------------------------
+//						スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ほりだしもの屋							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_horidasi_01_p01_c106_r1106
+	_TALK_OBJ_START
+
+	_TALKMSG		msg_shop_p01
+	_TALK_WAIT
+
+	_GOODS_SHOP_START	c106_r1106_menu_01
+
+	//ショップメニュー
+	_SHOP_MENU_START	c106_r1106_menu_01
+	_SHOP_MENU		GOODS_DORODANGO		
+	_SHOP_MENU		GOODS_TATENOSAKU		
+	_SHOP_MENU		GOODS_YOKONOSAKU		
+	_SHOP_MENU		GOODS_TAIYA		
+	_SHOP_MENU		GOODS_YABURERUDOA	
+	_SHOP_MENU		GOODS_ZYOUBUNAITA	
+	_SHOP_MENU		GOODS_SUNANOOKIMONO	
+	_SHOP_MENU		GOODS_OOKINADAI
+	_SHOP_MENU		GOODS_SUBERIDAI
+	_SHOP_MENU		GOODS_TEREBI
+	_SHOP_MENU		GOODS_MARUITEREBI
+	_SHOP_MENU		GOODS_KAWAIITEREBI
+	_SHOP_MENU		GOODS_HOERUKODOORU
+	_SHOP_MENU		GOODS_SAIDONDOORU
+	_SHOP_MENU_END
+
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							サラリーウーマン						*/
+/********************************************************************/
+SCRIPT_LABEL	ev_workerm1_01_p01_c106_r1106
+	_TALK_OBJ_START
+
+	_CM_EVENT_START_CHK	CM_FIND_ITEM_TYPE
+	_IFVAL_CALL		ANSWORK,EQ,TRUE,ev_workerm1_01_p02_c106_r1106
+
+	_TALK_KEYWAIT	msg_workerm1_01_p01_c106_r1106
+	_TALK_OBJ_END
+	_END
+
+//掘り出し物市開催中
+ev_workerm1_01_p02_c106_r1106:
+	_TALK_KEYWAIT	msg_workerm1_01_p02_c106_r1106
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							トレーナー男							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_trainerm1_01_p01_c106_r1106
+	_EASY_OBJ_MSG	msg_trainerm1_01_p01_c106_r1106
+	_END
+
+
+/********************************************************************/
+/*							自販機									*/
+/*																	*/
+/*							LOCALWORK0使用							*/
+/*							購入した金額							*/
+/*																	*/
+/*							LOCALWORK1使用							*/
+/*							0:おいしいみず							*/
+/*							1:サイコソーダ							*/
+/*							2:ミックスオレ							*/
+/********************************************************************/
+#define PRICE_OISIIMIZU			200				//おいしいみずの値段
+#define PRICE_SAIKOSOODA		300				//サイコソーダの値段
+#define PRICE_MIKKUSUORE		350				//ミックスオレの値段
+
+#define ATARI_RND				64				//あたりの乱数（１／６４）
+
+#define NO_OISIIMIZU			0				//おいしいみず
+#define NO_SAIKOSOODA			1				//サイコソーダ
+#define NO_MIKKUSUORE			2				//ミックスオレ
+
+#define JIHANKI_GOLD_WIN_POS_X	0				//自販機用お金表示ウインドウ左上Ｘ
+#define JIHANKI_GOLD_WIN_POS_Y	0				//自販機用お金表示ウインドウ左上Ｙ
+
+#define JIHANKI_ITEM_WIN_POS_X	16				//アイテム選択ウインドウ左上Ｘ
+#define JIHANKI_ITEM_WIN_POS_Y	0				//アイテム選択ウインドウ左上Ｙ
+
+#define NO_TEMOTI_GOLD			0				//手持ち金表示(※0以外は_GODL_WIN_WRITE/_GOLD_WRITE自体が未対応)
+
+
+SCRIPT_LABEL	ev_machine_01_p01_c106_r1106
+	_TALK_START
+	//”じどう　はんばいきがある”
+	_TALKMSG		msg_machine_01_p01_c106_r1106
+	_TALK_WAIT
+
+	_GOLD_WIN_WRITE	JIHANKI_GOLD_WIN_POS_X,JIHANKI_GOLD_WIN_POS_Y,NO_TEMOTI_GOLD		//手持ち
+
+	//商品リスト
+	_JUMP			ev_machine_02_p01_c106_r1106
+	_END
+
+//繰り返し購入のため、１と２に分割
+ev_machine_02_p01_c106_r1106:
+	_SELECT_WINDOW	JIHANKI_ITEM_WIN_POS_X,JIHANKI_ITEM_WIN_POS_Y,VENDING_MACHINE_MENU
+
+	//種類セット
+	_LDWK			LOCALWORK1,ANSWORK
+
+	_SWITCH			LOCALWORK1
+	_CASEJUMP		NO_OISIIMIZU,case0_vm_01_c106_r1106
+	_CASEJUMP		NO_SAIKOSOODA,case1_vm_01_c106_r1106
+	_CASEJUMP		NO_MIKKUSUORE,case2_vm_01_c106_r1106
+
+	//やめる選択(+B cancel)
+	_TALK_KEYWAIT	msg_machine_01_p04_c106_r1106
+	_JUMP			common_end_c106_r1106
+	_END
+
+//おいしいみず
+case0_vm_01_c106_r1106:
+	//アイテムナンバーセット
+	_LDVAL			LOCALWORK0,ITEM_OISIIMIZU
+	_JUMP			common_vm_01_c106_r1106
+	_END
+
+//サイコソーダ
+case1_vm_01_c106_r1106:
+	//アイテムナンバーセット
+	_LDVAL			LOCALWORK0,ITEM_SAIKOSOODA
+	_JUMP			common_vm_01_c106_r1106
+	_END
+
+//ミックスオレ
+case2_vm_01_c106_r1106:
+	//アイテムナンバーセット
+	_LDVAL			LOCALWORK0,ITEM_MIKKUSUORE
+	_JUMP			common_vm_01_c106_r1106
+	_END
+
+
+//所持金チェック
+comp_gold_case_0_c106_r1106:
+	_COMP_GOLD	PRICE_OISIIMIZU
+	_RET
+
+comp_gold_case_1_c106_r1106:
+	_COMP_GOLD	PRICE_SAIKOSOODA
+	_RET
+
+comp_gold_case_2_c106_r1106:
+	_COMP_GOLD	PRICE_MIKKUSUORE
+	_RET
+
+//お金を減らす
+sub_gold_case_0_c106_r1106:
+	_SUB_GOLD	PRICE_OISIIMIZU
+	_RET
+
+sub_gold_case_1_c106_r1106:
+	_SUB_GOLD	PRICE_SAIKOSOODA
+	_RET
+
+sub_gold_case_2_c106_r1106:
+	_SUB_GOLD	PRICE_MIKKUSUORE
+	_RET
+
+//購入時の統一処理
+common_vm_01_c106_r1106:
+	_IFVAL_CALL		LOCALWORK1,EQ,NO_OISIIMIZU,comp_gold_case_0_c106_r1106
+	_IFVAL_CALL		LOCALWORK1,EQ,NO_SAIKOSOODA,comp_gold_case_1_c106_r1106
+	_IFVAL_CALL		LOCALWORK1,EQ,NO_MIKKUSUORE,comp_gold_case_2_c106_r1106
+
+	//お金が足りない?
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_machine_01_p03_c106_r1106
+
+	//アイテムが取れるかチェック
+	_ADD_ITEM_CHK	LOCALWORK0,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_fail_item_c106_r1106
+
+	//お金を減らす（売買成立）
+	_IFVAL_CALL		LOCALWORK1,EQ,NO_OISIIMIZU,sub_gold_case_0_c106_r1106
+	_IFVAL_CALL		LOCALWORK1,EQ,NO_SAIKOSOODA,sub_gold_case_1_c106_r1106
+	_IFVAL_CALL		LOCALWORK1,EQ,NO_MIKKUSUORE,sub_gold_case_2_c106_r1106
+	_GOLD_WRITE		JIHANKI_GOLD_WIN_POS_X,JIHANKI_GOLD_WIN_POS_Y,NO_TEMOTI_GOLD		//お金表示更新
+	_GET_ITEMNAME	0,LOCALWORK0
+
+	_SE				SE_JIHANKI
+
+	//xxxxが出てきた。
+	_TALK_KEYWAIT	msg_machine_01_p02_c106_r1106
+	_ADD_ITEM		LOCALWORK0,1
+	_GET_ITEMNAME	1,LOCALWORK0
+	_SET_BUF		2,DOUGU
+	_TALK_KEYWAIT	msg_itemget_p05
+
+	//ハズレなら通常処理
+	_GET_RND		ATARI_RND
+	_IFVAL_JUMP		ANSWORK,NE,0,ev_machine_01_p02_c106_r1106
+
+	//アイテムが取れるかチェック
+	_ADD_ITEM_CHK	LOCALWORK0,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_fail_item_c106_r1106
+
+	_SE				SE_JIHANKI
+
+	//追加可能(当たりメッセージ）
+	_TALK_KEYWAIT	msg_machine_01_p05_c106_r1106
+	_ADD_ITEM		LOCALWORK0,1
+	_GET_ITEMNAME	1,LOCALWORK0
+	_SET_BUF		2,DOUGU
+	_TALK_KEYWAIT	msg_itemget_p05
+
+	//ハズレなら通常処理
+	_GET_RND		ATARI_RND
+	_IFVAL_JUMP		ANSWORK,NE,0,ev_machine_01_p02_c106_r1106
+
+	//アイテムが取れるかチェック
+	_ADD_ITEM_CHK	LOCALWORK0,1
+	_IFVAL_JUMP		ANSWORK,EQ,FALSE,ev_fail_item_c106_r1106
+
+	_SE				SE_JIHANKI
+
+	//追加可能(当たりメッセージ）
+	_TALK_KEYWAIT	msg_machine_01_p05_c106_r1106
+	_ADD_ITEM		LOCALWORK0,1
+	_GET_ITEMNAME	1,LOCALWORK0
+	_SET_BUF		2,DOUGU
+
+	_TALK_KEYWAIT	msg_itemget_p05
+	_JUMP			ev_machine_01_p02_c106_r1106
+	_END
+
+//もう一度買う画面へ
+ev_machine_01_p02_c106_r1106:
+	//”じどう　はんばいきがある”
+	_TALKMSG		msg_machine_01_p01_c106_r1106
+	_TALK_WAIT
+	_JUMP			ev_machine_02_p01_c106_r1106
+	_END
+
+//お金が足りない
+ev_machine_01_p03_c106_r1106:
+	_TALK_KEYWAIT	msg_machine_01_p03_c106_r1106
+	_JUMP			common_end_c106_r1106
+	_END
+
+//失敗メッセージ
+ev_fail_item_c106_r1106:
+	_TALK_KEYWAIT	msg_itemget_p03
+	_JUMP			common_end_c106_r1106
+	_END
+
+//共通終了処理
+common_end_c106_r1106:
+	_GOLD_WIN_DEL	JIHANKI_GOLD_WIN_POS_X,JIHANKI_GOLD_WIN_POS_Y
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

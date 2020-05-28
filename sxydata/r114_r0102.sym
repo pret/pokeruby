@@ -1,0 +1,8 @@
+//MapEditNH Ver.3.55 *.evt -> *.sym Convert.
+
+//OBJ ID = 1
+#define FREAK1_01_R114_R0102	1
+
+//Exit ID = 2
+#define R114_R0102_DOOR01	0
+#define R114_R0102_DOOR02	1

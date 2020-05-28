@@ -1,0 +1,60 @@
+// ●おくりび山　内部２Ｆ
+
+
+// ●少女４
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_girl4_01_p01_cave_d0802
+msg_girl4_01_p01_cave_d0802:
+	.byte	ka_,wa_,i_,ka_,ttu_,ta_,spc_,E_,NE_,KO_,to_,no_,spc_,o_,mo_,i_,de_,tenten_,tenten_
+	.byte	CR_
+	.byte	o_,mo_,i_,da_,su_,da_,ke_,de_,spc_,na_,mi_,da_,ga_,spc_,a_,hu_,re_,ru_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_cave_d0802
+msg_middlem2_01_p01_cave_d0802:
+	.byte	A_,I_,TA_,TA_,TA_,tenten_,tenten_,spc_,yu_,ka_,no_,spc_,so_,ko_,ka_,si_,ko_,ni_
+	.byte	CR_
+	.byte	a_,na_,ga_,spc_,a_,i_,te_,i_,ru_,no_,ni_,spc_,ki_,du_,ka_,na_,i_,de_
+	.byte	SCROLL_WAIT_
+	.byte	o_,zi_,sa_,n_,spc_,u_,e_,ka_,ra_,spc_,o_,ti_,te_,si_,ma_,ttu_,ta_,yo_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ▼d0802----------------------------------
+// ●かいじゅうマニア０３：戦闘前メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_monsterm_03_01
+msg_monsterm_03_01:
+	.byte	o_,ma_,e_,mo_,spc_,PO_,KE_,MO_,N_,spc_,sa_,ga_,si_,ni_,spc_,ki_,ta_,no_,ka_,hate_
+	.byte	CR_
+	.byte	a_,to_,ka_,ra_,spc_,ki_,ta_,spc_,ku_,se_,ni_,spc_,na_,ma_,i_,ki_,da_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいじゅうマニア０３：敗北メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_monsterm_03_02
+msg_monsterm_03_02:
+	.byte	hu_,e_,e_,e_,e_,e_,e_,ttu_,gyoe_
+	.byte	CR_
+	.byte	yu_,ru_,si_,te_,spc_,ku_,da_,sa_,i_,bou_,ttu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●かいじゅうマニア０３：戦闘後メッセージ
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_monsterm_03_03
+msg_monsterm_03_03:
+	.byte	me_,ttu_,ta_,ni_,spc_,hi_,to_,ga_,spc_,ha_,i_,ra_,na_,i_,spc_,ya_,ma_,spc_,da_,ka_,ra_
+	.byte	CR_
+	.byte	me_,zu_,ra_,si_,i_,spc_,PO_,KE_,MO_,N_,ga_,spc_,i_,ru_,to_,spc_,o_,mo_,ttu_,te_,sa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

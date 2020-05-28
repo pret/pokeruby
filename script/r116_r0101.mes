@@ -1,0 +1,76 @@
+// ●116番道路　トンネル工事団
+
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_01_p01_r116_r0101
+msg_middlem2_01_p01_r116_r0101:
+	.byte	a_,no_,spc_,KA_,NA_,SI_,DA_,TO_,N_,NE_,RU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	ha_,zi_,me_,ha_,spc_,ta_,ku_,sa_,n_,no_,spc_,ni_,n_,ge_,n_,to_
+	.byte	CR_
+	.byte	sa_,i_,si_,n_,no_,spc_,KI_,KA_,I_,de_,spc_,ho_,ri_,su_,su_,n_,de_,i_,ta_
+	.byte	NORMAL_WAIT_
+	.byte	da_,ga_,spc_,so_,no_,ma_,ma_,spc_,ho_,ri_,su_,su_,mu_,to_
+	.byte	CR_
+	.byte	a_,ta_,ri_,no_,spc_,PO_,KE_,MO_,N_,ni_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ku_,e_,i_,ki_,yyo_,u_,wo_,spc_,a_,ta_,e_,ru_,spc_,ra_,si_,ku_,te_,ne_
+	.byte	NORMAL_WAIT_
+	.byte	de_,spc_,o_,re_,ra_,spc_,do_,u_,si_,yo_,u_,mo_,na_,ku_
+	.byte	CR_
+	.byte	ko_,ko_,de_,spc_,bo_,n_,ya_,ri_,to_,spc_,si_,te_,i_,ru_,wa_,ke_,sa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_02_p01_r116_r0101
+msg_middlem2_02_p01_r116_r0101:
+	.byte	do_,u_,si_,te_,mo_,spc_,SI_,DA_,KE_,ni_,spc_,i_,ki_,ta_,i_
+	.byte	CR_
+	.byte	ya_,tu_,ga_,spc_,zi_,bu_,n_,no_,spc_,ti_,ka_,ra_,spc_,da_,ke_,de_
+	.byte	SCROLL_WAIT_
+	.byte	TO_,N_,NE_,RU_,wo_,spc_,ho_,ttu_,te_,i_,ru_,yo_
+	.byte	NORMAL_WAIT_
+	.byte	ni_,n_,ge_,n_,no_,spc_,ti_,ka_,ra_,de_,spc_,su_,ko_,si_,zu_,tu_,spc_,ho_,re_,ba_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,o_,do_,ro_,ka_,se_,na_,ku_,te_,spc_,su_,mu_,si_
+	.byte	SCROLL_WAIT_
+	.byte	ma_,wa_,ri_,no_,spc_,si_,ze_,n_,ni_,mo_,spc_,wa_,ru_,i_,spc_,e_,i_,ki_,yyo_,u_,wo_
+	.byte	SCROLL_WAIT_
+	.byte	a_,ta_,e_,na_,i_,de_,spc_,su_,mu_,ttu_,te_,spc_,i_,ttu_,te_,na_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おじさん２
+// ●トンネル開通前
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_03_p01_r116_r0101
+msg_middlem2_03_p01_r116_r0101:
+	.byte	TO_,N_,NE_,RU_,wo_,spc_,tu_,ka_,wa_,zu_,ni_,spc_,ko_,ko_,ka_,ra_
+	.byte	CR_
+	.byte	SI_,DA_,KE_,ni_,spc_,i_,ku_,na_,ra_,spc_,u_,mi_,wo_,spc_,wa_,ta_,ri_
+	.byte	SCROLL_WAIT_
+	.byte	MU_,RO_,ka_,ra_,spc_,KA_,I_,NA_,spc_,so_,si_,te_
+	.byte	SCROLL_WAIT_
+	.byte	KI_,N_,SE_,TU_,wo_,spc_,to_,o_,ttu_,te_,spc_,i_,ku_,si_,ka_,spc_,na_,i_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●トンネル開通後
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlem2_03_p02_r116_r0101
+msg_middlem2_03_p02_r116_r0101:
+	.byte	na_,n_,de_,mo_,spc_,SI_,DA_,KE_,spc_,ma_,de_,no_
+	.byte	CR_
+	.byte	TO_,N_,NE_,RU_,ga_,spc_,tu_,u_,zi_,ta_,spc_,ra_,si_,i_,zo_,gyoe_
+	.byte	NORMAL_WAIT_
+	.byte	ne_,ga_,i_,spc_,tu_,du_,ke_,re_,ba_
+	.byte	CR_
+	.byte	i_,tu_,ka_,ha_,spc_,ka_,na_,u_,spc_,ttu_,te_,spc_,ko_,to_,na_,n_,da_,na_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

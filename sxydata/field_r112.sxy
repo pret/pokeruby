@@ -1,0 +1,318 @@
+//MapEditNH Ver.3.55 *.evt -> *.sxy Convert.
+#define OBJNUM_FIELD_R112	12
+#define EXITNUM_FIELD_R112	6
+#define POSNUM_FIELD_R112	0
+#define BGNUM_FIELD_R112	3
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_evilm1_01_p01_field_r112[];
+extern const u8	ev_mount_01[];
+extern const u8	ev_campb_03[];
+extern const u8	ev_picnicg_03[];
+extern const u8	ev_mount_02[];
+extern const u8	ev_evilm1_02_p01_field_r112[];
+extern const u8	seed_script[];
+extern const u8	seed_script[];
+extern const u8	seed_script[];
+extern const u8	seed_script[];
+extern const u8	ev_hill1_01_p01_field_r112[];
+extern const u8	ev_ball1_11[];
+
+//BG_SCRIPT
+extern const u8	ev_kanban_02_p01_field_r112[];
+extern const u8	ev_kanban_01_p01_field_r112[];
+extern const u8	ev_kanban_03_p01_field_r112[];
+
+const evObjData	OBJ_field_r112[] =
+{
+	{
+		EVILM1_01_FIELD_R112,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001a,		//Xpos
+		0x001e,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_evilm1_01_p01_field_r112,		//Event Lavel
+		FV_AKUA_01_FIELD_R112,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_01,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0018,		//Xpos
+		0x0022,		//Ypos
+		0x03,		//Height
+		MV_H,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0002,		//work area
+		ev_mount_01,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_CAMPB_03,		//OBJ ID
+		BOYSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001d,		//Xpos
+		0x0031,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_campb_03,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_PICNICG_03,		//OBJ ID
+		GIRLSCOUT1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0016,		//Xpos
+		0x002e,		//Ypos
+		0x03,		//Height
+		MV_SPINL,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0003,		//work area
+		ev_picnicg_03,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		TR_MOUNT_02,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0011,		//Xpos
+		0x0028,		//Ypos
+		0x03,		//Height
+		MV_UR,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		OTYPE_TRAINER,		//Event Type
+		0x0004,		//work area
+		ev_mount_02,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		EVILM1_02_FIELD_R112,		//OBJ ID
+		WKOBJCODE2,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x001e,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_evilm1_02_p01_field_r112,		//Event Lavel
+		FV_AKUA_01_FIELD_R112,		//Event Flag
+	},
+
+	{
+		SEED_04_FIELD_R112,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001b,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0018,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_03_FIELD_R112,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001c,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0017,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_02_FIELD_R112,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001d,		//Xpos
+		0x0006,		//Ypos
+		0x00,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0016,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		SEED_01_FIELD_R112,		//OBJ ID
+		SEED,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x001e,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_SEED,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0015,		//work area
+		seed_script,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		HILL1_01_FIELD_R112,		//OBJ ID
+		HILL1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0032,		//Ypos
+		0x03,		//Height
+		MV_RTD,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x3,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_hill1_01_p01_field_r112,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		BALL1_11,		//OBJ ID
+		CAPSULE1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x000e,		//Xpos
+		0x002b,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x0,		//Move Limit X
+		0x0,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ball1_11,		//Event Lavel
+		FV_BALL1_11,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_field_r112[] =
+{
+	{
+		0x001c,		//Xpos
+		0x001b,		//Ypos
+		0x00,		//Height
+		R112_R0101_MAT01,		//Door ID
+		R112_R0101,			//Map ID
+		R112,				//Field ID
+	},
+
+	{
+		0x001d,		//Xpos
+		0x001b,		//Ypos
+		0x00,		//Height
+		R112_R0101_MAT02,		//Door ID
+		R112_R0101,			//Map ID
+		R112,				//Field ID
+	},
+
+	{
+		0x0006,		//Xpos
+		0x002e,		//Ypos
+		0x03,		//Height
+		CAVE_D0702_DOOR01,		//Door ID
+		CAVE_D0702,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0007,		//Xpos
+		0x002e,		//Ypos
+		0x03,		//Height
+		CAVE_D0702_DOOR02,		//Door ID
+		CAVE_D0702,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x000b,		//Xpos
+		0x0024,		//Ypos
+		0x00,		//Height
+		CAVE_D0703_DOOR01,		//Door ID
+		CAVE_D0703,			//Map ID
+		CAVE,				//Field ID
+	},
+
+	{
+		0x0016,		//Xpos
+		0x000a,		//Ypos
+		0x00,		//Height
+		CAVE_D0703_DOOR02,		//Door ID
+		CAVE_D0703,			//Map ID
+		CAVE,				//Field ID
+	},
+
+};
+
+const SXY_BG	BG_field_r112[] =
+{
+	{
+		0x0013,		//Xpos
+		0x002c,		//Ypos
+		0x03,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_02_p01_field_r112,		//Script
+	},
+
+	{
+		0x0016,		//Xpos
+		0x0025,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_01_p01_field_r112,		//Script
+	},
+
+	{
+		0x0004,		//Xpos
+		0x0031,		//Ypos
+		0x00,		//Height
+		BG_ALL_SITE,		//Event Type
+		ev_kanban_03_p01_field_r112,		//Script
+	},
+
+};
+
+const SXY_DATA	field_r112_sxy_data =
+{
+OBJNUM_FIELD_R112,			// field obj max
+EXITNUM_FIELD_R112,		// exit max
+POSNUM_FIELD_R112,			// pos event max
+BGNUM_FIELD_R112,			// bg event max
+OBJ_field_r112,			// field obj data
+EXIT_field_r112,			// exit data
+NULL,			// pos event data
+BG_field_r112,				// bg event data
+};

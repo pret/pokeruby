@@ -1,0 +1,409 @@
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●１）受け付け開始
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ※対戦の場合
+	.GLOBAL	msg_reception_battle_p01
+msg_reception_battle_p01:
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_
+	.byte	CR_
+	.byte	KO_,RO_,SI_,A_,MU_,spc_,ni_,spc_,yo_,u_,ko_,so_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ti_,ra_,de_,ha_,spc_,to_,mo_,da_,ti_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ta_,i_,se_,n_,ga_,spc_,ta_,no_,si_,me_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ta_,i_,se_,n_,wo_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ※交換の場合
+	.GLOBAL	msg_reception_trade_p01
+msg_reception_trade_p01:
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_
+	.byte	CR_
+	.byte	TO_,RE_,bou_,DO_,SE_,N_,TA_,bou_,spc_,ni_,spc_,yo_,u_,ko_,so_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ti_,ra_,de_,ha_,spc_,to_,mo_,da_,ti_,to_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,no_,spc_,ko_,u_,ka_,n_,ga_,spc_,ta_,no_,si_,me_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,u_,ka_,n_,wo_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ※レコードコーナーの場合
+	.GLOBAL	msg_reception_record_p01
+msg_reception_record_p01:
+	.byte	PO_,KE_,MO_,N_,spc_,tu_,u_,si_,n_,spc_,KU_,RA_,BU_
+	.byte	CR_
+	.byte	RE_,KO_,bou_,DO_,spc_,KO_,bou_,NA_,bou_,spc_,he_,spc_,yo_,u_,ko_,so_
+	.byte	NORMAL_WAIT_
+	.byte	ko_,ti_,ra_,de_,ha_,spc_,TO_,RE_,bou_,NA_,bou_,to_,si_,te_,no_,spc_,RE_,KO_,bou_,DO_,wo_
+	.byte	CR_
+	.byte	to_,mo_,da_,ti_,to_,spc_,ma_,ze_,ru_,spc_,ko_,to_,ga_,spc_,de_,ki_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	to_,mo_,da_,ti_,to_,spc_,RE_,KO_,bou_,DO_,wo_,spc_,ma_,ze_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ●（はい→２／いいえ→６）
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　対戦についての説明　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_battle_p03
+msg_reception_battle_p03:
+	.byte	tu_,u_,si_,n_,spc_,ta_,i_,se_,n_,ni_,ha_,spc_
+	.byte	CR_
+	.byte	ta_,i_,se_,n_,no_,spc_,MO_,bou_,DO_,ga_,spc_,n3_,tu_,a_,ri_,ma_,su_
+	.byte	NORMAL_WAIT_
+	.byte	SI_,N_,GU_,RU_,BA_,TO_,RU_,ha_,spc_,se_,n_,to_,u_,ni_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	n1_,hi_,ki_,zu_,tu_,de_,te_,spc_,hu_,ta_,ri_,de_,spc_,ta_,i_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	DA_,BU_,RU_,BA_,TO_,RU_,ha_,spc_,se_,n_,to_,u_,ni_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	n2_,hi_,ki_,zu_,tu_,de_,te_,spc_,hu_,ta_,ri_,de_,spc_,ta_,i_,se_,n_
+	.byte	NORMAL_WAIT_
+	.byte	MA_,RU_,TI_,BA_,TO_,RU_,ha_,spc_,se_,n_,to_,u_,ni_,spc_,PO_,KE_,MO_,N_,ga_
+	.byte	CR_
+	.byte	n2_,hi_,ki_,zu_,tu_,de_,te_,spc_,n4_,ni_,n_,de_,spc_,ta_,i_,se_,n_,si_,ma_,su_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_reception_battle_p05
+msg_reception_battle_p05:
+	.byte	ta_,i_,se_,n_,wo_,spc_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●（２にんたいせん／４にんたいせん）の選択
+// ●（対戦のみ。４人対戦はイベントをこなさないと
+// ●　出ない可能性あり）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_battle_p02
+msg_reception_battle_p02:
+	.byte	do_,ti_,ra_,no_,spc_,ta_,i_,se_,n_,wo_,si_,ma_,su_,ka_,hate_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　ポケモンがたりない場合　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_battle_p06
+msg_reception_battle_p06:
+	.byte	DA_,BU_,RU_,BA_,TO_,RU_,de_,ha_,spc_,n2_,hi_,ki_,spc_,i_,zi_,yyo_,u_,no_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,ga_,spc_,hi_,tu_,yo_,u_,de_,su_
+	.byte	EOM_
+
+
+
+	.GLOBAL	msg_reception_trade_warning
+msg_reception_trade_warning:
+	.byte	ko_,u_,ka_,n_,de_,ha_,spc_,n2_,hi_,ki_,spc_,i_,zi_,yyo_,u_,no_
+	.byte	CR_
+	.byte	te_,mo_,ti_,ga_,spc_,hi_,tu_,yo_,u_,de_,su_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_reception_trade_warning2
+msg_reception_trade_warning2:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,mi_,wo_,mo_,ttu_,te_,i_,ru_,spc_,PO_,KE_,MO_,N_,ha_
+	.byte	CR_
+	.byte	ko_,u_,ka_,n_,ha_,spc_,de_,ki_,ma_,se_,n_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●２）通信待ち
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●接続中、まだ親子確定していない
+	.GLOBAL	msg_reception_wait_p01
+msg_reception_wait_p01:
+	.byte	si_,yyo_,u_,si_,yyo_,u_,spc_,o_,ma_,ti_,spc_,ku_,da_,sa_,i_
+	.byte	CR_
+	.byte	tenten_,tenten_,B__,BO_,TA_,N_,de_,spc_,KI_,YYA_,N_,SE_,RU_
+	.byte	EOM_
+
+
+// ●親の待ちメッセージ
+	.GLOBAL	msg_reception_wait_p02
+msg_reception_wait_p02:
+	.byte	ni_,n_,zu_,u_,ga_,spc_,so_,ro_,ttu_,ta_,ra_,spc_,A__,BO_,TA_,N_,de_,spc_,su_,su_,mu_
+	.byte	CR_
+	.byte	tenten_,tenten_,B__,BO_,TA_,N_,de_,spc_,KI_,YYA_,N_,SE_,RU_
+	.byte	EOM_
+
+
+// ●親の確認メッセージ
+	.GLOBAL	msg_reception_wait_p04
+msg_reception_wait_p04:
+	.byte	I_MSG_,STR_TEMP_BUF0,ni_,n_,de_,spc_,tu_,u_,si_,n_,wo_,spc_,ha_,zi_,me_,ma_,su_
+	.byte	CR_
+	.byte	A__,BO_,TA_,N_,de_,spc_,ke_,ttu_,te_,i_,spc_,B__,BO_,TA_,N_,de_,spc_,mo_,do_,ru_
+	.byte	EOM_
+
+
+
+// ●子の待ちメッセージ
+	.GLOBAL	msg_reception_wait_p03
+msg_reception_wait_p03:
+	.byte	tu_,u_,si_,n_,ka_,i_,si_,wo_,spc_,ma_,ttu_,te_,i_,ma_,su_
+	.byte	CR_
+	.byte	tenten_,tenten_,B__,BO_,TA_,N_,de_,spc_,KI_,YYA_,N_,SE_,RU_
+	.byte	EOM_
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●３）セーブ確認
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_save
+msg_reception_save:
+	.byte	tu_,u_,si_,n_,wo_,spc_,ha_,zi_,me_,ru_,ma_,e_,ni_
+	.byte	CR_
+	.byte	RE_,PO_,bou_,TO_,wo_,spc_,ka_,ki_,ma_,su_,ga_,spc_,yo_,ro_,si_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●４）部屋に入る場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ※セーブ処理（通常のセーブ処理）
+
+	.GLOBAL	msg_reception_common_p03
+msg_reception_common_p03:
+	.byte	so_,re_,de_,ha_,spc_,he_,ya_,he_,spc_,do_,u_,zo_
+	.byte	EOM_
+
+
+// ※受付嬢が後ろ、右に１キャラずつ動いて、
+// 　主人公は正面奥の扉へ
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●５）通信失敗の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_common_p04
+msg_reception_common_p04:
+	.byte	o_,to_,mo_,da_,ti_,no_,spc_,zi_,yyu_,n_,bi_,ga_
+	.byte	CR_
+	.byte	de_,ki_,te_,spc_,i_,na_,i_,spc_,yo_,u_,de_,su_
+	.byte	NORMAL_WAIT_
+	.byte	zi_,yyu_,n_,bi_,ga_,spc_,de_,ki_,ma_,si_,ta_,ra_
+	.byte	CR_
+	.byte	ma_,ta_,spc_,o_,ko_,si_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ※終了
+
+	.GLOBAL	msg_reception_error
+msg_reception_error:
+	.byte	tu_,u_,si_,n_,E_,RA_,bou_,spc_,de_,su_
+	.byte	CR_
+	.byte	RI_,SE_,TTU_,TO_,si_,te_,spc_,ya_,ri_,na_,o_,si_,te_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●５）通信失敗の場合
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_common_p05
+msg_reception_common_p05:
+	.byte	o_,ta_,ga_,i_,no_,spc_,se_,n_,ta_,ku_,ga_,spc_,ti_,ga_,ttu_,te_,i_,ru_,yo_,u_,de_,su_
+	.byte	EOM_
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●６）通信しない場合　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_common_p06
+msg_reception_common_p06:
+	.byte	so_,re_,de_,ha_,spc_,ma_,ta_,spc_,o_,ko_,si_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ※終了
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●７）人数が間違っている場合　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_reception_common_p07
+msg_reception_common_p07:
+	.byte	sa_,n_,ka_,si_,te_,i_,ru_,spc_,ni_,n_,zu_,u_,ga_
+	.byte	CR_
+	.byte	ta_,da_,si_,ku_,spc_,a_,ri_,ma_,se_,n_
+	.byte	EOM_
+
+
+// ●シングルバトルで人数がおかしい場合
+	.GLOBAL	msg_reception_battle_uncorrect_single
+msg_reception_battle_uncorrect_single:
+	.byte	SI_,N_,GU_,RU_,BA_,TO_,RU_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,ni_,n_,de_
+	.byte	CR_
+	.byte	a_,so_,bu_,ko_,to_,ha_,spc_,de_,ki_,ma_,se_,n_,gyoe_
+	.byte	EOM_
+
+
+// ●ダブルバトルで人数がおかしい場合
+	.GLOBAL	msg_reception_battle_uncorrect_double
+msg_reception_battle_uncorrect_double:
+	.byte	DA_,BU_,RU_,BA_,TO_,RU_,ha_,spc_,I_MSG_,STR_TEMP_BUF0,ni_,n_,de_,ha_
+	.byte	CR_
+	.byte	a_,so_,bu_,ko_,to_,ha_,spc_,de_,ki_,ma_,se_,n_,gyoe_
+	.byte	EOM_
+
+
+// ●マルチバトルで人数がおかしい場合
+	.GLOBAL	msg_reception_battle_uncorrect_multi
+msg_reception_battle_uncorrect_multi:
+	.byte	sa_,n_,ka_,spc_,ni_,n_,zu_,u_,ga_,spc_,n4_,ni_,n_,spc_,i_,na_,i_,to_
+	.byte	CR_
+	.byte	ta_,i_,se_,n_,spc_,su_,ru_,ko_,to_,ga_,spc_,de_,ki_,ma_,se_,n_,gyoe_
+	.byte	EOM_
+
+
+// ●人数がおかしい場合、最後の共通メッセージ
+	.GLOBAL	msg_reception_battle_uncorrect
+msg_reception_battle_uncorrect:
+	.byte	mo_,u_,i_,ti_,do_,spc_,ni_,n_,zu_,u_,wo_,spc_,ta_,si_,ka_,me_,te_
+	.byte	CR_
+	.byte	sa_,i_,si_,yyo_,ka_,ra_,spc_,ya_,ri_,na_,o_,si_,te_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　通信部屋から出ようとしたとき　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_connect_end_check
+msg_connect_end_check:
+	.byte	he_,ya_,ka_,ra_,de_,ru_,to_,spc_,tu_,u_,si_,n_,wo_,spc_,si_,yyu_,u_,ri_,yyo_,u_
+	.byte	CR_
+	.byte	si_,ma_,su_,ga_,spc_,yo_,ro_,si_,i_,de_,su_,ka_,hate_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_connect_end
+msg_connect_end:
+	.byte	tu_,u_,si_,n_,wo_,spc_,si_,yyu_,u_,ri_,yyo_,u_,si_,te_,spc_,he_,ya_,no_,spc_,so_,to_,he_
+	.byte	CR_
+	.byte	go_,a_,n_,na_,i_,si_,ma_,su_,gyoe_,spc_,si_,ba_,ra_,ku_,spc_,o_,ma_,ti_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　通信部屋で他のプレイヤーに話しかけたとき　
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●なにかイベント中の場合
+	.GLOBAL	msg_connect_talk_busy_player
+msg_connect_talk_busy_player:
+	.byte	to_,ri_,ko_,mi_,ti_,yyu_,u_,no_,spc_,yo_,u_,da_,tenten_
+	.byte	EOM_
+
+
+// ●話しかけ成功、カードを見せてもらう
+	.GLOBAL	msg_connect_look_normal_card
+msg_connect_look_normal_card:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,TO_,RE_,bou_,NA_,bou_,KA_,bou_,DO_,wo_
+	.byte	CR_
+	.byte	mi_,se_,te_,mo_,ra_,ttu_,ta_,gyoe_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_connect_look_special_card
+msg_connect_look_special_card:
+	.byte	I_MSG_,STR_TEMP_BUF0,no_,spc_,TO_,RE_,bou_,NA_,bou_,KA_,bou_,DO_,wo_
+	.byte	CR_
+	.byte	mi_,se_,te_,mo_,ra_,ttu_,ta_,gyoe_,spc_,tenten_,I_MSG_,STR_TEMP_BUF1,KA_,bou_,DO_,da_,gyoe_
+	.byte	EOM_
+
+
+// ●プレイヤー以外のＯＢＪ（仮）
+	.GLOBAL	msg_connect_battle_guide
+msg_connect_battle_guide:
+	.byte	si_,yyo_,te_,i_,no_,spc_,i_,ti_,ni_,spc_,tu_,i_,te_
+	.byte	CR_
+	.byte	ta_,i_,se_,n_,wo_,spc_,ha_,zi_,me_,te_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_connect_trade_guide
+msg_connect_trade_guide:
+	.byte	si_,yyo_,te_,i_,no_,spc_,i_,ti_,ni_,spc_,tu_,i_,te_
+	.byte	CR_
+	.byte	ko_,u_,ka_,n_,wo_,spc_,ha_,zi_,me_,te_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_connect_record_guide
+msg_connect_record_guide:
+	.byte	si_,yyo_,te_,i_,no_,spc_,i_,ti_,ni_,spc_,tu_,i_,te_
+	.byte	CR_
+	.byte	o_,ma_,ti_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+	.GLOBAL	msg_connect_record_guide_after
+msg_connect_record_guide_after:
+	.byte	go_,ri_,yo_,u_,spc_,a_,ri_,ga_,to_,u_,spc_,go_,za_,i_,ma_,si_,ta_
+	.byte	EOM_
+
+
+
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　マルチバトルのポケモンを選ぶとき　
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_connect_select_pokemon
+msg_connect_select_pokemon:
+	.byte	de_,ha_,spc_,MA_,RU_,TI_,BA_,TO_,RU_,ni_,spc_,da_,su_,spc_
+	.byte	CR_
+	.byte	PO_,KE_,MO_,N_,wo_,spc_,e_,ra_,n_,de_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　レコードコーナーでものをもらったとき
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_connect_get_item
+msg_connect_get_item:
+	.byte	I_MSG_,STR_TEMP_BUF0,sa_,n_,ka_,ra_
+	.byte	CR_
+	.byte	I_MSG_,STR_TEMP_BUF1,ga_,spc_,o_,ku_,ra_,re_,te_,ki_,ta_,gyoe_
+	.byte	EOM_
+
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●　通信部屋からでてきたときの受付嬢のせりふ
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ========================================
+// １）・対戦部屋・交換部屋
+// から主人公が出てくる
+// ========================================
+// ２）立ち止まって受け付けの方を向く（左向きになる）
+// 　　同時に、受付嬢、右を向く
+// ========================================
+// ３）受付嬢のセリフ
+
+	.GLOBAL	msg_reception_exit_start
+msg_reception_exit_start:
+	.byte	TO_,RE_,bou_,NA_,bou_,KA_,bou_,DO_,no_
+	.byte	CR_
+	.byte	ki_,ro_,ku_,wo_,spc_,ka_,ki_,ka_,e_,ma_,su_,gyoe_
+	.byte	EOM_
+
+// ・ＳＥ２１
+	.GLOBAL	msg_reception_exit_end
+msg_reception_exit_end:
+	.byte	de_,ha_,spc_,ma_,ta_,spc_,do_,u_,zo_,gyoe_
+	.byte	EOM_
+
+// ========================================
+// ４）主人公＆受付嬢前を向き、主人公はカウンターの外に出る
+// ========================================

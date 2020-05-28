@@ -1,0 +1,77 @@
+//====================================================================
+//							field_r106
+//						フィールド・ロード106
+//====================================================================
+
+//--------------------------------------------------------------------
+//					 マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	field_r106_event_data
+EVENT_DATA_END		/*特別なイベントなし*/
+
+
+//--------------------------------------------------------------------
+//					      スクリプト本体
+//--------------------------------------------------------------------
+/********************************************************************/
+/*						お得な掲示板								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_kanban_01_p01_field_r106
+	_EASY_MSG		msg_kanban_01_p01_field_r106
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_swimmerm_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERM_03
+	_TRAINER_DATA2	msg_swimmerm_03_01
+	_TRAINER_DATA3	msg_swimmerm_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerm_03_03
+	_END
+
+SCRIPT_LABEL	ev_swimmerw_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	SWIMMERW_03
+	_TRAINER_DATA2	msg_swimmerw_03_01
+	_TRAINER_DATA3	msg_swimmerw_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_swimmerw_03_03
+	_END
+
+SCRIPT_LABEL	ev_fishing_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_04
+	_TRAINER_DATA2	msg_fishing_04_01
+	_TRAINER_DATA3	msg_fishing_04_02
+	_TRAINER_DATA_END
+	/* */
+	_FUNC_CALL		ANSWORK,TR_REVENGER_CHK
+	_IFVAL_JUMP		ANSWORK,EQ,TRUE,_revenge_fishing_04
+	_TRAINER_EASY_MSG	msg_fishing_04_03
+	_END
+
+_revenge_fishing_04:
+	_REVENGE_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_04
+	_TRAINER_DATA2	msg_fishing_04_04
+	_TRAINER_DATA3	msg_fishing_04_05
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_04_06
+	_END
+
+SCRIPT_LABEL	ev_fishing_05
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	FISHING_05
+	_TRAINER_DATA2	msg_fishing_05_01
+	_TRAINER_DATA3	msg_fishing_05_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_fishing_05_03
+	_END

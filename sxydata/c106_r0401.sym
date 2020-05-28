@@ -1,0 +1,15 @@
+//Sxy Data Converter *.evt -> *.sym Convert.
+
+//OBJ ID = 8
+#define SCHOOLW1_01_FAN	1
+#define YOUNGM1_01_FAN	2
+#define MIDDLEM2_01_FAN	3
+#define OJYOU2_01_FAN	4
+#define BOYA1_01_FAN	5
+#define BOY2_01_FAN	6
+#define WORKERW1_01_FAN	7
+#define OLDWOMAN1_01_FAN	8
+
+//Exit ID = 2
+#define C106_R0401_MAT02	0
+#define C106_R0401_MAT01	1

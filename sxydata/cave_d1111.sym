@@ -1,0 +1,13 @@
+//MapEditNH Ver.3.58 *.evt -> *.sym Convert.
+
+//OBJ ID = 7
+#define POKE1_01_CAVE_D1111	1
+#define AQUABOSS_01_CAVE_D1111	2
+#define MAGMABOSS_01_CAVE_D1111	3
+#define MAGMAM1_01_CAVE_D1111S	4
+#define MAGMAF1_01_CAVE_D1111S	5
+#define BALL1_90	6
+#define POKE1_02_CAVE_D1111	7
+
+//Exit ID = 1
+#define CAVE_D1111_DOOR01	0

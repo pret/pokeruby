@@ -1,0 +1,115 @@
+//====================================================================
+//
+//					イベントスクリプトファイル
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//			     マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c107_r0802_event_data
+FLAG_CHANGE_LABEL	flag_change_c107_r0802
+SP_SCRIPT_LABEL		scene_c107_r0802
+EVENT_DATA_END /* 特別なスクリプトなし */
+
+//--------------------------------------------------------------------
+//						FLAG_CHANGE_LABEL
+//--------------------------------------------------------------------
+flag_change_c107_r0802:
+	_PROGRAM		CARD_E_FOBJ_SET
+	_END
+
+//--------------------------------------------------------------------
+//						SP_SCRIPT_LABEL
+//--------------------------------------------------------------------
+scene_c107_r0802:
+	SP_SCRIPT_DATA	LOCALWORK1,0,ev_scene_card_tr_battle_c107_r0802
+	SP_SCRIPT_END
+
+//カードeトレーナーとバトル
+ev_scene_card_tr_battle_c107_r0802:
+	_TALK_START
+
+	//相手の前に移動する
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0802_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	//簡易会話
+	_PROGRAM		BATTLE_CARD_E_KAIWA_GET
+	_TALK_KEYWAIT	MsgExpandBuffer
+	_TALK_CLOSE
+
+	//戦闘呼び出し
+	_LDVAL			PARAM0,BEF_CARD_E		//イベントバトルタイプ指定
+	_LDVAL			PARAM1,0				//暫定（エンカウントエフェクト指定）
+	_PROGRAM		BATTLE_EVENT_FIGHT
+	_STOP_SCRIPT
+
+	_IFVAL_CALL		ANSWORK,EQ,FIGHT_DRAW,draw_card_tr_c107_r0802
+	_IFVAL_CALL		ANSWORK,EQ,FIGHT_WIN,win_card_tr_c107_r0802
+	_IFVAL_CALL		ANSWORK,EQ,FIGHT_LOSE,lose_card_tr_c107_r0802
+
+	_TALK_CLOSE
+
+	_PROGRAM		PC_KAIFUKU
+
+	//階段下りる
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0802_anime02
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_PROGRAM		TEMOTI_POKE_POP
+	_LDVAL			LOCALWORK1,1
+
+	_MAP_CHANGE		C107,C107_R0801,3,1
+	_STOP_SCRIPT
+
+	_TALK_END
+	_END
+
+//引き分け
+draw_card_tr_c107_r0802:
+	_LDVAL			WK_SCENE_TR_HOUSE,3
+	_TALK_KEYWAIT	msg_hikiwake_01_p01_c107_r0802
+	_RET
+
+//勝った
+win_card_tr_c107_r0802:
+	_LDVAL			WK_SCENE_TR_HOUSE,1
+	_PROGRAM		MSGEXPANDBUF
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_RET
+
+//負けた
+lose_card_tr_c107_r0802:
+	_LDVAL			WK_SCENE_TR_HOUSE,2
+	_PROGRAM		MSGEXPANDBUF
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_RET
+
+//--------------------------------------------------------------------
+//主人公	トレーナーの前まで移動する
+//--------------------------------------------------------------------
+hero_01_c107_r0802_anime01:
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_D_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	AC_WALK_R_1	//
+	.byte	ACMD_END
+
+//--------------------------------------------------------------------
+//主人公	階段下りる
+//--------------------------------------------------------------------
+hero_01_c107_r0802_anime02:
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_L_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WALK_U_1	//
+	.byte	AC_WAIT_8	//
+	.byte	ACMD_END
+
+

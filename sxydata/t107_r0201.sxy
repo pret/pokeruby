@@ -1,0 +1,96 @@
+//MapEditNH Ver.3.58 *.evt -> *.sxy Convert.
+#define OBJNUM_T107_R0201	3
+#define EXITNUM_T107_R0201	2
+#define POSNUM_T107_R0201	0
+#define BGNUM_T107_R0201	0
+
+//OBJ_EVENT_LABEL
+extern const u8	ev_gentlem1_01_p01_t107_r0201[];
+extern const u8	ev_ruriri_01_p01_t107_r0201[];
+extern const u8	ev_ruriri_02_p01_t107_r0201[];
+
+const evObjData	OBJ_t107_r0201[] =
+{
+	{
+		GENTLEM1_01_T107_R0201,		//OBJ ID
+		GENTLEM1,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0003,		//Xpos
+		0x0005,		//Ypos
+		0x03,		//Height
+		MV_DOWN,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_gentlem1_01_p01_t107_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		RURIRI_01_T107_R0201,		//OBJ ID
+		RURIRI,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0008,		//Xpos
+		0x0006,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ruriri_01_p01_t107_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+	{
+		RURIRI_02_T107_R0201,		//OBJ ID
+		RURIRI,		//OBJ Char Code
+		EVOBJ_DMY_PAL,		//OBJ Color Code
+		0x0001,		//Xpos
+		0x0007,		//Ypos
+		0x03,		//Height
+		MV_OFF,		//Obj Mode Type
+		0x1,		//Move Limit X
+		0x1,		//Move Limit Y
+		0,		//Event Type
+		0x0000,		//work area
+		ev_ruriri_02_p01_t107_r0201,		//Event Lavel
+		0,		//Event Flag
+	},
+
+};
+
+const SXY_CONNECT	EXIT_t107_r0201[] =
+{
+	{
+		0x0004,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_T107_DOOR03,		//Door ID
+		FIELD_T107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+	{
+		0x0005,		//Xpos
+		0x0008,		//Ypos
+		0x00,		//Height
+		FIELD_T107_DOOR03,		//Door ID
+		FIELD_T107,			//Map ID
+		FIELD,				//Field ID
+	},
+
+};
+
+const SXY_DATA	t107_r0201_sxy_data =
+{
+OBJNUM_T107_R0201,			// field obj max
+EXITNUM_T107_R0201,		// exit max
+POSNUM_T107_R0201,			// pos event max
+BGNUM_T107_R0201,			// bg event max
+OBJ_t107_r0201,			// field obj data
+EXIT_t107_r0201,			// exit data
+NULL,			// pos event data
+NULL,				// bg event data
+};

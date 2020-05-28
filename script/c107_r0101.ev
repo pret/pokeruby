@@ -1,0 +1,409 @@
+//====================================================================
+//							c107_r0101
+//							トクサネ・ジム
+//====================================================================
+
+//--------------------------------------------------------------------
+//						マップでの特殊イベント指定
+//--------------------------------------------------------------------
+EVENT_DATA_START	c107_r0101_event_data
+BG_CHANGE_LABEL		bg_change_c107_r0101
+EVENT_DATA_END
+
+#define	GYM07_SW_OFF	568
+#define	GYM07_SW_ON		569
+
+#define	GYM07_YA_R		516
+#define	GYM07_YA_D		517
+#define	GYM07_YA_L		524
+#define	GYM07_YA_U		525
+
+//--------------------------------------------------------------------
+//							BG_CHANGE_LABEL
+//--------------------------------------------------------------------
+//セルを元の状態に戻す
+bg_change_c107_r0101:
+	_IF_FLAGON_JUMP		FE_GYM07_SWITCH_01,gym07_switch_01_init
+	_JUMP				gym07_init_chk2
+	_END
+
+gym07_init_chk2:
+	_IF_FLAGON_JUMP		FE_GYM07_SWITCH_02,gym07_switch_02_init
+	_JUMP				gym07_init_chk3
+	_END
+
+gym07_init_chk3:
+	_IF_FLAGON_JUMP		FE_GYM07_SWITCH_03,gym07_switch_03_init
+	_JUMP				gym07_init_chk4
+	_END
+
+gym07_init_chk4:
+	_IF_FLAGON_JUMP		FE_GYM07_SWITCH_04,gym07_switch_04_init
+	_END
+
+//一つ目をセット
+gym07_switch_01_init:
+	_SET_CELL		5,5,GYM07_YA_R,0	//矢印の向きを変える
+	_SET_CELL		2,7,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			gym07_init_chk2
+	_END
+
+//２つ目をセット
+gym07_switch_02_init:
+	_SET_CELL		8,14,GYM07_YA_R,0	//矢印の向きを変える
+	_SET_CELL		8,10,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			gym07_init_chk3
+	_END
+
+//３つ目をセット
+gym07_switch_03_init:
+	_SET_CELL		15,17,GYM07_YA_L,0	//矢印の向きを変える
+	_SET_CELL		17,15,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			gym07_init_chk4
+	_END
+
+//４つ目をセット
+gym07_switch_04_init:
+	_SET_CELL		1,23,GYM07_YA_U,0	//矢印の向きを変える
+	_SET_CELL		5,24,GYM07_SW_ON,1	//スイッチのセルを変える
+	_END
+
+
+//--------------------------------------------------------------------
+//							スクリプト本体
+//--------------------------------------------------------------------
+
+/********************************************************************/
+/*							ジムリーダー							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_gymleader_07_01
+	_LEADER2vs2_DATA_START
+	_TRAINER_DATA1	LEADER_07
+	_TRAINER_DATA2	msg_gymleader_07_01
+	_TRAINER_DATA3	msg_gymleader_07_02
+	_TRAINER_DATA4	msg_gymleader_07_08
+	_TRAINER_DATA5	ev_gymleader_07_end
+	_TRAINER_DATA_END
+	/* */
+
+	//技マシン貰ったか
+	_IF_FLAGOFF_JUMP	FE_WAZAM_01_C107_R0101,gymleader_07_wazam_get
+
+	_TALK_KEYWAIT	msg_gymleader_07_06
+	_TALK_OBJ_END
+	_END
+
+ev_gymleader_07_end:
+	_TALKMSG		msg_gymleader_07_03
+	_TALK_WAIT
+	_CALL			leader_jingle_set
+	_TALK_KEYWAIT	msg_gymleader_07_04
+
+	_FLAG_SET		FT_GYM_07_LEADER
+	_FLAG_SET		SYS_BATCH07_GET			//バッチゲット
+
+	//造船所のハギを出す
+	_FLAG_RESET		FV_HAGI_01_C102_R0101
+
+	//おくりび山のトレーナーを出す
+	_FLAG_RESET		FV_TR_ALL_CAVE_D0803
+
+	//ジム内のトレーナーフラグ全てONにする
+	_LDVAL			TMPWK0,7
+	_CALL			gym_trainer_all_flagon
+
+	//船乗り場のOBJを出す
+	_FLAG_RESET		FV_OBJ_ALL_C102_R0601
+
+	_JUMP			gymleader_07_wazam_get
+	_END
+
+//技マシン貰う
+gymleader_07_wazam_get:
+	_ITEM_EVENT		ITEM_WAZAMASIN04,1	
+	_IF_ZERO_JUMP	ev_fail_item
+
+	_TALK_KEYWAIT	msg_gymleader_07_05
+
+	_FLAG_SET		FE_WAZAM_01_C107_R0101	//技マシン貰った
+	_TALK_OBJ_END
+	_END
+
+
+/********************************************************************/
+/*							スイッチ１								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_switch_01_p01_c107_r0101
+	_TALK_START
+
+	//すでにスイッチ押してあったら元の状態に戻す
+	_IF_FLAGON_JUMP	FE_GYM07_SWITCH_01,chg_sw_gym07_01
+
+	_FLAG_SET		FE_GYM07_SWITCH_01
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		5,5,GYM07_YA_R,0	//矢印の向きを変える
+	_SET_CELL		2,7,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+//共通終了処理
+end_gym07_sw:
+	_PROGRAM		MAKE_MAP_BG
+	_SE				SE_TK_KASYA
+	_TALK_END
+	_END
+
+//すでにスイッチ押してあったら元の状態に戻す
+chg_sw_gym07_01:
+	_FLAG_RESET		FE_GYM07_SWITCH_01
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		5,5,GYM07_YA_L,0	//矢印の向きを変える
+	_SET_CELL		2,7,GYM07_SW_OFF,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+
+/********************************************************************/
+/*							スイッチ２								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_switch_02_p01_c107_r0101
+	_TALK_START
+
+	//すでにスイッチ押してあったら元の状態に戻す
+	_IF_FLAGON_JUMP	FE_GYM07_SWITCH_02,chg_sw_gym07_02
+
+	_FLAG_SET		FE_GYM07_SWITCH_02
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		8,14,GYM07_YA_R,0	//矢印の向きを変える
+	_SET_CELL		8,10,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+//すでにスイッチ押してあったら元の状態に戻す
+chg_sw_gym07_02:
+	_FLAG_RESET		FE_GYM07_SWITCH_02
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		8,14,GYM07_YA_D,0	//矢印の向きを変える
+	_SET_CELL		8,10,GYM07_SW_OFF,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+
+/********************************************************************/
+/*							スイッチ３								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_switch_03_p01_c107_r0101
+	_TALK_START
+
+	//すでにスイッチ押してあったら元の状態に戻す
+	_IF_FLAGON_JUMP	FE_GYM07_SWITCH_03,chg_sw_gym07_03
+
+	_FLAG_SET		FE_GYM07_SWITCH_03
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		15,17,GYM07_YA_L,0	//矢印の向きを変える
+	_SET_CELL		17,15,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+//すでにスイッチ押してあったら元の状態に戻す
+chg_sw_gym07_03:
+	_FLAG_RESET		FE_GYM07_SWITCH_03
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		15,17,GYM07_YA_R,0	//矢印の向きを変える
+	_SET_CELL		17,15,GYM07_SW_OFF,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+
+/********************************************************************/
+/*							スイッチ４								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_switch_04_p01_c107_r0101
+	_TALK_START
+
+	//すでにスイッチ押してあったら元の状態に戻す
+	_IF_FLAGON_JUMP	FE_GYM07_SWITCH_04,chg_sw_gym07_04
+
+	_FLAG_SET		FE_GYM07_SWITCH_04
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		1,23,GYM07_YA_U,0	//矢印の向きを変える
+	_SET_CELL		5,24,GYM07_SW_ON,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+//すでにスイッチ押してあったら元の状態に戻す
+chg_sw_gym07_04:
+	_FLAG_RESET		FE_GYM07_SWITCH_04
+
+	_SET_OBJ_ANIME	EV_OBJ_SPID,hero_01_c107_r0101_anime01
+	_OBJ_ANIME_WAIT				//アニメ終了待ち
+
+	_SET_CELL		1,23,GYM07_YA_R,0	//矢印の向きを変える
+	_SET_CELL		5,24,GYM07_SW_OFF,1	//スイッチのセルを変える
+	_JUMP			end_gym07_sw
+	_END
+
+
+/********************************************************************/
+/*							ワープ床								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_c107_r0101_pos01
+	_TALK_START
+	_MAP_CHANGE_WARP	C107,C107_R0101,14,29
+	_STOP_SCRIPT
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+//						トレーナーデータ
+/********************************************************************/
+SCRIPT_LABEL	ev_espm_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_02
+	_TRAINER_DATA2	msg_espm_02_01
+	_TRAINER_DATA3	msg_espm_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_02_03
+	_END
+
+SCRIPT_LABEL	ev_espm_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_03
+	_TRAINER_DATA2	msg_espm_03_01
+	_TRAINER_DATA3	msg_espm_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_03_03
+	_END
+
+SCRIPT_LABEL	ev_espm_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPM_04
+	_TRAINER_DATA2	msg_espm_04_01
+	_TRAINER_DATA3	msg_espm_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espm_04_03
+	_END
+
+SCRIPT_LABEL	ev_espw_02
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_02
+	_TRAINER_DATA2	msg_espw_02_01
+	_TRAINER_DATA3	msg_espw_02_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_02_03
+	_END
+
+SCRIPT_LABEL	ev_espw_03
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_03
+	_TRAINER_DATA2	msg_espw_03_01
+	_TRAINER_DATA3	msg_espw_03_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_03_03
+	_END
+
+SCRIPT_LABEL	ev_espw_04
+	_TRAINER_DATA_START
+	_TRAINER_DATA1	ESPW_04
+	_TRAINER_DATA2	msg_espw_04_01
+	_TRAINER_DATA3	msg_espw_04_02
+	_TRAINER_DATA_END
+	/* */
+	_TRAINER_EASY_MSG	msg_espw_04_03
+	_END
+
+
+/********************************************************************/
+/*							ジム入り口の人							*/
+/********************************************************************/
+SCRIPT_LABEL	ev_danpei_07_01
+	_TALK_OBJ_START
+
+	//すでにリーダーを倒している
+	_IF_FLAGON_JUMP	FT_GYM_07_LEADER,ev_danpei_07_02
+
+	_TALK_KEYWAIT	msg_danpei_07_01
+	_TALK_OBJ_END
+	_END
+
+ev_danpei_07_02:
+	_TALK_KEYWAIT	msg_danpei_07_02
+	_TALK_OBJ_END
+	_END
+
+//--------------------------------------------------------------------
+//効果音が重なるのでウェイトをおく
+//--------------------------------------------------------------------
+hero_01_c107_r0101_anime01:
+	.byte	AC_WAIT_16
+	.byte	AC_WAIT_16
+	.byte	ACMD_END
+
+
+/********************************************************************/
+/*						ポケモン像 左								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_01_p01_c107_r0101
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH07_GET,batch_get_c107_r0101
+
+	_JUMP			batch_no_get_c107_r0101
+	_END
+
+
+/********************************************************************/
+/*						ポケモン像 右								*/
+/********************************************************************/
+SCRIPT_LABEL	ev_icon_02_p01_c107_r0101
+	_TALK_START
+
+	//バッチをゲットしている
+	_IF_FLAGON_JUMP		SYS_BATCH07_GET,batch_get_c107_r0101
+
+	_JUMP			batch_no_get_c107_r0101
+	_END
+
+//すでにリーダーを倒している
+batch_get_c107_r0101:
+	_TALK_KEYWAIT	msg_icon_01_p02_c107_r0101
+	_TALK_END
+	_END
+
+//まだリーダーを倒していない
+batch_no_get_c107_r0101:
+	_TALK_KEYWAIT	msg_icon_01_p01_c107_r0101
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

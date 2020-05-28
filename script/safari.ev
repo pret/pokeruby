@@ -1,0 +1,117 @@
+//====================================================================
+//						safari
+//						サファリ関連スクリプト
+//						※各スクリプト共通か
+//						safari.cから呼ばれるスクリプト
+//====================================================================
+
+
+//====================================================================
+//					サファリ終了処理
+//====================================================================
+SCRIPT_LABEL		ev_safari_end_core
+	_LDVAL					WK_SCENE_SAFARI_ZONE,1
+	_PROGRAM				SAFARI_END
+	_SET_MAP_CHANGE_POS		R121,R121_R0101,2,5
+	_END
+
+
+//====================================================================
+//					サファリ終了処理(共通）
+//
+//注意	park_safari04のドアの前にいるOBJに話し掛けてマップを
+//切り替える時は、呼ばれるSEが違うのでこの処理とは別の処理をしている
+//====================================================================
+SCRIPT_LABEL		ev_safari_end_common
+	_LDVAL			WK_SCENE_SAFARI_ZONE,1
+	_PROGRAM		SAFARI_END
+	_MAP_CHANGE		R121,R121_R0101,2,5
+	_STOP_SCRIPT
+	_END
+
+
+//====================================================================
+//			サファリをキャンセルするかどうかの問いかけ
+//====================================================================
+SCRIPT_LABEL		ev_safari_cancel_check
+	_TALK_START
+	_TALK_YES_NO	msg_safari_cancel_ask
+	_IFVAL_JUMP		ANSWORK,EQ,1,_safari_cancel_yes
+
+_safari_cancel_no:
+	_TALK_END
+	_END
+
+_safari_cancel_yes:
+	_JUMP			ev_safari_end_common
+
+
+//====================================================================
+//			歩数制限でサファリ終了
+//====================================================================
+SCRIPT_LABEL		ev_safari_end_by_step
+	_TALK_START
+	_SE				SE_PINPON
+	_TALKMSG		msg_safari_end_by_step
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_END
+	_JUMP			ev_safari_end_common
+
+
+//====================================================================
+//			ボールがなくなってサファリ終了
+//====================================================================
+SCRIPT_LABEL		ev_safari_end_by_ball
+	_TALK_START
+	_SE				SE_PINPON
+	_TALKMSG		msg_safari_end_by_ball
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_END
+	_JUMP			ev_safari_end_common
+
+
+//====================================================================
+//			キューブ置き場
+//====================================================================
+SCRIPT_LABEL		ev_safari_cube_table
+	_TALK_START
+
+	// キューブが置かれているか
+	_PROGRAM		SAFARI_CUBECHECK
+	_IFVAL_JUMP		ANSWORK, NE, 0xffff, _safari_cube_full
+
+	_TALK_YES_NO	msg_safari_cube_set
+	_IFVAL_JUMP		ANSWORK,EQ,1,_safari_cube_set
+
+	_TALK_END
+	_END
+
+_safari_cube_set:
+	// キューブケースへ
+	_FLD_FADE_BLACKOUT
+	_PROGRAM		SAFARI_CUBECASE
+	_STOP_SCRIPT
+
+	// キューブが選択されたか
+	_IFVAL_JUMP		ANSWORK, NE, 0xffff, _safari_cube_on
+	_END
+
+_safari_cube_on:
+	_TALKMSG		msg_safari_cube_on
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_END
+	_END
+
+_safari_cube_full:
+	_TALKMSG		msg_safari_cube_full
+	_TALK_WAIT
+	_AB_KEYWAIT
+	_TALK_END
+	_END
+
+
+/********************************************************************/
+/********************************************************************/

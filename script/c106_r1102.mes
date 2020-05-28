@@ -1,0 +1,48 @@
+// ●ミナモシティ　デパート２Ｆ
+
+// ●料理人１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_cook1_01_p01_c106_r1102
+msg_cook1_01_p01_c106_r1102:
+	.byte	do_,u_,gu_,no_,spc_,ki_,ho_,n_,ha_,spc_,u_,ma_,ku_,spc_,tu_,ka_,i_,ko_,na_,su_,ko_,to_
+	.byte	CR_
+	.byte	ko_,re_,spc_,i_,ti_,ba_,n_,spc_,da_,i_,zi_,spc_,na_,no_,YO_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●おばさん２
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_middlew2_01_p01_c106_r1102
+msg_middlew2_01_p01_c106_r1102:
+	.byte	i_,e_,de_,spc_,ma_,ttu_,te_,ru_,spc_,DA_,N_,NA_,no_
+	.byte	CR_
+	.byte	o_,mi_,ya_,ge_,spc_,na_,n_,da_,ke_,do_,spc_,do_,re_,ga_,spc_,i_,i_,ka_,si_,ra_,hate_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●船乗り１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_seaman1_01_p01_c106_r1102
+msg_seaman1_01_p01_c106_r1102:
+	.byte	ko_,re_,ka_,ra_,spc_,to_,o_,i_,spc_,to_,ko_,ro_,he_
+	.byte	CR_
+	.byte	ta_,bi_,ni_,spc_,i_,ku_,ka_,ra_,na_
+	.byte	SCROLL_WAIT_
+	.byte	ko_,ko_,de_,spc_,do_,ttu_,sa_,ri_,spc_,do_,u_,gu_,wo_,spc_,ka_,ttu_,te_,o_,ku_,no_,sa_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_c106_r1102
+msg_kanban_01_p01_c106_r1102:
+	.byte	ta_,bi_,no_,spc_,o_,to_,mo_,ni_
+	.byte	CR_
+	.byte	n2_,ka_,i_,spc_,tenten_,tenten_,spc_,TO_,RE_,bou_,NA_,bou_,ZU_,spc_,ZO_,bou_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■

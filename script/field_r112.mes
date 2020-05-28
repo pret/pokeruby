@@ -1,0 +1,82 @@
+// ●112番道路　フィールド
+
+
+// ●アクア団員（ロープウエイ乗り場のドアをふさいでいる）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_01_p01_field_r112
+msg_aquam1_01_p01_field_r112:
+	.byte	BU_,TU_,BU_,TU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	HA_,ZI_,TU_,GE_,ni_,spc_,mu_,ka_,ttu_,ta_,spc_,na_,ka_,ma_,ha_
+	.byte	CR_
+	.byte	na_,ni_,wo_,spc_,ya_,ttu_,te_,ru_,n_,da_,hate_,spc_,o_,so_,i_,na_,a_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●r-114の洞窟イベントを終えると（フラグ15）、
+// このアクア団員は消える。
+
+// ●アクア団員（ロープウエイ乗り場のドアをふさいでいる）
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_aquam1_02_p01_field_r112
+msg_aquam1_02_p01_field_r112:
+	.byte	BU_,TU_,BU_,TU_,tenten_,tenten_
+	.byte	NORMAL_WAIT_
+	.byte	o_,re_,mo_,spc_,RO_,bou_,PU_,U_,EE_,I_,ni_,spc_,no_,ttu_,te_
+	.byte	CR_
+	.byte	ti_,yyo_,u_,zi_,yyo_,u_,ni_,spc_,i_,ki_,ta_,i_,ze_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+// ●r-114の洞窟イベントを終えると（フラグ15）、
+// このアクア団員は消える。
+
+
+// ●山男１
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_hill1_01_p01_field_r112
+msg_hill1_01_p01_field_r112:
+	.byte	u_,bou_,mu_,tenten_,tenten_,spc_,KI_,N_,SE_,TU_,ni_,spc_,i_,ki_,ta_,i_,no_,da_,ga_,tenten_,tenten_
+	.byte	CR_
+	.byte	ko_,no_,spc_,da_,n_,sa_,wo_,spc_,o_,ri_,te_,si_,ma_,u_,to_
+	.byte	SCROLL_WAIT_
+	.byte	HU_,E_,N_,ni_,spc_,mo_,do_,ru_,no_,ha_,spc_,ta_,i_,he_,n_,spc_,da_,yo_,na_,tenten_,tenten_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+
+// ●えんとつやまの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_01_p01_field_r112
+msg_kanban_01_p01_field_r112:
+	.byte	kako_,e_,n_,to_,tu_,ya_,ma_,spc_,RO_,bou_,PU_,U_,EE_,I_,spc_,no_,ri_,ba_,kakot_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowU__,spc_,ko_,no_,sa_,ki_,spc_,su_,gu_,gyoe_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●えんとつやま入口の看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_02_p01_field_r112
+msg_kanban_02_p01_field_r112:
+	.byte	kako_,e_,n_,to_,tu_,ya_,ma_,kakot_
+	.byte	NORMAL_WAIT_
+	.byte	HU_,E_,N_,TA_,U_,N_,ya_,spc_,ti_,yyo_,u_,zi_,yyo_,u_,spc_,he_,ha_
+	.byte	CR_
+	.byte	RO_,bou_,PU_,U_,EE_,I_,wo_,spc_,go_,ri_,yo_,u_,spc_,ku_,da_,sa_,i_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
+
+// ●フエンタウン寄りの看板
+// ■□□□□□□□□□□□□□□□□□□□□■
+	.GLOBAL	msg_kanban_03_p01_field_r112
+msg_kanban_03_p01_field_r112:
+	.byte	ko_,ko_,ha_,spc_,n1_,n1_,n2_,ba_,n_,spc_,do_,u_,ro_
+	.byte	CR_
+	.byte	CTRL_,C_EXFONT_,ArrowL__,spc_,HU_,E_,N_,TA_,U_,N_
+	.byte	EOM_
+
+// ■□□□□□□□□□□□□□□□□□□□□■
