@@ -47,263 +47,60 @@ static bool8 ShouldSwitchIfPerishSong(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 static bool8 ShouldSwitchIfWonderGuard(void)
 {
     u8 opposingBattler;
     u8 moveFlags;
     s32 i, j;
+    u16 move;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
 
-    if (gBattleMons[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)].ability != ABILITY_WONDER_GUARD)
-        return FALSE;
-
-    // check if pokemon has a super effective move
-    opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    for (i = 0; i < 4; i++)
+    if (gBattleMons[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)].ability == ABILITY_WONDER_GUARD)
     {
-        u16 move = gBattleMons[gActiveBattler].moves[i];
-        if (move == MOVE_NONE)
-            continue;
-
-        moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
-        if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
-            return FALSE;
-    }
-
-    // find a pokemon in the party that has a super effective move
-    for (i = 0; i < 6; i++)
-    {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0
-            || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-            || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG
-            || i == gBattlerPartyIndexes[gActiveBattler])
-            continue;
-
-        GetMonData(&gEnemyParty[i], MON_DATA_SPECIES); // unused return value
-        GetMonData(&gEnemyParty[i], MON_DATA_ALT_ABILITY); // unused return value
-
-        opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        for (j = 0; j < 4; j++)
+        // Check if Pokemon has a super effective move.
+        for (opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), i = 0; i < MAX_MON_MOVES; ++i)
         {
-            u16 move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
+            move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
                 continue;
-
             moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
-            if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && (Random() % 3) < 2)
+            if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+                return FALSE;
+        }
+        // Find a Pokemon in the party that has a super effective move.
+        for (i = 0; i < PARTY_SIZE; ++i)
+        {
+            if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
+                continue;
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE)
+                continue;
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                continue;
+            if (i == gBattlerPartyIndexes[gActiveBattler])
+                continue;
+            GetMonData(&gEnemyParty[i], MON_DATA_SPECIES); // Unused return value.
+            GetMonData(&gEnemyParty[i], MON_DATA_ALT_ABILITY); // Unused return value.
+        
+            for (opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), j = 0; j < MAX_MON_MOVES; ++j)
             {
-                // we found a mon
-                ewram160C8arr(GetBattlerPosition(gActiveBattler)) = i; // gBattleStruct->AI_monToSwitchIntoId[GetBattlerPosition(gActiveBattler)] = i;
-                BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
-                return TRUE;
+                move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
+                if (move == MOVE_NONE)
+                    continue;
+                moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
+                if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % 3 < 2)
+                {
+                    // We found a mon.
+                    ewram160C8arr(GetBattlerPosition(gActiveBattler)) = i; // gBattleStruct->AI_monToSwitchIntoId[GetBattlerPosition(gActiveBattler)] = i;
+                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+                    return TRUE;
+                }
             }
         }
     }
-
-    return FALSE; // at this point there is not a single pokemon in the party that has a super effective move against a pokemon with wonder guard
+    return FALSE; // There is not a single Pokemon in the party that has a super effective move against a mon with Wonder Guard.
 }
-#else
-NAKED
-static bool8 ShouldSwitchIfWonderGuard(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    ldr r0, _0803606C @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080360A0\n\
-    b _080361C8\n\
-    .align 2, 0\n\
-_0803606C: .4byte gBattleTypeFlags\n\
-_08036070:\n\
-    ldr r0, _08036094 @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerPosition\n\
-    ldr r1, _08036098 @ =gSharedMem\n\
-    lsls r0, 24\n\
-    lsrs r0, 25\n\
-    ldr r2, _0803609C @ =0x000160c8\n\
-    adds r0, r2\n\
-    adds r0, r1\n\
-    strb r6, [r0]\n\
-    movs r0, 0x1\n\
-    movs r1, 0x2\n\
-    movs r2, 0\n\
-    bl BtlController_EmitTwoReturnValues\n\
-    movs r0, 0x1\n\
-    b _080361CA\n\
-    .align 2, 0\n\
-_08036094: .4byte gActiveBattler\n\
-_08036098: .4byte gSharedMem\n\
-_0803609C: .4byte 0x000160c8\n\
-_080360A0:\n\
-    ldr r4, _080361D8 @ =gBattleMons\n\
-    movs r0, 0\n\
-    bl GetBattlerAtPosition\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    movs r1, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r4\n\
-    adds r0, 0x20\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x19\n\
-    beq _080360BC\n\
-    b _080361C8\n\
-_080360BC:\n\
-    movs r0, 0\n\
-    bl GetBattlerAtPosition\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    movs r6, 0\n\
-    adds r7, r4, 0\n\
-    movs r5, 0x58\n\
-    adds r0, r2, 0\n\
-    muls r0, r5\n\
-    adds r4, r0, r7\n\
-    movs r3, 0x20\n\
-    adds r3, r4\n\
-    mov r8, r3\n\
-_080360D8:\n\
-    lsls r1, r6, 1\n\
-    ldr r0, _080361DC @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    muls r0, r5\n\
-    adds r1, r0\n\
-    adds r0, r7, 0\n\
-    adds r0, 0xC\n\
-    adds r1, r0\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0\n\
-    beq _08036104\n\
-    ldrh r1, [r4]\n\
-    mov r3, r8\n\
-    ldrb r2, [r3]\n\
-    bl AI_TypeCalc\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    movs r0, 0x2\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    bne _080361C8\n\
-_08036104:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    ble _080360D8\n\
-    movs r6, 0\n\
-    ldr r0, _080361E0 @ =gEnemyParty\n\
-    mov r9, r0\n\
-_08036110:\n\
-    movs r0, 0x64\n\
-    adds r5, r6, 0\n\
-    muls r5, r0\n\
-    mov r2, r9\n\
-    adds r4, r5, r2\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _080361C2\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _080361C2\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    movs r1, 0xCE\n\
-    lsls r1, 1\n\
-    cmp r0, r1\n\
-    beq _080361C2\n\
-    ldr r1, _080361E4 @ =gBattlerPartyIndexes\n\
-    ldr r0, _080361DC @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    cmp r6, r0\n\
-    beq _080361C2\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2E\n\
-    bl GetMonData\n\
-    movs r0, 0\n\
-    bl GetBattlerAtPosition\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    movs r4, 0\n\
-    mov r8, r5\n\
-    ldr r1, _080361D8 @ =gBattleMons\n\
-    movs r0, 0x58\n\
-    muls r0, r2\n\
-    adds r5, r0, r1\n\
-    adds r7, r5, 0\n\
-    adds r7, 0x20\n\
-_0803617C:\n\
-    adds r1, r4, 0\n\
-    adds r1, 0xD\n\
-    mov r0, r8\n\
-    add r0, r9\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0\n\
-    beq _080361BC\n\
-    ldrh r1, [r5]\n\
-    ldrb r2, [r7]\n\
-    bl AI_TypeCalc\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    movs r0, 0x2\n\
-    ands r1, r0\n\
-    cmp r1, 0\n\
-    beq _080361BC\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0x3\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bhi _080361BC\n\
-    b _08036070\n\
-_080361BC:\n\
-    adds r4, 0x1\n\
-    cmp r4, 0x3\n\
-    ble _0803617C\n\
-_080361C2:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x5\n\
-    ble _08036110\n\
-_080361C8:\n\
-    movs r0, 0\n\
-_080361CA:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_080361D8: .4byte gBattleMons\n\
-_080361DC: .4byte gActiveBattler\n\
-_080361E0: .4byte gEnemyParty\n\
-_080361E4: .4byte gBattlerPartyIndexes\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {

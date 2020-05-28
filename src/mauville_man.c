@@ -707,9 +707,6 @@ static void Task_BardSong(u8 taskId)
             struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
             u8 *str = gStringVar4 + task->tCharIndex;
             u16 wordLen = 0;
-            // Can't get it to match without hacking
-            u32 temp;
-            register s16 zero asm("r1");
 
             while (*str != CHAR_SPACE
                 && *str != CHAR_NEWLINE
@@ -723,17 +720,20 @@ static void Task_BardSong(u8 taskId)
                 gUnknown_020388BC = MACRO1(bard->songLyrics[task->tCurrWord]);
             else
                 gUnknown_020388BC = MACRO1(bard->temporaryLyrics[task->tCurrWord]);
-            temp = gUnknown_03005DA0.var04 / wordLen;
-            zero = 0;
-            gUnknown_03005DA0.var04 = temp;
+            gUnknown_03005DA0.var04 /= wordLen;
             if (gUnknown_03005DA0.var04 <= 0)
                 gUnknown_03005DA0.var04 = 1;
             task->tCurrWord++;
             if (task->data[2] == 0)
+            {
                 task->tState = 3;
+                task->data[1] = 0;
+            }
             else
+            {
                 task->tState = 5;
-            task->data[1] = zero;
+                task->data[1] = 0;
+            }
         }
         break;
     case 5:
