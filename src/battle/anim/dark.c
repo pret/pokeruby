@@ -730,215 +730,55 @@ static void sub_80E0620(u8 taskId)
     }
 }
 
-// static void sub_80E079C(struct Task *task)
-// {
-//     int var0, var1;
-//     s16 var2;
-//     s16 i, j;
-
-//     var2 = task->data[5] - task->data[4];
-//     if (var2 != 0)
-//     {
-//         var0 = task->data[13] / var2;
-//         var1 = task->data[6];
-
-//         for (i = 0; i < task->data[4]; i++)
-//         {
-//             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[10] - (i - 159);
-//         }
-
-//         for (i = task->data[4]; i <= task->data[5]; i++)
-//         {
-//             if (i >= 0)
-//             {
-//                 gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = (var1 - i) + task->data[10];
-//             }
-
-//             var1 += var0;
-//         }
-
-//         for (j = i; j < task->data[7]; j++)
-//         {
-//             if (j >= 0)
-//             {
-//                 gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][j] = (task->data[10] + 159) - j;
-//             }
-//         }
-//     }
-//     else
-//     {
-//         for (i = 0; i < 112; i++)
-//         {
-//             gScanlineEffectRegBuffers[0][i] = task->data[10] + 159 - i;
-//             gScanlineEffectRegBuffers[1][i] = task->data[10] + 159 - i;
-//         }
-//     }
-// }
-
-NAKED
 static void sub_80E079C(struct Task *task)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    adds r6, r0, 0\n\
-    ldrh r0, [r6, 0x12]\n\
-    ldrh r4, [r6, 0x10]\n\
-    subs r0, r4\n\
-    lsls r0, 16\n\
-    asrs r1, r0, 16\n\
-    cmp r1, 0\n\
-    beq _080E0890\n\
-    movs r2, 0x22\n\
-    ldrsh r0, [r6, r2]\n\
-    bl __divsi3\n\
-    mov r8, r0\n\
-    movs r3, 0x14\n\
-    ldrsh r0, [r6, r3]\n\
-    lsls r5, r0, 8\n\
-    lsls r0, r4, 16\n\
-    movs r4, 0\n\
-    cmp r0, 0\n\
-    ble _080E07FC\n\
-    ldr r0, _080E0888 @ =gScanlineEffectRegBuffers\n\
-    mov r12, r0\n\
-    ldr r7, _080E088C @ =gScanlineEffect\n\
-_080E07D0:\n\
-    lsls r2, r4, 16\n\
-    asrs r2, 16\n\
-    lsls r3, r2, 1\n\
-    ldrb r1, [r7, 0x14]\n\
-    lsls r0, r1, 4\n\
-    subs r0, r1\n\
-    lsls r0, 7\n\
-    adds r3, r0\n\
-    add r3, r12\n\
-    adds r1, r2, 0\n\
-    subs r1, 0x9F\n\
-    ldrh r0, [r6, 0x1C]\n\
-    subs r0, r1\n\
-    strh r0, [r3]\n\
-    adds r2, 0x1\n\
-    lsls r2, 16\n\
-    lsrs r4, r2, 16\n\
-    asrs r2, 16\n\
-    movs r1, 0x10\n\
-    ldrsh r0, [r6, r1]\n\
-    cmp r2, r0\n\
-    blt _080E07D0\n\
-_080E07FC:\n\
-    ldrh r4, [r6, 0x10]\n\
-    lsls r3, r4, 16\n\
-    asrs r1, r3, 16\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r6, r2]\n\
-    cmp r1, r0\n\
-    bgt _080E0846\n\
-    ldr r0, _080E0888 @ =gScanlineEffectRegBuffers\n\
-    mov r12, r0\n\
-    ldr r7, _080E088C @ =gScanlineEffect\n\
-_080E0810:\n\
-    asrs r4, r3, 16\n\
-    cmp r4, 0\n\
-    blt _080E0832\n\
-    asrs r1, r5, 8\n\
-    subs r1, r4\n\
-    lsls r3, r4, 1\n\
-    ldrb r2, [r7, 0x14]\n\
-    lsls r0, r2, 4\n\
-    subs r0, r2\n\
-    lsls r0, 7\n\
-    adds r3, r0\n\
-    add r3, r12\n\
-    lsls r1, 16\n\
-    asrs r1, 16\n\
-    ldrh r2, [r6, 0x1C]\n\
-    adds r1, r2\n\
-    strh r1, [r3]\n\
-_080E0832:\n\
-    add r5, r8\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    lsls r3, r4, 16\n\
-    asrs r1, r3, 16\n\
-    movs r2, 0x12\n\
-    ldrsh r0, [r6, r2]\n\
-    cmp r1, r0\n\
-    ble _080E0810\n\
-_080E0846:\n\
-    movs r3, 0x1C\n\
-    ldrsh r0, [r6, r3]\n\
-    adds r0, 0x9F\n\
-    lsls r2, r4, 16\n\
-    asrs r1, r2, 16\n\
-    subs r5, r0, r1\n\
-    movs r3, 0x16\n\
-    ldrsh r0, [r6, r3]\n\
-    cmp r1, r0\n\
-    bge _080E08BE\n\
-    ldr r7, _080E0888 @ =gScanlineEffectRegBuffers\n\
-    ldr r4, _080E088C @ =gScanlineEffect\n\
-_080E085E:\n\
-    asrs r3, r2, 16\n\
-    cmp r3, 0\n\
-    blt _080E0876\n\
-    lsls r2, r3, 1\n\
-    ldrb r1, [r4, 0x14]\n\
-    lsls r0, r1, 4\n\
-    subs r0, r1\n\
-    lsls r0, 7\n\
-    adds r2, r0\n\
-    adds r2, r7\n\
-    strh r5, [r2]\n\
-    subs r5, 0x1\n\
-_080E0876:\n\
-    adds r0, r3, 0x1\n\
-    lsls r2, r0, 16\n\
-    asrs r1, r2, 16\n\
-    movs r3, 0x16\n\
-    ldrsh r0, [r6, r3]\n\
-    cmp r1, r0\n\
-    blt _080E085E\n\
-    b _080E08BE\n\
-    .align 2, 0\n\
-_080E0888: .4byte gScanlineEffectRegBuffers\n\
-_080E088C: .4byte gScanlineEffect\n\
-_080E0890:\n\
-    movs r1, 0x1C\n\
-    ldrsh r0, [r6, r1]\n\
-    adds r5, r0, 0\n\
-    adds r5, 0x9F\n\
-    movs r4, 0\n\
-    ldr r3, _080E08C8 @ =gScanlineEffectRegBuffers\n\
-    movs r2, 0xF0\n\
-    lsls r2, 3\n\
-    adds r6, r3, r2\n\
-_080E08A2:\n\
-    lsls r0, r4, 16\n\
-    asrs r0, 16\n\
-    lsls r2, r0, 1\n\
-    adds r1, r2, r3\n\
-    strh r5, [r1]\n\
-    adds r2, r6\n\
-    strh r5, [r2]\n\
-    subs r5, 0x1\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x6F\n\
-    ble _080E08A2\n\
-_080E08BE:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080E08C8: .4byte gScanlineEffectRegBuffers\n\
-    .syntax divided\n");
+    int var0, var1;
+    s16 var2;
+    s16 i;
+    int var4;
+
+    var2 = task->data[5] - task->data[4];
+    if (var2 != 0)
+    {
+        var0 = task->data[13] / var2;
+        var1 = task->data[6] << 8;
+
+        for (i = 0; i < task->data[4]; i++)
+        {
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[10] - (i - 159);
+        }
+
+        for (i = task->data[4]; i <= task->data[5]; i++)
+        {
+            if (i >= 0)
+            {
+                s16 var3 = (var1 >> 8) - i;
+                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = var3 + task->data[10];
+            }
+
+            var1 += var0;
+        }
+
+        var4 = task->data[10] - (i - 159);
+        for (i = i; i < task->data[7]; i++)
+        {
+            if (i >= 0)
+            {
+                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = var4;
+                var4--;
+            }
+        }
+    }
+    else
+    {
+        var4 = task->data[10] + 159;
+        for (i = 0; i < 112; i++)
+        {
+            gScanlineEffectRegBuffers[0][i] = var4;
+            gScanlineEffectRegBuffers[1][i] = var4;
+            var4--;
+        }
+    }
 }
 
 static void sub_80E08CC(u8 priority)

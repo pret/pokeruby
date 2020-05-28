@@ -40,7 +40,7 @@ static const u8 gUnknown_0840612C[] = {
     0, 4, 3, 2, 1
 };
 
-static const u8 *const sContextStatNames[] = {
+static const u8 *const sContestStatNames[] = {
     OtherText_Coolness,
     OtherText_Toughness,
     OtherText_Smartness,
@@ -683,12 +683,15 @@ static void Pokeblock_MenuWindowTextPrint(const u8 *message)
     Menu_PrintText(message, 1, 17);
 }
 
-#ifdef NONMATCHING
-static void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
+void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
 {
-    if (a2 != 0)
+    if (a2)
     {
-        StringCopy(dest, sContextStatNames[statID]);
+        // This is is a joke.
+        // For absurd commentary on why this works, see battle/anim/water.c.
+        if (a2 > 0) a2 = 0;
+        if (a2 < 0) { u8 unk = -unk; }
+        StringCopy(dest, sContestStatNames[statId]);
         StringAppend(dest, gOtherText_WasEnhanced);
     }
     else
@@ -696,49 +699,6 @@ static void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
         StringCopy(dest, gOtherText_NothingChanged);
     }
 }
-#else
-NAKED
-static void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 a1, s16 a2)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                    "\tadds r4, r0, 0\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r3, r1, 24\n"
-                    "\tlsls r2, 16\n"
-                    "\tlsrs r0, r2, 16\n"
-                    "\tasrs r2, 16\n"
-                    "\tcmp r2, 0\n"
-                    "\tbeq _08136DFC\n"
-                    "\tcmp r2, 0\n"
-                    "\tble _08136DD8\n"
-                    "\tmovs r0, 0\n"
-                    "_08136DD8:\n"
-                    "\tlsls r0, 16\n"
-                    "\tldr r1, _08136DF4 @ =sContextStatNames\n"
-                    "\tlsls r0, r3, 2\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r1, [r0]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl StringCopy\n"
-                    "\tldr r1, _08136DF8 @ =gOtherText_WasEnhanced\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl StringAppend\n"
-                    "\tb _08136E04\n"
-                    "\t.align 2, 0\n"
-                    "_08136DF4: .4byte sContextStatNames\n"
-                    "_08136DF8: .4byte gOtherText_WasEnhanced\n"
-                    "_08136DFC:\n"
-                    "\tldr r1, _08136E0C @ =gOtherText_NothingChanged\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl StringCopy\n"
-                    "_08136E04:\n"
-                    "\tpop {r4}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_08136E0C: .4byte gOtherText_NothingChanged");
-}
-#endif
 
 static void Pokeblock_GetMonContestStats(struct Pokemon *pokemon, u8 *data)
 {

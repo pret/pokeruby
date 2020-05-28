@@ -1479,7 +1479,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
         UpdateOamPriorityInAllHealthboxes(0);
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) != 0)
+            if (GetBattlerSide(i) != B_SIDE_PLAYER)
                 gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
             else
                 gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
@@ -1793,7 +1793,7 @@ static void ScriptCmd_end(void)
     if (!continuousAnim) // may have been used for debug?
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
-        if (IsContest() == 0)
+        if (!IsContest())
         {
             UpdateBattlerSpritePriorities();
             UpdateOamPriorityInAllHealthboxes(1);
@@ -1838,7 +1838,7 @@ static void ScriptCmd_monbg(void)
     {
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
-        if (identity <= 1 || IsContest() != 0)
+        if (identity <= 1 || IsContest())
             toBG_2 = 0;
         else
             toBG_2 = 1;
@@ -1870,7 +1870,7 @@ static void ScriptCmd_monbg(void)
     {
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
-        if (identity <= 1 || IsContest() != 0)
+        if (identity <= 1 || IsContest())
             toBG_2 = 0;
         else
             toBG_2 = 1;
@@ -1940,7 +1940,7 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
 
         spriteId = gBattlerSpriteIds[bank];
         gBattle_BG1_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
-        if (IsContest() != 0 && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
+        if (IsContest() && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
             gBattle_BG1_X--;
         gBattle_BG1_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
         gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
@@ -1951,12 +1951,12 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, s.unk8 * 16, 32);
         DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (u16 *)PLTT + s.unk8 * 16, 32);
 
-        if (IsContest() != 0)
+        if (IsContest())
             r2 = 0;
         else
             r2 = GetBattlerPosition(bank);
         sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
-        if (IsContest() != 0)
+        if (IsContest())
             sub_8076380();
     }
     else
@@ -2040,7 +2040,7 @@ void sub_8076464(u8 a)
     struct UnknownStruct2 s;
 
     sub_8078914(&s);
-    if (a == 0 || IsContest() != 0)
+    if (a == 0 || IsContest())
     {
         DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
@@ -2128,7 +2128,7 @@ static void sub_807672C(u8 taskId)
     {
         identity = GetBattlerPosition(gTasks[taskId].data[2]);
         identity += 0xFF;
-        if (identity <= 1 || IsContest() != 0)
+        if (identity <= 1 || IsContest())
             to_BG2 = 0;
         else
             to_BG2 = 1;
@@ -2172,7 +2172,7 @@ static void ScriptCmd_monbg_22(void)
     {
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
-        if (identity <= 1 || IsContest() != 0)
+        if (identity <= 1 || IsContest())
             r1 = 0;
         else
             r1 = 1;
@@ -2185,7 +2185,7 @@ static void ScriptCmd_monbg_22(void)
     {
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
-        if (identity <= 1 || IsContest() != 0)
+        if (identity <= 1 || IsContest())
             r1 = 0;
         else
             r1 = 1;
@@ -2240,7 +2240,7 @@ static void sub_80769A4(u8 taskId)
         bank = gTasks[taskId].data[2];
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
-        if (identity <= 1 || IsContest() != 0)
+        if (identity <= 1 || IsContest())
             toBG_2 = 0;
         else
             toBG_2 = 1;
@@ -2400,7 +2400,7 @@ static void ScriptCmd_fadetobgfromset(void)
 
     if (IsContest())
         gTasks[taskId].tBackgroundId = bg3;
-    else if (GetBattlerSide(gBattleAnimTarget) == 0)
+    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         gTasks[taskId].tBackgroundId = bg2;
     else
         gTasks[taskId].tBackgroundId = bg1;
@@ -2524,188 +2524,60 @@ static void ScriptCmd_changebg(void)
     sBattleAnimScriptPtr++;
 }
 
-//Weird control flow
-/*
-s8 BattleAnimAdjustPanning(s8 a)
+s8 BattleAnimAdjustPanning(s8 pan)
 {
     if (!IsContest() && (EWRAM_17810[gBattleAnimAttacker].unk0 & 0x10))
     {
-        a = GetBattlerSide(gBattleAnimAttacker) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+            pan = SOUND_PAN_TARGET;
+        else
+            pan = SOUND_PAN_ATTACKER_NEG;
     }
-    //_08076FDC
+    else if (IsContest())
+    {
+        if (gBattleAnimAttacker != gBattleAnimTarget || gBattleAnimAttacker != 2 || pan != SOUND_PAN_TARGET)
+            pan *= -1;
+    }
+    else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+    {
+        if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+        {
+            if (pan == SOUND_PAN_TARGET)
+                pan = SOUND_PAN_ATTACKER_NEG;
+            else if (pan != SOUND_PAN_ATTACKER_NEG)
+                pan *= -1;
+        }
+    }
+    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
+    {
+        if (pan == SOUND_PAN_ATTACKER_NEG)
+            pan = SOUND_PAN_TARGET;
+    }
     else
     {
-        if (IsContest())
-        {
-            if (gBattleAnimAttacker == gBattleAnimTarget && gBattleAnimAttacker == 2
-             && a == SOUND_PAN_TARGET)
-            {
-                //jump to _0807707A
-                if (a < SOUND_PAN_ATTACKER_NEG)
-                    a = SOUND_PAN_ATTACKER;
-                return a;
-            }
-        }
-        //_08077004
-        else
-        {
-            if (GetBattlerSide(gBattleAnimAttacker) == 0)
-            {
-                if (GetBattlerSide(gBattleAnimTarget) == 0)
-            }
-            //_08077042
-            else
-            {
-
-            }
-            //_0807706C
-        }
+        pan *= -1;
     }
-    //_0807706E
-}
-*/
-NAKED
-s8 BattleAnimAdjustPanning(s8 a)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08076FDC\n\
-    ldr r0, _08076FD4 @ =gBattleAnimAttacker\n\
-    ldrb r2, [r0]\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    ldr r1, _08076FD8 @ =gSharedMem + 0x17810\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08076FDC\n\
-    adds r0, r2, 0\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    movs r4, 0xC0\n\
-    cmp r0, 0\n\
-    beq _0807706E\n\
-    movs r4, 0x3F\n\
-    b _0807706E\n\
-    .align 2, 0\n\
-_08076FD4: .4byte gBattleAnimAttacker\n\
-_08076FD8: .4byte gSharedMem + 0x17810\n\
-_08076FDC:\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08077004\n\
-    ldr r0, _08076FFC @ =gBattleAnimAttacker\n\
-    ldr r1, _08077000 @ =gBattleAnimTarget\n\
-    ldrb r0, [r0]\n\
-    ldrb r1, [r1]\n\
-    cmp r0, r1\n\
-    bne _08077068\n\
-    cmp r0, 0x2\n\
-    bne _08077068\n\
-    cmp r4, 0x3F\n\
-    beq _0807707A\n\
-    b _08077068\n\
-    .align 2, 0\n\
-_08076FFC: .4byte gBattleAnimAttacker\n\
-_08077000: .4byte gBattleAnimTarget\n\
-_08077004:\n\
-    ldr r0, _0807702C @ =gBattleAnimAttacker\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08077042\n\
-    ldr r0, _08077030 @ =gBattleAnimTarget\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0807706E\n\
-    lsls r0, r4, 24\n\
-    asrs r1, r0, 24\n\
-    cmp r1, 0x3F\n\
-    bne _08077034\n\
-    movs r4, 0xC0\n\
-    b _0807706E\n\
-    .align 2, 0\n\
-_0807702C: .4byte gBattleAnimAttacker\n\
-_08077030: .4byte gBattleAnimTarget\n\
-_08077034:\n\
-    movs r0, 0x40\n\
-    negs r0, r0\n\
-    cmp r1, r0\n\
-    beq _0807706E\n\
-    negs r0, r1\n\
-    lsls r0, 24\n\
-    b _0807706C\n\
-_08077042:\n\
-    ldr r0, _08077064 @ =gBattleAnimTarget\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _08077068\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0x40\n\
-    negs r1, r1\n\
-    cmp r0, r1\n\
-    bne _0807706E\n\
-    movs r4, 0x3F\n\
-    b _0807706E\n\
-    .align 2, 0\n\
-_08077064: .4byte gBattleAnimTarget\n\
-_08077068:\n\
-    lsls r0, r4, 24\n\
-    negs r0, r0\n\
-_0807706C:\n\
-    lsrs r4, r0, 24\n\
-_0807706E:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3F\n\
-    ble _0807707A\n\
-    movs r4, 0x3F\n\
-    b _08077088\n\
-_0807707A:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0x40\n\
-    negs r1, r1\n\
-    cmp r0, r1\n\
-    bge _08077088\n\
-    movs r4, 0xC0\n\
-_08077088:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    pop {r4}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
+
+    if (pan > SOUND_PAN_TARGET)
+        pan = SOUND_PAN_TARGET;
+    else if (pan < SOUND_PAN_ATTACKER_NEG)
+        pan = SOUND_PAN_ATTACKER_NEG;
+
+    return pan;
 }
 
 s8 BattleAnimAdjustPanning2(s8 pan)
 {
     if (!IsContest() && (EWRAM_17810[gBattleAnimAttacker].unk0 & 0x10))
     {
-        if (GetBattlerSide(gBattleAnimAttacker) != 0)
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;
         else
             pan = SOUND_PAN_ATTACKER;
     }
     else
     {
-        if (GetBattlerSide(gBattleAnimAttacker) != 0 || IsContest() != 0)
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER || IsContest())
             pan = -pan;
     }
     return pan;
