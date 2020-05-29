@@ -816,19 +816,12 @@ bool8 TrainerCard_InitFlipAnimation(struct Task *task)
     return FALSE;
 }
 
-/*
 bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *task)
 {
-    u32 r7;
-    u16 r9;
-    u32 r6;
-    u32 r5;
-    u32 r4;
-    u32 r10;
-    u32 sp0;
     s16 i;
+    u32 r4, r5, r10, r7, r6, var_24, r9, var;
 
-    ewram0_2.var_4 = 0;
+    ewram0_2.var_4 = FALSE;
     task->data[1] += 3;
     if (task->data[1] > 79)
         task->data[1] = 79;
@@ -837,183 +830,33 @@ bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *task)
     r9 = 160 - r7;
     r4 = r9 - r7;
     r6 = -r7 << 16;
-    r5 = (160 << 16) / r4;
-    r5 -= 1 << 16;
-    r10 = r5 * r4 + r6;
-    sp0 = r5 / r4;
+    r5 = 0xA00000 / r4;
+    r5 += 0xFFFF0000;
+    var_24 = r6 + r5 * r4;
+    r10 = r5 / r4;
     r5 *= 2;
 
-    for (i = 0; i < r7; i++)
+    for (i = 0; i < r7;
+        // WHAT?!
+        gScanlineEffectRegBuffers[0][i] = (u32)-i + -4,
+        i++);
+    for (; i < (s16)r9; i++)
     {
-        gScanlineEffectRegBuffers.filler0[i] = -4 - (u32)i;
-    }
-    //_08093B74
-    for (; i < r9; i++)
-    {
-        u16 var = r6 >> 16;
+        var = r6 >> 16;
         r6 += r5;
-        r5 -= sp0;
-        gScanlineEffectRegBuffers.filler0[i] = -4 + var;
+        r5 -= r10;
+        gScanlineEffectRegBuffers[0][i] = var + -4;
     }
-    for (; i < 160; i++)
-        gScanlineEffectRegBuffers.filler0[i] = -4 + (u16)(r10 >> 16);
-    ewram0_2.var_4 = 1;
-    if (task->data[1] > 0x4A)
-        task->data[0]++;
-    return FALSE;
-}
-*/
+    for (var = var_24 >> 16; i < 160;
+        // WHAT?!
+        gScanlineEffectRegBuffers[0][i] = var + -4,
+        i++);
 
-NAKED
-bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *task)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    mov r8, r0\n\
-    ldr r1, _08093BFC @ =gSharedMem\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x4]\n\
-    mov r2, r8\n\
-    ldrh r0, [r2, 0xA]\n\
-    adds r0, 0x3\n\
-    strh r0, [r2, 0xA]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x4F\n\
-    ble _08093B18\n\
-    movs r0, 0x4F\n\
-    strh r0, [r2, 0xA]\n\
-_08093B18:\n\
-    mov r4, r8\n\
-    movs r0, 0xA\n\
-    ldrsh r7, [r4, r0]\n\
-    movs r0, 0xA0\n\
-    subs r0, r7\n\
-    mov r9, r0\n\
-    subs r4, r0, r7\n\
-    negs r0, r7\n\
-    lsls r6, r0, 16\n\
-    movs r0, 0xA0\n\
-    lsls r0, 16\n\
-    adds r1, r4, 0\n\
-    bl __udivsi3\n\
-    adds r5, r0, 0\n\
-    ldr r1, _08093C00 @ =0xffff0000\n\
-    adds r5, r1\n\
-    adds r0, r5, 0\n\
-    muls r0, r4\n\
-    adds r0, r6\n\
-    mov r10, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r4, 0\n\
-    bl __udivsi3\n\
-    str r0, [sp]\n\
-    lsls r5, 1\n\
-    movs r3, 0\n\
-    cmp r3, r7\n\
-    bcs _08093B74\n\
-    ldr r2, _08093C04 @ =gScanlineEffectRegBuffers\n\
-    mov r12, r2\n\
-    ldr r0, _08093C08 @ =0x0000fffc\n\
-    adds r4, r0, 0\n\
-_08093B5C:\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    lsls r1, r0, 1\n\
-    add r1, r12\n\
-    subs r2, r4, r0\n\
-    strh r2, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, r7\n\
-    bcc _08093B5C\n\
-_08093B74:\n\
-    lsls r2, r3, 16\n\
-    mov r1, r9\n\
-    lsls r0, r1, 16\n\
-    asrs r1, r0, 16\n\
-    mov r4, r10\n\
-    lsrs r7, r4, 16\n\
-    cmp r2, r0\n\
-    bge _08093BAE\n\
-    ldr r0, _08093C04 @ =gScanlineEffectRegBuffers\n\
-    mov r9, r0\n\
-    ldr r4, _08093C08 @ =0x0000fffc\n\
-    mov r12, r4\n\
-    adds r4, r1, 0\n\
-_08093B8E:\n\
-    lsrs r1, r6, 16\n\
-    adds r6, r5\n\
-    ldr r0, [sp]\n\
-    subs r5, r0\n\
-    asrs r2, 16\n\
-    lsls r0, r2, 1\n\
-    add r0, r9\n\
-    add r1, r12\n\
-    strh r1, [r0]\n\
-    adds r2, 0x1\n\
-    lsls r2, 16\n\
-    lsrs r3, r2, 16\n\
-    lsls r2, r3, 16\n\
-    asrs r0, r2, 16\n\
-    cmp r0, r4\n\
-    blt _08093B8E\n\
-_08093BAE:\n\
-    adds r1, r7, 0\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x9F\n\
-    bgt _08093BD4\n\
-    ldr r4, _08093C04 @ =gScanlineEffectRegBuffers\n\
-    ldr r0, _08093C08 @ =0x0000fffc\n\
-    adds r2, r1, r0\n\
-_08093BBE:\n\
-    lsls r1, r3, 16\n\
-    asrs r1, 16\n\
-    lsls r0, r1, 1\n\
-    adds r0, r4\n\
-    strh r2, [r0]\n\
-    adds r1, 0x1\n\
-    lsls r1, 16\n\
-    lsrs r3, r1, 16\n\
-    asrs r1, 16\n\
-    cmp r1, 0x9F\n\
-    ble _08093BBE\n\
-_08093BD4:\n\
-    movs r0, 0x1\n\
-    ldr r1, _08093BFC @ =gSharedMem\n\
-    strb r0, [r1, 0x4]\n\
-    mov r2, r8\n\
-    movs r4, 0xA\n\
-    ldrsh r0, [r2, r4]\n\
-    cmp r0, 0x4A\n\
-    ble _08093BEA\n\
-    ldrh r0, [r2, 0x8]\n\
-    adds r0, 0x1\n\
-    strh r0, [r2, 0x8]\n\
-_08093BEA:\n\
-    movs r0, 0\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_08093BFC: .4byte gSharedMem\n\
-_08093C00: .4byte 0xffff0000\n\
-_08093C04: .4byte gScanlineEffectRegBuffers\n\
-_08093C08: .4byte 0x0000fffc\n\
-    .syntax divided\n");
+    ewram0_2.var_4 = TRUE;
+    if (task->data[1] > 74)
+        task->data[0]++;
+
+    return FALSE;
 }
 
 bool8 TrainerCard_SwitchToNewSide(struct Task *task)
@@ -1028,154 +871,47 @@ bool8 TrainerCard_SwitchToNewSide(struct Task *task)
     return TRUE;
 }
 
-NAKED
 bool8 TrainerCard_ScaleUpFlipAnimation(struct Task *task)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    mov r8, r0\n\
-    ldr r1, _08093D40 @ =gSharedMem\n\
-    movs r2, 0\n\
-    strb r2, [r1, 0x4]\n\
-    ldrh r0, [r0, 0xA]\n\
-    subs r0, 0x3\n\
-    mov r3, r8\n\
-    strh r0, [r3, 0xA]\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    bgt _08093C5C\n\
-    strh r2, [r3, 0xA]\n\
-_08093C5C:\n\
-    mov r4, r8\n\
-    movs r0, 0xA\n\
-    ldrsh r7, [r4, r0]\n\
-    movs r0, 0xA0\n\
-    subs r0, r7\n\
-    mov r9, r0\n\
-    subs r4, r0, r7\n\
-    negs r0, r7\n\
-    lsls r6, r0, 16\n\
-    movs r0, 0xA0\n\
-    lsls r0, 16\n\
-    adds r1, r4, 0\n\
-    bl __udivsi3\n\
-    adds r5, r0, 0\n\
-    ldr r1, _08093D44 @ =0xffff0000\n\
-    adds r5, r1\n\
-    adds r0, r5, 0\n\
-    muls r0, r4\n\
-    adds r0, r6\n\
-    mov r10, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r4, 0\n\
-    bl __udivsi3\n\
-    str r0, [sp]\n\
-    lsrs r5, 1\n\
-    movs r3, 0\n\
-    cmp r3, r7\n\
-    bcs _08093CB8\n\
-    ldr r2, _08093D48 @ =gScanlineEffectRegBuffers\n\
-    mov r12, r2\n\
-    ldr r0, _08093D4C @ =0x0000fffc\n\
-    adds r4, r0, 0\n\
-_08093CA0:\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    lsls r1, r0, 1\n\
-    add r1, r12\n\
-    subs r2, r4, r0\n\
-    strh r2, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, r7\n\
-    bcc _08093CA0\n\
-_08093CB8:\n\
-    lsls r2, r3, 16\n\
-    mov r1, r9\n\
-    lsls r0, r1, 16\n\
-    asrs r1, r0, 16\n\
-    mov r4, r10\n\
-    lsrs r7, r4, 16\n\
-    cmp r2, r0\n\
-    bge _08093CF2\n\
-    ldr r0, _08093D48 @ =gScanlineEffectRegBuffers\n\
-    mov r9, r0\n\
-    ldr r3, _08093D4C @ =0x0000fffc\n\
-    mov r12, r3\n\
-    adds r4, r1, 0\n\
-_08093CD2:\n\
-    lsrs r1, r6, 16\n\
-    adds r6, r5\n\
-    ldr r0, [sp]\n\
-    adds r5, r0\n\
-    asrs r2, 16\n\
-    lsls r0, r2, 1\n\
-    add r0, r9\n\
-    add r1, r12\n\
-    strh r1, [r0]\n\
-    adds r2, 0x1\n\
-    lsls r2, 16\n\
-    lsrs r3, r2, 16\n\
-    lsls r2, r3, 16\n\
-    asrs r0, r2, 16\n\
-    cmp r0, r4\n\
-    blt _08093CD2\n\
-_08093CF2:\n\
-    adds r1, r7, 0\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x9F\n\
-    bgt _08093D18\n\
-    ldr r4, _08093D48 @ =gScanlineEffectRegBuffers\n\
-    ldr r0, _08093D4C @ =0x0000fffc\n\
-    adds r2, r1, r0\n\
-_08093D02:\n\
-    lsls r1, r3, 16\n\
-    asrs r1, 16\n\
-    lsls r0, r1, 1\n\
-    adds r0, r4\n\
-    strh r2, [r0]\n\
-    adds r1, 0x1\n\
-    lsls r1, 16\n\
-    lsrs r3, r1, 16\n\
-    asrs r1, 16\n\
-    cmp r1, 0x9F\n\
-    ble _08093D02\n\
-_08093D18:\n\
-    movs r0, 0x1\n\
-    ldr r1, _08093D40 @ =gSharedMem\n\
-    strb r0, [r1, 0x4]\n\
-    mov r2, r8\n\
-    movs r3, 0xA\n\
-    ldrsh r0, [r2, r3]\n\
-    cmp r0, 0\n\
-    bgt _08093D2E\n\
-    ldrh r0, [r2, 0x8]\n\
-    adds r0, 0x1\n\
-    strh r0, [r2, 0x8]\n\
-_08093D2E:\n\
-    movs r0, 0\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_08093D40: .4byte gSharedMem\n\
-_08093D44: .4byte 0xffff0000\n\
-_08093D48: .4byte gScanlineEffectRegBuffers\n\
-_08093D4C: .4byte 0x0000fffc\n\
-    .syntax divided\n");
+    s16 i;
+    u32 r4, r5, r10, r7, r6, var_24, r9, var;
+
+    ewram0_2.var_4 = FALSE;
+    task->data[1] -= 3;
+    if (task->data[1] <= 0)
+        task->data[1] = 0;
+
+    r7 = task->data[1];
+    r9 = 160 - r7;
+    r4 = r9 - r7;
+    r6 = -r7 << 16;
+    r5 = 0xA00000 / r4;
+    r5 += 0xFFFF0000;
+    var_24 = r6 + r5 * r4;
+    r10 = r5 / r4;
+    r5 /= 2;
+
+    for (i = 0; i < r7;
+        // WHAT?!
+        gScanlineEffectRegBuffers[0][i] = (u32)-i + -4,
+        i++);
+    for (; i < (s16)r9; i++)
+    {
+        var = r6 >> 16;
+        r6 += r5;
+        r5 += r10;
+        gScanlineEffectRegBuffers[0][i] = var + -4;
+    }
+    for (var = var_24 >> 16; i < 160;
+        // WHAT?!
+        gScanlineEffectRegBuffers[0][i] = var + -4,
+        i++);
+
+    ewram0_2.var_4 = TRUE;
+    if (task->data[1] <= 0)
+        task->data[0]++;
+
+    return FALSE;
 }
 
 bool8 TrainerCard_FinishFlipAnimation(struct Task *task)
