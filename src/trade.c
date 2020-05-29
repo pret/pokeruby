@@ -454,46 +454,38 @@ const u8 gTradeMonSpriteCoords[][2] = {
     {23, 18} // CANCEL
 };
 
-const u8 gTradeLevelDisplayCoords[2][6][2] = {
-    {
-        // Your party
-        {5, 4},
-        {12, 4},
-        {5, 9},
-        {12, 9},
-        {5, 14},
-        {12, 14},
-    },
-    {
-        // Friend's party
-        {20, 4},
-        {27, 4},
-        {20, 9},
-        {27, 9},
-        {20, 14},
-        {27, 14}
-    }
+const u8 gTradeLevelDisplayCoords[][2] = {
+    // Your party
+    {5, 4},
+    {12, 4},
+    {5, 9},
+    {12, 9},
+    {5, 14},
+    {12, 14},
+    // Friend's party
+    {20, 4},
+    {27, 4},
+    {20, 9},
+    {27, 9},
+    {20, 14},
+    {27, 14}
 };
 
-const u8 gTradeMonBoxCoords[2][6][2] = {
-    {
-        // Your party
-        {1, 3},
-        {8, 3},
-        {1, 8},
-        {8, 8},
-        {1, 13},
-        {8, 13},
-    },
-    {
-        // Friend's party
-        {16, 3},
-        {23, 3},
-        {16, 8},
-        {23, 8},
-        {16, 13},
-        {23, 13}
-    }
+const u8 gTradeMonBoxCoords[][2] = {
+    // Your party
+    {1, 3},
+    {8, 3},
+    {1, 8},
+    {8, 8},
+    {1, 13},
+    {8, 13},
+    // Friend's party
+    {16, 3},
+    {23, 3},
+    {16, 8},
+    {23, 8},
+    {16, 13},
+    {23, 13}
 };
 
 const u8 gTradeUnknownSpriteCoords[][2][2] = {
@@ -3054,71 +3046,15 @@ void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 #endif
 }
 
-// simple nonmatching, supposedly from a CSE optimization
-#ifdef NONMATCHING
 static void sub_804A6DC(u8 whichParty)
 {
     int i;
-    for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
+    for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i++)
     {
-        sub_804A51C(whichParty, i, gTradeLevelDisplayCoords[whichParty][i][0], gTradeLevelDisplayCoords[whichParty][i][1], gTradeMonBoxCoords[whichParty][i][0], gTradeMonBoxCoords[whichParty][i][1]);
+        int loc = i + whichParty * 6;
+        sub_804A51C(whichParty, i, gTradeLevelDisplayCoords[loc][0], gTradeLevelDisplayCoords[loc][1], gTradeMonBoxCoords[loc][0], gTradeMonBoxCoords[loc][1]);
     }
 }
-#else
-NAKED
-static void sub_804A6DC(u8 whichParty)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tsub sp, 0x8\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r6, r0, 24\n"
-                    "\tmovs r7, 0\n"
-                    "\tldr r0, _0804A734 @ =gUnknown_03004824\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tadds r0, r6\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r7, r0\n"
-                    "\tbge _0804A72C\n"
-                    "\tlsls r0, r6, 1\n"
-                    "\tadds r0, r6\n"
-                    "\tldr r1, _0804A738 @ =gTradeLevelDisplayCoords\n"
-                    "\tlsls r0, 2\n"
-                    "\tadds r5, r0, r1\n"
-                    "\tldr r1, _0804A73C @ =gTradeMonBoxCoords\n"
-                    "\tadds r4, r0, r1\n"
-                    "_0804A702:\n"
-                    "\tlsls r1, r7, 24\n"
-                    "\tlsrs r1, 24\n"
-                    "\tldrb r2, [r5]\n"
-                    "\tldrb r3, [r5, 0x1]\n"
-                    "\tldrb r0, [r4]\n"
-                    "\tstr r0, [sp]\n"
-                    "\tldrb r0, [r4, 0x1]\n"
-                    "\tstr r0, [sp, 0x4]\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tbl sub_804A51C\n"
-                    "\tadds r5, 0x2\n"
-                    "\tadds r4, 0x2\n"
-                    "\tadds r7, 0x1\n"
-                    "\tldr r0, _0804A734 @ =gUnknown_03004824\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tadds r0, r6\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r7, r0\n"
-                    "\tblt _0804A702\n"
-                    "_0804A72C:\n"
-                    "\tadd sp, 0x8\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_0804A734: .4byte gUnknown_03004824\n"
-                    "_0804A738: .4byte gTradeLevelDisplayCoords\n"
-                    "_0804A73C: .4byte gTradeMonBoxCoords");
-}
-#endif
 
 static void sub_804A740(u8 whichParty)
 {
@@ -3495,68 +3431,31 @@ static void sub_804B128(void)
     REG_BG2Y = dest.dy;
 }
 
-// register swap with volatile, wtf !how
-#ifdef NONMATCHING
 static void sub_804B1BC(void)
 {
-    REG_BG1VOFS = gUnknown_03004828->bg1vofs, REG_BG1HOFS = gUnknown_03004828->bg1hofs;
-    //temp = ;
-    //asm(""::"r"(gUnknown_03004828->bg2vofs));
-    if (REG_DISPCNT % 8 == 0)
+    u16 dispcnt;
+
+    REG_BG1VOFS = gUnknown_03004828->bg1vofs;
+    REG_BG1HOFS = gUnknown_03004828->bg1hofs;
+
+    /*
+        A u16 cast allows for REG_DISPCNT storage to be swapped.
+        This is required for the function to match.
+
+        You can see this less obfuscated in FireRed and Emerald,
+        since they use gflib's GPU manager for this instead.
+    */
+    dispcnt = (*(u16 *)REG_ADDR_DISPCNT);
+    if ((dispcnt & 7) == DISPCNT_MODE_0)
     {
-        REG_BG2VOFS = gUnknown_03004828->bg2vofs, REG_BG2HOFS = gUnknown_03004828->bg2hofs;
+        REG_BG2VOFS = gUnknown_03004828->bg2vofs;
+        REG_BG2HOFS = gUnknown_03004828->bg2hofs;
     }
     else
     {
         sub_804B128();
     }
 }
-#else
-NAKED static void sub_804B1BC(void)
-{
-    asm_unified("\tpush {lr}\n"
-                    "\tldr r1, _0804B1FC @ =REG_BG1VOFS\n"
-                    "\tldr r0, _0804B200 @ =gUnknown_03004828\n"
-                    "\tldr r2, [r0]\n"
-                    "\tmovs r3, 0x88\n"
-                    "\tlsls r3, 1\n"
-                    "\tadds r0, r2, r3\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tsubs r1, 0x2\n"
-                    "\tadds r3, 0x2\n"
-                    "\tadds r0, r2, r3\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tmovs r0, 0x80\n"
-                    "\tlsls r0, 19\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tmovs r1, 0x7\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _0804B208\n"
-                    "\tldr r1, _0804B204 @ =REG_BG2VOFS\n"
-                    "\tadds r3, 0x2\n"
-                    "\tadds r0, r2, r3\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tsubs r1, 0x2\n"
-                    "\tadds r3, 0x2\n"
-                    "\tadds r0, r2, r3\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tb _0804B20C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B1FC: .4byte REG_BG1VOFS\n"
-                    "_0804B200: .4byte gUnknown_03004828\n"
-                    "_0804B204: .4byte REG_BG2VOFS\n"
-                    "_0804B208:\n"
-                    "\tbl sub_804B128\n"
-                    "_0804B20C:\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0");
-}
-#endif
 
 static void sub_804B210(void)
 {
