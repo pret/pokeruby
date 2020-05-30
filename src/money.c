@@ -176,8 +176,32 @@ void sub_80B7AEC(u32 arg0, u8 right, u8 top)
 #endif
 }
 
+#ifdef NONMATCHING
+void Draw10000Sprite(u8 var1, u8 var2, s32 var3)
+{
+    // 2D/3D array manipulation off the wazoo.
+    // Converting to 2D/3D array casts makes it match less!
+    u16 i;
+
+    CpuFastSet(
+        (void*)&gDecoration10000_Gfx[var3 * 0x100],
+        (void*)(VRAM + 0x8000 + (var2 * 0x3c0) + ((var1 + 1) * 0x20)),
+        32);
+    CpuFastSet(
+        (void*)&gDecoration10000_Gfx[var3 * 0x100 + 0x80],
+        (void*)(VRAM + 0x8000 + ((var2 + 1) * 0x3c0) + ((var1 + 1) * 0x20)),
+        32);
+
+    for (i = 0; i < 4; i++)
+    {
+        u32 base = var2 * 0x20 + var1 + i;
+        ((u16 *)(VRAM + 0xF800))[base] = var2 * 0x1e + 1 + var1 + (u16)-4096;
+        ((u16 *)(VRAM + 0xF840))[base] = (var2 + 1) * 0x1e + 1 + var1 + (u16)-4096;
+    };
+}
+#else
 NAKED
-void Draw10000Sprite(u8 var1, u8 var2, int var3)
+void Draw10000Sprite(u8 var1, u8 var2, s32 var3)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -269,6 +293,7 @@ _080B7BE4: .4byte 0x0600f800\n\
 _080B7BE8: .4byte 0x0600f840\n\
     .syntax divided\n");
 }
+#endif
 
 void UpdateMoneyWindow(u32 amount, u8 x, u8 y)
 {
