@@ -2674,217 +2674,85 @@ u8 sub_809C85C(void)
     return retVal;
 }
 
-#ifdef NONMATCHING
 u8 sub_809C944(void)
 {
-    u8 r6;
-    s8 var0 = sBoxCursorArea;
-    s8 var1 = sBoxCursorPosition;
+    u8 retVal;
+    s8 cursorArea;
+    s8 cursorPosition;
 
-    gPokemonStorageSystemPtr->unk_11df = 0;
-    gPokemonStorageSystemPtr->unk_11de = 0;
-    gPokemonStorageSystemPtr->unk_11e3 = 0;
-
-    if (!(gMain.newAndRepeatedKeys & DPAD_UP))
+    do
     {
+        cursorArea = sBoxCursorArea;
+        cursorPosition = sBoxCursorPosition;
+        gPokemonStorageSystemPtr->unk_11df = 0;
+        gPokemonStorageSystemPtr->unk_11de = 0;
+        gPokemonStorageSystemPtr->unk_11e3 = 0;
+
+        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            retVal = 1;
+            cursorArea = 0;
+            gPokemonStorageSystemPtr->unk_11de = -1;
+            if (sBoxCursorPosition == 0)
+                cursorPosition = 24;
+            else
+                cursorPosition = 29;
+            gPokemonStorageSystemPtr->unk_11e3 = 1;
+            break;
+        }
+
         if (gMain.newAndRepeatedKeys & (DPAD_DOWN | START_BUTTON))
         {
-            r6 = 1;
-            var0 = 2;
-            var1 = 0;
+            retVal = 1;
+            cursorArea = 2;
+            cursorPosition = 0;
             gPokemonStorageSystemPtr->unk_11e3 = 1;
+            break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+
+        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
         {
-            r6 = 1;
-            var1 -= 1;
-            if (var1 < 0)
+            retVal = 1;
+            if (--cursorPosition < 0)
             {
                 gPokemonStorageSystemPtr->unk_11df = -1;
-                var1 = 1;
+                cursorPosition = 1;
             }
+            break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+
+        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
         {
-            r6 = 1;
-            var1 += 1;
-            if (var1 > 1)
+            retVal = 1;
+            if (++cursorPosition > 1)
             {
                 gPokemonStorageSystemPtr->unk_11df = 1;
-                var1 = 0;
+                cursorPosition = 0;
             }
+            break;
         }
-        else if (gMain.newKeys & A_BUTTON)
-        {
-            return var1 == 0 ? 5 : 4;
-        }
-        else if (gMain.newKeys & B_BUTTON)
-        {
+
+        if (gMain.newKeys & A_BUTTON)
+            return (cursorPosition == 0) ? 5 : 4;
+        if (gMain.newKeys & B_BUTTON)
             return 16;
-        }
-        else if (gMain.newKeys & SELECT_BUTTON)
+
+        if (gMain.newKeys & SELECT_BUTTON)
         {
             sub_809CD88();
             return 0;
         }
-        else
-        {
-            r6 = 0;
-        }
-    }
-    else
+
+        retVal = 0;
+    } while (0);
+
+    if (retVal != 0)
     {
-        r6 = 1;
-        var0 = 0;
-        gPokemonStorageSystemPtr->unk_11de = -1;
-        var1 = !sBoxCursorPosition ? 24 : 29;
-        gPokemonStorageSystemPtr->unk_11e3 = 1;
+        sub_809AF18(cursorArea, cursorPosition);
     }
 
-    if (r6)
-    {
-        sub_809AF18(var0, var1);
-    }
-
-    return r6;
+    return retVal;
 }
-#else
-NAKED
-u8 sub_809C944(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    ldr r0, _0809C988 @ =sBoxCursorArea\n\
-    ldrb r0, [r0]\n\
-    mov r12, r0\n\
-    ldr r7, _0809C98C @ =sBoxCursorPosition\n\
-    ldrb r3, [r7]\n\
-    ldr r0, _0809C990 @ =gPokemonStorageSystemPtr\n\
-    ldr r1, [r0]\n\
-    ldr r0, _0809C994 @ =0x000011df\n\
-    adds r5, r1, r0\n\
-    movs r0, 0\n\
-    strb r0, [r5]\n\
-    ldr r2, _0809C998 @ =0x000011de\n\
-    adds r4, r1, r2\n\
-    strb r0, [r4]\n\
-    adds r2, 0x5\n\
-    adds r1, r2\n\
-    strb r0, [r1]\n\
-    ldr r6, _0809C99C @ =gMain\n\
-    ldrh r2, [r6, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _0809CA14\n\
-    movs r0, 0x88\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0809C9A0\n\
-    movs r6, 0x1\n\
-    movs r0, 0x2\n\
-    mov r12, r0\n\
-    movs r3, 0\n\
-    b _0809CA2A\n\
-    .align 2, 0\n\
-_0809C988: .4byte sBoxCursorArea\n\
-_0809C98C: .4byte sBoxCursorPosition\n\
-_0809C990: .4byte gPokemonStorageSystemPtr\n\
-_0809C994: .4byte 0x000011df\n\
-_0809C998: .4byte 0x000011de\n\
-_0809C99C: .4byte gMain\n\
-_0809C9A0:\n\
-    movs r0, 0x20\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0809C9C0\n\
-    movs r6, 0x1\n\
-    lsls r0, r3, 24\n\
-    movs r1, 0xFF\n\
-    lsls r1, 24\n\
-    adds r0, r1\n\
-    lsrs r3, r0, 24\n\
-    cmp r0, 0\n\
-    bge _0809CA2C\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5]\n\
-    movs r3, 0x1\n\
-    b _0809CA2C\n\
-_0809C9C0:\n\
-    movs r0, 0x10\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0809C9E0\n\
-    movs r6, 0x1\n\
-    lsls r0, r3, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r2\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x1\n\
-    ble _0809CA2C\n\
-    strb r6, [r5]\n\
-    movs r3, 0\n\
-    b _0809CA2C\n\
-_0809C9E0:\n\
-    ldrh r1, [r6, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809C9F4\n\
-    movs r0, 0x4\n\
-    cmp r3, 0\n\
-    bne _0809CA3A\n\
-    movs r0, 0x5\n\
-    b _0809CA3A\n\
-_0809C9F4:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809CA00\n\
-    movs r0, 0x10\n\
-    b _0809CA3A\n\
-_0809CA00:\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809CA10\n\
-    bl sub_809CD88\n\
-    movs r0, 0\n\
-    b _0809CA3A\n\
-_0809CA10:\n\
-    movs r6, 0\n\
-    b _0809CA38\n\
-_0809CA14:\n\
-    movs r6, 0x1\n\
-    movs r0, 0\n\
-    mov r12, r0\n\
-    movs r0, 0xFF\n\
-    strb r0, [r4]\n\
-    movs r0, 0\n\
-    ldrsb r0, [r7, r0]\n\
-    movs r3, 0x1D\n\
-    cmp r0, 0\n\
-    bne _0809CA2A\n\
-    movs r3, 0x18\n\
-_0809CA2A:\n\
-    strb r6, [r1]\n\
-_0809CA2C:\n\
-    cmp r6, 0\n\
-    beq _0809CA38\n\
-    mov r0, r12\n\
-    adds r1, r3, 0\n\
-    bl sub_809AF18\n\
-_0809CA38:\n\
-    adds r0, r6, 0\n\
-_0809CA3A:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 u8 sub_809CA40(void)
 {
