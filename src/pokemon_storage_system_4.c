@@ -2607,68 +2607,68 @@ NAKED u8 sub_809C664(void)
 u8 sub_809C85C(void)
 {
     u8 retVal;
-    s8 var0;
-    register s8 var1 asm("r5"); // FAKEMATCHING: r5 and r6 become swapped without this register hack
+    s8 cursorArea;
+    s8 cursorPosition;
 
-    gPokemonStorageSystemPtr->unk_11df = 0;
-    gPokemonStorageSystemPtr->unk_11de = 0;
-    gPokemonStorageSystemPtr->unk_11e3 = 0;
-
-    if (!(gMain.newAndRepeatedKeys & DPAD_UP))
+    do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        gPokemonStorageSystemPtr->unk_11df = 0;
+        gPokemonStorageSystemPtr->unk_11de = 0;
+        gPokemonStorageSystemPtr->unk_11e3 = 0;
+
+        if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
             retVal = 1;
-            var0 = 0;
-            var1 = 2;
+            cursorArea = 3;
+            cursorPosition = 0;
+            gPokemonStorageSystemPtr->unk_11e3 = 1;
+            break;
         }
-        else
+        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            if (gMain.heldKeys & DPAD_LEFT)
-                return 10;
-            if (gMain.heldKeys & DPAD_RIGHT)
-                return 9;
-            if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-            {
-                if (gMain.heldKeys & L_BUTTON)
-                    return 10;
-                if (gMain.heldKeys & R_BUTTON)
-                    return 9;
-            }
-
-            if (gMain.newKeys & A_BUTTON)
-            {
-                sub_809A860(0);
-                sub_809CA8C();
-                return 7;
-            }
-
-            if (gMain.newKeys & B_BUTTON)
-                return 16;
-
-            if (gMain.newKeys & SELECT_BUTTON)
-            {
-                sub_809CD88();
-                return 0;
-            }
-
-            retVal = 0;
+            retVal = 1;
+            cursorArea = 0;
+            cursorPosition = 2;
+            break;
         }
-    }
-    else
-    {
-        retVal = 1;
-        var0 = 3;
-        var1 = 0;
-        gPokemonStorageSystemPtr->unk_11e3 = 1;
-    }
 
-    if (retVal)
+        if (gMain.heldKeys & DPAD_LEFT)
+            return 10;
+        if (gMain.heldKeys & DPAD_RIGHT)
+            return 9;
+
+        if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        {
+            if (gMain.heldKeys & L_BUTTON)
+                return 10;
+            if (gMain.heldKeys & R_BUTTON)
+                return 9;
+        }
+
+        if (gMain.newKeys & A_BUTTON)
+        {
+            sub_809A860(FALSE);
+            sub_809CA8C();
+            return 7;
+        }
+
+        if (gMain.newKeys & B_BUTTON)
+            return 16;
+
+        if (gMain.newKeys & SELECT_BUTTON)
+        {
+            sub_809CD88();
+            return 0;
+        }
+
+        retVal = 0;
+    } while (0);
+
+    if (retVal != 0)
     {
-        if (var0 != 2)
-            sub_809A860(0);
-        sub_809AF18(var0, var1);
-        return retVal;
+        if (cursorArea != 2)
+            sub_809A860(FALSE);
+        sub_809AF18(cursorArea, cursorPosition);
     }
 
     return retVal;
