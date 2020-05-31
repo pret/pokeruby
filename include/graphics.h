@@ -3446,4 +3446,6 @@ extern const u8 gRouletteCreditTiles[];
 extern const u8 gRouletteNumbersTiles[];
 extern const u8 gRouletteMultiplierTiles[];
 
+extern const u8 gDecoration10000_Gfx[];
+
 #endif  // GUARD_GRAPHICS_H

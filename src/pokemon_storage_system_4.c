@@ -46,8 +46,8 @@ EWRAM_DATA struct UnkStruct_2000020 *gUnknown_020384EC = NULL;
 void sub_809900C(u8 boxId, s8 a1);
 s8 sub_8099D90(u8 boxId);
 void sub_8099EB0(u8 boxId, s8 a1);
-void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3);
-void sub_809A14C(u16 *vdest);
+void CopyWallpaperTilemap(u16 *buffer, const u16 *tilemap, s8 direction, u8 offset);
+void ClearLowestWallpaperTiles(u16 *buffer);
 void sub_809A23C(u8 boxId);
 void sub_809A3D0(u8 boxId, s8 a1);
 void sub_809A598(void);
@@ -444,448 +444,169 @@ void sub_8099EB0(u8 boxId, s8 a1)
     if (a1)
     {
         gPokemonStorageSystemPtr->unk_08ba = gPokemonStorageSystemPtr->unk_08ba ? FALSE : TRUE;
-        sub_809A14C(BG_SCREEN_ADDR(26));
+        ClearLowestWallpaperTiles(BG_SCREEN_ADDR(26));
     }
     wallpaperTable = gWallpaperTable +gPokemonStorage.wallpaper[boxId];
     LoadPalette(wallpaperTable->palettes, gPokemonStorageSystemPtr->unk_08ba * 0x30 + 0x40, 0x60);
     LZ77UnCompWram(wallpaperTable->tileMap, gPokemonStorageSystemPtr->unk_0d62);
-    sub_8099F58(BG_SCREEN_ADDR(26), gPokemonStorageSystemPtr->unk_0d62, a1, gPokemonStorageSystemPtr->unk_08ba);
+    CopyWallpaperTilemap(BG_SCREEN_ADDR(26), gPokemonStorageSystemPtr->unk_0d62, a1, gPokemonStorageSystemPtr->unk_08ba);
     LZ77UnCompVram(wallpaperTable->tiles, BG_CHAR_ADDR(2) + (gPokemonStorageSystemPtr->unk_08ba << 13));
 }
 
-#ifdef NONMATCHING
-void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
+/*
+    Copies the wallpaper rectangle tilemap to a buffer,
+    depending on the wallpaper type.
+
+    - buffer    : Where to copy the wallpaper to.
+    - tilemap   : The wallpaper tilemap to copy.
+    - direction : The direction of the wallpaper.
+    - offset    : The offset of the wallpaper tilemap.
+
+    Also depends on stored BG2 X variable in PSS.
+*/
+void CopyWallpaperTilemap(u16 *buffer, const u16 *tilemap, s8 direction, u8 offset)
 {
-    s16 r6;
-    s16 r3;
-    u16 sp0 = a3 << 8;
-    u16 sp4 = (a3 * 3 + 4) << 12;
-    u16 *r4;
-    u16 *r7;
-    u16 i;
-    u16 j;
-    s16 sp8 = ((gPokemonStorageSystemPtr->unk_08b4 >> 3) + 10 + a2 * 24) & 0x3f;
-    if (sp8 < 13)
+    u16 *dest; // For either all of the wallpaper tilemap, or the first half of it.
+    u16 *dest2; // The second half of wallpaper tilemap; used in case of two halves.
+    u16 *fillDest; // For blanking; used when direction is set.
+
+    u16 x, y; // Temps for copying the tilemap.
+
+    // Temps for copying the tile and palette metadata of the wallpaper.
+    u16 tileMeta;
+    u16 tileOffset = offset * 256;
+    u16 paletteMeta;
+    u16 paletteOffset = (offset * 3 + 4) << 12;
+
+    s16 rectWidth; // The width of the wallpaper, or it's first half.
+    s16 rectWidth2; // Used in case of two halves.
+    s16 rectX = ((gPokemonStorageSystemPtr->unk_08b4 / 8 + 10) + (direction * 24)) & 0x3F;
+
+    s16 fillX; // For blanking; used when direction is set.
+
+    /*
+        Bull**** agbcc behavior discovered here
+        while attempting to match this function:
+        x + (y + z) is NOT the same as x + y + z.
+        Even though it SHOULDN'T make a difference.
+
+        Rather, it's the same as x + z + y. That's
+        old codegen for you.
+    */
+    if (rectX < 13)
     {
-        r6 = 20;
-        r3 = 0;
-        r4 = vdest + sp8 + 0x40;
-        r7 = NULL;
+        // Copy the wallpaper in full.
+        rectWidth = 20;
+        rectWidth2 = 0;
+        dest = buffer + (rectX + 64);
+        dest2 = NULL;
     }
-    else if (sp8 < 32)
+    else if (rectX < 32)
     {
-        r6 = 32 - sp8;
-        r3 = 20 - r6;
-        r4 = vdest + sp8 + 0x40;
-        r7 = vdest + 0x440;
+        // Split copying the wallpaper into two operations.
+        rectWidth = 32 - rectX;
+        rectWidth2 = 20 - rectWidth;
+        dest = buffer + (rectX + 64);
+        dest2 = buffer + 0x440;
     }
-    else if (sp8 < 45)
+    else if (rectX < 45)
     {
-        r6 = 20;
-        r3 = 0;
-        r4 = vdest + sp8 + 0x420;
-        r7 = NULL;
+        // Copy the wallpaper in full.
+        rectWidth = 20;
+        rectWidth2 = 0;
+        dest = buffer + (rectX + 0x420);
+        dest2 = NULL;
     }
     else
     {
-        r6 = 64 - sp8;
-        r3 = 20 - r6;
-        r4 = vdest + sp8 + 0x420;
-        r7 = vdest + 0x40;
+        // Split copying the wallpaper into two operations.
+        rectWidth = 64 - rectX;
+        rectWidth2 = 20 - rectWidth;
+        dest = buffer + (rectX + 0x420);
+        dest2 = buffer + 0x40;
     }
-    for (i = 0; i < 18; i++)
-    {
-        for (j = 0; j < r6; j++)
-        {
-            u16 tile = ((*src & 0xfff) + sp0) | ((*src & 0xf000) + sp4);
-            r4[j] = tile;
-            src++;
-        }
-        for (j = 0; j < r3; j++)
-        {
-            u16 tile = ((*src & 0xfff) + sp0) | ((*src & 0xf000) + sp4);
-            r7[j] = tile;
-            src++;
-        }
-        r4 += 0x20;
-        r7 += 0x20;
-    }
-    if (a2)
-    {
-        s16 r4_2;
-        u16 *r2;
-        if (a2 > 0)
-            r4_2 = (sp8 + 20) & 0x3f;
-        else
-            r4_2 = (sp8 - 4) & 0x3f;
-        r2 = r4_2 < 0x20 ? vdest + r4_2 + 0x40 : vdest + r4_2 + 0x420;
-        for (i = 0; i < 4; i++)
-        {
-            for (j = 0; j < 18; j++)
-            {
-                *r2 = 0;
-                r2 += 0x20;
-            }
-            r4_2++;
-            r4_2 &= 0x3f;
-            r2 = r4_2 < 0x20 ? vdest + r4_2 + 0x40 : vdest + r4_2 + 0x420;
-        }
-    }
-}
-#else
-NAKED void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x20\n"
-                    "\tmov r9, r0\n"
-                    "\tadds r5, r1, 0\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsls r3, 24\n"
-                    "\tlsrs r3, 24\n"
-                    "\tlsls r0, r3, 8\n"
-                    "\tstr r0, [sp]\n"
-                    "\tlsls r0, r3, 1\n"
-                    "\tadds r0, r3\n"
-                    "\tadds r0, 0x4\n"
-                    "\tlsls r0, 28\n"
-                    "\tlsrs r0, 16\n"
-                    "\tstr r0, [sp, 0x4]\n"
-                    "\tldr r0, _08099FB8 @ =gPokemonStorageSystemPtr\n"
-                    "\tldr r0, [r0]\n"
-                    "\tldr r1, _08099FBC @ =0x000008b4\n"
-                    "\tadds r0, r1\n"
-                    "\tldrh r1, [r0]\n"
-                    "\tlsrs r1, 3\n"
-                    "\tadds r1, 0xA\n"
-                    "\tlsrs r0, r2, 24\n"
-                    "\tmov r8, r0\n"
-                    "\tasrs r2, 24\n"
-                    "\tlsls r0, r2, 1\n"
-                    "\tadds r0, r2\n"
-                    "\tlsls r0, 3\n"
-                    "\tadds r1, r0\n"
-                    "\tmovs r0, 0x3F\n"
-                    "\tands r1, r0\n"
-                    "\tstr r1, [sp, 0x8]\n"
-                    "\tadds r2, r1, 0\n"
-                    "\tcmp r2, 0xC\n"
-                    "\tbgt _08099FC0\n"
-                    "\tmovs r6, 0x14\n"
-                    "\tmovs r3, 0\n"
-                    "\tlsls r0, r2, 1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r1, r0\n"
-                    "\tmovs r7, 0\n"
-                    "\tb _0809A020\n"
-                    "\t.align 2, 0\n"
-                    "_08099FB8: .4byte gPokemonStorageSystemPtr\n"
-                    "_08099FBC: .4byte 0x000008b4\n"
-                    "_08099FC0:\n"
-                    "\tcmp r2, 0x1F\n"
-                    "\tbgt _08099FE6\n"
-                    "\tmovs r0, 0x20\n"
-                    "\tsubs r0, r2\n"
-                    "\tlsls r0, 16\n"
-                    "\tmovs r1, 0x14\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tsubs r1, r0\n"
-                    "\tlsls r1, 16\n"
-                    "\tlsrs r3, r1, 16\n"
-                    "\tlsls r0, r2, 1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r4, r2, r0\n"
-                    "\tmovs r7, 0x88\n"
-                    "\tlsls r7, 4\n"
-                    "\tadd r7, r9\n"
-                    "\tb _0809A020\n"
-                    "_08099FE6:\n"
-                    "\tcmp r2, 0x2C\n"
-                    "\tbgt _08099FFE\n"
-                    "\tmovs r6, 0x14\n"
-                    "\tmovs r3, 0\n"
-                    "\tlsls r0, r2, 1\n"
-                    "\tmovs r1, 0x84\n"
-                    "\tlsls r1, 4\n"
-                    "\tadds r0, r1\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r4, r2, r0\n"
-                    "\tmovs r7, 0\n"
-                    "\tb _0809A020\n"
-                    "_08099FFE:\n"
-                    "\tmovs r0, 0x40\n"
-                    "\tsubs r0, r2\n"
-                    "\tlsls r0, 16\n"
-                    "\tmovs r1, 0x14\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tsubs r1, r0\n"
-                    "\tlsls r1, 16\n"
-                    "\tlsrs r3, r1, 16\n"
-                    "\tlsls r0, r2, 1\n"
-                    "\tmovs r1, 0x84\n"
-                    "\tlsls r1, 4\n"
-                    "\tadds r0, r1\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r4, r2, r0\n"
-                    "\tmov r7, r9\n"
-                    "\tadds r7, 0x80\n"
-                    "_0809A020:\n"
-                    "\tmovs r1, 0\n"
-                    "\tmov r0, r8\n"
-                    "\tlsls r0, 24\n"
-                    "\tstr r0, [sp, 0x14]\n"
-                    "\tlsls r0, r6, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tmov r8, r0\n"
-                    "\tlsls r3, 16\n"
-                    "\tstr r3, [sp, 0xC]\n"
-                    "\tasrs r2, r3, 16\n"
-                    "\tstr r2, [sp, 0x10]\n"
-                    "_0809A036:\n"
-                    "\tmovs r3, 0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tadds r0, 0x40\n"
-                    "\tstr r0, [sp, 0x18]\n"
-                    "\tadds r2, r7, 0\n"
-                    "\tadds r2, 0x40\n"
-                    "\tstr r2, [sp, 0x1C]\n"
-                    "\tadds r1, 0x1\n"
-                    "\tmov r10, r1\n"
-                    "\tcmp r3, r8\n"
-                    "\tbge _0809A07A\n"
-                    "\tldr r0, _0809A0D4 @ =0x00000fff\n"
-                    "\tmov r12, r0\n"
-                    "\tmovs r6, 0xF0\n"
-                    "\tlsls r6, 8\n"
-                    "_0809A054:\n"
-                    "\tldrh r2, [r5]\n"
-                    "\tmov r0, r12\n"
-                    "\tands r0, r2\n"
-                    "\tldr r1, [sp]\n"
-                    "\tadds r0, r1, r0\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tands r1, r2\n"
-                    "\tldr r2, [sp, 0x4]\n"
-                    "\tadds r1, r2, r1\n"
-                    "\torrs r1, r0\n"
-                    "\tlsls r0, r3, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tadds r5, 0x2\n"
-                    "\tadds r0, r3, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r3, r0, 16\n"
-                    "\tcmp r3, r8\n"
-                    "\tblt _0809A054\n"
-                    "_0809A07A:\n"
-                    "\tmovs r3, 0\n"
-                    "\tldr r0, [sp, 0x10]\n"
-                    "\tcmp r3, r0\n"
-                    "\tbge _0809A0B4\n"
-                    "\tldr r1, _0809A0D4 @ =0x00000fff\n"
-                    "\tmov r12, r1\n"
-                    "\tmovs r6, 0xF0\n"
-                    "\tlsls r6, 8\n"
-                    "\tldr r2, [sp, 0xC]\n"
-                    "\tasrs r4, r2, 16\n"
-                    "_0809A08E:\n"
-                    "\tldrh r2, [r5]\n"
-                    "\tmov r0, r12\n"
-                    "\tands r0, r2\n"
-                    "\tldr r1, [sp]\n"
-                    "\tadds r0, r1, r0\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tands r1, r2\n"
-                    "\tldr r2, [sp, 0x4]\n"
-                    "\tadds r1, r2, r1\n"
-                    "\torrs r1, r0\n"
-                    "\tlsls r0, r3, 1\n"
-                    "\tadds r0, r7\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tadds r5, 0x2\n"
-                    "\tadds r0, r3, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r3, r0, 16\n"
-                    "\tcmp r3, r4\n"
-                    "\tblt _0809A08E\n"
-                    "_0809A0B4:\n"
-                    "\tldr r4, [sp, 0x18]\n"
-                    "\tldr r7, [sp, 0x1C]\n"
-                    "\tmov r1, r10\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tcmp r1, 0x11\n"
-                    "\tbls _0809A036\n"
-                    "\tldr r0, [sp, 0x14]\n"
-                    "\tasrs r2, r0, 24\n"
-                    "\tcmp r2, 0\n"
-                    "\tbeq _0809A13A\n"
-                    "\tcmp r2, 0\n"
-                    "\tble _0809A0D8\n"
-                    "\tldr r1, [sp, 0x8]\n"
-                    "\tadds r1, 0x14\n"
-                    "\tb _0809A0DC\n"
-                    "\t.align 2, 0\n"
-                    "_0809A0D4: .4byte 0x00000fff\n"
-                    "_0809A0D8:\n"
-                    "\tldr r1, [sp, 0x8]\n"
-                    "\tsubs r1, 0x4\n"
-                    "_0809A0DC:\n"
-                    "\tmovs r0, 0x3F\n"
-                    "\tands r1, r0\n"
-                    "\tadds r4, r1, 0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tcmp r0, 0x1F\n"
-                    "\tbgt _0809A0EE\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tb _0809A0F6\n"
-                    "_0809A0EE:\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r2, 0x84\n"
-                    "\tlsls r2, 4\n"
-                    "\tadds r0, r2\n"
-                    "_0809A0F6:\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r2, r1, r0\n"
-                    "\tmovs r3, 0\n"
-                    "\tmovs r6, 0\n"
-                    "_0809A0FE:\n"
-                    "\tmovs r1, 0\n"
-                    "\tadds r5, r3, 0x1\n"
-                    "\tlsls r3, r4, 16\n"
-                    "_0809A104:\n"
-                    "\tstrh r6, [r2]\n"
-                    "\tadds r2, 0x40\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tcmp r1, 0x11\n"
-                    "\tbls _0809A104\n"
-                    "\tasrs r0, r3, 16\n"
-                    "\tadds r4, r0, 0x1\n"
-                    "\tmovs r0, 0x3F\n"
-                    "\tands r4, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tcmp r0, 0x1F\n"
-                    "\tbgt _0809A126\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r0, 0x80\n"
-                    "\tb _0809A12E\n"
-                    "_0809A126:\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r2, 0x84\n"
-                    "\tlsls r2, 4\n"
-                    "\tadds r0, r2\n"
-                    "_0809A12E:\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r2, r1, r0\n"
-                    "\tlsls r0, r5, 16\n"
-                    "\tlsrs r3, r0, 16\n"
-                    "\tcmp r3, 0x3\n"
-                    "\tbls _0809A0FE\n"
-                    "_0809A13A:\n"
-                    "\tadd sp, 0x20\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0");
-}
-#endif
 
-#ifdef NONMATCHING
-void sub_809A14C(u16 *vdest)
-{
-    u16 *r2;
-    u16 i;
-    int r3 = ((gPokemonStorageSystemPtr->unk_08b4 >> 3) + 30) & 0x3f;
-    r2 = vdest + (r3 < 0x20 ? r3 + 0x260 : r3 + 0x640);
-    for (i = 0; i < 0x2b; i++)
+    for (y = 0; y < 18; y++)
     {
-        *r2++ = 0;
-        r3++;
-        r3 &= 0x3f;
-        if (r3 == 0)
-            r2 -= 0x420;
-        if (r3 == 0x20)
-            r2 += 0x3e0;
+        for(x = 0; x < rectWidth; x++)
+        {
+            // Get the tile and palette metadata for each
+            // 2 bytes, and copy over into the buffer.
+            tileMeta = (*tilemap & 0xfff) + tileOffset;
+            paletteMeta =  (*tilemap & 0xf000) + paletteOffset;
+            dest[x] = paletteMeta | tileMeta;
+            tilemap++;
+        }
+        for(x = 0; x < rectWidth2; x++)
+        {
+            // Repeat the same process again in case we need
+            // to copy halves.
+            tileMeta = (*tilemap & 0xfff) + tileOffset;
+            paletteMeta =  (*tilemap & 0xf000) + paletteOffset;
+            dest2[x] = paletteMeta | tileMeta;
+            tilemap++;
+        }
+        dest += 0x20;
+        dest2 += 0x20;
+    }
+
+    if (direction != 0)
+    {
+        fillX = (direction > 0 ? rectX + 20 : rectX - 4) & 0x3F;
+
+        if(fillX < 32)
+            fillDest = buffer + (fillX + 0x40);
+        else
+            fillDest = buffer + (fillX + 0x420);
+
+        for(x = 0; x < 4; x++)
+        {
+            for(y = 0; y < 18; y++)
+            {
+                *fillDest = 0; // Blank the buffer.
+                fillDest += 0x20;
+            }
+            // Needs to be one statement, or else it won't match.
+            // fillX = ++fillX & 0x3F; matches, but to have consistency
+            // with ClearLowestWallpaperTiles, which requires var + 1
+            // instead for a similar operation, we'll use that.
+            fillX = (fillX + 1) & 0x3F;
+
+            if (fillX < 32)
+                fillDest = buffer + (fillX + 0x40);
+            else
+                fillDest = buffer + (fillX + 0x420);
+        }
     }
 }
-#else
-NAKED void sub_809A14C(u16 *vdest)
+
+/*
+    Clears the lowest line of a wallpaper buffer.
+    Depends on stored BG2 X variable in PSS.
+
+    - buffer : Wallpaper buffer.
+*/
+void ClearLowestWallpaperTiles(u16 *buffer)
 {
-    asm_unified("\tpush {r4-r6,lr}\n"
-                    "\tadds r2, r0, 0\n"
-                    "\tldr r0, _0809A174 @ =gPokemonStorageSystemPtr\n"
-                    "\tldr r0, [r0]\n"
-                    "\tldr r1, _0809A178 @ =0x000008b4\n"
-                    "\tadds r0, r1\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tlsrs r0, 3\n"
-                    "\tadds r3, r0, 0\n"
-                    "\tadds r3, 0x1E\n"
-                    "\tmovs r0, 0x3F\n"
-                    "\tands r3, r0\n"
-                    "\tadds r0, r3, 0\n"
-                    "\tcmp r0, 0x1F\n"
-                    "\tbgt _0809A17C\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r6, 0x98\n"
-                    "\tlsls r6, 3\n"
-                    "\tadds r0, r6\n"
-                    "\tb _0809A184\n"
-                    "\t.align 2, 0\n"
-                    "_0809A174: .4byte gPokemonStorageSystemPtr\n"
-                    "_0809A178: .4byte 0x000008b4\n"
-                    "_0809A17C:\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r1, 0xC8\n"
-                    "\tlsls r1, 4\n"
-                    "\tadds r0, r1\n"
-                    "_0809A184:\n"
-                    "\tadds r2, r0\n"
-                    "\tmovs r0, 0\n"
-                    "\tmovs r5, 0\n"
-                    "\tmovs r4, 0x3F\n"
-                    "_0809A18C:\n"
-                    "\tstrh r5, [r2]\n"
-                    "\tadds r2, 0x2\n"
-                    "\tadds r3, 0x1\n"
-                    "\tands r3, r4\n"
-                    "\tadds r1, r3, 0\n"
-                    "\tcmp r1, 0\n"
-                    "\tbne _0809A19E\n"
-                    "\tldr r6, _0809A1B8 @ =0xfffff7c0\n"
-                    "\tadds r2, r6\n"
-                    "_0809A19E:\n"
-                    "\tcmp r1, 0x20\n"
-                    "\tbne _0809A1A8\n"
-                    "\tmovs r1, 0xF8\n"
-                    "\tlsls r1, 3\n"
-                    "\tadds r2, r1\n"
-                    "_0809A1A8:\n"
-                    "\tadds r0, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tcmp r0, 0x2B\n"
-                    "\tbls _0809A18C\n"
-                    "\tpop {r4-r6}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_0809A1B8: .4byte 0xfffff7c0");
+    u16 x;
+    s16 rectX = ((gPokemonStorageSystemPtr->unk_08b4 / 8) + 30) & 0x3F;
+
+    if (rectX < 32)
+        buffer += rectX + 0x260;
+    else
+        buffer += rectX + 0x640;
+
+    for (x = 0; x < 44; x++)
+    {
+        *buffer++ = 0;
+        // Needs to be one statement in order to match.
+        rectX = (rectX + 1) & 0x3F;
+        if (rectX == 0)
+            buffer -= 0x420;
+        if (rectX == 32)
+            buffer += 0x3e0;
+    }
 }
-#endif
 
 void sub_809A1BC(const u8 *a0, const u8 *text)
 {
