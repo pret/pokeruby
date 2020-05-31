@@ -3113,44 +3113,46 @@ void sub_809CE84(void)
         gPokemonStorageSystemPtr->unk_11b9);
 }
 
-#ifdef NONMATCHING // r4 and r5 are swapped throughout the entire function.
 s16 sub_809CF30(void)
 {
     int textId = -2;
 
-    if (!(gMain.newKeys & A_BUTTON))
+    do
     {
-        if (gMain.newKeys & B_BUTTON)
+        if (!(gMain.newKeys & A_BUTTON))
         {
-            PlaySE(SE_SELECT);
-            textId++;
+            if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                textId++;
+            }
+
+            if (gMain.newKeys & DPAD_UP)
+            {
+                PlaySE(SE_SELECT);
+                Menu_MoveCursor(-1);
+            }
+            else if (gMain.newKeys & DPAD_DOWN)
+            {
+                PlaySE(SE_SELECT);
+                Menu_MoveCursor(1);
+            }
+        }
+        else
+        {
+            textId = Menu_GetCursorPos();
         }
 
-        if (gMain.newKeys & DPAD_UP)
+        if (textId != -2)
         {
-            PlaySE(SE_SELECT);
-            Menu_MoveCursor(-1);
+            Menu_DestroyCursor();
+            Menu_EraseWindowRect(
+                gPokemonStorageSystemPtr->unk_11ba,
+                gPokemonStorageSystemPtr->unk_11bc,
+                29,
+                15);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
-        {
-            PlaySE(SE_SELECT);
-            Menu_MoveCursor(1);
-        }
-    }
-    else
-    {
-        textId = Menu_GetCursorPos();
-    }
-
-    if (textId != -2)
-    {
-        Menu_DestroyCursor();
-        Menu_EraseWindowRect(
-            gPokemonStorageSystemPtr->unk_11ba,
-            gPokemonStorageSystemPtr->unk_11bc,
-            29,
-            15);
-    }
+    } while (0);
 
     if (textId >= 0)
     {
@@ -3159,95 +3161,6 @@ s16 sub_809CF30(void)
 
     return textId;
 }
-#else
-NAKED
-s16 sub_809CF30(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    movs r5, 0x2\n\
-    negs r5, r5\n\
-    ldr r4, _0809CF6C @ =gMain\n\
-    ldrh r1, [r4, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0809CF86\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809CF52\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    adds r5, 0x1\n\
-_0809CF52:\n\
-    ldrh r1, [r4, 0x2E]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809CF70\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    bl Menu_MoveCursor\n\
-    b _0809CF8E\n\
-    .align 2, 0\n\
-_0809CF6C: .4byte gMain\n\
-_0809CF70:\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809CF8E\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    bl Menu_MoveCursor\n\
-    b _0809CF8E\n\
-_0809CF86:\n\
-    bl Menu_GetCursorPos\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-_0809CF8E:\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    cmp r5, r0\n\
-    beq _0809CFB2\n\
-    bl Menu_DestroyCursor\n\
-    ldr r0, _0809CFD0 @ =gPokemonStorageSystemPtr\n\
-    ldr r1, [r0]\n\
-    ldr r2, _0809CFD4 @ =0x000011ba\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    adds r2, 0x2\n\
-    adds r1, r2\n\
-    ldrb r1, [r1]\n\
-    movs r2, 0x1D\n\
-    movs r3, 0xF\n\
-    bl Menu_EraseWindowRect\n\
-_0809CFB2:\n\
-    cmp r5, 0\n\
-    blt _0809CFC4\n\
-    ldr r0, _0809CFD0 @ =gPokemonStorageSystemPtr\n\
-    ldr r0, [r0]\n\
-    lsls r1, r5, 3\n\
-    ldr r2, _0809CFD8 @ =0x00001184\n\
-    adds r0, r2\n\
-    adds r0, r1\n\
-    ldr r5, [r0]\n\
-_0809CFC4:\n\
-    lsls r0, r5, 16\n\
-    asrs r0, 16\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_0809CFD0: .4byte gPokemonStorageSystemPtr\n\
-_0809CFD4: .4byte 0x000011ba\n\
-_0809CFD8: .4byte 0x00001184\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_809CFDC(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u8 arg2)
 {
