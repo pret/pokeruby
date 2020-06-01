@@ -673,44 +673,47 @@ _080D3D32:\n\
 }
 #endif
 
-#ifdef NONMATCHING
 void sub_80D3D68(u8 taskId)
 {
     s16 i;
     struct ScanlineEffectParams params;
     struct Task *task = &gTasks[taskId];
-    // u16 *scanlineBuffer;
 
     switch (task->data[0])
     {
         case 0:
             for (i = 0; i < task->data[4]; i++)
             {
-                /* scanlineBuffer = &gScanlineEffectRegBuffers[0][i];
-                *(u16 *)(&gScanlineEffect) = task->data[2];
-                *scanlineBuffer = task->data[2] & -1; */
+                /*
+                   It would be odd for the scanline buffers to follow ASM literal
+                   and be initialized in reverse. Experimentation based upon how
+                   compilers in general load variables and pointers showed that
+                   they were initialized this way.
+
+                   foo = bar = baz -> foo = (bar = baz)
+                */
+                gScanlineEffectRegBuffers[0][i] =
                 gScanlineEffectRegBuffers[1][i] = task->data[2];
-                gScanlineEffectRegBuffers[0][i] = (u16)((int)(task->data[2] & 0xFFFF));
             }
             for (i = task->data[4]; i < task->data[5]; i++)
             {
+                gScanlineEffectRegBuffers[0][i] =
                 gScanlineEffectRegBuffers[1][i] = task->data[1];
-                gScanlineEffectRegBuffers[0][i] = (u16)((int)(task->data[1] & 0xFFFF));
             }
             for (i = task->data[5]; i < 160; i++)
             {
+                gScanlineEffectRegBuffers[0][i] =
                 gScanlineEffectRegBuffers[1][i] = task->data[2];
-                gScanlineEffectRegBuffers[0][i] = (u16)((int)(task->data[2] & 0xFFFF));
             }
             if (task->data[4] == 0)
             {
+                gScanlineEffectRegBuffers[0][i] =
                 gScanlineEffectRegBuffers[1][i] = task->data[1];
-                gScanlineEffectRegBuffers[0][i] = task->data[1];
             }
             else
             {
+                gScanlineEffectRegBuffers[0][i] =
                 gScanlineEffectRegBuffers[1][i] = task->data[2];
-                gScanlineEffectRegBuffers[0][i] = task->data[2];
             }
             params.dmaDest = (vu16 *)REG_ADDR_BLDALPHA;
             params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
@@ -766,391 +769,6 @@ void sub_80D3D68(u8 taskId)
             break;
     }
 }
-#else
-NAKED
-void sub_80D3D68(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	sub sp, 0xC\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	ldr r1, =gTasks\n\
-	adds r4, r0, r1\n\
-	movs r1, 0x8\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r0, 0x1\n\
-	bne _080D3D84\n\
-	b _080D3EBC\n\
-_080D3D84:\n\
-	cmp r0, 0x1\n\
-	bgt _080D3D94\n\
-	cmp r0, 0\n\
-	beq _080D3D9C\n\
-	b _080D4032\n\
-	.align 2, 0\n\
-	.pool\n\
-_080D3D94:\n\
-	cmp r0, 0x2\n\
-	bne _080D3D9A\n\
-	b _080D3F88\n\
-_080D3D9A:\n\
-	b _080D4032\n\
-_080D3D9C:\n\
-	movs r3, 0\n\
-	movs r2, 0x10\n\
-	ldrsh r0, [r4, r2]\n\
-	ldr r1, =gScanlineEffectRegBuffers\n\
-	mov r12, r1\n\
-	cmp r3, r0\n\
-	bge _080D3DDA\n\
-	mov r7, r12\n\
-	movs r5, 0xF0\n\
-	lsls r5, 3\n\
-	add r5, r12\n\
-	ldr r6, =0x0000ffff\n\
-_080D3DB4:\n\
-	lsls r2, r3, 16\n\
-	asrs r2, 16\n\
-	lsls r1, r2, 1\n\
-	adds r3, r1, r7\n\
-	adds r1, r5\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r1]\n\
-	ldrh r1, [r4, 0xC]\n\
-	adds r0, r6, 0\n\
-	ands r0, r1\n\
-	strh r0, [r3]\n\
-	adds r2, 0x1\n\
-	lsls r2, 16\n\
-	lsrs r3, r2, 16\n\
-	asrs r2, 16\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r2, r0\n\
-	blt _080D3DB4\n\
-_080D3DDA:\n\
-	ldrh r3, [r4, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	bge _080D3E14\n\
-	ldr r5, =gScanlineEffectRegBuffers\n\
-	movs r0, 0xF0\n\
-	lsls r0, 3\n\
-	adds r6, r5, r0\n\
-	ldr r7, =0x0000ffff\n\
-_080D3DF2:\n\
-	asrs r2, 16\n\
-	lsls r1, r2, 1\n\
-	adds r3, r1, r5\n\
-	adds r1, r6\n\
-	ldrh r0, [r4, 0xA]\n\
-	strh r0, [r1]\n\
-	ldrh r1, [r4, 0xA]\n\
-	adds r0, r7, 0\n\
-	ands r0, r1\n\
-	strh r0, [r3]\n\
-	adds r2, 0x1\n\
-	lsls r2, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	blt _080D3DF2\n\
-_080D3E14:\n\
-	ldrh r3, [r4, 0x12]\n\
-	lsls r2, r3, 16\n\
-	asrs r0, r2, 16\n\
-	cmp r0, 0x9F\n\
-	bgt _080D3E4A\n\
-	ldr r5, =gScanlineEffectRegBuffers\n\
-	movs r0, 0xF0\n\
-	lsls r0, 3\n\
-	adds r6, r5, r0\n\
-	ldr r7, =0x0000ffff\n\
-_080D3E28:\n\
-	asrs r2, 16\n\
-	lsls r1, r2, 1\n\
-	adds r3, r1, r5\n\
-	adds r1, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r1]\n\
-	ldrh r1, [r4, 0xC]\n\
-	adds r0, r7, 0\n\
-	ands r0, r1\n\
-	strh r0, [r3]\n\
-	adds r2, 0x1\n\
-	lsls r2, 16\n\
-	lsrs r3, r2, 16\n\
-	lsls r2, r3, 16\n\
-	asrs r0, r2, 16\n\
-	cmp r0, 0x9F\n\
-	ble _080D3E28\n\
-_080D3E4A:\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r0, 0\n\
-	bne _080D3E74\n\
-	lsls r0, r3, 16\n\
-	asrs r0, 15\n\
-	mov r3, r12\n\
-	adds r2, r0, r3\n\
-	movs r1, 0xF0\n\
-	lsls r1, 3\n\
-	add r1, r12\n\
-	adds r0, r1\n\
-	ldrh r1, [r4, 0xA]\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r4, 0xA]\n\
-	b _080D3E8A\n\
-	.align 2, 0\n\
-	.pool\n\
-_080D3E74:\n\
-	lsls r0, r3, 16\n\
-	asrs r0, 15\n\
-	mov r1, r12\n\
-	adds r2, r0, r1\n\
-	movs r1, 0xF0\n\
-	lsls r1, 3\n\
-	add r1, r12\n\
-	adds r0, r1\n\
-	ldrh r1, [r4, 0xC]\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r4, 0xC]\n\
-_080D3E8A:\n\
-	strh r0, [r2]\n\
-	ldr r0, =0x04000052\n\
-	str r0, [sp]\n\
-	ldr r0, =0xa2600001\n\
-	str r0, [sp, 0x4]\n\
-	mov r1, sp\n\
-	movs r2, 0\n\
-	movs r0, 0x1\n\
-	strb r0, [r1, 0x8]\n\
-	mov r0, sp\n\
-	strb r2, [r0, 0x9]\n\
-	ldr r0, [sp]\n\
-	ldr r1, [sp, 0x4]\n\
-	ldr r2, [sp, 0x8]\n\
-	bl ScanlineEffect_SetParams\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-	b _080D4032\n\
-	.align 2, 0\n\
-	.pool\n\
-_080D3EBC:\n\
-	movs r2, 0xE\n\
-	ldrsh r1, [r4, r2]\n\
-	cmp r1, 0\n\
-	bne _080D3ED4\n\
-	ldrh r0, [r4, 0x10]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4, 0x10]\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	bgt _080D3EE8\n\
-	strh r1, [r4, 0x10]\n\
-	b _080D3EE2\n\
-_080D3ED4:\n\
-	ldrh r0, [r4, 0x12]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x6F\n\
-	ble _080D3EE8\n\
-_080D3EE2:\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-_080D3EE8:\n\
-	movs r3, 0\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r3, r0\n\
-	bge _080D3F1C\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_080D3EF6:\n\
-	lsls r1, r3, 16\n\
-	asrs r1, 16\n\
-	lsls r3, r1, 1\n\
-	ldrb r2, [r5, 0x14]\n\
-	lsls r0, r2, 4\n\
-	subs r0, r2\n\
-	lsls r0, 7\n\
-	adds r3, r0\n\
-	adds r3, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r3]\n\
-	adds r1, 0x1\n\
-	lsls r1, 16\n\
-	lsrs r3, r1, 16\n\
-	asrs r1, 16\n\
-	movs r2, 0x10\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r1, r0\n\
-	blt _080D3EF6\n\
-_080D3F1C:\n\
-	ldrh r3, [r4, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	bge _080D3F50\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_080D3F2E:\n\
-	asrs r3, r2, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xA]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	blt _080D3F2E\n\
-_080D3F50:\n\
-	ldrh r3, [r4, 0x12]\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	bgt _080D4032\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_080D3F5E:\n\
-	asrs r3, r1, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	ble _080D3F5E\n\
-	b _080D4032\n\
-	.align 2, 0\n\
-	.pool\n\
-_080D3F88:\n\
-	movs r3, 0\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r3, r0\n\
-	bge _080D3FBC\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_080D3F96:\n\
-	lsls r1, r3, 16\n\
-	asrs r1, 16\n\
-	lsls r3, r1, 1\n\
-	ldrb r2, [r5, 0x14]\n\
-	lsls r0, r2, 4\n\
-	subs r0, r2\n\
-	lsls r0, 7\n\
-	adds r3, r0\n\
-	adds r3, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r3]\n\
-	adds r1, 0x1\n\
-	lsls r1, 16\n\
-	lsrs r3, r1, 16\n\
-	asrs r1, 16\n\
-	movs r2, 0x10\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r1, r0\n\
-	blt _080D3F96\n\
-_080D3FBC:\n\
-	ldrh r3, [r4, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	bge _080D3FF0\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_080D3FCE:\n\
-	asrs r3, r2, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xA]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	blt _080D3FCE\n\
-_080D3FF0:\n\
-	ldrh r3, [r4, 0x12]\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	bgt _080D401C\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_080D3FFE:\n\
-	asrs r3, r1, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	ble _080D3FFE\n\
-_080D401C:\n\
-	movs r0, 0x26\n\
-	ldrsh r1, [r4, r0]\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	cmp r1, r0\n\
-	bne _080D4032\n\
-	bl ScanlineEffect_Stop\n\
-	adds r0, r7, 0\n\
-	bl DestroyTask\n\
-_080D4032:\n\
-	add sp, 0xC\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-	.pool\n");
-}
-#endif
 
 void sub_80D4044(struct Sprite *sprite)
 {
