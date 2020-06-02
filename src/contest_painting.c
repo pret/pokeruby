@@ -101,40 +101,18 @@ static void ContestPaintingPrintCaption(u8 arg0, u8 arg1);
 static void ContestPaintingInitBG(void);
 static void ContestPaintingInitVars(u8 arg0);
 static void VBlankCB_ContestPainting(void);
-void sub_8106B90();  //should be static
+static void sub_8106B90(u8 *a, u16 *b, u16 *c);
 static void sub_8107090(u8 arg0, u8 arg1);
 
-NAKED
-void sub_8106630(u32 arg0)
+void sub_8106630(u32 contestWinnerId)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    ldr r2, _0810665C @ =gSharedMem + 0x15DE0\n\
-    subs r4, r2, 0x2\n\
-    subs r5, r2, 0x1\n\
-    ldr r3, _08106660 @ =gSaveBlock1\n\
-    subs r0, 0x1\n\
-    lsls r1, r0, 5\n\
-    adds r1, r3\n\
-    ldr r3, _08106664 @ =0x00002dfc\n\
-    adds r1, r3\n\
-    ldm r1!, {r3,r6,r7}\n\
-    stm r2!, {r3,r6,r7}\n\
-    ldm r1!, {r3,r6,r7}\n\
-    stm r2!, {r3,r6,r7}\n\
-    ldm r1!, {r6,r7}\n\
-    stm r2!, {r6,r7}\n\
-    strb r0, [r4]\n\
-    movs r0, 0\n\
-    strb r0, [r5]\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0810665C: .4byte gSharedMem + 0x15DE0\n\
-_08106660: .4byte gSaveBlock1\n\
-_08106664: .4byte 0x00002dfc\n\
-    .syntax divided\n");
+    // probably fakematching
+    struct ContestWinner *ptr1 = (struct ContestWinner*)&ewram15DE0; // TODO: resolve messy struct duplicates
+    u8 *ptr2 = (u8*)&ewram15DDE;
+    u8 *ptr3 = (u8*)&ewram15DDF;
+    *ptr1 = gSaveBlock1.contestWinners[contestWinnerId - 1];
+	*ptr2 = contestWinnerId - 1;
+	*ptr3 = 0;
 }
 
 void CB2_ContestPainting(void)
@@ -346,7 +324,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
             species,
             (u32)gUnknown_03005E8C->personality
         );
-        sub_8106B90(gUnknown_081FAF4C[1], gUnknown_03005E90, gUnknown_03005E10);
+        sub_8106B90((u8*)gUnknown_081FAF4C[1], (u16*)gUnknown_03005E90, (u16*)gUnknown_03005E10);
     }
     else
     {
@@ -359,18 +337,26 @@ static void sub_8106AC4(u16 species, u8 arg1)
             species,
             (u32)gUnknown_03005E8C->personality
         );
-        sub_8106B90(gUnknown_081FAF4C[0], gUnknown_03005E90, gUnknown_03005E10);
+        sub_8106B90((u8*)gUnknown_081FAF4C[0], (u16*)gUnknown_03005E90, (u16*)gUnknown_03005E10);
     }
 }
 
-#ifdef NONMATCHING
-void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
+
+static void sub_8106B90(u8 *a, u16 *b, u16 *c)
 {
     u16 i;
     u16 j;
     u16 k;
     u16 l;
 
+    /*
+        Raw arithmetics are required to match this function.
+        At least it's the first known way to match it. The extreme
+        sensitivity of this match and Game Freak proving to not have
+        been an array of C's advanced array features, preferring to
+        calculate dimensions manually (as proven in other functions)
+        tell that it may have been this way in the original code.
+    */
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
@@ -379,128 +365,38 @@ void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
             {
                 for (l = 0; l < 8; l++)
                 {
-                    //u8 *arr = a[i][j][k];
-                    //u8 r1 = arr[l / 2];
-                    u8 r1 = a[i][j][k][l / 2];
+                    /*
+                        Parenthesis/group hack absolutely required to match regalloc. Remove any
+                        unneeded parentheses and the function gets thrown off. See the comments
+                        in CopyWallpaperTilemap for documentation on a similar behavior.
+                    */
+                    u8 temp = ((u8*)a + ((((i << 3) + j) << 5) + (k << 2) + (l >> 1)))[0];
+                    /*
+                        The shifts have to be there to match r0 and r2's order in one instruction:
+                                add     r5, r2, r0
+                        This also makes agbcc's expression order parsing even more super sensitive
+                        and obscene when it comes to parentheses affecting regalloc regardless if
+                        unnecessary, requiring j must be placed in the front to match, or else
+                        regalloc breaks again and does this a few instructions above:
+                                add     r0, r3, r7 <- regswap
+                    */
 
                     if (l & 1)
-                        r1 /= 16;
+                        temp /= 16;
                     else
-                        r1 %= 16;
-                    //_08106BEA
-                    if (r1 == 0)
-                        c[i][k][j][l] = 0x8000;
+                        temp %= 16;
+
+                    // Same order as above needs to be written here, or else this happens:
+                    //         add     r0, r7, r1 <- regswap
+                    if (temp == 0)
+                        ((u16*)c + (((i << 3) + k) << 6) + ((j << 3)+l))[0] = 0x8000;
                     else
-                        c[i][k][j][l] = b[r1];
+                        ((u16*)c + (((i << 3) + k) << 6) + ((j << 3)+l))[0] = b[temp];
                 }
             }
         }
     }
 }
-#else
-NAKED
-void sub_8106B90()
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    mov r10, r0\n\
-    mov r9, r1\n\
-    str r2, [sp]\n\
-    movs r0, 0\n\
-_08106BA4:\n\
-    movs r3, 0\n\
-    adds r1, r0, 0x1\n\
-    str r1, [sp, 0x4]\n\
-    lsls r0, 3\n\
-    str r0, [sp, 0x8]\n\
-_08106BAE:\n\
-    movs r1, 0\n\
-    adds r2, r3, 0x1\n\
-    mov r8, r2\n\
-    ldr r7, [sp, 0x8]\n\
-    adds r0, r7, r3\n\
-    lsls r0, 5\n\
-    mov r12, r0\n\
-    lsls r4, r3, 3\n\
-_08106BBE:\n\
-    movs r3, 0\n\
-    lsls r0, r1, 2\n\
-    adds r6, r1, 0x1\n\
-    mov r2, r12\n\
-    adds r5, r2, r0\n\
-    ldr r7, [sp, 0x8]\n\
-    adds r0, r7, r1\n\
-    lsls r0, 7\n\
-    ldr r1, [sp]\n\
-    adds r2, r0, r1\n\
-_08106BD2:\n\
-    lsrs r0, r3, 1\n\
-    adds r0, r5, r0\n\
-    add r0, r10\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08106BE6\n\
-    lsrs r1, 4\n\
-    b _08106BEA\n\
-_08106BE6:\n\
-    movs r0, 0xF\n\
-    ands r1, r0\n\
-_08106BEA:\n\
-    cmp r1, 0\n\
-    bne _08106BFC\n\
-    adds r0, r4, r3\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    movs r7, 0x80\n\
-    lsls r7, 8\n\
-    adds r1, r7, 0\n\
-    b _08106C08\n\
-_08106BFC:\n\
-    adds r0, r4, r3\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    lsls r1, 1\n\
-    add r1, r9\n\
-    ldrh r1, [r1]\n\
-_08106C08:\n\
-    strh r1, [r0]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0x7\n\
-    bls _08106BD2\n\
-    lsls r0, r6, 16\n\
-    lsrs r1, r0, 16\n\
-    cmp r1, 0x7\n\
-    bls _08106BBE\n\
-    mov r1, r8\n\
-    lsls r0, r1, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0x7\n\
-    bls _08106BAE\n\
-    ldr r2, [sp, 0x4]\n\
-    lsls r0, r2, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x7\n\
-    bls _08106BA4\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_8106C40(u8 arg0, u8 arg1)
 {

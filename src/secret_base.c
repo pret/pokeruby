@@ -859,7 +859,11 @@ void sub_80BC6B0(u8 taskId)
         Menu_PrintText(gOtherText_Exit, 18, 2 * n + 2);
         DestroyVerticalScrollIndicator(BOTTOM_ARROW);
         if (n != 7)
-            Menu_BlankWindowRect(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // the shifts are needed to match
+        {
+            n++;
+            n--;
+            Menu_BlankWindowRect(18, n * 2 + 4, 28, 18);
+        }
     }
     else
     {
