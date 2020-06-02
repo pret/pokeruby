@@ -353,8 +353,8 @@ static void sub_8106B90(u8 *a, u16 *b, u16 *c)
         Raw arithmetics are required to match this function.
         At least it's the first known way to match it. The extreme
         sensitivity of this match and Game Freak proving to not have
-        been an array of C's advanced array features, preferring to
-        calculate dimensions manually (as proven in other functions)
+        been a fan of C's advanced array features, preferring to
+        calculate dimensions manually (as seen in other functions),
         tell that it may have been this way in the original code.
     */
     for (i = 0; i < 8; i++)
