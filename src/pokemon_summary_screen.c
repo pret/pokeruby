@@ -1576,35 +1576,38 @@ static void SummaryScreenHandleLeftRightInput(u8 taskId, s8 direction)
     }
 }
 
-// direction should be implicitly casted to a u8 during the var1 assign but it is not in this code
-#ifdef NONMATCHING
 void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 {
     s8 var3;
-    u8 var1 = direction;
 
     if (pssData.usingPC == TRUE)
     {
         if (pssData.page != PSS_PAGE_INFO)
         {
-            var1 = (direction == 1) ? 0 : 1;
+            if (direction == 1)
+                direction = 0;
+            else
+                direction = 1;
         }
         else
         {
-            var1 = (direction == 1) ? 2 : 3;
+            if (direction == 1)
+                direction = 2;
+            else
+                direction = 3;
         }
 
-        var3 = StorageSystemGetNextMonIndex(pssData.monList.boxMons, pssData.monIndex, pssData.maxMonIndex, var1);
+        var3 = StorageSystemGetNextMonIndex(pssData.monList.boxMons, pssData.monIndex, pssData.maxMonIndex, direction);
     }
     else
     {
         if (sub_80F9344() == TRUE && IsLinkDoubleBattle() == TRUE)
         {
-            var3 = sub_809F3CC(var1);
+            var3 = sub_809F3CC(direction);
         }
         else
         {
-            var3 = sub_809F284(var1);
+            var3 = sub_809F284(direction);
         }
     }
 
@@ -1621,113 +1624,7 @@ void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
         gTasks[taskId].func = sub_809F43C;
     }
 }
-#else
-NAKED
-void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r4, r1, 24\n\
-    ldr r0, _0809F1E4 @ =gSharedMem + 0x18000\n\
-    ldrb r1, [r0, 0xE]\n\
-    adds r2, r0, 0\n\
-    cmp r1, 0x1\n\
-    bne _0809F202\n\
-    ldrb r0, [r2, 0xB]\n\
-    cmp r0, 0\n\
-    beq _0809F1E8\n\
-    lsls r1, r4, 24\n\
-    asrs r1, 24\n\
-    movs r4, 0x1\n\
-    eors r1, r4\n\
-    negs r0, r1\n\
-    orrs r0, r1\n\
-    lsrs r4, r0, 31\n\
-    b _0809F1F4\n\
-    .align 2, 0\n\
-_0809F1E4: .4byte gSharedMem + 0x18000\n\
-_0809F1E8:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    movs r4, 0x3\n\
-    cmp r0, 0x1\n\
-    bne _0809F1F4\n\
-    movs r4, 0x2\n\
-_0809F1F4:\n\
-    ldr r0, [r2]\n\
-    ldrb r1, [r2, 0x9]\n\
-    ldrb r2, [r2, 0xA]\n\
-    adds r3, r4, 0\n\
-    bl StorageSystemGetNextMonIndex\n\
-    b _0809F22C\n\
-_0809F202:\n\
-    bl sub_80F9344\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0809F224\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0809F224\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    bl sub_809F3CC\n\
-    b _0809F22C\n\
-_0809F224:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    bl sub_809F284\n\
-_0809F22C:\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0x1\n\
-    negs r1, r1\n\
-    cmp r0, r1\n\
-    beq _0809F270\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    ldr r5, _0809F278 @ =gSharedMem + 0x18010\n\
-    adds r0, r5, 0\n\
-    bl GetMonStatusAndPokerus\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _0809F258\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    bl sub_80A12D0\n\
-_0809F258:\n\
-    adds r0, r5, 0\n\
-    subs r0, 0x10\n\
-    strb r4, [r0, 0x9]\n\
-    ldr r1, _0809F27C @ =gTasks\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    str r1, [r5, 0x74]\n\
-    ldr r1, _0809F280 @ =sub_809F43C\n\
-    str r1, [r0]\n\
-_0809F270:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809F278: .4byte gSharedMem + 0x18010\n\
-_0809F27C: .4byte gTasks\n\
-_0809F280: .4byte sub_809F43C\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
-#ifdef NONMATCHING
 s8 sub_809F284(s8 a)
 {
     struct Pokemon *mons = pssData.monList.partyMons;
@@ -1741,100 +1638,17 @@ s8 sub_809F284(s8 a)
             return -1;
         return pssData.monIndex + a;
     }
-    else
+
+    // unlike Emerald, the do while needs to be inversed in order to match
+    while (1)
     {
-        do
-        {
-            r6 += a;
-            if (pssData.monIndex + r6 < 0 || pssData.monIndex + r6 > pssData.maxMonIndex)
-                return -1;
-        } while (GetMonData(&mons[pssData.monIndex + r6], MON_DATA_IS_EGG) != 0);
-        return pssData.monIndex + r6;
+        r6 += a;
+        if (pssData.monIndex + r6 < 0 || pssData.monIndex + r6 > pssData.maxMonIndex)
+            return -1;
+        if (GetMonData(&mons[pssData.monIndex + r6], MON_DATA_IS_EGG) == 0)
+            return pssData.monIndex + r6;
     }
 }
-#else
-NAKED
-s8 sub_809F284(s8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    ldr r0, _0809F2C0 @ =gSharedMem + 0x18000\n\
-    ldr r7, [r0]\n\
-    movs r6, 0\n\
-    ldrb r1, [r0, 0xB]\n\
-    adds r4, r0, 0\n\
-    cmp r1, 0\n\
-    bne _0809F2C4\n\
-    lsls r0, r3, 24\n\
-    asrs r2, r0, 24\n\
-    movs r1, 0x1\n\
-    negs r1, r1\n\
-    adds r5, r0, 0\n\
-    cmp r2, r1\n\
-    bne _0809F2AC\n\
-    ldrb r0, [r4, 0x9]\n\
-    cmp r0, 0\n\
-    beq _0809F2E4\n\
-_0809F2AC:\n\
-    asrs r0, r5, 24\n\
-    cmp r0, 0x1\n\
-    bne _0809F2BA\n\
-    ldrb r0, [r4, 0x9]\n\
-    ldrb r1, [r4, 0xA]\n\
-    cmp r0, r1\n\
-    bcs _0809F2E4\n\
-_0809F2BA:\n\
-    ldrb r0, [r4, 0x9]\n\
-    adds r0, r3\n\
-    b _0809F304\n\
-    .align 2, 0\n\
-_0809F2C0: .4byte gSharedMem + 0x18000\n\
-_0809F2C4:\n\
-    lsls r5, r3, 24\n\
-_0809F2C6:\n\
-    lsls r0, r6, 24\n\
-    asrs r0, 24\n\
-    asrs r1, r5, 24\n\
-    adds r0, r1\n\
-    lsls r0, 24\n\
-    ldr r4, _0809F2EC @ =gSharedMem + 0x18000\n\
-    lsrs r6, r0, 24\n\
-    asrs r0, 24\n\
-    ldrb r2, [r4, 0x9]\n\
-    adds r1, r0, r2\n\
-    cmp r1, 0\n\
-    blt _0809F2E4\n\
-    ldrb r0, [r4, 0xA]\n\
-    cmp r1, r0\n\
-    ble _0809F2F0\n\
-_0809F2E4:\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    b _0809F308\n\
-    .align 2, 0\n\
-_0809F2EC: .4byte gSharedMem + 0x18000\n\
-_0809F2F0:\n\
-    movs r0, 0x64\n\
-    muls r0, r1\n\
-    adds r0, r7, r0\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _0809F2C6\n\
-    ldrb r0, [r4, 0x9]\n\
-    adds r0, r6\n\
-_0809F304:\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-_0809F308:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 bool8 sub_809F310(struct Pokemon *mon)
 {
@@ -2614,175 +2428,51 @@ static void sub_80A04CC(u16 move)
     }
 }
 
-#ifdef NONMATCHING // The two vramAddr lines are non-matching.
 void sub_80A057C(u16 move)
 {
-    u8 appeal;
-    u8 jam;
     u8 i;
-    u16 *vramAddr = (u16 *)(VRAM + 0x6800);
+    u8 effectValue;
+    u16 *tilemap = (u16 *)(VRAM + 0x6800);
+    u16 tile;
 
-    if (move == 0xFFFF) return;
-
-    appeal = gContestEffects[gContestMoves[move].effect].appeal;
-    if (appeal != 0xFF)
-        appeal = appeal / 10;
-
-    for (i = 0; i < 8; i++)
+    // The function didn't change much between Ruby and Emerald, but unlike
+    // Emerald, shifts are oddly an absolute requirement to match.
+    if (move != 0xFFFF)
     {
-        u16 tile = 0x1039;
-        int and = 3;
-        int offset = 0x3CC / 2;
-        if (appeal != 0xFF && i < appeal)
-            tile = 0x103A;
+        effectValue = gContestEffects[gContestMoves[move].effect].appeal;
+        if (effectValue != 0xFF)
+            effectValue /= 10;
 
-        *(&vramAddr[((i >> 2) << 5) + (i & and)] + offset) = tile;
-    }
-
-    if (move == 0xFFFF) return;
-
-    jam = gContestEffects[gContestMoves[move].effect].jam;
-    if (jam != 0xFF)
-    {
-        jam = jam / 10;
-    }
-
-    for (i = 0; i < 8; i++)
-    {
-        u16 tile = 0x103D;
-        int and = 3;
-        int offset = 0x226;
-        if (jam != 0xFF && i < jam)
+        for (i = 0; i < 8; i++)
         {
-            tile = 0x103C;
-        }
+            if (effectValue != 0xFF && i < effectValue)
+                tile = 0x103A;
+            else
+                tile = 0x1039;
 
-        *(&vramAddr[((i >> 2) << 5) + (i & and)] + offset) = tile;
+            // The offset number has to go first, or else, r1 gets swapped with r0.
+            tilemap[0x1E6 + ((i >> 2) << 5) + (i & 3)] = tile;
+        }
+    }
+
+    if (move != 0xFFFF)
+    {
+        effectValue = gContestEffects[gContestMoves[move].effect].jam;
+        if (effectValue != 0xFF)
+            effectValue /= 10;
+
+        for (i = 0; i < 8; i++)
+        {
+            if (effectValue != 0xFF && i < effectValue)
+                tile = 0x103C;
+            else
+                tile = 0x103D;
+
+            // match order above
+            tilemap[0x226 + ((i >> 2) << 5) + (i & 3)] = tile;
+        }
     }
 }
-#else
-NAKED
-void sub_80A057C(u16 move)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    ldr r0, _080A0648 @ =0x06006800\n\
-    mov r8, r0\n\
-    ldr r0, _080A064C @ =0x0000ffff\n\
-    cmp r5, r0\n\
-    beq _080A063A\n\
-    ldr r1, _080A0650 @ =gContestEffects\n\
-    ldr r2, _080A0654 @ =gContestMoves\n\
-    lsls r3, r5, 3\n\
-    adds r0, r3, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r4, [r0, 0x1]\n\
-    mov r10, r2\n\
-    mov r9, r3\n\
-    cmp r4, 0xFF\n\
-    beq _080A05B8\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xA\n\
-    bl __udivsi3\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-_080A05B8:\n\
-    movs r2, 0\n\
-    movs r7, 0x3\n\
-    movs r6, 0xF3\n\
-    lsls r6, 2\n\
-_080A05C0:\n\
-    ldr r3, _080A0658 @ =0x00001039\n\
-    cmp r4, 0xFF\n\
-    beq _080A05CC\n\
-    cmp r2, r4\n\
-    bcs _080A05CC\n\
-    adds r3, 0x1\n\
-_080A05CC:\n\
-    lsrs r0, r2, 2\n\
-    lsls r0, 5\n\
-    adds r1, r2, 0\n\
-    ands r1, r7\n\
-    adds r1, r0\n" // start of nonmatching
-    "lsls r1, 1\n\
-    add r1, r8\n\
-    adds r1, r6\n\
-    strh r3, [r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0x7\n\
-    bls _080A05C0\n\
-    ldr r0, _080A064C @ =0x0000ffff\n\
-    cmp r5, r0\n\
-    beq _080A063A\n\
-    mov r0, r9\n\
-    add r0, r10\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    ldr r1, _080A0650 @ =gContestEffects\n\
-    adds r0, r1\n\
-    ldrb r4, [r0, 0x2]\n\
-    cmp r4, 0xFF\n\
-    beq _080A060C\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xA\n\
-    bl __udivsi3\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-_080A060C:\n\
-    movs r2, 0\n\
-    movs r6, 0x3\n\
-    ldr r5, _080A065C @ =0x0000044c\n\
-_080A0612:\n\
-    ldr r3, _080A0660 @ =0x0000103d\n\
-    cmp r4, 0xFF\n\
-    beq _080A061E\n\
-    cmp r2, r4\n\
-    bcs _080A061E\n\
-    subs r3, 0x1\n\
-_080A061E:\n\
-    lsrs r0, r2, 2\n\
-    lsls r0, 5\n\
-    adds r1, r2, 0\n\
-    ands r1, r6\n\
-    adds r1, r0\n\
-    lsls r1, 1\n\
-    add r1, r8\n\
-    adds r1, r5\n\
-    strh r3, [r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0x7\n\
-    bls _080A0612\n\
-_080A063A:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A0648: .4byte 0x06006800\n\
-_080A064C: .4byte 0x0000ffff\n\
-_080A0650: .4byte gContestEffects\n\
-_080A0654: .4byte gContestMoves\n\
-_080A0658: .4byte 0x00001039\n\
-_080A065C: .4byte 0x0000044c\n\
-_080A0660: .4byte 0x0000103d\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {
