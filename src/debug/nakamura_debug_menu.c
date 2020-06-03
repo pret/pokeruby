@@ -1266,6 +1266,7 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
             }
         }
         if (pkblk[firstNonzeroFlavor] >= pkblk[lastNonzeroFlavor])
+            // Suspiciously looks like a temp could've been here.
             lastNonzeroFlavor = firstNonzeroFlavor;
 
         if (lastNonzeroFlavor == 0)

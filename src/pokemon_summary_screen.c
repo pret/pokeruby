@@ -97,12 +97,13 @@ static void DrawPokerusSurvivorDot(struct Pokemon *);
 static void sub_80A12D0(s8);
 static void sub_809FAC8(struct Pokemon *);
 static void SummaryScreenHandleLeftRightInput(u8, s8);
-static void sub_809E8F0();
+static void sub_809E8F0(u8 taskId, s8 direction, u8 *moveIndexPtr);
 static void sub_80A1654(s8, u8);
 static void sub_80A1488(s8, u8);
 static void SummaryScreen_PrintPokemonInfo(struct Pokemon *);
 static void SummaryScreen_PrintPokemonSkills(struct Pokemon *);
 static void sub_80A1918(u8, u8);
+static void sub_80A1C30(u8 a);
 static void SummaryScreen_DrawTypeIcon(u8, u8, u8, u8);
 static u16 GetMonMove(struct Pokemon *, u8);
 static void sub_80A04CC(u16);
@@ -1208,184 +1209,57 @@ static void sub_809E83C(u8 taskId, s8 b)
     sub_80A2078(taskId);
 }
 
-NAKED
-static void sub_809E8F0(/*u8 taskId, s8 direction, u8 *c*/)
+static void sub_809E8F0(u8 taskId, s8 direction, u8 *moveIndexPtr)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    adds r4, r1, 0\n\
-    mov r9, r2\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    mov r1, r9\n\
-    ldrb r6, [r1]\n\
-    ldr r1, _0809E944 @ =gTasks\n\
-    mov r2, r8\n\
-    lsls r0, r2, 2\n\
-    add r0, r8\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldrb r0, [r0, 0x8]\n\
-    movs r2, 0\n\
-    lsls r4, 24\n\
-    asrs r4, 24\n\
-    mov r10, r4\n\
-    lsls r7, r0, 24\n\
-_0809E930:\n\
-    lsls r0, r6, 24\n\
-    asrs r0, 24\n\
-    add r0, r10\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    asrs r1, r0, 24\n\
-    cmp r0, r7\n\
-    ble _0809E948\n\
-    movs r6, 0\n\
-    b _0809E94E\n\
-    .align 2, 0\n\
-_0809E944: .4byte gTasks\n\
-_0809E948:\n\
-    cmp r1, 0\n\
-    bge _0809E94E\n\
-    lsrs r6, r7, 24\n\
-_0809E94E:\n\
-    lsls r4, r6, 24\n\
-    lsrs r1, r4, 24\n\
-    ldr r0, _0809EA10 @ =gSharedMem + 0x18010\n\
-    str r2, [sp, 0x4]\n\
-    bl GetMonMove\n\
-    lsls r0, 16\n\
-    adds r5, r4, 0\n\
-    ldr r2, [sp, 0x4]\n\
-    cmp r0, 0\n\
-    bne _0809E97A\n\
-    asrs r0, r5, 24\n\
-    cmp r0, 0x4\n\
-    beq _0809E97A\n\
-    lsls r0, r2, 24\n\
-    movs r3, 0x80\n\
-    lsls r3, 17\n\
-    adds r0, r3\n\
-    lsrs r2, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _0809E930\n\
-_0809E97A:\n\
-    mov r1, r9\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x4\n\
-    bne _0809E996\n\
-    asrs r0, r5, 24\n\
-    cmp r0, 0x4\n\
-    beq _0809E996\n\
-    ldr r0, _0809EA14 @ =gSharedMem + 0x18000\n\
-    adds r0, 0x7C\n\
-    ldrh r0, [r0]\n\
-    mov r2, r8\n\
-    lsls r7, r2, 2\n\
-    cmp r0, 0\n\
-    beq _0809E9AC\n\
-_0809E996:\n\
-    ldr r2, _0809EA18 @ =gTasks\n\
-    mov r3, r8\n\
-    lsls r1, r3, 2\n\
-    adds r0, r1, r3\n\
-    lsls r0, 3\n\
-    adds r0, r2\n\
-    movs r2, 0x22\n\
-    ldrsh r0, [r0, r2]\n\
-    adds r7, r1, 0\n\
-    cmp r0, 0x1\n\
-    bne _0809E9D0\n\
-_0809E9AC:\n\
-    lsrs r4, r5, 24\n\
-    movs r0, 0x2\n\
-    adds r1, r4, 0\n\
-    bl sub_80A1488\n\
-    movs r0, 0x2\n\
-    adds r1, r4, 0\n\
-    bl sub_80A1654\n\
-    ldr r1, _0809EA18 @ =gTasks\n\
-    mov r3, r8\n\
-    adds r0, r7, r3\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0x22]\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-_0809E9D0:\n\
-    mov r1, r9\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x4\n\
-    beq _0809E9FE\n\
-    asrs r0, r5, 24\n\
-    cmp r0, 0x4\n\
-    bne _0809E9FE\n\
-    ldr r0, _0809EA14 @ =gSharedMem + 0x18000\n\
-    adds r0, 0x7C\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _0809E9FE\n\
-    movs r4, 0x2\n\
-    negs r4, r4\n\
-    lsrs r5, 24\n\
-    adds r0, r4, 0\n\
-    adds r1, r5, 0\n\
-    bl sub_80A1488\n\
-    adds r0, r4, 0\n\
-    adds r1, r5, 0\n\
-    bl sub_80A1654\n\
-_0809E9FE:\n\
-    mov r2, r9\n\
-    strb r6, [r2]\n\
-    ldr r0, _0809EA1C @ =gSharedMem + 0x18079\n\
-    cmp r9, r0\n\
-    bne _0809EA20\n\
-    movs r0, 0\n\
-    bl sub_80A1C30\n\
-    b _0809EA26\n\
-    .align 2, 0\n\
-_0809EA10: .4byte gSharedMem + 0x18010\n\
-_0809EA14: .4byte gSharedMem + 0x18000\n\
-_0809EA18: .4byte gTasks\n\
-_0809EA1C: .4byte gSharedMem + 0x18079\n\
-_0809EA20:\n\
-    movs r0, 0x1\n\
-    bl sub_80A1C30\n\
-_0809EA26:\n\
-    ldr r3, [sp]\n\
-    cmp r3, 0\n\
-    beq _0809EA34\n\
-    ldr r0, _0809EA4C @ =gSharedMem + 0x18010\n\
-    mov r1, r9\n\
-    bl sub_80A0428\n\
-_0809EA34:\n\
-    mov r0, r8\n\
-    bl sub_80A2078\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809EA4C: .4byte gSharedMem + 0x18010\n\
-    .syntax divided\n");
+    s8 i;
+    s8 newMoveIndex;
+    s8 var;
+    bool8 bln;
+
+    bln = TRUE;
+    PlaySE(SE_SELECT);
+    newMoveIndex = *moveIndexPtr;
+    var = (s8)gTasks[taskId].data[0];
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        newMoveIndex += direction;
+        if (newMoveIndex > var)
+            newMoveIndex = 0;
+        else if (newMoveIndex < 0)
+            newMoveIndex = var;
+
+        if (GetMonMove(&pssData.loadedMon, newMoveIndex) != 0 || newMoveIndex == MAX_MON_MOVES)
+            break;
+    }
+
+    if ((*moveIndexPtr == MAX_MON_MOVES
+         && newMoveIndex != MAX_MON_MOVES
+         && pssData.moveToLearn == 0)
+         || gTasks[taskId].data[13] == 1)
+    {
+    	sub_80A1488(2, newMoveIndex);
+    	sub_80A1654(2, newMoveIndex);
+        gTasks[taskId].data[13] = 0;
+        bln = FALSE;
+    }
+    if (*moveIndexPtr != MAX_MON_MOVES
+        && newMoveIndex == MAX_MON_MOVES
+        && pssData.moveToLearn == 0)
+    {
+    	sub_80A1488(-2, newMoveIndex);
+    	sub_80A1654(-2, newMoveIndex);
+    }
+
+    *moveIndexPtr = newMoveIndex;
+    // Get rid of the 'flicker' effect(while idle) when scrolling.
+    if (moveIndexPtr == &pssData.selectedMoveIndex)
+        sub_80A1C30(0);
+    else
+        sub_80A1C30(1);
+
+    if (bln)
+        sub_80A0428(&pssData.loadedMon, moveIndexPtr);
+    sub_80A2078(taskId);
 }
 
 static void SummaryScreenHandleAButton(u8 taskId)
@@ -4758,7 +4632,7 @@ static void sub_80A1BC0(struct Sprite *sprite)
 
 #define shared1A009 ((u8 *)(gSharedMem + 0x1A009))
 
-void sub_80A1C30(u8 a)
+static void sub_80A1C30(u8 a)
 {
     u8 r3;
 

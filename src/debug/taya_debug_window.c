@@ -440,36 +440,38 @@ void debug_sub_8090C44(void)
 }
 
 #ifdef NONMATCHING
-// mayday mayday
+// haven't tested but should work
 bool8 debug_sub_8090C88(void)
 {
     bool8 r8 = TRUE;
 
-    if (gMain.newKeys & DPAD_LEFT && eTayaLuckyNumber.digit != 0)
+    do
     {
-        eTayaLuckyNumber.digit--;
-    }
-    else if (gMain.newKeys & DPAD_RIGHT && eTayaLuckyNumber.digit < 4)
-    {
-        eTayaLuckyNumber.digit++;
-    }
-    else
-    {
+        if (gMain.newKeys & DPAD_LEFT && eTayaLuckyNumber.digit != 0)
+        {
+            eTayaLuckyNumber.digit--;
+            break;
+        }
+        if (gMain.newKeys & DPAD_RIGHT && eTayaLuckyNumber.digit < 4)
+        {
+            eTayaLuckyNumber.digit++;
+            break;
+        }
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
             u8 r4;
 
             eTayaLuckyNumber.tempLuckyId = eTayaLuckyNumber.curLuckyId;
-            eTayaLuckyNumber.charbuf0 = 10000;
+            eTayaLuckyNumber.digitDeltaMagnitude = 10000;
             for (r4 = 0; r4 < eTayaLuckyNumber.digit; r4++)
-                eTayaLuckyNumber.charbuf0 /= 10;
-            eTayaLuckyNumber.tempLuckyId += eTayaLuckyNumber.charbuf0;
+                eTayaLuckyNumber.digitDeltaMagnitude /= 10;
+            eTayaLuckyNumber.tempLuckyId += eTayaLuckyNumber.digitDeltaMagnitude;
             if (eTayaLuckyNumber.tempLuckyId > 0xFFFF)
                 eTayaLuckyNumber.tempLuckyId = 0xFFFF;
             if (eTayaLuckyNumber.curLuckyId != eTayaLuckyNumber.tempLuckyId)
             {
                 eTayaLuckyNumber.curLuckyId = eTayaLuckyNumber.tempLuckyId;
-                goto check;
+                break;
             }
         }
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
@@ -477,16 +479,16 @@ bool8 debug_sub_8090C88(void)
             u8 r4;
 
             eTayaLuckyNumber.tempLuckyId = eTayaLuckyNumber.curLuckyId;
-            eTayaLuckyNumber.charbuf0 = 10000;
+            eTayaLuckyNumber.digitDeltaMagnitude = 10000;
             for (r4 = 0; r4 < eTayaLuckyNumber.digit; r4++)
-                eTayaLuckyNumber.charbuf0 /= 10;
-            eTayaLuckyNumber.tempLuckyId -= eTayaLuckyNumber.charbuf0;
+                eTayaLuckyNumber.digitDeltaMagnitude /= 10;
+            eTayaLuckyNumber.tempLuckyId -= eTayaLuckyNumber.digitDeltaMagnitude;
             if (eTayaLuckyNumber.tempLuckyId < 0)
                 eTayaLuckyNumber.tempLuckyId = 0;
             if (eTayaLuckyNumber.curLuckyId != eTayaLuckyNumber.tempLuckyId)
             {
                 eTayaLuckyNumber.curLuckyId = eTayaLuckyNumber.tempLuckyId;
-                goto check;
+                break;
             }
         }
         if (gMain.newKeys & B_BUTTON)
@@ -501,9 +503,8 @@ bool8 debug_sub_8090C88(void)
             return TRUE;
         }
         r8 = FALSE;
-    }
+    } while (0);
 
-check:
     if (r8)
         debug_sub_8090C44();
     return FALSE;
