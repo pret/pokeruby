@@ -2904,60 +2904,57 @@ static void DrawPokerusSurvivorDot(struct Pokemon *mon)
 }
 
 // Draws the 4 small navigation circles at the top of the pokemon summary screen.
-// complex nonmatching
-#ifdef NONMATCHING
 void DrawSummaryScreenNavigationDots(void)
 {
     u16 arr[8];
-    u8 i = 0;
-    struct PokemonSummaryScreenStruct *SS = &pssData;
-    u16 var1 = 0x4040;
-    u16 var2 = 0x404A;
+    u8 i;
+
+    // Shifting 1 bit instead of multiplying by 2 is required to match.
     for (i = 0; i < 4; i++)
     {
-        if (i < SS->firstPage)
+        if (i < pssData.firstPage)
         {
-            arr[i * 2] = var1;
-            arr[(i * 2) + 1] = var1 + 1;
+            arr[i << 1] = 0x4040;
+            arr[(i << 1) + 1] = 0x4040;
         }
-        else if (i > SS->lastPage)
+        else if (i > pssData.lastPage)
         {
-            arr[i * 2] = var2;
-            arr[(i * 2) + 1] = var2 + 1;
+            arr[i << 1] = 0x404A;
+            arr[(i << 1) + 1] = 0x404A;
         }
         else
         {
-            if (i < SS->page)
+            if (i < pssData.page)
             {
-                arr[i * 2] = 0x4046;
-                arr[(i * 2) + 1] = 0x4046 + 1;
+                arr[i << 1] = 0x4046;
+                arr[(i << 1) + 1] = 0x4046 + 1;
             }
 
-            if (i == SS->page)
+            if (i == pssData.page)
             {
-                if (i != SS->lastPage)
+                if (i != pssData.lastPage)
                 {
-                    arr[i * 2] = 0x4041;
-                    arr[(i * 2) + 1] = 0x4041 + 1;
+                    arr[i << 1] = 0x4041;
+                    arr[(i << 1) + 1] = 0x4041 + 1;
                 }
                 else
                 {
-                    arr[i * 2] = 0x404B;
-                    arr[(i * 2) + 1] = 0x404B + 1;
+                    arr[i << 1] = 0x404B;
+                    arr[(i << 1) + 1] = 0x404B + 1;
                 }
             }
 
-            if (i > SS->page)
+            if (i > pssData.page)
             {
-                if (i != SS->lastPage)
+                if (i != pssData.lastPage)
                 {
-                    arr[i * 2] = 0x4043;
-                    arr[(i * 2) + 1] = 0x4043 + 1;
+                    arr[i << 1] = 0x4043;
+                    arr[(i << 1) + 1] = 0x4043 + 1;
                 }
                 else
                 {
-                    arr[i * 2] = 0x4048;
-                    arr[(i * 2) + 1] = 0x4048 + 1;
+                    arr[i << 1] = 0x4048;
+                    arr[(i << 1) + 1] = 0x4048 + 1;
                 }
             }
         }
@@ -2972,189 +2969,6 @@ void DrawSummaryScreenNavigationDots(void)
 
     DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
-#else
-NAKED
-void DrawSummaryScreenNavigationDots(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x10\n\
-    movs r3, 0\n\
-    ldr r6, _080A0F24 @ =gSharedMem + 0x18000\n\
-    adds r5, r6, 0\n\
-    ldr r1, _080A0F28 @ =0x00004040\n\
-    mov r8, r1\n\
-    ldr r2, _080A0F2C @ =0x0000404a\n\
-    mov r10, r2\n\
-_080A0F02:\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x75\n\
-    ldrb r0, [r0]\n\
-    cmp r3, r0\n\
-    bcs _080A0F30\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    add r0, sp\n\
-    mov r4, r8\n\
-    strh r4, [r0]\n\
-    adds r1, 0x1\n\
-    lsls r1, 1\n\
-    mov r7, sp\n\
-    adds r0, r7, r1\n\
-    strh r4, [r0]\n\
-    b _080A0FE2\n\
-    .align 2, 0\n\
-_080A0F24: .4byte gSharedMem + 0x18000\n\
-_080A0F28: .4byte 0x00004040\n\
-_080A0F2C: .4byte 0x0000404a\n\
-_080A0F30:\n\
-    movs r0, 0x76\n\
-    adds r0, r6\n\
-    mov r12, r0\n\
-    ldrb r1, [r0]\n\
-    cmp r3, r1\n\
-    bls _080A0F52\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    add r0, sp\n\
-    mov r2, r10\n\
-    strh r2, [r0]\n\
-    adds r1, 0x1\n\
-    lsls r1, 1\n\
-    mov r4, sp\n\
-    adds r0, r4, r1\n\
-    strh r2, [r0]\n\
-    b _080A0FE2\n\
-_080A0F52:\n\
-    ldrb r4, [r5, 0xB]\n\
-    cmp r3, r4\n\
-    bcs _080A0F6E\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    mov r7, sp\n\
-    adds r2, r7, r0\n\
-    ldr r0, _080A0F88 @ =0x00004046\n\
-    strh r0, [r2]\n\
-    adds r1, 0x1\n\
-    lsls r1, 1\n\
-    add r1, sp\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-_080A0F6E:\n\
-    cmp r3, r4\n\
-    bne _080A0FA6\n\
-    mov r0, r12\n\
-    ldrb r0, [r0]\n\
-    cmp r3, r0\n\
-    beq _080A0F90\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    mov r4, sp\n\
-    adds r2, r4, r0\n\
-    ldr r0, _080A0F8C @ =0x00004041\n\
-    b _080A0F9A\n\
-    .align 2, 0\n\
-_080A0F88: .4byte 0x00004046\n\
-_080A0F8C: .4byte 0x00004041\n\
-_080A0F90:\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    mov r7, sp\n\
-    adds r2, r7, r0\n\
-    ldr r0, _080A0FC4 @ =0x0000404b\n\
-_080A0F9A:\n\
-    strh r0, [r2]\n\
-    adds r1, 0x1\n\
-    lsls r1, 1\n\
-    add r1, sp\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-_080A0FA6:\n\
-    ldrb r0, [r5, 0xB]\n\
-    cmp r3, r0\n\
-    bls _080A0FE2\n\
-    adds r0, r6, 0\n\
-    adds r0, 0x76\n\
-    ldrb r0, [r0]\n\
-    cmp r3, r0\n\
-    beq _080A0FCC\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    mov r4, sp\n\
-    adds r2, r4, r0\n\
-    ldr r0, _080A0FC8 @ =0x00004043\n\
-    b _080A0FD6\n\
-    .align 2, 0\n\
-_080A0FC4: .4byte 0x0000404b\n\
-_080A0FC8: .4byte 0x00004043\n\
-_080A0FCC:\n\
-    lsls r1, r3, 1\n\
-    lsls r0, r3, 2\n\
-    mov r7, sp\n\
-    adds r2, r7, r0\n\
-    ldr r0, _080A1034 @ =0x00004048\n\
-_080A0FD6:\n\
-    strh r0, [r2]\n\
-    adds r1, 0x1\n\
-    lsls r1, 1\n\
-    add r1, sp\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-_080A0FE2:\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x3\n\
-    bls _080A0F02\n\
-    ldr r1, _080A1038 @ =0x0600e016\n\
-    ldr r0, _080A103C @ =0x040000d4\n\
-    mov r2, sp\n\
-    str r2, [r0]\n\
-    str r1, [r0, 0x4]\n\
-    ldr r1, _080A1040 @ =0x80000008\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    movs r3, 0\n\
-_080A0FFE:\n\
-    lsls r0, r3, 1\n\
-    mov r4, sp\n\
-    adds r1, r4, r0\n\
-    ldrh r0, [r1]\n\
-    adds r0, 0x10\n\
-    strh r0, [r1]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x7\n\
-    bls _080A0FFE\n\
-    ldr r1, _080A1044 @ =0x0600e056\n\
-    ldr r0, _080A103C @ =0x040000d4\n\
-    str r4, [r0]\n\
-    str r1, [r0, 0x4]\n\
-    ldr r1, _080A1040 @ =0x80000008\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    add sp, 0x10\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A1034: .4byte 0x00004048\n\
-_080A1038: .4byte 0x0600e016\n\
-_080A103C: .4byte 0x040000d4\n\
-_080A1040: .4byte 0x80000008\n\
-_080A1044: .4byte 0x0600e056\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 NAKED
 void sub_80A1048(u8 taskId)
