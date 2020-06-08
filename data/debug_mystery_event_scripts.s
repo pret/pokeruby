@@ -17,7 +17,7 @@
 
 	.section .rodata
 
-.if (ENGLISH && REVISION == 0)
+.if ENGLISH
     .set unkConstant, 2
 .else @ GERMAN
     .set unkConstant, 4
