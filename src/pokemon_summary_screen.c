@@ -4183,7 +4183,6 @@ u8 GetMonStatusAndPokerus(struct Pokemon *mon)
     return statusAilment;
 }
 
-#ifdef NONMATCHING
 void sub_80A1D18(void)
 {
     struct Pokemon mon;
@@ -4196,9 +4195,6 @@ void sub_80A1D18(void)
     if (statusAndPkrs)
     {
         statusAndPkrs2 = statusAndPkrs - 1;
-
-        if (ewram1A000[29] == 0xFF)
-            ewram1A000[29] = CreateSprite(&sSpriteTemplate_StatusCondition, 64, 152, 0);
     }
     else
     {
@@ -4206,65 +4202,10 @@ void sub_80A1D18(void)
         return;
     }
 
+    if (ewram1A000[29] == 0xFF)
+        ewram1A000[29] = CreateSprite(&sSpriteTemplate_StatusCondition, 64, 152, 0);
     StartSpriteAnim(&gSprites[ewram1A000[29]], statusAndPkrs2);
 }
-#else
-NAKED
-void sub_80A1D18(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    sub sp, 0x64\n\
-    mov r0, sp\n\
-    bl SummaryScreen_GetPokemon\n\
-    mov r0, sp\n\
-    bl GetMonStatusAndPokerus\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0\n\
-    beq _080A1D58\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    ldr r4, _080A1D50 @ =gSharedMem + 0x1A01D\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0xFF\n\
-    bne _080A1D60\n\
-    ldr r0, _080A1D54 @ =sSpriteTemplate_StatusCondition\n\
-    movs r1, 0x40\n\
-    movs r2, 0x98\n\
-    movs r3, 0\n\
-    bl CreateSprite\n\
-    strb r0, [r4]\n\
-    b _080A1D60\n\
-    .align 2, 0\n\
-_080A1D50: .4byte gSharedMem + 0x1A01D\n\
-_080A1D54: .4byte sSpriteTemplate_StatusCondition\n\
-_080A1D58:\n\
-    movs r0, 0x1D\n\
-    bl sub_80A18E4\n\
-    b _080A1D74\n\
-_080A1D60:\n\
-    ldr r0, _080A1D7C @ =gSharedMem + 0x1A01D\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    ldr r1, _080A1D80 @ =gSprites\n\
-    adds r0, r1\n\
-    adds r1, r5, 0\n\
-    bl StartSpriteAnim\n\
-_080A1D74:\n\
-    add sp, 0x64\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A1D7C: .4byte gSharedMem + 0x1A01D\n\
-_080A1D80: .4byte gSprites\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 static void sub_80A1D84(struct Pokemon *mon)
 {

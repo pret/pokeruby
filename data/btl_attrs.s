@@ -104,10 +104,14 @@ gUnknown_Debug_821F5AC::
 	.byte 0x0d, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x0e, 0x14, 0x00, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 Str_821F624:: @ 0x821F624
+.if (ENGLISH && REVISION == 0)
+	.string "ーーーーーーーー$"
+.else
 	.string "ーーーーーーーーーーーー$"
+.endif
 
-.if DEBUG_TRANSLATE
-
+.if DEBUG_FIX
+@ TODO: GERMAN translations
 str_821F631:: @ 0x821F631
 	.string "JUNICHI$"
 	.string "STEVEN LOW$"
@@ -118,16 +122,18 @@ Str_821F649:: @ 0x821F649
 	.string "TETSUJI$"
 
 debug_unk_0b::
-@ 0x821F64D
-	.string "　　ON$"
+    .string "  "
 
-@ 0x821F652
+Str_821F64D::
+	.string "ON$"
+
+Str_821F652::
 	.string "OFF$"
 
-@ 0x821F655
+Str_821F655::
 	.string "MONO$"
 
-@ 0x821F65A
+Str_821F65A::
 	.string "STEREO$"
 
 @ 0x821F65F
@@ -138,8 +144,7 @@ debug_unk_0b::
 
 @ 0x821F66D
 	.string "Connection error$"
-
-.else @ !DEBUG_TRANSLATE
+.else @ !DEBUG_FIX
 str_821F631:: @ 0x821F631
 	.string "ジュンイチ$"
 	.string "ダイゴロウ$"
@@ -150,16 +155,18 @@ Str_821F649:: @ 0x821F649
 	.string "てつじ$"
 
 debug_unk_0b::
-@ 0x821F64D
-	.string "　　オン$"
+    .string "  "
 
-@ 0x821F652
+Str_821F64D::
+	.string "オン$"
+
+Str_821F652::
 	.string "オフ$"
 
-@ 0x821F655
+Str_821F655::
 	.string "モノラル$"
 
-@ 0x821F65A
+Str_821F65A::
 	.string "ステレオ$"
 
 @ 0x821F65F
@@ -171,7 +178,7 @@ debug_unk_0b::
 @ 0x821F66D
 	.string "せつぞくエラー$"
 
-.endif @ !DEBUG_TRANSLATE
+.endif @ !DEBUG_FIX
 
 @ 0x821f675
 	.byte 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00
@@ -190,7 +197,8 @@ gUnknown_Debug_821F680::
 gUnknown_Debug_821F798::
 	.byte 0xc0, 0x03, 0x00, 0x00, 0xd6, 0x03, 0x00, 0x00, 0x40, 0x04, 0x00, 0x00, 0x56, 0x04, 0x00, 0x00, 0xc0, 0x0b, 0x00, 0x00, 0xd6, 0x0b, 0x00, 0x00, 0x40, 0x0c, 0x00, 0x00, 0x56, 0x0c, 0x00, 0x00
 
-.if DEBUG_TRANSLATE
+.if DEBUG_FIX
+@ TODO: GERMAN translations
 Str_821F7B8:: @ 0x821F7B8
 	.string "HEIGHT$"
 
@@ -209,7 +217,7 @@ Str_821F7EA:: @ 0x821F7EA
 gUnknown_Debug_821F7F3::
 	.string "Would you like to save?$"
 
-.else @ !DEBUG_TRANSLATE
+.else @ !DEBUG_FIX
 
 Str_821F7B8:: @ 0x821F7B8
 	.string "たかさ　$"
@@ -228,7 +236,7 @@ Str_821F7EA:: @ 0x821F7EA
 @ 0x821F7F3
 gUnknown_Debug_821F7F3::
 	.string "セーブしますか？$"
-.endif @ DEBUG_TRANSLATE
+.endif @ !DEBUG_FIX
 
 .endif @ DEBUG
 

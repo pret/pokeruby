@@ -3272,7 +3272,7 @@ void debug_sub_80524BC(void)
 }
 
 // Partially fixes the clipping on longer names.
-#if DEBUG_TRANSLATE && DEBUG
+#if DEBUG_FIX
 #  define BLENDER_DEBUG_BERRY_LEN 12
 #else
 #  define BLENDER_DEBUG_BERRY_LEN 6

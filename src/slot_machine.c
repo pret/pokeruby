@@ -5677,7 +5677,7 @@ void debug_sub_811B310(void)
     PRINT_NUMBER(eSlotMachine->unk6C, 10, 5);
     PRINT_NUMBER(eSlotMachine->unk10, 10, 7);
 
-#if DEBUG_TRANSLATE
+#if DEBUG_FIX
 #define OFFSET 24 // wider window
 #else
 #define OFFSET 20
@@ -5785,7 +5785,7 @@ static void debug_sub_811B654(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-#if DEBUG_TRANSLATE
+#if DEBUG_FIX
         Menu_DrawStdWindowFrame(0, 0, 28, 19); // wider window
 #else
         Menu_DrawStdWindowFrame(0, 0, 24, 19);

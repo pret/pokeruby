@@ -73,13 +73,14 @@ gSpriteTemplate_83BBC88:: @ 83BBC88
 	spr_template 1, 56006, gOamData_83BBC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_809CB74
 
 .if DEBUG
-.if DEBUG_TRANSLATE
+.if DEBUG_FIX
 gUnknown_Debug_0x83E6268:: @ 0x83E6268
+@ TODO: translations
 	.string "SET$"
-.else
+.else @ !DEBUG_FIX
 gUnknown_Debug_0x83E6268:: @ 0x83E6268
 	.string "セットする$"
-.endif
+.endif @ !DEBUG_FIX
 .endif
 
 	.align 2

@@ -6,8 +6,8 @@ GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
 MODERN        ?= 0
-DEBUG_TRANSLATE ?= 0
-COMPARE  ?= 0
+DEBUG_FIX     ?= 0
+COMPARE       ?= 0
 
 # For gbafix
 MAKER_CODE  := 01
@@ -55,8 +55,8 @@ else
 endif
 endif
 
-# Debug translations (always nonmatching)
-ifeq ($(DEBUG_TRANSLATE),1)
+# Debug fixes (always nonmatching)
+ifeq ($(DEBUG_FIX), 1)
   COMPARE := 0
   DEBUG = 1
 endif
@@ -64,9 +64,8 @@ endif
 # Debug
 ifeq ($(DEBUG), 1)
   BUILD_NAME := $(BUILD_NAME)_debug
-ifeq ($(GAME_LANGUAGE), ENGLISH)
-  COMPARE := 0
-  DEBUG_TRANSLATE := 1
+ifeq ($(DEBUG_FIX), 1)
+  BUILD_NAME := $(BUILD_NAME)_fixed
 endif
 endif
 

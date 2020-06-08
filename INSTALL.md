@@ -38,9 +38,9 @@ To set up the repository:
 
 	cd ../pokeruby
 
-To build **pokeruby.gba** and confirm it matches the official ROM image:
+To build Pokémon Ruby:
 
-	make
+	make ruby
 
 To build Pokémon Sapphire:
 
@@ -50,6 +50,15 @@ The above two commands will build the English v1.0 version of the respective tit
 
     make ruby_rev2
 
+To also build debug targets (only v1.0 is currently supported), run either of the following:
+
+    make ruby_debug
+    make sapphire_debug
+
+To compare between official ROM images for each target:
+
+    make (target) COMPARE=1
+
 ## Notes
 
 * If the base tools are not found on macOS in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
@@ -57,32 +66,27 @@ The above two commands will build the English v1.0 version of the respective tit
 * If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and try building again. [Learn the differences between MSYS2 and Cygwin.](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin)
 
 ## Notes about the German language ROMs
-This repository also supports the German versions of Ruby and Sapphire. However, due to major differences in scripts, text, and graphics, a special configuration needs to be set up before compilation and torn down after.
+This repository also supports the "first edition" German versions of Ruby and Sapphire. However, due to major differences in scripts, text, and graphics, a special configuration needs to be set up before compilation and torn down after.
 
 To set up the repository:
 
     make clean
     sh de_before.sh
 
-To compile the German ROMs:
+To compile the "first edition" German ROMs:
 
     make ruby_de
     make sapphire_de
 
-To compile the leaked Debug ROM (German):
+To compile their debug equivalents:
 
     make ruby_de_debug
+    make sapphire_de_debug
 
 To restore the repository (**MUST BE DONE BEFORE ATTEMPTING TO BUILD ANY ENGLISH LANGUAGE ROM**):
 
     make clean
     sh de_after.sh
-
-# Guidance
-
-To build **pokeruby.gba** with your changes:
-
-	make COMPARE=0
 
 ## Parallel builds
 

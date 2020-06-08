@@ -1812,6 +1812,15 @@ const struct WatanabeDebugMenuItem gUnknown_Debug_083F8698[] = {
     {gUnknown_Debug_083F868F, {.type3 = 0x6}}
 };
 
+#if (ENGLISH && REVISION == 0)
+const u8 gUnknown_Debug_083F86C8[] = _("ふつう");
+const u8 gUnknown_Debug_083F86CC[] = _("ねむり");
+const u8 gUnknown_Debug_083F86D0[] = _("どく");
+const u8 gUnknown_Debug_083F86D4[] = _("やけど");
+const u8 gUnknown_Debug_083F86D8[] = _("こおり");
+const u8 gUnknown_Debug_083F86DC[] = _("まひ");
+const u8 gUnknown_Debug_083F86E0[] = _("どくどく");
+#else
 const u8 gUnknown_Debug_083F86C8[] = _("ーーー");
 const u8 gUnknown_Debug_083F86CC[] = _("SLP");
 const u8 gUnknown_Debug_083F86D0[] = _("PSN");
@@ -1819,6 +1828,7 @@ const u8 gUnknown_Debug_083F86D4[] = _("BRN");
 const u8 gUnknown_Debug_083F86D8[] = _("FRZ");
 const u8 gUnknown_Debug_083F86DC[] = _("PAR");
 const u8 gUnknown_Debug_083F86E0[] = _("PSN2");
+#endif
 
 const struct WatanabeDebugMenuItem gUnknown_Debug_083F86E8[] = {
     {gUnknown_Debug_083F86C8, {.type3 = 0x0}},
@@ -1830,8 +1840,13 @@ const struct WatanabeDebugMenuItem gUnknown_Debug_083F86E8[] = {
     {gUnknown_Debug_083F86E0, {.type3 = 0x80}}
 };
 
+#if (ENGLISH && REVISION == 0)
+const u8 gUnknown_Debug_083F8720[] = _("ポケモンを てもちに くわえました");
+const u8 gUnknown_Debug_083F872A[] = _("ポケモンを ボックスに くわえました");
+#else
 const u8 gUnknown_Debug_083F8720[] = _("PKMN{RIGHT_ARROW}LIST");
 const u8 gUnknown_Debug_083F872A[] = _("PKMN{RIGHT_ARROW}BOX");
+#endif
 void InitCreatePokemon(void)
 {
     u8 sp04[] = _("Create POKéMON   LR:Shift  START:Add");
@@ -2196,7 +2211,11 @@ void debug_80C5FFC(void)
 {
     u32 ivs;
     u8 sp10[] = DTR("たまご", "EGG");
+#if (ENGLISH && REVISION == 0)
+    u8 sp14[] = _("デバッグポケ1");
+#else
     u8 sp14[] = _("DebugーG");
+#endif
     u8 one;
     u16 ff;
 

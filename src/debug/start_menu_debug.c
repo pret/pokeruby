@@ -51,7 +51,8 @@ extern void Debug_SetUpFieldMove_Cut(void);
 extern void Debug_SetUpFieldMove_SecretPower(void);
 
 void debug_sub_8076BB4(u8);
-void debug_sub_8077CF4(u8 x, u8 y);
+void DebugMenu_DisplayBuildDate(u8 x, u8 y);
+void DebugMenu_DisplayContinuousDate(u8 x, u8 y);
 u8 DebugMenu_807706C(void);
 u8 DebugMenu_807709C(void);
 void DebugMenu_807719C(void);
@@ -133,7 +134,9 @@ u8 DebugMenu_EndSequenceDemo(void);
 u8 DebugMenu_RandomNumberTest(void);
 u8 DebugMenu_MeTooBackupMan(void);
 u8 DebugMenu_OpenMurakawa(void);
+#if !(ENGLISH && REVISION == 0)
 u8 DebugMenu_OpenKiwa(void);
+#endif
 u8 DebugMenu_8076CBC(void);
 u8 DebugMenu_8076CC0(void);
 u8 DebugMenu_8076CD4(void);
@@ -204,7 +207,9 @@ const u8 Str_839B972[] = _("End sequence demo");
 const u8 Str_839B984[] = _("Random number test");
 const u8 Str_839B997[] = _("Me-too BackupMan");
 const u8 Str_839B9A8[] = _("MURAKAWA");
+#if !(ENGLISH && REVISION == 0)
 const u8 Str_839B9B1[] = _("KINA(FONT)");
+#endif
 
 const struct MenuAction gDebug0x839B9BC[] =
 {
@@ -260,18 +265,34 @@ const struct MenuAction gDebug0x839B9BC[] =
     { Str_839B984, DebugMenu_RandomNumberTest },
     { Str_839B997, DebugMenu_MeTooBackupMan },
     { Str_839B9A8, DebugMenu_OpenMurakawa },
+#if !(ENGLISH && REVISION == 0)
     { Str_839B9B1, DebugMenu_OpenKiwa },
+#endif
 };
 
+#if (ENGLISH && REVISION == 0)
+const u8 gUnknown_Debug_839BB64[] =
+{
+    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x00, 0x0b, 0x0c, 0x0d, 0x0e, 0x1f, 0x12, 0x13, 0x00, 0x08, 0x09, 0x0a, 0x1e, 0x10, 0x24, 0x0f, 0x00, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x00,
+    0x1c, 0x1d, 0x14, 0x20, 0x21, 0x22, 0x23, 0x00, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x00, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x00, 0x11, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
+#else
 const u8 gUnknown_Debug_839BB64[] =
 {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x00, 0x0b, 0x0c, 0x0d, 0x0e, 0x1f, 0x12, 0x13, 0x00, 0x08, 0x09, 0x0a, 0x1e, 0x10, 0x24, 0x0f, 0x00, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x00,
     0x1c, 0x1d, 0x14, 0x20, 0x21, 0x22, 0x23, 0x00, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x00, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x00, 0x11, 0x33, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
+#endif
 
-const u8 gUnknown_Debug_0839BBA4[] = _("Debugging Version");
-const u8 gUnknown_Debug_0839BBB6[] = _("{VERSION} Version");
-const u8 gUnknown_Debug_0839BBC1[] = _("Normal RTC compatible");
+#if ENGLISH
+const u8 gDebugCreatedString[] = _("Created");
+const u8 gDebugContinuousString[] = _("Continuous play\n"
+                                      "available from");
+#else
+const u8 gDebugRomString[] = _("Debugging Version");
+#endif
+const u8 gDebugVersionString[] = _("{VERSION} Version");
+const u8 gDebugRTCString[] = _("Normal RTC compatible");
 
 const u8 gTestMenu_TestMenuHeaderText[] = DTR("か　の　じっけん", "TEST MENU"); // 科の実験 (Test section)
 const u8 gTestMenu_Test2Text[] = DTR("じっけん2", "Test2");
@@ -345,6 +366,7 @@ extern const u8 Str_839BD4C[];
 
 static u8 gUnknown_030006B8;
 
+#ifndef ENGLISH
 struct DebugBuildDateInfo {
     s32 max;
     s32 digitMultiplier;
@@ -353,6 +375,7 @@ struct DebugBuildDateInfo {
 };
 
 static const struct DebugBuildDateInfo *gDebugBuildDate;
+#endif
 static u8 gUnknown_030006C0;
 static u8 gUnknown_030006C1;
 static const u8 * gUnknown_030006C4;
@@ -382,10 +405,17 @@ void debug_sub_8076B4C(void)
 // Initializes test menu
 void debug_sub_8076B68(void)
 {
-    Menu_PrintText(gUnknown_Debug_0839BBB6, 1, 1);
-    Menu_PrintText(gUnknown_Debug_0839BBC1, 1, 3);
-    Menu_PrintText(gUnknown_Debug_0839BBA4, 1, 9);
-    debug_sub_8077CF4(4, 11);
+    Menu_PrintText(gDebugVersionString, 1, 1);
+    Menu_PrintText(gDebugRTCString, 1, 3);
+#if ENGLISH
+    Menu_PrintText(gDebugCreatedString, 1, 7);
+    DebugMenu_DisplayBuildDate(3, 9);
+    Menu_PrintText(gDebugContinuousString, 1, 12);
+    DebugMenu_DisplayContinuousDate(3, 16);
+#else
+    Menu_PrintText(gDebugRomString, 1, 9);
+    DebugMenu_DisplayBuildDate(4, 11);
+#endif
     debug_sub_8076AC8(0);
     CreateTask(debug_sub_8076BB4, 1);
 }
@@ -699,6 +729,9 @@ void DebugMenu_8077048(void)
 
 u8 DebugMenu_807706C(void)
 {
+#if (ENGLISH && REVISION == 0)
+    gUnknown_Debug_Murakawa2 = 1;
+#endif
     InitMenuWindow(&gMenuTextWindowTemplate);
     DebugMenu_8077004();
     DebugMenu_807719C();
@@ -710,6 +743,8 @@ u8 DebugMenu_807706C(void)
 
 u8 DebugMenu_807709C(void)
 {
+    u8 actionRet;
+
     if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
@@ -743,11 +778,21 @@ u8 DebugMenu_807709C(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gDebug0x839B9BC[gUnknown_030006C4[gUnknown_030006C0]].func();
+        actionRet = gDebug0x839B9BC[gUnknown_030006C4[gUnknown_030006C0]].func();
+// TODO: see if this is in rev1+
+#if (ENGLISH && REVISION == 0)
+        if (actionRet == 1)
+            gUnknown_Debug_Murakawa2 = 0;
+#endif
+        return actionRet;
     }
     if (gMain.newKeys & (B_BUTTON | START_BUTTON))
     {
         CloseMenu();
+// TODO: see if this is in rev1+
+#if (ENGLISH && REVISION == 0)
+        gUnknown_Debug_Murakawa2 = 0;
+#endif
         return TRUE;
     }
     return FALSE;
@@ -1389,15 +1434,47 @@ u8 DebugMenu_8077C14(void)
 
 const u8 Str_839BFDC[] = DTR("　じかん　ふん　びょう", "  HOURS MINUTES SECONDS");
 
+#if ENGLISH
+const u8 ContinousDateTime[] = "2002 08 01 20:25";
+#else
 static const struct DebugBuildDateInfo gDebugBuildDateInfo[] = {
     { 99, 10, 2, 23 },
     { 99, 10, 2, 26 }
 };
+#endif
 
 // Parses the version code in a highly inefficient and unsafe way.
-void DebugMenu_ConvertBuildDate(const char *buildDateStr, u8 *out)
+void DebugMenu_ConvertBuildDate(const u8 *buildDateStr, u8 *out)
 {
-    int i;
+    s32 i;
+#if ENGLISH
+    u16 year;
+    u16 month;
+    u16 day;
+    u16 hour;
+    u16 minutes;
+
+    for (year = 0, i = 0; i < 2; i++)
+    {
+        year *= 10;
+        year += (buildDateStr[i+2] - '0');
+    }
+
+    month = (buildDateStr[5] - '0') * 10 + (buildDateStr[6] - '0');
+    day = (buildDateStr[8] - '0') * 10 + (buildDateStr[9] - '0');
+    hour = (buildDateStr[11] - '0') * 10 + (buildDateStr[12] - '0');
+    minutes = (buildDateStr[14] - '0') * 10 + (buildDateStr[15] - '0');
+
+    out = ConvertIntToDecimalStringN(out, year, STR_CONV_MODE_LEADING_ZEROS, 2);
+    *out++ = CHAR_SLASH;
+    out = ConvertIntToDecimalStringN(out, month, STR_CONV_MODE_LEADING_ZEROS, 2);
+    *out++ = CHAR_SLASH;
+    out = ConvertIntToDecimalStringN(out, day, STR_CONV_MODE_LEADING_ZEROS, 2);
+    *out++ = CHAR_SPACE;
+    out = ConvertIntToDecimalStringN(out, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
+    *out++ = CHAR_COLON;
+    out = ConvertIntToDecimalStringN(out, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+#else
     // Prevents register allocation swap
     // Intended: r7 = out, r6 = gDebugBuildDate->numDigits
     // Observed: r6 = out, r7 = gDebugBuildDate->numDigits
@@ -1408,8 +1485,8 @@ void DebugMenu_ConvertBuildDate(const char *buildDateStr, u8 *out)
     *out++ = CHAR_SPACE;
     for (i = 0; i < 2; i++, gDebugBuildDate++)
     {
-        int j;
-        int mul;
+        s32 j;
+        s32 mul;
         u32 date = 0;
         for (mul = gDebugBuildDate->digitMultiplier, j = 0; j < gDebugBuildDate->numDigits; j++, mul /= 10)
             date += (buildDateStr[gDebugBuildDate->offset + j] - '0') * mul;
@@ -1421,13 +1498,22 @@ void DebugMenu_ConvertBuildDate(const char *buildDateStr, u8 *out)
     if (out[0] > 0xf6) // prevent special characters
         out[0] = 0xf6;
     out[1] = EOS;
+#endif
 }
 
-void debug_sub_8077CF4(u8 x, u8 y)
+void DebugMenu_DisplayBuildDate(u8 x, u8 y)
 {
     DebugMenu_ConvertBuildDate(BuildDateTime, gStringVar4);
     Menu_PrintText(gStringVar4, x, y);
 }
+
+#if ENGLISH
+void DebugMenu_DisplayContinuousDate(u8 x, u8 y)
+{
+    DebugMenu_ConvertBuildDate(ContinousDateTime, gStringVar4);
+    Menu_PrintText(gStringVar4, x, y);
+}
+#endif
 
 void DebugMenu_8077D24(const struct MenuAction *menuAction, u8 width, u8 itemCount)
 {
@@ -2591,14 +2677,22 @@ u8 DebugMenu_PTime(void)
     return TRUE;
 }
 
+#if (ENGLISH && REVISION == 0)
+const u8 gDebug0x839C60C[] = _("switch DISP mode");
+#else
 const u8 gDebug0x839C60C[] = _("Set FLASH ERR");
+#endif
 
 void DebugMenu_8079058(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
         case 0:
+#if (ENGLISH && REVISION == 0)
+            gUnknown_Debug_Murakawa2 = 1;
+#else
             gUnknown_Debug_03004BD0 = 0;
+#endif
             Menu_DisplayDialogueFrame();
             gTasks[taskId].data[0]++;
             break;
@@ -2619,6 +2713,9 @@ void DebugMenu_8079058(u8 taskId)
                     gUnknown_Debug_03004BD0 = 0;
                     break;
             }
+#if (ENGLISH && REVISION == 0)
+            gUnknown_Debug_Murakawa2 = 0;
+#endif
             Menu_EraseScreen();
             ScriptContext2_Disable();
             DestroyTask(taskId);
@@ -2634,13 +2731,17 @@ u8 DebugMenu_OpenMurakawa(void)
     return TRUE;
 }
 
-const u8 Str_839C61A[] = _("abcde;　abcde:　ABCDE;　ABCDE:\p"
-                           "Tableaux　des　verbes　du　2{SUPER_E}　groupe.\p"
-                           "La1{SUPER_RE}　chose　à apprendre　c'est　de　lire.\p"
-                           "Tableaux　des　verbes　du　1{SUPER_ER}　groupe.\p"
-                           "“あいうえおかきくけコさしすせそたちつてとな”\n"
-                           "<にぬネのはひふへほマみむめもやゆよらりるれろわャッ>\p"
-                           "をんゃゅょアイウエオカキクケサシスルレロワ,");
+#if !(ENGLISH && REVISION == 0)
+const u8 Str_839C61A[] = _(
+#if GERMAN
+    "abcde;　abcde:　ABCDE;　ABCDE:\p"
+#endif
+    "Tableaux　des　verbes　du　2{SUPER_E}　groupe.\p"
+    "La1{SUPER_RE}　chose　à apprendre　c'est　de　lire.\p"
+    "Tableaux　des　verbes　du　1{SUPER_ER}　groupe.\p"
+    "“あいうえおかきくけコさしすせそたちつてとな”\n"
+    "<にぬネのはひふへほマみむめもやゆよらりるれろわャッ>\p"
+    "をんゃゅょアイウエオカキクケサシスルレロワ,");
 
 void DebugMenu_8079110(u8 taskId)
 {
@@ -2672,5 +2773,6 @@ u8 DebugMenu_OpenKiwa(void)
     ScriptContext2_Enable();
     // return TRUE;
 }
+#endif
 
 #endif

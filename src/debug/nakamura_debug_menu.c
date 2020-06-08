@@ -100,7 +100,9 @@ static bool8 TopMenu_HandleJoypad(void)
     if (gMain.newKeys & A_BUTTON)
     {
         MenuFunc func = sNakamuraTopMenuActions[Menu_GetCursorPos()].func;
+#if !(ENGLISH && REVISION == 0)
         Menu_DestroyCursor();
+#endif
         return func();
     }
 
@@ -739,6 +741,17 @@ static bool8 GiveAllDecorations(void)
 // FISHING POINTS (Feebas)
 // =======================================================
 
+#if (ENGLISH && REVISION == 0)
+static const u8 Str_843E58D[] = _(
+                                    "つりばしょ     R119\n"
+                                    " Y1\n"
+                                    " Y2\n"
+                                    " Y3\n"
+                                    "エンカウントばしょ\n"
+                                    "\n"
+                                    "\n"
+                                    "じぶんのまえ");
+#else
 static const u8 Str_843E58D[] = _(
                                     "Fishing location R119\n"
                                     " Y1\n"
@@ -748,6 +761,7 @@ static const u8 Str_843E58D[] = _(
                                     "\n"
                                     "\n"
                                     "front of you");
+#endif
 
 static u16 FishingPoints_CountFishingTilesInMapThird(u8 a0)
 {
@@ -974,7 +988,13 @@ static void NakaGenderTest_AdjustLevel(u8 i, s8 dirn)
         if (sNakaGenderTestData[i].level < 1)
             sNakaGenderTestData[i].level = 100;
         SetMonData(gPlayerParty + i, MON_DATA_EXP, gExperienceTables[gBaseStats[sNakaGenderTestData[i].species].growthRate] + sNakaGenderTestData[i].level);
+// TODO: check other revisions
+#if (ENGLISH && REVISION == 0)
+        CalculateMonStats(gPlayerParty + i);
+#else
+        // Same function, but without the Shedninja specific code.
         Nakamura_NakaGenderTest_RecalcStats(gPlayerParty + i);
+#endif
     }
 }
 

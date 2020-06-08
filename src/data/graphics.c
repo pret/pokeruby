@@ -10,10 +10,10 @@ const u8 gMonBackPic_CircledQuestionMark[] = INCBIN_U8("graphics/pokemon/circled
 const u16 gMonPalette_CircledQuestionMark[] = INCBIN_U16("graphics/pokemon/circled_question_mark/normal.gbapal.lz");
 const u16 gMonShinyPalette_CircledQuestionMark[] = INCBIN_U16("graphics/pokemon/circled_question_mark/shiny.gbapal.lz");
 
-// The test menu debug battle tileset. This uses the old Crystal charmap and
-// rendering method (it uses tiles instead of text).
-// Oddly, the English version is in Japanese and the German version is in English.
-#if DEBUG_TRANSLATE || GERMAN
+// The test menu debug battle tileset. This uses the old Crystal
+// charmap and rendering method (it uses tiles instead of text).
+// The non-English releases use translated graphics.
+#if DEBUG_FIX || !ENGLISH
 const u8 gDebugBattleCharmap_Gfx_lz[] = INCBIN_U8("graphics/debug/debug_battle_charmap_en.4bpp.lz");
 const u8 gDebugBattleCharmap_Tilemap_lz[] = INCBIN_U8("graphics/debug/debug_battle_charmap_en.bin.lz");
 const u8 gDebugBattleCharmap_Pal_lz[] = INCBIN_U8("graphics/debug/debug_battle_charmap_en.gbapal.lz");

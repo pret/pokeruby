@@ -155,7 +155,7 @@ static void CB2_WipeSave(void)
 
     gSaveFailedClockInfo[0] = TRUE;
 
-#if DEBUG
+#if (DEBUG && !(ENGLISH && REVISION == 0))
 	if (gUnknown_Debug_03004BD0 != 0)
 		gDamagedSaveSectors = 1;
 #endif
@@ -277,7 +277,7 @@ static bool8 IsSectorNonEmpty(u16 sector)
 
     ReadFlash(sector, 0, ptr, 4096);
 
-#if DEBUG  // Don't verify the sector wipe?
+#if (DEBUG && !(ENGLISH && REVISION == 0))  // Don't verify the sector wipe?
     for (i = 0; i < 0x400; i++, ptr++)
 		;
     return gUnknown_Debug_03004BD0;

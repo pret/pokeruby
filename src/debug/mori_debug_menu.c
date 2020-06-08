@@ -42,10 +42,10 @@ const u8 Text_39B28B[] = _("10000 steps");
 const u8 Text_39B297[] = _("MOVE TUTOR");
 const u8 Text_39B2A2[] = _("Breed an egg");
 const u8 Text_39B2AF[] = _("Long name");
-#ifdef GERMAN
-const u8 Text_39B2B9[] = _("Delete {POKEBLOCK}");
+#if (ENGLISH && REVISION == 0)
+const u8 Text_39B2B9[] = _("ポロックけす");
 #else
-const u8 Text_39B2B9[] = DTR("ポロックけす", "Delete {POKEBLOCK}");
+const u8 Text_39B2B9[] = _("Delete {POKEBLOCK}");
 #endif
 
 const struct MenuAction gMoriDebugMenuActions[] =
