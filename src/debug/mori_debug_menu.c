@@ -42,7 +42,7 @@ const u8 Text_39B28B[] = _("10000 steps");
 const u8 Text_39B297[] = _("MOVE TUTOR");
 const u8 Text_39B2A2[] = _("Breed an egg");
 const u8 Text_39B2AF[] = _("Long name");
-#if (ENGLISH && REVISION == 0)
+#if (ENGLISH && !DEBUG_FIX)
 const u8 Text_39B2B9[] = _("ポロックけす");
 #else
 const u8 Text_39B2B9[] = _("Delete {POKEBLOCK}");
