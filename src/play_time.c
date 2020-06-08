@@ -33,33 +33,33 @@ void PlayTimeCounter_Stop()
     sPlayTimeCounterState = STOPPED;
 }
 
-void PlayTimeCounter_Update()
+void PlayTimeCounter_Update(void)
 {
-    if (sPlayTimeCounterState == RUNNING)
-    {
-        gSaveBlock2.playTimeVBlanks++;
+    if (sPlayTimeCounterState != RUNNING)
+        return;
 
-        if (gSaveBlock2.playTimeVBlanks > 59)
-        {
-            gSaveBlock2.playTimeVBlanks = 0;
-            gSaveBlock2.playTimeSeconds++;
+    gSaveBlock2Ptr->playTimeVBlanks++;
 
-            if (gSaveBlock2.playTimeSeconds > 59)
-            {
-                gSaveBlock2.playTimeSeconds = 0;
-                gSaveBlock2.playTimeMinutes++;
+    if (gSaveBlock2Ptr->playTimeVBlanks < 60)
+        return;
 
-                if (gSaveBlock2.playTimeMinutes > 59)
-                {
-                    gSaveBlock2.playTimeMinutes = 0;
-                    gSaveBlock2.playTimeHours++;
+    gSaveBlock2Ptr->playTimeVBlanks = 0;
+    gSaveBlock2Ptr->playTimeSeconds++;
 
-                    if (gSaveBlock2.playTimeHours > 999)
-                        PlayTimeCounter_SetToMax();
-                }
-            }
-        }
-    }
+    if (gSaveBlock2Ptr->playTimeSeconds < 60)
+        return;
+
+    gSaveBlock2Ptr->playTimeSeconds = 0;
+    gSaveBlock2Ptr->playTimeMinutes++;
+
+    if (gSaveBlock2Ptr->playTimeMinutes < 60)
+        return;
+
+    gSaveBlock2Ptr->playTimeMinutes = 0;
+    gSaveBlock2Ptr->playTimeHours++;
+
+    if (gSaveBlock2Ptr->playTimeHours > 999)
+        PlayTimeCounter_SetToMax();
 }
 
 void PlayTimeCounter_SetToMax()
