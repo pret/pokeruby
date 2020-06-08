@@ -38,27 +38,27 @@ void PlayTimeCounter_Update(void)
     if (sPlayTimeCounterState != RUNNING)
         return;
 
-    gSaveBlock2Ptr->playTimeVBlanks++;
+    gSaveBlock2.playTimeVBlanks++;
 
-    if (gSaveBlock2Ptr->playTimeVBlanks < 60)
+    if (gSaveBlock2.playTimeVBlanks < 60)
         return;
 
-    gSaveBlock2Ptr->playTimeVBlanks = 0;
-    gSaveBlock2Ptr->playTimeSeconds++;
+    gSaveBlock2.playTimeVBlanks = 0;
+    gSaveBlock2.playTimeSeconds++;
 
-    if (gSaveBlock2Ptr->playTimeSeconds < 60)
+    if (gSaveBlock2.playTimeSeconds < 60)
         return;
 
-    gSaveBlock2Ptr->playTimeSeconds = 0;
-    gSaveBlock2Ptr->playTimeMinutes++;
+    gSaveBlock2.playTimeSeconds = 0;
+    gSaveBlock2.playTimeMinutes++;
 
-    if (gSaveBlock2Ptr->playTimeMinutes < 60)
+    if (gSaveBlock2.playTimeMinutes < 60)
         return;
 
-    gSaveBlock2Ptr->playTimeMinutes = 0;
-    gSaveBlock2Ptr->playTimeHours++;
+    gSaveBlock2.playTimeMinutes = 0;
+    gSaveBlock2.playTimeHours++;
 
-    if (gSaveBlock2Ptr->playTimeHours > 999)
+    if (gSaveBlock2.playTimeHours > 999)
         PlayTimeCounter_SetToMax();
 }
 
