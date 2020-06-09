@@ -1310,14 +1310,14 @@ static void Task_IntroPokemonBattle(u8 taskId)
 
     if (gIntroFrameCounter == 80)
     {
-        spriteId = sub_813CE88(SPECIES_SHARPEDO, 0xF0, 0xA0, 5, 1);
+        spriteId = SetupSpriteForIntro(SPECIES_SHARPEDO, 0xF0, 0xA0, 5, 1);
         gSprites[spriteId].callback = sub_813DB9C;
         gSprites[spriteId].data[1] = 1;
         gSprites[spriteId].data[2] = 0;
     }
     if (gIntroFrameCounter == 152)
     {
-        spriteId = sub_813CE88(SPECIES_DUSKULL, 0, 0xA0, 4, 1);
+        spriteId = SetupSpriteForIntro(SPECIES_DUSKULL, 0, 0xA0, 4, 1);
         gSprites[spriteId].callback = sub_813DB9C;
         gSprites[spriteId].data[1] = 2;
         gSprites[spriteId].data[2] = 1;
@@ -1355,14 +1355,14 @@ static void Task_IntroPokemonBattle(u8 taskId)
     if (gIntroFrameCounter == 463)
     {
         sub_813D084(1);
-        spriteId = sub_813CE88(SPECIES_SHARPEDO, 0xD0, 8, 5, 1);
+        spriteId = SetupSpriteForIntro(SPECIES_SHARPEDO, 0xD0, 8, 5, 1);
         gSprites[spriteId].callback = sub_813E10C;
         gTasks[taskId].data[2] = spriteId;
         sub_813E7C0(spriteId);
     }
     if (gIntroFrameCounter == 539)
     {
-        spriteId = sub_813CE88(SPECIES_DUSKULL, 0xF8, 0x10, 4, 1);
+        spriteId = SetupSpriteForIntro(SPECIES_DUSKULL, 0xF8, 0x10, 4, 1);
         gSprites[spriteId].callback = sub_813E10C;
         gTasks[taskId].data[3] = spriteId;
         sub_813E930(spriteId);
@@ -1376,14 +1376,14 @@ static void Task_IntroPokemonBattle(u8 taskId)
     if (gIntroFrameCounter == 624)
     {
         sub_813D084(0);
-        spriteId = sub_813CE88(SPECIES_MUDKIP, 0x20, 0x98, 0, 0);
+        spriteId = SetupSpriteForIntro(SPECIES_MUDKIP, 0x20, 0x98, 0, 0);
         gSprites[spriteId].callback = sub_813E210;
         gTasks[taskId].data[4] = spriteId;
         InitIntroMudkipAttackAnim(spriteId);
     }
     if (gIntroFrameCounter == 700)
     {
-        spriteId = sub_813CE88(SPECIES_TORCHIC, -8, 0x90, 1, 0);
+        spriteId = SetupSpriteForIntro(SPECIES_TORCHIC, -8, 0x90, 1, 0);
         gSprites[spriteId].callback = sub_813E210;
         gTasks[taskId].data[5] = spriteId;
         InitIntroTorchicAttackAnim(spriteId);
@@ -1595,7 +1595,7 @@ void sub_813CE30(u16 scrX, u16 scrY, u16 zoom, u16 alpha)
     REG_BG2Y = dest.dy;
 }
 
-static u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
+static u16 SetupSpriteForIntro(u16 species, s16 x, s16 y, u16 d, u8 front)
 {
     const u8 *lzPaletteData;
     u8 spriteId;
@@ -2223,7 +2223,7 @@ static void sub_813DE70(struct Sprite *sprite)
         r5 = gSprites[sprite->data[6]].pos1.x + gSprites[sprite->data[6]].pos2.x;
         r4 = gSprites[sprite->data[6]].pos1.y + gSprites[sprite->data[6]].pos2.y;
         DestroySprite(&gSprites[sprite->data[6]]);
-        sprite->data[6] = sub_813CE88(SPECIES_TORCHIC, r5, r4, 2, 1);
+        sprite->data[6] = SetupSpriteForIntro(SPECIES_TORCHIC, r5, r4, 2, 1);
         gSprites[sprite->data[6]].callback = sub_813DD58;
         gSprites[sprite->data[6]].invisible = TRUE;
         gSprites[sprite->data[6]].data[1] = 1;
@@ -2233,7 +2233,7 @@ static void sub_813DE70(struct Sprite *sprite)
         r5 = gSprites[sprite->data[7]].pos1.x + gSprites[sprite->data[7]].pos2.x;
         r4 = gSprites[sprite->data[7]].pos1.y + gSprites[sprite->data[7]].pos2.y;
         DestroySprite(&gSprites[sprite->data[7]]);
-        sprite->data[7] = sub_813CE88(SPECIES_MUDKIP, r5, r4, 3, 1);
+        sprite->data[7] = SetupSpriteForIntro(SPECIES_MUDKIP, r5, r4, 3, 1);
         gSprites[sprite->data[7]].callback = sub_813DD58;
         gSprites[sprite->data[7]].invisible = TRUE;
         gSprites[sprite->data[7]].data[1] = 2;
