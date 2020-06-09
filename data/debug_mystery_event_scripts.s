@@ -17,20 +17,20 @@
 
 	.section .rodata
 
-.if ENGLISH
+.ifdef ENGLISH
     .set unkConstant, 2
 .else @ GERMAN
     .set unkConstant, 4
 .endif @ GERMAN
 
-.if SAPPHIRE
-    .set unkConstant2, 0x100
+.ifdef SAPPHIRE
+    .set versionMask, 0x100
 .else @ RUBY
-    .set unkConstant2, 0x80
+    .set versionMask, 0x80
 .endif @ RUBY
 
 gUnknown_Debug_845DAE1::
-	me_checkcompat gUnknown_Debug_845DAE1, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845DAE1, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, _0845DAFF, _0845DAFFEnd
 _0845DAFF:
 	me_initramscript MAP_PETALBURG_CITY_GYM, 0x1, _845DB56, _845DB56End
@@ -38,7 +38,7 @@ _0845DAFF:
 	me_runscript _0845DD0D
 	me_end
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845DB16:
 	.string "Go see your father at the GYM in\n"
 	.string "PETALBURG.$"
@@ -82,7 +82,7 @@ _0845DBB5:
 	release
 	end
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845DBBE:
 	.string "DAD: {PLAYER}! Good to see you!\n"
 	.string "There's a letter here for you, {PLAYER}.$"
@@ -144,7 +144,7 @@ _0845DD5B:
 	setmysteryeventstatus 0x3
 	end
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845DD63:
 	.string "This EVENT may be played only once.$"
 _0845DD95:
@@ -162,7 +162,7 @@ _0845DAFFEnd:
 gUnknown_Debug_845DAE1End::
 
 gUnknown_Debug_845DDB2::
-	me_checkcompat gUnknown_Debug_845DDB2, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845DDB2, unkConstant, unkConstant, 0x4, versionMask
 	me_checksum 0x0, _0845DDD0, _0845DDD0End
 _0845DDD0:
 	me_setenigmaberry gUnknown_Debug_845DDD6
@@ -175,7 +175,7 @@ _0845DDD0End:
 gUnknown_Debug_845DDB2End::
 
 gUnknown_Debug_845E306::
-	me_checkcompat gUnknown_Debug_845E306, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E306, unkConstant, unkConstant, 0x4, versionMask
 	me_runscript _0845E329
 	me_setmsg 0x2, _0845E34F
 	me_setmsg 0x3, _0845E387
@@ -194,7 +194,7 @@ _0845E34C:
 	setmysteryeventstatus 0x3
 	end
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845E34F:
 	.string "A POKéMON was added to the\n"
 	.string "player's party.$"
@@ -214,7 +214,7 @@ _0845E387:
 .endif @ GERMAN
 
 gUnknown_Debug_845E3E0::
-	me_checkcompat gUnknown_Debug_845E3E0, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E3E0, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, _0845E3FE, _0845E3FEEnd
 _0845E3FE:
 	me_giveribbon 0x0, 0x1
@@ -224,7 +224,7 @@ _0845E3FEEnd:
 gUnknown_Debug_845E3E0End::
 
 gUnknown_Debug_845E402::
-	me_checkcompat gUnknown_Debug_845E402, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E402, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, _0845E420, _0845E420End
 _0845E420:
 	me_givenationaldex
@@ -234,7 +234,7 @@ _0845E420End:
 gUnknown_Debug_845E402End::
 
 gUnknown_Debug_845E422::
-	me_checkcompat gUnknown_Debug_845E422, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E422, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, _0845E440, _0845E440End
 _0845E440:
 	me_addrareword 0x1
@@ -244,7 +244,7 @@ _0845E440End:
 gUnknown_Debug_845E422End::
 
 gUnknown_Debug_845E443::
-	me_checkcompat gUnknown_Debug_845E443, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E443, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, _0845E461, _0845E461End
 _0845E461:
 	me_givepokemon gUnknown_Debug_845E467
@@ -260,7 +260,7 @@ _0845E461End:
 gUnknown_Debug_845E443End::
 
 gUnknown_Debug_845E4EF::
-	me_checkcompat gUnknown_Debug_845E4EF, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E4EF, unkConstant, unkConstant, 0x4, versionMask
 	me_addtrainer gUnknown_Debug_845E506
 	me_end
 
@@ -269,13 +269,13 @@ gUnknown_Debug_845E506::
 gUnknown_Debug_845E4EFEnd::
 
 gUnknown_Debug_845E606::
-	me_checkcompat gUnknown_Debug_845E606, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E606, unkConstant, unkConstant, 0x4, versionMask
 	me_enableresetrtc
 	me_end
 gUnknown_Debug_845E606End::
 
 gUnknown_Debug_845E619::
-	me_checkcompat gUnknown_Debug_845E619, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E619, unkConstant, unkConstant, 0x4, versionMask
 	me_checksum 0x0, _0845E637, _0845E637End
 _0845E637:
 	me_initramscript MAP_PETALBURG_CITY_GYM, 0x1, _0845E683, _0845E683End
@@ -283,7 +283,7 @@ _0845E637:
 	me_setstatus 0x2
 	me_end
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845E64C:
 	.string "Go see your dad at the\n"
 	.string "PETALBURG GYM.$"
@@ -314,7 +314,7 @@ _0845E683:
 _0845E6BF:
 	gotoram
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845E6C0:
 	.string "DAD: Hi, {PLAYER}!\p"
 	.string "I just received a rare BERRY.\n"
@@ -333,7 +333,7 @@ _0845E683End:
 gUnknown_Debug_845E619End::
 
 gUnknown_Debug_845E712::
-	me_checkcompat gUnknown_Debug_845E712, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E712, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, _0845E730, _0845E730End
 _0845E730:
 	me_runscript _0845E736
@@ -354,7 +354,7 @@ _0845E755:
 	setmysteryeventstatus 0x3
 	end
 
-.if ENGLISH
+.ifdef ENGLISH
 _0845E75D:
 	.string "{STR_VAR_1} was received!$"
 _0845E771:
@@ -373,7 +373,7 @@ _0845E730End:
 gUnknown_Debug_845E712End::
 
 gUnknown_Debug_845E797::
-	me_checkcompat gUnknown_Debug_845E797, unkConstant, unkConstant, 0x4, unkConstant2
+	me_checkcompat gUnknown_Debug_845E797, unkConstant, unkConstant, 0x4, versionMask
 	me_crc 0x0, gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End
 gUnknown_Debug_845E7B5::
 	me_setrecordmixinggift 0x1, 0x3, ITEM_POTION

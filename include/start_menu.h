@@ -13,11 +13,20 @@ void debug_sub_8075DB4(struct BattleTowerEReaderTrainer *ereaderTrainer, const u
 bool8 debug_sub_8075C30(void);
 
 #if DEBUG
-extern u8 gUnknown_Debug_03004BD0;
+
+#if (ENGLISH && REVISION == 0)
+#define TYPE u8
+#else
+#define TYPE u32
+#endif
+
+extern TYPE gUnknown_Debug_03004BD0;
 // TODO: see if this is in rev1+
 #if (ENGLISH && REVISION == 0)
-extern u8 gUnknown_Debug_Murakawa2;
+extern TYPE gUnknown_Debug_Murakawa2;
 #endif
+
+#undef TYPE
 #endif // DEBUG
 
 #endif // GUARD_START_MENU_H
