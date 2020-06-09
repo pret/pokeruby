@@ -795,7 +795,7 @@ static void task_intro_19(u8);
 static void task_intro_20(u8);
 static void intro_reset_and_hide_bgs(void);
 static void sub_813CCE8(u8);
-static u16 sub_813CE88(u16, s16, s16, u16, u8);
+static u16 SetupSpriteForIntro(u16, s16, s16, u16, u8);
 static u8 sub_813CFA8(u16, u16, u16, u16);
 static void sub_813D084(u8);
 static void sub_813D220(struct Sprite *);
