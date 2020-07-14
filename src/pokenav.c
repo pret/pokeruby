@@ -2042,14 +2042,8 @@ void sub_80F1480(void)
     Menu_EraseWindowRect(12, 13, 27, 16);
 }
 
-// This is a fakematching function, due to a hardcoded access of gSaveBlock1.
-// Due to this hardcoded address access, gift ribbons do not properly display
-// their descriptions, since the hardcoded access is inside of the LinkBattleRecords
-// save data, rather than the giftRibbons array, which is almost certainly what the
-// intended access is.
 void sub_80F1494(void)
 {
-    u8 *arr;
     u8 *tileBuffer1 = &gUnknown_083DFEC8[0x800];
     u8 *tileBuffer2 = &gUnknown_083DFEC8[0xA98];
 
@@ -2065,11 +2059,8 @@ void sub_80F1494(void)
         gUnknown_020388B4 = gPokenavStructPtr->unkBC8E - gPokenavStructPtr->unkBC8F;
         gUnknown_020388B4 = gPokenavStructPtr->unkBC4C[gUnknown_020388B4 + gPokenavStructPtr->unkBC90];
 
-        // FIXME!
-        arr = ((u8*)&gSaveBlock1);
-        asm("ldrh r1, [r5]\n\
-            add r0, r0, r1");
-        gUnknown_020388B4 = arr[0x30F7];
+        gUnknown_020388B4 = gSaveBlock1.externalReservedData.giftRibbons[gUnknown_020388B4 -25];
+    
         // The bug fix for this code is the following:
         // gUnknown_020388B4 = gSaveBlock1.externalReservedData.giftRibbons[gUnknown_020388B4];
         if (gUnknown_020388B4)
@@ -2320,17 +2311,8 @@ void sub_80F1B8C(u8 arg0)
         while (sub_80F1BC8(arg0));
 }
 
-#ifdef NONMATCHING
-// very close, but for some reason, (i + 1) is being stored in sp[0x10]
 bool8 sub_80F1BC8(u8 arg0)
 {
-    u16 i, j;
-    u16 animNum;
-    u16 topOffset;
-    u16 height;
-    u16 middle;
-    u8 spriteId;
-
     switch (gPokenavStructPtr->unk306)
     {
     case 0:
@@ -2340,6 +2322,14 @@ bool8 sub_80F1BC8(u8 arg0)
         sub_80F2514(arg0);
         break;
     case 2:
+    {
+        u16 i, j;
+        u16 animNum;
+        u16 topOffset;
+        u16 height;
+        u16 middle;
+        u8 spriteId;
+
         switch (arg0)
         {
         case 0:
@@ -2366,7 +2356,7 @@ bool8 sub_80F1BC8(u8 arg0)
         {
             middle = (height * i) + topOffset - 8;
             gPokenavStructPtr->unk314[i] = (middle << 8) | (middle + 0x11);
-            if (!arg0)
+            if (arg0 == 0)
             {
                 if (gPokenavStructPtr->unk6DB2[i] == 0)
                 {
@@ -2374,29 +2364,31 @@ bool8 sub_80F1BC8(u8 arg0)
                         gPokenavStructPtr->unk320[i][j] = NULL;
                     continue;
                 }
-                else
-                {
-                    animNum = (gPokenavStructPtr->unk6DB2[i] - 1) * 4;
-                }
+                
+                animNum = (gPokenavStructPtr->unk6DB2[i] - 1) * 4;
             }
 
             for (j = 0; j < 4; j++)
             {
                 spriteId = CreateSprite(&gSpriteTemplate_83E4454, j * 32 + 256, (height * i) + topOffset, 0);
-                if (spriteId != MAX_SPRITES)
-                {
-                    gPokenavStructPtr->unk320[i][j] = &gSprites[spriteId];
-                    gPokenavStructPtr->unk320[i][j]->data[0] = i;
-                    gPokenavStructPtr->unk320[i][j]->data[1] = j;
-                    gPokenavStructPtr->unk320[i][j]->data[2] = j * 32 + 152;
-                    gPokenavStructPtr->unk320[i][j]->data[3] = j * 32 + 256;
-                    StartSpriteAnim(gPokenavStructPtr->unk320[i][j], animNum++);
 
-                    if ((arg0 == 2 || arg0 == 0) && i > 2)
-                        gPokenavStructPtr->unk320[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(0x1);
+                if (spriteId == MAX_SPRITES)
+                {
+                    return FALSE;
                 }
+
+                gPokenavStructPtr->unk320[i][j] = &gSprites[spriteId];
+                gPokenavStructPtr->unk320[i][j]->data[0] = i;
+                gPokenavStructPtr->unk320[i][j]->data[1] = j;
+                gPokenavStructPtr->unk320[i][j]->data[2] = j * 32 + 152;
+                gPokenavStructPtr->unk320[i][j]->data[3] = j * 32 + 256;
+                StartSpriteAnim(gPokenavStructPtr->unk320[i][j], animNum++);
+
+                if ((arg0 == 2 || arg0 == 0) && i > 2)
+                    gPokenavStructPtr->unk320[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(1);
             }
         }
+    }
         break;
     default:
         return FALSE;
@@ -2405,297 +2397,6 @@ bool8 sub_80F1BC8(u8 arg0)
     gPokenavStructPtr->unk306++;
     return TRUE;
 }
-#else
-NAKED
-bool8 sub_80F1BC8(u8 arg0)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r9, r0\n\
-    ldr r1, _080F1BF4 @ =gPokenavStructPtr\n\
-    ldr r2, [r1]\n\
-    ldr r3, _080F1BF8 @ =0x00000306\n\
-    adds r0, r2, r3\n\
-    ldrh r0, [r0]\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0x1\n\
-    beq _080F1C0A\n\
-    cmp r0, 0x1\n\
-    bgt _080F1BFC\n\
-    cmp r0, 0\n\
-    beq _080F1C02\n\
-    b _080F1DC4\n\
-    .align 2, 0\n\
-_080F1BF4: .4byte gPokenavStructPtr\n\
-_080F1BF8: .4byte 0x00000306\n\
-_080F1BFC:\n\
-    cmp r0, 0x2\n\
-    beq _080F1C12\n\
-    b _080F1DC4\n\
-_080F1C02:\n\
-    mov r0, r9\n\
-    bl sub_80F2458\n\
-    b _080F1DC8\n\
-_080F1C0A:\n\
-    mov r0, r9\n\
-    bl sub_80F2514\n\
-    b _080F1DC8\n\
-_080F1C12:\n\
-    mov r4, r9\n\
-    cmp r4, 0x1\n\
-    beq _080F1C40\n\
-    cmp r4, 0x1\n\
-    bgt _080F1C22\n\
-    cmp r4, 0\n\
-    beq _080F1C2A\n\
-    b _080F1DC4\n\
-_080F1C22:\n\
-    mov r5, r9\n\
-    cmp r5, 0x2\n\
-    beq _080F1C54\n\
-    b _080F1DC4\n\
-_080F1C2A:\n\
-    movs r0, 0x2A\n\
-    str r0, [sp, 0x4]\n\
-    movs r1, 0x14\n\
-    str r1, [sp, 0x8]\n\
-    ldr r4, _080F1C3C @ =0x0000030e\n\
-    adds r1, r2, r4\n\
-    movs r0, 0x5\n\
-    b _080F1C62\n\
-    .align 2, 0\n\
-_080F1C3C: .4byte 0x0000030e\n\
-_080F1C40:\n\
-    movs r5, 0x38\n\
-    str r5, [sp, 0x4]\n\
-    movs r0, 0x14\n\
-    str r0, [sp, 0x8]\n\
-    ldr r4, _080F1C50 @ =0x0000030e\n\
-    adds r1, r2, r4\n\
-    movs r0, 0x3\n\
-    b _080F1C62\n\
-    .align 2, 0\n\
-_080F1C50: .4byte 0x0000030e\n\
-_080F1C54:\n\
-    movs r5, 0x28\n\
-    str r5, [sp, 0x4]\n\
-    movs r0, 0x10\n\
-    str r0, [sp, 0x8]\n\
-    ldr r4, _080F1CDC @ =0x0000030e\n\
-    adds r1, r2, r4\n\
-    movs r0, 0x6\n\
-_080F1C62:\n\
-    strb r0, [r1]\n\
-    movs r5, 0\n\
-    str r5, [sp]\n\
-    mov r8, r5\n\
-    adds r1, r3, 0\n\
-    ldr r0, [r1]\n\
-    ldr r2, _080F1CDC @ =0x0000030e\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r8, r0\n\
-    blt _080F1C7E\n\
-    b _080F1DC8\n\
-_080F1C7E:\n\
-    ldr r4, [sp, 0x8]\n\
-    mov r3, r8\n\
-    muls r3, r4\n\
-    ldr r5, [sp, 0x4]\n\
-    adds r0, r5, r3\n\
-    subs r0, 0x8\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    ldr r4, [r1]\n\
-    mov r2, r8\n\
-    lsls r1, r2, 1\n\
-    movs r5, 0xC5\n\
-    lsls r5, 2\n\
-    adds r2, r4, r5\n\
-    adds r2, r1\n\
-    lsls r1, r0, 8\n\
-    adds r0, 0x11\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    mov r0, r9\n\
-    cmp r0, 0\n\
-    bne _080F1CF2\n\
-    ldr r1, _080F1CE0 @ =0x00006db2\n\
-    adds r0, r4, r1\n\
-    mov r2, r8\n\
-    adds r1, r0, r2\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0\n\
-    bne _080F1CE8\n\
-    movs r5, 0\n\
-    ldr r0, _080F1CE4 @ =gPokenavStructPtr\n\
-    ldr r0, [r0]\n\
-    lsls r2, 4\n\
-    movs r3, 0xC8\n\
-    lsls r3, 2\n\
-    adds r1, r0, r3\n\
-    movs r3, 0\n\
-_080F1CC8:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r2\n\
-    adds r0, r1, r0\n\
-    str r3, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x3\n\
-    bls _080F1CC8\n\
-    b _080F1D92\n\
-    .align 2, 0\n\
-_080F1CDC: .4byte 0x0000030e\n\
-_080F1CE0: .4byte 0x00006db2\n\
-_080F1CE4: .4byte gPokenavStructPtr\n\
-_080F1CE8:\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0x1\n\
-    lsls r0, 18\n\
-    lsrs r0, 16\n\
-    str r0, [sp]\n\
-_080F1CF2:\n\
-    movs r5, 0\n\
-    ldr r4, [sp, 0x4]\n\
-    adds r0, r4, r3\n\
-    lsls r0, 16\n\
-    mov r10, r0\n\
-_080F1CFC:\n\
-    lsls r6, r5, 5\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    adds r7, r6, r0\n\
-    lsls r1, r7, 16\n\
-    asrs r1, 16\n\
-    ldr r0, _080F1DB4 @ =gSpriteTemplate_83E4454\n\
-    mov r3, r10\n\
-    asrs r2, r3, 16\n\
-    movs r3, 0\n\
-    bl CreateSprite\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x40\n\
-    beq _080F1DC4\n\
-    ldr r0, _080F1DB8 @ =gPokenavStructPtr\n\
-    ldr r2, [r0]\n\
-    lsls r1, r5, 2\n\
-    mov r4, r8\n\
-    lsls r0, r4, 4\n\
-    adds r1, r0\n\
-    movs r0, 0xC8\n\
-    lsls r0, 2\n\
-    adds r2, r0\n\
-    adds r4, r2, r1\n\
-    lsls r0, r3, 4\n\
-    adds r0, r3\n\
-    lsls r0, 2\n\
-    ldr r1, _080F1DBC @ =gSprites\n\
-    adds r0, r1\n\
-    str r0, [r4]\n\
-    mov r1, r8\n\
-    strh r1, [r0, 0x2E]\n\
-    ldr r0, [r4]\n\
-    strh r5, [r0, 0x30]\n\
-    ldr r1, [r4]\n\
-    adds r0, r6, 0\n\
-    adds r0, 0x98\n\
-    strh r0, [r1, 0x32]\n\
-    ldr r0, [r4]\n\
-    strh r7, [r0, 0x34]\n\
-    ldr r0, [r4]\n\
-    ldr r1, [sp]\n\
-    adds r2, r1, 0x1\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    str r2, [sp]\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    bl StartSpriteAnim\n\
-    mov r2, r9\n\
-    cmp r2, 0x2\n\
-    beq _080F1D6E\n\
-    cmp r2, 0\n\
-    bne _080F1D88\n\
-_080F1D6E:\n\
-    mov r3, r8\n\
-    cmp r3, 0x2\n\
-    bls _080F1D88\n\
-    movs r0, 0x1\n\
-    bl IndexOfSpritePaletteTag\n\
-    ldr r3, [r4]\n\
-    lsls r0, 4\n\
-    ldrb r2, [r3, 0x5]\n\
-    movs r1, 0xF\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    strb r1, [r3, 0x5]\n\
-_080F1D88:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x3\n\
-    bls _080F1CFC\n\
-_080F1D92:\n\
-    mov r0, r8\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    ldr r1, _080F1DB8 @ =gPokenavStructPtr\n\
-    ldr r0, [r1]\n\
-    ldr r4, _080F1DC0 @ =0x0000030e\n\
-    adds r0, r4\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r8, r0\n\
-    bge _080F1DB0\n\
-    b _080F1C7E\n\
-_080F1DB0:\n\
-    b _080F1DC8\n\
-    .align 2, 0\n\
-_080F1DB4: .4byte gSpriteTemplate_83E4454\n\
-_080F1DB8: .4byte gPokenavStructPtr\n\
-_080F1DBC: .4byte gSprites\n\
-_080F1DC0: .4byte 0x0000030e\n\
-_080F1DC4:\n\
-    movs r0, 0\n\
-    b _080F1DD8\n\
-_080F1DC8:\n\
-    ldr r0, _080F1DE8 @ =gPokenavStructPtr\n\
-    ldr r1, [r0]\n\
-    ldr r5, _080F1DEC @ =0x00000306\n\
-    adds r1, r5\n\
-    ldrh r0, [r1]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-    movs r0, 0x1\n\
-_080F1DD8:\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_080F1DE8: .4byte gPokenavStructPtr\n\
-_080F1DEC: .4byte 0x00000306\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80F1DF0(void)
 {
