@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle2_MapScripts:: @ 8161D76
-	map_script 5, Route110_TrickHousePuzzle2_MapScript1_161D81
-	map_script 3, Route110_TrickHousePuzzle2_MapScript1_161DAE
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle2_MapScript1_161D81
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle2_MapScript1_161DAE
 	.byte 0
 
 Route110_TrickHousePuzzle2_MapScript1_161D81:: @ 8161D81
@@ -90,16 +90,16 @@ Route110_TrickHousePuzzle2_EventScript_161E65:: @ 8161E65
 	return
 
 Route110_TrickHousePuzzle2_EventScript_161E78:: @ 8161E78
-	trainerbattle 0, TRAINER_TED, 0, Route110_TrickHousePuzzle2_Text_19CD46, Route110_TrickHousePuzzle2_Text_19CD66
-	msgbox Route110_TrickHousePuzzle2_Text_19CD91, 6
+	trainerbattle_single TRAINER_TED, Route110_TrickHousePuzzle2_Text_19CD46, Route110_TrickHousePuzzle2_Text_19CD66
+	msgbox Route110_TrickHousePuzzle2_Text_19CD91, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161E8F:: @ 8161E8F
-	trainerbattle 0, TRAINER_PAUL, 0, Route110_TrickHousePuzzle2_Text_19CDBF, Route110_TrickHousePuzzle2_Text_19CDF0
-	msgbox Route110_TrickHousePuzzle2_Text_19CE0D, 6
+	trainerbattle_single TRAINER_PAUL, Route110_TrickHousePuzzle2_Text_19CDBF, Route110_TrickHousePuzzle2_Text_19CDF0
+	msgbox Route110_TrickHousePuzzle2_Text_19CE0D, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161EA6:: @ 8161EA6
-	trainerbattle 0, TRAINER_GEORGIA, 0, Route110_TrickHousePuzzle2_Text_19CE52, Route110_TrickHousePuzzle2_Text_19CE98
-	msgbox Route110_TrickHousePuzzle2_Text_19CEB8, 6
+	trainerbattle_single TRAINER_GEORGIA, Route110_TrickHousePuzzle2_Text_19CE52, Route110_TrickHousePuzzle2_Text_19CE98
+	msgbox Route110_TrickHousePuzzle2_Text_19CEB8, MSGBOX_AUTOCLOSE
 	end

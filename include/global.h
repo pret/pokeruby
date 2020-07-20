@@ -6,6 +6,7 @@
 #include <limits.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
+#include "constants/global.h"
 
 // IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__)
@@ -96,90 +97,10 @@ enum
     f;                       \
 })
 
-enum
-{
-    VERSION_SAPPHIRE = 1,
-    VERSION_RUBY = 2,
-    VERSION_EMERALD = 3,
-};
-
-enum LanguageId
-{
-    LANGUAGE_JAPANESE = 1,
-    LANGUAGE_ENGLISH = 2,
-    LANGUAGE_GERMAN = 5,
-};
-
-#if defined(ENGLISH)
-#define GAME_LANGUAGE (LANGUAGE_ENGLISH)
-#elif defined(GERMAN)
-#define GAME_LANGUAGE (LANGUAGE_GERMAN)
-#endif
-
-// capacities of various saveblock objects
-#define DAYCARE_MON_COUNT   2
-#define POKEBLOCKS_COUNT    40
-#define PARTY_SIZE          6
-#define OBJECT_EVENTS_COUNT 16
-#define BERRY_TREES_COUNT   128
-#define FLAGS_COUNT         288
-#define VARS_COUNT          256
-#define MAIL_COUNT          16
-#define SECRET_BASES_COUNT  20
-#define TV_SHOWS_COUNT      25
-#define POKE_NEWS_COUNT     16
-#define PC_ITEMS_COUNT      50
-#define BAG_ITEMS_COUNT     20
-#define BAG_KEYITEMS_COUNT  20
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT      64
-#define BAG_BERRIES_COUNT   46
-
 #define TEST_BUTTON(value, button) ({(value) & (button);})
 #define JOY_NEW(button) (TEST_BUTTON(gMain.newKeys, button))
 #define JOY_HELD(button) (TEST_BUTTON(gMain.heldKeys, button))
 #define JOY_REPT(button) (TEST_BUTTON(gMain.newAndRepeatedKeys, button))
-
-enum
-{
-    MALE,
-    FEMALE
-};
-
-enum
-{
-    OPTIONS_BUTTON_MODE_NORMAL,
-    OPTIONS_BUTTON_MODE_LR,
-    OPTIONS_BUTTON_MODE_L_EQUALS_A
-};
-
-enum
-{
-    OPTIONS_TEXT_SPEED_SLOW,
-    OPTIONS_TEXT_SPEED_MID,
-    OPTIONS_TEXT_SPEED_FAST
-};
-
-enum
-{
-    OPTIONS_SOUND_MONO,
-    OPTIONS_SOUND_STEREO
-};
-
-enum
-{
-    OPTIONS_BATTLE_STYLE_SHIFT,
-    OPTIONS_BATTLE_STYLE_SET
-};
-
-enum
-{
-    BAG_ITEMS = 1,
-    BAG_POKEBALLS,
-    BAG_TMsHMs,
-    BAG_BERRIES,
-    BAG_KEYITEMS
-};
 
 struct Coords16
 {
@@ -205,14 +126,14 @@ struct SecretBaseRecord
     /*0x1A16*/ u16 sbr_field_e;
     /*0x1A18*/ u8 sbr_field_10;
     /*0x1A19*/ u8 sbr_field_11;
-    /*0x1A1A*/ u8 decorations[16];
-    /*0x1A2A*/ u8 decorationPos[16];
-    /*0x1A3C*/ u32 partyPersonality[6];
-    /*0x1A54*/ u16 partyMoves[6 * 4];
-    /*0x1A84*/ u16 partySpecies[6];
-    /*0x1A90*/ u16 partyHeldItems[6];
-    /*0x1A9C*/ u8 partyLevels[6];
-    /*0x1AA2*/ u8 partyEVs[6];
+    /*0x1A1A*/ u8 decorations[DECOR_MAX_SECRET_BASE];
+    /*0x1A2A*/ u8 decorationPos[DECOR_MAX_SECRET_BASE];
+    /*0x1A3C*/ u32 partyPersonality[PARTY_SIZE];
+    /*0x1A54*/ u16 partyMoves[PARTY_SIZE * 4];
+    /*0x1A84*/ u16 partySpecies[PARTY_SIZE];
+    /*0x1A90*/ u16 partyHeldItems[PARTY_SIZE];
+    /*0x1A9C*/ u8 partyLevels[PARTY_SIZE];
+    /*0x1AA2*/ u8 partyEVs[PARTY_SIZE];
 };
 
 #include "constants/game_stat.h"
@@ -698,16 +619,16 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x96C*/ u16 berryBlenderRecords[3];
     /*0x972*/ u8 filler_972[0x6];
     /*0x978*/ u16 trainerRematchStepCounter;
-    /*0x97A*/ u8 trainerRematches[100];
+    /*0x97A*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0x9E0*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
-    /*0xC20*/ struct ObjectEventTemplate objectEventTemplates[64];
+    /*0xC20*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x1220*/ u8 flags[FLAGS_COUNT];
     /*0x1340*/ u16 vars[VARS_COUNT];
     /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1608*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
     /*0x1A08*/ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
-    /*0x2688*/ u8 playerRoomDecor[12];
-    /*0x2694*/ u8 playerRoomDecorPos[12];
+    /*0x2688*/ u8 playerRoomDecor[DECOR_MAX_PLAYERS_HOUSE];
+    /*0x2694*/ u8 playerRoomDecorPos[DECOR_MAX_PLAYERS_HOUSE];
     /*0x26A0*/ u8 decorDesk[10];
     /*0x26AA*/ u8 decorChair[10];
     /*0x26B4*/ u8 decorPlant[10];

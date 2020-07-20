@@ -34,12 +34,12 @@ yes_hear_song:
 	compare VAR_RESULT, FALSE
 	@ Prompt new lyrics only if song hasn't been changed
 	goto_if_eq prompt_write_lyrics
-	msgbox gTextBard_OhWhatAMovingSong, 4
+	msgbox gTextBard_OhWhatAMovingSong, MSGBOX_DEFAULT
 	release
 	end
 
 dont_hear_song:
-	msgbox gTextBard_OhYouveLeftMe, 4
+	msgbox gTextBard_OhYouveLeftMe, MSGBOX_DEFAULT
 	release
 	end
 
@@ -53,12 +53,12 @@ prompt_write_lyrics:
 
 write_lyrics:
 	setvar VAR_0x8004, 6
-	call MauvilleCity_PokemonCenter_1F_EventScript_1A00F3
+	call Common_EventScript_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, NO
 	goto_if_eq dont_write_lyrics
-	msgbox gTextBard_ThankYouKindly, 4
+	msgbox gTextBard_ThankYouKindly, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
 	@ Give the player ear rape again
 	special ScrSpecial_PlayBardSong
@@ -67,12 +67,12 @@ write_lyrics:
 	compare VAR_RESULT, NO
 	goto_if_eq write_lyrics		@ Keep looping until player responds YES
 	special ScrSpecial_SaveBardSongLyrics
-	msgbox gTextBard_OkayThatsIt, 4
+	msgbox gTextBard_OkayThatsIt, MSGBOX_DEFAULT
 	release
 	end
 
 dont_write_lyrics:
-	msgbox gTextBard_OhYouveLeftMe2, 4
+	msgbox gTextBard_OhYouveLeftMe2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -85,11 +85,11 @@ SpeakToHipster:
 	lock
 	faceplayer
 	setflag FLAG_SYS_HIPSTER_MEET
-	msgbox gTextHipster_TheyCallMeTheHipster, 4
+	msgbox gTextHipster_TheyCallMeTheHipster, MSGBOX_DEFAULT
 	special ScrSpecial_GetHipsterSpokenFlag
 	compare VAR_RESULT, FALSE
 	goto_if_eq hipster_first_time
-	msgbox gTextHipster_TaughtYouAlready, 4
+	msgbox gTextHipster_TaughtYouAlready, MSGBOX_DEFAULT
 	release
 	end
 
@@ -97,12 +97,12 @@ hipster_first_time:
 	special ScrSpecial_HipsterTeachWord
 	compare VAR_RESULT, TRUE		@ TRUE if player learned a new word
 	goto_if_eq teach_new_word
-	msgbox gTextHipster_YouAlreadyKnowALot, 4
+	msgbox gTextHipster_YouAlreadyKnowALot, MSGBOX_DEFAULT
 	release
 	end
 
 teach_new_word:
-	msgbox gTextHipster_HaveYouHeardAbout, 4
+	msgbox gTextHipster_HaveYouHeardAbout, MSGBOX_DEFAULT
 	special ScrSpecial_SetHipsterSpokenFlag
 	release
 	end
@@ -129,11 +129,11 @@ SpeakToTrader:
 	end
 
 dont_want_to_trade:
-	msgbox gTextTrader_FeelUnwanted1, 2
+	msgbox gTextTrader_FeelUnwanted1, MSGBOX_NPC
 	end
 
 already_traded:
-	msgbox gTextTrader_TradedAlready, 2
+	msgbox gTextTrader_TradedAlready, MSGBOX_NPC
 	end
 
 do_trader_menu_get:
@@ -153,7 +153,7 @@ do_trader_menu_get:
 	end
 
 cancelled_get_menu:
-	msgbox gTextTrader_DontWantAnything, 2
+	msgbox gTextTrader_DontWantAnything, MSGBOX_NPC
 	end
 
 rare_item_cant_trade_away:
@@ -169,11 +169,11 @@ dont_want_item:
 	end
 
 player_has_no_decorations:
-	msgbox gTextTrader_YouDontHaveDecorations, 2
+	msgbox gTextTrader_YouDontHaveDecorations, MSGBOX_NPC
 	end
 
 do_trader_menu_give:
-	msgbox gTextTrader_PickDecorationYoullTrade, 4
+	msgbox gTextTrader_PickDecorationYoullTrade, MSGBOX_DEFAULT
 	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
 	compare VAR_0x8006, 0
@@ -187,20 +187,20 @@ do_trader_menu_give:
 	compare VAR_RESULT, NO
 	goto_if_eq do_trader_menu_give
 	special ScrSpecial_TraderDoDecorationTrade
-	msgbox gTextTrader_ThenWellTrade, 2
+	msgbox gTextTrader_ThenWellTrade, MSGBOX_NPC
 	end
 
 cancelled_give_menu:
-	msgbox gTextTrader_FeelUnwanted2, 2
+	msgbox gTextTrader_FeelUnwanted2, MSGBOX_NPC
 	end
 
 decoration_is_in_use:
-	msgbox gTextTrader_InUseYouCantTradeIt, 4
+	msgbox gTextTrader_InUseYouCantTradeIt, MSGBOX_DEFAULT
 	goto do_trader_menu_give
 	end
 
 decorations_full:
-	msgbox gTextTrader_NoRoomForThis, 2
+	msgbox gTextTrader_NoRoomForThis, MSGBOX_NPC
 	end
 
 
@@ -243,7 +243,7 @@ cancel_story_menu:
 	goto_if_eq dont_hear_story
 	goto yes_hear_story
 no_stat_update:
-	msgbox gTextStoryteller_CouldThereBeOtherTrainers, 4
+	msgbox gTextStoryteller_CouldThereBeOtherTrainers, MSGBOX_DEFAULT
 	msgbox gTextStoryteller_HearAnotherLegendaryTale, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq choose_story
@@ -256,7 +256,7 @@ yes_hear_story:
 	goto_if_eq cant_record_story		@ story list is full
 	goto prompt_record_story
 no_stories_recorded:
-	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, 4
+	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, MSGBOX_DEFAULT
 prompt_record_story:
 	msgbox gTextStoryteller_HaveYouAnyTales, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -264,25 +264,25 @@ prompt_record_story:
 	specialvar VAR_RESULT, ScrSpecial_StorytellerInitializeRandomStat
 	compare VAR_RESULT, TRUE
 	goto_if_eq stat_update
-	msgbox gTextStoryteller_ImNotSatisfied, 4
+	msgbox gTextStoryteller_ImNotSatisfied, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
 stat_update:
-	msgbox gTextStoryteller_BirthOfANewLegend, 4
+	msgbox gTextStoryteller_BirthOfANewLegend, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
 dont_hear_story:
-	msgbox gTextStoryteller_OhIFeelStifled, 4
+	msgbox gTextStoryteller_OhIFeelStifled, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
 cant_record_story:
-	msgbox gTextStoryteller_WishMorePeopleWould, 4
+	msgbox gTextStoryteller_WishMorePeopleWould, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
@@ -321,7 +321,7 @@ tell_another_giddy_tale:
 	end
 
 also_i_was_thinking:
-	msgbox gTextGiddy_AlsoIWasThinking, 4
+	msgbox gTextGiddy_AlsoIWasThinking, MSGBOX_DEFAULT
 	goto tell_giddy_tale
 	end
 
@@ -337,12 +337,12 @@ tell_giddy_tale:
 	end
 
 dont_hear_giddy:
-	msgbox gTextGiddy_YouveDeflatedMe, 4
+	msgbox gTextGiddy_YouveDeflatedMe, MSGBOX_DEFAULT
 	release
 	end
 
 bye_bye:
-	msgbox gTextGiddy_ByeBye, 4
+	msgbox gTextGiddy_ByeBye, MSGBOX_DEFAULT
 	release
 	end
 

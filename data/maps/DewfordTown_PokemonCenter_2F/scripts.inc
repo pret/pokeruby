@@ -1,7 +1,7 @@
 DewfordTown_PokemonCenter_2F_MapScripts:: @ 8153043
-	map_script 2, DewfordTown_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, DewfordTown_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, DewfordTown_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, DewfordTown_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, DewfordTown_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, DewfordTown_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 DewfordTown_PokemonCenter_2F_EventScript_153053:: @ 8153053

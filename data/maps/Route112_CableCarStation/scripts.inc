@@ -1,6 +1,6 @@
 Route112_CableCarStation_MapScripts:: @ 815C033
-	map_script 3, Route112_CableCarStation_MapScript1_15C03E
-	map_script 2, Route112_CableCarStation_MapScript2_15C05E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_CableCarStation_MapScript1_15C03E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route112_CableCarStation_MapScript2_15C05E
 	.byte 0
 
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
@@ -20,7 +20,7 @@ Route112_CableCarStation_MapScript2_15C05E:: @ 815C05E
 
 Route112_CableCarStation_EventScript_15C068:: @ 815C068
 	lockall
-	applymovement 255, Route112_CableCarStation_Movement_15C0F5
+	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_15C0F5
 	applymovement 1, Route112_CableCarStation_Movement_15C0EB
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
@@ -40,10 +40,10 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	end
 
 Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
-	msgbox Route112_CableCarStation_Text_1925A9, 4
+	msgbox Route112_CableCarStation_Text_1925A9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route112_CableCarStation_Movement_15C0E6
-	applymovement 255, Route112_CableCarStation_Movement_15C0F0
+	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_15C0F0
 	waitmovement 0
 	setvar VAR_0x8004, 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
@@ -55,7 +55,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	end
 
 Route112_CableCarStation_EventScript_15C0DC:: @ 815C0DC
-	msgbox Route112_CableCarStation_Text_192548, 4
+	msgbox Route112_CableCarStation_Text_192548, MSGBOX_DEFAULT
 	release
 	end
 
@@ -64,25 +64,25 @@ Route112_CableCarStation_Movement_15C0E6:: @ 815C0E6
 	walk_up
 	walk_right
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 Route112_CableCarStation_Movement_15C0EB:: @ 815C0EB
 	delay_16
 	walk_left
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 Route112_CableCarStation_Movement_15C0F0:: @ 815C0F0
 	walk_up
 	walk_up
 	walk_up
 	delay_16
-	end_movement
+	step_end
 
 Route112_CableCarStation_Movement_15C0F5:: @ 815C0F5
 	walk_down
 	walk_down
 	walk_down
 	delay_16
-	end_movement
+	step_end

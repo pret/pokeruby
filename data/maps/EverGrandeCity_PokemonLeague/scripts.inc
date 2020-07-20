@@ -1,5 +1,5 @@
 EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
-	map_script 3, EverGrandeCity_PokemonLeague_MapScript1_15BA7B
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_MapScript1_15BA7B
 	.byte 0
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
@@ -15,7 +15,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BA8B:: @ 815BA8B
 
 EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
 	setvar VAR_0x800B, 1
-	call EverGrandeCity_PokemonLeague_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
@@ -24,10 +24,10 @@ EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
 EverGrandeCity_PokemonLeague_EventScript_15BAA8:: @ 815BAA8
 	lock
 	faceplayer
-	message EverGrandeCity_PokemonLeague_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_Items
-	msgbox EverGrandeCity_PokemonLeague_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -73,27 +73,27 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB34:: @ 815BB34
-	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB76
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_Movement_15BB76
 	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB3F:: @ 815BB3F
-	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB7A
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_Movement_15BB7A
 	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
 	playse SE_HAZURE
-	msgbox EverGrandeCity_PokemonLeague_Text_19179C, 4
+	msgbox EverGrandeCity_PokemonLeague_Text_19179C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB57:: @ 815BB57
-	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox EverGrandeCity_PokemonLeague_Text_191804, 4
+	msgbox EverGrandeCity_PokemonLeague_Text_191804, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -102,20 +102,20 @@ EverGrandeCity_PokemonLeague_Movement_15BB76:: @ 815BB76
 	walk_down
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_15BB7A:: @ 815BB7A
 	walk_down
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_15BB7E:: @ 815BB7E
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_15BB81:: @ 815BB81
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end

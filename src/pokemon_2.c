@@ -1031,14 +1031,14 @@ u8 CalculateEnemyPartyCount(void)
     return gEnemyPartyCount;
 }
 
-u8 sub_803DAA0(void)
+u8 GetMonsStateToDoubles(void)
 {
     s32 aliveCount = 0;
     s32 i;
     CalculatePlayerPartyCount();
 
     if (gPlayerPartyCount == 1)
-        return gPlayerPartyCount;
+        return gPlayerPartyCount; // PLAYER_HAS_ONE_MON
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
@@ -1048,7 +1048,7 @@ u8 sub_803DAA0(void)
             aliveCount++;
     }
 
-    return (aliveCount > 1) ? 0 : 2;
+    return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
 }
 
 u8 GetAbilityBySpecies(u16 species, bool8 altAbility)

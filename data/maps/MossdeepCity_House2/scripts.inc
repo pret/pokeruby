@@ -2,11 +2,11 @@ MossdeepCity_House2_MapScripts:: @ 815A868
 	.byte 0
 
 MossdeepCity_House2_EventScript_15A869:: @ 815A869
-	msgbox MossdeepCity_House2_Text_18D536, 2
+	msgbox MossdeepCity_House2_Text_18D536, MSGBOX_NPC
 	end
 
 MossdeepCity_House2_EventScript_15A872:: @ 815A872
-	msgbox MossdeepCity_House2_Text_18D596, 2
+	msgbox MossdeepCity_House2_Text_18D596, MSGBOX_NPC
 	end
 
 MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
@@ -14,7 +14,7 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox MossdeepCity_House2_Text_18D61E, 4
+	msgbox MossdeepCity_House2_Text_18D61E, MSGBOX_DEFAULT
 	waitmoncry
 	closemessage
 	setflag FLAG_WINGULL_DELIVERED_MAIL
@@ -44,11 +44,11 @@ MossdeepCity_House2_Movement_15A8C4:: @ 815A8C4
 	walk_fast_left
 	walk_fast_down
 	delay_8
-	end_movement
+	step_end
 
 MossdeepCity_House2_Movement_15A8CB:: @ 815A8CB
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
 	delay_8
-	end_movement
+	step_end

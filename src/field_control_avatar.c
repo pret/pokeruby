@@ -49,40 +49,37 @@ u8 gSelectedObjectEvent;
 extern u8 gUnknown_081A2C51[];
 extern u8 gUnknown_0815281E[];
 extern u8 gUnknown_08152C39[];
-extern u8 gUnknown_0815F36C[];
-extern u8 gUnknown_0815F43A[];
-extern u8 gUnknown_081A0009[];
+extern u8 SecretBase_EventScript_PC[];
+extern u8 SecretBase_EventScript_RecordMixingPC[];
+extern u8 EventScript_PC[];
 extern u8 gUnknown_081C6C02[];
-extern u8 HiddenItemScript[];
+extern u8 EventScript_HiddenItem[];
 extern u8 Event_TV[];
-extern u8 gUnknown_081A0009[];
 extern u8 ClosedSootopolisDoorScript[];
 extern u8 gUnknown_081A4363[];
 extern u8 gUnknown_081C346A[];
 extern u8 gUnknown_081616E1[];
-extern u8 Event_WorldMap[];
+extern u8 EventScript_RegionMap[];
 extern u8 S_RunningShoesManual[];
-extern u8 PictureBookShelfScript[];
-extern u8 BookshelfScript[];
-extern u8 PokemonCenterBookshelfScript[];
-extern u8 VaseScript[];
-extern u8 TrashCanScript[];
-extern u8 ShopShelfScript[];
-extern u8 BlueprintScript[];
-extern u8 gUnknown_0815F36C[];
-extern u8 gUnknown_0815F43A[];
-extern u8 gUnknown_0815F523[];
-extern u8 gUnknown_0815F528[];
-extern u8 UseSurfScript[];
+extern u8 EventScript_PictureBookshelf[];
+extern u8 EventScript_Bookshelf[];
+extern u8 EventScript_PokemonCenterBookshelf[];
+extern u8 EventScript_Vase[];
+extern u8 EventScript_EmptyTrashCan[];
+extern u8 EventScript_ShopShelf[];
+extern u8 EventScript_Blueprint[];
+extern u8 SecretBase_EventScript_SandOrnament[];
+extern u8 SecretBase_EventScript_ShieldOrToyTV[];
+extern u8 EventScript_UseSurf[];
 extern u8 S_UseWaterfall[];
 extern u8 S_CannotUseWaterfall[];
 extern u8 UseDiveScript[];
 extern u8 S_UseDiveUnderwater[];
-extern u8 S_FallDownHole[];
+extern u8 EventScript_FallDownHole[];
 extern u8 gUnknown_081A14B8[];
 extern u8 S_EggHatch[];
 extern u8 gUnknown_0815FD0D[];
-extern u8 gUnknown_081C6BDE[];
+extern u8 EventScript_FallDownHoleMtPyre[];
 
 static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
@@ -228,7 +225,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 #if DEBUG
      !input->input_field_1_1 &&
 #endif
-     mapheader_run_first_tag2_script_list_match() == 1)
+     TryRunOnFrameMapScript() == TRUE)
         return TRUE;
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
@@ -320,9 +317,9 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     // Play computer noise for PC-related scripts.
     if (script != gUnknown_0815281E
      && script != gUnknown_08152C39
-     && script != gUnknown_0815F36C
-     && script != gUnknown_0815F43A
-     && script != gUnknown_081A0009)
+     && script != SecretBase_EventScript_PC
+     && script != SecretBase_EventScript_RecordMixingPC
+     && script != EventScript_PC)
         PlaySE(5);
 
     ScriptContext1_SetupScript(script);
@@ -437,7 +434,7 @@ static u8 *GetInteractedBackgroundEventScript(struct MapPosition *position, u8 m
         gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
-        return HiddenItemScript;
+        return EventScript_HiddenItem;
     case BG_EVENT_SECRET_BASE:
         if (direction == DIR_NORTH)
         {
@@ -458,7 +455,7 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
         return Event_TV;
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
-        return gUnknown_081A0009;
+        return EventScript_PC;
     if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
         return ClosedSootopolisDoorScript;
     if (MetatileBehavior_IsLinkBattleRecords(metatileBehavior) == TRUE)
@@ -468,35 +465,35 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
         return gUnknown_081616E1;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
-        return Event_WorldMap;
+        return EventScript_RegionMap;
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
         return S_RunningShoesManual;
     if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)
-        return PictureBookShelfScript;
+        return EventScript_PictureBookshelf;
     if (MetatileBehavior_IsBookShelf(metatileBehavior) == TRUE)
-        return BookshelfScript;
+        return EventScript_Bookshelf;
     if (MetatileBehavior_IsPokeCenterBookShelf(metatileBehavior) == TRUE)
-        return PokemonCenterBookshelfScript;
+        return EventScript_PokemonCenterBookshelf;
     if (MetatileBehavior_IsVase(metatileBehavior) == TRUE)
-        return VaseScript;
+        return EventScript_Vase;
     if (MetatileBehavior_IsTrashCan(metatileBehavior) == TRUE)
-        return TrashCanScript;
+        return EventScript_EmptyTrashCan;
     if (MetatileBehavior_IsShopShelf(metatileBehavior) == TRUE)
-        return ShopShelfScript;
+        return EventScript_ShopShelf;
     if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
-        return BlueprintScript;
+        return EventScript_Blueprint;
 
     height = position->height;
     if (height == MapGridGetZCoordAt(position->x, position->y))
     {
         if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
-            return gUnknown_0815F36C;
+            return SecretBase_EventScript_PC;
         if (MetatileBehavior_IsRecordMixingSecretBasePC(metatileBehavior) == TRUE)
-            return gUnknown_0815F43A;
+            return SecretBase_EventScript_RecordMixingPC;
         if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior) == TRUE)
-            return gUnknown_0815F523;
+            return SecretBase_EventScript_SandOrnament;
         if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
-            return gUnknown_0815F528;
+            return SecretBase_EventScript_ShieldOrToyTV;
     }
 
     return NULL;
@@ -505,7 +502,7 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
 static u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
     if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
-        return UseSurfScript;
+        return EventScript_UseSurf;
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
@@ -566,7 +563,7 @@ bool8 TryStartCrackedFloorHoleScript(u16 metatileBehavior)
 {
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
-        ScriptContext1_SetupScript(S_FallDownHole);
+        ScriptContext1_SetupScript(EventScript_FallDownHole);
         return TRUE;
     }
     return FALSE;
@@ -720,7 +717,7 @@ bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileBehavior
         }
         if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
-            ScriptContext1_SetupScript(gUnknown_081C6BDE);
+            ScriptContext1_SetupScript(EventScript_FallDownHoleMtPyre);
             return TRUE;
         }
         sub_8080E88();

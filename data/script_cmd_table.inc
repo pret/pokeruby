@@ -45,7 +45,7 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_clearflag               @ 0x2A
 	.4byte ScrCmd_checkflag               @ 0x2B
 	.4byte ScrCmd_initclock               @ 0x2C
-	.4byte ScrCmd_dodailyevents           @ 0x2D
+	.4byte ScrCmd_dotimebasedevents       @ 0x2D
 	.4byte ScrCmd_gettime                 @ 0x2E
 	.4byte ScrCmd_playse                  @ 0x2F
 	.4byte ScrCmd_waitse                  @ 0x30
@@ -68,15 +68,15 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_setholewarp             @ 0x41
 	.4byte ScrCmd_getplayerxy             @ 0x42
 	.4byte ScrCmd_getpartysize            @ 0x43
-	.4byte ScrCmd_giveitem                @ 0x44
-	.4byte ScrCmd_takeitem                @ 0x45
+	.4byte ScrCmd_additem                 @ 0x44
+	.4byte ScrCmd_removeitem              @ 0x45
 	.4byte ScrCmd_checkitemspace          @ 0x46
 	.4byte ScrCmd_checkitem               @ 0x47
 	.4byte ScrCmd_checkitemtype           @ 0x48
-	.4byte ScrCmd_givepcitem              @ 0x49
+	.4byte ScrCmd_addpcitem               @ 0x49
 	.4byte ScrCmd_checkpcitem             @ 0x4A
-	.4byte ScrCmd_givedecoration          @ 0x4B
-	.4byte ScrCmd_takedecoration          @ 0x4C
+	.4byte ScrCmd_adddecoration           @ 0x4B
+	.4byte ScrCmd_removedecoration        @ 0x4C
 	.4byte ScrCmd_checkdecor              @ 0x4D
 	.4byte ScrCmd_checkdecorspace         @ 0x4E
 	.4byte ScrCmd_applymovement           @ 0x4F
@@ -117,9 +117,9 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_drawbox                 @ 0x72
 	.4byte ScrCmd_erasebox                @ 0x73
 	.4byte ScrCmd_drawboxtext             @ 0x74
-	.4byte ScrCmd_drawmonpic              @ 0x75
-	.4byte ScrCmd_erasemonpic             @ 0x76
-	.4byte ScrCmd_drawcontestwinner       @ 0x77
+	.4byte ScrCmd_showmonpic              @ 0x75
+	.4byte ScrCmd_hidemonpic              @ 0x76
+	.4byte ScrCmd_showcontestwinner       @ 0x77
 	.4byte ScrCmd_braillemessage          @ 0x78
 	.4byte ScrCmd_givemon                 @ 0x79
 	.4byte ScrCmd_giveegg                 @ 0x7A
@@ -144,8 +144,8 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_showcontestresults      @ 0x8D
 	.4byte ScrCmd_contestlinktransfer     @ 0x8E
 	.4byte ScrCmd_random                  @ 0x8F
-	.4byte ScrCmd_givemoney               @ 0x90
-	.4byte ScrCmd_takemoney               @ 0x91
+	.4byte ScrCmd_addmoney                @ 0x90
+	.4byte ScrCmd_removemoney             @ 0x91
 	.4byte ScrCmd_checkmoney              @ 0x92
 	.4byte ScrCmd_showmoneybox            @ 0x93
 	.4byte ScrCmd_hidemoneybox            @ 0x94
@@ -180,8 +180,8 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_addelevmenuitem         @ 0xB1
 	.4byte ScrCmd_showelevmenu            @ 0xB2
 	.4byte ScrCmd_checkcoins              @ 0xB3
-	.4byte ScrCmd_givecoins               @ 0xB4
-	.4byte ScrCmd_takecoins               @ 0xB5
+	.4byte ScrCmd_addcoins                @ 0xB4
+	.4byte ScrCmd_removecoins             @ 0xB5
 	.4byte ScrCmd_setwildbattle           @ 0xB6
 	.4byte ScrCmd_dowildbattle            @ 0xB7
 	.4byte ScrCmd_setvaddress             @ 0xB8

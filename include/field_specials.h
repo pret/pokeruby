@@ -30,7 +30,7 @@ void ResetFanClub(void);
 u8 sub_810FB10(u8 a0);
 void sub_810FEFC(void);
 u16 GetSlotMachineId(void);
-void sub_810FAA0(void);
+void UpdateTrainerFanClubGameClear(void);
 int sub_810FB9C(void);
 int sub_810FC18(void);
 

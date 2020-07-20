@@ -29,7 +29,7 @@ LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
 	.string "Speichere den Fortschritt mit SICHERN.\p"
 	.string "Die übrigen Seiten sind leer.$"
 
-UnknownString_817303D: @ 817303D
+Text_LookCloserAtMap: @ 817303D
 	.string "{PLAYER} schaut sich die Karte der\n"
 	.string "HOENN-Region genauer an.$"
 

@@ -440,7 +440,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon);
 u8 SendMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
-u8 sub_803DAA0(void);
+u8 GetMonsStateToDoubles(void);
 u8 GetAbilityBySpecies(u16 species, bool8 altAbility);
 u8 GetMonAbility(struct Pokemon *mon);
 void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord);

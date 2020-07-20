@@ -262,7 +262,7 @@ bool8 debug_sub_8090880(void)
 {
     if (!UpdatePaletteFade())
     {
-        sub_80E60D8();
+        ShowEasyChatScreen();
         return TRUE;
     }
 

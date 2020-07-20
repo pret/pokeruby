@@ -1,14 +1,14 @@
-Route101_Text_1C4449:: @ 81C4449
+gBirchDexRatingText_ComeToShowMePokedex:: @ 81C4449
 	.string "PROF. BIRK: Ah, {PLAYER}{KUN}!\p"
 	.string "Möchtest du mir deine Fortschritte mit\n"
 	.string "dem POKéDEX zeigen?$"
 
-Route101_Text_1C449B:: @ 81C449B
+gBirchDexRatingText_Cancel:: @ 81C449B
 	.string "Ach? Du hast erst so wenige POKéMON\n"
 	.string "gefangen, dass es sich nicht lohnt,\l"
 	.string "ihn mir zu zeigen?$"
 
-Route101_Text_1C44DC:: @ 81C44DC
+gBirchDexRatingText_SoYouveSeenAndCaught:: @ 81C44DC
 	.string "Hmhm...\p"
 	.string "Oh, du hast {STR_VAR_1} POKéMON gesehen\n"
 	.string "und {STR_VAR_2} POKéMON gefangen...$"
@@ -103,7 +103,7 @@ gBirchDexRatingText_DexCompleted:: @ 81C4ADA
 	.string "Herzlichen Glückwunsch!\n"
 	.string "Dein POKéDEX ist vollständig!$"
 
-Route101_Text_1C4B05:: @ 81C4B05
+gBirchDexRatingText_OnANationwideBasis:: @ 81C4B05
 	.string "Hmhm...\n"
 	.string "Auf nationaler Ebene...\p"
 	.string "Hast du {STR_VAR_1} POKéMON gesehen\n"

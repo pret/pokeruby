@@ -43,6 +43,7 @@
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/metatile_labels.h"
+#include "constants/script_menu.h"
 
 struct UnkTvStruct
 {
@@ -1512,16 +1513,16 @@ void sub_80BEF10(u8 strvaridx, u8 rank)
     switch (rank)
     {
     case NORMAL_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[NORMAL_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_NORMAL]);
         break;
     case SUPER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[SUPER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_SUPER]);
         break;
     case HYPER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[HYPER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_HYPER]);
         break;
     case MASTER_RANK:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[MASTER_RANK + 5]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_MASTER]);
         break;
     }
 }
@@ -1531,19 +1532,19 @@ void CopyContestCategoryToStringVar(u8 strvaridx, u8 category)
     switch (category)
     {
     case CONTEST_COOL:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_COOL]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_COOL]);
         break;
     case CONTEST_BEAUTY:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_BEAUTY]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_BEAUTY]);
         break;
     case CONTEST_CUTE:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_CUTE]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_CUTE]);
         break;
     case CONTEST_SMART:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_SMART]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_SMART]);
         break;
     case CONTEST_TOUGH:
-        StringCopy(gUnknown_083D1464[strvaridx], gUnknown_083CE048[CONTEST_TOUGH]);
+        StringCopy(gUnknown_083D1464[strvaridx], gStdStrings[STDSTRING_TOUGH]);
         break;
     }
 }

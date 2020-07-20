@@ -868,7 +868,7 @@ u8 debug_sub_810CEA4(void)
     if (!gPaletteFade.active)
     {
         gSpecialVar_0x8004 = 4;
-        sub_80E60D8();
+        ShowEasyChatScreen();
         return 1;
     }
     return 0;

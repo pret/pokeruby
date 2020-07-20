@@ -88,7 +88,7 @@ VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 OldaleTown_PokemonCenter_2F_EventScript_1A3DB2:: @ 81A3DB2
 	special CloseLink
 	setvar VAR_CABLE_CLUB_STATE, 0
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	compare VAR_0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3DD9
@@ -105,14 +105,14 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DDA:: @ 81A3DDA
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
 	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E0C:: @ 81A3E0C
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	return
 
@@ -130,7 +130,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	setvar VAR_CABLE_CLUB_STATE, 0
 	compare VAR_0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4361
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4361
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
@@ -139,7 +139,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	playse SE_PIN
 	message OldaleTown_PokemonCenter_2F_Text_1A4E79
 	waitmessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
 	waitmovement 0
@@ -190,7 +190,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EBC:: @ 81A3EBC
 	case 127, OldaleTown_PokemonCenter_2F_EventScript_1A4319
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3FEF
@@ -226,13 +226,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 5, 1
 	waitdooranim
 	release
@@ -279,8 +279,8 @@ OldaleTown_PokemonCenter_2F_EventScript_1A403C:: @ 81A403C
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4042:: @ 81A4042
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_1A4056
 	setvar VAR_0x8004, 2
 	return
@@ -359,7 +359,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 	call OldaleTown_PokemonCenter_2F_EventScript_1A41BB
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
@@ -390,13 +390,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
 	opendoor 8, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 8, 1
 	waitdooranim
 	release
@@ -452,7 +452,7 @@ VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
@@ -487,13 +487,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
 	opendoor 11, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 11, 1
 	waitdooranim
 	release
@@ -554,43 +554,43 @@ OldaleTown_PokemonCenter_2F_EventScript_1A432D:: @ 81A432D
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4339:: @ 81A4339
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A141C, 2
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A141C, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4342:: @ 81A4342
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A13DF, 2
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A13DF, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A434B:: @ 81A434B
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A145C, 2
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A145C, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_2F_Movement_1A4354:: @ 81A4354
 	face_down
-	end_movement
+	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_1A4356:: @ 81A4356
 	face_right
-	end_movement
+	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_1A4358:: @ 81A4358
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_1A435B:: @ 81A435B
 	walk_right
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_1A435F:: @ 81A435F
 	walk_up
-	end_movement
+	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_1A4361:: @ 81A4361
 	face_left
-	end_movement
+	step_end
 
 gUnknown_081A4363:: @ 81A4363
 	lockall
@@ -613,7 +613,7 @@ SingleBattleColosseum_EventScript_1A4379:: @ 81A4379
 	end
 
 DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -624,7 +624,7 @@ DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
 	end
 
 DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -635,7 +635,7 @@ DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
 	end
 
 DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -646,7 +646,7 @@ DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
 	end
 
 DoubleBattleColosseum_EventScript_1A43D4:: @ 81A43D4
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
 	compare VAR_RESULT, 0
@@ -685,7 +685,7 @@ TradeCenter_EventScript_1A43FA:: @ 81A43FA
 
 RecordCorner_EventScript_1A4418:: @ 81A4418
 	setvar VAR_0x8005, 0
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -693,7 +693,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 
 RecordCorner_EventScript_1A442D:: @ 81A442D
 	setvar VAR_0x8005, 1
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -701,7 +701,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 
 RecordCorner_EventScript_1A4442:: @ 81A4442
 	setvar VAR_0x8005, 2
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -709,7 +709,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 
 RecordCorner_EventScript_1A4457:: @ 81A4457
 	setvar VAR_0x8005, 3
-	special sub_80B929C
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_1A446C
@@ -727,7 +727,7 @@ TradeRoom_ReadTrainerCard1:: @ 81A4479
 	message CableClub_LookAtTrainerCard1
 	waitmessage
 	waitbuttonpress
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_8083BDC
 	waitstate
 	end
@@ -736,7 +736,7 @@ TradeRoom_ReadTrainerCard2:: @ 81A4487
 	message CableClub_LookAtTrainerCard2
 	waitmessage
 	waitbuttonpress
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_8083BDC
 	waitstate
 	end

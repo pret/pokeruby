@@ -1,6 +1,6 @@
 SafariZone_Southeast_MapScripts:: @ 8160036
-	map_script 3, SafariZone_Southeast_MapScript1_160073
-	map_script 2, SafariZone_Southeast_MapScript2_160041
+	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_Southeast_MapScript1_160073
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SafariZone_Southeast_MapScript2_160041
 	.byte 0
 
 SafariZone_Southeast_MapScript2_160041:: @ 8160041
@@ -10,7 +10,7 @@ SafariZone_Southeast_MapScript2_160041:: @ 8160041
 SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	lockall
 	setvar VAR_TEMP_1, 0
-	applymovement 255, SafariZone_Southeast_Movement_160087
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_Southeast_Movement_160087
 	waitmovement 0
 	applymovement 1, SafariZone_Southeast_Movement_160089
 	waitmovement 0
@@ -30,23 +30,23 @@ SafariZone_Southeast_EventScript_16007F:: @ 816007F
 
 SafariZone_Southeast_Movement_160087:: @ 8160087
 	walk_down
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_160089:: @ 8160089
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SafariZone_Southeast_EventScript_16008C:: @ 816008C
-	msgbox SafariZone_Southeast_Text_1C3B71, 2
+	msgbox SafariZone_Southeast_Text_1C3B71, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_160095:: @ 8160095
-	msgbox SafariZone_Southeast_Text_1C3BBD, 2
+	msgbox SafariZone_Southeast_Text_1C3BBD, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_16009E:: @ 816009E
-	msgbox SafariZone_Southeast_Text_1C3DCE, 2
+	msgbox SafariZone_Southeast_Text_1C3DCE, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
@@ -57,18 +57,18 @@ SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	msgbox SafariZone_Southeast_Text_1C3A56, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SafariZone_Southeast_EventScript_1600E0
-	msgbox SafariZone_Southeast_Text_1C3A9C, 4
+	msgbox SafariZone_Southeast_Text_1C3A9C, MSGBOX_DEFAULT
 	release
 	end
 
 SafariZone_Southeast_EventScript_1600D1:: @ 81600D1
 	setvar VAR_TEMP_1, 1
-	msgbox SafariZone_Southeast_Text_1C3B2D, 4
+	msgbox SafariZone_Southeast_Text_1C3B2D, MSGBOX_DEFAULT
 	release
 	end
 
 SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
-	msgbox SafariZone_Southeast_Text_1C3ACA, 4
+	msgbox SafariZone_Southeast_Text_1C3ACA, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 2, SafariZone_Southeast_EventScript_160105
@@ -78,7 +78,7 @@ SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
 SafariZone_Southeast_EventScript_160105:: @ 8160105
 	applymovement 1, SafariZone_Southeast_Movement_160150
 	waitmovement 0
-	applymovement 255, SafariZone_Southeast_Movement_16014B
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_Southeast_Movement_16014B
 	waitmovement 0
 	goto SafariZone_Southeast_EventScript_160139
 	end
@@ -86,7 +86,7 @@ SafariZone_Southeast_EventScript_160105:: @ 8160105
 SafariZone_Southeast_EventScript_16011F:: @ 816011F
 	applymovement 1, SafariZone_Southeast_Movement_160153
 	waitmovement 0
-	applymovement 255, SafariZone_Southeast_Movement_16014D
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_Southeast_Movement_16014D
 	waitmovement 0
 	goto SafariZone_Southeast_EventScript_160139
 	end
@@ -100,19 +100,19 @@ SafariZone_Southeast_EventScript_160139:: @ 8160139
 
 SafariZone_Southeast_Movement_16014B:: @ 816014B
 	walk_up
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_16014D:: @ 816014D
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_160150:: @ 8160150
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 SafariZone_Southeast_Movement_160153:: @ 8160153
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end

@@ -10,7 +10,7 @@ S_CuttableTree:: @ 81B0DCC
 	msgbox UseCutPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Cut_ChoseNo
-	msgbox UsedCutRockSmashText, 4
+	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
@@ -33,10 +33,10 @@ DoTreeCutMovement: @ 81B0E21
 
 TreeCutMovement: @ 81B0E30
 	cut_tree
-	end_movement
+	step_end
 
 CannotUseCut: @ 81B0E32
-	msgbox CannotUseCutText, 3
+	msgbox CannotUseCutText, MSGBOX_SIGN
 	releaseall
 	end
 
@@ -70,7 +70,7 @@ S_BreakableRock:: @ 81B0EB7
 	msgbox UseRockSmashPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq RockSmash_ChoseNo
-	msgbox UsedCutRockSmashText, 4
+	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
@@ -104,10 +104,10 @@ DoRockSmashMovement_Done: @ 81B0F3A
 
 RockSmashMovement: @ 81B0F3C
 	rock_smash_break
-	end_movement
+	step_end
 
 CannotUseRockSmash: @ 81B0F3E
-	msgbox CannotUseRockSmashText, 3
+	msgbox CannotUseRockSmashText, MSGBOX_SIGN
 	releaseall
 	end
 
@@ -150,17 +150,17 @@ S_UseStrength:: @ 81B100E
 
 UsedStrength: @ 81B1019
 	setflag FLAG_SYS_USE_STRENGTH
-	msgbox UsedStrengthText, 3
+	msgbox UsedStrengthText, MSGBOX_SIGN
 	releaseall
 	end
 
 CannotUseStrength: @ 81B1026
-	msgbox CannotUseStrengthText, 3
+	msgbox CannotUseStrengthText, MSGBOX_SIGN
 	releaseall
 	end
 
 AlreadyUsedStrength: @ 81B1030
-	msgbox AlreadyUsedStrengthText, 3
+	msgbox AlreadyUsedStrengthText, MSGBOX_SIGN
 	releaseall
 	end
 
@@ -197,14 +197,14 @@ S_UseWaterfall:: @ 81B115A
 	msgbox UseWaterfallPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Waterfall_Done
-	msgbox UsedWaterfallText, 4
+	msgbox UsedWaterfallText, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto Waterfall_Done
 
 S_CannotUseWaterfall:: @ 81B1194
 	lockall
 Waterfall_NoMonKnows: @ 81B1195
-	msgbox CannotUseWaterfallText, 4
+	msgbox CannotUseWaterfallText, MSGBOX_DEFAULT
 Waterfall_Done:  @ 81B119D
 	releaseall
 	end
@@ -231,13 +231,13 @@ UseDiveScript:: @ 81B1220
 	msgbox UseDivePromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Dive_Done
-	msgbox UsedDiveText, 4
+	msgbox UsedDiveText, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto Dive_Done
 	lockall
 
 CannotUseDive: @ 81B125F
-	msgbox CannotUseDiveText, 4
+	msgbox CannotUseDiveText, MSGBOX_DEFAULT
 
 Dive_Done: @ 81B1267
 	releaseall
@@ -254,19 +254,19 @@ S_UseDiveUnderwater:: @ 81B1269
 	msgbox UnderwaterUseDivePromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq UnderwaterDive_Done
-	msgbox UsedDiveText, 4
+	msgbox UsedDiveText, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto UnderwaterDive_Done
 
 UnderwaterCannotUseDive: @ 81B12A7
 	lockall
-	msgbox UnderwaterCannotUseDiveText, 4
+	msgbox UnderwaterCannotUseDiveText, MSGBOX_DEFAULT
 	goto UnderwaterDive_Done
 
 @ not used
 SurfacingBlocked: @ 81B12B5
 	lockall
-	msgbox SurfacingBlockedText, 4
+	msgbox SurfacingBlockedText, MSGBOX_DEFAULT
 
 UnderwaterDive_Done: @ 81B12BE
 	releaseall
@@ -297,7 +297,7 @@ SurfacingBlockedText: @ 81B13CE
 	.string "eingesetzt werden.$"
 
 SweetScentNothingHereScript:: @ 81B140C
-	msgbox SweetScentNothingHereText, 3
+	msgbox SweetScentNothingHereText, MSGBOX_SIGN
 	end
 
 SweetScentNothingHereText: @ 81B1415

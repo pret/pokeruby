@@ -1,5 +1,5 @@
 MtPyre_Exterior_MapScripts:: @ 815D486
-	map_script 3, MtPyre_Exterior_MapScript1_15D48C
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Exterior_MapScript1_15D48C
 	.byte 0
 
 MtPyre_Exterior_MapScript1_15D48C:: @ 815D48C

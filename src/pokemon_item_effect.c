@@ -96,7 +96,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
         sp34 = 4;
     }
 
-    if (!IS_POKEMON_ITEM(item))
+    if (!ITEM_HAS_EFFECT(item))
         return TRUE;
     if (gItemEffectTable[item - 13] == NULL && item != ITEM_ENIGMA_BERRY)
         return TRUE;

@@ -1,5 +1,5 @@
 Route114_LanettesHouse_MapScripts:: @ 815C258
-	map_script 3, Route114_LanettesHouse_MapScript1_15C25E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_LanettesHouse_MapScript1_15C25E
 	.byte 0
 
 Route114_LanettesHouse_MapScript1_15C25E:: @ 815C25E
@@ -11,20 +11,20 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	faceplayer
 	goto_if_set FLAG_RECEIVED_DOLL_LANETTE, Route114_LanettesHouse_EventScript_15C28F
 	setflag FLAG_SYS_PC_LANETTE
-	msgbox Route114_LanettesHouse_Text_192A0D, 4
+	msgbox Route114_LanettesHouse_Text_192A0D, MSGBOX_DEFAULT
 	.ifdef SAPPHIRE
-	givedecoration_std DECOR_LOTAD_DOLL
+	givedecoration DECOR_LOTAD_DOLL
 	.else
-	givedecoration_std DECOR_SEEDOT_DOLL
+	givedecoration DECOR_SEEDOT_DOLL
 	.endif
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_LanettesHouse_EventScript_1A02AE
+	goto_if_eq Common_EventScript_ShowNoRoomForDecor
 	setflag FLAG_RECEIVED_DOLL_LANETTE
 	release
 	end
 
 Route114_LanettesHouse_EventScript_15C28F:: @ 815C28F
-	msgbox Route114_LanettesHouse_Text_192ACC, 4
+	msgbox Route114_LanettesHouse_Text_192ACC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -33,7 +33,7 @@ Route114_LanettesHouse_EventScript_15C299:: @ 815C299
 	msgbox Route114_LanettesHouse_Text_192B4A, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route114_LanettesHouse_EventScript_15C2B7
-	msgbox Route114_LanettesHouse_Text_192DA9, 4
+	msgbox Route114_LanettesHouse_Text_192DA9, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -45,9 +45,9 @@ Route114_LanettesHouse_EventScript_15C2B7:: @ 815C2B7
 	end
 
 Route114_LanettesHouse_EventScript_15C2CC:: @ 815C2CC
-	msgbox Route114_LanettesHouse_Text_192CB4, 4
+	msgbox Route114_LanettesHouse_Text_192CB4, MSGBOX_DEFAULT
 	return
 
 Route114_LanettesHouse_EventScript_15C2D5:: @ 815C2D5
-	msgbox Route114_LanettesHouse_Text_192DC1, 3
+	msgbox Route114_LanettesHouse_Text_192DC1, MSGBOX_SIGN
 	end

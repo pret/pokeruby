@@ -18,10 +18,10 @@ gSpecials::
 	def_special CheckPlayerHasSecretBase
 	def_special sub_80BBAF0
 	def_special sub_80BC440
-	def_special SecretBasePC_PackUp
+	def_special MoveOutOfSecretBase
 	def_special sub_80BC114
-	def_special sub_80BC56C
-	def_special sub_80BC5BC
+	def_special GetCurSecretBaseRegistrationValidity
+	def_special ToggleCurSecretBaseRegistry
 	def_special SecretBasePC_Decoration
 	def_special SecretBasePC_Registry
 	def_special sub_80BCE1C
@@ -30,12 +30,12 @@ gSpecials::
 	def_special sub_80FF474
 	def_special sub_8100B20
 	def_special sub_80BB70C
-	def_special sub_80BBFA4
+	def_special SetSecretBaseOwnerGfxId
 	def_special sub_8100A7C
 	def_special sub_80BBC78
 	def_special sub_80BCE4C
 	def_special DoSecretBasePCTurnOffEffect
-	def_special sub_80B929C
+	def_special RecordMixingPlayerSpotTriggered
 	def_special sub_808347C
 	def_special sub_80834E4
 	def_special sub_808350C
@@ -60,16 +60,16 @@ gSpecials::
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special ScrSpecial_GetTrainerBattleMode
-	def_special ScrSpecial_ShowTrainerIntroSpeech
+	def_special ShowTrainerIntroSpeech
 	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
-	def_special ScrSpecial_HasTrainerBeenFought
-	def_special ScrSpecial_EndTrainerApproach
+	def_special GetTrainerFlag
+	def_special EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
-	def_special ScrSpecial_GetTrainerEyeRematchFlag
-	def_special ScrSpecial_StartTrainerEyeRematch
+	def_special IsTrainerReadyForRematch
+	def_special BattleSetup_StartRematchBattle
 	def_special ShowPokemonStorageSystem
-	def_special CheckForAlivePartyMons
+	def_special HasEnoughMonsForDoubleBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -101,9 +101,9 @@ gSpecials::
 	def_special sub_80C5044
 	def_special GiveMonArtistRibbon
 	def_special sub_808363C
-	def_special ScrSpecial_DoSaveDialog
+	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
-	def_special sub_80E60D8
+	def_special ShowEasyChatScreen
 	def_special sub_80EB7C4
 	def_special ScrSpecial_GetCurrentMauvilleMan
 	def_special ScrSpecial_HasBardSongBeenChanged
@@ -158,7 +158,7 @@ gSpecials::
 	def_special GetPlayerTrainerIdOnesDigit
 	def_special GetPlayerBigGuyGirlString
 	def_special GetRivalSonDaughterString
-	def_special SetFlagInVar
+	def_special SetHiddenItemFlag
 	def_special CableCarWarp
 	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic
@@ -177,7 +177,7 @@ gSpecials::
 	def_special sub_810FA74
 	def_special UpdateMovedLilycoveFanClubMembers
 	def_special sub_810FF48
-	def_special sub_810FAA0
+	def_special UpdateTrainerFanClubGameClear
 	def_special sub_810FF60
 	def_special ScrSpecial_RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
@@ -270,7 +270,7 @@ gSpecials::
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special ScrSpecial_CreatePCMenu
+	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special ScrSpecial_ShowDiploma
 	def_special CheckLeadMonCool
@@ -318,16 +318,16 @@ gSpecials::
 	def_special GetShieldToyTVDecorationInfo
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
-	def_special sub_810F758
+	def_special ShakeCamera
 	def_special ScrSpecial_StartGroudonKyogreBattle
 	def_special ScrSpecial_StartRayquazaBattle
 	def_special ScrSpecial_StartRegiBattle
-	def_special sub_8082524
+	def_special SetUpTrainerMovement
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
 	def_special sub_807E25C
 	def_special sp13E_warp_to_last_warp
-	def_special sp13F_fall_to_last_warp
+	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
 	def_special sub_80C5164
 	def_special SetEReaderTrainerGfxId

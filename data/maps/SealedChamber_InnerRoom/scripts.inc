@@ -27,7 +27,7 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	waitstate
 	playse SE_DOOR
 	delay 40
-	msgbox SealedChamber_InnerRoom_Text_1A138B, 4
+	msgbox SealedChamber_InnerRoom_Text_1A138B, MSGBOX_DEFAULT
 	closemessage
 	fadeinbgm 0
 	setflag FLAG_REGI_DOORS_OPENED

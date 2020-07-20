@@ -1,5 +1,5 @@
 EverGrandeCity_Corridor5_MapScripts:: @ 815BA60
-	map_script 4, EverGrandeCity_Corridor5_MapScript2_15BA66
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_Corridor5_MapScript2_15BA66
 	.byte 0
 
 EverGrandeCity_Corridor5_MapScript2_15BA66:: @ 815BA66
@@ -7,5 +7,5 @@ EverGrandeCity_Corridor5_MapScript2_15BA66:: @ 815BA66
 	.2byte 0
 
 EverGrandeCity_Corridor5_EventScript_15BA70:: @ 815BA70
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end

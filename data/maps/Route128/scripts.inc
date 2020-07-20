@@ -1,11 +1,11 @@
 Route128_MapScripts:: @ 815211B
-	map_script 3, Route128_MapScript1_152126
-	map_script 2, Route128_MapScript2_152135
+	map_script MAP_SCRIPT_ON_TRANSITION, Route128_MapScript1_152126
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route128_MapScript2_152135
 	.byte 0
 
 Route128_MapScript1_152126:: @ 8152126
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route128_EventScript_1A02C1
-	call Route128_EventScript_1A0196
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
+	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 
 Route128_MapScript2_152135:: @ 8152135
@@ -21,28 +21,28 @@ Route128_EventScript_15213F:: @ 815213F
 	.endif
 	applymovement 4, Route128_Movement_152271
 	waitmovement 0
-	msgbox Route128_Text_171EE0, 4
+	msgbox Route128_Text_171EE0, MSGBOX_DEFAULT
 	applymovement 4, Route128_Movement_152279
 	waitmovement 0
-	msgbox Route128_Text_171F35, 4
+	msgbox Route128_Text_171F35, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Route128_Movement_152293
 	waitmovement 0
-	applymovement 4, Route128_Movement_1A0841
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox Route128_Text_171F4B, 4
+	msgbox Route128_Text_171F4B, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Route128_Movement_1522A1
 	waitmovement 0
-	applymovement 255, Route128_Movement_1A0841
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox Route128_Text_172008, 4
+	msgbox Route128_Text_172008, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route128_Movement_15227E
-	applymovement 255, Route128_Movement_1A083F
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 5, Route128_Movement_152290
 	waitmovement 0
-	msgbox Route128_Text_17210B, 4
+	msgbox Route128_Text_17210B, MSGBOX_DEFAULT
 	closemessage
 	delay 40
 	applymovement 5, Route128_Movement_152296
@@ -57,23 +57,23 @@ Route128_EventScript_15213F:: @ 815213F
 	addobject 3
 	applymovement 3, Route128_Movement_15226F
 	waitmovement 0
-	applymovement 255, Route128_Movement_1A0843
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	msgbox Route128_Text_172181, 4
+	msgbox Route128_Text_172181, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_15226D
-	applymovement 255, Route128_Movement_1A0841
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox Route128_Text_1721A2, 4
+	msgbox Route128_Text_1721A2, MSGBOX_DEFAULT
 	.else
-	msgbox Route128_Text_1722A1, 4
+	msgbox Route128_Text_1722A1, MSGBOX_DEFAULT
 	.endif
-	applymovement 3, Route128_Movement_1A0845
+	applymovement 3, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	msgbox Route128_Text_1723BE, 4
+	msgbox Route128_Text_1723BE, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, Route128_Movement_1A0845
+	applymovement 3, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -87,7 +87,7 @@ Route128_EventScript_15213F:: @ 815213F
 
 @ 815225E
 	walk_fast_left
-	end_movement
+	step_end
 
 @ 8152260
 	walk_left
@@ -102,15 +102,15 @@ Route128_EventScript_15213F:: @ 815213F
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 Route128_Movement_15226D:: @ 815226D
 	walk_up
-	end_movement
+	step_end
 
 Route128_Movement_15226F:: @ 815226F
 	walk_fast_left
-	end_movement
+	step_end
 
 Route128_Movement_152271:: @ 8152271
 	walk_fast_down
@@ -120,21 +120,21 @@ Route128_Movement_152271:: @ 8152271
 	delay_16
 	delay_16
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route128_Movement_152279:: @ 8152279
 	lock_facing_direction
 	walk_slow_up
 	delay_16
 	unlock_facing_direction
-	end_movement
+	step_end
 
 Route128_Movement_15227E:: @ 815227E
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 Route128_Movement_152283:: @ 8152283
 	delay_16
@@ -149,17 +149,17 @@ Route128_Movement_152283:: @ 8152283
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route128_Movement_152290:: @ 8152290
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 Route128_Movement_152293:: @ 8152293
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route128_Movement_152296:: @ 8152296
 	walk_fast_left
@@ -172,50 +172,50 @@ Route128_Movement_152296:: @ 8152296
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route128_Movement_1522A1:: @ 81522A1
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route128_EventScript_1522A4:: @ 81522A4
-	trainerbattle 0, TRAINER_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
+	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_1C1C67, Route128_Text_1C1C95
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route128_EventScript_1522CB
-	msgbox Route128_Text_1C1CC3, 6
+	msgbox Route128_Text_1C1CC3, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1522CB:: @ 81522CB
-	trainerbattle 5, TRAINER_ISAIAH_1, 0, Route128_Text_1C1D02, Route128_Text_1C1D45
-	msgbox Route128_Text_1C1D6B, 6
+	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_1C1D02, Route128_Text_1C1D45
+	msgbox Route128_Text_1C1D6B, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1522E2:: @ 81522E2
-	trainerbattle 0, TRAINER_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
+	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_1C1DB0, Route128_Text_1C1E25
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route128_EventScript_152309
-	msgbox Route128_Text_1C1E4A, 6
+	msgbox Route128_Text_1C1E4A, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_152309:: @ 8152309
-	trainerbattle 5, TRAINER_KATELYN_1, 0, Route128_Text_1C1E90, Route128_Text_1C1EFA
-	msgbox Route128_Text_1C1F2E, 6
+	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_1C1E90, Route128_Text_1C1EFA
+	msgbox Route128_Text_1C1F2E, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_152320:: @ 8152320
-	trainerbattle 0, TRAINER_ALEXA, 0, Route128_Text_1C1F6D, Route128_Text_1C1FCC
-	msgbox Route128_Text_1C1FE8, 6
+	trainerbattle_single TRAINER_ALEXA, Route128_Text_1C1F6D, Route128_Text_1C1FCC
+	msgbox Route128_Text_1C1FE8, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_152337:: @ 8152337
-	trainerbattle 0, TRAINER_RUBEN, 0, Route128_Text_1C202C, Route128_Text_1C2051
-	msgbox Route128_Text_1C2060, 6
+	trainerbattle_single TRAINER_RUBEN, Route128_Text_1C202C, Route128_Text_1C2051
+	msgbox Route128_Text_1C2060, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_15234E:: @ 815234E
-	trainerbattle 0, TRAINER_WAYNE, 0, Route128_Text_1C2090, Route128_Text_1C20FC
-	msgbox Route128_Text_1C210D, 6
+	trainerbattle_single TRAINER_WAYNE, Route128_Text_1C2090, Route128_Text_1C20FC
+	msgbox Route128_Text_1C210D, MSGBOX_AUTOCLOSE
 	end

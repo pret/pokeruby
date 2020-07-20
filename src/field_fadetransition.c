@@ -401,7 +401,7 @@ void sub_8080EF0(void)
     CreateTask(sub_808115C, 10);
 }
 
-void sp13F_fall_to_last_warp(void)
+void DoFallWarp(void)
 {
     sp13E_warp_to_last_warp();
     gFieldCallback = sub_8086748;

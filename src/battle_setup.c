@@ -27,6 +27,7 @@
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
+#include "constants/battle_setup.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/opponents.h"
@@ -54,13 +55,13 @@ extern u8 gBattleOutcome;
 
 extern struct ObjectEvent gObjectEvents[];
 
-extern u8 gUnknown_0819F818[];
-extern u8 gUnknown_0819F840[];
-extern u8 gUnknown_0819F878[];
-extern u8 gUnknown_0819F887[];
-extern u8 gUnknown_0819F8AE[];
+extern u8 EventScript_TryDoNormalTrainerBattle[];
+extern u8 EventScript_TryDoDoubleTrainerBattle[];
+extern u8 EventScript_DoNoIntroTrainerBattle[];
+extern u8 EventScript_TryDoRematchBattle[];
+extern u8 EventScript_TryDoDoubleRematchBattle[];
 
-extern u8 gUnknown_0819F80B[];
+extern u8 EventScript_StartTrainerBattle[];
 extern u8 gUnknown_081C6C02[];
 
 // The first transition is used if the enemy pokemon are lower level than our pokemon.
@@ -1005,37 +1006,37 @@ u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 
     switch (sTrainerBattleMode)
     {
-    case 3:
+    case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_3, data);
-        return gUnknown_0819F878;
-    case 4:
+        return EventScript_DoNoIntroTrainerBattle;
+    case TRAINER_BATTLE_DOUBLE:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
         SetMapVarsToTrainer();
-        return gUnknown_0819F840;
-    case 1:
-    case 2:
+        return EventScript_TryDoDoubleTrainerBattle;
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC:
+    case TRAINER_BATTLE_CONTINUE_SCRIPT:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_1, data);
         SetMapVarsToTrainer();
-        return gUnknown_0819F818;
-    case 6:
-    case 8:
+        return EventScript_TryDoNormalTrainerBattle;
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE:
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_4, data);
         SetMapVarsToTrainer();
-        return gUnknown_0819F840;
-    case 7:
+        return EventScript_TryDoDoubleTrainerBattle;
+    case TRAINER_BATTLE_REMATCH_DOUBLE:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent = GetRematchTrainerId(gTrainerBattleOpponent);
-        return gUnknown_0819F8AE;
-    case 5:
+        return EventScript_TryDoDoubleRematchBattle;
+    case TRAINER_BATTLE_REMATCH:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent = GetRematchTrainerId(gTrainerBattleOpponent);
-        return gUnknown_0819F887;
-    default:
+        return EventScript_TryDoRematchBattle;
+    default: // TRAINER_BATTLE_SINGLE
         TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
         SetMapVarsToTrainer();
-        return gUnknown_0819F818;
+        return EventScript_TryDoNormalTrainerBattle;
     }
 }
 
@@ -1044,7 +1045,7 @@ void TrainerWantsBattle(u8 trainerObjEventId, const u8 *trainerScript)
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext1_SetupScript(gUnknown_0819F80B);
+    ScriptContext1_SetupScript(EventScript_StartTrainerBattle);
     ScriptContext2_Enable();
 }
 
@@ -1054,7 +1055,7 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
     return FlagGet(TRAINER_FLAG_START + flag);
 }
 
-void sub_8082524(void)
+void SetUpTrainerMovement(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gSelectedObjectEvent];
 
@@ -1066,7 +1067,7 @@ u8 ScrSpecial_GetTrainerBattleMode(void)
     return sTrainerBattleMode;
 }
 
-u8 ScrSpecial_HasTrainerBeenFought(void)
+u8 GetTrainerFlag(void)
 {
     return FlagGet(CurrentOpponentTrainerFlag());
 }
@@ -1139,7 +1140,7 @@ void CB2_EndTrainerEyeRematchBattle(void)
     }
 }
 
-void ScrSpecial_StartTrainerEyeRematch(void)
+void BattleSetup_StartRematchBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndTrainerEyeRematchBattle;
@@ -1150,7 +1151,7 @@ void ScrSpecial_StartTrainerEyeRematch(void)
 static const u8 *GetTrainerIntroSpeech(void);
 static const u8 *GetTrainerNonBattlingSpeech(void);
 
-void ScrSpecial_ShowTrainerIntroSpeech(void)
+void ShowTrainerIntroSpeech(void)
 {
     ShowFieldMessage(GetTrainerIntroSpeech());
 }
@@ -1471,7 +1472,7 @@ bool8 ShouldTryRematchBattle(void)
         return WasSecondRematchWon(gTrainerEyeTrainers, gTrainerBattleOpponent);
 }
 
-u8 ScrSpecial_GetTrainerEyeRematchFlag(void)
+u8 IsTrainerReadyForRematch(void)
 {
     return GetTrainerEyeRematchFlag(gTrainerEyeTrainers, gTrainerBattleOpponent);
 }

@@ -1,7 +1,7 @@
 VerdanturfTown_PokemonCenter_2F_MapScripts:: @ 8153F38
-	map_script 2, VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, VerdanturfTown_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, VerdanturfTown_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 PacifidlogTown_PokemonCenter_2F_EventScript_153F48:: @ 8153F48

@@ -1,7 +1,7 @@
 Route110_MapScripts:: @ 814F900
-	map_script 5, Route110_MapScript1_14F910
-	map_script 3, Route110_MapScript1_14F914
-	map_script 2, Route110_MapScript2_14F933
+	map_script MAP_SCRIPT_ON_RESUME, Route110_MapScript1_14F910
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_MapScript1_14F914
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_MapScript2_14F933
 	.byte 0
 
 Route110_MapScript1_14F910:: @ 814F910
@@ -9,9 +9,9 @@ Route110_MapScript1_14F910:: @ 814F910
 	end
 
 Route110_MapScript1_14F914:: @ 814F914
-	call Route110_EventScript_1A0196
-	call Route110_EventScript_1A014E
-	call Route110_EventScript_1A0172
+	call Common_EventScript_SetupEvilTeamGfxIds
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_CYCLING_CHALLENGE_STATE, 1
 	call_if_eq Route110_EventScript_14F92F
 	end
@@ -32,8 +32,8 @@ Route110_EventScript_14F93D:: @ 814F93D
 Route110_EventScript_14F946:: @ 814F946
 	lock
 	faceplayer
-	msgbox Route110_Text_16E6C0, 4
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	msgbox Route110_Text_16E6C0, MSGBOX_DEFAULT
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -41,8 +41,8 @@ Route110_EventScript_14F946:: @ 814F946
 Route110_EventScript_14F95C:: @ 814F95C
 	lock
 	faceplayer
-	msgbox Route110_Text_16E6F2, 4
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	msgbox Route110_Text_16E6F2, MSGBOX_DEFAULT
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -50,8 +50,8 @@ Route110_EventScript_14F95C:: @ 814F95C
 Route110_EventScript_14F972:: @ 814F972
 	lock
 	faceplayer
-	msgbox Route110_Text_16E729, 4
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	msgbox Route110_Text_16E729, MSGBOX_DEFAULT
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -59,74 +59,74 @@ Route110_EventScript_14F972:: @ 814F972
 Route110_EventScript_14F988:: @ 814F988
 	lock
 	faceplayer
-	msgbox Route110_Text_16E76A, 4
-	applymovement VAR_LAST_TALKED, Route110_Movement_1A083D
+	msgbox Route110_Text_16E76A, MSGBOX_DEFAULT
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 Route110_EventScript_14F99E:: @ 814F99E
-	msgbox Route110_Text_16EB22, 2
+	msgbox Route110_Text_16EB22, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9A7:: @ 814F9A7
-	msgbox Route110_Text_16EB65, 2
+	msgbox Route110_Text_16EB65, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9B0:: @ 814F9B0
-	msgbox Route110_Text_16EBC9, 2
+	msgbox Route110_Text_16EBC9, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9B9:: @ 814F9B9
-	msgbox Route110_Text_16EDC5, 2
+	msgbox Route110_Text_16EDC5, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9C2:: @ 814F9C2
-	msgbox Route110_Text_16EE30, 2
+	msgbox Route110_Text_16EE30, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9CB:: @ 814F9CB
-	msgbox Route110_Text_16EE74, 2
+	msgbox Route110_Text_16EE74, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9D4:: @ 814F9D4
-	msgbox Route110_Text_16EEF6, 2
+	msgbox Route110_Text_16EEF6, MSGBOX_NPC
 	end
 
 Route110_EventScript_14F9DD:: @ 814F9DD
-	msgbox Route110_Text_16F381, 3
+	msgbox Route110_Text_16F381, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14F9E6:: @ 814F9E6
-	msgbox Route110_Text_16F39C, 3
+	msgbox Route110_Text_16F39C, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14F9EF:: @ 814F9EF
-	msgbox Route110_Text_16F3B1, 3
+	msgbox Route110_Text_16F3B1, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14F9F8:: @ 814F9F8
-	msgbox Route110_Text_16F3E9, 3
+	msgbox Route110_Text_16F3E9, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14FA01:: @ 814FA01
-	msgbox Route110_Text_16F3FF, 3
+	msgbox Route110_Text_16F3FF, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14FA0A:: @ 814FA0A
-	msgbox Route110_Text_16F40F, 3
+	msgbox Route110_Text_16F40F, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14FA13:: @ 814FA13
-	msgbox Route110_Text_16F429, 3
+	msgbox Route110_Text_16F429, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14FA1C:: @ 814FA1C
-	msgbox Route110_Text_16F4AE, 3
+	msgbox Route110_Text_16F4AE, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14FA25:: @ 814FA25
-	msgbox Route110_Text_16F4F7, 3
+	msgbox Route110_Text_16F4F7, MSGBOX_SIGN
 	end
 
 Route110_EventScript_14FA2E:: @ 814FA2E
@@ -134,12 +134,12 @@ Route110_EventScript_14FA2E:: @ 814FA2E
 	specialvar VAR_RESULT, GetRecordedCyclingRoadResults
 	compare VAR_RESULT, 0
 	goto_if_eq Route110_EventScript_14FA49
-	msgbox Route110_Text_16F53A, 4
+	msgbox Route110_Text_16F53A, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_EventScript_14FA49:: @ 814FA49
-	msgbox Route110_Text_16F57C, 4
+	msgbox Route110_Text_16F57C, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -151,110 +151,110 @@ Route110_EventScript_14FA53:: @ 814FA53
 	goto_if_eq Route110_EventScript_14FA84
 	compare VAR_CYCLING_CHALLENGE_STATE, 0
 	goto_if_eq Route110_EventScript_14FA7A
-	msgbox Route110_Text_16F26A, 4
+	msgbox Route110_Text_16F26A, MSGBOX_DEFAULT
 	release
 	end
 
 Route110_EventScript_14FA7A:: @ 814FA7A
-	msgbox Route110_Text_16F1D0, 4
+	msgbox Route110_Text_16F1D0, MSGBOX_DEFAULT
 	release
 	end
 
 Route110_EventScript_14FA84:: @ 814FA84
-	msgbox Route110_Text_16F2C4, 4
+	msgbox Route110_Text_16F2C4, MSGBOX_DEFAULT
 	release
 	end
 
 Route110_EventScript_14FA8E:: @ 814FA8E
-	trainerbattle 0, TRAINER_EDWARD, 0, Route110_Text_1BA699, Route110_Text_1BA6D2
-	msgbox Route110_Text_1BA6F8, 6
+	trainerbattle_single TRAINER_EDWARD, Route110_Text_1BA699, Route110_Text_1BA6D2
+	msgbox Route110_Text_1BA6F8, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FAA5:: @ 814FAA5
-	trainerbattle 0, TRAINER_JACLYN, 0, Route110_Text_1BA72D, Route110_Text_1BA759
-	msgbox Route110_Text_1BA76C, 6
+	trainerbattle_single TRAINER_JACLYN, Route110_Text_1BA72D, Route110_Text_1BA759
+	msgbox Route110_Text_1BA76C, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FABC:: @ 814FABC
-	trainerbattle 0, TRAINER_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
+	trainerbattle_single TRAINER_EDWIN_1, Route110_Text_1BA7D2, Route110_Text_1BA803
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FAE3
-	msgbox Route110_Text_1BA829, 6
+	msgbox Route110_Text_1BA829, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FAE3:: @ 814FAE3
-	trainerbattle 5, TRAINER_EDWIN_1, 0, Route110_Text_1BA877, Route110_Text_1BA8CD
-	msgbox Route110_Text_1BA8E9, 6
+	trainerbattle_rematch TRAINER_EDWIN_1, Route110_Text_1BA877, Route110_Text_1BA8CD
+	msgbox Route110_Text_1BA8E9, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FAFA:: @ 814FAFA
-	trainerbattle 0, TRAINER_DALE, 0, Route110_Text_1BA913, Route110_Text_1BA93C
-	msgbox Route110_Text_1BA94A, 6
+	trainerbattle_single TRAINER_DALE, Route110_Text_1BA913, Route110_Text_1BA93C
+	msgbox Route110_Text_1BA94A, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FB11:: @ 814FB11
-	trainerbattle 0, TRAINER_JACOB, 0, Route110_Text_1BA22C, Route110_Text_1BA264
-	msgbox Route110_Text_1BA27C, 6
+	trainerbattle_single TRAINER_JACOB, Route110_Text_1BA22C, Route110_Text_1BA264
+	msgbox Route110_Text_1BA27C, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FB28:: @ 814FB28
-	trainerbattle 0, TRAINER_ANTHONY, 0, Route110_Text_1BA2D4, Route110_Text_1BA2FC
-	msgbox Route110_Text_1BA30C, 6
+	trainerbattle_single TRAINER_ANTHONY, Route110_Text_1BA2D4, Route110_Text_1BA2FC
+	msgbox Route110_Text_1BA30C, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FB3F:: @ 814FB3F
-	trainerbattle 0, TRAINER_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
+	trainerbattle_single TRAINER_BENJAMIN_1, Route110_Text_1BA352, Route110_Text_1BA379
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FB66
-	msgbox Route110_Text_1BA3A5, 6
+	msgbox Route110_Text_1BA3A5, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FB66:: @ 814FB66
-	trainerbattle 5, TRAINER_BENJAMIN_1, 0, Route110_Text_1BA3EF, Route110_Text_1BA432
-	msgbox Route110_Text_1BA456, 6
+	trainerbattle_rematch TRAINER_BENJAMIN_1, Route110_Text_1BA3EF, Route110_Text_1BA432
+	msgbox Route110_Text_1BA456, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FB7D:: @ 814FB7D
-	trainerbattle 0, TRAINER_JASMINE, 0, Route110_Text_1BA5FF, Route110_Text_1BA63C
-	msgbox Route110_Text_1BA65F, 6
+	trainerbattle_single TRAINER_JASMINE, Route110_Text_1BA5FF, Route110_Text_1BA63C
+	msgbox Route110_Text_1BA65F, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FB94:: @ 814FB94
-	trainerbattle 0, TRAINER_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
+	trainerbattle_single TRAINER_ABIGAIL_1, Route110_Text_1BA4A0, Route110_Text_1BA50F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FBBB
-	msgbox Route110_Text_1BA52E, 6
+	msgbox Route110_Text_1BA52E, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FBBB:: @ 814FBBB
-	trainerbattle 5, TRAINER_ABIGAIL_1, 0, Route110_Text_1BA573, Route110_Text_1BA5A1
-	msgbox Route110_Text_1BA5C4, 6
+	trainerbattle_rematch TRAINER_ABIGAIL_1, Route110_Text_1BA573, Route110_Text_1BA5A1
+	msgbox Route110_Text_1BA5C4, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FBD2:: @ 814FBD2
-	trainerbattle 0, TRAINER_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
+	trainerbattle_single TRAINER_ISABEL_1, Route110_Text_1BA990, Route110_Text_1BA9D0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_EventScript_14FBF9
-	msgbox Route110_Text_1BA9E9, 6
+	msgbox Route110_Text_1BA9E9, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FBF9:: @ 814FBF9
-	trainerbattle 5, TRAINER_ISABEL_1, 0, Route110_Text_1BAA2D, Route110_Text_1BAA76
-	msgbox Route110_Text_1BAA8F, 6
+	trainerbattle_rematch TRAINER_ISABEL_1, Route110_Text_1BAA2D, Route110_Text_1BAA76
+	msgbox Route110_Text_1BAA8F, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FC10:: @ 814FC10
-	trainerbattle 0, TRAINER_TIMMY, 0, Route110_Text_1BAAC3, Route110_Text_1BAAF7
-	msgbox Route110_Text_1BAB19, 6
+	trainerbattle_single TRAINER_TIMMY, Route110_Text_1BAAC3, Route110_Text_1BAAF7
+	msgbox Route110_Text_1BAB19, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_14FC27:: @ 814FC27
 	lockall
-	applymovement 21, Route110_Movement_1A0843
+	applymovement 21, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	call Route110_EventScript_14FC39
 	releaseall
@@ -262,7 +262,7 @@ Route110_EventScript_14FC27:: @ 814FC27
 
 Route110_EventScript_14FC39:: @ 814FC39
 	special FinishCyclingRoadChallenge
-	msgbox Route110_Text_16EF65, 4
+	msgbox Route110_Text_16EF65, MSGBOX_DEFAULT
 	switch VAR_RESULT
 	case 10, Route110_EventScript_14FCC3
 	case 9, Route110_EventScript_14FCD1
@@ -278,27 +278,27 @@ Route110_EventScript_14FC39:: @ 814FC39
 	end
 
 Route110_EventScript_14FCC3:: @ 814FCC3
-	msgbox Route110_Text_16EF9F, 4
+	msgbox Route110_Text_16EF9F, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCD1:: @ 814FCD1
-	msgbox Route110_Text_16F012, 4
+	msgbox Route110_Text_16F012, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCDF:: @ 814FCDF
-	msgbox Route110_Text_16F069, 4
+	msgbox Route110_Text_16F069, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCED:: @ 814FCED
-	msgbox Route110_Text_16F0D0, 4
+	msgbox Route110_Text_16F0D0, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCFB:: @ 814FCFB
-	msgbox Route110_Text_16F139, 4
+	msgbox Route110_Text_16F139, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FD09
 	end
 
@@ -330,11 +330,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	call_if_eq Route110_EventScript_14FDA7
 	compare VAR_RESULT, 1
 	call_if_eq Route110_EventScript_14FDAC
-	applymovement 28, Route110_Movement_1A0845
+	applymovement 28, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 28, Route110_Movement_1A0833
+	applymovement 28, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 28, Route110_Movement_1A0835
+	applymovement 28, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
 	compare VAR_0x8008, 1
@@ -360,7 +360,7 @@ Route110_EventScript_14FDAC:: @ 814FDAC
 	return
 
 Route110_EventScript_14FDB1:: @ 814FDB1
-	msgbox Route110_Text_16E7A1, 4
+	msgbox Route110_Text_16E7A1, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_14FDE0
 	case 1, Route110_EventScript_14FDF0
@@ -368,29 +368,29 @@ Route110_EventScript_14FDB1:: @ 814FDB1
 	end
 
 Route110_EventScript_14FDE0:: @ 814FDE0
-	trainerbattle 3, TRAINER_MAY_5, 0, Route110_Text_16E826
+	trainerbattle_no_intro TRAINER_MAY_5, Route110_Text_16E826
 	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FDF0:: @ 814FDF0
-	trainerbattle 3, TRAINER_MAY_8, 0, Route110_Text_16E826
+	trainerbattle_no_intro TRAINER_MAY_8, Route110_Text_16E826
 	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FE00:: @ 814FE00
-	trainerbattle 3, TRAINER_MAY_2, 0, Route110_Text_16E826
+	trainerbattle_no_intro TRAINER_MAY_2, Route110_Text_16E826
 	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FE10:: @ 814FE10
-	msgbox Route110_Text_16E84C, 4
+	msgbox Route110_Text_16E84C, MSGBOX_DEFAULT
 	call Route110_EventScript_14FEA5
-	msgbox Route110_Text_16E8B3, 4
+	msgbox Route110_Text_16E8B3, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FEB2
 	end
 
 Route110_EventScript_14FE2B:: @ 814FE2B
-	msgbox Route110_Text_16E99A, 4
+	msgbox Route110_Text_16E99A, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_14FE5A
 	case 1, Route110_EventScript_14FE6A
@@ -398,29 +398,29 @@ Route110_EventScript_14FE2B:: @ 814FE2B
 	end
 
 Route110_EventScript_14FE5A:: @ 814FE5A
-	trainerbattle 3, TRAINER_BRENDAN_5, 0, Route110_Text_16EA0F
+	trainerbattle_no_intro TRAINER_BRENDAN_5, Route110_Text_16EA0F
 	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE6A:: @ 814FE6A
-	trainerbattle 3, TRAINER_BRENDAN_8, 0, Route110_Text_16EA0F
+	trainerbattle_no_intro TRAINER_BRENDAN_8, Route110_Text_16EA0F
 	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE7A:: @ 814FE7A
-	trainerbattle 3, TRAINER_BRENDAN_2, 0, Route110_Text_16EA0F
+	trainerbattle_no_intro TRAINER_BRENDAN_2, Route110_Text_16EA0F
 	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE8A:: @ 814FE8A
-	msgbox Route110_Text_16EA2A, 4
+	msgbox Route110_Text_16EA2A, MSGBOX_DEFAULT
 	call Route110_EventScript_14FEA5
-	msgbox Route110_Text_16EA7B, 4
+	msgbox Route110_Text_16EA7B, MSGBOX_DEFAULT
 	goto Route110_EventScript_14FEB2
 	end
 
 Route110_EventScript_14FEA5:: @ 814FEA5
-	giveitem_std ITEM_ITEMFINDER
+	giveitem ITEM_ITEMFINDER
 	return
 
 Route110_EventScript_14FEB2:: @ 814FEB2
@@ -495,17 +495,17 @@ Route110_Movement_14FF6E:: @ 814FF6E
 	walk_down
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF72:: @ 814FF72
 	walk_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF74:: @ 814FF74
 	walk_down
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF78:: @ 814FF78
 	walk_fast_up
@@ -515,7 +515,7 @@ Route110_Movement_14FF78:: @ 814FF78
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 Route110_Movement_14FF80:: @ 814FF80
 	walk_fast_up
@@ -526,7 +526,7 @@ Route110_Movement_14FF80:: @ 814FF80
 	walk_fast_up
 	walk_fast_up
 	walk_fast_down
-	end_movement
+	step_end
 
 Route110_Movement_14FF89:: @ 814FF89
 	walk_fast_up
@@ -536,4 +536,4 @@ Route110_Movement_14FF89:: @ 814FF89
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end

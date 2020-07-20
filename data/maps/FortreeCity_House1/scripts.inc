@@ -28,29 +28,29 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	special DoInGameTradeScene
 	waitstate
 	bufferspeciesname 0, VAR_0x8009
-	msgbox FortreeCity_House1_Text_1856F7, 4
+	msgbox FortreeCity_House1_Text_1856F7, MSGBOX_DEFAULT
 	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
 	end
 
 FortreeCity_House1_EventScript_157E95:: @ 8157E95
-	msgbox FortreeCity_House1_Text_18577F, 4
+	msgbox FortreeCity_House1_Text_18577F, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_House1_EventScript_157E9F:: @ 8157E9F
 	bufferspeciesname 0, VAR_0x8009
-	msgbox FortreeCity_House1_Text_185737, 4
+	msgbox FortreeCity_House1_Text_185737, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_House1_EventScript_157EAD:: @ 8157EAD
-	msgbox FortreeCity_House1_Text_1857C7, 4
+	msgbox FortreeCity_House1_Text_1857C7, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_House1_EventScript_157EB7:: @ 8157EB7
-	msgbox FortreeCity_House1_Text_18582A, 2
+	msgbox FortreeCity_House1_Text_18582A, MSGBOX_NPC
 	end
 
 FortreeCity_House1_EventScript_157EC0:: @ 8157EC0
@@ -58,7 +58,7 @@ FortreeCity_House1_EventScript_157EC0:: @ 8157EC0
 	faceplayer
 	waitse
 	playmoncry SPECIES_ZIGZAGOON, 0
-	msgbox FortreeCity_House1_Text_185888, 4
+	msgbox FortreeCity_House1_Text_185888, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

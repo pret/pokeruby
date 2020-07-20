@@ -1,6 +1,6 @@
 PetalburgCity_MapScripts:: @ 814B70C
-	map_script 3, PetalburgCity_MapScript1_14B717
-	map_script 2, PetalburgCity_MapScript2_14B73D
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_MapScript1_14B717
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_MapScript2_14B73D
 	.byte 0
 
 PetalburgCity_MapScript1_14B717:: @ 814B717
@@ -29,20 +29,21 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_14B7ED
-	applymovement 255, PetalburgCity_Movement_14B7CC
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14B7CC
 	waitmovement 0
-	msgbox PetalburgCity_Text_16D361, 4
+	msgbox PetalburgCity_Text_16D361, MSGBOX_DEFAULT
 	special ScrSpecial_StartWallyTutorialBattle
 	waitstate
-	msgbox PetalburgCity_Text_16D3DE, 4
-	applymovement 2, PetalburgCity_Movement_1A083F, 0, 0
-	waitmovement 0, 0, 2
-	msgbox PetalburgCity_Text_16D408, 4
+	msgbox PetalburgCity_Text_16D3DE, MSGBOX_DEFAULT
+	applymovement 2, Common_Movement_WalkInPlaceFastestLeft, MAP_PETALBURG_CITY
+	@ Local id and map num were swapped here (0, 0, 2 vs 2, 0, 0). Fixed to waitmovement 2, MAP_PETALBURG_CITY in Emerald
+	waitmovement 0, MAP_MAUVILLE_CITY
+	msgbox PetalburgCity_Text_16D408, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_SPECIAL_FLAG_0
 	setvar VAR_PETALBURG_STATE, 3
 	fadedefaultbgm
-	clearflag FLAG_SPECIAL_FLAG_1
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	special LoadPlayerParty
 	setvar VAR_PETALBURG_GYM_STATE, 1
 	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
@@ -53,15 +54,15 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 PetalburgCity_EventScript_14B7AC:: @ 814B7AC
 	lock
 	faceplayer
-	msgbox PetalburgCity_Text_164490, 4
+	msgbox PetalburgCity_Text_164490, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, PetalburgCity_Movement_1A083D
+	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 PetalburgCity_EventScript_14B7C3:: @ 814B7C3
-	msgbox PetalburgCity_Text_16433E, 2
+	msgbox PetalburgCity_Text_16433E, MSGBOX_NPC
 	end
 
 PetalburgCity_Movement_14B7CC:: @ 814B7CC
@@ -97,7 +98,7 @@ PetalburgCity_Movement_14B7CC:: @ 814B7CC
 	walk_up
 	walk_up
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B7ED:: @ 814B7ED
 	delay_8
@@ -136,22 +137,22 @@ PetalburgCity_Movement_14B7ED:: @ 814B7ED
 	delay_16
 	delay_16
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 PetalburgCity_EventScript_14B812:: @ 814B812
-	msgbox PetalburgCity_Text_1645BB, 3
+	msgbox PetalburgCity_Text_1645BB, MSGBOX_SIGN
 	end
 
 PetalburgCity_EventScript_14B81B:: @ 814B81B
-	msgbox PetalburgCity_Text_164602, 3
+	msgbox PetalburgCity_Text_164602, MSGBOX_SIGN
 	end
 
 PetalburgCity_EventScript_14B824:: @ 814B824
-	msgbox PetalburgCity_Text_16453F, 2
+	msgbox PetalburgCity_Text_16453F, MSGBOX_NPC
 	end
 
 PetalburgCity_EventScript_14B82D:: @ 814B82D
-	msgbox PetalburgCity_Text_164634, 3
+	msgbox PetalburgCity_Text_164634, MSGBOX_SIGN
 	end
 
 PetalburgCity_EventScript_14B836:: @ 814B836
@@ -179,13 +180,13 @@ PetalburgCity_EventScript_14B85A:: @ 814B85A
 	end
 
 PetalburgCity_EventScript_14B866:: @ 814B866
-	applymovement 9, PetalburgCity_Movement_1A0839
+	applymovement 9, Common_Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_TSURETEK, FALSE
 	playse SE_PIN
-	applymovement 9, PetalburgCity_Movement_1A0833
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, PetalburgCity_Movement_1A0835
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_EventScript_14B91B
@@ -195,7 +196,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	call_if_eq PetalburgCity_EventScript_14B93B
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_EventScript_14B950
-	msgbox PetalburgCity_Text_16438A, 4
+	msgbox PetalburgCity_Text_16438A, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_EventScript_14B965
@@ -205,11 +206,11 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	call_if_eq PetalburgCity_EventScript_14B989
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_EventScript_14B99B
-	msgbox PetalburgCity_Text_164426, 4
-	applymovement 9, PetalburgCity_Movement_1A0843
-	applymovement 255, PetalburgCity_Movement_1A0843
+	msgbox PetalburgCity_Text_164426, MSGBOX_DEFAULT
+	applymovement 9, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	msgbox PetalburgCity_Text_164449, 4
+	msgbox PetalburgCity_Text_164449, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, PetalburgCity_Movement_14B9F4
 	waitmovement 0
@@ -220,7 +221,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 PetalburgCity_EventScript_14B91B:: @ 814B91B
 	applymovement 9, PetalburgCity_Movement_14B9B1
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_1A0845
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -232,38 +233,38 @@ PetalburgCity_EventScript_14B930:: @ 814B930
 PetalburgCity_EventScript_14B93B:: @ 814B93B
 	applymovement 9, PetalburgCity_Movement_14B9B9
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_1A0841
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B950:: @ 814B950
 	applymovement 9, PetalburgCity_Movement_14B9BE
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_1A0841
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B965:: @ 814B965
 	applymovement 9, PetalburgCity_Movement_14B9C4
-	applymovement 255, PetalburgCity_Movement_14BA01
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA01
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B977:: @ 814B977
 	applymovement 9, PetalburgCity_Movement_14B9CF
-	applymovement 255, PetalburgCity_Movement_14BA0B
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA0B
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B989:: @ 814B989
 	applymovement 9, PetalburgCity_Movement_14B9DD
-	applymovement 255, PetalburgCity_Movement_14BA18
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA18
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B99B:: @ 814B99B
 	applymovement 9, PetalburgCity_Movement_14B9E8
-	applymovement 255, PetalburgCity_Movement_14BA22
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA22
 	waitmovement 0
 	return
 
@@ -271,26 +272,26 @@ PetalburgCity_EventScript_14B99B:: @ 814B99B
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9B1:: @ 814B9B1
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9B6:: @ 814B9B6
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9B9:: @ 814B9B9
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9BE:: @ 814B9BE
 	walk_down
@@ -298,7 +299,7 @@ PetalburgCity_Movement_14B9BE:: @ 814B9BE
 	walk_right
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9C4:: @ 814B9C4
 	walk_right
@@ -311,7 +312,7 @@ PetalburgCity_Movement_14B9C4:: @ 814B9C4
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9CF:: @ 814B9CF
 	walk_down
@@ -327,7 +328,7 @@ PetalburgCity_Movement_14B9CF:: @ 814B9CF
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9DD:: @ 814B9DD
 	walk_right
@@ -340,7 +341,7 @@ PetalburgCity_Movement_14B9DD:: @ 814B9DD
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9E8:: @ 814B9E8
 	walk_right
@@ -354,7 +355,7 @@ PetalburgCity_Movement_14B9E8:: @ 814B9E8
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14B9F4:: @ 814B9F4
 	walk_down
@@ -369,7 +370,7 @@ PetalburgCity_Movement_14B9F4:: @ 814B9F4
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA01:: @ 814BA01
 	walk_down
@@ -381,7 +382,7 @@ PetalburgCity_Movement_14BA01:: @ 814BA01
 	walk_right
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA0B:: @ 814BA0B
 	delay_16
@@ -396,7 +397,7 @@ PetalburgCity_Movement_14BA0B:: @ 814BA0B
 	walk_right
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA18:: @ 814BA18
 	walk_up
@@ -408,7 +409,7 @@ PetalburgCity_Movement_14BA18:: @ 814BA18
 	walk_right
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_Movement_14BA22:: @ 814BA22
 	walk_up
@@ -421,8 +422,8 @@ PetalburgCity_Movement_14BA22:: @ 814BA22
 	walk_right
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 PetalburgCity_EventScript_14BA2D:: @ 814BA2D
-	msgbox PetalburgCity_Text_16438A, 2
+	msgbox PetalburgCity_Text_16438A, MSGBOX_NPC
 	end

@@ -1,7 +1,7 @@
 PacifidlogTown_PokemonCenter_2F_MapScripts:: @ 8154132
-	map_script 2, PacifidlogTown_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, PacifidlogTown_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, PacifidlogTown_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PacifidlogTown_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PacifidlogTown_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, PacifidlogTown_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 @ 8154142

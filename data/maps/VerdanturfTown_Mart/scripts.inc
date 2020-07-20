@@ -4,10 +4,10 @@ VerdanturfTown_Mart_MapScripts:: @ 8153EBB
 VerdanturfTown_Mart_EventScript_153EBC:: @ 8153EBC
 	lock
 	faceplayer
-	message VerdanturfTown_Mart_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart VerdanturfTown_Mart_Items
-	msgbox VerdanturfTown_Mart_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -29,13 +29,13 @@ VerdanturfTown_Mart_Items:: @ 8153ED4
 	end
 
 VerdanturfTown_Mart_EventScript_153EEE:: @ 8153EEE
-	msgbox VerdanturfTown_Mart_Text_1781C9, 2
+	msgbox VerdanturfTown_Mart_Text_1781C9, MSGBOX_NPC
 	end
 
 VerdanturfTown_Mart_EventScript_153EF7:: @ 8153EF7
-	msgbox VerdanturfTown_Mart_Text_178240, 2
+	msgbox VerdanturfTown_Mart_Text_178240, MSGBOX_NPC
 	end
 
 VerdanturfTown_Mart_EventScript_153F00:: @ 8153F00
-	msgbox VerdanturfTown_Mart_Text_1782C0, 2
+	msgbox VerdanturfTown_Mart_Text_1782C0, MSGBOX_NPC
 	end

@@ -38,7 +38,7 @@ void not_trainer_hill_battle_pyramid(void)
 {
     mapheader_copy_mapdata_with_padding(&gMapHeader);
     sub_80BB970(gMapHeader.events);
-    mapheader_run_script_with_tag_x1();
+    RunOnLoadMapScript();
 }
 
 void sub_8055FC0(void)
@@ -47,7 +47,7 @@ void sub_8055FC0(void)
     sub_80BBCCC(0);
     sub_80BB970(gMapHeader.events);
     sub_8056670();
-    mapheader_run_script_with_tag_x1();
+    RunOnLoadMapScript();
     UpdateTVScreensOnMap(gUnknown_03004870.width, gUnknown_03004870.height);
 }
 

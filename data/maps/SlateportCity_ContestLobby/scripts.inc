@@ -1,5 +1,5 @@
 SlateportCity_ContestLobby_MapScripts:: @ 8155411
-	map_script 3, SlateportCity_ContestLobby_MapScript1_155417
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_ContestLobby_MapScript1_155417
 	.byte 0
 
 SlateportCity_ContestLobby_MapScript1_155417:: @ 8155417
@@ -35,12 +35,12 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	delay 20
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554DC
 	waitmovement 0
-	applymovement 255, SlateportCity_ContestLobby_Movement_1554CA
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_ContestLobby_Movement_1554CA
 	waitmovement 0
-	msgbox SlateportCity_ContestLobby_Text_1A6832, 4
+	msgbox SlateportCity_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554D3
-	applymovement 255, SlateportCity_ContestLobby_Movement_1554C0
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_ContestLobby_Movement_1554C0
 	waitmovement 0
 	releaseall
 	return
@@ -55,22 +55,22 @@ SlateportCity_ContestLobby_Movement_1554C0:: @ 81554C0
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554CA:: @ 81554CA
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554CC:: @ 81554CC
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554CF:: @ 81554CF
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554D3:: @ 81554D3
 	walk_left
@@ -81,48 +81,48 @@ SlateportCity_ContestLobby_Movement_1554D3:: @ 81554D3
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_Movement_1554DC:: @ 81554DC
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 SlateportCity_ContestLobby_EventScript_1554DE:: @ 81554DE
-	msgbox SlateportCity_ContestLobby_Text_17C937, 2
+	msgbox SlateportCity_ContestLobby_Text_17C937, MSGBOX_NPC
 	end
 
 SlateportCity_ContestLobby_EventScript_1554E7:: @ 81554E7
-	msgbox SlateportCity_ContestLobby_Text_17C9D5, 2
+	msgbox SlateportCity_ContestLobby_Text_17C9D5, MSGBOX_NPC
 	end
 
 SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
-	msgbox SlateportCity_ContestLobby_Text_17CAEC, 2
+	msgbox SlateportCity_ContestLobby_Text_17CAEC, MSGBOX_NPC
 	end
 
 SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	lockall
 	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, SlateportCity_ContestLobby_EventScript_155526
-	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
+	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_ContestLobby_Text_17CA67, 4
-	giveitem_std ITEM_POKEBLOCK_CASE
+	msgbox SlateportCity_ContestLobby_Text_17CA67, MSGBOX_DEFAULT
+	giveitem ITEM_POKEBLOCK_CASE
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	releaseall
 	end
 
 SlateportCity_ContestLobby_EventScript_155526:: @ 8155526
-	msgbox SlateportCity_ContestLobby_Text_17CA88, 2
+	msgbox SlateportCity_ContestLobby_Text_17CA88, MSGBOX_NPC
 	end
 
 SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
 	lockall
-	fadescreen 1
-	drawcontestwinner 3
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 3
 	releaseall
 	end
 
 SlateportCity_ContestLobby_EventScript_155536:: @ 8155536
-	msgbox SlateportCity_ContestLobby_Text_1B7225, 2
+	msgbox SlateportCity_ContestLobby_Text_1B7225, MSGBOX_NPC
 	end
 
 @ 815553F

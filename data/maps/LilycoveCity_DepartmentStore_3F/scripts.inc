@@ -4,10 +4,10 @@ LilycoveCity_DepartmentStore_3F_MapScripts:: @ 8159F90
 LilycoveCity_DepartmentStore_3F_EventScript_159F91:: @ 8159F91
 	lock
 	faceplayer
-	message LilycoveCity_DepartmentStore_3F_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_3F_Items1
-	msgbox LilycoveCity_DepartmentStore_3F_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -26,10 +26,10 @@ LilycoveCity_DepartmentStore_3F_Items1:: @ 8159FA8
 LilycoveCity_DepartmentStore_3F_EventScript_159FB8:: @ 8159FB8
 	lock
 	faceplayer
-	message LilycoveCity_DepartmentStore_3F_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_3F_Items2
-	msgbox LilycoveCity_DepartmentStore_3F_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -48,13 +48,13 @@ LilycoveCity_DepartmentStore_3F_Items2:: @ 8159FD0
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_159FE2:: @ 8159FE2
-	msgbox LilycoveCity_DepartmentStore_3F_Text_18C24B, 2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_18C24B, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_159FEB:: @ 8159FEB
-	msgbox LilycoveCity_DepartmentStore_3F_Text_18C2B5, 2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_18C2B5, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_159FF4:: @ 8159FF4
-	msgbox LilycoveCity_DepartmentStore_3F_Text_18C32E, 2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_18C32E, MSGBOX_NPC
 	end

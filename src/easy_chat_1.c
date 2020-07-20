@@ -197,7 +197,7 @@ u8 *sub_80EB218(u8 *, u16, u16);
 u16 sub_80EB2D4();
 bool8 sub_80EB680(u16 *, u16, u16, u16);
 
-void sub_80E60D8(void)
+void ShowEasyChatScreen(void)
 {
     u8 r4 = 3;
     u16 *r1;

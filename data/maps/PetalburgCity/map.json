@@ -237,7 +237,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "PetalburgCity_EventScript_1A00E1"
+      "script": "Common_EventScript_PokemartSign"
     },
     {
       "type": "sign",
@@ -245,7 +245,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "PetalburgCity_EventScript_1A00EA"
+      "script": "Common_EventScript_PokemonCenterSign"
     },
     {
       "type": "sign",
@@ -261,7 +261,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "PetalburgCity_EventScript_1A00EA"
+      "script": "Common_EventScript_PokemonCenterSign"
     },
     {
       "type": "sign",
@@ -269,7 +269,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "PetalburgCity_EventScript_1A00E1"
+      "script": "Common_EventScript_PokemartSign"
     },
     {
       "type": "sign",

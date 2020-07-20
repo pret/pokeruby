@@ -1,6 +1,6 @@
 MtChimney_CableCarStation_MapScripts:: @ 815C0FA
-	map_script 3, MtChimney_CableCarStation_MapScript1_15C105
-	map_script 2, MtChimney_CableCarStation_MapScript2_15C11D
+	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_CableCarStation_MapScript1_15C105
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtChimney_CableCarStation_MapScript2_15C11D
 	.byte 0
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
@@ -19,7 +19,7 @@ MtChimney_CableCarStation_MapScript2_15C11D:: @ 815C11D
 
 MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
 	lockall
-	applymovement 255, MtChimney_CableCarStation_Movement_15C1B4
+	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_15C1B4
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1AA
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
@@ -39,10 +39,10 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	end
 
 MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
-	msgbox MtChimney_CableCarStation_Text_1925A9, 4
+	msgbox MtChimney_CableCarStation_Text_1925A9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
-	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
+	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_15C1AF
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
@@ -54,7 +54,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	end
 
 MtChimney_CableCarStation_EventScript_15C19B:: @ 815C19B
-	msgbox MtChimney_CableCarStation_Text_1925BF, 4
+	msgbox MtChimney_CableCarStation_Text_1925BF, MSGBOX_DEFAULT
 	release
 	end
 
@@ -63,25 +63,25 @@ MtChimney_CableCarStation_Movement_15C1A5:: @ 815C1A5
 	walk_up
 	walk_left
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 MtChimney_CableCarStation_Movement_15C1AA:: @ 815C1AA
 	delay_16
 	walk_right
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 MtChimney_CableCarStation_Movement_15C1AF:: @ 815C1AF
 	walk_up
 	walk_up
 	walk_up
 	delay_16
-	end_movement
+	step_end
 
 MtChimney_CableCarStation_Movement_15C1B4:: @ 815C1B4
 	walk_down
 	walk_down
 	walk_down
 	delay_16
-	end_movement
+	step_end

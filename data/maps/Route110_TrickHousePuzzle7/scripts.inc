@@ -1,8 +1,8 @@
 Route110_TrickHousePuzzle7_MapScripts:: @ 816314C
-	map_script 5, Route110_TrickHousePuzzle7_MapScript1_163161
-	map_script 3, Route110_TrickHousePuzzle7_MapScript1_163253
-	map_script 1, Route110_TrickHousePuzzle7_MapScript1_16326F
-	map_script 2, Route110_TrickHousePuzzle7_MapScript2_16327B
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle7_MapScript1_163161
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle7_MapScript1_163253
+	map_script MAP_SCRIPT_ON_LOAD, Route110_TrickHousePuzzle7_MapScript1_16326F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHousePuzzle7_MapScript2_16327B
 	.byte 0
 
 Route110_TrickHousePuzzle7_MapScript1_163161:: @ 8163161
@@ -219,16 +219,16 @@ Route110_TrickHousePuzzle7_EventScript_1633D1:: @ 81633D1
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633D6:: @ 81633D6
-	trainerbattle 0, TRAINER_JOSHUA, 0, Route110_TrickHousePuzzle7_Text_19DF0B, Route110_TrickHousePuzzle7_Text_19DF4B
-	msgbox Route110_TrickHousePuzzle7_Text_19DF7E, 6
+	trainerbattle_single TRAINER_JOSHUA, Route110_TrickHousePuzzle7_Text_19DF0B, Route110_TrickHousePuzzle7_Text_19DF4B
+	msgbox Route110_TrickHousePuzzle7_Text_19DF7E, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633ED:: @ 81633ED
-	trainerbattle 0, TRAINER_PATRICIA, 0, Route110_TrickHousePuzzle7_Text_19DFBB, Route110_TrickHousePuzzle7_Text_19DFF2
-	msgbox Route110_TrickHousePuzzle7_Text_19E00F, 6
+	trainerbattle_single TRAINER_PATRICIA, Route110_TrickHousePuzzle7_Text_19DFBB, Route110_TrickHousePuzzle7_Text_19DFF2
+	msgbox Route110_TrickHousePuzzle7_Text_19E00F, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163404:: @ 8163404
-	trainerbattle 0, TRAINER_ALEXIS, 0, Route110_TrickHousePuzzle7_Text_19E054, Route110_TrickHousePuzzle7_Text_19E098
-	msgbox Route110_TrickHousePuzzle7_Text_19E0B2, 6
+	trainerbattle_single TRAINER_ALEXIS, Route110_TrickHousePuzzle7_Text_19E054, Route110_TrickHousePuzzle7_Text_19E098
+	msgbox Route110_TrickHousePuzzle7_Text_19E0B2, MSGBOX_AUTOCLOSE
 	end

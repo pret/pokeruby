@@ -1,5 +1,5 @@
 EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 815BC66
-	map_script 3, EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C:: @ 815BC6C
@@ -9,16 +9,16 @@ EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C:: @ 815BC6C
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 SootopolisCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 	setvar VAR_0x800B, 1
-	call SootopolisCity_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC7E:: @ 815BC7E
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_191967, 2
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_191967, MSGBOX_NPC
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC87:: @ 815BC87
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_1919EF, 2
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_1919EF, MSGBOX_NPC
 	end

@@ -1,6 +1,6 @@
 EverGrandeCity_HallOfFame_MapScripts:: @ 815BB84
-	map_script 2, EverGrandeCity_HallOfFame_MapScript2_15BB9E
-	map_script 4, EverGrandeCity_HallOfFame_MapScript2_15BB8F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_MapScript2_15BB9E
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_HallOfFame_MapScript2_15BB8F
 	.byte 0
 
 EverGrandeCity_HallOfFame_MapScript2_15BB8F:: @ 815BB8F
@@ -8,7 +8,7 @@ EverGrandeCity_HallOfFame_MapScript2_15BB8F:: @ 815BB8F
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_15BB99:: @ 815BB99
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 EverGrandeCity_HallOfFame_MapScript2_15BB9E:: @ 815BB9E
@@ -18,31 +18,31 @@ EverGrandeCity_HallOfFame_MapScript2_15BB9E:: @ 815BB9E
 EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	lockall
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC59
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC59
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_15BC59
 	waitmovement 0
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox EverGrandeCity_HallOfFame_Text_191841, 4
+	msgbox EverGrandeCity_HallOfFame_Text_191841, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC60
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC60
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_15BC60
 	waitmovement 0
 	delay 20
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox EverGrandeCity_HallOfFame_Text_1918D7, 4
+	msgbox EverGrandeCity_HallOfFame_Text_1918D7, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0841
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
 	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD
 	waitfieldeffect FLDEFF_HALL_OF_FAME_RECORD
 	delay 40
 	setvar VAR_TEMP_1, 1
-	call EverGrandeCity_HallOfFame_EventScript_19FC13
+	call EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags
 	checkplayergender
 	compare VAR_RESULT, 0
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC41
@@ -73,7 +73,7 @@ EverGrandeCity_HallOfFame_Movement_15BC59:: @ 815BC59
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 EverGrandeCity_HallOfFame_Movement_15BC60:: @ 815BC60
 	walk_up
@@ -81,4 +81,4 @@ EverGrandeCity_HallOfFame_Movement_15BC60:: @ 815BC60
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
