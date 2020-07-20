@@ -1,5 +1,5 @@
 FallarborTown_ContestLobby_MapScripts:: @ 81539C1
-	map_script 3, FallarborTown_ContestLobby_MapScript1_1539C7
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_ContestLobby_MapScript1_1539C7
 	.byte 0
 
 FallarborTown_ContestLobby_MapScript1_1539C7:: @ 81539C7
@@ -35,12 +35,12 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	delay 20
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A8C
 	waitmovement 0
-	applymovement 255, FallarborTown_ContestLobby_Movement_153A7A
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_ContestLobby_Movement_153A7A
 	waitmovement 0
-	msgbox FallarborTown_ContestLobby_Text_1A6832, 4
+	msgbox FallarborTown_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A83
-	applymovement 255, FallarborTown_ContestLobby_Movement_153A70
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_ContestLobby_Movement_153A70
 	waitmovement 0
 	releaseall
 	return
@@ -55,22 +55,22 @@ FallarborTown_ContestLobby_Movement_153A70:: @ 8153A70
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A7A:: @ 8153A7A
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A7C:: @ 8153A7C
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A7F:: @ 8153A7F
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A83:: @ 8153A83
 	walk_left
@@ -81,33 +81,33 @@ FallarborTown_ContestLobby_Movement_153A83:: @ 8153A83
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_Movement_153A8C:: @ 8153A8C
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
-	msgbox FallarborTown_ContestLobby_Text_177141, 2
+	msgbox FallarborTown_ContestLobby_Text_177141, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
 	goto_if_set FLAG_CONTEST_SKETCH_CREATED, FallarborTown_ContestLobby_EventScript_153AA9
-	msgbox FallarborTown_ContestLobby_Text_177246, 2
+	msgbox FallarborTown_ContestLobby_Text_177246, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153AA9:: @ 8153AA9
-	msgbox FallarborTown_ContestLobby_Text_1772D8, 2
+	msgbox FallarborTown_ContestLobby_Text_1772D8, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153AB2:: @ 8153AB2
-	msgbox FallarborTown_ContestLobby_Text_1771F2, 2
+	msgbox FallarborTown_ContestLobby_Text_1771F2, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB
 	lockall
-	fadescreen 1
-	drawcontestwinner 2
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 2
 	releaseall
 	end
 

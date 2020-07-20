@@ -47,16 +47,15 @@ Route120_Text_171B0E:: @ 8171B0E
 	.string "Ich finde, du machst das großartig.\p"
 	.string "Nun, mach's gut. Wir sehen uns!$"
 
-Route119_Text_171B93:: @ 8171B93
-Route120_Text_171B93:: @ 8171B93
+Text_SomethingUnseeable:: @ 8171B93
 	.string "Etwas Unsichtbares blockiert den Weg.$"
 
-Route119_Text_171BB6:: @ 8171BB6
+Text_WantToUseDevonScope:: @ 8171BB6
 	.string "Etwas Unsichtbares blockiert den Weg.\p"
 	.string "Möchtest du das DEVON-SCOPE\n"
 	.string "einsetzen?$"
 
-Route119_Text_171BF6:: @ 8171BF6
+Text_UseDevonScopeMonAttacked:: @ 8171BF6
 	.string "{PLAYER} setzt DEVON-SCOPE ein.\p"
 	.string "Ein unsichtbares POKéMON wird sichtbar!\p"
 	.string "Das erschreckte POKéMON greift an!$"

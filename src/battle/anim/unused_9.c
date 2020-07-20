@@ -33,7 +33,6 @@ void sub_80CFDFC(struct Sprite* sprite)
     sprite->callback = sub_80CFE2C;
 }
 
-#ifdef NONMATCHING
 static void sub_80CFE2C(struct Sprite* sprite)
 {
     u16 r7;
@@ -44,9 +43,9 @@ static void sub_80CFE2C(struct Sprite* sprite)
         sprite->data[1] = 0;
         r5 = sprite->data[0];
         r7 = gPlttBufferFaded[r5 + 8];
-        for (i = 0; i < 8; i++)
+        for (i = 8; i < 16; i++)
         {
-            gPlttBufferFaded[r5 + i + 8] = gPlttBufferFaded[r5 + i + 9];
+            gPlttBufferFaded[r5 + i] = gPlttBufferFaded[r5 + i + 1];
         }
         gPlttBufferFaded[r5 + 15] = r7;
 
@@ -54,67 +53,3 @@ static void sub_80CFE2C(struct Sprite* sprite)
             DestroyAnimSprite(sprite);
     }
 }
-#else
-NAKED
-static void sub_80CFE2C(struct Sprite* sprite)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	adds r4, r0, 0\n\
-	ldrh r0, [r4, 0x30]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x30]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x2\n\
-	bne _080CFE90\n\
-	movs r0, 0\n\
-	strh r0, [r4, 0x30]\n\
-	ldrh r5, [r4, 0x2E]\n\
-	ldr r1, _080CFE98 @ =gPlttBufferFaded\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x8\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r7, [r0]\n\
-	adds r6, r1, 0 @puts gPlttBufferFaded in r6\n\
-	adds r1, r5, 0\n\
-	adds r1, 0x9\n\
-	lsls r0, r5, 1\n\
-	adds r0, r6 \n\
-	adds r2, r0, 0\n\
-	adds r2, 0x10\n\
-	movs r3, 0x7\n\
-	lsls r1, 1\n\
-	adds r1, r6 \n\
-_080CFE64:\n\
-	ldrh r0, [r1]\n\
-	strh r0, [r2]\n\
-	adds r1, 0x2\n\
-	adds r2, 0x2\n\
-	subs r3, 0x1\n\
-	cmp r3, 0\n\
-	bge _080CFE64\n\
-	adds r0, r5, 0\n\
-	adds r0, 0xF\n\
-	lsls r0, 1\n\
-	adds r0, r6\n\
-	strh r7, [r0]\n\
-	ldrh r0, [r4, 0x32]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x32]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x18\n\
-	bne _080CFE90\n\
-	adds r0, r4, 0\n\
-	bl DestroyAnimSprite\n\
-_080CFE90:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080CFE98: .4byte gPlttBufferFaded\n\
-.syntax divided\n");
-}
-#endif

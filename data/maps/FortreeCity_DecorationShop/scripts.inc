@@ -2,20 +2,20 @@ FortreeCity_DecorationShop_MapScripts:: @ 8158257
 	.byte 0
 
 FortreeCity_DecorationShop_EventScript_158258:: @ 8158258
-	msgbox FortreeCity_DecorationShop_Text_186A61, 2
+	msgbox FortreeCity_DecorationShop_Text_186A61, MSGBOX_NPC
 	end
 
 FortreeCity_DecorationShop_EventScript_158261:: @ 8158261
-	msgbox FortreeCity_DecorationShop_Text_186AD6, 2
+	msgbox FortreeCity_DecorationShop_Text_186AD6, MSGBOX_NPC
 	end
 
 FortreeCity_DecorationShop_EventScript_15826A:: @ 815826A
 	lock
 	faceplayer
-	message FortreeCity_DecorationShop_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemartdecoration FortreeCity_DecorationShop_Decorations1
-	msgbox FortreeCity_DecorationShop_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -36,10 +36,10 @@ FortreeCity_DecorationShop_Decorations1:: @ 8158284
 FortreeCity_DecorationShop_EventScript_158298:: @ 8158298
 	lock
 	faceplayer
-	message FortreeCity_DecorationShop_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemartdecoration FortreeCity_DecorationShop_Decorations2
-	msgbox FortreeCity_DecorationShop_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

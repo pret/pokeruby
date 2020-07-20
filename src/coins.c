@@ -54,7 +54,7 @@ u16 GetCoins(void)
     return gSaveBlock1.coins;
 }
 
-bool8 GiveCoins(u16 coins)
+bool8 AddCoins(u16 coins)
 {
     u32 newCoins;
 
@@ -72,7 +72,7 @@ bool8 GiveCoins(u16 coins)
     return TRUE;
 }
 
-bool8 TakeCoins(u16 coins)
+bool8 RemoveCoins(u16 coins)
 {
     if (GetCoins() >= coins)
     {

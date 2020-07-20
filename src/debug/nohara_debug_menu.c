@@ -831,7 +831,7 @@ bool8 debug_sub_80901A4(void)
 bool8 debug_sub_80901E4(void)
 {
     ResetFanClub();
-    sub_810FAA0();
+    UpdateTrainerFanClubGameClear();
     CloseMenu();
     return TRUE;
 }

@@ -3,7 +3,6 @@
 
 #include <stddef.h>
 
-void sub_80B929C(void);
 void RecordMixing_PrepareExchangePacket(void);
 void RecordMixing_ReceiveExchangePacket(u32 a);
 void Task_RecordMixing_SoundEffect(u8 taskId);

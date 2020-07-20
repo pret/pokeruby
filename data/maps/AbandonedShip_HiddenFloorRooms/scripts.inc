@@ -1,5 +1,5 @@
 AbandonedShip_HiddenFloorRooms_MapScripts:: @ 815ED01
-	map_script 2, AbandonedShip_HiddenFloorRooms_MapScript2_15ED07
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, AbandonedShip_HiddenFloorRooms_MapScript2_15ED07
 	.byte 0
 
 AbandonedShip_HiddenFloorRooms_MapScript2_15ED07:: @ 815ED07
@@ -138,6 +138,6 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE9B:: @ 815EE9B
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EEAB:: @ 815EEAB
 	lockall
-	msgbox AbandonedShip_HiddenFloorRooms_Text_198EE2, 4
+	msgbox AbandonedShip_HiddenFloorRooms_Text_198EE2, MSGBOX_DEFAULT
 	releaseall
 	end

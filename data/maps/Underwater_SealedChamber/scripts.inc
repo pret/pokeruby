@@ -1,5 +1,5 @@
 Underwater_SealedChamber_MapScripts:: @ 815F080
-	map_script 6, Underwater_SealedChamber_MapScript1_15F086
+	map_script MAP_SCRIPT_ON_DIVE_WARP, Underwater_SealedChamber_MapScript1_15F086
 	.byte 0
 
 Underwater_SealedChamber_MapScript1_15F086:: @ 815F086

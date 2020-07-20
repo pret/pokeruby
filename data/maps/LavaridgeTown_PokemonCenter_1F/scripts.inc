@@ -1,28 +1,28 @@
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 815390C
-	map_script 3, LavaridgeTown_PokemonCenter_1F_MapScript1_153912
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_MapScript1_153912
 	.byte 0
 
 LavaridgeTown_PokemonCenter_1F_MapScript1_153912:: @ 8153912
 	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
-	call LavaridgeTown_PokemonCenter_1F_EventScript_19FD1B
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_15391B:: @ 815391B
 	setvar VAR_0x800B, 1
-	call LavaridgeTown_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_153929:: @ 8153929
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_176F08, 2
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_176F08, MSGBOX_NPC
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_153932:: @ 8153932
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_176E92, 2
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_176E92, MSGBOX_NPC
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_15393B:: @ 815393B
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_176F7A, 2
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_176F7A, MSGBOX_NPC
 	end

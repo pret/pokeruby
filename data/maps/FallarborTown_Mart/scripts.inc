@@ -4,10 +4,10 @@ FallarborTown_Mart_MapScripts:: @ 8153966
 FallarborTown_Mart_EventScript_153967:: @ 8153967
 	lock
 	faceplayer
-	message FallarborTown_Mart_Text_1A0BE4
+	message Text_HowMayIServeYou
 	waitmessage
 	pokemart FallarborTown_Mart_Items
-	msgbox FallarborTown_Mart_Text_1A0C02, 4
+	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -30,11 +30,11 @@ FallarborTown_Mart_Items:: @ 8153980
 	end
 
 FallarborTown_Mart_EventScript_15399C:: @ 815399C
-	msgbox FallarborTown_Mart_Text_176FF0, 2
+	msgbox FallarborTown_Mart_Text_176FF0, MSGBOX_NPC
 	end
 
 FallarborTown_Mart_EventScript_1539A5:: @ 81539A5
-	msgbox FallarborTown_Mart_Text_1770E2, 2
+	msgbox FallarborTown_Mart_Text_1770E2, MSGBOX_NPC
 	end
 
 FallarborTown_Mart_EventScript_1539AE:: @ 81539AE
@@ -42,7 +42,7 @@ FallarborTown_Mart_EventScript_1539AE:: @ 81539AE
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox FallarborTown_Mart_Text_1770D3, 4
+	msgbox FallarborTown_Mart_Text_1770D3, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

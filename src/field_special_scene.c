@@ -338,7 +338,7 @@ void Task_HandlePorthole(u8 taskId)
         }
         break;
     case EXIT_PORTHOLE: // exit porthole.
-        FlagClear(FLAG_SPECIAL_FLAG_1);
+        FlagClear(FLAG_DONT_TRANSITION_MUSIC);
         FlagClear(FLAG_SPECIAL_FLAG_0);
         copy_saved_warp2_bank_and_enter_x_to_warp1(0);
         sp13E_warp_to_last_warp();
@@ -375,7 +375,7 @@ void sub_80C791C(void)
 void sub_80C7958(void)
 {
     FlagSet(FLAG_SYS_CRUISE_MODE);
-    FlagSet(FLAG_SPECIAL_FLAG_1);
+    FlagSet(FLAG_DONT_TRANSITION_MUSIC);
     FlagSet(FLAG_SPECIAL_FLAG_0);
     saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
     sub_80C7754();

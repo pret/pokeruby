@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_VARS_H
 #define GUARD_CONSTANTS_VARS_H
 
-#define VAR_0x3F20                 0x3F20
-
 #define VARS_START 0x4000
 
 // temporary vars
@@ -110,7 +108,7 @@
 #define VAR_LINK_CONTEST_ROOM_STATE 0x4086
 #define VAR_CABLE_CLUB_STATE        0x4087
 #define VAR_CONTEST_LOCATION        0x4088
-#define VAR_0x4089                  0x4089 // TODO: related to decorations
+#define VAR_SECRET_BASE_INITIALIZED 0x4089
 #define VAR_CONTEST_PRIZE_PICKUP    0x408A
 
 #define VAR_LITTLEROOT_HOUSES_STATE_2 0x408C // TODO: needs more investigation
@@ -124,7 +122,7 @@
 #define VAR_LILYCOVE_MUSEUM_2F_STATE 0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE  0x4095
 #define VAR_BRINEY_LOCATION          0x4096
-#define VAR_0x4097                   0x4097 // TODO: related to creating new secret base
+#define VAR_INIT_SECRET_BASE         0x4097
 #define VAR_PETALBURG_WOODS_STATE    0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE 0x4099
 #define VAR_RUSTURF_TUNNEL_STATE     0x409a
@@ -172,6 +170,8 @@
 #define VAR_STEVENS_HOUSE_STATE           0x40C6
 #define VAR_OLDALE_STATE                  0x40C7
 
+#define VARS_END                          0x40FF
+
 #define SPECIAL_VARS_START 0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
@@ -193,5 +193,7 @@
 #define VAR_LAST_TALKED               0x800F
 #define VAR_CONTEST_RANK              0x8010
 #define VAR_CONTEST_CATEGORY          0x8011
+
+#define SPECIAL_VARS_END              0x8015
 
 #endif // GUARD_CONSTANTS_VARS_H

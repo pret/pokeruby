@@ -1,32 +1,32 @@
 PetalburgCity_PokemonCenter_1F_MapScripts:: @ 8155204
-	map_script 3, PetalburgCity_PokemonCenter_1F_MapScript1_15520A
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_PokemonCenter_1F_MapScript1_15520A
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_MapScript1_15520A:: @ 815520A
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
-	call PetalburgCity_PokemonCenter_1F_EventScript_19FD1B
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_155213:: @ 8155213
 	setvar VAR_0x800B, 1
-	call PetalburgCity_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_155221:: @ 8155221
-	msgbox PetalburgCity_PokemonCenter_1F_Text_17BD30, 2
+	msgbox PetalburgCity_PokemonCenter_1F_Text_17BD30, MSGBOX_NPC
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_15522A:: @ 815522A
-	msgbox PetalburgCity_PokemonCenter_1F_Text_17BD92, 2
+	msgbox PetalburgCity_PokemonCenter_1F_Text_17BD92, MSGBOX_NPC
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 	lock
 	faceplayer
-	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, IsStarterInParty
 	compare VAR_RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15524F
@@ -44,13 +44,13 @@ PetalburgCity_PokemonCenter_1F_EventScript_15524F:: @ 815524F
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_155272:: @ 8155272
-	msgbox PetalburgCity_PokemonCenter_1F_Text_17BE6C, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_17BE6C, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_PokemonCenter_1F_EventScript_15527B:: @ 815527B
-	msgbox PetalburgCity_PokemonCenter_1F_Text_17BEF1, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_17BEF1, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_PokemonCenter_1F_EventScript_155284:: @ 8155284
-	msgbox PetalburgCity_PokemonCenter_1F_Text_17BF73, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_17BF73, MSGBOX_DEFAULT
 	return

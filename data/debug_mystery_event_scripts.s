@@ -175,7 +175,7 @@ _0845E329:
 	getpartysize
 	compare VAR_RESULT, 0x6
 	vgoto_if 0x1, _0845E34C
-	givemon SPECIES_LUVDISC, 15, ITEM_BERRY_JUICE, 0x0, 0x0, 0x0
+	givemon SPECIES_LUVDISC, 15, ITEM_BERRY_JUICE
 	setmysteryeventstatus 0x2
 	end
 
@@ -333,7 +333,7 @@ _0845E730:
 _0845E736:
 	setvaddress _0845E736
 	bufferdecorationname 0x0, DECOR_REGISTEEL_DOLL
-	givedecoration DECOR_REGISTEEL_DOLL
+	adddecoration DECOR_REGISTEEL_DOLL
 	compare VAR_RESULT, 0x0
 	vgoto_if 0x1, _0845E755
 	vloadptr _0845E75D

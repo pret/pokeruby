@@ -24,14 +24,7 @@ static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
 
-#ifdef SAPPHIRE
-#define GAME_VERSION VERSION_SAPPHIRE
-#else
-#define GAME_VERSION VERSION_RUBY
-#endif
-
 const u8 gGameVersion = GAME_VERSION;
-
 const u8 gGameLanguage = GAME_LANGUAGE;
 
 // The debug menu expects this exact format. With the English build string, it

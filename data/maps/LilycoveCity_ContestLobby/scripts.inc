@@ -1,6 +1,6 @@
 LilycoveCity_ContestLobby_MapScripts:: @ 8158866
-	map_script 3, LilycoveCity_ContestLobby_MapScript1_158871
-	map_script 2, LilycoveCity_ContestLobby_MapScript2_158877
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_MapScript1_158871
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_MapScript2_158877
 	.byte 0
 
 LilycoveCity_ContestLobby_MapScript1_158871:: @ 8158871
@@ -22,12 +22,12 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	addobject 4
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A3B
 	waitmovement 4
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158A4C
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158A4C
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
+	msgbox LilycoveCity_ContestLobby_Text_18890F, MSGBOX_DEFAULT
 	lockall
-	fadescreen 1
-	drawcontestwinner 0
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -38,7 +38,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	end
 
 LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
-	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
+	msgbox LilycoveCity_ContestLobby_Text_188AE8, MSGBOX_DEFAULT
 	closemessage
 	special sub_80C4CEC
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
@@ -57,7 +57,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
-	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
+	msgbox LilycoveCity_ContestLobby_Text_188CBD, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
@@ -72,16 +72,16 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, LilycoveCity_ContestLobby_Movement_1A0833
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
+	msgbox LilycoveCity_ContestLobby_Text_188BB5, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
-	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
+	msgbox LilycoveCity_ContestLobby_Text_188C03, MSGBOX_DEFAULT
 	waitfanfare
-	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
-	msgbox LilycoveCity_ContestLobby_Text_188C32, 4
+	msgbox LilycoveCity_ContestLobby_Text_188C19, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_188C32, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -152,7 +152,7 @@ LilycoveCity_ContestLobby_Movement_158A3B:: @ 8158A3B
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158A43:: @ 8158A43
 	walk_down
@@ -163,17 +163,17 @@ LilycoveCity_ContestLobby_Movement_158A43:: @ 8158A43
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158A4C:: @ 8158A4C
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158A4E:: @ 8158A4E
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 	delay_16
@@ -184,7 +184,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 	walk_fast_up
 	walk_fast_up
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_158A6A
@@ -196,12 +196,12 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	addobject 11
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B64
 	waitmovement 11
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158B76
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158B76
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
+	msgbox LilycoveCity_ContestLobby_Text_18890F, MSGBOX_DEFAULT
 	lockall
-	fadescreen 1
-	drawcontestwinner 0
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
@@ -210,7 +210,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	end
 
 LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
-	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
+	msgbox LilycoveCity_ContestLobby_Text_188AE8, MSGBOX_DEFAULT
 	closemessage
 	special sub_80C4CEC
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
@@ -229,7 +229,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
-	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
+	msgbox LilycoveCity_ContestLobby_Text_188CBD, MSGBOX_DEFAULT
 	closemessage
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
@@ -244,16 +244,16 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmovement 0
 	playse SE_PIN
-	applymovement 11, LilycoveCity_ContestLobby_Movement_1A0833
+	applymovement 11, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
+	msgbox LilycoveCity_ContestLobby_Text_188BB5, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
-	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
+	msgbox LilycoveCity_ContestLobby_Text_188C03, MSGBOX_DEFAULT
 	waitfanfare
-	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
-	msgbox LilycoveCity_ContestLobby_Text_188C32, 4
+	msgbox LilycoveCity_ContestLobby_Text_188C19, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_188C32, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -266,7 +266,7 @@ LilycoveCity_ContestLobby_Movement_158B64:: @ 8158B64
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158B6D:: @ 8158B6D
 	walk_down
@@ -277,17 +277,17 @@ LilycoveCity_ContestLobby_Movement_158B6D:: @ 8158B6D
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158B76:: @ 8158B76
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158B78:: @ 8158B78
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158B7C:: @ 8158B7C
 	delay_16
@@ -298,7 +298,7 @@ LilycoveCity_ContestLobby_Movement_158B7C:: @ 8158B7C
 	walk_fast_up
 	walk_fast_up
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	lockall
@@ -319,7 +319,7 @@ LilycoveCity_ContestLobby_EventScript_158BAE:: @ 8158BAE
 	end
 
 LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
-	msgbox LilycoveCity_ContestLobby_Text_1A63F4, 4
+	msgbox LilycoveCity_ContestLobby_Text_1A63F4, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -327,7 +327,7 @@ LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	msgbox LilycoveCity_ContestLobby_Text_188521, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
-	call S_DoSaveDialog
+	call Common_EventScript_SaveGame
 	erasebox 0, 0, 15, 9
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
@@ -344,18 +344,18 @@ LilycoveCity_ContestLobby_EventScript_158BF0:: @ 8158BF0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C27:: @ 8158C27
-	msgbox LilycoveCity_ContestLobby_Text_1885A7, 4
+	msgbox LilycoveCity_ContestLobby_Text_1885A7, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_158B85
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
-	msgbox LilycoveCity_ContestLobby_Text_188559, 4
+	msgbox LilycoveCity_ContestLobby_Text_188559, MSGBOX_DEFAULT
 	releaseall
 	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
-	msgbox LilycoveCity_ContestLobby_Text_188703, 4
+	msgbox LilycoveCity_ContestLobby_Text_188703, MSGBOX_DEFAULT
 	setvar VAR_CONTEST_RANK, 0
 	choosecontestmon
 	compare VAR_0x8004, 255
@@ -374,17 +374,17 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C96:: @ 8158C96
-	msgbox LilycoveCity_ContestLobby_Text_1A664A, 4
+	msgbox LilycoveCity_ContestLobby_Text_1A664A, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CA4:: @ 8158CA4
-	msgbox LilycoveCity_ContestLobby_Text_1A669F, 4
+	msgbox LilycoveCity_ContestLobby_Text_1A669F, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CB2:: @ 8158CB2
-	msgbox LilycoveCity_ContestLobby_Text_1A66DC, 4
+	msgbox LilycoveCity_ContestLobby_Text_1A66DC, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
@@ -432,13 +432,13 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	end
 
 LilycoveCity_ContestLobby_EventScript_158D82:: @ 8158D82
-	msgbox LilycoveCity_ContestLobby_Text_188750, 4
+	msgbox LilycoveCity_ContestLobby_Text_188750, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_158CEA
 	end
 
 LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_18878D, 4
+	msgbox LilycoveCity_ContestLobby_Text_18878D, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	clearflag FLAG_TEMP_3
@@ -446,7 +446,7 @@ LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 
 LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_1887F4, 4
+	msgbox LilycoveCity_ContestLobby_Text_1887F4, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	clearflag FLAG_TEMP_3
@@ -454,14 +454,14 @@ LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 
 LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_18881F, 4
+	msgbox LilycoveCity_ContestLobby_Text_18881F, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
-	msgbox LilycoveCity_ContestLobby_Text_18873A, 4
+	msgbox LilycoveCity_ContestLobby_Text_18873A, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_158CEA
 	end
 
@@ -505,14 +505,14 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EAE
 	waitmovement 0
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158E99
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158E99
 	waitmovement 0
 	messageautoscroll LilycoveCity_ContestLobby_Text_1A6832
 	waitmessage
 	delay 20
 	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA4
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158E8E
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158E8E
 	waitmovement 0
 	releaseall
 	return
@@ -528,24 +528,24 @@ LilycoveCity_ContestLobby_Movement_158E8E:: @ 8158E8E
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158E99:: @ 8158E99
 	walk_in_place_fastest_right
 	walk_right
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158E9C:: @ 8158E9C
 	walk_right
 	walk_right
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158EA0:: @ 8158EA0
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158EA4:: @ 8158EA4
 	walk_right
@@ -557,11 +557,11 @@ LilycoveCity_ContestLobby_Movement_158EA4:: @ 8158EA4
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	specialvar VAR_RESULT, sub_80C5044
@@ -581,7 +581,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
-	giveitem ITEM_CONTEST_PASS, 1
+	additem ITEM_CONTEST_PASS
 	setvar VAR_0x800B, 8
 	setvar VAR_CONTEST_RANK, 3
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
@@ -644,12 +644,12 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15901C
 	waitmovement 0
-	applymovement 255, LilycoveCity_ContestLobby_Movement_159008
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_159008
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_1A6832, 4
+	msgbox LilycoveCity_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_ContestLobby_Movement_159013
-	applymovement 255, LilycoveCity_ContestLobby_Movement_158FFE
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158FFE
 	waitmovement 0
 	releaseall
 	return
@@ -664,24 +664,24 @@ LilycoveCity_ContestLobby_Movement_158FFE:: @ 8158FFE
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_159008:: @ 8159008
 	walk_in_place_fastest_left
 	walk_left
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_15900B:: @ 815900B
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_15900F:: @ 815900F
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_159013:: @ 8159013
 	walk_left
@@ -692,68 +692,68 @@ LilycoveCity_ContestLobby_Movement_159013:: @ 8159013
 	walk_up
 	delay_8
 	set_invisible
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_Movement_15901C:: @ 815901C
 	walk_in_place_fastest_right
-	end_movement
+	step_end
 
 LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
-	msgbox LilycoveCity_ContestLobby_Text_188D3C, 2
+	msgbox LilycoveCity_ContestLobby_Text_188D3C, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159027:: @ 8159027
 	goto_if_unset FLAG_RECEIVED_CONTEST_PASS, LilycoveCity_ContestLobby_EventScript_159039
-	msgbox LilycoveCity_ContestLobby_Text_188DDA, 2
+	msgbox LilycoveCity_ContestLobby_Text_188DDA, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159039:: @ 8159039
-	msgbox LilycoveCity_ContestLobby_Text_188E47, 2
+	msgbox LilycoveCity_ContestLobby_Text_188E47, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159042:: @ 8159042
-	msgbox LilycoveCity_ContestLobby_Text_188F07, 2
+	msgbox LilycoveCity_ContestLobby_Text_188F07, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_15904B:: @ 815904B
-	msgbox LilycoveCity_ContestLobby_Text_188F81, 2
+	msgbox LilycoveCity_ContestLobby_Text_188F81, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159054:: @ 8159054
-	msgbox LilycoveCity_ContestLobby_Text_188FE3, 2
+	msgbox LilycoveCity_ContestLobby_Text_188FE3, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_15905D:: @ 815905D
-	msgbox LilycoveCity_ContestLobby_Text_18904D, 2
+	msgbox LilycoveCity_ContestLobby_Text_18904D, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159066:: @ 8159066
 	lockall
-	fadescreen 1
-	drawcontestwinner 6
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 6
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_15906D:: @ 815906D
 	lockall
-	fadescreen 1
-	drawcontestwinner 7
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 7
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_159074:: @ 8159074
 	lockall
-	fadescreen 1
-	drawcontestwinner 8
+	fadescreen FADE_TO_BLACK
+	showcontestwinner 8
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_15907B:: @ 815907B
-	msgbox LilycoveCity_ContestLobby_Text_1B7225, 2
+	msgbox LilycoveCity_ContestLobby_Text_1B7225, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159084:: @ 8159084
-	msgbox LilycoveCity_ContestLobby_Text_1B7241, 2
+	msgbox LilycoveCity_ContestLobby_Text_1B7241, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_15908D:: @ 815908D

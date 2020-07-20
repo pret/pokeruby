@@ -1,7 +1,7 @@
 MauvilleCity_PokemonCenter_2F_MapScripts:: @ 8157392
-	map_script 2, MauvilleCity_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, MauvilleCity_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, MauvilleCity_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MauvilleCity_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, MauvilleCity_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 MauvilleCity_PokemonCenter_2F_EventScript_1573A2:: @ 81573A2
@@ -17,5 +17,5 @@ MauvilleCity_PokemonCenter_2F_EventScript_1573AE:: @ 81573AE
 	end
 
 MauvilleCity_PokemonCenter_2F_EventScript_1573B4:: @ 81573B4
-	msgbox MauvilleCity_PokemonCenter_2F_Text_182724, 2
+	msgbox MauvilleCity_PokemonCenter_2F_Text_182724, MSGBOX_NPC
 	end

@@ -1,5 +1,5 @@
 AbandonedShip_Underwater2_MapScripts:: @ 815EB37
-	map_script 5, AbandonedShip_Underwater2_MapScript1_15EB3D
+	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_Underwater2_MapScript1_15EB3D
 	.byte 0
 
 AbandonedShip_Underwater2_MapScript1_15EB3D:: @ 815EB3D

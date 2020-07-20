@@ -1,6 +1,6 @@
 SouthernIsland_Interior_MapScripts:: @ 8160B53
-	map_script 5, SouthernIsland_Interior_MapScript1_160B5E
-	map_script 3, SouthernIsland_Interior_MapScript1_160B6C
+	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_MapScript1_160B5E
+	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_MapScript1_160B6C
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E
@@ -71,7 +71,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	end
 
 SouthernIsland_Interior_EventScript_160C08:: @ 8160C08
-	msgbox SouthernIsland_Interior_Text_1C52C5, 4
+	msgbox SouthernIsland_Interior_Text_1C52C5, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -79,7 +79,7 @@ SouthernIsland_Interior_Movement_160C12:: @ 8160C12
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 SouthernIsland_Interior_Movement_160C16:: @ 8160C16
 	delay_16
@@ -93,7 +93,7 @@ SouthernIsland_Interior_Movement_160C16:: @ 8160C16
 	walk_down
 	walk_down
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 SouthernIsland_Interior_Movement_160C22:: @ 8160C22
 	walk_down
@@ -107,4 +107,4 @@ SouthernIsland_Interior_Movement_160C22:: @ 8160C22
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end

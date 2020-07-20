@@ -27,27 +27,27 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	waitstate
-	msgbox RustboroCity_House1_Text_184F6B, 4
+	msgbox RustboroCity_House1_Text_184F6B, MSGBOX_DEFAULT
 	setflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED
 	release
 	end
 
 RustboroCity_House1_EventScript_157CFB:: @ 8157CFB
-	msgbox RustboroCity_House1_Text_184FC1, 4
+	msgbox RustboroCity_House1_Text_184FC1, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_House1_EventScript_157D05:: @ 8157D05
 	bufferspeciesname 0, VAR_0x8009
-	msgbox RustboroCity_House1_Text_184F8F, 4
+	msgbox RustboroCity_House1_Text_184F8F, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_House1_EventScript_157D13:: @ 8157D13
-	msgbox RustboroCity_House1_Text_184FDD, 4
+	msgbox RustboroCity_House1_Text_184FDD, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_House1_EventScript_157D1D:: @ 8157D1D
-	msgbox RustboroCity_House1_Text_185020, 2
+	msgbox RustboroCity_House1_Text_185020, MSGBOX_NPC
 	end

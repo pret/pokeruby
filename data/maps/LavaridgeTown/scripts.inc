@@ -1,13 +1,13 @@
 LavaridgeTown_MapScripts:: @ 814E4A3
-	map_script 3, LavaridgeTown_MapScript1_14E4AE
-	map_script 2, LavaridgeTown_MapScript2_14E4E3
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_MapScript1_14E4AE
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_MapScript2_14E4E3
 	.byte 0
 
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_14E4DF
-	call LavaridgeTown_EventScript_1A014E
-	call LavaridgeTown_EventScript_1A0172
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_LAVARIDGE_RIVAL_STATE, 2
 	call_if_eq LavaridgeTown_EventScript_14E4D0
 	end
@@ -35,12 +35,12 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	waitmovement 0
 	closedoor 12, 15
 	waitdooranim
-	applymovement 8, LavaridgeTown_Movement_1A083F
+	applymovement 8, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	applymovement 255, LavaridgeTown_Movement_1A0843
-	applymovement 8, LavaridgeTown_Movement_1A0833
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement 8, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 8, LavaridgeTown_Movement_1A0835
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -81,18 +81,18 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	end
 
 LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
-	msgbox LavaridgeTown_Text_16BDA4, 4
-	giveitem_std ITEM_GO_GOGGLES
+	msgbox LavaridgeTown_Text_16BDA4, MSGBOX_DEFAULT
+	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	msgbox LavaridgeTown_Text_16BE7D, 4
+	msgbox LavaridgeTown_Text_16BE7D, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_14E5F5
 	end
 
 LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
-	msgbox LavaridgeTown_Text_16BF92, 4
-	giveitem_std ITEM_GO_GOGGLES
+	msgbox LavaridgeTown_Text_16BF92, MSGBOX_DEFAULT
+	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	msgbox LavaridgeTown_Text_16C020, 4
+	msgbox LavaridgeTown_Text_16C020, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_14E5F5
 	end
 
@@ -191,7 +191,7 @@ LavaridgeTown_Movement_14E6E8:: @ 814E6E8
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E6EF:: @ 814E6EF
 	walk_fast_right
@@ -204,7 +204,7 @@ LavaridgeTown_Movement_14E6EF:: @ 814E6EF
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E6FA:: @ 814E6FA
 	walk_fast_right
@@ -215,7 +215,7 @@ LavaridgeTown_Movement_14E6FA:: @ 814E6FA
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E703:: @ 814E703
 	walk_fast_down
@@ -228,11 +228,11 @@ LavaridgeTown_Movement_14E703:: @ 814E703
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	end_movement
+	step_end
 
 LavaridgeTown_Movement_14E70E:: @ 814E70E
 	walk_down
-	end_movement
+	step_end
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
 	specialvar VAR_RESULT, GetPlayerFacingDirection
@@ -245,27 +245,27 @@ LavaridgeTown_EventScript_14E721:: @ 814E721
 	end
 
 LavaridgeTown_EventScript_14E724:: @ 814E724
-	msgbox LavaridgeTown_Text_16C3FD, 2
+	msgbox LavaridgeTown_Text_16C3FD, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E72D:: @ 814E72D
-	msgbox LavaridgeTown_Text_16C4DB, 3
+	msgbox LavaridgeTown_Text_16C4DB, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_14E736:: @ 814E736
-	msgbox LavaridgeTown_Text_16C59B, 2
+	msgbox LavaridgeTown_Text_16C59B, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E73F:: @ 814E73F
-	msgbox LavaridgeTown_Text_16C603, 2
+	msgbox LavaridgeTown_Text_16C603, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E748:: @ 814E748
-	msgbox LavaridgeTown_Text_16C694, 2
+	msgbox LavaridgeTown_Text_16C694, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E751:: @ 814E751
-	msgbox LavaridgeTown_Text_16C54E, 2
+	msgbox LavaridgeTown_Text_16C54E, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_14E75A:: @ 814E75A
@@ -278,7 +278,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	getpartysize
 	compare VAR_RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
-	msgbox LavaridgeTown_Text_16C2B6, 4
+	msgbox LavaridgeTown_Text_16C2B6, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare MUS_FANFA4
 	message LavaridgeTown_Text_16C2EA
@@ -289,32 +289,32 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	end
 
 LavaridgeTown_EventScript_14E79E:: @ 814E79E
-	msgbox LavaridgeTown_Text_16C398, 4
+	msgbox LavaridgeTown_Text_16C398, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_14E7A8:: @ 814E7A8
-	msgbox LavaridgeTown_Text_16C2FF, 4
+	msgbox LavaridgeTown_Text_16C2FF, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_14E7B2:: @ 814E7B2
-	msgbox LavaridgeTown_Text_16C33C, 4
+	msgbox LavaridgeTown_Text_16C33C, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_14E7BC:: @ 814E7BC
-	msgbox LavaridgeTown_Text_16C72F, 3
+	msgbox LavaridgeTown_Text_16C72F, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_14E7C5:: @ 814E7C5
-	msgbox LavaridgeTown_Text_16C77C, 3
+	msgbox LavaridgeTown_Text_16C77C, MSGBOX_SIGN
 	end
 
 @ 814E7CE
-	msgbox LavaridgeTown_Text_16C7CF, 3
+	msgbox LavaridgeTown_Text_16C7CF, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_14E7D7:: @ 814E7D7
-	msgbox LavaridgeTown_Text_16C7CF, 3
+	msgbox LavaridgeTown_Text_16C7CF, MSGBOX_SIGN
 	end

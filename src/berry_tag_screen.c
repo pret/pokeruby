@@ -20,7 +20,6 @@
 #include "text.h"
 
 #define OFFSET_7B (123)
-#define FIRST_BERRY ITEM_CHERI_BERRY
 
 struct Struct2000000
 {
@@ -277,7 +276,7 @@ static void sub_81464E4(void)
 
     berryInfo = GetBerryInfo(gSpecialVar_ItemId + OFFSET_7B + 1);
 
-    ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_ItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_ItemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     Menu_PrintText(gStringVar1, 12, 4);
 
 #if ENGLISH

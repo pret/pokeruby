@@ -11,6 +11,7 @@
 #include "random.h"
 #include "task.h"
 #include "text.h"
+#include "constants/berry.h"
 #include "constants/event_object_movement.h"
 #include "constants/items.h"
 
@@ -1127,7 +1128,7 @@ const struct Berry *GetBerryInfo(u8 berry)
     // when getting the pointer to the berry info, enigma berries are handled differently. if your
     // berry is an Enigma Berry and its checksum is valid, fetch the pointer to its information in
     // the save block.
-    if (berry == GETBERRYID(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
+    if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
         return &gSaveBlock1.enigmaBerry.berry;
     else
     {
@@ -1135,8 +1136,8 @@ const struct Berry *GetBerryInfo(u8 berry)
         // an enigma berry whos checksum failed, the game will use the Enigma Berry information
         // for this: meaning if you see the Enigma Berry information, its actually because the
         // checksum failed.
-        if (berry == BERRY_NONE || berry > GETBERRYID(LAST_BERRY))
-            berry = GETBERRYID(FIRST_BERRY);
+        if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))
+            berry = ITEM_TO_BERRY(FIRST_BERRY_INDEX);
         return &gBerries[berry - 1];
     }
 }
@@ -1321,22 +1322,22 @@ u8 GetStageByBerryTreeId(u8 id)
 
 u8 ItemIdToBerryType(u16 item)
 {
-    u16 berry = item - FIRST_BERRY;
+    u16 berry = item - FIRST_BERRY_INDEX;
 
-    if (berry > LAST_BERRY - FIRST_BERRY)
-        return GETBERRYID(FIRST_BERRY);
+    if (berry > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
+        return ITEM_TO_BERRY(FIRST_BERRY_INDEX);
     else
-        return GETBERRYID(item);
+        return ITEM_TO_BERRY(item);
 }
 
 static u16 BerryTypeToItemId(u16 berry)
 {
     u16 item = berry - 1;
 
-    if (item > LAST_BERRY - FIRST_BERRY)
-        return FIRST_BERRY;
+    if (item > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
+        return FIRST_BERRY_INDEX;
     else
-        return GETITEMID(berry);
+        return berry + FIRST_BERRY_INDEX - 1;
 }
 
 void GetBerryNameByBerryType(u8 berry, u8 *string)

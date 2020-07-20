@@ -1,5 +1,5 @@
 BattleTower_BattleRoom_MapScripts:: @ 81608DB
-	map_script 2, BattleTower_BattleRoom_MapScript2_1608E1
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleTower_BattleRoom_MapScript2_1608E1
 	.byte 0
 
 BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1
@@ -8,7 +8,7 @@ BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1
 
 BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
 	setvar VAR_TEMP_0, 1
-	applymovement 255, BattleTower_BattleRoom_Movement_160AB7
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_BattleRoom_Movement_160AB7
 	waitmovement 0
 
 BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
@@ -17,7 +17,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmovement 0
 	special PrintBattleTowerTrainerGreeting
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	special ScrSpecial_HealPlayerParty
@@ -48,9 +48,9 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	removeobject 1
 	applymovement 2, BattleTower_BattleRoom_Movement_160ACB
 	waitmovement 0
-	applymovement 255, BattleTower_BattleRoom_Movement_160ABC
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_BattleRoom_Movement_160ABC
 	waitmovement 0
-	msgbox BattleTower_BattleRoom_Text_19ACDC, 4
+	msgbox BattleTower_BattleRoom_Text_19ACDC, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
 	special SetBattleTowerParty
@@ -81,7 +81,7 @@ BattleTower_BattleRoom_EventScript_160A0E:: @ 8160A0E
 
 BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 	closemessage
-	applymovement 255, BattleTower_BattleRoom_Movement_160ABE
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_BattleRoom_Movement_160ABE
 	waitmovement 0
 	applymovement 2, BattleTower_BattleRoom_Movement_160AD0
 	waitmovement 0
@@ -112,10 +112,10 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	waitmessage
 	playse SE_SAVE
 	waitse
-	msgbox BattleTower_BattleRoom_Text_1C6D05, 4
+	msgbox BattleTower_BattleRoom_Text_1C6D05, MSGBOX_DEFAULT
 
 BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special BattleTower_SoftReset
 	end
 
@@ -124,15 +124,15 @@ BattleTower_BattleRoom_Movement_160AB7:: @ 8160AB7
 	walk_up
 	walk_up
 	face_right
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160ABC:: @ 8160ABC
 	face_down
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160ABE:: @ 8160ABE
 	face_right
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160AC0:: @ 8160AC0
 	walk_down
@@ -140,21 +140,21 @@ BattleTower_BattleRoom_Movement_160AC0:: @ 8160AC0
 	walk_down
 	walk_down
 	face_left
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160AC6:: @ 8160AC6
 	walk_up
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160ACB:: @ 8160ACB
 	walk_right
 	walk_right
 	walk_right
 	walk_up
-	end_movement
+	step_end
 
 BattleTower_BattleRoom_Movement_160AD0:: @ 8160AD0
 	walk_down
@@ -162,4 +162,4 @@ BattleTower_BattleRoom_Movement_160AD0:: @ 8160AD0
 	walk_left
 	walk_left
 	face_right
-	end_movement
+	step_end

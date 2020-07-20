@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_B1F_EventScript_1A04FD",
+      "script": "Hideout_B1F_EventScript_Electrode1",
       "flag": "FLAG_HIDE_ELECTRODE_1_HIDEOUT"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_B1F_EventScript_1A051B",
+      "script": "Hideout_B1F_EventScript_Electrode2",
       "flag": "FLAG_HIDE_ELECTRODE_2_HIDEOUT"
     }
   ],

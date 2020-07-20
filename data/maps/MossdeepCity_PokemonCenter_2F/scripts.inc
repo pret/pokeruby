@@ -1,11 +1,11 @@
 MossdeepCity_PokemonCenter_2F_MapScripts:: @ 815A8FA
-	map_script 2, MossdeepCity_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, MossdeepCity_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, MossdeepCity_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, MossdeepCity_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 MossdeepCity_PokemonCenter_2F_EventScript_15A90A:: @ 815A90A
-	msgbox MossdeepCity_PokemonCenter_2F_Text_18D6F5, 2
+	msgbox MossdeepCity_PokemonCenter_2F_Text_18D6F5, MSGBOX_NPC
 	end
 
 MossdeepCity_PokemonCenter_2F_EventScript_15A913:: @ 815A913

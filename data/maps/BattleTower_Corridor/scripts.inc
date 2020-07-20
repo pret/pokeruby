@@ -1,6 +1,6 @@
 BattleTower_Corridor_MapScripts:: @ 8160845
-	map_script 1, BattleTower_Corridor_MapScript1_160850
-	map_script 2, BattleTower_Corridor_MapScript2_160881
+	map_script MAP_SCRIPT_ON_LOAD, BattleTower_Corridor_MapScript1_160850
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleTower_Corridor_MapScript2_160881
 	.byte 0
 
 BattleTower_Corridor_MapScript1_160850:: @ 8160850
@@ -24,13 +24,13 @@ BattleTower_Corridor_EventScript_16088B:: @ 816088B
 	compare VAR_0x8006, 1
 	goto_if_eq BattleTower_Corridor_EventScript_1608B1
 	applymovement 1, BattleTower_Corridor_Movement_1608D5
-	applymovement 255, BattleTower_Corridor_Movement_1608D4
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Corridor_Movement_1608D4
 	waitmovement 0
 	goto BattleTower_Corridor_EventScript_1608C2
 
 BattleTower_Corridor_EventScript_1608B1:: @ 81608B1
 	applymovement 1, BattleTower_Corridor_Movement_1608D2
-	applymovement 255, BattleTower_Corridor_Movement_1608D1
+	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Corridor_Movement_1608D1
 	waitmovement 0
 
 BattleTower_Corridor_EventScript_1608C2:: @ 81608C2
@@ -55,4 +55,4 @@ BattleTower_Corridor_Movement_1608D5:: @ 81608D5
 	walk_right
 	walk_up
 	set_invisible
-	end_movement
+	step_end

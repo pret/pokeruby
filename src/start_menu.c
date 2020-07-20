@@ -613,7 +613,7 @@ static u8 RunSaveDialogCallback(void)
     return saveDialogCallback();
 }
 
-void ScrSpecial_DoSaveDialog(void)
+void SaveGame(void)
 {
     sub_807160C();
     CreateTask(Task_SaveDialog, 0x50);

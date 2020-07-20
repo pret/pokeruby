@@ -1,7 +1,7 @@
 Underwater_SeafloorCavern_MapScripts:: @ 815D99E
-	map_script 5, Underwater_SeafloorCavern_MapScript1_15DA36
-	map_script 3, Underwater_SeafloorCavern_MapScript1_15D9AE
-	map_script 1, Underwater_SeafloorCavern_MapScript1_15D9BF
+	map_script MAP_SCRIPT_ON_RESUME, Underwater_SeafloorCavern_MapScript1_15DA36
+	map_script MAP_SCRIPT_ON_TRANSITION, Underwater_SeafloorCavern_MapScript1_15D9AE
+	map_script MAP_SCRIPT_ON_LOAD, Underwater_SeafloorCavern_MapScript1_15D9BF
 	.byte 0
 
 Underwater_SeafloorCavern_MapScript1_15D9AE:: @ 815D9AE
@@ -38,6 +38,6 @@ Underwater_SeafloorCavern_MapScript1_15DA36:: @ 815DA36
 
 Underwater_SeafloorCavern_EventScript_15DA3F:: @ 815DA3F
 	lockall
-	msgbox Underwater_SeafloorCavern_Text_197435, 4
+	msgbox Underwater_SeafloorCavern_Text_197435, MSGBOX_DEFAULT
 	releaseall
 	end

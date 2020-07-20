@@ -1,6 +1,6 @@
 LittlerootTown_MapScripts:: @ 814D509
-	map_script 3, LittlerootTown_MapScript1_14D514
-	map_script 2, LittlerootTown_MapScript2_14D5D5
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MapScript1_14D514
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_MapScript2_14D5D5
 	.byte 0
 
 LittlerootTown_MapScript1_14D514:: @ 814D514
@@ -99,7 +99,7 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 LittlerootTown_EventScript_14D62B:: @ 814D62B
 	delay 15
 	playse SE_DANSA
-	applymovement 255, LittlerootTown_Movement_14D6C0
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6C0
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
@@ -111,19 +111,19 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	delay 10
 	applymovement 4, LittlerootTown_Movement_14D6AE
 	waitmovement 0
-	msgbox LittlerootTown_Text_16A7C9, 4
+	msgbox LittlerootTown_Text_16A7C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_14D6B1
-	applymovement 255, LittlerootTown_Movement_14D6B8
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6B8
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14D6B5
-	applymovement 255, LittlerootTown_Movement_14D6BD
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6BD
 	waitmovement 0
 	setflag FLAG_HIDE_MOM_LITTLEROOT
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
@@ -132,42 +132,42 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 
 LittlerootTown_Movement_14D6AC:: @ 814D6AC
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6AE:: @ 814D6AE
 	walk_down
 	walk_in_place_fastest_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6B1:: @ 814D6B1
 	delay_16
 	delay_8
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6B5:: @ 814D6B5
 	walk_up
 	set_invisible
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6B8:: @ 814D6B8
 	delay_16
 	delay_8
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6BD:: @ 814D6BD
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D6C0:: @ 814D6C0
 	jump_right
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14D6C5:: @ 814D6C5
 	lockall
@@ -176,11 +176,11 @@ LittlerootTown_EventScript_14D6C5:: @ 814D6C5
 	end
 
 LittlerootTown_EventScript_14D6CD:: @ 814D6CD
-	msgbox LittlerootTown_Text_16AC00, 2
+	msgbox LittlerootTown_Text_16AC00, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_14D6D6:: @ 814D6D6
-	msgbox LittlerootTown_Text_16AC56, 2
+	msgbox LittlerootTown_Text_16AC56, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_14D6DF:: @ 814D6DF
@@ -190,14 +190,14 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_14D722
 	compare VAR_LITTLEROOT_STATE, 0
 	goto_if_ne LittlerootTown_EventScript_14D708
-	msgbox LittlerootTown_Text_16ACEB, 4
+	msgbox LittlerootTown_Text_16ACEB, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_14D708:: @ 814D708
-	msgbox LittlerootTown_Text_16AD82, 4
+	msgbox LittlerootTown_Text_16AD82, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LittlerootTown_Movement_1A083D
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setvar VAR_LITTLEROOT_STATE, 2
 	release
@@ -205,12 +205,12 @@ LittlerootTown_EventScript_14D708:: @ 814D708
 
 LittlerootTown_EventScript_14D722:: @ 814D722
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_16ADF2, 4
+	msgbox LittlerootTown_Text_16ADF2, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_14D72F:: @ 814D72F
-	msgbox LittlerootTown_Text_16AE25, 4
+	msgbox LittlerootTown_Text_16AE25, MSGBOX_DEFAULT
 	release
 	end
 
@@ -225,12 +225,12 @@ LittlerootTown_EventScript_14D739:: @ 814D739
 	end
 
 LittlerootTown_EventScript_14D755:: @ 814D755
-	msgbox LittlerootTown_Text_16ACEB, 4
+	msgbox LittlerootTown_Text_16ACEB, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_14D787
-	applymovement 255, LittlerootTown_Movement_14D793
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D793
 	waitmovement 0
-	msgbox LittlerootTown_Text_16AD3C, 4
+	msgbox LittlerootTown_Text_16AD3C, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -248,11 +248,11 @@ LittlerootTown_Movement_14D779:: @ 814D779
 	walk_fast_up
 	walk_fast_left
 	face_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D787:: @ 814D787
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D789:: @ 814D789
 	walk_right
@@ -264,13 +264,13 @@ LittlerootTown_Movement_14D789:: @ 814D789
 	walk_left
 	walk_up
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D793:: @ 814D793
 	lock_facing_direction
 	walk_down
 	unlock_facing_direction
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14D797:: @ 814D797
 	lockall
@@ -295,7 +295,7 @@ LittlerootTown_Movement_14D7B3:: @ 814D7B3
 	walk_fast_up
 	walk_fast_right
 	face_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14D7C0:: @ 814D7C0
 	walk_left
@@ -304,28 +304,28 @@ LittlerootTown_Movement_14D7C0:: @ 814D7C0
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	lockall
-	applymovement 1, LittlerootTown_Movement_1A0843
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement 255, LittlerootTown_Movement_1A083F
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox LittlerootTown_Text_16AD82, 4
+	msgbox LittlerootTown_Text_16AD82, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LittlerootTown_Movement_1A083D
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setvar VAR_LITTLEROOT_STATE, 2
 	releaseall
 	end
 
 LittlerootTown_EventScript_14D7F6:: @ 814D7F6
-	msgbox LittlerootTown_Text_16AE50, 3
+	msgbox LittlerootTown_Text_16AE50, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_14D7FF:: @ 814D7FF
-	msgbox LittlerootTown_Text_16AE87, 3
+	msgbox LittlerootTown_Text_16AE87, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_14D808:: @ 814D808
@@ -339,11 +339,11 @@ LittlerootTown_EventScript_14D808:: @ 814D808
 	end
 
 LittlerootTown_EventScript_14D822:: @ 814D822
-	msgbox LittlerootTown_Text_16AEA1, 4
+	msgbox LittlerootTown_Text_16AEA1, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D82B:: @ 814D82B
-	msgbox LittlerootTown_Text_16AEAC, 4
+	msgbox LittlerootTown_Text_16AEAC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D834:: @ 814D834
@@ -357,11 +357,11 @@ LittlerootTown_EventScript_14D834:: @ 814D834
 	end
 
 LittlerootTown_EventScript_14D84E:: @ 814D84E
-	msgbox LittlerootTown_Text_16AEAC, 4
+	msgbox LittlerootTown_Text_16AEAC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D857:: @ 814D857
-	msgbox LittlerootTown_Text_16AEA1, 4
+	msgbox LittlerootTown_Text_16AEA1, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_14D860:: @ 814D860
@@ -413,7 +413,7 @@ LittlerootTown_EventScript_14D8B6:: @ 814D8B6
 	call_if_eq LittlerootTown_EventScript_14D926
 	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D931
-	msgbox LittlerootTown_Text_16A8EE, 4
+	msgbox LittlerootTown_Text_16A8EE, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -440,12 +440,12 @@ LittlerootTown_EventScript_14D931:: @ 814D931
 	return
 
 LittlerootTown_EventScript_14D93C:: @ 814D93C
-	applymovement 4, LittlerootTown_Movement_1A0843
+	applymovement 4, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D947:: @ 814D947
-	applymovement 4, LittlerootTown_Movement_1A083F
+	applymovement 4, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -480,70 +480,70 @@ LittlerootTown_EventScript_14D995:: @ 814D995
 	return
 
 LittlerootTown_EventScript_14D9D8:: @ 814D9D8
-	applymovement 255, LittlerootTown_Movement_1A0845
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC76
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D9ED:: @ 814D9ED
-	applymovement 255, LittlerootTown_Movement_1A0845
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC7D
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA02:: @ 814DA02
-	applymovement 255, LittlerootTown_Movement_1A083F
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC84
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA17:: @ 814DA17
-	applymovement 255, LittlerootTown_Movement_1A083F
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC89
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA2C:: @ 814DA2C
-	applymovement 255, LittlerootTown_Movement_1A083F
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC8F
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA41:: @ 814DA41
-	applymovement 255, LittlerootTown_Movement_1A083F
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC92
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA56:: @ 814DA56
-	applymovement 255, LittlerootTown_Movement_1A0843
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC96
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA6B:: @ 814DA6B
-	applymovement 255, LittlerootTown_Movement_1A0843
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC9A
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA80:: @ 814DA80
-	applymovement 255, LittlerootTown_Movement_1A0843
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DC9D
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA95:: @ 814DA95
-	applymovement 255, LittlerootTown_Movement_1A0843
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_14DCA3
 	waitmovement 0
@@ -692,7 +692,7 @@ LittlerootTown_Movement_14DC76:: @ 814DC76
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC7D:: @ 814DC7D
 	walk_up
@@ -701,14 +701,14 @@ LittlerootTown_Movement_14DC7D:: @ 814DC7D
 	walk_up
 	walk_up
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC84:: @ 814DC84
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC89:: @ 814DC89
 	walk_right
@@ -716,29 +716,29 @@ LittlerootTown_Movement_14DC89:: @ 814DC89
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC8F:: @ 814DC8F
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC92:: @ 814DC92
 	walk_right
 	walk_right
 	walk_right
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC96:: @ 814DC96
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC9A:: @ 814DC9A
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DC9D:: @ 814DC9D
 	walk_left
@@ -746,14 +746,14 @@ LittlerootTown_Movement_14DC9D:: @ 814DC9D
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCA3:: @ 814DCA3
 	walk_left
 	walk_left
 	walk_left
 	walk_left
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCA8:: @ 814DCA8
 	walk_down
@@ -761,7 +761,7 @@ LittlerootTown_Movement_14DCA8:: @ 814DCA8
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCAE:: @ 814DCAE
 	walk_down
@@ -769,7 +769,7 @@ LittlerootTown_Movement_14DCAE:: @ 814DCAE
 	walk_down
 	walk_down
 	walk_down
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCB4:: @ 814DCB4
 	walk_left
@@ -777,7 +777,7 @@ LittlerootTown_Movement_14DCB4:: @ 814DCB4
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCBA:: @ 814DCBA
 	walk_left
@@ -786,33 +786,33 @@ LittlerootTown_Movement_14DCBA:: @ 814DCBA
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCC1:: @ 814DCC1
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCC5:: @ 814DCC5
 	walk_left
 	walk_left
 	walk_left
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCCA:: @ 814DCCA
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCCF:: @ 814DCCF
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCD3:: @ 814DCD3
 	walk_right
@@ -821,7 +821,7 @@ LittlerootTown_Movement_14DCD3:: @ 814DCD3
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCDA:: @ 814DCDA
 	walk_right
@@ -829,11 +829,11 @@ LittlerootTown_Movement_14DCDA:: @ 814DCDA
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
-	end_movement
+	step_end
 
 LittlerootTown_Movement_14DCE0:: @ 814DCE0
 	walk_up
-	end_movement
+	step_end
 
 LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	lock
@@ -844,7 +844,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_EventScript_14D931
 	call LittlerootTown_EventScript_14DD38
-	applymovement 4, LittlerootTown_Movement_1A0841
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
@@ -864,14 +864,14 @@ LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 	end
 
 LittlerootTown_EventScript_14DD38:: @ 814DD38
-	msgbox LittlerootTown_Text_16A8FD, 4
+	msgbox LittlerootTown_Text_16A8FD, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waitmessage
 	setflag FLAG_RECEIVED_RUNNING_SHOES
-	msgbox LittlerootTown_Text_16AA5C, 4
-	msgbox LittlerootTown_Text_16AB10, 4
+	msgbox LittlerootTown_Text_16AA5C, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_16AB10, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	return

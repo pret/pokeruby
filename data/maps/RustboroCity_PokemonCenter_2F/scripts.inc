@@ -1,7 +1,7 @@
 RustboroCity_PokemonCenter_2F_MapScripts:: @ 8157BB1
-	map_script 2, RustboroCity_PokemonCenter_2F_MapScript2_1A3D88
-	map_script 4, RustboroCity_PokemonCenter_2F_MapScript2_1A3D03
-	map_script 1, RustboroCity_PokemonCenter_2F_MapScript1_1A3D32
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_PokemonCenter_2F_MapScript2_1A3D88
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, RustboroCity_PokemonCenter_2F_MapScript2_1A3D03
+	map_script MAP_SCRIPT_ON_LOAD, RustboroCity_PokemonCenter_2F_MapScript1_1A3D32
 	.byte 0
 
 RustboroCity_PokemonCenter_2F_EventScript_157BC1:: @ 8157BC1

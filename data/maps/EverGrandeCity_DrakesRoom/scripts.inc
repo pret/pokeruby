@@ -1,7 +1,7 @@
 EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
-	map_script 2, EverGrandeCity_DrakesRoom_MapScript2_15B72C
-	map_script 1, EverGrandeCity_DrakesRoom_MapScript1_15B743
-	map_script 4, EverGrandeCity_DrakesRoom_MapScript2_15B570
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_DrakesRoom_MapScript2_15B72C
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_DrakesRoom_MapScript1_15B743
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_DrakesRoom_MapScript2_15B570
 	.byte 0
 
 @ 815B71D
@@ -9,7 +9,7 @@ EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
@@ -18,7 +18,7 @@ EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
 
 EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 	lockall
-	call EverGrandeCity_DrakesRoom_EventScript_1A0710
+	call PokemonLeague_EliteFour_EventScript_WalkInCloseDoor
 	setvar VAR_ELITE_4_STATE, 4
 	releaseall
 	end
@@ -30,11 +30,11 @@ EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B758:: @ 815B758
-	call EverGrandeCity_DrakesRoom_EventScript_1A0757
+	call PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_15B75E:: @ 815B75E
-	call EverGrandeCity_DrakesRoom_EventScript_1A07FA
+	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
@@ -42,13 +42,13 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B78B
 	playbgm MUS_SITENNOU, FALSE
-	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
-	trainerbattle 3, TRAINER_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42
+	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_190E42
 	goto EverGrandeCity_DrakesRoom_EventScript_15B795
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
-	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -56,7 +56,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
 	setvar VAR_0x8004, 0
 	special sub_810FF60
 	setflag FLAG_DEFEATED_ELITE_4_DRAKE
-	call EverGrandeCity_DrakesRoom_EventScript_1A0693
-	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
+	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, MSGBOX_DEFAULT
 	release
 	end

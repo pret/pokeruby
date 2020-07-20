@@ -483,7 +483,7 @@ bool8 ScrCmd_random(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_giveitem(struct ScriptContext *ctx)
+bool8 ScrCmd_additem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -492,7 +492,7 @@ bool8 ScrCmd_giveitem(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_takeitem(struct ScriptContext *ctx)
+bool8 ScrCmd_removeitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -527,7 +527,7 @@ bool8 ScrCmd_checkitemtype(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_givepcitem(struct ScriptContext *ctx)
+bool8 ScrCmd_addpcitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -545,15 +545,15 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_givedecoration(struct ScriptContext *ctx)
+bool8 ScrCmd_adddecoration(struct ScriptContext *ctx)
 {
     u32 decoration = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = GiveDecoration(decoration);
+    gSpecialVar_Result = AddDecoration(decoration);
     return FALSE;
 }
 
-bool8 ScrCmd_takedecoration(struct ScriptContext *ctx)
+bool8 ScrCmd_removedecoration(struct ScriptContext *ctx)
 {
     u32 decoration = VarGet(ScriptReadHalfword(ctx));
 
@@ -667,7 +667,7 @@ bool8 ScrCmd_initclock(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_dodailyevents(struct ScriptContext *ctx)
+bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 {
     DoTimeBasedEvents();
     return FALSE;
@@ -770,7 +770,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
         SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
-    sp13F_fall_to_last_warp();
+    DoFallWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -1386,7 +1386,7 @@ bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_drawmonpic(struct ScriptContext *ctx)
+bool8 ScrCmd_showmonpic(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u8 x = ScriptReadByte(ctx);
@@ -1396,7 +1396,7 @@ bool8 ScrCmd_drawmonpic(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_erasemonpic(struct ScriptContext *ctx)
+bool8 ScrCmd_hidemonpic(struct ScriptContext *ctx)
 {
     bool8 (*func)(void) = ScriptMenu_GetPicboxWaitFunc();
 
@@ -1406,7 +1406,7 @@ bool8 ScrCmd_erasemonpic(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_drawcontestwinner(struct ScriptContext *ctx)
+bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
 {
     u8 v1 = ScriptReadByte(ctx);
 
@@ -1513,7 +1513,7 @@ bool8 ScrCmd_bufferstdstring(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gUnknown_083CE048[index]);
+    StringCopy(sScriptStringVars[stringVarIndex], gStdStrings[index]);
     return FALSE;
 }
 
@@ -1598,7 +1598,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_givemoney(struct ScriptContext *ctx)
+bool8 ScrCmd_addmoney(struct ScriptContext *ctx)
 {
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
@@ -1608,7 +1608,7 @@ bool8 ScrCmd_givemoney(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_takemoney(struct ScriptContext *ctx)
+bool8 ScrCmd_removemoney(struct ScriptContext *ctx)
 {
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
@@ -1997,22 +1997,22 @@ bool8 ScrCmd_checkcoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
+bool8 ScrCmd_addcoins(struct ScriptContext *ctx)
 {
     u16 coins = VarGet(ScriptReadHalfword(ctx));
 
-    if (GiveCoins(coins) == TRUE)
+    if (AddCoins(coins) == TRUE)
         gSpecialVar_Result = 0;
     else
         gSpecialVar_Result = 1;
     return FALSE;
 }
 
-bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
+bool8 ScrCmd_removecoins(struct ScriptContext *ctx)
 {
     u16 coins = VarGet(ScriptReadHalfword(ctx));
 
-    if (TakeCoins(coins) == TRUE)
+    if (RemoveCoins(coins) == TRUE)
         gSpecialVar_Result = 0;
     else
         gSpecialVar_Result = 1;

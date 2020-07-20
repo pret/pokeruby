@@ -29,9 +29,6 @@
 	.equiv DIR_WEST,  3
 	.equiv DIR_EAST,  4
 
-	.equiv MALE, 0
-	.equiv FEMALE, 1
-
 	.ifdef ENGLISH
 	.equiv GAME_LANGUAGE, 2
 	.else

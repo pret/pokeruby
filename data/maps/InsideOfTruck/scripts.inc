@@ -1,6 +1,6 @@
 InsideOfTruck_MapScripts:: @ 815FBFF
-	map_script 1, InsideOfTruck_MapScript1_15FC0A
-	map_script 5, InsideOfTruck_MapScript1_15FC26
+	map_script MAP_SCRIPT_ON_LOAD, InsideOfTruck_MapScript1_15FC0A
+	map_script MAP_SCRIPT_ON_RESUME, InsideOfTruck_MapScript1_15FC26
 	.byte 0
 
 InsideOfTruck_MapScript1_15FC0A:: @ 815FC0A
@@ -48,5 +48,5 @@ InsideOfTruck_EventScript_15FC68:: @ 815FC68
 	end
 
 InsideOfTruck_EventScript_15FC8B:: @ 815FC8B
-	msgbox InsideOfTruck_Text_198FAD, 3
+	msgbox InsideOfTruck_Text_198FAD, MSGBOX_SIGN
 	end

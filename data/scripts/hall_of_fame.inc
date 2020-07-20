@@ -1,0 +1,34 @@
+EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 819FC13
+	clearflag FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE
+	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
+	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
+	clearflag FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
+	clearflag FLAG_HIDE_STEVENS_LETTER
+	setvar VAR_STEVENS_HOUSE_STATE, 1
+	clearflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
+	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
+	special UpdateTrainerFanClubGameClear
+	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent
+	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, EverGrandeCity_HallOfFame_EventScript_ReadyLatiTVEvent
+	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_ShowStevensBeldum
+	call_if_unset FLAG_RECEIVED_HM08, EverGrandeCity_HallOfFame_EventScript_ShowHM08
+	return
+
+EverGrandeCity_HallOfFame_EventScript_ShowStevensBeldum:: @ 819FC5A
+	clearflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
+	return
+
+EverGrandeCity_HallOfFame_EventScript_ShowHM08:: @ 819FC5E
+	clearflag FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08
+	return
+
+EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent:: @ 819FC62
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
+	clearflag FLAG_HIDE_NORMAN_LITTLEROOT
+	return
+
+EverGrandeCity_HallOfFame_EventScript_ReadyLatiTVEvent:: @ 819FC70
+	setflag FLAG_SYS_TV_LATI
+	return

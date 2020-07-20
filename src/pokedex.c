@@ -1961,8 +1961,8 @@ static void sub_808D640(void)
 
 static void SortPokedex(u8 dexMode, u8 sortMode)
 {
+    s16 i, r5, r10;
     u16 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
-    s16 i;
 
     gPokedexView->pokemonListCount = 0;
 
@@ -2004,18 +2004,13 @@ static void SortPokedex(u8 dexMode, u8 sortMode)
         }
         else
         {
-            bool32 r10;
-            s16 r5;
-
-            r10 = r5 = i = 0;
-            for (i = 0; i < vars[0]; i++)
+            for (i = 0, r5= 0, r10 = 0; i < vars[0]; i++)
             {
                 vars[2] = i + 1;
                 if (GetSetPokedexFlag(vars[2], 0))
                     r10 = 1;
                 if (r10)
                 {
-                    asm("");    //Needed to match for some reason
                     gPokedexView->unk0[r5].dexNum = vars[2];
                     gPokedexView->unk0[r5].seen = GetSetPokedexFlag(vars[2], 0);
                     gPokedexView->unk0[r5].owned = GetSetPokedexFlag(vars[2], 1);

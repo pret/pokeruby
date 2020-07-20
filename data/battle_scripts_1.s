@@ -2,6 +2,7 @@
 #include "constants/battle.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/pokemon.h"
 	.include "include/macros.inc"
 	.include "include/macros/battle_script.inc"
 	.include "constants/constants.inc"

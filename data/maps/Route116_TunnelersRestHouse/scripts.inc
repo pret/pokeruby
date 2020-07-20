@@ -1,5 +1,5 @@
 Route116_TunnelersRestHouse_MapScripts:: @ 815C2DE
-	map_script 3, Route116_TunnelersRestHouse_MapScript1_15C2E4
+	map_script MAP_SCRIPT_ON_TRANSITION, Route116_TunnelersRestHouse_MapScript1_15C2E4
 	.byte 0
 
 Route116_TunnelersRestHouse_MapScript1_15C2E4:: @ 815C2E4
@@ -7,22 +7,22 @@ Route116_TunnelersRestHouse_MapScript1_15C2E4:: @ 815C2E4
 	end
 
 Route116_TunnelersRestHouse_EventScript_15C2E8:: @ 815C2E8
-	msgbox Route116_TunnelersRestHouse_Text_192F33, 2
+	msgbox Route116_TunnelersRestHouse_Text_192F33, MSGBOX_NPC
 	end
 
 Route116_TunnelersRestHouse_EventScript_15C2F1:: @ 815C2F1
-	msgbox Route116_TunnelersRestHouse_Text_193049, 2
+	msgbox Route116_TunnelersRestHouse_Text_193049, MSGBOX_NPC
 	end
 
 Route116_TunnelersRestHouse_EventScript_15C2FA:: @ 815C2FA
 	lock
 	faceplayer
 	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, Route116_TunnelersRestHouse_EventScript_15C30F
-	msgbox Route116_TunnelersRestHouse_Text_193135, 4
+	msgbox Route116_TunnelersRestHouse_Text_193135, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_TunnelersRestHouse_EventScript_15C30F:: @ 815C30F
-	msgbox Route116_TunnelersRestHouse_Text_1931C1, 4
+	msgbox Route116_TunnelersRestHouse_Text_1931C1, MSGBOX_DEFAULT
 	release
 	end

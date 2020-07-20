@@ -1,6 +1,6 @@
 Route111_MapScripts:: @ 814FF91
-	map_script 1, Route111_MapScript1_14FF9C
-	map_script 3, Route111_MapScript1_14FFB9
+	map_script MAP_SCRIPT_ON_LOAD, Route111_MapScript1_14FF9C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_MapScript1_14FFB9
 	.byte 0
 
 Route111_MapScript1_14FF9C:: @ 814FF9C
@@ -15,7 +15,7 @@ Route111_EventScript_14FFA6:: @ 814FFA6
 Route111_MapScript1_14FFB9:: @ 814FFB9
 	call Route111_EventScript_14FFCD
 	call Route111_EventScript_1AE313
-	goto_if_trainer_not_defeated TRAINER_VICKY, Route111_EventScript_15000D
+	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_15000D
 	end
 
 Route111_EventScript_14FFCD:: @ 814FFCD
@@ -52,7 +52,7 @@ Route111_EventScript_150023:: @ 8150023
 	msgbox Route111_Text_16FA54, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route111_EventScript_15005F
-	giveitem_std ITEM_ROOT_FOSSIL
+	giveitem ITEM_ROOT_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_ROOT_FOSSIL
 	setflag FLAG_HIDE_CLAW_FOSSIL
@@ -65,7 +65,7 @@ Route111_EventScript_150023:: @ 8150023
 	end
 
 Route111_EventScript_15005F:: @ 815005F
-	msgbox Route111_Text_16FACE, 4
+	msgbox Route111_Text_16FACE, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -74,7 +74,7 @@ Route111_EventScript_150069:: @ 8150069
 	msgbox Route111_Text_16FAED, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route111_EventScript_1500A5
-	giveitem_std ITEM_CLAW_FOSSIL
+	giveitem ITEM_CLAW_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_CLAW_FOSSIL
 	setflag FLAG_HIDE_ROOT_FOSSIL
@@ -87,7 +87,7 @@ Route111_EventScript_150069:: @ 8150069
 	end
 
 Route111_EventScript_1500A5:: @ 81500A5
-	msgbox Route111_Text_16FB67, 4
+	msgbox Route111_Text_16FB67, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -113,25 +113,25 @@ Route111_Movement_1500AF:: @ 81500AF
 	set_invisible
 	delay_16
 	set_visible
-	end_movement
+	step_end
 
 Route111_EventScript_1500C5:: @ 81500C5
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE111, Route111_EventScript_150100
-	msgbox Route111_Text_1C56F0, 4
-	giveitem_std ITEM_RAZZ_BERRY
+	msgbox Route111_Text_1C56F0, MSGBOX_DEFAULT
+	giveitem ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route111_EventScript_1A029B
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	special GetPlayerBigGuyGirlString
-	msgbox Route111_Text_1C5781, 4
+	msgbox Route111_Text_1C5781, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_150100:: @ 8150100
-	msgbox Route111_Text_1C57D2, 4
+	msgbox Route111_Text_1C57D2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -168,7 +168,7 @@ Route111_EventScript_15013A:: @ 815013A
 	end
 
 Route111_EventScript_150151:: @ 8150151
-	msgbox Route111_Text_1A0F93, 4
+	msgbox Route111_Text_1A0F93, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
 	call_if_eq Route111_EventScript_150188
@@ -182,40 +182,40 @@ Route111_EventScript_150151:: @ 8150151
 	end
 
 Route111_EventScript_150188:: @ 8150188
-	applymovement 255, Route111_Movement_1501B4
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501B4
 	waitmovement 0
 	return
 
 Route111_EventScript_150193:: @ 8150193
-	applymovement 255, Route111_Movement_1501B6
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501B6
 	waitmovement 0
 	return
 
 Route111_EventScript_15019E:: @ 815019E
-	applymovement 255, Route111_Movement_1501B8
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501B8
 	waitmovement 0
 	return
 
 Route111_EventScript_1501A9:: @ 81501A9
-	applymovement 255, Route111_Movement_1501BA
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501BA
 	waitmovement 0
 	return
 
 Route111_Movement_1501B4:: @ 81501B4
 	walk_up
-	end_movement
+	step_end
 
 Route111_Movement_1501B6:: @ 81501B6
 	walk_down
-	end_movement
+	step_end
 
 Route111_Movement_1501B8:: @ 81501B8
 	walk_left
-	end_movement
+	step_end
 
 Route111_Movement_1501BA:: @ 81501BA
 	walk_right
-	end_movement
+	step_end
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather WEATHER_SUNNY
@@ -237,70 +237,70 @@ Route111_EventScript_1501D1:: @ 81501D1
 	msgbox Route111_Text_16F705, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route111_EventScript_1501F3
-	msgbox Route111_Text_16F785, 4
+	msgbox Route111_Text_16F785, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1501F3:: @ 81501F3
-	msgbox Route111_Text_16F7B3, 4
-	trainerbattle 3, TRAINER_VICTOR, 0, Route111_Text_16F7D2
-	applymovement 1, Route111_Movement_1A0841
+	msgbox Route111_Text_16F7B3, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_16F7D2
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_150348
-	msgbox Route111_Text_16F7FF, 4
+	msgbox Route111_Text_16F7FF, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route111_Movement_150356
 	waitmovement 0
 	removeobject 1
 	call Route111_EventScript_15034F
-	applymovement 255, Route111_Movement_15035B
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
 	addobject 2
 	applymovement 2, Route111_Movement_150359
 	waitmovement 0
 	call Route111_EventScript_15034F
-	msgbox Route111_Text_16F82D, 4
-	trainerbattle 3, TRAINER_VICTORIA, 0, Route111_Text_16F8A6
-	applymovement 2, Route111_Movement_1A0841
+	msgbox Route111_Text_16F82D, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_16F8A6
+	applymovement 2, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_150348
-	msgbox Route111_Text_16F8D5, 4
+	msgbox Route111_Text_16F8D5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, Route111_Movement_150356
 	waitmovement 0
 	removeobject 2
 	call Route111_EventScript_15034F
-	applymovement 255, Route111_Movement_15035B
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
 	addobject 3
 	applymovement 3, Route111_Movement_150359
 	waitmovement 0
 	call Route111_EventScript_15034F
-	msgbox Route111_Text_16F90E, 4
-	trainerbattle 3, TRAINER_VIVI, 0, Route111_Text_16F956
-	applymovement 3, Route111_Movement_1A0841
+	msgbox Route111_Text_16F90E, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_16F956
+	applymovement 3, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_150348
-	msgbox Route111_Text_16F96C, 4
+	msgbox Route111_Text_16F96C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route111_Movement_150356
 	waitmovement 0
 	removeobject 3
 	call Route111_EventScript_15034F
-	applymovement 255, Route111_Movement_15035B
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
 	addobject 4
 	applymovement 4, Route111_Movement_150359
 	waitmovement 0
 	call Route111_EventScript_15034F
-	msgbox Route111_Text_16F991, 4
-	trainerbattle 3, TRAINER_VICKY, 0, Route111_Text_16F9EC
-	msgbox Route111_Text_16FA22, 4
+	msgbox Route111_Text_16F991, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VICKY, Route111_Text_16F9EC
+	msgbox Route111_Text_16FA22, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Route111_Movement_1A0841
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_150348
 	applymovement 4, Route111_Movement_150356
@@ -323,120 +323,120 @@ Route111_EventScript_15034F:: @ 815034F
 Route111_Movement_150356:: @ 8150356
 	walk_in_place_fastest_up
 	walk_up
-	end_movement
+	step_end
 
 Route111_Movement_150359:: @ 8150359
 	walk_down
-	end_movement
+	step_end
 
 Route111_Movement_15035B:: @ 815035B
 	delay_16
 	delay_16
 	delay_16
-	end_movement
+	step_end
 
 Route111_EventScript_15035F:: @ 815035F
-	msgbox Route111_Text_16FC9C, 3
+	msgbox Route111_Text_16FC9C, MSGBOX_SIGN
 	end
 
 Route111_EventScript_150368:: @ 8150368
-	msgbox Route111_Text_16FCB6, 3
+	msgbox Route111_Text_16FCB6, MSGBOX_SIGN
 	end
 
 Route111_EventScript_150371:: @ 8150371
-	msgbox Route111_Text_16FCEF, 3
+	msgbox Route111_Text_16FCEF, MSGBOX_SIGN
 	end
 
 Route111_EventScript_15037A:: @ 815037A
-	msgbox Route111_Text_16FD05, 3
+	msgbox Route111_Text_16FD05, MSGBOX_SIGN
 	end
 
 Route111_EventScript_150383:: @ 8150383
-	msgbox Route111_Text_16FD1B, 3
+	msgbox Route111_Text_16FD1B, MSGBOX_SIGN
 	end
 
 Route111_EventScript_15038C:: @ 815038C
-	msgbox Route111_Text_16FD55, 3
+	msgbox Route111_Text_16FD55, MSGBOX_SIGN
 	end
 
 Route111_EventScript_150395:: @ 8150395
-	msgbox Route111_Text_16FB86, 2
+	msgbox Route111_Text_16FB86, MSGBOX_NPC
 	end
 
 Route111_EventScript_15039E:: @ 815039E
-	msgbox Route111_Text_16FC3A, 2
+	msgbox Route111_Text_16FC3A, MSGBOX_NPC
 	end
 
 Route111_EventScript_1503A7:: @ 81503A7
-	trainerbattle 0, TRAINER_DREW, 0, Route111_Text_1BAB4B, Route111_Text_1BABC7
-	msgbox Route111_Text_1BAC10, 6
+	trainerbattle_single TRAINER_DREW, Route111_Text_1BAB4B, Route111_Text_1BABC7
+	msgbox Route111_Text_1BAC10, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1503BE:: @ 81503BE
-	trainerbattle 0, TRAINER_HEIDI, 0, Route111_Text_1BAC60, Route111_Text_1BACC5
-	msgbox Route111_Text_1BACD8, 6
+	trainerbattle_single TRAINER_HEIDI, Route111_Text_1BAC60, Route111_Text_1BACC5
+	msgbox Route111_Text_1BACD8, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1503D5:: @ 81503D5
-	trainerbattle 0, TRAINER_CLIFF, 0, Route111_Text_1BAD4B, Route111_Text_1BADA3
-	msgbox Route111_Text_1BADC2, 6
+	trainerbattle_single TRAINER_CLIFF, Route111_Text_1BAD4B, Route111_Text_1BADA3
+	msgbox Route111_Text_1BADC2, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1503EC:: @ 81503EC
-	trainerbattle 0, TRAINER_BECKY, 0, Route111_Text_1BAE24, Route111_Text_1BAE6E
-	msgbox Route111_Text_1BAE81, 6
+	trainerbattle_single TRAINER_BECKY, Route111_Text_1BAE24, Route111_Text_1BAE6E
+	msgbox Route111_Text_1BAE81, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_150403:: @ 8150403
-	trainerbattle 0, TRAINER_DUSTY_1, 0, Route111_Text_1BAEC9, Route111_Text_1BAF14
+	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_1BAEC9, Route111_Text_1BAF14
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_15042A
-	msgbox Route111_Text_1BAF5B, 6
+	msgbox Route111_Text_1BAF5B, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_15042A:: @ 815042A
-	trainerbattle 5, TRAINER_DUSTY_1, 0, Route111_Text_1BAFC1, Route111_Text_1BB034
-	msgbox Route111_Text_1BB070, 6
+	trainerbattle_rematch TRAINER_DUSTY_1, Route111_Text_1BAFC1, Route111_Text_1BB034
+	msgbox Route111_Text_1BB070, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_150441:: @ 8150441
-	trainerbattle 0, TRAINER_TRAVIS, 0, Route111_Text_1BB111, Route111_Text_1BB140
-	msgbox Route111_Text_1BB15B, 6
+	trainerbattle_single TRAINER_TRAVIS, Route111_Text_1BB111, Route111_Text_1BB140
+	msgbox Route111_Text_1BB15B, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_150458:: @ 8150458
-	trainerbattle 0, TRAINER_IRENE, 0, Route111_Text_1BB199, Route111_Text_1BB1D8
-	msgbox Route111_Text_1BB1F6, 6
+	trainerbattle_single TRAINER_IRENE, Route111_Text_1BB199, Route111_Text_1BB1D8
+	msgbox Route111_Text_1BB1F6, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_15046F:: @ 815046F
-	trainerbattle 0, TRAINER_DAISUKE, 0, Route111_Text_1BB250, Route111_Text_1BB27E
-	msgbox Route111_Text_1BB290, 6
+	trainerbattle_single TRAINER_DAISUKE, Route111_Text_1BB250, Route111_Text_1BB27E
+	msgbox Route111_Text_1BB290, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_150486:: @ 8150486
-	trainerbattle 0, TRAINER_WILTON_1, 0, Route111_Text_1BB2E3, Route111_Text_1BB313
+	trainerbattle_single TRAINER_WILTON_1, Route111_Text_1BB2E3, Route111_Text_1BB313
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_1504AD
-	msgbox Route111_Text_1BB33E, 6
+	msgbox Route111_Text_1BB33E, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1504AD:: @ 81504AD
-	trainerbattle 5, TRAINER_WILTON_1, 0, Route111_Text_1BB3A7, Route111_Text_1BB3FA
-	msgbox Route111_Text_1BB40E, 6
+	trainerbattle_rematch TRAINER_WILTON_1, Route111_Text_1BB3A7, Route111_Text_1BB3FA
+	msgbox Route111_Text_1BB40E, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1504C4:: @ 81504C4
-	trainerbattle 0, TRAINER_BROOKE_1, 0, Route111_Text_1BB44F, Route111_Text_1BB49F
+	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_1BB44F, Route111_Text_1BB49F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route111_EventScript_1504EB
-	msgbox Route111_Text_1BB4CE, 6
+	msgbox Route111_Text_1BB4CE, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1504EB:: @ 81504EB
-	trainerbattle 5, TRAINER_BROOKE_1, 0, Route111_Text_1BB529, Route111_Text_1BB5A2
-	msgbox Route111_Text_1BB5C1, 6
+	trainerbattle_rematch TRAINER_BROOKE_1, Route111_Text_1BB529, Route111_Text_1BB5A2
+	msgbox Route111_Text_1BB5C1, MSGBOX_AUTOCLOSE
 	end

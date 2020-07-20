@@ -1,5 +1,5 @@
 Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 81634C8
-	map_script 3, Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE
 	.byte 0
 
 Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE:: @ 81634CE
@@ -16,7 +16,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5:: @ 81634E5
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634EB:: @ 81634EB
 	lock
 	faceplayer
-	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E406, 4
+	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E406, MSGBOX_DEFAULT
 	release
 	end
 
@@ -40,16 +40,16 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D:: @ 816351D
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523:: @ 8163523
 @ You don't have a bike!
-	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E3AD, 4
+	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E3AD, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route110_SeasideCyclingRoadNorthEntrance_Movement_163538
+	applymovement OBJ_EVENT_ID_PLAYER, Route110_SeasideCyclingRoadNorthEntrance_Movement_163538
 	waitmovement 0
 	releaseall
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_Movement_163538:: @ 8163538
 	walk_left
-	end_movement
+	step_end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_16353A:: @ 816353A
 @ Coord event directly in front of the gatesman heading right to left

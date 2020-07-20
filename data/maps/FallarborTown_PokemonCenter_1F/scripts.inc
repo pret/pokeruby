@@ -1,32 +1,32 @@
 FallarborTown_PokemonCenter_1F_MapScripts:: @ 8153AF3
-	map_script 3, FallarborTown_PokemonCenter_1F_MapScript1_153AF9
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_MapScript1_153AF9
 	.byte 0
 
 FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
 	setrespawn HEAL_LOCATION_FALLARBOR_TOWN
-	call FallarborTown_PokemonCenter_1F_EventScript_19FD1B
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
 	setvar VAR_0x800B, 1
-	call FallarborTown_PokemonCenter_1F_EventScript_19FD5B
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B10:: @ 8153B10
-	msgbox FallarborTown_PokemonCenter_1F_Text_17768C, 2
+	msgbox FallarborTown_PokemonCenter_1F_Text_17768C, MSGBOX_NPC
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B19:: @ 8153B19
-	msgbox FallarborTown_PokemonCenter_1F_Text_1776F5, 2
+	msgbox FallarborTown_PokemonCenter_1F_Text_1776F5, MSGBOX_NPC
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B22:: @ 8153B22
 	lock
 	faceplayer
-	msgbox FallarborTown_PokemonCenter_1F_Text_1774D4, 4
+	msgbox FallarborTown_PokemonCenter_1F_Text_1774D4, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 2, FallarborTown_PokemonCenter_1F_EventScript_153B49
@@ -65,7 +65,7 @@ FallarborTown_PokemonCenter_1F_Movement_153B74:: @ 8153B74
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end
 
 FallarborTown_PokemonCenter_1F_Movement_153B81:: @ 8153B81
 	walk_down
@@ -78,4 +78,4 @@ FallarborTown_PokemonCenter_1F_Movement_153B81:: @ 8153B81
 	walk_down
 	walk_down
 	delay_8
-	end_movement
+	step_end

@@ -1,6 +1,6 @@
 CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
-	map_script 5, CaveOfOrigin_B4F_MapScript1_15DDB7
-	map_script 3, CaveOfOrigin_B4F_MapScript1_15DDC5
+	map_script MAP_SCRIPT_ON_RESUME, CaveOfOrigin_B4F_MapScript1_15DDB7
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_B4F_MapScript1_15DDC5
 	.byte 0
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
@@ -17,18 +17,18 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	.else
 	setmaplayoutindex 313
 	.endif
-	call CaveOfOrigin_B4F_EventScript_1A01B5
-	call_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, CaveOfOrigin_B4F_EventScript_1A04E3
+	call Common_EventScript_SetupLegendaryGfxIds
+	call_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, CaveOfOrigin_EventScript_DisableTriggers
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	lockall
-	applymovement 255, CaveOfOrigin_B4F_Movement_1A0841
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B4F03, 4
+	msgbox UnknownString_81B4F03, MSGBOX_DEFAULT
 	.else
-	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
+	msgbox CaveOfOrigin_B4F_Text_1B4FE4, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	setweather WEATHER_NONE
@@ -81,17 +81,17 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 
 CaveOfOrigin_B4F_EventScript_15DE73:: @ 815DE73
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B4F29, 4
+	msgbox UnknownString_81B4F29, MSGBOX_DEFAULT
 	.else
-	msgbox CaveOfOrigin_B4F_Text_1B5009, 4
+	msgbox CaveOfOrigin_B4F_Text_1B5009, MSGBOX_DEFAULT
 	.endif
 	closemessage
 	return
 
 CaveOfOrigin_B4F_Movement_15DE7D:: @ 815DE7D
 	init_affine_anim
-	walk_down_affine_0
+	walk_down_start_affine
 	delay_16
 	delay_16
-	walk_down_affine_1
-	end_movement
+	walk_down_affine
+	step_end

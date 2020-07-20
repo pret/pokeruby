@@ -1,8 +1,8 @@
 LinkContestRoom1_MapScripts:: @ 815F580
-	map_script 4, LinkContestRoom1_MapScript2_15F610
-	map_script 2, LinkContestRoom1_MapScript2_15F606
-	map_script 3, LinkContestRoom1_MapScript1_15F595
-	map_script 5, LinkContestRoom1_MapScript1_15F5F4
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LinkContestRoom1_MapScript2_15F610
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LinkContestRoom1_MapScript2_15F606
+	map_script MAP_SCRIPT_ON_TRANSITION, LinkContestRoom1_MapScript1_15F595
+	map_script MAP_SCRIPT_ON_RESUME, LinkContestRoom1_MapScript1_15F5F4
 	.byte 0
 
 LinkContestRoom1_MapScript1_15F595:: @ 815F595
@@ -68,7 +68,7 @@ LinkContestRoom1_EventScript_15F61A:: @ 815F61A
 	end
 
 LinkContestRoom1_EventScript_15F625:: @ 815F625
-	hideobjectat 255, MAP_LITTLEROOT_TOWN
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	call LinkContestRoom1_EventScript_15F919
 	end
 

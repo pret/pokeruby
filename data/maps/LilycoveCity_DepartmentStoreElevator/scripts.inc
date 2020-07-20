@@ -71,7 +71,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1:: @ 815A4B1
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8:: @ 815A4B8
 	erasebox 0, 0, 29, 19
-	applymovement VAR_LAST_TALKED, LilycoveCity_DepartmentStoreElevator_Movement_1A0845
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	special ShakeScreenInElevator
 	waitstate

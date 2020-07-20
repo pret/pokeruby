@@ -46,15 +46,14 @@ Route120_Text_171B0E:: @ 8171B0E
 	.string "I think you're doing great.\p"
 	.string "Well, let's meet again somewhere.$"
 
-Route119_Text_171B93:: @ 8171B93
-Route120_Text_171B93:: @ 8171B93
+Text_SomethingUnseeable:: @ 8171B93
 	.string "Something unseeable is in the way.$"
 
-Route119_Text_171BB6:: @ 8171BB6
+Text_WantToUseDevonScope:: @ 8171BB6
 	.string "Something unseeable is in the way.\p"
 	.string "Want to use the DEVON SCOPE?$"
 
-Route119_Text_171BF6:: @ 8171BF6
+Text_UseDevonScopeMonAttacked:: @ 8171BF6
 	.string "{PLAYER} used the DEVON SCOPE.\p"
 	.string "An invisible POKéMON became completely\n"
 	.string "visible!\p"
