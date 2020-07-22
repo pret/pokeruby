@@ -49,7 +49,7 @@ extern u8 gBattlerTarget;
 extern u8 gBattlerPositions[];
 extern u8 gBattlerSpriteIds[];
 extern struct Window gUnknown_03004210;
-extern u32 gContestRngValue;
+u32 gContestRngValue;
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern const struct ContestPokemon gContestOpponents[60];

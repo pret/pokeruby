@@ -2,17 +2,18 @@
 #include "contest_painting_effects.h"
 #include "contest_painting.h"
 
-extern u16 (*gUnknown_03005DEC)[][32];
-extern u8 gUnknown_083E7A50[][3];
-extern u8 gUnknown_03005DE8;
-extern u8 gUnknown_03005DF0;
-extern u8 gUnknown_03005DFC;
-extern u8 gUnknown_03005DF8;
-extern u8 gUnknown_03005DF4;
-extern u8 gUnknown_03005E00;
-extern u8 gUnknown_03005E04;
-extern u16 * gUnknown_03005E08;
-extern u16 gUnknown_03005E0C;
+extern const u8 gUnknown_083E7A50[][3];
+
+u16 (*gUnknown_03005DEC)[][32];
+u8 gUnknown_03005DE8;
+u8 gUnknown_03005DF0;
+u8 gUnknown_03005DFC;
+u8 gUnknown_03005DF8;
+u8 gUnknown_03005DF4;
+u8 gUnknown_03005E00;
+u8 gUnknown_03005E04;
+u16 * gUnknown_03005E08;
+u16 gUnknown_03005E0C;
 
 // this file's functions
 void sub_80FCAA4(void);

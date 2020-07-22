@@ -1888,7 +1888,12 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
     s32 r6;
     u8 r2;
 
-    for (i = 0; i <= 5; i++) // bug, writing one index too far
+    // bug, writing one index too far
+#ifdef UBFIX
+    for (i = 0; i < 5; i++)
+#else
+    for (i = 0; i <= 5; i++)
+#endif //UBFIX
         vars[i] = a1[i];
     r6 = 0;
     for (i = 0; i < 5; i++)

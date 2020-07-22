@@ -124,7 +124,7 @@ extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gPPUpReadMasks[];
-extern TaskFunc gUnknown_03005CF0;
+TaskFunc gUnknown_03005CF0;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern const u8 gStatusPal_Icons[];

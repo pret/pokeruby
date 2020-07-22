@@ -102,6 +102,8 @@ static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 static void sub_806BB9C(u8 a);
 static void sub_806BBEC(u8 a);
 
+void (*gPokemonItemUseCallback)(u8 taskId, u16 itemId, TaskFunc taskFunc);
+
 extern u16 Random();
 
 EWRAM_DATA u8 gUnknown_0202E8F4 = 0;
@@ -4111,7 +4113,7 @@ s16 sub_806F7E8(u8 taskId, struct BattleInterfaceStruct1 *b, s8 c)
     if (hpBarLevel < 2)
         b->unkC_0 = 6;
     vramPtr = gUnknown_08376858[IsDoubleBattle()][ewram1C000.primarySelectedMonIndex];
-    return sub_80460C8(b, &ewram1C000.unkC, vramPtr, 0);
+    return sub_80460C8(b, (int *)&ewram1C000.unkC, vramPtr, 0);
 }
 
 void sub_806F8AC(u8 taskId)

@@ -141,8 +141,8 @@ static const u8 *sPopupMenuActionList;
 // common
 void (*gFieldItemUseCallback)(u8) = NULL;
 extern u16 gBattle_BG1_Y;
-extern struct PocketScrollState gBagPocketScrollStates[];
-extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
+struct PocketScrollState gBagPocketScrollStates[5];
+struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
 
 // TODO: decompile the debug code so we can use static in this file

@@ -19,9 +19,9 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
-extern int gUnknown_03005F0C;
-extern u16 gUnknown_03005F10;
-extern u16 gUnknown_03005F14;
+int gUnknown_03005F0C;
+u16 gUnknown_03005F10;
+u16 gUnknown_03005F14;
 
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimAttacker;

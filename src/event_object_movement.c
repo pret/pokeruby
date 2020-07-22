@@ -1031,7 +1031,7 @@ static u16 sCurrentSpecialObjectPaletteTag;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[];
 extern u8 gReservedSpritePaletteCount;
 extern struct Camera gCamera;
-extern struct ObjectEvent gObjectEvents[16];
+struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
 #if DEBUG
 u8 gUnknown_Debug_03004BC0;
 #endif

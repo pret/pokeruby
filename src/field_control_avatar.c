@@ -43,7 +43,7 @@ extern u8 gUnknown_020297ED;
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
 
-u8 gSelectedObjectEvent;
+extern u8 gSelectedObjectEvent;
 
 //scripts
 extern u8 gUnknown_081A2C51[];
