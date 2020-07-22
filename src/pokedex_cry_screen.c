@@ -41,7 +41,7 @@ void sub_811A350(u8, u16, u8);
 void sub_811A534(struct Sprite *);
 void sub_811A6D8(s8);
 
-extern u8 gUnknown_03005E98;
+u8 gUnknown_03005E98;
 
 // data/pokedex_cry_screen.o
 

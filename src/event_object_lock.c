@@ -6,6 +6,7 @@
 #include "task.h"
 
 extern u16 gSpecialVar_Facing;
+u8 gSelectedObjectEvent;
 
 bool8 walkrun_is_standing_still(void)
 {

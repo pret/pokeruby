@@ -27,7 +27,6 @@ SECTIONS {
         src/libs/m4a.o(.bss.code);
 
         /* COMMON starts at 0x3001760 */
-        INCLUDE "sym_common.ld"
         *(COMMON);
         end = .;
         . = 0x8000;

@@ -134,7 +134,7 @@ extern const u8 gTextStoryteller_Story36Title[];
 extern const u8 gTextStoryteller_Story36Action[];
 extern const u8 gTextStoryteller_Story36Text[];
 
-extern struct BardSong gUnknown_03005DA0;
+struct BardSong gUnknown_03005DA0;
 
 EWRAM_DATA static u16 gUnknown_020388BC = 0;  // set but not used?
 

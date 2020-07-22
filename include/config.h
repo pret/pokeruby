@@ -68,4 +68,8 @@
 // Fixed in Emerald.
 // #define BUGFIX_SETMONIVS
 
+#if MODERN
+#define UBFIX
+#endif //MODERN
+
 #endif // GUARD_CONFIG_H
