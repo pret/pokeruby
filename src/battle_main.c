@@ -2709,14 +2709,14 @@ void debug_sub_8012AC0(s8 a, u8 taskId)
 
 void debug_sub_8012B2C(u8 a)
 {
-    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 0) * 0x20) = 1;
-    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 2) * 0x20) = 2;
+    *(u16 *)(BG_VRAM + 0xC000 + 0x772 + (a * 4 + 0) * 0x20) = 1;
+    *(u16 *)(BG_VRAM + 0xC000 + 0x772 + (a * 4 + 2) * 0x20) = 2;
 }
 
 void debug_sub_8012B4C(u8 a)
 {
-    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 0) * 0x20) = 0x1016;
-    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 2) * 0x20) = 0x1016;
+    *(u16 *)(BG_VRAM + 0xC000 + 0x772 + (a * 4 + 0) * 0x20) = 0x1016;
+    *(u16 *)(BG_VRAM + 0xC000 + 0x772 + (a * 4 + 2) * 0x20) = 0x1016;
 }
 
 void debug_sub_8012B70(u8 taskId, u8 b)

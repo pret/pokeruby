@@ -459,8 +459,7 @@ void unref_sub_80E4EC8(u8 a, u8 b, u8 c, u8 d)
 void sub_80E4EF8(u8 left, u8 top, u8 c, u8 paletteNum, u16 e, u8 bgMap, u8 g)
 {
     u32 tileNum;
-    s32 x;
-    s32 y;
+    s32 x, y;
     u8 bank = GetBattlerAtPosition(c);
 
     DmaCopy16(3, gUnknown_081FAF4C[c] + gBattleMonForms[bank] * 0x800, (void *)(VRAM + e), 0x800);
@@ -469,7 +468,7 @@ void sub_80E4EF8(u8 left, u8 top, u8 c, u8 paletteNum, u16 e, u8 bgMap, u8 g)
     {
         for (x = left; x < left + 8; x++)
         {
-            *(u16 *)(VRAM + x * 2 + bgMap * 0x800 + y * 64) = tileNum | (paletteNum << 12);
+            *(u16 *)(BG_VRAM + x * 2 + bgMap * 0x800 + y * 64) = tileNum | (paletteNum << 12);
             tileNum++;
         }
     }
@@ -478,8 +477,7 @@ void sub_80E4EF8(u8 left, u8 top, u8 c, u8 paletteNum, u16 e, u8 bgMap, u8 g)
 void unref_sub_80E4FDC(u8 left, u8 top, u8 c, u8 form, u8 paletteNum, u16 f, u8 bgMap, u8 h)
 {
     u32 tileNum;
-    s32 x;
-    s32 y;
+    s32 x, y;
 
     DmaCopy16(3, gUnknown_081FAF4C[c] + form * 0x800, (void *)(VRAM + f), 0x800);
     tileNum = f / 32 - h * 512;
@@ -487,7 +485,7 @@ void unref_sub_80E4FDC(u8 left, u8 top, u8 c, u8 form, u8 paletteNum, u16 f, u8 
     {
         for (x = left; x < left + 8; x++)
         {
-            *(u16 *)(VRAM + x * 2 + bgMap * 0x800 + y * 64) = tileNum | (paletteNum << 12);
+            *(u16 *)(BG_VRAM + x * 2 + bgMap * 0x800 + y * 64) = tileNum | (paletteNum << 12);
             tileNum++;
         }
     }

@@ -676,12 +676,14 @@ _080D3D32:\n\
 void sub_80D3D68(u8 taskId)
 {
     s16 i;
-    struct ScanlineEffectParams params;
+    
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
     {
         case 0:
+        {
+            struct ScanlineEffectParams params;
             for (i = 0; i < task->data[4]; i++)
             {
                 /* variable initialization isn't literal to ASM */
@@ -710,6 +712,7 @@ void sub_80D3D68(u8 taskId)
             ScanlineEffect_SetParams(params);
             task->data[0]++;
             break;
+        }
         case 1:
             if (task->data[3] == 0)
             {

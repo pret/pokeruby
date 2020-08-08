@@ -7,7 +7,6 @@
 #include "ewram.h"
 #include "trig.h"
 #include "sound.h"
-
 extern struct SoundInfo gSoundInfo;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 

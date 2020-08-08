@@ -2572,8 +2572,8 @@ void sub_80AEBEC(u16 a)
 
     for (i = 0; i < 5; i++)
     {
-        *(u16 *)(VRAM + 0xC7D6 + i * 2) = categoryTile;
-        *(u16 *)(VRAM + 0xC816 + i * 2) = categoryTile + 16;
+        *(u16 *)(BG_VRAM + 0xC7D6 + i * 2) = categoryTile;
+        *(u16 *)(BG_VRAM + 0xC816 + i * 2) = categoryTile + 16;
         categoryTile++;
     }
 
@@ -2586,9 +2586,9 @@ void sub_80AEBEC(u16 a)
     for (i = 0; i < 8; i++)
     {
         if (i < numHearts)
-            *(u16 *)(VRAM + 0xC7EA + i * 2) = 0x5012;
+            *(u16 *)(BG_VRAM + 0xC7EA + i * 2) = 0x5012;
         else
-            *(u16 *)(VRAM + 0xC7EA + i * 2) = 0x5035;
+            *(u16 *)(BG_VRAM + 0xC7EA + i * 2) = 0x5035;
     }
 
     if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
@@ -2600,9 +2600,9 @@ void sub_80AEBEC(u16 a)
     for (i = 0; i < 8; i++)
     {
         if (i < numHearts)
-            *(u16 *)(VRAM + 0xC82A + i * 2) = 0x5014;
+            *(u16 *)(BG_VRAM + 0xC82A + i * 2) = 0x5014;
         else
-            *(u16 *)(VRAM + 0xC82A + i * 2) = 0x5036;
+            *(u16 *)(BG_VRAM + 0xC82A + i * 2) = 0x5036;
     }
 
     Text_InitWindowAndPrintText(&gUnknown_03004210, gContestEffectStrings[gContestMoves[a].effect], 868, 11, 35);
@@ -2623,20 +2623,20 @@ void sub_80AED7C(u16 move, u8 b)
     {
         u16 tile = sub_80AEB68(move, b);
 
-        *(u16 *)(VRAM + 0xC028 + r5 * 64) = tile;
-        *(u16 *)(VRAM + 0xC028 + r5 * 64 + 2) = tile + 1;
+        *(u16 *)(BG_VRAM + 0xC028 + r5 * 64) = tile;
+        *(u16 *)(BG_VRAM + 0xC028 + r5 * 64 + 2) = tile + 1;
 
-        *(u16 *)(VRAM + 0xC068 + r5 * 64) = tile + 16;
-        *(u16 *)(VRAM + 0xC068 + r5 * 64 + 2) = tile + 17;
+        *(u16 *)(BG_VRAM + 0xC068 + r5 * 64) = tile + 16;
+        *(u16 *)(BG_VRAM + 0xC068 + r5 * 64 + 2) = tile + 17;
 
     }
     else
     {
-        *(u16 *)(VRAM + 0xC028 + r5 * 64) = 0;
-        *(u16 *)(VRAM + 0xC028 + r5 * 64 + 2) = 0;
+        *(u16 *)(BG_VRAM + 0xC028 + r5 * 64) = 0;
+        *(u16 *)(BG_VRAM + 0xC028 + r5 * 64 + 2) = 0;
 
-        *(u16 *)(VRAM + 0xC068 + r5 * 64) = 0;
-        *(u16 *)(VRAM + 0xC068 + r5 * 64 + 2) = 0;
+        *(u16 *)(BG_VRAM + 0xC068 + r5 * 64) = 0;
+        *(u16 *)(BG_VRAM + 0xC068 + r5 * 64 + 2) = 0;
     }
 }
 
@@ -2668,7 +2668,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
         r4 = 0;
         while (sContestantStatus[a].condition / 10 > r4)
         {
-            *(u16 *)(VRAM + 0xC026 + (r9 + r4) * 64) = r8;
+            *(u16 *)(BG_VRAM + 0xC026 + (r9 + r4) * 64) = r8;
             r4++;
         }
         if (b != 0)
@@ -2683,7 +2683,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
         r4 = 3;
         while (sContestantStatus[a].condition / 10 < r4)
         {
-            *(u16 *)(VRAM + 0xBFE6 + (r9 + r4) * 64) = r8;
+            *(u16 *)(BG_VRAM + 0xBFE6 + (r9 + r4) * 64) = r8;
             r4--;
         }
         if (b != 0)
@@ -2708,13 +2708,13 @@ void sub_80AEF50(void)
         r4 = 0;
         while (r4 < sContestantStatus[i].condition / 10)
         {
-            *(u16 *)(VRAM + 0xC026 + (r8 + r4) * 64) = r6;
+            *(u16 *)(BG_VRAM + 0xC026 + (r8 + r4) * 64) = r6;
             r4++;
         }
         r6 = 0;
         while (r4 < 3)
         {
-            *(u16 *)(VRAM + 0xC026 + (r8 + r4) * 64) = r6;
+            *(u16 *)(BG_VRAM + 0xC026 + (r8 + r4) * 64) = r6;
             r4++;
         }
     }
@@ -2762,17 +2762,17 @@ bool8 sub_80AF038(u8 a)
         r5 = FALSE;
     if (r5)
     {
-        *(u16 *)(VRAM + 0xC028 + r6 * 64) = r4;
-        *(u16 *)(VRAM + 0xC028 + r6 * 64 + 2) = r4 + 1;
-        *(u16 *)(VRAM + 0xC068 + r6 * 64) = r4 + 16;
-        *(u16 *)(VRAM + 0xC068 + r6 * 64 + 2) = r4 + 17;
+        *(u16 *)(BG_VRAM + 0xC028 + r6 * 64) = r4;
+        *(u16 *)(BG_VRAM + 0xC028 + r6 * 64 + 2) = r4 + 1;
+        *(u16 *)(BG_VRAM + 0xC068 + r6 * 64) = r4 + 16;
+        *(u16 *)(BG_VRAM + 0xC068 + r6 * 64 + 2) = r4 + 17;
     }
     else
     {
-        *(u16 *)(VRAM + 0xC028 + r6 * 64) = 0;
-        *(u16 *)(VRAM + 0xC028 + r6 * 64 + 2) = 0;
-        *(u16 *)(VRAM + 0xC068 + r6 * 64) = 0;
-        *(u16 *)(VRAM + 0xC068 + r6 * 64 + 2) = 0;
+        *(u16 *)(BG_VRAM + 0xC028 + r6 * 64) = 0;
+        *(u16 *)(BG_VRAM + 0xC028 + r6 * 64 + 2) = 0;
+        *(u16 *)(BG_VRAM + 0xC068 + r6 * 64) = 0;
+        *(u16 *)(BG_VRAM + 0xC068 + r6 * 64 + 2) = 0;
     }
     return r5;
 }
@@ -5085,10 +5085,10 @@ void sub_80B20C4(void)
             u8 r4 = gUnknown_02038696[i] * 5 + 2;
             u16 r0 = sub_80AEFE8(i, 3);
 
-            *(u16 *)(VRAM + 0xC000 + r4 * 64 + 0x28) = r0;
-            *(u16 *)(VRAM + 0xC000 + r4 * 64 + 0x2A) = r0 + 1;
-            *(u16 *)(VRAM + 0xC000 + (r4 + 1) * 64 + 0x28) = r0 + 16;
-            *(u16 *)(VRAM + 0xC000 + (r4 + 1) * 64 + 0x2A) = r0 + 17;
+            *(u16 *)(BG_VRAM + 0xC000 + r4 * 64 + 0x28) = r0;
+            *(u16 *)(BG_VRAM + 0xC000 + r4 * 64 + 0x2A) = r0 + 1;
+            *(u16 *)(BG_VRAM + 0xC000 + (r4 + 1) * 64 + 0x28) = r0 + 16;
+            *(u16 *)(BG_VRAM + 0xC000 + (r4 + 1) * 64 + 0x2A) = r0 + 17;
             PlaySE(SE_C_PASI);
         }
     }

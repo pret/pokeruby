@@ -25,7 +25,7 @@
 #include "trig.h"
 #include "scanline_effect.h"
 #include "ewram.h"
-
+#define VRAM_ADDR(a, b, c) *(u16 *)(BG_VRAM + (15 * 0x800) + (c) * 64 + ((b) + (a))*2)
 
 struct PokedexListItem
 {
@@ -2201,8 +2201,8 @@ static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
     text[1] = CHAR_0 + (r7 % 100) / 10;
     text[2] = CHAR_0 + (r7 % 100) % 10;
     text[3] = EOS;
-    *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
-    *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
+    *(u16 *)(BG_VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
+    *(u16 *)(BG_VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
     Menu_PrintText(text, b - 15, c);
 }
 
@@ -2220,8 +2220,8 @@ static void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
         unk[0] = 0;
         unk[1] = 0;
     }
-    *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
-    *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
+    *(u16 *)(BG_VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
+    *(u16 *)(BG_VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
 }
 
 static u8 sub_808DFE4(u16 num, u8 b, u8 c)
@@ -2255,8 +2255,8 @@ static void sub_808E090(u8 a, u8 b, u16 c)
 
     for (i = 0; i < 12; i++)
     {
-        *(u16 *)(VRAM + c * 0x800 + b * 64 + (a + i) * 2) = 0;
-        *(u16 *)(VRAM + c * 0x800 + (b + 1) * 64 + (a + i) * 2) = 0;
+        *(u16 *)(BG_VRAM + c * 0x800 + b * 64 + (a + i) * 2) = 0;
+        *(u16 *)(BG_VRAM + c * 0x800 + (b + 1) * 64 + (a + i) * 2) = 0;
     }
 }
 
@@ -3795,7 +3795,7 @@ static void sub_8090750(u8 taskId)
 #ifndef NONMATCHING
             asm("");
 #endif
-            *(u16 *)(VRAM + 0x7800 + 2 * i) += 0x2000;
+            *(u16 *)(BG_VRAM + 0x7800 + 2 * i) += 0x2000;
         }
         sub_8091738(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
@@ -3870,8 +3870,8 @@ static void sub_8090A3C(u8 taskId)
 
             Menu_EraseWindowRect(2, 13, 27, 19);
             Menu_PrintText(gPokedexEntries[r4].descriptionPage2, 2, 13);
-            (*(u16 *)(VRAM + 0x7ACA))++;
-            (*(u16 *)(VRAM + 0x7B0A))++;
+            (*(u16 *)(BG_VRAM + 0x7ACA))++;
+            (*(u16 *)(BG_VRAM + 0x7B0A))++;
             gTasks[taskId].data[4] = 1;
             PlaySE(SE_PIN);
         }
@@ -3935,8 +3935,8 @@ static void sub_8090C68(void)
             Menu_EraseWindowRect(2, 13, 27, 19);
             Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage2, 2, 13);
             gPokedexView->descriptionPageNum = 1;
-            (*(u16 *)(VRAM + 0x7ACA))++;
-            (*(u16 *)(VRAM + 0x7B0A))++;
+            (*(u16 *)(BG_VRAM + 0x7ACA))++;
+            (*(u16 *)(BG_VRAM + 0x7B0A))++;
             PlaySE(SE_PIN);
         }
         else
@@ -3944,8 +3944,8 @@ static void sub_8090C68(void)
             Menu_EraseWindowRect(2, 13, 27, 19);
             Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
             gPokedexView->descriptionPageNum = 0;
-            (*(u16 *)(VRAM + 0x7ACA))--;
-            (*(u16 *)(VRAM + 0x7B0A))--;
+            (*(u16 *)(BG_VRAM + 0x7ACA))--;
+            (*(u16 *)(BG_VRAM + 0x7B0A))--;
             PlaySE(SE_PIN);
         }
     }
@@ -4463,10 +4463,10 @@ void sub_8091738(u16 num, u16 b, u16 c)
 
 static void sub_80917CC(u16 a, u16 b)
 {
-    *(u16 *)(VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
-    *(u16 *)(VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
-    *(u16 *)(VRAM + a * 0x800 + 0x272) = 0xF000 + b + 2;
-    *(u16 *)(VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x272) = 0xF000 + b + 2;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
 }
 
 static u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
@@ -5084,74 +5084,25 @@ static void sub_80927F0(u8 taskId)
         DestroyTask(taskId);
 }
 
-#ifdef NONMATCHING
+#define VRAM_ADDR(a, b, c) *(u16 *)(BG_VRAM + (15 * 0x800) + (c) * 64 + ((b) + (a))*2)
 void sub_8092810(u8 a, u8 b, u8 c, u8 d)
 {
-    u16 i;
+    u16 i, j;
 
     for (i = 0; i < d; i++)
     {
-        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] &= 0xFFF;
-        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] |= a << 12;
+        j = VRAM_ADDR(i, b, c);
+        j &= 0xFFF;
+        j |= a << 12;
 
-        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] &= 0xFFF;
-        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] |= a << 12;
+        VRAM_ADDR(i, b, c) = j;
+
+        j = VRAM_ADDR(i, b, c + 1);
+        j &= 0xFFF;
+        j |= a << 12;
+        VRAM_ADDR(i, b, c + 1) = j;
     }
 }
-#else
-NAKED
-void sub_8092810(u8 a, u8 b, u8 c, u8 d)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r12, r1\n\
-    lsls r2, 24\n\
-    lsrs r1, r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r5, r3, 8\n\
-    movs r3, 0\n\
-    cmp r5, 0\n\
-    beq _0809285A\n\
-    lsls r7, r1, 6\n\
-    ldr r6, _08092860 @ =0x00000fff\n\
-    lsls r4, r0, 12\n\
-_08092830:\n\
-    mov r0, r12\n\
-    adds r1, r0, r3\n\
-    lsls r1, 1\n\
-    adds r1, r7, r1\n\
-    ldr r0, _08092864 @ =0x06007800\n\
-    adds r2, r1, r0\n\
-    ldrh r0, [r2]\n\
-    ands r0, r6\n\
-    orrs r0, r4\n\
-    strh r0, [r2]\n\
-    ldr r0, _08092868 @ =0x06007840\n\
-    adds r1, r0\n\
-    ldrh r0, [r1]\n\
-    ands r0, r6\n\
-    orrs r0, r4\n\
-    strh r0, [r1]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r0, r5\n\
-    bcc _08092830\n\
-_0809285A:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08092860: .4byte 0x00000fff\n\
-_08092864: .4byte 0x06007800\n\
-_08092868: .4byte 0x06007840\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_809286C(u8 a, u8 b, u8 c)
 {
