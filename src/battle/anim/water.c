@@ -684,36 +684,24 @@ void sub_80D3D68(u8 taskId)
         case 0:
             for (i = 0; i < task->data[4]; i++)
             {
-                /*
-                   It would be odd for the scanline buffers to follow ASM literal
-                   and be initialized in reverse. Experimentation based upon how
-                   compilers in general load variables and pointers showed that
-                   they were initialized this way.
-
-                   foo = bar = baz -> foo = (bar = baz)
-                */
-                gScanlineEffectRegBuffers[0][i] =
-                gScanlineEffectRegBuffers[1][i] = task->data[2];
+                /* variable initialization isn't literal to ASM */
+                gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
             }
             for (i = task->data[4]; i < task->data[5]; i++)
             {
-                gScanlineEffectRegBuffers[0][i] =
-                gScanlineEffectRegBuffers[1][i] = task->data[1];
+                gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[1];
             }
             for (i = task->data[5]; i < 160; i++)
             {
-                gScanlineEffectRegBuffers[0][i] =
-                gScanlineEffectRegBuffers[1][i] = task->data[2];
+                gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
             }
             if (task->data[4] == 0)
             {
-                gScanlineEffectRegBuffers[0][i] =
-                gScanlineEffectRegBuffers[1][i] = task->data[1];
+                gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[1];
             }
             else
             {
-                gScanlineEffectRegBuffers[0][i] =
-                gScanlineEffectRegBuffers[1][i] = task->data[2];
+                gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
             }
             params.dmaDest = (vu16 *)REG_ADDR_BLDALPHA;
             params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
@@ -1313,63 +1301,16 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
     s16 randomSomethingY;
 
     something = sprite->data[0] / 2;
-    // Without the weird hack? you are about to see below, regalloc acts funny here...
+    // regalloc acts strange here...
     combinedX = sprite->pos1.x + sprite->pos2.x;
     combinedY = sprite->pos1.y + sprite->pos2.y;
-    /*
-        Then goes back to normal at this exact point. Something must have existed here
-        that lined up regalloc properly. Whatever it was, it's not the traditional if
-        (0) or do {} while (0). Nor is it localvar++--. It's something completely obscene.
 
-        Upon random experiments, there was an observation about how parameters affected
-        regalloc in ways more bizarre than local variables. xDiff++; xDiff--; had actually
-        changed the regalloc immensely:
-
-        mov     r2, #0x2e
-        ldrsh   r1, [r0, r2]
-        lsr     r2, r1, #0x1f
-        add     r1, r1, r2
-        lsl     r1, r1, #0xf
-        lsr     r1, r1, #0x10
-        str     r1, [sp]
-
-        ldrh    r3, [r0, #0x24]
-        mov     r8, r3
-        ldrh    r1, [r0, #0x20]
-        add     r8, r8, r1
-        mov     r2, r8
-        lsl     r2, r2, #0x10
-        lsr     r2, r2, #0x10
-        mov     r8, r2
-
-        ldrh    r6, [r0, #0x26]
-        ldrh    r0, [r0, #0x22]
-        add     r6, r6, r0
-        lsl     r6, r6, #0x10
-        lsr     r6, r6, #0x10
-
-        compared to doing the same to a local variable, where there was no change at
-        all. It's more similar to the actual ASM, but not quite, telling us that
-        something did indeed poke xDiff, but not through mathematical statements.
-        The only ideal possibility to turn to in this situation now would be an if
-        statement.
-    */
-    if (xDiff)
+    // ...then goes back to normal right here.
+    // Nothing but this appears to reproduce the behavior.
+    if (xDiff) // yDiff works too, but not sprite.
     {
-        /*
-            if (xDiff) by itself won't match, so something needs to
-            be in here.
-
-            Virtually nothing what you are about to see is in the
-            assembly, you just have to to come up a strange variety
-            of compile time scenarios, question reality, and see if
-            something happens.
-        */
-        // This absolutely needs to be a negation of some kind.
-        u8 unk = -unk; // ...this is what I came up with. It matches.
-        // i = -i; // This matches too. It might just work on any uninitialized.
+        u8 unk = -unk; // this can be any sort of negation
     }
-    // by the way, yDiff works for the if case too, but oddly not sprite.
 
     randomSomethingY = yDiff + (Random() % 10) - 5;
     randomSomethingX = -xDiff + (Random() % 10) - 5;

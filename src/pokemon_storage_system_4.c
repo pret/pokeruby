@@ -1972,7 +1972,7 @@ u8 sub_809C664(void)
         gotoBox = FALSE;
         retVal = 0;
 
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             if (--cursorPosition < 0)
                 cursorPosition = 6;
@@ -1981,7 +1981,7 @@ u8 sub_809C664(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        if (JOY_REPT(DPAD_DOWN))
         {
             if (++cursorPosition > 6)
                 cursorPosition = 0;
@@ -1990,7 +1990,7 @@ u8 sub_809C664(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & DPAD_LEFT && sBoxCursorPosition != 0)
+        if (JOY_REPT(DPAD_LEFT) && sBoxCursorPosition != 0)
         {
             retVal = 1;
             gPokemonStorageSystemPtr->unk_11e2 = sBoxCursorPosition;
@@ -1998,7 +1998,7 @@ u8 sub_809C664(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        if (JOY_REPT(DPAD_RIGHT))
         {
             if (sBoxCursorPosition == 0)
             {
@@ -2014,7 +2014,7 @@ u8 sub_809C664(void)
             break;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             if (sBoxCursorPosition == 6)
             {
@@ -2044,7 +2044,7 @@ u8 sub_809C664(void)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (gPokemonStorageSystemPtr->unk_0005 == 1)
                 return 16;
@@ -2060,7 +2060,7 @@ u8 sub_809C664(void)
             break;
         }
 
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_809CD88();
             return 0;
@@ -2087,7 +2087,7 @@ u8 sub_809C85C(void)
         gPokemonStorageSystemPtr->unk_11de = 0;
         gPokemonStorageSystemPtr->unk_11e3 = 0;
 
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             retVal = 1;
             cursorArea = 3;
@@ -2095,7 +2095,7 @@ u8 sub_809C85C(void)
             gPokemonStorageSystemPtr->unk_11e3 = 1;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPT(DPAD_DOWN))
         {
             retVal = 1;
             cursorArea = 0;
@@ -2116,17 +2116,17 @@ u8 sub_809C85C(void)
                 return 9;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sub_809A860(FALSE);
             sub_809CA8C();
             return 7;
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             return 16;
 
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_809CD88();
             return 0;
@@ -2159,7 +2159,7 @@ u8 sub_809C944(void)
         gPokemonStorageSystemPtr->unk_11de = 0;
         gPokemonStorageSystemPtr->unk_11e3 = 0;
 
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             retVal = 1;
             cursorArea = 0;
@@ -2172,7 +2172,7 @@ u8 sub_809C944(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & (DPAD_DOWN | START_BUTTON))
+        if (JOY_REPT(DPAD_DOWN | START_BUTTON))
         {
             retVal = 1;
             cursorArea = 2;
@@ -2181,7 +2181,7 @@ u8 sub_809C944(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        if (JOY_REPT(DPAD_LEFT))
         {
             retVal = 1;
             if (--cursorPosition < 0)
@@ -2192,7 +2192,7 @@ u8 sub_809C944(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        if (JOY_REPT(DPAD_RIGHT))
         {
             retVal = 1;
             if (++cursorPosition > 1)
@@ -2203,12 +2203,12 @@ u8 sub_809C944(void)
             break;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             return (cursorPosition == 0) ? 5 : 4;
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             return 16;
 
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_809CD88();
             return 0;
@@ -2458,20 +2458,20 @@ s16 sub_809CF30(void)
 
     do
     {
-        if (!(gMain.newKeys & A_BUTTON))
+        if (!(JOY_NEW(A_BUTTON)))
         {
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 textId++;
             }
 
-            if (gMain.newKeys & DPAD_UP)
+            if (JOY_NEW(DPAD_UP))
             {
                 PlaySE(SE_SELECT);
                 Menu_MoveCursor(-1);
             }
-            else if (gMain.newKeys & DPAD_DOWN)
+            else if (JOY_NEW(DPAD_DOWN))
             {
                 PlaySE(SE_SELECT);
                 Menu_MoveCursor(1);

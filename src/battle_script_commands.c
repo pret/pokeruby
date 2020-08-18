@@ -5342,7 +5342,7 @@ static void atk23_getexp(void)
             u16 calculatedExp;
             s32 viaSentIn;
 
-            for (viaSentIn = 0, i = 0; i < 6; i++)
+            for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                     continue;
@@ -5581,7 +5581,7 @@ static void atk24(void)
 
     if (gBattleControllerExecFlags == 0)
     {
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
@@ -5590,7 +5590,7 @@ static void atk24(void)
         if (HP_count == 0)
             gBattleOutcome |= B_OUTCOME_LOST;
 
-        for (HP_count = 0, i = 0; i < 6; i++)
+        for (HP_count = 0, i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
                 HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
@@ -6993,7 +6993,7 @@ static void atk4F_jumpifcantswitch(void)
                 to_cmp = r7;
             party = gPlayerParty;
         }
-        for (val = 0; val < 6; val++)
+        for (val = 0; val < PARTY_SIZE; val++)
         {
             if (GetMonData(&party[val], MON_DATA_HP) != 0
              && GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
@@ -8863,7 +8863,7 @@ static void atk61_drawpartystatussummary(void)
     else
         party = gEnemyParty;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == 0 || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
         {
@@ -10349,7 +10349,7 @@ static void atk8F_forcerandomswitch(void)
         else
         {
             valid = 0;
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
                  && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -12086,7 +12086,7 @@ static void atkAE_healpartystatus(void)
             }
         }
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityBit = GetMonData(&party[i], MON_DATA_ALT_ABILITY);
@@ -12575,7 +12575,7 @@ static void atkC4_trydobeatup(void)
     {
         u8 beforeLoop = gBattleCommunication[0];
 
-        for (;gBattleCommunication[0] < 6; ++gBattleCommunication[0])
+        for (;gBattleCommunication[0] < PARTY_SIZE; ++gBattleCommunication[0])
         {
             if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP)
              && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
@@ -12583,7 +12583,7 @@ static void atkC4_trydobeatup(void)
              && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
                 break;
         }
-        if (gBattleCommunication[0] < 6)
+        if (gBattleCommunication[0] < PARTY_SIZE)
         {
             gBattleTextBuff1[0] = 0xFD;
             gBattleTextBuff1[1] = 4;
@@ -13176,7 +13176,7 @@ static void atkE4_getsecretpowereffect(void)
 static void atkE5_pickup(void)
 {
     int i;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         u16 held_item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);

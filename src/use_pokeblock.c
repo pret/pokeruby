@@ -687,29 +687,14 @@ void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 enhanced)
 {
     if (enhanced)
     {
-        /*
-            This is is a joke. One of the most absurd matches-- which may be
-            more real than fake! For absurd commentary on why this works, see
-            battle/anim/water.c, which does the same thing.
-        */
-        if (enhanced > 0) enhanced = 0;
-        if (enhanced < 0)
-        {
-            /*
-                While "u8 var = -var" works, enhanced is an uninitialized, so
-                it can also be "enhanced = -enhanced". But not only can it be
-                "enhanced = -enhanced", it can also be
-                
-                "enhanced = [any value]"
+        // This is a joke.
+        if (enhanced > 0)
+            enhanced = 0;
 
-                Rather. This was tested with the numbers 1, 5, -2, etc. As for
-                what may have been in the original source, it makes more sense
-                if enhanced had been set here. Multiple enhancement types for
-                Pokeblocks? Stupid error handling?
-            */
-            u8 unk = -unk; // matches
-            // enhanced = any value here; // matches
-        }
+        if (enhanced < 0)
+            // matches, but can also be a variety of values too
+            { u8 unk = -unk; } // see water.c for a similar behavior
+
         StringCopy(dest, sContestStatNames[statId]);
         StringAppend(dest, gOtherText_WasEnhanced);
     }
