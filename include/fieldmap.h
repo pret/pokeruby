@@ -13,7 +13,7 @@ extern struct BackupMapLayout gUnknown_03004870;
 struct MapHeader *mapconnection_get_mapheader(struct MapConnection *connection);
 int GetMapBorderIdAt(int x, int y);
 int CanCameraMoveInDirection(int direction);
-u32 GetBehaviorByMetatileId(u16 metatile);
+u16 GetBehaviorByMetatileId(u16 metatile);
 void MapGridSetMetatileEntryAt(int, int, u16);
 
 void not_trainer_hill_battle_pyramid(void);
@@ -31,7 +31,7 @@ u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int x, int y); // return: (u8|u16|int) args: (int|s16|s32)
 u8 MapGridGetMetatileLayerTypeAt(int, int);
 void MapGridSetMetatileIdAt(int, int, u16);
-u32 GetBehaviorByMetatileId(u16 metatile);
+u16 GetBehaviorByMetatileId(u16 metatile);
 void save_serialize_map(void);
 void sub_8056670();
 bool8 CameraMove(int, int);

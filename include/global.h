@@ -22,12 +22,13 @@
 #endif
 
 // For debug menu translations.
-// DTR("こんにちは", "Hello") will expand to "Hello" with DEBUG_TRANSLATE,
+// DTR("こんにちは", "Hello") will expand to "Hello" with DEBUG_FIX,
 // or "こんにちは" if not.
 // The KANA macro will wrap Japanese text with encoding markers to
 // prevent mojibake while they are being translated.
 
-#if DEBUG_TRANSLATE
+// TODO: Support multiple languages.
+#if DEBUG_FIX
 #define DTR(japanese, english) _(english)
 #define KANA(txt) _("{JPN}" txt "{ENG}")
 #else

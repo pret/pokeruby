@@ -1626,32 +1626,33 @@ void sub_81193D4(struct Sprite *sprite)
     eRoulette->var38 = sprite;
 }
 
-#ifdef NONMATCHING
 void sub_811952C(struct Sprite *sprite)
 {
-    u8 i;
     u8 z;
     u16 o;
-    u8 h = 0; // r10 (sp+12)
-    u8 j = 5; // r9 (r9)
-    u8 p = 0; // sp+12 (sp+16)
-    u8 s[10] = {}; // sp+0 (sp+0)
-    u16 t = Random(); // sp+16 (r10)
+    u8 h = 0;
+    u8 j = 5;
+    u8 p = 0;
+    u8 i = 0;
+    u8 val;
+    u8 s[10] = {};
+    u16 rand = Random();
 
-    eRoulette->var7D   = 1;
+    eRoulette->var7D = 1;
     eRoulette->var03_5 = TRUE;
     eRoulette->var03_6 = FALSE;
-    eRoulette->var7E   = 255;
-    eRoulette->var88   = sprite->data[3];
-    eRoulette->var98   = 0.0f;
-    eRoulette->var8C   = gUnknown_083F8DF4[eRoulette->var04_0].var1C;
-    o = (eRoulette->var04_0 * 30 + 33) + (1 - eRoulette->var03_0) * 15;
+    eRoulette->var7E = 0xFF;
+    eRoulette->var88 = sprite->data[3];
+    eRoulette->var98 = 0.0f;
+    eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C;
+
+    o = (eRoulette->var04_0 * 30 + 33) + (0x1 - eRoulette->var03_0) * 15;
     for (i = 0; i < 4; i++)
     {
         if (o < sprite->data[3] && sprite->data[3] <= o + 90)
         {
-            sprite->data[0] = i << 1;
-            eRoulette->var03_0 = i & 1;
+            sprite->data[0] = i / 2;
+            eRoulette->var03_0 = i % 2;
             break;
         }
         if (i == 3)
@@ -1662,358 +1663,52 @@ void sub_811952C(struct Sprite *sprite)
         }
         o += 90;
     }
+
     if (eRoulette->var03_0)
     {
         if (sprite->data[0])
-        {
             PlayCry1(SPECIES_TAILLOW, -63);
-        }
         else
-        {
             PlayCry1(SPECIES_TAILLOW, 63);
-        }
     }
     else
     {
         PlayCry1(SPECIES_SHROOMISH, -63);
     }
-    i = 2;
+
+    val = 2;
     z = (eRoulette->var7F + 2) % 12;
+
     if (eRoulette->var03_0 == 1 && eRoulette->var04_0 == 1)
         j += 6;
     else
-        j += i;
-    for (; i < j; i++)
+        j += val;
+
+    for (i = val; i < j; i++)
     {
         if (!(eRoulette->var08 & gUnknown_083F8D90[z].var04))
         {
             s[h++] = i;
-            if (!p && (gUnknown_083F8D90[z].var04 & gUnknown_083F8C00[eRoulette->var1B[eRoulette->var1A_0]].var00))
-            {
+            if (p == 0 && (gUnknown_083F8D90[z].var04 & gUnknown_083F8C00[eRoulette->var1B[eRoulette->var1A_0]].var0C))
                 p = i;
-            }
         }
-        z = (z + 1) % 12;
+        z = (z + 1) % 0xC;
     }
+
     if ((eRoulette->var03_0 + 1) & eRoulette->var02)
     {
-        if (p && (t & 0xFF) < 192)
-        {
+        if (p && (rand & 0xFF) < 0xc0)
             sprite->data[7] = p;
-        }
         else
-        {
-            sprite->data[7] = s[t % h];
-        }
+            sprite->data[7] = s[rand % h];
     }
     else
     {
-        sprite->data[7] = s[t % h];
+        sprite->data[7] = s[rand % h];
     }
+
     sprite->callback = sub_8118CEC;
 }
-#else
-NAKED
-void sub_811952C(struct Sprite *sprite)
-{
-    asm_unified("push {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 20\n"
-                    "\tmov r8, r0\n"
-                    "\tmovs r0, 0\n"
-                    "\tmov r10, r0\n"
-                    "\tmovs r1, 5\n"
-                    "\tmov r9, r1\n"
-                    "\tmovs r2, 0\n"
-                    "\tstr r2, [sp, 12]\n"
-                    "\tmov r0, sp\n"
-                    "\tmovs r1, 0\n"
-                    "\tmovs r2, 10\n"
-                    "\tbl memset\n"
-                    "\tbl Random\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tstr r0, [sp, 16]\n"
-                    "\tldr r7, _08119610 @ =gSharedMem + 0x19000\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tadds r0, 125\n"
-                    "\tmovs r6, 1\n"
-                    "\tstrb r6, [r0]\n"
-                    "\tldrb r4, [r7, 3]\n"
-                    "\tmovs r0, 32\n"
-                    "\torrs r4, r0\n"
-                    "\tmovs r0, 65\n"
-                    "\tnegs r0, r0\n"
-                    "\tands r4, r0\n"
-                    "\tstrb r4, [r7, 3]\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tadds r1, 126\n"
-                    "\tmovs r0, 255\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tadds r5, r7, 0\n"
-                    "\tadds r5, 136\n"
-                    "\tmov r3, r8\n"
-                    "\tmovs r1, 52\n"
-                    "\tldrsh r0, [r3, r1]\n"
-                    "\tbl __floatsisf\n"
-                    "\tstr r0, [r5]\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tadds r1, 152\n"
-                    "\tldr r0, _08119614 @ =0\n"
-                    "\tstr r0, [r1]\n"
-                    "\tadds r3, r7, 0\n"
-                    "\tadds r3, 140\n"
-                    "\tldr r2, _08119618 @ =gUnknown_083F8DF4\n"
-                    "\tldrb r0, [r7, 4]\n"
-                    "\tlsls r0, 30\n"
-                    "\tlsrs r1, r0, 25\n"
-                    "\tadds r2, 28\n"
-                    "\tadds r1, r2\n"
-                    "\tldr r1, [r1]\n"
-                    "\tstr r1, [r3]\n"
-                    "\tlsrs r0, 30\n"
-                    "\tlsls r1, r0, 4\n"
-                    "\tsubs r1, r0\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r1, 33\n"
-                    "\tlsls r4, 27\n"
-                    "\tlsrs r4, 27\n"
-                    "\tsubs r6, r4\n"
-                    "\tlsls r0, r6, 4\n"
-                    "\tsubs r0, r6\n"
-                    "\tadds r1, r0\n"
-                    "\tlsls r1, 16\n"
-                    "\tlsrs r1, 16\n"
-                    "\tmov r5, r10\n"
-                    "\tmov r3, r8\n"
-                    "\tmovs r0, 52\n"
-                    "\tldrsh r2, [r3, r0]\n"
-                    "_081195C8:\n"
-                    "\tcmp r1, r2\n"
-                    "\tbge _081195D4\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tadds r0, 90\n"
-                    "\tcmp r2, r0\n"
-                    "\tble _08119638\n"
-                    "_081195D4:\n"
-                    "\tcmp r5, 3\n"
-                    "\tbeq _0811961C\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tadds r0, 90\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tadds r0, r5, 1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tcmp r5, 3\n"
-                    "\tbls _081195C8\n"
-                    "_081195EA:\n"
-                    "\tldr r0, _08119610 @ =gSharedMem + 0x19000\n"
-                    "\tldrb r1, [r0, 3]\n"
-                    "\tmovs r0, 31\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08119664\n"
-                    "\tmov r1, r8\n"
-                    "\tmovs r2, 46\n"
-                    "\tldrsh r0, [r1, r2]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08119658\n"
-                    "\tmovs r0, 152\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r1, 63\n"
-                    "\tnegs r1, r1\n"
-                    "\tbl PlayCry1\n"
-                    "\tb _08119670\n"
-                    "\t.align 2, 0\n"
-                    "_08119610: .4byte gSharedMem + 0x19000\n"
-                    "_08119614: .4byte 0\n"
-                    "_08119618: .4byte gUnknown_083F8DF4\n"
-                    "_0811961C:\n"
-                    "\tmovs r0, 1\n"
-                    "\tmov r3, r8\n"
-                    "\tstrh r0, [r3, 46]\n"
-                    "\tldr r2, _08119634 @ =gSharedMem + 0x19000\n"
-                    "\tldrb r1, [r2, 3]\n"
-                    "\tsubs r0, 33\n"
-                    "\tands r0, r1\n"
-                    "\tmovs r1, 1\n"
-                    "\torrs r0, r1\n"
-                    "\tstrb r0, [r2, 3]\n"
-                    "\tb _081195EA\n"
-                    "\t.align 2, 0\n"
-                    "_08119634: .4byte gSharedMem + 0x19000\n"
-                    "_08119638:\n"
-                    "\tlsrs r0, r5, 1\n"
-                    "\tmov r1, r8\n"
-                    "\tstrh r0, [r1, 46]\n"
-                    "\tldr r3, _08119654 @ =gSharedMem + 0x19000\n"
-                    "\tmovs r1, 1\n"
-                    "\tands r1, r5\n"
-                    "\tldrb r2, [r3, 3]\n"
-                    "\tmovs r0, 32\n"
-                    "\tnegs r0, r0\n"
-                    "\tands r0, r2\n"
-                    "\torrs r0, r1\n"
-                    "\tstrb r0, [r3, 3]\n"
-                    "\tb _081195EA\n"
-                    "\t.align 2, 0\n"
-                    "_08119654: .4byte gSharedMem + 0x19000\n"
-                    "_08119658:\n"
-                    "\tmovs r0, 152\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r1, 63\n"
-                    "\tbl PlayCry1\n"
-                    "\tb _08119670\n"
-                    "_08119664:\n"
-                    "\tmovs r0, 153\n"
-                    "\tlsls r0, 1\n"
-                    "\tmovs r1, 63\n"
-                    "\tnegs r1, r1\n"
-                    "\tbl PlayCry1\n"
-                    "_08119670:\n"
-                    "\tmovs r5, 2\n"
-                    "\tldr r4, _081196A0 @ =gSharedMem + 0x19000\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tadds r0, 127\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tadds r0, 2\n"
-                    "\tmovs r1, 12\n"
-                    "\tbl __modsi3\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r3, r0, 24\n"
-                    "\tldrb r1, [r4, 3]\n"
-                    "\tmovs r0, 31\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 1\n"
-                    "\tbne _081196A4\n"
-                    "\tldrb r1, [r4, 4]\n"
-                    "\tmovs r0, 3\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 1\n"
-                    "\tbne _081196A4\n"
-                    "\tmov r0, r9\n"
-                    "\tadds r0, 6\n"
-                    "\tb _081196A8\n"
-                    "\t.align 2, 0\n"
-                    "_081196A0: .4byte gSharedMem + 0x19000\n"
-                    "_081196A4:\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r0, r2, r5\n"
-                    "_081196A8:\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmov r9, r0\n"
-                    "\tcmp r5, r9\n"
-                    "\tbcs _0811970E\n"
-                    "\tldr r6, _08119734 @ =gSharedMem + 0x19000\n"
-                    "\tldr r7, _08119738 @ =gUnknown_083F8C00 + 12\n"
-                    "_081196B6:\n"
-                    "\tlsls r0, r3, 3\n"
-                    "\tldr r1, _0811973C @ =gUnknown_083F8D90 + 4\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r1, [r6, 8]\n"
-                    "\tldr r2, [r0]\n"
-                    "\tands r1, r2\n"
-                    "\tcmp r1, 0\n"
-                    "\tbne _081196F8\n"
-                    "\tmov r0, r10\n"
-                    "\tadds r1, r0, 1\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r1, 24\n"
-                    "\tmov r10, r1\n"
-                    "\tadd r0, sp\n"
-                    "\tstrb r5, [r0]\n"
-                    "\tldr r0, [sp, 12]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _081196F8\n"
-                    "\tldrb r0, [r6, 26]\n"
-                    "\tlsls r0, 28\n"
-                    "\tlsrs r0, 28\n"
-                    "\tldr r1, _08119740 @ =gSharedMem + 0x1901b\n"
-                    "\tadds r0, r1\n"
-                    "\tldrb r1, [r0]\n"
-                    "\tlsls r0, r1, 2\n"
-                    "\tadds r0, r1\n"
-                    "\tlsls r0, 2\n"
-                    "\tadds r0, r7\n"
-                    "\tldr r0, [r0]\n"
-                    "\tands r2, r0\n"
-                    "\tcmp r2, 0\n"
-                    "\tbeq _081196F8\n"
-                    "\tstr r5, [sp, 12]\n"
-                    "_081196F8:\n"
-                    "\tadds r0, r3, 1\n"
-                    "\tmovs r1, 12\n"
-                    "\tbl __modsi3\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r3, r0, 24\n"
-                    "\tadds r0, r5, 1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tcmp r5, r9\n"
-                    "\tbcc _081196B6\n"
-                    "_0811970E:\n"
-                    "\tldrb r0, [r4, 3]\n"
-                    "\tlsls r0, 27\n"
-                    "\tlsrs r0, 27\n"
-                    "\tadds r0, 1\n"
-                    "\tldrb r1, [r4, 2]\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08119756\n"
-                    "\tldr r2, [sp, 12]\n"
-                    "\tcmp r2, 0\n"
-                    "\tbeq _08119744\n"
-                    "\tmovs r0, 255\n"
-                    "\tldr r3, [sp, 16]\n"
-                    "\tands r0, r3\n"
-                    "\tcmp r0, 191\n"
-                    "\tbhi _08119744\n"
-                    "\tmov r0, r8\n"
-                    "\tstrh r2, [r0, 60]\n"
-                    "\tb _08119766\n"
-                    "\t.align 2, 0\n"
-                    "_08119734: .4byte gSharedMem + 0x19000\n"
-                    "_08119738: .4byte gUnknown_083F8C00 + 12\n"
-                    "_0811973C: .4byte gUnknown_083F8D90 + 4\n"
-                    "_08119740: .4byte gSharedMem + 0x1901b\n"
-                    "_08119744:\n"
-                    "\tldr r0, [sp, 16]\n"
-                    "\tmov r1, r10\n"
-                    "\tbl __modsi3\n"
-                    "\tadd r0, sp\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tmov r1, r8\n"
-                    "\tstrh r0, [r1, 60]\n"
-                    "\tb _08119766\n"
-                    "_08119756:\n"
-                    "\tldr r0, [sp, 16]\n"
-                    "\tmov r1, r10\n"
-                    "\tbl __modsi3\n"
-                    "\tadd r0, sp\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tmov r2, r8\n"
-                    "\tstrh r0, [r2, 60]\n"
-                    "_08119766:\n"
-                    "\tldr r3, _0811977C @ =sub_8118CEC\n"
-                    "\tmov r0, r8\n"
-                    "\tstr r3, [r0, 28]\n"
-                    "\tadd sp, 20\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_0811977C: .4byte sub_8118CEC");
-}
-#endif
 
 const u16 gUnknown_083FA61E[] = {
     BLDALPHA_BLEND( 7, 9),

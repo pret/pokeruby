@@ -27,12 +27,11 @@ static void IntrDummy(void);
 const u8 gGameVersion = GAME_VERSION;
 const u8 gGameLanguage = GAME_LANGUAGE;
 
-// The debug menu expects this exact format. With the English build string, it
-// will overflow on the title debug menu, outputting '9999ィ'.
-#if defined(GERMAN) || DEBUG
-const char BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
-#elif defined(ENGLISH)
-const char BuildDateTime[] = "2002 10 15 20:34";
+// International versions of the debug menu use a different format.
+#if defined(ENGLISH)
+const u8 BuildDateTime[] = "2002 10 15 20:34";
+#elif defined(GERMAN)
+const u8 BuildDateTime[] = "$Name: debug-Euro-2003-05-09-A $";
 #endif
 
 const IntrFunc gIntrTableTemplate[] =

@@ -38,8 +38,8 @@ GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
 JSONPROC  := tools/jsonproc/jsonproc$(EXE)
 
-ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym DEBUG_TRANSLATE=$(DEBUG_TRANSLATE) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym MODERN=$(MODERN)
-CPPFLAGS := -iquote include -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -DDEBUG_TRANSLATE=$(DEBUG_TRANSLATE) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
+ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym DEBUG_FIX=$(DEBUG_FIX) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym MODERN=$(MODERN)
+CPPFLAGS := -iquote include -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D=DEBUG_FIX$(DEBUG_FIX) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
 ifeq ($(MODERN),0)
 CPPFLAGS += -I tools/agbcc/include -nostdinc -undef
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -105,8 +105,7 @@ endif
 
 #### Main Rules ####
 
-ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug
-ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug ruby_en_debug
+ALL_BUILDS := ruby ruby_debug ruby_rev1 ruby_rev2 sapphire sapphire_debug sapphire_rev1 sapphire_rev2 ruby_de ruby_de_debug sapphire_de sapphire_de_debug
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 # Available targets
@@ -217,39 +216,45 @@ $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
 
 # "friendly" target names for convenience sake
-ruby:          ; @$(MAKE) GAME_VERSION=RUBY
-ruby_rev1:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1
-ruby_rev2:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2
-sapphire:      ; @$(MAKE) GAME_VERSION=SAPPHIRE
-sapphire_rev1: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1
-sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
-ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
-sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
-ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
+ruby:              ; @$(MAKE) GAME_VERSION=RUBY
+ruby_debug:        ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1
+ruby_rev1:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1
+ruby_rev2:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2
+sapphire:          ; @$(MAKE) GAME_VERSION=SAPPHIRE
+sapphire_debug:    ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1
+sapphire_rev1:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1
+sapphire_rev2:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
+ruby_de:           ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
+ruby_de_debug:     ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
+sapphire_de:       ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
+sapphire_de_debug: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN DEBUG=1
 
-modern:               ; @$(MAKE) GAME_VERSION=RUBY MODERN=1
-ruby_modern:          ; @$(MAKE) GAME_VERSION=RUBY MODERN=1
-ruby_rev1_modern:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 MODERN=1
-ruby_rev2_modern:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 MODERN=1
-sapphire_modern:      ; @$(MAKE) GAME_VERSION=SAPPHIRE MODERN=1
-sapphire_rev1_modern: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 MODERN=1
-sapphire_rev2_modern: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 MODERN=1
-ruby_de_modern:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN MODERN=1
-sapphire_de_modern:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN MODERN=1
-ruby_de_debug_modern: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1 MODERN=1
+modern:                   ; @$(MAKE) GAME_VERSION=RUBY MODERN=1
+ruby_modern:              ; @$(MAKE) GAME_VERSION=RUBY MODERN=1
+ruby_debug_modern:        ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 MODERN=1
+ruby_rev1_modern:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 MODERN=1
+ruby_rev2_modern:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 MODERN=1
+sapphire_modern:          ; @$(MAKE) GAME_VERSION=SAPPHIRE MODERN=1
+sappphire_debug_modern:   ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1 MODERN=1
+sapphire_rev1_modern:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 MODERN=1
+sapphire_rev2_modern:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 MODERN=1
+ruby_de_modern:           ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN MODERN=1
+ruby_de_debug_modern:     ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1 MODERN=1
+sapphire_de_modern:       ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN MODERN=1
+sapphire_de_debug_modern: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN DEBUG=1 MODERN=1
 
-ruby_en_debug: ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 DEBUG_TRANSLATE=1
-
-compare_ruby:          ; @$(MAKE) GAME_VERSION=RUBY COMPARE=1
-compare_ruby_rev1:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 COMPARE=1
-compare_ruby_rev2:     ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 COMPARE=1
-compare_sapphire:      ; @$(MAKE) GAME_VERSION=SAPPHIRE COMPARE=1
-compare_sapphire_rev1: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 COMPARE=1
-compare_sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 COMPARE=1
-compare_ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN COMPARE=1
-compare_sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN COMPARE=1
-compare_ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1 COMPARE=1
-compare_ruby_en_debug: ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 DEBUG_TRANSLATE=1 COMPARE=1
+compare_ruby:              ; @$(MAKE) GAME_VERSION=RUBY COMPARE=1
+compare_ruby_debug:        ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 COMPARE=1
+compare_ruby_rev1:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 COMPARE=1
+compare_ruby_rev2:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 COMPARE=1
+compare_sapphire:          ; @$(MAKE) GAME_VERSION=SAPPHIRE COMPARE=1
+compare_sapphire_debug:    ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1 COMPARE=1
+compare_sapphire_rev1:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 COMPARE=1
+compare_sapphire_rev2:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 COMPARE=1
+compare_ruby_de:           ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN COMPARE=1
+compare_ruby_de_debug:     ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1 COMPARE=1
+compare_sapphire_de:       ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN COMPARE=1
+compare_sapphire_de_debug: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN DEBUG=1 COMPARE=1
 
 #### Graphics Rules ####
 

@@ -245,12 +245,21 @@ static const struct MenuAction sMenuActions_TopMenu[] = {
     {sString_ControlWORK, ControlWorks},
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 sString_ContestMenuTitle[] = _("コンテスト");
+
+static const u8 sString_Contest_PokemonNo[] = _("ポケモンナンバー");
+static const u8 sString_Contest_Personality[] = _("こせいらんすう");
+static const u8 sString_Contest_Type[] = _("コンテストしゅるい");
+static const u8 sString_Contest_PokeArt[] = _("ひょうじ");
+#else
 static const u8 sString_ContestMenuTitle[] = _("Contest");
 
 static const u8 sString_Contest_PokemonNo[] = _("Pokémon No.");
 static const u8 sString_Contest_Personality[] = _("ID rnd. digit");
 static const u8 sString_Contest_Type[] = _("Contest Type");
 static const u8 sString_Contest_PokeArt[] = _("Poké Art");
+#endif
 
 static const struct MenuAction sMenuActions_ContestPicTest[] = {
     {sString_Contest_PokemonNo, DummyMenuAction},
@@ -259,12 +268,21 @@ static const struct MenuAction sMenuActions_ContestPicTest[] = {
     {sString_Contest_PokeArt, ContestGraphics_Show}
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 sString_Contest_ArtMuseumTitle[] = _("びじゅつかん");
+
+static const u8 sString_Contest_ArtMuseum_PokemonNo[] = _("ポケモンナンバー");
+static const u8 sString_Contest_ArtMuseum_Personality[] = _("こせいらんすう");
+static const u8 sString_Contest_ArtMuseum_Type[] = _("タイトルしゅるい");
+static const u8 sString_Contest_ArtMuseum_PokeArt[] = _("ひょうじ");
+#else
 static const u8 sString_Contest_ArtMuseumTitle[] = _("Art Mus.");
 
 static const u8 sString_Contest_ArtMuseum_PokemonNo[] = _("Pokémon No.");
 static const u8 sString_Contest_ArtMuseum_Personality[] = _("ID rnd. digit");
 static const u8 sString_Contest_ArtMuseum_Type[] = _("Title Type");
 static const u8 sString_Contest_ArtMuseum_PokeArt[] = _("Poké Art");
+#endif
 
 static const struct MenuAction sMenuActions_ArtMuseumPicTest[] = {
     {sString_Contest_ArtMuseum_PokemonNo, DummyMenuAction},
@@ -273,12 +291,21 @@ static const struct MenuAction sMenuActions_ArtMuseumPicTest[] = {
     {sString_Contest_ArtMuseum_PokeArt, MuseumGraphics_Show}
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 sString_Contest_PreviewTitle[] = _("プレビュー");
+
+static const u8 sString_Contest_Preview_PokemonNo[] = _("ポケモンナンバー");
+static const u8 sString_Contest_Preview_Personality[] = _("こせいらんすう");
+static const u8 sString_Contest_Preview_Type[] = _("しゅるい");
+static const u8 sString_Contest_Preview_PokeArt[] = _("ひょうじ");
+#else
 static const u8 sString_Contest_PreviewTitle[] = _("Preview");
 
 static const u8 sString_Contest_Preview_PokemonNo[] = _("Pokémon No.");
 static const u8 sString_Contest_Preview_Personality[] = _("ID rnd. digit");
 static const u8 sString_Contest_Preview_Type[] = _("Type");
 static const u8 sString_Contest_Preview_PokeArt[] = _("Poké Art");
+#endif
 
 static const struct MenuAction sMenuActions_PreviewPicTest[] = {
     {sString_Contest_Preview_PokemonNo, DummyMenuAction},
@@ -287,10 +314,19 @@ static const struct MenuAction sMenuActions_PreviewPicTest[] = {
     {sString_Contest_Preview_PokeArt, PreviewGraphics_Show}
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 sString_TrickRelated[] = _("カラクリかんれん");
+#else
 static const u8 sString_TrickRelated[] = _("Trick related");
+#endif
 
 static const u8 sString_TrickRelated_Level[] = _("Level");
+
+#if (ENGLISH && REVISION == 0)
+static const u8 sString_TrickRelated_TrickMaster[] = _("MASTER");
+#else
 static const u8 sString_TrickRelated_TrickMaster[] = _("Trick Master");
+#endif
 
 static const struct MenuAction sMenuActions_TrickRelated[] = {
     {sString_TrickRelated_Level, TrickRelated_Level_InitSubmenu},
@@ -1841,6 +1877,17 @@ static const u16 gUnknown_Debug_083C478E[][9] = {
     {VAR_TEMP_9, VAR_TEMP_A, VAR_TEMP_B, VAR_TEMP_C, VAR_TEMP_D, VAR_TEMP_E, VAR_TEMP_F}
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 gUnknown_Debug_083C47B2[] = _("レベル");
+static const u8 gUnknown_Debug_083C47B8[] = _("シーン1");
+static const u8 gUnknown_Debug_083C47BF[] = _("シーン2");
+static const u8 gUnknown_Debug_083C47C6[] = _("シーン3");
+static const u8 gUnknown_Debug_083C47CD[] = _("シーン4");
+static const u8 gUnknown_Debug_083C47D4[] = _("シーン5");
+static const u8 gUnknown_Debug_083C47DB[] = _("シーン6");
+static const u8 gUnknown_Debug_083C47E2[] = _("シーン7");
+static const u8 gUnknown_Debug_083C47E9[] = _("シーン8");
+#else
 static const u8 gUnknown_Debug_083C47B2[] = _("Level");
 static const u8 gUnknown_Debug_083C47B8[] = _("Scene1");
 static const u8 gUnknown_Debug_083C47BF[] = _("Scene2");
@@ -1850,6 +1897,7 @@ static const u8 gUnknown_Debug_083C47D4[] = _("Scene5");
 static const u8 gUnknown_Debug_083C47DB[] = _("Scene6");
 static const u8 gUnknown_Debug_083C47E2[] = _("Scene7");
 static const u8 gUnknown_Debug_083C47E9[] = _("Scene8");
+#endif
 
 static const struct MenuAction gUnknown_Debug_083C47F0[] = {
     {gUnknown_Debug_083C47B8, DummyMenuAction},
@@ -1862,7 +1910,11 @@ static const struct MenuAction gUnknown_Debug_083C47F0[] = {
     {gUnknown_Debug_083C47E9, DummyMenuAction}
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 gUnknown_Debug_083C4830[] = _("カラクリだいおう");
+#else
 static const u8 gUnknown_Debug_083C4830[] = _("Trick Master");
+#endif
 
 static const u8 gUnknown_Debug_083C483D[] = _("Hidden MASTER");
 static const u8 gUnknown_Debug_083C484B[] = _("Inside the HOUSE");
@@ -1878,8 +1930,13 @@ static const struct MenuAction gUnknown_Debug_083C4888[] = {
     {gUnknown_Debug_083C4876, DummyMenuAction}
 };
 
+#if (ENGLISH && REVISION == 0)
+static const u8 sDummyNickname[] = _("ポケモンめい");
+static const u8 sDummyTrainerName[] = _("ブリーダーめい");
+#else
 static const u8 sDummyNickname[] = _("PMNICKNAME");
 static const u8 sDummyTrainerName[] = _("BREEDER");
+#endif
 
 bool8 InitTomomichiDebugWindow(void)
 {

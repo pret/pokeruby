@@ -5342,7 +5342,7 @@ static void atk23_getexp(void)
             u16 calculatedExp;
             s32 viaSentIn;
 
-            for (viaSentIn = 0, i = 0; i < 6; i++)
+            for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                     continue;
@@ -5572,288 +5572,68 @@ static void atk23_getexp(void)
     }
 }
 
-#ifdef NONMATCHING
 static void atk24(void)
 {
     u16 HP_count = 0;
-    int i;
-    if (gBattleControllerExecFlags) {return;}
+    s32 i;
+    s32 found1;
+    s32 found2;
 
-    for (i = 0; i < 6; i++)
+    if (gBattleControllerExecFlags == 0)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-            HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
-    }
-
-    if (HP_count == 0)
-        gBattleOutcome |= B_OUTCOME_LOST;
-
-    for (HP_count = 0, i = 0; i < 6; i++)
-    {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
-            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
-    }
-
-    if (!HP_count)
-        gBattleOutcome |= B_OUTCOME_WON;
-
-    if (!gBattleOutcome && (gBattleTypeFlags & BATTLE_TYPE_LINK))
-    {
-        register int found1 asm("r2");
-        register int found2 asm("r4");
-
-        //I can't for the love of god decompile that part
-
-        for (found1 = 0, i = 0; i < gBattlersCount; i += 2)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
-                found1++;
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
         }
 
-        for (found2 = 0, i = 1; i < gBattlersCount; i += 2)
+        if (HP_count == 0)
+            gBattleOutcome |= B_OUTCOME_LOST;
+
+        for (HP_count = 0, i = 0; i < PARTY_SIZE; i++)
         {
-            if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
-                found2++;
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
+                HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
         }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        if (HP_count == 0)
+            gBattleOutcome |= B_OUTCOME_WON;
+
+        if (!gBattleOutcome && (gBattleTypeFlags & BATTLE_TYPE_LINK))
         {
-            if (found2 + found1 > 1)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+            for (found1 = 0, i = 0; i < gBattlersCount; i += 2)
+            {
+                if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
+                    found1++;
+            }
+
+            for (found2 = 0, i = 1; i < gBattlersCount; i += 2)
+            {
+                if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
+                    found2++;
+            }
+
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            {
+                if (found2 + found1 > 1)
+                    gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                else
+                    gBattlescriptCurrInstr += 5;
+            }
             else
-                gBattlescriptCurrInstr += 5;
+            {
+                if (found2 != 0 && found1 != 0)
+                    gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                else
+                    gBattlescriptCurrInstr += 5;
+            }
         }
         else
         {
-            if (found2 != 0 && found1 != 0)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-            else
-                gBattlescriptCurrInstr += 5;
+            gBattlescriptCurrInstr += 5;
         }
     }
-    else
-        gBattlescriptCurrInstr += 5;
-
 }
-#else
-NAKED
-static void atk24(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    movs r6, 0\n\
-    ldr r0, _08020AF0 @ =gBattleControllerExecFlags\n\
-    ldr r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _080209C6\n\
-    b _08020B46\n\
-_080209C6:\n\
-    movs r5, 0\n\
-_080209C8:\n\
-    movs r0, 0x64\n\
-    adds r1, r5, 0\n\
-    muls r1, r0\n\
-    ldr r0, _08020AF4 @ =gPlayerParty\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _080209F8\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _080209F8\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    adds r0, r6, r0\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-_080209F8:\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x5\n\
-    ble _080209C8\n\
-    cmp r6, 0\n\
-    bne _08020A0C\n\
-    ldr r0, _08020AF8 @ =gBattleOutcome\n\
-    ldrb r1, [r0]\n\
-    movs r2, 0x2\n\
-    orrs r1, r2\n\
-    strb r1, [r0]\n\
-_08020A0C:\n\
-    movs r6, 0\n\
-    movs r5, 0\n\
-_08020A10:\n\
-    movs r0, 0x64\n\
-    adds r1, r5, 0\n\
-    muls r1, r0\n\
-    ldr r0, _08020AFC @ =gEnemyParty\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08020A40\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _08020A40\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    adds r0, r6, r0\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-_08020A40:\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x5\n\
-    ble _08020A10\n\
-    ldr r2, _08020AF8 @ =gBattleOutcome\n\
-    cmp r6, 0\n\
-    bne _08020A54\n\
-    ldrb r0, [r2]\n\
-    movs r1, 0x1\n\
-    orrs r0, r1\n\
-    strb r0, [r2]\n\
-_08020A54:\n\
-    ldrb r0, [r2]\n\
-    cmp r0, 0\n\
-    bne _08020B3E\n\
-    ldr r2, _08020B00 @ =gBattleTypeFlags\n\
-    ldrh r1, [r2]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    mov r8, r2\n\
-    cmp r0, 0\n\
-    beq _08020B3E\n\
-    movs r2, 0\n\
-    movs r5, 0\n\
-    ldr r0, _08020B04 @ =gBattlersCount\n\
-    ldrb r3, [r0]\n\
-    mov r12, r0\n\
-    ldr r7, _08020B08 @ =gBattlescriptCurrInstr\n\
-    cmp r2, r3\n\
-    bge _08020AA0\n\
-    ldr r0, _08020B0C @ =gHitMarker\n\
-    movs r1, 0x80\n\
-    lsls r1, 21\n\
-    ldr r6, [r0]\n\
-    adds r4, r3, 0\n\
-    ldr r3, _08020B10 @ =gSpecialStatuses\n\
-_08020A84:\n\
-    adds r0, r1, 0\n\
-    lsls r0, r5\n\
-    ands r0, r6\n\
-    cmp r0, 0\n\
-    beq _08020A98\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 25\n\
-    cmp r0, 0\n\
-    blt _08020A98\n\
-    adds r2, 0x1\n\
-_08020A98:\n\
-    adds r3, 0x28\n\
-    adds r5, 0x2\n\
-    cmp r5, r4\n\
-    blt _08020A84\n\
-_08020AA0:\n\
-    movs r4, 0\n\
-    movs r5, 0x1\n\
-    mov r0, r12\n\
-    ldrb r3, [r0]\n\
-    cmp r5, r3\n\
-    bge _08020ADA\n\
-    ldr r0, _08020B0C @ =gHitMarker\n\
-    movs r1, 0x80\n\
-    lsls r1, 21\n\
-    mov r12, r1\n\
-    ldr r1, [r0]\n\
-    ldr r0, _08020B10 @ =gSpecialStatuses\n\
-    adds r6, r3, 0\n\
-    adds r3, r0, 0\n\
-    adds r3, 0x14\n\
-_08020ABE:\n\
-    mov r0, r12\n\
-    lsls r0, r5\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08020AD2\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 25\n\
-    cmp r0, 0\n\
-    blt _08020AD2\n\
-    adds r4, 0x1\n\
-_08020AD2:\n\
-    adds r3, 0x28\n\
-    adds r5, 0x2\n\
-    cmp r5, r6\n\
-    blt _08020ABE\n\
-_08020ADA:\n\
-    mov r0, r8\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08020B14\n\
-    adds r0, r4, r2\n\
-    cmp r0, 0x1\n\
-    bgt _08020B1C\n\
-    b _08020B36\n\
-    .align 2, 0\n\
-_08020AF0: .4byte gBattleControllerExecFlags\n\
-_08020AF4: .4byte gPlayerParty\n\
-_08020AF8: .4byte gBattleOutcome\n\
-_08020AFC: .4byte gEnemyParty\n\
-_08020B00: .4byte gBattleTypeFlags\n\
-_08020B04: .4byte gBattlersCount\n\
-_08020B08: .4byte gBattlescriptCurrInstr\n\
-_08020B0C: .4byte gHitMarker\n\
-_08020B10: .4byte gSpecialStatuses\n\
-_08020B14:\n\
-    cmp r4, 0\n\
-    beq _08020B36\n\
-    cmp r2, 0\n\
-    beq _08020B36\n\
-_08020B1C:\n\
-    ldr r2, [r7]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 24\n\
-    adds r1, r0\n\
-    str r1, [r7]\n\
-    b _08020B46\n\
-_08020B36:\n\
-    ldr r0, [r7]\n\
-    adds r0, 0x5\n\
-    str r0, [r7]\n\
-    b _08020B46\n\
-_08020B3E:\n\
-    ldr r1, _08020B50 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x5\n\
-    str r0, [r1]\n\
-_08020B46:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08020B50: .4byte gBattlescriptCurrInstr\n\
-        .syntax divided\n");
-}
-#endif // NONMATCHING
 
 static void MoveValuesCleanUp(void)
 {
@@ -7213,7 +6993,7 @@ static void atk4F_jumpifcantswitch(void)
                 to_cmp = r7;
             party = gPlayerParty;
         }
-        for (val = 0; val < 6; val++)
+        for (val = 0; val < PARTY_SIZE; val++)
         {
             if (GetMonData(&party[val], MON_DATA_HP) != 0
              && GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
@@ -9083,7 +8863,7 @@ static void atk61_drawpartystatussummary(void)
     else
         party = gEnemyParty;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == 0 || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
         {
@@ -10569,7 +10349,7 @@ static void atk8F_forcerandomswitch(void)
         else
         {
             valid = 0;
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
                  && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -11607,107 +11387,34 @@ static void atk9E_metronome(void)
 	.word	gBattlerTarget");
 }
 #else
-#ifdef NONMATCHING
 static void atk9E_metronome(void)
 {
-    // sMovesForbiddenToCopy
-    int i;
-    do
+    while (1)
     {
-        while ((gCurrentMove = (Random() & 0x1FF) + 1) > 0x162);
-        for (i = 0; sMovesForbiddenToCopy[i] != gCurrentMove && sMovesForbiddenToCopy[i] != 0xFFFF; i++);
-    } while (sMovesForbiddenToCopy[i] != 0xFFFF);
+        s32 i;
 
-    gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-    gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
-    gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
+        gCurrentMove = (Random() & 0x1FF) + 1;
+        if (gCurrentMove >= 355)
+            continue;
+        for (i = 0; i < MAX_MON_MOVES; ++i); // redundant
+        i = -1;
+        while (1)
+        {
+            ++i;
+            if (sMovesForbiddenToCopy[i] == gCurrentMove)
+                break;
+            if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
+                break;
+        }
+        if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
+        {
+            gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+            gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+            gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
+            return;
+        }
+    }
 }
-
-#else
-NAKED
-static void atk9E_metronome(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r7, _08027938 @ =gCurrentMove\n\
-    movs r6, 0xB1\n\
-    lsls r6, 1\n\
-    ldr r5, _0802793C @ =sMovesForbiddenToCopy\n\
-    ldr r0, _08027940 @ =gBattlescriptCurrInstr\n\
-    mov r8, r0\n\
-_080278CA:\n\
-    bl Random\n\
-    ldr r2, _08027944 @ =0x000001ff\n\
-    adds r1, r2, 0\n\
-    ands r0, r1\n\
-    adds r0, 0x1\n\
-    strh r0, [r7]\n\
-    cmp r0, r6\n\
-    bhi _080278CA\n\
-    movs r0, 0x3\n\
-_080278DE:\n\
-    subs r0, 0x1\n\
-    cmp r0, 0\n\
-    bge _080278DE\n\
-    ldr r4, _08027938 @ =gCurrentMove\n\
-    ldrh r2, [r4]\n\
-    ldr r3, _08027948 @ =0x0000ffff\n\
-    subs r0, r5, 0x2\n\
-_080278EC:\n\
-    adds r0, 0x2\n\
-    ldrh r1, [r0]\n\
-    cmp r1, r2\n\
-    beq _080278F8\n\
-    cmp r1, r3\n\
-    bne _080278EC\n\
-_080278F8:\n\
-    ldr r0, _08027948 @ =0x0000ffff\n\
-    cmp r1, r0\n\
-    bne _080278CA\n\
-    ldr r2, _0802794C @ =gHitMarker\n\
-    ldr r0, [r2]\n\
-    ldr r1, _08027950 @ =0xfffffbff\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-    ldr r3, _08027954 @ =gBattleScriptsForMoveEffects\n\
-    ldr r2, _08027958 @ =gBattleMoves\n\
-    ldrh r1, [r4]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    ldr r0, [r0]\n\
-    mov r1, r8\n\
-    str r0, [r1]\n\
-    ldrh r0, [r4]\n\
-    movs r1, 0\n\
-    bl GetMoveTarget\n\
-    ldr r1, _0802795C @ =gBattlerTarget\n\
-    strb r0, [r1]\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08027938: .4byte gCurrentMove\n\
-_0802793C: .4byte sMovesForbiddenToCopy\n\
-_08027940: .4byte gBattlescriptCurrInstr\n\
-_08027944: .4byte 0x000001ff\n\
-_08027948: .4byte 0x0000ffff\n\
-_0802794C: .4byte gHitMarker\n\
-_08027950: .4byte 0xfffffbff\n\
-_08027954: .4byte gBattleScriptsForMoveEffects\n\
-_08027958: .4byte gBattleMoves\n\
-_0802795C: .4byte gBattlerTarget\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
 #endif
 
 static void atk9F_dmgtolevel(void)
@@ -12379,7 +12086,7 @@ static void atkAE_healpartystatus(void)
             }
         }
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityBit = GetMonData(&party[i], MON_DATA_ALT_ABILITY);
@@ -12852,27 +12559,31 @@ static void atkC3_trysetfutureattack(void)
     }
 }
 
-#ifdef NONMATCHING
 static void atkC4_trydobeatup(void)
 {
-    register struct Pokemon* party asm("r7");
-    if (GetBattlerSide(gBattlerAttacker) == 0)
+    struct Pokemon *party;
+
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
-
     if (gBattleMons[gBattlerTarget].hp == 0)
+    {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
     else
     {
-        while (gBattleCommunication[0] < 6)
+        u8 beforeLoop = gBattleCommunication[0];
+
+        for (;gBattleCommunication[0] < PARTY_SIZE; ++gBattleCommunication[0])
         {
-            if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP) && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
-                && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_EGG && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
-                    break;
-            gBattleCommunication[0]++;
+            if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP)
+             && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
+             && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_EGG
+             && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
+                break;
         }
-        if (gBattleCommunication[0] < 6)
+        if (gBattleCommunication[0] < PARTY_SIZE)
         {
             gBattleTextBuff1[0] = 0xFD;
             gBattleTextBuff1[1] = 4;
@@ -12888,269 +12599,14 @@ static void atkC4_trydobeatup(void)
             gBattleMoveDamage = (gBattleMoveDamage / 50) + 2;
             if (gProtectStructs[gBattlerAttacker].helpingHand)
                 gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
-
-            gBattleCommunication[0]++;
+            ++gBattleCommunication[0];
         }
-        else if (gBattleCommunication[0] != 0)
+        else if (beforeLoop != 0)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
     }
 }
-#else
-NAKED
-static void atkC4_trydobeatup(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    ldr r0, _08029A8C @ =gBattlerAttacker\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    ldr r7, _08029A90 @ =gEnemyParty\n\
-    cmp r0, 0\n\
-    bne _08029A62\n\
-    ldr r7, _08029A94 @ =gPlayerParty\n\
-_08029A62:\n\
-    ldr r2, _08029A98 @ =gBattleMons\n\
-    ldr r0, _08029A9C @ =gBattlerTarget\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    bne _08029AA4\n\
-    ldr r3, _08029AA0 @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    b _08029C40\n\
-    .align 2, 0\n\
-_08029A8C: .4byte gBattlerAttacker\n\
-_08029A90: .4byte gEnemyParty\n\
-_08029A94: .4byte gPlayerParty\n\
-_08029A98: .4byte gBattleMons\n\
-_08029A9C: .4byte gBattlerTarget\n\
-_08029AA0: .4byte gBattlescriptCurrInstr\n\
-_08029AA4:\n\
-    ldr r6, _08029BE0 @ =gBattleCommunication\n\
-    ldrb r0, [r6]\n\
-    mov r8, r0\n\
-    cmp r0, 0x5\n\
-    bls _08029AB0\n\
-    b _08029C0C\n\
-_08029AB0:\n\
-    adds r4, r6, 0\n\
-    movs r5, 0x64\n\
-_08029AB4:\n\
-    ldrb r0, [r4]\n\
-    muls r0, r5\n\
-    adds r0, r7, r0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08029AF8\n\
-    ldrb r0, [r6]\n\
-    muls r0, r5\n\
-    adds r0, r7, r0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08029AF8\n\
-    ldrb r0, [r4]\n\
-    muls r0, r5\n\
-    adds r0, r7, r0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    movs r1, 0xCE\n\
-    lsls r1, 1\n\
-    cmp r0, r1\n\
-    beq _08029AF8\n\
-    ldrb r0, [r4]\n\
-    muls r0, r5\n\
-    adds r0, r7, r0\n\
-    movs r1, 0x37\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08029B08\n\
-_08029AF8:\n\
-    ldrb r0, [r4]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4]\n\
-    adds r6, r4, 0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x5\n\
-    bls _08029AB4\n\
-_08029B08:\n\
-    ldr r1, _08029BE0 @ =gBattleCommunication\n\
-    mov r9, r1\n\
-    ldrb r2, [r1]\n\
-    cmp r2, 0x5\n\
-    bhi _08029C0C\n\
-    ldr r1, _08029BE4 @ =gBattleTextBuff1\n\
-    movs r0, 0xFD\n\
-    strb r0, [r1]\n\
-    movs r0, 0x4\n\
-    strb r0, [r1, 0x1]\n\
-    ldr r6, _08029BE8 @ =gBattlerAttacker\n\
-    ldrb r0, [r6]\n\
-    strb r0, [r1, 0x2]\n\
-    strb r2, [r1, 0x3]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r1, 0x4]\n\
-    ldr r1, _08029BEC @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x9\n\
-    str r0, [r1]\n\
-    ldr r2, _08029BF0 @ =gBattleMoveDamage\n\
-    mov r8, r2\n\
-    ldr r5, _08029BF4 @ =gBaseStats\n\
-    mov r1, r9\n\
-    ldrb r0, [r1]\n\
-    movs r4, 0x64\n\
-    muls r0, r4\n\
-    adds r0, r7, r0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r5\n\
-    ldrb r3, [r1, 0x1]\n\
-    mov r2, r8\n\
-    str r3, [r2]\n\
-    ldr r2, _08029BF8 @ =gBattleMoves\n\
-    ldr r0, _08029BFC @ =gCurrentMove\n\
-    ldrh r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x1]\n\
-    muls r0, r3\n\
-    mov r1, r8\n\
-    str r0, [r1]\n\
-    mov r2, r9\n\
-    ldrb r0, [r2]\n\
-    muls r0, r4\n\
-    adds r0, r7, r0\n\
-    movs r1, 0x38\n\
-    bl GetMonData\n\
-    lsls r0, 1\n\
-    movs r1, 0x5\n\
-    bl __udivsi3\n\
-    adds r0, 0x2\n\
-    mov r2, r8\n\
-    ldr r1, [r2]\n\
-    muls r0, r1\n\
-    str r0, [r2]\n\
-    ldr r3, _08029C00 @ =gBattleMons\n\
-    ldr r1, _08029C04 @ =gBattlerTarget\n\
-    ldrb r2, [r1]\n\
-    movs r1, 0x58\n\
-    muls r1, r2\n\
-    adds r1, r3\n\
-    ldrh r2, [r1]\n\
-    lsls r1, r2, 3\n\
-    subs r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r5\n\
-    ldrb r1, [r1, 0x2]\n\
-    bl __divsi3\n\
-    mov r1, r8\n\
-    str r0, [r1]\n\
-    movs r1, 0x32\n\
-    bl __divsi3\n\
-    adds r2, r0, 0x2\n\
-    mov r0, r8\n\
-    str r2, [r0]\n\
-    ldr r1, _08029C08 @ =gProtectStructs\n\
-    ldrb r0, [r6]\n\
-    lsls r0, 4\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 28\n\
-    cmp r0, 0\n\
-    bge _08029BD4\n\
-    lsls r0, r2, 4\n\
-    subs r0, r2\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    mov r1, r8\n\
-    str r0, [r1]\n\
-_08029BD4:\n\
-    mov r2, r9\n\
-    ldrb r0, [r2]\n\
-    adds r0, 0x1\n\
-    strb r0, [r2]\n\
-    b _08029C46\n\
-    .align 2, 0\n\
-_08029BE0: .4byte gBattleCommunication\n\
-_08029BE4: .4byte gBattleTextBuff1\n\
-_08029BE8: .4byte gBattlerAttacker\n\
-_08029BEC: .4byte gBattlescriptCurrInstr\n\
-_08029BF0: .4byte gBattleMoveDamage\n\
-_08029BF4: .4byte gBaseStats\n\
-_08029BF8: .4byte gBattleMoves\n\
-_08029BFC: .4byte gCurrentMove\n\
-_08029C00: .4byte gBattleMons\n\
-_08029C04: .4byte gBattlerTarget\n\
-_08029C08: .4byte gProtectStructs\n\
-_08029C0C:\n\
-    mov r0, r8\n\
-    cmp r0, 0\n\
-    beq _08029C2C\n\
-    ldr r3, _08029C28 @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    b _08029C40\n\
-    .align 2, 0\n\
-_08029C28: .4byte gBattlescriptCurrInstr\n\
-_08029C2C:\n\
-    ldr r3, _08029C54 @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x5]\n\
-    ldrb r0, [r2, 0x6]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x7]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x8]\n\
-_08029C40:\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    str r1, [r3]\n\
-_08029C46:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08029C54: .4byte gBattlescriptCurrInstr\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
 
 static void atkC5_setsemiinvulnerablebit(void)
 {
@@ -13565,247 +13021,49 @@ static void atkDD_weightdamagecalculation(void)
     gBattlescriptCurrInstr++;
 }
 
-#ifdef NONMATCHING
 static void atkDE_assistattackselect(void)
 {
-    u32 chooseable_moves_no = 0;
-    struct Pokemon* party;
-    int i, j;
-    u16* chooseable_moves;
-    if (GetBattlerPosition(gBattlerAttacker) & 1)
+    s32 chooseableMovesNo = 0;
+    struct Pokemon *party;
+    s32 monId, moveId;
+    u16 *movesArray = (u16 *)&gBattleStruct->assistMove;
+
+    if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
         party = gEnemyParty;
     else
         party = gPlayerParty;
-
-    for (i = 0; i < 6; i++)
+    for (monId = 0; monId < PARTY_SIZE; ++monId)
     {
-        if (i == gBattlerPartyIndexes[gBattlerAttacker])
-            break;
-        if (!GetMonData(&party[i], MON_DATA_SPECIES2) || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
-            break;
-        chooseable_moves = &gBattleStruct->assistMove[chooseable_moves_no];
-        for (j = 0; j < 4; j++)
+        if (monId == gBattlerPartyIndexes[gBattlerAttacker]
+         || GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_NONE
+         || GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_EGG)
+            continue;
+        for (moveId = 0; moveId < MAX_MON_MOVES; ++moveId)
         {
-            int k;
-            u16 move = GetMonData(&party[i], MON_DATA_MOVE1 + i);
+            s32 i = 0;
+            u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
+
             if (IsMoveUnchoosable(move))
-                break;
-            //sMovesForbiddenToCopy[k]
-            for (k = 0; ;k++)
-            {
-                if (sMovesForbiddenToCopy[k] == 0xFFFF)
-                {
-                    if (move)
-                    {
-                        *chooseable_moves = move;
-                        chooseable_moves++;
-                        chooseable_moves_no++;
-                    }
-                    break;
-                }
-                if (sMovesForbiddenToCopy[k] == move)
-                    break;
-            }
+                continue;
+            for (; sMovesForbiddenToCopy[i] != ASSIST_FORBIDDEN_END && move != sMovesForbiddenToCopy[i]; ++i);
+            if (sMovesForbiddenToCopy[i] != ASSIST_FORBIDDEN_END || move == MOVE_NONE)
+                continue;
+            movesArray[chooseableMovesNo] = move;
+            ++chooseableMovesNo;
         }
     }
-    if (chooseable_moves_no)
+    if (chooseableMovesNo)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        gRandomMove = gBattleStruct->assistMove[Random() % chooseable_moves_no];
+        gRandomMove = movesArray[((Random() & 0xFF) * chooseableMovesNo) >> 8];
         gBattlerTarget = GetMoveTarget(gRandomMove, 0);
         gBattlescriptCurrInstr += 5;
     }
     else
+    {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
 }
-
-#else
-NAKED
-static void atkDE_assistattackselect(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    ldr r0, _0802AB9C @ =gBattlerAttacker\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerPosition\n\
-    movs r1, 0x1\n\
-    ands r1, r0\n\
-    ldr r0, _0802ABA0 @ =gPlayerParty\n\
-    str r0, [sp]\n\
-    cmp r1, 0\n\
-    beq _0802AAAC\n\
-    ldr r1, _0802ABA4 @ =gEnemyParty\n\
-    str r1, [sp]\n\
-_0802AAAC:\n\
-    movs r2, 0\n\
-_0802AAAE:\n\
-    ldr r1, _0802ABA8 @ =gBattlerPartyIndexes\n\
-    ldr r0, _0802AB9C @ =gBattlerAttacker\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 1\n\
-    adds r0, r1\n\
-    adds r1, r2, 0x1\n\
-    str r1, [sp, 0x4]\n\
-    ldrh r0, [r0]\n\
-    cmp r2, r0\n\
-    beq _0802AB54\n\
-    movs r0, 0x64\n\
-    adds r6, r2, 0\n\
-    muls r6, r0\n\
-    ldr r0, [sp]\n\
-    adds r4, r0, r6\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0802AB54\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    movs r1, 0xCE\n\
-    lsls r1, 1\n\
-    cmp r0, r1\n\
-    beq _0802AB54\n\
-    movs r5, 0\n\
-    ldr r1, _0802ABAC @ =0x0000ffff\n\
-    mov r8, r1\n\
-    mov r9, r6\n\
-    mov r1, r10\n\
-    lsls r0, r1, 1\n\
-    ldr r1, _0802ABB0 @ =gSharedMem + 0x16024\n\
-    adds r6, r0, r1\n\
-_0802AAF8:\n\
-    movs r7, 0\n\
-    adds r1, r5, 0\n\
-    adds r1, 0xD\n\
-    ldr r0, [sp]\n\
-    add r0, r9\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    adds r0, r4, 0\n\
-    bl IsMoveUnchoosable\n\
-    lsls r0, 24\n\
-    adds r1, r5, 0x1\n\
-    cmp r0, 0\n\
-    bne _0802AB4E\n\
-    ldr r0, _0802ABB4 @ =sMovesForbiddenToCopy\n\
-    ldrh r2, [r0]\n\
-    adds r3, r0, 0\n\
-    cmp r2, r8\n\
-    beq _0802AB42\n\
-    cmp r4, r2\n\
-    beq _0802AB38\n\
-    ldr r5, _0802ABAC @ =0x0000ffff\n\
-    adds r2, r3, 0\n\
-_0802AB2A:\n\
-    adds r2, 0x2\n\
-    adds r7, 0x1\n\
-    ldrh r0, [r2]\n\
-    cmp r0, r5\n\
-    beq _0802AB42\n\
-    cmp r4, r0\n\
-    bne _0802AB2A\n\
-_0802AB38:\n\
-    lsls r0, r7, 1\n\
-    adds r0, r3\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r8\n\
-    bne _0802AB4E\n\
-_0802AB42:\n\
-    cmp r4, 0\n\
-    beq _0802AB4E\n\
-    strh r4, [r6]\n\
-    adds r6, 0x2\n\
-    movs r0, 0x1\n\
-    add r10, r0\n\
-_0802AB4E:\n\
-    adds r5, r1, 0\n\
-    cmp r5, 0x3\n\
-    ble _0802AAF8\n\
-_0802AB54:\n\
-    ldr r2, [sp, 0x4]\n\
-    cmp r2, 0x5\n\
-    ble _0802AAAE\n\
-    mov r1, r10\n\
-    cmp r1, 0\n\
-    beq _0802ABCC\n\
-    ldr r2, _0802ABB8 @ =gHitMarker\n\
-    ldr r0, [r2]\n\
-    ldr r1, _0802ABBC @ =0xfffffbff\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-    ldr r4, _0802ABC0 @ =gRandomMove\n\
-    bl Random\n\
-    movs r1, 0xFF\n\
-    ands r1, r0\n\
-    mov r0, r10\n\
-    muls r0, r1\n\
-    asrs r0, 8\n\
-    lsls r0, 1\n\
-    ldr r1, _0802ABB0 @ =gSharedMem + 0x16024\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r4]\n\
-    ldrh r0, [r4]\n\
-    movs r1, 0\n\
-    bl GetMoveTarget\n\
-    ldr r1, _0802ABC4 @ =gBattlerTarget\n\
-    strb r0, [r1]\n\
-    ldr r1, _0802ABC8 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x5\n\
-    str r0, [r1]\n\
-    b _0802ABE6\n\
-    .align 2, 0\n\
-_0802AB9C: .4byte gBattlerAttacker\n\
-_0802ABA0: .4byte gPlayerParty\n\
-_0802ABA4: .4byte gEnemyParty\n\
-_0802ABA8: .4byte gBattlerPartyIndexes\n\
-_0802ABAC: .4byte 0x0000ffff\n\
-_0802ABB0: .4byte gSharedMem + 0x16024\n\
-_0802ABB4: .4byte sMovesForbiddenToCopy\n\
-_0802ABB8: .4byte gHitMarker\n\
-_0802ABBC: .4byte 0xfffffbff\n\
-_0802ABC0: .4byte gRandomMove\n\
-_0802ABC4: .4byte gBattlerTarget\n\
-_0802ABC8: .4byte gBattlescriptCurrInstr\n\
-_0802ABCC:\n\
-    ldr r3, _0802ABF8 @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    str r1, [r3]\n\
-_0802ABE6:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0802ABF8: .4byte gBattlescriptCurrInstr\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void atkDF_trysetmagiccoat(void)
 {
@@ -13918,7 +13176,7 @@ static void atkE4_getsecretpowereffect(void)
 static void atkE5_pickup(void)
 {
     int i;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         u16 held_item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);

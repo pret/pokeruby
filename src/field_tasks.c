@@ -147,46 +147,46 @@ void ResetFieldTasksArgs(void)
     }
 }
 
-const struct MetatileOffset gUnknown_08376384[][2] = {
-    {{  0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical0)}, {  0,  1, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical1)}},
-    {{  0, -1, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical0)}, {  0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical1)}},
-    {{  0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal0)}, {  1,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal1)}},
-    {{ -1,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal0)}, {  0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal1)}}
+const struct MetatileOffset gUnknown_08376384[] = {
+    { 0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical0)}, {0, 1, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical1)},
+    { 0, -1, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical0)}, {0, 0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical1)},
+    { 0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal0)}, {1, 0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal1)},
+    {-1,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal0)}, {0, 0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal1)}
 };
 
-const struct MetatileOffset gUnknown_083763A4[][2] = {
-    {{  0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical0)}, {  0,  1, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical1)}},
-    {{  0, -1, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical0)}, {  0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical1)}},
-    {{  0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal0)}, {  1,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal1)}},
-    {{ -1,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal0)}, {  0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal1)}}
+const struct MetatileOffset gUnknown_083763A4[] = {
+    { 0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical0)}, {0, 1, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical1)},
+    { 0, -1, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical0)}, {0, 0, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical1)},
+    { 0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal0)}, {1, 0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal1)},
+    {-1,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal0)}, {0, 0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal1)}
 };
 
-const struct MetatileOffset gUnknown_083763C4[][2] = {
-    {{  0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Vertical0)}, {  0,  1, METATILE_ID(Pacifidlog, FloatingLogs_Vertical1)}},
-    {{  0, -1, METATILE_ID(Pacifidlog, FloatingLogs_Vertical0)}, {  0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Vertical1)}},
-    {{  0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal0)}, {  1,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal1)}},
-    {{ -1,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal0)}, {  0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal1)}}
+const struct MetatileOffset gUnknown_083763C4[] = {
+    { 0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Vertical0)}, {0, 1, METATILE_ID(Pacifidlog, FloatingLogs_Vertical1)},
+    { 0, -1, METATILE_ID(Pacifidlog, FloatingLogs_Vertical0)}, {0, 0, METATILE_ID(Pacifidlog, FloatingLogs_Vertical1)},
+    { 0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal0)}, {1, 0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal1)},
+    {-1,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal0)}, {0, 0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal1)}
 };
 
 void DummyPerStepCallback(u8 taskId) {}
 
-const struct MetatileOffset *sub_80695E0(const struct MetatileOffset a0[][2], s8 a1)
+const struct MetatileOffset *sub_80695E0(const struct MetatileOffset *a0, u16 a1)
 {
     if (MetatileBehavior_IsPacifidlogVerticalLog1(a1))
     {
-        return a0[0];
+        return &a0[0 * 2];
     }
     else if (MetatileBehavior_IsPacifidlogVerticalLog2(a1))
     {
-        return a0[1];
+        return &a0[1 * 2];
     }
     else if (MetatileBehavior_IsPacifidlogHorizontalLog1(a1))
     {
-        return a0[2];
+        return &a0[2 * 2];
     }
     else if (MetatileBehavior_IsPacifidlogHorizontalLog2(a1))
     {
-        return a0[3];
+        return &a0[3 * 2];
     }
     else
     {
@@ -194,95 +194,23 @@ const struct MetatileOffset *sub_80695E0(const struct MetatileOffset a0[][2], s8
     }
 }
 
-#ifdef NONMATCHING
-void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 flag)
+void sub_8069638(const struct MetatileOffset *offsets, s16 x, s16 y, bool32 flag)
 {
-    const struct MetatileOffset *offsetData = sub_80695E0(offsets, MapGridGetMetatileBehaviorAt(x, y));
-    const struct MetatileOffset *offsetdata2 = offsetData;
-    if (offsetData != NULL)
+    offsets = sub_80695E0(offsets, MapGridGetMetatileBehaviorAt(x, y));
+    if (offsets)
     {
-        MapGridSetMetatileIdAt(x + offsetData[0].x, y + offsetData[0].y, offsetData[0].tileId);
+        MapGridSetMetatileIdAt(x + offsets[0].x, y + offsets[0].y, offsets[0].tileId);
         if (flag)
         {
-            CurrentMapDrawMetatileAt(x + offsetData[0].x, y + offsetData[0].y);
+            CurrentMapDrawMetatileAt(x + offsets[0].x, y + offsets[0].y);
         }
-        MapGridSetMetatileIdAt(x + offsetdata2[1].x, y + offsetdata2[1].y, offsetdata2[1].tileId);
+        MapGridSetMetatileIdAt(x + offsets[1].x, y + offsets[1].y, offsets[1].tileId);
         if (flag)
         {
-            CurrentMapDrawMetatileAt(x + offsetdata2[1].x, y + offsetdata2[1].y);
+            CurrentMapDrawMetatileAt(x + offsets[1].x, y + offsets[1].y);
         }
     }
 }
-#else
-NAKED
-void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 flag)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r8\n"
-                    "\tpush {r7}\n"
-                    "\tadds r5, r0, 0\n"
-                    "\tmov r8, r3\n"
-                    "\tlsls r1, 16\n"
-                    "\tasrs r6, r1, 16\n"
-                    "\tlsls r2, 16\n"
-                    "\tasrs r7, r2, 16\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tbl MapGridGetMetatileBehaviorAt\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tlsls r1, 16\n"
-                    "\tlsrs r1, 16\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tbl sub_80695E0\n"
-                    "\tadds r4, r0, 0\n"
-                    "\tadds r5, r4, 0\n"
-                    "\tcmp r4, 0\n"
-                    "\tbeq _080696B6\n"
-                    "\tmovs r0, 0\n"
-                    "\tldrsb r0, [r4, r0]\n"
-                    "\tadds r0, r6, r0\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tldrsb r1, [r4, r1]\n"
-                    "\tadds r1, r7, r1\n"
-                    "\tldrh r2, [r4, 0x2]\n"
-                    "\tbl MapGridSetMetatileIdAt\n"
-                    "\tmov r0, r8\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0806968E\n"
-                    "\tmovs r0, 0\n"
-                    "\tldrsb r0, [r4, r0]\n"
-                    "\tadds r0, r6, r0\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tldrsb r1, [r4, r1]\n"
-                    "\tadds r1, r7, r1\n"
-                    "\tbl CurrentMapDrawMetatileAt\n"
-                    "_0806968E:\n"
-                    "\tmovs r0, 0x4\n"
-                    "\tldrsb r0, [r5, r0]\n"
-                    "\tadds r0, r6, r0\n"
-                    "\tmovs r1, 0x5\n"
-                    "\tldrsb r1, [r5, r1]\n"
-                    "\tadds r1, r7, r1\n"
-                    "\tldrh r2, [r5, 0x6]\n"
-                    "\tbl MapGridSetMetatileIdAt\n"
-                    "\tmov r0, r8\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _080696B6\n"
-                    "\tmovs r0, 0x4\n"
-                    "\tldrsb r0, [r5, r0]\n"
-                    "\tadds r0, r6, r0\n"
-                    "\tmovs r1, 0x5\n"
-                    "\tldrsb r1, [r5, r1]\n"
-                    "\tadds r1, r7, r1\n"
-                    "\tbl CurrentMapDrawMetatileAt\n"
-                    "_080696B6:\n"
-                    "\tpop {r3}\n"
-                    "\tmov r8, r3\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0");
-}
-#endif
 
 void sub_80696C0(s16 x, s16 y, bool32 flag)
 {

@@ -64,7 +64,7 @@ void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 
-extern const char BuildDateTime[];
+extern const u8 BuildDateTime[];
 extern s8 gPcmDmaCounter;
 
 #endif // GUARD_MAIN_H

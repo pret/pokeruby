@@ -1764,6 +1764,8 @@ void CalculateMonStats(struct Pokemon *mon)
 }
 
 #if DEBUG
+// TODO: check other revisions
+#if !(ENGLISH && REVISION == 0)
 void Nakamura_NakaGenderTest_RecalcStats(struct Pokemon *mon)
 {
     s32 currentHP = GetMonData(mon, MON_DATA_HP, NULL);
@@ -1808,6 +1810,7 @@ void Nakamura_NakaGenderTest_RecalcStats(struct Pokemon *mon)
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
 }
+#endif
 #endif
 
 void ExpandBoxMon(const struct BoxPokemon *src, struct Pokemon *dest)

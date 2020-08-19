@@ -1272,18 +1272,14 @@ static void sub_81407B8(struct Sprite *sprite)
     sprite->callback = sub_81407F4;
 }
 
-#ifdef NONMATCHING
-// there is some weird typing going on with var0 and var1.
 static void sub_81407F4(struct Sprite *sprite)
 {
-    s16 var0, var1;
-
-    var0 = sprite->data[0] + 0x800;
-    var1 = sprite->data[1] + 0x680;
+    s16 var0 = sprite->data[0] + 0x800;
+    s16 var1 = sprite->data[1] + 0x680;
     sprite->pos2.x -= var1 >> 8;
     sprite->pos2.y += var0 >> 8;
-    sprite->data[0] = var0 & 0xFF;
-    sprite->data[1] = var1 & 0xFF;
+    sprite->data[0] = (sprite->data[0] + 0x800) & 0xFF;
+    sprite->data[1] = (sprite->data[1] + 0x680) & 0xFF;
 
     if (sprite->pos1.y + sprite->pos2.y > 160
      || sprite->pos1.x + sprite->pos2.x < -8)
@@ -1294,74 +1290,6 @@ static void sub_81407F4(struct Sprite *sprite)
         UpdateOamPriorityInAllHealthboxes(1);
     }
 }
-#else
-NAKED
-static void sub_81407F4(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    adds r4, r0, 0\n\
-    movs r0, 0x80\n\
-    lsls r0, 4\n\
-    adds r2, r0, 0\n\
-    ldrh r1, [r4, 0x2E]\n\
-    adds r2, r1\n\
-    movs r0, 0xD0\n\
-    lsls r0, 3\n\
-    adds r3, r0, 0\n\
-    ldrh r1, [r4, 0x30]\n\
-    adds r3, r1\n\
-    lsls r1, r3, 16\n\
-    asrs r1, 24\n\
-    ldrh r0, [r4, 0x24]\n\
-    subs r0, r1\n\
-    strh r0, [r4, 0x24]\n\
-    lsls r0, r2, 16\n\
-    asrs r0, 24\n\
-    ldrh r1, [r4, 0x26]\n\
-    adds r0, r1\n\
-    strh r0, [r4, 0x26]\n\
-    movs r0, 0xFF\n\
-    ands r2, r0\n\
-    strh r2, [r4, 0x2E]\n\
-    ands r3, r0\n\
-    strh r3, [r4, 0x30]\n\
-    movs r2, 0x22\n\
-    ldrsh r0, [r4, r2]\n\
-    movs r2, 0x26\n\
-    ldrsh r1, [r4, r2]\n\
-    adds r0, r1\n\
-    cmp r0, 0xA0\n\
-    bgt _0814084A\n\
-    movs r1, 0x20\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r2, 0x24\n\
-    ldrsh r1, [r4, r2]\n\
-    adds r0, r1\n\
-    movs r1, 0x8\n\
-    negs r1, r1\n\
-    cmp r0, r1\n\
-    bge _0814085E\n\
-_0814084A:\n\
-    movs r0, 0\n\
-    strh r0, [r4, 0x2E]\n\
-    ldr r0, _08140864 @ =sub_81405C8\n\
-    str r0, [r4, 0x1C]\n\
-    ldr r1, _08140868 @ =gDoingBattleAnim\n\
-    movs r0, 0\n\
-    strb r0, [r1]\n\
-    movs r0, 0x1\n\
-    bl UpdateOamPriorityInAllHealthboxes\n\
-_0814085E:\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08140864: .4byte sub_81405C8\n\
-_08140868: .4byte gDoingBattleAnim\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballIndex)
 {

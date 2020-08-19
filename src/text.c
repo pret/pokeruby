@@ -6,6 +6,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
+#include "start_menu.h"
 
 enum
 {
@@ -2078,7 +2079,7 @@ static u8 sub_8002FA0(struct Window *win, const u8 *text)
 
 static u8 PrintNextChar(struct Window *win)
 {
-    u8 c = win->text[win->textIndex++];
+    u32 c = win->text[win->textIndex++];
 
     // Handle special control characters
     switch (c)
@@ -2106,6 +2107,12 @@ static u8 PrintNextChar(struct Window *win)
         return HandleExtCtrlCode(win);
     }
 
+// TODO: see if this is in rev1+
+#if (DEBUG && ENGLISH && REVISION == 0)
+    // Code related to the Murakawa task.
+    if ((gUnknown_Debug_03004BD0) && (!gUnknown_Debug_Murakawa2))
+        c = win->textMode + CHAR_0;
+#endif
     sPrintGlyphFuncs[win->textMode](win, c);
     return 1;
 }

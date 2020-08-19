@@ -6,12 +6,12 @@
 
 
 // main.c
-#if DEBUG
-/*. += 0x18;*/
+#if (DEBUG && ENGLISH && REVISION == 0)
+. += 0x8;
 #endif
 SYMBOL(gKeyRepeatStartDelay, 4)
 SYMBOL(gLinkTransferringData, 4)
-#if DEBUG
+#if (DEBUG && !(ENGLISH && REVISION == 0))
 . += 0x8;
 #endif
 SYMBOL(gMain, 1088)
@@ -197,6 +197,10 @@ SYMBOL(gMenuCallback, 4)
 
 #if DEBUG
 SYMBOL(gUnknown_Debug_03004BD0, 4)
+// TODO: see if this is in rev1+
+#if (ENGLISH && REVISION == 0)
+SYMBOL(gUnknown_Debug_Murakawa2, 4)
+#endif
 #endif
 
 // sound.c
@@ -204,7 +208,11 @@ SYMBOL(gDisableMusic, 4)
 
 #if DEBUG
 unk_debug_common_2 = .;
+#if (ENGLISH && REVISION == 0)
+. += 0x4;
+#else
 . += 0x8;
+#endif
 #endif
 
 // battle_anim.c

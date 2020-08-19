@@ -1387,7 +1387,6 @@ void sub_802DA9C(u8 taskId)
     gTasks[taskId].func = sub_802DB6C;
 }
 
-#ifdef NONMATCHING
 void sub_802DB6C(u8 taskId)
 {
     if (gTasks[taskId].data[10] < 13)
@@ -1396,209 +1395,49 @@ void sub_802DB6C(u8 taskId)
     }
     else
     {
-        u8 r9 = gTasks[taskId].data[0];
-        s32 r10 = gTasks[taskId].data[1];  //s16?
-        u8 r7 = gTasks[taskId].data[2];
-        s16 r4;
+        u8 monId = gTasks[taskId].data[0];
+        s16 gainedExp = gTasks[taskId].data[1];
+        u8 battlerId = gTasks[taskId].data[2];
+        s16 newExpPoints;
 
-        r4 = sub_8045C78(r7, gHealthboxSpriteIds[r7], 1, 0);
-        sub_8043DFC(gHealthboxSpriteIds[r7]);
-        if (r4 == -1)
+        newExpPoints = sub_8045C78(battlerId, gHealthboxSpriteIds[battlerId], 1, 0);
+        sub_8043DFC(gHealthboxSpriteIds[battlerId]);
+        if (newExpPoints == -1)
         {
-            struct Pokemon *pkmn;
-            u8 r4;
-            u32 sp4;
-            u16 r0;
-            u32 sp0;
+            u8 level;
+            s32 currExp;
+            u16 species;
+            s32 expOnNextLvl;
 
             m4aSongNumStop(SE_EXP);
-            pkmn = &gPlayerParty[r9];
-            r4 = GetMonData(pkmn, MON_DATA_LEVEL);
-            sp4 = GetMonData(pkmn, MON_DATA_EXP);
-            r0 = GetMonData(pkmn, MON_DATA_SPECIES);
-            sp0 = gExperienceTables[gBaseStats[r0].growthRate][r4 + 1];
-            if (sp4 + r10 >= sp0)
-            {
-                u8 r5;
-                u32 asdf;
+            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            currExp = GetMonData(&gPlayerParty[monId], MON_DATA_EXP);
+            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);
+            expOnNextLvl = gExperienceTables[gBaseStats[species].growthRate][level + 1];
 
-                SetMonData(pkmn, MON_DATA_EXP, &sp0);
-                CalculateMonStats(pkmn);
-                //r10 -= sp0 - sp4;
-                asdf = sp0 - sp4;
-                //asdf = r10 - (sp0 - sp4);
-                r10 -= asdf;
-                r5 = gActiveBattler;
-                gActiveBattler = r7;
-                BtlController_EmitTwoReturnValues(1, 11, r10);
-                gActiveBattler = r5;
+            if (currExp + gainedExp >= expOnNextLvl)
+            {
+                u8 savedActiveBattler;
+
+                SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &expOnNextLvl);
+                CalculateMonStats(&gPlayerParty[monId]);
+                gainedExp -= expOnNextLvl - currExp;
+                savedActiveBattler = gActiveBattler;
+                gActiveBattler = battlerId;
+                BtlController_EmitTwoReturnValues(1, 11, gainedExp);
+                gActiveBattler = savedActiveBattler;
                 gTasks[taskId].func = sub_802DCB0;
             }
             else
             {
-                //u32 asdf = sp4 + r10;
-                sp4 += r10;
-                SetMonData(pkmn, MON_DATA_EXP, &sp4);
-                gBattlerControllerFuncs[r7] = sub_802D90C;
+                currExp += gainedExp;
+                SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &currExp);
+                gBattlerControllerFuncs[battlerId] = sub_802D90C;
                 DestroyTask(taskId);
             }
         }
     }
 }
-#else
-NAKED
-void sub_802DB6C(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    ldr r1, _0802DB98 @ =gTasks\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    lsls r0, 3\n\
-    adds r6, r0, r1\n\
-    ldrh r1, [r6, 0x1C]\n\
-    movs r2, 0x1C\n\
-    ldrsh r0, [r6, r2]\n\
-    cmp r0, 0xC\n\
-    bgt _0802DB9C\n\
-    adds r0, r1, 0x1\n\
-    strh r0, [r6, 0x1C]\n\
-    b _0802DC98\n\
-    .align 2, 0\n\
-_0802DB98: .4byte gTasks\n\
-_0802DB9C:\n\
-    ldrb r0, [r6, 0x8]\n\
-    mov r9, r0\n\
-    ldrh r2, [r6, 0xA]\n\
-    mov r10, r2\n\
-    ldrb r7, [r6, 0xC]\n\
-    ldr r5, _0802DC64 @ =gHealthboxSpriteIds\n\
-    adds r5, r7, r5\n\
-    ldrb r1, [r5]\n\
-    adds r0, r7, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0\n\
-    bl sub_8045C78\n\
-    adds r4, r0, 0\n\
-    lsls r4, 16\n\
-    lsrs r4, 16\n\
-    ldrb r0, [r5]\n\
-    bl sub_8043DFC\n\
-    lsls r4, 16\n\
-    asrs r4, 16\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    cmp r4, r0\n\
-    bne _0802DC98\n\
-    movs r0, 0x21\n\
-    bl m4aSongNumStop\n\
-    movs r0, 0x64\n\
-    mov r1, r9\n\
-    muls r1, r0\n\
-    ldr r0, _0802DC68 @ =gPlayerParty\n\
-    adds r5, r1, r0\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x38\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x19\n\
-    bl GetMonData\n\
-    str r0, [sp, 0x4]\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    ldr r3, _0802DC6C @ =gExperienceTables\n\
-    adds r4, 0x1\n\
-    lsls r4, 2\n\
-    ldr r2, _0802DC70 @ =gBaseStats\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r2\n\
-    ldrb r1, [r1, 0x13]\n\
-    movs r0, 0xCA\n\
-    lsls r0, 1\n\
-    muls r0, r1\n\
-    adds r4, r0\n\
-    adds r4, r3\n\
-    ldr r1, [r4]\n\
-    str r1, [sp]\n\
-    mov r2, r10\n\
-    lsls r0, r2, 16\n\
-    asrs r4, r0, 16\n\
-    ldr r0, [sp, 0x4]\n\
-    adds r0, r4\n\
-    cmp r0, r1\n\
-    blt _0802DC7C\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x19\n\
-    mov r2, sp\n\
-    bl SetMonData\n\
-    adds r0, r5, 0\n\
-    bl CalculateMonStats\n\
-    ldr r2, [sp]\n\
-    add r0, sp, 0x4\n\
-    ldrh r0, [r0]\n\
-    subs r2, r0\n\
-    subs r2, r4, r2\n\
-    ldr r4, _0802DC74 @ =gActiveBattler\n\
-    ldrb r5, [r4]\n\
-    strb r7, [r4]\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    movs r0, 0x1\n\
-    movs r1, 0xB\n\
-    bl BtlController_EmitTwoReturnValues\n\
-    strb r5, [r4]\n\
-    ldr r0, _0802DC78 @ =sub_802DCB0\n\
-    str r0, [r6]\n\
-    b _0802DC98\n\
-    .align 2, 0\n\
-_0802DC64: .4byte gHealthboxSpriteIds\n\
-_0802DC68: .4byte gPlayerParty\n\
-_0802DC6C: .4byte gExperienceTables\n\
-_0802DC70: .4byte gBaseStats\n\
-_0802DC74: .4byte gActiveBattler\n\
-_0802DC78: .4byte sub_802DCB0\n\
-_0802DC7C:\n\
-    str r0, [sp, 0x4]\n\
-    add r2, sp, 0x4\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x19\n\
-    bl SetMonData\n\
-    ldr r1, _0802DCA8 @ =gBattlerControllerFuncs\n\
-    lsls r0, r7, 2\n\
-    adds r0, r1\n\
-    ldr r1, _0802DCAC @ =sub_802D90C\n\
-    str r1, [r0]\n\
-    mov r0, r8\n\
-    bl DestroyTask\n\
-_0802DC98:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0802DCA8: .4byte gBattlerControllerFuncs\n\
-_0802DCAC: .4byte sub_802D90C\n");
-}
-#endif
 
 void sub_802DCB0(u8 taskId)
 {
