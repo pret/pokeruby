@@ -20,12 +20,12 @@ struct Coords32
     s32 y;
 };
 
-EWRAM_DATA static u16 gUnknown_02029828[0x2800] = {0};
+EWRAM_DATA static u16 gBackupMapData[MAX_MAP_DATA_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
-EWRAM_DATA static struct ConnectionFlags gUnknown_0202E850 = {0};
+EWRAM_DATA static struct ConnectionFlags gMapConnectionFlags = {0};
 
-struct BackupMapLayout gUnknown_03004870;
+struct BackupMapLayout gBackupMapLayout;
 
 static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
@@ -48,7 +48,7 @@ void sub_8055FC0(void)
     sub_80BB970(gMapHeader.events);
     sub_8056670();
     RunOnLoadMapScript();
-    UpdateTVScreensOnMap(gUnknown_03004870.width, gUnknown_03004870.height);
+    UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
 }
 
 void mapheader_copy_mapdata_with_padding(struct MapHeader *mapHeader)
@@ -57,13 +57,13 @@ void mapheader_copy_mapdata_with_padding(struct MapHeader *mapHeader)
     int width;
     int height;
     mapLayout = mapHeader->mapLayout;
-    CpuFastFill16(0x03ff, gUnknown_02029828, sizeof(gUnknown_02029828));
-    gUnknown_03004870.map = gUnknown_02029828;
+    CpuFastFill16(0x03ff, gBackupMapData, sizeof(gBackupMapData));
+    gBackupMapLayout.map = gBackupMapData;
     width = mapLayout->width + 15;
-    gUnknown_03004870.width = width;
+    gBackupMapLayout.width = width;
     height = mapLayout->height + 14;
-    gUnknown_03004870.height = height;
-    if (width * height <= 0x2800)
+    gBackupMapLayout.height = height;
+    if (width * height <= MAX_MAP_DATA_SIZE)
     {
         map_copy_with_padding(mapLayout->map, mapLayout->width, mapLayout->height);
         sub_80560AC(mapHeader);
@@ -74,8 +74,8 @@ void map_copy_with_padding(u16 *map, u16 width, u16 height)
 {
     u16 *dest;
     int y;
-    dest = gUnknown_03004870.map;
-    dest += gUnknown_03004870.width * 7 + 7;
+    dest = gBackupMapLayout.map;
+    dest += gBackupMapLayout.width * 7 + 7;
     for (y = 0; y < height; y++)
     {
         CpuCopy16(map, dest, width * 2);
@@ -94,7 +94,7 @@ void sub_80560AC(struct MapHeader *mapHeader)
     struct MapConnection *connection = mapHeader->connections->connections;
     int i;
 
-    gUnknown_0202E850 = sDummyConnectionFlags;
+    gMapConnectionFlags = sDummyConnectionFlags;
     for (i = 0; i < count; i++, connection++)
     {
         struct MapHeader *cMap = mapconnection_get_mapheader(connection);
@@ -104,19 +104,19 @@ void sub_80560AC(struct MapHeader *mapHeader)
         {
         case CONNECTION_SOUTH:
             fillSouthConnection(mapHeader, cMap, offset);
-            gUnknown_0202E850.south = 1;
+            gMapConnectionFlags.south = 1;
             break;
         case CONNECTION_NORTH:
             fillNorthConnection(mapHeader, cMap, offset);
-            gUnknown_0202E850.north = 1;
+            gMapConnectionFlags.north = 1;
             break;
         case CONNECTION_WEST:
             fillWestConnection(mapHeader, cMap, offset);
-            gUnknown_0202E850.west = 1;
+            gMapConnectionFlags.west = 1;
             break;
         case CONNECTION_EAST:
             fillEastConnection(mapHeader, cMap, offset);
-            gUnknown_0202E850.east = 1;
+            gMapConnectionFlags.east = 1;
             break;
         }
     }
@@ -131,12 +131,12 @@ void sub_8056134(int x, int y, struct MapHeader *mapHeader, int x2, int y2, int 
 
     mapWidth = mapHeader->mapLayout->width;
     src = &mapHeader->mapLayout->map[mapWidth * y2 + x2];
-    dest = &gUnknown_03004870.map[gUnknown_03004870.width * y + x];
+    dest = &gBackupMapLayout.map[gBackupMapLayout.width * y + x];
 
     for (i = 0; i < height; i++)
     {
         CpuCopy16(src, dest, width * 2);
-        dest += gUnknown_03004870.width;
+        dest += gBackupMapLayout.width;
         src += mapWidth;
     }
 }
@@ -157,26 +157,26 @@ void fillSouthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
         {
             x2 = -x;
             x += cWidth;
-            if (x < gUnknown_03004870.width)
+            if (x < gBackupMapLayout.width)
             {
                 width = x;
             }
             else
             {
-                width = gUnknown_03004870.width;
+                width = gBackupMapLayout.width;
             }
             x = 0;
         }
         else
         {
             x2 = 0;
-            if (x + cWidth < gUnknown_03004870.width)
+            if (x + cWidth < gBackupMapLayout.width)
             {
                 width = cWidth;
             }
             else
             {
-                width = gUnknown_03004870.width - x;
+                width = gBackupMapLayout.width - x;
             }
         }
         sub_8056134(
@@ -204,26 +204,26 @@ void fillNorthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
         {
             x2 = -x;
             x += cWidth;
-            if (x < gUnknown_03004870.width)
+            if (x < gBackupMapLayout.width)
             {
                 width = x;
             }
             else
             {
-                width = gUnknown_03004870.width;
+                width = gBackupMapLayout.width;
             }
             x = 0;
         }
         else
         {
             x2 = 0;
-            if (x + cWidth < gUnknown_03004870.width)
+            if (x + cWidth < gBackupMapLayout.width)
             {
                 width = cWidth;
             }
             else
             {
-                width = gUnknown_03004870.width - x;
+                width = gBackupMapLayout.width - x;
             }
         }
 
@@ -252,26 +252,26 @@ void fillWestConnection(struct MapHeader *mapHeader, struct MapHeader *connected
         if (y < 0)
         {
             y2 = -y;
-            if (y + cHeight < gUnknown_03004870.height)
+            if (y + cHeight < gBackupMapLayout.height)
             {
                 height = y + cHeight;
             }
             else
             {
-                height = gUnknown_03004870.height;
+                height = gBackupMapLayout.height;
             }
             y = 0;
         }
         else
         {
             y2 = 0;
-            if (y + cHeight < gUnknown_03004870.height)
+            if (y + cHeight < gBackupMapLayout.height)
             {
                 height = cHeight;
             }
             else
             {
-                height = gUnknown_03004870.height - y;
+                height = gBackupMapLayout.height - y;
             }
         }
 
@@ -297,26 +297,26 @@ void fillEastConnection(struct MapHeader *mapHeader, struct MapHeader *connected
         if (y < 0)
         {
             y2 = -y;
-            if (y + cHeight < gUnknown_03004870.height)
+            if (y + cHeight < gBackupMapLayout.height)
             {
                 height = y + cHeight;
             }
             else
             {
-                height = gUnknown_03004870.height;
+                height = gBackupMapLayout.height;
             }
             y = 0;
         }
         else
         {
             y2 = 0;
-            if (y + cHeight < gUnknown_03004870.height)
+            if (y + cHeight < gBackupMapLayout.height)
             {
                 height = cHeight;
             }
             else
             {
-                height = gUnknown_03004870.height - y;
+                height = gBackupMapLayout.height - y;
             }
         }
 
@@ -345,10 +345,10 @@ u8 MapGridGetZCoordAt(int x, int y)
     int i;
     u16 *border;
 
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gBackupMapLayout.width
+     && y >= 0 && y < gBackupMapLayout.height)
     {
-        block = gUnknown_03004870.map[x + gUnknown_03004870.width * y];
+        block = gBackupMapLayout.map[x + gBackupMapLayout.width * y];
     }
     else
     {
@@ -371,10 +371,10 @@ u8 MapGridIsImpassableAt(int x, int y)
     int i;
     u16 *border;
 
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gBackupMapLayout.width
+     && y >= 0 && y < gBackupMapLayout.height)
     {
-        block = gUnknown_03004870.map[x + gUnknown_03004870.width * y];
+        block = gBackupMapLayout.map[x + gBackupMapLayout.width * y];
     }
     else
     {
@@ -400,10 +400,10 @@ u32 MapGridGetMetatileIdAt(int x, int y)
     u16 *border;
     u16 block2;
 
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gBackupMapLayout.width
+     && y >= 0 && y < gBackupMapLayout.height)
     {
-        block = gUnknown_03004870.map[x + gUnknown_03004870.width * y];
+        block = gBackupMapLayout.map[x + gBackupMapLayout.width * y];
     }
     else
     {
@@ -441,22 +441,22 @@ u8 MapGridGetMetatileLayerTypeAt(int x, int y)
 void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
 {
     int i;
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gBackupMapLayout.width
+     && y >= 0 && y < gBackupMapLayout.height)
     {
-        i = x + y * gUnknown_03004870.width;
-        gUnknown_03004870.map[i] = (gUnknown_03004870.map[i] & 0xf000) | (metatile & 0xfff);
+        i = x + y * gBackupMapLayout.width;
+        gBackupMapLayout.map[i] = (gBackupMapLayout.map[i] & 0xf000) | (metatile & 0xfff);
     }
 }
 
 void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 {
     int i;
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gBackupMapLayout.width
+     && y >= 0 && y < gBackupMapLayout.height)
     {
-        i = x + gUnknown_03004870.width * y;
-        gUnknown_03004870.map[i] = metatile;
+        i = x + gBackupMapLayout.width * y;
+        gBackupMapLayout.map[i] = metatile;
     }
 }
 
@@ -486,14 +486,14 @@ void save_serialize_map(void)
     u16 *mapView;
     int width;
     mapView = gSaveBlock1.mapView;
-    width = gUnknown_03004870.width;
+    width = gBackupMapLayout.width;
     x = gSaveBlock1.pos.x;
     y = gSaveBlock1.pos.y;
     for (i = y; i < y + 14; i++)
     {
         for (j = x; j < x + 15; j++)
         {
-            *mapView++ = gUnknown_02029828[width * i + j];
+            *mapView++ = gBackupMapData[width * i + j];
         }
     }
 }
@@ -528,14 +528,14 @@ void sub_8056670(void)
     mapView = gSaveBlock1.mapView;
     if (!sub_8056618())
     {
-        width = gUnknown_03004870.width;
+        width = gBackupMapLayout.width;
         x = gSaveBlock1.pos.x;
         y = gSaveBlock1.pos.y;
         for (i = y; i < y + 14; i++)
         {
             for (j = x; j < x + 15; j++)
             {
-                gUnknown_02029828[width * i + j] = *mapView++;
+                gBackupMapData[width * i + j] = *mapView++;
             }
         }
         sav2_mapdata_clear();
@@ -554,7 +554,7 @@ void sub_80566F0(u8 a1)
     int x, y;
     int i, j;
     mapView = gSaveBlock1.mapView;
-    width = gUnknown_03004870.width;
+    width = gBackupMapLayout.width;
     r9 = 0;
     r8 = 0;
     x0 = gSaveBlock1.pos.x;
@@ -589,7 +589,7 @@ void sub_80566F0(u8 a1)
             desti = width * (y + y0);
             srci = (y + r8) * 15 + r9;
             src = &mapView[srci + i];
-            dest = &gUnknown_02029828[x0 + desti + j];
+            dest = &gBackupMapData[x0 + desti + j];
             *dest = *src;
             i++;
             j++;
@@ -603,12 +603,12 @@ int GetMapBorderIdAt(int x, int y)
     struct MapLayout *mapLayout;
     u16 block, block2;
     int i, j;
-    if (x >= 0 && x < gUnknown_03004870.width
-     && y >= 0 && y < gUnknown_03004870.height)
+    if (x >= 0 && x < gBackupMapLayout.width
+     && y >= 0 && y < gBackupMapLayout.height)
     {
-        i = gUnknown_03004870.width;
+        i = gBackupMapLayout.width;
         i *= y;
-        block = gUnknown_03004870.map[x + i];
+        block = gBackupMapLayout.map[x + i];
         if (block == 0x3ff)
         {
             goto fail;
@@ -630,9 +630,9 @@ fail:
     return -1;
 success:
 
-    if (x >= (gUnknown_03004870.width - 8))
+    if (x >= (gBackupMapLayout.width - 8))
     {
-        if (!gUnknown_0202E850.east)
+        if (!gMapConnectionFlags.east)
         {
             return -1;
         }
@@ -640,15 +640,15 @@ success:
     }
     else if (x < 7)
     {
-        if (!gUnknown_0202E850.west)
+        if (!gMapConnectionFlags.west)
         {
             return -1;
         }
         return CONNECTION_WEST;
     }
-    else if (y >= (gUnknown_03004870.height - 7))
+    else if (y >= (gBackupMapLayout.height - 7))
     {
-        if (!gUnknown_0202E850.south)
+        if (!gMapConnectionFlags.south)
         {
             return -1;
         }
@@ -656,7 +656,7 @@ success:
     }
     else if (y < 7)
     {
-        if (!gUnknown_0202E850.north)
+        if (!gMapConnectionFlags.north)
         {
             return -1;
         }

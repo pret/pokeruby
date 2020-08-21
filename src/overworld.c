@@ -664,7 +664,7 @@ void sub_8053994(u32 a1)
     not_trainer_hill_battle_pyramid();
     if (a1 != 1 && v3)
     {
-        UpdateTVScreensOnMap(gUnknown_03004870.width, gUnknown_03004870.height);
+        UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         sub_80BBCCC(1);
     }
 }
