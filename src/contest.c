@@ -4656,9 +4656,8 @@ void MakeContestantNervous(u8 p)
 // Determines turn order?
 void sub_80B159C(void)
 {
+    s32 i, j;
     u8 r12 = 0;
-    s32 i;
-    s32 j;
     u8 sp0[4];
     u8 sp4[4];
 
@@ -4712,13 +4711,12 @@ void sub_80B159C(void)
 
 void sub_80B16D0(struct Sprite *sprite)
 {
-    if (sprite->data[1]++ > 84)
-    {
-        sprite->data[1] = 0;
-        sprite->invisible = TRUE;
-        sprite->callback = SpriteCallbackDummy;
-        sContest.unk1920A_4 = 0;
-    }
+    if (sprite->data[1]++ < 85)
+        return;
+    sprite->data[1] = 0;
+    sprite->invisible = TRUE;
+    sprite->callback = SpriteCallbackDummy;
+    sContest.unk1920A_4 = 0;
 }
 
 void sub_80B1710(u8 a)
