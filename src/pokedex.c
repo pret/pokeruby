@@ -4431,41 +4431,35 @@ static void sub_8091564(u16 arg0, u8 left, u8 top)
 void sub_8091738(u16 num, u16 b, u16 c)
 {
     u8 arr[0x80];
-    u16 i;
-    u16 j;
+    u16 i, j, r7;
     const u8 *r12;
-    u16 r7;
-    u8 r3;
+    u8 r3, r1;
 
-    r12 = sMonFootprintTable[NationalPokedexNumToSpecies(num)];
-    for (r7 = 0, i = 0; i < 32; i++)
+    r12 = (const u8*)sMonFootprintTable[NationalPokedexNumToSpecies(num)];
+    r7 = 0;
+    for (i = 0; i < 32; i++)
     {
         r3 = r12[i];
         for (j = 0; j < 4; j++)
         {
-            u32 r1 = j * 2;
-            s32 r2 = (r3 >> r1) & 1;
+            r1 = 0;
+            if (r3 & (1 << (j * 2)))
+                r1 |= 0x01;
+            if (r3 & (2 << (j * 2)))
+                r1 |= 0x10;
 
-            if (r3 & (2 << r1))
-                r2 |= 0x10;
-
-// Needed to match
-#ifndef NONMATCHING
-            asm("");asm("");asm("");asm("");asm("");
-#endif
-
-            arr[r7] = r2;
+            arr[r7] = r1;
             r7++;
         }
     }
-    CpuCopy16(arr, (u16 *)(VRAM + b * 0x4000 + c * 0x20), 0x80);
+    CpuCopy16((void*)arr, (void *)(BG_VRAM + b * 0x4000 + c * 0x20), 0x80);
 }
 
 static void sub_80917CC(u16 a, u16 b)
 {
     *(u16 *)(BG_VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
     *(u16 *)(BG_VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
-    *(u16 *)(BG_VRAM + a * 0x800 + 0x272) = 0xF000 + b + 2;
+    *(u16 *)(BG_VRAM + a * 0x800+ 0x272) = 0xF000 + b + 2;
     *(u16 *)(BG_VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
 }
 
