@@ -293,12 +293,12 @@ void ResetContestGpuRegs(void)
 {
     u16 savedIme;
 
-    REG_DISPCNT = 0x40;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP;
     savedIme = REG_IME;
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = savedIme;
-    REG_DISPSTAT = 8;
+    REG_DISPSTAT = DISPSTAT_VBLANK_INTR;
     REG_BG0CNT = 0x9800;
     REG_BG1CNT = 0x9E09;
     REG_BG2CNT = 0x9C00;
@@ -474,14 +474,12 @@ void sub_80AB694(u8 taskId)
 
 void sub_80AB6B4(u8 taskId)
 {
-    gTasks[taskId].data[0]--;
-    if (gTasks[taskId].data[0] <= 0)
-    {
-        GetMultiplayerId();  // unused return value
-        DestroyTask(taskId);
-        gTasks[sContest.mainTaskId].func = sub_80AB960;
-        gRngValue = gContestRngValue;
-    }
+    if (--gTasks[taskId].data[0] > 0)
+        return;
+    GetMultiplayerId(); // unused return value
+    DestroyTask(taskId);
+    gTasks[sContest.mainTaskId].func = sub_80AB960;
+    gRngValue = gContestRngValue;
 }
 
 u8 sub_80AB70C(u8 *a)
