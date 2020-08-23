@@ -4172,16 +4172,15 @@ static u8 sub_80911C8(u16 num, u8 b, u8 c)
     for (i = 0; i < 11; i++)
         str[i] = EOS;
     num = NationalPokedexNumToSpecies(num);
-    switch (num)
+    if (num)
     {
-    default:
         for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
             str[i] = gSpeciesNames[num][i];
-        break;
-    case 0:
+    }
+    else
+    {
         for (i = 0; i < 10; i++)
             str[i] = 0xAE;
-        break;
     }
     Menu_PrintText(str, b, c);
     return i;
