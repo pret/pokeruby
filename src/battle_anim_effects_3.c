@@ -2555,24 +2555,16 @@ static void sub_812E09C(struct Sprite *sprite)
 
 static void sub_812E0F8(struct Sprite *sprite)
 {
-    u16 d2;
-    register u16 d3 asm("r1");
-    int var0;
-    s8 var1;
-    
-    if (!sprite->invisible)
+
+    if (sprite->invisible)
+        return;
+    sprite->data[3] += sprite->data[2];
+    sprite->pos2.y -= sprite->data[3] >> 8;
+    sprite->data[3] &= 0xFF;
+    if (sprite->data[1]-- == 0)
     {
-        d2 = sprite->data[2];
-        d3 = sprite->data[3];
-        var0 = d2 + d3;
-        var1 = var0 >> 8;
-        sprite->pos2.y -= var1;
-        sprite->data[3] = var0 & 0xFF;
-        if (--sprite->data[1] == -1)
-        {
-            sprite->invisible = 1;
-            sprite->callback = SpriteCallbackDummy;
-        }
+        sprite->invisible = 1;
+        sprite->callback = SpriteCallbackDummy;
     }
 }
 
