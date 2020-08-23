@@ -404,7 +404,7 @@ static void sub_80DD02C(struct Sprite *sprite)
     sprite->pos2.x = Sin(sprite->data[5], sprite->data[3]);
     sprite->data[5] = (sprite->data[5] + sprite->data[2]) & 0xFF;
 
-    if (--sprite->data[0] == -1)
+    if (sprite->data[0]-- == 0)
     {
         DestroyAnimSprite(sprite);
     }

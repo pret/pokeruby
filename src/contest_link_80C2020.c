@@ -1344,7 +1344,7 @@ void sub_80C35FC(struct Sprite *sprite)
     eContestLink80C2020Struct2018000.unk_04 = 2;
     if ((u16)sprite->data[5] != 0xFFFF)
     {
-        if (--sprite->data[5] == -1)
+        if (sprite->data[5]-- == 0)
             sub_80C3520(sprite->data[6]);
     }
 }
@@ -1845,7 +1845,7 @@ void sub_80C3A5C(u8 taskId)
     }
     else if (gTasks[taskId].data[10] == 1)
     {
-        if (--gTasks[taskId].data[11] == -1)
+        if (gTasks[taskId].data[11]-- == 0)
         {
             firstTileNum = gTasks[taskId].data[0] * 2 + 0x5043;
             *(vu16 *)((VRAM + 0xE142) + gTasks[taskId].data[1] * 192) = firstTileNum + 0x00;

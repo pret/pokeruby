@@ -257,7 +257,7 @@ static void sub_80D3874(struct Sprite *sprite)
     sprite->data[1] += 48;
     sprite->pos2.y = -(sprite->data[1] >> 8);
 
-    if (--sprite->data[7] == -1)
+    if (sprite->data[7]-- == 0)
     {
         DestroyAnimSprite(sprite);
     }

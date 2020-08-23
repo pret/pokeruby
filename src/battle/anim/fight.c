@@ -666,7 +666,7 @@ void AnimStompFoot(struct Sprite *sprite)
 
 static void AnimStompFootStep(struct Sprite *sprite)
 {
-    if (--sprite->data[0] == -1)
+    if (sprite->data[0]-- == 0)
     {
         sprite->data[0] = 6;
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);

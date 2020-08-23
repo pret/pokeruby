@@ -516,7 +516,7 @@ static void sub_80DB92C(struct Sprite *sprite)
 {
     REG_BLDALPHA = ((16 - sprite->data[3]) << 8) | sprite->data[3];
 
-    if (--sprite->data[3] == -1)
+    if (sprite->data[3]-- == 0)
     {
         if (!IsContest())
         {
@@ -664,7 +664,7 @@ static void sub_80DBC34(struct Sprite *sprite)
         }
         break;
     case 1:
-        if (--sprite->data[1] == -1)
+        if (sprite->data[1]-- == 0)
         {
             DestroyAnimSprite(sprite);
         }

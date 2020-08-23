@@ -2083,7 +2083,7 @@ void SandstormSpriteCallback3(struct Sprite *);
 
 void SandstormSpriteCallback2(struct Sprite *sprite)
 {
-    if (--sprite->data[3] == -1)
+    if (sprite->data[3]-- == 0)
         sprite->callback = SandstormSpriteCallback3;
 }
 

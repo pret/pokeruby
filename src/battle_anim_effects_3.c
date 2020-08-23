@@ -2535,7 +2535,7 @@ static void sub_812DFEC(struct Sprite *sprite)
         sprite->data[4]++;
     }
 
-    if (--sprite->data[1] == -1)
+    if (sprite->data[1]-- == 0)
     {
         sprite->invisible = 1;
         sprite->callback = sub_812E09C;

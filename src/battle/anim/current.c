@@ -397,7 +397,7 @@ static void sub_80D6514(struct Sprite *sprite)
 
 static void sub_80D658C(struct Sprite *sprite)
 {
-    if (--sprite->data[5] == -1)
+    if (sprite->data[5]-- == 0)
     {
         sprite->invisible ^= 1;
         sprite->data[5] = sprite->data[4];

@@ -1011,7 +1011,7 @@ static void sub_80DB0A0(struct Sprite *sprite)
         StartSpriteAnim(sprite, 0);
     }
 
-    if (--sprite->data[7] == -1)
+    if (sprite->data[7]-- == 0)
     {
         DestroyAnimSprite(sprite);
     }

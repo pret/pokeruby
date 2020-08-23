@@ -337,7 +337,7 @@ static void sub_80D541C(struct Sprite *sprite)
     sprite->data[1] = (sprite->data[1] + 10) & 0xFF;
     sprite->data[2] += 0xD0;
 
-    if (--sprite->data[0] == -1)
+    if (sprite->data[0]-- == 0)
         DestroyAnimSprite(sprite);
 }
 
