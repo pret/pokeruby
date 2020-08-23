@@ -5,8 +5,8 @@
 #include "task.h"
 
 struct Struct_sub_8078914 {
-    u8 *field_0;
-    u8 *field_4;
+    void *field_0;
+    void *field_4;
     u8 field_8;
 };
 

@@ -358,57 +358,58 @@ void AnimTask_CreateSurfWave(u8 taskId)
 #ifdef NONMATCHING
 void sub_80D3B60(u8 taskId)
 {
-    struct Struct_sub_8078914 unk;
-
     vu8 cpuDelay; // yet again
     u8 i;
     u16 rgbBuffer;
-    u16 *BGptrX = &gBattle_BG1_X;
-    u16 *BGptrY = &gBattle_BG1_Y;
-    s16 unkUse;
-    u32 palOffset;
-    u16 palNum;
+    u16 *BGptrX, *BGptrY;
+    struct Struct_sub_8078914 unk;
 
+    BGptrX = &gBattle_BG1_X;
+    BGptrY = &gBattle_BG1_Y;
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
+
     sub_8078914(&unk);
+
     gTasks[taskId].data[2] += gTasks[taskId].data[1];
+
     if (++gTasks[taskId].data[5] == 4)
     {
-        rgbBuffer = gPlttBufferFaded[unk.field_8 * 16 + 7];
+        rgbBuffer = gPlttBufferFaded[16 * unk.field_8 + 7];
         for (i = 6; i != 0; i--)
-        {
-            palNum = unk.field_8 * 16;
-            palOffset = 1 + i;
-            gPlttBufferFaded[palNum + palOffset] = gPlttBufferFaded[palNum + palOffset - 1];
-        }
-        gPlttBufferFaded[unk.field_8 * 16 + 1] = rgbBuffer;
+            gPlttBufferFaded[16 * unk.field_8 + 1 + i] =
+                gPlttBufferFaded[16 * unk.field_8 + 1 + i - 1]; // 1 + i - 1 is needed to match
+        gPlttBufferFaded[16 * unk.field_8 + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
     }
+
     if (++gTasks[taskId].data[6] > 1)
     {
-        // there is some weird math going on here
         gTasks[taskId].data[6] = 0;
-        unkUse = ++gTasks[taskId].data[3];
-        if (unkUse <= 13)
+
+        if (++gTasks[taskId].data[3] < 14)
         {
-            gTasks[gTasks[taskId].data[15]].data[1] = unkUse | ((16 - unkUse) * 256);
+            gTasks[gTasks[taskId].data[15]].data[1] =
+                (s16)((gTasks[taskId].data[3]) | ((16 - gTasks[taskId].data[3]) << 8));
             gTasks[taskId].data[4]++;
         }
+
         if (gTasks[taskId].data[3] > 54)
         {
-            unkUse = --gTasks[taskId].data[4];
-            gTasks[gTasks[taskId].data[15]].data[1] = unkUse | ((16 - unkUse) * 256);
+            gTasks[taskId].data[4]--;
+            gTasks[gTasks[taskId].data[15]].data[1] =
+                (s16)((gTasks[taskId].data[4]) | ((16 - gTasks[taskId].data[4]) << 8));
         }
     }
-    if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
+
+    if ((gTasks[gTasks[taskId].data[15]].data[1] & 0x1F) == 0)
     {
         Dma3FillLarge32_(0, unk.field_0, 0x2000); // !
         cpuDelay = 0; // stall the CPU
         cpuDelay = 0; // stall the CPU
         Dma3FillLarge32_(0, unk.field_4, 0x1000); // !
         if (!IsContest)
-            REG_BG1CNT_BITFIELD.charBaseBlock = 1;
+            REG_BG1CNT_BITFIELD.charBaseBlock = 0;
         *BGptrX = 0;
         *BGptrY = 0;
 

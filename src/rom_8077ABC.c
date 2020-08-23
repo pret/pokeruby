@@ -872,14 +872,14 @@ void sub_8078914(struct Struct_sub_8078914 *unk)
 {
     if (IsContest())
     {
-        unk->field_0 = (u8 *)(VRAM + 0x8000);
-        unk->field_4 = (u8 *)(VRAM + 0xf000);
+        unk->field_0 = (void *)(VRAM + 0x8000);
+        unk->field_4 = (void *)(VRAM + 0xf000);
         unk->field_8 = 0xe;
     }
     else
     {
-        unk->field_0 = (u8 *)(VRAM + 0x4000);
-        unk->field_4 = (u8 *)(VRAM + 0xe000);
+        unk->field_0 = (void *)(VRAM + 0x4000);
+        unk->field_4 = (void *)(VRAM + 0xe000);
         unk->field_8 = 0x8;
     }
 }
@@ -888,20 +888,20 @@ void sub_8078954(struct Struct_sub_8078914 *unk, u8 b)
 {
     if (IsContest())
     {
-        unk->field_0 = (u8 *)(VRAM + 0x8000);
-        unk->field_4 = (u8 *)(VRAM + 0xf000);
+        unk->field_0 = (void *)(VRAM + 0x8000);
+        unk->field_4 = (void *)(VRAM + 0xf000);
         unk->field_8 = 0xe;
     }
     else if (GetBattlerPosition_permutated(gBattleAnimAttacker) == 1)
     {
-        unk->field_0 = (u8 *)(VRAM + 0x4000);
-        unk->field_4 = (u8 *)(VRAM + 0xe000);
+        unk->field_0 = (void *)(VRAM + 0x4000);
+        unk->field_4 = (void *)(VRAM + 0xe000);
         unk->field_8 = 0x8;
     }
     else
     {
-        unk->field_0 = (u8 *)(VRAM + 0x6000);
-        unk->field_4 = (u8 *)(VRAM + 0xf000);
+        unk->field_0 = (void *)(VRAM + 0x6000);
+        unk->field_4 = (void *)(VRAM + 0xf000);
         unk->field_8 = 0x9;
     }
 }

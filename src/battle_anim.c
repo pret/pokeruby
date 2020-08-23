@@ -2360,8 +2360,7 @@ bool8 IsContest(void)
 {
     if (!gMain.inBattle)
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 #define tBackgroundId   data[0]
