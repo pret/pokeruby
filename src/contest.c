@@ -3680,25 +3680,20 @@ void sub_80B0588(void)
 // TODO: Try to write this better
 void sub_80B05A4(u8 a)
 {
-    u32 var;
-    u32 r0;
-
     sub_80B0548(a);
 
     // 2-byte DMA copy? Why?
 
-    r0 = a + 5;
     DmaCopy16Defvars(
       3,
-      gPlttBufferUnfaded + r0 * 16 + 10,
-      gPlttBufferFaded   + r0 * 16 + 10,
+      &gPlttBufferUnfaded[16 * (5 + a) + 10],
+      &gPlttBufferFaded[16 * (5 + a) + 10],
       2);
 
-    var = (a + 5) * 16 + 12 + a;
     DmaCopy16Defvars(
       3,
-      gPlttBufferUnfaded + var,
-      gPlttBufferFaded + var,
+      &gPlttBufferUnfaded[16 * (5 + a) + 12 + a],
+      &gPlttBufferFaded[16 * (5 + a) + 12 + a],
       2);
 }
 
