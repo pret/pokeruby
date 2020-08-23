@@ -352,7 +352,10 @@ gUnknown_083CC5A2:: @ 83CC5A2
 
 	.align 1
 gUnknown_083CC5A4:: @ 83CC5A4
-	.2byte 0x73, 0x19E6, 0x253, 0x4CC4, 0x1F, 0x3E0, 0x3FF, 0x7C00
+	.2byte 0x73, 0x19E6, 0x253, 0x4CC4
+
+gUnknown_083CC5A8:: @ 83CC5A4
+	.2byte  0x1F, 0x3E0, 0x3FF, 0x7C00
 
 @ 83CC5B4
 	.include "data/contest_excitement_table.inc"

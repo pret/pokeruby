@@ -180,9 +180,9 @@
 
 #define Dma3CopyLarge_(src, dest, size, bit)               \
 {                                                          \
-    const void *_src = src;                                \
-    void *_dest = dest;                                    \
-    u32 _size = size;                                      \
+    const void *_src = (const void*)(src);                 \
+    void *_dest = (void*)(dest);                           \
+    u32 _size = (u32)(size);                               \
     while (1)                                              \
     {                                                      \
         if (_size <= MAX_DMA_BLOCK_SIZE)                   \
