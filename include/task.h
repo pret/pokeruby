@@ -21,15 +21,15 @@ struct Task
 
 extern struct Task gTasks[];
 
-extern void ResetTasks(void);
-extern u8 CreateTask(TaskFunc func, u8 priority);
-extern void DestroyTask(u8 taskId);
-extern void RunTasks(void);
-extern void TaskDummy(u8 taskId);
-extern void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc);
-extern void SwitchTaskToFollowupFunc(u8 taskId);
-extern bool8 FuncIsActiveTask(TaskFunc func);
-extern u8 FindTaskIdByFunc(TaskFunc func);
-extern u8 GetTaskCount(void);
+void ResetTasks(void);
+u8 CreateTask(TaskFunc func, u8 priority);
+void DestroyTask(u8 taskId);
+void RunTasks(void);
+void TaskDummy(u8 taskId);
+void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc);
+void SwitchTaskToFollowupFunc(u8 taskId);
+bool8 FuncIsActiveTask(TaskFunc func);
+u8 FindTaskIdByFunc(TaskFunc func);
+u8 GetTaskCount(void);
 
 #endif // GUARD_TASK_H

@@ -25,7 +25,6 @@
 #include "trig.h"
 #include "scanline_effect.h"
 #include "ewram.h"
-#define VRAM_ADDR(a, b, c) *(u16 *)(BG_VRAM + (15 * 0x800) + (c) * 64 + ((b) + (a))*2)
 
 struct PokedexListItem
 {
@@ -37,10 +36,7 @@ struct PokedexListItem
 struct PokedexView
 {
     struct PokedexListItem unk0[NATIONAL_DEX_COUNT];
-    u16 unk608;
-    u8 unk60A_1:1;
-    u8 unk60A_2:1;
-    u8 unk60B;
+    struct PokedexListItem monData;
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 unk610;
@@ -52,19 +48,18 @@ struct PokedexView
     u16 unk61C;
     u16 unk61E[4];
     u16 selectedMonSpriteId;
-    u16 unk628;
-    u16 unk62A;
+    s16 unk628;
+    s16 unk62A;
     u8 unk62C;
     u8 unk62D;
     u8 unk62E;
     u8 unk62F;
     s16 unk630;
     s16 unk632;
-    u16 unk634;
-    u16 unk636;
+    s16 unk634;
+    s16 unk636;
     u16 unk638;
-    u16 unk63A[4];
-    u8 filler642[8];
+    u16 unk63A[8];
     u8 unk64A;
     u8 unk64B;
     u8 unk64C_1:1;
@@ -1331,9 +1326,9 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
         pokedexView->unk0[i].seen = 0;
         pokedexView->unk0[i].owned = 0;
     }
-    pokedexView->unk608 = 0;
-    pokedexView->unk60A_1 = 0;
-    pokedexView->unk60A_2 = 0;
+    pokedexView->monData.dexNum = 0;
+    pokedexView->monData.seen = 0;
+    pokedexView->monData.owned = 0;
     pokedexView->pokemonListCount = 0;
     pokedexView->selectedPokemon = 0;
     pokedexView->unk610 = 0;
@@ -1343,7 +1338,7 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->unk618 = 0;
     pokedexView->unk61A = 0;
     pokedexView->unk61C = 0;
-    for (i = 0; i <= 3; i++)
+    for (i = 0; i < 4; i++)
         pokedexView->unk61E[i] |= 0xFFFF;
     pokedexView->unk628 = 0;
     pokedexView->unk62A = 0;
@@ -1356,7 +1351,7 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->unk634 = 0;
     pokedexView->unk636 = 0;
     pokedexView->unk638 = 0;
-    for (i = 0; i <= 3; i++)
+    for (i = 0; i < 4; i++)
         pokedexView->unk63A[i] = 0;
     pokedexView->unk64A = 0;
     pokedexView->unk64B = 0;
@@ -1366,9 +1361,9 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->menuIsOpen = 0;
     pokedexView->menuCursorPos = 0;
     pokedexView->menuY = 0;
-    for (i = 0; i <= 7; i++)
+    for (i = 0; i < 8; i++)
         pokedexView->unk656[i] = 0;
-    for (i = 0; i <= 7; i++)
+    for (i = 0; i < 8; i++)
         pokedexView->unk65E[i] = 0;
 }
 
