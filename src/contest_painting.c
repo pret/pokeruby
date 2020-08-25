@@ -365,7 +365,7 @@ static void sub_8106B90(u8 *a, u16 *b, u16 *c)
             {
                 for (l = 0; l < 8; l++)
                 {
-                    u8 temp = *(u8 *)(a + ((((i << 3) + j) << 5) + (k << 2) + (l >> 1)));
+                    u8 temp = *(u8 *)(a + ((((i * 8) + j) * 32) + (k << 2) + (l >> 1)));
                     /*
                         The shifts have to be there to match r0 and r2's order in one instruction:
                                 add     r5, r2, r0
