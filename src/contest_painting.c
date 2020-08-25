@@ -384,9 +384,9 @@ static void sub_8106B90(u8 *a, u16 *b, u16 *c)
                     // Same order as above needs to be written here, or else this happens:
                     //         add     r0, r7, r1 <- regswap
                     if (temp == 0)
-                        *(u16 *)(c + (((i << 3) + k) << 6) + ((j << 3) + l)) = 0x8000;
+                        *(u16 *)(c + (((i * 8) + k) << 6) + ((j * 8) + l)) = 0x8000;
                     else
-                        *(u16 *)(c + (((i << 3) + k) << 6) + ((j << 3) + l)) = b[temp];
+                        *(u16 *)(c + (((i * 8) + k) << 6) + ((j * 8) + l)) = b[temp];
                 }
             }
         }
