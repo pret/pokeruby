@@ -389,7 +389,7 @@ Route110_TrickHousePuzzle5_EventScript_162D6D:: @ 8162D6D
 
 Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 	waitse
-	playse SE_HAZURE
+	playse SE_FAILURE
 	msgbox Route110_TrickHousePuzzle5_Text_19D5CF, MSGBOX_DEFAULT
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_16309F
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_16309F
@@ -408,7 +408,7 @@ Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 
 Route110_TrickHousePuzzle5_EventScript_162DDF:: @ 8162DDF
 	waitse
-	playse SE_SEIKAI
+	playse SE_SUCCESS
 	goto Route110_TrickHousePuzzle5_EventScript_162DE9
 	end
 

@@ -37,7 +37,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_183903, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_TSURETEK, FALSE
+	playbgm MUS_FOLLOW_ME, FALSE
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157803
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_157827
 	waitmovement 0
@@ -50,7 +50,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, MSGBOX_DEFAULT
 	giveitem ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waitmessage

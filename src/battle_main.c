@@ -1189,7 +1189,7 @@ void sub_800FE20(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, 1);
     sprite->callback = sub_800FDB0;
-    PlaySE(SE_BT_START);
+    PlaySE(SE_MUGSHOT);
 }
 
 void sub_800FE40(u8 taskId)
@@ -4948,7 +4948,7 @@ void HandleEndTurn_BattleWon(void)
         {
         case TRAINER_CLASS_ELITE_FOUR:
         case TRAINER_CLASS_CHAMPION:
-            PlayBGM(MUS_KACHI5);
+            PlayBGM(MUS_VICTORY_LEAGUE);
             break;
         case TRAINER_CLASS_TEAM_AQUA:
         case TRAINER_CLASS_TEAM_MAGMA:
@@ -4956,13 +4956,13 @@ void HandleEndTurn_BattleWon(void)
         case TRAINER_CLASS_AQUA_LEADER:
         case TRAINER_CLASS_MAGMA_ADMIN:
         case TRAINER_CLASS_MAGMA_LEADER:
-            PlayBGM(MUS_KACHI4);
+            PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:
-            PlayBGM(MUS_KACHI3);
+            PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:
-            PlayBGM(MUS_KACHI1);
+            PlayBGM(MUS_VICTORY_TRAINER);
             break;
         }
     }
@@ -5625,7 +5625,7 @@ void HandleAction_GoNear(void)
 void HandleAction_SafriZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
-    PlaySE(SE_NIGERU);
+    PlaySE(SE_FLEE);
     gCurrentTurnActionNumber = gBattlersCount;
     gBattleOutcome = B_OUTCOME_RAN;
 }

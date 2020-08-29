@@ -1112,38 +1112,38 @@ void ClearBattleMonForms(void)
 u16 GetMUS_ForBattle(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return MUS_BATTLE34;
+        return MUS_VS_KYOGRE_GROUDON;
     if (gBattleTypeFlags & BATTLE_TYPE_REGI)
-        return MUS_BATTLE36;
+        return MUS_VS_REGI;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return MUS_BATTLE20;
+        return MUS_VS_TRAINER;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         switch (gTrainers[gTrainerBattleOpponent].trainerClass)
         {
         case 2:
         case 0x31:
-            return MUS_BATTLE30;
+            return MUS_VS_AQUA_MAGMA_LEADER;
         case 3:
         case 4:
         case 0x32:
         case 0x33:
-            return MUS_BATTLE31;
+            return MUS_VS_AQUA_MAGMA;
         case 0x19:
-            return MUS_BATTLE32;
+            return MUS_VS_GYM_LEADER;
         case 0x20:
-            return MUS_BATTLE33;
+            return MUS_VS_CHAMPION;
         case 0x2E:
             if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
-                return MUS_BATTLE20;
-            return MUS_BATTLE35;
+                return MUS_VS_TRAINER;
+            return MUS_VS_RIVAL;
         case 0x18:
-            return MUS_BATTLE38;
+            return MUS_VS_ELITE_FOUR;
         default:
-            return MUS_BATTLE20;
+            return MUS_VS_TRAINER;
         }
     }
-    return MUS_BATTLE27;
+    return MUS_VS_WILD;
 }
 
 void sub_80408BC(void)

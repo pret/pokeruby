@@ -1406,7 +1406,7 @@ static void Task_IntroPokemonBattle(u8 taskId)
         gSprites[spriteId].invisible = 1;
     }
     if (gIntroFrameCounter == 800)
-        PlaySE(SE_OP_BASYU);
+        PlaySE(SE_INTRO_BLAST);
     if (gIntroFrameCounter == 850)
         BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 16, FADE_COLOR_WHITE);
     if (gIntroFrameCounter == 946)

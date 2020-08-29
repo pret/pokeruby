@@ -1294,7 +1294,7 @@ void OpponentHandlecmd10(void)
     else if (!ewram17810[gActiveBattler].unk0_6)
     {
         ewram17810[gActiveBattler].unk4 = 0;
-        PlaySE12WithPanning(SE_POKE_DEAD, 63);
+        PlaySE12WithPanning(SE_FAINT, 63);
         gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8010384;
         gBattlerControllerFuncs[gActiveBattler] = sub_803311C;
     }

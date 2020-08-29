@@ -22,13 +22,13 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	lockall
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CC
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 4, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 4, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CF
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 4, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 4, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView

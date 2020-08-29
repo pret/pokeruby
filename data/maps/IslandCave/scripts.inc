@@ -37,7 +37,7 @@ S_OpenRegiceChamber:: @ 815EF19
 	setmetatile 8, 20, METATILE_Cave_SealedChamberEntrance_BottomMid, 0
 	setmetatile 9, 20, METATILE_Cave_SealedChamberEntrance_BottomRight, 1
 	special DrawWholeMapView
-	playse SE_BAN
+	playse SE_BANG
 	setflag FLAG_SYS_BRAILLE_WAIT
 	end
 

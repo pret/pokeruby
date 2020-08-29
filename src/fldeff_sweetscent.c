@@ -49,7 +49,7 @@ static void StartSweetScentFieldEffect(void)
 {
     u8 taskId;
 
-    PlaySE(SE_W230);
+    PlaySE(SE_M_SWEET_SCENT);
     BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, RGB(31, 0, 0));
     taskId = CreateTask(TrySweetScentEncounter, 0);
     gTasks[taskId].data[0] = 0;

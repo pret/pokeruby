@@ -76,7 +76,7 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	applymovement 10, PetalburgCity_Gym_Movement_1545B4
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject 10
 	setflag FLAG_HIDE_WALLY_PETALBURG
 	delay 30
@@ -187,7 +187,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	msgbox PetalburgCity_Gym_Text_17A171, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_TSURETEK, FALSE
+	playbgm MUS_FOLLOW_ME, FALSE
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_Gym_EventScript_154835
 	compare VAR_0x8008, 1

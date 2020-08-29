@@ -1580,7 +1580,7 @@ static bool8 Phase2_Mugshot_Func4(struct Task* task)
     sub_811CA10(task->tMugshotPlayerID, 1);
     sub_811CA28(task->tMugshotOpponentID);
 
-    PlaySE(SE_BT_START);
+    PlaySE(SE_MUGSHOT);
 
     TRANSITION_STRUCT.VBlank_DMA++;
     return FALSE;

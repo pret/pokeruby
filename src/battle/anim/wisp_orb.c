@@ -142,7 +142,7 @@ static void sub_80D5C5C(struct Sprite *sprite)
 
         if ((initialData5 == 0 || initialData5 > 196) && newData5 > 0 && sprite->data[7] == 0)
         {
-            PlaySE12WithPanning(SE_W172, gUnknown_0202F7D2);
+            PlaySE12WithPanning(SE_M_FLAME_WHEEL, gUnknown_0202F7D2);
         }
     }
     else

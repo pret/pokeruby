@@ -22,7 +22,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	call_if_eq GraniteCave_StevensRoom_EventScript_15CC6D
 	compare VAR_FACING, 4
 	call_if_eq GraniteCave_StevensRoom_EventScript_15CC6D
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject 1
 	release
 	end

@@ -25,7 +25,7 @@ EventScript_AccessPC:
 	end
 
 EventScript_AccessPlayersPC:
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	msgbox Text_AccessedPlayersPC, MSGBOX_DEFAULT
 	special PlayerPC
 	waitstate
@@ -33,7 +33,7 @@ EventScript_AccessPlayersPC:
 	end
 
 EventScript_AccessPokemonStorage:
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_AccessSomeonesPC
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_AccessLanettesPC
 	msgbox Text_StorageSystemOpened, MSGBOX_DEFAULT
@@ -59,7 +59,7 @@ EventScript_TurnOffPC:
 
 EventScript_AccessHallOfFame:
 	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_TurnOffPC
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	special AccessHallOfFamePC
 	waitstate
 	goto EventScript_AccessPC

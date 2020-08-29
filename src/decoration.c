@@ -2542,7 +2542,7 @@ void sub_8100038(u8 taskId)
         DisplayItemMessageOnField(taskId, gSecretBaseText_PlaceItHere, sub_81000A0, 0);
     } else
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         DisplayItemMessageOnField(taskId, gSecretBaseText_CantBePlacedHere, sub_81006A8, 0);
     }
 }
