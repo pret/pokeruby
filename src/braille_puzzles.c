@@ -50,7 +50,7 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt(17, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
     MapGridSetMetatileIdAt(18, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
-    PlaySE(SE_BANG);
+    PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
     ScriptContext2_Disable();
 }
@@ -93,7 +93,7 @@ void DoBrailleStrengthEffect(void)
     MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
     MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
-    PlaySE(SE_BANG);
+    PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
     ScriptContext2_Disable();
 }
@@ -139,7 +139,7 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
     MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
     DrawWholeMapView();
-    PlaySE(SE_BANG);
+    PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_FLY);
     ScriptContext2_Disable();
 }

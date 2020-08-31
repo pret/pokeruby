@@ -312,7 +312,7 @@ void RunItemfinderResults(u8 taskId)
             }
             return;
         }
-        PlaySE(SE_ITEMFINDER); // play the itemfinder jingle 4 times before executing the itemfinder.
+        PlaySE(SE_DAUGI); // play the itemfinder jingle 4 times before executing the itemfinder.
         data[4]++;
     }
     data[3] = (data[3] + 1) & 0x1F;
@@ -744,7 +744,7 @@ void ItemUseOutOfBattle_TMHM(u8 taskId)
 
 static void BootTMHM(u8 taskId)
 {
-    PlaySE(SE_PC_LOGIN);
+    PlaySE(SE_PC_LOGON);
     gTasks[taskId].func = WaitButtonPressAndDisplayTMHMInfo;
 }
 
@@ -803,7 +803,7 @@ static void PlayBlackWhiteFluteSound(u8 taskId)
 {
     if(++gTasks[taskId].data[15] > 7)
     {
-        PlaySE(SE_GLASS_FLUTE);
+        PlaySE(SE_BIDORO);
         DisplayItemMessageOnField(taskId, gStringVar4, CleanUpItemMenuMessage, 1);
     }
 }
@@ -896,7 +896,7 @@ void sub_80CA2BC(u8 taskId)
 {
     if(++gTasks[taskId].data[15] > 7)
     {
-        PlaySE(SE_USE_ITEM);
+        PlaySE(SE_KAIFUKU);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         DisplayItemMessageOnField(taskId, sub_803F378(gSpecialVar_ItemId), sub_80CA294, 1);
     }

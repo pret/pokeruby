@@ -329,7 +329,7 @@ void sub_80C2358(void)
     gBattle_WIN1V = 0x80a0;
     CreateTask(sub_80C2F28, 20);
     sub_80C3F00();
-    PlayBGM(MUS_CONTEST_RESULTS);
+    PlayBGM(MUS_CON_K);
     SetVBlankCallback(sub_80C2448);
 }
 
@@ -1854,7 +1854,7 @@ void sub_80C3A5C(u8 taskId)
             *(vu16 *)((VRAM + 0xE184) + gTasks[taskId].data[1] * 192) = firstTileNum + 0x11;
             eContestLink80C2020Struct2018000.unk_05++;
             DestroyTask(taskId);
-            PlaySE(SE_CONTEST_PLACE);
+            PlaySE(SE_JYUNI);
         }
     }
 }

@@ -618,7 +618,7 @@ void sub_800DE30(u8 taskId)
             if (gTasks[taskId].data[5]) {
                 PrintLinkBattleWinLossTie();
             }
-            PlaySE(SE_M_HARDEN);
+            PlaySE(SE_W231);
             DestroyTask(taskId);
             gSprites[gBattleStruct->unk1608A].invisible = FALSE;
             gSprites[gBattleStruct->unk1608B].invisible = FALSE;

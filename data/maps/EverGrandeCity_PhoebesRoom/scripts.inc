@@ -41,7 +41,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_15B657
-	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	playbgm MUS_SITENNOU, FALSE
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_190A0C
 	goto EverGrandeCity_PhoebesRoom_EventScript_15B661

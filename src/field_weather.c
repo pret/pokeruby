@@ -1194,13 +1194,13 @@ void SetRainStrengthFromSoundEffect(u16 soundEffect)
     {
         switch (soundEffect)
         {
-        case SE_RAIN:
+        case SE_T_KOAME:
             gWeatherPtr->rainStrength = 0;
             break;
-        case SE_DOWNPOUR:
+        case SE_T_OOAME:
             gWeatherPtr->rainStrength = 1;
             break;
-        case SE_THUNDERSTORM:
+        case SE_T_AME:
             gWeatherPtr->rainStrength = 2;
             break;
         default:
@@ -1218,14 +1218,14 @@ void PlayRainSoundEffect(void)
         switch (gWeatherPtr->rainStrength)
         {
         case 0:
-            PlaySE(SE_RAIN_STOP);
+            PlaySE(SE_T_KOAME_E);
             break;
         case 1:
-            PlaySE(SE_DOWNPOUR_STOP);
+            PlaySE(SE_T_OOAME_E);
             break;
         case 2:
         default:
-            PlaySE(SE_THUNDERSTORM_STOP);
+            PlaySE(SE_T_AME_E);
             break;
         }
     }

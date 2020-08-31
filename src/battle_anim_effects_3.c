@@ -2421,7 +2421,7 @@ void sub_812DB84(u8 taskId)
         gTasks[taskId].data[11] = gBattle_BG1_Y;
 
         gTasks[taskId].data[0]++;
-        PlaySE12WithPanning(SE_M_MORNING_SUN, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
+        PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
         break;
     case 1:
         if (gTasks[taskId].data[4]++ > 0)
@@ -2456,7 +2456,7 @@ void sub_812DB84(u8 taskId)
         {
             gTasks[taskId].data[3] = 0;
             gTasks[taskId].data[0] = 1;
-            PlaySE12WithPanning(SE_M_MORNING_SUN, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
+            PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
         }
         break;
     case 4:
@@ -4702,7 +4702,7 @@ static void sub_8131408(u8 taskId)
 
         if (gSprites[spriteId].pos2.y == 0)
         {
-            PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
+            PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
             gTasks[taskId].data[10] -= 0x800;
             gTasks[taskId].data[0]++;
         }
@@ -4724,7 +4724,7 @@ static void sub_8131408(u8 taskId)
 
         if (gSprites[spriteId].pos2.y == 0)
         {
-            PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
+            PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
             DestroyAnimVisualTask(taskId);
         }
         break;
@@ -4759,7 +4759,7 @@ static void sub_81315C8(struct Sprite *sprite)
         sprite->pos2.y += 10;
         if (sprite->pos2.y >= 0)
         {
-            PlaySE12WithPanning(SE_M_SKETCH, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
+            PlaySE12WithPanning(SE_W166, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->pos2.y = 0;
             sprite->data[0]++;
         }
@@ -4769,7 +4769,7 @@ static void sub_81315C8(struct Sprite *sprite)
         sprite->pos2.y = -(gSineTable[sprite->data[1]] >> 3);
         if (sprite->data[1] > 127)
         {
-            PlaySE12WithPanning(SE_M_SKETCH, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
+            PlaySE12WithPanning(SE_W166, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->data[1] = 0;
             sprite->pos2.y = 0;
             sprite->data[0]++;
@@ -4788,7 +4788,7 @@ static void sub_81315C8(struct Sprite *sprite)
     case 3:
         if (++sprite->data[1] > 8)
         {
-            PlaySE12WithPanning(SE_M_LEER, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
+            PlaySE12WithPanning(SE_W043, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->data[1] = 0;
             sprite->data[0]++;
         }
@@ -5736,7 +5736,7 @@ void sub_8131EB8(struct Sprite *sprite)
     case 0:
         if (gBattleAnimArgs[7] == -1)
         {
-            PlaySE12WithPanning(SE_M_VITAL_THROW, BattleAnimAdjustPanning(63));
+            PlaySE12WithPanning(SE_W233, BattleAnimAdjustPanning(63));
             sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 16;
             sprite->data[0] = -32;
             sprite->data[7]++;

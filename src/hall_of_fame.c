@@ -451,7 +451,7 @@ static bool8 sub_8141E64(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(MUS_HALL_OF_FAME);
+            PlayBGM(MUS_DENDOU);
             return 0;
         }
         break;
@@ -666,7 +666,7 @@ static void sub_8142570(u8 taskID)
     }
     Menu_EraseWindowRect(0, 14, 29, 19);
     sub_8143068(0, 15);
-    PlaySE(SE_APPLAUSE);
+    PlaySE(SE_DENDOU);
     gTasks[taskID].tFrameCount = 400;
     gTasks[taskID].func = sub_8142618;
 }

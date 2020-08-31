@@ -24,7 +24,7 @@ SecretBase_OnFrame:: @ 815F362
 
 SecretBase_EventScript_PC:: @ 815F36C
 	lockall
-	playse SE_PC_LOGIN
+	playse SE_PC_LOGON
 	message SecretBase_Text_BootUpPC
 	dofieldeffect FLDEFF_SECRET_BASE_PC_TURN_ON
 	waitstate
@@ -85,7 +85,7 @@ SecretBase_EventScript_PCRegistryMenu:
 SecretBase_EventScript_RecordMixingPC:: @ 815F43A
 	lockall
 	message SecretBase_Text_BootUpPC
-	playse SE_PC_LOGIN
+	playse SE_PC_LOGON
 	dofieldeffect FLDEFF_SECRET_BASE_PC_TURN_ON
 	waitstate
 	waitmessage

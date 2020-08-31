@@ -182,7 +182,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
 	applymovement 1, Route110_TrickHouseEnd_Movement_161315
 	waitmovement 0
-	playse SE_M_EXPLOSION
+	playse SE_W153
 	applymovement 1, Route110_TrickHouseEnd_Movement_16131E
 	waitmovement 0
 	removeobject 1
@@ -230,7 +230,7 @@ Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	delay 20
 	applymovement 1, Route110_TrickHouseEnd_Movement_161CEA
 	waitmovement 0
-	playse SE_M_EXPLOSION
+	playse SE_W153
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, MSGBOX_DEFAULT

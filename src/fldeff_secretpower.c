@@ -360,7 +360,7 @@ bool8 FldEff_SecretPowerCave(void)
 
 static void CaveEntranceSpriteCallback1(struct Sprite *sprite)
 {
-    PlaySE(SE_M_ROCK_THROW);
+    PlaySE(SE_W088);
     sprite->data[0] = 0;
     sprite->callback = CaveEntranceSpriteCallback2;
 }
@@ -433,7 +433,7 @@ bool8 FldEff_SecretPowerTree(void)
 
 static void TreeEntranceSpriteCallback1(struct Sprite *sprite)
 {
-    PlaySE(SE_M_SCRATCH);
+    PlaySE(SE_W010);
     sprite->animNum = gFieldEffectArguments[7];
     sprite->data[0] = 0;
     sprite->callback = TreeEntranceSpriteCallback2;
@@ -494,7 +494,7 @@ bool8 FldEff_SecretPowerShrub(void)
 
 static void ShrubEntranceSpriteCallback1(struct Sprite *sprite)
 {
-    PlaySE(SE_M_POISON_POWDER);
+    PlaySE(SE_W077);
     sprite->data[0] = 0;
     sprite->callback = ShrubEntranceSpriteCallback2;
 }

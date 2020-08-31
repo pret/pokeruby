@@ -167,7 +167,7 @@ int FldEff_RockSmash(void)
 
 static void sub_810B58C(void)
 {
-    PlaySE(SE_M_ROCK_THROW);
+    PlaySE(SE_W088);
     FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
     EnableBothScriptContexts();
 }

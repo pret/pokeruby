@@ -970,7 +970,7 @@ void sub_804E738(struct Sprite* sprite)
         if (++sprite->data[5] > 3)
             DestroySprite(sprite);
         else
-            PlaySE(SE_BALL_TRAY_EXIT);
+            PlaySE(SE_TB_KARA);
     }
     sprite->pos1.x = sprite->data[1];
     sprite->pos1.y = sprite->data[2];
@@ -1451,7 +1451,7 @@ static void sub_804F378(void)
     case 13:
         gBerryBlenderData->field_0++;
         sub_804F238();
-        PlaySE(SE_FALL);
+        PlaySE(SE_RU_HYUU);
         sub_8051414(&gBerryBlenderData->field_168);
         break;
     case 14:
@@ -1465,7 +1465,7 @@ static void sub_804F378(void)
             gBerryBlenderData->arrowPos = gUnknown_082162F8[gUnknown_08216300[gBerryBlenderData->playersNo - 2]];
             REG_BG2CNT = 0x4882;
             gBerryBlenderData->framesToWait = 0;
-            PlaySE(SE_TRUCK_DOOR);;
+            PlaySE(SE_TRACK_DOOR);;
             sub_804F2A8();
         }
         sub_8051414(&gBerryBlenderData->field_168);
@@ -1508,7 +1508,7 @@ static void sub_804F378(void)
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
         PlayBGM(MUS_CYCLING);
-        PlaySE(SE_BERRY_BLENDER);
+        PlaySE(SE_MOTER);
         Blender_ControlHitPitch();
         break;
     }
@@ -1699,17 +1699,17 @@ static void sub_804FC48(u16 a0, u8 a1)
     {
         StartSpriteAnim(&gSprites[spriteID], 2);
         gSprites[spriteID].callback = sub_8051684;
-        PlaySE(SE_ICE_STAIRS);
+        PlaySE(SE_RU_GASHIN);
     }
     else if (a0 == 0x5432)
     {
         StartSpriteAnim(&gSprites[spriteID], 0);
-        PlaySE(SE_SUCCESS);
+        PlaySE(SE_SEIKAI);
     }
     else if (a0 == 0x2345)
     {
         StartSpriteAnim(&gSprites[spriteID], 1);
-        PlaySE(SE_FAILURE);
+        PlaySE(SE_HAZURE);
     }
     sub_805156C();
 }
@@ -2770,7 +2770,7 @@ static void sub_805181C(struct Sprite* sprite)
         {
             sprite->data[1] = 88;
             sprite->data[0]++;
-            PlaySE(SE_BALL_BOUNCE_1);
+            PlaySE(SE_KON);
         }
         break;
     case 1:
@@ -3537,7 +3537,7 @@ static void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {
-        PlayFanfare(MUS_LEVEL_UP);
+        PlayFanfare(MUS_FANFA1);
         gTasks[taskID].data[0]++;
     }
     if (IsFanfareTaskInactive())

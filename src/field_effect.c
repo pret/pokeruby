@@ -772,7 +772,7 @@ void PokeballGlowEffect_0(struct Sprite *sprite)
         gSprites[endSpriteId].data[0] = sprite->data[7];
         sprite->data[2]++;
         sprite->data[6]--;
-        PlaySE(SE_BALL);
+        PlaySE(SE_BOWA);
     }
     if (sprite->data[6] == 0)
     {
@@ -791,7 +791,7 @@ void PokeballGlowEffect_1(struct Sprite *sprite)
         sprite->data[3] = 0;
         if (sprite->data[5])
         {
-            PlayFanfare(MUS_HEAL);
+            PlayFanfare(MUS_ME_ASA);
         }
     }
 }
@@ -1081,7 +1081,7 @@ bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
     task->data[1] = 1;
     task->data[2] = 0;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = 0;
-    PlaySE(SE_FALL);
+    PlaySE(SE_RU_HYUU);
     task->data[0]++;
     return FALSE;
 }
@@ -1111,7 +1111,7 @@ bool8 sub_80868E4(struct Task *task)
     }
     if (sprite->pos2.y >= 0)
     {
-        PlaySE(SE_M_STRENGTH);
+        PlaySE(SE_W070);
         objectEvent->triggerGroundEffectsOnStop = 1;
         objectEvent->landingJump = 1;
         sprite->pos2.y = 0;
@@ -1210,7 +1210,7 @@ bool8 sub_8086AC0(struct Task *task)
         {
             task->data[0] = 4;
         }
-        PlaySE(SE_ESCALATOR);
+        PlaySE(SE_ESUKA);
     }
     return FALSE;
 }
@@ -1588,7 +1588,7 @@ bool8 sub_8087298(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
-    PlaySE(SE_M_EXPLOSION);
+    PlaySE(SE_W153);
     task->data[0]++;
     return TRUE;
 }
@@ -1704,7 +1704,7 @@ bool8 sub_8087548(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
         task->data[0]++;
         objectEvent->invisible = 0;
         CameraObjectReset1();
-        PlaySE(SE_M_DIG);
+        PlaySE(SE_W091);
         ObjectEventSetHeldMovement(objectEvent, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
@@ -1781,7 +1781,7 @@ bool8 sub_80876F8(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
         {
             task->data[1]++;
             ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFastestMovementAction(objectEvent->facingDirection));
-            PlaySE(SE_LAVARIDGE_FALL_WARP);
+            PlaySE(SE_FU_ZUZUZU);
         }
     }
     return FALSE;
@@ -2009,7 +2009,7 @@ static void TeleportFieldEffectTask2(struct Task *task)
         task->data[1] = 4;
         task->data[2] = 8;
         task->data[3] = 1;
-        PlaySE(SE_WARP_IN);
+        PlaySE(SE_TK_WARPIN);
     }
 }
 
@@ -2093,7 +2093,7 @@ void sub_8087E4C(struct Task *task)
         task->data[2] = 1;
         task->data[14] = sprite->subspriteMode;
         task->data[15] = GetPlayerFacingDirection();
-        PlaySE(SE_WARP_IN);
+        PlaySE(SE_TK_WARPIN);
     }
 }
 
@@ -2581,7 +2581,7 @@ u8 FldEff_UseSurf(void)
     taskId = CreateTask(sub_8088954, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
-    Overworld_ChangeMusicTo(MUS_SURF);
+    Overworld_ChangeMusicTo(MUS_NAMINORI);
     return FALSE;
 }
 
@@ -2679,7 +2679,7 @@ u8 FldEff_NPCFlyOut(void)
     sprite->oam.priority = 1;
     sprite->callback = sub_8088BC4;
     sprite->data[1] = gFieldEffectArguments[0];
-    PlaySE(SE_M_FLY);
+    PlaySE(SE_W019);
     return spriteId;
 }
 
@@ -2799,7 +2799,7 @@ void sub_8088DD8(struct Task *task)
     if ((task->data[2] == 0 || (--task->data[2]) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[0]++;
-        PlaySE(SE_M_FLY);
+        PlaySE(SE_W019);
         sub_8088FC0(task->data[1]);
     }
 }

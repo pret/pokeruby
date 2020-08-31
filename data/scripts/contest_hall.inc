@@ -343,13 +343,13 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	waitmovement 0
 	releaseall
 	addobject 13
-	playse SE_LEDGE
+	playse SE_DANSA
 	lockall
 	applymovement VAR_0x800B, LinkContestRoom1_Movement_1A5D9C
 	waitmovement 0
 	releaseall
 	addvar VAR_0x8006, -1
-	playse SE_BALL_OPEN
+	playse SE_BOWA2
 	special ShowContestEntryMonPic
 	call LinkContestRoom1_EventScript_1A535E
 	return
@@ -369,7 +369,7 @@ LinkContestRoom1_EventScript_1A5370:: @ 81A5370
 LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 	call LinkContestRoom1_EventScript_1A53B3
 	call LinkContestRoom1_EventScript_1A53CE
-	playse SE_M_ENCORE2
+	playse SE_W227B
 	waitmessage
 	call LinkContestRoom1_EventScript_1A5A90
 	applymovement 1, LinkContestRoom1_Movement_1A5D9F
@@ -406,7 +406,7 @@ LinkContestRoom1_EventScript_1A53DF:: @ 81A53DF
 LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 	applymovement 1, LinkContestRoom1_Movement_1A5DAF
 	waitmovement 0
-	playse SE_M_ENCORE2
+	playse SE_W227B
 	call LinkContestRoom1_EventScript_1A5AE4
 	applymovement 9, LinkContestRoom1_Movement_1A5DB7
 	applymovement 12, LinkContestRoom1_Movement_1A5DBB
@@ -803,7 +803,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
-	playbgm MUS_CONTEST_WINNER, FALSE
+	playbgm MUS_CON_FAN, FALSE
 	return
 
 LinkContestRoom1_EventScript_1A5984:: @ 81A5984
@@ -888,7 +888,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	call LinkContestRoom1_EventScript_1A5A75
 	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_1A5D99
 	waitmovement 0
-	playse SE_M_ENCORE2
+	playse SE_W227B
 	setvar VAR_TEMP_1, 0
 	return
 
@@ -999,7 +999,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	waitmessage
 	call LinkContestRoom1_EventScript_1A5C7F
 	call LinkContestRoom1_EventScript_1A5CE5
-	playse SE_M_ENCORE2
+	playse SE_W227B
 	setvar VAR_TEMP_1, 0
 	call LinkContestRoom1_EventScript_1A5A90
 	delay 30
@@ -1143,7 +1143,7 @@ LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_FANFA4
 	msgbox LinkContestRoom1_Text_1A6D96, MSGBOX_DEFAULT
 	waitfanfare
 	special ScrSpecial_GetContestWinnerNick

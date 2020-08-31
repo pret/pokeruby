@@ -46,7 +46,7 @@ FallarborTown_PokemonCenter_1F_EventScript_153B59:: @ 8153B59
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B69:: @ 8153B69
-	playse SE_SLIDING_DOOR
+	playse SE_JIDO_DOA
 	removeobject 4
 	clearflag FLAG_HIDE_LANETTE
 	release

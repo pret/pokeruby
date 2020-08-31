@@ -2,7 +2,7 @@
   "id": "MAP_TRADE_CENTER",
   "name": "TradeCenter",
   "layout": "LAYOUT_TRADE_CENTER",
-  "music": "MUS_EVER_GRANDE",
+  "music": "MUS_RAINBOW",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

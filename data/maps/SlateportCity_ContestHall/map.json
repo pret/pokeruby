@@ -2,7 +2,7 @@
   "id": "MAP_SLATEPORT_CITY_CONTEST_HALL",
   "name": "SlateportCity_ContestHall",
   "layout": "LAYOUT_CONTEST_HALL",
-  "music": "MUS_CONTEST_LOBBY",
+  "music": "MUS_CONLOBBY",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

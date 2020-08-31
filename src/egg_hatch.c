@@ -595,7 +595,7 @@ static void SpriteCB_Egg_0(struct Sprite* sprite)
         sprite->pos2.x = Sin(sprite->data[1], 1);
         if (sprite->data[0] == 15)
         {
-            PlaySE(SE_BALL);
+            PlaySE(SE_BOWA);
             StartSpriteAnim(sprite, 1);
             CreateRandomEggShardSprite();
         }
@@ -618,7 +618,7 @@ static void SpriteCB_Egg_1(struct Sprite* sprite)
             sprite->pos2.x = Sin(sprite->data[1], 2);
             if (sprite->data[0] == 15)
             {
-                PlaySE(SE_BALL);
+                PlaySE(SE_BOWA);
                 StartSpriteAnim(sprite, 2);
             }
         }
@@ -645,13 +645,13 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             sprite->pos2.x = Sin(sprite->data[1], 2);
             if (sprite->data[0] == 15)
             {
-                PlaySE(SE_BALL);
+                PlaySE(SE_BOWA);
                 StartSpriteAnim(sprite, 2);
                 CreateRandomEggShardSprite();
                 CreateRandomEggShardSprite();
             }
             if (sprite->data[0] == 30)
-                PlaySE(SE_BALL);
+                PlaySE(SE_BOWA);
         }
     }
 }
@@ -678,7 +678,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
     sprite->data[0]++;
     if (!gPaletteFade.active)
     {
-        PlaySE(SE_EGG_HATCH);
+        PlaySE(SE_TAMAGO);
         sprite->invisible = 1;
         sprite->callback = SpriteCB_Egg_5;
         sprite->data[0] = 0;

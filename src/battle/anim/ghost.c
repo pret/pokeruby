@@ -257,7 +257,7 @@ static void sub_80DDBD8(struct Sprite *sprite)
         return;
     if (r0 <= 0)
         return;
-    PlaySE12WithPanning(SE_M_CONFUSE_RAY, gUnknown_0202F7D2);
+    PlaySE12WithPanning(SE_W109, gUnknown_0202F7D2);
 }
 
 static void sub_80DDC4C(struct Sprite *sprite)
@@ -276,7 +276,7 @@ static void sub_80DDC4C(struct Sprite *sprite)
     if (r2 == 0 || r2 > 196)
     {
         if (r0 > 0)
-            PlaySE(SE_M_CONFUSE_RAY);
+            PlaySE(SE_W109);
     }
     
     if (sprite->data[6] == 0)

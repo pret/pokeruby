@@ -115,7 +115,7 @@ EventScript_1A2DAA:
 
 EventScript_1A2DB8:
 	closemessage
-	playse SE_EXIT
+	playse SE_KAIDAN
 	setvar VAR_INIT_SECRET_BASE, 0
 	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
@@ -135,7 +135,7 @@ SecretBase_EventScript_FirstEntrance:: @ 81A2DDE
 	compare VAR_RESULT, YES
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
 	closemessage
-	playse SE_EXIT
+	playse SE_KAIDAN
 	special sub_80BC440
 	end
 
@@ -154,7 +154,7 @@ SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 gUnknown_081A2E14:: @ 81A2E14
 	lockall
 	setvar VAR_INIT_SECRET_BASE, 1
-	playse SE_EXIT
+	playse SE_KAIDAN
 	special sub_80BC114
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1A2E38

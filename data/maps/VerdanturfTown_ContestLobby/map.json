@@ -2,7 +2,7 @@
   "id": "MAP_VERDANTURF_TOWN_CONTEST_LOBBY",
   "name": "VerdanturfTown_ContestLobby",
   "layout": "LAYOUT_CONTEST_LOBBY",
-  "music": "MUS_CONTEST_LOBBY",
+  "music": "MUS_CONLOBBY",
   "region_map_section": "MAPSEC_VERDANTURF_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

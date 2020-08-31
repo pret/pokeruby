@@ -35,7 +35,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152AD4
 	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152B4A
-	playse SE_EXIT
+	playse SE_KAIDAN
 	removeobject VAR_LAST_TALKED
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_STATE, 1
@@ -46,7 +46,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, MSGBOX_DEFAULT
-	playbgm MUS_ENCOUNTER_MAY, TRUE
+	playbgm MUS_GIRL_SUP, TRUE
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
@@ -80,7 +80,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, MSGBOX_DEFAULT
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
+	playbgm MUS_BOY_SUP, TRUE
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark

@@ -390,7 +390,7 @@ static void sub_81224A8(u8 taskId)
         }
         else
         {
-            PlaySE(SE_FAILURE);
+            PlaySE(SE_HAZURE);
             PrintPartyMenuPromptText(14, 0);
             gTasks[taskId].func = sub_8122480;
         }
@@ -460,7 +460,7 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
             return;
         }
     }
-    PlaySE(SE_FAILURE);
+    PlaySE(SE_HAZURE);
     Menu_EraseWindowRect(20, 10, 29, 19);
     Menu_DestroyCursor();
     sub_806D5A4();
@@ -658,7 +658,7 @@ static void sub_8122AB8(u8 taskId)
     {
         gTasks[taskId].func = sub_8122B10;
         ewram1B000.unk261 = 2;
-        PlaySE(SE_M_HARDEN);
+        PlaySE(SE_W231);
     }
 }
 

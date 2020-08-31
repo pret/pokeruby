@@ -336,7 +336,7 @@ void PerStepCallback_8069864(u8 taskId)
                 data[3] = y;
                 if (MetatileBehavior_IsPacifidlogLog(MapGridGetMetatileBehaviorAt(x, y)))
                 {
-                    PlaySE(SE_PUDDLE);
+                    PlaySE(SE_MIZU);
                 }
             }
             break;
@@ -427,7 +427,7 @@ void PerStepCallback_8069AA0(u8 taskId)
             }
             if (flag && (isFortreeBridgeCur == 1 || isFortreeBridgePrev == 1))
             {
-                PlaySE(SE_BRIDGE_WALK);
+                PlaySE(SE_HASHI);
             }
             if (isFortreeBridgePrev)
             {
@@ -603,7 +603,7 @@ void PerStepCallback_8069DD4(u8 taskId)
             {
                 x = data[4];
                 y = data[5];
-                PlaySE(SE_ICE_CRACK);
+                PlaySE(SE_RU_BARI);
                 MapGridSetMetatileIdAt(x, y, METATILE_ID(SootopolisGym, Ice_Cracked));
                 CurrentMapDrawMetatileAt(x, y);
                 sub_8069CFC(x - 7, y - 7);
@@ -619,7 +619,7 @@ void PerStepCallback_8069DD4(u8 taskId)
             {
                 x = data[4];
                 y = data[5];
-                PlaySE(SE_ICE_BREAK);
+                PlaySE(SE_RU_GASYAN);
                 MapGridSetMetatileIdAt(x, y, METATILE_ID(SootopolisGym, Ice_Broken));
                 CurrentMapDrawMetatileAt(x, y);
                 data[1] = 1;

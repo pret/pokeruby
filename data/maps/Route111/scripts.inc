@@ -219,14 +219,14 @@ Route111_Movement_1501BA:: @ 81501BA
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather WEATHER_SUNNY
-	fadenewbgm MUS_ROUTE110
+	fadenewbgm MUS_DOORO_X1
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1501C9:: @ 81501C9
 	setweather WEATHER_SANDSTORM
-	fadenewbgm MUS_ROUTE111
+	fadenewbgm MUS_ASHROAD
 	doweather
 	end
 

@@ -38,7 +38,7 @@ EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
-	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
+	playbgm MUS_DAIGO, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_STEVEN, EverGrandeCity_ChampionsRoom_Text_1910A0
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
@@ -67,11 +67,11 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B87C:: @ 815B87C
-	playbgm MUS_ENCOUNTER_MAY, FALSE
+	playbgm MUS_GIRL_SUP, FALSE
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B881:: @ 815B881
-	playbgm MUS_ENCOUNTER_BRENDAN, FALSE
+	playbgm MUS_BOY_SUP, FALSE
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886

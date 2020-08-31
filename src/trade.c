@@ -1194,7 +1194,7 @@ static void sub_8047EC0(void)
             sub_8048C70();
             gMain.state ++;
             nullsub_5(7, 0);
-            PlayBGM(MUS_SCHOOL);
+            PlayBGM(MUS_P_SCHOOL);
             break;
         case 14:
             sub_804ACF4(1);
@@ -3379,7 +3379,7 @@ static void sub_804B058(struct Sprite *sprite)
 {
     if (++ sprite->data[0] == 10)
     {
-        PlaySE(SE_BALL);
+        PlaySE(SE_BOWA);
         sprite->data[0] = 0;
     }
 }
@@ -3414,7 +3414,7 @@ static void sub_804B104(struct Sprite *sprite)
 {
     if (++ sprite->data[0] == 15)
     {
-        PlaySE(SE_M_MINIMIZE);
+        PlaySE(SE_W107);
         sprite->data[0] = 0;
     }
 }
@@ -4356,7 +4356,7 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[0]].y_offset;
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_0124 = GetCurrentMapMusic();
-            PlayBGM(MUS_EVOLUTION);
+            PlayBGM(MUS_SHINKA);
             break;
         case 1:
             if (gUnknown_03004828->bg2hofs > 0)
@@ -4509,7 +4509,7 @@ static bool8 sub_804C29C(void)
         case 32:
             if (!gPaletteFade.active)
             {
-                PlaySE(SE_WARP_OUT);
+                PlaySE(SE_TK_WARPOUT);
                 gUnknown_03004828->unk_00c4 ++;
             }
             gSprites[gUnknown_03004828->unk_00ba].pos2.y -= 3;
@@ -4563,7 +4563,7 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos2.y += 3;
             if (-0xa0 > gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y && gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y >= -0xa3)
             {
-                PlaySE(SE_WARP_IN);
+                PlaySE(SE_TK_WARPIN);
             }
             if (gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y < -0xde)
             {
@@ -4659,7 +4659,7 @@ static bool8 sub_804C29C(void)
                 DestroySprite(&gSprites[gUnknown_03004828->unk_00bb]);
                 sub_804BBE8(6);
                 gUnknown_03004828->unk_00c4 ++;
-                PlaySE(SE_M_SAND_ATTACK);
+                PlaySE(SE_W028);
             }
             break;
         case 51:
@@ -4739,7 +4739,7 @@ static bool8 sub_804C29C(void)
         case 68:
             if (++ gUnknown_03004828->unk_00c0 == 4)
             {
-                PlayFanfare(MUS_EVOLVED);
+                PlayFanfare(MUS_FANFA5);
             }
             if (gUnknown_03004828->unk_00c0 == 0xf0)
             {
@@ -4872,10 +4872,10 @@ static void sub_804D738(struct Sprite *sprite)
 {
     sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
     if (sprite->data[0] == 22)
-        PlaySE(SE_BALL_BOUNCE_1);
+        PlaySE(SE_KON);
     if (++ sprite->data[0] == 44)
     {
-        PlaySE(SE_M_MEGA_KICK);
+        PlaySE(SE_W025);
         sprite->callback = sub_804D7AC;
         sprite->data[0] = 0;
         BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, FADE_COLOR_WHITE);
@@ -4905,17 +4905,17 @@ static void sub_804D80C(struct Sprite *sprite)
         {
             sprite->data[2] ++;
             sprite->data[0] = 0x16;
-            PlaySE(SE_BALL_BOUNCE_1);
+            PlaySE(SE_KON);
         }
     }
     else
     {
         if (sprite->data[0] == 0x42)
-            PlaySE(SE_BALL_BOUNCE_2);
+            PlaySE(SE_KON2);
         if (sprite->data[0] == 0x5c)
-            PlaySE(SE_BALL_BOUNCE_3);
+            PlaySE(SE_KON3);
         if (sprite->data[0] == 0x6b)
-            PlaySE(SE_BALL_BOUNCE_4);
+            PlaySE(SE_KON4);
         sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
         if (++sprite->data[0] == 0x6c)
             sprite->callback = SpriteCallbackDummy;

@@ -367,7 +367,7 @@ void LightRain_InitVars(void)
     gWeatherPtr->unknown_6D9 = 10;
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
-    SetRainStrengthFromSoundEffect(SE_RAIN);
+    SetRainStrengthFromSoundEffect(SE_T_KOAME);
 }
 
 void LightRain_Main(void);
@@ -1075,7 +1075,7 @@ void MedRain_InitVars(void)
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     gWeatherPtr->unknown_6ED = 0;
-    SetRainStrengthFromSoundEffect(SE_THUNDERSTORM);
+    SetRainStrengthFromSoundEffect(SE_T_AME);
 }
 
 void Rain_Main(void);
@@ -1102,7 +1102,7 @@ void HeavyRain_InitVars(void)
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
-    SetRainStrengthFromSoundEffect(SE_DOWNPOUR);
+    SetRainStrengthFromSoundEffect(SE_T_OOAME);
 }
 
 void HeavyRain_InitAll(void)
@@ -1269,9 +1269,9 @@ void UpdateThunderSound(void)
             if (IsSEPlaying())
                 return;
             if (Random() & 1)
-                PlaySE(SE_THUNDER);
+                PlaySE(SE_T_KAMI);
             else
-                PlaySE(SE_THUNDER2);
+                PlaySE(SE_T_KAMI2);
             gWeatherPtr->unknown_6ED = 0;
         }
         else

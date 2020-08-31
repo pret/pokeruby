@@ -106,7 +106,7 @@ static void sub_810CBFC(void)
 
 static void sub_810CC34(void)
 {
-    PlaySE(SE_M_REFLECT);
+    PlaySE(SE_W115);
     FlagSet(FLAG_SYS_USE_FLASH);
     ScriptContext1_SetupScript(gUnknown_081B694A);
 }

@@ -2,7 +2,7 @@
   "id": "MAP_VERDANTURF_TOWN_WANDAS_HOUSE",
   "name": "VerdanturfTown_WandasHouse",
   "layout": "LAYOUT_VERDANTURF_TOWN_WANDAS_HOUSE",
-  "music": "MUS_VERDANTURF",
+  "music": "MUS_GOMACHI0",
   "region_map_section": "MAPSEC_VERDANTURF_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

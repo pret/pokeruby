@@ -84,7 +84,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	closemessage
 	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
 	waitmovement 0
-	playse SE_EXIT
+	playse SE_KAIDAN
 	removeobject 1
 	setflag FLAG_HIDE_EVIL_TEAM_ROUTE110
 	setflag FLAG_DELIVERED_DEVON_GOODS

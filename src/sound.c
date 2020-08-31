@@ -37,18 +37,18 @@ extern struct ToneData gCryTable2[];
 
 static const struct Fanfare sFanfares[] =
 {
-    { MUS_LEVEL_UP,       80 },
-    { MUS_OBTAIN_ITEM,   160 },
-    { MUS_EVOLVED,       220 },
-    { MUS_OBTAIN_TMHM,   220 },
-    { MUS_HEAL,          160 },
-    { MUS_OBTAIN_BADGE,  340 },
-    { MUS_MOVE_DELETED,  180 },
-    { MUS_OBTAIN_BERRY,  120 },
-    { MUS_AWAKEN_LEGEND, 710 },
-    { MUS_SLOTS_JACKPOT, 250 },
-    { MUS_SLOTS_WIN,     150 },
-    { MUS_TOO_BAD,       160 },
+    { MUS_FANFA1,      80 },
+    { MUS_FANFA4,     160 },
+    { MUS_FANFA5,     220 },
+    { MUS_ME_WAZA,    220 },
+    { MUS_ME_ASA,     160 },
+    { MUS_ME_BACHI,   340 },
+    { MUS_ME_WASURE,  180 },
+    { MUS_ME_KINOMI,  120 },
+    { MUS_ME_TAMA,    710 },
+    { MUS_ME_B_BIG,   250 },
+    { MUS_ME_B_SMALL, 150 },
+    { MUS_ME_ZANNEN,  160 },
 };
 
 static void Task_Fanfare(u8 taskId);
@@ -198,7 +198,7 @@ bool8 WaitFanfare(bool8 stop)
         if (!stop)
             m4aMPlayContinue(&gMPlayInfo_BGM);
         else
-            m4aSongNumStart(MUS_DUMMY);
+            m4aSongNumStart(SE_STOP);
 
         return TRUE;
     }

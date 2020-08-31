@@ -2,7 +2,7 @@
   "id": "MAP_FALLARBOR_TOWN_CONTEST_HALL",
   "name": "FallarborTown_ContestHall",
   "layout": "LAYOUT_CONTEST_HALL",
-  "music": "MUS_CONTEST_LOBBY",
+  "music": "MUS_CONLOBBY",
   "region_map_section": "MAPSEC_FALLARBOR_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

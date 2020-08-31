@@ -1200,7 +1200,7 @@ void sub_811889C(struct Sprite *sprite)
                 sub_811866C(sprite);
                 sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
                 sprite->callback = sub_8118834;
-                m4aSongNumStartOrChange(SE_BRIDGE_WALK);
+                m4aSongNumStartOrChange(SE_HASHI);
                 eRoulette->var9C = eRoulette->var98 = 0.0f;
                 eRoulette->var8C = -1.0f;
             }
@@ -1217,7 +1217,7 @@ void sub_811889C(struct Sprite *sprite)
                 sub_811866C(sprite);
                 sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
                 sprite->callback = sub_8118834;
-                m4aSongNumStartOrChange(SE_BRIDGE_WALK);
+                m4aSongNumStartOrChange(SE_HASHI);
                 eRoulette->var9C = eRoulette->var98 = 0.0f;
                 eRoulette->var8C = -1.0f;
             }
@@ -1286,7 +1286,7 @@ void sub_8118B30(struct Sprite *sprite)
         sub_811866C(sprite);
         sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
         sprite->callback  = sub_8118834;
-        m4aSongNumStartOrChange(SE_BRIDGE_WALK);
+        m4aSongNumStartOrChange(SE_HASHI);
         eRoulette->var03_6 = TRUE;
     }
 }
@@ -1322,7 +1322,7 @@ void sub_8118BD8(struct Sprite *sprite)
             sprite->animEnded     = FALSE;
             sprite->data[2]       = 0;
             sprite->callback      = sub_8118B30;
-            m4aSongNumStart(SE_BALL_THROW);
+            m4aSongNumStart(SE_NAGERU);
         }
     }
 }
@@ -1383,12 +1383,12 @@ void sub_8118D2C(struct Sprite *sprite)
             sub_811866C(sprite);
             sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
             sprite->callback  = sub_8118834;
-            m4aSongNumStartOrChange(SE_BRIDGE_WALK);
+            m4aSongNumStartOrChange(SE_HASHI);
         }
         else
         {
             sprite->animPaused = TRUE;
-            m4aSongNumStart(SE_BALL_BOUNCE_1);
+            m4aSongNumStart(SE_KON);
             sub_811952C(sprite);
         }
     }
@@ -1401,7 +1401,7 @@ void debug_sub_812E698(struct Sprite *sprite)
     sub_8118724(sprite);
     sprite->data[2] = 0;
     sub_81186B8(sprite);
-    m4aSongNumStart(SE_BALL_BOUNCE_1);
+    m4aSongNumStart(SE_KON);
     if (Random() & 1)
     {
         eRoulette->var8C = 0;
@@ -1436,13 +1436,13 @@ void sub_8118DE4(struct Sprite *sprite)
         sub_811866C(sprite);
         sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
         sprite->callback  = sub_8118834;
-        m4aSongNumStartOrChange(SE_BRIDGE_WALK);
+        m4aSongNumStartOrChange(SE_HASHI);
     }
     else
     {
         u8 t;
         u32 z;
-        m4aSongNumStart(SE_BALL_BOUNCE_1);
+        m4aSongNumStart(SE_KON);
         if ((z = (Random() & 1)))
         {
             u32 o;
@@ -1547,7 +1547,7 @@ void sub_8119134(struct Sprite *sprite)
     sub_8118724(sprite);
     if (!(eRoulette->var94 > 60.0f))
     {
-        m4aSongNumStartOrChange(SE_ROULETTE_BALL2);
+        m4aSongNumStartOrChange(SE_TAMAKORO_E);
         eRoulette->var98 = - (                20.0f / (float)((u16)eRoulette->var84));
         eRoulette->var90 =   ((1.0f - eRoulette->var8C) / (float)((u16)eRoulette->var84));
         sprite->animNum       = 1;
@@ -1785,7 +1785,7 @@ void sub_8119898(struct Sprite *sprite)
         gSprites[sprite->data[6]].data[1] = -2;
         gSprites[sprite->data[5]].invisible = FALSE;
         gSprites[sprite->data[5]].callback  = sub_81197D8;
-        m4aSongNumStart(SE_M_STRENGTH);
+        m4aSongNumStart(SE_W070);
     }
 }
 
@@ -1810,7 +1810,7 @@ void sub_8119964(struct Sprite *sprite)
         {
             sprite->invisible = FALSE;
             sprite->data[7]++;
-            m4aSongNumStart(SE_FALL);
+            m4aSongNumStart(SE_RU_HYUU);
             eRoulette->var01 = 1;
             eRoulette->var34 = gUnknown_083FA61E[0];
         }
@@ -1858,7 +1858,7 @@ void sub_8119AAC(struct Sprite *sprite)
         sprite->callback   = &SpriteCallbackDummy;
         sprite->invisible  = TRUE;
         sprite->animPaused = TRUE;
-        m4aSongNumStop(SE_TAILLOW_WING_FLAP);
+        m4aSongNumStop(SE_BASABASA);
         DestroySprite(sprite);
         FreeOamMatrix(gSprites[eRoulette->var3C[56]].oam.matrixNum);
         DestroySprite(&gSprites[eRoulette->var3C[56]]);
@@ -1889,7 +1889,7 @@ void sub_8119B24(struct Sprite *sprite)
         }
         else
         {
-            m4aSongNumStart(SE_FALL);
+            m4aSongNumStart(SE_RU_HYUU);
             StartSpriteAnim(sprite, eRoulette->var38->data[0] + 4);
             sprite->callback = sub_8119AAC;
             gSprites[sprite->data[6]].affineAnimPaused = FALSE;
@@ -1929,7 +1929,7 @@ void sub_8119BCC(struct Sprite *sprite)
         }
         else
         {
-            m4aSongNumStartOrChange(SE_TAILLOW_WING_FLAP);
+            m4aSongNumStartOrChange(SE_BASABASA);
             if (eRoulette->var38->data[0] == 0)
                 PlayCry1(SPECIES_TAILLOW, 63);
             else
@@ -1983,5 +1983,5 @@ void sub_8119D80(struct Sprite *sprite)
     }
     gSprites[sprite->data[6]].callback = sub_8119D08;
     gSprites[sprite->data[4]].callback = sub_8119BCC;
-    m4aSongNumStart(SE_FALL);
+    m4aSongNumStart(SE_RU_HYUU);
 }

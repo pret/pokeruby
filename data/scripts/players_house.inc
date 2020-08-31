@@ -72,7 +72,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
 	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
-	playse SE_EXIT
+	playse SE_KAIDAN
 	removeobject VAR_0x8008
 	releaseall
 	end
@@ -159,7 +159,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	call LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1B6CCC
 	waitmovement 0
-	playbgm MUS_ENCOUNTER_INTERVIEWER, FALSE
+	playbgm MUS_INTER_V, FALSE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
@@ -184,7 +184,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	call LittlerootTown_MaysHouse_1F_EventScript_1B6B9D
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1B6CD4
 	waitmovement 0
-	playbgm MUS_ENCOUNTER_INTERVIEWER, FALSE
+	playbgm MUS_INTER_V, FALSE
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BDE

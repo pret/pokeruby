@@ -24,7 +24,7 @@ EventScript_1C3443:
 
 gUnknown_081C3448:: @ 81C3448
 	lockall
-	playse SE_DING_DONG
+	playse SE_PINPON
 	message UnknownString_81C34E4
 	waitmessage
 	waitbuttonpress
@@ -33,7 +33,7 @@ gUnknown_081C3448:: @ 81C3448
 
 gUnknown_081C3459:: @ 81C3459
 	lockall
-	playse SE_DING_DONG
+	playse SE_PINPON
 	message UnknownString_81C3514
 	waitmessage
 	waitbuttonpress

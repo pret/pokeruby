@@ -3903,7 +3903,7 @@ void Task_TeamMonTMMove3(u8 taskId)
 {
     if (gUnknown_0202E8F6 == 0)
     {
-        PlayFanfare(MUS_LEVEL_UP);
+        PlayFanfare(MUS_FANFA1);
         gTasks[taskId].func = Task_TeamMonTMMove4;
     }
 }
@@ -4159,7 +4159,7 @@ void sub_806FA18(u8 taskId)
     ewram1B000.unk282 = sub_806F7E8(taskId, &sp0, 1);
     if (ewram1B000.unk282 == -1)
     {
-        PlaySE(SE_USE_ITEM);
+        PlaySE(SE_KAIFUKU);
         ewram1C000.unkC = 0;
         gTasks[taskId].data[11] -= gTasks[taskId].data[12];
         SetMonData(ewram1C000.pokemon, MON_DATA_HP, &gTasks[taskId].data[11]);
@@ -4343,9 +4343,9 @@ void UseMedicine(u8 taskId, u16 item, TaskFunc func)
 
         gUnknown_0202E8F4 = 1;
         if (!IsBlueYellowRedFlute(item))
-            PlaySE(SE_USE_ITEM);
+            PlaySE(SE_KAIFUKU);
         else
-            PlaySE(SE_GLASS_FLUTE);
+            PlaySE(SE_BIDORO);
         statusAndPkrs = GetMonStatusAndPokerus(ewram1C000.pokemon);
         if (statusAndPkrs == STATUS_PRIMARY_POKERUS || statusAndPkrs == STATUS_PRIMARY_NONE)
             PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.primarySelectedMonIndex);
@@ -4423,7 +4423,7 @@ void sub_8070088(u8 taskId)
         {
             gUnknown_0202E8F4 = 1;
             Menu_EraseWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
-            PlaySE(SE_USE_ITEM);
+            PlaySE(SE_KAIFUKU);
             PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.primarySelectedMonIndex);
             task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.primarySelectedMonIndex * 2], 9);
             ewram1B000.unk261 = 2;
@@ -4575,7 +4575,7 @@ void DoRecoverPP(u8 taskId)
     else
     {
         gUnknown_0202E8F4 = 1;
-        PlaySE(SE_USE_ITEM);
+        PlaySE(SE_KAIFUKU);
         RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
         r5 = GetMonData(ewram1C000.pokemon, MON_DATA_MOVE1 + gTasks[taskId].data[11]);
         StringCopy(gStringVar1, gMoveNames[r5]);

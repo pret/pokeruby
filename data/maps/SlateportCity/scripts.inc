@@ -73,7 +73,7 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	compare VAR_RESULT, 0
 	call_if_eq SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_FANFA4
 	message SlateportCity_Text_1646DD
 	waitfanfare
 	waitmessage

@@ -218,7 +218,7 @@ void UpdateCyclingRoadState(void) {
     if (VarGet(VAR_CYCLING_CHALLENGE_STATE) == 2 || VarGet(VAR_CYCLING_CHALLENGE_STATE) == 3)
     {
         VarSet(VAR_CYCLING_CHALLENGE_STATE, 0);
-        Overworld_SetSavedMusic(MUS_DUMMY);
+        Overworld_SetSavedMusic(SE_STOP);
     }
 }
 
@@ -571,7 +571,7 @@ void PetalburgGymSlideOpenDoors(void)
 {
     gUnknown_02039258 = 0;
     gPetalburgGymSlidingDoorIndex = 0;
-    PlaySE(SE_UNLOCK);
+    PlaySE(SE_KI_GASYAN);
     CreateTask(Task_SlideOpenPetalburgGymDoors, 8);
 }
 
@@ -1228,7 +1228,7 @@ void ShakeScreenInElevator(void)
     gTasks[taskId].data[5] = 3;
     SetCameraPanningCallback(NULL);
     sub_810ECFC();
-    PlaySE(SE_ELEVATOR);
+    PlaySE(SE_ELEBETA);
 }
 
 void sub_810EC34(u8 taskId)
@@ -1245,7 +1245,7 @@ void sub_810EC34(u8 taskId)
             SetCameraPanning(0, task->data[4]);
             if (task->data[2] == 23)
             {
-                PlaySE(SE_DING_DONG);
+                PlaySE(SE_PINPON);
                 sub_810EC9C(taskId);
                 InstallCameraPanAheadCallback();
             }
@@ -1801,7 +1801,7 @@ void ShakeCamera(void)
     gTasks[taskId].data[4] = gSpecialVar_0x8004;
     gTasks[taskId].data[5] = 5;
     SetCameraPanningCallback(NULL);
-    PlaySE(SE_M_STRENGTH);
+    PlaySE(SE_W070);
 }
 
 static void sub_810F7A8(u8 taskId)

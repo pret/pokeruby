@@ -562,7 +562,7 @@ void Task_ResetRtcScreen(u8 taskId)
         if (Save_WriteData(0) == SAVE_STATUS_OK)
         {
             ResetRtcScreen_ShowMessage(gSystemText_SaveCompleted);
-            PlaySE(SE_DING_DONG);
+            PlaySE(SE_PINPON);
         }
         else
         {

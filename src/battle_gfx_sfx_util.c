@@ -795,7 +795,7 @@ void HandleLowHpMusicChange(struct Pokemon *pkmn, u8 b)
         if (!ewram17800[b].unk0_1)
         {
             if (!ewram17800[b ^ 2].unk0_1)
-                PlaySE(SE_LOW_HEALTH);
+                PlaySE(SE_HINSI);
             ewram17800[b].unk0_1 = 1;
         }
     }
@@ -804,12 +804,12 @@ void HandleLowHpMusicChange(struct Pokemon *pkmn, u8 b)
         ewram17800[b].unk0_1 = 0;
         if (!IsDoubleBattle())
         {
-            m4aSongNumStop(SE_LOW_HEALTH);
+            m4aSongNumStop(SE_HINSI);
             return;
         }
         if (IsDoubleBattle() && !ewram17800[b ^ 2].unk0_1)
         {
-            m4aSongNumStop(SE_LOW_HEALTH);
+            m4aSongNumStop(SE_HINSI);
             return;
         }
     }
@@ -822,7 +822,7 @@ void BattleStopLowHpSound(void)
     ewram17800[r4].unk0_1 = 0;
     if (IsDoubleBattle())
         ewram17800[r4 ^ 2].unk0_1 = 0;
-    m4aSongNumStop(SE_LOW_HEALTH);
+    m4aSongNumStop(SE_HINSI);
 }
 
 u8 unref_sub_8032604(struct Pokemon *pkmn)

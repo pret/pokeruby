@@ -476,7 +476,7 @@ void HandleBattlePartyMenu(u8 taskId)
             if (gUnknown_02038473 == 3)
             {
                 if (GetMonData(&gPlayerParty[sub_806CA38(taskId)], MON_DATA_IS_EGG))
-                    PlaySE(SE_FAILURE);
+                    PlaySE(SE_HAZURE);
                 else
                 {
                     sub_806D5A4();
@@ -493,7 +493,7 @@ void HandleBattlePartyMenu(u8 taskId)
             break;
         case B_BUTTON:
             if (gUnknown_02038473 == 1)
-                PlaySE(SE_FAILURE);
+                PlaySE(SE_HAZURE);
             else
             {
                 PlaySE(SE_SELECT);

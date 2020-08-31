@@ -77,7 +77,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, MSGBOX_DEFAULT
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, MSGBOX_DEFAULT
@@ -249,7 +249,7 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, MSGBOX_DEFAULT
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, MSGBOX_DEFAULT
@@ -492,13 +492,13 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmovement 0
-	playse SE_BRIDGE_WALK
+	playse SE_HASHI
 	setmetatile 9, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 9, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmovement 0
-	playse SE_BRIDGE_WALK
+	playse SE_HASHI
 	setmetatile 9, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 9, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
@@ -631,13 +631,13 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	lockall
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900B
 	waitmovement 0
-	playse SE_BRIDGE_WALK
+	playse SE_HASHI
 	setmetatile 4, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 4, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmovement 0
-	playse SE_BRIDGE_WALK
+	playse SE_HASHI
 	setmetatile 4, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 4, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView

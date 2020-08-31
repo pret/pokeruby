@@ -98,7 +98,7 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 
 LittlerootTown_EventScript_14D62B:: @ 814D62B
 	delay 15
-	playse SE_LEDGE
+	playse SE_DANSA
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_14D6C0
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
@@ -865,7 +865,7 @@ LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 
 LittlerootTown_EventScript_14DD38:: @ 814DD38
 	msgbox LittlerootTown_Text_16A8FD, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waitmessage

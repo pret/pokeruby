@@ -13,7 +13,7 @@ SSTidalCorridor_EventScript_15FCBC:: @ 815FCBC
 	special SetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 2
 	lockall
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_199007, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -21,7 +21,7 @@ SSTidalCorridor_EventScript_15FCBC:: @ 815FCBC
 SSTidalCorridor_EventScript_15FCD2:: @ 815FCD2
 	setvar VAR_PORTHOLE_STATE, 6
 	lockall
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_199088, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -29,14 +29,14 @@ SSTidalCorridor_EventScript_15FCD2:: @ 815FCD2
 SSTidalRooms_EventScript_15FCE5:: @ 815FCE5
 	special SetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 7
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalRooms_Text_199007, MSGBOX_DEFAULT
 	return
 
 SSTidalRooms_EventScript_15FCF9:: @ 815FCF9
 	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 4
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalRooms_Text_1990F8, MSGBOX_DEFAULT
 	return
 
@@ -51,7 +51,7 @@ SSTidalCorridor_EventScript_15FD24:: @ 815FD24
 	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 3
 	lockall
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_199088, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -60,7 +60,7 @@ SSTidalCorridor_EventScript_15FD3A:: @ 815FD3A
 	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 8
 	lockall
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_1990B4, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -68,7 +68,7 @@ SSTidalCorridor_EventScript_15FD3A:: @ 815FD3A
 SSTidalRooms_EventScript_15FD50:: @ 815FD50
 	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 8
-	playse SE_DING_DONG
+	playse SE_PINPON
 	msgbox SSTidalRooms_Text_1990B4, MSGBOX_DEFAULT
 	return
 

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE109_SEASHORE_HOUSE",
   "name": "Route109_SeashoreHouse",
   "layout": "LAYOUT_ROUTE109_SEASHORE_HOUSE",
-  "music": "MUS_DEWFORD",
+  "music": "MUS_HIGHTOWN",
   "region_map_section": "MAPSEC_ROUTE_109",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

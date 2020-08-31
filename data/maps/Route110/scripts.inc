@@ -352,11 +352,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	end
 
 Route110_EventScript_14FDA7:: @ 814FDA7
-	playbgm MUS_ENCOUNTER_MAY, TRUE
+	playbgm MUS_GIRL_SUP, TRUE
 	return
 
 Route110_EventScript_14FDAC:: @ 814FDAC
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
+	playbgm MUS_BOY_SUP, TRUE
 	return
 
 Route110_EventScript_14FDB1:: @ 814FDB1

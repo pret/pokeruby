@@ -599,5 +599,5 @@ u32 GetDoorSoundEffect(u32 x, u32 y)
     if (cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, x, y) == 0)
         return SE_DOOR;
     else
-        return SE_SLIDING_DOOR;
+        return SE_JIDO_DOA;
 }

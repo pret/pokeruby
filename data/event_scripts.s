@@ -867,13 +867,13 @@ Common_EventScript_SetLegendaryWeather:: @ 81A02C1
 	return
 
 Common_EventScript_PlayGymBadgeFanfare:: @ 81A02C5
-	playfanfare MUS_OBTAIN_BADGE
+	playfanfare MUS_ME_BACHI
 	waitfanfare
 	return
 
 Common_EventScript_OutOfCenterPartyHeal:: @ 81A02CA
 	fadescreen FADE_TO_BLACK
-	playfanfare MUS_HEAL
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 	fadescreen FADE_FROM_BLACK
@@ -890,7 +890,7 @@ EventScript_RegionMap:: @ 81A02D6
 
 Common_EventScript_PlayBrineysBoatMusic:: @ 81A02E7
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_SAILING, FALSE
+	playbgm MUS_M_BOAT, FALSE
 	return
 
 Common_EventScript_StopBrineysBoatMusic:: @ 81A02EF
@@ -973,7 +973,7 @@ Common_EventScript_NameReceivedPartyMon:: @ 81A0678
 
 Common_EventScript_PlayerHandedOverTheItem:: @ 81A067F
 	bufferitemname 0, VAR_0x8004
-	playfanfare MUS_OBTAIN_TMHM
+	playfanfare MUS_ME_WAZA
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare

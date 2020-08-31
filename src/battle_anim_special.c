@@ -736,7 +736,7 @@ static void sub_813FCBC(u8 taskId)
 {
     if (gSprites[gBattlerSpriteIds[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]].animCmdIndex == 1)
     {
-        PlaySE12WithPanning(SE_BALL_THROW, 0);
+        PlaySE12WithPanning(SE_NAGERU, 0);
         gSprites[gTasks[taskId].data[0]].callback = sub_813FD90;
         CreateTask(sub_813FD34, 10);
         gTasks[taskId].func = sub_813FB7C;
@@ -824,7 +824,7 @@ static void sub_813FEC8(struct Sprite *sprite)
     taskId = sprite->data[5];
 
     if (++gTasks[taskId].data[1] == 11)
-        PlaySE(SE_BALL_TRADE);
+        PlaySE(SE_SUIKOMU);
 
     switch (gTasks[taskId].data[0])
     {
@@ -903,16 +903,16 @@ static void sub_8140058(struct Sprite *sprite)
             switch (bounceCount)
             {
             case 1:
-                PlaySE(SE_BALL_BOUNCE_1);
+                PlaySE(SE_KON);
                 break;
             case 2:
-                PlaySE(SE_BALL_BOUNCE_2);
+                PlaySE(SE_KON2);
                 break;
             case 3:
-                PlaySE(SE_BALL_BOUNCE_3);
+                PlaySE(SE_KON3);
                 break;
             default:
-                PlaySE(SE_BALL_BOUNCE_4);
+                PlaySE(SE_KON4);
                 break;
             }
         }
@@ -956,7 +956,7 @@ static void sub_8140158(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, 1);
         ewram17840.unkC = 0;
         sprite->callback = sub_81401A0;
-        PlaySE(SE_BALL);
+        PlaySE(SE_BOWA);
     }
 }
 
@@ -1098,7 +1098,7 @@ static void sub_81401A0(struct Sprite *sprite)
             else
                 StartSpriteAffineAnim(sprite, 1);
 
-            PlaySE(SE_BALL);
+            PlaySE(SE_BOWA);
         }
         break;
     }
@@ -1135,7 +1135,7 @@ static void sub_8140454(struct Sprite *sprite)
         gDoingBattleAnim = 0;
         UpdateOamPriorityInAllHealthboxes(1);
         m4aMPlayAllStop();
-        PlaySE(MUS_EVOLVED);
+        PlaySE(MUS_FANFA5);
     }
     else if (sprite->data[4] == 315)
     {
@@ -1307,7 +1307,7 @@ u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballInde
     gTasks[taskId].data[3] = priority;
     gTasks[taskId].data[4] = subpriority;
     gTasks[taskId].data[15] = ballIndex;
-    PlaySE(SE_BALL_OPEN);
+    PlaySE(SE_BOWA2);
     if (gMain.inBattle)
         ewram17840.unkA++;
 
@@ -1950,7 +1950,7 @@ static void sub_814191C(u8 taskId)
             else
                 pan = 63;
 
-            PlaySE12WithPanning(SE_SHINY, pan);
+            PlaySE12WithPanning(SE_REAPOKE, pan);
         }
     }
 

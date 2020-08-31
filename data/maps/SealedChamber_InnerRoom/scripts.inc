@@ -11,7 +11,7 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	compare VAR_RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	fadeoutbgm 0
-	playse SE_TRUCK_MOVE
+	playse SE_TRACK_MOVE
 	special DoSealedChamberShakingEffect1
 	waitstate
 	delay 40

@@ -962,7 +962,7 @@ void sub_802D148(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
-        m4aSongNumStop(SE_LOW_HEALTH);
+        m4aSongNumStop(SE_HINSI);
         gMain.inBattle = FALSE;
         gMain.callback1 = gPreBattleCallback1;
         SetMainCallback2(c2_8011A1C);
@@ -980,7 +980,7 @@ void sub_802D18C(void)
         }
         else
         {
-            m4aSongNumStop(SE_LOW_HEALTH);
+            m4aSongNumStop(SE_HINSI);
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
@@ -2470,7 +2470,7 @@ void PlayerHandlecmd10(void)
         {
             ewram17810[gActiveBattler].unk4 = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_FAINT, -64);
+            PlaySE12WithPanning(SE_POKE_DEAD, -64);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80105EC;

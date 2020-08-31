@@ -878,7 +878,7 @@ void PlayerTurnInPlace(u8 direction)
 
 void PlayerJumpLedge(u8 direction)
 {
-    PlaySE(SE_LEDGE);
+    PlaySE(SE_DANSA);
     PlayerSetAnimId(GetJump2MovementAction(direction), 8);
 }
 
@@ -912,28 +912,28 @@ void PlayerEndWheelie(u8 direction)
 // wheelie hopping standing
 void PlayerStandingHoppingWheelie(u8 a)
 {
-    PlaySE(SE_BIKE_HOP);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(a), 1);
 }
 
 // wheelie hopping moving
 void PlayerMovingHoppingWheelie(u8 a)
 {
-    PlaySE(SE_BIKE_HOP);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(a), 2);
 }
 
 // wheelie hopping ledge
 void PlayerLedgeHoppingWheelie(u8 a)
 {
-    PlaySE(SE_BIKE_HOP);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(a), 8);
 }
 
 // acro turn jump
 void PlayerAcroTurnJump(u8 direction)
 {
-    PlaySE(SE_BIKE_HOP);
+    PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
 }
 
@@ -1302,7 +1302,7 @@ static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject
         gFieldEffectArguments[2] = strengthObject->previousElevation;
         gFieldEffectArguments[3] = gSprites[strengthObject->spriteId].oam.priority;
         FieldEffectStart(FLDEFF_DUST);
-        PlaySE(SE_M_STRENGTH);
+        PlaySE(SE_W070);
         task->data[0]++;
     }
     return FALSE;
@@ -1341,7 +1341,7 @@ static u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEvent
     gPlayerAvatar.preventStep = TRUE;
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        PlaySE(SE_LEDGE);
+        PlaySE(SE_DANSA);
         ObjectEventSetHeldMovement(objectEvent, GetJumpInPlaceMovementAction(objectEvent->facingDirection));
         task->data[1]++;
         if (task->data[1] > 1)
@@ -1375,7 +1375,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct Objec
     task->data[1] = objectEvent->movementDirection;
     gPlayerAvatar.preventStep = TRUE;
     ScriptContext2_Enable();
-    PlaySE(SE_WARP_IN);
+    PlaySE(SE_TK_WARPIN);
     return TRUE;
 }
 

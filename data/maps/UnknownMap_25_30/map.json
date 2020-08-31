@@ -2,7 +2,7 @@
   "id": "MAP_UNKNOWN_MAP_25_30",
   "name": "UnknownMap_25_30",
   "layout": "LAYOUT_UNKNOWN_MAP_25_30",
-  "music": "MUS_GSC_PEWTER",
+  "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
