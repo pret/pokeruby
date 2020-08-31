@@ -54,7 +54,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	special LoadPlayerParty
 	special SavePlayerParty
 	special SetBattleTowerParty
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 

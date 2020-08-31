@@ -1030,7 +1030,7 @@ void sub_808B0C0(u8 taskID)
         case A_BUTTON:
             gLastFieldPokeMenuOpened = sub_806CA38(taskID);
             if (GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_IS_EGG))
-                PlaySE(SE_HAZURE);
+                PlaySE(SE_FAILURE);
             else
             {
                 sub_806D5A4();

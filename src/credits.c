@@ -497,7 +497,7 @@ void sub_81439D0(void)
 
 
     SetVBlankCallback(vblank_8143948);
-    m4aSongNumStart(MUS_THANKFOR);
+    m4aSongNumStart(MUS_CREDITS);
     SetMainCallback2(sub_814395C);
     gUnknown_02039325 = 0;
 

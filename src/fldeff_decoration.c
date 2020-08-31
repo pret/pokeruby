@@ -116,16 +116,16 @@ static void DoBalloonSoundEffect(s16 metatileId)
     switch (metatileId)
     {
     case 824:
-        PlaySE(SE_FUUSEN1);
+        PlaySE(SE_BALLOON_RED);
         break;
     case 828:
-        PlaySE(SE_FUUSEN2);
+        PlaySE(SE_BALLOON_BLUE);
         break;
     case 832:
-        PlaySE(SE_FUUSEN3);
+        PlaySE(SE_BALLOON_YELLOW);
         break;
     case 552:
-        PlaySE(SE_TOY_DANGO);
+        PlaySE(SE_MUD_BALL);
         break;
     }
 }
@@ -142,7 +142,7 @@ bool8 FldEff_Nop48(void)
 
 static void sub_80C69C4(s16 x, s16 y)
 {
-    PlaySE(SE_TOY_KABE);
+    PlaySE(SE_BREAKABLE_DOOR);
     MapGridSetMetatileIdAt(x, y, 630);
     MapGridSetMetatileIdAt(x, y - 1, 622);
     CurrentMapDrawMetatileAt(x, y);
@@ -185,28 +185,28 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
         switch (gTasks[taskId].data[0]) // metatileId
         {
         case 632:
-            PlaySE(SE_TOY_C);
+            PlaySE(SE_NOTE_C);
             break;
         case 633:
-            PlaySE(SE_TOY_D);
+            PlaySE(SE_NOTE_D);
             break;
         case 634:
-            PlaySE(SE_TOY_E);
+            PlaySE(SE_NOTE_E);
             break;
         case 635:
-            PlaySE(SE_TOY_F);
+            PlaySE(SE_NOTE_F);
             break;
         case 636:
-            PlaySE(SE_TOY_G);
+            PlaySE(SE_NOTE_G);
             break;
         case 637:
-            PlaySE(SE_TOY_A);
+            PlaySE(SE_NOTE_A);
             break;
         case 638:
-            PlaySE(SE_TOY_B);
+            PlaySE(SE_NOTE_B);
             break;
         case 691:
-            PlaySE(SE_TOY_C1);
+            PlaySE(SE_NOTE_C_HIGH);
             break;
         }
 
@@ -229,7 +229,7 @@ void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] == 8)
-        PlaySE(SE_W215);
+        PlaySE(SE_M_HEAL_BELL);
     if (sprite->data[0] >= 32)
         DestroySprite(sprite);
 }
@@ -298,7 +298,7 @@ bool8 FldEff_SandPillar(void)
 
 void SpriteCB_SandPillar_0(struct Sprite *sprite)
 {
-    PlaySE(SE_W088);
+    PlaySE(SE_M_ROCK_THROW);
     if (MapGridGetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1) == 646)
         MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, 3586);
     else

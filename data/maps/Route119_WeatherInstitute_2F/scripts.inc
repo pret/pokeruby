@@ -58,7 +58,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	getpartysize
 	compare VAR_RESULT, 6
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
 	waitmessage

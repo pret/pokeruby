@@ -895,7 +895,7 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
         {
             StoreInitialPlayerAvatarState();
             sp13E_warp_to_last_warp();
-            PlaySE(SE_W291);
+            PlaySE(SE_M_DIVE);
             return TRUE;
         }
     }
@@ -905,7 +905,7 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
         {
             StoreInitialPlayerAvatarState();
             sp13E_warp_to_last_warp();
-            PlaySE(SE_W291);
+            PlaySE(SE_M_DIVE);
             return TRUE;
         }
     }

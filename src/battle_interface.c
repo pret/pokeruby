@@ -1688,7 +1688,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     for (i = 0; i < 6; i++)
         gTasks[taskId].data[3 + i] = sp[i];
     gTasks[taskId].data[10] = d;
-    PlaySE12WithPanning(SE_TB_START, 0);
+    PlaySE12WithPanning(SE_BALL_TRAY_ENTER, 0);
     return taskId;
 }
 #else
@@ -2455,9 +2455,9 @@ static void sub_804507C(struct Sprite *sprite)
         if (r3 != 0)
             pan = -64;
         if (sprite->data[7] != 0)
-            PlaySE2WithPanning(SE_TB_KARA, pan);
+            PlaySE2WithPanning(SE_BALL_TRAY_EXIT, pan);
         else
-            PlaySE1WithPanning(SE_TB_KON, pan);
+            PlaySE1WithPanning(SE_BALL_TRAY_BALL, pan);
         sprite->callback = SpriteCallbackDummy;
     }
 }

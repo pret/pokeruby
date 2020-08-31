@@ -602,13 +602,13 @@ static void MoveTutorMain(void)
             PrintMainMoveTutorMenuText(gOtherText_ForgotOrDidNotLearnMove);
 #endif
             sMoveTutorMenu->state = 31;
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
         }
         break;
     case 31:
         if (Menu_UpdateWindowText())
         {
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
             sMoveTutorMenu->state = 32;
         }
         break;

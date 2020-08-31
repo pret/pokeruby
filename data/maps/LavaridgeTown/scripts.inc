@@ -57,11 +57,11 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	end
 
 LavaridgeTown_EventScript_14E56B:: @ 814E56B
-	playbgm MUS_GIRL_SUP, TRUE
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
 LavaridgeTown_EventScript_14E570:: @ 814E570
-	playbgm MUS_BOY_SUP, TRUE
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
 LavaridgeTown_EventScript_14E575:: @ 814E575
@@ -280,7 +280,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message LavaridgeTown_Text_16C2EA
 	waitfanfare
 	waitmessage

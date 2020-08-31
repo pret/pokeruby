@@ -211,7 +211,7 @@ bool8 FldEff_CutGrass(void)
     u8 tileBehavior;
     u8 i = 0, j;
 
-    PlaySE(SE_W015);
+    PlaySE(SE_M_CUT);
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     for (i = 0; i < 3; i++)
     {
@@ -383,7 +383,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
 
 static void StartCutTreeFieldEffect(void)
 {
-    PlaySE(SE_W015);
+    PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
     EnableBothScriptContexts();
 }

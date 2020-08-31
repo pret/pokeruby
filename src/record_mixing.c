@@ -100,7 +100,7 @@ void Task_RecordMixing_SoundEffect(u8 taskId)
     gTasks[taskId].tCounter++;
     if (gTasks[taskId].tCounter == 50)
     {
-        PlaySE(SE_W213);
+        PlaySE(SE_M_ATTRACT);
         gTasks[taskId].tCounter = 0;
     }
 }
@@ -139,7 +139,7 @@ void Task_RecordMixing_Main(u8 taskId)
     case 2:
         data[10] = CreateTask(sub_80BA00C, 10);
         tState = 3;
-        PlaySE(SE_W226);
+        PlaySE(SE_M_BATON_PASS);
         break;
     case 3:        // wait for sub_80BA00C
         if (!gTasks[data[10]].isActive)

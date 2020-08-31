@@ -35,7 +35,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	doweather
 	special WaitWeather
 	waitstate
-	playse SE_W197
+	playse SE_M_DETECT
 	setfieldeffectargument 0, 9
 	setfieldeffectargument 1, 13
 	setfieldeffectargument 2, 0
@@ -46,7 +46,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	.else
 	setvar VAR_RESULT, 2
 	.endif
-	playse SE_TAMA
+	playse SE_ORB
 	special sub_80818A4
 	waitstate
 	special sub_80818FC

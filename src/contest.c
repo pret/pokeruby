@@ -564,7 +564,7 @@ void sub_80AB9A0(u8 taskId)
         if (gTasks[taskId].data[1]++ <= 60)
             break;
         gTasks[taskId].data[1] = 0;
-        PlaySE12WithPanning(SE_C_MAKU_U, 0);
+        PlaySE12WithPanning(SE_CONTEST_CURTAIN_RISE, 0);
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -1299,7 +1299,7 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 50:
         if (sub_80AF038(r7))
-            PlaySE(SE_C_PASI);
+            PlaySE(SE_CONTEST_ICON_CHANGE);
         gTasks[taskId].data[0] = 25;
         return;
     case 25:
@@ -1385,9 +1385,9 @@ void sub_80AC2CC(u8 taskId)
                 break;
         }
         if (sub_80AF038(i))
-            PlaySE(SE_C_PASI);
+            PlaySE(SE_CONTEST_ICON_CHANGE);
         else
-            PlaySE(SE_C_SYU);
+            PlaySE(SE_CONTEST_ICON_CLEAR);
         if (sContestantStatus[i].judgesAttentionWasRemoved)
         {
             sub_80B03A8(i);
@@ -1568,7 +1568,7 @@ void sub_80AC2CC(u8 taskId)
         {
         case 0:
             sub_80B1EA8(-1, 1);
-            PlayFanfare(MUS_ME_ZANNEN);
+            PlayFanfare(MUS_TOO_BAD);
             gTasks[taskId].data[10]++;
             break;
         case 1:
@@ -1613,7 +1613,7 @@ void sub_80AC2CC(u8 taskId)
             if (!sContest.unk1920B_0)
             {
                 sub_80B1DDC();
-                PlaySE(SE_W227B);
+                PlaySE(SE_M_ENCORE2);
                 sub_80B1CBC(1);
                 gTasks[taskId].data[10]++;
             }
@@ -1997,7 +1997,7 @@ void sub_80ADE54(u8 taskId)
         sub_80B2184();
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 160;
-        PlaySE12WithPanning(SE_C_MAKU_D, 0);
+        PlaySE12WithPanning(SE_CONTEST_CURTAIN_FALL, 0);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = sub_80ADEAC;
     }
@@ -2671,7 +2671,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
         }
         if (b != 0)
         {
-            PlaySE(SE_EXPMAX);
+            PlaySE(SE_EXP_MAX);
             sContestantStatus[a].conditionMod = 0;
         }
     }
@@ -2686,7 +2686,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
         }
         if (b != 0)
         {
-            PlaySE(SE_FU_ZAKU2);
+            PlaySE(SE_CONTEST_CONDITION_LOSE);
             sContestantStatus[a].conditionMod = 0;
         }
     }
@@ -3363,7 +3363,7 @@ void sub_80AFC74(u8 taskId)
         CpuFill16(r6, (void *)(VRAM + 0xC000 + (0x56 + r5 + gUnknown_02038696[r7] * 160) * 2), 2);
         if (r1 > 0)
         {
-            PlaySE(SE_C_GAJI);
+            PlaySE(SE_CONTEST_HEART);
             m4aMPlayImmInit(&gMPlayInfo_SE1);
             m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
         }
@@ -3576,7 +3576,7 @@ void sub_80B02A8(struct Sprite *sprite)
     StartSpriteAnim(sprite, sContestantStatus[sprite->data[0]].unkB_0);
     StartSpriteAffineAnim(sprite, 2);
     sprite->callback = sub_80B02F4;
-    PlaySE(SE_JYUNI);
+    PlaySE(SE_CONTEST_PLACE);
 }
 
 void sub_80B02F4(struct Sprite *sprite)
@@ -4258,9 +4258,9 @@ void sub_80B0BC4(u8 a, bool8 b)
     gSprites[a].callback = sub_80B0C5C;
     gSprites[r5].callback = SpriteCallbackDummy;
     if (b == FALSE)
-        PlaySE(SE_C_PIKON);
+        PlaySE(SE_CONTEST_MONS_TURN);
     else
-        PlaySE(SE_PC_LOGON);
+        PlaySE(SE_PC_LOGIN);
 }
 
 void sub_80B0C5C(struct Sprite *sprite)
@@ -4723,36 +4723,36 @@ void sub_80B1710(u8 a)
     case 0:
     case 1:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0];
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         break;
     case 2:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 4;
-        PlaySE(SE_SEIKAI);
+        PlaySE(SE_SUCCESS);
         break;
     case 3:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 8;
-        PlaySE(SE_SEIKAI);
+        PlaySE(SE_SUCCESS);
         break;
     case 4:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     case 5:  // exactly the same as case 4
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     case 6:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 16;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     case 8:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 24;
-        PlaySE(SE_W215);
+        PlaySE(SE_M_HEAL_BELL);
         break;
     case 7:
     default:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 20;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     }
     gSprites[spriteId].data[1] = 0;
@@ -5075,12 +5075,11 @@ void sub_80B20C4(void)
         {
             u8 r4 = gUnknown_02038696[i] * 5 + 2;
             u16 r0 = sub_80AEFE8(i, 3);
-
-            *(u16 *)(BG_VRAM + 0xC000 + r4 * 64 + 0x28) = r0;
-            *(u16 *)(BG_VRAM + 0xC000 + r4 * 64 + 0x2A) = r0 + 1;
-            *(u16 *)(BG_VRAM + 0xC000 + (r4 + 1) * 64 + 0x28) = r0 + 16;
-            *(u16 *)(BG_VRAM + 0xC000 + (r4 + 1) * 64 + 0x2A) = r0 + 17;
-            PlaySE(SE_C_PASI);
+            *(u16 *)(VRAM + 0xC000 + r4 * 64 + 0x28) = r0;
+            *(u16 *)(VRAM + 0xC000 + r4 * 64 + 0x2A) = r0 + 1;
+            *(u16 *)(VRAM + 0xC000 + (r4 + 1) * 64 + 0x28) = r0 + 16;
+            *(u16 *)(VRAM + 0xC000 + (r4 + 1) * 64 + 0x2A) = r0 + 17;
+            PlaySE(SE_CONTEST_ICON_CHANGE);
         }
     }
 }
@@ -5148,7 +5147,7 @@ void sub_80B237C(u8 taskId)
 {
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = DISPLAY_HEIGHT;
-    PlaySE12WithPanning(SE_C_MAKU_D, 0);
+    PlaySE12WithPanning(SE_CONTEST_CURTAIN_FALL, 0);
     gTasks[taskId].func = sub_80B23BC;
 }
 
@@ -5260,7 +5259,7 @@ void sub_80B25A4(u8 taskId)
     else
     {
         gTasks[taskId].data[2] = 0;
-        PlaySE12WithPanning(SE_C_MAKU_U, 0);
+        PlaySE12WithPanning(SE_CONTEST_CURTAIN_RISE, 0);
         gTasks[taskId].func = sub_80B2508;
     }
 }

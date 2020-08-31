@@ -22,13 +22,13 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	lockall
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E25
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 4, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 4, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E28
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 4, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 4, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView

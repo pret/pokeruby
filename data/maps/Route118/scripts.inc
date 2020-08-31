@@ -76,7 +76,7 @@ Route118_EventScript_150FE4:: @ 8150FE4
 	end
 
 Route118_EventScript_151004:: @ 8151004
-	playse SE_DANSA
+	playse SE_LEDGE
 	applymovement 19, Route118_Movement_15106D
 	waitmovement 0
 	delay 30

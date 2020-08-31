@@ -78,7 +78,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	setvar VAR_RESULT, 0
 	.endif
-	playse SE_W197
+	playse SE_M_DETECT
 	setfieldeffectargument 0, 16
 	setfieldeffectargument 1, 42
 	setfieldeffectargument 2, 0
@@ -89,8 +89,8 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	setvar VAR_RESULT, 1
 	.endif
-	playfanfare MUS_ME_TAMA
-	playse SE_TAMA
+	playfanfare MUS_AWAKEN_LEGEND
+	playse SE_ORB
 	special sub_80818A4
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
@@ -126,7 +126,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4A89, MSGBOX_DEFAULT
 	.endif
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	.ifdef SAPPHIRE
