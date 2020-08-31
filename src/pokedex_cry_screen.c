@@ -146,8 +146,8 @@ struct PokedexCryScreen_201C000 * const gPokedexCryScreenPtr = (struct PokedexCr
 const u16 gUnknown_083FB6F8[] = INCBIN_U16("graphics/pokedex/83FB6F8.gbapal");
 const u16 gUnknown_083FB718[] = INCBIN_U16("graphics/pokedex/83FB718.4bpp");
 
-const u8 gUnknown_083FB738[] = {0xF0, 0x0F};
-const u8 gUnknown_083FB73A[][16] = {
+const u8 dotData[] = {0xF0, 0x0F};
+const u8 colorData[][16] = {
     {
         0x0F, 0x0E, 0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08,
         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
@@ -201,16 +201,12 @@ struct SpritePalette gCryMeterNeedleSpritePalettes[] = {
 #define CRY_METER_MAP_WIDTH 32
 #endif
 
-#ifdef NONMATCHING
-// caused by some switch branch weirdness
 u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
 {
     u8 i;
     u8 j;
-    u16 r6;
-    u16 r7;
+    u16 r6, r7;
     u8 r9 = FALSE;
-    u32 offset;
 
     switch (gUnknown_03005E98)
     {
@@ -223,6 +219,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             gPokedexCryScreenPtr->unk0012 = 28;
             gPokedexCryScreenPtr->unk0011 = 0;
             sub_811A350(arg1, -8 * cry->xPos, 0);
+            r7 = cry->unk2 * 0x800;
             for (i = 0; i < 7; i++)
             {
                 for (j = 0; j < 32; j++)
@@ -233,16 +230,13 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             gUnknown_03005E98++;
             break;
         case 1:
-            r7 = cry->unk2 << 11;
-            r6 = (cry->paletteNo << 12) + ((unsigned)(cry->unk0 << 18) >> 23);
+            r7 = cry->unk2 * 0x800;
+            r6 = (cry->paletteNo << 12) + ((cry->unk0 % 0x4000)/0x20);
             for (i = 0; i < 7; i++)
             {
                 for (j = 0; j < 32; j++)
                 {
-                    offset = j << 1;
-                    offset += i << 6;
-                    offset += r7;
-                    *((u16 *)(VRAM + offset)) = r6++;
+                    *((vu16 *)(BG_VRAM + r7 + (i * 0x40 + j * 2)) = r6++;
                 }
             }
             for (i = 0; i < gPokedexCryScreenPtr->unk0016 * 8; i++)
@@ -259,178 +253,6 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
     }
     return r9;
 }
-#else
-NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r9\n"
-                "\tmov r6, r8\n"
-                "\tpush {r6,r7}\n"
-                "\tadds r5, r0, 0\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r2, r1, 24\n"
-                "\tmovs r0, 0\n"
-                "\tmov r9, r0\n"
-                "\tldr r6, _08119E60 @ =gUnknown_03005E98\n"
-                "\tldrb r0, [r6]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _08119EE0\n"
-                "\tcmp r0, 0x1\n"
-                "\tbgt _08119E64\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08119E6A\n"
-                "\tb _08119F74\n"
-                "\t.align 2, 0\n"
-                "_08119E60: .4byte gUnknown_03005E98\n"
-                "_08119E64:\n"
-                "\tcmp r0, 0x2\n"
-                "\tbeq _08119F60\n"
-                "\tb _08119F74\n"
-                "_08119E6A:\n"
-                "\tldr r4, _08119ECC @ =gSharedMem + 0x1C000\n"
-                "\tldrh r0, [r5]\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r0, [r4, 0x14]\n"
-                "\tldrb r0, [r5, 0x5]\n"
-                "\tstrb r0, [r4, 0x16]\n"
-                "\tstrb r1, [r4, 0x1A]\n"
-                "\tstrb r1, [r4, 0x1B]\n"
-                "\tstrb r1, [r4, 0x10]\n"
-                "\tmovs r0, 0x1C\n"
-                "\tstrb r0, [r4, 0x12]\n"
-                "\tstrb r1, [r4, 0x11]\n"
-                "\tldrb r1, [r5, 0x4]\n"
-                "\tlsls r1, 19\n"
-                "\tnegs r1, r1\n"
-                "\tasrs r1, 16\n"
-                "\tadds r0, r2, 0\n"
-                "\tmovs r2, 0x1\n"
-                "\tbl sub_811A350\n"
-                "\tmovs r0, 0\n"
-                "\tmov r12, r6\n"
-                "\tldr r1, _08119ED0 @ =0x040000d4\n"
-                "\tldr r7, _08119ED4 @ =gUnknown_083FB718\n"
-                "\tldr r2, _08119ED8 @ =0xfffe4000\n"
-                "\tadds r6, r4, r2\n"
-                "\tldr r5, _08119EDC @ =0x80000010\n"
-                "_08119EA0:\n"
-                "\tmovs r3, 0\n"
-                "\tadds r4, r0, 0x1\n"
-                "\tlsls r2, r0, 5\n"
-                "_08119EA6:\n"
-                "\tstr r7, [r1]\n"
-                "\tadds r0, r2, r3\n"
-                "\tlsls r0, 5\n"
-                "\tadds r0, r6\n"
-                "\tstr r0, [r1, 0x4]\n"
-                "\tstr r5, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "\tadds r0, r3, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x1F\n"
-                "\tbls _08119EA6\n"
-                "\tlsls r0, r4, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x6\n"
-                "\tbls _08119EA0\n"
-                "\tmov r1, r12\n"
-                "\tb _08119F50\n"
-                "\t.align 2, 0\n"
-                "_08119ECC: .4byte gSharedMem + 0x1C000\n"
-                "_08119ED0: .4byte 0x040000d4\n"
-                "_08119ED4: .4byte gUnknown_083FB718\n"
-                "_08119ED8: .4byte 0xfffe4000\n"
-                "_08119EDC: .4byte 0x80000010\n"
-                "_08119EE0:\n"
-                "\tldrb r0, [r5, 0x2]\n"
-                "\tlsls r0, 27\n"
-                "\tlsrs r7, r0, 16\n"
-                "\tldrb r1, [r5, 0x3]\n"
-                "\tlsls r1, 12\n"
-                "\tldrh r0, [r5]\n"
-                "\tlsls r0, 18\n"
-                "\tlsrs r0, 23\n"
-                "\tadds r1, r0\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r6, r1, 16\n"
-                "\tmovs r0, 0\n"
-                "\tldr r2, _08119F58 @ =gSharedMem + 0x1C000\n"
-                "\tmov r8, r2\n"
-                "\tmovs r1, 0xC0\n"
-                "\tlsls r1, 19\n"
-                "\tmov r12, r1\n"
-                "_08119F02:\n"
-                "\tmovs r3, 0\n"
-                "\tadds r4, r0, 0x1\n"
-                "\tlsls r5, r0, 6\n"
-                "_08119F08:\n"
-                "\tlsls r1, r3, 1\n"
-                "\tadds r1, r5\n"
-                "\tadds r1, r7\n"
-                "\tadd r1, r12\n"
-                "\tadds r2, r6, 0\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r6, r0, 16\n"
-                "\tstrh r2, [r1]\n"
-                "\tadds r0, r3, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x1F\n"
-                "\tbls _08119F08\n"
-                "\tlsls r0, r4, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x6\n"
-                "\tbls _08119F02\n"
-                "\tmov r2, r8\n"
-                "\tldrb r0, [r2, 0x16]\n"
-                "\tmovs r4, 0\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08119F4E\n"
-                "\tmov r5, r8\n"
-                "_08119F38:\n"
-                "\tadds r0, r4, 0\n"
-                "\tmovs r1, 0\n"
-                "\tbl sub_811A1C8\n"
-                "\tadds r0, r4, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tldrb r0, [r5, 0x16]\n"
-                "\tlsls r0, 3\n"
-                "\tcmp r4, r0\n"
-                "\tblt _08119F38\n"
-                "_08119F4E:\n"
-                "\tldr r1, _08119F5C @ =gUnknown_03005E98\n"
-                "_08119F50:\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r1]\n"
-                "\tb _08119F74\n"
-                "\t.align 2, 0\n"
-                "_08119F58: .4byte gSharedMem + 0x1C000\n"
-                "_08119F5C: .4byte gUnknown_03005E98\n"
-                "_08119F60:\n"
-                "\tbl sub_811A324\n"
-                "\tldr r0, _08119F84 @ =gUnknown_083FB6F8\n"
-                "\tldrb r1, [r5, 0x3]\n"
-                "\tlsls r1, 4\n"
-                "\tmovs r2, 0x20\n"
-                "\tbl LoadPalette\n"
-                "\tmovs r0, 0x1\n"
-                "\tmov r9, r0\n"
-                "_08119F74:\n"
-                "\tmov r0, r9\n"
-                "\tpop {r3,r4}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1\n"
-                "\t.align 2, 0\n"
-                "_08119F84: .4byte gUnknown_083FB6F8");
-}
-#endif // NONMATCHING
 
 void sub_8119F88(u8 a0)
 {
@@ -605,8 +427,8 @@ void sub_811A1C8(u8 a0, u8 a1)
     {
         do
         {
-            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
-            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= dotData[r7];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= colorData[r7][((i / 3) - 1) & 0x0F];
             i--;
         } while (i > gPokedexCryScreenPtr->unk0012);
     }
@@ -614,8 +436,8 @@ void sub_811A1C8(u8 a0, u8 a1)
     {
         do
         {
-            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
-            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= dotData[r7];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= colorData[r7][((i / 3) - 1) & 0x0F];
             i++;
         } while (i < gPokedexCryScreenPtr->unk0012);
     }
@@ -656,7 +478,7 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
                 "\tmov r10, r0\n"
                 "\tlsrs r5, 27\n"
                 "\tmov r8, r5\n"
-                "\tldr r0, _0811A288 @ =gUnknown_083FB738\n"
+                "\tldr r0, _0811A288 @ =dotData\n"
                 "\tmov r1, r10\n"
                 "\tldrb r1, [r1, 0x12]\n"
                 "\tcmp r6, r1\n"
@@ -697,7 +519,7 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
                 "\tands r0, r1\n"
                 "\tlsls r1, r7, 4\n"
                 "\tadds r0, r1\n"
-                "\tldr r1, _0811A294 @ =gUnknown_083FB73A\n"
+                "\tldr r1, _0811A294 @ =colorData\n"
                 "\tadds r0, r1\n"
                 "\tldrb r0, [r0]\n"
                 "\torrs r4, r0\n"
@@ -715,10 +537,10 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
                 "_0811A27C: .4byte 0x40920000\n"
                 "_0811A280: .4byte 0x00000000\n"
                 "_0811A284: .4byte gSharedMem + 0x1C000\n"
-                "_0811A288: .4byte gUnknown_083FB738\n"
+                "_0811A288: .4byte dotData\n"
                 "_0811A28C: .4byte gUnknown_083FB274\n"
                 "_0811A290: .4byte gSharedMem\n"
-                "_0811A294: .4byte gUnknown_083FB73A\n"
+                "_0811A294: .4byte colorData\n"
                 "_0811A298:\n"
                 "\tlsls r1, r7, 4\n"
                 "\tstr r1, [sp, 0x4]\n"
@@ -757,7 +579,7 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
                 "\tands r0, r1\n"
                 "\tldr r3, [sp, 0x4]\n"
                 "\tadds r0, r3\n"
-                "\tldr r1, _0811A31C @ =gUnknown_083FB73A\n"
+                "\tldr r1, _0811A31C @ =colorData\n"
                 "\tadds r0, r1\n"
                 "\tldrb r0, [r0]\n"
                 "\torrs r4, r0\n"
@@ -785,7 +607,7 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
                 "\t.align 2, 0\n"
                 "_0811A314: .4byte gUnknown_083FB274\n"
                 "_0811A318: .4byte gSharedMem\n"
-                "_0811A31C: .4byte gUnknown_083FB73A\n"
+                "_0811A31C: .4byte colorData\n"
                 "_0811A320: .4byte gSharedMem + 0x1C000");
 }
 #endif // NONMATCHING
