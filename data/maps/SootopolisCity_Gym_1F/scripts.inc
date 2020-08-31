@@ -49,7 +49,7 @@ SootopolisCity_Gym_1F_MapScript2_15AF86:: @ 815AF86
 SootopolisCity_Gym_1F_EventScript_15AFA8:: @ 815AFA8
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse SE_RU_GASHIN
+	playse SE_ICE_STAIRS
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
@@ -57,7 +57,7 @@ SootopolisCity_Gym_1F_EventScript_15AFA8:: @ 815AFA8
 SootopolisCity_Gym_1F_EventScript_15AFBC:: @ 815AFBC
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse SE_RU_GASHIN
+	playse SE_ICE_STAIRS
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
@@ -65,7 +65,7 @@ SootopolisCity_Gym_1F_EventScript_15AFBC:: @ 815AFBC
 SootopolisCity_Gym_1F_EventScript_15AFD0:: @ 815AFD0
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse SE_RU_GASHIN
+	playse SE_ICE_STAIRS
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
@@ -75,7 +75,7 @@ SootopolisCity_Gym_1F_EventScript_15AFE4:: @ 815AFE4
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Gym_1F_Movement_15AFFD
 	waitmovement 0
-	playse SE_RU_HYUU
+	playse SE_FALL
 	delay 60
 	warphole MAP_SOOTOPOLIS_CITY_GYM_B1F
 	waitstate

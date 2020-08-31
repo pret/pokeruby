@@ -43,7 +43,7 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	updatemoneybox 0, 0
 	nop
 	updatecoinsbox 0, 5
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181CFE, MSGBOX_DEFAULT
 	hidemoneybox 0, 0
 	hidecoinsbox 0, 5
@@ -62,7 +62,7 @@ MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	updatemoneybox 0, 0
 	nop
 	updatecoinsbox 0, 5
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181CFE, MSGBOX_DEFAULT
 	hidemoneybox 0, 0
 	hidecoinsbox 0, 5
@@ -163,7 +163,7 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	removecoins 1000
 	adddecoration DECOR_TREECKO_DOLL
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181E49, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -179,7 +179,7 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	removecoins 1000
 	adddecoration DECOR_TORCHIC_DOLL
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181E49, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -195,7 +195,7 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	removecoins 1000
 	adddecoration DECOR_MUDKIP_DOLL
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181E49, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -297,7 +297,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	removecoins 1500
 	additem ITEM_TM32_DOUBLE_TEAM
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181F08, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -312,7 +312,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	removecoins 3500
 	additem ITEM_TM29_PSYCHIC
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181F08, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -327,7 +327,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	removecoins 4000
 	additem ITEM_TM35_FLAMETHROWER
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181F08, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -342,7 +342,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	removecoins 4000
 	additem ITEM_TM24_THUNDERBOLT
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181F08, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -357,7 +357,7 @@ MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	removecoins 4000
 	additem ITEM_TM13_ICE_BEAM
 	updatecoinsbox 0, 0
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_181F08, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -466,7 +466,7 @@ MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	setflag FLAG_RECEIVED_20_COINS
 	addcoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, MSGBOX_DEFAULT
-	playse SE_REGI
+	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_1570CA
 	end
 

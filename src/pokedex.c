@@ -1534,7 +1534,7 @@ void Task_PokedexMainScreen(u8 taskId)
             gPokedexView->unk614 = gPokedexView->dexMode;
             gPokedexView->unk618 = gPokedexView->dexOrder;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySE(SE_PC_LOGON);
+            PlaySE(SE_PC_LOGIN);
         }
         else if (gMain.newKeys & B_BUTTON)
         {
@@ -1725,7 +1725,7 @@ static void Task_PokedexResultsScreen(u8 taskId)
             gTasks[taskId].data[0] = sub_8091E3C();
             gPokedexView->unk64F = 0;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySE(SE_PC_LOGON);
+            PlaySE(SE_PC_LOGIN);
         }
         else if (gMain.newKeys & B_BUTTON)
         {
@@ -1784,7 +1784,7 @@ static void Task_PokedexResultsScreenMenu(u8 taskId)
             case 3: //BACK TO POKEDEX
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
-                PlaySE(SE_TRACK_DOOR);
+                PlaySE(SE_TRUCK_DOOR);
                 break;
             case 4: //CLOSE POKEDEX
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -3007,7 +3007,7 @@ static void Task_PageScreenProcessInput(u8 taskId)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_808F888;
-        PlaySE(SE_Z_SCROLL);
+        PlaySE(SE_DEX_SCROLL);
         return;
     }
     if (gMain.newKeys & B_BUTTON)
@@ -3037,7 +3037,7 @@ static void Task_PageScreenProcessInput(u8 taskId)
         case SIZE_SCREEN:
             if (!gUnknown_0202FFBC->owned)
             {
-                PlaySE(SE_HAZURE);
+                PlaySE(SE_FAILURE);
             }
             else
             {
@@ -3055,7 +3055,7 @@ static void Task_PageScreenProcessInput(u8 taskId)
     {
         gPokedexView->selectedScreen--;
         sub_8090584(gPokedexView->selectedScreen, 0xD);
-        PlaySE(SE_Z_PAGE);
+        PlaySE(SE_DEX_PAGE);
         return;
     }
     if (((gMain.newKeys & DPAD_RIGHT)
@@ -3064,7 +3064,7 @@ static void Task_PageScreenProcessInput(u8 taskId)
     {
         gPokedexView->selectedScreen++;
         sub_8090584(gPokedexView->selectedScreen, 0xD);
-        PlaySE(SE_Z_PAGE);
+        PlaySE(SE_DEX_PAGE);
         return;
     }
 }
@@ -3268,7 +3268,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
             m4aMPlayContinue(&gMPlayInfo_BGM);
             gPokedexView->unk64F = 2;
             gTasks[taskId].func = sub_808FFBC;
-            PlaySE(SE_Z_PAGE);
+            PlaySE(SE_DEX_PAGE);
             return;
         }
         if ((gMain.newKeys & DPAD_RIGHT)
@@ -3276,7 +3276,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
         {
             if (!gUnknown_0202FFBC->owned)
             {
-                PlaySE(SE_HAZURE);
+                PlaySE(SE_FAILURE);
             }
             else
             {
@@ -3284,7 +3284,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 gPokedexView->unk64F = 3;
                 gTasks[taskId].func = sub_808FFBC;
-                PlaySE(SE_Z_PAGE);
+                PlaySE(SE_DEX_PAGE);
             }
             return;
         }
@@ -3428,7 +3428,7 @@ static void Task_SizeScreenProcessInput(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
         gPokedexView->unk64F = 2;
         gTasks[taskId].func = sub_8090498;
-        PlaySE(SE_Z_PAGE);
+        PlaySE(SE_DEX_PAGE);
     }
 }
 
@@ -4810,13 +4810,13 @@ static void sub_809207C(u8 taskId)
     }
     if ((gMain.newKeys & DPAD_LEFT) && gTasks[taskId].data[0] > 0)
     {
-        PlaySE(SE_Z_PAGE);
+        PlaySE(SE_DEX_PAGE);
         gTasks[taskId].data[0]--;
         sub_8092AB0(gTasks[taskId].data[0]);
     }
     if ((gMain.newKeys & DPAD_RIGHT) && gTasks[taskId].data[0] < 2)
     {
-        PlaySE(SE_Z_PAGE);
+        PlaySE(SE_DEX_PAGE);
         gTasks[taskId].data[0]++;
         sub_8092AB0(gTasks[taskId].data[0]);
     }
@@ -4850,7 +4850,7 @@ static void sub_80921B0(u8 taskId)
 
     if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
         sub_8092EB0(taskId);
         gTasks[taskId].func = sub_809204C;
         return;
@@ -4878,7 +4878,7 @@ static void sub_80921B0(u8 taskId)
             {
                 sub_8091E20(gDexText_Searching);
                 gTasks[taskId].func = sub_80923FC;
-                PlaySE(SE_Z_SEARCH);
+                PlaySE(SE_DEX_SEARCH);
             }
         }
         else
@@ -4934,12 +4934,12 @@ static void sub_80924A4(u8 taskId)
     {
         if (gPokedexView->pokemonListCount != 0)
         {
-            PlaySE(SE_SEIKAI);
+            PlaySE(SE_SUCCESS);
             sub_8091E20(gDexText_SearchComplete);
         }
         else
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             sub_8091E20(gDexText_NoMatching);
         }
         gTasks[taskId].func = sub_8092508;
@@ -4961,7 +4961,7 @@ static void sub_8092508(u8 taskId)
         else
         {
             gTasks[taskId].func = sub_809217C;
-            PlaySE(SE_BOWA);
+            PlaySE(SE_BALL);
         }
     }
 }
@@ -5015,7 +5015,7 @@ static void sub_8092644(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         sub_814ADC8();
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
         Menu_EraseWindowRect(18, 1, 28, 12);
         sub_8092C8C(1);
         *p1 = gTasks[taskId].data[14];

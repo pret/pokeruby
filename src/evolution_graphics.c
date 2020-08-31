@@ -273,7 +273,7 @@ static void EvoTask_BeginPreSet1_FadeAndPlaySE(u8 taskID)
     gTasks[taskID].tFrameCounter = 0;
     BeginNormalPaletteFade(3 << gTasks[taskID].data[1], 10, 0, 16, RGB(31, 31, 31));
     gTasks[taskID].func = EvoTask_CreatePreEvoSparkleSet1;
-    PlaySE(SE_W025);
+    PlaySE(SE_M_MEGA_KICK);
 }
 
 static void EvoTask_CreatePreEvoSparkleSet1(u8 taskID)
@@ -313,7 +313,7 @@ static void EvoTask_BeginPreSparklesSet2(u8 taskID)
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     gTasks[taskID].func = EvoTask_CreatePreEvoSparklesSet2;
-    PlaySE(SE_W062B);
+    PlaySE(SE_M_BUBBLE_BEAM2);
 }
 
 static void EvoTask_CreatePreEvoSparklesSet2(u8 taskID)
@@ -347,7 +347,7 @@ static void EvoTask_BeginPostSparklesSet1(u8 taskID)
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet1;
-    PlaySE(SE_REAPOKE);
+    PlaySE(SE_SHINY);
 }
 
 static void EvoTask_CreatePostEvoSparklesSet1(u8 taskID)
@@ -391,7 +391,7 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash(u8 taskID)
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
     BeginNormalPaletteFade(0xFFF9001C, 0, 0, 16, RGB(31, 31, 31));
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet2_AndFlash;
-    PlaySE(SE_W080);
+    PlaySE(SE_M_PETAL_DANCE);
 }
 
 static void EvoTask_CreatePostEvoSparklesSet2_AndFlash(u8 taskID)
@@ -439,7 +439,7 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash_Trade(u8 taskID)
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
     BeginNormalPaletteFade(0xFFF90001, 0, 0, 16, RGB(31, 31, 31));
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade;
-    PlaySE(SE_W080);
+    PlaySE(SE_M_PETAL_DANCE);
 }
 
 static void EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade(u8 taskID)

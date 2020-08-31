@@ -51,9 +51,9 @@
 #include "constants/species.h"
 
 #ifdef SAPPHIRE
-#define LEGENDARY_MUSIC MUS_OOAME  // Heavy Rain
+#define LEGENDARY_MUSIC MUS_WEATHER_KYOGRE  // Heavy Rain
 #else
-#define LEGENDARY_MUSIC MUS_HIDERI // Drought
+#define LEGENDARY_MUSIC MUS_WEATHER_GROUDON // Drought
 #endif
 
 extern u8 gUnknown_020297ED;
@@ -845,7 +845,7 @@ static u16 GetLocationMusic(struct WarpData *warp)
     if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
         return LEGENDARY_MUSIC;
     else if (IsInfiltratedWeatherInstitute(warp) == TRUE)
-        return MUS_TOZAN;
+        return MUS_MT_CHIMNEY;
     else
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
@@ -858,7 +858,7 @@ u16 GetCurrLocationDefaultMusic(void)
     if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE111)
      && GetSav1Weather() == 8)
-        return MUS_ASHROAD;
+        return MUS_ROUTE111;
 
     music = GetLocationMusic(&gSaveBlock1.location);
     if (music != 0x7FFF)
@@ -868,9 +868,9 @@ u16 GetCurrLocationDefaultMusic(void)
     else
     {
         if (gSaveBlock1.pos.x < 24)
-            return MUS_DOORO_X1;
+            return MUS_ROUTE110;
         else
-            return MUS_GRANROAD;
+            return MUS_ROUTE119;
     }
 }
 
@@ -885,9 +885,9 @@ u16 GetWarpDestinationMusic(void)
     {
         if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAUVILLE_CITY)
          && gSaveBlock1.location.mapNum == MAP_NUM(MAUVILLE_CITY))
-            return MUS_DOORO_X1;
+            return MUS_ROUTE110;
         else
-            return MUS_GRANROAD;
+            return MUS_ROUTE119;
     }
 }
 
@@ -905,9 +905,9 @@ void Overworld_PlaySpecialMapMusic(void)
         if (gSaveBlock1.savedMusic)
             music = gSaveBlock1.savedMusic;
         else if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
-            music = MUS_DEEPDEEP;
+            music = MUS_UNDERWATER;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-            music = MUS_NAMINORI;
+            music = MUS_SURF;
     }
 
     if (music != GetCurrentMapMusic())
@@ -932,10 +932,10 @@ void sub_8053F0C(void)
         u16 currentMusic = GetCurrentMapMusic();
         if (newMusic != LEGENDARY_MUSIC)
         {
-            if (currentMusic == MUS_DEEPDEEP || currentMusic == MUS_NAMINORI)
+            if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
                 return;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-                newMusic = MUS_NAMINORI;
+                newMusic = MUS_SURF;
         }
         if (newMusic != currentMusic)
         {

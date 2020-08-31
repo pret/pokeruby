@@ -801,7 +801,7 @@ void sub_8115E14(u8 taskid)
             PlaySE(SE_BOO);
         else
         {
-            m4aSongNumStart(SE_REGI);
+            m4aSongNumStart(SE_SHOP);
             gTasks[taskid].func = sub_8115DA0;
         }
     }
@@ -983,7 +983,7 @@ void sub_8116308(u8 taskid)
     gTasks[taskid].data[6]++;
     gTasks[taskid].data[8]++;
     sub_81182F8(6 - gTasks[taskid].data[6]);
-    m4aSongNumStart(SE_TAMAKORO);
+    m4aSongNumStart(SE_ROULETTE_BALL);
     gTasks[taskid].func = sub_811637C;
 }
 
@@ -1100,20 +1100,20 @@ void sub_8116638(u8 taskid)
     case 2:
         if (gTasks[taskid].data[2] == 12)
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             Menu_DrawStdWindowFrame(0, 14, 29, 19);
             Menu_PrintText(&gUnknown_081C41A5, 1, 15);
         }
         else
         {
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
             Menu_DrawStdWindowFrame(0, 14, 29, 19);
             Menu_PrintText(&gUnknown_081C4199, 1, 15);
         }
         break;
     case 0:
     default:
-        m4aSongNumStart(SE_HAZURE);
+        m4aSongNumStart(SE_FAILURE);
         Menu_DrawStdWindowFrame(0, 14, 29, 19);
         Menu_PrintText(&gUnknown_081C41AE, 1, 15);
     }

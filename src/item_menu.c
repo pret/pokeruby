@@ -2853,7 +2853,7 @@ static void sub_80A6548(u8 taskId)
 
 static void sub_80A6574(u8 taskId)
 {
-    PlaySE(SE_REGI);
+    PlaySE(SE_SHOP);
     sub_80A6870(gSpecialVar_ItemId, gTasks[taskId].data[1]);
     gTasks[taskId].func = sub_80A6548;
 }

@@ -707,7 +707,7 @@ static bool8 sub_8101E3C(struct Task *task)
             eSlotMachine->coins -= (3 - eSlotMachine->bet);
             eSlotMachine->bet = 3;
             eSlotMachine->state = 9;
-            PlaySE(SE_REGI);
+            PlaySE(SE_SHOP);
         }
         else
         {
@@ -718,7 +718,7 @@ static bool8 sub_8101E3C(struct Task *task)
     {
         if (gMain.newKeys & DPAD_DOWN && eSlotMachine->coins != 0)
         {
-            PlaySE(SE_REGI);
+            PlaySE(SE_SHOP);
             sub_8103D50(eSlotMachine->bet);
             eSlotMachine->coins--;
             eSlotMachine->bet++;
@@ -834,7 +834,7 @@ static bool8 sub_8102058(struct Task *task)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(SE_JYUNI);
+        PlaySE(SE_CONTEST_PLACE);
         sub_8102E1C(eSlotMachine->unk18);
         sub_8103C14(eSlotMachine->unk18);
         eSlotMachine->state = 13;
@@ -927,17 +927,17 @@ bool8 sub_81020C8(struct Task *task)
         }
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             sub_8104CAC(6);
         }
         else if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_MIXED))
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             sub_8104CAC(5);
         }
         else
         {
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
             sub_8104CAC(2);
         }
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_MIXED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
@@ -2682,7 +2682,7 @@ static void sub_810437C(struct Task *task)
     sub_810545C();
     sub_8102680();
     StopMapMusic();
-    PlayNewMapMusic(MUS_BD_TIME);
+    PlayNewMapMusic(MUS_ROULETTE);
 }
 
 static void sub_81043EC(struct Task *task)
@@ -2818,7 +2818,7 @@ static void sub_81046C0(struct Task *task)
         {
             task->data[4] = 0xa0;
             StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 5);
-            PlayFanfare(MUS_ME_ZANNEN);
+            PlayFanfare(MUS_TOO_BAD);
         }
         else
         {
@@ -2830,7 +2830,7 @@ static void sub_81046C0(struct Task *task)
                 sub_8104098();
                 eSlotMachine->pikaPower = 0;
             }
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
         }
     }
 }
@@ -2906,8 +2906,8 @@ static void sub_81048CC(struct Task *task)
     task->data[4] = 4;
     task->data[5] = 0;
     StopMapMusic();
-    PlayFanfare(MUS_ME_ZANNEN);
-    PlaySE(SE_W153);
+    PlayFanfare(MUS_TOO_BAD);
+    PlaySE(SE_M_EXPLOSION);
 }
 
 static void sub_8104940(struct Task *task)

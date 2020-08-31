@@ -34,7 +34,7 @@ static void Task_FieldPoisonEffect(u8 taskId)
 
 void FldeffPoison_Start(void)
 {
-    PlaySE(SE_DOKU);
+    PlaySE(SE_FIELD_POISON);
     CreateTask(Task_FieldPoisonEffect, 80);
 }
 

@@ -404,7 +404,7 @@ static void SendOutMonAnimation(u8 taskId)
     gSprites[spriteId].oam.affineParam = taskId;
     gTasks[taskId].data[4] = gBattlerTarget;
     gTasks[taskId].func = TaskDummy;
-    PlaySE(SE_NAGERU);
+    PlaySE(SE_BALL_THROW);
 }
 
 static void objc_0804ABD4(struct Sprite *sprite)
@@ -455,7 +455,7 @@ static void sub_8046760(struct Sprite *sprite)
 {
     sprite->data[5]++;
     if (sprite->data[5] == 11)
-        PlaySE(SE_SUIKOMU);
+        PlaySE(SE_BALL_TRADE);
     if (gSprites[gBattlerSpriteIds[sprite->data[6]]].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
@@ -505,16 +505,16 @@ static void sub_804684C(struct Sprite *sprite)
             switch (sprite->data[3] >> 8)
             {
             case 1:
-                PlaySE(SE_KON);
+                PlaySE(SE_BALL_BOUNCE_1);
                 break;
             case 2:
-                PlaySE(SE_KON2);
+                PlaySE(SE_BALL_BOUNCE_2);
                 break;
             case 3:
-                PlaySE(SE_KON3);
+                PlaySE(SE_BALL_BOUNCE_3);
                 break;
             default:
-                PlaySE(SE_KON4);
+                PlaySE(SE_BALL_BOUNCE_4);
                 break;
             }
         }
@@ -556,7 +556,7 @@ static void sub_8046944(struct Sprite *sprite)
         sprite->affineAnimPaused = TRUE;
         StartSpriteAffineAnim(sprite, 1);
         sprite->callback = sub_8046984;
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
     }
 }
 
@@ -625,7 +625,7 @@ static void sub_8046984(struct Sprite *sprite)
                 StartSpriteAffineAnim(sprite, 2);
             else
                 StartSpriteAffineAnim(sprite, 1);
-            PlaySE(SE_BOWA);
+            PlaySE(SE_BALL);
         }
         break;
     }
@@ -822,7 +822,7 @@ static void sub_8046FBC(struct Sprite *sprite)
     {
         gDoingBattleAnim = 0;
         m4aMPlayAllStop();
-        PlaySE(MUS_FANFA5);
+        PlaySE(MUS_EVOLVED);
     }
     else if (sprite->data[4] == 315)
     {
@@ -1074,7 +1074,7 @@ static void sub_80476E0(struct Sprite *sprite)
 
     sprite->data[5]++;
     if (sprite->data[5] == 11)
-        PlaySE(SE_SUIKOMU);
+        PlaySE(SE_BALL_TRADE);
     r1 = sprite->data[0];
     if (gSprites[r1].affineAnimEnded)
     {

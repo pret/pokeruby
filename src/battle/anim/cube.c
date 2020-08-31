@@ -72,7 +72,7 @@ static void sub_80CE000(struct Sprite* sprite)
         {
             sprite->data[4]++;
             if (!(sprite->data[4] & 1))
-                PlaySE12WithPanning(SE_W207B, sprite->data[5]);
+                PlaySE12WithPanning(SE_M_SWAGGER2, sprite->data[5]);
         }
 
         sprite->data[0] = 0;

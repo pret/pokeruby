@@ -1361,7 +1361,7 @@ static void DeleteTextCharacter(void)
     var2 = GetKeyRoleAtCursorPos();
     if (var2 == 0 || var2 == 2)
         sub_80B6460(1, 0, 1);
-    PlaySE(SE_BOWA);
+    PlaySE(SE_BALL);
 }
 
 static bool8 sub_80B7004(void)

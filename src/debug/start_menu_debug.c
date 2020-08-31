@@ -610,7 +610,7 @@ void DebugMenu_8076E30(u8 taskId)
                 Menu_DisplayDialogueFrame();
                 sub_813B79C();
                 Menu_PrintText(Str_839BD7D, 2, 15);
-                PlaySE(SE_PINPON);
+                PlaySE(SE_DING_DONG);
                 data[0]++;
             }
             else if (gMain.newKeys & B_BUTTON)
@@ -1836,7 +1836,7 @@ void DebugMenu_8078310(u8 taskId)
         case 1:
             if (gMain.newKeys & A_BUTTON)
             {
-                PlaySE(SE_PINPON);
+                PlaySE(SE_DING_DONG);
                 *GetVarPointer(VAR_MIRAGE_RND_H) = data[1];
                 Menu_EraseScreen();
                 DestroyTask(taskId);
@@ -2324,7 +2324,7 @@ void DebugMenu_8078AA4(u8 taskId)
     else if (gMain.newKeys & A_BUTTON)
     {
         gSaveBlock2.battleTower.curStreakChallengesNum[data[0]] = data[1];
-        PlaySE(SE_PINPON);
+        PlaySE(SE_DING_DONG);
         gTasks[taskId].func = DebugMenu_8078B38;
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -2424,7 +2424,7 @@ void DebugMenu_8078BD4(u8 taskId)
         case 1:
             if (gMain.newKeys & A_BUTTON)
             {
-                PlaySE(SE_PINPON);
+                PlaySE(SE_DING_DONG);
                 Menu_EraseScreen();
                 DestroyTask(taskId);
                 ScriptContext2_Disable();
@@ -2631,7 +2631,7 @@ void DebugMenu_8078F68(u8 taskId)
         gSaveBlock2.playTimeHours = data[1];
         gSaveBlock2.playTimeMinutes = data[2];
         gSaveBlock2.playTimeSeconds = data[3];
-        PlaySE(SE_PINPON);
+        PlaySE(SE_DING_DONG);
         gTasks[taskId].func = DebugMenu_8079020;
     }
     else if (gMain.newKeys & B_BUTTON)

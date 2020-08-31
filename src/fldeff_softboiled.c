@@ -100,7 +100,7 @@ static void sub_8133D50(u8 taskId) {
         return;
     }
 
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
 
     EWRAM_1C000.unk5 = gSprites[EWRAM_1000.unk1].data[0];
 

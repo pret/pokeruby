@@ -1010,7 +1010,7 @@ static void sub_809E260(u8 taskId)
         }
         else
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             sub_809F9D0(taskId, pssData.selectedMoveIndex);
         }
     }
@@ -1043,7 +1043,7 @@ static void SummaryScreen_MoveSelect_HandleInput(u8 taskId)
         {
             if (!MonKnowsMultipleMoves(&pssData.loadedMon))
             {
-                PlaySE(SE_HAZURE);
+                PlaySE(SE_FAILURE);
             }
             else
             {

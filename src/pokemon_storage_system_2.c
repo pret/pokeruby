@@ -412,7 +412,7 @@ void sub_8096BF0(void)
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 1:
-        PlaySE(SE_PC_LOGON);
+        PlaySE(SE_PC_LOGIN);
         gPokemonStorageSystemPtr->unk_000c.tileTag = 14;
         gPokemonStorageSystemPtr->unk_000c.paletteTag = 0xdad0;
         gPokemonStorageSystemPtr->unk_000c.unk04 = 0;
@@ -586,12 +586,12 @@ void sub_8096C84(void)
         }
         break;
     case 4:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_LAST_POKE);
         gPokemonStorageSystemPtr->unk_0004 = 6;
         break;
     case 5:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
         gPokemonStorageSystemPtr->unk_0004 = 6;
         break;
@@ -751,17 +751,17 @@ void sub_8097078(void)
         }
         break;
     case 2:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_LAST_POKE);
         gPokemonStorageSystemPtr->unk_0004 = 5;
         break;
     case 4:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_CANT_RELEASE_EGG);
         gPokemonStorageSystemPtr->unk_0004 = 5;
         break;
     case 3:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
         gPokemonStorageSystemPtr->unk_0004 = 5;
         break;
@@ -1305,7 +1305,7 @@ void sub_8097BA0(void)
     case 0:
         if (sub_809BF20())
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             PrintStorageActionText(PC_TEXT_HOLDING_POKE);
             gPokemonStorageSystemPtr->unk_0004 = 1;
         }
@@ -1364,7 +1364,7 @@ void sub_8097CC0(void)
     case 0:
         if (sub_809BF20())
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             PrintStorageActionText(PC_TEXT_HOLDING_POKE);
             gPokemonStorageSystemPtr->unk_0004 = 1;
         }

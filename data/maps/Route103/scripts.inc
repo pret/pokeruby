@@ -18,7 +18,7 @@ Route103_EventScript_14EB92:: @ 814EB92
 
 Route103_EventScript_14EBAB:: @ 814EBAB
 	msgbox Route103_Text_16D57A, MSGBOX_DEFAULT
-	playbgm MUS_GIRL_SUP, TRUE
+	playbgm MUS_ENCOUNTER_MAY, TRUE
 	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement 2, Common_Movement_ExclamationMark
@@ -34,7 +34,7 @@ Route103_EventScript_14EBAB:: @ 814EBAB
 
 Route103_EventScript_14EC04:: @ 814EC04
 	msgbox Route103_Text_16D762, MSGBOX_DEFAULT
-	playbgm MUS_BOY_SUP, TRUE
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement 2, Common_Movement_ExclamationMark
@@ -100,7 +100,7 @@ Route103_EventScript_14ECD9:: @ 814ECD9
 Route103_EventScript_14ED0C:: @ 814ED0C
 	applymovement 2, Route103_Movement_14ED67
 	waitmovement 0
-	playse SE_DANSA
+	playse SE_LEDGE
 	applymovement 2, Route103_Movement_14ED6B
 	waitmovement 0
 	goto Route103_EventScript_14ED46
@@ -109,7 +109,7 @@ Route103_EventScript_14ED0C:: @ 814ED0C
 Route103_EventScript_14ED29:: @ 814ED29
 	applymovement 2, Route103_Movement_14ED71
 	waitmovement 0
-	playse SE_DANSA
+	playse SE_LEDGE
 	applymovement 2, Route103_Movement_14ED74
 	waitmovement 0
 	goto Route103_EventScript_14ED46

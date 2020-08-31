@@ -66,11 +66,11 @@ EventScript_NoRoomForItem: @ 819FECC
 	return
 
 EventScript_PlayFanfareObtainedItem:
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	return
 
 EventScript_PlayFanfareObtainedTMHM:
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	return
 
 Std_ObtainDecoration: @ 819FEDA
@@ -88,7 +88,7 @@ EventScript_ObtainDecorationMessage: @ 819FEE8
 	return
 
 EventScript_ObtainedDecor: @ 819FF03
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message Text_ObtainedTheDecor
 	waitfanfare
 	waitmessage

@@ -1426,9 +1426,9 @@ static void sub_80E3338(u8 taskId)
     gTasks[taskId].func = sub_80E3704;
 
     if (taskData[0] == 0)
-        PlaySE12WithPanning(SE_W287, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER_NEG));
+        PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER_NEG));
     else
-        PlaySE12WithPanning(SE_W287B, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER_NEG));
+        PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER_NEG));
 }
 
 static void sub_80E3704(u8 taskId)
