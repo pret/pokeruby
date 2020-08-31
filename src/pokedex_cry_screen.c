@@ -236,7 +236,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             {
                 for (j = 0; j < 32; j++)
                 {
-                    *(vu16 *)(BG_VRAM + r7 + (i * 0x40 + j * 2)) = r6++;
+                    *((vu16 *)(BG_VRAM + r7 + (i * 0x40 + j * 2)) = r6++;
                 }
             }
             for (i = 0; i < gPokedexCryScreenPtr->unk0016 * 8; i++)
