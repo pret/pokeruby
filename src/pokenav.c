@@ -4648,135 +4648,31 @@ void sub_80F492C(void)
     gPokenavStructPtr->unk8FE4 = 0;
 }
 
-#ifdef NONMATCHING
-// registers r3/r4 are swapped
-void sub_80F4944(struct UnkUsePokeblockSub *arg0)
+void sub_80F4944(struct UnkUsePokeblockSub *arg0) // This looks like a sorting algorithm. Proposal: Make local variables min, max, and currPos
 {
-    u16 i;
-    u16 r3;
-    u16 r4;
+    u16 min, max, currPos;
 
-    i = 0;
-    r4 = gPokenavStructPtr->unk8FE4;
-    r3 = r4 / 2;
-    while (r3 != r4)
+    min = 0;
+    max = gPokenavStructPtr->unk8FE4;
+    currPos = min + (max - min)/ 2;
+    while (max != currPos)
     {
-        if (arg0->unk0 > gPokenavStructPtr->unk893c[r3].unk0)
-            r4 = r3;
+        if (arg0->unk0 > gPokenavStructPtr->unk893c[currPos].unk0)
+            max = currPos;
         else
-            i = r3 + 1;
+            min = currPos + 1;
 
-        r3 = ((r4 - i) / 2) + i;
+        currPos = min + (max - min) / 2;
     }
 
-    r4 = gPokenavStructPtr->unk8FE4;
-    while (r4 > r3)
+    for ( max = gPokenavStructPtr->unk8FE4; max > currPos; max--)
     {
-        gPokenavStructPtr->unk893c[r4] = gPokenavStructPtr->unk893c[r4 - 1];
-        r4--;
+        gPokenavStructPtr->unk893c[max] = gPokenavStructPtr->unk893c[max - 1];
     }
 
-    gPokenavStructPtr->unk893c[r3] = *arg0;
+    gPokenavStructPtr->unk893c[currPos] = *arg0;
     gPokenavStructPtr->unk8FE4++;
 }
-#else
-NAKED
-void sub_80F4944(struct UnkUsePokeblockSub *arg0)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    mov r12, r0\n\
-    movs r2, 0\n\
-    ldr r1, _080F4978 @ =gPokenavStructPtr\n\
-    ldr r5, [r1]\n\
-    ldr r3, _080F497C @ =0x00008fe4\n\
-    adds r0, r5, r3\n\
-    ldrh r4, [r0]\n\
-    lsrs r3, r4, 1\n\
-    mov r8, r1\n\
-    cmp r4, r3\n\
-    beq _080F499C\n\
-    adds r6, r5, 0\n\
-    mov r0, r12\n\
-    ldrb r5, [r0]\n\
-    ldr r7, _080F4980 @ =0x0000893c\n\
-_080F4968:\n\
-    lsls r0, r3, 2\n\
-    adds r0, r6, r0\n\
-    adds r0, r7\n\
-    ldrb r0, [r0]\n\
-    cmp r5, r0\n\
-    bls _080F4984\n\
-    adds r4, r3, 0\n\
-    b _080F498A\n\
-    .align 2, 0\n\
-_080F4978: .4byte gPokenavStructPtr\n\
-_080F497C: .4byte 0x00008fe4\n\
-_080F4980: .4byte 0x0000893c\n\
-_080F4984:\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-_080F498A:\n\
-    subs r0, r4, r2\n\
-    lsrs r1, r0, 31\n\
-    adds r0, r1\n\
-    asrs r0, 1\n\
-    adds r0, r2, r0\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r4, r3\n\
-    bne _080F4968\n\
-_080F499C:\n\
-    mov r1, r8\n\
-    ldr r2, [r1]\n\
-    ldr r1, _080F49EC @ =0x00008fe4\n\
-    adds r0, r2, r1\n\
-    ldrh r4, [r0]\n\
-    lsls r6, r3, 2\n\
-    cmp r4, r3\n\
-    bls _080F49C6\n\
-    ldr r0, _080F49F0 @ =0x0000893c\n\
-    adds r5, r2, r0\n\
-_080F49B0:\n\
-    lsls r2, r4, 2\n\
-    adds r2, r5, r2\n\
-    subs r1, r4, 0x1\n\
-    lsls r0, r1, 2\n\
-    adds r0, r5, r0\n\
-    ldr r0, [r0]\n\
-    str r0, [r2]\n\
-    lsls r1, 16\n\
-    lsrs r4, r1, 16\n\
-    cmp r4, r3\n\
-    bhi _080F49B0\n\
-_080F49C6:\n\
-    mov r1, r8\n\
-    ldr r2, [r1]\n\
-    ldr r3, _080F49F0 @ =0x0000893c\n\
-    adds r0, r2, r3\n\
-    adds r0, r6\n\
-    mov r3, r12\n\
-    ldr r1, [r3]\n\
-    str r1, [r0]\n\
-    ldr r0, _080F49EC @ =0x00008fe4\n\
-    adds r2, r0\n\
-    ldrh r0, [r2]\n\
-    adds r0, 0x1\n\
-    strh r0, [r2]\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080F49EC: .4byte 0x00008fe4\n\
-_080F49F0: .4byte 0x0000893c\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80F49F4(void)
 {

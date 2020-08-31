@@ -26,7 +26,6 @@
 #include "scanline_effect.h"
 #include "ewram.h"
 
-
 struct PokedexListItem
 {
     u16 dexNum;
@@ -37,10 +36,7 @@ struct PokedexListItem
 struct PokedexView
 {
     struct PokedexListItem unk0[NATIONAL_DEX_COUNT];
-    u16 unk608;
-    u8 unk60A_1:1;
-    u8 unk60A_2:1;
-    u8 unk60B;
+    struct PokedexListItem monData;
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 unk610;
@@ -52,19 +48,18 @@ struct PokedexView
     u16 unk61C;
     u16 unk61E[4];
     u16 selectedMonSpriteId;
-    u16 unk628;
-    u16 unk62A;
+    s16 unk628;
+    s16 unk62A;
     u8 unk62C;
     u8 unk62D;
     u8 unk62E;
     u8 unk62F;
     s16 unk630;
     s16 unk632;
-    u16 unk634;
-    u16 unk636;
+    s16 unk634;
+    s16 unk636;
     u16 unk638;
-    u16 unk63A[4];
-    u8 filler642[8];
+    u16 unk63A[8];
     u8 unk64A;
     u8 unk64B;
     u8 unk64C_1:1;
@@ -1331,9 +1326,9 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
         pokedexView->unk0[i].seen = 0;
         pokedexView->unk0[i].owned = 0;
     }
-    pokedexView->unk608 = 0;
-    pokedexView->unk60A_1 = 0;
-    pokedexView->unk60A_2 = 0;
+    pokedexView->monData.dexNum = 0;
+    pokedexView->monData.seen = 0;
+    pokedexView->monData.owned = 0;
     pokedexView->pokemonListCount = 0;
     pokedexView->selectedPokemon = 0;
     pokedexView->unk610 = 0;
@@ -1343,7 +1338,7 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->unk618 = 0;
     pokedexView->unk61A = 0;
     pokedexView->unk61C = 0;
-    for (i = 0; i <= 3; i++)
+    for (i = 0; i < 4; i++)
         pokedexView->unk61E[i] |= 0xFFFF;
     pokedexView->unk628 = 0;
     pokedexView->unk62A = 0;
@@ -1356,7 +1351,7 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->unk634 = 0;
     pokedexView->unk636 = 0;
     pokedexView->unk638 = 0;
-    for (i = 0; i <= 3; i++)
+    for (i = 0; i < 4; i++)
         pokedexView->unk63A[i] = 0;
     pokedexView->unk64A = 0;
     pokedexView->unk64B = 0;
@@ -1366,9 +1361,9 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
     pokedexView->menuIsOpen = 0;
     pokedexView->menuCursorPos = 0;
     pokedexView->menuY = 0;
-    for (i = 0; i <= 7; i++)
+    for (i = 0; i < 8; i++)
         pokedexView->unk656[i] = 0;
-    for (i = 0; i <= 7; i++)
+    for (i = 0; i < 8; i++)
         pokedexView->unk65E[i] = 0;
 }
 
@@ -2201,8 +2196,8 @@ static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
     text[1] = CHAR_0 + (r7 % 100) / 10;
     text[2] = CHAR_0 + (r7 % 100) % 10;
     text[3] = EOS;
-    *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
-    *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
+    *(u16 *)(BG_VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
+    *(u16 *)(BG_VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
     Menu_PrintText(text, b - 15, c);
 }
 
@@ -2220,8 +2215,8 @@ static void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
         unk[0] = 0;
         unk[1] = 0;
     }
-    *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
-    *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
+    *(u16 *)(BG_VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
+    *(u16 *)(BG_VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
 }
 
 static u8 sub_808DFE4(u16 num, u8 b, u8 c)
@@ -2255,8 +2250,8 @@ static void sub_808E090(u8 a, u8 b, u16 c)
 
     for (i = 0; i < 12; i++)
     {
-        *(u16 *)(VRAM + c * 0x800 + b * 64 + (a + i) * 2) = 0;
-        *(u16 *)(VRAM + c * 0x800 + (b + 1) * 64 + (a + i) * 2) = 0;
+        *(u16 *)(BG_VRAM + c * 0x800 + b * 64 + (a + i) * 2) = 0;
+        *(u16 *)(BG_VRAM + c * 0x800 + (b + 1) * 64 + (a + i) * 2) = 0;
     }
 }
 
@@ -3795,7 +3790,7 @@ static void sub_8090750(u8 taskId)
 #ifndef NONMATCHING
             asm("");
 #endif
-            *(u16 *)(VRAM + 0x7800 + 2 * i) += 0x2000;
+            *(u16 *)(BG_VRAM + 0x7800 + 2 * i) += 0x2000;
         }
         sub_8091738(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
@@ -3870,8 +3865,8 @@ static void sub_8090A3C(u8 taskId)
 
             Menu_EraseWindowRect(2, 13, 27, 19);
             Menu_PrintText(gPokedexEntries[r4].descriptionPage2, 2, 13);
-            (*(u16 *)(VRAM + 0x7ACA))++;
-            (*(u16 *)(VRAM + 0x7B0A))++;
+            (*(u16 *)(BG_VRAM + 0x7ACA))++;
+            (*(u16 *)(BG_VRAM + 0x7B0A))++;
             gTasks[taskId].data[4] = 1;
             PlaySE(SE_PIN);
         }
@@ -3935,8 +3930,8 @@ static void sub_8090C68(void)
             Menu_EraseWindowRect(2, 13, 27, 19);
             Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage2, 2, 13);
             gPokedexView->descriptionPageNum = 1;
-            (*(u16 *)(VRAM + 0x7ACA))++;
-            (*(u16 *)(VRAM + 0x7B0A))++;
+            (*(u16 *)(BG_VRAM + 0x7ACA))++;
+            (*(u16 *)(BG_VRAM + 0x7B0A))++;
             PlaySE(SE_PIN);
         }
         else
@@ -3944,8 +3939,8 @@ static void sub_8090C68(void)
             Menu_EraseWindowRect(2, 13, 27, 19);
             Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
             gPokedexView->descriptionPageNum = 0;
-            (*(u16 *)(VRAM + 0x7ACA))--;
-            (*(u16 *)(VRAM + 0x7B0A))--;
+            (*(u16 *)(BG_VRAM + 0x7ACA))--;
+            (*(u16 *)(BG_VRAM + 0x7B0A))--;
             PlaySE(SE_PIN);
         }
     }
@@ -4172,16 +4167,15 @@ static u8 sub_80911C8(u16 num, u8 b, u8 c)
     for (i = 0; i < 11; i++)
         str[i] = EOS;
     num = NationalPokedexNumToSpecies(num);
-    switch (num)
+    if (num)
     {
-    default:
         for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
             str[i] = gSpeciesNames[num][i];
-        break;
-    case 0:
+    }
+    else
+    {
         for (i = 0; i < 10; i++)
             str[i] = 0xAE;
-        break;
     }
     Menu_PrintText(str, b, c);
     return i;
@@ -4431,42 +4425,36 @@ static void sub_8091564(u16 arg0, u8 left, u8 top)
 void sub_8091738(u16 num, u16 b, u16 c)
 {
     u8 arr[0x80];
-    u16 i;
-    u16 j;
+    u16 i, j, r7;
     const u8 *r12;
-    u16 r7;
-    u8 r3;
+    u8 r3, r1;
 
-    r12 = sMonFootprintTable[NationalPokedexNumToSpecies(num)];
-    for (r7 = 0, i = 0; i < 32; i++)
+    r12 = (const u8*)sMonFootprintTable[NationalPokedexNumToSpecies(num)];
+    r7 = 0;
+    for (i = 0; i < 32; i++)
     {
         r3 = r12[i];
         for (j = 0; j < 4; j++)
         {
-            u32 r1 = j * 2;
-            s32 r2 = (r3 >> r1) & 1;
+            r1 = 0;
+            if (r3 & (1 << (j * 2)))
+                r1 |= 0x01;
+            if (r3 & (2 << (j * 2)))
+                r1 |= 0x10;
 
-            if (r3 & (2 << r1))
-                r2 |= 0x10;
-
-// Needed to match
-#ifndef NONMATCHING
-            asm("");asm("");asm("");asm("");asm("");
-#endif
-
-            arr[r7] = r2;
+            arr[r7] = r1;
             r7++;
         }
     }
-    CpuCopy16(arr, (u16 *)(VRAM + b * 0x4000 + c * 0x20), 0x80);
+    CpuCopy16((void*)arr, (void *)(BG_VRAM + b * 0x4000 + c * 0x20), 0x80);
 }
 
 static void sub_80917CC(u16 a, u16 b)
 {
-    *(u16 *)(VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
-    *(u16 *)(VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
-    *(u16 *)(VRAM + a * 0x800 + 0x272) = 0xF000 + b + 2;
-    *(u16 *)(VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x232) = 0xF000 + b + 0;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x234) = 0xF000 + b + 1;
+    *(u16 *)(BG_VRAM + a * 0x800+ 0x272) = 0xF000 + b + 2;
+    *(u16 *)(BG_VRAM + a * 0x800 + 0x274) = 0xF000 + b + 3;
 }
 
 static u16 sub_8091818(u8 a, u16 b, u16 c, u16 d)
@@ -5084,74 +5072,25 @@ static void sub_80927F0(u8 taskId)
         DestroyTask(taskId);
 }
 
-#ifdef NONMATCHING
+#define VRAM_ADDR(a, b, c) *(u16 *)(BG_VRAM + (15 * 0x800) + (c) * 64 + ((b) + (a))*2)
 void sub_8092810(u8 a, u8 b, u8 c, u8 d)
 {
-    u16 i;
+    u16 i, j;
 
     for (i = 0; i < d; i++)
     {
-        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] &= 0xFFF;
-        ((u16 *)VRAM)[15 * 0x400 + c * 32 + i + b] |= a << 12;
+        j = VRAM_ADDR(i, b, c);
+        j &= 0xFFF;
+        j |= a << 12;
 
-        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] &= 0xFFF;
-        ((u16 *)VRAM)[15 * 0x400 + (c + 1) * 32 + i + b] |= a << 12;
+        VRAM_ADDR(i, b, c) = j;
+
+        j = VRAM_ADDR(i, b, c + 1);
+        j &= 0xFFF;
+        j |= a << 12;
+        VRAM_ADDR(i, b, c + 1) = j;
     }
 }
-#else
-NAKED
-void sub_8092810(u8 a, u8 b, u8 c, u8 d)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r12, r1\n\
-    lsls r2, 24\n\
-    lsrs r1, r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r5, r3, 8\n\
-    movs r3, 0\n\
-    cmp r5, 0\n\
-    beq _0809285A\n\
-    lsls r7, r1, 6\n\
-    ldr r6, _08092860 @ =0x00000fff\n\
-    lsls r4, r0, 12\n\
-_08092830:\n\
-    mov r0, r12\n\
-    adds r1, r0, r3\n\
-    lsls r1, 1\n\
-    adds r1, r7, r1\n\
-    ldr r0, _08092864 @ =0x06007800\n\
-    adds r2, r1, r0\n\
-    ldrh r0, [r2]\n\
-    ands r0, r6\n\
-    orrs r0, r4\n\
-    strh r0, [r2]\n\
-    ldr r0, _08092868 @ =0x06007840\n\
-    adds r1, r0\n\
-    ldrh r0, [r1]\n\
-    ands r0, r6\n\
-    orrs r0, r4\n\
-    strh r0, [r1]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r0, r5\n\
-    bcc _08092830\n\
-_0809285A:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08092860: .4byte 0x00000fff\n\
-_08092864: .4byte 0x06007800\n\
-_08092868: .4byte 0x06007840\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_809286C(u8 a, u8 b, u8 c)
 {

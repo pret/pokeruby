@@ -293,12 +293,12 @@ void ResetContestGpuRegs(void)
 {
     u16 savedIme;
 
-    REG_DISPCNT = 0x40;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP;
     savedIme = REG_IME;
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = savedIme;
-    REG_DISPSTAT = 8;
+    REG_DISPSTAT = DISPSTAT_VBLANK_INTR;
     REG_BG0CNT = 0x9800;
     REG_BG1CNT = 0x9E09;
     REG_BG2CNT = 0x9C00;
@@ -323,7 +323,6 @@ void ResetContestGpuRegs(void)
     gBattle_WIN1H = 0;
     gBattle_WIN1V = 0;
 }
-
 void LoadContestBgAfterMoveAnim(void)
 {
     s32 i;
@@ -474,14 +473,12 @@ void sub_80AB694(u8 taskId)
 
 void sub_80AB6B4(u8 taskId)
 {
-    gTasks[taskId].data[0]--;
-    if (gTasks[taskId].data[0] <= 0)
-    {
-        GetMultiplayerId();  // unused return value
-        DestroyTask(taskId);
-        gTasks[sContest.mainTaskId].func = sub_80AB960;
-        gRngValue = gContestRngValue;
-    }
+    if (--gTasks[taskId].data[0] > 0)
+        return;
+    GetMultiplayerId(); // unused return value
+    DestroyTask(taskId);
+    gTasks[sContest.mainTaskId].func = sub_80AB960;
+    gRngValue = gContestRngValue;
 }
 
 u8 sub_80AB70C(u8 *a)
@@ -3679,28 +3676,22 @@ void sub_80B0588(void)
         sub_80B05A4(i);
 }
 
-// TODO: Try to write this better
 void sub_80B05A4(u8 a)
 {
-    u32 var;
-    u32 r0;
-
     sub_80B0548(a);
 
     // 2-byte DMA copy? Why?
 
-    r0 = a + 5;
     DmaCopy16Defvars(
       3,
-      gPlttBufferUnfaded + r0 * 16 + 10,
-      gPlttBufferFaded   + r0 * 16 + 10,
+      &gPlttBufferUnfaded[16 * (5 + a) + 10],
+      &gPlttBufferFaded[16 * (5 + a) + 10],
       2);
 
-    var = (a + 5) * 16 + 12 + a;
     DmaCopy16Defvars(
       3,
-      gPlttBufferUnfaded + var,
-      gPlttBufferFaded + var,
+      &gPlttBufferUnfaded[16 * (5 + a) + 12 + a],
+      &gPlttBufferFaded[16 * (5 + a) + 12 + a],
       2);
 }
 

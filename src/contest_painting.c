@@ -341,13 +341,9 @@ static void sub_8106AC4(u16 species, u8 arg1)
     }
 }
 
-
 static void sub_8106B90(u8 *a, u16 *b, u16 *c)
 {
-    u16 i;
-    u16 j;
-    u16 k;
-    u16 l;
+    u16 i, j, k, l;
 
     /*
         Raw arithmetics are required to match this function.
@@ -365,12 +361,7 @@ static void sub_8106B90(u8 *a, u16 *b, u16 *c)
             {
                 for (l = 0; l < 8; l++)
                 {
-                    /*
-                        Parenthesis/group hack absolutely required to match regalloc. Remove any
-                        unneeded parentheses and the function gets thrown off. See the comments
-                        in CopyWallpaperTilemap for documentation on a similar behavior.
-                    */
-                    u8 temp = ((u8*)a + ((((i << 3) + j) << 5) + (k << 2) + (l >> 1)))[0];
+                    u8 temp = a[(((i * 8) + j) * 32) + (k << 2) + (l >> 1)];
                     /*
                         The shifts have to be there to match r0 and r2's order in one instruction:
                                 add     r5, r2, r0
@@ -389,9 +380,9 @@ static void sub_8106B90(u8 *a, u16 *b, u16 *c)
                     // Same order as above needs to be written here, or else this happens:
                     //         add     r0, r7, r1 <- regswap
                     if (temp == 0)
-                        ((u16*)c + (((i << 3) + k) << 6) + ((j << 3)+l))[0] = 0x8000;
+                        *(u16 *)(c + (((i * 8) + k) << 6) + ((j * 8) + l)) = 0x8000;
                     else
-                        ((u16*)c + (((i << 3) + k) << 6) + ((j << 3)+l))[0] = b[temp];
+                        *(u16 *)(c + (((i * 8) + k) << 6) + ((j * 8) + l)) = b[temp];
                 }
             }
         }
