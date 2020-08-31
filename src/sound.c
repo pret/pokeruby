@@ -37,18 +37,18 @@ extern struct ToneData gCryTable2[];
 
 static const struct Fanfare sFanfares[] =
 {
-    { MUS_LEVEL_UP,      80 },
-    { MUS_OBTAIN_ITEM,     160 },
-    { MUS_EVOLVED,     220 },
-    { MUS_OBTAIN_TMHM,    220 },
-    { MUS_HEAL,     160 },
-    { MUS_OBTAIN_BADGE,   340 },
+    { MUS_LEVEL_UP,       80 },
+    { MUS_OBTAIN_ITEM,   160 },
+    { MUS_EVOLVED,       220 },
+    { MUS_OBTAIN_TMHM,   220 },
+    { MUS_HEAL,          160 },
+    { MUS_OBTAIN_BADGE,  340 },
     { MUS_MOVE_DELETED,  180 },
     { MUS_OBTAIN_BERRY,  120 },
-    { MUS_AWAKEN_LEGEND,    710 },
-    { MUS_SLOTS_JACKPOT,   250 },
-    { MUS_SLOTS_WIN, 150 },
-    { MUS_TOO_BAD,  160 },
+    { MUS_AWAKEN_LEGEND, 710 },
+    { MUS_SLOTS_JACKPOT, 250 },
+    { MUS_SLOTS_WIN,     150 },
+    { MUS_TOO_BAD,       160 },
 };
 
 static void Task_Fanfare(u8 taskId);
