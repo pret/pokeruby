@@ -1046,7 +1046,7 @@ static void Task_IntroScrollDownAndShowEon(u8 taskId)
         {
             u8 spriteId = CreateSprite(&gSpriteTemplate_840AFF0, 200, 160, 10);
 
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
         }
     }
     else
@@ -1403,7 +1403,7 @@ static void Task_IntroPokemonBattle(u8 taskId)
         gSprites[gTasks[taskId].data[4]].data[0] = 3;
         gSprites[gTasks[taskId].data[5]].data[0] = 3;
         spriteId = CreateSprite(&gSpriteTemplate_840B1F4, 0x78, 0x50, 15);
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
     }
     if (gIntroFrameCounter == 800)
         PlaySE(SE_INTRO_BLAST);
@@ -2207,7 +2207,7 @@ static void sub_813DE70(struct Sprite *sprite)
     case 3:
         if (sprite->pos1.y > 160)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[0] = 1;
         }
         else

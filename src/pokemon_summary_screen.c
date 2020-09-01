@@ -4125,7 +4125,7 @@ static void sub_80A1BC0(struct Sprite *sprite)
     else
     {
         sprite->data[1] = 0;
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
     }
 
     if (sprite->data[0] == 9)

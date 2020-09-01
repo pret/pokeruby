@@ -782,12 +782,12 @@ void sub_80DD8E8(struct Sprite *sprite)
     sprite->data[0] = 3;
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->callback = sub_80DD928;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
 }
 
 static void sub_80DD928(struct Sprite *sprite)
 {
-    sprite->invisible = 0;
+    sprite->invisible = FALSE;
     if (sprite->data[3] != 0)
     {
         sprite->pos2.y = sprite->data[2] + sprite->data[3];

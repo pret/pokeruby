@@ -3039,15 +3039,15 @@ void sub_81009C0(struct Sprite *sprite)
     {
         if (sprite->data[6] < 15)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         } else
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         }
         sprite->data[6] = (sprite->data[6] + 1) & 0x1f;
     } else
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
     }
 }
 
@@ -3239,7 +3239,7 @@ void sub_8100EEC(u8 taskId)
 {
     Menu_EraseWindowRect(0, 0, 29, 19);
     gSprites[gUnknown_020391A8].data[7] = 0;
-    gSprites[gUnknown_020391A8].invisible = 0;
+    gSprites[gUnknown_020391A8].invisible = FALSE;
     gSprites[gUnknown_020391A8].callback = sub_8101698;
     gSprites[gUnknown_020391A9].pos1.x = 0x88;
     gSprites[gUnknown_020391A9].pos1.y = 0x48;
@@ -3258,7 +3258,7 @@ void sub_8100FB4(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
     sub_810045C();
-    gSprites[gUnknown_020391A8].invisible = 0;
+    gSprites[gUnknown_020391A8].invisible = FALSE;
     gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
     DisplayItemMessageOnField(taskId, gSecretBaseText_StopPuttingAwayDecor, sub_810156C, 0);
 }
@@ -3278,7 +3278,7 @@ void sub_8101024(u8 taskId)
         if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE
          || MetatileBehavior_IsPlayerRoomPCOn(metatileBehavior) == TRUE)
         {
-            gSprites[gUnknown_020391A8].invisible = 0;
+            gSprites[gUnknown_020391A8].invisible = FALSE;
             gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
             DisplayItemMessageOnField(taskId, gSecretBaseText_StopPuttingAwayDecor, sub_810156C, 0);
         } else
@@ -3343,7 +3343,7 @@ void sub_8101118(u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)
 
 void sub_8101198(u8 x, u8 y)
 {
-    gSprites[gUnknown_020391A8].invisible = 1;
+    gSprites[gUnknown_020391A8].invisible = TRUE;
     gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
     gSprites[gUnknown_020391A9].pos1.x = 0x88 + x * 16;
     gSprites[gUnknown_020391A9].pos1.y = 0x48 + y * 16;

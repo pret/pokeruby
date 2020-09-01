@@ -126,7 +126,7 @@ static void sub_80CCF70(struct Sprite* sprite)
         }
         break;
     case 3:
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->data[0]++;
         break;
     case 4:

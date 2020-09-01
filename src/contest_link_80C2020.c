@@ -1378,12 +1378,12 @@ void sub_80C3698(const u8 *text)
     sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
     sprite->pos1.x = x + 32;
     sprite->pos1.y = 80;
-    sprite->invisible = 0;
+    sprite->invisible = FALSE;
     for (i = 0; i < 3; i++)
     {
         gSprites[sprite->data[i]].pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
         gSprites[sprite->data[i]].pos1.y = sprite->pos1.y;
-        gSprites[sprite->data[i]].invisible = 0;
+        gSprites[sprite->data[i]].invisible = FALSE;
     }
 
     gBattle_WIN0H = 0x00F0;
@@ -1397,9 +1397,9 @@ void sub_80C3764(void)
     struct Sprite *sprite;
 
     sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     for (i = 0; i < 3; i++)
-        gSprites[sprite->data[i]].invisible = 1;
+        gSprites[sprite->data[i]].invisible = TRUE;
 
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;
@@ -2025,7 +2025,7 @@ void sub_80C3CB8(struct Sprite *sprite)
     if (sprite->pos1.x < -32)
     {
         sprite->callback = SpriteCallbackDummy;
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         eContestLink80C2020Struct2018000.unk_06 = 2;
     }
 }
@@ -2062,7 +2062,7 @@ void sub_80C3DF0(struct Sprite *sprite)
     sprite->data[4] = var0;
     sprite->pos1.y++;
     if (eContestLink80C2020Struct2018000.unk_09)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
 
     if (sprite->pos1.x > 248 || sprite->pos1.y > 116)
     {

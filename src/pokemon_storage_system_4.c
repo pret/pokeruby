@@ -2386,7 +2386,7 @@ void sub_809CC04(void)
         gPokemonStorageSystemPtr->unk_11c4 = &gSprites[spriteId];
         gPokemonStorageSystemPtr->unk_11c4->oam.priority = priority;
         if (sBoxCursorArea)
-            gPokemonStorageSystemPtr->unk_11c4->invisible = 1;
+            gPokemonStorageSystemPtr->unk_11c4->invisible = TRUE;
     }
     else
     {

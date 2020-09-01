@@ -60,5 +60,5 @@ void sub_80CF3C4(struct Sprite* sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = a;
     sprite->callback = sub_80CF374;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
 }

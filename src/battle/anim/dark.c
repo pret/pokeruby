@@ -233,7 +233,7 @@ static void sub_80DFC9C(u8 taskId)
         gTasks[taskId].data[2] = 0;
         if (r2 == 16)
         {
-            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = 1;
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = TRUE;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -797,12 +797,12 @@ void sub_80E0918(u8 taskId)
 {
     u8 toBG2 = GetBattlerPosition_permutated(gBattleAnimAttacker) ^ 1 ? 1 : 0;
     MoveBattlerSpriteToBG(gBattleAnimAttacker, toBG2);
-    gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = FALSE;
 
     if (IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
     {
         MoveBattlerSpriteToBG(gBattleAnimAttacker ^ 2, toBG2 ^ 1);
-        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = 0;
+        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = FALSE;
     }
 
     DestroyAnimVisualTask(taskId);

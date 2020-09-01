@@ -238,7 +238,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 1;
-    gSprites[ID].invisible = 1;
+    gSprites[ID].invisible = TRUE;
 
     // postEvo sprite
     DecompressPicFromTable_2(&gMonFrontPicTable[speciesToEvolve],
@@ -254,7 +254,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gUnknown_02024E8C, 120, 64, 30);
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 2;
-    gSprites[ID].invisible = 1;
+    gSprites[ID].invisible = TRUE;
 
     LoadEvoSparkleSpriteAndPal();
 
@@ -455,7 +455,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
 
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 2;
-    gSprites[ID].invisible = 1;
+    gSprites[ID].invisible = TRUE;
 
     LoadEvoSparkleSpriteAndPal();
 
@@ -542,7 +542,7 @@ static void Task_EvolutionScene(u8 taskID)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
-        gSprites[sEvoInfo.preEvoSpriteID].invisible = 0;
+        gSprites[sEvoInfo.preEvoSpriteID].invisible = FALSE;
         gTasks[taskID].tState++;
         break;
     case 1: // print 'whoa, poke is evolving!!!' msg

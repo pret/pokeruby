@@ -49,7 +49,7 @@ const struct SpriteTemplate gSpriteTemplate_83D6DFC =
 
 void sub_80CD774(struct Sprite* sprite)
 {
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->data[0] = 0;
     switch (gBattleAnimArgs[0])
     {

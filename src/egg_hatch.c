@@ -362,7 +362,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID)
     case 1:
         GetMonSpriteTemplate_803C56C(GetMonSpritePalStruct(mon)->tag, r5);
         spriteID = CreateSprite(&gUnknown_02024E8C, 120, 70, 6);
-        gSprites[spriteID].invisible = 1;
+        gSprites[spriteID].invisible = TRUE;
         gSprites[spriteID].callback = SpriteCallbackDummy;
         break;
     }
@@ -679,7 +679,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
     if (!gPaletteFade.active)
     {
         PlaySE(SE_EGG_HATCH);
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = SpriteCB_Egg_5;
         sprite->data[0] = 0;
     }
@@ -689,7 +689,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
 {
     if (sprite->data[0] == 0)
     {
-        gSprites[gEggHatchData->pokeSpriteID].invisible = 0;
+        gSprites[gEggHatchData->pokeSpriteID].invisible = FALSE;
         StartSpriteAffineAnim(&gSprites[gEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)

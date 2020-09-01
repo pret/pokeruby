@@ -144,7 +144,7 @@ static void sub_80D0E8C(struct Sprite* sprite)
         }
         if (++sprite->data[1] > 16)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->data[0]++;
         }
         break;
@@ -184,7 +184,7 @@ static void sub_80D0E8C(struct Sprite* sprite)
         }
         if (++sprite->data[1] > 16)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             DestroyAnimSprite(sprite);
         }
         break;

@@ -136,7 +136,7 @@ void MenuCursor_SetPos814A880(u8 a1, u8 a2)
     if (gUnknown_0203A3D0 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
-        spr->invisible = 0;
+        spr->invisible = FALSE;
         spr->centerToCornerVecX = 0;
         spr->centerToCornerVecY = 0;
         spr->pos1.x = a1;
@@ -146,7 +146,7 @@ void MenuCursor_SetPos814A880(u8 a1, u8 a2)
     if (gUnknown_0203A3D1 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D1];
-        spr->invisible = 0;
+        spr->invisible = FALSE;
         spr->centerToCornerVecX = 0;
         spr->centerToCornerVecY = 0;
         spr->pos1.x = a1;
@@ -163,13 +163,13 @@ void sub_814A904(void)
     if (gUnknown_0203A3D0 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
-        spr->invisible = 1;
+        spr->invisible = TRUE;
     }
 
     if (gUnknown_0203A3D1 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D1];
-        spr->invisible = 1;
+        spr->invisible = TRUE;
     }
 
     return;
@@ -744,7 +744,7 @@ void MenuCursor_SetPos814AD7C(u8 a1, u8 a2)
     if (gUnknown_0203A3D2 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D2];
-        spr->invisible = 0;
+        spr->invisible = FALSE;
         spr->centerToCornerVecX = 0;
         spr->centerToCornerVecY = 0;
         spr->pos1.x = a1;
@@ -759,7 +759,7 @@ void sub_814ADC8()
     if (gUnknown_0203A3D2 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D2];
-        spr->invisible = 1;
+        spr->invisible = TRUE;
     }
     return;
 }
