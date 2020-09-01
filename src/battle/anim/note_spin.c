@@ -69,7 +69,7 @@ void sub_80D2E68(struct Sprite *sprite)
     if (sprite->data[0] == 0)
     {
         sprite->data[1] = 120 - gBattleAnimArgs[0];
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
     }
 
     if (++sprite->data[0] == sprite->data[1])

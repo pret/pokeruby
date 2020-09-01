@@ -73,7 +73,7 @@ void sub_80D15E0(u8 taskId)
     if (RunAffineAnimFromTaskData(task) == 0)
     {
         gSprites[task->data[0]].pos2.y = 0;
-        gSprites[task->data[0]].invisible = 1;
+        gSprites[task->data[0]].invisible = TRUE;
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -170,9 +170,9 @@ void sub_80D1808(u8 taskId)
     {
         task->data[1] = 0;
         if (++task->data[2] & 1)
-            gSprites[task->data[15]].invisible = 0;
+            gSprites[task->data[15]].invisible = FALSE;
         else
-            gSprites[task->data[15]].invisible = 1;
+            gSprites[task->data[15]].invisible = TRUE;
 
         if (++task->data[3] >= task->data[13])
         {
@@ -184,7 +184,7 @@ void sub_80D1808(u8 taskId)
             }
             else
             {
-                gSprites[task->data[15]].invisible = 0;
+                gSprites[task->data[15]].invisible = FALSE;
                 DestroyAnimVisualTask(taskId);
             }
         }

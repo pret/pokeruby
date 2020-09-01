@@ -1596,7 +1596,7 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
 void SpawnCameraDummy(void)
 {
     u8 objectEventId = SpawnSpecialObjectEventParametrized(7, MOVEMENT_TYPE_FACE_DOWN, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
-    gObjectEvents[objectEventId].invisible = 1;
+    gObjectEvents[objectEventId].invisible = TRUE;
     CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
 

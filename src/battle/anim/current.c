@@ -808,7 +808,7 @@ void sub_80D6E9C(u8 taskId)
         }
         break;
     case 3:
-        gSprites[task->data[15]].invisible = 0;
+        gSprites[task->data[15]].invisible = FALSE;
         DestroyAnimVisualTask(taskId);
         break;
     }

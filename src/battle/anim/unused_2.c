@@ -105,15 +105,15 @@ void unref_sub_80CCB6C(struct Sprite* sprite)
     {
         if (sprite->data[3] & 1)
         {
-            sprite->invisible = 0;
-            gSprites[sprite->data[0]].invisible = 0;
-            gSprites[sprite->data[1]].invisible = 0;
+            sprite->invisible = FALSE;
+            gSprites[sprite->data[0]].invisible = FALSE;
+            gSprites[sprite->data[1]].invisible = FALSE;
         }
         else
         {
-            sprite->invisible = 1;
-            gSprites[sprite->data[0]].invisible = 1;
-            gSprites[sprite->data[1]].invisible = 1;
+            sprite->invisible = TRUE;
+            gSprites[sprite->data[0]].invisible = TRUE;
+            gSprites[sprite->data[1]].invisible = TRUE;
         }
 
         sprite->data[2] = 0;

@@ -355,7 +355,7 @@ static void AnimSimplePaletteBlend(struct Sprite *sprite)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     BeginNormalPaletteFade(selectedPalettes, gBattleAnimArgs[1], gBattleAnimArgs[2], gBattleAnimArgs[3], gBattleAnimArgs[4]);
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->callback = AnimSimplePaletteBlendStep;
 }
 
@@ -401,7 +401,7 @@ static void sub_80E1E2C(struct Sprite *sprite)
 
     selectedPalettes = UnpackSelectedBattleAnimPalettes(sprite->data[7]);
     BlendPalettes(selectedPalettes, gBattleAnimArgs[4], gBattleAnimArgs[3]);
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->callback = sub_80E1E80;
 }
 
@@ -724,7 +724,7 @@ static void sub_80E24B8(struct Sprite *sprite)
 {
     u16 var0;
 
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->data[0] = -gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = gBattleAnimArgs[1];
@@ -1921,7 +1921,7 @@ void sub_80E4300(u8 taskId)
     else
     {
         gTasks[taskId].data[0] = ewram17800[gBattleAnimAttacker].invisible;
-        ewram17800[gBattleAnimAttacker].invisible = 1;
+        ewram17800[gBattleAnimAttacker].invisible = TRUE;
         gTasks[taskId].func = sub_80E4368;
         gAnimVisualTaskCount--;
     }

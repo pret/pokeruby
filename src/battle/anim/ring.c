@@ -432,7 +432,7 @@ static void sub_80D154C(struct Sprite* sprite)
 {
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         if (sprite->data[7] == 0)
             sprite->callback = sub_80D158C;
         else

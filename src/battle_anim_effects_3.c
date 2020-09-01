@@ -1235,7 +1235,7 @@ static void sub_812C268(struct Sprite *sprite)
     REG_BLDALPHA = ((16 - sprite->data[1]) << 8) | sprite->data[1];
     if (--sprite->data[1] < 0)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = sub_812C2A4;
     }
 }
@@ -1295,7 +1295,7 @@ static void sub_812C380(struct Sprite *sprite)
         REG_BLDALPHA = 0;
         StartSpriteAffineAnim(sprite, 1);
         sprite->data[2] = 0;
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->affineAnimPaused = 1;
         sprite->callback = sub_812C40C;
     }
@@ -1305,7 +1305,7 @@ static void sub_812C40C(struct Sprite *sprite)
 {
     if (sprite->data[2]++ > 9)
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         sprite->affineAnimPaused = 0;
         if (sprite->affineAnimEnded)
             sprite->callback = sub_812C450;
@@ -1362,7 +1362,7 @@ static void sub_812C4FC(struct Sprite *sprite)
     }
 
     if (sprite->data[0] == 0)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
 
     if (sprite->data[0] < 0)
     {
@@ -1560,7 +1560,7 @@ static void sub_812C990(struct Sprite *sprite)
     sub_8078764(sprite, FALSE);
 
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->callback = sub_812CA04;
 }
 
@@ -1569,7 +1569,7 @@ static void sub_812CA04(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         if (sprite->affineAnimEnded)
             sprite->data[0]++;
         break;
@@ -1599,7 +1599,7 @@ static void sub_812CA04(struct Sprite *sprite)
     case 5:
         if (sprite->affineAnimEnded)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = sub_812CAD0;
         }
         break;
@@ -2028,13 +2028,13 @@ static void sub_812D294(struct Sprite *sprite)
     {
         u16 var = sprite->data[0];
         if ((var & 1) == 0)
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         else
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
     }
 
     if (sprite->data[0] > 30)
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
 
     if (sprite->data[0] == 61)
     {
@@ -2095,7 +2095,7 @@ static void sub_812D3AC(struct Sprite *sprite)
         if (++sprite->data[3] == 9)
         {
             sprite->data[3] = 0;
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
             sub_8078F40(spriteId);
             sprite->data[0]++;
         }
@@ -2178,11 +2178,11 @@ static void sub_812D5E8(struct Sprite *sprite)
     else
     {
         if (sprite->data[1] == 2)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
 
         if (sprite->data[1] == 3)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[1] = -1;
         }
 
@@ -2504,8 +2504,8 @@ static void sub_812DEAC(struct Sprite *sprite)
     gSprites[spriteId2].data[2] = gBattleAnimArgs[1];
     gSprites[spriteId1].data[7] = -1;
     gSprites[spriteId2].data[7] = -1;
-    gSprites[spriteId1].invisible = 1;
-    gSprites[spriteId2].invisible = 1;
+    gSprites[spriteId1].invisible = TRUE;
+    gSprites[spriteId2].invisible = TRUE;
     gSprites[spriteId1].callback = sub_812E0F8;
     gSprites[spriteId2].callback = sub_812E0F8;
 
@@ -2525,19 +2525,19 @@ static void sub_812DFEC(struct Sprite *sprite)
     sprite->data[3] = var0 & 0xFF;
     if (sprite->data[4] == 0 && sprite->pos2.y < -8)
     {
-        gSprites[sprite->data[6]].invisible = 0;
+        gSprites[sprite->data[6]].invisible = FALSE;
         sprite->data[4]++;
     }
 
     if (sprite->data[4] == 1 && sprite->pos2.y < -16)
     {
-        gSprites[sprite->data[7]].invisible = 0;
+        gSprites[sprite->data[7]].invisible = FALSE;
         sprite->data[4]++;
     }
 
     if (--sprite->data[1] == -1)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = sub_812E09C;
     }
 }
@@ -2555,24 +2555,16 @@ static void sub_812E09C(struct Sprite *sprite)
 
 static void sub_812E0F8(struct Sprite *sprite)
 {
-    u16 d2;
-    register u16 d3 asm("r1");
-    int var0;
-    s8 var1;
-    
-    if (!sprite->invisible)
+    if (sprite->invisible)
+        return;
+
+    sprite->data[3] += sprite->data[2];
+    sprite->pos2.y -= sprite->data[3] >> 8;
+    sprite->data[3] &= 0xFF;
+    if (sprite->data[1]-- == 0)
     {
-        d2 = sprite->data[2];
-        d3 = sprite->data[3];
-        var0 = d2 + d3;
-        var1 = var0 >> 8;
-        sprite->pos2.y -= var1;
-        sprite->data[3] = var0 & 0xFF;
-        if (--sprite->data[1] == -1)
-        {
-            sprite->invisible = 1;
-            sprite->callback = SpriteCallbackDummy;
-        }
+        sprite->invisible = TRUE;
+        sprite->callback = SpriteCallbackDummy;
     }
 }
 
@@ -3102,7 +3094,7 @@ static void sub_812ED84(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sub_8078764(sprite, FALSE);
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->callback = sub_812EE00;
 }
 
@@ -3111,7 +3103,7 @@ static void sub_812EE00(struct Sprite *sprite)
     switch (sprite->data[1])
     {
     case 0:
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         if (sprite->affineAnimEnded)
             sprite->data[1]++;
         break;
@@ -3125,7 +3117,7 @@ static void sub_812EE00(struct Sprite *sprite)
     case 2:
         if (sprite->affineAnimEnded)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[1]++;
         }
         break;
@@ -4593,7 +4585,7 @@ static void sub_8130FE0(struct Sprite *sprite)
         REG_BLDALPHA = (sprite->data[2] << 8) | sprite->data[1];
         if (++sprite->data[0] == 32)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[5]++;
         }
         break;
@@ -4666,7 +4658,7 @@ void sub_81312E4(u8 taskId)
         {
             gTasks[taskId].data[3] = 0;
             sub_8078F40(spriteId);
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
             gTasks[taskId].data[0]++;
         }
     }
@@ -4695,7 +4687,7 @@ static void sub_8131408(u8 taskId)
     case 0:
         gSprites[spriteId].pos2.y = -200;
         gSprites[spriteId].pos2.x = 200;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gTasks[taskId].data[10] = 0;
         gTasks[taskId].data[0]++;
         break;
@@ -4858,8 +4850,8 @@ void sub_81316F8(u8 taskId)
     gSprites[spriteId2].data[7] = 0;
     gSprites[spriteId1].data[7] = 0;
     gTasks[taskId].data[0] = 2;
-    gSprites[spriteId2].invisible = 0;
-    gSprites[spriteId1].invisible = 1;
+    gSprites[spriteId2].invisible = FALSE;
+    gSprites[spriteId1].invisible = TRUE;
     gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_NORMAL;
     gSprites[spriteId1].oam.objMode = ST_OAM_OBJ_NORMAL;
     gSprites[spriteId2].callback = sub_8131838;
@@ -5748,13 +5740,13 @@ void sub_8131EB8(struct Sprite *sprite)
             sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 16;
             sprite->data[0] = -32;
             sprite->data[7]++;
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT && !IsContest())
                 sprite->subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_BATTLER_TARGET)].subpriority - 1;
         }
         else
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         }
         break;
     case 1:

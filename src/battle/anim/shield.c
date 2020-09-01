@@ -86,7 +86,7 @@ static void sub_80CCE0C(struct Sprite* sprite)
         REG_BLDALPHA = (sprite->data[7] << 8) | (16 - sprite->data[7]);
         if (sprite->data[7] == 16)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = sub_807861C;
         }
     }

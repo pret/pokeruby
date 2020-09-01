@@ -524,14 +524,14 @@ static void sub_80DB92C(struct Sprite *sprite)
             u8 bank = bankCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
             if (IsAnimBankSpriteVisible(bank))
-                gSprites[gBattlerSpriteIds[bank]].invisible = 0;
+                gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
 
             bank = bankCopy ^ 2;
             if (IsAnimBankSpriteVisible(bank))
-                gSprites[gBattlerSpriteIds[bank]].invisible = 0;
+                gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
         }
 
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = sub_80DB9E4;
     }
 }
@@ -721,7 +721,7 @@ static void sub_80DBD58(u8 taskId)
         }
         else
         {
-            gSprites[task->data[0]].invisible = 1;
+            gSprites[task->data[0]].invisible = TRUE;
             gSprites[task->data[0]].pos1.x = 272;
             sub_8078F40(task->data[0]);
             DestroyAnimVisualTask(taskId);
@@ -1144,7 +1144,7 @@ void sub_80DC700(struct Sprite *sprite)
             if (sprite->data[1] == 0)
             {
                 sprite->data[0]++;
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
             }
         }
 

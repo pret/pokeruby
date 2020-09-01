@@ -498,7 +498,7 @@ static void sub_80DA300(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->callback = sub_80DA348;
-    gSprites[GetAnimBattlerSpriteId(0)].invisible = 1;
+    gSprites[GetAnimBattlerSpriteId(0)].invisible = TRUE;
 }
 
 static void sub_80DA348(struct Sprite *sprite)
@@ -558,7 +558,7 @@ static void sub_80DA410(struct Sprite *sprite)
     //The below if statement relies on overflow when cast to unsigned whenver pos1.x and pos2.x add up to less than 32.
     if ((u32) (sprite->pos1.x + sprite->pos2.x + 32) > 304 || sprite->pos1.y + sprite->pos2.y > 160)
     {
-        gSprites[GetAnimBattlerSpriteId(0)].invisible = 0;
+        gSprites[GetAnimBattlerSpriteId(0)].invisible = FALSE;
         DestroyAnimSprite(sprite);
     }
 }
@@ -1049,7 +1049,7 @@ static void sub_80DB194(struct Sprite *sprite)
     {
         case 0:
             InitAnimSpritePos(sprite, 1);
-            gSprites[GetAnimBattlerSpriteId(0)].invisible = 1;
+            gSprites[GetAnimBattlerSpriteId(0)].invisible = TRUE;
             ++sprite->data[0];
             break;
         case 1:
@@ -1080,7 +1080,7 @@ static void sub_80DB1F4(struct Sprite *sprite)
             sprite->pos2.y -= 10;
             if (sprite->pos1.y + sprite->pos2.y < -32)
             {
-                gSprites[GetAnimBattlerSpriteId(0)].invisible = 0;
+                gSprites[GetAnimBattlerSpriteId(0)].invisible = FALSE;
                 DestroyAnimSprite(sprite);
             }
     }
@@ -1092,7 +1092,7 @@ static void sub_80DB288(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->callback = sub_80DB2D0;
-    gSprites[GetAnimBattlerSpriteId(0)].invisible = 1;
+    gSprites[GetAnimBattlerSpriteId(0)].invisible = TRUE;
 }
 
 static void sub_80DB2D0(struct Sprite *sprite)
@@ -1108,7 +1108,7 @@ static void sub_80DB2D0(struct Sprite *sprite)
     }
     else
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         if (sprite->data[3]++ > 20)
         {
             sprite->callback = sub_80DB330;
@@ -1122,7 +1122,7 @@ static void sub_80DB330(struct Sprite *sprite)
 
     if (sprite->pos1.y + sprite->pos2.y > -32)
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
     }
 
     if (sprite->pos2.y > 0)
@@ -1329,12 +1329,12 @@ void unref_sub_80DB6E4(u8 taskId)
     if (gBattleAnimArgs[0] == 0)
     {
         u8 spriteId = GetAnimBattlerSpriteId(0);
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
     }
     else
     {
         u8 spriteId = GetAnimBattlerSpriteId(0);
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
     }
 
     DestroyAnimVisualTask(taskId);

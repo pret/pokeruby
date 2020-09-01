@@ -2885,11 +2885,11 @@ void SpriteCB_HeldItemIcon(struct Sprite *sprite)
 
     if (gSprites[data7].invisible)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
     }
     else
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         sprite->pos1.x = gSprites[data7].pos1.x + gSprites[data7].pos2.x;
         sprite->pos1.y = gSprites[data7].pos1.y + gSprites[data7].pos2.y;
     }
@@ -2979,7 +2979,7 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 
     if (!item)
     {
-        gSprites[heldItemSpriteId].invisible = 1;
+        gSprites[heldItemSpriteId].invisible = TRUE;
     }
     else
     {
@@ -2988,7 +2988,7 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
         else
             StartSpriteAnim(&gSprites[heldItemSpriteId], 0);
 
-        gSprites[heldItemSpriteId].invisible = 0;
+        gSprites[heldItemSpriteId].invisible = FALSE;
     }
 
     gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
@@ -3159,7 +3159,7 @@ void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
     spriteId = GetMonHeldItemIconSpriteId(taskId, monIndex);
     if (!GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM))
     {
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
     }
     else
     {
@@ -3181,7 +3181,7 @@ void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
             animNum = 0;
         }
         StartSpriteAnim(sprite2, animNum);
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
     }
 }
 

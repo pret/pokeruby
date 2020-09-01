@@ -1292,9 +1292,8 @@ void c2_8011A1C(void)
         gScanlineEffectRegBuffers[0][i] = 0xF0;
         gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
-    for (i = 80; i < 160; i++)
+    for (; i < 160; i++)
     {
-        asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
         gScanlineEffectRegBuffers[0][i] = 0xFF10;
         gScanlineEffectRegBuffers[1][i] = 0xFF10;
     }

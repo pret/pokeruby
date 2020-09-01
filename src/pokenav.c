@@ -3505,7 +3505,7 @@ void sub_80F3008(u8 arg0)
             if (spriteId != MAX_SPRITES)
             {
                 gPokenavStructPtr->unk87D0[i] = &gSprites[spriteId];
-                gSprites[spriteId].invisible = 1;
+                gSprites[spriteId].invisible = TRUE;
                 gSprites[spriteId].data[0] = 0;
                 gSprites[spriteId].data[1] = 0;
                 gSprites[spriteId].data[2] = i == 0 ? -1 : 1;
@@ -4030,7 +4030,7 @@ void sub_80F3D00(void)
         if (spriteId != MAX_SPRITES)
         {
             gPokenavStructPtr->unk8800[i] = &gSprites[spriteId];
-            gPokenavStructPtr->unk8800[i]->invisible = 1;
+            gPokenavStructPtr->unk8800[i]->invisible = TRUE;
         }
         else
         {
@@ -4099,13 +4099,13 @@ void sub_80F3E9C(struct Sprite *sprite)
             return;
 
         SeekSpriteAnim(sprite, 0);
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
     }
 
     sub_80F3E24(sprite);
     if (sprite->animEnded)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         if (sprite->data[3] == sprite->data[2])
         {
             if (sprite->data[3] == 9)
@@ -4147,7 +4147,7 @@ void sub_80F3F20(u8 arg0, u8 arg1)
                 sub_80F3E24(gPokenavStructPtr->unk8800[i]);
                 sub_80F3FAC();
                 gPokenavStructPtr->unk8800[i]->callback = sub_80F3E04;
-                gPokenavStructPtr->unk8800[i]->invisible = 0;
+                gPokenavStructPtr->unk8800[i]->invisible = FALSE;
             }
         }
     }
@@ -4162,7 +4162,7 @@ void sub_80F3FAC(void)
         if (gPokenavStructPtr->unk8800[i])
         {
             SeekSpriteAnim(gPokenavStructPtr->unk8800[i], 0);
-            gPokenavStructPtr->unk8800[i]->invisible = 0;
+            gPokenavStructPtr->unk8800[i]->invisible = FALSE;
         }
     }
 }
@@ -4230,7 +4230,7 @@ void sub_80F4138(struct Sprite *sprite)
     {
         if (sprite->data[0] == 0)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[0] = 1;
         }
     }
@@ -4238,7 +4238,7 @@ void sub_80F4138(struct Sprite *sprite)
     {
         if (sprite->data[0] == 1)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->data[0] = 0;
         }
     }

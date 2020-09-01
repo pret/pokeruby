@@ -888,7 +888,7 @@ u8 PokecenterHealEffectHelper(s16 x, s16 y)
     spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_839F220, x, y, 0);
     sprite = &gSprites[spriteIdAtEnd];
     sprite->oam.priority = 2;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     SetSubspriteTables(sprite, &gUnknown_0839F1A0);
     return spriteIdAtEnd;
 }
@@ -898,7 +898,7 @@ void SpriteCB_PokecenterMonitor(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         sprite->data[0] = 0;
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         StartSpriteAnim(sprite, 1);
     }
     if (sprite->animEnded)
@@ -918,7 +918,7 @@ void HallOfFameRecordEffectHelper(s16 a0, s16 a1, s16 a2, u8 a3)
     {
         spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_839F250, a1, a2, 0);
     }
-    gSprites[spriteIdAtEnd].invisible = 1;
+    gSprites[spriteIdAtEnd].invisible = TRUE;
     gSprites[spriteIdAtEnd].data[0] = a0;
 }
 
@@ -992,7 +992,7 @@ void mapldr_08084390(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(c3_080843F8, 0);
-    gObjectEvents[gPlayerAvatar.objectEventId].invisible = 1;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     if (gPlayerAvatar.flags & 0x08)
     {
         ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_WEST);
@@ -1051,7 +1051,7 @@ bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
     playerObject = &gObjectEvents[gPlayerAvatar.objectEventId];
     playerSprite = &gSprites[gPlayerAvatar.spriteId];
     CameraObjectReset2();
-    gObjectEvents[gPlayerAvatar.objectEventId].invisible = 1;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     gPlayerAvatar.preventStep = TRUE;
     ObjectEventSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
@@ -1080,7 +1080,7 @@ bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
     sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
     task->data[1] = 1;
     task->data[2] = 0;
-    gObjectEvents[gPlayerAvatar.objectEventId].invisible = 0;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
     PlaySE(SE_FALL);
     task->data[0]++;
     return FALSE;
@@ -1677,7 +1677,7 @@ bool8 sub_80874CC(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
     CameraObjectReset2();
     FreezeObjectEvents();
     gPlayerAvatar.preventStep = TRUE;
-    objectEvent->invisible = 1;
+    objectEvent->invisible = TRUE;
     task->data[0]++;
     return FALSE;
 }
@@ -1702,7 +1702,7 @@ bool8 sub_8087548(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
     if (sprite->animCmdIndex > 1)
     {
         task->data[0]++;
-        objectEvent->invisible = 0;
+        objectEvent->invisible = FALSE;
         CameraObjectReset1();
         PlaySE(SE_M_DIG);
         ObjectEventSetHeldMovement(objectEvent, GetJumpMovementAction(DIR_EAST));
@@ -1791,7 +1791,7 @@ bool8 sub_8087774(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
 {
     if (gSprites[task->data[1]].animCmdIndex == 2)
     {
-        objectEvent->invisible = 1;
+        objectEvent->invisible = TRUE;
         task->data[0]++;
     }
     return FALSE;
@@ -1914,7 +1914,7 @@ void mapldr_080859D4(void)
     ScriptContext2_Enable();
     FreezeObjectEvents();
     gFieldCallback = NULL;
-    gObjectEvents[gPlayerAvatar.objectEventId].invisible = 1;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     CreateTask(sub_8087A74, 0);
 }
 
@@ -1944,7 +1944,7 @@ void sub_8087AC8(struct Task *task)
         }
         if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
-            objectEvent->invisible = 0;
+            objectEvent->invisible = FALSE;
             ScriptContext2_Disable();
             UnfreezeObjectEvents();
             DestroyTask(FindTaskIdByFunc(sub_8087A74));
@@ -2062,7 +2062,7 @@ static void mapldr_08085D88(void)
     ScriptContext2_Enable();
     FreezeObjectEvents();
     gFieldCallback = NULL;
-    gObjectEvents[gPlayerAvatar.objectEventId].invisible = 1;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     CameraObjectReset2();
     CreateTask(sub_8087E1C, 0);
 }
@@ -2087,7 +2087,7 @@ void sub_8087E4C(struct Task *task)
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
         sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
-        gObjectEvents[gPlayerAvatar.objectEventId].invisible = 0;
+        gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
         task->data[0]++;
         task->data[1] = 8;
         task->data[2] = 1;
@@ -3001,7 +3001,7 @@ void sub_808914C(struct Sprite *sprite)
             sprite->data[7]++;
             sprite->oam.affineMode = 0;
             FreeOamMatrix(sprite->oam.matrixNum);
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         }
     }
 }
@@ -3054,7 +3054,7 @@ void sub_80892A0(struct Task *task)
         CameraObjectReset2();
         ObjectEventTurn(objectEvent, DIR_WEST);
         StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
-        objectEvent->invisible = 0;
+        objectEvent->invisible = FALSE;
         task->data[1] = sub_8088F60();
         sub_8088FC0(task->data[1]);
         sub_8088FFC(task->data[1], objectEvent->spriteId);
