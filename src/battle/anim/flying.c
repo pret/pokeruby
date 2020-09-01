@@ -555,7 +555,7 @@ static void sub_80DA410(struct Sprite *sprite)
         sprite->data[3] &= 0xFF;
     }
 
-    //The below if statement relies on overflow when cast to unsigned whenver pos1.x and pos2.x add up to less than 32.
+    //The below if statement relies on overflow when cast to unsigned whenever pos1.x and pos2.x add up to less than 32.
     if ((u32) (sprite->pos1.x + sprite->pos2.x + 32) > 304 || sprite->pos1.y + sprite->pos2.y > 160)
     {
         gSprites[GetAnimBattlerSpriteId(0)].invisible = FALSE;
