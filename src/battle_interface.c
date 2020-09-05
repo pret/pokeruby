@@ -23,7 +23,7 @@ struct UnknownStruct5
     u32 unk4;
     u32 unk8;
     u32 unkC;
-    u32 unk10;
+    int unk10;
 };
 
 struct UnknownStruct7
@@ -680,7 +680,7 @@ void sub_8043D84(u8 a, u8 b, u32 c, u32 d, u32 e)
     ewram17850[a].unk4 = c;
     ewram17850[a].unk8 = d;
     ewram17850[a].unkC = e;
-    ewram17850[a].unk10 = 0xFFFF8000;
+    ewram17850[a].unk10 = -0x8000;
 }
 
 void sub_8043DB0(u8 a)

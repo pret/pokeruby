@@ -2221,7 +2221,7 @@ static void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
 
 static u8 sub_808DFE4(u16 num, u8 b, u8 c)
 {
-    u8 text[10];
+    u8 text[POKEMON_NAME_LENGTH + (MODERN ? 1 : 0)];
     u8 i;
 
     for (i = 0; i < 10; i++)
@@ -2232,11 +2232,11 @@ static u8 sub_808DFE4(u16 num, u8 b, u8 c)
     switch (num)
     {
     default:
-        for (i = 0; gSpeciesNames[num][i] != EOS && i < 10; i++)
+        for (i = 0; gSpeciesNames[num][i] != EOS && i < POKEMON_NAME_LENGTH; i++)
             text[i] = gSpeciesNames[num][i];
         break;
     case 0:
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < POKEMON_NAME_LENGTH; i++)
             text[i] = CHAR_HYPHEN;
         break;
     }
