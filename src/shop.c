@@ -317,7 +317,7 @@ static void DrawFirstMartScrollIndicators(void)
 {
     ClearVerticalScrollIndicatorPalettes();
 
-    if (gMartInfo.itemCount > 7)
+    if (gMartInfo.itemCount >= 8)
     {
         CreateVerticalScrollIndicators(TOP_ARROW, 172, 12);
         CreateVerticalScrollIndicators(BOTTOM_ARROW, 172, 148);
@@ -354,45 +354,42 @@ static void BuyMenuDrawMapMetatileLayer(u16 *array, s16 offset1, s16 offset2, u1
     array[offset1 + offset2 + 33] = array2[3]; // bottom right
 }
 
-static void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s32 var4)
+static void BuyMenuDrawMapMetatile(s16 var1, s16 var2, u16 *var3, u8 var4)
 {
-    u8 tempVar4 = var4;
-    s16 offset1 = var1 * 2;
-    s16 offset2 = (var2 * 0x40) + 0x40;
+    var1 <<= 1;
+    var2 = (var2 <<6) + 0x40;
 
-    switch (tempVar4)
+    switch (var4)
     {
     case 0:
-        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3);
-        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], offset1, offset2, var3 + 4);
+        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], var1, var2, var3);
+        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], var1, var2, var3 + 4);
         break;
     case 1:
-        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
-        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3 + 4);
+        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], var1, var2, var3);
+        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], var1, var2, var3 + 4);
         break;
     case 2:
-        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
-        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], offset1, offset2, var3 + 4);
+        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], var1, var2, var3);
+        BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], var1, var2, var3 + 4);
         break;
     }
 }
 
 // used to draw the border tiles around the viewport.
-static void BuyMenuDrawMapPartialMetatile(s16 var1, int var2, u16 *var3)
+static void BuyMenuDrawMapPartialMetatile(s16 var1, s16 var2, u16 *var3)
 {
-    s16 offset1 = var1 * 2;
-    s16 offset2 = (var2 * 0x40) + 0x40;
+    var1 <<=1;
+    var2 = (var2 << 6) + 0x40;
 
-    BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
-    BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3 + 4);
+    BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], var1, var2, var3);
+    BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], var1, var2, var3 + 4);
 }
 
 static void Shop_DrawViewportTiles(void)
 {
-    s16 facingX;
-    s16 facingY;
-    s16 x;
-    s16 y;
+    s16 facingX, facingY;
+    s16 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     facingX -= 3;
@@ -406,7 +403,7 @@ static void Shop_DrawViewportTiles(void)
 
             if (y != 5 && x != 6)
             {
-                s32 r3 = MapGridGetMetatileLayerTypeAt(facingX + x, facingY + y);
+                u8 r3 = MapGridGetMetatileLayerTypeAt(facingX + x, facingY + y);
 
                 if (metatileId < 512)
                     BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapLayout->primaryTileset->metatiles + metatileId * 8, r3);
@@ -437,11 +434,9 @@ static void Shop_DrawViewport(void)
 
 static void Shop_LoadViewportObjects(void)
 {
-    s16 facingX;
-    s16 facingY;
+    s16 facingX, facingY;
     u8 playerHeight;
-    u8 y;
-    u8 x;
+    u8 y, x;
     u8 r8 = 0;
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
