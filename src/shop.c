@@ -265,21 +265,7 @@ static void BuyMenuDrawGraphics(void)
     REG_BG3VOFS = 0;
     gPaletteFade.bufferTransferDisabled = 1;
 
-    /*
-        THEORY: This seemingly useless loop is required in order to match this
-        function without hacks. The reason is because it alters the 0 optimization
-        of a later assignment into using 2 different 0s instead of the same register.
-        It is speculated that at some point Game Freak insert an artificial
-        breakpoint here in order to look at the contents of OAM before it is cleared,
-        possibly because a programmer made a mistake in shop.c which corrupted its
-        contents. There may have been a macro here which at one point idled on the
-        while(1) but was changed to 0 for release due to a define somewhere. A
-        while(0) also matches, but it is more correct to use do {} while(0) as it
-        was a fix to prevent compiler warnings on older compilers.
-    */
-    do {} while(0);
-
-    DmaFill32Defvars(3, 0, (void*)OAM, OAM_SIZE);
+    Dma3FillLarge32_(0, (void*)OAM, OAM_SIZE);
     LZDecompressVram(gBuyMenuFrame_Gfx, (void*)(VRAM + 0x7C00));
     LZDecompressWram(gBuyMenuFrame_Tilemap, ewram18000_2);
     LoadCompressedPalette(gMenuMoneyPal, 0xC0, sizeof(gMenuMoneyPal));
