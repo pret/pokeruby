@@ -16,7 +16,7 @@ DirectSoundWaveData_sc88pro_slap_bass:: @ 8457D98
 
 	.align 2
 DirectSoundWaveData_sc88pro_synth_bass:: @ 8458CD0
-	.incbin "sound/direct_sound_samples/synth/sc88_synth_bass.bin"
+	.incbin "sound/direct_sound_samples/synth/sc88pro_synth_bass.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_timpani:: @ 8459944
@@ -2020,4 +2020,4 @@ DirectSoundWaveData_Phoneme_Vowel57:: @ 8654170
 
 	.align 2
 DirectSoundWaveData_sc88pro_accordion_duplicate:: @ 8654C20
-	.incbin "sound/direct_sound_samples/synth/sc88_22_accordion_fr.bin"
+	.incbin "sound/direct_sound_samples/synth/sc88pro_accordion_duplicate.bin"
