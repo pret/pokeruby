@@ -215,11 +215,11 @@ void TrendyPhraseIsOld(void)
 
     do
     {
-        if (gSaveBlock1Ptr->easyChatPairs[0].unk0_0 - gSaveBlock1Ptr->easyChatPairs[1].unk0_0 > 1)
+        if (gSaveBlock1.easyChatPairs[0].unk0_0 - gSaveBlock1.easyChatPairs[1].unk0_0 > 1)
             break;
-        if (gSaveBlock1Ptr->easyChatPairs[0].unk1_6)
+        if (gSaveBlock1.easyChatPairs[0].unk1_6)
             break;
-        if (!gSaveBlock1Ptr->easyChatPairs[1].unk1_6)
+        if (!gSaveBlock1.easyChatPairs[1].unk1_6)
             break;
         result = 1;
     } while (0);
