@@ -25,7 +25,7 @@ PetalburgCity_MapScript2_14B73D:: @ 814B73D
 
 PetalburgCity_EventScript_14B747:: @ 814B747
 	lockall
-	setflag FLAG_SPECIAL_FLAG_0
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_14B7ED
@@ -40,7 +40,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	waitmovement 0, MAP_MAUVILLE_CITY
 	msgbox PetalburgCity_Text_16D408, MSGBOX_DEFAULT
 	closemessage
-	clearflag FLAG_SPECIAL_FLAG_0
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_PETALBURG_STATE, 3
 	fadedefaultbgm
 	clearflag FLAG_DONT_TRANSITION_MUSIC
