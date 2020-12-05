@@ -746,7 +746,11 @@ static void sub_80E24B8(struct Sprite *sprite)
         break;
     }
 
+    #if MODERN
+    sprite->data[4] = *(u16 *)(sprite->data[6] | (sprite->data[7] << 16));
+    #else
     sprite->data[4] = *(u32 *)(sprite->data[6] | (sprite->data[7] << 16));
+    #endif
     sprite->data[5] = gBattleAnimArgs[3];
     var0 = sprite->data[5] - 2;
     if (var0 < 2)
@@ -770,13 +774,21 @@ static void sub_80E255C(struct Sprite *sprite)
         else
         {
             sprite->data[1] = sprite->data[2];
+            #if MODERN
+            *(u16 *)(sprite->data[6] | (sprite->data[7] << 16)) += sprite->data[0];
+            #else
             *(u32 *)(sprite->data[6] | (sprite->data[7] << 16)) += sprite->data[0];
+            #endif
             sprite->data[0] = -sprite->data[0];
         }
     }
     else
     {
+        #if MODERN
+        *(u16 *)(sprite->data[6] | (sprite->data[7] << 16)) = sprite->data[4];
+        #else
         *(u32 *)(sprite->data[6] | (sprite->data[7] << 16)) = sprite->data[4];
+        #endif
         var0 = sprite->data[5] - 2;
         if (var0 < 2)
         {
