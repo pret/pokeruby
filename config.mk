@@ -27,6 +27,19 @@ else
 endif
 endif
 
+# Language
+ifeq ($(GAME_LANGUAGE), ENGLISH)
+  BUILD_NAME := $(BUILD_NAME)
+  GAME_CODE  := $(GAME_CODE)E
+else
+ifeq ($(GAME_LANGUAGE), GERMAN)
+  BUILD_NAME := $(BUILD_NAME)_de
+  GAME_CODE  := $(GAME_CODE)D
+else
+  $(error unknown language $(GAME_LANGUAGE))
+endif
+endif
+
 # Revision
 ifeq ($(GAME_REVISION), 0)
   BUILD_NAME := $(BUILD_NAME)
@@ -39,19 +52,6 @@ ifeq ($(GAME_REVISION), 2)
 else
   $(error unknown revision $(GAME_REVISION))
 endif
-endif
-endif
-
-# Language
-ifeq ($(GAME_LANGUAGE), ENGLISH)
-  BUILD_NAME := $(BUILD_NAME)
-  GAME_CODE  := $(GAME_CODE)E
-else
-ifeq ($(GAME_LANGUAGE), GERMAN)
-  BUILD_NAME := $(BUILD_NAME)_de
-  GAME_CODE  := $(GAME_CODE)D
-else
-  $(error unknown language $(GAME_LANGUAGE))
 endif
 endif
 

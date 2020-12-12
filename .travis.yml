@@ -68,5 +68,8 @@ matrix:
         - make -j2 compare_ruby_de
         - make -j2 compare_sapphire_de
         - make -j2 compare_ruby_de_debug
+        - make -j2 compare_sapphire_de_debug
+        - make -j2 compare_ruby_de_rev1
+        - make -j2 compare_sapphire_de_rev1
 after_success:
   - .travis/calcrom/webhook.sh pokeruby
