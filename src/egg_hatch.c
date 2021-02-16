@@ -241,6 +241,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     gameMet = GetMonData(egg, MON_DATA_MET_GAME);
     markings = GetMonData(egg, MON_DATA_MARKINGS);
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
+    //FRLGE also copy the eventLegal field to the hatched Pokemon. PCNY Wish Eggs traded to RS and hatched will not have their eventLegal bit set and will not be Fateful Encounters in future games.
 
     CreateMon(temp, species, EGG_HATCH_LEVEL, 32, TRUE, personality, 0, 0);
 

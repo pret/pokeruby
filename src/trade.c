@@ -1612,7 +1612,7 @@ static bool8 sub_8048D44(void)
             }
             break;
         case 13:
-            Trade_Memcpy(gBlockSendBuffer, gSaveBlock1.externalReservedData.giftRibbons, 11);
+            Trade_Memcpy(gBlockSendBuffer, gSaveBlock1.giftRibbons, 11);
             gUnknown_03004824->unk_0075 ++;
             break;
         case 14:
@@ -3355,8 +3355,8 @@ static void sub_804AF84(void)
 {
     int i;
     for (i = 0; i < 11; i ++)
-        if (gSaveBlock1.externalReservedData.giftRibbons[i] == 0 && gUnknown_03004824->unk_00b5[i] != 0)
-            gSaveBlock1.externalReservedData.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
+        if (gSaveBlock1.giftRibbons[i] == 0 && gUnknown_03004824->unk_00b5[i] != 0)
+            gSaveBlock1.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
 }
 
 static void sub_804AFB8(const struct WindowTemplate *windowConfig, u8 *dest, const u8 *src, u8 size)

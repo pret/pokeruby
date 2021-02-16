@@ -2724,13 +2724,13 @@ u8 GetNumRibbons(struct Pokemon *mon)
     numRibbons += GetMonData(mon, MON_DATA_VICTORY_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_ARTIST_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_EFFORT_RIBBON);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_1);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_2);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_3);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_4);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_5);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_6);
-    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_7);
+    numRibbons += GetMonData(mon, MON_DATA_MARINE_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_LAND_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_SKY_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_COUNTRY_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_NATIONAL_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_EARTH_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_WORLD_RIBBON);
 
     return numRibbons;
 }

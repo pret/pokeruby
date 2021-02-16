@@ -2071,7 +2071,7 @@ void sub_80F1494(void)
             add r0, r0, r1");
         gUnknown_020388B4 = arr[0x30F7];
         // The bug fix for this code is the following:
-        // gUnknown_020388B4 = gSaveBlock1.externalReservedData.giftRibbons[gUnknown_020388B4];
+        // gUnknown_020388B4 = gSaveBlock1.giftRibbons[gUnknown_020388B4];
         if (gUnknown_020388B4)
         {
             gUnknown_020388B4--;

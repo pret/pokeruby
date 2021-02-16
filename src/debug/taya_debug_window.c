@@ -182,15 +182,15 @@ const struct {
         {gUnknown_Debug_083C50A7, MON_DATA_ARTIST_RIBBON}
     }, {
         {gUnknown_Debug_083C50AF, MON_DATA_EFFORT_RIBBON},
-        {gUnknown_Debug_083C50B8, MON_DATA_GIFT_RIBBON_1},
-        {gUnknown_Debug_083C50BF, MON_DATA_GIFT_RIBBON_2}
+        {gUnknown_Debug_083C50B8, MON_DATA_MARINE_RIBBON},
+        {gUnknown_Debug_083C50BF, MON_DATA_LAND_RIBBON}
     }, {
-        {gUnknown_Debug_083C50C4, MON_DATA_GIFT_RIBBON_3},
-        {gUnknown_Debug_083C50C8, MON_DATA_GIFT_RIBBON_4},
-        {gUnknown_Debug_083C50D0, MON_DATA_GIFT_RIBBON_5}
+        {gUnknown_Debug_083C50C4, MON_DATA_SKY_RIBBON},
+        {gUnknown_Debug_083C50C8, MON_DATA_COUNTRY_RIBBON},
+        {gUnknown_Debug_083C50D0, MON_DATA_NATIONAL_RIBBON}
     }, {
-        {gUnknown_Debug_083C50D9, MON_DATA_GIFT_RIBBON_6},
-        {gUnknown_Debug_083C50DF, MON_DATA_GIFT_RIBBON_7},
+        {gUnknown_Debug_083C50D9, MON_DATA_EARTH_RIBBON},
+        {gUnknown_Debug_083C50DF, MON_DATA_WORLD_RIBBON},
         {gUnknown_Debug_083C50E5, 0 /* sentinel */}
     }
 };
@@ -619,25 +619,25 @@ bool8 TayaDebugMenu_PokenavD(void)
             SetBoxMonData(boxPokemon, MON_DATA_EFFORT_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_1, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_MARINE_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_2, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_LAND_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_3, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_SKY_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_4, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_COUNTRY_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_5, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_NATIONAL_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_6, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_EARTH_RIBBON, &otId);
 
             otId = Random() & 1;
-            SetBoxMonData(boxPokemon, MON_DATA_GIFT_RIBBON_7, &otId);
+            SetBoxMonData(boxPokemon, MON_DATA_WORLD_RIBBON, &otId);
         }
     }
     TayaDebugMenu_TownFlags();

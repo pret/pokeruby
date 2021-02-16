@@ -111,14 +111,14 @@ struct PokemonSubstruct3
     /*0x0A*/ u32 victoryRibbon:1;
     /*0x0A*/ u32 artistRibbon:1;
     /*0x0A*/ u32 effortRibbon:1;
-    /*0x0A*/ u32 giftRibbon1:1;
-    /*0x0A*/ u32 giftRibbon2:1;
-    /*0x0A*/ u32 giftRibbon3:1;
-    /*0x0A*/ u32 giftRibbon4:1;
-    /*0x0B*/ u32 giftRibbon5:1;
-    /*0x0B*/ u32 giftRibbon6:1;
-    /*0x0B*/ u32 giftRibbon7:1;
-    /*0x0B*/ u32 fatefulEncounter:5; // unused in Ruby/Sapphire, but the high bit must be set for Mew/Deoxys to obey in FR/LG/Emerald
+    /*0x0A*/ u32 marineRibbon:1; // never distributed
+    /*0x0A*/ u32 landRibbon:1; // never distributed
+    /*0x0A*/ u32 skyRibbon:1; // never distributed
+    /*0x0A*/ u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
+    /*0x0B*/ u32 nationalRibbon:1;
+    /*0x0B*/ u32 earthRibbon:1;
+    /*0x0B*/ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
+    /*0x0B*/ u32 eventLegal:5; // high bit controls Mew & Deoxys obedience in FRLGE; if set, Pokémon is a fateful encounter in FRLG & Gen 4+ summary screens; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
 };
 
 union PokemonSubstruct
