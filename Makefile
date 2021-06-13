@@ -7,6 +7,7 @@ OBJCOPY := $(PREFIX)objcopy
 CC := $(PREFIX)gcc
 AS := $(PREFIX)as
 endif
+NM := $(PREFIX)nm
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -60,6 +61,7 @@ endif
 
 ROM := poke$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
+SYM := $(ROM:%.gba=%.sym)
 
 BUILD_DIR := build/$(BUILD_NAME)
 
@@ -109,7 +111,7 @@ ALL_BUILDS := ruby ruby_debug ruby_rev1 ruby_rev2 sapphire sapphire_debug sapphi
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 # Available targets
-.PHONY: all clean mostlyclean tidy tools $(ALL_BUILDS)
+.PHONY: all clean mostlyclean tidy tools syms $(ALL_BUILDS)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -144,12 +146,14 @@ $(shell mkdir -p $(SUBDIRS))
 
 AUTO_GEN_TARGETS :=
 
-all: $(ROM)
+all: $(ROM) $(SYM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
 
 compare: ; @$(MAKE) COMPARE=1
+
+syms: $(SYM)
 
 mostlyclean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
@@ -293,3 +297,10 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
+
+###################
+### Symbol file ###
+###################
+
+$(SYM): $(ELF)
+	$(NM) -SBn $< | uniq | grep -E "^0[2389]" > $@
