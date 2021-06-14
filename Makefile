@@ -61,6 +61,7 @@ endif
 
 ROM := poke$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
+ELF := $(ROM:%.gba=%.elf)
 SYM := $(ROM:%.gba=%.sym)
 
 BUILD_DIR := build/$(BUILD_NAME)
@@ -241,7 +242,7 @@ ruby_debug_modern:        ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 MODERN=1
 ruby_rev1_modern:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 MODERN=1
 ruby_rev2_modern:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 MODERN=1
 sapphire_modern:          ; @$(MAKE) GAME_VERSION=SAPPHIRE MODERN=1
-sappphire_debug_modern:   ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1 MODERN=1
+sapphire_debug_modern:    ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1 MODERN=1
 sapphire_rev1_modern:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 MODERN=1
 sapphire_rev2_modern:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 MODERN=1
 ruby_de_modern:           ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN MODERN=1

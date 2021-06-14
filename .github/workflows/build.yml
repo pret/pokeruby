@@ -55,8 +55,8 @@ jobs:
           make -j${nproc} ruby_debug_modern
           make -j${nproc} ruby_rev1_modern
           make -j${nproc} ruby_rev2_modern
-          make -j${nproc} sapphire_debug_modern
           make -j${nproc} sapphire_modern
+          make -j${nproc} sapphire_debug_modern
           make -j${nproc} sapphire_rev1_modern
           make -j${nproc} sapphire_rev2_modern
           mv *.sym symbols
