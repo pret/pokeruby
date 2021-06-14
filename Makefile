@@ -8,6 +8,7 @@ CC := $(PREFIX)gcc
 AS := $(PREFIX)as
 endif
 NM := $(PREFIX)nm
+OBJDUMP := $(PREFIX)objdump
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -302,4 +303,4 @@ sound/songs/%.s: sound/songs/%.mid
 ###################
 
 $(SYM): $(ELF)
-	$(NM) -SBn $< | uniq | grep -E "^0[2389]" > $@
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" > $@
