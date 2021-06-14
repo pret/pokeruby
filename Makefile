@@ -82,9 +82,7 @@ GCC_VER = $(shell $(CC) -dumpversion)
 ifeq ($(MODERN),0)
 LIBDIRS := ../../tools/agbcc/lib
 else
-LIBDIRS := \
-	$(TOOLCHAIN)/lib/gcc/arm-none-eabi/$(GCC_VER)/thumb \
-	$(TOOLCHAIN)/arm-none-eabi/lib/thumb
+LIBDIRS := -L $(shell dirname $(shell $(CC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(CC) --print-file-name=libc.a))
 endif
 LDFLAGS := $(LIBDIRS:%=-L %) -lgcc -lc
 

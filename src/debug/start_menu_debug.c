@@ -50,6 +50,18 @@
 extern void Debug_SetUpFieldMove_Cut(void);
 extern void Debug_SetUpFieldMove_SecretPower(void);
 
+#if (ENGLISH && REVISION == 0)
+#define TYPE u8
+#else
+#define TYPE u32
+#endif
+
+TYPE gUnknown_Debug_03004BD0;
+#if (ENGLISH && REVISION == 0)
+TYPE gUnknown_Debug_Murakawa2;
+#endif
+#undef TYPE
+
 void debug_sub_8076BB4(u8);
 void DebugMenu_DisplayBuildDate(u8 x, u8 y);
 void DebugMenu_DisplayContinuousDate(u8 x, u8 y);

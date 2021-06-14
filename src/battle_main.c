@@ -1393,11 +1393,11 @@ void debug_sub_80132C8(u8, void *, u32);
 
 extern s16 gUnknown_Debug_2023A76[][35];
 extern s16 gUnknown_Debug_2023B02[][6][4];
-extern u8 gUnknown_Debug_03004360;
-extern struct Window gUnknown_Debug_03004370;
-extern u8 gUnknown_Debug_030043A0;
-extern u8 gUnknown_Debug_030043A4;
-extern u8 gUnknown_Debug_030043A8;
+u8 gUnknown_Debug_03004360;
+struct Window gUnknown_Debug_03004370;
+u8 gUnknown_Debug_030043A0;
+u8 gUnknown_Debug_030043A4;
+u8 gUnknown_Debug_030043A8;
 extern u8 gBattleBuffersTransferData[];
 
 extern const u16 gUnknown_Debug_821F424[][5];
