@@ -26,6 +26,7 @@ jobs:
       - name: Checkout agbcc
         uses: actions/checkout@master
         with:
+          repository: 'pret/agbcc'
           path: 'agbcc'
 
       - name: Install binutils
@@ -35,11 +36,11 @@ jobs:
         # as an alternative to dkP
 
       - name: Install agbcc
-        working-directory: agbcc
         run: |
           ./build.sh
           ./install.sh ../
           ./install.sh ../build_de
+        working-directory: ./agbcc
 
       - name: Compare
         run: |
@@ -57,7 +58,6 @@ jobs:
           make -j${nproc} ruby NONMATCHING=1
 
       - name: German
-        working-directory: build_de
         run: |
           sh de_before.sh
           make -j${nproc} compare_ruby_de
@@ -66,6 +66,7 @@ jobs:
           make -j${nproc} compare_sapphire_de
           make -j${nproc} compare_sapphire_de_debug
           make -j${nproc} compare_sapphire_de_rev1
+        working-directory: ./build_de
 
       - name: Webhook
         if: ${{ github.event_name == 'push' }}
