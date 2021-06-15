@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -23,6 +23,11 @@ jobs:
           path: 'symbols'
           ref: symbols
 
+      - name: Checkout agbcc
+        uses: actions/checkout@master
+        with:
+          path: 'agbcc'
+
       - name: Install binutils
         run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
         # build-essential, git, and libpng-dev are already installed
@@ -30,9 +35,8 @@ jobs:
         # as an alternative to dkP
 
       - name: Install agbcc
+        working-directory: agbcc
         run: |
-          git clone https://github.com/pret/agbcc.git
-          cd agbcc 
           ./build.sh
           ./install.sh ../
           ./install.sh ../build_de
@@ -40,53 +44,28 @@ jobs:
       - name: Compare
         run: |
           make -j${nproc} compare_ruby
-          make -j${nproc} compare_ruby_debug
           make -j${nproc} compare_ruby_rev1
           make -j${nproc} compare_ruby_rev2
           make -j${nproc} compare_sapphire
-          make -j${nproc} compare_sapphire_debug
           make -j${nproc} compare_sapphire_rev1
           make -j${nproc} compare_sapphire_rev2
-          mv *.sym symbols
+          make -j${nproc} modern
 
-      - name: Modern
+      - name: Nonmatching
         run: |
-          make -j${nproc} ruby_modern
-          make -j${nproc} ruby_debug_modern
-          make -j${nproc} ruby_rev1_modern
-          make -j${nproc} ruby_rev2_modern
-          make -j${nproc} sapphire_modern
-          make -j${nproc} sapphire_debug_modern
-          make -j${nproc} sapphire_rev1_modern
-          make -j${nproc} sapphire_rev2_modern
-          mv *.sym symbols
-
-      - name: German Before
-        run: |
-          cd build_de
-          sh de_before.sh
+          make clean
+          make -j${nproc} ruby NONMATCHING=1
 
       - name: German
+        working-directory: build_de
         run: |
-          cd build_de
+          sh de_before.sh
           make -j${nproc} compare_ruby_de
           make -j${nproc} compare_ruby_de_debug
           make -j${nproc} compare_ruby_de_rev1
           make -j${nproc} compare_sapphire_de
           make -j${nproc} compare_sapphire_de_debug
           make -j${nproc} compare_sapphire_de_rev1
-          mv *.sym ../symbols
-
-      - name: German Modern
-        run: |
-          cd build_de
-          make -j${nproc} ruby_de_modern
-          make -j${nproc} ruby_de_debug_modern
-          make -j${nproc} ruby_de_rev1_modern
-          make -j${nproc} sapphire_de_modern
-          make -j${nproc} sapphire_de_debug_modern
-          make -j${nproc} sapphire_de_rev1_modern
-          mv *.sym ../symbols
 
       - name: Webhook
         if: ${{ github.event_name == 'push' }}
@@ -95,6 +74,12 @@ jobs:
           CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
           CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
         run: sh .github/calcrom/webhook.sh pokeruby
+
+      - name: Move symfiles
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          cp *.sym symbols/
+          cp build_de/*.sym symbols/
 
       - name: Update symfiles
         if: ${{ github.event_name == 'push' }}
