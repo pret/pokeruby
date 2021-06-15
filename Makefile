@@ -1,14 +1,35 @@
-TOOLCHAIN ?= $(DEVKITARM)
-ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
-include $(DEVKITARM)/base_tools
-else
-PREFIX := $(TOOLCHAIN)/bin/arm-none-eabi-
-OBJCOPY := $(PREFIX)objcopy
-CC := $(PREFIX)gcc
-AS := $(PREFIX)as
+TOOLCHAIN := $(DEVKITARM)
+COMPARE ?= 0
+
+ifeq (compare,$(MAKECMDGOALS))
+  COMPARE := 1
 endif
+
+# don't use dkP's base_tools anymore
+# because the redefinition of $(CC) conflicts
+# with when we want to use $(CC) to preprocess files
+# thus, manually create the variables for the bin
+# files, or use arm-none-eabi binaries on the system
+# if dkP is not installed on this system
+
+ifneq (,$(TOOLCHAIN))
+ifneq ($(wildcard $(TOOLCHAIN)/bin),)
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
+endif
+endif
+
+PREFIX := arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+AS := $(PREFIX)as
+
+LD := $(PREFIX)ld
 NM := $(PREFIX)nm
 OBJDUMP := $(PREFIX)objdump
+
+# note: the makefile must be set up so MODERNCC is never called
+# if MODERN=0
+MODERNCC := $(PREFIX)gcc
+
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -17,17 +38,38 @@ else
 EXE :=
 endif
 
+ifeq (modern,$(MAKECMDGOALS))
+  MODERN := 1
+endif
+
+# use arm-none-eabi-cpp for macOS
+# as macOS's default compiler is clang
+# and clang's preprocessor will warn on \u
+# when preprocessing asm files, expecting a unicode literal
+# we can't unconditionally use arm-none-eabi-cpp
+# as installations which install binutils-arm-none-eabi
+# don't come with it
+ifneq ($(MODERN),1)
+  ifeq ($(shell uname -s),Darwin)
+    CPP := $(PREFIX)cpp
+  else
+    CPP := $(CC) -E
+  endif
+else
+  CPP := $(PREFIX)cpp
+endif
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
 ifeq ($(MODERN),0)
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 else
-CC1        = $(shell $(CC) --print-prog-name=cc1) -quiet
+CC1        = $(shell $(MODERNCC) --print-prog-name=cc1) -quiet
 endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
+
 SHA1SUM   := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
@@ -46,7 +88,7 @@ ifeq ($(MODERN),0)
 CPPFLAGS += -I tools/agbcc/include -nostdinc -undef
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 else
-CC1FLAGS := -mthumb -mthumb-interwork -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -O2 -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
+CC1FLAGS := -mthumb -mthumb-interwork -mabi=apcs-gnu -mcpu=arm7tdmi -O2 -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 endif
 
 ifneq (,$(DINFO))
@@ -78,12 +120,12 @@ OBJS_REL     := $(ALL_OBJECTS:$(BUILD_DIR)/%=%)
 SUBDIRS        := $(sort $(dir $(ALL_OBJECTS)))
 DATA_SRC_SUBDIR = src/data
 
-GCC_VER = $(shell $(CC) -dumpversion)
+GCC_VER = $(shell $(MODERNCC) -dumpversion)
 
 ifeq ($(MODERN),0)
 LIBDIRS := ../../tools/agbcc/lib
 else
-LIBDIRS := -L $(shell dirname $(shell $(CC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(CC) --print-file-name=libc.a))
+LIBDIRS := -L $(shell dirname $(shell $(MODERNCC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(MODERNCC) --print-file-name=libc.a))
 endif
 LDFLAGS := $(LIBDIRS:%=-L %) -lgcc -lc
 
