@@ -89,3 +89,4 @@ jobs:
           branch: symbols
           cwd: "./symbols"
           add: "*.sym"
+          message: ${{ github.event.commits[0].message }}
