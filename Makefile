@@ -188,7 +188,7 @@ $(shell mkdir -p $(SUBDIRS))
 
 AUTO_GEN_TARGETS :=
 
-all: $(ROM) $(SYM)
+all: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
