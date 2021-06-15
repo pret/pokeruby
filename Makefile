@@ -7,6 +7,8 @@ OBJCOPY := $(PREFIX)objcopy
 CC := $(PREFIX)gcc
 AS := $(PREFIX)as
 endif
+NM := $(PREFIX)nm
+OBJDUMP := $(PREFIX)objdump
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -60,6 +62,8 @@ endif
 
 ROM := poke$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
+ELF := $(ROM:%.gba=%.elf)
+SYM := $(ROM:%.gba=%.sym)
 
 BUILD_DIR := build/$(BUILD_NAME)
 
@@ -79,9 +83,7 @@ GCC_VER = $(shell $(CC) -dumpversion)
 ifeq ($(MODERN),0)
 LIBDIRS := ../../tools/agbcc/lib
 else
-LIBDIRS := \
-	$(TOOLCHAIN)/lib/gcc/arm-none-eabi/$(GCC_VER)/thumb \
-	$(TOOLCHAIN)/arm-none-eabi/lib/thumb
+LIBDIRS := -L $(shell dirname $(shell $(CC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(CC) --print-file-name=libc.a))
 endif
 LDFLAGS := $(LIBDIRS:%=-L %) -lgcc -lc
 
@@ -109,7 +111,7 @@ ALL_BUILDS := ruby ruby_debug ruby_rev1 ruby_rev2 sapphire sapphire_debug sapphi
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 # Available targets
-.PHONY: all clean mostlyclean tidy tools $(ALL_BUILDS)
+.PHONY: all clean mostlyclean tidy tools syms $(ALL_BUILDS)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -144,12 +146,14 @@ $(shell mkdir -p $(SUBDIRS))
 
 AUTO_GEN_TARGETS :=
 
-all: $(ROM)
+all: $(ROM) $(SYM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
 
 compare: ; @$(MAKE) COMPARE=1
+
+syms: $(SYM)
 
 mostlyclean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
@@ -237,7 +241,7 @@ ruby_debug_modern:        ; @$(MAKE) GAME_VERSION=RUBY DEBUG=1 MODERN=1
 ruby_rev1_modern:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=1 MODERN=1
 ruby_rev2_modern:         ; @$(MAKE) GAME_VERSION=RUBY GAME_REVISION=2 MODERN=1
 sapphire_modern:          ; @$(MAKE) GAME_VERSION=SAPPHIRE MODERN=1
-sappphire_debug_modern:   ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1 MODERN=1
+sapphire_debug_modern:    ; @$(MAKE) GAME_VERSION=SAPPHIRE DEBUG=1 MODERN=1
 sapphire_rev1_modern:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=1 MODERN=1
 sapphire_rev2_modern:     ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2 MODERN=1
 ruby_de_modern:           ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN MODERN=1
@@ -293,3 +297,10 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
+
+###################
+### Symbol file ###
+###################
+
+$(SYM): $(ELF)
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" > $@

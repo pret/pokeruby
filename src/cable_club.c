@@ -975,8 +975,8 @@ void sub_8083C50(u8 taskId)
 }
 
 #if DEBUG
-extern u16 unk_3004E94;
-extern u32 unk_3004E98;
+u16 unk_3004E94;
+u32 unk_3004E98;
 
 static void debug_sub_808B7A8(u8);
 
