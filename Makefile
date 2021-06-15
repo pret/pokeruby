@@ -159,7 +159,7 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all,$(MAKECMDGOALS)))
+ifeq (,$(filter-out all modern compare syms,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) tools)
 else
 NODEP := 1
