@@ -11,7 +11,7 @@ jobs:
     env:
       GAME_VERSION: RUBY
       GAME_REVISION: 0
-      GAME_LANGUAGE: 0
+      GAME_LANGUAGE: ENGLISH
       DEBUG: 0
       MODERN: 0
       COMPARE: 1
