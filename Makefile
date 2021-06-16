@@ -82,6 +82,8 @@ GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
 JSONPROC  := tools/jsonproc/jsonproc$(EXE)
 
+PERL := perl
+
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym DEBUG_FIX=$(DEBUG_FIX) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym MODERN=$(MODERN)
 CPPFLAGS := -iquote include -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D=DEBUG_FIX$(DEBUG_FIX) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
 ifeq ($(MODERN),0)
@@ -345,4 +347,4 @@ sound/songs/%.s: sound/songs/%.mid
 ###################
 
 $(SYM): $(ELF)
-	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" > $@
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\w+)$$/\1 \2 \3 \4/g' > $@
