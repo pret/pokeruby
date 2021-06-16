@@ -97,20 +97,6 @@ struct Unk2001000
     u16 array[53561];
 };
 
-struct UnknownPokemonStruct2
-{
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
-    /*0x04*/ u8 nickname[11];
-    /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
-    /*0x14*/ u32 status;
-    /*0x18*/ u32 personality;
-    /*0x1C*/ u8 gender;
-    /*0x1D*/ u8 language;
-};
-
 void CB2_PartyMenuMain(void);
 void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed);
 void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId);
@@ -151,7 +137,7 @@ void SetHeldItemIconVisibility(u8 a, u8 monIndex);
 void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer);
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon);
 void PrintPartyMenuMonNicknames(void);
-void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct UnknownPokemonStruct2 *pokemon);
+void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct MultiBattlePokemonTx *pokemon);
 u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer);
 void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status);
 void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level);

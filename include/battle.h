@@ -281,13 +281,22 @@ struct AI_Stack
     u8 size;
 };
 
+struct LinkPartnerHeader
+{
+    u8 versionSignatureLo;
+    u8 versionSignatureHi;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+};
+
 struct BattleStruct /* 0x2000000 */
 {
-    /*0x00000*/ u8 unk0;
-    /*0x00001*/ bool8 unk1;
-    /*0x00002*/ u8 unk2;
-    /*0x00003*/ bool8 unk3;
-    u8 filler4[0x15DDA];
+    /*0x00000*/ union{
+        struct LinkPartnerHeader linkPartnerHeader;
+        struct MultiBattlePokemonTx multiBattleMons[3];
+    } multiBuffer;
+    u8 filler60[0x15D7E];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
     /*0x15DE0*/ u8 filler15DE0[0x220];
@@ -393,7 +402,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160C7*/ u8 unk160C7;
     /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
-    /*0x160CB*/ u8 linkPlayerIndex;
+    /*0x160CB*/ u8 multiplayerId;
     /*0x160CC*/ u16 usedHeldItems[4];
     /*0x160D4*/ u8 unk160D4;
     /*0x160D5*/ u8 unk160D5;
@@ -659,7 +668,7 @@ void sub_800D6D4();
 void ApplyPlayerChosenFrameToBattleMenu();
 void DrawMainBattleBackground(void);
 void LoadBattleTextboxAndBackground();
-void sub_800DE30(u8);
+void InitLinkBattleVsScreen(u8);
 void DrawBattleEntryBackground();
 
 // src/battle_2.o
@@ -667,7 +676,7 @@ void CB2_InitBattle(void);
 void CB2_InitBattleInternal(void);
 void CB2_HandleStartBattle(void);
 void sub_800F104(void);
-void sub_800F298(void);
+void CB2_HandleStartMultiBattle(void);
 void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);

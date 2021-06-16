@@ -76,7 +76,7 @@ extern const u8 gUnknown_Debug_821F7F3[];
 extern const u8 BattleText_YesNo[];
 extern u8 gStatStageRatios[][2];
 extern u8 gActionsByTurnOrder[4];
-extern struct UnknownPokemonStruct2 gMultiPartnerParty[];
+extern struct MultiBattlePokemonTx gMultiPartnerParty[];
 extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBattler;
 extern u32 gBattleControllerExecFlags;
@@ -283,7 +283,7 @@ void CB2_InitBattleInternal(void)
     SetVBlankCallback(sub_800FCFC);
     SetUpBattleVarsAndBirchPoochyena();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-        SetMainCallback2(sub_800F298);
+        SetMainCallback2(CB2_HandleStartMultiBattle);
     else
         SetMainCallback2(CB2_HandleStartBattle);
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -301,7 +301,7 @@ void CB2_InitBattleInternal(void)
     gBattleCommunication[0] = 0;
 }
 
-void sub_800E9EC(void)
+void BufferPartyVsScreenHealth_AtStart(void)
 {
     u16 r6 = 0;
     u16 species;
@@ -330,21 +330,21 @@ void sub_800E9EC(void)
         if (species != SPECIES_EGG && hp == 0)
             r6 |= 3 << i * 2;
     }
-    gBattleStruct->unk2 = r6;
-    gBattleStruct->unk3 = r6 >> 8;
+    gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsLo = r6;
+    gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsHi = r6 >> 8;
 }
 
 static void SetPlayerBerryDataInBattleStruct(void)
 {
     s32 i;
-    struct UnknownStruct8 *_ewram4 = &ewram4;
+    struct BattleEnigmaBerry * battleBerry = &gBattleStruct->multiBuffer.linkPartnerHeader.battleEnigmaBerry;
 
     for (i = 0; i < 7; i++)
-        _ewram4->unk0[i] = gSaveBlock1.enigmaBerry.berry.name[i];
+        battleBerry->name[i] = gSaveBlock1.enigmaBerry.berry.name[i];
     for (i = 0; i < 18; i++)
-        _ewram4->unk8[i] = gSaveBlock1.enigmaBerry.itemEffect[i];
-    _ewram4->unk7 = gSaveBlock1.enigmaBerry.holdEffect;
-    _ewram4->unk1A = gSaveBlock1.enigmaBerry.holdEffectParam;
+        battleBerry->itemEffect[i] = gSaveBlock1.enigmaBerry.itemEffect[i];
+    battleBerry->holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
+    battleBerry->holdEffectParam = gSaveBlock1.enigmaBerry.holdEffectParam;
 }
 
 void SetAllPlayersBerryData(void)
@@ -419,7 +419,7 @@ void CB2_HandleStartBattle(void)
     BuildOamBuffer();
 
     playerId = GetMultiplayerId();
-    ewram160CB = playerId;
+    gBattleStruct->multiplayerId = playerId;
     enemyId = playerId ^ 1;
 
     switch (gBattleCommunication[0])
@@ -429,9 +429,9 @@ void CB2_HandleStartBattle(void)
         {
             if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
             {
-                gBattleStruct->unk0 = 1;
-                gBattleStruct->unk1 = 1;
-                sub_800E9EC();
+                gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureLo = 1;
+                gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureHi = 1;
+                BufferPartyVsScreenHealth_AtStart();
                 SetPlayerBerryDataInBattleStruct();
 #if DEBUG
                 if (gUnknown_02023A14_50 & 8)
@@ -443,7 +443,7 @@ void CB2_HandleStartBattle(void)
                     }
                 }
 #endif
-                SendBlock(bitmask_all_link_players_but_self(), gBattleStruct, 32);
+                SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkPartnerHeader, sizeof(gBattleStruct->multiBuffer.linkPartnerHeader));
                 gBattleCommunication[0] = 1;
             }
         }
@@ -494,11 +494,11 @@ void CB2_HandleStartBattle(void)
                 }
             }
             SetAllPlayersBerryData();
-            taskId = CreateTask(sub_800DE30, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
-            gTasks[taskId].data[3] = gBattleStruct->unk2 | (gBattleStruct->unk3 << 8);
+            gTasks[taskId].data[3] = gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsHi << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyId][1];
             gBattleCommunication[0]++;
         }
@@ -576,7 +576,7 @@ void CB2_HandleStartBattle(void)
     }
 }
 
-void sub_800F02C(void)
+void PrepareOwnMultiPartnerBuffer(void)
 {
     s32 i;
 
@@ -598,7 +598,7 @@ void sub_800F02C(void)
         if (gMultiPartnerParty[i].language != 1)
             PadNameString(nickname, 0);
     }
-    memcpy(gSharedMem, gMultiPartnerParty, 0x60);
+    memcpy(gBattleStruct->multiBuffer.multiBattleMons, gMultiPartnerParty, 3 * sizeof(struct MultiBattlePokemonTx));
 }
 
 void sub_800F104(void)
@@ -609,7 +609,7 @@ void sub_800F104(void)
     s32 i;
 
     playerId = GetMultiplayerId();
-    ewram160CB = playerId;
+    gBattleStruct->multiplayerId = playerId;
     // Seriously, Game Freak?
     pSavedCallback = ewram160C4_Callback;
     pSavedBattleTypeFlags = ewram160C2_Flags;
@@ -634,8 +634,8 @@ void sub_800F104(void)
 #endif
             if (IsLinkTaskFinished())
             {
-                sub_800F02C();
-                SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x60);
+                PrepareOwnMultiPartnerBuffer();
+                SendBlock(bitmask_all_link_players_but_self(), gBattleStruct->multiBuffer.multiBattleMons, 3 * sizeof(struct MultiBattlePokemonTx));
                 gBattleCommunication[0]++;
             }
         }
@@ -652,7 +652,7 @@ void sub_800F104(void)
                 {
                     if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[playerId].id & 1))
                      || ((gLinkPlayers[i].id & 1) && (gLinkPlayers[playerId].id & 1)))
-                        memcpy(gMultiPartnerParty, gBlockRecvBuffer[i], 0x60);
+                        memcpy(gMultiPartnerParty, gBlockRecvBuffer[i], 3 * sizeof(struct MultiBattlePokemonTx));
                 }
             }
             gBattleCommunication[0]++;
@@ -680,13 +680,13 @@ void sub_800F104(void)
     }
 }
 
-void sub_800F298(void)
+void CB2_HandleStartMultiBattle(void)
 {
     u8 playerId;
     s32 id;
 
     playerId = GetMultiplayerId();
-    ewram160CB = playerId;
+    gBattleStruct->multiplayerId = playerId;
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -707,11 +707,11 @@ void sub_800F298(void)
 #endif
             if (IsLinkTaskFinished())
             {
-                gBattleStruct->unk0 = 1;
-                gBattleStruct->unk1 = 1;
-                sub_800E9EC();
+                *(&gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureLo) = 1;
+                *(&gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureHi) = 1;
+                BufferPartyVsScreenHealth_AtStart();
                 SetPlayerBerryDataInBattleStruct();
-                SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x20);
+                SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkPartnerHeader, sizeof(gBattleStruct->multiBuffer.linkPartnerHeader));
                 gBattleCommunication[0]++;
             }
         }
@@ -722,6 +722,7 @@ void sub_800F298(void)
             u8 taskId;
 
             ResetBlockReceivedFlags();
+            // LinkBattleComputeBattleTypeFlags
             id = 0;
             if (gBlockRecvBuffer[0][0] == 0x100)
             {
@@ -767,9 +768,9 @@ void sub_800F298(void)
             }
             SetAllPlayersBerryData();
             memcpy(ewram1D000, gPlayerParty, sizeof(struct Pokemon) * 3);
-            taskId = CreateTask(sub_800DE30, 0);
-            gTasks[taskId].data[1] = 0x10E;
-            gTasks[taskId].data[2] = 0x5A;
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
+            gTasks[taskId].data[1] = 270;
+            gTasks[taskId].data[2] = 90;
             gTasks[taskId].data[5] = 0;
             gTasks[taskId].data[3] = 0;
             gTasks[taskId].data[4] = 0;
@@ -1195,7 +1196,7 @@ void sub_800FE40(u8 taskId)
 {
     struct Pokemon *sp4 = NULL;
     struct Pokemon *sp8 = NULL;
-    u8 r2 = ewram160CB;
+    u8 r2 = gBattleStruct->multiplayerId;
     u32 r7;
     s32 i;
 
@@ -1321,7 +1322,7 @@ void c2_8011A1C(void)
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
     SetVBlankCallback(sub_800FCFC);
-    taskId = CreateTask(sub_800DE30, 0);
+    taskId = CreateTask(InitLinkBattleVsScreen, 0);
     gTasks[taskId].data[1] = 0x10E;
     gTasks[taskId].data[2] = 0x5A;
     gTasks[taskId].data[5] = 1;

@@ -416,7 +416,7 @@ static void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
         }
         CpuSet(src, dest, 3);
     } else {
-        if (windowId == gBattleStruct->linkPlayerIndex) {
+        if (windowId == gBattleStruct->multiplayerId) {
             r4 = gTasks[taskId].data[3];
         } else {
             r4 = gTasks[taskId].data[4];
@@ -468,7 +468,7 @@ static void PrintLinkBattleWinLossTie(void)
         {
 
             // id = player position?
-            switch (gLinkPlayers[gBattleStruct->linkPlayerIndex].id)
+            switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 0:
             case 2:
@@ -486,7 +486,7 @@ static void PrintLinkBattleWinLossTie(void)
         else
         {
 
-            switch (gLinkPlayers[gBattleStruct->linkPlayerIndex].id)
+            switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 1:
             case 3:
@@ -508,7 +508,7 @@ static void PrintLinkBattleWinLossTie(void)
 
     if (gBattleOutcome == 1)
     {
-        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id != 0)
+        if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
             PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN);
             PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS);
@@ -521,7 +521,7 @@ static void PrintLinkBattleWinLossTie(void)
     }
     else
     {
-        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id != 0)
+        if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
             PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);
@@ -535,7 +535,7 @@ static void PrintLinkBattleWinLossTie(void)
 }
 
 
-void sub_800DE30(u8 taskId)
+void InitLinkBattleVsScreen(u8 taskId)
 {
     u8 palette;
     int i;
@@ -559,11 +559,11 @@ void sub_800DE30(u8 taskId)
         } else {
             u8 windowId = 4;
 
-            u8 playerId = gBattleStruct->linkPlayerIndex;
-            u8 opponentId = gBattleStruct->linkPlayerIndex ^ 1;
+            u8 playerId = gBattleStruct->multiplayerId;
+            u8 opponentId = gBattleStruct->multiplayerId ^ 1;
             if (gLinkPlayers[playerId].id) {
-                opponentId = gBattleStruct->linkPlayerIndex;
-                playerId = gBattleStruct->linkPlayerIndex ^ 1;
+                opponentId = gBattleStruct->multiplayerId;
+                playerId = gBattleStruct->multiplayerId ^ 1;
             }
 
             Text_InitWindow8002E4C(

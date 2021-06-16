@@ -23,7 +23,7 @@
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
-extern struct UnknownPokemonStruct2 gMultiPartnerParty[3];
+extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u8 gUnknown_0202E8F6;
 extern const u16 gBattleTowerBannedSpecies[];
 

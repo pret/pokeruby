@@ -658,7 +658,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 {
                     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id == gPotentialItemEffectBattler)
+                        if (gLinkPlayers[gBattleStruct->multiplayerId].id == gPotentialItemEffectBattler)
                         {
                             StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
 #ifdef ENGLISH
@@ -949,7 +949,7 @@ void ExpandBattleTextBuffPlaceholders(u8* src, u8* dst)
                 {
                     if (hword == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id == gPotentialItemEffectBattler)
+                        if (gLinkPlayers[gBattleStruct->multiplayerId].id == gPotentialItemEffectBattler)
                         {
                             StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
 #ifdef ENGLISH

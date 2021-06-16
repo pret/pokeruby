@@ -193,6 +193,20 @@ struct UnknownPokemonStruct
     /*0x2B*/u8 friendship;
 };
 
+struct MultiBattlePokemonTx
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 #define BATTLE_STATS_NO 8
 
 struct BattlePokemon

@@ -2828,7 +2828,7 @@ void unref_sub_806D964(u8 taskId)
         TryCreatePartyMenuMonIcon(taskId, i, &gPlayerParty[i]);
 }
 
-void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct UnknownPokemonStruct2 *pokemon)
+void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct MultiBattlePokemonTx *pokemon)
 {
     u8 x = gUnknown_08376678[menuType][monIndex].x;
     u8 y = gUnknown_08376678[menuType][monIndex].y;
