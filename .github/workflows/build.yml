@@ -15,7 +15,6 @@ jobs:
       DEBUG: 0
       MODERN: 0
       COMPARE: 1
-      NONMATCHING: 0
     steps:
       - name: Checkout
         uses: actions/checkout@master
