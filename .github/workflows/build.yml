@@ -8,6 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GAME_VERSION: RUBY
+      GAME_REVISION: 0
+      GAME_LANGUAGE: ENGLISH
+      DEBUG: 0
+      MODERN: 0
+      COMPARE: 1
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -43,30 +50,85 @@ jobs:
         working-directory: ./agbcc
 
       - name: Compare
-        run: |
-          make -j${nproc} compare_ruby
-          make -j${nproc} compare_ruby_rev1
-          make -j${nproc} compare_ruby_rev2
-          make -j${nproc} compare_sapphire
-          make -j${nproc} compare_sapphire_rev1
-          make -j${nproc} compare_sapphire_rev2
-          make -j${nproc} modern
+        run: make -j${nproc} all syms
+
+      - name: Compare rev1
+        env:
+          GAME_REVISION: 1
+        run: make -j${nproc} all syms
+
+      - name: Compare rev2
+        env:
+          GAME_REVISION: 2
+        run: make -j${nproc} all syms
+
+      - name: Compare Sapphire
+        env:
+          GAME_VERSION: SAPPHIRE
+        run: make -j${nproc} all syms
+
+      - name: Compare Sapphire rev1
+        env:
+          GAME_VERSION: SAPPHIRE
+          GAME_REVISION: 1
+        run: make -j${nproc} all syms
+
+      - name: Compare Sapphire rev2
+        env:
+          GAME_VERSION: SAPPHIRE
+          GAME_REVISION: 2
+        run: make -j${nproc} all syms
 
       - name: Nonmatching
-        run: |
-          make clean
-          make -j${nproc} ruby NONMATCHING=1
+        env:
+          NONMATCHING: 1
+          COMPARE: 0
+        run: make -j${nproc} $(git grep -wl NONMATCHING src | sed -r 's/^/-W /g')
 
-      - name: German
-        run: |
-          sh de_before.sh
-          make -j${nproc} compare_ruby_de
-          make -j${nproc} compare_ruby_de_debug
-          make -j${nproc} compare_ruby_de_rev1
-          make -j${nproc} compare_sapphire_de
-          make -j${nproc} compare_sapphire_de_debug
-          make -j${nproc} compare_sapphire_de_rev1
+      - name: Setup German
+        run: sh de_before.sh
         working-directory: ./build_de
+
+      - name: German Ruby
+        env:
+          GAME_LANGUAGE: GERMAN
+        run: make -j${nproc} all syms
+        working-directory: ./build_de
+
+      - name: German Ruby Debug
+        env:
+          GAME_LANGUAGE: GERMAN
+          DEBUG: 1
+        run: make -j${nproc} all syms
+        working-directory: ./build_de
+
+      - name: German Ruby rev1
+        env:
+          GAME_LANGUAGE: GERMAN
+          GAME_REVISION: 1
+        run: make -j${nproc} all syms
+        working-directory: ./build_de
+
+      - name: German Sapphire
+        env:
+          GAME_LANGUAGE: GERMAN
+          GAME_VERSION: SAPPHIRE
+        run: make -j${nproc} all syms
+        working-directory: ./build_de
+
+      - name: German Sapphire rev1
+        env:
+          GAME_LANGUAGE: GERMAN
+          GAME_VERSION: SAPPHIRE
+          GAME_REVISION: 1
+        run: make -j${nproc} all syms
+        working-directory: ./build_de
+
+      - name: Modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+        run: make -j${nproc} all
 
       - name: Webhook
         if: ${{ github.event_name == 'push' }}

@@ -159,7 +159,7 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all,$(MAKECMDGOALS)))
+ifeq (,$(filter-out all modern compare syms,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) tools)
 else
 NODEP := 1
@@ -188,7 +188,7 @@ $(shell mkdir -p $(SUBDIRS))
 
 AUTO_GEN_TARGETS :=
 
-all: $(ROM) $(SYM)
+all: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
