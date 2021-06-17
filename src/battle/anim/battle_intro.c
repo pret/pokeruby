@@ -12,7 +12,7 @@
 #include "trig.h"
 
 extern u16 gBattleTypeFlags;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gBattleMonForms[];
 
 extern void sub_800FE20(struct Sprite *);
@@ -118,7 +118,7 @@ static void BattleIntroTask_ScrollScenery(u8 taskId)
             gTasks[taskId].tState++;
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -227,7 +227,7 @@ static void BattleIntroTask_FadeScenery(u8 taskId)
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
             gTasks[taskId].data[5] = 1;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -323,7 +323,7 @@ static void BattleIntroTask_ScrollAndFadeScenery(u8 taskId)
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
             gTasks[taskId].data[5] = 1;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -419,7 +419,7 @@ static void BattleIntroTask_80E4C34(u8 taskId)
             gTasks[taskId].tState++;
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:

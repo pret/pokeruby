@@ -87,8 +87,6 @@ extern u8 gSharedMem[];
 #define ewram15000                      (&gSharedMem[0x15000])
 #define ewram15000arr(i, data)          (gSharedMem[0x15000 + data + i])
 #define ewram15800                      (&gSharedMem[0x15800])
-#define ewram15DDE                      (gSharedMem[0x15DDE])
-#define ewram15DDF                      (gSharedMem[0x15DDF])
 #define ewram15DE0                      ((*(struct ContestEntry*)(gSharedMem + 0x15DE0)))
 #define ewram15E00                      ((*(struct Unk2015E00*)(gSharedMem + 0x15E00)))
 #define ewram16000                      (gSharedMem[0x16000])
@@ -192,13 +190,16 @@ extern u8 gSharedMem[];
 #define ewram16800                      (&gSharedMem[0x16800])
 #define ewram17000                      (&gSharedMem[0x17000])
 #define eMoveTutorMenu                  (struct MoveTutorMenu *)(gSharedMem + 0x17000)
+
+// gBattleResources
 #define eSecretBaseRecord               ((struct SecretBaseRecord *)(gSharedMem + 0x17000))
-#define eCableCar1                      ((struct CableCarEwramStruct1 *)(gSharedMem + 0x17000))
-#define ewram17002                      (&gSharedMem[0x17002])
-#define eFlashFireArr                   (*(struct Struct2017100 *)(gSharedMem + 0x17100))
+#define eBattleFlagsArr                 (*(struct ResourceFlags *)(gSharedMem + 0x17100))
 #define B_BATTLESCRIPTS_STACK           ((struct BattleScriptsStack *)     (gSharedMem + 0x17110))
-#define ewram17130                      (gSharedMem[0x17130])
 #define B_FUNCTION_STACK                ((struct BattleCallbacksStack *)        (gSharedMem + 0x17140))
+
+
+#define eCableCar1                      ((struct CableCarEwramStruct1 *)(gSharedMem + 0x17000))
+#define ewram17130                      (gSharedMem[0x17130])
 #define ewram17160                      (gSharedMem[0x17160])
 #define ewram17800                      ((struct Struct2017800 *)    (gSharedMem + 0x17800))
 #define ewram17800_2                    (&gSharedMem[0x17800])

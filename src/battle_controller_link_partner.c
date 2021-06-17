@@ -38,7 +38,7 @@ extern u32 gBattleControllerExecFlags;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerSpriteIds[];
 extern u8 gBattleOutcome;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
@@ -1549,7 +1549,7 @@ void LinkPartnerHandleFaintingCry(void)
 void LinkPartnerHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     LinkPartnerBufferExecCompleted();
 }
 

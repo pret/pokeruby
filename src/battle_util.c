@@ -1303,7 +1303,7 @@ bool8 HandleFaintedMonActions(void)
             do
             {
                 gBank1 = gBattlerTarget = gBattleStruct->unk1605A;
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->unk16113 & gBitTable[gBattlerPartyIndexes[gBattleStruct->unk1605A]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
+                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->unk1605A]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
                     gBattleStruct->sub80173A4_Tracker = 2;
@@ -2003,14 +2003,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[bank].status1 & STATUS1_FREEZE))
                     {
-                        if (!(eFlashFireArr.arr[bank] & 1))
+                        if (!(eBattleFlagsArr.arr[bank] & 1))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBattlerAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
-                            eFlashFireArr.arr[bank] |= 1;
+                            eBattleFlagsArr.arr[bank] |= 1;
                             effect = 2;
                         }
                         else

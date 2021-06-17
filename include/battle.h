@@ -4,6 +4,7 @@
 #include "sprite.h"
 #include "constants/battle.h"
 #include "battle_setup.h"
+#include "main.h"
 
 #define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
@@ -297,8 +298,8 @@ struct BattleStruct /* 0x2000000 */
         struct MultiBattlePokemonTx multiBattleMons[3];
     } multiBuffer;
     u8 filler60[0x15D7E];
-    /*0x15DDE*/ u8 unk15DDE;
-    /*0x15DDF*/ u8 unk15DDF;
+    /*0x15DDE*/ u8 contestWinnerSaveIdx;
+    /*0x15DDF*/ u8 contestWinnerIsForArtist;
     /*0x15DE0*/ u8 filler15DE0[0x220];
     /*0x16000*/ u8 turnEffectsTracker;
     /*0x16001*/ u8 turnEffectsBattlerId;
@@ -339,14 +340,14 @@ struct BattleStruct /* 0x2000000 */
     /*0x16064*/ u8 unk16064[4];
     /*0x16068*/ u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     /*0x1606C*/ u8 unk1606C[4][3];
-    /*0x16078*/ u8 unk16078;
+    /*0x16078*/ u8 runTries;
     /*0x16079*/ u8 caughtNick[11];
-    /*0x16084*/ u8 unk16084;
+    /*0x16084*/ u8 battleStyle;
     /*0x16085*/ u8 unk16085;
-    /*0x16086*/ u8 unk16086;
-    /*0x16087*/ u8 unk16087;
+    /*0x16086*/ u8 safariGoNearCounter;
+    /*0x16087*/ u8 safariPkblThrowCounter;
     /*0x16088*/ u8 safariFleeRate;
-    /*0x16089*/ u8 unk16089;
+    /*0x16089*/ u8 safariCatchFactor;
     /*0x1608A*/ u8 unk1608A;
     /*0x1608B*/ u8 unk1608B;
     /*0x1608C*/ u8 ChosenMoveID[4];
@@ -375,31 +376,13 @@ struct BattleStruct /* 0x2000000 */
     /*0x160A9*/ u8 unk160A9;
     /*0x160AA*/ u8 unk160Aa;
     /*0x160AB*/ u8 unk160Ab;
-    /*0x160AC*/ u8 unk160AC;
-    /*0x160AD*/ u8 unk160AD;
-    /*0x160AE*/ u8 unk160AE;
-    /*0x160AF*/ u8 unk160AF;
-    /*0x160B0*/ u8 unk160B0;
-    /*0x160B1*/ u8 unk160B1;
-    /*0x160B2*/ u8 unk160B2;
-    /*0x160B3*/ u8 unk160B3;
-    /*0x160B4*/ u8 unk160B4;
-    /*0x160B5*/ u8 unk160B5;
-    /*0x160B6*/ u8 unk160B6;
-    /*0x160B7*/ u8 unk160B7;
-    /*0x160B8*/ u8 unk160B8;
-    /*0x160B9*/ u8 unk160B9;
-    /*0x160BA*/ u8 unk160Ba;
-    /*0x160BB*/ u8 unk160Bb;
+    /*0x160AC*/ u16 lastTakenMove[4 * 2];
     /*0x160BC*/ u16 HP_OnSwitchout[2];
     /*0x160C0*/ u8 unk160C0;
     /*0x160C1*/ u8 hpScale;
     /*0x160C2*/ u8 unk160C2;
     /*0x160C3*/ u8 unk160C3;
-    /*0x160C4*/ u8 unk160C4;
-    /*0x160C5*/ u8 unk160C5;
-    /*0x160C6*/ u8 unk160C6;
-    /*0x160C7*/ u8 unk160C7;
+    /*0x160C4*/ MainCallback unk160C4;
     /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
     /*0x160CB*/ u8 multiplayerId;
@@ -422,22 +405,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x160E5*/ u8 unk160E5;
     /*0x160E6*/ u8 unk160E6;
     /*0x160E7*/ u8 atkCancellerTracker;
-    /*0x160E8*/ u8 unk160E8;
-    /*0x160E9*/ u8 unk160E9;
-    /*0x160EA*/ u8 unk160EA;
-    /*0x160EB*/ u8 unk160EB;
-    /*0x160EC*/ u8 unk160EC;
-    /*0x160ED*/ u8 unk160ED;
-    /*0x160EE*/ u8 unk160EE;
-    /*0x160EF*/ u8 unk160EF;
-    /*0x160F0*/ u8 unk160F0;
-    /*0x160F1*/ u8 unk160F1;
-    /*0x160F2*/ u8 unk160F2;
-    /*0x160F3*/ u8 unk160F3;
-    /*0x160F4*/ u8 unk160F4;
-    /*0x160F5*/ u8 unk160F5;
-    /*0x160F6*/ u8 unk160F6;
-    /*0x160F7*/ u8 unk160F7;
+    /*0x160E8*/ u16 choicedMove[4];
+    /*0x160F0*/ u16 changedItems[4];
     /*0x160F8*/ u8 unk160F8;
     /*0x160F9*/ u8 unk160F9;
     /*0x160FA*/ u8 unk160FA;
@@ -446,26 +415,11 @@ struct BattleStruct /* 0x2000000 */
     /*0x160FD*/ u8 unk160FD;
     /*0x160FE*/ u8 unk160FE;
     /*0x160FF*/ u8 unk160FF;
-	/*0x16100*/ u8 unk16100;
-    /*0x16101*/ u8 unk16101;
-    /*0x16102*/ u8 unk16102;
-    /*0x16103*/ u8 unk16103;
-    /*0x16104*/ u8 unk16104;
-    /*0x16105*/ u8 unk16105;
-    /*0x16106*/ u8 unk16106;
-    /*0x16107*/ u8 unk16107;
-    /*0x16108*/ u8 unk16108;
-    /*0x16109*/ u8 unk16109;
-    /*0x1610A*/ u8 unk1610A;
-    /*0x1610B*/ u8 unk1610B;
-    /*0x1610C*/ u8 unk1610C;
-    /*0x1610D*/ u8 unk1610D;
-    /*0x1610E*/ u8 unk1610E;
-    /*0x1610F*/ u8 unk1610F;
+	/*0x16100*/ u8 lastTakenMoveFrom[2 * 2 * 4];
     /*0x16110*/ u8 wishPerishSongState;
     /*0x16111*/ u8 wishPerishSongBattlerId;
     /*0x16112*/ u8 unk16112;
-    /*0x16113*/ u8 unk16113;
+    /*0x16113*/ u8 givenExpMons;
     /*0x16114*/ u8 unk16114;
     /*0x16115*/ u8 unk16115;
     /*0x16116*/ u8 unk16116;
@@ -483,7 +437,7 @@ struct BattleStruct /* 0x2000000 */
     /* 0x16A00 */ struct BattleHistory unk_2016A00_2;
 };
 
-struct Struct2017100
+struct ResourceFlags
 {
     u32 arr[4];
 };
@@ -697,7 +651,7 @@ void objc_dp11b_pingpong(struct Sprite *);
 void nullsub_41(void);
 void sub_8010800(void);
 void BattleMainCB1(void);
-void sub_8010874(void);
+void BattleStartClearSetData(void);
 void bc_8012FAC(void);
 void sub_8011384(void);
 void bc_801333C(void);

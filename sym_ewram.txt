@@ -154,7 +154,7 @@ gActionForBanks = .; /* 2024C18 */
 gSelectionBattleScripts = .; /* 2024C1C */
     . += 0x10;
 
-gUnknown_02024C2C = .; /* 2024C2C */
+gLastPrintedMoves = .; /* 2024C2C */
     . += 0x8;
 
 gLastMoves = .; /* 2024C34 */
@@ -166,7 +166,7 @@ gLastLandedMoves = .; /* 2024C3C */
 gLastHitByType = .; /* 2024C44 */
     . += 0x8;
 
-gUnknown_02024C4C = .; /* 2024C4C */
+gLastResultingMoves = .; /* 2024C4C */
     . += 0x8;
 
 gLockedMoves = .; /* 2024C54 */
@@ -184,7 +184,7 @@ gMoveResultFlags = .; /* 2024C68 */
 gHitMarker = .; /* 2024C6C */
     . += 0x4;
 
-gUnknown_02024C70 = .; /* 2024C70 */
+sUnusedBattlersArray = .; /* 2024C70 */
     . += 0x4;
 
 gTakenDmgByBattler = .; /* 2024C74 */
@@ -238,7 +238,7 @@ gWishFutureKnock = .; /* 2024DBC */
 gUnknown_02024DDC = .; /* 2024DDC */
     . += 0xC;
 
-gUnknown_02024DE8 = .; /* 2024DE8 */
+gIntroSlideFlags = .; /* 2024DE8 */
     . += 0x2;
 
 gSentPokesToOpponent = .; /* 2024DEA */

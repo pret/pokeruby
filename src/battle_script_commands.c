@@ -101,8 +101,8 @@ extern u8* gBattleScriptsForMoveEffects[];
 extern u16 gChosenMove; //last used move in battle
 extern u8 gBankInMenu;
 extern u8 gActionForBanks[4];
-extern u16 gUnknown_02024C2C[4]; //last used moves 2, used by sketch
-extern u16 gUnknown_02024C4C[4]; //last used moves by banks, another one
+extern u16 gLastPrintedMoves[4]; //last used moves 2, used by sketch
+extern u16 gLastResultingMoves[4]; //last used moves by banks, another one
 extern u8 gCurrentTurnActionNumber;
 extern u16 gTrappingMoves[];
 
@@ -5334,7 +5334,7 @@ static void atk23_getexp(void)
         else
         {
             gBattleStruct->getexpStateTracker++;
-            gBattleStruct->unk16113 |= gBitTable[gBattlerPartyIndexes[gBank1]];
+            gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBank1]];
         }
         break;
     case 1: // calculate experience points to redistribute
@@ -6673,7 +6673,7 @@ void atk49_moveend(void)
             }
 
             if (gBattleMoves[gChosenMove].effect != 0x7F || (gMoveResultFlags & 0x29))
-                gUnknown_02024C2C[gBattlerAttacker] = gChosenMove;
+                gLastPrintedMoves[gBattlerAttacker] = gChosenMove;
 
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
                 && !(gSharedMem[0x160A6] & gBitTable[gBattlerAttacker])
@@ -6682,12 +6682,12 @@ void atk49_moveend(void)
                 if (gHitMarker & HITMARKER_OBEYS)
                 {
                     gLastMoves[gBattlerAttacker] = gChosenMove;
-                    gUnknown_02024C4C[gBattlerAttacker] = gCurrentMove;
+                    gLastResultingMoves[gBattlerAttacker] = gCurrentMove;
                 }
                 else
                 {
                     gLastMoves[gBattlerAttacker] = 0xFFFF;
-                    gUnknown_02024C4C[gBattlerAttacker] = 0xFFFF;
+                    gLastResultingMoves[gBattlerAttacker] = 0xFFFF;
                 }
 
                 if (!(gHitMarker & HITMARKER_FAINTED(gBattlerTarget)))
@@ -9666,7 +9666,7 @@ static void atk76_various(void)
 static void atk77_setprotectlike(void) //protect and endure
 {
     bool8 not_last_turn = 1;
-    u16 last_move = gUnknown_02024C4C[gBattlerAttacker];
+    u16 last_move = gLastResultingMoves[gBattlerAttacker];
 
     if (last_move != MOVE_PROTECT && last_move != MOVE_DETECT && last_move != MOVE_ENDURE)
         gDisableStructs[gBattlerAttacker].protectUses = 0;
@@ -11867,14 +11867,14 @@ struct move_pp
 static void atkA8_copymovepermanently(void)
 {
     gChosenMove = 0xFFFF;
-    if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED) && gUnknown_02024C2C[gBattlerTarget] != MOVE_STRUGGLE && gUnknown_02024C2C[gBattlerTarget] != 0 && gUnknown_02024C2C[gBattlerTarget] != 0xFFFF && gUnknown_02024C2C[gBattlerTarget] != MOVE_SKETCH)
+    if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED) && gLastPrintedMoves[gBattlerTarget] != MOVE_STRUGGLE && gLastPrintedMoves[gBattlerTarget] != 0 && gLastPrintedMoves[gBattlerTarget] != 0xFFFF && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH)
     {
         int i;
         for (i = 0; i < 4; i++)
         {
             if (gBattleMons[gBattlerAttacker].moves[i] == MOVE_SKETCH)
                 continue;
-            if (gBattleMons[gBattlerAttacker].moves[i] == gUnknown_02024C2C[gBattlerTarget])
+            if (gBattleMons[gBattlerAttacker].moves[i] == gLastPrintedMoves[gBattlerTarget])
                 break;
         }
         if (i != 4) //sketch fail
@@ -11882,8 +11882,8 @@ static void atkA8_copymovepermanently(void)
         else //sketch worked
         {
             struct move_pp moves_data;
-            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gUnknown_02024C2C[gBattlerTarget];
-            gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gUnknown_02024C2C[gBattlerTarget]].pp;
+            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
+            gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastPrintedMoves[gBattlerTarget]].pp;
             gActiveBattler = gBattlerAttacker;
             for (i = 0; i < 4; i++)
             {
@@ -11895,8 +11895,8 @@ static void atkA8_copymovepermanently(void)
             MarkBattlerForControllerExec(gActiveBattler);
             gBattleTextBuff1[0] = 0xFD;
             gBattleTextBuff1[1] = 2;
-            gBattleTextBuff1[2] = gUnknown_02024C2C[gBattlerTarget];
-            gBattleTextBuff1[3] = gUnknown_02024C2C[gBattlerTarget] >> 8;
+            gBattleTextBuff1[2] = gLastPrintedMoves[gBattlerTarget];
+            gBattleTextBuff1[3] = gLastPrintedMoves[gBattlerTarget] >> 8;
             gBattleTextBuff1[4] = 0xFF;
             gBattlescriptCurrInstr += 5;
         }
@@ -13376,7 +13376,7 @@ void atkEF_handleballthrow(void)
         u32 odds;
         u8 catch_rate;
         if (gLastUsedItem == ITEM_SAFARI_BALL)
-            catch_rate = gBattleStruct->unk16089 * 1275 / 100; //correct the name to safariFleeRate
+            catch_rate = gBattleStruct->safariCatchFactor * 1275 / 100; //correct the name to safariFleeRate
         else
             catch_rate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
         if (gLastUsedItem > 5)

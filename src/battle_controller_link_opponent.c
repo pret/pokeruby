@@ -44,7 +44,7 @@ extern void (*gAnimScriptCallback)(void);
 extern u8 gDisplayedStringBattle[];
 extern bool8 gDoingBattleAnim;
 extern u8 gBattleOutcome;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
@@ -1613,7 +1613,7 @@ void LinkOpponentHandleFaintingCry(void)
 void LinkOpponentHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     LinkOpponentBufferExecCompleted();
 }
 

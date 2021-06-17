@@ -58,7 +58,7 @@ extern u8 gDisplayedStringBattle[];
 extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 extern bool8 gDoingBattleAnim;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern MainCallback gPreBattleCallback1;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
@@ -2019,7 +2019,7 @@ void OpponentHandleFaintingCry(void)
 void OpponentHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     OpponentBufferExecCompleted();
 }
 

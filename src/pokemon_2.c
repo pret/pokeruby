@@ -1077,27 +1077,27 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
     for (i = 0; i < 6; i++)
     {
-        if (eSecretBaseRecord->partySpecies[i])
+        if (eSecretBaseRecord->party.species[i])
         {
             CreateMon(&gEnemyParty[i],
-                eSecretBaseRecord->partySpecies[i],
-                eSecretBaseRecord->partyLevels[i],
+                eSecretBaseRecord->party.species[i],
+                eSecretBaseRecord->party.levels[i],
                 15,
                 1,
-                eSecretBaseRecord->partyPersonality[i],
+                eSecretBaseRecord->party.personality[i],
                 2,
                 0);
 
             // these two SetMonData calls require the (u8 *) cast since SetMonData is declared in this function.
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&eSecretBaseRecord->partyHeldItems[i]);
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&eSecretBaseRecord->party.heldItems[i]);
 
             for (j = 0; j < 6; j++)
-                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &eSecretBaseRecord->partyEVs[i]);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &eSecretBaseRecord->party.EVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&eSecretBaseRecord->partyMoves[i * 4 + j]);
-                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[eSecretBaseRecord->partyMoves[i * 4 + j]].pp);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&eSecretBaseRecord->party.moves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[eSecretBaseRecord->party.moves[i * 4 + j]].pp);
             }
         }
     }

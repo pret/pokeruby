@@ -108,8 +108,8 @@ void sub_8106630(u32 contestWinnerId)
 {
     // probably fakematching
     struct ContestWinner *ptr1 = (struct ContestWinner*)&ewram15DE0; // TODO: resolve messy struct duplicates
-    u8 *ptr2 = (u8*)&ewram15DDE;
-    u8 *ptr3 = (u8*)&ewram15DDF;
+    u8 *ptr2 = (u8*)&gBattleStruct->contestWinnerSaveIdx;
+    u8 *ptr3 = (u8*)&gBattleStruct->contestWinnerIsForArtist;
     *ptr1 = gSaveBlock1.contestWinners[contestWinnerId - 1];
 	*ptr2 = contestWinnerId - 1;
 	*ptr3 = 0;
@@ -143,15 +143,15 @@ static void ShowContestPainting(void)
     case 2:
         SeedRng(gMain.vblankCounter1);
         InitKeys();
-        ContestPaintingInitWindow(ewram15DDF);
+        ContestPaintingInitWindow(gBattleStruct->contestWinnerIsForArtist);
         gMain.state++;
         break;
     case 3:
-        sub_8107090(ewram15DDE, ewram15DDF);
+        sub_8107090(gBattleStruct->contestWinnerSaveIdx, gBattleStruct->contestWinnerIsForArtist);
         gMain.state++;
         break;
     case 4:
-        ContestPaintingPrintCaption(ewram15DDE, ewram15DDF);
+        ContestPaintingPrintCaption(gBattleStruct->contestWinnerSaveIdx, gBattleStruct->contestWinnerIsForArtist);
         LoadPalette(gUnknown_083F6140, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);

@@ -115,26 +115,31 @@ struct UCoords16
     u16 y;
 };
 
+struct SecretBaseParty
+{
+    /*0x1A3C*/ u32 personality[PARTY_SIZE];
+    /*0x1A54*/ u16 moves[PARTY_SIZE * 4];
+    /*0x1A84*/ u16 species[PARTY_SIZE];
+    /*0x1A90*/ u16 heldItems[PARTY_SIZE];
+    /*0x1A9C*/ u8 levels[PARTY_SIZE];
+    /*0x1AA2*/ u8 EVs[PARTY_SIZE];
+};
+
 struct SecretBaseRecord
 {
     /*0x1A08*/ u8 secretBaseId;
-    /*0x1A09*/ u8 sbr_field_1_0:4;
+    /*0x1A09*/ u8 toRegister:4;
     /*0x1A09*/ u8 gender:1;
-    /*0x1A09*/ u8 sbr_field_1_5:1;
-    /*0x1A09*/ u8 sbr_field_1_6:2;
+    /*0x1A09*/ u8 battledOwnerToday:1;
+    /*0x1A09*/ u8 registryStatus:2;
     /*0x1A0A*/ u8 playerName[OT_NAME_LENGTH];
     /*0x1A11*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
-    /*0x1A16*/ u16 sbr_field_e;
-    /*0x1A18*/ u8 sbr_field_10;
-    /*0x1A19*/ u8 sbr_field_11;
+    /*0x1A16*/ u16 numSecretBasesReceived;
+    /*0x1A18*/ u8 numTimesEntered;
+    /*0x1A19*/ u8 unused;
     /*0x1A1A*/ u8 decorations[DECOR_MAX_SECRET_BASE];
     /*0x1A2A*/ u8 decorationPos[DECOR_MAX_SECRET_BASE];
-    /*0x1A3C*/ u32 partyPersonality[PARTY_SIZE];
-    /*0x1A54*/ u16 partyMoves[PARTY_SIZE * 4];
-    /*0x1A84*/ u16 partySpecies[PARTY_SIZE];
-    /*0x1A90*/ u16 partyHeldItems[PARTY_SIZE];
-    /*0x1A9C*/ u8 partyLevels[PARTY_SIZE];
-    /*0x1AA2*/ u8 partyEVs[PARTY_SIZE];
+    /*0x1A3C*/ struct SecretBaseParty party;
 };
 
 #include "constants/game_stat.h"

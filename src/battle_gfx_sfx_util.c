@@ -29,7 +29,7 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerPositions[];
 extern u8 gBattlerSpriteIds[];
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
 extern struct Window gUnknown_03004210;
@@ -142,7 +142,7 @@ void unref_sub_8031364(struct Sprite *sprite, bool8 stupid)
 
 void sub_80313A0(struct Sprite *sprite)
 {
-    if (!(gUnknown_02024DE8 & 1))
+    if (!(gIntroSlideFlags & 1))
     {
         sprite->pos2.x += sprite->data[0];
         if (sprite->pos2.x == 0)
