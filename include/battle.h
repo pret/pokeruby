@@ -380,8 +380,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160BC*/ u16 HP_OnSwitchout[2];
     /*0x160C0*/ u8 unk160C0;
     /*0x160C1*/ u8 hpScale;
-    /*0x160C2*/ u8 unk160C2;
-    /*0x160C3*/ u8 unk160C3;
+    /*0x160C2*/ u16 unk160C2;
     /*0x160C4*/ MainCallback unk160C4;
     /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
@@ -418,7 +417,7 @@ struct BattleStruct /* 0x2000000 */
 	/*0x16100*/ u8 lastTakenMoveFrom[2 * 2 * 4];
     /*0x16110*/ u8 wishPerishSongState;
     /*0x16111*/ u8 wishPerishSongBattlerId;
-    /*0x16112*/ u8 unk16112;
+    /*0x16112*/ u8 multihitMoveEffect;
     /*0x16113*/ u8 givenExpMons;
     /*0x16114*/ u8 unk16114;
     /*0x16115*/ u8 unk16115;
@@ -442,13 +441,13 @@ struct ResourceFlags
     u32 arr[4];
 };
 
-struct Struct2017800
+struct BattleSpriteInfo
 {
     u8 invisible:1;
-    u8 unk0_1:1;
+    u8 lowHpSong:1;
     u8 substituteSprite:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
+    u8 flag_x8:1;
+    u8 hpNumbersNoBars:1;
     u16 transformedSpecies;
 };
 
@@ -491,8 +490,6 @@ struct Struct20238C8
     u8 unk0_0:7;
     u8 unk0_7:1;
 };
-
-#define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \

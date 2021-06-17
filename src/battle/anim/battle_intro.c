@@ -402,10 +402,10 @@ static void BattleIntroTask_80E4C34(u8 taskId)
         if (gTasks[taskId].tBgXOffset == 0)
         {
             gTasks[taskId].tState++;
-            gSprites[ewram1608A].oam.objMode = 2;
-            gSprites[ewram1608A].callback = sub_800FE20;
-            gSprites[ewram1608B].oam.objMode = 2;
-            gSprites[ewram1608B].callback = sub_800FE20;
+            gSprites[gBattleStruct->unk1608A].oam.objMode = 2;
+            gSprites[gBattleStruct->unk1608A].callback = sub_800FE20;
+            gSprites[gBattleStruct->unk1608B].oam.objMode = 2;
+            gSprites[gBattleStruct->unk1608B].callback = sub_800FE20;
             REG_WININ = 0x3F;
             REG_WINOUT = 0x3F06;
         }

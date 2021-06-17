@@ -1843,7 +1843,7 @@ void sub_81416C4(u8 taskId)
 
 void sub_81417D8(u8 taskId)
 {
-    gBattleAnimArgs[7] = ewram17800[gBattleAnimAttacker].substituteSprite;
+    gBattleAnimArgs[7] = gBattleSpriteInfo[gBattleAnimAttacker].substituteSprite;
     DestroyAnimVisualTask(taskId);
 }
 

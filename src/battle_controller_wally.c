@@ -1195,7 +1195,7 @@ void sub_81390D0(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite == 1)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4 = 1;
         break;
@@ -1212,7 +1212,7 @@ void sub_81390D0(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if (ewram17800[gActiveBattler].substituteSprite == 1)
+            if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1)
                 move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
             ewram17810[gActiveBattler].unk4 = 3;
         }
@@ -1496,7 +1496,7 @@ void sub_81398BC(u8 bank)
 {
     u16 species;
 
-    ewram17800[bank].transformedSpecies = 0;
+    gBattleSpriteInfo[bank].transformedSpecies = 0;
     gBattlerPartyIndexes[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);

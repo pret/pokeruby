@@ -1188,6 +1188,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
 {
     s32 i;
     s8 nickname[POKEMON_NAME_LENGTH * 2];
+    u16 * hpSwitchout;
 
     gBattleMons[battleIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battleIndex].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
@@ -1226,7 +1227,9 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    ewram160BC[GetBattlerSide(battleIndex)] = gBattleMons[battleIndex].hp;
+
+    hpSwitchout = &gBattleStruct->HP_OnSwitchout[GetBattlerSide(battleIndex)];
+    *hpSwitchout = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

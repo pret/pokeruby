@@ -396,7 +396,7 @@ void sub_811E034(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
         gBattlerControllerFuncs[gActiveBattler] = sub_811E0A0;
     }
@@ -1153,7 +1153,7 @@ void sub_811FA5C(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4 = 1;
         break;
@@ -1219,7 +1219,7 @@ void LinkPartnerHandlecmd10(void)
 {
     if (ewram17810[gActiveBattler].unk4 == 0)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4++;
     }
@@ -1294,9 +1294,9 @@ void sub_811FF30(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite && !ewram17800[gActiveBattler].unk0_3)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite && !gBattleSpriteInfo[gActiveBattler].flag_x8)
         {
-            ewram17800[gActiveBattler].unk0_3 = 1;
+            gBattleSpriteInfo[gActiveBattler].flag_x8 = 1;
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         }
         ewram17810[gActiveBattler].unk4 = 1;
@@ -1314,10 +1314,10 @@ void sub_811FF30(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBattler].substituteSprite) && r7 <= 1)
+            if ((gBattleSpriteInfo[gActiveBattler].substituteSprite) && r7 <= 1)
             {
                 move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
-                ewram17800[gActiveBattler].unk0_3 = 0;
+                gBattleSpriteInfo[gActiveBattler].flag_x8 = 0;
             }
             ewram17810[gActiveBattler].unk4 = 3;
         }

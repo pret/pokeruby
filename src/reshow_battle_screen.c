@@ -201,7 +201,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
     {
         if (GetBattlerSide(bank))
         {
-            if (!ewram17800[bank].substituteSprite)
+            if (!gBattleSpriteInfo[bank].substituteSprite)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[bank]], bank);
             else
                 BattleLoadSubstituteSprite(bank, 0);
@@ -210,7 +210,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
             LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, 0);
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
             LoadPlayerTrainerBankSprite(2, 0);
-        else if (!ewram17800[bank].substituteSprite)
+        else if (!gBattleSpriteInfo[bank].substituteSprite)
             BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[bank]], bank);
         else
             BattleLoadSubstituteSprite(bank, 0);
@@ -226,7 +226,7 @@ static void sub_807B184(u8 bank)
     {
         u8 posY;
 
-        if (ewram17800[bank].substituteSprite)
+        if (gBattleSpriteInfo[bank].substituteSprite)
             posY = sub_8077F7C(bank);
         else
             posY = sub_8077F68(bank);
@@ -274,7 +274,7 @@ static void sub_807B184(u8 bank)
             gSprites[gBattlerSpriteIds[bank]].data[2] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
             StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
         }
-        gSprites[gBattlerSpriteIds[bank]].invisible = ewram17800[bank].invisible;
+        gSprites[gBattlerSpriteIds[bank]].invisible = gBattleSpriteInfo[bank].invisible;
     }
 }
 

@@ -1048,7 +1048,7 @@ _0804420C: .4byte 0x04000008\n\
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A89C, sizeof(str));
     r4 = gSprites[a].data[6];
-    if ((ewram17800[r4].unk0_4) == 0)
+    if ((gBattleSpriteInfo[r4].hpNumbersNoBars) == 0)
         return;
     ptr = str + 6;
     if (c == 0)
@@ -1427,8 +1427,8 @@ void sub_804454C(void)
         {
             u8 r6;
 
-            ewram17800[i].unk0_4 ^= 1;
-            r6 = ewram17800[i].unk0_4;
+            gBattleSpriteInfo[i].hpNumbersNoBars ^= 1;
+            r6 = gBattleSpriteInfo[i].hpNumbersNoBars;
             if (GetBattlerSide(i) == 0)
             {
 
@@ -2702,7 +2702,7 @@ static void sub_8045458(u8 a, u8 b)
         for (i = 0; i < 3; i++)
             CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32, 32);
 
-        if (!ewram17800[r7].unk0_4)
+        if (!gBattleSpriteInfo[r7].hpNumbersNoBars)
             CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 64);
 
         sub_8045458(a, 1);
@@ -2717,7 +2717,7 @@ static void sub_8045458(u8 a, u8 b)
     CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8) * 32, 96);
     if (IsDoubleBattle() == TRUE || GetBattlerSide(r7) == TRUE)
     {
-        if (!ewram17800[r7].unk0_4)
+        if (!gBattleSpriteInfo[r7].hpNumbersNoBars)
         {
             CpuCopy32(sub_8043CDC(0), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 32);
             CpuCopy32(sub_8043CDC(0x41), OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
@@ -2933,7 +2933,7 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
         r5 = ABS(r8 / r5);
         r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, r8, &ewram17850[a].unk10, 8, r5);
     }
-    if (c == 1 || (c == 0 && (!ewram17800[a].unk0_4)))
+    if (c == 1 || (c == 0 && (!gBattleSpriteInfo[a].hpNumbersNoBars)))
         sub_8045D58(a, c);
     if (r6 == -1)
         ewram17850[a].unk10 = 0;

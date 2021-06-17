@@ -1258,7 +1258,7 @@ void sub_802D680(void)
         ewram17810[gActiveBattler].unk1_0 = 0;
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
         gBattlerControllerFuncs[gActiveBattler] = sub_802D730;
     }
@@ -2385,7 +2385,7 @@ void sub_802FB2C(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4 = 1;
         break;
@@ -2460,7 +2460,7 @@ void PlayerHandlecmd10(void)
 {
     if (ewram17810[gActiveBattler].unk4 == 0)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4++;
     }
@@ -2548,9 +2548,10 @@ void sub_8030190(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite == 1 && ewram17800[gActiveBattler].unk0_3 == 0)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1 &&
+            gBattleSpriteInfo[gActiveBattler].flag_x8 == 0)
         {
-            ewram17800[gActiveBattler].unk0_3 = 1;
+            gBattleSpriteInfo[gActiveBattler].flag_x8 = 1;
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         }
         ewram17810[gActiveBattler].unk4 = 1;
@@ -2568,10 +2569,10 @@ void sub_8030190(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if (ewram17800[gActiveBattler].substituteSprite == 1 && r7 < 2)
+            if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1 && r7 < 2)
             {
                 move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
-                ewram17800[gActiveBattler].unk0_3 = 0;
+                gBattleSpriteInfo[gActiveBattler].flag_x8 = 0;
             }
             ewram17810[gActiveBattler].unk4 = 3;
         }
@@ -2674,9 +2675,9 @@ void PlayerHandlecmd22(void)
 
     gUnknown_0300434C[gActiveBattler] = CreateTask(TaskDummy, 0xFF);
     gTasks[gUnknown_0300434C[gActiveBattler]].data[0] = gBattleBufferA[gActiveBattler][1] & 0xF;
-    ewram16054 = gBattleBufferA[gActiveBattler][1] >> 4;
-    EWRAM_1609D = gBattleBufferA[gActiveBattler][2];
-    ewram160C0 = gBattleBufferA[gActiveBattler][3];
+    gBattleStruct->unk16054 = gBattleBufferA[gActiveBattler][1] >> 4;
+    gBattleStruct->unk1609D = gBattleBufferA[gActiveBattler][2];
+    gBattleStruct->unk160C0 = gBattleBufferA[gActiveBattler][3];
     for (i = 0; i < 3; i++)
         gUnknown_02038470[i] = gBattleBufferA[gActiveBattler][4 + i];
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));

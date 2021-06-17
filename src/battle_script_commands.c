@@ -4991,7 +4991,7 @@ static void atk15_seteffectwithchance(void)
     }
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
-    gBattleStruct->unk16112 = 0;
+    gBattleStruct->multihitMoveEffect = 0;
 }
 
 static void atk16_seteffectprimary(void)
@@ -5015,7 +5015,7 @@ static void atk18_clearstatusfromeffect(void)
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattlescriptCurrInstr += 2;
-    gBattleStruct->unk16112 = 0;
+    gBattleStruct->multihitMoveEffect = 0;
 }
 
 static void atk19_tryfaintmon(void)
@@ -5057,8 +5057,8 @@ static void atk19_tryfaintmon(void)
         if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler])
          && gBattleMons[gActiveBattler].hp == 0)
         {
-            ewram160ACarr2(0, battlerId) = 0;
-            ewram160ACarr2(1, battlerId) = 0;
+            eLastTakenMove_2d(0, battlerId) = 0;
+            eLastTakenMove_2d(1, battlerId) = 0;
             ewram16100arr2(0, battlerId) = 0;
             ewram16100arr2(1, battlerId) = 0;
             ewram16100arr2(2, battlerId) = 0;
@@ -9574,7 +9574,7 @@ static void atk74_hpthresholds2(void)
     {
         gActiveBattler = GetBattlerForBattleScript(T2_READ_8(gBattlescriptCurrInstr + 1));
         opposing_bank = gActiveBattler ^ 1;
-        hp_switchout = ewram160BCarr(GetBattlerSide(opposing_bank)); //gBattleStruct->HP_OnSwitchout[GetBattlerSide(opposing_bank)];
+        hp_switchout = eHpOnSwitchout(GetBattlerSide(opposing_bank)); //gBattleStruct->HP_OnSwitchout[GetBattlerSide(opposing_bank)];
         result = (hp_switchout - gBattleMons[opposing_bank].hp) * 100 / hp_switchout;
 
         if (gBattleMons[opposing_bank].hp >= hp_switchout)
@@ -9788,7 +9788,7 @@ static void atk7B_tryhealhalfhealth(void)
 
 static void atk7C_trymirrormove(void)
 {
-    u16 r7 = ewram160ACarr2(0, gBattlerAttacker) | (ewram160ACarr2(1, gBattlerAttacker) << 8);
+    u16 r7 = eLastTakenMove_2d(0, gBattlerAttacker) | (eLastTakenMove_2d(1, gBattlerAttacker) << 8);
     u16 r6 = ewram16100arr2(0, gBattlerAttacker) | (ewram16100arr2(1, gBattlerAttacker) << 8);
     u16 r5 = ewram16100arr2(2, gBattlerAttacker) | (ewram16100arr2(3, gBattlerAttacker) << 8);
 

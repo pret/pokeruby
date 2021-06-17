@@ -1932,8 +1932,8 @@ void sub_80E4300(u8 taskId)
     }
     else
     {
-        gTasks[taskId].data[0] = ewram17800[gBattleAnimAttacker].invisible;
-        ewram17800[gBattleAnimAttacker].invisible = TRUE;
+        gTasks[taskId].data[0] = gBattleSpriteInfo[gBattleAnimAttacker].invisible;
+        gBattleSpriteInfo[gBattleAnimAttacker].invisible = TRUE;
         gTasks[taskId].func = sub_80E4368;
         gAnimVisualTaskCount--;
     }
@@ -1943,7 +1943,7 @@ static void sub_80E4368(u8 taskId)
 {
     if (gBattleAnimArgs[7] == 0x1000)
     {
-        ewram17800[gBattleAnimAttacker].invisible = gTasks[taskId].data[0] & 1;
+        gBattleSpriteInfo[gBattleAnimAttacker].invisible = gTasks[taskId].data[0] & 1;
         DestroyTask(taskId);
     }
 }
