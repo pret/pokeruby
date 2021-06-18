@@ -32,21 +32,10 @@ enum
     CONTESTRESULT_TOUGH = 6,
 };
 
-struct Unk2015E00
+struct ContestPaintingBuffers
 {
-    u16 unk2015e00[128][32];
-    u16 unk2017e00[0];
-};
-
-struct ContestEntry
-{
-    /*0x00*/ u32 personality;
-    /*0x04*/ u32 otId;
-    /*0x08*/ u16 species;
-    /*0x0A*/ u8 contestType;
-    /*0x0B*/ u8 pokemon_name[POKEMON_NAME_LENGTH];
-    /*0x15*/ u8 pad15;
-    /*0x16*/ u8 trainer_name[OT_NAME_LENGTH];
+    u16 pixels[0x1000];
+    u16 palette[0x100];
 };
 
 struct LabelPair

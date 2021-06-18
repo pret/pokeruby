@@ -304,11 +304,11 @@ SYMBOL(gUnknown_03005E08, 4)
 SYMBOL(gUnknown_03005E0C, 4)
 
 // contest_painting.c
-SYMBOL(gUnknown_03005E10, 4)
-SYMBOL(gUnknown_03005E20, 32)
-SYMBOL(gUnknown_03005E40, 76)
-SYMBOL(gUnknown_03005E8C, 4)
-SYMBOL(gUnknown_03005E90, 4)
+SYMBOL(gContestMonPixels, 4)
+SYMBOL(gImageProcessingContext, 32)
+SYMBOL(sCaptionBuffer, 76)
+SYMBOL(gContestPaintingWinner, 4)
+SYMBOL(gContestPaintingMonPalette, 4)
 
 // evolution_scene.c
 SYMBOL(gCB2_AfterEvolution, 4)

@@ -1,7 +1,7 @@
 #ifndef GUARD_CUTE_SKETCH_H
 #define GUARD_CUTE_SKETCH_H
 
-struct Unk03005E20
+struct ImageProcessingContext
 {
     u8 var_0;
     u8 pad1[3];
@@ -21,8 +21,8 @@ struct Unk03005E20
     u8 var_1F;
 };
 
-void sub_80FC7A0(struct Unk03005E20 *);
-void sub_80FD8CC(struct Unk03005E20 *);
-void sub_80FDA18(struct Unk03005E20 *);
+void sub_80FC7A0(struct ImageProcessingContext *);
+void sub_80FD8CC(struct ImageProcessingContext *);
+void sub_80FDA18(struct ImageProcessingContext *);
 
 #endif // GUARD_CUTE_SKETCH_H

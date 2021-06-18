@@ -1,29 +1,29 @@
 #include "global.h"
 #include "contest_painting.h"
-#include "contest_painting_effects.h"
 #include "data2.h"
 #include "decompress.h"
+#include "ewram.h"
+#include "image_processing_effects.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
 #include "random.h"
+#include "scanline_effect.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
-#include "scanline_effect.h"
-#include "ewram.h"
 
-static u8 gUnknown_03000750;
-static u16 gUnknown_03000752;
-static u16 gUnknown_03000754;
-static u8 gUnknown_03000756;
+static u8 sHoldState;
+static u16 sMosaicVal;
+static u16 sFrameCounter;
+static u8 sVarsInitialized;
 
-u16 (*gUnknown_03005E10)[][32];
-struct Unk03005E20 gUnknown_03005E20;
-u8 gUnknown_03005E40[0x4C];
-struct ContestEntry *gUnknown_03005E8C;
-u16 *gUnknown_03005E90;
+u16 (*gContestMonPixels)[][32];
+struct ImageProcessingContext gImageProcessingContext;
+u8 sCaptionBuffer[76];
+struct ContestWinner *gContestPaintingWinner;
+u16 *gContestPaintingMonPalette;
 
 static const u16 gPictureFramePalettes[][16] =
 {
@@ -49,7 +49,8 @@ const u8 gPictureFrameTilemap_2[] = INCBIN_U8("graphics/picture_frame/frame2_map
 const u8 gPictureFrameTilemap_3[] = INCBIN_U8("graphics/picture_frame/frame3_map.bin.rl");
 const u8 gPictureFrameTilemap_4[] = INCBIN_U8("graphics/picture_frame/frame4_map.bin.rl");
 const u8 gPictureFrameTilemap_5[] = INCBIN_U8("graphics/picture_frame/frame5_map.bin.rl");
-const u8 *const gUnknown_083F60AC[] =
+
+const u8 *const sContestRankNames[] =
 {
     OtherText_Cool,
     OtherText_Beauty2,
@@ -57,25 +58,32 @@ const u8 *const gUnknown_083F60AC[] =
     OtherText_Smart,
     OtherText_Tough,
 };
-const struct LabelPair gUnknown_083F60C0[] =
+
+const struct LabelPair sMuseumCaptions[] =
 {
+    // COOL
     {OtherText_NonstopSuperCool, OtherText_Terminator6},
     {OtherText_GoodLookingPoke, OtherText_Terminator7},
     {OtherText_MarvelousGreat, OtherText_Terminator8},
+    // BEAUTY
     {OtherText_CenturyLastVenus, OtherText_Terminator9},
     {OtherText_Terminator10, OtherText_DazzlingSmile},
     {OtherText_PokeCenterIdol, OtherText_Terminator11},
+    // CUTE
     {OtherText_LovelyAndSweet, OtherText_Terminator12},
     {OtherText_ThePretty, OtherText_WinningPortrait},
     {OtherText_GiveUsWink, OtherText_Terminator13},
+    // SMART
     {OtherText_SmartnessMaestro, OtherText_Terminator15},
     {OtherText_ChosenPokeAmong, OtherText_Terminator15},
     {OtherText_TheExcellent, OtherText_ItsMomentOfElegance},
+    // TOUGH
     {OtherText_PowerfullyMuscular, OtherText_Terminator16},
     {OtherText_StrongErEst, OtherText_Terminator17},
     {OtherText_MightyTough, OtherText_Exclamation},
 };
-const struct OamData gOamData_83F6138 =
+
+const struct OamData sContestPaintingMonOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -91,7 +99,8 @@ const struct OamData gOamData_83F6138 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-const u16 gUnknown_083F6140[] = {0, 0};
+
+const u16 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
 
 static void ShowContestPainting();
 static void CB2_HoldContestPainting(void);
@@ -107,7 +116,7 @@ static void sub_8107090(u8 arg0, u8 arg1);
 void sub_8106630(u32 contestWinnerId)
 {
     // probably fakematching
-    struct ContestWinner *ptr1 = (struct ContestWinner*)&ewram15DE0; // TODO: resolve messy struct duplicates
+    struct ContestWinner *ptr1 = &eContestPaintingWinner; // TODO: resolve messy struct duplicates
     u8 *ptr2 = (u8*)&gBattleStruct->contestWinnerSaveIdx;
     u8 *ptr3 = (u8*)&gBattleStruct->contestWinnerIsForArtist;
     *ptr1 = gSaveBlock1.contestWinners[contestWinnerId - 1];
@@ -127,7 +136,7 @@ static void ShowContestPainting(void)
     case 0:
         ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
-        gUnknown_03005E8C = &ewram15DE0;
+        gContestPaintingWinner = &eContestPaintingWinner;
         ContestPaintingInitVars(TRUE);
         ContestPaintingInitBG();
         gMain.state++;
@@ -152,11 +161,11 @@ static void ShowContestPainting(void)
         break;
     case 4:
         ContestPaintingPrintCaption(gBattleStruct->contestWinnerSaveIdx, gBattleStruct->contestWinnerIsForArtist);
-        LoadPalette(gUnknown_083F6140, 0, 1 * 2);
+        LoadPalette(sBgPalette, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);
         SetVBlankCallback(VBlankCB_ContestPainting);
-        gUnknown_03000750 = 0;
+        sHoldState = 0;
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
         SetMainCallback2(CB2_HoldContestPainting);
         break;
@@ -176,30 +185,30 @@ static void CB2_QuitContestPainting(void)
 
 static void HoldContestPainting(void)
 {
-    switch (gUnknown_03000750)
+    switch (sHoldState)
     {
     case 0:
         if (!gPaletteFade.active)
-            gUnknown_03000750 = 1;
-        if (gUnknown_03000756 != 0 && gUnknown_03000754 != 0)
-            gUnknown_03000754--;
+            sHoldState = 1;
+        if (sVarsInitialized != 0 && sFrameCounter != 0)
+            sFrameCounter--;
         break;
     case 1:
         if ((gMain.newKeys & 1) || (gMain.newKeys & 2))
         {
             u8 two = 2;  //needed to make the asm match
 
-            gUnknown_03000750 = two;
+            sHoldState = two;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
-        if (gUnknown_03000756 != 0)
-            gUnknown_03000754 = 0;
+        if (sVarsInitialized != 0)
+            sFrameCounter = 0;
         break;
     case 2:
         if (!gPaletteFade.active)
             SetMainCallback2(CB2_QuitContestPainting);
-        if (gUnknown_03000756 != 0 && gUnknown_03000754 <= 0x1D)
-            gUnknown_03000754++;
+        if (sVarsInitialized != 0 && sFrameCounter <= 0x1D)
+            sFrameCounter++;
         break;
     }
 }
@@ -218,16 +227,16 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
 
     if (arg1 == TRUE)
         return;
-    ptr = gUnknown_03005E40;
-    type = gUnknown_03005E8C->contestType;
+    ptr = sCaptionBuffer;
+    type = gContestPaintingWinner->contestCategory;
     if (contestType < 8)
     {
-        ptr = StringCopy(ptr, gUnknown_083F60AC[type]);
+        ptr = StringCopy(ptr, sContestRankNames[type]);
         ptr = StringCopy(ptr, gContestText_ContestWinner);
 #if ENGLISH
-        ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+        ptr = StringCopy(ptr, gContestPaintingWinner->trainerName);
 #elif GERMAN
-        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+        ptr = StringCopy10(ptr, gContestPaintingWinner->nickname);
 #endif
 
         // {LATIN}
@@ -237,9 +246,9 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
 
         ptr = StringCopy(ptr, gOtherText_Unknown1);
 #if ENGLISH
-        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
+        ptr = StringCopy10(ptr, gContestPaintingWinner->nickname);
 #elif GERMAN
-        ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
+        ptr = StringCopy(ptr, gContestPaintingWinner->trainerName);
 #endif
 
         xPos = 6;
@@ -247,14 +256,14 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     }
     else
     {
-        ptr = StringCopy(ptr, gUnknown_083F60C0[type].prefix);
-        ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
-        ptr = StringCopy(ptr, gUnknown_083F60C0[type].suffix);
+        ptr = StringCopy(ptr, sMuseumCaptions[type].prefix);
+        ptr = StringCopy10(ptr, gContestPaintingWinner->nickname);
+        ptr = StringCopy(ptr, sMuseumCaptions[type].suffix);
 
         xPos = 3;
         yPos = 14;
     }
-    Menu_PrintTextPixelCoords(gUnknown_03005E40, xPos * 8 + 1, yPos * 8, 1);
+    Menu_PrintTextPixelCoords(sCaptionBuffer, xPos * 8 + 1, yPos * 8, 1);
 }
 
 static void ContestPaintingInitBG(void)
@@ -272,30 +281,30 @@ static void ContestPaintingInitVars(bool8 arg0)
 {
     if (arg0 == FALSE)
     {
-        gUnknown_03000756 = FALSE;
-        gUnknown_03000752 = 0;
-        gUnknown_03000754 = 0;
+        sVarsInitialized = FALSE;
+        sMosaicVal = 0;
+        sFrameCounter = 0;
     }
     else
     {
-        gUnknown_03000756 = TRUE;
-        gUnknown_03000752 = 15;
-        gUnknown_03000754 = 30;
+        sVarsInitialized = TRUE;
+        sMosaicVal = 15;
+        sFrameCounter = 30;
     }
 }
 
 static void ContestPaintingMosaic(void)
 {
-    if (gUnknown_03000756 == FALSE)
+    if (sVarsInitialized == FALSE)
     {
         REG_MOSAIC = 0;
         return;
     }
 
     REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(10) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_TXT256x256;
-    gUnknown_03000752 = gUnknown_03000754 / 2;
+    sMosaicVal = sFrameCounter / 2;
 
-    REG_MOSAIC = (gUnknown_03000752 << 12) | (gUnknown_03000752 << 8) | (gUnknown_03000752 << 4) | (gUnknown_03000752 << 0);
+    REG_MOSAIC = (sMosaicVal << 12) | (sMosaicVal << 8) | (sMosaicVal << 4) | (sMosaicVal << 0);
 }
 
 static void VBlankCB_ContestPainting(void)
@@ -310,8 +319,8 @@ static void sub_8106AC4(u16 species, u8 arg1)
 {
     const void *pal;
 
-    pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->otId, gUnknown_03005E8C->personality);
-    LZDecompressVram(pal, gUnknown_03005E90);
+    pal = GetMonSpritePalFromOtIdPersonality(species, gContestPaintingWinner->otId, gContestPaintingWinner->personality);
+    LZDecompressVram(pal, gContestPaintingMonPalette);
 
     if (arg1 == 0)
     {
@@ -322,9 +331,9 @@ static void sub_8106AC4(u16 species, u8 arg1)
             EWRAM,
             gUnknown_081FAF4C[1],
             species,
-            (u32)gUnknown_03005E8C->personality
+            (u32)gContestPaintingWinner->personality
         );
-        sub_8106B90((u8*)gUnknown_081FAF4C[1], (u16*)gUnknown_03005E90, (u16*)gUnknown_03005E10);
+        sub_8106B90((u8*)gUnknown_081FAF4C[1], (u16*)gContestPaintingMonPalette, (u16*)gContestMonPixels);
     }
     else
     {
@@ -335,9 +344,9 @@ static void sub_8106AC4(u16 species, u8 arg1)
             EWRAM,
             gUnknown_081FAF4C[0],
             species,
-            (u32)gUnknown_03005E8C->personality
+            (u32)gContestPaintingWinner->personality
         );
-        sub_8106B90((u8*)gUnknown_081FAF4C[0], (u16*)gUnknown_03005E90, (u16*)gUnknown_03005E10);
+        sub_8106B90((u8*)gUnknown_081FAF4C[0], (u16*)gContestPaintingMonPalette, (u16*)gContestMonPixels);
     }
 }
 
@@ -396,27 +405,27 @@ static void sub_8106C40(u8 arg0, u8 arg1)
     LoadPalette(gPictureFramePalettes, 0, sizeof(gPictureFramePalettes));
     if (arg1 == 1)
     {
-        switch (gUnknown_03005E8C->contestType / 3)
+        switch (gContestPaintingWinner->contestCategory / 3)
         {
         case CONTEST_COOL:
             RLUnCompVram(gPictureFrameTiles_0, (void *)VRAM);
-            RLUnCompWram(gPictureFrameTilemap_0, gUnknown_03005E10);
+            RLUnCompWram(gPictureFrameTilemap_0, gContestMonPixels);
             break;
         case CONTEST_BEAUTY:
             RLUnCompVram(gPictureFrameTiles_1, (void *)VRAM);
-            RLUnCompWram(gPictureFrameTilemap_1, gUnknown_03005E10);
+            RLUnCompWram(gPictureFrameTilemap_1, gContestMonPixels);
             break;
         case CONTEST_CUTE:
             RLUnCompVram(gPictureFrameTiles_2, (void *)VRAM);
-            RLUnCompWram(gPictureFrameTilemap_2, gUnknown_03005E10);
+            RLUnCompWram(gPictureFrameTilemap_2, gContestMonPixels);
             break;
         case CONTEST_SMART:
             RLUnCompVram(gPictureFrameTiles_3, (void *)VRAM);
-            RLUnCompWram(gPictureFrameTilemap_3, gUnknown_03005E10);
+            RLUnCompWram(gPictureFrameTilemap_3, gContestMonPixels);
             break;
         case CONTEST_TOUGH:
             RLUnCompVram(gPictureFrameTiles_4, (void *)VRAM);
-            RLUnCompWram(gPictureFrameTilemap_4, gUnknown_03005E10);
+            RLUnCompWram(gPictureFrameTilemap_4, gContestMonPixels);
             break;
         }
 
@@ -433,12 +442,12 @@ static void sub_8106C40(u8 arg0, u8 arg1)
         for (y = 0; y < 10; y++)
         {
             for (x = 0; x < 18; x++)
-                VRAM_PICTURE_DATA(x + 6, y + 2) = (*gUnknown_03005E10)[y + 2][x + 6];
+                VRAM_PICTURE_DATA(x + 6, y + 2) = (*gContestMonPixels)[y + 2][x + 6];
         }
 
         // Re-set the entire top row to the first top frame part
         for (x = 0; x < 16; x++)
-            VRAM_PICTURE_DATA(x + 7, 2) = (*gUnknown_03005E10)[2][7];
+            VRAM_PICTURE_DATA(x + 7, 2) = (*gContestMonPixels)[2][7];
 
 #undef VRAM_PICTURE_DATA
     }
@@ -449,7 +458,7 @@ static void sub_8106C40(u8 arg0, u8 arg1)
     }
     else
     {
-        switch (gUnknown_03005E8C->contestType / 3)
+        switch (gContestPaintingWinner->contestCategory / 3)
         {
         case CONTEST_COOL:
             RLUnCompVram(gPictureFrameTiles_0, (void *)VRAM);
@@ -482,7 +491,7 @@ static void sub_8106E98(u8 arg0)
     asm(""::"r"(arg0));
 #endif
 
-    gMain.oamBuffer[0] = gOamData_83F6138;
+    gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
 
 #ifndef NONMATCHING
@@ -498,9 +507,9 @@ static u8 sub_8106EE0(u8 arg0)
     u8 contestType;
 
     if (arg0 < 8)
-        contestType = gUnknown_03005E8C->contestType;
+        contestType = gContestPaintingWinner->contestCategory;
     else
-        contestType = gUnknown_03005E8C->contestType / 3;
+        contestType = gContestPaintingWinner->contestCategory / 3;
 
     switch (contestType)
     {
@@ -521,52 +530,52 @@ static u8 sub_8106EE0(u8 arg0)
 
 static void sub_8106F4C(void)
 {
-    gUnknown_03005E90 = ewram15E00.unk2017e00;
-    gUnknown_03005E10 = &ewram15E00.unk2015e00;
+    gContestPaintingMonPalette = ewram15E00.palette;
+    gContestMonPixels = (void *)&ewram15E00.pixels;
 }
 
 static void sub_8106F6C(u8 arg0)
 {
-    gUnknown_03005E20.var_4 = gUnknown_03005E10;
-    gUnknown_03005E20.var_8 = gUnknown_03005E90;
-    gUnknown_03005E20.var_18 = 0;
-    gUnknown_03005E20.var_1F = gUnknown_03005E8C->personality % 256;
-    gUnknown_03005E20.var_19 = 0;
-    gUnknown_03005E20.var_1A = 0;
-    gUnknown_03005E20.var_1B = 64;
-    gUnknown_03005E20.var_1C = 64;
-    gUnknown_03005E20.var_1D = 64;
-    gUnknown_03005E20.var_1E = 64;
+    gImageProcessingContext.var_4 = gContestMonPixels;
+    gImageProcessingContext.var_8 = gContestPaintingMonPalette;
+    gImageProcessingContext.var_18 = 0;
+    gImageProcessingContext.var_1F = gContestPaintingWinner->personality % 256;
+    gImageProcessingContext.var_19 = 0;
+    gImageProcessingContext.var_1A = 0;
+    gImageProcessingContext.var_1B = 64;
+    gImageProcessingContext.var_1C = 64;
+    gImageProcessingContext.var_1D = 64;
+    gImageProcessingContext.var_1E = 64;
 
     switch (arg0)
     {
     case CONTESTRESULT_SMART:
     case CONTESTRESULT_TOUGH:
-        gUnknown_03005E20.var_14 = 3;
+        gImageProcessingContext.var_14 = 3;
         break;
     case CONTESTRESULT_COOL:
     case CONTESTRESULT_BEAUTY:
     case CONTESTRESULT_CUTE:
     default:
-        gUnknown_03005E20.var_14 = 1;
+        gImageProcessingContext.var_14 = 1;
         break;
     }
 
-    gUnknown_03005E20.var_16 = 2;
-    gUnknown_03005E20.var_0 = arg0;
-    gUnknown_03005E20.var_10 = OBJ_VRAM0;
+    gImageProcessingContext.var_16 = 2;
+    gImageProcessingContext.var_0 = arg0;
+    gImageProcessingContext.var_10 = OBJ_VRAM0;
 
-    sub_80FC7A0(&gUnknown_03005E20);
-    sub_80FDA18(&gUnknown_03005E20);
-    sub_80FD8CC(&gUnknown_03005E20);
+    sub_80FC7A0(&gImageProcessingContext);
+    sub_80FDA18(&gImageProcessingContext);
+    sub_80FD8CC(&gImageProcessingContext);
 
-    LoadPalette(gUnknown_03005E90, 256, 256 * 2);
+    LoadPalette(gContestPaintingMonPalette, 256, 256 * 2);
 }
 
 static void sub_8107090(u8 arg0, u8 arg1)
 {
     sub_8106F4C();
-    sub_8106AC4(gUnknown_03005E8C->species, 0);
+    sub_8106AC4(gContestPaintingWinner->species, 0);
     sub_8106F6C(sub_8106EE0(arg0));
     sub_8106E98(arg0);
     sub_8106C40(arg0, arg1);

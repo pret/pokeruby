@@ -1,5 +1,5 @@
 #include "global.h"
-#include "contest_painting_effects.h"
+#include "image_processing_effects.h"
 #include "contest_painting.h"
 
 extern const u8 gUnknown_083E7A50[][3];
@@ -52,7 +52,7 @@ u16 sub_80FE17C(u16 *);
 u16 sub_80FE1B0(u16 *);
 u16 sub_80FE0AC(u16 *);
 
-void sub_80FC7A0(struct Unk03005E20* info)
+void sub_80FC7A0(struct ImageProcessingContext* info)
 {
     gUnknown_03005DEC = info->var_4;
     gUnknown_03005E00 = info->var_1F;
@@ -912,7 +912,7 @@ u16 sub_80FD7AC(u16 *a0, u16 *a1, u16 *a2)
 }
 
 /*
-void sub_80FD8CC(struct Unk03005E20 * a0)
+void sub_80FD8CC(struct ImageProcessingContext * a0)
 {
     u16 i, j, k;
     u8 r5 = a0->var_1D >> 3;
@@ -957,7 +957,7 @@ void sub_80FD8CC(struct Unk03005E20 * a0)
 */
 
 NAKED
-void sub_80FD8CC(struct Unk03005E20 * a0)
+void sub_80FD8CC(struct ImageProcessingContext * a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -1137,7 +1137,7 @@ void sub_80FD8CC(struct Unk03005E20 * a0)
                 "\tbx r0");
 }
 
-void sub_80FDA18(struct Unk03005E20 *arg0)
+void sub_80FDA18(struct ImageProcessingContext *arg0)
 {
     gUnknown_03005E0C = arg0->var_18 * 16;
     gUnknown_03005E08 = &arg0->var_8[gUnknown_03005E0C];
