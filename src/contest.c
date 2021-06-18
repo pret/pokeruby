@@ -2457,7 +2457,7 @@ u8 unref_sub_80AE908(void)
       gMonFrontPicCoords[species].coords,
       gMonFrontPicCoords[species].y_offset,
       (void *)EWRAM,
-      gUnknown_081FAF4C[1],
+      gMonSpriteGfx_Sprite_ptr[1],
       species);
     LoadCompressedPalette(gMonPaletteTable[species].data, 0x110, 32);
     GetMonSpriteTemplate_803C56C(gContestMons[gContestPlayerMonIndex].species, 1);
@@ -2483,7 +2483,7 @@ u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
       gMonBackPicCoords[species].coords,
       gMonBackPicCoords[species].y_offset,
       EWRAM,
-      gUnknown_081FAF4C[0],
+      gMonSpriteGfx_Sprite_ptr[0],
       species,
       personality);
     lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personality);

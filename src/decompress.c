@@ -71,8 +71,8 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coord
 {
     u32 frontOrBack;
 
-    // gUnknown_081FAF4C appears to be a list of pointers to locations to store poke pics for back and front pic here. the first and third pointers are used for back while the others are used for front.
-    if (dest == gUnknown_081FAF4C[0] || dest == gUnknown_081FAF4C[2])
+    // gMonSpriteGfx_Sprite_ptr appears to be a list of pointers to locations to store poke pics for back and front pic here. the first and third pointers are used for back while the others are used for front.
+    if (dest == gMonSpriteGfx_Sprite_ptr[0] || dest == gMonSpriteGfx_Sprite_ptr[2])
         frontOrBack = 0; // backPic
     else
         frontOrBack = 1; // frontPic

@@ -2623,7 +2623,7 @@ void debug_sub_8012688(void)
 	  gMonFrontPicCoords[gCurrentMove].coords,
 	  gMonFrontPicCoords[gCurrentMove].y_offset,
 	  (void *)EWRAM,
-	  gUnknown_081FAF4C[1],
+	  gMonSpriteGfx_Sprite_ptr[1],
 	  gCurrentMove);
 	LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
 	GetMonSpriteTemplate_803C56C(gCurrentMove, 1);
@@ -2683,7 +2683,7 @@ void debug_sub_80129F8(u8 taskId)
       gMonFrontPicCoords[gCurrentMove].coords,
       gMonFrontPicCoords[gCurrentMove].y_offset,
       (void *)EWRAM,
-      gUnknown_081FAF4C[1],
+      gMonSpriteGfx_Sprite_ptr[1],
       gCurrentMove);
     LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
     gSprites[gTasks[taskId].data[1]].pos1.y = gMonFrontPicCoords[gCurrentMove].y_offset + 40;
@@ -3179,7 +3179,7 @@ void sub_8010494(struct Sprite *sprite)
         else
         {
             // this should use a MEMSET_ALT, but *(dst++) wont match with it.
-            dst = (u8 *)gUnknown_081FAF4C[GetBattlerPosition(sprite->data[0])] + (gBattleMonForms[sprite->data[0]] << 11) + (sprite->data[3] << 8);
+            dst = (u8 *)gMonSpriteGfx_Sprite_ptr[GetBattlerPosition(sprite->data[0])] + (gBattleMonForms[sprite->data[0]] << 11) + (sprite->data[3] << 8);
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
             StartSpriteAnim(sprite, gBattleMonForms[sprite->data[0]]);

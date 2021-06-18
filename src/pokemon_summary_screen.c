@@ -1839,7 +1839,7 @@ static u8 SummaryScreen_LoadPokemonSprite(struct Pokemon *mon, u8 *state)
             gMonFrontPicCoords[species].coords,
             gMonFrontPicCoords[species].y_offset,
             ewram_addr,
-            gUnknown_081FAF4C[1],
+            gMonSpriteGfx_Sprite_ptr[1],
             species,
             personality);
         *state += 1;

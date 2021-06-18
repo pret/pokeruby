@@ -313,7 +313,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
       gMonFrontPicCoords[species].coords,
       gMonFrontPicCoords[species].y_offset,
       eVoidSharedArr2,
-      gUnknown_081FAF4C[var],
+      gMonSpriteGfx_Sprite_ptr[var],
       species,
       r7);
     paletteOffset = 0x100 + b * 16;
@@ -365,7 +365,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
       gMonBackPicCoords[species].coords,
       gMonBackPicCoords[species].y_offset,
       eVoidSharedArr2,
-      gUnknown_081FAF4C[var],
+      gMonSpriteGfx_Sprite_ptr[var],
       species,
       r7);
     paletteOffset = 0x100 + b * 16;
@@ -408,9 +408,9 @@ void sub_8031A6C(u16 a, u8 b)
       gTrainerFrontPicCoords[a].coords,
       gTrainerFrontPicCoords[a].y_offset,
       eVoidSharedArr,
-      gUnknown_081FAF4C[status],
+      gMonSpriteGfx_Sprite_ptr[status],
       0);
-    spriteSheet.data = gUnknown_081FAF4C[status];
+    spriteSheet.data = gMonSpriteGfx_Sprite_ptr[status];
     spriteSheet.size = gTrainerFrontPicTable[a].size;
     spriteSheet.tag = gTrainerFrontPicTable[a].tag;
     LoadCompressedObjectPic(&spriteSheet);
@@ -427,7 +427,7 @@ void LoadPlayerTrainerBankSprite(u16 a, u8 b)
       gTrainerBackPicCoords[a].coords,
       gTrainerBackPicCoords[a].y_offset,
       eVoidSharedArr,
-      gUnknown_081FAF4C[status],
+      gMonSpriteGfx_Sprite_ptr[status],
       0);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + b * 16, 32);
 }
@@ -662,7 +662,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               gMonBackPicCoords[species].coords,
               gMonBackPicCoords[species].y_offset,
               eVoidSharedArr2,
-              gUnknown_081FAF4C[0],
+              gMonSpriteGfx_Sprite_ptr[0],
               species,
               shared19348.unk10);
         }
@@ -682,7 +682,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   gMonBackPicCoords[species].coords,
                   gMonBackPicCoords[species].y_offset,
                   eVoidSharedArr2,
-                  gUnknown_081FAF4C[r10],
+                  gMonSpriteGfx_Sprite_ptr[r10],
                   species,
                   gTransformedPersonalities[a]);
             }
@@ -695,12 +695,12 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   gMonFrontPicCoords[species].coords,
                   gMonFrontPicCoords[species].y_offset,
                   eVoidSharedArr2,
-                  gUnknown_081FAF4C[r10],
+                  gMonSpriteGfx_Sprite_ptr[r10],
                   species,
                   gTransformedPersonalities[a]);
             }
         }
-        DmaCopy32Defvars(3, gUnknown_081FAF4C[r10], (void *)(VRAM + 0x10000 + gSprites[gBattlerSpriteIds[a]].oam.tileNum * 32), 0x800);
+        DmaCopy32Defvars(3, gMonSpriteGfx_Sprite_ptr[r10], (void *)(VRAM + 0x10000 + gSprites[gBattlerSpriteIds[a]].oam.tileNum * 32), 0x800);
         paletteOffset = 0x100 + a * 16;
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
         LZDecompressWram(lzPaletteData, gSharedMem);
@@ -739,15 +739,15 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
         else
             r4 = GetBattlerPosition(a);
         if (IsContest())
-            LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
+            LZDecompressVram(gSubstituteDollTilemap, gMonSpriteGfx_Sprite_ptr[r4]);
         else if (GetBattlerSide(a) != 0)
-            LZDecompressVram(gSubstituteDollGfx, gUnknown_081FAF4C[r4]);
+            LZDecompressVram(gSubstituteDollGfx, gMonSpriteGfx_Sprite_ptr[r4]);
         else
-            LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
+            LZDecompressVram(gSubstituteDollTilemap, gMonSpriteGfx_Sprite_ptr[r4]);
         // There is probably a way to do this without all the temp variables, but I couldn't figure it out.
         foo = a * 16;
         gSubstituteDollPal_ = gSubstituteDollPal;
-        src = gUnknown_081FAF4C[r4];
+        src = gMonSpriteGfx_Sprite_ptr[r4];
         for (i = 0; i < 3; i++)
             DmaCopy32(3, src, src + i * 0x800 + 0x800, 0x800);
         LoadCompressedPalette(gSubstituteDollPal_, 0x100 + foo, 32);

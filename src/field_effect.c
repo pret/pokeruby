@@ -543,7 +543,7 @@ u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    DecompressPicFromTable_2(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gUnknown_081FAF4C[3], gUnknown_081FAF4C[3], species);
+    DecompressPicFromTable_2(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gMonSpriteGfx_Sprite_ptr[3], gMonSpriteGfx_Sprite_ptr[3], species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 3);
     gUnknown_02024E8C.paletteTag = gMonPaletteTable[0].tag;
@@ -555,7 +555,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
 {
     const struct CompressedSpritePalette *spritePalette;
 
-    HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gUnknown_081FAF4C[3] /* this is actually u8* or something, pointing to ewram */, gUnknown_081FAF4C[3], species, g);
+    HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gMonSpriteGfx_Sprite_ptr[3] /* this is actually u8* or something, pointing to ewram */, gMonSpriteGfx_Sprite_ptr[3], species, g);
     spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
     LoadCompressedObjectPalette(spritePalette);
     GetMonSpriteTemplate_803C56C(species, 3);

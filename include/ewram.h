@@ -88,12 +88,17 @@ extern u8 gSharedMem[];
 #define ewram15000arr(i, data)          (gSharedMem[0x15000 + data + i])
 #define ewram15800                      (&gSharedMem[0x15800])
 
+#define ewram16000_2                    (&gSharedMem[0x16000])
+
 #define eCurContestWinnerSaveIdx        (gSharedMem[0x15DDE])
 #define eCurContestWinnerIsForArtist    (gSharedMem[0x15DDF])
 #define eCurContestWinner               ((*(struct ContestWinner*)(gSharedMem + 0x15DE0)))
-#define ewram15E00                      ((*(struct ContestPaintingBuffers*)(gSharedMem + 0x15E00)))
+#define eContestPaintingBuffers         ((*(struct ContestPaintingBuffers*)(gSharedMem + 0x15E00)))
+
+// Battle Struct
+// For matching purposes, the struct is placed at 0x02000000 and
+// there's a ton of filler.
 #define ewram16000                      (gSharedMem[0x16000])
-#define ewram16000_2                    (&gSharedMem[0x16000])
 #define ewram16003                      (gSharedMem[0x16003])
 #define ewram16004arr(i, battler)       (gSharedMem[0x16004 + i + battler * 2])
 #define ewram16010arr(battler)          (gSharedMem[0x16010 + battler])
@@ -159,7 +164,11 @@ extern u8 gSharedMem[];
 #define B_FUNCTION_STACK                ((struct BattleCallbacksStack *)        (gSharedMem + 0x17140))
 #define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
 
+// roulette_gfx.c
 #define ewram17000                      (&gSharedMem[0x17000])
+#define ewram17E00                      ((u16 *)(gSharedMem + 0x17E00))
+#define ewram18000                      ((u16 *)(gSharedMem + 0x18000))
+
 #define eMoveTutorMenu                  (struct MoveTutorMenu *)(gSharedMem + 0x17000)
 #define eCableCar1                      ((struct CableCarEwramStruct1 *)(gSharedMem + 0x17000))
 #define gBattleSpriteInfo               ((struct BattleSpriteInfo *)    (gSharedMem + 0x17800))
@@ -170,10 +179,8 @@ extern u8 gSharedMem[];
 #define EWRAM_17810                     ((struct UnknownStruct3 *)(gSharedMem + 0x17810))
 #define ewram17840                      (*(struct Struct2017840 *)   (gSharedMem + 0x17840))
 #define ewram17850                      ((struct UnknownStruct5 *)(gSharedMem + 0x17850))
-#define ewram17E00                      ((u16 *)(gSharedMem + 0x17E00))
 #define ewram_2018000                   (*(struct PlayerRecords *)(gSharedMem + 0x18000))
 #define EWRAM_18000                     ((u16 *)(gSharedMem + 0x18000))
-#define ewram18000                      ((u16 *)(gSharedMem + 0x18000))
 #define ewram18000_2                    (&gSharedMem[0x18000])
 #define ewram18000_3                    *(struct Pokemon **)(gSharedMem + 0x18000)
 #define eBerryBlenderData               (struct BerryBlenderData*)(&gSharedMem[0x18000])

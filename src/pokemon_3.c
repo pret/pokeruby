@@ -473,7 +473,7 @@ u16 SpeciesToCryId(u16 species)
 
 void unref_sub_803F938(u16 species, u32 personality, u8 *dest)
 {
-    if (species == SPECIES_SPINDA && dest != gUnknown_081FAF4C[0] && dest != gUnknown_081FAF4C[2])
+    if (species == SPECIES_SPINDA && dest != gMonSpriteGfx_Sprite_ptr[0] && dest != gMonSpriteGfx_Sprite_ptr[2])
     {
         int i;
         for (i = 0; i < 4; i++)

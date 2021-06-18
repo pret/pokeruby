@@ -105,13 +105,13 @@ const u16 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
 static void ShowContestPainting();
 static void CB2_HoldContestPainting(void);
 static void HoldContestPainting(void);
-static void ContestPaintingInitWindow(u8 arg0);
-static void ContestPaintingPrintCaption(u8 arg0, u8 arg1);
-static void ContestPaintingInitBG(void);
-static void ContestPaintingInitVars(u8 arg0);
+static void InitContestPaintingWindow(bool8 isForArtist);
+static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist);
+static void InitContestPaintingBg(void);
+static void InitContestPaintingVars(bool8 reset);
 static void VBlankCB_ContestPainting(void);
-static void sub_8106B90(u8 *a, u16 *b, u16 *c);
-static void CreateContestPaintingPicture(u8 arg0, u8 arg1);
+static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 *destPixels);
+static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist);
 
 void SetContestWinnerForPainting(u32 contestWinnerId)
 {
@@ -137,8 +137,8 @@ static void ShowContestPainting(void)
         ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
         gContestPaintingWinner = &eCurContestWinner;
-        ContestPaintingInitVars(TRUE);
-        ContestPaintingInitBG();
+        InitContestPaintingVars(TRUE);
+        InitContestPaintingBg();
         gMain.state++;
         break;
     case 1:
@@ -152,7 +152,7 @@ static void ShowContestPainting(void)
     case 2:
         SeedRng(gMain.vblankCounter1);
         InitKeys();
-        ContestPaintingInitWindow(eCurContestWinnerIsForArtist);
+        InitContestPaintingWindow(eCurContestWinnerIsForArtist);
         gMain.state++;
         break;
     case 3:
@@ -160,7 +160,7 @@ static void ShowContestPainting(void)
         gMain.state++;
         break;
     case 4:
-        ContestPaintingPrintCaption(eCurContestWinnerSaveIdx, eCurContestWinnerIsForArtist);
+        PrintContestPaintingCaption(eCurContestWinnerSaveIdx, eCurContestWinnerIsForArtist);
         LoadPalette(sBgPalette, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);
@@ -190,16 +190,14 @@ static void HoldContestPainting(void)
     case 0:
         if (!gPaletteFade.active)
             sHoldState = 1;
-        if (sVarsInitialized != 0 && sFrameCounter != 0)
+        if (sVarsInitialized&& sFrameCounter != 0)
             sFrameCounter--;
         break;
     case 1:
-        if ((gMain.newKeys & 1) || (gMain.newKeys & 2))
+        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
         {
-            u8 two = 2;  //needed to make the asm match
-
-            sHoldState = two;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+            sHoldState++;
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         }
         if (sVarsInitialized != 0)
             sFrameCounter = 0;
@@ -207,25 +205,25 @@ static void HoldContestPainting(void)
     case 2:
         if (!gPaletteFade.active)
             SetMainCallback2(CB2_QuitContestPainting);
-        if (sVarsInitialized != 0 && sFrameCounter <= 0x1D)
+        if (sVarsInitialized && sFrameCounter < 30)
             sFrameCounter++;
         break;
     }
 }
 
-static void ContestPaintingInitWindow(u8 arg0)
+static void InitContestPaintingWindow(u8 isForArtist)
 {
-    InitMenuWindow(&gWindowTemplate_81E7160);
-    Text_LoadWindowTemplate(&gWindowTemplate_81E7160);
+    InitMenuWindow(&gWindowTemplate_ContestPainting);
+    Text_LoadWindowTemplate(&gWindowTemplate_ContestPainting);
 }
 
-static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
+static void PrintContestPaintingCaption(u8 contestType, u8 isForArtist)
 {
     u8 xPos, yPos;
     u8 *ptr;
     u8 type;
 
-    if (arg1 == TRUE)
+    if (isForArtist == TRUE)
         return;
     ptr = sCaptionBuffer;
     type = gContestPaintingWinner->contestCategory;
@@ -240,7 +238,7 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
 #endif
 
         // {LATIN}
-        ptr[0] = 0xFC;
+        ptr[0] = EXT_CTRL_CODE_BEGIN;
         ptr[1] = 0x16;
         ptr += 2;
 
@@ -266,7 +264,7 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
     Menu_PrintTextPixelCoords(sCaptionBuffer, xPos * 8 + 1, yPos * 8, 1);
 }
 
-static void ContestPaintingInitBG(void)
+static void InitContestPaintingBg(void)
 {
     REG_DISPCNT = 0;
     REG_IE |= INTR_FLAG_VBLANK;
@@ -277,9 +275,9 @@ static void ContestPaintingInitBG(void)
     REG_BLDY = 0;
 }
 
-static void ContestPaintingInitVars(bool8 arg0)
+static void InitContestPaintingVars(bool8 reset)
 {
-    if (arg0 == FALSE)
+    if (reset == FALSE)
     {
         sVarsInitialized = FALSE;
         sMosaicVal = 0;
@@ -315,7 +313,7 @@ static void VBlankCB_ContestPainting(void)
     TransferPlttBuffer();
 }
 
-static void sub_8106AC4(u16 species, u8 arg1)
+static void InitContestMonPixels(u16 species, u8 arg1)
 {
     const void *pal;
 
@@ -329,11 +327,11 @@ static void sub_8106AC4(u16 species, u8 arg1)
             gMonFrontPicCoords[species].coords,
             gMonFrontPicCoords[species].y_offset,
             EWRAM,
-            gUnknown_081FAF4C[1],
+            gMonSpriteGfx_Sprite_ptr[1],
             species,
             (u32)gContestPaintingWinner->personality
         );
-        sub_8106B90((u8*)gUnknown_081FAF4C[1], (u16*)gContestPaintingMonPalette, (u16*)gContestMonPixels);
+        _InitContestMonPixels((u8*)gMonSpriteGfx_Sprite_ptr[1], (u16*)gContestPaintingMonPalette, (u16*)gContestMonPixels);
     }
     else
     {
@@ -342,17 +340,17 @@ static void sub_8106AC4(u16 species, u8 arg1)
             gMonBackPicCoords[species].coords,
             gMonBackPicCoords[species].y_offset,
             EWRAM,
-            gUnknown_081FAF4C[0],
+            gMonSpriteGfx_Sprite_ptr[0],
             species,
             (u32)gContestPaintingWinner->personality
         );
-        sub_8106B90((u8*)gUnknown_081FAF4C[0], (u16*)gContestPaintingMonPalette, (u16*)gContestMonPixels);
+        _InitContestMonPixels((u8*)gMonSpriteGfx_Sprite_ptr[0], (u16*)gContestPaintingMonPalette, (u16*)gContestMonPixels);
     }
 }
 
-static void sub_8106B90(u8 *a, u16 *b, u16 *c)
+static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 *destPixels)
 {
-    u16 i, j, k, l;
+    u16 tileY, tileX, pixelY, pixelX;
 
     /*
         Raw arithmetics are required to match this function.
@@ -362,48 +360,49 @@ static void sub_8106B90(u8 *a, u16 *b, u16 *c)
         calculate dimensions manually (as seen in other functions),
         tell that it may have been this way in the original code.
     */
-    for (i = 0; i < 8; i++)
+    for (tileY = 0; tileY < 8; tileY++)
     {
-        for (j = 0; j < 8; j++)
+        for (tileX = 0; tileX < 8; tileX++)
         {
-            for (k = 0; k < 8; k++)
+            for (pixelY = 0; pixelY < 8; pixelY++)
             {
-                for (l = 0; l < 8; l++)
+                for (pixelX = 0; pixelX < 8; pixelX++)
                 {
-                    u8 temp = a[(((i * 8) + j) * 32) + (k << 2) + (l >> 1)];
+                    u8 colorIndex = spriteGfx[(((tileY * 8) + tileX) * 32) + (pixelY << 2) + (pixelX >> 1)];
                     /*
                         The shifts have to be there to match r0 and r2's order in one instruction:
                                 add     r5, r2, r0
                         This also makes agbcc's expression order parsing even more super sensitive
                         and obscene when it comes to parentheses affecting regalloc regardless if
-                        unnecessary, requiring j must be placed in the front to match, or else
+                        unnecessary, requiring tileX must be placed in the front to match, or else
                         regalloc breaks again and does this a few instructions above:
                                 add     r0, r3, r7 <- regswap
                     */
 
-                    if (l & 1)
-                        temp /= 16;
+                    if (pixelX & 1)
+                        colorIndex /= 16;
                     else
-                        temp %= 16;
+                        colorIndex %= 16;
 
                     // Same order as above needs to be written here, or else this happens:
                     //         add     r0, r7, r1 <- regswap
-                    if (temp == 0)
-                        *(u16 *)(c + (((i * 8) + k) << 6) + ((j * 8) + l)) = 0x8000;
+                    if (colorIndex == 0)
+                        *(u16 *)(destPixels + (((tileY * 8) + pixelY) << 6) + ((tileX * 8) + pixelX)) = 0x8000;
                     else
-                        *(u16 *)(c + (((i * 8) + k) << 6) + ((j * 8) + l)) = b[temp];
+                        *(u16 *)(destPixels + (((tileY * 8) + pixelY) << 6) + ((tileX * 8) + pixelX)) =
+                            palette[colorIndex];
                 }
             }
         }
     }
 }
 
-static void sub_8106C40(u8 arg0, u8 arg1)
+static void LoadContestPaintingFrame(u8 contestWinnerId, u8 isForArtist)
 {
     u8 x, y;
 
     LoadPalette(gPictureFramePalettes, 0, sizeof(gPictureFramePalettes));
-    if (arg1 == 1)
+    if (isForArtist == TRUE)
     {
         switch (gContestPaintingWinner->contestCategory / 3)
         {
@@ -451,7 +450,7 @@ static void sub_8106C40(u8 arg0, u8 arg1)
 
 #undef VRAM_PICTURE_DATA
     }
-    else if (arg0 < 8)
+    else if (contestWinnerId < 8)
     {
         RLUnCompVram(gPictureFrameTiles_5, (void *)VRAM);
         RLUnCompVram(gPictureFrameTilemap_5, (void *)(VRAM + 0x6000));
@@ -484,29 +483,28 @@ static void sub_8106C40(u8 arg0, u8 arg1)
     }
 }
 
-static void sub_8106E98(u8 arg0)
+static void InitPaintingMonOamData(u8 contestWinnerId)
 {
-    //Some hacks just to get the asm to match
-#ifndef NONMATCHING
-    asm(""::"r"(arg0));
-#endif
-
     gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
 
-#ifndef NONMATCHING
-    if (arg0) arg0 = gMain.oamBuffer[0].tileNum;
-#endif
-
-    gMain.oamBuffer[0].x = 88;
-    gMain.oamBuffer[0].y = 24;
+    if (contestWinnerId > 1)
+    {
+        gMain.oamBuffer[0].x = 88;
+        gMain.oamBuffer[0].y = 24;
+    }
+    else // duplicated code branch
+    {
+        gMain.oamBuffer[0].x = 88;
+        gMain.oamBuffer[0].y = 24;
+    }
 }
 
-static u8 sub_8106EE0(u8 arg0)
+static u8 GetImageEffectForContestWinner(u8 contestWinnerId)
 {
     u8 contestType;
 
-    if (arg0 < 8)
+    if (contestWinnerId < 8)
         contestType = gContestPaintingWinner->contestCategory;
     else
         contestType = gContestPaintingWinner->contestCategory / 3;
@@ -528,55 +526,55 @@ static u8 sub_8106EE0(u8 arg0)
     return contestType;
 }
 
-static void sub_8106F4C(void)
+static void AllocPaintingResources(void)
 {
-    gContestPaintingMonPalette = ewram15E00.palette;
-    gContestMonPixels = (void *)&ewram15E00.pixels;
+    gContestPaintingMonPalette = eContestPaintingBuffers.palette;
+    gContestMonPixels = (void *)eContestPaintingBuffers.pixels;
 }
 
-static void sub_8106F6C(u8 arg0)
+static void DoContestPaintingImageProcessing(u8 imageEffect)
 {
-    gImageProcessingContext.var_4 = gContestMonPixels;
-    gImageProcessingContext.var_8 = gContestPaintingMonPalette;
-    gImageProcessingContext.var_18 = 0;
-    gImageProcessingContext.var_1F = gContestPaintingWinner->personality % 256;
-    gImageProcessingContext.var_19 = 0;
-    gImageProcessingContext.var_1A = 0;
-    gImageProcessingContext.var_1B = 64;
-    gImageProcessingContext.var_1C = 64;
-    gImageProcessingContext.var_1D = 64;
-    gImageProcessingContext.var_1E = 64;
+    gImageProcessingContext.canvasPixels = gContestMonPixels;
+    gImageProcessingContext.canvasPalette = gContestPaintingMonPalette;
+    gImageProcessingContext.paletteStart = 0;
+    gImageProcessingContext.personality = gContestPaintingWinner->personality % 256;
+    gImageProcessingContext.columnStart = 0;
+    gImageProcessingContext.rowStart = 0;
+    gImageProcessingContext.columnEnd = 64;
+    gImageProcessingContext.rowEnd = 64;
+    gImageProcessingContext.canvasWidth = 64;
+    gImageProcessingContext.canvasHeight = 64;
 
-    switch (arg0)
+    switch (imageEffect)
     {
     case CONTESTRESULT_SMART:
     case CONTESTRESULT_TOUGH:
-        gImageProcessingContext.var_14 = 3;
+        gImageProcessingContext.quantizeEffect = QUANTIZE_EFFECT_GRAYSCALE;
         break;
     case CONTESTRESULT_COOL:
     case CONTESTRESULT_BEAUTY:
     case CONTESTRESULT_CUTE:
     default:
-        gImageProcessingContext.var_14 = 1;
+        gImageProcessingContext.quantizeEffect = QUANTIZE_EFFECT_STANDARD_LIMITED_COLORS;
         break;
     }
 
-    gImageProcessingContext.var_16 = 2;
-    gImageProcessingContext.var_0 = arg0;
-    gImageProcessingContext.var_10 = OBJ_VRAM0;
+    gImageProcessingContext.bgType = 2;
+    gImageProcessingContext.effect = imageEffect;
+    gImageProcessingContext.dest = OBJ_VRAM0;
 
-    sub_80FC7A0(&gImageProcessingContext);
-    sub_80FDA18(&gImageProcessingContext);
-    sub_80FD8CC(&gImageProcessingContext);
+    ApplyImageProcessingEffects(&gImageProcessingContext);
+    ApplyImageProcessingQuantization(&gImageProcessingContext);
+    ConvertImageProcessingToGBA(&gImageProcessingContext);
 
     LoadPalette(gContestPaintingMonPalette, 256, 256 * 2);
 }
 
-static void CreateContestPaintingPicture(u8 arg0, u8 arg1)
+static void CreateContestPaintingPicture(u8 contestWinnerId, u8 isForArtist)
 {
-    sub_8106F4C();
-    sub_8106AC4(gContestPaintingWinner->species, 0);
-    sub_8106F6C(sub_8106EE0(arg0));
-    sub_8106E98(arg0);
-    sub_8106C40(arg0, arg1);
+    AllocPaintingResources();
+    InitContestMonPixels(gContestPaintingWinner->species, 0);
+    DoContestPaintingImageProcessing(GetImageEffectForContestWinner(contestWinnerId));
+    InitPaintingMonOamData(contestWinnerId);
+    LoadContestPaintingFrame(contestWinnerId, isForArtist);
 }

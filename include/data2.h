@@ -48,8 +48,8 @@ extern const u8 gUnknown_081F96C8[];
 extern const struct CompressedSpriteSheet gUnknown_081FAEA4;
 extern const struct CompressedSpritePalette gUnknown_081FAEAC;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF0C;
-extern u8 *const gUnknown_081FAF4C[];
-//extern u8 (*const gUnknown_081FAF4C[])[0x800];
+extern u8 *const gMonSpriteGfx_Sprite_ptr[];
+//extern u8 (*const gMonSpriteGfx_Sprite_ptr[])[0x800];
 extern const struct BattleMove gBattleMoves[];
 
 // data/graphics/trainers/front_pic_coords.inc

@@ -2670,14 +2670,14 @@ void debug_80C6B00(u8 taskId)
 
 void debug_80C6CB8(u8 taskId)
 {
-    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->unk0, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], gUnknown_Debug_2038A20->unk0);
+    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->unk0, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->unk0);
     LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
     GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 1);
     gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
     gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
 
-    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->unk0, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[2], gUnknown_Debug_2038A20->unk0);
+    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->unk0, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[2], gUnknown_Debug_2038A20->unk0);
     LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
     GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 2);
     gUnknown_Debug_2038A20->unk3 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x78, 0);
@@ -3297,7 +3297,7 @@ void debug_80C777C(u8 taskId)
 
 void debug_80C7934(u8 taskId)
 {
-    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->unk0, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], gUnknown_Debug_2038A20->unk0);
+    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->unk0, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->unk0);
     LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->unk0);
     GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->unk0, 1);
     gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);

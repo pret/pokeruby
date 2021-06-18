@@ -1424,8 +1424,8 @@ u8 CreateAzurillSprite(u8 x, u8 y)
         &gMonFrontPicTable[SPECIES_AZURILL],
         gMonFrontPicCoords[SPECIES_AZURILL].coords,
         gMonFrontPicCoords[SPECIES_AZURILL].y_offset,
-        gUnknown_081FAF4C[0],
-        gUnknown_081FAF4C[1],
+        gMonSpriteGfx_Sprite_ptr[0],
+        gMonSpriteGfx_Sprite_ptr[1],
         SPECIES_AZURILL);
     LoadCompressedObjectPalette(&gMonPaletteTable[SPECIES_AZURILL]);
     GetMonSpriteTemplate_803C56C(SPECIES_AZURILL, 1);

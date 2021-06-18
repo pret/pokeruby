@@ -206,7 +206,7 @@ extern const struct WindowTemplate gWindowTemplate_81E70F0;
 extern const struct WindowTemplate gWindowTemplate_81E710C;
 extern const struct WindowTemplate gWindowTemplate_81E7128;
 extern const struct WindowTemplate gWindowTemplate_81E7144;
-extern const struct WindowTemplate gWindowTemplate_81E7160;
+extern const struct WindowTemplate gWindowTemplate_ContestPainting;
 extern const struct WindowTemplate gWindowTemplate_81E717C;
 extern const struct WindowTemplate gWindowTemplate_81E7198;
 extern const struct WindowTemplate gWindowTemplate_81E71B4;

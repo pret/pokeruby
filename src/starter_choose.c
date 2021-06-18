@@ -714,7 +714,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
     DecompressPicFromTable_2(
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
-      gUnknown_081FAF4C[0], gUnknown_081FAF4C[1],
+      gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1],
       species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 1);

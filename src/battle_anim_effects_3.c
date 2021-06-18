@@ -2297,7 +2297,7 @@ void sub_812D7E8(u8 taskId)
         else
             position = GetBattlerPosition(gBattleAnimAttacker);
 
-        dest = gUnknown_081FAF4C[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
+        dest = gMonSpriteGfx_Sprite_ptr[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
         src = subStruct.field_0;
         DmaCopy32(3, dest, src, 0x800);
 

@@ -616,7 +616,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
     case 0:
         species = GetMonData(mon, MON_DATA_SPECIES2);
         PiD = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, EWRAM, gUnknown_081FAF4C[1], species, PiD);
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, EWRAM, gMonSpriteGfx_Sprite_ptr[1], species, PiD);
         ewram1FFFF++;
         break;
     case 1:
