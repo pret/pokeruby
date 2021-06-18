@@ -86,14 +86,14 @@ const struct LabelPair sMuseumCaptions[] =
 const struct OamData sContestPaintingMonOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 1,
-    .bpp = 1,
-    .shape = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = TRUE,
+    .bpp = ST_OAM_8BPP,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -111,17 +111,17 @@ static void ContestPaintingInitBG(void);
 static void ContestPaintingInitVars(u8 arg0);
 static void VBlankCB_ContestPainting(void);
 static void sub_8106B90(u8 *a, u16 *b, u16 *c);
-static void sub_8107090(u8 arg0, u8 arg1);
+static void CreateContestPaintingPicture(u8 arg0, u8 arg1);
 
-void sub_8106630(u32 contestWinnerId)
+void SetContestWinnerForPainting(u32 contestWinnerId)
 {
     // probably fakematching
-    struct ContestWinner *ptr1 = &eContestPaintingWinner; // TODO: resolve messy struct duplicates
-    u8 *ptr2 = (u8*)&gBattleStruct->contestWinnerSaveIdx;
-    u8 *ptr3 = (u8*)&gBattleStruct->contestWinnerIsForArtist;
-    *ptr1 = gSaveBlock1.contestWinners[contestWinnerId - 1];
-	*ptr2 = contestWinnerId - 1;
-	*ptr3 = 0;
+    struct ContestWinner *curWinner = &eCurContestWinner;
+    u8 *saveIdx = (u8*)&eCurContestWinnerSaveIdx;
+    u8 *isForArtist = (u8*)&eCurContestWinnerIsForArtist;
+    *curWinner = gSaveBlock1.contestWinners[contestWinnerId - 1];
+	*saveIdx = contestWinnerId - 1;
+	*isForArtist = FALSE;
 }
 
 void CB2_ContestPainting(void)
@@ -136,7 +136,7 @@ static void ShowContestPainting(void)
     case 0:
         ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
-        gContestPaintingWinner = &eContestPaintingWinner;
+        gContestPaintingWinner = &eCurContestWinner;
         ContestPaintingInitVars(TRUE);
         ContestPaintingInitBG();
         gMain.state++;
@@ -152,15 +152,15 @@ static void ShowContestPainting(void)
     case 2:
         SeedRng(gMain.vblankCounter1);
         InitKeys();
-        ContestPaintingInitWindow(gBattleStruct->contestWinnerIsForArtist);
+        ContestPaintingInitWindow(eCurContestWinnerIsForArtist);
         gMain.state++;
         break;
     case 3:
-        sub_8107090(gBattleStruct->contestWinnerSaveIdx, gBattleStruct->contestWinnerIsForArtist);
+        CreateContestPaintingPicture(eCurContestWinnerSaveIdx, eCurContestWinnerIsForArtist);
         gMain.state++;
         break;
     case 4:
-        ContestPaintingPrintCaption(gBattleStruct->contestWinnerSaveIdx, gBattleStruct->contestWinnerIsForArtist);
+        ContestPaintingPrintCaption(eCurContestWinnerSaveIdx, eCurContestWinnerIsForArtist);
         LoadPalette(sBgPalette, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);
@@ -572,7 +572,7 @@ static void sub_8106F6C(u8 arg0)
     LoadPalette(gContestPaintingMonPalette, 256, 256 * 2);
 }
 
-static void sub_8107090(u8 arg0, u8 arg1)
+static void CreateContestPaintingPicture(u8 arg0, u8 arg1)
 {
     sub_8106F4C();
     sub_8106AC4(gContestPaintingWinner->species, 0);

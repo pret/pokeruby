@@ -44,7 +44,7 @@ struct LabelPair
     const u8 *suffix;
 };
 
-void sub_8106630(u32);
+void SetContestWinnerForPainting(u32 contestWinnerId);
 void CB2_ContestPainting(void);
 
 #endif

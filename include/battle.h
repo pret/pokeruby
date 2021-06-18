@@ -297,10 +297,7 @@ struct BattleStruct /* 0x2000000 */
         struct LinkPartnerHeader linkPartnerHeader;
         struct MultiBattlePokemonTx multiBattleMons[3];
     } multiBuffer;
-    u8 filler60[0x15D7E];
-    /*0x15DDE*/ u8 contestWinnerSaveIdx;
-    /*0x15DDF*/ u8 contestWinnerIsForArtist;
-    /*0x15DE0*/ u8 filler15DE0[0x220];
+    u8 filler60[0x15FA0];
     /*0x16000*/ u8 turnEffectsTracker;
     /*0x16001*/ u8 turnEffectsBattlerId;
     /*0x16002*/ u8 animTurn;

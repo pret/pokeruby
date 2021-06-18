@@ -87,7 +87,10 @@ extern u8 gSharedMem[];
 #define ewram15000                      (&gSharedMem[0x15000])
 #define ewram15000arr(i, data)          (gSharedMem[0x15000 + data + i])
 #define ewram15800                      (&gSharedMem[0x15800])
-#define eContestPaintingWinner          ((*(struct ContestWinner*)(gSharedMem + 0x15DE0)))
+
+#define eCurContestWinnerSaveIdx        (gSharedMem[0x15DDE])
+#define eCurContestWinnerIsForArtist    (gSharedMem[0x15DDF])
+#define eCurContestWinner               ((*(struct ContestWinner*)(gSharedMem + 0x15DE0)))
 #define ewram15E00                      ((*(struct ContestPaintingBuffers*)(gSharedMem + 0x15E00)))
 #define ewram16000                      (gSharedMem[0x16000])
 #define ewram16000_2                    (&gSharedMem[0x16000])

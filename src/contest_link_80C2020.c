@@ -727,8 +727,8 @@ static void sub_80C2E14(u8 taskId)
     sub_810FB10(2);
     Contest_SaveWinner(gSpecialVar_ContestRank);
     Contest_SaveWinner(0xFE);
-    gBattleStruct->contestWinnerIsForArtist = 1;
-    gBattleStruct->contestWinnerSaveIdx = sub_80B2C4C(0xfe, 0);
+    eCurContestWinnerIsForArtist = TRUE;
+    eCurContestWinnerSaveIdx = sub_80B2C4C(0xfe, 0);
     BeginHardwarePaletteFade(0xff, 0, 0, 16, 0);
     gTasks[taskId].func = sub_80C2EA0;
 }

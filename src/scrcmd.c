@@ -1411,7 +1411,7 @@ bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
     u8 v1 = ScriptReadByte(ctx);
 
     if (v1)
-        sub_8106630(v1);
+        SetContestWinnerForPainting(v1);
     ShowContestWinner();
     ScriptContext1_Stop();
     return TRUE;

@@ -222,8 +222,8 @@ void ShowContestWinner(void)
     if(gUnknown_0203856C)
     {
         sub_80AAF30();
-        gBattleStruct->contestWinnerIsForArtist = 1;
-        gBattleStruct->contestWinnerSaveIdx = sub_80B2C4C(254, 0);
+        eCurContestWinnerIsForArtist = TRUE;
+        eCurContestWinnerSaveIdx = sub_80B2C4C(254, 0);
         Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }
