@@ -13,6 +13,38 @@ enum
 
 enum
 {
+    CONTEST_WINNER_ARTIST,
+    CONTEST_WINNER_HALL_1,
+    CONTEST_WINNER_HALL_2,
+    CONTEST_WINNER_HALL_3,
+    CONTEST_WINNER_HALL_4,
+    CONTEST_WINNER_HALL_5,
+    CONTEST_WINNER_HALL_6,
+    NUM_CONTEST_HALL_WINNERS = CONTEST_WINNER_HALL_6,
+    CONTEST_WINNER_HALL_UNUSED_1 , // These two have data for gDefaultContestWinners
+    CONTEST_WINNER_HALL_UNUSED_2, // but there are only 6 paintings in the Contest Hall
+    MUSEUM_CONTEST_WINNERS_START = CONTEST_WINNER_HALL_UNUSED_2,
+    CONTEST_WINNER_MUSEUM_COOL,
+    CONTEST_WINNER_MUSEUM_BEAUTY,
+    CONTEST_WINNER_MUSEUM_CUTE,
+    CONTEST_WINNER_MUSEUM_SMART,
+    CONTEST_WINNER_MUSEUM_TOUGH,
+};
+
+enum
+{
+    CONTEST_RANK_NORMAL,
+    CONTEST_RANK_SUPER,
+    CONTEST_RANK_HYPER,
+    CONTEST_RANK_MASTER,
+    CONTEST_RANK_LINK
+};
+
+#define CONTEST_SAVE_FOR_MUSEUM ((u8)-1)
+#define CONTEST_SAVE_FOR_ARTIST ((u8)-2)
+
+enum
+{
     CONTEST_EFFECT_HIGHLY_APPEALING,
     CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
     CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES,
@@ -267,7 +299,7 @@ u16 InitContestMonConditionI(u8, u8);
 void InitContestMonConditions(u8);
 u8 IsSpeciesNotUnown(u16);
 void sub_80AF668(void);
-void sub_80B0F28(u8);
+void SortContestants(u8);
 bool8 Contest_SaveWinner(u8);
 u8 sub_80B2C4C(u8, u8);
 void Contest_ResetWinners(void);
@@ -432,13 +464,13 @@ extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
 extern u32 gContestRngValue;
 extern u8 gUnknown_02038696[4];
-extern s16 gContestMonConditions[4];
-extern s16 gUnknown_02038678[4];
+extern s16 gContestMonRound1Points[4];
+extern s16 gContestMonTotalPoints[4];
 extern s16 gUnknown_02038680[4];
 extern s16 gUnknown_02038688[4];
 extern u8 gContestFinalStandings[4];
 extern u8 gUnknown_02038696[4];
-extern u8 gUnknown_0203869B;
+extern u8 gContestLinkLeaderIndex;
 extern u16 gSpecialVar_ContestRank;
 extern u16 gSpecialVar_ContestCategory;
 extern u8 gContestMonPartyIndex;

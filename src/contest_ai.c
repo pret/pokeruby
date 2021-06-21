@@ -632,7 +632,7 @@ static void ContestAICmd_unk_19(void)
 
 static void ContestAICmd_unk_1A(void)
 {
-    eContestAI->scriptResult = gContestMonConditions[eContestAI->unk41];
+    eContestAI->scriptResult = gContestMonRound1Points[eContestAI->unk41];
     gAIScriptPtr += 1;
 }
 
@@ -1353,7 +1353,8 @@ static void ContestAICmd_unk_5E(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = gContestMonConditions[var] - gContestMonConditions[eContestAI->unk41];
+    eContestAI->scriptResult =
+        gContestMonRound1Points[var] - gContestMonRound1Points[eContestAI->unk41];
     gAIScriptPtr += 2;
 }
 

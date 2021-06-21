@@ -36,6 +36,12 @@
 #define KANA(txt) _(txt)
 #endif
 
+#define SWAP(x,y,t) {\
+    t = x;           \
+    x = y;           \
+    y = t;           \
+}
+
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 

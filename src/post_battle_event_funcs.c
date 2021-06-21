@@ -1,12 +1,12 @@
 #include "global.h"
+#include "constants/heal_locations.h"
+#include "contest_util.h"
 #include "event_data.h"
 #include "hall_of_fame.h"
 #include "load_save.h"
 #include "main.h"
-#include "pokemon.h"
 #include "overworld.h"
-#include "script_pokemon_80C4.h"
-#include "constants/heal_locations.h"
+#include "pokemon.h"
 
 extern u8 gUnknown_02039324;
 

@@ -1,15 +1,16 @@
 #include "global.h"
-#include "constants/items.h"
-#include "constants/event_objects.h"
-#include "constants/moves.h"
-#include "constants/songs.h"
-#include "constants/species.h"
+#include "contest.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "blend_palette.h"
-#include "contest.h"
+#include "constants/event_objects.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "contest_ai.h"
 #include "contest_effect.h"
-#include "contest_link_80C857C.h"
+#include "contest_link.h"
 #include "data2.h"
 #include "decompress.h"
 #include "ewram.h"
@@ -23,6 +24,7 @@
 #include "palette.h"
 #include "random.h"
 #include "rom_8077ABC.h"
+#include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -30,9 +32,7 @@
 #include "task.h"
 #include "text.h"
 #include "tv.h"
-#include "scanline_effect.h"
 #include "util.h"
-#include "contest_ai.h"
 
 extern u8 gUnknown_020297ED;
 
@@ -267,8 +267,8 @@ void SelectContestMoveBankTarget(u16);
 
 EWRAM_DATA u8 gUnknown_0203856C = 0;
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
-EWRAM_DATA s16 gContestMonConditions[4] = {0};
-EWRAM_DATA s16 gUnknown_02038678[4] = {0};
+EWRAM_DATA s16 gContestMonRound1Points[4] = {0};
+EWRAM_DATA s16 gContestMonTotalPoints[4] = {0};
 EWRAM_DATA s16 gUnknown_02038680[4] = {0};
 EWRAM_DATA s16 gUnknown_02038688[4] = {0};
 EWRAM_DATA u8 gContestFinalStandings[4] = {0};  // What "place" each participant came in.
@@ -276,7 +276,7 @@ EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
 EWRAM_DATA u8 gUnknown_02038696[4] = {0};
 EWRAM_DATA u8 gIsLinkContest = 0;
-EWRAM_DATA u8 gUnknown_0203869B = 0;
+EWRAM_DATA u8 gContestLinkLeaderIndex = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 
@@ -380,7 +380,7 @@ void ClearContestVars(void)
     memset(&shared19328, 0, sizeof(shared19328));
     memset(shared19338, 0, 4 * sizeof(*shared19338));
     if (!(gIsLinkContest & 1))
-        sub_80B0F28(0);
+        SortContestants(0);
     for (i = 0; i < 4; i++)
     {
         sContestantStatus[i].nextTurnOrder = 0xFF;
@@ -2093,7 +2093,7 @@ void sub_80AE054(void)
 
 bool8 sub_80AE074(void)
 {
-    if (gContestPlayerMonIndex == gUnknown_0203869B)
+    if (gContestPlayerMonIndex == gContestLinkLeaderIndex)
         return TRUE;
     else
         return FALSE;
@@ -2420,7 +2420,7 @@ void InitContestMonConditions(u8 a)
     u8 i;
 
     for (i = 0; i < 4; i++)
-        gContestMonConditions[i] = InitContestMonConditionI(i, a);
+        gContestMonRound1Points[i] = InitContestMonConditionI(i, a);
 }
 
 u8 CreateJudgeSprite(void)
@@ -2896,7 +2896,7 @@ void sub_80AF2FC(void)
             }
         }
     }
-    sub_80B0F28(1);
+    SortContestants(1);
     sub_80B159C();
 }
 
@@ -3021,7 +3021,7 @@ bool8 unref_sub_80AF5D0(u8 a, u8 b)
 void sub_80AF630(u8 a)
 {
     gUnknown_02038688[a] = sub_80AF688(a);
-    gUnknown_02038678[a] = gContestMonConditions[a] + gUnknown_02038688[a];
+    gContestMonTotalPoints[a] = gContestMonRound1Points[a] + gUnknown_02038688[a];
 }
 
 void sub_80AF668(void)
@@ -3063,8 +3063,8 @@ void DetermineFinalStandings(void)
 
     for (i = 0; i < 4; i++)
     {
-        sp8[i].unk0 = gUnknown_02038678[i];
-        sp8[i].unk4 = gContestMonConditions[i];
+        sp8[i].unk0 = gContestMonTotalPoints[i];
+        sp8[i].unk4 = gContestMonRound1Points[i];
         sp8[i].unk8 = sp0[i];
         sp8[i].unkC = i;
     }
@@ -4397,7 +4397,7 @@ void unref_sub_80B0EE8(s32 *a, s32 b)
 }
 
 // something to do with contest NPC opponents, I think.
-void sub_80B0F28(u8 a)
+void SortContestants(u8 a)
 {
     u8 sp0[4];
     u16 sp4[4] = {0};
@@ -4425,8 +4425,8 @@ void sub_80B0F28(u8 a)
             gUnknown_02038696[i] = i;
             for (r4 = 0; r4 < i; r4++)
             {
-                if (gContestMonConditions[gUnknown_02038696[r4]] < gContestMonConditions[i]
-                 || (gContestMonConditions[gUnknown_02038696[r4]] == gContestMonConditions[i] && sp4[gUnknown_02038696[r4]] < sp4[i]))
+                if (gContestMonRound1Points[gUnknown_02038696[r4]] < gContestMonRound1Points[i]
+                 || (gContestMonRound1Points[gUnknown_02038696[r4]] == gContestMonRound1Points[i] && sp4[gUnknown_02038696[r4]] < sp4[i]))
                 {
                     for (r2 = i; r2 > r4; r2--)
                         gUnknown_02038696[r2] = gUnknown_02038696[r2 - 1];

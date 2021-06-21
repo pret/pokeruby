@@ -86,14 +86,14 @@ gSpecials::
 	def_special ResetTVShowState
 	def_special ScrSpecial_GetContestWinnerIdx
 	def_special ScrSpecial_GetContestPlayerMonIdx
-	def_special sub_80C4C28
+	def_special GetNpcContestantLocalId
 	def_special ScrSpecial_GetContestWinnerTrainerName
 	def_special ScrSpecial_GetContestWinnerNick
-	def_special sub_80C4C64
+	def_special BufferContestTrainerAndMonNames
 	def_special ScrSpecial_CountContestMonsWithBetterCondition
 	def_special SetContestTrainerGfxIds
 	def_special ScrSpecial_CheckSelectedMonAndInitContest
-	def_special sub_80C4D80
+	def_special GetContestantNamesAtRank
 	def_special ScrSpecial_SetLinkContestTrainerGfxIdx
 	def_special ScrSpecial_GetMonCondition
 	def_special ScrSpecial_CanMonParticipateInSelectedLinkContest
@@ -142,10 +142,10 @@ gSpecials::
 	def_special CalculatePlayerPartyCount
 	def_special GetNumValidDaycarePartyMons
 	def_special CountAlivePartyMonsExceptSelectedOne
-	def_special sub_80C4CF8
-	def_special sub_80C4CEC
-	def_special sub_80C4C78
-	def_special sub_80C4D50
+	def_special ShouldReadyContestArtist
+	def_special SaveMuseumContestPainting
+	def_special DoesContestCategoryHaveMuseumPainting
+	def_special CountPlayerMuseumPaintings
 	def_special ShowContestWinner
 	def_special MauvilleGymSpecial2
 	def_special MauvilleGymSpecial1

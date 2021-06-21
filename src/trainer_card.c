@@ -1,7 +1,10 @@
 #include "global.h"
 #include "trainer_card.h"
+#include "constants/songs.h"
+#include "contest_util.h"
 #include "easy_chat.h"
 #include "event_data.h"
+#include "ewram.h"
 #include "field_effect.h"
 #include "graphics.h"
 #include "link.h"
@@ -9,19 +12,16 @@
 #include "main.h"
 #include "menu.h"
 #include "money.h"
+#include "overworld.h"
 #include "palette.h"
 #include "pokedex.h"
-#include "overworld.h"
-#include "script_pokemon_80C4.h"
-#include "constants/songs.h"
+#include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "task.h"
-#include "scanline_effect.h"
 #include "util.h"
-#include "ewram.h"
 
 typedef void (*Callback)(void);
 
@@ -417,7 +417,7 @@ void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
     }
 
     r4 = FALSE;
-    if (sub_80C4D50() > 4)
+    if (CountPlayerMuseumPaintings() > 4)
     {
         r4 = TRUE;
     }

@@ -666,7 +666,7 @@ void sub_800F104(void)
         if (!gPaletteFade.active)
         {
             gBattleCommunication[0] = 3;
-            sub_800832C();
+            SetCloseLinkCallback();
         }
         break;
     case 3:

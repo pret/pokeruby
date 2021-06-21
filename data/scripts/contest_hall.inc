@@ -335,7 +335,7 @@ LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 	return
 
 LinkContestRoom1_EventScript_1A5323:: @ 81A5323
-	special sub_80C4C64
+	special BufferContestTrainerAndMonNames
 	addvar VAR_0x8006, 1
 	buffernumberstring 1, VAR_0x8006
 	lockall
@@ -1003,7 +1003,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	setvar VAR_TEMP_1, 0
 	call LinkContestRoom1_EventScript_1A5A90
 	delay 30
-	special sub_80C4CF8
+	special ShouldReadyContestArtist
 	compare VAR_0x8004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C46
 	return
@@ -1012,7 +1012,7 @@ LinkContestRoom1_EventScript_1A5BF6:: @ 81A5BF6
 	incrementgamestat GAME_STAT_WON_CONTEST
 	msgbox LinkContestRoom1_Text_1A6DF1, MSGBOX_SIGN
 	delay 90
-	special sub_80C4CF8
+	special ShouldReadyContestArtist
 	compare VAR_0x8004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C46
 	return
@@ -1049,7 +1049,7 @@ LinkContestRoom1_EventScript_1A5C46:: @ 81A5C46
 LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
 	delay 60
 	call LinkContestRoom1_EventScript_1A5C6A
-	special sub_80C4CF8
+	special ShouldReadyContestArtist
 	compare VAR_0x8004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C64
 	closemessage

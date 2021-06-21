@@ -2479,7 +2479,7 @@ static void sub_8050E30(void)
     case 11:
         if (++gBerryBlenderData->framesToWait > 30)
         {
-            sub_800832C();
+            SetCloseLinkCallback();
             gBerryBlenderData->field_6F++;
         }
         break;

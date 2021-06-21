@@ -677,7 +677,7 @@ void sub_80BA00C(u8 taskId)
         task->data[1]++;
         if (task->data[1] > 10)
         {
-            sub_800832C();
+            SetCloseLinkCallback();
             task->data[0]++;
         }
         break;

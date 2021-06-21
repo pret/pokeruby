@@ -40,7 +40,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, MSGBOX_DEFAULT
 	closemessage
-	special sub_80C4CEC
+	special SaveMuseumContestPainting
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, 1
@@ -86,7 +86,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	return
 
 LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
-	specialvar VAR_0x8004, sub_80C4D50
+	specialvar VAR_0x8004, CountPlayerMuseumPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_1589D6
 	case 2, LilycoveCity_ContestLobby_EventScript_1589DA
@@ -212,7 +212,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, MSGBOX_DEFAULT
 	closemessage
-	special sub_80C4CEC
+	special SaveMuseumContestPainting
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, 1

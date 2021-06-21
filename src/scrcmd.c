@@ -3,16 +3,19 @@
 #include "berry.h"
 #include "clock.h"
 #include "coins.h"
-#include "contest_link_80C2020.h"
+#include "constants/maps.h"
+#include "contest_link_util.h"
 #include "contest_painting.h"
+#include "contest_util.h"
 #include "data2.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
+#include "event_object_lock.h"
+#include "event_object_movement.h"
 #include "field_door.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
-#include "event_object_movement.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -22,27 +25,24 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "main.h"
-#include "event_object_lock.h"
 #include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"
+#include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "random.h"
-#include "overworld.h"
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
 #include "script_movement.h"
-#include "script_pokemon_80C4.h"
 #include "script_pokemon_80F9.h"
 #include "shop.h"
 #include "slot_machine.h"
 #include "sound.h"
 #include "string_util.h"
 #include "tv.h"
-#include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -1831,7 +1831,7 @@ bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 
 bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
-    sub_80C4980(gSpecialVar_ContestCategory);
+    ContestLinkTransfer(gSpecialVar_ContestCategory);
     ScriptContext1_Stop();
     return TRUE;
 }

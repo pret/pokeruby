@@ -975,7 +975,7 @@ void sub_802D18C(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            sub_800832C();
+            SetCloseLinkCallback();
             gBattlerControllerFuncs[gActiveBattler] = sub_802D148;
         }
         else

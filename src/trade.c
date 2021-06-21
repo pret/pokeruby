@@ -1406,7 +1406,7 @@ static void sub_80489F4(void)
     {
         gUnknown_020297D8[0] = gUnknown_03004824->tradeMenuCursorPosition;
         gUnknown_020297D8[1] = gUnknown_03004824->unk_008a;
-        sub_800832C();
+        SetCloseLinkCallback();
         gUnknown_03004824->unk_007b = 13;
     }
 }
@@ -2158,7 +2158,7 @@ static void sub_8049D9C(void)
 {
     if (!gPaletteFade.active)
     {
-        sub_800832C();
+        SetCloseLinkCallback();
         gUnknown_03004824->unk_007b = 12;
     }
 }
@@ -5168,7 +5168,7 @@ static void sub_804DC88(void)
         case 8:
             if (IsBGMStopped() == TRUE)
             {
-                sub_800832C();
+                SetCloseLinkCallback();
                 gMain.state ++;
             }
             break;

@@ -414,7 +414,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & R_BUTTON)
         Save_WriteData(SAVE_LINK);
     if (gMain.newKeys & SELECT_BUTTON)
-        sub_800832C();
+        SetCloseLinkCallback();
     if (gLinkTestDebugValuesEnabled)
     {
         u32 vblankCounter1 = gMain.vblankCounter1;
@@ -1145,7 +1145,7 @@ u8 GetDummy2(void)
     return sDummy2;
 }
 
-void sub_800832C(void)
+void SetCloseLinkCallback(void)
 {
     if (!gLinkCallback)
     {
