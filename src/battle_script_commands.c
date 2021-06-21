@@ -91,7 +91,7 @@ extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
 extern u8 gLeveledUpInBattle;
 extern void (*gBattleMainFunc)(void);
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern const u8 BattleText_YesNo[];
 extern u8 gPlayerPartyCount;
 extern u16 gMoveToLearn; //move to learn
@@ -8294,8 +8294,8 @@ void atk59_handlelearnnewmove(void)
 void sub_8023A80(void)
 {
     sub_802BBD4(0x18, 8, 0x1D, 0xD, 0);
-    Text_InitWindow(&gUnknown_03004210, BattleText_YesNo, 0x100, 0x19, 0x9);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, BattleText_YesNo, 0x100, 0x19, 0x9);
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     MenuCursor_Create814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
 }
 
@@ -9304,7 +9304,7 @@ _08024AB8:\n\
     bgt _08024AC4\n\
     b _0802495A\n\
 _08024AC4:\n\
-    ldr r4, _08024AE4 @ =gUnknown_03004210\n\
+    ldr r4, _08024AE4 @ =gWindowTemplate_Contest_MoveDescription\n\
     ldr r1, _08024AE8 @ =gStringVar4\n\
     adds r2, 0xFF\n\
     movs r0, 0x1\n\
@@ -9319,7 +9319,7 @@ _08024AC4:\n\
     adds r1, r2\n\
     b _08024BEA\n\
     .align 2, 0\n\
-_08024AE4: .4byte gUnknown_03004210\n\
+_08024AE4: .4byte gWindowTemplate_Contest_MoveDescription\n\
 _08024AE8: .4byte gStringVar4\n\
 _08024AEC: .4byte gSharedMem\n\
 _08024AF0: .4byte 0x0001609c\n\
@@ -9424,7 +9424,7 @@ _08024BC0:\n\
     mov r2, r8\n\
     cmp r2, 0x5\n\
     ble _08024B1C\n\
-    ldr r4, _08024BF4 @ =gUnknown_03004210\n\
+    ldr r4, _08024BF4 @ =gWindowTemplate_Contest_MoveDescription\n\
     ldr r1, _08024BF8 @ =gStringVar4\n\
     movs r2, 0x80\n\
     lsls r2, 1\n\
@@ -9444,7 +9444,7 @@ _08024BEA:\n\
     strb r0, [r1]\n\
     b _08024C38\n\
     .align 2, 0\n\
-_08024BF4: .4byte gUnknown_03004210\n\
+_08024BF4: .4byte gWindowTemplate_Contest_MoveDescription\n\
 _08024BF8: .4byte gStringVar4\n\
 _08024BFC: .4byte gSharedMem\n\
 _08024C00: .4byte 0x0001609c\n\

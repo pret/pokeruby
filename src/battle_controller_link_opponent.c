@@ -48,7 +48,7 @@ extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gUnknown_0300434C[];
 extern u32 gBattleControllerExecFlags;
 extern MainCallback gPreBattleCallback1;
@@ -427,7 +427,7 @@ void sub_8037BBC(void)
 
 void sub_8037C2C(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gWindowTemplate_Contest_MoveDescription.state == 0)
         LinkOpponentBufferExecCompleted();
 }
 
@@ -1405,7 +1405,7 @@ void LinkOpponentHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_8037C2C;
 }
 

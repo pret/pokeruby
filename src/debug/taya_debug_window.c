@@ -69,7 +69,7 @@ const u8 gUnknown_Debug_083C4EB0[] = _("Interview(BT)");
 
 const struct {
     const u8 * text;
-    u32 unk4;
+    u32 round1Points;
 } gUnknown_Debug_083C4EC0[] = {
     {gUnknown_Debug_083C4E54, 0x0},
     {gUnknown_Debug_083C4E5C, 0x1},
@@ -281,7 +281,7 @@ bool8 debug_sub_809089C(void)
         case -2:
             return FALSE;
         default:
-            gSpecialVar_0x8004 = gUnknown_Debug_083C4EC0[input].unk4;
+            gSpecialVar_0x8004 = gUnknown_Debug_083C4EC0[input].round1Points;
             switch (gSpecialVar_0x8004)
             {
                 case 5:

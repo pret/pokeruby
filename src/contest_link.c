@@ -480,28 +480,29 @@ void sub_80C8AD0(u8 taskId)
         case 3:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(gUnknown_02038680, sizeof gUnknown_02038680);
+                SendBlockToAllOpponents(
+                    gContestMonAppealPointTotals, sizeof gContestMonAppealPointTotals);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 4:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(gUnknown_02038680, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gUnknown_02038680);
+                memcpy(gContestMonAppealPointTotals, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gContestMonAppealPointTotals);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 6:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(gUnknown_02038688, sizeof gUnknown_02038688);
+                SendBlockToAllOpponents(gContestMonRound2Points, sizeof gContestMonRound2Points);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 7:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(gUnknown_02038688, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gUnknown_02038688);
+                memcpy(gContestMonRound2Points, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gContestMonRound2Points);
                 gTasks[taskId].data[0]++;
             }
             break;
@@ -585,14 +586,14 @@ void sub_80C8C80(u8 taskId)
         case 9:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(gUnknown_02038696, sizeof gUnknown_02038696);
+                SendBlockToAllOpponents(gContestantTurnOrder, sizeof gContestantTurnOrder);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 10:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(gUnknown_02038696, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gUnknown_02038696);
+                memcpy(gContestantTurnOrder, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gContestantTurnOrder);
                 gTasks[taskId].data[0]++;
             }
             break;
@@ -706,14 +707,14 @@ void Task_LinkContest_CommunicateTurnOrder(u8 taskId)
         case 0:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(gUnknown_02038696, sizeof gUnknown_02038696);
+                SendBlockToAllOpponents(gContestantTurnOrder, sizeof gContestantTurnOrder);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(gUnknown_02038696, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gUnknown_02038696);
+                memcpy(gContestantTurnOrder, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof gContestantTurnOrder);
                 gTasks[taskId].data[0]++;
             }
             break;

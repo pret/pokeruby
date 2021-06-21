@@ -48,7 +48,7 @@ extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u8 gAnimMoveTurn;
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattlerControllerFuncs[])(void);
 extern u8 gHealthboxSpriteIds[];
@@ -368,7 +368,7 @@ void sub_811DF34(void)
 
 void sub_811DFA0(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gWindowTemplate_Contest_MoveDescription.state == 0)
         LinkPartnerBufferExecCompleted();
 }
 
@@ -1341,7 +1341,7 @@ void LinkPartnerHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_811DFA0;
 }
 

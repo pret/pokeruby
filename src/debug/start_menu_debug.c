@@ -2589,9 +2589,9 @@ void DebugMenu_8078E68(u8 a0, u8 * a1, u32 a2)
 }
 
 struct GameTimeDebugMenuStruct {
-    u16 unk0;
+    u16 totalPoints;
     u16 unk2;
-    u8 unk4;
+    u8 round1Points;
     u8 unk5;
 };
 
@@ -2604,7 +2604,7 @@ const struct GameTimeDebugMenuStruct gUnknown_Debug_839C5F4[] = {
 void DebugMenu_8078E80(s16 * a0)
 {
     Menu_BlankWindowRect(2, 15, 22, 16);
-    sub_8071F60(0xd0, gUnknown_Debug_839C5F4[*a0].unk4, 15);
+    sub_8071F60(0xd0, gUnknown_Debug_839C5F4[*a0].round1Points, 15);
 }
 
 void DebugMenu_8078EB0(s16 * a0)
@@ -2669,7 +2669,7 @@ void DebugMenu_8078F68(u8 taskId)
     else
     {
         const struct GameTimeDebugMenuStruct *r2 = gUnknown_Debug_839C5F4 + data[0];
-        if (DebugMenu_8077DD8(data + r2->unk5, r2->unk0, r2->unk2, gMain.newAndRepeatedKeys) == TRUE)
+        if (DebugMenu_8077DD8(data + r2->unk5, r2->totalPoints, r2->unk2, gMain.newAndRepeatedKeys) == TRUE)
             DebugMenu_8078EB0(data);
     }
 }

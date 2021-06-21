@@ -1690,15 +1690,15 @@ void debug_sub_8110CCC(void)
 
 void debug_sub_8110D84(void)
 {
-    switch (sFlyDataPtr->unk4)
+    switch (sFlyDataPtr->round1Points)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
-        sFlyDataPtr->unk4++;
+        sFlyDataPtr->round1Points++;
         break;
     case 1:
         if (!UpdatePaletteFade())
-            sFlyDataPtr->unk4++;
+            sFlyDataPtr->round1Points++;
         break;
     case 2:
         switch (sub_80FAB60())
@@ -1719,7 +1719,7 @@ void debug_sub_8110D84(void)
         case 5:
             m4aSongNumStart(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-            sFlyDataPtr->unk4++;
+            sFlyDataPtr->round1Points++;
             break;
         }
         break;
@@ -1736,14 +1736,14 @@ void debug_sub_8110D84(void)
         {
             sub_80FBCA0();
             sub_80FAEC4();
-            sFlyDataPtr->unk4++;
+            sFlyDataPtr->round1Points++;
         }
         break;
     case 5:
         if (sub_80FAFC0() == 0)
         {
             CreateRegionMapCursor(0, 0);
-            sFlyDataPtr->unk4++;
+            sFlyDataPtr->round1Points++;
         }
         break;
     case 6:
@@ -1755,14 +1755,14 @@ void debug_sub_8110D84(void)
         {
             sub_80FBCA0();
             sub_80FAEC4();
-            sFlyDataPtr->unk4++;
+            sFlyDataPtr->round1Points++;
         }
         break;
     case 7:
         if (sub_80FAFC0() == 0)
         {
             CreateRegionMapCursor(0, 0);
-            sFlyDataPtr->unk4 = 3;
+            sFlyDataPtr->round1Points = 3;
         }
         break;
     }

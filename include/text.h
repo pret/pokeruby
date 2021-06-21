@@ -75,7 +75,6 @@
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
 
-#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 4
 #define TEXT_COLOR_TRANSPARENT 0x00
 #define TEXT_COLOR_DARK_GREY   0x01
 #define TEXT_COLOR_RED         0x02
@@ -93,8 +92,28 @@
 #define TEXT_COLOR_LIGHT_BLUE  0x0E
 #define TEXT_COLOR_WHITE2      0x0F
 
-#define EXT_CTRL_CODE_CLEAR 17
-
+#define EXT_CTRL_CODE_COLOR                  0x01
+#define EXT_CTRL_CODE_HIGHLIGHT              0x02
+#define EXT_CTRL_CODE_SHADOW                 0x03
+#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 0x04
+#define EXT_CTRL_CODE_PALETTE                0x05
+#define EXT_CTRL_CODE_SIZE                   0x06
+#define EXT_CTRL_CODE_RESET_SIZE             0x07
+#define EXT_CTRL_CODE_PAUSE                  0x08
+#define EXT_CTRL_CODE_PAUSE_UNTIL_PRESS      0x09
+#define EXT_CTRL_CODE_WAIT_SE                0x0A
+#define EXT_CTRL_CODE_PLAY_BGM               0x0B
+#define EXT_CTRL_CODE_ESCAPE                 0x0C
+#define EXT_CTRL_CODE_SHIFT_TEXT             0x0D // nop
+#define EXT_CTRL_CODE_SHIFT_DOWN             0x0E
+#define EXT_CTRL_CODE_FILL_WINDOW            0x0F
+#define EXT_CTRL_CODE_PLAY_SE                0x10
+#define EXT_CTRL_CODE_CLEAR                  0x11
+#define EXT_CTRL_CODE_SKIP                   0x12
+#define EXT_CTRL_CODE_CLEAR_TO               0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING     0x14
+#define EXT_CTRL_CODE_JPN                    0x15
+#define EXT_CTRL_CODE_ENG                    0x16
 
 struct WindowTemplate
 {

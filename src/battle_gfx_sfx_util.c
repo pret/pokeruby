@@ -32,7 +32,7 @@ extern u8 gBattlerSpriteIds[];
 extern u16 gIntroSlideFlags;
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern void (*gBattlerControllerFuncs[])(void);
 extern u8 gHealthboxSpriteIds[];
 extern u8 gUnknown_0300434C[];

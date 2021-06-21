@@ -64,7 +64,7 @@ void sub_8023AD8(void);
 void nullsub_6(void);
 bool32 IsHMMove2(u16 move);
 
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gMoveToLearn;
@@ -204,7 +204,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gBattle_BG3_X = 256;
     gBattle_BG3_Y = 0;
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
@@ -312,7 +312,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gBattle_BG3_X = 256;
     gBattle_BG3_Y = 0;
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
@@ -476,7 +476,7 @@ static void CB2_EvolutionSceneUpdate(void)
 {
     AnimateSprites();
     BuildOamBuffer();
-    Text_UpdateWindowInBattle(&gUnknown_03004210);
+    Text_UpdateWindowInBattle(&gWindowTemplate_Contest_MoveDescription);
     UpdatePaletteFade();
     RunTasks();
 }
@@ -549,12 +549,12 @@ static void Task_EvolutionScene(u8 taskID)
         if (!gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
-            Text_InitWindow8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
+            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
             gTasks[taskID].tState++;
         }
         break;
     case 2: // wait for string, play cry
-        if (gUnknown_03004210.state == 0)
+        if (gWindowTemplate_Contest_MoveDescription.state == 0)
         {
             PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
@@ -637,7 +637,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsCryFinished() && !gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
-            Text_InitWindow8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
+            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
@@ -649,7 +649,7 @@ static void Task_EvolutionScene(u8 taskID)
         }
         break;
     case 14: // check if it wants to learn a new move
-        if (gUnknown_03004210.state == 0)
+        if (gWindowTemplate_Contest_MoveDescription.state == 0)
         {
             var = MonTryLearningNewMove(mon, gTasks[taskID].tLearnsFirstMove);
             if (var != 0 && !gTasks[taskID].tEvoWasStopped)
@@ -706,59 +706,59 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsCryFinished())
         {
             StringExpandPlaceholders(gStringVar4, BattleText_StopEvo);
-            Text_InitWindow8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
+            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
             gTasks[taskID].tEvoWasStopped = TRUE;
             gTasks[taskID].tState = 14;
         }
         break;
     case 19: // pokemon learned a new move, print string and play a fanfare
-        if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+        if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
         {
             sub_8024CEC();
             PlayFanfare(MUS_LEVEL_UP);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
-            Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
         }
         break;
     case 20: // wait a bit and check if can learn another move
-        if (gUnknown_03004210.state == 0 && !IsSEPlaying() && --gTasks[taskID].tLearnsFirstMove == 0)
+        if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying() && --gTasks[taskID].tLearnsFirstMove == 0)
             gTasks[taskID].tState = 14;
         break;
     case 21: // try to learn a new move
         switch (gTasks[taskID].tLearnMoveState)
         {
         case 0:
-            if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+            if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 sub_8024CEC();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
         case 1:
-            if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+            if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
         case 2:
-            if (gUnknown_03004210.state != 0)
+            if (gWindowTemplate_Contest_MoveDescription.state != 0)
                 break;
             if (!IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tData9 = 5;
                 gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
             }
         case 3:
-            if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+            if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 sub_8023A80();
                 gTasks[taskID].tLearnMoveState++;
@@ -785,7 +785,7 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 sub_8023AD8();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
@@ -800,7 +800,7 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 sub_8023AD8();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
@@ -826,7 +826,7 @@ static void Task_EvolutionScene(u8 taskID)
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
-                        Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                        Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                         gTasks[taskID].tLearnMoveState = 11;
                     }
                     else
@@ -839,42 +839,42 @@ static void Task_EvolutionScene(u8 taskID)
                         RemoveMonPPBonus(mon, var);
                         SetMonMoveSlot(mon, gMoveToLearn, var);
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
-                        Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                        Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                         gTasks[taskID].tLearnMoveState++;
                     }
                 }
             }
             break;
         case 7:
-            if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+            if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
         case 8:
-            if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+            if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
-                Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tState = 19;
             }
             break;
         case 9:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
-            Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tData9 = 10;
             gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
-            Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tState = 14;
             break;
         case 11:
-            if (gUnknown_03004210.state == 0 && !IsSEPlaying())
+            if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
                 gTasks[taskID].tLearnMoveState = 5;
             break;
         }
@@ -1229,7 +1229,7 @@ void unref_sub_8113B50(u8 *a, u8 *b)
     for (sp8 = 0; sp8 < 64; sp8++)
     {
         sEvoInfo.unk84[sp8] = 0;
-        sEvoInfo.unk4[sp8] = 0;
+        sEvoInfo.round1Points[sp8] = 0;
         sEvoInfo.unk44[sp8] = 0;
         for (r6 = 0; r6 < 32; r6++)
         {
@@ -1268,14 +1268,14 @@ void unref_sub_8113B50(u8 *a, u8 *b)
                 case 0:
                     if (*r2 & 0xF)
                     {
-                        sEvoInfo.unk10C4[sp8][sEvoInfo.unk4[sp8]] = r6;
+                        sEvoInfo.unk10C4[sp8][sEvoInfo.round1Points[sp8]] = r6;
                         r3 = 1;
                     }
                     break;
                 case 1:
                     if (*r2 & 0xF0)
                     {
-                        sEvoInfo.unk10C4[sp8][sEvoInfo.unk4[sp8]] = r6;
+                        sEvoInfo.unk10C4[sp8][sEvoInfo.round1Points[sp8]] = r6;
                         r3 = 1;
                     }
                     break;
@@ -1287,16 +1287,16 @@ void unref_sub_8113B50(u8 *a, u8 *b)
                  case 0:
                     if (*r2 & 0xF)
                     {
-                        sEvoInfo.unk18C4[sp8][sEvoInfo.unk4[sp8]] = r6 - 1;
-                        sEvoInfo.unk4[sp8]++;
+                        sEvoInfo.unk18C4[sp8][sEvoInfo.round1Points[sp8]] = r6 - 1;
+                        sEvoInfo.round1Points[sp8]++;
                         r3 = 0;
                     }
                     break;
                 case 1:
                     if (*r2 & 0xF0)
                     {
-                        sEvoInfo.unk18C4[sp8][sEvoInfo.unk4[sp8]] = r6 - 1;
-                        sEvoInfo.unk4[sp8]++;
+                        sEvoInfo.unk18C4[sp8][sEvoInfo.round1Points[sp8]] = r6 - 1;
+                        sEvoInfo.round1Points[sp8]++;
                         r3 = 0;
                     }
                     break;
@@ -1310,8 +1310,8 @@ void unref_sub_8113B50(u8 *a, u8 *b)
         }
         if (r3)
         {
-            sEvoInfo.unk18C4[sp8][sEvoInfo.unk4[sp8]] = r6;
-            sEvoInfo.unk4[sp8]++;
+            sEvoInfo.unk18C4[sp8][sEvoInfo.round1Points[sp8]] = r6;
+            sEvoInfo.round1Points[sp8]++;
         }
         //_08113D26
         if (!((sp8 + 1) & 7))
@@ -1392,9 +1392,9 @@ void unref_sub_8113B50(u8 *a, u8 *b)
 
     for (sp8 = 0; sp8 < 0x40; sp8++)  //_08113E3A
     {
-        if (sEvoInfo.unk4[sp8] < sEvoInfo.unk44[sp8])
+        if (sEvoInfo.round1Points[sp8] < sEvoInfo.unk44[sp8])
         {
-            for (spC = 0; spC < sEvoInfo.unk4[sp8]; spC++)
+            for (spC = 0; spC < sEvoInfo.round1Points[sp8]; spC++)
             {
                 sp14 = 0x100;
 
@@ -1431,19 +1431,19 @@ void unref_sub_8113B50(u8 *a, u8 *b)
             }
         }
         //_08113F9E
-        if (sEvoInfo.unk4[sp8] == sEvoInfo.unk44[sp8])
+        if (sEvoInfo.round1Points[sp8] == sEvoInfo.unk44[sp8])
         {
-            for (r6 = 0; r6 < sEvoInfo.unk4[sp8]; r6++)
+            for (r6 = 0; r6 < sEvoInfo.round1Points[sp8]; r6++)
                 sub_81141F0(r6, r6, sp8);
         }
         //_08113FCC
-        if (sEvoInfo.unk4[sp8] > sEvoInfo.unk44[sp8])
+        if (sEvoInfo.round1Points[sp8] > sEvoInfo.unk44[sp8])
         {
             for (sp10 = 0; sp10 < sEvoInfo.unk44[sp8]; sp10++)
             {
                 sp14 = 0x100;
 
-                for (r6 = 0; r6 < sEvoInfo.unk4[sp8]; r6++)
+                for (r6 = 0; r6 < sEvoInfo.round1Points[sp8]; r6++)
                 {
                     s32 r3;
 
@@ -1472,7 +1472,7 @@ void unref_sub_8113B50(u8 *a, u8 *b)
                 sEvoInfo.unkC4[sp8][spC] = 1;
             }
             //_08114104
-            for (r6 = 0; r6 < sEvoInfo.unk4[sp8]; r6++)
+            for (r6 = 0; r6 < sEvoInfo.round1Points[sp8]; r6++)
             {
                 sEvoInfo.unk20C4[sp8][r6] = sEvoInfo.unk30C4[sp8][r6];
                 sEvoInfo.unk28C4[sp8][r6] = sEvoInfo.unk38C4[sp8][r6];

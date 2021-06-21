@@ -109,7 +109,7 @@ static void sub_80A9BE4(u8 taskId)
         DestroyTask(taskId);
 
         if (!(gIsLinkContest & 1))
-            sub_80AF668();
+            CalculateFinalScores();
 
         sub_80C2358();
     }
@@ -182,7 +182,7 @@ static void sub_80A9D58(u8 taskId)
        dest[i] = gTasks[taskId].data[5 + i];
 
    gContestLinkLeaderIndex = LinkContest_GetLeaderIndex(dest);
-   InitContestMonConditions((u8)gSpecialVar_ContestCategory);
+   CalculateRound1Points((u8)gSpecialVar_ContestCategory);
    SortContestants(0);
    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, sub_80A9DBC);
 }
@@ -607,7 +607,7 @@ void sub_80AA5E8(u8 var)
 
 static void sub_80AA614(u8 var1, u8 var2)
 {
-    u16 var = InitContestMonConditionI(var1, var2);
+    u16 var = CalculateContestantRound1Points(var1, var2);
 
     ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
     Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
@@ -859,7 +859,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            InitContestMonConditions(eMatsudaDebugVar);
+            CalculateRound1Points(eMatsudaDebugVar);
         SetMainCallback2(CB2_StartContest);
     }
 }
@@ -882,7 +882,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
 
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
-            gContestMonRound1Points[i] = InitContestMonConditionI(i, gSpecialVar_ContestCategory);
+            gContestMonRound1Points[i] = CalculateContestantRound1Points(i, gSpecialVar_ContestCategory);
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
     }
 }
@@ -951,15 +951,15 @@ void sub_80AAF30(void)
     for (i = 0; i < 3; i++)
     {
         gContestMonRound1Points[i] = 0;
-        gUnknown_02038680[i] = 0;
+        gContestMonAppealPointTotals[i] = 0;
         gContestMonTotalPoints[i] = 0;
         gContestMons[i] = gContestMons[3];
     }
 
     gContestMonRound1Points[3] = 0x12C;
-    gUnknown_02038680[3] = 0x190;
+    gContestMonAppealPointTotals[3] = 0x190;
     gContestMonTotalPoints[3] = 0x190;
-    Contest_SaveWinner(0xFE);
+    Contest_SaveWinner(CONTEST_SAVE_FOR_ARTIST);
 }
 
 u8 MatsudaDebugMenu_SetHighScore(void)
@@ -977,7 +977,7 @@ u8 MatsudaDebugMenu_ResetHighScore(void)
     for (i = 0; i < 4; i++)
     {
         gContestMonRound1Points[i] = 0;
-        gUnknown_02038680[i] = 0;
+        gContestMonAppealPointTotals[i] = 0;
         gContestMonTotalPoints[i] = 0;
     }
     CloseMenu();

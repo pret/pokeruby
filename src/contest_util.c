@@ -223,13 +223,15 @@ void ShowContestWinnerCleanup(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
+// File boundary?
+
 void ShowContestWinner(void)
 {
     if(gUnknown_0203856C)
     {
         sub_80AAF30();
         eCurContestWinnerIsForArtist = TRUE;
-        eCurContestWinnerSaveIdx = sub_80B2C4C(254, 0);
+        eCurContestWinnerSaveIdx = GetContestWinnerSaveIdx(CONTEST_SAVE_FOR_ARTIST, 0);
         Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }

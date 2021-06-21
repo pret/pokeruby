@@ -19,7 +19,7 @@
 extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;
 
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 
 extern u8 BattleText_Win[];
 extern u8 BattleText_Loss[];
@@ -247,9 +247,9 @@ void sub_800D6D4(void)
 void ApplyPlayerChosenFrameToBattleMenu(void)
 {
     TextWindow_SetBaseTileNum(0x12);
-    TextWindow_LoadStdFrameGraphicsOverridePal(&gUnknown_03004210, 1);
+    TextWindow_LoadStdFrameGraphicsOverridePal(&gWindowTemplate_Contest_MoveDescription, 1);
     TextWindow_SetBaseTileNum(0x22);
-    TextWindow_LoadStdFrameGraphicsOverridePal(&gUnknown_03004210, 1);
+    TextWindow_LoadStdFrameGraphicsOverridePal(&gWindowTemplate_Contest_MoveDescription, 1);
     gPlttBufferUnfaded[92] = 0x7fe0;
     gPlttBufferUnfaded[93] = 0x2529;
     gPlttBufferUnfaded[94] = 0x7fff;
@@ -444,8 +444,8 @@ static void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
 
 #define PRINT_MESSAGE(text, tileDataStartOffset, x)                             \
 {                                                                               \
-    Text_InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
-    Text_PrintWindow8002F44(&gUnknown_03004210);                                            \
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, text, tileDataStartOffset, x, MESSAGE_Y);    \
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);                                            \
 }
 
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)

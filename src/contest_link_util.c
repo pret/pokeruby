@@ -728,7 +728,7 @@ static void sub_80C2E14(u8 taskId)
     Contest_SaveWinner(gSpecialVar_ContestRank);
     Contest_SaveWinner(0xFE);
     eCurContestWinnerIsForArtist = TRUE;
-    eCurContestWinnerSaveIdx = sub_80B2C4C(0xfe, 0);
+    eCurContestWinnerSaveIdx = GetContestWinnerSaveIdx(0xfe, 0);
     BeginHardwarePaletteFade(0xff, 0, 0, 16, 0);
     gTasks[taskId].func = sub_80C2EA0;
 }
@@ -1810,7 +1810,7 @@ s8 sub_80C39E4(u8 arg0, u8 arg1)
     s16 val;
     s8 ret;
 
-    val = gUnknown_02038688[arg0];
+    val = gContestMonRound2Points[arg0];
     if (val < 0)
         r4 = -val << 16;
     else
@@ -1826,7 +1826,7 @@ s8 sub_80C39E4(u8 arg0, u8 arg1)
     if (arg1 != 0 && r2 > 10)
         r2 = 10;
 
-    if (gUnknown_02038688[arg0] < 0)
+    if (gContestMonRound2Points[arg0] < 0)
         ret = -r2;
     else
         ret =  r2;
@@ -2122,12 +2122,12 @@ void sub_80C3F00(void)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
 
-        r4 = 1000 * ABS(gUnknown_02038688[i]) / ABS(r2);
+        r4 = 1000 * ABS(gContestMonRound2Points[i]) / ABS(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_04 = r4 / 10;
 
-        if (gUnknown_02038688[i] < 0)
+        if (gContestMonRound2Points[i] < 0)
             eContestLink80C2020Struct2018018[i].unk_10 = 1;
 
         r5 = 22528 * eContestLink80C2020Struct2018018[i].unk_00 / 100;
@@ -2568,7 +2568,7 @@ void ScrSpecial_CheckSelectedMonAndInitContest(void)
     if (result != 0)
     {
         Contest_InitAllPokemon(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
-        InitContestMonConditions(gSpecialVar_ContestCategory);
+        CalculateRound1Points(gSpecialVar_ContestCategory);
     }
     gSpecialVar_Result = result;
 }
@@ -2853,7 +2853,7 @@ void Task_LinkContest_SetUpContest(u8 taskId)
         sp4[i] = gTasks[taskId].data[i + 5];
 
     gContestLinkLeaderIndex = LinkContest_GetLeaderIndex(sp4);
-    InitContestMonConditions(gSpecialVar_ContestCategory);
+    CalculateRound1Points(gSpecialVar_ContestCategory);
     SetTaskFuncWithFollowupFunc(
         taskId, Task_LinkContest_CommunicateRound1Points, Task_LinkContest_CalculateTurnOrder);
 }

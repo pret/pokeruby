@@ -501,7 +501,7 @@ static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
 // The appeal works great if performed first.
 static void ContestEffect_BetterIfFirst(void)
 {
-    if (gUnknown_02038696[shared192D0.contestant] == 0)
+    if (gContestantTurnOrder[shared192D0.contestant] == 0)
     {
         u16 move = sContestantStatus[shared192D0.contestant].currMove;
         sContestantStatus[shared192D0.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
@@ -512,7 +512,7 @@ static void ContestEffect_BetterIfFirst(void)
 // The appeal works great if performed last.
 static void ContestEffect_BetterIfLast(void)
 {
-    if (gUnknown_02038696[shared192D0.contestant] == 3)
+    if (gContestantTurnOrder[shared192D0.contestant] == 3)
     {
         u16 move = sContestantStatus[shared192D0.contestant].currMove;
         sContestantStatus[shared192D0.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;

@@ -10,7 +10,7 @@
 #include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
 extern u8 gBankInMenu;
@@ -72,7 +72,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         ScanlineEffect_Clear();
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
         ResetPaletteFade();
-        Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+        Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;

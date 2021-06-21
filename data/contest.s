@@ -156,23 +156,23 @@ gOamData_83CA49C:: @ 83CA49C
 	.2byte 0x2C00
 
 	.align 2
-gSpriteTemplate_83CA4A4:: @ 83CA4A4
+sSpriteTemplate_Judge:: @ 83CA4A4
 	spr_template 20005, 20005, gOamData_83CA49C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-gUnknown_083CA4BC:: @ 83CA4BC
+sSpriteSheet_Judge:: @ 83CA4BC
 	obj_tiles gContestJudgeGfx, 2048, 0x4e25
 
 	.align 2
-gUnknown_083CA4C4:: @ 83CA4C4
+sSpriteSheet_JudgeSymbols:: @ 83CA4C4
 	obj_tiles gContestJudgeSymbolsGfx, 896, 0xabe0
 
 	.align 2
-gUnknown_083CA4CC:: @ 83CA4CC
+sSpritePalette_JudgeSymbols:: @ 83CA4CC
 	obj_pal gContest3Pal, 0xabe0
 
 	.align 2
-gUnknown_083CA4D4:: @ 83CA4D4
+sSpriteTemplate_JudgeSpeechBubble:: @ 83CA4D4
 	spr_template 0xABE0, 0xABE0, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.include "data/text/contest_strings.inc"
@@ -347,7 +347,7 @@ gSpriteTemplate_83CC584:: @ 83CC584
 gUnknown_083CC59C:: @ 83CC59C
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR}$"
 
-gUnknown_083CC5A2:: @ 83CC5A2
+gText_Slash:: @ 83CC5A2
 	.string "/$"
 
 	.align 1

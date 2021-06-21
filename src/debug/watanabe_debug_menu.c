@@ -33,9 +33,9 @@
 #include "field_effect.h"
 
 struct WatanabeDebugMenuItemSubstruct {
-    u32 unk0;
-    u32 unk4;
-    u8 unk8;
+    u32 totalPoints;
+    u32 round1Points;
+    u8 random;
     u8 unk9;
 };
 
@@ -60,7 +60,7 @@ struct WatanabeEwram17000 {
     u8 unk9;
     u8 unkA;
     u8 unkB;
-    u8 unkC;
+    u8 contestant;
 };
 
 struct WatanabeEwram18000 {
@@ -74,17 +74,17 @@ struct WatanabeEwram18000 {
 };
 
 struct WatanabeEwram18000_2 {
-    u16 unk0;
+    u16 totalPoints;
     u8 unk2;
     u8 unk3;
-    u8 unk4;
+    u8 round1Points;
     u8 unk5;
     u8 unk6;
     u8 unk7;
-    u8 unk8;
+    u8 random;
     u8 unk9;
     u8 unkA;
-    struct PlttData unkC;
+    struct PlttData contestant;
     u16 unk10[16];
 };
 
@@ -1367,7 +1367,7 @@ void debug_80C4AC4(u8 taskId)
         eWatanabe17000.unk9 = 0;
         eWatanabe17000.unkA = 0;
         eWatanabe17000.unkB = 0;
-        eWatanabe17000.unkC = 0;
+        eWatanabe17000.contestant = 0;
         gTasks[taskId].func = debug_80C4F48;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
@@ -2362,11 +2362,11 @@ const u32 gUnknown_Debug_083F8768[] = {
 void debug_80C6544(u8 a0)
 {
     u32 r7 = debug_80C5B60(gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]);
-    u32 r5 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk0;
-    u32 r4 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk4;
+    u32 r5 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->totalPoints;
+    u32 r4 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->round1Points;
     u32 r3 = gUnknown_Debug_083F8768[gUnknown_Debug_2038A1C->unk16a];
 
-    if (gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk8 == 0)
+    if (gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->random == 0)
     {
         switch (a0)
         {
@@ -2568,13 +2568,13 @@ void InitSeePokemonGraphics(void)
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
     CreateTask(debug_80C6B00, 0);
     gUnknown_Debug_2038A20 = &eWatanabe18000_2;
-    gUnknown_Debug_2038A20->unk0 = 0x115;
+    gUnknown_Debug_2038A20->totalPoints = 0x115;
     gUnknown_Debug_2038A20->unk2 = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
     gUnknown_Debug_2038A20->unk5 = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
     gUnknown_Debug_2038A20->unkA = 0;
-    gUnknown_Debug_2038A20->unk8 = 0;
+    gUnknown_Debug_2038A20->random = 0;
     spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6C, 0x74, 0);
     gSprites[spriteId].data[0] = 0;
     StartSpriteAnim(gSprites + spriteId, 0);
@@ -2670,31 +2670,31 @@ void debug_80C6B00(u8 taskId)
 
 void debug_80C6CB8(u8 taskId)
 {
-    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->unk0, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->unk0);
-    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
-    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 1);
+    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
+    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
+    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 1);
     gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
     gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
 
-    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->unk0, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[2], gUnknown_Debug_2038A20->unk0);
-    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
-    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 2);
+    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->totalPoints, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[2], gUnknown_Debug_2038A20->totalPoints);
+    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
+    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 2);
     gUnknown_Debug_2038A20->unk3 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x78, 0);
     gSprites[gUnknown_Debug_2038A20->unk3].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk3].oam.priority = 0;
 
-    gUnknown_Debug_2038A20->unk4 = CreateMonIcon(gUnknown_Debug_2038A20->unk0, sub_809D62C, 0x68, 0x2C, 0, 0);
+    gUnknown_Debug_2038A20->round1Points = CreateMonIcon(gUnknown_Debug_2038A20->totalPoints, sub_809D62C, 0x68, 0x2C, 0, 0);
 
-    sub_8091738(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->unk0), 2, 0x3fc);
+    sub_8091738(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->totalPoints), 2, 0x3fc);
 
     ((u16 *)(VRAM + 0xF858))[0] = 0xF3FC;
     ((u16 *)(VRAM + 0xF858))[1] = 0xF3FD;
     ((u16 *)(VRAM + 0xF858))[32] = 0xF3FE;
     ((u16 *)(VRAM + 0xF858))[33] = 0xF3FF;
 
-    debug_80C3800(gUnknown_Debug_2038A20->unk0, 17, 3);
-    debug_80C376C(gUnknown_Debug_2038A20->unk0, 26, 5);
+    debug_80C3800(gUnknown_Debug_2038A20->totalPoints, 17, 3);
+    debug_80C376C(gUnknown_Debug_2038A20->totalPoints, 26, 5);
 
     gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
@@ -2704,7 +2704,7 @@ void debug_80C6CB8(u8 taskId)
 
     gUnknown_Debug_2038A20->unk9 = 0;
     StopCryAndClearCrySongs();
-    PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
+    PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
 }
 
 void debug_80C6EE8(u8 taskId)
@@ -2712,10 +2712,10 @@ void debug_80C6EE8(u8 taskId)
     u16 hue;
     CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
-    gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
-    gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
-    gUnknown_Debug_2038A20->unkC.b = (hue & 0x7c00) >> 10;
-    gUnknown_Debug_2038A20->unkC.unused_15 = 0;
+    gUnknown_Debug_2038A20->contestant.r = hue & 0x1f;
+    gUnknown_Debug_2038A20->contestant.g = (hue & 0x3e0) >> 5;
+    gUnknown_Debug_2038A20->contestant.b = (hue & 0x7c00) >> 10;
+    gUnknown_Debug_2038A20->contestant.unused_15 = 0;
     debug_80C68CC(gUnknown_Debug_2038A20->unk7 + 1, 11, 10, 2);
     Menu_PrintText(gUnknown_Debug_083F8813, 13, 10);
     debug_80C68CC(hue, 14, 10, 4);
@@ -2734,12 +2734,12 @@ void debug_80C6FA8(u8 taskId)
     }
     else if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C3878(0, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C3878(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
     }
     else if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C3878(1, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C3878(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
     }
     else if (gMain.newKeys & A_BUTTON)
@@ -2767,9 +2767,9 @@ void debug_80C6FA8(u8 taskId)
     {
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         else
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 32);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 32);
         gTasks[taskId].func = debug_80C6EE8;
@@ -2779,11 +2779,11 @@ void debug_80C6FA8(u8 taskId)
         if (gMain.newKeys & SELECT_BUTTON)
         {
             StopCryAndClearCrySongs();
-            PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
+            PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
         }
-        gUnknown_Debug_2038A20->unk8 += 4;
-        gUnknown_Debug_2038A20->unk8 &= 0x1f;
-        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->unk8];
+        gUnknown_Debug_2038A20->random += 4;
+        gUnknown_Debug_2038A20->random &= 0x1f;
+        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->random];
     }
 }
 #else
@@ -3092,7 +3092,7 @@ void debug_80C71FC(u8 taskId)
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
-    sub_809D510(gSprites + gUnknown_Debug_2038A20->unk4);
+    sub_809D510(gSprites + gUnknown_Debug_2038A20->round1Points);
     gTasks[taskId].func = debug_80C6CB8;
 }
 
@@ -3129,18 +3129,18 @@ void debug_80C7294(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->unkC.r < 31)
-                    gUnknown_Debug_2038A20->unkC.r++;
+                if (gUnknown_Debug_2038A20->contestant.r < 31)
+                    gUnknown_Debug_2038A20->contestant.r++;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->unkC.g < 31)
-                    gUnknown_Debug_2038A20->unkC.g++;
+                if (gUnknown_Debug_2038A20->contestant.g < 31)
+                    gUnknown_Debug_2038A20->contestant.g++;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->unkC.b < 31)
-                    gUnknown_Debug_2038A20->unkC.b++;
+                if (gUnknown_Debug_2038A20->contestant.b < 31)
+                    gUnknown_Debug_2038A20->contestant.b++;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
         }
@@ -3150,18 +3150,18 @@ void debug_80C7294(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->unkC.r > 0)
-                    gUnknown_Debug_2038A20->unkC.r--;
+                if (gUnknown_Debug_2038A20->contestant.r > 0)
+                    gUnknown_Debug_2038A20->contestant.r--;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->unkC.g > 0)
-                    gUnknown_Debug_2038A20->unkC.g--;
+                if (gUnknown_Debug_2038A20->contestant.g > 0)
+                    gUnknown_Debug_2038A20->contestant.g--;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->unkC.b > 0)
-                    gUnknown_Debug_2038A20->unkC.b--;
+                if (gUnknown_Debug_2038A20->contestant.b > 0)
+                    gUnknown_Debug_2038A20->contestant.b--;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
         }
@@ -3170,7 +3170,7 @@ void debug_80C7294(u8 taskId)
 
 void debug_80C74E4(u8 taskId)
 {
-    u16 pal = (gUnknown_Debug_2038A20->unkC.r & 0x001f) + ((gUnknown_Debug_2038A20->unkC.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->unkC.b << 10) & 0x7c00);
+    u16 pal = (gUnknown_Debug_2038A20->contestant.r & 0x001f) + ((gUnknown_Debug_2038A20->contestant.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->contestant.b << 10) & 0x7c00);
     gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferFaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferUnfaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;
@@ -3190,13 +3190,13 @@ void debug_80C7584(struct Sprite *sprite)
         {
             default:
             case 0:
-                shade = gUnknown_Debug_2038A20->unkC.r;
+                shade = gUnknown_Debug_2038A20->contestant.r;
                 break;
             case 1:
-                shade = gUnknown_Debug_2038A20->unkC.g;
+                shade = gUnknown_Debug_2038A20->contestant.g;
                 break;
             case 2:
-                shade = gUnknown_Debug_2038A20->unkC.b;
+                shade = gUnknown_Debug_2038A20->contestant.b;
                 break;
         }
         sprite->pos2.x = 4 * shade;
@@ -3237,13 +3237,13 @@ void InitSeeTrainers(void)
     REG_DISPCNT = 0x3340;
     CreateTask(debug_80C777C, 0);
     gUnknown_Debug_2038A20 = &eWatanabe18000_2;
-    gUnknown_Debug_2038A20->unk0 = 0;
+    gUnknown_Debug_2038A20->totalPoints = 0;
     gUnknown_Debug_2038A20->unk2 = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
     gUnknown_Debug_2038A20->unk5 = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
     gUnknown_Debug_2038A20->unkA = 0;
-    gUnknown_Debug_2038A20->unk8 = 0;
+    gUnknown_Debug_2038A20->random = 0;
     spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6c, 0x74, 0);
     gSprites[spriteId].data[0] = 0;
     StartSpriteAnim(gSprites + spriteId, 0);
@@ -3297,14 +3297,14 @@ void debug_80C777C(u8 taskId)
 
 void debug_80C7934(u8 taskId)
 {
-    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->unk0, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->unk0);
-    LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->unk0);
-    GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->unk0, 1);
+    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
+    LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->totalPoints);
+    GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->totalPoints, 1);
     gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
     gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
 
-    debug_80C376C(gUnknown_Debug_2038A20->unk0, 26, 5);
+    debug_80C376C(gUnknown_Debug_2038A20->totalPoints, 26, 5);
 
     gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
@@ -3320,10 +3320,10 @@ void debug_80C7A54(u8 taskId)
     u16 hue;
     CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
-    gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
-    gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
-    gUnknown_Debug_2038A20->unkC.b = (hue & 0x7c00) >> 10;
-    gUnknown_Debug_2038A20->unkC.unused_15 = 0;
+    gUnknown_Debug_2038A20->contestant.r = hue & 0x1f;
+    gUnknown_Debug_2038A20->contestant.g = (hue & 0x3e0) >> 5;
+    gUnknown_Debug_2038A20->contestant.b = (hue & 0x7c00) >> 10;
+    gUnknown_Debug_2038A20->contestant.unused_15 = 0;
     debug_80C68CC(gUnknown_Debug_2038A20->unk7 + 1, 11, 10, 2);
     Menu_PrintText(gUnknown_Debug_083F8813, 13, 10);
     debug_80C68CC(hue, 14, 10, 4);
@@ -3342,12 +3342,12 @@ void debug_80C7B14(u8 taskId)
     }
     else if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C38B4(0, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
     }
     else if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C38B4(1, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
     }
     else if (gMain.newKeys & A_BUTTON)
@@ -3376,11 +3376,11 @@ void debug_80C7B14(u8 taskId)
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
         {
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         }
         else
         {
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         }
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 32);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 32);
@@ -3388,9 +3388,9 @@ void debug_80C7B14(u8 taskId)
     }
     else
     {
-        gUnknown_Debug_2038A20->unk8 += 4;
-        gUnknown_Debug_2038A20->unk8 &= 0x1f;
-        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->unk8];
+        gUnknown_Debug_2038A20->random += 4;
+        gUnknown_Debug_2038A20->random &= 0x1f;
+        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->random];
     }
 }
 #else
@@ -3683,7 +3683,7 @@ void debug_80C7D44(u8 taskId)
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
-    sub_809D510(gSprites + gUnknown_Debug_2038A20->unk4);
+    sub_809D510(gSprites + gUnknown_Debug_2038A20->round1Points);
     gTasks[taskId].func = debug_80C7934;
 }
 
@@ -3720,18 +3720,18 @@ void debug_80C7DDC(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->unkC.r < 31)
-                    gUnknown_Debug_2038A20->unkC.r++;
+                if (gUnknown_Debug_2038A20->contestant.r < 31)
+                    gUnknown_Debug_2038A20->contestant.r++;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->unkC.g < 31)
-                    gUnknown_Debug_2038A20->unkC.g++;
+                if (gUnknown_Debug_2038A20->contestant.g < 31)
+                    gUnknown_Debug_2038A20->contestant.g++;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->unkC.b < 31)
-                    gUnknown_Debug_2038A20->unkC.b++;
+                if (gUnknown_Debug_2038A20->contestant.b < 31)
+                    gUnknown_Debug_2038A20->contestant.b++;
                 gTasks[taskId].func = debug_80C802C;
                 break;
         }
@@ -3741,18 +3741,18 @@ void debug_80C7DDC(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->unkC.r > 0)
-                    gUnknown_Debug_2038A20->unkC.r--;
+                if (gUnknown_Debug_2038A20->contestant.r > 0)
+                    gUnknown_Debug_2038A20->contestant.r--;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->unkC.g > 0)
-                    gUnknown_Debug_2038A20->unkC.g--;
+                if (gUnknown_Debug_2038A20->contestant.g > 0)
+                    gUnknown_Debug_2038A20->contestant.g--;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->unkC.b > 0)
-                    gUnknown_Debug_2038A20->unkC.b--;
+                if (gUnknown_Debug_2038A20->contestant.b > 0)
+                    gUnknown_Debug_2038A20->contestant.b--;
                 gTasks[taskId].func = debug_80C802C;
                 break;
         }
@@ -3761,7 +3761,7 @@ void debug_80C7DDC(u8 taskId)
 
 void debug_80C802C(u8 taskId)
 {
-    u16 pal = (gUnknown_Debug_2038A20->unkC.r & 0x001f) + ((gUnknown_Debug_2038A20->unkC.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->unkC.b << 10) & 0x7c00);
+    u16 pal = (gUnknown_Debug_2038A20->contestant.r & 0x001f) + ((gUnknown_Debug_2038A20->contestant.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->contestant.b << 10) & 0x7c00);
     gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferFaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferUnfaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;

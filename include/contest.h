@@ -295,13 +295,13 @@ void CB2_StartContest(void);
 void Contest_CreatePlayerMon(u8);
 void Contest_InitAllPokemon(u8, u8);
 u8 CanMonParticipateInContest(struct Pokemon *party);
-u16 InitContestMonConditionI(u8, u8);
-void InitContestMonConditions(u8);
+u16 CalculateContestantRound1Points(u8, u8);
+void CalculateRound1Points(u8);
 u8 IsSpeciesNotUnown(u16);
-void sub_80AF668(void);
+void CalculateFinalScores(void);
 void SortContestants(u8);
 bool8 Contest_SaveWinner(u8);
-u8 sub_80B2C4C(u8, u8);
+u8 GetContestWinnerSaveIdx(u8, u8);
 void Contest_ResetWinners(void);
 s8 Contest_GetMoveExcitement(u16);
 
@@ -439,12 +439,12 @@ struct UnknownContestStruct8
     u32 unk10;
 };
 
-struct UnknownContestStruct6
+struct ContestFinalStandings
 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
+    s32 totalPoints;
+    s32 round1Points;
+    s32 random;
+    s32 contestant;
 };
 
 // TODO: Please move these to ewram.h once the defines are settled down and figured out completely.
@@ -463,13 +463,13 @@ struct UnknownContestStruct6
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
 extern u32 gContestRngValue;
-extern u8 gUnknown_02038696[4];
+extern u8 gContestantTurnOrder[4];
 extern s16 gContestMonRound1Points[4];
 extern s16 gContestMonTotalPoints[4];
-extern s16 gUnknown_02038680[4];
-extern s16 gUnknown_02038688[4];
+extern s16 gContestMonAppealPointTotals[4];
+extern s16 gContestMonRound2Points[4];
 extern u8 gContestFinalStandings[4];
-extern u8 gUnknown_02038696[4];
+extern u8 gContestantTurnOrder[4];
 extern u8 gContestLinkLeaderIndex;
 extern u16 gSpecialVar_ContestRank;
 extern u16 gSpecialVar_ContestCategory;
