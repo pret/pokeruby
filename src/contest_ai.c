@@ -380,7 +380,7 @@ static u8 sub_8128A7C(u8 var)
     int i;
 
     for(i = 0; i < 4; i++)
-        if(shared192D0.turnOrder[i] == var)
+        if(eContestAppealResults.turnOrder[i] == var)
             break;
 
     return i;
@@ -494,7 +494,7 @@ static void ContestAICmd_unk_0A(void)
 
 static void ContestAICmd_get_user_order(void)
 {
-    eContestAI->scriptResult = shared192D0.turnOrder[eContestAI->unk41];
+    eContestAI->scriptResult = eContestAppealResults.turnOrder[eContestAI->unk41];
     gAIScriptPtr += 1;
 }
 
@@ -1196,7 +1196,7 @@ static void ContestAICmd_get_used_combo_starter(void)
     u16 result = 0;
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    if(sub_80B214C(var))
+    if(IsContestantAllowedToCombo(var))
         result = gContestMoves[sContestantStatus[var].prevMove].comboStarterId ? 1 : 0;
 
     eContestAI->scriptResult = result;
@@ -1277,7 +1277,7 @@ static void ContestAICmd_get_val_812A188(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = sContestantStatus[var].unk15_3;
+    eContestAI->scriptResult = sContestantStatus[var].completedComboFlag;
     gAIScriptPtr += 2;
 }
 

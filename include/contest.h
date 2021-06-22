@@ -307,11 +307,9 @@ s8 Contest_GetMoveExcitement(u16);
 
 // Contest Shared EWRAM
 
-struct Shared18000
+struct ContestTempSave
 {
-    /*0x18000*/ u8 unk18000;
-    /*0x18001*/ u8 filler18001[3];
-    /*0x18004*/ u16 unk18004[16][16];
+    /*0x18004*/ u16 cachedWindowPalettes[16][16];
     /*0x18204*/ u16 unk18204[0x200];
     /*0x18604*/ u16 unk18604[0x200];
     /*0x18A04*/ u8 unk18A04[0x800];
@@ -326,10 +324,10 @@ struct Contest
                 u16 unk1920A_1:1;
                 u16 unk1920A_2:1;
                 u16 unk1920A_3:1;
-                u16 unk1920A_4:1;
-                u16 unk1920A_5:1;
-                u16 unk1920A_6:1;
-                u16 unk1920A_7:1;
+                u16 waitForJudgeSpeechBubble :1;
+                u16 isShowingApplauseMeter :1;
+                u16 applauseMeterIsMoving :1;
+                u16 animatingAudience :1;
     /*0x1920B*/ u16 unk1920B_0:1;
                 u16 unk1920B_1:1;
                 u16 unk1920B_2:1;
@@ -353,13 +351,13 @@ struct Contest
 
 struct ContestantStatus
 {
- /*0x00*/ s16 appeal1;  // move appeal?
- /*0x02*/ s16 appeal2;  // final appeal after end of turn, maybe?
+ /*0x00*/ s16 baseAppeal;  // move appeal?
+ /*0x02*/ s16 appeal;  // final appeal after end of turn, maybe?
  /*0x04*/ s16 unk4;
  /*0x06*/ u16 currMove;
  /*0x08*/ u16 prevMove;
  /*0x0A*/ u8 moveCategory;
- /*0x0B*/ u8 unkB_0:2;
+ /*0x0B*/ u8 ranking :2;
           u8 unkB_2:2;
           u8 moveRepeatCount:3;
           u8 noMoreTurns:1;  // used a one-time move?
@@ -388,12 +386,12 @@ struct ContestantStatus
  /*0x15*/ u8 disappointedRepeat:1;
           u8 unk15_1:1;
           u8 unk15_2:1;
-          u8 unk15_3:1;
+          u8 completedComboFlag :1;
           u8 hasJudgesAttention:1;
           u8 judgesAttentionWasRemoved:1;
-          u8 unk15_6:1;
- /*0x16*/ u8 unk16;
- /*0x17*/ u8 unk17;
+          u8 usedComboMove :1;
+ /*0x16*/ u8 completedCombo;
+ /*0x17*/ u8 comboAppealBonus;
  /*0x18*/ u8 unk18;
  /*0x19*/ u8 nextTurnOrder;  // turn position
  /*0x1A*/ u8 attentionLevel;  // How much the Pokemon "stood out"
@@ -401,21 +399,21 @@ struct ContestantStatus
 };
 
 // possibly the same as UnknownContestStruct3?
-struct UnknownContestStruct4
+struct ContestGfxState
 {
     u8 unk0;  // sprite ID
     u8 unk1;  // sprite ID
     u8 unk2_0:1;
-    u8 unk2_1:1;
+    u8 boxBlinking :1;
     u8 unk2_2:1;
 };
 
-struct UnknownContestStruct5
+struct ContestExcitement
 {
-    s8 bits_0;  // current move excitement?
+    s8 moveExcitement;  // current move excitement?
     u8 excitementFrozen:1;
     u8 excitementFreezer:3;
-    s8 unk2;
+    s8 excitementAppealBonus;
 };
 
 struct UnknownContestStruct7
@@ -448,16 +446,13 @@ struct ContestFinalStandings
 };
 
 // TODO: Please move these to ewram.h once the defines are settled down and figured out completely.
-#define shared15800 (gSharedMem + 0x15800)
 #define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
-#define shared16800 (gSharedMem + 0x16800)
-#define shared18000 (*(struct Shared18000 *)(gSharedMem + 0x18000))
-#define shared18004 ((u16 *)(gSharedMem + 0x18004))
+#define eEnableContestDebugging (gSharedMem[0x18000])
+#define eContestTempSave (*(struct ContestTempSave *)(gSharedMem + 0x18004))
 #define sContest (*(struct Contest *)(gSharedMem + 0x19204))
 #define sContestantStatus ((struct ContestantStatus *)(gSharedMem + 0x19260))
-#define shared192E4 (gSharedMem + 0x192E4)
-#define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
-#define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
+#define eContestExcitement (*(struct ContestExcitement *)(gSharedMem + 0x19328))
+#define eContestGfxState ((struct ContestGfxState *)(gSharedMem + 0x19338))
 #define shared19348 (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
 
 extern u8 gContestPlayerMonIndex;
@@ -479,7 +474,7 @@ void SetContestantEffectStringID(u8 a, u8 b);
 void SetContestantEffectStringID2(u8 a, u8 b);
 void MakeContestantNervous(u8 p);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
-bool8 sub_80B214C(u8 a);
+bool8 IsContestantAllowedToCombo(u8 a);
 void SetStartledString(u8 a, u8 b);
 
 #endif // GUARD_CONTEST_H

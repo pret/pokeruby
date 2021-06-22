@@ -54,7 +54,7 @@ struct WatanabeEwram17000 {
     u8 unk1_0:4;
     u8 unk1_4:1;
     u8 unk1_5:3;
-    u8 unk2;
+    u8 excitementAppealBonus;
     u8 unk3;
     u8 fill4[5];
     u8 unk9;
@@ -75,7 +75,7 @@ struct WatanabeEwram18000 {
 
 struct WatanabeEwram18000_2 {
     u16 totalPoints;
-    u8 unk2;
+    u8 excitementAppealBonus;
     u8 unk3;
     u8 round1Points;
     u8 unk5;
@@ -1362,7 +1362,7 @@ void debug_80C4AC4(u8 taskId)
         PlaySE(SE_SELECT);
         gTrainerBattleOpponent = SECRET_BASE_OPPONENT;
         eWatanabe17000.unk1_4 = 0;
-        eWatanabe17000.unk2 = 0xAC;
+        eWatanabe17000.excitementAppealBonus = 0xAC;
         eWatanabe17000.unk3 = 0xFF;
         eWatanabe17000.unk9 = 0;
         eWatanabe17000.unkA = 0;
@@ -2569,7 +2569,7 @@ void InitSeePokemonGraphics(void)
     CreateTask(debug_80C6B00, 0);
     gUnknown_Debug_2038A20 = &eWatanabe18000_2;
     gUnknown_Debug_2038A20->totalPoints = 0x115;
-    gUnknown_Debug_2038A20->unk2 = 0;
+    gUnknown_Debug_2038A20->excitementAppealBonus = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
     gUnknown_Debug_2038A20->unk5 = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
@@ -2673,9 +2673,9 @@ void debug_80C6CB8(u8 taskId)
     DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
     LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
     GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 1);
-    gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
-    gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
-    gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
+    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.priority = 0;
 
     DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->totalPoints, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[2], gUnknown_Debug_2038A20->totalPoints);
     LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
@@ -2696,7 +2696,7 @@ void debug_80C6CB8(u8 taskId)
     debug_80C3800(gUnknown_Debug_2038A20->totalPoints, 17, 3);
     debug_80C376C(gUnknown_Debug_2038A20->totalPoints, 26, 5);
 
-    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
+    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum;
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 0x20);
 
@@ -3088,8 +3088,8 @@ NAKED void debug_80C6FA8(u8 taskId)
 
 void debug_80C71FC(u8 taskId)
 {
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum));
-    DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum));
+    DestroySprite(gSprites + gUnknown_Debug_2038A20->excitementAppealBonus);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
     sub_809D510(gSprites + gUnknown_Debug_2038A20->round1Points);
@@ -3238,7 +3238,7 @@ void InitSeeTrainers(void)
     CreateTask(debug_80C777C, 0);
     gUnknown_Debug_2038A20 = &eWatanabe18000_2;
     gUnknown_Debug_2038A20->totalPoints = 0;
-    gUnknown_Debug_2038A20->unk2 = 0;
+    gUnknown_Debug_2038A20->excitementAppealBonus = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
     gUnknown_Debug_2038A20->unk5 = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
@@ -3300,13 +3300,13 @@ void debug_80C7934(u8 taskId)
     DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
     LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->totalPoints);
     GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->totalPoints, 1);
-    gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
-    gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
-    gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
+    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.priority = 0;
 
     debug_80C376C(gUnknown_Debug_2038A20->totalPoints, 26, 5);
 
-    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
+    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum;
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 0x20);
 
@@ -3679,8 +3679,8 @@ NAKED void debug_80C7B14(u8 taskId)
 
 void debug_80C7D44(u8 taskId)
 {
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum));
-    DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum));
+    DestroySprite(gSprites + gUnknown_Debug_2038A20->excitementAppealBonus);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
     sub_809D510(gSprites + gUnknown_Debug_2038A20->round1Points);

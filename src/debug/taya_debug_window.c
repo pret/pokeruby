@@ -221,7 +221,7 @@ bool8 TayaDebugMenu_Trend(void)
         *r4++ = CHAR_SPACE;
         r4 = ConvertIntToDecimalStringN(r4, pair->unk0_7, STR_CONV_MODE_RIGHT_ALIGN, 3);
         *r4++ = CHAR_SPACE;
-        ConvertIntToDecimalStringN(r4, pair->unk2, STR_CONV_MODE_RIGHT_ALIGN, 5);
+        ConvertIntToDecimalStringN(r4, pair->excitementAppealBonus, STR_CONV_MODE_RIGHT_ALIGN, 5);
         Menu_PrintText(sp00, 1, 2 * i + 1);
         pair++;
     }

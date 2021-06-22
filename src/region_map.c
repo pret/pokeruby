@@ -1709,7 +1709,7 @@ void debug_sub_8110D84(void)
             debug_sub_8110CCC();
             break;
         case 4:
-            if (sFlyDataPtr->regionMap.unk16 != 0)
+            if (sFlyDataPtr->regionMap.completedCombo != 0)
             {
                 m4aSongNumStart(SE_SELECT);
                 gSharedMem[0xA6E] = 1;  // TODO: what is this?

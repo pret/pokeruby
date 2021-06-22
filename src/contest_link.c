@@ -558,28 +558,28 @@ void sub_80C8C80(u8 taskId)
         case 3:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(&shared192D0, sizeof shared192D0);
+                SendBlockToAllOpponents(&eContestAppealResults, sizeof eContestAppealResults);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 4:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(&shared192D0, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof shared192D0);
+                memcpy(&eContestAppealResults, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof eContestAppealResults);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 6:
             if (IsLinkTaskFinished())
             {
-                SendBlockToAllOpponents(&shared19328, sizeof shared19328);
+                SendBlockToAllOpponents(&eContestExcitement, sizeof eContestExcitement);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 7:
             if (HaveAllPlayersReceivedBlock())
             {
-                memcpy(&shared19328, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof shared19328);
+                memcpy(&eContestExcitement, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof eContestExcitement);
                 gTasks[taskId].data[0]++;
             }
             break;

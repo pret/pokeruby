@@ -234,7 +234,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             gUnknown_03005E98++;
             break;
         case 1:
-            r7 = cry->unk2 << 11;
+            r7 = cry->excitementAppealBonus << 11;
             r6 = (cry->paletteNo << 12) + ((unsigned)(cry->totalPoints << 18) >> 23);
             for (i = 0; i < 7; i++)
             {
