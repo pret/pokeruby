@@ -40,7 +40,6 @@ extern u8 gBattlerSpriteIds[];
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern const struct ContestPokemon gContestOpponents[60];
 extern const u8 gUnknown_083CA308[][2];
 extern const u8 gUnknown_083CA310[][2];
 extern const u8 gUnknown_083CA318[][2];
@@ -79,6 +78,8 @@ extern const u8 gUnknownText_MissedTurn[];
 extern const u8 gUnknownText_LinkStandbyAndWinner[];
 extern void (*const gContestEffectFuncs[])(void);
 extern const s8 gContestExcitementTable[][5];
+
+#include "data/contest_opponents.h"
 
 void TryPutPlayerLast(void)
 {

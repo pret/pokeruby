@@ -6,7 +6,7 @@
 	.section .rodata
 
 @ 83C9408
-	.include "data/contest_opponents.inc"
+	@ .include "data/contest_opponents.inc"
 
 gUnknown_083CA308:: @ 83CA308
 	.byte 19,  0
