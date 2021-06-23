@@ -96,7 +96,7 @@ static void ContestEffect_GreatAppealButNoMoreMoves(void)
 static void ContestEffect_RepetitionNotBoring(void)
 {
     sContestantStatus[eContestAppealResults.contestant].usedRepeatableMove = TRUE;
-    sContestantStatus[eContestAppealResults.contestant].disappointedRepeat = FALSE;
+    sContestantStatus[eContestAppealResults.contestant].repeatedMove = FALSE;
     sContestantStatus[eContestAppealResults.contestant].moveRepeatCount = 0;
 }
 
@@ -727,7 +727,7 @@ static void ContestEffect_NextAppealEarlier(void)
     s8 j;
     u8 turnOrder[4];
 
-    if (sContest.turnNumber != 4)
+    if (sContest.appealNumber != 4)
     {
         for (i = 0; i < 4; i++)
             turnOrder[i] = sContestantStatus[i].nextTurnOrder;
@@ -769,7 +769,7 @@ static void ContestEffect_NextAppealLater(void)
     s8 j;
     u8 turnOrder[4];
 
-    if (sContest.turnNumber != 4)
+    if (sContest.appealNumber != 4)
     {
         for (i = 0; i < 4; i++)
             turnOrder[i] = sContestantStatus[i].nextTurnOrder;
@@ -818,7 +818,7 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
     u8 turnOrder[4];
     u8 unselectedContestants[4];
 
-    if (sContest.turnNumber != 4)
+    if (sContest.appealNumber != 4)
     {
         for (i = 0; i < 4; i++)
         {

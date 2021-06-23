@@ -966,8 +966,8 @@ void SetContestantStatusesForNextRound(void)
         sContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
         sContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
         sContestantStatus[i].conditionMod = 0;
-        sContestantStatus[i].repeatedPrevMove = sContestantStatus[i].disappointedRepeat;
-        sContestantStatus[i].disappointedRepeat = FALSE;
+        sContestantStatus[i].repeatedPrevMove = sContestantStatus[i].repeatedMove;
+        sContestantStatus[i].repeatedMove = FALSE;
         sContestantStatus[i].turnOrderModAction = 0;
         sContestantStatus[i].appealTripleCondition = 0;
         if (sContestantStatus[i].turnSkipped)
@@ -985,8 +985,8 @@ void SetContestantStatusesForNextRound(void)
     for (i = 0; i < 4; i++)
     {
         sContestantStatus[i].prevMove = sContestantStatus[i].currMove;
-        sContest.unk19220[sContest.turnNumber][i] = sContestantStatus[i].prevMove;
-        sContest.unk19248[sContest.turnNumber][i] = Contest_GetMoveExcitement(sContestantStatus[i].currMove);
+        sContest.moveHistory[sContest.appealNumber][i] = sContestantStatus[i].prevMove;
+        sContest.excitementHistory[sContest.appealNumber][i] = Contest_GetMoveExcitement(sContestantStatus[i].currMove);
         sContestantStatus[i].currMove = MOVE_NONE;
     }
     eContestExcitement.excitementFrozen = 0;
@@ -1406,7 +1406,7 @@ void sub_80AFE78(u8 a)
     u8 spriteId;
     s16 r5;
 
-    eContestGfxState[a].unk2_0 = 1;
+    eContestGfxState[a].sliderUpdating = 1;
     spriteId = eContestGfxState[a].sliderHeartSpriteId;
     r5 = sContestantStatus[a].pointTotal / 10 * 2;
     if (r5 > 56)
@@ -1437,7 +1437,7 @@ bool8 sub_80AFF28(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (eContestGfxState[i].unk2_0)
+        if (eContestGfxState[i].sliderUpdating)
             break;
     }
     if (i == 4)
@@ -1450,7 +1450,7 @@ void sub_80AFF60(struct Sprite *sprite)
 {
     if (sprite->pos2.x == sprite->data[1])
     {
-        eContestGfxState[sprite->data[0]].unk2_0 = 0;
+        eContestGfxState[sprite->data[0]].sliderUpdating = 0;
         sprite->callback = SpriteCallbackDummy;
     }
     else
@@ -1491,12 +1491,12 @@ void sub_80B0034(void)
     for (i = 0; i < 4; i++)
     {
         LoadCompressedObjectPic(&gUnknown_083CA3C4[i]);
-        eContestGfxState[i].unk1 = CreateSprite(
+        eContestGfxState[i].nextTurnSpriteId = CreateSprite(
             &gSpriteTemplate_83CA3F4[i],
             204, gUnknown_083CA33C[gContestantTurnOrder[i]],
             0);
-        SetSubspriteTables(&gSprites[eContestGfxState[i].unk1], gSubspriteTables_83CA464);
-        gSprites[eContestGfxState[i].unk1].invisible = TRUE;
+        SetSubspriteTables(&gSprites[eContestGfxState[i].nextTurnSpriteId], gSubspriteTables_83CA464);
+        gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = TRUE;
     }
 }
 
@@ -1606,15 +1606,15 @@ void sub_80B0324(void)
     u8 i;
     u8 taskId = CreateTask(sub_80B0458, 30);
 
-    sContest.unk19211 = taskId;
+    sContest.judgeAttentionTaskId = taskId;
     for (i = 0; i < 4; i++)
         gTasks[taskId].data[i * 4] = 0xFF;
 }
 
 void sub_80B0368(u8 a)
 {
-    gTasks[sContest.unk19211].data[a * 4 + 0] = 0;
-    gTasks[sContest.unk19211].data[a * 4 + 1] = 0;
+    gTasks[sContest.judgeAttentionTaskId].data[a * 4 + 0] = 0;
+    gTasks[sContest.judgeAttentionTaskId].data[a * 4 + 1] = 0;
 }
 
 void sub_80B03A8(u8 a)
@@ -1628,11 +1628,11 @@ void sub_80B03D8(u8 taskId)
 {
     u8 r4 = gTasks[taskId].data[0];
 
-    if (gTasks[sContest.unk19211].data[r4 * 4 + 0] == 0
-        || gTasks[sContest.unk19211].data[r4 * 4 + 0] == 0xFF)
+    if (gTasks[sContest.judgeAttentionTaskId].data[r4 * 4 + 0] == 0
+        || gTasks[sContest.judgeAttentionTaskId].data[r4 * 4 + 0] == 0xFF)
     {
-        gTasks[sContest.unk19211].data[r4 * 4 + 0] = 0xFF;
-        gTasks[sContest.unk19211].data[r4 * 4 + 1] = 0;
+        gTasks[sContest.judgeAttentionTaskId].data[r4 * 4 + 0] = 0xFF;
+        gTasks[sContest.judgeAttentionTaskId].data[r4 * 4 + 1] = 0;
         BlendPalette((sContest.prevTurnOrder[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
@@ -1670,15 +1670,15 @@ void sub_80B0518(void)
 {
     u8 i;
 
-    sContest.unk19212 = CreateTask(sub_80B05FC, 30);
+    sContest.blendTaskId = CreateTask(sub_80B05FC, 30);
     for (i = 0; i < 4; i++)
         sub_80B0548(i);
 }
 
 void sub_80B0548(u8 a)
 {
-    gTasks[sContest.unk19212].data[a * 4 + 0] = 0xFF;
-    gTasks[sContest.unk19212].data[a * 4 + 1] = 0;
+    gTasks[sContest.blendTaskId].data[a * 4 + 0] = 0xFF;
+    gTasks[sContest.blendTaskId].data[a * 4 + 1] = 0;
 }
 
 void UpdateBlendTaskContestantsData(void)
@@ -2553,7 +2553,7 @@ void CalculateAppealMoveImpact(u8 contestant)
         sContestantStatus[contestant].moveCategory = gContestMoves[sContestantStatus[contestant].currMove].contestCategory;
         if (sContestantStatus[contestant].currMove == sContestantStatus[contestant].prevMove && sContestantStatus[contestant].currMove != MOVE_NONE)
         {
-            sContestantStatus[contestant].disappointedRepeat = TRUE;
+            sContestantStatus[contestant].repeatedMove = TRUE;
             sContestantStatus[contestant].moveRepeatCount++;
         }
         else
@@ -2606,8 +2606,8 @@ void CalculateAppealMoveImpact(u8 contestant)
                 }
             }
         }
-        if (sContestantStatus[contestant].disappointedRepeat)
-            sContestantStatus[contestant].unk18 = (sContestantStatus[contestant].moveRepeatCount + 1) * 10;
+        if (sContestantStatus[contestant].repeatedMove)
+            sContestantStatus[contestant].repeatJam = (sContestantStatus[contestant].moveRepeatCount + 1) * 10;
         if (sContestantStatus[contestant].nervous)
         {
             sContestantStatus[contestant].hasJudgesAttention = 0;
@@ -2639,7 +2639,7 @@ void CalculateAppealMoveImpact(u8 contestant)
                 rnd--;
             }
         }
-        sContestantStatus[contestant].unk1B = i;
+        sContestantStatus[contestant].contestantAnimTarget = i;
     }
 }
 
@@ -2771,7 +2771,7 @@ void SpriteCB_JudgeSpeechBubble(struct Sprite *sprite)
 
 void DoJudgeSpeechBubble(u8 a)
 {
-    u8 spriteId = sContest.unk19216;
+    u8 spriteId = sContest.judgeSpeechBubbleSpriteId;
 
     switch (a)
     {
@@ -3109,14 +3109,14 @@ void ShowHideNextTurnGfx(bool8 a)
         {
             CpuCopy32(
                 GetTurnOrderNumberGfx(i),
-                (void *)(VRAM + 0x10000 + (gSprites[eContestGfxState[i].unk1].oam.tileNum + 5) * 32),
+                (void *)(VRAM + 0x10000 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 5) * 32),
                 64);
-            gSprites[eContestGfxState[i].unk1].pos1.y = gUnknown_083CA33C[gContestantTurnOrder[i]];
-            gSprites[eContestGfxState[i].unk1].invisible = FALSE;
+            gSprites[eContestGfxState[i].nextTurnSpriteId].pos1.y = gUnknown_083CA33C[gContestantTurnOrder[i]];
+            gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = FALSE;
         }
         else
         {
-            gSprites[eContestGfxState[i].unk1].invisible = TRUE;
+            gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = TRUE;
         }
     }
 }
@@ -3151,7 +3151,7 @@ void DrawUnnervedSymbols(void)
 
 bool8 IsContestantAllowedToCombo(u8 contestant)
 {
-    if (sContestantStatus[contestant].disappointedRepeat || sContestantStatus[contestant].nervous)
+    if (sContestantStatus[contestant].repeatedMove || sContestantStatus[contestant].nervous)
         return FALSE;
     else
         return TRUE;
@@ -3178,7 +3178,7 @@ void SetBgForCurtainDrop(void)
     for (i = 0; i < 4; i++)
     {
         gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.priority = 1;
-        gSprites[eContestGfxState[i].unk1].oam.priority = 1;
+        gSprites[eContestGfxState[i].nextTurnSpriteId].oam.priority = 1;
     }
 
     ((vBgCnt *)&REG_BG2CNT)->priority = 1;
@@ -3204,7 +3204,7 @@ void UpdateContestantBoxOrder(void)
     for (i = 0; i < 4; i++)
     {
         gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.priority = 0;
-        gSprites[eContestGfxState[i].unk1].oam.priority = 0;
+        gSprites[eContestGfxState[i].nextTurnSpriteId].oam.priority = 0;
     }
 }
 
@@ -3404,10 +3404,10 @@ void SetMoveSpecificAnimData(u8 contestant)
         break;
     case MOVE_TRANSFORM:
     case MOVE_ROLE_PLAY:
-        r5_2 = sContestantStatus[contestant].unk1B;
-        gContestResources__moveAnim.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
+        r5_2 = sContestantStatus[contestant].contestantAnimTarget;
+        gContestResources__moveAnim.targetSpecies = SanitizeSpecies(gContestMons[r5_2].species);
         gContestResources__moveAnim.unk10 = gContestMons[r5_2].personality;
-        gContestResources__moveAnim.unk4_0 = 1;
+        gContestResources__moveAnim.hasTargetAnim = 1;
         break;
     case MOVE_RETURN:
         gAnimFriendship = 0xFF;
@@ -3538,15 +3538,15 @@ bool8 Contest_SaveWinner(u8 rank)
     }
     else
     {
-        gCurContestWinner.personality = gContestMons[i].personality;
-        gCurContestWinner.otId = gContestMons[i].otId;
-        gCurContestWinner.species = gContestMons[i].species;
-        StringCopy(gCurContestWinner.nickname, gContestMons[i].nickname);
+        eCurContestWinner.personality = gContestMons[i].personality;
+        eCurContestWinner.otId = gContestMons[i].otId;
+        eCurContestWinner.species = gContestMons[i].species;
+        StringCopy(eCurContestWinner.nickname, gContestMons[i].nickname);
         if (gIsLinkContest & 1)
-            StringCopy(gCurContestWinner.trainerName, gLinkPlayers[i].name);
+            StringCopy(eCurContestWinner.trainerName, gLinkPlayers[i].name);
         else
-            StringCopy(gCurContestWinner.trainerName, gContestMons[i].trainerName);
-        gCurContestWinner.contestCategory = captionId;
+            StringCopy(eCurContestWinner.trainerName, gContestMons[i].trainerName);
+        eCurContestWinner.contestCategory = captionId;
     }
     return TRUE;
 }

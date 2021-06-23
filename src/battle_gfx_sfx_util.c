@@ -654,7 +654,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         if (IsContest())
         {
             r10 = 0;
-            species = gContestResources__moveAnim.unk2;
+            species = gContestResources__moveAnim.targetSpecies;
             personalityValue = gContestResources__moveAnim.personality;
             otId = gContestResources__moveAnim.otId;
             HandleLoadSpecialPokePic(

@@ -172,8 +172,8 @@ u8 GetBattlerSpriteCoord(u8 slot, u8 a2)
     default:
         if (IsContest())
         {
-            if (gContestResources__moveAnim.unk4_0)
-                species = gContestResources__moveAnim.unk2;
+            if (gContestResources__moveAnim.hasTargetAnim)
+                species = gContestResources__moveAnim.targetSpecies;
             else
                 species = gContestResources__moveAnim.species;
         }
@@ -219,7 +219,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
         {
             if (IsContest())
             {
-                if (gContestResources__moveAnim.unk4_0)
+                if (gContestResources__moveAnim.hasTargetAnim)
                     personality = gContestResources__moveAnim.unk10;
                 else
                     personality = gContestResources__moveAnim.personality;
@@ -335,8 +335,8 @@ u8 sub_8077EE4(u8 slot, u8 a2)
     {
         if (IsContest())
         {
-            if (gContestResources__moveAnim.unk4_0)
-                species = gContestResources__moveAnim.unk2;
+            if (gContestResources__moveAnim.hasTargetAnim)
+                species = gContestResources__moveAnim.targetSpecies;
             else
                 species = gContestResources__moveAnim.species;
         }
@@ -1997,9 +1997,9 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
 
     if (IsContest())
     {
-        if (gContestResources__moveAnim.unk4_0)
+        if (gContestResources__moveAnim.hasTargetAnim)
         {
-            species = gContestResources__moveAnim.unk2;
+            species = gContestResources__moveAnim.targetSpecies;
             personality = gContestResources__moveAnim.unk10;
         }
         else

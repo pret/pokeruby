@@ -90,10 +90,20 @@ extern u8 gSharedMem[];
 
 #define ewram16000_2                    (&gSharedMem[0x16000])
 
+// Contest
 #define eCurContestWinnerSaveIdx        (gSharedMem[0x15DDE])
 #define eCurContestWinnerIsForArtist    (gSharedMem[0x15DDF])
 #define eCurContestWinner               ((*(struct ContestWinner*)(gSharedMem + 0x15DE0)))
 #define eContestPaintingBuffers         ((*(struct ContestPaintingBuffers*)(gSharedMem + 0x15E00)))
+#define eEnableContestDebugging         (gSharedMem[0x18000])
+#define eContestTempSave                (*(struct ContestTempSave *)(gSharedMem + 0x18004))
+#define sContest                        (*(struct Contest *)(gSharedMem + 0x19204))
+#define sContestantStatus               ((struct ContestantStatus *)(gSharedMem + 0x19260))
+#define eContestAppealResults           (*(struct ContestAppealMoveResults *)(gSharedMem + 0x192D0))
+#define eContestAI                      ((struct ContestAIInfo *)(gSharedMem + 0x192E4))
+#define eContestExcitement              (*(struct ContestExcitement *)(gSharedMem + 0x19328))
+#define eContestGfxState                ((struct ContestGfxState *)(gSharedMem + 0x19338))
+#define gContestResources__moveAnim     (*(struct ContestMoveAnim *)(gSharedMem + 0x19348))
 
 // Battle Struct
 // For matching purposes, the struct is placed at 0x02000000 and
@@ -199,8 +209,6 @@ extern u8 gSharedMem[];
 #define eCableCar2                      ((struct CableCarEwramStruct2 *)(gSharedMem + 0x19000))
 #define ePokedexView3                   (struct PokedexView *)(gSharedMem + 0x19000)
 #define eRoulette                       ((struct Roulette *)(gSharedMem + 0x19000))
-#define eContestAppealResults                     (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
-#define eContestAI                      ((struct ContestAIInfo *)(gSharedMem + 0x192E4))
 #define EWRAM_19348                     ((u16 *)(gSharedMem + 0x19348))
 #define eWRAM_19348Struct               ((struct EWRAM_19348_Struct *)(gSharedMem + 0x19348))
 #define ewram19800                      (&gSharedMem[0x19800])
