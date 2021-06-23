@@ -61,7 +61,7 @@ extern const u8 ContestString_JudgeExpectantly2[];
 extern const u8 ContestString_WentOverWell[];
 extern const u8 ContestString_WentOverVeryWell[];
 extern const u8 ContestString_AppealComboExcellently[];
-extern const u8 gText_MonWasTooNervousToMove[];
+extern const u8 ContestString_TooNervous[];
 extern const u8 gText_AllOutOfAppealTime[];
 extern const u8 *const gContestStandOutStrings[];
 extern const u8 ContestString_DissapointedRepeat[];
@@ -1508,7 +1508,7 @@ void Task_DoAppeals(u8 taskId)
         StartStopFlashJudgeAttentionEye(contestant);
         StringCopy(gStringVar1, gContestMons[contestant].nickname);
         StringCopy(gStringVar2, gMoveNames[sContestantStatus[contestant].currMove]);
-        StringExpandPlaceholders(gStringVar4, gText_MonWasTooNervousToMove);
+        StringExpandPlaceholders(gStringVar4, ContestString_TooNervous);
         Contest_StartTextPrinter(&gMenuWindow, gStringVar4, 776, 1, 15);
         gTasks[taskId].data[0] = 34;
         return;

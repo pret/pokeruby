@@ -38,28 +38,253 @@ extern u8 gDisplayedStringBattle[];
 extern u8 gBattlerTarget;
 extern u8 gBattlerSpriteIds[];
 extern struct Window gWindowTemplate_Contest_MoveDescription;
-
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern const u8 gUnknown_083CA308[][2];
-extern const u8 gUnknown_083CA310[][2];
-extern const u8 gUnknown_083CA318[][2];
-extern const u8 gUnknown_083CA330[][2];
-extern const u8 sSliderHeartYPositions[];
-extern const u8 gUnknown_083CA33C[];
-extern const struct SpriteSheet sSpriteSheet_SliderHeart;
-extern const struct SpriteTemplate sSpriteTemplate_SliderHeart;
-extern const struct CompressedSpriteSheet gUnknown_083CA3C4[];
-extern const struct SpritePalette gUnknown_083CA3E4;
-extern const struct SpriteTemplate gSpriteTemplate_83CA3F4[];
-extern const struct SubspriteTable gSubspriteTables_83CA464[];
-extern const struct CompressedSpriteSheet gUnknown_083CA46C;
-extern const struct SpritePalette gUnknown_083CA474;
-extern const struct SpriteTemplate gSpriteTemplate_83CA484;
-extern const struct SpriteTemplate sSpriteTemplate_Judge;
-extern const struct CompressedSpriteSheet sSpriteSheet_Judge;
-extern const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols;
-extern const struct CompressedSpritePalette sSpritePalette_JudgeSymbols;
-extern const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble;
+
+#include "data/contest_opponents.h"
+
+const u8 gUnknown_083CA308[][2] = {
+    {19,  0},
+    {19,  5},
+    {19, 10},
+    {19, 15},
+};
+
+const u8 gUnknown_083CA310[][2] = {
+    {25,  0},
+    {25,  5},
+    {25, 10},
+    {25, 15},
+};
+
+const u8 gUnknown_083CA318[][2] = {
+    {  20,   2 },
+    {  20,   7 },
+    {  20,  12 },
+    {  20,  17 },
+    {  24,   2 },
+    {  24,   7 },
+    {  24,  12 },
+    {  24,  17 },
+    { 220,  24 },
+    { 220,  64 },
+    { 220, 104 },
+    { 220, 144 },
+};
+
+const u8 gUnknown_083CA330[][2] = {
+    { 224,  24 },
+    { 224,  64 },
+    { 224, 104 },
+    { 224, 144 },
+};
+
+const u8 sSliderHeartYPositions[] = { 36, 76, 116, 156 };
+const u8 gUnknown_083CA33C[] = { 36, 76, 116, 156 };
+
+const u8 gUnknown_083CA340[][4] = {
+    { 0, 31, 9, 39 },
+    { 0, 33, 9, 39 },
+    { 0, 35, 9, 39 },
+    { 0, 37, 9, 39 },
+};
+
+const struct SpriteSheet sSpriteSheet_SliderHeart = {
+    .data = gTiles_8D1975C,
+    .size = 0x20,
+    .tag = 20004
+};
+
+const struct OamData gOamData_83CA358 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+// Idle
+const union AffineAnimCmd gSpriteAffineAnim_83CA360[] = {
+    AFFINEANIMCMD_FRAME(Q_8_8(1.0), Q_8_8(1.0), 0, 0),
+    AFFINEANIMCMD_END
+};
+
+// Shrink
+const union AffineAnimCmd gSpriteAffineAnim_83CA370[] = {
+    AFFINEANIMCMD_FRAME(256, 256,   0,  0),
+    AFFINEANIMCMD_FRAME(-10, -10, -20, 20),
+    AFFINEANIMCMD_END
+};
+
+// Grow
+const union AffineAnimCmd gSpriteAffineAnim_83CA388[] = {
+    AFFINEANIMCMD_FRAME(56, 56,  0,  0),
+    AFFINEANIMCMD_FRAME(10, 10, 20, 20),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83CA3A0[] = {
+    gSpriteAffineAnim_83CA360,
+    gSpriteAffineAnim_83CA370,
+    gSpriteAffineAnim_83CA388,
+};
+
+const struct SpriteTemplate sSpriteTemplate_SliderHeart = {
+    .tileTag = 20004,
+    .paletteTag = 44000,
+    .oam = &gOamData_83CA358,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83CA3A0,
+    .callback = SpriteCallbackDummy
+};
+
+// One graphic for each contestant.
+// Yes, it's loaded four times.
+const struct CompressedSpriteSheet gUnknown_083CA3C4[] = {
+    { .data = gContestNextTurnGfx, .size = 0x100, .tag = 20006 },
+    { .data = gContestNextTurnGfx, .size = 0x100, .tag = 20007 },
+    { .data = gContestNextTurnGfx, .size = 0x100, .tag = 20008 },
+    { .data = gContestNextTurnGfx, .size = 0x100, .tag = 20009 },
+};
+
+const struct SpritePalette gUnknown_083CA3E4 = {
+    .data = gContestPal, .tag = 20006
+};
+
+const struct OamData gOamData_83CA3EC = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CA3F4[] = {
+    { .tileTag = 20006, .paletteTag = 20006, .oam = &gOamData_83CA3EC, .anims = gDummySpriteAnimTable, .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCallbackDummy },
+    { .tileTag = 20007, .paletteTag = 20006, .oam = &gOamData_83CA3EC, .anims = gDummySpriteAnimTable, .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCallbackDummy },
+    { .tileTag = 20008, .paletteTag = 20006, .oam = &gOamData_83CA3EC, .anims = gDummySpriteAnimTable, .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCallbackDummy },
+    { .tileTag = 20009, .paletteTag = 20006, .oam = &gOamData_83CA3EC, .anims = gDummySpriteAnimTable, .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCallbackDummy },
+};
+
+const struct Subsprite gSubspriteTable_83CA454[] = {
+    { .x = -26, .y = -4, .shape = ST_OAM_H_RECTANGLE, .size = 1, .tileOffset = 0, .priority = 0 },
+    { .x =   6, .y = -4, .shape = ST_OAM_H_RECTANGLE, .size = 1, .tileOffset = 4, .priority = 0 },
+};
+
+const struct SubspriteTable gSubspriteTables_83CA464[] = {
+    { 2, gSubspriteTable_83CA454 },
+};
+
+const struct CompressedSpriteSheet gUnknown_083CA46C = {
+    .data = gContestApplauseGfx,
+    .size = 0x400,
+    .tag = 44002
+};
+
+const struct SpritePalette gUnknown_083CA474 = {
+    .data = gContestPal,
+    .tag = 44002
+};
+
+const struct OamData gOamData_83CA47C = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CA484 = {
+    .tileTag = 44002,
+    .paletteTag = 44002,
+    .oam = &gOamData_83CA47C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gOamData_83CA49C = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 2
+};
+
+const struct SpriteTemplate sSpriteTemplate_Judge = {
+    .tileTag = 20005,
+    .paletteTag = 20005,
+    .oam = &gOamData_83CA49C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct CompressedSpriteSheet sSpriteSheet_Judge = {
+    .data = gContestJudgeGfx,
+    .size = 0x800,
+    .tag = 20005
+};
+
+const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols = {
+    .data = gContestJudgeSymbolsGfx,
+    .size = 0x380,
+    .tag = 44000
+};
+
+const struct CompressedSpritePalette sSpritePalette_JudgeSymbols = {
+    .data = gContest3Pal,
+    .tag = 44000
+};
+
+const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble = {
+    .tileTag = 44000,
+    .paletteTag = 44000,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+#ifdef ENGLISH
+#include "data/text/contest_en.h"
+#else
+#include "data/text/contest_de.h"
+#endif //ENGLISH
+
+const u8 ALIGNED(2) _unk_83CC3BE[] = __("ピラ");
+
 extern const struct CompressedSpriteSheet gUnknown_083CC3AC;
 extern const struct CompressedSpritePalette gUnknown_083CC3B4[];
 extern const struct SpriteTemplate gSpriteTemplate_83CC454[];
@@ -78,8 +303,6 @@ extern const u8 gUnknownText_MissedTurn[];
 extern const u8 gUnknownText_LinkStandbyAndWinner[];
 extern void (*const gContestEffectFuncs[])(void);
 extern const s8 gContestExcitementTable[][5];
-
-#include "data/contest_opponents.h"
 
 void TryPutPlayerLast(void)
 {

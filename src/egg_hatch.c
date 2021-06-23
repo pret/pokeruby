@@ -716,9 +716,6 @@ static void SpriteCB_EggShard(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-// Converts a number to Q8.8 fixed-point format
-#define Q_8_8(n) ((s16)((n) * 256))
-
 static const s16 sEggShardVelocities[][2] =
 {
     {Q_8_8(-1.5),       Q_8_8(-3.75)},
