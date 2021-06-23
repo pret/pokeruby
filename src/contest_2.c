@@ -604,7 +604,7 @@ void PrintContestMoveDescription(u16 a)
     Text_InitWindowAndPrintText(&gWindowTemplate_Contest_MoveDescription, gText_Slash, 866, 16, 31);
 }
 
-void sub_80AED58(void)
+void Contest_ClearMoveDescriptionBox(void)
 {
     Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 0, 11, 35, 28, 40);
 }
@@ -1423,7 +1423,7 @@ void sub_80AFE78(u8 a)
     gSprites[spriteId].callback = sub_80AFF60;
 }
 
-void sub_80AFF10(void)
+void UpdateHeartSliders(void)
 {
     s32 i;
 
@@ -1431,7 +1431,7 @@ void sub_80AFF10(void)
         sub_80AFE78(i);
 }
 
-bool8 sub_80AFF28(void)
+bool8 SlidersDoneUpdating(void)
 {
     s32 i;
 
@@ -1467,7 +1467,7 @@ void UpdateSliderHeartSpriteYPositions(void)
         gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 }
 
-void sub_80AFFE0(bool8 a)
+void SetBottomSliderHeartsInvisibility(bool8 a)
 {
     s32 i;
 
@@ -1483,7 +1483,7 @@ void sub_80AFFE0(bool8 a)
     }
 }
 
-void sub_80B0034(void)
+void CreateNextTurnSprites(void)
 {
     s32 i;
 
@@ -1601,7 +1601,7 @@ void sub_80B02F4(struct Sprite *sprite)
     }
 }
 
-void sub_80B0324(void)
+void CreateJudgeAttentionEyeTask(void)
 {
     u8 i;
     u8 taskId = CreateTask(sub_80B0458, 30);
@@ -1666,19 +1666,19 @@ void sub_80B0458(u8 taskId)
     }
 }
 
-void sub_80B0518(void)
+void CreateUnusedBlendTask(void)
 {
     u8 i;
 
-    sContest.blendTaskId = CreateTask(sub_80B05FC, 30);
+    sContest.blendTaskId = CreateTask(Task_UnusedBlend, 30);
     for (i = 0; i < 4; i++)
-        sub_80B0548(i);
+        InitUnusedBlendTaskData(i);
 }
 
-void sub_80B0548(u8 a)
+void InitUnusedBlendTaskData(u8 contestant)
 {
-    gTasks[sContest.blendTaskId].data[a * 4 + 0] = 0xFF;
-    gTasks[sContest.blendTaskId].data[a * 4 + 1] = 0;
+    gTasks[sContest.blendTaskId].data[contestant * 4 + 0] = 0xFF;
+    gTasks[sContest.blendTaskId].data[contestant * 4 + 1] = 0;
 }
 
 void UpdateBlendTaskContestantsData(void)
@@ -1686,25 +1686,25 @@ void UpdateBlendTaskContestantsData(void)
     u8 i;
 
     for (i = 0; i < 4; i++)
-        sub_80B05A4(i);
+        UpdateBlendTaskContestantData(i);
 }
 
-void sub_80B05A4(u8 a)
+void UpdateBlendTaskContestantData(u8 contestant)
 {
-    sub_80B0548(a);
+    InitUnusedBlendTaskData(contestant);
 
     // 2-byte DMA copy? Why?
 
     DmaCopy16Defvars(
         3,
-        &gPlttBufferUnfaded[16 * (5 + a) + 10],
-        &gPlttBufferFaded[16 * (5 + a) + 10],
+        &gPlttBufferUnfaded[16 * (5 + contestant) + 10],
+        &gPlttBufferFaded[16 * (5 + contestant) + 10],
         2);
 
     DmaCopy16Defvars(
         3,
-        &gPlttBufferUnfaded[16 * (5 + a) + 12 + a],
-        &gPlttBufferFaded[16 * (5 + a) + 12 + a],
+        &gPlttBufferUnfaded[16 * (5 + contestant) + 12 + contestant],
+        &gPlttBufferFaded[16 * (5 + contestant) + 12 + contestant],
         2);
 }
 
@@ -1712,7 +1712,7 @@ void nullsub_19(int unused)
 {
 }
 
-void sub_80B05FC(u8 taskId)
+void Task_UnusedBlend(u8 taskId)
 {
     u8 i;
 
@@ -1743,10 +1743,10 @@ void sub_80B05FC(u8 taskId)
 }
 
 // This task is never used
-u8 CreateUnusedBlendTask(u8 *a)
+u8 CreateUnusedBrokenBlendTask(u8 *a)
 {
     u8 i;
-    u8 taskId = CreateTask(Task_UnusedBlend, 10);
+    u8 taskId = CreateTask(Task_UnusedBrokenBlend, 10);
 
     for (i = 0; i < 4; i++)
     {
@@ -1883,7 +1883,7 @@ void Task_UnusedBlend(u8 taskId)
 }
 #else
 NAKED
-void Task_UnusedBlend(u8 taskId)
+void Task_UnusedBrokenBlend(u8 taskId)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -2683,7 +2683,7 @@ void PrintAppealMoveResultText(u8 contestant, u8 stringId)
         StringCopy(gStringVar3, gText_Contest_Fear);
     StringExpandPlaceholders(gStringVar4, gUnknown_083CC188[stringId]);
     ContestClearGeneralTextWindow();
-    Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+    Contest_StartTextPrinter(&gMenuWindow, gStringVar4, 776, 1, 15);
 }
 
 void MakeContestantNervous(u8 p)
@@ -3005,7 +3005,7 @@ void Task_AnimateAudience(u8 taskId)
         }
         else
         {
-            DmaCopy32Defvars(3, ewram15800, (void *)(VRAM + 0x2000), 0x1000);
+            DmaCopy32Defvars(3, eUnzippedContestAudience_Gfx, (void *)(VRAM + 0x2000), 0x1000);
             gTasks[taskId].data[12]++;
         }
 

@@ -2019,7 +2019,7 @@ void Text_SetWindowText(struct Window *win, const u8 *text)
     win->delayCounter = 0;
 }
 
-void Text_InitWindow8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+void Contest_StartTextPrinter(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     gMain.watchedKeysMask = A_BUTTON | B_BUTTON;
     gMain.watchedKeysPressed = 0;
@@ -2546,7 +2546,7 @@ u8 Text_UpdateWindowAutoscroll(struct Window *win)
     return retVal;
 }
 
-u8 Text_UpdateWindowInContest(struct Window *win)
+u8 Contest_RunTextPrinter(struct Window *win)
 {
     u8 retVal;
 

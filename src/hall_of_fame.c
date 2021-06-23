@@ -204,7 +204,7 @@ static const struct SpriteFrameImage sSpriteImageTable_840B65C[] =
     {ewram14000, 0x800},
     {ewram14800, 0x800},
     {ewram15000, 0x800},
-    {ewram15800, 0x800}
+    { eUnzippedContestAudience_Gfx, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B67C[] =

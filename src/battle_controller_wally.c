@@ -1239,7 +1239,8 @@ void WallyHandlePrintString(void)
     if (*ptr == 2)
         DestroyMenuCursor();
     BufferStringBattle(*ptr);
-    Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x90, 2, 15);
+    Contest_StartTextPrinter(
+        &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x90, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_8137454;
 }
 

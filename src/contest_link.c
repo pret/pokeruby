@@ -395,7 +395,7 @@ void Task_LinkContest_CommunicateCategory(u8 taskId)
     }
 }
 
-void sub_80C89DC(u8 taskId)
+void Task_LinkContest_CommunicateMonIdxs(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -449,7 +449,7 @@ void sub_80C8A38(u8 taskId)
     }
 }
 
-void sub_80C8AD0(u8 taskId)
+void Task_LinkContest_CommunicateFinalStandings(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {

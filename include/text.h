@@ -255,7 +255,7 @@ void Text_InitWindowWithTemplate(struct Window *win, const struct WindowTemplate
 void Text_InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 void Text_InitWindow8002E4C(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6);
 void Text_SetWindowText(struct Window *win, const u8 *text);
-void Text_InitWindow8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
+void Contest_StartTextPrinter(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 u8 Text_PrintWindow8002F44(struct Window *win);
 u8 Text_PrintWindowSimple(struct Window *win);
 u8 Text_InitWindowAndPrintText(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
@@ -267,7 +267,7 @@ u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType);
 u8 Text_UpdateWindow(struct Window *win);
 u8 Text_UpdateWindowInBattle(struct Window *win);
 u8 Text_UpdateWindowAutoscroll(struct Window *win);
-u8 Text_UpdateWindowInContest(struct Window *win);
+u8 Contest_RunTextPrinter(struct Window *win);
 u32 Text_UpdateWindowOverrideLineLength(struct Window *win, u8 lineLength);
 void Text_ClearWindow(struct Window *win);
 u16 Text_GetWindowTilemapEntry(struct Window *win, u8 x, u8 y);

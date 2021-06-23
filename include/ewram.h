@@ -86,11 +86,11 @@ extern u8 gSharedMem[];
 #define EWRAM_15000                     ((u8 *)(gSharedMem + 0x15000))
 #define ewram15000                      (&gSharedMem[0x15000])
 #define ewram15000arr(i, data)          (gSharedMem[0x15000 + data + i])
-#define ewram15800                      (&gSharedMem[0x15800])
 
 #define ewram16000_2                    (&gSharedMem[0x16000])
 
 // Contest
+#define eUnzippedContestAudience_Gfx    (&gSharedMem[0x15800]) // overlaps other contest vars
 #define eCurContestWinnerSaveIdx        (gSharedMem[0x15DDE])
 #define eCurContestWinnerIsForArtist    (gSharedMem[0x15DDF])
 #define eCurContestWinner               ((*(struct ContestWinner*)(gSharedMem + 0x15DE0)))

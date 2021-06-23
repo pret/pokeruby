@@ -764,7 +764,8 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
 
 static void EggHatchPrintMessage1(u8* src)
 {
-    Text_InitWindow8002EB0(&gEggHatchData->window, src, gEggHatchData->tileDataStartOffset, 3, 15);
+    Contest_StartTextPrinter(
+        &gEggHatchData->window, src, gEggHatchData->tileDataStartOffset, 3, 15);
 }
 
 static void EggHatchPrintMessage2(u8* src)

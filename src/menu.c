@@ -204,12 +204,12 @@ void Menu_DisplayDialogueFrame(void)
 
 void MenuPrintMessage(const u8 *str, u8 left, u8 top)
 {
-    Text_InitWindow8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
+    Contest_StartTextPrinter(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
 void MenuPrintMessageDefaultCoords(const u8 *str)
 {
-    Text_InitWindow8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
+    Contest_StartTextPrinter(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }
 
 void Menu_SetText(const u8 *str)

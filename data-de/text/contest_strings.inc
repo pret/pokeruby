@@ -268,18 +268,18 @@ gText_Contest_ButItCantParticipate:: @ 83CAFAE
 	.string "Ausdruck {NAME_END}! Aber es\n"
 	.string "kann nicht teilnehmen!$"
 
-gUnknown_083CAFD7:: @ 83CAFD7
+gText_MonAppealedWithMove:: @ 83CAFD7
 	.string "{STR_VAR_1} führt\n"
 	.string "{STR_VAR_2} vor!$"
 
 	.string "Die anderen POKéMON\n"
 	.string "zeigten ihre Attacken!$"
 
-gUnknown_083CB00D:: @ 83CB00D
+gText_MonWasWatchingOthers:: @ 83CB00D
 	.string "{STR_VAR_1} beobachtet\n"
 	.string "die anderen.{PAUSE 60}$"
 
-gUnknown_083CB02C:: @ 83CB02C
+gText_AllOutOfAppealTime:: @ 83CB02C
 	.string "Soweit zur\n"
 	.string "Ausdruckskraft!{PAUSE 60}$"
 
@@ -645,7 +645,7 @@ ContestString_TrippedOver:
 	.string "{STR_VAR_1} ist so irri-\n"
 	.string "tiert, dass es stolpert.{PAUSE 60}$"
 
-gUnknown_083CBF60:: @ 83CBF60
+gText_MonWasTooNervousToMove:: @ 83CBF60
 ContestString_TooNervous:
 	.string "{STR_VAR_1} ist zu nervös,\n"
 	.string "um etwas vorzuführen.{PAUSE 60}$"
@@ -828,7 +828,7 @@ ContestString_UnknownMoveType:
 	.string "???$"
 
 	.align 2
-gUnknown_083CC330:: @ 83CC330
+sInvalidContestMoveNames:: @ 83CC330
 	.4byte ContestString_CoolMove
 	.4byte ContestString_BeautyMove
 	.4byte ContestString_CuteMove

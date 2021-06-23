@@ -35,9 +35,9 @@ extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gUnknown_08D030D0[];
 
-extern const u8 gUnknown_08D17144[];
-extern const u8 gUnknown_08D1725C[];
-extern const u8 gUnknown_08D17424[];
+extern const u8 gContestPalette[];
+extern const u8 gContestGfx[];
+extern const u8 gContestBgmap[];
 extern const u8 gUnknown_08D17C3C[];
 extern const u8 gContestMiscGfx[];
 extern const u8 gContestAudienceGfx[];

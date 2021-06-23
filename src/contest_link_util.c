@@ -388,7 +388,7 @@ static void sub_80C255C(u8 taskId)
 
 static void sub_80C25A4(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C89DC, sub_80C25C0);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonIdxs, sub_80C25C0);
 }
 
 static void sub_80C25C0(u8 taskId)

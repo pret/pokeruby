@@ -214,14 +214,14 @@ gText_Contest_WhichMoveWillBePlayed:: @ 83CAF84
 gText_Contest_ButItCantParticipate:: @ 83CAFAE
 	.string "Appeal no. {NAME_END}!\nBut it can't participate!$"
 
-gUnknown_083CAFD7:: @ 83CAFD7
+gText_MonAppealedWithMove:: @ 83CAFD7
 	.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
 	.string "The other POKéMON\nmade moves.{PAUSE 60}$"
 
-gUnknown_083CB00D:: @ 83CB00D
+gText_MonWasWatchingOthers:: @ 83CB00D
 	.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
 
-gUnknown_083CB02C:: @ 83CB02C
+gText_AllOutOfAppealTime:: @ 83CB02C
 	.string "We're all out of\nAppeal Time!{PAUSE 60}$"
 	.string "{STR_VAR_1}'s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
 	.string "TRICK$"
@@ -485,7 +485,7 @@ ContestString_LeaptUp:
 ContestString_TrippedOver:
 	.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
 
-gUnknown_083CBF60:: @ 83CBF60
+gText_MonWasTooNervousToMove:: @ 83CBF60
 ContestString_TooNervous:
 	.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
 ContestString_MessedUp2:
@@ -654,7 +654,7 @@ ContestString_UnknownMoveType:
 	.string "???$"
 
 	.align 2
-gUnknown_083CC330:: @ 83CC330
+sInvalidContestMoveNames:: @ 83CC330
 	.4byte ContestString_CoolMove
 	.4byte ContestString_BeautyMove
 	.4byte ContestString_CuteMove

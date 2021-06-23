@@ -549,7 +549,8 @@ static void Task_EvolutionScene(u8 taskID)
         if (!gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
-            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
+            Contest_StartTextPrinter(
+                &gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
             gTasks[taskID].tState++;
         }
         break;
@@ -637,7 +638,8 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsCryFinished() && !gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
-            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
+            Contest_StartTextPrinter(
+                &gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
@@ -706,7 +708,8 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsCryFinished())
         {
             StringExpandPlaceholders(gStringVar4, BattleText_StopEvo);
-            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
+            Contest_StartTextPrinter(
+                &gWindowTemplate_Contest_MoveDescription, gStringVar4, 144, 2, 15);
             gTasks[taskID].tEvoWasStopped = TRUE;
             gTasks[taskID].tState = 14;
         }
@@ -717,7 +720,8 @@ static void Task_EvolutionScene(u8 taskID)
             sub_8024CEC();
             PlayFanfare(MUS_LEVEL_UP);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
-            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+            Contest_StartTextPrinter(
+                &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
         }
@@ -734,7 +738,8 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 sub_8024CEC();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -742,7 +747,8 @@ static void Task_EvolutionScene(u8 taskID)
             if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -752,7 +758,8 @@ static void Task_EvolutionScene(u8 taskID)
             if (!IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tData9 = 5;
                 gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
@@ -785,7 +792,8 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 sub_8023AD8();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
@@ -800,7 +808,8 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 sub_8023AD8();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
@@ -826,7 +835,11 @@ static void Task_EvolutionScene(u8 taskID)
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
-                        Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                        Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription,
+                            gDisplayedStringBattle,
+                            144,
+                            2,
+                            15);
                         gTasks[taskID].tLearnMoveState = 11;
                     }
                     else
@@ -839,7 +852,11 @@ static void Task_EvolutionScene(u8 taskID)
                         RemoveMonPPBonus(mon, var);
                         SetMonMoveSlot(mon, gMoveToLearn, var);
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
-                        Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                        Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription,
+                            gDisplayedStringBattle,
+                            144,
+                            2,
+                            15);
                         gTasks[taskID].tLearnMoveState++;
                     }
                 }
@@ -849,7 +866,8 @@ static void Task_EvolutionScene(u8 taskID)
             if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -857,20 +875,23 @@ static void Task_EvolutionScene(u8 taskID)
             if (gWindowTemplate_Contest_MoveDescription.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
-                Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+                Contest_StartTextPrinter(
+                    &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tState = 19;
             }
             break;
         case 9:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
-            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+            Contest_StartTextPrinter(
+                &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tData9 = 10;
             gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
-            Text_InitWindow8002EB0(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+            Contest_StartTextPrinter(
+                &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tState = 14;
             break;
         case 11:
@@ -891,7 +912,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
     {
     case 0:
         StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
-        Text_InitWindow8002EB0(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+        Contest_StartTextPrinter(&gUnknown_03004828->window,
+            gStringVar4,
+            gUnknown_03004828->textWindowBaseTileNum,
+            2,
+            15);
         gTasks[taskID].tState++;
         break;
     case 1:
@@ -979,7 +1004,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
         if (IsCryFinished() && !gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
-            Text_InitWindow8002EB0(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Contest_StartTextPrinter(&gUnknown_03004828->window,
+                gStringVar4,
+                gUnknown_03004828->textWindowBaseTileNum,
+                2,
+                15);
             PlayFanfare(MUS_EVOLVED);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
@@ -1013,7 +1042,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
             else
             {
                 PlayBGM(MUS_EVOLUTION);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gOtherText_LinkStandby2, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gOtherText_LinkStandby2,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 gTasks[taskID].tState++;
             }
         }
@@ -1031,7 +1064,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
             sub_8024CEC();
             PlayFanfare(MUS_LEVEL_UP);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
-            Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Contest_StartTextPrinter(&gUnknown_03004828->window,
+                gDisplayedStringBattle,
+                gUnknown_03004828->textWindowBaseTileNum,
+                2,
+                15);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
         }
@@ -1048,7 +1085,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
             {
                 sub_8024CEC();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -1056,7 +1097,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -1066,7 +1111,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (!IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 gTasks[taskID].tData9 = 5;
                 gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
@@ -1104,7 +1153,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
@@ -1120,7 +1173,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 PlaySE(SE_SELECT);
                 gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
@@ -1146,7 +1203,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
-                        Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                        Contest_StartTextPrinter(&gUnknown_03004828->window,
+                            gDisplayedStringBattle,
+                            gUnknown_03004828->textWindowBaseTileNum,
+                            2,
+                            15);
                         gTasks[taskID].tLearnMoveState = 11;
                     }
                     else
@@ -1159,7 +1220,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
                         RemoveMonPPBonus(mon, var);
                         SetMonMoveSlot(mon, gMoveToLearn, var);
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
-                        Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                        Contest_StartTextPrinter(&gUnknown_03004828->window,
+                            gDisplayedStringBattle,
+                            gUnknown_03004828->textWindowBaseTileNum,
+                            2,
+                            15);
                         gTasks[taskID].tLearnMoveState++;
                     }
                 }
@@ -1169,7 +1234,11 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -1177,20 +1246,32 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (gUnknown_03004828->window.state == 0 && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
-                Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Contest_StartTextPrinter(&gUnknown_03004828->window,
+                    gDisplayedStringBattle,
+                    gUnknown_03004828->textWindowBaseTileNum,
+                    2,
+                    15);
                 gTasks[taskID].tState = 15;
             }
             break;
         case 9:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
-            Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Contest_StartTextPrinter(&gUnknown_03004828->window,
+                gDisplayedStringBattle,
+                gUnknown_03004828->textWindowBaseTileNum,
+                2,
+                15);
             gTasks[taskID].tData9 = 10;
             gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
-            Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Contest_StartTextPrinter(&gUnknown_03004828->window,
+                gDisplayedStringBattle,
+                gUnknown_03004828->textWindowBaseTileNum,
+                2,
+                15);
             gTasks[taskID].tState = 13;
             break;
         case 11:
