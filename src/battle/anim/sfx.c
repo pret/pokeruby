@@ -137,7 +137,7 @@ static void sub_812B108(u8 taskId)
     }
 }
 
-// #define shared19348 (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
+// #define gContestResources__moveAnim (*(struct ContestMoveAnim *)(gSharedMem + 0x19348))
 // #define EWRAM_19348 (*(u16 *)(gSharedMem + 0x19348))
 
 // used in 3 moves:
@@ -150,7 +150,7 @@ void sub_812B18C(u8 taskId)
     if (IsContest())
     {
         if (!gBattleAnimArgs[0])
-            species = shared19348.unk0;
+            species = gContestResources__moveAnim.species;
         else
             DestroyAnimVisualTask(taskId);
     }
@@ -200,7 +200,7 @@ void sub_812B2B8(u8 taskId)
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
 
     if (IsContest())
-        species = shared19348.unk0;
+        species = gContestResources__moveAnim.species;
     else
         species = gAnimSpeciesByBanks[gBattleAnimAttacker];
 

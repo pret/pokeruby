@@ -32,8 +32,8 @@ extern u16 gBattle_BG2_Y;
 extern u16 gWeatherMoveAnim;
 
 extern const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7220;
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18[];
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
 extern const u32 gUnknown_08D2AA98[];
 extern const u32 gUnknown_08D2A9E0[];
 extern const u16 gUnknown_08D2AA80[];
@@ -2327,9 +2327,11 @@ void sub_812D7E8(u8 taskId)
 
             ptr = EWRAM_19348;
             if (IsSpeciesNotUnown(ptr[1]))
-                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims =
+                    gAffineAnims_BattleSpriteContest;
             else
-                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7BEC;
+                gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims =
+                    gAffineAnims_BattleSpriteOpponentSide;
 
             StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], 0);
         }
@@ -4667,7 +4669,8 @@ void sub_81312E4(u8 taskId)
         refresh_graphics_maybe(gBattleAnimAttacker, 0, spriteId);
         if (IsContest())
         {
-            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims =
+                gAffineAnims_BattleSpriteContest;
             StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], 0);
         }
 

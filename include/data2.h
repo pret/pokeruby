@@ -21,9 +21,9 @@ extern const struct SpriteFrameImage gSpriteImageTable_81E7A30[];
 extern const struct SpriteFrameImage gSpriteImageTable_81E7A50[];
 extern const struct SpriteFrameImage gSpriteImageTable_81E7A70[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7B70[];
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
 
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 extern const union AnimCmd *const gSpriteAnimTable_81E7C64[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gMonBackPicCoords[];

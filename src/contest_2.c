@@ -29,8 +29,8 @@
 
 #include "contest_internal.h"
 
-extern void sub_80C8C80(u8);
-extern void sub_80ADCDC(u8 taskId);
+extern void Task_LinkContest_CommunicateAppealsState(u8 taskId);
+extern void Task_UpdateContestantBoxOrder(u8 taskId);
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern u8 gBattleMonForms[];
@@ -45,10 +45,10 @@ extern const u8 gUnknown_083CA308[][2];
 extern const u8 gUnknown_083CA310[][2];
 extern const u8 gUnknown_083CA318[][2];
 extern const u8 gUnknown_083CA330[][2];
-extern const u8 gUnknown_083CA338[];
+extern const u8 sSliderHeartYPositions[];
 extern const u8 gUnknown_083CA33C[];
-extern const struct SpriteSheet gUnknown_083CA350;
-extern const struct SpriteTemplate gSpriteTemplate_83CA3AC;
+extern const struct SpriteSheet sSpriteSheet_SliderHeart;
+extern const struct SpriteTemplate sSpriteTemplate_SliderHeart;
 extern const struct CompressedSpriteSheet gUnknown_083CA3C4[];
 extern const struct SpritePalette gUnknown_083CA3E4;
 extern const struct SpriteTemplate gSpriteTemplate_83CA3F4[];
@@ -74,7 +74,7 @@ extern const u8 gUnknown_083CC2EC[];
 extern const u8 gUnknown_083CC59C[];
 extern const u8 gText_Slash[];
 extern const u16 gUnknown_083CC5A4[];
-extern const struct ContestWinner gUnknown_083CC5D0[];
+extern const struct ContestWinner gDefaultContestWinners[];
 extern const u8 gUnknownText_MissedTurn[];
 extern const u8 gUnknownText_LinkStandbyAndWinner[];
 extern void (*const gContestEffectFuncs[])(void);
@@ -462,7 +462,7 @@ u8 unref_sub_80AE908(void)
         30);
     gSprites[spriteId].oam.paletteNum = 1;
     gSprites[spriteId].callback = SpriteCallbackDummy;
-    gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7C18;
+    gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteContest;
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     return spriteId;
 }
@@ -484,7 +484,7 @@ u8 CreateContestantSprite(u16 species, u32 otId, u32 personality)
     lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personality);
     LoadCompressedPalette(lzPaletteData, 0x120, 32);
     GetMonSpriteTemplate_803C56C(species, 0);
-    spriteId = CreateSprite(&gUnknown_02024E8C, 112, sub_8077E44(2, species, 0), 30);
+    spriteId = CreateSprite(&gUnknown_02024E8C, 112, GetBattlerSpriteFinal_Y(2, species, 0), 30);
     gSprites[spriteId].oam.paletteNum = 2;
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].subpriority = GetBattlerSubpriority(2);
@@ -492,9 +492,9 @@ u8 CreateContestantSprite(u16 species, u32 otId, u32 personality)
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;
     if (IsSpeciesNotUnown(species))
-        gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7C18;
+        gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteContest;
     else
-        gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7BEC;
+        gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteOpponentSide;
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     return spriteId;
 }
@@ -507,6 +507,9 @@ bool8 IsSpeciesNotUnown(u16 species)
         return TRUE;
 }
 
+// The contestant info windows and general-purpose text box are drawn on one half, while
+// the moves and move description windows are drawn on another screen. Only the first 32 * 20
+// tiles are actually drawn on screen.
 void SwapMoveDescAndContestTilemaps(void)
 {
     __copy_tilemap((void *)(VRAM + 0xC000));
@@ -800,7 +803,7 @@ u16 GetChosenMove(u8 a)
     }
 }
 
-void sub_80AF1B8(void)
+void GetAllChosenMoves(void)
 {
     u8 i;
 
@@ -857,7 +860,7 @@ void unref_sub_80AF2E0(void)
         sub_80AF2A0(i);
 }
 
-void sub_80AF2FC(void)
+void RankContestants(void)
 {
     u8 i;
     u8 j;
@@ -865,9 +868,11 @@ void sub_80AF2FC(void)
 
     for (i = 0; i < 4; i++)
     {
-        sContestantStatus[i].unk4 += sContestantStatus[i].appeal;
-        arr[i] = sContestantStatus[i].unk4;
+        sContestantStatus[i].pointTotal += sContestantStatus[i].appeal;
+        arr[i] = sContestantStatus[i].pointTotal;
     }
+
+    // Sort the point totals using bubble-sort.
     for (i = 0; i < 3; i++)
     {
         for (j = 3; j > i; j--)
@@ -881,11 +886,21 @@ void sub_80AF2FC(void)
             }
         }
     }
+
+    // For each contestant, find the best rank with their point total.
+    // Normally, each point total is different, and this will output the
+    // rankings as expected. However, if two pokemon are tied, then they
+    // both get the best rank for that point total.
+    //
+    // For example if the point totals are [100, 80, 80, 50], the ranks will
+    // be [1, 2, 2, 4]. The pokemon with a point total of 80 stop looking
+    // when they see the first 80 in the array, so they both share the '2'
+    // rank.
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 4; j++)
         {
-            if (sContestantStatus[i].unk4 == arr[j])
+            if (sContestantStatus[i].pointTotal == arr[j])
             {
                 sContestantStatus[i].ranking = j;
                 break;
@@ -896,7 +911,7 @@ void sub_80AF2FC(void)
     ApplyNextTurnOrder();
 }
 
-void sub_80AF3C0(void)
+void SetAttentionLevels(void)
 {
     s32 i;
 
@@ -929,7 +944,7 @@ bool8 ContestantCanUseTurn(u8 a)
         return TRUE;
 }
 
-void sub_80AF438(void)
+void SetContestantStatusesForNextRound(void)
 {
     u8 i;
 
@@ -951,7 +966,7 @@ void sub_80AF438(void)
         sContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
         sContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
         sContestantStatus[i].conditionMod = 0;
-        sContestantStatus[i].unk15_2 = sContestantStatus[i].disappointedRepeat;
+        sContestantStatus[i].repeatedPrevMove = sContestantStatus[i].disappointedRepeat;
         sContestantStatus[i].disappointedRepeat = FALSE;
         sContestantStatus[i].turnOrderModAction = 0;
         sContestantStatus[i].appealTripleCondition = 0;
@@ -1131,11 +1146,11 @@ u8 unref_sub_80AF89C(s16 a, s16 b, u8 c, u8 d)
     s8 r4;
     u16 r0;
 
-    eContestGfxState[d].unk2_2 = 1;
+    eContestGfxState[d].updatingAppealHearts = 1;
     taskId = CreateTask(sub_80AF94C, 20);
-    r5 = sub_80AFB74(a);
-    r4 = sub_80AFB74(a + b) - r5;
-    r0 = sub_80AFB40(d);
+    r5 = GetNumHeartsFromAppealPoints(a);
+    r4 = GetNumHeartsFromAppealPoints(a + b) - r5;
+    r0 = GetAppealHeartTileOffset(d);
     gTasks[taskId].data[0] = r5;
     gTasks[taskId].data[1] = r4;
     gTasks[taskId].data[2] = r0 + c;
@@ -1153,7 +1168,7 @@ void sub_80AF94C(u8 taskId)
     {
         nullsub_19(r5);
         DestroyTask(taskId);
-        eContestGfxState[r5].unk2_2 = 0;
+        eContestGfxState[r5].updatingAppealHearts = 0;
     }
     else if (++gTasks[taskId].data[10] > 29)
     {
@@ -1199,7 +1214,7 @@ void sub_80AF94C(u8 taskId)
     }
 }
 
-void sub_80AFA5C(void)
+void FillContestantWindowBgs(void)
 {
     u8 i;
 
@@ -1212,7 +1227,7 @@ void sub_80AFA5C(void)
 
 void unref_sub_80AFAB8(s16 a, u8 b)
 {
-    u8 r5 = sub_80AFB74(a);
+    u8 r5 = GetNumHeartsFromAppealPoints(a);
     u16 r2;
     u8 i;
     u16 arr[9];
@@ -1237,7 +1252,7 @@ void unref_sub_80AFAB8(s16 a, u8 b)
     DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xC000 + (148 + b * 160) * 2), sizeof(arr));
 }
 
-u16 sub_80AFB40(u8 a)
+u16 GetAppealHeartTileOffset(u8 a)
 {
     u16 var;
 
@@ -1252,7 +1267,7 @@ u16 sub_80AFB40(u8 a)
     return var + 1;
 }
 
-s8 sub_80AFB74(s16 a)
+s8 GetNumHeartsFromAppealPoints(s16 a)
 {
     s8 retVal = a / 10;
 
@@ -1263,126 +1278,126 @@ s8 sub_80AFB74(s16 a)
     return retVal;
 }
 
-u8 sub_80AFBA0(s16 a, s16 b, u8 c)
+u8 UpdateAppealHearts(s16 startAppeal, s16 appealDelta, u8 contestant)
 {
     u8 taskId;
-    s8 r4;
-    s8 r5;
+    s8 startHearts;
+    s8 heartsDelta;
 
-    eContestGfxState[c].unk2_2 = 1;
-    taskId = CreateTask(sub_80AFC74, 20);
-    r4 = sub_80AFB74(a);
-    r5 = sub_80AFB74(a + b) - r4;
-    sub_80AFB40(c);  // unused return value
-    gTasks[taskId].data[0] = abs(r4);
-    gTasks[taskId].data[1] = r5;
-    if (r4 > 0 || (r4 == 0 && r5 > 0))
+    eContestGfxState[contestant].updatingAppealHearts = 1;
+    taskId = CreateTask(Task_UpdateAppealHearts, 20);
+    startHearts = GetNumHeartsFromAppealPoints(startAppeal);
+    heartsDelta = GetNumHeartsFromAppealPoints(startAppeal + appealDelta) - startHearts;
+    GetAppealHeartTileOffset(contestant);  // unused return value
+    gTasks[taskId].data[0] = abs(startHearts);
+    gTasks[taskId].data[1] = heartsDelta;
+    if (startHearts > 0 || (startHearts == 0 && heartsDelta > 0))
         gTasks[taskId].data[2] = 1;
     else
         gTasks[taskId].data[2] = -1;
-    gTasks[taskId].data[3] = c;
-    if (b < 0)
-        nullsub_19(c);
+    gTasks[taskId].data[3] = contestant;
+    if (appealDelta < 0)
+        nullsub_19(contestant);
     return taskId;
 }
 
-void sub_80AFC74(u8 taskId)
+void Task_UpdateAppealHearts(u8 taskId)
 {
-    u8 r7 = gTasks[taskId].data[3];
-    s16 r3 = gTasks[taskId].data[0];
-    s16 r1 = gTasks[taskId].data[1];
+    u8 contestant = gTasks[taskId].data[3];
+    s16 startHearts = gTasks[taskId].data[0];
+    s16 heartsDelta = gTasks[taskId].data[1];
 
     if (++gTasks[taskId].data[10] > 14)
     {
-        u16 r6;
-        u8 r5;
-        u8 r10;
+        u16 heartOffset;
+        u8 newNumHearts;
+        u8 pitchMod;
 
         gTasks[taskId].data[10] = 0;
         if (gTasks[taskId].data[1] == 0)
         {
-            nullsub_19(r7);
+            nullsub_19(contestant);
             DestroyTask(taskId);
-            eContestGfxState[r7].unk2_2 = 0;
+            eContestGfxState[contestant].updatingAppealHearts = 0;
             return;
         }
-        else if (r3 == 0)
+        else if (startHearts == 0)
         {
-            if (r1 < 0)
+            if (heartsDelta < 0)
             {
-                r6 = sub_80AFB40(r7) + 2;
+                heartOffset = GetAppealHeartTileOffset(contestant) + 2;
                 gTasks[taskId].data[1]++;
             }
             else
             {
-                r6 = sub_80AFB40(r7);
+                heartOffset = GetAppealHeartTileOffset(contestant);
                 gTasks[taskId].data[1]--;
             }
-            r5 = gTasks[taskId].data[0]++;
+            newNumHearts = gTasks[taskId].data[0]++;
         }
         else
         {
             if (gTasks[taskId].data[2] < 0)
             {
-                if (r1 < 0)
+                if (heartsDelta < 0)
                 {
-                    r5 = gTasks[taskId].data[0]++;
+                    newNumHearts = gTasks[taskId].data[0]++;
                     gTasks[taskId].data[1]++;
-                    r6 = sub_80AFB40(r7) + 2;
+                    heartOffset = GetAppealHeartTileOffset(contestant) + 2;
                 }
                 else
                 {
-                    r5 = --gTasks[taskId].data[0];
-                    r6 = 0;
+                    newNumHearts = --gTasks[taskId].data[0];
+                    heartOffset = 0;
                     gTasks[taskId].data[1]--;
                 }
             }
             else
             {
-                if (r1 < 0)
+                if (heartsDelta < 0)
                 {
-                    r5 = --gTasks[taskId].data[0];
-                    r6 = 0;
+                    newNumHearts = --gTasks[taskId].data[0];
+                    heartOffset = 0;
                     gTasks[taskId].data[1]++;
                 }
                 else
                 {
-                    r5 = gTasks[taskId].data[0]++;
+                    newNumHearts = gTasks[taskId].data[0]++;
                     gTasks[taskId].data[1]--;
-                    r6 = sub_80AFB40(r7);
+                    heartOffset = GetAppealHeartTileOffset(contestant);
                 }
             }
         }
-        r10 = r5;
-        if (r5 > 7)
-            r5 += 24;
+        pitchMod = newNumHearts;
+        if (newNumHearts >= 8)
+            newNumHearts += 32 - 8; // jump to second line
         // Seriously, a 2-byte CpuFill? Why?
-        CpuFill16(r6, (void *)(VRAM + 0xC000 + (0x56 + r5 + gContestantTurnOrder[r7] * 160) * 2), 2);
-        if (r1 > 0)
+        CpuFill16(heartOffset, (void *)(VRAM + 0xC000 + (0x56 + newNumHearts + gContestantTurnOrder[contestant] * 160) * 2), 2);
+        if (heartsDelta > 0) // Appeal
         {
             PlaySE(SE_CONTEST_HEART);
             m4aMPlayImmInit(&gMPlayInfo_SE1);
-            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
+            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, pitchMod * 256);
         }
-        else
+        else // Jam
         {
             PlaySE(SE_BOO);
         }
-        if (r5 == 0 && r6 == 0)
+        if (newNumHearts == 0 && heartOffset == 0)
             gTasks[taskId].data[2] = -gTasks[taskId].data[2];
     }
 }
 
-void sub_80AFE30(void)
+void CreateSliderHeartSprites(void)
 {
     s32 i;
 
-    LoadSpriteSheet(&gUnknown_083CA350);
+    LoadSpriteSheet(&sSpriteSheet_SliderHeart);
     for (i = 0; i < 4; i++)
     {
-        u8 y = gUnknown_083CA338[gContestantTurnOrder[i]];
+        u8 y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 
-        eContestGfxState[i].unk0 = CreateSprite(&gSpriteTemplate_83CA3AC, 180, y, 1);
+        eContestGfxState[i].sliderHeartSpriteId = CreateSprite(&sSpriteTemplate_SliderHeart, 180, y, 1);
     }
 }
 
@@ -1392,8 +1407,8 @@ void sub_80AFE78(u8 a)
     s16 r5;
 
     eContestGfxState[a].unk2_0 = 1;
-    spriteId = eContestGfxState[a].unk0;
-    r5 = sContestantStatus[a].unk4 / 10 * 2;
+    spriteId = eContestGfxState[a].sliderHeartSpriteId;
+    r5 = sContestantStatus[a].pointTotal / 10 * 2;
     if (r5 > 56)
         r5 = 56;
     else if (r5 < 0)
@@ -1444,12 +1459,12 @@ void sub_80AFF60(struct Sprite *sprite)
     }
 }
 
-void sub_80AFFA0(void)
+void UpdateSliderHeartSpriteYPositions(void)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
-        gSprites[eContestGfxState[i].unk0].pos1.y = gUnknown_083CA338[gContestantTurnOrder[i]];
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 }
 
 void sub_80AFFE0(bool8 a)
@@ -1461,9 +1476,9 @@ void sub_80AFFE0(bool8 a)
         if (gContestantTurnOrder[i] > 1)
         {
             if (!a)
-                gSprites[eContestGfxState[i].unk0].pos1.x = 180;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 180;
             else
-                gSprites[eContestGfxState[i].unk0].pos1.x = 256;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 256;
         }
     }
 }
@@ -1618,7 +1633,7 @@ void sub_80B03D8(u8 taskId)
     {
         gTasks[sContest.unk19211].data[r4 * 4 + 0] = 0xFF;
         gTasks[sContest.unk19211].data[r4 * 4 + 1] = 0;
-        BlendPalette((sContest.unk19218[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
+        BlendPalette((sContest.prevTurnOrder[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
 }
@@ -1643,7 +1658,7 @@ void sub_80B0458(u8 taskId)
                 gTasks[taskId].data[r3 + 1] ^= 1;
 
             BlendPalette(
-                (sContest.unk19218[i] + 5) * 16 + 6,
+                (sContest.prevTurnOrder[i] + 5) * 16 + 6,
                 2,
                 gTasks[taskId].data[r3 + 0],
                 RGB(31, 31, 18));
@@ -1666,7 +1681,7 @@ void sub_80B0548(u8 a)
     gTasks[sContest.unk19212].data[a * 4 + 1] = 0;
 }
 
-void sub_80B0588(void)
+void UpdateBlendTaskContestantsData(void)
 {
     u8 i;
 
@@ -2282,7 +2297,7 @@ void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     ResetBlendForContestantBoxBlink();
 }
 
-void sub_80B0CDC(u8 a, int unused)
+void Unused_EndBlinkingState(u8 a, int unused)
 {
     eContestGfxState[a].boxBlinking = 0;
 }
@@ -2335,7 +2350,7 @@ void ContestDebugDoPrint(void)
         }
         for (i = 0; i < 4; i++)
         {
-            r2 = sContestantStatus[i].unk4;
+            r2 = sContestantStatus[i].pointTotal;
             if (r2 < 0)
             {
                 r2 = -r2;
@@ -3018,49 +3033,51 @@ void Task_AnimateAudience(u8 taskId)
 #define tBlendColor data[0]
 #define tBlendCoeff data[1]
 
-void sub_80B1EA8(s8 a, s8 b)
+void BlendAudienceBackground(s8 excitementDir, s8 blendDir)
 {
-    u8 taskId = CreateTask(sub_80B1F4C, 10);
+    u8 taskId = CreateTask(Task_BlendAudienceBackground, 10);
     u16 blendColor;
     u8 blendCoeff;
-    u8 r3;
+    u8 targetBlendCoeff;
 
-    if (a > 0)
+    if (excitementDir > 0)
     {
         blendColor = RGB(30, 27, 8);
-        if (b > 0)
+        if (blendDir > 0)
         {
             blendCoeff = 0;
-            r3 = sContest.applauseLevel * 3;
+            targetBlendCoeff = sContest.applauseLevel * 3;
         }
         else
         {
             blendCoeff = sContest.applauseLevel * 3;
-            r3 = 0;
+            targetBlendCoeff = 0;
         }
     }
     else
     {
         blendColor = 0;
-        if (b > 0)
+        if (blendDir > 0)
         {
             blendCoeff = 0;
-            r3 = 12;
+            targetBlendCoeff = 12;
         }
         else
         {
             blendCoeff = 12;
-            r3 = 0;
+            targetBlendCoeff = 0;
         }
     }
     gTasks[taskId].tBlendColor = blendColor;
     gTasks[taskId].tBlendCoeff = blendCoeff;
-    gTasks[taskId].data[2] = b;
-    gTasks[taskId].data[3] = r3;
-    sContest.unk1920B_0 = 0;
+    gTasks[taskId].data[2] = blendDir;
+    gTasks[taskId].data[3] = targetBlendCoeff;
+    // Because this isn't set to TRUE here, the main task doesn't wait for the color blend
+    // Unclear if this was intentional or not (perhaps waiting added too much delay). In any case it does nothing now
+    sContest.waitForAudienceBlend = 0;
 }
 
-void sub_80B1F4C(u8 taskId)
+void Task_BlendAudienceBackground(u8 taskId)
 {
     if (gTasks[taskId].data[10]++ >= 0)
     {
@@ -3074,7 +3091,7 @@ void sub_80B1F4C(u8 taskId)
         if (gTasks[taskId].tBlendCoeff == gTasks[taskId].data[3])
         {
             DestroyTask(taskId);
-            sContest.unk1920B_0 = 0;
+            sContest.waitForAudienceBlend = 0;
         }
     }
 }
@@ -3082,7 +3099,7 @@ void sub_80B1F4C(u8 taskId)
 #undef tBlendColor
 #undef tBlendCoeff
 
-void sub_80B1FD0(bool8 a)
+void ShowHideNextTurnGfx(bool8 a)
 {
     s32 i;
 
@@ -3112,7 +3129,7 @@ const u8 *GetTurnOrderNumberGfx(u8 contestant)
         return gContestNextTurnNumbersGfx + sContestantStatus[contestant].nextTurnOrder * 64;
 }
 
-void sub_80B20C4(void)
+void DrawUnnervedSymbols(void)
 {
     s32 i;
 
@@ -3132,15 +3149,15 @@ void sub_80B20C4(void)
     }
 }
 
-bool8 IsContestantAllowedToCombo(u8 a)
+bool8 IsContestantAllowedToCombo(u8 contestant)
 {
-    if (sContestantStatus[a].disappointedRepeat || sContestantStatus[a].nervous)
+    if (sContestantStatus[contestant].disappointedRepeat || sContestantStatus[contestant].nervous)
         return FALSE;
     else
         return TRUE;
 }
 
-void sub_80B2184(void)
+void SetBgForCurtainDrop(void)
 {
     s32 i;
 
@@ -3160,7 +3177,7 @@ void sub_80B2184(void)
 
     for (i = 0; i < 4; i++)
     {
-        gSprites[eContestGfxState[i].unk0].oam.priority = 1;
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.priority = 1;
         gSprites[eContestGfxState[i].unk1].oam.priority = 1;
     }
 
@@ -3169,7 +3186,7 @@ void sub_80B2184(void)
     ((vBgCnt *)&REG_BG1CNT)->screenSize = 2;
 }
 
-void sub_80B2280(void)
+void UpdateContestantBoxOrder(void)
 {
     s32 i;
 
@@ -3186,20 +3203,20 @@ void sub_80B2280(void)
 
     for (i = 0; i < 4; i++)
     {
-        gSprites[eContestGfxState[i].unk0].oam.priority = 0;
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.priority = 0;
         gSprites[eContestGfxState[i].unk1].oam.priority = 0;
     }
 }
 
-void sub_80B237C(u8 taskId)
+void Task_StartDropCurtainAtRoundEnd(u8 taskId)
 {
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = DISPLAY_HEIGHT;
     PlaySE12WithPanning(SE_CONTEST_CURTAIN_FALL, 0);
-    gTasks[taskId].func = sub_80B23BC;
+    gTasks[taskId].func = Task_UpdateCurtainDropAtRoundEnd;
 }
 
-void sub_80B23BC(u8 taskId)
+void Task_UpdateCurtainDropAtRoundEnd(u8 taskId)
 {
     if ((s16)(gBattle_BG1_Y -= 7) < 0)
         gBattle_BG1_Y = 0;
@@ -3208,11 +3225,11 @@ void sub_80B23BC(u8 taskId)
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = 0;
-        gTasks[taskId].func = sub_80B2400;
+        gTasks[taskId].func = Task_ResetForNextRound;
     }
 }
 
-void sub_80B2400(u8 taskId)
+void Task_ResetForNextRound(u8 taskId)
 {
     s32 i;
 
@@ -3220,13 +3237,13 @@ void sub_80B2400(u8 taskId)
     {
     case 0:
         for (i = 0; i < 4; i++)
-            sContest.unk19218[i] = gContestantTurnOrder[i];
-        sub_80AFA5C();
-        sub_80B0588();
+            sContest.prevTurnOrder[i] = gContestantTurnOrder[i];
+        FillContestantWindowBgs();
+        UpdateBlendTaskContestantsData();
         DrawConditionStars();
         DrawContestantWindows();
-        sub_80B1FD0(TRUE);
-        sub_80AFFA0();
+        ShowHideNextTurnGfx(TRUE);
+        UpdateSliderHeartSpriteYPositions();
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
@@ -3234,40 +3251,41 @@ void sub_80B2400(u8 taskId)
         {
             u8 taskId2;
 
-            sContest.unk1920B_2 = 1;
+            sContest.waitForLink = 1;
             if (IsPlayerLinkLeader())
-                sub_80AF438();
-            taskId2 = CreateTask(sub_80C8C80, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, sub_80C8C80, sub_80AD8DC);
+                SetContestantStatusesForNextRound();
+            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
+            SetTaskFuncWithFollowupFunc(
+                taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
             ContestPrintLinkStandby();
             gTasks[taskId].data[0] = 2;
         }
         else
         {
-            sub_80AF438();
+            SetContestantStatusesForNextRound();
             gTasks[taskId].data[0] = 3;
         }
         break;
     case 2:
-        if (!sContest.unk1920B_2)
+        if (!sContest.waitForLink)
             gTasks[taskId].data[0] = 3;
         break;
     case 3:
         DrawStatusSymbols();
         SwapMoveDescAndContestTilemaps();
         gTasks[taskId].data[0] = 0;
-        gTasks[taskId].func = sub_80B253C;
+        gTasks[taskId].func = Task_WaitRaiseCurtainAtRoundEnd;
         break;
     }
 }
 
-void sub_80B2508(u8 taskId)
+void Task_UpdateRaiseCurtainAtRoundEnd(u8 taskId)
 {
     if ((s16)(gBattle_BG1_Y += 7) > DISPLAY_HEIGHT)
-        gTasks[taskId].func = sub_80ADCDC;
+        gTasks[taskId].func = Task_UpdateContestantBoxOrder;
 }
 
-void sub_80B253C(u8 taskId)
+void Task_WaitRaiseCurtainAtRoundEnd(u8 taskId)
 {
     if (gTasks[taskId].data[2] < 10)
     {
@@ -3288,7 +3306,7 @@ void sub_80B253C(u8 taskId)
             {
                 gTasks[taskId].data[1] = 0;
                 gTasks[taskId].data[2] = 0;
-                gTasks[taskId].func = sub_80B25A4;
+                gTasks[taskId].func = Task_StartRaiseCurtainAtRoundEnd;
             }
             else
             {
@@ -3298,7 +3316,7 @@ void sub_80B253C(u8 taskId)
     }
 }
 
-void sub_80B25A4(u8 taskId)
+void Task_StartRaiseCurtainAtRoundEnd(u8 taskId)
 {
     if (gTasks[taskId].data[2] < 10)
     {
@@ -3308,45 +3326,45 @@ void sub_80B25A4(u8 taskId)
     {
         gTasks[taskId].data[2] = 0;
         PlaySE12WithPanning(SE_CONTEST_CURTAIN_RISE, 0);
-        gTasks[taskId].func = sub_80B2508;
+        gTasks[taskId].func = Task_UpdateRaiseCurtainAtRoundEnd;
     }
 }
 
-void sub_80B25E4(u8 a)
+void AnimateSliderHearts(u8 animId)
 {
     s32 i;
     u8 taskId;
 
     for (i = 0; i < 4; i++)
     {
-        gSprites[eContestGfxState[i].unk0].oam.matrixNum = AllocOamMatrix();
-        gSprites[eContestGfxState[i].unk0].oam.affineMode = 1;
-        StartSpriteAffineAnim(&gSprites[eContestGfxState[i].unk0], a);
-        if (a == 2)
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.matrixNum = AllocOamMatrix();
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.affineMode = 1;
+        StartSpriteAffineAnim(&gSprites[eContestGfxState[i].sliderHeartSpriteId], animId);
+        if (animId == 2)
         {
-            AnimateSprite(&gSprites[eContestGfxState[i].unk0]);
-            gSprites[eContestGfxState[i].unk0].invisible = FALSE;
+            AnimateSprite(&gSprites[eContestGfxState[i].sliderHeartSpriteId]);
+            gSprites[eContestGfxState[i].sliderHeartSpriteId].invisible = FALSE;
         }
     }
-    taskId = CreateTask(sub_80B26C8, 5);
-    gTasks[taskId].data[0] = a;
-    sContest.unk1920B_1 = 1;
+    taskId = CreateTask(Task_WaitForSliderHeartAnim, 5);
+    gTasks[taskId].data[0] = animId;
+    sContest.sliderHeartsAnimating = 1;
 }
 
-void sub_80B26C8(u8 taskId)
+void Task_WaitForSliderHeartAnim(u8 taskId)
 {
     s32 i;
 
-    if (gSprites[eContestGfxState[0].unk0].affineAnimEnded)
+    if (gSprites[eContestGfxState[0].sliderHeartSpriteId].affineAnimEnded)
     {
         if ((u8)gTasks[taskId].data[0] == 1)
         {
             for (i = 0; i < 4; i++)
-                gSprites[eContestGfxState[i].unk0].invisible = TRUE;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].invisible = TRUE;
         }
         for (i = 0; i < 4; i++)
-            FreeSpriteOamMatrix(&gSprites[eContestGfxState[i].unk0]);
-        sContest.unk1920B_1 = 0;
+            FreeSpriteOamMatrix(&gSprites[eContestGfxState[i].sliderHeartSpriteId]);
+        sContest.sliderHeartsAnimating = 0;
         DestroyTask(taskId);
     }
 }
@@ -3365,14 +3383,14 @@ u16 SanitizeSpecies(u16 species)
     return species;
 }
 
-void sub_80B2790(u8 a)
+void SetMoveSpecificAnimData(u8 contestant)
 {
     s32 i;
-    u16 move = SanitizeMove(sContestantStatus[a].currMove);
-    u16 species = SanitizeSpecies(gContestMons[a].species);
+    u16 move = SanitizeMove(sContestantStatus[contestant].currMove);
+    u16 species = SanitizeSpecies(gContestMons[contestant].species);
     u8 r5_2;
 
-    memset(&shared19348, 0, sizeof(shared19348));
+    memset(&gContestResources__moveAnim, 0, sizeof(gContestResources__moveAnim));
     ClearBattleAnimationVars();
     for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
@@ -3386,10 +3404,10 @@ void sub_80B2790(u8 a)
         break;
     case MOVE_TRANSFORM:
     case MOVE_ROLE_PLAY:
-        r5_2 = sContestantStatus[a].unk1B;
-        shared19348.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
-        shared19348.unk10 = gContestMons[r5_2].personality;
-        shared19348.unk4_0 = 1;
+        r5_2 = sContestantStatus[contestant].unk1B;
+        gContestResources__moveAnim.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
+        gContestResources__moveAnim.unk10 = gContestMons[r5_2].personality;
+        gContestResources__moveAnim.unk4_0 = 1;
         break;
     case MOVE_RETURN:
         gAnimFriendship = 0xFF;
@@ -3401,9 +3419,9 @@ void sub_80B2790(u8 a)
     case MOVE_RAZOR_WIND:
     case MOVE_SKULL_BASH:
     case MOVE_SKY_ATTACK:
-        if (sContest.unk1925E == 0)
+        if (sContest.moveAnimTurnCount == 0)
         {
-            sContest.unk1925E = 2;
+            sContest.moveAnimTurnCount = 2;
             gAnimMoveTurn = 0;
         }
         else
@@ -3412,32 +3430,32 @@ void sub_80B2790(u8 a)
         }
         break;
     }
-    sub_80B2968();
+    SetBattleTargetSpritePosition();
 }
 
-void sub_80B28CC(int unused)
+void ClearMoveAnimData(UNUSED u8 contestant)
 {
-    memset(&shared19348, 0, sizeof(shared19348));
-    if (sContest.unk1925E != 0)
-        sContest.unk1925E--;
+    memset(&gContestResources__moveAnim, 0, sizeof(gContestResources__moveAnim));
+    if (sContest.moveAnimTurnCount != 0)
+        sContest.moveAnimTurnCount--;
 }
 
-void sub_80B28F0(u8 a)
+void SetMoveAnimAttackerData(u8 contestant)
 {
-    shared19348.unk5 = a;
-    shared19348.unk0 = SanitizeSpecies(gContestMons[a].species);
-    shared19348.unk8 = gContestMons[a].personality;
-    shared19348.unkC = gContestMons[a].otId;
+    gContestResources__moveAnim.contestant = contestant;
+    gContestResources__moveAnim.species = SanitizeSpecies(gContestMons[contestant].species);
+    gContestResources__moveAnim.personality = gContestMons[contestant].personality;
+    gContestResources__moveAnim.otId = gContestMons[contestant].otId;
 }
 
-void sub_80B292C(void)
+void CreateInvisibleBattleTargetSprite(void)
 {
     gBattlerSpriteIds[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     InitSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattlerTarget]]);
-    sub_80B2968();
+    SetBattleTargetSpritePosition();
 }
 
-void sub_80B2968(void)
+void SetBattleTargetSpritePosition(void)
 {
     struct Sprite *sprite = &gSprites[gBattlerSpriteIds[3]];
 
@@ -3466,102 +3484,116 @@ void SelectContestMoveBankTarget(u16 move)
     }
 }
 
-bool8 Contest_SaveWinner(u8 a)
+bool8 Contest_SaveWinner(u8 rank)
 {
     s32 i;
-    u8 r7 = Random() % 3;
+    u8 captionId = Random() % 3;
 
+    // Get the index of the winner among the contestants
     for (i = 0; i < 3; i++)
     {
         if (gContestFinalStandings[i] == 0)
             break;
     }
-    if (a == 0xFF && i != gContestPlayerMonIndex)
+
+    // Exit if attempting to save a Pokémon other than the player's to the museum
+    if (rank == CONTEST_SAVE_FOR_MUSEUM && i != gContestPlayerMonIndex)
         return FALSE;
+
+    // Adjust the random painting caption depending on the category
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        r7 += 0;
+        captionId += 0;
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        r7 += 3;
+        captionId += 3;
         break;
     case CONTEST_CATEGORY_CUTE:
-        r7 += 6;
+        captionId += 6;
         break;
     case CONTEST_CATEGORY_SMART:
-        r7 += 9;
+        captionId += 9;
         break;
     case CONTEST_CATEGORY_TOUGH:
-        r7 += 12;
+        captionId += 12;
         break;
     }
-    if (a != 0xFE)
+    if (rank != CONTEST_SAVE_FOR_ARTIST)
     {
-        u8 r4 = GetContestWinnerSaveIdx(a, 1);
+        // Save winner in the saveblock
+        // Used to save any winner for the Contest Hall or the Museum
+        // but excludes the temporary save used by the artist
+        u8 saveIdx = GetContestWinnerSaveIdx(rank, TRUE);
 
-        gSaveBlock1.contestWinners[r4].personality = gContestMons[i].personality;
-        gSaveBlock1.contestWinners[r4].species = gContestMons[i].species;
-        gSaveBlock1.contestWinners[r4].otId = gContestMons[i].otId;
-        StringCopy(gSaveBlock1.contestWinners[r4].nickname, gContestMons[i].nickname);
-        StringCopy(gSaveBlock1.contestWinners[r4].trainerName, gContestMons[i].trainerName);
-        if (a != 0xFF)
-            gSaveBlock1.contestWinners[r4].contestCategory = gSpecialVar_ContestCategory;
+        gSaveBlock1.contestWinners[saveIdx].personality = gContestMons[i].personality;
+        gSaveBlock1.contestWinners[saveIdx].species = gContestMons[i].species;
+        gSaveBlock1.contestWinners[saveIdx].otId = gContestMons[i].otId;
+        StringCopy(gSaveBlock1.contestWinners[saveIdx].nickname, gContestMons[i].nickname);
+        StringCopy(gSaveBlock1.contestWinners[saveIdx].trainerName, gContestMons[i].trainerName);
+        if (rank != CONTEST_SAVE_FOR_MUSEUM)
+            gSaveBlock1.contestWinners[saveIdx].contestCategory = gSpecialVar_ContestCategory;
         else
-            gSaveBlock1.contestWinners[r4].contestCategory = r7;
+            gSaveBlock1.contestWinners[saveIdx].contestCategory = captionId;
     }
     else
     {
-        shared15DE0.personality = gContestMons[i].personality;
-        shared15DE0.otId = gContestMons[i].otId;
-        shared15DE0.species = gContestMons[i].species;
-        StringCopy(shared15DE0.nickname, gContestMons[i].nickname);
+        gCurContestWinner.personality = gContestMons[i].personality;
+        gCurContestWinner.otId = gContestMons[i].otId;
+        gCurContestWinner.species = gContestMons[i].species;
+        StringCopy(gCurContestWinner.nickname, gContestMons[i].nickname);
         if (gIsLinkContest & 1)
-            StringCopy(shared15DE0.trainerName, gLinkPlayers[i].name);
+            StringCopy(gCurContestWinner.trainerName, gLinkPlayers[i].name);
         else
-            StringCopy(shared15DE0.trainerName, gContestMons[i].trainerName);
-        shared15DE0.contestCategory = r7;
+            StringCopy(gCurContestWinner.trainerName, gContestMons[i].trainerName);
+        gCurContestWinner.contestCategory = captionId;
     }
     return TRUE;
 }
 
-u8 GetContestWinnerSaveIdx(u8 a, u8 b)
+// Rank is either a regular contest rank (for saving winners to show in the Contest Hall)
+// Or one of two special IDs listed below (for saving winners to show in Museum, or from the artist)
+// If just retrieving the index where the winner *would* go, shift is FALSE
+// If actually preparing to insert the winner into the saveblock, shift is TRUE
+u8 GetContestWinnerSaveIdx(u8 rank, u8 shift)
 {
     s32 i;
 
-    switch (a)
+    switch (rank)
     {
-    case 0:
-    case 1:
-        return a;
-    case 2:
-        if (b != 0)
+    case CONTEST_RANK_NORMAL:
+    case CONTEST_RANK_SUPER:
+        return rank;
+    case CONTEST_RANK_HYPER:
+        if (shift)
         {
-            for (i = 4; i >= 3; i--)
+            for (i = CONTEST_WINNER_HYPER_3 - 1; i > CONTEST_WINNER_HYPER_1 - 1; i--)
                 memcpy(&gSaveBlock1.contestWinners[i], &gSaveBlock1.contestWinners[i - 1], sizeof(struct ContestWinner));
         }
-        return 2;
-    case 3:
-        if (b != 0)
+        return CONTEST_WINNER_HYPER_1 - 1;
+    case CONTEST_RANK_MASTER:
+        if (shift)
         {
-            for (i = 7; i >= 6; i--)
+            for (i = CONTEST_WINNER_MASTER_3 - 1; i > CONTEST_WINNER_MASTER_1 - 1; i--)
                 memcpy(&gSaveBlock1.contestWinners[i], &gSaveBlock1.contestWinners[i - 1], sizeof(struct ContestWinner));
         }
-        return 5;
+        return CONTEST_WINNER_MASTER_1 - 1;
     default:
+//  case CONTEST_SAVE_FOR_MUSEUM:
+//  case CONTEST_SAVE_FOR_ARTIST:
         switch (gSpecialVar_ContestCategory)
         {
         case CONTEST_CATEGORY_COOL:
-            return 8;
+            return CONTEST_WINNER_MUSEUM_COOL - 1;
         case CONTEST_CATEGORY_BEAUTY:
-            return 9;
+            return CONTEST_WINNER_MUSEUM_BEAUTY - 1;
         case CONTEST_CATEGORY_CUTE:
-            return 10;
+            return CONTEST_WINNER_MUSEUM_CUTE - 1;
         case CONTEST_CATEGORY_SMART:
-            return 11;
+            return CONTEST_WINNER_MUSEUM_SMART - 1;
         case CONTEST_CATEGORY_TOUGH:
         default:
-            return 12;
+            return CONTEST_WINNER_MUSEUM_TOUGH - 1;
         }
     }
 }
@@ -3571,6 +3603,6 @@ void Contest_ResetWinners(void)
     s32 i;
 
     for (i = 0; i < 8; i++)
-        gSaveBlock1.contestWinners[i] = gUnknown_083CC5D0[i];
+        gSaveBlock1.contestWinners[i] = gDefaultContestWinners[i];
 }
 

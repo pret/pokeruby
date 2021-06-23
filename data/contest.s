@@ -40,7 +40,7 @@ gUnknown_083CA330:: @ 83CA330
 	.byte 224, 104
 	.byte 224, 144
 
-gUnknown_083CA338:: @ 83CA338
+sSliderHeartYPositions:: @ 83CA338
 	.byte 36, 76, 116, 156
 
 gUnknown_083CA33C:: @ 83CA33C
@@ -53,7 +53,7 @@ gUnknown_083CA340:: @ 83CA340
 	.byte 0, 37, 9, 39
 
 	.align 2
-gUnknown_083CA350:: @ 83CA350
+sSpriteSheet_SliderHeart:: @ 83CA350
 	obj_tiles gTiles_8D1975C, 0x20, 20004
 
 	.align 2
@@ -86,7 +86,7 @@ gSpriteAffineAnimTable_83CA3A0:: @ 83CA3A0
 	.4byte gSpriteAffineAnim_83CA388
 
 	.align 2
-gSpriteTemplate_83CA3AC:: @ 83CA3AC
+sSpriteTemplate_SliderHeart:: @ 83CA3AC
 	spr_template 20004, 44000, gOamData_83CA358, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83CA3A0, SpriteCallbackDummy
 
 	.align 2
@@ -358,7 +358,7 @@ gUnknown_083CC5A4:: @ 83CC5A4
 	.include "data/contest_excitement_table.inc"
 
 	.align 2
-gUnknown_083CC5D0:: @ 83CC5D0
+gDefaultContestWinners:: @ 83CC5D0
 	.4byte 0
 	.4byte 0xFFFF
 	.2byte SPECIES_TAILLOW

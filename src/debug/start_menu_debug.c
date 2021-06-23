@@ -2592,7 +2592,7 @@ struct GameTimeDebugMenuStruct {
     u16 totalPoints;
     u16 excitementAppealBonus;
     u8 round1Points;
-    u8 unk5;
+    u8 contestant;
 };
 
 const struct GameTimeDebugMenuStruct gUnknown_Debug_839C5F4[] = {
@@ -2669,7 +2669,7 @@ void DebugMenu_8078F68(u8 taskId)
     else
     {
         const struct GameTimeDebugMenuStruct *r2 = gUnknown_Debug_839C5F4 + data[0];
-        if (DebugMenu_8077DD8(data + r2->unk5, r2->totalPoints, r2->excitementAppealBonus, gMain.newAndRepeatedKeys) == TRUE)
+        if (DebugMenu_8077DD8(data + r2->contestant, r2->totalPoints, r2->excitementAppealBonus, gMain.newAndRepeatedKeys) == TRUE)
             DebugMenu_8078EB0(data);
     }
 }

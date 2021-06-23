@@ -78,7 +78,7 @@ struct WatanabeEwram18000_2 {
     u8 excitementAppealBonus;
     u8 unk3;
     u8 round1Points;
-    u8 unk5;
+    u8 contestant;
     u8 unk6;
     u8 unk7;
     u8 random;
@@ -2571,7 +2571,7 @@ void InitSeePokemonGraphics(void)
     gUnknown_Debug_2038A20->totalPoints = 0x115;
     gUnknown_Debug_2038A20->excitementAppealBonus = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
-    gUnknown_Debug_2038A20->unk5 = 0;
+    gUnknown_Debug_2038A20->contestant = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
     gUnknown_Debug_2038A20->unkA = 0;
     gUnknown_Debug_2038A20->random = 0;
@@ -2744,7 +2744,7 @@ void debug_80C6FA8(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 1;
+        gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7294;
@@ -3100,14 +3100,14 @@ void debug_80C7294(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         gTasks[taskId].func = debug_80C6EE8;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);
@@ -3181,7 +3181,7 @@ void debug_80C74E4(u8 taskId)
 
 void debug_80C7584(struct Sprite *sprite)
 {
-    if (!gUnknown_Debug_2038A20->unk5)
+    if (!gUnknown_Debug_2038A20->contestant)
         sprite->invisible = TRUE;
     else
     {
@@ -3240,7 +3240,7 @@ void InitSeeTrainers(void)
     gUnknown_Debug_2038A20->totalPoints = 0;
     gUnknown_Debug_2038A20->excitementAppealBonus = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
-    gUnknown_Debug_2038A20->unk5 = 0;
+    gUnknown_Debug_2038A20->contestant = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
     gUnknown_Debug_2038A20->unkA = 0;
     gUnknown_Debug_2038A20->random = 0;
@@ -3352,7 +3352,7 @@ void debug_80C7B14(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 1;
+        gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7DDC;
@@ -3691,14 +3691,14 @@ void debug_80C7DDC(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         gTasks[taskId].func = debug_80C7A54;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);

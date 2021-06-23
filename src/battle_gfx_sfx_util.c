@@ -654,9 +654,9 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         if (IsContest())
         {
             r10 = 0;
-            species = shared19348.unk2;
-            personalityValue = shared19348.unk8;
-            otId = shared19348.unkC;
+            species = gContestResources__moveAnim.unk2;
+            personalityValue = gContestResources__moveAnim.personality;
+            otId = gContestResources__moveAnim.otId;
             HandleLoadSpecialPokePic(
               &gMonBackPicTable[species],
               gMonBackPicCoords[species].coords,
@@ -664,7 +664,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               eVoidSharedArr2,
               gMonSpriteGfx_Sprite_ptr[0],
               species,
-              shared19348.unk10);
+                gContestResources__moveAnim.unk10);
         }
         else
         {

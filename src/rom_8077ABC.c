@@ -172,10 +172,10 @@ u8 GetBattlerSpriteCoord(u8 slot, u8 a2)
     default:
         if (IsContest())
         {
-            if (shared19348.unk4_0)
-                species = shared19348.unk2;
+            if (gContestResources__moveAnim.unk4_0)
+                species = gContestResources__moveAnim.unk2;
             else
-                species = shared19348.unk0;
+                species = gContestResources__moveAnim.species;
         }
         else
         {
@@ -197,9 +197,9 @@ u8 GetBattlerSpriteCoord(u8 slot, u8 a2)
             }
         }
         if (a2 == 3)
-            var = sub_8077E44(slot, species, 1);
+            var = GetBattlerSpriteFinal_Y(slot, species, 1);
         else
-            var = sub_8077E44(slot, species, 0);
+            var = GetBattlerSpriteFinal_Y(slot, species, 0);
         break;
     }
     return var;
@@ -219,10 +219,10 @@ u8 sub_8077BFC(u8 slot, u16 species)
         {
             if (IsContest())
             {
-                if (shared19348.unk4_0)
-                    personality = shared19348.unk10;
+                if (gContestResources__moveAnim.unk4_0)
+                    personality = gContestResources__moveAnim.unk10;
                 else
-                    personality = shared19348.unk8;
+                    personality = gContestResources__moveAnim.personality;
             }
             else
             {
@@ -302,7 +302,7 @@ u8 sub_8077DD8(u8 slot, u16 species)
     return ret;
 }
 
-u8 sub_8077E44(u8 slot, u16 species, u8 a3)
+u8 GetBattlerSpriteFinal_Y(u8 slot, u16 species, u8 a3)
 {
     u16 offset;
     u8 y;
@@ -335,10 +335,10 @@ u8 sub_8077EE4(u8 slot, u8 a2)
     {
         if (IsContest())
         {
-            if (shared19348.unk4_0)
-                species = shared19348.unk2;
+            if (gContestResources__moveAnim.unk4_0)
+                species = gContestResources__moveAnim.unk2;
             else
-                species = shared19348.unk0;
+                species = gContestResources__moveAnim.species;
         }
         else
         {
@@ -349,9 +349,9 @@ u8 sub_8077EE4(u8 slot, u8 a2)
                 species = transform->species;
         }
         if (a2 == 3)
-            return sub_8077E44(slot, species, 1);
+            return GetBattlerSpriteFinal_Y(slot, species, 1);
         else
-            return sub_8077E44(slot, species, 0);
+            return GetBattlerSpriteFinal_Y(slot, species, 0);
     }
     else
     {
@@ -1756,7 +1756,7 @@ u16 sub_8079B10(u8 sprite)
         {
             if (IsContest())
             {
-                species = shared19348.unk0;
+                species = gContestResources__moveAnim.species;
                 return gMonBackPicCoords[species].y_offset;
             }
             else
@@ -1974,7 +1974,7 @@ u8 sub_8079F44(u16 species, bool8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a
 
     if (IsContest())
     {
-        gSprites[sprite].affineAnims = gSpriteAffineAnimTable_81E7C18;
+        gSprites[sprite].affineAnims = gAffineAnims_BattleSpriteContest;
         StartSpriteAffineAnim(&gSprites[sprite], 0);
     }
     return sprite;
@@ -1997,15 +1997,15 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
 
     if (IsContest())
     {
-        if (shared19348.unk4_0)
+        if (gContestResources__moveAnim.unk4_0)
         {
-            species = shared19348.unk2;
-            personality = shared19348.unk10;
+            species = gContestResources__moveAnim.unk2;
+            personality = gContestResources__moveAnim.unk10;
         }
         else
         {
-            species = shared19348.unk0;
-            personality = shared19348.unk8;
+            species = gContestResources__moveAnim.species;
+            personality = gContestResources__moveAnim.personality;
         }
         if (species == SPECIES_UNOWN)
         {

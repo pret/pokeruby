@@ -527,7 +527,7 @@ void sub_80C8AD0(u8 taskId)
     }
 }
 
-void sub_80C8C80(u8 taskId)
+void Task_LinkContest_CommunicateAppealsState(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {

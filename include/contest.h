@@ -14,16 +14,16 @@ enum
 enum
 {
     CONTEST_WINNER_ARTIST,
-    CONTEST_WINNER_HALL_1,
-    CONTEST_WINNER_HALL_2,
-    CONTEST_WINNER_HALL_3,
-    CONTEST_WINNER_HALL_4,
-    CONTEST_WINNER_HALL_5,
-    CONTEST_WINNER_HALL_6,
-    NUM_CONTEST_HALL_WINNERS = CONTEST_WINNER_HALL_6,
-    CONTEST_WINNER_HALL_UNUSED_1 , // These two have data for gDefaultContestWinners
-    CONTEST_WINNER_HALL_UNUSED_2, // but there are only 6 paintings in the Contest Hall
-    MUSEUM_CONTEST_WINNERS_START = CONTEST_WINNER_HALL_UNUSED_2,
+    CONTEST_WINNER_NORMAL,
+    CONTEST_WINNER_SUPER,
+    CONTEST_WINNER_HYPER_1,
+    CONTEST_WINNER_HYPER_2,
+    CONTEST_WINNER_HYPER_3,
+    CONTEST_WINNER_MASTER_1,
+    CONTEST_WINNER_MASTER_2,
+    CONTEST_WINNER_MASTER_3,
+    NUM_CONTEST_HALL_WINNERS = CONTEST_WINNER_MASTER_3,
+    MUSEUM_CONTEST_WINNERS_START = CONTEST_WINNER_MASTER_3,
     CONTEST_WINNER_MUSEUM_COOL,
     CONTEST_WINNER_MUSEUM_BEAUTY,
     CONTEST_WINNER_MUSEUM_CUTE,
@@ -328,9 +328,9 @@ struct Contest
                 u16 isShowingApplauseMeter :1;
                 u16 applauseMeterIsMoving :1;
                 u16 animatingAudience :1;
-    /*0x1920B*/ u16 unk1920B_0:1;
-                u16 unk1920B_1:1;
-                u16 unk1920B_2:1;
+    /*0x1920B*/ u16 waitForAudienceBlend :1;
+                u16 sliderHeartsAnimating :1;
+                u16 waitForLink :1;
     /*0x1920C*/ u8 mainTaskId;
     /*0x1920D*/ u8 unk1920D[4];
     /*0x19211*/ u8 unk19211;
@@ -340,20 +340,20 @@ struct Contest
     /*0x19215*/ u8 unk19215;
     /*0x19216*/ u8 unk19216;    // sprite ID
     /*0x19217*/ s8 applauseLevel;
-    /*0x19218*/ u8 unk19218[4];
+    /*0x19218*/ u8 prevTurnOrder[4];
     /*0x1921C*/ u32 unk1921C;   // saved RNG value?
                 u16 unk19220[5][4];  // move history?
                 u8 unk19248[5][4];  // excitement history
                 u8 applauseMeterSpriteId;    // sprite ID
     /*0x1925D*/ u8 unk1925D;
-    /*0x1925E*/ u8 unk1925E;
+    /*0x1925E*/ u8 moveAnimTurnCount;
 };
 
 struct ContestantStatus
 {
  /*0x00*/ s16 baseAppeal;  // move appeal?
  /*0x02*/ s16 appeal;  // final appeal after end of turn, maybe?
- /*0x04*/ s16 unk4;
+ /*0x04*/ s16 pointTotal;
  /*0x06*/ u16 currMove;
  /*0x08*/ u16 prevMove;
  /*0x0A*/ u8 moveCategory;
@@ -385,7 +385,7 @@ struct ContestantStatus
  /*0x14*/ u8 effectStringId2;
  /*0x15*/ u8 disappointedRepeat:1;
           u8 unk15_1:1;
-          u8 unk15_2:1;
+          u8 repeatedPrevMove :1;
           u8 completedComboFlag :1;
           u8 hasJudgesAttention:1;
           u8 judgesAttentionWasRemoved:1;
@@ -401,11 +401,11 @@ struct ContestantStatus
 // possibly the same as UnknownContestStruct3?
 struct ContestGfxState
 {
-    u8 unk0;  // sprite ID
+    u8 sliderHeartSpriteId;  // sprite ID
     u8 unk1;  // sprite ID
     u8 unk2_0:1;
     u8 boxBlinking :1;
-    u8 unk2_2:1;
+    u8 updatingAppealHearts :1;
 };
 
 struct ContestExcitement
@@ -426,14 +426,14 @@ struct UnknownContestStruct7
     u8 contestant;
 };
 
-struct UnknownContestStruct8
+struct ContestMoveAnim
 {
-    u16 unk0;
+    u16 species;
     u16 unk2;
     u8 unk4_0:1;
-    u8 unk5;
-    u32 unk8;
-    u32 unkC;
+    u8 contestant;
+    u32 personality;
+    u32 otId;
     u32 unk10;
 };
 
@@ -446,14 +446,14 @@ struct ContestFinalStandings
 };
 
 // TODO: Please move these to ewram.h once the defines are settled down and figured out completely.
-#define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
+#define gCurContestWinner (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
 #define eEnableContestDebugging (gSharedMem[0x18000])
 #define eContestTempSave (*(struct ContestTempSave *)(gSharedMem + 0x18004))
 #define sContest (*(struct Contest *)(gSharedMem + 0x19204))
 #define sContestantStatus ((struct ContestantStatus *)(gSharedMem + 0x19260))
 #define eContestExcitement (*(struct ContestExcitement *)(gSharedMem + 0x19328))
 #define eContestGfxState ((struct ContestGfxState *)(gSharedMem + 0x19338))
-#define shared19348 (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
+#define gContestResources__moveAnim (*(struct ContestMoveAnim *)(gSharedMem + 0x19348))
 
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
@@ -474,7 +474,7 @@ void SetContestantEffectStringID(u8 a, u8 b);
 void SetContestantEffectStringID2(u8 a, u8 b);
 void MakeContestantNervous(u8 p);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
-bool8 IsContestantAllowedToCombo(u8 a);
+bool8 IsContestantAllowedToCombo(u8 contestant);
 void SetStartledString(u8 a, u8 b);
 
 #endif // GUARD_CONTEST_H

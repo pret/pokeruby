@@ -152,9 +152,11 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 const struct SpriteTemplate gSpriteTemplate_8208288[] =
 {
     {0xFFFF, 0, &gOamData_81F96F0, NULL, gSpriteImageTable_81E7A10, gSpriteAffineAnimTable_81E7B70, sub_80105A0},
-    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A30, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent},
+    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A30,
+        gAffineAnims_BattleSpriteOpponentSide, oac_poke_opponent},
     {0xFFFF, 0, &gOamData_81F96F0, NULL, gSpriteImageTable_81E7A50, gSpriteAffineAnimTable_81E7B70, sub_80105A0},
-    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent},
+    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70,
+        gAffineAnims_BattleSpriteOpponentSide, oac_poke_opponent},
 };
 
 void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)

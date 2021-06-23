@@ -586,7 +586,7 @@ static void ContestAICmd_unk_14(void)
 
 static void ContestAICmd_unk_15(void)
 {
-    eContestAI->scriptResult = sContestantStatus[eContestAI->unk41].unk4;
+    eContestAI->scriptResult = sContestantStatus[eContestAI->unk41].pointTotal;
     gAIScriptPtr += 1;
 }
 
@@ -1305,7 +1305,7 @@ static void ContestAICmd_unk_59(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = sContestantStatus[var].unk4 - sContestantStatus[eContestAI->unk41].unk4;
+    eContestAI->scriptResult = sContestantStatus[var].pointTotal - sContestantStatus[eContestAI->unk41].pointTotal;
     gAIScriptPtr += 2;
 }
 
