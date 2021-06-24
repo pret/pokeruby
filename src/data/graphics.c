@@ -1188,7 +1188,7 @@ const u8 gUnknown_08E96994[] = INCBIN_U8("graphics/pokedex/pokedex_listing_menu.
 const u8 gUnknown_08E96ACC[] = INCBIN_U8("graphics/pokedex/pokedex_navbar.bin.lz");
 const u8 gUnknown_08E96B58[] = INCBIN_U8("graphics/pokedex/pokedex_navbar_3.bin.lz");
 const u8 gUnknown_08E96BD4[] = INCBIN_U8("graphics/pokedex/pokedex_detail_layout.bin.lz");
-const u8 gUnknown_08E96D2C[] = INCBIN_U8("graphics/unknown/unknown_E96D2C.bin.lz");
+const u8 gPokedexMenuSearch_Tilemap[] = INCBIN_U8("graphics/unknown/unknown_E96D2C.bin.lz");
 
 const u8 gBagScreenLabels_Tilemap[] = INCBIN_U8("graphics/interface/bag_screen_labels.bin");
 

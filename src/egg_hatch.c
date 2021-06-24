@@ -24,7 +24,7 @@
 #include "trig.h"
 #include "trade.h"
 
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 struct EggHatchData
 {
@@ -356,13 +356,13 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID)
         {
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, ewram0_6, gMonSpriteGfx_Sprite_ptr[2 * a0 + 1], species, pid);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gSharedMem, gMonSpriteGfx_Sprite_ptr[2 * a0 + 1], species, pid);
             LoadCompressedObjectPalette(GetMonSpritePalStruct(mon));
         }
         break;
     case 1:
         GetMonSpriteTemplate_803C56C(GetMonSpritePalStruct(mon)->tag, r5);
-        spriteID = CreateSprite(&gUnknown_02024E8C, 120, 70, 6);
+        spriteID = CreateSprite(&gCreatingSpriteTemplate, 120, 70, 6);
         gSprites[spriteID].invisible = TRUE;
         gSprites[spriteID].callback = SpriteCallbackDummy;
         break;

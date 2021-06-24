@@ -326,7 +326,7 @@ static void InitContestMonPixels(u16 species, u8 arg1)
             &gMonFrontPicTable[species],
             gMonFrontPicCoords[species].coords,
             gMonFrontPicCoords[species].y_offset,
-            EWRAM,
+            (void *)EWRAM,
             gMonSpriteGfx_Sprite_ptr[1],
             species,
             (u32)gContestPaintingWinner->personality
@@ -339,7 +339,7 @@ static void InitContestMonPixels(u16 species, u8 arg1)
             &gMonBackPicTable[species],
             gMonBackPicCoords[species].coords,
             gMonBackPicCoords[species].y_offset,
-            EWRAM,
+            (void *)EWRAM,
             gMonSpriteGfx_Sprite_ptr[0],
             species,
             (u32)gContestPaintingWinner->personality

@@ -126,7 +126,7 @@ extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gPPUpReadMasks[];
 TaskFunc gUnknown_03005CF0;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern const u8 gStatusPal_Icons[];
 extern const u8 gStatusGfx_Icons[];
@@ -1838,7 +1838,7 @@ static u8 SummaryScreen_LoadPokemonSprite(struct Pokemon *mon, u8 *state)
             &gMonFrontPicTable[species],
             gMonFrontPicCoords[species].coords,
             gMonFrontPicCoords[species].y_offset,
-            ewram_addr,
+            (void *)EWRAM,
             gMonSpriteGfx_Sprite_ptr[1],
             species,
             personality);
@@ -3988,7 +3988,7 @@ u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *mon)
     u8 spriteId;
 
     species = GetMonData(mon, MON_DATA_SPECIES2);
-    spriteId = CreateSprite(&gUnknown_02024E8C, 40, 64, 5);
+    spriteId = CreateSprite(&gCreatingSpriteTemplate, 40, 64, 5);
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
 

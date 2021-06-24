@@ -29,7 +29,7 @@ extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gReservedSpritePaletteCount;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
@@ -1279,18 +1279,18 @@ static void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite)
 
 void sub_8143648(u16 paletteTag, u8 animID)
 {
-    gUnknown_02024E8C = sUnknown_0840B6B8;
-    gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = sUnknown_0840B69C[animID];
-    gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
+    gCreatingSpriteTemplate = sUnknown_0840B6B8;
+    gCreatingSpriteTemplate.paletteTag = paletteTag;
+    gCreatingSpriteTemplate.images = sUnknown_0840B69C[animID];
+    gCreatingSpriteTemplate.anims = gSpriteAnimTable_81E7C64;
 }
 
 void sub_8143680(u16 paletteTag, u8 animID)
 {
-    gUnknown_02024E8C = sUnknown_0840B6B8;
-    gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = sUnknown_0840B69C[animID];
-    gUnknown_02024E8C.anims = gUnknown_081EC2A4[0];
+    gCreatingSpriteTemplate = sUnknown_0840B6B8;
+    gCreatingSpriteTemplate.paletteTag = paletteTag;
+    gCreatingSpriteTemplate.images = sUnknown_0840B69C[animID];
+    gCreatingSpriteTemplate.anims = gUnknown_081EC2A4[0];
 }
 
 static u32 HallOfFame_LoadPokemonPic(u16 species, s16 posX, s16 posY, u16 pokeID, u32 tid, u32 pid)
@@ -1298,13 +1298,13 @@ static u32 HallOfFame_LoadPokemonPic(u16 species, s16 posX, s16 posY, u16 pokeID
     u8 spriteID;
     const u8* pokePal;
 
-    LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, EWRAM, gUnknown_0840B5A0[pokeID], species, pid, 1);
+    LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (void *)EWRAM, gUnknown_0840B5A0[pokeID], species, pid, 1);
 
     pokePal = GetMonSpritePalFromOtIdPersonality(species, tid, pid);
     LoadCompressedPalette(pokePal, 16 * pokeID + 256, 0x20);
 
     sub_8143648(pokeID, pokeID);
-    spriteID = CreateSprite(&gUnknown_02024E8C, posX, posY, 10 - pokeID);
+    spriteID = CreateSprite(&gCreatingSpriteTemplate, posX, posY, 10 - pokeID);
     gSprites[spriteID].oam.paletteNum = pokeID;
     return spriteID;
 }
@@ -1318,7 +1318,7 @@ static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a
     LoadCompressedPalette(gTrainerFrontPicPaletteTable[trainerPicID].data, 16 * a3 + 256, 0x20);
     sub_8143680(a3, a3);
 
-    spriteID = CreateSprite(&gUnknown_02024E8C, posX, posY, 1);
+    spriteID = CreateSprite(&gCreatingSpriteTemplate, posX, posY, 1);
     gSprites[spriteID].oam.paletteNum = a3;
 
     return spriteID;

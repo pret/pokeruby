@@ -27,7 +27,7 @@ extern void *gBattlerControllerFuncs[];
 extern u8 gBattleBufferA[][0x200];
 extern bool8 gDoingBattleAnim;
 extern u8 gBattlerSpriteIds[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u16 gBattleTypeFlags;
 extern u32 gBattleControllerExecFlags;
 extern u16 gSpecialVar_ItemId;
@@ -396,7 +396,7 @@ void SafariHandleTrainerThrow(void)
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);

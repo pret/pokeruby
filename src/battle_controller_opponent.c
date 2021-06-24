@@ -39,7 +39,7 @@ extern u8 gBattleBufferA[][0x200];
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerSpriteIds[];
 extern u8 gBattleMonForms[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern void (*gBattlerControllerFuncs[])(void);
 extern u8 gUnknown_0300434C[];
 extern u8 gHealthboxSpriteIds[];
@@ -1119,7 +1119,7 @@ void OpponentHandleLoadPokeSprite(void)
     BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
       GetBattlerSubpriority(gActiveBattler));
@@ -1151,7 +1151,7 @@ void sub_803495C(u8 a, u8 b)
     BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBattlerSpriteIds[a] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       GetBattlerSubpriority(a));
@@ -1227,7 +1227,7 @@ void OpponentHandleTrainerThrow(void)
     sub_8031A6C(trainerPicIndex, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       0xB0,
       40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicIndex].coords),
       GetBattlerSubpriority(gActiveBattler));
@@ -1257,7 +1257,7 @@ void OpponentHandleTrainerSlide(void)
     sub_8031A6C(trainerPicIndex, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       0xB0,
       40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicIndex].coords),
       0x1E);

@@ -17,7 +17,7 @@
 #include "scanline_effect.h"
 
 extern u16 gSpecialVar_Result;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 //--------------------------------------------------
 // Graphics Data
@@ -718,7 +718,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
       species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 1);
-    spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
+    spriteId = CreateSprite(&gCreatingSpriteTemplate, x, y, 0);
     gSprites[spriteId].callback = nullsub_72;
     gSprites[spriteId].oam.priority = 0;
     return spriteId;

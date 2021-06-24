@@ -66,7 +66,7 @@ extern u32 gTransformedPersonalities[];
 extern u8 gBattleMonForms[];
 extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u8 gAnimMoveTurn;
 extern u8 gUnknown_02038470[];
 extern u8 gUnknown_03004344;
@@ -2351,7 +2351,7 @@ void sub_802F934(u8 bank, u8 b)
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
     gBattlerSpriteIds[bank] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
       GetBattlerSubpriority(bank));
@@ -2418,7 +2418,7 @@ void PlayerHandleTrainerThrow(void)
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       r7 + 80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       GetBattlerSubpriority(gActiveBattler));
@@ -2434,7 +2434,7 @@ void PlayerHandleTrainerSlide(void)
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);

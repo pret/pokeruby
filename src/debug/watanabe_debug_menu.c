@@ -446,7 +446,7 @@ void debug_80C3A50(u8 taskId)
 
     debug_80C3800(species, 18, 17);
 
-    spriteId = sub_8091A4C(saveBlock2->playerGender, 0x98, 0x28, 0);
+    spriteId = CreateSizeScreenTrainerPic(saveBlock2->playerGender, 0x98, 0x28, 0);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 2;
     gSprites[spriteId].oam.priority = 0;
@@ -458,7 +458,7 @@ void debug_80C3A50(u8 taskId)
     gTasks[taskId].data[4] = gPokedexEntries[natDexNum].trainerOffset;
     gTasks[taskId].data[6] = gPokedexEntries[natDexNum].trainerScale;
 
-    spriteId2 = sub_80918EC(natDexNum, 0x58, 0x28, 1);
+    spriteId2 = CreateMonSpriteFromNationalDexNumber(natDexNum, 0x58, 0x28, 1);
     gSprites[spriteId2].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId2].oam.matrixNum = 1;
     gSprites[spriteId2].oam.priority = 0;
@@ -601,7 +601,7 @@ NAKED void debug_80C3A50(u8 taskId)
         "\tmov\tr1, #0x98\n"
         "\tmov\tr2, #0x28\n"
         "\tmov\tr3, #0x0\n"
-        "\tbl\tsub_8091A4C\n"
+        "\tbl\tCreateSizeScreenTrainerPic\n"
         "\tmov\tr2, sp\n"
         "\tstrh\tr0, [r2, #0x10]\n"
         "\tadd\tr3, r0, #0\n"
@@ -668,7 +668,7 @@ NAKED void debug_80C3A50(u8 taskId)
         "\tmov\tr1, #0x58\n"
         "\tmov\tr2, #0x28\n"
         "\tmov\tr3, #0x1\n"
-        "\tbl\tsub_80918EC\n"
+        "\tbl\tCreateMonSpriteFromNationalDexNumber\n"
         "\tmov\tr3, sp\n"
         "\tstrh\tr0, [r3, #0x1c]\n"
         "\tlsl\tr0, r0, #0x10\n"
@@ -2673,20 +2673,20 @@ void debug_80C6CB8(u8 taskId)
     DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
     LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
     GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 1);
-    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
+    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gCreatingSpriteTemplate, 0x28, 0x28, 0);
     gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.priority = 0;
 
     DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->totalPoints, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[2], gUnknown_Debug_2038A20->totalPoints);
     LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
     GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 2);
-    gUnknown_Debug_2038A20->unk3 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x78, 0);
+    gUnknown_Debug_2038A20->unk3 = CreateSprite(&gCreatingSpriteTemplate, 0x28, 0x78, 0);
     gSprites[gUnknown_Debug_2038A20->unk3].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk3].oam.priority = 0;
 
     gUnknown_Debug_2038A20->round1Points = CreateMonIcon(gUnknown_Debug_2038A20->totalPoints, sub_809D62C, 0x68, 0x2C, 0, 0);
 
-    sub_8091738(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->totalPoints), 2, 0x3fc);
+    PrintFootprint(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->totalPoints), 2, 0x3fc);
 
     ((u16 *)(VRAM + 0xF858))[0] = 0xF3FC;
     ((u16 *)(VRAM + 0xF858))[1] = 0xF3FD;
@@ -3300,7 +3300,7 @@ void debug_80C7934(u8 taskId)
     DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
     LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->totalPoints);
     GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->totalPoints, 1);
-    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
+    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gCreatingSpriteTemplate, 0x28, 0x28, 0);
     gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.priority = 0;
 

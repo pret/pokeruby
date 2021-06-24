@@ -3522,13 +3522,13 @@ static void sub_804B2D0(u8 whichParty, u8 a1)
         case 0:
             species = GetMonData(pokemon, MON_DATA_SPECIES2);
             personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gSharedMem, gMonSpriteGfx_Sprite_ptr[whichParty * 2 + 1], species, personality);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gSharedMem, gMonSpriteGfx_Sprite_ptr[whichParty * 2 + 1], species, personality);
             LoadCompressedObjectPalette(GetMonSpritePalStruct(pokemon));
             gUnknown_03004828->tradeSpecies[whichParty] = species;
             break;
         case 1:
             GetMonSpriteTemplate_803C56C(GetMonSpritePalStruct(pokemon)->tag, v0);
-            gUnknown_03004828->pokePicSpriteIdxs[whichParty] = CreateSprite(&gUnknown_02024E8C, 0x78, 0x3c, 0x6);
+            gUnknown_03004828->pokePicSpriteIdxs[whichParty] = CreateSprite(&gCreatingSpriteTemplate, 0x78, 0x3c, 0x6);
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[whichParty]].invisible = TRUE;
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[whichParty]].callback = SpriteCallbackDummy;
             break;

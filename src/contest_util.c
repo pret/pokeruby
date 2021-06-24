@@ -27,7 +27,7 @@
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
 
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern u8 gSelectedOrderFromParty[];
 
@@ -295,15 +295,15 @@ void ShowContestEntryMonPic(void)
           &gMonFrontPicTable[species],
           gMonFrontPicCoords[species].coords,
           gMonFrontPicCoords[species].y_offset,
-          (u32)gMonSpriteGfx_Sprite_ptr[0],
+          gMonSpriteGfx_Sprite_ptr[0],
           gMonSpriteGfx_Sprite_ptr[1],
           species,
           var1);
         palette = GetMonSpritePalStructFromOtIdPersonality(species, var2, var1);
         LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(species, 1);
-        gUnknown_02024E8C.paletteTag = palette->tag;
-        spriteId = CreateSprite(&gUnknown_02024E8C, 0x78, 0x40, 0);
+        gCreatingSpriteTemplate.paletteTag = palette->tag;
+        spriteId = CreateSprite(&gCreatingSpriteTemplate, 0x78, 0x40, 0);
         gTasks[taskId].data[2] = spriteId;
         gTasks[taskId].data[3] = left;
         gTasks[taskId].data[4] = top;

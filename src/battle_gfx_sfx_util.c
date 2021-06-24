@@ -312,7 +312,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords,
       gMonFrontPicCoords[species].y_offset,
-      eVoidSharedArr2,
+      (void *)EWRAM,
       gMonSpriteGfx_Sprite_ptr[var],
       species,
       r7);
@@ -364,7 +364,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
       &gMonBackPicTable[species],
       gMonBackPicCoords[species].coords,
       gMonBackPicCoords[species].y_offset,
-      eVoidSharedArr2,
+      (void *)EWRAM,
       gMonSpriteGfx_Sprite_ptr[var],
       species,
       r7);
@@ -661,7 +661,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               &gMonBackPicTable[species],
               gMonBackPicCoords[species].coords,
               gMonBackPicCoords[species].y_offset,
-              eVoidSharedArr2,
+              (void *)EWRAM,
               gMonSpriteGfx_Sprite_ptr[0],
               species,
                 gContestResources__moveAnim.unk10);
@@ -681,7 +681,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   &gMonBackPicTable[species],
                   gMonBackPicCoords[species].coords,
                   gMonBackPicCoords[species].y_offset,
-                  eVoidSharedArr2,
+                  (void *)EWRAM,
                   gMonSpriteGfx_Sprite_ptr[r10],
                   species,
                   gTransformedPersonalities[a]);
@@ -694,7 +694,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   &gMonFrontPicTable[species],
                   gMonFrontPicCoords[species].coords,
                   gMonFrontPicCoords[species].y_offset,
-                  eVoidSharedArr2,
+                  (void *)EWRAM,
                   gMonSpriteGfx_Sprite_ptr[r10],
                   species,
                   gTransformedPersonalities[a]);

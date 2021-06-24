@@ -67,7 +67,8 @@ void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, u8 coords
         LZ77UnCompWram(src->data, dest);
 }
 
-void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coords, u32 y_offset, u32 d, void *dest, s32 species, u32 pid)
+void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coords, u32 y_offset,
+    void *decompBuf, void *dest, s32 species, u32 pid)
 {
     u32 frontOrBack;
 
@@ -77,10 +78,11 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coord
     else
         frontOrBack = 1; // frontPic
 
-    LoadSpecialPokePic(src, coords, y_offset, d, dest, species, pid, frontOrBack);
+    LoadSpecialPokePic(src, coords, y_offset, decompBuf, dest, species, pid, frontOrBack);
 }
 
-void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 pid, u32 frontOrBack)
+void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c,
+    void *decompBuffer, void *dest, s32 species, u32 pid, u32 frontOrBack)
 {
     u8 frontOrBack8 = frontOrBack;
 

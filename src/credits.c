@@ -166,7 +166,7 @@ struct CreditsEntry
 extern u8 unk_201e800[0x800];
 extern u8 unk_201f000[0x800];
 
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern u16 gUnknown_02039358;
 extern s16 gUnknown_0203935A;
@@ -1561,7 +1561,7 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         &gMonFrontPicTable[species],
         gMonFrontPicCoords[species].coords,
         gMonFrontPicCoords[species].y_offset,
-        EWRAM,
+        (void *)EWRAM,
         gUnknown_0840B5A0[position],
         species,
         personality,
@@ -1572,7 +1572,7 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
     LoadCompressedPalette(lzPaletteData, 0x100 + (position * 16), 0x20);
     sub_8143648(position, position);
 
-    spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
+    spriteId = CreateSprite(&gCreatingSpriteTemplate, x, y, 0);
     gSprites[spriteId].oam.paletteNum = position;
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].data[1] = position + 1;

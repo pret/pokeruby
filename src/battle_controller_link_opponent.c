@@ -46,7 +46,7 @@ extern bool8 gDoingBattleAnim;
 extern u8 gBattleOutcome;
 extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u8 gAnimMoveTurn;
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gUnknown_0300434C[];
@@ -1148,7 +1148,7 @@ void LinkOpponentHandleLoadPokeSprite(void)
     BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
       GetBattlerSubpriority(gActiveBattler));
@@ -1178,7 +1178,7 @@ void sub_8039430(u8 a, u8 b)
     BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBattlerSpriteIds[a] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       GetBattlerSubpriority(a));
@@ -1250,7 +1250,7 @@ void LinkOpponentHandleTrainerThrow(void)
     sub_8031A6C(gender, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(gender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       176 + xOffset, 40 + 4 * (8 - gTrainerFrontPicCoords[gender].coords),
       GetBattlerSubpriority(gActiveBattler));
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;

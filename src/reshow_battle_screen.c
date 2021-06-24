@@ -9,7 +9,7 @@
 #include "data2.h"
 #include "ewram.h"
 
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
@@ -235,7 +235,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
@@ -245,7 +245,7 @@ static void sub_807B184(u8 bank)
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
         {
             GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(0));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, 0x50,
                                                 (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
                                                  GetBattlerSubpriority(0));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
@@ -255,7 +255,7 @@ static void sub_807B184(u8 bank)
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
         {
             GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(0));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, 0x50,
                                                 (8 - gTrainerBackPicCoords[2].coords) * 4 + 80,
                                                  GetBattlerSubpriority(0));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
@@ -267,7 +267,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[bank]].data[0] = bank;

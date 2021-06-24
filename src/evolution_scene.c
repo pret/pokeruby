@@ -68,7 +68,7 @@ extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gMoveToLearn;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern bool8 gAffineAnimsDisabled;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleTextBuff2[];
@@ -233,8 +233,8 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     LoadCompressedPalette(*pokePal, 0x110, 0x20);
 
     GetMonSpriteTemplate_803C56C(currSpecies, 1);
-    gUnknown_02024E8C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoInfo.preEvoSpriteID = ID = CreateSprite(&gUnknown_02024E8C, 120, 64, 30);
+    gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoInfo.preEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 1;
@@ -250,8 +250,8 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(speciesToEvolve, 3);
-    gUnknown_02024E8C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gUnknown_02024E8C, 120, 64, 30);
+    gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 2;
     gSprites[ID].invisible = TRUE;
@@ -330,8 +330,8 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(postEvoSpecies, 3);
-    gUnknown_02024E8C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gUnknown_02024E8C, 120, 64, 30);
+    gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 2;
@@ -406,8 +406,8 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             u8 ID;
 
             GetMonSpriteTemplate_803C56C(postEvoSpecies, 3);
-            gUnknown_02024E8C.affineAnims = gDummySpriteAffineAnimTable;
-            sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gUnknown_02024E8C, 120, 64, 30);
+            gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+            sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
             gSprites[ID].callback = nullsub_37;
             gSprites[ID].oam.paletteNum = 2;
@@ -450,8 +450,8 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(speciesToEvolve, 1);
-    gUnknown_02024E8C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gUnknown_02024E8C, 120, 64, 30);
+    gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
     gSprites[ID].callback = nullsub_37;
     gSprites[ID].oam.paletteNum = 2;

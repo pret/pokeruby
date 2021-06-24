@@ -51,7 +51,7 @@ extern u8 gBattleMonForms[];
 extern u8 gBattleOutcome;
 extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u8 gAnimMoveTurn;
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gUnknown_0300434C[];
@@ -1098,7 +1098,7 @@ void WallyHandleTrainerThrow(void)
     LoadPlayerTrainerBankSprite(2, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
@@ -1113,7 +1113,7 @@ void WallyHandleTrainerSlide(void)
     LoadPlayerTrainerBankSprite(2, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
@@ -1503,7 +1503,7 @@ void sub_81398BC(u8 bank)
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
     gBattlerSpriteIds[bank] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
       GetBattlerSubpriority(bank));

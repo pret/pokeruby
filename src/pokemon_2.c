@@ -36,7 +36,7 @@ extern u16 gBattleMovePower;
 extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
-EWRAM_DATA struct SpriteTemplate gUnknown_02024E8C = {0};
+EWRAM_DATA struct SpriteTemplate gCreatingSpriteTemplate = {0};
 
 extern u8 gBadEggNickname[];
 extern const struct SpriteTemplate gSpriteTemplate_8208288[];
@@ -161,19 +161,19 @@ const struct SpriteTemplate gSpriteTemplate_8208288[] =
 
 void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
-    gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
-    gUnknown_02024E8C.paletteTag = species;
-    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
+    gCreatingSpriteTemplate = gSpriteTemplate_8208288[a2];
+    gCreatingSpriteTemplate.paletteTag = species;
+    gCreatingSpriteTemplate.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
 }
 
 void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)
 {
-    gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
-    gUnknown_02024E8C.paletteTag = species;
+    gCreatingSpriteTemplate = gSpriteTemplate_8208288[a2];
+    gCreatingSpriteTemplate.paletteTag = species;
     if (a2 == 0 || a2 == 2)
-        gUnknown_02024E8C.anims = gUnknown_081ECACC[species];
+        gCreatingSpriteTemplate.anims = gUnknown_081ECACC[species];
     else
-        gUnknown_02024E8C.anims = gUnknown_081EC2A4[species];
+        gCreatingSpriteTemplate.anims = gUnknown_081EC2A4[species];
 }
 
 void EncryptBoxMon(struct BoxPokemon *boxMon)

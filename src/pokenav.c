@@ -4626,7 +4626,7 @@ void sub_80F4824(s16 arg0, u8 arg1)
             &gMonFrontPicTable[species],
             gMonFrontPicCoords[species].coords,
             1,
-            (intptr_t)gPokenavStructPtr->unk131E4,
+            gPokenavStructPtr->unk131E4,
             gPokenavStructPtr->unkD1E4[arg1],
             species,
             personality);

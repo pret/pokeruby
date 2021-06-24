@@ -66,7 +66,7 @@ struct UnknownStruct8
 
 extern void sub_802BBD4();
 
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern const u8 Str_821F7B8[];
 extern u8 gUnknown_02023A14_50;
 extern const u16 gBattleTextboxPalette[];
@@ -2627,7 +2627,7 @@ void debug_sub_8012688(void)
 	  gCurrentMove);
 	LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
 	GetMonSpriteTemplate_803C56C(gCurrentMove, 1);
-	spriteId = CreateSprite(&gUnknown_02024E8C, 176, 40 + gMonFrontPicCoords[gCurrentMove].y_offset, 40);
+	spriteId = CreateSprite(&gCreatingSpriteTemplate, 176, 40 + gMonFrontPicCoords[gCurrentMove].y_offset, 40);
 	gSprites[spriteId].callback = nullsub_37;
 	gSprites[spriteId].oam.paletteNum = 1;
 	REG_DISPCNT = 0x1F40;

@@ -216,7 +216,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
     switch (gUnknown_03005E98)
     {
         case 0:
-            gPokedexCryScreenPtr->unk0014 = cry->unk0;
+            gPokedexCryScreenPtr->unk0014 = cry->texts;
             gPokedexCryScreenPtr->unk0016 = cry->yPos;
             gPokedexCryScreenPtr->unk001A = 0;
             gPokedexCryScreenPtr->unk001B = 0;
@@ -235,7 +235,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             break;
         case 1:
             r7 = cry->unk2 << 11;
-            r6 = (cry->paletteNo << 12) + ((unsigned)(cry->unk0 << 18) >> 23);
+            r6 = (cry->paletteNo << 12) + ((unsigned)(cry->texts << 18) >> 23);
             for (i = 0; i < 7; i++)
             {
                 for (j = 0; j < 32; j++)
