@@ -4477,40 +4477,40 @@ static void PrepareDebugOverlayBeforeShowingContestPainting(u8 a0)
     switch (a0)
     {
         case 0:
-            gBattleStruct->contestWinnerIsForArtist = 0;
-            gBattleStruct->contestWinnerSaveIdx = 0;
-            contestEntry->contestType = sPicTest_ContestType - 1;
-            StringCopy(contestEntry->trainer_name, sDummyTrainerName);
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 0;
+            contestEntry->contestCategory = sPicTest_ContestType - 1;
+            StringCopy(contestEntry->trainerName, sDummyTrainerName);
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 1:
-            gBattleStruct->contestWinnerIsForArtist = 0;
-            gBattleStruct->contestWinnerSaveIdx = 8;
-            contestEntry->contestType = sPicTest_MuseumArtTitleType - 1;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = sPicTest_MuseumArtTitleType - 1;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 2:
-            gBattleStruct->contestWinnerIsForArtist = 1;
-            gBattleStruct->contestWinnerSaveIdx = 8;
-            contestEntry->contestType = sPicTest_PreviewType - 1;
+            eCurContestWinnerIsForArtist = TRUE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = sPicTest_PreviewType - 1;
             break;
         case 3:
-            gBattleStruct->contestWinnerIsForArtist = 0;
-            gBattleStruct->contestWinnerSaveIdx = 8;
-            contestEntry->contestType = 0;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = 0;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 4:
-            gBattleStruct->contestWinnerIsForArtist = 0;
-            gBattleStruct->contestWinnerSaveIdx = 8;
-            contestEntry->contestType = 3;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = 3;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 5:
-            gBattleStruct->contestWinnerIsForArtist = 0;
-            gBattleStruct->contestWinnerSaveIdx = 8;
-            contestEntry->contestType = 9;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = 9;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
     }
 }

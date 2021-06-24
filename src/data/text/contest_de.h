@@ -467,4 +467,4 @@ const u8 gUnknownText_MissedTurn[] = _("Verpasste Chance");
 
 const u8 gUnknownText_LinkStandbyAndWinner[] = _("Verbindung...");
 const u8 gUnknownText_ColorWhite2[] = _("{COLOR WHITE2}");
-const u8 gUnknownText_LinkWinner[] = _("Der Sieger ist {STR_VAR_2} von\n{STR_VAR_1}! Herzlichen Glückwunsch!!");
+const u8 gUnknownText_LinkWinner[] = _("Der Sieger ist {STR_VAR_2} von\n{STR_VAR_1}! Herzlichen Glückwunsch!");

@@ -649,7 +649,7 @@ void debug_sub_80B9EBC(u8 taskId)
 	  796,
 	  gUnknown_083CA340[1][0],
 	  gUnknown_083CA340[1][1]);
-	sub_80AED58();
+        Contest_ClearMoveDescriptionBox();
 	PrintContestMoveDescription(gTasks[taskId].data[1]);
 	gTasks[taskId].data[0]++;
 	break;
@@ -696,7 +696,7 @@ void debug_sub_80B9EBC(u8 taskId)
 	    gTasks[taskId].data[1] = 0;
 	    gTasks[taskId].data[2] = 0;
 	    gTasks[taskId].data[3] = 0;
-	    gTasks[taskId].func = sub_80ABCDC;
+	    gTasks[taskId].func = Task_ShowMoveSelectScreen;
 	    break;
 	}
 	break;
@@ -714,13 +714,13 @@ void debug_sub_80BA054(u8 taskId)
 	for (i = 0; i < 4; i++)
 	    gBattleMonForms[i] = 0;
 	memset(&gContestResources__moveAnim, 0, sizeof(gContestResources__moveAnim));
-	sub_80B28F0(gContestPlayerMonIndex);
+	SetMoveAnimAttackerData(gContestPlayerMonIndex);
 	r6 = CreateContestantSprite(
 	  gContestMons[gContestPlayerMonIndex].species, 
 	  gContestMons[gContestPlayerMonIndex].otId, 
 	  gContestMons[gContestPlayerMonIndex].personality);
 	gSprites[r6].pos2.x = 120;
-	gSprites[r6].callback = sub_80AD8FC;
+	gSprites[r6].callback = SpriteCB_MonSlideIn;
 	gTasks[taskId].data[2] = r6;
 	gBattlerSpriteIds[gBattlerAttacker] = r6;
 	gTasks[taskId].data[3] = 0;
@@ -732,8 +732,8 @@ void debug_sub_80BA054(u8 taskId)
 	if (gSprites[r6].callback == SpriteCallbackDummy)
 	{
 	    sContestantStatus[gContestPlayerMonIndex].currMove = gTasks[taskId].data[1];
-	    sub_80B2790(gContestPlayerMonIndex);
-	    sub_80B28F0(gContestPlayerMonIndex);
+	    SetMoveSpecificAnimData(gContestPlayerMonIndex);
+	    SetMoveAnimAttackerData(gContestPlayerMonIndex);
 	    SelectContestMoveBankTarget(gTasks[taskId].data[1]);
 	    DoMoveAnim(gTasks[taskId].data[1]);
 	    gTasks[taskId].data[3] = 0;
@@ -744,7 +744,7 @@ void debug_sub_80BA054(u8 taskId)
 	gAnimScriptCallback();
 	if (!gAnimScriptActive)
 	{
-	    sub_80B28CC(gContestPlayerMonIndex);
+	    ClearMoveAnimData(gContestPlayerMonIndex);
 	    if (sContest.moveAnimTurnCount != 0)
 	    {
 		gTasks[taskId].data[10] = 0;
@@ -761,7 +761,7 @@ void debug_sub_80BA054(u8 taskId)
 	if (gTasks[taskId].data[3] == 21)
 	{
 	    r6 = gTasks[taskId].data[2];
-	    gSprites[r6].callback = sub_80AD92C;
+	    gSprites[r6].callback = SpriteCB_MonSlideOut;
 	    SlideApplauseMeterIn();
 	    gTasks[taskId].data[3] = 0;
 	    gTasks[taskId].data[0]++;

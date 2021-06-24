@@ -1690,15 +1690,15 @@ void debug_sub_8110CCC(void)
 
 void debug_sub_8110D84(void)
 {
-    switch (sFlyDataPtr->round1Points)
+    switch (sFlyDataPtr->unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
-        sFlyDataPtr->round1Points++;
+        sFlyDataPtr->unk4++;
         break;
     case 1:
         if (!UpdatePaletteFade())
-            sFlyDataPtr->round1Points++;
+            sFlyDataPtr->unk4++;
         break;
     case 2:
         switch (sub_80FAB60())
@@ -1709,7 +1709,7 @@ void debug_sub_8110D84(void)
             debug_sub_8110CCC();
             break;
         case 4:
-            if (sFlyDataPtr->regionMap.completedCombo != 0)
+            if (sFlyDataPtr->regionMap.unk16 != 0)
             {
                 m4aSongNumStart(SE_SELECT);
                 gSharedMem[0xA6E] = 1;  // TODO: what is this?
@@ -1719,7 +1719,7 @@ void debug_sub_8110D84(void)
         case 5:
             m4aSongNumStart(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-            sFlyDataPtr->round1Points++;
+            sFlyDataPtr->unk4++;
             break;
         }
         break;
@@ -1736,14 +1736,14 @@ void debug_sub_8110D84(void)
         {
             sub_80FBCA0();
             sub_80FAEC4();
-            sFlyDataPtr->round1Points++;
+            sFlyDataPtr->unk4++;
         }
         break;
     case 5:
         if (sub_80FAFC0() == 0)
         {
             CreateRegionMapCursor(0, 0);
-            sFlyDataPtr->round1Points++;
+            sFlyDataPtr->unk4++;
         }
         break;
     case 6:
@@ -1755,14 +1755,14 @@ void debug_sub_8110D84(void)
         {
             sub_80FBCA0();
             sub_80FAEC4();
-            sFlyDataPtr->round1Points++;
+            sFlyDataPtr->unk4++;
         }
         break;
     case 7:
         if (sub_80FAFC0() == 0)
         {
             CreateRegionMapCursor(0, 0);
-            sFlyDataPtr->round1Points = 3;
+            sFlyDataPtr->unk4 = 3;
         }
         break;
     }

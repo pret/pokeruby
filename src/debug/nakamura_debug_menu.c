@@ -851,7 +851,7 @@ static bool8 FishingPoints(void)
     ConvertIntToDecimalStringN(gStringVar1, FeebasDebug_GetTrueNumberOfWaterTilesInMapThird(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 11, 7);
 
-    FeebasSeedRng(gSaveBlock1.easyChatPairs[0].excitementAppealBonus);
+    FeebasSeedRng(gSaveBlock1.easyChatPairs[0].unk2);
     nWaterTiles = FishingPoints_CountFishingTilesInMapThird(0) + FishingPoints_CountFishingTilesInMapThird(1) + FishingPoints_CountFishingTilesInMapThird(2);
     nFeebas = 0;
 

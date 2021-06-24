@@ -461,7 +461,7 @@ void debug_sub_815D1D8(void)
             gMain.state++;
         break;
     case 8:
-        sub_800832C();
+        SetCloseLinkCallback();
         gMain.state++;
         break;
     case 9:

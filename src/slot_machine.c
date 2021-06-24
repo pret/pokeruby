@@ -822,9 +822,9 @@ static bool8 sub_8102058(struct Task *task)
         unk_debug_bss_1_8--;
         if (unk_debug_bss_1_8 == 0)
         {
-            PlaySE(0x18);
-            sub_8102E1C(eSlotMachine->repeatJam);
-            sub_8103C14(eSlotMachine->repeatJam);
+            PlaySE(SE_CONTEST_PLACE);
+            sub_8102E1C(eSlotMachine->unk18);
+            sub_8103C14(eSlotMachine->unk18);
             unk_debug_bss_1_8 = (Random() & 0x1F) + 1;
             eSlotMachine->state = 13;
         }

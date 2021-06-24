@@ -84,7 +84,7 @@ struct WatanabeEwram18000_2 {
     u8 random;
     u8 unk9;
     u8 unkA;
-    struct PlttData contestant;
+    struct PlttData unkC;
     u16 unk10[16];
 };
 
@@ -2712,10 +2712,10 @@ void debug_80C6EE8(u8 taskId)
     u16 hue;
     CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
-    gUnknown_Debug_2038A20->contestant.r = hue & 0x1f;
-    gUnknown_Debug_2038A20->contestant.g = (hue & 0x3e0) >> 5;
-    gUnknown_Debug_2038A20->contestant.b = (hue & 0x7c00) >> 10;
-    gUnknown_Debug_2038A20->contestant.unused_15 = 0;
+    gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
+    gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
+    gUnknown_Debug_2038A20->unkC.b = (hue & 0x7c00) >> 10;
+    gUnknown_Debug_2038A20->unkC.unused_15 = 0;
     debug_80C68CC(gUnknown_Debug_2038A20->unk7 + 1, 11, 10, 2);
     Menu_PrintText(gUnknown_Debug_083F8813, 13, 10);
     debug_80C68CC(hue, 14, 10, 4);
@@ -3129,18 +3129,18 @@ void debug_80C7294(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->contestant.r < 31)
-                    gUnknown_Debug_2038A20->contestant.r++;
+                if (gUnknown_Debug_2038A20->unkC.r < 31)
+                    gUnknown_Debug_2038A20->unkC.r++;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->contestant.g < 31)
-                    gUnknown_Debug_2038A20->contestant.g++;
+                if (gUnknown_Debug_2038A20->unkC.g < 31)
+                    gUnknown_Debug_2038A20->unkC.g++;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->contestant.b < 31)
-                    gUnknown_Debug_2038A20->contestant.b++;
+                if (gUnknown_Debug_2038A20->unkC.b < 31)
+                    gUnknown_Debug_2038A20->unkC.b++;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
         }
@@ -3150,18 +3150,18 @@ void debug_80C7294(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->contestant.r > 0)
-                    gUnknown_Debug_2038A20->contestant.r--;
+                if (gUnknown_Debug_2038A20->unkC.r > 0)
+                    gUnknown_Debug_2038A20->unkC.r--;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->contestant.g > 0)
-                    gUnknown_Debug_2038A20->contestant.g--;
+                if (gUnknown_Debug_2038A20->unkC.g > 0)
+                    gUnknown_Debug_2038A20->unkC.g--;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->contestant.b > 0)
-                    gUnknown_Debug_2038A20->contestant.b--;
+                if (gUnknown_Debug_2038A20->unkC.b > 0)
+                    gUnknown_Debug_2038A20->unkC.b--;
                 gTasks[taskId].func = debug_80C74E4;
                 break;
         }
@@ -3170,7 +3170,7 @@ void debug_80C7294(u8 taskId)
 
 void debug_80C74E4(u8 taskId)
 {
-    u16 pal = (gUnknown_Debug_2038A20->contestant.r & 0x001f) + ((gUnknown_Debug_2038A20->contestant.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->contestant.b << 10) & 0x7c00);
+    u16 pal = (gUnknown_Debug_2038A20->unkC.r & 0x001f) + ((gUnknown_Debug_2038A20->unkC.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->unkC.b << 10) & 0x7c00);
     gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferFaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferUnfaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;
@@ -3190,13 +3190,13 @@ void debug_80C7584(struct Sprite *sprite)
         {
             default:
             case 0:
-                shade = gUnknown_Debug_2038A20->contestant.r;
+                shade = gUnknown_Debug_2038A20->unkC.r;
                 break;
             case 1:
-                shade = gUnknown_Debug_2038A20->contestant.g;
+                shade = gUnknown_Debug_2038A20->unkC.g;
                 break;
             case 2:
-                shade = gUnknown_Debug_2038A20->contestant.b;
+                shade = gUnknown_Debug_2038A20->unkC.b;
                 break;
         }
         sprite->pos2.x = 4 * shade;
@@ -3320,10 +3320,10 @@ void debug_80C7A54(u8 taskId)
     u16 hue;
     CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
-    gUnknown_Debug_2038A20->contestant.r = hue & 0x1f;
-    gUnknown_Debug_2038A20->contestant.g = (hue & 0x3e0) >> 5;
-    gUnknown_Debug_2038A20->contestant.b = (hue & 0x7c00) >> 10;
-    gUnknown_Debug_2038A20->contestant.unused_15 = 0;
+    gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
+    gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
+    gUnknown_Debug_2038A20->unkC.b = (hue & 0x7c00) >> 10;
+    gUnknown_Debug_2038A20->unkC.unused_15 = 0;
     debug_80C68CC(gUnknown_Debug_2038A20->unk7 + 1, 11, 10, 2);
     Menu_PrintText(gUnknown_Debug_083F8813, 13, 10);
     debug_80C68CC(hue, 14, 10, 4);
@@ -3720,18 +3720,18 @@ void debug_80C7DDC(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->contestant.r < 31)
-                    gUnknown_Debug_2038A20->contestant.r++;
+                if (gUnknown_Debug_2038A20->unkC.r < 31)
+                    gUnknown_Debug_2038A20->unkC.r++;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->contestant.g < 31)
-                    gUnknown_Debug_2038A20->contestant.g++;
+                if (gUnknown_Debug_2038A20->unkC.g < 31)
+                    gUnknown_Debug_2038A20->unkC.g++;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->contestant.b < 31)
-                    gUnknown_Debug_2038A20->contestant.b++;
+                if (gUnknown_Debug_2038A20->unkC.b < 31)
+                    gUnknown_Debug_2038A20->unkC.b++;
                 gTasks[taskId].func = debug_80C802C;
                 break;
         }
@@ -3741,18 +3741,18 @@ void debug_80C7DDC(u8 taskId)
         switch (gUnknown_Debug_2038A20->unkA)
         {
             case 0:
-                if (gUnknown_Debug_2038A20->contestant.r > 0)
-                    gUnknown_Debug_2038A20->contestant.r--;
+                if (gUnknown_Debug_2038A20->unkC.r > 0)
+                    gUnknown_Debug_2038A20->unkC.r--;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 1:
-                if (gUnknown_Debug_2038A20->contestant.g > 0)
-                    gUnknown_Debug_2038A20->contestant.g--;
+                if (gUnknown_Debug_2038A20->unkC.g > 0)
+                    gUnknown_Debug_2038A20->unkC.g--;
                 gTasks[taskId].func = debug_80C802C;
                 break;
             case 2:
-                if (gUnknown_Debug_2038A20->contestant.b > 0)
-                    gUnknown_Debug_2038A20->contestant.b--;
+                if (gUnknown_Debug_2038A20->unkC.b > 0)
+                    gUnknown_Debug_2038A20->unkC.b--;
                 gTasks[taskId].func = debug_80C802C;
                 break;
         }
@@ -3761,7 +3761,7 @@ void debug_80C7DDC(u8 taskId)
 
 void debug_80C802C(u8 taskId)
 {
-    u16 pal = (gUnknown_Debug_2038A20->contestant.r & 0x001f) + ((gUnknown_Debug_2038A20->contestant.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->contestant.b << 10) & 0x7c00);
+    u16 pal = (gUnknown_Debug_2038A20->unkC.r & 0x001f) + ((gUnknown_Debug_2038A20->unkC.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->unkC.b << 10) & 0x7c00);
     gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferFaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
     gPlttBufferUnfaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;

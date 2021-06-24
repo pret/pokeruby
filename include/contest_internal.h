@@ -76,7 +76,7 @@ s16 GetContestantRound2Points(u8 a);
 void DetermineFinalStandings(void);
 bool8 DidContestantPlaceHigher(s32 a, s32 b, struct ContestFinalStandings *c);
 void ContestPrintLinkStandby(void);
-void sub_80AF94C(u8);
+void Task_unused_80AF94C(u8 taskId);
 void FillContestantWindowBgs(void);
 u16 GetAppealHeartTileOffset(u8 a);
 s8 GetNumHeartsFromAppealPoints(s16 a);
