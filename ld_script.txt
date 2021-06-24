@@ -576,7 +576,6 @@ SECTIONS {
         src/debug/matsuda_debug_menu.o(.rodata);
 		src/contest.o(.rodata);
         src/contest_2.o(.rodata);
-        data/contest.o(.rodata);
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
         src/berry.o(.rodata);

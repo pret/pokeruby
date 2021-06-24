@@ -39,6 +39,7 @@ extern u8 gBattlerTarget;
 extern u8 gBattlerSpriteIds[];
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern struct SpriteTemplate gUnknown_02024E8C;
+extern void (*const gContestEffectFuncs[])(void);
 
 #include "data/contest_opponents.h"
 
@@ -277,32 +278,374 @@ const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble = {
     .callback = SpriteCallbackDummy,
 };
 
-#ifdef ENGLISH
+#if defined(ENGLISH)
 #include "data/text/contest_en.h"
-#else
+#elif defined(GERMAN)
 #include "data/text/contest_de.h"
 #endif //ENGLISH
 
 const u8 ALIGNED(2) _unk_83CC3BE[] = __("ピラ");
+const u8 gUnknownText_UnknownFormatting2[] = _("{COLOR GREEN}{SHADOW RED}");
+const u8 gUnknownText_UnknownFormatting3[] = _("{COLOR LIGHT_GREY}");
 
-extern const struct CompressedSpriteSheet gUnknown_083CC3AC;
-extern const struct CompressedSpritePalette gUnknown_083CC3B4[];
-extern const struct SpriteTemplate gSpriteTemplate_83CC454[];
-extern const u8 *const gUnknown_083CC188[];
-extern const u8 gText_Contest_Shyness[];
-extern const u8 gText_Contest_Anxiety[];
-extern const u8 gText_Contest_Laziness[];
-extern const u8 gText_Contest_Hesitancy[];
-extern const u8 gText_Contest_Fear[];
-extern const u8 gUnknown_083CC2EC[];
-extern const u8 gUnknown_083CC59C[];
-extern const u8 gText_Slash[];
-extern const u16 gUnknown_083CC5A4[];
-extern const struct ContestWinner gDefaultContestWinners[];
-extern const u8 gUnknownText_MissedTurn[];
-extern const u8 gUnknownText_LinkStandbyAndWinner[];
-extern void (*const gContestEffectFuncs[])(void);
-extern const s8 gContestExcitementTable[][5];
+const struct CompressedSpriteSheet gUnknown_083CC3AC = {
+    .data = gContestNumbers_UnusedGfx,
+    .size = 0x200,
+    .tag = 20000
+};
+
+const struct CompressedSpritePalette gUnknown_083CC3B4[] = {
+    { .data = gContestNumbers_UnusedPal, .tag = 20000 },
+    { .data = gContestNumbers_UnusedPal, .tag = 20001 },
+    { .data = gContestNumbers_UnusedPal, .tag = 20002 },
+    { .data = gContestNumbers_UnusedPal, .tag = 20003 },
+};
+
+const union AnimCmd gSpriteAnim_83CC3D4[] = {
+    ANIMCMD_FRAME( 0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83CC3DC[] = {
+    ANIMCMD_FRAME( 4, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83CC3E4[] = {
+    ANIMCMD_FRAME( 8, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83CC3EC[] = {
+    ANIMCMD_FRAME(12, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83CC3F4[] = {
+    gSpriteAnim_83CC3D4,
+    gSpriteAnim_83CC3DC,
+    gSpriteAnim_83CC3E4,
+    gSpriteAnim_83CC3EC,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83CC404[] = {
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83CC414[] = {
+    AFFINEANIMCMD_FRAME(-15, -15, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83CC424[] = {
+    AFFINEANIMCMD_FRAME(31, 31, 0, 0),
+    AFFINEANIMCMD_FRAME(15, 15, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83CC43C[] = {
+    gSpriteAffineAnim_83CC404,
+    gSpriteAffineAnim_83CC414,
+    gSpriteAffineAnim_83CC424,
+    NULL,
+};
+
+const struct OamData gOamData_83CC44C = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CC454[] = {
+    {
+        .tileTag = 20000,
+        .paletteTag = 20000,
+        .oam = &gOamData_83CC44C,
+        .anims = gSpriteAnimTable_83CC3F4,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC43C,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 20000,
+        .paletteTag = 20001,
+        .oam = &gOamData_83CC44C,
+        .anims = gSpriteAnimTable_83CC3F4,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC43C,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 20000,
+        .paletteTag = 20002,
+        .oam = &gOamData_83CC44C,
+        .anims = gSpriteAnimTable_83CC3F4,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC43C,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 20000,
+        .paletteTag = 20003,
+        .oam = &gOamData_83CC44C,
+        .anims = gSpriteAnimTable_83CC3F4,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC43C,
+        .callback = SpriteCallbackDummy,
+    },
+};
+
+const struct CompressedSpriteSheet gUnknown_083CC4B4[] = {
+    { .data = gBlankGfxCompressed, .size = 0x1000, .tag = 33000 },
+    { .data = gBlankGfxCompressed, .size = 0x1000, .tag = 33001 },
+    { .data = gBlankGfxCompressed, .size = 0x1000, .tag = 33002 },
+    { .data = gBlankGfxCompressed, .size = 0x1000, .tag = 33003 },
+};
+
+const struct SpritePalette gUnknown_083CC4D4[] = {
+    { .data = eContestTempSave.cachedWindowPalettes[5], .tag = 33000 },
+    { .data = eContestTempSave.cachedWindowPalettes[6], .tag = 33001 },
+    { .data = eContestTempSave.cachedWindowPalettes[7], .tag = 33002 },
+    { .data = eContestTempSave.cachedWindowPalettes[8], .tag = 33003 },
+};
+
+const struct OamData gOamData_83CC4F4 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83CC4FC[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83CC50C[] = {
+    AFFINEANIMCMD_FRAME( 3,  3, 0, 15),
+    AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
+    AFFINEANIMCMD_FRAME( 3,  3, 0, 15),
+    AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83CC534[] = {
+    gSpriteAffineAnim_83CC4FC,
+    gSpriteAffineAnim_83CC50C,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CC53C[] = {
+    {
+        .tileTag = 33000,
+        .paletteTag = 33000,
+        .oam = &gOamData_83CC4F4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC534,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 33001,
+        .paletteTag = 33001,
+        .oam = &gOamData_83CC4F4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC534,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 33002,
+        .paletteTag = 33002,
+        .oam = &gOamData_83CC4F4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC534,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 33003,
+        .paletteTag = 33003,
+        .oam = &gOamData_83CC4F4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_83CC534,
+        .callback = SpriteCallbackDummy,
+    },
+};
+
+const u8 gUnknown_083CC59C[] = _("{HIGHLIGHT TRANSPARENT}{COLOR}");
+const u8 gText_Slash[] = _("/");
+
+const u16 gUnknown_083CC5A4[] = {
+    RGB(19, 3, 0),
+    RGB(6, 15, 6),
+    RGB(19, 18, 0),
+    RGB(4, 6, 19),
+    RGB(31, 0, 0),
+    RGB(0, 31, 0),
+    RGB(31, 31, 0),
+    RGB(0, 0, 31),
+};
+
+const u8 gContestExcitementTable[][5] =
+{
+    [CONTEST_CATEGORY_COOL] = {
+        [CONTEST_CATEGORY_COOL]   = +1,
+        [CONTEST_CATEGORY_BEAUTY] =  0,
+        [CONTEST_CATEGORY_CUTE]   = -1,
+        [CONTEST_CATEGORY_SMART]  = -1,
+        [CONTEST_CATEGORY_TOUGH]  =  0
+    },
+    [CONTEST_CATEGORY_BEAUTY] = {
+        [CONTEST_CATEGORY_COOL]   =  0,
+        [CONTEST_CATEGORY_BEAUTY] = +1,
+        [CONTEST_CATEGORY_CUTE]   =  0,
+        [CONTEST_CATEGORY_SMART]  = -1,
+        [CONTEST_CATEGORY_TOUGH]  = -1
+    },
+    [CONTEST_CATEGORY_CUTE] = {
+        [CONTEST_CATEGORY_COOL]   = -1,
+        [CONTEST_CATEGORY_BEAUTY] =  0,
+        [CONTEST_CATEGORY_CUTE]   = +1,
+        [CONTEST_CATEGORY_SMART]  =  0,
+        [CONTEST_CATEGORY_TOUGH]  = -1
+    },
+    [CONTEST_CATEGORY_SMART] = {
+        [CONTEST_CATEGORY_COOL]   = -1,
+        [CONTEST_CATEGORY_BEAUTY] = -1,
+        [CONTEST_CATEGORY_CUTE]   =  0,
+        [CONTEST_CATEGORY_SMART]  = +1,
+        [CONTEST_CATEGORY_TOUGH]  =  0
+    },
+    [CONTEST_CATEGORY_TOUGH] = {
+        [CONTEST_CATEGORY_COOL]   =  0,
+        [CONTEST_CATEGORY_BEAUTY] = -1,
+        [CONTEST_CATEGORY_CUTE]   = -1,
+        [CONTEST_CATEGORY_SMART]  =  0,
+        [CONTEST_CATEGORY_TOUGH]  = +1
+    }
+};
+
+#if defined(ENGLISH)
+#define CONTEST_WINNER_1_NICKNAME    "TAILTA"
+#define CONTEST_WINNER_1_OTNAME      "WYATT"
+#define CONTEST_WINNER_2_NICKNAME    "BRELO"
+#define CONTEST_WINNER_2_OTNAME      "LIANA"
+#define CONTEST_WINNER_3_NICKNAME    "PELEP"
+#define CONTEST_WINNER_3_OTNAME      "TIERA"
+#define CONTEST_WINNER_4_NICKNAME    "PELEP"
+#define CONTEST_WINNER_4_OTNAME      "TIERA"
+#define CONTEST_WINNER_5_NICKNAME    "PELEP"
+#define CONTEST_WINNER_5_OTNAME      "TIERA"
+#define CONTEST_WINNER_6_NICKNAME    "KITSY"
+#define CONTEST_WINNER_6_OTNAME      "OMAR"
+#define CONTEST_WINNER_7_NICKNAME    "GULPS"
+#define CONTEST_WINNER_7_OTNAME      "MACIE"
+#define CONTEST_WINNER_8_NICKNAME    "LOUDED"
+#define CONTEST_WINNER_8_OTNAME      "BRYANT"
+#elif defined(GERMAN)
+#define CONTEST_WINNER_1_NICKNAME    "SCHWALBI"
+#define CONTEST_WINNER_1_OTNAME      "ROSEL"
+#define CONTEST_WINNER_2_NICKNAME    "TUFUNG"
+#define CONTEST_WINNER_2_OTNAME      "WITOLD"
+#define CONTEST_WINNER_3_NICKNAME    "LIPPER"
+#define CONTEST_WINNER_3_OTNAME      "RUFUS"
+#define CONTEST_WINNER_4_NICKNAME    "LIPPER"
+#define CONTEST_WINNER_4_OTNAME      "ELLEN"
+#define CONTEST_WINNER_5_NICKNAME    "LIPPER"
+#define CONTEST_WINNER_5_OTNAME      "AVIA"
+#define CONTEST_WINNER_6_NICKNAME    "CONEC"
+#define CONTEST_WINNER_6_OTNAME      "HAUBERT"
+#define CONTEST_WINNER_7_NICKNAME    "SCHLUCKI"
+#define CONTEST_WINNER_7_OTNAME      "HEILWIG"
+#define CONTEST_WINNER_8_NICKNAME    "KEELO"
+#define CONTEST_WINNER_8_OTNAME      "ISEGRIM"
+#endif
+
+const struct ContestWinner gDefaultContestWinners[] = {
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_TAILLOW,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .nickname = _(CONTEST_WINNER_1_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_1_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_BRELOOM,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .nickname = _(CONTEST_WINNER_2_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_2_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_PELIPPER,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .nickname = _(CONTEST_WINNER_3_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_3_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_PELIPPER,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .nickname = _(CONTEST_WINNER_4_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_4_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_PELIPPER,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .nickname = _(CONTEST_WINNER_5_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_5_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_DELCATTY,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .nickname = _(CONTEST_WINNER_6_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_6_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_GULPIN,
+        .contestCategory = CONTEST_CATEGORY_CUTE,
+        .nickname = _(CONTEST_WINNER_7_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_7_OTNAME),
+    },
+    {
+        .personality = 0,
+        .otId = 0xFFFF,
+        .species = SPECIES_LOUDRED,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .nickname = _(CONTEST_WINNER_8_NICKNAME),
+        .trainerName = _(CONTEST_WINNER_8_OTNAME),
+    },
+};
 
 void TryPutPlayerLast(void)
 {
@@ -1984,7 +2327,7 @@ u8 CreateUnusedBrokenBlendTask(u8 *a)
 }
 
 #ifdef NONMATCHING
-void Task_UnusedBlend(u8 taskId)
+void Task_UnusedBrokenBlend(u8 taskId)
 {
     u8 i;
     u8 r4;

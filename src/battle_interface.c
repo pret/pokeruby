@@ -1538,7 +1538,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     sp14 = 0;
     for (i = 0; i < 6; i++)  //_080448A0
     {
-        if (b[i].totalPoints != 0xFFFF)
+        if (b[i].unk0 != 0xFFFF)
             sp14++;
     }
 
@@ -1599,19 +1599,19 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI) // && b[i] != 0xFFFF && b[i]
             {
-                if (b[i].totalPoints == 0xFFFF)
+                if (b[i].unk0 == 0xFFFF)
                 {
                     //_08044AE6
                     gSprites[sp[i]].oam.tileNum += 1;
                     gSprites[sp[i]].data[7] = 1;
                     // to _08044B52
                 }
-                else if (b[i].totalPoints == 0)
+                else if (b[i].unk0 == 0)
                 {
                     gSprites[sp[i]].oam.tileNum += 3;
                     // to _08044B46
                 }
-                else if (b[i].round1Points != 0)
+                else if (b[i].unk4 != 0)
                 {
                     gSprites[sp[i]].oam.tileNum += 2;
                 }
@@ -1626,13 +1626,13 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                     gSprites[sp[i]].data[7] = 1;
                     // to _08044B52
                 }
-                else if (b[i].totalPoints == 0)
+                else if (b[i].unk0 == 0)
                 {
                     //_08044B14
                     gSprites[sp[i]].oam.tileNum += 3;
                     // to _08044B46
                 }
-                else if (b[i].round1Points != 0)
+                else if (b[i].unk4 != 0)
                 {
                     gSprites[sp[i]].oam.tileNum += 2;
                 }
@@ -1647,16 +1647,16 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
-                if (b[i].totalPoints == 0xFFFF)
+                if (b[i].unk0 == 0xFFFF)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 1;
                     gSprites[sp[5 - i]].data[7] = 1;
                 }
-                else if (b[i].totalPoints == 0)
+                else if (b[i].unk0 == 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 3;
                 }
-                else if (b[i].round1Points != 0)
+                else if (b[i].unk4 != 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 2;
                 }
@@ -1668,11 +1668,11 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                     gSprites[sp[5 - i]].oam.tileNum += 1;
                     gSprites[sp[5 - i]].data[7] = 1;
                 }
-                else if (b[i].totalPoints == 0)
+                else if (b[i].unk0 == 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 3;
                 }
-                else if (b[i].round1Points != 0)
+                else if (b[i].unk4 != 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 2;
                 }

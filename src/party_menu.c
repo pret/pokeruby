@@ -2406,13 +2406,13 @@ void SwapValues_s16(s16 *a, s16 *b)
 #ifdef NONMATCHING
 void sub_806CF04(void)
 {
-    SwapValues_s16(&gSprites[ewram01000.unk3].pos1.x, &gSprites[ewram01000.round1Points].pos1.x);
-    SwapValues_s16(&gSprites[ewram01000.unk3].pos1.y, &gSprites[ewram01000.round1Points].pos1.y);
-    SwapValues_s16(&gSprites[ewram01000.unk3].pos2.x, &gSprites[ewram01000.round1Points].pos2.x);
-    SwapValues_s16(&gSprites[ewram01000.unk3].data[0], &gSprites[ewram01000.round1Points].data[0]);
+    SwapValues_s16(&gSprites[ewram01000.unk3].pos1.x, &gSprites[ewram01000.unk4].pos1.x);
+    SwapValues_s16(&gSprites[ewram01000.unk3].pos1.y, &gSprites[ewram01000.unk4].pos1.y);
+    SwapValues_s16(&gSprites[ewram01000.unk3].pos2.x, &gSprites[ewram01000.unk4].pos2.x);
+    SwapValues_s16(&gSprites[ewram01000.unk3].data[0], &gSprites[ewram01000.unk4].data[0]);
 
     gSprites[ewram01000.unk3].callback = SpriteCB_sub_806D37C;
-    gSprites[ewram01000.round1Points].callback = SpriteCB_sub_806D37C;
+    gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
 }
 #else
 NAKED

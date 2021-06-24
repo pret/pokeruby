@@ -261,206 +261,210 @@ const u8 *const gContestString_UnreferencedPtrTable3[] = {
     ContestString_Terminator,
     ContestString_JammedAppealsNotice,
     ContestString_AppealSame,
-    const u8 ContestString_MoreConscious[] = _("Es wird sich der anderen\nPKMN mehr bewusst.{PAUSE 60}");
-    const u8 ContestString_NoAppeal[] = _("{STR_VAR_1} kann danach\nkeinen Ausdruck zeigen.{PAUSE 60}");
-    const u8 ContestString_SettleDown[] = _("Es kommt ein wenig\nzur Ruhe.{PAUSE 60}");
-    const u8 ContestString_ObliviousToOthers[] = _("Die anderen PKMN nehmen\nes überhaupt nicht wahr.{PAUSE 60}");
-    const u8 ContestString_LessAware[] = _("Es ist sich der anderen\nPKMN kaum bewusst.{PAUSE 60}");
-    const u8 ContestString_StoppedCaring[] = _("Es kümmert sich nicht\nmehr viel um andere PKMN.{PAUSE 60}");
-    const u8 ContestString_StartleAttempt[] = _("Es versucht, die anderen\nPKMN zu erschrecken.{PAUSE 60}");
-    const u8 ContestString_DazzleAttempt[] = _("Es versucht, die anderen\nPKMN zu blenden.{PAUSE 60}");
-    const u8 ContestString_JudgeLookAway2[] = _("Der JUROR schaut\n{STR_VAR_1} nicht mehr an.{PAUSE 60}");
-    const u8 ContestString_UnnerveAttempt[] = _("Es versucht, die folgenden\nPKMN zu entnerven.{PAUSE 60}");
-    const u8 ContestString_Nervous[] = _("{STR_VAR_1} wird\nnervös.{PAUSE 60}");
-    const u8 ContestString_UnnerveWaiting[] = _("Dieser Ausdruck soll die\nanderen PKMN entnerven.{PAUSE 60}");
-    const u8 ContestString_TauntWell[] = _("Es verhöhnt die\nbesseren PKMN.{PAUSE 60}");
-    const u8 ContestString_RegainedForm[] = _("{STR_VAR_1} findet zu\nseiner Form zurück.{PAUSE 60}");
-    const u8 ContestString_JamWell[] = _("Es versucht, die besseren\nPKMN zu beeindrucken.{PAUSE 60}");
-    const u8 ContestString_HustleStandout[] = _("{STR_VAR_1} an der Spitze\nengagiert sich noch mehr.{PAUSE 60}");
-    const u8 ContestString_WorkHardUnnoticed[] = _("Das bisher unauffällige\n{STR_VAR_1} gibt alles.");
-    const u8 ContestString_WorkBefore[] = _("Es strengt sich genauso\nan wie die PKMN vor ihm.{PAUSE 60}");
-    const u8 ContestString_AppealNotWell[] = _("Ausdruck von {STR_VAR_1}:\nKam nicht gut an.{PAUSE 60}");
-    const u8 ContestString_WorkPreceding[] = _("Es strengt sich an wie die\nvorangegangenen PKMN.{PAUSE 60}");
-    const u8 ContestString_AppealNotWell2[] = _("Ausdruck von {STR_VAR_1}:\nVerlief nicht so gut.{PAUSE 60}");
-    const u8 ContestString_AppealNotShownWell[] = _("Ausdruck v. {STR_VAR_1}: \nWurde gestört.{PAUSE 60}");
-    const u8 ContestString_AppealSlightlyWell[] = _("Ausdruck von {STR_VAR_1}:\nVerlief ganz gut.{PAUSE 60}");
-    const u8 ContestString_AppealPrettyWell[] = _("Ausdruck von {STR_VAR_1}:\nKam ganz gut an.{PAUSE 60}");
-    const u8 ContestString_AppealExcellently[] = _("{STR_VAR_1} führte seinen\nAusdruck exzellent vor.{PAUSE 60}");
-    const u8 ContestString_AppealDud[] = _("Ausdruck von {STR_VAR_1}:\nEr war absolut mies.{PAUSE 60}");
-    const u8 ContestString_AppealNotVeryWell[] = _("Ausdruck von {STR_VAR_1}:\nEr war nicht so gut.{PAUSE 60}");
-    const u8 ContestString_AppealSlightlyWell2[] = _("Ausdruck von {STR_VAR_1}:\nEr war nicht schlecht.{PAUSE 60}");
-    const u8 ContestString_AppealPrettyWell2[] = _("Ausdruck von {STR_VAR_1}:\nEr war recht gut.{PAUSE 60}");
-    const u8 ContestString_AppealVeryWell[] = _("Ausdruck von {STR_VAR_1}:\nEr war sehr gut.{PAUSE 60}");
-    const u8 ContestString_AppealExcellently2[] = _("Ausdruck von {STR_VAR_1}:\nEr war exzellent.{PAUSE 60}");
-    const u8 ContestString_SameTypeGood[] = _("Der gleiche Typ wie das\nvorhergehende PKMN - gut!{PAUSE 60}");
-    const u8 ContestString_DiffTypeGood[] = _("Nicht der gleiche Typ wie\ndas vorherige PKMN - gut!{PAUSE 60}");
-    const u8 ContestString_StoodOutAsMuch[] = _("Es ist viel besser als die\nvorhergehenden PKMN.{PAUSE 60}");
-    const u8 ContestString_NotAsWell[] = _("Es war nicht so gut wie\ndas PKMN vor ihm.{PAUSE 60}");
-    const u8 ContestString_ConditionRose[] = _("Die Kondition von\n{STR_VAR_1} stieg.{PAUSE 60}");
-    const u8 ContestString_HotStatus[] = _("Status von {STR_VAR_1}:\nBewirkt guten Ausdruck!{PAUSE 60}");
-    const u8 ContestString_MoveUpLine[] = _("Es steigt in der Reihen-\nfolge auf.{PAUSE 60}");
-    const u8 ContestString_MoveBackLine[] = _("Es fällt in der Reihen-\nfolge zurück.{PAUSE 60}");
-    const u8 ContestString_ScrambleOrder[] = _("Es bringt die Reihenfolge\ndurcheinander.{PAUSE 60}");
+};
 
-    const u8 ContestString_JudgeExpectantly2[] = _("Der JUROR betrachtet\n{STR_VAR_1} interessiert.{PAUSE 60}");
+const u8 ContestString_MoreConscious[] = _("Es wird sich der anderen\nPKMN mehr bewusst.{PAUSE 60}");
+const u8 ContestString_NoAppeal[] = _("{STR_VAR_1} kann danach\nkeinen Ausdruck zeigen.{PAUSE 60}");
+const u8 ContestString_SettleDown[] = _("Es kommt ein wenig\nzur Ruhe.{PAUSE 60}");
+const u8 ContestString_ObliviousToOthers[] = _("Die anderen PKMN nehmen\nes überhaupt nicht wahr.{PAUSE 60}");
+const u8 ContestString_LessAware[] = _("Es ist sich der anderen\nPKMN kaum bewusst.{PAUSE 60}");
+const u8 ContestString_StoppedCaring[] = _("Es kümmert sich nicht\nmehr viel um andere PKMN.{PAUSE 60}");
+const u8 ContestString_StartleAttempt[] = _("Es versucht, die anderen\nPKMN zu erschrecken.{PAUSE 60}");
+const u8 ContestString_DazzleAttempt[] = _("Es versucht, die anderen\nPKMN zu blenden.{PAUSE 60}");
+const u8 ContestString_JudgeLookAway2[] = _("Der JUROR schaut\n{STR_VAR_1} nicht mehr an.{PAUSE 60}");
+const u8 ContestString_UnnerveAttempt[] = _("Es versucht, die folgenden\nPKMN zu entnerven.{PAUSE 60}");
+const u8 ContestString_Nervous[] = _("{STR_VAR_1} wird\nnervös.{PAUSE 60}");
+const u8 ContestString_UnnerveWaiting[] = _("Dieser Ausdruck soll die\nanderen PKMN entnerven.{PAUSE 60}");
+const u8 ContestString_TauntWell[] = _("Es verhöhnt die\nbesseren PKMN.{PAUSE 60}");
+const u8 ContestString_RegainedForm[] = _("{STR_VAR_1} findet zu\nseiner Form zurück.{PAUSE 60}");
+const u8 ContestString_JamWell[] = _("Es versucht, die besseren\nPKMN zu beeindrucken.{PAUSE 60}");
+const u8 ContestString_HustleStandout[] = _("{STR_VAR_1} an der Spitze\nengagiert sich noch mehr.{PAUSE 60}");
+const u8 ContestString_WorkHardUnnoticed[] = _("Das bisher unauffällige\n{STR_VAR_1} gibt alles.");
+const u8 ContestString_WorkBefore[] = _("Es strengt sich genauso\nan wie die PKMN vor ihm.{PAUSE 60}");
+const u8 ContestString_AppealNotWell[] = _("Ausdruck von {STR_VAR_1}:\nKam nicht gut an.{PAUSE 60}");
+const u8 ContestString_WorkPreceding[] = _("Es strengt sich an wie die\nvorangegangenen PKMN.{PAUSE 60}");
+const u8 ContestString_AppealNotWell2[] = _("Ausdruck von {STR_VAR_1}:\nVerlief nicht so gut.{PAUSE 60}");
+const u8 ContestString_AppealNotShownWell[] = _("Ausdruck v. {STR_VAR_1}: \nWurde gestört.{PAUSE 60}");
+const u8 ContestString_AppealSlightlyWell[] = _("Ausdruck von {STR_VAR_1}:\nVerlief ganz gut.{PAUSE 60}");
+const u8 ContestString_AppealPrettyWell[] = _("Ausdruck von {STR_VAR_1}:\nKam ganz gut an.{PAUSE 60}");
+const u8 ContestString_AppealExcellently[] = _("{STR_VAR_1} führte seinen\nAusdruck exzellent vor.{PAUSE 60}");
+const u8 ContestString_AppealDud[] = _("Ausdruck von {STR_VAR_1}:\nEr war absolut mies.{PAUSE 60}");
+const u8 ContestString_AppealNotVeryWell[] = _("Ausdruck von {STR_VAR_1}:\nEr war nicht so gut.{PAUSE 60}");
+const u8 ContestString_AppealSlightlyWell2[] = _("Ausdruck von {STR_VAR_1}:\nEr war nicht schlecht.{PAUSE 60}");
+const u8 ContestString_AppealPrettyWell2[] = _("Ausdruck von {STR_VAR_1}:\nEr war recht gut.{PAUSE 60}");
+const u8 ContestString_AppealVeryWell[] = _("Ausdruck von {STR_VAR_1}:\nEr war sehr gut.{PAUSE 60}");
+const u8 ContestString_AppealExcellently2[] = _("Ausdruck von {STR_VAR_1}:\nEr war exzellent.{PAUSE 60}");
+const u8 ContestString_SameTypeGood[] = _("Der gleiche Typ wie das\nvorhergehende PKMN - gut!{PAUSE 60}");
+const u8 ContestString_DiffTypeGood[] = _("Nicht der gleiche Typ wie\ndas vorherige PKMN - gut!{PAUSE 60}");
+const u8 ContestString_StoodOutAsMuch[] = _("Es ist viel besser als die\nvorhergehenden PKMN.{PAUSE 60}");
+const u8 ContestString_NotAsWell[] = _("Es war nicht so gut wie\ndas PKMN vor ihm.{PAUSE 60}");
+const u8 ContestString_ConditionRose[] = _("Die Kondition von\n{STR_VAR_1} stieg.{PAUSE 60}");
+const u8 ContestString_HotStatus[] = _("Status von {STR_VAR_1}:\nBewirkt guten Ausdruck!{PAUSE 60}");
+const u8 ContestString_MoveUpLine[] = _("Es steigt in der Reihen-\nfolge auf.{PAUSE 60}");
+const u8 ContestString_MoveBackLine[] = _("Es fällt in der Reihen-\nfolge zurück.{PAUSE 60}");
+const u8 ContestString_ScrambleOrder[] = _("Es bringt die Reihenfolge\ndurcheinander.{PAUSE 60}");
 
-    const u8 ContestString_WentOverWell[] = _("Die Combo der Ausdrücke\nkam gut an.{PAUSE 60}");
+const u8 ContestString_JudgeExpectantly2[] = _("Der JUROR betrachtet\n{STR_VAR_1} interessiert.{PAUSE 60}");
 
-    const u8 ContestString_WentOverVeryWell[] = _("Die Combo der Ausdrücke\nkam sehr gut an.{PAUSE 60}");
+const u8 ContestString_WentOverWell[] = _("Die Combo der Ausdrücke\nkam gut an.{PAUSE 60}");
 
-    const u8 ContestString_AppealComboExcellently[] = _("Die Combo der Ausdrücke\nkam exzellent an.{PAUSE 60}");
-    const u8 ContestString_AvertGaze[] = _("{STR_VAR_1} gelingt es,\nden Blick abzuwenden.{PAUSE 60}");
-    const u8 ContestString_AvoidSeeing[] = _("{STR_VAR_1} wandte den\nBlick erfolgreich ab.{PAUSE 60}");
-    const u8 ContestString_NotFazed[] = _("{STR_VAR_1} lässt sich\ndavon nicht ablenken.{PAUSE 60}");
-    const u8 ContestString_LittleDistracted[] = _("{STR_VAR_1} wurde etwas\nunruhig.{PAUSE 60}");
-    const u8 ContestString_AttemptStartle[] = _("Es versucht, die anderen\nPKMN zu verschrecken.{PAUSE 60}");
-    const u8 ContestString_LookedDown[] = _("{STR_VAR_1} blickt\nirritiert zu Boden.{PAUSE 60}");
-    const u8 ContestString_TurnedBack[] = _("{STR_VAR_1} dreht sich\nirritiert um.{PAUSE 60}");
-    const u8 ContestString_UtterCry[] = _("{STR_VAR_1} kann einen \nLaut nicht unterdrücken.{PAUSE 60}");
-    const u8 ContestString_LeaptUp[] = _("{STR_VAR_1} kann nicht\nanders und springt auf.{PAUSE 60}");
-    const u8 ContestString_TrippedOver[] = _("{STR_VAR_1} ist so irri-\ntiert, dass es stolpert.{PAUSE 60}");
+const u8 ContestString_WentOverVeryWell[] = _("Die Combo der Ausdrücke\nkam sehr gut an.{PAUSE 60}");
 
-    const u8 ContestString_TooNervous[] = _("{STR_VAR_1} ist zu nervös,\num etwas vorzuführen.{PAUSE 60}");
-    const u8 ContestString_MessedUp2[] = _("Es hatte keinen Erfolg.{PAUSE 60}");
-    const u8 ContestString_FailedTargetNervous[] = _("Es konnte keine\nNervosität erzeugen.{PAUSE 60}");
-    const u8 ContestString_FailedAnyoneNervous[] = _("Aber es konnte niemanden\nnervös machen.{PAUSE 60}");
-    const u8 ContestString_Ignored[] = _("Es wurde ignoriert...{PAUSE 60}");
-    const u8 ContestString_NoConditionImprove[] = _("Es konnte seinen Aus-\ndruck nicht verstärken...{PAUSE 60}");
-    const u8 ContestString_BadConditionWeakAppeal[] = _("Schwacher Ausdruck we-\ngen schlechter Konditon.{PAUSE 60}");
-    const u8 ContestString_Unaffected[] = _("{STR_VAR_1} blieb\nunbeeindruckt.{PAUSE 60}");
+const u8 ContestString_AppealComboExcellently[] = _("Die Combo der Ausdrücke\nkam exzellent an.{PAUSE 60}");
+const u8 ContestString_AvertGaze[] = _("{STR_VAR_1} gelingt es,\nden Blick abzuwenden.{PAUSE 60}");
+const u8 ContestString_AvoidSeeing[] = _("{STR_VAR_1} wandte den\nBlick erfolgreich ab.{PAUSE 60}");
+const u8 ContestString_NotFazed[] = _("{STR_VAR_1} lässt sich\ndavon nicht ablenken.{PAUSE 60}");
+const u8 ContestString_LittleDistracted[] = _("{STR_VAR_1} wurde etwas\nunruhig.{PAUSE 60}");
+const u8 ContestString_AttemptStartle[] = _("Es versucht, die anderen\nPKMN zu verschrecken.{PAUSE 60}");
+const u8 ContestString_LookedDown[] = _("{STR_VAR_1} blickt\nirritiert zu Boden.{PAUSE 60}");
+const u8 ContestString_TurnedBack[] = _("{STR_VAR_1} dreht sich\nirritiert um.{PAUSE 60}");
+const u8 ContestString_UtterCry[] = _("{STR_VAR_1} kann einen \nLaut nicht unterdrücken.{PAUSE 60}");
+const u8 ContestString_LeaptUp[] = _("{STR_VAR_1} kann nicht\nanders und springt auf.{PAUSE 60}");
+const u8 ContestString_TrippedOver[] = _("{STR_VAR_1} ist so irri-\ntiert, dass es stolpert.{PAUSE 60}");
 
-    const u8 ContestString_DissapointedRepeat[] = _("{STR_VAR_1} enttäuscht\ndurch Wiederholung.{PAUSE 60}");
+const u8 ContestString_TooNervous[] = _("{STR_VAR_1} ist zu nervös,\num etwas vorzuführen.{PAUSE 60}");
+const u8 ContestString_MessedUp2[] = _("Es hatte keinen Erfolg.{PAUSE 60}");
+const u8 ContestString_FailedTargetNervous[] = _("Es konnte keine\nNervosität erzeugen.{PAUSE 60}");
+const u8 ContestString_FailedAnyoneNervous[] = _("Aber es konnte niemanden\nnervös machen.{PAUSE 60}");
+const u8 ContestString_Ignored[] = _("Es wurde ignoriert...{PAUSE 60}");
+const u8 ContestString_NoConditionImprove[] = _("Es konnte seinen Aus-\ndruck nicht verstärken...{PAUSE 60}");
+const u8 ContestString_BadConditionWeakAppeal[] = _("Schwacher Ausdruck we-\ngen schlechter Konditon.{PAUSE 60}");
+const u8 ContestString_Unaffected[] = _("{STR_VAR_1} blieb\nunbeeindruckt.{PAUSE 60}");
 
-    const u8 ContestString_WentOverGreat[] = _("Die {STR_VAR_3} von\n{STR_VAR_1} war sehr gut.{PAUSE 60}");
+const u8 ContestString_DissapointedRepeat[] = _("{STR_VAR_1} enttäuscht\ndurch Wiederholung.{PAUSE 60}");
 
-    const u8 ContestString_DidntGoWell[] = _("Die {STR_VAR_3} von\n{STR_VAR_1} war nicht gut.{PAUSE 60}");
+const u8 ContestString_WentOverGreat[] = _("Die {STR_VAR_3} von\n{STR_VAR_1} war sehr gut.{PAUSE 60}");
 
-    const u8 ContestString_GotCrowdGoing[] = _("{STR_VAR_1} begeistert\nPublikum mit {STR_VAR_3}.{PAUSE 60}");
+const u8 ContestString_DidntGoWell[] = _("Die {STR_VAR_3} von\n{STR_VAR_1} war nicht gut.{PAUSE 60}");
 
-    const u8 ContestString_CantAppealNextTurn[] = _("{STR_VAR_1} setzt in der \nfolgenden Runde aus.{PAUSE 60}");
-    const u8 ContestString_AttractedAttention[] = _("Die Aufmerksamkeit des\nPublikums liegt auf ihm.{PAUSE 60}");
+const u8 ContestString_GotCrowdGoing[] = _("{STR_VAR_1} begeistert\nPublikum mit {STR_VAR_3}.{PAUSE 60}");
 
-    const u8 ContestString_CrowdWatches[] = _("Das Publikum beobachtet\nweiterhin {STR_VAR_3}.{PAUSE 60}");
+const u8 ContestString_CantAppealNextTurn[] = _("{STR_VAR_1} setzt in der \nfolgenden Runde aus.{PAUSE 60}");
+const u8 ContestString_AttractedAttention[] = _("Die Aufmerksamkeit des\nPublikums liegt auf ihm.{PAUSE 60}");
 
-    const u8 ContestString_Ignored2[] = _("{STR_VAR_2} von\n{STR_VAR_1} ist ignoriert.{PAUSE 60}");
+const u8 ContestString_CrowdWatches[] = _("Das Publikum beobachtet\nweiterhin {STR_VAR_3}.{PAUSE 60}");
 
-    const u8 *const gUnknown_083CC188[] = {
-        ContestString_MoreConscious,
-            ContestString_NoAppeal,
-            ContestString_SettleDown,
-            ContestString_ObliviousToOthers,
-            ContestString_LessAware,
-            ContestString_StoppedCaring,
-            ContestString_StartleAttempt,
-            ContestString_DazzleAttempt,
-            ContestString_JudgeLookAway2,
-            ContestString_UnnerveAttempt,
-            ContestString_Nervous,
-            ContestString_UnnerveWaiting,
-            ContestString_TauntWell,
-            ContestString_RegainedForm,
-            ContestString_JamWell,
-            ContestString_HustleStandout,
-            ContestString_WorkHardUnnoticed,
-            ContestString_WorkBefore,
-            ContestString_AppealNotWell,
-            ContestString_WorkPreceding,
-            ContestString_AppealNotWell2,
-            ContestString_AppealNotShownWell,
-            ContestString_AppealSlightlyWell,
-            ContestString_AppealPrettyWell,
-            ContestString_AppealExcellently,
-            ContestString_AppealDud,
-            ContestString_AppealNotVeryWell,
-            ContestString_AppealSlightlyWell2,
-            ContestString_AppealPrettyWell2,
-            ContestString_AppealVeryWell,
-            ContestString_AppealExcellently2,
-            ContestString_SameTypeGood,
-            ContestString_DiffTypeGood,
-            ContestString_StoodOutAsMuch,
-            ContestString_NotAsWell,
-            ContestString_ConditionRose,
-            ContestString_HotStatus,
-            ContestString_MoveUpLine,
-            ContestString_MoveBackLine,
-            ContestString_ScrambleOrder,
-            ContestString_JudgeExpectantly2,
-            ContestString_WentOverWell,
-            ContestString_WentOverVeryWell,
-            ContestString_AppealComboExcellently,
-            ContestString_AvertGaze,
-            ContestString_AvoidSeeing,
-            ContestString_NotFazed,
-            ContestString_LittleDistracted,
-            ContestString_AttemptStartle,
-            ContestString_LookedDown,
-            ContestString_TurnedBack,
-            ContestString_UtterCry,
-            ContestString_LeaptUp,
-            ContestString_TrippedOver,
-            ContestString_MessedUp2,
-            ContestString_FailedTargetNervous,
-            ContestString_FailedAnyoneNervous,
-            ContestString_Ignored,
-            ContestString_NoConditionImprove,
-            ContestString_BadConditionWeakAppeal,
-            ContestString_Unaffected,
-            ContestString_AttractedAttention,
-    };
+const u8 ContestString_Ignored2[] = _("{STR_VAR_2} von\n{STR_VAR_1} ist ignoriert.{PAUSE 60}");
 
-    const u8 gText_Contest_Shyness[] = _("Scheu");
+const u8 *const gUnknown_083CC188[] = {
+    ContestString_MoreConscious,
+    ContestString_NoAppeal,
+    ContestString_SettleDown,
+    ContestString_ObliviousToOthers,
+    ContestString_LessAware,
+    ContestString_StoppedCaring,
+    ContestString_StartleAttempt,
+    ContestString_DazzleAttempt,
+    ContestString_JudgeLookAway2,
+    ContestString_UnnerveAttempt,
+    ContestString_Nervous,
+    ContestString_UnnerveWaiting,
+    ContestString_TauntWell,
+    ContestString_RegainedForm,
+    ContestString_JamWell,
+    ContestString_HustleStandout,
+    ContestString_WorkHardUnnoticed,
+    ContestString_WorkBefore,
+    ContestString_AppealNotWell,
+    ContestString_WorkPreceding,
+    ContestString_AppealNotWell2,
+    ContestString_AppealNotShownWell,
+    ContestString_AppealSlightlyWell,
+    ContestString_AppealPrettyWell,
+    ContestString_AppealExcellently,
+    ContestString_AppealDud,
+    ContestString_AppealNotVeryWell,
+    ContestString_AppealSlightlyWell2,
+    ContestString_AppealPrettyWell2,
+    ContestString_AppealVeryWell,
+    ContestString_AppealExcellently2,
+    ContestString_SameTypeGood,
+    ContestString_DiffTypeGood,
+    ContestString_StoodOutAsMuch,
+    ContestString_NotAsWell,
+    ContestString_ConditionRose,
+    ContestString_HotStatus,
+    ContestString_MoveUpLine,
+    ContestString_MoveBackLine,
+    ContestString_ScrambleOrder,
+    ContestString_JudgeExpectantly2,
+    ContestString_WentOverWell,
+    ContestString_WentOverVeryWell,
+    ContestString_AppealComboExcellently,
+    ContestString_AvertGaze,
+    ContestString_AvoidSeeing,
+    ContestString_NotFazed,
+    ContestString_LittleDistracted,
+    ContestString_AttemptStartle,
+    ContestString_LookedDown,
+    ContestString_TurnedBack,
+    ContestString_UtterCry,
+    ContestString_LeaptUp,
+    ContestString_TrippedOver,
+    ContestString_MessedUp2,
+    ContestString_FailedTargetNervous,
+    ContestString_FailedAnyoneNervous,
+    ContestString_Ignored,
+    ContestString_NoConditionImprove,
+    ContestString_BadConditionWeakAppeal,
+    ContestString_Unaffected,
+    ContestString_AttractedAttention,
+};
 
-    const u8 gText_Contest_Anxiety[] = _("Besorgnis");
+const u8 gText_Contest_Shyness[] = _("Scheu");
 
-    const u8 gText_Contest_Laziness[] = _("Faulheit");
+const u8 gText_Contest_Anxiety[] = _("Besorgnis");
 
-    const u8 gText_Contest_Hesitancy[] = _("Zögern");
+const u8 gText_Contest_Laziness[] = _("Faulheit");
 
-    const u8 gText_Contest_Fear[] = _("Furcht");
+const u8 gText_Contest_Hesitancy[] = _("Zögern");
 
-    const u8 ContestString_Coolness[] = _("Coolness");
-    const u8 ContestString_Beauty2[] = _("Schönheit");
-    const u8 ContestString_Cuteness[] = _("Anmut");
-    const u8 ContestString_Smartness[] = _("Klugheit");
-    const u8 ContestString_Toughness[] = _("Stärke");
+const u8 gText_Contest_Fear[] = _("Furcht");
 
-    const u8 *const gContestCategoryStrings[] = {
-        ContestString_Coolness,
-            ContestString_Beauty2,
-            ContestString_Cuteness,
-            ContestString_Smartness,
-            ContestString_Toughness,
-    };
+const u8 ContestString_Coolness[] = _("Coolness");
+const u8 ContestString_Beauty2[] = _("Schönheit");
+const u8 ContestString_Cuteness[] = _("Anmut");
+const u8 ContestString_Smartness[] = _("Klugheit");
+const u8 ContestString_Toughness[] = _("Stärke");
 
-    const u8 gUnknown_083CC2EC[] = _("SPANNUNG:");
+const u8 *const gContestCategoryStrings[] = {
+    ContestString_Coolness,
+        ContestString_Beauty2,
+        ContestString_Cuteness,
+        ContestString_Smartness,
+        ContestString_Toughness,
+};
 
-    const u8 ContestString_CoolMove[] = _("COOLE Att.");
+const u8 gUnknown_083CC2EC[] = _("SPANNUNG:");
 
-    const u8 ContestString_BeautyMove[] = _("SCHÖNE Att.");
+const u8 ContestString_CoolMove[] = _("COOLE Att.");
 
-    const u8 ContestString_CuteMove[] = _("ANMUT-Att.");
+const u8 ContestString_BeautyMove[] = _("SCHÖNE Att.");
 
-    const u8 ContestString_SmartMove[] = _("KLUGE Att.");
+const u8 ContestString_CuteMove[] = _("ANMUT-Att.");
 
-    const u8 ContestString_ToughMove[] = _("STARKE Att.");
+const u8 ContestString_SmartMove[] = _("KLUGE Att.");
 
-    const u8 ContestString_UnknownMoveType[] = _("???");
+const u8 ContestString_ToughMove[] = _("STARKE Att.");
 
-    const u8 *const sInvalidContestMoveNames[] = {
-        ContestString_CoolMove,
-            ContestString_BeautyMove,
-            ContestString_CuteMove,
-            ContestString_SmartMove,
-            ContestString_ToughMove,
-            ContestString_UnknownMoveType,
-    };
+const u8 ContestString_UnknownMoveType[] = _("???");
+
+const u8 *const sInvalidContestMoveNames[] = {
+    ContestString_CoolMove,
+        ContestString_BeautyMove,
+        ContestString_CuteMove,
+        ContestString_SmartMove,
+        ContestString_ToughMove,
+        ContestString_UnknownMoveType,
+};
 
 // unused?
-    const u8 ContestString_Rank[] = _("KLASSE");
+const u8 ContestString_Rank[] = _("KLASSE");
 
-    const u8 ContestString_HighlightTransparent_ColorMagenta[] = _("{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} ");
+const u8 ContestString_HighlightTransparent_ColorMagenta[] = _("{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} ");
 
-    const u8 gUnknownText_LinkStandbyAndWinner[] = _("Verbindung...");
-    const u8 gUnknownText_ColorWhite2[] = _("{COLOR WHITE2}");
-    const u8 gUnknownText_LinkWinner[] = _("Der Sieger ist {STR_VAR_2} von\n{STR_VAR_1}! Herzlichen Glückwunsch!!");
+const u8 gUnknownText_MissedTurn[] = _("Verpasste Chance");
+
+const u8 gUnknownText_LinkStandbyAndWinner[] = _("Verbindung...");
+const u8 gUnknownText_ColorWhite2[] = _("{COLOR WHITE2}");
+const u8 gUnknownText_LinkWinner[] = _("Der Sieger ist {STR_VAR_2} von\n{STR_VAR_1}! Herzlichen Glückwunsch!!");

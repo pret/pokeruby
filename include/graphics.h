@@ -43,6 +43,8 @@ extern const u8 gContestMiscGfx[];
 extern const u8 gContestAudienceGfx[];
 extern const u8 gContestJudgeSymbolsGfx[];
 extern const u8 gContest3Pal[];
+extern const u8 gContestNumbers_UnusedGfx[];
+extern const u8 gContestNumbers_UnusedPal[];
 extern const u8 gTiles_8D1975C[];
 extern const u8 gUnknown_08D1977C[];
 extern const u8 gUnknown_08D1A250[];

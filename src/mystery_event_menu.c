@@ -156,7 +156,7 @@ static void CB2_MysteryEventMenu(void)
 
             if (GetLinkPlayerDataExchangeStatusTimed() == 3)
             {
-                sub_800832C();
+                SetCloseLinkCallback();
                 Menu_EraseWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
                 MenuPrintMessageDefaultCoords(gStringVar4);
