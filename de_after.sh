@@ -1,1 +1,1 @@
-git checkout override.mk data/ graphics
+git checkout data/ graphics
