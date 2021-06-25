@@ -244,7 +244,7 @@ SYMBOL(gLastFieldPokeMenuOpened, 4)
 SYMBOL(gPostMenuFieldCallback, 4)
 
 // pokedex.c
-SYMBOL(gUnknown_03005CE8, 4)
+SYMBOL(gUnusedPokedexU8, 4)
 SYMBOL(gUnknown_03005CEC, 4)
 
 // pokemon_summary_screen.o

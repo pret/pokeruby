@@ -69,7 +69,9 @@ u8 sub_8072A18(const u8 *, u8, u16, u8, u32);
 u8 unref_sub_8072A5C(u8 *, u8 *, u8, u16, u8, u32);
 int sub_8072AB0(const u8 *, u8, u16, u8, u8, u32);
 void MenuPrint_RightAligned(const u8 *, u8, u8);
-void sub_8072B80(const u8 *, u8, u8, const u8 *);
+
+// Prints src aligned to right edge of widthRefStr in window defined by left and top
+void MenuPrint_AlignedToRightOfReferenceString(const u8 *src, u8 left, u8 top, const u8 *widthRefStr);
 void MenuPrint_Centered(const u8 *, u8, u8, u16);
 u8 *AlignInt1InMenuWindow(u8 *, s32, u8, u8);
 u8 *AlignInt2InMenuWindow(u8 *, s32, u8, u8);

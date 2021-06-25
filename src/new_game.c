@@ -35,7 +35,7 @@ EWRAM_DATA u8 gDifferentSaveFile = 0;
 EWRAM_DATA u8 gUnknown_020297ED = 0;
 
 extern u8 gPlayerPartyCount;
-extern u8 gUnknown_03005CE8;
+extern u8 gUnusedPokedexU8;
 extern u16 gSaveFileStatus;
 
 extern u8 EventScript_ResetAllMapFlags[];
@@ -91,7 +91,7 @@ void SetDefaultOptions(void)
 
 void ClearPokedexFlags(void)
 {
-    gUnknown_03005CE8 = 0;
+    gUnusedPokedexU8 = 0;
     memset(&gSaveBlock2.pokedex.owned, 0, sizeof(gSaveBlock2.pokedex.owned));
     memset(&gSaveBlock2.pokedex.seen, 0, sizeof(gSaveBlock2.pokedex.seen));
 }
@@ -152,7 +152,7 @@ void sub_8052E4C(void)
 #if DEBUG
     gUnknown_020297ED = 0;
 #endif
-    sub_808C0A0();
+    ResetPokedexScrollPositions();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();

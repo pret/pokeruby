@@ -7,7 +7,7 @@
 #define NATIONAL_DEX_COUNT 386
 
 void ResetPokedex(void);
-void sub_808C0A0(void);
+void ResetPokedexScrollPositions(void);
 void CB2_InitPokedex(void);
 u8 sub_809070C(u16 dexNum, u32 b, u32 c);
 const u8 *GetPokemonCategory(u16);
@@ -28,7 +28,7 @@ u16 GetHoennPokedexCount(u8);
 bool8 CompletedHoennPokedex(void);
 bool16 CompletedNationalPokedex(void);
 
-extern bool8 gUnknown_03005CE8;
+extern bool8 gUnusedPokedexU8;
 
 struct PokedexEntry
 {

@@ -1015,7 +1015,7 @@ u8 DebugMenu_NationalDex(void)
         GetSetPokedexFlag(i + 1, 2);
         GetSetPokedexFlag(i + 1, 3);
     }
-    gUnknown_03005CE8 = TRUE;
+    gUnusedPokedexU8 = TRUE;
     CloseMenu();
     return TRUE;
 }
@@ -1030,7 +1030,7 @@ u8 DebugMenu_HoennDex(void)
         GetSetPokedexFlag(nati, 2);
         GetSetPokedexFlag(nati, 3);
     }
-    gUnknown_03005CE8 = TRUE;
+    gUnusedPokedexU8 = TRUE;
     CloseMenu();
     return TRUE;
 }
