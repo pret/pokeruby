@@ -8,7 +8,7 @@
 #include "overworld.h"
 #include "pokemon.h"
 
-extern u8 gUnknown_02039324;
+extern u8 gHasHallOfFameRecords;
 
 int GameClear(void)
 {
@@ -19,11 +19,11 @@ int GameClear(void)
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR) == TRUE)
     {
-        gUnknown_02039324 = 1;
+        gHasHallOfFameRecords = 1;
     }
     else
     {
-        gUnknown_02039324 = 0;
+        gHasHallOfFameRecords = 0;
         FlagSet(FLAG_SYS_GAME_CLEAR);
     }
 

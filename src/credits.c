@@ -174,7 +174,7 @@ extern s16 gUnknown_0203935C;
 
 static EWRAM_DATA s16 gUnknown_02039320 = 0;
 static EWRAM_DATA u16 gUnknown_02039322 = 0; // TASK A
-EWRAM_DATA u8 gUnknown_02039324 = 0;
+EWRAM_DATA u8 gHasHallOfFameRecords = 0;
 static EWRAM_DATA u8 gUnknown_02039325 = 0;
 
 extern u8 gReservedSpritePaletteCount;
@@ -433,7 +433,7 @@ static void sub_814395C(void)
     UpdatePaletteFade();
 
     if ((gMain.heldKeys & B_BUTTON)
-     && gUnknown_02039324 != 0
+     && gHasHallOfFameRecords != 0
      && gTasks[gUnknown_02039322].func == task_a_8143B68)
     {
         vblank_8143948();

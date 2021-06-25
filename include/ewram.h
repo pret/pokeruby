@@ -8,6 +8,8 @@ extern u8 gSharedMem[];
 // regions overlap others but have different definitions. Until some
 // dupes can be determined to be the same, they will be deliberate
 // seperated.
+#define gDecompressionBuffer            (gSharedMem + 0x1E000)
+
 #define eDroughtPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
 #define ewram0_2                        (*(struct Struct2000000 *)(gSharedMem + 0x0))
@@ -17,7 +19,6 @@ extern u8 gSharedMem[];
 #define ewram0_5                        (*(struct UnkStruct *)(gSharedMem + 0x0))
 #define eMatsudaDebugVar                (gSharedMem[0x0])
 #define eBrendanSprite                  (gSharedMem + 0x0)
-#define ewram0_6                        (u32)(&gSharedMem[0])
 #define ewram0_7                        (&gSharedMem[0])
 #define eSaveSection                    (struct SaveSector *)(gSharedMem + 0x0)
 #define ewram0arr                       ((u8 (*)[32])gSharedMem)
@@ -52,35 +53,16 @@ extern u8 gSharedMem[];
 #define ePokedexCryScreen               (*(struct PokedexCryScreen *)(gSharedMem + 0x1C000))
 #define ePokedexCryScreen2              (*(struct PokedexCryMeterNeedle *)(gSharedMem + 0x1C800))
 
-#define ewram8000                       (&gSharedMem[0x8000])
-#define ewram8800                       (&gSharedMem[0x8800])
-#define ewram9000                       (&gSharedMem[0x9000])
 #define ewram9000_hack                  (void *)(ewram_addr + 0x9000) // TODO: Fix this.
-#define ewram9800                       (&gSharedMem[0x9800])
-#define ewramA000                       (&gSharedMem[0xA000])
-#define ewramA800                       (&gSharedMem[0xA800])
-#define ewramB000                       (&gSharedMem[0xB000])
-#define ewramB800                       (&gSharedMem[0xB800])
 #define TRANSITION_STRUCT               (*(struct TransitionData *)   (gSharedMem + 0xC000))
-#define ewramC000                       (&gSharedMem[0xC000])
 #define ewramC03C                       (&gSharedMem[0xC03C])
-#define ewramC800                       (&gSharedMem[0xC800])
-#define ewramD000                       (&gSharedMem[0xD000])
-#define ewramD800                       (&gSharedMem[0xD800])
-#define ewramE000                       (&gSharedMem[0xE000])
-#define ewramE800                       (&gSharedMem[0xE800])
-#define ewramF000                       (&gSharedMem[0xF000])
-#define ewramF800                       (&gSharedMem[0xF800])
 #define ewram_2010000                   (*(struct TradeEwramStruct *)(gSharedMem + 0x10000))
 #define ewram10000                      (&gSharedMem[0x10000])
 #define eSlotMachineGfxBuffer                    (void *)(gSharedMem + 0x10000) // slot machine
-#define ewram10800                      (&gSharedMem[0x10800])
 #define ewram11000                      (&gSharedMem[0x11000])
-#define ewram11800                      (&gSharedMem[0x11800])
 #define ewram13000                      (&gSharedMem[0x13000])
 #define eSlotMachineReelTimeGfxBuffer                      (&gSharedMem[0x13200])
 #define EWRAM_14000                     ((u8 *)(gSharedMem + 0x14000))
-#define ewram14000                      (&gSharedMem[0x14000])
 #define ewram14000arr(i, data)          (gSharedMem[0x14000 + i + data])
 #define ewram14004arr(i, data)          (gSharedMem[0x14004 + i + data])
 #define ewram14008arr(i, data)          (gSharedMem[0x14008 + data + i])
@@ -88,7 +70,6 @@ extern u8 gSharedMem[];
 #define EWRAM_14800                     ((u16 *)(gSharedMem + 0x14800))
 #define sEvoInfo                        ((*(struct EvoInfo*)(gSharedMem + 0x14800)))
 #define EWRAM_15000                     ((u8 *)(gSharedMem + 0x15000))
-#define ewram15000                      (&gSharedMem[0x15000])
 #define ewram15000arr(i, data)          (gSharedMem[0x15000 + data + i])
 
 // Contest
@@ -203,12 +184,10 @@ extern u8 gSharedMem[];
 #define ewram18a20                      ((u16 *)(gSharedMem + 0x18A20))
 #define ewram18a32                      ((u16 *)(gSharedMem + 0x18A32))
 #define ewram18a80                      ((u16 *)(gSharedMem + 0x18a80))
-#define ewram19000                      (&gSharedMem[0x19000])
 #define eCableCar2                      ((struct CableCarEwramStruct2 *)(gSharedMem + 0x19000))
 #define eRoulette                       ((struct Roulette *)(gSharedMem + 0x19000))
 #define EWRAM_19348                     ((u16 *)(gSharedMem + 0x19348))
 #define eWRAM_19348Struct               ((struct EWRAM_19348_Struct *)(gSharedMem + 0x19348))
-#define ewram19800                      (&gSharedMem[0x19800])
 #define ewram1A000                      (&gSharedMem[0x1A000])
 #define ewram1B000                      (*(struct Unk201B000 *)(gSharedMem + 0x1B000))
 #define ewram1B000_alt                  (*(struct Struct201B000 *)(gSharedMem + 0x1B000))
@@ -217,14 +196,16 @@ extern u8 gSharedMem[];
 #define EWRAM_1C000                     (*(struct Struct201C000 *)(gSharedMem + 0x1C000))
 #define ewram1C000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000))
 #define ewram1c000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000)) // FIXME, names too similar
-#define eHallOfFameMons1                (struct HallofFameMons*)(&gSharedMem[0x1C000])
+
+// hall_of_fame.c
+#define eHofGfxPtr                      (gSharedMem + 0x8000)
+#define eHofMonPtr                      (struct HallofFameMons*)(&gSharedMem[0x1C000])
 #define eHOFPCScreenEffect              (*(struct PCScreenEffectStruct *)(gSharedMem + 0x1c000))
+
 #define ewram1D000                      ((struct Pokemon *)(gSharedMem + 0x1D000))
 #define ewram1D000_2                    ((u16 *)(gSharedMem + 0x1D000))
 #define ewram1D400                      ((u16 *)(gSharedMem + 0x1D400))
 #define ewramSavedItemsPocket           ((struct ItemSlot *)(gSharedMem + 0x1E000))  // saved items pocket (for Wally battle)
-#define ewram1E000(i)                   (gSharedMem[0x1E000 + i])
-#define eHallOfFameMons2                (struct HallofFameMons*)(&gSharedMem[0x1E000])
 #define eHallOfFame                     (struct HallOfFame *)(gSharedMem + 0x1E000)
 #define HALL_OF_FAME_SHEET_0            ((u8 *)(gSharedMem + 0x1E000))
 #define ewram1E000_2                    (const u8 *)(gSharedMem + 0x1E000)
