@@ -3476,7 +3476,7 @@ static void sub_8090540(u16 a)
 }
 
 #ifdef NONMATCHING
-static void sub_8090584(u8 a, u16 b)
+static void HighlightScreenSelectBarItem(u8 a, u16 b)
 {
     u8 i;   //r1
     u8 j;   //r3
