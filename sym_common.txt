@@ -245,7 +245,7 @@ SYMBOL(gPostMenuFieldCallback, 4)
 
 // pokedex.c
 SYMBOL(gUnusedPokedexU8, 4)
-SYMBOL(gUnknown_03005CEC, 4)
+SYMBOL(gPokedexVBlankCB, 4)
 
 // pokemon_summary_screen.o
 SYMBOL(gUnknown_03005CF0, 4)
@@ -319,7 +319,7 @@ gUnknown_Debug_03005FB8 = .;
 #endif
 
 // pokedex_cry_screen.c
-SYMBOL(gUnknown_03005E98, 4)
+SYMBOL(gDexCryScreenState, 4)
 
 // save.c
 SYMBOL(gFirstSaveSector, 4)

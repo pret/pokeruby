@@ -56,7 +56,7 @@ static EWRAM_DATA u8 gUnknown_020387D8 = 0;
 static EWRAM_DATA u8 gUnknown_020387D9 = 0;
 
 u16 gSoundTestCryNum;
-extern u8 gUnknown_03005E98;
+extern u8 gDexCryScreenState;
 
 struct MusicPlayerInfo *gUnknown_03005D30;
 
@@ -1208,7 +1208,7 @@ SOUND_LIST_SE
 
 void Task_InitCryTest(u8 taskId)
 {
-    struct CryRelatedStruct cryStruct, cryStruct2;
+    struct CryScreenWindow cryStruct, cryStruct2;
     u8 zero;
 
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
@@ -1224,9 +1224,9 @@ void Task_InitCryTest(u8 taskId)
     cryStruct.xPos = 4;
 
     zero = 0; // wtf?
-    gUnknown_03005E98 = 0;
+    gDexCryScreenState = 0;
 
-    while (sub_8119E3C(&cryStruct, 3) == FALSE)
+    while (LoadCryWaveformWindow(&cryStruct, 3) == FALSE)
         ;
 
     cryStruct2.unk0 = 0;
@@ -1236,7 +1236,7 @@ void Task_InitCryTest(u8 taskId)
     cryStruct2.yPos = 12;
 
     zero = 0; // wtf?
-    gUnknown_03005E98 = 0;
+    gDexCryScreenState = 0;
 
     while (ShowPokedexCryScreen(&cryStruct2, 2) == FALSE)
         ;
@@ -1255,11 +1255,11 @@ void Task_InitCryTest(u8 taskId)
 
 void Task_ProcessCryTestInput(u8 taskId)
 {
-    sub_8119F88(3);
+    UpdateCryWaveformWindow(3);
 
     if (gMain.newKeys & A_BUTTON)
     {
-        sub_811A050(gSoundTestCryNum);
+        CryScreenPlayButton(gSoundTestCryNum);
     }
     if (gMain.newKeys & R_BUTTON)
     {

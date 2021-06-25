@@ -41,7 +41,7 @@ void sub_811A350(u8, u16, u8);
 void sub_811A534(struct Sprite *);
 void sub_811A6D8(s8);
 
-u8 gUnknown_03005E98;
+u8 gDexCryScreenState;
 
 // data/pokedex_cry_screen.o
 
@@ -204,7 +204,7 @@ struct SpritePalette gCryMeterNeedleSpritePalettes[] = {
 
 #ifdef NONMATCHING
 // caused by some switch branch weirdness
-u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
+u8 LoadCryWaveformWindow(struct CryScreenWindow *cry, u8 arg1)
 {
     u8 i;
     u8 j;
@@ -213,7 +213,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
     u8 r9 = FALSE;
     u32 offset;
 
-    switch (gUnknown_03005E98)
+    switch (gDexCryScreenState)
     {
         case 0:
             gPokedexCryScreenPtr->unk0014 = cry->unk0;
@@ -231,7 +231,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
                     DmaCopy16(3, gUnknown_083FB718, gSharedMem[32 * i + j], 32);
                 }
             }
-            gUnknown_03005E98++;
+            gDexCryScreenState++;
             break;
         case 1:
             r7 = cry->unk2 << 11;
@@ -250,7 +250,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             {
                 sub_811A1C8(i, 0);
             }
-            gUnknown_03005E98++;
+            gDexCryScreenState++;
             break;
         case 2:
             sub_811A324();
@@ -261,7 +261,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
     return r9;
 }
 #else
-NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
+NAKED u8 LoadCryWaveformWindow(struct CryScreenWindow *cry, u8 arg1)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r9\n"
@@ -272,7 +272,7 @@ NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
                 "\tlsrs r2, r1, 24\n"
                 "\tmovs r0, 0\n"
                 "\tmov r9, r0\n"
-                "\tldr r6, _08119E60 @ =gUnknown_03005E98\n"
+                "\tldr r6, _08119E60 @ =gDexCryScreenState\n"
                 "\tldrb r0, [r6]\n"
                 "\tcmp r0, 0x1\n"
                 "\tbeq _08119EE0\n"
@@ -282,7 +282,7 @@ NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
                 "\tbeq _08119E6A\n"
                 "\tb _08119F74\n"
                 "\t.align 2, 0\n"
-                "_08119E60: .4byte gUnknown_03005E98\n"
+                "_08119E60: .4byte gDexCryScreenState\n"
                 "_08119E64:\n"
                 "\tcmp r0, 0x2\n"
                 "\tbeq _08119F60\n"
@@ -402,7 +402,7 @@ NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
                 "\tcmp r4, r0\n"
                 "\tblt _08119F38\n"
                 "_08119F4E:\n"
-                "\tldr r1, _08119F5C @ =gUnknown_03005E98\n"
+                "\tldr r1, _08119F5C @ =gDexCryScreenState\n"
                 "_08119F50:\n"
                 "\tldrb r0, [r1]\n"
                 "\tadds r0, 0x1\n"
@@ -410,7 +410,7 @@ NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
                 "\tb _08119F74\n"
                 "\t.align 2, 0\n"
                 "_08119F58: .4byte gSharedMem + 0x1C000\n"
-                "_08119F5C: .4byte gUnknown_03005E98\n"
+                "_08119F5C: .4byte gDexCryScreenState\n"
                 "_08119F60:\n"
                 "\tbl sub_811A324\n"
                 "\tldr r0, _08119F84 @ =gUnknown_083FB6F8\n"
@@ -433,7 +433,7 @@ NAKED u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
 }
 #endif // NONMATCHING
 
-void sub_8119F88(u8 a0)
+void UpdateCryWaveformWindow(u8 a0)
 {
     u8 r4;
     sub_811A324();
@@ -472,7 +472,7 @@ void sub_8119F88(u8 a0)
     gPokedexCryScreenPtr->unk0010++;
 }
 
-void sub_811A050(u16 species)
+void CryScreenPlayButton(u16 species)
 {
     if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
     {
@@ -827,15 +827,15 @@ void sub_811A350(u8 a0, u16 a1, u8 a2)
     }
 }
 
-u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
+u8 ShowPokedexCryScreen(struct CryScreenWindow *cry, u8 arg1) {
     int returnVal = FALSE;
 
-    switch (gUnknown_03005E98)
+    switch (gDexCryScreenState)
     {
     case 0:
         LZ77UnCompVram(gUnknown_083FAF3C, (void *) (VRAM + cry->unk0));
         LoadPalette(&gUnknown_083FAF1C, cry->paletteNo * 16, 0x20);
-        gUnknown_03005E98 += 1;
+        gDexCryScreenState += 1;
         break;
 
     case 1:
@@ -859,7 +859,7 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
             }
         }
 
-        gUnknown_03005E98 += 1;
+        gDexCryScreenState += 1;
         break;
     }
 

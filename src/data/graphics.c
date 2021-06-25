@@ -1185,8 +1185,8 @@ const u16 gMonIconPalettes[][16] =
 const u8 gUnknown_08E96738[] = INCBIN_U8("graphics/unknown/unknown_E96738.bin.lz");
 const u8 gPokedexStartMenuMain_Tilemap[] = INCBIN_U8("graphics/pokedex/pokedex_list_menu.bin.lz");
 const u8 gPokedexStartMenuSearchResults_Tilemap[] = INCBIN_U8("graphics/pokedex/pokedex_listing_menu.bin.lz");
-const u8 gUnknown_08E96ACC[] = INCBIN_U8("graphics/pokedex/pokedex_navbar.bin.lz");
-const u8 gUnknown_08E96B58[] = INCBIN_U8("graphics/pokedex/pokedex_navbar_3.bin.lz");
+const u8 gPokedexScreenSelectBarMain_Tilemap[] = INCBIN_U8("graphics/pokedex/pokedex_navbar.bin.lz");
+const u8 gPokedexScreenSelectBarSubmenu_Tilemap[] = INCBIN_U8("graphics/pokedex/pokedex_navbar_3.bin.lz");
 const u8 gUnknown_08E96BD4[] = INCBIN_U8("graphics/pokedex/pokedex_detail_layout.bin.lz");
 const u8 gPokedexMenuSearch_Tilemap[] = INCBIN_U8("graphics/unknown/unknown_E96D2C.bin.lz");
 
