@@ -320,78 +320,25 @@ void sub_811A0A0(u16 species)
     gPokedexCryScreenPtr->unk0010 = 1;
 }
 
-// compiler refuses to put src into r0. this can't be solved with greg asm hacks
-#ifdef NONMATCHING
+#define MACRO_sub_811A0C0(counter) ({ \
+    const s8 * p;                     \
+    if ((counter) < 2)                \
+        p = gSoundInfo.pcmBuffer;     \
+    else                              \
+        p = gSoundInfo.pcmBuffer + (gSoundInfo.pcmDmaPeriod + 1 - gPcmDmaCounter) * gSoundInfo.pcmSamplesPerVBlank; \
+    p + PCM_DMA_BUF_SIZE;             \
+})
+
 void sub_811A0C0(void)
 {
     const s8 * src;
     u8 i;
 
-    if (gPcmDmaCounter < 2)
-        src = gSoundInfo.pcmBuffer;
-    else
-        src = gSoundInfo.pcmBuffer + (gSoundInfo.pcmDmaPeriod + 1 - gPcmDmaCounter) * gSoundInfo.pcmSamplesPerVBlank;
-
-    src += PCM_DMA_BUF_SIZE;
+    src = MACRO_sub_811A0C0(gPcmDmaCounter);
     for (i = 0; i < 16; i++)
         gPokedexCryScreenPtr->unk0000[i] = src[i * 2] * 2;
-    
+
 }
-#else
-NAKED void sub_811A0C0(void)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                "\tldr r3, _0811A0D0 @ =gPcmDmaCounter\n"
-                "\tmovs r0, 0\n"
-                "\tldrsb r0, [r3, r0]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbgt _0811A0D8\n"
-                "\tldr r0, _0811A0D4 @ =gSoundInfo + 0x350\n"
-                "\tb _0811A0F0\n"
-                "\t.align 2, 0\n"
-                "_0811A0D0: .4byte gPcmDmaCounter\n"
-                "_0811A0D4: .4byte gSoundInfo + 0x350\n"
-                "_0811A0D8:\n"
-                "\tldr r2, _0811A11C @ =gSoundInfo\n"
-                "\tldrb r1, [r2, 0xB]\n"
-                "\tmovs r0, 0\n"
-                "\tldrsb r0, [r3, r0]\n"
-                "\tsubs r0, 0x1\n"
-                "\tsubs r1, r0\n"
-                "\tldr r0, [r2, 0x10]\n"
-                "\tmuls r0, r1\n"
-                "\tmovs r1, 0xD4\n"
-                "\tlsls r1, 2\n"
-                "\tadds r2, r1\n"
-                "\tadds r0, r2\n"
-                "_0811A0F0:\n"
-                "\tmovs r1, 0xC6\n"
-                "\tlsls r1, 3\n"
-                "\tadds r3, r0, r1\n"
-                "\tmovs r2, 0\n"
-                "\tldr r4, _0811A120 @ =gSharedMem + 0x1C000\n"
-                "_0811A0FA:\n"
-                "\tadds r1, r2, r4\n"
-                "\tlsls r0, r2, 1\n"
-                "\tadds r0, r3\n"
-                "\tldrb r0, [r0]\n"
-                "\tlsls r0, 24\n"
-                "\tasrs r0, 24\n"
-                "\tlsls r0, 1\n"
-                "\tstrb r0, [r1]\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r2, r0, 24\n"
-                "\tcmp r2, 0xF\n"
-                "\tbls _0811A0FA\n"
-                "\tpop {r4}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0811A11C: .4byte gSoundInfo\n"
-                "_0811A120: .4byte gSharedMem + 0x1C000");
-}
-#endif // NONMATCHING
 
 void sub_811A124(void)
 {
