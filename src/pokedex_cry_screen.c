@@ -11,35 +11,35 @@
 extern struct SoundInfo gSoundInfo;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-struct Unk201C800 {
-    s8 unk_0;
-    s8 unk_1;
-    u8 unk_2;
-    u16 unk_4;
+struct PokedexCryMeterNeedle {
+    s8 rotation;
+    s8 targetRotation;
+    u8 moveIncrement;
+    u16 spriteId;
 };
 
-struct PokedexCryScreen_201C000
+struct PokedexCryScreen
 {
-    u8 unk0000[0x10];
-    u8 unk0010;
-    u8 unk0011;
-    u8 unk0012;
-    u16 unk0014;
-    u8 unk0016;
+    u8 cryWaveformBuffer[0x10];
+    u8 cryState;
+    u8 playhead;
+    u8 waveformPreviousY;
+    u16 charBase;
+    u8 playStartPos;
     u16 species;
-    u8 unk001A;
-    u8 unk001B;
+    u8 cryOverrideCountdown;
+    u8 cryRepeatDelay;
 };
 
-void sub_811A0A0(u16 species);
-void sub_811A0C0(void);
-void sub_811A124(void);
-void sub_811A15C(u8);
-void sub_811A1C8(u8, u8);
-void sub_811A324(void);
-void sub_811A350(u8, s16, u8);
-void sub_811A534(struct Sprite *);
-void sub_811A6D8(s8);
+void PlayCryScreenCry(u16 species);
+void BufferCryWaveformSegment(void);
+void DrawWaveformFlatline(void);
+void AdvancePlayhead(u8 bgId);
+void DrawWaveformSegment(u8 position, u8 amplitude);
+void DrawWaveformWindow(void);
+void ShiftWaveformOver(u8 bgId, s16 pos, u8 axis);
+void SpriteCB_CryMeterNeedle(struct Sprite *);
+void SetCryMeterNeedleTarget(s8);
 
 u8 gDexCryScreenState;
 
@@ -49,16 +49,16 @@ const u16 CryMeterNeedlePalette[] = INCBIN_U16("graphics/pokedex/cry_meter_needl
 const u8 CryMeterNeedleTiles[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
 
 #if ENGLISH
-const u16 gUnknown_083FAE7C[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
-const u16 gUnknown_083FAF1C[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-const u8 gUnknown_083FAF3C[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
+const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
+const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
 #else
-extern const u16 gUnknown_083FAE7C[];
-extern const u16 gUnknown_083FAF1C[];
-extern const u8 gUnknown_083FAF3C[];
+extern const u16 sCryMeter_Tilemap[];
+extern const u16 sCryMeter_Pal[];
+extern const u8 sCryMeter_Gfx[];
 #endif // ENGLISH
 
-const u16 gUnknown_083FB274[][72] = {
+const u16 sWaveformOffsets[][72] = {
     {
         0x0000, 0x0004, 0x0008, 0x000C, 0x0010, 0x0014, 0x0018, 0x001C,
         0x0400, 0x0404, 0x0408, 0x040C, 0x0410, 0x0414, 0x0418, 0x041C,
@@ -142,13 +142,16 @@ const u16 gUnknown_083FB274[][72] = {
     }
 };
 
-struct PokedexCryScreen_201C000 * const gPokedexCryScreenPtr = (struct PokedexCryScreen_201C000 *)(gSharedMem + 0x1c000);
+struct PokedexCryScreen * const gPokedexCryScreenPtr = &ePokedexCryScreen;
 
-const u16 gUnknown_083FB6F8[] = INCBIN_U16("graphics/pokedex/83FB6F8.gbapal");
-const u16 gUnknown_083FB718[] = INCBIN_U16("graphics/pokedex/83FB718.4bpp");
+const u16 sCryScreenBg_Pal[] = INCBIN_U16("graphics/pokedex/83FB6F8.gbapal");
+const u16 sCryScreenBg_Gfx[] = INCBIN_U16("graphics/pokedex/83FB718.4bpp");
 
-const u8 gUnknown_083FB738[] = {0xF0, 0x0F};
-const u8 gUnknown_083FB73A[][16] = {
+const u8 sWaveformTileDataNybbleMasks[] = {0xF0, 0x0F};
+
+// Waveform is blue in the middle (8) grading to white at peaks (15)
+// Split into two arrays for the two vertical slice halves
+const u8 sWaveformColor[][16] = {
     {
         0x0F, 0x0E, 0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08,
         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
@@ -158,32 +161,30 @@ const u8 gUnknown_083FB73A[][16] = {
     }
 };
 
-struct Unk201C800 * const gPokedexCryScreenPtr2 = (struct Unk201C800 *)(gSharedMem + 0x1c800);
+struct PokedexCryMeterNeedle * const gPokedexCryScreenPtr2 = &ePokedexCryScreen2;
 
-union AnimCmd gSpriteAnim_83FB760[] = {
+union AnimCmd sAnim_CryMeterNeedle_0[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd * gSpriteAnimTable_83FB768[] = {
-    gSpriteAnim_83FB760
-};
+const union AnimCmd *sAnimTable_CryMeterNeedle[] = { sAnim_CryMeterNeedle_0 };
 
-struct OamData gOamData_83FB76C = {
+struct OamData sOamData_CryMeterNeedle = {
     .y = 160,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .size = 3,
     .priority = 1
 };
 
-struct SpriteTemplate gSpriteTemplate_83FB774 = {
+struct SpriteTemplate sSpriteTemplate_CryMeterNeedle = {
     0x2000,
     0x2000,
-    &gOamData_83FB76C,
-    gSpriteAnimTable_83FB768,
+    &sOamData_CryMeterNeedle,
+    sAnimTable_CryMeterNeedle,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_811A534
+    SpriteCB_CryMeterNeedle
 };
 
 struct SpriteSheet gCryMeterNeedleSpriteSheets[] = {
@@ -202,125 +203,127 @@ struct SpritePalette gCryMeterNeedleSpritePalettes[] = {
 #define CRY_METER_MAP_WIDTH 32
 #endif
 
-u8 LoadCryWaveformWindow(struct CryScreenWindow *cry, u8 arg1)
+bool8 LoadCryWaveformWindow(struct CryScreenWindow *cry, u8 bgId)
 {
     u8 i;
     u8 j;
-    u8 i2;
-    u16 r6;
-    u16 r7;
-    u8 r9 = FALSE;
+    u8 position;
+    u16 tileNum;
+    u16 screenBase;
+    bool8 finished = FALSE;
 
     switch (gDexCryScreenState)
     {
     case 0:
-        gPokedexCryScreenPtr->unk0014 = cry->unk0;
-        gPokedexCryScreenPtr->unk0016 = cry->yPos;
-        gPokedexCryScreenPtr->unk001A = 0;
-        gPokedexCryScreenPtr->unk001B = 0;
-        gPokedexCryScreenPtr->unk0010 = 0;
-        gPokedexCryScreenPtr->unk0012 = 28;
-        gPokedexCryScreenPtr->unk0011 = 0;
-        sub_811A350(arg1, -8 * cry->xPos, 1);
+        gPokedexCryScreenPtr->charBase = cry->charBase;
+        gPokedexCryScreenPtr->playStartPos = cry->yPos;
+        gPokedexCryScreenPtr->cryOverrideCountdown = 0;
+        gPokedexCryScreenPtr->cryRepeatDelay = 0;
+        gPokedexCryScreenPtr->cryState = 0;
+        gPokedexCryScreenPtr->waveformPreviousY = 28;
+        gPokedexCryScreenPtr->playhead = 0;
+        ShiftWaveformOver(bgId, -8 * cry->xPos, 1);
         for (i = 0; i < 7; i++)
         {
             for (j = 0; j < 32; j++)
             {
-                DmaCopy16(3, gUnknown_083FB718, &gSharedMem[((32 * i) + j) * 32], 32);
+                DmaCopy16(3, sCryScreenBg_Gfx, &sCryWaveformWindowTiledata[((32 * i) + j) * 32], 32);
             }
         }
         gDexCryScreenState++;
         break;
     case 1:
-        r7 = cry->unk2 << 11;
-        r6 = (cry->paletteNo << 12) + ((cry->unk0 >> 5) & 0x1FF);
+        screenBase = cry->screenBase * 0x800;
+        tileNum = (cry->paletteNo << 12) + ((cry->charBase >> 5) & 0x1FF);
         for (i = 0; i < 7; i++)
         {
             for (j = 0; j < 32; j++)
             {
-                *((u16 *)(VRAM + (2 * j) + (64 * i) + r7)) = r6++;
+                *((u16 *)(VRAM + (2 * j) + (64 * i) + screenBase)) = tileNum++;
             }
         }
-        for (i2 = 0; i2 < gPokedexCryScreenPtr->unk0016 * 8; i2++)
+        for (position = 0; position < gPokedexCryScreenPtr->playStartPos * 8; position++)
         {
-            sub_811A1C8(i2, 0);
+            DrawWaveformSegment(position, 0);
         }
         gDexCryScreenState++;
         break;
     case 2:
-        sub_811A324();
-        LoadPalette(gUnknown_083FB6F8, cry->paletteNo * 16, 32);
-        r9 = TRUE;
+        DrawWaveformWindow();
+        LoadPalette(sCryScreenBg_Pal, cry->paletteNo * 16, 32);
+        finished = TRUE;
         break;
     }
-    return r9;
+    return finished;
 }
 
-void UpdateCryWaveformWindow(u8 a0)
+void UpdateCryWaveformWindow(u8 bgId)
 {
     u8 r4;
-    sub_811A324();
-    sub_811A15C(a0);
-    if (gPokedexCryScreenPtr->unk001B)
-        gPokedexCryScreenPtr->unk001B--;
-    if (gPokedexCryScreenPtr->unk001A && !--gPokedexCryScreenPtr->unk001A)
+    DrawWaveformWindow();
+    AdvancePlayhead(bgId);
+    if (gPokedexCryScreenPtr->cryRepeatDelay)
+        gPokedexCryScreenPtr->cryRepeatDelay--;
+    if (gPokedexCryScreenPtr->cryOverrideCountdown && !--gPokedexCryScreenPtr->cryOverrideCountdown)
     {
-        sub_811A0A0(gPokedexCryScreenPtr->species);
-        sub_811A124();
+        PlayCryScreenCry(gPokedexCryScreenPtr->species);
+        DrawWaveformFlatline();
         return;
     }
-    if (gPokedexCryScreenPtr->unk0010 == 0)
+    if (gPokedexCryScreenPtr->cryState == 0)
     {
-        sub_811A124();
+        DrawWaveformFlatline();
         return;
     }
-    if (gPokedexCryScreenPtr->unk0010 == 1)
+    if (gPokedexCryScreenPtr->cryState == 1)
     {
-        sub_811A0C0();
+        BufferCryWaveformSegment();
     }
-    else if (gPokedexCryScreenPtr->unk0010 > 8)
+    else if (gPokedexCryScreenPtr->cryState > 8)
     {
         if (!IsCryPlaying())
         {
-            sub_811A124();
-            gPokedexCryScreenPtr->unk0010 = 0;
+            DrawWaveformFlatline();
+            gPokedexCryScreenPtr->cryState = 0;
             return;
         }
-        sub_811A0C0();
-        gPokedexCryScreenPtr->unk0010 = 1;
+        BufferCryWaveformSegment();
+        gPokedexCryScreenPtr->cryState = 1;
     }
-    r4 = 2 * (gPokedexCryScreenPtr->unk0010 - 1);
-    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 2, gPokedexCryScreenPtr->unk0000[r4]);
-    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 1, gPokedexCryScreenPtr->unk0000[r4 + 1]);
-    gPokedexCryScreenPtr->unk0010++;
+    r4 = 2 * (gPokedexCryScreenPtr->cryState - 1);
+    DrawWaveformSegment(gPokedexCryScreenPtr->playStartPos * 8 + gPokedexCryScreenPtr->playhead - 2,
+        gPokedexCryScreenPtr->cryWaveformBuffer[r4]);
+    DrawWaveformSegment(gPokedexCryScreenPtr->playStartPos * 8 + gPokedexCryScreenPtr->playhead - 1,
+        gPokedexCryScreenPtr->cryWaveformBuffer[r4 + 1]);
+    gPokedexCryScreenPtr->cryState++;
 }
 
 void CryScreenPlayButton(u16 species)
 {
-    if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
+    if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->cryOverrideCountdown)
     {
-        if (!gPokedexCryScreenPtr->unk001B)
+        if (!gPokedexCryScreenPtr->cryRepeatDelay)
         {
-            gPokedexCryScreenPtr->unk001B = 4;
+            gPokedexCryScreenPtr->cryRepeatDelay = 4;
             if (IsCryPlaying() == TRUE)
             {
                 StopCry();
                 gPokedexCryScreenPtr->species = species;
-                gPokedexCryScreenPtr->unk001A = 2;
+                gPokedexCryScreenPtr->cryOverrideCountdown = 2;
             }
             else
-                sub_811A0A0(species);
+                PlayCryScreenCry(species);
         }
     }
 }
 
-void sub_811A0A0(u16 species)
+void PlayCryScreenCry(u16 species)
 {
-    PlayCry2(species, 0, 0x7d, 10);
-    gPokedexCryScreenPtr->unk0010 = 1;
+    PlayCry2(species, 0, 125, 10);
+    gPokedexCryScreenPtr->cryState = 1;
 }
 
-#define MACRO_sub_811A0C0(counter) ({ \
+#define GetSrcBufferForCryWaveformSegment(counter) ({ \
     const s8 * p;                     \
     if ((counter) < 2)                \
         p = gSoundInfo.pcmBuffer;     \
@@ -329,124 +332,125 @@ void sub_811A0A0(u16 species)
     p + PCM_DMA_BUF_SIZE;             \
 })
 
-void sub_811A0C0(void)
+void BufferCryWaveformSegment(void)
 {
     const s8 * src;
     u8 i;
 
-    src = MACRO_sub_811A0C0(gPcmDmaCounter);
+    src = GetSrcBufferForCryWaveformSegment(gPcmDmaCounter);
     for (i = 0; i < 16; i++)
-        gPokedexCryScreenPtr->unk0000[i] = src[i * 2] * 2;
+        gPokedexCryScreenPtr->cryWaveformBuffer[i] = src[i * 2] * 2;
 
 }
 
-void sub_811A124(void)
+void DrawWaveformFlatline(void)
 {
-    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 2, 0);
-    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 1, 0);
+    DrawWaveformSegment(gPokedexCryScreenPtr->playStartPos * 8 + gPokedexCryScreenPtr->playhead - 2, 0);
+    DrawWaveformSegment(gPokedexCryScreenPtr->playStartPos * 8 + gPokedexCryScreenPtr->playhead - 1, 0);
 }
 
-void sub_811A15C(u8 a0)
+void AdvancePlayhead(u8 bgId)
 {
     u8 i;
-    u16 r3;
-    sub_811A350(a0, gPokedexCryScreenPtr->unk0011, 0);
-    gPokedexCryScreenPtr->unk0011 += 2;
-    r3 = (gPokedexCryScreenPtr->unk0011 / 8 + gPokedexCryScreenPtr->unk0016 + 1) % 32;
+    u16 offset;
+
+    ShiftWaveformOver(bgId, gPokedexCryScreenPtr->playhead, 0);
+    gPokedexCryScreenPtr->playhead += 2;
+    offset = (gPokedexCryScreenPtr->playhead / 8 + gPokedexCryScreenPtr->playStartPos + 1) % 32;
     for (i = 0; i < 7; i++)
     {
-        DmaCopy16(3, gUnknown_083FB718, &gSharedMem[32 * (32 * i + r3)], 32);
+        DmaCopy16(3, sCryScreenBg_Gfx, &sCryWaveformWindowTiledata[32 * (32 * i + offset)], 32);
     }
 }
 
-void sub_811A1C8(u8 a0, u8 a1)
+void DrawWaveformSegment(u8 position, u8 amplitude)
 {
-#define PLAY_START_POS            (a0 >> 3)
-#define PLAYHEAD_POS              (a0 & ((1 << 3) - 1))
-#define VERT_SLICE                (a0 & 1)
+#define PLAY_START_POS            (position >> 3)
+#define PLAYHEAD_POS              (position & ((1 << 3) - 1))
+#define VERT_SLICE                (position & 1)
     u8 currentPointY;
     u8 nybble;
     u16 offset;
     u16 temp;
     u8 y;
 
-    temp = (a1 + 127) * 256;
+    temp = (amplitude + 127) * 256;
     y = temp / 1152.0;
     if (y > 71 - 16)
         y = 71 - 16;
     currentPointY = y;
     nybble = VERT_SLICE;
-    if (y > gPokedexCryScreenPtr->unk0012)
+    if (y > gPokedexCryScreenPtr->waveformPreviousY)
     {
         do
         {
-            offset = gUnknown_083FB274[PLAYHEAD_POS][y] + PLAY_START_POS * TILE_SIZE_4BPP;
-            gSharedMem[offset] &= gUnknown_083FB738[nybble];
-            gSharedMem[offset] |= gUnknown_083FB73A[nybble][((y / 3) - 1) & 0x0F];
+            offset = sWaveformOffsets[PLAYHEAD_POS][y] + PLAY_START_POS * TILE_SIZE_4BPP;
+            sCryWaveformWindowTiledata[offset] &= sWaveformTileDataNybbleMasks[nybble];
+            sCryWaveformWindowTiledata[offset] |= sWaveformColor[nybble][((y / 3) - 1) & 0x0F];
             y--;
-        } while (y > gPokedexCryScreenPtr->unk0012);
+        } while (y > gPokedexCryScreenPtr->waveformPreviousY);
     }
     else
     {
         do
         {
-            offset = gUnknown_083FB274[PLAYHEAD_POS][y] + PLAY_START_POS * TILE_SIZE_4BPP;
-            gSharedMem[offset] &= gUnknown_083FB738[nybble];
-            gSharedMem[offset] |= gUnknown_083FB73A[nybble][((y / 3) - 1) & 0x0F];
+            offset = sWaveformOffsets[PLAYHEAD_POS][y] + PLAY_START_POS * TILE_SIZE_4BPP;
+            sCryWaveformWindowTiledata[offset] &= sWaveformTileDataNybbleMasks[nybble];
+            sCryWaveformWindowTiledata[offset] |= sWaveformColor[nybble][((y / 3) - 1) & 0x0F];
             y++;
-        } while (y < gPokedexCryScreenPtr->unk0012);
+        } while (y < gPokedexCryScreenPtr->waveformPreviousY);
     }
-    gPokedexCryScreenPtr->unk0012 = currentPointY;
+    gPokedexCryScreenPtr->waveformPreviousY = currentPointY;
     #undef PLAYHEAD_POS
     #undef PLAY_START_POS
     #undef VERT_SLICE
 }
 
-void sub_811A324(void)
+void DrawWaveformWindow(void)
 {
-    DmaCopy16(3, gSharedMem, VRAM + gPokedexCryScreenPtr->unk0014, 0x1c00);
+    DmaCopy16(3, sCryWaveformWindowTiledata, VRAM + gPokedexCryScreenPtr->charBase, 0x1c00);
 }
 
-void sub_811A350(u8 a0, s16 a1, u8 a2)
+void ShiftWaveformOver(u8 bgId, s16 pos, u8 axis)
 {
-    switch (a0)
+    switch (bgId)
     {
         case 0:
-            if (a2)
-                REG_BG0VOFS = a1;
+            if (axis)
+                REG_BG0VOFS = pos;
             else
-                REG_BG0HOFS = a1;
+                REG_BG0HOFS = pos;
             break;
         case 1:
-            if (a2)
-                REG_BG1VOFS = a1;
+            if (axis)
+                REG_BG1VOFS = pos;
             else
-                REG_BG1HOFS = a1;
+                REG_BG1HOFS = pos;
             break;
         case 2:
-            if (a2)
-                REG_BG2VOFS = a1;
+            if (axis)
+                REG_BG2VOFS = pos;
             else
-                REG_BG2HOFS = a1;
+                REG_BG2HOFS = pos;
             break;
         case 3:
-            if (a2)
-                REG_BG3VOFS = a1;
+            if (axis)
+                REG_BG3VOFS = pos;
             else
-                REG_BG3HOFS = a1;
+                REG_BG3HOFS = pos;
             break;
     }
 }
 
-u8 ShowPokedexCryScreen(struct CryScreenWindow *cry, u8 arg1) {
+bool8 ShowPokedexCryScreen(struct CryScreenWindow *cry, UNUSED u8 arg1) {
     int returnVal = FALSE;
 
     switch (gDexCryScreenState)
     {
     case 0:
-        LZ77UnCompVram(gUnknown_083FAF3C, (void *) (VRAM + cry->unk0));
-        LoadPalette(&gUnknown_083FAF1C, cry->paletteNo * 16, 0x20);
-        gDexCryScreenState += 1;
+        LZ77UnCompVram(sCryMeter_Gfx, (void *) (VRAM + cry->charBase));
+        LoadPalette(sCryMeter_Pal, cry->paletteNo * 16, 0x20);
+        gDexCryScreenState++;
         break;
 
     case 1:
@@ -456,9 +460,9 @@ u8 ShowPokedexCryScreen(struct CryScreenWindow *cry, u8 arg1) {
         u32 r12;
         int x, y;
 
-        vram = BG_SCREEN_ADDR(cry->unk2);
+        vram = BG_SCREEN_ADDR(cry->screenBase);
 
-        r12 = (u32) (cry->unk0 << 18) >> 23;
+        r12 = (cry->charBase >> 5) & 0x1FF;
 
         for (row = 0; row < 8; row++)
         {
@@ -466,7 +470,7 @@ u8 ShowPokedexCryScreen(struct CryScreenWindow *cry, u8 arg1) {
             {
                 y = row + cry->yPos;
                 x = col + cry->xPos;
-                *(u16 *) (vram + (y * 64 + x * 2)) = (gUnknown_083FAE7C[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
+                *(u16 *) (vram + (y * 64 + x * 2)) = (sCryMeter_Tilemap[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
             }
         }
 
@@ -478,10 +482,10 @@ u8 ShowPokedexCryScreen(struct CryScreenWindow *cry, u8 arg1) {
     {
         LoadSpriteSheets(gCryMeterNeedleSpriteSheets);
         LoadSpritePalettes(gCryMeterNeedleSpritePalettes);
-        gPokedexCryScreenPtr2->unk_4 = CreateSprite(&gSpriteTemplate_83FB774, 40 + cry->xPos * 8, 56 + cry->yPos * 8, 1);
-        gPokedexCryScreenPtr2->unk_0 = 0x20;
-        gPokedexCryScreenPtr2->unk_1 = 0x20;
-        gPokedexCryScreenPtr2->unk_2 = 0;
+        gPokedexCryScreenPtr2->spriteId = CreateSprite(&sSpriteTemplate_CryMeterNeedle, 40 + cry->xPos * 8, 56 + cry->yPos * 8, 1);
+        gPokedexCryScreenPtr2->rotation = 0x20;
+        gPokedexCryScreenPtr2->targetRotation = 0x20;
+        gPokedexCryScreenPtr2->moveIncrement = 0;
 
         returnVal = TRUE;
         break;
@@ -493,82 +497,84 @@ u8 ShowPokedexCryScreen(struct CryScreenWindow *cry, u8 arg1) {
 
 void DestroyCryMeterNeedleSprite(void)
 {
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gPokedexCryScreenPtr2->unk_4].oam.paletteNum));
-    DestroySprite(gSprites + gPokedexCryScreenPtr2->unk_4);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gPokedexCryScreenPtr2->spriteId].oam.paletteNum));
+    DestroySprite(gSprites + gPokedexCryScreenPtr2->spriteId);
 }
 
-void sub_811A534(struct Sprite * sprite)
+void SpriteCB_CryMeterNeedle(struct Sprite * sprite)
 {
     u16 i;
-    s8 r3;
+    s8 peakAmplitude;
     s16 x;
     s16 y;
-    struct ObjAffineSrcData sp04;
-    struct OamMatrix sp0c;
+    struct ObjAffineSrcData affine;
+    struct OamMatrix matrix;
     u8 * r0;
 
-    gSprites[gPokedexCryScreenPtr2->unk_4].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    gSprites[gPokedexCryScreenPtr2->unk_4].oam.affineParam = 0;
-    switch (gPokedexCryScreenPtr->unk0010)
+    gSprites[gPokedexCryScreenPtr2->spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[gPokedexCryScreenPtr2->spriteId].oam.affineParam = 0;
+    switch (gPokedexCryScreenPtr->cryState)
     {
         case 0:
-            gPokedexCryScreenPtr2->unk_1 = 0x20;
-            if (gPokedexCryScreenPtr2->unk_0 > 0)
+            gPokedexCryScreenPtr2->targetRotation = 0x20;
+            if (gPokedexCryScreenPtr2->rotation > 0)
             {
-                if (gPokedexCryScreenPtr2->unk_2 != 1)
-                    gPokedexCryScreenPtr2->unk_2--;
+                if (gPokedexCryScreenPtr2->moveIncrement != 1)
+                    gPokedexCryScreenPtr2->moveIncrement--;
             }
             else
-                gPokedexCryScreenPtr2->unk_2 = 5;
+                gPokedexCryScreenPtr2->moveIncrement = 5;
             break;
         case 2:
-            r3 = 0;
+            peakAmplitude = 0;
             for (i = 0; i < 16; i++)
             {
-                if (r3 < gPokedexCryScreenPtr->unk0000[i])
-                    r3 = gPokedexCryScreenPtr->unk0000[i];
+                if (peakAmplitude < gPokedexCryScreenPtr->cryWaveformBuffer[i])
+                    peakAmplitude = gPokedexCryScreenPtr->cryWaveformBuffer[i];
             }
-            sub_811A6D8(r3 * 0xd0 / 0x100);
+            SetCryMeterNeedleTarget(peakAmplitude * 0xd0 / 0x100);
             break;
         case 6:
-            r0 = &gPokedexCryScreenPtr->unk0000[10];
-            sub_811A6D8(*r0 * 0xd0 / 0x100);
+            r0 = &gPokedexCryScreenPtr->cryWaveformBuffer[10];
+            SetCryMeterNeedleTarget(*r0 * 0xd0 / 0x100);
             break;
     }
-    if (gPokedexCryScreenPtr2->unk_0 == gPokedexCryScreenPtr2->unk_1)
-        ;
-    else if (gPokedexCryScreenPtr2->unk_0 < gPokedexCryScreenPtr2->unk_1)
+    if (gPokedexCryScreenPtr2->rotation == gPokedexCryScreenPtr2->targetRotation)
+        ; // Empty, needle has reached target
+    else if (gPokedexCryScreenPtr2->rotation < gPokedexCryScreenPtr2->targetRotation)
     {
-        if ((gPokedexCryScreenPtr2->unk_0 += gPokedexCryScreenPtr2->unk_2) > gPokedexCryScreenPtr2->unk_1)
+        // Rotate needle left
+        if ((gPokedexCryScreenPtr2->rotation += gPokedexCryScreenPtr2->moveIncrement) > gPokedexCryScreenPtr2->targetRotation)
         {
-            gPokedexCryScreenPtr2->unk_0 = gPokedexCryScreenPtr2->unk_1;
-            gPokedexCryScreenPtr2->unk_1 = 0;
+            gPokedexCryScreenPtr2->rotation = gPokedexCryScreenPtr2->targetRotation;
+            gPokedexCryScreenPtr2->targetRotation = 0;
         }
     }
     else
     {
-        if ((gPokedexCryScreenPtr2->unk_0 -= gPokedexCryScreenPtr2->unk_2) < gPokedexCryScreenPtr2->unk_1)
+        // Rotate needle right
+        if ((gPokedexCryScreenPtr2->rotation -= gPokedexCryScreenPtr2->moveIncrement) < gPokedexCryScreenPtr2->targetRotation)
         {
-            gPokedexCryScreenPtr2->unk_0 = gPokedexCryScreenPtr2->unk_1;
-            gPokedexCryScreenPtr2->unk_1 = 0;
+            gPokedexCryScreenPtr2->rotation = gPokedexCryScreenPtr2->targetRotation;
+            gPokedexCryScreenPtr2->targetRotation = 0;
         }
     }
-    sp04.xScale = 0x100;
-    sp04.yScale = 0x100;
-    sp04.rotation = gPokedexCryScreenPtr2->unk_0 * 256;
-    ObjAffineSet(&sp04, &sp0c, 1, 2);
-    SetOamMatrix(0, sp0c.a, sp0c.b, sp0c.c, sp0c.d);
-    x = gSineTable[((gPokedexCryScreenPtr2->unk_0 + 0x7F) & 0xFF)];
-    y = gSineTable[((gPokedexCryScreenPtr2->unk_0 + 0x7F) & 0xFF) + 0x40];
+    affine.xScale = 0x100;
+    affine.yScale = 0x100;
+    affine.rotation = gPokedexCryScreenPtr2->rotation * 256;
+    ObjAffineSet(&affine, &matrix, 1, 2);
+    SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);
+    x = gSineTable[((gPokedexCryScreenPtr2->rotation + 0x7F) & 0xFF)];
+    y = gSineTable[((gPokedexCryScreenPtr2->rotation + 0x7F) & 0xFF) + 0x40];
     sprite->pos2.x = x * 24 / 256;
     sprite->pos2.y = y * 24 / 256;
 }
 
-void sub_811A6D8(s8 a0)
+void SetCryMeterNeedleTarget(s8 offset)
 {
-    u16 r2 = (0x20 - a0) & 0xff;
-    if (r2 > 0x20 && r2 < 0xe0)
-        r2 = 0xe0;
-    gPokedexCryScreenPtr2->unk_1 = r2;
-    gPokedexCryScreenPtr2->unk_2 = 5;
+    u16 rotation = (0x20 - offset) & 0xff;
+    if (rotation > 0x20 && rotation < 0xe0)
+        rotation = 0xe0;
+    gPokedexCryScreenPtr2->targetRotation = rotation;
+    gPokedexCryScreenPtr2->moveIncrement = 5;
 }

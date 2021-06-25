@@ -1422,7 +1422,7 @@ const u16 gTilesetPalettes_Shop[][16] =
 };
 
 const u8 gTilesetTiles_Shop[] = INCBIN_U8("data/tilesets/secondary/shop/tiles.4bpp.lz");
-const u16 gUnknown_083FAF1C[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-const u8 gUnknown_083FAF3C[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
-const u8 gUnknown_083FAE7C[] = INCBIN_U8("graphics/pokedex/cry_meter_map.bin");
+const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
+const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+const u8 sCryMeter_Tilemap[] = INCBIN_U8("graphics/pokedex/cry_meter_map.bin");
 #endif // GERMAN

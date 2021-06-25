@@ -1217,8 +1217,8 @@ void Task_InitCryTest(u8 taskId)
     ResetSpriteData();
     FreeAllSpritePalettes();
 
-    cryStruct.unk0 = 0x2000;
-    cryStruct.unk2 = 29;
+    cryStruct.charBase = 0x2000;
+    cryStruct.screenBase = 29;
     cryStruct.paletteNo = 12;
     cryStruct.yPos = 30;
     cryStruct.xPos = 4;
@@ -1229,8 +1229,8 @@ void Task_InitCryTest(u8 taskId)
     while (LoadCryWaveformWindow(&cryStruct, 3) == FALSE)
         ;
 
-    cryStruct2.unk0 = 0;
-    cryStruct2.unk2 = 15;
+    cryStruct2.charBase = 0;
+    cryStruct2.screenBase = 15;
     cryStruct2.paletteNo = 13;
     cryStruct2.xPos = 12;
     cryStruct2.yPos = 12;

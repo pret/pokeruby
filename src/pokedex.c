@@ -3201,8 +3201,8 @@ static void Task_InitCryScreenMultistep(u8 taskId)
         {
             struct CryScreenWindow waveformWindow;
 
-            waveformWindow.unk0 = 0x4020;
-            waveformWindow.unk2 = 0x1F;
+            waveformWindow.charBase = 0x4020;
+            waveformWindow.screenBase = 0x1F;
             waveformWindow.paletteNo = 8;
             waveformWindow.yPos = 0x1E;
             waveformWindow.xPos = 0xC;
@@ -3217,8 +3217,8 @@ static void Task_InitCryScreenMultistep(u8 taskId)
         {
             struct CryScreenWindow sp10;
 
-            sp10.unk0 = 0x3000;
-            sp10.unk2 = 0xE;
+            sp10.charBase = 0x3000;
+            sp10.screenBase = 0xE;
             sp10.paletteNo = 9;
             sp10.xPos = 0x12;
             sp10.yPos = 3;

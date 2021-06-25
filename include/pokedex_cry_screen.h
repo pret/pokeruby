@@ -3,16 +3,16 @@
 
 struct CryScreenWindow
 {
-    u16 unk0;
-    u8 unk2;
+    u16 charBase;
+    u8 screenBase;
     u8 paletteNo;
     u8 xPos;
     u8 yPos;
 };
 
-u8 ShowPokedexCryScreen(struct CryScreenWindow *, u8);
-u8 LoadCryWaveformWindow(struct CryScreenWindow *, u8);
-void UpdateCryWaveformWindow(u8 a);
+bool8 ShowPokedexCryScreen(struct CryScreenWindow * cry, u8 arg1);
+bool8 LoadCryWaveformWindow(struct CryScreenWindow * cry, u8 bgId);
+void UpdateCryWaveformWindow(u8 bgId);
 void CryScreenPlayButton(u16 species);
 void DestroyCryMeterNeedleSprite();
 
