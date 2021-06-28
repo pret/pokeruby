@@ -29,8 +29,6 @@ extern u8 gSharedMem[];
 #define eSaveSection                    (struct SaveSector *)(gSharedMem + 0x0)
 #define eSlotMachine                    ((struct SlotMachineEwramStruct *)(gSharedMem + 0x0))
 #define ePokemonStorageSystem           (*(struct PokemonStorageSystemData *)(gSharedMem + 0))
-#define ewram520                        ((struct UnknownStruct7 *)(gSharedMem + 0x00520))
-#define ewram520_2                      (u8 *)(ewram_addr + 0x520)
 #define ewramA6E                        (gSharedMem[0xA6E])
 #define ewram01000                      (*(struct Unk2001000 *)(gSharedMem + 0x1000))
 #define ewramBerryPicTemp               (gSharedMem + 0x1000)

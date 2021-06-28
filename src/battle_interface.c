@@ -26,11 +26,6 @@ struct UnknownStruct5
     int unk10;
 };
 
-struct UnknownStruct7
-{
-    u8 filler0[0x180];
-};
-
 static void sub_8043CEC(struct Sprite *sprite);
 static void sub_8045030(struct Sprite *sprite);
 static void sub_804507C(struct Sprite *sprite);
@@ -886,7 +881,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     for (i = 0; i < c; i++)  // _080440BC
     {
         void *temp = r4[i] + gSprites[a].oam.tileNum * 32;
-        CpuCopy32((void *)(&eBattleInterfaceGfxBuffer[i * 64 + 32], temp, 0x20);
+        CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], temp, 0x20);
     }
 }
 #else
@@ -1090,7 +1085,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
-    r6 = ewram520[GetBattlerPosition(gSprites[a].data[6])].filler0;
+    r6 = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
     r8 = 5;
     nature = GetNature(pkmn);
     StringCopy(str + 6, gNatureNames[nature]);
@@ -2546,7 +2541,7 @@ void sub_8045180(struct Sprite *sprite)
     ptr[1] = 0x13;
     ptr[2] = 0x37;
     ptr[3] = EOS;
-    ptr = ewram520_2 + GetBattlerPosition(gSprites[a].data[6]) * 0x180;
+    ptr = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
     sub_80034D4(ptr, gDisplayedStringBattle);
 
     i = 0;
@@ -2794,7 +2789,7 @@ static u8 sub_80457E8(u8 a, u8 b)
     s32 r7;
     u8 *addr;
 
-    r6 = ewram520_2 + GetBattlerPosition(gSprites[a].data[6]) * 0x180;
+    r6 = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
     r8 = 7;
     sub_80034D4(r6, BattleText_SafariBalls);
     for (i = 0; i < r8; i++)
@@ -2823,10 +2818,10 @@ static u8 sub_80457E8(u8 a, u8 b)
     r7 = sub_8003504(r7, gNumSafariBalls, 10, 1);
     StringAppend(r7, BattleText_HighlightRed);
     status = GetBattlerPosition(gSprites[a].data[6]);
-    r7 = ewram520_2 + status * 0x180;
+    r7 = &eBattleInterfaceGfxBuffer[0x520 + status * 0x180];
     r6 = 5;
     sub_80034D4(r7, gDisplayedStringBattle);
-    r7 = ewram520_2 + status * 0x180 + 32;
+    r7 = &eBattleInterfaceGfxBuffer[0x520 + status * 0x180 + 32];
     for (i = 6; i < 6 + r6; i++)
     {
         CpuCopy32(r7, OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x18 + MACRO1(i)) * 32, 32);
