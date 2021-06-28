@@ -1538,338 +1538,90 @@ void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directio
     }
 }
 
-// too many registers allocated, the function takes 0x4c more bytes
-#ifdef NONMATCHING
 void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed)
 {
-    s8 menuMovement;
-    u16 var1;
-    u8 var2;
-
-    menuMovement = directionPressed + 2;
-    switch (menuMovement)
+    switch (directionPressed)
     {
-        case 2: // no movement
-            gSprites[spriteId].data[1] = 0;
-            break;
-        case 3: // moving down
-            if (menuIndex == 7) {
-                gSprites[spriteId].data[0] = 0;
-            } else {
-                while (menuIndex != PARTY_SIZE - 1) {
-                    menuIndex++;
-                    if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES))
-                    {
-                        gSprites[spriteId].data[0] = menuIndex;
-                        gSprites[spriteId].data[1] = 0;
-                        return;
-                    }
+    case 0: // no movement
+        gSprites[spriteId].data[1] = 0;
+        break;
+    case 1: // moving down
+        if (menuIndex == 7) {
+            gSprites[spriteId].data[0] = 0;
+        }
+        else
+        {
+            while (1)
+            {
+                if (menuIndex == PARTY_SIZE - 1)
+                {
+                    gSprites[spriteId].data[0] = 7;
+                    break;
                 }
-
-                gSprites[spriteId].data[0] = 7;
-            }
-
-            gSprites[spriteId].data[1] = 0;
-            break;
-        case 1: // moving up
-            while (menuIndex != 0) {
-                menuIndex--;
-                if (menuIndex != PARTY_SIZE && GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
+                menuIndex++;
+                if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES) != SPECIES_NONE)
                 {
                     gSprites[spriteId].data[0] = menuIndex;
-                    gSprites[spriteId].data[1] = 0;
-                    return;
+                    break;
                 }
             }
+        }
+        gSprites[spriteId].data[1] = 0;
+        break;
+    case -1: // moving up
+        while (1)
+        {
+            if (menuIndex == 0)
+            {
+                gSprites[spriteId].data[0] = 7;
+                break;
+            }
+            menuIndex--;
+            if (menuIndex != PARTY_SIZE && GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES) != SPECIES_NONE)
+            {
+                gSprites[spriteId].data[0] = menuIndex;
+                break;
+            }
+        }
 
-            gSprites[spriteId].data[0] = 7;
-            gSprites[spriteId].data[1] = 0;
-            break;
-        case 4: // moving right
-            if (menuIndex == 0) {
-                var1 = gSprites[spriteId].data[1] - 2;
-                if (var1 > 1) {
-                    if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
-                        gSprites[spriteId].data[0] = 2;
-                    } else if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
-                        gSprites[spriteId].data[0] = 3;
-                    }
-                } else {
-                    gSprites[spriteId].data[0] = 1;
+        gSprites[spriteId].data[1] = 0;
+        break;
+    case 2: // moving right
+        if (menuIndex == 0) {
+            if (gSprites[spriteId].data[1] < 2 || gSprites[spriteId].data[1] > 3) {
+                if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE) {
+                    gSprites[spriteId].data[0] = 2;
+                } else if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE) {
+                    gSprites[spriteId].data[0] = 3;
                 }
-            } else if (menuIndex == 1) {
-                var1 = gSprites[spriteId].data[1] - 4;
-                if (var1 <= 1) {
-                    gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
-                } else {
-                    if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
-                        gSprites[spriteId].data[0] = 4;
-                    } else if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
-                        gSprites[spriteId].data[0] = 5;
-                    }
-                }
-            }
-            break;
-        case 0: // moving left
-            var2 = menuIndex - 2;
-            if (var2 <= 1) {
-                gSprites[spriteId].data[0] = 0;
-                gSprites[spriteId].data[1] = menuIndex;
             } else {
-                var2 = menuIndex - 4;
-                if (var2 <= 1) {
-                    gSprites[spriteId].data[0] = 1;
-                    gSprites[spriteId].data[1] = menuIndex;
+                gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
+            }
+        } else if (menuIndex == 1) {
+            if (gSprites[spriteId].data[1] >= 4 && gSprites[spriteId].data[1] <= 5) {
+                gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
+            } else {
+                if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE) {
+                    gSprites[spriteId].data[0] = 4;
+                } else if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE) {
+                    gSprites[spriteId].data[0] = 5;
                 }
             }
-
-            break;
+        }
+        break;
+    case -2: // moving left
+        if (menuIndex > 1 && menuIndex < 4) {
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = menuIndex;
+        } else {
+            if (menuIndex > 3 && menuIndex < 6) {
+                gSprites[spriteId].data[0] = 1;
+                gSprites[spriteId].data[1] = menuIndex;
+            }
+        }
+        break;
     }
 }
-
-#else
-NAKED
-void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r4, r1, 24\n\
-    lsls r2, 24\n\
-    movs r0, 0x80\n\
-    lsls r0, 18\n\
-    adds r2, r0\n\
-    asrs r0, r2, 24\n\
-    cmp r0, 0x4\n\
-    bls _0806C4AA\n\
-    b _0806C64E\n\
-_0806C4AA:\n\
-    lsls r0, 2\n\
-    ldr r1, _0806C4B4 @ =_0806C4B8\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_0806C4B4: .4byte _0806C4B8\n\
-    .align 2, 0\n\
-_0806C4B8:\n\
-    .4byte _0806C618\n\
-    .4byte _0806C524\n\
-    .4byte _0806C4CC\n\
-    .4byte _0806C4E0\n\
-    .4byte _0806C57C\n\
-_0806C4CC:\n\
-    ldr r0, _0806C4DC @ =gSprites\n\
-    lsls r1, r5, 4\n\
-    adds r1, r5\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    movs r0, 0\n\
-    strh r0, [r1, 0x30]\n\
-    b _0806C64E\n\
-    .align 2, 0\n\
-_0806C4DC: .4byte gSprites\n\
-_0806C4E0:\n\
-    cmp r4, 0x7\n\
-    bne _0806C4FC\n\
-    ldr r2, _0806C4F8 @ =gSprites\n\
-    lsls r3, r5, 4\n\
-    adds r0, r3, r5\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0x2E]\n\
-    adds r1, r2, 0\n\
-    adds r6, r3, 0\n\
-    b _0806C566\n\
-    .align 2, 0\n\
-_0806C4F8: .4byte gSprites\n\
-_0806C4FC:\n\
-    lsls r6, r5, 4\n\
-    b _0806C518\n\
-_0806C500:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    movs r0, 0x64\n\
-    muls r0, r4\n\
-    ldr r1, _0806C520 @ =gPlayerParty\n\
-    adds r0, r1\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _0806C528\n\
-_0806C518:\n\
-    cmp r4, 0x5\n\
-    bne _0806C500\n\
-    b _0806C558\n\
-    .align 2, 0\n\
-_0806C520: .4byte gPlayerParty\n\
-_0806C524:\n\
-    lsls r6, r5, 4\n\
-    b _0806C554\n\
-_0806C528:\n\
-    ldr r1, _0806C534 @ =gSprites\n\
-    adds r0, r6, r5\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    strh r4, [r0, 0x2E]\n\
-    b _0806C566\n\
-    .align 2, 0\n\
-_0806C534: .4byte gSprites\n\
-_0806C538:\n\
-    subs r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x6\n\
-    beq _0806C554\n\
-    movs r0, 0x64\n\
-    muls r0, r4\n\
-    ldr r1, _0806C574 @ =gPlayerParty\n\
-    adds r0, r1\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _0806C528\n\
-_0806C554:\n\
-    cmp r4, 0\n\
-    bne _0806C538\n\
-_0806C558:\n\
-    ldr r0, _0806C578 @ =gSprites\n\
-    adds r1, r6, r5\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    movs r2, 0x7\n\
-    strh r2, [r1, 0x2E]\n\
-    adds r1, r0, 0\n\
-_0806C566:\n\
-    adds r0, r6, r5\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0x30]\n\
-    b _0806C64E\n\
-    .align 2, 0\n\
-_0806C574: .4byte gPlayerParty\n\
-_0806C578: .4byte gSprites\n\
-_0806C57C:\n\
-    cmp r4, 0\n\
-    bne _0806C5C8\n\
-    ldr r0, _0806C5AC @ =gSprites\n\
-    lsls r1, r5, 4\n\
-    adds r1, r5\n\
-    lsls r1, 2\n\
-    adds r4, r1, r0\n\
-    ldrh r1, [r4, 0x30]\n\
-    subs r0, r1, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bls _0806C5E2\n\
-    ldr r5, _0806C5B0 @ =gPlayerParty + 2 * 0x64\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806C5B4\n\
-    movs r0, 0x2\n\
-    strh r0, [r4, 0x2E]\n\
-    b _0806C64E\n\
-    .align 2, 0\n\
-_0806C5AC: .4byte gSprites\n\
-_0806C5B0: .4byte gPlayerParty + 2 * 0x64\n\
-_0806C5B4:\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806C64E\n\
-    movs r0, 0x3\n\
-    strh r0, [r4, 0x2E]\n\
-    b _0806C64E\n\
-_0806C5C8:\n\
-    cmp r4, 0x1\n\
-    bne _0806C64E\n\
-    ldr r0, _0806C5E8 @ =gSprites\n\
-    lsls r1, r5, 4\n\
-    adds r1, r5\n\
-    lsls r1, 2\n\
-    adds r4, r1, r0\n\
-    ldrh r1, [r4, 0x30]\n\
-    subs r0, r1, 0x4\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bhi _0806C5EC\n\
-_0806C5E2:\n\
-    strh r1, [r4, 0x2E]\n\
-    b _0806C64E\n\
-    .align 2, 0\n\
-_0806C5E8: .4byte gSprites\n\
-_0806C5EC:\n\
-    ldr r5, _0806C600 @ =gPlayerParty + 4 * 0x64\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806C604\n\
-    movs r0, 0x4\n\
-    strh r0, [r4, 0x2E]\n\
-    b _0806C64E\n\
-    .align 2, 0\n\
-_0806C600: .4byte gPlayerParty + 4 * 0x64\n\
-_0806C604:\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806C64E\n\
-    movs r0, 0x5\n\
-    strh r0, [r4, 0x2E]\n\
-    b _0806C64E\n\
-_0806C618:\n\
-    subs r0, r4, 0x2\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bhi _0806C634\n\
-    ldr r0, _0806C630 @ =gSprites\n\
-    lsls r1, r5, 4\n\
-    adds r1, r5\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    movs r0, 0\n\
-    b _0806C64A\n\
-    .align 2, 0\n\
-_0806C630: .4byte gSprites\n\
-_0806C634:\n\
-    subs r0, r4, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bhi _0806C64E\n\
-    ldr r0, _0806C654 @ =gSprites\n\
-    lsls r1, r5, 4\n\
-    adds r1, r5\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    movs r0, 0x1\n\
-_0806C64A:\n\
-    strh r0, [r1, 0x2E]\n\
-    strh r4, [r1, 0x30]\n\
-_0806C64E:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806C654: .4byte gSprites\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
 {
