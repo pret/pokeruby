@@ -2444,127 +2444,40 @@ void CreateHeldItemIcons_806DC34(u8 taskId)
     }
 }
 
-// too many registers allocated
-#ifdef NONMATCHING
 void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 {
     u8 monIconSpriteId;
     u8 heldItemSpriteId;
+    struct Sprite * r1;
+    struct Sprite * heldItemSprite;
 
     monIconSpriteId = GetMonIconSpriteId(taskId, monIndex);
     heldItemSpriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
 
-    gSprites[heldItemSpriteId].x2 = 4;
-    gSprites[heldItemSpriteId].y2 = 10;
-    gSprites[heldItemSpriteId].data[7] = monIconSpriteId;
+    r1 = gSprites;
+    heldItemSprite = r1 + heldItemSpriteId;
+    heldItemSprite->x2 = 4;
+    heldItemSprite->y2 = 10;
+    heldItemSprite->data[7] = monIconSpriteId;
     gSprites[monIconSpriteId].data[7] = heldItemSpriteId;
 
-    if (!item)
+    if (item == ITEM_NONE)
     {
-        gSprites[heldItemSpriteId].invisible = TRUE;
+        heldItemSprite->invisible = TRUE;
+    }
+    else if (ItemIsMail(item))
+    {
+        StartSpriteAnim(heldItemSprite, 1);
+        heldItemSprite->invisible = FALSE;
     }
     else
     {
-        if (ItemIsMail(item))
-            StartSpriteAnim(&gSprites[heldItemSpriteId], 1);
-        else
-            StartSpriteAnim(&gSprites[heldItemSpriteId], 0);
-
-        gSprites[heldItemSpriteId].invisible = FALSE;
+        StartSpriteAnim(heldItemSprite, 0);
+        heldItemSprite->invisible = FALSE;
     }
 
     gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
 }
-#else
-NAKED
-void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    lsls r2, 16\n\
-    lsrs r7, r2, 16\n\
-    bl GetMonIconSpriteId\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    ldr r0, _0806DD2C @ =gSpriteTemplate_837660C\n\
-    movs r1, 0xFA\n\
-    movs r2, 0xAA\n\
-    movs r3, 0x4\n\
-    bl CreateSprite\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    ldr r1, _0806DD30 @ =gSprites\n\
-    lsls r0, r6, 4\n\
-    adds r0, r6\n\
-    lsls r0, 2\n\
-    adds r5, r0, r1\n\
-    movs r0, 0x4\n\
-    strh r0, [r5, 0x24]\n\
-    movs r0, 0xA\n\
-    strh r0, [r5, 0x26]\n\
-    strh r4, [r5, 0x3C]\n\
-    lsls r0, r4, 4\n\
-    adds r0, r4\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    strh r6, [r0, 0x3C]\n\
-    cmp r7, 0\n\
-    bne _0806DD34\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x3E\n\
-    ldrb r1, [r0]\n\
-    movs r2, 0x4\n\
-    orrs r1, r2\n\
-    strb r1, [r0]\n\
-    b _0806DD5C\n\
-    .align 2, 0\n\
-_0806DD2C: .4byte gSpriteTemplate_837660C\n\
-_0806DD30: .4byte gSprites\n\
-_0806DD34:\n\
-    adds r0, r7, 0\n\
-    bl ItemIsMail\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _0806DD46\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x1\n\
-    b _0806DD4A\n\
-_0806DD46:\n\
-    adds r0, r5, 0\n\
-    movs r1, 0\n\
-_0806DD4A:\n\
-    bl StartSpriteAnim\n\
-    adds r2, r5, 0\n\
-    adds r2, 0x3E\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0x5\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r2]\n\
-_0806DD5C:\n\
-    ldr r2, _0806DD78 @ =gSprites\n\
-    lsls r0, r6, 4\n\
-    adds r0, r6\n\
-    lsls r0, 2\n\
-    adds r1, r2, 0\n\
-    adds r1, 0x1C\n\
-    adds r1, r0, r1\n\
-    adds r0, r2\n\
-    ldr r1, [r1]\n\
-    bl _call_via_r1\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806DD78: .4byte gSprites\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite)
 {
