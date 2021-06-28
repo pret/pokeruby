@@ -1589,13 +1589,13 @@ static void sub_80FC600(void)
             if (gRegionMapState->regionMap.unk16 == 2 || gRegionMapState->regionMap.unk16 == 4)
             {
                 m4aSongNumStart(SE_SELECT);
-                ewramA6E = 1;
+                gRegionMapState->choseFlyLocation = 1;
                 sub_80FC244(sub_80FC69C);
             }
             break;
         case INPUT_EVENT_B_BUTTON:
             m4aSongNumStart(SE_SELECT);
-            ewramA6E = 0;
+            gRegionMapState->choseFlyLocation = 0;
             sub_80FC244(sub_80FC69C);
             break;
         }
@@ -1614,7 +1614,7 @@ void sub_80FC69C(void)
         if (UpdatePaletteFade() != 0)
             break;
         FreeRegionMapIconResources();
-        if (ewramA6E != 0)
+        if (gRegionMapState->choseFlyLocation != 0)
         {
             switch (gRegionMapState->regionMap.mapSectionId)
             {

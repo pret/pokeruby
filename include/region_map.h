@@ -68,7 +68,8 @@ struct RegionMapState
     u16 mapSectionId;
     struct RegionMap regionMap;
     u16 unk_888[0xE0];
-    u8 blankMapName[12];
+    u8 blankMapName[0x26];
+    bool8 choseFlyLocation;
 };
 
 extern struct RegionMapState *const gRegionMapState;
