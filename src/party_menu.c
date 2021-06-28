@@ -177,8 +177,8 @@ const u16 TMHMMoves[] =
 };
 
 //FIXME
-//const u8 *unrefTileBuffer = gTileBuffer;
-asm(".4byte gTileBuffer\n");
+
+u8 *const gTileBufferPtr = gTileBuffer;
 
 static const u8 MenuGfx_HoldIcons[] = INCBIN_U8("graphics/interface/hold_icons.4bpp");
 static const u16 MenuPal_HoldIcons[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
@@ -466,7 +466,6 @@ struct PartyMenu
 };
 
 extern u16 gBattleTypeFlags;
-extern u8 gTileBuffer[];
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;
@@ -474,7 +473,6 @@ extern u16 gMoveToLearn;
 
 extern u16 gUnknown_08E9A300[];
 extern struct Coords8 const gUnknown_08376738[12][6];
-extern u8 gUnknown_02039460[];
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 
 extern const u8 gPartyMenuMisc_Gfx[];
@@ -2186,7 +2184,6 @@ void sub_806D5A4(void)
 
 void sub_806D5B8(u8 monIndex)
 {
-    u32 var1;
     u8 left = gUnknown_08376948[IsDoubleBattle()][monIndex].left;
     u8 top = gUnknown_08376948[IsDoubleBattle()][monIndex].top;
     u8 right = gUnknown_08376948[IsDoubleBattle()][monIndex].right;
@@ -2194,13 +2191,11 @@ void sub_806D5B8(u8 monIndex)
 
     Text_EraseWindowRect(&gWindowTemplate_Contest_MoveDescription, left, top, right, bottom);
 
-    var1 = 0;
-    CpuFastSet(&var1, OBJ_VRAM1 + monIndex * 0x400, 0x1000100);
+    CpuFastFill(0, OBJ_VRAM1 + monIndex * 0x400, 0x400);
 }
 
 void sub_806D668(u8 monIndex)
 {
-    u32 var1;
     u8 left = gUnknown_08376978[IsDoubleBattle()][monIndex].left;
     u8 top = gUnknown_08376978[IsDoubleBattle()][monIndex].top;
     u8 right = gUnknown_08376978[IsDoubleBattle()][monIndex].right;
@@ -2208,8 +2203,7 @@ void sub_806D668(u8 monIndex)
 
     Text_EraseWindowRect(&gWindowTemplate_Contest_MoveDescription, left, top, right, bottom);
 
-    var1 = 0;
-    CpuFastSet(&var1, OBJ_VRAM1 + 0x300 + monIndex * 0x400, 0x1000040);
+    CpuFastFill(0, OBJ_VRAM1 + 0x300 + monIndex * 0x400, 0x100);
 }
 
 bool8 LoadPartyMenuGraphics(u8 a)
@@ -2582,10 +2576,9 @@ void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
 
 void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
 {
-    u32 var1 = 0;
-    CpuFastSet(&var1, gTileBuffer, 0x1000100);
-    Text_InitWindow8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gTileBuffer, nameBuffer);
-    CpuFastSet(gTileBuffer, OBJ_VRAM1 + (monIndex * 0x400), 128);
+    CpuFastFill(0, gTileBufferPtr, 0x400);
+    Text_InitWindow8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gTileBufferPtr, nameBuffer);
+    CpuFastCopy(gTileBufferPtr, OBJ_VRAM1 + (monIndex * 0x400), 0x200);
 }
 
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon)
@@ -2662,7 +2655,6 @@ static void PartyMenuWriteTilemap(u8 a, u8 x, u8 y)
 void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
 {
     u8 *stringVar;
-    u32 var1;
     u8 x = gUnknown_08376738[menuLayout][monIndex].x;
     u8 y = gUnknown_08376738[menuLayout][monIndex].y;
 
@@ -2675,10 +2667,9 @@ void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
 
     ConvertIntToDecimalString(&stringVar[3], level);
 
-    var1 = 0;
-    CpuFastSet(&var1, gUnknown_02039460, 0x1000020);
-    Text_InitWindow8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x200 + (monIndex * 0x400), 32);
+    CpuFastFill(0, gTileBufferPtr + 0x100, 0x80);
+    Text_InitWindow8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gTileBufferPtr, gStringVar1);
+    CpuFastCopy(gTileBufferPtr + 0x100, OBJ_VRAM1 + 0x200 + (monIndex * 0x400), 0x80);
 }
 
 void PartyMenuPrintLevel(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
@@ -2748,17 +2739,14 @@ void PartyMenuPrintGenderIcon(u8 monIndex, u8 menuLayout, struct Pokemon *pokemo
 
 void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 {
-    u32 *var;
     register u8 *stringVar1 asm("r2") = gStringVar1;
     register u8 *textPtr asm("r2") = AlignInt1InMenuWindow(stringVar1, currentHP, 15, 1);
     textPtr[0] = CHAR_SLASH;
 
     AlignInt1InMenuWindow(++textPtr, maxHP, 35, 1);
-    var = 0;
-
-    CpuFastSet(&var, gUnknown_02039460, 0x1000040);
-    Text_InitWindow8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x300 + (monIndex * 0x400), 64);
+    CpuFastFill(0, gTileBufferPtr + 0x100, 0x100);
+    Text_InitWindow8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gTileBufferPtr, gStringVar1);
+    CpuFastCopy(gTileBufferPtr + 0x100, OBJ_VRAM1 + 0x300 + (monIndex * 0x400), 0x100);
 }
 
 void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)

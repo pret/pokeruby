@@ -377,10 +377,7 @@ gBattleMonForms = .; /* 2024E84 */
     . = ALIGN(16);
 #endif
 gTileBuffer = .; /* 2039360 */
-    . += 0x100;
-
-gUnknown_02039460 = .; /* 2039460 */
-    . += 0x300;
+    . += 0x400;
 
 gUnknown_02039760 = .; /* 2039760 */
     . += 0xC00;
