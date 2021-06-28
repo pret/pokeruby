@@ -9,27 +9,11 @@
 #include "text.h"
 #include "ewram.h"
 
-struct RegionMapStruct
-{
-    u8 str[0x16];
-    u8 unk16;
-    u8 filler[0x869];
-};
-
-struct UnkStruct
-{
-    MainCallback callback;
-    u8 filler[4];
-    // This should be RegionMap, but I can't do that because it overlaps unk888.
-    struct RegionMapStruct unk8;
-    u16 unk888;
-};
-
 void FieldInitRegionMap(MainCallback callback)
 {
     SetVBlankCallback(NULL);
-    ewram0_5.unk888 = 0;
-    ewram0_5.callback = callback;
+    eRegionMapState.unk_888[0] = 0;
+    eRegionMapState.callback = callback;
     SetMainCallback2(CB2_FieldInitRegionMap);
 }
 
@@ -46,8 +30,7 @@ void CB2_FieldInitRegionMap(void)
     REG_BG3VOFS = 0;
     ResetSpriteData();
     FreeAllSpritePalettes();
-    // TODO: remove this cast
-    InitRegionMap((void *)&ewram0_5.unk8, 0);
+    InitRegionMap(&eRegionMapState.regionMap, 0);
     CreateRegionMapPlayerIcon(0, 0);
     CreateRegionMapCursor(1, 1);
     Text_LoadWindowTemplate(&gWindowTemplate_81E709C);
@@ -80,15 +63,15 @@ void CB2_FieldRegionMap(void)
 
 void sub_813EFDC(void)
 {
-    switch (ewram0_5.unk888)
+    switch (eRegionMapState.unk_888[0])
     {
     case 0:
         REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
-        ewram0_5.unk888++;
+        eRegionMapState.unk_888[0]++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            ewram0_5.unk888++;
+            eRegionMapState.unk_888[0]++;
         break;
     case 2:
         switch (sub_80FAB60())
@@ -98,18 +81,18 @@ void sub_813EFDC(void)
             break;
         case 4:
         case 5:
-            ewram0_5.unk888++;
+            eRegionMapState.unk_888[0]++;
         }
         break;
     case 3:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-        ewram0_5.unk888++;
+        eRegionMapState.unk_888[0]++;
         break;
     case 4:
         if (!gPaletteFade.active)
         {
             FreeRegionMapIconResources();
-            SetMainCallback2(ewram0_5.callback);
+            SetMainCallback2(eRegionMapState.callback);
         }
         break;
     }
@@ -118,6 +101,6 @@ void sub_813EFDC(void)
 void sub_813F0C8(void)
 {
     Menu_BlankWindowRect(17, 17, 28, 18);
-    if (ewram0_5.unk8.unk16)
-        Menu_PrintText(ewram0_5.unk8.str, 17, 17);
+    if (eRegionMapState.regionMap.unk16)
+        Menu_PrintText(eRegionMapState.regionMap.mapSectionName, 17, 17);
 }

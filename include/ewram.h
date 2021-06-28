@@ -10,11 +10,11 @@ extern u8 gSharedMem[];
 // seperated.
 #define gDecompressionBuffer            (gSharedMem + 0x1E000)
 
+#define eRegionMapState                 (*(struct RegionMapState *)gSharedMem)
 #define eDroughtPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
 #define namingScreenData                (*(struct NamingScreenData *)(gSharedMem + 0x0))
 #define ewramBerryPic                   (gSharedMem + 0x0)
-#define ewram0_5                        (*(struct UnkStruct *)(gSharedMem + 0x0))
 #define eMatsudaDebugVar                (gSharedMem[0x0])
 #define eBrendanSprite                  (gSharedMem + 0x0)
 #define ewram0_7                        (&gSharedMem[0])
