@@ -58,13 +58,13 @@ void sub_80D31C8(struct Sprite* sprite)
 
     if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
     }
 
     sprite->animPaused = 1;
@@ -75,9 +75,9 @@ void sub_80D31C8(struct Sprite* sprite)
     }
 
     sprite->data[0] = gBattleAnimArgs[6];
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
     InitAnimLinearTranslation(sprite);
@@ -85,8 +85,8 @@ void sub_80D31C8(struct Sprite* sprite)
     newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     sprite->data[5] = newSpriteId;
 
-    sprite->pos1.x -= Sin((u8)gBattleAnimArgs[4], gBattleAnimArgs[2]);
-    sprite->pos1.y -= Cos((u8)gBattleAnimArgs[4], gBattleAnimArgs[3]);
+    sprite->x -= Sin((u8)gBattleAnimArgs[4], gBattleAnimArgs[2]);
+    sprite->y -= Cos((u8)gBattleAnimArgs[4], gBattleAnimArgs[3]);
 
     gSprites[newSpriteId].data[0] = gBattleAnimArgs[2];
     gSprites[newSpriteId].data[1] = gBattleAnimArgs[3];
@@ -108,8 +108,8 @@ static void sub_80D32E8(struct Sprite *sprite)
     sprite->data[0] = 1;
     TranslateAnimLinear(sprite);
 
-    sprite->pos2.x += Sin(index / 256, gSprites[spriteId].data[0]);
-    sprite->pos2.y += Cos(index / 256, gSprites[spriteId].data[1]);
+    sprite->x2 += Sin(index / 256, gSprites[spriteId].data[0]);
+    sprite->y2 += Cos(index / 256, gSprites[spriteId].data[1]);
 
     gSprites[spriteId].data[3] = gSprites[spriteId].data[2] + index;
 

@@ -70,7 +70,7 @@ const struct SpriteTemplate gFallingItemBagTemplate =
 
 void sub_80CB7EC(struct Sprite* sprite, s16 c)
 {
-    s32 a = (sprite->pos1.x * 256) | sprite->pos1.y;
+    s32 a = (sprite->x * 256) | sprite->y;
     s32 b = (sprite->data[6] * 256) | sprite->data[7];
     c *= 256;
     sprite->data[5] = a;
@@ -104,8 +104,8 @@ bool8 sub_80CB814(struct Sprite* sprite)
     r0 = r2 - r10;
     var1 = r0 * r3 / r6;
     var2 = r4_2 * r3 / r6;
-    sprite->pos1.x = var1 + r10;
-    sprite->pos1.y = var2 + r9;
+    sprite->x = var1 + r10;
+    sprite->y = var2 + r9;
     if (++r3 == r6)
         return TRUE;
 
@@ -136,10 +136,10 @@ void sub_80CB8E8(struct Sprite* sprite)
         sprite->data[0] = 0;
     }
 
-    sprite->pos2.y = Sin(sprite->data[0] + 128, 30 - sprite->data[1] * 8);
+    sprite->y2 = Sin(sprite->data[0] + 128, 30 - sprite->data[1] * 8);
     if (sub_80CB814(sprite))
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 0;
         sprite->callback = sub_80CB8B8;
     }
@@ -182,10 +182,10 @@ void sub_80CB9C4(struct Sprite* sprite)
         sprite->data[0] = zero;
     }
 
-    sprite->pos2.y = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
+    sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sub_80CB814(sprite))
     {
-        sprite->pos2.y = zero;
+        sprite->y2 = zero;
         sprite->data[0] = zero;
         DestroyAnimSprite(sprite);
     }

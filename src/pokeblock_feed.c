@@ -778,8 +778,8 @@ static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon)
 
 static void sub_8148044(u8 spriteID)
 {
-    gSprites[spriteID].pos1.x = 48;
-    gSprites[spriteID].pos1.y = 80;
+    gSprites[spriteID].x = 48;
+    gSprites[spriteID].y = 80;
     gSprites[spriteID].data[0] = -8;
     gSprites[spriteID].data[1] = 1;
     gSprites[spriteID].callback = sub_8148078;
@@ -787,8 +787,8 @@ static void sub_8148044(u8 spriteID)
 
 static void sub_8148078(struct Sprite* sprite)
 {
-    sprite->pos1.x += 4;
-    sprite->pos1.y += sprite->data[0];
+    sprite->x += 4;
+    sprite->y += sprite->data[0];
     sprite->data[0] += sprite->data[1];
     if (sprite->data[0] == 0)
         PlayCry1(sprite->data[2], 0);
@@ -827,8 +827,8 @@ static u8 CreatePokeblockSprite(void)
 
 static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
-    sprite->pos1.x -= 4;
-    sprite->pos1.y += sprite->data[0];
+    sprite->x -= 4;
+    sprite->y += sprite->data[0];
     sprite->data[0] += sprite->data[1];
     if (sprite->data[0] == 10)
         DestroySprite(sprite);
@@ -918,8 +918,8 @@ static bool8 sub_8148540(void)
         gUnknown_03005FA0[10] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2]);
         gUnknown_03005FA0[11] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3]);
         gUnknown_03005FA0[12] = gUnknown_03005FA0[4];
-        gUnknown_03005FA0[13] = gPokeblockFeedPokeSprite->pos2.x;
-        gUnknown_03005FA0[14] = gPokeblockFeedPokeSprite->pos2.y;
+        gUnknown_03005FA0[13] = gPokeblockFeedPokeSprite->x2;
+        gUnknown_03005FA0[14] = gPokeblockFeedPokeSprite->y2;
         sub_8148710();
         gUnknown_03005FA0[4] = gUnknown_03005FA0[12];
         sub_814862C();
@@ -932,8 +932,8 @@ static bool8 sub_81485CC(void)
 {
     u16 var = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
-    gPokeblockFeedPokeSprite->pos2.x = ePokeblockFeedMonAnimX[var];
-    gPokeblockFeedPokeSprite->pos2.y = ePokeblockFeedMonAnimY[var];
+    gPokeblockFeedPokeSprite->x2 = ePokeblockFeedMonAnimX[var];
+    gPokeblockFeedPokeSprite->y2 = ePokeblockFeedMonAnimY[var];
 
     if (--gUnknown_03005FA0[4] == 0)
         return TRUE;

@@ -72,7 +72,7 @@ void sub_80CFE9C(struct Sprite* sprite)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     r6 += gBattleAnimArgs[2];
-    var = ArcTan2Neg(r6 - sprite->pos1.x, r7 - sprite->pos1.y);
+    var = ArcTan2Neg(r6 - sprite->x, r7 - sprite->y);
     var += 0xC000;
     sub_8078FDC(sprite, 0, 0x100, 0x100, var);
     sprite->data[0] = gBattleAnimArgs[4];
@@ -85,18 +85,18 @@ void sub_80CFE9C(struct Sprite* sprite)
 void sub_80CFF50(struct Sprite* sprite)
 {
     sprite->data[2] = -16;
-    sprite->pos1.y += 8;
+    sprite->y += 8;
     sprite->callback = sub_80CFF68;
 }
 
 static void sub_80CFF68(struct Sprite* sprite)
 {
     sprite->data[0] += 0x80;
-    sprite->pos2.x = sprite->data[0] >> 8;
+    sprite->x2 = sprite->data[0] >> 8;
     if (GetBattlerSide(gBattleAnimAttacker) == 0)
-        sprite->pos2.x = -sprite->pos2.x;
+        sprite->x2 = -sprite->x2;
 
-    sprite->pos2.y = Sin(sprite->data[1], sprite->data[2]);
+    sprite->y2 = Sin(sprite->data[1], sprite->data[2]);
     sprite->data[1] += 5;
     if (sprite->data[1] > 0x7E)
     {

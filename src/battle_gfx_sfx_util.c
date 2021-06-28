@@ -144,8 +144,8 @@ void sub_80313A0(struct Sprite *sprite)
 {
     if (!(gIntroSlideFlags & 1))
     {
-        sprite->pos2.x += sprite->data[0];
-        if (sprite->pos2.x == 0)
+        sprite->x2 += sprite->data[0];
+        if (sprite->x2 == 0)
             sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -647,7 +647,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         }
-        gSprites[gBattlerSpriteIds[a]].pos1.y = sub_8077F68(a);
+        gSprites[gBattlerSpriteIds[a]].y = sub_8077F68(a);
     }
     else
     {
@@ -719,7 +719,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             gBattleSpriteInfo[a].transformedSpecies = species;
             gBattleMonForms[a] = gBattleMonForms[b];
         }
-        gSprites[gBattlerSpriteIds[a]].pos1.y = sub_8077F68(a);
+        gSprites[gBattlerSpriteIds[a]].y = sub_8077F68(a);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[a]], gBattleMonForms[a]);
     }
 }
@@ -769,9 +769,9 @@ void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
     BattleLoadSubstituteSprite(a, b);
     StartSpriteAnim(&gSprites[spriteId], gBattleMonForms[a]);
     if (b == 0)
-        gSprites[spriteId].pos1.y = sub_8077F7C(a);
+        gSprites[spriteId].y = sub_8077F7C(a);
     else
-        gSprites[spriteId].pos1.y = sub_8077F68(a);
+        gSprites[spriteId].y = sub_8077F68(a);
 }
 
 void sub_80324BC(u8 a, u16 b)
@@ -907,8 +907,8 @@ void sub_80328A4(struct Sprite *sprite)
         invisible = TRUE;
     if (gBattleSpriteInfo[r4].substituteSprite)
         invisible = TRUE;
-    sprite->pos1.x = r7->pos1.x;
-    sprite->pos2.x = r7->pos2.x;
+    sprite->x = r7->x;
+    sprite->x2 = r7->x2;
     sprite->invisible = invisible;
 }
 

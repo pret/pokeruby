@@ -682,8 +682,8 @@ void sub_80AA754(struct Sprite *sprite)
         sub_80AAD08(sprite, 1);
         break;
     }
-    sprite->pos1.x = gUnknown_083C9296[sprite->data[0] + sprite->data[1] * 2];
-    sprite->pos1.y = gUnknown_083C92A8[sprite->data[1]];
+    sprite->x = gUnknown_083C9296[sprite->data[0] + sprite->data[1] * 2];
+    sprite->y = gUnknown_083C92A8[sprite->data[1]];
 }
 
 static void sub_80AA8A0(struct Sprite *sprite, s8 var1, u8 var2)

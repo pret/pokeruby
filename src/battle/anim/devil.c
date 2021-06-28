@@ -42,8 +42,8 @@ void sub_80D2ABC(struct Sprite *sprite)
 {
     if (sprite->data[3] == 0)
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         StartSpriteAnim(sprite, 0);
         sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) - 1;
         sprite->data[2] = 1;
@@ -52,8 +52,8 @@ void sub_80D2ABC(struct Sprite *sprite)
     sprite->data[1] = (sprite->data[0] * 4) % 256;
     if (sprite->data[1] < 0)
         sprite->data[1] = 0;
-    sprite->pos2.x = Cos(sprite->data[1], 30 - sprite->data[0] / 4);
-    sprite->pos2.y = Sin(sprite->data[1], 10 - sprite->data[0] / 8);
+    sprite->x2 = Cos(sprite->data[1], 30 - sprite->data[0] / 4);
+    sprite->y2 = Sin(sprite->data[1], 10 - sprite->data[0] / 8);
     if (sprite->data[1] > 128 && sprite->data[2] > 0)
         sprite->data[2] = -1;
     if (sprite->data[1] == 0 && sprite->data[2] < 0)

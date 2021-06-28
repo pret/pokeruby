@@ -38,7 +38,7 @@ void sub_80CF514(u8 taskId)
     if (gTasks[taskId].data[1] == 0)
     {
         gTasks[taskId].data[0] += 0xB0;
-        gSprites[a].pos2.y++;
+        gSprites[a].y2++;
     }
     else if (gTasks[taskId].data[1] == 1)
     {
@@ -50,7 +50,7 @@ void sub_80CF514(u8 taskId)
     else
     {
         gTasks[taskId].data[0] -= 0xB0;
-        gSprites[a].pos2.y--;
+        gSprites[a].y2--;
     }
 
     sub_8078F9C(a);

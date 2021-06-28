@@ -215,9 +215,9 @@ void sub_80CA858(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = gBattleAnimArgs[3];
@@ -241,8 +241,8 @@ static void sub_80CA8B4(struct Sprite* sprite)
         {
             sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) + 6;
         }
-        sprite->pos2.x += Sin(sprite->data[5], 5);
-        sprite->pos2.y += Cos(sprite->data[5], 14);
+        sprite->x2 += Sin(sprite->data[5], 5);
+        sprite->y2 += Cos(sprite->data[5], 14);
         sprite->data[5] = (sprite->data[5] + 15) & 0xFF;
     }
 }
@@ -288,22 +288,22 @@ void sub_80CAA14(struct Sprite* sprite)
     u16 b;
     
     StartSpriteAnim(sprite, a & 7);
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     if (GetBattlerSide(gBattleAnimAttacker))
     {
-        sprite->pos1.x -= 20;
+        sprite->x -= 20;
     }
     else
     {
-        sprite->pos1.x += 20;
+        sprite->x += 20;
     }
 
     b = Random();
     sprite->data[0] = (b & 31) + 64;
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     sub_8078D60(sprite);
     sprite->data[5] = Random() & 0xFF;
@@ -320,7 +320,7 @@ static void sub_80CAACC(struct Sprite* sprite)
     }
     else
     {
-        sprite->pos2.y += Cos(sprite->data[5], 12);
+        sprite->y2 += Cos(sprite->data[5], 12);
         if (sprite->data[5] <= 0x7E)
         {
             sprite->subpriority = sprite->data[6];

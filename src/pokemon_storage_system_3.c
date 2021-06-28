@@ -136,12 +136,12 @@ static void sub_8098E24(struct Sprite *sprite)
     if (sprite->data[1] != 0)
     {
         sprite->data[1]--;
-        sprite->pos1.x += sprite->data[2];
+        sprite->x += sprite->data[2];
     }
     else
     {
         gPokemonStorageSystemPtr->unk_1178--;
-        sprite->pos1.x = sprite->data[3];
+        sprite->x = sprite->data[3];
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -154,8 +154,8 @@ static void sub_8098E68(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.x += sprite->data[2];
-        sprite->data[5] = sprite->pos1.x + sprite->pos2.x;
+        sprite->x += sprite->data[2];
+        sprite->data[5] = sprite->x + sprite->x2;
         if (sprite->data[5] < 0x45 || sprite->data[5] > 0xfb)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -296,7 +296,7 @@ void sub_8099200(bool8 a0)
         for (i = 0; i < count; i++)
         {
             // this routine assumes party_compaction has been called
-            gPokemonStorageSystemPtr->unk_1038[i]->pos1.y -= 0xa0;
+            gPokemonStorageSystemPtr->unk_1038[i]->y -= 0xa0;
             gPokemonStorageSystemPtr->unk_1038[i]->invisible = TRUE;
         }
     }
@@ -344,8 +344,8 @@ static void sub_8099388(struct Sprite *sprite, u16 a1)
         r3 = 0x98;
         r4 = 24 * (a1 - 1) + 0x10;
     }
-    sprite->data[2] = sprite->pos1.x << 3;
-    sprite->data[3] = sprite->pos1.y << 3;
+    sprite->data[2] = sprite->x << 3;
+    sprite->data[3] = sprite->y << 3;
     sprite->data[4] = (r3 * 8 - sprite->data[2]) / 8;
     sprite->data[5] = (r4 * 8 - sprite->data[3]) / 8;
     sprite->data[6] = 8;
@@ -358,21 +358,21 @@ static void sub_80993F4(struct Sprite *sprite)
     {
         sprite->data[2] += sprite->data[4];
         sprite->data[3] += sprite->data[5];
-        sprite->pos1.x = sprite->data[2] >> 3;
-        sprite->pos1.y = sprite->data[3] >> 3;
+        sprite->x = sprite->data[2] >> 3;
+        sprite->y = sprite->data[3] >> 3;
         sprite->data[6]--;
     }
     else
     {
         if (sprite->data[1] == 0)
         {
-            sprite->pos1.x = 0x68;
-            sprite->pos1.y = 0x40;
+            sprite->x = 0x68;
+            sprite->y = 0x40;
         }
         else
         {
-            sprite->pos1.x = 0x98;
-            sprite->pos1.y = (sprite->data[1] - 1) * 24 + 0x10;
+            sprite->x = 0x98;
+            sprite->y = (sprite->data[1] - 1) * 24 + 0x10;
         }
         sprite->callback = SpriteCallbackDummy;
         gPokemonStorageSystemPtr->unk_1038[sprite->data[1]] = sprite;
@@ -398,8 +398,8 @@ void sub_80994A8(s16 y)
         if (gPokemonStorageSystemPtr->unk_1038[i])
         {
             s16 yy;
-            gPokemonStorageSystemPtr->unk_1038[i]->pos1.y += y;
-            yy = gPokemonStorageSystemPtr->unk_1038[i]->pos1.y + gPokemonStorageSystemPtr->unk_1038[i]->pos2.y + gPokemonStorageSystemPtr->unk_1038[i]->centerToCornerVecY;
+            gPokemonStorageSystemPtr->unk_1038[i]->y += y;
+            yy = gPokemonStorageSystemPtr->unk_1038[i]->y + gPokemonStorageSystemPtr->unk_1038[i]->y2 + gPokemonStorageSystemPtr->unk_1038[i]->centerToCornerVecY;
             if (yy < -0x10 || yy > 0xb0)
                 gPokemonStorageSystemPtr->unk_1038[i]->invisible = TRUE;
             else
@@ -487,11 +487,11 @@ bool8 sub_809971C(void)
     gPokemonStorageSystemPtr->unk_1170++;
     if (gPokemonStorageSystemPtr->unk_1170 & 1)
     {
-        (*gPokemonStorageSystemPtr->unk_10c8)->pos1.y--;
-        gPokemonStorageSystemPtr->unk_1034->pos1.y++;
+        (*gPokemonStorageSystemPtr->unk_10c8)->y--;
+        gPokemonStorageSystemPtr->unk_1034->y++;
     }
-    (*gPokemonStorageSystemPtr->unk_10c8)->pos2.x = gSineTable[gPokemonStorageSystemPtr->unk_1170 * 8] / 16;
-    gPokemonStorageSystemPtr->unk_1034->pos2.x = -(gSineTable[gPokemonStorageSystemPtr->unk_1170 * 8] / 16);
+    (*gPokemonStorageSystemPtr->unk_10c8)->x2 = gSineTable[gPokemonStorageSystemPtr->unk_1170 * 8] / 16;
+    gPokemonStorageSystemPtr->unk_1034->x2 = -(gSineTable[gPokemonStorageSystemPtr->unk_1170 * 8] / 16);
     if (gPokemonStorageSystemPtr->unk_1170 == 8)
     {
         gPokemonStorageSystemPtr->unk_1034->oam.priority = (*gPokemonStorageSystemPtr->unk_10c8)->oam.priority;
@@ -576,8 +576,8 @@ bool8 sub_8099990(void)
 
 static void sub_80999C4(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPokemonStorageSystemPtr->unk_11c0->pos1.x;
-    sprite->pos1.y = gPokemonStorageSystemPtr->unk_11c0->pos1.y + gPokemonStorageSystemPtr->unk_11c0->pos2.y + 4;
+    sprite->x = gPokemonStorageSystemPtr->unk_11c0->x;
+    sprite->y = gPokemonStorageSystemPtr->unk_11c0->y + gPokemonStorageSystemPtr->unk_11c0->y2 + 4;
 }
 
 static u16 PSS_LoadSpeciesIconGfx(u16 a0)

@@ -401,7 +401,7 @@ void SafariHandleTrainerThrow(void)
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_812B65C;

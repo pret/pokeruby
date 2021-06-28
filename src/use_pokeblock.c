@@ -285,7 +285,7 @@ static void sub_8136294(void)
             break;
         case 13:
             sub_80F2E18(0);
-            gPokenavStructPtr->unk8768->pos2.y = 0xffd8;
+            gPokenavStructPtr->unk8768->y2 = 0xffd8;
             gUnknown_02039304->unk50++;
             break;
         case 14:
@@ -857,9 +857,9 @@ static void sub_8137138(void)
 static void sub_81371DC(struct Sprite *sprite)
 {
     if (sprite->data[0] <= 5)
-        sprite->pos2.y -= 2;
+        sprite->y2 -= 2;
     else if (sprite->data[0] <= 11)
-        sprite->pos2.y += 2;
+        sprite->y2 += 2;
     if ((++sprite->data[0]) > 60)
     {
         DestroySprite(sprite);

@@ -123,13 +123,13 @@ void sub_80CC474(struct Sprite* sprite)
     {
         sprite->data[4] = 0;
         sprite->data[2] = gBattleAnimArgs[3];
-        sprite->pos1.x = 0xFFF0;
+        sprite->x = 0xFFF0;
     }
     else
     {
         sprite->data[4] = 1;
         sprite->data[2] = -gBattleAnimArgs[3];
-        sprite->pos1.x = 0x100;
+        sprite->x = 0x100;
     }
 
     sprite->data[1] = gBattleAnimArgs[1];
@@ -138,19 +138,19 @@ void sub_80CC474(struct Sprite* sprite)
     switch (gBattleAnimArgs[5])
     {
     case 0:
-        sprite->pos1.y = gBattleAnimArgs[0];
+        sprite->y = gBattleAnimArgs[0];
         sprite->oam.priority = GetBattlerSpriteBGPriority(bank);
         break;
     case 1:
-        sprite->pos1.y = gBattleAnimArgs[0];
+        sprite->y = gBattleAnimArgs[0];
         sprite->oam.priority = GetBattlerSpriteBGPriority(bank) + 1;
         break;
     case 2:
-        sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[0];
         sprite->oam.priority = GetBattlerSpriteBGPriority(bank);
         break;
     case 3:
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[0];
         GetAnimBattlerSpriteId(1);
         sprite->oam.priority = GetBattlerSpriteBGPriority(bank) + 1;
         break;
@@ -163,17 +163,17 @@ static void sub_80CC580(struct Sprite* sprite)
 {
     int a = sprite->data[7];
     sprite->data[7]++;
-    sprite->pos2.y = (sprite->data[1] * gSineTable[sprite->data[0]]) >> 8;
-    sprite->pos2.x = sprite->data[2] * a;
+    sprite->y2 = (sprite->data[1] * gSineTable[sprite->data[0]]) >> 8;
+    sprite->x2 = sprite->data[2] * a;
     sprite->data[0] = (sprite->data[3] * a) & 0xFF;
     if (sprite->data[4] == 0)
     {
-        if (sprite->pos2.x + sprite->pos1.x <= 0xF7)
+        if (sprite->x2 + sprite->x <= 0xF7)
             return;
     }
     else
     {
-        if (sprite->pos2.x + sprite->pos1.x > -16)
+        if (sprite->x2 + sprite->x > -16)
             return;
     }
 

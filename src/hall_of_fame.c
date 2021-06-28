@@ -722,8 +722,8 @@ static void sub_8142794(u8 taskID)
         gTasks[taskID].tFrameCount--;
     else
     {
-        if (gSprites[gTasks[taskID].tPlayerSpriteID].pos1.x != 160)
-            gSprites[gTasks[taskID].tPlayerSpriteID].pos1.x++;
+        if (gSprites[gTasks[taskID].tPlayerSpriteID].x != 160)
+            gSprites[gTasks[taskID].tPlayerSpriteID].x++;
         else
         {
             Menu_DrawStdWindowFrame(1, 2, 15, 9);
@@ -1251,19 +1251,17 @@ static void sub_81435B8(void)
 
 static void sub_81435DC(struct Sprite* sprite)
 {
-    u32 spritePos = *(u32*)(&sprite->pos1);
-    u32 dataPos = *(u32*)(&sprite->data[1]);
-    if (spritePos != dataPos)
+    if (sprite->x != sprite->data[1] || sprite->y != sprite->data[2])
     {
-        if (sprite->pos1.x < sprite->data[1])
-            sprite->pos1.x += 15;
-        if (sprite->pos1.x > sprite->data[1])
-            sprite->pos1.x -= 15;
+        if (sprite->x < sprite->data[1])
+            sprite->x += 15;
+        if (sprite->x > sprite->data[1])
+            sprite->x -= 15;
 
-        if (sprite->pos1.y < sprite->data[2])
-            sprite->pos1.y += 10;
-        if (sprite->pos1.y > sprite->data[2])
-            sprite->pos1.y -= 10;
+        if (sprite->y < sprite->data[2])
+            sprite->y += 10;
+        if (sprite->y > sprite->data[2])
+            sprite->y -= 10;
     }
     else
     {
@@ -1326,19 +1324,19 @@ static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a
 
 static void sub_814386C(struct Sprite* sprite)
 {
-    if (sprite->pos2.y > 120)
+    if (sprite->y2 > 120)
         DestroySprite(sprite);
     else
     {
         u16 rand;
         u8 tableID;
 
-        sprite->pos2.y++;
-        sprite->pos2.y += sprite->data[1];
+        sprite->y2++;
+        sprite->y2 += sprite->data[1];
 
         tableID = sprite->data[0];
         rand = (Random() % 4) + 8;
-        sprite->pos2.x = rand * gSineTable[tableID] / 256;
+        sprite->x2 = rand * gSineTable[tableID] / 256;
 
         sprite->data[0] += 4;
     }

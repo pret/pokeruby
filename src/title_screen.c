@@ -369,7 +369,7 @@ void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
     if (task->data[1] != 0)
     {
         sprite->oam.objMode = 0;
-        sprite->pos1.y = VERSION_BANNER_Y_GOAL;
+        sprite->y = VERSION_BANNER_Y_GOAL;
         sprite->invisible = FALSE;
     }
     else
@@ -379,8 +379,8 @@ void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
         if (task->data[5] < 64)
         {
             sprite->invisible = FALSE;
-            if (sprite->pos1.y != VERSION_BANNER_Y_GOAL)
-                sprite->pos1.y++;
+            if (sprite->y != VERSION_BANNER_Y_GOAL)
+                sprite->y++;
             REG_BLDALPHA = gUnknown_08393E64[task->data[5] / 2];
         }
     }
@@ -393,7 +393,7 @@ void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
     if (task->data[1] != 0)
     {
         sprite->oam.objMode = 0;
-        sprite->pos1.y = VERSION_BANNER_Y_GOAL;
+        sprite->y = VERSION_BANNER_Y_GOAL;
         sprite->invisible = FALSE;
     }
     else
@@ -401,8 +401,8 @@ void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
         if (task->data[5] < 64)
         {
             sprite->invisible = FALSE;
-            if (sprite->pos1.y != VERSION_BANNER_Y_GOAL)
-                sprite->pos1.y++;
+            if (sprite->y != VERSION_BANNER_Y_GOAL)
+                sprite->y++;
         }
     }
 }
@@ -556,13 +556,13 @@ static void CreateCopyrightBanner(s16 x, s16 y)
 
 void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
 {
-    if (gTasks[gUnknown_0202F7E4].data[1] == 0 && sprite->pos1.x < 272)
+    if (gTasks[gUnknown_0202F7E4].data[1] == 0 && sprite->x < 272)
     {
         if (sprite->data[0]) //Flash background
         {
             u16 backgroundColor;
 
-            if (sprite->pos1.x < DISPLAY_WIDTH / 2)
+            if (sprite->x < DISPLAY_WIDTH / 2)
             {
                 //Brighten background color
                 if (sprite->data[1] < 31)
@@ -582,7 +582,7 @@ void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
             gPlttBufferFaded[0] = backgroundColor;
             gPlttBufferFaded[PLTT_BUFFER_INDEX] = backgroundColor;
         }
-        sprite->pos1.x += 4;
+        sprite->x += 4;
     }
     else
     {

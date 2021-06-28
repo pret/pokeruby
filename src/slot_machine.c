@@ -3182,7 +3182,7 @@ static void sub_8104F18(struct Sprite *sprite)
 {
     sprite->data[2] = eSlotMachine->unk1C[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
-    sprite->pos1.y = eSlotMachine->unk22[sprite->data[0]] + 28 + sprite->data[2];
+    sprite->y = eSlotMachine->unk22[sprite->data[0]] + 28 + sprite->data[2];
     sprite->sheetTileStart = GetSpriteTileStartByTag(GetTagOfReelSymbolOnScreenAtPos(sprite->data[0], sprite->data[2] / 24));
     SetSpriteSheetFrameTileNum(sprite);
 }
@@ -3253,12 +3253,12 @@ static void sub_810514C(void)
 
 static void sub_8105170(struct Sprite *sprite)
 {
-    sprite->pos2.y = sprite->pos2.x = 0;
+    sprite->y2 = sprite->x2 = 0;
     if (sprite->animNum == 4)
     {
-        sprite->pos2.y = sprite->pos2.x = 8;
+        sprite->y2 = sprite->x2 = 8;
         if ((sprite->animCmdIndex != 0 && sprite->animDelayCounter != 0) || (sprite->animCmdIndex == 0 && sprite->animDelayCounter == 0))
-            sprite->pos2.y = -8;
+            sprite->y2 = -8;
     }
 }
 
@@ -3318,7 +3318,7 @@ static void sub_810535C(struct Sprite *sprite)
 {
     s16 r0 = (u16)(eSlotMachine->unk14 + sprite->data[7]);
     r0 %= 40;
-    sprite->pos1.y = r0 + 59;
+    sprite->y = r0 + 59;
     StartSpriteAnimIfDifferent(sprite, sub_8102C48(r0 / 20));
 }
 
@@ -3407,15 +3407,15 @@ static void sub_810562C(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         sprite->data[0]--;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->invisible = TRUE;
     }
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos2.x += sprite->data[1];
-        sprite->pos2.y += sprite->data[2];
+        sprite->x2 += sprite->data[1];
+        sprite->y2 += sprite->data[2];
         if (++sprite->data[3] >= 8)
         {
             sprite->data[0] = sprite->data[7];
@@ -3494,7 +3494,7 @@ static void sub_8105854(void)
 
 static void sub_8105894(struct Sprite *sprite)
 {
-    sprite->pos2.y = gSpriteCoordOffsetY;
+    sprite->y2 = gSpriteCoordOffsetY;
 }
 
 static void sub_81058A0(void)
@@ -3523,8 +3523,8 @@ static void sub_810594C(struct Sprite *sprite)
 {
     sprite->data[0] -= 2;
     sprite->data[0] &= 0xff;
-    sprite->pos2.x = Cos(sprite->data[0], 20);
-    sprite->pos2.y = Sin(sprite->data[0], 6);
+    sprite->x2 = Cos(sprite->data[0], 20);
+    sprite->y2 = Sin(sprite->data[0], 6);
     sprite->subpriority = 0;
     if (sprite->data[0] >= 0x80)
     {
@@ -3582,7 +3582,7 @@ static void sub_8105A38(struct Sprite *sprite)
     }
     sprite->data[1] &= 0xff;
     sprite->data[1] += 16;
-    sprite->pos2.y -= (sprite->data[1] >> 8);
+    sprite->y2 -= (sprite->data[1] >> 8);
 }
 
 u8 sub_8105ACC(void)
@@ -3661,12 +3661,12 @@ static void sub_8105C6C(struct Sprite *sprite)
         sprite->subspriteTableNum ^= 1;
         sprite->data[1] = 0;
     }
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     if (sprite->subspriteTableNum != 0)
     {
-        sprite->pos2.x = sp0[sprite->data[6]];
-        sprite->pos2.y = sp8[sprite->data[6]];
+        sprite->x2 = sp0[sprite->data[6]];
+        sprite->y2 = sp8[sprite->data[6]];
     }
 }
 
@@ -3694,10 +3694,10 @@ static void sub_8105D3C(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0xd0)
+        sprite->x += 4;
+        if (sprite->x >= 0xd0)
         {
-            sprite->pos1.x = 0xd0;
+            sprite->x = 0xd0;
             sprite->data[0]++;
         }
         break;
@@ -3706,8 +3706,8 @@ static void sub_8105D3C(struct Sprite *sprite)
             sprite->data[0]++;
         break;
     case 2:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0x110)
+        sprite->x += 4;
+        if (sprite->x >= 0x110)
             sprite->data[0]++;
         break;
     case 3:
@@ -3721,10 +3721,10 @@ static void sub_8105DA4(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.x -= 4;
-        if (sprite->pos1.x <= 0xd0)
+        sprite->x -= 4;
+        if (sprite->x <= 0xd0)
         {
-            sprite->pos1.x = 0xd0;
+            sprite->x = 0xd0;
             sprite->data[0]++;
         }
         break;
@@ -3733,8 +3733,8 @@ static void sub_8105DA4(struct Sprite *sprite)
             sprite->data[0]++;
         break;
     case 2:
-        sprite->pos1.x -= 4;
-        if (sprite->pos1.x <= 0x90)
+        sprite->x -= 4;
+        if (sprite->x <= 0x90)
             sprite->data[0]++;
         break;
     case 3:
@@ -3759,10 +3759,10 @@ static void sub_8105E08(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0xd0)
+        sprite->x += 4;
+        if (sprite->x >= 0xd0)
         {
-            sprite->pos1.x = 0xd0;
+            sprite->x = 0xd0;
             sprite->data[0]++;
         }
         break;
@@ -3771,8 +3771,8 @@ static void sub_8105E08(struct Sprite *sprite)
             sprite->data[0]++;
         break;
     case 4:
-        sprite->pos1.x += 4;
-        if (sprite->pos1.x >= 0xf8)
+        sprite->x += 4;
+        if (sprite->x >= 0xf8)
             sprite->data[0]++;
         break;
     case 5:
@@ -3790,10 +3790,10 @@ static void sub_8105EB4(struct Sprite *sprite)
         sprite->data[0]++;
         // fallthrough
     case 1:
-        sprite->pos1.y += 8;
-        if (sprite->pos1.y >= 0x70)
+        sprite->y += 8;
+        if (sprite->y >= 0x70)
         {
-            sprite->pos1.y = 0x70;
+            sprite->y = 0x70;
             sprite->data[1] = 16;
             sprite->data[0]++;
         }
@@ -3801,7 +3801,7 @@ static void sub_8105EB4(struct Sprite *sprite)
     case 2:
         if (sprite->data[2] == 0)
         {
-            sprite->pos1.y -= sprite->data[1];
+            sprite->y -= sprite->data[1];
             sprite->data[1] = -sprite->data[1];
             if (++sprite->data[3] >= 2)
             {
@@ -3830,10 +3830,10 @@ static void sub_8105F54(struct Sprite *sprite)
             sprite->data[0]++;
         break;
     case 1:
-        sprite->pos1.y += 2;
-        if (sprite->pos1.y >= 0x30)
+        sprite->y += 2;
+        if (sprite->y >= 0x30)
         {
-            sprite->pos1.y = 0x30;
+            sprite->y = 0x30;
             sprite->data[0]++;
             sprite->data[7] = 0;
         }
@@ -3910,8 +3910,8 @@ static void sub_81060FC(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.x = sp00[sprite->data[6]];
-        sprite->pos2.y = sp10[sprite->data[6]];
+        sprite->x2 = sp00[sprite->data[6]];
+        sprite->y2 = sp10[sprite->data[6]];
         sprite->data[1] = sp20[sprite->data[6]];
         sprite->data[0]++;
         // fallthrough
@@ -3920,17 +3920,17 @@ static void sub_81060FC(struct Sprite *sprite)
             sprite->data[0]++;
         break;
     case 2:
-        if (sprite->pos2.x > 0)
-            sprite->pos2.x -= 4;
-        else if (sprite->pos2.x < 0)
-            sprite->pos2.x += 4;
+        if (sprite->x2 > 0)
+            sprite->x2 -= 4;
+        else if (sprite->x2 < 0)
+            sprite->x2 += 4;
 
-        if (sprite->pos2.y > 0)
-            sprite->pos2.y -= 4;
-        else if (sprite->pos2.y < 0)
-            sprite->pos2.y += 4;
+        if (sprite->y2 > 0)
+            sprite->y2 -= 4;
+        else if (sprite->y2 < 0)
+            sprite->y2 += 4;
 
-        if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+        if (sprite->x2 == 0 && sprite->y2 == 0)
             sprite->data[0]++;
         break;
     }
@@ -3945,8 +3945,8 @@ static void sub_81061C8(struct Sprite *sprite)
         sprite->data[0]++;
         sprite->data[1] = 12;
     }
-    sprite->pos2.x = Cos(sp0[sprite->data[6]], sprite->data[1]);
-    sprite->pos2.y = Sin(sp0[sprite->data[6]], sprite->data[1]);
+    sprite->x2 = Cos(sp0[sprite->data[6]], sprite->data[1]);
+    sprite->y2 = Sin(sp0[sprite->data[6]], sprite->data[1]);
     if (sprite->data[1] != 0)
         sprite->data[1]--;
 }

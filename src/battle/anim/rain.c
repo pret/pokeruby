@@ -76,8 +76,8 @@ static void MoveAnimRaindrop(struct Sprite *sprite)
 {
     if (++sprite->data[0] <= 13)
     {
-        sprite->pos2.x++;
-        sprite->pos2.y += 4;
+        sprite->x2++;
+        sprite->y2 += 4;
     }
 
     if (sprite->animEnded)

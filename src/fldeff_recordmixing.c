@@ -59,10 +59,10 @@ u8 CreateRecordMixingSprite(void)
     else
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        sub_8060388(16, 13, &sprite->pos1.x, &sprite->pos1.y);
+        sub_8060388(16, 13, &sprite->x, &sprite->y);
         sprite->coordOffsetEnabled = TRUE;
-        sprite->pos1.x += 16;
-        sprite->pos1.y += 2;
+        sprite->x += 16;
+        sprite->y += 2;
     }
 
     return spriteId;

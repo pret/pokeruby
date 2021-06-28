@@ -1132,10 +1132,10 @@ static void SetBikeScene(u8 data, u8 taskIdA)
     case 0:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
@@ -1143,10 +1143,10 @@ static void SetBikeScene(u8 data, u8 taskIdA)
     case 1:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 120;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
@@ -1154,10 +1154,10 @@ static void SetBikeScene(u8 data, u8 taskIdA)
     case 2:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 120;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
@@ -1165,10 +1165,10 @@ static void SetBikeScene(u8 data, u8 taskIdA)
     case 3:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = -32;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 120;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = -32;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
@@ -1176,10 +1176,10 @@ static void SetBikeScene(u8 data, u8 taskIdA)
     case 4:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 88;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 152;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 88;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 152;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(2, 0x2000, 0x200, 8);
@@ -1395,8 +1395,8 @@ static void SpriteCB_Player(struct Sprite *sprite)
         break;
     case 1:
         StartSpriteAnimIfDifferent(sprite, 1);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 1;
+        if (sprite->x > -32)
+            sprite->x -= 1;
         break;
     case 2:
         StartSpriteAnimIfDifferent(sprite, 2);
@@ -1406,13 +1406,13 @@ static void SpriteCB_Player(struct Sprite *sprite)
         break;
     case 4:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > 120)
-            sprite->pos1.x -= 1;
+        if (sprite->x > 120)
+            sprite->x -= 1;
         break;
     case 5:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 1;
+        if (sprite->x > -32)
+            sprite->x -= 1;
         break;
     }
 }
@@ -1428,28 +1428,28 @@ static void SpriteCB_Rival(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         StartSpriteAnimIfDifferent(sprite, 0);
         break;
     case 1:
-        if (sprite->pos1.x > 200)
+        if (sprite->x > 200)
             StartSpriteAnimIfDifferent(sprite, 1);
         else
             StartSpriteAnimIfDifferent(sprite, 2);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 2;
-        sprite->pos2.y = -gUnknown_0203935A;
+        if (sprite->x > -32)
+            sprite->x -= 2;
+        sprite->y2 = -gUnknown_0203935A;
         break;
     case 2:
         sprite->data[7] += 1;
         StartSpriteAnimIfDifferent(sprite, 0);
         if ((sprite->data[7] & 3) == 0)
-            sprite->pos1.x += 1;
+            sprite->x += 1;
         break;
     case 3:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 1;
+        if (sprite->x > -32)
+            sprite->x -= 1;
         break;
     }
 }
@@ -1488,15 +1488,15 @@ void SpriteCB_CreditsMon(struct Sprite *sprite)
         {
         case 1:
             if ((sprite->data[7] & 3) == 0)
-                sprite->pos1.y += 1;
-            sprite->pos1.x -= 2;
+                sprite->y += 1;
+            sprite->x -= 2;
             break;
         case 2:
             break;
         case 3:
             if ((sprite->data[7] & 3) == 0)
-                sprite->pos1.y += 1;
-            sprite->pos1.x += 2;
+                sprite->y += 1;
+            sprite->x += 2;
             break;
         }
         break;
@@ -1583,7 +1583,7 @@ static u8 CreateCreditsMonSprite(u16 species, u16 x, u16 y, u16 position)
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].callback = SpriteCB_CreditsMon;
 
-    spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].pos1.x, gSprites[spriteId].pos1.y, 1);
+    spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].x, gSprites[spriteId].y, 1);
     gSprites[spriteId2].data[0] = spriteId;
 
     StartSpriteAnimIfDifferent(&gSprites[spriteId2], position);
@@ -1604,8 +1604,8 @@ void SpriteCB_CreditsMonBg(struct Sprite *sprite)
     sprite->oam.objMode = gSprites[sprite->data[0]].oam.objMode;
     sprite->oam.affineMode = gSprites[sprite->data[0]].oam.affineMode;
     sprite->oam.matrixNum = gSprites[sprite->data[0]].oam.matrixNum;
-    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
+    sprite->x = gSprites[sprite->data[0]].x;
+    sprite->y = gSprites[sprite->data[0]].y;
 }
 
 static void DeterminePokemonToShow(void)

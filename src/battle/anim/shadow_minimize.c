@@ -91,7 +91,7 @@ void AnimTask_Minimize_Step(u8 taskId)
         break;
     case 5:
         sub_8078F40(task->data[0]);
-        gSprites[task->data[15]].pos2.y = 0;
+        gSprites[task->data[15]].y2 = 0;
         DestroyAnimVisualTask(taskId);
         break;
     }

@@ -55,19 +55,19 @@ void sub_80D2C38(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+            sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+            sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
         }
         else
         {
-            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+            sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+            sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
         }
 
         if (gBattleAnimArgs[1] == 0)
-            sprite->pos1.x += 32;
+            sprite->x += 32;
         else
-            sprite->pos1.x -= 32;
+            sprite->x -= 32;
 
         sprite->data[0] = gBattleAnimArgs[2];
         sprite->data[1] = gBattleAnimArgs[1];

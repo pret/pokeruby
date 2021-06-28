@@ -1628,8 +1628,8 @@ static void Task_PokedexMainScreenMenu(u8 taskId)
 
 static void Task_OpenInfoScreenAfterMonMovement(u8 taskId)
 {
-    if (gSprites[gPokedexView->selectedMonSpriteId].pos1.x == 48
-     && gSprites[gPokedexView->selectedMonSpriteId].pos1.y == 56)
+    if (gSprites[gPokedexView->selectedMonSpriteId].x == 48
+     && gSprites[gPokedexView->selectedMonSpriteId].y == 56)
     {
         gPokedexView->currentPageBackup = gPokedexView->currentPage;
         gTasks[taskId].data[0] = LoadInfoScreen(&gPokedexView->pokedexList[gPokedexView->selectedPokemon], gPokedexView->selectedMonSpriteId);
@@ -1826,8 +1826,8 @@ static void Task_PokedexResultsScreenMenu(u8 taskId)
 
 static void Task_OpenSearchResultsInfoScreenAfterMonMovement(u8 taskId)
 {
-    if (gSprites[gPokedexView->selectedMonSpriteId].pos1.x == 48
-     && gSprites[gPokedexView->selectedMonSpriteId].pos1.y == 56)
+    if (gSprites[gPokedexView->selectedMonSpriteId].x == 48
+     && gSprites[gPokedexView->selectedMonSpriteId].y == 56)
     {
         gPokedexView->currentPageBackup = gPokedexView->currentPage;
         gTasks[taskId].data[0] = LoadInfoScreen(&gPokedexView->pokedexList[gPokedexView->selectedPokemon], gPokedexView->selectedMonSpriteId);
@@ -2479,7 +2479,7 @@ static void UpdateSelectedMonSpriteId(void)
     {
         u16 spriteId = gPokedexView->monSpriteIds[i];
 
-        if (gSprites[spriteId].pos2.x == 0 && gSprites[spriteId].pos2.y == 0 && spriteId != 0xFFFF)
+        if (gSprites[spriteId].x2 == 0 && gSprites[spriteId].y2 == 0 && spriteId != 0xFFFF)
             gPokedexView->selectedMonSpriteId = spriteId;
     }
 }
@@ -2696,19 +2696,19 @@ static void SpriteCB_MoveMonForInfoScreen(struct Sprite *sprite)
 {
     sprite->oam.priority = 0;
     sprite->oam.affineMode = 0;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
-    if (sprite->pos1.x != 48 || sprite->pos1.y != 56)
+    sprite->x2 = 0;
+    sprite->y2 = 0;
+    if (sprite->x != 48 || sprite->y != 56)
     {
-        if (sprite->pos1.x > 48)
-            sprite->pos1.x--;
-        if (sprite->pos1.x < 48)
-            sprite->pos1.x++;
+        if (sprite->x > 48)
+            sprite->x--;
+        if (sprite->x < 48)
+            sprite->x++;
 
-        if (sprite->pos1.y > 56)
-            sprite->pos1.y--;
-        if (sprite->pos1.y < 56)
-            sprite->pos1.y++;
+        if (sprite->y > 56)
+            sprite->y--;
+        if (sprite->y < 56)
+            sprite->y++;
     }
     else
     {
@@ -2729,7 +2729,7 @@ static void SpriteCB_PokedexListMonSprite(struct Sprite *sprite)
     {
         u32 var;
 
-        sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
+        sprite->y2 = gSineTable[(u8)sprite->data[5]] * 76 / 256;
         var = 0x10000 / gSineTable[sprite->data[5] + 0x40];
         if (var > 0xFFFF)
             var = 0xFFFF;
@@ -2759,7 +2759,7 @@ static void SpriteCB_Scrollbar(struct Sprite *sprite)
     if (gPokedexView->currentPage != 0 && gPokedexView->currentPage != 3)
         DestroySprite(sprite);
     else
-        sprite->pos2.y = gPokedexView->selectedPokemon * 120 / (gPokedexView->pokemonListCount - 1);
+        sprite->y2 = gPokedexView->selectedPokemon * 120 / (gPokedexView->pokemonListCount - 1);
 }
 
 static void SpriteCB_ScrollArrow(struct Sprite *sprite)
@@ -2788,7 +2788,7 @@ static void SpriteCB_ScrollArrow(struct Sprite *sprite)
                 sprite->invisible = FALSE;
             r0 = sprite->data[2] - 128;
         }
-        sprite->pos2.y = gSineTable[r0] / 64;
+        sprite->y2 = gSineTable[r0] / 64;
         sprite->data[2] = sprite->data[2] + 8;
         if (gPokedexView->menuIsOpen == 0 && gPokedexView->menuY == 0 && sprite->invisible == 0)
             sprite->invisible = FALSE;
@@ -2823,8 +2823,8 @@ static void SpriteCB_RotatingPokeBall(struct Sprite *sprite)
         val = gPokedexView->pokeBallRotation + (sprite->data[1] + 0x40);
         r3 = gSineTable[val];
         r0 = gSineTable[val + 0x40];
-        sprite->pos2.x = r0 * 40 / 256;
-        sprite->pos2.y = r3 * 40 / 256;
+        sprite->x2 = r0 * 40 / 256;
+        sprite->y2 = r3 * 40 / 256;
     }
 }
 
@@ -2841,8 +2841,8 @@ static void SpriteCB_DexListStartMenuCursor(struct Sprite *sprite)
         if (gPokedexView->menuIsOpen != 0 && gPokedexView->menuY == r1)
         {
             sprite->invisible = FALSE;
-            sprite->pos2.y = gPokedexView->menuCursorPos * 16;
-            sprite->pos2.x = gSineTable[(u8)sprite->data[2]] / 64;
+            sprite->y2 = gPokedexView->menuCursorPos * 16;
+            sprite->x2 = gSineTable[(u8)sprite->data[2]] / 64;
             sprite->data[2] += 8;
         }
         else
@@ -3389,7 +3389,7 @@ static void Task_InitSizeScreenMultistep(u8 taskId)
         gSprites[spriteId].oam.affineMode = 1;
         gSprites[spriteId].oam.matrixNum = 1;
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].pos2.y = gPokedexEntries[sPokedexListItem->dexNum].trainerOffset;
+        gSprites[spriteId].y2 = gPokedexEntries[sPokedexListItem->dexNum].trainerOffset;
         SetOamMatrix(1, gPokedexEntries[sPokedexListItem->dexNum].trainerScale, 0, 0, gPokedexEntries[sPokedexListItem->dexNum].trainerScale);
         LoadPalette(sSizeScreenSilhouette_Pal, (gSprites[spriteId].oam.paletteNum + 16) * 16, sizeof(sSizeScreenSilhouette_Pal));
         gMain.state++;
@@ -3399,7 +3399,7 @@ static void Task_InitSizeScreenMultistep(u8 taskId)
         gSprites[spriteId].oam.affineMode = 1;
         gSprites[spriteId].oam.matrixNum = 2;
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].pos2.y = gPokedexEntries[sPokedexListItem->dexNum].pokemonOffset;
+        gSprites[spriteId].y2 = gPokedexEntries[sPokedexListItem->dexNum].pokemonOffset;
         SetOamMatrix(2, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale, 0, 0, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale);
         LoadPalette(sSizeScreenSilhouette_Pal, (gSprites[spriteId].oam.paletteNum + 16) * 16, sizeof(sSizeScreenSilhouette_Pal));
         gMain.state++;
@@ -3930,15 +3930,15 @@ static void sub_8090B8C(u8 taskId)
 
 static void sub_8090C28(struct Sprite *sprite)
 {
-    if (sprite->pos1.x < 0x78)
-        sprite->pos1.x += 2;
-    if (sprite->pos1.x > 0x78)
-        sprite->pos1.x -= 2;
+    if (sprite->x < 0x78)
+        sprite->x += 2;
+    if (sprite->x > 0x78)
+        sprite->x -= 2;
 
-    if (sprite->pos1.y < 0x50)
-        sprite->pos1.y += 1;
-    if (sprite->pos1.y > 0x50)
-        sprite->pos1.y -= 1;
+    if (sprite->y < 0x50)
+        sprite->y += 1;
+    if (sprite->y > 0x50)
+        sprite->y -= 1;
 }
 
 static void sub_8090C68(void)
@@ -5449,7 +5449,7 @@ static void SpriteCB_SearchParameterScrollArrow(struct Sprite *sprite)
                 sprite->invisible = FALSE;
         }
         val = sprite->data[2] + sprite->data[1] * 128;
-        sprite->pos2.y = gSineTable[val] / 128;
+        sprite->y2 = gSineTable[val] / 128;
         sprite->data[2] += 8;
     }
     else

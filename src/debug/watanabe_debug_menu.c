@@ -452,7 +452,7 @@ void debug_80C3A50(u8 taskId)
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].oam.paletteNum = 0;
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(0));
-    gSprites[spriteId].pos2.y = gPokedexEntries[natDexNum].trainerOffset;
+    gSprites[spriteId].y2 = gPokedexEntries[natDexNum].trainerOffset;
     SetOamMatrix(2, gPokedexEntries[natDexNum].trainerScale, 0, 0, gPokedexEntries[natDexNum].trainerScale);
     gTasks[taskId].data[3] = spriteId;
     gTasks[taskId].data[4] = gPokedexEntries[natDexNum].trainerOffset;
@@ -464,7 +464,7 @@ void debug_80C3A50(u8 taskId)
     gSprites[spriteId2].oam.priority = 0;
     gSprites[spriteId2].oam.paletteNum = 0;
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(0));
-    gSprites[spriteId2].pos2.y = gPokedexEntries[natDexNum].pokemonOffset;
+    gSprites[spriteId2].y2 = gPokedexEntries[natDexNum].pokemonOffset;
     SetOamMatrix(1, gPokedexEntries[natDexNum].pokemonScale, 0, 0, gPokedexEntries[natDexNum].pokemonScale);
     gTasks[taskId].data[2] = spriteId2;
     gTasks[taskId].data[5] = gPokedexEntries[natDexNum].pokemonOffset;
@@ -912,14 +912,14 @@ void debug_80C3D2C(u8 taskId)
         SetOamMatrix(1, scale, 0, 0, scale);
         debug_80C68CC(scale, 1, 3, 4);
         debug_80C68CC(offset, 1, 7, 4);
-        gSprites[gTasks[taskId].data[2]].pos2.y = offset;
+        gSprites[gTasks[taskId].data[2]].y2 = offset;
 
         scale = gTasks[taskId].data[6];
         offset = gTasks[taskId].data[4];
         SetOamMatrix(2, scale, 0, 0, scale);
         debug_80C68CC(scale, 25, 3, 4);
         debug_80C68CC(offset, 25, 7, 4);
-        gSprites[gTasks[taskId].data[3]].pos2.y = offset;
+        gSprites[gTasks[taskId].data[3]].y2 = offset;
 
         REG_WIN0H = ((gTasks[taskId].data[8] * 64 + 0x38) << 8) + (gTasks[taskId].data[8] * 64 + 0x78);
     }
@@ -3199,8 +3199,8 @@ void debug_80C7584(struct Sprite *sprite)
                 shade = gUnknown_Debug_2038A20->unkC.b;
                 break;
         }
-        sprite->pos2.x = 4 * shade;
-        sprite->pos2.y = 8 * sprite->data[0];
+        sprite->x2 = 4 * shade;
+        sprite->y2 = 8 * sprite->data[0];
         sprite->data[1]++;
         if (sprite->data[0] == gUnknown_Debug_2038A20->unkA && !(sprite->data[1] & 0x08))
             sprite->invisible = TRUE;

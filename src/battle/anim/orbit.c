@@ -106,8 +106,8 @@ static void sub_80CAC44(struct Sprite* sprite)
 {
     u8 var1;
     
-    sprite->pos2.x = Sin(sprite->data[1], 32);
-    sprite->pos2.y = Cos(sprite->data[1], -3) + ((sprite->data[2] += 24) >> 8);
+    sprite->x2 = Sin(sprite->data[1], 32);
+    sprite->y2 = Cos(sprite->data[1], -3) + ((sprite->data[2] += 24) >> 8);
     if ((u16)(sprite->data[1] - 0x40) < 0x80)
     {
         sprite->oam.priority = (GetBattlerSpriteBGPriority(gBattleAnimTarget) & 3);
@@ -154,9 +154,9 @@ void sub_80CAD54(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 0);
     sprite->data[0] = gBattleAnimArgs[3];
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
@@ -168,8 +168,8 @@ static void sub_80CADA8(struct Sprite* sprite)
 {
     if (!TranslateAnimLinear(sprite))
     {
-        sprite->pos2.x += Sin(sprite->data[5], 32);
-        sprite->pos2.y += Cos(sprite->data[5], -5);
+        sprite->x2 += Sin(sprite->data[5], 32);
+        sprite->y2 += Cos(sprite->data[5], -5);
         if ((u16)(sprite->data[5] - 0x40) < 0x80)
         {
             sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
@@ -191,9 +191,9 @@ void sub_80CAE20(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[3];
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
@@ -205,7 +205,7 @@ static void sub_80CAE74(struct Sprite* sprite)
 {
     if (!TranslateAnimLinear(sprite))
     {
-        sprite->pos2.x += Sin(sprite->data[5], 8);
+        sprite->x2 += Sin(sprite->data[5], 8);
         if ((u16)(sprite->data[5] - 0x3B) < 5 || (u16)(sprite->data[5] - 0xBB) < 5)
         {
             sprite->oam.matrixNum ^= 8;

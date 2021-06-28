@@ -642,31 +642,31 @@ static void sub_8043CEC(struct Sprite *sprite)
     switch (sprite->data[6])
     {
     case 0:
-        sprite->pos1.x = gSprites[r5].pos1.x + 16;
-        sprite->pos1.y = gSprites[r5].pos1.y;
+        sprite->x = gSprites[r5].x + 16;
+        sprite->y = gSprites[r5].y;
         break;
     case 1:
-        sprite->pos1.x = gSprites[r5].pos1.x + 16;
-        sprite->pos1.y = gSprites[r5].pos1.y;
+        sprite->x = gSprites[r5].x + 16;
+        sprite->y = gSprites[r5].y;
         break;
     default:
     case 2:
-        sprite->pos1.x = gSprites[r5].pos1.x + 8;
-        sprite->pos1.y = gSprites[r5].pos1.y;
+        sprite->x = gSprites[r5].x + 8;
+        sprite->y = gSprites[r5].y;
         break;
     }
-    sprite->pos2.x = gSprites[r5].pos2.x;
-    sprite->pos2.y = gSprites[r5].pos2.y;
+    sprite->x2 = gSprites[r5].x2;
+    sprite->y2 = gSprites[r5].y2;
 }
 
 static void sub_8043D5C(struct Sprite *sprite)
 {
     u8 data5 = sprite->data[5];
 
-    sprite->pos1.x = gSprites[data5].pos1.x + 64;
-    sprite->pos1.y = gSprites[data5].pos1.y;
-    sprite->pos2.x = gSprites[data5].pos2.x;
-    sprite->pos2.y = gSprites[data5].pos2.y;
+    sprite->x = gSprites[data5].x + 64;
+    sprite->y = gSprites[data5].y;
+    sprite->x2 = gSprites[data5].x2;
+    sprite->y2 = gSprites[data5].y2;
 }
 
 void sub_8043D84(u8 a, u8 b, u32 c, u32 d, u32 e)
@@ -694,8 +694,8 @@ void sub_8043DFC(u8 a)
 
 static void sub_8043E50(u8 spriteId, s16 x, s16 y)
 {
-    gSprites[spriteId].pos1.x = x;
-    gSprites[spriteId].pos1.y = y;
+    gSprites[spriteId].x = x;
+    gSprites[spriteId].y = y;
 }
 
 void unref_sub_8043E70(u8 a)
@@ -1544,16 +1544,16 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
 
     sp18 = CreateSprite(&gSpriteTemplate_820A7A4[r7], x, y, 10);
     SetSubspriteTables(&gSprites[sp18], gSubspriteTables_820A6E4);
-    gSprites[sp18].pos2.x = r8;
+    gSprites[sp18].x2 = r8;
     gSprites[sp18].data[0] = r5;
     if (r7 != 0)
     {
-        gSprites[sp18].pos1.x -= 96;
+        gSprites[sp18].x -= 96;
         gSprites[sp18].oam.matrixNum = 8;
     }
     else
     {
-        gSprites[sp18].pos1.x += 0x60;
+        gSprites[sp18].x += 0x60;
     }
     //_0804495A
     for (i = 0; i < 6; i++)  //_08044970
@@ -1566,23 +1566,23 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         //_080449A0
         if (r7 == 0)
         {
-            gSprites[sp[i]].pos2.x = 0;
-            gSprites[sp[i]].pos2.y = 0;
+            gSprites[sp[i]].x2 = 0;
+            gSprites[sp[i]].y2 = 0;
         }
         //_080449BE
         gSprites[sp[i]].data[0] = sp18;
         if (r7 == 0)
         {
-            gSprites[sp[i]].pos1.x += 10 * i + 24;
+            gSprites[sp[i]].x += 10 * i + 24;
             gSprites[sp[i]].data[1] = i * 7 + 10;
-            gSprites[sp[i]].pos2.x = 120;
+            gSprites[sp[i]].x2 = 120;
         }
         //_08044A18
         else
         {
-            gSprites[sp[i]].pos1.x -= 10 * (5 - i) + 24;
+            gSprites[sp[i]].x -= 10 * (5 - i) + 24;
             gSprites[sp[i]].data[1] = (6 - i) * 7 + 10;
-            gSprites[sp[i]].pos2.x = -120;
+            gSprites[sp[i]].x2 = -120;
         }
         //_08044A56
         gSprites[sp[i]].data[2] = r7;
@@ -2403,17 +2403,17 @@ static void sub_8044F70(u8 taskId)
 
 static void sub_8045030(struct Sprite *sprite)
 {
-    if (sprite->pos2.x != 0)
-        sprite->pos2.x += sprite->data[0];
+    if (sprite->x2 != 0)
+        sprite->x2 += sprite->data[0];
 }
 
 static void sub_8045048(struct Sprite *sprite)
 {
     sprite->data[1] += 32;
     if (sprite->data[0] > 0)
-        sprite->pos2.x += sprite->data[1] >> 4;
+        sprite->x2 += sprite->data[1] >> 4;
     else
-        sprite->pos2.x -= sprite->data[1] >> 4;
+        sprite->x2 -= sprite->data[1] >> 4;
     sprite->data[1] &= 0xF;
 }
 
@@ -2434,17 +2434,17 @@ static void sub_804507C(struct Sprite *sprite)
     sprite->data[3] = r2 & 0xFFF0;
     if (r3 != 0)
     {
-        sprite->pos2.x += r2 >> 4;
-        if (sprite->pos2.x > 0)
-            sprite->pos2.x = 0;
+        sprite->x2 += r2 >> 4;
+        if (sprite->x2 > 0)
+            sprite->x2 = 0;
     }
     else
     {
-        sprite->pos2.x -= r2 >> 4;
-        if (sprite->pos2.x < 0)
-            sprite->pos2.x = 0;
+        sprite->x2 -= r2 >> 4;
+        if (sprite->x2 < 0)
+            sprite->x2 = 0;
     }
-    if (sprite->pos2.x == 0)
+    if (sprite->x2 == 0)
     {
         pan = 63;
         if (r3 != 0)
@@ -2472,11 +2472,11 @@ static void sub_8045110(struct Sprite *sprite)
     r2 += 56;
     sprite->data[3] = r2 & 0xFFF0;
     if (r0 != 0)
-        sprite->pos2.x += r2 >> 4;
+        sprite->x2 += r2 >> 4;
     else
-        sprite->pos2.x -= r2 >> 4;
-    if (sprite->pos2.x + sprite->pos1.x > 248
-     || sprite->pos2.x + sprite->pos1.x < -8)
+        sprite->x2 -= r2 >> 4;
+    if (sprite->x2 + sprite->x > 248
+     || sprite->x2 + sprite->x < -8)
     {
         sprite->invisible = TRUE;
         sprite->callback = SpriteCallbackDummy;
@@ -2487,8 +2487,8 @@ void sub_8045180(struct Sprite *sprite)
 {
     u8 spriteId = sprite->data[0];
 
-    sprite->pos2.x = gSprites[spriteId].pos2.x;
-    sprite->pos2.y = gSprites[spriteId].pos2.y;
+    sprite->x2 = gSprites[spriteId].x2;
+    sprite->y2 = gSprites[spriteId].y2;
 }
 
 /*static*/ void sub_80451A0(u8 a, struct Pokemon *pkmn)

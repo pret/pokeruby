@@ -625,8 +625,8 @@ void InitLinkBattleVsScreen(u8 taskId)
             gSprites[gBattleStruct->unk1608B].oam.tileNum += 0x40;
             gSprites[gBattleStruct->unk1608A].data[0] = 0;
             gSprites[gBattleStruct->unk1608B].data[0] = 1;
-            gSprites[gBattleStruct->unk1608A].data[1] = gSprites[gBattleStruct->unk1608A].pos1.x;
-            gSprites[gBattleStruct->unk1608B].data[1] = gSprites[gBattleStruct->unk1608B].pos1.x;
+            gSprites[gBattleStruct->unk1608A].data[1] = gSprites[gBattleStruct->unk1608A].x;
+            gSprites[gBattleStruct->unk1608B].data[1] = gSprites[gBattleStruct->unk1608B].x;
             gSprites[gBattleStruct->unk1608A].data[2] = 0;
             gSprites[gBattleStruct->unk1608B].data[2] = 0;
         }

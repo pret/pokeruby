@@ -1015,8 +1015,8 @@ static void SetCursorPos(s16 x, s16 y)
 {
     struct Sprite *cursorSprite = &gSprites[namingScreenDataPtr->cursorSpriteId];
 
-    cursorSprite->pos1.x = CursorColToKeyboardCol(x) * 8 + 27;
-    cursorSprite->pos1.y = y * 16 + 80;
+    cursorSprite->x = CursorColToKeyboardCol(x) * 8 + 27;
+    cursorSprite->y = y * 16 + 80;
     cursorSprite->data[2] = cursorSprite->data[0];
     cursorSprite->data[3] = cursorSprite->data[1];
     cursorSprite->data[0] = x;
@@ -1170,11 +1170,11 @@ static u8 sub_80B6B9C(struct Sprite *sprite)
     struct Sprite *r4 = &gSprites[sprite->data[6]];
     struct Sprite *r5 = &gSprites[sprite->data[7]];
 
-    r4->pos2.y++;
-    if (r4->pos2.y > 7)
+    r4->y2++;
+    if (r4->y2 > 7)
     {
         sprite->data[0]++;
-        r4->pos2.y = -4;
+        r4->y2 = -4;
         r4->invisible = TRUE;
         sub_80B6C48(((u8)sprite->data[1] + 1) % 3, r4, r5);
     }
@@ -1186,10 +1186,10 @@ static u8 sub_80B6C08(struct Sprite *sprite)
     struct Sprite *r2 = &gSprites[sprite->data[6]];
 
     r2->invisible = FALSE;
-    r2->pos2.y++;
-    if (r2->pos2.y >= 0)
+    r2->y2++;
+    if (r2->y2 >= 0)
     {
-        r2->pos2.y = 0;
+        r2->y2 = 0;
         sprite->data[0] = 1;
     }
     return 0;
@@ -1245,7 +1245,7 @@ void sub_80B6D9C(struct Sprite *sprite)
         sprite->data[0] = 8;
         sprite->data[1] = (sprite->data[1] + 1) & 3;
     }
-    sprite->pos2.x = arr[sprite->data[1]];
+    sprite->x2 = arr[sprite->data[1]];
 }
 
 void sub_80B6DE8(struct Sprite *sprite)
@@ -1256,13 +1256,13 @@ void sub_80B6DE8(struct Sprite *sprite)
     var = GetTextCaretPosition();
     if (var != (u8)sprite->data[0])
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->data[1] = 0;
         sprite->data[2] = 0;
     }
     else
     {
-        sprite->pos2.y = arr[sprite->data[1]];
+        sprite->y2 = arr[sprite->data[1]];
         sprite->data[2]++;
         if (sprite->data[2] > 8)
         {

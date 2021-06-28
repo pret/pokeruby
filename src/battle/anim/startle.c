@@ -25,15 +25,15 @@ void sub_80D1E38(u8 taskId)
     if (++gTasks[taskId].data[0] == 1)
     {
         PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(1), &gSpriteAffineAnim_83D7A98);
-        gSprites[spriteId].pos2.x = 4;
+        gSprites[spriteId].x2 = 4;
     }
     else
     {
-        gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
+        gSprites[spriteId].x2 = -gSprites[spriteId].x2;
         if (RunAffineAnimFromTaskData(&gTasks[taskId]) == 0)
         {
-            gSprites[spriteId].pos2.x = 0;
-            gSprites[spriteId].pos2.y = 0;
+            gSprites[spriteId].x2 = 0;
+            gSprites[spriteId].y2 = 0;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -46,15 +46,15 @@ void sub_80D1EC8(u8 taskId)
     if (++gTasks[taskId].data[0] == 1)
     {
         PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(0), &gSpriteAffineAnim_83D7A98);
-        gSprites[spriteId].pos2.x = 4;
+        gSprites[spriteId].x2 = 4;
     }
     else
     {
-        gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
+        gSprites[spriteId].x2 = -gSprites[spriteId].x2;
         if (RunAffineAnimFromTaskData(&gTasks[taskId]) == 0)
         {
-            gSprites[spriteId].pos2.x = 0;
-            gSprites[spriteId].pos2.y = 0;
+            gSprites[spriteId].x2 = 0;
+            gSprites[spriteId].y2 = 0;
             DestroyAnimVisualTask(taskId);
         }
     }

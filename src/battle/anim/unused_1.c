@@ -77,8 +77,8 @@ const struct SpriteTemplate gSpriteTemplate_83D6AF8 =
 
 void sub_80CC8C8(struct Sprite* sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];

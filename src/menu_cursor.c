@@ -139,8 +139,8 @@ void MenuCursor_SetPos814A880(u8 a1, u8 a2)
         spr->invisible = FALSE;
         spr->centerToCornerVecX = 0;
         spr->centerToCornerVecY = 0;
-        spr->pos1.x = a1;
-        spr->pos1.y = a2;
+        spr->x = a1;
+        spr->y = a2;
     }
 
     if (gUnknown_0203A3D1 != 0x40)
@@ -149,8 +149,8 @@ void MenuCursor_SetPos814A880(u8 a1, u8 a2)
         spr->invisible = FALSE;
         spr->centerToCornerVecX = 0;
         spr->centerToCornerVecY = 0;
-        spr->pos1.x = a1;
-        spr->pos1.y = a2;
+        spr->x = a1;
+        spr->y = a2;
     }
 
     return;
@@ -747,8 +747,8 @@ void MenuCursor_SetPos814AD7C(u8 a1, u8 a2)
         spr->invisible = FALSE;
         spr->centerToCornerVecX = 0;
         spr->centerToCornerVecY = 0;
-        spr->pos1.x = a1;
-        spr->pos1.y = a2;
+        spr->x = a1;
+        spr->y = a2;
     }
     return;
 }

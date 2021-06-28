@@ -669,12 +669,12 @@ void sub_80963D0(u8 curBox)
         r5 = 0;
         if (i & 2)
         {
-            gUnknown_02038478->unk_0004[i]->pos1.x = 0xc4;
+            gUnknown_02038478->unk_0004[i]->x = 0xc4;
             r5 = 2;
         }
         if (i & 1)
         {
-            gUnknown_02038478->unk_0004[i]->pos1.y = 0x70;
+            gUnknown_02038478->unk_0004[i]->y = 0x70;
             gUnknown_02038478->unk_0004[i]->oam.size = 0;
             r5++;
         }
@@ -774,11 +774,11 @@ void sub_8096784(struct Sprite *sprite)
     if (++sprite->data[1] > 3)
     {
         sprite->data[1] = 0;
-        sprite->pos2.x += sprite->data[0];
+        sprite->x2 += sprite->data[0];
         if (++sprite->data[2] > 5)
         {
             sprite->data[2] = 0;
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
         }
     }
 }

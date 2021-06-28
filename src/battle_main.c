@@ -1172,9 +1172,9 @@ void nullsub_36(struct Sprite *sprite)
 void sub_800FDB0(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
-        sprite->pos1.x = sprite->data[1] + ((sprite->data[2] & 0xFF00) >> 8);
+        sprite->x = sprite->data[1] + ((sprite->data[2] & 0xFF00) >> 8);
     else
-        sprite->pos1.x = sprite->data[1] - ((sprite->data[2] & 0xFF00) >> 8);
+        sprite->x = sprite->data[1] - ((sprite->data[2] & 0xFF00) >> 8);
     sprite->data[2] += 0x180;
     if (sprite->affineAnimEnded)
     {
@@ -2673,7 +2673,7 @@ void debug_sub_8012938(u8 taskId)
     ConvertIntToDecimalStringN(gBattleTextBuff1 + 4, gUnknown_Debug_2023B62[gCurrentMove - 1], 2, 3);
     Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gBattleTextBuff1, 162, 2, 37);
     Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
-    gSprites[gTasks[taskId].data[1]].pos2.y = -gUnknown_Debug_2023B62[gCurrentMove - 1];
+    gSprites[gTasks[taskId].data[1]].y2 = -gUnknown_Debug_2023B62[gCurrentMove - 1];
 }
 
 void debug_sub_80129F8(u8 taskId)
@@ -2686,8 +2686,8 @@ void debug_sub_80129F8(u8 taskId)
       gMonSpriteGfx_Sprite_ptr[1],
       gCurrentMove);
     LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
-    gSprites[gTasks[taskId].data[1]].pos1.y = gMonFrontPicCoords[gCurrentMove].y_offset + 40;
-    gSprites[gTasks[taskId].data[1]].pos2.y = -gUnknown_Debug_2023B62[gCurrentMove - 1];
+    gSprites[gTasks[taskId].data[1]].y = gMonFrontPicCoords[gCurrentMove].y_offset + 40;
+    gSprites[gTasks[taskId].data[1]].y2 = -gUnknown_Debug_2023B62[gCurrentMove - 1];
     StartSpriteAnim(&gSprites[gTasks[taskId].data[1]], 0);
 }
 
@@ -3067,8 +3067,8 @@ void sub_8010278(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
-        sprite->pos2.x += 2;
-        if (sprite->pos2.x == 0)
+        sprite->x2 += 2;
+        if (sprite->x2 == 0)
         {
             sprite->callback = sub_80102AC;
             PlayCry1(sprite->data[2], 25);
@@ -3169,7 +3169,7 @@ void sub_8010494(struct Sprite *sprite)
     if (sprite->data[4] == 0)
     {
         sprite->data[4] = 2;
-        sprite->pos2.y += 8;
+        sprite->y2 += 8;
         sprite->data[3]--;
         if (sprite->data[3] < 0)
         {
@@ -3220,8 +3220,8 @@ void oac_poke_ally_(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
-        sprite->pos2.x -= 2;
-        if (sprite->pos2.x == 0)
+        sprite->x2 -= 2;
+        if (sprite->x2 == 0)
         {
             sprite->callback = nullsub_86;
             sprite->data[1] = 0;
@@ -3242,8 +3242,8 @@ void sub_80105EC(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
-        sprite->pos2.x += sprite->data[1];
-        sprite->pos2.y += sprite->data[2];
+        sprite->x2 += sprite->data[1];
+        sprite->y2 += sprite->data[2];
     }
 }
 
@@ -3282,8 +3282,8 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
     gSprites[spriteId].data[2] = d;
     gSprites[spriteId].data[3] = objectID;
     gSprites[spriteId].data[4] = b;
-    gSprites[objectID].pos2.x = 0;
-    gSprites[objectID].pos2.y = 0;
+    gSprites[objectID].x2 = 0;
+    gSprites[objectID].y2 = 0;
 }
 
 void dp11b_obj_free(u8 a, u8 b)
@@ -3306,8 +3306,8 @@ void dp11b_obj_free(u8 a, u8 b)
         DestroySprite(&gSprites[ewram17810[a].unk3]);
         ewram17810[a].unk0_2 = 0;
     }
-    gSprites[r4].pos2.x = 0;
-    gSprites[r4].pos2.y = 0;
+    gSprites[r4].x2 = 0;
+    gSprites[r4].y2 = 0;
 }
 
 void objc_dp11b_pingpong(struct Sprite *sprite)
@@ -3320,7 +3320,7 @@ void objc_dp11b_pingpong(struct Sprite *sprite)
     else
         var = sprite->data[0];
 
-    gSprites[spriteId].pos2.y = Sin(var, sprite->data[2]) + sprite->data[2];
+    gSprites[spriteId].y2 = Sin(var, sprite->data[2]) + sprite->data[2];
     sprite->data[0] = (sprite->data[0] + sprite->data[1]) & 0xFF;
 }
 

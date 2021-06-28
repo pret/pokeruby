@@ -27,7 +27,7 @@ void sub_80CF280(struct Sprite* sprite)
 {
     sub_8078650(sprite);
     sub_807867C(sprite, gBattleAnimArgs[0]);
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[2] = gBattleAnimArgs[4];
     sprite->data[3] = gBattleAnimArgs[5];

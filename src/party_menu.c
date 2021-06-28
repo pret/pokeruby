@@ -1356,8 +1356,8 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
 
         ewram1B000.unk261 = 2;
 
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data[0]].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data[0]].y;
+        gSprites[spriteId].x = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data[0]].x;
+        gSprites[spriteId].y = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data[0]].y;
     }
     else
     {
@@ -1380,8 +1380,8 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
 
         ewram1B000.unk261 = 2;
 
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data[0]].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data[0]].y;
+        gSprites[spriteId].x = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data[0]].x;
+        gSprites[spriteId].y = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data[0]].y;
     }
 
     UpdateMonIconFrame_806DA44(taskId, gSprites[spriteId].data[0], 1);
@@ -1683,8 +1683,8 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
         break;
     }
 
-    gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].x;
-    gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].y;
+    gSprites[spriteId].x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].x;
+    gSprites[spriteId].y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].y;
 
 
     newMenuIndex = gSprites[spriteId].data[0];
@@ -1721,8 +1721,8 @@ void SelectBattleTowerOKButton(u8 taskId)
 
         gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].data[0] = 6;
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].y;
+        gSprites[spriteId].x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].x;
+        gSprites[spriteId].y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].y;
 
         sub_806BB9C(2);
 
@@ -1778,8 +1778,8 @@ void sub_806C9C4(u8 taskId, u8 spriteId)
 {
     u8 spriteId2 = sub_806CA00(taskId);
 
-    gSprites[spriteId].pos1.x = gSprites[spriteId2].pos1.x;
-    gSprites[spriteId].pos1.y = gSprites[spriteId2].pos1.y;
+    gSprites[spriteId].x = gSprites[spriteId2].x;
+    gSprites[spriteId].y = gSprites[spriteId2].y;
     gSprites[spriteId].data[0] = gSprites[spriteId2].data[0];
 }
 
@@ -1966,98 +1966,16 @@ void SwapValues_s16(s16 *a, s16 *b)
     *b = temp;
 }
 
-// not really sure, but creates +4
-#ifdef NONMATCHING
 void sub_806CF04(void)
 {
-    SwapValues_s16(&gSprites[ewram01000.unk3].pos1.x, &gSprites[ewram01000.unk4].pos1.x);
-    SwapValues_s16(&gSprites[ewram01000.unk3].pos1.y, &gSprites[ewram01000.unk4].pos1.y);
-    SwapValues_s16(&gSprites[ewram01000.unk3].pos2.x, &gSprites[ewram01000.unk4].pos2.x);
+    SwapValues_s16(&gSprites[ewram01000.unk3].x, &gSprites[ewram01000.unk4].x);
+    SwapValues_s16(&gSprites[ewram01000.unk3].y, &gSprites[ewram01000.unk4].y);
+    SwapValues_s16(&gSprites[ewram01000.unk3].x2, &gSprites[ewram01000.unk4].x2);
     SwapValues_s16(&gSprites[ewram01000.unk3].data[0], &gSprites[ewram01000.unk4].data[0]);
 
     gSprites[ewram01000.unk3].callback = SpriteCB_sub_806D37C;
     gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
 }
-#else
-NAKED
-void sub_806CF04(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r4, _0806CF94 @ =gSharedMem + 0x1000\n\
-    ldrb r1, [r4, 0x3]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    ldr r5, _0806CF98 @ =gSprites + 0x20\n\
-    adds r0, r5\n\
-    ldrb r2, [r4, 0x4]\n\
-    lsls r1, r2, 4\n\
-    adds r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r5\n\
-    bl SwapValues_s16\n\
-    ldrb r1, [r4, 0x3]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r3, r5, 0x2\n\
-    adds r0, r3\n\
-    ldrb r2, [r4, 0x4]\n\
-    lsls r1, r2, 4\n\
-    adds r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r3\n\
-    bl SwapValues_s16\n\
-    ldrb r1, [r4, 0x3]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r3, r5, 0x4\n\
-    adds r0, r3\n\
-    ldrb r2, [r4, 0x4]\n\
-    lsls r1, r2, 4\n\
-    adds r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r3\n\
-    bl SwapValues_s16\n\
-    ldrb r1, [r4, 0x3]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r3, r5, 0\n\
-    adds r3, 0xE\n\
-    adds r0, r3\n\
-    ldrb r2, [r4, 0x4]\n\
-    lsls r1, r2, 4\n\
-    adds r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r3\n\
-    bl SwapValues_s16\n\
-    ldrb r1, [r4, 0x3]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    subs r5, 0x4\n\
-    adds r0, r5\n\
-    ldr r2, _0806CF9C @ =SpriteCB_sub_806D37C\n\
-    str r2, [r0]\n\
-    ldrb r1, [r4, 0x4]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r5\n\
-    str r2, [r0]\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806CF94: .4byte gSharedMem + 0x1000\n\
-_0806CF98: .4byte gSprites + 0x20\n\
-_0806CF9C: .4byte SpriteCB_sub_806D37C\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_806CFA0(u8 taskId, u8 b)
 {
@@ -2149,16 +2067,16 @@ void sub_806D198(u8 taskId)
     SetMonIconSpriteId(ewram01000.unk0, ewram01000.unk5, ewram01000.unk4);
     SetMonIconSpriteId(ewram01000.unk0, ewram01000.unk6, ewram01000.unk3);
 
-    gSprites[ewram01000.unk3].pos1.x = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk6].x;
-    gSprites[ewram01000.unk3].pos1.y = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk6].y;
-    gSprites[ewram01000.unk3].pos2.x = 0;
-    gSprites[ewram01000.unk3].pos2.y = 0;
+    gSprites[ewram01000.unk3].x = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk6].x;
+    gSprites[ewram01000.unk3].y = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk6].y;
+    gSprites[ewram01000.unk3].x2 = 0;
+    gSprites[ewram01000.unk3].y2 = 0;
     gSprites[ewram01000.unk3].callback = UpdateMonIconFrame_806DA38;
 
-    gSprites[ewram01000.unk4].pos1.x = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk5].x;
-    gSprites[ewram01000.unk4].pos1.y = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk5].y;
-    gSprites[ewram01000.unk4].pos2.x = 0;
-    gSprites[ewram01000.unk4].pos2.y = 0;
+    gSprites[ewram01000.unk4].x = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk5].x;
+    gSprites[ewram01000.unk4].y = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk5].y;
+    gSprites[ewram01000.unk4].x2 = 0;
+    gSprites[ewram01000.unk4].y2 = 0;
     gSprites[ewram01000.unk4].callback = UpdateMonIconFrame_806DA38;
 
     spriteId = GetMonIconSpriteId(ewram01000.unk0, gSprites[ewram01000.unk2].data[0]);
@@ -2184,7 +2102,7 @@ void SpriteCB_sub_806D37C(struct Sprite *sprite)
 {
     UpdateMonIconFrame(sprite);
 
-    if (sprite->pos2.x == sprite->data[2])
+    if (sprite->x2 == sprite->data[2])
     {
         sprite->data[0] *= -1;
         sprite->data[2] = 0;
@@ -2192,7 +2110,7 @@ void SpriteCB_sub_806D37C(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos2.x += sprite->data[0];
+        sprite->x2 += sprite->data[0];
     }
 }
 
@@ -2234,7 +2152,7 @@ void sub_806D4AC(u8 taskId, u16 species, u8 c)
 
 void sub_806D50C(u8 taskId, u8 monIndex)
 {
-    gSprites[GetMonIconSpriteId(taskId, monIndex)].pos1.x += 0xF0;
+    gSprites[GetMonIconSpriteId(taskId, monIndex)].x += 0xF0;
 }
 
 void PrintPartyMenuPromptText(u8 textId, u8 b)
@@ -2409,9 +2327,9 @@ void UpdateMonIconFrame_806DA0C(struct Sprite *sprite)
     if (var1)
     {
         if (var1 & 1)
-            sprite->pos2.y = -3;
+            sprite->y2 = -3;
         else
-            sprite->pos2.y = 1;
+            sprite->y2 = 1;
     }
 }
 
@@ -2427,7 +2345,7 @@ void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c)
     if (monIndex < PARTY_SIZE)
     {
         spriteId = GetMonIconSpriteId(taskId, monIndex);
-        gSprites[spriteId].pos2.y = 0;
+        gSprites[spriteId].y2 = 0;
         gSprites[spriteId].data[0] = 0;
 
         if (!c)
@@ -2454,8 +2372,8 @@ void SpriteCB_HeldItemIcon(struct Sprite *sprite)
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos1.x = gSprites[data7].pos1.x + gSprites[data7].pos2.x;
-        sprite->pos1.y = gSprites[data7].pos1.y + gSprites[data7].pos2.y;
+        sprite->x = gSprites[data7].x + gSprites[data7].x2;
+        sprite->y = gSprites[data7].y + gSprites[data7].y2;
     }
 }
 
@@ -2467,8 +2385,8 @@ void CreateHeldItemIcon(u8 a, u8 b)
     subPriority = gSprites[a].subpriority;
     spriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, subPriority - 1);
 
-    gSprites[spriteId].pos2.x = 4;
-    gSprites[spriteId].pos2.y = 10;
+    gSprites[spriteId].x2 = 4;
+    gSprites[spriteId].y2 = 10;
     gSprites[spriteId].callback = SpriteCB_HeldItemIcon;
     gSprites[spriteId].data[7] = a;
 
@@ -2515,8 +2433,8 @@ void CreateHeldItemIcons_806DC34(u8 taskId)
             monIconSpriteId = GetMonIconSpriteId(taskId, i);
             heldItemSpriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
 
-            gSprites[heldItemSpriteId].pos2.x = 4;
-            gSprites[heldItemSpriteId].pos2.y = 10;
+            gSprites[heldItemSpriteId].x2 = 4;
+            gSprites[heldItemSpriteId].y2 = 10;
             gSprites[heldItemSpriteId].data[7] = monIconSpriteId;
             gSprites[monIconSpriteId].data[7] = heldItemSpriteId;
 
@@ -2536,8 +2454,8 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
     monIconSpriteId = GetMonIconSpriteId(taskId, monIndex);
     heldItemSpriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
 
-    gSprites[heldItemSpriteId].pos2.x = 4;
-    gSprites[heldItemSpriteId].pos2.y = 10;
+    gSprites[heldItemSpriteId].x2 = 4;
+    gSprites[heldItemSpriteId].y2 = 10;
     gSprites[heldItemSpriteId].data[7] = monIconSpriteId;
     gSprites[monIconSpriteId].data[7] = heldItemSpriteId;
 
@@ -2652,8 +2570,8 @@ void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite)
 {
     u8 spriteId = sprite->data[7];
 
-    sprite->pos1.x = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-    sprite->pos1.y = gSprites[spriteId].pos1.y;
+    sprite->x = gSprites[spriteId].x + gSprites[spriteId].x2;
+    sprite->y = gSprites[spriteId].y;
 }
 
 u8 GetMonIconSpriteId(u8 taskId, u8 monIndex)

@@ -358,7 +358,7 @@ void PlayerBufferRunCommand(void)
 
 void bx_0802E404(void)
 {
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].x2 == 0)
         PlayerBufferExecCompleted();
 }
 
@@ -1481,7 +1481,7 @@ void sub_802DDC4(u8 taskId)
 
 void sub_802DE10(void)
 {
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y + gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.y > DISPLAY_HEIGHT)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].y + gSprites[gBattlerSpriteIds[gActiveBattler]].y2 > DISPLAY_HEIGHT)
     {
         u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
@@ -2423,7 +2423,7 @@ void PlayerHandleTrainerThrow(void)
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       GetBattlerSubpriority(gActiveBattler));
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_802D204;
@@ -2439,7 +2439,7 @@ void PlayerHandleTrainerSlide(void)
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_802D23C;
@@ -2450,7 +2450,7 @@ void PlayerHandleTrainerSlideBack(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
@@ -2907,7 +2907,7 @@ void PlayerHandleTrainerBallThrow(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8030E38);

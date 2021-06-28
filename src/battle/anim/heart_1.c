@@ -29,8 +29,8 @@ void sub_80D1C80(struct Sprite* sprite)
     if (++sprite->data[0] == 1)
         InitAnimSpritePos(sprite, 0);
 
-    sprite->pos2.x = Sin(sprite->data[1], 8);
-    sprite->pos2.y = sprite->data[2] >> 8;
+    sprite->x2 = Sin(sprite->data[1], 8);
+    sprite->y2 = sprite->data[2] >> 8;
     sprite->data[1] = (sprite->data[1] + 7) & 0xFF;
     sprite->data[2] -= 0x80;
     if (sprite->data[0] == 0x3C)

@@ -1838,14 +1838,14 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     if (newPosition == 12) // CANCEL
     {
         StartSpriteAnim(&gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx], 1);
-        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.x = 0xe0;
-        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.y = 0xa0;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].x = 0xe0;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].y = 0xa0;
     }
     else
     {
         StartSpriteAnim(&gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx], 0);
-        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
-        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.y = gTradeMonSpriteCoords[newPosition][1] * 8;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].y = gTradeMonSpriteCoords[newPosition][1] * 8;
     }
     if (*tradeMenuCursorPosition != newPosition)
     {
@@ -2278,10 +2278,10 @@ static void sub_8049ED4(u8 a0)
             break;
         case 3:
             sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * whichParty, 0, gTradePartyBoxTilemap, 15, 17, 0);
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos1.x = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos1.y = gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][1] * 8 - 12;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos2.x = 0;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos2.y = 0;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].x = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].y = gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][1] * 8 - 12;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].x2 = 0;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].y2 = 0;
             stringLength = sub_804A2B4(string1 + 6, whichParty, whichPokemon);
             string1[0] = 0xFC;
             string1[1] = 0x06;
@@ -3062,10 +3062,10 @@ static void sub_804A740(u8 whichParty)
     for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
     {
         gSprites[gUnknown_03004824->partyIcons[whichParty][i]].invisible = FALSE;
-        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos1.x = gTradeMonSpriteCoords[6 * whichParty + i][0] * 8 + 14;
-        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos1.y = gTradeMonSpriteCoords[6 * whichParty + i][1] * 8 - 12;
-        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos2.x = 0;
-        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos2.y = 0;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].x = gTradeMonSpriteCoords[6 * whichParty + i][0] * 8 + 14;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].y = gTradeMonSpriteCoords[6 * whichParty + i][1] * 8 - 12;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].x2 = 0;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].y2 = 0;
     }
 }
 
@@ -3397,7 +3397,7 @@ static void sub_804B07C(struct Sprite *sprite)
 static void sub_804B0BC(struct Sprite *sprite)
 {
     sprite->data[0] ++;
-    sprite->pos2.y ++;
+    sprite->y2 ++;
     if (sprite->data[0] == 10)
         DestroySprite(sprite);
 }
@@ -3405,7 +3405,7 @@ static void sub_804B0BC(struct Sprite *sprite)
 static void sub_804B0E0(struct Sprite *sprite)
 {
     sprite->data[0] ++;
-    sprite->pos2.y --;
+    sprite->y2 --;
     if (sprite->data[0] == 10)
         DestroySprite(sprite);
 }
@@ -4352,8 +4352,8 @@ static bool8 sub_804C29C(void)
     {
         case 0:
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].invisible = FALSE;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.x = -0xb4;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[0]].y_offset;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].x2 = -0xb4;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].y2 = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[0]].y_offset;
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_0124 = GetCurrentMapMusic();
             PlayBGM(MUS_EVOLUTION);
@@ -4361,12 +4361,12 @@ static bool8 sub_804C29C(void)
         case 1:
             if (gUnknown_03004828->bg2hofs > 0)
             {
-                gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.x += 3;
+                gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].x2 += 3;
                 gUnknown_03004828->bg2hofs -= 3;
             }
             else
             {
-                gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.x = 0;
+                gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].x2 = 0;
                 gUnknown_03004828->bg2hofs = 0;
                 gUnknown_03004828->unk_00c4 = 10;
             }
@@ -4479,10 +4479,10 @@ static bool8 sub_804C29C(void)
             REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
             break;
         case 200:
-            gSprites[gUnknown_03004828->unk_00ba].pos1.y -= 2;
-            gSprites[gUnknown_03004828->unk_00bb].pos1.y -= 2;
+            gSprites[gUnknown_03004828->unk_00ba].y -= 2;
+            gSprites[gUnknown_03004828->unk_00bb].y -= 2;
             sub_804C0F8(0);
-            if (gSprites[gUnknown_03004828->unk_00ba].pos1.y < -8)
+            if (gSprites[gUnknown_03004828->unk_00ba].y < -8)
             {
                 gUnknown_03004828->unk_00c4 = 29;
             }
@@ -4512,13 +4512,13 @@ static bool8 sub_804C29C(void)
                 PlaySE(SE_WARP_OUT);
                 gUnknown_03004828->unk_00c4 ++;
             }
-            gSprites[gUnknown_03004828->unk_00ba].pos2.y -= 3;
-            gSprites[gUnknown_03004828->unk_00bb].pos2.y += 3;
+            gSprites[gUnknown_03004828->unk_00ba].y2 -= 3;
+            gSprites[gUnknown_03004828->unk_00bb].y2 += 3;
             break;
         case 33:
-            gSprites[gUnknown_03004828->unk_00ba].pos2.y -= 3;
-            gSprites[gUnknown_03004828->unk_00bb].pos2.y += 3;
-            if (gSprites[gUnknown_03004828->unk_00ba].pos2.y <= -0x5a)
+            gSprites[gUnknown_03004828->unk_00ba].y2 -= 3;
+            gSprites[gUnknown_03004828->unk_00bb].y2 += 3;
+            if (gSprites[gUnknown_03004828->unk_00ba].y2 <= -0x5a)
             {
                 gSprites[gUnknown_03004828->unk_00ba].data[1] = 1;
                 gSprites[gUnknown_03004828->unk_00bb].data[1] = 1;
@@ -4550,22 +4550,22 @@ static bool8 sub_804C29C(void)
                 StartSpriteAffineAnim(&gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]], 0);
             }
             StartSpriteAffineAnim(&gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]], 0);
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos1.x = 0x3c;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos1.x = 0xb4;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos1.y = 0xc0;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos1.y = -0x20;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].x = 0x3c;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].x = 0xb4;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].y = 0xc0;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].y = -0x20;
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].invisible = FALSE;
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].invisible = FALSE;
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 38:
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y -= 3;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos2.y += 3;
-            if (-0xa0 > gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y && gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y >= -0xa3)
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].y2 -= 3;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].y2 += 3;
+            if (-0xa0 > gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].y2 && gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].y2 >= -0xa3)
             {
                 PlaySE(SE_WARP_IN);
             }
-            if (gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y < -0xde)
+            if (gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].y2 < -0xde)
             {
                 gSprites[gUnknown_03004828->unk_00ba].data[1] = 0;
                 gSprites[gUnknown_03004828->unk_00bb].data[1] = 0;
@@ -4576,9 +4576,9 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 39:
-            gSprites[gUnknown_03004828->unk_00ba].pos2.y -= 3;
-            gSprites[gUnknown_03004828->unk_00bb].pos2.y += 3;
-            if (gSprites[gUnknown_03004828->unk_00ba].pos2.y <= -0xde)
+            gSprites[gUnknown_03004828->unk_00ba].y2 -= 3;
+            gSprites[gUnknown_03004828->unk_00bb].y2 += 3;
+            if (gSprites[gUnknown_03004828->unk_00ba].y2 <= -0xde)
             {
                 BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB(0, 0, 0));
                 gUnknown_03004828->unk_00c4 ++;
@@ -4611,9 +4611,9 @@ static bool8 sub_804C29C(void)
             break;
         case 43:
             sub_804C0F8(1);
-            gSprites[gUnknown_03004828->unk_00ba].pos2.y += 3;
-            gSprites[gUnknown_03004828->unk_00bb].pos2.y += 3;
-            if (gSprites[gUnknown_03004828->unk_00ba].pos2.y + gSprites[gUnknown_03004828->unk_00ba].pos1.y == 64)
+            gSprites[gUnknown_03004828->unk_00ba].y2 += 3;
+            gSprites[gUnknown_03004828->unk_00bb].y2 += 3;
+            if (gSprites[gUnknown_03004828->unk_00ba].y2 + gSprites[gUnknown_03004828->unk_00ba].y == 64)
             {
                 gUnknown_03004828->unk_00c4 ++;
             }
@@ -4719,10 +4719,10 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 66:
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos1.x = 0x78;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos1.y = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[1]].y_offset + 60;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos2.x = 0;
-            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].pos2.y = 0;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].x = 0x78;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].y = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[1]].y_offset + 60;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].x2 = 0;
+            gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].y2 = 0;
             CreatePokeballSprite(gUnknown_03004828->pokePicSpriteIdxs[1], gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].oam.paletteNum, 0x78, 0x54, 2, 1, 0x14, 0xfffff);
             FreeSpriteOamMatrix(&gSprites[gUnknown_03004828->unk_0103]);
             DestroySprite(&gSprites[gUnknown_03004828->unk_0103]);
@@ -4849,16 +4849,16 @@ static void sub_804D63C(void)
 
 static void sub_804D6BC(struct Sprite *sprite)
 {
-    sprite->pos1.y += sprite->data[0] / 10;
+    sprite->y += sprite->data[0] / 10;
     sprite->data[5] += sprite->data[1];
-    sprite->pos1.x = sprite->data[5] / 10;
-    if (sprite->pos1.y > 0x4c)
+    sprite->x = sprite->data[5] / 10;
+    if (sprite->y > 0x4c)
     {
-        sprite->pos1.y = 0x4c;
+        sprite->y = 0x4c;
         sprite->data[0] = -(sprite->data[0] * sprite->data[2]) / 100;
         sprite->data[3] ++;
     }
-    if (sprite->pos1.x == 0x78)
+    if (sprite->x == 0x78)
         sprite->data[1] = 0;
     sprite->data[0] += sprite->data[4];
     if (sprite->data[3] == 4)
@@ -4870,7 +4870,7 @@ static void sub_804D6BC(struct Sprite *sprite)
 
 static void sub_804D738(struct Sprite *sprite)
 {
-    sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
+    sprite->y2 += gTradeBallVerticalVelocityTable[sprite->data[0]];
     if (sprite->data[0] == 22)
         PlaySE(SE_BALL_BOUNCE_1);
     if (++ sprite->data[0] == 44)
@@ -4888,7 +4888,7 @@ static void sub_804D7AC(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, 1);
     if (++ sprite->data[1] > 20)
     {
-        sprite->pos2.y -= gTradeBallVerticalVelocityTable[sprite->data[0]];
+        sprite->y2 -= gTradeBallVerticalVelocityTable[sprite->data[0]];
         if (++ sprite->data[0] == 23)
         {
             DestroySprite(sprite);
@@ -4901,7 +4901,7 @@ static void sub_804D80C(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        if ((sprite->pos1.y += 4) > sprite->data[3])
+        if ((sprite->y += 4) > sprite->data[3])
         {
             sprite->data[2] ++;
             sprite->data[0] = 0x16;
@@ -4916,7 +4916,7 @@ static void sub_804D80C(struct Sprite *sprite)
             PlaySE(SE_BALL_BOUNCE_3);
         if (sprite->data[0] == 0x6b)
             PlaySE(SE_BALL_BOUNCE_4);
-        sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
+        sprite->y2 += gTradeBallVerticalVelocityTable[sprite->data[0]];
         if (++sprite->data[0] == 0x6c)
             sprite->callback = SpriteCallbackDummy;
     }

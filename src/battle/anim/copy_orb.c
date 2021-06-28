@@ -53,8 +53,8 @@ void sub_80CB4CC(struct Sprite* sprite)
             gBattleAnimArgs[0] = -a;
         }
 
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[1];
         sprite->invisible = TRUE;
         sprite->data[0]++;
         break;

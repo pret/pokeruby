@@ -566,8 +566,8 @@ void SpriteCB_CryMeterNeedle(struct Sprite * sprite)
     SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);
     x = gSineTable[((gPokedexCryScreenPtr2->rotation + 0x7F) & 0xFF)];
     y = gSineTable[((gPokedexCryScreenPtr2->rotation + 0x7F) & 0xFF) + 0x40];
-    sprite->pos2.x = x * 24 / 256;
-    sprite->pos2.y = y * 24 / 256;
+    sprite->x2 = x * 24 / 256;
+    sprite->y2 = y * 24 / 256;
 }
 
 void SetCryMeterNeedleTarget(s8 offset)

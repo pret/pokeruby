@@ -1282,10 +1282,10 @@ u16 sub_80C34AC(const u8 * string)
 void sub_80C34CC(s16 arg0, u16 y, u16 arg2, u16 arg3)
 {
     struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
-    sprite->pos1.x = 272;
-    sprite->pos1.y = y;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x = 272;
+    sprite->y = y;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     sprite->data[4] = arg0 + 32;
     sprite->data[5] = arg2;
     sprite->data[6] = arg3;
@@ -1297,10 +1297,10 @@ void sub_80C34CC(s16 arg0, u16 y, u16 arg2, u16 arg3)
 void sub_80C3520(u16 arg0)
 {
     struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
-    sprite->pos1.x += sprite->pos2.x;
-    sprite->pos1.y += sprite->pos2.y;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x += sprite->x2;
+    sprite->y += sprite->y2;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     sprite->data[6] = arg0;
     sprite->data[7] = 0;
     sprite->callback = sub_80C3630;
@@ -1309,10 +1309,10 @@ void sub_80C3520(u16 arg0)
 
 void sub_80C3564(struct Sprite *sprite)
 {
-    sprite->pos1.x = 272;
-    sprite->pos1.y = 144;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x = 272;
+    sprite->y = 144;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     sprite->callback = SpriteCallbackDummy;
     eContestLink80C2020Struct2018000.unk_04 = 0;
 }
@@ -1324,18 +1324,18 @@ void sub_80C3588(struct Sprite *sprite)
     s16 var0;
 
     var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
-    sprite->pos1.x -= var0 >> 8;
+    sprite->x -= var0 >> 8;
     sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
-    if (sprite->pos1.x < sprite->data[4])
-        sprite->pos1.x = sprite->data[4];
+    if (sprite->x < sprite->data[4])
+        sprite->x = sprite->data[4];
 
     for (i = 0; i < 3; i++)
     {
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
     }
 
-    if (sprite->pos1.x == sprite->data[4])
+    if (sprite->x == sprite->data[4])
         sprite->callback = sub_80C35FC;
 }
 
@@ -1355,15 +1355,15 @@ void sub_80C3630(struct Sprite *sprite)
     s16 var0;
 
     var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
-    sprite->pos1.x -= var0 >> 8;
+    sprite->x -= var0 >> 8;
     sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
     for (i = 0; i < 3; i++)
     {
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
     }
 
-    if (sprite->pos1.x + sprite->pos2.x < -224)
+    if (sprite->x + sprite->x2 < -224)
         sub_80C3564(sprite);
 }
 
@@ -1376,18 +1376,18 @@ void sub_80C3698(const u8 *text)
     sub_80C3158(text, eContestLink80C2020Struct2018000.unk_01);
     x = sub_80C34AC(text);
     sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
-    sprite->pos1.x = x + 32;
-    sprite->pos1.y = 80;
+    sprite->x = x + 32;
+    sprite->y = 80;
     sprite->invisible = FALSE;
     for (i = 0; i < 3; i++)
     {
-        gSprites[sprite->data[i]].pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
-        gSprites[sprite->data[i]].pos1.y = sprite->pos1.y;
+        gSprites[sprite->data[i]].x = sprite->x + sprite->x2 + (i + 1) * 64;
+        gSprites[sprite->data[i]].y = sprite->y;
         gSprites[sprite->data[i]].invisible = FALSE;
     }
 
     gBattle_WIN0H = 0x00F0;
-    gBattle_WIN0V = ((sprite->pos1.y - 16) << 8) | (sprite->pos1.y + 16);
+    gBattle_WIN0V = ((sprite->y - 16) << 8) | (sprite->y + 16);
     REG_WININ = WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR;
 }
 
@@ -2003,12 +2003,12 @@ void sub_80C3C44(struct Sprite *sprite)
     else
     {
         s16 delta = (u16)sprite->data[1] + 0x600;
-        sprite->pos1.x -= delta >> 8;
+        sprite->x -= delta >> 8;
         sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
-        if (sprite->pos1.x < 120)
-            sprite->pos1.x = 120;
+        if (sprite->x < 120)
+            sprite->x = 120;
 
-        if (sprite->pos1.x == 120)
+        if (sprite->x == 120)
         {
             sprite->callback = SpriteCallbackDummy;
             sprite->data[1] = 0;
@@ -2020,9 +2020,9 @@ void sub_80C3C44(struct Sprite *sprite)
 void sub_80C3CB8(struct Sprite *sprite)
 {
     s16 delta = (u16)sprite->data[1] + 0x600;
-    sprite->pos1.x -= delta >> 8;
+    sprite->x -= delta >> 8;
     sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
-    if (sprite->pos1.x < -32)
+    if (sprite->x < -32)
     {
         sprite->callback = SpriteCallbackDummy;
         sprite->invisible = TRUE;
@@ -2055,16 +2055,16 @@ void sub_80C3DF0(struct Sprite *sprite)
     register s16 var0 asm("r1");
 
     sprite->data[3] += sprite->data[0];
-    sprite->pos2.x = Sin(sprite->data[3] >> 8, sprite->data[1]);
+    sprite->x2 = Sin(sprite->data[3] >> 8, sprite->data[1]);
     var0 = sprite->data[4] + sprite->data[2];
-    sprite->pos1.x += var0 >> 8;
+    sprite->x += var0 >> 8;
     var0 = var0 & 0xFF;
     sprite->data[4] = var0;
-    sprite->pos1.y++;
+    sprite->y++;
     if (eContestLink80C2020Struct2018000.unk_09)
         sprite->invisible = TRUE;
 
-    if (sprite->pos1.x > 248 || sprite->pos1.y > 116)
+    if (sprite->x > 248 || sprite->y > 116)
     {
         DestroySprite(sprite);
         eContestLink80C2020Struct2018000.unk_07--;

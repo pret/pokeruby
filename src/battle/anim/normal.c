@@ -310,8 +310,8 @@ const u16 gUnknown_083DB568 = RGB(31, 31, 31);
 // arg 4: duration
 static void AnimConfusionDuck(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -332,8 +332,8 @@ static void AnimConfusionDuck(struct Sprite *sprite)
 
 static void AnimConfusionDuckStep(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 30);
-    sprite->pos2.y = Sin(sprite->data[0], 10);
+    sprite->x2 = Cos(sprite->data[0], 30);
+    sprite->y2 = Sin(sprite->data[0], 10);
 
     if ((u16)sprite->data[0] < 128)
         sprite->oam.priority = 1;
@@ -449,8 +449,8 @@ static void sub_80E1F0C(struct Sprite *sprite)
 
 static void sub_80E1F3C(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = 0;
     sprite->data[1] = 10;
     sprite->data[2] = 8;
@@ -904,8 +904,8 @@ static void sub_80E2870(struct Sprite *sprite)
     else
         sub_8078764(sprite, FALSE);
 
-    sprite->pos2.x += (Random() % 48) - 24;
-    sprite->pos2.y += (Random() % 24) - 12;
+    sprite->x2 += (Random() % 48) - 24;
+    sprite->y2 += (Random() % 24) - 12;
 
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;
@@ -914,10 +914,10 @@ static void sub_80E2870(struct Sprite *sprite)
 static void sub_80E2908(struct Sprite *sprite)
 {
     sprite->data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x + gSprites[sprite->data[0]].pos2.x;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y + gSprites[sprite->data[0]].pos2.y;
-    sprite->pos2.x = gBattleAnimArgs[1];
-    sprite->pos2.y = gBattleAnimArgs[2];
+    sprite->x = gSprites[sprite->data[0]].x + gSprites[sprite->data[0]].x2;
+    sprite->y = gSprites[sprite->data[0]].y + gSprites[sprite->data[0]].y2;
+    sprite->x2 = gBattleAnimArgs[1];
+    sprite->y2 = gBattleAnimArgs[2];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;
@@ -1248,8 +1248,8 @@ void sub_80E2F2C(u8 taskId)
     LZDecompressVram(&gUnknown_08D20A14, subStruct.field_0);
     LoadPalette(&gUnknown_083DB568, subStruct.field_8 * 16 + 1, 2);
 
-    gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
-    gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
+    gBattle_BG1_X = -gSprites[spriteId].x + 32;
+    gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     gTasks[taskId].data[0] = newSpriteId;
     gTasks[taskId].data[6] = var0;
     gTasks[taskId].func = sub_80E3194;

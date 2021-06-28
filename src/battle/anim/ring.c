@@ -293,7 +293,7 @@ void sub_80D10B8(struct Sprite* sprite)
         r9 = GetBattlerSpriteCoord(bankr7, r10) - gBattleAnimArgs[0];
         if (gMain.inBattle && IsAnimBankSpriteVisible(bankr7 ^ 2))
         {
-            if (gSprites[gBattlerSpriteIds[bankr7]].pos1.x < gSprites[gBattlerSpriteIds[bankr7 ^ 2]].pos1.x)
+            if (gSprites[gBattlerSpriteIds[bankr7]].x < gSprites[gBattlerSpriteIds[bankr7 ^ 2]].x)
                 sprite->subpriority = gSprites[gBattlerSpriteIds[bankr7 ^ 2]].subpriority + 1;
             else
                 sprite->subpriority = gSprites[gBattlerSpriteIds[bankr7]].subpriority - 1;
@@ -322,8 +322,8 @@ void sub_80D10B8(struct Sprite* sprite)
         sp0 -= gBattleAnimArgs[3];
 
     sp1 += gBattleAnimArgs[4];
-    sprite->pos1.x = sprite->data[1] = r9;
-    sprite->pos1.y = sprite->data[3] = r6;
+    sprite->x = sprite->data[1] = r9;
+    sprite->y = sprite->data[3] = r6;
     sprite->data[2] = sp0;
     sprite->data[4] = sp1;
     sprite->data[0] = gBattleAnimArgs[0];
@@ -359,17 +359,17 @@ void sub_80D1368(struct Sprite* sprite)
 static void sub_80D13AC(struct Sprite* sprite)
 {
     s16 add;
-    sprite->pos2.y -= (sprite->data[0] >> 8);
-    sprite->pos2.x = sprite->data[1] >> 8;
+    sprite->y2 -= (sprite->data[0] >> 8);
+    sprite->x2 = sprite->data[1] >> 8;
     sprite->data[0] -= 32;
     add = (GetBattlerSide(gBattleAnimAttacker)) ? -0xA0 : 0xA0;
     sprite->data[1] += add;
-    if (sprite->pos2.y > 0)
+    if (sprite->y2 > 0)
     {
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
+        sprite->y += sprite->y2;
+        sprite->x += sprite->x2;
+        sprite->y2 = 0;
+        sprite->x2 = 0;
         sprite->data[0] = 0;
         StartSpriteAffineAnim(sprite, 1);
         sprite->callback = sub_80D1424;
@@ -406,7 +406,7 @@ static void sub_80D144C(struct Sprite* sprite)
 
 static void sub_80D14C4(struct Sprite* sprite)
 {
-    sprite->pos2.y -= 2;
+    sprite->y2 -= 2;
     if (++sprite->data[0] == 9)
     {
         sprite->data[0] = 16;

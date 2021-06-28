@@ -40,20 +40,20 @@ void sub_80D2938(struct Sprite* sprite)
     s16 r5;
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
     }
 
     sprite->data[0]++;
     r5 = (sprite->data[0] * 10) & 0xFF;
-    sprite->pos2.x = Sin(r5, 0x50) >> 8;
+    sprite->x2 = Sin(r5, 0x50) >> 8;
     if (sprite->data[0] <= 0x4F)
-        sprite->pos2.y = (sprite->data[0] / 2) + (Cos(r5, 0x50) >> 8);
+        sprite->y2 = (sprite->data[0] / 2) + (Cos(r5, 0x50) >> 8);
 
     if (sprite->data[0] > 0x5A)
     {
         sprite->data[2]++;
-        sprite->pos2.x -= sprite->data[2] / 2;
+        sprite->x2 -= sprite->data[2] / 2;
     }
 
     if (sprite->data[0] > 0x64)

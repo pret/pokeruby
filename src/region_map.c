@@ -495,8 +495,8 @@ void RegionMapDefaultZoomOffsetPlayerSprite(s16 a, s16 b)
     UpdateRegionMapVideoRegs();
     if (gRegionMap->playerIconSprite != NULL)
     {
-        gRegionMap->playerIconSprite->pos2.x = -a;
-        gRegionMap->playerIconSprite->pos2.y = -b;
+        gRegionMap->playerIconSprite->x2 = -a;
+        gRegionMap->playerIconSprite->y2 = -b;
     }
 }
 
@@ -868,8 +868,8 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
 {
     if (gRegionMap->unk7A != 0)
     {
-        sprite->pos1.x += gRegionMap->cursorDeltaX * 2;
-        sprite->pos1.y += gRegionMap->cursorDeltaY * 2;
+        sprite->x += gRegionMap->cursorDeltaX * 2;
+        sprite->y += gRegionMap->cursorDeltaY * 2;
         gRegionMap->unk7A--;
     }
 }
@@ -924,15 +924,15 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
         if (gRegionMap->zoomed == TRUE)
         {
             gRegionMap->cursorSprite->oam.size = 2;
-            gRegionMap->cursorSprite->pos1.x -= 8;
-            gRegionMap->cursorSprite->pos1.y -= 8;
+            gRegionMap->cursorSprite->x -= 8;
+            gRegionMap->cursorSprite->y -= 8;
             StartSpriteAnim(gRegionMap->cursorSprite, 1);
         }
         else
         {
             gRegionMap->cursorSprite->oam.size = 1;
-            gRegionMap->cursorSprite->pos1.x = gRegionMap->cursorPosX * 8 + 4;
-            gRegionMap->cursorSprite->pos1.y = gRegionMap->cursorPosY * 8 + 4;
+            gRegionMap->cursorSprite->x = gRegionMap->cursorPosX * 8 + 4;
+            gRegionMap->cursorSprite->y = gRegionMap->cursorPosY * 8 + 4;
         }
         gRegionMap->cursorSprite->data[1] = 2;
         gRegionMap->cursorSprite->data[2] = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
@@ -1024,14 +1024,14 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     gRegionMap->playerIconSprite = &gSprites[spriteId];
     if (gRegionMap->zoomed == FALSE)
     {
-        gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 8 + 4;
-        gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 8 + 4;
+        gRegionMap->playerIconSprite->x = gRegionMap->unk74 * 8 + 4;
+        gRegionMap->playerIconSprite->y = gRegionMap->unk76 * 8 + 4;
         gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedOut;
     }
     else
     {
-        gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 16 - 48;
-        gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 16 - 66;
+        gRegionMap->playerIconSprite->x = gRegionMap->unk74 * 16 - 48;
+        gRegionMap->playerIconSprite->y = gRegionMap->unk76 * 16 - 66;
         gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedIn;
     }
 }
@@ -1051,17 +1051,17 @@ static void sub_80FBE24(void)
     {
         if (gRegionMap->zoomed == TRUE)
         {
-            gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 16 - 48;
-            gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 16 - 66;
+            gRegionMap->playerIconSprite->x = gRegionMap->unk74 * 16 - 48;
+            gRegionMap->playerIconSprite->y = gRegionMap->unk76 * 16 - 66;
             gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedIn;
             gRegionMap->playerIconSprite->invisible = FALSE;
         }
         else
         {
-            gRegionMap->playerIconSprite->pos1.x = gRegionMap->unk74 * 8 + 4;
-            gRegionMap->playerIconSprite->pos1.y = gRegionMap->unk76 * 8 + 4;
-            gRegionMap->playerIconSprite->pos2.x = 0;
-            gRegionMap->playerIconSprite->pos2.y = 0;
+            gRegionMap->playerIconSprite->x = gRegionMap->unk74 * 8 + 4;
+            gRegionMap->playerIconSprite->y = gRegionMap->unk76 * 8 + 4;
+            gRegionMap->playerIconSprite->x2 = 0;
+            gRegionMap->playerIconSprite->y2 = 0;
             gRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconZoomedOut;
             gRegionMap->playerIconSprite->invisible = FALSE;
         }
@@ -1070,10 +1070,10 @@ static void sub_80FBE24(void)
 
 static void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
 {
-    sprite->pos2.x = -(gRegionMap->scrollX * 2);
-    sprite->pos2.y = -(gRegionMap->scrollY * 2);
-    sprite->data[0] = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
-    sprite->data[1] = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+    sprite->x2 = -(gRegionMap->scrollX * 2);
+    sprite->y2 = -(gRegionMap->scrollY * 2);
+    sprite->data[0] = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
+    sprite->data[1] = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
 
     // Determine if sprite is on screen
     if (sprite->data[0] < -8 || sprite->data[0] > 0xA8 || sprite->data[1] < -8 || sprite->data[1] > 0xF8)

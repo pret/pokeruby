@@ -217,8 +217,8 @@ void sub_80DC824(struct Sprite *sprite)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     }
 
-    sprite->pos1.x = sub_8077EE4(gBattleAnimTarget, 2) + gBattleAnimArgs[0];
-    sprite->pos1.y = sub_8077EE4(gBattleAnimTarget, 3) + gBattleAnimArgs[1];
+    sprite->x = sub_8077EE4(gBattleAnimTarget, 2) + gBattleAnimArgs[0];
+    sprite->y = sub_8077EE4(gBattleAnimTarget, 3) + gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[4];
 
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
@@ -242,8 +242,8 @@ void sub_80DC8F4(struct Sprite *sprite)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     }
 
-    sprite->pos1.x = sub_8077EE4(gBattleAnimTarget, 2) + gBattleAnimArgs[0];
-    sprite->pos1.y = sub_8077EE4(gBattleAnimTarget, 3) + gBattleAnimArgs[1];
+    sprite->x = sub_8077EE4(gBattleAnimTarget, 2) + gBattleAnimArgs[0];
+    sprite->y = sub_8077EE4(gBattleAnimTarget, 3) + gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
 
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
@@ -262,8 +262,8 @@ void sub_80DC9A0(struct Sprite *sprite)
 
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[1] = sprite->x;
+    sprite->data[3] = sprite->y;
 
     if (!gBattleAnimArgs[4])
     {
@@ -288,22 +288,22 @@ static void sub_80DCA38(struct Sprite *sprite)
         return;
     }
 
-    sprite->pos2.x += Sin(sprite->data[6], sprite->data[5]);
+    sprite->x2 += Sin(sprite->data[6], sprite->data[5]);
     sprite->data[6] = (sprite->data[6] + 13) & 0xFF;
 }
 
 // used in Move_STRING_SHOT
 void sub_80DCA70(struct Sprite *sprite)
 {
-    SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
+    SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
     if (GetBattlerSide(gBattleAnimAttacker))
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
     else
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     if (!GetBattlerSide(gBattleAnimTarget))
-        sprite->pos1.y += 8;
+        sprite->y += 8;
 
     sprite->callback = sub_80DCAEC;
 }
@@ -406,7 +406,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
 
     lVarX = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
     lVarY = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
-    rot = ArcTan2Neg(lVarX - sprite->pos1.x, lVarY - sprite->pos1.y);
+    rot = ArcTan2Neg(lVarX - sprite->x, lVarY - sprite->y);
     rot += 0xC000;
     sub_8078FDC(sprite, FALSE, 0x100, 0x100, rot);
 
@@ -456,10 +456,10 @@ static void AnimMissileArcStep(struct Sprite *sprite)
     {
         s16 tempData[8];
         u16 *data = sprite->data;
-        u16 x1 = sprite->pos1.x;
-        s16 x2 = sprite->pos2.x;
-        u16 y1 = sprite->pos1.y;
-        s16 y2 = sprite->pos2.y;
+        u16 x1 = sprite->x;
+        s16 x2 = sprite->x2;
+        u16 y1 = sprite->y;
+        s16 y2 = sprite->y2;
         int i;
 
         for (i = 0; i < 8; i++)
@@ -470,8 +470,8 @@ static void AnimMissileArcStep(struct Sprite *sprite)
 
         if (!TranslateAnimArc(sprite))
         {
-            u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - x2,
-                                  sprite->pos1.y + sprite->pos2.y - y2);
+            u16 rotation = ArcTan2Neg(sprite->x + sprite->x2 - x2,
+                                  sprite->y + sprite->y2 - y2);
             rotation += 0xC000;
             sub_8078FDC(sprite, FALSE, 0x100, 0x100, rotation);
 
@@ -485,13 +485,13 @@ void sub_80DCE40(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 18;
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 18;
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 18;
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 18;
     }
 
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);

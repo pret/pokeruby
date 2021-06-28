@@ -1464,8 +1464,8 @@ void sub_8097F58(void)
     gPokemonStorageSystemPtr->unk_12ac = sub_80F7940(0x000d, 0xdace, 0);
     gPokemonStorageSystemPtr->unk_12ac->oam.priority = 0;
     gPokemonStorageSystemPtr->unk_12ac->subpriority = 1;
-    gPokemonStorageSystemPtr->unk_12ac->pos1.x = 0x28;
-    gPokemonStorageSystemPtr->unk_12ac->pos1.y = 0x95;
+    gPokemonStorageSystemPtr->unk_12ac->x = 0x28;
+    gPokemonStorageSystemPtr->unk_12ac->y = 0x95;
     gPokemonStorageSystemPtr->unk_12b8 = BG_CHAR_ADDR(4) + 32 * GetSpriteTileStartByTag(0x000d);
 }
 

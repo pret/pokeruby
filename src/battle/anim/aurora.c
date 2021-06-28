@@ -71,9 +71,9 @@ void AnimAuroraRings(struct Sprite *sprite)
     else
         r6 = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + r6;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     InitAnimLinearTranslation(sprite);
     sprite->callback = AnimGrowAuroraRings;

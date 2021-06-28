@@ -170,8 +170,10 @@ static const struct Sprite sDummySprite =
     .template = &gDummySpriteTemplate,
     .subspriteTables = NULL,
     .callback = SpriteCallbackDummy,
-    .pos1 = { 304, 160 },
-    .pos2 = {   0,   0 },
+    .x = 304,
+    .y = 160,
+    .x2 = 0,
+    .y2 = 0,
     .centerToCornerVecX = 0,
     .centerToCornerVecY = 0,
     .animNum = 0,
@@ -359,13 +361,13 @@ static void UpdateOamCoords(void)
         {
             if (sprite->coordOffsetEnabled)
             {
-                sprite->oam.x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
-                sprite->oam.y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+                sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+                sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
             }
             else
             {
-                sprite->oam.x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
-                sprite->oam.y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+                sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
+                sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
             }
         }
     }
@@ -565,8 +567,8 @@ static u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x,
     sprite->affineAnims = template->affineAnims;
     sprite->template = template;
     sprite->callback = template->callback;
-    sprite->pos1.x = x;
-    sprite->pos1.y = y;
+    sprite->x = x;
+    sprite->y = y;
 
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 

@@ -227,8 +227,8 @@ void sub_80D37FC(struct Sprite *sprite)
     sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
-    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[4];
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[4] = sprite->y + gBattleAnimArgs[4];
 
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -252,10 +252,10 @@ void sub_80D3838(struct Sprite *sprite)
 static void sub_80D3874(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 11) & 0xFF;
-    sprite->pos2.x = Sin(sprite->data[0], 4);
+    sprite->x2 = Sin(sprite->data[0], 4);
 
     sprite->data[1] += 48;
-    sprite->pos2.y = -(sprite->data[1] >> 8);
+    sprite->y2 = -(sprite->data[1] >> 8);
 
     if (--sprite->data[7] == -1)
     {
@@ -779,10 +779,10 @@ void sub_80D40A8(struct Sprite *sprite)
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
     if (sprite->data[1] & 1)
-        sprite->pos2.x = -(sprite->data[3] >> 8);
+        sprite->x2 = -(sprite->data[3] >> 8);
     else
-        sprite->pos2.x = sprite->data[3] >> 8;
-    sprite->pos2.y = sprite->data[4] >> 8;
+        sprite->x2 = sprite->data[3] >> 8;
+    sprite->y2 = sprite->data[4] >> 8;
     if (++sprite->data[0] == 21)
         DestroyAnimSprite(sprite);
 }
@@ -792,7 +792,7 @@ void sub_80D40F4(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->data[15] = GetAnimBattlerSpriteId(ANIM_BATTLER_ATTACKER);
-    task->data[5] = gSprites[task->data[15]].pos1.y;
+    task->data[5] = gSprites[task->data[15]].y;
     task->data[1] = sub_80D4394();
     PrepareBattlerSpriteForRotScale(task->data[15], ST_OAM_OBJ_NORMAL);
     task->func = sub_80D4150;
@@ -813,18 +813,18 @@ void sub_80D4150(u8 taskId)
                 task->data[3] = 0;
                 if (++task->data[4] & 1)
                 {
-                    gSprites[task->data[15]].pos2.x = 3;
-                    gSprites[task->data[15]].pos1.y++;
+                    gSprites[task->data[15]].x2 = 3;
+                    gSprites[task->data[15]].y++;
                 }
                 else
                 {
-                    gSprites[task->data[15]].pos2.x = -3;
+                    gSprites[task->data[15]].x2 = -3;
                 }
             }
             if (sub_8079C74(task) == 0)
             {
                 sub_8079A64(task->data[15]);
-                gSprites[task->data[15]].pos2.x = 0;
+                gSprites[task->data[15]].x2 = 0;
                 task->data[3] = 0;
                 task->data[4] = 0;
                 task->data[0]++;
@@ -854,9 +854,9 @@ void sub_80D4150(u8 taskId)
             {
                 task->data[3] = 0;
                 if (++task->data[4] & 1)
-                    gSprites[task->data[15]].pos2.y += 2;
+                    gSprites[task->data[15]].y2 += 2;
                 else
-                    gSprites[task->data[15]].pos2.y -= 2;
+                    gSprites[task->data[15]].y2 -= 2;
                 if (task->data[4] == 10)
                 {
                     sub_8079C08(task, task->data[15], 384, 224, 0x100, 0x100, 8);
@@ -867,11 +867,11 @@ void sub_80D4150(u8 taskId)
             }
             break;
         case 6:
-            gSprites[task->data[15]].pos1.y--;
+            gSprites[task->data[15]].y--;
             if (sub_8079C74(task) == 0)
             {
                 sub_8078F40(task->data[15]);
-                gSprites[task->data[15]].pos1.y = task->data[5];
+                gSprites[task->data[15]].y = task->data[5];
                 task->data[4] = 0;
                 task->data[0]++;
             }
@@ -959,9 +959,9 @@ void sub_80D452C(struct Sprite *sprite)
         case 1:
             sprite->data[2] += sprite->data[4];
             sprite->data[3] += sprite->data[5];
-            sprite->pos1.x = sprite->data[2] >> 4;
-            sprite->pos1.y = sprite->data[3] >> 4;
-            if (sprite->pos1.x < -8 || sprite->pos1.x > 248 || sprite->pos1.y < -8 || sprite->pos1.y > 120)
+            sprite->x = sprite->data[2] >> 4;
+            sprite->y = sprite->data[3] >> 4;
+            if (sprite->x < -8 || sprite->x > 248 || sprite->y < -8 || sprite->y > 120)
             {
                 gTasks[sprite->data[6]].data[sprite->data[7]]--;
                 DestroySprite(sprite);
@@ -1056,11 +1056,11 @@ void sub_80D47D0(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.y += 8;
-        if (sprite->pos1.y >= sprite->data[5])
+        sprite->y += 8;
+        if (sprite->y >= sprite->data[5])
         {
             gTasks[sprite->data[6]].data[10] = 1;
-            sprite->data[1] = CreateSprite(&gBattleAnimSpriteTemplate_83DB4D8, sprite->pos1.x, sprite->pos1.y, 1);
+            sprite->data[1] = CreateSprite(&gBattleAnimSpriteTemplate_83DB4D8, sprite->x, sprite->y, 1);
             if (sprite->data[1] != MAX_SPRITES)
             {
                 StartSpriteAffineAnim(&gSprites[sprite->data[1]], 3);
@@ -1199,11 +1199,11 @@ void sub_80D4B3C(struct Sprite *sprite)
 {
     if (TranslateAnimArc(sprite))
     {
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         sprite->data[0] = 6;
-        sprite->data[2] = (Random() & 0x1F) - 16 + sprite->pos1.x;
-        sprite->data[4] = (Random() & 0x1F) - 16 + sprite->pos1.y;
+        sprite->data[2] = (Random() & 0x1F) - 16 + sprite->x;
+        sprite->data[4] = (Random() & 0x1F) - 16 + sprite->y;
         sprite->data[5] = ~(Random() & 7);
         InitAnimArcTranslation(sprite);
         sprite->callback = sub_80D4BA4;
@@ -1230,8 +1230,8 @@ void sub_80D4BA4(struct Sprite *sprite)
 
 void sub_80D4BF0(struct Sprite *sprite)
 {
-    sprite->pos1.x = gBattleAnimArgs[0];
-    sprite->pos1.y = gBattleAnimArgs[1];
+    sprite->x = gBattleAnimArgs[0];
+    sprite->y = gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
@@ -1242,9 +1242,9 @@ void sub_80D4BF0(struct Sprite *sprite)
 void sub_80D4C18(struct Sprite *sprite)
 {
     sprite->data[4] -= sprite->data[0];
-    sprite->pos2.y = sprite->data[4] / 10;
+    sprite->y2 = sprite->data[4] / 10;
     sprite->data[5] = (sprite->data[5] + sprite->data[1]) & 0xFF;
-    sprite->pos2.x = Sin(sprite->data[5], sprite->data[2]);
+    sprite->x2 = Sin(sprite->data[5], sprite->data[2]);
     if (--sprite->data[3] == 0)
         DestroyAnimSprite(sprite);
 }
@@ -1253,8 +1253,8 @@ void sub_80D4C64(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
-    sprite->pos2.x = sprite->data[3] >> 7;
-    sprite->pos2.y = sprite->data[4] >> 7;
+    sprite->x2 = sprite->data[3] >> 7;
+    sprite->y2 = sprite->data[4] >> 7;
     if (--sprite->data[0] == 0)
     {
         FreeSpriteOamMatrix(sprite);
@@ -1274,11 +1274,11 @@ void sub_80D4CA4(struct Sprite *sprite)
 
 void sub_80D4CEC(struct Sprite *sprite)
 {
-    int xDiff = sprite->data[1] - sprite->pos1.x;
-    int yDiff = sprite->data[2] - sprite->pos1.y;
+    int xDiff = sprite->data[1] - sprite->x;
+    int yDiff = sprite->data[2] - sprite->y;
 
-    sprite->pos2.x = (sprite->data[0] * xDiff) / sprite->data[3];
-    sprite->pos2.y = (sprite->data[0] * yDiff) / sprite->data[3];
+    sprite->x2 = (sprite->data[0] * xDiff) / sprite->data[3];
+    sprite->y2 = (sprite->data[0] * yDiff) / sprite->data[3];
     if (++sprite->data[5] == sprite->data[4])
     {
         sprite->data[5] = 0;
@@ -1302,8 +1302,8 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
 
     something = sprite->data[0] / 2;
     // regalloc acts strange here...
-    combinedX = sprite->pos1.x + sprite->pos2.x;
-    combinedY = sprite->pos1.y + sprite->pos2.y;
+    combinedX = sprite->x + sprite->x2;
+    combinedY = sprite->y + sprite->y2;
 
     // ...then goes back to normal right here.
     // Nothing but this appears to reproduce the behavior.

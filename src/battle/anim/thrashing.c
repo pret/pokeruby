@@ -51,8 +51,8 @@ void sub_80D0AB8(u8 taskId)
     task->data[2] = 4;
     task->data[3] = 7;
     task->data[4] = 3;
-    task->data[5] = gSprites[task->data[0]].pos1.x;
-    task->data[6] = gSprites[task->data[0]].pos1.y;
+    task->data[5] = gSprites[task->data[0]].x;
+    task->data[6] = gSprites[task->data[0]].y;
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 2;
@@ -71,17 +71,17 @@ static void sub_80D0B3C(u8 taskId)
         task->data[8]++;
         if ((task->data[8] & 1) != 0)
         {
-            gSprites[task->data[0]].pos1.y += task->data[9];
+            gSprites[task->data[0]].y += task->data[9];
         }
         else
         {
-            gSprites[task->data[0]].pos1.y -= task->data[9];
+            gSprites[task->data[0]].y -= task->data[9];
         }
     }
     switch (task->data[1])
     {
     case 0:
-        gSprites[task->data[0]].pos1.x += task->data[2];
+        gSprites[task->data[0]].x += task->data[2];
         if (--task->data[3] == 0)
         {
             task->data[3] = 14;
@@ -89,7 +89,7 @@ static void sub_80D0B3C(u8 taskId)
         }
         break;
     case 1:
-        gSprites[task->data[0]].pos1.x -= task->data[2];
+        gSprites[task->data[0]].x -= task->data[2];
         if (--task->data[3] == 0)
         {
             task->data[3] = 7;
@@ -97,7 +97,7 @@ static void sub_80D0B3C(u8 taskId)
         }
         break;
     case 2:
-        gSprites[task->data[0]].pos1.x += task->data[2];
+        gSprites[task->data[0]].x += task->data[2];
         if (--task->data[3] == 0)
         {
             if (--task->data[4] != 0)
@@ -109,7 +109,7 @@ static void sub_80D0B3C(u8 taskId)
             {
                 if ((task->data[8] & 1) != 0)
                 {
-                    gSprites[task->data[0]].pos1.y -= task->data[9];
+                    gSprites[task->data[0]].y -= task->data[9];
                 }
                 DestroyAnimVisualTask(taskId);
             }

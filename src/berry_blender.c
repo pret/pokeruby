@@ -972,8 +972,8 @@ void sub_804E738(struct Sprite* sprite)
         else
             PlaySE(SE_BALL_TRAY_EXIT);
     }
-    sprite->pos1.x = sprite->data[1];
-    sprite->pos1.y = sprite->data[2];
+    sprite->x = sprite->data[1];
+    sprite->y = sprite->data[2];
 }
 
 void sub_804E794(struct Sprite* sprite, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
@@ -2666,8 +2666,8 @@ void sub_8051524(struct Sprite* sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];
-    sprite->pos2.x = sprite->data[2] / 8;
-    sprite->pos2.y = sprite->data[3] / 8;
+    sprite->x2 = sprite->data[2] / 8;
+    sprite->y2 = sprite->data[3] / 8;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -2699,7 +2699,7 @@ static void sub_805156C(void)
 static void sub_8051650(struct Sprite* sprite)
 {
     sprite->data[0]++;
-    sprite->pos2.y = -(sprite->data[0] / 3);
+    sprite->y2 = -(sprite->data[0] / 3);
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -2707,9 +2707,9 @@ static void sub_8051650(struct Sprite* sprite)
 void sub_8051684(struct Sprite* sprite)
 {
     sprite->data[0]++;
-    sprite->pos2.y = -(sprite->data[0] * 2);
-    if (sprite->pos2.y < -12)
-        sprite->pos2.y = -12;
+    sprite->y2 = -(sprite->data[0] * 2);
+    if (sprite->y2 < -12)
+        sprite->y2 = -12;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -2799,7 +2799,7 @@ static void sub_805181C(struct Sprite* sprite)
         }
         break;
     }
-    sprite->pos2.y = sprite->data[1];
+    sprite->y2 = sprite->data[1];
 }
 
 static void sub_80518CC(struct Sprite* sprite)
@@ -2829,7 +2829,7 @@ static void sub_80518CC(struct Sprite* sprite)
         }
         break;
     }
-    sprite->pos2.y = sprite->data[1];
+    sprite->y2 = sprite->data[1];
 }
 
 static void sub_805194C(u16 a0, u16 a1)
@@ -2953,8 +2953,8 @@ static bool8 sub_8051B8C(void)
 
 static void sub_8051C04(struct Sprite* sprite)
 {
-   sprite->pos2.x = -(gBerryBlenderData->field_144);
-   sprite->pos2.y = -(gBerryBlenderData->field_146);
+   sprite->x2 = -(gBerryBlenderData->field_144);
+   sprite->y2 = -(gBerryBlenderData->field_146);
 }
 
 /*static*/ void Blender_TrySettingRecord(void)

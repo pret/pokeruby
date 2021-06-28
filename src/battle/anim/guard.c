@@ -46,20 +46,20 @@ void sub_80D3014(struct Sprite *sprite)
 {
     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsAnimBankSpriteVisible(gBattleAnimAttacker ^ 2))
     {
-        SetAverageBattlerPositions(gBattleAnimAttacker, 0, &sprite->pos1.x, &sprite->pos1.y);
-        sprite->pos1.y += 40;
+        SetAverageBattlerPositions(gBattleAnimAttacker, 0, &sprite->x, &sprite->y);
+        sprite->y += 40;
 
         StartSpriteAffineAnim(sprite, 1);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 40;
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 40;
     }
 
     sprite->data[0] = 13;
-    sprite->data[2] = sprite->pos1.x;
-    sprite->data[4] = sprite->pos1.y - 72;
+    sprite->data[2] = sprite->x;
+    sprite->data[4] = sprite->y - 72;
 
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);

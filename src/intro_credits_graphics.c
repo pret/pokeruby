@@ -533,17 +533,17 @@ void sub_814910C(struct Sprite *sprite)
     }
     else
     {
-        s32 var = ((sprite->pos1.x << 16) | (u16)sprite->data[2]) + (u16)sprite->data[1];
-        sprite->pos1.x = var >> 16;
+        s32 var = ((sprite->x << 16) | (u16)sprite->data[2]) + (u16)sprite->data[1];
+        sprite->x = var >> 16;
         sprite->data[2] = var;
-        if (sprite->pos1.x > 255) sprite->pos1.x = 0xFFE0;
+        if (sprite->x > 255) sprite->x = 0xFFE0;
         if (sprite->data[0])
         {
-            sprite->pos2.y = -(gUnknown_02039358 + gUnknown_0203935A);
+            sprite->y2 = -(gUnknown_02039358 + gUnknown_0203935A);
         }
         else
         {
-            sprite->pos2.y = -gUnknown_02039358;
+            sprite->y2 = -gUnknown_02039358;
         }
     }
 }
@@ -590,10 +590,10 @@ void nullsub_82(struct Sprite *sprite)
 void sub_81492A0(struct Sprite* sprite)
 {
     sprite->invisible = gSprites[sprite->data[0]].invisible;
-    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y + 8;
-    sprite->pos2.x = gSprites[sprite->data[0]].pos2.x;
-    sprite->pos2.y = gSprites[sprite->data[0]].pos2.y;
+    sprite->x = gSprites[sprite->data[0]].x;
+    sprite->y = gSprites[sprite->data[0]].y + 8;
+    sprite->x2 = gSprites[sprite->data[0]].x2;
+    sprite->y2 = gSprites[sprite->data[0]].y2;
 }
 
 
@@ -621,9 +621,9 @@ void nullsub_83(struct Sprite *sprite)
 void sub_81493C4(struct Sprite* sprite)
 {
     sprite->invisible = gSprites[sprite->data[0]].invisible;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
-    sprite->pos2.x = gSprites[sprite->data[0]].pos2.x;
-    sprite->pos2.y = gSprites[sprite->data[0]].pos2.y;
+    sprite->y = gSprites[sprite->data[0]].y;
+    sprite->x2 = gSprites[sprite->data[0]].x2;
+    sprite->y2 = gSprites[sprite->data[0]].y2;
 }
 
 u8 intro_create_latios_sprite(s16 a, s16 b)

@@ -236,9 +236,9 @@ static void AnimFireRingStep1(struct Sprite *sprite)
     if (++sprite->data[0] == 0x12)
     {
         sprite->data[0] = 0x19;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
         InitAnimLinearTranslation(sprite);
@@ -253,18 +253,18 @@ static void AnimFireRingStep2(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
 
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->y2 = 0;
+        sprite->x2 = 0;
 
         sprite->callback = AnimFireRingStep3;
         sprite->callback(sprite);
     }
     else
     {
-        sprite->pos2.x += Sin(sprite->data[7], 28);
-        sprite->pos2.y += Cos(sprite->data[7], 28);
+        sprite->x2 += Sin(sprite->data[7], 28);
+        sprite->y2 += Cos(sprite->data[7], 28);
 
         sprite->data[7] = (sprite->data[7] + 20) & 0xFF;
     }
@@ -280,8 +280,8 @@ static void AnimFireRingStep3(struct Sprite *sprite)
 
 static void UpdateFireRingCircleOffset(struct Sprite *sprite)
 {
-    sprite->pos2.x = Sin(sprite->data[7], 28);
-    sprite->pos2.y = Cos(sprite->data[7], 28);
+    sprite->x2 = Sin(sprite->data[7], 28);
+    sprite->y2 = Cos(sprite->data[7], 28);
 
     sprite->data[7] = (sprite->data[7] + 20) & 0xFF;
 }
@@ -293,8 +293,8 @@ static void UpdateFireRingCircleOffset(struct Sprite *sprite)
 // arg 4: y delta 
 void AnimFireCross(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
@@ -331,8 +331,8 @@ static void sub_80D53F4(struct Sprite *sprite)
 
 static void sub_80D541C(struct Sprite *sprite)
 {
-    sprite->pos2.x = Sin(sprite->data[1], sprite->data[2] >> 8);
-    sprite->pos2.y = Cos(sprite->data[1], sprite->data[2] >> 8);
+    sprite->x2 = Sin(sprite->data[1], sprite->data[2] >> 8);
+    sprite->y2 = Cos(sprite->data[1], sprite->data[2] >> 8);
 
     sprite->data[1] = (sprite->data[1] + 10) & 0xFF;
     sprite->data[2] += 0xD0;
@@ -351,7 +351,7 @@ void sub_80D5470(u8 taskId) // initialize animation task for Move_ERUPTION?
     task->data[1] = 0;
     task->data[2] = 0;
     task->data[3] = 0;
-    task->data[4] = gSprites[task->data[15]].pos1.y;
+    task->data[4] = gSprites[task->data[15]].y;
     task->data[5] = GetBattlerSide(gBattleAnimAttacker);
     task->data[6] = 0;
 
@@ -376,9 +376,9 @@ static void sub_80D54E0(u8 taskId) // animate Move_ERUPTION?
             task->data[1] = 0;
 
             if (++task->data[2] & 0x1)
-                gSprites[task->data[15]].pos2.x = 3;
+                gSprites[task->data[15]].x2 = 3;
             else
-                gSprites[task->data[15]].pos2.x = -3;
+                gSprites[task->data[15]].x2 = -3;
         }
 
         if (task->data[5])
@@ -386,14 +386,14 @@ static void sub_80D54E0(u8 taskId) // animate Move_ERUPTION?
             if (++task->data[3] > 4)
             {
                 task->data[3] = 0;
-                gSprites[task->data[15]].pos1.y++;
+                gSprites[task->data[15]].y++;
             }
         }
 
         if(!sub_8079C74(task))
         {
             sub_8079A64(task->data[15]);
-            gSprites[task->data[15]].pos2.x = 0;
+            gSprites[task->data[15]].x2 = 0;
 
             task->data[1] = 0;
             task->data[2] = 0;
@@ -427,9 +427,9 @@ static void sub_80D54E0(u8 taskId) // animate Move_ERUPTION?
             task->data[1] = 0;
 
             if (++task->data[2] & 1)
-                gSprites[task->data[15]].pos2.y += 3;
+                gSprites[task->data[15]].y2 += 3;
             else
-                gSprites[task->data[15]].pos2.y -= 3;
+                gSprites[task->data[15]].y2 -= 3;
         }
 
         if (++task->data[3] > 0x18)
@@ -440,7 +440,7 @@ static void sub_80D54E0(u8 taskId) // animate Move_ERUPTION?
                 sub_8079C08(task, task->data[15], 0x180, 0xC0, 0x100, 0x100, 0x8);
 
             if (task->data[2] & 1)
-                gSprites[task->data[15]].pos2.y -= 3;
+                gSprites[task->data[15]].y2 -= 3;
 
             task->data[1] = 0;
             task->data[2] = 0;
@@ -450,11 +450,11 @@ static void sub_80D54E0(u8 taskId) // animate Move_ERUPTION?
         break;
     case 5:
         if (task->data[5])
-            gSprites[task->data[15]].pos1.y--;
+            gSprites[task->data[15]].y--;
 
         if (!sub_8079C74(task))
         {
-            gSprites[task->data[15]].pos1.y = task->data[4];
+            gSprites[task->data[15]].y = task->data[4];
             sub_8078F40(task->data[15]);
 
             task->data[2] = 0;
@@ -477,7 +477,7 @@ static void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3)
     s8 sign;
 
     u16 y = sub_80D5940(spriteId);
-    u16 x = gSprites[spriteId].pos1.x;
+    u16 x = gSprites[spriteId].x;
 
     if(!GetBattlerSide(gBattleAnimAttacker))
     {
@@ -523,7 +523,7 @@ void sub_80D58FC(struct Sprite *sprite)
 
 u16 sub_80D5940(u8 spriteId)
 {
-    u16 var1 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y + gSprites[spriteId].centerToCornerVecY;
+    u16 var1 = gSprites[spriteId].y + gSprites[spriteId].y2 + gSprites[spriteId].centerToCornerVecY;
 
     if (GetBattlerSide(gBattleAnimAttacker) == 0)
     {
@@ -541,8 +541,8 @@ void sub_80D5994(struct Sprite *sprite, s16 x, s16 y)
 {
     sprite->data[0] = 0;
     sprite->data[1] = 0;
-    sprite->data[2] = (u16)sprite->pos1.x * 8;
-    sprite->data[3] = (u16)sprite->pos1.y * 8;
+    sprite->data[2] = (u16)sprite->x * 8;
+    sprite->data[3] = (u16)sprite->y * 8;
     sprite->data[4] = x * 8;
     sprite->data[5] = y * 8;
 }
@@ -559,18 +559,18 @@ static void sub_80D59B0(struct Sprite *sprite)
     }
 
     sprite->data[2] += sprite->data[4];
-    sprite->pos1.x = sprite->data[2] >> 3;
+    sprite->x = sprite->data[2] >> 3;
     sprite->data[3] += sprite->data[5];
-    sprite->pos1.y = sprite->data[3] >> 3;
+    sprite->y = sprite->data[3] >> 3;
 
-    if (sprite->pos1.x < -8 || sprite->pos1.x > 0xf8 || sprite->pos1.y < -8 || sprite->pos1.y > 120)
+    if (sprite->x < -8 || sprite->x > 0xf8 || sprite->y < -8 || sprite->y > 120)
         sprite->invisible = TRUE;
 }
 
 void sub_80D5A20(struct Sprite *sprite)
 {
-    sprite->pos1.x = gBattleAnimArgs[0];
-    sprite->pos1.y = gBattleAnimArgs[1];
+    sprite->x = gBattleAnimArgs[0];
+    sprite->y = gBattleAnimArgs[1];
 
     sprite->data[0] = 0;
     sprite->data[1] = 0;
@@ -596,10 +596,10 @@ static void sub_80D5A74(struct Sprite *sprite)
         sprite->data[0]++;
         // fall through
     case 1:
-        sprite->pos1.y += 8;
-        if (sprite->pos1.y >= sprite->data[7])
+        sprite->y += 8;
+        if (sprite->y >= sprite->data[7])
         {
-            sprite->pos1.y = sprite->data[7];
+            sprite->y = sprite->data[7];
             sprite->data[0]++;
         }
         break;
@@ -609,11 +609,11 @@ static void sub_80D5A74(struct Sprite *sprite)
             sprite->data[1] = 0;
             if ((++sprite->data[2] & 1) != 0)
             {
-                sprite->pos2.y = -3;
+                sprite->y2 = -3;
             }
             else
             {
-                sprite->pos2.y = 3;
+                sprite->y2 = 3;
             }
         }
 

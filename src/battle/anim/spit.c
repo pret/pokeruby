@@ -38,16 +38,16 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7B60 =
 
 static void sub_80D287C(struct Sprite* sprite)
 {
-    sprite->pos2.x += sprite->data[0];
-    sprite->pos2.y += sprite->data[1];
+    sprite->x2 += sprite->data[0];
+    sprite->y2 += sprite->data[1];
     if (sprite->data[3]++ >= sprite->data[2])
         DestroyAnimSprite(sprite);
 }
 
 void sub_80D28AC(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
     sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
     sprite->data[2] = gBattleAnimArgs[1];

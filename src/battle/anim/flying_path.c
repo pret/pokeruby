@@ -146,14 +146,14 @@ static void sub_80CBF5C(u8 taskId)
         task->data[0] = 0xFF;
         break;
     case 1:
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 10;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = task->data[6];
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = task->data[7];
         sprite->data[5] = sub_80CC338(sprite);
         task->data[4] += 2;
@@ -172,14 +172,14 @@ static void sub_80CBF5C(u8 taskId)
         task->data[0] = 0xFF;
         break;
     case 3:
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 10;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = task->data[6] - ((task->data[10] / 2) + 10) * task->data[5];
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = task->data[7] - ((task->data[11] / 2) + 10) * task->data[5];
         sprite->data[5] = sub_80CC338(sprite);
         task->data[3] = 2;
@@ -189,14 +189,14 @@ static void sub_80CBF5C(u8 taskId)
         task->data[0]++;
         break;
     case 5:
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 10;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = task->data[6] + ((task->data[10] / 2) + 10) * task->data[5];
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = task->data[7] + ((task->data[11] / 2) + 10) * task->data[5];
         sprite->data[5] = sub_80CC338(sprite);
         task->data[4] -= 2;
@@ -215,14 +215,14 @@ static void sub_80CBF5C(u8 taskId)
         task->data[0] = 0xFF;
         break;
     case 7:
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 10;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = task->data[6];
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = task->data[7];
         sprite->data[5] = sub_80CC338(sprite);
         task->data[4] += 2;
@@ -233,14 +233,14 @@ static void sub_80CBF5C(u8 taskId)
         task->data[0]++;
         break;
     case 9:
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 10;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = task->data[6] - ((task->data[10] / 2) + 10) * task->data[5];
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = task->data[7] + ((task->data[11] / 2) + 10) * task->data[5];
         sprite->data[5] = sub_80CC338(sprite);
         task->data[3] = 5;
@@ -263,14 +263,14 @@ static void sub_80CBF5C(u8 taskId)
         break;
     case 11:
     {
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 10;
-        sprite->data[1] = sprite->pos1.x;
+        sprite->data[1] = sprite->x;
         sprite->data[2] = task->data[8];
-        sprite->data[3] = sprite->pos1.y;
+        sprite->data[3] = sprite->y;
         sprite->data[4] = task->data[9];
         sprite->data[5] = sub_80CC338(sprite);
         task->data[4] -= 2;
@@ -309,7 +309,7 @@ static void sub_80CBF5C(u8 taskId)
 static s16 sub_80CC338(struct Sprite* sprite)
 {
     s16 var = 8;
-    if (sprite->data[4] < sprite->pos1.y)
+    if (sprite->data[4] < sprite->y)
         var = -var;
 
     return var;
@@ -324,8 +324,8 @@ static void sub_80CC358(struct Task* task, u8 taskId)
         s16 spriteX;
         s16 spriteY;
         task->data[14] = 0;
-        spriteX = gSprites[task->data[2]].pos1.x + gSprites[task->data[2]].pos2.x;
-        spriteY = gSprites[task->data[2]].pos1.y + gSprites[task->data[2]].pos2.y;
+        spriteX = gSprites[task->data[2]].x + gSprites[task->data[2]].x2;
+        spriteY = gSprites[task->data[2]].y + gSprites[task->data[2]].y2;
         spriteId = CreateSprite(&gSpriteTemplate_83D6884, spriteX, spriteY, task->data[4]);
         if (spriteId != 0x40)
         {

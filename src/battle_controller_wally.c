@@ -1102,7 +1102,7 @@ void WallyHandleTrainerThrow(void)
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_813741C;
@@ -1117,7 +1117,7 @@ void WallyHandleTrainerSlide(void)
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
@@ -1477,7 +1477,7 @@ void WallyHandleTrainerBallThrow(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8030E38);

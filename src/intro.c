@@ -1678,8 +1678,8 @@ static void sub_813D158(struct Sprite *sprite)
     if (gSprites[sprite->data[7]].data[7] != 0)
     {
         sprite->invisible = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         StartSpriteAnim(sprite, 3);
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
@@ -1690,10 +1690,10 @@ static void sub_813D158(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos2.x = gSprites[sprite->data[7]].pos2.x;
-        sprite->pos2.y = gSprites[sprite->data[7]].pos2.y;
-        sprite->pos1.x = gSprites[sprite->data[7]].pos1.x;
-        sprite->pos1.y = gSprites[sprite->data[7]].pos1.y;
+        sprite->x2 = gSprites[sprite->data[7]].x2;
+        sprite->y2 = gSprites[sprite->data[7]].y2;
+        sprite->x = gSprites[sprite->data[7]].x;
+        sprite->y = gSprites[sprite->data[7]].y;
     }
 }
 
@@ -1705,12 +1705,12 @@ static void sub_813D208(struct Sprite *sprite)
 
 static void sub_813D220(struct Sprite *sprite)
 {
-    if (sprite->pos1.x <= 116)
+    if (sprite->x <= 116)
     {
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos1.x += 4;
-        sprite->pos2.x = -4;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x += 4;
+        sprite->x2 = -4;
         sprite->data[4] = 128;
         sprite->callback = sub_813D368;
     }
@@ -1733,10 +1733,10 @@ static void sub_813D220(struct Sprite *sprite)
         sin1 = gSineTable[(u8)data4];
         sin2 = gSineTable[(u8)(data4 + 64)];
         sprite->data[4] += 2;
-        sprite->pos2.y = sin1 / 32;
-        sprite->pos1.x--;
-        if (sprite->pos1.x & 1)
-            sprite->pos1.y++;
+        sprite->y2 = sin1 / 32;
+        sprite->x--;
+        if (sprite->x & 1)
+            sprite->y++;
         temp = -sin2 / 16;
         data2 = sprite->data[2];
         data3 = sprite->data[3];
@@ -1763,8 +1763,8 @@ static void sub_813D368(struct Sprite *sprite)
 
         sprite->data[4] -= 8;
         data4 = sprite->data[4];
-        sprite->pos2.x = gSineTable[(u8)(data4 + 64)] / 64;
-        sprite->pos2.y = gSineTable[(u8)data4] / 64;
+        sprite->x2 = gSineTable[(u8)(data4 + 64)] / 64;
+        sprite->y2 = gSineTable[(u8)data4] / 64;
     }
     else
     {
@@ -1781,8 +1781,8 @@ static void sub_813D414(struct Sprite *sprite)
 
         sprite->data[4] += 8;
         r2 = gSineTable[(u8)sprite->data[4]] / 16 + 64;
-        sprite->pos2.x = gSineTable[(u8)(r2 + 64)] / 64;
-        sprite->pos2.y = gSineTable[(u8)r2] / 64;
+        sprite->x2 = gSineTable[(u8)(r2 + 64)] / 64;
+        sprite->y2 = gSineTable[(u8)r2] / 64;
     }
     else
     {
@@ -1792,16 +1792,16 @@ static void sub_813D414(struct Sprite *sprite)
 
 static void SpriteCB_WaterDropFall(struct Sprite *sprite)
 {
-    if (sprite->pos1.y < sprite->data[5])
+    if (sprite->y < sprite->data[5])
     {
-        sprite->pos1.y += 4;
+        sprite->y += 4;
     }
     else
     {
         sprite->data[7] = 1;
         sprite->invisible = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         StartSpriteAnim(sprite, 3);
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
@@ -1815,16 +1815,16 @@ static void SpriteCB_WaterDropFall(struct Sprite *sprite)
 //Duplicate function
 static void SpriteCB_WaterDropFall_2(struct Sprite *sprite)
 {
-    if (sprite->pos1.y < sprite->data[5])
+    if (sprite->y < sprite->data[5])
     {
-        sprite->pos1.y += 4;
+        sprite->y += 4;
     }
     else
     {
         sprite->data[7] = 1;
         sprite->invisible = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
         StartSpriteAnim(sprite, 3);
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
@@ -1888,47 +1888,47 @@ static void sub_813D788(struct Sprite *sprite)
     {
     case 0:
         StartSpriteAnimIfDifferent(sprite, 0);
-        sprite->pos1.x--;
+        sprite->x--;
         break;
     case 1:
         StartSpriteAnimIfDifferent(sprite, 0);
         if (gIntroFrameCounter & 7)
             return;
-        sprite->pos1.x++;
+        sprite->x++;
         break;
     case 2:
         StartSpriteAnimIfDifferent(sprite, 2);
-        if (sprite->pos1.x <= 120 || (gIntroFrameCounter & 7))
-            sprite->pos1.x++;
+        if (sprite->x <= 120 || (gIntroFrameCounter & 7))
+            sprite->x++;
         break;
     case 3:
         StartSpriteAnimIfDifferent(sprite, 3);
         break;
     case 4:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 2;
+        if (sprite->x > -32)
+            sprite->x -= 2;
         break;
     }
     if (gIntroFrameCounter & 7)
         return;
-    if (sprite->pos2.y != 0)
+    if (sprite->y2 != 0)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
     }
     else
     {
         switch (Random() & 3)
         {
         case 0:
-            sprite->pos2.y = -1;
+            sprite->y2 = -1;
             break;
         case 1:
-            sprite->pos2.y = 1;
+            sprite->y2 = 1;
             break;
         case 2:
         case 3:
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             break;
         }
     }
@@ -1941,23 +1941,23 @@ static void sub_813D880(struct Sprite *sprite)
     case 0:
         break;
     case 1:
-        if (sprite->pos2.x + sprite->pos1.x < 304)
-            sprite->pos2.x += 8;
+        if (sprite->x2 + sprite->x < 304)
+            sprite->x2 += 8;
         else
             sprite->data[0] = 2;
         break;
     case 2:
-        if (sprite->pos2.x + sprite->pos1.x > 120)
-            sprite->pos2.x -= 1;
+        if (sprite->x2 + sprite->x > 120)
+            sprite->x2 -= 1;
         else
             sprite->data[0] = 3;
         break;
     case 3:
-        if (sprite->pos2.x > 0)
-            sprite->pos2.x -= 2;
+        if (sprite->x2 > 0)
+            sprite->x2 -= 2;
         break;
     }
-    sprite->pos2.y = Sin((u8)sprite->data[1], 8) - gUnknown_0203935A;
+    sprite->y2 = Sin((u8)sprite->data[1], 8) - gUnknown_0203935A;
     sprite->data[1] += 4;
 }
 
@@ -2028,8 +2028,8 @@ static void sub_813DA64(struct Sprite *sprite)
 
         if (sprite->data[3] < 0x50)
         {
-            sprite->pos2.y = -Sin((u8)sprite->data[3], 0x78);
-            sprite->pos2.x = -Sin((u8)sprite->data[3], 0x8C);
+            sprite->y2 = -Sin((u8)sprite->data[3], 0x78);
+            sprite->x2 = -Sin((u8)sprite->data[3], 0x8C);
             if (sprite->data[3] > 64)
                 sprite->oam.priority = 3;
         }
@@ -2070,13 +2070,13 @@ static void sub_813DB9C(struct Sprite *sprite)
         sprite->data[0] = 1;
         //fall through
     case 1:
-        if (sprite->pos1.y > 96)
+        if (sprite->y > 96)
         {
-            sprite->pos1.y -= 4;
+            sprite->y -= 4;
             if (sprite->data[2] != 0)
-                sprite->pos1.x += 2;
+                sprite->x += 2;
             else
-                sprite->pos1.x -= 2;
+                sprite->x -= 2;
         }
         else
         {
@@ -2108,16 +2108,16 @@ static void sub_813DB9C(struct Sprite *sprite)
         break;
     case 4:
         sprite->data[4]++;
-        if (sprite->pos1.y + sprite->pos2.y > -32
-         && sprite->pos1.x + sprite->pos2.x > -64)
+        if (sprite->y + sprite->y2 > -32
+         && sprite->x + sprite->x2 > -64)
         {
             u16 r2;
 
-            sprite->pos2.y = -(sprite->data[4] * sprite->data[4]) / 8;
+            sprite->y2 = -(sprite->data[4] * sprite->data[4]) / 8;
             if (sprite->data[2] != 0)
-                sprite->pos2.x += sprite->data[4];
+                sprite->x2 += sprite->data[4];
             else
-                sprite->pos2.x -= sprite->data[4];
+                sprite->x2 -= sprite->data[4];
             if (sprite->data[3] < 128)
                 sprite->data[3] += 8;
             r2 = 256 - sprite->data[3];
@@ -2167,11 +2167,11 @@ static void sub_813DD58(struct Sprite *sprite)
         break;
     case 3:
         sprite->data[4]++;
-        sprite->pos2.y = sprite->data[4] * sprite->data[4] / 32;
+        sprite->y2 = sprite->data[4] * sprite->data[4] / 32;
         if (sprite->data[2] != 0)
-            sprite->pos2.x = sprite->data[4] / 4;
+            sprite->x2 = sprite->data[4] / 4;
         else
-            sprite->pos2.x = -(sprite->data[4] / 4);
+            sprite->x2 = -(sprite->data[4] / 4);
         break;
     }
 }
@@ -2182,9 +2182,9 @@ static void sub_813DE70(struct Sprite *sprite)
     {
     case 0:
     default:
-        if (sprite->pos1.x > 40)
+        if (sprite->x > 40)
         {
-            sprite->pos1.x -= 4;
+            sprite->x -= 4;
         }
         else
         {
@@ -2203,23 +2203,23 @@ static void sub_813DE70(struct Sprite *sprite)
         sprite->data[0]++;
         break;
     case 3:
-        if (sprite->pos1.y > 160)
+        if (sprite->y > 160)
         {
             sprite->invisible = TRUE;
             sprite->data[0] = 1;
         }
         else
         {
-            sprite->pos1.y += 2;
-            sprite->pos1.x--;
+            sprite->y += 2;
+            sprite->x--;
         }
         break;
     case 4:
     {
         s16 r4, r5;
 
-        r5 = gSprites[sprite->data[6]].pos1.x + gSprites[sprite->data[6]].pos2.x;
-        r4 = gSprites[sprite->data[6]].pos1.y + gSprites[sprite->data[6]].pos2.y;
+        r5 = gSprites[sprite->data[6]].x + gSprites[sprite->data[6]].x2;
+        r4 = gSprites[sprite->data[6]].y + gSprites[sprite->data[6]].y2;
         DestroySprite(&gSprites[sprite->data[6]]);
         sprite->data[6] = sub_813CE88(SPECIES_TORCHIC, r5, r4, 2, 1);
         gSprites[sprite->data[6]].callback = sub_813DD58;
@@ -2228,8 +2228,8 @@ static void sub_813DE70(struct Sprite *sprite)
         gSprites[sprite->data[6]].data[2] = 1;
         sub_813E580(r5, r4);
 
-        r5 = gSprites[sprite->data[7]].pos1.x + gSprites[sprite->data[7]].pos2.x;
-        r4 = gSprites[sprite->data[7]].pos1.y + gSprites[sprite->data[7]].pos2.y;
+        r5 = gSprites[sprite->data[7]].x + gSprites[sprite->data[7]].x2;
+        r4 = gSprites[sprite->data[7]].y + gSprites[sprite->data[7]].y2;
         DestroySprite(&gSprites[sprite->data[7]]);
         sprite->data[7] = sub_813CE88(SPECIES_MUDKIP, r5, r4, 3, 1);
         gSprites[sprite->data[7]].callback = sub_813DD58;
@@ -2260,19 +2260,19 @@ static void sub_813E10C(struct Sprite *sprite)
     {
     case 0:
     default:
-        if (sprite->pos2.x > -56)
+        if (sprite->x2 > -56)
         {
-            sprite->pos2.x -= 8;
-            sprite->pos2.y += 6;
+            sprite->x2 -= 8;
+            sprite->y2 += 6;
         }
         else
         {
-            sprite->data[6] = sprite->pos1.x;
-            sprite->data[7] = sprite->pos1.y;
-            sprite->pos1.x += sprite->pos2.x;
-            sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
+            sprite->data[6] = sprite->x;
+            sprite->data[7] = sprite->y;
+            sprite->x += sprite->x2;
+            sprite->y += sprite->y2;
+            sprite->x2 = 0;
+            sprite->y2 = 0;
             sprite->data[0] = 1;
             sprite->data[1] = 0;
         }
@@ -2282,40 +2282,40 @@ static void sub_813E10C(struct Sprite *sprite)
         {
             if (sprite->data[1] & 2)
             {
-                sprite->pos2.x = -1;
-                sprite->pos2.y = 1;
+                sprite->x2 = -1;
+                sprite->y2 = 1;
             }
             else
             {
-                sprite->pos2.x = 0;
-                sprite->pos2.y = 0;
+                sprite->x2 = 0;
+                sprite->y2 = 0;
             }
         }
         sprite->data[1]++;
         break;
     case 2:
         sprite->invisible = TRUE;
-        sprite->pos1.x = sprite->data[6];
-        sprite->pos1.y = sprite->data[7];
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x = sprite->data[6];
+        sprite->y = sprite->data[7];
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         break;
     case 3:
         sprite->invisible = FALSE;
         sprite->data[1]++;
         //fall through
     case 4:
-        if (sprite->pos2.x > -56)
+        if (sprite->x2 > -56)
         {
-            sprite->pos2.x -= 4;
-            sprite->pos2.y += 3;
+            sprite->x2 -= 4;
+            sprite->y2 += 3;
         }
         else
         {
-            sprite->pos1.x += sprite->pos2.x;
-            sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
+            sprite->x += sprite->x2;
+            sprite->y += sprite->y2;
+            sprite->x2 = 0;
+            sprite->y2 = 0;
             sprite->data[0] = 1;
         }
         break;
@@ -2328,19 +2328,19 @@ static void sub_813E210(struct Sprite *sprite)
     {
     case 0:
     default:
-        if (sprite->pos2.x < 56)
+        if (sprite->x2 < 56)
         {
-            sprite->pos2.x += 8;
-            sprite->pos2.y -= 6;
+            sprite->x2 += 8;
+            sprite->y2 -= 6;
         }
         else
         {
-            sprite->data[6] = sprite->pos1.x;
-            sprite->data[7] = sprite->pos1.y;
-            sprite->pos1.x += sprite->pos2.x;
-            sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
+            sprite->data[6] = sprite->x;
+            sprite->data[7] = sprite->y;
+            sprite->x += sprite->x2;
+            sprite->y += sprite->y2;
+            sprite->x2 = 0;
+            sprite->y2 = 0;
             sprite->data[0] = 1;
             sprite->data[1] = 0;
         }
@@ -2350,40 +2350,40 @@ static void sub_813E210(struct Sprite *sprite)
         {
             if (sprite->data[1] & 2)
             {
-                sprite->pos2.x = 1;
-                sprite->pos2.y = -1;
+                sprite->x2 = 1;
+                sprite->y2 = -1;
             }
             else
             {
-                sprite->pos2.x = 0;
-                sprite->pos2.y = 0;
+                sprite->x2 = 0;
+                sprite->y2 = 0;
             }
         }
         sprite->data[1]++;
         break;
     case 2:
         sprite->invisible = TRUE;
-        sprite->pos1.x = sprite->data[6];
-        sprite->pos1.y = sprite->data[7];
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x = sprite->data[6];
+        sprite->y = sprite->data[7];
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         break;
     case 3:
         sprite->invisible = FALSE;
         sprite->data[1]++;
         //fall through
     case 4:
-        if (sprite->pos2.x < 56)
+        if (sprite->x2 < 56)
         {
-            sprite->pos2.x += 4;
-            sprite->pos2.y -= 3;
+            sprite->x2 += 4;
+            sprite->y2 -= 3;
         }
         else
         {
-            sprite->pos1.x += sprite->pos2.x;
-            sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.x = 0;
-            sprite->pos2.y = 0;
+            sprite->x += sprite->x2;
+            sprite->y += sprite->y2;
+            sprite->x2 = 0;
+            sprite->y2 = 0;
             sprite->data[0] = 1;
         }
         break;
@@ -2407,11 +2407,11 @@ static void sub_813E30C(struct Sprite *sprite)
         sprite->data[4] = 36;
         //fall through
     case 10:
-        if (sprite->pos1.x <= 144)
+        if (sprite->x <= 144)
         {
-            sprite->pos1.x += 4;
-            sprite->pos1.y -= 1;
-            sprite->pos2.y = -Sin((u8)sprite->data[2], 24);
+            sprite->x += 4;
+            sprite->y -= 1;
+            sprite->y2 = -Sin((u8)sprite->data[2], 24);
             sprite->data[2] += 4;
         }
         sprite->data[3] -= sprite->data[4];
@@ -2428,11 +2428,11 @@ static void sub_813E30C(struct Sprite *sprite)
         sprite->data[4] = 36;
         //fall through
     case 20:
-        if (sprite->pos1.x <= 96)
+        if (sprite->x <= 96)
         {
-            sprite->pos1.x += 3;
-            sprite->pos1.y -= 1;
-            sprite->pos2.y = -Sin((u8)sprite->data[2], 24);
+            sprite->x += 3;
+            sprite->y -= 1;
+            sprite->y2 = -Sin((u8)sprite->data[2], 24);
             sprite->data[2] += 4;
         }
         sprite->data[3] -= sprite->data[4];
@@ -2463,8 +2463,8 @@ static void sub_813E4B8(struct Sprite *sprite)
     }
     sprite->data[2] += 2;
     r4 = Sin((u8)sprite->data[2], 40);
-    sprite->pos2.x = Cos((u8)(sprite->data[0] * 32), r4);
-    sprite->pos2.y = Sin((u8)(sprite->data[0] * 32), r4);
+    sprite->x2 = Cos((u8)(sprite->data[0] * 32), r4);
+    sprite->y2 = Sin((u8)(sprite->data[0] * 32), r4);
     if (sprite->data[0] == 0)
     {
         sprite->data[3] -= sprite->data[1];
@@ -2503,12 +2503,12 @@ static void sub_813E5E0(struct Sprite *sprite)
         if (sprite->data[7] < 12)
             sprite->data[7]++;
         sprite->data[6] += 4;
-        sprite->pos1.x = sprite->data[4] + gSineTable[(u8)(sprite->data[3] + 64)] * sprite->data[6] / 256;
+        sprite->x = sprite->data[4] + gSineTable[(u8)(sprite->data[3] + 64)] * sprite->data[6] / 256;
         //This useless '+ 0' is needed to make the asm match
-        sprite->pos1.y = sprite->data[5] + gSineTable[(u8)(sprite->data[3] + 0)] * sprite->data[6] / 256;
-        sprite->pos2.y = gSineTable[(u8)(sprite->data[1] + 0)] * sprite->data[7] / 256;
+        sprite->y = sprite->data[5] + gSineTable[(u8)(sprite->data[3] + 0)] * sprite->data[6] / 256;
+        sprite->y2 = gSineTable[(u8)(sprite->data[1] + 0)] * sprite->data[7] / 256;
         sprite->data[1] += 16;
-        if (sprite->pos1.y > sprite->data[2])
+        if (sprite->y > sprite->data[2])
             DestroySprite(sprite);
     }
 }
@@ -2530,8 +2530,8 @@ static void sub_813E6C0(struct Sprite *sprite)
         sprite->invisible = TRUE;
         if (gSprites[sprite->data[0]].data[0] == 1 && !(sprite->data[7] & 3))
         {
-            var1 = sprite->data[1] + gSprites[sprite->data[0]].pos1.x;
-            var2 = sprite->data[2] + gSprites[sprite->data[0]].pos1.y;
+            var1 = sprite->data[1] + gSprites[sprite->data[0]].x;
+            var2 = sprite->data[2] + gSprites[sprite->data[0]].y;
             for (i = 0; i < 3; i++)
             {
                 u8 r3 = gSprites[sprite->data[0]].subpriority - 1;
@@ -2582,10 +2582,10 @@ static void sub_813E804(struct Sprite *sprite)
         if (sprite->data[3] < 40)
             sprite->data[3] += 2;
         //This useless '+ 0' is needed to make the asm match
-        sprite->pos1.x = gSprites[sprite->data[0]].pos1.x + gSprites[sprite->data[0]].pos2.x + gSineTable[(u8)(sprite->data[1] + 64)] * sprite->data[3] / 256;
-        sprite->pos1.y = gSprites[sprite->data[0]].pos1.y + gSprites[sprite->data[0]].pos2.y + gSineTable[(u8)(sprite->data[1] + 0)] * sprite->data[3] / 512;
+        sprite->x = gSprites[sprite->data[0]].x + gSprites[sprite->data[0]].x2 + gSineTable[(u8)(sprite->data[1] + 64)] * sprite->data[3] / 256;
+        sprite->y = gSprites[sprite->data[0]].y + gSprites[sprite->data[0]].y2 + gSineTable[(u8)(sprite->data[1] + 0)] * sprite->data[3] / 512;
         sprite->data[1] += 2;
-        sprite->pos2.y = gSineTable[(u8)(sprite->data[2] + 0)] / 32;
+        sprite->y2 = gSineTable[(u8)(sprite->data[2] + 0)] / 32;
         sprite->data[2] += 8;
         if ((sprite->data[1] & 0xFF) < 128)
             sprite->subpriority = gSprites[sprite->data[0]].subpriority - 1;
@@ -2601,7 +2601,7 @@ static void sub_813E930(u8 a)
 
     for (i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gSpriteTemplate_840B124, gSprites[a].pos1.x, gSprites[a].pos1.y, 0);
+        spriteId = CreateSprite(&gSpriteTemplate_840B124, gSprites[a].x, gSprites[a].y, 0);
         if (spriteId != 64)
         {
             gSprites[spriteId].data[0] = a;
@@ -2624,8 +2624,8 @@ static void sub_813E980(struct Sprite *sprite)
         sprite->invisible = gSprites[sprite->data[0]].invisible;
         sprite->data[7]++;
         sprite->data[6] += 8;
-        sprite->pos1.x = sprite->data[4] + gSineTable[(u8)(sprite->data[3] + 64)] * sprite->data[6] / 256;
-        sprite->pos1.y = sprite->data[5] + gSineTable[(u8)(sprite->data[3] + 0)] * sprite->data[6] / 256;
+        sprite->x = sprite->data[4] + gSineTable[(u8)(sprite->data[3] + 64)] * sprite->data[6] / 256;
+        sprite->y = sprite->data[5] + gSineTable[(u8)(sprite->data[3] + 0)] * sprite->data[6] / 256;
         r0 = sprite->data[6] / 16;
         if (r0 > 9)
             r0 = 9;
@@ -2655,8 +2655,8 @@ static void sub_813EA60(struct Sprite *sprite)
             r6 = (sprite->data[7] & 1);
             if (!r6)
             {
-                r1 = sprite->data[1] + gSprites[sprite->data[0]].pos1.x;
-                r2 = sprite->data[2] + gSprites[sprite->data[0]].pos1.y;
+                r1 = sprite->data[1] + gSprites[sprite->data[0]].x;
+                r2 = sprite->data[2] + gSprites[sprite->data[0]].y;
                 spriteId = CreateSprite(&gSpriteTemplate_840B150, r1, r2, gSprites[sprite->data[0]].subpriority + 1);
                 if (spriteId != 64)
                 {
@@ -2704,11 +2704,11 @@ static void sub_813EBBC(struct Sprite *sprite)
         sprite->invisible = gSprites[sprite->data[0]].invisible;
         sprite->data[7] += 1;
         sprite->data[6] += 8;
-        sprite->pos1.x = sprite->data[4] + gSineTable[(u8)(sprite->data[3] + 64)] * sprite->data[6] / 256;
-        sprite->pos1.y = sprite->data[5] + gSineTable[(u8)(sprite->data[3] + 0)] * sprite->data[6] / 256;
-        sprite->pos2.y = gSineTable[(u8)(sprite->data[1] + 0)] / 64;
+        sprite->x = sprite->data[4] + gSineTable[(u8)(sprite->data[3] + 64)] * sprite->data[6] / 256;
+        sprite->y = sprite->data[5] + gSineTable[(u8)(sprite->data[3] + 0)] * sprite->data[6] / 256;
+        sprite->y2 = gSineTable[(u8)(sprite->data[1] + 0)] / 64;
         sprite->data[1] += 16;
-        if (sprite->pos1.y < sprite->data[2])
+        if (sprite->y < sprite->data[2])
             DestroySprite(sprite);
     }
 }
@@ -2733,8 +2733,8 @@ static void sub_813EC90(struct Sprite *sprite)
             r6 = sprite->data[7] & 1;
             if (!r6)
             {
-                r1 = sprite->data[1] + gSprites[sprite->data[0]].pos1.x;
-                r2 = sprite->data[2] + gSprites[sprite->data[0]].pos1.y;
+                r1 = sprite->data[1] + gSprites[sprite->data[0]].x;
+                r2 = sprite->data[2] + gSprites[sprite->data[0]].y;
                 spriteId = CreateSprite(&gSpriteTemplate_840B1B0, r1, r2, gSprites[sprite->data[0]].subpriority + 1);
                 if (spriteId != 64)
                 {

@@ -1994,7 +1994,7 @@ void sub_80AFE78(u8 a)
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = a;
     gSprites[spriteId].data[1] = r5;
-    if (gSprites[spriteId].data[1] > gSprites[spriteId].pos2.x)
+    if (gSprites[spriteId].data[1] > gSprites[spriteId].x2)
         gSprites[spriteId].data[2] = 1;
     else
         gSprites[spriteId].data[2] = -1;
@@ -2026,14 +2026,14 @@ bool8 SlidersDoneUpdating(void)
 
 void sub_80AFF60(struct Sprite *sprite)
 {
-    if (sprite->pos2.x == sprite->data[1])
+    if (sprite->x2 == sprite->data[1])
     {
         eContestGfxState[sprite->data[0]].sliderUpdating = 0;
         sprite->callback = SpriteCallbackDummy;
     }
     else
     {
-        sprite->pos2.x += sprite->data[2];
+        sprite->x2 += sprite->data[2];
     }
 }
 
@@ -2042,7 +2042,7 @@ void UpdateSliderHeartSpriteYPositions(void)
     s32 i;
 
     for (i = 0; i < 4; i++)
-        gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.y = sSliderHeartYPositions[gContestantTurnOrder[i]];
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 }
 
 void SetBottomSliderHeartsInvisibility(bool8 a)
@@ -2054,9 +2054,9 @@ void SetBottomSliderHeartsInvisibility(bool8 a)
         if (gContestantTurnOrder[i] > 1)
         {
             if (!a)
-                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 180;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].x = 180;
             else
-                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 256;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].x = 256;
         }
     }
 }
@@ -3461,7 +3461,7 @@ void Task_ApplauseOverflowAnimation(u8 taskId)
 void SlideApplauseMeterIn(void)
 {
     CreateTask(Task_SlideApplauseMeterIn, 10);
-    gSprites[sContest.applauseMeterSpriteId].pos2.x = -70;
+    gSprites[sContest.applauseMeterSpriteId].x2 = -70;
     gSprites[sContest.applauseMeterSpriteId].invisible = FALSE;
     sContest.applauseMeterIsMoving = 1;
 }
@@ -3471,11 +3471,11 @@ void Task_SlideApplauseMeterIn(u8 taskId)
     struct Sprite *sprite = &gSprites[sContest.applauseMeterSpriteId];
 
     gTasks[taskId].data[10] += 1664;
-    sprite->pos2.x += gTasks[taskId].data[10] >> 8;
+    sprite->x2 += gTasks[taskId].data[10] >> 8;
     gTasks[taskId].data[10] = gTasks[taskId].data[10] & 0xFF;
-    if (sprite->pos2.x > 0)
-        sprite->pos2.x = 0;
-    if (sprite->pos2.x == 0)
+    if (sprite->x2 > 0)
+        sprite->x2 = 0;
+    if (sprite->x2 == 0)
     {
         sContest.applauseMeterIsMoving = 0;
         DestroyTask(taskId);
@@ -3491,7 +3491,7 @@ void SlideApplauseMeterOut(void)
     else
     {
         CreateTask(Task_SlideApplauseMeterOut, 10);
-        gSprites[sContest.applauseMeterSpriteId].pos2.x = 0;
+        gSprites[sContest.applauseMeterSpriteId].x2 = 0;
         sContest.applauseMeterIsMoving = 1;
     }
 }
@@ -3501,11 +3501,11 @@ void Task_SlideApplauseMeterOut(u8 taskId)
     struct Sprite *sprite = &gSprites[sContest.applauseMeterSpriteId];
 
     gTasks[taskId].data[10] += 1664;
-    sprite->pos2.x -= gTasks[taskId].data[10] >> 8;
+    sprite->x2 -= gTasks[taskId].data[10] >> 8;
     gTasks[taskId].data[10] = gTasks[taskId].data[10] & 0xFF;
-    if (sprite->pos2.x < -70)
-        sprite->pos2.x = -70;
-    if (sprite->pos2.x == -70)
+    if (sprite->x2 < -70)
+        sprite->x2 = -70;
+    if (sprite->x2 == -70)
     {
         sprite->invisible = TRUE;
         sContest.applauseMeterIsMoving = 0;
@@ -3551,7 +3551,7 @@ void Task_ShowAndUpdateApplauseMeter(u8 taskId)
 UNUSED
 void HideApplauseMeterNoAnim(void)
 {
-    gSprites[sContest.applauseMeterSpriteId].pos2.x = 0;
+    gSprites[sContest.applauseMeterSpriteId].x2 = 0;
     gSprites[sContest.applauseMeterSpriteId].invisible = FALSE;
 }
 
@@ -3689,7 +3689,7 @@ void ShowHideNextTurnGfx(bool8 a)
                 GetTurnOrderNumberGfx(i),
                 (void *)(VRAM + 0x10000 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 5) * 32),
                 64);
-            gSprites[eContestGfxState[i].nextTurnSpriteId].pos1.y = gUnknown_083CA33C[gContestantTurnOrder[i]];
+            gSprites[eContestGfxState[i].nextTurnSpriteId].y = gUnknown_083CA33C[gContestantTurnOrder[i]];
             gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = FALSE;
         }
         else
@@ -4037,10 +4037,10 @@ void SetBattleTargetSpritePosition(void)
 {
     struct Sprite *sprite = &gSprites[gBattlerSpriteIds[3]];
 
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
-    sprite->pos1.x = GetBattlerSpriteCoord(3, 0);
-    sprite->pos1.y = GetBattlerSpriteCoord(3, 1);
+    sprite->x2 = 0;
+    sprite->y2 = 0;
+    sprite->x = GetBattlerSpriteCoord(3, 0);
+    sprite->y = GetBattlerSpriteCoord(3, 1);
     sprite->invisible = TRUE;
 }
 

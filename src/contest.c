@@ -719,7 +719,7 @@ void debug_sub_80BA054(u8 taskId)
 	  gContestMons[gContestPlayerMonIndex].species, 
 	  gContestMons[gContestPlayerMonIndex].otId, 
 	  gContestMons[gContestPlayerMonIndex].personality);
-	gSprites[r6].pos2.x = 120;
+	gSprites[r6].x2 = 120;
 	gSprites[r6].callback = SpriteCB_MonSlideIn;
 	gTasks[taskId].data[2] = r6;
 	gBattlerSpriteIds[gBattlerAttacker] = r6;
@@ -932,7 +932,7 @@ void Task_DoAppeals(u8 taskId)
           gContestMons[sContest.currentContestant].species,
           gContestMons[sContest.currentContestant].otId,
           gContestMons[sContest.currentContestant].personality);
-        gSprites[spriteId].pos2.x = 120;
+        gSprites[spriteId].x2 = 120;
         gSprites[spriteId].callback = SpriteCB_MonSlideIn;
         gTasks[taskId].data[2] = spriteId;
         gBattlerSpriteIds[gBattlerAttacker] = spriteId;
@@ -1594,9 +1594,9 @@ void Task_EndWaitForLink(u8 taskId)
 
 void SpriteCB_MonSlideIn(struct Sprite *sprite)
 {
-    if (sprite->pos2.x != 0)
+    if (sprite->x2 != 0)
     {
-        sprite->pos2.x -= 2;
+        sprite->x2 -= 2;
     }
     else
     {
@@ -1610,8 +1610,8 @@ void SpriteCB_MonSlideIn(struct Sprite *sprite)
 
 void SpriteCB_MonSlideOut(struct Sprite *sprite)
 {
-    sprite->pos2.x -= 6;
-    if (sprite->pos1.x + sprite->pos2.x < -32)
+    sprite->x2 -= 6;
+    if (sprite->x + sprite->x2 < -32)
     {
         sprite->callback = SpriteCallbackDummy;
         sprite->invisible = TRUE;

@@ -120,10 +120,10 @@ void sub_80CE09C(struct Sprite* sprite)
 {
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
         if (IsContest())
-            sprite->pos1.y += 10;
+            sprite->y += 10;
         sprite->data[0]++;
     }
 

@@ -2566,7 +2566,7 @@ void sub_81000C4(u8 taskId)
         gUnknown_020391A6 = gTasks[taskId].data[1] - 7;
         ScriptContext1_SetupScript(gUnknown_081A2F7B);
     }
-    gSprites[gUnknown_020391A8].pos1.y += 2;
+    gSprites[gUnknown_020391A8].y += 2;
     sub_810028C(taskId);
 }
 
@@ -3241,8 +3241,8 @@ void sub_8100EEC(u8 taskId)
     gSprites[gUnknown_020391A8].data[7] = 0;
     gSprites[gUnknown_020391A8].invisible = FALSE;
     gSprites[gUnknown_020391A8].callback = sub_8101698;
-    gSprites[gUnknown_020391A9].pos1.x = 0x88;
-    gSprites[gUnknown_020391A9].pos1.y = 0x48;
+    gSprites[gUnknown_020391A9].x = 0x88;
+    gSprites[gUnknown_020391A9].y = 0x48;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8100494;
 }
@@ -3345,8 +3345,8 @@ void sub_8101198(u8 x, u8 y)
 {
     gSprites[gUnknown_020391A8].invisible = TRUE;
     gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_020391A9].pos1.x = 0x88 + x * 16;
-    gSprites[gUnknown_020391A9].pos1.y = 0x48 + y * 16;
+    gSprites[gUnknown_020391A9].x = 0x88 + x * 16;
+    gSprites[gUnknown_020391A9].y = 0x48 + y * 16;
 }
 
 bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B4)

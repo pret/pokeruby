@@ -61,13 +61,13 @@ void sub_80CD274(struct Sprite* sprite)
     sub_8078650(sprite);
     if (GetBattlerSide(gBattleAnimAttacker) == 0)
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
     }
     else
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x -= gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         StartSpriteAnim(sprite, 1);
     }
 
@@ -78,8 +78,8 @@ static void sub_80CD2D4(struct Sprite* sprite)
 {
     if (++sprite->data[0] > 30)
     {
-        sprite->pos2.y = (30 - sprite->data[0]) / 3;
-        sprite->pos2.x = Sin(sprite->data[1] * 4, 3);
+        sprite->y2 = (30 - sprite->data[0]) / 3;
+        sprite->x2 = Sin(sprite->data[1] * 4, 3);
         sprite->data[1]++;
     }
 

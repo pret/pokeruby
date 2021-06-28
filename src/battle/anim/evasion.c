@@ -90,6 +90,6 @@ void sub_80CE974(struct Sprite* sprite)
         sprite->data[4] = gSineTable[sprite->data[0]] / 6;
         sprite->data[5] = gSineTable[sprite->data[0]] / 13;
         sprite->data[1] = (sprite->data[1] + sprite->data[5]) & 0xFF;
-        sprite->pos2.x = Sin(sprite->data[1], sprite->data[4]);
+        sprite->x2 = Sin(sprite->data[1], sprite->data[4]);
     }
 }

@@ -3922,7 +3922,7 @@ static void sub_80A79EC(struct Sprite *sprite)
         {
             sprite->animBeginning = TRUE;
             sprite->animNum = 0;
-            sprite->pos1.y -= 4;
+            sprite->y -= 4;
             sprite->data[0] = 4;
             sprite->data[3] = 1;
             sub_80A7AE4(sprite);
@@ -3933,7 +3933,7 @@ static void sub_80A79EC(struct Sprite *sprite)
         {
             if (sprite->data[1] != 0)
             {
-                sprite->pos1.y++;
+                sprite->y++;
                 sprite->data[0]--;
             }
             sprite->data[1] = (sprite->data[1] + 1) & 1;
@@ -4310,7 +4310,7 @@ u8 CreateBerrySprite(u8 berryId, s16 x, s16 y)
 
 static void SpriteCB_BerrySprite(struct Sprite *sprite)
 {
-    sprite->pos2.y = -gBattle_BG1_Y;
+    sprite->y2 = -gBattle_BG1_Y;
 }
 
 void sub_80A7DD4(void)

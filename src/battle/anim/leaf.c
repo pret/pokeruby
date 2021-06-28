@@ -117,8 +117,8 @@ const struct SpriteTemplate gSwiftStarSpriteTemplate =
 
 void sub_80CAED8(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = gBattleAnimArgs[2];
@@ -146,8 +146,8 @@ static void sub_80CAF20(struct Sprite* sprite)
     else
     {
         sprite->data[2]--;
-        sprite->pos1.x += sprite->data[0];
-        sprite->pos1.y += sprite->data[1];
+        sprite->x += sprite->data[0];
+        sprite->y += sprite->data[1];
     }
 }
 
@@ -155,18 +155,18 @@ static void sub_80CAF6C(struct Sprite* sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker))
     {
-        sprite->pos2.x = -Sin(sprite->data[0], 0x19);
+        sprite->x2 = -Sin(sprite->data[0], 0x19);
     }
     else
     {
-        sprite->pos2.x = Sin(sprite->data[0], 0x19);
+        sprite->x2 = Sin(sprite->data[0], 0x19);
     }
 
     sprite->data[0] = (sprite->data[0] + 2) & 0xFF;
     sprite->data[1]++;
     if (!(sprite->data[1] & 1))
     {
-        sprite->pos2.y++;
+        sprite->y2++;
     }
 
     if (sprite->data[1] > 0x50)
@@ -242,10 +242,10 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
             destroy = TRUE;
     }
     
-    if (sprite->pos1.x + sprite->pos2.x > 256
-     || sprite->pos1.x + sprite->pos2.x < -16
-     || sprite->pos1.y + sprite->pos2.y > 160
-     || sprite->pos1.y + sprite->pos2.y < -16)
+    if (sprite->x + sprite->x2 > 256
+     || sprite->x + sprite->x2 < -16
+     || sprite->y + sprite->y2 > 160
+     || sprite->y + sprite->y2 < -16)
         destroy = TRUE;
 
     if (destroy)
@@ -262,10 +262,10 @@ void AnimMoveTwisterParticle(struct Sprite* sprite)
 {
     if (!IsContest() && IsDoubleBattle() == TRUE)
     {
-        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->x, &sprite->y);
     }
 
-    sprite->pos1.y += 32;
+    sprite->y += 32;
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = gBattleAnimArgs[2];
@@ -278,11 +278,11 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite)
 {
     if (sprite->data[1] == 0xFF)
     {
-        sprite->pos1.y -= 2;
+        sprite->y -= 2;
     }
     else if (sprite->data[1] > 0)
     {
-        sprite->pos1.y -= 2;
+        sprite->y -= 2;
         sprite->data[1] -= 2;
     }
 
@@ -291,8 +291,8 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite)
         sprite->data[5] += sprite->data[2];
 
     sprite->data[5] &= 0xFF;
-    sprite->pos2.x = Cos(sprite->data[5], sprite->data[3]);
-    sprite->pos2.y = Sin(sprite->data[5], 5);
+    sprite->x2 = Cos(sprite->data[5], sprite->data[3]);
+    sprite->y2 = Sin(sprite->data[5], 5);
     if (sprite->data[5] <= 0x7F)
     {
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) - 1;

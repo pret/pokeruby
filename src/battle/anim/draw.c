@@ -120,8 +120,8 @@ static void sub_80D0D68(u8 taskId)
 
 void sub_80D0E30(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) - 16;
-    sprite->pos1.y = sub_8077FC0(gBattleAnimTarget) + 16;
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) - 16;
+    sprite->y = sub_8077FC0(gBattleAnimTarget) + 16;
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
@@ -152,7 +152,7 @@ static void sub_80D0E8C(struct Sprite* sprite)
         if (++sprite->data[1] > 3 && sprite->data[2] < sprite->data[5])
         {
             sprite->data[1] = 0;
-            sprite->pos1.y -= 1;
+            sprite->y -= 1;
             sprite->data[2]++;
             if (sprite->data[2] % 10 == 0)
                 PlaySE12WithPanning(0xCD, sprite->data[6]);
@@ -168,7 +168,7 @@ static void sub_80D0E8C(struct Sprite* sprite)
             sprite->data[4] = -0x40 - sprite->data[4];
             sprite->data[3] *= -1;
         }
-        sprite->pos2.x = sprite->data[4];
+        sprite->x2 = sprite->data[4];
         if (sprite->data[5] == sprite->data[2])
         {
             sprite->data[1] = 0;

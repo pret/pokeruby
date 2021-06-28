@@ -1847,8 +1847,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+        gTasks[taskId].data[2] = gSprites[spriteId].y + gSprites[spriteId].y2;
         if (toBG_2 == 0)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -1878,8 +1878,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+        gTasks[taskId].data[2] = gSprites[spriteId].y + gSprites[spriteId].y2;
         if (toBG_2 == 0)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -1939,10 +1939,10 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
 
         spriteId = gBattlerSpriteIds[bank];
-        gBattle_BG1_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
+        gBattle_BG1_X = -(gSprites[spriteId].x + gSprites[spriteId].x2) + 32;
         if (IsContest() && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
             gBattle_BG1_X--;
-        gBattle_BG1_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
+        gBattle_BG1_Y = -(gSprites[spriteId].y + gSprites[spriteId].y2) + 32;
         gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
 
         REG_BG1HOFS = gBattle_BG1_X;
@@ -1973,8 +1973,8 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
 
         spriteId = gBattlerSpriteIds[bank];
-        gBattle_BG2_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
-        gBattle_BG2_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
+        gBattle_BG2_X = -(gSprites[spriteId].x + gSprites[spriteId].x2) + 32;
+        gBattle_BG2_Y = -(gSprites[spriteId].y + gSprites[spriteId].y2) + 32;
         gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
 
         REG_BG2HOFS = gBattle_BG2_X;
@@ -2069,8 +2069,8 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
     sub_8078914(&s);
-    x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
-    y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
+    x = gTasks[taskId].data[1] - (gSprites[spriteId].x + gSprites[spriteId].x2);
+    y = gTasks[taskId].data[2] - (gSprites[spriteId].y + gSprites[spriteId].y2);
 
     if (gTasks[taskId].data[5] == 0)
     {

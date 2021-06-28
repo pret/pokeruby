@@ -52,7 +52,7 @@ void AnimTask_SplashStep(u8 taskId)
     case 0:
         RunAffineAnimFromTaskData(task);
         task->data[4] += 3;
-        gSprites[task->data[0]].pos2.y += task->data[4];
+        gSprites[task->data[0]].y2 += task->data[4];
         if (++task->data[3] > 7)
         {
             task->data[3] = 0;
@@ -61,7 +61,7 @@ void AnimTask_SplashStep(u8 taskId)
         break;
     case 1:
         RunAffineAnimFromTaskData(task);
-        gSprites[task->data[0]].pos2.y += task->data[4];
+        gSprites[task->data[0]].y2 += task->data[4];
         if (++task->data[3] > 7)
         {
             task->data[3] = 0;
@@ -71,7 +71,7 @@ void AnimTask_SplashStep(u8 taskId)
     case 2:
         if (task->data[4] != 0)
         {
-            gSprites[task->data[0]].pos2.y -= 2;
+            gSprites[task->data[0]].y2 -= 2;
             task->data[4] -= 2;
         }
         else
@@ -82,7 +82,7 @@ void AnimTask_SplashStep(u8 taskId)
         {
             if (--task->data[2] == 0)
             {
-                gSprites[task->data[0]].pos2.y = 0;
+                gSprites[task->data[0]].y2 = 0;
                 DestroyAnimVisualTask(taskId);
             }
             else

@@ -166,10 +166,10 @@ void sub_80CF0BC(struct Sprite* sprite)
     else
         bank = gBattleAnimTarget;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(bank, 0);
-    sprite->pos1.y = GetBattlerSpriteCoordAttr(bank, 2);
-    if (sprite->pos1.y <= 9)
-        sprite->pos1.y = 10;
+    sprite->x = GetBattlerSpriteCoord(bank, 0);
+    sprite->y = GetBattlerSpriteCoordAttr(bank, 2);
+    if (sprite->y <= 9)
+        sprite->y = 10;
 
     sprite->data[0] = 1;
     sprite->data[1] = 0;
@@ -195,7 +195,7 @@ static void sub_80CF158(struct Sprite* sprite)
     {
         if (--sprite->data[0] == 0)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sprite->callback = sub_80CF088;
             return;
         }
@@ -212,7 +212,7 @@ static void sub_80CF158(struct Sprite* sprite)
         sprite->subpriority = sprite->data[2];
 
     temp = gSineTable[sprite->data[1]];
-    sprite->pos2.x = (temp2 = temp >> 3) + (temp2 >> 1);
+    sprite->x2 = (temp2 = temp >> 3) + (temp2 >> 1);
 }
 
 void sub_80CF1C8(struct Sprite* sprite)
