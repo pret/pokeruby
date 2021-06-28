@@ -1449,14 +1449,14 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].tAzurillSpriteId = spriteId;
 
     //Create Brendan sprite
-    spriteId = CreateTrainerSprite(0, 120, 60, 0, eBrendanSprite);
+    spriteId = CreateTrainerSprite(0, 120, 60, 0, &gSharedMem[0x000]);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = spriteId;
 
     //Create May sprite
-    spriteId = CreateTrainerSprite(1, 120, 60, 0, eMaySprite);
+    spriteId = CreateTrainerSprite(1, 120, 60, 0, &gSharedMem[0x800]);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].oam.priority = 0;

@@ -10,23 +10,27 @@ extern u8 gSharedMem[];
 // seperated.
 #define gDecompressionBuffer            (gSharedMem + 0x1E000)
 
+// battle_interface.c
+#define eBattleInterfaceGfxBuffer       ((u8 *)EWRAM)
+
+// region_map.c, field_region_map.c
 #define eRegionMapState                 (*(struct RegionMapState *)gSharedMem)
+
+// field_weather.c
 #define eDroughtPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
+
+// battle etc.
+// This overlaps with so many things it's not even funny
+// The actual data starts at 0x02016000
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
 #define namingScreenData                (*(struct NamingScreenData *)(gSharedMem + 0x0))
 #define ewramBerryPic                   (gSharedMem + 0x0)
 #define eMatsudaDebugVar                (gSharedMem[0x0])
-#define eBrendanSprite                  (gSharedMem + 0x0)
 #define eSaveSection                    (struct SaveSector *)(gSharedMem + 0x0)
-#define eVoidSharedArr                  (void *)(ewram_addr + 0x0)
 #define eSlotMachine                    ((struct SlotMachineEwramStruct *)(gSharedMem + 0x0))
-#define ewram0_9(i)                     (u8 *)(ewram_addr + (i * 0x20))
 #define ePokemonStorageSystem           (*(struct PokemonStorageSystemData *)(gSharedMem + 0))
 #define ewram520                        ((struct UnknownStruct7 *)(gSharedMem + 0x00520))
 #define ewram520_2                      (u8 *)(ewram_addr + 0x520)
-#define eMaySprite                      (gSharedMem + 0x800)
-#define ewram888                        (gSharedMem + 0x888)
-#define ewramBlankMapName               (gSharedMem + 0xA48)
 #define ewramA6E                        (gSharedMem[0xA6E])
 #define ewram01000                      (*(struct Unk2001000 *)(gSharedMem + 0x1000))
 #define ewramBerryPicTemp               (gSharedMem + 0x1000)

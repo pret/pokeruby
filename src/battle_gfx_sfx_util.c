@@ -312,7 +312,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords,
       gMonFrontPicCoords[species].y_offset,
-      (void *)EWRAM,
+      eBattleInterfaceGfxBuffer,
       gMonSpriteGfx_Sprite_ptr[var],
       species,
       r7);
@@ -364,7 +364,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
       &gMonBackPicTable[species],
       gMonBackPicCoords[species].coords,
       gMonBackPicCoords[species].y_offset,
-      (void *)EWRAM,
+      eBattleInterfaceGfxBuffer,
       gMonSpriteGfx_Sprite_ptr[var],
       species,
       r7);
@@ -407,7 +407,7 @@ void sub_8031A6C(u16 a, u8 b)
       &gTrainerFrontPicTable[a],
       gTrainerFrontPicCoords[a].coords,
       gTrainerFrontPicCoords[a].y_offset,
-      eVoidSharedArr,
+      eBattleInterfaceGfxBuffer,
       gMonSpriteGfx_Sprite_ptr[status],
       0);
     spriteSheet.data = gMonSpriteGfx_Sprite_ptr[status];
@@ -426,7 +426,7 @@ void LoadPlayerTrainerBankSprite(u16 a, u8 b)
       &gTrainerBackPicTable[a],
       gTrainerBackPicCoords[a].coords,
       gTrainerBackPicCoords[a].y_offset,
-      eVoidSharedArr,
+      eBattleInterfaceGfxBuffer,
       gMonSpriteGfx_Sprite_ptr[status],
       0);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + b * 16, 32);
@@ -523,7 +523,7 @@ bool8 sub_8031C30(u8 a)
 
 void load_gfxc_health_bar(u8 a)
 {
-    LZDecompressWram(gUnknown_08D09C48, eVoidSharedArr);
+    LZDecompressWram(gUnknown_08D09C48, eBattleInterfaceGfxBuffer);
 }
 
 u8 battle_load_something(u8 *pState, u8 *b)
@@ -661,7 +661,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               &gMonBackPicTable[species],
               gMonBackPicCoords[species].coords,
               gMonBackPicCoords[species].y_offset,
-              (void *)EWRAM,
+              eBattleInterfaceGfxBuffer,
               gMonSpriteGfx_Sprite_ptr[0],
               species,
                 gContestResources__moveAnim.unk10);
@@ -681,7 +681,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   &gMonBackPicTable[species],
                   gMonBackPicCoords[species].coords,
                   gMonBackPicCoords[species].y_offset,
-                  (void *)EWRAM,
+                  eBattleInterfaceGfxBuffer,
                   gMonSpriteGfx_Sprite_ptr[r10],
                   species,
                   gTransformedPersonalities[a]);
@@ -694,7 +694,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   &gMonFrontPicTable[species],
                   gMonFrontPicCoords[species].coords,
                   gMonFrontPicCoords[species].y_offset,
-                  (void *)EWRAM,
+                  eBattleInterfaceGfxBuffer,
                   gMonSpriteGfx_Sprite_ptr[r10],
                   species,
                   gTransformedPersonalities[a]);

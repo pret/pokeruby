@@ -815,27 +815,27 @@ void sub_8043F44(u8 a)
     else
     {
         *(ptr++) = EXT_CTRL_CODE_BEGIN;
-        *(ptr++) = 0x11;
+        *(ptr++) = EXT_CTRL_CODE_CLEAR;
         *(ptr++) = 1;
         *(ptr++) = EXT_CTRL_CODE_BEGIN;
-        *(ptr++) = 0x14;
+        *(ptr++) = EXT_CTRL_CODE_MIN_LETTER_SPACING;
         *(ptr++) = 4;
         *(ptr++) = CHAR_LV_SEPARATOR;
         *(ptr++) = EXT_CTRL_CODE_BEGIN;
-        *(ptr++) = 0x14;
+        *(ptr++) = EXT_CTRL_CODE_MIN_LETTER_SPACING;
         *(ptr++) = 0;
         ptr = ConvertIntToDecimalStringN(ptr, b, 0, 2);
     }
 
     *(ptr++) = EXT_CTRL_CODE_BEGIN;
-    *(ptr++) = 0x13;
-    *(ptr++) = 0xF;
+    *(ptr++) = EXT_CTRL_CODE_CLEAR_TO;
+    *(ptr++) = 15;
     *(ptr++) = EOS;
-    sub_80034D4(ewram0_9(0), str);
+    sub_80034D4(eBattleInterfaceGfxBuffer, str);
 
     two = 2;
     for (i = 0; i < two; i++)
-        CpuCopy32((void *)(ewram0_9(1) + i * 64), r7[i] + gSprites[a].oam.tileNum * 32, 32);
+        CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], r7[i] + gSprites[a].oam.tileNum * TILE_SIZE_4BPP, TILE_SIZE_4BPP);
 }
 
 #ifdef NONMATCHING
@@ -869,7 +869,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
         ptr = sub_8003504(ptr, b, 0x13, 1);
         *(ptr++) = 0xBA;
         *(ptr++) = 0xFF;
-        sub_80034D4(ewram0_9(0), str);
+        sub_80034D4(eBattleInterfaceGfxBuffer, str);
     }
     else
     {
@@ -879,14 +879,14 @@ void sub_80440EC(u8 a, s16 b, u8 c)
             r4 = gUnknown_0820A85C;
         c = 2;
         sub_8003504(ptr, b, 0xF, 1);
-        sub_80034D4(ewram0_9(0), str);
+        sub_80034D4(eBattleInterfaceGfxBuffer, str);
     }
     //asm(""::"r"(a));
     //_080441B6
     for (i = 0; i < c; i++)  // _080440BC
     {
         void *temp = r4[i] + gSprites[a].oam.tileNum * 32;
-        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), temp, 0x20);
+        CpuCopy32((void *)(&eBattleInterfaceGfxBuffer[i * 64 + 32], temp, 0x20);
     }
 }
 #else
@@ -1070,10 +1070,10 @@ _0804420C: .4byte 0x04000008\n\
         }
     }
     r4 = gSprites[a].data[5];
-    sub_80034D4(ewram0_9(0), str);
+    sub_80034D4(eBattleInterfaceGfxBuffer, str);
     for (i = 0; i < r10; i++)
     {
-        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 32);
+        CpuCopy32((void *)(&eBattleInterfaceGfxBuffer[i * 64 + 32]), r7[i] + gSprites[r4].oam.tileNum * 32, 32);
     }
 }
 
@@ -1130,19 +1130,19 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     ConvertIntToDecimalStringN(str + 9, ewram16088, 1, 2);
     str[5] = 0;
     str[8] = 0xBA;
-    sub_80034D4(ewram0_9(0), str);
+    sub_80034D4(eBattleInterfaceGfxBuffer, str);
 
     for (r7 = 0; r7 < 5; r7++)
     {
         if (r7 <= 1)
         {
             int foo = (gSprites[r5].oam.tileNum + 2 + r7);
-            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)(VRAM + 0x10000) + foo * 32, 32);
+            CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], (u8 *)(VRAM + 0x10000) + foo * 32, 32);
         }
         else
         {
             int foo = (r7 + gSprites[r5].oam.tileNum);
-            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)(VRAM + 0x100C0) + foo * 32, 32);
+            CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], (u8 *)(VRAM + 0x100C0) + foo * 32, 32);
         }
     }
 }
