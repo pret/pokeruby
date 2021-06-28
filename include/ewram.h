@@ -191,7 +191,7 @@ extern u8 gSharedMem[];
 #define EWRAM_1B000                     ewram1B000_alt // FIXME
 #define EWRAM_1B000_2                   (*(struct Struct201B000 *)(gSharedMem + 0x1B000))
 #define EWRAM_1C000                     (*(struct Struct201C000 *)(gSharedMem + 0x1C000))
-#define ewram1C000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000))
+#define gPartyMenu                      (*(struct PartyMenu *)(gSharedMem + 0x1C000))
 #define ewram1c000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000)) // FIXME, names too similar
 
 // hall_of_fame.c
@@ -213,8 +213,10 @@ extern u8 gSharedMem[];
 #define HALL_OF_FAME_SHEET_2            ((u8 *)(gSharedMem + 0x1F000))
 #define EWRAM_1F800                     ((u16 *)(gSharedMem + 0x1F800))
 #define ewram_1F800_2                   (const u16 *)(gSharedMem + 0x1F800)
-#define ewram1FE00                      (*(struct Unk201FE00 *)(gSharedMem + 0x1FE00))
+
+// player_pc.c, party_menu.c
 #define eMailboxInfo                    (*(struct MailboxStruct *)(gSharedMem + 0x1FE00))
+
 #define eCutGrassSpriteArray            (gSharedMem + 0x1FFF0) // 8 sprite IDs
 #define ewram1FFFC                      (gSharedMem[0x1FFFC])
 #define ewram1FFFD                      (gSharedMem[0x1FFFD])
