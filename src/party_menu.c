@@ -1097,7 +1097,7 @@ void sub_806BB3C(s16 a, u16 b)
                 if (a + j >= 0)
                 {
                     gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = 0;
-                }                
+                }
             }
         }
     }
@@ -1188,7 +1188,7 @@ void sub_806BCE8()
         {
             DrawMonDescriptorStatus(i, 0x46);
         }
-    }    
+    }
 }
 
 u8 sub_806BD58(u8 taskId, u8 b)
@@ -1198,8 +1198,6 @@ u8 sub_806BD58(u8 taskId, u8 b)
     return 1;
 }
 
-// non-shifting, some expressions swapped around
-#ifdef NONMATCHING
 u16 HandleDefaultPartyMenuInput(u8 taskId)
 {
     s8 menuDirectionPressed = 0x0;
@@ -1222,6 +1220,7 @@ u16 HandleDefaultPartyMenuInput(u8 taskId)
 
     if (menuDirectionPressed == 0)
     {
+        // Check L/R input
         u8 var1 = sub_80F92BC();
         switch (var1)
         {
@@ -1232,130 +1231,23 @@ u16 HandleDefaultPartyMenuInput(u8 taskId)
             menuDirectionPressed = 1;
             break;
         }
-
-        if (menuDirectionPressed == 0)
-        {
-            if ((gMain.newKeys & A_BUTTON) && gSprites[sub_806CA00(taskId)].data[0] == 7)
-            {
-                // Selected "CANCEL"
-                return B_BUTTON;
-            }
-            else
-            {
-                return gMain.newKeys & (A_BUTTON | B_BUTTON);
-            }
-        }
     }
 
-    ChangePartyMenuSelection(taskId, menuDirectionPressed);
-    return gMain.newAndRepeatedKeys;
+    if (menuDirectionPressed != 0)
+    {
+        ChangePartyMenuSelection(taskId, menuDirectionPressed);
+        return gMain.newAndRepeatedKeys;
+    }
+    else if ((gMain.newKeys & A_BUTTON) && gSprites[sub_806CA00(taskId)].data[0] == 7)
+    {
+        // Selected "CANCEL"
+        return B_BUTTON;
+    }
+    else
+    {
+        return gMain.newKeys & (A_BUTTON | B_BUTTON);
+    }
 }
-#else
-NAKED
-u16 HandleDefaultPartyMenuInput(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    movs r4, 0\n\
-    ldr r0, _0806BD9C @ =gMain\n\
-    ldrh r0, [r0, 0x30]\n\
-    cmp r0, 0x20\n\
-    beq _0806BDB2\n\
-    cmp r0, 0x20\n\
-    bgt _0806BDA0\n\
-    cmp r0, 0x10\n\
-    beq _0806BDB6\n\
-    b _0806BDB8\n\
-    .align 2, 0\n\
-_0806BD9C: .4byte gMain\n\
-_0806BDA0:\n\
-    cmp r0, 0x40\n\
-    beq _0806BDAA\n\
-    cmp r0, 0x80\n\
-    beq _0806BDAE\n\
-    b _0806BDB8\n\
-_0806BDAA:\n\
-    movs r4, 0xFF\n\
-    b _0806BDB8\n\
-_0806BDAE:\n\
-    movs r4, 0x1\n\
-    b _0806BDB8\n\
-_0806BDB2:\n\
-    movs r4, 0xFE\n\
-    b _0806BDB8\n\
-_0806BDB6:\n\
-    movs r4, 0x2\n\
-_0806BDB8:\n\
-    lsls r0, r4, 24\n\
-    cmp r0, 0\n\
-    bne _0806BDDC\n\
-    bl sub_80F92BC\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _0806BDD0\n\
-    cmp r0, 0x2\n\
-    beq _0806BDD4\n\
-    b _0806BDD6\n\
-_0806BDD0:\n\
-    movs r4, 0xFF\n\
-    b _0806BDD6\n\
-_0806BDD4:\n\
-    movs r4, 0x1\n\
-_0806BDD6:\n\
-    lsls r0, r4, 24\n\
-    cmp r0, 0\n\
-    beq _0806BDF0\n\
-_0806BDDC:\n\
-    asrs r1, r0, 24\n\
-    adds r0, r5, 0\n\
-    bl ChangePartyMenuSelection\n\
-    ldr r0, _0806BDEC @ =gMain\n\
-    ldrh r0, [r0, 0x30]\n\
-    b _0806BE2C\n\
-    .align 2, 0\n\
-_0806BDEC: .4byte gMain\n\
-_0806BDF0:\n\
-    ldr r0, _0806BE1C @ =gMain\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0806BE24\n\
-    ldr r4, _0806BE20 @ =gSprites\n\
-    adds r0, r5, 0\n\
-    bl sub_806CA00\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r4\n\
-    movs r2, 0x2E\n\
-    ldrsh r0, [r1, r2]\n\
-    cmp r0, 0x7\n\
-    bne _0806BE24\n\
-    movs r0, 0x2\n\
-    b _0806BE2C\n\
-    .align 2, 0\n\
-_0806BE1C: .4byte gMain\n\
-_0806BE20: .4byte gSprites\n\
-_0806BE24:\n\
-    ldr r0, _0806BE34 @ =gMain\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x3\n\
-    ands r0, r1\n\
-_0806BE2C:\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_0806BE34: .4byte gMain\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 u16 HandleBattleTowerPartyMenuInput(u8 taskId)
 {
@@ -1374,7 +1266,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
         break;
     case DPAD_RIGHT:
         menuDirectionPressed = 0x2;
-        break;   
+        break;
     }
 
     if (menuDirectionPressed == 0)
@@ -1442,7 +1334,7 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
     u8 menuIndex = gSprites[spriteId].data[0];
 
     UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
-    
+
     isLinkDoubleBattle = IsLinkDoubleBattle();
     if (isLinkDoubleBattle == 1)
     {
@@ -1673,10 +1565,10 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
                         return;
                     }
                 }
-    
+
                 gSprites[spriteId].data[0] = 7;
             }
-    
+
             gSprites[spriteId].data[1] = 0;
             break;
         case 1: // moving up
@@ -1689,7 +1581,7 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
                     return;
                 }
             }
-    
+
             gSprites[spriteId].data[0] = 7;
             gSprites[spriteId].data[1] = 0;
             break;
@@ -1730,7 +1622,7 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
                     gSprites[spriteId].data[1] = menuIndex;
                 }
             }
-    
+
             break;
     }
 }
@@ -2038,7 +1930,7 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
         }
         break;
     }
-    
+
     gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].x;
     gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].y;
 
@@ -3017,7 +2909,7 @@ u8 GetMonIconSpriteId(u8 taskId, u8 monIndex)
     switch (monIndex)
     {
     case 1:
-        return gTasks[taskId].data[0]; 
+        return gTasks[taskId].data[0];
         break;
     case 2:
         return gTasks[taskId].data[1] >> 8;
@@ -3075,7 +2967,7 @@ void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
 {
     u8 spriteId;
     u16 heldItem;
-    
+
     spriteId = GetMonHeldItemIconSpriteId(taskId, monIndex);
     if (!GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM))
     {
