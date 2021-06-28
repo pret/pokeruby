@@ -12,7 +12,6 @@ extern u8 gSharedMem[];
 
 #define eDroughtPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
-#define ewram0_2                        (*(struct Struct2000000 *)(gSharedMem + 0x0))
 #define namingScreenData                (*(struct NamingScreenData *)(gSharedMem + 0x0))
 #define ewramBerryPic                   (gSharedMem + 0x0)
 #define ewram0_4                        (*(struct Unk2000000 *)(gSharedMem + 0x0))
