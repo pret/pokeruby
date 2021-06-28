@@ -770,7 +770,7 @@ const struct SpritePalette gIntro3MiscPal_Table[] =
 // Game Freak probably used the raw address here.
 // Treating this like a u8 * causes the compiler
 // to remove it at link time.
-const u32 unusedSharedMemPtr = (u32)gSharedMem;
+u8 (*const ewram0arr)[32] = (u8 (*)[32])gSharedMem;
 
 static void MainCB2_EndIntro(void);
 void Task_IntroLoadPart1Graphics(u8);
@@ -1212,8 +1212,6 @@ static void Task_IntroWaitToSetupPart3DoubleFight(u8 taskId)
         gTasks[taskId].func = Task_IntroLoadPart3Streaks;
 }
 
-//extern u8 gSharedMem[][32];
-
 static void Task_IntroLoadPart3Streaks(u8 taskId)
 {
     u16 i;
@@ -1225,7 +1223,7 @@ static void Task_IntroLoadPart3Streaks(u8 taskId)
         ewram0arr[1][i] = 17;
         ewram0arr[2][i] = 34;
     }
-    DmaCopy16Defvars(3, gSharedMem, (void *)(VRAM + 0x0), 0x60);
+    DmaCopy16Defvars(3, ewram0arr, (void *)(VRAM + 0x0), 0x60);
     for (i = 0; i < 0x280; i++)
         ((u16 *)(VRAM + 0x3000))[i] = 0xF001;
     for (i = 0; i < 0x80; i++)

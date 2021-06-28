@@ -419,8 +419,8 @@ static void CB2_EggHatch_0(void)
         break;
     case 2:
         LZDecompressVram(&gBattleTextboxTiles, (void*)(VRAM));
-        CpuSet(&gBattleTextboxTilemap, ewram0_7, 0x800);
-        DmaCopy16(3, ewram0_7, (void*)(VRAM + 0x2800), 0x500);
+        CpuSet(&gBattleTextboxTilemap, gSharedMem, 0x800);
+        DmaCopy16(3, gSharedMem, (void*)(VRAM + 0x2800), 0x500);
         LoadCompressedPalette(&gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
         break;
