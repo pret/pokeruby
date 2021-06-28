@@ -985,104 +985,29 @@ bool8 DrawPartyMonBackground(u8 monIndex)
     return FALSE;
 }
 
-// many expressions swapped, hard to follow asm diff
-#ifdef NONMATCHING
 void sub_806B908(void)
 {
+    const u8 * r4;
+    struct Pokemon * pokemon;
     memset(&gBGTilemapBuffers[2], 0, 0x800);
-    gPartyMenuType = PARTY_MENU_LAYOUT_MULTI_BATTLE;
-    sub_806B9A4(gUnknown_083769C0[12], gUnknown_083769C0[13], 3);
+    gPartyMenuType = 3;
 
-    if (GetMonData(&gPlayerParty[1], MON_DATA_SPECIES))
-        sub_806BA94(gUnknown_083769C0[16], gUnknown_083769C0[17], 0, 3);
-    else
-        sub_806BA94(gUnknown_083769C0[16], gUnknown_083769C0[17], 1, 3);
+    r4 = ({const u8 * r0 = gUnknown_083769A8; r0 + 36;});
+    pokemon = &gPlayerParty[1];
+    sub_806B9A4(r4[0], r4[1], 3);
 
-    if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES))
-        sub_806BA94(gUnknown_083769C0[18], gUnknown_083769C0[19], 0, 3);
+    if (GetMonData(pokemon, MON_DATA_SPECIES))
+        sub_806BA94(r4[4], r4[5], 0, 3);
     else
-        sub_806BA94(gUnknown_083769C0[18], gUnknown_083769C0[19], 1, 3);
+        sub_806BA94(r4[4], r4[5], 1, 3);
+
+    if (GetMonData(pokemon + 1, MON_DATA_SPECIES))
+        sub_806BA94(r4[6], r4[7], 0, 3);
+    else
+        sub_806BA94(r4[6], r4[7], 1, 3);
 
     ewram1B000.unk261 = 2;
 }
-#else
-NAKED
-void sub_806B908(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r0, _0806B948 @ =gBGTilemapBuffers + 0x1000\n\
-    movs r2, 0x80\n\
-    lsls r2, 4\n\
-    movs r1, 0\n\
-    bl memset\n\
-    ldr r1, _0806B94C @ =gPartyMenuType\n\
-    movs r0, 0x3\n\
-    strb r0, [r1]\n\
-    ldr r0, _0806B950 @ =gUnknown_083769A8\n\
-    adds r4, r0, 0\n\
-    adds r4, 0x24\n\
-    ldr r5, _0806B954 @ =gPlayerParty + 1 * 0x64\n\
-    ldrb r0, [r4]\n\
-    ldrb r1, [r4, 0x1]\n\
-    movs r2, 0x3\n\
-    bl sub_806B9A4\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806B958\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    b _0806B964\n\
-    .align 2, 0\n\
-_0806B948: .4byte gBGTilemapBuffers + 0x1000\n\
-_0806B94C: .4byte gPartyMenuType\n\
-_0806B950: .4byte gUnknown_083769A8\n\
-_0806B954: .4byte gPlayerParty + 1 * 0x64\n\
-_0806B958:\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-_0806B964:\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806B980\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    b _0806B98C\n\
-_0806B980:\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-_0806B98C:\n\
-    ldr r0, _0806B99C @ =gSharedMem + 0x1B000\n\
-    ldr r1, _0806B9A0 @ =0x00000261\n\
-    adds r0, r1\n\
-    movs r1, 0x2\n\
-    strb r1, [r0]\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806B99C: .4byte gSharedMem + 0x1B000\n\
-_0806B9A0: .4byte 0x00000261\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_806B9A4(s16 a, u16 b, u8 c)
 {
