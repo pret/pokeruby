@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/items.h"
+#include "constants/item_effects.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -4925,346 +4926,75 @@ void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c)
 u8 GetItemEffectType(u16 item)
 {
     const u8 *itemEffect;
-#ifndef NONMATCHING
-    register u8 itemEffect0 asm("r1");
-    register u8 itemEffect3 asm("r3");
-    register u32 itemEffect0_r0 asm("r0"); // u32 to prevent shifting when transferring itemEffect0 to this
-    u8 mask;
-#else
-#define itemEffect0 itemEffect[0]
-#define itemEffect3 itemEffect[3]
-#define mask 0x3F
+    u32 statusCure;
+
+#ifdef UBFIX
+    // Enforces that the item ID is within the bounds of gItemEffectTable.
+    // In the retail ROM, the otherwise situation will never arise.
+    // Nevertheless, GameFreak added this sanity check in FireRed.
+    if (!ITEM_HAS_EFFECT(item))
+        return ITEM_EFFECT_NONE;
 #endif
 
     // Read the item's effect properties.
     if (item == ITEM_ENIGMA_BERRY)
-    {
         itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
-    }
     else
-    {
         itemEffect = gItemEffectTable[item - ITEM_POTION];
-    }
 
-#ifndef NONMATCHING
-    itemEffect0 = itemEffect[0];
-    mask = 0x3F;
-#endif
+    if ((itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
+        return ITEM_EFFECT_X_ITEM;
+    else if (itemEffect[0] & ITEM0_SACRED_ASH)
+        return ITEM_EFFECT_SACRED_ASH;
+    else if (itemEffect[3] & ITEM3_LEVEL_UP)
+        return ITEM_EFFECT_RAISE_LEVEL;
 
-    if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2])
+    statusCure = itemEffect[3] & ITEM3_STATUS_ALL;
+    if (statusCure || (itemEffect[0] >> 7))
     {
-        return 0;
-    }
-#ifndef NONMATCHING
-    itemEffect3 = itemEffect[3];
-#endif
-    if (itemEffect3 & 0x80)
-    {
-        return 0;
-    }
-    else if (itemEffect0 & 0x40)
-    {
-        return 10;
-    }
-    else if (itemEffect3 & 0x40)
-    {
-        return 1;
-    }
-    else if ((itemEffect3 & mask) || (itemEffect0 >> 7))
-    {
-        if ((itemEffect3 & mask) == 0x20)
-        {
-            return 4;
-        }
-        else if ((itemEffect3 & mask) == 0x10)
-        {
-            return 3;
-        }
-        else if ((itemEffect3 & mask) == 0x8)
-        {
-            return 5;
-        }
-        else if ((itemEffect3 & mask) == 0x4)
-        {
-            return 6;
-        }
-        else if ((itemEffect3 & mask) == 0x2)
-        {
-            return 7;
-        }
-        else if ((itemEffect3 & mask) == 0x1)
-        {
-            return 8;
-        }
-        // alternate fakematching
-        // itemEffect0_r0 = itemEffect0 >> 7;
-        // asm(""); // increase live length for greg
-        // if ((itemEffect0_r0 != 0) && (itemEffect3 & mask) == 0)
-#ifndef NONMATCHING
-        else if (((itemEffect0_r0 = itemEffect0 >> 7) != 0) && (itemEffect3 & mask) == 0)
-#else
-        else if (((itemEffect[0] >> 7) != 0) && (itemEffect[3] & 0x3F) == 0)
-#endif
-        {
-            return 9;
-        }
+        if (statusCure == ITEM3_SLEEP)
+            return ITEM_EFFECT_CURE_SLEEP;
+        else if (statusCure == ITEM3_POISON)
+            return ITEM_EFFECT_CURE_POISON;
+        else if (statusCure == ITEM3_BURN)
+            return ITEM_EFFECT_CURE_BURN;
+        else if (statusCure == ITEM3_FREEZE)
+            return ITEM_EFFECT_CURE_FREEZE;
+        else if (statusCure == ITEM3_PARALYSIS)
+            return ITEM_EFFECT_CURE_PARALYSIS;
+        else if (statusCure == ITEM3_CONFUSION)
+            return ITEM_EFFECT_CURE_CONFUSION;
+        else if (itemEffect[0] >> 7 && !statusCure)
+            return ITEM_EFFECT_CURE_INFATUATION;
         else
-        {
-            return 11;
-        }
+            return ITEM_EFFECT_CURE_ALL_STATUS;
     }
-    else if (itemEffect[4] & 0x44)
-    {
-        return 2;
-    }
-    else if (itemEffect[4] & 0x2)
-    {
-        return 12;
-    }
-    else if (itemEffect[4] & 0x1)
-    {
-        return 13;
-    }
-    else if (itemEffect[5] & 0x8)
-    {
-        return 14;
-    }
-    else if (itemEffect[5] & 0x4)
-    {
-        return 15;
-    }
-    else if (itemEffect[5] & 0x2)
-    {
-        return 16;
-    }
-    else if (itemEffect[5] & 0x1)
-    {
-        return 17;
-    }
-    else if (itemEffect[4] & 0x80)
-    {
-        return 18;
-    }
-    else if (itemEffect[4] & 0x20)
-    {
-        return 19;
-    }
-    else if (itemEffect[5] & 0x10)
-    {
-        return 20;
-    }
-    else if (itemEffect[4] & 0x18)
-    {
-        return 21;
-    }
+
+    if (itemEffect[4] & (ITEM4_REVIVE | ITEM4_HEAL_HP))
+        return ITEM_EFFECT_HEAL_HP;
+    else if (itemEffect[4] & ITEM4_EV_ATK)
+        return ITEM_EFFECT_ATK_EV;
+    else if (itemEffect[4] & ITEM4_EV_HP)
+        return ITEM_EFFECT_HP_EV;
+    else if (itemEffect[5] & ITEM5_EV_SPATK)
+        return ITEM_EFFECT_SPATK_EV;
+    else if (itemEffect[5] & ITEM5_EV_SPDEF)
+        return ITEM_EFFECT_SPDEF_EV;
+    else if (itemEffect[5] & ITEM5_EV_SPEED)
+        return ITEM_EFFECT_SPEED_EV;
+    else if (itemEffect[5] & ITEM5_EV_DEF)
+        return ITEM_EFFECT_DEF_EV;
+    else if (itemEffect[4] & ITEM4_EVO_STONE)
+        return ITEM_EFFECT_EVO_STONE;
+    else if (itemEffect[4] & ITEM4_PP_UP)
+        return ITEM_EFFECT_PP_UP;
+    else if (itemEffect[5] & ITEM5_PP_MAX)
+        return ITEM_EFFECT_PP_MAX;
+    else if (itemEffect[4] & (ITEM4_HEAL_PP | ITEM4_HEAL_PP_ONE))
+        return ITEM_EFFECT_HEAL_PP;
     else
-    {
-        return 22;
-    }
-#ifdef NONMATCHING
-#undef itemEffect0
-#undef itemEffect3
-#undef mask
-#endif
+        return ITEM_EFFECT_NONE;
 }
-#if 0
-NAKED
-u8 GetItemEffectType(u16 item)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xAF\n\
-    bne _08070E5C\n\
-    ldr r4, _08070E58 @ =gSaveBlock1 + 0x3676\n\
-    b _08070E66\n\
-    .align 2, 0\n\
-_08070E58: .4byte gSaveBlock1 + 0x3676\n\
-_08070E5C:\n\
-    ldr r1, _08070E8C @ =gItemEffectTable\n\
-    subs r0, 0xD\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r4, [r0]\n\
-_08070E66:\n\
-    ldrb r1, [r4]\n\
-    movs r5, 0x3F\n\
-    adds r0, r5, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08070E88\n\
-    ldrb r0, [r4, 0x1]\n\
-    cmp r0, 0\n\
-    bne _08070E88\n\
-    ldrb r0, [r4, 0x2]\n\
-    cmp r0, 0\n\
-    bne _08070E88\n\
-    ldrb r3, [r4, 0x3]\n\
-    movs r0, 0x80\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08070E90\n\
-_08070E88:\n\
-    movs r0, 0\n\
-    b _08070F8A\n\
-    .align 2, 0\n\
-_08070E8C: .4byte gItemEffectTable\n\
-_08070E90:\n\
-    movs r2, 0x40\n\
-    adds r0, r2, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08070E9E\n\
-    movs r0, 0xA\n\
-    b _08070F8A\n\
-_08070E9E:\n\
-    adds r0, r2, 0\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08070EAA\n\
-    movs r0, 0x1\n\
-    b _08070F8A\n\
-_08070EAA:\n\
-    adds r2, r5, 0\n\
-    ands r2, r3\n\
-    cmp r2, 0\n\
-    bne _08070EB8\n\
-    lsrs r0, r1, 7\n\
-    cmp r0, 0\n\
-    beq _08070EFA\n\
-_08070EB8:\n\
-    cmp r2, 0x20\n\
-    bne _08070EC0\n\
-    movs r0, 0x4\n\
-    b _08070F8A\n\
-_08070EC0:\n\
-    cmp r2, 0x10\n\
-    bne _08070EC8\n\
-    movs r0, 0x3\n\
-    b _08070F8A\n\
-_08070EC8:\n\
-    cmp r2, 0x8\n\
-    bne _08070ED0\n\
-    movs r0, 0x5\n\
-    b _08070F8A\n\
-_08070ED0:\n\
-    cmp r2, 0x4\n\
-    bne _08070ED8\n\
-    movs r0, 0x6\n\
-    b _08070F8A\n\
-_08070ED8:\n\
-    cmp r2, 0x2\n\
-    bne _08070EE0\n\
-    movs r0, 0x7\n\
-    b _08070F8A\n\
-_08070EE0:\n\
-    cmp r2, 0x1\n\
-    bne _08070EE8\n\
-    movs r0, 0x8\n\
-    b _08070F8A\n\
-_08070EE8:\n\
-    lsrs r0, r1, 7\n\
-    cmp r0, 0\n\
-    beq _08070EF6\n\
-    cmp r2, 0\n\
-    bne _08070EF6\n\
-    movs r0, 0x9\n\
-    b _08070F8A\n\
-_08070EF6:\n\
-    movs r0, 0xB\n\
-    b _08070F8A\n\
-_08070EFA:\n\
-    ldrb r1, [r4, 0x4]\n\
-    movs r0, 0x44\n\
-    ands r0, r1\n\
-    adds r2, r1, 0\n\
-    cmp r0, 0\n\
-    beq _08070F0A\n\
-    movs r0, 0x2\n\
-    b _08070F8A\n\
-_08070F0A:\n\
-    movs r5, 0x2\n\
-    adds r0, r5, 0\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _08070F18\n\
-    movs r0, 0xC\n\
-    b _08070F8A\n\
-_08070F18:\n\
-    movs r3, 0x1\n\
-    adds r0, r3, 0\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _08070F26\n\
-    movs r0, 0xD\n\
-    b _08070F8A\n\
-_08070F26:\n\
-    ldrb r1, [r4, 0x5]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08070F34\n\
-    movs r0, 0xE\n\
-    b _08070F8A\n\
-_08070F34:\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08070F40\n\
-    movs r0, 0xF\n\
-    b _08070F8A\n\
-_08070F40:\n\
-    adds r0, r5, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08070F4C\n\
-    movs r0, 0x10\n\
-    b _08070F8A\n\
-_08070F4C:\n\
-    adds r0, r3, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08070F58\n\
-    movs r0, 0x11\n\
-    b _08070F8A\n\
-_08070F58:\n\
-    movs r0, 0x80\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _08070F64\n\
-    movs r0, 0x12\n\
-    b _08070F8A\n\
-_08070F64:\n\
-    movs r0, 0x20\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _08070F70\n\
-    movs r0, 0x13\n\
-    b _08070F8A\n\
-_08070F70:\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08070F7C\n\
-    movs r0, 0x14\n\
-    b _08070F8A\n\
-_08070F7C:\n\
-    movs r0, 0x18\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _08070F88\n\
-    movs r0, 0x16\n\
-    b _08070F8A\n\
-_08070F88:\n\
-    movs r0, 0x15\n\
-_08070F8A:\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 // Maybe this goes in start_menu.c
 #if !DEBUG
