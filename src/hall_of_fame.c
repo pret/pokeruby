@@ -756,7 +756,7 @@ static void sub_81428A0(u8 taskID)
     if (!gPaletteFade.active)
     {
         DestroyTask(taskID);
-        SetMainCallback2(sub_81439D0);
+        SetMainCallback2(CB2_StartCreditsSequence);
     }
 }
 

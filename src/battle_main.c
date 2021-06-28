@@ -767,7 +767,7 @@ void CB2_HandleStartMultiBattle(void)
                 }
             }
             SetAllPlayersBerryData();
-            memcpy(ewram1D000, gPlayerParty, sizeof(struct Pokemon) * 3);
+            memcpy(eMultiBattleSetupPartySendBuffer, gPlayerParty, sizeof(struct Pokemon) * 3);
             taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 270;
             gTasks[taskId].data[2] = 90;
@@ -799,7 +799,7 @@ void CB2_HandleStartMultiBattle(void)
     case 2:
             if (IsLinkTaskFinished())
             {
-                SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
+                SendBlock(bitmask_all_link_players_but_self(), eMultiBattleSetupPartySendBuffer, sizeof(struct Pokemon) * 2);
                 gBattleCommunication[0]++;
             }
 	}
@@ -863,7 +863,7 @@ void CB2_HandleStartMultiBattle(void)
     case 4:
         if (IsLinkTaskFinished())
         {
-            SendBlock(bitmask_all_link_players_but_self(), ewram1D000 + 2, sizeof(struct Pokemon));
+            SendBlock(bitmask_all_link_players_but_self(), eMultiBattleSetupPartySendBuffer + 2, sizeof(struct Pokemon));
             gBattleCommunication[0]++;
         }
         break;

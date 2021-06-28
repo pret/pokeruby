@@ -540,7 +540,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     case 6:
         if (MultistepInitMenuWindowContinue())
         {
-            ewram1FFFF = 0;
+            ePokeblockGfxState = 0;
             gMain.state++;
         }
         break;
@@ -551,11 +551,11 @@ static bool8 TransitionToPokeblockFeedScene(void)
         }
         break;
     case 8:
-        ewram1FFFD = sub_81480B4();
+        ePokeblockFeedCaseSpriteId = sub_81480B4();
         gMain.state++;
         break;
     case 9:
-        ewram1FFFE = PokeblockFeed_CreatePokeSprite(&gPlayerParty[gPokeblockMonID]);
+        ePokeblockMonSpriteId = PokeblockFeed_CreatePokeSprite(&gPlayerParty[gPokeblockMonID]);
         gMain.state++;
         break;
     case 10:
@@ -611,13 +611,13 @@ static bool8 sub_8147B20(struct Pokemon* mon)
 {
     u16 species;
     u32 PiD, TiD;
-    switch (ewram1FFFF)
+    switch (ePokeblockGfxState)
     {
     case 0:
         species = GetMonData(mon, MON_DATA_SPECIES2);
         PiD = GetMonData(mon, MON_DATA_PERSONALITY);
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (void *)EWRAM, gMonSpriteGfx_Sprite_ptr[1], species, PiD);
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 1:
         {
@@ -629,37 +629,37 @@ static bool8 sub_8147B20(struct Pokemon* mon)
             palette = GetMonSpritePalStructFromOtIdPersonality(species, TiD, PiD);
             LoadCompressedObjectPalette(palette);
             GetMonSpriteTemplate_803C56C(palette->tag, 1);
-            ewram1FFFF++;
+            ePokeblockGfxState++;
         }
         break;
     case 2:
         LoadCompressedObjectPic(&gUnknown_083F7F74);
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 3:
         LoadCompressedObjectPalette(&gUnknown_083F7F7C);
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 4:
         LoadCompressedObjectPic(&sUnknown_084121DC);
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 5:
         SetPokeblockFeedSpritePal(gSpecialVar_ItemId);
         LoadCompressedObjectPalette(&sPokeblockFeedSpritePal);
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 6:
         LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM));
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 7:
         LZDecompressVram(gUnknown_08E782FC, (void*)(VRAM + 0xE800));
-        ewram1FFFF++;
+        ePokeblockGfxState++;
         break;
     case 8:
         LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
-        ewram1FFFF = 0;
+        ePokeblockGfxState = 0;
         return TRUE;
     }
     return FALSE;
@@ -684,13 +684,13 @@ static void sub_8147CC8(u8 taskID)
             sub_81481DC();
             break;
         case 255:
-            sub_8148108(ewram1FFFD, gTasks[taskID].data[1]);
+            sub_8148108(ePokeblockFeedCaseSpriteId, gTasks[taskID].data[1]);
             break;
         case 269:
-            ewram1FFFC = CreatePokeblockSprite();
+            ePokeblockSpriteId = CreatePokeblockSprite();
             break;
         case 281:
-            sub_8148044(ewram1FFFE);
+            sub_8148044(ePokeblockMonSpriteId);
             break;
         case 297:
             gTasks[taskID].func = Task_PrintAtePokeblockText;
@@ -932,8 +932,8 @@ static bool8 sub_81485CC(void)
 {
     u16 var = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
-    gPokeblockFeedPokeSprite->pos2.x = ewram1D000_2[var];
-    gPokeblockFeedPokeSprite->pos2.y = ewram1D400[var];
+    gPokeblockFeedPokeSprite->pos2.x = ePokeblockFeedMonAnimX[var];
+    gPokeblockFeedPokeSprite->pos2.y = ePokeblockFeedMonAnimY[var];
 
     if (--gUnknown_03005FA0[4] == 0)
         return TRUE;
@@ -957,18 +957,18 @@ static void sub_814862C(void)
 
     for (i = 0; i < r7 - 1; i++)
     {
-        s16* r3 = &ewram1D000_2[r8 + i];
+        s16* r3 = &ePokeblockFeedMonAnimX[r8 + i];
         s16 r1 = *r3 - (var3);
 
-        s16* r5 = &ewram1D400[r8 + i];
+        s16* r5 = &ePokeblockFeedMonAnimY[r8 + i];
         s16 r4 = *r5 - r9;
 
         *r3 -= r1 * (i + 1) / r7;
         *r5 -= r4 * (i + 1) / r7;
     }
 
-    ewram1D000_2[(r8 + r7) - 1] = var3;
-    ewram1D400[(r8 + r7) - 1] = r9;
+    ePokeblockFeedMonAnimX[(r8 + r7) - 1] = var3;
+    ePokeblockFeedMonAnimY[(r8 + r7) - 1] = r9;
 }
 
 void sub_8148710(void)
@@ -996,13 +996,13 @@ void sub_8148710(void)
 
         if (!var_24)
         {
-            ewram1D000_2[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
-            ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
+            ePokeblockFeedMonAnimX[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
+            ePokeblockFeedMonAnimY[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
         }
         else
         {
-            ewram1D000_2[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
-            ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
+            ePokeblockFeedMonAnimX[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
+            ePokeblockFeedMonAnimY[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
         }
 
         gUnknown_03005FA0[0] += gUnknown_03005FA0[1];

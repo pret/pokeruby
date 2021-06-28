@@ -6,6 +6,6 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
-void sub_81439D0(void);
+void CB2_StartCreditsSequence(void);
 
 #endif //GUARD_credits_H

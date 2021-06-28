@@ -192,38 +192,45 @@ extern u8 gSharedMem[];
 #define EWRAM_1B000_2                   (*(struct Struct201B000 *)(gSharedMem + 0x1B000))
 #define EWRAM_1C000                     (*(struct Struct201C000 *)(gSharedMem + 0x1C000))
 #define gPartyMenu                      (*(struct PartyMenu *)(gSharedMem + 0x1C000))
-#define ewram1c000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000)) // FIXME, names too similar
+#define sCreditsData                    (*(struct CreditsData *)(gSharedMem + 0x1C000))
 
 // hall_of_fame.c
 #define eHofGfxPtr                      (gSharedMem + 0x8000)
 #define eHofMonPtr                      (struct HallofFameMons*)(&gSharedMem[0x1C000])
 #define eHOFPCScreenEffect              (*(struct PCScreenEffectStruct *)(gSharedMem + 0x1c000))
 
-#define ewram1D000                      ((struct Pokemon *)(gSharedMem + 0x1D000))
-#define ewram1D000_2                    ((u16 *)(gSharedMem + 0x1D000))
-#define ewram1D400                      ((u16 *)(gSharedMem + 0x1D400))
+#define eMultiBattleSetupPartySendBuffer \
+    ((struct Pokemon *)(gSharedMem + 0x1D000))
+
+// pokeblock_feed.c
+#define ePokeblockFeedMonAnimX          ((s16 *)(gSharedMem + 0x1D000))
+#define ePokeblockFeedMonAnimY          ((s16 *)(gSharedMem + 0x1D400))
+
+// decoration.c
+#define sDecorationContext              (*(struct DecoPCPointers *)(gSharedMem + 0x1f000))
+
 #define ewramSavedItemsPocket           ((struct ItemSlot *)(gSharedMem + 0x1E000))  // saved items pocket (for Wally battle)
-#define eHallOfFame                     (struct HallOfFame *)(gSharedMem + 0x1E000)
-#define HALL_OF_FAME_SHEET_0            ((u8 *)(gSharedMem + 0x1E000))
-#define ewram1E000_2                    (const u8 *)(gSharedMem + 0x1E000)
-#define eContestLinkSendBuffer          gSharedMem + 0x1E000
-#define HALL_OF_FAME_SHEET_1            ((u8 *)(gSharedMem + 0x1E800))
-#define ewram_1f000                     (*(struct DecoPCPointers *)(gSharedMem + 0x1f000))
 #define ewramSavedPokeballsPocket       ((struct ItemSlot *)(gSharedMem + 0x1F000))  // saved Pokeballs pocket (for Wally battle)
-#define HALL_OF_FAME_SHEET_2            ((u8 *)(gSharedMem + 0x1F000))
-#define EWRAM_1F800                     ((u16 *)(gSharedMem + 0x1F800))
-#define ewram_1F800_2                   (const u16 *)(gSharedMem + 0x1F800)
 
 // player_pc.c, party_menu.c
 #define eMailboxInfo                    (*(struct MailboxStruct *)(gSharedMem + 0x1FE00))
 
 #define eCutGrassSpriteArray            (gSharedMem + 0x1FFF0) // 8 sprite IDs
-#define ewram1FFFC                      (gSharedMem[0x1FFFC])
-#define ewram1FFFD                      (gSharedMem[0x1FFFD])
+
+// reshow_battle_screen.c
 #define gHelperState                    (gSharedMem[0x1FFFE])
-#define ewram1FFFE                      (gSharedMem[0x1FFFE])
 #define gReshowState                    (gSharedMem[0x1FFFF])
+
+// item_menu.c
 #define ewramBagSetupStep               (gSharedMem[0x1FFFF])
-#define ewram1FFFF                      (gSharedMem[0x1FFFF])
+
+// pokeblock_feed.c
+#define ePokeblockSpriteId              (gSharedMem[0x1FFFC])
+#define ePokeblockFeedCaseSpriteId      (gSharedMem[0x1FFFD])
+#define ePokeblockMonSpriteId           (gSharedMem[0x1FFFE])
+
+// pokeblock.c
+#define ePokeblockCaseSpriteId          (gSharedMem[0x1FFFE])
+#define ePokeblockGfxState              (gSharedMem[0x1FFFF])
 
 #endif

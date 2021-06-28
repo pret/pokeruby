@@ -303,7 +303,7 @@ const struct CompressedSpriteSheet gUnknown_08416E34[] = {
 
 EWRAM_DATA u16 gUnknown_02039358 = 0;
 EWRAM_DATA s16 gUnknown_0203935A = 0;
-EWRAM_DATA s16 gUnknown_0203935C = 0;
+EWRAM_DATA s16 gIntroCredits_MovingSceneryState = 0;
 
 extern u8 gReservedSpritePaletteCount;
 
@@ -335,7 +335,7 @@ void load_intro_part2_graphics(u8 a)
         sub_8149264();
         break;
     }
-    gUnknown_0203935C = 0;
+    gIntroCredits_MovingSceneryState = 0;
     gReservedSpritePaletteCount = 8;
 }
 
@@ -407,7 +407,7 @@ void sub_8148CB0(u8 a)
         break;
     }
     gReservedSpritePaletteCount = 8;
-    gUnknown_0203935C = 0;
+    gIntroCredits_MovingSceneryState = 0;
 }
 
 void sub_8148E90(u8 a)
@@ -480,7 +480,7 @@ void sub_8148F3C(u8 taskId)
     }
 }
 
-void sub_8149020(u8 mode)
+void CycleSceneryPalette(u8 mode)
 {
     u16 x;
     u16 y;
@@ -527,7 +527,7 @@ void sub_8149020(u8 mode)
 
 void sub_814910C(struct Sprite *sprite)
 {
-    if (gUnknown_0203935C)
+    if (gIntroCredits_MovingSceneryState)
     {
         DestroySprite(sprite);
     }

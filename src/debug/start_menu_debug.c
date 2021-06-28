@@ -905,7 +905,7 @@ u8 DebugMenu_OpenWatanabe(void)
 u8 DebugMenu_EndSequenceDemo(void)
 {
     CloseMenu();
-    SetMainCallback2(sub_81439D0);
+    SetMainCallback2(CB2_StartCreditsSequence);
     ScriptContext2_Enable();
     return TRUE;
 }

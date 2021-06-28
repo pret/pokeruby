@@ -1153,9 +1153,9 @@ static void Task_IntroHandleBikeAndEonMovement(u8 taskId)
     if (gTasks[taskId].data[3] < 512)
         gTasks[taskId].data[3]++;
 #ifdef SAPPHIRE
-    sub_8149020(0);
+    CycleSceneryPalette(0);
 #else
-    sub_8149020(1);
+    CycleSceneryPalette(1);
 #endif
 }
 

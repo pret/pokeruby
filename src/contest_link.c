@@ -16,8 +16,8 @@ static void de_sub_80C9294(bool32 arg0);
 
 static void SendBlockToAllOpponents(const void *data, u16 size)
 {
-    memcpy(eContestLinkSendBuffer, data, size);
-    SendBlock(bitmask_all_link_players_but_self(), eContestLinkSendBuffer, size);
+    memcpy(gDecompressionBuffer, data, size);
+    SendBlock(bitmask_all_link_players_but_self(), gDecompressionBuffer, size);
 }
 
 static bool8 HasPlayerReceivedBlock(u8 who)

@@ -97,11 +97,13 @@ static EWRAM_DATA u32 gLastSaveSectorStatus = 0; // used but in an unferenced fu
 
 // Divide save blocks into individual chunks to be written to flash sectors
 
-#define SAVEBLOCK_CHUNK(structure, chunkNum)                                \
-{                                                                           \
-    (u8 *)&structure + chunkNum * SECTOR_DATA_SIZE,                         \
-    min(sizeof(structure) - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE)  \
-}                                                                           \
+#define SAVEBLOCK_CHUNK_EX(structure, size, chunkNum)         \
+{                                                             \
+    (u8 *)structure + chunkNum * SECTOR_DATA_SIZE,            \
+    min(size - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE) \
+}                                                             \
+
+#define SAVEBLOCK_CHUNK(structure, chunkNum) SAVEBLOCK_CHUNK_EX(&structure, sizeof(structure), chunkNum)
 
 static const struct SaveBlockChunk sSaveBlockChunks[] =
 {
@@ -125,8 +127,8 @@ static const struct SaveBlockChunk sSaveBlockChunks[] =
 
 static const struct SaveBlockChunk sHallOfFameChunks[] =
 {
-    SAVEBLOCK_CHUNK(*eHallOfFame, 0),
-    SAVEBLOCK_CHUNK(*eHallOfFame, 1),
+    SAVEBLOCK_CHUNK_EX(gDecompressionBuffer, 2 * SECTOR_DATA_SIZE, 0),
+    SAVEBLOCK_CHUNK_EX(gDecompressionBuffer, 2 * SECTOR_DATA_SIZE, 1),
 };
 
 void Save_EraseAllData(void)

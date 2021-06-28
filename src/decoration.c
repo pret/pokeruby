@@ -1457,19 +1457,19 @@ void DecorationPC(u8 taskId)
 void Task_SecretBasePC_Decoration(u8 taskId)
 {
     DecorationPC(taskId);
-    ewram_1f000.items = gSaveBlock1.secretBases[0].decorations;
-    ewram_1f000.pos = gSaveBlock1.secretBases[0].decorationPos;
-    ewram_1f000.size = sizeof gSaveBlock1.secretBases[0].decorations;
-    ewram_1f000.isPlayerRoom = 0;
+    sDecorationContext.items = gSaveBlock1.secretBases[0].decorations;
+    sDecorationContext.pos = gSaveBlock1.secretBases[0].decorationPos;
+    sDecorationContext.size = sizeof gSaveBlock1.secretBases[0].decorations;
+    sDecorationContext.isPlayerRoom = 0;
 }
 
 void DoPlayerPCDecoration(u8 taskId)
 {
     DecorationPC(taskId);
-    ewram_1f000.items = gSaveBlock1.playerRoomDecor;
-    ewram_1f000.pos = gSaveBlock1.playerRoomDecorPos;
-    ewram_1f000.size = sizeof gSaveBlock1.playerRoomDecor;
-    ewram_1f000.isPlayerRoom = 1;
+    sDecorationContext.items = gSaveBlock1.playerRoomDecor;
+    sDecorationContext.pos = gSaveBlock1.playerRoomDecorPos;
+    sDecorationContext.size = sizeof gSaveBlock1.playerRoomDecor;
+    sDecorationContext.isPlayerRoom = 1;
 }
 
 void sub_80FE2B4(void)
@@ -1522,7 +1522,7 @@ void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
     Menu_EraseWindowRect(0, 0, 10, 9);
     Menu_BlankWindowRect(2, 15, 27, 18);
     FreeSpritePaletteByTag(6);
-    if (ewram_1f000.isPlayerRoom == 0)
+    if (sDecorationContext.isPlayerRoom == 0)
     {
         ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
         DestroyTask(taskId);
@@ -1572,7 +1572,7 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
     Menu_DrawStdWindowFrame(0, 0, 14, 19);
     for (decoCat=0; decoCat<8; decoCat++)
     {
-        if (ewram_1f000.isPlayerRoom == 1 && gTasks[taskId].data[11] == 0 && decoCat != DECORCAT_DOLL && decoCat != DECORCAT_CUSHION)
+        if (sDecorationContext.isPlayerRoom == 1 && gTasks[taskId].data[11] == 0 && decoCat != DECORCAT_DOLL && decoCat != DECORCAT_CUSHION)
         {
             sub_80FE470(decoCat, 1, 2 * decoCat + 1, 13); // Selectable
         } else
@@ -1811,7 +1811,7 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
         }
         if (gUnknown_020388D0[i])
         {
-            if (ewram_1f000.isPlayerRoom == 1 && gUnknown_020388F6 != DECORCAT_DOLL && gUnknown_020388F6 != DECORCAT_CUSHION && gTasks[taskId].data[11] == 0)
+            if (sDecorationContext.isPlayerRoom == 1 && gUnknown_020388F6 != DECORCAT_DOLL && gUnknown_020388F6 != DECORCAT_CUSHION && gTasks[taskId].data[11] == 0)
             {
                 StringCopy(gStringVar1, gDecorations[gUnknown_020388D0[i]].name);
                 sub_8072A18(gUnknown_083EC65A, 0x08, 8 * ni, 0x68, 1);
@@ -2180,9 +2180,9 @@ void sub_80FF474(void)
 bool8 sub_80FF58C/*IsThereRoomForMoreDecorations*/(void)
 {
     u16 i;
-    for (i=0; i<ewram_1f000.size; i++)
+    for (i=0; i<sDecorationContext.size; i++)
     {
-        if (ewram_1f000.items[i] == 0)
+        if (sDecorationContext.items[i] == 0)
         {
             return TRUE;
         }
@@ -2192,7 +2192,7 @@ bool8 sub_80FF58C/*IsThereRoomForMoreDecorations*/(void)
 
 void sub_80FF5BC(u8 taskId)
 {
-    if (ewram_1f000.isPlayerRoom == 1 && gUnknown_020388F6 != DECORCAT_DOLL && gUnknown_020388F6 != DECORCAT_CUSHION)
+    if (sDecorationContext.isPlayerRoom == 1 && gUnknown_020388F6 != DECORCAT_DOLL && gUnknown_020388F6 != DECORCAT_CUSHION)
     {
         sub_80FEF74();
         sub_80FED1C();
@@ -2208,8 +2208,8 @@ void sub_80FF5BC(u8 taskId)
         {
             sub_80FEF74();
             sub_80FED1C();
-            ConvertIntToDecimalStringN(gStringVar1, ewram_1f000.size, STR_CONV_MODE_RIGHT_ALIGN, 2);
-            if (!ewram_1f000.isPlayerRoom)
+            ConvertIntToDecimalStringN(gStringVar1, sDecorationContext.size, STR_CONV_MODE_RIGHT_ALIGN, 2);
+            if (!sDecorationContext.isPlayerRoom)
             {
                 StringExpandPlaceholders(gStringVar4, gSecretBaseText_NoMoreDecor);
             } else
@@ -2573,16 +2573,16 @@ void sub_81000C4(u8 taskId)
 void sub_8100174(u8 taskId)
 {
     u16 i;
-    for (i=0; i<ewram_1f000.size; i++)
+    for (i=0; i<sDecorationContext.size; i++)
     {
-        if (ewram_1f000.items[i] == 0)
+        if (sDecorationContext.items[i] == 0)
         {
-            ewram_1f000.items[i] = gUnknown_020388D0[gUnknown_020388F5];
-            ewram_1f000.pos[i] = ((gTasks[taskId].data[0] - 7) << 4) + (gTasks[taskId].data[1] - 7);
+            sDecorationContext.items[i] = gUnknown_020388D0[gUnknown_020388F5];
+            sDecorationContext.pos[i] = ((gTasks[taskId].data[0] - 7) << 4) + (gTasks[taskId].data[1] - 7);
             break;
         }
     }
-    if (!ewram_1f000.isPlayerRoom)
+    if (!sDecorationContext.isPlayerRoom)
     {
         for (i=0; i<16; i++)
         {
@@ -3066,8 +3066,8 @@ void sub_8100A0C(u8 taskId)
 
 void sub_8100A60(u8 a0)
 {
-    ewram_1f000.items[a0] = 0;
-    ewram_1f000.pos[a0] = 0;
+    sDecorationContext.items[a0] = 0;
+    sDecorationContext.pos[a0] = 0;
 }
 
 void sub_8100A7C(void)
@@ -3078,7 +3078,7 @@ void sub_8100A7C(void)
     if (gSpecialVar_0x8004 == gUnknown_02039234)
     {
         gSpecialVar_Result = 1;
-    } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].decorId]].permission == DECORPERM_SOLID_MAT)
+    } else if (gDecorations[sDecorationContext.items[gUnknown_020391B4[gSpecialVar_0x8004].decorId]].permission == DECORPERM_SOLID_MAT)
     {
         gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;
         sub_8100A60(gUnknown_020391B4[gSpecialVar_0x8004].decorId);
@@ -3116,12 +3116,12 @@ void sub_8100B6C(void)
     u8 permission;
     for (i=0; i<gUnknown_02039234; i++)
     {
-        permission = gDecorations[ewram_1f000.items[gUnknown_020391B4[i].decorId]].permission;
-        x = ewram_1f000.pos[gUnknown_020391B4[i].decorId] >> 4;
-        y = ewram_1f000.pos[gUnknown_020391B4[i].decorId] & 0xf;
+        permission = gDecorations[sDecorationContext.items[gUnknown_020391B4[i].decorId]].permission;
+        x = sDecorationContext.pos[gUnknown_020391B4[i].decorId] >> 4;
+        y = sDecorationContext.pos[gUnknown_020391B4[i].decorId] & 0xf;
         if (permission != DECORPERM_SOLID_MAT)
         {
-            if (ewram_1f000.items[gUnknown_020391B4[i].decorId] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(x + 7, y + 7) == 0x28c)
+            if (sDecorationContext.items[gUnknown_020391B4[i].decorId] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(x + 7, y + 7) == 0x28c)
             {
                 gUnknown_020391B4[i].height++;
             }
@@ -3173,9 +3173,9 @@ void sub_8100C88(u8 taskId)
 bool8 sub_8100D38(u8 taskId)
 {
     u16 i;
-    for (i=0; i<ewram_1f000.size; i++)
+    for (i=0; i<sDecorationContext.size; i++)
     {
-        if (ewram_1f000.items[i] != 0)
+        if (sDecorationContext.items[i] != 0)
         {
             gTasks[taskId].data[13] = i;
             return TRUE;
@@ -3357,9 +3357,9 @@ bool8 sub_8101200(u8 taskId, u8 decorIdx, struct UnkStruct_020391B4 *unk_020391B
     u8 yOff;
     x = gTasks[taskId].data[0] - 7;
     y = gTasks[taskId].data[1] - 7;
-    xOff = ewram_1f000.pos[decorIdx] >> 4;
-    yOff = ewram_1f000.pos[decorIdx] & 0xf;
-    if (ewram_1f000.items[decorIdx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28c)
+    xOff = sDecorationContext.pos[decorIdx] >> 4;
+    yOff = sDecorationContext.pos[decorIdx] & 0xf;
+    if (sDecorationContext.items[decorIdx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28c)
     {
         unk_020391B4->height--;
     }
@@ -3376,8 +3376,8 @@ void sub_81012A0(void)
     u8 xOff;
     u8 yOff;
     u16 i;
-    xOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].decorId] >> 4;
-    yOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].decorId] & 0xf;
+    xOff = sDecorationContext.pos[gUnknown_020391B4[gUnknown_02039234].decorId] >> 4;
+    yOff = sDecorationContext.pos[gUnknown_020391B4[gUnknown_02039234].decorId] & 0xf;
     for (i=0; i<0x40; i++)
     {
         if (gSaveBlock1.objectEventTemplates[i].x == xOff && gSaveBlock1.objectEventTemplates[i].y == yOff && !FlagGet(gSaveBlock1.objectEventTemplates[i].flagId))
@@ -3391,13 +3391,13 @@ void sub_81012A0(void)
 bool8 sub_8101340(u8 taskId)
 {
     u16 i;
-    for (i=0; i<ewram_1f000.size; i++)
+    for (i=0; i<sDecorationContext.size; i++)
     {
-        if (ewram_1f000.items[i] != 0)
+        if (sDecorationContext.items[i] != 0)
         {
-            if (gDecorations[ewram_1f000.items[i]].permission == DECORPERM_SOLID_MAT)
+            if (gDecorations[sDecorationContext.items[i]].permission == DECORPERM_SOLID_MAT)
             {
-                sub_8101118(ewram_1f000.items[i], gUnknown_020391B4);
+                sub_8101118(sDecorationContext.items[i], gUnknown_020391B4);
                 if (sub_8101200(taskId, i, gUnknown_020391B4) == TRUE)
                 {
                     gUnknown_020391B4->decorId = i;
@@ -3417,11 +3417,11 @@ void sub_81013B8(u8 a0, u8 a1, u8 a2, u8 a3)
     u8 xOff;
     u8 yOff;
     u8 decorIdx;
-    for (i=0; i<ewram_1f000.size; i++)
+    for (i=0; i<sDecorationContext.size; i++)
     {
-        decorIdx = ewram_1f000.items[i];
-        xOff = ewram_1f000.pos[i] >> 4;
-        yOff = ewram_1f000.pos[i] & 0xf;
+        decorIdx = sDecorationContext.items[i];
+        xOff = sDecorationContext.pos[i] >> 4;
+        yOff = sDecorationContext.pos[i] & 0xf;
         if (decorIdx != 0 && gDecorations[decorIdx].permission == DECORPERM_SOLID_MAT && a0 <= xOff && a1 <= yOff && a2 >= xOff && a3 >= yOff)
         {
             gUnknown_020391B4[gUnknown_02039234].decorId = i;
@@ -3442,9 +3442,9 @@ void sub_8101460(u8 taskId)
     gUnknown_02039234 = 0;
     if (sub_8101340(taskId) != TRUE)
     {
-        for (i = 0; i < ewram_1f000.size; i++)
+        for (i = 0; i < sDecorationContext.size; i++)
         {
-            var1 = ewram_1f000.items[i];
+            var1 = sDecorationContext.items[i];
             if (var1 != 0)
             {
                 sub_8101118(var1, gUnknown_020391B4);
@@ -3458,8 +3458,8 @@ void sub_8101460(u8 taskId)
         }
         if (gUnknown_02039234 != 0)
         {
-            xOff = ewram_1f000.pos[gUnknown_020391B4[0].decorId] >> 4;
-            yOff = ewram_1f000.pos[gUnknown_020391B4[0].decorId] & 0xf;
+            xOff = sDecorationContext.pos[gUnknown_020391B4[0].decorId] >> 4;
+            yOff = sDecorationContext.pos[gUnknown_020391B4[0].decorId] & 0xf;
             var1 = yOff - gUnknown_020391B4[0].height + 1;
             var2 = gUnknown_020391B4[0].width + xOff - 1;
 
