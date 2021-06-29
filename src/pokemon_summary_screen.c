@@ -2478,7 +2478,7 @@ bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {
     u32 trainerId;
 
-    if (ewram18000_3 == gEnemyParty)
+    if (pssData.monList.partyMons == gEnemyParty)
     {
         u8 enemyId = GetMultiplayerId() ^ 1;
         trainerId = gLinkPlayers[enemyId].trainerId & 0xFFFF;

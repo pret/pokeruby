@@ -3984,7 +3984,7 @@ void SetMoveSpecificAnimData(u8 contestant)
     case MOVE_ROLE_PLAY:
         r5_2 = sContestantStatus[contestant].contestantAnimTarget;
         gContestResources__moveAnim.targetSpecies = SanitizeSpecies(gContestMons[r5_2].species);
-        gContestResources__moveAnim.unk10 = gContestMons[r5_2].personality;
+        gContestResources__moveAnim.personality2 = gContestMons[r5_2].personality;
         gContestResources__moveAnim.hasTargetAnim = 1;
         break;
     case MOVE_RETURN:

@@ -1227,7 +1227,7 @@ void sub_80E2F2C(u8 taskId)
 
     if (IsContest())
     {
-        species = eWRAM_19348Struct->species2;
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -1364,7 +1364,7 @@ static void sub_80E3338(u8 taskId)
 
     if (IsContest())
     {
-        species = eWRAM_19348Struct->species2;
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -1694,7 +1694,7 @@ void sub_80E3C4C(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 
     if (IsContest())
     {
-        species = eWRAM_19348Struct->species2;
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -1816,7 +1816,7 @@ void sub_80E4028(u8 taskId)
     }
 
     offset = gBattleAnimArgs[1] * 32;
-    dest = IsContest() ? &ewram14800[offset] : &ewram18000_2[offset];
+    dest = IsContest() ? &((u8 *)EWRAM_14800)[offset] : &((u8 *)ewram18000)[offset];
     // This doesn't match when u16* is used.
     memcpy(dest, &((u8 *)gPlttBufferUnfaded)[i * 32], 32);
     DestroyAnimVisualTask(taskId);
@@ -1851,7 +1851,7 @@ void sub_80E40D0(u8 taskId)
 
     dest = &((u8 *)gPlttBufferUnfaded)[i * 32];
     offset = gBattleAnimArgs[1] * 32;
-    src = IsContest() ? &ewram14800[offset] : &ewram18000_2[offset];
+    src = IsContest() ? &((u8 *)EWRAM_14800)[offset] : &((u8 *)ewram18000)[offset];
     // This doesn't match when u16* is used.
     memcpy(dest, src, 32);
     DestroyAnimVisualTask(taskId);

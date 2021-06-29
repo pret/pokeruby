@@ -85,7 +85,7 @@ struct WatanabeEwram18000_2 {
     u8 unk9;
     u8 unkA;
     struct PlttData unkC;
-    u16 unk10[16];
+    u16 personality2[16];
 };
 
 #define eWatanabe17000 (*(struct WatanabeEwram17000 *)(gSharedMem + 0x17000))
@@ -2710,7 +2710,7 @@ void debug_80C6CB8(u8 taskId)
 void debug_80C6EE8(u8 taskId)
 {
     u16 hue;
-    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
+    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->personality2, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
     gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
     gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
@@ -3110,10 +3110,10 @@ void debug_80C7294(u8 taskId)
         gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
         gTasks[taskId].func = debug_80C6EE8;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)
@@ -3318,7 +3318,7 @@ void debug_80C7934(u8 taskId)
 void debug_80C7A54(u8 taskId)
 {
     u16 hue;
-    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
+    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->personality2, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
     gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
     gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
@@ -3701,10 +3701,10 @@ void debug_80C7DDC(u8 taskId)
         gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
         gTasks[taskId].func = debug_80C7A54;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)

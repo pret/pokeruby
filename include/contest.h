@@ -425,17 +425,6 @@ struct ContestAppealMoveResults
     u8 contestant;
 };
 
-struct ContestMoveAnim
-{
-    u16 species;
-    u16 targetSpecies;
-    bool8 hasTargetAnim :1;
-    u8 contestant;
-    u32 personality;
-    u32 otId;
-    u32 unk10;
-};
-
 struct ContestFinalStandings
 {
     s32 totalPoints;

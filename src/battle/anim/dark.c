@@ -864,7 +864,7 @@ void sub_80E0A4C(u8 taskId)
 
     if (IsContest())
     {
-        species = EWRAM_19348[0];
+        species = gContestResources__moveAnim.species;
     }
     else
     {

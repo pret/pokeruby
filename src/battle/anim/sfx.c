@@ -137,9 +137,6 @@ static void sub_812B108(u8 taskId)
     }
 }
 
-// #define gContestResources__moveAnim (*(struct ContestMoveAnim *)(gSharedMem + 0x19348))
-// #define EWRAM_19348 (*(u16 *)(gSharedMem + 0x19348))
-
 // used in 3 moves:
 //         Move_HOWL, Move_ROAR, Move_GROWL
 void sub_812B18C(u8 taskId)

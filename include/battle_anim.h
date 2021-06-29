@@ -31,11 +31,6 @@ enum
     BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
 
-struct UnknownStruct1
-{
-    u8 unk0;
-};
-
 struct UnknownStruct2
 {
     void *unk0;
@@ -43,19 +38,15 @@ struct UnknownStruct2
     u8 unk8;
 };
 
-struct UnknownStruct3
+struct ContestMoveAnim
 {
-    u8 unk0;
-    u8 filler1[0xB];
-};
-
-struct EWRAM_19348_Struct
-{
-    /*0x00*/ u16 species2;
-    /*0x02*/ u16 species;
-    /*0x04*/ u8 filler4[0x8];
-    /*0x0C*/ u32 otId;
-    /*0x10*/ u32 personality;
+    u16 species;
+    u16 targetSpecies;
+    bool8 hasTargetAnim:1;
+    u8 contestant;
+    u32 personality;
+    u32 otId;
+    u32 personality2;
 };
 
 extern void (*gAnimScriptCallback)(void);

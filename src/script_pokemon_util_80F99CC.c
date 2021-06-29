@@ -301,7 +301,7 @@ void ScrSpecial_GetPokemonNicknameAndMoveName(void)
     StringCopy(gStringVar2, gMoveNames[data]);
 }
 
-void sub_80F9FDC(struct Pokemon *pkmn, u8 moveIndex1, u8 moveIndex2)
+static void SwapMoveSlots(struct Pokemon *pkmn, u8 moveIndex1, u8 moveIndex2)
 {
     u16 move1 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1);
     u16 move2 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex2);
@@ -331,7 +331,7 @@ void DeleteMonMove(void)
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
 
     for (i = gSpecialVar_0x8005; i < 3; i++)
-        sub_80F9FDC(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
+        SwapMoveSlots(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 
 void IsSelectedMonEgg(void)

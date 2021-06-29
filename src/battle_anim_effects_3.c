@@ -2262,7 +2262,6 @@ void sub_812D7E8(u8 taskId)
     u8 *dest;
     u8 *src;
     u16 *field_4;
-    u16 *ptr;
     u16 stretch;
 
     switch (gTasks[taskId].data[0])
@@ -2303,7 +2302,7 @@ void sub_812D7E8(u8 taskId)
 
         if (IsContest())
         {
-            if (IsSpeciesNotUnown(EWRAM_19348[0]) != IsSpeciesNotUnown(EWRAM_19348[1]))
+            if (IsSpeciesNotUnown(gContestResources__moveAnim.species) != IsSpeciesNotUnown(gContestResources__moveAnim.targetSpecies))
             {
                 field_4 = (u16 *)subStruct.field_4;
                 for (i = 0; i < 8; i++)
@@ -2325,8 +2324,7 @@ void sub_812D7E8(u8 taskId)
                 }
             }
 
-            ptr = EWRAM_19348;
-            if (IsSpeciesNotUnown(ptr[1]))
+            if (IsSpeciesNotUnown(gContestResources__moveAnim.targetSpecies))
                 gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims =
                     gAffineAnims_BattleSpriteContest;
             else
@@ -3189,9 +3187,9 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     if (IsContest())
     {
         isBackPic = 1;
-        personality = eWRAM_19348Struct->personality;
-        otId = eWRAM_19348Struct->otId;
-        species = eWRAM_19348Struct->species;
+        personality = gContestResources__moveAnim.personality2;
+        otId = gContestResources__moveAnim.otId;
+        species = gContestResources__moveAnim.targetSpecies;
         xOffset = 20;
         priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
     }
@@ -4951,9 +4949,9 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     case 1:
         if (IsContest())
         {
-            personality = eWRAM_19348Struct->personality;
-            otId = eWRAM_19348Struct->otId;
-            species = eWRAM_19348Struct->species;
+            personality = gContestResources__moveAnim.personality;
+            otId = gContestResources__moveAnim.otId;
+            species = gContestResources__moveAnim.targetSpecies;
             subpriority = GetBattlerSubpriority(gBattleAnimAttacker);
             isBackPic = 0;
             x = -32;

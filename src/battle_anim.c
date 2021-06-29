@@ -1488,7 +1488,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
     else
     {
         for (i = 0; i < 4; i++)
-            gAnimSpeciesByBanks[i] = EWRAM_19348[0];
+            gAnimSpeciesByBanks[i] = gContestResources__moveAnim.species;
     }
 
     if (isMoveAnim == 0)
@@ -1940,7 +1940,7 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
 
         spriteId = gBattlerSpriteIds[bank];
         gBattle_BG1_X = -(gSprites[spriteId].x + gSprites[spriteId].x2) + 32;
-        if (IsContest() && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
+        if (IsContest() && IsSpeciesNotUnown(gContestResources__moveAnim.species) != 0)
             gBattle_BG1_X--;
         gBattle_BG1_Y = -(gSprites[spriteId].y + gSprites[spriteId].y2) + 32;
         gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
@@ -1994,7 +1994,7 @@ static void sub_8076380(void)
     struct UnknownStruct2 s;
     u16 *ptr;
 
-    if (IsSpeciesNotUnown(EWRAM_19348[0]))
+    if (IsSpeciesNotUnown(gContestResources__moveAnim.species))
     {
         sub_8078914(&s);
         ptr = s.unk4;
@@ -2451,9 +2451,9 @@ static void LoadMoveBg(u16 bgId)
     {
         void *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
 
-        LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
-        sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
-        DmaCopy32Defvars(3, IsContest() ? EWRAM_14800 : EWRAM_18000, (void *)(VRAM + 0xD000), 0x800);
+        LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : ewram18000);
+        sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : ewram18000, 0x100, 0);
+        DmaCopy32Defvars(3, IsContest() ? EWRAM_14800 : ewram18000, (void *)(VRAM + 0xD000), 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80789BC() * 16, 32);
     }

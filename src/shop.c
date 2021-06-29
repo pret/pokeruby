@@ -267,7 +267,7 @@ static void BuyMenuDrawGraphics(void)
 
     Dma3FillLarge32_(0, (void*)OAM, OAM_SIZE);
     LZDecompressVram(gBuyMenuFrame_Gfx, (void*)(VRAM + 0x7C00));
-    LZDecompressWram(gBuyMenuFrame_Tilemap, ewram18000_2);
+    LZDecompressWram(gBuyMenuFrame_Tilemap, ewram18000);
     LoadCompressedPalette(gMenuMoneyPal, 0xC0, sizeof(gMenuMoneyPal));
     FreeAllSpritePalettes();
     ResetPaletteFade();
@@ -498,7 +498,7 @@ static void BuyMenuDrawTextboxBG_Restore(void)
 
     for (i = 0; i < 8; i++)
         for (j = 0; j < 14; j++)
-            gBGTilemapBuffers[1][32 * (i + 12) + j] = ewram18300[32 * i + j] + 0xC3E0;
+            gBGTilemapBuffers[1][32 * (i + 12) + j] = ewram18000[0x180 + 32 * i + j] + 0xC3E0;
 }
 
 static void Shop_PrintItemDesc(void)
