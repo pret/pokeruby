@@ -405,7 +405,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160F0*/ u16 changedItems[4];
     /*0x160F8*/ u8 unk160F8;
     /*0x160F9*/ u8 unk160F9;
-    /*0x160FA*/ u8 unk160FA;
+    /*0x160FA*/ u8 levelUpHP;
     /*0x160FB*/ u8 unk160FB;
     /*0x160FC*/ u8 turnSideTracker;
     /*0x160FD*/ u8 unk160FD;

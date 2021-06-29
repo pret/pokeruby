@@ -5181,7 +5181,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(battlerId -1, gLastUsedAbility);
-            ewram160F8 = battlerId - 1;
+            gBattleStruct->unk160F8 = battlerId - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -5194,7 +5194,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(battlerId - 1, gLastUsedAbility);
-            ewram160F8 = battlerId - 1;
+            gBattleStruct->unk160F8 = battlerId - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -5207,7 +5207,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(battlerId, gLastUsedAbility);
-            ewram160F8 = battlerId;
+            gBattleStruct->unk160F8 = battlerId;
         }
         else
             gBattlescriptCurrInstr += 7;

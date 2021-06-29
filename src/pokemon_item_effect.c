@@ -311,7 +311,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 data = 1;
                             break;
                         case 0xFD:
-                            data = eStatHp;
+                            data = gBattleStruct->levelUpHP;
                             break;
                         }
                         if (GetMonData(pkmn, MON_DATA_MAX_HP, NULL) != GetMonData(pkmn, MON_DATA_HP, NULL))
