@@ -71,62 +71,63 @@ void OpenPartyMenuFromScriptContext(u8 taskId)
 
 bool8 SetupContestPartyMenu(void)
 {
-    switch (ewram1B000.pmSetupState)
+    switch (ePartyMenu2.pmSetupState)
     {
     case 0:
-        if (ewram1B000.pmMonIndex < gPlayerPartyCount)
+        if (ePartyMenu2.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex, &gPlayerParty[ewram1B000.pmMonIndex]);
-            ewram1B000.pmMonIndex++;
+            TryCreatePartyMenuMonIcon(ePartyMenu2.menuHandlerTaskId,
+                ePartyMenu2.pmMonIndex, &gPlayerParty[ePartyMenu2.pmMonIndex]);
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            ewram1B000.pmMonIndex = 0;
-            ewram1B000.pmSetupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(ewram1B000.menuHandlerTaskId);
-        ewram1B000.pmSetupState++;
+        CreateHeldItemIcons_806DC34(ePartyMenu2.menuHandlerTaskId);
+        ePartyMenu2.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex) != 1)
+        if (sub_806BD58(ePartyMenu2.menuHandlerTaskId, ePartyMenu2.pmMonIndex) != 1)
         {
-            ewram1B000.pmMonIndex++;
+            ePartyMenu2.pmMonIndex++;
             break;
         }
         else
         {
-            ewram1B000.pmMonIndex = 0;
-            ewram1B000.pmSetupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
             break;
         }
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 6:
         sub_80F9C00();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 7: // the only case that can return true.
-        if (DrawPartyMonBackground(ewram1B000.pmMonIndex) != 1)
+        if (DrawPartyMonBackground(ePartyMenu2.pmMonIndex) != 1)
         {
-            ewram1B000.pmMonIndex++;
+            ePartyMenu2.pmMonIndex++;
             break;
         }
         else
         {
-            ewram1B000.pmMonIndex = 0;
-            ewram1B000.pmSetupState = 0;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState = 0;
             return TRUE;
         }
     }
@@ -178,60 +179,61 @@ void HandleSelectPartyMenu(u8 var)
 
 bool8 SetupMoveTutorPartyMenu(void)
 {
-    switch (ewram1B000.pmSetupState)
+    switch (ePartyMenu2.pmSetupState)
     {
     case 0:
-        if (ewram1B000.pmMonIndex < gPlayerPartyCount)
+        if (ePartyMenu2.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex, &gPlayerParty[ewram1B000.pmMonIndex]);
-            ewram1B000.pmMonIndex++;
+            TryCreatePartyMenuMonIcon(ePartyMenu2.menuHandlerTaskId,
+                ePartyMenu2.pmMonIndex, &gPlayerParty[ePartyMenu2.pmMonIndex]);
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            ewram1B000.pmMonIndex = 0;
-            ewram1B000.pmSetupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(ewram1B000.menuHandlerTaskId);
-        ewram1B000.pmSetupState++;
+        CreateHeldItemIcons_806DC34(ePartyMenu2.menuHandlerTaskId);
+        ePartyMenu2.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex) != 1)
+        if (sub_806BD58(ePartyMenu2.menuHandlerTaskId, ePartyMenu2.pmMonIndex) != 1)
         {
-            ewram1B000.pmMonIndex++;
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            ewram1B000.pmMonIndex = 0;
-            ewram1B000.pmSetupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
         }
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 6:
         sub_80F9E1C();
-        ewram1B000.pmSetupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 7: // the only case that can return true.
-        if (DrawPartyMonBackground(ewram1B000.pmMonIndex) != 1)
+        if (DrawPartyMonBackground(ePartyMenu2.pmMonIndex) != 1)
         {
-            ewram1B000.pmMonIndex++;
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            ewram1B000.pmMonIndex = 0;
-            ewram1B000.pmSetupState = 0;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState = 0;
             return TRUE;
         }
     }

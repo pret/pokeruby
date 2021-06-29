@@ -11,18 +11,6 @@
 #include "task.h"
 #include "ewram.h"
 
-struct Struct201C000 {
-    struct Pokemon *monPointer;
-    u8 filler4[1];
-    u8 donorMonId;
-    u16 unk6;
-    u8 filler8[4];
-    s32 unkC;
-    void* unk10;
-    u8 filler14[26];
-    s16 unk2E;
-};
-
 #if ENGLISH
 #define WINDOW_LEFT 3
 #define WINDOW_RIGHT 26
@@ -40,7 +28,7 @@ extern u8 gUnknown_0202E8F4;
 static void sub_8133D50(u8 taskId);
 static void Task_ChooseNewMonForSoftboiled(u8 taskId);
 static void CantUseSoftboiled(u8 taskId);
-static void sub_8133EF8(void);
+static void sub_8133EF8(u8 taskId);
 
 bool8 SetUpFieldMove_SoftBoiled(void) {
     u16 maxHp;
@@ -61,7 +49,7 @@ bool8 SetUpFieldMove_SoftBoiled(void) {
 
 void sub_8133D28(u8 taskid) {
     ePartyMenu.unkC = sub_8133D50;
-    ewram1B000.pmUnk272 = 3;
+    ePartyMenu2.pmUnk272 = 3;
     DoPokemonMenu_Switch(taskid);
 }
 
@@ -82,10 +70,10 @@ static void sub_8133D50(u8 taskId) {
         return;
     }
 
-    EWRAM_1C000.monPointer = &gPlayerParty[sprites[ePartyMenu.slotId2].data[0]];
-    hp = GetMonData(EWRAM_1C000.monPointer, MON_DATA_HP);
+    gPartyMenu.pokemon = &gPlayerParty[sprites[ePartyMenu.slotId2].data[0]];
+    hp = GetMonData(gPartyMenu.pokemon, MON_DATA_HP);
 
-    if (hp == 0 || userPartyId == recipientPartyId || GetMonData(EWRAM_1C000.monPointer, MON_DATA_MAX_HP) == hp)
+    if (hp == 0 || userPartyId == recipientPartyId || GetMonData(gPartyMenu.pokemon, MON_DATA_MAX_HP) == hp)
     {
         CantUseSoftboiled(taskId);
         return;
@@ -93,22 +81,22 @@ static void sub_8133D50(u8 taskId) {
 
     PlaySE(SE_USE_ITEM);
 
-    EWRAM_1C000.donorMonId = gSprites[ePartyMenu.slotId].data[0];
+    gPartyMenu.primarySelectedMonIndex = gSprites[ePartyMenu.slotId].data[0];
 
-    pokemon = &gPlayerParty[EWRAM_1C000.donorMonId];
-    EWRAM_1C000.monPointer = pokemon;
-    EWRAM_1C000.unk6 = 0;
-    EWRAM_1C000.unkC = -0x8000;
-    EWRAM_1C000.unk10 = sub_8133EF8;
+    pokemon = &gPlayerParty[gPartyMenu.primarySelectedMonIndex];
+    gPartyMenu.pokemon = pokemon;
+    gPartyMenu.secondarySelectedIndex = 0;
+    gPartyMenu.unkC = -0x8000;
+    gPartyMenu.unk10 = sub_8133EF8;
 
 
-    gTasks[taskId].data[10] = GetMonData(EWRAM_1C000.monPointer, MON_DATA_MAX_HP);
-    gTasks[taskId].data[11] = GetMonData(EWRAM_1C000.monPointer, MON_DATA_HP);
+    gTasks[taskId].data[10] = GetMonData(gPartyMenu.pokemon, MON_DATA_MAX_HP);
+    gTasks[taskId].data[11] = GetMonData(gPartyMenu.pokemon, MON_DATA_HP);
     gTasks[taskId].data[12] = gTasks[taskId].data[10] / 5;
 
     PartyMenuEraseMsgBoxAndFrame();
     gTasks[taskId].func = sub_806FA18;
-    ewram1B000.pmUnk282 = gTasks[taskId].data[11];
+    ePartyMenu2.pmUnk282 = gTasks[taskId].data[11];
 }
 
 static void Task_ChooseNewMonForSoftboiled(u8 taskId) {
@@ -129,9 +117,10 @@ static void CantUseSoftboiled(u8 taskId) {
     gTasks[taskId].func = Task_ChooseNewMonForSoftboiled;
 }
 
-static void sub_8133EF8(void) {
+static void sub_8133EF8(u8 taskId)
+{
     sub_806CCE4();
-    ewram1B000.unk261 = 2;
+    ePartyMenu2.unk261 = 2;
     DestroySprite(&gSprites[ePartyMenu.slotId]);
     Menu_EraseWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
     PrintPartyMenuPromptText(0, 0);

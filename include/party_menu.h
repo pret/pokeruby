@@ -81,6 +81,19 @@ struct Unk2001000
     u16 array[53561];
 };
 
+struct PartyMenu
+{
+    /*0x00*/ struct Pokemon *pokemon;
+    /*0x04*/ u8 unk4;
+    /*0x05*/ u8 primarySelectedMonIndex;
+    /*0x06*/ u16 secondarySelectedIndex;
+    /*0x08*/ u16 unk8;
+    /*0x0A*/ u8 pad_0A[2];
+    /*0x0C*/ s32 unkC;
+    /*0x10*/ TaskFunc unk10;
+    /*0x14*/ TaskFunc unk14;
+};
+
 void CB2_PartyMenuMain(void);
 void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed);
 void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId);

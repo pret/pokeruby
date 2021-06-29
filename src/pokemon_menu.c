@@ -329,8 +329,8 @@ static void sub_8089EBC(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gUnknown_020384F0);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gUnknown_020384F0);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_8089E84();
             SetMainCallback2(CB2_PartyMenuMain);
@@ -352,7 +352,7 @@ static void sub_8089F44(u8 taskID)
     {
         u8 spriteID = gSprites[gTasks[taskID].data[3] >> 8].data[0];
         DestroyTask(taskID);
-        ewram1B000.unk262 = 1;
+        ePartyMenu2.unk262 = 1;
         ShowPokemonSummaryScreen(gPlayerParty, spriteID, gPlayerPartyCount - 1, sub_8089F14, PSS_MODE_NORMAL);
     }
 }
@@ -480,8 +480,8 @@ static void sub_808A358(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -496,9 +496,9 @@ static void sub_808A3A4(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
-            ewram1B000.unk262 = 3;
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
+            ePartyMenu2.unk262 = 3;
             sub_8089E84();
             SetMainCallback2(CB2_PartyMenuMain);
             break;
@@ -544,8 +544,8 @@ static void sub_808A4D4(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -675,7 +675,7 @@ static void sub_808A848(u8 taskID)
 static void sub_808A8A8(void)
 {
     gUnknown_020384F0 = gLastFieldPokeMenuOpened;
-    ewram1B000.unk262 = 4;
+    ePartyMenu2.unk262 = 4;
     sub_8089F14();
 }
 
@@ -853,8 +853,8 @@ static void sub_808AD0C(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -989,8 +989,8 @@ static void sub_808AF80(void)
             }
             if (gLastFieldPokeMenuOpened > 5 || !GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES))
                 gLastFieldPokeMenuOpened = 0;
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -1127,8 +1127,8 @@ static void sub_808B3A0(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -1187,8 +1187,8 @@ static void sub_808B518(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(ewram1B000.menuHandlerTaskId, gUnknown_020384F0);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gUnknown_020384F0);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }

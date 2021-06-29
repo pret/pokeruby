@@ -186,8 +186,7 @@ extern u8 gSharedMem[];
 #define EWRAM_19348                     ((u16 *)(gSharedMem + 0x19348))
 #define eWRAM_19348Struct               ((struct EWRAM_19348_Struct *)(gSharedMem + 0x19348))
 #define ewram1A000                      (&gSharedMem[0x1A000])
-#define ewram1B000                      (*(struct Unk201B000 *)(gSharedMem + 0x1B000))
-#define EWRAM_1C000                     (*(struct Struct201C000 *)(gSharedMem + 0x1C000))
+#define ePartyMenu2                     (*(struct Unk201B000 *)(gSharedMem + 0x1B000))
 #define gPartyMenu                      (*(struct PartyMenu *)(gSharedMem + 0x1C000))
 #define sCreditsData                    (*(struct CreditsData *)(gSharedMem + 0x1C000))
 
