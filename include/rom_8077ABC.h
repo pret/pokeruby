@@ -12,7 +12,7 @@ struct Struct_sub_8078914 {
 
 struct TransformStatus
 {
-    u16 unknown;
+    u8 unk0;
     u16 species;
 };
 

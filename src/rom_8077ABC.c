@@ -151,7 +151,7 @@ u8 GetBattlerSpriteCoord(u8 slot, u8 a2)
 {
     u8 var;
     u16 species;
-    struct TransformStatus *transform;
+    struct BattleSpriteInfo *transform;
 
     if (IsContest())
     {
@@ -181,19 +181,19 @@ u8 GetBattlerSpriteCoord(u8 slot, u8 a2)
         {
             if (GetBattlerSide(slot))
             {
-                transform = &eTransformStatuses[slot];
-                if (!transform->species)
+                transform = &gBattleSpriteInfo[slot];
+                if (!transform->transformedSpecies)
                     species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 else
-                    species = transform->species;
+                    species = transform->transformedSpecies;
             }
             else
             {
-                transform = &eTransformStatuses[slot];
-                if (!transform->species)
+                transform = &gBattleSpriteInfo[slot];
+                if (!transform->transformedSpecies)
                     species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 else
-                    species = transform->species;
+                    species = transform->transformedSpecies;
             }
         }
         if (a2 == 3)
@@ -209,7 +209,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
 {
     u16 letter;
     u32 personality;
-    struct TransformStatus *transform;
+    struct BattleSpriteInfo *transform;
     u8 ret;
     u16 var;
 
@@ -226,8 +226,8 @@ u8 sub_8077BFC(u8 slot, u16 species)
             }
             else
             {
-                transform = &eTransformStatuses[slot];
-                if (!transform->species)
+                transform = &gBattleSpriteInfo[slot];
+                if (!transform->transformedSpecies)
                     personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
                 else
                     personality = gTransformPersonalities[slot];
@@ -256,8 +256,8 @@ u8 sub_8077BFC(u8 slot, u16 species)
     {
         if (species == SPECIES_UNOWN)
         {
-            transform = &eTransformStatuses[slot];
-            if (!transform->species)
+            transform = &gBattleSpriteInfo[slot];
+            if (!transform->transformedSpecies)
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             else
                 personality = gTransformPersonalities[slot];
@@ -330,7 +330,7 @@ u8 GetBattlerSpriteFinal_Y(u8 slot, u16 species, u8 a3)
 u8 sub_8077EE4(u8 slot, u8 a2)
 {
     u16 species;
-    struct TransformStatus *transform;
+    struct BattleSpriteInfo *transform;
     if (a2 == 3 || a2 == 4)
     {
         if (IsContest())
@@ -342,11 +342,11 @@ u8 sub_8077EE4(u8 slot, u8 a2)
         }
         else
         {
-            transform = &eTransformStatuses[slot];
-            if (!transform->species)
+            transform = &gBattleSpriteInfo[slot];
+            if (!transform->transformedSpecies)
                 species = gAnimSpeciesByBanks[slot];
             else
-                species = transform->species;
+                species = transform->transformedSpecies;
         }
         if (a2 == 3)
             return GetBattlerSpriteFinal_Y(slot, species, 1);
@@ -378,27 +378,27 @@ u8 sub_8077FC0(u8 slot)
 {
     u16 var;
     u8 r6;
-    struct TransformStatus *transform;
+    struct BattleSpriteInfo *transform;
 
     r6 = GetBattlerSpriteCoord(slot, 1);
     if (!IsContest())
     {
         if (GetBattlerSide(slot) != 0)
         {
-            transform = &eTransformStatuses[slot];
-            if (!transform->species) {
+            transform = &gBattleSpriteInfo[slot];
+            if (!transform->transformedSpecies) {
                 var = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             } else {
-                var = transform->species;
+                var = transform->transformedSpecies;
             }
         }
         else
         {
-            transform = &eTransformStatuses[slot];
-            if (!transform->species)
+            transform = &gBattleSpriteInfo[slot];
+            if (!transform->transformedSpecies)
                 var = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             else
-                var = transform->species;
+                var = transform->transformedSpecies;
         }
         if (GetBattlerSide(slot) != 0)
             r6 -= sub_8077DD8(slot, var);
@@ -1745,7 +1745,7 @@ void sub_8079AB8(u8 sprite, u8 sprite2)
 
 u16 sub_8079B10(u8 sprite)
 {
-    struct TransformStatus *transform;
+    struct BattleSpriteInfo *transform;
     u8 slot = gSprites[sprite].data[0];
     u16 species;
     u16 i;
@@ -1763,20 +1763,20 @@ u16 sub_8079B10(u8 sprite)
             {
                 if (!GetBattlerSide(i))
                 {
-                    transform = &eTransformStatuses[slot];
-                    if (!transform->species)
+                    transform = &gBattleSpriteInfo[slot];
+                    if (!transform->transformedSpecies)
                         species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     else
-                        species = transform->species;
+                        species = transform->transformedSpecies;
                     return gMonBackPicCoords[species].y_offset;
                 }
                 else
                 {
-                    transform = &eTransformStatuses[slot];
-                    if (!transform->species)
+                    transform = &gBattleSpriteInfo[slot];
+                    if (!transform->transformedSpecies)
                         species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     else
-                        species = transform->species;
+                        species = transform->transformedSpecies;
                     return gMonFrontPicCoords[species].y_offset;
                 }
             }
@@ -1993,7 +1993,7 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
     u16 var;
     int ret;
     const struct MonCoords *coords;
-    struct TransformStatus *transform;
+    struct BattleSpriteInfo *transform;
 
     if (IsContest())
     {
@@ -2033,15 +2033,15 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
     {
         if (!GetBattlerSide(slot))
         {
-            transform = &eTransformStatuses[slot];
-            if (!transform->species)
+            transform = &gBattleSpriteInfo[slot];
+            if (!transform->transformedSpecies)
             {
                 species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             }
             else
             {
-                species = transform->species;
+                species = transform->transformedSpecies;
                 personality = gTransformPersonalities[slot];
             }
             if (species == SPECIES_UNOWN)
@@ -2064,15 +2064,15 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
         }
         else
         {
-            transform = &eTransformStatuses[slot];
-            if (!transform->species)
+            transform = &gBattleSpriteInfo[slot];
+            if (!transform->transformedSpecies)
             {
                 species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             }
             else
             {
-                species = transform->species;
+                species = transform->transformedSpecies;
                 personality = gTransformPersonalities[slot];
             }
             if (species == SPECIES_UNOWN)

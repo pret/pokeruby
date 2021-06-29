@@ -1912,7 +1912,7 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!(EWRAM_17800[bank].unk0 & 1) || !gSprites[gBattlerSpriteIds[bank]].invisible)
+    if (!gBattleSpriteInfo[bank].invisible || !gSprites[gBattlerSpriteIds[bank]].invisible)
         return TRUE;
 
     return FALSE;
