@@ -5675,7 +5675,7 @@ void debug_sub_811B310(void)
 
     PRINT_NUMBER(eSlotMachine->unk68, 10, 3);
     PRINT_NUMBER(eSlotMachine->unk6C, 10, 5);
-    PRINT_NUMBER(eSlotMachine->personality2, 10, 7);
+    PRINT_NUMBER(eSlotMachine->unk10, 10, 7);
 
 #if DEBUG_FIX
 #define OFFSET 24 // wider window
