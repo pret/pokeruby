@@ -1150,9 +1150,9 @@ static void sub_8047EC0(void)
             gUnknown_03004824->partyCounts[0] = gPlayerPartyCount;
             gUnknown_03004824->partyCounts[1] = gEnemyPartyCount;
             for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
-                gUnknown_03004824->partyIcons[0][i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+                gUnknown_03004824->partyIcons[0][i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2), SpriteCB_PokemonIcon, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
             for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
-                gUnknown_03004824->partyIcons[1][i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
+                gUnknown_03004824->partyIcons[1][i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), SpriteCB_PokemonIcon, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
             nullsub_5(2, 0);
             gMain.state ++;
             break;
@@ -1300,9 +1300,9 @@ static void sub_80484F4(void)
             sub_804A41C(0);
             sub_804A41C(1);
             for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
-                gUnknown_03004824->partyIcons[0][i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+                gUnknown_03004824->partyIcons[0][i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL), SpriteCB_PokemonIcon, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
             for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
-                gUnknown_03004824->partyIcons[1][i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
+                gUnknown_03004824->partyIcons[1][i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), SpriteCB_PokemonIcon, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
             nullsub_5(2, 0);
             gMain.state ++;
             break;
@@ -2259,7 +2259,7 @@ static void sub_8049ED4(u8 a0)
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[0] = 20;
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[2] = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[4] = gTradeMonSpriteCoords[6 * whichParty + whichPokemon][1] * 8 - 12;
-            StoreSpriteCallbackInData(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], sub_809D62C);
+            StoreSpriteCallbackInData(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], SpriteCB_PokemonIcon);
             gUnknown_03004824->unk_0080[a0] ++;
             sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]]);
             Menu_DestroyCursor();
@@ -2271,7 +2271,7 @@ static void sub_8049ED4(u8 a0)
             }
             break;
         case 2:
-            if (gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].callback == sub_809D62C)
+            if (gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].callback == SpriteCB_PokemonIcon)
             {
                 gUnknown_03004824->unk_0080[a0] = 3;
             }
@@ -2472,7 +2472,7 @@ static void sub_8049ED4(u8 a0)
                     "\tadds r0, r1\n"
                     "\tlsls r0, 2\n"
                     "\tadds r0, r7\n"
-                    "\tldr r1, _0804A0A0 @ =sub_809D62C\n"
+                    "\tldr r1, _0804A0A0 @ =SpriteCB_PokemonIcon\n"
                     "\tbl StoreSpriteCallbackInData\n"
                     "\tldr r2, _0804A09C @ =gUnknown_03004824\n"
                     "\tldr r1, [r2]\n"
@@ -2535,7 +2535,7 @@ static void sub_8049ED4(u8 a0)
                     "_0804A094: .4byte gSprites\n"
                     "_0804A098: .4byte gTradeMonSpriteCoords\n"
                     "_0804A09C: .4byte gUnknown_03004824\n"
-                    "_0804A0A0: .4byte sub_809D62C\n"
+                    "_0804A0A0: .4byte SpriteCB_PokemonIcon\n"
                     "_0804A0A4: .4byte gUnknown_0820C330\n"
                     "_0804A0A8: .4byte gTradePartyBoxTilemap\n"
                     "_0804A0AC:\n"
@@ -2555,7 +2555,7 @@ static void sub_8049ED4(u8 a0)
                     "\tadds r2, 0x1C\n"
                     "\tadds r0, r2\n"
                     "\tldr r1, [r0]\n"
-                    "\tldr r0, _0804A0E0 @ =sub_809D62C\n"
+                    "\tldr r0, _0804A0E0 @ =SpriteCB_PokemonIcon\n"
                     "\tcmp r1, r0\n"
                     "\tbeq _0804A0D4\n"
                     "\tb _0804A294\n"
@@ -2565,7 +2565,7 @@ static void sub_8049ED4(u8 a0)
                     "\tb _0804A294\n"
                     "\t.align 2, 0\n"
                     "_0804A0DC: .4byte gSprites\n"
-                    "_0804A0E0: .4byte sub_809D62C\n"
+                    "_0804A0E0: .4byte SpriteCB_PokemonIcon\n"
                     "_0804A0E4:\n"
                     "\tadds r0, r5, 0\n"
                     "\tadds r0, 0xC8\n"
@@ -3346,7 +3346,7 @@ static void sub_804AF10(void)
     {
         for (j = 0; j < gUnknown_03004824->partyCounts[i]; j ++)
         {
-            sub_809D824(&gSprites[gUnknown_03004824->partyIcons[i][j]], 4 - gUnknown_03004824->unk_0069[i][j]);
+            SetPartyHPBarSprite(&gSprites[gUnknown_03004824->partyIcons[i][j]], 4 - gUnknown_03004824->unk_0069[i][j]);
         }
     }
 }

@@ -2684,7 +2684,7 @@ void debug_80C6CB8(u8 taskId)
     gSprites[gUnknown_Debug_2038A20->unk3].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk3].oam.priority = 0;
 
-    gUnknown_Debug_2038A20->round1Points = CreateMonIcon(gUnknown_Debug_2038A20->totalPoints, sub_809D62C, 0x68, 0x2C, 0, 0);
+    gUnknown_Debug_2038A20->round1Points = CreateMonIcon(gUnknown_Debug_2038A20->totalPoints, SpriteCB_PokemonIcon, 0x68, 0x2C, 0, 0);
 
     PrintFootprint(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->totalPoints), 2, 0x3fc);
 

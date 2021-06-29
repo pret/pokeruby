@@ -1018,9 +1018,9 @@ u16 GetUnownLetterByPersonality(u32);
 const u8 *GetMonIconPtr(u16, u32 personality);
 u8 UpdateMonIconFrame(struct Sprite *);
 u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
-void sub_809D7E8(struct Sprite *);
+void DestroyPokemonIconSprite(struct Sprite *);
 
-// duplicate of sub_809D3A4
+// duplicate of CreateMonIcon
 u8 unref_sub_809D26C(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
     u8 spriteId;
@@ -1139,7 +1139,7 @@ const u8 *GetMonIconPtr(u16 species, u32 personality)
 
 void sub_809D510(struct Sprite *sprite)
 {
-    sub_809D7E8(sprite);
+    DestroyPokemonIconSprite(sprite);
 }
 
 void sub_809D51C(void)
@@ -1192,12 +1192,11 @@ void sub_809D608(u16 species)
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
-void sub_809D62C(struct Sprite *sprite)
+void SpriteCB_PokemonIcon(struct Sprite *sprite)
 {
     UpdateMonIconFrame(sprite);
 }
 
-// TODO: try to find a way to avoid using asm statement
 u8 UpdateMonIconFrame(struct Sprite *sprite)
 {
     u8 result = 0;
@@ -1221,10 +1220,7 @@ u8 UpdateMonIconFrame(struct Sprite *sprite)
                 (u8 *)sprite->images + (sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame),
                 OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
                 sSpriteImageSizes[sprite->oam.shape][sprite->oam.size]);
-            {
-                register u8 duration asm("r0") = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;
-                sprite->animDelayCounter = duration;
-            }
+            sprite->animDelayCounter = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration & 0xFF;
             sprite->animCmdIndex++;
             result = sprite->animCmdIndex;
             break;
@@ -1261,14 +1257,14 @@ u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x, s16 y,
     return spriteId;
 }
 
-void sub_809D7E8(struct Sprite *sprite)
+void DestroyPokemonIconSprite(struct Sprite *sprite)
 {
     struct SpriteFrameImage image = { NULL, sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] };
     sprite->images = &image;
     DestroySprite(sprite);
 }
 
-void sub_809D824(struct Sprite *sprite, u8 animNum)
+void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;
