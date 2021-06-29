@@ -163,7 +163,6 @@ extern u8 gSharedMem[];
 #define eCableCar1                      ((struct CableCarEwramStruct1 *)(gSharedMem + 0x17000))
 #define gBattleSpriteInfo               ((struct BattleSpriteInfo *)    (gSharedMem + 0x17800))
 #define ewram17810                      ((struct Struct2017810 *)    (gSharedMem + 0x17810))
-#define EWRAM_17810                     ((struct UnknownStruct3 *)(gSharedMem + 0x17810))
 #define ewram17840                      (*(struct Struct2017840 *)   (gSharedMem + 0x17840))
 #define ewram17850                      ((struct UnknownStruct5 *)(gSharedMem + 0x17850))
 #define EWRAM_18000                     ((u16 *)(gSharedMem + 0x18000))
