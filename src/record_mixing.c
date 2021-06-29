@@ -58,7 +58,8 @@ struct PlayerRecords
     struct EasyChatPair easyChatPairs[5];
     struct RecordMixingDayCareMail daycareMailRecord;
     struct BattleTowerRecord battleTowerRecord;
-    u16 filler11C8[0x34];
+    u16 giftItem;
+    u16 filler11CA[0x33];
 };
 
 void RecordMixing_PrepareExchangePacket(void)
@@ -66,31 +67,34 @@ void RecordMixing_PrepareExchangePacket(void)
     SetPlayerSecretBaseRecordMixingParty();
     sub_80C045C();
 
-    memcpy(ewram_2018000.secretBases, recordMixingSecretBases, sizeof(ewram_2018000.secretBases));
-    memcpy(ewram_2018000.tvShows, recordMixingTvShows, sizeof(ewram_2018000.tvShows));
-    memcpy(ewram_2018000.pokeNews, recordMixingPokeNews, sizeof(ewram_2008000.pokeNews));
-    memcpy(&ewram_2018000.mauvilleMan, recordMixingMauvilleMan, sizeof(ewram_2008000.mauvilleMan));
-    memcpy(ewram_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(ewram_2018000.easyChatPairs));
+    memcpy(eSentRecord.secretBases, recordMixingSecretBases, sizeof(eSentRecord.secretBases));
+    memcpy(eSentRecord.tvShows, recordMixingTvShows, sizeof(eSentRecord.tvShows));
+    memcpy(eSentRecord.pokeNews, recordMixingPokeNews, sizeof(eSentRecord.pokeNews));
+    memcpy(&eSentRecord.mauvilleMan, recordMixingMauvilleMan, sizeof(eSentRecord.mauvilleMan));
+    memcpy(eSentRecord.easyChatPairs, recordMixingEasyChatPairs, sizeof(eSentRecord.easyChatPairs));
     gDayCareMailRecord.mail[0] = gSaveBlock1.daycare.misc.mail[0];
     gDayCareMailRecord.mail[1] = gSaveBlock1.daycare.misc.mail[1];
     InitDaycareMailRecordMixing(gSaveBlock1.daycare.mons, &gDayCareMailRecord);
-    memcpy(&ewram_2018000.daycareMailRecord, gDayCareMailPlayerRecord, sizeof(struct RecordMixingDayCareMail));
-    memcpy(&ewram_2018000.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
+    memcpy(&eSentRecord.daycareMailRecord, gDayCareMailPlayerRecord, sizeof(struct RecordMixingDayCareMail));
+    memcpy(&eSentRecord.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
 
     if (GetMultiplayerId() == 0)
-        ewram_2018000.filler11C8[0] = GetRecordMixingGift();
+        eSentRecord.giftItem = GetRecordMixingGift();
 }
 
-void RecordMixing_ReceiveExchangePacket(u32 a)
+void RecordMixing_ReceiveExchangePacket(u32 which)
 {
-    sub_80BD674(ewram_2008000.secretBases, sizeof(struct PlayerRecords), a);
-    sub_80BFD44((u8 *)ewram_2008000.tvShows, sizeof(struct PlayerRecords), a);
-    sub_80C0514(ewram_2008000.pokeNews, sizeof(struct PlayerRecords), a);
-    sub_80B9B1C((u8 *)&ewram_2008000.mauvilleMan, sizeof(struct PlayerRecords), a);
-    sub_80FA4E4(ewram_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
-    sub_80B9C6C(&ewram_2008000.daycareMailRecord, sizeof(struct PlayerRecords), a, ewram_2008000.tvShows);
-    sub_80B9B70(&ewram_2008000.battleTowerRecord, sizeof(struct PlayerRecords), a);
-    sub_80B9F3C(ewram_2008000.filler11C8, a);
+    ReceiveSecretBasesData(eReceivedRecords.secretBases, sizeof(struct PlayerRecords), which);
+    ReceiveTvShowsData((u8 *)eReceivedRecords.tvShows, sizeof(struct PlayerRecords), which);
+    ReceivePokeNewsData(eReceivedRecords.pokeNews, sizeof(struct PlayerRecords), which);
+    ReceiveOldManData((u8 *)&eReceivedRecords.mauvilleMan, sizeof(struct PlayerRecords), which);
+    ReceiveDewfordTrendData(eReceivedRecords.easyChatPairs, sizeof(struct PlayerRecords), which);
+    ReceiveDaycareMailData(&eReceivedRecords.daycareMailRecord,
+        sizeof(struct PlayerRecords),
+        which,
+        eReceivedRecords.tvShows);
+    ReceiveBattleTowerData(&eReceivedRecords.battleTowerRecord, sizeof(struct PlayerRecords), which);
+    ReceiveGiftItem(&eReceivedRecords.giftItem, which);
 }
 
 #define tCounter data[0]
@@ -247,11 +251,11 @@ void sub_80B95F0(u8 taskId)
             task->tState = 0;
             task->data[5] = GetMultiplayerId_();
             task->func = Task_RecordMixing_SendPacket;
-            StorePtrInTaskData(&ewram_2018000, &task->data[2]);
+            StorePtrInTaskData(&eSentRecord, &task->data[2]);
             subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
             task->data[10] = subTaskId;
             gTasks[subTaskId].data[0] = taskId;
-            StorePtrInTaskData((u8 *)&ewram_2008000, &gTasks[subTaskId].data[5]);
+            StorePtrInTaskData((u8 *)&eReceivedRecords, &gTasks[subTaskId].data[5]);
         }
         break;
     case 5:        // wait 60 frames
@@ -432,7 +436,7 @@ void sub_80B9A88(u8 *a)
     }
 }
 
-void sub_80B9B1C(u8 *a, size_t size, u8 index)
+void ReceiveOldManData(u8 *a, size_t size, u8 index)
 {
     u8 arr[4];
     u8 *ptr;
@@ -444,7 +448,7 @@ void sub_80B9B1C(u8 *a, size_t size, u8 index)
     sub_80F7F30();
 }
 
-void sub_80B9B70(void *battleTowerRecord, u32 size, u8 index)
+void ReceiveBattleTowerData(void *battleTowerRecord, u32 size, u8 index)
 {
     sub_80B9A88(gUnknown_0300071C);
     memcpy(battleTowerRecord + size * index, battleTowerRecord + size * gUnknown_0300071C[index], sizeof(struct BattleTowerRecord));
@@ -494,7 +498,7 @@ const u8 gUnknown_083D02BA[3][4] =
     {0, 3, 2, 1},
 };
 
-void sub_80B9C6C(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
+void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
 {
     {
         u16 i, j;
@@ -615,17 +619,17 @@ void sub_80B9C6C(struct RecordMixingDayCareMail *src, size_t recordSize, u8 whic
     }
 }
 
-void sub_80B9F3C(u16 *a, u8 b)
+void ReceiveGiftItem(u16 *pItemId, u8 b)
 {
-    if (b != 0 && *a != 0)
+    if (b != 0 && *pItemId != 0)
     {
-        if (GetPocketByItemId(*a) == 5)
+        if (GetPocketByItemId(*pItemId) == POCKET_KEY_ITEMS)
         {
-            if (!CheckBagHasItem(*a, 1) && !CheckPCHasItem(*a, 1) && AddBagItem(*a, 1))
+            if (!CheckBagHasItem(*pItemId, 1) && !CheckPCHasItem(*pItemId, 1) && AddBagItem(*pItemId, 1))
             {
-                VarSet(VAR_TEMP_1, *a);
+                VarSet(VAR_TEMP_1, *pItemId);
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
-                if (*a == ITEM_EON_TICKET)
+                if (*pItemId == ITEM_EON_TICKET)
                     FlagSet(FLAG_SYS_HAS_EON_TICKET);
             }
             else
@@ -635,9 +639,9 @@ void sub_80B9F3C(u16 *a, u8 b)
         }
         else
         {
-            if (AddBagItem(*a, 1) == TRUE)
+            if (AddBagItem(*pItemId, 1) == TRUE)
             {
-                VarSet(VAR_TEMP_1, *a);
+                VarSet(VAR_TEMP_1, *pItemId);
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
             }
             else

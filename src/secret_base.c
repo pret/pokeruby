@@ -1517,7 +1517,7 @@ void sub_80BD610(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
     sub_80BD328(basesC, 0);
 } 
 
-void sub_80BD674(void *playerRecords, u32 size, u8 c)
+void ReceiveSecretBasesData(void *playerRecords, u32 size, u8 c)
 {
     if (
 #if DEBUG

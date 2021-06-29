@@ -1782,20 +1782,20 @@ u8 NicknameDiffersFromSpeciesName(u8 monIndex)
     return TRUE;
 }
 #elif GERMAN
-u8 NicknameDiffersFromSpeciesName(u8 monIndex)
+u8 NicknameDiffersFromSpeciesName(u8 pmMonIndex)
 {
     u8 langData[4];
     u32 species;
     u8 *tmp;
 
-    GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, &gStringVar1);
+    GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_NICKNAME, &gStringVar1);
 
     tmp = langData;
-    tmp[0] = GetMonData(&gPlayerParty[monIndex], MON_DATA_LANGUAGE, &langData);
+    tmp[0] = GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_LANGUAGE, &langData);
     if (tmp[0] != GAME_LANGUAGE)
         return TRUE;
 
-    species = GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES, NULL);
+    species = GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_SPECIES, NULL);
     if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1))
         return TRUE;
 
@@ -2201,7 +2201,7 @@ void sub_80C04A0(void);
 void sub_80C01D4(void);
 void sub_80C0408(void);
 
-void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
+void ReceiveTvShowsData(u8 * arg0, u32 arg1 , u8 arg2)
 {
     u8 i;
     ewramStruct_02007000 *ewramTVShows;
@@ -2493,7 +2493,7 @@ void sub_80C0788(void);
 s8 sub_80C0730(struct PokeNews[POKE_NEWS_COUNT], u8);
 void sub_80C06BC(struct PokeNews *[POKE_NEWS_COUNT], struct PokeNews *[POKE_NEWS_COUNT]);
 
-void sub_80C0514(void *a0, u32 a1, u8 a2)
+void ReceivePokeNewsData(void * a0, u32 a1, u8 a2)
 {
     ewramStruct_02007000 *struct02007000;
     u8 i;

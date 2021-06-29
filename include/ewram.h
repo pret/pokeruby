@@ -29,14 +29,15 @@ extern u8 gSharedMem[];
 #define eSaveSection                    (struct SaveSector *)(gSharedMem + 0x0)
 #define eSlotMachine                    ((struct SlotMachineEwramStruct *)(gSharedMem + 0x0))
 #define ePokemonStorageSystem           (*(struct PokemonStorageSystemData *)(gSharedMem + 0))
-#define ewram01000                      (*(struct Unk2001000 *)(gSharedMem + 0x1000))
+#define ePartyMenu                      (*(struct Unk2001000 *)(gSharedMem + 0x1000))
 #define ewramBerryPicTemp               (gSharedMem + 0x1000)
-#define EWRAM_1000                      (*(struct Struct2001000 *)(gSharedMem + 0x1000))
-#define ewram4000                       (gSharedMem + 0x4000)
 #define gUnknown_02007000               (*(ewramStruct_02007000 *)(gSharedMem + 0x7000))
-#define ARRAY_2007800                   ((struct EasyChatPair *)(gSharedMem + 0x7800))
-#define ARRAY_2007900                   ((struct EasyChatPair *)(gSharedMem + 0x7900))
-#define ewram_2008000                   (*(struct PlayerRecords *)(gSharedMem + 0x08000))
+
+// record_mixing.c
+#define eLinkedDewfordTrendsBuffer      ((struct EasyChatPair *)(gSharedMem + 0x7800))
+#define eSavedDewfordTrendsBuffer       ((struct EasyChatPair *)(gSharedMem + 0x7900))
+#define eReceivedRecords                (*(struct PlayerRecords *)(gSharedMem + 0x08000))
+#define eSentRecord                     (*(struct PlayerRecords *)(gSharedMem + 0x18000))
 
 // pokedex.c
 #define ePokedexGraphicsBuffer          ((void *)&gSharedMem[0x8000])
@@ -167,7 +168,6 @@ extern u8 gSharedMem[];
 #define EWRAM_17810                     ((struct UnknownStruct3 *)(gSharedMem + 0x17810))
 #define ewram17840                      (*(struct Struct2017840 *)   (gSharedMem + 0x17840))
 #define ewram17850                      ((struct UnknownStruct5 *)(gSharedMem + 0x17850))
-#define ewram_2018000                   (*(struct PlayerRecords *)(gSharedMem + 0x18000))
 #define EWRAM_18000                     ((u16 *)(gSharedMem + 0x18000))
 #define ewram18000_2                    (&gSharedMem[0x18000])
 #define ewram18000_3                    *(struct Pokemon **)(gSharedMem + 0x18000)
@@ -187,9 +187,6 @@ extern u8 gSharedMem[];
 #define eWRAM_19348Struct               ((struct EWRAM_19348_Struct *)(gSharedMem + 0x19348))
 #define ewram1A000                      (&gSharedMem[0x1A000])
 #define ewram1B000                      (*(struct Unk201B000 *)(gSharedMem + 0x1B000))
-#define ewram1B000_alt                  (*(struct Struct201B000 *)(gSharedMem + 0x1B000))
-#define EWRAM_1B000                     ewram1B000_alt // FIXME
-#define EWRAM_1B000_2                   (*(struct Struct201B000 *)(gSharedMem + 0x1B000))
 #define EWRAM_1C000                     (*(struct Struct201C000 *)(gSharedMem + 0x1C000))
 #define gPartyMenu                      (*(struct PartyMenu *)(gSharedMem + 0x1C000))
 #define sCreditsData                    (*(struct CreditsData *)(gSharedMem + 0x1C000))

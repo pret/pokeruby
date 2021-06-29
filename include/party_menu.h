@@ -43,49 +43,33 @@ struct PartyPopupMenu
     /*0x4*/const u8 *items;  // menu item ids (ids for a MenuAction2 array)
 };
 
-// TODO: Unify these two structs
+#define pmStatGrowths      data
+#define pmSetupState       data[0]
+#define pmMonIndex         data[1]
+#define pmUnk268           data[2]
+#define pmUnk272           data[7]
+#define pmUnk27E           data[13]
+#define pmUnk280           data[14]
+#define pmUnk282           data[15]
 
 struct Unk201B000
 {
     struct Pokemon unk0[6];
     u8 menuType;
     u8 promptTextId;
-    u8 filler25A[2];
     TaskFunc menuHandler;
     u8 menuHandlerTaskId;
     u8 unk261;
-    u8 unk262;
+    u8 unk262; // Never read
     u8 unk263;
-    // Stat growth upon level-up. First 6 bytes = old stats, Second 6 bytes = new stats.
-    s16 statGrowths[NUM_STATS * 2];
-    u8 filler27C[2];
-    s16 unk27E;
-    s16 unk280;
-    s16 unk282;
-};
-
-struct Struct201B000
-{
-    u8 filler0[0x259];
-    u8 promptTextId;
-    u8 filler25A[6];
-    u8 menuHandlerTaskId;
-    u8 unk261;
-    u8 unk262;
-    s16 setupState;
-    s16 monIndex;
-    s16 unk268;
-    u8 filler26A[8];
-    u16 unk272;
-    u8 filler274[14];
-    u16 unk282;
+    s16 data[16];
 };
 
 struct Unk2001000
 {
     u8 unk0;
-    u8 unk1;
-    u8 unk2;
+    u8 slotId;
+    u8 slotId2;
     u8 unk3;
     u8 unk4;
     u8 unk5;
@@ -123,7 +107,7 @@ void sub_806D3B4(u8 taskId, u16 species1, u16 species2);
 void sub_806D4AC(u8 taskId, u16 species, u8 c);
 void sub_806D50C(u8 taskId, u8 monIndex);
 void PrintPartyMenuPromptText(u8 textId, u8 b);
-void sub_806D5A4(void);
+void PartyMenuEraseMsgBoxAndFrame(void);
 void SetMonIconAnim(u8 spriteId, struct Pokemon *pokemon);
 void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 c, struct Pokemon *pokemon);
 void TryCreatePartyMenuMonIcon(u8 a, u8 monIndex, struct Pokemon *pokemon);
@@ -158,7 +142,7 @@ void SetPartyPopupMenuOffsets(u8 menuIndex, u8 *left, u8 *top, const struct Part
 void ShowPartyPopupMenu(u8 menuIndex, const struct PartyPopupMenu *menu, const struct MenuAction2 *menuActions, u8 cursorPos);
 void ClosePartyPopupMenu(u8 index, const struct PartyPopupMenu *menu);
 TaskFunc PartyMenuGetPopupMenuFunc(u8 menuIndex, const struct PartyPopupMenu *menus, const struct MenuAction2 *menuActions, u8 itemIndex);
-u8 sub_806E834(const u8 *message, u8 arg1);
+u8 DisplayPartyMenuMessage(const u8 *message, u8 noClearAfter);
 void sub_806E8D0(u8 taskId, u16 b, TaskFunc c);
 void party_menu_link_mon_held_item_object(u8);
 void Task_ConfirmGiveHeldItem(u8);

@@ -71,62 +71,62 @@ void OpenPartyMenuFromScriptContext(u8 taskId)
 
 bool8 SetupContestPartyMenu(void)
 {
-    switch (EWRAM_1B000.setupState)
+    switch (ewram1B000.pmSetupState)
     {
     case 0:
-        if (EWRAM_1B000.monIndex < gPlayerPartyCount)
+        if (ewram1B000.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
-            EWRAM_1B000.monIndex++;
+            TryCreatePartyMenuMonIcon(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex, &gPlayerParty[ewram1B000.pmMonIndex]);
+            ewram1B000.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
-        EWRAM_1B000.setupState++;
+        CreateHeldItemIcons_806DC34(ewram1B000.menuHandlerTaskId);
+        ewram1B000.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
+        if (sub_806BD58(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ewram1B000.pmMonIndex++;
             break;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
             break;
         }
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 6:
         sub_80F9C00();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 7: // the only case that can return true.
-        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
+        if (DrawPartyMonBackground(ewram1B000.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ewram1B000.pmMonIndex++;
             break;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState = 0;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState = 0;
             return TRUE;
         }
     }
@@ -178,60 +178,60 @@ void HandleSelectPartyMenu(u8 var)
 
 bool8 SetupMoveTutorPartyMenu(void)
 {
-    switch (EWRAM_1B000.setupState)
+    switch (ewram1B000.pmSetupState)
     {
     case 0:
-        if (EWRAM_1B000.monIndex < gPlayerPartyCount)
+        if (ewram1B000.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
-            EWRAM_1B000.monIndex++;
+            TryCreatePartyMenuMonIcon(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex, &gPlayerParty[ewram1B000.pmMonIndex]);
+            ewram1B000.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
-        EWRAM_1B000.setupState++;
+        CreateHeldItemIcons_806DC34(ewram1B000.menuHandlerTaskId);
+        ewram1B000.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
+        if (sub_806BD58(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ewram1B000.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 6:
         sub_80F9E1C();
-        EWRAM_1B000.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 7: // the only case that can return true.
-        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
+        if (DrawPartyMonBackground(ewram1B000.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ewram1B000.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState = 0;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState = 0;
             return TRUE;
         }
     }

@@ -1,6 +1,16 @@
 #ifndef GUARD_ITEM_H
 #define GUARD_ITEM_H
 
+// These constants are used in gItems
+enum
+{
+    POCKET_ITEMS = 1,
+    POCKET_POKE_BALLS,
+    POCKET_TM_HM,
+    POCKET_BERRIES,
+    POCKET_KEY_ITEMS,
+};
+
 typedef void (*ItemUseFunc)(u8);
 
 struct BagPocket

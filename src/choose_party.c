@@ -24,7 +24,7 @@ extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
-extern u8 gUnknown_0202E8F6;
+extern u8 gPartyMenuMessage_IsPrinting;
 extern const u16 gBattleTowerBannedSpecies[];
 
 EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
@@ -80,46 +80,46 @@ bool8 SetupBattleTowerPartyMenu(void)
 {
     u8 i;
 
-    switch (ewram1B000_alt.setupState)
+    switch (ewram1B000.pmSetupState)
     {
     case 0:
-        if (ewram1B000_alt.monIndex < gPlayerPartyCount)
+        if (ewram1B000.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex, &gPlayerParty[ewram1B000_alt.monIndex]);
-            ewram1B000_alt.monIndex++;
+            TryCreatePartyMenuMonIcon(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex, &gPlayerParty[ewram1B000.pmMonIndex]);
+            ewram1B000.pmMonIndex++;
         }
         else
         {
-            ewram1B000_alt.monIndex = 0;
-            ewram1B000_alt.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(ewram1B000_alt.menuHandlerTaskId);
-        ewram1B000_alt.setupState++;
+        CreateHeldItemIcons_806DC34(ewram1B000.menuHandlerTaskId);
+        ewram1B000.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex) == 1)
+        if (sub_806BD58(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex) == 1)
         {
-            ewram1B000_alt.monIndex = 0;
-            ewram1B000_alt.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         else
         {
-            ewram1B000_alt.monIndex++;
+            ewram1B000.pmMonIndex++;
         }
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 6:
         for (i = 0; i < gPlayerPartyCount; i++)
@@ -142,18 +142,18 @@ bool8 SetupBattleTowerPartyMenu(void)
                     DrawMonDescriptorStatus(i, 0x7E);
             }
         }
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 7:
-        if (DrawPartyMonBackground(ewram1B000_alt.monIndex) == 1)
+        if (DrawPartyMonBackground(ewram1B000.pmMonIndex) == 1)
         {
-            ewram1B000_alt.monIndex = 0;
-            ewram1B000_alt.setupState = 0;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState = 0;
             return TRUE;
         }
         else
         {
-            ewram1B000_alt.monIndex++;
+            ewram1B000.pmMonIndex++;
         }
         break;
     }
@@ -203,13 +203,13 @@ static u8 sub_81220C8(void)
     {
         u8 j;
 
-        ewram1B000.unk282 = GetMonData(&gPlayerParty[gSelectedOrderFromParty[i] - 1], MON_DATA_SPECIES);
-        ewram1B000.unk280 = GetMonData(&gPlayerParty[gSelectedOrderFromParty[i] - 1], MON_DATA_HELD_ITEM);
+        ewram1B000.pmUnk282 = GetMonData(&gPlayerParty[gSelectedOrderFromParty[i] - 1], MON_DATA_SPECIES);
+        ewram1B000.pmUnk280 = GetMonData(&gPlayerParty[gSelectedOrderFromParty[i] - 1], MON_DATA_HELD_ITEM);
         for (j = i + 1; j < 3; j++)
         {
-            if (ewram1B000.unk282 == GetMonData(&gPlayerParty[gSelectedOrderFromParty[j] - 1], MON_DATA_SPECIES))
+            if (ewram1B000.pmUnk282 == GetMonData(&gPlayerParty[gSelectedOrderFromParty[j] - 1], MON_DATA_SPECIES))
                 return 0x12;
-            if (ewram1B000.unk280 != 0 && ewram1B000.unk280 == GetMonData(&gPlayerParty[gSelectedOrderFromParty[j] - 1], MON_DATA_HELD_ITEM))
+            if (ewram1B000.pmUnk280 != 0 && ewram1B000.pmUnk280 == GetMonData(&gPlayerParty[gSelectedOrderFromParty[j] - 1], MON_DATA_HELD_ITEM))
                 return 0x13;
         }
     }
@@ -463,14 +463,14 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
     PlaySE(SE_FAILURE);
     Menu_EraseWindowRect(20, 10, 29, 19);
     Menu_DestroyCursor();
-    sub_806D5A4();
-    sub_806E834(gOtherText_NoMoreThreePoke, 1);
+    PartyMenuEraseMsgBoxAndFrame();
+    DisplayPartyMenuMessage(gOtherText_NoMoreThreePoke, 1);
     gTasks[taskId].func = sub_8122728;
 }
 
 static void sub_8122728(u8 taskId)
 {
-    if (gUnknown_0202E8F6 == 1)
+    if (gPartyMenuMessage_IsPrinting == 1)
         return;
 
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
@@ -557,23 +557,23 @@ void Debug_CopyLastThreePartyMonsToMultiPartnerParty(void)
 
 bool8 SetupLinkMultiBattlePartyMenu(void)
 {
-    switch (ewram1B000_alt.setupState)
+    switch (ewram1B000.pmSetupState)
     {
     case 0:
-        sub_81228E8(ewram1B000_alt.menuHandlerTaskId);
-        ewram1B000_alt.setupState++;
+        sub_81228E8(ewram1B000.menuHandlerTaskId);
+        ewram1B000.pmSetupState++;
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 2:
-        sub_8122950(ewram1B000_alt.menuHandlerTaskId);
-        ewram1B000_alt.setupState++;
+        sub_8122950(ewram1B000.menuHandlerTaskId);
+        ewram1B000.pmSetupState++;
         break;
     case 3:
         sub_81229B8();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 4:
         sub_806B908();
@@ -707,61 +707,61 @@ static void sub_8122C18(u8 taskId)
 // Exactly the same as SetupBattleTowerPartyMenu except for case 6
 bool8 unref_sub_8122C60(void)
 {
-    switch (ewram1B000_alt.setupState)
+    switch (ewram1B000.pmSetupState)
     {
     case 0:
-        if (ewram1B000_alt.monIndex < gPlayerPartyCount)
+        if (ewram1B000.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex, &gPlayerParty[ewram1B000_alt.monIndex]);
-            ewram1B000_alt.monIndex++;
+            TryCreatePartyMenuMonIcon(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex, &gPlayerParty[ewram1B000.pmMonIndex]);
+            ewram1B000.pmMonIndex++;
         }
         else
         {
-            ewram1B000_alt.monIndex = 0;
-            ewram1B000_alt.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(ewram1B000_alt.menuHandlerTaskId);
-        ewram1B000_alt.setupState++;
+        CreateHeldItemIcons_806DC34(ewram1B000.menuHandlerTaskId);
+        ewram1B000.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex) == 1)
+        if (sub_806BD58(ewram1B000.menuHandlerTaskId, ewram1B000.pmMonIndex) == 1)
         {
-            ewram1B000_alt.monIndex = 0;
-            ewram1B000_alt.setupState++;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState++;
         }
         else
         {
-            ewram1B000_alt.monIndex++;
+            ewram1B000.pmMonIndex++;
         }
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 6:
         sub_806BCE8();
-        ewram1B000_alt.setupState++;
+        ewram1B000.pmSetupState++;
         break;
     case 7:
-        if (DrawPartyMonBackground(ewram1B000_alt.monIndex) == 1)
+        if (DrawPartyMonBackground(ewram1B000.pmMonIndex) == 1)
         {
-            ewram1B000_alt.monIndex = 0;
-            ewram1B000_alt.setupState = 0;
+            ewram1B000.pmMonIndex = 0;
+            ewram1B000.pmSetupState = 0;
             return TRUE;
         }
         else
         {
-            ewram1B000_alt.monIndex++;
+            ewram1B000.pmMonIndex++;
         }
         break;
     }
