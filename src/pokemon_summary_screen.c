@@ -659,7 +659,7 @@ void sub_809DA1C(void)
         pssData.inputHandlingTaskId = CreateTask(SummaryScreenHandleKeyInput, 0);
         break;
     case PSS_MODE_SELECT_MOVE:
-    case PSS_MODE_UNKNOWN:
+    case PSS_MODE_MOVE_DELETER:
         pssData.inputHandlingTaskId = CreateTask(sub_809EB40, 0);
         break;
     case PSS_MODE_MOVES_ONLY:
@@ -1894,7 +1894,7 @@ static bool8 SummaryScreen_CanForgetSelectedMove(u8 taskId)
 
     SummaryScreen_GetPokemon(&mon);
     move = GetMonMove(&mon, pssData.selectedMoveIndex);
-    if (IsHMMove(move) == TRUE && pssData.mode != PSS_MODE_UNKNOWN)
+    if (IsHMMove(move) == TRUE && pssData.mode != PSS_MODE_MOVE_DELETER)
         return FALSE;
     return TRUE;
 }

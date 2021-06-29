@@ -170,7 +170,6 @@ extern u8 gSharedMem[];
 #define ewram18000_3                    *(struct Pokemon **)(gSharedMem + 0x18000)
 #define eBerryBlenderData               (struct BerryBlenderData*)(&gSharedMem[0x18000])
 #define eEggHatchData                   (struct EggHatchData*)(&gSharedMem[0x18000])
-#define UNK_2018000_STRUCT              (*(struct UnknownStruct2018000 *)(gSharedMem + 0x18000))
 #define pssData                         (*(struct PokemonSummaryScreenStruct *)(gSharedMem + 0x18000))
 #define ewram18300                      ((u16 *)(gSharedMem + 0x18300))
 #define ewram18800                      (&gSharedMem[0x18800])
