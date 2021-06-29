@@ -602,20 +602,20 @@ void sub_81157D0(u8 r0)
     case 4:
         temp0 = (r0 * 3 + 14);
         sub_8124DDC(&gBGTilemapBuffers[2][0], 0, 14, 7, 16, 13);
-        sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18a32, temp0, 7, 3, 13);
+        sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18800 + 0x119, temp0, 7, 3, 13);
         break;
     case 5:
     case 10:
     case 15:
         temp1 = ((r0 - 1) / 5 * 3 + 10);
         sub_8124DDC(&gBGTilemapBuffers[2][0], 0, 14, 7, 16, 13);
-        sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18a80, 14, temp1, 16, 3);
+        sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18800 + 0x140, 14, temp1, 16, 3);
         break;
     default:
         temp0 = ((r0 % 5) * 3 + 14);
         temp1 = ((r0 - 1) / 5 * 3 + 7);
         sub_8124DDC(&gBGTilemapBuffers[2][0], 0, 14, 7, 16, 13);
-        sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18a20, temp0, temp1, 3, 3);
+        sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18800 + 0x110, temp0, temp1, 3, 3);
         break;
     }
 }
@@ -1502,9 +1502,9 @@ void sub_8117158(u8 r0)
         for (z = 0; z < 3; z++)
         {
             var2 = (gUnknown_083F8C00[v[i]].var04 + z) * 32;
-            gBGTilemapBuffers[1][var1 + var2 + 0] = ewram189a0[(var0 + z) * 3 + 0];
-            gBGTilemapBuffers[1][var1 + var2 + 1] = ewram189a0[(var0 + z) * 3 + 1];
-            gBGTilemapBuffers[1][var1 + var2 + 2] = ewram189a0[(var0 + z) * 3 + 2];
+            gBGTilemapBuffers[1][var1 + var2 + 0] = ewram18800[0xD0 + (var0 + z) * 3 + 0];
+            gBGTilemapBuffers[1][var1 + var2 + 1] = ewram18800[0xD0 + (var0 + z) * 3 + 1];
+            gBGTilemapBuffers[1][var1 + var2 + 2] = ewram18800[0xD0 + (var0 + z) * 3 + 2];
         }
     }
 }

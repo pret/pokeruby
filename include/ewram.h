@@ -167,13 +167,12 @@ extern u8 gSharedMem[];
 #define eBerryBlenderData               (struct BerryBlenderData*)(&gSharedMem[0x18000])
 #define eEggHatchData                   (struct EggHatchData*)(&gSharedMem[0x18000])
 #define pssData                         (*(struct PokemonSummaryScreenStruct *)(gSharedMem + 0x18000))
-#define ewram18800                      (&gSharedMem[0x18800])
-#define ewram189a0                      ((u16 *)(gSharedMem + 0x189A0))
-#define ewram18a20                      ((u16 *)(gSharedMem + 0x18A20))
-#define ewram18a32                      ((u16 *)(gSharedMem + 0x18A32))
-#define ewram18a80                      ((u16 *)(gSharedMem + 0x18a80))
-#define eCableCar2                      ((struct CableCarEwramStruct2 *)(gSharedMem + 0x19000))
+
+// roulette.c
+#define ewram18800                      ((u16 *)(gSharedMem + 0x18800))
 #define eRoulette                       ((struct Roulette *)(gSharedMem + 0x19000))
+
+#define eCableCar2                      ((struct CableCarEwramStruct2 *)(gSharedMem + 0x19000))
 #define ewram1A000                      (&gSharedMem[0x1A000])
 #define ePartyMenu2                     (*(struct Unk201B000 *)(gSharedMem + 0x1B000))
 #define gPartyMenu                      (*(struct PartyMenu *)(gSharedMem + 0x1C000))
