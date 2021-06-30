@@ -3579,7 +3579,7 @@ void Task_AnimateAudience(u8 taskId)
         gTasks[taskId].data[10] = 0;
         if (gTasks[taskId].data[11] == 0)
         {
-            DmaCopy32Defvars(3, ewram16800, (void *)(VRAM + 0x2000), 0x1000);
+            DmaCopy32Defvars(3, eUnzippedContestAudience_Gfx + 0x1000, (void *)(VRAM + 0x2000), 0x1000);
         }
         else
         {

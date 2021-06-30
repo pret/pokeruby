@@ -138,7 +138,6 @@ extern u8 gSharedMem[];
 #define ewram16108arr(i)                (gSharedMem[0x16108 + i])
 #define ewram16400                      (gSharedMem + 0x16400)
 #define AI_ARRAY_160CC(i)               (gSharedMem[0x160CC + i * 2])
-#define ewram16800                      (&gSharedMem[0x16800])
 
 // gBattleResources
 #define AI_THINKING_STRUCT              ((struct AI_ThinkingStruct *)(gSharedMem + 0x16800))
