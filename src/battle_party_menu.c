@@ -94,7 +94,7 @@ void sub_8094958(void)
 
 void sub_8094978(u8 arg1, u8 arg2)
 {
-    sub_8094A74((UNK_201606C_ARRAY) + arg1 * 3, arg2, arg1);
+    sub_8094A74(gBattleStruct->unk1606C[arg1], arg2, arg1);
 }
 
 static void sub_8094998(u8 arg[3], u8 player_number)
@@ -204,7 +204,7 @@ void sub_8094B6C(u8 a, u8 b, u8 c)
 
     if (IsLinkDoubleBattle())
     {
-        u8 *arr = &ewram1606Carr(0, a);
+        u8 *arr = gBattleStruct->unk1606C[a];
 
         for (i = 0, j = 0; i < 3; i++)
         {
@@ -686,7 +686,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
         gTasks[taskId].func = Task_80954C0;
         return;
     }
-    if (sub_8094C20(partySelection) == EWRAM_1609D)
+    if (sub_8094C20(partySelection) == gBattleStruct->unk1609D)
     {
         PartyMenuEraseMsgBoxAndFrame();
         GetMonNickname(&gPlayerParty[partySelection], gStringVar1);

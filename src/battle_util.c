@@ -227,7 +227,7 @@ u8 GetBattlerForBattleScript(u8 caseId)
         ret = 0;
         break;
     case BS_GET_SCRIPTING_BANK:
-        ret = ewram16003;
+        ret = gBattleStruct->scriptingActive;
         break;
     case BS_GET_gBank1:
         ret = gBank1;

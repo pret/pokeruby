@@ -232,10 +232,10 @@ void unref_sub_8137220(void)
 void SetBankFuncToWallyBufferRunCommand(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
-    ewram160A8 = 0;
-    ewram160A9 = 0;
-    ewram160AA = 0;
-    ewram160AB = 0;
+    gBattleStruct->unk160A8 = 0;
+    gBattleStruct->unk160A9 = 0;
+    gBattleStruct->unk160AA = 0;
+    gBattleStruct->unk160AB = 0;
 }
 
 void WallyBufferRunCommand(void)
@@ -253,59 +253,59 @@ void sub_81372BC(void)
 {
     u8 r4;
 
-    switch (ewram160A8)
+    switch (gBattleStruct->unk160A8)
     {
     case 0:
-        ewram160AA = 64;
-        ewram160A8++;
+        gBattleStruct->unk160AA = 64;
+        gBattleStruct->unk160A8++;
         // fall through
     case 1:
-        r4 = --ewram160AA;
+        r4 = --gBattleStruct->unk160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
+            gBattleStruct->unk160A8++;
+            gBattleStruct->unk160A9 = r4;
+            gBattleStruct->unk160AA = 64;
         }
         break;
     case 2:
-        r4 = --ewram160AA;
+        r4 = --gBattleStruct->unk160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
+            gBattleStruct->unk160A8++;
+            gBattleStruct->unk160A9 = r4;
+            gBattleStruct->unk160AA = 64;
         }
         break;
     case 3:
-        r4 = --ewram160AA;
+        r4 = --gBattleStruct->unk160AA;
         if (r4 == 0)
         {
             BtlController_EmitTwoReturnValues(1, 9, 0);
             WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
+            gBattleStruct->unk160A8++;
+            gBattleStruct->unk160A9 = r4;
+            gBattleStruct->unk160AA = 64;
         }
         break;
     case 4:
-        if (--ewram160AA == 0)
+        if (--gBattleStruct->unk160AA == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
             sub_802E3E4(1, 0);
-            ewram160AA = 64;
-            ewram160A8++;
+            gBattleStruct->unk160AA = 64;
+            gBattleStruct->unk160A8++;
         }
         break;
     case 5:
-        if (--ewram160AA == 0)
+        if (--gBattleStruct->unk160AA == 0)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
@@ -1284,16 +1284,16 @@ void WallyHandlecmd19(void)
 
 void WallyHandlecmd20(void)
 {
-    switch (ewram160A9)
+    switch (gBattleStruct->unk160A9)
     {
     case 0:
         sub_80304A8();
-        ewram160A9++;
-        ewram160AB = 80;
+        gBattleStruct->unk160A9++;
+        gBattleStruct->unk160AB = 80;
         // fall through
     case 1:
-        ewram160AB--;
-        if (ewram160AB == 0)
+        gBattleStruct->unk160AB--;
+        if (gBattleStruct->unk160AB == 0)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);

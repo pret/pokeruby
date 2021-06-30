@@ -12806,7 +12806,7 @@ static void atkD2_tryswapitems(void)
         else {
             u16 oldItemAtk, *newItemAtk;
 
-            newItemAtk = (u16 *)(ewram160F0 + 2 * gBattlerAttacker);
+            newItemAtk = (u16 *)(gBattleStruct->changedItems + gBattlerAttacker);
             oldItemAtk = gBattleMons[gBattlerAttacker].item;
             *newItemAtk = gBattleMons[gBattlerTarget].item;
 
@@ -13094,7 +13094,7 @@ static void atkE1_trygetintimidatetarget(void)
 {
     u8 side;
 
-    gBattleStruct->scriptingActive = ewram160DD;
+    gBattleStruct->scriptingActive = gBattleStruct->intimidateBank;
     side = GetBattlerSide(gBattleStruct->scriptingActive);
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 9;

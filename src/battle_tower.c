@@ -1351,7 +1351,7 @@ void SetBattleTowerProperty(void)
     switch (gSpecialVar_0x8004)
     {
     case 0:
-        ewram160FB = gSaveBlock2.battleTower.var_4AE[battleTowerLevelType];
+        gBattleStruct->unk160FB = gSaveBlock2.battleTower.var_4AE[battleTowerLevelType];
         gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gSpecialVar_0x8005;
         break;
     case 1:
@@ -1400,7 +1400,7 @@ void SetBattleTowerProperty(void)
             ResetBattleTowerStreak(battleTowerLevelType);
         break;
     case 12:
-        gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = ewram160FB;
+        gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gBattleStruct->unk160FB;
         break;
     case 13:
         gSaveBlock2.battleTower.currentWinStreaks[battleTowerLevelType] = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
@@ -1449,7 +1449,7 @@ void BattleTowerUtil(void)
         ResetBattleTowerStreak(battleTowerLevelType);
         break;
     case 12:
-        gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = ewram160FB;
+        gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gBattleStruct->unk160FB;
         break;
     case 13:
         gSaveBlock2.battleTower.currentWinStreaks[battleTowerLevelType] = GetCurrentBattleTowerWinStreak(battleTowerLevelType);

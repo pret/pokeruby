@@ -4778,7 +4778,7 @@ void SetActionsAndBanksTurnOrder(void)
                 }
             }
             gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-            eFocusPunchBattler = 0;
+            gBattleStruct->focusPunchBattler = 0;
             return;
         }
         else
@@ -4821,7 +4821,7 @@ void SetActionsAndBanksTurnOrder(void)
     }
 
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-    eFocusPunchBattler = 0;
+    gBattleStruct->focusPunchBattler = 0;
 }
 
 static void TurnValuesCleanUp(bool8 var0)
@@ -4877,10 +4877,10 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
-        while (eFocusPunchBattler < gBattlersCount)
+        while (gBattleStruct->focusPunchBattler < gBattlersCount)
         {
-            gActiveBattler = gBattlerAttacker = eFocusPunchBattler;
-            eFocusPunchBattler++;
+            gActiveBattler = gBattlerAttacker = gBattleStruct->focusPunchBattler;
+            gBattleStruct->focusPunchBattler++;
             if (gChosenMovesByBanks[gActiveBattler] == MOVE_FOCUS_PUNCH
                 && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
@@ -5187,7 +5187,7 @@ void HandleAction_UseMove(void)
     }
 
     gCritMultiplier = 1;
-    eDmgMultiplier = 1;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleStruct->atkCancellerTracker = 0;
     gMoveResultFlags = 0;
     gMultiHitCounter = 0;
@@ -5687,7 +5687,7 @@ void HandleAction_ActionFinished(void)
     gBattleStruct->animTargetsHit = 0;
     gLastLandedMoves[gBattlerAttacker] = 0;
     gLastHitByType[gBattlerAttacker] = 0;
-    eDynamicMoveType = 0;
+    gBattleStruct->dynamicMoveType = 0;
     gDynamicBasePower = 0;
     gBattleStruct->cmd49StateTracker = 0;
     gBattleCommunication[3] = 0;
