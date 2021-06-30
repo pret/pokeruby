@@ -22,6 +22,7 @@ extern u8 gSharedMem[];
 // battle etc.
 // This overlaps with so many things it's not even funny
 // The actual data starts at 0x02016000
+#define eMultiTxBuffer                  (*(union MultiBuffers *)gSharedMem)
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
 #define namingScreenData                (*(struct NamingScreenData *)(gSharedMem + 0x0))
 #define ewramBerryPic                   (gSharedMem + 0x0)

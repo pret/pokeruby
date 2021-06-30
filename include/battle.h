@@ -291,13 +291,15 @@ struct LinkPartnerHeader
     struct BattleEnigmaBerry battleEnigmaBerry;
 };
 
+union MultiBuffers
+{
+    struct LinkPartnerHeader linkPartnerHeader;
+    struct MultiBattlePokemonTx multiBattleMons[3];
+};
+
 struct BattleStruct /* 0x2000000 */
 {
-    /*0x00000*/ union{
-        struct LinkPartnerHeader linkPartnerHeader;
-        struct MultiBattlePokemonTx multiBattleMons[3];
-    } multiBuffer;
-    u8 filler60[0x15FA0];
+    u8 filler00000[0x16000];
     /*0x16000*/ u8 turnEffectsTracker;
     /*0x16001*/ u8 turnEffectsBattlerId;
     /*0x16002*/ u8 animTurn;
@@ -416,21 +418,6 @@ struct BattleStruct /* 0x2000000 */
     /*0x16111*/ u8 wishPerishSongBattlerId;
     /*0x16112*/ u8 multihitMoveEffect;
     /*0x16113*/ u8 givenExpMons;
-    /*0x16114*/ u8 unk16114;
-    /*0x16115*/ u8 unk16115;
-    /*0x16116*/ u8 unk16116;
-    /*0x16117*/ u8 unk16117;
-    /*0x16118*/ u8 unk16118;
-    /*0x16119*/ u8 unk16119;
-    /*0x1611A*/ u8 unk1611A;
-    /*0x1611B*/ u8 unk1611B;
-    /*0x1611C*/ u8 unk1611C;
-    /*0x1611D*/ u8 unk1611D;
-    /*0x1611E*/ u8 unk1611E;
-    /*0x1611F*/ u8 unk1611F;
-
-    //u8 filler2[0x72E];
-    /* 0x16A00 */ struct BattleHistory unk_2016A00_2;
 };
 
 struct ResourceFlags
