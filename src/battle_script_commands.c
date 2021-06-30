@@ -5057,12 +5057,12 @@ static void atk19_tryfaintmon(void)
         if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler])
          && gBattleMons[gActiveBattler].hp == 0)
         {
-            eLastTakenMove_2d(0, battlerId) = 0;
-            eLastTakenMove_2d(1, battlerId) = 0;
-            ewram16100arr2(0, battlerId) = 0;
-            ewram16100arr2(1, battlerId) = 0;
-            ewram16100arr2(2, battlerId) = 0;
-            ewram16100arr2(3, battlerId) = 0;
+            gSharedMem[BSTRUCT_OFF(lastTakenMove) + 2 * battlerId + 0] = 0;
+            gSharedMem[BSTRUCT_OFF(lastTakenMove) + 2 * battlerId + 1] = 0;
+            gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * battlerId + 0] = 0;
+            gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * battlerId + 1] = 0;
+            gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * battlerId + 2] = 0;
+            gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * battlerId + 3] = 0;
 
             gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
             BattleScriptPush(gBattlescriptCurrInstr + 7);
@@ -5098,7 +5098,7 @@ static void atk19_tryfaintmon(void)
              && gBattleMons[gBattlerAttacker].hp != 0
              && gCurrentMove != MOVE_STRUGGLE)
             {
-                u8 moveIndex = ewram1608Carr(gBattlerAttacker);
+                u8 moveIndex = gSharedMem[BSTRUCT_OFF(ChosenMoveID) + gBattlerAttacker];
 
                 gBattleMons[gBattlerAttacker].pp[moveIndex] = 0;
                 BattleScriptPush(gBattlescriptCurrInstr);
@@ -5107,11 +5107,7 @@ static void atk19_tryfaintmon(void)
                 BtlController_EmitSetMonData(0, moveIndex + 9, 0, 1, &gBattleMons[gActiveBattler].pp[moveIndex]);
                 MarkBattlerForControllerExec(gActiveBattler);
 
-                gBattleTextBuff1[0] = 0xFD;
-                gBattleTextBuff1[1] = 2;
-                gBattleTextBuff1[2] = gBattleMons[gBattlerAttacker].moves[moveIndex];
-                gBattleTextBuff1[3] = gBattleMons[gBattlerAttacker].moves[moveIndex] >> 8;
-                gBattleTextBuff1[4] = EOS;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].moves[moveIndex]);
             }
         }
         else
@@ -8110,9 +8106,9 @@ static void atk51_switchhandleorder(void)
         ewram16068arr(gActiveBattler) = gBattleBufferB[gActiveBattler][1];
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            ewram1606Carr(0, gActiveBattler) &= 0xF;
-            ewram1606Carr(0, gActiveBattler) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
-            ewram1606Carr(1, gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+            gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0] &= 0xF;
+            gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0] |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
+            gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 1] = gBattleBufferB[gActiveBattler][3];
             ewram1606Carr(0, (gActiveBattler ^ 2)) &= (0xF0);
             ewram1606Carr(0, (gActiveBattler ^ 2)) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
             ewram1606Carr(2, (gActiveBattler ^ 2)) = gBattleBufferB[gActiveBattler][3];
@@ -9648,7 +9644,7 @@ static void atk76_various(void)
             else
                 gActiveBattler = 2;
 
-            choiced_move = CHOICED_MOVE(gActiveBattler);
+            choiced_move = &gBattleStruct->choicedMove[gActiveBattler];
             for (i = 0; i < 4; i++)
             {
                 if (gBattleMons[gActiveBattler].moves[i] == *choiced_move)
@@ -9788,9 +9784,9 @@ static void atk7B_tryhealhalfhealth(void)
 
 static void atk7C_trymirrormove(void)
 {
-    u16 r7 = eLastTakenMove_2d(0, gBattlerAttacker) | (eLastTakenMove_2d(1, gBattlerAttacker) << 8);
-    u16 r6 = ewram16100arr2(0, gBattlerAttacker) | (ewram16100arr2(1, gBattlerAttacker) << 8);
-    u16 r5 = ewram16100arr2(2, gBattlerAttacker) | (ewram16100arr2(3, gBattlerAttacker) << 8);
+    u16 r7 = gSharedMem[BSTRUCT_OFF(lastTakenMove) + 2 * gBattlerAttacker + 0] | (gSharedMem[BSTRUCT_OFF(lastTakenMove) + 2 * gBattlerAttacker + 1] << 8);
+    u16 r6 = gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gBattlerAttacker + 0] | (gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gBattlerAttacker + 1] << 8);
+    u16 r5 = gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gBattlerAttacker + 2] | (gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gBattlerAttacker + 3] << 8);
 
     if (r7 != 0 && r7 != 0xFFFF)
     {
@@ -10290,12 +10286,7 @@ static void atk8D_setmultihitcounter(void)
 
 static void atk8E_initmultihitstring(void)
 {
-    ewram160E0(0) = 0xFD;
-    ewram160E0(1) = 1;
-    ewram160E0(2) = 1;
-    ewram160E0(3) = 1;
-    ewram160E0(4) = 0;
-    ewram160E0(5) = 0xFF;
+    PREPARE_BYTE_NUMBER_BUFFER(gBattleStruct->unk160E0, 1, 0);
     gBattlescriptCurrInstr++;
 }
 
@@ -11529,10 +11520,11 @@ static void atkA5_painsplitdmgcalc(void)
     {
         s32 hp_diff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
         s32 to_store = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hp_diff;
-        gBattleStruct->unk16014 = sBYTE0_32(to_store);
-        gBattleStruct->unk16015 = sBYTE1_32(to_store);
-        gBattleStruct->unk16016 = sBYTE2_32(to_store);
-        gBattleStruct->unk16017 = sBYTE3_32(to_store);
+
+        gSharedMem[BSTRUCT_OFF(unk16014) + 0] = sBYTE0_32(to_store);
+        gSharedMem[BSTRUCT_OFF(unk16014) + 1] = sBYTE1_32(to_store);
+        gSharedMem[BSTRUCT_OFF(unk16014) + 2] = sBYTE2_32(to_store);
+        gSharedMem[BSTRUCT_OFF(unk16014) + 3] = sBYTE3_32(to_store);
 
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp - hp_diff;
         gSpecialStatuses[gBattlerTarget].dmg = 0xFFFF;
@@ -12370,7 +12362,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
             gBattlerTarget = GetBattlerAtPosition(2);
     }
 
-    if (gActionForBanks[gBattlerTarget] == 0 && gBattlerAttacker == ewram16010arr(gBattlerTarget) && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
+    if (gActionForBanks[gBattlerTarget] == 0 && gBattlerAttacker == gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerTarget] && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
         && gBattleMons[gBattlerAttacker].hp && !gDisableStructs[gBattlerTarget].truantCounter && gChosenMovesByBanks[gBattlerTarget] == MOVE_PURSUIT)
     {
         int i;
@@ -12439,12 +12431,12 @@ static void atkBE_rapidspinfree(void) //rapid spin
     if (gBattleMons[gBattlerAttacker].status2 & STATUS2_WRAPPED)
     {
         gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_WRAPPED);
-        gBattlerTarget = ewram16020arr(gBattlerAttacker);
-        gBattleTextBuff1[0] = 0xFD;
-        gBattleTextBuff1[1] = 2;
-        gBattleTextBuff1[2] = ewram16004arr(0, gBattlerAttacker);
-        gBattleTextBuff1[3] = ewram16004arr(1, gBattlerAttacker);
-        gBattleTextBuff1[4] = 0xFF;
+        gBattlerTarget = gSharedMem[BSTRUCT_OFF(wrappedBy) + gBattlerAttacker];
+        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+        gBattleTextBuff1[1] = B_BUFF_MOVE;
+        gBattleTextBuff1[2] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gBattlerAttacker + 0];
+        gBattleTextBuff1[3] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gBattlerAttacker + 1];
+        gBattleTextBuff1[4] = B_BUFF_EOS;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_WrapFree;
     }
@@ -12585,11 +12577,11 @@ static void atkC4_trydobeatup(void)
         }
         if (gBattleCommunication[0] < PARTY_SIZE)
         {
-            gBattleTextBuff1[0] = 0xFD;
-            gBattleTextBuff1[1] = 4;
+            gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+            gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
             gBattleTextBuff1[2] = gBattlerAttacker;
             gBattleTextBuff1[3] = gBattleCommunication[0];
-            gBattleTextBuff1[4] = 0xFF;
+            gBattleTextBuff1[4] = B_BUFF_EOS;
             gBattlescriptCurrInstr += 9;
 
             gBattleMoveDamage = gBaseStats[GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES)].baseAttack;
@@ -12821,10 +12813,10 @@ static void atkD2_tryswapitems(void)
             BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerTarget].item);
             MarkBattlerForControllerExec(gBattlerTarget);
 
-            ewram160E8arr2(0, gBattlerTarget) = 0;
-            ewram160E8arr2(1, gBattlerTarget) = 0;
-            ewram160E8arr2(0, gBattlerAttacker) = 0;
-            ewram160E8arr2(1, gBattlerAttacker) = 0;
+            gSharedMem[BSTRUCT_OFF(choicedMove) + 2 * gBattlerTarget   + 0] = 0;
+            gSharedMem[BSTRUCT_OFF(choicedMove) + 2 * gBattlerTarget   + 1] = 0;
+            gSharedMem[BSTRUCT_OFF(choicedMove) + 2 * gBattlerAttacker + 0] = 0;
+            gSharedMem[BSTRUCT_OFF(choicedMove) + 2 * gBattlerAttacker + 1] = 0;
 
             gBattlescriptCurrInstr += 5;
 
@@ -12868,7 +12860,7 @@ static void atkD4_trywish(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         break;
     case 1: //heal effect
-        gBattleTextBuff1[0] = 0xFD;
+        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
         gBattleTextBuff1[1] = 4;
         gBattleTextBuff1[2] = gBattlerTarget;
         gBattleTextBuff1[3] = gWishFutureKnock.wishMonId[gBattlerTarget];
@@ -13274,7 +13266,7 @@ static void atkEA_tryrecycleitem(void)
 {
     u16* used_item;
     gActiveBattler = gBattlerAttacker;
-    used_item = USED_HELD_ITEM(gActiveBattler);
+    used_item = &USED_HELD_ITEMS(gActiveBattler);
     if (*used_item && gBattleMons[gActiveBattler].item == 0)
     {
         gLastUsedItem = *used_item;

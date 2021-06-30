@@ -1501,7 +1501,7 @@ void debug_sub_8010A7C(u8 a, u8 b)
 
     for (i = 0; i < b; i++)
         gBattleTextBuff1[i] = a;
-    gBattleTextBuff1[i] = EOS;
+    gBattleTextBuff1[i] = B_BUFF_EOS;
 }
 
 void debug_sub_8010AAC(u8 a)
@@ -2240,7 +2240,7 @@ void debug_sub_8011EA0(u8 a)
             gUnknown_Debug_03004360 * 32 + 25,
             0);
         Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
-        gBattleTextBuff1[0] = EOS;
+        gBattleTextBuff1[0] = B_BUFF_EOS;
 #endif
         StringAppend(gBattleTextBuff1, gSpeciesNames[gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a]]);
         Text_InitWindow(
@@ -2296,7 +2296,7 @@ void debug_sub_8011EA0(u8 a)
             gUnknown_Debug_03004360 * 32 + 25,
             0);
         Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
-        gBattleTextBuff1[0] = EOS;
+        gBattleTextBuff1[0] = B_BUFF_EOS;
 #endif
         if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a] != 0)
             StringAppend(gBattleTextBuff1, ItemId_GetName(gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a]));
@@ -2355,7 +2355,7 @@ void debug_sub_8011EA0(u8 a)
             length++;
             break;
         }
-        gBattleTextBuff1[length] = EOS;
+        gBattleTextBuff1[length] = B_BUFF_EOS;
         Text_InitWindow(
             &gUnknown_Debug_03004370,
             gBattleTextBuff1,
@@ -2417,7 +2417,7 @@ void debug_sub_8012294(void)
             gUnknown_Debug_03004360 * 32 + 25,
             0);
         Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
-        gBattleTextBuff1[0] = EOS;
+        gBattleTextBuff1[0] = B_BUFF_EOS;
 #endif
         StringAppend(gBattleTextBuff1, gMoveNames[gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r5 / 5][gUnknown_Debug_030043A8]]);
         Text_InitWindow(
@@ -2658,7 +2658,7 @@ void debug_sub_80128B4(void)
     Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     ConvertIntToDecimalStringN(gBattleTextBuff1, gCurrentMove, 2, 3);
     gBattleTextBuff1[3] = CHAR_SPACE;
-    gBattleTextBuff1[4] = EOS;
+    gBattleTextBuff1[4] = B_BUFF_EOS;
     StringAppend(gBattleTextBuff1, gSpeciesNames[gCurrentMove]);
     Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gBattleTextBuff1, 144, 2, 35);
     Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
@@ -3470,13 +3470,12 @@ void BattleStartClearSetData(void)
 
     for (i = 0; i < 8; i++)
     {
-        // TODO: Find matching access here
-        eLastTakenMove_flat(i) = 0;/*((u8 *)(gBattleStruct->lastTakenMove))[i] = 0;*/
-        ewram160CCarr(i) = 0;/*((u8 *)(gBattleStruct->usedHeldItems))[i] = 0;*/
-        ewram160E8arr(i) = 0;/*((u8 *)(gBattleStruct->choicedMove))[i] = 0;*/
-        ewram160F0arr(i) = 0;/*((u8 *)(gBattleStruct->changedItems))[i] = 0;*/
-        ewram16100arr(i) = 0;/*((u8 *)(gBattleStruct->lastTakenMoveFrom) + 8 * 0)[i] = 0;*/
-        ewram16108arr(i) = 0;/*((u8 *)(gBattleStruct->lastTakenMoveFrom) + 8 * 1)[i] = 0;*/
+        gSharedMem[BSTRUCT_OFF(lastTakenMove)             + i] = 0;
+        gSharedMem[BSTRUCT_OFF(usedHeldItems)             + i] = 0;
+        gSharedMem[BSTRUCT_OFF(choicedMove)               + i] = 0;
+        gSharedMem[BSTRUCT_OFF(changedItems)              + i] = 0;
+        gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 0 * 8 + i] = 0;
+        gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 1 * 8 + i] = 0;
     }
 
     gBattleStruct->AI_monToSwitchIntoId[0] = PARTY_SIZE;
@@ -3560,7 +3559,7 @@ void SwitchInClearSetData(void)
     {
         if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
             gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
-        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram16020arr(i) == gActiveBattler)
+        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && gSharedMem[BSTRUCT_OFF(wrappedBy) + i] == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
 
@@ -3585,14 +3584,14 @@ void SwitchInClearSetData(void)
     gLastPrintedMoves[gActiveBattler] = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
 
-    eLastTakenMove_2d(0, gActiveBattler) = 0;
-    eLastTakenMove_2d(1, gActiveBattler) = 0;
-    ewram16100arr2(0, gActiveBattler) = 0;
-    ewram16100arr2(1, gActiveBattler) = 0;
-    ewram16100arr2(2, gActiveBattler) = 0;
-    ewram16100arr2(3, gActiveBattler) = 0;
-    ewram160E8arr2(0, gActiveBattler) = 0;
-    ewram160E8arr2(1, gActiveBattler) = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMove)     + 2 * gActiveBattler + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMove)     + 2 * gActiveBattler + 1] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 1] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 2] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 3] = 0;
+    gSharedMem[BSTRUCT_OFF(choicedMove)       + 2 * gActiveBattler + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(choicedMove)       + 2 * gActiveBattler + 1] = 0;
 
     eBattleFlagsArr.arr[gActiveBattler] = 0;
 
@@ -3614,7 +3613,7 @@ void UndoEffectsAfterFainting(void)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
         if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
             gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
-        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram16020arr(i) == gActiveBattler)
+        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && gSharedMem[BSTRUCT_OFF(wrappedBy) + i] == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
     gActionSelectionCursor[gActiveBattler] = 0;
@@ -3649,14 +3648,14 @@ void UndoEffectsAfterFainting(void)
     gLastPrintedMoves[gActiveBattler] = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
 
-    ewram160E8arr2(0, gActiveBattler) = 0;
-    ewram160E8arr2(1, gActiveBattler) = 0;
-    eLastTakenMove_2d(0, gActiveBattler) = 0;
-    eLastTakenMove_2d(1, gActiveBattler) = 0;
-    ewram16100arr2(0, gActiveBattler) = 0;
-    ewram16100arr2(1, gActiveBattler) = 0;
-    ewram16100arr2(2, gActiveBattler) = 0;
-    ewram16100arr2(3, gActiveBattler) = 0;
+    gSharedMem[BSTRUCT_OFF(choicedMove) + 2 * gActiveBattler + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(choicedMove) + 2 * gActiveBattler + 1] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMove) + 2 * gActiveBattler + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMove) + 2 * gActiveBattler + 1] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 1] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 2] = 0;
+    gSharedMem[BSTRUCT_OFF(lastTakenMoveFrom) + 4 * gActiveBattler + 3] = 0;
 
     eBattleFlagsArr.arr[gActiveBattler] = 0;
 
@@ -4282,7 +4281,7 @@ void sub_8012324(void)
                                 gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
                                 ewram16060(gActiveBattler) = FALSE;
                                 ewram16094arr(gActiveBattler) = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
-                                ewram16010arr(gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                                gSharedMem[BSTRUCT_OFF(moveTarget) + gActiveBattler] = gBattleBufferB[gActiveBattler][3];
                                 return;
                             }
                             else if (gDisableStructs[gActiveBattler].encoredMove != 0)
@@ -4333,7 +4332,7 @@ void sub_8012324(void)
                             }
                             else
                             {
-                                BtlController_EmitChooseItem(0, &ewram1606Carr(0, gActiveBattler));
+                                BtlController_EmitChooseItem(0, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                                 MarkBattlerForControllerExec(gActiveBattler);
                             }
                             break;
@@ -4342,7 +4341,7 @@ void sub_8012324(void)
                             if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
                                 || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
                             {
-                                BtlController_EmitChoosePokemon(0, 2, 6, ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                                BtlController_EmitChoosePokemon(0, 2, 6, ABILITY_NONE, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                             }
                             else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
                                      || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
@@ -4351,16 +4350,16 @@ void sub_8012324(void)
                                      || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
                                          && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
                             {
-                                BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | PARTY_ABILITY_PREVENTS, 6, gLastUsedAbility, &ewram1606Carr(0, gActiveBattler));
+                                BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | PARTY_ABILITY_PREVENTS, 6, gLastUsedAbility, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                             }
                             else
                             {
                                 if (gActiveBattler == 2 && gActionForBanks[0] == B_ACTION_SWITCH)
-                                    BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, ewram16068arr(0), ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                                    BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, ewram16068arr(0), ABILITY_NONE, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                                 else if (gActiveBattler == 3 && gActionForBanks[1] == B_ACTION_SWITCH)
-                                    BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, ewram16068arr(1), ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                                    BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, ewram16068arr(1), ABILITY_NONE, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                                 else
-                                    BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, 6, ABILITY_NONE, &ewram1606Carr(0, gActiveBattler));
+                                    BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, 6, ABILITY_NONE, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                             }
                             MarkBattlerForControllerExec(gActiveBattler);
                             break;
@@ -4375,7 +4374,7 @@ void sub_8012324(void)
                             }
                             break;
                         case B_ACTION_SAFARI_POKEBLOCK:
-                            BtlController_EmitChooseItem(0, &ewram1606Carr(0, gActiveBattler));
+                            BtlController_EmitChooseItem(0, &gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0]);
                             MarkBattlerForControllerExec(gActiveBattler);
                             break;
                         case B_ACTION_CANCEL_PARTNER:
@@ -4440,9 +4439,9 @@ void sub_8012324(void)
                                     }
                                     else
                                     {
-                                        ewram1608Carr(gActiveBattler) = gBattleBufferB[gActiveBattler][2];
-                                        gChosenMovesByBanks[gActiveBattler] = gBattleMons[gActiveBattler].moves[ewram1608Carr(gActiveBattler)];
-                                        ewram16010arr(gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                                        gSharedMem[BSTRUCT_OFF(ChosenMoveID) + gActiveBattler] = gBattleBufferB[gActiveBattler][2];
+                                        gChosenMovesByBanks[gActiveBattler] = gBattleMons[gActiveBattler].moves[gSharedMem[BSTRUCT_OFF(ChosenMoveID) + gActiveBattler]];
+                                        gSharedMem[BSTRUCT_OFF(moveTarget) + gActiveBattler] = gBattleBufferB[gActiveBattler][3];
                                         gBattleCommunication[gActiveBattler]++;
                                     }
                                     break;
@@ -4470,9 +4469,9 @@ void sub_8012324(void)
 
                                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                                 {
-                                    ewram1606Carr(0, gActiveBattler) &= 0xF;
-                                    ewram1606Carr(0, gActiveBattler) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
-                                    ewram1606Carr(1, gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                                    gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0] &= 0xF;
+                                    gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0] |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
+                                    gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 1] = gBattleBufferB[gActiveBattler][3];
 
                                     ewram1606Carr(0, (gActiveBattler ^ BIT_FLANK)) &= (0xF0);
                                     ewram1606Carr(0, (gActiveBattler ^ BIT_FLANK)) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
@@ -4688,7 +4687,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
             if (gProtectStructs[bank1].noValidMoves)
                 bank1Move = MOVE_STRUGGLE;
             else
-                bank1Move = gBattleMons[bank1].moves[ewram1608Carr(bank1)];
+                bank1Move = gBattleMons[bank1].moves[gSharedMem[BSTRUCT_OFF(ChosenMoveID) + bank1]];
         }
         else
             bank1Move = MOVE_NONE;
@@ -4698,7 +4697,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
             if (gProtectStructs[bank2].noValidMoves)
                 bank2Move = MOVE_STRUGGLE;
             else
-                bank2Move = gBattleMons[bank2].moves[ewram1608Carr(bank2)];
+                bank2Move = gBattleMons[bank2].moves[gSharedMem[BSTRUCT_OFF(ChosenMoveID) + bank2]];
         }
         else
             bank2Move = MOVE_NONE;
@@ -5192,7 +5191,7 @@ void HandleAction_UseMove(void)
     gMoveResultFlags = 0;
     gMultiHitCounter = 0;
     gBattleCommunication[6] = 0;
-    gCurrMovePos = gUnknown_02024BE5 = ewram1608Carr(gBattlerAttacker);
+    gCurrMovePos = gUnknown_02024BE5 = gSharedMem[BSTRUCT_OFF(ChosenMoveID) + gBattlerAttacker];
 
     // choose move
     if (gProtectStructs[gBattlerAttacker].noValidMoves)
@@ -5200,7 +5199,7 @@ void HandleAction_UseMove(void)
         gProtectStructs[gBattlerAttacker].noValidMoves = 0;
         gCurrentMove = gChosenMove = MOVE_STRUGGLE;
         gHitMarker |= HITMARKER_NO_PPDEDUCT;
-        ewram16010arr(gBattlerAttacker) = GetMoveTarget(MOVE_STRUGGLE, 0);
+        gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] = GetMoveTarget(MOVE_STRUGGLE, 0);
     }
     else if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS || gBattleMons[gBattlerAttacker].status2 & STATUS2_RECHARGE)
     {
@@ -5212,7 +5211,7 @@ void HandleAction_UseMove(void)
     {
         gCurrentMove = gChosenMove = gDisableStructs[gBattlerAttacker].encoredMove;
         gCurrMovePos = gUnknown_02024BE5 = gDisableStructs[gBattlerAttacker].encoredMovePos;
-        ewram16010arr(gBattlerAttacker) = GetMoveTarget(gCurrentMove, 0);
+        gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] = GetMoveTarget(gCurrentMove, 0);
     }
     // check if the encored move wasn't overwritten
     else if (gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE
@@ -5223,12 +5222,12 @@ void HandleAction_UseMove(void)
         gDisableStructs[gBattlerAttacker].encoredMove = MOVE_NONE;
         gDisableStructs[gBattlerAttacker].encoredMovePos = 0;
         gDisableStructs[gBattlerAttacker].encoreTimer1 = 0;
-        ewram16010arr(gBattlerAttacker) = GetMoveTarget(gCurrentMove, 0);
+        gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] = GetMoveTarget(gCurrentMove, 0);
     }
     else if (gBattleMons[gBattlerAttacker].moves[gCurrMovePos] != gChosenMovesByBanks[gBattlerAttacker])
     {
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
-        ewram16010arr(gBattlerAttacker) = GetMoveTarget(gCurrentMove, 0);
+        gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] = GetMoveTarget(gCurrentMove, 0);
     }
     else
     {
@@ -5253,14 +5252,14 @@ void HandleAction_UseMove(void)
              && gSideTimers[side].followmeTimer == 0
              && (gBattleMoves[gCurrentMove].power != 0
                  || gBattleMoves[gCurrentMove].target != MOVE_TARGET_USER)
-             && gBattleMons[ewram16010arr(gBattlerAttacker)].ability != ABILITY_LIGHTNING_ROD
+             && gBattleMons[gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker]].ability != ABILITY_LIGHTNING_ROD
              && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
     {
         side = GetBattlerSide(gBattlerAttacker);
         for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (side != GetBattlerSide(gActiveBattler)
-                && ewram16010arr(gBattlerAttacker) != gActiveBattler
+                && gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] != gActiveBattler
                 && gBattleMons[gActiveBattler].ability == ABILITY_LIGHTNING_ROD
                 && GetBattlerTurnOrderNum(gActiveBattler) < var)
             {
@@ -5288,7 +5287,7 @@ void HandleAction_UseMove(void)
             }
             else
             {
-                gBattlerTarget = ewram16010arr(gBattlerAttacker);
+                gBattlerTarget = gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker];
             }
 
             if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
@@ -5339,7 +5338,7 @@ void HandleAction_UseMove(void)
     }
     else
     {
-        gBattlerTarget = ewram16010arr(gBattlerAttacker);
+        gBattlerTarget = gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker];
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
         {
             if (GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget))

@@ -474,7 +474,7 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     u8 limitations = 0;
     u16 move = gBattleMons[gActiveBattler].moves[gBattleBufferB[gActiveBattler][2]];
     u8 holdEffect;
-    u16* choicedMove = CHOICED_MOVE(gActiveBattler);
+    u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
     if (gDisableStructs[gActiveBattler].disabledMove == move && move)
     {
@@ -527,7 +527,7 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
 u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
 {
     u8 holdEffect;
-    u16* choicedMove = CHOICED_MOVE(battlerId);
+    u16* choicedMove = &gBattleStruct->choicedMove[battlerId];
     s32 i;
 
     if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
@@ -1016,12 +1016,12 @@ u8 TurnBasedEffects(void)
                     gBattleMons[gActiveBattler].status2 -= 0x2000;
                     if (gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED)  // damaged by wrap
                     {
-                        gBattleStruct->animArg1 = ewram16004arr(0, gActiveBattler);
-                        gBattleStruct->animArg2 = ewram16004arr(1, gActiveBattler);
+                        gBattleStruct->animArg1 = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
+                        gBattleStruct->animArg2 = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 1];
                         gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
                         gBattleTextBuff1[1] = B_BUFF_MOVE;
-                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBattler);
-                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBattler);
+                        gBattleTextBuff1[2] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
+                        gBattleTextBuff1[3] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 1];
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                         gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
@@ -1030,10 +1030,10 @@ u8 TurnBasedEffects(void)
                     }
                     else  // broke free
                     {
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBattler);
-                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBattler);
+                        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+                        gBattleTextBuff1[1] = B_BUFF_MOVE;
+                        gBattleTextBuff1[2] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
+                        gBattleTextBuff1[3] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 1];
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapEnds;
                     }
@@ -3481,7 +3481,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
         targetBank = gBattlerAttacker;
         break;
     }
-    ewram16010arr(gBattlerAttacker) = targetBank;
+    gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] = targetBank;
     return targetBank;
 }
 

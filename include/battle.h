@@ -306,14 +306,11 @@ struct BattleStruct /* 0x2000000 */
     /*0x16003*/ u8 scriptingActive;
     /*0x16004*/ u8 wrappedMove[MAX_BATTLERS_COUNT * 2];
     /*0x1600C*/ u8 cmd49StateTracker;
-    /*0x1600D*/ u8 unk1600D;
+    /*0x1600D*/ u8 unk1600D; // unused
     /*0x1600E*/ u8 turnCountersTracker;
     /*0x1600F*/ u8 getexpStateTracker;
     /*0x16010*/ u8 moveTarget[MAX_BATTLERS_COUNT];
-    /*0x16014*/ u8 unk16014;
-    /*0x16015*/ u8 unk16015;
-    /*0x16016*/ u8 unk16016;
-    /*0x16017*/ u8 unk16017;
+    /*0x16014*/ u32 unk16014;
     /*0x16018*/ u8 expGetterMonId;
     /*0x16019*/ u8 unk16019;
     /*0x1601A*/ u8 atk5A_StateTracker; //also atk5B, statetracker
@@ -402,7 +399,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160FD*/ u8 unk160FD;
     /*0x160FE*/ u8 unk160FE;
     /*0x160FF*/ u8 unk160FF;
-	/*0x16100*/ u8 lastTakenMoveFrom[2 * 2 * 4];
+	/*0x16100*/ u16 lastTakenMoveFrom[2 * 4];
     /*0x16110*/ u8 wishPerishSongState;
     /*0x16111*/ u8 wishPerishSongBattlerId;
     /*0x16112*/ u8 multihitMoveEffect;
