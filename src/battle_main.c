@@ -4338,7 +4338,7 @@ void sub_8012324(void)
                             }
                             break;
                         case B_ACTION_SWITCH:
-                            ewram16064arr(gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
+                            BATTLE_PARTY_ID(gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
                             if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
                                 || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
                             {
@@ -5367,7 +5367,7 @@ void HandleAction_Switch(void)
     gActionSelectionCursor[gBattlerAttacker] = 0;
     gMoveSelectionCursor[gBattlerAttacker] = 0;
 
-    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, ewram16064arr(gBattlerAttacker))
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, BATTLE_PARTY_ID(gBattlerAttacker))
 
     gBattleStruct->scriptingActive = gBattlerAttacker;
     gBattlescriptCurrInstr = BattleScript_ActionSwitch;

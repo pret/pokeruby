@@ -1758,7 +1758,7 @@ static void BattleAICmd_get_used_item(void)
     else
         index = gBattlerTarget;
 
-    AI_THINKING_STRUCT->funcResult = AI_ARRAY_160CC(index);
+    AI_THINKING_STRUCT->funcResult = gSharedMem[offsetof(struct BattleStruct, usedHeldItems) + 2 * index];
 
     gAIScriptPtr += 2;
 }

@@ -1121,8 +1121,8 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     }
     //_08044486
     r5 = gSprites[a].data[5];
-    ConvertIntToDecimalStringN(str + 6, ewram16089, 1, 2);
-    ConvertIntToDecimalStringN(str + 9, ewram16088, 1, 2);
+    ConvertIntToDecimalStringN(str + 6, gBattleStruct->safariCatchFactor, 1, 2);
+    ConvertIntToDecimalStringN(str + 9, gBattleStruct->safariFleeRate, 1, 2);
     str[5] = 0;
     str[8] = 0xBA;
     sub_80034D4(eBattleInterfaceGfxBuffer, str);

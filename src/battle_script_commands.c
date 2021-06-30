@@ -10303,7 +10303,7 @@ static bool8 sub_80264C0(void)
 {
     if (gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
     {
-        ewram16064arr(gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
+        BATTLE_PARTY_ID(gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
     }
     else
     {
@@ -10313,7 +10313,7 @@ static bool8 sub_80264C0(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
             return 0;
         }
-        ewram16064arr(gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
+        BATTLE_PARTY_ID(gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
     }
     gBattlescriptCurrInstr = BattleScript_SuccessForceOut;
     return 1;
@@ -13122,7 +13122,7 @@ static void atkE2_switchoutabilities(void)
     {
     case ABILITY_NATURAL_CURE:
         gBattleMons[gActiveBattler].status1 = 0;
-        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[ewram16064arr(gActiveBattler)], 4, &gBattleMons[gActiveBattler].status1);
+        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[BATTLE_PARTY_ID(gActiveBattler)], 4, &gBattleMons[gActiveBattler].status1);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     }
