@@ -802,7 +802,7 @@ static bool8 sub_804E2EC(void)
     switch (gBerryBlenderData->field_1)
     {
     case 0:
-        LZDecompressWram(gUnknown_08E6C100, ewram10000);
+        LZDecompressWram(gUnknown_08E6C100, eBerryBlenderGfxBuffer);
         gBerryBlenderData->field_1++;
         break;
     case 1:
@@ -811,35 +811,35 @@ static bool8 sub_804E2EC(void)
         gBerryBlenderData->field_1++;
         break;
     case 2:
-        DmaCopyLarge16(3, ewram10000, (void *)(VRAM + 0x0), 0x2000, 0x1000);
+        DmaCopyLarge16(3, eBerryBlenderGfxBuffer, (void *)(VRAM + 0x0), 0x2000, 0x1000);
         gBerryBlenderData->field_1++;
         break;
     case 3:
-        LZDecompressWram(gUnknown_08E6C920, ewram10000);
+        LZDecompressWram(gUnknown_08E6C920, eBerryBlenderGfxBuffer);
         gBerryBlenderData->field_1++;
         break;
     case 4:
-        LZDecompressWram(gUnknown_08E6D354, ewram13000);
+        LZDecompressWram(gUnknown_08E6D354, eBerryBlenderGfxBuffer + 0x3000);
         gBerryBlenderData->field_1++;
         break;
     case 5:
-        DmaCopy16Defvars(3, ewram10000, (void *)(VRAM + 0xE000), 0x1000);
+        DmaCopy16Defvars(3, eBerryBlenderGfxBuffer + 0x0000, (void *)(VRAM + 0xE000), 0x1000);
         gBerryBlenderData->field_1++;
         break;
     case 6:
-		DmaCopy16Defvars(3, ewram11000, (void *)(VRAM + 0xF000), 0x1000);
+		DmaCopy16Defvars(3, eBerryBlenderGfxBuffer + 0x1000, (void *)(VRAM + 0xF000), 0x1000);
         gBerryBlenderData->field_1++;
         break;
     case 7:
         {
             u16 i;
-            u16* palStore = (u16*)(ewram13000);
+            u16* palStore = (u16*)(eBerryBlenderGfxBuffer + 0x3000);
 
             for (i = 0; i < 640; i++)
             {
                 *(palStore + i) |= 0x100;
             }
-            DmaCopy16Defvars(3, ewram13000, (void *)(VRAM + 0x6000), 0x500);
+            DmaCopy16Defvars(3, eBerryBlenderGfxBuffer + 0x3000, (void *)(VRAM + 0x6000), 0x500);
             LoadPalette(sBlenderOuterPal, 0x80, 0x20);
             gBerryBlenderData->field_1++;
         }

@@ -498,7 +498,8 @@ static void BuyMenuDrawTextboxBG_Restore(void)
 
     for (i = 0; i < 8; i++)
         for (j = 0; j < 14; j++)
-            gBGTilemapBuffers[1][32 * (i + 12) + j] = ewram18000[0x180 + 32 * i + j] + 0xC3E0;
+            gBGTilemapBuffers[1][32 * (i + 12) + j] =
+                ewram18000[0x180 + 32 * i + j] + 0xC3E0;
 }
 
 static void Shop_PrintItemDesc(void)

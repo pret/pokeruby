@@ -269,7 +269,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
 
-    memcpy(ewram9000_hack, &gPlttBufferUnfaded[0x20], 0x60);
+    memcpy((void *)(EWRAM + 0x9000), &gPlttBufferUnfaded[0x20], 0x60);
 
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
     SetHBlankCallback(EvoDummyFunc);
@@ -629,7 +629,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             m4aMPlayAllStop();
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
-            memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
+            memcpy(&gPlttBufferUnfaded[0x20], (void *)(EWRAM + 0x9000), 0x60);
             BeginNormalPaletteFade(0x1C, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;
         }
@@ -995,7 +995,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         if (IsSEPlaying())
         {
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
-            memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
+            memcpy(&gPlttBufferUnfaded[0x20], (void *)(EWRAM + 0x9000), 0x60);
             BeginNormalPaletteFade(0x1, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;
         }

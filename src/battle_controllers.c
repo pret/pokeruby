@@ -413,7 +413,7 @@ static void CreateTasksForSendRecvLinkBuffers(void)
     gTasks[sLinkReceiveTaskId].data[15] = 0;
 
     gUnknown_020238C6 = 0;
-    CpuFill16(0, EWRAM_14000, 0x2000);
+    CpuFill16(0, &gSharedMem[BSTRUCT_OFF(linkSend)], sizeof(gBattleStruct->linkSend) + sizeof(gBattleStruct->linkRecv));
 }
 
 void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
@@ -428,17 +428,17 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
         gTasks[sLinkSendTaskId].data[14] = 0;
     }
 
-    ewram14000arr(0, gTasks[sLinkSendTaskId].data[14]) = a;
-    ewram14000arr(1, gTasks[sLinkSendTaskId].data[14]) = gActiveBattler;
-    ewram14000arr(2, gTasks[sLinkSendTaskId].data[14]) = gBattlerAttacker;
-    ewram14000arr(3, gTasks[sLinkSendTaskId].data[14]) = gBattlerTarget;
-    ewram14000arr(4, gTasks[sLinkSendTaskId].data[14]) = r9;
-    ewram14000arr(5, gTasks[sLinkSendTaskId].data[14]) = (r9 & 0x0000FF00) >> 8;
-    ewram14000arr(6, gTasks[sLinkSendTaskId].data[14]) = gAbsentBattlerFlags;
-    ewram14000arr(7, gTasks[sLinkSendTaskId].data[14]) = gEffectBattler;
+    BCOMM(linkSend, state, gTasks[sLinkSendTaskId].data[14], 0) = a;
+    BCOMM(linkSend, activeBattler, gTasks[sLinkSendTaskId].data[14], 0) = gActiveBattler;
+    BCOMM(linkSend, battlerAttacker, gTasks[sLinkSendTaskId].data[14], 0) = gBattlerAttacker;
+    BCOMM(linkSend, battlerTarget, gTasks[sLinkSendTaskId].data[14], 0) = gBattlerTarget;
+    BCOMM(linkSend, size, gTasks[sLinkSendTaskId].data[14], 0) = r9;
+    BCOMM(linkSend, size, gTasks[sLinkSendTaskId].data[14], 1) = (r9 & 0x0000FF00) >> 8;
+    BCOMM(linkSend, absentBattlerFlags, gTasks[sLinkSendTaskId].data[14], 0) = gAbsentBattlerFlags;
+    BCOMM(linkSend, effectBattler, gTasks[sLinkSendTaskId].data[14], 0) = gEffectBattler;
 
     for (i = 0; i < size; i++)
-        ewram14008arr(i, gTasks[sLinkSendTaskId].data[14]) = data[i];
+        BCOMM(linkSend, data, gTasks[sLinkSendTaskId].data[14], i) = data[i];
     gTasks[sLinkSendTaskId].data[14] = gTasks[sLinkSendTaskId].data[14] + r9 + 8;
 }
 
@@ -478,8 +478,8 @@ void Task_HandleSendLinkBuffersData(u8 taskId)
                     gTasks[taskId].data[12] = 0;
                     gTasks[taskId].data[15] = 0;
                 }
-                var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8)) + 8;
-                SendBlock(bitmask_all_link_players_but_self(), &ewram14000arr(0, gTasks[taskId].data[15]), var);
+                var = (BCOMM(linkSend, size, gTasks[taskId].data[15], 0) | (BCOMM(linkSend, size, gTasks[taskId].data[15], 1) << 8)) + 8;
+                SendBlock(bitmask_all_link_players_but_self(), &gSharedMem[BSTRUCT_OFF(linkSend) + gTasks[taskId].data[15]], var);
                 gTasks[taskId].data[11]++;
             }
             else
@@ -492,7 +492,7 @@ void Task_HandleSendLinkBuffersData(u8 taskId)
     case 4:
         if (IsLinkTaskFinished())
         {
-            var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8));
+            var = (BCOMM(linkSend, size, gTasks[taskId].data[15], 0) | (BCOMM(linkSend, size, gTasks[taskId].data[15], 1) << 8));
             gTasks[taskId].data[13] = 1;
             gTasks[taskId].data[15] = gTasks[taskId].data[15] + var + 8;
             gTasks[taskId].data[11] = 3;
@@ -538,7 +538,7 @@ void sub_800C35C(void)
                     gTasks[sLinkReceiveTaskId].data[14] = 0;
                 }
                 //_0800C402
-                dest = EWRAM_15000 + gTasks[sLinkReceiveTaskId].data[14];
+                dest = &gSharedMem[BSTRUCT_OFF(linkRecv) + gTasks[sLinkReceiveTaskId].data[14]];
                 src = (u8 *)recvBuffer;
                 for (j = 0; j < r6 + 8; j++)
                     dest[j] = src[j];
@@ -563,28 +563,29 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        battlerId = ewram15000arr(1, gTasks[taskId].data[15]);
-        blockSize = ewram15000arr(4, gTasks[taskId].data[15]) | (ewram15000arr(5, gTasks[taskId].data[15]) << 8);
-        switch (ewram15000arr(0, gTasks[taskId].data[15]))
+        battlerId = BCOMM(linkRecv, activeBattler, gTasks[taskId].data[15], 0);
+        blockSize = BCOMM(linkRecv, size, gTasks[taskId].data[15], 0)
+                 | (BCOMM(linkRecv, size, gTasks[taskId].data[15], 1) << 8);
+        switch (BCOMM(linkRecv, state, gTasks[taskId].data[15], 0))
         {
         case 0:
             if (gBattleControllerExecFlags & gBitTable[battlerId])
                 return;
-            memcpy(gBattleBufferA[battlerId], &ewram15000arr(8, gTasks[taskId].data[15]), blockSize);
+            memcpy(gBattleBufferA[battlerId], &BCOMM(linkRecv, data, gTasks[taskId].data[15], 0), blockSize);
             sub_80155A4(battlerId);
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
-                gBattlerAttacker = ewram15000arr(2, gTasks[taskId].data[15]);
-                gBattlerTarget = ewram15000arr(3, gTasks[taskId].data[15]);
-                gAbsentBattlerFlags = ewram15000arr(6, gTasks[taskId].data[15]);
-                gEffectBattler = ewram15000arr(7, gTasks[taskId].data[15]);
+                gBattlerAttacker    = BCOMM(linkRecv, battlerAttacker, gTasks[taskId].data[15], 0);
+                gBattlerTarget      = BCOMM(linkRecv, battlerTarget, gTasks[taskId].data[15], 0);
+                gAbsentBattlerFlags = BCOMM(linkRecv, absentBattlerFlags, gTasks[taskId].data[15], 0);
+                gEffectBattler      = BCOMM(linkRecv, effectBattler, gTasks[taskId].data[15], 0);
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[battlerId], &ewram15000arr(8, gTasks[taskId].data[15]), blockSize);
+            memcpy(gBattleBufferB[battlerId], &BCOMM(linkRecv, data, gTasks[taskId].data[15], 0), blockSize);
             break;
         case 2:
-            r2 = ewram15000arr(8, gTasks[taskId].data[15]);
+            r2 = BCOMM(linkRecv, data, gTasks[taskId].data[15], 0);
             gBattleControllerExecFlags &= ~(gBitTable[battlerId] << (r2 * 4));
             break;
         }

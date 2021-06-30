@@ -95,7 +95,14 @@ extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern const u8 BattleText_YesNo[];
 extern u8 gPlayerPartyCount;
 extern u16 gMoveToLearn; //move to learn
-extern const u8 gTrainerMoney[];
+
+struct TrainerReward
+{
+    u8 trainerClass;
+    u8 baseMoney;
+};
+
+extern const struct TrainerReward gTrainerMoney[];
 extern u16 gRandomMove;
 extern u8* gBattleScriptsForMoveEffects[];
 extern u16 gChosenMove; //last used move in battle
@@ -8182,7 +8189,7 @@ static void atk52_switchineffects(void)
 
             for (i = 0; i < gBattlersCount; i++)
             {
-                *(HP_ON_SWITCHOUT + GetBattlerSide(i)) = gBattleMons[i].hp;
+                *((u16 *)&gSharedMem[BSTRUCT_OFF(HP_OnSwitchout) + 2 * GetBattlerSide(i)]) = gBattleMons[i].hp;
             }
 
             if (T2_READ_8(gBattlescriptCurrInstr + 1) == 5)
@@ -8472,59 +8479,55 @@ static void atk5C_hitanimation(void)
         gBattlescriptCurrInstr += 2;
 }
 
-#define MONEY_UNKNOWN ((*(u8*)(ewram_addr + 0x17000 + 0x94)))
-
 #ifdef NONMATCHING
 static void atk5D_getmoneyreward(void)
 {
-    int i = 0;
-    u8 r5 = 0;
+    u32 i = 0;
+    u8 lvl = 0;
     u32 money_to_give;
     if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
-        money_to_give = 2 * gBattleStruct->moneyMultiplier * MONEY_UNKNOWN;
+        money_to_give = 20 * eSecretBaseRecord->party.levels[0] * gBattleStruct->moneyMultiplier;
     }
     else
     {
         switch(gTrainers[gTrainerBattleOpponent].partyFlags)
         {
         case 0:
-            {
-                const struct TrainerMonNoItemDefaultMoves *data = gTrainers[gTrainerBattleOpponent].party.NoItemDefaultMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
-            }
-            break;
-        case 2:
-            {
-                const struct TrainerMonItemDefaultMoves *data = gTrainers[gTrainerBattleOpponent].party.ItemDefaultMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
-            }
+        {
+            const struct TrainerMonNoItemDefaultMoves *data = gTrainers[gTrainerBattleOpponent].party.NoItemDefaultMoves;
+            lvl = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
+        }
             break;
         case 1:
+        {
+            const struct TrainerMonNoItemCustomMoves *data = gTrainers[gTrainerBattleOpponent].party.NoItemCustomMoves;
+            lvl = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
+        }
+            break;
+        case 2:
+        {
+            const struct TrainerMonItemDefaultMoves *data = gTrainers[gTrainerBattleOpponent].party.ItemDefaultMoves;
+            lvl = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
+        }
+            break;
         case 3:
-            {
-                const struct TrainerMonItemCustomMoves *data = gTrainers[gTrainerBattleOpponent].party.ItemCustomMoves;
-                r5 = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
-            }
+        {
+            const struct TrainerMonItemCustomMoves *data = gTrainers[gTrainerBattleOpponent].party.ItemCustomMoves;
+            lvl = data[gTrainers[gTrainerBattleOpponent].partySize - 1].level;
+        }
             break;
         }
-        for (; gTrainerMoney[i * 4] != 0xFF && gTrainerMoney[i * 4 + 1] != gTrainers[gTrainerBattleOpponent].trainerClass ; i++) {}
+        for (; gTrainerMoney[i].trainerClass != 0xFF; i++) {
+            if (gTrainerMoney[i].trainerClass == gTrainers[gTrainerBattleOpponent].trainerClass)
+                break;
+        }
 
-        money_to_give = (r5 << 2) * gBattleStruct->moneyMultiplier;
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            money_to_give = 2 * gTrainerMoney[i * 4 + 1] * money_to_give;
-        else
-            money_to_give = 1 * gTrainerMoney[i * 4 + 1] * money_to_give;
+        money_to_give = 4 * lvl * gBattleStruct->moneyMultiplier * (gBattleTypeFlags & BATTLE_TYPE_DOUBLE ? 2 : 1) * gTrainerMoney[i].baseMoney;
     }
 
     AddMoney(&gSaveBlock1.money, money_to_give);
-    gBattleTextBuff1[0] = 0xFD;
-    gBattleTextBuff1[1] = 1;
-    gBattleTextBuff1[2] = 4;
-    gBattleTextBuff1[3] = 5;
-    T2_WRITE_32(&gBattleTextBuff1[4], money_to_give);
-    gBattleTextBuff1[8] = 0xFF;
-
+    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, money_to_give);
     gBattlescriptCurrInstr += 1;
 }
 #else

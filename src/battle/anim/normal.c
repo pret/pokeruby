@@ -1816,7 +1816,7 @@ void sub_80E4028(u8 taskId)
     }
 
     offset = gBattleAnimArgs[1] * 32;
-    dest = IsContest() ? &((u8 *)EWRAM_14800)[offset] : &((u8 *)ewram18000)[offset];
+    dest = IsContest() ? &((u8 *)eBattleAnimPalBackup_Contest)[offset] : &((u8 *)eBattleAnimPalBackup_Battle)[offset];
     // This doesn't match when u16* is used.
     memcpy(dest, &((u8 *)gPlttBufferUnfaded)[i * 32], 32);
     DestroyAnimVisualTask(taskId);
@@ -1851,7 +1851,7 @@ void sub_80E40D0(u8 taskId)
 
     dest = &((u8 *)gPlttBufferUnfaded)[i * 32];
     offset = gBattleAnimArgs[1] * 32;
-    src = IsContest() ? &((u8 *)EWRAM_14800)[offset] : &((u8 *)ewram18000)[offset];
+    src = IsContest() ? &((u8 *)eBattleAnimPalBackup_Contest)[offset] : &((u8 *)eBattleAnimPalBackup_Battle)[offset];
     // This doesn't match when u16* is used.
     memcpy(dest, src, 32);
     DestroyAnimVisualTask(taskId);

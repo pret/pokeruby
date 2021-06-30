@@ -859,7 +859,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            CalculateRound1Points(eMatsudaDebugVar);
+            CalculateRound1Points(gSharedMem[0]);
         SetMainCallback2(CB2_StartContest);
     }
 }
@@ -868,7 +868,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
 {
     if (var2 == 1)
     {
-        eMatsudaDebugVar = sprite->data[3];
+        gSharedMem[0] = sprite->data[3];
         SetMainCallback2(sub_80AACC4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     }
