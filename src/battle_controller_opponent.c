@@ -1800,8 +1800,10 @@ void OpponentHandlecmd20(void)
 
 void OpponentHandleOpenBag(void)
 {
-    // What is this?
-    BtlController_EmitOneReturnValue(1, ewram160D4(gActiveBattler));
+    // The AI will only ever use an item whose ID fits in 8 bits.
+    // If you want the AI to use an item with a higher ID, uncomment the code
+    // in the line below.
+    BtlController_EmitOneReturnValue(1, gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2]/* | (gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2 + 1] */);
     OpponentBufferExecCompleted();
 }
 
@@ -1809,7 +1811,7 @@ void OpponentHandlecmd22(void)
 {
     s32 r4;
 
-    if (ewram160C8arr(GetBattlerPosition(gActiveBattler)) == 6)
+    if (gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] == PARTY_SIZE)
     {
         u8 r6;
         u8 r5;
@@ -1838,10 +1840,10 @@ void OpponentHandlecmd22(void)
     }
     else
     {
-        r4 = ewram160C8arr(GetBattlerPosition(gActiveBattler));
-        ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6;
+        r4 = gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)];
+        gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = PARTY_SIZE;
     }
-    ewram16068arr(gActiveBattler) = r4;
+    gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + gActiveBattler] = r4;
     BtlController_EmitChosenMonReturnValue(1, r4, 0);
     OpponentBufferExecCompleted();
 }

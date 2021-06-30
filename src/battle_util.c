@@ -1657,28 +1657,28 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
     }
     else
     {
-        if (GetBattlerSide(bank) == 1)
+        if (GetBattlerSide(bank) == B_SIDE_OPPONENT)
         {
-            r7 = GetBattlerAtPosition(1);
-            r6 = GetBattlerAtPosition(3);
+            r7 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            r6 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBattlerAtPosition(0);
-            r6 = GetBattlerAtPosition(2);
+            r7 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            r6 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
             party = gPlayerParty;
         }
-        if (r1 == 6)
+        if (r1 == PARTY_SIZE)
             r1 = gBattlerPartyIndexes[r7];
-        if (r2 == 6)
+        if (r2 == PARTY_SIZE)
             r2 = gBattlerPartyIndexes[r6];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram16068arr(r7) && i != ewram16068arr(r6))
+            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + r7] && i != gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + r6])
                 break;
         }
-        return (i == 6);
+        return (i == PARTY_SIZE);
     }
 }
 

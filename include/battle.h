@@ -375,13 +375,21 @@ struct BattleStruct /* 0x2000000 */
     /*0x160C1*/ u8 hpScale;
     /*0x160C2*/ u16 unk160C2;
     /*0x160C4*/ MainCallback unk160C4;
+
+    // Buffers used by the AI are indexed using (battler / 2)
+    // i.e. the flank bit, because at no point in game is the
+    // player's partner in a multi battle controlled by the AI.
+    // This is changed in Emerald to support the Tabitha fight
+    // in the Space Center.
     /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
     /*0x160CB*/ u8 multiplayerId;
     /*0x160CC*/ u16 usedHeldItems[MAX_BATTLERS_COUNT];
-    /*0x160D4*/ u8 unk160D4[MAX_BATTLERS_COUNT];
-    /*0x160D8*/ u8 unk160D8[2];
-    /*0x160DA*/ u8 unk160DA[2];
+    // Space is reserved for two u16s, one for each opponent in
+    // doubles. However, only the lower byte of each is ever used.
+    /*0x160D4*/ u16 AI_usedItemId[2];
+    /*0x160D8*/ u8 AI_usedItemType[2];
+    /*0x160DA*/ u8 AI_usedItemEffect[2];
     /*0x160DC*/ u8 unk160DC;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;

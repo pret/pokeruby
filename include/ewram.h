@@ -89,20 +89,10 @@ extern u8 gSharedMem[];
 // Battle Struct
 // For matching purposes, the struct is placed at 0x02000000 and
 // there's a ton of filler.
+// This macro ensures that any changes to the battle struct
+// definition will not horribly break things in battle.
 #define BSTRUCT_OFF(member)             (offsetof(struct BattleStruct, member) + ((u8 *)gBattleStruct - gSharedMem))
 
-#define ewram16060(battler)             (gSharedMem[BSTRUCT_OFF(unk16060) + battler])
-#define BATTLE_PARTY_ID(battler)        (gSharedMem[BSTRUCT_OFF(unk16064) + battler])
-#define ewram16068arr(i)                (gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + i])
-#define ewram1606Carr(i, a)             (gSharedMem[BSTRUCT_OFF(unk1606C) + i + a * 3])
-#define ewram16094arr(battler)          (gSharedMem[BSTRUCT_OFF(unk16094) + battler])
-#define eHpOnSwitchout(battler)         (gSharedMem[BSTRUCT_OFF(HP_OnSwitchout) + battler * 2])
-#define ewram160C8arr(battler)          (gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (battler / 2)])
-#define USED_HELD_ITEMS(battler)        (*(u16 *)&gSharedMem[BSTRUCT_OFF(usedHeldItems) + 2 * (battler)])
-#define ewram160D4(battler)             (gSharedMem[BSTRUCT_OFF(unk160D4) + (battler / 2) * 2])
-#define ewram160D8(battler)             (gSharedMem[BSTRUCT_OFF(unk160D8) + (battler / 2)])
-#define ewram160DA(battler)             (gSharedMem[BSTRUCT_OFF(unk160DA) + (battler >> 1)])
-#define ewram160E0(i)                   (gSharedMem[BSTRUCT_OFF(unk160E0) + i])
 #define ewram16400                      (gSharedMem + 0x16400)
 
 // gBattleResources

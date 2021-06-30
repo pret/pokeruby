@@ -2686,7 +2686,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                     {gBattlescriptCurrInstr++; return;}
 
 				gLastUsedItem = gBattleMons[gBattlerTarget].item;
-                *USED_HELD_ITEM(gBattlerTarget) = gLastUsedItem;
+                *((u16 *)&gSharedMem[BSTRUCT_OFF(usedHeldItems) + gBattlerTarget * 2]) = gLastUsedItem;
                 gBattleMons[gBattlerTarget].item = 0;
 
                 gActiveBattler = gBattlerAttacker;
@@ -2700,7 +2700,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
-				*CHOICED_MOVE(gBattlerTarget) = 0;
+				*((u16 *)&gSharedMem[BSTRUCT_OFF(choicedMove) + gBattlerTarget * 2]) = MOVE_NONE;
             }
             break;
         case 32: //escape prevention
@@ -6010,7 +6010,7 @@ static void atk43_jumpifabilitypresent(void)
 
 static void atk44_endselectionscript(void)
 {
-    ewram16060(gBattlerAttacker) = 1;
+    gSharedMem[BSTRUCT_OFF(unk16060) + gBattlerAttacker] = 1;
 }
 
 static void atk45_playanimation(void)
@@ -6863,7 +6863,7 @@ static void atk4C_getswitchedmondata(void)
 
     gActiveBattler = GetBattlerForBattleScript(T2_READ_8(gBattlescriptCurrInstr + 1));
 
-    gBattlerPartyIndexes[gActiveBattler] = ewram16068arr(gActiveBattler);
+    gBattlerPartyIndexes[gActiveBattler] = gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + gActiveBattler];
 
     BtlController_EmitGetMonData(0, 0, gBitTable[gBattlerPartyIndexes[gActiveBattler]]);
     MarkBattlerForControllerExec(gActiveBattler);
@@ -7006,7 +7006,7 @@ static void atk4F_jumpifcantswitch(void)
 
 void sub_8022A3C(u8 unkown)
 {
-    BATTLE_PARTY_ID(gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
+    gSharedMem[BSTRUCT_OFF(unk16064) + gActiveBattler] = gBattlerPartyIndexes[gActiveBattler];
     BtlController_EmitChoosePokemon(0, 1, unkown, 0, gBattleStruct->unk1606C[gActiveBattler]);
     MarkBattlerForControllerExec(gActiveBattler);
 }
@@ -8094,7 +8094,7 @@ static void atk51_switchhandleorder(void)
         for (i = 0; i < gBattlersCount; i++)
         {
             if (gBattleBufferB[i][0] == 0x22)
-                ewram16068arr(i) = gBattleBufferB[i][1];
+                gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + i] = gBattleBufferB[i][1];
         }
         break;
     case 1:
@@ -8103,15 +8103,15 @@ static void atk51_switchhandleorder(void)
         break;
     case 2:
         gBattleCommunication[0] = gBattleBufferB[gActiveBattler][1];
-        ewram16068arr(gActiveBattler) = gBattleBufferB[gActiveBattler][1];
+        gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + gActiveBattler] = gBattleBufferB[gActiveBattler][1];
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0] &= 0xF;
             gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 0] |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
             gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * gActiveBattler + 1] = gBattleBufferB[gActiveBattler][3];
-            ewram1606Carr(0, (gActiveBattler ^ 2)) &= (0xF0);
-            ewram1606Carr(0, (gActiveBattler ^ 2)) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
-            ewram1606Carr(2, (gActiveBattler ^ 2)) = gBattleBufferB[gActiveBattler][3];
+            gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * (gActiveBattler ^ BIT_FLANK) + 0] &= (0xF0);
+            gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * (gActiveBattler ^ BIT_FLANK) + 0] |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
+            gSharedMem[BSTRUCT_OFF(unk1606C) + 3 * (gActiveBattler ^ BIT_FLANK) + 2] = gBattleBufferB[gActiveBattler][3];
         }
         else
             sub_8012258(gActiveBattler);
@@ -9038,7 +9038,7 @@ static void atk69_adjustsetdamage(void) //literally a copy of atk07 except there
 void atk6A_removeitem(void)
 {
     gActiveBattler = GetBattlerForBattleScript(T2_READ_8(gBattlescriptCurrInstr + 1));
-    USED_HELD_ITEMS(gActiveBattler) = gBattleMons[gActiveBattler].item;
+    *((u16 *)&gSharedMem[BSTRUCT_OFF(usedHeldItems) + gActiveBattler * 2]) = gBattleMons[gActiveBattler].item;
 
     gBattleMons[gActiveBattler].item = 0;
     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
@@ -9570,7 +9570,7 @@ static void atk74_hpthresholds2(void)
     {
         gActiveBattler = GetBattlerForBattleScript(T2_READ_8(gBattlescriptCurrInstr + 1));
         opposing_bank = gActiveBattler ^ 1;
-        hp_switchout = eHpOnSwitchout(GetBattlerSide(opposing_bank)); //gBattleStruct->HP_OnSwitchout[GetBattlerSide(opposing_bank)];
+        hp_switchout = gSharedMem[BSTRUCT_OFF(HP_OnSwitchout) + GetBattlerSide(opposing_bank) * 2];
         result = (hp_switchout - gBattleMons[opposing_bank].hp) * 100 / hp_switchout;
 
         if (gBattleMons[opposing_bank].hp >= hp_switchout)
@@ -10294,7 +10294,7 @@ static bool8 sub_80264C0(void)
 {
     if (gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
     {
-        BATTLE_PARTY_ID(gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
+        gSharedMem[BSTRUCT_OFF(unk16064) + gBattlerTarget] = gBattlerPartyIndexes[gBattlerTarget];
     }
     else
     {
@@ -10304,7 +10304,7 @@ static bool8 sub_80264C0(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
             return 0;
         }
-        BATTLE_PARTY_ID(gBattlerTarget) = gBattlerPartyIndexes[gBattlerTarget];
+        gSharedMem[BSTRUCT_OFF(unk16064) + gBattlerTarget] = gBattlerPartyIndexes[gBattlerTarget];
     }
     gBattlescriptCurrInstr = BattleScript_SuccessForceOut;
     return 1;
@@ -10385,7 +10385,7 @@ static void atk8F_forcerandomswitch(void)
                     } while (i == gBattlerPartyIndexes[gBattlerTarget] || !MON_CAN_BATTLE(&party[i]));
                 }
             }
-            ewram16068arr(gBattlerTarget) = i;
+            gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + gBattlerTarget] = i;
             if (!IsLinkDoubleBattle())
                 sub_8012258(gBattlerTarget);
             sub_8094B6C(gBattlerTarget, i, 0);
@@ -13114,7 +13114,7 @@ static void atkE2_switchoutabilities(void)
     {
     case ABILITY_NATURAL_CURE:
         gBattleMons[gActiveBattler].status1 = 0;
-        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[BATTLE_PARTY_ID(gActiveBattler)], 4, &gBattleMons[gActiveBattler].status1);
+        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[gSharedMem[BSTRUCT_OFF(unk16064) + gActiveBattler]], 4, &gBattleMons[gActiveBattler].status1);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     }
@@ -13266,7 +13266,7 @@ static void atkEA_tryrecycleitem(void)
 {
     u16* used_item;
     gActiveBattler = gBattlerAttacker;
-    used_item = &USED_HELD_ITEMS(gActiveBattler);
+    used_item = ((u16 *)&gSharedMem[BSTRUCT_OFF(usedHeldItems) + gActiveBattler * 2]);
     if (*used_item && gBattleMons[gActiveBattler].item == 0)
     {
         gLastUsedItem = *used_item;
