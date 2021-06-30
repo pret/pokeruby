@@ -83,7 +83,7 @@ jobs:
         env:
           NONMATCHING: 1
           COMPARE: 0
-        run: make -j${nproc} $(git grep -wl NONMATCHING src | sed -r 's/^/-W /g')
+        run: make -j${nproc} $(git grep -wl NONMATCHING src | sed -r 'i-W')
 
       - name: Setup German
         run: sh de_before.sh

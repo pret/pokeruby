@@ -2775,7 +2775,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_KnockedOff;
 
-                *CHOICED_MOVE(gEffectBattler) = 0;
+                *((u16 *)&gSharedMem[BSTRUCT_OFF(choicedMove) + gEffectBattler * 2]) = MOVE_NONE;
             }
             break;
         case 59: //overheat
