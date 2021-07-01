@@ -20,13 +20,16 @@
 #include "text.h"
 #include "ewram.h"
 
+EWRAM_DATA u8 gBattlePartyCurrentOrder[3] = {};
+EWRAM_DATA u8 gUnknown_02038473 = 0;
+
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void nullsub_13(void);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
 extern u8 *sub_8040D08();
-extern void sub_8040B8C(void);
+extern void SetMonPreventsSwitchingString(void);
 extern void nullsub_14();
 extern u8 sub_803FBBC(void);
 
@@ -37,8 +40,6 @@ extern u8 gBankInMenu;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gPartyMenuMessage_IsPrinting;
-extern u8 gUnknown_02038470[3];
-extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
 extern void (*gPokemonItemUseCallback)();  //don't know types yet
 extern struct PokemonStorage gPokemonStorage;
@@ -89,7 +90,7 @@ void unref_sub_8094940(struct PokemonStorage *ptr)
 
 void sub_8094958(void)
 {
-    sub_8094998(gUnknown_02038470, sub_803FBBC());
+    sub_8094998(gBattlePartyCurrentOrder, sub_803FBBC());
 }
 
 void sub_8094978(u8 arg1, u8 arg2)
@@ -239,9 +240,9 @@ u8 sub_8094C20(u8 monIndex)
 
     monIndex /= 2;
     if (val)
-        retVal = gUnknown_02038470[monIndex] & 0xF;
+        retVal = gBattlePartyCurrentOrder[monIndex] & 0xF;
     else
-        retVal = gUnknown_02038470[monIndex] >> 4;
+        retVal = gBattlePartyCurrentOrder[monIndex] >> 4;
     return retVal;
 }
 
@@ -251,9 +252,9 @@ void sub_8094C54(u8 a, u8 b)
 
     a /= 2;
     if (val)
-        gUnknown_02038470[a] = (gUnknown_02038470[a] & 0xF0) | b;
+        gBattlePartyCurrentOrder[a] = (gBattlePartyCurrentOrder[a] & 0xF0) | b;
     else
-        gUnknown_02038470[a] = (gUnknown_02038470[a] & 0xF) | (b << 4);
+        gBattlePartyCurrentOrder[a] = (gBattlePartyCurrentOrder[a] & 0xF) | (b << 4);
 }
 
 void sub_8094C98(u8 a, u8 b)
@@ -272,10 +273,10 @@ u8 pokemon_order_func(u8 a)
 
     for (i = 0, r2 = 0; i < 3; i++)
     {
-        if ((gUnknown_02038470[i] >> 4) == a)
+        if ((gBattlePartyCurrentOrder[i] >> 4) == a)
             return r2;
         r2++;
-        if ((gUnknown_02038470[i] & 0xF) == a)
+        if ((gBattlePartyCurrentOrder[i] & 0xF) == a)
             return r2;
         r2++;
     }
@@ -698,7 +699,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     if (gUnknown_02038473 == 4)
     {
         PartyMenuEraseMsgBoxAndFrame();
-        sub_8040B8C();
+        SetMonPreventsSwitchingString();
         DisplayPartyMenuMessage(gStringVar4, 0);
         gTasks[taskId].func = Task_80954C0;
         return;

@@ -592,10 +592,10 @@ void InitLinkBattleVsScreen(u8 taskId)
     case 1:
         palette = AllocSpritePalette(10000);
         gPlttBufferUnfaded[palette * 16 + 0x10f] = gPlttBufferFaded[palette * 16 + 0x10f] = 0x7fff;
-        gBattleStruct->unk1608A = CreateSprite(&gSpriteTemplate_81F9574, 108, 80, 0);
-        gBattleStruct->unk1608B = CreateSprite(&gSpriteTemplate_81F958C, 132, 80, 0);
-        gSprites[gBattleStruct->unk1608A].invisible = TRUE;
-        gSprites[gBattleStruct->unk1608B].invisible = TRUE;
+        gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&gSpriteTemplate_81F9574, 108, 80, 0);
+        gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&gSpriteTemplate_81F958C, 132, 80, 0);
+        gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;
+        gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
 
@@ -620,15 +620,15 @@ void InitLinkBattleVsScreen(u8 taskId)
             }
             PlaySE(SE_M_HARDEN);
             DestroyTask(taskId);
-            gSprites[gBattleStruct->unk1608A].invisible = FALSE;
-            gSprites[gBattleStruct->unk1608B].invisible = FALSE;
-            gSprites[gBattleStruct->unk1608B].oam.tileNum += 0x40;
-            gSprites[gBattleStruct->unk1608A].data[0] = 0;
-            gSprites[gBattleStruct->unk1608B].data[0] = 1;
-            gSprites[gBattleStruct->unk1608A].data[1] = gSprites[gBattleStruct->unk1608A].x;
-            gSprites[gBattleStruct->unk1608B].data[1] = gSprites[gBattleStruct->unk1608B].x;
-            gSprites[gBattleStruct->unk1608A].data[2] = 0;
-            gSprites[gBattleStruct->unk1608B].data[2] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = FALSE;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = FALSE;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.tileNum += 0x40;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[0] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[0] = 1;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_V].x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_S].x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[2] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[2] = 0;
         }
         break;
     }

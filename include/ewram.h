@@ -2,7 +2,6 @@
 #define GUARD_EWRAM_H
 
 extern u8 gSharedMem[];
-#define ewram_addr EWRAM // used in gSharedMem addr hacks
 
 // Note: we have duplicate ewram labels because its clear some memory
 // regions overlap others but have different definitions. Until some

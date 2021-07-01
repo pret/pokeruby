@@ -1289,11 +1289,11 @@ bool8 HandleFaintedMonActions(void)
     do
     {
         int i;
-        switch (gBattleStruct->sub80173A4_Tracker)
+        switch (gBattleStruct->faintedActionsState)
         {
         case 0:
-            gBattleStruct->unk1605A = 0;
-            gBattleStruct->sub80173A4_Tracker++;
+            gBattleStruct->faintedActionsBattlerId = 0;
+            gBattleStruct->faintedActionsState++;
             for (i = 0; i < gBattlersCount; i++)
             {
                 if (gAbsentBattlerFlags & gBitTable[i] && !sub_8018018(i, 6, 6))
@@ -1302,54 +1302,54 @@ bool8 HandleFaintedMonActions(void)
         case 1:
             do
             {
-                gBank1 = gBattlerTarget = gBattleStruct->unk1605A;
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->unk1605A]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
+                gBank1 = gBattlerTarget = gBattleStruct->faintedActionsBattlerId;
+                if (gBattleMons[gBattleStruct->faintedActionsBattlerId].hp == 0 && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
-                    gBattleStruct->sub80173A4_Tracker = 2;
+                    gBattleStruct->faintedActionsState = 2;
                     return 1;
                 }
-            } while (++gBattleStruct->unk1605A != gBattlersCount);
-            gBattleStruct->sub80173A4_Tracker = 3;
+            } while (++gBattleStruct->faintedActionsBattlerId != gBattlersCount);
+            gBattleStruct->faintedActionsState = 3;
             break;
         case 2:
             sub_8015740(gBank1);
-            if (++gBattleStruct->unk1605A == gBattlersCount)
-                gBattleStruct->sub80173A4_Tracker = 3;
+            if (++gBattleStruct->faintedActionsBattlerId == gBattlersCount)
+                gBattleStruct->faintedActionsState = 3;
             else
-                gBattleStruct->sub80173A4_Tracker = 1;
+                gBattleStruct->faintedActionsState = 1;
             break;
         case 3:
-            gBattleStruct->unk1605A = 0;
-            gBattleStruct->sub80173A4_Tracker++;
+            gBattleStruct->faintedActionsBattlerId = 0;
+            gBattleStruct->faintedActionsState++;
         case 4:
             do
             {
-                gBank1 = gBattlerTarget = gBattleStruct->unk1605A; //or should banks be switched?
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
+                gBank1 = gBattlerTarget = gBattleStruct->faintedActionsBattlerId; //or should banks be switched?
+                if (gBattleMons[gBattleStruct->faintedActionsBattlerId].hp == 0 && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
-                    gBattleStruct->sub80173A4_Tracker = 5;
+                    gBattleStruct->faintedActionsState = 5;
                     return 1;
                 }
-            } while (++gBattleStruct->unk1605A != gBattlersCount);
-            gBattleStruct->sub80173A4_Tracker = 6;
+            } while (++gBattleStruct->faintedActionsBattlerId != gBattlersCount);
+            gBattleStruct->faintedActionsState = 6;
             break;
         case 5:
-            if (++gBattleStruct->unk1605A == gBattlersCount)
-                gBattleStruct->sub80173A4_Tracker = 6;
+            if (++gBattleStruct->faintedActionsBattlerId == gBattlersCount)
+                gBattleStruct->faintedActionsState = 6;
             else
-                gBattleStruct->sub80173A4_Tracker = 4;
+                gBattleStruct->faintedActionsState = 4;
             break;
         case 6:
             if (AbilityBattleEffects(9, 0, 0, 0, 0) || AbilityBattleEffects(0xB, 0, 0, 0, 0) || ItemBattleEffects(1, 0, 1) || AbilityBattleEffects(6, 0, 0, 0, 0))
                 return 1;
-            gBattleStruct->sub80173A4_Tracker++;
+            gBattleStruct->faintedActionsState++;
             break;
         case 7:
             break;
         }
-    } while (gBattleStruct->sub80173A4_Tracker != HandleFaintedMonActions_MAX_CASE);
+    } while (gBattleStruct->faintedActionsState != HandleFaintedMonActions_MAX_CASE);
     return 0;
 }
 

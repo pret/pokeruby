@@ -7,6 +7,8 @@
 #include "string_util.h"
 #include "strings2.h"
 
+EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
+
 void HandleDrawSaveWindowInfo(s16 left, s16 top)
 {
     u32 width = 12;

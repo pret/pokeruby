@@ -1430,11 +1430,6 @@ void OpponentHandlecmd19(void)
     OpponentBufferExecCompleted();
 }
 
-struct ChooseMoveStruct
-{
-    u16 moves[4];
-};
-
 #if DEBUG
 NAKED
 void OpponentHandlecmd20(void)

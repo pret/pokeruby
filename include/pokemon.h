@@ -501,7 +501,7 @@ const u8 *GetMonSpritePal(struct Pokemon *mon);
 const u8 *GetMonSpritePalFromOtIdPersonality(u16, u32, u32);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
-void sub_8040B8C(void);
+void SetMonPreventsSwitchingString(void);
 void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
 bool32 ShouldHideGenderIconForLanguage(u16 species, u8 *name, u8 language);

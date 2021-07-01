@@ -68,7 +68,7 @@ extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u8 gAnimMoveTurn;
-extern u8 gUnknown_02038470[];
+extern u8 gBattlePartyCurrentOrder[];
 extern u8 gUnknown_03004344;
 extern u8 gUnknown_0300434C[];
 
@@ -76,7 +76,6 @@ extern const u8 BattleText_OtherMenu[];
 extern const u8 BattleText_MenuOptions[];
 extern const u8 BattleText_PP[];
 
-extern void sub_802C68C(void);
 extern void sub_802E1B0(void);
 extern void sub_802E220();
 extern void sub_802E2D4();
@@ -151,7 +150,7 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gUnknown_0300434C[];
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
-extern u8 gUnknown_02038470[];
+extern u8 gBattlePartyCurrentOrder[];
 extern u16 gSpecialVar_ItemId;
 extern u8 gDisplayedStringBattle[];
 extern const u8 BattleText_LinkStandby[];
@@ -292,7 +291,7 @@ void (*const gPlayerBufferCommands[])(void) =
 
 void PlayerBufferRunCommand(void);
 void sub_802C2EC(void);
-void sub_802C68C(void);
+static void HandleAction_ChooseMove(void);
 void sub_802CA60(void);
 void sub_802D730(void);
 void sub_802DA9C(u8);
@@ -496,7 +495,7 @@ void sub_802C2EC(void)
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gUnknown_03004344]].callback = sub_8010574;
-        gBattlerControllerFuncs[gActiveBattler] = sub_802C68C;
+        gBattlerControllerFuncs[gActiveBattler] = HandleAction_ChooseMove;
         dp11b_obj_instanciate(gActiveBattler, 1, 7, 1);
         dp11b_obj_instanciate(gActiveBattler, 0, 7, 1);
         dp11b_obj_free(gUnknown_03004344, 1);
@@ -595,21 +594,11 @@ void sub_802C2EC(void)
     }
 }
 
-struct ChooseMoveStruct
-{
-    u16 moves[4];
-    u8 pp[4];
-    u8 unkC[0x12-0xC];
-    u8 unk12;
-    u8 effectStringId;
-    u8 filler14[0x20-0x14];
-};
-
 const u8 gUnknown_081FAE80[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}");
 
 void debug_sub_8030C24(void);
 
-void sub_802C68C(void)
+static void HandleAction_ChooseMove(void)
 {
     u32 r8 = 0;
 #if DEBUG
@@ -624,7 +613,12 @@ void sub_802C68C(void)
         PlaySE(SE_SELECT);
 
         if (r6->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_CURSE)
-            r4 = (r6->unk12 != TYPE_GHOST && (r6->effectStringId ^ 7)) ? 0x10 : 0;
+        {
+            if (r6->monType1 != TYPE_GHOST && r6->monType2 != TYPE_GHOST)
+                r4 = MOVE_TARGET_USER;
+            else
+                r4 = MOVE_TARGET_SELECTED;
+        }
         else
             r4 = gBattleMoves[r6->moves[gMoveSelectionCursor[gActiveBattler]]].target;
 
@@ -642,7 +636,7 @@ void sub_802C68C(void)
         {
             if (!(r4 & 0x7D))
                 r8++;
-            if (r6->pp[gMoveSelectionCursor[gActiveBattler]] == 0)
+            if (r6->currentPp[gMoveSelectionCursor[gActiveBattler]] == 0)
             {
                 r8 = 0;
             }
@@ -810,13 +804,13 @@ void sub_802CA60(void)
             r9->moves[gMoveSelectionCursor[gActiveBattler]] = r9->moves[gUnknown_03004344];
             r9->moves[gUnknown_03004344] = i;
 
-            i = r9->pp[gMoveSelectionCursor[gActiveBattler]];
-            r9->pp[gMoveSelectionCursor[gActiveBattler]] = r9->pp[gUnknown_03004344];
-            r9->pp[gUnknown_03004344] = i;
+            i = r9->currentPp[gMoveSelectionCursor[gActiveBattler]];
+            r9->currentPp[gMoveSelectionCursor[gActiveBattler]] = r9->currentPp[gUnknown_03004344];
+            r9->currentPp[gUnknown_03004344] = i;
 
-            i = r9->unkC[gMoveSelectionCursor[gActiveBattler]];
-            r9->unkC[gMoveSelectionCursor[gActiveBattler]] = r9->unkC[gUnknown_03004344];
-            r9->unkC[gUnknown_03004344] = i;
+            i = r9->maxPp[gMoveSelectionCursor[gActiveBattler]];
+            r9->maxPp[gMoveSelectionCursor[gActiveBattler]] = r9->maxPp[gUnknown_03004344];
+            r9->maxPp[gUnknown_03004344] = i;
 
             if (gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[gMoveSelectionCursor[gActiveBattler]])
             {
@@ -840,7 +834,7 @@ void sub_802CA60(void)
             for (i = 0; i < 4; i++)
             {
                 gBattleMons[gActiveBattler].moves[i] = r9->moves[i];
-                gBattleMons[gActiveBattler].pp[i] = r9->pp[i];
+                gBattleMons[gActiveBattler].pp[i] = r9->currentPp[i];
             }
             if (!(gBattleMons[gActiveBattler].status2 & 0x200000))
             {
@@ -882,7 +876,7 @@ void sub_802CA60(void)
         {
             sub_802E12C(gUnknown_03004344, BattleText_Format);
         }
-        gBattlerControllerFuncs[gActiveBattler] = sub_802C68C;
+        gBattlerControllerFuncs[gActiveBattler] = HandleAction_ChooseMove;
         gMoveSelectionCursor[gActiveBattler] = gUnknown_03004344;
         sub_802E3B4(gMoveSelectionCursor[gActiveBattler], 0);
         Text_FillWindowRect(&gWindowTemplate_Contest_MoveDescription, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
@@ -897,7 +891,7 @@ void sub_802CA60(void)
         nullsub_7(gUnknown_03004344);
         sub_802E3B4(gMoveSelectionCursor[gActiveBattler], 0);
         sub_802E12C(gMoveSelectionCursor[gActiveBattler], BattleText_Format);
-        gBattlerControllerFuncs[gActiveBattler] = sub_802C68C;
+        gBattlerControllerFuncs[gActiveBattler] = HandleAction_ChooseMove;
         Text_FillWindowRect(&gWindowTemplate_Contest_MoveDescription, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
         Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, BattleText_PP, 0x290, 0x17, 0x37);
         Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
@@ -1105,7 +1099,7 @@ void debug_sub_8030C24(void)
                 (i < 2) ? 0x37 : 0x39);
             Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
         }
-        gBattlerControllerFuncs[gActiveBattler] = sub_802C68C;
+        gBattlerControllerFuncs[gActiveBattler] = HandleAction_ChooseMove;
     }
 }
 
@@ -1529,7 +1523,7 @@ void sub_802DF88(void)
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         if (gUnknown_0202E8F4 == 1)
-            BtlController_EmitChosenMonReturnValue(1, gUnknown_0202E8F5, gUnknown_02038470);
+            BtlController_EmitChosenMonReturnValue(1, gUnknown_0202E8F5, gBattlePartyCurrentOrder);
         else
             BtlController_EmitChosenMonReturnValue(1, 6, NULL);
         if ((gBattleBufferA[gActiveBattler][1] & 0xF) == 1)
@@ -1629,9 +1623,9 @@ void sub_802E220(void)
         str[1] = 0x14;
         str[2] = 6;
         str += 3;
-        str = ConvertIntToDecimalStringN(str, r4->pp[gMoveSelectionCursor[gActiveBattler]], 1, 2);
+        str = ConvertIntToDecimalStringN(str, r4->currentPp[gMoveSelectionCursor[gActiveBattler]], 1, 2);
         *str++ = CHAR_SLASH;
-        ConvertIntToDecimalStringN(str, r4->unkC[gMoveSelectionCursor[gActiveBattler]], 1, 2);
+        ConvertIntToDecimalStringN(str, r4->maxPp[gMoveSelectionCursor[gActiveBattler]], 1, 2);
         Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x2A2, 0x19, 0x37);
         Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     }
@@ -2641,7 +2635,7 @@ void PlayerHandlecmd20(void)
 {
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     sub_80304A8();
-    gBattlerControllerFuncs[gActiveBattler] = sub_802C68C;
+    gBattlerControllerFuncs[gActiveBattler] = HandleAction_ChooseMove;
 }
 
 void sub_80304A8(void)
@@ -2668,7 +2662,7 @@ void PlayerHandleOpenBag(void)
     gBattlerControllerFuncs[gActiveBattler] = sub_802E004;
     gBankInMenu = gActiveBattler;
     for (i = 0; i < 3; i++)
-        gUnknown_02038470[i] = gBattleBufferA[gActiveBattler][1 + i];
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
 }
 
 void PlayerHandlecmd22(void)
@@ -2677,11 +2671,11 @@ void PlayerHandlecmd22(void)
 
     gUnknown_0300434C[gActiveBattler] = CreateTask(TaskDummy, 0xFF);
     gTasks[gUnknown_0300434C[gActiveBattler]].data[0] = gBattleBufferA[gActiveBattler][1] & 0xF;
-    gBattleStruct->unk16054 = gBattleBufferA[gActiveBattler][1] >> 4;
+    gBattleStruct->battlerPreventingSwitchout = gBattleBufferA[gActiveBattler][1] >> 4;
     gBattleStruct->unk1609D = gBattleBufferA[gActiveBattler][2];
-    gBattleStruct->unk160C0 = gBattleBufferA[gActiveBattler][3];
+    gBattleStruct->abilityPreventingSwitchout = gBattleBufferA[gActiveBattler][3];
     for (i = 0; i < 3; i++)
-        gUnknown_02038470[i] = gBattleBufferA[gActiveBattler][4 + i];
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][4 + i];
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gBattlerControllerFuncs[gActiveBattler] = sub_802DF30;
     gBankInMenu = gActiveBattler;

@@ -5,8 +5,6 @@
 #include "text.h"
 #include "ewram.h"
 
-#define WRAM ewram_addr // using gSharedMem doesn't match
-
 void LZDecompressWram(const void *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
@@ -21,8 +19,8 @@ void LoadCompressedObjectPic(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
 
-    LZ77UnCompWram(src->data, (void *)WRAM);
-    dest.data = (void *)WRAM;
+    LZ77UnCompWram(src->data, (void *)EWRAM);
+    dest.data = (void *)EWRAM;
     dest.size = src->size;
     dest.tag = src->tag;
     LoadSpriteSheet(&dest);
@@ -43,8 +41,8 @@ void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src)
 {
     struct SpritePalette dest;
 
-    LZ77UnCompWram(src->data, (void *)WRAM);
-    dest.data = (void *)WRAM;
+    LZ77UnCompWram(src->data, (void *)EWRAM);
+    dest.data = (void *)EWRAM;
     dest.tag = src->tag;
     LoadSpritePalette(&dest);
 }

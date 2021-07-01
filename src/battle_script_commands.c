@@ -292,8 +292,6 @@ extern u8 BattleScript_GrudgeTakesPp[];
 #define RecordAbilitySetField6(ability, fieldValue) \
 (gLastUsedAbility = ability, gBattleCommunication[6] = fieldValue, RecordAbilityBattle(gBattlerTarget, ability))
 
-#define HP_ON_SWITCHOUT (((u16*)(ewram_addr + 0x160BC)))
-
 static void atk00_attackcanceler(void);
 static void atk01_accuracycheck(void);
 static void atk02_attackstring(void);
@@ -6017,7 +6015,7 @@ static void atk43_jumpifabilitypresent(void)
 
 static void atk44_endselectionscript(void)
 {
-    gSharedMem[BSTRUCT_OFF(unk16060) + gBattlerAttacker] = 1;
+    gSharedMem[BSTRUCT_OFF(selectionScriptFinished) + gBattlerAttacker] = 1;
 }
 
 static void atk45_playanimation(void)
@@ -11524,10 +11522,10 @@ static void atkA5_painsplitdmgcalc(void)
         s32 hp_diff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
         s32 to_store = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hp_diff;
 
-        gSharedMem[BSTRUCT_OFF(unk16014) + 0] = sBYTE0_32(to_store);
-        gSharedMem[BSTRUCT_OFF(unk16014) + 1] = sBYTE1_32(to_store);
-        gSharedMem[BSTRUCT_OFF(unk16014) + 2] = sBYTE2_32(to_store);
-        gSharedMem[BSTRUCT_OFF(unk16014) + 3] = sBYTE3_32(to_store);
+        gSharedMem[BSTRUCT_OFF(painSplitHP) + 0] = sBYTE0_32(to_store);
+        gSharedMem[BSTRUCT_OFF(painSplitHP) + 1] = sBYTE1_32(to_store);
+        gSharedMem[BSTRUCT_OFF(painSplitHP) + 2] = sBYTE2_32(to_store);
+        gSharedMem[BSTRUCT_OFF(painSplitHP) + 3] = sBYTE3_32(to_store);
 
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp - hp_diff;
         gSpecialStatuses[gBattlerTarget].dmg = 0xFFFF;

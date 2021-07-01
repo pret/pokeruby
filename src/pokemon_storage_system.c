@@ -22,9 +22,6 @@ void sub_809665C(void);
 void sub_80966F4(const u8 *sourceString, u16 x, u16 y);
 void sub_8096784(struct Sprite *sprite);
 
-EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gUnknown_02038470[3] = {};
-EWRAM_DATA u8 gUnknown_02038473 = 0;
 EWRAM_DATA u8 gUnknown_02038474 = 0;
 EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478 = NULL;
 
