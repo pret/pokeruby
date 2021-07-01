@@ -233,14 +233,14 @@ struct BattleResults
 {
     u8 playerFaintCounter;    // 0x0
     u8 opponentFaintCounter;  // 0x1
-    u8 unk2;                  // 0x2
-    u8 unk3;                  // 0x3
-    u8 unk4;                  // 0x4
+    u8 totalMonSwitchCounter; // 0x2
+    u8 playerHealInBattleCount; // 0x3
+    u8 reviveCount;           // 0x4
     u8 playerMonWasDamaged:1; // 0x5
-    u8 unk5_1:1;              // 0x5
+    u8 usedMasterBall:1;      // 0x5
     u16 poke1Species;         // 0x6
     u8 pokeString1[10];       // 0x8
-    u8 unk12;
+    u8 unk12; // unused
     u8 battleTurnCounter;     // 0x13
     u8 pokeString2[10];       // 0x14
     u8 filler1E[2];

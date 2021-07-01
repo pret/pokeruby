@@ -3490,11 +3490,11 @@ void BattleStartClearSetData(void)
     gBattleResults.battleTurnCounter = 0;
     gBattleResults.playerFaintCounter = 0;
     gBattleResults.opponentFaintCounter = 0;
-    gBattleResults.unk2 = 0;
-    gBattleResults.unk3 = 0;
-    gBattleResults.unk4 = 0;
+    gBattleResults.totalMonSwitchCounter = 0;
+    gBattleResults.playerHealInBattleCount = 0;
+    gBattleResults.reviveCount = 0;
     gBattleResults.playerMonWasDamaged = 0;
-    gBattleResults.unk5_1 = 0;
+    gBattleResults.usedMasterBall = 0;
     gBattleResults.lastOpponentSpecies = 0;
     gBattleResults.lastUsedMove = 0;
     gBattleResults.opponentMove = 0;
@@ -5367,8 +5367,8 @@ void HandleAction_Switch(void)
     gBattlescriptCurrInstr = BattleScript_ActionSwitch;
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 
-    if (gBattleResults.unk2 < 255)
-        gBattleResults.unk2++;
+    if (gBattleResults.totalMonSwitchCounter < 255)
+        gBattleResults.totalMonSwitchCounter++;
 }
 
 void HandleAction_UseItem(void)

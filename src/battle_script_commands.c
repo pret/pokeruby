@@ -13428,7 +13428,7 @@ void atkEF_handleballthrow(void)
         {
             if (gLastUsedItem == ITEM_MASTER_BALL)
             {
-                gBattleResults.unk5_1 = 1;
+                gBattleResults.usedMasterBall = 1;
             }
             else
             {

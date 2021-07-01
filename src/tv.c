@@ -643,12 +643,12 @@ void GabbyAndTyBeforeInterview(void)
     else
         gSaveBlock1.gabbyAndTyData.valA_1 = 0;
 
-    if (gBattleResults.unk3)
+    if (gBattleResults.playerHealInBattleCount)
         gSaveBlock1.gabbyAndTyData.valA_2 = 1;
     else
         gSaveBlock1.gabbyAndTyData.valA_2 = 0;
 
-    if (!gBattleResults.unk5_1)
+    if (!gBattleResults.usedMasterBall)
     {
         for (i=0; i<11; i++)
         {
@@ -818,7 +818,7 @@ void PutPokemonTodayCaughtOnAir(void)
             {
                 for (i = 0; i < 11; i++)
                     total += gBattleResults.usedBalls[i];
-                if (total != 0 || gBattleResults.unk5_1 != 0)
+                if (total != 0 || gBattleResults.usedMasterBall != 0)
                 {
                     struct TVShowPokemonToday *pokemonToday;
 
@@ -826,7 +826,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     pokemonToday = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].pokemonToday;
                     pokemonToday->kind = TVSHOW_POKEMON_TODAY_CAUGHT;
                     pokemonToday->active = total;
-                    if (gBattleResults.unk5_1 != 0)
+                    if (gBattleResults.usedMasterBall != 0)
                     {
                         total = 1;
                         item = ITEM_MASTER_BALL;
