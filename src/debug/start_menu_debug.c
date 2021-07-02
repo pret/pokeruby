@@ -2417,8 +2417,7 @@ void DebugMenu_8078B94(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1.pokeblocks); i++)
     {
-        if (gUnknown_Debug_839C444[i].color == 0)
-            break;
+        if (gUnknown_Debug_839C444[i].color == 0) break;
         gSaveBlock1.pokeblocks[i] = gUnknown_Debug_839C444[i];
     }
 }
