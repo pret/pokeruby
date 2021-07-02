@@ -355,19 +355,15 @@ void AnimTask_CreateSurfWave(u8 taskId)
     gTasks[taskId].func = sub_80D3B60;
 }
 
-#ifdef NONMATCHING
 void sub_80D3B60(u8 taskId)
 {
-    struct Struct_sub_8078914 unk;
 
     vu8 cpuDelay; // yet again
+    struct Struct_sub_8078914 unk;
     u8 i;
     u16 rgbBuffer;
     u16 *BGptrX = &gBattle_BG1_X;
     u16 *BGptrY = &gBattle_BG1_Y;
-    s16 unkUse;
-    u32 palOffset;
-    u16 palNum;
 
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
@@ -378,9 +374,7 @@ void sub_80D3B60(u8 taskId)
         rgbBuffer = gPlttBufferFaded[unk.field_8 * 16 + 7];
         for (i = 6; i != 0; i--)
         {
-            palNum = unk.field_8 * 16;
-            palOffset = 1 + i;
-            gPlttBufferFaded[palNum + palOffset] = gPlttBufferFaded[palNum + palOffset - 1];
+            gPlttBufferFaded[unk.field_8 * 16 + 1 + i] = gPlttBufferFaded[unk.field_8 * 16 + 1 + i - 1];
         }
         gPlttBufferFaded[unk.field_8 * 16 + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
@@ -389,16 +383,15 @@ void sub_80D3B60(u8 taskId)
     {
         // there is some weird math going on here
         gTasks[taskId].data[6] = 0;
-        unkUse = ++gTasks[taskId].data[3];
-        if (unkUse <= 13)
+        if (++gTasks[taskId].data[3] <= 13)
         {
-            gTasks[gTasks[taskId].data[15]].data[1] = unkUse | ((16 - unkUse) * 256);
+            gTasks[gTasks[taskId].data[15]].data[1] = gTasks[taskId].data[3] | ((16 - gTasks[taskId].data[3]) << 8);
             gTasks[taskId].data[4]++;
         }
         if (gTasks[taskId].data[3] > 54)
         {
-            unkUse = --gTasks[taskId].data[4];
-            gTasks[gTasks[taskId].data[15]].data[1] = unkUse | ((16 - unkUse) * 256);
+            gTasks[taskId].data[4]--;
+            gTasks[gTasks[taskId].data[15]].data[1] = gTasks[taskId].data[4] | ((16 - gTasks[taskId].data[4]) << 8);
         }
     }
     if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
@@ -407,8 +400,8 @@ void sub_80D3B60(u8 taskId)
         cpuDelay = 0; // stall the CPU
         cpuDelay = 0; // stall the CPU
         Dma3FillLarge32_(0, unk.field_4, 0x1000); // !
-        if (!IsContest)
-            REG_BG1CNT_BITFIELD.charBaseBlock = 1;
+        if (!IsContest())
+            REG_BG1CNT_BITFIELD.charBaseBlock = 0;
         *BGptrX = 0;
         *BGptrY = 0;
 
@@ -419,259 +412,6 @@ void sub_80D3B60(u8 taskId)
         DestroyAnimVisualTask(taskId);
     }
 }
-#else
-NAKED
-void sub_80D3B60(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x18\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	ldr r0, =gTasks\n\
-	lsls r4, r7, 2\n\
-	adds r4, r7\n\
-	lsls r4, 3\n\
-	adds r4, r0\n\
-	ldrh r0, [r4, 0x8]\n\
-	ldr r1, =gBattle_BG1_X\n\
-	ldrh r1, [r1]\n\
-	adds r0, r1\n\
-	ldr r2, =gBattle_BG1_X\n\
-	strh r0, [r2]\n\
-	ldrh r0, [r4, 0xA]\n\
-	ldr r3, =gBattle_BG1_Y\n\
-	ldrh r3, [r3]\n\
-	adds r0, r3\n\
-	ldr r1, =gBattle_BG1_Y\n\
-	strh r0, [r1]\n\
-	add r5, sp, 0x4\n\
-	adds r0, r5, 0\n\
-	bl sub_8078914\n\
-	ldrh r0, [r4, 0xA]\n\
-	ldrh r2, [r4, 0xC]\n\
-	adds r0, r2\n\
-	strh r0, [r4, 0xC]\n\
-	ldrh r0, [r4, 0x12]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	mov r10, r5\n\
-	cmp r0, 0x4\n\
-	bne _080D3C02\n\
-	ldr r1, =gPlttBufferFaded\n\
-	ldrb r0, [r5, 0x8]\n\
-	lsls r0, 4\n\
-	adds r0, 0x7\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r6, [r0]\n\
-	movs r2, 0x6\n\
-	adds r5, r1, 0\n\
-	adds r3, r5, 0\n\
-	mov r4, r10\n\
-_080D3BC8:\n\
-	ldrb r0, [r4, 0x8]\n\
-	lsls r0, 4\n\
-	adds r1, r2, 0x1\n\
-	adds r0, r1\n\
-	lsls r1, r0, 1\n\
-	adds r1, r3\n\
-	subs r0, 0x1\n\
-	lsls r0, 1\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	subs r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0\n\
-	bne _080D3BC8\n\
-	mov r3, r10\n\
-	ldrb r0, [r3, 0x8]\n\
-	lsls r0, 4\n\
-	adds r0, 0x1\n\
-	lsls r0, 1\n\
-	adds r0, r5\n\
-	strh r6, [r0]\n\
-	ldr r1, =gTasks\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	strh r2, [r0, 0x12]\n\
-_080D3C02:\n\
-	ldr r1, =gTasks\n\
-	lsls r2, r7, 2\n\
-	adds r0, r2, r7\n\
-	lsls r0, 3\n\
-	adds r3, r0, r1\n\
-	ldrh r0, [r3, 0x14]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x14]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	adds r4, r1, 0\n\
-	str r2, [sp, 0x14]\n\
-	cmp r0, 0x1\n\
-	ble _080D3C70\n\
-	movs r0, 0\n\
-	strh r0, [r3, 0x14]\n\
-	ldrh r0, [r3, 0xE]\n\
-	adds r2, r0, 0x1\n\
-	strh r2, [r3, 0xE]\n\
-	lsls r0, r2, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0xD\n\
-	bgt _080D3C4C\n\
-	movs r1, 0x26\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r1, 3\n\
-	adds r1, r4\n\
-	movs r0, 0x10\n\
-	subs r0, r2\n\
-	lsls r0, 8\n\
-	orrs r2, r0\n\
-	strh r2, [r1, 0xA]\n\
-	ldrh r0, [r3, 0x10]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x10]\n\
-_080D3C4C:\n\
-	movs r2, 0xE\n\
-	ldrsh r0, [r3, r2]\n\
-	cmp r0, 0x36\n\
-	ble _080D3C70\n\
-	ldrh r2, [r3, 0x10]\n\
-	subs r2, 0x1\n\
-	strh r2, [r3, 0x10]\n\
-	movs r1, 0x26\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r1, 3\n\
-	adds r1, r4\n\
-	movs r0, 0x10\n\
-	subs r0, r2\n\
-	lsls r0, 8\n\
-	orrs r2, r0\n\
-	strh r2, [r1, 0xA]\n\
-_080D3C70:\n\
-	ldr r2, [sp, 0x14]\n\
-	adds r0, r2, r7\n\
-	lsls r0, 3\n\
-	adds r0, r4\n\
-	movs r3, 0x26\n\
-	ldrsh r1, [r0, r3]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r4\n\
-	ldrh r1, [r0, 0xA]\n\
-	movs r0, 0x1F\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080D3D32\n\
-	ldr r2, [sp, 0x4]\n\
-	movs r3, 0x80\n\
-	lsls r3, 6\n\
-	add r6, sp, 0x10\n\
-	movs r5, 0\n\
-	ldr r1, =0x040000d4\n\
-	movs r4, 0x80\n\
-	lsls r4, 5\n\
-	mov r8, r6\n\
-	ldr r0, =0x85000400\n\
-	mov r12, r0\n\
-	movs r0, 0x85\n\
-	lsls r0, 24\n\
-	mov r9, r0\n\
-_080D3CAA:\n\
-	str r5, [sp, 0x10]\n\
-	mov r0, r8\n\
-	str r0, [r1]\n\
-	str r2, [r1, 0x4]\n\
-	mov r0, r12\n\
-	str r0, [r1, 0x8]\n\
-	ldr r0, [r1, 0x8]\n\
-	adds r2, r4\n\
-	subs r3, r4\n\
-	cmp r3, r4\n\
-	bhi _080D3CAA\n\
-	str r5, [sp, 0x10]\n\
-	str r6, [r1]\n\
-	str r2, [r1, 0x4]\n\
-	lsrs r0, r3, 2\n\
-	mov r2, r9\n\
-	orrs r0, r2\n\
-	str r0, [r1, 0x8]\n\
-	ldr r0, [r1, 0x8]\n\
-	mov r0, sp\n\
-	movs r1, 0\n\
-	strb r1, [r0]\n\
-	strb r1, [r0]\n\
-	mov r3, r10\n\
-	ldr r1, [r3, 0x4]\n\
-	movs r4, 0\n\
-	str r4, [sp, 0x10]\n\
-	ldr r0, =0x040000d4\n\
-	str r6, [r0]\n\
-	str r1, [r0, 0x4]\n\
-	ldr r1, =0x85000400\n\
-	str r1, [r0, 0x8]\n\
-	ldr r0, [r0, 0x8]\n\
-	bl IsContest\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _080D3D02\n\
-	ldr r2, =0x0400000a\n\
-	ldrb r1, [r2]\n\
-	movs r0, 0xD\n\
-	negs r0, r0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-_080D3D02:\n\
-	ldr r0,=gBattle_BG1_X\n\
-	strh r4, [r0]\n\
-	ldr r1, =gBattle_BG1_Y\n\
-	strh r4, [r1]\n\
-	ldr r0, =0x04000050\n\
-	strh r4, [r0]\n\
-	adds r0, 0x2\n\
-	strh r4, [r0]\n\
-	ldr r2, =gTasks\n\
-	ldr r3, [sp, 0x14]\n\
-	adds r0, r3, r7\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	movs r3, 0x26\n\
-	ldrsh r1, [r0, r3]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	ldr r1, =0x0000ffff\n\
-	strh r1, [r0, 0x26]\n\
-	adds r0, r7, 0\n\
-	bl DestroyAnimVisualTask\n\
-_080D3D32:\n\
-	add sp, 0x18\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-	.pool");
-}
-#endif
 
 void sub_80D3D68(u8 taskId)
 {

@@ -1925,14 +1925,14 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
     if (toBG_2 == 0)
     {
         volatile u8 pointlessZero;
-        struct UnknownStruct2 s;
+        struct Struct_sub_8078914 s;
         u8 r2;
 
         sub_8078914(&s);
-        DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
+        DmaFill32Large(3, 0, s.field_0, 0x2000, 0x1000);
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
-        DmaFill16Defvars(3, 0xFF, (void *)s.unk4, 0x1000);
+        DmaFill16Defvars(3, 0xFF, (void *)s.field_4, 0x1000);
 
         REG_BG1CNT_BITFIELD.priority = 2;
         REG_BG1CNT_BITFIELD.screenSize = 1;
@@ -1948,14 +1948,14 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         REG_BG1HOFS = gBattle_BG1_X;
         REG_BG1VOFS = gBattle_BG1_Y;
 
-        LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, s.unk8 * 16, 32);
-        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (u16 *)PLTT + s.unk8 * 16, 32);
+        LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, s.field_8 * 16, 32);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (u16 *)PLTT + s.field_8 * 16, 32);
 
         if (IsContest())
             r2 = 0;
         else
             r2 = GetBattlerPosition(bank);
-        sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
+        sub_80E4EF8(0, 0, r2, s.field_8, (u32)s.field_0, (((s32)s.field_4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
         if (IsContest())
             sub_8076380();
     }
@@ -1991,13 +1991,13 @@ static void sub_8076380(void)
 {
     int i;
     int j;
-    struct UnknownStruct2 s;
+    struct Struct_sub_8078914 s;
     u16 *ptr;
 
     if (IsSpeciesNotUnown(gContestResources__moveAnim.species))
     {
         sub_8078914(&s);
-        ptr = s.unk4;
+        ptr = (u16 *)s.field_4;
         for (i = 0; i < 8; i++)
         {
             for (j = 0; j < 4; j++)
@@ -2037,15 +2037,15 @@ void sub_80763FC(u16 a, u16 *b, u32 c, u8 d)
 void sub_8076464(u8 a)
 {
     volatile u8 pointlessZero;
-    struct UnknownStruct2 s;
+    struct Struct_sub_8078914 s;
 
     sub_8078914(&s);
     if (a == 0 || IsContest())
     {
-        DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
+        DmaFill32Large(3, 0, s.field_0, 0x2000, 0x1000);
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
-        DmaFill32Defvars(3, 0, s.unk4, 0x800);
+        DmaFill32Defvars(3, 0, s.field_4, 0x800);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
     }
@@ -2064,7 +2064,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 {
     u8 spriteId, palIndex;
     s16 x, y;
-    struct UnknownStruct2 s;
+    struct Struct_sub_8078914 s;
 
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
@@ -2076,7 +2076,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     {
         gBattle_BG1_X = x + gTasks[taskId].data[3];
         gBattle_BG1_Y = y + gTasks[taskId].data[4];
-        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 + s.unk8 * 16 - 256, 32);
+        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 + s.field_8 * 16 - 256, 32);
     }
     else
     {

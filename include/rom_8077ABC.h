@@ -38,7 +38,7 @@ bool8 IsBankSpritePresent(u8);
 bool8 IsDoubleBattle();
 u8 IsDoubleBattle(void);
 bool8 IsDoubleBattle(void);
-void sub_8078914();
+void sub_8078914(struct Struct_sub_8078914 * unk);
 u8 sub_80789BC();
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);

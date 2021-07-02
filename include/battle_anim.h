@@ -31,13 +31,6 @@ enum
     BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
 
-struct UnknownStruct2
-{
-    void *unk0;
-    u16 *unk4;
-    u8 unk8;
-};
-
 struct ContestMoveAnim
 {
     u16 species;
