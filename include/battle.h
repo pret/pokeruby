@@ -376,7 +376,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1609B*/ u8 castformToChangeInto;
     /*0x1609C*/ u8 atk6C_statetracker;
     /*0x1609D*/ u8 unk1609D;
-    /*0x1609E*/ u8 unk1609E[2]; // debug
+    /*0x1609E*/ u8 dbgAICycleMoveTracker[2]; // debug
     /*0x160A0*/ u8 stringMoveType;
     /*0x160A1*/ u8 animTargetsHit;
     /*0x160A2*/ u8 expGetterBattlerId;

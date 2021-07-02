@@ -3508,8 +3508,8 @@ void BattleStartClearSetData(void)
         gBattleResults.caughtNick[i] = 0;
     }
 #if DEBUG
-    gBattleStruct->unk1609E = 0;
-    gBattleStruct->unk1609F = 0;
+    gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) + 0] = 0;
+    gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) + 1] = 0;
 #endif
 }
 
