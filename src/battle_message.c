@@ -460,8 +460,7 @@ const u8* TryGetStatusString(u8* src)
     statusPtr = status;
     for (i = 0; i < sizeof(struct StatusFlagString); i++)
     {
-        if (*src == EOS)
-            break;
+        if (*src == EOS) break; // oneline required to match with -g
         *statusPtr = *src;
         src++;
         statusPtr++;

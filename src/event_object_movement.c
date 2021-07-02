@@ -1228,8 +1228,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (!gObjectEvents[i].active)
-            break;
+        if (!gObjectEvents[i].active) break; // one-line required to match with -g
         if (gObjectEvents[i].localId == localId && gObjectEvents[i].mapNum == mapNum && gObjectEvents[i].mapGroup == mapGroup)
             return TRUE;
     }
