@@ -2993,8 +2993,6 @@ const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
 
 const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
 
-u8 *const unref_label_083ECAA8[] = {gSharedMem};
-
 void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
 {
     u8 i;
