@@ -13536,94 +13536,49 @@ static void atkF2_displaydexinfo(void)
     }
 }
 
-NAKED
 void sub_802BBD4(u8 r0, u8 r1, u8 r2, u8 r3, u8 sp0)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r4, [sp, 0x20]\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r12, r1\n\
-    lsls r2, 24\n\
-    lsrs r5, r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r7, r3, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    mov r8, r4\n\
-    mov r2, r12\n\
-    cmp r2, r7\n\
-    bgt _0802BC5A\n\
-    lsls r1, r6, 1\n\
-    ldr r0, _0802BC20 @ =0x0600c000\n\
-    adds r1, r0\n\
-    mov r9, r1\n\
-_0802BC06:\n\
-    adds r1, r6, 0\n\
-    adds r0, r2, 0x1\n\
-    mov r10, r0\n\
-    cmp r1, r5\n\
-    bgt _0802BC54\n\
-    lsls r0, r2, 6\n\
-    mov r4, r9\n\
-    adds r3, r4, r0\n\
-_0802BC16:\n\
-    cmp r2, r12\n\
-    bne _0802BC28\n\
-    ldr r0, _0802BC24 @ =0x00001022\n\
-    b _0802BC36\n\
-    .align 2, 0\n\
-_0802BC20: .4byte 0x0600c000\n\
-_0802BC24: .4byte 0x00001022\n\
-_0802BC28:\n\
-    cmp r2, r7\n\
-    bne _0802BC34\n\
-    ldr r0, _0802BC30 @ =0x00001028\n\
-    b _0802BC36\n\
-    .align 2, 0\n\
-_0802BC30: .4byte 0x00001028\n\
-_0802BC34:\n\
-    ldr r0, _0802BC68 @ =0x00001025\n\
-_0802BC36:\n\
-    cmp r1, r6\n\
-    beq _0802BC42\n\
-    adds r0, 0x1\n\
-    cmp r1, r5\n\
-    bne _0802BC42\n\
-    adds r0, 0x1\n\
-_0802BC42:\n\
-    mov r4, r8\n\
-    cmp r4, 0\n\
-    beq _0802BC4A\n\
-    movs r0, 0\n\
-_0802BC4A:\n\
-    strh r0, [r3]\n\
-    adds r3, 0x2\n\
-    adds r1, 0x1\n\
-    cmp r1, r5\n\
-    ble _0802BC16\n\
-_0802BC54:\n\
-    mov r2, r10\n\
-    cmp r2, r7\n\
-    ble _0802BC06\n\
-_0802BC5A:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0802BC68: .4byte 0x00001025\n\
-        .syntax divided");
+    int i;
+    int j;
+    int tile;
+
+    for (i = r1; i <= r3; i++)
+    {
+        for (j = r0; j <= r2; j++)
+        {
+            u16 * dest = ((u16 *)(BG_VRAM + (24 * 0x800) + (0x2 * j) + (0x40 * i)));
+            if (i == r1)
+            {
+                if (j == r0)
+                    tile = 0x1022;
+                else if (j == r2)
+                    tile = 0x1024;
+                else
+                    tile = 0x1023;
+            }
+            else if (i == r3)
+            {
+                if (j == r0)
+                    tile = 0x1028;
+                else if (j == r2)
+                    tile = 0x102A;
+                else
+                    tile = 0x1029;
+            }
+            else
+            {
+                if (j == r0)
+                    tile = 0x1025;
+                else if (j == r2)
+                    tile = 0x1027;
+                else
+                    tile = 0x1026;
+            }
+            if (sp0)
+                tile = 0;
+            *dest = tile;
+        }
+    }
 }
 
 void sub_802BC6C(void)
