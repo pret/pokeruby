@@ -9057,434 +9057,146 @@ static void atk6B_atknameinbuff1(void)
     gBattlescriptCurrInstr++;
 }
 
-#ifdef NONMATCHING
 extern const u8 BattleText_Format2[];
+extern const u8 BattleText_Dash[];
+extern const u8 BattleText_Plus[];
+extern const u8 *const gUnknown_0840165C[];
 
-// TODO: finish
 static void atk6C_drawlvlupbox(void)
 {
-    UNUSED u8 r1 = 0;
-    UNUSED u8 r7 = 0;
+    s16 r1 = 0;
+    s16 r7 = 0;
+    int i;
+    u8 * r5;
+    bool32 sign;
     switch (gBattleStruct->atk6C_statetracker)
     {
     case 0:
-        sub_802BBD4(0xB, 0, 0x1D, 0x7, r1);
-        StringCopy(gStringVar4, BattleText_Format2);
-
+        sub_802BBD4(0xB, 0, 0x1D, 0x7, 0);
+        r5 = StringCopy(gStringVar4, BattleText_Format2);
+        for (i = 0; i < 6; i++)
+        {
+            sign = FALSE;
+            r5 = StringAppend(r5, gUnknown_0840165C[i]);
+            r1 = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], gLevelUpStatBoxStats[i]);
+            switch (i)
+            {
+            case 0:
+                r7 = r1 - gBattleResources_statsBeforeLvlUp->hp;
+                break;
+            case 1:
+                r7 = r1 - gBattleResources_statsBeforeLvlUp->spAtk;
+                break;
+            case 2:
+                r7 = r1 - gBattleResources_statsBeforeLvlUp->atk;
+                break;
+            case 3:
+                r7 = r1 - gBattleResources_statsBeforeLvlUp->spDef;
+                break;
+            case 4:
+                r7 = r1 - gBattleResources_statsBeforeLvlUp->def;
+                break;
+            case 5:
+                r7 = r1 - gBattleResources_statsBeforeLvlUp->spd;
+                break;
+            }
+            if (r7 < 0)
+            {
+                r7 = -r7;
+                sign++;
+            }
+            r5[0] = EXT_CTRL_CODE_BEGIN;
+            r5[1] = EXT_CTRL_CODE_CLEAR_TO;
+            r5[2] = ((i & 1) * 9 + 5) * 8 + 6;
+            r5 += 3;
+            if (sign)
+                r5 = StringCopy(r5, BattleText_Dash);
+            else
+                r5 = StringCopy(r5, BattleText_Plus);
+            r5[0] = EXT_CTRL_CODE_BEGIN;
+            r5[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+            r5[2] = 6;
+            r5 += 3;
+            r5 = ConvertIntToDecimalStringN(r5, r7, STR_CONV_MODE_RIGHT_ALIGN, 2);
+            r5[0] = EXT_CTRL_CODE_BEGIN;
+            r5[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+            r5[2] = 0;
+            r5 += 3;
+            if (i & 1)
+            {
+                r5[0] = CHAR_NEWLINE;
+                r5[1] = EOS;
+                r5 += 1;
+            }
+            else
+            {
+                r5[0] = EXT_CTRL_CODE_BEGIN;
+                r5[1] = EXT_CTRL_CODE_CLEAR;
+                r5[2] = 8;
+                r5 += 3;
+                *r5 = EOS;
+            }
+        }
+        Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 0x100, 12, 1);
+        Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
+        gBattleStruct->atk6C_statetracker++;
+        break;
+    case 1:
+        if (gMain.newKeys != 0)
+        {
+            PlaySE(SE_SELECT);
+            r5 = StringCopy(gStringVar4, BattleText_Format2);
+            for (i = 0; i < 6; i++)
+            {
+                sign = FALSE;
+                r5 = StringAppend(r5, gUnknown_0840165C[i]);
+                r1 = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], gLevelUpStatBoxStats[i]);
+                r5[0] = EXT_CTRL_CODE_BEGIN;
+                r5[1] = EXT_CTRL_CODE_CLEAR_TO;
+                r5[2] = ((i & 1) * 9 + 5) * 8 + 6;
+                r5 += 3;
+                r5[0] = EXT_CTRL_CODE_BEGIN;
+                r5[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+                r5[2] = 6;
+                r5 += 3;
+                r5 = ConvertIntToDecimalStringN(r5, r1, STR_CONV_MODE_RIGHT_ALIGN, 3);
+                r5[0] = EXT_CTRL_CODE_BEGIN;
+                r5[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+                r5[2] = 0;
+                r5 += 3;
+                if (i & 1)
+                {
+                    r5[0] = CHAR_NEWLINE;
+                    r5[1] = EOS;
+                    r5 += 1;
+                }
+                else
+                {
+                    r5[0] = EXT_CTRL_CODE_BEGIN;
+                    r5[1] = EXT_CTRL_CODE_CLEAR;
+                    r5[2] = 8;
+                    r5 += 3;
+                    *r5 = EOS;
+                }
+            }
+            Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gStringVar4, 0x100, 12, 1);
+            Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
+            gBattleStruct->atk6C_statetracker++;
+        }
+        break;
+    case 2:
+        if (gMain.newKeys != 0)
+        {
+            PlaySE(SE_SELECT);
+            sub_802BBD4(11, 0, 29, 7, TRUE);
+            gBattleStruct->atk6C_statetracker++;
+        }
+        break;
+    case 3:
+        gBattlescriptCurrInstr++;
+        break;
     }
 }
-
-#else
-NAKED
-static void atk6C_drawlvlupbox(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    movs r1, 0\n\
-    movs r7, 0\n\
-    ldr r0, _08024928 @ =gSharedMem\n\
-    mov r10, r0\n\
-    ldr r4, _0802492C @ =0x0001609c\n\
-    add r4, r10\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0x1\n\
-    bne _0802491C\n\
-    b _08024AF4\n\
-_0802491C:\n\
-    cmp r0, 0x1\n\
-    bgt _08024930\n\
-    cmp r0, 0\n\
-    beq _0802493E\n\
-    b _08024C38\n\
-    .align 2, 0\n\
-_08024928: .4byte gSharedMem\n\
-_0802492C: .4byte 0x0001609c\n\
-_08024930:\n\
-    cmp r0, 0x2\n\
-    bne _08024936\n\
-    b _08024C04\n\
-_08024936:\n\
-    cmp r0, 0x3\n\
-    bne _0802493C\n\
-    b _08024C30\n\
-_0802493C:\n\
-    b _08024C38\n\
-_0802493E:\n\
-    str r1, [sp]\n\
-    movs r0, 0xB\n\
-    movs r1, 0\n\
-    movs r2, 0x1D\n\
-    movs r3, 0x7\n\
-    bl sub_802BBD4\n\
-    ldr r0, _0802499C @ =gStringVar4\n\
-    ldr r1, _080249A0 @ =BattleText_Format2\n\
-    bl StringCopy\n\
-    adds r5, r0, 0\n\
-    movs r1, 0\n\
-    mov r8, r1\n\
-_0802495A:\n\
-    movs r2, 0\n\
-    mov r9, r2\n\
-    ldr r0, _080249A4 @ =gUnknown_0840165C\n\
-    mov r1, r8\n\
-    lsls r4, r1, 2\n\
-    adds r0, r4, r0\n\
-    ldr r1, [r0]\n\
-    adds r0, r5, 0\n\
-    bl StringAppend\n\
-    adds r5, r0, 0\n\
-    ldr r0, _080249A8 @ =gSharedMem\n\
-    ldr r2, _080249AC @ =0x00016018\n\
-    adds r0, r2\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x64\n\
-    muls r0, r1\n\
-    ldr r1, _080249B0 @ =gPlayerParty\n\
-    adds r0, r1\n\
-    ldr r1, _080249B4 @ =gLevelUpStatBoxStats\n\
-    add r1, r8\n\
-    ldrb r1, [r1]\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    mov r0, r8\n\
-    cmp r0, 0x5\n\
-    bhi _08024A1A\n\
-    ldr r0, _080249B8 @ =_080249BC\n\
-    adds r0, r4, r0\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_0802499C: .4byte gStringVar4\n\
-_080249A0: .4byte BattleText_Format2\n\
-_080249A4: .4byte gUnknown_0840165C\n\
-_080249A8: .4byte gSharedMem\n\
-_080249AC: .4byte 0x00016018\n\
-_080249B0: .4byte gPlayerParty\n\
-_080249B4: .4byte gLevelUpStatBoxStats\n\
-_080249B8: .4byte _080249BC\n\
-    .align 2, 0\n\
-_080249BC:\n\
-    .4byte _080249D4\n\
-    .4byte _080249E0\n\
-    .4byte _080249EC\n\
-    .4byte _080249F8\n\
-    .4byte _08024A04\n\
-    .4byte _08024A10\n\
-_080249D4:\n\
-    ldr r0, _080249DC @ =gSharedMem + 0x17180\n\
-    ldrh r0, [r0]\n\
-    b _08024A14\n\
-    .align 2, 0\n\
-_080249DC: .4byte gSharedMem + 0x17180\n\
-_080249E0:\n\
-    ldr r0, _080249E8 @ =gSharedMem + 0x17180\n\
-    ldrh r0, [r0, 0x8]\n\
-    b _08024A14\n\
-    .align 2, 0\n\
-_080249E8: .4byte gSharedMem + 0x17180\n\
-_080249EC:\n\
-    ldr r0, _080249F4 @ =gSharedMem + 0x17180\n\
-    ldrh r0, [r0, 0x2]\n\
-    b _08024A14\n\
-    .align 2, 0\n\
-_080249F4: .4byte gSharedMem + 0x17180\n\
-_080249F8:\n\
-    ldr r0, _08024A00 @ =gSharedMem + 0x17180\n\
-    ldrh r0, [r0, 0xA]\n\
-    b _08024A14\n\
-    .align 2, 0\n\
-_08024A00: .4byte gSharedMem + 0x17180\n\
-_08024A04:\n\
-    ldr r0, _08024A0C @ =gSharedMem + 0x17180\n\
-    ldrh r0, [r0, 0x4]\n\
-    b _08024A14\n\
-    .align 2, 0\n\
-_08024A0C: .4byte gSharedMem + 0x17180\n\
-_08024A10:\n\
-    ldr r0, _08024A54 @ =gSharedMem + 0x17180\n\
-    ldrh r0, [r0, 0x6]\n\
-_08024A14:\n\
-    subs r0, r1, r0\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-_08024A1A:\n\
-    lsls r0, r7, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0\n\
-    bge _08024A2C\n\
-    negs r0, r0\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    movs r1, 0x1\n\
-    add r9, r1\n\
-_08024A2C:\n\
-    movs r0, 0xFC\n\
-    strb r0, [r5]\n\
-    movs r0, 0x13\n\
-    strb r0, [r5, 0x1]\n\
-    movs r1, 0x1\n\
-    mov r2, r8\n\
-    ands r1, r2\n\
-    lsls r0, r1, 3\n\
-    adds r0, r1\n\
-    adds r0, 0x5\n\
-    lsls r0, 3\n\
-    adds r0, 0x6\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    mov r0, r9\n\
-    cmp r0, 0\n\
-    beq _08024A5C\n\
-    ldr r1, _08024A58 @ =BattleText_Dash\n\
-    b _08024A5E\n\
-    .align 2, 0\n\
-_08024A54: .4byte gSharedMem + 0x17180\n\
-_08024A58: .4byte BattleText_Dash\n\
-_08024A5C:\n\
-    ldr r1, _08024AA4 @ =BattleText_Plus\n\
-_08024A5E:\n\
-    adds r0, r5, 0\n\
-    bl StringCopy\n\
-    adds r5, r0, 0\n\
-    movs r6, 0xFC\n\
-    strb r6, [r5]\n\
-    movs r4, 0x14\n\
-    strb r4, [r5, 0x1]\n\
-    movs r0, 0x6\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    lsls r1, r7, 16\n\
-    asrs r1, 16\n\
-    adds r0, r5, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x2\n\
-    bl ConvertIntToDecimalStringN\n\
-    adds r5, r0, 0\n\
-    strb r6, [r5]\n\
-    strb r4, [r5, 0x1]\n\
-    movs r0, 0\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    movs r0, 0x1\n\
-    mov r1, r8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08024AA8\n\
-    movs r0, 0xFE\n\
-    strb r0, [r5]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5, 0x1]\n\
-    adds r5, 0x1\n\
-    b _08024AB8\n\
-    .align 2, 0\n\
-_08024AA4: .4byte BattleText_Plus\n\
-_08024AA8:\n\
-    strb r6, [r5]\n\
-    movs r0, 0x11\n\
-    strb r0, [r5, 0x1]\n\
-    movs r0, 0x8\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5]\n\
-_08024AB8:\n\
-    movs r2, 0x1\n\
-    add r8, r2\n\
-    mov r0, r8\n\
-    cmp r0, 0x5\n\
-    bgt _08024AC4\n\
-    b _0802495A\n\
-_08024AC4:\n\
-    ldr r4, _08024AE4 @ =gWindowTemplate_Contest_MoveDescription\n\
-    ldr r1, _08024AE8 @ =gStringVar4\n\
-    adds r2, 0xFF\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    adds r0, r4, 0\n\
-    movs r3, 0xC\n\
-    bl Text_InitWindow\n\
-    adds r0, r4, 0\n\
-    bl Text_PrintWindow8002F44\n\
-    ldr r1, _08024AEC @ =gSharedMem\n\
-    ldr r2, _08024AF0 @ =0x0001609c\n\
-    adds r1, r2\n\
-    b _08024BEA\n\
-    .align 2, 0\n\
-_08024AE4: .4byte gWindowTemplate_Contest_MoveDescription\n\
-_08024AE8: .4byte gStringVar4\n\
-_08024AEC: .4byte gSharedMem\n\
-_08024AF0: .4byte 0x0001609c\n\
-_08024AF4:\n\
-    ldr r0, _08024B94 @ =gMain\n\
-    ldrh r0, [r0, 0x2E]\n\
-    cmp r0, 0\n\
-    bne _08024AFE\n\
-    b _08024C38\n\
-_08024AFE:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    ldr r0, _08024B98 @ =gStringVar4\n\
-    ldr r1, _08024B9C @ =BattleText_Format2\n\
-    bl StringCopy\n\
-    adds r5, r0, 0\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    mov r9, r0\n\
-    movs r6, 0xFC\n\
-    movs r7, 0x14\n\
-    ldr r1, _08024BA0 @ =0x00016018\n\
-    add r10, r1\n\
-_08024B1C:\n\
-    ldr r1, _08024BA4 @ =gUnknown_0840165C\n\
-    mov r2, r8\n\
-    lsls r0, r2, 2\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    adds r0, r5, 0\n\
-    bl StringAppend\n\
-    adds r5, r0, 0\n\
-    mov r0, r10\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x64\n\
-    muls r0, r1\n\
-    ldr r1, _08024BA8 @ =gPlayerParty\n\
-    adds r0, r1\n\
-    ldr r1, _08024BAC @ =gLevelUpStatBoxStats\n\
-    add r1, r8\n\
-    ldrb r1, [r1]\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    strb r6, [r5]\n\
-    movs r0, 0x13\n\
-    strb r0, [r5, 0x1]\n\
-    movs r4, 0x1\n\
-    mov r2, r8\n\
-    ands r4, r2\n\
-    lsls r0, r4, 3\n\
-    adds r0, r4\n\
-    adds r0, 0x5\n\
-    lsls r0, 3\n\
-    adds r0, 0x6\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    strb r6, [r5]\n\
-    strb r7, [r5, 0x1]\n\
-    movs r0, 0x6\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    lsls r1, 16\n\
-    asrs r1, 16\n\
-    adds r0, r5, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    adds r5, r0, 0\n\
-    strb r6, [r5]\n\
-    strb r7, [r5, 0x1]\n\
-    mov r0, r9\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    cmp r4, 0\n\
-    beq _08024BB0\n\
-    movs r0, 0xFE\n\
-    strb r0, [r5]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5, 0x1]\n\
-    adds r5, 0x1\n\
-    b _08024BC0\n\
-    .align 2, 0\n\
-_08024B94: .4byte gMain\n\
-_08024B98: .4byte gStringVar4\n\
-_08024B9C: .4byte BattleText_Format2\n\
-_08024BA0: .4byte 0x00016018\n\
-_08024BA4: .4byte gUnknown_0840165C\n\
-_08024BA8: .4byte gPlayerParty\n\
-_08024BAC: .4byte gLevelUpStatBoxStats\n\
-_08024BB0:\n\
-    strb r6, [r5]\n\
-    movs r0, 0x11\n\
-    strb r0, [r5, 0x1]\n\
-    movs r0, 0x8\n\
-    strb r0, [r5, 0x2]\n\
-    adds r5, 0x3\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5]\n\
-_08024BC0:\n\
-    movs r1, 0x1\n\
-    add r8, r1\n\
-    mov r2, r8\n\
-    cmp r2, 0x5\n\
-    ble _08024B1C\n\
-    ldr r4, _08024BF4 @ =gWindowTemplate_Contest_MoveDescription\n\
-    ldr r1, _08024BF8 @ =gStringVar4\n\
-    movs r2, 0x80\n\
-    lsls r2, 1\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    adds r0, r4, 0\n\
-    movs r3, 0xC\n\
-    bl Text_InitWindow\n\
-    adds r0, r4, 0\n\
-    bl Text_PrintWindow8002F44\n\
-    ldr r1, _08024BFC @ =gSharedMem\n\
-    ldr r0, _08024C00 @ =0x0001609c\n\
-    adds r1, r0\n\
-_08024BEA:\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    b _08024C38\n\
-    .align 2, 0\n\
-_08024BF4: .4byte gWindowTemplate_Contest_MoveDescription\n\
-_08024BF8: .4byte gStringVar4\n\
-_08024BFC: .4byte gSharedMem\n\
-_08024C00: .4byte 0x0001609c\n\
-_08024C04:\n\
-    ldr r0, _08024C2C @ =gMain\n\
-    ldrh r0, [r0, 0x2E]\n\
-    cmp r0, 0\n\
-    beq _08024C38\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    movs r0, 0xB\n\
-    movs r1, 0\n\
-    movs r2, 0x1D\n\
-    movs r3, 0x7\n\
-    bl sub_802BBD4\n\
-    ldrb r0, [r4]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4]\n\
-    b _08024C38\n\
-    .align 2, 0\n\
-_08024C2C: .4byte gMain\n\
-_08024C30:\n\
-    ldr r1, _08024C48 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x1\n\
-    str r0, [r1]\n\
-_08024C38:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08024C48: .4byte gBattlescriptCurrInstr\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void atk6D_resetsentmonsvalue(void)
 {
