@@ -10904,201 +10904,50 @@ static void atk9D_mimicattackcopy(void)
     }
 }
 
+void atk9E_metronome(void)
+{
 #if DEBUG
-NAKED
-static void atk9E_metronome(void)
-{
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, r8\n\
-	push	{r7}\n\
-	ldr	r6, ._3076      @ gBattlerAttacker\n\
-	ldrb	r2, [r6]\n\
-	lsl	r1, r2, #0x1\n\
-	ldr	r0, ._3076 + 4  @ \n\
-	add	r3, r1, r0\n\
-	ldr	r5, ._3076 + 8  @ \n\
-	mov	r4, #0x58\n\
-	add	r0, r2, #0\n\
-	mul	r0, r0, r4\n\
-	add	r1, r0, r5\n\
-	ldrh	r0, [r1, #0xe]\n\
-	cmp	r0, #0\n\
-	bne	._3071	@cond_branch\n\
-	ldrh	r2, [r1, #0x10]\n\
-	cmp	r2, #0\n\
-	beq	._3071	@cond_branch\n\
-	ldrh	r0, [r1, #0x12]\n\
-	cmp	r0, #0\n\
-	beq	._3071	@cond_branch\n\
-	ldrh	r0, [r3]\n\
-	cmp	r0, #0\n\
-	bne	._3072	@cond_branch\n\
-	strh	r2, [r3]\n\
-._3072:\n\
-	ldr	r1, ._3076 + 12 @ \n\
-	ldrh	r0, [r3]\n\
-	strh	r0, [r1]\n\
-	ldrb	r0, [r6]\n\
-	mul	r0, r0, r4\n\
-	add	r0, r0, r5\n\
-	ldrh	r5, [r0, #0x10]\n\
-	ldrh	r2, [r0, #0x12]\n\
-	add	r7, r1, #0\n\
-	cmp	r5, r2\n\
-	bcs	._3073	@cond_branch\n\
-	ldrh	r0, [r3]\n\
-	cmp	r0, r2\n\
-	beq	._3074	@cond_branch\n\
-	add	r0, r0, #0x1\n\
-	b	._3079\n\
-._3077:\n\
-	.align	2, 0\n\
-._3076:\n\
-	.word	gBattlerAttacker\n\
-	.word	+0x20160b4\n\
-	.word	gBattleMons\n\
-	.word	gCurrentMove\n\
-._3073:\n\
-	ldrh	r4, [r3]\n\
-	add	r1, r4, #0\n\
-	mov	r0, #0xb1\n\
-	lsl	r0, r0, #0x1\n\
-	cmp	r1, r0\n\
-	bne	._3078	@cond_branch\n\
-	mov	r0, #0x1\n\
-	b	._3079\n\
-._3078:\n\
-	cmp	r1, r2\n\
-	bne	._3080	@cond_branch\n\
-._3074:\n\
-	strh	r5, [r3]\n\
-	b	._3081\n\
-._3080:\n\
-	add	r0, r4, #1\n\
-._3079:\n\
-	strh	r0, [r3]\n\
-._3081:\n\
-	ldr	r4, ._3083      @ gHitMarker\n\
-	ldr	r2, [r4]\n\
-	ldr	r0, ._3083 + 4  @ 0xfffffbff\n\
-	and	r2, r2, r0\n\
-	str	r2, [r4]\n\
-	ldr	r6, ._3083 + 8  @ gBattlescriptCurrInstr\n\
-	ldr	r5, ._3083 + 12 @ gBattleScriptsForMoveEffects\n\
-	ldr	r3, ._3083 + 16 @ gBattleMoves\n\
-	ldrh	r1, [r7]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r3\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r5\n\
-	ldr	r0, [r0]\n\
-	str	r0, [r6]\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x4\n\
-	orr	r2, r2, r0\n\
-	str	r2, [r4]\n\
-	ldrh	r0, [r7]\n\
-	b	._3082\n\
-._3084:\n\
-	.align	2, 0\n\
-._3083:\n\
-	.word	gHitMarker\n\
-	.word	0xfffffbff\n\
-	.word	gBattlescriptCurrInstr\n\
-	.word	gBattleScriptsForMoveEffects\n\
-	.word	gBattleMoves\n\
-._3071:\n\
-	ldr	r7, ._3090      @ gCurrentMove\n\
-	mov	r6, #0xb1\n\
-	lsl	r6, r6, #0x1\n\
-	ldr	r5, ._3090 + 4  @ sMovesForbiddenToCopy\n\
-	ldr	r0, ._3090 + 8  @ gBattlescriptCurrInstr\n\
-	mov	r8, r0\n\
-._3089:\n\
-	bl	Random\n\
-	ldr	r2, ._3090 + 12 @ 0x1ff\n\
-	add	r1, r2, #0\n\
-	and	r0, r0, r1\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r7]\n\
-	cmp	r0, r6\n\
-	bhi	._3089	@cond_branch\n\
-	mov	r0, #0x3\n\
-._3086:\n\
-	sub	r0, r0, #0x1\n\
-	cmp	r0, #0\n\
-	bge	._3086	@cond_branch\n\
-	ldr	r4, ._3090      @ gCurrentMove\n\
-	ldrh	r2, [r4]\n\
-	ldr	r3, ._3090 + 16 @ 0xffff\n\
-	sub	r0, r5, #2\n\
-._3088:\n\
-	add	r0, r0, #0x2\n\
-	ldrh	r1, [r0]\n\
-	cmp	r1, r2\n\
-	beq	._3087	@cond_branch\n\
-	cmp	r1, r3\n\
-	bne	._3088	@cond_branch\n\
-._3087:\n\
-	ldr	r0, ._3090 + 16 @ 0xffff\n\
-	cmp	r1, r0\n\
-	bne	._3089	@cond_branch\n\
-	ldr	r2, ._3090 + 20 @ gHitMarker\n\
-	ldr	r0, [r2]\n\
-	ldr	r1, ._3090 + 24 @ 0xfffffbff\n\
-	and	r0, r0, r1\n\
-	str	r0, [r2]\n\
-	ldr	r3, ._3090 + 28 @ gBattleScriptsForMoveEffects\n\
-	ldr	r2, ._3090 + 32 @ gBattleMoves\n\
-	ldrh	r1, [r4]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r2\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r3\n\
-	ldr	r0, [r0]\n\
-	mov	r1, r8\n\
-	str	r0, [r1]\n\
-	ldrh	r0, [r4]\n\
-._3082:\n\
-	mov	r1, #0x0\n\
-	bl	GetMoveTarget\n\
-	ldr	r1, ._3090 + 36 @ gBattlerTarget\n\
-	strb	r0, [r1]\n\
-	pop	{r3}\n\
-	mov	r8, r3\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._3091:\n\
-	.align	2, 0\n\
-._3090:\n\
-	.word	gCurrentMove\n\
-	.word	sMovesForbiddenToCopy\n\
-	.word	gBattlescriptCurrInstr\n\
-	.word	0x1ff\n\
-	.word	0xffff\n\
-	.word	gHitMarker\n\
-	.word	0xfffffbff\n\
-	.word	gBattleScriptsForMoveEffects\n\
-	.word	gBattleMoves\n\
-	.word	gBattlerTarget");
-}
-#else
-static void atk9E_metronome(void)
-{
+    u16 * r3 = (u16 *)&gSharedMem[BSTRUCT_OFF(lastTakenMove) + 8 + (2 * gBattlerAttacker)];
+    if (
+        gBattleMons[gBattlerAttacker].moves[1] == MOVE_NONE
+     && gBattleMons[gBattlerAttacker].moves[2] != MOVE_NONE
+     && gBattleMons[gBattlerAttacker].moves[3] != MOVE_NONE
+    )
+    {
+        if (*r3 == MOVE_NONE)
+            *r3 = gBattleMons[gBattlerAttacker].moves[2];
+        gCurrentMove = *r3;
+        if (gBattleMons[gBattlerAttacker].moves[2] < gBattleMons[gBattlerAttacker].moves[3])
+        {
+            if (*r3 == gBattleMons[gBattlerAttacker].moves[3])
+                *r3 = gBattleMons[gBattlerAttacker].moves[2];
+            else
+                (*r3)++;
+        }
+        else
+        {
+            asm("":::"r4"); // Force correct register use
+            if (*r3 == NUM_MOVES - 1)
+                *r3 = 1;
+            else if (*r3 == gBattleMons[gBattlerAttacker].moves[3])
+                *r3 = gBattleMons[gBattlerAttacker].moves[2];
+            else
+                (*r3)++;
+        }
+        gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+        asm("":::"r5"); // Force correct register use
+        gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+        gHitMarker |= HITMARKER_NO_PPDEDUCT;
+        gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
+        return;
+    }
+#endif //DEBUG
     while (1)
     {
         s32 i;
 
         gCurrentMove = (Random() & 0x1FF) + 1;
-        if (gCurrentMove >= 355)
+        if (gCurrentMove >= NUM_MOVES)
             continue;
         for (i = 0; i < MAX_MON_MOVES; ++i); // redundant
         i = -1;
@@ -11119,7 +10968,6 @@ static void atk9E_metronome(void)
         }
     }
 }
-#endif
 
 static void atk9F_dmgtolevel(void)
 {
