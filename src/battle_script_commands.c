@@ -4141,357 +4141,123 @@ static void atk47_setgraphicalstatchangevalues(void)
     gBattlescriptCurrInstr++;
 }
 
-#ifdef NONMATCHING
+// stat change flags for atk48_playstatchangeanimation
+#define STAT_CHANGE_NEGATIVE             (1 << 0)
+#define STAT_CHANGE_BY_TWO               (1 << 1)
+#define STAT_CHANGE_MULTIPLE_STATS       (1 << 2)
+#define STAT_CHANGE_CANT_PREVENT         (1 << 3)
+
+// battle_anim_status_effects.c
+#define STAT_ANIM_PLUS1  15
+#define STAT_ANIM_PLUS2  39
+#define STAT_ANIM_MINUS1 22
+#define STAT_ANIM_MINUS2 46
+#define STAT_ANIM_MULTIPLE_PLUS1 55
+#define STAT_ANIM_MULTIPLE_PLUS2 56
+#define STAT_ANIM_MULTIPLE_MINUS1 57
+#define STAT_ANIM_MULTIPLE_MINUS2 58
+
+#define MIN_STAT_STAGE 0
+#define MAX_STAT_STAGE 12
+
 static void atk48_playstatchangeanimation(void)
 {
-    int curr_stat = 0;
-    u16 stat_animID = 0;
-    int changeable_stats = 0;
-    u32 stats_to_check;
-    u8 arg3;
+    u32 currStat = 0;
+    u16 statAnimId = 0;
+    s32 changeableStatsCount = 0;
+    u8 statsToCheck = 0;
 
-    gActiveBattler = GetBattlerForBattleScript(T2_READ_8(gBattlescriptCurrInstr + 1));
-    stats_to_check = T2_READ_8(gBattlescriptCurrInstr + 2);
-    arg3 = T2_READ_8(gBattlescriptCurrInstr + 3);
-    if (arg3 & 1)
+    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    statsToCheck = gBattlescriptCurrInstr[2];
+
+    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_NEGATIVE) // goes down
     {
-        u16 r1 = 0x15;
-        if (arg3 & 0x2)
-            r1 = 0x2D;
-        while (stats_to_check != 0)
-        {
-            if (!(stats_to_check & 1))
-                continue;
-            if (!(T2_READ_8(gBattlescriptCurrInstr + 3)))
-            {
-                u8 ability;
-                if (gSideTimers[GetBattlerPosition(gActiveBattler) & 1].mistTimer)
-                    continue;
-                ability = gBattleMons[gActiveBattler].ability;
-                if (ability == ABILITY_CLEAR_BODY || ability == ABILITY_WHITE_SMOKE || (ability == ABILITY_KEEN_EYE && curr_stat == 6) || (ability == ABILITY_HYPER_CUTTER && curr_stat == 1))
-                    continue;
-            }
-            if (gBattleMons[gActiveBattler].statStages[curr_stat] > 0)
-            {
-                stat_animID = r1;
-                changeable_stats++;
-            }
-
-            stats_to_check >>= 1;
-            r1 += 1;
-            curr_stat++;
-        }
-        if (changeable_stats > 1 && T2_READ_8(gBattlescriptCurrInstr + 3) & 2)
-            stat_animID = 0x39;
+        s16 startingStatAnimId;
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
+            startingStatAnimId = STAT_ANIM_MINUS2 - 1;
         else
-            stat_animID = 0x3A;
+            startingStatAnimId = STAT_ANIM_MINUS1 - 1;
+
+        while (statsToCheck != 0)
+        {
+            if (statsToCheck & 1)
+            {
+                if (gBattlescriptCurrInstr[3] & STAT_CHANGE_CANT_PREVENT)
+                {
+                    if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
+                    {
+                        statAnimId = startingStatAnimId + currStat;
+                        changeableStatsCount++;
+                    }
+                }
+                else if (!gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].mistTimer
+                         && gBattleMons[gActiveBattler].ability != ABILITY_CLEAR_BODY
+                         && gBattleMons[gActiveBattler].ability != ABILITY_WHITE_SMOKE
+                         && !(gBattleMons[gActiveBattler].ability == ABILITY_KEEN_EYE && currStat == STAT_ACC)
+                         && !(gBattleMons[gActiveBattler].ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK))
+                {
+                    if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
+                    {
+                        statAnimId = startingStatAnimId + currStat;
+                        changeableStatsCount++;
+                    }
+                }
+            }
+            statsToCheck >>= 1, currStat++;
+        }
+
+        if (changeableStatsCount > 1) // more than one stat, so the color is gray
+        {
+            if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
+                statAnimId = STAT_ANIM_MULTIPLE_MINUS2;
+            else
+                statAnimId = STAT_ANIM_MULTIPLE_MINUS1;
+        }
     }
-    else
+    else // goes up
     {
-        u16 r1 = 0x15;
-        if (arg3 & 0x2)
-            r1 = 0x2D;
-        while (stats_to_check != 0)
-        {
-            if (!(stats_to_check & 1))
-                continue;
-            if (gBattleMons[gActiveBattler].statStages[curr_stat] < 0xB)
-            {
-                stat_animID = r1;
-                changeable_stats++;
-            }
-
-            stats_to_check >>= 1;
-            r1 += 1;
-            curr_stat++;
-        }
-        if (changeable_stats > 1 && T2_READ_8(gBattlescriptCurrInstr + 3) & 2)
-            stat_animID = 0x37;
+        s16 startingStatAnimId;
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
+            startingStatAnimId = STAT_ANIM_PLUS2 - 1;
         else
-            stat_animID = 0x38;
+            startingStatAnimId = STAT_ANIM_PLUS1 - 1;
+
+        while (statsToCheck != 0)
+        {
+            if (statsToCheck & 1 && gBattleMons[gActiveBattler].statStages[currStat] < MAX_STAT_STAGE)
+            {
+                statAnimId = startingStatAnimId + currStat;
+                changeableStatsCount++;
+            }
+            statsToCheck >>= 1, currStat++;
+        }
+
+        if (changeableStatsCount > 1) // more than one stat, so the color is gray
+        {
+            if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
+                statAnimId = STAT_ANIM_MULTIPLE_PLUS2;
+            else
+                statAnimId = STAT_ANIM_MULTIPLE_PLUS1;
+        }
     }
-    if ((T2_READ_8(gBattlescriptCurrInstr + 3) & 2 && changeable_stats <= 1)
-        || changeable_stats == 0 || gBattleStruct->unk160DC != 0)
+
+    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount < 2)
+    {
         gBattlescriptCurrInstr += 4;
-    else
+    }
+    else if (changeableStatsCount != 0 && !gBattleStruct->statAnimPlayed)
     {
-        BtlController_EmitBattleAnimation(0, 1, stat_animID);
+        BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if ((T2_READ_8(gBattlescriptCurrInstr + 3) & 4) && changeable_stats > 1)
-            gBattleStruct->unk160DC = 1;
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount > 1)
+            gBattleStruct->statAnimPlayed = TRUE;
+        gBattlescriptCurrInstr += 4;
+    }
+    else
+    {
         gBattlescriptCurrInstr += 4;
     }
 }
-
-#else
-NAKED
-static void atk48_playstatchangeanimation(void)
-{
-    asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    movs r7, 0\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    movs r3, 0\n\
-    ldr r5, _08021670 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r5]\n\
-    ldrb r0, [r0, 0x1]\n\
-    str r3, [sp]\n\
-    bl GetBattlerForBattleScript\n\
-    ldr r2, _08021674 @ =gActiveBattler\n\
-    strb r0, [r2]\n\
-    ldr r0, [r5]\n\
-    ldrb r4, [r0, 0x2]\n\
-    ldrb r1, [r0, 0x3]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    ldr r3, [sp]\n\
-    cmp r0, 0\n\
-    beq _08021710\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    movs r1, 0x15\n\
-    cmp r0, 0\n\
-    beq _0802163C\n\
-    movs r1, 0x2D\n\
-_0802163C:\n\
-    cmp r4, 0\n\
-    beq _080216E4\n\
-    movs r0, 0x1\n\
-    mov r10, r0\n\
-    ldr r0, _08021678 @ =gBattleMons+0x18 @ gBattleMons.statStages\n\
-    mov r9, r0\n\
-    lsls r5, r1, 16\n\
-_0802164A:\n\
-    adds r0, r4, 0\n\
-    mov r1, r10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080216D6\n\
-    ldr r0, _08021670 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r0]\n\
-    ldrb r1, [r0, 0x3]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0802167C\n\
-    ldr r0, _08021674 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r7, r0\n\
-    b _080216C4\n\
-    .align 2, 0\n\
-_08021670: .4byte gBattlescriptCurrInstr\n\
-_08021674: .4byte gActiveBattler\n\
-_08021678: .4byte gBattleMons+0x18 @ gBattleMons.statStages\n\
-_0802167C:\n\
-    ldr r6, _08021700 @ =gActiveBattler\n\
-    ldrb r0, [r6]\n\
-    str r3, [sp]\n\
-    bl GetBattlerPosition\n\
-    mov r1, r10\n\
-    ands r1, r0\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    ldr r1, _08021704 @ =gSideTimers\n\
-    adds r0, r1\n\
-    ldrb r0, [r0, 0x2]\n\
-    ldr r3, [sp]\n\
-    cmp r0, 0\n\
-    bne _080216D6\n\
-    ldr r0, _08021708 @ =gBattleMons\n\
-    ldrb r2, [r6]\n\
-    movs r1, 0x58\n\
-    muls r2, r1\n\
-    adds r0, r2, r0\n\
-    adds r0, 0x20\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1D\n\
-    beq _080216D6\n\
-    cmp r0, 0x49\n\
-    beq _080216D6\n\
-    cmp r0, 0x33\n\
-    bne _080216BA\n\
-    cmp r7, 0x6\n\
-    beq _080216D6\n\
-_080216BA:\n\
-    cmp r0, 0x34\n\
-    bne _080216C2\n\
-    cmp r7, 0x1\n\
-    beq _080216D6\n\
-_080216C2:\n\
-    adds r0, r7, r2\n\
-_080216C4:\n\
-    add r0, r9\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0\n\
-    ble _080216D6\n\
-    lsrs r0, r5, 16\n\
-    mov r8, r0\n\
-    adds r3, 0x1\n\
-_080216D6:\n\
-    lsrs r4, 1\n\
-    movs r1, 0x80\n\
-    lsls r1, 9\n\
-    adds r5, r1\n\
-    adds r7, 0x1\n\
-    cmp r4, 0\n\
-    bne _0802164A\n\
-_080216E4:\n\
-    ldr r0, _0802170C @ =gBattlescriptCurrInstr\n\
-    mov r9, r0\n\
-    cmp r3, 0x1\n\
-    ble _08021772\n\
-    ldr r0, [r0]\n\
-    ldrb r1, [r0, 0x3]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    movs r1, 0x39\n\
-    mov r8, r1\n\
-    cmp r0, 0\n\
-    beq _08021772\n\
-    movs r0, 0x3A\n\
-    b _08021770\n\
-    .align 2, 0\n\
-_08021700: .4byte gActiveBattler\n\
-_08021704: .4byte gSideTimers\n\
-_08021708: .4byte gBattleMons\n\
-_0802170C: .4byte gBattlescriptCurrInstr\n\
-_08021710:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    movs r1, 0xE\n\
-    cmp r0, 0\n\
-    beq _0802171C\n\
-    movs r1, 0x26\n\
-_0802171C:\n\
-    mov r9, r5\n\
-    cmp r4, 0\n\
-    beq _08021758\n\
-    ldr r6, _0802178C @ =gBattleMons+0x18 @ gBattleMons.statStages\n\
-    adds r5, r2, 0\n\
-    lsls r2, r1, 16\n\
-_08021728:\n\
-    movs r0, 0x1\n\
-    ands r0, r4\n\
-    cmp r0, 0\n\
-    beq _0802174A\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r7, r0\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0xB\n\
-    bgt _0802174A\n\
-    lsrs r1, r2, 16\n\
-    mov r8, r1\n\
-    adds r3, 0x1\n\
-_0802174A:\n\
-    lsrs r4, 1\n\
-    movs r0, 0x80\n\
-    lsls r0, 9\n\
-    adds r2, r0\n\
-    adds r7, 0x1\n\
-    cmp r4, 0\n\
-    bne _08021728\n\
-_08021758:\n\
-    cmp r3, 0x1\n\
-    ble _08021772\n\
-    mov r1, r9\n\
-    ldr r0, [r1]\n\
-    ldrb r1, [r0, 0x3]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    movs r1, 0x37\n\
-    mov r8, r1\n\
-    cmp r0, 0\n\
-    beq _08021772\n\
-    movs r0, 0x38\n\
-_08021770:\n\
-    mov r8, r0\n\
-_08021772:\n\
-    mov r1, r9\n\
-    ldr r2, [r1]\n\
-    ldrb r1, [r2, 0x3]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021790\n\
-    cmp r3, 0x1\n\
-    bgt _08021790\n\
-    adds r0, r2, 0x4\n\
-    mov r1, r9\n\
-    b _080217E6\n\
-    .align 2, 0\n\
-_0802178C: .4byte gBattleMons+0x18 @ gBattleMons.statStages\n\
-_08021790:\n\
-    cmp r3, 0\n\
-    beq _080217E0\n\
-    ldr r0, _080217D0 @ =gSharedMem\n\
-    ldr r1, _080217D4 @ =0x000160dc\n\
-    adds r4, r0, r1\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0\n\
-    bne _080217E0\n\
-    movs r0, 0\n\
-    movs r1, 0x1\n\
-    mov r2, r8\n\
-    str r3, [sp]\n\
-    bl BtlController_EmitBattleAnimation\n\
-    ldr r0, _080217D8 @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    bl MarkBattlerForControllerExec\n\
-    ldr r0, _080217DC @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r0]\n\
-    ldrb r1, [r0, 0x3]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    ldr r3, [sp]\n\
-    cmp r0, 0\n\
-    beq _080217CC\n\
-    cmp r3, 0x1\n\
-    ble _080217CC\n\
-    movs r0, 0x1\n\
-    strb r0, [r4]\n\
-_080217CC:\n\
-    ldr r1, _080217DC @ =gBattlescriptCurrInstr\n\
-    b _080217E2\n\
-    .align 2, 0\n\
-_080217D0: .4byte gSharedMem\n\
-_080217D4: .4byte 0x000160dc\n\
-_080217D8: .4byte gActiveBattler\n\
-_080217DC: .4byte gBattlescriptCurrInstr\n\
-_080217E0:\n\
-    mov r1, r9\n\
-_080217E2:\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x4\n\
-_080217E6:\n\
-    str r0, [r1]\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 #define BattleScript_FlushMessageBox gUnknown_081D9B2D
 

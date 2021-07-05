@@ -269,6 +269,8 @@ enum
     STAT_SPD,    // 3
     STAT_SPATK,  // 4
     STAT_SPDEF,  // 5
+    STAT_ACC,    // 6
+    STAT_EVA,    // 7
 };
 
 struct BaseStats

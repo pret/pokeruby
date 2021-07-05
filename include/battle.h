@@ -410,7 +410,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160D4*/ u16 AI_usedItemId[2];
     /*0x160D8*/ u8 AI_usedItemType[2];
     /*0x160DA*/ u8 AI_usedItemEffect[2];
-    /*0x160DC*/ u8 unk160DC;
+    /*0x160DC*/ u8 statAnimPlayed;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
     /*0x160DF*/ u8 unk160DF;
