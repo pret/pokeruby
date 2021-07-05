@@ -81,6 +81,7 @@
 // These persist remain outside of battle and after switching out
 #define STATUS1_NONE             0x0
 #define STATUS1_SLEEP            0x7
+#define STATUS1_SLEEP_TURN(num)  ((num) << 0)
 #define STATUS1_POISON           0x8
 #define STATUS1_BURN             0x10
 #define STATUS1_FREEZE           0x20
@@ -93,12 +94,16 @@
 // Volatile status ailments
 // These are removed after exiting the battle or switching out
 #define STATUS2_CONFUSION             0x00000007
+#define STATUS2_CONFUSION_TURN(num)   ((num) << 0)
 #define STATUS2_FLINCHED              0x00000008
 #define STATUS2_UPROAR                0x00000070
+#define STATUS2_UPROAR_TURN(num)      ((num) << 4)
 #define STATUS2_BIDE                  0x00000300  // two bits 0x100, 0x200
 #define STATUS2_LOCK_CONFUSE          0x00000C00
+#define STATUS2_LOCK_CONFUSE_TURN(num) ((num) << 10)
 #define STATUS2_MULTIPLETURNS         0x00001000
 #define STATUS2_WRAPPED               0x0000E000
+#define STATUS2_WRAPPED_TURN(num)     ((num) << 13)
 #define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
 #define STATUS2_FOCUS_ENERGY          0x00100000
@@ -205,6 +210,7 @@
 #define MOVE_EFFECT_BURN                0x3
 #define MOVE_EFFECT_FREEZE              0x4
 #define MOVE_EFFECT_PARALYSIS           0x5
+#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC // All above move effects apply primary status
 #define MOVE_EFFECT_TOXIC               0x6
 #define MOVE_EFFECT_CONFUSION           0x7
 #define MOVE_EFFECT_FLINCH              0x8
