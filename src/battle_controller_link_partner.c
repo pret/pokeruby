@@ -1623,7 +1623,7 @@ void LinkPartnerHandlecmd48(void)
     ewram17810[gActiveBattler].unk0_0 = 1;
     gUnknown_02024E68[gActiveBattler] = sub_8044804(
       gActiveBattler,
-      (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBattler][4],
+      (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
       gBattleBufferA[gActiveBattler][1],
       gBattleBufferA[gActiveBattler][2]);
     ewram17810[gActiveBattler].unk5 = 0;

@@ -1841,7 +1841,7 @@ void OpponentHandlecmd48(void)
     }
     gUnknown_02024E68[gActiveBattler] = sub_8044804(
       gActiveBattler,
-      (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBattler][4],
+      (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
       gBattleBufferA[gActiveBattler][1],
       gBattleBufferA[gActiveBattler][2]);
     ewram17810[gActiveBattler].unk5 = 0;

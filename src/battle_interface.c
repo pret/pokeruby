@@ -1075,9 +1075,8 @@ void sub_804454C(void)
     }
 }
 
-// This function almost matches except for just two instructions around 0x08044B52 that are swapped.
 #ifdef NONMATCHING
-u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
+u8 sub_8044804(u8 a, const struct HpAndStatus *b, u8 c, u8 d)
 {
     u8 r7;
     s16 x;
@@ -1131,7 +1130,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     sp14 = 0;
     for (i = 0; i < 6; i++)  //_080448A0
     {
-        if (b[i].unk0 != 0xFFFF)
+        if (b[i].hp != 0xFFFF)
             sp14++;
     }
 
@@ -1192,19 +1191,19 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI) // && b[i] != 0xFFFF && b[i]
             {
-                if (b[i].unk0 == 0xFFFF)
+                if (b[i].hp == 0xFFFF)
                 {
                     //_08044AE6
                     gSprites[sp[i]].oam.tileNum += 1;
                     gSprites[sp[i]].data[7] = 1;
                     // to _08044B52
                 }
-                else if (b[i].unk0 == 0)
+                else if (b[i].hp == 0)
                 {
                     gSprites[sp[i]].oam.tileNum += 3;
                     // to _08044B46
                 }
-                else if (b[i].unk4 != 0)
+                else if (b[i].status != 0)
                 {
                     gSprites[sp[i]].oam.tileNum += 2;
                 }
@@ -1219,13 +1218,13 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                     gSprites[sp[i]].data[7] = 1;
                     // to _08044B52
                 }
-                else if (b[i].unk0 == 0)
+                else if (b[i].hp == 0)
                 {
                     //_08044B14
                     gSprites[sp[i]].oam.tileNum += 3;
                     // to _08044B46
                 }
-                else if (b[i].unk4 != 0)
+                else if (b[i].status != 0)
                 {
                     gSprites[sp[i]].oam.tileNum += 2;
                 }
@@ -1240,16 +1239,16 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
-                if (b[i].unk0 == 0xFFFF)
+                if (b[i].hp == 0xFFFF)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 1;
                     gSprites[sp[5 - i]].data[7] = 1;
                 }
-                else if (b[i].unk0 == 0)
+                else if (b[i].hp == 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 3;
                 }
-                else if (b[i].unk4 != 0)
+                else if (b[i].status != 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 2;
                 }
@@ -1261,11 +1260,11 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                     gSprites[sp[5 - i]].oam.tileNum += 1;
                     gSprites[sp[5 - i]].data[7] = 1;
                 }
-                else if (b[i].unk0 == 0)
+                else if (b[i].hp == 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 3;
                 }
-                else if (b[i].unk4 != 0)
+                else if (b[i].status != 0)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 2;
                 }
@@ -1286,7 +1285,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
 }
 #else
 NAKED
-u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
+u8 sub_8044804(u8 a, const struct HpAndStatus *b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
