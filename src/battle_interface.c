@@ -930,336 +930,76 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8044338(u8 a, struct Pokemon *pkmn)
 {
-    u8 str[0x14];
-    u8 *r6;
-    s32 r8;
-    u8 nature; // = GetNature(pkmn);
-    s32 r7;
-    u8 i;
-    u8 r5;
+    u8 text[20];
+    s32 j, spriteTileNum;
+    u8 *barFontGfx;
+    u8 i, var, nature, healthBarSpriteId;
 
     // TODO: make this a local variable
-    memcpy(str, gUnknown_0820A864, sizeof(str));
-    r6 = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
-    r8 = 5;
+    memcpy(text, gUnknown_0820A864, sizeof(text));
+    barFontGfx = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
+    var = 5;
     nature = GetNature(pkmn);
-    StringCopy(str + 6, gNatureNames[nature]);
-    sub_80034D4(r6, str);
-    r7 = 6;
-    for (i = 0; i < (u32)r8; i++, r7++)  //_080443AA
-    {
-        u8 val;
+    StringCopy(text + 6, gNatureNames[nature]);
+    sub_80034D4(barFontGfx, text);
 
-        if ((u8)(str[r7] - 0x37) <= 0x13 || (u8)(str[r7] + 0x79) <= 0x13)
-            val = 0x2C;
+    for (j = 6, i = 0; i < var; i++, j++)  //_080443AA
+    {
+        u8 elementId;
+
+        if ((text[j] >= 0x37 && text[j] <= 0x4A) || (text[j] >= 0x87 && text[j] <= 0x9A))
+            elementId = 0x2C;
         //_080443DC
-        else if ((u8)(str[r7] - 0x4B) <= 4 || (u8)(str[r7] + 0x65) <= 4)
-            val = 0x2D;
+        else if ((text[j] >= 0x4B && text[j] <= 0x4F) || (text[j] >= 0x9B && text[j] <= 0x9F))
+            elementId = 0x2D;
         else
-            val = 0x2B;
+            elementId = 0x2B;
 
-        CpuCopy32(sub_8043CDC(val), r6 + i * 64, 32);
+        CpuCopy32(sub_8043CDC(elementId), barFontGfx + i * 64, 32);
     }
-    //r7 = 1;
+    //j = 1;
     //sp18 = a * 16;
-    for (r7 = 1; r7 < r8 + 1; r7++)
+    for (j = 1; j < var + 1; j++)
     {
-        int foo;
+        spriteTileNum = (gSprites[a].oam.tileNum + MACRO1(j)) * 32;
+        CpuCopy32(barFontGfx, (u8 *)(OBJ_VRAM0) + spriteTileNum, 32);
+        barFontGfx += 32;
 
-        foo = gSprites[a].oam.tileNum + MACRO1(r7);
-        CpuCopy32(r6, (u8 *)(VRAM + 0x10000) + foo * 32, 32);
-        r6 += 32;
-
-        foo = gSprites[a].oam.tileNum + 8 + MACRO1(r7);
-        CpuCopy32(r6, (u8 *)(VRAM + 0x10000) + foo * 32, 32);
-        r6 += 32;
+        spriteTileNum = (8 + gSprites[a].oam.tileNum + MACRO1(j)) * 32;
+        CpuCopy32(barFontGfx, (u8 *)(OBJ_VRAM0) + spriteTileNum, 32);
+        barFontGfx += 32;
     }
     //_08044486
-    r5 = gSprites[a].data[5];
-    ConvertIntToDecimalStringN(str + 6, gBattleStruct->safariCatchFactor, 1, 2);
-    ConvertIntToDecimalStringN(str + 9, gBattleStruct->safariFleeRate, 1, 2);
-    str[5] = 0;
-    str[8] = 0xBA;
-    sub_80034D4(eBattleInterfaceGfxBuffer, str);
+    healthBarSpriteId = gSprites[a].data[5];
+    ConvertIntToDecimalStringN(text + 6, gBattleStruct->safariCatchFactor, 1, 2);
+    ConvertIntToDecimalStringN(text + 9, gBattleStruct->safariFleeRate, 1, 2);
+    text[5] = CHAR_SPACE;
+    text[8] = CHAR_SLASH;
+    sub_80034D4(eBattleInterfaceGfxBuffer, text);
 
-    for (r7 = 0; r7 < 5; r7++)
+    j = healthBarSpriteId; // Needed to match for some reason
+    for (j = 0; j < 5; j++)
     {
-        if (r7 <= 1)
+        if (j <= 1)
         {
-            int foo = (gSprites[r5].oam.tileNum + 2 + r7);
-            CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], (u8 *)(VRAM + 0x10000) + foo * 32, 32);
+            CpuCopy32(
+                &eBattleInterfaceGfxBuffer[j * 64 + 32],
+                (u8 *)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * 32,
+                32
+            );
         }
         else
         {
-            int foo = (r7 + gSprites[r5].oam.tileNum);
-            CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], (u8 *)(VRAM + 0x100C0) + foo * 32, 32);
+            CpuCopy32(
+                &eBattleInterfaceGfxBuffer[j * 64 + 32],
+                (u8 *)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthBarSpriteId].oam.tileNum) * 32,
+                32
+            );
         }
     }
 }
-#else
-NAKED
-void sub_8044338(u8 a, struct Pokemon *pkmn)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x20\n\
-    adds r4, r1, 0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x14]\n\
-    ldr r1, _080443CC @ =gUnknown_0820A864\n\
-    mov r0, sp\n\
-    movs r2, 0x14\n\
-    bl memcpy\n\
-    ldr r1, _080443D0 @ =gSprites\n\
-    ldr r2, [sp, 0x14]\n\
-    lsls r0, r2, 4\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrh r0, [r0, 0x3A]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl GetBattlerPosition\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    lsls r1, 7\n\
-    ldr r3, _080443D4 @ =gSharedMem + 0x520\n\
-    adds r6, r1, r3\n\
-    movs r0, 0x5\n\
-    mov r8, r0\n\
-    adds r0, r4, 0\n\
-    bl GetNature\n\
-    lsls r0, 24\n\
-    mov r4, sp\n\
-    adds r4, 0x6\n\
-    ldr r1, _080443D8 @ =gNatureNames\n\
-    lsrs r0, 22\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    adds r0, r4, 0\n\
-    bl StringCopy\n\
-    adds r0, r6, 0\n\
-    mov r1, sp\n\
-    bl sub_80034D4\n\
-    movs r7, 0x6\n\
-    movs r5, 0\n\
-    mov r1, sp\n\
-    adds r1, 0x9\n\
-    str r1, [sp, 0x1C]\n\
-_080443AA:\n\
-    mov r2, sp\n\
-    adds r0, r2, r7\n\
-    ldrb r1, [r0]\n\
-    adds r0, r1, 0\n\
-    subs r0, 0x37\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x13\n\
-    bls _080443C8\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x79\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x13\n\
-    bhi _080443DC\n\
-_080443C8:\n\
-    movs r0, 0x2C\n\
-    b _080443FA\n\
-    .align 2, 0\n\
-_080443CC: .4byte gUnknown_0820A864\n\
-_080443D0: .4byte gSprites\n\
-_080443D4: .4byte gSharedMem + 0x520\n\
-_080443D8: .4byte gNatureNames\n\
-_080443DC:\n\
-    adds r0, r1, 0\n\
-    subs r0, 0x4B\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x4\n\
-    bls _080443F4\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x65\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x4\n\
-    bhi _080443F8\n\
-_080443F4:\n\
-    movs r0, 0x2D\n\
-    b _080443FA\n\
-_080443F8:\n\
-    movs r0, 0x2B\n\
-_080443FA:\n\
-    bl sub_8043CDC\n\
-    lsls r1, r5, 6\n\
-    adds r1, r6, r1\n\
-    ldr r2, _080444F8 @ =REG_BG0CNT\n\
-    bl CpuSet\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    adds r7, 0x1\n\
-    cmp r5, r8\n\
-    bcc _080443AA\n\
-    movs r7, 0x1\n\
-    ldr r3, [sp, 0x14]\n\
-    lsls r3, 4\n\
-    str r3, [sp, 0x18]\n\
-    movs r0, 0x1\n\
-    add r0, r8\n\
-    mov r9, r0\n\
-    cmp r7, r9\n\
-    bge _08044486\n\
-    ldr r1, _080444FC @ =gSprites\n\
-    ldr r2, _080444F8 @ =REG_BG0CNT\n\
-    mov r10, r2\n\
-    ldr r2, [sp, 0x14]\n\
-    adds r0, r3, r2\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    mov r8, r0\n\
-_08044436:\n\
-    mov r3, r8\n\
-    ldrh r0, [r3, 0x4]\n\
-    lsls r0, 22\n\
-    lsrs r0, 22\n\
-    adds r5, r7, 0\n\
-    cmp r7, 0\n\
-    bge _08044446\n\
-    adds r5, r7, 0x7\n\
-_08044446:\n\
-    asrs r5, 3\n\
-    lsls r4, r5, 3\n\
-    subs r4, r7, r4\n\
-    adds r0, r4\n\
-    lsls r5, 6\n\
-    adds r0, r5\n\
-    lsls r0, 5\n\
-    ldr r2, _08044500 @ =(VRAM + 0x10000)\n\
-    adds r1, r0, r2\n\
-    adds r0, r6, 0\n\
-    mov r2, r10\n\
-    bl CpuSet\n\
-    adds r6, 0x20\n\
-    mov r3, r8\n\
-    ldrh r0, [r3, 0x4]\n\
-    lsls r0, 22\n\
-    lsrs r0, 22\n\
-    adds r4, 0x8\n\
-    adds r0, r4\n\
-    adds r0, r5\n\
-    lsls r0, 5\n\
-    ldr r2, _08044500 @ =(VRAM + 0x10000)\n\
-    adds r1, r0, r2\n\
-    adds r0, r6, 0\n\
-    mov r2, r10\n\
-    bl CpuSet\n\
-    adds r6, 0x20\n\
-    adds r7, 0x1\n\
-    cmp r7, r9\n\
-    blt _08044436\n\
-_08044486:\n\
-    ldr r6, _080444FC @ =gSprites\n\
-    ldr r3, [sp, 0x18]\n\
-    ldr r1, [sp, 0x14]\n\
-    adds r0, r3, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldrh r5, [r0, 0x38]\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    ldr r4, _08044504 @ =gSharedMem\n\
-    ldr r2, _08044508 @ =0x00016089\n\
-    adds r0, r4, r2\n\
-    ldrb r1, [r0]\n\
-    mov r0, sp\n\
-    adds r0, 0x6\n\
-    movs r2, 0x1\n\
-    movs r3, 0x2\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r3, _0804450C @ =0x00016088\n\
-    adds r4, r3\n\
-    ldrb r1, [r4]\n\
-    ldr r0, [sp, 0x1C]\n\
-    movs r2, 0x1\n\
-    movs r3, 0x2\n\
-    bl ConvertIntToDecimalStringN\n\
-    mov r1, sp\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x5]\n\
-    movs r0, 0xBA\n\
-    strb r0, [r1, 0x8]\n\
-    movs r0, 0x80\n\
-    lsls r0, 18\n\
-    bl sub_80034D4\n\
-    movs r7, 0\n\
-    lsls r0, r5, 4\n\
-    adds r0, r5\n\
-    lsls r0, 2\n\
-    adds r5, r0, r6\n\
-    ldr r4, _08044510 @ =gSharedMem + 0x20\n\
-_080444DA:\n\
-    cmp r7, 0x1\n\
-    bgt _08044514\n\
-    ldrh r1, [r5, 0x4]\n\
-    lsls r1, 22\n\
-    lsrs r1, 22\n\
-    adds r0, r7, 0x2\n\
-    adds r1, r0\n\
-    lsls r1, 5\n\
-    ldr r0, _08044500 @ =(VRAM + 0x10000)\n\
-    adds r1, r0\n\
-    adds r0, r4, 0\n\
-    ldr r2, _080444F8 @ =REG_BG0CNT\n\
-    bl CpuSet\n\
-    b _0804452A\n\
-    .align 2, 0\n\
-_080444F8: .4byte 0x04000008\n\
-_080444FC: .4byte gSprites\n\
-_08044500: .4byte 0x06010000\n\
-_08044504: .4byte gSharedMem\n\
-_08044508: .4byte 0x00016089\n\
-_0804450C: .4byte 0x00016088\n\
-_08044510: .4byte gSharedMem + 0x20\n\
-_08044514:\n\
-    ldrh r1, [r5, 0x4]\n\
-    lsls r1, 22\n\
-    lsrs r1, 22\n\
-    adds r1, r7, r1\n\
-    lsls r1, 5\n\
-    ldr r2, _08044544 @ =0x060100c0\n\
-    adds r1, r2\n\
-    adds r0, r4, 0\n\
-    ldr r2, _08044548 @ =REG_BG0CNT\n\
-    bl CpuSet\n\
-_0804452A:\n\
-    adds r4, 0x40\n\
-    adds r7, 0x1\n\
-    cmp r7, 0x4\n\
-    ble _080444DA\n\
-    add sp, 0x20\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08044544: .4byte 0x060100c0\n\
-_08044548: .4byte 0x04000008\n\
-    .syntax divided\n");
-}
-#endif
 
 extern u8 gUnknown_020297ED;
 
