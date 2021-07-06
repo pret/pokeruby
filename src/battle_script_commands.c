@@ -8093,311 +8093,70 @@ static void atkA5_painsplitdmgcalc(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-#ifdef NONMATCHING
 static void atkA6_settypetorandomresistance(void)
 {
-    if (gLastLandedMoves[gBattlerAttacker] == 0 || gLastLandedMoves[gBattlerAttacker] == 0xFFFF || (IsTwoTurnsMove(gLastLandedMoves[gBattlerAttacker]) && !gProtectStructs[gBattlerAttacker].physicalDmg && !gProtectStructs[gBattlerAttacker].specialDmg))
+    if (gLastLandedMoves[gBattlerAttacker] == 0
+        || gLastLandedMoves[gBattlerAttacker] == 0xFFFF)
+    {
+        // The attacker has not yet been hit with a move
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else if (IsTwoTurnsMove(gLastLandedMoves[gBattlerAttacker])
+             && !(gProtectStructs[gBattlerAttacker].physicalDmg != 0 || gProtectStructs[gBattlerAttacker].specialDmg != 0))
+    {
+        // The attacker is about to be hit with the effects of a two-turn move
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
     else
     {
-        int type = 0, rands = 0;
-        do
+        s32 i, j, rands;
+
+        // Try up to 1000 times
+        for (rands = 0; rands < 1000; rands++)
         {
-            while (((type = (Random() & 0x7F)) > 0x70));
-            type *= 3;
-            if (gTypeEffectiveness[type] == gLastHitByType[gBattlerAttacker] && gTypeEffectiveness[type + 2] <= 5 && gBattleMons[gBattlerAttacker].type1 != gTypeEffectiveness[type + 1] && gBattleMons[gBattlerAttacker].type2 != gTypeEffectiveness[type + 1])
+            while (((i = (Random() & 0x7F)) > 0x150u / 3));
+
+            i *= 3;
+
+            if (TYPE_EFFECT_ATK_TYPE(i) == gLastHitByType[gBattlerAttacker]
+                && TYPE_EFFECT_MULTIPLIER(i) <= TYPE_MUL_NOT_EFFECTIVE
+                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i)))
             {
-                gBattleMons[gBattlerAttacker].type1 = type;
-                gBattleMons[gBattlerAttacker].type2 = type;
-                gBattleTextBuff1[0] = 0xFD;
-                gBattleTextBuff1[1] = 3;
-                gBattleTextBuff1[2] = type;
-                gBattleTextBuff1[3] = 0xFF;
+                // Success
+                SET_BATTLER_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i));
+                PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_EFFECT_DEF_TYPE(i));
+
                 gBattlescriptCurrInstr += 5;
                 return;
             }
-            rands++;
-        } while (rands <= 999);
+        }
 
-        type = 0, rands = 0;
-        do
+        // Random selection failed, so go through linearly
+        for (j = 0, rands = 0; rands < 0x150u; j += 3, rands += 3)
         {
-            if (gTypeEffectiveness[type] == 0xFE || gTypeEffectiveness[type] != 0xFF)
+            switch (TYPE_EFFECT_ATK_TYPE(j))
             {
-                if (gTypeEffectiveness[type] == gLastHitByType[gBattlerAttacker] && gTypeEffectiveness[type + 2] <= 5 && gBattleMons[gBattlerAttacker].type1 != gTypeEffectiveness[type + 1] && gBattleMons[gBattlerAttacker].type2 != gTypeEffectiveness[type + 1])
+            case TYPE_ENDTABLE:
+            case TYPE_FORESIGHT:
+                break;
+            default:
+                if (TYPE_EFFECT_ATK_TYPE(j) == gLastHitByType[gBattlerAttacker]
+                    && TYPE_EFFECT_MULTIPLIER(j) <= TYPE_MUL_NOT_EFFECTIVE
+                    && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i)))
                 {
-                    gBattleMons[gBattlerAttacker].type1 = gTypeEffectiveness[rands + 1];
-                    gBattleMons[gBattlerAttacker].type2 = gTypeEffectiveness[rands + 1];
-                    gBattleTextBuff1[0] = 0xFD;
-                    gBattleTextBuff1[1] = 3;
-                    gBattleTextBuff1[2] = gTypeEffectiveness[rands + 1];
-                    gBattleTextBuff1[3] = 0xFF;
+                    SET_BATTLER_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(rands));
+                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_EFFECT_DEF_TYPE(rands))
+
                     gBattlescriptCurrInstr += 5;
                     return;
                 }
+                break;
             }
-            type += 3, rands += 3;
-        } while (rands < 336);
+        }
 
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
 }
-
-#else
-NAKED
-static void atkA6_settypetorandomresistance(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r1, _08027FA8 @ =gLastLandedMoves\n\
-    ldr r4, _08027FAC @ =gBattlerAttacker\n\
-    ldrb r0, [r4]\n\
-    lsls r0, 1\n\
-    adds r2, r0, r1\n\
-    ldrh r1, [r2]\n\
-    cmp r1, 0\n\
-    beq _08027F8C\n\
-    ldr r0, _08027FB0 @ =0x0000ffff\n\
-    cmp r1, r0\n\
-    beq _08027F8C\n\
-    ldrh r0, [r2]\n\
-    bl IsTwoTurnsMove\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08028024\n\
-    ldr r2, _08027FB4 @ =gProtectStructs\n\
-    ldrb r0, [r4]\n\
-    lsls r1, r0, 4\n\
-    adds r0, r2, 0x4\n\
-    adds r0, r1, r0\n\
-    ldr r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08028024\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x8\n\
-    adds r0, r1, r0\n\
-    ldr r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08028024\n\
-_08027F8C:\n\
-    ldr r3, _08027FB8 @ =gBattlescriptCurrInstr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    str r1, [r3]\n\
-    b _08028110\n\
-    .align 2, 0\n\
-_08027FA8: .4byte gLastLandedMoves\n\
-_08027FAC: .4byte gBattlerAttacker\n\
-_08027FB0: .4byte 0x0000ffff\n\
-_08027FB4: .4byte gProtectStructs\n\
-_08027FB8: .4byte gBattlescriptCurrInstr\n\
-_08027FBC:\n\
-    mov r0, r12\n\
-    strb r5, [r0]\n\
-    mov r1, r10\n\
-    ldrb r0, [r1]\n\
-    muls r0, r2\n\
-    adds r0, r7\n\
-    adds r0, 0x22\n\
-    strb r5, [r0]\n\
-    ldr r1, _08027FE0 @ =gBattleTextBuff1\n\
-    movs r0, 0xFD\n\
-    strb r0, [r1]\n\
-    movs r0, 0x3\n\
-    strb r0, [r1, 0x1]\n\
-    strb r5, [r1, 0x2]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r1, 0x3]\n\
-    ldr r1, _08027FE4 @ =gBattlescriptCurrInstr\n\
-    b _08028012\n\
-    .align 2, 0\n\
-_08027FE0: .4byte gBattleTextBuff1\n\
-_08027FE4: .4byte gBattlescriptCurrInstr\n\
-_08027FE8:\n\
-    mov r0, r8\n\
-    adds r0, 0x1\n\
-    adds r0, r3\n\
-    ldrb r2, [r0]\n\
-    strb r2, [r4]\n\
-    mov r4, r10\n\
-    ldrb r0, [r4]\n\
-    muls r0, r6\n\
-    ldr r7, _0802801C @ =gBattleMons\n\
-    adds r0, r7\n\
-    adds r0, 0x22\n\
-    strb r2, [r0]\n\
-    ldr r1, _08028020 @ =gBattleTextBuff1\n\
-    movs r0, 0xFD\n\
-    strb r0, [r1]\n\
-    movs r0, 0x3\n\
-    strb r0, [r1, 0x1]\n\
-    strb r2, [r1, 0x2]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r1, 0x3]\n\
-    mov r1, r12\n\
-_08028012:\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x5\n\
-    str r0, [r1]\n\
-    b _08028110\n\
-    .align 2, 0\n\
-_0802801C: .4byte gBattleMons\n\
-_08028020: .4byte gBattleTextBuff1\n\
-_08028024:\n\
-    movs r4, 0\n\
-    mov r8, r4\n\
-    movs r7, 0x7F\n\
-    mov r9, r7\n\
-_0802802C:\n\
-    bl Random\n\
-    mov r4, r9\n\
-    ands r4, r0\n\
-    cmp r4, 0x70\n\
-    bhi _0802802C\n\
-    lsls r0, r4, 1\n\
-    adds r4, r0, r4\n\
-    ldr r6, _08028120 @ =gTypeEffectiveness\n\
-    adds r3, r4, r6\n\
-    ldr r1, _08028124 @ =gLastHitByType\n\
-    ldr r2, _08028128 @ =gBattlerAttacker\n\
-    ldrb r5, [r2]\n\
-    lsls r0, r5, 1\n\
-    adds r0, r1\n\
-    ldrb r1, [r3]\n\
-    mov r10, r2\n\
-    ldrh r0, [r0]\n\
-    cmp r1, r0\n\
-    bne _08028088\n\
-    adds r0, r4, 0x2\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x5\n\
-    bhi _08028088\n\
-    ldr r7, _0802812C @ =gBattleMons\n\
-    movs r2, 0x58\n\
-    adds r0, r5, 0\n\
-    muls r0, r2\n\
-    adds r3, r0, r7\n\
-    movs r0, 0x21\n\
-    adds r0, r3\n\
-    mov r12, r0\n\
-    adds r0, r4, 0x1\n\
-    adds r0, r6\n\
-    ldrb r5, [r0]\n\
-    mov r1, r12\n\
-    ldrb r0, [r1]\n\
-    adds r1, r5, 0\n\
-    cmp r0, r1\n\
-    beq _08028088\n\
-    adds r0, r3, 0\n\
-    adds r0, 0x22\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r1\n\
-    bne _08027FBC\n\
-_08028088:\n\
-    movs r7, 0x1\n\
-    add r8, r7\n\
-    ldr r0, _08028130 @ =0x000003e7\n\
-    cmp r8, r0\n\
-    ble _0802802C\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    ldr r1, _08028134 @ =gBattlescriptCurrInstr\n\
-    mov r12, r1\n\
-    ldr r3, _08028120 @ =gTypeEffectiveness\n\
-    adds r0, r4, 0x1\n\
-    adds r0, r3\n\
-    mov r9, r0\n\
-    adds r5, r3, 0\n\
-_080280A4:\n\
-    ldrb r1, [r5]\n\
-    cmp r1, 0xFF\n\
-    bgt _080280AE\n\
-    cmp r1, 0xFE\n\
-    bge _080280E8\n\
-_080280AE:\n\
-    mov r4, r10\n\
-    ldrb r2, [r4]\n\
-    lsls r0, r2, 1\n\
-    ldr r7, _08028124 @ =gLastHitByType\n\
-    adds r0, r7\n\
-    ldrh r0, [r0]\n\
-    cmp r1, r0\n\
-    bne _080280E8\n\
-    ldrb r0, [r5, 0x2]\n\
-    cmp r0, 0x5\n\
-    bhi _080280E8\n\
-    movs r6, 0x58\n\
-    adds r0, r2, 0\n\
-    muls r0, r6\n\
-    ldr r1, _0802812C @ =gBattleMons\n\
-    adds r2, r0, r1\n\
-    adds r4, r2, 0\n\
-    adds r4, 0x21\n\
-    ldrb r0, [r4]\n\
-    mov r7, r9\n\
-    ldrb r1, [r7]\n\
-    cmp r0, r1\n\
-    beq _080280E8\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x22\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r1\n\
-    beq _080280E8\n\
-    b _08027FE8\n\
-_080280E8:\n\
-    adds r5, 0x3\n\
-    movs r0, 0x3\n\
-    add r8, r0\n\
-    ldr r0, _08028138 @ =0x0000014f\n\
-    cmp r8, r0\n\
-    bls _080280A4\n\
-    mov r1, r12\n\
-    ldr r2, [r1]\n\
-    ldrb r1, [r2, 0x1]\n\
-    ldrb r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    mov r4, r12\n\
-    str r1, [r4]\n\
-_08028110:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08028120: .4byte gTypeEffectiveness\n\
-_08028124: .4byte gLastHitByType\n\
-_08028128: .4byte gBattlerAttacker\n\
-_0802812C: .4byte gBattleMons\n\
-_08028130: .4byte 0x000003e7\n\
-_08028134: .4byte gBattlescriptCurrInstr\n\
-_08028138: .4byte 0x0000014f\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
 
 static void atkA7_setalwayshitflag(void)
 {
