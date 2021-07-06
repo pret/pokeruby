@@ -833,7 +833,6 @@ void sub_8043F44(u8 a)
         CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], r7[i] + gSprites[a].oam.tileNum * TILE_SIZE_4BPP, TILE_SIZE_4BPP);
 }
 
-#ifdef NONMATCHING
 void sub_80440EC(u8 a, s16 b, u8 c)
 {
     u8 str[0x14];
@@ -841,6 +840,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     s32 foo;
     u8 *const *r4;
     s32 i;
+    u8 r8;
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
@@ -850,186 +850,44 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     {
         //_08044136
         sub_8044210(a, b, c);
-        return;
-    }
-    //
-    ptr = str + 6;
-    if (c == 0)
-    {
-        if (GetBattlerSide(gSprites[a].data[6]) == 0)
-            r4 = gUnknown_0820A83C;
-        else
-            r4 = gUnknown_0820A848;
-        c = 3;
-        ptr = sub_8003504(ptr, b, 0x13, 1);
-        *(ptr++) = 0xBA;
-        *(ptr++) = 0xFF;
-        sub_80034D4(eBattleInterfaceGfxBuffer, str);
     }
     else
     {
-        if (GetBattlerSide(gSprites[a].data[6]) == 0)
-            r4 = gUnknown_0820A854;
+        //
+        ptr = str + 6;
+        if (c == 0)
+        {
+            if (GetBattlerSide(gSprites[a].data[6]) == 0)
+                r4 = gUnknown_0820A83C;
+            else
+                r4 = gUnknown_0820A848;
+            r8 = 3;
+            ptr = sub_8003504(ptr, b, 19, 1);
+            *(ptr++) = CHAR_SLASH;
+            *(ptr++) = EOS;
+        }
         else
-            r4 = gUnknown_0820A85C;
-        c = 2;
-        sub_8003504(ptr, b, 0xF, 1);
+        {
+            if (GetBattlerSide(gSprites[a].data[6]) == 0)
+                r4 = gUnknown_0820A854;
+            else
+                r4 = gUnknown_0820A85C;
+            r8 = 2;
+            ptr = sub_8003504(ptr, b, 15, 1);
+        }
         sub_80034D4(eBattleInterfaceGfxBuffer, str);
-    }
-    //asm(""::"r"(a));
-    //_080441B6
-    for (i = 0; i < c; i++)  // _080440BC
-    {
-        void *temp = r4[i] + gSprites[a].oam.tileNum * 32;
-        CpuCopy32(&eBattleInterfaceGfxBuffer[i * 64 + 32], temp, 0x20);
+        //asm(""::"r"(a));
+        //_080441B6
+        for (i = 0; i < r8; i++)  // _080440BC
+        {
+            CpuCopy32(
+                &eBattleInterfaceGfxBuffer[i * 64 + 32],
+                r4[i] + gSprites[a].oam.tileNum * 32,
+                0x20
+            );
+        }
     }
 }
-#else
-NAKED
-void sub_80440EC(u8 a, s16 b, u8 c)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x14\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    lsls r1, 16\n\
-    lsrs r6, r1, 16\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    mov r8, r2\n\
-    ldr r1, _08044144 @ =gUnknown_0820A864\n\
-    mov r0, sp\n\
-    movs r2, 0x14\n\
-    bl memcpy\n\
-    ldr r1, _08044148 @ =gSprites\n\
-    lsls r0, r7, 4\n\
-    adds r0, r7\n\
-    lsls r0, 2\n\
-    adds r4, r0, r1\n\
-    movs r0, 0x3A\n\
-    ldrsh r5, [r4, r0]\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _08044136\n\
-    lsls r0, r5, 24\n\
-    lsrs r0, 24\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0804414C\n\
-_08044136:\n\
-    lsls r1, r6, 16\n\
-    asrs r1, 16\n\
-    adds r0, r7, 0\n\
-    mov r2, r8\n\
-    bl sub_8044210\n\
-    b _080441F0\n\
-    .align 2, 0\n\
-_08044144: .4byte gUnknown_0820A864\n\
-_08044148: .4byte gSprites\n\
-_0804414C:\n\
-    mov r5, sp\n\
-    adds r5, 0x6\n\
-    mov r0, r8\n\
-    cmp r0, 0\n\
-    bne _08044190\n\
-    ldrh r0, [r4, 0x3A]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    ldr r4, _08044188 @ =gUnknown_0820A848\n\
-    cmp r0, 0\n\
-    bne _0804416A\n\
-    ldr r4, _0804418C @ =gUnknown_0820A83C\n\
-_0804416A:\n\
-    movs r0, 0x3\n\
-    mov r8, r0\n\
-    lsls r1, r6, 16\n\
-    asrs r1, 16\n\
-    adds r0, r5, 0\n\
-    movs r2, 0x13\n\
-    movs r3, 0x1\n\
-    bl sub_8003504\n\
-    adds r5, r0, 0\n\
-    movs r0, 0xBA\n\
-    strb r0, [r5]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5, 0x1]\n\
-    b _080441B6\n\
-    .align 2, 0\n\
-_08044188: .4byte gUnknown_0820A848\n\
-_0804418C: .4byte gUnknown_0820A83C\n\
-_08044190:\n\
-    ldrh r0, [r4, 0x3A]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    ldr r4, _080441FC @ =gUnknown_0820A85C\n\
-    cmp r0, 0\n\
-    bne _080441A4\n\
-    ldr r4, _08044200 @ =gUnknown_0820A854\n\
-_080441A4:\n\
-    movs r0, 0x2\n\
-    mov r8, r0\n\
-    lsls r1, r6, 16\n\
-    asrs r1, 16\n\
-    adds r0, r5, 0\n\
-    movs r2, 0xF\n\
-    movs r3, 0x1\n\
-    bl sub_8003504\n\
-_080441B6:\n\
-    movs r0, 0x80\n\
-    lsls r0, 18\n\
-    mov r1, sp\n\
-    bl sub_80034D4\n\
-    mov r0, r8\n\
-    cmp r0, 0\n\
-    beq _080441F0\n\
-    ldr r1, _08044204 @ =gSprites\n\
-    lsls r0, r7, 4\n\
-    adds r0, r7\n\
-    lsls r0, 2\n\
-    adds r6, r0, r1\n\
-    adds r7, r4, 0\n\
-    ldr r5, _08044208 @ =gSharedMem + 0x20\n\
-    mov r4, r8\n\
-_080441D6:\n\
-    ldrh r0, [r6, 0x4]\n\
-    lsls r0, 22\n\
-    lsrs r0, 17\n\
-    ldm r7!, {r1}\n\
-    adds r1, r0\n\
-    adds r0, r5, 0\n\
-    ldr r2, _0804420C @ =REG_BG0CNT\n\
-    bl CpuSet\n\
-    adds r5, 0x40\n\
-    subs r4, 0x1\n\
-    cmp r4, 0\n\
-    bne _080441D6\n\
-_080441F0:\n\
-    add sp, 0x14\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080441FC: .4byte gUnknown_0820A85C\n\
-_08044200: .4byte gUnknown_0820A854\n\
-_08044204: .4byte gSprites\n\
-_08044208: .4byte gSharedMem + 0x20\n\
-_0804420C: .4byte 0x04000008\n\
-    .syntax divided\n");
-}
-#endif
 
 /*static*/ void sub_8044210(u8 a, s16 b, u8 c)
 {
