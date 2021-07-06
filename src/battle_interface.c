@@ -17,13 +17,13 @@
 #include "graphics.h"
 #include "pokemon_summary_screen.h"
 
-struct UnknownStruct5
+struct BattleBar
 {
-    u8 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    int unk10;
+    u8 healthboxSpriteId;
+    u32 maxValue;
+    u32 oldValue;
+    u32 receivedValue;
+    int currValue;
 };
 
 static void sub_8043CEC(struct Sprite *sprite);
@@ -448,7 +448,7 @@ static u8 sub_80457E8(u8, u8);
 static int sub_8045F58(s32, s32, int, int *, u8, u16);
 static u8 GetScaledExpFraction(int, int, int, u8);
 static void sub_8045D58(u8, u8);
-static u8 sub_804602C(int, int, int, int *, u8 *, u8);
+static u8 CalcBarFilledPixels(int a, int b, int c, int *d, u8 *e, u8 f);
 static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c);
 
 static int do_nothing(s16 unused1, s16 unused2, int unused3)
@@ -671,11 +671,11 @@ static void sub_8043D5C(struct Sprite *sprite)
 
 void sub_8043D84(u8 a, u8 b, u32 c, u32 d, u32 e)
 {
-    ewram17850[a].unk0 = b;
-    ewram17850[a].unk4 = c;
-    ewram17850[a].unk8 = d;
-    ewram17850[a].unkC = e;
-    ewram17850[a].unk10 = -0x8000;
+    eBattleBars[a].healthboxSpriteId = b;
+    eBattleBars[a].maxValue = c;
+    eBattleBars[a].oldValue = d;
+    eBattleBars[a].receivedValue = e;
+    eBattleBars[a].currValue = -0x8000;
 }
 
 void sub_8043DB0(u8 a)
@@ -2511,24 +2511,24 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
 
     if (c == 0)
     {
-        r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, 6, 1);
+        r6 = sub_8045F58(eBattleBars[a].maxValue, eBattleBars[a].oldValue, eBattleBars[a].receivedValue, &eBattleBars[a].currValue, 6, 1);
     }
     else
     {
         u16 r5;
         s32 r8;
 
-        r5 = GetScaledExpFraction(ewram17850[a].unk8, ewram17850[a].unkC, ewram17850[a].unk4, 8);
+        r5 = GetScaledExpFraction(eBattleBars[a].oldValue, eBattleBars[a].receivedValue, eBattleBars[a].maxValue, 8);
         if (r5 == 0)
             r5 = 1;
-        r8 = ewram17850[a].unkC;
+        r8 = eBattleBars[a].receivedValue;
         r5 = ABS(r8 / r5);
-        r6 = sub_8045F58(ewram17850[a].unk4, ewram17850[a].unk8, r8, &ewram17850[a].unk10, 8, r5);
+        r6 = sub_8045F58(eBattleBars[a].maxValue, eBattleBars[a].oldValue, r8, &eBattleBars[a].currValue, 8, r5);
     }
     if (c == 1 || (c == 0 && (!gBattleSpriteInfo[a].hpNumbersNoBars)))
         sub_8045D58(a, c);
     if (r6 == -1)
-        ewram17850[a].unk10 = 0;
+        eBattleBars[a].currValue = 0;
     return r6;
 }
 
@@ -2542,7 +2542,12 @@ static void sub_8045D58(u8 a, u8 b)
     switch (b)
     {
     case 0:
-        r0 = sub_804602C(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, sp8, 6);
+        r0 = CalcBarFilledPixels(eBattleBars[a].maxValue,
+            eBattleBars[a].oldValue,
+            eBattleBars[a].receivedValue,
+            &eBattleBars[a].currValue,
+            sp8,
+            6);
         r8 = 3;
         if (r0 <= 0x18)
         {
@@ -2552,7 +2557,7 @@ static void sub_8045D58(u8 a, u8 b)
         }
         for (i = 0; i < 6; i++)
         {
-            u8 r4 = gSprites[ewram17850[a].unk0].data[5];
+            u8 r4 = gSprites[eBattleBars[a].healthboxSpriteId].data[5];
             if (i < 2)
                 CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
             else
@@ -2560,7 +2565,12 @@ static void sub_8045D58(u8 a, u8 b)
         }
         break;
     case 1:
-        sub_804602C(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, sp8, 8);
+        CalcBarFilledPixels(eBattleBars[a].maxValue,
+            eBattleBars[a].oldValue,
+            eBattleBars[a].receivedValue,
+            &eBattleBars[a].currValue,
+            sp8,
+            8);
         r0 = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_LEVEL);
         if (r0 == 100)
         {
@@ -2570,9 +2580,9 @@ static void sub_8045D58(u8 a, u8 b)
         for (i = 0; i < 8; i++)
         {
             if (i < 4)
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[ewram17850[a].unk0].oam.tileNum + 0x24 + i) * 32, 32);
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[eBattleBars[a].healthboxSpriteId].oam.tileNum + 0x24 + i) * 32, 32);
             else
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + 0xB80 + (i + gSprites[ewram17850[a].unk0].oam.tileNum) * 32, 32);
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + 0xB80 + (i + gSprites[eBattleBars[a].healthboxSpriteId].oam.tileNum) * 32, 32);
         }
         break;
     }
@@ -2662,7 +2672,7 @@ static int sub_8045F58(s32 a, s32 b, int c, int *d, u8 e, u16 f)
     return ret;
 }
 
-static u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
+static u8 CalcBarFilledPixels(int a, int b, int c, int *d, u8 *e, u8 f)
 {
     s32 r5 = b - c;
     u8 r3;
@@ -2705,6 +2715,7 @@ static u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
     return r3;
 }
 
+// These two functions seem as if they were made for testing the health bar.
 s16 sub_80460C8(struct BattleInterfaceStruct1 *a, int *b, u16 *c, int d)
 {
     u16 r7;
@@ -2726,7 +2737,7 @@ static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c)
     u16 sp10[6];
     u8 i;
 
-    sub_804602C(a->unk0, a->unk4, a->unk8, b, (u8 *)sp8, 6);
+    CalcBarFilledPixels(a->unk0, a->unk4, a->unk8, b, (u8 *)sp8, 6);
     for (i = 0; i < 6; i++)
         sp10[i] = (a->unkC_0 << 12) | (a->unk10 + sp8[i]);
     CpuCopy16(sp10, c, sizeof(sp10));
