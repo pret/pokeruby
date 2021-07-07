@@ -557,324 +557,99 @@ void SetEReaderTrainerGfxId(void)
     SetBattleTowerTrainerGfxId(BATTLE_TOWER_EREADER_TRAINER_ID);
 }
 
-// void sub_8134AC0(struct BattleTowerRecord *record)
-// {
-//     u16 var1[6];
-//     u16 var2[6];
-//     s32 i, j, k;
-//     s16 l = 0;
+#define BATTLE_TOWER_RECORD_COUNT 5
 
-//     for (i = 0; i < 5; i++)
-//     {
-//         k = 0;
-//         for (j = 0; j < 4 && gSaveBlock2.battleTower.records[i].trainerId[j] == record->trainerId[j]; j++);
-//         if (j == 4)
-//         {
-//             for (; k < 7 && gSaveBlock2.battleTower.records[i].name[4] == record->name[4]; k++)
-//             {
-//                 if (record->name[4] == 0xFF)
-//                 {
-//                     k = 7;
-//                     break;
-//                 }
-//             }
-//         }
-
-//         if (k == 7)
-//         {
-//             break;
-//         }
-//     }
-
-//     if (i < 5)
-//     {
-//         gSaveBlock2.battleTower.records[i] = *record;
-//         return;
-//     }
-
-//     i = 0;
-//     while (i < 5)
-//     {
-//         if (gSaveBlock2.battleTower.records[i].winStreak == 0)
-//         {
-//             if (i > 4)
-//             {
-//                 break;
-//             }
-
-//             gSaveBlock2.battleTower.records[i] = *record;
-//             return;
-//         }
-
-//         i++;
-//     }
-
-//     var1[0] = gSaveBlock2.battleTower.records[0].winStreak;
-//     var2[0] = 0;
-//     l++;
-
-//     for (i = 1; i < 5; i++)
-//     {
-//         j = 0;
-//         if (j < l)
-//         {
-//             for (; gSaveBlock2.battleTower.records[i].winStreak <= var1[j]; j++)
-//             {
-//                 if (gSaveBlock2.battleTower.records[i].winStreak < var1[j])
-//                 {
-//                     j = 0;
-//                     l = 1;
-//                     var1[0] = gSaveBlock2.battleTower.records[i].winStreak;
-//                     var2[0] = i;
-//                     break;
-//                 }
-//             }
-//         }
-
-//         if (j == l)
-//         {
-//             var1[l] = gSaveBlock2.battleTower.records[i].winStreak;
-//             var2[l] = i;
-//             l++;
-//         }
-//     }
-
-//     gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
-// }
-NAKED
 void sub_8134AC0(struct BattleTowerRecord *record)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x1C\n\
-    movs r7, 0\n\
-    mov r8, r0\n\
-    movs r5, 0\n\
-    ldr r0, _08134B3C @ =gSaveBlock2\n\
-    mov r12, r0\n\
-    mov r1, r8\n\
-    ldrb r1, [r1, 0xC]\n\
-    str r1, [sp, 0x18]\n\
-    movs r2, 0xAA\n\
-    lsls r2, 1\n\
-    add r2, r12\n\
-    mov r10, r2\n\
-    mov r9, r5\n\
-_08134AE6:\n\
-    movs r6, 0\n\
-    movs r3, 0\n\
-    ldr r0, _08134B40 @ =gSaveBlock2 + 0x158\n\
-    add r0, r9\n\
-    ldrb r0, [r0]\n\
-    ldr r1, [sp, 0x18]\n\
-    cmp r0, r1\n\
-    bne _08134B14\n\
-    movs r0, 0xA4\n\
-    muls r0, r5\n\
-    ldr r1, _08134B40 @ =gSaveBlock2 + 0x158\n\
-    adds r2, r0, r1\n\
-    mov r4, r8\n\
-    adds r4, 0xC\n\
-_08134B02:\n\
-    adds r2, 0x1\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x3\n\
-    bgt _08134B14\n\
-    adds r1, r4, r3\n\
-    ldrb r0, [r2]\n\
-    ldrb r1, [r1]\n\
-    cmp r0, r1\n\
-    beq _08134B02\n\
-_08134B14:\n\
-    cmp r3, 0x4\n\
-    bne _08134B54\n\
-    movs r6, 0\n\
-    mov r2, r10\n\
-    ldrb r0, [r2]\n\
-    mov r3, r8\n\
-    ldrb r3, [r3, 0x8]\n\
-    cmp r0, r3\n\
-    bne _08134B54\n\
-    adds r1, r0, 0\n\
-    movs r0, 0xA4\n\
-    muls r0, r5\n\
-    adds r0, 0x4\n\
-    ldr r3, _08134B44 @ =gSaveBlock2 + 0x150\n\
-    adds r2, r0, r3\n\
-_08134B32:\n\
-    cmp r1, 0xFF\n\
-    bne _08134B48\n\
-    movs r6, 0x7\n\
-    b _08134B54\n\
-    .align 2, 0\n\
-_08134B3C: .4byte gSaveBlock2\n\
-_08134B40: .4byte gSaveBlock2 + 0x158\n\
-_08134B44: .4byte gSaveBlock2 + 0x150\n\
-_08134B48:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x6\n\
-    bgt _08134B54\n\
-    ldrb r0, [r2]\n\
-    cmp r0, r1\n\
-    beq _08134B32\n\
-_08134B54:\n\
-    cmp r6, 0x7\n\
-    beq _08134B64\n\
-    movs r0, 0xA4\n\
-    add r10, r0\n\
-    add r9, r0\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x4\n\
-    ble _08134AE6\n\
-\n\
-_08134B64:\n\
-    cmp r5, 0x4\n\
-    bgt _08134B76\n\
-    movs r0, 0xA4\n\
-    muls r0, r5\n\
-    add r0, r12\n\
-    movs r1, 0xA6\n\
-    lsls r1, 1\n\
-    adds r0, r1\n\
-    b _08134B9E\n\
-_08134B76:\n\
-    movs r5, 0\n\
-    movs r1, 0xA7\n\
-    lsls r1, 1\n\
-    add r1, r12\n\
-    b _08134B88\n\
-_08134B80:\n\
-    adds r1, 0xA4\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x4\n\
-    bgt _08134BA8\n\
-_08134B88:\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0\n\
-    bne _08134B80\n\
-    cmp r5, 0x4\n\
-    bgt _08134BA8\n\
-    movs r0, 0xA4\n\
-    muls r0, r5\n\
-    add r0, r12\n\
-    movs r2, 0xA6\n\
-    lsls r2, 1\n\
-    adds r0, r2\n\
-_08134B9E:\n\
-    mov r1, r8\n\
-    movs r2, 0xA4\n\
-    bl memcpy\n\
-    b _08134C5E\n\
-\n\
-_08134BA8:\n\
-    mov r2, sp\n\
-    movs r3, 0xA7\n\
-    lsls r3, 1\n\
-    mov r1, r12\n\
-    adds r0, r1, r3\n\
-    ldrh r0, [r0]\n\
-    movs r1, 0\n\
-    strh r0, [r2]\n\
-    add r0, sp, 0xC\n\
-    strh r1, [r0]\n\
-    adds r7, 0x1\n\
-    movs r5, 0x1\n\
-    add r2, sp, 0xC  @var2 = r2\n\
-    mov r9, r2\n\
-    mov r10, r3\n\
-_08134BC6:\n\
-    movs r3, 0\n\
-    adds r0, r5, 0x1\n\
-    mov r12, r0\n\
-    cmp r3, r7\n\
-    bge _08134C0A  @ j < l\n\
-    movs r1, 0xA4\n\
-    adds r0, r5, 0\n\
-    muls r0, r1\n\
-    ldr r2, _08134BFC @ =gSaveBlock2\n\
-    adds r0, r2\n\
-    mov r1, r10\n\
-    adds r4, r0, r1\n\
-    mov r6, sp\n\
-_08134BE0:\n\
-    lsls r0, r3, 1\n\
-    add r0, sp\n\
-    ldrh r2, [r4]\n\
-    adds r1, r2, 0\n\
-    ldrh r0, [r0]\n\
-    cmp r1, r0\n\
-    bcs _08134C00\n\
-    movs r3, 0\n\
-    movs r7, 0x1\n\
-    strh r2, [r6]\n\
-    mov r2, r9\n\
-    strh r5, [r2]\n\
-    b _08134C0A\n\
-    .align 2, 0\n\
-_08134BFC: .4byte gSaveBlock2\n\
-_08134C00:\n\
-    cmp r1, r0\n\
-    bhi _08134C0A\n\
-    adds r3, 0x1\n\
-    cmp r3, r7\n\
-    blt _08134BE0\n\
-_08134C0A:\n\
-    cmp r3, r7\n\
-    bne _08134C2A\n\
-    lsls r1, r7, 1\n\
-    mov r3, sp\n\
-    adds r2, r3, r1\n\
-    movs r3, 0xA4\n\
-    adds r0, r5, 0\n\
-    muls r0, r3\n\
-    ldr r3, _08134C70 @ =gSaveBlock2\n\
-    adds r0, r3\n\
-    add r0, r10\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r2]\n\
-    add r1, r9\n\
-    strh r5, [r1]\n\
-    adds r7, 0x1\n\
-_08134C2A:\n\
-    mov r5, r12\n\
-    cmp r5, 0x4\n\
-    ble _08134BC6\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    adds r1, r7, 0\n\
-    bl __modsi3\n\
-    adds r5, r0, 0\n\
-    ldr r2, _08134C70 @ =gSaveBlock2\n\
-    lsls r0, r5, 1\n\
-    add r0, sp\n\
-    adds r0, 0xC\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0xA4\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    movs r1, 0xA6\n\
-    lsls r1, 1\n\
-    adds r0, r1\n\
-    mov r1, r8\n\
-    movs r2, 0xA4\n\
-    bl memcpy\n\
-_08134C5E:\n\
-    add sp, 0x1C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08134C70: .4byte gSaveBlock2\n\
-    .syntax divided\n");
+    u16 slotValues[6];
+    u16 slotIds[6];
+    s32 i, j, k;
+    s32 slotsCount = 0;
+    struct BattleTowerRecord *newRecord = record; // Needed to match.
+
+    // Find a record slot of the same player and replace it.
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
+    {
+        k = 0;
+        for (j = 0; j < TRAINER_ID_LENGTH; j++)
+        {
+            if (gSaveBlock2.battleTower.records[i].trainerId[j] != newRecord->trainerId[j])
+                break;
+        }
+        if (j == 4)
+        {
+            for (k = 0; k < OT_NAME_LENGTH; k++)
+            {
+#ifdef BUGFIX
+                if (gSaveBlock2.battleTower.records[i].name[k] != newRecord->name[k])
+                    break;
+                if (newRecord->name[k] == EOS)
+#else
+                if (gSaveBlock2.battleTower.records[i].name[j] != newRecord->name[j])
+                    break;
+                if (newRecord->name[j] == EOS)
+#endif
+                {
+                    k = OT_NAME_LENGTH;
+                    break;
+                }
+            }
+        }
+
+        if (k == OT_NAME_LENGTH)
+            break;
+    }
+    if (i < BATTLE_TOWER_RECORD_COUNT)
+    {
+        gSaveBlock2.battleTower.records[i] = *newRecord;
+        return;
+    }
+
+    // Find an empty record slot.
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
+    {
+        if (gSaveBlock2.battleTower.records[i].winStreak == 0)
+            break;
+    }
+    if (i < BATTLE_TOWER_RECORD_COUNT)
+    {
+        gSaveBlock2.battleTower.records[i] = *newRecord;
+        return;
+    }
+
+    // Find possible slots to replace the record.
+    slotValues[0] = gSaveBlock2.battleTower.records[0].winStreak;
+    slotIds[0] = 0;
+    slotsCount++;
+
+    for (i = 1; i < BATTLE_TOWER_RECORD_COUNT; i++)
+    {
+        for (j = 0; j < slotsCount; j++)
+        {
+            if (gSaveBlock2.battleTower.records[i].winStreak < slotValues[j])
+            {
+                j = 0;
+                slotsCount = 1;
+                slotValues[0] = gSaveBlock2.battleTower.records[i].winStreak;
+                slotIds[0] = i;
+                break;
+            }
+            else if (gSaveBlock2.battleTower.records[i].winStreak > slotValues[j])
+            {
+                break;
+            }
+        }
+
+        if (j == slotsCount)
+        {
+            slotValues[slotsCount] = gSaveBlock2.battleTower.records[i].winStreak;
+            slotIds[slotsCount] = i;
+            slotsCount++;
+        }
+    }
+
+    i = Random() % slotsCount;
+    gSaveBlock2.battleTower.records[slotIds[i]] = *newRecord;
 }
 
 u8 get_trainer_class_pic_index(void)
