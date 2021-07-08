@@ -316,7 +316,7 @@ static bool8 sub_810B6C0(void)
         case 10:
             if (MultistepInitMenuWindowContinue())
             {
-                ewram1FFFF = 0;
+                ePokeblockGfxState = 0;
                 gMain.state++;
             }
             break;
@@ -334,7 +334,7 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case 13:
-            ewram1FFFE = sub_810BA50(0x38, 0x40, 0);
+            ePokeblockCaseSpriteId = sub_810BA50(0x38, 0x40, 0);
             gMain.state++;
             break;
         case 14:
@@ -386,27 +386,27 @@ void sub_810B96C(void)
 
 static bool8 sub_810B998(void)
 {
-    switch (ewram1FFFF)
+    switch (ePokeblockGfxState)
     {
         case 0:
             LZDecompressVram(gMenuPokeblock_Gfx, BG_CHAR_ADDR(2));
-            ewram1FFFF++;
+            ePokeblockGfxState++;
             break;
         case 1:
             LZDecompressWram(gMenuPokeblock_Tilemap, gBGTilemapBuffers[2]);
-            ewram1FFFF++;
+            ePokeblockGfxState++;
             break;
         case 2:
             LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xc0);
-            ewram1FFFF++;
+            ePokeblockGfxState++;
             break;
         case 3:
             LoadCompressedObjectPic(&gUnknown_083F7F74);
-            ewram1FFFF++;
+            ePokeblockGfxState++;
             break;
         case 4:
             LoadCompressedObjectPalette(&gUnknown_083F7F7C);
-            ewram1FFFF = 0;
+            ePokeblockGfxState = 0;
             return TRUE;
     }
     return FALSE;
@@ -627,7 +627,7 @@ static void sub_810BDAC(bool8 flag)
 static void sub_810BF38(bool8 flag)
 {
     PlaySE(SE_SELECT);
-    gSprites[ewram1FFFE].callback = sub_810C8D4;
+    gSprites[ePokeblockCaseSpriteId].callback = sub_810C8D4;
     sub_810BDAC(flag);
 }
 

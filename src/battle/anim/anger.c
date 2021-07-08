@@ -49,10 +49,10 @@ void sub_80D09C0(struct Sprite* sprite)
         gBattleAnimArgs[1] *= -1;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(bank, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[2];
-    if (sprite->pos1.y <= 7)
-        sprite->pos1.y = 8;
+    sprite->x = GetBattlerSpriteCoord(bank, 2) + gBattleAnimArgs[1];
+    sprite->y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[2];
+    if (sprite->y <= 7)
+        sprite->y = 8;
 
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;

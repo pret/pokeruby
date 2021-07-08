@@ -136,13 +136,13 @@ void sub_80CCC50(struct Sprite* sprite)
 {
     sprite->data[0] = gBattleAnimArgs[2];
     if (GetBattlerSide(gBattleAnimAttacker) != 0)
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
     else
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
 
     StartSpriteAnim(sprite, gBattleAnimArgs[5]);
     sprite->data[1] = -gBattleAnimArgs[3];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->callback = sub_80CCCB4;
     sub_80CCCB4(sprite);
@@ -150,8 +150,8 @@ void sub_80CCC50(struct Sprite* sprite)
 
 static void sub_80CCCB4(struct Sprite* sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 100);
-    sprite->pos2.y = Sin(sprite->data[0], 20);
+    sprite->x2 = Cos(sprite->data[0], 100);
+    sprite->y2 = Sin(sprite->data[0], 20);
     if (sprite->data[0] <= 0x7F)
         sprite->subpriority = 0;
     else
@@ -159,7 +159,7 @@ static void sub_80CCCB4(struct Sprite* sprite)
 
     sprite->data[0] = (sprite->data[0] + sprite->data[1]) & 0xFF;
     sprite->data[5] += 0x82;
-    sprite->pos2.y += sprite->data[5] >> 8;
+    sprite->y2 += sprite->data[5] >> 8;
     sprite->data[2]++;
     if (sprite->data[2] == sprite->data[3])
         DestroyAnimSprite(sprite);

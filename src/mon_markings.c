@@ -505,7 +505,7 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
         }
     }
 
-    sMenu->menuWindowSprites[1]->pos1.y = y + 96;
+    sMenu->menuWindowSprites[1]->y = y + 96;
 
     sprTemplate.tileTag++;
     sprTemplate.paletteTag++;
@@ -538,8 +538,8 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
         sMenu->menuTextSprite->oam.shape = ST_OAM_H_RECTANGLE;
         sMenu->menuTextSprite->oam.size = 3;
         StartSpriteAnim(sMenu->menuTextSprite, 9);
-        sMenu->menuTextSprite->pos1.x = x + MENU_TEXT_SPRITE_X_OFFSET;
-        sMenu->menuTextSprite->pos1.y = y + 80;
+        sMenu->menuTextSprite->x = x + MENU_TEXT_SPRITE_X_OFFSET;
+        sMenu->menuTextSprite->y = y + 80;
         CalcCenterToCornerVec(sMenu->menuTextSprite, 1, 2, 0);
     }
     else
@@ -567,7 +567,7 @@ void sub_80F78CC(struct Sprite *sprite)
 
 void sub_80F7908(struct Sprite *sprite)
 {
-    sprite->pos1.y = 16 * sMenu->cursorPos + sMenu->cursorBaseY;
+    sprite->y = 16 * sMenu->cursorPos + sMenu->cursorBaseY;
 }
 
 struct Sprite *sub_80F7920(u16 tileTag, u16 paletteTag, const u16 *palette)

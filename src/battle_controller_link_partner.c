@@ -38,17 +38,17 @@ extern u32 gBattleControllerExecFlags;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerSpriteIds[];
 extern u8 gBattleOutcome;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u8 gAnimMoveTurn;
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattlerControllerFuncs[])(void);
 extern u8 gHealthboxSpriteIds[];
@@ -322,7 +322,7 @@ void sub_811DCA0(void)
 void sub_811DDE8(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
+     && gSprites[gBattlerSpriteIds[gActiveBattler]].x2 == 0)
         LinkPartnerBufferExecCompleted();
 }
 
@@ -345,7 +345,7 @@ void bx_t3_healthbar_update(void)
 
 void sub_811DE98(void)
 {
-    if (gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y + gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.y > 160)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].y + gSprites[gBattlerSpriteIds[gActiveBattler]].y2 > 160)
     {
         nullsub_9(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
         FreeOamMatrix(gSprites[gBattlerSpriteIds[gActiveBattler]].oam.matrixNum);
@@ -368,7 +368,7 @@ void sub_811DF34(void)
 
 void sub_811DFA0(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gWindowTemplate_Contest_MoveDescription.state == 0)
         LinkPartnerBufferExecCompleted();
 }
 
@@ -396,7 +396,7 @@ void sub_811E034(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
         gBattlerControllerFuncs[gActiveBattler] = sub_811E0A0;
     }
@@ -456,7 +456,7 @@ void sub_811E29C(void)
     {
         if (gBattleTypeFlags & 2)
         {
-            sub_800832C();
+            SetCloseLinkCallback();
             gBattlerControllerFuncs[gActiveBattler] = sub_811E258;
         }
         else
@@ -1088,11 +1088,11 @@ void LinkPartnerHandleLoadPokeSprite(void)
       GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES),
       GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
       GetBattlerSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
@@ -1118,7 +1118,7 @@ void sub_811F864(u8 a, u8 b)
     gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBattlerSpriteIds[a] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       GetBattlerSubpriority(a));
@@ -1153,7 +1153,7 @@ void sub_811FA5C(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4 = 1;
         break;
@@ -1189,11 +1189,11 @@ void LinkPartnerHandleTrainerThrow(void)
     LoadPlayerTrainerBankSprite(gender, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(gender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80 + xOffset, 80 + 4 * (8 - gTrainerBackPicCoords[gender].coords),
       GetBattlerSubpriority(gActiveBattler));
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_811DAE4;
@@ -1209,7 +1209,7 @@ void LinkPartnerHandleTrainerSlideBack(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = sub_811DB1C;
@@ -1219,7 +1219,7 @@ void LinkPartnerHandlecmd10(void)
 {
     if (ewram17810[gActiveBattler].unk4 == 0)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4++;
     }
@@ -1294,9 +1294,9 @@ void sub_811FF30(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite && !ewram17800[gActiveBattler].unk0_3)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite && !gBattleSpriteInfo[gActiveBattler].flag_x8)
         {
-            ewram17800[gActiveBattler].unk0_3 = 1;
+            gBattleSpriteInfo[gActiveBattler].flag_x8 = 1;
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         }
         ewram17810[gActiveBattler].unk4 = 1;
@@ -1314,10 +1314,10 @@ void sub_811FF30(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBattler].substituteSprite) && r7 <= 1)
+            if ((gBattleSpriteInfo[gActiveBattler].substituteSprite) && r7 <= 1)
             {
                 move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
-                ewram17800[gActiveBattler].unk0_3 = 0;
+                gBattleSpriteInfo[gActiveBattler].flag_x8 = 0;
             }
             ewram17810[gActiveBattler].unk4 = 3;
         }
@@ -1341,7 +1341,7 @@ void LinkPartnerHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_811DFA0;
 }
 
@@ -1549,7 +1549,7 @@ void LinkPartnerHandleFaintingCry(void)
 void LinkPartnerHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     LinkPartnerBufferExecCompleted();
 }
 
@@ -1561,7 +1561,7 @@ void LinkPartnerHandleTrainerBallThrow(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8030E38);
@@ -1622,7 +1622,7 @@ void LinkPartnerHandlecmd48(void)
     ewram17810[gActiveBattler].unk0_0 = 1;
     gUnknown_02024E68[gActiveBattler] = sub_8044804(
       gActiveBattler,
-      (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBattler][4],
+      (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
       gBattleBufferA[gActiveBattler][1],
       gBattleBufferA[gActiveBattler][2]);
     ewram17810[gActiveBattler].unk5 = 0;

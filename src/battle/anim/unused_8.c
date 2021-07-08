@@ -76,8 +76,8 @@ void sub_80CF458(struct Sprite* sprite)
 static void sub_80CF490(struct Sprite* sprite)
 {
     sprite->data[0] = sprite->data[1];
-    sprite->data[2] = sprite->pos1.x;
-    sprite->data[4] = sprite->pos1.y + 15;
+    sprite->data[2] = sprite->x;
+    sprite->data[4] = sprite->y + 15;
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, sub_80CF4B8);
 }

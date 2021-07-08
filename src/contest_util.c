@@ -1,33 +1,33 @@
 #include "global.h"
+#include "contest_util.h"
 #include "battle.h"
 #include "berry.h"
 #include "choose_party.h"
+#include "constants/items.h"
+#include "constants/species.h"
 #include "contest.h"
-#include "contest_link_80C2020.h"
+#include "contest_link_util.h"
 #include "contest_painting.h"
 #include "data2.h"
 #include "daycare.h"
 #include "debug.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "constants/items.h"
+#include "ewram.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "overworld.h"
 #include "pokedex.h"
 #include "pokemon.h"
 #include "random.h"
-#include "overworld.h"
-#include "script_pokemon_80C4.h"
-#include "constants/species.h"
 #include "task.h"
-#include "ewram.h"
 
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
 
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern u8 gSelectedOrderFromParty[];
 
@@ -44,89 +44,86 @@ void SetContestTrainerGfxIds(void)
     gSaveBlock1.vars[VAR_OBJ_GFX_ID_2 - VARS_START] = gContestMons[2].trainerGfxId;
 }
 
-void sub_80C4C28(void)
+void GetNpcContestantLocalId(void)
 {
-    u16 var;
+    u16 localId;
     u8 specialVar = gSpecialVar_0x8005;
 
     switch(specialVar)
     {
     case 0:
-        var = 3;
+        localId = 3;
         break;
     case 1:
-        var = 4;
+        localId = 4;
         break;
     case 2:
-        var = 5;
+        localId = 5;
         break;
     default:
-        var = 100;
+        localId = 100;
         break;
     }
-    gSpecialVar_0x8004 = var;
+    gSpecialVar_0x8004 = localId;
 }
 
-void sub_80C4C64(void)
+void BufferContestTrainerAndMonNames(void)
 {
     Contest_GetTrainerNameI_StringVar1();
     Contest_GetNicknameI_StringVar1();
-    sub_80C48F4();
+    Contest_GetSpeciesNameI_StringVar1();
 }
 
-void sub_80C4C78(void)
+void DoesContestCategoryHaveMuseumPainting(void)
 {
-    u16 var;
-    u16 returnVar;
+    u16 contestWinner;
 
     switch(gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        var = 8;
+        contestWinner = CONTEST_WINNER_MUSEUM_COOL - 1;
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        var = 9;
+        contestWinner = CONTEST_WINNER_MUSEUM_BEAUTY - 1;
         break;
     case CONTEST_CATEGORY_CUTE:
-        var = 10;
+        contestWinner = CONTEST_WINNER_MUSEUM_CUTE - 1;
         break;
     case CONTEST_CATEGORY_SMART:
-        var = 11;
+        contestWinner = CONTEST_WINNER_MUSEUM_SMART - 1;
         break;
     case CONTEST_CATEGORY_TOUGH:
     default:
-        var = 12;
+        contestWinner = CONTEST_WINNER_MUSEUM_TOUGH - 1;
         break;
     }
 
-    returnVar = gSaveBlock1.contestWinners[var].species;
-
-    if(returnVar == 0)
-        gSpecialVar_0x8004 = returnVar;
+    if (gSaveBlock1.contestWinners[contestWinner].species == SPECIES_NONE)
+        gSpecialVar_0x8004 = FALSE;
     else
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE;
 }
 
-void sub_80C4CEC(void)
+void SaveMuseumContestPainting(void)
 {
-    Contest_SaveWinner(0xFF);
+    Contest_SaveWinner(CONTEST_SAVE_FOR_MUSEUM);
 }
 
-void sub_80C4CF8(void)
+void ShouldReadyContestArtist(void)
 {
     if(!gContestFinalStandings[gContestPlayerMonIndex]
-    && gSpecialVar_ContestRank == 3
-    && gUnknown_02038678[gContestPlayerMonIndex] >= 800)
+    && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
+    && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE;
     }
     else
     {
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8004 = FALSE;
     }
 }
 
-u8 sub_80C4D50(void)
+u8 CountPlayerMuseumPaintings(void)
 {
     u8 retVar = 0;
     int i;
@@ -138,67 +135,72 @@ u8 sub_80C4D50(void)
     return retVar;
 }
 
-void sub_80C4D80(void)
+void GetContestantNamesAtRank(void)
 {
-    s16 sp0[4];
+    s16 conditions[4];
     s32 i;
     s32 j;
-    s16 r4;
-    u8 r2;
-    u8 r7;
-    s8 r10;
-    u8 r4_;
+    s16 condition;
+    u8 contestantOffset;
+    u8 tieRank;
+    s8 numAtCondition;
+    u8 rank;
 
+    // Get round 1 points
     for (i = 0; i < 4; i++)
-        sp0[i] = gContestMonConditions[i];
+        conditions[i] = gContestMonRound1Points[i];
 
+    // Sort round 1 points
     for (i = 0; i < 3; i++)
     {
         for (j = 3; j > i; j--)
         {
-            if (sp0[j - 1] < sp0[j])
+            if (conditions[j - 1] < conditions[j])
             {
-                s32 temp = sp0[j];
-
-                sp0[j] = sp0[j - 1];
-                sp0[j - 1] = temp;
+                int temp;
+                SWAP(conditions[j], conditions[j - 1], temp)
             }
         }
     }
 
-    r4 = sp0[gSpecialVar_0x8006];
-    r10 = 0;
-    r7 = 0;
+    // Get round1 points at specified rank
+    condition = conditions[gSpecialVar_0x8006];
+
+    // Count number of contestants with the same number of points
+    numAtCondition = 0;
+    tieRank = 0;
 
     for (i = 0; i < 4; i++)
     {
-        if (sp0[i] == r4)
+        if (conditions[i] == condition)
         {
-            r10++;
+            numAtCondition++;
             if (i == gSpecialVar_0x8006)
-                r7 = r10;
+                tieRank = numAtCondition;
         }
     }
 
+    // Get rank of first contestant with the same number of points
     for (i = 0; i < 4; i++)
     {
-        if (sp0[i] == r4)
+        if (conditions[i] == condition)
             break;
     }
+    rank = i;
 
-    r4_ = i;
-    r2 = r7;
-
+    // Get contestant id of player at rank (taking ties into account)
+    contestantOffset = tieRank;
     for (i = 0; i < 4; i++)
     {
-        if (r4 == gContestMonConditions[i])
+        if (condition == gContestMonRound1Points[i])
         {
-            if (r2 == 1)
+            if (contestantOffset == 1)
                 break;
-            r2--;
+            contestantOffset--;
         }
     }
 
+    // Use contestant id to get names
     Contest_CopyAndConvertNicknameI_Intl(gStringVar1, i);
 
     if (gIsLinkContest & 1)
@@ -206,10 +208,13 @@ void sub_80C4D80(void)
     else
         Contest_CopyAndConvertTrainerName_Intl(gStringVar2, gContestMons[i].trainerName);
 
-    if (r10 == 1 || r7 == r10)
-        gSpecialVar_0x8006 = r4_;
+    // Return adjusted rank
+    if (numAtCondition == 1)
+        gSpecialVar_0x8006 = rank;
+    else if (tieRank == numAtCondition)
+        gSpecialVar_0x8006 = rank;
     else
-        gSpecialVar_0x8006 = r4_ + 4;
+        gSpecialVar_0x8006 = rank + 4;
 }
 
 void ShowContestWinnerCleanup(void)
@@ -217,13 +222,15 @@ void ShowContestWinnerCleanup(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
+// File boundary?
+
 void ShowContestWinner(void)
 {
     if(gUnknown_0203856C)
     {
         sub_80AAF30();
-        gBattleStruct->unk15DDF = 1;
-        gBattleStruct->unk15DDE = sub_80B2C4C(254, 0);
+        eCurContestWinnerIsForArtist = TRUE;
+        eCurContestWinnerSaveIdx = GetContestWinnerSaveIdx(CONTEST_SAVE_FOR_ARTIST, 0);
         Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }
@@ -246,7 +253,7 @@ bool8 GiveMonArtistRibbon(void)
     if(ribbon == FALSE
     && gContestFinalStandings[gContestPlayerMonIndex] == 0
     && gSpecialVar_ContestRank == 3
-    && gUnknown_02038678[gContestPlayerMonIndex] >= 800)
+    && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         ribbon = TRUE;
         SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &ribbon);
@@ -287,15 +294,15 @@ void ShowContestEntryMonPic(void)
           &gMonFrontPicTable[species],
           gMonFrontPicCoords[species].coords,
           gMonFrontPicCoords[species].y_offset,
-          (u32)gUnknown_081FAF4C[0],
-          gUnknown_081FAF4C[1],
+          gMonSpriteGfx_Sprite_ptr[0],
+          gMonSpriteGfx_Sprite_ptr[1],
           species,
           var1);
         palette = GetMonSpritePalStructFromOtIdPersonality(species, var2, var1);
         LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(species, 1);
-        gUnknown_02024E8C.paletteTag = palette->tag;
-        spriteId = CreateSprite(&gUnknown_02024E8C, 0x78, 0x40, 0);
+        gCreatingSpriteTemplate.paletteTag = palette->tag;
+        spriteId = CreateSprite(&gCreatingSpriteTemplate, 0x78, 0x40, 0);
         gTasks[taskId].data[2] = spriteId;
         gTasks[taskId].data[3] = left;
         gTasks[taskId].data[4] = top;

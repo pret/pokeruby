@@ -1,35 +1,35 @@
 #include "global.h"
-#include "data2.h"
-#include "util.h"
-#include "random.h"
-#include "overworld.h"
-#include "constants/songs.h"
-#include "ewram.h"
-#include "main.h"
-#include "scanline_effect.h"
-#include "decompress.h"
-#include "palette.h"
-#include "blend_palette.h"
-#include "graphics.h"
-#include "strings2.h"
-#include "text.h"
-#include "string_util.h"
-#include "menu.h"
-#include "sound.h"
-#include "pokedex.h"
-#include "pokemon_icon.h"
-#include "tv.h"
+#include "contest_link_util.h"
 #include "battle.h"
+#include "blend_palette.h"
+#include "constants/songs.h"
 #include "contest.h"
-#include "link.h"
+#include "contest_link.h"
+#include "data2.h"
+#include "decompress.h"
+#include "event_data.h"
+#include "ewram.h"
 #include "field_effect.h"
 #include "field_specials.h"
-#include "contest_link_80C857C.h"
-#include "contest_link_80C2020.h"
+#include "graphics.h"
+#include "link.h"
+#include "main.h"
+#include "menu.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokedex.h"
+#include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
-#include "event_data.h"
+#include "random.h"
+#include "scanline_effect.h"
 #include "script.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings2.h"
+#include "text.h"
 #include "trig.h"
+#include "tv.h"
+#include "util.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
@@ -117,15 +117,15 @@ void sub_80C3EA4(u8 taskId);
 void sub_80C3F00(void);
 void sub_80C40D4(u8 a0, u8 a1);
 void sub_80C42C0(u8 taskId);
-void sub_80C49C4(u8 taskId);
-void sub_80C49F0(u8 taskId);
-void sub_80C4A0C(u8 taskId);
-void sub_80C4A28(u8 taskId);
-void sub_80C4A44(u8 taskId);
-void sub_80C4B0C(u8 taskId);
-void sub_80C4B5C(u8 taskId);
-void sub_80C4BA4(u8 taskId);
-void sub_80C4BCC(u8 taskId);
+void Task_StartCommunication(u8 taskId);
+void Task_StartCommunicateRng(u8 taskId);
+void Task_StartCommunicateLeaderIds(u8 taskId);
+void Task_StartCommunicateCategory(u8 taskId);
+void Task_LinkContest_SetUpContest(u8 taskId);
+void Task_LinkContest_CalculateTurnOrder(u8 taskId);
+void Task_LinkContest_FinalizeConnection(u8 taskId);
+void Task_LinkContest_Disconnect(u8 taskId);
+void Task_LinkContest_WaitDisconnect(u8 taskId);
 
 const u16 gUnknown_083D1624[] = INCBIN_U16("graphics/unknown/unknown_3D1624/0.4bpp");
 const u16 gUnknown_083D1644[] = INCBIN_U16("graphics/unknown/unknown_3D1624/1.4bpp");
@@ -388,7 +388,7 @@ static void sub_80C255C(u8 taskId)
 
 static void sub_80C25A4(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C89DC, sub_80C25C0);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonIdxs, sub_80C25C0);
 }
 
 static void sub_80C25C0(u8 taskId)
@@ -610,12 +610,12 @@ static void sub_80C2A8C(u8 taskId)
             species = gContestMons[i].species;
             personality = gContestMons[i].personality;
             otId = gContestMons[i].otId;
-            HandleLoadSpecialPokePic(gMonFrontPicTable + species, gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (intptr_t)gSharedMem, gUnknown_081FAF4C[1], species, personality);
+            HandleLoadSpecialPokePic(gMonFrontPicTable + species, gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (void *)gSharedMem, gMonSpriteGfx_Sprite_ptr[1], species, personality);
             monPal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
             LoadCompressedObjectPalette(monPal);
             GetMonSpriteTemplate_803C56C(species, 1);
-            gUnknown_02024E8C.paletteTag = monPal->tag;
-            spriteId = CreateSprite(&gUnknown_02024E8C, 0x110, 0x50, 10);
+            gCreatingSpriteTemplate.paletteTag = monPal->tag;
+            spriteId = CreateSprite(&gCreatingSpriteTemplate, 0x110, 0x50, 10);
             gSprites[spriteId].data[1] = species;
             gSprites[spriteId].oam.priority = 0;
             gSprites[spriteId].callback = sub_80C3C44;
@@ -702,7 +702,7 @@ static void sub_80C2D80(u8 taskId)
     if (gIsLinkContest & 1)
     {
         sub_80C3698(gOtherText_LinkStandby);
-        sub_800832C();
+        SetCloseLinkCallback();
         gTasks[taskId].func = sub_80C2DD8;
     }
     else
@@ -727,8 +727,8 @@ static void sub_80C2E14(u8 taskId)
     sub_810FB10(2);
     Contest_SaveWinner(gSpecialVar_ContestRank);
     Contest_SaveWinner(0xFE);
-    ewram15DDF = 1;
-    ewram15DDE = sub_80B2C4C(0xfe, 0);
+    eCurContestWinnerIsForArtist = TRUE;
+    eCurContestWinnerSaveIdx = GetContestWinnerSaveIdx(0xfe, 0);
     BeginHardwarePaletteFade(0xff, 0, 0, 16, 0);
     gTasks[taskId].func = sub_80C2EA0;
 }
@@ -1282,10 +1282,10 @@ u16 sub_80C34AC(const u8 * string)
 void sub_80C34CC(s16 arg0, u16 y, u16 arg2, u16 arg3)
 {
     struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
-    sprite->pos1.x = 272;
-    sprite->pos1.y = y;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x = 272;
+    sprite->y = y;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     sprite->data[4] = arg0 + 32;
     sprite->data[5] = arg2;
     sprite->data[6] = arg3;
@@ -1297,10 +1297,10 @@ void sub_80C34CC(s16 arg0, u16 y, u16 arg2, u16 arg3)
 void sub_80C3520(u16 arg0)
 {
     struct Sprite *sprite = &gSprites[eContestLink80C2020Struct2018000.unk_00];
-    sprite->pos1.x += sprite->pos2.x;
-    sprite->pos1.y += sprite->pos2.y;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x += sprite->x2;
+    sprite->y += sprite->y2;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     sprite->data[6] = arg0;
     sprite->data[7] = 0;
     sprite->callback = sub_80C3630;
@@ -1309,10 +1309,10 @@ void sub_80C3520(u16 arg0)
 
 void sub_80C3564(struct Sprite *sprite)
 {
-    sprite->pos1.x = 272;
-    sprite->pos1.y = 144;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x = 272;
+    sprite->y = 144;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     sprite->callback = SpriteCallbackDummy;
     eContestLink80C2020Struct2018000.unk_04 = 0;
 }
@@ -1324,18 +1324,18 @@ void sub_80C3588(struct Sprite *sprite)
     s16 var0;
 
     var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
-    sprite->pos1.x -= var0 >> 8;
+    sprite->x -= var0 >> 8;
     sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
-    if (sprite->pos1.x < sprite->data[4])
-        sprite->pos1.x = sprite->data[4];
+    if (sprite->x < sprite->data[4])
+        sprite->x = sprite->data[4];
 
     for (i = 0; i < 3; i++)
     {
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
     }
 
-    if (sprite->pos1.x == sprite->data[4])
+    if (sprite->x == sprite->data[4])
         sprite->callback = sub_80C35FC;
 }
 
@@ -1355,15 +1355,15 @@ void sub_80C3630(struct Sprite *sprite)
     s16 var0;
 
     var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
-    sprite->pos1.x -= var0 >> 8;
+    sprite->x -= var0 >> 8;
     sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
     for (i = 0; i < 3; i++)
     {
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
+        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
     }
 
-    if (sprite->pos1.x + sprite->pos2.x < -224)
+    if (sprite->x + sprite->x2 < -224)
         sub_80C3564(sprite);
 }
 
@@ -1376,18 +1376,18 @@ void sub_80C3698(const u8 *text)
     sub_80C3158(text, eContestLink80C2020Struct2018000.unk_01);
     x = sub_80C34AC(text);
     sprite = &gSprites[eContestLink80C2020Struct2018000.unk_01];
-    sprite->pos1.x = x + 32;
-    sprite->pos1.y = 80;
+    sprite->x = x + 32;
+    sprite->y = 80;
     sprite->invisible = FALSE;
     for (i = 0; i < 3; i++)
     {
-        gSprites[sprite->data[i]].pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
-        gSprites[sprite->data[i]].pos1.y = sprite->pos1.y;
+        gSprites[sprite->data[i]].x = sprite->x + sprite->x2 + (i + 1) * 64;
+        gSprites[sprite->data[i]].y = sprite->y;
         gSprites[sprite->data[i]].invisible = FALSE;
     }
 
     gBattle_WIN0H = 0x00F0;
-    gBattle_WIN0V = ((sprite->pos1.y - 16) << 8) | (sprite->pos1.y + 16);
+    gBattle_WIN0V = ((sprite->y - 16) << 8) | (sprite->y + 16);
     REG_WININ = WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR;
 }
 
@@ -1788,7 +1788,7 @@ u8 sub_80C3990(u8 monIndex, u8 arg1)
     u32 var0;
     u32 var1;
 
-    var0 = gContestMonConditions[monIndex] << 16;
+    var0 = gContestMonRound1Points[monIndex] << 16;
     var1 = var0 / 0x3F;
     if (var1 & 0xFFFF)
         var1 += 0x10000;
@@ -1810,7 +1810,7 @@ s8 sub_80C39E4(u8 arg0, u8 arg1)
     s16 val;
     s8 ret;
 
-    val = gUnknown_02038688[arg0];
+    val = gContestMonRound2Points[arg0];
     if (val < 0)
         r4 = -val << 16;
     else
@@ -1826,7 +1826,7 @@ s8 sub_80C39E4(u8 arg0, u8 arg1)
     if (arg1 != 0 && r2 > 10)
         r2 = 10;
 
-    if (gUnknown_02038688[arg0] < 0)
+    if (gContestMonRound2Points[arg0] < 0)
         ret = -r2;
     else
         ret =  r2;
@@ -2003,12 +2003,12 @@ void sub_80C3C44(struct Sprite *sprite)
     else
     {
         s16 delta = (u16)sprite->data[1] + 0x600;
-        sprite->pos1.x -= delta >> 8;
+        sprite->x -= delta >> 8;
         sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
-        if (sprite->pos1.x < 120)
-            sprite->pos1.x = 120;
+        if (sprite->x < 120)
+            sprite->x = 120;
 
-        if (sprite->pos1.x == 120)
+        if (sprite->x == 120)
         {
             sprite->callback = SpriteCallbackDummy;
             sprite->data[1] = 0;
@@ -2020,9 +2020,9 @@ void sub_80C3C44(struct Sprite *sprite)
 void sub_80C3CB8(struct Sprite *sprite)
 {
     s16 delta = (u16)sprite->data[1] + 0x600;
-    sprite->pos1.x -= delta >> 8;
+    sprite->x -= delta >> 8;
     sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
-    if (sprite->pos1.x < -32)
+    if (sprite->x < -32)
     {
         sprite->callback = SpriteCallbackDummy;
         sprite->invisible = TRUE;
@@ -2055,16 +2055,16 @@ void sub_80C3DF0(struct Sprite *sprite)
     register s16 var0 asm("r1");
 
     sprite->data[3] += sprite->data[0];
-    sprite->pos2.x = Sin(sprite->data[3] >> 8, sprite->data[1]);
+    sprite->x2 = Sin(sprite->data[3] >> 8, sprite->data[1]);
     var0 = sprite->data[4] + sprite->data[2];
-    sprite->pos1.x += var0 >> 8;
+    sprite->x += var0 >> 8;
     var0 = var0 & 0xFF;
     sprite->data[4] = var0;
-    sprite->pos1.y++;
+    sprite->y++;
     if (eContestLink80C2020Struct2018000.unk_09)
         sprite->invisible = TRUE;
 
-    if (sprite->pos1.x > 248 || sprite->pos1.y > 116)
+    if (sprite->x > 248 || sprite->y > 116)
     {
         DestroySprite(sprite);
         eContestLink80C2020Struct2018000.unk_07--;
@@ -2093,41 +2093,41 @@ void sub_80C3EA4(u8 taskId)
 void sub_80C3F00(void)
 {
     s32 i;
-    s16 r2 = gUnknown_02038678[0];
+    s16 r2 = gContestMonTotalPoints[0];
     s32 r4;
     u32 r5;
     s8 r0;
 
     for (i = 1; i < 4; i++)
     {
-        if (r2 < gUnknown_02038678[i])
-            r2 = gUnknown_02038678[i];
+        if (r2 < gContestMonTotalPoints[i])
+            r2 = gContestMonTotalPoints[i];
     }
 
     if (r2 < 0)
     {
-        r2 = gUnknown_02038678[0];
+        r2 = gContestMonTotalPoints[0];
 
         for (i = 1; i < 4; i++)
         {
-            if (r2 > gUnknown_02038678[i])
-                r2 = gUnknown_02038678[i];
+            if (r2 > gContestMonTotalPoints[i])
+                r2 = gContestMonTotalPoints[i];
         }
     }
 
     for (i = 0; i < 4; i++)
     {
-        r4 = 1000 * gContestMonConditions[i] / ABS(r2);
+        r4 = 1000 * gContestMonRound1Points[i] / ABS(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
 
-        r4 = 1000 * ABS(gUnknown_02038688[i]) / ABS(r2);
+        r4 = 1000 * ABS(gContestMonRound2Points[i]) / ABS(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_04 = r4 / 10;
 
-        if (gUnknown_02038688[i] < 0)
+        if (gContestMonRound2Points[i] < 0)
             eContestLink80C2020Struct2018018[i].unk_10 = 1;
 
         r5 = 22528 * eContestLink80C2020Struct2018018[i].unk_00 / 100;
@@ -2568,7 +2568,7 @@ void ScrSpecial_CheckSelectedMonAndInitContest(void)
     if (result != 0)
     {
         Contest_InitAllPokemon(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
-        InitContestMonConditions(gSpecialVar_ContestCategory);
+        CalculateRound1Points(gSpecialVar_ContestCategory);
     }
     gSpecialVar_Result = result;
 }
@@ -2700,7 +2700,7 @@ void ScrSpecial_CountContestMonsWithBetterCondition(void)
 
     for (i = 0, count = 0; i < 4; i++)
     {
-        if (gContestMonConditions[gSpecialVar_0x8006] < gContestMonConditions[i])
+        if (gContestMonRound1Points[gSpecialVar_0x8006] < gContestMonRound1Points[i])
             count++;
     }
 
@@ -2709,7 +2709,7 @@ void ScrSpecial_CountContestMonsWithBetterCondition(void)
 
 void ScrSpecial_GetMonCondition(void)
 {
-    gSpecialVar_0x8004 = gContestMonConditions[gSpecialVar_0x8006];
+    gSpecialVar_0x8004 = gContestMonRound1Points[gSpecialVar_0x8006];
 }
 
 void ScrSpecial_GetContestWinnerIdx(void)
@@ -2770,7 +2770,7 @@ void sub_80C48C8(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
 }
 
-void sub_80C48F4(void)
+void Contest_GetSpeciesNameI_StringVar1(void)
 {
     gSpecialVar_0x8004 = gContestMons[gSpecialVar_0x8006].species;
 }
@@ -2796,37 +2796,40 @@ void ScrSpecial_GetContestPlayerMonIdx(void)
     gSpecialVar_0x8004 = gContestPlayerMonIndex;
 }
 
-void sub_80C4980(u8 taskId)
+void ContestLinkTransfer(u8 category)
 {
-    u8 taskId2;
+    u8 taskId;
     ScriptContext2_Enable();
-    taskId2 = CreateTask(sub_80C8604, 0);
-    SetTaskFuncWithFollowupFunc(taskId2, sub_80C8604, sub_80C49C4);
-    gTasks[taskId2].data[9] = taskId;
+    taskId = CreateTask(Task_LinkContest_Init, 0);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_Init, Task_StartCommunication);
+    gTasks[taskId].data[9] = category;
 }
 
-void sub_80C49C4(u8 taskId)
+void Task_StartCommunication(u8 taskId)
 {
     Contest_CreatePlayerMon(gContestMonPartyIndex);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, sub_80C49F0);
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, Task_StartCommunicateRng);
 }
 
-void sub_80C49F0(u8 taskId)
+void Task_StartCommunicateRng(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C88AC, sub_80C4A0C);
+    SetTaskFuncWithFollowupFunc(
+        taskId, Task_LinkContest_CommunicateRng, Task_StartCommunicateLeaderIds);
 }
 
-void sub_80C4A0C(u8 taskId)
+void Task_StartCommunicateLeaderIds(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8E1C, sub_80C4A28);
+    SetTaskFuncWithFollowupFunc(
+        taskId, Task_LinkContest_CommunicateLeaderIds, Task_StartCommunicateCategory);
 }
 
-void sub_80C4A28(u8 taskId)
+void Task_StartCommunicateCategory(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8938, sub_80C4A44);
+    SetTaskFuncWithFollowupFunc(
+        taskId, Task_LinkContest_CommunicateCategory, Task_LinkContest_SetUpContest);
 }
 
-void sub_80C4A44(u8 taskId)
+void Task_LinkContest_SetUpContest(u8 taskId)
 {
     u8 i;
     u8 sp0[4];
@@ -2849,18 +2852,20 @@ void sub_80C4A44(u8 taskId)
     for (i = 0; i < 4; i++)
         sp4[i] = gTasks[taskId].data[i + 5];
 
-    gUnknown_0203869B = sub_80C4B34(sp4);
-    InitContestMonConditions(gSpecialVar_ContestCategory);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80C4B0C);
+    gContestLinkLeaderIndex = LinkContest_GetLeaderIndex(sp4);
+    CalculateRound1Points(gSpecialVar_ContestCategory);
+    SetTaskFuncWithFollowupFunc(
+        taskId, Task_LinkContest_CommunicateRound1Points, Task_LinkContest_CalculateTurnOrder);
 }
 
-void sub_80C4B0C(u8 taskId)
+void Task_LinkContest_CalculateTurnOrder(u8 taskId)
 {
-    sub_80B0F28(0);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8F34, sub_80C4B5C);
+    SortContestants(0);
+    SetTaskFuncWithFollowupFunc(
+        taskId, Task_LinkContest_CommunicateTurnOrder, Task_LinkContest_FinalizeConnection);
 }
 
-u8 sub_80C4B34(u8 * a0)
+u8 LinkContest_GetLeaderIndex(u8 * a0)
 {
     s32 i;
     u8 result = 0;
@@ -2874,12 +2879,12 @@ u8 sub_80C4B34(u8 * a0)
     return result;
 }
 
-void sub_80C4B5C(u8 taskId)
+void Task_LinkContest_FinalizeConnection(u8 taskId)
 {
     if (gSpecialVar_0x8004 == 1)
     {
         if (IsLinkTaskFinished())
-            gTasks[taskId].func = sub_80C4BA4;
+            gTasks[taskId].func = Task_LinkContest_Disconnect;
     }
     else
     {
@@ -2889,13 +2894,13 @@ void sub_80C4B5C(u8 taskId)
     }
 }
 
-void sub_80C4BA4(u8 taskId)
+void Task_LinkContest_Disconnect(u8 taskId)
 {
-    sub_800832C();
-    gTasks[taskId].func = sub_80C4BCC;
+    SetCloseLinkCallback();
+    gTasks[taskId].func = Task_LinkContest_WaitDisconnect;
 }
 
-void sub_80C4BCC(u8 taskId)
+void Task_LinkContest_WaitDisconnect(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {

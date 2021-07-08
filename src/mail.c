@@ -291,7 +291,7 @@ const u8 Str_8411608[] = DTR("メールをけす", "Delete MAIL");
 #endif
 
 // XXX: what is this?
-static u8 *const sSharedMemPtr = gSharedMem;
+static struct Unk2000000 *const sSharedMemPtr = (struct Unk2000000 *)gSharedMem;
 
 static u8 sub_80F8A28(void);
 static void sub_80F8D50(void);
@@ -319,65 +319,65 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
 #if DEBUG
     if (gUnknown_Debug_0300079C != 0)
     {
-        ewram0_4.varFF = GAME_LANGUAGE;
-        ewram0_4.var100 = gSpecialVar_0x8004;
-        ewram0_4.var104 = (MainCallback)EasyChat_GetWordText;
-        ewram0_4.var108 = (MainCallback)ConvertEasyChatWordsToString;
-        ewram0_4.varFA = gSpecialVar_0x8006;
+        sSharedMemPtr->varFF = GAME_LANGUAGE;
+        sSharedMemPtr->var100 = gSpecialVar_0x8004;
+        sSharedMemPtr->var104 = (MainCallback)EasyChat_GetWordText;
+        sSharedMemPtr->var108 = (MainCallback)ConvertEasyChatWordsToString;
+        sSharedMemPtr->varFA = gSpecialVar_0x8006;
     }
     else
 #endif
     {
-        ewram0_4.varFF = GAME_LANGUAGE;
-        ewram0_4.var100 = 1;
-        ewram0_4.var104 = (MainCallback)EasyChat_GetWordText;
-        ewram0_4.var108 = (MainCallback)ConvertEasyChatWordsToString;
+        sSharedMemPtr->varFF = GAME_LANGUAGE;
+        sSharedMemPtr->var100 = 1;
+        sSharedMemPtr->var104 = (MainCallback)EasyChat_GetWordText;
+        sSharedMemPtr->var108 = (MainCallback)ConvertEasyChatWordsToString;
         if (IS_ITEM_MAIL(arg0->itemId))
         {
-            ewram0_4.varFA = arg0->itemId - 0x79;
+            sSharedMemPtr->varFA = arg0->itemId - 0x79;
         }
         else
         {
-            ewram0_4.varFA = 0;
+            sSharedMemPtr->varFA = 0;
             arg2 = FALSE;
         }
     }
 
-    switch (ewram0_4.var100)
+    switch (sSharedMemPtr->var100)
     {
     case 0:
     default:
-        ewram0_4.var10C = &gUnknown_083E5730[ewram0_4.varFA];
+        sSharedMemPtr->var10C = &gUnknown_083E5730[sSharedMemPtr->varFA];
         break;
     case 1:
-        ewram0_4.var10C = &gUnknown_083E57A4[ewram0_4.varFA];
+        sSharedMemPtr->var10C = &gUnknown_083E57A4[sSharedMemPtr->varFA];
         break;
     }
 
     species = MailSpeciesToSpecies(arg0->species, buffer);
     if (species >= 1 && species <= 411)
     {
-        switch (ewram0_4.varFA)
+        switch (sSharedMemPtr->varFA)
         {
         case 6:
-            ewram0_4.varFB = 1;
+            sSharedMemPtr->varFB = 1;
             break;
         case 9:
-            ewram0_4.varFB = 2;
+            sSharedMemPtr->varFB = 2;
             break;
         default:
-            ewram0_4.varFB = 0;
+            sSharedMemPtr->varFB = 0;
             break;
         }
     }
     else
     {
-        ewram0_4.varFB = 0;
+        sSharedMemPtr->varFB = 0;
     }
 
-    ewram0_4.varF4 = arg0;
-    ewram0_4.varEC = arg1;
-    ewram0_4.varF8 = arg2;
+    sSharedMemPtr->varF4 = arg0;
+    sSharedMemPtr->varEC = arg1;
+    sSharedMemPtr->varF8 = arg2;
 
     SetMainCallback2(sub_80F8D50);
 }
@@ -447,31 +447,31 @@ static u8 sub_80F8A28(void)
         RETURN_UP_STATE;
 
     case 11:
-        LoadPalette(gMailGraphicsTable[ewram0_4.varFA].palette, 0, 16 * 2);
+        LoadPalette(gMailGraphicsTable[sSharedMemPtr->varFA].palette, 0, 16 * 2);
         RETURN_UP_STATE;
 
     case 12:
-        LZ77UnCompVram(gMailGraphicsTable[ewram0_4.varFA].tileMap, (void *)(VRAM + 0x4000));
+        LZ77UnCompVram(gMailGraphicsTable[sSharedMemPtr->varFA].tileMap, (void *)(VRAM + 0x4000));
         RETURN_UP_STATE;
 
     case 13:
-        LZ77UnCompVram(gMailGraphicsTable[ewram0_4.varFA].tiles, (void *)(VRAM));
+        LZ77UnCompVram(gMailGraphicsTable[sSharedMemPtr->varFA].tiles, (void *)(VRAM));
 
-        gPlttBufferUnfaded[241] = gMailGraphicsTable[ewram0_4.varFA].color10;
-        gPlttBufferUnfaded[248] = gMailGraphicsTable[ewram0_4.varFA].color12;
+        gPlttBufferUnfaded[241] = gMailGraphicsTable[sSharedMemPtr->varFA].color10;
+        gPlttBufferUnfaded[248] = gMailGraphicsTable[sSharedMemPtr->varFA].color12;
         gPlttBufferUnfaded[10] = gUnknown_083E562C[gSaveBlock2.playerGender][0];
         gPlttBufferUnfaded[11] = gUnknown_083E562C[gSaveBlock2.playerGender][1];
         RETURN_UP_STATE;
 
     case 14:
-        if (ewram0_4.varF8 != 0)
+        if (sSharedMemPtr->varF8 != 0)
         {
             sub_80F8DA0();
         }
         RETURN_UP_STATE;
 
     case 15:
-        if (ewram0_4.varF8 != 0)
+        if (sSharedMemPtr->varF8 != 0)
         {
             sub_80F8E80();
         }
@@ -484,18 +484,18 @@ static u8 sub_80F8A28(void)
     {
         u16 local1;
 
-        local1 = sub_809D4A8(ewram0_4.varF4->species);
+        local1 = sub_809D4A8(sSharedMemPtr->varF4->species);
 
-        switch (ewram0_4.varFB)
+        switch (sSharedMemPtr->varFB)
         {
         case 1:
             sub_809D580(local1);
-            ewram0_4.varFC = sub_809D3A4(local1, SpriteCallbackDummy, 96, 128, 0);
+            sSharedMemPtr->varFC = sub_809D3A4(local1, SpriteCallbackDummy, 96, 128, 0);
             break;
 
         case 2:
             sub_809D580(local1);
-            ewram0_4.varFC = sub_809D3A4(local1, SpriteCallbackDummy, 40, 128, 0);
+            sSharedMemPtr->varFC = sub_809D3A4(local1, SpriteCallbackDummy, 40, 128, 0);
             break;
         }
         RETURN_UP_STATE;
@@ -516,7 +516,7 @@ static u8 sub_80F8A28(void)
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gPaletteFade.bufferTransferDisabled = 0;
-        ewram0_4.varF0 = sub_80F8F58;
+        sSharedMemPtr->varF0 = sub_80F8F58;
         return TRUE;
 
     default:
@@ -558,24 +558,24 @@ static void sub_80F8DA0(void)
     u8 *ptr;
 
     r6 = 0;
-    for (i = 0; i < ewram0_4.var10C->var0; i++)
+    for (i = 0; i < sSharedMemPtr->var10C->var0; i++)
     {
-        ConvertEasyChatWordsToString(ewram0_4.words[i], &ewram0_4.varF4->words[r6], ewram0_4.var10C->var4[i].unk_0_2, 1);
-        r6 += ewram0_4.var10C->var4[i].unk_0_2;
+        ConvertEasyChatWordsToString(sSharedMemPtr->words[i], &sSharedMemPtr->varF4->words[r6], sSharedMemPtr->var10C->var4[i].unk_0_2, 1);
+        r6 += sSharedMemPtr->var10C->var4[i].unk_0_2;
     }
-    ptr = ewram0_4.varD8;
-    if (ewram0_4.var100 == 0)
+    ptr = sSharedMemPtr->varD8;
+    if (sSharedMemPtr->var100 == 0)
     {
-        ptr = sub_80F8D7C(ptr, ewram0_4.varF4->playerName);
+        ptr = sub_80F8D7C(ptr, sSharedMemPtr->varF4->playerName);
         StringCopy(ptr, gOtherText_From);
-        ewram0_4.varF9 = ewram0_4.var10C->var2 - StringLength(ewram0_4.varD8);
+        sSharedMemPtr->varF9 = sSharedMemPtr->var10C->var2 - StringLength(sSharedMemPtr->varD8);
 
     }
     else
     {
         ptr = StringCopy(ptr, gOtherText_From);
-        sub_80F8D7C(ptr, ewram0_4.varF4->playerName);
-        ewram0_4.varF9 = ewram0_4.var10C->var2;
+        sub_80F8D7C(ptr, sSharedMemPtr->varF4->playerName);
+        sSharedMemPtr->varF9 = sSharedMemPtr->var10C->var2;
     }
 }
 
@@ -585,25 +585,25 @@ static void sub_80F8E80(void)
     u8 x;
     u8 y = 0;
 
-    for (pos = 0; pos < ewram0_4.var10C->var0; pos++)
+    for (pos = 0; pos < sSharedMemPtr->var10C->var0; pos++)
     {
-        if (ewram0_4.words[pos][0] == 0xFF)
+        if (sSharedMemPtr->words[pos][0] == 0xFF)
         {
             continue;
         }
 
-        if (ewram0_4.words[pos][0] == 0x00)
+        if (sSharedMemPtr->words[pos][0] == 0x00)
         {
             continue;
         }
 
-        x = ewram0_4.var10C->var4[pos].unk_0_4;
-        y += ewram0_4.var10C->var4[pos].unk_0_0;
-        Menu_PrintText(ewram0_4.words[pos], ewram0_4.var10C->var3_4 + x, ewram0_4.var10C->var3_0 + y);
+        x = sSharedMemPtr->var10C->var4[pos].unk_0_4;
+        y += sSharedMemPtr->var10C->var4[pos].unk_0_0;
+        Menu_PrintText(sSharedMemPtr->words[pos], sSharedMemPtr->var10C->var3_4 + x, sSharedMemPtr->var10C->var3_0 + y);
         y += 2;
     }
 
-    Menu_PrintText(ewram0_4.varD8, ewram0_4.varF9, ewram0_4.var10C->var1);
+    Menu_PrintText(sSharedMemPtr->varD8, sSharedMemPtr->varF9, sSharedMemPtr->var10C->var1);
 }
 
 static void sub_80F8F18(void)
@@ -615,13 +615,13 @@ static void sub_80F8F18(void)
 
 static void sub_80F8F2C(void)
 {
-    if (ewram0_4.varFB != 0)
+    if (sSharedMemPtr->varFB != 0)
     {
         AnimateSprites();
         BuildOamBuffer();
     }
 
-    ewram0_4.varF0();
+    sSharedMemPtr->varF0();
 }
 
 static void sub_80F8F58(void)
@@ -631,7 +631,7 @@ static void sub_80F8F58(void)
     local0 = UpdatePaletteFade();
     if (local0 == 0)
     {
-        ewram0_4.varF0 = sub_80F8F78;
+        sSharedMemPtr->varF0 = sub_80F8F78;
     }
 }
 
@@ -640,7 +640,7 @@ static void sub_80F8F78(void)
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-        ewram0_4.varF0 = sub_80F8FB4;
+        sSharedMemPtr->varF0 = sub_80F8FB4;
     }
 }
 
@@ -648,17 +648,17 @@ static void sub_80F8FB4(void)
 {
     if (!UpdatePaletteFade())
     {
-        SetMainCallback2(ewram0_4.varEC);
-        switch (ewram0_4.varFB)
+        SetMainCallback2(sSharedMemPtr->varEC);
+        switch (sSharedMemPtr->varFB)
         {
         case 2:
         case 1:
-            sub_809D608(sub_809D4A8(ewram0_4.varF4->species));
-            sub_809D510(&gSprites[ewram0_4.varFC]);
+            sub_809D608(sub_809D4A8(sSharedMemPtr->varF4->species));
+            sub_809D510(&gSprites[sSharedMemPtr->varFC]);
             break;
         }
 #if !DEBUG
-        memset(&ewram0_4, 0, 0x110);
+        memset(sSharedMemPtr, 0, sizeof(struct Unk2000000));
 #endif
         ResetPaletteFade();
     }

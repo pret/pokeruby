@@ -107,13 +107,13 @@ void sub_80CC82C(struct Sprite* sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x -= gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
     }
 
     sprite->callback = sub_8078600;
@@ -127,5 +127,5 @@ void sub_80CC884(struct Sprite* sprite)
 
     sprite->callback = sub_80CC810;
     sub_807867C(sprite, gBattleAnimArgs[0]);
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
 }

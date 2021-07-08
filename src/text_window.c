@@ -205,7 +205,7 @@ u16 TextWindow_SetDlgFrameBaseTileNum(u16 baseTileNum)
 
 void unref_sub_80651DC(struct Window *win, u8 *text)
 {
-    Text_InitWindow8002EB0(win, text, sDialogueFrameBaseTileNum + 14, 2, 15);
+    Contest_StartTextPrinter(win, text, sDialogueFrameBaseTileNum + 14, 2, 15);
 }
 
 // Loads and draws a dialogue window frame

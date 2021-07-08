@@ -6,7 +6,7 @@ void sub_80C5580(void);
 void SetBattleTowerPlayerParty(void);
 void ReducePlayerPartyToThree(void);
 
-u8 sub_80C4D50(void);
+u8 CountPlayerMuseumPaintings(void);
 void ShowContestWinner(void);
 void ScrSpecial_HealPlayerParty();
 u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);

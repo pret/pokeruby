@@ -193,6 +193,20 @@ struct UnknownPokemonStruct
     /*0x2B*/u8 friendship;
 };
 
+struct MultiBattlePokemonTx
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 #define BATTLE_STATS_NO 8
 
 struct BattlePokemon
@@ -255,6 +269,8 @@ enum
     STAT_SPD,    // 3
     STAT_SPATK,  // 4
     STAT_SPDEF,  // 5
+    STAT_ACC,    // 6
+    STAT_EVA,    // 7
 };
 
 struct BaseStats
@@ -487,7 +503,7 @@ const u8 *GetMonSpritePal(struct Pokemon *mon);
 const u8 *GetMonSpritePalFromOtIdPersonality(u16, u32, u32);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
-void sub_8040B8C(void);
+void SetMonPreventsSwitchingString(void);
 void SetWildMonHeldItem(void);
 u8 *sub_8040D08();
 bool32 ShouldHideGenderIconForLanguage(u16 species, u8 *name, u8 language);

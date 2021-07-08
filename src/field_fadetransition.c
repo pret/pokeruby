@@ -490,7 +490,7 @@ void sub_8081050(u8 taskId)
     case 1:
         if (!PaletteFadeActive() && BGMusicStopped())
         {
-            sub_800832C();
+            SetCloseLinkCallback();
             data[0]++;
         }
         break;

@@ -53,8 +53,8 @@ const s8 gUnknown_083D6DDC[][2] =
 
 void sub_80CD3E0(struct Sprite* sprite)
 {
-    sprite->pos1.x -= 32;
-    sprite->pos1.y -= 32;
+    sprite->x -= 32;
+    sprite->y -= 32;
     sprite->data[0] = 20;
     sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, sub_80CD408);
@@ -70,13 +70,13 @@ static void sub_80CD408(struct Sprite* sprite)
         StoreSpriteCallbackInData(sprite, sub_80CD408);
         break;
     case 1:
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x2 = 0;
         sprite->data[0] = 8;
-        sprite->data[2] = sprite->pos1.x + gUnknown_083D6DDC[sprite->data[5] >> 8][0];
-        sprite->data[4] = sprite->pos1.y + gUnknown_083D6DDC[sprite->data[5] >> 8][1];
+        sprite->data[2] = sprite->x + gUnknown_083D6DDC[sprite->data[5] >> 8][0];
+        sprite->data[4] = sprite->y + gUnknown_083D6DDC[sprite->data[5] >> 8][1];
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, sub_80CD4B8);
         sprite->data[5] += 0x100;
@@ -135,10 +135,10 @@ static void sub_80CD4EC(struct Sprite* sprite)
             break;
         }
 
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x2 = 0;
         sprite->data[0] = 6;
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + a;
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + b;
@@ -202,25 +202,25 @@ void sub_80CD6CC(struct Sprite* sprite)
     sprite->oam.affineParam = gBattleAnimArgs[0];
     if ((s16)sprite->oam.affineParam == 1)
     {
-        sprite->pos1.x -= 0x18;
-        sprite->pos1.y -= 0x18;
+        sprite->x -= 0x18;
+        sprite->y -= 0x18;
     }
     else if ((s16)sprite->oam.affineParam == 2)
     {
-        sprite->pos1.x -= 0x18;
-        sprite->pos1.y += 0x18;
+        sprite->x -= 0x18;
+        sprite->y += 0x18;
         sprite->oam.matrixNum = 16;
     }
     else if ((s16)sprite->oam.affineParam == 3)
     {
-        sprite->pos1.x += 0x18;
-        sprite->pos1.y -= 0x18;
+        sprite->x += 0x18;
+        sprite->y -= 0x18;
         sprite->oam.matrixNum = 8;
     }
     else
     {
-        sprite->pos1.x += 0x18;
-        sprite->pos1.y += 0x18;
+        sprite->x += 0x18;
+        sprite->y += 0x18;
         sprite->oam.matrixNum = 24;
     }
 

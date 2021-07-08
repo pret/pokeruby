@@ -7,7 +7,7 @@
 #define NATIONAL_DEX_COUNT 386
 
 void ResetPokedex(void);
-void sub_808C0A0(void);
+void ResetPokedexScrollPositions(void);
 void CB2_InitPokedex(void);
 u8 sub_809070C(u16 dexNum, u32 b, u32 c);
 const u8 *GetPokemonCategory(u16);
@@ -28,7 +28,7 @@ u16 GetHoennPokedexCount(u8);
 bool8 CompletedHoennPokedex(void);
 bool16 CompletedNationalPokedex(void);
 
-extern bool8 gUnknown_03005CE8;
+extern bool8 gUnusedPokedexU8;
 
 struct PokedexEntry
 {
@@ -46,9 +46,9 @@ struct PokedexEntry
 
 extern const struct PokedexEntry gPokedexEntries[];
 
-u16 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum);
-u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum);
+u16 CreateSizeScreenTrainerPic(u16 gender, s16 x, s16 y, u16 paletteNum);
+u16 CreateMonSpriteFromNationalDexNumber(u16 num, s16 x, s16 y, u16 paletteNum);
 
-void sub_8091738(u16, u16, u16);
+void PrintFootprint(u16 num, u16 b, u16 c);
 
 #endif // GUARD_POKEDEX_H

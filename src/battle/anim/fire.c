@@ -189,7 +189,7 @@ void sub_80D4F18(struct Sprite *sprite)
 {
     sub_807867C(sprite, gBattleAnimArgs[0]);
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[2] = gBattleAnimArgs[3];
@@ -204,14 +204,14 @@ void sub_80D4F5C(struct Sprite *sprite)
 
     if (GetBattlerSide(gBattleAnimAttacker))
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x -= gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         sprite->data[2] = -gBattleAnimArgs[4];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         sprite->data[2] = gBattleAnimArgs[4];
     }
 
@@ -226,14 +226,14 @@ void sub_80D4FCC(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker))
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x -= gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         sprite->data[2] = gBattleAnimArgs[4];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         sprite->data[2] = -gBattleAnimArgs[4];
     }
 
@@ -248,8 +248,8 @@ static void sub_80D5038(struct Sprite *sprite)
 {
     if (++sprite->data[0] < sprite->data[4])
     {
-        sprite->pos2.x += sprite->data[2];
-        sprite->pos2.y += sprite->data[3];
+        sprite->x2 += sprite->data[2];
+        sprite->y2 += sprite->data[3];
     }
 
     if (sprite->data[0] == sprite->data[1])
@@ -262,15 +262,15 @@ void sub_80D5074(struct Sprite *sprite)
 
     if (GetBattlerSide(gBattleAnimAttacker))
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
         sprite->subpriority = 8;
     }
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
@@ -288,8 +288,8 @@ static void sub_80D50E8(struct Sprite *sprite)
         if(sprite->data[5] > 10000)
             sprite->subpriority = 1;
 
-        sprite->pos2.x = Sin(sprite->data[0], sprite->data[1] + (sprite->data[5] >> 8));
-        sprite->pos2.y = Cos(sprite->data[0], sprite->data[1] + (sprite->data[5] >> 8));
+        sprite->x2 = Sin(sprite->data[0], sprite->data[1] + (sprite->data[5] >> 8));
+        sprite->y2 = Cos(sprite->data[0], sprite->data[1] + (sprite->data[5] >> 8));
 
         sprite->data[0] += sprite->data[2];
         sprite->data[5] += sprite->data[4];

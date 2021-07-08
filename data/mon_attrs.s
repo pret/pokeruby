@@ -138,7 +138,7 @@ gSpriteAffineAnim_81E7BDC:: @ 81E7BDC
 	obj_rot_scal_anim_end
 
 	.align 2
-gSpriteAffineAnimTable_81E7BEC:: @ 81E7BEC
+gAffineAnims_BattleSpriteOpponentSide:: @ 81E7BEC
 	.4byte gSpriteAffineAnim_81E7AA0
 	.4byte gSpriteAffineAnim_81E7AC0
 	.4byte gSpriteAffineAnim_81E7AD8
@@ -152,7 +152,7 @@ gSpriteAffineAnimTable_81E7BEC:: @ 81E7BEC
 	.4byte gSpriteAffineAnim_81E7BDC
 
 	.align 2
-gSpriteAffineAnimTable_81E7C18:: @ 81E7C18
+gAffineAnims_BattleSpriteContest:: @ 81E7C18
 	.4byte gSpriteAffineAnim_81E7AB0
 	.4byte gSpriteAffineAnim_81E7AC0
 	.4byte gSpriteAffineAnim_81E7AD8

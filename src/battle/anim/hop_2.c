@@ -68,15 +68,15 @@ static void sub_80CBB60(struct Sprite* sprite)
         sprite->data[0] = zero;
     }
 
-    sprite->pos2.y = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
-    if (sprite->pos2.y == 0)
+    sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
+    if (sprite->y2 == 0)
     {
         PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
 
     if (sub_80CB814(sprite))
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->data[0] = 0;
         sprite->callback = sub_80CB8B8;
         PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));

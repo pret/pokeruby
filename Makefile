@@ -88,13 +88,9 @@ ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISI
 CPPFLAGS := -iquote include -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D=DEBUG_FIX$(DEBUG_FIX) -D DEBUG=$(DEBUG) -D MODERN=$(MODERN)
 ifeq ($(MODERN),0)
 CPPFLAGS += -I tools/agbcc/include -nostdinc -undef
-CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
+CC1FLAGS := -g -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 else
-CC1FLAGS := -mthumb -mthumb-interwork -mabi=apcs-gnu -mcpu=arm7tdmi -O2 -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast -Wno-stringop-overflow
-endif
-
-ifneq (,$(DINFO))
-CC1FLAGS += -g
+CC1FLAGS := -g -mthumb -mthumb-interwork -mabi=apcs-gnu -mcpu=arm7tdmi -O2 -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast -Wno-stringop-overflow
 endif
 
 ifneq (,$(NONMATCHING))
@@ -242,7 +238,8 @@ $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
-	cd $(BUILD_DIR) && $(LD) -T $(LD_SCRIPT:$(BUILD_DIR)/%=%) -Map ../../$(MAP) -o ../../$@ $(OBJS_REL) $(LDFLAGS)
+	@echo "cd $(BUILD_DIR) && $(LD) -T $(LD_SCRIPT:$(BUILD_DIR)/%=%) -Map ../../$(MAP) -o ../../$@ <objects> <lib>"
+	@cd $(BUILD_DIR) && $(LD) -T $(LD_SCRIPT:$(BUILD_DIR)/%=%) -Map ../../$(MAP) -o ../../$@ $(OBJS_REL) $(LDFLAGS)
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(LD_SCRIPT): $(LD_SCRIPT:$(BUILD_DIR)/%.ld=%.txt) $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
@@ -251,17 +248,20 @@ $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
-	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
-	$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
+	@echo "$(CC1) <flags> -o $@ $<"
+	@$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
+	@$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
 	@$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	@echo "$(AS) <flags> -o $@ $<"
+	@$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
-	$(AS) $(ASFLAGS) $< -o $@
+	@echo "$(AS) <flags> -o $@ $<"
+	@$(AS) $(ASFLAGS) $< -o $@
 
 # "friendly" target names for convenience sake
 ruby:              ; @$(MAKE) GAME_VERSION=RUBY

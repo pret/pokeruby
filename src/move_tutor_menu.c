@@ -364,7 +364,7 @@ static void MoveTutorMain(void)
         DrawLearnMoveMenuWindow();
         DrawBattleMoveInfoHeaders(FALSE);
         DrawMoveSelectionWindow();
-        gSprites[1].pos1.x = 0x48;
+        gSprites[1].x = 0x48;
         sMoveTutorMenu->redrawMoveInfoWindow = TRUE;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
@@ -381,7 +381,7 @@ static void MoveTutorMain(void)
         DrawMoveSelectionWindow();
         sMoveTutorMenu->redrawMoveInfoWindow = TRUE;
         sMoveTutorMenu->state++;
-        gSprites[1].pos1.x = 0x48;
+        gSprites[1].x = 0x48;
         break;
     case 4:
         if (!ChangeToContestMoveInfoWindow())
@@ -391,7 +391,7 @@ static void MoveTutorMain(void)
         DrawContestMoveInfoHeaders(FALSE);
         DrawMoveSelectionWindow();
         sMoveTutorMenu->redrawMoveInfoWindow = TRUE;
-        gSprites[1].pos1.x = 0x48;
+        gSprites[1].x = 0x48;
         sMoveTutorMenu->state++;
         break;
     case 6:
@@ -567,7 +567,7 @@ static void MoveTutorMain(void)
             DrawBattleMoveInfoHeaders(TRUE);
         if (sMoveTutorMenu->showContestInfo == TRUE)
         {
-            gSprites[1].pos1.x = 0x48;
+            gSprites[1].x = 0x48;
             DrawContestMoveInfoHeaders(TRUE);
         }
         DrawMoveInfoWindow(sMoveTutorMenu->showContestInfo, 1);
@@ -754,10 +754,10 @@ static void UpdateMoveTutorMenuCursorPosition(struct Sprite *sprite)
     case 0:
         break;
     case 1:
-        sprite->pos2.x = Sin(var, 3) * sprite->data[2];
+        sprite->x2 = Sin(var, 3) * sprite->data[2];
         break;
     case 2:
-        sprite->pos2.y = Sin(var, 1) * sprite->data[2];
+        sprite->y2 = Sin(var, 1) * sprite->data[2];
         break;
     }
     sprite->data[1]++;

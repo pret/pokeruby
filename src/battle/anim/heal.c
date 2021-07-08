@@ -46,7 +46,7 @@ void sub_80CBAA4(struct Sprite* sprite)
     }
 
     sprite->data[0]++;
-    sprite->pos2.y = sprite->data[1] * sprite->data[0];
+    sprite->y2 = sprite->data[1] * sprite->data[0];
     if (sprite->animEnded)
     {
         DestroyAnimSprite(sprite);

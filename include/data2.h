@@ -21,9 +21,9 @@ extern const struct SpriteFrameImage gSpriteImageTable_81E7A30[];
 extern const struct SpriteFrameImage gSpriteImageTable_81E7A50[];
 extern const struct SpriteFrameImage gSpriteImageTable_81E7A70[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7B70[];
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
 
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18[];
+extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 extern const union AnimCmd *const gSpriteAnimTable_81E7C64[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gMonBackPicCoords[];
@@ -48,8 +48,8 @@ extern const u8 gUnknown_081F96C8[];
 extern const struct CompressedSpriteSheet gUnknown_081FAEA4;
 extern const struct CompressedSpritePalette gUnknown_081FAEAC;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF0C;
-extern u8 *const gUnknown_081FAF4C[];
-//extern u8 (*const gUnknown_081FAF4C[])[0x800];
+extern u8 *const gMonSpriteGfx_Sprite_ptr[];
+//extern u8 (*const gMonSpriteGfx_Sprite_ptr[])[0x800];
 extern const struct BattleMove gBattleMoves[];
 
 // data/graphics/trainers/front_pic_coords.inc

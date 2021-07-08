@@ -51,7 +51,7 @@ extern u8 gUnknown_020297ED;
 extern u8 gUnknown_020384F0;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
-extern u8 gUnknown_0202E8F6;
+extern bool8 gPartyMenuMessage_IsPrinting;
 extern u8 gPokemonItemUseType;
 extern u16 gUnknown_0202E8F8;
 extern void (*gPokemonItemUseCallback)(u8 taskID, u16 itemID, TaskFunc func);
@@ -329,8 +329,8 @@ static void sub_8089EBC(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gUnknown_020384F0);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_8089E84();
             SetMainCallback2(CB2_PartyMenuMain);
@@ -352,7 +352,7 @@ static void sub_8089F44(u8 taskID)
     {
         u8 spriteID = gSprites[gTasks[taskID].data[3] >> 8].data[0];
         DestroyTask(taskID);
-        ewram1B000_alt.unk262 = 1;
+        ePartyMenu2.unk262 = 1;
         ShowPokemonSummaryScreen(gPlayerParty, spriteID, gPlayerPartyCount - 1, sub_8089F14, PSS_MODE_NORMAL);
     }
 }
@@ -372,8 +372,8 @@ void DoPokemonMenu_Switch(u8 taskID)
 static void PokemonMenu_Switch(u8 taskID)
 {
     Menu_DestroyCursor();
-    ewram01000.unkC = sub_806CD5C;
-    ewram01000.array[53553] = 1;
+    ePartyMenu.unkC = sub_806CD5C;
+    ePartyMenu.array[53553] = 1;
     DoPokemonMenu_Switch(taskID);
 }
 
@@ -428,7 +428,7 @@ static void sub_808A180(u8 taskID)
 
 static void sub_808A1E0(u8 taskID)
 {
-    if (gUnknown_0202E8F6 != 1)
+    if (gPartyMenuMessage_IsPrinting != 1)
     {
         SetHeldItemIconVisibility(taskID, sub_806CA38(taskID));
         PrintPartyMenuPromptText(0, 0);
@@ -480,8 +480,8 @@ static void sub_808A358(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -496,9 +496,9 @@ static void sub_808A3A4(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
-            EWRAM_1B000.unk262 = 3;
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
+            ePartyMenu2.unk262 = 3;
             sub_8089E84();
             SetMainCallback2(CB2_PartyMenuMain);
             break;
@@ -544,8 +544,8 @@ static void sub_808A4D4(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -605,7 +605,7 @@ static void PokemonMenu_TakeItem(u8 taskID)
 {
     Menu_DestroyCursor();
     Menu_EraseWindowRect(19, 0, 29, 19);
-    sub_806D5A4();
+    PartyMenuEraseMsgBoxAndFrame();
     PartyMenuTryGiveMonHeldItem_806ECE8(taskID, sub_808A678);
 }
 
@@ -613,7 +613,7 @@ static void PokemonMenu_TakeMail(u8 taskID)
 {
     Menu_DestroyCursor();
     Menu_EraseWindowRect(19, 0, 29, 19);
-    sub_806D5A4();
+    PartyMenuEraseMsgBoxAndFrame();
     DoTakeMail(taskID, sub_808A678);
 }
 
@@ -675,7 +675,7 @@ static void sub_808A848(u8 taskID)
 static void sub_808A8A8(void)
 {
     gUnknown_020384F0 = gLastFieldPokeMenuOpened;
-    ewram1B000.unk262 = 4;
+    ePartyMenu2.unk262 = 4;
     sub_8089F14();
 }
 
@@ -699,7 +699,7 @@ static void PokemonMenu_CancelSubmenu(u8 taskID)
     Menu_DestroyCursor();
     PlaySE(SE_SELECT);
     Menu_EraseWindowRect(19, 0, 29, 19);
-    sub_806D5A4();
+    PartyMenuEraseMsgBoxAndFrame();
     sub_8089C7C(sPokeMenuCursorPos);
     gTasks[taskID].func = sub_8089D94;
 }
@@ -729,8 +729,8 @@ static void PokemonMenu_FieldMove(u8 taskID)
     {
         // can't use a field HM move without a proper badge
         Menu_EraseWindowRect(19, 0, 29, 19);
-        sub_806D5A4();
-        sub_806E834(gOtherText_CantBeUsedBadge, 1);
+        PartyMenuEraseMsgBoxAndFrame();
+        DisplayPartyMenuMessage(gOtherText_CantBeUsedBadge, 1);
         gTasks[taskID].func = sub_808AAF0;
     }
     else
@@ -760,7 +760,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
 
 static void sub_808AAF0(u8 taskID)
 {
-    if (gUnknown_0202E8F6 != 1 && (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON))
+    if (gPartyMenuMessage_IsPrinting != 1 && (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON))
     {
         Menu_EraseWindowRect(0, 14, 29, 19);
         PokemonMenu_Cancel(taskID);
@@ -853,8 +853,8 @@ static void sub_808AD0C(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -989,8 +989,8 @@ static void sub_808AF80(void)
             }
             if (gLastFieldPokeMenuOpened > 5 || !GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES))
                 gLastFieldPokeMenuOpened = 0;
-            sub_806C994(ewram1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -1033,7 +1033,7 @@ void sub_808B0C0(u8 taskID)
                 PlaySE(SE_FAILURE);
             else
             {
-                sub_806D5A4();
+                PartyMenuEraseMsgBoxAndFrame();
                 if (gPokemonItemUseType == ITEM_USE_SINGLE_MON)
                     gPokemonItemUseCallback(taskID, gSpecialVar_ItemId, sub_808B224);
                 if (gPokemonItemUseType == ITEM_USE_GIVE_ITEM)
@@ -1127,8 +1127,8 @@ static void sub_808B3A0(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gLastFieldPokeMenuOpened);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gLastFieldPokeMenuOpened);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
@@ -1172,7 +1172,7 @@ static void sub_808B4A4(u8 taskID)
 
 static void sub_808B4EC(u8 taskID)
 {
-    if (gUnknown_0202E8F6 != 1)
+    if (gPartyMenuMessage_IsPrinting != 1)
         sub_808B224(taskID);
 }
 
@@ -1187,8 +1187,8 @@ static void sub_808B518(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
-            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
+            sub_806C994(ePartyMenu2.menuHandlerTaskId, gUnknown_020384F0);
+            ChangePartyMenuSelection(ePartyMenu2.menuHandlerTaskId, 0);
             SetMainCallback2(CB2_PartyMenuMain);
             break;
         }

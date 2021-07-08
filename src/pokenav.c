@@ -2872,10 +2872,10 @@ void sub_80F21F8()
 
 void sub_80F2218(struct Sprite *sprite)
 {
-    sprite->pos1.x -= 8;
-    if (sprite->pos1.x <= sprite->data[2])
+    sprite->x -= 8;
+    if (sprite->x <= sprite->data[2])
     {
-        sprite->pos1.x = sprite->data[2];
+        sprite->x = sprite->data[2];
         sprite->callback = sub_80F22B0;
     }
 }
@@ -2886,7 +2886,7 @@ void sub_80F2240(struct Sprite *sprite)
     {
         if (sprite->data[5])
         {
-            sprite->pos1.x += sprite->data[4];
+            sprite->x += sprite->data[4];
             sprite->data[5] -= sprite->data[4];
         }
 
@@ -2895,8 +2895,8 @@ void sub_80F2240(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.x += 8;
-        if (sprite->pos1.x >= sprite->data[3])
+        sprite->x += 8;
+        if (sprite->x >= sprite->data[3])
             sub_80F240C(sprite);
     }
 }
@@ -2905,13 +2905,13 @@ void sub_80F22B0(struct Sprite *sprite)
 {
     if (sprite->data[0] == gPokenavStructPtr->unk6DAD)
     {
-        if (sprite->pos2.x > -16)
-            sprite->pos2.x -= 4;
+        if (sprite->x2 > -16)
+            sprite->x2 -= 4;
     }
     else
     {
-        if (sprite->pos2.x < 0)
-            sprite->pos2.x += 4;
+        if (sprite->x2 < 0)
+            sprite->x2 += 4;
     }
 }
 
@@ -2927,7 +2927,7 @@ bool8 sub_80F22F8(void)
             if (!sprite)
                 return TRUE;
 
-            if (sprite->pos2.x != 0 && sprite->pos2.x != -16)
+            if (sprite->x2 != 0 && sprite->x2 != -16)
                 return FALSE;
         }
     }
@@ -3283,11 +3283,11 @@ void sub_80F29B8(u8 arg0)
 #define sEndX sprite->data[1]
 void sub_80F2BBC(struct Sprite *sprite)
 {
-    s16 x = sprite->pos1.x;
-    sprite->pos1.x += sprite->data[0];
-    if ((x <= sEndX && sprite->pos1.x >= sEndX) || (x >= sEndX && sprite->pos1.x <= sEndX))
+    s16 x = sprite->x;
+    sprite->x += sprite->data[0];
+    if ((x <= sEndX && sprite->x >= sEndX) || (x >= sEndX && sprite->x <= sEndX))
     {
-        sprite->pos1.x = sEndX;
+        sprite->x = sEndX;
         if (sprite->data[3] == 4 && sprite->data[2] == 1)
             sprite->callback = sub_80F2C58;
         else
@@ -3300,8 +3300,8 @@ void sub_80F2C14(struct Sprite *sprite)
 {
     u16 right;
 
-    sprite->pos1.x -= sprite->data[0];
-    right = sprite->pos1.x + 32;
+    sprite->x -= sprite->data[0];
+    right = sprite->x + 32;
     if (right > 304)
     {
         if (sprite->data[2] == 1)
@@ -3394,7 +3394,7 @@ void sub_80F2DF4(void)
 
 void sub_80F2E00(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPokenavStructPtr->unk8766 + 38;
+    sprite->x = gPokenavStructPtr->unk8766 + 38;
 }
 
 void sub_80F2E18(u8 arg0)
@@ -3468,8 +3468,8 @@ void sub_80F2FB0(void)
 
 void sub_80F2FEC(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPokenavStructPtr->unkD15A + 40;
-    sprite->pos1.y = 104;
+    sprite->x = gPokenavStructPtr->unkD15A + 40;
+    sprite->y = 104;
 }
 
 void sub_80F3008(u8 arg0)
@@ -3547,7 +3547,7 @@ void sub_80F3130(void)
 
 void sub_80F3190(struct Sprite *sprite)
 {
-    sprite->pos1.y = gPokenavStructPtr->unk876C * 16 + 16;
+    sprite->y = gPokenavStructPtr->unk876C * 16 + 16;
 }
 
 void sub_80F31AC(struct Sprite *sprite)
@@ -3569,12 +3569,12 @@ void sub_80F31AC(struct Sprite *sprite)
             sprite->data[0] = 0;
             if (++sprite->data[1] < 5)
             {
-                sprite->pos2.y += sprite->data[2];
+                sprite->y2 += sprite->data[2];
             }
             else
             {
                 sprite->data[1] = 0;
-                sprite->pos2.y = 0;
+                sprite->y2 = 0;
             }
         }
     }
@@ -3708,8 +3708,8 @@ void sub_80F35B4(void)
     sub_80F7404();
     sprite = sub_80F7920(27, 21, gUnknown_083E4678);
     sprite->oam.priority = 3;
-    sprite->pos1.x = 192;
-    sprite->pos1.y = 32;
+    sprite->x = 192;
+    sprite->y = 32;
     sprite->callback = sub_80F363C;
     gPokenavStructPtr->unk76AC = sprite;
 }
@@ -4077,17 +4077,17 @@ void sub_80F3E24(struct Sprite *sprite)
 {
     if (gPokenavStructPtr->unk8768)
     {
-        sprite->pos1.x = gPokenavStructPtr->unk8768->pos1.x
-                         + gPokenavStructPtr->unk8768->pos2.x
+        sprite->x = gPokenavStructPtr->unk8768->x
+                         + gPokenavStructPtr->unk8768->x2
                          + gUnknown_083E4794[sprite->data[0]][0];
-        sprite->pos1.y = gPokenavStructPtr->unk8768->pos1.y
-                         + gPokenavStructPtr->unk8768->pos2.y
+        sprite->y = gPokenavStructPtr->unk8768->y
+                         + gPokenavStructPtr->unk8768->y2
                          + gUnknown_083E4794[sprite->data[0]][1];
     }
     else
     {
-        sprite->pos1.x = gUnknown_083E4794[sprite->data[0]][0] + 40;
-        sprite->pos1.y = gUnknown_083E4794[sprite->data[0]][1] + 104;
+        sprite->x = gUnknown_083E4794[sprite->data[0]][0] + 40;
+        sprite->y = gUnknown_083E4794[sprite->data[0]][1] + 104;
     }
 }
 
@@ -4225,8 +4225,8 @@ bool8 sub_80F4024(void)
 
 void sub_80F4138(struct Sprite *sprite)
 {
-    sprite->pos2.y = -gPokenavStructPtr->unk030C;
-    if (sprite->pos2.y <= -32)
+    sprite->y2 = -gPokenavStructPtr->unk030C;
+    if (sprite->y2 <= -32)
     {
         if (sprite->data[0] == 0)
         {
@@ -4626,7 +4626,7 @@ void sub_80F4824(s16 arg0, u8 arg1)
             &gMonFrontPicTable[species],
             gMonFrontPicCoords[species].coords,
             1,
-            (intptr_t)gPokenavStructPtr->unk131E4,
+            gPokenavStructPtr->unk131E4,
             gPokenavStructPtr->unkD1E4[arg1],
             species,
             personality);

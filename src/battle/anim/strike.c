@@ -64,36 +64,36 @@ void sub_80CE670(struct Sprite* sprite)
 
     sprite->data[0] = 0;
     sprite->data[1] = gBattleAnimArgs[2];
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[0];
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[1];
-    sprite->data[6] = sprite->pos1.x;
-    sprite->data[7] = sprite->pos1.y;
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[0];
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[1];
+    sprite->data[6] = sprite->x;
+    sprite->data[7] = sprite->y;
     if (IsContest() != 0)
     {
         sprite->oam.matrixNum = 8;
-        sprite->pos1.x += 40;
-        sprite->pos1.y += 20;
-        sprite->data[2] = sprite->pos1.x << 7;
+        sprite->x += 40;
+        sprite->y += 20;
+        sprite->data[2] = sprite->x << 7;
         sprite->data[3] = -0x1400 / sprite->data[1];
-        sprite->data[4] = sprite->pos1.y << 7;
+        sprite->data[4] = sprite->y << 7;
         sprite->data[5] = -0xA00 / sprite->data[1];
     }
     else if (GetBattlerSide(gBattleAnimAttacker) == 0)
     {
-        sprite->pos1.x -= 40;
-        sprite->pos1.y += 20;
-        sprite->data[2] = sprite->pos1.x << 7;
+        sprite->x -= 40;
+        sprite->y += 20;
+        sprite->data[2] = sprite->x << 7;
         sprite->data[3] = 0x1400 / sprite->data[1];
-        sprite->data[4] = sprite->pos1.y << 7;
+        sprite->data[4] = sprite->y << 7;
         sprite->data[5] = -0xA00 / sprite->data[1];
     }
     else
     {
-        sprite->pos1.x += 40;
-        sprite->pos1.y -= 20;
-        sprite->data[2] = sprite->pos1.x << 7;
+        sprite->x += 40;
+        sprite->y -= 20;
+        sprite->data[2] = sprite->x << 7;
         sprite->data[3] = -0x1400 / sprite->data[1];
-        sprite->data[4] = sprite->pos1.y << 7;
+        sprite->data[4] = sprite->y << 7;
         sprite->data[5] = 0xA00 / sprite->data[1];
         sprite->oam.matrixNum = 24;
     }
@@ -105,12 +105,12 @@ static void sub_80CE798(struct Sprite* sprite)
 {
     sprite->data[2] += sprite->data[3];
     sprite->data[4] += sprite->data[5];
-    sprite->pos1.x = sprite->data[2] >> 7;
-    sprite->pos1.y = sprite->data[4] >> 7;
+    sprite->x = sprite->data[2] >> 7;
+    sprite->y = sprite->data[4] >> 7;
     if (--sprite->data[1] == 1)
     {
-        sprite->pos1.x = sprite->data[6];
-        sprite->pos1.y = sprite->data[7];
+        sprite->x = sprite->data[6];
+        sprite->y = sprite->data[7];
     }
 
     if (sprite->data[1] == 0)

@@ -1,11 +1,12 @@
 #include "global.h"
-#include "constants/maps.h"
-#include "constants/species.h"
-#include "clock.h"
 #include "new_game.h"
 #include "battle_records.h"
 #include "berry.h"
+#include "clock.h"
+#include "constants/maps.h"
+#include "constants/species.h"
 #include "contest.h"
+#include "contest_util.h"
 #include "decoration_inventory.h"
 #include "dewford_trend.h"
 #include "easy_chat.h"
@@ -15,6 +16,7 @@
 #include "lottery_corner.h"
 #include "mail_data.h"
 #include "mauville_man.h"
+#include "overworld.h"
 #include "play_time.h"
 #include "player_pc.h"
 #include "pokeblock.h"
@@ -23,8 +25,6 @@
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "roamer.h"
-#include "script_pokemon_80C4.h"
-#include "overworld.h"
 #include "rtc.h"
 #include "script.h"
 #include "secret_base.h"
@@ -35,7 +35,7 @@ EWRAM_DATA u8 gDifferentSaveFile = 0;
 EWRAM_DATA u8 gUnknown_020297ED = 0;
 
 extern u8 gPlayerPartyCount;
-extern u8 gUnknown_03005CE8;
+extern u8 gUnusedPokedexU8;
 extern u16 gSaveFileStatus;
 
 extern u8 EventScript_ResetAllMapFlags[];
@@ -91,7 +91,7 @@ void SetDefaultOptions(void)
 
 void ClearPokedexFlags(void)
 {
-    gUnknown_03005CE8 = 0;
+    gUnusedPokedexU8 = 0;
     memset(&gSaveBlock2.pokedex.owned, 0, sizeof(gSaveBlock2.pokedex.owned));
     memset(&gSaveBlock2.pokedex.seen, 0, sizeof(gSaveBlock2.pokedex.seen));
 }
@@ -152,7 +152,7 @@ void sub_8052E4C(void)
 #if DEBUG
     gUnknown_020297ED = 0;
 #endif
-    sub_808C0A0();
+    ResetPokedexScrollPositions();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();

@@ -9,8 +9,8 @@
 #include "data2.h"
 #include "ewram.h"
 
-extern struct SpriteTemplate gUnknown_02024E8C;
-extern struct Window gUnknown_03004210;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
 extern u8 gBankInMenu;
@@ -72,7 +72,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         ScanlineEffect_Clear();
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
         ResetPaletteFade();
-        Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+        Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;
@@ -201,7 +201,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
     {
         if (GetBattlerSide(bank))
         {
-            if (!ewram17800[bank].substituteSprite)
+            if (!gBattleSpriteInfo[bank].substituteSprite)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[bank]], bank);
             else
                 BattleLoadSubstituteSprite(bank, 0);
@@ -210,7 +210,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
             LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, 0);
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
             LoadPlayerTrainerBankSprite(2, 0);
-        else if (!ewram17800[bank].substituteSprite)
+        else if (!gBattleSpriteInfo[bank].substituteSprite)
             BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[bank]], bank);
         else
             BattleLoadSubstituteSprite(bank, 0);
@@ -226,7 +226,7 @@ static void sub_807B184(u8 bank)
     {
         u8 posY;
 
-        if (ewram17800[bank].substituteSprite)
+        if (gBattleSpriteInfo[bank].substituteSprite)
             posY = sub_8077F7C(bank);
         else
             posY = sub_8077F68(bank);
@@ -235,7 +235,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
@@ -245,7 +245,7 @@ static void sub_807B184(u8 bank)
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
         {
             GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(0));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, 0x50,
                                                 (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
                                                  GetBattlerSubpriority(0));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
@@ -255,7 +255,7 @@ static void sub_807B184(u8 bank)
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
         {
             GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(0));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, 0x50,
                                                 (8 - gTrainerBackPicCoords[2].coords) * 4 + 80,
                                                  GetBattlerSubpriority(0));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
@@ -267,14 +267,14 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
+            gBattlerSpriteIds[bank] = CreateSprite(&gCreatingSpriteTemplate, GetBattlerSpriteCoord(bank, 2), posY, GetBattlerSubpriority(bank));
             gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
             gSprites[gBattlerSpriteIds[bank]].data[2] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
             StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
         }
-        gSprites[gBattlerSpriteIds[bank]].invisible = ewram17800[bank].invisible;
+        gSprites[gBattlerSpriteIds[bank]].invisible = gBattleSpriteInfo[bank].invisible;
     }
 }
 

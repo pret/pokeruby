@@ -146,15 +146,16 @@ enum
 };
 
 
-struct Unk201C000
+struct CreditsData
 {
-    u16 unk0[POKEMON_TILE_COUNT];
-    u16 unk88;
-    u16 unk8A;
-    u16 unk8C;
-    u16 unk8E;
-    u16 unk90[386];
-    u16 unk394;
+    u16 monToShow[POKEMON_TILE_COUNT]; // List of Pokemon species ids that will show during the credits
+    u16 imgCounter; //how many mon images have been shown
+    u16 nextImgPos; //if the next image spawns left/center/right
+    u16 currShownMon; //index into monToShow
+    u16 numMonToShow; //number of pokemon to show, always NUM_MON_SLIDES after determine function
+    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught pokemon
+    u16 numCaughtMon; //count of filled spaces in caughtMonIds
+    u16 unused[7];
 };
 
 struct CreditsEntry
@@ -163,19 +164,16 @@ struct CreditsEntry
     const u8 *text;
 };
 
-extern u8 unk_201e800[0x800];
-extern u8 unk_201f000[0x800];
-
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern u16 gUnknown_02039358;
 extern s16 gUnknown_0203935A;
-extern s16 gUnknown_0203935C;
+extern s16 gIntroCredits_MovingSceneryState;
 
 static EWRAM_DATA s16 gUnknown_02039320 = 0;
-static EWRAM_DATA u16 gUnknown_02039322 = 0; // TASK A
-EWRAM_DATA u8 gUnknown_02039324 = 0;
-static EWRAM_DATA u8 gUnknown_02039325 = 0;
+static EWRAM_DATA u16 sSavedTaskId = 0; // TASK A
+EWRAM_DATA u8 gHasHallOfFameRecords = 0;
+static EWRAM_DATA u8 sUsedSpeedUp = 0;
 
 extern u8 gReservedSpritePaletteCount;
 
@@ -186,9 +184,9 @@ extern void *gUnknown_0840B5A0[];
 const u16 gUnknown_0840B7BC[] = INCBIN_U16("graphics/credits/palette_1.gbapal");
 const u8 gUnknown_0840B7FC[] = INCBIN_U8("graphics/credits/ampersand.4bpp");
 
-void spritecb_814580C(struct Sprite *sprite);
+void SpriteCB_CreditsMonBg(struct Sprite *sprite);
 
-const u8 gUnknown_0840B83C[] =
+const u8 sTheEnd_LetterMap_T[] =
 {
     0,    1, 0,
     0xFF, 1, 0xFF,
@@ -197,7 +195,7 @@ const u8 gUnknown_0840B83C[] =
     0xFF, 1, 0xFF,
 };
 
-const u8 gUnknown_0840B84B[] =
+const u8 sTheEnd_LetterMap_H[] =
 {
     1, 0xFF, 1,
     1, 0xFF, 1,
@@ -206,7 +204,7 @@ const u8 gUnknown_0840B84B[] =
     1, 0xFF, 1,
 };
 
-const u8 gUnknown_0840B85A[] =
+const u8 sTheEnd_LetterMap_E[] =
 {
     1, 0, 0,
     1, 0xFF, 0xFF,
@@ -215,7 +213,7 @@ const u8 gUnknown_0840B85A[] =
     1, 0x80, 0x80,
 };
 
-const u8 gUnknown_0840B869[] =
+const u8 sTheEnd_LetterMap_N[] =
 {
     1, 3, 1,
     1, 4, 1,
@@ -224,26 +222,32 @@ const u8 gUnknown_0840B869[] =
     1, 0xC3, 1,
 };
 
-const u8 gUnknown_0840B878[] =
+const u8 sTheEnd_LetterMap_D[] =
 {
     1, 6, 7,
     1, 8, 9,
     1, 0xFF, 1,
     1, 0x88, 0x89,
     1, 0x86, 0x87,
+};
+
 #ifdef GERMAN
+const u8 sTheEnd_LetterMap_F[] = {
     1, 0, 0,
     1, 0xFF, 0xFF,
     1, 0x80, 0x8A,
     1, 0xFF, 0xFF,
     1, 0xFF, 0xFF,
+};
+
+const u8 sTheEnd_LetterMap_I[] = {
     0, 1, 0,
     0xFF, 1, 0xFF,
     0xFF, 1, 0xFF,
     0xFF, 1, 0xFF,
     0x80, 1, 0x80,
-#endif
 };
+#endif
 
 #ifdef GERMAN
 #include "data/credits_de.h"
@@ -251,7 +255,7 @@ const u8 gUnknown_0840B878[] =
 #include "data/credits_en.h"
 #endif
 
-const u8 gUnknown_0840CA00[][2] =
+const u8 sMonSpritePos[][2] =
 {
     {104, 36},
     {120, 36},
@@ -332,8 +336,8 @@ static const union AnimCmd *const gSpriteAnimTable_0840CA94[] =
     gSpriteAnim_840CA8C,
 };
 
-static const struct SpriteSheet gUnknown_0840CAA0[] = {{ewram1E000_2, 6144, 1001}, {0}};
-static const struct SpritePalette gUnknown_0840CAB0[] = {{ewram_1F800_2, 1001}, {0}};
+static const struct SpriteSheet gUnknown_0840CAA0[] = {{gDecompressionBuffer, 0x1800, 1001}, {0}};
+static const struct SpritePalette gUnknown_0840CAB0[] = {{(u16 *)(gDecompressionBuffer + 0x1800), 1001}, {0}};
 
 static const struct OamData gOamData_840CAC0 =
 {
@@ -385,47 +389,47 @@ static const struct SpriteTemplate gSpriteTemplate_840CAEC =
     .anims = gSpriteAnimTable_840CAE0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = spritecb_814580C,
+    .callback = SpriteCB_CreditsMonBg,
 };
 
 // graphics
 extern u8 gCreditsCopyrightEnd_Gfx[];
 extern u16 gIntroCopyright_Pal[16];
 
-static void task_a_8143B38(u8 taskIdA);
-static void task_a_8143B68(u8 taskIdA);
-static void task_a_8143BFC(u8 taskIdA);
-static void task_a_80C9BFC(u8 taskIdA);
-static void task_a_8143CC0(u8 taskIdA);
-static void task_a_8143D04(u8 taskIdA);
-static void task_a_8143EBC(u8 taskIdA);
-static void task_a_8143F04(u8 taskIdA);
-static void task_a_8143F3C(u8 taskIdA);
-static void task_a_8143FDC(u8 taskIdA);
-static void task_a_8144024(u8 taskIdA);
-static void task_a_8144080(u8 taskIdA);
-static void task_a_8144114(u8 taskIdA);
-static void sub_8144130(void);
-static void task_b_81441B8(u8 taskIdB);
-static u8 sub_8144454(u8 page, u8 taskIdA);
-static void task_d_8144514(u8 taskIdD);
-static bool8 sub_8144ECC(u8 data, u8 taskIdA);
-static void sub_81450AC(u8 taskIdA);
-static void sub_8145128(u16, u16, u16);
-static void sub_81452D0(u16 arg0, u16 palette);
-static void spritecb_player_8145378(struct Sprite *sprite);
-static void spritecb_rival_8145420(struct Sprite *sprite);
-static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position);
-static void sub_81458DC(void);
+static void Task_WaitPaletteFade(u8 taskIdA);
+static void Task_CreditsMain(u8 taskIdA);
+static void Task_ReadyBikeScene(u8 taskIdA);
+static void Task_SetBikeScene(u8 taskIdA);
+static void Task_ReadyShowMons(u8 taskIdA);
+static void Task_LoadShowMons(u8 taskIdA);
+static void Task_CreditsTheEnd1(u8 taskIdA);
+static void Task_CreditsTheEnd2(u8 taskIdA);
+static void Task_CreditsTheEnd3(u8 taskIdA);
+static void Task_CreditsTheEnd4(u8 taskIdA);
+static void Task_CreditsTheEnd5(u8 taskIdA);
+static void Task_CreditsTheEnd6(u8 taskIdA);
+static void Task_CreditsSoftReset(u8 taskIdA);
+static void ResetGpuAndVram(void);
+static void Task_UpdatePage(u8 taskIdB);
+static u8 CheckChangeScene(u8 page, u8 taskIdA);
+static void Task_ShowMons(u8 taskIdD);
+static bool8 LoadBikeScene(u8 data, u8 taskIdA);
+static void ResetCreditsTasks(u8 taskIdA);
+static void LoadTheEndScreen(u16, u16, u16);
+static void DrawTheEnd(u16 arg0, u16 palette);
+static void SpriteCB_Player(struct Sprite *sprite);
+static void SpriteCB_Rival(struct Sprite *sprite);
+static u8 CreateCreditsMonSprite(u16 species, u16 x, u16 y, u16 position);
+static void DeterminePokemonToShow(void);
 
-static void vblank_8143948(void)
+static void VBlankCB_Credits(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_814395C(void)
+static void CB2_Credits(void)
 {
     RunTasks();
     AnimateSprites();
@@ -433,32 +437,32 @@ static void sub_814395C(void)
     UpdatePaletteFade();
 
     if ((gMain.heldKeys & B_BUTTON)
-     && gUnknown_02039324 != 0
-     && gTasks[gUnknown_02039322].func == task_a_8143B68)
+     && gHasHallOfFameRecords != 0
+     && gTasks[sSavedTaskId].func == Task_CreditsMain)
     {
-        vblank_8143948();
+        VBlankCB_Credits();
         RunTasks();
         AnimateSprites();
         BuildOamBuffer();
         UpdatePaletteFade();
-        gUnknown_02039325 = 1;
+        sUsedSpeedUp = 1;
     }
 }
 
-void sub_81439D0(void)
+void CB2_StartCreditsSequence(void)
 {
     u8 taskIdA;
     s16 taskIdC;
     u8 taskIdB;
     u16 savedIme;
-    struct Unk201C000 *c000;
+    struct CreditsData *pCreditsData;
 
-    sub_8144130();
+    ResetGpuAndVram();
     SetVBlankCallback(NULL);
     ResetPaletteFade();
     ResetTasks();
 
-    taskIdA = CreateTask(task_a_8143B38, 0);
+    taskIdA = CreateTask(Task_WaitPaletteFade, 0);
 
     gTasks[taskIdA].data[TDA_4] = 0;
     gTasks[taskIdA].data[TDA_7] = 0;
@@ -467,7 +471,7 @@ void sub_81439D0(void)
 
     while (TRUE)
     {
-        if (sub_8144ECC(0, taskIdA))
+        if (LoadBikeScene(0, taskIdA))
             break;
     }
 
@@ -482,7 +486,7 @@ void sub_81439D0(void)
 
     REG_BG0VOFS = 0xFFFC;
 
-    taskIdB = CreateTask(task_b_81441B8, 0);
+    taskIdB = CreateTask(Task_UpdatePage, 0);
 
     gTasks[taskIdB].data[TDB_TASK_A_ID] = taskIdA;
     gTasks[taskIdA].data[TDA_TASK_B_ID] = taskIdB;
@@ -496,29 +500,29 @@ void sub_81439D0(void)
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
 
 
-    SetVBlankCallback(vblank_8143948);
+    SetVBlankCallback(VBlankCB_Credits);
     m4aSongNumStart(MUS_CREDITS);
-    SetMainCallback2(sub_814395C);
-    gUnknown_02039325 = 0;
+    SetMainCallback2(CB2_Credits);
+    sUsedSpeedUp = 0;
 
-    c000 = &ewram1c000;
+    pCreditsData = &sCreditsData;
 
-    sub_81458DC();
+    DeterminePokemonToShow();
 
-    c000->unk88 = 0;
-    c000->unk8A = 0;
-    c000->unk8C = 0;
+    pCreditsData->imgCounter = 0;
+    pCreditsData->nextImgPos = 0;
+    pCreditsData->currShownMon = 0;
 
-    gUnknown_02039322 = taskIdA;
+    sSavedTaskId = taskIdA;
 }
 
-static void task_a_8143B38(u8 taskIdA)
+static void Task_WaitPaletteFade(u8 taskIdA)
 {
     if (!gPaletteFade.active)
-        gTasks[taskIdA].func = task_a_8143B68;
+        gTasks[taskIdA].func = Task_CreditsMain;
 }
 
-static void task_a_8143B68(u8 taskIdA)
+static void Task_CreditsMain(u8 taskIdA)
 {
     u16 data1;
 
@@ -530,7 +534,7 @@ static void task_a_8143B68(u8 taskIdA)
         gTasks[taskIdC].data[TDC_0] = 30;
 
         gTasks[taskIdA].data[TDA_12] = 0x100;
-        gTasks[taskIdA].func = task_a_8143EBC;
+        gTasks[taskIdA].func = Task_CreditsTheEnd1;
         return;
     }
 
@@ -542,34 +546,34 @@ static void task_a_8143B68(u8 taskIdA)
         gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-        gTasks[taskIdA].func = task_a_8143BFC;
+        gTasks[taskIdA].func = Task_ReadyBikeScene;
     }
     else if (gTasks[taskIdA].data[TDA_11] == 2)
     {
         gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-        gTasks[taskIdA].func = task_a_8143CC0;
+        gTasks[taskIdA].func = Task_ReadyShowMons;
     }
 }
 
-static void task_a_8143BFC(u8 taskIdA)
+static void Task_ReadyBikeScene(u8 taskIdA)
 {
     if (!gPaletteFade.active)
     {
         REG_DISPCNT = 0;
-        sub_81450AC(taskIdA);
-        gTasks[taskIdA].func = task_a_80C9BFC;
+        ResetCreditsTasks(taskIdA);
+        gTasks[taskIdA].func = Task_SetBikeScene;
     }
 }
 
-static void task_a_80C9BFC(u8 taskIdA)
+static void Task_SetBikeScene(u8 taskIdA)
 {
     u16 backup;
 
     SetVBlankCallback(NULL);
 
-    if (sub_8144ECC(gTasks[taskIdA].data[TDA_7], taskIdA))
+    if (LoadBikeScene(gTasks[taskIdA].data[TDA_7], taskIdA))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 
@@ -579,22 +583,22 @@ static void task_a_80C9BFC(u8 taskIdA)
         REG_IME = backup;
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
 
-        SetVBlankCallback(vblank_8143948);
-        gTasks[taskIdA].func = task_a_8143B38;
+        SetVBlankCallback(VBlankCB_Credits);
+        gTasks[taskIdA].func = Task_WaitPaletteFade;
     }
 }
 
-static void task_a_8143CC0(u8 taskIdA)
+static void Task_ReadyShowMons(u8 taskIdA)
 {
     if (!gPaletteFade.active)
     {
         REG_DISPCNT = 0;
-        sub_81450AC(taskIdA);
-        gTasks[taskIdA].func = task_a_8143D04;
+        ResetCreditsTasks(taskIdA);
+        gTasks[taskIdA].func = Task_LoadShowMons;
     }
 }
 
-void task_a_8143D04(u8 taskIdA)
+void Task_LoadShowMons(u8 taskIdA)
 {
     switch (gMain.state)
     {
@@ -611,16 +615,16 @@ void task_a_8143D04(u8 taskIdA)
         LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)
-            HALL_OF_FAME_SHEET_0[i] = 0x11;
+            gDecompressionBuffer[i] = 0x11;
         for (i = 0; i < 0x800; i++)
-            HALL_OF_FAME_SHEET_1[i] = 0x22;
+            (gDecompressionBuffer + 0x800)[i] = 0x22;
         for (i = 0; i < 0x800; i++)
-            HALL_OF_FAME_SHEET_2[i] = 0x33;
+            (gDecompressionBuffer + 0x1000)[i] = 0x33;
 
-        EWRAM_1F800[0] = 0;
-        EWRAM_1F800[1] = 0x53FF; // light yellow
-        EWRAM_1F800[2] = 0x529F; // light red
-        EWRAM_1F800[3] = 0x7E94; // light blue
+        ((u16 *)(gDecompressionBuffer + 0x1800))[0] = RGB( 0,  0,  0); // black
+        ((u16 *)(gDecompressionBuffer + 0x1800))[1] = RGB(31, 31, 20); // light yellow
+        ((u16 *)(gDecompressionBuffer + 0x1800))[2] = RGB(31, 20, 20); // light red
+        ((u16 *)(gDecompressionBuffer + 0x1800))[3] = RGB(20, 20, 31); // light blue
 
         LoadSpriteSheet(gUnknown_0840CAA0);
         LoadSpritePalette(gUnknown_0840CAB0);
@@ -629,7 +633,7 @@ void task_a_8143D04(u8 taskIdA)
         break;
     }
     case 1:
-        gTasks[taskIdA].data[TDA_TASK_D_ID] = CreateTask(task_d_8144514, 0);
+        gTasks[taskIdA].data[TDA_TASK_D_ID] = CreateTask(Task_ShowMons, 0);
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_STATE] = 1;
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_TASK_A_ID] = taskIdA;
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_2] = gTasks[taskIdA].data[TDA_7];
@@ -641,13 +645,13 @@ void task_a_8143D04(u8 taskIdA)
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 
         gMain.state = 0;
-        gUnknown_0203935C = 0;
-        gTasks[taskIdA].func = task_a_8143B38;
+        gIntroCredits_MovingSceneryState = 0;
+        gTasks[taskIdA].func = Task_WaitPaletteFade;
         break;
     }
 }
 
-static void task_a_8143EBC(u8 taskIdA)
+static void Task_CreditsTheEnd1(u8 taskIdA)
 {
     if (gTasks[taskIdA].data[TDA_12])
     {
@@ -656,25 +660,25 @@ static void task_a_8143EBC(u8 taskIdA)
     }
 
     BeginNormalPaletteFade(0xFFFFFFFF, 12, 0, 16, RGB(0, 0, 0));
-    gTasks[taskIdA].func = task_a_8143F04;
+    gTasks[taskIdA].func = Task_CreditsTheEnd2;
 }
 
-static void task_a_8143F04(u8 taskIdA)
+static void Task_CreditsTheEnd2(u8 taskIdA)
 {
     if (!gPaletteFade.active)
     {
-        sub_81450AC(taskIdA);
-        gTasks[taskIdA].func = task_a_8143F3C;
+        ResetCreditsTasks(taskIdA);
+        gTasks[taskIdA].func = Task_CreditsTheEnd3;
     }
 }
 
-static void task_a_8143F3C(u8 taskIdA)
+static void Task_CreditsTheEnd3(u8 taskIdA)
 {
     u16 backup;
 
-    sub_8144130();
+    ResetGpuAndVram();
     ResetPaletteFade();
-    sub_8145128(0, 0x3800, 0);
+    LoadTheEndScreen(0, 0x3800, 0);
     ResetSpriteData();
     FreeAllSpritePalettes();
     BeginNormalPaletteFade(0xFFFFFFFF, 8, 16, 0, RGB(0, 0, 0));
@@ -688,10 +692,10 @@ static void task_a_8143F3C(u8 taskIdA)
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
 
     gTasks[taskIdA].data[TDA_0] = 0x100;
-    gTasks[taskIdA].func = task_a_8143FDC;
+    gTasks[taskIdA].func = Task_CreditsTheEnd4;
 }
 
-static void task_a_8143FDC(u8 taskIdA)
+static void Task_CreditsTheEnd4(u8 taskIdA)
 {
     if (gTasks[taskIdA].data[TDA_0])
     {
@@ -700,22 +704,22 @@ static void task_a_8143FDC(u8 taskIdA)
     }
 
     BeginNormalPaletteFade(0xFFFFFFFF, 6, 0, 16, RGB(0, 0, 0));
-    gTasks[taskIdA].func = task_a_8144024;
+    gTasks[taskIdA].func = Task_CreditsTheEnd5;
 }
 
-static void task_a_8144024(u8 taskIdA)
+static void Task_CreditsTheEnd5(u8 taskIdA)
 {
     if (!gPaletteFade.active)
     {
-        sub_81452D0(0x3800, 0);
+        DrawTheEnd(0x3800, 0);
 
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB(0, 0, 0));
         gTasks[taskIdA].data[TDA_0] = 7200;
-        gTasks[taskIdA].func = task_a_8144080;
+        gTasks[taskIdA].func = Task_CreditsTheEnd6;
     }
 }
 
-static void task_a_8144080(u8 taskIdA)
+static void Task_CreditsTheEnd6(u8 taskIdA)
 {
     if (!gPaletteFade.active)
     {
@@ -723,7 +727,7 @@ static void task_a_8144080(u8 taskIdA)
         {
             FadeOutBGM(4);
             BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, FADE_COLOR_WHITE);
-            gTasks[taskIdA].func = task_a_8144114;
+            gTasks[taskIdA].func = Task_CreditsSoftReset;
             return;
         }
 
@@ -731,7 +735,7 @@ static void task_a_8144080(u8 taskIdA)
         {
             FadeOutBGM(4);
             BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, FADE_COLOR_WHITE);
-            gTasks[taskIdA].func = task_a_8144114;
+            gTasks[taskIdA].func = Task_CreditsSoftReset;
             return;
         }
 
@@ -747,13 +751,13 @@ static void task_a_8144080(u8 taskIdA)
     }
 }
 
-static void task_a_8144114(u8 taskIdA)
+static void Task_CreditsSoftReset(u8 taskIdA)
 {
     if (!gPaletteFade.active)
         SoftReset(0xFF);
 }
 
-static void sub_8144130(void)
+static void ResetGpuAndVram(void)
 {
     REG_DISPCNT = 0;
 
@@ -775,7 +779,7 @@ static void sub_8144130(void)
     DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
 }
 
-static void task_b_81441B8(u8 taskIdB)
+static void Task_UpdatePage(u8 taskIdB)
 {
     u16 i;
 
@@ -805,7 +809,7 @@ static void task_b_81441B8(u8 taskIdB)
         return;
     case 2:
         REG_DISPCNT &= ~DISPCNT_BG0_ON;
-        if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].func == task_a_8143B68)
+        if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].func == Task_CreditsMain)
         {
             if (gTasks[taskIdB].data[TDB_CURRENT_PAGE] < PAGE_COUNT)
             {
@@ -843,7 +847,7 @@ static void task_b_81441B8(u8 taskIdB)
             return;
         }
 
-        if (sub_8144454((u8)gTasks[taskIdB].data[TDB_CURRENT_PAGE], (u8)gTasks[taskIdB].data[TDB_TASK_A_ID]))
+        if (CheckChangeScene((u8)gTasks[taskIdB].data[TDB_CURRENT_PAGE], (u8)gTasks[taskIdB].data[TDB_TASK_A_ID]))
         {
             gTasks[taskIdB].data[TDB_0] += 1;
             return;
@@ -869,7 +873,7 @@ static void task_b_81441B8(u8 taskIdB)
     }
 }
 
-static u8 sub_8144454(u8 page, u8 taskIdA)
+static u8 CheckChangeScene(u8 page, u8 taskIdA)
 {
     // Starts with bike + ocean + morning
 
@@ -934,9 +938,9 @@ static u8 sub_8144454(u8 page, u8 taskIdA)
     return FALSE;
 }
 
-static void task_d_8144514(u8 taskIdD)
+static void Task_ShowMons(u8 taskIdD)
 {
-    struct Unk201C000 *r6 = &ewram1c000;
+    struct CreditsData *r6 = &sCreditsData;
     u8 r2;
 
     switch (gTasks[taskIdD].data[TDD_STATE])
@@ -944,30 +948,30 @@ static void task_d_8144514(u8 taskIdD)
     case 0:
         break;
     case 1:
-        if (r6->unk8A == 0 && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] == 0)
+        if (r6->nextImgPos == 0 && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] == 0)
             break;
         gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] = 0;
         gTasks[taskIdD].data[TDD_STATE]++;
         break;
     case 2:
-        if (r6->unk88 == POKEMON_TILE_COUNT || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != task_a_8143B68)
+        if (r6->imgCounter == POKEMON_TILE_COUNT || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != Task_CreditsMain)
             break;
-        r2 = sub_81456B4(r6->unk0[r6->unk8C], gUnknown_0840CA00[r6->unk8A][0], gUnknown_0840CA00[r6->unk8A][1], r6->unk8A);
-        if (r6->unk8C < r6->unk8E - 1)
+        r2 = CreateCreditsMonSprite(r6->monToShow[r6->currShownMon], sMonSpritePos[r6->nextImgPos][0], sMonSpritePos[r6->nextImgPos][1], r6->nextImgPos);
+        if (r6->currShownMon < r6->numMonToShow - 1)
         {
-            r6->unk8C++;
+            r6->currShownMon++;
             gSprites[r2].data[3] = 50;
         }
         else
         {
-            r6->unk8C = 0;
+            r6->currShownMon = 0;
             gSprites[r2].data[3] = 512;
         }
-        r6->unk88++;
-        if (r6->unk8A == 2)
-            r6->unk8A = 0;
+        r6->imgCounter++;
+        if (r6->nextImgPos == 2)
+            r6->nextImgPos = 0;
         else
-            r6->unk8A++;
+            r6->nextImgPos++;
         gTasks[taskIdD].data[TDD_3] = 50;
         gTasks[taskIdD].data[TDD_STATE]++;
         break;
@@ -980,7 +984,7 @@ static void task_d_8144514(u8 taskIdD)
     }
 }
 
-void task_c_8144664(u8 taskIdC)
+void Task_BikeScene(u8 taskIdC)
 {
     switch (gTasks[taskIdC].data[TDC_0])
     {
@@ -1063,7 +1067,7 @@ void task_c_8144664(u8 taskIdC)
     }
 }
 
-void task_e_8144934(u8 taskIdE)
+void Task_CycleSceneryPalette(u8 taskIdE)
 {
     s16 taskIdC;
 
@@ -1080,10 +1084,10 @@ void task_e_8144934(u8 taskIdE)
                 gTasks[taskIdE].data[TDE_1] = 0x7FFF;
             }
         }
-        sub_8149020(0);
+        CycleSceneryPalette(0);
         break;
     case 1:
-        sub_8149020(0);
+        CycleSceneryPalette(0);
         break;
     case 2:
         if (gTasks[taskIdE].data[TDE_1] != 0x7FFF)
@@ -1097,7 +1101,7 @@ void task_e_8144934(u8 taskIdE)
                 gTasks[taskIdE].data[TDE_1] = 0x7FFF;
             }
         }
-        sub_8149020(1);
+        CycleSceneryPalette(1);
         break;
     case 3:
         if (gTasks[taskIdE].data[TDE_1] != 0x7FFF)
@@ -1113,25 +1117,25 @@ void task_e_8144934(u8 taskIdE)
                 gTasks[taskIdE].data[TDE_1] += 1;
             }
         }
-        sub_8149020(1);
+        CycleSceneryPalette(1);
         break;
     case 4:
-        sub_8149020(2);
+        CycleSceneryPalette(2);
         break;
     }
 }
 
-static void sub_8144A68(u8 data, u8 taskIdA)
+static void SetBikeScene(u8 data, u8 taskIdA)
 {
     switch (data)
     {
     case 0:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
@@ -1139,10 +1143,10 @@ static void sub_8144A68(u8 data, u8 taskIdA)
     case 1:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 120;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
@@ -1150,10 +1154,10 @@ static void sub_8144A68(u8 data, u8 taskIdA)
     case 2:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 120;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 272;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
@@ -1161,10 +1165,10 @@ static void sub_8144A68(u8 data, u8 taskIdA)
     case 3:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 120;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = -32;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 120;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = -32;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
@@ -1172,22 +1176,22 @@ static void sub_8144A68(u8 data, u8 taskIdA)
     case 4:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].invisible = FALSE;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.x = 88;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 152;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].x = 88;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].x = 152;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].y = 46;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(2, 0x2000, 0x200, 8);
         break;
     }
 
-    gTasks[taskIdA].data[TDA_TASK_E_ID] = CreateTask(task_e_8144934, 0);
+    gTasks[taskIdA].data[TDA_TASK_E_ID] = CreateTask(Task_CycleSceneryPalette, 0);
     gTasks[gTasks[taskIdA].data[TDA_TASK_E_ID]].data[TDE_0] = data;
     gTasks[gTasks[taskIdA].data[TDA_TASK_E_ID]].data[TDE_1] = 0;
     gTasks[gTasks[taskIdA].data[TDA_TASK_E_ID]].data[TDE_TASK_A_ID] = taskIdA;
 
-    gTasks[taskIdA].data[TDA_TASK_C_ID] = CreateTask(task_c_8144664, 0);
+    gTasks[taskIdA].data[TDA_TASK_C_ID] = CreateTask(Task_BikeScene, 0);
     gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_0] = 0;
     gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_1] = taskIdA;
     gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_2] = gTasks[taskIdA].data[TDA_PLAYER_CYCLIST];
@@ -1198,7 +1202,7 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gTasks[gTasks[taskIdA].data[TDA_TASK_C_ID]].data[TDC_5] = UNK_DEFINE_45;
 }
 
-static bool8 sub_8144ECC(u8 data, u8 taskIdA)
+static bool8 LoadBikeScene(u8 data, u8 taskIdA)
 {
     u8 spriteId;
 
@@ -1235,12 +1239,12 @@ static bool8 sub_8144ECC(u8 data, u8 taskIdA)
 
             spriteId = intro_create_brendan_sprite(120, 46);
             gTasks[taskIdA].data[TDA_PLAYER_CYCLIST] = spriteId;
-            gSprites[spriteId].callback = spritecb_player_8145378;
+            gSprites[spriteId].callback = SpriteCB_Player;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA54;
 
             spriteId = intro_create_may_sprite(272, 46);
             gTasks[taskIdA].data[TDA_RIVAL_CYCLIST] = spriteId;
-            gSprites[spriteId].callback = spritecb_rival_8145420;
+            gSprites[spriteId].callback = SpriteCB_Rival;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA94;
         }
         else
@@ -1252,18 +1256,18 @@ static bool8 sub_8144ECC(u8 data, u8 taskIdA)
 
             spriteId = intro_create_may_sprite(120, 46);
             gTasks[taskIdA].data[TDA_PLAYER_CYCLIST] = spriteId;
-            gSprites[spriteId].callback = spritecb_player_8145378;
+            gSprites[spriteId].callback = SpriteCB_Player;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA54;
 
             spriteId = intro_create_brendan_sprite(272, 46);
             gTasks[taskIdA].data[TDA_RIVAL_CYCLIST] = spriteId;
-            gSprites[spriteId].callback = spritecb_rival_8145420;
+            gSprites[spriteId].callback = SpriteCB_Rival;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA94;
         };
         gMain.state += 1;
         break;
     case 3:
-        sub_8144A68(data, taskIdA);
+        SetBikeScene(data, taskIdA);
         sub_8148E90(data);
         gMain.state = 0;
         return TRUE;
@@ -1271,7 +1275,7 @@ static bool8 sub_8144ECC(u8 data, u8 taskIdA)
     return FALSE;
 }
 
-static void sub_81450AC(u8 taskIdA)
+static void ResetCreditsTasks(u8 taskIdA)
 {
     if (gTasks[taskIdA].data[TDA_0] != 0)
     {
@@ -1297,10 +1301,10 @@ static void sub_81450AC(u8 taskIdA)
         gTasks[taskIdA].data[TDA_TASK_D_ID] = 0;
     }
 
-    gUnknown_0203935C = 1;
+    gIntroCredits_MovingSceneryState = 1;
 }
 
-static void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
+static void LoadTheEndScreen(u16 arg0, u16 arg1, u16 arg2)
 {
     u16 baseTile;
     u16 i;
@@ -1326,7 +1330,7 @@ static void sub_8145128(u16 arg0, u16 arg1, u16 arg2)
         ((u16 *) (VRAM + arg1))[13 * 32 + 4 + i] = i + 66 + baseTile;
 }
 
-u16 sub_8145208(u8 arg0)
+u16 GetLetterMapTile(u8 arg0)
 {
     u16 out = (arg0 & 0x3F) + 80;
 
@@ -1341,7 +1345,7 @@ u16 sub_8145208(u8 arg0)
     return out;
 }
 
-void sub_814524C(const u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
+void DrawLetterMapTiles(const u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
 {
     u8 y, x;
     const u16 tileOffset = (palette / 16) << 12;
@@ -1349,11 +1353,11 @@ void sub_814524C(const u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 3; x++)
-            ((u16 *) (VRAM + arg3 + (baseY + y) * 64))[baseX + x] = tileOffset + sub_8145208(arg0[y * 3 + x]);
+            ((u16 *) (VRAM + arg3 + (baseY + y) * 64))[baseX + x] = tileOffset + GetLetterMapTile(arg0[y * 3 + x]);
     }
 }
 
-static void sub_81452D0(u16 arg0, u16 palette)
+static void DrawTheEnd(u16 arg0, u16 palette)
 {
     u16 pos;
     u16 baseTile = (palette / 16) << 12;
@@ -1362,23 +1366,23 @@ static void sub_81452D0(u16 arg0, u16 palette)
         ((u16 *) (VRAM + arg0))[pos] = baseTile + 1;
 
 #if ENGLISH
-    sub_814524C(gUnknown_0840B83C, 3, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B84B, 7, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B85A, 11, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B85A, 16, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B869, 20, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B878, 24, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_T, 3, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_H, 7, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_E, 11, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_E, 16, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_N, 20, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_D, 24, 7, arg0, palette);
 #elif GERMAN
-    sub_814524C(gUnknown_0840B85A, 7, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B869, 11, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B878, 15, 7, arg0, palette);
-    sub_814524C(gUnknown_0840B85A, 19, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_E, 7, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_N, 11, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_D, 15, 7, arg0, palette);
+    DrawLetterMapTiles(sTheEnd_LetterMap_E, 19, 7, arg0, palette);
 #endif
 }
 
-static void spritecb_player_8145378(struct Sprite *sprite)
+static void SpriteCB_Player(struct Sprite *sprite)
 {
-    if (gUnknown_0203935C != 0)
+    if (gIntroCredits_MovingSceneryState != 0)
     {
         DestroySprite(sprite);
         return;
@@ -1391,8 +1395,8 @@ static void spritecb_player_8145378(struct Sprite *sprite)
         break;
     case 1:
         StartSpriteAnimIfDifferent(sprite, 1);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 1;
+        if (sprite->x > -32)
+            sprite->x -= 1;
         break;
     case 2:
         StartSpriteAnimIfDifferent(sprite, 2);
@@ -1402,20 +1406,20 @@ static void spritecb_player_8145378(struct Sprite *sprite)
         break;
     case 4:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > 120)
-            sprite->pos1.x -= 1;
+        if (sprite->x > 120)
+            sprite->x -= 1;
         break;
     case 5:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 1;
+        if (sprite->x > -32)
+            sprite->x -= 1;
         break;
     }
 }
 
-static void spritecb_rival_8145420(struct Sprite *sprite)
+static void SpriteCB_Rival(struct Sprite *sprite)
 {
-    if (gUnknown_0203935C != 0)
+    if (gIntroCredits_MovingSceneryState != 0)
     {
         DestroySprite(sprite);
         return;
@@ -1424,35 +1428,35 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         StartSpriteAnimIfDifferent(sprite, 0);
         break;
     case 1:
-        if (sprite->pos1.x > 200)
+        if (sprite->x > 200)
             StartSpriteAnimIfDifferent(sprite, 1);
         else
             StartSpriteAnimIfDifferent(sprite, 2);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 2;
-        sprite->pos2.y = -gUnknown_0203935A;
+        if (sprite->x > -32)
+            sprite->x -= 2;
+        sprite->y2 = -gUnknown_0203935A;
         break;
     case 2:
         sprite->data[7] += 1;
         StartSpriteAnimIfDifferent(sprite, 0);
         if ((sprite->data[7] & 3) == 0)
-            sprite->pos1.x += 1;
+            sprite->x += 1;
         break;
     case 3:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->pos1.x > -32)
-            sprite->pos1.x -= 1;
+        if (sprite->x > -32)
+            sprite->x -= 1;
         break;
     }
 }
 
-void spritecb_81454E0(struct Sprite *sprite)
+void SpriteCB_CreditsMon(struct Sprite *sprite)
 {
-    if (gUnknown_0203935C)
+    if (gIntroCredits_MovingSceneryState)
     {
         DestroySprite(sprite);
         return;
@@ -1484,15 +1488,15 @@ void spritecb_81454E0(struct Sprite *sprite)
         {
         case 1:
             if ((sprite->data[7] & 3) == 0)
-                sprite->pos1.y += 1;
-            sprite->pos1.x -= 2;
+                sprite->y += 1;
+            sprite->x -= 2;
             break;
         case 2:
             break;
         case 3:
             if ((sprite->data[7] & 3) == 0)
-                sprite->pos1.y += 1;
-            sprite->pos1.x += 2;
+                sprite->y += 1;
+            sprite->x += 2;
             break;
         }
         break;
@@ -1536,7 +1540,7 @@ void spritecb_81454E0(struct Sprite *sprite)
     }
 }
 
-static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
+static u8 CreateCreditsMonSprite(u16 species, u16 x, u16 y, u16 position)
 {
     u32 personality;
     const u8 *lzPaletteData;
@@ -1561,7 +1565,7 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         &gMonFrontPicTable[species],
         gMonFrontPicCoords[species].coords,
         gMonFrontPicCoords[species].y_offset,
-        EWRAM,
+        (void *)EWRAM,
         gUnknown_0840B5A0[position],
         species,
         personality,
@@ -1572,14 +1576,14 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
     LoadCompressedPalette(lzPaletteData, 0x100 + (position * 16), 0x20);
     sub_8143648(position, position);
 
-    spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
+    spriteId = CreateSprite(&gCreatingSpriteTemplate, x, y, 0);
     gSprites[spriteId].oam.paletteNum = position;
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].data[1] = position + 1;
     gSprites[spriteId].invisible = TRUE;
-    gSprites[spriteId].callback = spritecb_81454E0;
+    gSprites[spriteId].callback = SpriteCB_CreditsMon;
 
-    spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].pos1.x, gSprites[spriteId].pos1.y, 1);
+    spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].x, gSprites[spriteId].y, 1);
     gSprites[spriteId2].data[0] = spriteId;
 
     StartSpriteAnimIfDifferent(&gSprites[spriteId2], position);
@@ -1587,9 +1591,10 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
     return spriteId;
 }
 
-void spritecb_814580C(struct Sprite *sprite)
+void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 {
-    if (gSprites[sprite->data[0]].data[0] == 10 || gUnknown_0203935C)
+    if (gSprites[sprite->data[0]].data[0] == 10
+     || gIntroCredits_MovingSceneryState != 0)
     {
         DestroySprite(sprite);
         return;
@@ -1599,13 +1604,13 @@ void spritecb_814580C(struct Sprite *sprite)
     sprite->oam.objMode = gSprites[sprite->data[0]].oam.objMode;
     sprite->oam.affineMode = gSprites[sprite->data[0]].oam.affineMode;
     sprite->oam.matrixNum = gSprites[sprite->data[0]].oam.matrixNum;
-    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
+    sprite->x = gSprites[sprite->data[0]].x;
+    sprite->y = gSprites[sprite->data[0]].y;
 }
 
-static void sub_81458DC(void)
+static void DeterminePokemonToShow(void)
 {
-    struct Unk201C000 *unk201C000 = &ewram1c000;
+    struct CreditsData *creditsData = &sCreditsData;
     u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
     u16 seenTypesCount;
     u16 page;
@@ -1616,62 +1621,62 @@ static void sub_81458DC(void)
     {
         if (GetSetPokedexFlag(dexNum, 1))
         {
-            unk201C000->unk90[seenTypesCount] = dexNum;
+            creditsData->caughtMonIds[seenTypesCount] = dexNum;
             seenTypesCount++;
         }
     }
 
     for (dexNum = seenTypesCount; dexNum < 386; dexNum++)
-        unk201C000->unk90[dexNum] = 0;
+        creditsData->caughtMonIds[dexNum] = 0;
 
-    unk201C000->unk394 = seenTypesCount;
-    if (unk201C000->unk394 < POKEMON_TILE_COUNT)
-        unk201C000->unk8E = seenTypesCount;
+    creditsData->numCaughtMon = seenTypesCount;
+    if (creditsData->numCaughtMon < POKEMON_TILE_COUNT)
+        creditsData->numMonToShow = seenTypesCount;
     else
-        unk201C000->unk8E = POKEMON_TILE_COUNT;
+        creditsData->numMonToShow = POKEMON_TILE_COUNT;
 
     j = 0;
     do
     {
-        page = Random() % unk201C000->unk394;
-        unk201C000->unk0[j] = unk201C000->unk90[page];
+        page = Random() % creditsData->numCaughtMon;
+        creditsData->monToShow[j] = creditsData->caughtMonIds[page];
 
         j++;
-        unk201C000->unk90[page] = 0;
-        unk201C000->unk394--;
-        if (page != unk201C000->unk394)
+        creditsData->caughtMonIds[page] = 0;
+        creditsData->numCaughtMon--;
+        if (page != creditsData->numCaughtMon)
         {
-            unk201C000->unk90[page] = unk201C000->unk90[unk201C000->unk394];
-            unk201C000->unk90[unk201C000->unk394] = 0;
+            creditsData->caughtMonIds[page] = creditsData->caughtMonIds[creditsData->numCaughtMon];
+            creditsData->caughtMonIds[creditsData->numCaughtMon] = 0;
         }
     }
-    while (unk201C000->unk394 != 0 && j < POKEMON_TILE_COUNT);
+    while (creditsData->numCaughtMon != 0 && j < POKEMON_TILE_COUNT);
 
-    if (unk201C000->unk8E < POKEMON_TILE_COUNT)
+    if (creditsData->numMonToShow < POKEMON_TILE_COUNT)
     {
-        for (j = unk201C000->unk8E, page = 0; j < POKEMON_TILE_COUNT; j++)
+        for (j = creditsData->numMonToShow, page = 0; j < POKEMON_TILE_COUNT; j++)
         {
-            unk201C000->unk0[j] = unk201C000->unk0[page];
+            creditsData->monToShow[j] = creditsData->monToShow[page];
 
             page++;
-            if (page == unk201C000->unk8E)
+            if (page == creditsData->numMonToShow)
                 page = 0;
         }
-        unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
+        creditsData->monToShow[POKEMON_TILE_COUNT - 1] = starter;
     }
     else
     {
-        for (dexNum = 0; unk201C000->unk0[dexNum] != starter && dexNum < POKEMON_TILE_COUNT; dexNum++);
+        for (dexNum = 0; creditsData->monToShow[dexNum] != starter && dexNum < POKEMON_TILE_COUNT; dexNum++);
 
-        if (dexNum < unk201C000->unk8E - 1)
+        if (dexNum < creditsData->numMonToShow - 1)
         {
-            unk201C000->unk0[dexNum] = unk201C000->unk0[POKEMON_TILE_COUNT - 1];
-            unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
+            creditsData->monToShow[dexNum] = creditsData->monToShow[POKEMON_TILE_COUNT - 1];
+            creditsData->monToShow[POKEMON_TILE_COUNT - 1] = starter;
         }
         else
         {
-            unk201C000->unk0[POKEMON_TILE_COUNT - 1] = starter;
+            creditsData->monToShow[POKEMON_TILE_COUNT - 1] = starter;
         }
     }
-    unk201C000->unk8E = POKEMON_TILE_COUNT;
+    creditsData->numMonToShow = POKEMON_TILE_COUNT;
 }

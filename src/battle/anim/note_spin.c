@@ -90,8 +90,8 @@ void sub_80D2EC8(struct Sprite *sprite)
 
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.x = 120;
-        sprite->pos1.y = (gBattleAnimArgs[0] + (((u16)gBattleAnimArgs[0]) >> 31)) / 2 - 15;
+        sprite->x = 120;
+        sprite->y = (gBattleAnimArgs[0] + (((u16)gBattleAnimArgs[0]) >> 31)) / 2 - 15;
 
         StartSpriteAnim(sprite, gBattleAnimArgs[1]);
 
@@ -107,9 +107,9 @@ void sub_80D2EC8(struct Sprite *sprite)
     sprite->data[6] = (sprite->data[6] + 10) & 0xFF;
 
     index &= var2;
-    sprite->pos2.x = Cos(index, 100);
+    sprite->x2 = Cos(index, 100);
 
-    sprite->pos2.y = sprite->data[1] + Sin(index, 10) + Cos(sprite->data[6], 4);
+    sprite->y2 = sprite->data[1] + Sin(index, 10) + Cos(sprite->data[6], 4);
 
     if (sprite->data[0] > sprite->data[5])
     {
@@ -137,7 +137,7 @@ static void sub_80D2F80(struct Sprite *sprite)
 static void sub_80D2FA4(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[2];
-    sprite->pos2.y = sprite->data[3];
+    sprite->y2 = sprite->data[3];
 
     sprite->data[2]++;
 

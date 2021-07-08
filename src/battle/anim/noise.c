@@ -33,11 +33,11 @@ void sub_80D2D68(struct Sprite* sprite)
         gBattleAnimArgs[1] *= -1;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(slot, 2)  + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBattlerSpriteCoord(slot, 3) + gBattleAnimArgs[2];
+    sprite->x = GetBattlerSpriteCoord(slot, 2)  + gBattleAnimArgs[1];
+    sprite->y = GetBattlerSpriteCoord(slot, 3) + gBattleAnimArgs[2];
     sprite->data[0] = 0;
-    sprite->data[1] = (u16)sprite->pos1.x << 3;
-    sprite->data[2] = (u16)sprite->pos1.y << 3;
+    sprite->data[1] = (u16)sprite->x << 3;
+    sprite->data[2] = (u16)sprite->y << 3;
 
     var1 = gBattleAnimArgs[1] << 3;
     if (var1 < 0)
@@ -58,8 +58,8 @@ static void sub_80D2E30(struct Sprite *sprite)
     sprite->data[1] += sprite->data[3];
     sprite->data[2] += sprite->data[4];
 
-    sprite->pos1.x = sprite->data[1] >> 3;
-    sprite->pos1.y = sprite->data[2] >> 3;
+    sprite->x = sprite->data[1] >> 3;
+    sprite->y = sprite->data[2] >> 3;
 
     if (++sprite->data[0] > 16)
     {

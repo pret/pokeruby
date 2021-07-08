@@ -139,7 +139,7 @@ void AnimSonicBoomProjectile(struct Sprite* sprite)
     InitAnimSpritePos(sprite, 1);
     targetXPos = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
     targetYPos = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
-    rotation = ArcTan2Neg(targetXPos - sprite->pos1.x, targetYPos - sprite->pos1.y);
+    rotation = ArcTan2Neg(targetXPos - sprite->x, targetYPos - sprite->y);
     rotation += 0xF000;
     if (IsContest())
         rotation -= 0x6000;
@@ -178,14 +178,14 @@ void sub_80CF814(struct Sprite* sprite)
     sprite->data[1] += sprite->data[5];
     sprite->data[2] += sprite->data[6];
     if (1 & task->data[7])
-        sprite->pos2.x = ((u16)sprite->data[1] >> 8) * -1;
+        sprite->x2 = ((u16)sprite->data[1] >> 8) * -1;
     else
-        sprite->pos2.x = (u16)sprite->data[1] >> 8;
+        sprite->x2 = (u16)sprite->data[1] >> 8;
 
     if (1 & task->data[8])
-        sprite->pos2.y = ((u16)sprite->data[2] / 256u) * -1;
+        sprite->y2 = ((u16)sprite->data[2] / 256u) * -1;
     else
-        sprite->pos2.y = (u16)sprite->data[2] / 256u;
+        sprite->y2 = (u16)sprite->data[2] / 256u;
 
     if (sprite->data[0]-- <= 0)
     {
@@ -204,33 +204,33 @@ void sub_80CF8B8(struct Sprite* sprite)
     sprite->data[1] += (-2 & task->data[7]);
     sprite->data[2] += (-2 & task->data[8]);
     if (1 & task->data[7])
-        sprite->pos2.x = ((u16)sprite->data[1] >> 8) * -1;
+        sprite->x2 = ((u16)sprite->data[1] >> 8) * -1;
     else
-        sprite->pos2.x = (u16)sprite->data[1] >> 8;
+        sprite->x2 = (u16)sprite->data[1] >> 8;
 
     if (1 & task->data[8])
-        sprite->pos2.y = ((u16)sprite->data[2] / 256u) * -1;
+        sprite->y2 = ((u16)sprite->data[2] / 256u) * -1;
     else
-        sprite->pos2.y = (u16)sprite->data[2] / 256u;
+        sprite->y2 = (u16)sprite->data[2] / 256u;
 
     if (sprite->data[0]-- <= 0)
     {
         sprite->data[0] = 8;
         task->data[5] = 4;
         a = sub_81174E0(0x1000);
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
-        if (task->data[11] >= sprite->pos1.x)
-            b = (task->data[11] - sprite->pos1.x) << 8;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x2 = 0;
+        if (task->data[11] >= sprite->x)
+            b = (task->data[11] - sprite->x) << 8;
         else
-            b = (sprite->pos1.x - task->data[11]) << 8;
+            b = (sprite->x - task->data[11]) << 8;
 
-        if (task->data[12] >= sprite->pos1.y)
-            c = (task->data[12] - sprite->pos1.y) << 8;
+        if (task->data[12] >= sprite->y)
+            c = (task->data[12] - sprite->y) << 8;
         else
-            c = (sprite->pos1.y - task->data[12]) << 8;
+            c = (sprite->y - task->data[12]) << 8;
 
         sprite->data[2] = 0;
         sprite->data[1] = 0;

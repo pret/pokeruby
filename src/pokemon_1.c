@@ -1731,9 +1731,9 @@ void CalculateMonStats(struct Pokemon *mon)
         newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
     }
 
-    eStatHp = newMaxHP - oldMaxHP;
-    if (eStatHp == 0)
-        eStatHp = 1;
+    gBattleStruct->levelUpHP = newMaxHP - oldMaxHP;
+    if (gBattleStruct->levelUpHP == 0)
+        gBattleStruct->levelUpHP = 1;
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
 

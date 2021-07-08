@@ -4,7 +4,7 @@
 #include "text.h"
 #include "palette.h"
 
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 
 static void CB2_CrashIdle(void);
 
@@ -37,9 +37,9 @@ void Crash(u8 *text)
     SetMainCallback2(CB2_CrashIdle);
     DmaFill32Large(3, 0, (void *)VRAM, 0x18000, 0x1000);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6FD8);
     LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);
-    Text_InitWindowAndPrintText(&gUnknown_03004210, text, 1, 9, 7);
+    Text_InitWindowAndPrintText(&gWindowTemplate_Contest_MoveDescription, text, 1, 9, 7);
 }
 
 static void CB2_CrashIdle(void)

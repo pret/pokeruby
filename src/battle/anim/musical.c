@@ -225,9 +225,9 @@ void sub_80CEB0C(struct Sprite* sprite)
         b = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     }
 
-    sprite->data[4] = sprite->pos1.x << 4;
-    sprite->data[5] = sprite->pos1.y << 4;
-    sub_80CEBC4(a - sprite->pos1.x, b - sprite->pos1.y, &sprite->data[6], &sprite->data[7], 0x28);
+    sprite->data[4] = sprite->x << 4;
+    sprite->data[5] = sprite->y << 4;
+    sub_80CEBC4(a - sprite->x, b - sprite->y, &sprite->data[6], &sprite->data[7], 0x28);
     sprite->callback = sub_80CEC1C;
 }
 
@@ -257,11 +257,11 @@ static void sub_80CEC1C(struct Sprite* sprite)
     b = sprite->data[0] * 5 - ((sprite->data[0] * 5 / 256) << 8);
     sprite->data[4] += sprite->data[6];
     sprite->data[5] += sprite->data[7];
-    sprite->pos1.x = sprite->data[4] >> 4;
-    sprite->pos1.y = sprite->data[5] >> 4;
-    sprite->pos2.y = Sin(b, 15);
-    a = (u16)sprite->pos1.y;
-    c = (u16)sprite->pos1.x;
+    sprite->x = sprite->data[4] >> 4;
+    sprite->y = sprite->data[5] >> 4;
+    sprite->y2 = Sin(b, 15);
+    a = (u16)sprite->y;
+    c = (u16)sprite->x;
 
     if ((u32)((c + 16) << 16) > (0x110) << 16 || a < -16 || a > 0x80)
     {
@@ -294,13 +294,13 @@ void sub_80CECE8(struct Sprite* sprite)
         *(u16*)&gBattleAnimArgs[1] = -a;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
     StartSpriteAnim(sprite, gBattleAnimArgs[0]);
     sprite->data[2] = 0;
     sprite->data[3] = 0;
-    sprite->data[4] = sprite->pos1.x << 4;
-    sprite->data[5] = sprite->pos1.y << 4;
+    sprite->data[4] = sprite->x << 4;
+    sprite->data[5] = sprite->y << 4;
     sprite->data[6] = (gBattleAnimArgs[1] << 4) / 5;
     sprite->data[7] = (gBattleAnimArgs[2] << 7) / 5;
     sprite->callback = sub_80CED78;
@@ -310,13 +310,13 @@ static void sub_80CED78(struct Sprite* sprite)
 {
     sprite->data[4] += sprite->data[6];
     sprite->data[5] += sprite->data[7];
-    sprite->pos1.x = sprite->data[4] >> 4;
-    sprite->pos1.y = sprite->data[5] >> 4;
+    sprite->x = sprite->data[4] >> 4;
+    sprite->y = sprite->data[5] >> 4;
     if (sprite->data[0] > 5 && sprite->data[3] == 0)
     {
         sprite->data[2] = (sprite->data[2] + 16) & 0xFF;
-        sprite->pos2.x = Cos(sprite->data[2], 18);
-        sprite->pos2.y = Sin(sprite->data[2], 18);
+        sprite->x2 = Cos(sprite->data[2], 18);
+        sprite->y2 = Sin(sprite->data[2], 18);
         if (sprite->data[2] == 0)
             sprite->data[3] = 1;
     }
@@ -341,8 +341,8 @@ void sub_80CEDF0(struct Sprite* sprite)
         a = -16;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + a;
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 8;
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + a;
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 8;
     sprite->data[0] = 8;
     sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -356,7 +356,7 @@ void sub_80CEE60(struct Sprite* sprite)
     s16 a;
     u8 index;
     sub_8078650(sprite);
-    sprite->pos1.y += 8;
+    sprite->y += 8;
     StartSpriteAnim(sprite, gBattleAnimArgs[1]);
     index = IndexOfSpritePaletteTag(gUnknown_083D712C[gBattleAnimArgs[2]][0]);
     if (index != 0xFF)
@@ -364,9 +364,9 @@ void sub_80CEE60(struct Sprite* sprite)
 
     a = (gBattleAnimArgs[0] == 0) ? 0xFFE0 : 0x20;
     sprite->data[0] = 40;
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = a + sprite->data[1];
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = sprite->data[3] - 40;
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = gBattleAnimArgs[3];
@@ -379,11 +379,11 @@ static void sub_80CEEE8(struct Sprite* sprite)
     {
         s16 a;
         a = Sin(sprite->data[5], 8);
-        if (sprite->pos2.x < 0)
+        if (sprite->x2 < 0)
             a = -a;
 
-        sprite->pos2.x += a;
-        sprite->pos2.y += Sin(sprite->data[5], 4);
+        sprite->x2 += a;
+        sprite->y2 += Sin(sprite->data[5], 4);
         sprite->data[5] = (sprite->data[5] + 8) & 0xFF;
     }
     else

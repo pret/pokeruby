@@ -304,17 +304,17 @@ static void sub_80DFE90(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
-    sprite->pos2.x = sprite->data[3] >> 8;
-    sprite->pos2.y = sprite->data[4] >> 8;
+    sprite->x2 = sprite->data[3] >> 8;
+    sprite->y2 = sprite->data[4] >> 8;
     if (sprite->data[7] == 0)
     {
         sprite->data[3] += sprite->data[1];
         sprite->data[4] += sprite->data[2];
-        sprite->pos2.x = sprite->data[3] >> 8;
-        sprite->pos2.y = sprite->data[4] >> 8;
+        sprite->x2 = sprite->data[3] >> 8;
+        sprite->y2 = sprite->data[4] >> 8;
         sprite->data[0]--;
     }
-    sprite->pos2.y += Sin(sprite->data[5], sprite->data[6]);
+    sprite->y2 += Sin(sprite->data[5], sprite->data[6]);
     sprite->data[5] = (sprite->data[5] + 3) & 0xFF;
     if (sprite->data[5] > 0x7F)
     {
@@ -328,8 +328,8 @@ static void sub_80DFE90(struct Sprite *sprite)
 
 void sub_80DFF1C(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]);
 
     sprite->data[0] = gBattleAnimArgs[3];
@@ -342,8 +342,8 @@ static void sub_80DFF58(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[0];
     sprite->data[5] += sprite->data[1];
-    sprite->pos2.x = sprite->data[4] >> 8;
-    sprite->pos2.y = sprite->data[5] >> 8;
+    sprite->x2 = sprite->data[4] >> 8;
+    sprite->y2 = sprite->data[5] >> 8;
 
     if (++sprite->data[3] == sprite->data[2])
         sprite->callback = sub_80DFF98;
@@ -353,8 +353,8 @@ static void sub_80DFF98(struct Sprite *sprite)
 {
     sprite->data[4] -= sprite->data[0];
     sprite->data[5] -= sprite->data[1];
-    sprite->pos2.x = sprite->data[4] >> 8;
-    sprite->pos2.y = sprite->data[5] >> 8;
+    sprite->x2 = sprite->data[4] >> 8;
+    sprite->y2 = sprite->data[5] >> 8;
 
     if (--sprite->data[3] == 0)
         DestroySpriteAndMatrix(sprite);
@@ -376,30 +376,30 @@ void sub_80DFFD0(struct Sprite *sprite)
     switch (gBattleAnimArgs[1])
     {
     case 0:
-        sprite->pos1.x = GetBattlerSpriteCoordAttr(bank, 5) - 8;
-        sprite->pos1.y = GetBattlerSpriteCoordAttr(bank, 2) + 8;
+        sprite->x = GetBattlerSpriteCoordAttr(bank, 5) - 8;
+        sprite->y = GetBattlerSpriteCoordAttr(bank, 2) + 8;
         break;
     case 1:
-        sprite->pos1.x = GetBattlerSpriteCoordAttr(bank, 5) - 14;
-        sprite->pos1.y = GetBattlerSpriteCoordAttr(bank, 2) + 16;
+        sprite->x = GetBattlerSpriteCoordAttr(bank, 5) - 14;
+        sprite->y = GetBattlerSpriteCoordAttr(bank, 2) + 16;
         break;
     case 2:
-        sprite->pos1.x = GetBattlerSpriteCoordAttr(bank, 4) + 8;
-        sprite->pos1.y = GetBattlerSpriteCoordAttr(bank, 2) + 8;
+        sprite->x = GetBattlerSpriteCoordAttr(bank, 4) + 8;
+        sprite->y = GetBattlerSpriteCoordAttr(bank, 2) + 8;
         StartSpriteAffineAnim(sprite, 1);
         xOffset = -20;
         break;
     case 3:
-        sprite->pos1.x = GetBattlerSpriteCoordAttr(bank, 4) + 14;
-        sprite->pos1.y = GetBattlerSpriteCoordAttr(bank, 2) + 16;
+        sprite->x = GetBattlerSpriteCoordAttr(bank, 4) + 14;
+        sprite->y = GetBattlerSpriteCoordAttr(bank, 2) + 16;
         StartSpriteAffineAnim(sprite, 1);
         xOffset = -20;
         break;
     }
 
     sprite->data[0] = 32;
-    sprite->data[2] = sprite->pos1.x + xOffset;
-    sprite->data[4] = sprite->pos1.y + 12;
+    sprite->data[2] = sprite->x + xOffset;
+    sprite->data[4] = sprite->y + 12;
     sprite->data[5] = -12;
 
     InitAnimArcTranslation(sprite);
@@ -821,8 +821,8 @@ void sub_80E09C4(u8 taskId)
 
 void sub_80E0A10(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
     sprite->callback = sub_8078600;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -864,7 +864,7 @@ void sub_80E0A4C(u8 taskId)
 
     if (IsContest())
     {
-        species = EWRAM_19348[0];
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -883,8 +883,8 @@ void sub_80E0A4C(u8 taskId)
     LZDecompressVram(&gUnknown_08D1D410, subStruct.field_0);
     LoadCompressedPalette(&gUnknown_08D1D54C, subStruct.field_8 << 4, 32);
 
-    gBattle_BG1_X = -gSprites[spriteId].pos1.x + 96;
-    gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
+    gBattle_BG1_X = -gSprites[spriteId].x + 96;
+    gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
 
     if (gBattleAnimArgs[1]  == 0)

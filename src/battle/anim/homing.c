@@ -53,25 +53,25 @@ void sub_80CC6CC(struct Sprite* sprite)
         sprite->data[0] = gBattleAnimArgs[4];
         if (gBattleAnimArgs[1] == 0)
         {
-            sprite->pos1.x = gBattleAnimArgs[2] + a;
-            sprite->pos1.y = gBattleAnimArgs[3] + b;
+            sprite->x = gBattleAnimArgs[2] + a;
+            sprite->y = gBattleAnimArgs[3] + b;
             sprite->data[5] = a;
             sprite->data[6] = b;
         }
         else
         {
-            sprite->pos1.x = a;
-            sprite->pos1.y = b;
+            sprite->x = a;
+            sprite->y = b;
             sprite->data[5] = gBattleAnimArgs[2] + a;
             sprite->data[6] = gBattleAnimArgs[3] + b;
         }
 
-        x = sprite->pos1.x;
+        x = sprite->x;
         sprite->data[1] = x * 16;
-        y = sprite->pos1.y;
+        y = sprite->y;
         sprite->data[2] = y * 16;
-        sprite->data[3] = (sprite->data[5] - sprite->pos1.x) * 16 / gBattleAnimArgs[4];
-        sprite->data[4] = (sprite->data[6] - sprite->pos1.y) * 16 / gBattleAnimArgs[4];
+        sprite->data[3] = (sprite->data[5] - sprite->x) * 16 / gBattleAnimArgs[4];
+        sprite->data[4] = (sprite->data[6] - sprite->y) * 16 / gBattleAnimArgs[4];
         c = ArcTan2Neg(sprite->data[5] - x, sprite->data[6] - y);
         if (IsContest())
             c -= 0x8000;
@@ -87,8 +87,8 @@ static void sub_80CC7D4(struct Sprite* sprite)
     {
         sprite->data[1] += sprite->data[3];
         sprite->data[2] += sprite->data[4];
-        sprite->pos1.x = sprite->data[1] >> 4 ;
-        sprite->pos1.y = sprite->data[2] >> 4 ;
+        sprite->x = sprite->data[1] >> 4 ;
+        sprite->y = sprite->data[2] >> 4 ;
         sprite->data[0]--;
     }
     else

@@ -204,12 +204,12 @@ void Menu_DisplayDialogueFrame(void)
 
 void MenuPrintMessage(const u8 *str, u8 left, u8 top)
 {
-    Text_InitWindow8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
+    Contest_StartTextPrinter(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
 void MenuPrintMessageDefaultCoords(const u8 *str)
 {
-    Text_InitWindow8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
+    Contest_StartTextPrinter(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }
 
 void Menu_SetText(const u8 *str)
@@ -733,12 +733,12 @@ void MenuPrint_RightAligned(const u8 *str, u8 right, u8 top)
     Text_InitWindow_RightAligned(gMenuWindowPtr, str, gMenuTextTileOffset, right, top);
 }
 
-void sub_8072B80(const u8 *src, u8 a2, u8 a3, const u8 *text)
+void MenuPrint_AlignedToRightOfReferenceString(const u8 *src, u8 left, u8 top, const u8 *widthRefStr)
 {
     u8 buffer[64];
-    u8 width = GetStringWidth(gMenuWindowPtr, text);
+    u8 width = GetStringWidth(gMenuWindowPtr, widthRefStr);
     AlignString(gMenuWindowPtr, buffer, src, width, 1);
-    Text_InitWindowAndPrintText(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
+    Text_InitWindowAndPrintText(gMenuWindowPtr, buffer, gMenuTextTileOffset, left, top);
 }
 
 void MenuPrint_Centered(const u8 *text, u8 left, u8 top, u16 width)

@@ -39,16 +39,16 @@ void sub_80CB768(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
         sprite->data[1] = gBattleAnimArgs[2];
         sprite->data[2] = gBattleAnimArgs[3];
         sprite->data[3] = gBattleAnimArgs[4];
     }
 
     sprite->data[0]++;
-    sprite->pos2.x = sprite->data[1] * sprite->data[0];
-    sprite->pos2.y = Sin((sprite->data[0] * 20) & 0xFF, sprite->data[2]);
+    sprite->x2 = sprite->data[1] * sprite->data[0];
+    sprite->y2 = Sin((sprite->data[0] * 20) & 0xFF, sprite->data[2]);
     if (sprite->data[0] > sprite->data[3])
         DestroyAnimSprite(sprite);
 }

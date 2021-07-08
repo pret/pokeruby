@@ -380,7 +380,7 @@ static u8 sub_8128A7C(u8 var)
     int i;
 
     for(i = 0; i < 4; i++)
-        if(shared192D0.turnOrder[i] == var)
+        if(eContestAppealResults.turnOrder[i] == var)
             break;
 
     return i;
@@ -402,7 +402,7 @@ static void ContestAICmd_unk_00(void)
 
 static void ContestAICmd_get_turn(void)
 {
-    eContestAI->scriptResult = sContest.turnNumber;
+    eContestAI->scriptResult = sContest.appealNumber;
     gAIScriptPtr += 1;
 }
 
@@ -494,7 +494,7 @@ static void ContestAICmd_unk_0A(void)
 
 static void ContestAICmd_get_user_order(void)
 {
-    eContestAI->scriptResult = shared192D0.turnOrder[eContestAI->unk41];
+    eContestAI->scriptResult = eContestAppealResults.turnOrder[eContestAI->unk41];
     gAIScriptPtr += 1;
 }
 
@@ -586,7 +586,7 @@ static void ContestAICmd_unk_14(void)
 
 static void ContestAICmd_unk_15(void)
 {
-    eContestAI->scriptResult = sContestantStatus[eContestAI->unk41].unk4;
+    eContestAI->scriptResult = sContestantStatus[eContestAI->unk41].pointTotal;
     gAIScriptPtr += 1;
 }
 
@@ -632,7 +632,7 @@ static void ContestAICmd_unk_19(void)
 
 static void ContestAICmd_unk_1A(void)
 {
-    eContestAI->scriptResult = gContestMonConditions[eContestAI->unk41];
+    eContestAI->scriptResult = gContestMonRound1Points[eContestAI->unk41];
     gAIScriptPtr += 1;
 }
 
@@ -1196,7 +1196,7 @@ static void ContestAICmd_get_used_combo_starter(void)
     u16 result = 0;
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    if(sub_80B214C(var))
+    if(IsContestantAllowedToCombo(var))
         result = gContestMoves[sContestantStatus[var].prevMove].comboStarterId ? 1 : 0;
 
     eContestAI->scriptResult = result;
@@ -1277,7 +1277,7 @@ static void ContestAICmd_get_val_812A188(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = sContestantStatus[var].unk15_3;
+    eContestAI->scriptResult = sContestantStatus[var].completedComboFlag;
     gAIScriptPtr += 2;
 }
 
@@ -1305,7 +1305,7 @@ static void ContestAICmd_unk_59(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = sContestantStatus[var].unk4 - sContestantStatus[eContestAI->unk41].unk4;
+    eContestAI->scriptResult = sContestantStatus[var].pointTotal - sContestantStatus[eContestAI->unk41].pointTotal;
     gAIScriptPtr += 2;
 }
 
@@ -1353,7 +1353,7 @@ static void ContestAICmd_unk_5E(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = gContestMonConditions[var] - gContestMonConditions[eContestAI->unk41];
+    eContestAI->scriptResult = gContestMonRound1Points[var] - gContestMonRound1Points[eContestAI->unk41];
     gAIScriptPtr += 2;
 }
 
@@ -1401,7 +1401,7 @@ static void ContestAICmd_unk_63(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
     u8 var2 = gAIScriptPtr[2];
-    u16 move = sContest.unk19220[var2][var];
+    u16 move = sContest.moveHistory[var2][var];
 
     eContestAI->scriptResult = gContestMoves[move].effect;
     gAIScriptPtr += 3;
@@ -1451,7 +1451,7 @@ static void ContestAICmd_unk_68(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
     u8 var2 = gAIScriptPtr[2];
-    s8 result = sContest.unk19248[var2][var];
+    s8 result = sContest.excitementHistory[var2][var];
 
     eContestAI->scriptResult = result;
     gAIScriptPtr += 3;
@@ -1501,7 +1501,7 @@ static void ContestAICmd_unk_6D(void)
 {
     u8 var = sub_8128A7C(gAIScriptPtr[1]);
     u8 var2 = gAIScriptPtr[2];
-    u16 move = sContest.unk19220[var2][var];
+    u16 move = sContest.moveHistory[var2][var];
 
     eContestAI->scriptResult = gContestEffects[gContestMoves[move].effect].effectType;
     gAIScriptPtr += 3;

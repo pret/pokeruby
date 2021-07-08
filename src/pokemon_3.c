@@ -473,7 +473,7 @@ u16 SpeciesToCryId(u16 species)
 
 void unref_sub_803F938(u16 species, u32 personality, u8 *dest)
 {
-    if (species == SPECIES_SPINDA && dest != gUnknown_081FAF4C[0] && dest != gUnknown_081FAF4C[2])
+    if (species == SPECIES_SPINDA && dest != gMonSpriteGfx_Sprite_ptr[0] && dest != gMonSpriteGfx_Sprite_ptr[2])
     {
         int i;
         for (i = 0; i < 4; i++)
@@ -1298,22 +1298,22 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
     }
 }
 
-void sub_8040B8C(void)
+void SetMonPreventsSwitchingString(void)
 {
-    gLastUsedAbility = gBattleStruct->unk160C0;;
-    gBattleTextBuff1[0] = 0xFD;
-    gBattleTextBuff1[1] = 4;
-    gBattleTextBuff1[2] = gBattleStruct->unk16054;
-    gBattleTextBuff1[4] = EOS;
-    if (!GetBattlerSide(gBattleStruct->unk16054))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->unk16054]);
+    gLastUsedAbility = gBattleStruct->abilityPreventingSwitchout;;
+    gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+    gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
+    gBattleTextBuff1[2] = gBattleStruct->battlerPreventingSwitchout;
+    gBattleTextBuff1[4] = B_BUFF_EOS;
+    if (GetBattlerSide(gBattleStruct->battlerPreventingSwitchout) == B_SIDE_PLAYER)
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout]);
     else
-        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->unk16054];
-    gBattleTextBuff2[0] = 0xFD;
-    gBattleTextBuff2[1] = 4;
+        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout];
+    gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
+    gBattleTextBuff2[1] = B_BUFF_MON_NICK_WITH_PREFIX;
     gBattleTextBuff2[2] = gBankInMenu;
     gBattleTextBuff2[3] = pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]);
-    gBattleTextBuff2[4] = EOS;
+    gBattleTextBuff2[4] = B_BUFF_EOS;
     BattleStringExpandPlaceholders(BattleText_PreventedSwitch, gStringVar4);
 }
 

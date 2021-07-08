@@ -161,7 +161,7 @@ static void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
     }
 }
 
-void sub_80FA4E4(void *a, u32 b, u8 unused)
+void ReceiveDewfordTrendData(void * a, u32 b, u8 unused)
 {
     u16 i;
     u16 j;
@@ -171,9 +171,9 @@ void sub_80FA4E4(void *a, u32 b, u8 unused)
     u16 players = GetLinkPlayerCount();
 
     for (i = 0; i < players; i++)
-        memcpy(&ARRAY_2007800[i * 5], (u8 *)a + i * b, 40);
-    src = ARRAY_2007800;
-    dst = ARRAY_2007900;
+        memcpy(&eLinkedDewfordTrendsBuffer[i * 5], (u8 *)a + i * b, 40);
+    src = eLinkedDewfordTrendsBuffer;
+    dst = eSavedDewfordTrendsBuffer;
     r7 = 0;
     for (i = 0; i < players; i++)
     {
@@ -187,16 +187,16 @@ void sub_80FA4E4(void *a, u32 b, u8 unused)
             }
             else
             {
-                if (ARRAY_2007900[foo].unk0_0 < src->unk0_0)
+                if (eSavedDewfordTrendsBuffer[foo].unk0_0 < src->unk0_0)
                 {
-                    ARRAY_2007900[foo] = *src;
+                    eSavedDewfordTrendsBuffer[foo] = *src;
                 }
             }
             src++;
         }
     }
-    sub_80FA46C(ARRAY_2007900, r7, 2);
-    src = ARRAY_2007900;
+    sub_80FA46C(eSavedDewfordTrendsBuffer, r7, 2);
+    src = eSavedDewfordTrendsBuffer;
     dst = gSaveBlock1.easyChatPairs;
     for (i = 0; i < 5; i++)
         *(dst++) = *(src++);
@@ -320,7 +320,7 @@ static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
 static s16 sub_80FA828(struct EasyChatPair *a, u16 b)
 {
     s16 i;
-    struct EasyChatPair *s = ARRAY_2007900;
+    struct EasyChatPair *s = eSavedDewfordTrendsBuffer;
 
     for (i = 0; i < b; i++)
     {

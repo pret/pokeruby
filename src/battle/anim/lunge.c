@@ -239,7 +239,7 @@ void sub_80CDB60(u8 taskId)
         if (task->data[3])
         {
             task->data[4] += task->data[5];
-            gSprites[task->data[0]].pos2.x = task->data[4];
+            gSprites[task->data[0]].x2 = task->data[4];
             task->data[3]--;
         }
         else
@@ -262,7 +262,7 @@ void sub_80CDB60(u8 taskId)
         else
         {
             task->data[3] = 8;
-            task->data[4] = gSprites[task->data[0]].pos2.x;
+            task->data[4] = gSprites[task->data[0]].x2;
             task->data[5] = (task->data[1] == 0) ? 0x2 : -0x2;
             task->data[6] = 1;
             task->data[2]++;
@@ -278,9 +278,9 @@ void sub_80CDB60(u8 taskId)
             else
             {
                 if (task->data[3] & 1)
-                    gSprites[task->data[0]].pos2.x = task->data[4] + task->data[5];
+                    gSprites[task->data[0]].x2 = task->data[4] + task->data[5];
                 else
-                    gSprites[task->data[0]].pos2.x = task->data[4] - task->data[5];
+                    gSprites[task->data[0]].x2 = task->data[4] - task->data[5];
 
                 task->data[6] = 1;
                 task->data[3]--;
@@ -288,7 +288,7 @@ void sub_80CDB60(u8 taskId)
         }
         else
         {
-            gSprites[task->data[0]].pos2.x = task->data[4];
+            gSprites[task->data[0]].x2 = task->data[4];
             task->data[3] = 12;
             task->data[2]++;
         }
@@ -301,7 +301,7 @@ void sub_80CDB60(u8 taskId)
         else
         {
             task->data[3] = 3;
-            task->data[4] = gSprites[task->data[0]].pos2.x;
+            task->data[4] = gSprites[task->data[0]].x2;
             task->data[5] = (task->data[1] == 0) ? 8 : -8;
             task->data[2]++;
         }
@@ -310,7 +310,7 @@ void sub_80CDB60(u8 taskId)
         if (task->data[3])
         {
             task->data[4] += task->data[5];
-            gSprites[task->data[0]].pos2.x = task->data[4];
+            gSprites[task->data[0]].x2 = task->data[4];
             task->data[3]--;
         }
         else

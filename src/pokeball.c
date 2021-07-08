@@ -372,13 +372,13 @@ static void SendOutMonAnimation(u8 taskId)
     {
     case 0xFF: // Player's side
         gBattlerTarget = battler;
-        gSprites[spriteId].pos1.x = 24;
-        gSprites[spriteId].pos1.y = 68;
+        gSprites[spriteId].x = 24;
+        gSprites[spriteId].y = 68;
         gSprites[spriteId].callback = SendOutPlayerMonAnimation_Step0;
         break;
     case 0xFE: // Opponent's side
-        gSprites[spriteId].pos1.x = GetBattlerSpriteCoord(battler, 0);
-        gSprites[spriteId].pos1.y = GetBattlerSpriteCoord(battler, 1) + 24;
+        gSprites[spriteId].x = GetBattlerSpriteCoord(battler, 0);
+        gSprites[spriteId].y = GetBattlerSpriteCoord(battler, 1) + 24;
         gBattlerTarget = battler;
         gSprites[spriteId].data[0] = 0;
         gSprites[spriteId].callback = SendOutOpponentMonAnimation_Step0;
@@ -418,13 +418,13 @@ static void objc_0804ABD4(struct Sprite *sprite)
 
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = TRUE;
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->data[5] = 0;
         r4 = ball_number_to_ball_processing_index(GetBattlerBall(r5));
-        AnimateBallOpenParticles(sprite->pos1.x, sprite->pos1.y - 5, 1, 0x1C, r4);
+        AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 0x1C, r4);
         sprite->data[0] = sub_8141314(0, r5, 14, r4);
         sprite->data[6] = r5;
         sprite->data[7] = r8;
@@ -466,7 +466,7 @@ static void sub_8046760(struct Sprite *sprite)
     else
     {
         gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] += 0x60;
-        gSprites[gBattlerSpriteIds[sprite->data[6]]].pos2.y = -gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] >> 8;
+        gSprites[gBattlerSpriteIds[sprite->data[6]]].y2 = -gSprites[gBattlerSpriteIds[sprite->data[6]]].data[1] >> 8;
     }
 }
 
@@ -480,8 +480,8 @@ static void sub_80467F8(struct Sprite *sprite)
             sprite->data[3] = 0;
             sprite->data[4] = 32;
             sprite->data[5] = 0;
-            sprite->pos1.y += Cos(0, 32);
-            sprite->pos2.y = -Cos(0, sprite->data[4]);
+            sprite->y += Cos(0, 32);
+            sprite->y2 = -Cos(0, sprite->data[4]);
             sprite->callback = sub_804684C;
         }
     }
@@ -494,7 +494,7 @@ static void sub_804684C(struct Sprite *sprite)
     switch (sprite->data[3] & 0xFF)
     {
     case 0:
-        sprite->pos2.y = -Cos(sprite->data[5], sprite->data[4]);
+        sprite->y2 = -Cos(sprite->data[5], sprite->data[4]);
         sprite->data[5] += 4 + (sprite->data[3] >> 8);
         if (sprite->data[5] >= 64)
         {
@@ -520,7 +520,7 @@ static void sub_804684C(struct Sprite *sprite)
         }
         break;
     case 1:
-        sprite->pos2.y = -Cos(sprite->data[5], sprite->data[4]);
+        sprite->y2 = -Cos(sprite->data[5], sprite->data[4]);
         sprite->data[5] -= 4 + (sprite->data[3] >> 8);
         if (sprite->data[5] <= 0)
         {
@@ -532,8 +532,8 @@ static void sub_804684C(struct Sprite *sprite)
     if (r5)
     {
         sprite->data[3] = 0;
-        sprite->pos1.y += Cos(64, 32);
-        sprite->pos2.y = 0;
+        sprite->y += Cos(64, 32);
+        sprite->y2 = 0;
         if (sprite->data[7] == 0)
         {
             sprite->callback = sub_8046C78;
@@ -566,7 +566,7 @@ static void sub_8046984(struct Sprite *sprite)
     {
     case 0:
     case 2:
-        sprite->pos2.x += sprite->data[4];
+        sprite->x2 += sprite->data[4];
         sprite->data[5] += sprite->data[4];
         sprite->affineAnimPaused = FALSE;
         if (sprite->data[5] > 3 || sprite->data[5] < -3)
@@ -703,7 +703,7 @@ static void sub_8046C78(struct Sprite *sprite)
 
     StartSpriteAnim(sprite, 1);
     ballIndex = ball_number_to_ball_processing_index(GetBattlerBall(battler));
-    AnimateBallOpenParticles(sprite->pos1.x, sprite->pos1.y - 5, 1, 28, ballIndex);
+    AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 28, ballIndex);
     sprite->data[0] = sub_8141314(1, sprite->data[6], 14, ballIndex);
     sprite->callback = sub_8046E9C;
     if (gMain.inBattle)
@@ -784,14 +784,14 @@ static void sub_8046E9C(struct Sprite *sprite)
     else
     {
         gSprites[gBattlerSpriteIds[r4]].data[1] -= 288;
-        gSprites[gBattlerSpriteIds[r4]].pos2.y = gSprites[gBattlerSpriteIds[r4]].data[1] >> 8;
+        gSprites[gBattlerSpriteIds[r4]].y2 = gSprites[gBattlerSpriteIds[r4]].data[1] >> 8;
     }
     if (sprite->animEnded && r7)
     {
         s32 i;
         u32 r3;
 
-        gSprites[gBattlerSpriteIds[r4]].pos2.y = 0;
+        gSprites[gBattlerSpriteIds[r4]].y2 = 0;
         gDoingBattleAnim = 0;
         ewram17810[r4].unk0_3 = 0;
         FreeSpriteOamMatrix(sprite);
@@ -868,7 +868,7 @@ static void SendOutPlayerMonAnimation_Step1(struct Sprite *sprite)
         r4 = sprite->data[0];
         TranslateAnimLinear(sprite);
         sprite->data[7] += sprite->data[6] / 3;
-        sprite->pos2.y += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
+        sprite->y2 += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
         sprite->oam.affineParam += 0x100;
         if ((sprite->oam.affineParam >> 8) % 3 != 0)
             sprite->data[0] = r4;
@@ -887,10 +887,10 @@ static void SendOutPlayerMonAnimation_Step1(struct Sprite *sprite)
     {
         if (TranslateAnimArc(sprite))
         {
-            sprite->pos1.x += sprite->pos2.x;
-            sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.y = 0;
-            sprite->pos2.x = 0;
+            sprite->x += sprite->x2;
+            sprite->y += sprite->y2;
+            sprite->y2 = 0;
+            sprite->x2 = 0;
             sprite->data[6] = sprite->oam.affineParam & 0xFF;
             sprite->data[0] = 0;
             if (IsDoubleBattle() && ewram17840.unk9_0 && sprite->data[6] == GetBattlerAtPosition(2))
@@ -943,10 +943,10 @@ void CreatePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 e, u8 f, u8 g, u32 h)
     LoadCompressedObjectPalette(&sBallSpritePalettes[0]);
     spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, f);
     gSprites[spriteId].data[0] = a;
-    gSprites[spriteId].data[5] = gSprites[a].pos1.x;
-    gSprites[spriteId].data[6] = gSprites[a].pos1.y;
-    gSprites[a].pos1.x = x;
-    gSprites[a].pos1.y = y;
+    gSprites[spriteId].data[5] = gSprites[a].x;
+    gSprites[spriteId].data[6] = gSprites[a].y;
+    gSprites[a].x = x;
+    gSprites[a].y = y;
     gSprites[spriteId].data[1] = g;
     gSprites[spriteId].data[2] = b;
     gSprites[spriteId].data[3] = h;
@@ -970,7 +970,7 @@ static void sub_80473D0(struct Sprite *sprite)
         else
             r5 = 0;
         StartSpriteAnim(sprite, 1);
-        sub_80472B0(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r5);
+        sub_80472B0(sprite->x, sprite->y - 5, sprite->oam.priority, r5);
         sprite->data[1] = sub_80472D8(1, r8, r4);
         sprite->callback = sub_804748C;
         gSprites[r7].invisible = FALSE;
@@ -1000,24 +1000,24 @@ static void sub_804748C(struct Sprite *sprite)
         StartSpriteAffineAnim(&gSprites[r3], 0);
         r12 = TRUE;
     }
-    var1 = (sprite->data[5] - sprite->pos1.x) * sprite->data[7] / 128 + sprite->pos1.x;
-    var2 = (sprite->data[6] - sprite->pos1.y) * sprite->data[7] / 128 + sprite->pos1.y;
-    gSprites[r3].pos1.x = var1;
-    gSprites[r3].pos1.y = var2;
+    var1 = (sprite->data[5] - sprite->x) * sprite->data[7] / 128 + sprite->x;
+    var2 = (sprite->data[6] - sprite->y) * sprite->data[7] / 128 + sprite->y;
+    gSprites[r3].x = var1;
+    gSprites[r3].y = var2;
     if (sprite->data[7] < 128)
     {
         s16 sine = -(gSineTable[(u8)sprite->data[7]] / 8);
 
         sprite->data[7] += 4;
-        gSprites[r3].pos2.x = sine;
-        gSprites[r3].pos2.y = sine;
+        gSprites[r3].x2 = sine;
+        gSprites[r3].y2 = sine;
     }
     else
     {
-        gSprites[r3].pos1.x = sprite->data[5];
-        gSprites[r3].pos1.y = sprite->data[6];
-        gSprites[r3].pos2.x = 0;
-        gSprites[r3].pos2.y = 0;
+        gSprites[r3].x = sprite->data[5];
+        gSprites[r3].y = sprite->data[6];
+        gSprites[r3].x2 = 0;
+        gSprites[r3].y2 = 0;
         r6 = TRUE;
     }
     if (sprite->animEnded && r12 && r6)
@@ -1055,7 +1055,7 @@ static void sub_8047638(struct Sprite *sprite)
         else
             r6 = 0;
         StartSpriteAnim(sprite, 1);
-        sub_80472B0(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r6);
+        sub_80472B0(sprite->x, sprite->y - 5, sprite->oam.priority, r6);
         sprite->data[1] = sub_80472D8(1, r8, r5);
         sprite->callback = sub_80476E0;
         StartSpriteAffineAnim(&gSprites[r7], 2);
@@ -1086,7 +1086,7 @@ static void sub_80476E0(struct Sprite *sprite)
     else
     {
         gSprites[r1].data[1] += 96;
-        gSprites[r1].pos2.y = -gSprites[r1].data[1] >> 8;
+        gSprites[r1].y2 = -gSprites[r1].data[1] >> 8;
     }
 }
 
@@ -1107,15 +1107,15 @@ void sub_804777C(u8 a)
 
     sprite->data[0] = 5;
     sprite->data[1] = 0;
-    sprite->pos2.x = 0x73;
-    sprite->pos2.y = 0;
+    sprite->x2 = 0x73;
+    sprite->y2 = 0;
     sprite->callback = sub_8047830;
     if (GetBattlerSide(a) != 0)
     {
         sprite->data[0] = -sprite->data[0];
         sprite->data[1] = -sprite->data[1];
-        sprite->pos2.x = -sprite->pos2.x;
-        sprite->pos2.y = -sprite->pos2.y;
+        sprite->x2 = -sprite->x2;
+        sprite->y2 = -sprite->y2;
     }
     gSprites[sprite->data[5]].callback(&gSprites[sprite->data[5]]);
     if (GetBattlerPosition(a) == 2)
@@ -1134,9 +1134,9 @@ static void sub_804780C(struct Sprite *sprite)
 
 static void sub_8047830(struct Sprite *sprite)
 {
-    sprite->pos2.x -= sprite->data[0];
-    sprite->pos2.y -= sprite->data[1];
-    if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+    sprite->x2 -= sprite->data[0];
+    sprite->y2 -= sprite->data[1];
+    if (sprite->x2 == 0 && sprite->y2 == 0)
         sprite->callback = SpriteCallbackDummy;
 }
 
@@ -1154,13 +1154,13 @@ static void oamc_804BEB4(struct Sprite *sprite)
 {
     u8 r1 = sprite->data[1];
 
-    gSprites[r1].pos2.y = sprite->data[0];
+    gSprites[r1].y2 = sprite->data[0];
     sprite->data[0] = -sprite->data[0];
     sprite->data[2]++;
     if (sprite->data[2] == 21)
     {
-        gSprites[r1].pos2.x = 0;
-        gSprites[r1].pos2.y = 0;
+        gSprites[r1].x2 = 0;
+        gSprites[r1].y2 = 0;
         DestroySprite(sprite);
     }
 }

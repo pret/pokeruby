@@ -391,7 +391,7 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
             gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[2] = -1;
             if (gVerticalScrollIndicatorIds[BOTTOM_ARROW] != 0xFF)
             {
-                gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].pos2.y = gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].pos2.y * -1;
+                gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].y2 = gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].y2 * -1;
                 gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[3] = gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[3];
             }
             else
@@ -408,7 +408,7 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
             gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[2] = 1;
             if (gVerticalScrollIndicatorIds[TOP_ARROW] != 0xFF)
             {
-                gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].pos2.y = gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].pos2.y * -1;
+                gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].y2 = gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].y2 * -1;
                 gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[3] = gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[3];
             }
             else
@@ -425,7 +425,7 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
             gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[0] = -1;
             if (gVerticalScrollIndicatorIds[RIGHT_ARROW] != 0xFF)
             {
-                gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].pos2.x = gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].pos2.x * -1;
+                gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].x2 = gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].x2 * -1;
                 gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[1] = gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[1];
             }
             else
@@ -442,7 +442,7 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
             gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[0] = 1;
             if (gVerticalScrollIndicatorIds[LEFT_ARROW] != 0xFF)
             {
-                gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].pos2.x = gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].pos2.x * -1;
+                gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].x2 = gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].x2 * -1;
                 gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[1] = gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[1];
             }
             else
@@ -487,11 +487,11 @@ static void sub_80F9834(struct Sprite *sprite)
 {
     if (sprite->data[1] == 0)
     {
-        sprite->pos2.x += sprite->data[0];
+        sprite->x2 += sprite->data[0];
     }
     if (sprite->data[3] == 0)
     {
-        sprite->pos2.y += sprite->data[2];
+        sprite->y2 += sprite->data[2];
     }
     sprite->data[1]++;
     sprite->data[3]++;
@@ -503,13 +503,13 @@ static void sub_80F9834(struct Sprite *sprite)
     {
         sprite->data[3] = 0;
     }
-    if (sprite->pos2.x == 8 || sprite->pos2.x == -8)
+    if (sprite->x2 == 8 || sprite->x2 == -8)
     {
-        sprite->pos2.x = 0;
+        sprite->x2 = 0;
     }
-    if (sprite->pos2.y == 8 || sprite->pos2.y == -8)
+    if (sprite->y2 == 8 || sprite->y2 == -8)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
     }
 }
 
@@ -533,8 +533,8 @@ static void ResetVerticalScrollIndicators(u8 id)
 {
     if (gVerticalScrollIndicatorIds[id] != 0xFF && id < 4)
     {
-        gSprites[gVerticalScrollIndicatorIds[id]].pos2.x = 0;
-        gSprites[gVerticalScrollIndicatorIds[id]].pos2.y = 0;
+        gSprites[gVerticalScrollIndicatorIds[id]].x2 = 0;
+        gSprites[gVerticalScrollIndicatorIds[id]].y2 = 0;
         gSprites[gVerticalScrollIndicatorIds[id]].data[1] = 0;
         gSprites[gVerticalScrollIndicatorIds[id]].data[3] = 0;
     }

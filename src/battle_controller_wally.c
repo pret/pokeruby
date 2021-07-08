@@ -49,11 +49,11 @@ extern u8 gDisplayedStringBattle[];
 extern u8 gBankInMenu;
 extern u8 gBattleMonForms[];
 extern u8 gBattleOutcome;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u8 gAnimMoveTurn;
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gUnknown_0300434C[];
 extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];
@@ -232,10 +232,10 @@ void unref_sub_8137220(void)
 void SetBankFuncToWallyBufferRunCommand(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
-    ewram160A8 = 0;
-    ewram160A9 = 0;
-    ewram160AA = 0;
-    ewram160AB = 0;
+    gBattleStruct->unk160A8 = 0;
+    gBattleStruct->unk160A9 = 0;
+    gBattleStruct->unk160AA = 0;
+    gBattleStruct->unk160AB = 0;
 }
 
 void WallyBufferRunCommand(void)
@@ -253,59 +253,59 @@ void sub_81372BC(void)
 {
     u8 r4;
 
-    switch (ewram160A8)
+    switch (gBattleStruct->unk160A8)
     {
     case 0:
-        ewram160AA = 64;
-        ewram160A8++;
+        gBattleStruct->unk160AA = 64;
+        gBattleStruct->unk160A8++;
         // fall through
     case 1:
-        r4 = --ewram160AA;
+        r4 = --gBattleStruct->unk160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
+            gBattleStruct->unk160A8++;
+            gBattleStruct->unk160A9 = r4;
+            gBattleStruct->unk160AA = 64;
         }
         break;
     case 2:
-        r4 = --ewram160AA;
+        r4 = --gBattleStruct->unk160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
+            gBattleStruct->unk160A8++;
+            gBattleStruct->unk160A9 = r4;
+            gBattleStruct->unk160AA = 64;
         }
         break;
     case 3:
-        r4 = --ewram160AA;
+        r4 = --gBattleStruct->unk160AA;
         if (r4 == 0)
         {
             BtlController_EmitTwoReturnValues(1, 9, 0);
             WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
+            gBattleStruct->unk160A8++;
+            gBattleStruct->unk160A9 = r4;
+            gBattleStruct->unk160AA = 64;
         }
         break;
     case 4:
-        if (--ewram160AA == 0)
+        if (--gBattleStruct->unk160AA == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
             sub_802E3E4(1, 0);
-            ewram160AA = 64;
-            ewram160A8++;
+            gBattleStruct->unk160AA = 64;
+            gBattleStruct->unk160A8++;
         }
         break;
     case 5:
-        if (--ewram160AA == 0)
+        if (--gBattleStruct->unk160AA == 0)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
@@ -324,7 +324,7 @@ void sub_813741C(void)
 
 void sub_8137454(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gWindowTemplate_Contest_MoveDescription.state == 0)
         WallyBufferExecCompleted();
 }
 
@@ -1098,11 +1098,11 @@ void WallyHandleTrainerThrow(void)
     LoadPlayerTrainerBankSprite(2, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_813741C;
@@ -1113,11 +1113,11 @@ void WallyHandleTrainerSlide(void)
     LoadPlayerTrainerBankSprite(2, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
@@ -1195,7 +1195,7 @@ void sub_81390D0(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite == 1)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4 = 1;
         break;
@@ -1212,7 +1212,7 @@ void sub_81390D0(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if (ewram17800[gActiveBattler].substituteSprite == 1)
+            if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1)
                 move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
             ewram17810[gActiveBattler].unk4 = 3;
         }
@@ -1239,7 +1239,7 @@ void WallyHandlePrintString(void)
     if (*ptr == 2)
         DestroyMenuCursor();
     BufferStringBattle(*ptr);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
+    Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x90, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_8137454;
 }
 
@@ -1257,23 +1257,23 @@ void WallyHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    gUnknown_03004210.paletteNum = 0;
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
+    gWindowTemplate_Contest_MoveDescription.paletteNum = 0;
+    Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 10, 2, 15, 27, 18);
+    Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 10, 2, 35, 16, 36);
     gBattlerControllerFuncs[gActiveBattler] = sub_81372BC;
-    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, BattleText_MenuOptions, 400, 18, 35);
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     for (i = 0; i < 4; i++)
         nullsub_8(i);
     sub_802E3E4(0, 0);
     BattleStringExpandPlaceholdersToDisplayedString(BattleText_WallyMenu);
 #ifdef ENGLISH
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 440, 2, 35);
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 440, 2, 35);
 #else
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 444, 2, 35);
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 444, 2, 35);
 #endif
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
 }
 
 void WallyHandlecmd19(void)
@@ -1283,16 +1283,16 @@ void WallyHandlecmd19(void)
 
 void WallyHandlecmd20(void)
 {
-    switch (ewram160A9)
+    switch (gBattleStruct->unk160A9)
     {
     case 0:
         sub_80304A8();
-        ewram160A9++;
-        ewram160AB = 80;
+        gBattleStruct->unk160A9++;
+        gBattleStruct->unk160AB = 80;
         // fall through
     case 1:
-        ewram160AB--;
-        if (ewram160AB == 0)
+        gBattleStruct->unk160AB--;
+        if (gBattleStruct->unk160AB == 0)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);
@@ -1464,7 +1464,7 @@ void WallyHandleFaintingCry(void)
 void WallyHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     WallyBufferExecCompleted();
 }
 
@@ -1476,7 +1476,7 @@ void WallyHandleTrainerBallThrow(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8030E38);
@@ -1496,13 +1496,13 @@ void sub_81398BC(u8 bank)
 {
     u16 species;
 
-    ewram17800[bank].transformedSpecies = 0;
+    gBattleSpriteInfo[bank].transformedSpecies = 0;
     gBattlerPartyIndexes[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
     gBattlerSpriteIds[bank] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
       GetBattlerSubpriority(bank));
@@ -1544,7 +1544,7 @@ void WallyHandlecmd48(void)
     else
     {
         ewram17810[gActiveBattler].unk0_0 = 1;
-        gUnknown_02024E68[gActiveBattler] = sub_8044804(gActiveBattler, (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gUnknown_02024E68[gActiveBattler] = sub_8044804(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         WallyBufferExecCompleted();
     }
 }

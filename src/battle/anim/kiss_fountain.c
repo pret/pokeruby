@@ -35,8 +35,8 @@ void sub_80D1FDC(struct Sprite* sprite)
     else
     {
         sprite->data[4] += sprite->data[1];
-        sprite->pos2.x = sprite->data[4] >> 8;
-        sprite->pos2.y = Sin(sprite->data[3], sprite->data[2]);
+        sprite->x2 = sprite->data[4] >> 8;
+        sprite->y2 = Sin(sprite->data[3], sprite->data[2]);
         sprite->data[3] = (sprite->data[3] + 3) & 0xFF;
         if (sprite->data[3] > 0x64)
         {

@@ -246,10 +246,10 @@ static void sub_80D9E78(struct Sprite *sprite) // same as sub_80D9DD4
 void sub_80D9E94(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[0];
-    sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[1];
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x + gBattleAnimArgs[0];
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = sprite->y + gBattleAnimArgs[1];
 
     InitSpriteDataForLinearTranslation(sprite);
 
@@ -272,17 +272,17 @@ static void sub_80D9EE8(struct Sprite *sprite)
 
 void sub_80D9F14(struct Sprite *sprite)
 {
-    SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+    SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->x, &sprite->y);
 
     if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
-    sprite->data[4] = sprite->pos1.y + sprite->data[0];
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[4] = sprite->y + sprite->data[0];
 
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -302,13 +302,13 @@ void AnimBubbleEffect(struct Sprite *sprite)
     }
     else
     {
-        SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->x, &sprite->y);
 
         if (GetBattlerSide(gBattleAnimAttacker))
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
     }
 
     sprite->callback = AnimBubbleEffectStep;
@@ -317,9 +317,9 @@ void AnimBubbleEffect(struct Sprite *sprite)
 static void AnimBubbleEffectStep(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 0xB) & 0xFF;
-    sprite->pos2.x = Sin(sprite->data[0], 4);
+    sprite->x2 = Sin(sprite->data[0], 4);
     sprite->data[1] += 0x30;
-    sprite->pos2.y = -(sprite->data[1] >> 8);
+    sprite->y2 = -(sprite->data[1] >> 8);
 
     if (sprite->affineAnimEnded)
         DestroyAnimSprite(sprite);

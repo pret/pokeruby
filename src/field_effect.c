@@ -543,25 +543,25 @@ u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    DecompressPicFromTable_2(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gUnknown_081FAF4C[3], gUnknown_081FAF4C[3], species);
+    DecompressPicFromTable_2(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gMonSpriteGfx_Sprite_ptr[3], gMonSpriteGfx_Sprite_ptr[3], species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 3);
-    gUnknown_02024E8C.paletteTag = gMonPaletteTable[0].tag;
+    gCreatingSpriteTemplate.paletteTag = gMonPaletteTable[0].tag;
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
-    return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
+    return CreateSprite(&gCreatingSpriteTemplate, x, y, subpriority);
 }
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette;
 
-    HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gUnknown_081FAF4C[3] /* this is actually u8* or something, pointing to ewram */, gUnknown_081FAF4C[3], species, g);
+    HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gMonSpriteGfx_Sprite_ptr[3] /* this is actually u8* or something, pointing to ewram */, gMonSpriteGfx_Sprite_ptr[3], species, g);
     spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
     LoadCompressedObjectPalette(spritePalette);
     GetMonSpriteTemplate_803C56C(species, 3);
-    gUnknown_02024E8C.paletteTag = spritePalette->tag;
+    gCreatingSpriteTemplate.paletteTag = spritePalette->tag;
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
-    return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
+    return CreateSprite(&gCreatingSpriteTemplate, x, y, subpriority);
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite)
@@ -748,8 +748,8 @@ u8 CreatePokeballGlowSprite(s16 data6, s16 x, s16 y, u16 data5)
     struct Sprite *sprite;
     spriteId = CreateInvisibleSprite(SpriteCB_PokeballGlowEffect);
     sprite = &gSprites[spriteId];
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
     sprite->data[5] = data5;
     sprite->data[6] = data6;
     sprite->data[7] = spriteId;
@@ -767,7 +767,7 @@ void PokeballGlowEffect_0(struct Sprite *sprite)
     if (sprite->data[1] == 0 || (--sprite->data[1]) == 0)
     {
         sprite->data[1] = 25;
-        endSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_839F208, gUnknown_0839F2A8[sprite->data[2]].x + sprite->pos2.x, gUnknown_0839F2A8[sprite->data[2]].y + sprite->pos2.y, 0);
+        endSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_839F208, gUnknown_0839F2A8[sprite->data[2]].x + sprite->x2, gUnknown_0839F2A8[sprite->data[2]].y + sprite->y2, 0);
         gSprites[endSpriteId].oam.priority = 2;
         gSprites[endSpriteId].data[0] = sprite->data[7];
         sprite->data[2]++;
@@ -1077,7 +1077,7 @@ bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
     s16 centerToCornerVecY;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
-    sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
+    sprite->y2 = -(sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
     task->data[1] = 1;
     task->data[2] = 0;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
@@ -1093,7 +1093,7 @@ bool8 sub_80868E4(struct Task *task)
 
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.y += task->data[1];
+    sprite->y2 += task->data[1];
     if (task->data[1] < 8)
     {
         task->data[2] += task->data[1];
@@ -1102,19 +1102,19 @@ bool8 sub_80868E4(struct Task *task)
             task->data[1] <<= 1;
         }
     }
-    if (task->data[3] == 0 && sprite->pos2.y >= -16)
+    if (task->data[3] == 0 && sprite->y2 >= -16)
     {
         task->data[3]++;
         objectEvent->fixedPriority = 0;
         sprite->subspriteMode = task->data[4];
         objectEvent->triggerGroundEffectsOnMove = 1;
     }
-    if (sprite->pos2.y >= 0)
+    if (sprite->y2 >= 0)
     {
         PlaySE(SE_M_STRENGTH);
         objectEvent->triggerGroundEffectsOnStop = 1;
         objectEvent->landingJump = 1;
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         task->data[0]++;
     }
     return FALSE;
@@ -1255,8 +1255,8 @@ void sub_8086B98(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = Cos(0x84, task->data[2]);
-    sprite->pos2.y = Sin(0x94, task->data[2]);
+    sprite->x2 = Cos(0x84, task->data[2]);
+    sprite->y2 = Sin(0x94, task->data[2]);
     task->data[3]++;
     if (task->data[3] & 1)
     {
@@ -1268,8 +1268,8 @@ void sub_8086BE4(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = Cos(0x7c, task->data[2]);
-    sprite->pos2.y = Sin(0x76, task->data[2]);
+    sprite->x2 = Cos(0x7c, task->data[2]);
+    sprite->y2 = Sin(0x76, task->data[2]);
     task->data[3]++;
     if (task->data[3] & 1)
     {
@@ -1340,8 +1340,8 @@ bool8 sub_8086D70(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = Cos(0x84, task->data[1]);
-    sprite->pos2.y = Sin(0x94, task->data[1]);
+    sprite->x2 = Cos(0x84, task->data[1]);
+    sprite->y2 = Sin(0x94, task->data[1]);
     task->data[0]++;
     return FALSE;
 }
@@ -1350,8 +1350,8 @@ bool8 sub_8086DB0(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = Cos(0x84, task->data[1]);
-    sprite->pos2.y = Sin(0x94, task->data[1]);
+    sprite->x2 = Cos(0x84, task->data[1]);
+    sprite->y2 = Sin(0x94, task->data[1]);
     task->data[2]++;
     if (task->data[2] & 1)
     {
@@ -1359,8 +1359,8 @@ bool8 sub_8086DB0(struct Task *task)
     }
     if (task->data[1] == 0)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         task->data[0] = 5;
     }
     return FALSE;
@@ -1370,8 +1370,8 @@ bool8 sub_8086E10(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = Cos(0x7c, task->data[1]);
-    sprite->pos2.y = Sin(0x76, task->data[1]);
+    sprite->x2 = Cos(0x7c, task->data[1]);
+    sprite->y2 = Sin(0x76, task->data[1]);
     task->data[0]++;
     return FALSE;
 }
@@ -1380,8 +1380,8 @@ bool8 sub_8086E50(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = Cos(0x7c, task->data[1]);
-    sprite->pos2.y = Sin(0x76, task->data[1]);
+    sprite->x2 = Cos(0x7c, task->data[1]);
+    sprite->y2 = Sin(0x76, task->data[1]);
     task->data[2]++;
     if (task->data[2] & 1)
     {
@@ -1389,8 +1389,8 @@ bool8 sub_8086E50(struct Task *task)
     }
     if (task->data[1] == 0)
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         task->data[0]++;
     }
     return FALSE;
@@ -1581,7 +1581,7 @@ bool8 sub_8087264(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
 
 bool8 sub_8087298(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sprite->pos2.y = 0;
+    sprite->y2 = 0;
     task->data[3] = 1;
     gFieldEffectArguments[0] = objectEvent->currentCoords.x;
     gFieldEffectArguments[1] = objectEvent->currentCoords.y;
@@ -1610,9 +1610,9 @@ bool8 sub_80872E4(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
     if (task->data[2] > 6)
     {
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
-        if (sprite->pos2.y > -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY))
+        if (sprite->y2 > -(sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY))
         {
-            sprite->pos2.y -= task->data[3];
+            sprite->y2 -= task->data[3];
             if (task->data[3] <= 7)
             {
                 task->data[3]++;
@@ -1622,7 +1622,7 @@ bool8 sub_80872E4(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
             task->data[4] = 1;
         }
     }
-    if (task->data[5] == 0 && sprite->pos2.y < -0x10)
+    if (task->data[5] == 0 && sprite->y2 < -0x10)
     {
         task->data[5]++;
         objectEvent->fixedPriority = 1;
@@ -2023,7 +2023,7 @@ static void TeleportFieldEffectTask3(struct Task *task)
         task->data[1] = 4;
         ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
     }
-    sprite->pos1.y -= task->data[3];
+    sprite->y -= task->data[3];
     task->data[4] += task->data[3];
     if ((--task->data[2]) <= 0 && (task->data[2] = 4, task->data[3] < 8))
     {
@@ -2086,7 +2086,7 @@ void sub_8087E4C(struct Task *task)
     {
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
-        sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
+        sprite->y2 = -(sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
         gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
         task->data[0]++;
         task->data[1] = 8;
@@ -2102,7 +2102,7 @@ void sub_8087ED8(struct Task *task)
     u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
-    if ((sprite->pos2.y += task->data[1]) >= -8)
+    if ((sprite->y2 += task->data[1]) >= -8)
     {
         if (task->data[13] == 0)
         {
@@ -2118,7 +2118,7 @@ void sub_8087ED8(struct Task *task)
             sprite->subspriteMode = 2;
         }
     }
-    if (sprite->pos2.y >= -0x30 && task->data[1] > 1 && !(sprite->pos2.y & 1))
+    if (sprite->y2 >= -0x30 && task->data[1] > 1 && !(sprite->y2 & 1))
     {
         task->data[1]--;
     }
@@ -2127,9 +2127,9 @@ void sub_8087ED8(struct Task *task)
         task->data[2] = 4;
         ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
     }
-    if (sprite->pos2.y >= 0)
+    if (sprite->y2 >= 0)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         task->data[0]++;
         task->data[1] = 1;
         task->data[2] = 0;
@@ -2537,9 +2537,9 @@ void sub_80888D4(struct Sprite *);
 
 void sub_8088890(struct Sprite *sprite)
 {
-    if ((sprite->pos1.x -= 20) <= 0x78)
+    if ((sprite->x -= 20) <= 0x78)
     {
-        sprite->pos1.x = 0x78;
+        sprite->x = 0x78;
         sprite->data[1] = 30;
         sprite->callback = sub_80888D4;
         if (sprite->data[6])
@@ -2564,12 +2564,12 @@ void sub_80888D4(struct Sprite *sprite)
 
 void sub_80888F0(struct Sprite *sprite)
 {
-    if (sprite->pos1.x < -0x40)
+    if (sprite->x < -0x40)
     {
         sprite->data[7] = 1;
     } else
     {
-        sprite->pos1.x -= 20;
+        sprite->x -= 20;
     }
 }
 
@@ -2686,17 +2686,17 @@ u8 FldEff_NPCFlyOut(void)
 void sub_8088BC4(struct Sprite *sprite)
 {
     struct Sprite *npcSprite;
-    sprite->pos2.x = Cos(sprite->data[2], 0x8c);
-    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->x2 = Cos(sprite->data[2], 0x8c);
+    sprite->y2 = Sin(sprite->data[2], 0x48);
     sprite->data[2] = (sprite->data[2] + 4) & 0xff;
     if (sprite->data[0])
     {
         npcSprite = &gSprites[sprite->data[1]];
         npcSprite->coordOffsetEnabled = 0;
-        npcSprite->pos1.x = sprite->pos1.x + sprite->pos2.x;
-        npcSprite->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
-        npcSprite->pos2.x = 0;
-        npcSprite->pos2.y = 0;
+        npcSprite->x = sprite->x + sprite->x2;
+        npcSprite->y = sprite->y + sprite->y2 - 8;
+        npcSprite->x2 = 0;
+        npcSprite->y2 = 0;
     }
     if (sprite->data[2] >= 0x80)
     {
@@ -2878,10 +2878,10 @@ void sub_8088FC0(u8 spriteId)
     struct Sprite *sprite;
     sprite = &gSprites[spriteId];
     sprite->callback = sub_80890D8;
-    sprite->pos1.x = 0x78;
-    sprite->pos1.y = 0x00;
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
+    sprite->x = 0x78;
+    sprite->y = 0x00;
+    sprite->x2 = 0;
+    sprite->y2 = 0;
     memset(&sprite->data[0], 0, 8 * sizeof(u16) /* zero all data cells */);
     sprite->data[6] = 0x40;
 }
@@ -2918,15 +2918,15 @@ void sub_8089018(struct Sprite *sprite)
             sprite->affineAnims = gSpriteAffineAnimTable_0839F44C;
             InitSpriteAffineAnim(sprite);
             StartSpriteAffineAnim(sprite, 0);
-            sprite->pos1.x = 0x76;
-            sprite->pos1.y = -0x30;
+            sprite->x = 0x76;
+            sprite->y = -0x30;
             sprite->data[0]++;
             sprite->data[1] = 0x40;
             sprite->data[2] = 0x100;
         }
         sprite->data[1] += (sprite->data[2] >> 8);
-        sprite->pos2.x = Cos(sprite->data[1], 0x78);
-        sprite->pos2.y = Sin(sprite->data[1], 0x78);
+        sprite->x2 = Cos(sprite->data[1], 0x78);
+        sprite->y2 = Sin(sprite->data[1], 0x78);
         if (sprite->data[2] < 0x800)
         {
             sprite->data[2] += 0x60;
@@ -2944,17 +2944,17 @@ void sub_8089018(struct Sprite *sprite)
 void sub_80890D8(struct Sprite *sprite)
 {
     struct Sprite *sprite1;
-    sprite->pos2.x = Cos(sprite->data[2], 0x8c);
-    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->x2 = Cos(sprite->data[2], 0x8c);
+    sprite->y2 = Sin(sprite->data[2], 0x48);
     sprite->data[2] = (sprite->data[2] + 4) & 0xff;
     if (sprite->data[6] != 0x40)
     {
         sprite1 = &gSprites[sprite->data[6]];
         sprite1->coordOffsetEnabled = 0;
-        sprite1->pos1.x = sprite->pos1.x + sprite->pos2.x;
-        sprite1->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
-        sprite1->pos2.x = 0;
-        sprite1->pos2.y = 0;
+        sprite1->x = sprite->x + sprite->x2;
+        sprite1->y = sprite->y + sprite->y2 - 8;
+        sprite1->x2 = 0;
+        sprite1->y2 = 0;
     }
     if (sprite->data[2] >= 0x80)
     {
@@ -2972,8 +2972,8 @@ void sub_808914C(struct Sprite *sprite)
             sprite->affineAnims = gSpriteAffineAnimTable_0839F44C;
             InitSpriteAffineAnim(sprite);
             StartSpriteAffineAnim(sprite, 1);
-            sprite->pos1.x = 0x5e;
-            sprite->pos1.y = -0x20;
+            sprite->x = 0x5e;
+            sprite->y = -0x20;
             sprite->data[0]++;
             sprite->data[1] = 0xf0;
             sprite->data[2] = 0x800;
@@ -2982,8 +2982,8 @@ void sub_808914C(struct Sprite *sprite)
         sprite->data[1] += sprite->data[2] >> 8;
         sprite->data[3] += sprite->data[2] >> 8;
         sprite->data[1] &= 0xff;
-        sprite->pos2.x = Cos(sprite->data[1], 0x20);
-        sprite->pos2.y = Sin(sprite->data[1], 0x78);
+        sprite->x2 = Cos(sprite->data[1], 0x20);
+        sprite->y2 = Sin(sprite->data[1], 0x78);
         if (sprite->data[2] > 0x100)
         {
             sprite->data[2] -= sprite->data[4];
@@ -3070,10 +3070,10 @@ void sub_8089354(struct Task *task)
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         sprite = &gSprites[objectEvent->spriteId];
         sub_8088FFC(task->data[1], 0x40);
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         task->data[0]++;
         task->data[2] = 0;
     }
@@ -3102,7 +3102,7 @@ void sub_80893C0(struct Task *task)
         8
     };
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.y = unknown_0839F470[task->data[2]];
+    sprite->y2 = unknown_0839F470[task->data[2]];
     if ((++task->data[2]) >= 18)
     {
         task->data[0]++;
@@ -3119,8 +3119,8 @@ void sub_8089414(struct Task *task)
         sprite = &gSprites[objectEvent->spriteId];
         objectEvent->inanimate = 0;
         sub_805C058(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->x2 = 0;
+        sprite->y2 = 0;
         sprite->coordOffsetEnabled = 1;
         sub_8059BF4();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);

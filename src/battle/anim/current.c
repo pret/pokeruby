@@ -361,9 +361,9 @@ void sub_80D648C(struct Sprite *sprite)
     InitAnimSpritePos(sprite, 1);
 
     sprite->data[0] = gBattleAnimArgs[3];
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
     InitAnimLinearTranslation(sprite);
@@ -380,8 +380,8 @@ static void sub_80D6514(struct Sprite *sprite)
 {
     if (!TranslateAnimLinear(sprite))
     {
-        sprite->pos2.x += Sin(sprite->data[7], sprite->data[5]);
-        sprite->pos2.y += Cos(sprite->data[7], sprite->data[5]);
+        sprite->x2 += Sin(sprite->data[7], sprite->data[5]);
+        sprite->y2 += Cos(sprite->data[7], sprite->data[5]);
 
         sprite->data[7] = (sprite->data[7] + sprite->data[6]) & 0xFF;
         if (sprite->data[7] % 3 == 0)
@@ -414,8 +414,8 @@ void sub_80D65DC(struct Sprite *sprite)
     if (!gMain.inBattle || GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[2];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[1];
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[2];
     sprite->data[3] = gBattleAnimArgs[0];
     sprite->data[4] = gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[3];
@@ -435,8 +435,8 @@ void sub_80D6658(struct Sprite *sprite)
     if (!gMain.inBattle || GetBattlerSide(bank) == B_SIDE_PLAYER)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
-    sprite->pos1.x = GetBattlerSpriteCoord(bank, 2) + gBattleAnimArgs[0];
-    sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[1];
+    sprite->x = GetBattlerSpriteCoord(bank, 2) + gBattleAnimArgs[0];
+    sprite->y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[1];
 
     sprite->data[4] = gBattleAnimArgs[7] & 0x7FFF;
     sprite->data[5] = gBattleAnimArgs[2];
@@ -450,8 +450,8 @@ void sub_80D6658(struct Sprite *sprite)
 
 static void sub_80D672C(struct Sprite *sprite)
 {
-    sprite->pos2.x = Sin(sprite->data[7], sprite->data[5]);
-    sprite->pos2.y = Cos(sprite->data[7], sprite->data[5]);
+    sprite->x2 = Sin(sprite->data[7], sprite->data[5]);
+    sprite->y2 = Cos(sprite->data[7], sprite->data[5]);
 
     sprite->data[7] = (sprite->data[7] + sprite->data[6]) & 0xFF;
     if (sprite->data[7] % sprite->data[4] == 0)
@@ -574,9 +574,9 @@ void sub_80D6A6C(struct Sprite *sprite)
 {
     u8 spriteId;
 
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
-    spriteId = CreateSprite(&gBattleAnimSpriteTemplate_83D9950, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
+    spriteId = CreateSprite(&gBattleAnimSpriteTemplate_83D9950, sprite->x + 32, sprite->y, sprite->subpriority);
     gSprites[spriteId].oam.tileNum += 8;
     gAnimVisualTaskCount++;
     gSprites[spriteId].callback = sub_80D6AF0;
@@ -635,13 +635,13 @@ static void sub_80D6BB8(u8 taskId)
             if (spriteId != MAX_SPRITES)
             {
                 struct Sprite *sprite = &gSprites[spriteId];
-                sprite->pos1.x += gUnknown_083D9968[task->data[9]][0];
-                sprite->pos1.y += gUnknown_083D9968[task->data[9]][1];
+                sprite->x += gUnknown_083D9968[task->data[9]][0];
+                sprite->y += gUnknown_083D9968[task->data[9]][1];
 
                 sprite->data[0] = 40 - task->data[8] * 5;
-                sprite->data[1] = sprite->pos1.x;
+                sprite->data[1] = sprite->x;
                 sprite->data[2] = task->data[14];
-                sprite->data[3] = sprite->pos1.y;
+                sprite->data[3] = sprite->y;
                 sprite->data[4] = task->data[15];
                 sprite->data[5] = taskId;
 
@@ -692,13 +692,13 @@ void sub_80D6D18(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     }
 
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
@@ -709,17 +709,17 @@ void sub_80D6D70(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     }
 
-    sprite->pos2.x = gBattleAnimArgs[1];
-    sprite->pos2.y = gBattleAnimArgs[2];
+    sprite->x2 = gBattleAnimArgs[1];
+    sprite->y2 = gBattleAnimArgs[2];
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->callback = sub_8078600;
 }
@@ -727,8 +727,8 @@ void sub_80D6D70(struct Sprite *sprite)
 void sub_80D6DD8(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, 1);
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[6] = GetAnimBattlerSpriteId(0);
     sprite->data[7] = 16;
 
@@ -747,9 +747,9 @@ static void sub_80D6E38(struct Sprite *sprite)
             sprite->data[0]++;
         break;
     case 1:
-        sprite->pos1.x += sprite->data[7];
-        gSprites[sprite->data[6]].pos2.x += sprite->data[7];
-        if ((u16)(sprite->pos1.x + 80) > 400)
+        sprite->x += sprite->data[7];
+        gSprites[sprite->data[6]].x2 += sprite->data[7];
+        if ((u16)(sprite->x + 80) > 400)
         {
             DestroySpriteAndMatrix(sprite);
         }
@@ -777,7 +777,7 @@ void sub_80D6E9C(u8 taskId)
             task->data[13] = -2;
         }
 
-        gSprites[task->data[15]].pos2.x = task->data[14];
+        gSprites[task->data[15]].x2 = task->data[14];
         task->data[0]++;
         break;
     case 1:
@@ -789,7 +789,7 @@ void sub_80D6E9C(u8 taskId)
             if (task->data[14])
             {
                 task->data[14] += task->data[13];
-                gSprites[task->data[15]].pos2.x = task->data[14];
+                gSprites[task->data[15]].x2 = task->data[14];
             }
             else
             {
@@ -935,8 +935,8 @@ void sub_80D727C(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
         StartSpriteAffineAnim(sprite, 2);
         sprite->data[0]++;
         break;

@@ -60,8 +60,8 @@ void sub_80D5CC0(struct Sprite *sprite)
     sprite->data[3] += 0xC0 * 2;
     sprite->data[4] += 0xA0;
 
-    sprite->pos2.x = Sin(sprite->data[1], sprite->data[3] >> 8);
-    sprite->pos2.y = Cos(sprite->data[1], sprite->data[4] >> 8);
+    sprite->x2 = Sin(sprite->data[1], sprite->data[3] >> 8);
+    sprite->y2 = Cos(sprite->data[1], sprite->data[4] >> 8);
 
     sprite->data[1] = (sprite->data[1] + 7) & 0xFF;
 
@@ -119,7 +119,7 @@ static void sub_80D5E4C(u8 taskId)
 
             for (task->data[3] = 0; task->data[3] < task->data[13]; task->data[3]++)
             {
-                gSprites[task->data[task->data[3] + 14]].pos2.x = task->data[10] + task->data[11];
+                gSprites[task->data[task->data[3] + 14]].x2 = task->data[10] + task->data[11];
             }
 
             if (++task->data[9] == 16)
@@ -142,7 +142,7 @@ static void sub_80D5E4C(u8 taskId)
 
             for (task->data[3] = 0; task->data[3] < task->data[13]; task->data[3]++)
             {
-                gSprites[task->data[task->data[3] + 14]].pos2.x = task->data[10] + task->data[11];
+                gSprites[task->data[task->data[3] + 14]].x2 = task->data[10] + task->data[11];
             }
 
             if (++task->data[9] == 96)
@@ -167,7 +167,7 @@ static void sub_80D5E4C(u8 taskId)
 
             for (task->data[3] = 0; task->data[3] < task->data[13]; task->data[3]++)
             {
-                gSprites[task->data[task->data[3] + 14]].pos2.x = task->data[10] + task->data[11];
+                gSprites[task->data[task->data[3] + 14]].x2 = task->data[10] + task->data[11];
             }
 
             if (++task->data[9] == 16)
@@ -178,7 +178,7 @@ static void sub_80D5E4C(u8 taskId)
         case 3:
             for (task->data[3] = 0; task->data[3] < task->data[13]; task->data[3]++)
             {
-                gSprites[task->data[task->data[3] + 14]].pos2.x = 0;
+                gSprites[task->data[task->data[3] + 14]].x2 = 0;
             }
 
             DestroyAnimVisualTask(taskId);
@@ -219,14 +219,14 @@ void sub_80D60B4(u8 taskId)
         unk = gUnknown_083D97A4[gTasks[taskId].data[0] % 10];
 
     if (gTasks[taskId].data[3] == 1)
-        gSprites[spriteId].pos2.y = gBattleAnimArgs[1] * unk < 0 ? -(gBattleAnimArgs[1] * unk) : gBattleAnimArgs[1] * unk;
+        gSprites[spriteId].y2 = gBattleAnimArgs[1] * unk < 0 ? -(gBattleAnimArgs[1] * unk) : gBattleAnimArgs[1] * unk;
     else
-        gSprites[spriteId].pos2.x = gBattleAnimArgs[1] * unk;
+        gSprites[spriteId].x2 = gBattleAnimArgs[1] * unk;
 
     if (gTasks[taskId].data[0] == gTasks[taskId].data[1])
     {
-        gSprites[spriteId].pos2.x = 0;
-        gSprites[spriteId].pos2.y = 0;
+        gSprites[spriteId].x2 = 0;
+        gSprites[spriteId].y2 = 0;
         DestroyAnimVisualTask(taskId);
     }
 }

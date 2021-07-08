@@ -192,7 +192,7 @@ void CreateCloudSprites(void)
 
             gWeatherPtr->sprites.s1.cloudSprites[i] = &gSprites[spriteId];
             sprite = gWeatherPtr->sprites.s1.cloudSprites[i];
-            sub_80603CC(gUnknown_0839A9C8[i].x + 7, gUnknown_0839A9C8[i].y + 7, &sprite->pos1.x, &sprite->pos1.y);
+            sub_80603CC(gUnknown_0839A9C8[i].x + 7, gUnknown_0839A9C8[i].y + 7, &sprite->x, &sprite->y);
             sprite->coordOffsetEnabled = TRUE;
         }
         else
@@ -222,7 +222,7 @@ void sub_807E0F4(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 1) & 1;
     if (sprite->data[0] != 0)
-        sprite->pos1.x--;
+        sprite->x--;
 }
 
 //------------------------------------------------------------------------------
@@ -482,12 +482,12 @@ void sub_807E5C0(struct Sprite *sprite)
     {
         sprite->data[2] += gUnknown_0839AABC[gWeatherPtr->unknown_6DC][0];
         sprite->data[3] += gUnknown_0839AABC[gWeatherPtr->unknown_6DC][1];
-        sprite->pos1.x = sprite->data[2] >> 4;
-        sprite->pos1.y = sprite->data[3] >> 4;
+        sprite->x = sprite->data[2] >> 4;
+        sprite->y = sprite->data[3] >> 4;
 
         if (sprite->data[5] != 0
-         && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
-         && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
+         && (sprite->x >= -8 && sprite->x <= 248)
+         && sprite->y >= -16 && sprite->y <= 176)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
@@ -497,8 +497,8 @@ void sub_807E5C0(struct Sprite *sprite)
         {
             StartSpriteAnim(sprite, gWeatherPtr->unknown_6DC + 1);
             sprite->data[4] = 1;
-            sprite->pos1.x -= gSpriteCoordOffsetX;
-            sprite->pos1.y -= gSpriteCoordOffsetY;
+            sprite->x -= gSpriteCoordOffsetX;
+            sprite->y -= gSpriteCoordOffsetY;
             sprite->coordOffsetEnabled = TRUE;
         }
     }
@@ -987,10 +987,10 @@ void sub_807EC40(struct Sprite *sprite)
     u16 r4 = ((sprite->data[4] * 5) & 7) * 30 + (Random() % 30);
     u16 r6;
 
-    sprite->pos1.y = -3 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-    sprite->pos1.x = r4 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
-    sprite->data[0] = sprite->pos1.y * 128;
-    sprite->pos2.x = 0;
+    sprite->y = -3 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+    sprite->x = r4 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+    sprite->data[0] = sprite->y * 128;
+    sprite->x2 = 0;
     r6 = Random();
     sprite->data[1] = (r6 & 3) * 5 + 64;
     sprite->data[7] = (r6 & 3) * 5 + 64;
@@ -1007,8 +1007,8 @@ void sub_807ECEC(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
         sprite->callback = sub_807ED48;
-        sprite->pos1.y = 0xFA - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->data[0] = sprite->pos1.y * 128;
+        sprite->y = 0xFA - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->data[0] = sprite->y * 128;
         gWeatherPtr->unknown_6E2 = 0;
     }
 }
@@ -1019,30 +1019,30 @@ void sub_807ED48(struct Sprite *sprite)
     s16 r2;
 
     sprite->data[0] += sprite->data[1];
-    sprite->pos1.y = sprite->data[0] >> 7;
+    sprite->y = sprite->data[0] >> 7;
     sprite->data[3] = (sprite->data[3] + sprite->data[2]) & 0xFF;
-    sprite->pos2.x = gSineTable[sprite->data[3]] / 64;
+    sprite->x2 = gSineTable[sprite->data[3]] / 64;
 
-    r3 = (sprite->pos1.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
+    r3 = (sprite->x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
     if (r3 & 0x100)
         r3 = -0x100 | r3;  // hmm... what is this?
     if (r3 < -3)
-        sprite->pos1.x = 242 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+        sprite->x = 242 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
     else if (r3 > 242)
-        sprite->pos1.x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+        sprite->x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
 
-    r2 = (sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
+    r2 = (sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
     if (r2 > 163 && r2 < 171)
     {
-        sprite->pos1.y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->data[0] = sprite->pos1.y * 128;
+        sprite->y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->data[0] = sprite->y * 128;
         sprite->data[5] = 0;
         sprite->data[6] = 220;
     }
     else if (r2 > 242 && r2 < 250)
     {
-        sprite->pos1.y = 163;
-        sprite->data[0] = sprite->pos1.y * 128;
+        sprite->y = 163;
+        sprite->data[0] = sprite->y * 128;
         sprite->data[5] = 0;
         sprite->data[6] = 220;
         sprite->invisible = TRUE;
@@ -1053,7 +1053,7 @@ void sub_807ED48(struct Sprite *sprite)
     if (sprite->data[5] == sprite->data[6])
     {
         sub_807EC40(sprite);
-        sprite->pos1.y = 250;
+        sprite->y = 250;
         sprite->invisible = TRUE;
         sprite->callback = sub_807ECEC;
     }
@@ -1372,12 +1372,12 @@ bool8 Fog1_Finish(void)
 
 static void Fog1SpriteCallback(struct Sprite *sprite)
 {
-    sprite->pos2.y = (u8)gSpriteCoordOffsetY;
-    sprite->pos1.x = gWeatherPtr->fog1ScrollPosX + 32 + sprite->sprColumn * 64;
-    if (sprite->pos1.x > 0x10F)
+    sprite->y2 = (u8)gSpriteCoordOffsetY;
+    sprite->x = gWeatherPtr->fog1ScrollPosX + 32 + sprite->sprColumn * 64;
+    if (sprite->x > 0x10F)
     {
-        sprite->pos1.x = 480 + gWeatherPtr->fog1ScrollPosX - (4 - sprite->sprColumn) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = 480 + gWeatherPtr->fog1ScrollPosX - (4 - sprite->sprColumn) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -1399,8 +1399,8 @@ static void CreateFog1Sprites(void)
                 struct Sprite *sprite = &gSprites[spriteId];
 
                 sprite->sprColumn = i % 5;
-                sprite->pos1.x = (i % 5) * 64 + 32;
-                sprite->pos1.y = (i / 5) * 64 + 32;
+                sprite->x = (i % 5) * 64 + 32;
+                sprite->y = (i / 5) * 64 + 32;
                 gWeatherPtr->sprites.s2.fog1Sprites[i] = sprite;
             }
             else
@@ -1614,12 +1614,12 @@ void sub_807FAA8(struct Sprite *sprite)
         sprite->data[1] = 0;
         sprite->data[0]++;
     }
-    sprite->pos1.y = gSpriteCoordOffsetY + sprite->data[0];
-    sprite->pos1.x = gWeatherPtr->unknown_6FC + 32 + sprite->data[2] * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y = gSpriteCoordOffsetY + sprite->data[0];
+    sprite->x = gWeatherPtr->unknown_6FC + 32 + sprite->data[2] * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = gWeatherPtr->unknown_6FC + 0x1E0 - (4 - sprite->data[2]) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = gWeatherPtr->unknown_6FC + 0x1E0 - (4 - sprite->data[2]) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -1815,12 +1815,12 @@ void DestroyFog2Sprites(void)
 
 void Fog2SpriteCallback(struct Sprite *sprite)
 {
-    sprite->pos2.y = gWeatherPtr->unknown_71A;
-    sprite->pos1.x = gWeatherPtr->unknown_718 + 32 + sprite->data[0] * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y2 = gWeatherPtr->unknown_71A;
+    sprite->x = gWeatherPtr->unknown_718 + 32 + sprite->data[0] * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = gWeatherPtr->unknown_718 + 0x1E0 - (4 - sprite->data[0]) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = gWeatherPtr->unknown_718 + 0x1E0 - (4 - sprite->data[0]) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -2070,12 +2070,12 @@ void CreateSandstormSprites_2(void)
 
 void SandstormSpriteCallback1(struct Sprite *sprite)
 {
-    sprite->pos2.y = gWeatherPtr->unknown_710;
-    sprite->pos1.x = gWeatherPtr->unknown_70E + 32 + sprite->data[0] * 64;
-    if (sprite->pos1.x > 271)
+    sprite->y2 = gWeatherPtr->unknown_710;
+    sprite->x = gWeatherPtr->unknown_70E + 32 + sprite->data[0] * 64;
+    if (sprite->x > 271)
     {
-        sprite->pos1.x = gWeatherPtr->unknown_70E + 0x1E0 - (4 - sprite->data[0]) * 64;
-        sprite->pos1.x &= 0x1FF;
+        sprite->x = gWeatherPtr->unknown_70E + 0x1E0 - (4 - sprite->data[0]) * 64;
+        sprite->x &= 0x1FF;
     }
 }
 
@@ -2092,15 +2092,15 @@ void SandstormSpriteCallback3(struct Sprite *sprite)
     u32 x;
     u32 y;
 
-    if (--sprite->pos1.y < -48)
+    if (--sprite->y < -48)
     {
-        sprite->pos1.y = 208;
+        sprite->y = 208;
         sprite->data[0] = 4;
     }
     x = sprite->data[0] * gSineTable[sprite->data[1]];
     y = sprite->data[0] * gSineTable[sprite->data[1] + 64];
-    sprite->pos2.x = x >> 8;
-    sprite->pos2.y = y >> 8;
+    sprite->x2 = x >> 8;
+    sprite->y2 = y >> 8;
     sprite->data[1] = (sprite->data[1] + 10) & 0xFF;
     if (++sprite->data[2] > 8)
     {
@@ -2276,16 +2276,16 @@ void unc_0807DAB4(struct Sprite *sprite)
         sprite->data[0] = 0;
         if (sprite->data[1] == 0)
         {
-            if (++sprite->pos2.x > 4)
+            if (++sprite->x2 > 4)
                 sprite->data[1] = 1;
         }
         else
         {
-            if (--sprite->pos2.x <= 0)
+            if (--sprite->x2 <= 0)
                 sprite->data[1] = 0;
         }
     }
-    sprite->pos1.y -= 3;
+    sprite->y -= 3;
     if (++sprite->data[2] > 0x77)
         DestroySprite(sprite);
 }

@@ -71,62 +71,63 @@ void OpenPartyMenuFromScriptContext(u8 taskId)
 
 bool8 SetupContestPartyMenu(void)
 {
-    switch (EWRAM_1B000.setupState)
+    switch (ePartyMenu2.pmSetupState)
     {
     case 0:
-        if (EWRAM_1B000.monIndex < gPlayerPartyCount)
+        if (ePartyMenu2.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
-            EWRAM_1B000.monIndex++;
+            TryCreatePartyMenuMonIcon(ePartyMenu2.menuHandlerTaskId,
+                ePartyMenu2.pmMonIndex, &gPlayerParty[ePartyMenu2.pmMonIndex]);
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
-        EWRAM_1B000.setupState++;
+        CreateHeldItemIcons_806DC34(ePartyMenu2.menuHandlerTaskId);
+        ePartyMenu2.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
+        if (sub_806BD58(ePartyMenu2.menuHandlerTaskId, ePartyMenu2.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ePartyMenu2.pmMonIndex++;
             break;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
             break;
         }
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 6:
         sub_80F9C00();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 7: // the only case that can return true.
-        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
+        if (DrawPartyMonBackground(ePartyMenu2.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ePartyMenu2.pmMonIndex++;
             break;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState = 0;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState = 0;
             return TRUE;
         }
     }
@@ -178,60 +179,61 @@ void HandleSelectPartyMenu(u8 var)
 
 bool8 SetupMoveTutorPartyMenu(void)
 {
-    switch (EWRAM_1B000.setupState)
+    switch (ePartyMenu2.pmSetupState)
     {
     case 0:
-        if (EWRAM_1B000.monIndex < gPlayerPartyCount)
+        if (ePartyMenu2.pmMonIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
-            EWRAM_1B000.monIndex++;
+            TryCreatePartyMenuMonIcon(ePartyMenu2.menuHandlerTaskId,
+                ePartyMenu2.pmMonIndex, &gPlayerParty[ePartyMenu2.pmMonIndex]);
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
-        EWRAM_1B000.setupState++;
+        CreateHeldItemIcons_806DC34(ePartyMenu2.menuHandlerTaskId);
+        ePartyMenu2.pmSetupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
+        if (sub_806BD58(ePartyMenu2.menuHandlerTaskId, ePartyMenu2.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState++;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState++;
         }
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 6:
         sub_80F9E1C();
-        EWRAM_1B000.setupState++;
+        ePartyMenu2.pmSetupState++;
         break;
     case 7: // the only case that can return true.
-        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
+        if (DrawPartyMonBackground(ePartyMenu2.pmMonIndex) != 1)
         {
-            EWRAM_1B000.monIndex++;
+            ePartyMenu2.pmMonIndex++;
         }
         else
         {
-            EWRAM_1B000.monIndex = 0;
-            EWRAM_1B000.setupState = 0;
+            ePartyMenu2.pmMonIndex = 0;
+            ePartyMenu2.pmSetupState = 0;
             return TRUE;
         }
     }
@@ -275,7 +277,7 @@ void HandleMoveTutorPartyMenu(u8 var)
 void SelectMove(void)
 {
     ShowSelectMovePokemonSummaryScreen(&gPlayerParty[0], gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField, 0);
-    UNK_2018000_STRUCT.unk8 = 3;
+    pssData.mode = PSS_MODE_MOVE_DELETER;
     gFieldCallback = sub_8080990;
 }
 
@@ -299,7 +301,7 @@ void ScrSpecial_GetPokemonNicknameAndMoveName(void)
     StringCopy(gStringVar2, gMoveNames[data]);
 }
 
-void sub_80F9FDC(struct Pokemon *pkmn, u8 moveIndex1, u8 moveIndex2)
+static void SwapMoveSlots(struct Pokemon *pkmn, u8 moveIndex1, u8 moveIndex2)
 {
     u16 move1 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1);
     u16 move2 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex2);
@@ -329,7 +331,7 @@ void DeleteMonMove(void)
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
 
     for (i = gSpecialVar_0x8005; i < 3; i++)
-        sub_80F9FDC(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
+        SwapMoveSlots(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 
 void IsSelectedMonEgg(void)

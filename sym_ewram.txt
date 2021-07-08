@@ -15,35 +15,34 @@ gUnknown_020238C8 = .; /* 20238C8 */
     . += 0x4;
 
 gDisplayedStringBattle = .; /* 20238CC */
-    . += 0x12C;
+    . += 0x12C; /* 300 */
 
+	. = ALIGN(2);
 gBattleTypeFlags = .; /* 20239F8 */
-    . += 0x4;
+    . += 0x2;
 
+	. = ALIGN(4);
 gUnknown_020239FC = .; /* 20239FC */
     . += 0x4;
 
+	. = ALIGN(4);
 gMultiPartnerParty = .; /* 2023A00 */
-    . += 0x4;
-
-gUnknown_02023A04 = .; /* 2023A04 */
-    . += 0x10;
-
-gUnknown_02023A14 = .; /* 2023A14 */
-    . += 0x4C;
+    . += 0x60;
 
 #if DEBUG
 
+	. = ALIGN(4);
 gUnknown_02023A14_4C = .;
     . += 0x4;
 
 gUnknown_02023A14_50 = .;
-    . += 0x2;
+    . += 0x1;
 
+	. = ALIGN(2);
 gUnknown_Debug_2023A76 = .;
-gUnknown_Debug_2023A76_ = .;
 	. += 0x8C;
 
+	. = ALIGN(2);
 gUnknown_Debug_2023B02 = .;
     . += 0x60;
 
@@ -154,7 +153,7 @@ gActionForBanks = .; /* 2024C18 */
 gSelectionBattleScripts = .; /* 2024C1C */
     . += 0x10;
 
-gUnknown_02024C2C = .; /* 2024C2C */
+gLastPrintedMoves = .; /* 2024C2C */
     . += 0x8;
 
 gLastMoves = .; /* 2024C34 */
@@ -166,7 +165,7 @@ gLastLandedMoves = .; /* 2024C3C */
 gLastHitByType = .; /* 2024C44 */
     . += 0x8;
 
-gUnknown_02024C4C = .; /* 2024C4C */
+gLastResultingMoves = .; /* 2024C4C */
     . += 0x8;
 
 gLockedMoves = .; /* 2024C54 */
@@ -184,7 +183,7 @@ gMoveResultFlags = .; /* 2024C68 */
 gHitMarker = .; /* 2024C6C */
     . += 0x4;
 
-gUnknown_02024C70 = .; /* 2024C70 */
+sUnusedBattlersArray = .; /* 2024C70 */
     . += 0x4;
 
 gTakenDmgByBattler = .; /* 2024C74 */
@@ -238,7 +237,7 @@ gWishFutureKnock = .; /* 2024DBC */
 gUnknown_02024DDC = .; /* 2024DDC */
     . += 0xC;
 
-gUnknown_02024DE8 = .; /* 2024DE8 */
+gIntroSlideFlags = .; /* 2024DE8 */
     . += 0x2;
 
 gSentPokesToOpponent = .; /* 2024DEA */
@@ -317,6 +316,8 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/pokemon_menu.o(ewram_data);
 . = ALIGN(4); src/pokedex.o(ewram_data);
 . = ALIGN(4); src/trainer_card.o(ewram_data);
+. = ALIGN(4); src/save_menu_util.o(ewram_data);
+. = ALIGN(4); src/battle_party_menu.o(ewram_data);
 . = ALIGN(4); src/pokemon_storage_system.o(ewram_data);
 . = ALIGN(4); src/pokemon_storage_system_2.o(ewram_data);
 . = ALIGN(4); src/pokemon_storage_system_3.o(ewram_data);
@@ -377,10 +378,7 @@ gBattleMonForms = .; /* 2024E84 */
     . = ALIGN(16);
 #endif
 gTileBuffer = .; /* 2039360 */
-    . += 0x100;
-
-gUnknown_02039460 = .; /* 2039460 */
-    . += 0x300;
+    . += 0x400;
 
 gUnknown_02039760 = .; /* 2039760 */
     . += 0xC00;

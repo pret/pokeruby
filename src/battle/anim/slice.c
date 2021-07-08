@@ -55,23 +55,23 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6B40 =
 // arg 2: slice direction; 0 = right-to-left, 1 = left-to-right
 void AnimCuttingSlice(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
     if (GetBattlerSide(gBattleAnimTarget) == 0)
-        sprite->pos1.y += 8;
+        sprite->y += 8;
 
     sprite->callback = AnimSliceStep;
     if (gBattleAnimArgs[2] == 0)
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
     }
     else
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
         sprite->hFlip = 1;
     }
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[1] -= 0x400;
     sprite->data[2] += 0x400;
     sprite->data[5] = gBattleAnimArgs[2];
@@ -105,23 +105,23 @@ void sub_80CC9BC(struct Sprite* sprite)
         break;
     }
 
-    sprite->pos1.x = a;
-    sprite->pos1.y = b;
+    sprite->x = a;
+    sprite->y = b;
     if (GetBattlerSide(gBattleAnimTarget) == 0)
-        sprite->pos1.y += 8;
+        sprite->y += 8;
 
     sprite->callback = AnimSliceStep;
     if (gBattleAnimArgs[2] == 0)
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
     }
     else
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
         sprite->hFlip = 1;
     }
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[1] -= 0x400;
     sprite->data[2] += 0x400;
     sprite->data[5] = gBattleAnimArgs[2];
@@ -139,8 +139,8 @@ static void AnimSliceStep(struct Sprite* sprite)
         sprite->data[1] -= 0x18;
 
     sprite->data[2] -= 0x18;
-    sprite->pos2.x = sprite->data[3] >> 8;
-    sprite->pos2.y = sprite->data[4] >> 8;
+    sprite->x2 = sprite->data[3] >> 8;
+    sprite->y2 = sprite->data[4] >> 8;
     sprite->data[0]++;
     if (sprite->data[0] == 20)
     {

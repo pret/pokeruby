@@ -97,7 +97,7 @@ SYMBOL(gBattle_BG3_Y, 4)
 SYMBOL(gBattleTextBuff1, 16)
 SYMBOL(gUnknown_030041D0, 48)
 SYMBOL(gBattle_WIN1H, 4)
-SYMBOL(gUnknown_03004210, 48)
+SYMBOL(gWindowTemplate_Contest_MoveDescription, 48)
 SYMBOL(gBattle_WIN0V, 4)
 SYMBOL(gBattle_WIN1V, 4)
 SYMBOL(gUnknown_03004250, 48)
@@ -244,8 +244,8 @@ SYMBOL(gLastFieldPokeMenuOpened, 4)
 SYMBOL(gPostMenuFieldCallback, 4)
 
 // pokedex.c
-SYMBOL(gUnknown_03005CE8, 4)
-SYMBOL(gUnknown_03005CEC, 4)
+SYMBOL(gUnusedPokedexU8, 4)
+SYMBOL(gPokedexVBlankCB, 4)
 
 // pokemon_summary_screen.o
 SYMBOL(gUnknown_03005CF0, 4)
@@ -292,23 +292,23 @@ SYMBOL(gUnknown_03005D38, 4)
 SYMBOL(gUnknown_03005DA0, 0x48)
 
 // contest_painting_effects.c
-SYMBOL(gUnknown_03005DE8, 4)
-SYMBOL(gUnknown_03005DEC, 4)
-SYMBOL(gUnknown_03005DF0, 4)
-SYMBOL(gUnknown_03005DF4, 4)
-SYMBOL(gUnknown_03005DF8, 4)
-SYMBOL(gUnknown_03005DFC, 4)
-SYMBOL(gUnknown_03005E00, 4)
-SYMBOL(gUnknown_03005E04, 4)
-SYMBOL(gUnknown_03005E08, 4)
-SYMBOL(gUnknown_03005E0C, 4)
+SYMBOL(gCanvasColumnStart, 4)
+SYMBOL(gCanvasPixels, 4)
+SYMBOL(gCanvasRowEnd, 4)
+SYMBOL(gCanvasHeight, 4)
+SYMBOL(gCanvasColumnEnd, 4)
+SYMBOL(gCanvasRowStart, 4)
+SYMBOL(gCanvasMonPersonality, 4)
+SYMBOL(gCanvasWidth, 4)
+SYMBOL(gCanvasPalette, 4)
+SYMBOL(gCanvasPaletteStart, 4)
 
 // contest_painting.c
-SYMBOL(gUnknown_03005E10, 4)
-SYMBOL(gUnknown_03005E20, 32)
-SYMBOL(gUnknown_03005E40, 76)
-SYMBOL(gUnknown_03005E8C, 4)
-SYMBOL(gUnknown_03005E90, 4)
+SYMBOL(gContestMonPixels, 4)
+SYMBOL(gImageProcessingContext, 32)
+SYMBOL(sCaptionBuffer, 76)
+SYMBOL(gContestPaintingWinner, 4)
+SYMBOL(gContestPaintingMonPalette, 4)
 
 // evolution_scene.c
 SYMBOL(gCB2_AfterEvolution, 4)
@@ -319,7 +319,7 @@ gUnknown_Debug_03005FB8 = .;
 #endif
 
 // pokedex_cry_screen.c
-SYMBOL(gUnknown_03005E98, 4)
+SYMBOL(gDexCryScreenState, 4)
 
 // save.c
 SYMBOL(gFirstSaveSector, 4)

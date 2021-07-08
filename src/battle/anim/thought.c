@@ -72,11 +72,11 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7220 =
 void sub_80CEF44(u8 bank, struct Sprite* sprite)
 {
     if (GetBattlerSide(bank) == 0)
-        sprite->pos1.x = GetBattlerSpriteCoordAttr(bank, 5) + 8;
+        sprite->x = GetBattlerSpriteCoordAttr(bank, 5) + 8;
     else
-        sprite->pos1.x = GetBattlerSpriteCoordAttr(bank, 4) - 8;
+        sprite->x = GetBattlerSpriteCoordAttr(bank, 4) - 8;
 
-    sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) - (s16)GetBattlerSpriteCoordAttr(bank, 0) / 4;
+    sprite->y = GetBattlerSpriteCoord(bank, 3) - (s16)GetBattlerSpriteCoordAttr(bank, 0) / 4;
 }
 
 void sub_80CEF9C(struct Sprite* sprite)

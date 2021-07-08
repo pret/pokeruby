@@ -154,8 +154,8 @@ const struct SpriteTemplate gDigDirtMoundSpriteTemplate =
 // a boomerang. After hitting the target mon, it comes back to the user.
 static void AnimBonemerangProjectile(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = 20;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
@@ -168,10 +168,10 @@ static void AnimBonemerangProjectileStep(struct Sprite *sprite)
 {
     if (TranslateAnimArc(sprite))
     {
-        sprite->pos1.x += sprite->pos2.x;
-        sprite->pos1.y += sprite->pos2.y;
-        sprite->pos2.y = 0;
-        sprite->pos2.x = 0;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        sprite->y2 = 0;
+        sprite->x2 = 0;
         sprite->data[0] = 20;
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
@@ -247,16 +247,16 @@ static void AnimMudSportDirt(struct Sprite *sprite)
     sprite->oam.tileNum++;
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[2];
         sprite->data[0] = gBattleAnimArgs[1] > 0 ? 1 : -1;
         sprite->callback = AnimMudSportDirtRising;
     }
     else
     {
-        sprite->pos1.x = gBattleAnimArgs[1];
-        sprite->pos1.y = gBattleAnimArgs[2];
-        sprite->pos2.y = -gBattleAnimArgs[2];
+        sprite->x = gBattleAnimArgs[1];
+        sprite->y = gBattleAnimArgs[2];
+        sprite->y2 = -gBattleAnimArgs[2];
         sprite->callback = AnimMudSportDirtFalling;
     }
 }
@@ -266,11 +266,11 @@ static void AnimMudSportDirtRising(struct Sprite *sprite)
     if (++sprite->data[1] > 1)
     {
         sprite->data[1] = 0;
-        sprite->pos1.x += sprite->data[0];
+        sprite->x += sprite->data[0];
     }
 
-    sprite->pos1.y -= 4;
-    if (sprite->pos1.y < -4)
+    sprite->y -= 4;
+    if (sprite->y < -4)
         DestroyAnimSprite(sprite);
 }
 
@@ -279,10 +279,10 @@ static void AnimMudSportDirtFalling(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.y += 4;
-        if (sprite->pos2.y >= 0)
+        sprite->y2 += 4;
+        if (sprite->y2 >= 0)
         {
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             sprite->data[0]++;
         }
         break;
@@ -366,7 +366,7 @@ static void sub_80E1284(u8 taskId)
             else
                 gBattle_BG2_Y = task->data[13] - task->data[5];
 
-            gSprites[task->data[10]].pos2.x = 272 - gSprites[task->data[10]].pos1.x;
+            gSprites[task->data[10]].x2 = 272 - gSprites[task->data[10]].x;
             task->data[0]++;
         }
         break;
@@ -385,8 +385,8 @@ static void sub_80E143C(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(0);
     gSprites[spriteId].invisible = TRUE;
-    gSprites[spriteId].pos2.x = 0;
-    gSprites[spriteId].pos2.y = 0;
+    gSprites[spriteId].x2 = 0;
+    gSprites[spriteId].y2 = 0;
 
     if (GetBattlerPosition_permutated(gBattleAnimAttacker) == 1)
         gBattle_BG1_Y = 0;
@@ -417,8 +417,8 @@ static void sub_80E14DC(u8 taskId)
     case 0:
         task->data[10] = GetAnimBattlerSpriteId(0);
         gSprites[task->data[10]].invisible = FALSE;
-        gSprites[task->data[10]].pos2.x = 0;
-        gSprites[task->data[10]].pos2.y = 160 - gSprites[task->data[10]].pos1.y;
+        gSprites[task->data[10]].x2 = 0;
+        gSprites[task->data[10]].y2 = 160 - gSprites[task->data[10]].y;
         task->data[0]++;
         break;
     case 1:
@@ -451,12 +451,12 @@ static void sub_80E1560(u8 taskId)
         task->data[0]++;
         break;
     case 2:
-        gSprites[task->data[10]].pos2.y = 96;
+        gSprites[task->data[10]].y2 = 96;
         task->data[0]++;
         break;
     case 3:
-        gSprites[task->data[10]].pos2.y -= 8;
-        if (gSprites[task->data[10]].pos2.y == 0)
+        gSprites[task->data[10]].y2 -= 8;
+        if (gSprites[task->data[10]].y2 == 0)
         {
             gScanlineEffect.state = 3;
             task->data[0]++;
@@ -531,11 +531,11 @@ static void AnimFissureDirtPlumeParticle(struct Sprite *sprite)
         gBattleAnimArgs[2] *= -1;
     }
 
-    sprite->pos1.x = GetBattlerSpriteCoord(battler, 2) + xOffset;
-    sprite->pos1.y = sub_8077FC0(battler) + 30;
+    sprite->x = GetBattlerSpriteCoord(battler, 2) + xOffset;
+    sprite->y = sub_8077FC0(battler) + 30;
     sprite->data[0] = gBattleAnimArgs[5];
-    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
-    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[4] = sprite->y + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimFissureDirtPlumeParticleStep;
@@ -562,8 +562,8 @@ static void AnimDigDirtMound(struct Sprite *sprite)
     else
         battler = gBattleAnimTarget;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(battler, 0) - 16 + (gBattleAnimArgs[1] * 32);
-    sprite->pos1.y = sub_8077FC0(battler) + 32;
+    sprite->x = GetBattlerSpriteCoord(battler, 0) - 16 + (gBattleAnimArgs[1] * 32);
+    sprite->y = sub_8077FC0(battler) + 32;
     sprite->oam.tileNum += gBattleAnimArgs[1] * 8;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -697,7 +697,7 @@ static void sub_80E1A2C(u8 taskId)
         break;
     case 2:
         for (i = 0; i < task->data[13]; i++)
-            gSprites[task->data[9 + i]].pos2.x = 0;
+            gSprites[task->data[9 + i]].x2 = 0;
 
         DestroyAnimVisualTask(taskId);
         break;
@@ -716,7 +716,7 @@ static void sub_80E1B10(struct Task *task)
 
     for (i = 0; i < task->data[13]; i++)
     {
-        gSprites[task->data[9 + i]].pos2.x = xOffset;
+        gSprites[task->data[9 + i]].x2 = xOffset;
     }
 }
 

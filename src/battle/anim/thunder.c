@@ -43,14 +43,14 @@ void sub_80D61C8(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
     }
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->callback = sub_80D6218;
 }
 

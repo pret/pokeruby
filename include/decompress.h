@@ -10,8 +10,10 @@ void LoadCompressedObjectPicOverrideBuffer(const struct CompressedSpriteSheet *s
 void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src);
 void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer);
 void DecompressPicFromTable_2(const struct CompressedSpriteSheet *a, u8 coords, u8 y_offset, void *d, void *dest, s32 species);
-void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *spriteSheet, u32 coords, u32 y_offset, u32 d, void *dest, s32 species, u32 pid);
-void LoadSpecialPokePic(const struct CompressedSpriteSheet *spriteSheet, u32 coords, u32 y_offset, u32 d, void *dest, s32 species, u32 pid, u32 frontOrBack);
+void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coords, u32 y_offset,
+    void *decompBuf, void *dest, s32 species, u32 pid);
+void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c,
+    void *decompBuffer, void *dest, s32 species, u32 pid, u32 frontOrBack);
 void Unused_LZDecompressWramIndirect(const void **src, void *dest);
 
 #endif // GUARD_DECOMPRESS_H

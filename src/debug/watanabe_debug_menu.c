@@ -33,9 +33,9 @@
 #include "field_effect.h"
 
 struct WatanabeDebugMenuItemSubstruct {
-    u32 unk0;
-    u32 unk4;
-    u8 unk8;
+    u32 totalPoints;
+    u32 round1Points;
+    u8 random;
     u8 unk9;
 };
 
@@ -54,13 +54,13 @@ struct WatanabeEwram17000 {
     u8 unk1_0:4;
     u8 unk1_4:1;
     u8 unk1_5:3;
-    u8 unk2;
+    u8 excitementAppealBonus;
     u8 unk3;
     u8 fill4[5];
     u8 unk9;
     u8 unkA;
     u8 unkB;
-    u8 unkC;
+    u8 contestant;
 };
 
 struct WatanabeEwram18000 {
@@ -74,18 +74,18 @@ struct WatanabeEwram18000 {
 };
 
 struct WatanabeEwram18000_2 {
-    u16 unk0;
-    u8 unk2;
+    u16 totalPoints;
+    u8 excitementAppealBonus;
     u8 unk3;
-    u8 unk4;
-    u8 unk5;
+    u8 round1Points;
+    u8 contestant;
     u8 unk6;
     u8 unk7;
-    u8 unk8;
+    u8 random;
     u8 unk9;
     u8 unkA;
     struct PlttData unkC;
-    u16 unk10[16];
+    u16 personality2[16];
 };
 
 #define eWatanabe17000 (*(struct WatanabeEwram17000 *)(gSharedMem + 0x17000))
@@ -446,25 +446,25 @@ void debug_80C3A50(u8 taskId)
 
     debug_80C3800(species, 18, 17);
 
-    spriteId = sub_8091A4C(saveBlock2->playerGender, 0x98, 0x28, 0);
+    spriteId = CreateSizeScreenTrainerPic(saveBlock2->playerGender, 0x98, 0x28, 0);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 2;
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].oam.paletteNum = 0;
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(0));
-    gSprites[spriteId].pos2.y = gPokedexEntries[natDexNum].trainerOffset;
+    gSprites[spriteId].y2 = gPokedexEntries[natDexNum].trainerOffset;
     SetOamMatrix(2, gPokedexEntries[natDexNum].trainerScale, 0, 0, gPokedexEntries[natDexNum].trainerScale);
     gTasks[taskId].data[3] = spriteId;
     gTasks[taskId].data[4] = gPokedexEntries[natDexNum].trainerOffset;
     gTasks[taskId].data[6] = gPokedexEntries[natDexNum].trainerScale;
 
-    spriteId2 = sub_80918EC(natDexNum, 0x58, 0x28, 1);
+    spriteId2 = CreateMonSpriteFromNationalDexNumber(natDexNum, 0x58, 0x28, 1);
     gSprites[spriteId2].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId2].oam.matrixNum = 1;
     gSprites[spriteId2].oam.priority = 0;
     gSprites[spriteId2].oam.paletteNum = 0;
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(0));
-    gSprites[spriteId2].pos2.y = gPokedexEntries[natDexNum].pokemonOffset;
+    gSprites[spriteId2].y2 = gPokedexEntries[natDexNum].pokemonOffset;
     SetOamMatrix(1, gPokedexEntries[natDexNum].pokemonScale, 0, 0, gPokedexEntries[natDexNum].pokemonScale);
     gTasks[taskId].data[2] = spriteId2;
     gTasks[taskId].data[5] = gPokedexEntries[natDexNum].pokemonOffset;
@@ -601,7 +601,7 @@ NAKED void debug_80C3A50(u8 taskId)
         "\tmov\tr1, #0x98\n"
         "\tmov\tr2, #0x28\n"
         "\tmov\tr3, #0x0\n"
-        "\tbl\tsub_8091A4C\n"
+        "\tbl\tCreateSizeScreenTrainerPic\n"
         "\tmov\tr2, sp\n"
         "\tstrh\tr0, [r2, #0x10]\n"
         "\tadd\tr3, r0, #0\n"
@@ -668,7 +668,7 @@ NAKED void debug_80C3A50(u8 taskId)
         "\tmov\tr1, #0x58\n"
         "\tmov\tr2, #0x28\n"
         "\tmov\tr3, #0x1\n"
-        "\tbl\tsub_80918EC\n"
+        "\tbl\tCreateMonSpriteFromNationalDexNumber\n"
         "\tmov\tr3, sp\n"
         "\tstrh\tr0, [r3, #0x1c]\n"
         "\tlsl\tr0, r0, #0x10\n"
@@ -912,14 +912,14 @@ void debug_80C3D2C(u8 taskId)
         SetOamMatrix(1, scale, 0, 0, scale);
         debug_80C68CC(scale, 1, 3, 4);
         debug_80C68CC(offset, 1, 7, 4);
-        gSprites[gTasks[taskId].data[2]].pos2.y = offset;
+        gSprites[gTasks[taskId].data[2]].y2 = offset;
 
         scale = gTasks[taskId].data[6];
         offset = gTasks[taskId].data[4];
         SetOamMatrix(2, scale, 0, 0, scale);
         debug_80C68CC(scale, 25, 3, 4);
         debug_80C68CC(offset, 25, 7, 4);
-        gSprites[gTasks[taskId].data[3]].pos2.y = offset;
+        gSprites[gTasks[taskId].data[3]].y2 = offset;
 
         REG_WIN0H = ((gTasks[taskId].data[8] * 64 + 0x38) << 8) + (gTasks[taskId].data[8] * 64 + 0x78);
     }
@@ -1362,12 +1362,12 @@ void debug_80C4AC4(u8 taskId)
         PlaySE(SE_SELECT);
         gTrainerBattleOpponent = SECRET_BASE_OPPONENT;
         eWatanabe17000.unk1_4 = 0;
-        eWatanabe17000.unk2 = 0xAC;
+        eWatanabe17000.excitementAppealBonus = 0xAC;
         eWatanabe17000.unk3 = 0xFF;
         eWatanabe17000.unk9 = 0;
         eWatanabe17000.unkA = 0;
         eWatanabe17000.unkB = 0;
-        eWatanabe17000.unkC = 0;
+        eWatanabe17000.contestant = 0;
         gTasks[taskId].func = debug_80C4F48;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
@@ -2362,11 +2362,11 @@ const u32 gUnknown_Debug_083F8768[] = {
 void debug_80C6544(u8 a0)
 {
     u32 r7 = debug_80C5B60(gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]);
-    u32 r5 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk0;
-    u32 r4 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk4;
+    u32 r5 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->totalPoints;
+    u32 r4 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->round1Points;
     u32 r3 = gUnknown_Debug_083F8768[gUnknown_Debug_2038A1C->unk16a];
 
-    if (gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk8 == 0)
+    if (gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->random == 0)
     {
         switch (a0)
         {
@@ -2568,13 +2568,13 @@ void InitSeePokemonGraphics(void)
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
     CreateTask(debug_80C6B00, 0);
     gUnknown_Debug_2038A20 = &eWatanabe18000_2;
-    gUnknown_Debug_2038A20->unk0 = 0x115;
-    gUnknown_Debug_2038A20->unk2 = 0;
+    gUnknown_Debug_2038A20->totalPoints = 0x115;
+    gUnknown_Debug_2038A20->excitementAppealBonus = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
-    gUnknown_Debug_2038A20->unk5 = 0;
+    gUnknown_Debug_2038A20->contestant = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
     gUnknown_Debug_2038A20->unkA = 0;
-    gUnknown_Debug_2038A20->unk8 = 0;
+    gUnknown_Debug_2038A20->random = 0;
     spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6C, 0x74, 0);
     gSprites[spriteId].data[0] = 0;
     StartSpriteAnim(gSprites + spriteId, 0);
@@ -2670,33 +2670,33 @@ void debug_80C6B00(u8 taskId)
 
 void debug_80C6CB8(u8 taskId)
 {
-    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->unk0, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], gUnknown_Debug_2038A20->unk0);
-    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
-    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 1);
-    gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
-    gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
-    gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
+    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
+    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
+    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 1);
+    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gCreatingSpriteTemplate, 0x28, 0x28, 0);
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.priority = 0;
 
-    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->unk0, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[2], gUnknown_Debug_2038A20->unk0);
-    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
-    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 2);
-    gUnknown_Debug_2038A20->unk3 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x78, 0);
+    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->totalPoints, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[2], gUnknown_Debug_2038A20->totalPoints);
+    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->totalPoints);
+    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->totalPoints, 2);
+    gUnknown_Debug_2038A20->unk3 = CreateSprite(&gCreatingSpriteTemplate, 0x28, 0x78, 0);
     gSprites[gUnknown_Debug_2038A20->unk3].callback = debug_69;
     gSprites[gUnknown_Debug_2038A20->unk3].oam.priority = 0;
 
-    gUnknown_Debug_2038A20->unk4 = CreateMonIcon(gUnknown_Debug_2038A20->unk0, sub_809D62C, 0x68, 0x2C, 0, 0);
+    gUnknown_Debug_2038A20->round1Points = CreateMonIcon(gUnknown_Debug_2038A20->totalPoints, SpriteCB_PokemonIcon, 0x68, 0x2C, 0, 0);
 
-    sub_8091738(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->unk0), 2, 0x3fc);
+    PrintFootprint(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->totalPoints), 2, 0x3fc);
 
     ((u16 *)(VRAM + 0xF858))[0] = 0xF3FC;
     ((u16 *)(VRAM + 0xF858))[1] = 0xF3FD;
     ((u16 *)(VRAM + 0xF858))[32] = 0xF3FE;
     ((u16 *)(VRAM + 0xF858))[33] = 0xF3FF;
 
-    debug_80C3800(gUnknown_Debug_2038A20->unk0, 17, 3);
-    debug_80C376C(gUnknown_Debug_2038A20->unk0, 26, 5);
+    debug_80C3800(gUnknown_Debug_2038A20->totalPoints, 17, 3);
+    debug_80C376C(gUnknown_Debug_2038A20->totalPoints, 26, 5);
 
-    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
+    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum;
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 0x20);
 
@@ -2704,13 +2704,13 @@ void debug_80C6CB8(u8 taskId)
 
     gUnknown_Debug_2038A20->unk9 = 0;
     StopCryAndClearCrySongs();
-    PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
+    PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
 }
 
 void debug_80C6EE8(u8 taskId)
 {
     u16 hue;
-    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
+    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->personality2, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
     gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
     gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
@@ -2734,17 +2734,17 @@ void debug_80C6FA8(u8 taskId)
     }
     else if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C3878(0, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C3878(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
     }
     else if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C3878(1, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C3878(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 1;
+        gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7294;
@@ -2767,9 +2767,9 @@ void debug_80C6FA8(u8 taskId)
     {
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         else
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 32);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 32);
         gTasks[taskId].func = debug_80C6EE8;
@@ -2779,11 +2779,11 @@ void debug_80C6FA8(u8 taskId)
         if (gMain.newKeys & SELECT_BUTTON)
         {
             StopCryAndClearCrySongs();
-            PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
+            PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
         }
-        gUnknown_Debug_2038A20->unk8 += 4;
-        gUnknown_Debug_2038A20->unk8 &= 0x1f;
-        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->unk8];
+        gUnknown_Debug_2038A20->random += 4;
+        gUnknown_Debug_2038A20->random &= 0x1f;
+        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->random];
     }
 }
 #else
@@ -3088,11 +3088,11 @@ NAKED void debug_80C6FA8(u8 taskId)
 
 void debug_80C71FC(u8 taskId)
 {
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum));
-    DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum));
+    DestroySprite(gSprites + gUnknown_Debug_2038A20->excitementAppealBonus);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
-    sub_809D510(gSprites + gUnknown_Debug_2038A20->unk4);
+    sub_809D510(gSprites + gUnknown_Debug_2038A20->round1Points);
     gTasks[taskId].func = debug_80C6CB8;
 }
 
@@ -3100,20 +3100,20 @@ void debug_80C7294(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         gTasks[taskId].func = debug_80C6EE8;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
         gTasks[taskId].func = debug_80C6EE8;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)
@@ -3181,7 +3181,7 @@ void debug_80C74E4(u8 taskId)
 
 void debug_80C7584(struct Sprite *sprite)
 {
-    if (!gUnknown_Debug_2038A20->unk5)
+    if (!gUnknown_Debug_2038A20->contestant)
         sprite->invisible = TRUE;
     else
     {
@@ -3199,8 +3199,8 @@ void debug_80C7584(struct Sprite *sprite)
                 shade = gUnknown_Debug_2038A20->unkC.b;
                 break;
         }
-        sprite->pos2.x = 4 * shade;
-        sprite->pos2.y = 8 * sprite->data[0];
+        sprite->x2 = 4 * shade;
+        sprite->y2 = 8 * sprite->data[0];
         sprite->data[1]++;
         if (sprite->data[0] == gUnknown_Debug_2038A20->unkA && !(sprite->data[1] & 0x08))
             sprite->invisible = TRUE;
@@ -3237,13 +3237,13 @@ void InitSeeTrainers(void)
     REG_DISPCNT = 0x3340;
     CreateTask(debug_80C777C, 0);
     gUnknown_Debug_2038A20 = &eWatanabe18000_2;
-    gUnknown_Debug_2038A20->unk0 = 0;
-    gUnknown_Debug_2038A20->unk2 = 0;
+    gUnknown_Debug_2038A20->totalPoints = 0;
+    gUnknown_Debug_2038A20->excitementAppealBonus = 0;
     gUnknown_Debug_2038A20->unk3 = 0;
-    gUnknown_Debug_2038A20->unk5 = 0;
+    gUnknown_Debug_2038A20->contestant = 0;
     gUnknown_Debug_2038A20->unk7 = 0;
     gUnknown_Debug_2038A20->unkA = 0;
-    gUnknown_Debug_2038A20->unk8 = 0;
+    gUnknown_Debug_2038A20->random = 0;
     spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6c, 0x74, 0);
     gSprites[spriteId].data[0] = 0;
     StartSpriteAnim(gSprites + spriteId, 0);
@@ -3297,16 +3297,16 @@ void debug_80C777C(u8 taskId)
 
 void debug_80C7934(u8 taskId)
 {
-    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->unk0, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], gUnknown_Debug_2038A20->unk0);
-    LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->unk0);
-    GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->unk0, 1);
-    gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
-    gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
-    gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
+    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->totalPoints, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->totalPoints].y_offset, gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1], gUnknown_Debug_2038A20->totalPoints);
+    LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->totalPoints);
+    GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->totalPoints, 1);
+    gUnknown_Debug_2038A20->excitementAppealBonus = CreateSprite(&gCreatingSpriteTemplate, 0x28, 0x28, 0);
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.priority = 0;
 
-    debug_80C376C(gUnknown_Debug_2038A20->unk0, 26, 5);
+    debug_80C376C(gUnknown_Debug_2038A20->totalPoints, 26, 5);
 
-    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
+    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum;
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
     CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 0x20);
 
@@ -3318,7 +3318,7 @@ void debug_80C7934(u8 taskId)
 void debug_80C7A54(u8 taskId)
 {
     u16 hue;
-    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
+    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->personality2, 32);
     hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
     gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
     gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
@@ -3342,17 +3342,17 @@ void debug_80C7B14(u8 taskId)
     }
     else if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C38B4(0, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
     }
     else if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk0 = debug_80C38B4(1, gUnknown_Debug_2038A20->unk0);
+        gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 1;
+        gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7DDC;
@@ -3376,11 +3376,11 @@ void debug_80C7B14(u8 taskId)
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
         {
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         }
         else
         {
-            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->totalPoints, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
         }
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 32);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 32);
@@ -3388,9 +3388,9 @@ void debug_80C7B14(u8 taskId)
     }
     else
     {
-        gUnknown_Debug_2038A20->unk8 += 4;
-        gUnknown_Debug_2038A20->unk8 &= 0x1f;
-        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->unk8];
+        gUnknown_Debug_2038A20->random += 4;
+        gUnknown_Debug_2038A20->random &= 0x1f;
+        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->random];
     }
 }
 #else
@@ -3679,11 +3679,11 @@ NAKED void debug_80C7B14(u8 taskId)
 
 void debug_80C7D44(u8 taskId)
 {
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum));
-    DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->excitementAppealBonus].oam.paletteNum));
+    DestroySprite(gSprites + gUnknown_Debug_2038A20->excitementAppealBonus);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
     DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
-    sub_809D510(gSprites + gUnknown_Debug_2038A20->unk4);
+    sub_809D510(gSprites + gUnknown_Debug_2038A20->round1Points);
     gTasks[taskId].func = debug_80C7934;
 }
 
@@ -3691,20 +3691,20 @@ void debug_80C7DDC(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         gTasks[taskId].func = debug_80C7A54;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        gUnknown_Debug_2038A20->unk5 = 0;
+        gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x80, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
-        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
         gTasks[taskId].func = debug_80C7A54;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)

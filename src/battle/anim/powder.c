@@ -70,8 +70,8 @@ const struct SpriteTemplate gPoisonPowderParticleSpriteTemplate =
 // arg 5: wave speed
 void AnimMovePowderParticle(struct Sprite* sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
 
@@ -93,9 +93,9 @@ static void AnimMovePowderParticleStep(struct Sprite* sprite)
     if (sprite->data[0] > 0)
     {
         sprite->data[0]--;
-        sprite->pos2.y = sprite->data[2] >> 8;
+        sprite->y2 = sprite->data[2] >> 8;
         sprite->data[2] += sprite->data[1];
-        sprite->pos2.x = Sin(sprite->data[5], sprite->data[3]);
+        sprite->x2 = Sin(sprite->data[5], sprite->data[3]);
         sprite->data[5] = (sprite->data[5] + sprite->data[4]) & 0xFF;
     }
     else

@@ -227,7 +227,7 @@ u8 GetBattlerForBattleScript(u8 caseId)
         ret = 0;
         break;
     case BS_GET_SCRIPTING_BANK:
-        ret = ewram16003;
+        ret = gBattleStruct->scriptingActive;
         break;
     case BS_GET_gBank1:
         ret = gBank1;
@@ -474,7 +474,7 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     u8 limitations = 0;
     u16 move = gBattleMons[gActiveBattler].moves[gBattleBufferB[gActiveBattler][2]];
     u8 holdEffect;
-    u16* choicedMove = CHOICED_MOVE(gActiveBattler);
+    u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
     if (gDisableStructs[gActiveBattler].disabledMove == move && move)
     {
@@ -527,7 +527,7 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
 u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
 {
     u8 holdEffect;
-    u16* choicedMove = CHOICED_MOVE(battlerId);
+    u16* choicedMove = &gBattleStruct->choicedMove[battlerId];
     s32 i;
 
     if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
@@ -1016,12 +1016,12 @@ u8 TurnBasedEffects(void)
                     gBattleMons[gActiveBattler].status2 -= 0x2000;
                     if (gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED)  // damaged by wrap
                     {
-                        gBattleStruct->animArg1 = ewram16004arr(0, gActiveBattler);
-                        gBattleStruct->animArg2 = ewram16004arr(1, gActiveBattler);
+                        gBattleStruct->animArg1 = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
+                        gBattleStruct->animArg2 = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 1];
                         gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
                         gBattleTextBuff1[1] = B_BUFF_MOVE;
-                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBattler);
-                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBattler);
+                        gBattleTextBuff1[2] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
+                        gBattleTextBuff1[3] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 1];
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                         gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
@@ -1030,10 +1030,10 @@ u8 TurnBasedEffects(void)
                     }
                     else  // broke free
                     {
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBattler);
-                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBattler);
+                        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+                        gBattleTextBuff1[1] = B_BUFF_MOVE;
+                        gBattleTextBuff1[2] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
+                        gBattleTextBuff1[3] = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 1];
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapEnds;
                     }
@@ -1289,11 +1289,11 @@ bool8 HandleFaintedMonActions(void)
     do
     {
         int i;
-        switch (gBattleStruct->sub80173A4_Tracker)
+        switch (gBattleStruct->faintedActionsState)
         {
         case 0:
-            gBattleStruct->unk1605A = 0;
-            gBattleStruct->sub80173A4_Tracker++;
+            gBattleStruct->faintedActionsBattlerId = 0;
+            gBattleStruct->faintedActionsState++;
             for (i = 0; i < gBattlersCount; i++)
             {
                 if (gAbsentBattlerFlags & gBitTable[i] && !sub_8018018(i, 6, 6))
@@ -1302,54 +1302,54 @@ bool8 HandleFaintedMonActions(void)
         case 1:
             do
             {
-                gBank1 = gBattlerTarget = gBattleStruct->unk1605A;
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->unk16113 & gBitTable[gBattlerPartyIndexes[gBattleStruct->unk1605A]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
+                gBank1 = gBattlerTarget = gBattleStruct->faintedActionsBattlerId;
+                if (gBattleMons[gBattleStruct->faintedActionsBattlerId].hp == 0 && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
-                    gBattleStruct->sub80173A4_Tracker = 2;
+                    gBattleStruct->faintedActionsState = 2;
                     return 1;
                 }
-            } while (++gBattleStruct->unk1605A != gBattlersCount);
-            gBattleStruct->sub80173A4_Tracker = 3;
+            } while (++gBattleStruct->faintedActionsBattlerId != gBattlersCount);
+            gBattleStruct->faintedActionsState = 3;
             break;
         case 2:
             sub_8015740(gBank1);
-            if (++gBattleStruct->unk1605A == gBattlersCount)
-                gBattleStruct->sub80173A4_Tracker = 3;
+            if (++gBattleStruct->faintedActionsBattlerId == gBattlersCount)
+                gBattleStruct->faintedActionsState = 3;
             else
-                gBattleStruct->sub80173A4_Tracker = 1;
+                gBattleStruct->faintedActionsState = 1;
             break;
         case 3:
-            gBattleStruct->unk1605A = 0;
-            gBattleStruct->sub80173A4_Tracker++;
+            gBattleStruct->faintedActionsBattlerId = 0;
+            gBattleStruct->faintedActionsState++;
         case 4:
             do
             {
-                gBank1 = gBattlerTarget = gBattleStruct->unk1605A; //or should banks be switched?
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
+                gBank1 = gBattlerTarget = gBattleStruct->faintedActionsBattlerId; //or should banks be switched?
+                if (gBattleMons[gBattleStruct->faintedActionsBattlerId].hp == 0 && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
-                    gBattleStruct->sub80173A4_Tracker = 5;
+                    gBattleStruct->faintedActionsState = 5;
                     return 1;
                 }
-            } while (++gBattleStruct->unk1605A != gBattlersCount);
-            gBattleStruct->sub80173A4_Tracker = 6;
+            } while (++gBattleStruct->faintedActionsBattlerId != gBattlersCount);
+            gBattleStruct->faintedActionsState = 6;
             break;
         case 5:
-            if (++gBattleStruct->unk1605A == gBattlersCount)
-                gBattleStruct->sub80173A4_Tracker = 6;
+            if (++gBattleStruct->faintedActionsBattlerId == gBattlersCount)
+                gBattleStruct->faintedActionsState = 6;
             else
-                gBattleStruct->sub80173A4_Tracker = 4;
+                gBattleStruct->faintedActionsState = 4;
             break;
         case 6:
             if (AbilityBattleEffects(9, 0, 0, 0, 0) || AbilityBattleEffects(0xB, 0, 0, 0, 0) || ItemBattleEffects(1, 0, 1) || AbilityBattleEffects(6, 0, 0, 0, 0))
                 return 1;
-            gBattleStruct->sub80173A4_Tracker++;
+            gBattleStruct->faintedActionsState++;
             break;
         case 7:
             break;
         }
-    } while (gBattleStruct->sub80173A4_Tracker != HandleFaintedMonActions_MAX_CASE);
+    } while (gBattleStruct->faintedActionsState != HandleFaintedMonActions_MAX_CASE);
     return 0;
 }
 
@@ -1657,28 +1657,28 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
     }
     else
     {
-        if (GetBattlerSide(bank) == 1)
+        if (GetBattlerSide(bank) == B_SIDE_OPPONENT)
         {
-            r7 = GetBattlerAtPosition(1);
-            r6 = GetBattlerAtPosition(3);
+            r7 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            r6 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBattlerAtPosition(0);
-            r6 = GetBattlerAtPosition(2);
+            r7 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            r6 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
             party = gPlayerParty;
         }
-        if (r1 == 6)
+        if (r1 == PARTY_SIZE)
             r1 = gBattlerPartyIndexes[r7];
-        if (r2 == 6)
+        if (r2 == PARTY_SIZE)
             r2 = gBattlerPartyIndexes[r6];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram16068arr(r7) && i != ewram16068arr(r6))
+            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + r7] && i != gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + r6])
                 break;
         }
-        return (i == 6);
+        return (i == PARTY_SIZE);
     }
 }
 
@@ -2003,14 +2003,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[bank].status1 & STATUS1_FREEZE))
                     {
-                        if (!(eFlashFireArr.arr[bank] & 1))
+                        if (!(eBattleFlagsArr.arr[bank] & 1))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBattlerAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
-                            eFlashFireArr.arr[bank] |= 1;
+                            eBattleFlagsArr.arr[bank] |= 1;
                             effect = 2;
                         }
                         else
@@ -3481,7 +3481,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
         targetBank = gBattlerAttacker;
         break;
     }
-    ewram16010arr(gBattlerAttacker) = targetBank;
+    gSharedMem[BSTRUCT_OFF(moveTarget) + gBattlerAttacker] = targetBank;
     return targetBank;
 }
 

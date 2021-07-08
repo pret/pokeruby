@@ -1,7 +1,9 @@
 #include "global.h"
+#include "cable_club.h"
 #include "battle.h"
 #include "battle_records.h"
-#include "cable_club.h"
+#include "constants/songs.h"
+#include "contest_util.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_specials.h"
@@ -11,12 +13,10 @@
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "record_mixing.h"
-#include "overworld.h"
 #include "script.h"
-#include "script_pokemon_80C4.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"
@@ -431,7 +431,7 @@ static void sub_80831F8(u8 taskId)
         return;
     if (gSpecialVar_Result == 3)
     {
-        sub_800832C();
+        SetCloseLinkCallback();
         HideFieldMessageBox();
         gTasks[taskId].func = sub_80833C4;
     }
@@ -452,7 +452,7 @@ static void sub_8083288(u8 taskId)
 
     if (gSpecialVar_Result == 3)
     {
-        sub_800832C();
+        SetCloseLinkCallback();
         HideFieldMessageBox();
         gTasks[taskId].func = sub_80833C4;
     }
@@ -511,7 +511,7 @@ static void sub_8083314(u8 taskId)
         return;
     }
 
-    sub_800832C();
+    SetCloseLinkCallback();
     gTasks[taskId].func = sub_80833C4;
 }
 
@@ -757,7 +757,7 @@ static void sub_808382C(u8 taskId)
             task->data[0]++;
         break;
     case 3:
-        sub_800832C();
+        SetCloseLinkCallback();
         task->data[0]++;
         break;
     case 4:
@@ -890,7 +890,7 @@ static void sub_8083AAC(u8 taskId)
         gUnknown_020297D8.field0 = 0;
         gUnknown_020297D8.field1 = 0;
         m4aMPlayAllStop();
-        sub_800832C();
+        SetCloseLinkCallback();
         task->data[0]++;
         break;
     case 3:
@@ -1009,7 +1009,7 @@ static void sub_8083CA4(u8 taskId)
 
 void unref_sub_8083CC8(u8 taskId)
 {
-    sub_800832C();
+    SetCloseLinkCallback();
     gTasks[taskId].func = sub_8083CA4;
 }
 

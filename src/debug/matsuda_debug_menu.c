@@ -2,21 +2,21 @@
 #include "matsuda_debug_menu.h"
 #include "battle.h"
 #include "contest.h"
-#include "contest_link_80C2020.h"
-#include "contest_link_80C857C.h"
+#include "contest_link.h"
+#include "contest_link_util.h"
 #include "data2.h"
+#include "ewram.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
-#include "palette.h"
 #include "overworld.h"
+#include "palette.h"
+#include "scanline_effect.h"
 #include "sprite.h"
 #include "start_menu.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "scanline_effect.h"
-#include "ewram.h"
 
 extern u8 gUnknown_0203856C;
 extern u8 gContestMonPartyIndex;
@@ -109,7 +109,7 @@ static void sub_80A9BE4(u8 taskId)
         DestroyTask(taskId);
 
         if (!(gIsLinkContest & 1))
-            sub_80AF668();
+            CalculateFinalScores();
 
         sub_80C2358();
     }
@@ -149,12 +149,12 @@ static void sub_80A9C98(u8 taskId)
 
 static void sub_80A9CC0(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C88AC, sub_80A9CDC);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRng, sub_80A9CDC);
 }
 
 static void sub_80A9CDC(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8E1C, sub_80A9D58);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateLeaderIds, sub_80A9D58);
 }
 
 static void sub_80A9CF8(u8 taskId)
@@ -169,7 +169,7 @@ static void sub_80A9CF8(u8 taskId)
 
 static void sub_80A9D30(u8 taskId)
 {
-    sub_800832C();
+    SetCloseLinkCallback();
     gTasks[taskId].func = sub_80A9CF8;
 }
 
@@ -181,15 +181,15 @@ static void sub_80A9D58(u8 taskId)
    for (i = 0; i < 4; i++)
        dest[i] = gTasks[taskId].data[5 + i];
 
-   gUnknown_0203869B = sub_80C4B34(dest);
-   InitContestMonConditions((u8)gSpecialVar_ContestCategory);
-   sub_80B0F28(0);
-   SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
+   gContestLinkLeaderIndex = LinkContest_GetLeaderIndex(dest);
+   CalculateRound1Points((u8)gSpecialVar_ContestCategory);
+   SortContestants(0);
+   SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, sub_80A9DBC);
 }
 
 static void sub_80A9DBC(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80C8F34, sub_80A9DD8);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, sub_80A9DD8);
 }
 
 static void sub_80A9DD8(u8 taskId)
@@ -607,7 +607,7 @@ void sub_80AA5E8(u8 var)
 
 static void sub_80AA614(u8 var1, u8 var2)
 {
-    u16 var = InitContestMonConditionI(var1, var2);
+    u16 var = CalculateContestantRound1Points(var1, var2);
 
     ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
     Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
@@ -682,8 +682,8 @@ void sub_80AA754(struct Sprite *sprite)
         sub_80AAD08(sprite, 1);
         break;
     }
-    sprite->pos1.x = gUnknown_083C9296[sprite->data[0] + sprite->data[1] * 2];
-    sprite->pos1.y = gUnknown_083C92A8[sprite->data[1]];
+    sprite->x = gUnknown_083C9296[sprite->data[0] + sprite->data[1] * 2];
+    sprite->y = gUnknown_083C92A8[sprite->data[1]];
 }
 
 static void sub_80AA8A0(struct Sprite *sprite, s8 var1, u8 var2)
@@ -859,7 +859,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            InitContestMonConditions(eMatsudaDebugVar);
+            CalculateRound1Points(gSharedMem[0]);
         SetMainCallback2(CB2_StartContest);
     }
 }
@@ -868,7 +868,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
 {
     if (var2 == 1)
     {
-        eMatsudaDebugVar = sprite->data[3];
+        gSharedMem[0] = sprite->data[3];
         SetMainCallback2(sub_80AACC4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     }
@@ -882,7 +882,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
 
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
-            gContestMonConditions[i] = InitContestMonConditionI(i, gSpecialVar_ContestCategory);
+            gContestMonRound1Points[i] = CalculateContestantRound1Points(i, gSpecialVar_ContestCategory);
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
     }
 }
@@ -950,16 +950,16 @@ void sub_80AAF30(void)
 
     for (i = 0; i < 3; i++)
     {
-        gContestMonConditions[i] = 0;
-        gUnknown_02038680[i] = 0;
-        gUnknown_02038678[i] = 0;
+        gContestMonRound1Points[i] = 0;
+        gContestMonAppealPointTotals[i] = 0;
+        gContestMonTotalPoints[i] = 0;
         gContestMons[i] = gContestMons[3];
     }
 
-    gContestMonConditions[3] = 0x12C;
-    gUnknown_02038680[3] = 0x190;
-    gUnknown_02038678[3] = 0x190;
-    Contest_SaveWinner(0xFE);
+    gContestMonRound1Points[3] = 0x12C;
+    gContestMonAppealPointTotals[3] = 0x190;
+    gContestMonTotalPoints[3] = 0x190;
+    Contest_SaveWinner(CONTEST_SAVE_FOR_ARTIST);
 }
 
 u8 MatsudaDebugMenu_SetHighScore(void)
@@ -976,9 +976,9 @@ u8 MatsudaDebugMenu_ResetHighScore(void)
     gUnknown_0203856C = 0;
     for (i = 0; i < 4; i++)
     {
-        gContestMonConditions[i] = 0;
-        gUnknown_02038680[i] = 0;
-        gUnknown_02038678[i] = 0;
+        gContestMonRound1Points[i] = 0;
+        gContestMonAppealPointTotals[i] = 0;
+        gContestMonTotalPoints[i] = 0;
     }
     CloseMenu();
     return 1;

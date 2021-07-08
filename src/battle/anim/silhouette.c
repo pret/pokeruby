@@ -34,10 +34,10 @@ void sub_80CB3A8(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(1);
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
-    gSprites[spriteId].pos2.x = gTasks[taskId].data[10] >> 8;
+    gSprites[spriteId].x2 = gTasks[taskId].data[10] >> 8;
     if (GetBattlerSide(gBattleAnimTarget))
     {
-        gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
+        gSprites[spriteId].x2 = -gSprites[spriteId].x2;
     }
 
     gTasks[taskId].data[11] += 16;
@@ -59,8 +59,8 @@ void sub_80CB438(u8 taskId)
         {
             u8 spriteId = GetAnimBattlerSpriteId(1);
             sub_8078F40(spriteId);
-            gSprites[spriteId].pos2.x = 0;
-            gSprites[spriteId].pos2.y = 0;
+            gSprites[spriteId].x2 = 0;
+            gSprites[spriteId].y2 = 0;
             gTasks[taskId].data[0]++;
             return;
         }

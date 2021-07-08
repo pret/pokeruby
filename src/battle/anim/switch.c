@@ -79,7 +79,7 @@ void sub_80CBBF0(struct Sprite* sprite)
         if (!IsContest())
         {
             sprite->data[1] = gBattleAnimArgs[1];
-            sprite->pos1.x = 120;
+            sprite->x = 120;
         }
         else
         {
@@ -90,14 +90,14 @@ void sub_80CBBF0(struct Sprite* sprite)
                 b = a;
 
             sprite->data[1] = a - ((b >> 8) << 8);
-            sprite->pos1.x = 70;
+            sprite->x = 70;
         }
 
-        sprite->pos1.y = gBattleAnimArgs[0];
+        sprite->y = gBattleAnimArgs[0];
         sprite->data[2] = gBattleAnimArgs[0];
         sprite->data[4] = 20;
-        sprite->pos2.x = Cos(sprite->data[1], 60);
-        sprite->pos2.y = Sin(sprite->data[1], 20);
+        sprite->x2 = Cos(sprite->data[1], 60);
+        sprite->y2 = Sin(sprite->data[1], 20);
         sprite->callback = sub_80CBC8C;
         if (sprite->data[1] > 0 && sprite->data[1] < 0xC0)
             sprite->subpriority = 31;
@@ -121,7 +121,7 @@ static void sub_80CBC8C(struct Sprite* sprite)
         {
             sprite->data[2] += sprite->data[4] / 10;
             sprite->data[4] += 3;
-            sprite->pos1.y = sprite->data[2];
+            sprite->y = sprite->data[2];
             break;
         }
         break;
@@ -165,8 +165,8 @@ static void sub_80CBCF8(struct Sprite* sprite)
 		    }
 		}
 
-		sprite->pos2.x = Cos(sprite->data[1], 60);
-		sprite->pos2.y = Sin(sprite->data[1], 20);
+		sprite->x2 = Cos(sprite->data[1], 60);
+		sprite->y2 = Sin(sprite->data[1], 20);
 	}
 }
 

@@ -624,13 +624,13 @@ static void sub_8123CB8(struct Sprite *sprite)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
-            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
-            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
     }
 }
@@ -641,18 +641,18 @@ static void sub_8123D98(struct Sprite *sprite)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
-            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
-            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
         switch (sprite->data[2])
         {
             case 0:
-                sprite->pos2.y = 17;
+                sprite->y2 = 17;
                 if (sprite->data[3] ++ > 9)
                 {
                     sprite->data[3] = 0;
@@ -660,7 +660,7 @@ static void sub_8123D98(struct Sprite *sprite)
                 }
                 break;
             default:
-                sprite->pos2.y = 16;
+                sprite->y2 = 16;
                 if (sprite->data[3] ++ > 9)
                 {
                     sprite->data[3] = 0;
@@ -675,32 +675,32 @@ static void sub_8123EB8(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.x += 2 * sprite->centerToCornerVecX;
-        sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+        sprite->x += 2 * sprite->centerToCornerVecX;
+        sprite->y += 16 + sprite->centerToCornerVecY;
     }
     if (++sprite->data[0] >= sprite->data[2])
     {
         switch (sprite->data[1])
         {
             case 0:
-                sprite->pos1.x++;
+                sprite->x++;
                 if ((sprite->data[0] % 4) == 0)
                 {
-                    sprite->pos1.y++;
+                    sprite->y++;
                 }
                 break;
             case 1:
                 if ((sprite->data[0] % 2) != 0)
                 {
-                    sprite->pos1.x++;
-                    if ((sprite->pos1.x % 4) == 0)
+                    sprite->x++;
+                    if ((sprite->x % 4) == 0)
                     {
-                        sprite->pos1.y++;
+                        sprite->y++;
                     }
                 }
                 break;
         }
-        if (sprite->pos1.y > 0xa0)
+        if (sprite->y > 0xa0)
         {
             DestroySprite(sprite);
         }
@@ -711,31 +711,31 @@ static void sub_8123F44(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+        sprite->y += 16 + sprite->centerToCornerVecY;
     }
     if (++sprite->data[0] >= sprite->data[2])
     {
         switch (sprite->data[1])
         {
             case 0:
-                sprite->pos1.x--;
+                sprite->x--;
                 if ((sprite->data[0] % 4) == 0)
                 {
-                    sprite->pos1.y--;
+                    sprite->y--;
                 }
                 break;
             case 1:
                 if ((sprite->data[0] % 2) != 0)
                 {
-                    sprite->pos1.x--;
-                    if ((sprite->pos1.x % 4) == 0)
+                    sprite->x--;
+                    if ((sprite->x % 4) == 0)
                     {
-                        sprite->pos1.y--;
+                        sprite->y--;
                     }
                 }
                 break;
         }
-        if (sprite->pos1.y < 0x50)
+        if (sprite->y < 0x50)
         {
             DestroySprite(sprite);
         }
@@ -851,18 +851,18 @@ static void LoadSprites(void)
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
-                gSprites[spriteId].pos2.x = 0x08;
-                gSprites[spriteId].pos2.y = 0x10;
+                gSprites[spriteId].x2 = 0x08;
+                gSprites[spriteId].y2 = 0x10;
                 gSprites[spriteId].data[0] = 0xc8;
                 gSprites[spriteId].data[1] = 0x49;
             }
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[0], 0xb0, 0x2b, 0x67);
-            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
+            gSprites[spriteId].x2 = gSprites[spriteId].y2 = 0x20;
             gSprites[spriteId].data[0] = 0xb0;
             gSprites[spriteId].data[1] = 0x2b;
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[1], 0xc8, 0x63, 0x65);
-            gSprites[spriteId].pos2.x = 8;
-            gSprites[spriteId].pos2.y = 4;
+            gSprites[spriteId].x2 = 8;
+            gSprites[spriteId].y2 = 4;
             gSprites[spriteId].data[0] = 0xc8;
             gSprites[spriteId].data[1] = 0x63;
             sCableCarPtr->unk_0002 = 7;
@@ -875,18 +875,18 @@ static void LoadSprites(void)
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
-                gSprites[spriteId].pos2.x = 0x08;
-                gSprites[spriteId].pos2.y = 0x10;
+                gSprites[spriteId].x2 = 0x08;
+                gSprites[spriteId].y2 = 0x10;
                 gSprites[spriteId].data[0] = 0x80;
                 gSprites[spriteId].data[1] = 0x27;
             }
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[0], 0x68, 0x09, 0x67);
-            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
+            gSprites[spriteId].x2 = gSprites[spriteId].y2 = 0x20;
             gSprites[spriteId].data[0] = 0x68;
             gSprites[spriteId].data[1] = 0x09;
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[1], 0x80, 0x41, 0x65);
-            gSprites[spriteId].pos2.x = 8;
-            gSprites[spriteId].pos2.y = 4;
+            gSprites[spriteId].x2 = 8;
+            gSprites[spriteId].y2 = 4;
             gSprites[spriteId].data[0] = 0x80;
             gSprites[spriteId].data[1] = 0x41;
             sCableCarPtr->unk_0002 = 2;
@@ -897,8 +897,8 @@ static void LoadSprites(void)
     for (i = 0; i < 9; i++)
     {
         spriteId = CreateSprite(&gSpriteTemplate_8401D40[2], 16 * i + 0x60, 8 * i - 8, 0x68);
-        gSprites[spriteId].pos2.x = 8;
-        gSprites[spriteId].pos2.y = 8;
+        gSprites[spriteId].x2 = 8;
+        gSprites[spriteId].y2 = 8;
     }
     if ((rval % 64) == 0)
     {
@@ -906,15 +906,15 @@ static void LoadSprites(void)
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;
-            gSprites[spriteId].pos2.x = -gSprites[spriteId].centerToCornerVecX;
-            gSprites[spriteId].pos2.y = -gSprites[spriteId].centerToCornerVecY;
+            gSprites[spriteId].x2 = -gSprites[spriteId].centerToCornerVecX;
+            gSprites[spriteId].y2 = -gSprites[spriteId].centerToCornerVecY;
             if (gSpecialVar_0x8004 == 0)
             {
                 if (rval % 2)
                 {
                     StartSpriteAnim(&gSprites[spriteId], 6);
                     gSprites[spriteId].data[1] = 1;
-                    gSprites[spriteId].pos1.y += 2;
+                    gSprites[spriteId].y += 2;
                 }
                 else
                 {
@@ -928,7 +928,7 @@ static void LoadSprites(void)
                 {
                     StartSpriteAnim(&gSprites[spriteId], 7);
                     gSprites[spriteId].data[1] = 1;
-                    gSprites[spriteId].pos1.y += 2;
+                    gSprites[spriteId].y += 2;
                 }
                 else
                 {

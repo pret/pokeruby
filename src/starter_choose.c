@@ -17,7 +17,7 @@
 #include "scanline_effect.h"
 
 extern u16 gSpecialVar_Result;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 //--------------------------------------------------
 // Graphics Data
@@ -414,8 +414,8 @@ static void Task_StarterChoose2(u8 taskId)
 static void Task_StarterChoose3(u8 taskId)
 {
     if (gSprites[gTasks[taskId].tCircleSpriteId].affineAnimEnded &&
-      gSprites[gTasks[taskId].tCircleSpriteId].pos1.x == STARTER_PKMN_POS_X &&
-      gSprites[gTasks[taskId].tCircleSpriteId].pos1.y == STARTER_PKMN_POS_Y)
+      gSprites[gTasks[taskId].tCircleSpriteId].x == STARTER_PKMN_POS_X &&
+      gSprites[gTasks[taskId].tCircleSpriteId].y == STARTER_PKMN_POS_Y)
     {
         gTasks[taskId].func = Task_StarterChoose4;
     }
@@ -714,11 +714,11 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
     DecompressPicFromTable_2(
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,
-      gUnknown_081FAF4C[0], gUnknown_081FAF4C[1],
+      gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1],
       species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 1);
-    spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
+    spriteId = CreateSprite(&gCreatingSpriteTemplate, x, y, 0);
     gSprites[spriteId].callback = nullsub_72;
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
@@ -727,9 +727,9 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 //Sprite callback
 static void sub_810A62C(struct Sprite *sprite)
 {
-    sprite->pos1.x = gUnknown_083F76E4[gTasks[sprite->data[0]].tStarterSelection][0];
-    sprite->pos1.y = gUnknown_083F76E4[gTasks[sprite->data[0]].tStarterSelection][1];
-    sprite->pos2.y = Sin(sprite->data[1], 8);
+    sprite->x = gUnknown_083F76E4[gTasks[sprite->data[0]].tStarterSelection][0];
+    sprite->y = gUnknown_083F76E4[gTasks[sprite->data[0]].tStarterSelection][1];
+    sprite->y2 = Sin(sprite->data[1], 8);
     sprite->data[1] = (u8)sprite->data[1] + 4;
 }
 
@@ -746,12 +746,12 @@ static void sub_810A68C(struct Sprite *sprite)
 static void StarterPokemonSpriteAnimCallback(struct Sprite *sprite)
 {
     //Move sprite to upper center of screen
-    if (sprite->pos1.x > STARTER_PKMN_POS_X)
-        sprite->pos1.x -= 4;
-    if (sprite->pos1.x < STARTER_PKMN_POS_X)
-        sprite->pos1.x += 4;
-    if (sprite->pos1.y > STARTER_PKMN_POS_Y)
-        sprite->pos1.y -= 2;
-    if (sprite->pos1.y < STARTER_PKMN_POS_Y)
-        sprite->pos1.y += 2;
+    if (sprite->x > STARTER_PKMN_POS_X)
+        sprite->x -= 4;
+    if (sprite->x < STARTER_PKMN_POS_X)
+        sprite->x += 4;
+    if (sprite->y > STARTER_PKMN_POS_Y)
+        sprite->y -= 2;
+    if (sprite->y < STARTER_PKMN_POS_Y)
+        sprite->y += 2;
 }

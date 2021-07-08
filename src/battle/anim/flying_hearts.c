@@ -27,8 +27,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7AE0 =
 
 void sub_80D2064(struct Sprite* sprite)
 {
-    sprite->pos1.x = gBattleAnimArgs[0];
-    sprite->pos1.y = 0xA0;
+    sprite->x = gBattleAnimArgs[0];
+    sprite->y = 0xA0;
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->callback = WaitAnimForDuration;
@@ -39,10 +39,10 @@ static void sub_80D2094(struct Sprite* sprite)
 {
     s16 y;
     sprite->data[2] += sprite->data[1];
-    sprite->pos2.y = -((u16)sprite->data[2] >> 8);
-    sprite->pos2.x = Sin(sprite->data[3], 4);
+    sprite->y2 = -((u16)sprite->data[2] >> 8);
+    sprite->x2 = Sin(sprite->data[3], 4);
     sprite->data[3] = (sprite->data[3] + 3) & 0xFF;
-    y = sprite->pos1.y + sprite->pos2.y;
+    y = sprite->y + sprite->y2;
     if (y <= 0x48)
     {
         sprite->invisible = sprite->data[3] % 2;

@@ -145,8 +145,8 @@ void sub_80E8268(void)
     u8 spriteId;
 
     spriteId = CreateSprite(&gSpriteTemplate_83DBBFC, 0, 0, 0);
-    gSprites[spriteId].pos1.y = gEasyChatStruct->unk8A * 8 + 8;
-    gSprites[spriteId].pos1.x = gEasyChatStruct->unk88 * 8 + 4;
+    gSprites[spriteId].y = gEasyChatStruct->unk8A * 8 + 8;
+    gSprites[spriteId].x = gEasyChatStruct->unk88 * 8 + 4;
     gSprites[spriteId].data[0] = 0;
     gSprites[spriteId].data[1] = 0;
     gEasyChatStruct->unk98 = &gSprites[spriteId];
@@ -168,16 +168,16 @@ void sub_80E82BC(struct Sprite *sprite)
 
             if (r5 == gEasyChatStruct->unk84)
             {
-                sprite->pos1.y = 96;
-                sprite->pos1.x = (r4 * 7  + 3) * 8 + 4;
+                sprite->y = 96;
+                sprite->x = (r4 * 7  + 3) * 8 + 4;
             }
             else
             {
-                sprite->pos1.y = (gEasyChatStruct->unk8A + r5 * 2) * 8 + 8;
-                sprite->pos1.x = (gEasyChatStruct->unk88 + r7 + r4 * 11) * 8 + 4;
+                sprite->y = (gEasyChatStruct->unk8A + r5 * 2) * 8 + 8;
+                sprite->x = (gEasyChatStruct->unk88 + r7 + r4 * 11) * 8 + 4;
             }
 
-            sprite->pos2.x = -6;
+            sprite->x2 = -6;
             sprite->data[0] = 0;
         }
         else
@@ -185,8 +185,8 @@ void sub_80E82BC(struct Sprite *sprite)
             if (++sprite->data[0] > 2)
             {
                 sprite->data[0] = 0;
-                if (++sprite->pos2.x > 0)
-                    sprite->pos2.x = -6;
+                if (++sprite->x2 > 0)
+                    sprite->x2 = -6;
             }
         }
     }
@@ -198,17 +198,17 @@ void sub_80E8398(u8 a)
     {
     case 0:
         gEasyChatStruct->unk98->data[1] = a;
-        gEasyChatStruct->unk98->pos2.x = a;
+        gEasyChatStruct->unk98->x2 = a;
         gEasyChatStruct->unk98->invisible = FALSE;
         break;
     case 1:
         gEasyChatStruct->unk98->data[1] = a;
-        gEasyChatStruct->unk98->pos2.x = 0;
+        gEasyChatStruct->unk98->x2 = 0;
         gEasyChatStruct->unk98->invisible = FALSE;
         break;
     case 2:
         gEasyChatStruct->unk98->data[1] = 1;
-        gEasyChatStruct->unk98->pos2.x = 0;
+        gEasyChatStruct->unk98->x2 = 0;
         gEasyChatStruct->unk98->invisible = TRUE;
         break;
     }
@@ -434,24 +434,24 @@ void sub_80E85F8(struct Sprite *sprite)
         switch (sprite->data[2])
         {
         case 0:
-            sprite->pos1.x = gEasyChatStruct->unk1A9 * 88 + 32;
-            sprite->pos1.y = (gEasyChatStruct->unk1A8 - gEasyChatStruct->unk1B5) * 16 + 96;
+            sprite->x = gEasyChatStruct->unk1A9 * 88 + 32;
+            sprite->y = (gEasyChatStruct->unk1A8 - gEasyChatStruct->unk1B5) * 16 + 96;
             break;
         case 1:
 #if ENGLISH
-            sprite->pos1.x = 216;
+            sprite->x = 216;
 #else
-            sprite->pos1.x = 214;
+            sprite->x = 214;
 #endif
-            sprite->pos1.y = gEasyChatStruct->unk1A8 * 16 + 96;
+            sprite->y = gEasyChatStruct->unk1A8 * 16 + 96;
             break;
         case 2:
-            sprite->pos1.x = 151;
-            sprite->pos1.y = 96;
+            sprite->x = 151;
+            sprite->y = 96;
             break;
         case 3:
-            sprite->pos1.x = gUnknown_083DBCC4[gEasyChatStruct->unk1A8][gEasyChatStruct->unk1A9] * 8 + 31;
-            sprite->pos1.y = (gEasyChatStruct->unk1A8 - gEasyChatStruct->unk1B5) * 16 + 96;
+            sprite->x = gUnknown_083DBCC4[gEasyChatStruct->unk1A8][gEasyChatStruct->unk1A9] * 8 + 31;
+            sprite->y = (gEasyChatStruct->unk1A8 - gEasyChatStruct->unk1B5) * 16 + 96;
             break;
         }
     }
@@ -462,8 +462,8 @@ void sub_80E872C(struct Sprite *sprite)
 {
     if (gEasyChatStruct->unk96 != 0 && sprite->data[2] == 0)
     {
-        sprite->pos1.x = gEasyChatStruct->unk9C->pos1.x + 32;
-        sprite->pos1.y = gEasyChatStruct->unk9C->pos1.y;
+        sprite->x = gEasyChatStruct->unk9C->x + 32;
+        sprite->y = gEasyChatStruct->unk9C->y;
     }
 }
 
@@ -474,18 +474,18 @@ void sub_80E8760(struct Sprite *sprite)
         switch (sprite->data[2])
         {
         case 0:
-            sprite->pos1.x = gEasyChatStruct->unk9C->pos1.x + 64;
-            sprite->pos1.y = gEasyChatStruct->unk9C->pos1.y;
+            sprite->x = gEasyChatStruct->unk9C->x + 64;
+            sprite->y = gEasyChatStruct->unk9C->y;
             break;
 #if GERMAN
         case 1:
-            sprite->pos1.x = gEasyChatStruct->unk9C->pos1.x + 28;
-            sprite->pos1.y = gEasyChatStruct->unk9C->pos1.y;
+            sprite->x = gEasyChatStruct->unk9C->x + 28;
+            sprite->y = gEasyChatStruct->unk9C->y;
             break;
 #endif
         case 2:
-            sprite->pos1.x = gEasyChatStruct->unk9C->pos1.x + 21;
-            sprite->pos1.y = gEasyChatStruct->unk9C->pos1.y;
+            sprite->x = gEasyChatStruct->unk9C->x + 21;
+            sprite->y = gEasyChatStruct->unk9C->y;
             break;
         }
     }
@@ -494,7 +494,7 @@ void sub_80E8760(struct Sprite *sprite)
 void sub_80E87A4(u8 a)
 {
     gEasyChatStruct->unkA8->data[1] = (a == 0);
-    gEasyChatStruct->unkA8->pos2.x = 0;
+    gEasyChatStruct->unkA8->x2 = 0;
 }
 
 void sub_80E87CC(u8 a)
@@ -522,9 +522,9 @@ void sub_80E8860(struct Sprite *sprite)
     {
         if (gEasyChatStruct->unk1B9 != 0)
         {
-            sprite->pos1.x = gEasyChatStruct->unk99A5 * 88 + 44;
-            sprite->pos1.y = (gEasyChatStruct->unk99A4 - gEasyChatStruct->unk9A29) * 16 + 96;
-            sprite->pos2.x = -6;
+            sprite->x = gEasyChatStruct->unk99A5 * 88 + 44;
+            sprite->y = (gEasyChatStruct->unk99A4 - gEasyChatStruct->unk9A29) * 16 + 96;
+            sprite->x2 = -6;
             sprite->data[0] = 0;
         }
         else
@@ -533,9 +533,9 @@ void sub_80E8860(struct Sprite *sprite)
             if (sprite->data[0] > 2)
             {
                 sprite->data[0] = 0;
-                sprite->pos2.x++;
-                if (sprite->pos2.x > 0)
-                    sprite->pos2.x = -6;
+                sprite->x2++;
+                if (sprite->x2 > 0)
+                    sprite->x2 = -6;
             }
         }
     }
@@ -586,7 +586,7 @@ void sub_80E8958(u8 animNum)
 
     for (i = 0; i < 2; i++)
     {
-        gEasyChatStruct->unkAC[i]->pos1.x = r9;
+        gEasyChatStruct->unkAC[i]->x = r9;
         gEasyChatStruct->unkAC[i]->invisible = FALSE;
         gEasyChatStruct->unkAC[i]->data[1] = 1;
         StartSpriteAnim(gEasyChatStruct->unkAC[i], animNum);

@@ -830,8 +830,8 @@ void sub_8117C60(u8 r0, u8 r1)
             else
             {
                 gSprites[eRoulette->var3C[49 + i]].invisible = FALSE;
-                gSprites[eRoulette->var3C[49 + i]].pos1.x    = (gUnknown_083F8C00[eRoulette->var0C[i]].var03 + 1) * 8 + 4;
-                gSprites[eRoulette->var3C[49 + i]].pos1.y    = (gUnknown_083F8C00[eRoulette->var0C[i]].var04 + 1) * 8 + 3;
+                gSprites[eRoulette->var3C[49 + i]].x         = (gUnknown_083F8C00[eRoulette->var0C[i]].var03 + 1) * 8 + 4;
+                gSprites[eRoulette->var3C[49 + i]].y         = (gUnknown_083F8C00[eRoulette->var0C[i]].var04 + 1) * 8 + 3;
             }
         }
     }
@@ -846,8 +846,8 @@ void sub_8117D68(u8 r0)
     else
     {
         gSprites[eRoulette->var3C[48]].invisible = FALSE;
-        gSprites[eRoulette->var3C[48]].pos1.x    = (gUnknown_083F8C00[r0].var03 + 2) * 8;
-        gSprites[eRoulette->var3C[48]].pos1.y    = (gUnknown_083F8C00[r0].var04 + 2) * 8;
+        gSprites[eRoulette->var3C[48]].x    = (gUnknown_083F8C00[r0].var03 + 2) * 8;
+        gSprites[eRoulette->var3C[48]].y    = (gUnknown_083F8C00[r0].var04 + 2) * 8;
     }
 }
 
@@ -885,8 +885,8 @@ void sub_8117E98(struct Sprite *sprite)
         angle -= 360;
     sin = Sin2(angle);
     cos = Cos2(angle);
-    sprite->pos2.x =  sin * sprite->data[1] >> 12;
-    sprite->pos2.y = -cos * sprite->data[1] >> 12;
+    sprite->x2 =  sin * sprite->data[1] >> 12;
+    sprite->y2 = -cos * sprite->data[1] >> 12;
     matrixNum = sprite->oam.matrixNum;
     sin /= 16;
     gOamMatrices[matrixNum].d = cos /= 16;
@@ -1040,7 +1040,7 @@ void sub_81182F8(u8 r0)
 
 void sub_81184CC(struct Sprite *sprite)
 {
-    sprite->pos2.x = eRoulette->var26;
+    sprite->x2 = eRoulette->var26;
 }
 
 void sub_81184D8(void)
@@ -1156,12 +1156,12 @@ void sub_8118724(struct Sprite *sprite)
     sprite->data[4] = eRoulette->var94;
     sin = Sin2(sprite->data[3]);
     cos = Cos2(sprite->data[3]);
-    sprite->pos2.x =  sin * sprite->data[4] >> 12;
-    sprite->pos2.y = -cos * sprite->data[4] >> 12;
+    sprite->x2 =  sin * sprite->data[4] >> 12;
+    sprite->y2 = -cos * sprite->data[4] >> 12;
     if (IsSEPlaying())
     {
-        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xffff, sprite->pos2.x);
-        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xffff, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xffff, sprite->x2);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xffff, sprite->x2);
     }
 }
 
@@ -1173,9 +1173,9 @@ void sub_8118834(struct Sprite *sprite)
         sprite->data[3] -= 360;
     sin = Sin2(sprite->data[3]);
     cos = Cos2(sprite->data[3]);
-    sprite->pos2.x =  sin * sprite->data[4] >> 12;
-    sprite->pos2.y = -cos * sprite->data[4] >> 12;
-    sprite->pos2.y += gSpriteCoordOffsetY;
+    sprite->x2 =  sin * sprite->data[4] >> 12;
+    sprite->y2 = -cos * sprite->data[4] >> 12;
+    sprite->y2 += gSpriteCoordOffsetY;
 }
 
 void sub_811889C(struct Sprite *sprite)
@@ -1274,9 +1274,9 @@ void sub_81189A8(struct Sprite *sprite)
 
 void sub_8118B30(struct Sprite *sprite)
 {
-    sprite->pos2.y = (s32)(((float)sprite->data[2]) * 0.05f * ((float)sprite->data[2])) - 45;
+    sprite->y2 = (s32)(((float)sprite->data[2]) * 0.05f * ((float)sprite->data[2])) - 45;
     sprite->data[2]++;
-    if (sprite->data[2] > 29 && sprite->pos2.y >= 0)
+    if (sprite->data[2] > 29 && sprite->y2 >= 0)
     {
         eRoulette->var7D   = 255;
         eRoulette->var03_7 = FALSE;
@@ -1295,11 +1295,11 @@ void sub_8118BD8(struct Sprite *sprite)
 {
     if (sprite->data[2]++ < 45)
     {
-        sprite->pos2.y--;
+        sprite->y2--;
         if (sprite->data[2] == 45)
         {
             if (gSprites[eRoulette->var3C[55]].animCmdIndex == 1)
-                sprite->pos2.y++;
+                sprite->y2++;
         }
     }
     else
@@ -1309,9 +1309,9 @@ void sub_8118BD8(struct Sprite *sprite)
             if (gSprites[eRoulette->var3C[55]].animDelayCounter == 0)
             {
                 if (gSprites[eRoulette->var3C[55]].animCmdIndex == 1)
-                    sprite->pos2.y++;
+                    sprite->y2++;
                 else
-                    sprite->pos2.y--;
+                    sprite->y2--;
             }
         }
         else
@@ -1727,8 +1727,8 @@ void sub_8119780(struct Sprite *sprite)
 {
     if (sprite->data[1]++ >= sprite->data[3])
     {
-        sprite->pos1.x -= 2;
-        if (sprite->pos1.x < -16)
+        sprite->x -= 2;
+        if (sprite->x < -16)
         {
             if (!eRoulette->var03_6)
                 eRoulette->var03_6 = TRUE;
@@ -1773,7 +1773,7 @@ void sub_8119898(struct Sprite *sprite)
     float t;
     sprite->data[1]++;
     t = sprite->data[1];
-    sprite->pos2.y = t * 0.039f * t;
+    sprite->y2 = t * 0.039f * t;
     eRoulette->var34 = gUnknown_083FA61E[(eRoulette->var01 - 1) / 2];
     if (eRoulette->var01 < 19)
         eRoulette->var01++;
@@ -1849,9 +1849,9 @@ void sub_8119A90(struct Sprite *sprite)
 
 void sub_8119AAC(struct Sprite *sprite)
 {
-    if (sprite->pos1.y > -16)
+    if (sprite->y > -16)
     {
-        sprite->pos1.y--;
+        sprite->y--;
     }
     else
     {
@@ -1870,9 +1870,9 @@ void sub_8119B24(struct Sprite *sprite)
     if (sprite->data[1] >= 0)
     {
         sprite->data[1]--;
-        sprite->pos1.y--;
+        sprite->y--;
         if (sprite->data[1] == 0 && sprite->animCmdIndex == 1)
-            sprite->pos2.y++;
+            sprite->y2++;
     }
     else
     {
@@ -1882,9 +1882,9 @@ void sub_8119B24(struct Sprite *sprite)
             if (sprite->animDelayCounter == 0)
             {
                 if (sprite->animCmdIndex == 1)
-                    sprite->pos2.y++;
+                    sprite->y2++;
                 else
-                    sprite->pos2.y--;
+                    sprite->y2--;
             }
         }
         else
@@ -1912,10 +1912,10 @@ void sub_8119BCC(struct Sprite *sprite)
     };
     if (sprite->data[1]-- > 7)
     {
-        sprite->pos1.x += t[eRoulette->var38->data[0]] * 2;
+        sprite->x += t[eRoulette->var38->data[0]] * 2;
         if (IsSEPlaying())
         {
-            s8 u =  -((116 - sprite->pos1.x) / 2);
+            s8 u =  -((116 - sprite->x) / 2);
             m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xffff, u);
             m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xffff, u);
         }
@@ -1924,8 +1924,8 @@ void sub_8119BCC(struct Sprite *sprite)
     {
         if (sprite->data[1] >= 0)
         {
-            sprite->pos1.x += t[eRoulette->var38->data[0]] * z[7 - sprite->data[1]][0];
-            sprite->pos1.y += z[7 - sprite->data[1]][1];
+            sprite->x += t[eRoulette->var38->data[0]] * z[7 - sprite->data[1]][0];
+            sprite->y += z[7 - sprite->data[1]][1];
         }
         else
         {
@@ -1946,7 +1946,7 @@ void sub_8119D08(struct Sprite *sprite)
     s8 t[2] = {-1, 1}; //sign
     if (sprite->data[1]-- >= 0)
     {
-        sprite->pos1.x += t[eRoulette->var38->data[0]] * 2;
+        sprite->x += t[eRoulette->var38->data[0]] * 2;
         gSprites[sprite->data[6]].invisible ^= 1;
     }
     else

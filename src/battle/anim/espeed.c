@@ -72,7 +72,7 @@ void sub_80D15E0(u8 taskId)
     struct Task* task = &gTasks[taskId];
     if (RunAffineAnimFromTaskData(task) == 0)
     {
-        gSprites[task->data[0]].pos2.y = 0;
+        gSprites[task->data[0]].y2 = 0;
         gSprites[task->data[0]].invisible = TRUE;
         DestroyAnimVisualTask(taskId);
     }
@@ -109,7 +109,7 @@ void sub_80D16A0(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        gSprites[task->data[15]].pos2.x += task->data[14];
+        gSprites[task->data[15]].x2 += task->data[14];
         task->data[1] = 0;
         task->data[2] = 0;
         task->data[3] = 0;
@@ -121,14 +121,14 @@ void sub_80D16A0(u8 taskId)
             task->data[1] = 0;
             task->data[2]++;
             if (task->data[2] & 1)
-                gSprites[task->data[15]].pos2.x += 6;
+                gSprites[task->data[15]].x2 += 6;
             else
-                gSprites[task->data[15]].pos2.x -= 6;
+                gSprites[task->data[15]].x2 -= 6;
 
             if (++task->data[3] > 4)
             {
                 if (task->data[2] & 1)
-                    gSprites[task->data[15]].pos2.x -= 6;
+                    gSprites[task->data[15]].x2 -= 6;
 
                 task->data[0]++;
             }
@@ -141,8 +141,8 @@ void sub_80D16A0(u8 taskId)
             task->data[0]++;
         break;
     case 3:
-        gSprites[task->data[15]].pos2.x += task->data[13];
-        if (gSprites[task->data[15]].pos2.x == 0)
+        gSprites[task->data[15]].x2 += task->data[13];
+        if (gSprites[task->data[15]].x2 == 0)
             DestroyAnimVisualTask(taskId);
         break;
     }
@@ -257,8 +257,8 @@ void sub_80D1930(u8 taskId)
             {
                 gSprites[spriteId].data[0] = taskId;
                 gSprites[spriteId].data[1] = 13;
-                gSprites[spriteId].pos2.x = gUnknown_083D7A00[task->data[2]][0];
-                gSprites[spriteId].pos2.y = gUnknown_083D7A00[task->data[2]][1];
+                gSprites[spriteId].x2 = gUnknown_083D7A00[task->data[2]][0];
+                gSprites[spriteId].y2 = gUnknown_083D7A00[task->data[2]][1];
                 task->data[13]++;
                 if (++task->data[2] > 3)
                 {

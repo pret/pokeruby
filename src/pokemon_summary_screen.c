@@ -126,7 +126,7 @@ extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gPPUpReadMasks[];
 TaskFunc gUnknown_03005CF0;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern const u8 gStatusPal_Icons[];
 extern const u8 gStatusGfx_Icons[];
@@ -659,7 +659,7 @@ void sub_809DA1C(void)
         pssData.inputHandlingTaskId = CreateTask(SummaryScreenHandleKeyInput, 0);
         break;
     case PSS_MODE_SELECT_MOVE:
-    case PSS_MODE_UNKNOWN:
+    case PSS_MODE_MOVE_DELETER:
         pssData.inputHandlingTaskId = CreateTask(sub_809EB40, 0);
         break;
     case PSS_MODE_MOVES_ONLY:
@@ -1838,8 +1838,8 @@ static u8 SummaryScreen_LoadPokemonSprite(struct Pokemon *mon, u8 *state)
             &gMonFrontPicTable[species],
             gMonFrontPicCoords[species].coords,
             gMonFrontPicCoords[species].y_offset,
-            ewram_addr,
-            gUnknown_081FAF4C[1],
+            (void *)EWRAM,
+            gMonSpriteGfx_Sprite_ptr[1],
             species,
             personality);
         *state += 1;
@@ -1894,7 +1894,7 @@ static bool8 SummaryScreen_CanForgetSelectedMove(u8 taskId)
 
     SummaryScreen_GetPokemon(&mon);
     move = GetMonMove(&mon, pssData.selectedMoveIndex);
-    if (IsHMMove(move) == TRUE && pssData.mode != PSS_MODE_UNKNOWN)
+    if (IsHMMove(move) == TRUE && pssData.mode != PSS_MODE_MOVE_DELETER)
         return FALSE;
     return TRUE;
 }
@@ -2478,7 +2478,7 @@ bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {
     u32 trainerId;
 
-    if (ewram18000_3 == gEnemyParty)
+    if (pssData.monList.partyMons == gEnemyParty)
     {
         u8 enemyId = GetMultiplayerId() ^ 1;
         trainerId = gLinkPlayers[enemyId].trainerId & 0xFFFF;
@@ -3988,7 +3988,7 @@ u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *mon)
     u8 spriteId;
 
     species = GetMonData(mon, MON_DATA_SPECIES2);
-    spriteId = CreateSprite(&gUnknown_02024E8C, 40, 64, 5);
+    spriteId = CreateSprite(&gCreatingSpriteTemplate, 40, 64, 5);
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
 
@@ -4054,8 +4054,8 @@ static void SummaryScreen_DrawTypeIcon(u8 animNum, u8 x, u8 y, u8 d)
     StartSpriteAnim(&gSprites[ewram1A000[d]], animNum);
 
     gSprites[ewram1A000[d]].oam.paletteNum = sMoveTypeToOamPaletteNum[animNum];
-    gSprites[ewram1A000[d]].pos1.x = x + 16;
-    gSprites[ewram1A000[d]].pos1.y = y + 8;
+    gSprites[ewram1A000[d]].x = x + 16;
+    gSprites[ewram1A000[d]].y = y + 8;
 
     sub_80A1918(d, 0);
 }
@@ -4129,9 +4129,9 @@ static void sub_80A1BC0(struct Sprite *sprite)
     }
 
     if (sprite->data[0] == 9)
-        sprite->pos2.y = pssData.selectedMoveIndex * 16;
+        sprite->y2 = pssData.selectedMoveIndex * 16;
     else
-        sprite->pos2.y = pssData.switchMoveIndex * 16;
+        sprite->y2 = pssData.switchMoveIndex * 16;
 }
 
 #define shared1A009 ((u8 *)(gSharedMem + 0x1A009))
@@ -4219,8 +4219,8 @@ static void sub_80A1D84(struct Pokemon *mon)
         u8 markings = GetMonData(mon, MON_DATA_MARKINGS);
         StartSpriteAnim(sprite, markings);
 
-        gUnknown_020384F4->pos1.x = 60;
-        gUnknown_020384F4->pos1.y = 26;
+        gUnknown_020384F4->x = 60;
+        gUnknown_020384F4->y = 26;
     }
 }
 

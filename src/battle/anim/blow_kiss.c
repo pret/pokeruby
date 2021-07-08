@@ -29,9 +29,9 @@ void sub_80D1F58(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = 0x5F;
-    sprite->data[1] = sprite->pos1.x;
+    sprite->data[1] = sprite->x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[3] = sprite->pos1.y;
+    sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80D1FA4;
@@ -41,7 +41,7 @@ static void sub_80D1FA4(struct Sprite* sprite)
 {
     if (TranslateAnimLinear(sprite) == 0)
     {
-        sprite->pos2.y += Sin(sprite->data[5], 14);
+        sprite->y2 += Sin(sprite->data[5], 14);
         sprite->data[5] = (sprite->data[5] + 4) & 0xFF;
     }
     else

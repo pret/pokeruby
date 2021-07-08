@@ -643,12 +643,12 @@ void GabbyAndTyBeforeInterview(void)
     else
         gSaveBlock1.gabbyAndTyData.valA_1 = 0;
 
-    if (gBattleResults.unk3)
+    if (gBattleResults.playerHealInBattleCount)
         gSaveBlock1.gabbyAndTyData.valA_2 = 1;
     else
         gSaveBlock1.gabbyAndTyData.valA_2 = 0;
 
-    if (!gBattleResults.unk5_1)
+    if (!gBattleResults.usedMasterBall)
     {
         for (i=0; i<11; i++)
         {
@@ -818,7 +818,7 @@ void PutPokemonTodayCaughtOnAir(void)
             {
                 for (i = 0; i < 11; i++)
                     total += gBattleResults.usedBalls[i];
-                if (total != 0 || gBattleResults.unk5_1 != 0)
+                if (total != 0 || gBattleResults.usedMasterBall != 0)
                 {
                     struct TVShowPokemonToday *pokemonToday;
 
@@ -826,7 +826,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     pokemonToday = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].pokemonToday;
                     pokemonToday->kind = TVSHOW_POKEMON_TODAY_CAUGHT;
                     pokemonToday->active = total;
-                    if (gBattleResults.unk5_1 != 0)
+                    if (gBattleResults.usedMasterBall != 0)
                     {
                         total = 1;
                         item = ITEM_MASTER_BALL;
@@ -1782,20 +1782,20 @@ u8 NicknameDiffersFromSpeciesName(u8 monIndex)
     return TRUE;
 }
 #elif GERMAN
-u8 NicknameDiffersFromSpeciesName(u8 monIndex)
+u8 NicknameDiffersFromSpeciesName(u8 pmMonIndex)
 {
     u8 langData[4];
     u32 species;
     u8 *tmp;
 
-    GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, &gStringVar1);
+    GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_NICKNAME, &gStringVar1);
 
     tmp = langData;
-    tmp[0] = GetMonData(&gPlayerParty[monIndex], MON_DATA_LANGUAGE, &langData);
+    tmp[0] = GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_LANGUAGE, &langData);
     if (tmp[0] != GAME_LANGUAGE)
         return TRUE;
 
-    species = GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES, NULL);
+    species = GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_SPECIES, NULL);
     if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1))
         return TRUE;
 
@@ -2189,39 +2189,33 @@ void sub_80BFD20(void)
     RemoveObjectEventByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
-typedef union ewramStruct_02007000
-{
-    TVShow tvshows[4][TV_SHOWS_COUNT];
-    struct PokeNews pokeNews[4][POKE_NEWS_COUNT];
-} ewramStruct_02007000;
-
 void sub_80BFE24(TVShow arg0[TV_SHOWS_COUNT], TVShow arg1[TV_SHOWS_COUNT], TVShow arg2[TV_SHOWS_COUNT], TVShow arg3[TV_SHOWS_COUNT]);
 
 void sub_80C04A0(void);
 void sub_80C01D4(void);
 void sub_80C0408(void);
 
-void sub_80BFD44(u8 *arg0, u32 arg1, u8 arg2)
+void ReceiveTvShowsData(u8 * arg0, u32 arg1, u8 arg2)
 {
     u8 i;
-    ewramStruct_02007000 *ewramTVShows;
+    union TVShow (*tvShows)[TV_SHOWS_COUNT];
 
     for (i = 0; i < 4; i++)
-        memcpy(&gUnknown_02007000.tvshows[i], &arg0[i * arg1], TV_SHOWS_COUNT * sizeof(TVShow));
-    ewramTVShows = &gUnknown_02007000;
+        memcpy(eRecordMixTvShows[i], &arg0[i * arg1], TV_SHOWS_COUNT * sizeof(TVShow));
+    tvShows = eRecordMixTvShows;
     switch (arg2)
     {
     case 0:
-        sub_80BFE24(gSaveBlock1.tvShows, ewramTVShows->tvshows[1], ewramTVShows->tvshows[2], ewramTVShows->tvshows[3]);
+        sub_80BFE24(gSaveBlock1.tvShows, tvShows[1], tvShows[2], tvShows[3]);
         break;
     case 1:
-        sub_80BFE24(ewramTVShows->tvshows[0], gSaveBlock1.tvShows, ewramTVShows->tvshows[2], ewramTVShows->tvshows[3]);
+        sub_80BFE24(tvShows[0], gSaveBlock1.tvShows, tvShows[2], tvShows[3]);
         break;
     case 2:
-        sub_80BFE24(ewramTVShows->tvshows[0], ewramTVShows->tvshows[1], gSaveBlock1.tvShows, ewramTVShows->tvshows[3]);
+        sub_80BFE24(tvShows[0], tvShows[1], gSaveBlock1.tvShows, tvShows[3]);
         break;
     case 3:
-        sub_80BFE24(ewramTVShows->tvshows[0], ewramTVShows->tvshows[1], ewramTVShows->tvshows[2], gSaveBlock1.tvShows);
+        sub_80BFE24(tvShows[0], tvShows[1], tvShows[2], gSaveBlock1.tvShows);
         break;
     }
     sub_80BF588(gSaveBlock1.tvShows);
@@ -2493,27 +2487,28 @@ void sub_80C0788(void);
 s8 sub_80C0730(struct PokeNews[POKE_NEWS_COUNT], u8);
 void sub_80C06BC(struct PokeNews *[POKE_NEWS_COUNT], struct PokeNews *[POKE_NEWS_COUNT]);
 
-void sub_80C0514(void *a0, u32 a1, u8 a2)
+void ReceivePokeNewsData(void * a0, u32 a1, u8 a2)
 {
-    ewramStruct_02007000 *struct02007000;
+    struct PokeNews (* pokeNews)[POKE_NEWS_COUNT];
     u8 i;
 
     for (i = 0; i < 4; i++)
-        memcpy(gUnknown_02007000.pokeNews[i], a0 + i * a1, 64);
-    struct02007000 = &gUnknown_02007000;
+        memcpy(eRecordMixPokeNews[i], a0 + i * a1, 64);
+    
+    pokeNews = eRecordMixPokeNews;
     switch (a2)
     {
     case 0:
-        sub_80C05C4(gSaveBlock1.pokeNews, struct02007000->pokeNews[1], struct02007000->pokeNews[2], struct02007000->pokeNews[3]);
+        sub_80C05C4(gSaveBlock1.pokeNews, pokeNews[1], pokeNews[2], pokeNews[3]);
         break;
     case 1:
-        sub_80C05C4(struct02007000->pokeNews[0], gSaveBlock1.pokeNews, struct02007000->pokeNews[2], struct02007000->pokeNews[3]);
+        sub_80C05C4(pokeNews[0], gSaveBlock1.pokeNews, pokeNews[2], pokeNews[3]);
         break;
     case 2:
-        sub_80C05C4(struct02007000->pokeNews[0], struct02007000->pokeNews[1], gSaveBlock1.pokeNews, struct02007000->pokeNews[3]);
+        sub_80C05C4(pokeNews[0], pokeNews[1], gSaveBlock1.pokeNews, pokeNews[3]);
         break;
     case 3:
-        sub_80C05C4(struct02007000->pokeNews[0], struct02007000->pokeNews[1], struct02007000->pokeNews[2], gSaveBlock1.pokeNews);
+        sub_80C05C4(pokeNews[0], pokeNews[1], pokeNews[2], gSaveBlock1.pokeNews);
         break;
     }
     sub_80C0750();

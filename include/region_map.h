@@ -60,6 +60,19 @@ struct RegionMap
     /*0x280*/ u8 cursorLargeImage[0x600];
 }; // size: 0x880
 
+struct RegionMapState
+{
+    void (*callback)(void);
+    u16 state;
+    u16 mapSectionId;
+    struct RegionMap regionMap;
+    u16 unk_888[0xE0];
+    u8 blankMapName[0x26];
+    bool8 choseFlyLocation;
+};
+
+extern struct RegionMapState *const gRegionMapState;
+
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed);
 void sub_80FA904(struct RegionMap *regionMap, bool8 zoomed);
 bool8 sub_80FA940(void);

@@ -2,6 +2,14 @@
 #include "battle_setup.h"
 #include "battle.h"
 #include "battle_transition.h"
+#include "constants/battle_setup.h"
+#include "constants/items.h"
+#include "constants/map_types.h"
+#include "constants/maps.h"
+#include "constants/opponents.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "contest_util.h"
 #include "data2.h"
 #include "event_data.h"
 #include "field_control_avatar.h"
@@ -13,12 +21,11 @@
 #include "fldeff_poison.h"
 #include "main.h"
 #include "metatile_behavior.h"
+#include "overworld.h"
 #include "palette.h"
 #include "random.h"
-#include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
-#include "script_pokemon_80C4.h"
 #include "secret_base.h"
 #include "sound.h"
 #include "starter_choose.h"
@@ -27,13 +34,6 @@
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
-#include "constants/battle_setup.h"
-#include "constants/map_types.h"
-#include "constants/maps.h"
-#include "constants/opponents.h"
-#include "constants/songs.h"
-#include "constants/species.h"
-#include "constants/items.h"
 
 extern u16 gSpecialVar_Result;
 
@@ -1287,8 +1287,9 @@ s32 TrainerIdToRematchTableId(const struct TrainerEyeTrainer *trainers, u16 oppo
 
     for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
     {
-        for (j = 0; j < 5 && trainers[i].opponentIDs[j] != 0; j++)
+        for (j = 0; j < 5; j++)
         {
+            if (trainers[i].opponentIDs[j] == 0) break; // one-line required to match with -g
             if (trainers[i].opponentIDs[j] == opponentId)
                 return i;
         }
@@ -1354,7 +1355,7 @@ bool8 IsFirstTrainerIdReadyForRematch(const struct TrainerEyeTrainer *trainers, 
 {
     s32 trainerEyeIndex = FirstBattleTrainerIdToRematchTableId(trainers, opponentId);
 
-    if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
+    if (trainerEyeIndex != -1 && trainerEyeIndex < MAX_REMATCH_ENTRIES && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
     else
         return FALSE;
@@ -1364,7 +1365,7 @@ bool8 GetTrainerEyeRematchFlag(const struct TrainerEyeTrainer *trainers, u16 opp
 {
     s32 trainerEyeIndex = TrainerIdToRematchTableId(trainers, opponentId);
 
-    if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
+    if (trainerEyeIndex != -1 && trainerEyeIndex < MAX_REMATCH_ENTRIES && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
     else
         return FALSE;

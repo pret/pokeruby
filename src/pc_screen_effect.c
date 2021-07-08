@@ -227,8 +227,8 @@ static void sub_80C6078(void)
 
 static void sub_80C60CC(struct Sprite *sprite)
 {
-    sprite->pos1.x += sprite->data[0];
-    if (sprite->pos1.x < -0x08 || sprite->pos1.x > 0xf8)
+    sprite->x += sprite->data[0];
+    if (sprite->x < -0x08 || sprite->x > 0xf8)
     {
         DestroySprite(sprite);
         gUnknown_020387EC->unk0A++;
@@ -246,23 +246,23 @@ static void sub_80C6130(struct Sprite *sprite)
 {
     if (sprite->data[4] == 0 && gUnknown_020387EC->unk0C == 1)
     {
-        sprite->pos1.x += sprite->data[0];
-        if (sprite->pos1.x > -0x10 && sprite->pos1.x < 0x100)
+        sprite->x += sprite->data[0];
+        if (sprite->x > -0x10 && sprite->x < 0x100)
             sprite->invisible = FALSE;
         if (sprite->data[1] > 0)
         {
-            if (sprite->pos1.x >= sprite->data[2])
+            if (sprite->x >= sprite->data[2])
                 sprite->data[4] = 1;
         }
         else
         {
-            if (sprite->pos1.x <= sprite->data[2])
+            if (sprite->x <= sprite->data[2])
                 sprite->data[4] = 1;
         }
         if (sprite->data[4])
         {
             gUnknown_020387EC->unk0A++;
-            sprite->pos1.x = sprite->data[2];
+            sprite->x = sprite->data[2];
         }
     }
 }

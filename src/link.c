@@ -406,7 +406,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & A_BUTTON)
         gShouldAdvanceLinkState = 1;
     if (gMain.heldKeys & B_BUTTON)
-        InitBlockSend(ewram4000, 0x2004);
+        InitBlockSend(gSharedMem + 0x4000, 0x2004);
     if (gMain.newKeys & L_BUTTON)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
     if (gMain.newKeys & START_BUTTON)
@@ -414,7 +414,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & R_BUTTON)
         Save_WriteData(SAVE_LINK);
     if (gMain.newKeys & SELECT_BUTTON)
-        sub_800832C();
+        SetCloseLinkCallback();
     if (gLinkTestDebugValuesEnabled)
     {
         u32 vblankCounter1 = gMain.vblankCounter1;
@@ -1145,7 +1145,7 @@ u8 GetDummy2(void)
     return sDummy2;
 }
 
-void sub_800832C(void)
+void SetCloseLinkCallback(void)
 {
     if (!gLinkCallback)
     {

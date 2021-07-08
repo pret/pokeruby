@@ -18,7 +18,7 @@ struct Shared1000
     u16 *unk4;
     u8 unk8;
     u8 unk9;
-    u8 unkA;  // length of unkC array
+    u8 unkA;  // length of contestant array
     u8 unkB;  // reporter talked to (Gabby or Ty)
     u16 unkC[9];
     void (*unk20)(void);

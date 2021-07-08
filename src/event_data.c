@@ -62,9 +62,9 @@ void EnableNationalPokedex(void)
     gSaveBlock2.pokedex.nationalMagic = 0xDA;
     *nationalDexVar = 0x302;
     FlagSet(FLAG_SYS_NATIONAL_DEX);
-    gSaveBlock2.pokedex.unknown1 = 1;
+    gSaveBlock2.pokedex.mode = 1;
     gSaveBlock2.pokedex.order = 0;
-    sub_808C0A0();
+    ResetPokedexScrollPositions();
 }
 
 bool32 IsNationalPokedexEnabled(void)

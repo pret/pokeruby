@@ -160,36 +160,36 @@ void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = 1;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 53;
-            sprite->pos1.y = 68;
+            sprite->x = 53;
+            sprite->y = 68;
             break;
         case 2:
             sprite->invisible = FALSE;
             sprite->animNum = 1;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 86;
-            sprite->pos1.y = 68;
+            sprite->x = 86;
+            sprite->y = 68;
             break;
         case 3:
             sprite->invisible = FALSE;
             sprite->animNum = 1;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 107;
-            sprite->pos1.y = 68;
+            sprite->x = 107;
+            sprite->y = 68;
             break;
         case 4:
             sprite->invisible = FALSE;
             sprite->animNum = 1;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 128;
-            sprite->pos1.y = 68;
+            sprite->x = 128;
+            sprite->y = 68;
             break;
         case 5:
             sprite->invisible = FALSE;
             sprite->animNum = 2;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 155;
-            sprite->pos1.y = 80;
+            sprite->x = 155;
+            sprite->y = 80;
             break;
         case 6:
             DestroySprite(sprite);
@@ -210,29 +210,29 @@ void SpriteCB_ResetRtcCusor1(struct Sprite *sprite)
             sprite->invisible = FALSE;
             sprite->animNum = 0;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 53;
-            sprite->pos1.y = 92;
+            sprite->x = 53;
+            sprite->y = 92;
             break;
         case 2:
             sprite->invisible = FALSE;
             sprite->animNum = 0;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 86;
-            sprite->pos1.y = 92;
+            sprite->x = 86;
+            sprite->y = 92;
             break;
         case 3:
             sprite->invisible = FALSE;
             sprite->animNum = 0;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 107;
-            sprite->pos1.y = 92;
+            sprite->x = 107;
+            sprite->y = 92;
             break;
         case 4:
             sprite->invisible = FALSE;
             sprite->animNum = 0;
             sprite->animDelayCounter = 0;
-            sprite->pos1.x = 128;
-            sprite->pos1.y = 92;
+            sprite->x = 128;
+            sprite->y = 92;
             break;
         case 5:
             sprite->invisible = TRUE;

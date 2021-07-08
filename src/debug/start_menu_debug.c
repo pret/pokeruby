@@ -905,7 +905,7 @@ u8 DebugMenu_OpenWatanabe(void)
 u8 DebugMenu_EndSequenceDemo(void)
 {
     CloseMenu();
-    SetMainCallback2(sub_81439D0);
+    SetMainCallback2(CB2_StartCreditsSequence);
     ScriptContext2_Enable();
     return TRUE;
 }
@@ -1015,7 +1015,7 @@ u8 DebugMenu_NationalDex(void)
         GetSetPokedexFlag(i + 1, 2);
         GetSetPokedexFlag(i + 1, 3);
     }
-    gUnknown_03005CE8 = TRUE;
+    gUnusedPokedexU8 = TRUE;
     CloseMenu();
     return TRUE;
 }
@@ -1030,7 +1030,7 @@ u8 DebugMenu_HoennDex(void)
         GetSetPokedexFlag(nati, 2);
         GetSetPokedexFlag(nati, 3);
     }
-    gUnknown_03005CE8 = TRUE;
+    gUnusedPokedexU8 = TRUE;
     CloseMenu();
     return TRUE;
 }
@@ -2417,8 +2417,7 @@ void DebugMenu_8078B94(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1.pokeblocks); i++)
     {
-        if (gUnknown_Debug_839C444[i].color == 0)
-            break;
+        if (gUnknown_Debug_839C444[i].color == 0) break;
         gSaveBlock1.pokeblocks[i] = gUnknown_Debug_839C444[i];
     }
 }
@@ -2589,10 +2588,10 @@ void DebugMenu_8078E68(u8 a0, u8 * a1, u32 a2)
 }
 
 struct GameTimeDebugMenuStruct {
-    u16 unk0;
-    u16 unk2;
-    u8 unk4;
-    u8 unk5;
+    u16 totalPoints;
+    u16 excitementAppealBonus;
+    u8 round1Points;
+    u8 contestant;
 };
 
 const struct GameTimeDebugMenuStruct gUnknown_Debug_839C5F4[] = {
@@ -2604,7 +2603,7 @@ const struct GameTimeDebugMenuStruct gUnknown_Debug_839C5F4[] = {
 void DebugMenu_8078E80(s16 * a0)
 {
     Menu_BlankWindowRect(2, 15, 22, 16);
-    sub_8071F60(0xd0, gUnknown_Debug_839C5F4[*a0].unk4, 15);
+    sub_8071F60(0xd0, gUnknown_Debug_839C5F4[*a0].round1Points, 15);
 }
 
 void DebugMenu_8078EB0(s16 * a0)
@@ -2669,7 +2668,7 @@ void DebugMenu_8078F68(u8 taskId)
     else
     {
         const struct GameTimeDebugMenuStruct *r2 = gUnknown_Debug_839C5F4 + data[0];
-        if (DebugMenu_8077DD8(data + r2->unk5, r2->unk0, r2->unk2, gMain.newAndRepeatedKeys) == TRUE)
+        if (DebugMenu_8077DD8(data + r2->contestant, r2->totalPoints, r2->excitementAppealBonus, gMain.newAndRepeatedKeys) == TRUE)
             DebugMenu_8078EB0(data);
     }
 }

@@ -5,8 +5,6 @@
 #include "text.h"
 #include "ewram.h"
 
-#define WRAM ewram_addr // using gSharedMem doesn't match
-
 void LZDecompressWram(const void *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
@@ -21,8 +19,8 @@ void LoadCompressedObjectPic(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
 
-    LZ77UnCompWram(src->data, (void *)WRAM);
-    dest.data = (void *)WRAM;
+    LZ77UnCompWram(src->data, (void *)EWRAM);
+    dest.data = (void *)EWRAM;
     dest.size = src->size;
     dest.tag = src->tag;
     LoadSpriteSheet(&dest);
@@ -43,8 +41,8 @@ void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src)
 {
     struct SpritePalette dest;
 
-    LZ77UnCompWram(src->data, (void *)WRAM);
-    dest.data = (void *)WRAM;
+    LZ77UnCompWram(src->data, (void *)EWRAM);
+    dest.data = (void *)EWRAM;
     dest.tag = src->tag;
     LoadSpritePalette(&dest);
 }
@@ -67,20 +65,22 @@ void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, u8 coords
         LZ77UnCompWram(src->data, dest);
 }
 
-void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coords, u32 y_offset, u32 d, void *dest, s32 species, u32 pid)
+void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coords, u32 y_offset,
+    void *decompBuf, void *dest, s32 species, u32 pid)
 {
     u32 frontOrBack;
 
-    // gUnknown_081FAF4C appears to be a list of pointers to locations to store poke pics for back and front pic here. the first and third pointers are used for back while the others are used for front.
-    if (dest == gUnknown_081FAF4C[0] || dest == gUnknown_081FAF4C[2])
+    // gMonSpriteGfx_Sprite_ptr appears to be a list of pointers to locations to store poke pics for back and front pic here. the first and third pointers are used for back while the others are used for front.
+    if (dest == gMonSpriteGfx_Sprite_ptr[0] || dest == gMonSpriteGfx_Sprite_ptr[2])
         frontOrBack = 0; // backPic
     else
         frontOrBack = 1; // frontPic
 
-    LoadSpecialPokePic(src, coords, y_offset, d, dest, species, pid, frontOrBack);
+    LoadSpecialPokePic(src, coords, y_offset, decompBuf, dest, species, pid, frontOrBack);
 }
 
-void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 pid, u32 frontOrBack)
+void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c,
+    void *decompBuffer, void *dest, s32 species, u32 pid, u32 frontOrBack)
 {
     u8 frontOrBack8 = frontOrBack;
 

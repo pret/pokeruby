@@ -43,13 +43,13 @@ void sub_80CDF0C(struct Sprite* sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[2];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[1];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[2];
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[2];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[1];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[2];
     }
 
     sprite->data[0] = 0;
@@ -62,10 +62,10 @@ static void sub_80CDF70(struct Sprite* sprite)
     if (++sprite->data[0] > sprite->data[1])
     {
         sprite->data[0] = 0;
-        sprite->pos1.y--;
+        sprite->y--;
     }
 
-    sprite->pos1.y -= sprite->data[0];
+    sprite->y -= sprite->data[0];
     if (sprite->animEnded)
         DestroyAnimSprite(sprite);
 }

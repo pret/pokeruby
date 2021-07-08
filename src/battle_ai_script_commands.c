@@ -957,8 +957,8 @@ static void BattleAICmd_is_most_powerful_move(void)
         && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        eDynamicMoveType = 0;
-        eDmgMultiplier = 1;
+        gBattleStruct->dynamicMoveType = 0;
+        gBattleStruct->dmgMultiplier = 1;
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
 
@@ -1758,7 +1758,7 @@ static void BattleAICmd_get_used_item(void)
     else
         index = gBattlerTarget;
 
-    AI_THINKING_STRUCT->funcResult = AI_ARRAY_160CC(index);
+    AI_THINKING_STRUCT->funcResult = gSharedMem[offsetof(struct BattleStruct, usedHeldItems) + 2 * index];
 
     gAIScriptPtr += 2;
 }

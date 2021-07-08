@@ -33,8 +33,8 @@ void sub_80CCD24(struct Sprite* sprite)
         gBattleAnimArgs[1] += 8;
     }
 
-    sprite->pos1.x = sub_8077EE4(gBattleAnimAttacker, 0) + gBattleAnimArgs[0];
-    sprite->pos1.y = sub_8077EE4(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
+    sprite->x = sub_8077EE4(gBattleAnimAttacker, 0) + gBattleAnimArgs[0];
+    sprite->y = sub_8077EE4(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
     if (GetBattlerSide(gBattleAnimAttacker) == 0 || IsContest())
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker) + 1;
     else
@@ -53,7 +53,7 @@ static void sub_80CCE0C(struct Sprite* sprite)
     int a;
     int i;
     sprite->data[5] += 0x60;
-    sprite->pos2.x = -(sprite->data[5] >> 8);
+    sprite->x2 = -(sprite->data[5] >> 8);
     sprite->data[1]++;
     if (sprite->data[1] > 1)
     {

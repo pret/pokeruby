@@ -53,8 +53,8 @@ const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
 // arg 1: initial wave offset
 void AnimOrbitFast(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->affineAnimPaused = 1;
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
@@ -70,8 +70,8 @@ static void AnimOrbitFastStep(struct Sprite* sprite)
     else
         sprite->subpriority = sprite->data[7] - 1;
 
-    sprite->pos2.x = Sin(sprite->data[1], sprite->data[2] >> 8);
-    sprite->pos2.y = Cos(sprite->data[1], sprite->data[3] >> 8);
+    sprite->x2 = Sin(sprite->data[1], sprite->data[2] >> 8);
+    sprite->y2 = Cos(sprite->data[1], sprite->data[3] >> 8);
     sprite->data[1] = (sprite->data[1] + 9) & 0xFF;
     switch (sprite->data[5])
     {
@@ -104,8 +104,8 @@ static void AnimOrbitFastStep(struct Sprite* sprite)
 // arg 0: initial wave offset
 void AnimOrbitScatter(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
     sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
     sprite->callback = AnimOrbitScatterStep;
@@ -113,8 +113,8 @@ void AnimOrbitScatter(struct Sprite* sprite)
 
 static void AnimOrbitScatterStep(struct Sprite* sprite)
 {
-    sprite->pos2.x += sprite->data[0];
-    sprite->pos2.y += sprite->data[1];
-    if (sprite->pos1.x + sprite->pos2.x + 16 > 0x110u || sprite->pos1.y + sprite->pos2.y > 0xA0 || sprite->pos1.y + sprite->pos2.y < -16)
+    sprite->x2 += sprite->data[0];
+    sprite->y2 += sprite->data[1];
+    if (sprite->x + sprite->x2 + 16 > 0x110u || sprite->y + sprite->y2 > 0xA0 || sprite->y + sprite->y2 < -16)
         DestroyAnimSprite(sprite);
 }

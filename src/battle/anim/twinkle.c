@@ -41,8 +41,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FF8 =
 
 void sub_80CE36C(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
-    sprite->pos1.y = gBattleAnimArgs[1];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
+    sprite->y = gBattleAnimArgs[1];
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
@@ -58,7 +58,7 @@ static void sub_80CE3B0(struct Sprite* sprite)
         sprite->data[1] = 0;
         if (sprite->data[2] <= 0x77)
         {
-            sprite->pos1.y++;
+            sprite->y++;
             sprite->data[2]++;
         }
     }

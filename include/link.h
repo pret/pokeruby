@@ -185,7 +185,7 @@ void sub_800826C(void);
 void sub_80082EC(void);
 u8 GetLinkPlayerCount_2(void);
 bool8 IsLinkMaster(void);
-void sub_800832C(void);
+void SetCloseLinkCallback(void);
 void sub_8008480(void);
 void sub_80084A4(void);
 void CB2_LinkError(void);

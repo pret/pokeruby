@@ -60,7 +60,7 @@ void sub_80CD140(struct Sprite* sprite)
         sub_8078650(sprite);
 
     sub_807867C(sprite, gBattleAnimArgs[0]);
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[5];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
@@ -78,21 +78,21 @@ void sub_80CD190(struct Sprite* sprite)
 
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
     {
-        SetAverageBattlerPositions(bank, gBattleAnimArgs[6], &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(bank, gBattleAnimArgs[6], &sprite->x, &sprite->y);
         sub_807867C(sprite, gBattleAnimArgs[0]);
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->y += gBattleAnimArgs[1];
     }
     else
     {
         if (!gBattleAnimArgs[6])
         {
-            sprite->pos1.x = GetBattlerSpriteCoord(bank, 0);
-            sprite->pos1.y = GetBattlerSpriteCoord(bank, 1) + gBattleAnimArgs[1];
+            sprite->x = GetBattlerSpriteCoord(bank, 0);
+            sprite->y = GetBattlerSpriteCoord(bank, 1) + gBattleAnimArgs[1];
         }
         else
         {
-            sprite->pos1.x = GetBattlerSpriteCoord(bank, 2);
-            sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[1];
+            sprite->x = GetBattlerSpriteCoord(bank, 2);
+            sprite->y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[1];
         }
 
         sub_807867C(sprite, gBattleAnimArgs[0]);

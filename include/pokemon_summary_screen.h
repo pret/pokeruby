@@ -13,7 +13,7 @@ enum PokemonSummaryScreenMode
     PSS_MODE_NORMAL,
     PSS_MODE_MOVES_ONLY,
     PSS_MODE_SELECT_MOVE,
-    PSS_MODE_UNKNOWN, // TODO: this mode might be used by pokemon_storage_system
+    PSS_MODE_MOVE_DELETER, // TODO: this mode might be used by pokemon_storage_system
     PSS_MODE_NO_MOVE_ORDER_EDIT,
     PSS_MODE_PC_NORMAL,
     PSS_MODE_PC_MOVES_ONLY,

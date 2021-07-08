@@ -66,18 +66,18 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9874 =
 
 void sub_80D6294(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
     if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
-        sprite->pos1.y -= gBattleAnimArgs[1];
+        sprite->x -= gBattleAnimArgs[0];
+        sprite->y -= gBattleAnimArgs[1];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
     }
 
     sprite->data[0] = 0;
@@ -128,17 +128,17 @@ void sub_80D6328(struct Sprite *sprite)
 
     if (gBattleAnimArgs[5] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(slot, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(slot, 1);
+        sprite->x = GetBattlerSpriteCoord(slot, 0);
+        sprite->y = GetBattlerSpriteCoord(slot, 1);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(slot, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(slot, 3);
+        sprite->x = GetBattlerSpriteCoord(slot, 2);
+        sprite->y = GetBattlerSpriteCoord(slot, 3);
     }
 
-    sprite->pos2.x = (gSineTable[gBattleAnimArgs[0]] * gBattleAnimArgs[1]) >> 8;
-    sprite->pos2.y = (gSineTable[gBattleAnimArgs[0] + 64] * gBattleAnimArgs[1]) >> 8;
+    sprite->x2 = (gSineTable[gBattleAnimArgs[0]] * gBattleAnimArgs[1]) >> 8;
+    sprite->y2 = (gSineTable[gBattleAnimArgs[0] + 64] * gBattleAnimArgs[1]) >> 8;
 
     if (gBattleAnimArgs[6] & 1)
     {

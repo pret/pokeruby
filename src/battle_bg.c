@@ -19,7 +19,7 @@
 extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;
 
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 
 extern u8 BattleText_Win[];
 extern u8 BattleText_Loss[];
@@ -247,9 +247,9 @@ void sub_800D6D4(void)
 void ApplyPlayerChosenFrameToBattleMenu(void)
 {
     TextWindow_SetBaseTileNum(0x12);
-    TextWindow_LoadStdFrameGraphicsOverridePal(&gUnknown_03004210, 1);
+    TextWindow_LoadStdFrameGraphicsOverridePal(&gWindowTemplate_Contest_MoveDescription, 1);
     TextWindow_SetBaseTileNum(0x22);
-    TextWindow_LoadStdFrameGraphicsOverridePal(&gUnknown_03004210, 1);
+    TextWindow_LoadStdFrameGraphicsOverridePal(&gWindowTemplate_Contest_MoveDescription, 1);
     gPlttBufferUnfaded[92] = 0x7fe0;
     gPlttBufferUnfaded[93] = 0x2529;
     gPlttBufferUnfaded[94] = 0x7fff;
@@ -416,7 +416,7 @@ static void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
         }
         CpuSet(src, dest, 3);
     } else {
-        if (windowId == gBattleStruct->linkPlayerIndex) {
+        if (windowId == gBattleStruct->multiplayerId) {
             r4 = gTasks[taskId].data[3];
         } else {
             r4 = gTasks[taskId].data[4];
@@ -444,8 +444,8 @@ static void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
 
 #define PRINT_MESSAGE(text, tileDataStartOffset, x)                             \
 {                                                                               \
-    Text_InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
-    Text_PrintWindow8002F44(&gUnknown_03004210);                                            \
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, text, tileDataStartOffset, x, MESSAGE_Y);    \
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);                                            \
 }
 
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
@@ -468,7 +468,7 @@ static void PrintLinkBattleWinLossTie(void)
         {
 
             // id = player position?
-            switch (gLinkPlayers[gBattleStruct->linkPlayerIndex].id)
+            switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 0:
             case 2:
@@ -486,7 +486,7 @@ static void PrintLinkBattleWinLossTie(void)
         else
         {
 
-            switch (gLinkPlayers[gBattleStruct->linkPlayerIndex].id)
+            switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 1:
             case 3:
@@ -508,7 +508,7 @@ static void PrintLinkBattleWinLossTie(void)
 
     if (gBattleOutcome == 1)
     {
-        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id != 0)
+        if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
             PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN);
             PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS);
@@ -521,7 +521,7 @@ static void PrintLinkBattleWinLossTie(void)
     }
     else
     {
-        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].id != 0)
+        if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
             PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);
@@ -535,7 +535,7 @@ static void PrintLinkBattleWinLossTie(void)
 }
 
 
-void sub_800DE30(u8 taskId)
+void InitLinkBattleVsScreen(u8 taskId)
 {
     u8 palette;
     int i;
@@ -559,11 +559,11 @@ void sub_800DE30(u8 taskId)
         } else {
             u8 windowId = 4;
 
-            u8 playerId = gBattleStruct->linkPlayerIndex;
-            u8 opponentId = gBattleStruct->linkPlayerIndex ^ 1;
+            u8 playerId = gBattleStruct->multiplayerId;
+            u8 opponentId = gBattleStruct->multiplayerId ^ 1;
             if (gLinkPlayers[playerId].id) {
-                opponentId = gBattleStruct->linkPlayerIndex;
-                playerId = gBattleStruct->linkPlayerIndex ^ 1;
+                opponentId = gBattleStruct->multiplayerId;
+                playerId = gBattleStruct->multiplayerId ^ 1;
             }
 
             Text_InitWindow8002E4C(
@@ -592,10 +592,10 @@ void sub_800DE30(u8 taskId)
     case 1:
         palette = AllocSpritePalette(10000);
         gPlttBufferUnfaded[palette * 16 + 0x10f] = gPlttBufferFaded[palette * 16 + 0x10f] = 0x7fff;
-        gBattleStruct->unk1608A = CreateSprite(&gSpriteTemplate_81F9574, 108, 80, 0);
-        gBattleStruct->unk1608B = CreateSprite(&gSpriteTemplate_81F958C, 132, 80, 0);
-        gSprites[gBattleStruct->unk1608A].invisible = TRUE;
-        gSprites[gBattleStruct->unk1608B].invisible = TRUE;
+        gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&gSpriteTemplate_81F9574, 108, 80, 0);
+        gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&gSpriteTemplate_81F958C, 132, 80, 0);
+        gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;
+        gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
 
@@ -620,15 +620,15 @@ void sub_800DE30(u8 taskId)
             }
             PlaySE(SE_M_HARDEN);
             DestroyTask(taskId);
-            gSprites[gBattleStruct->unk1608A].invisible = FALSE;
-            gSprites[gBattleStruct->unk1608B].invisible = FALSE;
-            gSprites[gBattleStruct->unk1608B].oam.tileNum += 0x40;
-            gSprites[gBattleStruct->unk1608A].data[0] = 0;
-            gSprites[gBattleStruct->unk1608B].data[0] = 1;
-            gSprites[gBattleStruct->unk1608A].data[1] = gSprites[gBattleStruct->unk1608A].pos1.x;
-            gSprites[gBattleStruct->unk1608B].data[1] = gSprites[gBattleStruct->unk1608B].pos1.x;
-            gSprites[gBattleStruct->unk1608A].data[2] = 0;
-            gSprites[gBattleStruct->unk1608B].data[2] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = FALSE;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = FALSE;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.tileNum += 0x40;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[0] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[0] = 1;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_V].x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_S].x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[2] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[2] = 0;
         }
         break;
     }

@@ -1488,7 +1488,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
     else
     {
         for (i = 0; i < 4; i++)
-            gAnimSpeciesByBanks[i] = EWRAM_19348[0];
+            gAnimSpeciesByBanks[i] = gContestResources__moveAnim.species;
     }
 
     if (isMoveAnim == 0)
@@ -1847,8 +1847,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+        gTasks[taskId].data[2] = gSprites[spriteId].y + gSprites[spriteId].y2;
         if (toBG_2 == 0)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -1878,8 +1878,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[0] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+        gTasks[taskId].data[2] = gSprites[spriteId].y + gSprites[spriteId].y2;
         if (toBG_2 == 0)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -1912,7 +1912,7 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!(EWRAM_17800[bank].unk0 & 1) || !gSprites[gBattlerSpriteIds[bank]].invisible)
+    if (!gBattleSpriteInfo[bank].invisible || !gSprites[gBattlerSpriteIds[bank]].invisible)
         return TRUE;
 
     return FALSE;
@@ -1925,37 +1925,37 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
     if (toBG_2 == 0)
     {
         volatile u8 pointlessZero;
-        struct UnknownStruct2 s;
+        struct Struct_sub_8078914 s;
         u8 r2;
 
         sub_8078914(&s);
-        DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
+        DmaFill32Large(3, 0, s.field_0, 0x2000, 0x1000);
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
-        DmaFill16Defvars(3, 0xFF, (void *)s.unk4, 0x1000);
+        DmaFill16Defvars(3, 0xFF, (void *)s.field_4, 0x1000);
 
         REG_BG1CNT_BITFIELD.priority = 2;
         REG_BG1CNT_BITFIELD.screenSize = 1;
         REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
 
         spriteId = gBattlerSpriteIds[bank];
-        gBattle_BG1_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
-        if (IsContest() && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
+        gBattle_BG1_X = -(gSprites[spriteId].x + gSprites[spriteId].x2) + 32;
+        if (IsContest() && IsSpeciesNotUnown(gContestResources__moveAnim.species) != 0)
             gBattle_BG1_X--;
-        gBattle_BG1_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
+        gBattle_BG1_Y = -(gSprites[spriteId].y + gSprites[spriteId].y2) + 32;
         gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
 
         REG_BG1HOFS = gBattle_BG1_X;
         REG_BG1VOFS = gBattle_BG1_Y;
 
-        LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, s.unk8 * 16, 32);
-        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (u16 *)PLTT + s.unk8 * 16, 32);
+        LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, s.field_8 * 16, 32);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (u16 *)PLTT + s.field_8 * 16, 32);
 
         if (IsContest())
             r2 = 0;
         else
             r2 = GetBattlerPosition(bank);
-        sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
+        sub_80E4EF8(0, 0, r2, s.field_8, (u32)s.field_0, (((s32)s.field_4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
         if (IsContest())
             sub_8076380();
     }
@@ -1973,8 +1973,8 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
 
         spriteId = gBattlerSpriteIds[bank];
-        gBattle_BG2_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
-        gBattle_BG2_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
+        gBattle_BG2_X = -(gSprites[spriteId].x + gSprites[spriteId].x2) + 32;
+        gBattle_BG2_Y = -(gSprites[spriteId].y + gSprites[spriteId].y2) + 32;
         gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
 
         REG_BG2HOFS = gBattle_BG2_X;
@@ -1991,13 +1991,13 @@ static void sub_8076380(void)
 {
     int i;
     int j;
-    struct UnknownStruct2 s;
+    struct Struct_sub_8078914 s;
     u16 *ptr;
 
-    if (IsSpeciesNotUnown(EWRAM_19348[0]))
+    if (IsSpeciesNotUnown(gContestResources__moveAnim.species))
     {
         sub_8078914(&s);
-        ptr = s.unk4;
+        ptr = (u16 *)s.field_4;
         for (i = 0; i < 8; i++)
         {
             for (j = 0; j < 4; j++)
@@ -2037,15 +2037,15 @@ void sub_80763FC(u16 a, u16 *b, u32 c, u8 d)
 void sub_8076464(u8 a)
 {
     volatile u8 pointlessZero;
-    struct UnknownStruct2 s;
+    struct Struct_sub_8078914 s;
 
     sub_8078914(&s);
     if (a == 0 || IsContest())
     {
-        DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
+        DmaFill32Large(3, 0, s.field_0, 0x2000, 0x1000);
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
         pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
-        DmaFill32Defvars(3, 0, s.unk4, 0x800);
+        DmaFill32Defvars(3, 0, s.field_4, 0x800);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
     }
@@ -2064,19 +2064,19 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 {
     u8 spriteId, palIndex;
     s16 x, y;
-    struct UnknownStruct2 s;
+    struct Struct_sub_8078914 s;
 
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
     sub_8078914(&s);
-    x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
-    y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
+    x = gTasks[taskId].data[1] - (gSprites[spriteId].x + gSprites[spriteId].x2);
+    y = gTasks[taskId].data[2] - (gSprites[spriteId].y + gSprites[spriteId].y2);
 
     if (gTasks[taskId].data[5] == 0)
     {
         gBattle_BG1_X = x + gTasks[taskId].data[3];
         gBattle_BG1_Y = y + gTasks[taskId].data[4];
-        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 + s.unk8 * 16 - 256, 32);
+        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 + s.field_8 * 16 - 256, 32);
     }
     else
     {
@@ -2451,9 +2451,9 @@ static void LoadMoveBg(u16 bgId)
     {
         void *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
 
-        LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
-        sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
-        DmaCopy32Defvars(3, IsContest() ? EWRAM_14800 : EWRAM_18000, (void *)(VRAM + 0xD000), 0x800);
+        LZDecompressWram(tilemap, IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle);
+        sub_80763FC(sub_80789BC(), IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle, 0x100, 0);
+        DmaCopy32Defvars(3, IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle, (void *)(VRAM + 0xD000), 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80789BC() * 16, 32);
     }
@@ -2526,7 +2526,7 @@ static void ScriptCmd_changebg(void)
 
 s8 BattleAnimAdjustPanning(s8 pan)
 {
-    if (!IsContest() && (EWRAM_17810[gBattleAnimAttacker].unk0 & 0x10))
+    if (!IsContest() && ewram17810[gBattleAnimAttacker].unk0_4)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;
@@ -2568,7 +2568,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
 
 s8 BattleAnimAdjustPanning2(s8 pan)
 {
-    if (!IsContest() && (EWRAM_17810[gBattleAnimAttacker].unk0 & 0x10))
+    if (!IsContest() && ewram17810[gBattleAnimAttacker].unk0_4)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;

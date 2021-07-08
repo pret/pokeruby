@@ -141,6 +141,10 @@
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
 
+#define MIN_STAT_STAGE     0
+#define DEFAULT_STAT_STAGE 6
+#define MAX_STAT_STAGE    12
+
 #define PLAYER_HAS_TWO_USABLE_MONS     0
 #define PLAYER_HAS_ONE_MON             1
 #define PLAYER_HAS_ONE_USABLE_MON      2

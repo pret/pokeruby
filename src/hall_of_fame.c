@@ -23,13 +23,13 @@
 #include "pc_screen_effect.h"
 #include "ewram.h"
 
-static EWRAM_DATA u32 sUnknown_0203931C = 0;
+static EWRAM_DATA u32 sHofFadePalettes = 0;
 
-extern bool8 gUnknown_02039324; // has hall of fame records
+extern bool8 gHasHallOfFameRecords; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gReservedSpritePaletteCount;
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 
 extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
@@ -54,7 +54,7 @@ struct HallofFameMons
 
 static void sub_8141FF8(u8 taskID);
 static void sub_81422E8(u8 taskID);
-static void sub_814217C(u8 taskID);
+static void Task_Hof_InitTeamSaveData(u8 taskID);
 static void sub_8142274(u8 taskID);
 static void sub_81422B8(u8 taskID);
 static void sub_8142320(u8 taskID);
@@ -150,69 +150,69 @@ static const struct OamData sOamData_840B598 =
 
 void* const gUnknown_0840B5A0[] =
 {
-    ewram8000,
-    ewramA000,
-    ewramC000,
-    ewramE000,
-    ewram10000,
-    ewram14000,
-    ewram18000_2
+    eHofGfxPtr + 0x0000,
+    eHofGfxPtr + 0x2000,
+    eHofGfxPtr + 0x4000,
+    eHofGfxPtr + 0x6000,
+    eHofGfxPtr + 0x8000,
+    eHofGfxPtr + 0xC000,
+    eHofGfxPtr + 0x10000
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B5BC[] =
 {
-    {ewram8000, 0x800},
-    {ewram8800, 0x800},
-    {ewram9000, 0x800},
-    {ewram9800, 0x800}
+    {eHofGfxPtr + 0x0000, 0x800},
+    {eHofGfxPtr + 0x800, 0x800},
+    {eHofGfxPtr + 0x1000, 0x800},
+    {eHofGfxPtr + 0x1800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B5DC[] =
 {
-    {ewramA000, 0x800},
-    {ewramA800, 0x800},
-    {ewramB000, 0x800},
-    {ewramB800, 0x800}
+    {eHofGfxPtr + 0x2000, 0x800},
+    {eHofGfxPtr + 0x2800, 0x800},
+    {eHofGfxPtr + 0x3000, 0x800},
+    {eHofGfxPtr + 0x3800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B5FC[] =
 {
-    {ewramC000, 0x800},
-    {ewramC800, 0x800},
-    {ewramD000, 0x800},
-    {ewramD800, 0x800}
+    {eHofGfxPtr + 0x4000, 0x800},
+    {eHofGfxPtr + 0x4800, 0x800},
+    {eHofGfxPtr + 0x5000, 0x800},
+    {eHofGfxPtr + 0x5800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B61C[] =
 {
-    {ewramE000, 0x800},
-    {ewramE800, 0x800},
-    {ewramF000, 0x800},
-    {ewramF800, 0x800}
+    {eHofGfxPtr + 0x6000, 0x800},
+    {eHofGfxPtr + 0x6800, 0x800},
+    {eHofGfxPtr + 0x7000, 0x800},
+    {eHofGfxPtr + 0x7800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B63C[] =
 {
-    {ewram10000, 0x800},
-    {ewram10800, 0x800},
-    {ewram11000, 0x800},
-    {ewram11800, 0x800}
+    {eHofGfxPtr + 0x8000, 0x800},
+    {eHofGfxPtr + 0x8800, 0x800},
+    {eHofGfxPtr + 0x9000, 0x800},
+    {eHofGfxPtr + 0x9800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B65C[] =
 {
-    {ewram14000, 0x800},
-    {ewram14800, 0x800},
-    {ewram15000, 0x800},
-    {ewram15800, 0x800}
+    {eHofGfxPtr + 0xC000, 0x800},
+    {eHofGfxPtr + 0xC800, 0x800},
+    {eHofGfxPtr + 0xD000, 0x800},
+    {eHofGfxPtr + 0xD800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B67C[] =
 {
-    {ewram18000_2, 0x800},
-    {ewram18800, 0x800},
-    {ewram19000, 0x800},
-    {ewram19800, 0x800}
+    {eHofGfxPtr + 0x10000, 0x800},
+    {eHofGfxPtr + 0x10800, 0x800},
+    {eHofGfxPtr + 0x11000, 0x800},
+    {eHofGfxPtr + 0x11800, 0x800}
 };
 
 static const struct SpriteFrameImage* const sUnknown_0840B69C[7] =
@@ -480,7 +480,7 @@ static void sub_8141FC4(void)
 static void sub_8141FF8(u8 taskID)
 {
     u16 i, j;
-    struct HallofFameMons* fameMons = eHallOfFameMons1;
+    struct HallofFameMons* fameMons = eHofMonPtr;
 
     gTasks[taskID].tPokesNumber = 0; // valid pokes
     for (i = 0; i < 6; i++)
@@ -508,7 +508,7 @@ static void sub_8141FF8(u8 taskID)
             fameMons->mons[i].nick[0] = EOS;
         }
     }
-    sUnknown_0203931C = 0;
+    sHofFadePalettes = 0;
     gTasks[taskID].tDisplayedPoke = 0;
     gTasks[taskID].data[4] = 0xFF;
     for (i = 0; i < 6; i++)
@@ -518,19 +518,19 @@ static void sub_8141FF8(u8 taskID)
     if (gTasks[taskID].data[0])
         gTasks[taskID].func = sub_81422E8;
     else
-        gTasks[taskID].func = sub_814217C;
+        gTasks[taskID].func = Task_Hof_InitTeamSaveData;
 }
 
-static void sub_814217C(u8 taskID)
+static void Task_Hof_InitTeamSaveData(u8 taskID)
 {
     u16 i;
-    struct HallofFameMons* fameMons = eHallOfFameMons1;
-    struct HallofFameMons* lastSavedTeam = eHallOfFameMons2;
+    struct HallofFameMons* fameMons = eHofMonPtr;
+    struct HallofFameMons* lastSavedTeam = (struct HallofFameMons *)gDecompressionBuffer;
 
-    if (gUnknown_02039324 == FALSE)
+    if (gHasHallOfFameRecords == FALSE)
     {
         for (i = 0; i < 0x2000; i++)
-            ewram1E000(i) = 0;
+            gSharedMem[0x1E000 + i] = 0; // gDecompressionBuffer[i] = 0;
     }
     else
         Save_LoadGameData(SAVE_HALL_OF_FAME);
@@ -542,12 +542,12 @@ static void sub_814217C(u8 taskID)
     }
     if (i >= HALL_OF_FAME_MAX_TEAMS)
     {
-        struct HallofFameMons* r5 = eHallOfFameMons2;
-        struct HallofFameMons* r6 = eHallOfFameMons2;
-        r5++;
-        for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, r6++, r5++)
+        struct HallofFameMons *afterTeam = (struct HallofFameMons *)gDecompressionBuffer;
+        struct HallofFameMons *beforeTeam = (struct HallofFameMons *)gDecompressionBuffer;
+        afterTeam++;
+        for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, beforeTeam++, afterTeam++)
         {
-            *r6 = *r5;
+            *beforeTeam = *afterTeam;
         }
         lastSavedTeam--;
     }
@@ -586,7 +586,7 @@ static void sub_8142320(u8 taskID)
     u8 spriteID;
     s16 xPos, yPos, field4, field6;
 
-    struct HallofFameMons* fameMons = eHallOfFameMons1;
+    struct HallofFameMons* fameMons = eHofMonPtr;
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
@@ -617,7 +617,7 @@ static void sub_8142320(u8 taskID)
 
 static void sub_8142404(u8 taskID)
 {
-    struct HallofFameMons* fameMons = eHallOfFameMons1;
+    struct HallofFameMons* fameMons = eHofMonPtr;
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
@@ -633,7 +633,7 @@ static void sub_8142404(u8 taskID)
 
 static void sub_8142484(u8 taskID)
 {
-    struct HallofFameMons* fameMons = eHallOfFameMons1;
+    struct HallofFameMons* fameMons = eHofMonPtr;
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
@@ -641,11 +641,11 @@ static void sub_8142484(u8 taskID)
         gTasks[taskID].tFrameCount--;
     else
     {
-        sUnknown_0203931C |= (0x10000 << gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.paletteNum);
+        sHofFadePalettes |= (0x10000 << gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.paletteNum);
         if (gTasks[taskID].tDisplayedPoke <= 4 && currMon[1].species != 0) // there is another pokemon to display
         {
             gTasks[taskID].tDisplayedPoke++;
-            BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, RGB(31, 26, 28));
+            BeginNormalPaletteFade(sHofFadePalettes, 0, 12, 12, RGB(31, 26, 28));
             gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.priority = 1;
             gTasks[taskID].func = sub_8142320;
         }
@@ -687,7 +687,7 @@ static void sub_8142618(u8 taskID)
             if (gTasks[taskID].tMonSpriteID(i) != 0xFF)
                 gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 1;
         }
-        BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, RGB(31, 26, 28));
+        BeginNormalPaletteFade(sHofFadePalettes, 0, 12, 12, RGB(31, 26, 28));
         Menu_EraseWindowRect(0, 14, 29, 19);
         gTasks[taskID].tFrameCount = 7;
         gTasks[taskID].func = sub_81426F8;
@@ -722,8 +722,8 @@ static void sub_8142794(u8 taskID)
         gTasks[taskID].tFrameCount--;
     else
     {
-        if (gSprites[gTasks[taskID].tPlayerSpriteID].pos1.x != 160)
-            gSprites[gTasks[taskID].tPlayerSpriteID].pos1.x++;
+        if (gSprites[gTasks[taskID].tPlayerSpriteID].x != 160)
+            gSprites[gTasks[taskID].tPlayerSpriteID].x++;
         else
         {
             Menu_DrawStdWindowFrame(1, 2, 15, 9);
@@ -756,7 +756,7 @@ static void sub_81428A0(u8 taskID)
     if (!gPaletteFade.active)
     {
         DestroyTask(taskID);
-        SetMainCallback2(sub_81439D0);
+        SetMainCallback2(CB2_StartCreditsSequence);
     }
 }
 
@@ -836,7 +836,7 @@ static void sub_8142A28(u8 taskID)
         u16 *vram1, *vram2;
 
         u16 i;
-        struct HallofFameMons* savedTeams = eHallOfFameMons2;
+        struct HallofFameMons* savedTeams = (struct HallofFameMons *)gDecompressionBuffer;
         for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, savedTeams++)
         {
             if (savedTeams->mons[0].species == 0)
@@ -861,7 +861,7 @@ static void sub_8142A28(u8 taskID)
 
 static void sub_8142B04(u8 taskID)
 {
-    struct HallofFameMons* savedTeams = eHallOfFameMons2;
+    struct HallofFameMons* savedTeams = (struct HallofFameMons *)gDecompressionBuffer;
     struct HallofFameMon* currMon;
     u16 i;
     u8* stringPtr;
@@ -870,7 +870,7 @@ static void sub_8142B04(u8 taskID)
         savedTeams++;
 
     currMon = &savedTeams->mons[0];
-    sUnknown_0203931C = 0;
+    sHofFadePalettes = 0;
     gTasks[taskID].tCurrPokeID = 0;
     gTasks[taskID].tPokesNo = 0;
 
@@ -926,7 +926,7 @@ static void sub_8142B04(u8 taskID)
 
 static void sub_8142CC8(u8 taskID)
 {
-    struct HallofFameMons* savedTeams = eHallOfFameMons2;
+    struct HallofFameMons* savedTeams = (struct HallofFameMons *)gDecompressionBuffer;
     struct HallofFameMon* currMon;
     u16 i;
     u16 currMonID;
@@ -943,8 +943,8 @@ static void sub_8142CC8(u8 taskID)
 
     currMonID = gTasks[taskID].tMonSpriteID(gTasks[taskID].tCurrPokeID);
     gSprites[currMonID].oam.priority = 0;
-    sUnknown_0203931C = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
-    BlendPalettesUnfaded(sUnknown_0203931C, 12, RGB(31, 26, 28));
+    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
+    BlendPalettesUnfaded(sHofFadePalettes, 12, RGB(31, 26, 28));
 
     currMon = &savedTeams->mons[gTasks[taskID].tCurrPokeID];
     if (currMon->species != SPECIES_EGG)
@@ -1224,7 +1224,7 @@ static void sub_81433E0(void)
         *((u16*)(VRAM + 0x3000) + i) = 2;
     }
 
-    DmaFill16Large(3, 0, ewram0_6, 0x4000, 0x1000);
+    DmaFill16Large(3, 0, gSharedMem, 0x4000, 0x1000);
     ResetPaletteFade();
     LoadPalette(gHallOfFame_Pal, 0, 0x20);
 }
@@ -1251,19 +1251,17 @@ static void sub_81435B8(void)
 
 static void sub_81435DC(struct Sprite* sprite)
 {
-    u32 spritePos = *(u32*)(&sprite->pos1);
-    u32 dataPos = *(u32*)(&sprite->data[1]);
-    if (spritePos != dataPos)
+    if (sprite->x != sprite->data[1] || sprite->y != sprite->data[2])
     {
-        if (sprite->pos1.x < sprite->data[1])
-            sprite->pos1.x += 15;
-        if (sprite->pos1.x > sprite->data[1])
-            sprite->pos1.x -= 15;
+        if (sprite->x < sprite->data[1])
+            sprite->x += 15;
+        if (sprite->x > sprite->data[1])
+            sprite->x -= 15;
 
-        if (sprite->pos1.y < sprite->data[2])
-            sprite->pos1.y += 10;
-        if (sprite->pos1.y > sprite->data[2])
-            sprite->pos1.y -= 10;
+        if (sprite->y < sprite->data[2])
+            sprite->y += 10;
+        if (sprite->y > sprite->data[2])
+            sprite->y -= 10;
     }
     else
     {
@@ -1279,18 +1277,18 @@ static void SpriteCB_HallOfFame_Dummy(struct Sprite* sprite)
 
 void sub_8143648(u16 paletteTag, u8 animID)
 {
-    gUnknown_02024E8C = sUnknown_0840B6B8;
-    gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = sUnknown_0840B69C[animID];
-    gUnknown_02024E8C.anims = gSpriteAnimTable_81E7C64;
+    gCreatingSpriteTemplate = sUnknown_0840B6B8;
+    gCreatingSpriteTemplate.paletteTag = paletteTag;
+    gCreatingSpriteTemplate.images = sUnknown_0840B69C[animID];
+    gCreatingSpriteTemplate.anims = gSpriteAnimTable_81E7C64;
 }
 
 void sub_8143680(u16 paletteTag, u8 animID)
 {
-    gUnknown_02024E8C = sUnknown_0840B6B8;
-    gUnknown_02024E8C.paletteTag = paletteTag;
-    gUnknown_02024E8C.images = sUnknown_0840B69C[animID];
-    gUnknown_02024E8C.anims = gUnknown_081EC2A4[0];
+    gCreatingSpriteTemplate = sUnknown_0840B6B8;
+    gCreatingSpriteTemplate.paletteTag = paletteTag;
+    gCreatingSpriteTemplate.images = sUnknown_0840B69C[animID];
+    gCreatingSpriteTemplate.anims = gUnknown_081EC2A4[0];
 }
 
 static u32 HallOfFame_LoadPokemonPic(u16 species, s16 posX, s16 posY, u16 pokeID, u32 tid, u32 pid)
@@ -1298,13 +1296,13 @@ static u32 HallOfFame_LoadPokemonPic(u16 species, s16 posX, s16 posY, u16 pokeID
     u8 spriteID;
     const u8* pokePal;
 
-    LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, EWRAM, gUnknown_0840B5A0[pokeID], species, pid, 1);
+    LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (void *)EWRAM, gUnknown_0840B5A0[pokeID], species, pid, 1);
 
     pokePal = GetMonSpritePalFromOtIdPersonality(species, tid, pid);
     LoadCompressedPalette(pokePal, 16 * pokeID + 256, 0x20);
 
     sub_8143648(pokeID, pokeID);
-    spriteID = CreateSprite(&gUnknown_02024E8C, posX, posY, 10 - pokeID);
+    spriteID = CreateSprite(&gCreatingSpriteTemplate, posX, posY, 10 - pokeID);
     gSprites[spriteID].oam.paletteNum = pokeID;
     return spriteID;
 }
@@ -1318,7 +1316,7 @@ static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a
     LoadCompressedPalette(gTrainerFrontPicPaletteTable[trainerPicID].data, 16 * a3 + 256, 0x20);
     sub_8143680(a3, a3);
 
-    spriteID = CreateSprite(&gUnknown_02024E8C, posX, posY, 1);
+    spriteID = CreateSprite(&gCreatingSpriteTemplate, posX, posY, 1);
     gSprites[spriteID].oam.paletteNum = a3;
 
     return spriteID;
@@ -1326,19 +1324,19 @@ static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a
 
 static void sub_814386C(struct Sprite* sprite)
 {
-    if (sprite->pos2.y > 120)
+    if (sprite->y2 > 120)
         DestroySprite(sprite);
     else
     {
         u16 rand;
         u8 tableID;
 
-        sprite->pos2.y++;
-        sprite->pos2.y += sprite->data[1];
+        sprite->y2++;
+        sprite->y2 += sprite->data[1];
 
         tableID = sprite->data[0];
         rand = (Random() % 4) + 8;
-        sprite->pos2.x = rand * gSineTable[tableID] / 256;
+        sprite->x2 = rand * gSineTable[tableID] / 256;
 
         sprite->data[0] += 4;
     }

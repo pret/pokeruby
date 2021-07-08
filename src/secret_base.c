@@ -147,13 +147,13 @@ void ClearSecretBase(struct SecretBaseRecord *record)
         record->playerName[i] = 0xff;
     for (i = 0; i < 4; i++)
         record->trainerId[i] = 0x00;
-    record->sbr_field_e = 0;
-    record->sbr_field_10 = 0;
-    record->sbr_field_11 = 0;
-    record->sbr_field_1_0 = 0;
+    record->numSecretBasesReceived = 0;
+    record->numTimesEntered = 0;
+    record->unused = 0;
+    record->toRegister = 0;
     record->gender = 0;
-    record->sbr_field_1_5 = 0;
-    record->sbr_field_1_6 = 0;
+    record->battledOwnerToday = 0;
+    record->registryStatus = 0;
     for (i = 0; i < 16; i++)
     {
         record->decorations[i] = 0;
@@ -162,12 +162,12 @@ void ClearSecretBase(struct SecretBaseRecord *record)
     for (i = 0; i < 6; i++)
     {
         for (j = 0; j < 4; j++)
-            record->partyMoves[i * 4 + j] = 0;
-        record->partyPersonality[i] = 0;
-        record->partyEVs[i] = 0;
-        record->partySpecies[i] = 0;
-        record->partyHeldItems[i] = 0;
-        record->partyLevels[i] = 0;
+            record->party.moves[i * 4 + j] = 0;
+        record->party.personality[i] = 0;
+        record->party.EVs[i] = 0;
+        record->party.species[i] = 0;
+        record->party.heldItems[i] = 0;
+        record->party.levels[i] = 0;
     }
 }
 
@@ -373,8 +373,8 @@ void sub_80BBA48(u8 taskid)
         break;
     case 2:
         curbaseid = VarGet(VAR_CURRENT_SECRET_BASE);
-        if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
-            gSaveBlock1.secretBases[curbaseid].sbr_field_10++;
+        if (gSaveBlock1.secretBases[curbaseid].numTimesEntered < 0xff)
+            gSaveBlock1.secretBases[curbaseid].numTimesEntered++;
         sub_80BBA14();
         WarpIntoMap();
         gFieldCallback = sub_8080990;
@@ -660,7 +660,7 @@ void BufferSecretBaseOwnerName(void)
 
 bool8 sub_80BC268(u8 i)
 {
-    if (gSaveBlock1.secretBases[i].sbr_field_1_6)
+    if (gSaveBlock1.secretBases[i].registryStatus)
         return TRUE;
     else
         return FALSE;
@@ -686,24 +686,24 @@ void SetPlayerSecretBaseRecordMixingParty(void)
     {
         u16 j;
         for (j = 0; j < 4; j++)
-            record->partyMoves[i * 4 + j] = MOVE_NONE;
+            record->party.moves[i * 4 + j] = MOVE_NONE;
 
-        record->partySpecies[i] = SPECIES_NONE;
-        record->partyHeldItems[i] = ITEM_NONE;
-        record->partyLevels[i] = 0;
-        record->partyPersonality[i] = 0;
-        record->partyEVs[i] = 0;
+        record->party.species[i] = SPECIES_NONE;
+        record->party.heldItems[i] = ITEM_NONE;
+        record->party.levels[i] = 0;
+        record->party.personality[i] = 0;
+        record->party.EVs[i] = 0;
 
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
             for (j = 0; j < 4; j++)
-                record->partyMoves[secretBasePartyIndex * 4 + j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j);
+                record->party.moves[secretBasePartyIndex * 4 + j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j);
 
-            record->partySpecies[secretBasePartyIndex] = GetMonData(&(gPlayerParty[i]), MON_DATA_SPECIES);
-            record->partyHeldItems[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            record->partyLevels[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            record->partyPersonality[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            record->partyEVs[secretBasePartyIndex] = CalculateMonAverageEVs(&gPlayerParty[i]);
+            record->party.species[secretBasePartyIndex] = GetMonData(&(gPlayerParty[i]), MON_DATA_SPECIES);
+            record->party.heldItems[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            record->party.levels[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            record->party.personality[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+            record->party.EVs[secretBasePartyIndex] = CalculateMonAverageEVs(&gPlayerParty[i]);
             secretBasePartyIndex++;
         }
     }
@@ -711,9 +711,9 @@ void SetPlayerSecretBaseRecordMixingParty(void)
 
 void sub_80BC440(void)
 {
-    u16 backupValue = gSaveBlock1.secretBases[0].sbr_field_e;
+    u16 backupValue = gSaveBlock1.secretBases[0].numSecretBasesReceived;
     ResetSecretBase(0);
-    gSaveBlock1.secretBases[0].sbr_field_e = backupValue;
+    gSaveBlock1.secretBases[0].numSecretBasesReceived = backupValue;
     sub_80BC0F8();
 }
 
@@ -760,9 +760,9 @@ void MoveSecretBase(void)
     sub_80BC474();
     IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
 
-    backupValue = gSaveBlock1.secretBases[0].sbr_field_e;
+    backupValue = gSaveBlock1.secretBases[0].numSecretBasesReceived;
     ResetSecretBase(0);
-    gSaveBlock1.secretBases[0].sbr_field_e = backupValue;
+    gSaveBlock1.secretBases[0].numSecretBasesReceived = backupValue;
 }
 
 u8 sub_80BC538(void)
@@ -790,7 +790,7 @@ void GetCurSecretBaseRegistrationValidity(void)
 
 void ToggleCurSecretBaseRegistry(void)
 {
-    gSaveBlock1.secretBases[sub_80BC14C(gCurrentSecretBaseId)].sbr_field_1_6 ^= 1;
+    gSaveBlock1.secretBases[sub_80BC14C(gCurrentSecretBaseId)].registryStatus ^= 1;
     FlagSet(FLAG_SECRET_BASE_REGISTRY_ENABLED);
 }
 
@@ -1045,7 +1045,7 @@ void sub_80BCB10(u8 taskId)
 
     Menu_EraseWindowRect(0, 0, 29, 19);
 
-    gSaveBlock1.secretBases[taskData[4]].sbr_field_1_6 = 0;
+    gSaveBlock1.secretBases[taskData[4]].registryStatus = 0;
     taskData[0]--;
 
     if (taskData[2] > 0)
@@ -1128,12 +1128,12 @@ void unref_sub_80BCD7C(u8 secretBaseIndex)
 
     for (i = 0; i < 1; i++)
     {
-        gSaveBlock1.secretBases[secretBaseIndex].partyPersonality[i] = i + 1;
-        gSaveBlock1.secretBases[secretBaseIndex].partyMoves[i * 4] = i + 1;
-        gSaveBlock1.secretBases[secretBaseIndex].partySpecies[i] = SPECIES_TREECKO;
-        gSaveBlock1.secretBases[secretBaseIndex].partyHeldItems[i] = i + 1;
-        gSaveBlock1.secretBases[secretBaseIndex].partyLevels[i] = i + 5;
-        gSaveBlock1.secretBases[secretBaseIndex].partyEVs[i] = i * 5;
+        gSaveBlock1.secretBases[secretBaseIndex].party.personality[i] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].party.moves[i * 4] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].party.species[i] = SPECIES_TREECKO;
+        gSaveBlock1.secretBases[secretBaseIndex].party.heldItems[i] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].party.levels[i] = i + 5;
+        gSaveBlock1.secretBases[secretBaseIndex].party.EVs[i] = i * 5;
     }
 }
 
@@ -1147,7 +1147,7 @@ void sub_80BCE1C(void)
 
 void sub_80BCE4C()
 {
-    gSaveBlock1.secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].sbr_field_1_5 = gSpecialVar_Result;
+    gSaveBlock1.secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].battledOwnerToday = gSpecialVar_Result;
 }
 
 void sub_80BCE90()
@@ -1159,13 +1159,13 @@ void sub_80BCE90()
         u8 i;
 
         for (i = 0; i < MAX_SECRET_BASES; i++)
-            gSaveBlock1.secretBases[i].sbr_field_1_5 = 0;
+            gSaveBlock1.secretBases[i].battledOwnerToday = 0;
 
         FlagSet(FLAG_DAILY_UNKNOWN_8C2);
     }
 
     gSpecialVar_0x8004 = GetSecretBaseOwnerType(curBaseIndex);
-    gSpecialVar_Result = gSaveBlock1.secretBases[curBaseIndex].sbr_field_1_5;
+    gSpecialVar_Result = gSaveBlock1.secretBases[curBaseIndex].battledOwnerToday;
 }
 
 void sub_80BCF1C(u8 taskId)
@@ -1208,7 +1208,7 @@ void sub_80BCF1C(u8 taskId)
 void sub_80BD034(u8 i, struct SecretBaseRecord *secretBase)
 {
     gSaveBlock1.secretBases[i] = *secretBase;
-    gSaveBlock1.secretBases[i].sbr_field_1_6 = 2;
+    gSaveBlock1.secretBases[i].registryStatus = 2;
 }
 
 bool8 sub_80BD070(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
@@ -1277,7 +1277,7 @@ u8 sub_80BD1B0(void)
 
     for (i = 1; i < MAX_SECRET_BASES; i++)
     {
-        if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 0 && gSaveBlock1.secretBases[i].sbr_field_1_0 == 0)
+        if (gSaveBlock1.secretBases[i].registryStatus == 0 && gSaveBlock1.secretBases[i].toRegister == 0)
             return i;
     }
 
@@ -1296,10 +1296,10 @@ u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
     {
         if (secretBaseIndex != -1)
         {
-            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_0 == 1)
+            if (gSaveBlock1.secretBases[secretBaseIndex].toRegister == 1)
                 return 0;
-            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_6 != 2
-             || secretBase->sbr_field_1_0 == 1)
+            if (gSaveBlock1.secretBases[secretBaseIndex].registryStatus != 2
+             || secretBase->toRegister == 1)
             {
                 sub_80BD034(secretBaseIndex, secretBase);
                 return secretBaseIndex;
@@ -1336,8 +1336,8 @@ void sub_80BD280(void)
     {
         for (j = i + 1; j < MAX_SECRET_BASES; j++)
         {
-            if ((!secretBases[i].sbr_field_1_6 && secretBases[j].sbr_field_1_6 == 1)
-             || (secretBases[i].sbr_field_1_6 == 2 && secretBases[j].sbr_field_1_6 != 2))
+            if ((!secretBases[i].registryStatus && secretBases[j].registryStatus == 1)
+             || (secretBases[i].registryStatus == 2 && secretBases[j].registryStatus != 2))
             {
                 temp = secretBases[i];
                 secretBases[i] = secretBases[j];
@@ -1353,7 +1353,7 @@ void sub_80BD328(struct SecretBaseRecord *secretBases, u8 b)
 
     for (i = 1; i < MAX_SECRET_BASES; i++)
     {
-        if (secretBases[i].sbr_field_1_6 == b)
+        if (secretBases[i].registryStatus == b)
             sub_80BD1FC(&secretBases[i]);
     }
 }
@@ -1439,13 +1439,13 @@ bool8 sub_80BD494(struct SecretBaseRecord *base, struct SecretBaseRecord *secret
                     return FALSE;
                 }
 
-                if (base->sbr_field_e > secretBases[i].sbr_field_e)
+                if (base->numSecretBasesReceived > secretBases[i].numSecretBasesReceived)
                 {
                     ClearSecretBase(&secretBases[i]);
                     return FALSE;
                 }
 
-                secretBases[i].sbr_field_1_0 = base->sbr_field_1_0;
+                secretBases[i].toRegister = base->toRegister;
 
                 ClearSecretBase(base);
                 return TRUE;
@@ -1464,8 +1464,8 @@ void sub_80BD514(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
     {
         if (basesA[i].secretBaseId)
         {
-            if (basesA[i].sbr_field_1_6 == 1)
-                basesA[i].sbr_field_1_0 = 1;
+            if (basesA[i].registryStatus == 1)
+                basesA[i].toRegister = 1;
 
             if (!sub_80BD494(&basesA[i], basesB, i))
             {
@@ -1479,7 +1479,7 @@ void sub_80BD514(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
     {
         if (basesB[i].secretBaseId)
         {
-            basesB[i].sbr_field_1_5 = 0;
+            basesB[i].battledOwnerToday = 0;
 
             if (!sub_80BD494(&basesB[i], basesC, i))
                 sub_80BD494(&basesB[i], basesD, i);
@@ -1490,12 +1490,12 @@ void sub_80BD514(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
     {
         if (basesC[i].secretBaseId)
         {
-            basesC[i].sbr_field_1_5 = 0;
+            basesC[i].battledOwnerToday = 0;
             sub_80BD494(&basesC[i], basesD, i);
         }
 
         if (basesD[i].secretBaseId)
-            basesD[i].sbr_field_1_5 = 0;
+            basesD[i].battledOwnerToday = 0;
     }
 }
 
@@ -1517,7 +1517,7 @@ void sub_80BD610(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
     sub_80BD328(basesC, 0);
 } 
 
-void sub_80BD674(void *playerRecords, u32 size, u8 c)
+void ReceiveSecretBasesData(void *playerRecords, u32 size, u8 c)
 {
     if (
 #if DEBUG
@@ -1557,10 +1557,10 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 
         for (i = 1; i < MAX_SECRET_BASES; i++)
         {
-            if (gSaveBlock1.secretBases[i].sbr_field_1_0 == 1)
+            if (gSaveBlock1.secretBases[i].toRegister == 1)
             {
-                gSaveBlock1.secretBases[i].sbr_field_1_6 = 1;
-                gSaveBlock1.secretBases[i].sbr_field_1_0 = 0;
+                gSaveBlock1.secretBases[i].registryStatus = 1;
+                gSaveBlock1.secretBases[i].toRegister = 0;
             }
         }
 
@@ -1568,11 +1568,11 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 
         for (i = 1; i < MAX_SECRET_BASES; i++)
         {
-            if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 2)
-                gSaveBlock1.secretBases[i].sbr_field_1_6 = 0;
+            if (gSaveBlock1.secretBases[i].registryStatus == 2)
+                gSaveBlock1.secretBases[i].registryStatus = 0;
         }
 
-        if (gSaveBlock1.secretBases[0].sbr_field_e != 0xFFFF)
-            gSaveBlock1.secretBases[0].sbr_field_e++;
+        if (gSaveBlock1.secretBases[0].numSecretBasesReceived != 0xFFFF)
+            gSaveBlock1.secretBases[0].numSecretBasesReceived++;
     }
 }

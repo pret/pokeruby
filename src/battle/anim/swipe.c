@@ -45,8 +45,8 @@ void sub_80D2BE8(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[0]++;
     }

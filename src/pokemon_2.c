@@ -36,7 +36,7 @@ extern u16 gBattleMovePower;
 extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
-EWRAM_DATA struct SpriteTemplate gUnknown_02024E8C = {0};
+EWRAM_DATA struct SpriteTemplate gCreatingSpriteTemplate = {0};
 
 extern u8 gBadEggNickname[];
 extern const struct SpriteTemplate gSpriteTemplate_8208288[];
@@ -152,26 +152,28 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 const struct SpriteTemplate gSpriteTemplate_8208288[] =
 {
     {0xFFFF, 0, &gOamData_81F96F0, NULL, gSpriteImageTable_81E7A10, gSpriteAffineAnimTable_81E7B70, sub_80105A0},
-    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A30, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent},
+    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A30,
+        gAffineAnims_BattleSpriteOpponentSide, oac_poke_opponent},
     {0xFFFF, 0, &gOamData_81F96F0, NULL, gSpriteImageTable_81E7A50, gSpriteAffineAnimTable_81E7B70, sub_80105A0},
-    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent},
+    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70,
+        gAffineAnims_BattleSpriteOpponentSide, oac_poke_opponent},
 };
 
 void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
-    gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
-    gUnknown_02024E8C.paletteTag = species;
-    gUnknown_02024E8C.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
+    gCreatingSpriteTemplate = gSpriteTemplate_8208288[a2];
+    gCreatingSpriteTemplate.paletteTag = species;
+    gCreatingSpriteTemplate.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
 }
 
 void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)
 {
-    gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
-    gUnknown_02024E8C.paletteTag = species;
+    gCreatingSpriteTemplate = gSpriteTemplate_8208288[a2];
+    gCreatingSpriteTemplate.paletteTag = species;
     if (a2 == 0 || a2 == 2)
-        gUnknown_02024E8C.anims = gUnknown_081ECACC[species];
+        gCreatingSpriteTemplate.anims = gUnknown_081ECACC[species];
     else
-        gUnknown_02024E8C.anims = gUnknown_081EC2A4[species];
+        gCreatingSpriteTemplate.anims = gUnknown_081EC2A4[species];
 }
 
 void EncryptBoxMon(struct BoxPokemon *boxMon)
@@ -1077,27 +1079,27 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
     for (i = 0; i < 6; i++)
     {
-        if (eSecretBaseRecord->partySpecies[i])
+        if (eSecretBaseRecord->party.species[i])
         {
             CreateMon(&gEnemyParty[i],
-                eSecretBaseRecord->partySpecies[i],
-                eSecretBaseRecord->partyLevels[i],
+                eSecretBaseRecord->party.species[i],
+                eSecretBaseRecord->party.levels[i],
                 15,
                 1,
-                eSecretBaseRecord->partyPersonality[i],
+                eSecretBaseRecord->party.personality[i],
                 2,
                 0);
 
             // these two SetMonData calls require the (u8 *) cast since SetMonData is declared in this function.
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&eSecretBaseRecord->partyHeldItems[i]);
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&eSecretBaseRecord->party.heldItems[i]);
 
             for (j = 0; j < 6; j++)
-                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &eSecretBaseRecord->partyEVs[i]);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &eSecretBaseRecord->party.EVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&eSecretBaseRecord->partyMoves[i * 4 + j]);
-                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[eSecretBaseRecord->partyMoves[i * 4 + j]].pp);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&eSecretBaseRecord->party.moves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[eSecretBaseRecord->party.moves[i * 4 + j]].pp);
             }
         }
     }
@@ -1188,6 +1190,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
 {
     s32 i;
     s8 nickname[POKEMON_NAME_LENGTH * 2];
+    u16 * hpSwitchout;
 
     gBattleMons[battleIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battleIndex].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
@@ -1226,7 +1229,9 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    ewram160BC[GetBattlerSide(battleIndex)] = gBattleMons[battleIndex].hp;
+
+    hpSwitchout = &gBattleStruct->HP_OnSwitchout[GetBattlerSide(battleIndex)];
+    *hpSwitchout = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

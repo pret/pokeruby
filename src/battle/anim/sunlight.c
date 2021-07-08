@@ -32,8 +32,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D95B0 =
 
 void sub_80D517C(struct Sprite *sprite)
 {
-    sprite->pos1.x = 0;
-    sprite->pos1.y = 0;
+    sprite->x = 0;
+    sprite->y = 0;
     sprite->data[0] = 60;
     sprite->data[2] = 140;
     sprite->data[4] = 80;

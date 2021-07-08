@@ -5,6 +5,16 @@
 
 #include "sprite.h"
 
+// battle_anim_status_effects.c
+#define STAT_ANIM_PLUS1  15
+#define STAT_ANIM_PLUS2  39
+#define STAT_ANIM_MINUS1 22
+#define STAT_ANIM_MINUS2 46
+#define STAT_ANIM_MULTIPLE_PLUS1 55
+#define STAT_ANIM_MULTIPLE_PLUS2 56
+#define STAT_ANIM_MULTIPLE_MINUS1 57
+#define STAT_ANIM_MULTIPLE_MINUS2 58
+
 #define REG_BGnCNT_BITFIELD(n) (*(vBgCnt *)REG_ADDR_BG##n##CNT)
 #define REG_BG0CNT_BITFIELD REG_BGnCNT_BITFIELD(0)
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
@@ -31,31 +41,15 @@ enum
     BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
 
-struct UnknownStruct1
+struct ContestMoveAnim
 {
-    u8 unk0;
-};
-
-struct UnknownStruct2
-{
-    void *unk0;
-    u16 *unk4;
-    u8 unk8;
-};
-
-struct UnknownStruct3
-{
-    u8 unk0;
-    u8 filler1[0xB];
-};
-
-struct EWRAM_19348_Struct
-{
-    /*0x00*/ u16 species2;
-    /*0x02*/ u16 species;
-    /*0x04*/ u8 filler4[0x8];
-    /*0x0C*/ u32 otId;
-    /*0x10*/ u32 personality;
+    u16 species;
+    u16 targetSpecies;
+    bool8 hasTargetAnim:1;
+    u8 contestant;
+    u32 personality;
+    u32 otId;
+    u32 targetPersonality;
 };
 
 extern void (*gAnimScriptCallback)(void);

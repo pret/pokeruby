@@ -29,7 +29,7 @@ const struct DebugStruct1 gUnknown_Debug_4245CC[] =
     { 7, DTR("ナンバー7", "NUMBER7") },
 };
 
-const struct {u8 unk0; u8 unk1;} gUnknown_Debug_8424620[] =
+const struct {u8 totalPoints; u8 nextTurnSpriteId;} gUnknown_Debug_8424620[] =
 {
     { 1, 1 },
     { 2, 1 },
@@ -231,13 +231,13 @@ void debug_sub_81257E0(void)
     InitLinkBattleRecords();
     for (i = 0; i < 3; i++)
     {
-        u32 id = gUnknown_Debug_8424620[i].unk0 - 1;
+        u32 id = gUnknown_Debug_8424620[i].totalPoints - 1;
 
         UpdateLinkBattleRecords_(
             gSaveBlock1.linkBattleRecords,
             gUnknown_Debug_4245CC[id].var1,
             gUnknown_Debug_4245CC[id].var0,
-            gUnknown_Debug_8424620[i].unk1,
+            gUnknown_Debug_8424620[i].nextTurnSpriteId,
             gLinkPlayers[gLinkPlayerObjectEvents[id].linkPlayerId].language);
     }
 }

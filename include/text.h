@@ -5,10 +5,15 @@
 #define CHAR_LV             0x34
 #define CHAR_SONG_WORD_SEPARATOR 0x37  // separates words in the bard song. Not sure if it's used for anything else
 #define CHAR_0              0xA1
+#define CHAR_EXCL_MARK      0xAB
 #define CHAR_QUESTION_MARK  0xAC
 #define CHAR_PERIOD         0xAD
 #define CHAR_HYPHEN         0xAE
 #define CHAR_ELLIPSIS       0xB0
+#define CHAR_DBL_QUOT_LEFT  0xB1
+#define CHAR_DBL_QUOT_RIGHT 0xB2
+#define CHAR_SGL_QUOT_LEFT  0xB3
+#define CHAR_SGL_QUOT_RIGHT 0xB4
 #define CHAR_MALE           0xB5
 #define CHAR_FEMALE         0xB6
 #define CHAR_CURRENCY       0xB7
@@ -75,7 +80,6 @@
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
 
-#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 4
 #define TEXT_COLOR_TRANSPARENT 0x00
 #define TEXT_COLOR_DARK_GREY   0x01
 #define TEXT_COLOR_RED         0x02
@@ -93,8 +97,28 @@
 #define TEXT_COLOR_LIGHT_BLUE  0x0E
 #define TEXT_COLOR_WHITE2      0x0F
 
-#define EXT_CTRL_CODE_CLEAR 17
-
+#define EXT_CTRL_CODE_COLOR                  0x01
+#define EXT_CTRL_CODE_HIGHLIGHT              0x02
+#define EXT_CTRL_CODE_SHADOW                 0x03
+#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 0x04
+#define EXT_CTRL_CODE_PALETTE                0x05
+#define EXT_CTRL_CODE_SIZE                   0x06
+#define EXT_CTRL_CODE_RESET_SIZE             0x07
+#define EXT_CTRL_CODE_PAUSE                  0x08
+#define EXT_CTRL_CODE_PAUSE_UNTIL_PRESS      0x09
+#define EXT_CTRL_CODE_WAIT_SE                0x0A
+#define EXT_CTRL_CODE_PLAY_BGM               0x0B
+#define EXT_CTRL_CODE_ESCAPE                 0x0C
+#define EXT_CTRL_CODE_SHIFT_TEXT             0x0D // nop
+#define EXT_CTRL_CODE_SHIFT_DOWN             0x0E
+#define EXT_CTRL_CODE_FILL_WINDOW            0x0F
+#define EXT_CTRL_CODE_PLAY_SE                0x10
+#define EXT_CTRL_CODE_CLEAR                  0x11
+#define EXT_CTRL_CODE_SKIP                   0x12
+#define EXT_CTRL_CODE_CLEAR_TO               0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING     0x14
+#define EXT_CTRL_CODE_JPN                    0x15
+#define EXT_CTRL_CODE_ENG                    0x16
 
 struct WindowTemplate
 {
@@ -206,7 +230,7 @@ extern const struct WindowTemplate gWindowTemplate_81E70F0;
 extern const struct WindowTemplate gWindowTemplate_81E710C;
 extern const struct WindowTemplate gWindowTemplate_81E7128;
 extern const struct WindowTemplate gWindowTemplate_81E7144;
-extern const struct WindowTemplate gWindowTemplate_81E7160;
+extern const struct WindowTemplate gWindowTemplate_ContestPainting;
 extern const struct WindowTemplate gWindowTemplate_81E717C;
 extern const struct WindowTemplate gWindowTemplate_81E7198;
 extern const struct WindowTemplate gWindowTemplate_81E71B4;
@@ -236,7 +260,7 @@ void Text_InitWindowWithTemplate(struct Window *win, const struct WindowTemplate
 void Text_InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 void Text_InitWindow8002E4C(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6);
 void Text_SetWindowText(struct Window *win, const u8 *text);
-void Text_InitWindow8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
+void Contest_StartTextPrinter(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 u8 Text_PrintWindow8002F44(struct Window *win);
 u8 Text_PrintWindowSimple(struct Window *win);
 u8 Text_InitWindowAndPrintText(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
@@ -248,7 +272,7 @@ u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType);
 u8 Text_UpdateWindow(struct Window *win);
 u8 Text_UpdateWindowInBattle(struct Window *win);
 u8 Text_UpdateWindowAutoscroll(struct Window *win);
-u8 Text_UpdateWindowInContest(struct Window *win);
+u8 Contest_RunTextPrinter(struct Window *win);
 u32 Text_UpdateWindowOverrideLineLength(struct Window *win, u8 lineLength);
 void Text_ClearWindow(struct Window *win);
 u16 Text_GetWindowTilemapEntry(struct Window *win, u8 x, u8 y);

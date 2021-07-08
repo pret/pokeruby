@@ -713,7 +713,7 @@ void sub_809A5E8(struct Sprite *sprite)
 {
     if (sprite->data[2])
         sprite->data[2]--;
-    else if ((sprite->pos1.x += sprite->data[0]) == sprite->data[1])
+    else if ((sprite->x += sprite->data[0]) == sprite->data[1])
         sprite->callback = SpriteCallbackDummy;
 }
 
@@ -723,8 +723,8 @@ void sub_809A61C(struct Sprite *sprite)
         sprite->data[1]--;
     else
     {
-        sprite->pos1.x += sprite->data[0];
-        sprite->data[2] = sprite->pos1.x + sprite->pos2.x;
+        sprite->x += sprite->data[0];
+        sprite->data[2] = sprite->x + sprite->x2;
         if (sprite->data[2] < 0x40 || sprite->data[2] > 0x100)
             DestroySprite(sprite);
     }
@@ -772,7 +772,7 @@ void sub_809A774(s8 a0)
 
     for (i = 0; i < 2; i++)
     {
-        gPokemonStorageSystemPtr->unk_0d00[i]->pos2.x = 0;
+        gPokemonStorageSystemPtr->unk_0d00[i]->x2 = 0;
         gPokemonStorageSystemPtr->unk_0d00[i]->data[0] = 2;
     }
     if (a0 < 0)
@@ -799,8 +799,8 @@ void sub_809A810(void)
 
     for (i = 0; i < 2; i++)
     {
-        gPokemonStorageSystemPtr->unk_0d00[i]->pos1.x = 0x88 * i + 0x5c;
-        gPokemonStorageSystemPtr->unk_0d00[i]->pos2.x = 0;
+        gPokemonStorageSystemPtr->unk_0d00[i]->x = 0x88 * i + 0x5c;
+        gPokemonStorageSystemPtr->unk_0d00[i]->x2 = 0;
         gPokemonStorageSystemPtr->unk_0d00[i]->invisible = FALSE;
     }
     sub_809A860(TRUE);
@@ -833,17 +833,17 @@ void sub_809A8C8(struct Sprite *sprite)
     switch (sprite->data[0])
     {
         case 0:
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             break;
         case 1:
             if (++sprite->data[1] > 3)
             {
                 sprite->data[1] = 0;
-                sprite->pos2.x += sprite->data[3];
+                sprite->x2 += sprite->data[3];
                 if (++sprite->data[2] > 5)
                 {
                     sprite->data[2] = 0;
-                    sprite->pos2.x = 0;
+                    sprite->x2 = 0;
                 }
             }
             break;
@@ -851,18 +851,18 @@ void sub_809A8C8(struct Sprite *sprite)
             sprite->data[0] = 3;
             break;
         case 3:
-            sprite->pos1.x -= gPokemonStorageSystemPtr->unk_08b6;
-            if (sprite->pos1.x < 0x49 || sprite->pos1.x > 0xf7)
+            sprite->x -= gPokemonStorageSystemPtr->unk_08b6;
+            if (sprite->x < 0x49 || sprite->x > 0xf7)
                 sprite->invisible = TRUE;
             if (--sprite->data[1] == 0)
             {
-                sprite->pos1.x = sprite->data[2];
+                sprite->x = sprite->data[2];
                 sprite->invisible = FALSE;
                 sprite->data[0] = 4;
             }
             break;
         case 4:
-            sprite->pos1.x -= gPokemonStorageSystemPtr->unk_08b6;
+            sprite->x -= gPokemonStorageSystemPtr->unk_08b6;
             break;
     }
 }
@@ -967,35 +967,35 @@ bool8 sub_809AC00(void)
     {
         gPokemonStorageSystemPtr->unk_11c8 += gPokemonStorageSystemPtr->unk_11d0;
         gPokemonStorageSystemPtr->unk_11cc += gPokemonStorageSystemPtr->unk_11d4;
-        gPokemonStorageSystemPtr->unk_11c0->pos1.x = gPokemonStorageSystemPtr->unk_11c8 >> 8;
-        gPokemonStorageSystemPtr->unk_11c0->pos1.y = gPokemonStorageSystemPtr->unk_11cc >> 8;
-        if (gPokemonStorageSystemPtr->unk_11c0->pos1.x > 0x100)
+        gPokemonStorageSystemPtr->unk_11c0->x = gPokemonStorageSystemPtr->unk_11c8 >> 8;
+        gPokemonStorageSystemPtr->unk_11c0->y = gPokemonStorageSystemPtr->unk_11cc >> 8;
+        if (gPokemonStorageSystemPtr->unk_11c0->x > 0x100)
         {
-            tmp = gPokemonStorageSystemPtr->unk_11c0->pos1.x - 0x100;
-            gPokemonStorageSystemPtr->unk_11c0->pos1.x = tmp + 0x40;
+            tmp = gPokemonStorageSystemPtr->unk_11c0->x - 0x100;
+            gPokemonStorageSystemPtr->unk_11c0->x = tmp + 0x40;
         }
-        if (gPokemonStorageSystemPtr->unk_11c0->pos1.x < 0x40)
+        if (gPokemonStorageSystemPtr->unk_11c0->x < 0x40)
         {
-            tmp = 0x40 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
-            gPokemonStorageSystemPtr->unk_11c0->pos1.x = 0x100 - tmp;
+            tmp = 0x40 - gPokemonStorageSystemPtr->unk_11c0->x;
+            gPokemonStorageSystemPtr->unk_11c0->x = 0x100 - tmp;
         }
-        if (gPokemonStorageSystemPtr->unk_11c0->pos1.y > 0xb0)
+        if (gPokemonStorageSystemPtr->unk_11c0->y > 0xb0)
         {
-            tmp = gPokemonStorageSystemPtr->unk_11c0->pos1.y - 0xb0;
-            gPokemonStorageSystemPtr->unk_11c0->pos1.y = tmp - 0x10;
+            tmp = gPokemonStorageSystemPtr->unk_11c0->y - 0xb0;
+            gPokemonStorageSystemPtr->unk_11c0->y = tmp - 0x10;
         }
-        if (gPokemonStorageSystemPtr->unk_11c0->pos1.y < -0x10)
+        if (gPokemonStorageSystemPtr->unk_11c0->y < -0x10)
         {
-            tmp = -0x10 - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
-            gPokemonStorageSystemPtr->unk_11c0->pos1.y = 0xb0 - tmp;
+            tmp = -0x10 - gPokemonStorageSystemPtr->unk_11c0->y;
+            gPokemonStorageSystemPtr->unk_11c0->y = 0xb0 - tmp;
         }
         if (gPokemonStorageSystemPtr->unk_11e3 && --gPokemonStorageSystemPtr->unk_11e3 == 0)
             gPokemonStorageSystemPtr->unk_11c0->vFlip = gPokemonStorageSystemPtr->unk_11c0->vFlip ? FALSE : TRUE;
     }
     else
     {
-        gPokemonStorageSystemPtr->unk_11c0->pos1.x = gPokemonStorageSystemPtr->unk_11d8;
-        gPokemonStorageSystemPtr->unk_11c0->pos1.y = gPokemonStorageSystemPtr->unk_11da;
+        gPokemonStorageSystemPtr->unk_11c0->x = gPokemonStorageSystemPtr->unk_11d8;
+        gPokemonStorageSystemPtr->unk_11c0->y = gPokemonStorageSystemPtr->unk_11da;
         sub_809AFB8();
     }
     return TRUE;
@@ -1027,33 +1027,33 @@ void sub_809AD94(void)
     switch (gPokemonStorageSystemPtr->unk_11de)
     {
         default:
-            r7 = gPokemonStorageSystemPtr->unk_11da - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            r7 = gPokemonStorageSystemPtr->unk_11da - gPokemonStorageSystemPtr->unk_11c0->y;
             break;
         case -1:
-            r7 = gPokemonStorageSystemPtr->unk_11da - 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            r7 = gPokemonStorageSystemPtr->unk_11da - 0xc0 - gPokemonStorageSystemPtr->unk_11c0->y;
             break;
         case 1:
-            r7 = gPokemonStorageSystemPtr->unk_11da + 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            r7 = gPokemonStorageSystemPtr->unk_11da + 0xc0 - gPokemonStorageSystemPtr->unk_11c0->y;
             break;
     }
     switch (gPokemonStorageSystemPtr->unk_11df)
     {
         default:
-            r0 = gPokemonStorageSystemPtr->unk_11d8 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            r0 = gPokemonStorageSystemPtr->unk_11d8 - gPokemonStorageSystemPtr->unk_11c0->x;
             break;
         case -1:
-            r0 = gPokemonStorageSystemPtr->unk_11d8 - 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            r0 = gPokemonStorageSystemPtr->unk_11d8 - 0xc0 - gPokemonStorageSystemPtr->unk_11c0->x;
             break;
         case 1:
-            r0 = gPokemonStorageSystemPtr->unk_11d8 + 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            r0 = gPokemonStorageSystemPtr->unk_11d8 + 0xc0 - gPokemonStorageSystemPtr->unk_11c0->x;
             break;
     }
     r7 <<= 8;
     r0 <<= 8;
     gPokemonStorageSystemPtr->unk_11d0 = r0 / gPokemonStorageSystemPtr->unk_11dc;
     gPokemonStorageSystemPtr->unk_11d4 = r7 / gPokemonStorageSystemPtr->unk_11dc;
-    gPokemonStorageSystemPtr->unk_11c8 = gPokemonStorageSystemPtr->unk_11c0->pos1.x << 8;
-    gPokemonStorageSystemPtr->unk_11cc = gPokemonStorageSystemPtr->unk_11c0->pos1.y << 8;
+    gPokemonStorageSystemPtr->unk_11c8 = gPokemonStorageSystemPtr->unk_11c0->x << 8;
+    gPokemonStorageSystemPtr->unk_11cc = gPokemonStorageSystemPtr->unk_11c0->y << 8;
 }
 
 void sub_809AF18(u8 a0, u8 a1)
@@ -1237,13 +1237,13 @@ bool8 sub_809B24C(void)
 
 bool8 sub_809B324(void)
 {
-    switch (gPokemonStorageSystemPtr->unk_11c0->pos2.y)
+    switch (gPokemonStorageSystemPtr->unk_11c0->y2)
     {
         default:
-            gPokemonStorageSystemPtr->unk_11c0->pos2.y++;
+            gPokemonStorageSystemPtr->unk_11c0->y2++;
             break;
         case 0:
-            gPokemonStorageSystemPtr->unk_11c0->pos2.y++;
+            gPokemonStorageSystemPtr->unk_11c0->y2++;
             break;
         case 8:
             return FALSE;
@@ -1253,12 +1253,12 @@ bool8 sub_809B324(void)
 
 bool8 sub_809B358(void)
 {
-    switch (gPokemonStorageSystemPtr->unk_11c0->pos2.y)
+    switch (gPokemonStorageSystemPtr->unk_11c0->y2)
     {
         case 0:
             return FALSE;
         default:
-            gPokemonStorageSystemPtr->unk_11c0->pos2.y--;
+            gPokemonStorageSystemPtr->unk_11c0->y2--;
             break;
     }
     return TRUE;
@@ -2323,8 +2323,8 @@ bool8 sub_809CAB0(void)
 
 void sub_809CB74(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPokemonStorageSystemPtr->unk_11c0->pos1.x;
-    sprite->pos1.y = gPokemonStorageSystemPtr->unk_11c0->pos1.y + 20;
+    sprite->x = gPokemonStorageSystemPtr->unk_11c0->x;
+    sprite->y = gPokemonStorageSystemPtr->unk_11c0->y + 20;
 }
 
 void sub_809CB94(struct Pokemon *mon)

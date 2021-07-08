@@ -28,12 +28,12 @@ const struct SpriteTemplate gSpriteTemplate_83D73AC =
 static void sub_80CF374(struct Sprite* sprite)
 {
     s16 temp;
-    gSprites[sprite->data[2]].pos2.x += sprite->data[1];
+    gSprites[sprite->data[2]].x2 += sprite->data[1];
     temp = sprite->data[1];
     sprite->data[1] = -temp;
     if (sprite->data[0] == 0)
     {
-        gSprites[sprite->data[2]].pos2.x = 0;
+        gSprites[sprite->data[2]].x2 = 0;
         DestroySpriteAndMatrix(sprite);
     }
 
@@ -43,19 +43,19 @@ static void sub_80CF374(struct Sprite* sprite)
 void sub_80CF3C4(struct Sprite* sprite)
 {
     u8 a;
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     a = gBattlerSpriteIds[gBattleAnimTarget];
     if (GetBattlerSide(gBattleAnimAttacker) != 0)
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
     }
 
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = a;

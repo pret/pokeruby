@@ -25,6 +25,7 @@
 #include "text.h"
 #include "util.h"
 #include "ewram.h"
+#include "constants/moves.h"
 
 struct MovePpInfo
 {
@@ -39,7 +40,7 @@ extern u8 gBattleBufferA[][0x200];
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerSpriteIds[];
 extern u8 gBattleMonForms[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern void (*gBattlerControllerFuncs[])(void);
 extern u8 gUnknown_0300434C[];
 extern u8 gHealthboxSpriteIds[];
@@ -53,12 +54,12 @@ extern u32 gTransformedPersonalities[];
 extern u8 gAnimMoveTurn;
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 extern bool8 gDoingBattleAnim;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gUnknown_02024E68[];
 extern MainCallback gPreBattleCallback1;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
@@ -379,7 +380,7 @@ void sub_8032E2C(void)
 void sub_8033018(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded == TRUE
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
+     && gSprites[gBattlerSpriteIds[gActiveBattler]].x2 == 0)
     {
         if (!ewram17810[gActiveBattler].unk0_7)
         {
@@ -432,7 +433,7 @@ void sub_8033160(void)
 
 void sub_80331D0(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gWindowTemplate_Contest_MoveDescription.state == 0)
         OpponentBufferExecCompleted();
 }
 
@@ -459,7 +460,7 @@ void sub_8033264(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
         gBattlerControllerFuncs[gActiveBattler] = sub_80332D0;
     }
@@ -1119,11 +1120,11 @@ void OpponentHandleLoadPokeSprite(void)
     BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
       GetBattlerSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = species;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
@@ -1151,7 +1152,7 @@ void sub_803495C(u8 a, u8 b)
     BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBattlerSpriteIds[a] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       GetBattlerSubpriority(a));
@@ -1187,7 +1188,7 @@ void sub_8034B74(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4 = 1;
         break;
@@ -1209,7 +1210,7 @@ void OpponentHandleTrainerThrow(void)
 #if DEBUG
     if (gUnknown_02023A14_50 & 0x10)
     {
-        trainerPicIndex = gSharedMem[0x160A3];
+        trainerPicIndex = gSharedMem[BSTRUCT_OFF(unk160A3)];
     }
     else
 #endif
@@ -1227,11 +1228,11 @@ void OpponentHandleTrainerThrow(void)
     sub_8031A6C(trainerPicIndex, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       0xB0,
       40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicIndex].coords),
       GetBattlerSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicIndex].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum;
@@ -1257,12 +1258,12 @@ void OpponentHandleTrainerSlide(void)
     sub_8031A6C(trainerPicIndex, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       0xB0,
       40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicIndex].coords),
       0x1E);
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 96;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.x += 32;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x += 32;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicIndex].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum;
@@ -1277,7 +1278,7 @@ void OpponentHandleTrainerSlideBack(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = sub_8032BBC;
@@ -1287,7 +1288,7 @@ void OpponentHandlecmd10(void)
 {
     if (ewram17810[gActiveBattler].unk4 == 0)
     {
-        if (ewram17800[gActiveBattler].substituteSprite)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite)
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         ewram17810[gActiveBattler].unk4++;
     }
@@ -1362,9 +1363,9 @@ void sub_8035238(void)
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBattler].substituteSprite && !ewram17800[gActiveBattler].unk0_3)
+        if (gBattleSpriteInfo[gActiveBattler].substituteSprite && !gBattleSpriteInfo[gActiveBattler].flag_x8)
         {
-            ewram17800[gActiveBattler].unk0_3 = 1;
+            gBattleSpriteInfo[gActiveBattler].flag_x8 = 1;
             move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         }
         ewram17810[gActiveBattler].unk4 = 1;
@@ -1382,10 +1383,10 @@ void sub_8035238(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBattler].substituteSprite) && r7 <= 1)
+            if ((gBattleSpriteInfo[gActiveBattler].substituteSprite) && r7 <= 1)
             {
                 move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
-                ewram17800[gActiveBattler].unk0_3 = 0;
+                gBattleSpriteInfo[gActiveBattler].flag_x8 = 0;
             }
             ewram17810[gActiveBattler].unk4 = 3;
         }
@@ -1409,7 +1410,7 @@ void OpponentHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_80331D0;
 }
 
@@ -1429,325 +1430,65 @@ void OpponentHandlecmd19(void)
     OpponentBufferExecCompleted();
 }
 
-struct ChooseMoveStruct
-{
-    u16 moves[4];
-};
-
-#if DEBUG
-NAKED
-void OpponentHandlecmd20(void)
-{
-    asm("\
-    push    {r4, r5, r6, r7, lr}\n\
-    mov r7, sl\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push    {r5, r6, r7}\n\
-    ldr r6, ._549       @ gActiveBattler\n\
-    ldrb    r0, [r6]\n\
-    lsl r0, r0, #0x9\n\
-    ldr r1, ._549 + 4   @ gBattleBufferA\n\
-    add r5, r0, r1\n\
-    ldr r2, ._549 + 8   @ gUnknown_02023A14_50\n\
-    ldrb    r1, [r2]\n\
-    mov r0, #0x4\n\
-    and r0, r0, r1\n\
-    mov sl, r6\n\
-    cmp r0, #0\n\
-    beq ._546   @cond_branch\n\
-    ldr r0, ._549 + 12  @ gBattleMoves\n\
-    mov r9, r0\n\
-    ldr r1, ._549 + 16  @ \n\
-    mov ip, r1\n\
-    add r7, r6, #0\n\
-    mov r0, #0x2\n\
-    mov r8, r0\n\
-    ldr r6, ._549 + 20  @ \n\
-._552:\n\
-    ldrb    r1, [r7]\n\
-    mov r0, r8\n\
-    and r0, r0, r1\n\
-    lsl r0, r0, #0x18\n\
-    lsr r0, r0, #0x19\n\
-    add r0, r0, r6\n\
-    mov r1, ip\n\
-    add r3, r0, r1\n\
-    ldrb    r1, [r3]\n\
-    lsl r0, r1, #0x1\n\
-    add r0, r5, r0\n\
-    ldrh    r2, [r0]\n\
-    add r4, r1, #0\n\
-    cmp r2, #0\n\
-    beq ._547   @cond_branch\n\
-    add r0, r4, #1\n\
-    strb    r0, [r3]\n\
-    b   ._548\n\
-._550:\n\
-    .align  2, 0\n\
-._549:\n\
-    .word   gActiveBattler\n\
-    .word   gBattleBufferA+4\n\
-    .word   gUnknown_02023A14_50\n\
-    .word   gBattleMoves\n\
-    .word   +0x2000000\n\
-    .word   0x1609e\n\
-._547:\n\
-    strb    r2, [r3]\n\
-._548:\n\
-    ldrb    r0, [r7]\n\
-    mov r1, r8\n\
-    and r1, r1, r0\n\
-    lsl r1, r1, #0x18\n\
-    lsr r1, r1, #0x19\n\
-    add r1, r1, r6\n\
-    add r1, r1, ip\n\
-    ldrb    r0, [r1]\n\
-    cmp r0, #0x3\n\
-    bls ._551   @cond_branch\n\
-    mov r0, #0x0\n\
-    strb    r0, [r1]\n\
-._551:\n\
-    cmp r2, #0\n\
-    beq ._552   @cond_branch\n\
-    lsl r0, r2, #0x1\n\
-    add r0, r0, r2\n\
-    lsl r0, r0, #0x2\n\
-    add r0, r0, r9\n\
-    ldrb    r3, [r0, #0x6]\n\
-    mov r0, #0x12\n\
-    and r0, r0, r3\n\
-    cmp r0, #0\n\
-    beq ._553   @cond_branch\n\
-    mov r1, sl\n\
-    ldrb    r0, [r1]\n\
-    b   ._561\n\
-._553:\n\
-    ldr r0, ._559       @ gBattleTypeFlags\n\
-    ldrh    r1, [r0]\n\
-    mov r0, #0x1\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._557   @cond_branch\n\
-    ldr r0, ._559 + 4   @ gUnknown_02023A14_50\n\
-    ldrb    r1, [r0]\n\
-    mov r5, #0x2\n\
-    add r0, r5, #0\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._556   @cond_branch\n\
-    cmp r3, #0\n\
-    bne ._557   @cond_branch\n\
-    mov r1, sl\n\
-    ldrb    r0, [r1]\n\
-    bl  GetBattlerPosition\n\
-    mov r1, #0x2\n\
-    eor r0, r0, r1\n\
-    lsl r0, r0, #0x18\n\
-    lsr r0, r0, #0x18\n\
-    b   ._558\n\
-._560:\n\
-    .align  2, 0\n\
-._559:\n\
-    .word   gBattleTypeFlags\n\
-    .word   gUnknown_02023A14_50\n\
-._556:\n\
-    bl  Random\n\
-    add r1, r5, #0\n\
-    and r1, r1, r0\n\
-    lsl r1, r1, #0x10\n\
-    lsr r0, r1, #0x10\n\
-    b   ._561\n\
-._557:\n\
-    mov r0, #0x0\n\
-._558:\n\
-    bl  GetBattlerAtPosition\n\
-    lsl r0, r0, #0x18\n\
-    lsr r0, r0, #0x18\n\
-._561:\n\
-    lsl r2, r0, #0x8\n\
-    orr r2, r2, r4\n\
-    mov r0, #0x1\n\
-    mov r1, #0xa\n\
-._569:\n\
-    bl  BtlController_EmitTwoReturnValues\n\
-._573:\n\
-    bl  OpponentBufferExecCompleted\n\
-    b   ._562\n\
-._546:\n\
-    ldr r0, ._567       @ gBattleTypeFlags\n\
-    ldrh    r1, [r0]\n\
-    mov r0, #0x93\n\
-    lsl r0, r0, #0x3\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._563   @cond_branch\n\
-    bl  BattleAI_SetupAIData\n\
-    bl  BattleAI_GetAIActionToUse\n\
-    lsl r0, r0, #0x18\n\
-    lsr r4, r0, #0x18\n\
-    cmp r4, #0x4\n\
-    beq ._564   @cond_branch\n\
-    cmp r4, #0x5\n\
-    bne ._565   @cond_branch\n\
-    mov r0, #0x1\n\
-    mov r1, #0x4\n\
-    b   ._566\n\
-._568:\n\
-    .align  2, 0\n\
-._567:\n\
-    .word   gBattleTypeFlags\n\
-._564:\n\
-    mov r0, #0x1\n\
-    mov r1, #0x3\n\
-._566:\n\
-    mov r2, #0x0\n\
-    b   ._569\n\
-._565:\n\
-    ldr r3, ._574       @ gBattleMoves\n\
-    lsl r0, r4, #0x1\n\
-    add r2, r5, r0\n\
-    ldrh    r1, [r2]\n\
-    lsl r0, r1, #0x1\n\
-    add r0, r0, r1\n\
-    lsl r0, r0, #0x2\n\
-    add r0, r0, r3\n\
-    ldrb    r1, [r0, #0x6]\n\
-    mov r0, #0x12\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._570   @cond_branch\n\
-    ldr r1, ._574 + 4   @ gBattlerTarget\n\
-    ldrb    r0, [r6]\n\
-    strb    r0, [r1]\n\
-._570:\n\
-    ldrh    r1, [r2]\n\
-    lsl r0, r1, #0x1\n\
-    add r0, r0, r1\n\
-    lsl r0, r0, #0x2\n\
-    add r0, r0, r3\n\
-    ldrb    r1, [r0, #0x6]\n\
-    mov r0, #0x8\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._572   @cond_branch\n\
-    mov r0, #0x0\n\
-    bl  GetBattlerAtPosition\n\
-    ldr r5, ._574 + 4   @ gBattlerTarget\n\
-    strb    r0, [r5]\n\
-    ldr r0, ._574 + 8   @ gAbsentBattlerFlags\n\
-    ldrb    r1, [r0]\n\
-    ldr r2, ._574 + 12  @ gBitTable\n\
-    ldrb    r0, [r5]\n\
-    lsl r0, r0, #0x2\n\
-    add r0, r0, r2\n\
-    ldr r0, [r0]\n\
-    and r1, r1, r0\n\
-    cmp r1, #0\n\
-    beq ._572   @cond_branch\n\
-    mov r0, #0x2\n\
-    bl  GetBattlerAtPosition\n\
-    strb    r0, [r5]\n\
-._572:\n\
-    ldr r0, ._574 + 4   @ gBattlerTarget\n\
-    ldrb    r2, [r0]\n\
-    lsl r2, r2, #0x8\n\
-    orr r2, r2, r4\n\
-    mov r0, #0x1\n\
-    mov r1, #0xa\n\
-    bl  BtlController_EmitTwoReturnValues\n\
-    b   ._573\n\
-._575:\n\
-    .align  2, 0\n\
-._574:\n\
-    .word   gBattleMoves\n\
-    .word   gBattlerTarget\n\
-    .word   gAbsentBattlerFlags\n\
-    .word   gBitTable\n\
-._563:\n\
-    mov r6, #0x3\n\
-._576:\n\
-    bl  Random\n\
-    add r4, r0, #0\n\
-    and r4, r4, r6\n\
-    lsl r0, r4, #0x1\n\
-    add r0, r5, r0\n\
-    ldrh    r2, [r0]\n\
-    cmp r2, #0\n\
-    beq ._576   @cond_branch\n\
-    ldr r1, ._579       @ gBattleMoves\n\
-    lsl r0, r2, #0x1\n\
-    add r0, r0, r2\n\
-    lsl r0, r0, #0x2\n\
-    add r0, r0, r1\n\
-    ldrb    r1, [r0, #0x6]\n\
-    mov r0, #0x12\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._577   @cond_branch\n\
-    ldr r0, ._579 + 4   @ gActiveBattler\n\
-    ldrb    r2, [r0]\n\
-    lsl r2, r2, #0x8\n\
-    b   ._578\n\
-._580:\n\
-    .align  2, 0\n\
-._579:\n\
-    .word   gBattleMoves\n\
-    .word   gActiveBattler\n\
-._577:\n\
-    ldr r0, ._583       @ gBattleTypeFlags\n\
-    ldrh    r1, [r0]\n\
-    mov r0, #0x1\n\
-    and r0, r0, r1\n\
-    cmp r0, #0\n\
-    beq ._581   @cond_branch\n\
-    bl  Random\n\
-    mov r1, #0x2\n\
-    and r1, r1, r0\n\
-    lsl r1, r1, #0x18\n\
-    lsr r1, r1, #0x18\n\
-    add r0, r1, #0\n\
-    bl  GetBattlerAtPosition\n\
-    add r2, r0, #0\n\
-    lsl r2, r2, #0x18\n\
-    lsr r2, r2, #0x10\n\
-._578:\n\
-    orr r2, r2, r4\n\
-    mov r0, #0x1\n\
-    mov r1, #0xa\n\
-    bl  BtlController_EmitTwoReturnValues\n\
-    b   ._582\n\
-._584:\n\
-    .align  2, 0\n\
-._583:\n\
-    .word   gBattleTypeFlags\n\
-._581:\n\
-    mov r0, #0x0\n\
-    bl  GetBattlerAtPosition\n\
-    add r2, r0, #0\n\
-    lsl r2, r2, #0x18\n\
-    lsr r2, r2, #0x10\n\
-    orr r2, r2, r4\n\
-    mov r0, #0x1\n\
-    mov r1, #0xa\n\
-    bl  BtlController_EmitTwoReturnValues\n\
-._582:\n\
-    bl  OpponentBufferExecCompleted\n\
-._562:\n\
-    pop {r3, r4, r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov sl, r5\n\
-    pop {r4, r5, r6, r7}\n\
-    pop {r0}\n\
-    bx  r0");
-}
-#else
 void OpponentHandlecmd20(void)
 {
     u8 chosenMoveId;
+    u16 move;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBattler][4];
-
+#if DEBUG
+    u16 battler;
+    if (gUnknown_02023A14_50 & 4)
+    {
+        // Move selection cycle
+        move = MOVE_NONE;
+        while (move == MOVE_NONE)
+        {
+            move = moveInfo->moves[gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) + ((gActiveBattler & BIT_FLANK) >> 1)]];
+            chosenMoveId = gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) + ((gActiveBattler & BIT_FLANK) >> 1)];
+            if (move != MOVE_NONE)
+            {
+                gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) +  ((gActiveBattler & BIT_FLANK) >> 1)]++;
+            }
+            else
+            {
+                gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) +  ((gActiveBattler & BIT_FLANK) >> 1)] = 0;
+            }
+            if (gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) +  ((gActiveBattler & BIT_FLANK) >> 1)] >= 4)
+            {
+                gSharedMem[BSTRUCT_OFF(dbgAICycleMoveTracker) +  ((gActiveBattler & BIT_FLANK) >> 1)] = 0;
+            }
+        }
+        if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+        {
+            battler = gActiveBattler;
+        }
+        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        {
+            if (gUnknown_02023A14_50 & 2)
+            {
+                if (gBattleMoves[move].target == MOVE_TARGET_SELECTED)
+                {
+                    battler = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
+                }
+                else
+                {
+                    battler = GetBattlerAtPosition(0);
+                }
+            }
+            else
+            {
+                battler = (Random() & BIT_FLANK);
+            }
+        }
+        else
+        {
+            battler = GetBattlerAtPosition(0);
+        }
+        BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, (battler << 8) | chosenMoveId);
+        OpponentBufferExecCompleted();
+    }
+    else
+#endif //DEBUG
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
     {
         BattleAI_SetupAIData();
@@ -1764,7 +1505,7 @@ void OpponentHandlecmd20(void)
         default:
             if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                 gBattlerTarget = gActiveBattler;
-            if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & 8)
+            if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
             {
                 gBattlerTarget = GetBattlerAtPosition(0);
                 if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
@@ -1777,30 +1518,32 @@ void OpponentHandlecmd20(void)
     }
     else
     {
-        u16 move;
-
-        do
+        while (1)
         {
-            // Can't for the life of me get this to match.
             chosenMoveId = Random() & 3;
             move = moveInfo->moves[chosenMoveId];
-        } while (move == 0);
+            if (move != MOVE_NONE)
+            {
+                break;
+            }
+        }
 
         if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
             BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gActiveBattler << 8));
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(Random() & 2) << 8));
+            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(Random() & BIT_FLANK) << 8));
         else
             BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(0) << 8));
         OpponentBufferExecCompleted();
     }
 }
-#endif
 
 void OpponentHandleOpenBag(void)
 {
-    // What is this?
-    BtlController_EmitOneReturnValue(1, ewram160D4(gActiveBattler));
+    // The AI will only ever use an item whose ID fits in 8 bits.
+    // If you want the AI to use an item with a higher ID, uncomment the code
+    // in the line below.
+    BtlController_EmitOneReturnValue(1, gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2]/* | (gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2 + 1] */);
     OpponentBufferExecCompleted();
 }
 
@@ -1808,7 +1551,7 @@ void OpponentHandlecmd22(void)
 {
     s32 r4;
 
-    if (ewram160C8arr(GetBattlerPosition(gActiveBattler)) == 6)
+    if (gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] == PARTY_SIZE)
     {
         u8 r6;
         u8 r5;
@@ -1837,10 +1580,10 @@ void OpponentHandlecmd22(void)
     }
     else
     {
-        r4 = ewram160C8arr(GetBattlerPosition(gActiveBattler));
-        ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6;
+        r4 = gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)];
+        gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = PARTY_SIZE;
     }
-    ewram16068arr(gActiveBattler) = r4;
+    gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + gActiveBattler] = r4;
     BtlController_EmitChosenMonReturnValue(1, r4, 0);
     OpponentBufferExecCompleted();
 }
@@ -2019,7 +1762,7 @@ void OpponentHandleFaintingCry(void)
 void OpponentHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     OpponentBufferExecCompleted();
 }
 
@@ -2030,7 +1773,7 @@ void OpponentHandleTrainerBallThrow(void)
     oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8035C10);
     taskId = CreateTask(sub_8035C44, 5);
@@ -2097,7 +1840,7 @@ void OpponentHandlecmd48(void)
     }
     gUnknown_02024E68[gActiveBattler] = sub_8044804(
       gActiveBattler,
-      (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBattler][4],
+      (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
       gBattleBufferA[gActiveBattler][1],
       gBattleBufferA[gActiveBattler][2]);
     ewram17810[gActiveBattler].unk5 = 0;

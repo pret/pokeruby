@@ -29,13 +29,13 @@ void sub_80CE30C(struct Sprite* sprite)
 {
     if (IsContest())
     {
-        sprite->pos1.x = 0x30;
-        sprite->pos1.y = 0x28;
+        sprite->x = 0x30;
+        sprite->y = 0x28;
     }
     else
     {
-        sprite->pos1.x = gBattleAnimArgs[0];
-        sprite->pos1.y = gBattleAnimArgs[1];
+        sprite->x = gBattleAnimArgs[0];
+        sprite->y = gBattleAnimArgs[1];
     }
 
     sprite->oam.shape = 0;

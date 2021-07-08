@@ -56,12 +56,12 @@ static void sub_80CF310(struct Sprite* sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.y -= 3;
+        sprite->y2 -= 3;
         if (++sprite->data[1] == 6)
             sprite->data[0]++;
         break;
     case 1:
-        sprite->pos2.y += 3;
+        sprite->y2 += 3;
         if (--sprite->data[1] == 0)
             sprite->data[0]++;
         break;

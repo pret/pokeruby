@@ -40,7 +40,7 @@ void sub_80D0118(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 0);
     if (GetBattlerSide(gBattleAnimAttacker) == 0)
-        sprite->pos1.y += 16;
+        sprite->y += 16;
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = gBattleAnimArgs[2];

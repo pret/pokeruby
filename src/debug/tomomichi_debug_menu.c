@@ -4470,47 +4470,47 @@ NAKED void PicTest_Redraw(u8 a0)
 
 static void PrepareDebugOverlayBeforeShowingContestPainting(u8 a0)
 {
-    struct ContestEntry *contestEntry = &ewram15DE0;
+    struct ContestWinner *contestEntry = &eCurContestWinner;
     contestEntry->species = sPicTest_Species;
     contestEntry->otId = sPicTest_OTID;
     contestEntry->personality = sPicTest_Personality;
     switch (a0)
     {
         case 0:
-            ewram15DDF = 0;
-            ewram15DDE = 0;
-            contestEntry->contestType = sPicTest_ContestType - 1;
-            StringCopy(contestEntry->trainer_name, sDummyTrainerName);
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 0;
+            contestEntry->contestCategory = sPicTest_ContestType - 1;
+            StringCopy(contestEntry->trainerName, sDummyTrainerName);
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 1:
-            ewram15DDF = 0;
-            ewram15DDE = 8;
-            contestEntry->contestType = sPicTest_MuseumArtTitleType - 1;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = sPicTest_MuseumArtTitleType - 1;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 2:
-            ewram15DDF = 1;
-            ewram15DDE = 8;
-            contestEntry->contestType = sPicTest_PreviewType - 1;
+            eCurContestWinnerIsForArtist = TRUE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = sPicTest_PreviewType - 1;
             break;
         case 3:
-            ewram15DDF = 0;
-            ewram15DDE = 8;
-            contestEntry->contestType = 0;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = 0;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 4:
-            ewram15DDF = 0;
-            ewram15DDE = 8;
-            contestEntry->contestType = 3;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = 3;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
         case 5:
-            ewram15DDF = 0;
-            ewram15DDE = 8;
-            contestEntry->contestType = 9;
-            StringCopy(contestEntry->pokemon_name, sDummyNickname);
+            eCurContestWinnerIsForArtist = FALSE;
+            eCurContestWinnerSaveIdx = 8;
+            contestEntry->contestCategory = 9;
+            StringCopy(contestEntry->nickname, sDummyNickname);
             break;
     }
 }

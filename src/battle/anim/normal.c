@@ -310,8 +310,8 @@ const u16 gUnknown_083DB568 = RGB(31, 31, 31);
 // arg 4: duration
 static void AnimConfusionDuck(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -332,8 +332,8 @@ static void AnimConfusionDuck(struct Sprite *sprite)
 
 static void AnimConfusionDuckStep(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 30);
-    sprite->pos2.y = Sin(sprite->data[0], 10);
+    sprite->x2 = Cos(sprite->data[0], 30);
+    sprite->y2 = Sin(sprite->data[0], 10);
 
     if ((u16)sprite->data[0] < 128)
         sprite->oam.priority = 1;
@@ -449,8 +449,8 @@ static void sub_80E1F0C(struct Sprite *sprite)
 
 static void sub_80E1F3C(struct Sprite *sprite)
 {
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = 0;
     sprite->data[1] = 10;
     sprite->data[2] = 8;
@@ -904,8 +904,8 @@ static void sub_80E2870(struct Sprite *sprite)
     else
         sub_8078764(sprite, FALSE);
 
-    sprite->pos2.x += (Random() % 48) - 24;
-    sprite->pos2.y += (Random() % 24) - 12;
+    sprite->x2 += (Random() % 48) - 24;
+    sprite->y2 += (Random() % 24) - 12;
 
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;
@@ -914,10 +914,10 @@ static void sub_80E2870(struct Sprite *sprite)
 static void sub_80E2908(struct Sprite *sprite)
 {
     sprite->data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x + gSprites[sprite->data[0]].pos2.x;
-    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y + gSprites[sprite->data[0]].pos2.y;
-    sprite->pos2.x = gBattleAnimArgs[1];
-    sprite->pos2.y = gBattleAnimArgs[2];
+    sprite->x = gSprites[sprite->data[0]].x + gSprites[sprite->data[0]].x2;
+    sprite->y = gSprites[sprite->data[0]].y + gSprites[sprite->data[0]].y2;
+    sprite->x2 = gBattleAnimArgs[1];
+    sprite->y2 = gBattleAnimArgs[2];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     StoreSpriteCallbackInData(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80785E4;
@@ -1227,7 +1227,7 @@ void sub_80E2F2C(u8 taskId)
 
     if (IsContest())
     {
-        species = eWRAM_19348Struct->species2;
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -1248,8 +1248,8 @@ void sub_80E2F2C(u8 taskId)
     LZDecompressVram(&gUnknown_08D20A14, subStruct.field_0);
     LoadPalette(&gUnknown_083DB568, subStruct.field_8 * 16 + 1, 2);
 
-    gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
-    gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
+    gBattle_BG1_X = -gSprites[spriteId].x + 32;
+    gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     gTasks[taskId].data[0] = newSpriteId;
     gTasks[taskId].data[6] = var0;
     gTasks[taskId].func = sub_80E3194;
@@ -1364,7 +1364,7 @@ static void sub_80E3338(u8 taskId)
 
     if (IsContest())
     {
-        species = eWRAM_19348Struct->species2;
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -1694,7 +1694,7 @@ void sub_80E3C4C(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 
     if (IsContest())
     {
-        species = eWRAM_19348Struct->species2;
+        species = gContestResources__moveAnim.species;
     }
     else
     {
@@ -1816,7 +1816,7 @@ void sub_80E4028(u8 taskId)
     }
 
     offset = gBattleAnimArgs[1] * 32;
-    dest = IsContest() ? &ewram14800[offset] : &ewram18000_2[offset];
+    dest = IsContest() ? &((u8 *)eBattleAnimPalBackup_Contest)[offset] : &((u8 *)eBattleAnimPalBackup_Battle)[offset];
     // This doesn't match when u16* is used.
     memcpy(dest, &((u8 *)gPlttBufferUnfaded)[i * 32], 32);
     DestroyAnimVisualTask(taskId);
@@ -1851,7 +1851,7 @@ void sub_80E40D0(u8 taskId)
 
     dest = &((u8 *)gPlttBufferUnfaded)[i * 32];
     offset = gBattleAnimArgs[1] * 32;
-    src = IsContest() ? &ewram14800[offset] : &ewram18000_2[offset];
+    src = IsContest() ? &((u8 *)eBattleAnimPalBackup_Contest)[offset] : &((u8 *)eBattleAnimPalBackup_Battle)[offset];
     // This doesn't match when u16* is used.
     memcpy(dest, src, 32);
     DestroyAnimVisualTask(taskId);
@@ -1932,8 +1932,8 @@ void sub_80E4300(u8 taskId)
     }
     else
     {
-        gTasks[taskId].data[0] = ewram17800[gBattleAnimAttacker].invisible;
-        ewram17800[gBattleAnimAttacker].invisible = TRUE;
+        gTasks[taskId].data[0] = gBattleSpriteInfo[gBattleAnimAttacker].invisible;
+        gBattleSpriteInfo[gBattleAnimAttacker].invisible = TRUE;
         gTasks[taskId].func = sub_80E4368;
         gAnimVisualTaskCount--;
     }
@@ -1943,7 +1943,7 @@ static void sub_80E4368(u8 taskId)
 {
     if (gBattleAnimArgs[7] == 0x1000)
     {
-        ewram17800[gBattleAnimAttacker].invisible = gTasks[taskId].data[0] & 1;
+        gBattleSpriteInfo[gBattleAnimAttacker].invisible = gTasks[taskId].data[0] & 1;
         DestroyTask(taskId);
     }
 }

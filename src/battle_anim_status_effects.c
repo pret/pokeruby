@@ -85,7 +85,7 @@ u8 unref_sub_807B69C(u8 a, u8 b)
         gTasks[taskId].data[1] = 0x1F;
         for (i = 0; i < 10; i++)
         {
-            spriteId2 = CreateSprite(&gSpriteTemplate_83931F8, gSprites[spriteId1].pos1.x, gSprites[spriteId1].pos1.y + 32, 0);
+            spriteId2 = CreateSprite(&gSpriteTemplate_83931F8, gSprites[spriteId1].x, gSprites[spriteId1].y + 32, 0);
             gSprites[spriteId2].data[0] = i * 51;
             gSprites[spriteId2].data[1] = -256;
             gSprites[spriteId2].invisible = TRUE;
@@ -98,7 +98,7 @@ u8 unref_sub_807B69C(u8 a, u8 b)
         gTasks[taskId].data[1] = 0x7C00;
         for (i = 0; i < 10; i++)
         {
-            spriteId2 = CreateSprite(&gSpriteTemplate_83931F8, gSprites[spriteId1].pos1.x, gSprites[spriteId1].pos1.y - 32, 0);
+            spriteId2 = CreateSprite(&gSpriteTemplate_83931F8, gSprites[spriteId1].x, gSprites[spriteId1].y - 32, 0);
             gSprites[spriteId2].data[0] = i * 51;
             gSprites[spriteId2].data[1] = 256;
             gSprites[spriteId2].invisible = TRUE;
@@ -159,15 +159,15 @@ static void sub_807B870(struct Sprite *sprite)
 
 static void sub_807B8A4(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data[0], 32);
-    sprite->pos2.y = Sin(sprite->data[0], 8);
+    sprite->x2 = Cos(sprite->data[0], 32);
+    sprite->y2 = Sin(sprite->data[0], 8);
     if (sprite->data[0] < 128)
         sprite->subpriority = 29;
     else
         sprite->subpriority = 31;
     sprite->data[0] = (sprite->data[0] + 8) & 0xFF;
     sprite->data[5] += sprite->data[1];
-    sprite->pos2.y += sprite->data[5] >> 8;
+    sprite->y2 += sprite->data[5] >> 8;
     sprite->data[2]++;
     if (sprite->data[2] == 52)
     {

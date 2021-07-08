@@ -36,6 +36,12 @@
 #define KANA(txt) _(txt)
 #endif
 
+#define SWAP(x,y,t) {\
+    t = x;           \
+    x = y;           \
+    y = t;           \
+}
+
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
@@ -89,6 +95,18 @@ enum
     (ptr)[3] = ((value) >> 24) & 0xFF;\
 })
 
+// Converts a number to Q8.8 fixed-point format
+#define Q_8_8(n)   ((s16)((n) * 256))
+
+// Converts a number from Q8.8 fixed-point format to integer
+#define Q_8_8_TO_INT(n)  ((s16)((n) >> 8))
+
+// Converts a number to Q4.12 fixed-point format
+#define Q_4_12(n)  ((s16)((n) * 4096))
+
+// Converts a number from Q4.12 fixed-point format to integer
+#define Q_4_12_TO_INT(n)    ((s16)((n) >> 12))
+
 // Credits to Made (dolphin emoji)
 #define S16TOPOSFLOAT(val)   \
 ({                           \
@@ -115,26 +133,31 @@ struct UCoords16
     u16 y;
 };
 
+struct SecretBaseParty
+{
+    /*0x1A3C*/ u32 personality[PARTY_SIZE];
+    /*0x1A54*/ u16 moves[PARTY_SIZE * MAX_MON_MOVES];
+    /*0x1A84*/ u16 species[PARTY_SIZE];
+    /*0x1A90*/ u16 heldItems[PARTY_SIZE];
+    /*0x1A9C*/ u8 levels[PARTY_SIZE];
+    /*0x1AA2*/ u8 EVs[PARTY_SIZE];
+};
+
 struct SecretBaseRecord
 {
     /*0x1A08*/ u8 secretBaseId;
-    /*0x1A09*/ u8 sbr_field_1_0:4;
+    /*0x1A09*/ u8 toRegister:4;
     /*0x1A09*/ u8 gender:1;
-    /*0x1A09*/ u8 sbr_field_1_5:1;
-    /*0x1A09*/ u8 sbr_field_1_6:2;
+    /*0x1A09*/ u8 battledOwnerToday:1;
+    /*0x1A09*/ u8 registryStatus:2;
     /*0x1A0A*/ u8 playerName[OT_NAME_LENGTH];
     /*0x1A11*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
-    /*0x1A16*/ u16 sbr_field_e;
-    /*0x1A18*/ u8 sbr_field_10;
-    /*0x1A19*/ u8 sbr_field_11;
+    /*0x1A16*/ u16 numSecretBasesReceived;
+    /*0x1A18*/ u8 numTimesEntered;
+    /*0x1A19*/ u8 unused;
     /*0x1A1A*/ u8 decorations[DECOR_MAX_SECRET_BASE];
     /*0x1A2A*/ u8 decorationPos[DECOR_MAX_SECRET_BASE];
-    /*0x1A3C*/ u32 partyPersonality[PARTY_SIZE];
-    /*0x1A54*/ u16 partyMoves[PARTY_SIZE * 4];
-    /*0x1A84*/ u16 partySpecies[PARTY_SIZE];
-    /*0x1A90*/ u16 partyHeldItems[PARTY_SIZE];
-    /*0x1A9C*/ u8 partyLevels[PARTY_SIZE];
-    /*0x1AA2*/ u8 partyEVs[PARTY_SIZE];
+    /*0x1A3C*/ struct SecretBaseParty party;
 };
 
 #include "constants/game_stat.h"
@@ -735,7 +758,7 @@ struct Time
 struct Pokedex
 {
     /*0x00*/ u8 order;
-    /*0x01*/ u8 unknown1;
+    /*0x01*/ u8 mode;
     /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
     /*0x03*/ u8 unknown2;
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
@@ -846,12 +869,6 @@ struct UnkStruct_8054FF8
     u8 d;
     struct MapPosition sub;
     u16 field_C;
-};
-
-// wasnt defined so I had to define it
-struct HallOfFame
-{
-    u8 filler[0x1F00];
 };
 
 extern struct SaveBlock2 gSaveBlock2;

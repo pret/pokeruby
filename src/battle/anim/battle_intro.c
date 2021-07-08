@@ -12,7 +12,7 @@
 #include "trig.h"
 
 extern u16 gBattleTypeFlags;
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gBattleMonForms[];
 
 extern void sub_800FE20(struct Sprite *);
@@ -118,7 +118,7 @@ static void BattleIntroTask_ScrollScenery(u8 taskId)
             gTasks[taskId].tState++;
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -227,7 +227,7 @@ static void BattleIntroTask_FadeScenery(u8 taskId)
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
             gTasks[taskId].data[5] = 1;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -323,7 +323,7 @@ static void BattleIntroTask_ScrollAndFadeScenery(u8 taskId)
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
             gTasks[taskId].data[5] = 1;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -402,10 +402,10 @@ static void BattleIntroTask_80E4C34(u8 taskId)
         if (gTasks[taskId].tBgXOffset == 0)
         {
             gTasks[taskId].tState++;
-            gSprites[ewram1608A].oam.objMode = 2;
-            gSprites[ewram1608A].callback = sub_800FE20;
-            gSprites[ewram1608B].oam.objMode = 2;
-            gSprites[ewram1608B].callback = sub_800FE20;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].oam.objMode = 2;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].callback = sub_800FE20;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.objMode = 2;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].callback = sub_800FE20;
             REG_WININ = 0x3F;
             REG_WINOUT = 0x3F06;
         }
@@ -419,7 +419,7 @@ static void BattleIntroTask_80E4C34(u8 taskId)
             gTasks[taskId].tState++;
             gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
             gTasks[taskId].tFramesUntilBg1Slide = 32;
-            gUnknown_02024DE8 &= ~1;
+            gIntroSlideFlags &= ~1;
         }
         break;
     case 3:
@@ -463,7 +463,7 @@ void sub_80E4EF8(u8 left, u8 top, u8 c, u8 paletteNum, u16 e, u8 bgMap, u8 g)
     s32 y;
     u8 bank = GetBattlerAtPosition(c);
 
-    DmaCopy16(3, gUnknown_081FAF4C[c] + gBattleMonForms[bank] * 0x800, (void *)(VRAM + e), 0x800);
+    DmaCopy16(3, gMonSpriteGfx_Sprite_ptr[c] + gBattleMonForms[bank] * 0x800, (void *)(VRAM + e), 0x800);
     tileNum = e / 32 - g * 512;
     for (y = top; y < top + 8; y++)
     {
@@ -481,7 +481,7 @@ void unref_sub_80E4FDC(u8 left, u8 top, u8 c, u8 form, u8 paletteNum, u16 f, u8 
     s32 x;
     s32 y;
 
-    DmaCopy16(3, gUnknown_081FAF4C[c] + form * 0x800, (void *)(VRAM + f), 0x800);
+    DmaCopy16(3, gMonSpriteGfx_Sprite_ptr[c] + form * 0x800, (void *)(VRAM + f), 0x800);
     tileNum = f / 32 - h * 512;
     for (y = top; y < top + 8; y++)
     {

@@ -15,7 +15,7 @@
 #include "util.h"
 #include "ewram.h"
 
-extern struct Window gUnknown_03004210;
+extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gDisplayedStringBattle[];
 extern u8 gActionSelectionCursor[];
 
@@ -27,7 +27,7 @@ extern void *gBattlerControllerFuncs[];
 extern u8 gBattleBufferA[][0x200];
 extern bool8 gDoingBattleAnim;
 extern u8 gBattlerSpriteIds[];
-extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u16 gBattleTypeFlags;
 extern u32 gBattleControllerExecFlags;
 extern u16 gSpecialVar_ItemId;
@@ -35,7 +35,7 @@ extern MainCallback gPreBattleCallback1;
 extern u8 gBankInMenu;
 extern u8 gHealthboxSpriteIds[];
 extern u16 gBattlerPartyIndexes[];
-extern u16 gUnknown_02024DE8;
+extern u16 gIntroSlideFlags;
 extern u8 gBattleOutcome;
 
 extern u8 GetBattlerSide(u8);
@@ -290,7 +290,7 @@ void sub_812B65C(void)
 
 void sub_812B694(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gWindowTemplate_Contest_MoveDescription.state == 0)
         SafariBufferExecCompleted();
 }
 
@@ -396,12 +396,12 @@ void SafariHandleTrainerThrow(void)
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_02024E8C,
+      &gCreatingSpriteTemplate,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
     gBattlerControllerFuncs[gActiveBattler] = sub_812B65C;
@@ -461,7 +461,7 @@ void SafariHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_812B694;
 }
 
@@ -479,13 +479,13 @@ void SafariHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    gUnknown_03004210.paletteNum = 0;
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
+    gWindowTemplate_Contest_MoveDescription.paletteNum = 0;
+    Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 10, 2, 15, 27, 18);
+    Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 10, 2, 35, 16, 36);
     gBattlerControllerFuncs[gActiveBattler] = bx_battle_menu_t6_2;
 
-    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, BattleText_MenuOptionsSafari, 400, 18, 35);
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (i = 0; i < 4; i++)
@@ -494,8 +494,8 @@ void SafariHandlecmd18(void)
     sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(BattleText_PlayerMenu);
 
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
+    Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
 }
 
 void SafariHandlecmd19(void)
@@ -650,7 +650,7 @@ void SafariHandleFaintingCry(void)
 void SafariHandleIntroSlide(void)
 {
     StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_02024DE8 |= 1;
+    gIntroSlideFlags |= 1;
     SafariBufferExecCompleted();
 }
 

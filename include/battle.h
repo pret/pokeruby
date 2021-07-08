@@ -4,6 +4,7 @@
 #include "sprite.h"
 #include "constants/battle.h"
 #include "battle_setup.h"
+#include "main.h"
 
 #define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
@@ -232,14 +233,14 @@ struct BattleResults
 {
     u8 playerFaintCounter;    // 0x0
     u8 opponentFaintCounter;  // 0x1
-    u8 unk2;                  // 0x2
-    u8 unk3;                  // 0x3
-    u8 unk4;                  // 0x4
+    u8 totalMonSwitchCounter; // 0x2
+    u8 playerHealInBattleCount; // 0x3
+    u8 reviveCount;           // 0x4
     u8 playerMonWasDamaged:1; // 0x5
-    u8 unk5_1:1;              // 0x5
+    u8 usedMasterBall:1;      // 0x5
     u16 poke1Species;         // 0x6
     u8 pokeString1[10];       // 0x8
-    u8 unk12;
+    u8 unk12; // unused
     u8 battleTurnCounter;     // 0x13
     u8 pokeString2[10];       // 0x14
     u8 filler1E[2];
@@ -281,211 +282,170 @@ struct AI_Stack
     u8 size;
 };
 
+struct LinkPartnerHeader
+{
+    u8 versionSignatureLo;
+    u8 versionSignatureHi;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+};
+
+union MultiBuffers
+{
+    struct LinkPartnerHeader linkPartnerHeader;
+    struct MultiBattlePokemonTx multiBattleMons[3];
+};
+
+// Used internally
+struct LinkBattleCommunicationHeader
+{
+    u8 state;
+    u8 activeBattler;
+    u8 battlerAttacker;
+    u8 battlerTarget;
+    u16 size;
+    u8 absentBattlerFlags;
+    u8 effectBattler;
+    u8 data[0];
+};
+
+struct ChooseMoveStruct {
+    u16 moves[4];
+    u8 currentPp[4];
+    u8 maxPp[4];
+    u16 species;
+    u8 monType1;
+    u8 monType2;
+};
+
 struct BattleStruct /* 0x2000000 */
 {
-    /*0x00000*/ u8 unk0;
-    /*0x00001*/ bool8 unk1;
-    /*0x00002*/ u8 unk2;
-    /*0x00003*/ bool8 unk3;
-    u8 filler4[0x15DDA];
-    /*0x15DDE*/ u8 unk15DDE;
-    /*0x15DDF*/ u8 unk15DDF;
-    /*0x15DE0*/ u8 filler15DE0[0x220];
+    u8 filler00000[0x14000];
+    /*0x14000*/ u8 linkSend[0x1000];
+    /*0x15000*/ u8 linkRecv[0x1000];
     /*0x16000*/ u8 turnEffectsTracker;
     /*0x16001*/ u8 turnEffectsBattlerId;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
-    /*0x16004*/ u8 wrappedMove[8];
+    /*0x16004*/ u8 wrappedMove[MAX_BATTLERS_COUNT * 2];
     /*0x1600C*/ u8 cmd49StateTracker;
-    /*0x1600D*/ u8 unk1600D;
+    /*0x1600D*/ u8 unk1600D; // unused
     /*0x1600E*/ u8 turnCountersTracker;
     /*0x1600F*/ u8 getexpStateTracker;
-    /*0x16010*/ u8 moveTarget[4];
-    /*0x16014*/ u8 unk16014;
-    /*0x16015*/ u8 unk16015;
-    /*0x16016*/ u8 unk16016;
-    /*0x16017*/ u8 unk16017;
+    /*0x16010*/ u8 moveTarget[MAX_BATTLERS_COUNT];
+    /*0x16014*/ u32 painSplitHP;
     /*0x16018*/ u8 expGetterMonId;
-    /*0x16019*/ u8 unk16019;
+    /*0x16019*/ u8 unk16019; // unused
     /*0x1601A*/ u8 atk5A_StateTracker; //also atk5B, statetracker
     /*0x1601B*/ u8 wildVictorySong;
     /*0x1601C*/ u8 dynamicMoveType;
-    /*0x1601D*/ u8 unk1601D;
+    /*0x1601D*/ u8 focusPunchBattler;
     /*0x1601E*/ u8 statChanger;
     /*0x1601F*/ u8 dmgMultiplier;
-    /*0x16020*/ u8 wrappedBy[4];
-    /*0x16024*/ u16 assistMove[24];
-    /*0x16054*/ u8 unk16054;
-    /*0x16055*/ u8 unk16055;
+    /*0x16020*/ u8 wrappedBy[MAX_BATTLERS_COUNT];
+    /*0x16024*/ u16 assistMove[PARTY_SIZE * MAX_MON_MOVES];
+    /*0x16054*/ u8 battlerPreventingSwitchout;
+    /*0x16055*/ u8 unk16055; // unused
     /*0x16056*/ u8 moneyMultiplier;
-    /*0x16057*/ u8 unk16057;
-    /*0x16058*/ u8 unk16058;
-    /*0x16059*/ u8 sub80173A4_Tracker;
-    /*0x1605A*/ u8 unk1605A;
-    /*0x1605B*/ u8 unk1605B;
+    /*0x16057*/ u8 savedTurnActionNumber;
+    /*0x16058*/ u8 switchInAbilitiesCounter;
+    /*0x16059*/ u8 faintedActionsState;
+    /*0x1605A*/ u8 faintedActionsBattlerId;
     /*0x1605C*/ u16 exp;
     /*0x1605E*/ u8 unk1605E;
     /*0x1605F*/ u8 sentInPokes;
-    /*0x16060*/ u8 unk16060[4];
-    /*0x16064*/ u8 unk16064[4];
+    /*0x16060*/ u8 selectionScriptFinished[MAX_BATTLERS_COUNT];
+    /*0x16064*/ u8 unk16064[MAX_BATTLERS_COUNT];
     /*0x16068*/ u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    /*0x1606C*/ u8 unk1606C[4][3];
-    /*0x16078*/ u8 unk16078;
-    /*0x16079*/ u8 caughtNick[11];
-    /*0x16084*/ u8 unk16084;
+    /*0x1606C*/ u8 unk1606C[MAX_BATTLERS_COUNT][3];
+    /*0x16078*/ u8 runTries;
+    /*0x16079*/ u8 caughtNick[POKEMON_NAME_LENGTH + 1];
+    /*0x16084*/ u8 battleStyle;
     /*0x16085*/ u8 unk16085;
-    /*0x16086*/ u8 unk16086;
-    /*0x16087*/ u8 unk16087;
+    /*0x16086*/ u8 safariGoNearCounter;
+    /*0x16087*/ u8 safariPkblThrowCounter;
     /*0x16088*/ u8 safariFleeRate;
-    /*0x16089*/ u8 unk16089;
-    /*0x1608A*/ u8 unk1608A;
-    /*0x1608B*/ u8 unk1608B;
-    /*0x1608C*/ u8 ChosenMoveID[4];
+    /*0x16089*/ u8 safariCatchFactor;
+    /*0x1608A*/ u8 linkBattleVsSpriteId_V;
+    /*0x1608B*/ u8 linkBattleVsSpriteId_S;
+    /*0x1608C*/ u8 ChosenMoveID[MAX_BATTLERS_COUNT];
     /*0x16090*/ s32 bideDmg;
-    /*0x16094*/ u8 unk16094;
-    /*0x16095*/ u8 unk16095;
-    /*0x16096*/ u8 unk16096;
-    /*0x16097*/ u8 unk16097;
-    /*0x16098*/ u8 unk16098;
-    /*0x16099*/ u8 unk16099;
-    /*0x1609A*/ u8 unk1609a;
+    /*0x16094*/ u8 stateIdAfterSelScript[4];
+    /*0x16098*/ u8 unk16098[3]; // unused
     /*0x1609B*/ u8 castformToChangeInto;
     /*0x1609C*/ u8 atk6C_statetracker;
     /*0x1609D*/ u8 unk1609D;
-    /*0x1609E*/ u8 unk1609E;
-    /*0x1609F*/ u8 unk1609F;
+    /*0x1609E*/ u8 dbgAICycleMoveTracker[2]; // debug
     /*0x160A0*/ u8 stringMoveType;
     /*0x160A1*/ u8 animTargetsHit;
     /*0x160A2*/ u8 expGetterBattlerId;
     /*0x160A3*/ u8 unk160A3;
     /*0x160A4*/ u8 animArg1;
     /*0x160A5*/ u8 animArg2;
-    /*0x160A6*/ u8 unk160A6;
+    /*0x160A6*/ u8 unk160A6; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
     /*0x160A7*/ u8 unk160A7;
     /*0x160A8*/ u8 unk160A8;
     /*0x160A9*/ u8 unk160A9;
-    /*0x160AA*/ u8 unk160Aa;
-    /*0x160AB*/ u8 unk160Ab;
-    /*0x160AC*/ u8 unk160AC;
-    /*0x160AD*/ u8 unk160AD;
-    /*0x160AE*/ u8 unk160AE;
-    /*0x160AF*/ u8 unk160AF;
-    /*0x160B0*/ u8 unk160B0;
-    /*0x160B1*/ u8 unk160B1;
-    /*0x160B2*/ u8 unk160B2;
-    /*0x160B3*/ u8 unk160B3;
-    /*0x160B4*/ u8 unk160B4;
-    /*0x160B5*/ u8 unk160B5;
-    /*0x160B6*/ u8 unk160B6;
-    /*0x160B7*/ u8 unk160B7;
-    /*0x160B8*/ u8 unk160B8;
-    /*0x160B9*/ u8 unk160B9;
-    /*0x160BA*/ u8 unk160Ba;
-    /*0x160BB*/ u8 unk160Bb;
+    /*0x160AA*/ u8 unk160AA;
+    /*0x160AB*/ u8 unk160AB;
+    /*0x160AC*/ u16 lastTakenMove[2 * 2 * 2];
     /*0x160BC*/ u16 HP_OnSwitchout[2];
-    /*0x160C0*/ u8 unk160C0;
+    /*0x160C0*/ u8 abilityPreventingSwitchout;
     /*0x160C1*/ u8 hpScale;
-    /*0x160C2*/ u8 unk160C2;
-    /*0x160C3*/ u8 unk160C3;
-    /*0x160C4*/ u8 unk160C4;
-    /*0x160C5*/ u8 unk160C5;
-    /*0x160C6*/ u8 unk160C6;
-    /*0x160C7*/ u8 unk160C7;
+    /*0x160C2*/ u16 unk160C2;
+    /*0x160C4*/ MainCallback unk160C4;
+
+    // Buffers used by the AI are indexed using (battler / 2)
+    // i.e. the flank bit, because at no point in game is the
+    // player's partner in a multi battle controlled by the AI.
+    // This is changed in Emerald to support the Tabitha fight
+    // in the Space Center.
     /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
-    /*0x160CB*/ u8 linkPlayerIndex;
-    /*0x160CC*/ u16 usedHeldItems[4];
-    /*0x160D4*/ u8 unk160D4;
-    /*0x160D5*/ u8 unk160D5;
-    /*0x160D6*/ u8 unk160D6;
-    /*0x160D7*/ u8 unk160D7;
-    /*0x160D8*/ u8 unk160D8[2];
-    /*0x160DA*/ u8 unk160DA[2];
-    /*0x160DC*/ u8 unk160DC;
+    /*0x160CB*/ u8 multiplayerId;
+    /*0x160CC*/ u16 usedHeldItems[MAX_BATTLERS_COUNT];
+    // Space is reserved for two u16s, one for each opponent in
+    // doubles. However, only the lower byte of each is ever used.
+    /*0x160D4*/ u16 AI_usedItemId[2];
+    /*0x160D8*/ u8 AI_usedItemType[2];
+    /*0x160DA*/ u8 AI_usedItemEffect[2];
+    /*0x160DC*/ u8 statAnimPlayed;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
     /*0x160DF*/ u8 unk160DF;
-    /*0x160E0*/ u8 unk160E0;
-    /*0x160E1*/ u8 unk160E1;
-    /*0x160E2*/ u8 unk160E2;
-    /*0x160E3*/ u8 unk160E3;
-    /*0x160E4*/ u8 unk160E4;
-    /*0x160E5*/ u8 unk160E5;
+    /*0x160E0*/ u8 unk160E0[6];
     /*0x160E6*/ u8 unk160E6;
     /*0x160E7*/ u8 atkCancellerTracker;
-    /*0x160E8*/ u8 unk160E8;
-    /*0x160E9*/ u8 unk160E9;
-    /*0x160EA*/ u8 unk160EA;
-    /*0x160EB*/ u8 unk160EB;
-    /*0x160EC*/ u8 unk160EC;
-    /*0x160ED*/ u8 unk160ED;
-    /*0x160EE*/ u8 unk160EE;
-    /*0x160EF*/ u8 unk160EF;
-    /*0x160F0*/ u8 unk160F0;
-    /*0x160F1*/ u8 unk160F1;
-    /*0x160F2*/ u8 unk160F2;
-    /*0x160F3*/ u8 unk160F3;
-    /*0x160F4*/ u8 unk160F4;
-    /*0x160F5*/ u8 unk160F5;
-    /*0x160F6*/ u8 unk160F6;
-    /*0x160F7*/ u8 unk160F7;
+    /*0x160E8*/ u16 choicedMove[MAX_BATTLERS_COUNT];
+    /*0x160F0*/ u16 changedItems[MAX_BATTLERS_COUNT];
     /*0x160F8*/ u8 unk160F8;
     /*0x160F9*/ u8 unk160F9;
-    /*0x160FA*/ u8 unk160FA;
+    /*0x160FA*/ u8 levelUpHP;
     /*0x160FB*/ u8 unk160FB;
     /*0x160FC*/ u8 turnSideTracker;
     /*0x160FD*/ u8 unk160FD;
     /*0x160FE*/ u8 unk160FE;
     /*0x160FF*/ u8 unk160FF;
-	/*0x16100*/ u8 unk16100;
-    /*0x16101*/ u8 unk16101;
-    /*0x16102*/ u8 unk16102;
-    /*0x16103*/ u8 unk16103;
-    /*0x16104*/ u8 unk16104;
-    /*0x16105*/ u8 unk16105;
-    /*0x16106*/ u8 unk16106;
-    /*0x16107*/ u8 unk16107;
-    /*0x16108*/ u8 unk16108;
-    /*0x16109*/ u8 unk16109;
-    /*0x1610A*/ u8 unk1610A;
-    /*0x1610B*/ u8 unk1610B;
-    /*0x1610C*/ u8 unk1610C;
-    /*0x1610D*/ u8 unk1610D;
-    /*0x1610E*/ u8 unk1610E;
-    /*0x1610F*/ u8 unk1610F;
+	/*0x16100*/ u16 lastTakenMoveFrom[2 * 4];
     /*0x16110*/ u8 wishPerishSongState;
     /*0x16111*/ u8 wishPerishSongBattlerId;
-    /*0x16112*/ u8 unk16112;
-    /*0x16113*/ u8 unk16113;
-    /*0x16114*/ u8 unk16114;
-    /*0x16115*/ u8 unk16115;
-    /*0x16116*/ u8 unk16116;
-    /*0x16117*/ u8 unk16117;
-    /*0x16118*/ u8 unk16118;
-    /*0x16119*/ u8 unk16119;
-    /*0x1611A*/ u8 unk1611A;
-    /*0x1611B*/ u8 unk1611B;
-    /*0x1611C*/ u8 unk1611C;
-    /*0x1611D*/ u8 unk1611D;
-    /*0x1611E*/ u8 unk1611E;
-    /*0x1611F*/ u8 unk1611F;
-
-    //u8 filler2[0x72E];
-    /* 0x16A00 */ struct BattleHistory unk_2016A00_2;
+    /*0x16112*/ u8 multihitMoveEffect;
+    /*0x16113*/ u8 givenExpMons;
 };
 
-struct Struct2017100
+struct ResourceFlags
 {
     u32 arr[4];
 };
 
-struct Struct2017800
+struct BattleSpriteInfo
 {
     u8 invisible:1;
-    u8 unk0_1:1;
+    u8 lowHpSong:1;
     u8 substituteSprite:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
+    u8 flag_x8:1;
+    u8 hpNumbersNoBars:1;
     u16 transformedSpecies;
 };
 
@@ -528,8 +488,6 @@ struct Struct20238C8
     u8 unk0_0:7;
     u8 unk0_7:1;
 };
-
-#define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
@@ -659,7 +617,7 @@ void sub_800D6D4();
 void ApplyPlayerChosenFrameToBattleMenu();
 void DrawMainBattleBackground(void);
 void LoadBattleTextboxAndBackground();
-void sub_800DE30(u8);
+void InitLinkBattleVsScreen(u8);
 void DrawBattleEntryBackground();
 
 // src/battle_2.o
@@ -667,7 +625,7 @@ void CB2_InitBattle(void);
 void CB2_InitBattleInternal(void);
 void CB2_HandleStartBattle(void);
 void sub_800F104(void);
-void sub_800F298(void);
+void CB2_HandleStartMultiBattle(void);
 void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
@@ -688,7 +646,7 @@ void objc_dp11b_pingpong(struct Sprite *);
 void nullsub_41(void);
 void sub_8010800(void);
 void BattleMainCB1(void);
-void sub_8010874(void);
+void BattleStartClearSetData(void);
 void bc_8012FAC(void);
 void sub_8011384(void);
 void bc_801333C(void);

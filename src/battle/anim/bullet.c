@@ -55,10 +55,10 @@ static void sub_80D0030(struct Sprite* sprite)
     u16 rand;
     s16* ptr;
     PlaySE12WithPanning(0xA6, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
-    sprite->pos1.x += sprite->pos2.x;
-    sprite->pos1.y += sprite->pos2.y;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->x += sprite->x2;
+    sprite->y += sprite->y2;
+    sprite->y2 = 0;
+    sprite->x2 = 0;
     ptr = &sprite->data[7];
     for (i = 0; i < 8; i++)
     {
@@ -76,11 +76,11 @@ static void sub_80D0030(struct Sprite* sprite)
 static void sub_80D00B4(struct Sprite* sprite)
 {
     sprite->data[0] += sprite->data[7];
-    sprite->pos2.x = sprite->data[0] >> 8;
+    sprite->x2 = sprite->data[0] >> 8;
     if (sprite->data[7] & 1)
-        sprite->pos2.x = -sprite->pos2.x;
+        sprite->x2 = -sprite->x2;
 
-    sprite->pos2.y = Sin(sprite->data[1], sprite->data[6]);
+    sprite->y2 = Sin(sprite->data[1], sprite->data[6]);
     sprite->data[1] += 8;
     if (sprite->data[1] > 0x7E)
     {
