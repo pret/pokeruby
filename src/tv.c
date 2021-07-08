@@ -2195,7 +2195,7 @@ void sub_80C04A0(void);
 void sub_80C01D4(void);
 void sub_80C0408(void);
 
-void ReceiveTvShowsData(u8 * arg0, u32 arg1 , u8 arg2)
+void ReceiveTvShowsData(u8 * arg0, u32 arg1, u8 arg2)
 {
     u8 i;
     union TVShow (*tvShows)[TV_SHOWS_COUNT];

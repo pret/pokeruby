@@ -113,8 +113,7 @@ void ShouldReadyContestArtist(void)
 {
     if(!gContestFinalStandings[gContestPlayerMonIndex]
     && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
-    &&
-        gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
+    && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = TRUE;
     }

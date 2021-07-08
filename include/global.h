@@ -136,7 +136,7 @@ struct UCoords16
 struct SecretBaseParty
 {
     /*0x1A3C*/ u32 personality[PARTY_SIZE];
-    /*0x1A54*/ u16 moves[PARTY_SIZE * 4];
+    /*0x1A54*/ u16 moves[PARTY_SIZE * MAX_MON_MOVES];
     /*0x1A84*/ u16 species[PARTY_SIZE];
     /*0x1A90*/ u16 heldItems[PARTY_SIZE];
     /*0x1A9C*/ u8 levels[PARTY_SIZE];

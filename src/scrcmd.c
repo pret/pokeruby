@@ -3,7 +3,6 @@
 #include "berry.h"
 #include "clock.h"
 #include "coins.h"
-#include "constants/maps.h"
 #include "contest_link_util.h"
 #include "contest_painting.h"
 #include "contest_util.h"
@@ -43,6 +42,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "tv.h"
+#include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);

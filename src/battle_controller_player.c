@@ -1722,8 +1722,7 @@ void b_link_standby_message(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
-        Contest_StartTextPrinter(
-            &gWindowTemplate_Contest_MoveDescription, BattleText_LinkStandby, 0x90, 2, 15);
+        Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, BattleText_LinkStandby, 0x90, 2, 15);
     }
 }
 
@@ -2589,8 +2588,7 @@ void PlayerHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Contest_StartTextPrinter(
-        &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x90, 2, 15);
+    Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x90, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_802DF18;
 }
 

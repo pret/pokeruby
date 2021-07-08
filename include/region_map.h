@@ -60,7 +60,6 @@ struct RegionMap
     /*0x280*/ u8 cursorLargeImage[0x600];
 }; // size: 0x880
 
-// Replaces field_region_map.c:UnkStruct, region_map.c:UnknownStruct3
 struct RegionMapState
 {
     void (*callback)(void);

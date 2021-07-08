@@ -1365,7 +1365,7 @@ static void ClearPokedexView(struct PokedexView *pokedexView)
         pokedexView->unk63A[i] = 0;
     pokedexView->currentPage = 0;
     pokedexView->currentPageBackup = 0;
-    pokedexView->isSearchResults = 0;
+    pokedexView->isSearchResults = FALSE;
     pokedexView->selectedScreen = 0;
     pokedexView->screenSwitchState = 0;
     pokedexView->menuIsOpen = 0;
@@ -1495,7 +1495,7 @@ static void MainCB(void)
 
 static void Task_PokedexShowMainScreen(u8 taskId)
 {
-    gPokedexView->isSearchResults = 0;
+    gPokedexView->isSearchResults = FALSE;
     if (LoadPokedexListPage(0))
         gTasks[taskId].func = Task_PokedexMainScreen;
 }
@@ -1693,7 +1693,7 @@ static void Task_ClosePokedex(u8 taskId)
 
 static void Task_OpenSearchResults(u8 taskId)
 {
-    gPokedexView->isSearchResults = 1;
+    gPokedexView->isSearchResults = TRUE;
     if (LoadPokedexListPage(3))
         gTasks[taskId].func = Task_PokedexResultsScreen;
 }
@@ -1898,9 +1898,9 @@ static bool8 LoadPokedexListPage(u8 a)
             LZ77UnCompVram(gPokedexStartMenuSearchResults_Tilemap, (void *)(VRAM + 0x6500));
         ResetPaletteFade();
         if (a == 0)
-            gPokedexView->isSearchResults = 0;
+            gPokedexView->isSearchResults = FALSE;
         else
-            gPokedexView->isSearchResults = 1;
+            gPokedexView->isSearchResults = TRUE;
         LoadPokedexBgPalette();
         gMain.state = 1;
         break;

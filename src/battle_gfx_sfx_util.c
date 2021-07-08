@@ -664,7 +664,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               eBattleInterfaceGfxBuffer,
               gMonSpriteGfx_Sprite_ptr[0],
               species,
-                gContestResources__moveAnim.personality2);
+                gContestResources__moveAnim.targetPersonality);
         }
         else
         {

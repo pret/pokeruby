@@ -8,7 +8,7 @@
 #include "overworld.h"
 #include "pokemon.h"
 
-extern u8 gHasHallOfFameRecords;
+extern bool8 gHasHallOfFameRecords;
 
 int GameClear(void)
 {

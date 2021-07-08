@@ -503,10 +503,10 @@ extern u8 *de_sub_8041024(s32, u32);
     StringGetEnd10(text);                                               \
     toCpy = text;
 #else
-#define HANDLE_NICKNAME_STRING_CASE(bank, pmMonIndex)                     \
+#define HANDLE_NICKNAME_STRING_CASE(bank, monIndex)                     \
     if (GetBattlerSide(bank) != 0)                                         \
     {                                                                   \
-        GetMonData(&gEnemyParty[pmMonIndex], MON_DATA_NICKNAME, text);    \
+        GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
         StringGetEnd10(text);                                           \
         toCpy = text;                                                   \
         while (*toCpy != EOS)                                           \
@@ -522,7 +522,7 @@ extern u8 *de_sub_8041024(s32, u32);
     }                                                                   \
     else                                                                \
     {                                                                   \
-        GetMonData(&gPlayerParty[pmMonIndex], MON_DATA_NICKNAME, text);   \
+        GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
         StringGetEnd10(text);                                           \
         toCpy = text;                                                   \
     }

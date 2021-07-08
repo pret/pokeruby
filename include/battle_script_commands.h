@@ -16,10 +16,10 @@
 #define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
 #define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
 
-#define ATK48_STAT_NEGATIVE         0x1
-#define ATK48_STAT_BY_TWO           0x2
-#define ATK48_BIT_x4                0x4
-#define ATK48_LOWER_FAIL_CHECK      0x8
+#define STAT_CHANGE_NEGATIVE         (1 << 0)
+#define STAT_CHANGE_BY_TWO           (1 << 1)
+#define STAT_CHANGE_MULTIPLE_STATS   (1 << 2)
+#define STAT_CHANGE_CANT_PREVENT     (1 << 3)
 
 #define ATK4F_DONT_CHECK_STATUSES   0x80
 

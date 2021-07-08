@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_message.h"
 #include "battle_string_ids.h"
 #include "battle_script_commands.h"
@@ -2301,23 +2302,10 @@ u8 GetBattlerTurnOrderNum(u8 battlerId)
     return i;
 }
 
-#define INCREMENT_RESET_RETURN                  \
-{                                               \
-    gBattlescriptCurrInstr++;                   \
-    /*gBattleCommunication[MOVE_EFFECT_BYTE] = 0;*/ \
-    return;                                     \
-}
-
-#define RESET_RETURN                            \
-{                                               \
-    /*gBattleCommunication[MOVE_EFFECT_BYTE] = 0;*/ \
-    return;                                     \
-}
-
 void SetMoveEffect(bool8 primary, u8 certain)
 {
     bool32 statusChanged = FALSE;
-    u8 affectsUser = 0; // 0x40 otherwise
+    u8 affectsUser = 0;
     bool32 noSunCanFreeze = TRUE;
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_AFFECTS_USER)
@@ -2335,19 +2323,31 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
     if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELD_DUST && !(gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
         && !primary && gBattleCommunication[MOVE_EFFECT_BYTE] <= 9)
-        INCREMENT_RESET_RETURN
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
 
     if (gSideStatuses[GET_BATTLER_SIDE(gEffectBattler)] & SIDE_STATUS_SAFEGUARD && !(gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
     && !primary && gBattleCommunication[MOVE_EFFECT_BYTE] <= 7)
-        INCREMENT_RESET_RETURN
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
 
     if (gBattleMons[gEffectBattler].hp == 0
     && gBattleCommunication[MOVE_EFFECT_BYTE] != MOVE_EFFECT_PAYDAY
     && gBattleCommunication[MOVE_EFFECT_BYTE] != MOVE_EFFECT_STEAL_ITEM)
-        INCREMENT_RESET_RETURN
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
 
     if (gBattleMons[gEffectBattler].status2 & STATUS2_SUBSTITUTE && affectsUser != MOVE_EFFECT_AFFECTS_USER)
-        INCREMENT_RESET_RETURN
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] <= PRIMARY_STATUS_MOVE_EFFECT)
     {
@@ -2396,7 +2396,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABILITY_PREVENTS_MOVE_STATUS;
                 }
-                RESET_RETURN
+                return;
             }
             if ((IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) || IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
                 && (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
@@ -2406,7 +2406,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
 
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
-                RESET_RETURN
+                return;
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON))
                 break;
@@ -2437,7 +2437,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABILITY_PREVENTS_MOVE_STATUS;
                 }
-                RESET_RETURN
+                return;
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_FIRE)
                 && (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
@@ -2447,7 +2447,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattlescriptCurrInstr = BattleScript_BRNPrevention;
 
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
-                RESET_RETURN
+                return;
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_FIRE))
                 break;
@@ -2493,7 +2493,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     {
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABILITY_PREVENTS_MOVE_STATUS;
                     }
-                    RESET_RETURN
+                    return;
                 }
                 else
                     break;
@@ -2521,7 +2521,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABILITY_PREVENTS_MOVE_STATUS;
                 }
-                RESET_RETURN
+                return;
             }
             if ((IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) || IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
                 && (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
@@ -2531,7 +2531,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
 
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
-                RESET_RETURN
+                return;
             }
             if (gBattleMons[gEffectBattler].status1)
                 break;
@@ -2838,7 +2838,6 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 else if (gBattleMons[gBattlerTarget].item
                          && gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD)
                 {
-//                    BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_NoItemSteal;
 
                     gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
@@ -2846,7 +2845,6 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else if (gBattleMons[gBattlerAttacker].item == ITEM_NONE
                          && gBattleMons[gBattlerTarget].item != ITEM_ENIGMA_BERRY
-//                         || IS_ITEM_MAIL(gBattleMons[gBattlerTarget].item)
                          && gBattleMons[gBattlerTarget].item != ITEM_NONE)
                 {
                     u16* changedItem = &gBattleStruct->changedItems[gBattlerAttacker];
@@ -4140,25 +4138,6 @@ static void atk47_setgraphicalstatchangevalues(void)
     gBattleStruct->animArg2 = 0;
     gBattlescriptCurrInstr++;
 }
-
-// stat change flags for atk48_playstatchangeanimation
-#define STAT_CHANGE_NEGATIVE             (1 << 0)
-#define STAT_CHANGE_BY_TWO               (1 << 1)
-#define STAT_CHANGE_MULTIPLE_STATS       (1 << 2)
-#define STAT_CHANGE_CANT_PREVENT         (1 << 3)
-
-// battle_anim_status_effects.c
-#define STAT_ANIM_PLUS1  15
-#define STAT_ANIM_PLUS2  39
-#define STAT_ANIM_MINUS1 22
-#define STAT_ANIM_MINUS2 46
-#define STAT_ANIM_MULTIPLE_PLUS1 55
-#define STAT_ANIM_MULTIPLE_PLUS2 56
-#define STAT_ANIM_MULTIPLE_MINUS1 57
-#define STAT_ANIM_MULTIPLE_MINUS2 58
-
-#define MIN_STAT_STAGE 0
-#define MAX_STAT_STAGE 12
 
 static void atk48_playstatchangeanimation(void)
 {

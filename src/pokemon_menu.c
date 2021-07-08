@@ -51,7 +51,7 @@ extern u8 gUnknown_020297ED;
 extern u8 gUnknown_020384F0;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
-extern u8 gPartyMenuMessage_IsPrinting;
+extern bool8 gPartyMenuMessage_IsPrinting;
 extern u8 gPokemonItemUseType;
 extern u16 gUnknown_0202E8F8;
 extern void (*gPokemonItemUseCallback)(u8 taskID, u16 itemID, TaskFunc func);

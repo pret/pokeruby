@@ -1341,8 +1341,7 @@ void LinkPartnerHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Contest_StartTextPrinter(
-        &gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
+    Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 144, 2, 15);
     gBattlerControllerFuncs[gActiveBattler] = sub_811DFA0;
 }
 

@@ -3187,7 +3187,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     if (IsContest())
     {
         isBackPic = 1;
-        personality = gContestResources__moveAnim.personality2;
+        personality = gContestResources__moveAnim.targetPersonality;
         otId = gContestResources__moveAnim.otId;
         species = gContestResources__moveAnim.targetSpecies;
         xOffset = 20;
@@ -4667,8 +4667,7 @@ void sub_81312E4(u8 taskId)
         refresh_graphics_maybe(gBattleAnimAttacker, 0, spriteId);
         if (IsContest())
         {
-            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims =
-                gAffineAnims_BattleSpriteContest;
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gAffineAnims_BattleSpriteContest;
             StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], 0);
         }
 

@@ -830,8 +830,8 @@ void sub_8117C60(u8 r0, u8 r1)
             else
             {
                 gSprites[eRoulette->var3C[49 + i]].invisible = FALSE;
-                gSprites[eRoulette->var3C[49 + i]].x    = (gUnknown_083F8C00[eRoulette->var0C[i]].var03 + 1) * 8 + 4;
-                gSprites[eRoulette->var3C[49 + i]].y    = (gUnknown_083F8C00[eRoulette->var0C[i]].var04 + 1) * 8 + 3;
+                gSprites[eRoulette->var3C[49 + i]].x         = (gUnknown_083F8C00[eRoulette->var0C[i]].var03 + 1) * 8 + 4;
+                gSprites[eRoulette->var3C[49 + i]].y         = (gUnknown_083F8C00[eRoulette->var0C[i]].var04 + 1) * 8 + 3;
             }
         }
     }

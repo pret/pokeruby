@@ -220,7 +220,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
             if (IsContest())
             {
                 if (gContestResources__moveAnim.hasTargetAnim)
-                    personality = gContestResources__moveAnim.personality2;
+                    personality = gContestResources__moveAnim.targetPersonality;
                 else
                     personality = gContestResources__moveAnim.personality;
             }
@@ -2000,7 +2000,7 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
         if (gContestResources__moveAnim.hasTargetAnim)
         {
             species = gContestResources__moveAnim.targetSpecies;
-            personality = gContestResources__moveAnim.personality2;
+            personality = gContestResources__moveAnim.targetPersonality;
         }
         else
         {

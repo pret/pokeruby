@@ -49,13 +49,13 @@ const u16 CryMeterNeedlePalette[] = INCBIN_U16("graphics/pokedex/cry_meter_needl
 const u8 CryMeterNeedleTiles[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
 
 #if ENGLISH
-const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
-const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+const u16 gCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
+const u16 gCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
+const u8 gCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
 #else
-extern const u16 sCryMeter_Tilemap[];
-extern const u16 sCryMeter_Pal[];
-extern const u8 sCryMeter_Gfx[];
+extern const u16 gCryMeter_Tilemap[];
+extern const u16 gCryMeter_Pal[];
+extern const u8 gCryMeter_Gfx[];
 #endif // ENGLISH
 
 const u16 sWaveformOffsets[][72] = {
@@ -448,8 +448,8 @@ bool8 ShowPokedexCryScreen(struct CryScreenWindow *cry, UNUSED u8 arg1) {
     switch (gDexCryScreenState)
     {
     case 0:
-        LZ77UnCompVram(sCryMeter_Gfx, (void *) (VRAM + cry->charBase));
-        LoadPalette(sCryMeter_Pal, cry->paletteNo * 16, 0x20);
+        LZ77UnCompVram(gCryMeter_Gfx, (void *) (VRAM + cry->charBase));
+        LoadPalette(gCryMeter_Pal, cry->paletteNo * 16, 0x20);
         gDexCryScreenState++;
         break;
 
@@ -470,7 +470,7 @@ bool8 ShowPokedexCryScreen(struct CryScreenWindow *cry, UNUSED u8 arg1) {
             {
                 y = row + cry->yPos;
                 x = col + cry->xPos;
-                *(u16 *) (vram + (y * 64 + x * 2)) = (sCryMeter_Tilemap[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
+                *(u16 *) (vram + (y * 64 + x * 2)) = (gCryMeter_Tilemap[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
             }
         }
 

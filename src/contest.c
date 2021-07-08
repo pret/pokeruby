@@ -1246,8 +1246,7 @@ void Task_DoAppeals(u8 taskId)
             else if (r4 == 2)
                 Contest_StartTextPrinter(&gMenuWindow, ContestString_WentOverVeryWell, 776, 1, 15);
             else
-                Contest_StartTextPrinter(
-                    &gMenuWindow, ContestString_AppealComboExcellently, 776, 1, 15);
+                Contest_StartTextPrinter(&gMenuWindow, ContestString_AppealComboExcellently, 776, 1, 15);
             DoJudgeSpeechBubble(3);
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 45;
