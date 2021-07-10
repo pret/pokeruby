@@ -145,9 +145,9 @@ struct PocketScrollState gBagPocketScrollStates[5];
 struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
 
-extern const struct CompressedSpriteSheet sMaleBagSpriteSheet;
-extern const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
-extern const struct CompressedSpritePalette sBagSpritePalette;
+static const struct CompressedSpriteSheet sMaleBagSpriteSheet;
+static const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
+static const struct CompressedSpritePalette sBagSpritePalette;
 
 const struct BagPocket gBagPockets[NUM_BAG_POCKETS] =
 {
