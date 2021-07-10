@@ -897,11 +897,11 @@ bool8 ScriptMenu_CreatePCMultichoice(void)
 
 void ScriptMenu_CreatePCMenu(void)
 {
-    u16 playersPCWidth = GetStringWidthInTilesForScriptMenu(gPCText_PlayersPC);
     u8 width;
     u8 numChoices;
 
 #if ENGLISH
+    u16 playersPCWidth = GetStringWidthInTilesForScriptMenu(gPCText_PlayersPC);
     if (playersPCWidth > GetStringWidthInTilesForScriptMenu(gPCText_SomeonesPC))
         width = playersPCWidth;
     else

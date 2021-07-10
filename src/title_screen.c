@@ -438,9 +438,7 @@ static void CreatePressStartBanner(s16 x, s16 y)
     spriteId = CreateSprite(&sStartCopyrightBannerSpriteTemplate, x, y, 0);
     StartSpriteAnim(&gSprites[spriteId], 8);
     gSprites[spriteId].data[0] = 1;
-    x -= 0x60;
-    y -= 0x8;
-    spriteId = CreateSprite(&sStartCopyrightBannerSpriteTemplate, x, y, 0);
+    spriteId = CreateSprite(&sStartCopyrightBannerSpriteTemplate, x - 0x60, y - 0x8, 0);
     StartSpriteAnim(&gSprites[spriteId], 9);
     gSprites[spriteId].data[0] = 1;
 #endif
