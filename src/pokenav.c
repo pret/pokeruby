@@ -462,198 +462,48 @@ void sub_80EF58C(u8 a)
     }
 }
 
-#ifdef NONMATCHING
+#define RGB2(r, g, b) (((b) << 10) | ((g) << 5) | (r))
+
 void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
 {
-    u16 red1, green1, blue1;
-    u16 red2, green2, blue2;
-    s32 redDiv, greenDiv, blueDiv;
-    u16 *palettes2;
-    u16 i, j;
+    u16 i;
+    u16 j;
+    u16 * r3;
 
-    i = 0;
-    while (i < d)
+    for (i = 0; i < d; i++)
     {
-        red1 = (*a & 0x1F) << 8;
-        green1 = ((*a >> 5) & 0x1F) << 8;
-        blue1 = ((*a >> 10) & 0x1F) << 8;
+        s32 r1 = Q_24_8((((*a) >>  0)) & 0x1F);
+        s32 g1 = Q_24_8((((*a) >>  5)) & 0x1F);
+        s32 b1 = Q_24_8((((*a) >> 10)) & 0x1F);
+        s32 r2 = Q_24_8((((*b) >>  0)) & 0x1F);
+        s32 g2 = Q_24_8((((*b) >>  5)) & 0x1F);
+        s32 b2 = Q_24_8((((*b) >> 10)) & 0x1F);
+        s32 dr = (r2 - r1) / c;
+        s32 dg = (g2 - g1) / c;
+        s32 db = (b2 - b1) / c;
+        u16 rf, gf, bf;
 
-        red2 = (*b & 0x1F) << 8;
-        green2 = ((*b >> 5) & 0x1F) << 8;
-        blue2 = ((*b >> 10) & 0x1F) << 8;
-
-        redDiv = (red2 - red1) / c;
-        greenDiv = (green2 - green1) / c;
-        blueDiv = (blue2 - blue1) / c;
-
-        palettes2 = palettes;
+        r3 = palettes;
         for (j = 0; j < c - 1; j++)
         {
-            *palettes2 = (((blue1 << 8) >> 16) << 10) | (((green1 << 8) >> 16) << 5) | ((red1 << 8) >> 16);
-            palettes2 += d;
-            red1 += redDiv;
-            green1 += greenDiv;
-            blue1 += blueDiv;
+            rf = Q_24_8_TO_INT(r1);
+            gf = Q_24_8_TO_INT(g1);
+            bf = Q_24_8_TO_INT(b1);
+            *r3 = RGB2(rf, gf, bf);
+            r3 += d;
+            r1 += dr;
+            g1 += dg;
+            b1 += db;
         }
-
-        *palettes2 = (red2 >> 8) | (blue2 << 2) | (green2 >> 3);
-        palettes++;
-
+        rf = Q_24_8_TO_INT(r2);
+        gf = Q_24_8_TO_INT(g2);
+        bf = Q_24_8_TO_INT(b2);
+        *r3 = RGB2(rf, gf, bf);
         a++;
         b++;
-        i++;
+        palettes++;
     }
 }
-#else
-NAKED
-void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x38\n\
-    str r0, [sp]\n\
-    str r1, [sp, 0x4]\n\
-    ldr r4, [sp, 0x58]\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    str r2, [sp, 0x8]\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    str r3, [sp, 0xC]\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x10]\n\
-    lsls r0, r3, 16\n\
-    ldr r1, [sp, 0x10]\n\
-    cmp r1, r3\n\
-    bcs _080EF72E\n\
-    subs r2, 0x1\n\
-    str r2, [sp, 0x20]\n\
-    str r0, [sp, 0x2C]\n\
-_080EF654:\n\
-    ldr r2, [sp]\n\
-    ldrh r1, [r2]\n\
-    movs r0, 0x1F\n\
-    ands r0, r1\n\
-    lsls r7, r0, 8\n\
-    lsls r1, 16\n\
-    lsrs r0, r1, 21\n\
-    movs r2, 0x1F\n\
-    ands r0, r2\n\
-    lsls r6, r0, 8\n\
-    lsrs r1, 26\n\
-    ands r1, r2\n\
-    lsls r5, r1, 8\n\
-    ldr r0, [sp, 0x4]\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x1F\n\
-    ands r0, r1\n\
-    lsls r0, 8\n\
-    str r0, [sp, 0x14]\n\
-    lsls r1, 16\n\
-    lsrs r0, r1, 21\n\
-    ands r0, r2\n\
-    lsls r0, 8\n\
-    str r0, [sp, 0x18]\n\
-    lsrs r1, 26\n\
-    ands r1, r2\n\
-    lsls r1, 8\n\
-    str r1, [sp, 0x1C]\n\
-    ldr r1, [sp, 0x14]\n\
-    subs r0, r1, r7\n\
-    ldr r1, [sp, 0x8]\n\
-    bl __divsi3\n\
-    mov r10, r0\n\
-    ldr r2, [sp, 0x18]\n\
-    subs r0, r2, r6\n\
-    ldr r1, [sp, 0x8]\n\
-    bl __divsi3\n\
-    mov r9, r0\n\
-    ldr r1, [sp, 0x1C]\n\
-    subs r0, r1, r5\n\
-    ldr r1, [sp, 0x8]\n\
-    bl __divsi3\n\
-    mov r8, r0\n\
-    adds r3, r4, 0\n\
-    movs r4, 0\n\
-    ldr r2, [sp]\n\
-    adds r2, 0x2\n\
-    str r2, [sp, 0x30]\n\
-    ldr r0, [sp, 0x4]\n\
-    adds r0, 0x2\n\
-    str r0, [sp, 0x34]\n\
-    adds r1, r3, 0x2\n\
-    str r1, [sp, 0x24]\n\
-    ldr r2, [sp, 0x10]\n\
-    adds r2, 0x1\n\
-    str r2, [sp, 0x28]\n\
-    ldr r0, [sp, 0x20]\n\
-    cmp r4, r0\n\
-    bge _080EF700\n\
-    ldr r1, [sp, 0xC]\n\
-    lsls r1, 1\n\
-    mov r12, r1\n\
-_080EF6D6:\n\
-    lsls r0, r7, 8\n\
-    lsrs r2, r0, 16\n\
-    lsls r0, r6, 8\n\
-    lsrs r1, r0, 16\n\
-    lsls r0, r5, 8\n\
-    lsrs r0, 16\n\
-    lsls r0, 10\n\
-    lsls r1, 5\n\
-    orrs r0, r1\n\
-    orrs r2, r0\n\
-    strh r2, [r3]\n\
-    add r3, r12\n\
-    add r7, r10\n\
-    add r6, r9\n\
-    add r5, r8\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    ldr r2, [sp, 0x20]\n\
-    cmp r4, r2\n\
-    blt _080EF6D6\n\
-_080EF700:\n\
-    ldr r4, [sp, 0x14]\n\
-    lsrs r2, r4, 8\n\
-    ldr r1, [sp, 0x1C]\n\
-    lsls r0, r1, 2\n\
-    ldr r4, [sp, 0x18]\n\
-    lsrs r1, r4, 3\n\
-    orrs r0, r1\n\
-    orrs r2, r0\n\
-    strh r2, [r3]\n\
-    ldr r0, [sp, 0x30]\n\
-    str r0, [sp]\n\
-    ldr r1, [sp, 0x34]\n\
-    str r1, [sp, 0x4]\n\
-    ldr r4, [sp, 0x24]\n\
-    ldr r2, [sp, 0x28]\n\
-    lsls r0, r2, 16\n\
-    lsrs r0, 16\n\
-    str r0, [sp, 0x10]\n\
-    ldr r1, [sp, 0x2C]\n\
-    lsrs r0, r1, 16\n\
-    ldr r2, [sp, 0x10]\n\
-    cmp r2, r0\n\
-    bcc _080EF654\n\
-_080EF72E:\n\
-    add sp, 0x38\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80EF740(void)
 {
