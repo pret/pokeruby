@@ -1238,109 +1238,25 @@ void sub_80F0954(u16 arg0, u16 arg1, u16 arg2)
     gPokenavStructPtr->unk8786 = 0;
 }
 
-#ifdef NONMATCHING
 bool8 sub_80F098C(void)
 {
-    register u16 zero asm("r8");
-    if (!gPokenavStructPtr->unk8784)
-    {
-        DONE:
+    s32 r8;
+    if (gPokenavStructPtr->unk8784 == 0)
         return FALSE;
+    r8 = 0;
+    while (1)
+    {
+        gUnknown_083E3270[gPokenavStructPtr->unk87CA](gPokenavStructPtr->unk877E, gPokenavStructPtr->unk8780);
+        if (--gPokenavStructPtr->unk8784 == 0)
+            return FALSE;
+        if (++gPokenavStructPtr->unk877E > gPokenavStructPtr->unk8774)
+            gPokenavStructPtr->unk877E = r8;
+        gPokenavStructPtr->unk8780 += 2;
+        gPokenavStructPtr->unk8780 &= 0x1F;
+        break;
     }
-
-    zero = 0;
-    gUnknown_083E3270[gPokenavStructPtr->unk87CA](gPokenavStructPtr->unk877E, gPokenavStructPtr->unk8780);
-    if (!--gPokenavStructPtr->unk8784)
-        goto DONE;
-
-    if ((++gPokenavStructPtr->unk877E & 0xFFFF) > gPokenavStructPtr->unk8774)
-        gPokenavStructPtr->unk877E = zero;
-
-    gPokenavStructPtr->unk8780 += 2;
-    gPokenavStructPtr->unk8780 &= 0x1F;
     return TRUE;
 }
-#else
-NAKED
-bool8 sub_80F098C(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r0, _080F09A4 @ =gPokenavStructPtr\n\
-    ldr r6, [r0]\n\
-    ldr r0, _080F09A8 @ =0x00008784\n\
-    adds r7, r6, r0\n\
-    ldrh r0, [r7]\n\
-    cmp r0, 0\n\
-    bne _080F09AC\n\
-_080F09A0:\n\
-    movs r0, 0\n\
-    b _080F0A02\n\
-    .align 2, 0\n\
-_080F09A4: .4byte gPokenavStructPtr\n\
-_080F09A8: .4byte 0x00008784\n\
-_080F09AC:\n\
-    movs r1, 0\n\
-    mov r8, r1\n\
-    ldr r1, _080F0A0C @ =gUnknown_083E3270\n\
-    ldr r2, _080F0A10 @ =0x000087ca\n\
-    adds r0, r6, r2\n\
-    ldrb r2, [r0]\n\
-    lsls r2, 2\n\
-    adds r2, r1\n\
-    ldr r0, _080F0A14 @ =0x0000877e\n\
-    adds r4, r6, r0\n\
-    ldrh r0, [r4]\n\
-    ldr r1, _080F0A18 @ =0x00008780\n\
-    adds r5, r6, r1\n\
-    ldrh r1, [r5]\n\
-    ldr r2, [r2]\n\
-    bl _call_via_r2\n\
-    ldrh r0, [r7]\n\
-    subs r0, 0x1\n\
-    strh r0, [r7]\n\
-    ldr r2, _080F0A1C @ =0x0000ffff\n\
-    adds r1, r2, 0\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    beq _080F09A0\n\
-    ldrh r0, [r4]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4]\n\
-    ands r0, r1\n\
-    ldr r2, _080F0A20 @ =0x00008774\n\
-    adds r1, r6, r2\n\
-    movs r2, 0\n\
-    ldrsh r1, [r1, r2]\n\
-    cmp r0, r1\n\
-    ble _080F09F6\n\
-    mov r0, r8\n\
-    strh r0, [r4]\n\
-_080F09F6:\n\
-    ldrh r0, [r5]\n\
-    adds r0, 0x2\n\
-    movs r1, 0x1F\n\
-    ands r0, r1\n\
-    strh r0, [r5]\n\
-    movs r0, 0x1\n\
-_080F0A02:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_080F0A0C: .4byte gUnknown_083E3270\n\
-_080F0A10: .4byte 0x000087ca\n\
-_080F0A14: .4byte 0x0000877e\n\
-_080F0A18: .4byte 0x00008780\n\
-_080F0A1C: .4byte 0x0000ffff\n\
-_080F0A20: .4byte 0x00008774\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80F0A24(u16 arg0, u16 arg1)
 {
