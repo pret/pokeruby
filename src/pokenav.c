@@ -1380,244 +1380,55 @@ void LoadTrainerEyesDescriptionLines(void)
     }
 }
 
-#ifdef NONMATCHING
-// small register mismatch (r2/r3) on the line where var0 is set.
 bool8 sub_80F0D5C(void)
 {
-    int var0;
+    u32 r5;
+
     if (gPokenavStructPtr->unkD15C == 7)
+    {
         return FALSE;
-
-    if (++gPokenavStructPtr->unk306 > 1)
-    {
-        gPokenavStructPtr->unk306 = 0;
-        BasicInitMenuWindow(&gWindowTemplate_81E70D4);
-        var0 = (gPokenavStructPtr->unk8778 + 2 + gPokenavStructPtr->unkD15C * 2) & 0x1F;
-        switch (gPokenavStructPtr->unkD15C)
-        {
-        case 0:
-            Menu_PrintTextPixelCoords(gOtherText_Strategy, 97, var0 * 8, 0);
-            break;
-        case 1:
-            AlignStringInMenuWindow(
-                gPokenavStructPtr->unk8788,
-                gPokenavStructPtr->trainerEyeDescriptionLines[0],
-                136,
-                0);
-            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 97, var0 * 8, 0);
-            break;
-        case 2:
-            Menu_PrintTextPixelCoords(gOtherText_TrainersPokemon, 97, var0 * 8, 0);
-            break;
-        case 3:
-            AlignStringInMenuWindow(
-                gPokenavStructPtr->unk8788,
-                gPokenavStructPtr->trainerEyeDescriptionLines[1],
-                136,
-                0);
-            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 97, var0 * 8, 0);
-            break;
-        case 4:
-            Menu_PrintTextPixelCoords(gOtherText_SelfIntroduction, 97, var0 * 8, 0);
-            break;
-        case 5:
-            AlignStringInMenuWindow(
-                gPokenavStructPtr->unk8788,
-                gPokenavStructPtr->trainerEyeDescriptionLines[2],
-                136,
-                0);
-            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 97, var0 * 8, 0);
-            break;
-        case 6:
-            AlignStringInMenuWindow(
-                gPokenavStructPtr->unk8788,
-                gPokenavStructPtr->trainerEyeDescriptionLines[3],
-                136,
-                0);
-            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 97, var0 * 8, 0);
-        default:
-            return FALSE;
-        }
-
-        gPokenavStructPtr->unkD15C++;
-        return TRUE;
     }
-    else
+    if (++gPokenavStructPtr->unk306 < 2)
     {
         return TRUE;
     }
+    gPokenavStructPtr->unk306 = 0;
+    BasicInitMenuWindow(&gWindowTemplate_81E70D4);
+    r5 = (gPokenavStructPtr->unk8778 + 2 + gPokenavStructPtr->unkD15C * 2) & 0x1F;
+    asm("":::"r2"); // fakematch
+    switch (gPokenavStructPtr->unkD15C)
+    {
+    default:
+        return FALSE;
+    case 0:
+        Menu_PrintTextPixelCoords(gOtherText_Strategy, 0x61, r5 * 8, 0);
+        break;
+    case 1:
+        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[0], 0x88, 0);
+        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+        break;
+    case 2:
+        Menu_PrintTextPixelCoords(gOtherText_TrainersPokemon, 0x61, r5 * 8, 0);
+        break;
+    case 3:
+        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[1], 0x88, 0);
+        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+        break;
+    case 4:
+        Menu_PrintTextPixelCoords(gOtherText_SelfIntroduction, 0x61, r5 * 8, 0);
+        break;
+    case 5:
+        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[2], 0x88, 0);
+        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+        break;
+    case 6:
+        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[3], 0x88, 0);
+        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+        return FALSE;
+    }
+    gPokenavStructPtr->unkD15C++;
+    return TRUE;
 }
-#else
-NAKED
-bool8 sub_80F0D5C(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r0, _080F0D70 @ =gPokenavStructPtr\n\
-    ldr r4, [r0]\n\
-    ldr r0, _080F0D74 @ =0x0000d15c\n\
-    adds r5, r4, r0\n\
-    ldrh r0, [r5]\n\
-    cmp r0, 0x7\n\
-    bne _080F0D78\n\
-_080F0D6C:\n\
-    movs r0, 0\n\
-    b _080F0EB0\n\
-    .align 2, 0\n\
-_080F0D70: .4byte gPokenavStructPtr\n\
-_080F0D74: .4byte 0x0000d15c\n\
-_080F0D78:\n\
-    ldr r0, _080F0DB8 @ =0x00000306\n\
-    adds r1, r4, r0\n\
-    ldrh r0, [r1]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bhi _080F0D8C\n\
-    b _080F0EAE\n\
-_080F0D8C:\n\
-    movs r0, 0\n\
-    strh r0, [r1]\n\
-    ldr r0, _080F0DBC @ =gWindowTemplate_81E70D4\n\
-    bl BasicInitMenuWindow\n\
-    ldr r0, _080F0DC0 @ =0x00008778\n\
-    adds r1, r4, r0\n\
-    ldrh r3, [r5]\n\
-    lsls r0, r3, 1\n\
-    adds r0, 0x2\n\
-    ldrh r1, [r1]\n\
-    adds r5, r0, r1\n\
-    movs r0, 0x1F\n\
-    ands r5, r0\n\
-    cmp r3, 0x6\n\
-    bhi _080F0D6C\n\
-    lsls r0, r3, 2\n\
-    ldr r1, _080F0DC4 @ =_080F0DC8\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080F0DB8: .4byte 0x00000306\n\
-_080F0DBC: .4byte gWindowTemplate_81E70D4\n\
-_080F0DC0: .4byte 0x00008778\n\
-_080F0DC4: .4byte _080F0DC8\n\
-    .align 2, 0\n\
-_080F0DC8:\n\
-    .4byte _080F0DE4\n\
-    .4byte _080F0DF0\n\
-    .4byte _080F0E08\n\
-    .4byte _080F0E14\n\
-    .4byte _080F0E2C\n\
-    .4byte _080F0E38\n\
-    .4byte _080F0E6C\n\
-_080F0DE4:\n\
-    ldr r0, _080F0DEC @ =gOtherText_Strategy\n\
-    lsls r2, r5, 3\n\
-    b _080F0E54\n\
-    .align 2, 0\n\
-_080F0DEC: .4byte gOtherText_Strategy\n\
-_080F0DF0:\n\
-    ldr r0, _080F0DFC @ =gPokenavStructPtr\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080F0E00 @ =0x00008788\n\
-    adds r4, r0, r1\n\
-    ldr r1, _080F0E04 @ =0x0000d110\n\
-    b _080F0E42\n\
-    .align 2, 0\n\
-_080F0DFC: .4byte gPokenavStructPtr\n\
-_080F0E00: .4byte 0x00008788\n\
-_080F0E04: .4byte 0x0000d110\n\
-_080F0E08:\n\
-    ldr r0, _080F0E10 @ =gOtherText_TrainersPokemon\n\
-    lsls r2, r5, 3\n\
-    b _080F0E54\n\
-    .align 2, 0\n\
-_080F0E10: .4byte gOtherText_TrainersPokemon\n\
-_080F0E14:\n\
-    ldr r0, _080F0E20 @ =gPokenavStructPtr\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080F0E24 @ =0x00008788\n\
-    adds r4, r0, r1\n\
-    ldr r1, _080F0E28 @ =0x0000d114\n\
-    b _080F0E42\n\
-    .align 2, 0\n\
-_080F0E20: .4byte gPokenavStructPtr\n\
-_080F0E24: .4byte 0x00008788\n\
-_080F0E28: .4byte 0x0000d114\n\
-_080F0E2C:\n\
-    ldr r0, _080F0E34 @ =gOtherText_SelfIntroduction\n\
-    lsls r2, r5, 3\n\
-    b _080F0E54\n\
-    .align 2, 0\n\
-_080F0E34: .4byte gOtherText_SelfIntroduction\n\
-_080F0E38:\n\
-    ldr r0, _080F0E60 @ =gPokenavStructPtr\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080F0E64 @ =0x00008788\n\
-    adds r4, r0, r1\n\
-    ldr r1, _080F0E68 @ =0x0000d118\n\
-_080F0E42:\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x88\n\
-    movs r3, 0\n\
-    bl AlignStringInMenuWindow\n\
-    lsls r2, r5, 3\n\
-    adds r0, r4, 0\n\
-_080F0E54:\n\
-    movs r1, 0x61\n\
-    movs r3, 0\n\
-    bl Menu_PrintTextPixelCoords\n\
-    b _080F0EA0\n\
-    .align 2, 0\n\
-_080F0E60: .4byte gPokenavStructPtr\n\
-_080F0E64: .4byte 0x00008788\n\
-_080F0E68: .4byte 0x0000d118\n\
-_080F0E6C:\n\
-    ldr r0, _080F0E94 @ =gPokenavStructPtr\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080F0E98 @ =0x00008788\n\
-    adds r4, r0, r1\n\
-    ldr r1, _080F0E9C @ =0x0000d11c\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x88\n\
-    movs r3, 0\n\
-    bl AlignStringInMenuWindow\n\
-    lsls r2, r5, 3\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x61\n\
-    movs r3, 0\n\
-    bl Menu_PrintTextPixelCoords\n\
-    b _080F0D6C\n\
-    .align 2, 0\n\
-_080F0E94: .4byte gPokenavStructPtr\n\
-_080F0E98: .4byte 0x00008788\n\
-_080F0E9C: .4byte 0x0000d11c\n\
-_080F0EA0:\n\
-    ldr r0, _080F0EB8 @ =gPokenavStructPtr\n\
-    ldr r1, [r0]\n\
-    ldr r0, _080F0EBC @ =0x0000d15c\n\
-    adds r1, r0\n\
-    ldrh r0, [r1]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-_080F0EAE:\n\
-    movs r0, 0x1\n\
-_080F0EB0:\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_080F0EB8: .4byte gPokenavStructPtr\n\
-_080F0EBC: .4byte 0x0000d15c\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80F0EC0(void)
 {
