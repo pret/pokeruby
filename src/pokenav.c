@@ -3536,8 +3536,6 @@ void sub_80F4138(struct Sprite *sprite)
     }
 }
 
-#ifdef NONMATCHING
-// close, but the last DmaCopy16 is sharing the 0x400 value from the beginning of the function.
 void sub_80F4194(u8 *arg0, u8 *text)
 {
     u8 i;
@@ -3575,162 +3573,10 @@ void sub_80F4194(u8 *arg0, u8 *text)
     for (i = 0; i < 5; i++)
     {
         DmaCopy16(3, &tileBuffer[128 * i], &arg0[i * 256], 128);
+        i++;i--; // fakematch
         DmaCopy16(3, &tileBuffer[128 * i + 0x400], &arg0[32 * ((i * 8) + 4)], 128);
     }
 }
-#else
-NAKED
-void sub_80F4194(u8 *arg0, u8 *text)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x4\n\
-    adds r7, r0, 0\n\
-    adds r2, r1, 0\n\
-    ldr r0, _080F42A4 @ =gUnknown_083DFEC8\n\
-    ldr r6, [r0]      @ r6 = tileBuffer\n\
-    mov r0, sp        \n\
-    ldr r1, _080F42A8 @ =0x00001111\n\
-    adds r5, r1, 0\n\
-    strh r5, [r0]\n\
-    ldr r4, _080F42AC @ =0x040000d4\n\
-    str r0, [r4]\n\
-    str r6, [r4, 0x4]\n\
-    ldr r3, _080F42B0 @ =0x81000140\n\
-    str r3, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    movs r0, 0x80\n\
-    lsls r0, 3\n\
-    adds r1, r6, r0\n\
-    mov r0, sp\n\
-    strh r5, [r0]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    str r3, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    ldr r0, _080F42B4 @ =gWindowTemplate_81E70F0\n\
-    adds r1, r6, 0\n\
-    bl Text_InitWindow8004E3C\n\
-    movs r3, 0x88\n\
-    lsls r3, 2\n\
-    adds r1, r6, r3\n\
-    mov r0, sp\n\
-    movs r3, 0\n\
-    strh r3, [r0]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    ldr r2, _080F42B8 @ =0x81000030\n\
-    str r2, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    movs r0, 0xC4\n\
-    lsls r0, 3\n\
-    adds r1, r6, r0\n\
-    mov r0, sp\n\
-    strh r3, [r0]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    str r2, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    movs r1, 0x80\n\
-    lsls r1, 2\n\
-    adds r2, r6, r1\n\
-    ldr r0, [r2]\n\
-    ldr r1, _080F42BC @ =0x0fffffff\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-    ldr r0, [r2, 0x4]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x4]\n\
-    ldr r0, [r2, 0x8]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0xC]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0xC]\n\
-    ldr r0, [r2, 0x10]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x10]\n\
-    ldr r0, [r2, 0x14]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x14]\n\
-    ldr r0, [r2, 0x18]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x18]\n\
-    ldr r0, [r2, 0x1C]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x1C]\n\
-    movs r3, 0xC0\n\
-    lsls r3, 3\n\
-    adds r2, r6, r3\n\
-    ldr r0, [r2]\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-    ldr r0, [r2, 0x4]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x4]\n\
-    ldr r0, [r2, 0x8]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0xC]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0xC]\n\
-    ldr r0, [r2, 0x10]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x10]\n\
-    ldr r0, [r2, 0x14]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x14]\n\
-    ldr r0, [r2, 0x18]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x18]\n\
-    ldr r0, [r2, 0x1C]\n\
-    ands r0, r1\n\
-    str r0, [r2, 0x1C]\n\
-    movs r1, 0\n\
-    ldr r2, _080F42C0 @ =0x80000040\n\
-_080F4268:\n\
-    lsls r0, r1, 7\n\
-    adds r0, r6, r0\n\
-    str r0, [r4]\n\
-    lsls r0, r1, 8\n\
-    adds r0, r7, r0\n\
-    str r0, [r4, 0x4]\n\
-    str r2, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    lsls r0, r1, 7\n\
-    movs r3, 0x80\n\
-    lsls r3, 3\n\
-    adds r0, r3\n\
-    adds r0, r6, r0\n\
-    str r0, [r4]\n\
-    lsls r0, r1, 3\n\
-    adds r0, 0x4\n\
-    lsls r0, 5\n\
-    adds r0, r7, r0\n\
-    str r0, [r4, 0x4]\n\
-    str r2, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    adds r0, r1, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0x4\n\
-    bls _080F4268\n\
-    add sp, 0x4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080F42A4: .4byte gUnknown_083DFEC8\n\
-_080F42A8: .4byte 0x00001111\n\
-_080F42AC: .4byte 0x040000d4\n\
-_080F42B0: .4byte 0x81000140\n\
-_080F42B4: .4byte gWindowTemplate_81E70F0\n\
-_080F42B8: .4byte 0x81000030\n\
-_080F42BC: .4byte 0x0fffffff\n\
-_080F42C0: .4byte 0x80000040\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80F42C4(u8 *arg0)
 {
