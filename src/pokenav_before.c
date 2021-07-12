@@ -3265,276 +3265,82 @@ void sub_80EE9C0(u8 param1, u8 param2, u8 param3)
     gPokenavStructPtr->unk6E17 = param3;
 }
 
-#if 0
-bool8 sub_80EEA0C() {
-    switch (gPokenavStructPtr->unk6E16) {
+bool8 sub_80EF4F8(void);
+void sub_80EF490(u8);
+
+bool8 sub_80EEA0C(void)
+{
+    switch (gPokenavStructPtr->unk6E16)
+    {
     case 0:
-        if (sub_80F1F10()) return 1;
-        if (gPokenavStructPtr->unk6E17 != 0xC) {
-            gPokenavStructPtr->unk6E16 = 0x1;
-            return 1;
+        if (!sub_80F1F10())
+        {
+            if (gPokenavStructPtr->unk6E17 != 12)
+                gPokenavStructPtr->unk6E16 = 1;
+            else
+                gPokenavStructPtr->unk6E16 = 3;
         }
-        else {
-            gPokenavStructPtr->unk6E16 = 0x3;
-            return 1;
-        }
+        break;
     case 1:
         sub_80F2C80(gPokenavStructPtr->unk6E17);
         gPokenavStructPtr->unk6E16++;
+        // fallthrough
     case 2:
-        if (sub_80F2CBC(gPokenavStructPtr->unk6E17)) return 1;
-        gPokenavStructPtr->unk6E16++;
+        if (!sub_80F2CBC(gPokenavStructPtr->unk6E17))
+            gPokenavStructPtr->unk6E16++;
+        break;
     case 3:
-
+        gPokenavStructPtr->unk6DAD = gPokenavStructPtr->unk6E15;
+        switch (gPokenavStructPtr->unk6E14)
+        {
+        case 0:
+            gPokenavStructPtr->unk6DAE = 5;
+            break;
+        case 1:
+            gPokenavStructPtr->unk6DAE = 3;
+            break;
+        case 2:
+            gPokenavStructPtr->unk6DAE = 6;
+            break;
+        }
+        sub_80F1B8C(gPokenavStructPtr->unk6E14);
+        gPokenavStructPtr->unk6E16++;
+        // fallthrough
+    case 4:
+        if (!sub_80F1BC8(gPokenavStructPtr->unk6E14))
+            gPokenavStructPtr->unk6E16++;
+        break;
+    case 5:
+        if (!sub_8055870())
+        {
+            gPokenavStructPtr->unk6E16++;
+        }
+        break;
+    case 6:
+        sub_80F1DF0();
+        sub_80EF490(gPokenavStructPtr->unk6E14);
+        gPokenavStructPtr->unk6E16++;
+        break;
+    case 7:
+        if (!sub_80F1E50())
+        {
+            sub_80EF428(gPokenavStructPtr->unk6E14, gPokenavStructPtr->unk6DAD);
+            gPokenavStructPtr->unk6E16++;
+        }
+        break;
+    case 8:
+        if (!sub_80EF4F8())
+        {
+            gPokenavStructPtr->unk6E16++;
+            return FALSE;
+        }
+        break;
+    default:
+        return FALSE;
     }
-}
-#else
-NAKED
-bool8 sub_80EEA0C() {
-    asm_unified(
-    "push {r4,lr}\n\
-    ldr r1, _080EEA28 @ =gSharedMem\n\
-    ldr r2, _080EEA2C @ =0x00006e16\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0x8\n\
-    bls _080EEA1E\n\
-    b _080EEBFA\n\
-_080EEA1E:\n\
-    lsls r0, 2\n\
-    ldr r1, _080EEA30 @ =_080EEA34\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080EEA28: .4byte gSharedMem\n\
-_080EEA2C: .4byte 0x00006e16\n\
-_080EEA30: .4byte _080EEA34\n\
-    .align 2, 0\n\
-_080EEA34:\n\
-    .4byte _080EEA58\n\
-    .4byte _080EEA98\n\
-    .4byte _080EEAAE\n\
-    .4byte _080EEAD4\n\
-    .4byte _080EEB3E\n\
-    .4byte _080EEB68\n\
-    .4byte _080EEB88\n\
-    .4byte _080EEBAC\n\
-    .4byte _080EEBE4\n\
-_080EEA58:\n\
-    bl sub_80F1F10\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080EEA64\n\
-    b _080EEC08\n\
-_080EEA64:\n\
-    ldr r1, _080EEA7C @ =gSharedMem\n\
-    ldr r4, _080EEA80 @ =0x00006e17\n\
-    adds r0, r1, r4\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xC\n\
-    beq _080EEA88\n\
-    ldr r0, _080EEA84 @ =0x00006e16\n\
-    adds r1, r0\n\
-    movs r0, 0x1\n\
-    strb r0, [r1]\n\
-    b _080EEC08\n\
-    .align 2, 0\n\
-_080EEA7C: .4byte gSharedMem\n\
-_080EEA80: .4byte 0x00006e17\n\
-_080EEA84: .4byte 0x00006e16\n\
-_080EEA88:\n\
-    ldr r2, _080EEA94 @ =0x00006e16\n\
-    adds r1, r2\n\
-    movs r0, 0x3\n\
-    strb r0, [r1]\n\
-    b _080EEC08\n\
-    .align 2, 0\n\
-_080EEA94: .4byte 0x00006e16\n\
-_080EEA98:\n\
-    ldr r4, _080EEAC8 @ =gSharedMem\n\
-    ldr r1, _080EEACC @ =0x00006e17\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    bl sub_80F2C80\n\
-    ldr r2, _080EEAD0 @ =0x00006e16\n\
-    adds r4, r2\n\
-    ldrb r0, [r4]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4]\n\
-_080EEAAE:\n\
-    ldr r4, _080EEAC8 @ =gSharedMem\n\
-    ldr r1, _080EEACC @ =0x00006e17\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    bl sub_80F2CBC\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080EEAC2\n\
-    b _080EEC08\n\
-_080EEAC2:\n\
-    ldr r2, _080EEAD0 @ =0x00006e16\n\
-    adds r1, r4, r2\n\
-    b _080EEB76\n\
-    .align 2, 0\n\
-_080EEAC8: .4byte gSharedMem\n\
-_080EEACC: .4byte 0x00006e17\n\
-_080EEAD0: .4byte 0x00006e16\n\
-_080EEAD4:\n\
-    adds r2, r3, 0\n\
-    ldr r4, _080EEAF8 @ =0x00006e15\n\
-    adds r0, r2, r4\n\
-    ldrb r1, [r0]\n\
-    subs r4, 0x68\n\
-    adds r0, r2, r4\n\
-    strb r1, [r0]\n\
-    ldr r1, _080EEAFC @ =0x00006e14\n\
-    adds r0, r2, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    beq _080EEB14\n\
-    cmp r0, 0x1\n\
-    bgt _080EEB00\n\
-    cmp r0, 0\n\
-    beq _080EEB06\n\
-    b _080EEB28\n\
-    .align 2, 0\n\
-_080EEAF8: .4byte 0x00006e15\n\
-_080EEAFC: .4byte 0x00006e14\n\
-_080EEB00:\n\
-    cmp r0, 0x2\n\
-    beq _080EEB20\n\
-    b _080EEB28\n\
-_080EEB06:\n\
-    ldr r4, _080EEB10 @ =0x00006dae\n\
-    adds r1, r2, r4\n\
-    movs r0, 0x5\n\
-    b _080EEB26\n\
-    .align 2, 0\n\
-_080EEB10: .4byte 0x00006dae\n\
-_080EEB14:\n\
-    ldr r0, _080EEB1C @ =0x00006dae\n\
-    adds r1, r2, r0\n\
-    movs r0, 0x3\n\
-    b _080EEB26\n\
-    .align 2, 0\n\
-_080EEB1C: .4byte 0x00006dae\n\
-_080EEB20:\n\
-    ldr r2, _080EEB58 @ =0x00006dae\n\
-    adds r1, r3, r2\n\
-    movs r0, 0x6\n\
-_080EEB26:\n\
-    strb r0, [r1]\n\
-_080EEB28:\n\
-    ldr r4, _080EEB5C @ =gSharedMem\n\
-    ldr r1, _080EEB60 @ =0x00006e14\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    bl sub_80F1B8C\n\
-    ldr r2, _080EEB64 @ =0x00006e16\n\
-    adds r4, r2\n\
-    ldrb r0, [r4]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4]\n\
-_080EEB3E:\n\
-    ldr r4, _080EEB5C @ =gSharedMem\n\
-    ldr r1, _080EEB60 @ =0x00006e14\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    bl sub_80F1BC8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080EEC08\n\
-    ldr r2, _080EEB64 @ =0x00006e16\n\
-    adds r1, r4, r2\n\
-    b _080EEB76\n\
-    .align 2, 0\n\
-_080EEB58: .4byte 0x00006dae\n\
-_080EEB5C: .4byte gSharedMem\n\
-_080EEB60: .4byte 0x00006e14\n\
-_080EEB64: .4byte 0x00006e16\n\
-_080EEB68:\n\
-    bl sub_8055870\n\
-    cmp r0, 0\n\
-    bne _080EEC08\n\
-    ldr r1, _080EEB80 @ =gSharedMem\n\
-    ldr r4, _080EEB84 @ =0x00006e16\n\
-    adds r1, r4\n\
-_080EEB76:\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    b _080EEC08\n\
-    .align 2, 0\n\
-_080EEB80: .4byte gSharedMem\n\
-_080EEB84: .4byte 0x00006e16\n\
-_080EEB88:\n\
-    bl sub_80F1DF0\n\
-    ldr r4, _080EEBA0 @ =gSharedMem\n\
-    ldr r1, _080EEBA4 @ =0x00006e14\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    bl sub_80EF490\n\
-    ldr r2, _080EEBA8 @ =0x00006e16\n\
-    adds r4, r2\n\
-    b _080EEBCC\n\
-    .align 2, 0\n\
-_080EEBA0: .4byte gSharedMem\n\
-_080EEBA4: .4byte 0x00006e14\n\
-_080EEBA8: .4byte 0x00006e16\n\
-_080EEBAC:\n\
-    bl sub_80F1E50\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080EEC08\n\
-    ldr r4, _080EEBD4 @ =gSharedMem\n\
-    ldr r1, _080EEBD8 @ =0x00006e14\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    ldr r2, _080EEBDC @ =0x00006dad\n\
-    adds r1, r4, r2\n\
-    ldrb r1, [r1]\n\
-    bl sub_80EF428\n\
-    ldr r0, _080EEBE0 @ =0x00006e16\n\
-    adds r4, r0\n\
-_080EEBCC:\n\
-    ldrb r0, [r4]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4]\n\
-    b _080EEC08\n\
-    .align 2, 0\n\
-_080EEBD4: .4byte gSharedMem\n\
-_080EEBD8: .4byte 0x00006e14\n\
-_080EEBDC: .4byte 0x00006dad\n\
-_080EEBE0: .4byte 0x00006e16\n\
-_080EEBE4:\n\
-    bl sub_80EF4F8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080EEC08\n\
-    ldr r1, _080EEC00 @ =gSharedMem\n\
-    ldr r2, _080EEC04 @ =0x00006e16\n\
-    adds r1, r2\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-_080EEBFA:\n\
-    movs r0, 0\n\
-    b _080EEC0A\n\
-    .align 2, 0\n\
-_080EEC00: .4byte gSharedMem\n\
-_080EEC04: .4byte 0x00006e16\n\
-_080EEC08:\n\
-    movs r0, 0x1\n\
-_080EEC0A:\n\
-    pop {r4}\n\
-    pop {r1}\n\
-    bx r1\n"
 
-    );
+    return TRUE;
 }
-#endif
 
 // var6dad and var6dae must be s8 in this func
 bool8 sub_80EEC10()
