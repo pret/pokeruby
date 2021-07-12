@@ -915,15 +915,10 @@ void ScriptMenu_CreatePCMenu(void)
         sp8[r4++] = GetStringWidthInTilesForScriptMenu(gPCText_LanettesPC);
     else
         sp8[r4++] = GetStringWidthInTilesForScriptMenu(gPCText_SomeonesPC);
-
     sp8[r4++] = GetStringWidthInTilesForScriptMenu(gPCText_PlayersPC);
-
     sp8[r4++] = GetStringWidthInTilesForScriptMenu(gPCText_LogOff);
-
     if (FlagGet(FLAG_SYS_GAME_CLEAR))
-    {
         sp8[r4++] = GetStringWidthInTilesForScriptMenu(gPCText_HallOfFame);
-    }
 
     width = 0;
     for (r5 = 0; r5 < r4; r5++)

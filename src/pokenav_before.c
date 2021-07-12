@@ -2463,9 +2463,7 @@ void sub_80ED858(void)
         break;
     case 1:
         if (!sub_80F5B50())
-        {
             gPokenavStructPtr->unk304 = 2;
-        }
         break;
     case 2:
         sub_80F0174(1);
@@ -2546,9 +2544,7 @@ void sub_80ED858(void)
         break;
     case 6:
         if (!sub_8055870())
-        {
             gPokenavStructPtr->unk304 = 4;
-        }
         break;
     case 7:
         sub_80EEFBC(3);
@@ -2597,9 +2593,7 @@ void sub_80ED858(void)
 
 #if DEBUG
     if (gLinkOpen == TRUE)
-    {
         debug_sub_8008264(gLink.recvQueue.count, 9, 6, 2, 4);
-    }
 #endif
 }
 
@@ -3312,9 +3306,7 @@ bool8 sub_80EEA0C(void)
         break;
     case 5:
         if (!sub_8055870())
-        {
             gPokenavStructPtr->unk6E16++;
-        }
         break;
     case 6:
         sub_80F1DF0();

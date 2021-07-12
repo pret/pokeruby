@@ -1847,28 +1847,18 @@ static void sub_80A5414(u8 taskId)
         if (sReturnLocation == RETURN_TO_FIELD_5)
         {
             if (sPopupMenuSelection == 0)
-            {
                 sub_8072DDC(12);
-            }
             else if (sPopupMenuSelection < 2)
-            {
                 sub_8072DCC(47);
-            }
             else
-            {
                 sub_8072DCC(48);
-            }
         }
         else
         {
             if (sPopupMenuSelection < 2)
-            {
                 sub_8072DCC(47);
-            }
             else
-            {
                 sub_8072DCC(48);
-            }
         }
     }
 }
@@ -1879,7 +1869,7 @@ static void sub_80A5600(u8 taskId)
 
     while (1)
     {
-        if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_UP)
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
         {
             if (sPopupMenuSelection != 0 && sPopupMenuActionList[sPopupMenuSelection - 1] != 8)
             {
@@ -1888,7 +1878,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_DOWN)
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
         {
             if (sPopupMenuSelection != gUnknown_02038564 - 1 && sPopupMenuSelection != 2 && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
             {
@@ -1897,7 +1887,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_LEFT)
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
         {
             if ((sPopupMenuSelection >= 3) && sPopupMenuActionList[sPopupMenuSelection - 3] != 8)
             {
@@ -1906,7 +1896,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_RIGHT)
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
         {
             if ((sPopupMenuSelection < 3) && sPopupMenuActionList[sPopupMenuSelection + 3] != 8)
             {

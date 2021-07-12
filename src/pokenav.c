@@ -25,6 +25,7 @@
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "pokenav.h"
+#include "constants/rgb.h"
 
 // Static type declarations
 
@@ -462,8 +463,6 @@ void sub_80EF58C(u8 a)
     }
 }
 
-#define RGB2(r, g, b) (((b) << 10) | ((g) << 5) | (r))
-
 void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
 {
     u16 i;
@@ -472,12 +471,12 @@ void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
 
     for (i = 0; i < d; i++)
     {
-        s32 r1 = Q_24_8((((*a) >>  0)) & 0x1F);
-        s32 g1 = Q_24_8((((*a) >>  5)) & 0x1F);
-        s32 b1 = Q_24_8((((*a) >> 10)) & 0x1F);
-        s32 r2 = Q_24_8((((*b) >>  0)) & 0x1F);
-        s32 g2 = Q_24_8((((*b) >>  5)) & 0x1F);
-        s32 b2 = Q_24_8((((*b) >> 10)) & 0x1F);
+        s32 r1 = Q_24_8(GET_R(*a));
+        s32 g1 = Q_24_8(GET_G(*a));
+        s32 b1 = Q_24_8(GET_B(*a));
+        s32 r2 = Q_24_8(GET_R(*b));
+        s32 g2 = Q_24_8(GET_G(*b));
+        s32 b2 = Q_24_8(GET_B(*b));
         s32 dr = (r2 - r1) / c;
         s32 dg = (g2 - g1) / c;
         s32 db = (b2 - b1) / c;
@@ -1385,17 +1384,15 @@ bool8 sub_80F0D5C(void)
     u32 r5;
 
     if (gPokenavStructPtr->unkD15C == 7)
-    {
         return FALSE;
-    }
     if (++gPokenavStructPtr->unk306 < 2)
-    {
         return TRUE;
-    }
     gPokenavStructPtr->unk306 = 0;
     BasicInitMenuWindow(&gWindowTemplate_81E70D4);
     r5 = (gPokenavStructPtr->unk8778 + 2 + gPokenavStructPtr->unkD15C * 2) & 0x1F;
+#ifndef NONMATCHING
     asm("":::"r2"); // fakematch
+#endif //NONMATCHING
     switch (gPokenavStructPtr->unkD15C)
     {
     default:
@@ -4916,13 +4913,9 @@ void sub_80F66E0(void)
             break;
         };
         for (j = 0; j < r2; j++)
-        {
             gPokenavStructPtr->unkBC4C[gPokenavStructPtr->unkBC8E++] = r9 + j;
-        }
         if (r2 && r9 > 24)
-        {
             gPokenavStructPtr->unkBC8F++;
-        }
         r9 += r0;
     }
     if (gPokenavStructPtr->unkBC8E != gPokenavStructPtr->unkBC8F)
@@ -4965,16 +4958,12 @@ u8 sub_80F68E8(void)
             {
                 r4--;
                 if (gPokenavStructPtr->unkBC96[r4] != 0)
-                {
                     break;
-                }
             }
             if (gPokenavStructPtr->unkBC96[r4] != 0)
             {
                 if (r5 >= gPokenavStructPtr->unkBC96[r4])
-                {
                     r5 = gPokenavStructPtr->unkBC96[r4] - 1;
-                }
                 break;
             }
             r4 = gPokenavStructPtr->unkBC91;
@@ -4985,16 +4974,12 @@ u8 sub_80F68E8(void)
             {
                 r4++;
                 if (gPokenavStructPtr->unkBC96[r4] != 0)
-                {
                     break;
-                }
             }
             if (gPokenavStructPtr->unkBC96[r4] != 0)
             {
                 if (r5 >= gPokenavStructPtr->unkBC96[r4])
-                {
                     r5 = gPokenavStructPtr->unkBC96[r4] - 1;
-                }
                 break;
             }
             r4 = gPokenavStructPtr->unkBC91;
@@ -5025,9 +5010,7 @@ u8 sub_80F68E8(void)
             gPokenavStructPtr->unkBC91 = r4;
         }
         else
-        {
             r12 = 0;
-        }
     }
     return r12;
 }
