@@ -5,6 +5,7 @@
 #include "palette.h"
 #include "scanline_effect.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "strings2.h"
 #include "task.h"
 
@@ -430,11 +431,9 @@ static u8 FrameType_ProcessInput(u8 selection)
     return selection;
 }
 
-#define CHAR_0 0xA1 //Character code of '0' character
-
-#if ENGLISH
 static void FrameType_DrawChoices(u8 selection)
 {
+#if ENGLISH
     u8 text[6];
     u8 n = selection + 1;
     u16 i;
@@ -461,70 +460,28 @@ static void FrameType_DrawChoices(u8 selection)
     text[i] = EOS;
     Menu_PrintText(gSystemText_Type, 15, 15);
     Menu_PrintText(text, 18, 15);
-}
 #elif GERMAN
-NAKED
-static void FrameType_DrawChoices(u8 selection)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x10\n\
-    lsls r0, 24\n\
-    movs r1, 0x80\n\
-    lsls r1, 17\n\
-    adds r0, r1\n\
-    lsrs r5, r0, 24\n\
-    ldr r1, _0808C368 @ =gSystemText_Type\n\
-    mov r0, sp\n\
-    bl StringCopy\n\
-    ldr r1, _0808C36C @ =gSystemText_Terminator\n\
-    mov r0, sp\n\
-    bl StringAppend\n\
-    adds r4, r0, 0\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xA\n\
-    bl __udivsi3\n\
-    adds r1, r0, 0\n\
-    lsls r0, r1, 24\n\
-    lsrs r6, r0, 24\n\
-    cmp r6, 0\n\
-    beq _0808C370\n\
-    adds r0, r1, 0\n\
-    adds r0, 0xA1\n\
-    strb r0, [r4]\n\
-    adds r4, 0x1\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xA\n\
-    bl __umodsi3\n\
-    adds r0, 0xA1\n\
-    strb r0, [r4]\n\
-    b _0808C380\n\
-    .align 2, 0\n\
-_0808C368: .4byte gSystemText_Type\n\
-_0808C36C: .4byte gSystemText_Terminator\n\
-_0808C370:\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xA\n\
-    bl __umodsi3\n\
-    adds r0, 0xA1\n\
-    strb r0, [r4]\n\
-    adds r4, 0x1\n\
-    strb r6, [r4]\n\
-_0808C380:\n\
-    adds r4, 0x1\n\
-    movs r0, 0xFF\n\
-    strb r0, [r4]\n\
-    mov r0, sp\n\
-    movs r1, 0xF\n\
-    movs r2, 0xF\n\
-    bl Menu_PrintText\n\
-    add sp, 0x10\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
+    u8 text[16];
+    u8 n = selection + 1;
+    u8 *str;
+
+    StringCopy(text, gSystemText_Type);
+    str = StringAppend(text, gSystemText_Terminator);
+
+    if (n / 10 != 0)
+    {
+        *str++ = n / 10 + CHAR_0;
+        *str++ = n % 10 + CHAR_0;
+    }
+    else
+    {
+        *str++ = n % 10 + CHAR_0;
+        *str++ = CHAR_SPACE;
+    }
+    *str = EOS;
+    Menu_PrintText(text, 15, 15);
 #endif
+}
 
 static u8 ButtonMode_ProcessInput(u8 selection)
 {

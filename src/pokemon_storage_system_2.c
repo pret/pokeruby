@@ -1521,184 +1521,65 @@ void sub_8098090(struct Sprite *sprite)
 
 const struct OamData gOamData_83B6EAC;
 
-#ifdef NONMATCHING
 void sub_80980D4(void)
 {
     u16 i;
-    u16 tileStart;
-    u8 palSlot;
+    u16 startTile;
+    u8 paletteNum;
     u8 spriteId;
-    struct SpriteSheet sheet = {gPokemonStorageSystemPtr->unk_2784, 0x800, 0x0002};
-    struct SpritePalette palette = {gPokemonStorageSystemPtr->unk_2704, 0xdac7};
-    struct SpriteTemplate template = {
-        0x0002, 0xdac7, &gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+    struct SpriteSheet spriteSheet = {
+        .data = gPokemonStorageSystemPtr->unk_2784,
+        .size = 0x800,
+        .tag = 0x0002
+    };
+    struct SpritePalette spritePalette = {
+        .data = gPokemonStorageSystemPtr->unk_2704,
+        .tag = 0xDAC7
+    };
+    struct SpriteTemplate spriteTemplate = {
+        .tileTag = 0x0002,
+        .paletteTag = 0xDAC7,
+        .oam = &gOamData_83B6EAC,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
     };
 
     for (i = 0; i < 0x800; i++)
-        gPokemonStorageSystemPtr->unk_2784[i] = 0;
-    for (i = 0; i < 0x10; i++)
-        gPokemonStorageSystemPtr->unk_2704[i] = 0;
-
-    gPokemonStorageSystemPtr->unk_2700 = NULL;
-    if ((tileStart = LoadSpriteSheet(&sheet)) != 0
-        && (palSlot = LoadSpritePalette(&palette)) != 0xff
-        && (spriteId = CreateSprite(&template, 0x28, 0x30, 0)) != MAX_SPRITES)
     {
-        // FIXME this gets compiled as a separate block between the palSlot check and the spriteId check
-        gPokemonStorageSystemPtr->unk_2700 = gSprites + spriteId;
-        gPokemonStorageSystemPtr->unk_26fa = palSlot * 16 + 0x100;
-        gPokemonStorageSystemPtr->unk_26fc = BG_CHAR_ADDR(4) + tileStart * 32;
+        gPokemonStorageSystemPtr->unk_2784[i] = 0;
     }
+    for (i = 0; i < 0x10; i++)
+    {
+        gPokemonStorageSystemPtr->unk_2704[i] = 0;
+    }
+    gPokemonStorageSystemPtr->unk_2700 = NULL;
+    do
+    {
+        startTile = LoadSpriteSheet(&spriteSheet);
+        if (startTile == 0)
+            break;
 
+        paletteNum = LoadSpritePalette(&spritePalette);
+        if (paletteNum == 0xFF)
+            break;
+
+        spriteId = CreateSprite(&spriteTemplate, 0x28, 0x30, 0);
+        if (spriteId == MAX_SPRITES)
+            break;
+
+        gPokemonStorageSystemPtr->unk_2700 = &gSprites[spriteId];
+        gPokemonStorageSystemPtr->unk_26fa = 0x100 + 16 * paletteNum;
+        gPokemonStorageSystemPtr->unk_26fc = (void *)(OBJ_VRAM0 + 32 * startTile);
+    } while (0);
     if (gPokemonStorageSystemPtr->unk_2700 == NULL)
     {
         FreeSpriteTilesByTag(0x0002);
-        FreeSpritePaletteByTag(0xdac7);
+        FreeSpritePaletteByTag(0xDAC7);
     }
 }
-#else
-
-const struct SpriteSheet gUnknown_083B6DCC = {ePokemonStorageSystem.unk_2784, 0x800, 0x0002};
-const struct SpritePalette gUnknown_083B6DD4 = {ePokemonStorageSystem.unk_2704, 0xdac7};
-const struct SpriteTemplate gSpriteTemplate_83B6DDC = {
-    0x0002, 0xdac7, &gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-};
-
-NAKED void sub_80980D4(void)
-{
-    asm_unified("\tpush {r4,r5,lr}\n"
-                    "\tsub sp, 0x28\n"
-                    "\tldr r0, _08098150 @ =gUnknown_083B6DCC\n"
-                    "\tldr r1, [r0, 0x4]\n"
-                    "\tldr r0, [r0]\n"
-                    "\tstr r0, [sp, 0x18]\n"
-                    "\tstr r1, [sp, 0x1C]\n"
-                    "\tldr r0, _08098154 @ =gUnknown_083B6DD4\n"
-                    "\tldr r1, [r0, 0x4]\n"
-                    "\tldr r0, [r0]\n"
-                    "\tstr r0, [sp, 0x20]\n"
-                    "\tstr r1, [sp, 0x24]\n"
-                    "\tmov r1, sp\n"
-                    "\tldr r0, _08098158 @ =gSpriteTemplate_83B6DDC\n"
-                    "\tldm r0!, {r2-r4}\n"
-                    "\tstm r1!, {r2-r4}\n"
-                    "\tldm r0!, {r2-r4}\n"
-                    "\tstm r1!, {r2-r4}\n"
-                    "\tmovs r1, 0\n"
-                    "\tadd r5, sp, 0x18\n"
-                    "\tldr r4, _0809815C @ =gSharedMem + 0x2784\n"
-                    "\tmovs r3, 0\n"
-                    "\tldr r2, _08098160 @ =0x000007ff\n"
-                    "_08098102:\n"
-                    "\tadds r0, r1, r4\n"
-                    "\tstrb r3, [r0]\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tcmp r1, r2\n"
-                    "\tbls _08098102\n"
-                    "\tmovs r1, 0\n"
-                    "\tldr r3, _08098164 @ =gSharedMem + 0x2704\n"
-                    "\tmovs r2, 0\n"
-                    "_08098116:\n"
-                    "\tlsls r0, r1, 1\n"
-                    "\tadds r0, r3\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tcmp r1, 0xF\n"
-                    "\tbls _08098116\n"
-                    "\tldr r0, _08098168 @ =gSharedMem\n"
-                    "\tmovs r1, 0x9C\n"
-                    "\tlsls r1, 6\n"
-                    "\tadds r0, r1\n"
-                    "\tmovs r1, 0\n"
-                    "\tstr r1, [r0]\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tbl LoadSpriteSheet\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tcmp r5, 0\n"
-                    "\tbeq _080981C4\n"
-                    "\tadd r0, sp, 0x20\n"
-                    "\tbl LoadSpritePalette\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tcmp r4, 0xFF\n"
-                    "\tbeq _080981C4\n"
-                    "\tb _080981B0\n"
-                    "\t.align 2, 0\n"
-                    "_08098150: .4byte gUnknown_083B6DCC\n"
-                    "_08098154: .4byte gUnknown_083B6DD4\n"
-                    "_08098158: .4byte gSpriteTemplate_83B6DDC\n"
-                    "_0809815C: .4byte gSharedMem + 0x2784\n"
-                    "_08098160: .4byte 0x000007ff\n"
-                    "_08098164: .4byte gSharedMem + 0x2704\n"
-                    "_08098168: .4byte gSharedMem\n"
-                    "_0809816C:\n"
-                    "\tldr r2, _0809819C @ =gSharedMem\n"
-                    "\tmovs r0, 0x9C\n"
-                    "\tlsls r0, 6\n"
-                    "\tadds r3, r2, r0\n"
-                    "\tlsls r0, r1, 4\n"
-                    "\tadds r0, r1\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, _080981A0 @ =gSprites\n"
-                    "\tadds r0, r1\n"
-                    "\tstr r0, [r3]\n"
-                    "\tlsls r0, r4, 4\n"
-                    "\tmovs r1, 0x80\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r3, _080981A4 @ =0x000026fa\n"
-                    "\tadds r1, r2, r3\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tldr r4, _080981A8 @ =0x000026fc\n"
-                    "\tadds r2, r4\n"
-                    "\tlsls r0, r5, 5\n"
-                    "\tldr r1, _080981AC @ =0x06010000\n"
-                    "\tadds r0, r1\n"
-                    "\tstr r0, [r2]\n"
-                    "\tb _080981C4\n"
-                    "\t.align 2, 0\n"
-                    "_0809819C: .4byte gSharedMem\n"
-                    "_080981A0: .4byte gSprites\n"
-                    "_080981A4: .4byte 0x000026fa\n"
-                    "_080981A8: .4byte 0x000026fc\n"
-                    "_080981AC: .4byte 0x06010000\n"
-                    "_080981B0:\n"
-                    "\tmov r0, sp\n"
-                    "\tmovs r1, 0x28\n"
-                    "\tmovs r2, 0x30\n"
-                    "\tmovs r3, 0\n"
-                    "\tbl CreateSprite\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r1, r0, 24\n"
-                    "\tcmp r1, 0x40\n"
-                    "\tbne _0809816C\n"
-                    "_080981C4:\n"
-                    "\tldr r0, _080981E8 @ =gSharedMem\n"
-                    "\tmovs r2, 0x9C\n"
-                    "\tlsls r2, 6\n"
-                    "\tadds r0, r2\n"
-                    "\tldr r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _080981DE\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tbl FreeSpriteTilesByTag\n"
-                    "\tldr r0, _080981EC @ =0x0000dac7\n"
-                    "\tbl FreeSpritePaletteByTag\n"
-                    "_080981DE:\n"
-                    "\tadd sp, 0x28\n"
-                    "\tpop {r4,r5}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_080981E8: .4byte gSharedMem\n"
-                    "_080981EC: .4byte 0x0000dac7");
-}
-#endif
 
 void sub_80981F0(u16 species, u32 pid)
 {

@@ -1,15 +1,7 @@
 #include "global.h"
 #include "image_processing_effects.h"
 #include "contest_painting.h"
-
-#define GET_R(color) ((color) & 0x1F)
-#define GET_G(color) (((color) >> 5) & 0x1F)
-#define GET_B(color) (((color) >> 10) & 0x1F)
-
-#define RGB_ALPHA       (1 << 15)
-#define IS_ALPHA(color) ((color) & RGB_ALPHA)
-
-#define RGB2(r, g, b) (((b) << 10) | ((g) << 5) | (r))
+#include "constants/rgb.h"
 
 u16 *gCanvasPixels;
 u8 gCanvasColumnStart;

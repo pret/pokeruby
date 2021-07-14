@@ -145,12 +145,9 @@ struct PocketScrollState gBagPocketScrollStates[5];
 struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
 
-// TODO: decompile the debug code so we can use static in this file
-#define static
-
-extern const struct CompressedSpriteSheet sMaleBagSpriteSheet;
-extern const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
-extern const struct CompressedSpritePalette sBagSpritePalette;
+static const struct CompressedSpriteSheet sMaleBagSpriteSheet;
+static const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
+static const struct CompressedSpritePalette sBagSpritePalette;
 
 const struct BagPocket gBagPockets[NUM_BAG_POCKETS] =
 {
@@ -1782,51 +1779,57 @@ void sub_80A53F8(void)
     SetMainCallback2(sub_80A53CC);
 }
 
-#ifdef NONMATCHING
 static void sub_80A5414(u8 taskId)
 {
     TaskFunc r5 = NULL;
-
-    if (sub_80A78A0() != 0)
+    if (sub_80A78A0())
     {
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x40)
+        while (1)
         {
-            if ((sPopupMenuSelection & 1) && sPopupMenuActionList[sPopupMenuSelection - 1] == 8)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
             {
-                PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor3(-1);
+                if ((sPopupMenuSelection & 1) && sPopupMenuActionList[sPopupMenuSelection - 1] != 8)
+                {
+                    PlaySE(SE_SELECT);
+                    sPopupMenuSelection = MoveMenuCursor3(-1);
+                }
+                break;
             }
-        }
-        //_080A546C
-        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x80)
-        {
-            if (!(sPopupMenuSelection & 1) && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
             {
-                PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor3(1);
+                if ((!(sPopupMenuSelection & 1)) && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
+                {
+                    PlaySE(SE_SELECT);
+                    sPopupMenuSelection = MoveMenuCursor3(1);
+                }
+                break;
             }
-        }
-        //_080A549C
-        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x20)
-        {
-            if (sPopupMenuSelection > 1 && sPopupMenuActionList[sPopupMenuSelection - 2] != 8)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
             {
-                PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor3(-2);
+                if ((sPopupMenuSelection >= 2) && sPopupMenuActionList[sPopupMenuSelection - 2] != 8)
+                {
+                    PlaySE(SE_SELECT);
+                    sPopupMenuSelection = MoveMenuCursor3(-2);
+                }
+                break;
             }
-        }
-        //_080A54CC
-        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == 0x10)
-        {
-            if (sPopupMenuSelection <= 1 && sPopupMenuActionList[sPopupMenuSelection + 2] != 8)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
             {
-                PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor3(2);
+                if ((sPopupMenuSelection < 2) && sPopupMenuActionList[sPopupMenuSelection + 2] != 8)
+                {
+                    PlaySE(SE_SELECT);
+                    sPopupMenuSelection = MoveMenuCursor3(2);
+                }
+                break;
             }
-        }
-        //_080A5500
-        else if (!(gMain.newKeys & A_BUTTON))
-        {
+            if (gMain.newKeys & A_BUTTON)
+            {
+                gTasks[taskId].data[10] = 0;
+                sub_80A4DA4(gBGTilemapBuffers[1]);
+                r5 = sItemPopupMenuActions[sPopupMenuActionList[sPopupMenuSelection]].func;
+                r5(taskId);
+                break;
+            }
             if (gMain.newKeys & B_BUTTON)
             {
                 gTasks[taskId].data[10] = 0;
@@ -1834,494 +1837,108 @@ static void sub_80A5414(u8 taskId)
                 sub_80A4DA4(gBGTilemapBuffers[1]);
                 r5 = sItemPopupMenuActions[sPopupMenuActionList[3]].func;
                 r5(taskId);
+                break;
             }
-        }
-        else
-        {
-            //_080A5590
-            gTasks[taskId].data[10] = 0;
-            sub_80A4DA4(gBGTilemapBuffers[1]);
-            r5 = sItemPopupMenuActions[sPopupMenuActionList[sPopupMenuSelection]].func;
-            r5(taskId);
+            break;
         }
     }
-    //_080A5552
     if (r5 == NULL)
     {
         if (sReturnLocation == RETURN_TO_FIELD_5)
         {
             if (sPopupMenuSelection == 0)
-            {
                 sub_8072DDC(12);
-                return;
-            }
-            //_080A55D4
-            //else
-            //{
-                if (sPopupMenuSelection == 0 || sPopupMenuSelection == 1)
-                    sub_8072DCC(0x2F);
-                else
-                    sub_8072DCC(0x30);
-            //}
+            else if (sPopupMenuSelection < 2)
+                sub_8072DCC(47);
+            else
+                sub_8072DCC(48);
         }
-        //_080A55E0
         else
         {
-            if (sPopupMenuSelection == 0 || sPopupMenuSelection == 1)
-                sub_8072DCC(0x2F);
+            if (sPopupMenuSelection < 2)
+                sub_8072DCC(47);
             else
-                sub_8072DCC(0x30);
+                sub_8072DCC(48);
         }
     }
 }
-#else
-NAKED
-static void sub_80A5414(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    movs r5, 0\n\
-    bl sub_80A78A0\n\
-    cmp r0, 0\n\
-    bne _080A5426\n\
-    b _080A5552\n\
-_080A5426:\n\
-    ldr r2, _080A5460 @ =gMain\n\
-    ldrh r0, [r2, 0x30]\n\
-    movs r1, 0xF0\n\
-    ands r1, r0\n\
-    cmp r1, 0x40\n\
-    bne _080A546C\n\
-    ldr r4, _080A5464 @ =sPopupMenuSelection\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080A5440\n\
-    b _080A5552\n\
-_080A5440:\n\
-    ldrb r1, [r4]\n\
-    ldr r0, _080A5468 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    subs r1, 0x1\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x8\n\
-    bne _080A5452\n\
-    b _080A5552\n\
-_080A5452:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    b _080A54EE\n\
-    .align 2, 0\n\
-_080A5460: .4byte gMain\n\
-_080A5464: .4byte sPopupMenuSelection\n\
-_080A5468: .4byte sPopupMenuActionList\n\
-_080A546C:\n\
-    cmp r1, 0x80\n\
-    bne _080A549C\n\
-    ldr r4, _080A5494 @ =sPopupMenuSelection\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080A5552\n\
-    ldrb r1, [r4]\n\
-    ldr r0, _080A5498 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x1]\n\
-    cmp r0, 0x8\n\
-    beq _080A5552\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    b _080A54EE\n\
-    .align 2, 0\n\
-_080A5494: .4byte sPopupMenuSelection\n\
-_080A5498: .4byte sPopupMenuActionList\n\
-_080A549C:\n\
-    cmp r1, 0x20\n\
-    bne _080A54CC\n\
-    ldr r4, _080A54C4 @ =sPopupMenuSelection\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0x1\n\
-    bls _080A5552\n\
-    adds r1, r0, 0\n\
-    ldr r0, _080A54C8 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    subs r1, 0x2\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x8\n\
-    beq _080A5552\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    b _080A54EE\n\
-    .align 2, 0\n\
-_080A54C4: .4byte sPopupMenuSelection\n\
-_080A54C8: .4byte sPopupMenuActionList\n\
-_080A54CC:\n\
-    cmp r1, 0x10\n\
-    bne _080A5500\n\
-    ldr r4, _080A54F8 @ =sPopupMenuSelection\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0x1\n\
-    bhi _080A5552\n\
-    adds r1, r0, 0\n\
-    ldr r0, _080A54FC @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x2]\n\
-    cmp r0, 0x8\n\
-    beq _080A5552\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x2\n\
-_080A54EE:\n\
-    bl MoveMenuCursor3\n\
-    strb r0, [r4]\n\
-    b _080A5552\n\
-    .align 2, 0\n\
-_080A54F8: .4byte sPopupMenuSelection\n\
-_080A54FC: .4byte sPopupMenuActionList\n\
-_080A5500:\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080A5590\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080A5552\n\
-    ldr r1, _080A5570 @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    strh r5, [r0, 0x1C]\n\
-    ldr r1, _080A5574 @ =gBagPocketScrollStates\n\
-    ldr r0, _080A5578 @ =sCurrentBagPocket\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r2, [r0]\n\
-    adds r0, r4, 0\n\
-    adds r1, r2, 0\n\
-    bl sub_80A48E8\n\
-    ldr r0, _080A557C @ =gBGTilemapBuffers + 0x800\n\
-    bl sub_80A4DA4\n\
-    ldr r1, _080A5580 @ =sItemPopupMenuActions\n\
-    ldr r0, _080A5584 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x3]\n\
-    lsls r0, 3\n\
-    adds r1, 0x4\n\
-    adds r0, r1\n\
-    ldr r5, [r0]\n\
-    adds r0, r4, 0\n\
-    bl _call_via_r5\n\
-_080A5552:\n\
-    cmp r5, 0\n\
-    bne _080A55FA\n\
-    ldr r0, _080A5588 @ =sReturnLocation\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x5\n\
-    bne _080A55E0\n\
-    ldr r0, _080A558C @ =sPopupMenuSelection\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _080A55D4\n\
-    movs r0, 0xC\n\
-    bl sub_8072DDC\n\
-    b _080A55FA\n\
-    .align 2, 0\n\
-_080A5570: .4byte gTasks\n\
-_080A5574: .4byte gBagPocketScrollStates\n\
-_080A5578: .4byte sCurrentBagPocket\n\
-_080A557C: .4byte gBGTilemapBuffers + 0x800\n\
-_080A5580: .4byte sItemPopupMenuActions\n\
-_080A5584: .4byte sPopupMenuActionList\n\
-_080A5588: .4byte sReturnLocation\n\
-_080A558C: .4byte sPopupMenuSelection\n\
-_080A5590:\n\
-    ldr r1, _080A55C0 @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    strh r5, [r0, 0x1C]\n\
-    ldr r0, _080A55C4 @ =gBGTilemapBuffers + 0x800\n\
-    bl sub_80A4DA4\n\
-    ldr r1, _080A55C8 @ =sItemPopupMenuActions\n\
-    ldr r0, _080A55CC @ =sPopupMenuSelection\n\
-    ldrb r2, [r0]\n\
-    ldr r0, _080A55D0 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 3\n\
-    adds r1, 0x4\n\
-    adds r0, r1\n\
-    ldr r5, [r0]\n\
-    adds r0, r4, 0\n\
-    bl _call_via_r5\n\
-    b _080A5552\n\
-    .align 2, 0\n\
-_080A55C0: .4byte gTasks\n\
-_080A55C4: .4byte gBGTilemapBuffers + 0x800\n\
-_080A55C8: .4byte sItemPopupMenuActions\n\
-_080A55CC: .4byte sPopupMenuSelection\n\
-_080A55D0: .4byte sPopupMenuActionList\n\
-_080A55D4:\n\
-    cmp r0, 0x1\n\
-    bls _080A55E8\n\
-    movs r0, 0x30\n\
-    bl sub_8072DCC\n\
-    b _080A55FA\n\
-_080A55E0:\n\
-    ldr r0, _080A55F0 @ =sPopupMenuSelection\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bhi _080A55F4\n\
-_080A55E8:\n\
-    movs r0, 0x2F\n\
-    bl sub_8072DCC\n\
-    b _080A55FA\n\
-    .align 2, 0\n\
-_080A55F0: .4byte sPopupMenuSelection\n\
-_080A55F4:\n\
-    movs r0, 0x30\n\
-    bl sub_8072DCC\n\
-_080A55FA:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
-NAKED
 static void sub_80A5600(u8 taskId)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    movs r5, 0\n\
-    ldr r2, _080A563C @ =gMain\n\
-    ldrh r0, [r2, 0x30]\n\
-    movs r1, 0xF0\n\
-    ands r1, r0\n\
-    cmp r1, 0x40\n\
-    bne _080A5648\n\
-    ldr r4, _080A5640 @ =sPopupMenuSelection\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0\n\
-    bne _080A561E\n\
-    b _080A5736\n\
-_080A561E:\n\
-    adds r1, r0, 0\n\
-    ldr r0, _080A5644 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    subs r1, 0x1\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x8\n\
-    bne _080A5630\n\
-    b _080A5736\n\
-_080A5630:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    b _080A56D2\n\
-    .align 2, 0\n\
-_080A563C: .4byte gMain\n\
-_080A5640: .4byte sPopupMenuSelection\n\
-_080A5644: .4byte sPopupMenuActionList\n\
-_080A5648:\n\
-    cmp r1, 0x80\n\
-    bne _080A5680\n\
-    ldr r4, _080A5674 @ =sPopupMenuSelection\n\
-    ldrb r1, [r4]\n\
-    ldr r0, _080A5678 @ =gUnknown_02038564\n\
-    ldrb r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r1, r0\n\
-    beq _080A5736\n\
-    cmp r1, 0x2\n\
-    beq _080A5736\n\
-    ldr r0, _080A567C @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r0, r1, r0\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x8\n\
-    beq _080A5736\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x1\n\
-    b _080A56D2\n\
-    .align 2, 0\n\
-_080A5674: .4byte sPopupMenuSelection\n\
-_080A5678: .4byte gUnknown_02038564\n\
-_080A567C: .4byte sPopupMenuActionList\n\
-_080A5680:\n\
-    cmp r1, 0x20\n\
-    bne _080A56B0\n\
-    ldr r4, _080A56A8 @ =sPopupMenuSelection\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0x2\n\
-    bls _080A5736\n\
-    adds r1, r0, 0\n\
-    ldr r0, _080A56AC @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    subs r1, 0x3\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x8\n\
-    beq _080A5736\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x3\n\
-    negs r0, r0\n\
-    b _080A56D2\n\
-    .align 2, 0\n\
-_080A56A8: .4byte sPopupMenuSelection\n\
-_080A56AC: .4byte sPopupMenuActionList\n\
-_080A56B0:\n\
-    cmp r1, 0x10\n\
-    bne _080A56E4\n\
-    ldr r4, _080A56DC @ =sPopupMenuSelection\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0x2\n\
-    bhi _080A5736\n\
-    adds r1, r0, 0\n\
-    ldr r0, _080A56E0 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x3]\n\
-    cmp r0, 0x8\n\
-    beq _080A5736\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    movs r0, 0x3\n\
-_080A56D2:\n\
-    bl MoveMenuCursor3\n\
-    strb r0, [r4]\n\
-    b _080A5736\n\
-    .align 2, 0\n\
-_080A56DC: .4byte sPopupMenuSelection\n\
-_080A56E0: .4byte sPopupMenuActionList\n\
-_080A56E4:\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080A5768\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080A5736\n\
-    ldr r1, _080A574C @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    strh r5, [r0, 0x1C]\n\
-    ldr r1, _080A5750 @ =gBagPocketScrollStates\n\
-    ldr r0, _080A5754 @ =sCurrentBagPocket\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r2, [r0]\n\
-    adds r0, r4, 0\n\
-    adds r1, r2, 0\n\
-    bl sub_80A48E8\n\
-    ldr r0, _080A5758 @ =gBGTilemapBuffers + 0x800\n\
-    bl sub_80A4DA4\n\
-    ldr r1, _080A575C @ =sItemPopupMenuActions\n\
-    ldr r0, _080A5760 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x5]\n\
-    lsls r0, 3\n\
-    adds r1, 0x4\n\
-    adds r0, r1\n\
-    ldr r5, [r0]\n\
-    adds r0, r4, 0\n\
-    bl _call_via_r5\n\
-_080A5736:\n\
-    cmp r5, 0\n\
-    bne _080A57BE\n\
-    ldr r0, _080A5764 @ =sPopupMenuSelection\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _080A57AC\n\
-    movs r0, 0xC\n\
-    bl sub_8072DDC\n\
-    b _080A57BE\n\
-    .align 2, 0\n\
-_080A574C: .4byte gTasks\n\
-_080A5750: .4byte gBagPocketScrollStates\n\
-_080A5754: .4byte sCurrentBagPocket\n\
-_080A5758: .4byte gBGTilemapBuffers + 0x800\n\
-_080A575C: .4byte sItemPopupMenuActions\n\
-_080A5760: .4byte sPopupMenuActionList\n\
-_080A5764: .4byte sPopupMenuSelection\n\
-_080A5768:\n\
-    ldr r1, _080A5798 @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    strh r5, [r0, 0x1C]\n\
-    ldr r0, _080A579C @ =gBGTilemapBuffers + 0x800\n\
-    bl sub_80A4DA4\n\
-    ldr r1, _080A57A0 @ =sItemPopupMenuActions\n\
-    ldr r0, _080A57A4 @ =sPopupMenuSelection\n\
-    ldrb r2, [r0]\n\
-    ldr r0, _080A57A8 @ =sPopupMenuActionList\n\
-    ldr r0, [r0]\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 3\n\
-    adds r1, 0x4\n\
-    adds r0, r1\n\
-    ldr r5, [r0]\n\
-    adds r0, r4, 0\n\
-    bl _call_via_r5\n\
-    b _080A5736\n\
-    .align 2, 0\n\
-_080A5798: .4byte gTasks\n\
-_080A579C: .4byte gBGTilemapBuffers + 0x800\n\
-_080A57A0: .4byte sItemPopupMenuActions\n\
-_080A57A4: .4byte sPopupMenuSelection\n\
-_080A57A8: .4byte sPopupMenuActionList\n\
-_080A57AC:\n\
-    cmp r0, 0x2\n\
-    bhi _080A57B8\n\
-    movs r0, 0x2F\n\
-    bl sub_8072DCC\n\
-    b _080A57BE\n\
-_080A57B8:\n\
-    movs r0, 0x30\n\
-    bl sub_8072DCC\n\
-_080A57BE:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    TaskFunc r5 = NULL;
+
+    while (1)
+    {
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+        {
+            if (sPopupMenuSelection != 0 && sPopupMenuActionList[sPopupMenuSelection - 1] != 8)
+            {
+                PlaySE(SE_SELECT);
+                sPopupMenuSelection = MoveMenuCursor3(-1);
+            }
+            break;
+        }
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+        {
+            if (sPopupMenuSelection != gUnknown_02038564 - 1 && sPopupMenuSelection != 2 && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
+            {
+                PlaySE(SE_SELECT);
+                sPopupMenuSelection = MoveMenuCursor3(1);
+            }
+            break;
+        }
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
+        {
+            if ((sPopupMenuSelection >= 3) && sPopupMenuActionList[sPopupMenuSelection - 3] != 8)
+            {
+                PlaySE(SE_SELECT);
+                sPopupMenuSelection = MoveMenuCursor3(-3);
+            }
+            break;
+        }
+        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
+        {
+            if ((sPopupMenuSelection < 3) && sPopupMenuActionList[sPopupMenuSelection + 3] != 8)
+            {
+                PlaySE(SE_SELECT);
+                sPopupMenuSelection = MoveMenuCursor3(3);
+            }
+            break;
+        }
+        if (gMain.newKeys & A_BUTTON)
+        {
+            gTasks[taskId].data[10] = 0;
+            sub_80A4DA4(gBGTilemapBuffers[1]);
+            r5 = sItemPopupMenuActions[sPopupMenuActionList[sPopupMenuSelection]].func;
+            r5(taskId);
+            break;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            gTasks[taskId].data[10] = 0;
+            sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
+            sub_80A4DA4(gBGTilemapBuffers[1]);
+            r5 = sItemPopupMenuActions[sPopupMenuActionList[5]].func;
+            r5(taskId);
+            break;
+        }
+        break;
+    }
+    if (r5 == NULL)
+    {
+        if (sPopupMenuSelection == 0)
+        {
+            sub_8072DDC(12);
+        }
+        else if (sPopupMenuSelection < 3)
+        {
+            sub_8072DCC(47);
+        }
+        else
+        {
+            sub_8072DCC(48);
+        }
+    }
 }
 
 static void sub_80A57C4(void)

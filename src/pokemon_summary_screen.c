@@ -138,7 +138,7 @@ extern const u8 gStatusScreen_Pal[];
 extern const u8 gStatusScreen_Tilemap[];
 extern const u8 gUnknown_08E74688[];
 extern const u8 gUnknown_08E74E88[];
-extern const u8 gUnknown_08E73508[];
+extern const u16 gUnknown_08E73508[];
 extern const u8 gStatusScreen_Gfx[];
 extern const u8 gFontDefaultPalette[];
 extern const u8 gAbilityNames[][13];
@@ -2970,321 +2970,54 @@ void DrawSummaryScreenNavigationDots(void)
     DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
 
-NAKED
+// Like DmaCopyLarge16 but the size check is up top
+#define DmaCopyLargeCheckFirst16(_src,_dest,_size) { \
+    const void * src = (const void *)(_src);         \
+    void * dest = (void *)(_dest);                   \
+    u32 size = (u32)(_size);                         \
+    while (1)                                        \
+    {                                                \
+        if (size <= 0x1000)                          \
+        {                                            \
+            DmaCopy16(3, src, dest, size);           \
+            break;                                   \
+        }                                            \
+        DmaCopy16(3, src, dest, 0x1000);             \
+        src += 0x1000;                               \
+        dest += 0x1000;                              \
+        size -= 0x1000;                              \
+    }                                                \
+}
+
+void sub_80A1D18(void);
+
 void sub_80A1048(u8 taskId)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    lsls r0, 3\n\
-    ldr r1, _080A10A0 @ =gTasks + 0x8\n\
-    adds r6, r0, r1\n\
-    ldrh r0, [r6]\n\
-    ldrh r1, [r6, 0x2]\n\
-    adds r0, r1\n\
-    strh r0, [r6, 0x2]\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    bne _080A106E\n\
-    b _080A1224\n\
-_080A106E:\n\
-    movs r5, 0x2\n\
-    ldrsh r2, [r6, r5]\n\
-    ldr r0, _080A10A4 @ =0x0000024a\n\
-    subs r0, r2\n\
-    lsls r0, 1\n\
-    ldr r1, _080A10A8 @ =gUnknown_08E73508\n\
-    adds r4, r0, r1\n\
-    ldr r5, _080A10AC @ =0x0600e480\n\
-    lsls r2, 1\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    adds r7, r1, 0\n\
-    cmp r2, r0\n\
-    bhi _080A10B4\n\
-    ldr r0, _080A10B0 @ =0x040000d4\n\
-    str r4, [r0]\n\
-    str r5, [r0, 0x4]\n\
-    lsrs r1, r2, 1\n\
-    movs r2, 0x80\n\
-    lsls r2, 24\n\
-    orrs r1, r2\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    b _080A10E0\n\
-    .align 2, 0\n\
-_080A10A0: .4byte gTasks + 0x8\n\
-_080A10A4: .4byte 0x0000024a\n\
-_080A10A8: .4byte gUnknown_08E73508\n\
-_080A10AC: .4byte 0x0600e480\n\
-_080A10B0: .4byte 0x040000d4\n\
-_080A10B4:\n\
-    ldr r3, _080A110C @ =0x040000d4\n\
-    str r4, [r3]\n\
-    str r5, [r3, 0x4]\n\
-    ldr r0, _080A1110 @ =0x80000800\n\
-    str r0, [r3, 0x8]\n\
-    ldr r0, [r3, 0x8]\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    adds r4, r0\n\
-    adds r5, r0\n\
-    ldr r1, _080A1114 @ =0xfffff000\n\
-    adds r2, r1\n\
-    cmp r2, r0\n\
-    bhi _080A10B4\n\
-    str r4, [r3]\n\
-    str r5, [r3, 0x4]\n\
-    lsrs r0, r2, 1\n\
-    movs r1, 0x80\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    str r0, [r3, 0x8]\n\
-    ldr r0, [r3, 0x8]\n\
-_080A10E0:\n\
-    movs r5, 0x2\n\
-    ldrsh r0, [r6, r5]\n\
-    ldr r1, _080A1118 @ =0x0000026a\n\
-    subs r1, r0\n\
-    lsls r1, 1\n\
-    adds r3, r1, r7\n\
-    ldr r4, _080A111C @ =0x0600e4c0\n\
-    lsls r1, r0, 1\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    cmp r1, r0\n\
-    bhi _080A1120\n\
-    ldr r0, _080A110C @ =0x040000d4\n\
-    str r3, [r0]\n\
-    str r4, [r0, 0x4]\n\
-    lsrs r1, 1\n\
-    movs r2, 0x80\n\
-    lsls r2, 24\n\
-    orrs r1, r2\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    b _080A114C\n\
-    .align 2, 0\n\
-_080A110C: .4byte 0x040000d4\n\
-_080A1110: .4byte 0x80000800\n\
-_080A1114: .4byte 0xfffff000\n\
-_080A1118: .4byte 0x0000026a\n\
-_080A111C: .4byte 0x0600e4c0\n\
-_080A1120:\n\
-    ldr r2, _080A1178 @ =0x040000d4\n\
-    str r3, [r2]\n\
-    str r4, [r2, 0x4]\n\
-    ldr r0, _080A117C @ =0x80000800\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    adds r3, r0\n\
-    adds r4, r0\n\
-    ldr r5, _080A1180 @ =0xfffff000\n\
-    adds r1, r5\n\
-    cmp r1, r0\n\
-    bhi _080A1120\n\
-    str r3, [r2]\n\
-    str r4, [r2, 0x4]\n\
-    lsrs r0, r1, 1\n\
-    movs r1, 0x80\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-_080A114C:\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r6, r1]\n\
-    ldr r1, _080A1184 @ =0x0000024a\n\
-    subs r1, r0\n\
-    lsls r1, 1\n\
-    adds r3, r1, r7\n\
-    ldr r4, _080A1188 @ =0x0600ec80\n\
-    lsls r1, r0, 1\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    cmp r1, r0\n\
-    bhi _080A118C\n\
-    ldr r0, _080A1178 @ =0x040000d4\n\
-    str r3, [r0]\n\
-    str r4, [r0, 0x4]\n\
-    lsrs r1, 1\n\
-    movs r2, 0x80\n\
-    lsls r2, 24\n\
-    orrs r1, r2\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    b _080A11B8\n\
-    .align 2, 0\n\
-_080A1178: .4byte 0x040000d4\n\
-_080A117C: .4byte 0x80000800\n\
-_080A1180: .4byte 0xfffff000\n\
-_080A1184: .4byte 0x0000024a\n\
-_080A1188: .4byte 0x0600ec80\n\
-_080A118C:\n\
-    ldr r2, _080A11E4 @ =0x040000d4\n\
-    str r3, [r2]\n\
-    str r4, [r2, 0x4]\n\
-    ldr r0, _080A11E8 @ =0x80000800\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    adds r3, r0\n\
-    adds r4, r0\n\
-    ldr r5, _080A11EC @ =0xfffff000\n\
-    adds r1, r5\n\
-    cmp r1, r0\n\
-    bhi _080A118C\n\
-    str r3, [r2]\n\
-    str r4, [r2, 0x4]\n\
-    lsrs r0, r1, 1\n\
-    movs r1, 0x80\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-_080A11B8:\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r6, r1]\n\
-    ldr r1, _080A11F0 @ =0x0000026a\n\
-    subs r1, r0\n\
-    lsls r1, 1\n\
-    adds r3, r1, r7\n\
-    ldr r4, _080A11F4 @ =0x0600ecc0\n\
-    lsls r1, r0, 1\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    cmp r1, r0\n\
-    bhi _080A11F8\n\
-    ldr r0, _080A11E4 @ =0x040000d4\n\
-    str r3, [r0]\n\
-    str r4, [r0, 0x4]\n\
-    lsrs r1, 1\n\
-    movs r2, 0x80\n\
-    lsls r2, 24\n\
-    orrs r1, r2\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    b _080A1224\n\
-    .align 2, 0\n\
-_080A11E4: .4byte 0x040000d4\n\
-_080A11E8: .4byte 0x80000800\n\
-_080A11EC: .4byte 0xfffff000\n\
-_080A11F0: .4byte 0x0000026a\n\
-_080A11F4: .4byte 0x0600ecc0\n\
-_080A11F8:\n\
-    ldr r2, _080A12B0 @ =0x040000d4\n\
-    str r3, [r2]\n\
-    str r4, [r2, 0x4]\n\
-    ldr r0, _080A12B4 @ =0x80000800\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    adds r3, r0\n\
-    adds r4, r0\n\
-    ldr r5, _080A12B8 @ =0xfffff000\n\
-    adds r1, r5\n\
-    cmp r1, r0\n\
-    bhi _080A11F8\n\
-    str r3, [r2]\n\
-    str r4, [r2, 0x4]\n\
-    lsrs r0, r1, 1\n\
-    movs r1, 0x80\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-_080A1224:\n\
-    ldrb r4, [r6, 0x2]\n\
-    ldrh r7, [r6, 0x2]\n\
-    ldrh r0, [r6]\n\
-    mov r12, r0\n\
-    cmp r4, 0x9\n\
-    bhi _080A1272\n\
-    adds r3, r6, 0x4\n\
-    ldr r2, _080A12B0 @ =0x040000d4\n\
-    ldr r5, _080A12BC @ =0x80000001\n\
-_080A1236:\n\
-    lsls r1, r4, 1\n\
-    ldr r6, _080A12C0 @ =0x0600e480\n\
-    adds r0, r1, r6\n\
-    str r3, [r2]\n\
-    str r0, [r2, 0x4]\n\
-    str r5, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    adds r6, 0x40\n\
-    adds r0, r1, r6\n\
-    str r3, [r2]\n\
-    str r0, [r2, 0x4]\n\
-    str r5, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    ldr r6, _080A12C4 @ =0x0600ec80\n\
-    adds r0, r1, r6\n\
-    str r3, [r2]\n\
-    str r0, [r2, 0x4]\n\
-    str r5, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    ldr r0, _080A12C8 @ =0x0600ecc0\n\
-    adds r1, r0\n\
-    str r3, [r2]\n\
-    str r1, [r2, 0x4]\n\
-    str r5, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x9\n\
-    bls _080A1236\n\
-_080A1272:\n\
-    mov r1, r12\n\
-    lsls r0, r1, 16\n\
-    cmp r0, 0\n\
-    beq _080A1286\n\
-    lsls r0, r7, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0\n\
-    ble _080A1286\n\
-    cmp r0, 0x9\n\
-    ble _080A12A4\n\
-_080A1286:\n\
-    lsls r0, r7, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x9\n\
-    ble _080A129A\n\
-    ldr r0, _080A12CC @ =gOtherText_Status\n\
-    movs r1, 0xD\n\
-    movs r2, 0x1\n\
-    movs r3, 0x12\n\
-    bl SummaryScreen_PrintColoredText\n\
-_080A129A:\n\
-    bl sub_80A1D18\n\
-    mov r0, r8\n\
-    bl DestroyTask\n\
-_080A12A4:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A12B0: .4byte 0x040000d4\n\
-_080A12B4: .4byte 0x80000800\n\
-_080A12B8: .4byte 0xfffff000\n\
-_080A12BC: .4byte 0x80000001\n\
-_080A12C0: .4byte 0x0600e480\n\
-_080A12C4: .4byte 0x0600ec80\n\
-_080A12C8: .4byte 0x0600ecc0\n\
-_080A12CC: .4byte gOtherText_Status\n\
-    .syntax divided\n");
+    s16 * data = gTasks[taskId].data;
+    u8 i;
+
+    data[1] += data[0];
+    if (data[1] != 0)
+    {
+        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x24A - data[1]], (void *)(BG_SCREEN_ADDR(28) + 0x480), data[1] * 2);
+        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x26A - data[1]], (void *)(BG_SCREEN_ADDR(28) + 0x4C0), data[1] * 2);
+        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x24A - data[1]], (void *)(BG_SCREEN_ADDR(29) + 0x480), data[1] * 2);
+        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x26A - data[1]], (void *)(BG_SCREEN_ADDR(29) + 0x4C0), data[1] * 2);
+    }
+    for (i = data[1]; i < 10; i++)
+    {
+        DmaCopy16Defvars(3, &data[2], (void *)(BG_SCREEN_ADDR(28) + 0x480 + 2 * i), 2);
+        DmaCopy16Defvars(3, &data[2], (void *)(BG_SCREEN_ADDR(28) + 0x4C0 + 2 * i), 2);
+        DmaCopy16Defvars(3, &data[2], (void *)(BG_SCREEN_ADDR(29) + 0x480 + 2 * i), 2);
+        DmaCopy16Defvars(3, &data[2], (void *)(BG_SCREEN_ADDR(29) + 0x4C0 + 2 * i), 2);
+    }
+    if (data[0] == 0 || data[1] <= 0 || data[1] >= 10)
+    {
+        if (data[1] >= 10)
+            SummaryScreen_PrintColoredText(gOtherText_Status, 13, 1, 18);
+        sub_80A1D18();
+        DestroyTask(taskId);
+    }
 }
 
 static void sub_80A12D0(s8 a)
