@@ -1786,7 +1786,7 @@ static void sub_80A5414(u8 taskId)
     {
         while (1)
         {
-            if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_UP)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
             {
                 if ((sPopupMenuSelection & 1) && sPopupMenuActionList[sPopupMenuSelection - 1] != 8)
                 {
@@ -1795,7 +1795,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_DOWN)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
             {
                 if ((!(sPopupMenuSelection & 1)) && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
                 {
@@ -1804,7 +1804,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_LEFT)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
             {
                 if ((sPopupMenuSelection >= 2) && sPopupMenuActionList[sPopupMenuSelection - 2] != 8)
                 {
@@ -1813,7 +1813,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if ((gMain.newAndRepeatedKeys & 0xF0) == DPAD_RIGHT)
+            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
             {
                 if ((sPopupMenuSelection < 2) && sPopupMenuActionList[sPopupMenuSelection + 2] != 8)
                 {
