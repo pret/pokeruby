@@ -25,6 +25,7 @@ jobs:
           path: 'build_de'
 
       - name: Checkout Symbols
+        if: ${{ github.event_name == 'push' }}
         uses: actions/checkout@master
         with:
           path: 'symbols'
@@ -131,7 +132,7 @@ jobs:
         run: make -j${nproc} all
 
       - name: Webhook
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
         env:
           CALCROM_DISCORD_WEBHOOK_USERNAME: OK
           CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
@@ -143,7 +144,7 @@ jobs:
         run: |
           cp *.sym symbols/
           cp build_de/*.sym symbols/
-          export GITHUB_COMMIT_MSG="$(git log --format=%s -n1 $GITHUB_SHA)"
+          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s -n1 ${GITHUB_SHA} )" >> $GITHUB_ENV
 
       - name: Update symfiles
         if: ${{ github.event_name == 'push' }}
@@ -152,4 +153,4 @@ jobs:
           branch: symbols
           cwd: "./symbols"
           add: "*.sym"
-          message: $GITHUB_COMMIT_MSG
+          message: ${{ env.SYMBOLS_COMMIT_MSG }}
