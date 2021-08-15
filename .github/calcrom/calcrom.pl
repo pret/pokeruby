@@ -104,7 +104,7 @@ my $undocumented = $undocumented_as_string + 0;
 
 my $partial_documented = $partial_documented_as_string + 0;
 (($partial_documented != 0) and ($partial_documented_as_string ne "0"))
-	or die "ERROR: Cannot convert string to num: '$partial_documented_as_string'";
+    or die "ERROR: Cannot convert string to num: '$partial_documented_as_string'";
 
 my $total_syms = $total_syms_as_string + 0;
 (($total_syms != 0) and ($total_syms_as_string ne "0"))
@@ -125,14 +125,29 @@ my $docPct = sprintf("%.4f", 100 * $documented / $total_syms);
 my $partialPct = sprintf("%.4f", 100 * $partial_documented / $total_syms);
 my $undocPct = sprintf("%.4f", 100 * $undocumented / $total_syms);
 
-print "$total total bytes of code\n";
-print "$src bytes of code in src ($srcPct%)\n";
-print "$asm bytes of code in asm ($asmPct%)\n";
+if ($asm == 0)
+{
+    print "Code decompilation is 100% complete\n"
+}
+else
+{
+    print "$total total bytes of code\n";
+    print "$src bytes of code in src ($srcPct%)\n";
+    print "$asm bytes of code in asm ($asmPct%)\n";
+}
 print "\n";
-print "$total_syms total symbols\n";
-print "$documented symbols documented ($docPct%)\n";
-print "$partial_documented symbols partially documented ($partialPct%)\n";
-print "$undocumented symbols undocumented ($undocPct%)\n";
+
+if ($partial_documented == 0 && $undocumented == 0)
+{
+    print "Documentation is 100% complete\n"
+}
+else
+{
+    print "$total_syms total symbols\n";
+    print "$documented symbols documented ($docPct%)\n";
+    print "$partial_documented symbols partially documented ($partialPct%)\n";
+    print "$undocumented symbols undocumented ($undocPct%)\n";
+}
 
 print "\n";
 my $dataTotal = $srcdata + $data;
