@@ -75,17 +75,17 @@ bool32 IsNationalPokedexEnabled(void)
         return FALSE;
 }
 
-void DisableMysteryGift(void)
+void DisableMysteryEvent(void)
 {
     FlagClear(FLAG_SYS_EXDATA_ENABLE);
 }
 
-void EnableMysteryGift(void)
+void EnableMysteryEvent(void)
 {
     FlagSet(FLAG_SYS_EXDATA_ENABLE);
 }
 
-bool32 IsMysteryGiftEnabled(void)
+bool32 IsMysteryEventEnabled(void)
 {
     return FlagGet(FLAG_SYS_EXDATA_ENABLE);
 }

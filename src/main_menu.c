@@ -46,7 +46,7 @@ enum
 {
     HAS_NO_SAVED_GAME,  //NEW GAME, OPTION
     HAS_SAVED_GAME,     //CONTINUE, NEW GAME, OPTION
-    HAS_MYSTERY_GIFT,   //CONTINUE, NEW GAME, MYSTERY EVENTS, OPTION
+    HAS_MYSTERY_EVENT,  //CONTINUE, NEW GAME, MYSTERY EVENTS, OPTION
 };
 
 static void CB2_MainMenu(void);
@@ -276,8 +276,8 @@ void Task_MainMenuCheckSave(u8 taskId)
     switch (gSaveFileStatus)
     {
     case SAVE_STATUS_OK:
-        if (IsMysteryGiftEnabled() == TRUE)
-            gTasks[taskId].tMenuLayout = HAS_MYSTERY_GIFT;
+        if (IsMysteryEventEnabled() == TRUE)
+            gTasks[taskId].tMenuLayout = HAS_MYSTERY_EVENT;
         else
             gTasks[taskId].tMenuLayout = HAS_SAVED_GAME;
         gTasks[taskId].func = Task_MainMenuCheckRtc;
@@ -298,8 +298,8 @@ void Task_MainMenuCheckSave(u8 taskId)
         gTasks[taskId].tMenuLayout = HAS_SAVED_GAME;
         gTasks[taskId].func = Task_MainMenuWaitForSaveErrorAck;
 
-        if (IsMysteryGiftEnabled() == TRUE)
-            gTasks[taskId].tMenuLayout = HAS_MYSTERY_GIFT;
+        if (IsMysteryEventEnabled() == TRUE)
+            gTasks[taskId].tMenuLayout = HAS_MYSTERY_EVENT;
         else
             gTasks[taskId].tMenuLayout = HAS_SAVED_GAME;
         break;
@@ -416,7 +416,7 @@ void Task_MainMenuDraw(u8 taskId)
             PrintMainMenuItem(gMainMenuString_Option, 2, 13);
             PrintSaveFileInfo();
             break;
-        case HAS_MYSTERY_GIFT:
+        case HAS_MYSTERY_EVENT:
             Menu_DrawStdWindowFrame(1, 0, 28, 7);
             PrintMainMenuItem(gMainMenuString_Continue, 2, 1);
             Menu_DrawStdWindowFrame(1, 8, 28, 11);
@@ -468,7 +468,7 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
         case HAS_SAVED_GAME:
             menuItemCount = 3;
             break;
-        case HAS_MYSTERY_GIFT:
+        case HAS_MYSTERY_EVENT:
             menuItemCount = 4;
             break;
         }
@@ -544,7 +544,7 @@ void Task_MainMenuPressedA(u8 taskId)
             break;
         }
         break;
-    case HAS_MYSTERY_GIFT:
+    case HAS_MYSTERY_EVENT:
         switch (gTasks[taskId].tMenuSelection)
         {
         case 0:
@@ -636,7 +636,7 @@ void HighlightCurrentMenuItem(u8 layout, u8 menuItem)
             break;
         }
         break;
-    case HAS_MYSTERY_GIFT:
+    case HAS_MYSTERY_EVENT:
         switch (menuItem)
         {
         case 0:
