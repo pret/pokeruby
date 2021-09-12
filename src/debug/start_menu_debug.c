@@ -1932,13 +1932,13 @@ u8 DebugMenu_OpenWeatherEvents(void)
 
 bool8 DebugMenu_80784E8(void)
 {
-    switch (DebugMenu_8077E40(IsMysteryGiftEnabled()))
+    switch (DebugMenu_8077E40(IsMysteryEventEnabled()))
     {
         case 0:
-            DisableMysteryGift();
+            DisableMysteryEvent();
             return FALSE;
         case 1:
-            EnableMysteryGift();
+            EnableMysteryEvent();
             return FALSE;
         case -1:
             return TRUE;
@@ -1949,7 +1949,7 @@ bool8 DebugMenu_80784E8(void)
 u8 DebugMenu_OpenMysteryEvent(void)
 {
     Menu_EraseScreen();
-    DebugMenu_807786C(IsMysteryGiftEnabled() ? FALSE : TRUE);
+    DebugMenu_807786C(IsMysteryEventEnabled() ? FALSE : TRUE);
     gMenuCallback = DebugMenu_80784E8;
     return FALSE;
 }
