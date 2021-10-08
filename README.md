@@ -20,7 +20,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 * Disassembly of [**Pokémon Fire Red**][pokefirered]
 * Disassembly of [**Pokémon Emerald**][pokeemerald]
 * Discord: [**pret**][Discord]
-* irc: **irc.freenode.net** [**#pret**][irc]
+* irc: **irc.libera.net** [**#pret**][irc]
 
 [pokered]: https://github.com/pret/pokered
 [pokeyellow]: https://github.com/pret/pokeyellow
@@ -31,6 +31,6 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 [pokefirered]: https://github.com/pret/pokefirered
 [pokeemerald]: https://github.com/pret/pokeemerald
 [Discord]: https://discord.gg/d5dubZ3
-[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+[irc]: https://web.libera.chat/?#pret
 [travis]: https://travis-ci.org/pret/pokeruby
 [travis-badge]: https://travis-ci.org/pret/pokeruby.svg?branch=master
