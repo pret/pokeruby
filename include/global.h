@@ -9,7 +9,7 @@
 #include "constants/global.h"
 
 // IDE support
-#if defined(__APPLE__) || defined(__CYGWIN__)
+#if defined (__APPLE__) || defined (__CYGWIN__) || defined (__INTELLISENSE__)
 #define _(x) x
 #define __(x) x
 #define INCBIN(x) {0}
@@ -19,7 +19,7 @@
 #define INCBIN_S8 INCBIN
 #define INCBIN_S16 INCBIN
 #define INCBIN_S32 INCBIN
-#endif
+#endif // IDE support
 
 // For debug menu translations.
 // DTR("こんにちは", "Hello") will expand to "Hello" with DEBUG_FIX,
