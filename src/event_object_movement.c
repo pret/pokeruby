@@ -1169,7 +1169,6 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->movementType = template->movementType;
     objectEvent->localId = template->localId;
     objectEvent->mapNum = mapNum;
-    asm("":::"r6");
     objectEvent->mapGroup = mapGroup;
     objectEvent->initialCoords.x = initialX;
     objectEvent->initialCoords.y = initialY;
@@ -1182,10 +1181,10 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->range.as_nybbles.x = template->movementRangeX;
     objectEvent->range.as_nybbles.y = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
+    objectEvent->mapNum = mapNum; //redundant, but needed to match
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
-    asm("":::"r5","r6");
     SetObjectEventDynamicGraphicsId(objectEvent);
 
     if (gRangedMovementTypes[objectEvent->movementType])
@@ -1224,7 +1223,7 @@ u8 TryInitLocalObjectEvent(u8 localId)
 
 static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *objectEventId)
 {
-    u8 i = 0;
+    u8 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
