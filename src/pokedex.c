@@ -5311,7 +5311,7 @@ static void PrintSearchParameterText(u8 taskId)
     u16 j;
 
     Menu_EraseWindowRect(18, 1, 28, 12);
-    for (i = 0, j = *r7; i < 6 && r6[j].title != NULL; i++, j++)
+    for (i = 0, j = *r7; i < 6; i++, j++)
     {
         if (r6[j].title == NULL)
             break;
