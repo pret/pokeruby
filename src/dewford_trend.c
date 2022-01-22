@@ -16,7 +16,7 @@ static bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c);
 static void sub_80FA740(struct EasyChatPair *s);
 static bool8 SB1ContainsWords(u16 *a);
 static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2);
-static s16 sub_80FA828(struct EasyChatPair *a, u16 b);
+static s16 GetEqualEasyChatPairIndex(struct EasyChatPair *a, u16 b);
 
 void InitDewfordTrend(void)
 {
@@ -108,7 +108,7 @@ bool8 sub_80FA364(u16 *a)
             {
                 gSaveBlock1.easyChatPairs[0].words[0] = a[0];
                 gSaveBlock1.easyChatPairs[0].words[1] = a[1];
-                return 1;
+                return TRUE;
             }
         }
 
@@ -122,21 +122,21 @@ bool8 sub_80FA364(u16 *a)
         {
             if (sub_80FA670(&s, &gSaveBlock1.easyChatPairs[i], 0))
             {
-                u16 r3 = 4;
+                u16 r3;
 
-                while (r3 > i)
+                for (r3 = 4; r3 > i; r3--)
                 {
                     gSaveBlock1.easyChatPairs[r3] = gSaveBlock1.easyChatPairs[r3 - 1];
-                    r3--;
                 }
                 gSaveBlock1.easyChatPairs[i] = s;
+                //In emerald, there is a check here for i == 4
                 return (i == 0);
             }
             //_080FA450
         }
         gSaveBlock1.easyChatPairs[4] = s;
     }
-    return 0;
+    return FALSE;
 }
 
 static void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
@@ -179,7 +179,7 @@ void ReceiveDewfordTrendData(void * a, u32 b, u8 unused)
     {
         for (j = 0; j < 5; j++)
         {
-            s16 foo = sub_80FA828(src, r7);
+            s16 foo = GetEqualEasyChatPairIndex(src, r7);
             if (foo < 0)
             {
                 *(dst++) = *src;
@@ -213,12 +213,17 @@ void TrendyPhraseIsOld(void)
 {
     u16 result = 0;
 
-    if (gSaveBlock1.easyChatPairs[0].unk0_0 - gSaveBlock1.easyChatPairs[1].unk0_0 < 2)
+    do
     {
-        asm("":::"r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
-        if (!gSaveBlock1.easyChatPairs[0].unk1_6 && gSaveBlock1.easyChatPairs[1].unk1_6)
-            result = 1;
-    }
+        if (gSaveBlock1.easyChatPairs[0].unk0_0 - gSaveBlock1.easyChatPairs[1].unk0_0 > 1)
+            break;
+        if (gSaveBlock1.easyChatPairs[0].unk1_6)
+            break;
+        if (!gSaveBlock1.easyChatPairs[1].unk1_6)
+            break;
+        result = 1;
+    } while (0);
+
     gSpecialVar_Result = result;
 }
 
@@ -227,52 +232,53 @@ void GetDewfordHallPaintingNameIndex(void)
     gSpecialVar_Result = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
 }
 
+
 static bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
 {
     switch (c)
     {
     case 0:
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         break;
     case 1:
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         break;
     case 2:
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         if (a->unk2 > b->unk2)
-            return 1;
+            return TRUE;
         if (a->unk2 < b->unk2)
-            return 0;
+            return FALSE;
         if (a->words[0] > b->words[0])
-            return 1;
+            return TRUE;
         if (a->words[0] < b->words[0])
-            return 0;
+            return FALSE;
         if (a->words[1] > b->words[1])
-            return 1;
+            return TRUE;
         if (a->words[1] < b->words[1])
-            return 0;
-        return 1;
+            return FALSE;
+        return TRUE;
     }
     return Random() & 1;
 }
@@ -317,7 +323,7 @@ static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
     return TRUE;
 }
 
-static s16 sub_80FA828(struct EasyChatPair *a, u16 b)
+static s16 GetEqualEasyChatPairIndex(struct EasyChatPair *a, u16 b)
 {
     s16 i;
     struct EasyChatPair *s = eSavedDewfordTrendsBuffer;
