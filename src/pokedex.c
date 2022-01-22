@@ -3479,40 +3479,35 @@ static void LoadScreenSelectBarSubmenu(u16 screenBase)
 #ifdef NONMATCHING
 static void HighlightScreenSelectBarItem(u8 a, u16 b)
 {
-    u8 i;   //r1
-    u8 j;   //r3
-    u32 r6;
-    register u8 r7;
+    u8 i;
+    u8 j;
+    u8 x;
+    u16 r6;
+    u16 r7;
 
-    for (i = 0; i < 4; i++)
+    for (j = 0; j < 4; j++)
     {
-        r7 = i * 5 + 1;
-        r6 = 0x4000;
-
-        if (i == a)
-            r6 = 0x2000;
-
-        for (j = 0; j < 5; j++)
+        x = j * 7 + 1;
+        if (j == a)
         {
-            u32 r0 = b * 0x800 + (r7 + j) * 2;
-            u8 *ptr;
-
-            ptr = (void *)VRAM;
-            *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
-            ptr = (void *)VRAM + 0x40;
-            *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
+            r6 = 0x2000;
         }
-    }
-    r6 = 0x4000;
-    for (j = 0; j < 5; j++)
-    {
-        u32 r0 = b * 0x800 + j * 2;
-        u8 *ptr;
+        else
+        {
+            r6 = 0x4000;
+        }
+        for (i = 0; i < 7; i++)
+        {
+            r7 = *(u16 *)(BG_VRAM + b * 0x800 + (x + i) * 2);
+            r7 &= 0x0fff;
+            r7 |= r6;
+            *(u16 *)(BG_VRAM + b * 0x800 + (x + i) * 2) = r7;
 
-        ptr = (void *)VRAM + 0x32;
-        *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
-        ptr = (void *)VRAM + 0x72;
-        *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
+            r7 = *(u16 *)(BG_VRAM + b * 0x800 + 64 + (x + i) * 2);
+            r7 &= 0x0fff;
+            r7 |= r6;
+            *(u16 *)(BG_VRAM + b * 0x800 + 64 + (x + i) * 2) = r7;
+        }
     }
 }
 #else
@@ -3625,38 +3620,32 @@ _08090640: .4byte 0x06000072\n\
 #ifdef NONMATCHING
 static void sub_8090644(u8 a, u16 b)
 {
-    u8 i;
-    u8 j;
+    u8 i, j, k;
+    u16 r7, r6;
 
-    for (i = 0; i < 4; i++)
+    for (j = 0; j < 4; j++)
     {
-        u8 r8 = i * 5 + 1;
-        u32 r5;
-
-        if (i == a || i == 0)
-            r5 = 0x2000;
-        else if (a != 0)
-            r5 = 0x4000;
-
-        for (j = 0; j < 5; j++)
+        k = j * 7 + 1;
+        if ((j == a) || (j == 3))
         {
-            u16 (*vramData)[0x400];
-
-            vramData = (u16 (*)[])VRAM;
-            vramData[b][r8 + j] = (vramData[b][r8 + j] & 0xFFF) | r5;
-            vramData = (u16 (*)[])(VRAM + 0x40);
-            vramData[b][r8 + j] = (vramData[b][r8 + j] & 0xFFF) | r5;
+            r6 = 0x2000;
         }
-    }
+        else
+        {
+            r6 = 0x4000;
+        }
+        for (i = 0; i < 7; i++)
+        {
+            r7 = *(u16 *)(BG_VRAM + b * 0x800 + (k + i) * 2);
+            r7 &= 0x0fff;
+            r7 |= r6;
+            *(u16 *)(BG_VRAM + b * 0x800 + (k + i) * 2) = r7;
 
-    for (j = 0; j < 5; j++)
-    {
-        u16 (*vramData)[0x400];
-
-        vramData = (u16 (*)[])(VRAM + 0x32);
-        vramData[b][j] = (vramData[b][j] & 0xFFF) | 0x4000;
-        vramData = (u16 (*)[])(VRAM + 0x72);
-        vramData[b][j] = (vramData[b][j] & 0xFFF) | 0x4000;
+            r7 = *(u16 *)(BG_VRAM + b * 0x800 + 64 + (k + i) * 2);
+            r7 &= 0x0fff;
+            r7 |= r6;
+            *(u16 *)(BG_VRAM + b * 0x800 + 64 + (k + i) * 2) = r7;
+        }
     }
 }
 #else
@@ -3792,8 +3781,8 @@ static void sub_8090750(u8 taskId)
 
     switch (gTasks[taskId].data[0])
     {
-    case 0:
     default:
+    case 0:
         if (!gPaletteFade.active)
         {
             gPokedexVBlankCB = gMain.vblankCallback;
@@ -3807,10 +3796,9 @@ static void sub_8090750(u8 taskId)
         LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
         for (i = 0; i < 0x280; i++)
         {
-#ifndef NONMATCHING
-            asm("");
-#endif
-            *(u16 *)(BG_VRAM + 0x7800 + 2 * i) += 0x2000;
+            u16 temp = *(u16 *)(BG_VRAM + 0x7800 + 2 * i);
+            temp += 0x2000;
+            *(u16 *)(BG_VRAM + 0x7800 + 2 * i) = temp;
         }
         PrintFootprint(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
@@ -5325,9 +5313,8 @@ static void PrintSearchParameterText(u8 taskId)
     Menu_EraseWindowRect(18, 1, 28, 12);
     for (i = 0, j = *r7; i < 6 && r6[j].title != NULL; i++, j++)
     {
-#ifndef NONMATCHING
-        j += 0;  // Useless statement needed to match
-#endif
+        if (r6[j].title == NULL)
+            break;
         Menu_PrintText(r6[j].title, 18, i * 2 + 1);
     }
     EraseAndPrintSearchTextBox(r6[*r8 + *r7].description);
