@@ -1213,7 +1213,7 @@ void sub_81390D0(void)
         }
         break;
     case 3:
-        if (ewram17810[gActiveBattler].unk0_6 )
+        if (ewram17810[gActiveBattler].unk0_6)
             break;
         sub_8031F24();
         r4 = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
