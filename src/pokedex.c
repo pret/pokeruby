@@ -3479,35 +3479,40 @@ static void LoadScreenSelectBarSubmenu(u16 screenBase)
 #ifdef NONMATCHING
 static void HighlightScreenSelectBarItem(u8 a, u16 b)
 {
-    u8 i;
-    u8 j;
-    u8 x;
-    u16 r6;
-    u16 r7;
+    u8 i;   //r1
+    u8 j;   //r3
+    u32 r6;
+    register u8 r7;
 
-    for (j = 0; j < 4; j++)
+    for (i = 0; i < 4; i++)
     {
-        x = j * 7 + 1;
-        if (j == a)
-        {
-            r6 = 0x2000;
-        }
-        else
-        {
-            r6 = 0x4000;
-        }
-        for (i = 0; i < 7; i++)
-        {
-            r7 = *(u16 *)(BG_VRAM + b * 0x800 + (x + i) * 2);
-            r7 &= 0x0fff;
-            r7 |= r6;
-            *(u16 *)(BG_VRAM + b * 0x800 + (x + i) * 2) = r7;
+        r7 = i * 5 + 1;
+        r6 = 0x4000;
 
-            r7 = *(u16 *)(BG_VRAM + b * 0x800 + 64 + (x + i) * 2);
-            r7 &= 0x0fff;
-            r7 |= r6;
-            *(u16 *)(BG_VRAM + b * 0x800 + 64 + (x + i) * 2) = r7;
+        if (i == a)
+            r6 = 0x2000;
+
+        for (j = 0; j < 5; j++)
+        {
+            u32 r0 = b * 0x800 + (r7 + j) * 2;
+            u8 *ptr;
+
+            ptr = (void *)VRAM;
+            *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
+            ptr = (void *)VRAM + 0x40;
+            *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
         }
+    }
+    r6 = 0x4000;
+    for (j = 0; j < 5; j++)
+    {
+        u32 r0 = b * 0x800 + j * 2;
+        u8 *ptr;
+
+        ptr = (void *)VRAM + 0x32;
+        *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
+        ptr = (void *)VRAM + 0x72;
+        *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
     }
 }
 #else
