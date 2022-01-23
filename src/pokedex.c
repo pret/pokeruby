@@ -3625,32 +3625,38 @@ _08090640: .4byte 0x06000072\n\
 #ifdef NONMATCHING
 static void sub_8090644(u8 a, u16 b)
 {
-    u8 i, j, k;
-    u16 r7, r6;
+    u8 i;
+    u8 j;
 
-    for (j = 0; j < 4; j++)
+    for (i = 0; i < 4; i++)
     {
-        k = j * 7 + 1;
-        if ((j == a) || (j == 3))
-        {
-            r6 = 0x2000;
-        }
-        else
-        {
-            r6 = 0x4000;
-        }
-        for (i = 0; i < 7; i++)
-        {
-            r7 = *(u16 *)(BG_VRAM + b * 0x800 + (k + i) * 2);
-            r7 &= 0x0fff;
-            r7 |= r6;
-            *(u16 *)(BG_VRAM + b * 0x800 + (k + i) * 2) = r7;
+        u8 r8 = i * 5 + 1;
+        u32 r5;
 
-            r7 = *(u16 *)(BG_VRAM + b * 0x800 + 64 + (k + i) * 2);
-            r7 &= 0x0fff;
-            r7 |= r6;
-            *(u16 *)(BG_VRAM + b * 0x800 + 64 + (k + i) * 2) = r7;
+        if (i == a || i == 0)
+            r5 = 0x2000;
+        else if (a != 0)
+            r5 = 0x4000;
+
+        for (j = 0; j < 5; j++)
+        {
+            u16 (*vramData)[0x400];
+
+            vramData = (u16 (*)[])VRAM;
+            vramData[b][r8 + j] = (vramData[b][r8 + j] & 0xFFF) | r5;
+            vramData = (u16 (*)[])(VRAM + 0x40);
+            vramData[b][r8 + j] = (vramData[b][r8 + j] & 0xFFF) | r5;
         }
+    }
+
+    for (j = 0; j < 5; j++)
+    {
+        u16 (*vramData)[0x400];
+
+        vramData = (u16 (*)[])(VRAM + 0x32);
+        vramData[b][j] = (vramData[b][j] & 0xFFF) | 0x4000;
+        vramData = (u16 (*)[])(VRAM + 0x72);
+        vramData[b][j] = (vramData[b][j] & 0xFFF) | 0x4000;
     }
 }
 #else
