@@ -129,7 +129,7 @@ bool8 sub_80FA364(u16 *a)
                     gSaveBlock1.easyChatPairs[r3] = gSaveBlock1.easyChatPairs[r3 - 1];
                 }
                 gSaveBlock1.easyChatPairs[i] = s;
-                //In emerald, there is a check here for i == 4
+                // In emerald, there is a check here for i == 4
                 return (i == 0);
             }
             //_080FA450
