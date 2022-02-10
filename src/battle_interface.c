@@ -1230,7 +1230,6 @@ u8 CreatePartyStatusSummarySprites(u8 a, const struct HpAndStatus *b, u8 c, u8 d
     //_08044B5E
     else
     {
-        // Mismatch occurrs in this loop initialization
         j = 5;
         for (i = 0; i < 6; i++)
         {
