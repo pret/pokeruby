@@ -277,7 +277,7 @@ void bx_battle_menu_t6_2(void)
     }
     else if (gMain.newKeys & START_BUTTON)
     {
-        sub_804454C();
+        SwapHpBarsWithHpText();
     }
 #endif
 }
