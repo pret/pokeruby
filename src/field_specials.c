@@ -1503,8 +1503,8 @@ void sub_810F118(u8 taskId)
 
 bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
 {
-    u8 i;
-    u8 flag = 0;
+    u8 i, j;
+    bool8 flag = FALSE;
     u8 newPos = 0;
     if (gUnknown_0203925A < 5)
     {
@@ -1530,14 +1530,9 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
     {
         GlassWorkshopUpdateScrollIndicators(newPos, 5);
         Menu_BlankWindowRect(2, 1, 9, 10);
-        for (i=0; i<5; newPos++, i++)
+        for (j = newPos, i=0; i<5; j++, i++)
         {
-            Menu_PrintText(gUnknown_083F83C0[newPos], 1, 2 * i + 1);
-#ifndef NONMATCHING
-            asm(""::"r"(newPos));
-            asm(""::"r"(newPos));
-            asm(""::"r"(newPos));
-#endif
+            Menu_PrintText(gUnknown_083F83C0[j], 1, 2 * i + 1);
         }
     }
     return flag;
