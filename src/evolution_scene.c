@@ -281,7 +281,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 static void CB2_EvolutionSceneLoadGraphics(void)
 {
     u8 ID;
-    const struct CompressedSpritePalette** pokePal;
+    const struct CompressedSpritePalette* pokePal;
     u16 postEvoSpecies;
     u32 TiD, PiD;
     struct Pokemon* Mon = &gPlayerParty[gTasks[sEvoInfo.evoTaskID].tPartyID];
@@ -326,8 +326,8 @@ static void CB2_EvolutionSceneLoadGraphics(void)
                              gMonFrontPicCoords[postEvoSpecies].y_offset,
                              (void*)EWRAM,
                              gMonSpriteGfx_Sprite_ptr[3], postEvoSpecies);
-    pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
-    LoadCompressedPalette(*pokePal, 0x120, 0x20);
+    pokePal = (struct CompressedSpritePalette*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
+    LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(postEvoSpecies, 3);
     gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
