@@ -3752,224 +3752,85 @@ void sub_8114DF0(u32 a, u8 b)
     }
 }
 
-NAKED
-void sub_8114E48()
+u8 sub_8114E48(u32 a, u8 b)
 {
-    asm(".syntax unified\n\
-        push {r4-r7,lr}\n\
-    adds r4, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r6, r1, 24\n\
-    ldr r1, _08114E6C @ =gSharedMem + 0x14800\n\
-    ldr r2, _08114E70 @ =0x0000a0c4\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    adds r5, r1, 0\n\
-    cmp r0, 0\n\
-    bne _08114E60\n\
-    b _08114F5E\n\
-_08114E60:\n\
-    movs r1, 0\n\
-    movs r3, 0\n\
-    cmp r4, 0\n\
-    bne _08114E74\n\
-    movs r1, 0x1\n\
-    b _08114EA6\n\
-    .align 2, 0\n\
-_08114E6C: .4byte gSharedMem + 0x14800\n\
-_08114E70: .4byte 0x0000a0c4\n\
-_08114E74:\n\
-    subs r0, r4, 0x1\n\
-    lsls r0, 5\n\
-    adds r2, r3, r0\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xC4\n\
-    adds r0, r2, r0\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08114EA6\n\
-    ldr r7, _08114EC4 @ =0x000008c4\n\
-    adds r0, r5, r7\n\
-    adds r0, r2, r0\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08114EA6\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x1F\n\
-    bgt _08114EA6\n\
-    cmp r4, 0\n\
-    bne _08114E74\n\
-    lsls r0, r1, 24\n\
-    movs r1, 0x80\n\
-    lsls r1, 17\n\
-    adds r0, r1\n\
-    lsrs r1, r0, 24\n\
-_08114EA6:\n\
-    cmp r3, 0x20\n\
-    bne _08114EB4\n\
-    lsls r0, r1, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r2\n\
-    lsrs r1, r0, 24\n\
-_08114EB4:\n\
-    movs r3, 0\n\
-    cmp r4, 0x3F\n\
-    bne _08114EC8\n\
-    lsls r0, r1, 24\n\
-    movs r7, 0x80\n\
-    lsls r7, 17\n\
-    adds r0, r7\n\
-    b _08114EF8\n\
-    .align 2, 0\n\
-_08114EC4: .4byte 0x000008c4\n\
-_08114EC8:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 5\n\
-    adds r2, r3, r0\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xC4\n\
-    adds r0, r2, r0\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08114EFA\n\
-    ldr r7, _08114F64 @ =0x000008c4\n\
-    adds r0, r5, r7\n\
-    adds r0, r2, r0\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08114EFA\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x1F\n\
-    bgt _08114EFA\n\
-    cmp r4, 0x3F\n\
-    bne _08114EC8\n\
-    lsls r0, r1, 24\n\
-    movs r1, 0x80\n\
-    lsls r1, 17\n\
-    adds r0, r1\n\
-_08114EF8:\n\
-    lsrs r1, r0, 24\n\
-_08114EFA:\n\
-    cmp r3, 0x20\n\
-    bne _08114F08\n\
-    lsls r0, r1, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r2\n\
-    lsrs r1, r0, 24\n\
-_08114F08:\n\
-    cmp r1, 0x2\n\
-    beq _08114F5E\n\
-    subs r0, r6, 0x2\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r0, 0\n\
-    bge _08114F18\n\
-    movs r1, 0\n\
-_08114F18:\n\
-    adds r0, r6, 0x2\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3F\n\
-    ble _08114F26\n\
-    movs r2, 0x3F\n\
-_08114F26:\n\
-    lsls r1, 24\n\
-    asrs r3, r1, 24\n\
-    lsls r0, r2, 24\n\
-    asrs r2, r0, 24\n\
-    adds r6, r1, 0\n\
-    adds r7, r0, 0\n\
-    cmp r3, r2\n\
-    bge _08114F7C\n\
-    cmp r4, 0\n\
-    beq _08114F7C\n\
-    subs r0, r4, 0x1\n\
-    lsls r5, r0, 7\n\
-    ldr r0, _08114F68 @ =gSharedMem + 0x188C4\n\
-    mov r12, r0\n\
-_08114F42:\n\
-    asrs r0, r3, 1\n\
-    lsls r0, 2\n\
-    adds r0, r5\n\
-    add r0, r12\n\
-    ldr r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08114F6C\n\
-    ldrb r1, [r1]\n\
-    movs r0, 0xF0\n\
-_08114F58:\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08114F72\n\
-_08114F5E:\n\
-    movs r0, 0x1\n\
-    b _08114FCA\n\
-    .align 2, 0\n\
-_08114F64: .4byte 0x000008c4\n\
-_08114F68: .4byte gSharedMem + 0x188C4\n\
-_08114F6C:\n\
-    ldrb r1, [r1]\n\
-    movs r0, 0xF\n\
-    b _08114F58\n\
-_08114F72:\n\
-    adds r3, 0x1\n\
-    cmp r3, r2\n\
-    bge _08114F7C\n\
-    cmp r4, 0\n\
-    bne _08114F42\n\
-_08114F7C:\n\
-    asrs r3, r6, 24\n\
-    asrs r1, r7, 24\n\
-    cmp r3, r1\n\
-    bge _08114FC8\n\
-    cmp r4, 0x3F\n\
-    beq _08114FC8\n\
-    adds r0, r4, 0x1\n\
-    lsls r5, r0, 7\n\
-    ldr r6, _08114FB0 @ =gSharedMem + 0x188C4\n\
-    adds r2, r1, 0\n\
-_08114F90:\n\
-    asrs r0, r3, 1\n\
-    lsls r0, 2\n\
-    adds r0, r5\n\
-    adds r0, r6\n\
-    ldr r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08114FB4\n\
-    ldrb r1, [r1]\n\
-    movs r0, 0xF0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08114FBE\n\
-    b _08114F5E\n\
-    .align 2, 0\n\
-_08114FB0: .4byte gSharedMem + 0x188C4\n\
-_08114FB4:\n\
-    ldrb r1, [r1]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08114F5E\n\
-_08114FBE:\n\
-    adds r3, 0x1\n\
-    cmp r3, r2\n\
-    bge _08114FC8\n\
-    cmp r4, 0x3F\n\
-    bne _08114F90\n\
-_08114FC8:\n\
-    movs r0, 0\n\
-_08114FCA:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-        .syntax divided");
+    int i;
+    s8 r2, r3;
+    u8 *r1;
+    if (sEvoInfo.unkA0C4 == 0)
+        return 1;
+
+    r2 = 0;
+    for (i = 0; i < 32; i++)
+    {
+        if (a == 0)
+        {
+            r2++;
+            break;
+        }
+        if ((sEvoInfo.unkC4[a - 1][i]) || (sEvoInfo.unk8C4[a - 1][i]))
+            break;
+    }
+    if (i == 32)
+        r2++;
+    for (i = 0; i < 32; i++)
+    {
+        if (a == 63)
+        {
+            r2++;
+            break;
+        }
+        if ((sEvoInfo.unkC4[a + 1][i]) || (sEvoInfo.unk8C4[a + 1][i]))
+            break;
+    }
+
+    if (i == 32)
+        r2++;
+    if (r2 == 2)
+        return 1;
+
+    r2 = b - 2;
+    if (r2 < 0)
+        r2 = 0;
+
+    r3 = b + 2;
+    if (r3 > 63)
+        r3 = 63;
+
+    for (i = r2; i < r3; i++)
+    {
+        if (a == 0)
+            break;
+        r1 = sEvoInfo.unk40C4[a - 1][i >> 1];
+        if (i & 1)
+        {
+            if (r1[0] & 0xf0)
+                return 1;
+        }
+        else
+        {
+            if (r1[0] & 0x0f)
+                return 1;
+        }
+    }
+
+    for (i = r2; i < r3; i++)
+    {
+        if (a == 63)
+            break;
+        r1 = sEvoInfo.unk40C4[a + 1][i >> 1];
+        if (i & 1)
+        {
+            if (r1[0] & 0xf0)
+                return 1;
+        }
+        else
+        {
+            if (r1[0] & 0x0f)
+                return 1;
+        }
+    }
+    return 0;
 }
 
 // Functions below are vblank callbacks and are used
