@@ -93,10 +93,11 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 1:
-        if (gPaletteFade.active)
-            break;
-        MenuPrintMessageDefaultCoords(gSystemText_LinkStandby);
-        gMain.state++;
+        if (!gPaletteFade.active)
+        {
+            MenuPrintMessageDefaultCoords(gSystemText_LinkStandby);
+            gMain.state++;
+        }
         break;
     case 2:
         if (Menu_UpdateWindowText())
@@ -107,11 +108,14 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 3:
-        if ((gLinkStatus & 0x20) && (gLinkStatus & 0x1C) > 4)
+        if (gLinkStatus & 0x20)
         {
-            PlaySE(SE_PIN);
-            MenuPrintMessageDefaultCoords(gSystemText_LoadEventPressA);
-            gMain.state++;
+            if (((gLinkStatus & 0x1c) >> 2) > 1)
+            {
+                PlaySE(SE_PIN);
+                MenuPrintMessageDefaultCoords(gSystemText_LoadEventPressA);
+                gMain.state++;
+            }
         }
         if (gMain.newKeys & B_BUTTON)
         {
@@ -124,22 +128,59 @@ static void CB2_MysteryEventMenu(void)
         if (Menu_UpdateWindowText())
             gMain.state++;
         break;
-#ifdef NONMATCHING
     case 5:
-        if (GetLinkPlayerCount_2() != 2)
+        if (GetLinkPlayerCount_2() == 2)
+        {
+            if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                sub_8007F4C();
+                Menu_DrawStdWindowFrame(6, 5, 23, 8);
+                Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
+                gMain.state++;
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                CloseLink();
+                gMain.state = 15;
+            }
+        }
+        else
         {
             GetEventLoadMessage(gStringVar4, 1);
             MenuPrintMessageDefaultCoords(gStringVar4);
             gMain.state = 13;
-            break;
         }
-        if (gMain.newKeys & A_BUTTON)
+        break;
+    case 6:
+        if (IsLinkConnectionEstablished())
         {
-            PlaySE(SE_SELECT);
-            sub_8007F4C();
-            Menu_DrawStdWindowFrame(6, 5, 23, 8);
-            Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
-            gMain.state++;
+            if (gReceivedRemoteLinkPlayers)
+            {
+
+                if (GetLinkPlayerDataExchangeStatusTimed() == 3)
+                {
+                    SetCloseLinkCallback();
+                    Menu_EraseWindowRect(6, 5, 23, 8);
+                    GetEventLoadMessage(gStringVar4, 1);
+                    MenuPrintMessageDefaultCoords(gStringVar4);
+                    gMain.state = 13;
+                }
+                else if (CheckLanguageMatch())
+                {
+                    MenuPrintMessageDefaultCoords(gSystemText_DontCutLink);
+                    gMain.state++;
+                }
+                else
+                {
+                    CloseLink();
+                    Menu_EraseWindowRect(6, 5, 23, 8);
+                    GetEventLoadMessage(gStringVar4, 1);
+                    MenuPrintMessageDefaultCoords(gStringVar4);
+                    gMain.state = 13;
+                }
+            }
         }
         else if (gMain.newKeys & B_BUTTON)
         {
@@ -148,125 +189,6 @@ static void CB2_MysteryEventMenu(void)
             gMain.state = 15;
         }
         break;
-    case 6:
-        if (IsLinkConnectionEstablished())
-        {
-            if (!gReceivedRemoteLinkPlayers)
-                break;
-
-            if (GetLinkPlayerDataExchangeStatusTimed() == 3)
-            {
-                SetCloseLinkCallback();
-                Menu_EraseWindowRect(6, 5, 23, 8);
-                GetEventLoadMessage(gStringVar4, 1);
-                MenuPrintMessageDefaultCoords(gStringVar4);
-                gMain.state = 13;
-                break;
-            }
-            else if (CheckLanguageMatch())
-            {
-                MenuPrintMessageDefaultCoords(gSystemText_DontCutLink);
-                gMain.state++;
-                break;
-            }
-            else
-            {
-                CloseLink();
-                Menu_EraseWindowRect(6, 5, 23, 8);
-                GetEventLoadMessage(gStringVar4, 1);
-                MenuPrintMessageDefaultCoords(gStringVar4);
-                gMain.state = 13;
-                break;
-            }
-        }
-        if (gMain.newKeys & B_BUTTON)
-        {
-            PlaySE(SE_SELECT);
-            CloseLink();
-            gMain.state = 15;
-            break;
-        }
-        break;
-#else
-    case 5:
-        if (GetLinkPlayerCount_2() != 2)
-        {
-            goto label;
-        }
-        if (gMain.newKeys & A_BUTTON)
-        {
-            PlaySE(SE_SELECT);
-            sub_8007F4C();
-            Menu_DrawStdWindowFrame(6, 5, 23, 8);
-            Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
-            gMain.state++;
-        }
-        else if (gMain.newKeys & B_BUTTON)
-        {
-            PlaySE(SE_SELECT);
-            CloseLink();
-            gMain.state = 15;
-        }
-        break;
-    case 6:
-        if (IsLinkConnectionEstablished())
-        {
-            register u8 *ptr asm("r0");
-            register u32 offset1 asm("r2");
-            register u32 offset2 asm("r1");
-
-            if (!gReceivedRemoteLinkPlayers)
-                break;
-
-            if (GetLinkPlayerDataExchangeStatusTimed() == 3)
-            {
-                SetCloseLinkCallback();
-                Menu_EraseWindowRect(6, 5, 23, 8);
-                GetEventLoadMessage(gStringVar4, 1);
-                MenuPrintMessageDefaultCoords(gStringVar4);
-                ptr = (u8 *)&gMain;
-                offset1 = offsetof(struct Main, state);
-                asm("" ::: "r1");
-                ptr += offset1;
-                *ptr = 13;
-            }
-            else if (CheckLanguageMatch())
-            {
-                register u8 *ptr2 asm("r1");
-                register int offset3 asm("r0");
-                register int dummy asm("r2");
-                MenuPrintMessageDefaultCoords(gSystemText_DontCutLink);
-                ptr2 = (u8 *)&gMain;
-                offset3 = offsetof(struct Main, state);
-                if (dummy)
-                    dummy++;
-                ptr2 += offset3;
-                (*ptr2)++;
-                break;
-            }
-            else
-            {
-                CloseLink();
-                Menu_EraseWindowRect(6, 5, 23, 8);
-            label:
-                GetEventLoadMessage(gStringVar4, 1);
-                MenuPrintMessageDefaultCoords(gStringVar4);
-                ptr = (u8 *)&gMain;
-                offset2 = offsetof(struct Main, state);
-                ptr += offset2;
-                *ptr = 13;
-            }
-            break;
-        }
-        if (gMain.newKeys & B_BUTTON)
-        {
-            PlaySE(SE_SELECT);
-            CloseLink();
-            gMain.state = 15;
-            break;
-        }
-        break;
-#endif
     case 7:
         if (Menu_UpdateWindowText())
             gMain.state++;
