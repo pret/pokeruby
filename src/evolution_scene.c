@@ -146,7 +146,7 @@ static void Task_BeginEvolutionScene(u8 taskID)
             u8 partyID;
 
 #if MODERN
-            mon = (struct Pokemon*)((u16)gTasks[taskID].tMonPtrLo | (gTasks[taskID].tMonPtrHi << 0x10));
+            mon = (struct Pokemon*)((u16)gTasks[taskID].tMonPtrLo | ((u16)gTasks[taskID].tMonPtrHi << 0x10));
 #else
             mon = (struct Pokemon*)(gTasks[taskID].tMonPtrLo | (gTasks[taskID].tMonPtrHi << 0x10));
 #endif
@@ -2450,7 +2450,7 @@ _081141EC: .4byte gSharedMem + 0x14804\n\
 
 void sub_81141F0(s32 a, s32 b, s32 c)
 {
-    u32 r7;
+    int r7;
 
     sEvoInfo.unk30C4[c][b] = sEvoInfo.unk10C4[c][a];
     sEvoInfo.unk38C4[c][b] = sEvoInfo.unk18C4[c][a];
