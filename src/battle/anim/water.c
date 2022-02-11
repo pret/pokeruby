@@ -286,7 +286,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
 
         This is just an example. Also, this is apparently
         not a macro, as making it a macro results in a
-        NONMATCHING.
+        not matching.
     */
     cpuDelay = 0; // stall the CPU
     cpuDelay = 0; // stall the CPU

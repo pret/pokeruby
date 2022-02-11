@@ -350,7 +350,6 @@ static bool8 MonListHasMon(const struct WildPokemonInfo *info, u16 mon, u16 size
     return FALSE;
 }
 
-#ifdef NONMATCHING
 static void BuildAreaGlowTilemap(void)
 {
     static EWRAM_DATA u16 gUnknown_02039260 = 0;
@@ -359,19 +358,22 @@ static void BuildAreaGlowTilemap(void)
     static EWRAM_DATA u16 gUnknown_02039266 = 0;
     static EWRAM_DATA u16 gUnknown_02039268 = 0;
     static EWRAM_DATA u16 gUnknown_0203926A = 0;
-    u32 r3;
+    u8 r3;
 
     for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280; gUnknown_02039260++)
         gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] = 0;
 
-    for (gUnknown_02039260 = 0; gUnknown_02039260 < gPokedexAreaScreenPtr->numOverworldAreas; gUnknown_02039260++)
+    for (gUnknown_02039260 = 0; gUnknown_02039260 < gPokedexAreaScreenPtr->numOverworldAreas;
+         gUnknown_02039260++)
     {
         gUnknown_02039266 = 0;
         for (gUnknown_02039264 = 0; gUnknown_02039264 < 20; gUnknown_02039264++)
         {
             for (gUnknown_02039262 = 0; gUnknown_02039262 < 32; gUnknown_02039262++)
             {
-                if (GetRegionMapSectionAt_(gUnknown_02039262, gUnknown_02039264) == gPokedexAreaScreenPtr->overworldAreasWithMons[gUnknown_02039260].regionMapSectionId)
+                if (GetRegionMapSectionAt_(gUnknown_02039262, gUnknown_02039264) ==
+                    gPokedexAreaScreenPtr->overworldAreasWithMons[gUnknown_02039260]
+                        .regionMapSectionId)
                 {
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266] = 0xFFFF;
                 }
@@ -387,28 +389,37 @@ static void BuildAreaGlowTilemap(void)
         {
             if (gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266] == 0xFFFF)
             {
-                if (gUnknown_02039262 != 0 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 1] != 0xFFFF)
+                if (gUnknown_02039262 != 0 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 1] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 1] |= 0x02;
-                if (gUnknown_02039262 != 31 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 1] != 0xFFFF)
+                if (gUnknown_02039262 != 31 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 1] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 1] |= 0x01;
-                if (gUnknown_02039264 != 0 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 32] != 0xFFFF)
+                if (gUnknown_02039264 != 0 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 32] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 32] |= 0x08;
-                if (gUnknown_02039264 != 19 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 32] != 0xFFFF)
+                if (gUnknown_02039264 != 19 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 32] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 32] |= 0x04;
-                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 0 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 33] != 0xFFFF)
+                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 0 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 33] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 33] |= 0x10;
-                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 0 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 31] != 0xFFFF)
+                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 0 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 31] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 - 31] |= 0x40;
-                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 19 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 31] != 0xFFFF)
+                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 19 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 31] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 31] |= 0x20;
-                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 19 && gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 33] != 0xFFFF)
+                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 19 &&
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 33] != 0xFFFF)
                     gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039266 + 33] |= 0x80;
             }
             gUnknown_02039266++;
         }
     }
 
-    for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280; gUnknown_02039260++) // Register difference on induction: expected r3, got r1
+    for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280;
+         gUnknown_02039260++) // Register difference on induction: expected r3, got r1
     {
         if (gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] == 0xFFFF)
             gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] = 0x10;
@@ -424,636 +435,64 @@ static void BuildAreaGlowTilemap(void)
                 gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] &= 0xFF5F;
             gUnknown_02039268 = gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] & 0x0F;
             gUnknown_0203926A = gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] & 0xF0;
-            if (gUnknown_0203926A)
+            if (!gUnknown_0203926A)
             {
-                gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] &= 0x0F;
-                switch (gUnknown_02039268)
+                continue;
+            }
+
+            gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] &= 0x0F;
+            switch (gUnknown_02039268)
+            {
+            case 0:
+                if (gUnknown_0203926A != 0)
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] +=
+                        (gUnknown_0203926A >> 4) + 0x10;
+                break;
+            case 2:
+                if (gUnknown_0203926A != 0)
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] +=
+                        (gUnknown_0203926A >> 4) + 0x1E;
+                break;
+            case 1:
+                if (gUnknown_0203926A != 0)
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] +=
+                        (gUnknown_0203926A >> 6) + 0x20;
+                break;
+            case 8:
+                if (gUnknown_0203926A != 0)
                 {
-                    case 0:
-                        if (gUnknown_0203926A != 0)
-                            gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x10;
-                        break;
-                    case 2:
-                        if (gUnknown_0203926A != 0)
-                            gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x1E;
-                        break;
-                    case 1:
-                        if (gUnknown_0203926A != 0)
-                            gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += (gUnknown_0203926A >> 6) + 0x20;
-                        break;
-                    case 8:
-                        if (gUnknown_0203926A != 0)
-                        {
-                            r3 = 0;
-                            if (gUnknown_0203926A & 0x80)
-                                r3 |= 1;
-                            if (gUnknown_0203926A & 0x20)
-                                r3 |= 2;
-                            gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += r3 + 0x20;
-                        }
-                        break;
-                    case 4:
-                        if (gUnknown_0203926A != 0)
-                        {
-                            r3 = 0;
-                            if (gUnknown_0203926A & 0x40)
-                                r3 |= 1;
-                            if (gUnknown_0203926A & 0x10)
-                                r3 |= 2;
-                            gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += r3 + 0x21;
-                        }
-                        break;
-                    case 5:
-                    case 6:
-                        gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += 0x27;
-                        break;
-                    case 9:
-                    case 10:
-                        gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += 0x25;
-                        break;
+                    r3 = 0;
+                    if (gUnknown_0203926A & 0x80)
+                        r3 |= 1;
+                    if (gUnknown_0203926A & 0x20)
+                        r3 |= 2;
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += r3 + 0x20;
                 }
+                break;
+            case 4:
+                if (gUnknown_0203926A != 0)
+                {
+                    r3 = 0;
+                    if (gUnknown_0203926A & 0x40)
+                        r3 |= 1;
+                    if (gUnknown_0203926A & 0x10)
+                        r3 |= 2;
+                    gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += r3 + 0x21;
+                }
+                break;
+            case 5:
+            case 6:
+                gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += 0x27;
+                break;
+            case 9:
+            case 10:
+                gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] += 0x25;
+                break;
             }
         }
+        gPokedexAreaScreenPtr->areaGlowTilemap[gUnknown_02039260] |= 0; // Needed to match
     }
 }
-# else
-EWRAM_DATA u16 gUnknown_02039260 = 0;
-EWRAM_DATA u16 gUnknown_02039262 = 0;
-EWRAM_DATA u16 gUnknown_02039264 = 0;
-EWRAM_DATA u16 gUnknown_02039266 = 0;
-EWRAM_DATA u16 gUnknown_02039268 = 0;
-EWRAM_DATA u16 gUnknown_0203926A = 0;
-static NAKED void BuildAreaGlowTilemap(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0xC\n"
-                "\tldr r1, _08110E5C @ =gUnknown_02039260\n"
-                "\tmovs r0, 0\n"
-                "\tstrh r0, [r1]\n"
-                "\tmov r9, r1\n"
-                "\tldr r0, _08110E60 @ =gSharedMem\n"
-                "\tmov r8, r0\n"
-                "\tldr r1, _08110E64 @ =gUnknown_02039262\n"
-                "\tmov r12, r1\n"
-                "\tmov r1, r9\n"
-                "\tmovs r4, 0x8B\n"
-                "\tlsls r4, 1\n"
-                "\tadd r4, r8\n"
-                "\tldr r3, _08110E68 @ =0x0000027f\n"
-                "\tmovs r2, 0\n"
-                "_08110C5C:\n"
-                "\tldrh r0, [r1]\n"
-                "\tlsls r0, 1\n"
-                "\tadds r0, r4\n"
-                "\tstrh r2, [r0]\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tcmp r0, r3\n"
-                "\tbls _08110C5C\n"
-                "\tmovs r0, 0\n"
-                "\tmov r3, r9\n"
-                "\tstrh r0, [r3]\n"
-                "\tmovs r1, 0x88\n"
-                "\tlsls r1, 1\n"
-                "\tadd r1, r8\n"
-                "\tldrh r0, [r1]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110D04\n"
-                "\tldr r4, _08110E6C @ =gUnknown_02039266\n"
-                "\tmovs r2, 0\n"
-                "\tldr r5, _08110E64 @ =gUnknown_02039262\n"
-                "\tmov r0, r8\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tmovs r1, 0x8B\n"
-                "\tlsls r1, 1\n"
-                "\tadd r1, r8\n"
-                "\tmov r10, r1\n"
-                "\tldr r6, _08110E70 @ =gUnknown_02039264\n"
-                "\tmov r7, r9\n"
-                "_08110C9A:\n"
-                "\tstrh r2, [r4]\n"
-                "\tldr r3, _08110E70 @ =gUnknown_02039264\n"
-                "\tstrh r2, [r3]\n"
-                "_08110CA0:\n"
-                "\tmov r0, r12\n"
-                "\tstrh r2, [r0]\n"
-                "_08110CA4:\n"
-                "\tldrh r0, [r5]\n"
-                "\tldrh r1, [r6]\n"
-                "\tstr r2, [sp]\n"
-                "\tbl GetRegionMapSectionAt_\n"
-                "\tldrh r1, [r7]\n"
-                "\tlsls r1, 2\n"
-                "\tldr r3, [sp, 0x8]\n"
-                "\tadds r1, r3\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tldr r2, [sp]\n"
-                "\tldrh r1, [r1, 0x12]\n"
-                "\tcmp r0, r1\n"
-                "\tbne _08110CCC\n"
-                "\tldrh r0, [r4]\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r10\n"
-                "\tldr r1, _08110E74 @ =0x0000ffff\n"
-                "\tstrh r1, [r0]\n"
-                "_08110CCC:\n"
-                "\tldrh r0, [r4]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4]\n"
-                "\tldrh r0, [r5]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r5]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tcmp r0, 0x1F\n"
-                "\tbls _08110CA4\n"
-                "\tldrh r0, [r6]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r6]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tldr r1, _08110E64 @ =gUnknown_02039262\n"
-                "\tmov r12, r1\n"
-                "\tcmp r0, 0x13\n"
-                "\tbls _08110CA0\n"
-                "\tldrh r0, [r7]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r7]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tldr r3, _08110E78 @ =gSharedMem + 0x110\n"
-                "\tldrh r3, [r3]\n"
-                "\tcmp r0, r3\n"
-                "\tbcc _08110C9A\n"
-                "_08110D04:\n"
-                "\tmovs r0, 0\n"
-                "\tldr r1, _08110E6C @ =gUnknown_02039266\n"
-                "\tstrh r0, [r1]\n"
-                "\tldr r3, _08110E70 @ =gUnknown_02039264\n"
-                "\tstrh r0, [r3]\n"
-                "\tldr r6, _08110E64 @ =gUnknown_02039262\n"
-                "\tmov r10, r0\n"
-                "\tadds r3, r1, 0\n"
-                "\tldr r5, _08110E7C @ =gSharedMem + 0x116\n"
-                "\tldr r4, _08110E74 @ =0x0000ffff\n"
-                "\tldr r7, _08110E70 @ =gUnknown_02039264\n"
-                "_08110D1A:\n"
-                "\tmov r0, r10\n"
-                "\tstrh r0, [r6]\n"
-                "_08110D1E:\n"
-                "\tldrh r1, [r3]\n"
-                "\tlsls r0, r1, 1\n"
-                "\tadds r0, r5\n"
-                "\tldrh r0, [r0]\n"
-                "\tcmp r0, r4\n"
-                "\tbne _08110E10\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110D42\n"
-                "\tsubs r0, r1, 0x1\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110D42\n"
-                "\tmovs r0, 0x2\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110D42:\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0x1F\n"
-                "\tbeq _08110D5C\n"
-                "\tldrh r0, [r3]\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110D5C\n"
-                "\tmovs r0, 0x1\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110D5C:\n"
-                "\tldrh r0, [r7]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110D76\n"
-                "\tldrh r0, [r3]\n"
-                "\tsubs r0, 0x20\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110D76\n"
-                "\tmovs r0, 0x8\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110D76:\n"
-                "\tldrh r0, [r7]\n"
-                "\tcmp r0, 0x13\n"
-                "\tbeq _08110D90\n"
-                "\tldrh r0, [r3]\n"
-                "\tadds r0, 0x20\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110D90\n"
-                "\tmovs r0, 0x4\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110D90:\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110DB0\n"
-                "\tldrh r0, [r7]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110DB0\n"
-                "\tldrh r0, [r3]\n"
-                "\tsubs r0, 0x21\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110DB0\n"
-                "\tmovs r0, 0x10\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110DB0:\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0x1F\n"
-                "\tbeq _08110DD0\n"
-                "\tldrh r0, [r7]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110DD0\n"
-                "\tldrh r0, [r3]\n"
-                "\tsubs r0, 0x1F\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110DD0\n"
-                "\tmovs r0, 0x40\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110DD0:\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110DF0\n"
-                "\tldrh r0, [r7]\n"
-                "\tcmp r0, 0x13\n"
-                "\tbeq _08110DF0\n"
-                "\tldrh r0, [r3]\n"
-                "\tadds r0, 0x1F\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110DF0\n"
-                "\tmovs r0, 0x20\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110DF0:\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0x1F\n"
-                "\tbeq _08110E10\n"
-                "\tldrh r0, [r7]\n"
-                "\tcmp r0, 0x13\n"
-                "\tbeq _08110E10\n"
-                "\tldrh r0, [r3]\n"
-                "\tadds r0, 0x21\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r5\n"
-                "\tldrh r1, [r2]\n"
-                "\tcmp r1, r4\n"
-                "\tbeq _08110E10\n"
-                "\tmovs r0, 0x80\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110E10:\n"
-                "\tldrh r0, [r3]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3]\n"
-                "\tldrh r0, [r6]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r6]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tcmp r0, 0x1F\n"
-                "\tbhi _08110E26\n"
-                "\tb _08110D1E\n"
-                "_08110E26:\n"
-                "\tldrh r0, [r7]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r7]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tcmp r0, 0x13\n"
-                "\tbhi _08110E36\n"
-                "\tb _08110D1A\n"
-                "_08110E36:\n"
-                "\tmovs r0, 0\n"
-                "\tmov r1, r9\n"
-                "\tstrh r0, [r1]\n"
-                "_08110E3C:\n"
-                "\tmov r3, r9\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r0, 1\n"
-                "\tmovs r4, 0x8B\n"
-                "\tlsls r4, 1\n"
-                "\tadd r4, r8\n"
-                "\tadds r3, r0, r4\n"
-                "\tldrh r2, [r3]\n"
-                "\tadds r1, r2, 0\n"
-                "\tldr r0, _08110E74 @ =0x0000ffff\n"
-                "\tcmp r1, r0\n"
-                "\tbne _08110E80\n"
-                "\tmovs r0, 0x10\n"
-                "\tstrh r0, [r3]\n"
-                "\tb _0811105E\n"
-                "\t.align 2, 0\n"
-                "_08110E5C: .4byte gUnknown_02039260\n"
-                "_08110E60: .4byte gSharedMem\n"
-                "_08110E64: .4byte gUnknown_02039262\n"
-                "_08110E68: .4byte 0x0000027f\n"
-                "_08110E6C: .4byte gUnknown_02039266\n"
-                "_08110E70: .4byte gUnknown_02039264\n"
-                "_08110E74: .4byte 0x0000ffff\n"
-                "_08110E78: .4byte gSharedMem + 0x110\n"
-                "_08110E7C: .4byte gSharedMem + 0x116\n"
-                "_08110E80:\n"
-                "\tcmp r1, 0\n"
-                "\tbne _08110E86\n"
-                "\tb _0811105E\n"
-                "_08110E86:\n"
-                "\tmovs r0, 0x2\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110E94\n"
-                "\tldr r0, _08110F28 @ =0x0000ffcf\n"
-                "\tands r0, r2\n"
-                "\tstrh r0, [r3]\n"
-                "_08110E94:\n"
-                "\tmov r1, r9\n"
-                "\tldrh r0, [r1]\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r4\n"
-                "\tldrh r1, [r2]\n"
-                "\tmovs r0, 0x1\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110EAC\n"
-                "\tldr r0, _08110F2C @ =0x0000ff3f\n"
-                "\tands r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110EAC:\n"
-                "\tmov r3, r9\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r4\n"
-                "\tldrh r1, [r2]\n"
-                "\tmovs r0, 0x8\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110EC4\n"
-                "\tldr r0, _08110F30 @ =0x0000ffaf\n"
-                "\tands r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110EC4:\n"
-                "\tmov r1, r9\n"
-                "\tldrh r0, [r1]\n"
-                "\tlsls r0, 1\n"
-                "\tadds r2, r0, r4\n"
-                "\tldrh r1, [r2]\n"
-                "\tmovs r0, 0x4\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110EDC\n"
-                "\tldr r0, _08110F34 @ =0x0000ff5f\n"
-                "\tands r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "_08110EDC:\n"
-                "\tldr r6, _08110F38 @ =gUnknown_02039268\n"
-                "\tmov r3, r9\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r0, 1\n"
-                "\tadds r0, r4\n"
-                "\tldrh r1, [r0]\n"
-                "\tmovs r5, 0xF\n"
-                "\tadds r0, r5, 0\n"
-                "\tands r0, r1\n"
-                "\tstrh r0, [r6]\n"
-                "\tldr r2, _08110F3C @ =gUnknown_0203926A\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r0, 1\n"
-                "\tadds r0, r4\n"
-                "\tldrh r1, [r0]\n"
-                "\tmovs r0, 0xF0\n"
-                "\tands r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "\tldrh r1, [r3]\n"
-                "\tadds r3, r2, 0\n"
-                "\tcmp r0, 0\n"
-                "\tbne _08110F0A\n"
-                "\tb _0811105E\n"
-                "_08110F0A:\n"
-                "\tlsls r0, r1, 1\n"
-                "\tadds r0, r4\n"
-                "\tldrh r2, [r0]\n"
-                "\tadds r1, r5, 0\n"
-                "\tands r1, r2\n"
-                "\tstrh r1, [r0]\n"
-                "\tldrh r0, [r6]\n"
-                "\tcmp r0, 0xA\n"
-                "\tbls _08110F1E\n"
-                "\tb _0811105E\n"
-                "_08110F1E:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _08110F40 @ =_08110F44\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_08110F28: .4byte 0x0000ffcf\n"
-                "_08110F2C: .4byte 0x0000ff3f\n"
-                "_08110F30: .4byte 0x0000ffaf\n"
-                "_08110F34: .4byte 0x0000ff5f\n"
-                "_08110F38: .4byte gUnknown_02039268\n"
-                "_08110F3C: .4byte gUnknown_0203926A\n"
-                "_08110F40: .4byte _08110F44\n"
-                "\t.align 2, 0\n"
-                "_08110F44:\n"
-                "\t.4byte _08110F70\n"
-                "\t.4byte _08110FAC\n"
-                "\t.4byte _08110F8E\n"
-                "\t.4byte _0811105E\n"
-                "\t.4byte _08111002\n"
-                "\t.4byte _08111036\n"
-                "\t.4byte _08111036\n"
-                "\t.4byte _0811105E\n"
-                "\t.4byte _08110FCE\n"
-                "\t.4byte _0811104A\n"
-                "\t.4byte _0811104A\n"
-                "_08110F70:\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r1, r0, 16\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _0811105E\n"
-                "\tmov r0, r9\n"
-                "\tldrh r2, [r0]\n"
-                "\tlsls r2, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r2, r0\n"
-                "\tldrh r0, [r2]\n"
-                "\tadds r0, 0x10\n"
-                "\tlsrs r1, 20\n"
-                "\tb _08110FC8\n"
-                "_08110F8E:\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r1, r0, 16\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _0811105E\n"
-                "\tmov r3, r9\n"
-                "\tldrh r2, [r3]\n"
-                "\tlsls r2, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r2, r0\n"
-                "\tldrh r0, [r2]\n"
-                "\tadds r0, 0x1E\n"
-                "\tlsrs r1, 20\n"
-                "\tb _08110FC8\n"
-                "_08110FAC:\n"
-                "\tldrh r0, [r3]\n"
-                "\tlsls r1, r0, 16\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _0811105E\n"
-                "\tmov r0, r9\n"
-                "\tldrh r2, [r0]\n"
-                "\tlsls r2, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r2, r0\n"
-                "\tldrh r0, [r2]\n"
-                "\tadds r0, 0x20\n"
-                "\tlsrs r1, 22\n"
-                "_08110FC8:\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r2]\n"
-                "\tb _0811105E\n"
-                "_08110FCE:\n"
-                "\tldrh r2, [r3]\n"
-                "\tcmp r2, 0\n"
-                "\tbeq _0811105E\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r2\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tnegs r0, r0\n"
-                "\tlsrs r3, r0, 31\n"
-                "\tmovs r0, 0x20\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08110FEC\n"
-                "\tmovs r0, 0x2\n"
-                "\torrs r3, r0\n"
-                "_08110FEC:\n"
-                "\tmov r0, r9\n"
-                "\tldrh r1, [r0]\n"
-                "\tlsls r1, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x20\n"
-                "\tadds r0, r3\n"
-                "\tb _0811105C\n"
-                "_08111002:\n"
-                "\tldrh r2, [r3]\n"
-                "\tcmp r2, 0\n"
-                "\tbeq _0811105E\n"
-                "\tmovs r0, 0x40\n"
-                "\tands r0, r2\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tnegs r0, r0\n"
-                "\tlsrs r3, r0, 31\n"
-                "\tmovs r0, 0x10\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08111020\n"
-                "\tmovs r0, 0x2\n"
-                "\torrs r3, r0\n"
-                "_08111020:\n"
-                "\tmov r0, r9\n"
-                "\tldrh r1, [r0]\n"
-                "\tlsls r1, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x21\n"
-                "\tadds r0, r3\n"
-                "\tb _0811105C\n"
-                "_08111036:\n"
-                "\tmov r3, r9\n"
-                "\tldrh r1, [r3]\n"
-                "\tlsls r1, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x27\n"
-                "\tb _0811105C\n"
-                "_0811104A:\n"
-                "\tmov r0, r9\n"
-                "\tldrh r1, [r0]\n"
-                "\tlsls r1, 1\n"
-                "\tmovs r0, 0x8B\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r8\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x25\n"
-                "_0811105C:\n"
-                "\tstrh r0, [r1]\n"
-                "_0811105E:\n"
-                "\tmov r3, r9\n"
-                "\tldrh r0, [r3]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3]\n"
-                "\tlsls r0, 16\n"
-                "\tldr r1, _08111080 @ =0x027f0000\n"
-                "\tcmp r0, r1\n"
-                "\tbhi _08111070\n"
-                "\tb _08110E3C\n"
-                "_08111070:\n"
-                "\tadd sp, 0xC\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_08111080: .4byte 0x027f0000");
-}
-#endif // NONMATCHING
 
 static void StartAreaGlow(void)
 {
