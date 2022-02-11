@@ -324,7 +324,7 @@ static void VBlankIntr(void)
     gPcmDmaCounter = gSoundInfo.pcmDmaCounter;
 
     m4aSoundMain();
-    sub_800C35C();
+    TryReceiveLinkBattleData();
     Random();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;

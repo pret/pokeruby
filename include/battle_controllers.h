@@ -142,7 +142,7 @@ void SetUpBattleVarsAndBirchPoochyena();
 void sub_800B950(void);
 void InitLinkBtlControllers(void);
 void PrepareBufferDataTransferLink(u8 a, u16, u8 *c);
-void sub_800C35C(void);
+void TryReceiveLinkBattleData(void);
 void BtlController_EmitGetMonData(u8 a, u8 b, u8 c);
 void BtlController_EmitGetRawMonData(u8 a, u8 b, u8 c);
 void BtlController_EmitLoadMonSprite(u8 a);

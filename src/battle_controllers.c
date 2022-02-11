@@ -510,39 +510,37 @@ void Task_HandleSendLinkBuffersData(u8 taskId)
 }
 
 //fix me
-void sub_800C35C(void)
+void TryReceiveLinkBattleData(void)
 {
-    u8 i;  //r4
-    s32 j;  //r2
-    u16 r6;  //r6
-    u16 *recvBuffer;  //r3
-    u8 *dest;  //r5
-    u8 *src;  //r4
+    u8 i; // r4
+    s32 j; // r2
+    u8 *recvBuffer; // r3
 
-    if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & 0x20) && gLinkPlayers[0].linkType == 0x2211)
+    if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & 0x20) &&
+        gLinkPlayers[0].linkType == 0x2211)
     {
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             if (GetBlockReceivedStatus() & gBitTable[i])
             {
                 ResetBlockReceivedFlag(i);
-                recvBuffer = gBlockRecvBuffer[i];
-#ifndef NONMATCHING
-                asm("");
-                recvBuffer = gBlockRecvBuffer[i];
-#endif
-                r6 = gBlockRecvBuffer[i][2];
-                if (gTasks[sLinkReceiveTaskId].data[14] + 9 + r6 > 0x1000)
+                recvBuffer = (u8 *)gBlockRecvBuffer[i];
                 {
-                    gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
-                    gTasks[sLinkReceiveTaskId].data[14] = 0;
+                    u8 *dest, *src;
+                    u16 dataSize = gBlockRecvBuffer[i][2];
+                    if (gTasks[sLinkReceiveTaskId].data[14] + 9 + dataSize > 0x1000)
+                    {
+                        gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
+                        gTasks[sLinkReceiveTaskId].data[14] = 0;
+                    }
+                    //_0800C402
+                    dest = &gSharedMem[BSTRUCT_OFF(linkRecv) + gTasks[sLinkReceiveTaskId].data[14]];
+                    src = recvBuffer;
+                    for (j = 0; j < dataSize + 8; j++)
+                        dest[j] = src[j];
+                    gTasks[sLinkReceiveTaskId].data[14] =
+                        gTasks[sLinkReceiveTaskId].data[14] + dataSize + 8;
                 }
-                //_0800C402
-                dest = &gSharedMem[BSTRUCT_OFF(linkRecv) + gTasks[sLinkReceiveTaskId].data[14]];
-                src = (u8 *)recvBuffer;
-                for (j = 0; j < r6 + 8; j++)
-                    dest[j] = src[j];
-                gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + r6 + 8;
             }
             //_0800C446
         }

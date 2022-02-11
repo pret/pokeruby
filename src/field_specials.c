@@ -1501,9 +1501,6 @@ void sub_810F118(u8 taskId)
     }
 }
 
-/* Removing the NONMATCHING block will swap the roles of r4 and r5 throughout.
-Could possibly be fixed by writing code which increases the amount of references to newPos,
-or decreasing the amount of references to i.*/
 bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
 {
     u8 i;
