@@ -1793,52 +1793,42 @@ void sub_8119964(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
     {
-        register u32 t asm("r2");
-        u32 z ;
         if (eRoulette->var38->data[0] == 0)
         {
-            t = eRoulette->var38->data[3];
-            z = gUnknown_083F8DF4[eRoulette->var04_0].var08;
+            if (eRoulette->var38->data[3] != gUnknown_083F8DF4[eRoulette->var04_0].var08)
+                return;
         }
-        else
+        else if (eRoulette->var38->data[3] != 180 + gUnknown_083F8DF4[eRoulette->var04_0].var08)
         {
-            t = eRoulette->var38->data[3];
-            z = gUnknown_083F8DF4[eRoulette->var04_0].var08;
-            z += 180;
+            return;
         }
-        if (t == z)
-        {
-            sprite->invisible = FALSE;
-            sprite->data[7]++;
-            m4aSongNumStart(SE_FALL);
-            eRoulette->var01 = 1;
-            eRoulette->var34 = gUnknown_083FA61E[0];
-        }
+
+        sprite->invisible = FALSE;
+        sprite->data[7]++;
+        m4aSongNumStart(SE_FALL);
+        eRoulette->var01 = 1;
+        eRoulette->var34 = gUnknown_083FA61E[0];
     }
     else
     {
-        u32 t, z;
+
         eRoulette->var34 = gUnknown_083FA61E[(eRoulette->var01 - 1) / 2];
         if (eRoulette->var01 < 19)
             eRoulette->var01++;
         if (eRoulette->var38->data[0] == 0)
         {
-            t = eRoulette->var38->data[3];
-            z = gUnknown_083F8DF4[eRoulette->var04_0].var0A;
+            if (eRoulette->var38->data[3] != gUnknown_083F8DF4[eRoulette->var04_0].var0A)
+                return;
         }
-        else
+        else if (eRoulette->var38->data[3] != 180 + gUnknown_083F8DF4[eRoulette->var04_0].var0A)
         {
-            t = eRoulette->var38->data[3];
-            z = gUnknown_083F8DF4[eRoulette->var04_0].var0A ;
-            z += 180;
+            return;
         }
-        if (t == z)
-        {
-            gSprites[sprite->data[4]].callback  = sub_8119898;
-            gSprites[sprite->data[4]].invisible = FALSE;
-            sprite->callback  = &SpriteCallbackDummy;
-            sprite->data[7] = 0;
-        }
+
+        gSprites[sprite->data[4]].callback = sub_8119898;
+        gSprites[sprite->data[4]].invisible = FALSE;
+        sprite->callback = SpriteCallbackDummy;
+        sprite->data[7] = 0;
     }
 }
 
