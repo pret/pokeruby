@@ -1100,14 +1100,13 @@ void sub_80F063C(s16 arg0)
 {
     s16 var0;
     s16 var1;
-    s16 var2;
 
     gPokenavStructPtr->unk877C = arg0 * 16;
     gPokenavStructPtr->unk877A = (arg0 == 1 || arg0 == -1) ? 4 : 8;
     if (arg0 < 0)
     {
         gPokenavStructPtr->unk877A *= -1;
-        var0 = arg0 * 2 + gPokenavStructPtr->unk8778;
+        var0 = gPokenavStructPtr->unk8778 + arg0 * 2;
         var1 = arg0 + gPokenavStructPtr->unk8770;
         if (var1 < 0)
             var1 += gPokenavStructPtr->unk8774 + 1;
@@ -1123,26 +1122,28 @@ void sub_80F063C(s16 arg0)
     if (var1 > gPokenavStructPtr->unk8774)
         var1 = 0;
 
-    var2 = var0 & 0x1F;
-    sub_80F0954(var1, var2, arg0);
+    var0 &= 0x1F;
+    sub_80F0954(var1, var0, arg0);
 }
 
 bool8 sub_80F0718(void)
 {
-    if (!sub_80F098C())
+    if (sub_80F098C())
     {
-        if (gPokenavStructPtr->unk877C == 0)
-            return FALSE;
+        return TRUE;
+    }
 
-        gPokenavStructPtr->unk877C -= gPokenavStructPtr->unk877A;
-        gPokenavStructPtr->unk8776 += gPokenavStructPtr->unk877A;
-        gPokenavStructPtr->unk8776 &= 0xFF;
-        REG_BG3VOFS = gPokenavStructPtr->unk8776;
-        if (gPokenavStructPtr->unk877C == 0)
-        {
-            gPokenavStructPtr->unk8778 = ((8 + gPokenavStructPtr->unk8776) & 0xFF) / 8;
-            return FALSE;
-        }
+    if (gPokenavStructPtr->unk877C == 0)
+        return FALSE;
+
+    gPokenavStructPtr->unk877C -= gPokenavStructPtr->unk877A;
+    gPokenavStructPtr->unk8776 += gPokenavStructPtr->unk877A;
+    gPokenavStructPtr->unk8776 &= 0xFF;
+    REG_BG3VOFS = gPokenavStructPtr->unk8776;
+    if (gPokenavStructPtr->unk877C == 0)
+    {
+        gPokenavStructPtr->unk8778 = ((gPokenavStructPtr->unk8776 + 8) & 0xFF) / 8;
+        return FALSE;
     }
 
     return TRUE;
@@ -1285,7 +1286,6 @@ void sub_80F0B24(void)
 
 bool8 sub_80F0B44(void)
 {
-    int top;
     if (gPokenavStructPtr->unkD15C > 8)
     {
         return FALSE;
@@ -1293,6 +1293,7 @@ bool8 sub_80F0B44(void)
 
     if (++gPokenavStructPtr->unk306 > 1)
     {
+        u16 top;
         gPokenavStructPtr->unk306 = 0;
         if (gPokenavStructPtr->unkD15C < 8)
         {
@@ -1307,7 +1308,6 @@ bool8 sub_80F0B44(void)
                 sub_80F08E4();
 
             gPokenavStructPtr->unkD15C++;
-            return TRUE;
         }
         else
         {
@@ -1324,10 +1324,8 @@ bool8 sub_80F0B44(void)
             return FALSE;
         }
     }
-    else
-    {
-        return TRUE;
-    }
+    
+    return TRUE;
 }
 
 void sub_80F0C28(void)
@@ -1338,7 +1336,7 @@ void sub_80F0C28(void)
 
 bool8 sub_80F0C48(void)
 {
-    if (gPokenavStructPtr->unkD15C > 7)
+    if (gPokenavStructPtr->unkD15C >= 8)
         return FALSE;
 
     if (++gPokenavStructPtr->unk306 > 1)
@@ -1381,49 +1379,58 @@ void LoadTrainerEyesDescriptionLines(void)
 
 bool8 sub_80F0D5C(void)
 {
-    u32 r5;
-
     if (gPokenavStructPtr->unkD15C == 7)
         return FALSE;
-    if (++gPokenavStructPtr->unk306 < 2)
-        return TRUE;
-    gPokenavStructPtr->unk306 = 0;
-    BasicInitMenuWindow(&gWindowTemplate_81E70D4);
-    r5 = (gPokenavStructPtr->unk8778 + 2 + gPokenavStructPtr->unkD15C * 2) & 0x1F;
-#ifndef NONMATCHING
-    asm("":::"r2"); // fakematch
-#endif //NONMATCHING
-    switch (gPokenavStructPtr->unkD15C)
+    if (++gPokenavStructPtr->unk306 > 1)
     {
-    default:
-        return FALSE;
-    case 0:
-        Menu_PrintTextPixelCoords(gOtherText_Strategy, 0x61, r5 * 8, 0);
-        break;
-    case 1:
-        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[0], 0x88, 0);
-        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
-        break;
-    case 2:
-        Menu_PrintTextPixelCoords(gOtherText_TrainersPokemon, 0x61, r5 * 8, 0);
-        break;
-    case 3:
-        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[1], 0x88, 0);
-        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
-        break;
-    case 4:
-        Menu_PrintTextPixelCoords(gOtherText_SelfIntroduction, 0x61, r5 * 8, 0);
-        break;
-    case 5:
-        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[2], 0x88, 0);
-        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
-        break;
-    case 6:
-        AlignStringInMenuWindow(gPokenavStructPtr->unk8788, gPokenavStructPtr->trainerEyeDescriptionLines[3], 0x88, 0);
-        Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
-        return FALSE;
+        u16 r5;
+        gPokenavStructPtr->unk306 = 0;
+        BasicInitMenuWindow(&gWindowTemplate_81E70D4);
+        r5 = (gPokenavStructPtr->unk8778 + 2 + gPokenavStructPtr->unkD15C * 2) & 0x1F;
+        switch (gPokenavStructPtr->unkD15C)
+        {
+        case 0:
+            Menu_PrintTextPixelCoords(gOtherText_Strategy, 0x61, r5 * 8, 0);
+            break;
+        case 1:
+            AlignStringInMenuWindow(gPokenavStructPtr->unk8788,
+                gPokenavStructPtr->trainerEyeDescriptionLines[0],
+                0x88,
+                0);
+            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+            break;
+        case 2:
+            Menu_PrintTextPixelCoords(gOtherText_TrainersPokemon, 0x61, r5 * 8, 0);
+            break;
+        case 3:
+            AlignStringInMenuWindow(gPokenavStructPtr->unk8788,
+                gPokenavStructPtr->trainerEyeDescriptionLines[1],
+                0x88,
+                0);
+            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+            break;
+        case 4:
+            Menu_PrintTextPixelCoords(gOtherText_SelfIntroduction, 0x61, r5 * 8, 0);
+            break;
+        case 5:
+            AlignStringInMenuWindow(gPokenavStructPtr->unk8788,
+                gPokenavStructPtr->trainerEyeDescriptionLines[2],
+                0x88,
+                0);
+            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+            break;
+        case 6:
+            AlignStringInMenuWindow(gPokenavStructPtr->unk8788,
+                gPokenavStructPtr->trainerEyeDescriptionLines[3],
+                0x88,
+                0);
+            Menu_PrintTextPixelCoords(gPokenavStructPtr->unk8788, 0x61, r5 * 8, 0);
+            return FALSE;
+        default:
+            return FALSE;
+        }
+        gPokenavStructPtr->unkD15C++;
     }
-    gPokenavStructPtr->unkD15C++;
     return TRUE;
 }
 
@@ -1436,12 +1443,12 @@ void sub_80F0EC0(void)
 
 bool8 sub_80F0EF4(void)
 {
-    int top;
     if (gPokenavStructPtr->unkD15C > 6)
         return FALSE;
 
     if (++gPokenavStructPtr->unk306 > 1)
     {
+        u16 top;
         gPokenavStructPtr->unk306 = 0;
         top = (gPokenavStructPtr->unk8778 + 2 + gPokenavStructPtr->unkD15C * 2) & 0x1F;
         BasicInitMenuWindow(&gWindowTemplate_81E70D4);
