@@ -500,7 +500,7 @@ void sub_802C2EC(void)
         dp11b_obj_instanciate(gActiveBattler, 0, 7, 1);
         dp11b_obj_free(gUnknown_03004344, 1);
     }
-    else if (gMain.newKeys & 0x60)
+    else if (gMain.newKeys & (DPAD_LEFT | DPAD_UP))
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gUnknown_03004344]].callback = sub_8010574;
@@ -547,7 +547,7 @@ void sub_802C2EC(void)
         gSprites[gBattlerSpriteIds[gUnknown_03004344]].callback = sub_8010520;
     }
     //_0802C540
-    else if (gMain.newKeys & 0x90)
+    else if (gMain.newKeys & (DPAD_RIGHT | DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gUnknown_03004344]].callback = sub_8010574;
