@@ -2785,29 +2785,33 @@ void debug_sub_8012D10(u8 taskId)
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~2;
             sub_802E3E4(gTasks[taskId].data[2], 0);
+            break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 2;
             sub_802E3E4(gTasks[taskId].data[2], 0);
+            break;
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        if (gMain.newKeys & DPAD_LEFT)
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~1;
             sub_802E3E4(gTasks[taskId].data[2], 0);
+            break;
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        if (gMain.newKeys & DPAD_RIGHT)
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 1;
             sub_802E3E4(gTasks[taskId].data[2], 0);
+            break;
         }
-        else if (gMain.newAndRepeatedKeys & A_BUTTON)
+        if (gMain.newAndRepeatedKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2835,8 +2839,9 @@ void debug_sub_8012D10(u8 taskId)
                 debug_sub_8012B70(taskId, 0);
                 break;
             }
+            break;
         }
-        else if (gMain.newAndRepeatedKeys & B_BUTTON)
+        if (gMain.newAndRepeatedKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2844,7 +2849,7 @@ void debug_sub_8012D10(u8 taskId)
             case 0:
                 if (gUnknown_Debug_2023B62[gCurrentMove - 1] > 0)
                 {
-                    gUnknown_Debug_2023B62[gCurrentMove - 1] -= 1;
+                    gUnknown_Debug_2023B62[gCurrentMove - 1]--;
                     debug_sub_8012938(taskId);
                 }
                 break;
@@ -2864,8 +2869,9 @@ void debug_sub_8012D10(u8 taskId)
                 debug_sub_8012B70(taskId, 0);
                 break;
             }
+            break;
         }
-        else if (gMain.newAndRepeatedKeys & R_BUTTON)
+        if (gMain.newAndRepeatedKeys & R_BUTTON)
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2895,8 +2901,9 @@ void debug_sub_8012D10(u8 taskId)
                 debug_sub_8012B70(taskId, 0);
                 break;
             }
+            break;
         }
-        else if (gMain.newAndRepeatedKeys & L_BUTTON)
+        if (gMain.newAndRepeatedKeys & L_BUTTON)
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2927,6 +2934,7 @@ void debug_sub_8012D10(u8 taskId)
                 debug_sub_8012B70(taskId, 0);
                 break;
             }
+            break;
         }
         break;
     case 2:
@@ -2936,26 +2944,28 @@ void debug_sub_8012D10(u8 taskId)
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
+            break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
+            break;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
             debug_sub_8012C08(taskId, gTasks[taskId].data[3]);
+            break;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            asm("");
             debug_sub_8012B70(taskId, 1);
         }
-        return;
+        break;
     case 3:
         if (gMain.newKeys & DPAD_UP)
         {
@@ -2963,22 +2973,31 @@ void debug_sub_8012D10(u8 taskId)
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
+            break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
+            break;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            if (gTasks[taskId].data[3] == 0)
+            if (gTasks[taskId].data[3] != 0)
+            {
+                debug_sub_8012B70(taskId, 1);
+            }
+            else
+            {
                 debug_sub_80132C8(31, gUnknown_Debug_2023B62, 411);
-            debug_sub_8012B70(taskId, 1);
+                debug_sub_8012B70(taskId, 1);
+            }
+            break;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B70(taskId, 1);
@@ -2991,22 +3010,31 @@ void debug_sub_8012D10(u8 taskId)
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
+            break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
+            break;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            if (gTasks[taskId].data[3] == 0)
+            if (gTasks[taskId].data[3] != 0)
+            {
+                debug_sub_8012B70(taskId, 1);
+            }
+            else
+            {
                 debug_sub_8013294(31, gUnknown_Debug_2023B62, 411);
-            debug_sub_8012B70(taskId, 1);
+                debug_sub_8012B70(taskId, 1);
+            }
+            break;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B70(taskId, 1);
