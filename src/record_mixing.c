@@ -565,18 +565,18 @@ void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t recordSi
                 sp24[j][0] = i;
                 var1 = sub_80B9BBC(&_src->mail[0]);
                 var2 = sub_80B9BBC(&_src->mail[1]);
-                if (!var1 && var2)
-                {
-                    register u8 one asm("r0") = 1; // boo, a fakematch
-                    sp24[j][1] = one;
-                }
-                else if ((var1 && var2) || (!var1 && !var2))
+                // xor var1 and var2
+                if ((!var1 && !var2) || (var1 && var2))
                 {
                     sp24[j][1] = Random() % 2;
                 }
                 else if (var1 && !var2)
                 {
                     sp24[j][1] = 0;
+                }
+                else if (!var1 && var2)
+                {
+                    sp24[j][1] = 1;
                 }
                 j++;
             }
