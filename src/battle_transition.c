@@ -1304,11 +1304,8 @@ static bool8 Phase2_Transition_Ripple_Func2(struct Task* task)
 
     for (i = 0; i < 160; i++, r4 += r8)
     {
-        // todo: fix the asm
-        s16 var = r4 >> 8;
-        asm("");
-        gScanlineEffectRegBuffers[0][i] = TRANSITION_STRUCT.field_16 + Sin(var, r3);
-        asm("");
+        u16 var = r4 >> 8;
+        gScanlineEffectRegBuffers[0][i] = TRANSITION_STRUCT.field_16 + Sin(var & 0xff, r3);
     }
 
     if (++task->data[3] == 81)

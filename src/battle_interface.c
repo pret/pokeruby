@@ -876,7 +876,6 @@ void sub_80440EC(u8 a, s16 b, u8 c)
             ptr = sub_8003504(ptr, b, 15, 1);
         }
         RenderTextHandleBold(eBattleInterfaceGfxBuffer, str);
-        //asm(""::"r"(a));
         //_080441B6
         for (i = 0; i < r8; i++)  // _080440BC
         {
