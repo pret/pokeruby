@@ -4950,7 +4950,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         {
             personality = gContestResources__moveAnim.personality;
             otId = gContestResources__moveAnim.otId;
-            species = gContestResources__moveAnim.targetSpecies;
+            species = gContestResources__moveAnim.species;
             subpriority = GetBattlerSubpriority(gBattleAnimAttacker);
             isBackPic = 0;
             x = -32;
