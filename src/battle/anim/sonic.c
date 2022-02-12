@@ -144,7 +144,7 @@ void AnimSonicBoomProjectile(struct Sprite* sprite)
     if (IsContest())
         rotation -= 0x6000;
 
-    sub_8078FDC(sprite, 0, 0x100, 0x100, rotation);
+    TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, rotation);
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = targetXPos;
     sprite->data[4] = targetYPos;

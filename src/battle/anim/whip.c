@@ -126,6 +126,6 @@ void sub_80CC884(struct Sprite* sprite)
         StartSpriteAnim(sprite, 1);
 
     sprite->callback = sub_80CC810;
-    sub_807867C(sprite, gBattleAnimArgs[0]);
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->y += gBattleAnimArgs[1];
 }

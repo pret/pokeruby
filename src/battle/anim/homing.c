@@ -76,7 +76,7 @@ void sub_80CC6CC(struct Sprite* sprite)
         if (IsContest())
             c -= 0x8000;
 
-        sub_8078FDC(sprite, 0, 0x100, 0x100, c);
+        TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, c);
         sprite->callback = sub_80CC7D4;
     }
 }

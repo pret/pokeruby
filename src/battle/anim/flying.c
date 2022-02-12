@@ -371,7 +371,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA65C =
 
 static void sub_80DA034(struct Sprite *sprite)
 {
-    sub_8078764(sprite, FALSE);
+    InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->y += 20;
     sprite->data[1] = 0xBF;
     sprite->callback = sub_80DA05C;
@@ -979,7 +979,7 @@ static void sub_80DB000(struct Sprite *sprite)
     }
     else
     {
-        sub_8078764(sprite, FALSE);
+        InitSpritePosToAnimTarget(sprite, FALSE);
     }
 
     if ((!gBattleAnimArgs[2] && !GetBattlerSide(gBattleAnimAttacker))
@@ -1152,7 +1152,7 @@ static void sub_80DB374(struct Sprite *sprite)
 
         sprite->data[1] = 512;
 
-        sub_8078FDC(sprite, 0, 256, sprite->data[1], 0);
+        TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
         sprite->data[0]++;
         break;
     case 1:
@@ -1163,7 +1163,7 @@ static void sub_80DB374(struct Sprite *sprite)
 
         sprite->data[2]++;
 
-        sub_8078FDC(sprite, 0, 256, sprite->data[1], 0);
+        TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
 
         matrixNum = sprite->oam.matrixNum;
 
@@ -1305,7 +1305,7 @@ static void sub_80DB5E4(struct Sprite *sprite)
     rotation = ArcTan2Neg(posx - sprite->x, posy - sprite->y);
     rotation += 0xc000;
 
-    sub_8078FDC(sprite, 1, 0x100, 0x100, rotation);
+    TrySetSpriteRotScale(sprite, 1, 0x100, 0x100, rotation);
 
     sprite->callback = sub_80DB6A0;
 }

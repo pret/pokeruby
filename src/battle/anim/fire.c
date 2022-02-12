@@ -187,7 +187,7 @@ void sub_80D4ED8(struct Sprite *sprite)
 
 void sub_80D4F18(struct Sprite *sprite)
 {
-    sub_807867C(sprite, gBattleAnimArgs[0]);
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
 
     sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[4];
@@ -200,7 +200,7 @@ void sub_80D4F18(struct Sprite *sprite)
 
 void sub_80D4F5C(struct Sprite *sprite)
 {
-    sub_8078650(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
 
     if (GetBattlerSide(gBattleAnimAttacker))
     {
@@ -258,7 +258,7 @@ static void sub_80D5038(struct Sprite *sprite)
 
 void sub_80D5074(struct Sprite *sprite)
 {
-    sub_8078650(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
 
     if (GetBattlerSide(gBattleAnimAttacker))
     {

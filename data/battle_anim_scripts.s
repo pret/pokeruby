@@ -2264,7 +2264,7 @@ Move_SMOKESCREEN: @ 81CA710
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_84021B0, ANIM_BATTLER_TARGET, 2, 20, 0, 0, 0, 35, -25
 	waitforvisualfinish
-	createvisualtask sub_812C1D0, 2
+	createvisualtask AnimTask_SmokescreenImpact, 2
 	delay 2
 	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_TARGET
 	createsprite gBattleAnimSpriteTemplate_8402198, ANIM_BATTLER_TARGET, 4, 0, -12, 104, 0, 75
@@ -10153,7 +10153,7 @@ ConfusionEffect: @ 81D618B
 SetPsychicBackground: @ 81D61E7
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
-	createvisualtask sub_812C560, 5
+	createvisualtask AnimTask_SetPsychicBackground, 5
 	waitbgfadein
 	return
 

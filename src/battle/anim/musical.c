@@ -206,7 +206,7 @@ void sub_80CEB0C(struct Sprite* sprite)
     u8 index;
     u8 a;
     u8 b;
-    sub_8078650(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
     StartSpriteAnim(sprite, gBattleAnimArgs[0]);
     if ((index = IndexOfSpritePaletteTag(gUnknown_083D712C[gBattleAnimArgs[1]][0])) != 0xFF)
         sprite->oam.paletteNum = index;
@@ -355,7 +355,7 @@ void sub_80CEE60(struct Sprite* sprite)
 {
     s16 a;
     u8 index;
-    sub_8078650(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
     sprite->y += 8;
     StartSpriteAnim(sprite, gBattleAnimArgs[1]);
     index = IndexOfSpritePaletteTag(gUnknown_083D712C[gBattleAnimArgs[2]][0]);

@@ -74,7 +74,7 @@ void sub_80CFE9C(struct Sprite* sprite)
     r6 += gBattleAnimArgs[2];
     var = ArcTan2Neg(r6 - sprite->x, r7 - sprite->y);
     var += 0xC000;
-    sub_8078FDC(sprite, 0, 0x100, 0x100, var);
+    TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, var);
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
     sprite->data[4] = r7;

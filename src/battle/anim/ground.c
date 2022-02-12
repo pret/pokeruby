@@ -196,7 +196,7 @@ static void AnimBonemerangProjectileEnd(struct Sprite *sprite)
 // arg 4: duration
 static void AnimBoneHitProjectile(struct Sprite *sprite)
 {
-    sub_8078764(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     

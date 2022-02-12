@@ -2452,10 +2452,10 @@ static void LoadMoveBg(u16 bgId)
         void *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
 
         LZDecompressWram(tilemap, IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle);
-        sub_80763FC(sub_80789BC(), IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle, 0x100, 0);
+        sub_80763FC(GetBattleBgPaletteNum(), IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle, 0x100, 0);
         DmaCopy32Defvars(3, IsContest() ? eBattleAnimPalBackup_Contest : eBattleAnimPalBackup_Battle, (void *)(VRAM + 0xD000), 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
-        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80789BC() * 16, 32);
+        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, GetBattleBgPaletteNum() * 16, 32);
     }
     else
     {

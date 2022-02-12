@@ -8,7 +8,7 @@
 static void sub_8046388(struct Sprite *);
 
 
-u8 sub_8046234(s16 x, s16 y, u8 a3)
+u8 SmokescreenImpact(s16 x, s16 y, u8 a3)
 {
     u8 mainSpriteId;
     u8 spriteId1, spriteId2, spriteId3, spriteId4;

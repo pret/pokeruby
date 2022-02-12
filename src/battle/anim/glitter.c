@@ -57,9 +57,9 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6CA0 =
 void sub_80CD140(struct Sprite* sprite)
 {
     if (!gBattleAnimArgs[2])
-        sub_8078650(sprite);
+        SetSpriteCoordsToAnimAttackerCoords(sprite);
 
-    sub_807867C(sprite, gBattleAnimArgs[0]);
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[5];
     sprite->data[1] = gBattleAnimArgs[3];
@@ -79,7 +79,7 @@ void sub_80CD190(struct Sprite* sprite)
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
     {
         SetAverageBattlerPositions(bank, gBattleAnimArgs[6], &sprite->x, &sprite->y);
-        sub_807867C(sprite, gBattleAnimArgs[0]);
+        SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
         sprite->y += gBattleAnimArgs[1];
     }
     else
@@ -95,7 +95,7 @@ void sub_80CD190(struct Sprite* sprite)
             sprite->y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[1];
         }
 
-        sub_807867C(sprite, gBattleAnimArgs[0]);
+        SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     }
 
     sprite->data[0] = gBattleAnimArgs[5];

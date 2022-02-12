@@ -44,18 +44,18 @@ extern u8 gBattleMonForms[];
 extern u8 gBattlerSpriteIds[];
 extern u16 gBattlerPartyIndexes[];
 
-extern u8 sub_8046234(s16 x, s16 y, u8 a3);
+extern u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 extern void sub_80DA48C(struct Sprite *);
 extern void sub_80E3C4C(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u8 *arg8, const u8 *arg9, const u16 *palette);
 
-static void sub_812C184(struct Sprite *sprite);
-static void sub_812C268(struct Sprite *sprite);
-static void sub_812C2A4(struct Sprite *sprite);
-static void sub_812C380(struct Sprite *sprite);
-static void sub_812C40C(struct Sprite *sprite);
-static void sub_812C450(struct Sprite *sprite);
-static void sub_812C4FC(struct Sprite *sprite);
-static void sub_812C588(u8 taskId);
+static void AnimBlackSmoke_Step(struct Sprite *sprite);
+static void AnimWhiteHalo_Step1(struct Sprite *sprite);
+static void AnimWhiteHalo_Step2(struct Sprite *sprite);
+static void AnimMeanLookEye_Step1(struct Sprite *sprite);
+static void AnimMeanLookEye_Step2(struct Sprite *sprite);
+static void AnimMeanLookEye_Step3(struct Sprite *sprite);
+static void AnimMeanLookEye_Step4(struct Sprite *sprite);
+static void SetPsychicBackground_Step(u8 taskId);
 static void sub_812C64C(u8 taskId);
 static void sub_812C798(struct Sprite *sprite);
 static void sub_812C7C8(struct Sprite *sprite);
@@ -99,13 +99,13 @@ static void sub_8131408(u8 taskId);
 static void sub_81315C8(struct Sprite *sprite);
 static void sub_8131810(u8 taskId);
 static void sub_8131838(struct Sprite *sprite);
-static void sub_812C144(struct Sprite *sprite);
-static void sub_812C220(struct Sprite *sprite);
-static void sub_812C2BC(struct Sprite *sprite);
-static void sub_812C358(struct Sprite *sprite);
+static void AnimBlackSmoke(struct Sprite *sprite);
+static void AnimWhiteHalo(struct Sprite *sprite);
+static void AnimTealAlert(struct Sprite *sprite);
+static void AnimMeanLookEye(struct Sprite *sprite);
 static void sub_812C720(struct Sprite *sprite);
 static void sub_812C80C(struct Sprite *sprite);
-static void sub_812C848(struct Sprite *sprite);
+static void AnimLetterZ(struct Sprite *sprite);
 static void sub_812C908(struct Sprite *sprite);
 static void sub_812C990(struct Sprite *sprite);
 static void sub_812CAFC(struct Sprite *sprite);
@@ -178,7 +178,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8402198 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_812C144,
+    .callback = AnimBlackSmoke,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_84021B0 =
@@ -224,7 +224,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_84021F4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_812C220,
+    .callback = AnimWhiteHalo,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_840220C =
@@ -235,7 +235,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_840220C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_812C2BC,
+    .callback = AnimTealAlert,
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_8402224[] =
@@ -267,7 +267,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8402264 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_840225C,
-    .callback = sub_812C358,
+    .callback = AnimMeanLookEye,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_840227C =
@@ -338,7 +338,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_84022F0 =
     .anims = gSpriteAnimTable_84022D0,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_84022EC,
-    .callback = sub_812C848,
+    .callback = AnimLetterZ,
 };
 
 const union AnimCmd gSpriteAnim_8402308[] =
@@ -1181,7 +1181,7 @@ const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-static void sub_812C144(struct Sprite *sprite)
+static void AnimBlackSmoke(struct Sprite *sprite)
 {
     sprite->x += gBattleAnimArgs[0];
     sprite->y += gBattleAnimArgs[1];
@@ -1192,10 +1192,10 @@ static void sub_812C144(struct Sprite *sprite)
         sprite->data[0] = -gBattleAnimArgs[2];
 
     sprite->data[1] = gBattleAnimArgs[4];
-    sprite->callback = sub_812C184;
+    sprite->callback = AnimBlackSmoke_Step;
 }
 
-static void sub_812C184(struct Sprite *sprite)
+static void AnimBlackSmoke_Step(struct Sprite *sprite)
 {
     if (sprite->data[1] > 0)
     {
@@ -1210,9 +1210,9 @@ static void sub_812C184(struct Sprite *sprite)
     }
 }
 
-void sub_812C1D0(u8 taskId)
+void AnimTask_SmokescreenImpact(u8 taskId)
 {
-    sub_8046234(
+    SmokescreenImpact(
         GetBattlerSpriteCoord(gBattleAnimTarget, 2) + 8,
         GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 8,
         0);
@@ -1220,47 +1220,47 @@ void sub_812C1D0(u8 taskId)
 
 }
 
-static void sub_812C220(struct Sprite *sprite)
+static void AnimWhiteHalo(struct Sprite *sprite)
 {
     sprite->data[0] = 90;
     sprite->callback = WaitAnimForDuration;
     sprite->data[1] = 7;
-    StoreSpriteCallbackInData(sprite, sub_812C268);
+    StoreSpriteCallbackInData(sprite, AnimWhiteHalo_Step1);
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = ((16 - sprite->data[1]) << 8) | sprite->data[1];
 }
 
-static void sub_812C268(struct Sprite *sprite)
+static void AnimWhiteHalo_Step1(struct Sprite *sprite)
 {
     REG_BLDALPHA = ((16 - sprite->data[1]) << 8) | sprite->data[1];
     if (--sprite->data[1] < 0)
     {
         sprite->invisible = TRUE;
-        sprite->callback = sub_812C2A4;
+        sprite->callback = AnimWhiteHalo_Step2;
     }
 }
 
-static void sub_812C2A4(struct Sprite *sprite)
+static void AnimWhiteHalo_Step2(struct Sprite *sprite)
 {
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
     DestroyAnimSprite(sprite);
 }
 
-static void sub_812C2BC(struct Sprite *sprite)
+static void AnimTealAlert(struct Sprite *sprite)
 {
     u16 rotation;
     u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     u8 y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
-    sub_8078764(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
 
     rotation = ArcTan2Neg(sprite->x - x, sprite->y - y);
     rotation += 0x6000;
     if (IsContest())
         rotation += 0x4000;
 
-    sub_8078FDC(sprite, 0, 0x100, 0x100, rotation);
+    TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, rotation);
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = x;
@@ -1269,15 +1269,15 @@ static void sub_812C2BC(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-static void sub_812C358(struct Sprite *sprite)
+static void AnimMeanLookEye(struct Sprite *sprite)
 {
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = 0x1000;
     sprite->data[0] = 4;
-    sprite->callback = sub_812C380;
+    sprite->callback = AnimMeanLookEye_Step1;
 }
 
-static void sub_812C380(struct Sprite *sprite)
+static void AnimMeanLookEye_Step1(struct Sprite *sprite)
 {
     REG_BLDALPHA = ((16 - sprite->data[0]) << 8) | sprite->data[0];
 
@@ -1297,22 +1297,22 @@ static void sub_812C380(struct Sprite *sprite)
         sprite->data[2] = 0;
         sprite->invisible = TRUE;
         sprite->affineAnimPaused = 1;
-        sprite->callback = sub_812C40C;
+        sprite->callback = AnimMeanLookEye_Step2;
     }
 }
 
-static void sub_812C40C(struct Sprite *sprite)
+static void AnimMeanLookEye_Step2(struct Sprite *sprite)
 {
     if (sprite->data[2]++ > 9)
     {
         sprite->invisible = FALSE;
         sprite->affineAnimPaused = 0;
         if (sprite->affineAnimEnded)
-            sprite->callback = sub_812C450;
+            sprite->callback = AnimMeanLookEye_Step3;
     }
 }
 
-static void sub_812C450(struct Sprite *sprite)
+static void AnimMeanLookEye_Step3(struct Sprite *sprite)
 {
     switch (sprite->data[3])
     {
@@ -1347,11 +1347,11 @@ static void sub_812C450(struct Sprite *sprite)
         sprite->data[1] = 0;
         REG_BLDCNT = 0x3F40;
         REG_BLDALPHA = sprite->data[0];
-        sprite->callback = sub_812C4FC;
+        sprite->callback = AnimMeanLookEye_Step4;
     }
 }
 
-static void sub_812C4FC(struct Sprite *sprite)
+static void AnimMeanLookEye_Step4(struct Sprite *sprite)
 {
     REG_BLDALPHA = ((16 - sprite->data[0]) << 8) | sprite->data[0];
 
@@ -1372,17 +1372,17 @@ static void sub_812C4FC(struct Sprite *sprite)
     }
 }
 
-void sub_812C560(u8 taskId)
+void AnimTask_SetPsychicBackground(u8 taskId)
 {
-    gTasks[taskId].func = sub_812C588;
+    gTasks[taskId].func = SetPsychicBackground_Step;
     gAnimVisualTaskCount--;
 }
 
-static void sub_812C588(u8 taskId)
+static void SetPsychicBackground_Step(u8 taskId)
 {
     int i;
     u16 lastColor;
-    u8 paletteIndex = sub_80789BC();
+    u8 paletteIndex = GetBattleBgPaletteNum();
 
     if (++gTasks[taskId].data[5] == 4)
     {
@@ -1408,7 +1408,7 @@ static void sub_812C64C(u8 taskId)
 {
     int i;
     u16 lastColor;
-    u8 paletteIndex = sub_80789BC();
+    u8 paletteIndex = GetBattleBgPaletteNum();
 
     if (++gTasks[taskId].data[5] == 4)
     {
@@ -1471,23 +1471,21 @@ static void sub_812C7C8(struct Sprite *sprite)
 
 static void sub_812C80C(struct Sprite *sprite)
 {
-    sub_8078650(sprite);
-    sub_807867C(sprite, gBattleAnimArgs[0]);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->y += gBattleAnimArgs[1];
     sprite->callback = sub_8078600;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 // This is likely fakematching due to some strange type casting behavior.
-static void sub_812C848(struct Sprite *sprite)
+static void AnimLetterZ(struct Sprite *sprite)
 {
     int var0;
-    int var1;
     if (sprite->data[0] == 0)
     {
-        sub_8078650(sprite);
-        sub_807867C(sprite, gBattleAnimArgs[0]);
-
+        SetSpriteCoordsToAnimAttackerCoords(sprite);
+        SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
         if (!IsContest())
         {
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
@@ -1497,16 +1495,13 @@ static void sub_812C848(struct Sprite *sprite)
             }
             else
             {
-                var1 = -gBattleAnimArgs[2];
-                sprite->data[1] = var1;
-                var1 = -gBattleAnimArgs[3];
-                sprite->data[2] = var1;
+                sprite->data[1] = -1 * gBattleAnimArgs[2];
+                sprite->data[2] = -1 * gBattleAnimArgs[3];
             }
         }
         else
         {
-            var1 = -gBattleAnimArgs[2];
-            sprite->data[1] = var1;
+            sprite->data[1] = -1 * gBattleAnimArgs[2];
             sprite->data[2] = gBattleAnimArgs[3];
         }
     }
@@ -1515,10 +1510,10 @@ static void sub_812C848(struct Sprite *sprite)
     var0 = (sprite->data[0] * 20) & 0xFF;
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
-    sprite->x2 = (sprite->data[3] + (s32)((u32)sprite->data[3] >> 31)) >> 1;
-    sprite->y2 = Sin(var0 & 0xFF, 5) + ((s32)(sprite->data[4] + ((u32)sprite->data[4] >> 31)) >> 1);
+    sprite->x2 = sprite->data[3] / 2;
+    sprite->y2 = Sin(var0 & 0xFF, 5) + (sprite->data[4] / 2);
 
-    if ((u16)(sprite->x + sprite->x2) > 240)
+    if ((u16)(sprite->x + sprite->x2) > DISPLAY_WIDTH)
         DestroyAnimSprite(sprite);
 }
 
@@ -1557,7 +1552,7 @@ static void sub_812C990(struct Sprite *sprite)
     REG_WIN0H = 0;
     REG_WIN0V = 0;
 
-    sub_8078764(sprite, FALSE);
+    InitSpritePosToAnimTarget(sprite, FALSE);
 
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->invisible = TRUE;
@@ -3092,7 +3087,7 @@ static void sub_812ED84(struct Sprite *sprite)
     REG_WIN0V = 0;
 
     sprite->data[0] = gBattleAnimArgs[2];
-    sub_8078764(sprite, FALSE);
+    InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->invisible = TRUE;
     sprite->callback = sub_812EE00;
@@ -3274,7 +3269,7 @@ static void sub_812F290(u8 taskId)
     gTasks[taskId].data[10] -= 16;
     gTasks[taskId].data[11] += 128;
     gSprites[spriteId].oam.affineMode |= 2;
-    sub_8078FDC(&gSprites[spriteId], 1, gTasks[taskId].data[10], gTasks[taskId].data[11], 0);
+    TrySetSpriteRotScale(&gSprites[spriteId], 1, gTasks[taskId].data[10], gTasks[taskId].data[11], 0);
     if (++gTasks[taskId].data[12] == 9)
     {
         sub_8079098(&gSprites[spriteId]);
@@ -3520,7 +3515,7 @@ static void sub_812F88C(struct Sprite *sprite)
     s16 x = sprite->x;
     s16 y = sprite->y;
 
-    sub_8078650(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[0]);
     sub_812F804(sprite, sprite->x, sprite->y, x, y, 64);
     sprite->data[0] = 0;

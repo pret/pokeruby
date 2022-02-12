@@ -89,7 +89,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6440 =
 
 void sub_80CABF8(struct Sprite* sprite)
 {
-    sub_8078764(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
     if (gBattleAnimArgs[4] == 1)
     {

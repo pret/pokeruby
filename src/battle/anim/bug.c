@@ -408,7 +408,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
     lVarY = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     rot = ArcTan2Neg(lVarX - sprite->x, lVarY - sprite->y);
     rot += 0xC000;
-    sub_8078FDC(sprite, FALSE, 0x100, 0x100, rot);
+    TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rot);
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = lVarX;
@@ -473,7 +473,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
             u16 rotation = ArcTan2Neg(sprite->x + sprite->x2 - x2,
                                   sprite->y + sprite->y2 - y2);
             rotation += 0xC000;
-            sub_8078FDC(sprite, FALSE, 0x100, 0x100, rotation);
+            TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
 
             for (i = 0; i < 8; i++)
                 data[i] = tempData[i];
