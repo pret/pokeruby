@@ -515,8 +515,7 @@ void sub_802C2EC(void)
             }
             do
             {
-                i--;
-                if (i < 0)
+                if (--i < 0)
                     i = 3;
                 gUnknown_03004344 = GetBattlerAtPosition(arr[i]);
             } while(gUnknown_03004344 == gBattlersCount);
@@ -525,16 +524,11 @@ void sub_802C2EC(void)
             {
             case 0:
             case 2:
-                if (gActiveBattler == gUnknown_03004344)
-                {
-                    u32 moveId;
-
-                    asm("":::"memory");
-                    moveId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler]);
-                    if (!(gBattleMoves[moveId].target & 2))
-                        break;
-                }
-                i++;
+                if (gActiveBattler != gUnknown_03004344)
+                    i++;
+                // Flipping this condition leads to better code on agbcc
+                else if (gBattleMoves[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler])].target & MOVE_TARGET_USER_OR_SELECTED)
+                    i++;
                 break;
             case 1:
             case 3:
@@ -572,16 +566,10 @@ void sub_802C2EC(void)
             {
             case 0:
             case 2:
-                if (gActiveBattler == gUnknown_03004344)
-                {
-                    u32 moveId;
-
-                    asm("":::"memory");
-                    moveId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler]);
-                    if (!(gBattleMoves[moveId].target & 2))
-                        break;
-                }
-                i++;
+                if (gActiveBattler != gUnknown_03004344)
+                    i++;
+                else if (gBattleMoves[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler])].target & MOVE_TARGET_USER_OR_SELECTED)
+                    i++;
                 break;
             case 1:
             case 3:
