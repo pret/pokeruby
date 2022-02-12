@@ -2504,10 +2504,9 @@ bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 
 static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 left, u8 top)
 {
-    u8 locationMet;
-    u8 gameMet = GetMonData(mon, MON_DATA_MET_GAME);
+    u8 locationMet = GetMonData(mon, MON_DATA_MET_GAME);
 
-    if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == VERSION_EMERALD))
+    if (!(locationMet == VERSION_RUBY || locationMet == VERSION_SAPPHIRE || locationMet == VERSION_EMERALD))
     {
         Menu_PrintText(gOtherText_EggObtainedInTrade, left, top);
         return;
@@ -2527,8 +2526,6 @@ static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 lef
         Menu_PrintText(gOtherText_EggObtainedInTrade, left, top);
         return;
     }
-
-    asm(""); // needed to match for some reason
 
     if (locationMet == 253)
     {
