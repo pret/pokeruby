@@ -4897,7 +4897,7 @@ static void sub_8131838(struct Sprite *sprite)
 void AnimTask_GetReturnPowerLevel(u8 taskId)
 {
     gBattleAnimArgs[7] = 0;
-    if (gAnimFriendship < 60)
+    if (gAnimFriendship <= 60)
         gBattleAnimArgs[7] = 0;
     if (gAnimFriendship > 60 && gAnimFriendship < 92)
         gBattleAnimArgs[7] = 1;
@@ -4909,9 +4909,6 @@ void AnimTask_GetReturnPowerLevel(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-#ifdef NONMATCHING
-// Makes the mon run out of screen, run past the opposing mon, and return to its original position.
-// No args.
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
@@ -4920,7 +4917,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     u16 species;
     u8 subpriority;
     bool8 isBackPic;
-    s16 x;
+    s16 x, y, x2;
 
     switch (gTasks[taskId].data[0])
     {
@@ -4933,8 +4930,8 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             gSprites[spriteId].x2 -= (gTasks[taskId].data[1] >> 8);
 
         gTasks[taskId].data[1] &= 0xFF;
-        x = gSprites[spriteId].x + gSprites[spriteId].x2;
-        if ((u16)(x + 32) > 304)
+        x2 = gSprites[spriteId].x + gSprites[spriteId].x2;
+        if ((u16)(x2 + 32) > 304)
         {
             gTasks[taskId].data[1] = 0;
             gTasks[taskId].data[0]++;
@@ -4949,6 +4946,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             subpriority = GetBattlerSubpriority(gBattleAnimAttacker);
             isBackPic = 0;
             x = -32;
+            y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
         }
         else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         {
@@ -4962,6 +4960,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
             isBackPic = FALSE;
             x = DISPLAY_WIDTH + 32;
+            y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
         }
         else
         {
@@ -4975,9 +4974,10 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
             isBackPic = TRUE;
             x = -32;
+            y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
         }
 
-        spriteId2 = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId);
+        spriteId2 = sub_8079F44(species, isBackPic, 0, x, y, subpriority, personality, otId);
         if (gBattleSpriteInfo[gBattleAnimAttacker].transformedSpecies != SPECIES_NONE)
             BlendPalette((gSprites[spriteId2].oam.paletteNum * 16) + 0x100, 16, 6, RGB_WHITE);
 
@@ -4993,12 +4993,12 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             gSprites[spriteId2].x2 += (gTasks[taskId].data[1] >> 8);
 
         gTasks[taskId].data[1] &= 0xFF;
-        x = gSprites[spriteId2].x + gSprites[spriteId2].x2;
+        x2 = gSprites[spriteId2].x + gSprites[spriteId2].x2;
         if (gTasks[taskId].data[14] == 0)
         {
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             {
-                if (x < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
+                if (x2 < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
                     gBattleAnimArgs[7] = 0xFFFF;
@@ -5006,7 +5006,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             }
             else
             {
-                if (x > GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
+                if (x2 > GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
                     gBattleAnimArgs[7] = 0xFFFF;
@@ -5014,7 +5014,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             }
         }
 
-        if ((u16)(x + 32) > 304)
+        if ((u16)(x2 + 32) > 304)
         {
             gTasks[taskId].data[1] = 0;
             gTasks[taskId].data[0]++;
@@ -5053,673 +5053,6 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         break;
     }
 }
-#else
-NAKED
-void AnimTask_SnatchOpposingMonMove(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x14\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	ldr r1, _08131974 @ =gTasks\n\
-	lsls r0, 2\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	movs r1, 0x8\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, 0x4\n\
-	bls _0813196A\n\
-	b _08131EA0\n\
-_0813196A:\n\
-	lsls r0, 2\n\
-	ldr r1, _08131978 @ =_0813197C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_08131974: .4byte gTasks\n\
-_08131978: .4byte _0813197C\n\
-	.align 2, 0\n\
-_0813197C:\n\
-	.4byte _08131990\n\
-	.4byte _08131A44\n\
-	.4byte _08131C20\n\
-	.4byte _08131D40\n\
-	.4byte _08131DC4\n\
-_08131990:\n\
-	movs r0, 0\n\
-	bl GetAnimBattlerSpriteId\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	ldr r1, _081319DC @ =gTasks\n\
-	mov r2, r8\n\
-	lsls r4, r2, 2\n\
-	adds r0, r4, r2\n\
-	lsls r0, 3\n\
-	adds r6, r0, r1\n\
-	movs r3, 0x80\n\
-	lsls r3, 4\n\
-	adds r0, r3, 0\n\
-	ldrh r1, [r6, 0xA]\n\
-	adds r0, r1\n\
-	strh r0, [r6, 0xA]\n\
-	ldr r0, _081319E0 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	mov r9, r4\n\
-	cmp r0, 0\n\
-	bne _081319E8\n\
-	ldr r2, _081319E4 @ =gSprites\n\
-	lsls r3, r7, 4\n\
-	adds r1, r3, r7\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldrh r0, [r6, 0xA]\n\
-	lsls r0, 16\n\
-	asrs r0, 24\n\
-	ldrh r4, [r1, 0x24]\n\
-	adds r0, r4\n\
-	strh r0, [r1, 0x24]\n\
-	b _08131A02\n\
-	.align 2, 0\n\
-_081319DC: .4byte gTasks\n\
-_081319E0: .4byte gBattleAnimAttacker\n\
-_081319E4: .4byte gSprites\n\
-_081319E8:\n\
-	ldr r3, _08131A3C @ =gSprites\n\
-	lsls r4, r7, 4\n\
-	adds r2, r4, r7\n\
-	lsls r2, 2\n\
-	adds r2, r3\n\
-	ldrh r1, [r6, 0xA]\n\
-	lsls r1, 16\n\
-	asrs r1, 24\n\
-	ldrh r0, [r2, 0x24]\n\
-	subs r0, r1\n\
-	strh r0, [r2, 0x24]\n\
-	adds r2, r3, 0\n\
-	adds r3, r4, 0\n\
-_08131A02:\n\
-	ldr r1, _08131A40 @ =gTasks\n\
-	mov r0, r9\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r4, r0, r1\n\
-	ldrb r0, [r4, 0xA]\n\
-	strh r0, [r4, 0xA]\n\
-	adds r1, r3, r7\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldrh r0, [r1, 0x24]\n\
-	ldrh r1, [r1, 0x20]\n\
-	adds r0, r1\n\
-	lsls r0, 16\n\
-	movs r1, 0x80\n\
-	lsls r1, 14\n\
-	adds r0, r1\n\
-	movs r1, 0x98\n\
-	lsls r1, 17\n\
-	cmp r0, r1\n\
-	bhi _08131A2E\n\
-	b _08131EA0\n\
-_08131A2E:\n\
-	movs r0, 0\n\
-	strh r0, [r4, 0xA]\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-	b _08131EA0\n\
-	.align 2, 0\n\
-_08131A3C: .4byte gSprites\n\
-_08131A40: .4byte gTasks\n\
-_08131A44:\n\
-	bl IsContest\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08131A74\n\
-	ldr r0, _08131A6C @ =gSharedMem + 0x19348\n\
-	ldr r2, [r0, 0x8]\n\
-	mov r10, r2\n\
-	ldr r3, [r0, 0xC]\n\
-	mov r9, r3\n\
-	ldrh r5, [r0]\n\
-	ldr r0, _08131A70 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSubpriority\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	movs r7, 0\n\
-	b _08131B92\n\
-	.align 2, 0\n\
-_08131A6C: .4byte gSharedMem + 0x19348\n\
-_08131A70: .4byte gBattleAnimAttacker\n\
-_08131A74:\n\
-	ldr r4, _08131AD4 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r4]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _08131B10\n\
-	ldr r7, _08131AD8 @ =gBattlerPartyIndexes\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	movs r6, 0x64\n\
-	muls r0, r6\n\
-	ldr r5, _08131ADC @ =gPlayerParty\n\
-	adds r0, r5\n\
-	movs r1, 0\n\
-	bl GetMonData\n\
-	mov r10, r0\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	muls r0, r6\n\
-	adds r0, r5\n\
-	movs r1, 0x1\n\
-	bl GetMonData\n\
-	mov r9, r0\n\
-	ldrb r2, [r4]\n\
-	lsls r1, r2, 2\n\
-	ldr r0, _08131AE0 @ =gSharedMem + 0x17800\n\
-	adds r1, r0\n\
-	ldrh r0, [r1, 0x2]\n\
-	cmp r0, 0\n\
-	bne _08131AE4\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	muls r0, r6\n\
-	adds r0, r5\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	b _08131AE6\n\
-	.align 2, 0\n\
-_08131AD4: .4byte gBattleAnimAttacker\n\
-_08131AD8: .4byte gBattlerPartyIndexes\n\
-_08131ADC: .4byte gPlayerParty\n\
-_08131AE0: .4byte gSharedMem + 0x17800\n\
-_08131AE4:\n\
-	ldrh r5, [r1, 0x2]\n\
-_08131AE6:\n\
-	movs r0, 0x1\n\
-	bl GetAnimBattlerSpriteId\n\
-	ldr r2, _08131B0C @ =gSprites\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	lsls r1, r0, 4\n\
-	adds r1, r0\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	adds r1, 0x43\n\
-	ldrb r0, [r1]\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	movs r7, 0\n\
-	movs r6, 0x88\n\
-	lsls r6, 1\n\
-	b _08131B94\n\
-	.align 2, 0\n\
-_08131B0C: .4byte gSprites\n\
-_08131B10:\n\
-	ldr r7, _08131B64 @ =gBattlerPartyIndexes\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	movs r6, 0x64\n\
-	muls r0, r6\n\
-	ldr r5, _08131B68 @ =gEnemyParty\n\
-	adds r0, r5\n\
-	movs r1, 0\n\
-	bl GetMonData\n\
-	mov r10, r0\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	muls r0, r6\n\
-	adds r0, r5\n\
-	movs r1, 0x1\n\
-	bl GetMonData\n\
-	mov r9, r0\n\
-	ldrb r2, [r4]\n\
-	lsls r1, r2, 2\n\
-	ldr r0, _08131B6C @ =gSharedMem + 0x17800\n\
-	adds r1, r0\n\
-	ldrh r0, [r1, 0x2]\n\
-	cmp r0, 0\n\
-	bne _08131B70\n\
-	lsls r0, r2, 1\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	muls r0, r6\n\
-	adds r0, r5\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	b _08131B72\n\
-	.align 2, 0\n\
-_08131B64: .4byte gBattlerPartyIndexes\n\
-_08131B68: .4byte gEnemyParty\n\
-_08131B6C: .4byte gSharedMem + 0x17800\n\
-_08131B70:\n\
-	ldrh r5, [r1, 0x2]\n\
-_08131B72:\n\
-	movs r0, 0x1\n\
-	bl GetAnimBattlerSpriteId\n\
-	ldr r2, _08131C04 @ =gSprites\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	lsls r1, r0, 4\n\
-	adds r1, r0\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	adds r1, 0x43\n\
-	ldrb r0, [r1]\n\
-	subs r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	movs r7, 0x1\n\
-_08131B92:\n\
-	ldr r6, _08131C08 @ =0x0000ffe0\n\
-_08131B94:\n\
-	ldr r0, _08131C0C @ =gBattleAnimTarget\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0x1\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	lsls r3, r6, 16\n\
-	asrs r3, 16\n\
-	str r0, [sp]\n\
-	str r4, [sp, 0x4]\n\
-	mov r4, r10\n\
-	str r4, [sp, 0x8]\n\
-	mov r0, r9\n\
-	str r0, [sp, 0xC]\n\
-	adds r0, r5, 0\n\
-	adds r1, r7, 0\n\
-	movs r2, 0\n\
-	bl sub_8079F44\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	ldr r0, _08131C10 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 2\n\
-	ldr r1, _08131C14 @ =gSharedMem + 0x17800\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x2]\n\
-	cmp r0, 0\n\
-	beq _08131BF2\n\
-	ldr r1, _08131C04 @ =gSprites\n\
-	lsls r0, r5, 4\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x5]\n\
-	lsrs r0, 4\n\
-	lsls r0, 4\n\
-	movs r2, 0x80\n\
-	lsls r2, 1\n\
-	adds r1, r2, 0\n\
-	orrs r0, r1\n\
-	ldr r3, _08131C18 @ =0x00007fff\n\
-	movs r1, 0x10\n\
-	movs r2, 0x6\n\
-	bl BlendPalette\n\
-_08131BF2:\n\
-	ldr r0, _08131C1C @ =gTasks\n\
-	mov r3, r8\n\
-	lsls r1, r3, 2\n\
-	add r1, r8\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	strh r5, [r1, 0x26]\n\
-	b _08131DB6\n\
-	.align 2, 0\n\
-_08131C04: .4byte gSprites\n\
-_08131C08: .4byte 0x0000ffe0\n\
-_08131C0C: .4byte gBattleAnimTarget\n\
-_08131C10: .4byte gBattleAnimAttacker\n\
-_08131C14: .4byte gSharedMem + 0x17800\n\
-_08131C18: .4byte 0x00007fff\n\
-_08131C1C: .4byte gTasks\n\
-_08131C20:\n\
-	ldr r1, _08131C6C @ =gTasks\n\
-	mov r0, r8\n\
-	lsls r4, r0, 2\n\
-	adds r0, r4, r0\n\
-	lsls r0, 3\n\
-	adds r6, r0, r1\n\
-	ldrh r0, [r6, 0x26]\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r1, 0x80\n\
-	lsls r1, 4\n\
-	adds r0, r1, 0\n\
-	ldrh r2, [r6, 0xA]\n\
-	adds r0, r2\n\
-	strh r0, [r6, 0xA]\n\
-	ldr r0, _08131C70 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	mov r9, r4\n\
-	cmp r0, 0\n\
-	bne _08131C78\n\
-	ldr r3, _08131C74 @ =gSprites\n\
-	lsls r4, r5, 4\n\
-	adds r2, r4, r5\n\
-	lsls r2, 2\n\
-	adds r2, r3\n\
-	ldrh r1, [r6, 0xA]\n\
-	lsls r1, 16\n\
-	asrs r1, 24\n\
-	ldrh r0, [r2, 0x24]\n\
-	subs r0, r1\n\
-	strh r0, [r2, 0x24]\n\
-	adds r2, r3, 0\n\
-	adds r3, r4, 0\n\
-	b _08131C8E\n\
-	.align 2, 0\n\
-_08131C6C: .4byte gTasks\n\
-_08131C70: .4byte gBattleAnimAttacker\n\
-_08131C74: .4byte gSprites\n\
-_08131C78:\n\
-	ldr r2, _08131CDC @ =gSprites\n\
-	lsls r3, r5, 4\n\
-	adds r1, r3, r5\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldrh r0, [r6, 0xA]\n\
-	lsls r0, 16\n\
-	asrs r0, 24\n\
-	ldrh r4, [r1, 0x24]\n\
-	adds r0, r4\n\
-	strh r0, [r1, 0x24]\n\
-_08131C8E:\n\
-	ldr r1, _08131CE0 @ =gTasks\n\
-	mov r0, r9\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r6, r0, r1\n\
-	ldrb r0, [r6, 0xA]\n\
-	strh r0, [r6, 0xA]\n\
-	adds r1, r3, r5\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldrh r0, [r1, 0x24]\n\
-	ldrh r1, [r1, 0x20]\n\
-	adds r0, r1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	movs r1, 0x24\n\
-	ldrsh r0, [r6, r1]\n\
-	cmp r0, 0\n\
-	bne _08131D0E\n\
-	ldr r0, _08131CE4 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _08131CEC\n\
-	lsls r4, r5, 16\n\
-	asrs r4, 16\n\
-	ldr r0, _08131CE8 @ =gBattleAnimTarget\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r4, r0\n\
-	bge _08131D0E\n\
-	b _08131D02\n\
-	.align 2, 0\n\
-_08131CDC: .4byte gSprites\n\
-_08131CE0: .4byte gTasks\n\
-_08131CE4: .4byte gBattleAnimAttacker\n\
-_08131CE8: .4byte gBattleAnimTarget\n\
-_08131CEC:\n\
-	lsls r4, r5, 16\n\
-	asrs r4, 16\n\
-	ldr r0, _08131D30 @ =gBattleAnimTarget\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r4, r0\n\
-	ble _08131D0E\n\
-_08131D02:\n\
-	ldrh r0, [r6, 0x24]\n\
-	adds r0, 0x1\n\
-	strh r0, [r6, 0x24]\n\
-	ldr r1, _08131D34 @ =gBattleAnimArgs\n\
-	ldr r0, _08131D38 @ =0x0000ffff\n\
-	strh r0, [r1, 0xE]\n\
-_08131D0E:\n\
-	lsls r0, r5, 16\n\
-	movs r2, 0x80\n\
-	lsls r2, 14\n\
-	adds r0, r2\n\
-	movs r1, 0x98\n\
-	lsls r1, 17\n\
-	cmp r0, r1\n\
-	bhi _08131D20\n\
-	b _08131EA0\n\
-_08131D20:\n\
-	ldr r0, _08131D3C @ =gTasks\n\
-	mov r1, r9\n\
-	add r1, r8\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	movs r0, 0\n\
-	strh r0, [r1, 0xA]\n\
-	b _08131DB6\n\
-	.align 2, 0\n\
-_08131D30: .4byte gBattleAnimTarget\n\
-_08131D34: .4byte gBattleAnimArgs\n\
-_08131D38: .4byte 0x0000ffff\n\
-_08131D3C: .4byte gTasks\n\
-_08131D40:\n\
-	movs r0, 0\n\
-	bl GetAnimBattlerSpriteId\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	ldr r1, _08131D8C @ =gTasks\n\
-	mov r3, r8\n\
-	lsls r4, r3, 2\n\
-	adds r0, r4, r3\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x26]\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	lsls r0, r5, 4\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	ldr r5, _08131D90 @ =gSprites\n\
-	adds r0, r5\n\
-	bl DestroySpriteAndFreeResources_\n\
-	ldr r0, _08131D94 @ =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	mov r9, r4\n\
-	cmp r0, 0\n\
-	bne _08131D98\n\
-	lsls r1, r7, 4\n\
-	adds r1, r7\n\
-	lsls r1, 2\n\
-	adds r1, r5\n\
-	ldrh r0, [r1, 0x20]\n\
-	negs r0, r0\n\
-	subs r0, 0x20\n\
-	strh r0, [r1, 0x24]\n\
-	b _08131DAC\n\
-	.align 2, 0\n\
-_08131D8C: .4byte gTasks\n\
-_08131D90: .4byte gSprites\n\
-_08131D94: .4byte gBattleAnimAttacker\n\
-_08131D98:\n\
-	lsls r0, r7, 4\n\
-	adds r0, r7\n\
-	lsls r0, 2\n\
-	adds r0, r5\n\
-	ldrh r2, [r0, 0x20]\n\
-	movs r4, 0x88\n\
-	lsls r4, 1\n\
-	adds r1, r4, 0\n\
-	subs r1, r2\n\
-	strh r1, [r0, 0x24]\n\
-_08131DAC:\n\
-	ldr r0, _08131DC0 @ =gTasks\n\
-	mov r1, r9\n\
-	add r1, r8\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-_08131DB6:\n\
-	ldrh r0, [r1, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1, 0x8]\n\
-	b _08131EA0\n\
-	.align 2, 0\n\
-_08131DC0: .4byte gTasks\n\
-_08131DC4:\n\
-	movs r0, 0\n\
-	bl GetAnimBattlerSpriteId\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	ldr r1, _08131E38 @ =gTasks\n\
-	mov r0, r8\n\
-	lsls r4, r0, 2\n\
-	adds r0, r4, r0\n\
-	lsls r0, 3\n\
-	adds r2, r0, r1\n\
-	movs r1, 0x80\n\
-	lsls r1, 4\n\
-	adds r0, r1, 0\n\
-	ldrh r3, [r2, 0xA]\n\
-	adds r0, r3\n\
-	strh r0, [r2, 0xA]\n\
-	ldr r0, _08131E3C @ =gBattleAnimAttacker\n\
-	mov r10, r0\n\
-	ldrb r0, [r0]\n\
-	str r2, [sp, 0x10]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	mov r9, r4\n\
-	ldr r2, [sp, 0x10]\n\
-	cmp r0, 0\n\
-	bne _08131E44\n\
-	ldr r1, _08131E40 @ =gSprites\n\
-	lsls r5, r7, 4\n\
-	adds r0, r5, r7\n\
-	lsls r0, 2\n\
-	adds r6, r0, r1\n\
-	ldrh r0, [r2, 0xA]\n\
-	lsls r0, 16\n\
-	asrs r0, 24\n\
-	ldrh r1, [r6, 0x24]\n\
-	adds r0, r1\n\
-	strh r0, [r6, 0x24]\n\
-	movs r2, 0x24\n\
-	ldrsh r4, [r6, r2]\n\
-	movs r3, 0x20\n\
-	ldrsh r0, [r6, r3]\n\
-	adds r4, r0\n\
-	mov r1, r10\n\
-	ldrb r0, [r1]\n\
-	movs r1, 0\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r3, r5, 0\n\
-	cmp r4, r0\n\
-	blt _08131E7C\n\
-	movs r2, 0\n\
-	strh r2, [r6, 0x24]\n\
-	b _08131E7C\n\
-	.align 2, 0\n\
-_08131E38: .4byte gTasks\n\
-_08131E3C: .4byte gBattleAnimAttacker\n\
-_08131E40: .4byte gSprites\n\
-_08131E44:\n\
-	ldr r1, _08131EB0 @ =gSprites\n\
-	lsls r5, r7, 4\n\
-	adds r0, r5, r7\n\
-	lsls r0, 2\n\
-	adds r6, r0, r1\n\
-	ldrh r1, [r2, 0xA]\n\
-	lsls r1, 16\n\
-	asrs r1, 24\n\
-	ldrh r0, [r6, 0x24]\n\
-	subs r0, r1\n\
-	strh r0, [r6, 0x24]\n\
-	movs r3, 0x24\n\
-	ldrsh r4, [r6, r3]\n\
-	movs r1, 0x20\n\
-	ldrsh r0, [r6, r1]\n\
-	adds r4, r0\n\
-	mov r2, r10\n\
-	ldrb r0, [r2]\n\
-	movs r1, 0\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r3, r5, 0\n\
-	cmp r4, r0\n\
-	bgt _08131E7C\n\
-	movs r4, 0\n\
-	strh r4, [r6, 0x24]\n\
-_08131E7C:\n\
-	ldr r1, _08131EB4 @ =gTasks\n\
-	mov r0, r9\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0xA]\n\
-	strh r1, [r0, 0xA]\n\
-	ldr r1, _08131EB0 @ =gSprites\n\
-	adds r0, r3, r7\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	movs r1, 0x24\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, 0\n\
-	bne _08131EA0\n\
-	mov r0, r8\n\
-	bl DestroyAnimVisualTask\n\
-_08131EA0:\n\
-	add sp, 0x14\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08131EB0: .4byte gSprites\n\
-_08131EB4: .4byte gTasks\n\
-    .syntax divided");
-}
-#endif // NONMATCHING
 
 void sub_8131EB8(struct Sprite *sprite)
 {
