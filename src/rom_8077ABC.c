@@ -410,7 +410,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
 {
     u8 *sprites;
 
-    if (whichBank == ANIM_BATTLER_ATTACKER)
+    if (whichBank == ANIM_ATTACKER)
     {
         if (IsBankSpritePresent(gBattleAnimAttacker))
         {
@@ -422,7 +422,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
             return 0xff;
         }
     }
-    else if (whichBank == ANIM_BATTLER_TARGET)
+    else if (whichBank == ANIM_TARGET)
     {
         if (IsBankSpritePresent(gBattleAnimTarget))
         {
