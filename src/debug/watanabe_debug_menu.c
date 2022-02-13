@@ -3330,7 +3330,6 @@ void debug_80C7A54(u8 taskId)
     gTasks[taskId].func = debug_80C7B14;
 }
 
-#ifdef NONMATCHING
 void debug_80C7B14(u8 taskId)
 {
     if (gMain.newKeys & B_BUTTON)
@@ -3339,39 +3338,43 @@ void debug_80C7B14(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
+        return;
     }
-    else if (gMain.newAndRepeatedKeys & R_BUTTON)
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
         gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
+        return;
     }
-    else if (gMain.newAndRepeatedKeys & L_BUTTON)
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
         gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
+        return;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    if (gMain.newKeys & A_BUTTON)
     {
         gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7DDC;
+        return;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && gUnknown_Debug_2038A20->unk7 < 14)
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT && gUnknown_Debug_2038A20->unk7 < 14)
     {
-        ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
-        do; while (0); // this matches the asm here...
+        *(u16 *)(BG_PLTT + 0x100 + (gUnknown_Debug_2038A20->unk7 + 1) * 2) = 0;
         gUnknown_Debug_2038A20->unk7++;
         gTasks[taskId].func = debug_80C7A54;
+        return;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && gUnknown_Debug_2038A20->unk7 > 0)
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT && gUnknown_Debug_2038A20->unk7 > 0)
     {
-        ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
-        do; while (0); // ... but not here
+        *(u16 *)(BG_PLTT + 0x100 + (gUnknown_Debug_2038A20->unk7 + 1) * 2) = 0;
         gUnknown_Debug_2038A20->unk7--;
         gTasks[taskId].func = debug_80C7A54;
+        return;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    if (gMain.newKeys & START_BUTTON)
     {
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
@@ -3385,297 +3388,13 @@ void debug_80C7B14(u8 taskId)
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 32);
         CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 32);
         gTasks[taskId].func = debug_80C7A54;
+        return;
     }
-    else
-    {
-        gUnknown_Debug_2038A20->random += 4;
-        gUnknown_Debug_2038A20->random &= 0x1f;
-        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->random];
-    }
+
+    gUnknown_Debug_2038A20->random += 4;
+    gUnknown_Debug_2038A20->random &= 0x1f;
+    *(u16 *)(BG_PLTT + 0x140 + (gUnknown_Debug_2038A20->unk7 + 1) * 2) = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->random];
 }
-#else
-NAKED void debug_80C7B14(u8 taskId)
-{
-    asm("\tpush\t{r4, r5, r6, lr}\n"
-        "\tadd\tsp, sp, #0xfffffffc\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr6, r0, #0x18\n"
-        "\tldr\tr1, ._792       @ gMain\n"
-        "\tldrh\tr3, [r1, #0x2e]\n"
-        "\tmov\tr0, #0x2\n"
-        "\tand\tr0, r0, r3\n"
-        "\tadd\tr4, r1, #0\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._790\t@cond_branch\n"
-        "\tmov\tr0, #0x5\n"
-        "\tbl\tPlaySE\n"
-        "\tmov\tr0, #0x1\n"
-        "\tneg\tr0, r0\n"
-        "\tmov\tr1, #0x0\n"
-        "\tstr\tr1, [sp]\n"
-        "\tmov\tr2, #0x0\n"
-        "\tmov\tr3, #0x10\n"
-        "\tbl\tBeginNormalPaletteFade\n"
-        "\tldr\tr0, ._792 + 4   @ debug_80C370C\n"
-        "\tbl\tSetMainCallback2\n"
-        "\tldr\tr1, ._792 + 8   @ gTasks\n"
-        "\tlsl\tr0, r6, #0x2\n"
-        "\tadd\tr0, r0, r6\n"
-        "\tlsl\tr0, r0, #0x3\n"
-        "\tadd\tr0, r0, r1\n"
-        "\tldr\tr1, ._792 + 12  @ debug_80C373C\n"
-        "\tstr\tr1, [r0]\n"
-        "\tb\t._821\n"
-        "._793:\n"
-        "\t.align\t2, 0\n"
-        "._792:\n"
-        "\t.word\tgMain\n"
-        "\t.word\tdebug_80C370C+1\n"
-        "\t.word\tgTasks\n"
-        "\t.word\tdebug_80C373C+1\n"
-        "._790:\n"
-        "\tldrh\tr1, [r4, #0x30]\n"
-        "\tmov\tr0, #0x80\n"
-        "\tlsl\tr0, r0, #0x1\n"
-        "\tand\tr0, r0, r1\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._794\t@cond_branch\n"
-        "\tldr\tr4, ._796       @ gUnknown_Debug_2038A20\n"
-        "\tldr\tr0, [r4]\n"
-        "\tldrh\tr1, [r0]\n"
-        "\tmov\tr0, #0x0\n"
-        "\tb\t._795\n"
-        "._797:\n"
-        "\t.align\t2, 0\n"
-        "._796:\n"
-        "\t.word\tgUnknown_Debug_2038A20\n"
-        "._794:\n"
-        "\tmov\tr0, #0x80\n"
-        "\tlsl\tr0, r0, #0x2\n"
-        "\tand\tr0, r0, r1\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._798\t@cond_branch\n"
-        "\tldr\tr4, ._800       @ gUnknown_Debug_2038A20\n"
-        "\tldr\tr0, [r4]\n"
-        "\tldrh\tr1, [r0]\n"
-        "\tmov\tr0, #0x1\n"
-        "._795:\n"
-        "\tbl\tdebug_80C38B4\n"
-        "\tldr\tr1, [r4]\n"
-        "\tstrh\tr0, [r1]\n"
-        "\tldr\tr1, ._800 + 4   @ gTasks\n"
-        "\tlsl\tr0, r6, #0x2\n"
-        "\tadd\tr0, r0, r6\n"
-        "\tlsl\tr0, r0, #0x3\n"
-        "\tadd\tr0, r0, r1\n"
-        "\tldr\tr1, ._800 + 8   @ debug_80C7D44\n"
-        "\tstr\tr1, [r0]\n"
-        "\tb\t._821\n"
-        "._801:\n"
-        "\t.align\t2, 0\n"
-        "._800:\n"
-        "\t.word\tgUnknown_Debug_2038A20\n"
-        "\t.word\tgTasks\n"
-        "\t.word\tdebug_80C7D44+1\n"
-        "._798:\n"
-        "\tmov\tr2, #0x1\n"
-        "\tand\tr2, r2, r3\n"
-        "\tcmp\tr2, #0\n"
-        "\tbeq\t._802\t@cond_branch\n"
-        "\tldr\tr0, ._804       @ gUnknown_Debug_2038A20\n"
-        "\tldr\tr1, [r0]\n"
-        "\tmov\tr0, #0x1\n"
-        "\tstrb\tr0, [r1, #0x5]\n"
-        "\tldr\tr1, ._804 + 4   @ 0x4000040\n"
-        "\tldr\tr2, ._804 + 8   @ 0x51ef\n"
-        "\tadd\tr0, r2, #0\n"
-        "\tstrh\tr0, [r1]\n"
-        "\tadd\tr1, r1, #0x4\n"
-        "\tldr\tr2, ._804 + 12  @ 0x4167\n"
-        "\tadd\tr0, r2, #0\n"
-        "\tstrh\tr0, [r1]\n"
-        "\tldr\tr1, ._804 + 16  @ gTasks\n"
-        "\tlsl\tr0, r6, #0x2\n"
-        "\tadd\tr0, r0, r6\n"
-        "\tlsl\tr0, r0, #0x3\n"
-        "\tadd\tr0, r0, r1\n"
-        "\tldr\tr1, ._804 + 20  @ debug_80C7DDC\n"
-        "\tstr\tr1, [r0]\n"
-        "\tb\t._821\n"
-        "._805:\n"
-        "\t.align\t2, 0\n"
-        "._804:\n"
-        "\t.word\tgUnknown_Debug_2038A20\n"
-        "\t.word\t0x4000040\n"
-        "\t.word\t0x51ef\n"
-        "\t.word\t0x4167\n"
-        "\t.word\tgTasks\n"
-        "\t.word\tdebug_80C7DDC+1\n"
-        "._802:\n"
-        "\tmov\tr0, #0x10\n"
-        "\tand\tr0, r0, r1\n"
-        "\tldr\tr3, ._809       @ gUnknown_Debug_2038A20\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._807\t@cond_branch\n"
-        "\tldr\tr1, [r3]\n"
-        "\tldrb\tr0, [r1, #0x7]\n"
-        "\tcmp\tr0, #0xd\n"
-        "\tbhi\t._807\t@cond_branch\n"
-        "\tlsl\tr0, r0, #0x1\n"
-        "\tldr\tr1, ._809 + 4   @ 0x5000102\n"
-        "\tadd\tr0, r0, r1\n"
-        "\tstrh\tr2, [r0]\n"
-        "\tldr\tr1, [r3]\n"
-        "\tldrb\tr0, [r1, #0x7]\n"
-        "\tadd\tr0, r0, #0x1\n"
-        "\tstrb\tr0, [r1, #0x7]\n"
-        "\tb\t._813\n"
-        "._810:\n"
-        "\t.align\t2, 0\n"
-        "._809:\n"
-        "\t.word\tgUnknown_Debug_2038A20\n"
-        "\t.word\t0x5000102\n"
-        "._807:\n"
-        "\tldrh\tr1, [r4, #0x30]\n"
-        "\tmov\tr0, #0x20\n"
-        "\tand\tr0, r0, r1\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._812\t@cond_branch\n"
-        "\tldr\tr1, [r3]\n"
-        "\tldrb\tr0, [r1, #0x7]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._812\t@cond_branch\n"
-        "\tlsl\tr0, r0, #0x1\n"
-        "\tldr\tr2, ._814       @ 0x5000102\n"
-        "\tadd\tr0, r0, r2\n"
-        "\tmov\tr1, #0x0\n"
-        "\tstrh\tr1, [r0]\n"
-        "\tldr\tr1, [r3]\n"
-        "\tldrb\tr0, [r1, #0x7]\n"
-        "\tsub\tr0, r0, #0x1\n"
-        "\tstrb\tr0, [r1, #0x7]\n"
-        "\tb\t._813\n"
-        "._815:\n"
-        "\t.align\t2, 0\n"
-        "._814:\n"
-        "\t.word\t0x5000102\n"
-        "._812:\n"
-        "\tldrh\tr1, [r4, #0x2e]\n"
-        "\tmov\tr0, #0x8\n"
-        "\tand\tr0, r0, r1\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._816\t@cond_branch\n"
-        "\tldr\tr4, ._819       @ gUnknown_Debug_2038A20\n"
-        "\tldr\tr2, [r4]\n"
-        "\tldrb\tr0, [r2, #0x9]\n"
-        "\tmov\tr1, #0x1\n"
-        "\teor\tr0, r0, r1\n"
-        "\tstrb\tr0, [r2, #0x9]\n"
-        "\tldr\tr1, [r4]\n"
-        "\tldrb\tr0, [r1, #0x9]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._817\t@cond_branch\n"
-        "\tldrh\tr0, [r1]\n"
-        "\tmov\tr1, #0x0\n"
-        "\tmov\tr2, #0x0\n"
-        "\tbl\tGetMonSpritePalFromOtIdPersonality\n"
-        "\tldr\tr1, [r4]\n"
-        "\tldrb\tr1, [r1, #0x6]\n"
-        "\tlsl\tr1, r1, #0x14\n"
-        "\tmov\tr2, #0x80\n"
-        "\tlsl\tr2, r2, #0x11\n"
-        "\tadd\tr1, r1, r2\n"
-        "\tlsr\tr1, r1, #0x10\n"
-        "\tmov\tr2, #0x20\n"
-        "\tbl\tLoadCompressedPalette\n"
-        "\tb\t._818\n"
-        "._820:\n"
-        "\t.align\t2, 0\n"
-        "._819:\n"
-        "\t.word\tgUnknown_Debug_2038A20\n"
-        "._817:\n"
-        "\tldrh\tr0, [r1]\n"
-        "\tmov\tr1, #0x0\n"
-        "\tmov\tr2, #0x9\n"
-        "\tbl\tGetMonSpritePalFromOtIdPersonality\n"
-        "\tldr\tr1, [r4]\n"
-        "\tldrb\tr1, [r1, #0x6]\n"
-        "\tlsl\tr1, r1, #0x14\n"
-        "\tmov\tr2, #0x80\n"
-        "\tlsl\tr2, r2, #0x11\n"
-        "\tadd\tr1, r1, r2\n"
-        "\tlsr\tr1, r1, #0x10\n"
-        "\tmov\tr2, #0x20\n"
-        "\tbl\tLoadCompressedPalette\n"
-        "._818:\n"
-        "\tldr\tr5, ._822       @ gUnknown_Debug_2038A20\n"
-        "\tldr\tr0, [r5]\n"
-        "\tldrb\tr0, [r0, #0x6]\n"
-        "\tlsl\tr0, r0, #0x5\n"
-        "\tldr\tr4, ._822 + 4   @ gPlttBufferUnfaded\n"
-        "\tadd\tr0, r0, r4\n"
-        "\tldr\tr2, ._822 + 8   @ 0xffffff00\n"
-        "\tadd\tr1, r4, r2\n"
-        "\tmov\tr2, #0x10\n"
-        "\tbl\tCpuSet\n"
-        "\tldr\tr0, [r5]\n"
-        "\tldrb\tr0, [r0, #0x6]\n"
-        "\tlsl\tr0, r0, #0x5\n"
-        "\tadd\tr0, r0, r4\n"
-        "\tldr\tr1, ._822 + 12  @ gPlttBufferFaded\n"
-        "\tmov\tr2, #0x10\n"
-        "\tbl\tCpuSet\n"
-        "._813:\n"
-        "\tldr\tr1, ._822 + 16  @ gTasks\n"
-        "\tlsl\tr0, r6, #0x2\n"
-        "\tadd\tr0, r0, r6\n"
-        "\tlsl\tr0, r0, #0x3\n"
-        "\tadd\tr0, r0, r1\n"
-        "\tldr\tr1, ._822 + 20  @ debug_80C7A54\n"
-        "\tstr\tr1, [r0]\n"
-        "\tb\t._821\n"
-        "._823:\n"
-        "\t.align\t2, 0\n"
-        "._822:\n"
-        "\t.word\tgUnknown_Debug_2038A20\n"
-        "\t.word\tgPlttBufferUnfaded+0x200\n"
-        "\t.word\t0xffffff00\n"
-        "\t.word\tgPlttBufferFaded+0x100\n"
-        "\t.word\tgTasks\n"
-        "\t.word\tdebug_80C7A54+1\n"
-        "._816:\n"
-        "\tldr\tr1, [r3]\n"
-        "\tldrb\tr0, [r1, #0x8]\n"
-        "\tadd\tr0, r0, #0x4\n"
-        "\tstrb\tr0, [r1, #0x8]\n"
-        "\tldr\tr2, [r3]\n"
-        "\tldrb\tr1, [r2, #0x8]\n"
-        "\tmov\tr0, #0x1f\n"
-        "\tand\tr0, r0, r1\n"
-        "\tstrb\tr0, [r2, #0x8]\n"
-        "\tldr\tr0, [r3]\n"
-        "\tldrb\tr1, [r0, #0x7]\n"
-        "\tlsl\tr1, r1, #0x1\n"
-        "\tldr\tr2, ._824       @ 0x5000142\n"
-        "\tadd\tr1, r1, r2\n"
-        "\tldr\tr2, ._824 + 4   @ gUnknown_Debug_083F8790\n"
-        "\tldrb\tr0, [r0, #0x8]\n"
-        "\tlsl\tr0, r0, #0x1\n"
-        "\tadd\tr0, r0, r2\n"
-        "\tldrh\tr0, [r0]\n"
-        "\tstrh\tr0, [r1]\n"
-        "._821:\n"
-        "\tadd\tsp, sp, #0x4\n"
-        "\tpop\t{r4, r5, r6}\n"
-        "\tpop\t{r0}\n"
-        "\tbx\tr0\n"
-        "._825:\n"
-        "\t.align\t2, 0\n"
-        "._824:\n"
-        "\t.word\t0x5000142\n"
-        "\t.word\tgUnknown_Debug_083F8790");
-}
-#endif // NONMATCHING
 
 void debug_80C7D44(u8 taskId)
 {
