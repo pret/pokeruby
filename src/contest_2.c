@@ -2331,434 +2331,121 @@ u8 CreateUnusedBrokenBlendTask(u8 *a)
     return taskId;
 }
 
-#ifdef NONMATCHING
 void Task_UnusedBrokenBlend(u8 taskId)
 {
     u8 i;
     u8 r4;
-    u8 r4_2;
     u8 r1;
     u8 r7;
+    u8 r8;
+    u8 r5;
+    u8 r6;
 
     for (i = 0; i < 4; i++)
     {
-        //#define r4 r4_2
         r4 = gContestantTurnOrder[i];
         r1 = r4 * 4;
-        r7 = gTasks[taskId].data[r1 + 0];
+        r7 = gTasks[taskId].data[r1];
 
-        if (r7 != 0)
-        {
+        if (r7 == 0)
+            continue;
             //_080B079C
-            u8 r8 = gTasks[taskId].data[r1 + 1];
-            u8 r5 = gTasks[taskId].data[r1 + 2];
-            u8 r6 = gTasks[taskId].data[r1 + 3];
+        r8 = gTasks[taskId].data[r1 + 1];
+        r5 = gTasks[taskId].data[r1 + 2];
+        r6 = gTasks[taskId].data[r1 + 3];
 
-            if (r7 == 1)
+        if (r7 == 1)
+        {
+            if (++r6 == 1)
             {
-                r6++;
-                if (r6 == 1)
+                //_080B07D2
+                r6 = 0;
+                BlendPalette((r4 + 5) * 16 + 1, 3, r5, RGB(31, 31, 31));
+                if (r5 == 0 && r8 == 4)
                 {
-                    //_080B07D2
-                    r6 = 0;
-                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, RGB(31, 31, 31));
-                    if (r5 == 0 && r8 == 4)
+                    gTasks[taskId].data[r1] = 0;
+                }
+                //_080B0800
+                else
+                {
+                    r5 += 2;
+                    if (r5 >= 14)
                     {
-                        gTasks[taskId].data[r1 + 0] = 0;
-                        //asm("");
-                    }
-                    //_080B0800
-                    else
-                    {
-                        r5 += 2;
-                        if (r5 > 13)
-                        {
-                            r5 = 0;
-                            r8++;
-                        }
+                        r5 = 0;
+                        r8++;
                     }
                 }
-                //to _080B08EA
             }
-            //_080B0818
-            else if (r7 == 2 || r7 == 4)
+            //to _080B08EA
+        }
+        //_080B0818
+        else if (r7 == 2 || r7 == 4)
+        {
+            if (++r6 == 3)
             {
-                r6++;
-                if (r6 == 3)
-                {
-                    r6 = 0;
+                r6 = 0;
                     BlendPalette((r4 + 5) * 16 + 1, 3, r5, gUnknown_083CC5A4[r4]);
-                    if (r5 == 0 && r8 == 2)
+                if (r5 == 0 && r8 == 2)
+                {
+                    gTasks[taskId].data[r1] = 0;
+                }
+                //_080B0858
+                else
+                {
+                    if (++r5 == 14)
                     {
-                        gTasks[taskId].data[r1 + 0] = 0;
-                    }
-                    //_080B0858
-                    else
-                    {
-                        r5 += 1;
-                        if (r5 == 14)
+                        r5 = 0;
+                        r8++;
+                        if (r7 == 4 && r8 == 1)
                         {
-                            r5 = 0;
-                            r8++;
-                            if (r7 == 4 && r8 == 1)
-                            {
                                 BlendPalette((r4 + 9) * 16 + 2, 1, 4, RGB(0, 0, 0));
                                 BlendPalette((r4 + 9) * 16 + 5, 1, 4, RGB(0, 0, 0));
-                            }
                         }
                     }
                 }
-                //to _080B08EA
             }
-            //_080B0896
-            else if (r7 == 3)
+            // to _080B08EA
+        }
+        //_080B0896
+        else if (r7 == 3)
+        {
+            if (++r6 == 12)
             {
-                r6++;
-                if (r6 == 12)
+                r6 = 0;
+                BlendPalette((r4 + 5) * 16 + 1, 3, r5, RGB(0, 0, 0));
+                if (++r5 == 5)
                 {
-                    r6 = 0;
-                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, RGB(0, 0, 0));
-                    r5 += 1;
-                    if (r5 == 5)
-                    {
-                        // What the hell? These aren't pointers.
-                        // This code would crash if run.
-                        DmaCopy16Defvars(3, (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1],
+                    // What the hell? These aren't pointers.
+                    // This code would crash if run.
+                    // Can just be DmaCopy16, but doesn't match that way
+                    Dma3CopyLarge16_((void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1],
                             (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1], 6);
-                        gTasks[taskId].data[r1 + 0] = 0;
-                    }
+                    gTasks[taskId].data[r1] = 0;
                 }
             }
-            //_080B08EA
-            gTasks[taskId].data[r1 + 1] = r8;
-            gTasks[taskId].data[r1 + 2] = r5;
-            gTasks[taskId].data[r1 + 3] = r6;
         }
+        //_080B08EA
+        gTasks[taskId].data[r1 + 1] = r8;
+        gTasks[taskId].data[r1 + 2] = r5;
+        gTasks[taskId].data[r1 + 3] = r6;
         //_080B0910
     }
     //_080B0920
 
-    #define i r4_2
-    for (i = 0; i < 4; i++)  // r4 is i
+    for (r4 = 0; r4 < 4; r4++)  // r4 is i
     {
-        if (gTasks[taskId].data[i * 4 + 0] != 0)
+        if (gTasks[taskId].data[r4 * 4] != 0)
             break;
     }
     //_080B0958
-    if (i == 4)
+    if (r4 == 4)
     {
-        for (i = 0; i < 4; i++)
-            eContestGfxState[i].boxBlinking = FALSE;
+        for (r4 = 0; r4 < 4; r4++)
+            eContestGfxState[r4].boxBlinking = FALSE;
         DestroyTask(taskId);
     }
-    #undef i
 }
-#else
-NAKED
-void Task_UnusedBrokenBlend(u8 taskId)
-{
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x20\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp]\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x4]\n\
-	ldr r2, _080B07F4 @ =gTasks\n\
-	movs r1, 0x8\n\
-	adds r1, r2\n\
-	mov r10, r1\n\
-	ldr r3, [sp]\n\
-	lsls r3, 2\n\
-	str r3, [sp, 0x1C]\n\
-	ldr r1, [sp]\n\
-	adds r0, r3, r1\n\
-	lsls r0, 3\n\
-	str r0, [sp, 0xC]\n\
-_080B0774:\n\
-	ldr r0, _080B07F8 @ =gContestantTurnOrder\n\
-	ldr r3, [sp, 0x4]\n\
-	adds r0, r3, r0\n\
-	ldrb r4, [r0]\n\
-	lsls r0, r4, 26\n\
-	lsrs r1, r0, 24\n\
-	lsls r0, r1, 1\n\
-	str r0, [sp, 0x8]\n\
-	ldr r3, [sp]\n\
-	lsls r0, r3, 2\n\
-	adds r0, r3\n\
-	lsls r6, r0, 3\n\
-	ldr r3, [sp, 0x8]\n\
-	adds r0, r3, r6\n\
-	add r0, r10\n\
-	mov r9, r0\n\
-	ldrb r7, [r0]\n\
-	cmp r7, 0\n\
-	bne _080B079C\n\
-	b _080B0910\n\
-_080B079C:\n\
-	adds r3, r1, 0x1\n\
-	lsls r0, r3, 1\n\
-	adds r0, r6\n\
-	add r0, r10\n\
-	ldrb r0, [r0]\n\
-	mov r8, r0\n\
-	adds r2, r1, 0x2\n\
-	lsls r0, r2, 1\n\
-	adds r0, r6\n\
-	add r0, r10\n\
-	ldrb r5, [r0]\n\
-	adds r1, 0x3\n\
-	lsls r0, r1, 1\n\
-	adds r0, r6\n\
-	add r0, r10\n\
-	ldrb r6, [r0]\n\
-	str r3, [sp, 0x10]\n\
-	str r2, [sp, 0x14]\n\
-	str r1, [sp, 0x18]\n\
-	cmp r7, 0x1\n\
-	bne _080B0818\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	cmp r6, 0x1\n\
-	beq _080B07D2\n\
-	b _080B08EA\n\
-_080B07D2:\n\
-	movs r6, 0\n\
-	adds r0, r4, 0x5\n\
-	lsls r0, 4\n\
-	adds r0, 0x1\n\
-	movs r1, 0x3\n\
-	adds r2, r5, 0\n\
-	ldr r3, _080B07FC @ =0x00007fff\n\
-	bl BlendPalette\n\
-	cmp r5, 0\n\
-	bne _080B0800\n\
-	mov r0, r8\n\
-	cmp r0, 0x4\n\
-	bne _080B0800\n\
-	mov r1, r9\n\
-	strh r6, [r1]\n\
-	b _080B08EA\n\
-	.align 2, 0\n\
-_080B07F4: .4byte gTasks\n\
-_080B07F8: .4byte gContestantTurnOrder\n\
-_080B07FC: .4byte 0x00007fff\n\
-_080B0800:\n\
-	adds r0, r5, 0x2\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0xD\n\
-	bls _080B08EA\n\
-	movs r5, 0\n\
-	mov r0, r8\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	b _080B08EA\n\
-_080B0818:\n\
-	cmp r7, 0x2\n\
-	beq _080B0820\n\
-	cmp r7, 0x4\n\
-	bne _080B0896\n\
-_080B0820:\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	cmp r6, 0x3\n\
-	bne _080B08EA\n\
-	movs r6, 0\n\
-	adds r0, r4, 0x5\n\
-	lsls r0, 4\n\
-	adds r0, 0x1\n\
-	ldr r2, _080B0854 @ =gUnknown_083CC5A4\n\
-	lsls r1, r4, 1\n\
-	adds r1, r2\n\
-	ldrh r3, [r1]\n\
-	movs r1, 0x3\n\
-	adds r2, r5, 0\n\
-	bl BlendPalette\n\
-	cmp r5, 0\n\
-	bne _080B0858\n\
-	mov r2, r8\n\
-	cmp r2, 0x2\n\
-	bne _080B0858\n\
-	mov r3, r9\n\
-	strh r6, [r3]\n\
-	b _080B08EA\n\
-	.align 2, 0\n\
-_080B0854: .4byte gUnknown_083CC5A4\n\
-_080B0858:\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0xE\n\
-	bne _080B08EA\n\
-	movs r5, 0\n\
-	mov r0, r8\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	cmp r7, 0x4\n\
-	bne _080B08EA\n\
-	cmp r0, 0x1\n\
-	bne _080B08EA\n\
-	adds r4, 0x9\n\
-	lsls r4, 4\n\
-	adds r0, r4, 0x2\n\
-	movs r1, 0x1\n\
-	movs r2, 0x4\n\
-	movs r3, 0\n\
-	bl BlendPalette\n\
-	adds r4, 0x5\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x1\n\
-	movs r2, 0x4\n\
-	movs r3, 0\n\
-	bl BlendPalette\n\
-	b _080B08EA\n\
-_080B0896:\n\
-	cmp r7, 0x3\n\
-	bne _080B08EA\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	cmp r6, 0xC\n\
-	bne _080B08EA\n\
-	movs r6, 0\n\
-	adds r0, r4, 0x5\n\
-	lsls r0, 4\n\
-	adds r4, r0, 0x1\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3\n\
-	adds r2, r5, 0\n\
-	movs r3, 0\n\
-	bl BlendPalette\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0x5\n\
-	bne _080B08EA\n\
-	ldr r0, _080B0930 @ =gPlttBufferFaded\n\
-	lsls r1, r4, 1\n\
-	adds r0, r1, r0\n\
-	ldrh r2, [r0]\n\
-	ldr r0, _080B0934 @ =gPlttBufferUnfaded\n\
-	adds r1, r0\n\
-	ldrh r0, [r1]\n\
-	ldr r1, _080B0938 @ =0x040000d4\n\
-	str r2, [r1]\n\
-	str r0, [r1, 0x4]\n\
-	movs r0, 0x80\n\
-	lsls r0, 24\n\
-	orrs r7, r0\n\
-	str r7, [r1, 0x8]\n\
-	ldr r0, [r1, 0x8]\n\
-	ldr r1, [sp, 0x8]\n\
-	ldr r2, [sp, 0xC]\n\
-	adds r0, r1, r2\n\
-	add r0, r10\n\
-	strh r6, [r0]\n\
-_080B08EA:\n\
-	ldr r3, [sp, 0x10]\n\
-	lsls r0, r3, 1\n\
-	ldr r1, [sp, 0xC]\n\
-	adds r0, r1\n\
-	add r0, r10\n\
-	mov r2, r8\n\
-	strh r2, [r0]\n\
-	ldr r3, [sp, 0x14]\n\
-	lsls r0, r3, 1\n\
-	adds r0, r1\n\
-	add r0, r10\n\
-	strh r5, [r0]\n\
-	ldr r1, [sp, 0x18]\n\
-	lsls r0, r1, 1\n\
-	ldr r2, [sp, 0xC]\n\
-	adds r0, r2\n\
-	add r0, r10\n\
-	strh r6, [r0]\n\
-	ldr r2, _080B093C @ =gTasks\n\
-_080B0910:\n\
-	ldr r0, [sp, 0x4]\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp, 0x4]\n\
-	cmp r0, 0x3\n\
-	bhi _080B0920\n\
-	b _080B0774\n\
-_080B0920:\n\
-	movs r4, 0\n\
-	ldr r3, [sp, 0x1C]\n\
-	ldr r1, [sp]\n\
-	adds r0, r3, r1\n\
-	lsls r1, r0, 3\n\
-	adds r2, 0x8\n\
-	adds r0, r1, r2\n\
-	b _080B0950\n\
-	.align 2, 0\n\
-_080B0930: .4byte gPlttBufferFaded\n\
-_080B0934: .4byte gPlttBufferUnfaded\n\
-_080B0938: .4byte 0x040000d4\n\
-_080B093C: .4byte gTasks\n\
-_080B0940:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x3\n\
-	bhi _080B0958\n\
-	lsls r0, r4, 3\n\
-	adds r0, r1\n\
-	adds r0, r2\n\
-_080B0950:\n\
-	movs r3, 0\n\
-	ldrsh r0, [r0, r3]\n\
-	cmp r0, 0\n\
-	beq _080B0940\n\
-_080B0958:\n\
-	cmp r4, 0x4\n\
-	bne _080B0980\n\
-	movs r4, 0\n\
-	ldr r3, _080B0990 @ =gSharedMem + 0x19338\n\
-	movs r5, 0x3\n\
-	negs r5, r5\n\
-_080B0964:\n\
-	lsls r1, r4, 2\n\
-	adds r1, r3\n\
-	ldrb r2, [r1, 0x2]\n\
-	adds r0, r5, 0\n\
-	ands r0, r2\n\
-	strb r0, [r1, 0x2]\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x3\n\
-	bls _080B0964\n\
-	ldr r0, [sp]\n\
-	bl DestroyTask\n\
-_080B0980:\n\
-	add sp, 0x20\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080B0990: .4byte gSharedMem + 0x19338\n\
-    .syntax divided\n");
-}
-#endif
+
 
 void unref_sub_80B0994(u8 a)
 {
@@ -3565,36 +3252,22 @@ void Task_AnimateAudience(u8 taskId)
 {
     if (gTasks[taskId].data[10]++ > 6)
     {
-#ifndef NONMATCHING
-        register struct Task *task asm("r0");
-        register u32 r4 asm("r4") = taskId * 4;
-#endif
 
         gTasks[taskId].data[10] = 0;
         if (gTasks[taskId].data[11] == 0)
         {
-            DmaCopy32Defvars(3, eUnzippedContestAudience_Gfx + 0x1000, (void *)(VRAM + 0x2000), 0x1000);
+            // Can just be DmaCopy32, but doesn't match that way
+            Dma3CopyLarge32_(eUnzippedContestAudience_Gfx + 0x1000, (void *)(VRAM + 0x2000), 0x1000);
         }
         else
         {
-            DmaCopy32Defvars(3, eUnzippedContestAudience_Gfx, (void *)(VRAM + 0x2000), 0x1000);
+            // Can just be DmaCopy32, but doesn't match that way
+            Dma3CopyLarge32_(eUnzippedContestAudience_Gfx, (void *)(VRAM + 0x2000), 0x1000);
             gTasks[taskId].data[12]++;
         }
 
-#ifdef NONMATCHING
         gTasks[taskId].data[11] ^= 1;
         if (gTasks[taskId].data[12] == 9)
-#else
-        // Why won't this match the normal way?
-        asm("add %0, %1, #0\n\t"
-            "add %0, %3\n\t"
-            "lsl %0, #3\n\t"
-            "add %0, %2\n\t"
-        : "=r"(task):"r"(r4),"r"(gTasks),"r"(taskId));
-
-        task->data[11] ^= 1;
-        if (task->data[12] == 9)
-#endif
         {
             sContest.animatingAudience = 0;
             DestroyTask(taskId);
