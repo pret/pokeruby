@@ -433,7 +433,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction
 {
     u8 i;
     u8 maxWidth;
-    s32 height;
+    u8 height;
 
     for (i = 0; i < 7; i++)
         gMenu.columnXCoords[i] = 0;
@@ -451,38 +451,22 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction
         gMenu.columnXCoords[i] = maxWidth;
 
     for (i = 1; i <= columnCount; i++)
-        gMenu.columnXCoords[i] += 1 + gMenu.columnXCoords[i - 1];
+        gMenu.columnXCoords[i] += gMenu.columnXCoords[i - 1] + 1;
 
     gMenu.columnXCoords[columnCount]--;
 
-    if (!((menuItemCount / 2) < columnCount || (menuItemCount % 2 != 0))
-     || columnCount == 1
-     || columnCount == menuItemCount)
+    if (((menuItemCount / 2) >= columnCount && (menuItemCount % 2) == 0)
+     || columnCount == 1 || columnCount == menuItemCount)
     {
-        height = 2 * (menuItemCount / columnCount) + 1;
+        height = top + (2 * (menuItemCount / columnCount) + 1);
     }
     else
     {
-        height = 2 * ((menuItemCount / columnCount) + 1) + 1;
+        height = top + (2 * ((menuItemCount / columnCount) + 1) + 1);
     }
 
-    {
-        // TODO: Make this code less hideous but still match the original asm.
-        u8 right;
-        u8 bottom;
-        u32 totalWidth;
-        register s32 val asm("r1");
-
-        val = (s8)top + height;
-        val = val << 24;
-        asm("" ::: "r3");
-        bottom = val >> 24;
-
-        totalWidth = (gMenu.columnXCoords[columnCount] + 1);
-        right = left + totalWidth;
-
-        Menu_DrawStdWindowFrame(left, top, right, bottom);
-    }
+    // on agbcc, moving the + 1 to the end seems to generate better code
+    Menu_DrawStdWindowFrame(left, top, 1 + left + gMenu.columnXCoords[columnCount], height);
 
     return maxWidth;
 }
