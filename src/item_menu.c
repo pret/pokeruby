@@ -1270,17 +1270,17 @@ static void sub_80A46FC(u16 taskId, int b, int c, int d)
         u8 r4;
         u8 r5;
         u8 *text;
-        register int var asm("r0");
+        u16 var;
 
         if (sub_80A42B0(i, d) == TRUE)
             break;
+
         r4 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + i;
         r5 = i * 2 + 2;
 
-        var = 14 + r5 * 32;
+        var = r5 * 32 + 14;
         gBGTilemapBuffers[2][var] = 0x59;
-        var += 32;
-        gBGTilemapBuffers[2][var] = 0x69;
+        gBGTilemapBuffers[2][var + 32] = 0x69;
 
         text = gStringVar1;
         text = sub_80A425C(taskId, text, i);
