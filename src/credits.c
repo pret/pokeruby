@@ -18,12 +18,6 @@
 #include "trig.h"
 #include "ewram.h"
 
-asm(".set REG_BASE, 0x4000000");
-asm(".set OFFSET_REG_BLDCNT,      0x50");
-asm(".set OFFSET_REG_BLDALPHA,    0x52");
-asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
-asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
-
 enum
 {
     PAGE_TITLE,
