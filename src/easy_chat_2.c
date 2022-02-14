@@ -1319,13 +1319,11 @@ void sub_80E97C0(u16 a, u16 b)
     u8 i;
     u8 r7 = 0;
 
-    asm("":::"r9");
-
     for (i = 0; i < gEasyChatStruct->unk84; i++)
     {
         u8 r6;
         u8 *r2 = gEasyChatStruct->unk9E6E;
-        u32 r1;
+        u16 r1;
 
         for (r6 = 0; r6 < gEasyChatStruct->unk83; r6++)
         {
