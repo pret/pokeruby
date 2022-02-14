@@ -21,9 +21,6 @@
 #include "trig.h"
 #include "scanline_effect.h"
 
-// define register constants for the inline asm
-asm(".include \"constants/gba_constants.inc\"\n");
-
 struct IntroCreditsSpriteMetadata
 {
     u8 animNum:4;
