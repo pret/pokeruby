@@ -3476,300 +3476,96 @@ static void LoadScreenSelectBarSubmenu(u16 screenBase)
     DmaClear16(3, (void *)(VRAM + screenBase * 0x800 + 0xC0), 0x440);
 }
 
-#ifdef NONMATCHING
 static void HighlightScreenSelectBarItem(u8 a, u16 b)
 {
     u8 i;   //r1
     u8 j;   //r3
-    u32 r6;
-    register u8 r7;
+    u16 r0;
+    u16 r6;
+    u8 r7;
 
     for (i = 0; i < 4; i++)
     {
         r7 = i * 5 + 1;
-        r6 = 0x4000;
 
         if (i == a)
             r6 = 0x2000;
+        else
+            r6 = 0x4000;
 
         for (j = 0; j < 5; j++)
         {
-            u32 r0 = b * 0x800 + (r7 + j) * 2;
-            u8 *ptr;
+            r0 = *(u16 *)(VRAM + b * 0x800 + (r7 + j) * 2);
+            r0 &= 0xFFF;
+            r0 |= r6;
+            *(u16 *)(VRAM + b * 0x800 + (r7 + j) * 2) = r0;
 
-            ptr = (void *)VRAM;
-            *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
-            ptr = (void *)VRAM + 0x40;
-            *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
+            r0 = *(u16 *)(VRAM + 0x40 + b * 0x800 + (r7 + j) * 2);
+            r0 &= 0xFFF;
+            r0 |= r6;
+            *(u16 *)(VRAM + 0x40 + b * 0x800 + (r7 + j) * 2) = r0;
         }
     }
     r6 = 0x4000;
     for (j = 0; j < 5; j++)
     {
-        u32 r0 = b * 0x800 + j * 2;
-        u8 *ptr;
+        r0 = *(u16 *)(VRAM + 0x32 + b * 0x800 + j * 2);
+        r0 &= 0xFFF;
+        r0 |= r6;
+        *(u16 *)(VRAM + 0x32 + b * 0x800 + j * 2) = r0;
 
-        ptr = (void *)VRAM + 0x32;
-        *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
-        ptr = (void *)VRAM + 0x72;
-        *(u16 *)(ptr + r0) = (*(u16 *)(ptr + r0) & 0xFFF) | r6;
+        r0 = *(u16 *)(VRAM + 0x72 + b * 0x800 + j * 2);
+        r0 &= 0xFFF;
+        r0 |= r6;
+        *(u16 *)(VRAM + 0x72 + b * 0x800 + j * 2) = r0;
     }
 }
-#else
-NAKED
-static void HighlightScreenSelectBarItem(u8 a, u16 b)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    mov r9, r1\n\
-    movs r1, 0\n\
-_0809059C:\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    movs r6, 0x80\n\
-    lsls r6, 7\n\
-    cmp r1, r10\n\
-    bne _080905B2\n\
-    movs r6, 0x80\n\
-    lsls r6, 6\n\
-_080905B2:\n\
-    movs r3, 0\n\
-    mov r0, r9\n\
-    lsls r0, 11\n\
-    mov r12, r0\n\
-    adds r1, 0x1\n\
-    mov r8, r1\n\
-    mov r5, r12\n\
-    ldr r4, _08090634 @ =0x00000fff\n\
-_080905C2:\n\
-    adds r0, r7, r3\n\
-    lsls r0, 1\n\
-    adds r0, r5, r0\n\
-    movs r2, 0xC0\n\
-    lsls r2, 19\n\
-    adds r1, r0, r2\n\
-    ldrh r2, [r1]\n\
-    ands r2, r4\n\
-    orrs r2, r6\n\
-    strh r2, [r1]\n\
-    ldr r1, _08090638 @ =0x06000040\n\
-    adds r0, r1\n\
-    ldrh r2, [r0]\n\
-    ands r2, r4\n\
-    orrs r2, r6\n\
-    strh r2, [r0]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x4\n\
-    bls _080905C2\n\
-    mov r2, r8\n\
-    lsls r0, r2, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0x3\n\
-    bls _0809059C\n\
-    movs r6, 0x80\n\
-    lsls r6, 7\n\
-    movs r3, 0\n\
-    mov r5, r12\n\
-    ldr r4, _08090634 @ =0x00000fff\n\
-_08090600:\n\
-    lsls r0, r3, 1\n\
-    adds r0, r5, r0\n\
-    ldr r2, _0809063C @ =0x06000032\n\
-    adds r1, r0, r2\n\
-    ldrh r2, [r1]\n\
-    ands r2, r4\n\
-    orrs r2, r6\n\
-    strh r2, [r1]\n\
-    ldr r1, _08090640 @ =0x06000072\n\
-    adds r0, r1\n\
-    ldrh r2, [r0]\n\
-    ands r2, r4\n\
-    orrs r2, r6\n\
-    strh r2, [r0]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x4\n\
-    bls _08090600\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08090634: .4byte 0x00000fff\n\
-_08090638: .4byte 0x06000040\n\
-_0809063C: .4byte 0x06000032\n\
-_08090640: .4byte 0x06000072\n\
-    .syntax divided\n");
-}
-#endif
 
 //Nope, can't get this one to match, either.
-#ifdef NONMATCHING
 static void sub_8090644(u8 a, u16 b)
 {
-    u8 i;
-    u8 j;
+    u8 i;   //r1
+    u8 j;   //r3
+    u16 r0;
+    u16 r6;
+    u8 r7;
 
     for (i = 0; i < 4; i++)
     {
-        u8 r8 = i * 5 + 1;
-        u32 r5;
+        r7 = i * 5 + 1;
 
-        if (i == a || i == 0)
-            r5 = 0x2000;
-        else if (a != 0)
-            r5 = 0x4000;
+        if (i == a || (i == 0))
+            r6 = 0x2000;
+        else
+            r6 = 0x4000;
 
         for (j = 0; j < 5; j++)
         {
-            u16 (*vramData)[0x400];
+            r0 = *(u16 *)(VRAM + b * 0x800 + (r7 + j) * 2);
+            r0 &= 0xFFF;
+            r0 |= r6;
+            *(u16 *)(VRAM + b * 0x800 + (r7 + j) * 2) = r0;
 
-            vramData = (u16 (*)[])VRAM;
-            vramData[b][r8 + j] = (vramData[b][r8 + j] & 0xFFF) | r5;
-            vramData = (u16 (*)[])(VRAM + 0x40);
-            vramData[b][r8 + j] = (vramData[b][r8 + j] & 0xFFF) | r5;
+            r0 = *(u16 *)(VRAM + 0x40 + b * 0x800 + (r7 + j) * 2);
+            r0 &= 0xFFF;
+            r0 |= r6;
+            *(u16 *)(VRAM + 0x40 + b * 0x800 + (r7 + j) * 2) = r0;
         }
     }
-
+    r6 = 0x4000;
     for (j = 0; j < 5; j++)
     {
-        u16 (*vramData)[0x400];
+        r0 = *(u16 *)(VRAM + 0x32 + b * 0x800 + j * 2);
+        r0 &= 0xFFF;
+        r0 |= r6;
+        *(u16 *)(VRAM + 0x32 + b * 0x800 + j * 2) = r0;
 
-        vramData = (u16 (*)[])(VRAM + 0x32);
-        vramData[b][j] = (vramData[b][j] & 0xFFF) | 0x4000;
-        vramData = (u16 (*)[])(VRAM + 0x72);
-        vramData[b][j] = (vramData[b][j] & 0xFFF) | 0x4000;
+        r0 = *(u16 *)(VRAM + 0x72 + b * 0x800 + j * 2);
+        r0 &= 0xFFF;
+        r0 |= r6;
+        *(u16 *)(VRAM + 0x72 + b * 0x800 + j * 2) = r0;
     }
 }
-#else
-NAKED
-static void sub_8090644(u8 a, u16 b)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    mov r9, r1\n\
-    movs r1, 0\n\
-_0809065C:\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    cmp r1, r10\n\
-    beq _08090670\n\
-    cmp r1, 0\n\
-    bne _08090676\n\
-_08090670:\n\
-    movs r5, 0x80\n\
-    lsls r5, 6\n\
-    b _0809067A\n\
-_08090676:\n\
-    movs r5, 0x80\n\
-    lsls r5, 7\n\
-_0809067A:\n\
-    movs r3, 0\n\
-    mov r0, r9\n\
-    lsls r7, r0, 11\n\
-    adds r1, 0x1\n\
-    mov r12, r1\n\
-    adds r6, r7, 0\n\
-    ldr r4, _080906FC @ =0x00000fff\n\
-_08090688:\n\
-    mov r1, r8\n\
-    adds r0, r1, r3\n\
-    lsls r0, 1\n\
-    adds r0, r6, r0\n\
-    movs r2, 0xC0\n\
-    lsls r2, 19\n\
-    adds r1, r0, r2\n\
-    ldrh r2, [r1]\n\
-    ands r2, r4\n\
-    orrs r2, r5\n\
-    strh r2, [r1]\n\
-    ldr r1, _08090700 @ =0x06000040\n\
-    adds r0, r1\n\
-    ldrh r2, [r0]\n\
-    ands r2, r4\n\
-    orrs r2, r5\n\
-    strh r2, [r0]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x4\n\
-    bls _08090688\n\
-    mov r2, r12\n\
-    lsls r0, r2, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0x3\n\
-    bls _0809065C\n\
-    movs r5, 0x80\n\
-    lsls r5, 7\n\
-    movs r3, 0\n\
-    adds r6, r7, 0\n\
-    ldr r4, _080906FC @ =0x00000fff\n\
-_080906C8:\n\
-    lsls r0, r3, 1\n\
-    adds r0, r6, r0\n\
-    ldr r2, _08090704 @ =0x06000032\n\
-    adds r1, r0, r2\n\
-    ldrh r2, [r1]\n\
-    ands r2, r4\n\
-    orrs r2, r5\n\
-    strh r2, [r1]\n\
-    ldr r1, _08090708 @ =0x06000072\n\
-    adds r0, r1\n\
-    ldrh r2, [r0]\n\
-    ands r2, r4\n\
-    orrs r2, r5\n\
-    strh r2, [r0]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0x4\n\
-    bls _080906C8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080906FC: .4byte 0x00000fff\n\
-_08090700: .4byte 0x06000040\n\
-_08090704: .4byte 0x06000032\n\
-_08090708: .4byte 0x06000072\n\
-    .syntax divided\n");
-}
-#endif
 
 u8 sub_809070C(u16 dexNum, u32 b, u32 c)
 {
