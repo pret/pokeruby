@@ -856,8 +856,7 @@ void sub_80C3158(const u8 *string, u8 spriteId)
 
     for (i = 0; i < 4; i++)
     {
-        //DmaClear32 should be used instead
-        Dma3FillLarge32_(0, OBJ_VRAM0 + sp00[i] * 32, 0x400);
+        DmaClear32(3, OBJ_VRAM0 + sp00[i] * 32, 0x400);
     }
     
     width = Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7278, string);
@@ -1012,25 +1011,23 @@ void sub_80C3588(struct Sprite *sprite)
 void sub_80C35FC(struct Sprite *sprite)
 {
     eContestLink80C2020Struct2018000.unk_04 = 2;
-    if ((u16)sprite->data[5] != 0xFFFF)
-    {
-        if (sprite->data[5]-- == 0)
-            sub_80C3520(sprite->data[6]);
-    }
+    if ((u16)sprite->data[5] == 0xFFFF)
+        return;
+
+    if (sprite->data[5]-- == 0)
+        sub_80C3520(sprite->data[6]);
 }
 
 void sub_80C3630(struct Sprite *sprite)
 {
     int i;
-    s16 var0;
 
-    var0 = (u16)sprite->data[7] + (u16)sprite->data[6];
-    sprite->x -= var0 >> 8;
-    sprite->data[7] = (sprite->data[6] + sprite->data[7]) & 0xFF;
+    sprite->data[7] += sprite->data[6];
+    sprite->x -= sprite->data[7] >> 8;
+    sprite->data[7] &= 0xFF;
     for (i = 0; i < 3; i++)
     {
-        struct Sprite *sprite2 = &gSprites[sprite->data[i]];
-        sprite2->x = sprite->x + sprite->x2 + (i + 1) * 64;
+        gSprites[sprite->data[i]].x = sprite->x + sprite->x2 + 64 * (i + 1);
     }
 
     if (sprite->x + sprite->x2 < -224)
@@ -1452,19 +1449,18 @@ void sub_80C37E4(void)
 }
 #endif
 
-// fakematching?
 u8 sub_80C3990(u8 monIndex, u8 arg1)
 {
     u32 var0;
     u32 var1;
 
     var0 = gContestMonRound1Points[monIndex] << 16;
-    var1 = var0 / 0x3F;
-    if (var1 & 0xFFFF)
+    var1 = var0 / 63;
+    if ((var1 & 0xFFFF) > 0)
         var1 += 0x10000;
 
     var1 >>= 16;
-    if (var1 == 0 && var0)
+    if (var1 == 0 && var0 != 0)
         var1 = 1;
 
     if (arg1 && var1 > 10)
@@ -1477,23 +1473,18 @@ s8 sub_80C39E4(u8 arg0, u8 arg1)
 {
     u32 r4;
     u32 r2;
-    s16 val;
     s8 ret;
 
-    val = gContestMonRound2Points[arg0];
-    if (val < 0)
-        r4 = -val << 16;
-    else
-        r4 =  val << 16;
+    r4 = abs(gContestMonRound2Points[arg0]) << 16;
     r2 = r4 / 80;
-    if (r2 & 0xFFFF)
+    if ((r2 & 0xFFFF) > 0)
         r2 += 0x10000;
 
     r2 >>= 16;
     if (r2 == 0 && r4 != 0)
         r2 = 1;
 
-    if (arg1 != 0 && r2 > 10)
+    if (arg1 && r2 > 10)
         r2 = 10;
 
     if (gContestMonRound2Points[arg0] < 0)
@@ -1515,13 +1506,14 @@ void sub_80C3A5C(u8 taskId)
     }
     else if (gTasks[taskId].data[10] == 1)
     {
-        if (--gTasks[taskId].data[11] == -1)
+        if (gTasks[taskId].data[11]-- == 0)
         {
-            firstTileNum = gTasks[taskId].data[0] * 2 + 0x5043;
-            *(vu16 *)((VRAM + 0xE142) + gTasks[taskId].data[1] * 192) = firstTileNum + 0x00;
-            *(vu16 *)((VRAM + 0xE144) + gTasks[taskId].data[1] * 192) = firstTileNum + 0x01;
-            *(vu16 *)((VRAM + 0xE182) + gTasks[taskId].data[1] * 192) = firstTileNum + 0x10;
-            *(vu16 *)((VRAM + 0xE184) + gTasks[taskId].data[1] * 192) = firstTileNum + 0x11;
+            firstTileNum = 0x5043 + gTasks[taskId].data[0] * 2;
+            // might be vu16 to match, but u16 may work
+            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1)*2) = firstTileNum;
+            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 + 1)*2) = firstTileNum + 0x01;
+            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 +0x20)*2) = firstTileNum + 0x10;
+            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 + 0x21)*2) = firstTileNum + 0x11;
             eContestLink80C2020Struct2018000.unk_05++;
             DestroyTask(taskId);
             PlaySE(SE_CONTEST_PLACE);
@@ -1529,20 +1521,24 @@ void sub_80C3A5C(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80C3B30(u8 taskId)
 {
-    int i, j, k;
+    int i;
+    u16 temp;
+    int j, k;
 
-    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
-        ;
+    for (i = 0; i < 4; i++) {
+        if (gContestFinalStandings[i] == 0)
+            break;
+    }
 
-    for (j = 0; j < 3; j++)
-    {
-        for (k = 0; k < 30; k++)
-        {
-            ((u16 *)((VRAM + 0xE100) + 2 * (96 * i + 32 * j)))[k] &= 0x0FFF;
-            ((u16 *)((VRAM + 0xE100) + 2 * (96 * i + 32 * j)))[k] |= 0x9000;
+    for (j = 0; j < 3; j++) {
+        for (k = 0; k < 30; k++) {
+            // must be vu16 to match, but u16 may work
+            temp = *(vu16 *)((BG_VRAM + 0x800 * 28) + (i * 0x60 + 0x20*4 + k + 0x20 * j) * 2);
+            temp &= 0x0FFF;
+            temp |= 0x9000;
+            *(vu16 *)((BG_VRAM + 0x800 * 28) + (i * 0x60 + 0x20*4 + k + 0x20 * j) * 2) = temp;
         }
     }
     gTasks[taskId].data[10] = i;
@@ -1550,100 +1546,10 @@ void sub_80C3B30(u8 taskId)
     gTasks[taskId].func = sub_80C3BD8;
     eContestLink80C2020Struct2018000.unk_03 = taskId;
 }
-#else
-NAKED
-void sub_80C3B30(u8 taskId)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r12, r0\n"
-                "\tmovs r5, 0\n"
-                "\tldr r1, _080C3BC0 @ =gContestFinalStandings\n"
-                "\tldrb r0, [r1]\n"
-                "\tldr r2, _080C3BC4 @ =gTasks\n"
-                "\tmov r10, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080C3B5C\n"
-                "_080C3B4E:\n"
-                "\tadds r5, 0x1\n"
-                "\tcmp r5, 0x3\n"
-                "\tbgt _080C3B5C\n"
-                "\tadds r0, r5, r1\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080C3B4E\n"
-                "_080C3B5C:\n"
-                "\tmovs r1, 0\n"
-                "\tlsls r0, r5, 1\n"
-                "\tmov r2, r12\n"
-                "\tlsls r2, 2\n"
-                "\tmov r9, r2\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 5\n"
-                "\tmov r8, r0\n"
-                "\tldr r7, _080C3BC8 @ =0x00000fff\n"
-                "\tmovs r0, 0x90\n"
-                "\tlsls r0, 8\n"
-                "\tadds r6, r0, 0\n"
-                "_080C3B74:\n"
-                "\tlsls r0, r1, 5\n"
-                "\tadds r4, r1, 0x1\n"
-                "\tadd r0, r8\n"
-                "\t@ the next two instructions are swapped\n"
-                "\tmovs r3, 0x1D\n"
-                "\tlsls r0, 1\n"
-                "\tldr r1, _080C3BCC @ =0x0600e100\n"
-                "\tadds r2, r0, r1\n"
-                "_080C3B82:\n"
-                "\tldrh r1, [r2]\n"
-                "\tadds r0, r7, 0\n"
-                "\tands r0, r1\n"
-                "\torrs r0, r6\n"
-                "\tstrh r0, [r2]\n"
-                "\tadds r2, 0x2\n"
-                "\tsubs r3, 0x1\n"
-                "\tcmp r3, 0\n"
-                "\tbge _080C3B82\n"
-                "\tadds r1, r4, 0\n"
-                "\tcmp r1, 0x2\n"
-                "\tble _080C3B74\n"
-                "\tmov r0, r9\n"
-                "\tadd r0, r12\n"
-                "\tlsls r0, 3\n"
-                "\tadd r0, r10\n"
-                "\tstrh r5, [r0, 0x1C]\n"
-                "\tmovs r1, 0x1\n"
-                "\tstrh r1, [r0, 0x20]\n"
-                "\tldr r2, _080C3BD0 @ =sub_80C3BD8\n"
-                "\tstr r2, [r0]\n"
-                "\tmov r1, r12\n"
-                "\tldr r0, _080C3BD4 @ =gSharedMem + 0x18000\n"
-                "\tstrb r1, [r0, 0x3]\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080C3BC0: .4byte gContestFinalStandings\n"
-                "_080C3BC4: .4byte gTasks\n"
-                "_080C3BC8: .4byte 0x00000fff\n"
-                "_080C3BCC: .4byte 0x0600e100\n"
-                "_080C3BD0: .4byte sub_80C3BD8\n"
-                "_080C3BD4: .4byte gSharedMem + 0x18000");
-}
-#endif //NONMATCHING
 
 void sub_80C3BD8(u8 taskId)
 {
-    if (++gTasks[taskId].data[11] == 1)
+    if (gTasks[taskId].data[11]++ == 0)
     {
         gTasks[taskId].data[11] = 0;
         BlendPalette(0x91, 1, gTasks[taskId].data[12], RGB(13, 28, 27));
@@ -1664,34 +1570,34 @@ void sub_80C3C44(struct Sprite *sprite)
 {
     if (sprite->data[0] < 10)
     {
-        if (++sprite->data[0] == 10)
+        sprite->data[0]++;
+        if (sprite->data[0] == 10)
         {
             PlayCry1(sprite->data[1], 0);
             sprite->data[1] = 0;
         }
+        return;
     }
-    else
-    {
-        s16 delta = (u16)sprite->data[1] + 0x600;
-        sprite->x -= delta >> 8;
-        sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
-        if (sprite->x < 120)
-            sprite->x = 120;
 
-        if (sprite->x == 120)
-        {
-            sprite->callback = SpriteCallbackDummy;
-            sprite->data[1] = 0;
-            eContestLink80C2020Struct2018000.unk_06 = 1;
-        }
+    sprite->data[1] += 0x600;
+    sprite->x -= sprite->data[1] >> 8;
+    sprite->data[1] &= 0xFF;
+    if (sprite->x < 120)
+        sprite->x = 120;
+
+    if (sprite->x == 120)
+    {
+        sprite->callback = SpriteCallbackDummy;
+        sprite->data[1] = 0;
+        eContestLink80C2020Struct2018000.unk_06 = 1;
     }
 }
 
 void sub_80C3CB8(struct Sprite *sprite)
 {
-    s16 delta = (u16)sprite->data[1] + 0x600;
-    sprite->x -= delta >> 8;
-    sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+    sprite->data[1] += 0x600;
+    sprite->x -= sprite->data[1] >> 8;
+    sprite->data[1] &= 0xFF;
     if (sprite->x < -32)
     {
         sprite->callback = SpriteCallbackDummy;
@@ -1702,7 +1608,7 @@ void sub_80C3CB8(struct Sprite *sprite)
 
 void sub_80C3D04(u8 taskId)
 {
-    if (++gTasks[taskId].data[0] == 5)
+    if (gTasks[taskId].data[0]++ == 4)
     {
         gTasks[taskId].data[0] = 0;
         if (eContestLink80C2020Struct2018000.unk_07 < 40)
@@ -1722,14 +1628,11 @@ void sub_80C3D04(u8 taskId)
 
 void sub_80C3DF0(struct Sprite *sprite)
 {
-    register s16 var0 asm("r1");
-
     sprite->data[3] += sprite->data[0];
     sprite->x2 = Sin(sprite->data[3] >> 8, sprite->data[1]);
-    var0 = sprite->data[4] + sprite->data[2];
-    sprite->x += var0 >> 8;
-    var0 = var0 & 0xFF;
-    sprite->data[4] = var0;
+    sprite->data[4] += sprite->data[2];
+    sprite->x += sprite->data[4] >> 8;
+    sprite->data[4] &= 0xFF;
     sprite->y++;
     if (eContestLink80C2020Struct2018000.unk_09)
         sprite->invisible = TRUE;
