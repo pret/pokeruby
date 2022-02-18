@@ -31,8 +31,6 @@
 #include "tv.h"
 #include "util.h"
 
-#define ABS(x) ((x) < 0 ? -(x) : (x))
-
 #define GET_CONTEST_WINNER(var) {           \
     for ((var) = 0; (var) < 4; (var)++)     \
     {                                       \
@@ -1694,7 +1692,7 @@ void sub_80C3F00(void)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
 
-        r4 = 1000 * ABS(gContestMonRound2Points[i]) / abs(r2);
+        r4 = 1000 * abs(gContestMonRound2Points[i]) / abs(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_04 = r4 / 10;

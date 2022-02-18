@@ -430,7 +430,6 @@ extern const u8 gHealthboxElementsGfxTable[][32];
 
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
-#define ABS(n) ((n) >= 0 ? (n) : -(n))
 // Used for computing copy destination addresses
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
 
@@ -1924,7 +1923,7 @@ s32 sub_8045C78(u8 a, u8 unused1, u8 c, u8 unused2)
         if (r5 == 0)
             r5 = 1;
         r8 = eBattleBars[a].receivedValue;
-        r5 = ABS(r8 / r5);
+        r5 = abs(r8 / r5);
         r6 = sub_8045F58(eBattleBars[a].maxValue, eBattleBars[a].oldValue, r8, &eBattleBars[a].currValue, 8, r5);
     }
     if (c == 1 || (c == 0 && (!gBattleSpriteInfo[a].hpNumbersNoBars)))
@@ -2161,7 +2160,7 @@ static u8 GetScaledExpFraction(int a, int b, int c, u8 d)
     r4 = a * r7 / c;
     r0 = r5 * r7 / c;
     result = r4 - r0;
-    return ABS(result);
+    return abs(result);
 }
 
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
