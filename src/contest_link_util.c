@@ -258,7 +258,7 @@ void sub_80C2144(void)
             r6 = 0x60b2;
             if (j < r7)
                 r6 = 0x60b4;
-            if (j < ABS(r4))
+            if (j < abs(r4))
             {
                 r3 = 0x60a4;
                 if (r4 < 0)
@@ -1510,10 +1510,10 @@ void sub_80C3A5C(u8 taskId)
         {
             firstTileNum = 0x5043 + gTasks[taskId].data[0] * 2;
             // might be vu16 to match, but u16 may work
-            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1)*2) = firstTileNum;
-            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 + 1)*2) = firstTileNum + 0x01;
-            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 +0x20)*2) = firstTileNum + 0x10;
-            *(vu16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 + 0x21)*2) = firstTileNum + 0x11;
+            *(u16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1)*2) = firstTileNum;
+            *(u16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 + 1)*2) = firstTileNum + 0x01;
+            *(u16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 +0x20)*2) = firstTileNum + 0x10;
+            *(u16 *)((BG_VRAM + 0x800 * 28) + (gTasks[taskId].data[1]*0x60 + 0x20*5+1 + 0x21)*2) = firstTileNum + 0x11;
             eContestLink80C2020Struct2018000.unk_05++;
             DestroyTask(taskId);
             PlaySE(SE_CONTEST_PLACE);
@@ -1669,7 +1669,6 @@ void sub_80C3F00(void)
     s16 r2 = gContestMonTotalPoints[0];
     s32 r4;
     u32 r5;
-    s8 r0;
 
     for (i = 1; i < 4; i++)
     {
@@ -1690,12 +1689,12 @@ void sub_80C3F00(void)
 
     for (i = 0; i < 4; i++)
     {
-        r4 = 1000 * gContestMonRound1Points[i] / ABS(r2);
+        r4 = 1000 * gContestMonRound1Points[i] / abs(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_00 = r4 / 10;
 
-        r4 = 1000 * ABS(gContestMonRound2Points[i]) / ABS(r2);
+        r4 = 1000 * ABS(gContestMonRound2Points[i]) / abs(r2);
         if ((r4 % 10) >= 5)
             r4 += 10;
         eContestLink80C2020Struct2018018[i].unk_04 = r4 / 10;
@@ -1714,8 +1713,7 @@ void sub_80C3F00(void)
         eContestLink80C2020Struct2018018[i].unk_0c = r5 / 256;
 
         eContestLink80C2020Struct2018018[i].unk_11 = sub_80C3990(i, 1);
-        r0 = sub_80C39E4(i, 1);
-        eContestLink80C2020Struct2018018[i].unk_12 = ABS(r0);
+        eContestLink80C2020Struct2018018[i].unk_12 = abs(sub_80C39E4(i, 1));
 
         if (gContestFinalStandings[i])
         {
@@ -1734,10 +1732,11 @@ void sub_80C3F00(void)
     }
 }
 
-#ifdef NONMATCHING
+
 void sub_80C40D4(u8 arg0, u8 arg1)
 {
     int i;
+    u32 var0;
     u8 taskId;
     u8 sp8, spC;
 
@@ -1745,20 +1744,18 @@ void sub_80C40D4(u8 arg0, u8 arg1)
     spC = 0;
     if (!arg0)
     {
-        u32 var0;
         for (i = 0; i < 4; i++)
         {
             u8 var1 = eContestLink80C2020Struct2018018[i].unk_11;
             if (arg1 < var1)
             {
-                int x = var1 + 19;
-                x += 32 * (i * 3 + 5);
-                x -= arg1;
-                x--;
-                *(vu16 *)((VRAM + 0xC000) + 2 * x) = 0x60B3;
+                *(u16*)(BG_VRAM + 0x800 * 24 +
+					(0x20*(5+i*3) 
+					+ 19 + var1 - arg1-1)*2) = 0x60b3;
+            
                 taskId = CreateTask(sub_80C42C0, 10);
                 var0 = ((eContestLink80C2020Struct2018018[i].unk_08 << 16) / eContestLink80C2020Struct2018018[i].unk_11) * (arg1 + 1);
-                if ((var0 % 0x10000) >= 0x8000)
+                if ((var0 & 0xFFFF) >= 0x8000)
                     var0 += 0x10000;
 
                 gTasks[taskId].data[0] = i;
@@ -1770,22 +1767,23 @@ void sub_80C40D4(u8 arg0, u8 arg1)
     }
     else
     {
-        u32 var0;
         for (i = 0; i < 4; i++)
         {
-            int tile;
+            u16 tile;
             s8 var1 = eContestLink80C2020Struct2018018[i].unk_12;
-            tile = eContestLink80C2020Struct2018018[i].unk_10 ? 0x60A5 : 0x60A3;
+            if (eContestLink80C2020Struct2018018[i].unk_10)
+                tile = 0x60A5;
+            else
+                tile = 0x60A3;
+
             if (arg1 < var1)
             {
-                int x = var1 + 19;
-                x += 32 * (i * 3 + 6);
-                x -= arg1;
-                x--;
-                *(vu16 *)((VRAM + 0xC000) + 2 * x) = tile;
+                *(u16*)(BG_VRAM + 0x800 * 24 +
+					(0x20*(6+i*3) 
+					+ 19 + var1 - arg1-1)*2) = tile;
                 taskId = CreateTask(sub_80C42C0, 10);
                 var0 = ((eContestLink80C2020Struct2018018[i].unk_0c << 16) / eContestLink80C2020Struct2018018[i].unk_12) * (arg1 + 1);
-                if ((var0 % 0x10000) >= 0x8000)
+                if ((var0 & 0xFFFF) >= 0x8000)
                     var0 += 0x10000;
 
                 gTasks[taskId].data[0] = i;
@@ -1815,253 +1813,7 @@ void sub_80C40D4(u8 arg0, u8 arg1)
     if (sp8)
         PlaySE(SE_PIN);
 }
-#else
-// Assorted register differences
-NAKED
-void sub_80C40D4(u8 arg0, u8 arg1)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x8\n"
-                "\tlsls r0, 24\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r7, r1, 24\n"
-                "\tmovs r1, 0\n"
-                "\tmov r10, r1\n"
-                "\tmovs r2, 0\n"
-                "\tstr r2, [sp]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080C4198\n"
-                "\tmov r8, r2\n"
-                "\tldr r0, _080C417C @ =gSharedMem + 0x18018\n"
-                "\tsubs r1, 0x18\n"
-                "\tadds r1, r0\n"
-                "\tmov r9, r1\n"
-                "\tadds r4, r0, 0\n"
-                "\tadds r4, 0x8\n"
-                "\tmovs r6, 0xA0\n"
-                "_080C4102:\n"
-                "\tldrb r0, [r4, 0x9]\n"
-                "\tcmp r7, r0\n"
-                "\tbcs _080C416A\n"
-                "\tadds r0, 0x13\n"
-                "\tadds r0, r6, r0\n"
-                "\tsubs r0, r7\n"
-                "\tlsls r0, 1\n"
-                "\tldr r2, _080C4180 @ =0x0600bffe\n"
-                "\tadds r0, r2\n"
-                "\tldr r2, _080C4184 @ =0x000060b3\n"
-                "\tadds r1, r2, 0\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080C4188 @ =sub_80C42C0\n"
-                "\tmovs r1, 0xA\n"
-                "\tbl CreateTask\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tldr r0, [r4]\n"
-                "\tlsls r0, 16\n"
-                "\tldrb r1, [r4, 0x9]\n"
-                "\tbl __udivsi3\n"
-                "\tadds r1, r7, 0x1\n"
-                "\tadds r3, r0, 0\n"
-                "\tmuls r3, r1\n"
-                "\tldr r0, _080C418C @ =0x0000ffff\n"
-                "\tands r0, r3\n"
-                "\tldr r1, _080C4190 @ =0x00007fff\n"
-                "\tcmp r0, r1\n"
-                "\tbls _080C4146\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 9\n"
-                "\tadds r3, r0\n"
-                "_080C4146:\n"
-                "\tldr r1, _080C4194 @ =gTasks\n"
-                "\tlsls r0, r5, 2\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 3\n"
-                "\tadds r0, r1\n"
-                "\tmov r1, r8\n"
-                "\tstrh r1, [r0, 0x8]\n"
-                "\tlsrs r1, r3, 16\n"
-                "\tstrh r1, [r0, 0xA]\n"
-                "\tmov r2, r9\n"
-                "\tldrb r0, [r2, 0x14]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r2, 0x14]\n"
-                "\tmov r0, r10\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r10, r0\n"
-                "_080C416A:\n"
-                "\tadds r4, 0x14\n"
-                "\tadds r6, 0x60\n"
-                "\tmovs r0, 0x1\n"
-                "\tadd r8, r0\n"
-                "\tmov r1, r8\n"
-                "\tcmp r1, 0x3\n"
-                "\tble _080C4102\n"
-                "\tb _080C4292\n"
-                "\t.align 2, 0\n"
-                "_080C417C: .4byte gSharedMem + 0x18018\n"
-                "_080C4180: .4byte 0x0600bffe\n"
-                "_080C4184: .4byte 0x000060b3\n"
-                "_080C4188: .4byte sub_80C42C0\n"
-                "_080C418C: .4byte 0x0000ffff\n"
-                "_080C4190: .4byte 0x00007fff\n"
-                "_080C4194: .4byte gTasks\n"
-                "_080C4198:\n"
-                "\tmovs r2, 0\n"
-                "\tmov r8, r2\n"
-                "\tldr r0, _080C4220 @ =gSharedMem + 0x18018\n"
-                "\tmov r12, r0\n"
-                "\tmov r9, r2\n"
-                "\tmovs r1, 0xC0\n"
-                "\tstr r1, [sp, 0x4]\n"
-                "_080C41A6:\n"
-                "\tmov r6, r9\n"
-                "\tadd r6, r12\n"
-                "\tldrb r1, [r6, 0x12]\n"
-                "\tldrb r0, [r6, 0x10]\n"
-                "\tldr r2, _080C4224 @ =0x000060a3\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080C41B6\n"
-                "\tadds r2, 0x2\n"
-                "_080C41B6:\n"
-                "\tlsls r0, r1, 24\n"
-                "\tasrs r0, 24\n"
-                "\tcmp r7, r0\n"
-                "\tbge _080C427E\n"
-                "\tadds r0, 0x13\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tadds r0, r1, r0\n"
-                "\tsubs r0, r7\n"
-                "\tlsls r0, 1\n"
-                "\tldr r1, _080C4228 @ =0x0600bffe\n"
-                "\tadds r0, r1\n"
-                "\tstrh r2, [r0]\n"
-                "\tldr r0, _080C422C @ =sub_80C42C0\n"
-                "\tmovs r1, 0xA\n"
-                "\tbl CreateTask\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tldr r0, [r6, 0xC]\n"
-                "\tlsls r0, 16\n"
-                "\tldrb r1, [r6, 0x12]\n"
-                "\tbl __udivsi3\n"
-                "\tadds r1, r7, 0x1\n"
-                "\tadds r3, r0, 0\n"
-                "\tmuls r3, r1\n"
-                "\tldr r0, _080C4230 @ =0x0000ffff\n"
-                "\tands r0, r3\n"
-                "\tldr r1, _080C4234 @ =0x00007fff\n"
-                "\tcmp r0, r1\n"
-                "\tbls _080C41FA\n"
-                "\tmovs r2, 0x80\n"
-                "\tlsls r2, 9\n"
-                "\tadds r3, r2\n"
-                "_080C41FA:\n"
-                "\tldr r1, _080C4238 @ =gTasks\n"
-                "\tlsls r2, r5, 2\n"
-                "\tadds r0, r2, r5\n"
-                "\tlsls r0, 3\n"
-                "\tadds r4, r0, r1\n"
-                "\tmov r0, r8\n"
-                "\tstrh r0, [r4, 0x8]\n"
-                "\tldrb r0, [r6, 0x10]\n"
-                "\tadds r6, r1, 0\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080C423C\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrh r0, [r4, 0xC]\n"
-                "\tldr r0, [sp]\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstr r0, [sp]\n"
-                "\tb _080C4246\n"
-                "\t.align 2, 0\n"
-                "_080C4220: .4byte gSharedMem + 0x18018\n"
-                "_080C4224: .4byte 0x000060a3\n"
-                "_080C4228: .4byte 0x0600bffe\n"
-                "_080C422C: .4byte sub_80C42C0\n"
-                "_080C4230: .4byte 0x0000ffff\n"
-                "_080C4234: .4byte 0x00007fff\n"
-                "_080C4238: .4byte gTasks\n"
-                "_080C423C:\n"
-                "\tmov r0, r10\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r10, r0\n"
-                "_080C4246:\n"
-                "\tldr r0, _080C4264 @ =gSharedMem + 0x18018\n"
-                "\tmov r1, r9\n"
-                "\tadds r4, r1, r0\n"
-                "\tldrb r1, [r4, 0x10]\n"
-                "\tmov r12, r0\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _080C4268\n"
-                "\tadds r0, r2, r5\n"
-                "\tlsls r0, 3\n"
-                "\tadds r0, r6\n"
-                "\tlsrs r2, r3, 16\n"
-                "\tldr r1, [r4, 0x8]\n"
-                "\tsubs r1, r2\n"
-                "\tb _080C4274\n"
-                "\t.align 2, 0\n"
-                "_080C4264: .4byte gSharedMem + 0x18018\n"
-                "_080C4268:\n"
-                "\tadds r0, r2, r5\n"
-                "\tlsls r0, 3\n"
-                "\tadds r0, r6\n"
-                "\tlsrs r2, r3, 16\n"
-                "\tldr r1, [r4, 0x8]\n"
-                "\tadds r1, r2\n"
-                "_080C4274:\n"
-                "\tstrh r1, [r0, 0xA]\n"
-                "\tldr r1, _080C42BC @ =gSharedMem + 0x18000\n"
-                "\tldrb r0, [r1, 0x14]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r1, 0x14]\n"
-                "_080C427E:\n"
-                "\tmovs r2, 0x14\n"
-                "\tadd r9, r2\n"
-                "\tldr r0, [sp, 0x4]\n"
-                "\tadds r0, 0x60\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tmovs r1, 0x1\n"
-                "\tadd r8, r1\n"
-                "\tmov r2, r8\n"
-                "\tcmp r2, 0x3\n"
-                "\tble _080C41A6\n"
-                "_080C4292:\n"
-                "\tldr r0, [sp]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080C429E\n"
-                "\tmovs r0, 0x16\n"
-                "\tbl PlaySE\n"
-                "_080C429E:\n"
-                "\tmov r1, r10\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _080C42AA\n"
-                "\tmovs r0, 0x15\n"
-                "\tbl PlaySE\n"
-                "_080C42AA:\n"
-                "\tadd sp, 0x8\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080C42BC: .4byte gSharedMem + 0x18000");
-}
-#endif //NONMATCHING
+
 
 void sub_80C42C0(u8 taskId /*r12*/)
 {
