@@ -1857,9 +1857,9 @@ void sub_8114DB4(int a, u8 b)
     u8 *r2 = sEvoInfo.unk40C4[a][b >> 1];
 
     if (b & 1)
-        r2[0] |= 0xF0;
+        *r2 |= 0xF0;
     else
-        r2[0] |= 0x0F;
+        *r2 |= 0x0F;
 }
 
 void sub_8114DF0(int a, u8 b)
@@ -1869,13 +1869,13 @@ void sub_8114DF0(int a, u8 b)
 
     if (b & 1)
     {
-        if ((r1[0] & 0xF0) == 0)
-            r2[0] &= 0x0F;
+        if ((*r1 & 0xF0) == 0)
+            *r2 &= 0x0F;
     }
     else
     {
-        if ((r1[0] & 0x0F) == 0)
-            r2[0] &= 0xF0;
+        if ((*r1 & 0x0F) == 0)
+            *r2 &= 0xF0;
     }
 }
 
