@@ -7626,32 +7626,34 @@ void atk9E_metronome(void)
      && gBattleMons[gBattlerAttacker].moves[3] != MOVE_NONE
     )
     {
-        if (*r3 == MOVE_NONE)
-            *r3 = gBattleMons[gBattlerAttacker].moves[2];
-        gCurrentMove = *r3;
-        if (gBattleMons[gBattlerAttacker].moves[2] < gBattleMons[gBattlerAttacker].moves[3])
+        while (1)  // Why bother if you return at the end anyway?
         {
-            if (*r3 == gBattleMons[gBattlerAttacker].moves[3])
+            if (*r3 == MOVE_NONE)
                 *r3 = gBattleMons[gBattlerAttacker].moves[2];
+            gCurrentMove = *r3;
+            if (gBattleMons[gBattlerAttacker].moves[2] < gBattleMons[gBattlerAttacker].moves[3])
+            {
+                if (*r3 == gBattleMons[gBattlerAttacker].moves[3])
+                    *r3 = gBattleMons[gBattlerAttacker].moves[2];
+                else
+                    (*r3)++;
+            }
             else
-                (*r3)++;
+            {
+                if (*r3 == NUM_MOVES - 1)
+                    *r3 = 1;
+                else if (*r3 == gBattleMons[gBattlerAttacker].moves[3])
+                    *r3 = gBattleMons[gBattlerAttacker].moves[2];
+                else
+                    (*r3)++;
+            }
+            gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+            gBattlescriptCurrInstr =
+                gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+            gHitMarker |= HITMARKER_NO_PPDEDUCT;
+            gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
+            return;
         }
-        else
-        {
-            asm("":::"r4"); // Force correct register use
-            if (*r3 == NUM_MOVES - 1)
-                *r3 = 1;
-            else if (*r3 == gBattleMons[gBattlerAttacker].moves[3])
-                *r3 = gBattleMons[gBattlerAttacker].moves[2];
-            else
-                (*r3)++;
-        }
-        gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        asm("":::"r5"); // Force correct register use
-        gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
-        gHitMarker |= HITMARKER_NO_PPDEDUCT;
-        gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
-        return;
     }
 #endif //DEBUG
     while (1)
@@ -7663,14 +7665,12 @@ void atk9E_metronome(void)
             continue;
         for (i = 0; i < MAX_MON_MOVES; ++i); // redundant
         i = -1;
-        while (1)
+        do
         {
             ++i;
             if (sMovesForbiddenToCopy[i] == gCurrentMove)
                 break;
-            if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
-                break;
-        }
+        } while (sMovesForbiddenToCopy[i] != METRONOME_FORBIDDEN_END);
         if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
         {
             gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
