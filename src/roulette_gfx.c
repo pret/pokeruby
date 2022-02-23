@@ -27,8 +27,6 @@
 #include "trig.h"
 #include "scanline_effect.h"
 
-asm(".include \"constants/gba_constants.inc\"");
-
 s16 sub_811866C(struct Sprite *);
 u8 sub_81186B8(struct Sprite *);
 s16 sub_81186E8(struct Sprite *);

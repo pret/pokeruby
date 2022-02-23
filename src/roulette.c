@@ -27,8 +27,6 @@
 #include "trig.h"
 #include "scanline_effect.h"
 
-asm(".include \"constants/gba_constants.inc\"");
-
 #if DEBUG
 void *gUnknown_Debug_03005FB8;
 #endif

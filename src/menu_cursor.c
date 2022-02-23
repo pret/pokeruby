@@ -123,7 +123,7 @@ void DestroyMenuCursor(void)
         gUnknown_0203A3D1 = 0x40;
         if (!gUnknown_0203A3D3)
             REG_DISPCNT &= ~DISPCNT_OBJWIN_ON;
-        *(u8 *)(REG_BASE + REG_OFFSET_WINOUT + 1) = gUnknown_0203A3D4;
+        *(vu8 *)(REG_BASE + REG_OFFSET_WINOUT + 1) = gUnknown_0203A3D4;
     }
 
     return;
