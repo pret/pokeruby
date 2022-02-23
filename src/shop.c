@@ -759,36 +759,35 @@ static void Shop_MoveItemListUp(void)
     int j;
     struct Window *r8 = &gMenuWindow;
     
-    r1 = r8->tilemap;
-    r1 += 0x1EF;
+    r2 = r8->tilemap;
+    r2 += 0x1EF;
 
-    r2 = r1;
-    r2 += 64;
+    r1 = r2;
+    r1 += 64;
     r10 = (u16 *)r8->tileData;
     for (i = 0; i < 14; i++)
     {
         for (j = 0; j < 15; j++)
         {
-            if ((r1[j] & 0x3FF) > r8->tileDataStartOffset + 1)
-                r2[j] = r1[j] + 0x3C;
+            if ((r2[j] & 0x3FF) > r8->tileDataStartOffset + 1)
+                r1[j] = r2[j] + 0x3C;
             else
-                r2[j] = r8->tileDataStartOffset + 1;
+                r1[j] = r8->tileDataStartOffset + 1;
         }
         
-        r2 -= 32;
-        asm("");
         r1 -= 32;
+        r2 -= 32;
     }
-    r1 = r10;
-    r1 += 0x3A20/2;
-    r2 = r1; 
-    r2 += 0x780/2;
+    r2 = r10;
+    r2 += 0x3A20/2;
+    r1 = r2; 
+    r1 += 0x780/2;
 
     for (i = 0; i < 14; i++)
     {
-        DmaCopy16(3, r1, r2, 0x1E0);
-        r2 -= 0x1E0;
+        DmaCopy16(3, r2, r1, 0x1E0);
         r1 -= 0x1E0;
+        r2 -= 0x1E0;
     }
 }
 
