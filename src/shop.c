@@ -792,143 +792,48 @@ static void Shop_MoveItemListUp(void)
     }
 }
 
-#ifdef NONMATCHING
 static void Shop_MoveItemListDown(void)
 {
     u16 *r1;
     u16 *r2;
-    u8 *r10;
-    s32 i;
-    s32 j;
+    u16 *r10;
+    int i;
+    int j;
     struct Window *r8 = &gMenuWindow;
     
     r1 = r8->tilemap;
     r1 += 0x4F;
+
     r2 = r1;
     r2 += 64;
-    r10 = r8->tileData;
-    
+    r10 = (u16 *)r8->tileData;
     for (i = 0; i < 14; i++)
     {
         for (j = 0; j < 15; j++)
         {
-            if ((r1[j] & 0x3FF) <= r8->tileDataStartOffset + 1)
-                r2[j] = r8->tileDataStartOffset + 1;
+            if ((r2[j] & 0x3FF) > r8->tileDataStartOffset + 1)
+                r1[j] = r2[j] - 0x3C;
             else
-                r2[j] = r1[j] + 0x3C;
+                r1[j] = r8->tileDataStartOffset + 1;
         }
         
         r1 += 32;
         r2 += 32;
     }
 
+    r1 = r10;
+    r1 += 0x960/2;
+    r2 = r1; 
+    r2 += 0x780/2;
+    for (i = 0; i < 14; i++)
     {
-        register u8 *r1 asm("r1") = r10 + 0x960;
-        register u8 *r2 asm("r2") = r1;
-       
-        r1 += 0x780;
-        for (i = 0; i < 14; i++)
-        {
-            DmaCopy16(3, r1, r2, 0x1E0);
-            r1 += 0x3C0;
-            r2 += 0x3C0;
-        }
+        DmaCopy16(3, r2, r1, 0x1E0);
+        
+        r1 += 0x1E0;
+        r2 += 0x1E0;
     }
 }
-#else
-NAKED
-static void Shop_MoveItemListDown(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r0, _080B40D8 @ =gMenuWindow\n\
-    mov r8, r0\n\
-    ldr r2, [r0, 0x28]\n\
-    adds r1, r2, 0\n\
-    adds r1, 0x9E\n\
-    adds r2, r1, 0\n\
-    adds r1, 0x80\n\
-    ldr r3, [r0, 0x24]\n\
-    mov r10, r3\n\
-    ldr r7, _080B40DC @ =0x000003ff\n\
-    mov r9, r7\n\
-    movs r6, 0xD\n\
-_080B4060:\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x40\n\
-    str r0, [sp]\n\
-    movs r3, 0x40\n\
-    adds r3, r1\n\
-    mov r12, r3\n\
-    adds r3, r2, 0\n\
-    adds r4, r1, 0\n\
-    movs r5, 0xE\n\
-_080B4072:\n\
-    ldrh r2, [r4]\n\
-    mov r1, r9\n\
-    ands r1, r2\n\
-    mov r7, r8\n\
-    ldrh r0, [r7, 0x1A]\n\
-    adds r0, 0x1\n\
-    cmp r1, r0\n\
-    ble _080B4086\n\
-    adds r0, r2, 0\n\
-    subs r0, 0x3C\n\
-_080B4086:\n\
-    strh r0, [r3]\n\
-    adds r3, 0x2\n\
-    adds r4, 0x2\n\
-    subs r5, 0x1\n\
-    cmp r5, 0\n\
-    bge _080B4072\n\
-    ldr r2, [sp]\n\
-    mov r1, r12\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080B4060\n\
-    movs r1, 0x96\n\
-    lsls r1, 4\n\
-    add r1, r10\n\
-    adds r2, r1, 0\n\
-    movs r0, 0xF0\n\
-    lsls r0, 3\n\
-    adds r1, r0\n\
-    ldr r3, _080B40E0 @ =0x040000d4\n\
-    ldr r5, _080B40E4 @ =0x800000f0\n\
-    movs r4, 0xF0\n\
-    lsls r4, 2\n\
-    movs r6, 0xD\n\
-_080B40B4:\n\
-    str r1, [r3]\n\
-    str r2, [r3, 0x4]\n\
-    str r5, [r3, 0x8]\n\
-    ldr r0, [r3, 0x8]\n\
-    adds r2, r4\n\
-    adds r1, r4\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080B40B4\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080B40D8: .4byte gMenuWindow\n\
-_080B40DC: .4byte 0x000003ff\n\
-_080B40E0: .4byte 0x040000d4\n\
-_080B40E4: .4byte 0x800000f0\n\
-    .syntax divided");
-}
-#endif
+
 
 static void Shop_DoCursorAction(u8 taskId)
 {

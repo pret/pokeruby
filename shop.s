@@ -3718,28 +3718,46 @@ Shop_MoveItemListDown:
 .LFB46:
 .LM430:
 
-.LM431:
+.LM452:
 
-	.syntax unified
     push {r4-r7,lr}
     mov r7, r10
     mov r6, r9
     mov r5, r8
     push {r5-r7}
     sub sp, 0x4
+.LM453:
+
+.LBB33:
+.LM454:
+
     ldr r0, _080B40D8 @ =gMenuWindow
     mov r8, r0
+.LM455:
+
     ldr r2, [r0, 0x28]
+.LM456:
+
     adds r1, r2, 0
     adds r1, 0x9E
+.LM457:
+
     adds r2, r1, 0
+.LM458:
+
     adds r1, 0x80
+.LM459:
+
     ldr r3, [r0, 0x24]
     mov r10, r3
+.LM460:
+
     ldr r7, _080B40DC @ =0x000003ff
     mov r9, r7
     movs r6, 0xD
 _080B4060:
+.LM461:
+
     adds r0, r2, 0
     adds r0, 0x40
     str r0, [sp]
@@ -3750,6 +3768,8 @@ _080B4060:
     adds r4, r1, 0
     movs r5, 0xE
 _080B4072:
+.LM462:
+
     ldrh r2, [r4]
     mov r1, r9
     ands r1, r2
@@ -3758,42 +3778,77 @@ _080B4072:
     adds r0, 0x1
     cmp r1, r0
     ble _080B4086
+.LM463:
+
     adds r0, r2, 0
     subs r0, 0x3C
 _080B4086:
+.LM464:
+
     strh r0, [r3]
+.LM465:
+
     adds r3, 0x2
     adds r4, 0x2
     subs r5, 0x1
     cmp r5, 0
     bge _080B4072
+.LM466:
+
     ldr r2, [sp]
+.LM467:
+
+.LM468:
+
     mov r1, r12
+.LM469:
+
     subs r6, 0x1
     cmp r6, 0
     bge _080B4060
+.LM470:
+
     movs r1, 0x96
     lsls r1, 4
     add r1, r10
+.LM471:
+
     adds r2, r1, 0
+.LM472:
+
     movs r0, 0xF0
     lsls r0, 3
     adds r1, r0
+.LM473:
+
     ldr r3, _080B40E0 @ =0x040000d4
     ldr r5, _080B40E4 @ =0x800000f0
     movs r4, 0xF0
     lsls r4, 2
     movs r6, 0xD
 _080B40B4:
+.LM474:
+
+.LBB34:
     str r1, [r3]
     str r2, [r3, 0x4]
     str r5, [r3, 0x8]
     ldr r0, [r3, 0x8]
+
+.LM475:
+
     adds r2, r4
+.LM476:
+
     adds r1, r4
+.LM477:
+
     subs r6, 0x1
     cmp r6, 0
     bge _080B40B4
+.LM478:
+
+.LBE33:
     add sp, 0x4
     pop {r3-r5}
     mov r8, r3
