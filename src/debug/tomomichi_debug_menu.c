@@ -4145,29 +4145,28 @@ static void PreviewPicTest_SelectType(void)
     }
 }
 
-#ifdef NONMATCHING
 static void PicTest_Redraw(u8 a0)
 {
     u8 i;
-    u8 digit;
     u16 species;
 
     switch (a0)
     {
-        case 0:
-        case 1:
-        case 2:
-            for (i = 0; i < 8; i++)
-            {
-                digit = (sPicTest_Personality >> (4 * (7 - i))) & 0xf;
-                if (digit < 10)
-                    sPicTest_StringBuffer[i] = digit + CHAR_0;
-                else
-                    sPicTest_StringBuffer[i] = digit + CHAR_A - 10;
-            }
-            sPicTest_StringBuffer[i] = EOS;
-            Menu_PrintText(sPicTest_StringBuffer, 12, 5);
-            break;
+    case 0:
+    case 1:
+    case 2:
+        for (i = 0; i < 8; i++)
+        {
+            species = (sPicTest_Personality >> ((7 - i) * 4)) & 0xF;
+
+            if (species < 10)
+                sPicTest_StringBuffer[i] = CHAR_0 + species;
+            else
+                sPicTest_StringBuffer[i] = CHAR_A + species - 10;
+        }
+        sPicTest_StringBuffer[8] = EOS;
+        Menu_PrintText(sPicTest_StringBuffer, 12, 5);
+        break;
     }
     for (i = 0; i < POKEMON_NAME_LENGTH; i++)
     {
@@ -4179,294 +4178,48 @@ static void PicTest_Redraw(u8 a0)
         sPicTest_StringBuffer[i + 1] = gSpeciesNames[species][i];
     }
 
-    sPicTest_StringBuffer[0] = 0xB1;
-    sPicTest_StringBuffer[POKEMON_NAME_LENGTH + 1] = 0xB2;
+    sPicTest_StringBuffer[0] = 0xb1;
+    sPicTest_StringBuffer[POKEMON_NAME_LENGTH + 1] = 0xb2;
     sPicTest_StringBuffer[POKEMON_NAME_LENGTH + 2] = EOS;
     switch (a0)
     {
-        case 0:
-        case 1:
-        case 2:
-            Menu_PrintText(sPicTest_StringBuffer, 8, 1);
-            break;
-        default:
-            Menu_PrintText(sPicTest_StringBuffer, 12, 1);
-            break;
+    case 0:
+    case 1:
+    case 2:
+        Menu_PrintText(sPicTest_StringBuffer, 8, 1);
+        break;
+    default:
+        Menu_PrintText(sPicTest_StringBuffer, 12, 1);
+        break;
     }
     sPicTest_StringBuffer[3] = EOS;
-    sPicTest_StringBuffer[0] = sPicTest_Species / 100 + CHAR_0;
-    sPicTest_StringBuffer[1] = (sPicTest_Species % 100) / 10 + CHAR_0;
-    sPicTest_StringBuffer[2] = sPicTest_Species % 10 + CHAR_0;
+    sPicTest_StringBuffer[0] = CHAR_0 + (sPicTest_Species / 100);
+    sPicTest_StringBuffer[1] = CHAR_0 + ((sPicTest_Species % 100) / 10);
+    sPicTest_StringBuffer[2] = CHAR_0 + (sPicTest_Species % 10);
     Menu_PrintText(sPicTest_StringBuffer, 12, 3);
 
     switch (a0)
     {
-        case 0:
-            sPicTest_StringBuffer[0] = sPicTest_ContestType / 100 + CHAR_0;
-            sPicTest_StringBuffer[1] = (sPicTest_ContestType % 100) / 10 + CHAR_0;
-            sPicTest_StringBuffer[2] = sPicTest_ContestType % 10 + CHAR_0;
-            Menu_PrintText(sPicTest_StringBuffer, 12, 7);
-            break;
-        case 1:
-            sPicTest_StringBuffer[0] = sPicTest_MuseumArtTitleType / 100 + CHAR_0;
-            sPicTest_StringBuffer[1] = (sPicTest_MuseumArtTitleType % 100) / 10 + CHAR_0;
-            sPicTest_StringBuffer[2] = sPicTest_MuseumArtTitleType % 10 + CHAR_0;
-            Menu_PrintText(sPicTest_StringBuffer, 12, 7);
-            break;
-        case 2:
-            sPicTest_StringBuffer[0] = sPicTest_PreviewType / 100 + CHAR_0;
-            sPicTest_StringBuffer[1] = (sPicTest_PreviewType % 100) / 10 + CHAR_0;
-            sPicTest_StringBuffer[2] = sPicTest_PreviewType % 10 + CHAR_0;
-            Menu_PrintText(sPicTest_StringBuffer, 12, 7);
-            break;
+    case 0:
+        sPicTest_StringBuffer[0] = CHAR_0 + (sPicTest_ContestType / 100);
+        sPicTest_StringBuffer[1] = CHAR_0 + ((sPicTest_ContestType % 100) / 10);
+        sPicTest_StringBuffer[2] = CHAR_0 + (sPicTest_ContestType % 10);
+        Menu_PrintText(sPicTest_StringBuffer, 12, 7);
+        break;
+    case 1:
+        sPicTest_StringBuffer[0] = CHAR_0 + (sPicTest_MuseumArtTitleType / 100);
+        sPicTest_StringBuffer[1] = CHAR_0 + ((sPicTest_MuseumArtTitleType % 100) / 10);
+        sPicTest_StringBuffer[2] = CHAR_0 + (sPicTest_MuseumArtTitleType % 10);
+        Menu_PrintText(sPicTest_StringBuffer, 12, 7);
+        break;
+    case 2:
+        sPicTest_StringBuffer[0] = CHAR_0 + (sPicTest_PreviewType / 100);
+        sPicTest_StringBuffer[1] = CHAR_0 + ((sPicTest_PreviewType % 100) / 10);
+        sPicTest_StringBuffer[2] = CHAR_0 + (sPicTest_PreviewType % 10);
+        Menu_PrintText(sPicTest_StringBuffer, 12, 7);
+        break;
     }
 }
-#else
-NAKED void PicTest_Redraw(u8 a0)
-{
-    asm("\tpush\t{r4, r5, r6, r7, lr}\n"
-        "\tmov\tr7, r8\n"
-        "\tpush\t{r7}\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr6, r0, #0x18\n"
-        "\tcmp\tr6, #0x2\n"
-        "\tbgt\t._653\t@cond_branch\n"
-        "\tcmp\tr6, #0\n"
-        "\tblt\t._653\t@cond_branch\n"
-        "\tmov\tr3, #0x0\n"
-        "\tldr\tr0, ._656       @ sPicTest_Personality\n"
-        "\tmov\tr8, r0\n"
-        "\tldr\tr4, ._656 + 4   @ sPicTest_StringBuffer\n"
-        "\tmov\tr7, #0x7\n"
-        "\tmov\tr5, #0xf\n"
-        "._658:\n"
-        "\tsub\tr0, r7, r3\n"
-        "\tlsl\tr0, r0, #0x2\n"
-        "\tmov\tr1, r8\n"
-        "\tldr\tr2, [r1]\n"
-        "\tLSR\tr2, r0\n"
-        "\tand\tr2, r2, r5\n"
-        "\tcmp\tr2, #0x9\n"
-        "\tbhi\t._654\t@cond_branch\n"
-        "\tadd\tr1, r3, r4\n"
-        "\tadd\tr0, r2, #0\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tb\t._655\n"
-        "._657:\n"
-        "\t.align\t2, 0\n"
-        "._656:\n"
-        "\t.word\tsPicTest_Personality\n"
-        "\t.word\tsPicTest_StringBuffer\n"
-        "._654:\n"
-        "\tadd\tr1, r3, r4\n"
-        "\tadd\tr0, r2, #0\n"
-        "\tsub\tr0, r0, #0x4f\n"
-        "._655:\n"
-        "\tstrb\tr0, [r1]\n"
-        "\tadd\tr0, r3, #1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr3, r0, #0x18\n"
-        "\tcmp\tr3, #0x7\n"
-        "\tbls\t._658\t@cond_branch\n"
-        "\tldr\tr0, ._666       @ sPicTest_StringBuffer\n"
-        "\tmov\tr1, #0xff\n"
-        "\tstrb\tr1, [r0, #0x8]\n"
-        "\tmov\tr1, #0xc\n"
-        "\tmov\tr2, #0x5\n"
-        "\tbl\tMenu_PrintText\n"
-        "._653:\n"
-        "\tmov\tr3, #0x0\n"
-        "\tldr\tr7, ._666       @ sPicTest_StringBuffer\n"
-        "\tldr\tr5, ._666 + 4   @ sPicTest_Species\n"
-        "\tldr\tr2, ._666 + 8   @ gSpeciesNames\n"
-        "\tmov\tr8, r2\n"
-        "\tadd\tr4, r7, #0\n"
-        "\tmov\tr2, #0x0\n"
-        "._659:\n"
-        "\tadd\tr1, r3, #1\n"
-        "\tadd\tr0, r1, r4\n"
-        "\tstrb\tr2, [r0]\n"
-        "\tlsl\tr1, r1, #0x18\n"
-        "\tlsr\tr3, r1, #0x18\n"
-        "\tcmp\tr3, #0x9\n"
-        "\tbls\t._659\t@cond_branch\n"
-        "\tmov\tr3, #0x0\n"
-        "\tldrh\tr2, [r5]\n"
-        "\tmov\tr0, #0xb\n"
-        "\tadd\tr1, r2, #0\n"
-        "\tmul\tr1, r1, r0\n"
-        "\tmov\tr2, r8\n"
-        "\tadd\tr0, r1, r2\n"
-        "\tldrb\tr0, [r0]\n"
-        "\tcmp\tr0, #0xff\n"
-        "\tbeq\t._661\t@cond_branch\n"
-        "\tldr\tr0, ._666       @ sPicTest_StringBuffer\n"
-        "\tmov\tip, r0\n"
-        "\tmov\tr5, r8\n"
-        "\tadd\tr4, r1, #0\n"
-        "._662:\n"
-        "\tadd\tr1, r3, #1\n"
-        "\tmov\tr0, ip\n"
-        "\tadd\tr2, r1, r0\n"
-        "\tadd\tr0, r3, r4\n"
-        "\tadd\tr0, r0, r5\n"
-        "\tldrb\tr0, [r0]\n"
-        "\tstrb\tr0, [r2]\n"
-        "\tlsl\tr1, r1, #0x18\n"
-        "\tlsr\tr3, r1, #0x18\n"
-        "\tadd\tr0, r3, r4\n"
-        "\tadd\tr0, r0, r5\n"
-        "\tldrb\tr0, [r0]\n"
-        "\tcmp\tr0, #0xff\n"
-        "\tbeq\t._661\t@cond_branch\n"
-        "\tcmp\tr3, #0x9\n"
-        "\tbls\t._662\t@cond_branch\n"
-        "._661:\n"
-        "\tmov\tr0, #0xb1\n"
-        "\tstrb\tr0, [r7]\n"
-        "\tmov\tr0, #0xb2\n"
-        "\tstrb\tr0, [r7, #0xb]\n"
-        "\tmov\tr0, #0xff\n"
-        "\tstrb\tr0, [r7, #0xc]\n"
-        "\tcmp\tr6, #0x2\n"
-        "\tbgt\t._664\t@cond_branch\n"
-        "\tcmp\tr6, #0\n"
-        "\tblt\t._664\t@cond_branch\n"
-        "\tadd\tr0, r7, #0\n"
-        "\tmov\tr1, #0x8\n"
-        "\tmov\tr2, #0x1\n"
-        "\tbl\tMenu_PrintText\n"
-        "\tb\t._665\n"
-        "._667:\n"
-        "\t.align\t2, 0\n"
-        "._666:\n"
-        "\t.word\tsPicTest_StringBuffer\n"
-        "\t.word\tsPicTest_Species\n"
-        "\t.word\tgSpeciesNames\n"
-        "._664:\n"
-        "\tldr\tr0, ._672       @ sPicTest_StringBuffer\n"
-        "\tmov\tr1, #0xc\n"
-        "\tmov\tr2, #0x1\n"
-        "\tbl\tMenu_PrintText\n"
-        "._665:\n"
-        "\tldr\tr5, ._672       @ sPicTest_StringBuffer\n"
-        "\tmov\tr0, #0xff\n"
-        "\tstrb\tr0, [r5, #0x3]\n"
-        "\tldr\tr4, ._672 + 4   @ sPicTest_Species\n"
-        "\tldrh\tr0, [r4]\n"
-        "\tmov\tr1, #0x64\n"
-        "\tbl\t__udivsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5]\n"
-        "\tldrh\tr0, [r4]\n"
-        "\tmov\tr1, #0x64\n"
-        "\tbl\t__umodsi3\n"
-        "\tlsl\tr0, r0, #0x10\n"
-        "\tlsr\tr0, r0, #0x10\n"
-        "\tmov\tr1, #0xa\n"
-        "\tbl\t__udivsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5, #0x1]\n"
-        "\tldrh\tr0, [r4]\n"
-        "\tmov\tr1, #0xa\n"
-        "\tbl\t__umodsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5, #0x2]\n"
-        "\tadd\tr0, r5, #0\n"
-        "\tmov\tr1, #0xc\n"
-        "\tmov\tr2, #0x3\n"
-        "\tbl\tMenu_PrintText\n"
-        "\tcmp\tr6, #0x1\n"
-        "\tbeq\t._668\t@cond_branch\n"
-        "\tcmp\tr6, #0x1\n"
-        "\tbgt\t._669\t@cond_branch\n"
-        "\tcmp\tr6, #0\n"
-        "\tbeq\t._670\t@cond_branch\n"
-        "\tb\t._679\n"
-        "._673:\n"
-        "\t.align\t2, 0\n"
-        "._672:\n"
-        "\t.word\tsPicTest_StringBuffer\n"
-        "\t.word\tsPicTest_Species\n"
-        "._669:\n"
-        "\tcmp\tr6, #0x2\n"
-        "\tbeq\t._674\t@cond_branch\n"
-        "\tb\t._679\n"
-        "._670:\n"
-        "\tldr\tr4, ._677       @ sPicTest_ContestType\n"
-        "\tb\t._676\n"
-        "._678:\n"
-        "\t.align\t2, 0\n"
-        "._677:\n"
-        "\t.word\tsPicTest_ContestType\n"
-        "._668:\n"
-        "\tldr\tr4, ._680       @ sPicTest_MuseumArtTitleType\n"
-        "._676:\n"
-        "\tldrb\tr0, [r4]\n"
-        "\tmov\tr1, #0x64\n"
-        "\tbl\t__udivsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5]\n"
-        "\tldrb\tr0, [r4]\n"
-        "\tmov\tr1, #0x64\n"
-        "\tbl\t__umodsi3\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr0, r0, #0x18\n"
-        "\tmov\tr1, #0xa\n"
-        "\tbl\t__udivsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5, #0x1]\n"
-        "\tldrb\tr0, [r4]\n"
-        "\tmov\tr1, #0xa\n"
-        "\tbl\t__umodsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5, #0x2]\n"
-        "\tadd\tr0, r5, #0\n"
-        "\tmov\tr1, #0xc\n"
-        "\tmov\tr2, #0x7\n"
-        "\tbl\tMenu_PrintText\n"
-        "\tb\t._679\n"
-        "._681:\n"
-        "\t.align\t2, 0\n"
-        "._680:\n"
-        "\t.word\tsPicTest_MuseumArtTitleType\n"
-        "._674:\n"
-        "\tldr\tr4, ._682       @ sPicTest_PreviewType\n"
-        "\tldrb\tr0, [r4]\n"
-        "\tmov\tr1, #0x64\n"
-        "\tbl\t__udivsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5]\n"
-        "\tldrb\tr0, [r4]\n"
-        "\tmov\tr1, #0x64\n"
-        "\tbl\t__umodsi3\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr0, r0, #0x18\n"
-        "\tmov\tr1, #0xa\n"
-        "\tbl\t__udivsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5, #0x1]\n"
-        "\tldrb\tr0, [r4]\n"
-        "\tmov\tr1, #0xa\n"
-        "\tbl\t__umodsi3\n"
-        "\tadd\tr0, r0, #0xa1\n"
-        "\tstrb\tr0, [r5, #0x2]\n"
-        "\tadd\tr0, r5, #0\n"
-        "\tmov\tr1, #0xc\n"
-        "\tmov\tr2, #0x7\n"
-        "\tbl\tMenu_PrintText\n"
-        "._679:\n"
-        "\tpop\t{r3}\n"
-        "\tmov\tr8, r3\n"
-        "\tpop\t{r4, r5, r6, r7}\n"
-        "\tpop\t{r0}\n"
-        "\tbx\tr0\n"
-        "._683:\n"
-        "\t.align\t2, 0\n"
-        "._682:\n"
-        "\t.word\tsPicTest_PreviewType");
-}
-#endif // NONMATCHING
 
 static void PrepareDebugOverlayBeforeShowingContestPainting(u8 a0)
 {
