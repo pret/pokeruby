@@ -27,6 +27,7 @@ void NakaGenderTest(void);
 // unk debug menu 3
 extern const u8 gUnknown_Debug_842E350;
 extern const struct UnkDebugMenu3Items gUnknown_Debug_842E2D0[];
+extern const u8 *const gUnknown_Debug_842E354[][2];
 
 // unknown debug menu
 int InitSogabeDebugMenu(void);

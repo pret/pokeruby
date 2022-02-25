@@ -348,19 +348,14 @@ const struct UnkDebugMenu3Items gUnknown_Debug_842E2D0[] = {
 
 extern u8 gUnknown_Debug_845E306[];
 
-const u8 gUnknown_Debug_842E350 = 16;
+const u8 gUnknown_Debug_842E350 = ARRAY_COUNT(gUnknown_Debug_842E2D0);
 
-u8 *const gUnknown_Debug_842E354[] = {
-    gUnknown_Debug_845DAE1,
-    gUnknown_Debug_845DDB2,
-    gUnknown_Debug_845E306,
-    gUnknown_Debug_845E3E0,
-    gUnknown_Debug_845E3E0,
-    gUnknown_Debug_845E402,
-    gUnknown_Debug_845E402,
-    gUnknown_Debug_845E422,
-    gUnknown_Debug_845E422,
-    gUnknown_Debug_845E443
+const u8 *const gUnknown_Debug_842E354[][2] = {
+    { gUnknown_Debug_845DAE1, gUnknown_Debug_845DDB2 },
+    { gUnknown_Debug_845E306, gUnknown_Debug_845E3E0 },
+    { gUnknown_Debug_845E3E0, gUnknown_Debug_845E402 },
+    { gUnknown_Debug_845E402, gUnknown_Debug_845E422 },
+    { gUnknown_Debug_845E422, gUnknown_Debug_845E443 },
 };
 
 #endif // DEBUG

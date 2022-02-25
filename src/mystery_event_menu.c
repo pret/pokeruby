@@ -270,11 +270,11 @@ static const u8 Str_843DA84[] = _("LR:　select　A:　send。");
 static const u8 Str_843DA98[] = _("sending。。。");
 static const u8 Str_843DAA3[] = _("completed。");
 
-
 void debug_sub_815D1D8();
 
 void debug_sub_815D04C(u8 taskId)
 {
+    u32 uselessVar = 0;
     if (gTasks[taskId].data[0] == 0)
     {
         Menu_DrawStdWindowFrame(4, 4, 13, 7);
@@ -282,7 +282,7 @@ void debug_sub_815D04C(u8 taskId)
         gTasks[taskId].data[0]++;
     }
 
-    if (gMain.newKeys & 0x20)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         if (gTasks[taskId].data[1] == 0)
             gTasks[taskId].data[1] = gUnknown_Debug_842E350 - 1;
@@ -290,7 +290,7 @@ void debug_sub_815D04C(u8 taskId)
             gTasks[taskId].data[1]--;
         gTasks[taskId].data[0] = 0;
     }
-    if (gMain.newKeys & 0x10)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         if (gTasks[taskId].data[1] == gUnknown_Debug_842E350 - 1)
             gTasks[taskId].data[1] = 0;
@@ -300,10 +300,9 @@ void debug_sub_815D04C(u8 taskId)
     }
     if (gMain.newKeys & A_BUTTON)
     {
-        // TODO: fix this
-        s32 var = gTasks[taskId].data[1];
-        asm(""::"r"(var * 8));
-        gUnknown_Debug_842E2D0[var].func(gSharedMem + 0x4000);
+        // This statement is totally useless, but required to match. Must have been forgotten to be removed
+        uselessVar = (u32)(gUnknown_Debug_842E354[gTasks[taskId].data[1]][1] - gUnknown_Debug_842E354[gTasks[taskId].data[1]][0]);
+        gUnknown_Debug_842E2D0[gTasks[taskId].data[1]].func(gSharedMem + 0x4000);
 
         gMain.state++;
         DestroyTask(taskId);
