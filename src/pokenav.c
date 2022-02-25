@@ -32,7 +32,6 @@
 // Static RAM declarations
 
 EWRAM_DATA u8 gUnknown_020388B0[4] = {};
-EWRAM_DATA u16 gUnknown_020388B4 = 0;
 
 extern const u8 gUnknown_083E0314[];
 extern const u16 gUnknown_08E9F9E8[];
@@ -1605,9 +1604,7 @@ void DrawMonRibbonIcons(void)
 
 void sub_80F13FC(void)
 {
-    u16 *src = gPokenavStructPtr->unk934C;
-    u16 *dest = (u16 *)(VRAM + 0xB800);
-    DmaCopy32(3, src, dest, 0x500);
+    DmaCopy32Defvars(3, gPokenavStructPtr->unk934C, (VRAM + 0xB800), 0x500);
     gPlttBufferUnfaded[0] = *(gPokenavRibbonView_Pal + 14);
 }
 
@@ -1630,7 +1627,7 @@ void sub_80F1480(void)
 // intended access is.
 void sub_80F1494(void)
 {
-    u8 *arr;
+    EWRAM_DATA static u16 gUnknown_020388B4 = 0;
     u8 *tileBuffer1 = &gUnknown_083DFEC8[0x800];
     u8 *tileBuffer2 = &gUnknown_083DFEC8[0xA98];
 
@@ -1647,12 +1644,8 @@ void sub_80F1494(void)
         gUnknown_020388B4 = gPokenavStructPtr->unkBC4C[gUnknown_020388B4 + gPokenavStructPtr->unkBC90];
 
         // FIXME!
-        arr = ((u8*)&gSaveBlock1);
-        asm("ldrh r1, [r5]\n\
-            add r0, r0, r1");
-        gUnknown_020388B4 = arr[0x30F7];
         // The bug fix for this code is the following:
-        // gUnknown_020388B4 = gSaveBlock1.giftRibbons[gUnknown_020388B4];
+        gUnknown_020388B4 = gSaveBlock1.giftRibbons[gUnknown_020388B4 - 25];
         if (gUnknown_020388B4)
         {
             gUnknown_020388B4--;
@@ -3919,8 +3912,6 @@ void sub_80F4D44(void)
 bool8 sub_80F4D88(void)
 {
     u16 i;
-    register int mask asm("r3"); // FIXME
-    int nextValue;
     struct UnkUsePokeblockSub var0;
 
     switch (gPokenavStructPtr->unk8FE6)
@@ -3941,14 +3932,10 @@ bool8 sub_80F4D88(void)
                 sub_80F4944(&var0);
             }
 
-            gPokenavStructPtr->unk8FE7++;
-            mask = 0xFF;
-            if (gPokenavStructPtr->unk8FE7 == 30)
+            if (++gPokenavStructPtr->unk8FE7 == 30)
             {
                 gPokenavStructPtr->unk8FE7 = 0;
-                nextValue = gPokenavStructPtr->unk8FE6 + 1;
-                gPokenavStructPtr->unk8FE6 = nextValue;
-                if ((nextValue & mask) == 14)
+                if (++gPokenavStructPtr->unk8FE6 == 14)
                     break;
             }
         }
@@ -4959,7 +4946,7 @@ u8 sub_80F68E8(void)
     s8 r12 = 1;
     do
     {
-        if (({gMain.newAndRepeatedKeys & DPAD_UP;}) && r4 > 0)
+        if ((gMain.newAndRepeatedKeys & DPAD_UP) && r4 > 0)
         {
             while (r4 > 0)
             {
@@ -4975,7 +4962,7 @@ u8 sub_80F68E8(void)
             }
             r4 = gPokenavStructPtr->unkBC91;
         }
-        if (({gMain.newAndRepeatedKeys & DPAD_DOWN;}) && r4 < 3)
+        if ((gMain.newAndRepeatedKeys & DPAD_DOWN) && r4 < 3)
         {
             while (r4 < 3)
             {
@@ -4991,7 +4978,7 @@ u8 sub_80F68E8(void)
             }
             r4 = gPokenavStructPtr->unkBC91;
         }
-        if (({gMain.newAndRepeatedKeys & DPAD_LEFT;}))
+        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
         {
             if (r5 > 0)
             {
@@ -4999,7 +4986,7 @@ u8 sub_80F68E8(void)
                 break;
             }
         }
-        if (({gMain.newAndRepeatedKeys & DPAD_RIGHT;}))
+        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
         {
             if (r5 < gPokenavStructPtr->unkBC96[r4] - 1)
             {

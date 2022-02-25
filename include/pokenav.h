@@ -189,7 +189,8 @@ struct UnkPokenavStruct {
     /*0x934C*/ u16 unk934C[0x280];
     /*0x984C*/ u8 unk984C[0xC][0x100];
     /*0xA44C*/ u8 unkA44C[0xC][0x200];
-    /*0xBC4C*/ u8 unkBC4C[0x42];
+    /*0xBC4C*/ u8 unkBC4C[32];
+    /*0xBC6C*/ u8 unkBC6C[2][17];
     /*0xBC8E*/ u8 unkBC8E;
     /*0xBC8F*/ u8 unkBC8F;
     /*0xBC90*/ u8 unkBC90;
