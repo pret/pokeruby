@@ -1643,8 +1643,6 @@ void sub_80F1494(void)
         gUnknown_020388B4 = gPokenavStructPtr->unkBC8E - gPokenavStructPtr->unkBC8F;
         gUnknown_020388B4 = gPokenavStructPtr->unkBC4C[gUnknown_020388B4 + gPokenavStructPtr->unkBC90];
 
-        // FIXME!
-        // The bug fix for this code is the following:
         gUnknown_020388B4 = gSaveBlock1.giftRibbons[gUnknown_020388B4 - 25];
         if (gUnknown_020388B4)
         {
@@ -1668,14 +1666,13 @@ void sub_80F15A8(void)
     u8 *buffer;
     Menu_EraseWindowRect(12, 13, 27, 16);
     buffer = StringCopy(gPokenavStructPtr->unk8788, gOtherText_Ribbons);
-    buffer[0] = CHAR_SPACE;
-    buffer++;
+    *buffer++ = CHAR_SPACE;
     buffer = ConvertIntToDecimalStringN(
         buffer,
         gPokenavStructPtr->unk893c[gPokenavStructPtr->unk87DC].unk0,
         STR_CONV_MODE_LEFT_ALIGN,
         2);
-    buffer[0] = EOS;
+    *buffer = EOS;
     Menu_PrintText(gPokenavStructPtr->unk8788, 12, 13);
 }
 

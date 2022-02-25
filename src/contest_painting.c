@@ -115,7 +115,6 @@ static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist);
 
 void SetContestWinnerForPainting(u32 contestWinnerId)
 {
-    // probably fakematching
     struct ContestWinner *curWinner = &eCurContestWinner;
     u8 *saveIdx = (u8*)&eCurContestWinnerSaveIdx;
     u8 *isForArtist = (u8*)&eCurContestWinnerIsForArtist;
