@@ -31,7 +31,7 @@
 
 // Static RAM declarations
 
-EWRAM_DATA u8 gUnknown_020388B0[4] = {};
+EWRAM_DATA u8 gUnknown_020388B0[4] = {0};
 
 extern const u8 gUnknown_083E0314[];
 extern const u16 gUnknown_08E9F9E8[];
@@ -1620,11 +1620,6 @@ void sub_80F1480(void)
     Menu_EraseWindowRect(12, 13, 27, 16);
 }
 
-// This is a fakematching function, due to a hardcoded access of gSaveBlock1.
-// Due to this hardcoded address access, gift ribbons do not properly display
-// their descriptions, since the hardcoded access is inside of the LinkBattleRecords
-// save data, rather than the giftRibbons array, which is almost certainly what the
-// intended access is.
 void sub_80F1494(void)
 {
     EWRAM_DATA static u16 gUnknown_020388B4 = 0;
@@ -1644,7 +1639,7 @@ void sub_80F1494(void)
         gUnknown_020388B4 = gPokenavStructPtr->unkBC4C[gUnknown_020388B4 + gPokenavStructPtr->unkBC90];
 
         gUnknown_020388B4 = gSaveBlock1.giftRibbons[gUnknown_020388B4 - 25];
-        if (gUnknown_020388B4)
+        if (gUnknown_020388B4 != 0)
         {
             gUnknown_020388B4--;
             AlignStringInMenuWindow(tileBuffer1, gGiftRibbonDescriptions[gUnknown_020388B4][0], 128, 0);
@@ -1815,23 +1810,20 @@ void sub_80F19DC(u8 *text)
 
 void sub_80F19FC(void)
 {
-    // FIXME r4/r5 swapped
     register u8 *ptr asm("r5") = gUnknown_020388B0;
     if (ptr[0] == 1)
     {
-        const u8 *landmarkName = GetLandmarkName(
-            gPokenavStructPtr->regionMap.mapSectionId,
-            gPokenavStructPtr->regionMap.everGrandeCityArea,
-            ptr[1]);
-
-        if (landmarkName)
+        const u8 *landmarkName;
+        if ((landmarkName = GetLandmarkName(gPokenavStructPtr->regionMap.mapSectionId, gPokenavStructPtr->regionMap.everGrandeCityArea, ptr[1])) != NULL)
         {
-            sub_8072A18(landmarkName, 0x70, 4 * (ptr[1] * 4 + 12), 0x78, 1);
-            if (++ptr[1] != 4)
+            sub_8072A18(landmarkName, 0x70, (2 * ptr[1] + 6) * 8, 0x78, 1);
+            if (ptr[1]++ != 3)
+            {
                 return;
+            }
         }
 
-        Menu_BlankWindowRect(14, ptr[1] * 2 + 6, 28, 15);
+        Menu_BlankWindowRect(14, 2 * ptr[1] + 6, 28, 15);
         ptr[0] = 0;
     }
 }
@@ -1967,7 +1959,7 @@ bool8 sub_80F1BC8(u8 arg0)
                 gPokenavStructPtr->unk320[i][j]->data[3] = j * 32 + 256;
                 StartSpriteAnim(gPokenavStructPtr->unk320[i][j], animNum++);
 
-                if ((arg0 == 2 || arg0 == 0) && i > 2)
+                if ((arg0 == 2 || arg0 == 0) && i >= 3)
                 {
                     gPokenavStructPtr->unk320[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(0x1);
                 }
@@ -2139,8 +2131,7 @@ void sub_80F2170(void)
         sub_80F20F4();
         for (j = 0; j < 4; j++)
         {
-            struct Sprite *sprite = gPokenavStructPtr->unk320[gPokenavStructPtr->unk6DAD][j];
-            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+            gPokenavStructPtr->unk320[gPokenavStructPtr->unk6DAD][j][0].oam.objMode = ST_OAM_OBJ_BLEND;
         }
 
         gPokenavStructPtr->unk311 = 2;
@@ -2231,8 +2222,7 @@ bool8 sub_80F2360(void)
         {
             for (j = 0; j < 4; j++)
             {
-                struct Sprite *sprite = gPokenavStructPtr->unk320[i][j];
-                if (sprite)
+                if (gPokenavStructPtr->unk320[i][j])
                     return FALSE;
             }
         }
@@ -2247,8 +2237,7 @@ bool8 sub_80F23C8(void)
 
     for (j = 0; j < 4; j++)
     {
-        struct Sprite *sprite = gPokenavStructPtr->unk320[gPokenavStructPtr->unk6DAD][j];
-        if (sprite)
+        if (gPokenavStructPtr->unk320[gPokenavStructPtr->unk6DAD][j])
             return FALSE;
     }
 
@@ -2604,8 +2593,7 @@ void sub_80F2C14(struct Sprite *sprite)
 
 void sub_80F2C58(struct Sprite *sprite)
 {
-    int anim = !gPokenavStructPtr->regionMap.zoomed ? 1 : 2;
-    StartSpriteAnim(sprite, anim);
+    StartSpriteAnim(sprite, !gPokenavStructPtr->regionMap.zoomed ? 1 : 2);
 }
 
 void sub_80F2C80(u8 arg0)
