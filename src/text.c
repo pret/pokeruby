@@ -2406,6 +2406,8 @@ static u8 UpdateWindowText(struct Window *win)
 {
     switch (win->state)
     {
+    case WIN_STATE_END:
+        return TRUE; // done printing text
     case WIN_STATE_WAIT_BUTTON:
         if (PlayerCanInterruptDelay(win))
         {
@@ -2418,10 +2420,8 @@ static u8 UpdateWindowText(struct Window *win)
                 return FALSE;
             }
         }
-        else
+        else if (--win->delayCounter)
         {
-            win->delayCounter--;
-            if (win->delayCounter)
                 return FALSE;
         }
         win->state = WIN_STATE_NORMAL;
@@ -2436,14 +2436,12 @@ static u8 UpdateWindowText(struct Window *win)
             win->state = WIN_STATE_NORMAL;
             break;
         }
-        // fall through
+                // fall through
     case WIN_STATE_PAUSE:
         // Wait for timer to expire, then continue printing
-        if (win->delayCounter)
+        if (win->delayCounter && --win->delayCounter)
         {
-            win->delayCounter--;
-            if (win->delayCounter)
-                return FALSE;
+            return FALSE;
         }
         win->state = WIN_STATE_NORMAL;
         break;
@@ -2453,7 +2451,6 @@ static u8 UpdateWindowText(struct Window *win)
         {
             Text_ClearWindow(win);
             win->state = WIN_STATE_NORMAL;
-            asm("");
         }
         return FALSE;
     case WIN_STATE_WAIT_SCROLL:
@@ -2462,7 +2459,6 @@ static u8 UpdateWindowText(struct Window *win)
         {
             ScrollWindowTextLines(win);
             win->state = WIN_STATE_NORMAL;
-            asm("");
         }
         return FALSE;
     case WIN_STATE_PLACEHOLDER:
@@ -2472,7 +2468,6 @@ static u8 UpdateWindowText(struct Window *win)
     case WIN_STATE_NEWLINE:
         ScrollWindowTextLines(win);
         win->state = WIN_STATE_NORMAL;
-        asm("");
         return FALSE;
     case WIN_STATE_BEGIN:
         Text_ClearWindow(win);
@@ -2482,8 +2477,6 @@ static u8 UpdateWindowText(struct Window *win)
             return FALSE;
         win->state = WIN_STATE_NORMAL;
         break;
-    case WIN_STATE_END:
-        return TRUE;  // done printing text
     case WIN_STATE_NORMAL:
         break;
     default:
@@ -2495,25 +2488,25 @@ static u8 UpdateWindowText(struct Window *win)
 
     switch (win->state)
     {
-    case WIN_STATE_END:
-        return TRUE;  // done printing text
+    case WIN_STATE_PAUSE:
+    case WIN_STATE_NEWLINE:
+    case WIN_STATE_WAIT_SOUND:
+        return FALSE;
     case WIN_STATE_WAIT_BUTTON:
     case WIN_STATE_WAIT_CLEAR:
     case WIN_STATE_WAIT_SCROLL:
         if (PlayerCanInterruptDelay(win))
-            return 0;
+            return FALSE;
         win->delayCounter = 60;
-        break;
-    case WIN_STATE_PAUSE:
-    case WIN_STATE_NEWLINE:
-    case WIN_STATE_WAIT_SOUND:
-        break;
+        return FALSE;
+    case WIN_STATE_END:
+        return TRUE;  // done printing text
     default:
-        win->state = WIN_STATE_CHAR_DELAY;
-        win->delayCounter = GetTextDelay(win);
         break;
     }
 
+    win->state = WIN_STATE_CHAR_DELAY;
+    win->delayCounter = GetTextDelay(win);
     return 0;
 }
 
