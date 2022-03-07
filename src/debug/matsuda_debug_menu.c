@@ -82,17 +82,17 @@ static bool8 sub_80A9B78(void)
 {
     s8 choice = Menu_ProcessInput();
 
-    switch (choice)
+    if (choice == -2)
+        return FALSE;
+
+    if (choice == -1)
     {
-    case -2:
-        return FALSE;
-    default:
-        gMenuCallback = gMatsudaDebugMenuActions[choice].func;
-        return FALSE;
-    case -1:
         CloseMenu();
         return TRUE;
     }
+
+    gMenuCallback = gMatsudaDebugMenuActions[choice].func;
+    return FALSE;
 }
 
 u8 MatsudaDebugMenu_ContestResults(void)
@@ -201,7 +201,7 @@ static void sub_80A9DD8(u8 taskId)
 
 static void sub_80A9E04(u8 taskId)
 {
-    if (gMain.newKeys == 2)
+    if (gMain.newKeys == B_BUTTON)
         gTasks[(u8)gTasks[taskId].data[10]].func = sub_80A9D30;
 }
 
@@ -226,28 +226,26 @@ static void sub_80A9E80(u8 taskId)
         gTasks[taskId].data[0]++;
     else
     {
-        if (GetLinkPlayerCount_2() > 3)
-        {
-            gTasks[taskId].data[0] = 0;
+        if (GetLinkPlayerCount_2() < 4)
+            return;
+        gTasks[taskId].data[0] = 0;
 
-            if (IsLinkMaster())
-            {
-                func = sub_80A9ED8;
-                gTasks[taskId].func = (TaskFunc)func;
-            }
-            else
-            {
-                func = sub_80A9F10;
-                gTasks[taskId].func = (TaskFunc)func;
-            }
+        if (IsLinkMaster())
+        {
+            func = sub_80A9ED8;
+            gTasks[taskId].func = (TaskFunc)func;
+        }
+        else
+        {
+            func = sub_80A9F10;
+            gTasks[taskId].func = (TaskFunc)func;
         }
     }
 }
 
 static void sub_80A9ED8(u8 taskId)
 {
-    gTasks[taskId].data[0] = gTasks[taskId].data[0] + 1;
-    if ((gTasks[taskId].data[0]) == 101)
+    if (gTasks[taskId].data[0]++ == 100)
     {
         sub_8007F4C();
         gTasks[taskId].data[0] = 0;
@@ -294,7 +292,7 @@ static void sub_80A9FE4(void)
 {
     u8 ptr[] = _("{HIGHLIGHT WHITE2} ");
     DmaFill32Large(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
-    RenderTextHandleBold((void *)VRAM, ptr);
+    RenderTextHandleBold((void *)BG_VRAM, ptr);
     LoadFontDefaultPalette(&gWindowTemplate_81E6C3C);
 }
 
@@ -320,15 +318,14 @@ const u8 gMatsudaDebugMenuContestTopLeft[][2] =
         {15, 10},
     };
 
-const u8 gUnknown_083C9282[] =
+const u8 gUnknown_083C9282[][2] =
     {
-        // TODO: 2d array?
-        7,   6,
-        22,  6,
-        7,   8,
-        22,  8,
-        7,  10,
-        22, 10,
+        {7,   6},
+        {22,  6},
+        {7,   8},
+        {22,  8},
+        {7,  10},
+        {22, 10},
     };
 
 const u8 gUnknown_083C928E[][2] =
@@ -339,7 +336,7 @@ const u8 gUnknown_083C928E[][2] =
         {17, 16},
     };
 
-const u8 gUnknown_083C9296[] = {0x08, 0x80, 0x08, 0x80, 0x10, 0x10, 0x30, 0xA8, 0x30, 0xA8, 0x30, 0xA8, 0x08, 0x80, 0x08, 0x80, 0x10, 0x88};
+const u8 gUnknown_083C9296[][2] = {{0x08, 0x80}, {0x08, 0x80}, {0x10, 0x10}, {0x30, 0xA8}, {0x30, 0xA8}, {0x30, 0xA8}, {0x08, 0x80}, {0x08, 0x80}, {0x10, 0x88}};
 const u8 gUnknown_083C92A8[] = {0x08, 0x18, 0x28, 0x38, 0x48, 0x58, 0x78, 0x88, 0x98};
 
 const struct SpriteSheet gUnknown_083C92B4[] = {Unknown_083C922D, 32, 0x4B0};
@@ -525,7 +522,7 @@ static void sub_80AA10C(void)
     sub_80AA280(3);
     sub_80AA658(3);
     sub_80AA614(3, 0);
-    spriteId = CreateSprite(&gSpriteTemplate_83C92CC, gUnknown_083C9296[3], gUnknown_083C92A8[1], 5);
+    spriteId = CreateSprite(&gSpriteTemplate_83C92CC, gUnknown_083C9296[1][1], gUnknown_083C92A8[1], 5);
     gSprites[spriteId].data[0] = 1;
     gSprites[spriteId].data[1] = 1;
     gSprites[spriteId].data[2] = 3;
@@ -552,37 +549,37 @@ void sub_80AA280(u8 var) // no?
 static void sub_80AA340(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x66, gUnknown_083C9282[0][0], gUnknown_083C9282[0][1]);
 }
 
 static void sub_80AA388(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x6C, gUnknown_083C9282[1][0], gUnknown_083C9282[1][1]);
 }
 
 static void sub_80AA3D0(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x72, gUnknown_083C9282[2][0], gUnknown_083C9282[2][1]);
 }
 
 static void sub_80AA418(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x78, gUnknown_083C9282[3][0], gUnknown_083C9282[3][1]);
 }
 
 static void sub_80AA460(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x7E, gUnknown_083C9282[4][0], gUnknown_083C9282[4][1]);
 }
 
 static void sub_80AA4A8(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x84, gUnknown_083C9282[5][0], gUnknown_083C9282[5][1]);
 }
 
 static void sub_80AA4F0(u8 var1, u8 var2)
@@ -680,7 +677,7 @@ void sub_80AA754(struct Sprite *sprite)
         sub_80AAD08(sprite, 1);
         break;
     }
-    sprite->x = gUnknown_083C9296[sprite->data[0] + sprite->data[1] * 2];
+    sprite->x = gUnknown_083C9296[sprite->data[1]][sprite->data[0]];
     sprite->y = gUnknown_083C92A8[sprite->data[1]];
 }
 
