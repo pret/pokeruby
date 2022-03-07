@@ -2590,10 +2590,10 @@ void PartyMenuPutStatusTilemap(u8 monIndex, u8 menuLayout, u8 status)
     u8 x = gUnknown_08376738[menuLayout][monIndex].x - 1;
     u8 y = gUnknown_08376738[menuLayout][monIndex].y + 1;
     u16 *vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
-    u8 var1 = status * 4;
+    status *= 4;
 
     for (i = 0; i < 4; i++)
-        vramPtr[i] = (0x18C + var1 + i) | -0x5000;
+        vramPtr[i] = (0x18C + status + i) | 0xB000;
 }
 
 static void PartyMenuClearLevelStatusTilemap(u8 monIndex)
@@ -2710,8 +2710,9 @@ void PartyMenuPrintGenderIcon(u8 monIndex, u8 menuLayout, struct Pokemon *pokemo
 
 void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 {
-    register u8 *stringVar1 asm("r2") = gStringVar1;
-    register u8 *textPtr asm("r2") = AlignInt1InMenuWindow(stringVar1, currentHP, 15, 1);
+    u8 *textPtr = gStringVar1;
+    
+    textPtr = AlignInt1InMenuWindow(textPtr, currentHP, 15, 1);
     textPtr[0] = CHAR_SLASH;
 
     AlignInt1InMenuWindow(++textPtr, maxHP, 35, 1);
@@ -2722,10 +2723,7 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 
 void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)
 {
-    u16 currentHP = GetMonData(pokemon, MON_DATA_HP);
-    u16 maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
-
-    PartyMenuDoPrintHP(monIndex, b, currentHP, maxHP);
+    PartyMenuDoPrintHP(monIndex, b, GetMonData(pokemon, MON_DATA_HP), GetMonData(pokemon, MON_DATA_MAX_HP));
 }
 
 void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon)
