@@ -487,11 +487,10 @@ static void sub_80AA090(void)
 static void sub_80AA10C(void)
 {
     u8 i;
-    u8 zero;
     u8 spriteId;
 
     gPaletteFade.bufferTransferDisabled = 1;
-    SetVBlankCallback(0);
+    SetVBlankCallback(NULL);
     sub_80A9F50();
     ScanlineEffect_Clear();
     ResetPaletteFade();
@@ -517,21 +516,20 @@ static void sub_80AA10C(void)
     }
 
     gSpecialVar_ContestCategory = gSpecialVar_ContestRank = 0;
-    zero = 0; // it's possible this was some assignment that matsuda used to quickly edit and test things without changing whats passed to the later functions.
-    sub_80AA5BC(zero);
+    sub_80AA5BC(gSpecialVar_ContestCategory);
     sub_80AA5E8(gSpecialVar_ContestRank);
     Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
-    Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
+    Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, 0, 0xC);
     LoadSpriteSheet(gUnknown_083C92B4);
     LoadSpritePalette(gUnknown_083C92BC);
     sub_80AA280(3);
     sub_80AA658(3);
-    sub_80AA614(3, zero);
+    sub_80AA614(3, 0);
     spriteId = CreateSprite(&gSpriteTemplate_83C92CC, gUnknown_083C9296[3], gUnknown_083C92A8[1], 5);
     gSprites[spriteId].data[0] = 1;
     gSprites[spriteId].data[1] = 1;
     gSprites[spriteId].data[2] = 3;
-    gSprites[spriteId].data[3] = zero; // only this assignment of zero is necessary. other replacements of 0 with zero do not change the asm, compiler will treat it the same.
+    gSprites[spriteId].data[3] = 0;
 }
 
 void sub_80AA280(u8 var) // no?
@@ -896,7 +894,7 @@ void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
     u8 sp20[32];
     u8 str2[2];
 
-    DmaClear32(3, (void *)(VRAM + 0x18000 - (d + 1) * 256), 0x100);
+    DmaClear32(3, (void *)(VRAM + VRAM_SIZE - (d + 1) * 256), 0x100);
 
     len = StringLength(string);
     if (len > 8)
@@ -907,7 +905,7 @@ void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
         str2[0] = string[i];
         str2[1] = EOS;
         RenderTextHandleBold(sp0, str2);
-        DmaCopy32Defvars(3, sp20, (void *)(VRAM + 0x18000 - (d + 1) * 256 + i * 32), sizeof(sp0));
+        DmaCopy32Defvars(3, sp20, (void *)(VRAM + VRAM_SIZE - (d + 1) * 256 + i * 32), sizeof(sp0));
     }
 
     r7 = 124 - d * 2;
