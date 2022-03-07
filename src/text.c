@@ -2839,12 +2839,12 @@ static void EraseAtCursor(struct Window *win)
 
 static void ClipLeft(struct Window *win)
 {
-    u32 pixel = win->left & 7;
+    u8 pixel = win->left & 7;
 
-    if (win->textMode != TEXT_MODE_MONOSPACE && pixel)
+    if (win->textMode != TEXT_MODE_MONOSPACE && pixel != 0)
     {
         const u32 *masks = sGlyphMasks[8][pixel];
-        u32 outsideMask = masks[0];
+        u32 outsideMask = *masks;
         u32 insideMask = ~outsideMask;
         u32 outside = sGlyphBuffer.background & outsideMask;
         u16 tileNum = GetCursorTileNum(win, 0, 0);
@@ -2872,15 +2872,14 @@ static void ClipLeft(struct Window *win)
 
 static void ClipRight(struct Window *win)
 {
-    register u8 cursorX asm("r0") = win->cursorX;
-    u8 left = win->left;
-    u32 pixelX = (cursorX + left) & 7;
+    u8 pixelX = (win->left + win->cursorX) & 7;
 
     if (win->textMode != TEXT_MODE_MONOSPACE && pixelX != 0)
     {
         const u32 *masks = sGlyphMasks[8 - pixelX][pixelX];
-        u32 insideMask = masks[0];
-        u32 outside = (sGlyphBuffer.background & ~insideMask);
+        u32 insideMask = *masks;
+        u32 outsideMask = ~insideMask;
+        u32 outside = sGlyphBuffer.background & outsideMask;
         u16 tileNum; 
         u32 *tileData;
 
@@ -2967,7 +2966,7 @@ static bool8 PlayerCanInterruptDelay(struct Window *win)
         retVal = FALSE;
         break;
     case WAIT_TYPE_CONTEST:
-        retVal = gIsLinkContest ? FALSE : TRUE;
+        retVal = !gIsLinkContest;
         break;
     case WAIT_TYPE_BATTLE:
         retVal = (gBattleTypeFlags & BATTLE_TYPE_LINK) ? FALSE : TRUE;
@@ -3741,12 +3740,9 @@ void ConvertInternationalString(u8 *s, u8 language)
         s[i++] = 22;
         s[i++] = EOS;
 
-        i--;
-
-        while (i != (u8)-1)
+        while (i--)
         {
             s[i + 2] = s[i];
-            i--;
         }
 
         s[0] = EXT_CTRL_CODE_BEGIN;
