@@ -51,8 +51,8 @@ const struct SpriteTemplate gSpriteTemplate_83CF56C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct CompressedSpriteSheet gUnknown_083CF584[] = {gMenuMoneyGfx, 256, SPRITE_TAG_MONEY};
-const struct CompressedSpritePalette gUnknown_083CF58C[] = {gMenuMoneyPal, SPRITE_TAG_MONEY};
+static const struct CompressedSpriteSheet gUnknown_083CF584 = {gMenuMoneyGfx, 256, SPRITE_TAG_MONEY};
+static const struct CompressedSpritePalette gUnknown_083CF58C = {gMenuMoneyPal, SPRITE_TAG_MONEY};
 
 bool8 IsEnoughMoney(u32 budget, u32 cost)
 {
@@ -305,8 +305,8 @@ void OpenMoneyWindow(u32 amount, u8 x, u8 y)
     Menu_DrawStdWindowFrame(x, y, x + 13, y + 3);
     UpdateMoneyWindow(amount, x, y);
 
-    LoadCompressedObjectPic(gUnknown_083CF584);
-    LoadCompressedObjectPalette(gUnknown_083CF58C);
+    LoadCompressedObjectPic(&gUnknown_083CF584);
+    LoadCompressedObjectPalette(&gUnknown_083CF58C);
 
     gUnknown_02038734 = CreateSprite(&gSpriteTemplate_83CF56C, x * 8 + 19, y * 8 + 11, 0);
 }

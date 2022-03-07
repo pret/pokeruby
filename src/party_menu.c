@@ -2431,32 +2431,28 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 {
     u8 monIconSpriteId;
     u8 heldItemSpriteId;
-    struct Sprite * r1;
-    struct Sprite * heldItemSprite;
 
     monIconSpriteId = GetMonIconSpriteId(taskId, monIndex);
     heldItemSpriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
 
-    r1 = gSprites;
-    heldItemSprite = r1 + heldItemSpriteId;
-    heldItemSprite->x2 = 4;
-    heldItemSprite->y2 = 10;
-    heldItemSprite->data[7] = monIconSpriteId;
+    gSprites[heldItemSpriteId].x2 = 4;
+    gSprites[heldItemSpriteId].y2 = 10;
+    gSprites[heldItemSpriteId].data[7] = monIconSpriteId;
     gSprites[monIconSpriteId].data[7] = heldItemSpriteId;
 
     if (item == ITEM_NONE)
     {
-        heldItemSprite->invisible = TRUE;
+        gSprites[heldItemSpriteId].invisible = TRUE;
     }
     else if (ItemIsMail(item))
     {
-        StartSpriteAnim(heldItemSprite, 1);
-        heldItemSprite->invisible = FALSE;
+        StartSpriteAnim(&gSprites[heldItemSpriteId], 1);
+        gSprites[heldItemSpriteId].invisible = FALSE;
     }
     else
     {
-        StartSpriteAnim(heldItemSprite, 0);
-        heldItemSprite->invisible = FALSE;
+        StartSpriteAnim(&gSprites[heldItemSpriteId], 0);
+        gSprites[heldItemSpriteId].invisible = FALSE;
     }
 
     gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
@@ -2502,19 +2498,19 @@ void SetMonIconSpriteId(u8 taskId, u8 monIndex, u8 spriteId)
     switch (monIndex)
     {
     case 0:
-        gTasks[taskId].data[0] = (u8)gTasks[taskId].data[0] | (spriteId << 8);
+        gTasks[taskId].data[0] = (gTasks[taskId].data[0] & 0xFF) | (spriteId << 8);
         break;
     case 1:
         gTasks[taskId].data[0] = (gTasks[taskId].data[0] & ~0xFF) | spriteId;
         break;
     case 2:
-        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1] | (spriteId << 8);
+        gTasks[taskId].data[1] = (gTasks[taskId].data[1] & 0xFF) | (spriteId << 8);
         break;
     case 3:
         gTasks[taskId].data[1] = (gTasks[taskId].data[1] & ~0xFF) | spriteId;
         break;
     case 4:
-        gTasks[taskId].data[2] = (u8)gTasks[taskId].data[2] | (spriteId << 8);
+        gTasks[taskId].data[2] = (gTasks[taskId].data[2] & 0xFF) | (spriteId << 8);
         break;
     case 5:
         gTasks[taskId].data[2] = (gTasks[taskId].data[2] & ~0xFF) | spriteId;
@@ -2522,45 +2518,30 @@ void SetMonIconSpriteId(u8 taskId, u8 monIndex, u8 spriteId)
     }
 }
 
-u16 GetMonHeldItemIconSpriteId(u8 taskId, u8 monIndex)
+static u8 GetMonHeldItemIconSpriteId(u8 taskId, u8 monIndex)
 {
     u8 spriteId = GetMonIconSpriteId(taskId, monIndex);
-    u8 retVal = gSprites[spriteId].data[7];
-    return retVal;
+    return gSprites[spriteId].data[7];
 }
 
-// #ifdef NONMATCHING (for grep)
 void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
 {
     u8 spriteId;
-    u16 heldItem;
 
     spriteId = GetMonHeldItemIconSpriteId(taskId, monIndex);
     if (!GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM))
     {
         gSprites[spriteId].invisible = TRUE;
     }
+    else if (ItemIsMail(GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM)))
+    {
+        StartSpriteAnim(&gSprites[spriteId], 1);
+        gSprites[spriteId].invisible = FALSE;
+    }
     else
     {
-        register struct Sprite *sprite asm("r4");
-// sprite2 is required to mimic a failed optimization where r0 would have been loaded at the end of the if statement
-        register struct Sprite *sprite2 asm("r0");
-        u8 animNum;
-        heldItem = GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM);
-        if (ItemIsMail(heldItem))
-        {
-            sprite = &gSprites[spriteId];
-            sprite2 = sprite; // hack
-            animNum = 1;
-        }
-        else
-        {
-            sprite = &gSprites[spriteId];
-            sprite2 = sprite; // hack
-            animNum = 0;
-        }
-        StartSpriteAnim(sprite2, animNum);
-        sprite->invisible = FALSE;
+        StartSpriteAnim(&gSprites[spriteId], 0);
+        gSprites[spriteId].invisible = FALSE;
     }
 }
 
