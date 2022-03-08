@@ -2315,7 +2315,7 @@ void sub_8088338(struct Task *task)
 void sub_8088380(struct Task *task)
 {
     IntrCallback callback;
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    LoadWordFromTwoHalfwords(&task->data[13], (u32 *)&callback);
     SetVBlankCallback(callback);
     Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
     InitMenuWindow(&gMenuTextWindowTemplate);
@@ -2329,7 +2329,7 @@ void sub_80883DC(void)
     struct Task *task;
     IntrCallback callback;
     task = &gTasks[FindTaskIdByFunc(sub_8088120)];
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    LoadWordFromTwoHalfwords(&task->data[13], (u32 *)&callback);
     callback();
     REG_WIN0H = task->data[1];
     REG_WIN0V = task->data[2];
@@ -2438,7 +2438,7 @@ void sub_808862C(struct Task *task)
     u16 bg0cnt;
     bg0cnt = (REG_BG0CNT >> 8) << 11;
     CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    LoadWordFromTwoHalfwords(&task->data[13], (u32 *)&intrCallback);
     SetVBlankCallback(intrCallback);
     Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
     InitMenuWindow(&gMenuTextWindowTemplate);
@@ -2452,7 +2452,7 @@ void sub_80886B0(void)
     IntrCallback intrCallback;
     struct Task *task;
     task = &gTasks[FindTaskIdByFunc(sub_808847C)];
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    LoadWordFromTwoHalfwords(&task->data[13], (u32 *)&intrCallback);
     intrCallback();
     REG_BG0HOFS = task->data[1];
     REG_BG0VOFS = task->data[2];

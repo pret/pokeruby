@@ -122,15 +122,16 @@ u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
     return sprite;
 }
 
-void StoreWordInTwoHalfwords(u16 *h, u32 w)
+// Should be u16 pointers but tasks uses s16 so we have to use this
+void StoreWordInTwoHalfwords(s16 *h, u32 w)
 {
-    h[0] = (u16)(w);
-    h[1] = (u16)(w >> 16);
+    h[0] = (s16)(w);
+    h[1] = (s16)(w >> 16);
 }
 
-void LoadWordFromTwoHalfwords(u16 *h, u32 *w)
+void LoadWordFromTwoHalfwords(s16 *h, u32 *w)
 {
-    *w = h[0] | (s16)h[1] << 16;
+    *w = (h[0] & 0xffff) | h[1] << 16;
 }
 
 void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)

@@ -1472,47 +1472,45 @@ void sub_80EC210()
 
 void sub_80EC268()
 {
-    u8 var1;
-
     switch (gPokenavStructPtr->unk304)
     {
     case 0:
-        if (sub_80EEC10() != 0)
+        if (sub_80EEC10())
         {
             PlaySE(SE_SELECT);
             sub_80EF428(0, gPokenavStructPtr->unk6DAD);
             sub_80EED9C();
+            break;
         }
-        else
+
+        if (gMain.newKeys & A_BUTTON)
         {
-            if (gMain.newKeys & A_BUTTON)
+            gPokenavStructPtr->unk6DDC = gPokenavStructPtr->unk6DAD;
+            switch (gPokenavStructPtr->unk6DB2[gPokenavStructPtr->unk6DDC])
             {
-                gPokenavStructPtr->unk6DDC = gPokenavStructPtr->unk6DAD;
-                switch (gPokenavStructPtr->unk6DB2[gPokenavStructPtr->unk6DDC] - 1)
-                {
-                case 0:
-                    PlaySE(SE_SELECT);
-                    sub_80EBDBC(&sub_80EC4A0);
-                    break;
-                case 1:
-                    PlaySE(SE_SELECT);
-                    sub_80EBDBC(&sub_80EC81C);
-                    break;
-                case 4:
-                    gPokenavStructPtr->unk304 = 1;
-                    break;
-                case 3:
-                    gPokenavStructPtr->unk304 = 2;
-                    break;
-                case 2:
-                    gPokenavStructPtr->unk304 = 6;
-                    break;
-                }
-            }
-            else if (gMain.newKeys & B_BUTTON)
-            {
+            case 1:
+                PlaySE(SE_SELECT);
+                sub_80EBDBC(&sub_80EC4A0);
+                break;
+            case 2:
+                PlaySE(SE_SELECT);
+                sub_80EBDBC(&sub_80EC81C);
+                break;
+            case 5:
                 gPokenavStructPtr->unk304 = 1;
+                break;
+            case 4:
+                gPokenavStructPtr->unk304 = 2;
+                break;
+            case 3:
+                gPokenavStructPtr->unk304 = 6;
+                break;
             }
+            break;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            gPokenavStructPtr->unk304 = 1;
         }
         break;
     case 1:
@@ -1537,7 +1535,7 @@ void sub_80EC268()
 			}
 			else
 			{
-				PlaySE(0x20);
+				PlaySE(SE_FAILURE);
 				sub_80EF428(0, 5);
 				gPokenavStructPtr->unk304 = 0xFF;
 			}
@@ -1552,23 +1550,24 @@ void sub_80EC268()
         }
         else
         {
-            PlaySE(0x20);
+            PlaySE(SE_FAILURE);
             sub_80EF428(0, 6);
             gPokenavStructPtr->unk304 = 0xFF;
         }
         break;
     case 0xFF:
-        if ((var1 = sub_80EEC10()) != 0)
+        if (sub_80EEC10())
         {
             PlaySE(SE_SELECT);
             sub_80EF428(0, gPokenavStructPtr->unk6DAD);
             gPokenavStructPtr->unk304 = 0;
             sub_80EED9C();
+            break;
         }
-        else if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
 		{
 			sub_80EF428(0, gPokenavStructPtr->unk6DAD);
-			gPokenavStructPtr->unk304 = var1;
+			gPokenavStructPtr->unk304 = 0;
 		}
         break;
     }
@@ -1862,8 +1861,8 @@ void sub_80ECA10()
 			gPokenavStructPtr->unk304++;
         break;
     case 5:
-        if (sub_8055870()) return;
-        gPokenavStructPtr->unk304++;
+        if (!sub_8055870())
+            gPokenavStructPtr->unk304++;
         break;
     case 6:
         BeginNormalPaletteFade(gPokenavStructPtr->unk308, -1, 16, 0, RGB(0, 0, 0));
@@ -1918,11 +1917,12 @@ void sub_80ECC08()
             PlaySE(SE_SELECT);
             sub_80EF428(2, gPokenavStructPtr->unk6DAD);
             sub_80EED9C();
+            return;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            switch ((s8)gPokenavStructPtr->unk6DAD)
+            switch (gPokenavStructPtr->unk6DAD)
             {
             case 0:
                 gPokenavStructPtr->unk87D8 = 22;
@@ -1947,8 +1947,9 @@ void sub_80ECC08()
             gPokenavStructPtr->unk6DFC = gPokenavStructPtr->unk6DAD;
             gPokenavStructPtr->unk76AA = 1;
             sub_80EBDBC(&sub_80ED01C);
+            return;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
             gPokenavStructPtr->unk6DAD = 0x5;

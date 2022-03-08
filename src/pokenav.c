@@ -1239,17 +1239,18 @@ void sub_80F0954(u16 arg0, u16 arg1, u16 arg2)
 
 bool8 sub_80F098C(void)
 {
-    s32 r8;
+    u32 r8;
     if (gPokenavStructPtr->unk8784 == 0)
         return FALSE;
-    r8 = 0;
-    while (1)
+
+    // No point since it breaks
+    for (r8 = 0; r8 < 8; r8++)
     {
         gUnknown_083E3270[gPokenavStructPtr->unk87CA](gPokenavStructPtr->unk877E, gPokenavStructPtr->unk8780);
         if (--gPokenavStructPtr->unk8784 == 0)
             return FALSE;
         if (++gPokenavStructPtr->unk877E > gPokenavStructPtr->unk8774)
-            gPokenavStructPtr->unk877E = r8;
+            gPokenavStructPtr->unk877E = 0;
         gPokenavStructPtr->unk8780 += 2;
         gPokenavStructPtr->unk8780 &= 0x1F;
         break;
@@ -1345,7 +1346,7 @@ bool8 sub_80F0C48(void)
         sub_80F0A74(gPokenavStructPtr->unk8770 + gPokenavStructPtr->unkD15C,
                     gPokenavStructPtr->unk8778 + gPokenavStructPtr->unkD15C * 2);
 
-        if ((++gPokenavStructPtr->unkD15C) > 7)
+        if ((++gPokenavStructPtr->unkD15C) >= 8)
         {
             sub_80F081C(0);
             return FALSE;
@@ -1358,7 +1359,7 @@ bool8 sub_80F0C48(void)
 void LoadTrainerEyesDescriptionLines(void)
 {
     u16 i;
-    int trainerEyesId;
+    u32 trainerEyesId;
     const u8 *curChar;
 
     gPokenavStructPtr->unk306 = 0;
@@ -1442,7 +1443,7 @@ void sub_80F0EC0(void)
 
 bool8 sub_80F0EF4(void)
 {
-    if (gPokenavStructPtr->unkD15C > 6)
+    if (gPokenavStructPtr->unkD15C >= 7)
         return FALSE;
 
     if (++gPokenavStructPtr->unk306 > 1)

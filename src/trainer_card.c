@@ -348,7 +348,7 @@ void TrainerCard_FillTrainerCardStruct(void)
     struct Task *task = &gTasks[taskId];
     gTrainerCardPtr->isShowingLinkCard = task->data[TD_SHOWING_LINK_CARD];
 
-    LoadWordFromTwoHalfwords((u16 *)&task->data[TD_CALLBACK], (u32 *)&gTrainerCardPtr->var_60);
+    LoadWordFromTwoHalfwords(&task->data[TD_CALLBACK], (u32 *)&gTrainerCardPtr->var_60);
 
     if (gTrainerCardPtr->isShowingLinkCard)
     {

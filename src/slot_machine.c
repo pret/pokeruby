@@ -427,7 +427,7 @@ static void sub_81019EC(void)
 {
     struct Task *task = gTasks + FindTaskIdByFunc(SlotMachineDummyTask);
     sSlotMachine->unk01 = task->data[0];
-    LoadWordFromTwoHalfwords((u16 *)(task->data + 1), (u32 *)&sSlotMachine->prevMainCb);
+    LoadWordFromTwoHalfwords((task->data + 1), (u32 *)&sSlotMachine->prevMainCb);
 }
 
 static void SlotMachineDummyTask(u8 taskId)

@@ -7447,6 +7447,7 @@ static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
     s16 j;
     u8 result;
     u8 b;
+    // Needed to match
     s16 one;
 
 #define RETURN_REFLECTION_TYPE_AT(x, y)              \
@@ -7492,18 +7493,17 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
     };
 
     u8 b;
-    u8 index = z;
 
-    if (index == 0)
+    if (z == 0)
         return 0;
-    else if (index > 4)
-        index -= 4;
+    else if (z > 4)
+        z -= 4;
 
-    index--;
+    z--;
     b = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (unknown_08376040[index](b) == 1)
-        return index + 1;
+    if (unknown_08376040[z](b) == 1)
+        return z + 1;
 
     return 0;
 }
@@ -7585,26 +7585,26 @@ u8 ZCoordToPriority(u8 z)
 
 void ObjectEventUpdateZCoord(struct ObjectEvent *objEvent)
 {
-    u8 z = MapGridGetZCoordAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
-    u8 z2 = MapGridGetZCoordAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+    u8 curElevation = MapGridGetZCoordAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+    u8 prevElevation = MapGridGetZCoordAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (z == 0xF || z2 == 0xF)
+    if (curElevation == 15 || prevElevation == 15)
         return;
 
-    objEvent->currentElevation = z;
+    objEvent->currentElevation = curElevation;
 
-    if (z != 0 && z != 0xF)
-        objEvent->previousElevation = z;
+    if (curElevation == 0 || curElevation == 15)
+        return;
+
+    objEvent->previousElevation = curElevation;
 }
 
 void SetObjectSubpriorityByZCoord(u8 a, struct Sprite *sprite, u8 b)
 {
-    s32 tmp = sprite->centerToCornerVecY;
-    u32 tmpa = *(u16 *)&sprite->y;
-    u32 tmpb = *(u16 *)&gSpriteCoordOffsetY;
-    s32 tmp2 = (tmpa - tmp) + tmpb;
-    u16 tmp3 = (0x10 - ((((u32)tmp2 + 8) & 0xFF) >> 4)) * 2;
-    sprite->subpriority = tmp3 + sUnknown_08376050[a] + b;
+    u16 y = (sprite->y - sprite->centerToCornerVecY + gSpriteCoordOffsetY + 8) & 0xFF;
+    y = (16 - (y >> 4)) << 1;
+
+    sprite->subpriority = sUnknown_08376050[a] + y + b;
 }
 
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
@@ -7617,13 +7617,10 @@ static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sp
 
 bool8 AreZCoordsCompatible(u8 a, u8 b)
 {
-    if (a == 0 || b == 0)
+    if (a == 0 || b == 0 || a == b)
         return TRUE;
 
-    if (a != b)
-        return FALSE;
-
-    return TRUE;
+    return FALSE;
 }
 
 void GroundEffect_SpawnOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
