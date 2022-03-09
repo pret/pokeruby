@@ -27,7 +27,7 @@
 
 #define CpuFastFill16(value, dest, size) CpuFastFill(((value) << 16) | (value), (dest), (size))
 
-#define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
+#define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, (DMA_SRC_INC | ((size)/(32/8) & 0x1FFFFF)))
 
 #define DmaSet(dmaNum, src, dest, control)        \
 {                                                 \

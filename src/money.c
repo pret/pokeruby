@@ -176,124 +176,21 @@ void sub_80B7AEC(u32 arg0, u8 right, u8 top)
 #endif
 }
 
-#ifdef NONMATCHING
-void Draw10000Sprite(u8 var1, u8 var2, s32 var3)
+void Draw10000Sprite(u8 var1, u8 var2, u32 var3)
 {
     // 2D/3D array manipulation off the wazoo.
     // Converting to 2D/3D array casts makes it match less!
     u16 i;
 
-    CpuFastSet(
-        (void*)&gDecoration10000_Gfx[var3 * 0x100],
-        (void*)(VRAM + 0x8000 + (var2 * 0x3c0) + ((var1 + 1) * 0x20)),
-        32);
-    CpuFastSet(
-        (void*)&gDecoration10000_Gfx[var3 * 0x100 + 0x80],
-        (void*)(VRAM + 0x8000 + ((var2 + 1) * 0x3c0) + ((var1 + 1) * 0x20)),
-        32);
+    CpuFastCopy((void*)&gDecoration10000_Gfx[var3 * 0x100],(void*)(VRAM + 0x8000 + var2 * 0x3c0 + (var1 + 1) * 0x20),32 * 4);
+    CpuFastCopy((void*)&gDecoration10000_Gfx[var3 * 0x100 + 0x80],(void*)(VRAM + 0x8000 + (var2 + 1) * 0x3c0 + (var1 + 1) * 0x20),32 * 4);
 
     for (i = 0; i < 4; i++)
     {
-        u32 base = var2 * 0x20 + var1 + i;
-        ((u16 *)(VRAM + 0xF800))[base] = var2 * 0x1e + 1 + var1 + (u16)-4096;
-        ((u16 *)(VRAM + 0xF840))[base] = (var2 + 1) * 0x1e + 1 + var1 + (u16)-4096;
+        ((u16 *)(VRAM + 0xF800))[var2 * 32 + var1 + i] = var2 * 30 + 1 + var1 + i - 4096;
+        ((u16 *)(VRAM + 0xF800))[(var2 + 1) * 32 + var1 + i] = (var2 + 1) * 30 + 1 + var1 + i - 4096;
     };
 }
-#else
-NAKED
-void Draw10000Sprite(u8 var1, u8 var2, s32 var3)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    sub sp, 0x4\n\
-    mov r8, r0\n\
-    adds r5, r1, 0\n\
-    mov r9, r2\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    mov r1, r9\n\
-    lsls r1, 8\n\
-    mov r9, r1\n\
-    ldr r4, _080B7BD8 @ =gDecoration10000_Gfx\n\
-    adds r0, r1, r4\n\
-    lsls r6, r5, 4\n\
-    subs r6, r5\n\
-    lsls r1, r6, 6\n\
-    mov r3, r8\n\
-    adds r3, 0x1\n\
-    lsls r3, 5\n\
-    ldr r2, _080B7BDC @ =0x06008000\n\
-    adds r3, r2\n\
-    adds r1, r3\n\
-    movs r2, 0x20\n\
-    str r3, [sp]\n\
-    bl CpuFastSet\n\
-    adds r4, 0x80\n\
-    add r9, r4\n\
-    adds r0, r5, 0x1\n\
-    lsls r4, r0, 4\n\
-    subs r4, r0\n\
-    lsls r1, r4, 6\n\
-    ldr r3, [sp]\n\
-    adds r1, r3\n\
-    mov r0, r9\n\
-    movs r2, 0x20\n\
-    bl CpuFastSet\n\
-    movs r3, 0\n\
-    lsls r5, 5\n\
-    mov r0, r8\n\
-    adds r7, r5, r0\n\
-    lsls r6, 1\n\
-    adds r6, 0x1\n\
-    add r6, r8\n\
-    ldr r1, _080B7BE0 @ =0xfffff000\n\
-    adds r5, r1, 0\n\
-    ldr r0, _080B7BE4 @ =0x0600f800\n\
-    mov r12, r0\n\
-    ldr r1, _080B7BE8 @ =0x0600f840\n\
-    mov r9, r1\n\
-    lsls r4, 1\n\
-    adds r4, 0x1\n\
-    add r4, r8\n\
-_080B7BAA:\n\
-    adds r1, r7, r3\n\
-    lsls r1, 1\n\
-    mov r0, r12\n\
-    adds r2, r1, r0\n\
-    adds r0, r3, r6\n\
-    adds r0, r5\n\
-    strh r0, [r2]\n\
-    add r1, r9\n\
-    adds r0, r3, r4\n\
-    adds r0, r5\n\
-    strh r0, [r1]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0x3\n\
-    bls _080B7BAA\n\
-    add sp, 0x4\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080B7BD8: .4byte gDecoration10000_Gfx\n\
-_080B7BDC: .4byte 0x06008000\n\
-_080B7BE0: .4byte 0xfffff000\n\
-_080B7BE4: .4byte 0x0600f800\n\
-_080B7BE8: .4byte 0x0600f840\n\
-    .syntax divided\n");
-}
-#endif
 
 void UpdateMoneyWindow(u32 amount, u8 x, u8 y)
 {
