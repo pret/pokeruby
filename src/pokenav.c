@@ -1811,21 +1811,24 @@ void sub_80F19DC(u8 *text)
 
 void sub_80F19FC(void)
 {
-    register u8 *ptr asm("r5") = gUnknown_020388B0;
-    if (ptr[0] == 1)
+    if (gUnknown_020388B0[0] == 1)
     {
         const u8 *landmarkName;
-        if ((landmarkName = GetLandmarkName(gPokenavStructPtr->regionMap.mapSectionId, gPokenavStructPtr->regionMap.everGrandeCityArea, ptr[1])) != NULL)
+        if ((landmarkName = GetLandmarkName(gPokenavStructPtr->regionMap.mapSectionId, gPokenavStructPtr->regionMap.everGrandeCityArea, gUnknown_020388B0[1])) != NULL)
         {
-            sub_8072A18(landmarkName, 0x70, (2 * ptr[1] + 6) * 8, 0x78, 1);
-            if (ptr[1]++ != 3)
+            do
+            {
+                sub_8072A18(landmarkName, 0x70, ((2 * gUnknown_020388B0[1]) + 6) * 8, 0x78, 1);
+            } while (0);
+
+            if (gUnknown_020388B0[1]++ != 3)
             {
                 return;
             }
         }
 
-        Menu_BlankWindowRect(14, 2 * ptr[1] + 6, 28, 15);
-        ptr[0] = 0;
+        Menu_BlankWindowRect(14, 2 * gUnknown_020388B0[1] + 6, 28, 15);
+        gUnknown_020388B0[0] = 0;
     }
 }
 
