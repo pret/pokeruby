@@ -2237,49 +2237,46 @@ static void sub_8049E9C(u8 a0)
 #ifdef NONMATCHING
 static void sub_8049ED4(u8 a0)
 {
-    u8 i;
-    s8 stringLength;
-    u8 whichParty = 1;
-    u8 whichPokemon;
-    u8 string1[40];
-    u8 string2[56];
-    u8 temp0 = gUnknown_03004824->unk_0082[a0];
+    u8 whichParty, whichPokemon, i, temp0;
+	s8 stringLength;
+    u8 string1[40], string2[56];
+    
+    temp0 = gUnknown_03004824->unk_0082[a0];
     if (temp0 < PARTY_SIZE)
         whichParty = 0;
+    else
+        whichParty = 1;
     whichPokemon = temp0 % PARTY_SIZE;
+    stringLength = 0;
 
     switch (gUnknown_03004824->unk_0080[a0])
     {
         case 1:
             for (i = 0; i < gUnknown_03004824->partyCounts[a0]; i ++)
-            {
                 gSprites[gUnknown_03004824->partyIcons[whichParty][i]].invisible = TRUE;
-            }
+
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].invisible = FALSE;
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[0] = 20;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[2] = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[4] = gTradeMonSpriteCoords[6 * whichParty + whichPokemon][1] * 8 - 12;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[2] = ((gTradeMonSpriteCoords[whichParty * 6][0] + gTradeMonSpriteCoords[whichParty * 6 + 1][0]) / 2) * 8 + 14;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[4] = gTradeMonSpriteCoords[whichParty * 6][1] * 8 - 12;
             StoreSpriteCallbackInData(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], SpriteCB_PokemonIcon);
             gUnknown_03004824->unk_0080[a0] ++;
             sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]]);
             Menu_DestroyCursor();
+
             Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[whichParty][0], 0, gUnknown_0820C330[whichParty][1], 19);
             sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * a0, 0, gTradePartyBoxTilemap, 15, 17, 0);
             if (whichParty == 0)
-            {
                 sub_804A80C();
-            }
             break;
         case 2:
             if (gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].callback == SpriteCB_PokemonIcon)
-            {
-                gUnknown_03004824->unk_0080[a0] = 3;
-            }
+                gUnknown_03004824->unk_0080[a0]++;
             break;
         case 3:
-            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * whichParty, 0, gTradePartyBoxTilemap, 15, 17, 0);
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].x = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].y = gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][1] * 8 - 12;
+            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, whichParty * 15, 0, gTradeMovesBoxTilemap, 15, 17, 0);
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].x = ((gTradeMonSpriteCoords[whichParty * 6][0] + gTradeMonSpriteCoords[whichParty * 6 + 1][0]) / 2) * 8 + 14;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].y = gTradeMonSpriteCoords[whichParty * 6][1] * 8 - 12;
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].x2 = 0;
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].y2 = 0;
             stringLength = sub_804A2B4(string1 + 6, whichParty, whichPokemon);
@@ -2289,14 +2286,14 @@ static void sub_8049ED4(u8 a0)
             string1[3] = 0xFC;
             string1[4] = 0x11;
             string1[5] = (64 - stringLength) / 2;
-            Text_InitWindowAndPrintText(&gUnknown_03004824->window, string1, gUnknown_03004824->unk_007a + whichParty * 6 * 32, gUnknown_0820C334[whichParty][0], gUnknown_0820C334[whichParty][1]);
+            Text_InitWindowAndPrintText(&gUnknown_03004824->window, string1, gUnknown_03004824->unk_007a + whichParty * 6 * 32, gUnknown_0820C334[whichParty * 2 + 0][0], gUnknown_0820C334[whichParty * 2 + 0][1]);
             sub_804A33C(string2, whichParty, whichPokemon);
-            Text_InitWindowAndPrintText(&gUnknown_03004824->window, gOtherText_Terminator2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 32, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
-            Text_InitWindowAndPrintText(&gUnknown_03004824->window, string2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 38, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
+            Text_InitWindowAndPrintText(&gUnknown_03004824->window, gOtherText_Terminator2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 32, gUnknown_0820C334[whichParty * 2 + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
+            Text_InitWindowAndPrintText(&gUnknown_03004824->window, string2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 38, gUnknown_0820C334[whichParty * 2 + 1][0], gUnknown_0820C334[whichParty * 2 + 1][1] + 1);
             gUnknown_03004824->unk_0080[a0] ++;
             break;
         case 4:
-            sub_804ACD8(gUnknown_0820C14C[5], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
+            sub_804ACD8(gUnknown_0820C14C[5], OBJ_VRAM0 + (gUnknown_03004824->unk_007e << 5), 20);
             sub_804A51C(a0, whichPokemon, gUnknown_0820C3D1[a0][0] + 4, gUnknown_0820C3D1[a0][1] + 1, gUnknown_0820C3D1[a0][0], gUnknown_0820C3D1[a0][1]);
             gUnknown_03004824->unk_0080[a0] ++;
             break;
@@ -2860,7 +2857,7 @@ static void sub_804A41C(u8 whichParty)
         StringCopy10(string + 6, nickname);
         GetMonGender(pokemon);
         string[5] = (50 - Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7294, string + 6)) / 2;
-        Text_InitWindowAndPrintText(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * 6 * whichParty + 22 * i, gTradeMonSpriteCoords[i + 6 * whichParty][0], gTradeMonSpriteCoords[i + 6 * whichParty][1]);
+        Text_InitWindowAndPrintText(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * whichParty * 6 + 22 * i, gTradeMonSpriteCoords[i + whichParty * 6][0], gTradeMonSpriteCoords[i + whichParty * 6][1]);
     }
 }
 #else
@@ -3062,8 +3059,8 @@ static void sub_804A740(u8 whichParty)
     for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
     {
         gSprites[gUnknown_03004824->partyIcons[whichParty][i]].invisible = FALSE;
-        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].x = gTradeMonSpriteCoords[6 * whichParty + i][0] * 8 + 14;
-        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].y = gTradeMonSpriteCoords[6 * whichParty + i][1] * 8 - 12;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].x = gTradeMonSpriteCoords[whichParty * 6 + i][0] * 8 + 14;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].y = gTradeMonSpriteCoords[whichParty * 6 + i][1] * 8 - 12;
         gSprites[gUnknown_03004824->partyIcons[whichParty][i]].x2 = 0;
         gSprites[gUnknown_03004824->partyIcons[whichParty][i]].y2 = 0;
     }

@@ -617,8 +617,6 @@ bool8 sub_80EF874(void)
     return TRUE;
 }
 
-asm(".include \"constants/gba_constants.inc\"\n");
-
 void sub_80EF9F8(void)
 {
     bool8 someBool = FALSE;
