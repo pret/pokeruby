@@ -154,7 +154,7 @@ struct Link gLink;
 u8 gLastRecvQueueCount;
 u16 gLinkSavedIme;
 
-#ifdef GERMAN
+#if GERMAN
 u8 deUnkValue1;
 u8 deUnkValue2;
 #endif

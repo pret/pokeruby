@@ -20,7 +20,7 @@
 
 #define GFX_TAG_CONDITIONUPDOWN 0
 
-#ifdef GERMAN
+#if GERMAN
 extern const u16 ConditionUpDownPalette[16];
 extern const u8 ConditionUpDownTiles[0x200];
 #else

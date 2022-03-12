@@ -7,7 +7,7 @@
 #include "sprite.h"
 #include "mon_markings.h"
 
-#ifdef GERMAN
+#if GERMAN
 #define MENU_TEXT_SPRITE_X_OFFSET 24
 #else
 #define MENU_TEXT_SPRITE_X_OFFSET 32

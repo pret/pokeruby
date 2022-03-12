@@ -19,7 +19,7 @@
 #define BATTLESTRINGS_NO    351
 #define BATTLESTRINGS_MAX   BATTLESTRINGS_NO + BATTLESTRING_TO_SUB
 
-#ifdef GERMAN
+#if GERMAN
 #include "data/battle_strings_de.h" // TODO: German
 #else
 #include "data/battle_strings_en.h"
@@ -205,7 +205,7 @@ u8 GetMultiplayerId(void);
 u8 GetBattlerAtPosition(u8 ID);
 u8 GetBattlerSide(u8 bank);
 u8 GetBattlerPosition(u8 bank);
-#ifdef GERMAN
+#if GERMAN
 extern u8 *de_sub_804110C();
 #endif
 
@@ -247,7 +247,7 @@ void BufferStringBattle(u16 stringID)
             else
             {
                 stringPtr = BattleText_SingleWantToBattle1;
-#ifdef GERMAN
+#if GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
             }
@@ -288,7 +288,7 @@ void BufferStringBattle(u16 stringID)
                 else
                 {
                     stringPtr = BattleText_SentOutDouble1;
-#ifdef GERMAN
+#if GERMAN
                     stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
                 }
@@ -298,7 +298,7 @@ void BufferStringBattle(u16 stringID)
             else
             {
                 stringPtr = BattleText_SentOutSingle1;
-#ifdef GERMAN
+#if GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
             }
@@ -328,7 +328,7 @@ void BufferStringBattle(u16 stringID)
             else
             {
                 stringPtr = BattleText_WithdrewPoke1;
-#ifdef GERMAN
+#if GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
             }
@@ -358,7 +358,7 @@ void BufferStringBattle(u16 stringID)
             else
             {
                 stringPtr = BattleText_SentOutSingle2;
-#ifdef GERMAN
+#if GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
             }
@@ -434,7 +434,7 @@ void BufferStringBattle(u16 stringID)
         else
         {
             stringPtr = gBattleStringsTable[stringID - BATTLESTRING_TO_SUB];
-#ifdef GERMAN
+#if GERMAN
             stringPtr = de_sub_804110C(stringID, stringPtr);
 #endif
         }
@@ -475,7 +475,7 @@ const u8* TryGetStatusString(u8* src)
     return NULL;
 }
 
-#ifdef GERMAN
+#if GERMAN
 extern u8 *de_sub_8073174(u8 *, const u8 *);
 extern u8 *de_sub_8041024(s32, u32);
 #endif
@@ -847,7 +847,7 @@ void ExpandBattleTextBuffPlaceholders(u8* src, u8* dst)
         {
         case B_BUFF_STRING: // battle string
             hword = T1_READ_16(&src[srcID + 1]);
-#ifdef GERMAN
+#if GERMAN
             if (hword == 209 || hword == 211)
                 srcID += 3;
 #endif

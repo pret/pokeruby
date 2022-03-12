@@ -124,7 +124,7 @@ u16 StringLength(const u8 *str)
     return length;
 }
 
-#ifdef GERMAN
+#if GERMAN
 s32 StringLengthN(const u8 *str, s32 n)
 {
     s32 i;

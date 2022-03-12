@@ -32,7 +32,7 @@ extern const u8 *const gMoveDescriptions[];
 extern const u8 gTypeNames[][7];
 extern const u8 *const gContestCategoryNames[];
 
-#ifdef GERMAN
+#if GERMAN
 extern const u8 deuOtherText_ForgotAndLearned[];
 #endif
 
@@ -596,7 +596,7 @@ static void MoveTutorMain(void)
     case 30:
         if (Menu_UpdateWindowText())
         {
-#ifdef GERMAN
+#if GERMAN
             PrintMainMoveTutorMenuText(deuOtherText_ForgotAndLearned);
 #else
             PrintMainMoveTutorMenuText(gOtherText_ForgotOrDidNotLearnMove);

@@ -225,7 +225,7 @@ const u8 sTheEnd_LetterMap_D[] =
     1, 0x86, 0x87,
 };
 
-#ifdef GERMAN
+#if GERMAN
 const u8 sTheEnd_LetterMap_F[] = {
     1, 0, 0,
     1, 0xFF, 0xFF,
@@ -243,7 +243,7 @@ const u8 sTheEnd_LetterMap_I[] = {
 };
 #endif
 
-#ifdef GERMAN
+#if GERMAN
 #include "data/credits_de.h"
 #else
 #include "data/credits_en.h"

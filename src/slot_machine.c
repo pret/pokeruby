@@ -3092,7 +3092,7 @@ static void sub_8104CAC(u8 arg0)
         );
         task->data[4 + i] = spriteId;
 
-#ifdef GERMAN
+#if GERMAN
         if (arg0 == 5 && i <= 2)
             gSprites[spriteId].invisible = TRUE;
 #endif

@@ -66,7 +66,7 @@ static void sub_8083CA4(u8 taskId);
 static u8 debug_sub_808B850(void);
 #endif
 
-#ifdef GERMAN
+#if GERMAN
 const u8 TrainerCardColorName_Bronze[] = _("BRONZE");
 const u8 TrainerCardColorName_Copper[] = _("KUPFER");
 const u8 TrainerCardColorName_Silver[] = _("SILBER");

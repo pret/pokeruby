@@ -18,7 +18,7 @@ u8 *StringAppend(u8 *dest, const u8 *src);
 u8 *StringCopyN(u8 *dest, const u8 *src, u8 n);
 u8 *StringAppendN(u8 *dest, const u8 *src, u8 n);
 u16 StringLength(const u8 *str);
-#ifdef GERMAN
+#if GERMAN
 s32 StringLengthN(const u8 *str, s32 n);
 #endif
 s32 StringCompare(const u8 *str1, const u8 *str2);
