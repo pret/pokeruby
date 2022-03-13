@@ -2405,13 +2405,11 @@ void sub_804A33C(u8 *a0, u8 whichParty, u8 whichPokemon)
     }
 }
 
-#ifdef NONMATCHING
 static void sub_804A41C(u8 whichParty)
 {
-    u8 i;
+    u8 i, gender;
     u8 nickname[22];
     u8 string[40];
-    struct Pokemon *pokemon;
 
     string[0] = 0xFC;
     string[1] = 0x06;
@@ -2422,144 +2420,23 @@ static void sub_804A41C(u8 whichParty)
 
     for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
     {
-        pokemon = whichParty == 0 ? &gPlayerParty[i] : &gEnemyParty[i];
-        GetMonData(pokemon, MON_DATA_NICKNAME, nickname);
-        StringCopy10(string + 6, nickname);
-        GetMonGender(pokemon);
+        if (!whichParty)
+        {
+            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
+            StringCopy10(string + 6, nickname);
+            gender = GetMonGender(&gPlayerParty[i]);
+        }
+        else
+        {
+            GetMonData(&gEnemyParty[i], MON_DATA_NICKNAME, nickname);
+            StringCopy10(string + 6, nickname);
+            gender = GetMonGender(&gEnemyParty[i]);
+        }
         string[5] = (50 - Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7294, string + 6)) / 2;
         Text_InitWindowAndPrintText(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * whichParty * 6 + 22 * i, gTradeMonSpriteCoords[i + whichParty * 6][0], gTradeMonSpriteCoords[i + whichParty * 6][1]);
     }
 }
-#else
-NAKED
-static void sub_804A41C(u8 whichParty)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x44\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tadd r3, sp, 0x1C\n"
-                    "\tmovs r2, 0\n"
-                    "\tmovs r1, 0xFC\n"
-                    "\tstrb r1, [r3]\n"
-                    "\tmovs r0, 0x6\n"
-                    "\tstrb r0, [r3, 0x1]\n"
-                    "\tmovs r0, 0x4\n"
-                    "\tstrb r0, [r3, 0x2]\n"
-                    "\tstrb r1, [r3, 0x3]\n"
-                    "\tmovs r0, 0x11\n"
-                    "\tstrb r0, [r3, 0x4]\n"
-                    "\tstrb r2, [r3, 0x5]\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r1, _0804A470 @ =gUnknown_03004824\n"
-                    "\tldr r0, [r1]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tadds r0, r5\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r6, r0\n"
-                    "\tbcs _0804A504\n"
-                    "\tmov r8, r3\n"
-                    "\tadds r7, r1, 0\n"
-                    "\tldr r0, _0804A474 @ =gTradeMonSpriteCoords\n"
-                    "\tmov r9, r0\n"
-                    "\tmovs r4, 0x1\n"
-                    "\tadd r4, r9\n"
-                    "\tmov r10, r4\n"
-                    "_0804A462:\n"
-                    "\tcmp r5, 0\n"
-                    "\tbne _0804A47C\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r4, r6, 0\n"
-                    "\tmuls r4, r0\n"
-                    "\tldr r0, _0804A478 @ =gPlayerParty\n"
-                    "\tb _0804A484\n"
-                    "\t.align 2, 0\n"
-                    "_0804A470: .4byte gUnknown_03004824\n"
-                    "_0804A474: .4byte gTradeMonSpriteCoords\n"
-                    "_0804A478: .4byte gPlayerParty\n"
-                    "_0804A47C:\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r4, r6, 0\n"
-                    "\tmuls r4, r0\n"
-                    "\tldr r0, _0804A514 @ =gEnemyParty\n"
-                    "_0804A484:\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x2\n"
-                    "\tadd r2, sp, 0x4\n"
-                    "\tbl GetMonData\n"
-                    "\tmov r0, sp\n"
-                    "\tadds r0, 0x22\n"
-                    "\tadd r1, sp, 0x4\n"
-                    "\tbl StringCopy10\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl GetMonGender\n"
-                    "\tmov r1, sp\n"
-                    "\tadds r1, 0x22\n"
-                    "\tldr r0, _0804A518 @ =gWindowTemplate_81E7294\n"
-                    "\tbl Text_GetStringWidthFromWindowTemplate\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmovs r1, 0x32\n"
-                    "\tsubs r1, r0\n"
-                    "\tlsrs r0, r1, 31\n"
-                    "\tadds r1, r0\n"
-                    "\tasrs r1, 1\n"
-                    "\tmov r0, r8\n"
-                    "\tstrb r1, [r0, 0x5]\n"
-                    "\tldr r1, [r7]\n"
-                    "\tadds r0, r1, 0x4\n"
-                    "\tadds r1, 0x7A\n"
-                    "\tlsls r2, r5, 5\n"
-                    "\tadds r2, r5\n"
-                    "\tlsls r2, 2\n"
-                    "\tldrb r1, [r1]\n"
-                    "\tadds r2, r1\n"
-                    "\tmovs r1, 0x16\n"
-                    "\tmuls r1, r6\n"
-                    "\tadds r2, r1\n"
-                    "\tlsls r2, 16\n"
-                    "\tlsrs r2, 16\n"
-                    "\tlsls r1, r5, 1\n"
-                    "\tadds r1, r5\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r1, r6, r1\n"
-                    "\tlsls r1, 1\n"
-                    "\tmov r4, r9\n"
-                    "\tadds r3, r1, r4\n"
-                    "\tldrb r3, [r3]\n"
-                    "\tadd r1, r10\n"
-                    "\tldrb r1, [r1]\n"
-                    "\tstr r1, [sp]\n"
-                    "\tmov r1, r8\n"
-                    "\tbl Text_InitWindowAndPrintText\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r6, r0, 24\n"
-                    "\tldr r0, [r7]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tadds r0, r5\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r6, r0\n"
-                    "\tbcc _0804A462\n"
-                    "_0804A504:\n"
-                    "\tadd sp, 0x44\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_0804A514: .4byte gEnemyParty\n"
-                    "_0804A518: .4byte gWindowTemplate_81E7294");
-}
-#endif
+
 
 void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
@@ -3102,10 +2979,6 @@ static void sub_804B2D0(u8 whichParty, u8 a1)
     }
 }
 
-// non-shifting nonmatch
-// out of order statements + register swaps?
-// r4 is loaded with 0 way before it's used (and it should be r2)
-#ifdef NONMATCHING
 void sub_804B41C(void)
 // Link trade init
 {
@@ -3118,30 +2991,33 @@ void sub_804B41C(void)
             gUnknown_03004828 = &ewram_2010000.unk_0f000;
             ResetSpriteData();
             FreeAllSpritePalettes();
+
             SetVBlankCallback(sub_804B210);
+
             sub_804B228();
+
             Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
-            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E6F84);
+            Text_InitWindowWithTemplate(&(gUnknown_03004828->window), &gWindowTemplate_81E6F84);
             gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
             //
             // start of nonmatching here?
-            TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
+            TextWindow_LoadStdFrameGraphics(&(gUnknown_03004828->window));
             Menu_EraseScreen();
+
             gLinkType = 0x1144;
             gMain.state++;
+
             LZDecompressVram(gBattleTextboxTiles, (void *)VRAM);
             CpuCopy16(gBattleTextboxTilemap, gSharedMem, 0x1000);
-            DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
+            // Should be DMACopy16, but that doesn't match
+            Dma3CopyLarge_(gSharedMem, BG_SCREEN_ADDR(5), 0x500, 16);
             LoadCompressedPalette(gBattleTextboxPalette, 0, 32);
             gUnknown_03004828->unk_00b6 = 0; // nonmatching code writes to this address with r4, as opposed to r2 in matching code. r4 is also loaded with zero way before
             gUnknown_03004828->unk_00c4 = 0;
             gUnknown_03004828->isLinkTrade = TRUE;
-            gUnknown_03004828->unk_0104 = 0x40;
-            gUnknown_03004828->unk_0106 = 0x40;
-            gUnknown_03004828->unk_0108 = 0;
-            gUnknown_03004828->unk_010a = 0;
-            gUnknown_03004828->unk_010c = 0x78;
-            gUnknown_03004828->unk_010e = 0x50;
+            gUnknown_03004828->unk_0104 = 0x40; gUnknown_03004828->unk_0106 = 0x40;
+            gUnknown_03004828->unk_0108 = 0; gUnknown_03004828->unk_010a = 0;
+            gUnknown_03004828->unk_010c = 0x78; gUnknown_03004828->unk_010e = 0x50;
             gUnknown_03004828->unk_0118 = 0x100;
             gUnknown_03004828->unk_011c = 0;
             break;
@@ -3173,7 +3049,9 @@ void sub_804B41C(void)
             break;
         case 4:
             sub_804B24C();
-            if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE) gMain.state ++;
+            if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE){
+                gMain.state ++;
+            }
             break;
         case 5:
             gUnknown_03004828->unk_009c = 0;
@@ -3223,388 +3101,6 @@ void sub_804B41C(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
-#else
-NAKED void sub_804B41C(void)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                    "\tsub sp, 0x4\n"
-                    "\tldr r1, _0804B43C @ =gMain\n"
-                    "\tldr r2, _0804B440 @ =0x0000043c\n"
-                    "\tadds r0, r1, r2\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tadds r2, r1, 0\n"
-                    "\tcmp r0, 0xC\n"
-                    "\tbls _0804B430\n"
-                    "\tb _0804B76E_break\n"
-                    "_0804B430:\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, _0804B444 @ =_0804B448\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r0, [r0]\n"
-                    "\tmov pc, r0\n"
-                    "\t.align 2, 0\n"
-                    "_0804B43C: .4byte gMain\n"
-                    "_0804B440: .4byte 0x0000043c\n"
-                    "_0804B444: .4byte _0804B448\n"
-                    "\t.align 2, 0\n"
-                    "_0804B448:\n"
-                    "\t.4byte _0804B47C_case00\n"
-                    "\t.4byte _0804B5AC_case01\n"
-                    "\t.4byte _0804B5D4_case02\n"
-                    "\t.4byte _0804B5FC_case03\n"
-                    "\t.4byte _0804B648_case04\n"
-                    "\t.4byte _0804B678_case05\n"
-                    "\t.4byte _0804B6A8_case06\n"
-                    "\t.4byte _0804B6B2_case07\n"
-                    "\t.4byte _0804B6CC_case08\n"
-                    "\t.4byte _0804B6E4_case09\n"
-                    "\t.4byte _0804B71C_case10\n"
-                    "\t.4byte _0804B726_case11\n"
-                    "\t.4byte _0804B75C_case12\n"
-                    "_0804B47C_case00:\n"
-                    "\tmovs r1, 0x80\n"
-                    "\tlsls r1, 19\n"
-                    "\tmovs r0, 0\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tbl ResetTasks\n"
-                    "\tbl CloseLink\n"
-                    "\tldr r6, _0804B570 @ =gUnknown_03004828\n"
-                    "\tldr r5, _0804B574 @ =gSharedMem + 0x1F000\n"
-                    "\tstr r5, [r6]\n"
-                    "\tbl ResetSpriteData\n"
-                    "\tbl FreeAllSpritePalettes\n"
-                    "\tldr r0, _0804B578 @ =sub_804B210\n"
-                    "\tbl SetVBlankCallback\n"
-                    "\tbl sub_804B228\n"
-                    "\tldr r4, _0804B57C @ =gWindowTemplate_81E6F84\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl Text_LoadWindowTemplate\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x4\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tbl Text_InitWindowWithTemplate\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tbl TextWindow_SetBaseTileNum\n"
-                    "\tldr r1, [r6]\n"
-                    "\tadds r1, 0x34\n"
-                    "\tstrb r0, [r1]\n" // start of nonmatching
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x4\n"
-                    "\tbl TextWindow_LoadStdFrameGraphics\n"
-                    "\tbl Menu_EraseScreen\n"
-                    "\tldr r1, _0804B580 @ =gLinkType\n"
-                    "\tldr r4, _0804B584 @ =0x00001144\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tldr r1, _0804B588 @ =gMain\n"
-                    "\tldr r0, _0804B58C @ =0x0000043c\n"
-                    "\tadds r1, r0\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tldr r0, _0804B590 @ =gBattleTextboxTiles\n"
-                    "\tmovs r1, 0xC0\n"
-                    "\tlsls r1, 19\n"
-                    "\tbl LZDecompressVram\n"
-                    "\tldr r0, _0804B594 @ =gBattleTextboxTilemap\n"
-                    "\tldr r1, _0804B598 @ =0xfffe1000\n"
-                    "\tadds r5, r1\n"
-                    "\tmovs r2, 0x80\n"
-                    "\tlsls r2, 4\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tbl CpuSet\n"
-                    "\tldr r1, _0804B59C @ =0x06002800\n"
-                    "\tldr r0, _0804B5A0 @ =0x040000d4\n"
-                    "\tstr r5, [r0]\n"
-                    "\tstr r1, [r0, 0x4]\n"
-                    "\tldr r1, _0804B5A4 @ =0x80000280\n"
-                    "\tstr r1, [r0, 0x8]\n"
-                    "\tldr r0, [r0, 0x8]\n"
-                    "\tldr r0, _0804B5A8 @ =gBattleTextboxPalette\n"
-                    "\tmovs r1, 0\n"
-                    "\tmovs r2, 0x20\n"
-                    "\tbl LoadCompressedPalette\n"
-                    "\tldr r1, [r6]\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tadds r0, 0xB6\n"
-                    "\tmovs r2, 0\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tadds r0, 0xE\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tmovs r4, 0x8F\n"
-                    "\tlsls r4, 1\n"
-                    "\tadds r1, r4\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tldr r3, [r6]\n"
-                    "\tmovs r1, 0x82\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r0, r3, r1\n"
-                    "\tmovs r1, 0x40\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tsubs r4, 0x18\n"
-                    "\tadds r0, r3, r4\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tadds r1, 0xC8\n"
-                    "\tadds r0, r3, r1\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tadds r4, 0x4\n"
-                    "\tadds r0, r3, r4\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tmovs r0, 0x86\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r1, r3, r0\n"
-                    "\tmovs r0, 0x78\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r4, 0x4\n"
-                    "\tadds r1, r3, r4\n"
-                    "\tmovs r0, 0x50\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, 0xC8\n"
-                    "\tadds r1, r3, r0\n"
-                    "\tsubs r0, 0x18\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tmovs r1, 0x8E\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r0, r3, r1\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tb _0804B76E_break\n"
-                    "\t.align 2, 0\n"
-                    "_0804B570: .4byte gUnknown_03004828\n"
-                    "_0804B574: .4byte gSharedMem + 0x1F000\n"
-                    "_0804B578: .4byte sub_804B210\n"
-                    "_0804B57C: .4byte gWindowTemplate_81E6F84\n"
-                    "_0804B580: .4byte gLinkType\n"
-                    "_0804B584: .4byte 0x00001144\n"
-                    "_0804B588: .4byte gMain\n"
-                    "_0804B58C: .4byte 0x0000043c\n"
-                    "_0804B590: .4byte gBattleTextboxTiles\n"
-                    "_0804B594: .4byte gBattleTextboxTilemap\n"
-                    "_0804B598: .4byte 0xfffe1000\n"
-                    "_0804B59C: .4byte 0x06002800\n"
-                    "_0804B5A0: .4byte 0x040000d4\n"
-                    "_0804B5A4: .4byte 0x80000280\n"
-                    "_0804B5A8: .4byte gBattleTextboxPalette\n"
-                    "_0804B5AC_case01:\n"
-                    "\tbl OpenLink\n"
-                    "\tldr r1, _0804B5C8 @ =gMain\n"
-                    "\tldr r2, _0804B5CC @ =0x0000043c\n"
-                    "\tadds r1, r2\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tmovs r2, 0\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tldr r0, _0804B5D0 @ =gUnknown_03004828\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, 0xC0\n"
-                    "\tstr r2, [r0]\n"
-                    "\tb _0804B76E_break\n"
-                    "\t.align 2, 0\n"
-                    "_0804B5C8: .4byte gMain\n"
-                    "_0804B5CC: .4byte 0x0000043c\n"
-                    "_0804B5D0: .4byte gUnknown_03004828\n"
-                    "_0804B5D4_case02:\n"
-                    "\tldr r0, _0804B5F4 @ =gUnknown_03004828\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tadds r1, 0xC0\n"
-                    "\tldr r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstr r0, [r1]\n"
-                    "\tcmp r0, 0x3C\n"
-                    "\tbhi _0804B5E8\n"
-                    "\tb _0804B76E_break\n"
-                    "_0804B5E8:\n"
-                    "\tmovs r0, 0\n"
-                    "\tstr r0, [r1]\n"
-                    "\tldr r4, _0804B5F8 @ =0x0000043c\n"
-                    "\tadds r1, r2, r4\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B5F4: .4byte gUnknown_03004828\n"
-                    "_0804B5F8: .4byte 0x0000043c\n"
-                    "_0804B5FC_case03:\n"
-                    "\tbl IsLinkMaster\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _0804B608\n"
-                    "\tb _0804B746\n"
-                    "_0804B608:\n"
-                    "\tbl GetLinkPlayerCount_2\n"
-                    "\tadds r4, r0, 0\n"
-                    "\tbl sub_800820C\n"
-                    "\tlsls r4, 24\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r4, r0\n"
-                    "\tbcs _0804B61C\n"
-                    "\tb _0804B76E_break\n"
-                    "_0804B61C:\n"
-                    "\tldr r0, _0804B63C @ =gUnknown_03004828\n"
-                    "\tldr r1, [r0]\n"
-                    "\tadds r1, 0xC0\n"
-                    "\tldr r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstr r0, [r1]\n"
-                    "\tcmp r0, 0x1E\n"
-                    "\tbhi _0804B62E\n"
-                    "\tb _0804B76E_break\n"
-                    "_0804B62E:\n"
-                    "\tbl sub_8007F4C\n"
-                    "\tldr r1, _0804B640 @ =gMain\n"
-                    "\tldr r0, _0804B644 @ =0x0000043c\n"
-                    "\tadds r1, r0\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B63C: .4byte gUnknown_03004828\n"
-                    "_0804B640: .4byte gMain\n"
-                    "_0804B644: .4byte 0x0000043c\n"
-                    "_0804B648_case04:\n"
-                    "\tbl sub_804B24C\n"
-                    "\tldr r0, _0804B66C @ =gReceivedRemoteLinkPlayers\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbeq _0804B656\n"
-                    "\tb _0804B76E_break\n"
-                    "_0804B656:\n"
-                    "\tbl IsLinkPlayerDataExchangeComplete\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbeq _0804B664\n"
-                    "\tb _0804B76E_break\n"
-                    "_0804B664:\n"
-                    "\tldr r1, _0804B670 @ =gMain\n"
-                    "\tldr r4, _0804B674 @ =0x0000043c\n"
-                    "\tadds r1, r4\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B66C: .4byte gReceivedRemoteLinkPlayers\n"
-                    "_0804B670: .4byte gMain\n"
-                    "_0804B674: .4byte 0x0000043c\n"
-                    "_0804B678_case05:\n"
-                    "\tldr r2, _0804B69C @ =gUnknown_03004828\n"
-                    "\tldr r0, [r2]\n"
-                    "\tadds r0, 0x9C\n"
-                    "\tmovs r1, 0\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, [r2]\n"
-                    "\tadds r0, 0x9D\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, [r2]\n"
-                    "\tadds r0, 0xBD\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tmovs r0, 0\n"
-                    "\tbl sub_804B2D0\n"
-                    "\tldr r1, _0804B6A0 @ =gMain\n"
-                    "\tldr r0, _0804B6A4 @ =0x0000043c\n"
-                    "\tadds r1, r0\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B69C: .4byte gUnknown_03004828\n"
-                    "_0804B6A0: .4byte gMain\n"
-                    "_0804B6A4: .4byte 0x0000043c\n"
-                    "_0804B6A8_case06:\n"
-                    "\tmovs r0, 0\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tbl sub_804B2D0\n"
-                    "\tb _0804B746\n"
-                    "_0804B6B2_case07:\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmovs r1, 0\n"
-                    "\tbl sub_804B2D0\n"
-                    "\tldr r1, _0804B6C4 @ =gMain\n"
-                    "\tldr r4, _0804B6C8 @ =0x0000043c\n"
-                    "\tadds r1, r4\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B6C4: .4byte gMain\n"
-                    "_0804B6C8: .4byte 0x0000043c\n"
-                    "_0804B6CC_case08:\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tbl sub_804B2D0\n"
-                    "\tldr r1, _0804B6DC @ =gMain\n"
-                    "\tldr r0, _0804B6E0 @ =0x0000043c\n"
-                    "\tadds r1, r0\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B6DC: .4byte gMain\n"
-                    "_0804B6E0: .4byte 0x0000043c\n"
-                    "_0804B6E4_case09:\n"
-                    "\tbl sub_804C164\n"
-                    "\tldr r0, _0804B704 @ =gUnknown_0821594C\n"
-                    "\tbl LoadSpriteSheet\n"
-                    "\tldr r0, _0804B708 @ =gUnknown_08215954\n"
-                    "\tbl LoadSpritePalette\n"
-                    "\tldr r1, _0804B70C @ =REG_BG1CNT\n"
-                    "\tldr r2, _0804B710 @ =0x00000502\n"
-                    "\tadds r0, r2, 0\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tldr r1, _0804B714 @ =gMain\n"
-                    "\tldr r4, _0804B718 @ =0x0000043c\n"
-                    "\tadds r1, r4\n"
-                    "\tb _0804B74C\n"
-                    "\t.align 2, 0\n"
-                    "_0804B704: .4byte gUnknown_0821594C\n"
-                    "_0804B708: .4byte gUnknown_08215954\n"
-                    "_0804B70C: .4byte REG_BG1CNT\n"
-                    "_0804B710: .4byte 0x00000502\n"
-                    "_0804B714: .4byte gMain\n"
-                    "_0804B718: .4byte 0x0000043c\n"
-                    "_0804B71C_case10:\n"
-                    "\tldr r0, _0804B754 @ =0x0000043c\n"
-                    "\tadds r1, r2, r0\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrb r0, [r1]\n"
-                    "_0804B726_case11:\n"
-                    "\tmovs r0, 0x5\n"
-                    "\tbl sub_804BBE8\n"
-                    "\tmovs r0, 0\n"
-                    "\tbl sub_804BBE8\n"
-                    "\tbl SetTradeSceneStrings\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tnegs r0, r0\n"
-                    "\tmovs r1, 0\n"
-                    "\tstr r1, [sp]\n"
-                    "\tmovs r2, 0x10\n"
-                    "\tmovs r3, 0\n"
-                    "\tbl BeginNormalPaletteFade\n"
-                    "_0804B746:\n"
-                    "\tldr r1, _0804B758 @ =gMain\n"
-                    "\tldr r2, _0804B754 @ =0x0000043c\n"
-                    "\tadds r1, r2\n"
-                    "_0804B74C:\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tb _0804B76E_break\n"
-                    "\t.align 2, 0\n"
-                    "_0804B754: .4byte 0x0000043c\n"
-                    "_0804B758: .4byte gMain\n"
-                    "_0804B75C_case12:\n"
-                    "\tldr r0, _0804B788 @ =gPaletteFade\n"
-                    "\tldrb r1, [r0, 0x7]\n"
-                    "\tmovs r0, 0x80\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _0804B76E_break\n"
-                    "\tldr r0, _0804B78C @ =sub_804DB84\n"
-                    "\tbl SetMainCallback2\n"
-                    "_0804B76E_break:\n"
-                    "\tbl RunTasks\n"
-                    "\tbl AnimateSprites\n"
-                    "\tbl BuildOamBuffer\n"
-                    "\tbl UpdatePaletteFade\n"
-                    "\tadd sp, 0x4\n"
-                    "\tpop {r4-r6}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_0804B788: .4byte gPaletteFade\n"
-                    "_0804B78C: .4byte sub_804DB84");
-}
-#endif
 
 // In-game trade init
 void sub_804B790(void)
