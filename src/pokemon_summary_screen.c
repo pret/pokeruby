@@ -3035,244 +3035,78 @@ static void sub_80A12D0(s8 a)
     gTasks[newTaskId].data[2] = 1;
 }
 
-// void sub_80A1334(u8 taskId)
-// {
-//     u8 i;
-//     s16 var1;
-
-//     gTasks[taskId].data[1] += gTasks[taskId].data[0];
-
-//     var1 = 0;
-//     if (gTasks[taskId].data[1] >= 0)
-//     {
-//         var1 = 10;
-//         if (gTasks[taskId].data[1] < 10)
-//         {
-//             var1 = gTasks[taskId].data[1];
-//         }
-//     }
-
-//     if (var1 > 0)
-//     {
-//         u8 *vramAddr = (u8 *)(VRAM + 0x5B40);
-//         for (i = 0; i < 7; i++)
-//         {
-//             CpuSet(&gUnknown_08E73E88[(i + 13) * 64], vramAddr, var1 & 0x1FFFFF);
-//             vramAddr += 64;
-//         }
-//     }
-
-//     if (var1 <= 9)
-//     {
-//         u8 *vramAddr = (u8 *)(VRAM + 0x5B40);
-//         for (i = 0; i < 64; i++)
-//         {
-//             u16 val = gTasks[taskId].data[2];
-//             CpuSet(&val, vramAddr, ((10 - var1) & 0x1FFFFF) | 0x800000);
-//         }
-//     }
-//     else
-//     {
-//         Menu_EraseWindowRect(0, 19, 9, 19);
-//     }
-
-//     if (gTasks[taskId].data[0] == 0 || gTasks[taskId].data[1] < 0)
-//     {
-//         if (pssData.page == PSS_PAGE_BATTLE_MOVES)
-//         {
-//             Menu_EraseWindowRect(0, 14, 9, 18);
-//             sub_80A0958(pssData.loadedMon);
-
-//             if (GetMonStatusAndPokerus(pssData.loadedMon))
-//             {
-//                 SummaryScreen_PrintColoredText(gOtherText_Status, 13, 1, 18);
-//             }
-
-//             DestroyTask(taskId);
-//         }
-//     }
-
-//     if (gTasks[taskId].data[1] > 9)
-//     {
-//         if (pssData.page == PSS_PAGE_BATTLE_MOVES)
-//         {
-//             sub_80A00F4(gTasks[taskId].data[3]);
-//         }
-
-//         sub_80A0428(pssData.loadedMon, &gTasks[taskId].data[3]);
-//         DestroyTask(taskId);
-//     }
-// }
-NAKED
-static void sub_80A1334(u8 taskId)
+void sub_80A1334(u8 taskId)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    lsls r0, 2\n\
-    add r0, r10\n\
-    lsls r0, 3\n\
-    ldr r1, _080A13E4 @ =gTasks + 0x8\n\
-    adds r7, r0, r1\n\
-    ldrh r0, [r7]\n\
-    ldrh r1, [r7, 0x2]\n\
-    adds r0, r1\n\
-    strh r0, [r7, 0x2]\n\
-    lsls r0, 16\n\
-    asrs r1, r0, 16\n\
-    movs r0, 0\n\
-    cmp r1, 0\n\
-    blt _080A136A\n\
-    movs r0, 0xA\n\
-    cmp r1, 0xA\n\
-    bgt _080A136A\n\
-    ldrh r0, [r7, 0x2]\n\
-_080A136A:\n\
-    lsls r0, 16\n\
-    asrs r2, r0, 16\n\
-    mov r9, r0\n\
-    cmp r2, 0\n\
-    ble _080A13A6\n\
-    movs r0, 0xA\n\
-    subs r0, r2\n\
-    lsls r0, 1\n\
-    ldr r1, _080A13E8 @ =0x06005b40\n\
-    adds r4, r0, r1\n\
-    movs r5, 0\n\
-    adds r6, r2, 0\n\
-    ldr r0, _080A13EC @ =0x001fffff\n\
-    mov r8, r0\n\
-_080A1386:\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xD\n\
-    lsls r0, 6\n\
-    ldr r1, _080A13F0 @ =gUnknown_08E73E88\n\
-    adds r0, r1\n\
-    adds r1, r4, 0\n\
-    mov r2, r8\n\
-    ands r2, r6\n\
-    bl CpuSet\n\
-    adds r4, 0x40\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x6\n\
-    bls _080A1386\n\
-_080A13A6:\n\
-    mov r1, r9\n\
-    asrs r2, r1, 16\n\
-    cmp r2, 0x9\n\
-    bgt _080A13F4\n\
-    ldr r4, _080A13E8 @ =0x06005b40\n\
-    movs r5, 0\n\
-    mov r8, sp\n\
-    movs r0, 0xA\n\
-    subs r6, r0, r2\n\
-    ldr r0, _080A13EC @ =0x001fffff\n\
-    ands r6, r0\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    mov r9, r0\n\
-_080A13C2:\n\
-    ldrh r0, [r7, 0x4]\n\
-    mov r1, r8\n\
-    strh r0, [r1]\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    mov r2, r9\n\
-    orrs r2, r6\n\
-    bl CpuSet\n\
-    adds r4, 0x40\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x6\n\
-    bls _080A13C2\n\
-    b _080A1400\n\
-    .align 2, 0\n\
-_080A13E4: .4byte gTasks + 0x8\n\
-_080A13E8: .4byte 0x06005b40\n\
-_080A13EC: .4byte 0x001fffff\n\
-_080A13F0: .4byte gUnknown_08E73E88\n\
-_080A13F4:\n\
-    movs r0, 0\n\
-    movs r1, 0x13\n\
-    movs r2, 0x9\n\
-    movs r3, 0x13\n\
-    bl Menu_EraseWindowRect\n\
-_080A1400:\n\
-    movs r1, 0\n\
-    ldrsh r0, [r7, r1]\n\
-    cmp r0, 0\n\
-    beq _080A1410\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r7, r1]\n\
-    cmp r0, 0\n\
-    bge _080A144A\n\
-_080A1410:\n\
-    ldr r4, _080A1480 @ =gSharedMem + 0x18000\n\
-    ldrb r0, [r4, 0xB]\n\
-    cmp r0, 0x2\n\
-    bne _080A1444\n\
-    movs r0, 0\n\
-    movs r1, 0xE\n\
-    movs r2, 0x9\n\
-    movs r3, 0x12\n\
-    bl Menu_EraseWindowRect\n\
-    adds r4, 0x10\n\
-    adds r0, r4, 0\n\
-    bl sub_80A0958\n\
-    adds r0, r4, 0\n\
-    bl GetMonStatusAndPokerus\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080A1444\n\
-    ldr r0, _080A1484 @ =gOtherText_Status\n\
-    movs r1, 0xD\n\
-    movs r2, 0x1\n\
-    movs r3, 0x12\n\
-    bl SummaryScreen_PrintColoredText\n\
-_080A1444:\n\
-    mov r0, r10\n\
-    bl DestroyTask\n\
-_080A144A:\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r7, r1]\n\
-    cmp r0, 0x9\n\
-    ble _080A1470\n\
-    ldr r4, _080A1480 @ =gSharedMem + 0x18000\n\
-    ldrb r0, [r4, 0xB]\n\
-    cmp r0, 0x2\n\
-    bne _080A1460\n\
-    ldrb r0, [r7, 0x6]\n\
-    bl sub_80A00F4\n\
-_080A1460:\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x10\n\
-    adds r1, r7, 0x6\n\
-    bl sub_80A0428\n\
-    mov r0, r10\n\
-    bl DestroyTask\n\
-_080A1470:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A1480: .4byte gSharedMem + 0x18000\n\
-_080A1484: .4byte gOtherText_Status\n\
-    .syntax divided\n");
+    u8 i;
+    s16 var1;
+    u16* vramAddr;
+    s16 * wk = gTasks[taskId].data;
+
+    wk[1] += wk[0];
+    
+    if (wk[1] < 0)
+    {
+        var1 = 0;
+    }
+    else if (wk[1] > 10)
+    {
+        var1 = 10; 
+    }
+    else
+    {
+        var1 = wk[1];
+    }
+
+    if (var1 > 0)
+    {
+        vramAddr = (u16 *)(VRAM + 0x5B40 + ((10 - var1) << 1));
+        for (i = 0; i < 7; i++)
+        {
+            CpuSet(&gUnknown_08E73E88[(i + 13) * 64], vramAddr, var1 & 0x1fffff);
+            vramAddr += 32;
+        }
+    }
+
+    if (var1 < 10)
+    {
+        vramAddr = (u16 *)(VRAM + 0x5B40);
+        for (i = 0; i < 7; i++)
+        {
+            vu16 val = wk[2];
+            CpuSet((u8*)&val, vramAddr, ((10 - var1) & 0x1fffff) | 0x1000000);
+            vramAddr += 32;
+        }
+    }
+    else
+    {
+        Menu_EraseWindowRect(0, 19, 9, 19);
+    }
+
+    if (wk[0] == 0 || wk[1] < 0)
+    {
+        if (pssData.page == PSS_PAGE_BATTLE_MOVES)
+        {
+            Menu_EraseWindowRect(0, 14, 9, 18);
+            sub_80A0958(&(pssData.loadedMon));
+
+            if (GetMonStatusAndPokerus(&(pssData.loadedMon)))
+            {
+                SummaryScreen_PrintColoredText(gOtherText_Status, 13, 1, 18);
+            }
+        }
+        DestroyTask(taskId);
+    }
+
+    if (wk[1] >= 10)
+    {
+        if (pssData.page == PSS_PAGE_BATTLE_MOVES)
+        {
+            sub_80A00F4(wk[3]);
+        }
+
+        sub_80A0428(&(pssData.loadedMon), (u8*)&wk[3]);
+        DestroyTask(taskId);
+    }
 }
 
 // Related to re-drawing the summary area underneath the pokemon's picture
@@ -3299,176 +3133,78 @@ static void sub_80A1488(s8 a, u8 b)
     gTasks[taskId].data[3] = b;
 }
 
-NAKED
 static void sub_80A1500(u8 taskId)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    lsls r0, 2\n\
-    add r0, r10\n\
-    lsls r0, 3\n\
-    ldr r1, _080A15B0 @ =gTasks + 0x8\n\
-    adds r7, r0, r1\n\
-    ldrh r0, [r7]\n\
-    ldrh r1, [r7, 0x2]\n\
-    adds r0, r1\n\
-    strh r0, [r7, 0x2]\n\
-    lsls r0, 16\n\
-    asrs r1, r0, 16\n\
-    movs r0, 0\n\
-    cmp r1, 0\n\
-    blt _080A1536\n\
-    movs r0, 0xA\n\
-    cmp r1, 0xA\n\
-    bgt _080A1536\n\
-    ldrh r0, [r7, 0x2]\n\
-_080A1536:\n\
-    lsls r0, 16\n\
-    asrs r2, r0, 16\n\
-    mov r9, r0\n\
-    cmp r2, 0\n\
-    ble _080A1572\n\
-    movs r0, 0xA\n\
-    subs r0, r2\n\
-    lsls r0, 1\n\
-    ldr r1, _080A15B4 @ =0x06006b40\n\
-    adds r4, r0, r1\n\
-    movs r5, 0\n\
-    adds r6, r2, 0\n\
-    ldr r0, _080A15B8 @ =0x001fffff\n\
-    mov r8, r0\n\
-_080A1552:\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xD\n\
-    lsls r0, 6\n\
-    ldr r1, _080A15BC @ =gUnknown_08E74688\n\
-    adds r0, r1\n\
-    adds r1, r4, 0\n\
-    mov r2, r8\n\
-    ands r2, r6\n\
-    bl CpuSet\n\
-    adds r4, 0x40\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x6\n\
-    bls _080A1552\n\
-_080A1572:\n\
-    mov r1, r9\n\
-    asrs r2, r1, 16\n\
-    cmp r2, 0x9\n\
-    bgt _080A15C0\n\
-    ldr r4, _080A15B4 @ =0x06006b40\n\
-    movs r5, 0\n\
-    mov r8, sp\n\
-    movs r0, 0xA\n\
-    subs r6, r0, r2\n\
-    ldr r0, _080A15B8 @ =0x001fffff\n\
-    ands r6, r0\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    mov r9, r0\n\
-_080A158E:\n\
-    ldrh r0, [r7, 0x4]\n\
-    mov r1, r8\n\
-    strh r0, [r1]\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    mov r2, r9\n\
-    orrs r2, r6\n\
-    bl CpuSet\n\
-    adds r4, 0x40\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x6\n\
-    bls _080A158E\n\
-    b _080A15CC\n\
-    .align 2, 0\n\
-_080A15B0: .4byte gTasks + 0x8\n\
-_080A15B4: .4byte 0x06006b40\n\
-_080A15B8: .4byte 0x001fffff\n\
-_080A15BC: .4byte gUnknown_08E74688\n\
-_080A15C0:\n\
-    movs r0, 0\n\
-    movs r1, 0x13\n\
-    movs r2, 0x9\n\
-    movs r3, 0x13\n\
-    bl Menu_EraseWindowRect\n\
-_080A15CC:\n\
-    movs r1, 0\n\
-    ldrsh r0, [r7, r1]\n\
-    cmp r0, 0\n\
-    beq _080A15DC\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r7, r1]\n\
-    cmp r0, 0\n\
-    bge _080A1616\n\
-_080A15DC:\n\
-    ldr r4, _080A164C @ =gSharedMem + 0x18000\n\
-    ldrb r0, [r4, 0xB]\n\
-    cmp r0, 0x3\n\
-    bne _080A1610\n\
-    movs r0, 0\n\
-    movs r1, 0xE\n\
-    movs r2, 0x9\n\
-    movs r3, 0x12\n\
-    bl Menu_EraseWindowRect\n\
-    adds r4, 0x10\n\
-    adds r0, r4, 0\n\
-    bl sub_80A0958\n\
-    adds r0, r4, 0\n\
-    bl GetMonStatusAndPokerus\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080A1610\n\
-    ldr r0, _080A1650 @ =gOtherText_Status\n\
-    movs r1, 0xD\n\
-    movs r2, 0x1\n\
-    movs r3, 0x12\n\
-    bl SummaryScreen_PrintColoredText\n\
-_080A1610:\n\
-    mov r0, r10\n\
-    bl DestroyTask\n\
-_080A1616:\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r7, r1]\n\
-    cmp r0, 0x9\n\
-    ble _080A163C\n\
-    ldr r4, _080A164C @ =gSharedMem + 0x18000\n\
-    ldrb r0, [r4, 0xB]\n\
-    cmp r0, 0x3\n\
-    bne _080A162C\n\
-    ldrb r0, [r7, 0x6]\n\
-    bl sub_80A00F4\n\
-_080A162C:\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x10\n\
-    adds r1, r7, 0x6\n\
-    bl sub_80A0428\n\
-    mov r0, r10\n\
-    bl DestroyTask\n\
-_080A163C:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A164C: .4byte gSharedMem + 0x18000\n\
-_080A1650: .4byte gOtherText_Status\n\
-    .syntax divided\n");
+    u8 i;
+    s16 var1;
+    u16* vramAddr;
+    s16 * wk = gTasks[taskId].data;
+
+    wk[1] += wk[0];
+    
+    if (wk[1] < 0)
+    {
+        var1 = 0;
+    }
+    else if (wk[1] > 10)
+    {
+        var1 = 10; 
+    }
+    else
+    {
+        var1 = wk[1];
+    }
+
+    if (var1 > 0)
+    {
+        vramAddr = (u16 *)(VRAM + 0x6B40 + ((10 - var1) << 1));
+        for (i = 0; i < 7; i++)
+        {
+            CpuSet(&gUnknown_08E74688[(i + 13) * 64], vramAddr, var1 & 0x1fffff);
+            vramAddr += 32;
+        }
+    }
+
+    if (var1 < 10)
+    {
+        vramAddr = (u16 *)(VRAM + 0x6B40);
+        for (i = 0; i < 7; i++)
+        {
+            vu16 val = wk[2];
+            CpuSet((u8*)&val, vramAddr, ((10 - var1) & 0x1fffff) | 0x1000000);
+            vramAddr += 32;
+        }
+    }
+    else
+    {
+        Menu_EraseWindowRect(0, 19, 9, 19);
+    }
+
+    if (wk[0] == 0 || wk[1] < 0)
+    {
+        if (pssData.page == PSS_PAGE_CONTEST_MOVES)
+        {
+            Menu_EraseWindowRect(0, 14, 9, 18);
+            sub_80A0958(&(pssData.loadedMon));
+
+            if (GetMonStatusAndPokerus(&(pssData.loadedMon)))
+            {
+                SummaryScreen_PrintColoredText(gOtherText_Status, 13, 1, 18);
+            }
+        }
+        DestroyTask(taskId);
+    }
+
+    if (wk[1] >= 10)
+    {
+        if (pssData.page == PSS_PAGE_CONTEST_MOVES)
+        {
+            sub_80A00F4(wk[3]);
+        }
+
+        sub_80A0428(&(pssData.loadedMon), (u8*)&wk[3]);
+        DestroyTask(taskId);
+    }
 }
 
 static void sub_80A1654(s8 a, u8 b)

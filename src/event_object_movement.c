@@ -1594,7 +1594,7 @@ void sub_805B75C(u8 objectEventId, s16 x, s16 y)
     }
 
     objectEvent = &gObjectEvents[objectEventId];
-    // asm("":::"r5");
+    
     subspriteTables = NULL;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     spriteFrameImage.size = graphicsInfo->size;

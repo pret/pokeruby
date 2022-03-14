@@ -181,7 +181,7 @@ void sub_814A904(void)
 void sub_814A958(u8 a)
 {
     u8 r7;
-    struct Subsprite *r4 = &gMenuCursorSubsprites[0];
+    struct Subsprite *r4 = gMenuCursorSubsprites;
     s16 r2 = -1;
     s32 _a = a;
     s16 r5;
@@ -662,7 +662,7 @@ void sub_814AB84(void)
 
         if (!gUnknown_0203A3D3)
             REG_DISPCNT &= ~DISPCNT_OBJWIN_ON;
-        *(u8 *)(REG_ADDR_WINOUT + 1) = gUnknown_0203A3D4;
+        *(vu8 *)(REG_ADDR_WINOUT + 1) = gUnknown_0203A3D4;
     }
     return;
 }

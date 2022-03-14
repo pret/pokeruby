@@ -48,6 +48,7 @@
          | ((size)/(bit/8)));                                                                 \
 }
 
+
 #define DmaFill16(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 16)
 #define DmaFill32(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 32)
 
