@@ -54,7 +54,7 @@ static void sub_80A1DCC(struct Pokemon *);
 static void sub_809FE80(void);
 static void sub_80A00A4(void);
 static void sub_80A0390(void);
-extern u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *);
+static u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *);
 static void SummaryScreen_PrintColoredIntPixelCoords(s32, u8, u8, u8, u8, u16, s32);
 static void sub_80A0958(struct Pokemon *);
 static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *, u8, u8);
@@ -3040,21 +3040,21 @@ void sub_80A1334(u8 taskId)
     u8 i;
     s16 var1;
     u16* vramAddr;
-    s16 * wk = gTasks[taskId].data;
+    s16 * taskData = gTasks[taskId].data;
 
-    wk[1] += wk[0];
+    taskData[1] += taskData[0];
     
-    if (wk[1] < 0)
+    if (taskData[1] < 0)
     {
         var1 = 0;
     }
-    else if (wk[1] > 10)
+    else if (taskData[1] > 10)
     {
         var1 = 10; 
     }
     else
     {
-        var1 = wk[1];
+        var1 = taskData[1];
     }
 
     if (var1 > 0)
@@ -3072,7 +3072,7 @@ void sub_80A1334(u8 taskId)
         vramAddr = (u16 *)(VRAM + 0x5B40);
         for (i = 0; i < 7; i++)
         {
-            vu16 val = wk[2];
+            vu16 val = taskData[2];
             CpuSet((u8*)&val, vramAddr, ((10 - var1) & 0x1fffff) | 0x1000000);
             vramAddr += 32;
         }
@@ -3082,7 +3082,7 @@ void sub_80A1334(u8 taskId)
         Menu_EraseWindowRect(0, 19, 9, 19);
     }
 
-    if (wk[0] == 0 || wk[1] < 0)
+    if (taskData[0] == 0 || taskData[1] < 0)
     {
         if (pssData.page == PSS_PAGE_BATTLE_MOVES)
         {
@@ -3097,14 +3097,14 @@ void sub_80A1334(u8 taskId)
         DestroyTask(taskId);
     }
 
-    if (wk[1] >= 10)
+    if (taskData[1] >= 10)
     {
         if (pssData.page == PSS_PAGE_BATTLE_MOVES)
         {
-            sub_80A00F4(wk[3]);
+            sub_80A00F4(taskData[3]);
         }
 
-        sub_80A0428(&(pssData.loadedMon), (u8*)&wk[3]);
+        sub_80A0428(&(pssData.loadedMon), (u8*)&taskData[3]);
         DestroyTask(taskId);
     }
 }
@@ -3138,21 +3138,21 @@ static void sub_80A1500(u8 taskId)
     u8 i;
     s16 var1;
     u16* vramAddr;
-    s16 * wk = gTasks[taskId].data;
+    s16 * taskData = gTasks[taskId].data;
 
-    wk[1] += wk[0];
+    taskData[1] += taskData[0];
     
-    if (wk[1] < 0)
+    if (taskData[1] < 0)
     {
         var1 = 0;
     }
-    else if (wk[1] > 10)
+    else if (taskData[1] > 10)
     {
         var1 = 10; 
     }
     else
     {
-        var1 = wk[1];
+        var1 = taskData[1];
     }
 
     if (var1 > 0)
@@ -3170,7 +3170,7 @@ static void sub_80A1500(u8 taskId)
         vramAddr = (u16 *)(VRAM + 0x6B40);
         for (i = 0; i < 7; i++)
         {
-            vu16 val = wk[2];
+            vu16 val = taskData[2];
             CpuSet((u8*)&val, vramAddr, ((10 - var1) & 0x1fffff) | 0x1000000);
             vramAddr += 32;
         }
@@ -3180,7 +3180,7 @@ static void sub_80A1500(u8 taskId)
         Menu_EraseWindowRect(0, 19, 9, 19);
     }
 
-    if (wk[0] == 0 || wk[1] < 0)
+    if (taskData[0] == 0 || taskData[1] < 0)
     {
         if (pssData.page == PSS_PAGE_CONTEST_MOVES)
         {
@@ -3195,14 +3195,14 @@ static void sub_80A1500(u8 taskId)
         DestroyTask(taskId);
     }
 
-    if (wk[1] >= 10)
+    if (taskData[1] >= 10)
     {
         if (pssData.page == PSS_PAGE_CONTEST_MOVES)
         {
-            sub_80A00F4(wk[3]);
+            sub_80A00F4(taskData[3]);
         }
 
-        sub_80A0428(&(pssData.loadedMon), (u8*)&wk[3]);
+        sub_80A0428(&(pssData.loadedMon), (u8*)&taskData[3]);
         DestroyTask(taskId);
     }
 }
