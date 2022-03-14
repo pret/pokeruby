@@ -1049,8 +1049,7 @@ static void ClearAllObjectEvents(void)
 {
     u8 i;
 
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
-        ClearObjectEvent(&gObjectEvents[i]);
+    for (i = 0; i < OBJECT_EVENTS_COUNT; ClearObjectEvent(&gObjectEvents[i]), i++);
 #if DEBUG
     gUnknown_Debug_03004BC0 = 0;
 #endif
@@ -1066,18 +1065,20 @@ void ResetObjectEvents(void)
 
 static void CreateReflectionEffectSprites(void)
 {
+    u8 spriteId;
+    const struct SpriteTemplate * temp = gFieldEffectObjectTemplatePointers[21];
     // The reflection effect when an object event is standing over water or ice
     // is driven by these two invisible sprites' callback functions. The callback
     // continuously updates OAM rot/scale matrices using affine animations that scale
     // the sprite up and down horizontally. The second one is needed to handle the inverted
     // effect when the object is facing to the east. (The sprite has h-flip enabled).
-    u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
+    spriteId = CreateSpriteAtEnd(temp, 0, 0, 31);
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     gSprites[spriteId].invisible = TRUE;
 
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
+    spriteId = CreateSpriteAtEnd(temp, 0, 0, 31);
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
@@ -1593,7 +1594,7 @@ void sub_805B75C(u8 objectEventId, s16 x, s16 y)
     }
 
     objectEvent = &gObjectEvents[objectEventId];
-    asm("":::"r5");
+    // asm("":::"r5");
     subspriteTables = NULL;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     spriteFrameImage.size = graphicsInfo->size;
@@ -1604,41 +1605,45 @@ void sub_805B75C(u8 objectEventId, s16 x, s16 y)
     {
         LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
-    if (graphicsInfo->paletteSlot > 9)
+    if (graphicsInfo->paletteSlot >= 10)
     {
+        do
+        {
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+        } while (0);
     }
     *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
-    if (spriteId != MAX_SPRITES)
+    if (spriteId == MAX_SPRITES)
     {
-        sprite = &gSprites[spriteId];
-        sub_8060388(x + objectEvent->currentCoords.x, y + objectEvent->currentCoords.y, &sprite->x, &sprite->y);
-        sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
-        sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
-        sprite->x += 8;
-        sprite->y += 16 + sprite->centerToCornerVecY;
-        sprite->images = graphicsInfo->images;
-        if (objectEvent->movementType == MOVEMENT_TYPE_PLAYER)
-        {
-            SetPlayerAvatarObjectEventIdAndObjectId(objectEventId, spriteId);
-            objectEvent->warpArrowSpriteId = CreateWarpArrowSprite();
-        }
-        if (subspriteTables != NULL)
-        {
-            SetSubspriteTables(sprite, subspriteTables);
-        }
-        sprite->oam.paletteNum = graphicsInfo->paletteSlot;
-        sprite->coordOffsetEnabled = TRUE;
-        sprite->data[0] = objectEventId;
-        objectEvent->spriteId = spriteId;
-        if (!objectEvent->inanimate && objectEvent->movementType != MOVEMENT_TYPE_PLAYER)
-        {
-            StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
-        }
-        sub_805B914(objectEvent);
-        SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+        return;
     }
+    sprite = &gSprites[spriteId];
+    sub_8060388(objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y, &sprite->x, &sprite->y);
+    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+    sprite->x += 8;
+    sprite->y += 16 + sprite->centerToCornerVecY;
+    sprite->images = graphicsInfo->images;
+    if (objectEvent->movementType == MOVEMENT_TYPE_PLAYER)
+    {
+        SetPlayerAvatarObjectEventIdAndObjectId(objectEventId, spriteId);
+        objectEvent->warpArrowSpriteId = CreateWarpArrowSprite();
+    }
+    if (subspriteTables != NULL)
+    {
+        SetSubspriteTables(sprite, subspriteTables);
+    }
+    sprite->oam.paletteNum = graphicsInfo->paletteSlot;
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->data[0] = objectEventId;
+    objectEvent->spriteId = spriteId;
+    if (!objectEvent->inanimate && objectEvent->movementType != MOVEMENT_TYPE_PLAYER)
+    {
+        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
+    }
+    sub_805B914(objectEvent);
+    SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
 }
 
 static void sub_805B914(struct ObjectEvent *objectEvent)
@@ -2260,7 +2265,7 @@ struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8
         return FindObjectEventTemplateByLocalId(localId, gSaveBlock1.objectEventTemplates, gMapHeader.events->objectEventCount);
     else
     {
-        struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+        const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
         return FindObjectEventTemplateByLocalId(localId, mapHeader->events->objectEvents, mapHeader->events->objectEventCount);
     }
