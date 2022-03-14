@@ -1586,13 +1586,11 @@ void sub_805B75C(u8 objectEventId, s16 x, s16 y)
     const struct SubspriteTable *subspriteTables;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
-#define i spriteId
-    for (i = 0; i < 4; i++)
+    for (spriteId = 0; spriteId < 4; spriteId++)
     {
-        if (gLinkPlayerObjectEvents[i].active && objectEventId == gLinkPlayerObjectEvents[i].objEventId)
+        if (gLinkPlayerObjectEvents[spriteId].active && objectEventId == gLinkPlayerObjectEvents[spriteId].objEventId)
             return;
     }
-#undef i
 
     objectEvent = &gObjectEvents[objectEventId];
     asm("":::"r5");

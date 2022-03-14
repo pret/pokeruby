@@ -41,13 +41,8 @@
 #include "trade.h"
 #include "ewram.h"
 
-#ifndef NONMATCHING
-asm(".include \"constants/gba_constants.inc\"");
-#endif
-
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
-asm(".set sub_804A96C_alt, sub_804A96C");
 #endif
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
