@@ -146,9 +146,6 @@ extern const u8 * const gAbilityDescriptions[];
 extern const u8 * const gContestEffectStrings[];
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
-extern const u16 gUnknown_08E94510[];
-extern const u16 gUnknown_08E94550[];
-extern const u16 gUnknown_08E94590[];
 extern const u8 gUnknown_08E73E88[];
 
 EWRAM_DATA u8 gUnknown_020384F0 = 0;
@@ -1350,7 +1347,6 @@ static void sub_809EBC4(void)
 
 void sub_809EC38(u8 taskId)
 {
-    u8 minus2;
     s16 *taskData = gTasks[taskId].data;
 
     switch (taskData[0])
@@ -1384,9 +1380,8 @@ void sub_809EC38(u8 taskId)
     case 1:
         if (pssData.bgToggle == 0)
         {
-            int var2 = gBattle_BG1_X - 0x20;
-            gBattle_BG1_X = var2;
-            if (var2 << 16 == 0)
+            gBattle_BG1_X -= 0x20;
+            if (gBattle_BG1_X == 0)
             {
                 REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 2;
                 REG_BG2CNT = (REG_BG2CNT & 0xFFFC) + 1;
@@ -1395,9 +1390,8 @@ void sub_809EC38(u8 taskId)
         }
         else
         {
-            int var2 = gBattle_BG2_X - 0x20;
-            gBattle_BG2_X = var2;
-            if (var2 << 16 == 0)
+            gBattle_BG2_X -= 0x20;
+            if (gBattle_BG2_X == 0)
             {
                 REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 1;
                 REG_BG2CNT = (REG_BG2CNT & 0xFFFC) + 2;
@@ -1407,8 +1401,7 @@ void sub_809EC38(u8 taskId)
         break;
     case 2:
         pssData.headerTextId = pssData.page + 1;
-        minus2 = pssData.mode - 2;
-        if (minus2 < 2)
+        if (pssData.mode == 2 || pssData.mode == 3)
         {
             pssData.headerActionTextId = 0;
             sub_80A029C(&pssData.loadedMon);
@@ -1702,7 +1695,7 @@ s8 sub_809F3CC(s8 direction)
         return -1;
     if (direction != 1)
         return sub_809F388(monIndex);
-    else if (monIndex != 5)
+    if (monIndex != 5)
         return sub_809F344(monIndex);
 
     return -1;
@@ -2680,38 +2673,27 @@ static void sub_80A0958(struct Pokemon *mon)
 
 static void sub_80A0A2C(struct Pokemon *mon, u8 left, u8 top)
 {
-    const u8 *genderSymbol;
-    u8 color;
-    u8 bottom;
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
 
-    if (species != SPECIES_NIDORAN_M && species != SPECIES_NIDORAN_F)
+    if (species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+        return;
+    switch (GetMonGender(mon))
     {
-        u8 gender = GetMonGender(mon);
-        switch (gender)
-        {
-        default:
-            bottom = top + 1;
-            Menu_EraseWindowRect(left, top, left, bottom);
-            return;
-        case MON_MALE:
-            genderSymbol = gOtherText_MaleSymbol2;
-            color = 11;
-            break;
-        case MON_FEMALE:
-            genderSymbol = gOtherText_FemaleSymbol2;
-            color = 12;
-            break;
-        }
-
-        SummaryScreen_PrintColoredText(genderSymbol, color, left, top);
+    case MON_MALE:
+        SummaryScreen_PrintColoredText(gOtherText_MaleSymbol2, 11, left, top);
+        break;
+    case MON_FEMALE:
+        SummaryScreen_PrintColoredText(gOtherText_FemaleSymbol2, 12, left, top);
+        break;
+    default:
+        Menu_EraseWindowRect(left, top, left, top + 1);
     }
 }
 
 u8 GetNumRibbons(struct Pokemon *mon)
 {
-    u8 numRibbons = 0;
-    numRibbons += GetMonData(mon, MON_DATA_COOL_RIBBON);
+    u8 numRibbons;
+    numRibbons = GetMonData(mon, MON_DATA_COOL_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_BEAUTY_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_CUTE_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_SMART_RIBBON);
@@ -2967,39 +2949,20 @@ void DrawSummaryScreenNavigationDots(void)
     DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
 
-// Like DmaCopyLarge16 but the size check is up top
-#define DmaCopyLargeCheckFirst16(_src,_dest,_size) { \
-    const void * src = (const void *)(_src);         \
-    void * dest = (void *)(_dest);                   \
-    u32 size = (u32)(_size);                         \
-    while (1)                                        \
-    {                                                \
-        if (size <= 0x1000)                          \
-        {                                            \
-            DmaCopy16(3, src, dest, size);           \
-            break;                                   \
-        }                                            \
-        DmaCopy16(3, src, dest, 0x1000);             \
-        src += 0x1000;                               \
-        dest += 0x1000;                              \
-        size -= 0x1000;                              \
-    }                                                \
-}
-
 void sub_80A1D18(void);
 
 void sub_80A1048(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
     u8 i;
+    s16 * data = gTasks[taskId].data;
 
     data[1] += data[0];
     if (data[1] != 0)
     {
-        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x24A - data[1]], (void *)(BG_SCREEN_ADDR(28) + 0x480), data[1] * 2);
-        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x26A - data[1]], (void *)(BG_SCREEN_ADDR(28) + 0x4C0), data[1] * 2);
-        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x24A - data[1]], (void *)(BG_SCREEN_ADDR(29) + 0x480), data[1] * 2);
-        DmaCopyLargeCheckFirst16(&gUnknown_08E73508[0x26A - data[1]], (void *)(BG_SCREEN_ADDR(29) + 0x4C0), data[1] * 2);
+        Dma3CopyLarge_(&gUnknown_08E73508[0x24A - data[1]], (void *)(BG_SCREEN_ADDR(28) + 0x480), data[1] * 2, 16);
+        Dma3CopyLarge_(&gUnknown_08E73508[0x26A - data[1]], (void *)(BG_SCREEN_ADDR(28) + 0x4C0), data[1] * 2, 16);
+        Dma3CopyLarge_(&gUnknown_08E73508[0x24A - data[1]], (void *)(BG_SCREEN_ADDR(29) + 0x480), data[1] * 2, 16);
+        Dma3CopyLarge_(&gUnknown_08E73508[0x26A - data[1]], (void *)(BG_SCREEN_ADDR(29) + 0x4C0), data[1] * 2, 16);
     }
     for (i = data[1]; i < 10; i++)
     {
@@ -3025,12 +2988,10 @@ static void sub_80A12D0(s8 a)
     sub_80A18E4(29);
 
     newTaskId = CreateTask(sub_80A1048, 0);
-    gTasks[newTaskId].data[0] = a;
+    gTasks[newTaskId].data[0] = (s16)a;
 
-    if (a < 0)
-        gTasks[newTaskId].data[1] = 10;
-    else
-        gTasks[newTaskId].data[1] = 0;
+    if (a < 0) gTasks[newTaskId].data[1] = 10;
+    else gTasks[newTaskId].data[1] = 0;
 
     gTasks[newTaskId].data[2] = 1;
 }
@@ -3122,15 +3083,13 @@ static void sub_80A1488(s8 a, u8 b)
     if (taskId == 0xFF)
         taskId = CreateTask(sub_80A1334, 0);
 
-    gTasks[taskId].data[0] = a;
+    gTasks[taskId].data[0] = (s16)a;
 
-    if (a < 0)
-        gTasks[taskId].data[1] = 10;
-    else
-        gTasks[taskId].data[1] = 0;
+    if (a < 0) gTasks[taskId].data[1] = 10;
+    else gTasks[taskId].data[1] = 0;
 
     gTasks[taskId].data[2] = 0;
-    gTasks[taskId].data[3] = b;
+    gTasks[taskId].data[3] = (s16)b;
 }
 
 static void sub_80A1500(u8 taskId)
@@ -3218,240 +3177,69 @@ static void sub_80A1654(s8 a, u8 b)
     if (taskId == 0xFF)
         taskId = CreateTask(sub_80A1500, 0);
 
-    gTasks[taskId].data[0] = a;
+    gTasks[taskId].data[0] = (s16)a;
 
-    if (a < 0)
-        gTasks[taskId].data[1] = 10;
-    else
-        gTasks[taskId].data[1] = 0;
+    if (a < 0) gTasks[taskId].data[1] = 10;
+    else gTasks[taskId].data[1] = 0;
 
     gTasks[taskId].data[2] = 0;
-    gTasks[taskId].data[3] = b;
+    gTasks[taskId].data[3] = (s16)b;
 }
 
-// not enough registers allocated (need to allocate r8 and r9)
-#ifdef NONMATCHING
+extern u16 gUnknown_08E94510[3][32];
+
 static void sub_80A16CC(u8 a)
 {
     u8 i;
-    u16 *vramAddr = (u16 *)(VRAM + 0x6AD4);
+    u16 (*vramAddr)[0x20];
+    
+    vramAddr = BG_SCREEN_ADDR(13) + ( 0xb << 6 ) + ( 0xa << 1 );
 
     if (a == 0)
     {
         for (i = 0; i < 20; i++)
         {
-            vramAddr[i] = gUnknown_08E94510[i] + 0x1000;
-            vramAddr[i + 0x20] = gUnknown_08E94510[i] + 0x1000;
-            vramAddr[i + 0x40] = gUnknown_08E94550[i] + 0x1000;
-        }
-    }
-    else
-    {
-        i = 0;
-        for (i = 0; i < 20; i++)
-        {
-            vramAddr[i] = gUnknown_08E94550[i] + 0x1000;
-            vramAddr[i + 0x20] = gUnknown_08E94590[i] + 0x1000;
-            vramAddr[i + 0x40] = gUnknown_08E94590[i] + 0x1000;
-        }
-    }
-
-    vramAddr = (u16 *)(VRAM + 0x5AD4);
-
-    if (a == 0)
-    {
-        for (i = 0; i < 20; i++)
-        {
-            vramAddr[i] = gUnknown_08E94510[i] + 0x3000;
-            vramAddr[i + 0x20] = gUnknown_08E94510[i] + 0x3000;
-            vramAddr[i + 0x40] = gUnknown_08E94550[i] + 0x3000;
+            vramAddr[0][i] = 0x1000 + gUnknown_08E94510[0][i];
+            vramAddr[1][i] = 0x1000 + gUnknown_08E94510[0][i];
+            vramAddr[2][i] = 0x1000 + gUnknown_08E94510[1][i];
         }
     }
     else
     {
         for (i = 0; i < 20; i++)
         {
-            vramAddr[i] = gUnknown_08E94550[i] + 0x3000;
-            vramAddr[i + 0x20] = gUnknown_08E94590[i] + 0x3000;
-            vramAddr[i + 0x40] = gUnknown_08E94590[i] + 0x3000;
+            vramAddr[0][i] = 0x1000 + (gUnknown_08E94510+1)[0][i];
+            vramAddr[1][i] = 0x1000 + (gUnknown_08E94510+1)[1][i];
+            vramAddr[2][i] = 0x1000 + (gUnknown_08E94510+1)[1][i];
+        }
+    }
+
+    vramAddr = BG_SCREEN_ADDR(11) + ( 0xb << 6 ) + ( 0xa << 1 );
+
+    if (a == 0)
+    {
+        for (i = 0; i < 20; i++)
+        {
+            vramAddr[0][i] = 0x3000 + gUnknown_08E94510[0][i];
+            vramAddr[1][i] = 0x3000 + gUnknown_08E94510[0][i];
+            vramAddr[2][i] = 0x3000 + gUnknown_08E94510[1][i];
+        }
+    }
+    else
+    {
+        for (i = 0; i < 20; i++)
+        {
+            vramAddr[0][i] = 0x3000 + (gUnknown_08E94510+1)[0][i];
+            vramAddr[1][i] = 0x3000 + (gUnknown_08E94510+1)[1][i];
+            vramAddr[2][i] = 0x3000 + (gUnknown_08E94510+1)[1][i];
         }
     }
 }
-#else
-NAKED
-static void sub_80A16CC(u8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r9, r0\n\
-    ldr r0, _080A1724 @ =0x06006ad4\n\
-    mov r12, r0\n\
-    mov r1, r9\n\
-    cmp r1, 0\n\
-    bne _080A172C\n\
-    movs r5, 0\n\
-    ldr r7, _080A1728 @ =gUnknown_08E94510\n\
-    movs r0, 0x80\n\
-    lsls r0, 5\n\
-    adds r6, r0, 0\n\
-    movs r1, 0x40\n\
-    adds r1, r7\n\
-    mov r8, r1\n\
-_080A16F4:\n\
-    lsls r2, r5, 1\n\
-    mov r0, r12\n\
-    adds r3, r2, r0\n\
-    adds r4, r2, r7\n\
-    ldrh r1, [r4]\n\
-    adds r0, r6, r1\n\
-    strh r0, [r3]\n\
-    adds r1, r3, 0\n\
-    adds r1, 0x40\n\
-    ldrh r4, [r4]\n\
-    adds r0, r6, r4\n\
-    strh r0, [r1]\n\
-    adds r3, 0x80\n\
-    add r2, r8\n\
-    ldrh r2, [r2]\n\
-    adds r0, r6, r2\n\
-    strh r0, [r3]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x13\n\
-    bls _080A16F4\n\
-    b _080A1768\n\
-    .align 2, 0\n\
-_080A1724: .4byte 0x06006ad4\n\
-_080A1728: .4byte gUnknown_08E94510\n\
-_080A172C:\n\
-    movs r5, 0\n\
-    ldr r6, _080A17B0 @ =gUnknown_08E94550\n\
-    movs r7, 0x80\n\
-    lsls r7, 5\n\
-    adds r4, r7, 0\n\
-    movs r0, 0x40\n\
-    adds r0, r6\n\
-    mov r8, r0\n\
-_080A173C:\n\
-    lsls r1, r5, 1\n\
-    mov r7, r12\n\
-    adds r2, r1, r7\n\
-    adds r0, r1, r6\n\
-    ldrh r0, [r0]\n\
-    adds r0, r4, r0\n\
-    strh r0, [r2]\n\
-    adds r3, r2, 0\n\
-    adds r3, 0x40\n\
-    add r1, r8\n\
-    ldrh r7, [r1]\n\
-    adds r0, r4, r7\n\
-    strh r0, [r3]\n\
-    adds r2, 0x80\n\
-    ldrh r1, [r1]\n\
-    adds r0, r4, r1\n\
-    strh r0, [r2]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x13\n\
-    bls _080A173C\n\
-_080A1768:\n\
-    ldr r0, _080A17B4 @ =0x06005ad4\n\
-    mov r12, r0\n\
-    mov r1, r9\n\
-    cmp r1, 0\n\
-    bne _080A17BC\n\
-    movs r5, 0\n\
-    ldr r7, _080A17B8 @ =gUnknown_08E94510\n\
-    movs r0, 0xC0\n\
-    lsls r0, 6\n\
-    adds r6, r0, 0\n\
-    movs r1, 0x40\n\
-    adds r1, r7\n\
-    mov r8, r1\n\
-_080A1782:\n\
-    lsls r2, r5, 1\n\
-    mov r0, r12\n\
-    adds r3, r2, r0\n\
-    adds r4, r2, r7\n\
-    ldrh r1, [r4]\n\
-    adds r0, r6, r1\n\
-    strh r0, [r3]\n\
-    adds r1, r3, 0\n\
-    adds r1, 0x40\n\
-    ldrh r4, [r4]\n\
-    adds r0, r6, r4\n\
-    strh r0, [r1]\n\
-    adds r3, 0x80\n\
-    add r2, r8\n\
-    ldrh r2, [r2]\n\
-    adds r0, r6, r2\n\
-    strh r0, [r3]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x13\n\
-    bls _080A1782\n\
-    b _080A17F8\n\
-    .align 2, 0\n\
-_080A17B0: .4byte gUnknown_08E94550\n\
-_080A17B4: .4byte 0x06005ad4\n\
-_080A17B8: .4byte gUnknown_08E94510\n\
-_080A17BC:\n\
-    movs r5, 0\n\
-    ldr r6, _080A1804 @ =gUnknown_08E94550\n\
-    movs r7, 0xC0\n\
-    lsls r7, 6\n\
-    adds r4, r7, 0\n\
-    movs r0, 0x40\n\
-    adds r0, r6\n\
-    mov r8, r0\n\
-_080A17CC:\n\
-    lsls r1, r5, 1\n\
-    mov r7, r12\n\
-    adds r2, r1, r7\n\
-    adds r0, r1, r6\n\
-    ldrh r0, [r0]\n\
-    adds r0, r4, r0\n\
-    strh r0, [r2]\n\
-    adds r3, r2, 0\n\
-    adds r3, 0x40\n\
-    add r1, r8\n\
-    ldrh r7, [r1]\n\
-    adds r0, r4, r7\n\
-    strh r0, [r3]\n\
-    adds r2, 0x80\n\
-    ldrh r1, [r1]\n\
-    adds r0, r4, r1\n\
-    strh r0, [r2]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x13\n\
-    bls _080A17CC\n\
-_080A17F8:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A1804: .4byte gUnknown_08E94550\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *mon)
 {
-    u16 species;
     u8 spriteId;
+    u16 species;
 
     species = GetMonData(mon, MON_DATA_SPECIES2);
     spriteId = CreateSprite(&gCreatingSpriteTemplate, 40, 64, 5);
@@ -3461,10 +3249,8 @@ u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *mon)
     gSprites[spriteId].data[0] = species;
     gSprites[spriteId].callback = SummaryScreen_SpritePlayCry;
 
-    if (!IsPokeSpriteNotFlipped(species))
-        gSprites[spriteId].hFlip = TRUE;
-    else
-        gSprites[spriteId].hFlip = FALSE;
+    if (!IsPokeSpriteNotFlipped(species)) gSprites[spriteId].hFlip = TRUE;
+    else gSprites[spriteId].hFlip = FALSE;
 
     return spriteId;
 }

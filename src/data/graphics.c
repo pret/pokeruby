@@ -1155,9 +1155,12 @@ const u16 gTilesetPalettes_General[][16] =
     INCBIN_U16("data/tilesets/primary/general/palettes/15.gbapal"),
 };
 
-const u8 gUnknown_08E94510[] = INCBIN_U8("graphics/unknown/unknown_E94510.bin");
-const u8 gUnknown_08E94550[] = INCBIN_U8("graphics/unknown/unknown_E94550.bin");
-const u8 gUnknown_08E94590[] = INCBIN_U8("graphics/unknown/unknown_E94590.bin");
+const u16 gUnknown_08E94510[3][32] = 
+{
+    INCBIN_U16("graphics/unknown/unknown_E94510.bin"),
+    INCBIN_U16("graphics/unknown/unknown_E94550.bin"),
+    INCBIN_U16("graphics/unknown/unknown_E94590.bin"),
+};
 const u8 gUnknown_08E945D0[] = INCBIN_U8("graphics/interface/wordgroup_layout.bin");
 const u8 gUnknown_08E94AD0[] = INCBIN_U8("graphics/unknown/unknown_E94AD0.bin");
 const u8 gUnknown_08E953D0[] = INCBIN_U8("graphics/unknown/unknown_E953D0.bin.lz");

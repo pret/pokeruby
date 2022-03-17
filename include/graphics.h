@@ -2667,9 +2667,6 @@ extern const u16 gMenuWordGroupIndicator_Pal[];
 extern const u16 gMenuWordGroupFrame1_Pal[];
 extern const u16 gMenuWordGroupFrame2_Pal[];
 
-extern const u8 gUnknown_08E94510[];
-extern const u8 gUnknown_08E94550[];
-extern const u8 gUnknown_08E94590[];
 extern const u8 gUnknown_08E945D0[];
 extern const u8 gUnknown_08E94AD0[];
 extern const u8 gUnknown_08E953D0[];
