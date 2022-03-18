@@ -65,11 +65,11 @@ u8 MenuCursor_Create814A5C0(u8 subpriority, u16 paletteTag, u8 a3, u16 a4, u8 a5
             v10->oam.paletteNum = IndexOfSpritePaletteTag(paletteTag);
 
         if (!(REG_DISPCNT & (DISPCNT_WIN0_ON | DISPCNT_WIN1_ON)))
-            *(u8 *)(REG_ADDR_WINOUT) |= 0x1F;
+            *(vu8 *)(REG_ADDR_WINOUT) |= 0x1F;
         gUnknown_0203A3D3 = REG_DISPCNT >> 0xF;
-        gUnknown_0203A3D4 = *(u8 *)(REG_BASE + REG_OFFSET_WINOUT + 1);
+        gUnknown_0203A3D4 = *(vu8 *)(REG_BASE + REG_OFFSET_WINOUT + 1);
         REG_DISPCNT |= DISPCNT_OBJWIN_ON;
-        *(u8 *)(REG_ADDR_WINOUT + 1) = 0x10;
+        *(vu8 *)(REG_ADDR_WINOUT + 1) = 0x10;
     }
     sub_814A958(a5);
     return gUnknown_0203A3D0;
@@ -176,248 +176,63 @@ void sub_814A904(void)
 }
 
 #if ENGLISH
-#ifdef NONMATCHING
-// Fix pls
-void sub_814A958(u8 a)
+void sub_814A958(u8 a1)
 {
     u8 r7;
     struct Subsprite *r4 = gMenuCursorSubsprites;
     s16 r2 = -1;
-    s32 _a = a;
-    s16 r5;
+    s16 a = a1;
     s16 i;
+    struct Sprite *sprite;
 
-    *r4 = (struct Subsprite){.x = 0, .y = 0, .shape = 2, .size = 0, .tileOffset = 0, .priority = 0};
+    *r4 = (struct Subsprite){ .x = 0, .y = 0, .shape = 2, .size = 0, .tileOffset = 0, .priority = 0 };
     r4->x = r2;
     r4++;
+
     r7 = 1;
     r2 = 1;
-    r5 = a;
-    i = r5;
-    while ((i -= r2) >= 8)
+
+    while ((i = a - r2) >= 8)
     {
         if (i > 0x1F)
         {
             *r4 = gUnknown_0842F780;
             r4->x = r2;
-            r2 += 32;
-            r5 = a;
+            r2 += 0x20;
         }
-        //_0814A9D4
+        else if (a > 0x27 && i > 8)
+        {
+            *r4 = gUnknown_0842F780;
+            r4->x = r2 - 32;
+            r4->x += i & (~7);
+            r2 += i & 0x18;
+        }
         else
         {
-            r5 = a;
-            if (_a > 0x27 && i > 8)
-            {
-                *r4 = gUnknown_0842F780;
-                r4->x = (r2 - 32) + (i & ~7);
-                r2 += i & 0x18;
-            }
-            //_0814AA0A
-            else
-            {
-                *r4 = gUnknown_0842F788;
-                r4->x = r2;
-                r2 += 8;
-            }
+            *r4 = gUnknown_0842F788;
+            r4->x = r2;
+            r2 += 8;
         }
-        //_0814AA20
+
         r4++;
         r7++;
-        i = r5;
     }
-    //_0814AA3A
+
     *r4 = gUnknown_0842F790;
-    r4->x = r2 - 7 + i;
+    r4->x = r2 + (i - 7);
+
     r7++;
     if (gUnknown_0203A3D0 != 64)
-        SetSubspriteTables(&gSprites[gUnknown_0203A3D0], gSubspriteTables_842F5C0 + r7);
+    {
+        sprite = &gSprites[gUnknown_0203A3D0];
+        SetSubspriteTables(sprite, &gSubspriteTables_842F5C0[r7]);
+    }
     if (gUnknown_0203A3D1 != 64)
-        SetSubspriteTables(&gSprites[gUnknown_0203A3D1], gSubspriteTables_842F5C0 + r7);
+    {
+        sprite = &gSprites[gUnknown_0203A3D1];
+        SetSubspriteTables(sprite, &gSubspriteTables_842F5C0[r7]);
+    }
 }
-#else
-NAKED
-void sub_814A958(u8 a1)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _0814A9C4\n\
-    ldr r2, _0814A9C8\n\
-    lsrs r0, 24\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0\n\
-    movs r1, 0x2\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    strh r2, [r4]\n\
-    adds r4, 0x8\n\
-    movs r7, 0x1\n\
-    movs r2, 0x1\n\
-    ldr r1, [sp]\n\
-    subs r0, r1, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x7\n\
-    ble _0814AA3A\n\
-    ldr r0, _0814A9CC\n\
-    mov r12, r0\n\
-    mov r8, r1\n\
-    movs r1, 0x8\n\
-    negs r1, r1\n\
-    mov r10, r1\n\
-    ldr r5, _0814A9D0\n\
-    mov r9, r5\n\
-_0814A99E:\n\
-    lsls r0, r3, 16\n\
-    asrs r3, r0, 16\n\
-    cmp r3, 0x1F\n\
-    ble _0814A9D4\n\
-    mov r6, r12\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r6, 0x4]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    strh r2, [r4]\n\
-    lsls r0, r2, 16\n\
-    movs r1, 0x80\n\
-    lsls r1, 14\n\
-    adds r0, r1\n\
-    lsrs r2, r0, 16\n\
-    ldr r3, [sp]\n\
-    lsls r5, r3, 16\n\
-    b _0814AA20\n\
-    .align 2, 0\n\
-_0814A9C4: .4byte gMenuCursorSubsprites\n\
-_0814A9C8: .4byte 0x0000ffff\n\
-_0814A9CC: .4byte gUnknown_0842F780\n\
-_0814A9D0: .4byte gUnknown_0842F788\n\
-_0814A9D4:\n\
-    ldr r6, [sp]\n\
-    lsls r5, r6, 16\n\
-    mov r0, r8\n\
-    cmp r0, 0x27\n\
-    ble _0814AA0A\n\
-    cmp r3, 0x8\n\
-    ble _0814AA0A\n\
-    mov r6, r12\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r6, 0x4]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    lsls r1, r2, 16\n\
-    asrs r1, 16\n\
-    adds r2, r1, 0\n\
-    subs r2, 0x20\n\
-    adds r0, r3, 0\n\
-    mov r6, r10\n\
-    ands r0, r6\n\
-    adds r2, r0\n\
-    strh r2, [r4]\n\
-    movs r0, 0x18\n\
-    ands r0, r3\n\
-    adds r1, r0\n\
-    lsls r1, 16\n\
-    lsrs r2, r1, 16\n\
-    b _0814AA20\n\
-_0814AA0A:\n\
-    mov r3, r9\n\
-    ldr r0, [r3]\n\
-    ldr r1, [r3, 0x4]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    strh r2, [r4]\n\
-    lsls r0, r2, 16\n\
-    movs r6, 0x80\n\
-    lsls r6, 12\n\
-    adds r0, r6\n\
-    lsrs r2, r0, 16\n\
-_0814AA20:\n\
-    adds r4, 0x8\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    asrs r1, r5, 16\n\
-    lsls r0, r2, 16\n\
-    asrs r0, 16\n\
-    subs r1, r0\n\
-    lsls r1, 16\n\
-    lsrs r3, r1, 16\n\
-    asrs r1, 16\n\
-    cmp r1, 0x7\n\
-    bgt _0814A99E\n\
-_0814AA3A:\n\
-    ldr r5, _0814AAA8\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r5, 0x4]\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    lsls r1, r2, 16\n\
-    asrs r1, 16\n\
-    subs r1, 0x7\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    adds r0, r1\n\
-    strh r0, [r4]\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    ldr r6, _0814AAAC\n\
-    ldrb r0, [r6]\n\
-    cmp r0, 0x40\n\
-    beq _0814AA78\n\
-    adds r1, r0, 0\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    ldr r1, _0814AAB0\n\
-    adds r2, r0, r1\n\
-    lsls r1, r7, 3\n\
-    ldr r0, _0814AAB4\n\
-    adds r1, r0\n\
-    adds r0, r2, 0\n\
-    bl SetSubspriteTables\n\
-_0814AA78:\n\
-    ldr r1, _0814AAB8\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x40\n\
-    beq _0814AA98\n\
-    adds r1, r0, 0\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    ldr r1, _0814AAB0\n\
-    adds r2, r0, r1\n\
-    lsls r1, r7, 3\n\
-    ldr r0, _0814AAB4\n\
-    adds r1, r0\n\
-    adds r0, r2, 0\n\
-    bl SetSubspriteTables\n\
-_0814AA98:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0814AAA8: .4byte gUnknown_0842F790\n\
-_0814AAAC: .4byte gUnknown_0203A3D0\n\
-_0814AAB0: .4byte gSprites\n\
-_0814AAB4: .4byte gSubspriteTables_842F5C0\n\
-_0814AAB8: .4byte gUnknown_0203A3D1\n\
-    .syntax divided\n");
-}
-#endif
 #elif GERMAN
 NAKED
 void sub_814A958(u8 a1)

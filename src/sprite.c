@@ -1745,8 +1745,8 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
     else
     {
         u16 tileNum;
-        u16 baseX;
-        u16 baseY;
+        s16 baseX;
+        s16 baseY;
         u8 subspriteCount;
         u8 hFlip;
         u8 vFlip;
@@ -1754,15 +1754,15 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
         tileNum = oam->tileNum;
         subspriteCount = subspriteTable->subspriteCount;
-        hFlip = ((s32)oam->matrixNum >> 3) & 1;
-        vFlip = ((s32)oam->matrixNum >> 4) & 1;
+        hFlip = (oam->matrixNum >> 3) & 1;
+        vFlip = (oam->matrixNum >> 4) & 1;
         baseX = oam->x - sprite->centerToCornerVecX;
         baseY = oam->y - sprite->centerToCornerVecY;
 
         for (i = 0; i < subspriteCount; i++, (*oamIndex)++)
         {
-            u16 x;
-            u16 y;
+            s16 x;
+            s16 y;
 
             if (*oamIndex >= gOamLimit)
                 return 1;
@@ -1772,26 +1772,20 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
             if (hFlip)
             {
-                s8 width = sOamDimensions[subspriteTable->subsprites[i].shape][subspriteTable->subsprites[i].size].width;
-                s16 right = x;
-                right += width;
-                x = right;
+                x += sOamDimensions[subspriteTable->subsprites[i].shape][subspriteTable->subsprites[i].size].width;
                 x = ~x + 1;
             }
 
             if (vFlip)
             {
-                s8 height = sOamDimensions[subspriteTable->subsprites[i].shape][subspriteTable->subsprites[i].size].height;
-                s16 bottom = y;
-                bottom += height;
-                y = bottom;
+                y += sOamDimensions[subspriteTable->subsprites[i].shape][subspriteTable->subsprites[i].size].height;
                 y = ~y + 1;
             }
 
             destOam[i] = *oam;
             destOam[i].shape = subspriteTable->subsprites[i].shape;
             destOam[i].size = subspriteTable->subsprites[i].size;
-            destOam[i].x = (s16)baseX + (s16)x;
+            destOam[i].x = baseX + x;
             destOam[i].y = baseY + y;
             destOam[i].tileNum = tileNum + subspriteTable->subsprites[i].tileOffset;
 

@@ -152,8 +152,8 @@ enum
 
 struct Subsprite
 {
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
     u16 shape:2;
     u16 size:2;
     u16 tileOffset:10;
@@ -162,7 +162,7 @@ struct Subsprite
 
 struct SubspriteTable
 {
-    u8 subspriteCount;
+    const u8 subspriteCount;
     const struct Subsprite *subsprites;
 };
 

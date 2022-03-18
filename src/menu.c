@@ -21,7 +21,7 @@ struct Menu
     u8 width;
     u8 height;
     u8 menu_field_7;
-    u8 columnXCoords[8];
+    u8 columnXCoords[7];
 };
 
 static void MultistepInitMenuWindowInternal(const struct WindowTemplate *, u16);
@@ -59,7 +59,7 @@ void CloseMenu(void)
     Menu_DestroyCursor();
 }
 
-void AppendToList(u8 *list, u8 *pindex, u32 value)
+void AppendToList(u8 *list, u8 *pindex, u8 value)
 {
     list[*pindex] = value;
     (*pindex)++;
@@ -89,27 +89,26 @@ bool32 MultistepInitMenuWindowContinue(void)
     {
     case 0:
         gMenuMultistepInitState++;
-        return 0;
+        break;
     case 1:
         gMenuTextWindowTileOffset = MultistepInitWindowTileData(gMenuWindowPtr, gMenuTextTileOffset);
-        goto next;
+        gMenuMultistepInitState++;
+        break;
     case 2:
         if (!MultistepLoadFont())
-            goto fail;
-        goto next;
+            break;
+        gMenuMultistepInitState++;
+        break;
     case 3:
         gMenuTextWindowContentTileOffset = TextWindow_SetBaseTileNum(gMenuTextWindowTileOffset);
-    next:
         gMenuMultistepInitState++;
-        return 0;
+        break;
     case 4:
         TextWindow_LoadStdFrameGraphics(gMenuWindowPtr);
         gMenuMessageBoxContentTileOffset = TextWindow_SetDlgFrameBaseTileNum(gMenuTextWindowContentTileOffset);
         return 1;
-    default:
-    fail:
-        return 0;
     }
+    return 0;
 }
 
 static void InitMenuWindowInternal(const struct WindowTemplate *winTemplate, u16 tileOffset)

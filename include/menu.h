@@ -27,7 +27,7 @@ extern u16 gMenuTextWindowContentTileOffset;
 extern u16 gMenuMessageBoxContentTileOffset;
 
 void CloseMenu(void);
-void AppendToList(u8 *list, u8 *pindex, u32 value);
+void AppendToList(u8 *list, u8 *pindex, u8 value);
 void InitMenuWindow(const struct WindowTemplate *);
 void MultistepInitMenuWindowBegin(const struct WindowTemplate *);
 bool32 MultistepInitMenuWindowContinue(void);
