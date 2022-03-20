@@ -2280,7 +2280,7 @@ static void sub_8049ED4(u8 a0)
             gUnknown_0820C330[whichParty][1],
             19);
 
-        sub_804A96C(&gUnknown_03004824->unk_00c8, 15 * a0, 0, gTradePartyBoxTilemap, 15, 17, 0);
+        sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * a0, 0, gTradePartyBoxTilemap, 15, 17, 0);
         if (whichParty == 0)
             sub_804A80C();
         break;
@@ -2290,7 +2290,7 @@ static void sub_8049ED4(u8 a0)
             gUnknown_03004824->unk_0080[a0]++;
         break;
     case 3:
-        sub_804A96C(
+        sub_804A96C_alt(
             &gUnknown_03004824->unk_00c8, whichParty * 15, 0, gTradeMovesBoxTilemap, 15, 17, 0);
 
         gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].x =
