@@ -690,7 +690,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].unk2C[0] = 0;
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
-    StringGetEnd10(name);
+    StringGet_Nickname(name);
     if (gIsLinkContest & 1)
     {
         Text_StripExtCtrlCodes(name);

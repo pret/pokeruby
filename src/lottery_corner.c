@@ -123,7 +123,7 @@ void PickLotteryCornerTicket(void)
             gSpecialVar_0x8006 = 1;
             GetBoxMonData(&gPokemonStorage.boxes[box][slot], MON_DATA_NICKNAME, gStringVar1);
         }
-        StringGetEnd10(gStringVar1);
+        StringGet_Nickname(gStringVar1);
     }
 }
 

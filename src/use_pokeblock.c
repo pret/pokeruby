@@ -607,7 +607,7 @@ static void sub_8136B44(void)
 static void sub_8136BB8(void)
 {
     GetMonData(&gPlayerParty[sub_81370A4(gPokenavStructPtr->unk87DC)], MON_DATA_NICKNAME, gUnknown_02039304->stringBuffer);
-    StringGetEnd10(gUnknown_02039304->stringBuffer);
+    StringGet_Nickname(gUnknown_02039304->stringBuffer);
     StringAppend(gUnknown_02039304->stringBuffer, gOtherText_GetsAPokeBlock);
     BasicInitMenuWindow(&gWindowTemplate_81E709C);
     Menu_DrawStdWindowFrame(0, 16, 29, 19);

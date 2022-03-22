@@ -686,7 +686,7 @@ static void sub_8122B10(u8 taskId)
                 PartyMenuDoPrintLevel(i + 3, 3, gMultiPartnerParty[i].level);
             PartyMenuDoPrintGenderIcon(gMultiPartnerParty[i].species, gMultiPartnerParty[i].gender, 3, i + 3, gMultiPartnerParty[i].nickname);
             StringCopy(gStringVar1, gMultiPartnerParty[i].nickname);
-            StringGetEnd10(gStringVar1);
+            StringGet_Nickname(gStringVar1);
             SanitizeNameString(gStringVar1);
             PartyMenuDoPrintMonNickname(i + 3, 3, gStringVar1);
             PartyMenuDoDrawHPBar(i + 3, 3, gMultiPartnerParty[i].hp, gMultiPartnerParty[i].maxhp);

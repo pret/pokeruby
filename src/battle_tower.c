@@ -1297,7 +1297,7 @@ void sub_8135AC4(void)
     playerRecord->trainerClass = trainerClass;
 
     copy_word_to_mem(playerRecord->trainerId, gSaveBlock2.playerTrainerId);
-    StringCopy8(playerRecord->name, gSaveBlock2.playerName);
+    StringCopy_PlayerName(playerRecord->name, gSaveBlock2.playerName);
 
     playerRecord->winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
 
@@ -1486,7 +1486,7 @@ void Debug_FillEReaderTrainerWithPlayerData(void)
     }
 
     copy_word_to_mem(ereaderTrainer->trainerId, gSaveBlock2.playerTrainerId);
-    StringCopy8(ereaderTrainer->name, gSaveBlock2.playerName);
+    StringCopy_PlayerName(ereaderTrainer->name, gSaveBlock2.playerName);
 
     ereaderTrainer->winStreak = 1;
 

@@ -1703,7 +1703,7 @@ void sub_809C04C(void *pokemon, u8 a1)
         {
             gPokemonStorageSystemPtr->unk_11f9 = GetMonData(pkmn, MON_DATA_IS_EGG);
             GetMonData(pkmn, MON_DATA_NICKNAME, gPokemonStorageSystemPtr->unk_11fa);
-            StringGetEnd10(gPokemonStorageSystemPtr->unk_11fa);
+            StringGet_Nickname(gPokemonStorageSystemPtr->unk_11fa);
             gPokemonStorageSystemPtr->unk_11f8 = GetMonData(pkmn, MON_DATA_LEVEL);
             gPokemonStorageSystemPtr->unk_11f7 = GetMonData(pkmn, MON_DATA_MARKINGS);
             gPokemonStorageSystemPtr->unk_11ec = GetMonData(pkmn, MON_DATA_PERSONALITY);
@@ -1721,7 +1721,7 @@ void sub_809C04C(void *pokemon, u8 a1)
             u32 otId = GetBoxMonData(boxmon, MON_DATA_OT_ID);
             gPokemonStorageSystemPtr->unk_11f9 = GetBoxMonData(boxmon, MON_DATA_IS_EGG);
             GetBoxMonData(boxmon, MON_DATA_NICKNAME, gPokemonStorageSystemPtr->unk_11fa);
-            StringGetEnd10(gPokemonStorageSystemPtr->unk_11fa);
+            StringGet_Nickname(gPokemonStorageSystemPtr->unk_11fa);
             gPokemonStorageSystemPtr->unk_11f8 = GetLevelFromBoxMonExp(boxmon);
             gPokemonStorageSystemPtr->unk_11f7 = GetBoxMonData(boxmon, MON_DATA_MARKINGS);
             gPokemonStorageSystemPtr->unk_11ec = GetBoxMonData(boxmon, MON_DATA_PERSONALITY);

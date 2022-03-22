@@ -4770,7 +4770,7 @@ u8 * sub_80F6514(u8 * r10, u16 sp0, u8 sp4)
     if (!sub_80F44B0(box, monNo, MON_DATA_IS_EGG, NULL))
     {
         sub_80F44B0(box, monNo, MON_DATA_NICKNAME, dest);
-        StringGetEnd10(dest);
+        StringGet_Nickname(dest);
         species = sub_80F44B0(box, monNo, MON_DATA_SPECIES, NULL);
         if (box == 14)
         {

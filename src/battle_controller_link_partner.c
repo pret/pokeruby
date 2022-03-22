@@ -567,7 +567,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
         battlePokemon.altAbility = GetMonData(&gPlayerParty[a], MON_DATA_ALT_ABILITY);
         battlePokemon.otId = GetMonData(&gPlayerParty[a], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battlePokemon.nickname, nickname);
+        StringCopy_Nickname(battlePokemon.nickname, nickname);
         GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
         MEMCPY_ALT(&battlePokemon, buffer, sizeof(battlePokemon), size, src);
         break;

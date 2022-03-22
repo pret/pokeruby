@@ -51,7 +51,7 @@ u8 *GetMonNick(struct Pokemon *mon, u8 *dest)
     s8 nickname[POKEMON_NAME_LENGTH * 2];
 
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
-    return StringCopy10(dest, nickname);
+    return StringCopy_Nickname(dest, nickname);
 }
 
 u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest)
@@ -59,7 +59,7 @@ u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest)
     s8 nickname[POKEMON_NAME_LENGTH * 2];
 
     GetBoxMonData(mon, MON_DATA_NICKNAME, nickname);
-    return StringCopy10(dest, nickname);
+    return StringCopy_Nickname(dest, nickname);
 }
 
 u8 CountPokemonInDaycare(struct DayCare *daycare)

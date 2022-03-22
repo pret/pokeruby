@@ -500,14 +500,14 @@ extern u8 *de_sub_8041024(s32, u32);
     {                                                                   \
         GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
     }                                                                   \
-    StringGetEnd10(text);                                               \
+    StringGet_Nickname(text);                                               \
     toCpy = text;
 #else
 #define HANDLE_NICKNAME_STRING_CASE(bank, monIndex)                     \
     if (GetBattlerSide(bank) != 0)                                         \
     {                                                                   \
         GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
-        StringGetEnd10(text);                                           \
+        StringGet_Nickname(text);                                           \
         toCpy = text;                                                   \
         while (*toCpy != EOS)                                           \
         {                                                               \
@@ -523,7 +523,7 @@ extern u8 *de_sub_8041024(s32, u32);
     else                                                                \
     {                                                                   \
         GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
-        StringGetEnd10(text);                                           \
+        StringGet_Nickname(text);                                           \
         toCpy = text;                                                   \
     }
 #endif
@@ -575,42 +575,42 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 break;
             case B_TXT_PLAYER_MON1_NAME: // first player poke name
                 GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(0)]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON1_NAME: // first enemy poke name
                 GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(1)]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_PLAYER_MON2_NAME: // second player poke name
                 GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(2)]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
                 GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(3)]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON1_NAME: // link first player poke name
                 GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON1_NAME: // link first opponent poke name
                 GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 1]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON2_NAME: // link second player poke name
                 GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 2]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON2_NAME: // link second opponent poke name
                 GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 3]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only bank 0/1
@@ -622,7 +622,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 else
                     GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
 
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX: // attacker name with prefix
@@ -892,19 +892,19 @@ void ExpandBattleTextBuffPlaceholders(u8* src, u8* dst)
                     StringAppend(dst, BattleText_Wild);
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
             }
-            StringGetEnd10(text);
+            StringGet_Nickname(text);
             StringAppend(dst, text);
 #else
             if (GetBattlerSide(src[srcID + 1]) == 0)
             {
                 GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 StringAppend(dst, text);
             }
             else
             {
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 StringAppend(dst, text);
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     StringAppend(dst, BattleText_Foe);
@@ -927,7 +927,7 @@ void ExpandBattleTextBuffPlaceholders(u8* src, u8* dst)
                 GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
             else
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
-            StringGetEnd10(dst);
+            StringGet_Nickname(dst);
             srcID += 3;
             break;
         case B_BUFF_NEGATIVE_FLAVOR: // flavour table

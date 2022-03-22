@@ -233,7 +233,7 @@ static void PrintContestPaintingCaption(u8 contestType, u8 isForArtist)
 #if ENGLISH
         ptr = StringCopy(ptr, gContestPaintingWinner->trainerName);
 #elif GERMAN
-        ptr = StringCopy10(ptr, gContestPaintingWinner->nickname);
+        ptr = StringCopy_Nickname(ptr, gContestPaintingWinner->nickname);
 #endif
 
         // {LATIN}
@@ -243,7 +243,7 @@ static void PrintContestPaintingCaption(u8 contestType, u8 isForArtist)
 
         ptr = StringCopy(ptr, gOtherText_Unknown1);
 #if ENGLISH
-        ptr = StringCopy10(ptr, gContestPaintingWinner->nickname);
+        ptr = StringCopy_Nickname(ptr, gContestPaintingWinner->nickname);
 #elif GERMAN
         ptr = StringCopy(ptr, gContestPaintingWinner->trainerName);
 #endif
@@ -254,7 +254,7 @@ static void PrintContestPaintingCaption(u8 contestType, u8 isForArtist)
     else
     {
         ptr = StringCopy(ptr, sMuseumCaptions[type].prefix);
-        ptr = StringCopy10(ptr, gContestPaintingWinner->nickname);
+        ptr = StringCopy_Nickname(ptr, gContestPaintingWinner->nickname);
         ptr = StringCopy(ptr, sMuseumCaptions[type].suffix);
 
         xPos = 3;

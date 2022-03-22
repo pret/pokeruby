@@ -111,7 +111,7 @@ bool8 (*const TrainerCard_StateMachine[])(struct Task *) =
 };
 
 bool8 TrainerCard_InitFlipAnimation(struct Task *);
-bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *);
+bool8 Task_AnimateCardFlipDown(struct Task *);
 bool8 TrainerCard_SwitchToNewSide(struct Task *);
 bool8 TrainerCard_ScaleUpFlipAnimation(struct Task *);
 bool8 TrainerCard_FinishFlipAnimation(struct Task *);
@@ -119,7 +119,7 @@ bool8 TrainerCard_FinishFlipAnimation(struct Task *);
 bool8 (*const TrainerCard_FlipAnimationStateMachine[])(struct Task *) =
 {
     TrainerCard_InitFlipAnimation,
-    TrainerCard_ScaleDownFlipAnimation,
+    Task_AnimateCardFlipDown,
     TrainerCard_SwitchToNewSide,
     TrainerCard_ScaleUpFlipAnimation,
     TrainerCard_FinishFlipAnimation,
@@ -239,7 +239,7 @@ void debug_sub_80A0710(Callback callback)
 
 void debug_sub_80A073C(Callback callback)
 {
-    memcpy(&gTrainerCards[0], &sTestTrainerCard, sizeof(struct TrainerCard));
+    gTrainerCards[0] = sTestTrainerCard;
     gDebug_03000748=TRUE;
     TrainerCard_InitScreenForLinkPlayer(0, callback);
     SetMainCallback2(sub_8093174);
@@ -251,7 +251,7 @@ void debug_sub_80A0780()
     int i;
 
     for (i = 0; i < 4; i++)
-        memcpy(&gTrainerCards[i], &sTestTrainerCard, sizeof(struct TrainerCard));
+        gTrainerCards[i] = sTestTrainerCard;
 }
 #endif
 
@@ -469,7 +469,7 @@ static u8 TrainerCard_GetStarCount(struct TrainerCard *trainerCard)
         value++;
     }
 
-    if (trainerCard->battleTowerLosses > 49)
+    if (trainerCard->battleTowerLosses >= 50)
     {
         value++;
     }
@@ -588,19 +588,11 @@ static void TrainerCard_FillFlags(void)
     if (!gTrainerCardPtr->isShowingLinkCard)
     {
         u32 badgeFlag;
-        int i = 0;
-
-        badgeFlag = FLAG_BADGE01_GET;
-        while (1)
+        u32 i;
+        for (i = 0, badgeFlag = FLAG_BADGE01_GET; badgeFlag <= FLAG_BADGE08_GET; badgeFlag++, i++)
         {
             if (FlagGet(badgeFlag))
                 gTrainerCardPtr->ownedBadges[i]++;
-            badgeFlag++;
-            i++;
-            if (badgeFlag > FLAG_BADGE08_GET)
-            {
-                break;
-            }
         }
     }
 
@@ -816,44 +808,44 @@ bool8 TrainerCard_InitFlipAnimation(struct Task *task)
     return FALSE;
 }
 
-bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *task)
+// Note: Cannot be DISPLAY_HEIGHT / 2, or cardHeight will be 0
+#define CARD_FLIP_Y ((DISPLAY_HEIGHT / 2) - 3)
+
+bool8 Task_AnimateCardFlipDown(struct Task *task)
 {
+    u32 cardHeight, r5, r10, cardTop, r6, var_24, cardBottom, var;
     s16 i;
-    u32 r4, r5, r10, r7, r6, var_24, r9, var;
 
     gTrainerCardPtr->var_4 = FALSE;
     task->data[1] += 3;
-    if (task->data[1] > 79)
+    if (task->data[1] >= 80)
         task->data[1] = 79;
 
-    r7 = task->data[1];
-    r9 = 160 - r7;
-    r4 = r9 - r7;
-    r6 = -r7 << 16;
-    r5 = 0xA00000 / r4;
-    r5 += 0xFFFF0000;
-    var_24 = r6 + r5 * r4;
-    r10 = r5 / r4;
+    cardTop = task->data[1];
+    cardBottom = DISPLAY_HEIGHT - cardTop;
+    cardHeight = cardBottom - cardTop;
+    r6 = -cardTop << 16;
+    r5 = (DISPLAY_HEIGHT << 16) / cardHeight;
+    r5 -= 1 << 16;
+    var_24 = r6 + r5 * cardHeight;
+    r10 = r5 / cardHeight;
     r5 *= 2;
 
-    for (i = 0; i < r7;
-        // WHAT?!
-        gScanlineEffectRegBuffers[0][i] = (u32)-i + -4,
-        i++);
-    for (; i < (s16)r9; i++)
+    for (i = 0; i < cardTop; gScanlineEffectRegBuffers[0][i] = (u16)-i + -4, i++);
+        
+    for (; i < (s16)cardBottom; i++)
     {
         var = r6 >> 16;
         r6 += r5;
         r5 -= r10;
         gScanlineEffectRegBuffers[0][i] = var + -4;
     }
-    for (var = var_24 >> 16; i < 160;
-        // WHAT?!
-        gScanlineEffectRegBuffers[0][i] = var + -4,
-        i++);
+    
+    for (var = var_24 >> 16; i < DISPLAY_HEIGHT; gScanlineEffectRegBuffers[0][i] = var + -4, i++);
+        
 
     gTrainerCardPtr->var_4 = TRUE;
-    if (task->data[1] > 74)
+    if (task->data[1] >= 75)
         task->data[0]++;
 
     return FALSE;
@@ -873,39 +865,35 @@ bool8 TrainerCard_SwitchToNewSide(struct Task *task)
 
 bool8 TrainerCard_ScaleUpFlipAnimation(struct Task *task)
 {
+    u32 cardHeight, r5, r10, cardTop, r6, var_24, cardBottom, var;
     s16 i;
-    u32 r4, r5, r10, r7, r6, var_24, r9, var;
 
     gTrainerCardPtr->var_4 = FALSE;
     task->data[1] -= 3;
     if (task->data[1] <= 0)
         task->data[1] = 0;
 
-    r7 = task->data[1];
-    r9 = 160 - r7;
-    r4 = r9 - r7;
-    r6 = -r7 << 16;
-    r5 = 0xA00000 / r4;
-    r5 += 0xFFFF0000;
-    var_24 = r6 + r5 * r4;
-    r10 = r5 / r4;
+    cardTop = task->data[1];
+    cardBottom = DISPLAY_HEIGHT - cardTop;
+    cardHeight = cardBottom - cardTop;
+    r6 = -cardTop << 16;
+    r5 = (DISPLAY_HEIGHT << 16) / cardHeight;
+    r5 -= 1 << 16;
+    var_24 = r6 + r5 * cardHeight;
+    r10 = r5 / cardHeight;
     r5 /= 2;
 
-    for (i = 0; i < r7;
-        // WHAT?!
-        gScanlineEffectRegBuffers[0][i] = (u32)-i + -4,
-        i++);
-    for (; i < (s16)r9; i++)
+    for (i = 0; i < cardTop; gScanlineEffectRegBuffers[0][i] = (u16)-i + -4, i++);
+        
+    for (; i < (s16)cardBottom; i++)
     {
         var = r6 >> 16;
         r6 += r5;
         r5 += r10;
         gScanlineEffectRegBuffers[0][i] = var + -4;
     }
-    for (var = var_24 >> 16; i < 160;
-        // WHAT?!
-        gScanlineEffectRegBuffers[0][i] = var + -4,
-        i++);
+    
+    for (var = var_24 >> 16; i < DISPLAY_HEIGHT; gScanlineEffectRegBuffers[0][i] = var + -4, i++);
 
     gTrainerCardPtr->var_4 = TRUE;
     if (task->data[1] <= 0)
@@ -916,13 +904,10 @@ bool8 TrainerCard_ScaleUpFlipAnimation(struct Task *task)
 
 bool8 TrainerCard_FinishFlipAnimation(struct Task *task)
 {
-    u8 taskId;
-
     gTrainerCardPtr->var_4 = FALSE;
     SetHBlankCallback(NULL);
     TrainerCard_ResetOffsetRegisters();
-    taskId = FindTaskIdByFunc(TrainerCard_RunFlipAnimationStateMachine);
-    DestroyTask(taskId);
+    DestroyTask(FindTaskIdByFunc(TrainerCard_RunFlipAnimationStateMachine));
     return FALSE;
 }
 

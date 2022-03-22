@@ -1502,7 +1502,7 @@ void sub_8045180(struct Sprite *sprite)
 
     StringCopy(gDisplayedStringBattle, gUnknown_0820A8B0);
     GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
-    StringGetEnd10(nickname);
+    StringGet_Nickname(nickname);
     ptr = StringCopy(gDisplayedStringBattle + 3, nickname);
     ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 3;

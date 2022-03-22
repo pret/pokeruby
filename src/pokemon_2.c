@@ -1227,7 +1227,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     gBattleMons[battleIndex].type2 = gBaseStats[gBattleMons[battleIndex].species].type2;
     gBattleMons[battleIndex].ability = GetAbilityBySpecies(gBattleMons[battleIndex].species, gBattleMons[battleIndex].altAbility);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gBattleMons[battleIndex].nickname, nickname);
+    StringCopy_Nickname(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
 
     hpSwitchout = &gBattleStruct->HP_OnSwitchout[GetBattlerSide(battleIndex)];

@@ -2581,7 +2581,7 @@ void PrintPartyMenuMonNicknames(void)
 u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer)
 {
     GetMonData(pokemon, MON_DATA_NICKNAME, stringBuffer);
-    return StringGetEnd10(stringBuffer);
+    return StringGet_Nickname(stringBuffer);
 }
 
 void PartyMenuPutStatusTilemap(u8 monIndex, u8 menuLayout, u8 status)

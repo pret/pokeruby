@@ -46,7 +46,7 @@ static void FaintFromFieldPoison(u8 monIndex)
     AdjustFriendship(mon, FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE);
     SetMonData(mon, MON_DATA_STATUS, &status);
     GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
-    StringGetEnd10(gStringVar1);
+    StringGet_Nickname(gStringVar1);
 }
 
 static bool32 MonFaintedFromPoison(u8 monIndex)

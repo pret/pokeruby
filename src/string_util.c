@@ -24,10 +24,10 @@ static const s32 sPowersOfTen[] =
     1000000000,
 };
 
-u8 *StringCopy10(u8 *dest, const u8 *src)
+u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
 {
     u8 i;
-    u32 limit = 10;
+    u32 limit = POKEMON_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
     {
@@ -41,10 +41,10 @@ u8 *StringCopy10(u8 *dest, const u8 *src)
     return &dest[i];
 }
 
-u8 *StringGetEnd10(u8 *str)
+u8 *StringGet_Nickname(u8 *str)
 {
     u8 i;
-    u32 limit = 10;
+    u32 limit = POKEMON_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
         if (str[i] == EOS)
@@ -54,11 +54,11 @@ u8 *StringGetEnd10(u8 *str)
     return &str[i];
 }
 
-u8 *StringCopy8(u8 *dest, const u8 *src)
+u8 *StringCopy_PlayerName(u8 *dest, const u8 *src)
 {
     s32 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < OT_NAME_LENGTH + 1; i++)
     {
         dest[i] = src[i];
 
@@ -115,8 +115,7 @@ u16 StringLength(const u8 *str)
 
     while (str[length] != EOS)
     {
-        u16 temp = length;
-        length++;
+        u16 temp = length++;
         if (str[temp] == EXT_CTRL_CODE_BEGIN)
             length += GetExtCtrlCodeLength(str[length]);
     }
@@ -302,38 +301,23 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
     if (mode == STR_CONV_MODE_RIGHT_ALIGN)
         state = WRITING_SPACES;
 
+// Should be else if here
     if (mode == STR_CONV_MODE_LEADING_ZEROS)
         state = WRITING_DIGITS;
 
     for (powerOfSixteen = largestPowerOfSixteen; powerOfSixteen > 0; powerOfSixteen /= 16)
     {
-        char *out;
-        u8 c;
         u32 digit = value / powerOfSixteen;
         s32 temp = value % powerOfSixteen;
 
         if (state == WRITING_DIGITS)
         {
-            out = dest++;
-
-            if (digit <= 0xF)
-                c = sDigits[digit];
-            else
-                c = CHAR_QUESTION_MARK;
-
-            *out = c;
+            *dest++ = (digit <= 0xF) ? sDigits[digit] : CHAR_QUESTION_MARK;
         }
         else if (digit != 0 || powerOfSixteen == 1)
         {
             state = WRITING_DIGITS;
-            out = dest++;
-
-            if (digit <= 0xF)
-                c = sDigits[digit];
-            else
-                c = CHAR_QUESTION_MARK;
-
-            *out = c;
+            *dest++ = (digit <= 0xF) ? sDigits[digit] : CHAR_QUESTION_MARK;
         }
         else if (state == WRITING_SPACES)
         {
@@ -396,9 +380,9 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
         case EOS:
             *dest = EOS;
             return dest;
-        case 0xFA:
-        case 0xFB:
-        case 0xFE:
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
+        case CHAR_NEWLINE:
         default:
             *dest++ = c;
         }
@@ -543,12 +527,9 @@ u8 *StringCopyPadded(u8 *dest, const u8 *src, u8 c, u16 n)
             n--;
     }
 
-    n--;
-
-    while (n != (u16)-1)
+    while (n--)
     {
         *dest++ = c;
-        n--;
     }
 
     *dest = EOS;

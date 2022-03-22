@@ -812,7 +812,7 @@ static void InitMoveTutorMenuStrings(void)
     for (i = 0; i < sMoveTutorMenu->numMenuChoices; i++)
         StringCopy(sMoveTutorMenu->moveNames[i], gMoveNames[sMoveTutorMenu->movesToLearn[i]]);
     GetMonData(&gPlayerParty[sMoveTutorMenu->partyMonIndex], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gStringVar1, nickname);
+    StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(sMoveTutorMenu->moveNames[sMoveTutorMenu->numMenuChoices], gOtherText_Exit);
     sMoveTutorMenu->numMenuChoices++;
 }
