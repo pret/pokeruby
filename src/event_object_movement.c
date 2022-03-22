@@ -7499,13 +7499,14 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
 
     if (z == 0)
         return 0;
-    else if (z > 4)
+    
+    if (z > 4)
         z -= 4;
 
     z--;
     b = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (unknown_08376040[z](b) == 1)
+    if (unknown_08376040[z](b) == TRUE)
         return z + 1;
 
     return 0;
