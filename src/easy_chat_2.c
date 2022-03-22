@@ -2131,202 +2131,19 @@ u16 sub_80EAE88(u8 group)
     }
 }
 
-#if GERMAN
-NAKED
-void sub_80EAECC(void)
+static inline u16 sub_80EAECC_helper(u16 word)
 {
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x10\n\
-	movs r7, 0\n\
-	ldr r1, _080EAF08 @ =gEasyChatStruct\n\
-	ldr r0, [r1]\n\
-	ldr r3, _080EAF0C @ =0x0000446c\n\
-	adds r3, r0, r3\n\
-	str r3, [sp, 0x4]\n\
-_080EAEE4:\n\
-	ldr r1, _080EAF10 @ =gEasyChatWordsByLetter\n\
-	lsls r2, r7, 1\n\
-	adds r0, r2, r1\n\
-	ldrh r4, [r0]\n\
-	adds r3, r7, 0x1\n\
-	lsls r0, r3, 1\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	str r0, [sp]\n\
-	ldr r0, [sp, 0x4]\n\
-	adds r1, r0, r2\n\
-	movs r0, 0\n\
-	strh r0, [r1]\n\
-	mov r9, r0\n\
-	adds r6, r4, 0\n\
-	mov r10, r2\n\
-	str r3, [sp, 0x8]\n\
-	b _080EB00C\n\
-	.align 2, 0\n\
-_080EAF08: .4byte gEasyChatStruct\n\
-_080EAF0C: .4byte 0x0000446c\n\
-_080EAF10: .4byte gEasyChatWordsByLetter\n\
-_080EAF14:\n\
-	ldr r2, _080EAFAC @ =gEasyChatWordsAlphabetized\n\
-	adds r0, r6, 0\n\
-	adds r1, r0, 0x1\n\
-	lsls r1, 16\n\
-	lsrs r6, r1, 16\n\
-	lsls r0, 1\n\
-	adds r0, r2\n\
-	ldrh r1, [r0]\n\
-	adds r4, r1, 0\n\
-	ldr r0, _080EAFB0 @ =0x0000feff\n\
-	cmp r1, r0\n\
-	bls _080EAFC8\n\
-	movs r0, 0xFF\n\
-	ands r1, r0\n\
-	movs r3, 0\n\
-	subs r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldr r0, _080EAFB4 @ =0x0000ffff\n\
-	cmp r5, r0\n\
-	beq _080EB00C\n\
-	lsls r0, r7, 4\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	subs r0, r7\n\
-	lsls r0, 2\n\
-	mov r8, r0\n\
-_080EAF4A:\n\
-	adds r1, r6, 0\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	lsls r1, 1\n\
-	ldr r0, _080EAFAC @ =gEasyChatWordsAlphabetized\n\
-	adds r1, r0\n\
-	ldrh r4, [r1]\n\
-	lsrs r0, r4, 9\n\
-	ldr r1, _080EAFB8 @ =0x000001ff\n\
-	adds r2, r1, 0\n\
-	adds r1, r4, 0\n\
-	ands r1, r2\n\
-	str r3, [sp, 0xC]\n\
-	bl sub_80EADC0\n\
-	lsls r0, 24\n\
-	ldr r3, [sp, 0xC]\n\
-	cmp r0, 0\n\
-	beq _080EAF9E\n\
-	cmp r3, 0\n\
-	bne _080EAF9E\n\
-	ldr r3, _080EAFBC @ =gEasyChatStruct\n\
-	ldr r2, [r3]\n\
-	mov r1, r9\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r9, r0\n\
-	lsls r1, 1\n\
-	add r1, r8\n\
-	ldr r3, _080EAFC0 @ =0x00000b78\n\
-	adds r0, r2, r3\n\
-	adds r0, r1\n\
-	strh r4, [r0]\n\
-	ldr r0, _080EAFC4 @ =0x0000446c\n\
-	adds r2, r0\n\
-	add r2, r10\n\
-	ldrh r0, [r2]\n\
-	adds r0, 0x1\n\
-	strh r0, [r2]\n\
-	movs r3, 0x1\n\
-_080EAF9E:\n\
-	subs r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldr r1, _080EAFB4 @ =0x0000ffff\n\
-	cmp r5, r1\n\
-	bne _080EAF4A\n\
-	b _080EB00C\n\
-	.align 2, 0\n\
-_080EAFAC: .4byte gEasyChatWordsAlphabetized\n\
-_080EAFB0: .4byte 0x0000feff\n\
-_080EAFB4: .4byte 0x0000ffff\n\
-_080EAFB8: .4byte 0x000001ff\n\
-_080EAFBC: .4byte gEasyChatStruct\n\
-_080EAFC0: .4byte 0x00000b78\n\
-_080EAFC4: .4byte 0x0000446c\n\
-_080EAFC8:\n\
-	lsrs r0, r4, 9\n\
-	ldr r3, _080EB030 @ =0x000001ff\n\
-	adds r2, r3, 0\n\
-	adds r1, r4, 0\n\
-	ands r1, r2\n\
-	bl sub_80EADC0\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EB00C\n\
-	ldr r0, _080EB034 @ =gEasyChatStruct\n\
-	ldr r2, [r0]\n\
-	mov r1, r9\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r9, r0\n\
-	lsls r1, 1\n\
-	lsls r0, r7, 4\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	subs r0, r7\n\
-	lsls r0, 2\n\
-	adds r1, r0\n\
-	ldr r3, _080EB038 @ =0x00000b78\n\
-	adds r0, r2, r3\n\
-	adds r0, r1\n\
-	strh r4, [r0]\n\
-	ldr r0, _080EB03C @ =0x0000446c\n\
-	adds r2, r0\n\
-	add r2, r10\n\
-	ldrh r0, [r2]\n\
-	adds r0, 0x1\n\
-	strh r0, [r2]\n\
-_080EB00C:\n\
-	ldr r1, [sp]\n\
-	cmp r6, r1\n\
-	bcs _080EB014\n\
-	b _080EAF14\n\
-_080EB014:\n\
-	ldr r3, [sp, 0x8]\n\
-	lsls r0, r3, 16\n\
-	lsrs r7, r0, 16\n\
-	cmp r7, 0x1A\n\
-	bhi _080EB020\n\
-	b _080EAEE4\n\
-_080EB020:\n\
-	add sp, 0x10\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080EB030: .4byte 0x000001ff\n\
-_080EB034: .4byte gEasyChatStruct\n\
-_080EB038: .4byte 0x00000b78\n\
-_080EB03C: .4byte 0x0000446c\n\
-    .syntax divided\n");
+    return word & 0xff;
 }
-#else
+
 void sub_80EAECC(void)
 {
     u16 i;
     u16 r9;
     u16 r6;
     u16 r5;
-    bool8 r7;
+    u16 r1;
+    bool32 r3;
 
     for (i = 0; i < 27; i++)
     {
@@ -2342,31 +2159,28 @@ void sub_80EAECC(void)
 
             if (word > 0xFEFF)
             {
-                r5 = word & 0xFF;
-                r7 = FALSE;
-                while (--r5 != 0xFFFF)
+                r1 = sub_80EAECC_helper(word);
+                r3 = 0;
+                r5 = r1;
+
+                while (r5--)
                 {
                     word = gEasyChatWordsAlphabetized[r6++];
-                    if (sub_80EADC0(EC_GROUP(word), EC_INDEX(word)) && !r7)
-                    {
-                        gEasyChatStruct->unkB78[i][r9++] = word;
-                        gEasyChatStruct->unk4142[i]++;
-                        r7 = TRUE;
-                    }
-                }
-            }
-            else
-            {
-                if (sub_80EADC0(EC_GROUP(word), EC_INDEX(word)))
-                {
+                    if (!sub_80EADC0(((word) >> 9), ((word) & 0x1ff))) continue;
+                    if (r3) continue;
                     gEasyChatStruct->unkB78[i][r9++] = word;
                     gEasyChatStruct->unk4142[i]++;
+                    r3 = 1;
                 }
+            }
+            else if (sub_80EADC0(((word) >> 9), ((word) & 0x1FF)))
+            {
+                gEasyChatStruct->unkB78[i][r9++] = word;
+                gEasyChatStruct->unk4142[i]++;
             }
         }
     }
 }
-#endif
 
 // loads strings of all easy chat words except for the species and move names.
 void LoadEasyChatStrings(void)
@@ -2389,6 +2203,8 @@ void LoadEasyChatStrings(void)
                 gEasyChatStruct->ecWordStrings[group][index] = wordText;
 
                 // Find the end of the current word
+
+                // Should be a do while
                 while (*wordText != EOS)
                     wordText++;
                 // Skip over the EOS
