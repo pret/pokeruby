@@ -178,7 +178,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         break;
     default:
         SetHBlankCallback(sub_800FCD4);
-        SetVBlankCallback(sub_800FCFC);
+        SetVBlankCallback(VBlankCB_Battle);
         sub_807B06C();
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;

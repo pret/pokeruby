@@ -88,7 +88,7 @@ u16 SpeciesToMailSpecies(u16 species, u32 personality)
 {
     if (species == SPECIES_UNOWN)
     {
-        int mailSpecies = GetUnownLetterByPersonality(personality) + 30000;
+        u32 mailSpecies = GetUnownLetterByPersonality(personality) + 30000;
         return mailSpecies;
     }
 

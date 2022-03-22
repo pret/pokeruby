@@ -281,7 +281,7 @@ void CB2_InitBattleInternal(void)
     DrawBattleEntryBackground();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
-    SetVBlankCallback(sub_800FCFC);
+    SetVBlankCallback(VBlankCB_Battle);
     SetUpBattleVarsAndBirchPoochyena();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         SetMainCallback2(CB2_HandleStartMultiBattle);
@@ -1145,7 +1145,7 @@ void sub_800FCD4(void)
         REG_BG0CNT = 0x9800;
 }
 
-void sub_800FCFC(void)
+void VBlankCB_Battle(void)
 {
     Random();  // unused return value
     REG_BG0HOFS = gBattle_BG0_X;
@@ -1322,7 +1322,7 @@ void c2_8011A1C(void)
     REG_WINOUT = 0x37;
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
-    SetVBlankCallback(sub_800FCFC);
+    SetVBlankCallback(VBlankCB_Battle);
     taskId = CreateTask(InitLinkBattleVsScreen, 0);
     gTasks[taskId].data[1] = 0x10E;
     gTasks[taskId].data[2] = 0x5A;
