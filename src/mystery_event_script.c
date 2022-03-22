@@ -28,7 +28,7 @@
 #define VERSION_MASK 0x80
 #endif
 
-extern void party_compaction(void);
+extern void CompactPartySlots(void);
 
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
@@ -400,7 +400,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
         heldItem = GetMonData(&gPlayerParty[5], MON_DATA_HELD_ITEM);
         if (ItemIsMail(heldItem))
             GiveMailToMon2(&gPlayerParty[5], &mail);
-        party_compaction();
+        CompactPartySlots();
         CalculatePlayerPartyCount();
         StringExpandPlaceholders(gStringVar4, gOtherText_PokeWasSentOver);
         ctx->data[2] = 2;

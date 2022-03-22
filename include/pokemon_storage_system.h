@@ -300,7 +300,7 @@ void sub_809BB90(void);
 void sub_809BBC0(void);
 void sub_809BC18(void);
 void sub_809BD14(void);
-s16 party_compaction(void);
+s16 CompactPartySlots(void);
 void sub_809BDD8(u8 markings);
 bool8 sub_809BE80(void);
 bool8 sub_809BEBC(void);

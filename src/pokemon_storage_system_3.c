@@ -295,7 +295,7 @@ void sub_8099200(bool8 a0)
     {
         for (i = 0; i < count; i++)
         {
-            // this routine assumes party_compaction has been called
+            // this routine assumes CompactPartySlots has been called
             gPokemonStorageSystemPtr->unk_1038[i]->y -= 0xa0;
             gPokemonStorageSystemPtr->unk_1038[i]->invisible = TRUE;
         }
