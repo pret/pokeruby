@@ -3193,7 +3193,7 @@ static void sub_80A16CC(u8 a)
     u8 i;
     u16 (*vramAddr)[0x20];
     
-    vramAddr = BG_SCREEN_ADDR(13) + ( 0xb << 6 ) + ( 0xa << 1 );
+    vramAddr = BG_SCREEN_ADDR(13) + 0x2D4;
 
     if (a == 0)
     {
@@ -3214,7 +3214,7 @@ static void sub_80A16CC(u8 a)
         }
     }
 
-    vramAddr = BG_SCREEN_ADDR(11) + ( 0xb << 6 ) + ( 0xa << 1 );
+    vramAddr = BG_SCREEN_ADDR(11) + 0x2D4;
 
     if (a == 0)
     {

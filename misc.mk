@@ -231,6 +231,13 @@ $(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_
 $(MISCGFXDIR)/clock_misc.4bpp: $(MISCGFXDIR)/clock_hands.4bpp $(MISCGFXDIR)/clock_ampm.4bpp
 	@cat $(MISCGFXDIR)/clock_hands.4bpp $(MISCGFXDIR)/clock_ampm.4bpp >$@
 
+#### Unknown (not the pokemon) ####
+
+UNKNOWNDIR := graphics/unknown/unknown_3D1624
+
+$(UNKNOWNDIR)/01.4bpp: $(UNKNOWNDIR)/0.4bpp $(UNKNOWNDIR)/1.4bpp $(UNKNOWNDIR)/2.4bpp $(UNKNOWNDIR)/3.4bpp $(UNKNOWNDIR)/4.4bpp $(UNKNOWNDIR)/5.4bpp $(UNKNOWNDIR)/6.4bpp $(UNKNOWNDIR)/7.4bpp
+	@cat $(UNKNOWNDIR)/0.4bpp $(UNKNOWNDIR)/1.4bpp $(UNKNOWNDIR)/2.4bpp $(UNKNOWNDIR)/3.4bpp $(UNKNOWNDIR)/4.4bpp $(UNKNOWNDIR)/5.4bpp $(UNKNOWNDIR)/6.4bpp $(UNKNOWNDIR)/7.4bpp >$@
+
 
 #### Unused ####
 

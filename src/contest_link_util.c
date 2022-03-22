@@ -126,14 +126,7 @@ void Task_LinkContest_Disconnect(u8 taskId);
 void Task_LinkContest_WaitDisconnect(u8 taskId);
 
 // TODO: Merge all these as one
-const u16 gUnknown_083D1624[] = INCBIN_U16("graphics/unknown/unknown_3D1624/0.4bpp");
-const u16 gUnknown_083D1644[] = INCBIN_U16("graphics/unknown/unknown_3D1624/1.4bpp");
-const u16 gUnknown_083D1664[] = INCBIN_U16("graphics/unknown/unknown_3D1624/2.4bpp");
-const u16 gUnknown_083D1684[] = INCBIN_U16("graphics/unknown/unknown_3D1624/3.4bpp");
-const u16 gUnknown_083D16A4[] = INCBIN_U16("graphics/unknown/unknown_3D1624/4.4bpp");
-const u16 gUnknown_083D16C4[] = INCBIN_U16("graphics/unknown/unknown_3D1624/5.4bpp");
-const u16 gUnknown_083D16E4[] = INCBIN_U16("graphics/unknown/unknown_3D1624/6.4bpp");
-const u16 gUnknown_083D1704[] = INCBIN_U16("graphics/unknown/unknown_3D1624/7.4bpp");
+const u16 gUnknown_083D1624_1[] = INCBIN_U16("graphics/unknown/unknown_3D1624/01.4bpp");
 const u16 gMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
 
 const struct OamData gOamData_83D1744 = {
@@ -879,10 +872,10 @@ void sub_80C3158(const u8 *string, u8 spriteId)
     RenderTextHandleBold(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
 
     dest = OBJ_VRAM0 + sp00[0] * 32;
-    CpuCopy32(gUnknown_083D1624, dest, 32);
-    CpuCopy32(&gUnknown_083D1624[0x40], &dest[0x100], 32);
-    CpuCopy32(&gUnknown_083D1624[0x40], &dest[0x200], 32);
-    CpuCopy32(&gUnknown_083D1624[0x20], &dest[0x300], 32);
+    CpuCopy32(gUnknown_083D1624_1, dest, 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x40], &dest[0x100], 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x40], &dest[0x200], 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x20], &dest[0x300], 32);
 
     width /= 8;
     for (i = 0; i <= width; i++)
@@ -899,16 +892,16 @@ void sub_80C3158(const u8 *string, u8 spriteId)
         if (i == width)
             break;
 
-        CpuCopy32(&gUnknown_083D1624[0x60], dest, 32);
-        CpuCopy32(&gUnknown_083D1624[0x70], &dest[0x300], 32);
+        CpuCopy32(&gUnknown_083D1624_1[0x60], dest, 32);
+        CpuCopy32(&gUnknown_083D1624_1[0x70], &dest[0x300], 32);
         CpuCopy32(eContestLink80C2020Struct2018068 + i * 0x40, &dest[0x100], 32);
         CpuCopy32(eContestLink80C2020Struct2018068 + i * 0x40 + 0x20, &dest[0x200], 32);
     }
 
-    CpuCopy32(&gUnknown_083D1624[0x10], dest, 32);
-    CpuCopy32(&gUnknown_083D1624[0x50], &dest[0x100], 32);
-    CpuCopy32(&gUnknown_083D1624[0x50], &dest[0x200], 32);
-    CpuCopy32(&gUnknown_083D1624[0x30], &dest[0x300], 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x10], dest, 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x50], &dest[0x100], 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x50], &dest[0x200], 32);
+    CpuCopy32(&gUnknown_083D1624_1[0x30], &dest[0x300], 32);
 }
 
 void sub_80C33DC(void)

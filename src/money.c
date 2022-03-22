@@ -187,8 +187,8 @@ void Draw10000Sprite(u8 var1, u8 var2, u32 var3)
 
     for (i = 0; i < 4; i++)
     {
-        ((u16 *)(VRAM + 0xF800))[var2 * 32 + var1 + i] = var2 * 30 + 1 + var1 + i - 4096;
-        ((u16 *)(VRAM + 0xF800))[(var2 + 1) * 32 + var1 + i] = (var2 + 1) * 30 + 1 + var1 + i - 4096;
+        ((u16 *)BG_SCREEN_ADDR(31))[var2 * 32 + var1 + i] = var2 * 30 + 1 + var1 + i - 4096;
+         ((u16 *)BG_SCREEN_ADDR(31))[(var2 + 1) * 32 + var1 + i] = (var2 + 1) * 30 + 1 + var1 + i - 4096;
     };
 }
 
