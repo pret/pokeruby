@@ -192,7 +192,7 @@ void debug_sub_813C6AC(struct Pokemon *mon, struct MailStruct *mail)
         GetMonData(mon, MON_DATA_OT_NAME, nameBuf);
         StringCopyN(name, nameBuf, OT_NAME_LENGTH + 1);
 
-        write_word_to_mem(GetMonData(mon, MON_DATA_OT_ID), id);
+        SetTrainerId(GetMonData(mon, MON_DATA_OT_ID), id);
 
         mail->species = SpeciesToMailSpecies(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_PERSONALITY));
         mail->itemId = itemId;

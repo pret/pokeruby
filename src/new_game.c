@@ -58,24 +58,24 @@ const s8 gUnknown_Debug_0823C788[][2] =
 const u8 gUnknown_Debug_0823C790[] = _("KRÖTE");
 #endif
 
-void write_word_to_mem(u32 var, u8 *dataPtr)
+void SetTrainerId(u32 trainerId, u8 *dst)
 {
-    dataPtr[0] = var;
-    dataPtr[1] = var >> 8;
-    dataPtr[2] = var >> 16;
-    dataPtr[3] = var >> 24;
+    dst[0] = trainerId;
+    dst[1] = trainerId >> 8;
+    dst[2] = trainerId >> 16;
+    dst[3] = trainerId >> 24;
 }
 
-void copy_word_to_mem(u8 *copyTo, u8 *copyFrom)
+void CopyTrainerId(u8 *dst, u8 *src)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        copyTo[i] = copyFrom[i];
+        dst[i] = src[i];
 }
 
 void InitPlayerTrainerId(void)
 {
-    write_word_to_mem((Random() << 16) | Random(), gSaveBlock2.playerTrainerId);
+    SetTrainerId((Random() << 16) | Random(), gSaveBlock2.playerTrainerId);
 }
 
 // L=A isnt set here for some reason.
@@ -96,11 +96,11 @@ void ClearPokedexFlags(void)
     memset(&gSaveBlock2.pokedex.seen, 0, sizeof(gSaveBlock2.pokedex.seen));
 }
 
-void ResetContestAndMuseumWinners(void)
+void ClearAllContestWinnerPics(void)
 {
     s32 i;
 
-    Contest_ResetWinners();
+    ClearContestWinnerPicsInContestHall();
     for (i = 0; i < 5; i++)
         gSaveBlock1.museumPortraits[i] = sEmptyMuseumPortrait;
 }
@@ -130,13 +130,13 @@ void debug_sub_8052E04()
         i = 0;
     }
 
-    Overworld_SetWarpDestination(gUnknown_Debug_0823C788[i][0], gUnknown_Debug_0823C788[i][1], -1, -1, -1);
+    SetWarpDestination(gUnknown_Debug_0823C788[i][0], gUnknown_Debug_0823C788[i][1], -1, -1, -1);
 }
 #endif
 
 void WarpToTruck(void)
 {
-    Overworld_SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
+    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
     WarpIntoMap();
 }
 
@@ -146,7 +146,7 @@ void ClearSav2(void)
     SetDefaultOptions();
 }
 
-void sub_8052E4C(void)
+void ResetMenuAndMonGlobals(void)
 {
     gDifferentSaveFile = 0;
 #if DEBUG
@@ -177,12 +177,12 @@ void NewGameInitData(void)
     InitEventData();
     ClearTVShowData();
     ResetGabbyAndTy();
-    ResetSecretBases();
+    ClearSecretBases();
     ClearBerryTrees();
     gSaveBlock1.money = 3000;
     ResetLinkContestBoolean();
     ResetGameStats();
-    ResetContestAndMuseumWinners();
+    ClearAllContestWinnerPics();
     InitLinkBattleRecords();
     InitShroomishSizeRecord();
     InitBarboachSizeRecord();

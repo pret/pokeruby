@@ -3843,7 +3843,7 @@ u8 GetContestWinnerSaveIdx(u8 rank, u8 shift)
     }
 }
 
-void Contest_ResetWinners(void)
+void ClearContestWinnerPicsInContestHall(void)
 {
     s32 i;
 

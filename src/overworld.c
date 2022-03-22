@@ -447,14 +447,14 @@ void WarpIntoMap(void)
     SetPlayerCoordsFromWarp();
 }
 
-void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     SetWarpData(&gWarpDestination, mapGroup, mapNum, warpId, x, y);
 }
 
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
+    SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
 }
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
@@ -477,7 +477,7 @@ void sub_8053538(u8 a1)
     const struct HealLocation *warp = GetHealLocation(a1);
 
     if (warp)
-        Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
 }
 
 void Overworld_SetWarpDestToLastHealLoc(void)
@@ -531,7 +531,7 @@ void SetFixedHoleWarpAsDestination(s16 x, s16 y)
     if (IsDummyWarp(&gFixedHoleWarp) == TRUE)
         gWarpDestination = gLastUsedWarp;
     else
-        Overworld_SetWarpDestination(gFixedHoleWarp.mapGroup, gFixedHoleWarp.mapNum, -1, x, y);
+        SetWarpDestination(gFixedHoleWarp.mapGroup, gFixedHoleWarp.mapNum, -1, x, y);
 }
 
 void sub_8053778(void)
@@ -578,7 +578,7 @@ static bool8 SetDiveWarp(u8 direction, u16 x, u16 y)
 
     if (connection != NULL)
     {
-        Overworld_SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
+        SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
     }
     else
     {
@@ -606,7 +606,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
 {
     s32 paletteIndex;
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
+    SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     sub_8053F0C();
     ApplyCurrentWarp();
     LoadCurrentMapData();

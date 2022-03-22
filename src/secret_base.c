@@ -176,7 +176,7 @@ void ResetSecretBase(u8 idx)
     ClearSecretBase(&gSaveBlock1.secretBases[idx]);
 }
 
-void ResetSecretBases(void)
+void ClearSecretBases(void)
 {
     u16 i;
     for (i = 0; i < MAX_SECRET_BASES; i++)
@@ -428,7 +428,7 @@ void sub_80BBBEC(u8 taskid)
     if (!gPaletteFade.active)
     {
         idx = 4 * (gCurrentSecretBaseId / 10);
-        Overworld_SetWarpDestination(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
+        SetWarpDestination(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
         WarpIntoMap();
         gFieldCallback = sub_80BBB90;
         SetMainCallback2(CB2_LoadMap);

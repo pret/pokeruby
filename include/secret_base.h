@@ -4,7 +4,7 @@
 // Maximum number of secret bases the game can store. This include 1 for the player, and up to 19 others from linked players.
 #define MAX_SECRET_BASES 20
 
-void ResetSecretBases(void);
+void ClearSecretBases(void);
 void SetCurrentSecretBaseVar(void);
 void CheckPlayerHasSecretBase(void);
 void SetOpenedSecretBaseMetatile(void);

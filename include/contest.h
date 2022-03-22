@@ -302,7 +302,7 @@ void CalculateFinalScores(void);
 void SortContestants(u8);
 bool8 Contest_SaveWinner(u8);
 u8 GetContestWinnerSaveIdx(u8, u8);
-void Contest_ResetWinners(void);
+void ClearContestWinnerPicsInContestHall(void);
 s8 Contest_GetMoveExcitement(u16);
 
 // Contest Shared EWRAM

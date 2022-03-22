@@ -217,7 +217,7 @@ void debug_sub_8075DB4(struct BattleTowerEReaderTrainer *ereaderTrainer, const u
     s32 r3;
 
     ereaderTrainer->trainerClass = trainerId % 77;
-    write_word_to_mem(trainerId, ereaderTrainer->trainerId);
+    SetTrainerId(trainerId, ereaderTrainer->trainerId);
     StringCopy_PlayerName(ereaderTrainer->name, b);
     r3 = 7;
     for (i = 0; i < 6; i++)

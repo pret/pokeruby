@@ -47,7 +47,7 @@ struct MapHeader * const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 ma
 struct MapHeader * const GetDestinationWarpMapHeader(void);
 // LoadSaveblockMapHeader
 void WarpIntoMap(void);
-void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
