@@ -20,15 +20,15 @@ endif
 
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
+OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as
 
 LD := $(PREFIX)ld
-NM := $(PREFIX)nm
-OBJDUMP := $(PREFIX)objdump
 
 # note: the makefile must be set up so MODERNCC is never called
 # if MODERN=0
 MODERNCC := $(PREFIX)gcc
+PATH_MODERNCC := PATH=$(TOOLCHAIN)/bin:PATH $(MODERNCC)
 
 include config.mk
 
@@ -64,7 +64,7 @@ SHELL     := /bin/bash -o pipefail
 ifeq ($(MODERN),0)
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 else
-CC1        = $(shell $(MODERNCC) --print-prog-name=cc1) -quiet
+CC1        = $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
 endif
 CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
