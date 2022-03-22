@@ -2278,7 +2278,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     switch (gBattleMons[bank].ability)
                     {
                     case ABILITY_IMMUNITY:
-                        if (gBattleMons[bank].status1 & (STATUS1_POISON | STATUS1_TOXIC_POISON | 0xF00))  // TODO: what is 0xF00?
+                        if (gBattleMons[bank].status1 & (STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_TOXIC_COUNTER))
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
                             effect = 1;

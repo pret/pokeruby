@@ -937,23 +937,23 @@ void PlayerAcroTurnJump(u8 direction)
     PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
 }
 
-void sub_80595DC(u8 direction)
+void PlayerWheelieInPlace(u8 direction)
 {
     PlaySE(SE_WALL_HIT);
     PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
 }
 
-void sub_8059600(u8 direction)
+void PlayerPopWheelieWhileMoving(u8 direction)
 {
     PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_8059618(u8 direction)
+void PlayerWheelieMove(u8 direction)
 {
     PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_8059630(u8 direction)
+void PlayerEndWheelieWhileMoving(u8 direction)
 {
     PlayerSetAnimId(GetAcroEndWheelieMoveDirectionMovementAction(direction), 2);
 }

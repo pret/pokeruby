@@ -29,10 +29,6 @@
 #include "ewram.h"
 #include "util.h"
 
-// TODO: put this into battle_controllers.h
-
-#define RET_VALUE_LEVELLED_UP   11
-
 //extern needed variables
 extern u8 gUnknown_02023A14_50;
 extern u8 gCritMultiplier;

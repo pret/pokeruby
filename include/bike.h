@@ -69,7 +69,7 @@ bool8 IsRunningDisallowed(u8 tile);
 bool8 IsBikingDisallowedByPlayer(void);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 void GetOnOffBike(u8 var);
-void BikeClearState(int var1, int var2);
+void BikeClearState(u32 newDirHistory, u32 newAbStartHistory);
 void Bike_UpdateBikeCounterSpeed(u8 var);
 s16 GetPlayerSpeed(void);
 void Bike_HandleBumpySlopeJump(void);

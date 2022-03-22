@@ -54,8 +54,8 @@ static u8 AcroBike_GetJumpDirection(void);
 static void Bike_UpdateDirTimerHistory(u8);
 static void Bike_UpdateABStartSelectHistory(u8);
 static u8 Bike_DPadToDirection(u16);
-static u8 get_some_collision(u8);
-static u8 Bike_CheckCollisionTryAdvanceCollisionCount(struct ObjectEvent *, s16, s16, u8, u8);
+static u8 GetBikeCollision(u8);
+static u8 GetBikeCollisionAt(struct ObjectEvent *, s16, s16, u8, u8);
 static bool8 IsRunningDisallowedByMetatile(u8);
 static void Bike_TryAdvanceCyclingRoadCollisions();
 static u8 CanBikeFaceDirOnMetatile(u8, u8);
@@ -230,7 +230,7 @@ static void MachBikeTransition_TrySpeedUp(u8 direction)
     }
     else
     {
-        collision = get_some_collision(direction);
+        collision = GetBikeCollision(direction);
         if (collision > 0 && collision < 12)
         {
             // we hit a solid object, but check to see if its a ledge and then jump.
@@ -264,7 +264,7 @@ static void MachBikeTransition_TrySlowDown(u8 direction)
     if (gPlayerAvatar.bikeSpeed != SPEED_STANDING)
         gPlayerAvatar.bikeFrameCounter = --gPlayerAvatar.bikeSpeed;
 
-    collision = get_some_collision(direction);
+    collision = GetBikeCollision(direction);
 
     if (collision > 0 && collision < 12)
     {
@@ -572,7 +572,7 @@ static void AcroBikeTransition_Moving(u8 direction)
         AcroBikeTransition_FaceDirection(playerObjEvent->movementDirection);
         return;
     }
-    collision = get_some_collision(direction);
+    collision = GetBikeCollision(direction);
     if (collision > 0 && collision < 12)
     {
         if (collision == COLLISION_LEDGE_JUMP)
@@ -632,28 +632,25 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
         AcroBikeTransition_WheelieHoppingStanding(playerObjEvent->movementDirection);
         return;
     }
-    collision = get_some_collision(direction);
-    // TODO: Try to get rid of this goto
-    if (collision == 0 || collision == 9)
+    collision = GetBikeCollision(direction);
+    if (collision && collision != COLLISION_WHEELIE_HOP)
     {
-        goto derp;
-    }
-    else if (collision == 6)
-    {
-        PlayerLedgeHoppingWheelie(direction);
-    }
-    else if (collision < 5 || collision > 8)
-    {
-        if (collision <= 11)
+        if (collision == COLLISION_LEDGE_JUMP)
+        {
+            PlayerLedgeHoppingWheelie(direction);
+            return;
+        }
+        if (collision >= COLLISION_STOP_SURFING && collision <= COLLISION_ROTATING_GATE)
+        {
+            return;
+        }
+        if (collision < COLLISION_VERTICAL_RAIL)
         {
             AcroBikeTransition_WheelieHoppingStanding(direction);
-        }
-        else
-        {
-        derp:
-            PlayerMovingHoppingWheelie(direction);
+            return;
         }
     }
+    PlayerMovingHoppingWheelie(direction);
 }
 
 static void AcroBikeTransition_SideJump(u8 direction)
@@ -661,12 +658,12 @@ static void AcroBikeTransition_SideJump(u8 direction)
     u8 collision;
     struct ObjectEvent *playerObjEvent;
 
-    collision = get_some_collision(direction);
-    if (collision != 0)
+    collision = GetBikeCollision(direction);
+    if (collision)
     {
-        if (collision == 7)
+        if (collision == COLLISION_PUSHED_BOULDER)
             return;
-        if (collision < 10)
+        if (collision < COLLISION_ISOLATED_VERTICAL_RAIL)
         {
             AcroBikeTransition_TurnDirection(direction);
             return;
@@ -698,27 +695,27 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
         PlayerIdleWheelie(playerObjEvent->movementDirection);
         return;
     }
-    collision = get_some_collision(direction);
-    if (collision > 0 && collision < 12)
+    collision = GetBikeCollision(direction);
+    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
     {
-        if (collision == 6)
+        if (collision == COLLISION_LEDGE_JUMP)
         {
             PlayerLedgeHoppingWheelie(direction);
         }
-        else if (collision == 9)
+        else if (collision == COLLISION_WHEELIE_HOP)
         {
             PlayerIdleWheelie(direction);
         }
-        else if (collision <= 4)
+        else if (collision < COLLISION_STOP_SURFING)
         {
             if (MetatileBehavior_IsBumpySlope(playerObjEvent->currentMetatileBehavior))
                 PlayerIdleWheelie(direction);
             else
-                sub_80595DC(direction);  //hit wall?
+                PlayerWheelieInPlace(direction);  //hit wall?
         }
         return;
     }
-    sub_8059618(direction);
+    PlayerWheelieMove(direction);
     gPlayerAvatar.runningState = MOVING;
 }
 
@@ -732,27 +729,27 @@ static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
         PlayerStartWheelie(playerObjEvent->movementDirection);
         return;
     }
-    collision = get_some_collision(direction);
-    if (collision > 0 && collision < 12)
+    collision = GetBikeCollision(direction);
+    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
     {
-        if (collision == 6)
+        if (collision == COLLISION_LEDGE_JUMP)
         {
             PlayerLedgeHoppingWheelie(direction);
         }
-        else if (collision == 9)
+        else if (collision == COLLISION_WHEELIE_HOP)
         {
             PlayerIdleWheelie(direction);
         }
-        else if (collision <= 4)
+        else if (collision < COLLISION_STOP_SURFING)
         {
             if (MetatileBehavior_IsBumpySlope(playerObjEvent->currentMetatileBehavior))
                 PlayerIdleWheelie(direction);
             else
-                sub_80595DC(direction);  //hit wall?
+                PlayerWheelieInPlace(direction);  //hit wall?
         }
         return;
     }
-    sub_8059600(direction);
+    PlayerPopWheelieWhileMoving(direction);
     gPlayerAvatar.runningState = MOVING;
 }
 
@@ -766,16 +763,16 @@ static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
         PlayerEndWheelie(playerObjEvent->movementDirection);
         return;
     }
-    collision = get_some_collision(direction);
-    if (collision > 0 && collision < 12)
+    collision = GetBikeCollision(direction);
+    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
     {
-        if (collision == 6)
+        if (collision == COLLISION_LEDGE_JUMP)
             PlayerJumpLedge(direction);
-        else if (collision < 5 || collision > 8)
+        else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
             PlayerEndWheelie(direction);
         return;
     }
-    sub_8059630(direction);
+    PlayerEndWheelieWhileMoving(direction);
 }
 
 void Bike_TryAcroBikeHistoryUpdate(u16 newKeys, u16 heldKeys)
@@ -854,7 +851,7 @@ static void Bike_UpdateDirTimerHistory(u8 dir)
 
     gPlayerAvatar.directionHistory = (gPlayerAvatar.directionHistory << 4) | (dir & 0xF);
 
-    for (i = 7; i != 0; i--)
+    for (i = ARRAY_COUNT(gPlayerAvatar.dirTimerHistory) - 1; i != 0; i--)
         gPlayerAvatar.dirTimerHistory[i] = gPlayerAvatar.dirTimerHistory[i - 1];
     gPlayerAvatar.dirTimerHistory[0] = 1;
 }
@@ -865,7 +862,7 @@ static void Bike_UpdateABStartSelectHistory(u8 input)
 
     gPlayerAvatar.abStartSelectHistory = (gPlayerAvatar.abStartSelectHistory << 4) | (input & 0xF);
 
-    for (i = 7; i != 0; i--)
+    for (i = ARRAY_COUNT(gPlayerAvatar.abStartSelectTimerHistory) - 1; i != 0; i--)
         gPlayerAvatar.abStartSelectTimerHistory[i] = gPlayerAvatar.abStartSelectTimerHistory[i - 1];
     gPlayerAvatar.abStartSelectTimerHistory[0] = 1;
 }
@@ -883,29 +880,26 @@ static u8 Bike_DPadToDirection(u16 heldKeys)
     return DIR_NONE;
 }
 
-static u8 get_some_collision(u8 direction)
+static u8 GetBikeCollision(u8 direction)
 {
-    s16 x;
-    s16 y;
     u8 metatitleBehavior;
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-
-    x = playerObjEvent->currentCoords.x;
-    y = playerObjEvent->currentCoords.y;
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
     MoveCoords(direction, &x, &y);
     metatitleBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    return Bike_CheckCollisionTryAdvanceCollisionCount(playerObjEvent, x, y, direction, metatitleBehavior);
+    return GetBikeCollisionAt(playerObjEvent, x, y, direction, metatitleBehavior);
 }
 
-static u8 Bike_CheckCollisionTryAdvanceCollisionCount(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
+static u8 GetBikeCollisionAt(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
 {
     u8 collision = CheckForObjectEventCollision(objectEvent, x, y, direction, metatitleBehavior);
 
-    if (collision > 4)
+    if (collision > COLLISION_OBJECT_EVENT)
         return collision;
 
-    if (collision == 0 && IsRunningDisallowedByMetatile(metatitleBehavior))
-        collision = 2;
+    if (collision == COLLISION_NONE && IsRunningDisallowedByMetatile(metatitleBehavior))
+        collision = COLLISION_IMPASSABLE;
 
     if (collision)
         Bike_TryAdvanceCyclingRoadCollisions();
@@ -959,10 +953,10 @@ static bool8 WillPlayerCollideWithCollision(u8 newTileCollision, u8 direction)
 {
     if (direction == DIR_NORTH || direction == DIR_SOUTH)
     {
-        if (newTileCollision == 10 || newTileCollision == 12)
+        if (newTileCollision == COLLISION_ISOLATED_VERTICAL_RAIL || newTileCollision == COLLISION_VERTICAL_RAIL)
             return FALSE;
     }
-    else if (newTileCollision == 11 || newTileCollision == 13)
+    else if (newTileCollision == COLLISION_ISOLATED_HORIZONTAL_RAIL || newTileCollision == COLLISION_HORIZONTAL_RAIL)
     {
         return FALSE;
     }
@@ -1011,7 +1005,8 @@ void GetOnOffBike(u8 transitionFlags)
     }
 }
 
-void BikeClearState(int newDirHistory, int newAbStartHistory)
+// It's always 0 anyway. Might as well inline it
+void BikeClearState(u32 newDirHistory, u32 newAbStartHistory)
 {
     u8 i;
 
@@ -1022,10 +1017,10 @@ void BikeClearState(int newDirHistory, int newAbStartHistory)
     gPlayerAvatar.directionHistory = newDirHistory;
     gPlayerAvatar.abStartSelectHistory = newAbStartHistory;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(gPlayerAvatar.dirTimerHistory); i++)
         gPlayerAvatar.dirTimerHistory[i] = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(gPlayerAvatar.abStartSelectTimerHistory); i++)
         gPlayerAvatar.abStartSelectTimerHistory[i] = 0;
 }
 
