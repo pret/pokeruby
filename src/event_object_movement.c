@@ -91,7 +91,7 @@ static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent *, u32 *);
 static void GetGroundEffectFlags_HotSprings(struct ObjectEvent *, u32 *);
 static void GetGroundEffectFlags_Seaweed(struct ObjectEvent *, u32 *);
 static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *, u32 *);
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *);
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *);
 static void DoRippleFieldEffect(struct ObjectEvent *objEvent, struct Sprite *sprite);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
@@ -7253,20 +7253,20 @@ static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
 {
     u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
-    u8 type = ObjectEventCheckForReflectiveSurface(objEvent);
+    u8 reflType = ObjectEventGetNearbyReflectionType(objEvent);
 
-    if (type)
+    if (reflType)
     {
-        if (!objEvent->hasReflection)
+        if (objEvent->hasReflection == FALSE)
         {
-            objEvent->hasReflection = 0;
-            objEvent->hasReflection = 1;
-            *flags |= reflectionFlags[type - 1];
+            //objEvent->hasReflection = TRUE;
+            objEvent->hasReflection++;
+            *flags |= reflectionFlags[reflType - 1];
         }
     }
     else
     {
-        objEvent->hasReflection = 0;
+        objEvent->hasReflection = FALSE;
     }
 }
 
@@ -7439,7 +7439,7 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     }
 }
 
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
