@@ -689,7 +689,6 @@ static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
     {
         if (gEggMoves[eggMoveIdx + i] > EGG_MOVES_SPECIES_OFFSET)
         {
-            // TODO: the curly braces around this if statement are required for a matching build.
             break;
         }
 
