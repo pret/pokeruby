@@ -1540,8 +1540,9 @@ static void Task_EggHatchPlayBGM(u8 taskID)
     {
         PlayBGM(377);
         DestroyTask(taskID);
+        // task is destroyed, yet you increment the value?
 #ifdef BUGFIX
-        return; task is destroyed, yet you increment the value?
+        return;
 #endif
     }
     gTasks[taskID].data[0]++;
