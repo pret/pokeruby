@@ -4916,12 +4916,7 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 
     TryClearRageStatuses();
     gCurrentTurnActionNumber = 0;
-    {
-        // something stupid needed to match
-        u8 zero;
-        gCurrentActionFuncId = gActionsByTurnOrder[(zero = 0)];
-    }
-
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleMainFunc = RunTurnActionsFunctions;
