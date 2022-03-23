@@ -108,14 +108,11 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 3:
-        if (gLinkStatus & 0x20)
+        if ((gLinkStatus & 0x20) && ((gLinkStatus & 0x1c) > 4))
         {
-            if (((gLinkStatus & 0x1c) >> 2) > 1)
-            {
-                PlaySE(SE_PIN);
-                MenuPrintMessageDefaultCoords(gSystemText_LoadEventPressA);
-                gMain.state++;
-            }
+            PlaySE(SE_PIN);
+            MenuPrintMessageDefaultCoords(gSystemText_LoadEventPressA);
+            gMain.state++;
         }
         if (gMain.newKeys & B_BUTTON)
         {

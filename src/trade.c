@@ -2337,7 +2337,7 @@ static void sub_8049ED4(u8 a0)
 
     case 4:
         sub_804ACD8(gUnknown_0820C14C[5],
-            (void *)((0x6000000 + 0x10000) + (gUnknown_03004824->unk_007e << 5)),
+            (void *)(OBJ_VRAM0 + (gUnknown_03004824->unk_007e << 5)),
             20);
         sub_804A51C(a0,
             whichPokemon,
