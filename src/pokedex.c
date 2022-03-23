@@ -3158,7 +3158,7 @@ static void Task_InitCryScreenMultistep(u8 taskId)
     default:
         if (!gPaletteFade.active)
         {
-            m4aMPlayStop(&gMPlayInfo_BGM);
+            MPlayStop(&gMPlayInfo_BGM);
             gPokedexView->currentPage = 6;
             gPokedexVBlankCB = gMain.vblankCallback;
             SetVBlankCallback(NULL);

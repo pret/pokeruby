@@ -88,7 +88,7 @@ void m4aSoundInit(void)
         mplayInfo->memAccArea = gMPlayMemAccArea;
     }
 
-    memcpy(&gPokemonCrySong, &gPokemonCrySongTemplate, sizeof(struct PokemonCrySong));
+    gPokemonCrySong = gPokemonCrySongTemplate;
 
     for (i = 0; i < MAX_POKEMON_CRIES; i++)
     {
@@ -125,13 +125,10 @@ void m4aSongNumStartOrChange(u16 n)
     {
         MPlayStart(mplay->info, song->header);
     }
-    else
+    else if ((mplay->info->status & MUSICPLAYER_STATUS_TRACK) == 0 ||
+             (mplay->info->status & MUSICPLAYER_STATUS_PAUSE))
     {
-        if ((mplay->info->status & MUSICPLAYER_STATUS_TRACK) == 0
-         || (mplay->info->status & MUSICPLAYER_STATUS_PAUSE))
-        {
-            MPlayStart(mplay->info, song->header);
-        }
+        MPlayStart(mplay->info, song->header);
     }
 }
 
@@ -158,7 +155,7 @@ void m4aSongNumStop(u16 n)
     const struct MusicPlayer *mplay = &mplayTable[song->ms];
 
     if (mplay->info->songHeader == song->header)
-        m4aMPlayStop(mplay->info);
+        MPlayStop(mplay->info);
 }
 
 void m4aSongNumContinue(u16 n)
@@ -177,10 +174,10 @@ void m4aMPlayAllStop(void)
     s32 i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
-        m4aMPlayStop(gMPlayTable[i].info);
+        MPlayStop(gMPlayTable[i].info);
 
     for (i = 0; i < MAX_POKEMON_CRIES; i++)
-        m4aMPlayStop(&gPokemonCryMusicPlayers[i]);
+        MPlayStop(&gPokemonCryMusicPlayers[i]);
 }
 
 void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo)
@@ -352,10 +349,10 @@ void SoundInit(struct SoundInfo *soundInfo)
                    | SOUND_ALL_MIX_FULL;
     REG_SOUNDBIAS_H = (REG_SOUNDBIAS_H & 0x3F) | 0x40;
 
-    REG_DMA1SAD = (s32)soundInfo->pcmBuffer;
-    REG_DMA1DAD = (s32)&REG_FIFO_A;
-    REG_DMA2SAD = (s32)soundInfo->pcmBuffer + PCM_DMA_BUF_SIZE;
-    REG_DMA2DAD = (s32)&REG_FIFO_B;
+    REG_DMA1SAD = (u32)soundInfo->pcmBuffer;
+    REG_DMA1DAD = REG_ADDR_FIFO_A;
+    REG_DMA2SAD = (u32)(soundInfo->pcmBuffer + PCM_DMA_BUF_SIZE);
+    REG_DMA2DAD = REG_ADDR_FIFO_B;
 
     SOUND_INFO_PTR = soundInfo;
     CpuFill32(0, soundInfo, sizeof(struct SoundInfo));
@@ -382,7 +379,7 @@ void SampleFreqSet(u32 freq)
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
 
     freq = (freq & 0xF0000) >> 16;
-    soundInfo->freq = freq;
+    soundInfo->freq = (u8)freq;
     soundInfo->pcmSamplesPerVBlank = gPcmSamplesPerVBlankTable[freq - 1];
     soundInfo->pcmDmaPeriod = PCM_DMA_BUF_SIZE / soundInfo->pcmSamplesPerVBlank;
 
@@ -430,29 +427,25 @@ void m4aSoundMode(u32 mode)
     {
         struct SoundChannel *chan;
 
-        soundInfo->maxChans = temp >> SOUND_MODE_MAXCHN_SHIFT;
+        soundInfo->maxChans = (u8)(temp >> SOUND_MODE_MAXCHN_SHIFT);
 
-        temp = MAX_DIRECTSOUND_CHANNELS;
-        chan = &soundInfo->chans[0];
-
-        while (temp != 0)
+        // Why not just do simple indexing?
+        for (temp = MAX_DIRECTSOUND_CHANNELS, chan = soundInfo->chans; temp != 0; temp--, chan++)
         {
             chan->statusFlags = 0;
-            temp--;
-            chan++;
         }
     }
 
     temp = mode & SOUND_MODE_MASVOL;
 
     if (temp)
-        soundInfo->masterVolume = temp >> SOUND_MODE_MASVOL_SHIFT;
+        soundInfo->masterVolume = (u8)(temp >> SOUND_MODE_MASVOL_SHIFT);
 
-    temp = mode & SOUND_MODE_DA_BIT;
+    temp = mode & (SOUND_MODE_DA_BIT_VAL | SOUND_MODE_DA_BIT_SET);
 
     if (temp)
     {
-        temp = (temp & 0x300000) >> 14;
+        temp = (temp & SOUND_MODE_DA_BIT_VAL) >> (SOUND_MODE_DA_BIT_SHIFT - 6);
         REG_SOUNDBIAS_H = (REG_SOUNDBIAS_H & 0x3F) | temp;
     }
 
@@ -471,35 +464,39 @@ void SoundClear(void)
 {
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
     s32 i;
-    void *chan;
+    struct SoundChannel *chan;
+    //struct CgbChannel *chan2;
 
     if (soundInfo->ident != ID_NUMBER)
         return;
 
     soundInfo->ident++;
 
-    i = MAX_DIRECTSOUND_CHANNELS;
-    chan = &soundInfo->chans[0];
-
-    while (i > 0)
+    for (i = MAX_DIRECTSOUND_CHANNELS, chan = soundInfo->chans; i > 0; i--, chan++)
     {
-        ((struct SoundChannel *)chan)->statusFlags = 0;
-        i--;
-        chan = (void *)((s32)chan + sizeof(struct SoundChannel));
+        chan->statusFlags = 0;
     }
 
-    chan = soundInfo->cgbChans;
+    // Why not just make a new pointer of type CgbChannel?! It's not like it's different offsets either
+/*     chan = soundInfo->cgbChans;
+
+    if (chan2)
+    {
+        for (i = 1; i <=4; i++, chan++)
+        {
+            soundInfo->CgbOscOff(i);
+            chan2->statusFlags = 0;
+        }
+    } */
+
+    chan = (struct SoundChannel *)soundInfo->cgbChans;
 
     if (chan)
     {
-        i = 1;
-
-        while (i <= 4)
+        for (i = 1; i <=4; i++, chan++)
         {
             soundInfo->CgbOscOff(i);
-            ((struct CgbChannel *)chan)->statusFlags = 0;
-            i++;
-            chan = (void *)((s32)chan + sizeof(struct CgbChannel));
+            chan->statusFlags = 0;
         }
     }
 
@@ -510,21 +507,23 @@ void m4aSoundVSyncOff(void)
 {
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
 
-    if (soundInfo->ident >= ID_NUMBER && soundInfo->ident <= ID_NUMBER + 1)
+    if (soundInfo->ident != ID_NUMBER && soundInfo->ident != ID_NUMBER + 1)
     {
-        soundInfo->ident += 10;
-
-        if (REG_DMA1CNT & (DMA_REPEAT << 16))
-            REG_DMA1CNT = ((DMA_ENABLE | DMA_START_NOW | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 4;
-
-        if (REG_DMA2CNT & (DMA_REPEAT << 16))
-            REG_DMA2CNT = ((DMA_ENABLE | DMA_START_NOW | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 4;
-
-        REG_DMA1CNT_H = DMA_32BIT;
-        REG_DMA2CNT_H = DMA_32BIT;
-
-        CpuFill32(0, soundInfo->pcmBuffer, sizeof(soundInfo->pcmBuffer));
+        return;
     }
+
+    soundInfo->ident += 10;
+
+    if (REG_DMA1CNT & (DMA_REPEAT << 16))
+        REG_DMA1CNT = ((DMA_ENABLE | DMA_START_NOW | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 4;
+
+    if (REG_DMA2CNT & (DMA_REPEAT << 16))
+        REG_DMA2CNT = ((DMA_ENABLE | DMA_START_NOW | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 4;
+
+    REG_DMA1CNT_H = DMA_32BIT;
+    REG_DMA2CNT_H = DMA_32BIT;
+
+    CpuFill32(0, soundInfo->pcmBuffer, sizeof(soundInfo->pcmBuffer));
 }
 
 void m4aSoundVSyncOn(void)
@@ -591,15 +590,12 @@ void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader)
 {
     s32 i;
-    u8 unk_B;
     struct MusicPlayerTrack *track;
 
     if (mplayInfo->ident != ID_NUMBER)
         return;
 
-    unk_B = mplayInfo->unk_B;
-
-    if (!unk_B
+    if (!mplayInfo->unk_B
         || ((!mplayInfo->songHeader || !(mplayInfo->tracks[0].flags & MPT_FLG_START))
             && ((mplayInfo->status & MUSICPLAYER_STATUS_TRACK) == 0
                 || (mplayInfo->status & MUSICPLAYER_STATUS_PAUSE)))
@@ -645,7 +641,7 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
     }
 }
 
-void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo)
+void MPlayStop(struct MusicPlayerInfo *mplayInfo)
 {
     s32 i;
     struct MusicPlayerTrack *track;
@@ -673,7 +669,6 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
 {
     s32 i;
     struct MusicPlayerTrack *track;
-    u16 fadeOV;
 
     if (mplayInfo->fadeOI == 0)
         return;
@@ -684,61 +679,39 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
 
     if (mplayInfo->fadeOV & FADE_IN)
     {
-        if ((u16)(mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT)) >= (64 << FADE_VOL_SHIFT))
+        if ((mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT)) >= (64 << FADE_VOL_SHIFT))
         {
             mplayInfo->fadeOV = (64 << FADE_VOL_SHIFT);
             mplayInfo->fadeOI = 0;
         }
     }
-    else
+    else if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
     {
-        if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
+        for (i = mplayInfo->trackCount, track = mplayInfo->tracks; i > 0; i--, track++)
         {
-            i = mplayInfo->trackCount;
-            track = mplayInfo->tracks;
+            TrackStop(mplayInfo, track);
 
-            while (i > 0)
-            {
-                u32 val;
-
-                TrackStop(mplayInfo, track);
-
-                val = TEMPORARY_FADE;
-                fadeOV = mplayInfo->fadeOV;
-                val &= fadeOV;
-
-                if (!val)
-                    track->flags = 0;
-
-                i--;
-                track++;
-            }
-
-            if (mplayInfo->fadeOV & TEMPORARY_FADE)
-                mplayInfo->status |= MUSICPLAYER_STATUS_PAUSE;
-            else
-                mplayInfo->status = MUSICPLAYER_STATUS_PAUSE;
-
-            mplayInfo->fadeOI = 0;
-            return;
+            if (!(mplayInfo->fadeOV & TEMPORARY_FADE))
+                track->flags = 0;
         }
+
+        if (mplayInfo->fadeOV & TEMPORARY_FADE)
+            mplayInfo->status |= MUSICPLAYER_STATUS_PAUSE;
+        else
+            mplayInfo->status = MUSICPLAYER_STATUS_PAUSE;
+
+        mplayInfo->fadeOI = 0;
+        return;
     }
 
-    i = mplayInfo->trackCount;
-    track = mplayInfo->tracks;
-
-    while (i > 0)
+    for (i = mplayInfo->trackCount, track = mplayInfo->tracks; i > 0; i--, track++)
     {
         if (track->flags & MPT_FLG_EXIST)
         {
-            fadeOV = mplayInfo->fadeOV;
 
-            track->volX = (fadeOV >> FADE_VOL_SHIFT);
+            track->volX = (u8)(mplayInfo->fadeOV >> FADE_VOL_SHIFT);
             track->flags |= MPT_FLG_VOLCHG;
         }
-
-        i--;
-        track++;
     }
 }
 
@@ -746,13 +719,13 @@ void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tr
 {
     if (track->flags & MPT_FLG_VOLSET)
     {
-        s32 x;
+        u32 x;
         s32 y;
 
         x = (u32)(track->vol * track->volX) >> 5;
 
         if (track->modT == 1)
-            x = (u32)(x * (track->modM + 128)) >> 7;
+            x = (x * (u32)(track->modM + 128)) >> 7;
 
         y = 2 * track->pan + track->panX;
 

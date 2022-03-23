@@ -732,7 +732,7 @@ static void sub_8046C78(struct Sprite *sprite)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 if (IsBGMPlaying())
-                    m4aMPlayStop(&gMPlayInfo_BGM);
+                    MPlayStop(&gMPlayInfo_BGM);
             }
             else
             {

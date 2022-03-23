@@ -239,7 +239,7 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *cry, u8 bgId)
         {
             for (j = 0; j < 32; j++)
             {
-                *((u16 *)(VRAM + (2 * j) + (64 * i) + screenBase)) = tileNum++;
+                *((u16 *)(BG_VRAM + (2 * j) + (64 * i) + screenBase)) = tileNum++;
             }
         }
         for (position = 0; position < gPokedexCryScreenPtr->playStartPos * 8; position++)
@@ -371,34 +371,32 @@ void DrawWaveformSegment(u8 position, u8 amplitude)
     u8 currentPointY;
     u8 nybble;
     u16 offset;
-    u16 temp;
-    u8 y;
 
-    temp = (amplitude + 127) * 256;
-    y = temp / 1152.0;
-    if (y > 71 - 16)
-        y = 71 - 16;
-    currentPointY = y;
+    amplitude += 127;
+    amplitude = (amplitude << 8)/1152.0;
+    if (amplitude > 71 - 16)
+        amplitude = 71 - 16;
+    currentPointY = amplitude;
     nybble = VERT_SLICE;
-    if (y > gPokedexCryScreenPtr->waveformPreviousY)
+    if (amplitude > gPokedexCryScreenPtr->waveformPreviousY)
     {
         do
         {
-            offset = sWaveformOffsets[PLAYHEAD_POS][y] + PLAY_START_POS * TILE_SIZE_4BPP;
+            offset = sWaveformOffsets[PLAYHEAD_POS][amplitude] + PLAY_START_POS * TILE_SIZE_4BPP;
             sCryWaveformWindowTiledata[offset] &= sWaveformTileDataNybbleMasks[nybble];
-            sCryWaveformWindowTiledata[offset] |= sWaveformColor[nybble][((y / 3) - 1) & 0x0F];
-            y--;
-        } while (y > gPokedexCryScreenPtr->waveformPreviousY);
+            sCryWaveformWindowTiledata[offset] |= sWaveformColor[nybble][((amplitude / 3) - 1) & 0x0F];
+            amplitude--;
+        } while (amplitude > gPokedexCryScreenPtr->waveformPreviousY);
     }
     else
     {
         do
         {
-            offset = sWaveformOffsets[PLAYHEAD_POS][y] + PLAY_START_POS * TILE_SIZE_4BPP;
+            offset = sWaveformOffsets[PLAYHEAD_POS][amplitude] + PLAY_START_POS * TILE_SIZE_4BPP;
             sCryWaveformWindowTiledata[offset] &= sWaveformTileDataNybbleMasks[nybble];
-            sCryWaveformWindowTiledata[offset] |= sWaveformColor[nybble][((y / 3) - 1) & 0x0F];
-            y++;
-        } while (y < gPokedexCryScreenPtr->waveformPreviousY);
+            sCryWaveformWindowTiledata[offset] |= sWaveformColor[nybble][((amplitude / 3) - 1) & 0x0F];
+            amplitude++;
+        } while (amplitude < gPokedexCryScreenPtr->waveformPreviousY);
     }
     gPokedexCryScreenPtr->waveformPreviousY = currentPointY;
     #undef PLAYHEAD_POS
@@ -443,12 +441,12 @@ void ShiftWaveformOver(u8 bgId, s16 pos, u8 axis)
 }
 
 bool8 ShowPokedexCryScreen(struct CryScreenWindow *cry, UNUSED u8 arg1) {
-    int returnVal = FALSE;
+    bool8 returnVal = FALSE;
 
     switch (gDexCryScreenState)
     {
     case 0:
-        LZ77UnCompVram(gCryMeter_Gfx, (void *) (VRAM + cry->charBase));
+        LZ77UnCompVram(gCryMeter_Gfx, (void *) (BG_VRAM + cry->charBase));
         LoadPalette(gCryMeter_Pal, cry->paletteNo * 16, 0x20);
         gDexCryScreenState++;
         break;
@@ -458,7 +456,6 @@ bool8 ShowPokedexCryScreen(struct CryScreenWindow *cry, UNUSED u8 arg1) {
         void *vram;
         u8 row, col;
         u32 r12;
-        int x, y;
 
         vram = BG_SCREEN_ADDR(cry->screenBase);
 
@@ -468,13 +465,11 @@ bool8 ShowPokedexCryScreen(struct CryScreenWindow *cry, UNUSED u8 arg1) {
         {
             for (col = 0; col < 10; col++)
             {
-                y = row + cry->yPos;
-                x = col + cry->xPos;
-                *(u16 *) (vram + (y * 64 + x * 2)) = (gCryMeter_Tilemap[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
+                *(u16 *) (vram + ((row + cry->yPos) * 64 + (col + cry->xPos) * 2)) = (gCryMeter_Tilemap[row * CRY_METER_MAP_WIDTH + col] | (cry->paletteNo << 12)) + r12;
             }
         }
 
-        gDexCryScreenState += 1;
+        gDexCryScreenState ++;
         break;
     }
 

@@ -105,7 +105,7 @@ extern u8 gSharedMem[];
 #define ePokedexView4                   (struct PokedexView *)(gSharedMem + 0x19800)
 
 // pokedex_cry_screen.c
-#define sCryWaveformWindowTiledata      (&gSharedMem[0])
+#define sCryWaveformWindowTiledata      gSharedMem
 #define ePokedexCryScreen               (*(struct PokedexCryScreen *)(gSharedMem + 0x1C000))
 #define ePokedexCryScreen2              (*(struct PokedexCryMeterNeedle *)(gSharedMem + 0x1C800))
 

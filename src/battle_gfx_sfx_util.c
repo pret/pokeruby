@@ -274,8 +274,8 @@ bool8 mplay_80342A4(u8 a)
         ewram17810[a].unk8++;
         if (ewram17810[gActiveBattler].unk8 < 30)
             return TRUE;
-        m4aMPlayStop(&gMPlayInfo_SE1);
-        m4aMPlayStop(&gMPlayInfo_SE2);
+        MPlayStop(&gMPlayInfo_SE1);
+        MPlayStop(&gMPlayInfo_SE2);
     }
     if (zero == 0)
     {

@@ -1772,8 +1772,8 @@ static void ScriptCmd_end(void)
         }
         else
         {
-            m4aMPlayStop(&gMPlayInfo_SE1);
-            m4aMPlayStop(&gMPlayInfo_SE2);
+            MPlayStop(&gMPlayInfo_SE1);
+            MPlayStop(&gMPlayInfo_SE2);
         }
     }
 
@@ -2909,8 +2909,8 @@ static void ScriptCmd_waitsound(void)
     {
         if (++gSoundAnimFramesToWait > 90)
         {
-            m4aMPlayStop(&gMPlayInfo_SE1);
-            m4aMPlayStop(&gMPlayInfo_SE2);
+            MPlayStop(&gMPlayInfo_SE1);
+            MPlayStop(&gMPlayInfo_SE2);
             gSoundAnimFramesToWait = 0;
         }
         else
@@ -3102,7 +3102,7 @@ static void ScriptCmd_doublebattle_2E(void)
 // Cease playing sounds.
 static void ScriptCmd_stopsound(void)
 {
-    m4aMPlayStop(&gMPlayInfo_SE1);
-    m4aMPlayStop(&gMPlayInfo_SE2);
+    MPlayStop(&gMPlayInfo_SE1);
+    MPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }

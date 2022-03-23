@@ -669,7 +669,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
                 }
                 break;
             case 0xFE:
-                m4aMPlayStop(&gMPlayInfo_SE2);
+                MPlayStop(&gMPlayInfo_SE2);
                 song->state = 0xFF;
                 break;
             }

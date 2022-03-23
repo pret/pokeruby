@@ -170,7 +170,7 @@ struct BlenderDebug
 // other files functions
 void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch);
 void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
-void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
+void MPlayStop(struct MusicPlayerInfo *mplayInfo);
 void sub_80A6978(void);
 u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 void MenuCursor_SetPos814A880(u8 a1, u8 a2);
@@ -2186,7 +2186,7 @@ static void sub_8050954(void)
             else
                 gBerryBlenderData->field_6F = 5;
             gBerryBlenderData->field_0 = 0;
-            m4aMPlayStop(&gMPlayInfo_SE2);
+            MPlayStop(&gMPlayInfo_SE2);
         }
         Blender_ControlHitPitch();
         break;
