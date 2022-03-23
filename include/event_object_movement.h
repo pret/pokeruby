@@ -372,7 +372,7 @@ void LoadSpecialObjectReflectionPalette(u16, u8);
 void ShiftObjectEventCoords(struct ObjectEvent *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
 void ShiftStillObjectEventCoords(struct ObjectEvent *pObject);
-u8 GetObjectEventIdByXYZ(u16, u16, u8);
+u8 GetObjectEventIdByPosition(u16, u16, u8);
 void UpdateObjectEventsForCameraUpdate(s16, s16);
 u8 AddCameraObject(u8);
 void CameraObjectReset1(void);

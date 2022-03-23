@@ -1,4 +1,4 @@
-gUnknown_081A2C51:: @ 81A2C51
+SecretBase_EventScript_CheckEntrance:: @ 81A2C51
 	special sub_80BB70C
 	special CheckPlayerHasSecretBase
 	compare VAR_RESULT, 1

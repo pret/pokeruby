@@ -401,7 +401,7 @@ void sub_80712B4(u8 taskId)
     }
 }
 
-void sub_8071310(void)
+void ShowStartMenu(void)
 {
     if (!is_c1_link_related_active())
     {

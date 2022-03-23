@@ -26,7 +26,7 @@ void fillSouthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillNorthConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillWestConnection(struct MapHeader *, struct MapHeader *, s32);
 void fillEastConnection(struct MapHeader *, struct MapHeader *, s32);
-u8 MapGridGetZCoordAt(int s, int y);
+u8 MapGridGetElevationAt(int s, int y);
 u8 MapGridIsImpassableAt(int, int);
 u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int x, int y); // return: (u8|u16|int) args: (int|s16|s32)

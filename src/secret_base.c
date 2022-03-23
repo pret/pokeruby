@@ -356,7 +356,7 @@ void sub_80BB970(struct MapEvents *events)
 void sub_80BBA14(void)
 {
     s8 idx = 4 * (gCurrentSecretBaseId / 10);
-    warp1_set_2(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_083D1374[idx], gUnknown_083D1374[idx + 1]);
+    SetWarpDestinationToMapWarp(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_083D1374[idx], gUnknown_083D1374[idx + 1]);
 }
 
 void sub_80BBA48(u8 taskid)
@@ -388,7 +388,7 @@ void sub_80BBAF0(void)
 {
     CreateTask(sub_80BBA48, 0);
     FadeScreen(1, 0);
-    saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
 }
 
 bool8 sub_80BBB24(void)
@@ -561,14 +561,14 @@ void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEv
     }
 }
 
-void sub_80BC038(struct MapPosition *position, struct MapEvents *events)
+void WarpIntoSecretBase(struct MapPosition *position, struct MapEvents *events)
 {
     SetCurrentSecretBaseFromPosition(position, events);
     SetCurrentSecretBaseVar();
     ScriptContext1_SetupScript(gUnknown_081A2E14);
 }
 
-bool8 sub_80BC050(void)
+bool8 TrySetCurSecretBase(void)
 {
     sub_80BB5D0();
     SetCurrentSecretBaseVar();
@@ -590,7 +590,7 @@ void sub_80BC074(u8 taskid)
             gTasks[taskid].data[0] = 2;
         break;
     case 2:
-        copy_saved_warp2_bank_and_enter_x_to_warp1(0x7E);
+        SetWarpDestinationToDynamicWarp(0x7E);
         WarpIntoMap();
         gFieldCallback = mapldr_default;
         SetMainCallback2(CB2_LoadMap);

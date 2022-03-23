@@ -187,7 +187,7 @@ AlreadyUsedStrengthText: @ 81B1127
 	.string "STÄRKE ermöglicht es, Felsen zu\n"
 	.string "bewegen.$"
 
-S_UseWaterfall:: @ 81B115A
+EventScript_UseWaterfall:: @ 81B115A
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, 6
@@ -201,7 +201,7 @@ S_UseWaterfall:: @ 81B115A
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto Waterfall_Done
 
-S_CannotUseWaterfall:: @ 81B1194
+EventScript_CannotUseWaterfall:: @ 81B1194
 	lockall
 Waterfall_NoMonKnows: @ 81B1195
 	msgbox CannotUseWaterfallText, MSGBOX_DEFAULT

@@ -812,7 +812,7 @@ void sub_80839A4(void)
         LoadPlayerParty();
         SavePlayerBag();
     }
-    copy_saved_warp2_bank_and_enter_x_to_warp1(0x7F);
+    SetWarpDestinationToDynamicWarp(0x7F);
 }
 
 void sub_80839D0(void)

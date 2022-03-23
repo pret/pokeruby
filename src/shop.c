@@ -433,7 +433,7 @@ static void Shop_LoadViewportObjects(void)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 objEventId = GetObjectEventIdByXYZ(facingX - 3 + x, facingY - 2 + y, playerHeight);
+            u8 objEventId = GetObjectEventIdByPosition(facingX - 3 + x, facingY - 2 + y, playerHeight);
 
             if (objEventId != 16)
             {

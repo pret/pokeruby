@@ -373,7 +373,7 @@ bool32 sub_8080E70(void)
         return FALSE;
 }
 
-void sub_8080E88(void)
+void DoWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -384,7 +384,7 @@ void sub_8080E88(void)
     CreateTask(task0A_fade_n_map_maybe, 10);
 }
 
-void sp13E_warp_to_last_warp(void)
+void DoDiveWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -394,7 +394,7 @@ void sp13E_warp_to_last_warp(void)
     CreateTask(task0A_fade_n_map_maybe, 10);
 }
 
-void sub_8080EF0(void)
+void DoDoorWarp(void)
 {
     ScriptContext2_Enable();
     gFieldCallback = mapldr_default;
@@ -403,29 +403,29 @@ void sub_8080EF0(void)
 
 void DoFallWarp(void)
 {
-    sp13E_warp_to_last_warp();
+    DoDiveWarp();
     gFieldCallback = sub_8086748;
 }
 
-void sub_8080F2C(u8 metatileBehavior)
+void DoEscalatorWarp(u8 metatileBehavior)
 {
     ScriptContext2_Enable();
     sub_8086A2C(metatileBehavior, 10);
 }
 
-void sub_8080F48(void)
+void DoLavaridgeGymB1FWarp(void)
 {
     ScriptContext2_Enable();
     sub_80871B8(10);
 }
 
-void sub_8080F58(void)
+void DoLavaridgeGym1FWarp(void)
 {
     ScriptContext2_Enable();
     sub_8087654(10);
 }
 
-void sub_8080F68(void)
+void DoSpinExitWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -515,7 +515,7 @@ void sub_80810DC(void)
 void debug_sub_80888D8()
 {
     debug_sub_8052E04();
-    sub_8080E88();
+    DoWarp();
     ScriptContext2_Enable();
 }
 

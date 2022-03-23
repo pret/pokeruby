@@ -1024,7 +1024,7 @@ static void sub_812800C(struct ObjectEvent *objectEvent, struct Sprite *sprite)
         for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
         {
             MoveCoords(i, &x, &y);
-            if (MapGridGetZCoordAt(x, y) == 3)
+            if (MapGridGetElevationAt(x, y) == 3)
             {
                 sprite->data[5] ++;
                 break;

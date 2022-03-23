@@ -616,8 +616,8 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *a, s16 x, s16 y, u8 directio
 static bool8 sub_8058EF0(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-     && MapGridGetZCoordAt(x, y) == 3
-     && GetObjectEventIdByXYZ(x, y, 3) == 16)
+     && MapGridGetElevationAt(x, y) == 3
+     && GetObjectEventIdByPosition(x, y, 3) == 16)
     {
         sub_805A20C(direction);
         return TRUE;

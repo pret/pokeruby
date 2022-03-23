@@ -339,7 +339,7 @@ union Block
     u16 value;
 };
 
-u8 MapGridGetZCoordAt(int x, int y)
+u8 MapGridGetElevationAt(int x, int y)
 {
     u16 block;
     int i;

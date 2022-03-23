@@ -2435,7 +2435,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
+                    behaviorAt = GetObjectEventIdByPosition(curX, curY, 0);
                     if (behaviorAt != 0 && behaviorAt != 16)
                     {
                         return FALSE;
@@ -2460,7 +2460,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    if (GetObjectEventIdByXYZ(curX, curY, 0) != 16)
+                    if (GetObjectEventIdByPosition(curX, curY, 0) != 16)
                     {
                         return FALSE;
                     }
@@ -2480,7 +2480,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     return FALSE;
                 }
-                behaviorAt = GetObjectEventIdByXYZ(curX, curY, 0);
+                behaviorAt = GetObjectEventIdByPosition(curX, curY, 0);
                 if (behaviorAt != 0 && behaviorAt != 16)
                 {
                     return FALSE;
@@ -2525,7 +2525,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                         return FALSE;
                     }
                 }
-                if (GetObjectEventIdByXYZ(curX, curY, 0) != 16)
+                if (GetObjectEventIdByPosition(curX, curY, 0) != 16)
                 {
                     return FALSE;
                 }

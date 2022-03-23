@@ -48,14 +48,14 @@ struct MapHeader * const GetDestinationWarpMapHeader(void);
 // LoadSaveblockMapHeader
 void WarpIntoMap(void);
 void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
-void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
+void SetWarpDestinationToMapWarp(s8 mapGroup, s8 mapNum, s8 warpId);
+void SetDynamicWarp(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
+void SetWarpDestinationToDynamicWarp(u8 unused);
 void sub_8053538(u8);
 void Overworld_SetWarpDestToLastHealLoc(void);
 void Overworld_SetHealLocationWarp(u8);
-void sub_80535C4(s16 a1, s16 a2);
+void UpdateEscapeWarp(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8053678(void);
 void SetFixedDiveWarp(s8, s8, s8, s8, s8);

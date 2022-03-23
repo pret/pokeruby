@@ -2030,7 +2030,7 @@ void UpdateObjectEventCoordsForCameraUpdate(void)
     }
 }
 
-u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
+u8 GetObjectEventIdByPosition(u16 x, u16 y, u8 z)
 {
     u8 i;
 
@@ -7450,7 +7450,7 @@ static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
     s16 j;
     u8 result;
     u8 b;
-    // Needed to match
+    // Needed to match. Not a fakematch though
     s16 one;
 
 #define RETURN_REFLECTION_TYPE_AT(x, y)              \
@@ -7536,7 +7536,7 @@ bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
     if (z == 0)
         return FALSE;
 
-    mapZ = MapGridGetZCoordAt(x, y);
+    mapZ = MapGridGetElevationAt(x, y);
 
     if (mapZ == 0 || mapZ == 0xF)
         return FALSE;
@@ -7589,8 +7589,8 @@ u8 ZCoordToPriority(u8 z)
 
 void ObjectEventUpdateZCoord(struct ObjectEvent *objEvent)
 {
-    u8 curElevation = MapGridGetZCoordAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
-    u8 prevElevation = MapGridGetZCoordAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+    u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+    u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
     if (curElevation == 15 || prevElevation == 15)
         return;
