@@ -1853,7 +1853,7 @@ bool8 ScrCmd_setfieldeffectargument(struct ScriptContext *ctx)
     return FALSE;
 }
 
-static bool8 sub_8067B48()
+static bool8 WaitForFieldEffectFinish(void)
 {
     if (!FieldEffectActiveListContains(sFieldEffectScriptId))
         return TRUE;
@@ -1864,7 +1864,7 @@ static bool8 sub_8067B48()
 bool8 ScrCmd_waitfieldeffect(struct ScriptContext *ctx)
 {
     sFieldEffectScriptId = VarGet(ScriptReadHalfword(ctx));
-    SetupNativeScript(ctx, sub_8067B48);
+    SetupNativeScript(ctx, WaitForFieldEffectFinish);
     return TRUE;
 }
 
