@@ -1511,14 +1511,9 @@ void SpriteCB_CreditsMon(struct Sprite *sprite)
     case 3:
         if (sprite->data[3] != 0)
         {
-            int data3;
-            vu16 *reg;
-
-            sprite->data[3] -= 1;
-
-            reg = &REG_BLDALPHA;
-            data3 = 16 - sprite->data[3];
-            *reg = (data3 << 8) + sprite->data[3];
+            sprite->data[3]--;
+                                                // Should be << 8 but that does not work
+            REG_BLDALPHA = ((16 - sprite->data[3]) * 256) + sprite->data[3];
         }
         else
         {
