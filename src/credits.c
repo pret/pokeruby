@@ -160,8 +160,8 @@ struct CreditsEntry
 
 extern struct SpriteTemplate gCreatingSpriteTemplate;
 
-extern u16 gUnknown_02039358;
-extern s16 gUnknown_0203935A;
+extern u16 gIntroCredits_MovingSceneryVBase;
+extern s16 gIntroCredits_MovingSceneryVOffset;
 extern s16 gIntroCredits_MovingSceneryState;
 
 static EWRAM_DATA s16 gUnknown_02039320 = 0;
@@ -983,13 +983,13 @@ void Task_BikeScene(u8 taskIdC)
     switch (gTasks[taskIdC].data[TDC_0])
     {
     case 0:
-        gUnknown_0203935A = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
+        gIntroCredits_MovingSceneryVOffset = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
         gTasks[taskIdC].data[TDC_5]++;
         break;
     case 1:
-        if (gUnknown_0203935A != 0)
+        if (gIntroCredits_MovingSceneryVOffset != 0)
         {
-            gUnknown_0203935A = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
+            gIntroCredits_MovingSceneryVOffset = Sin((gTasks[taskIdC].data[TDC_5] >> 1) & 0x7F, 12);
             gTasks[taskIdC].data[TDC_5]++;
         }
         else
@@ -1003,7 +1003,7 @@ void Task_BikeScene(u8 taskIdC)
         if (gTasks[taskIdC].data[TDC_5] < 64)
         {
             gTasks[taskIdC].data[TDC_5]++;
-            gUnknown_0203935A = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
+            gIntroCredits_MovingSceneryVOffset = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
         }
         else
         {
@@ -1031,7 +1031,7 @@ void Task_BikeScene(u8 taskIdC)
         if (gTasks[taskIdC].data[TDC_5] > 0)
         {
             gTasks[taskIdC].data[TDC_5]--;
-            gUnknown_0203935A = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
+            gIntroCredits_MovingSceneryVOffset = Sin(gTasks[taskIdC].data[TDC_5] & 0x7F, 20);
         }
         else
         {
@@ -1132,7 +1132,7 @@ static void SetBikeScene(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
         break;
     case 1:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1143,7 +1143,7 @@ static void SetBikeScene(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(0, 0x2000, 0x20, 8);
         break;
     case 2:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1154,7 +1154,7 @@ static void SetBikeScene(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
         break;
     case 3:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1165,7 +1165,7 @@ static void SetBikeScene(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(1, 0x2000, 0x200, 8);
         break;
     case 4:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1176,7 +1176,7 @@ static void SetBikeScene(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_8148EC0(2, 0x2000, 0x200, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleBgAnimationTask(2, 0x2000, 0x200, 8);
         break;
     }
 
@@ -1218,10 +1218,10 @@ static bool8 LoadBikeScene(u8 data, u8 taskIdA)
         gMain.state = 1;
         break;
     case 1:
-        gUnknown_02039358 = 34;
-        gUnknown_0203935A = 0;
-        sub_8148CB0(data);
-        gMain.state += 1;
+        gIntroCredits_MovingSceneryVBase = 34;
+        gIntroCredits_MovingSceneryVOffset = 0;
+        LoadCreditsSceneGraphics(data);
+        gMain.state ++;
         break;
     case 2:
         if (gSaveBlock2.playerGender == MALE)
@@ -1231,12 +1231,12 @@ static bool8 LoadBikeScene(u8 data, u8 taskIdA)
             LoadCompressedObjectPic(gIntro2BicycleSpriteSheet);
             LoadSpritePalettes(gIntro2SpritePalettes);
 
-            spriteId = intro_create_brendan_sprite(120, 46);
+            spriteId = CreateIntroBrendanSprite(120, 46);
             gTasks[taskIdA].data[TDA_PLAYER_CYCLIST] = spriteId;
             gSprites[spriteId].callback = SpriteCB_Player;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA54;
 
-            spriteId = intro_create_may_sprite(272, 46);
+            spriteId = CreateIntroMaySprite(272, 46);
             gTasks[taskIdA].data[TDA_RIVAL_CYCLIST] = spriteId;
             gSprites[spriteId].callback = SpriteCB_Rival;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA94;
@@ -1248,21 +1248,21 @@ static bool8 LoadBikeScene(u8 data, u8 taskIdA)
             LoadCompressedObjectPic(gIntro2BicycleSpriteSheet);
             LoadSpritePalettes(gIntro2SpritePalettes);
 
-            spriteId = intro_create_may_sprite(120, 46);
+            spriteId = CreateIntroMaySprite(120, 46);
             gTasks[taskIdA].data[TDA_PLAYER_CYCLIST] = spriteId;
             gSprites[spriteId].callback = SpriteCB_Player;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA54;
 
-            spriteId = intro_create_brendan_sprite(272, 46);
+            spriteId = CreateIntroBrendanSprite(272, 46);
             gTasks[taskIdA].data[TDA_RIVAL_CYCLIST] = spriteId;
             gSprites[spriteId].callback = SpriteCB_Rival;
             gSprites[spriteId].anims = gSpriteAnimTable_0840CA94;
         };
-        gMain.state += 1;
+        gMain.state ++;
         break;
     case 3:
         SetBikeScene(data, taskIdA);
-        sub_8148E90(data);
+        SetCreditsSceneBgCnt(data);
         gMain.state = 0;
         return TRUE;
     }
@@ -1432,7 +1432,7 @@ static void SpriteCB_Rival(struct Sprite *sprite)
             StartSpriteAnimIfDifferent(sprite, 2);
         if (sprite->x > -32)
             sprite->x -= 2;
-        sprite->y2 = -gUnknown_0203935A;
+        sprite->y2 = -gIntroCredits_MovingSceneryVOffset;
         break;
     case 2:
         sprite->data[7] += 1;

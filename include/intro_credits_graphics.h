@@ -12,13 +12,13 @@ extern const struct CompressedSpriteSheet gUnknown_08416E34[];
 
 void load_intro_part2_graphics(u8 a);
 void sub_8148C78(u8 a);
-void sub_8148CB0(u8);
-void sub_8148E90(u8);
-u8 sub_8148EC0(u8 a, u16 b, u16 c, u16 d);
+void LoadCreditsSceneGraphics(u8);
+void SetCreditsSceneBgCnt(u8);
+u8 CreateBicycleBgAnimationTask(u8 a, u16 b, u16 c, u16 d);
 void sub_8148F3C(u8);
 void CycleSceneryPalette(u8);
-u8 intro_create_brendan_sprite(s16 a, s16 b);
-u8 intro_create_may_sprite(s16 a, s16 b);
+u8 CreateIntroBrendanSprite(s16 a, s16 b);
+u8 CreateIntroMaySprite(s16 a, s16 b);
 u8 intro_create_latios_sprite(s16 a, s16 b);
 u8 intro_create_latias_sprite(s16 a, s16 b);
 

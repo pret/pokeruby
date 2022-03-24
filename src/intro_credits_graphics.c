@@ -298,8 +298,8 @@ const struct CompressedSpriteSheet gUnknown_08416E34[] = {
 };
 
 
-EWRAM_DATA u16 gUnknown_02039358 = 0;
-EWRAM_DATA s16 gUnknown_0203935A = 0;
+EWRAM_DATA u16 gIntroCredits_MovingSceneryVBase = 0;
+EWRAM_DATA s16 gIntroCredits_MovingSceneryVOffset = 0;
 EWRAM_DATA s16 gIntroCredits_MovingSceneryState = 0;
 
 extern u8 gReservedSpritePaletteCount;
@@ -356,7 +356,7 @@ void sub_8148C78(u8 a)
 
 void sub_8149280();
 
-void sub_8148CB0(u8 a)
+void LoadCreditsSceneGraphics(u8 a)
 {
     LZ77UnCompVram(&gUnknown_0841225C, (void *)(VRAM + 0x4000));
     LZ77UnCompVram(&gUnknown_084126DC, (void *)(VRAM + 0x7800));
@@ -407,7 +407,7 @@ void sub_8148CB0(u8 a)
     gIntroCredits_MovingSceneryState = 0;
 }
 
-void sub_8148E90(u8 a)
+void SetCreditsSceneBgCnt(u8 a)
 {
     REG_BG3CNT = 0x603;
     REG_BG2CNT = 0x702;
@@ -415,7 +415,7 @@ void sub_8148E90(u8 a)
     REG_DISPCNT = 0x1F40;
 }
 
-u8 sub_8148EC0(u8 a, u16 b, u16 c, u16 d)
+u8 CreateBicycleBgAnimationTask(u8 a, u16 b, u16 c, u16 d)
 {
     u8 taskId = CreateTask(&sub_8148F3C, 0);
 
@@ -448,7 +448,7 @@ void sub_8148F3C(u8 taskId)
         gTasks[taskId].data[2] = r2 >> 16;
         gTasks[taskId].data[3] = r2;
         REG_BG1HOFS = gTasks[taskId].data[2];
-        REG_BG1VOFS = gUnknown_02039358 + gUnknown_0203935A;
+        REG_BG1VOFS = gIntroCredits_MovingSceneryVBase + gIntroCredits_MovingSceneryVOffset;
     }
 
     deltaBG2HOFS = gTasks[taskId].data[4];
@@ -460,9 +460,9 @@ void sub_8148F3C(u8 taskId)
         gTasks[taskId].data[6] = r2;
         REG_BG2HOFS = gTasks[taskId].data[5];
         if (gTasks[taskId].data[0] != 0)
-            REG_BG2VOFS = gUnknown_02039358 + gUnknown_0203935A;
+            REG_BG2VOFS = gIntroCredits_MovingSceneryVBase + gIntroCredits_MovingSceneryVOffset;
         else
-            REG_BG2VOFS = gUnknown_02039358;
+            REG_BG2VOFS = gIntroCredits_MovingSceneryVBase;
     }
 
     deltaBG3HOFS = gTasks[taskId].data[7];
@@ -473,7 +473,7 @@ void sub_8148F3C(u8 taskId)
         gTasks[taskId].data[8] = r2 >> 16;
         gTasks[taskId].data[9] = r2;
         REG_BG3HOFS = gTasks[taskId].data[8];
-        REG_BG3VOFS = gUnknown_02039358;
+        REG_BG3VOFS = gIntroCredits_MovingSceneryVBase;
     }
 }
 
@@ -536,11 +536,11 @@ void sub_814910C(struct Sprite *sprite)
         if (sprite->x > 255) sprite->x = 0xFFE0;
         if (sprite->data[0])
         {
-            sprite->y2 = -(gUnknown_02039358 + gUnknown_0203935A);
+            sprite->y2 = -(gIntroCredits_MovingSceneryVBase + gIntroCredits_MovingSceneryVOffset);
         }
         else
         {
-            sprite->y2 = -gUnknown_02039358;
+            sprite->y2 = -gIntroCredits_MovingSceneryVBase;
         }
     }
 }
@@ -595,7 +595,7 @@ void sub_81492A0(struct Sprite* sprite)
 
 
 
-u8 intro_create_brendan_sprite(s16 a, s16 b)
+u8 CreateIntroBrendanSprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416CDC, a, b, 0);
     u8 brendan = CreateSprite(&gSpriteTemplate_Brendan, a, b + 8, 1);
@@ -603,7 +603,7 @@ u8 intro_create_brendan_sprite(s16 a, s16 b)
     return sprite;
 }
 
-u8 intro_create_may_sprite(s16 a, s16 b)
+u8 CreateIntroMaySprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416CF4, a, b, 0);
     u8 may = CreateSprite(&gSpriteTemplate_May, a, b + 8, 1);
