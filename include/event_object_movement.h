@@ -441,7 +441,7 @@ void CameraObjectSetFollowedObjectId(u8);
 u8 TryInitLocalObjectEvent(u8);
 u8 CreateCopySpriteAt(struct Sprite *, s16, s16, u8);
 u16 GetObjectPaletteTag(u8);
-void sub_8060470(s16 *, s16 *, s16, s16);
+void SetSpritePosToOffsetMapCoords(s16 *, s16 *, s16, s16);
 bool8 FreezeObjectEvent(struct ObjectEvent *);
 void FreezeObjectEvents(void);
 void FreezeObjectEventsExceptOne(u8);

@@ -377,7 +377,7 @@ static bool8 sub_80845FC(u8 taskId, struct Task *task, struct ObjectEvent *train
         gFieldEffectArguments[1] = trainerObj->currentCoords.y;
         gFieldEffectArguments[2] = gSprites[trainerObj->spriteId].subpriority - 1;
         gFieldEffectArguments[3] = 2;
-        task->data[4] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
+        task->data[4] = FieldEffectStart(FLDEFF_ASH_PUFF);
         task->data[0]++;
     }
     return FALSE;
@@ -403,7 +403,7 @@ static bool8 sub_8084654(u8 taskId, struct Task *task, struct ObjectEvent *train
 
 static bool8 sub_80846C8(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
+    if (!FieldEffectActiveListContains(FLDEFF_ASH_PUFF))
         task->data[0] = 3;
 
     return FALSE;
@@ -430,7 +430,7 @@ void sub_80846E4(u8 taskId)
         task->data[7]++;
     }
     gTrainerSeeFuncList2[task->data[0]](taskId, task, objEvent);
-    if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
+    if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_ASH_PUFF))
     {
         SetTrainerMovementType(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));
         OverrideMovementTypeForObjectEvent(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));

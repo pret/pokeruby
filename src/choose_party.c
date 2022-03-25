@@ -956,7 +956,7 @@ static void sub_81231C4(u8);
 
 void sub_81231AC(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(sub_81231C4, 10);
 }
 

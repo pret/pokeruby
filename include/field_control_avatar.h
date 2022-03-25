@@ -32,6 +32,6 @@ void RestartWildEncounterImmunitySteps(void);
 u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *);
 const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 u8 TrySetDiveWarp(void);
-bool8 dive_warp(struct MapPosition*, u16);
+bool8 TryDoDiveWarp(struct MapPosition*, u16);
 
 #endif

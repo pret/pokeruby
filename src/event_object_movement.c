@@ -1462,7 +1462,7 @@ u8 sub_805B410(u8 graphicsId, u8 b, s16 x, s16 y, u8 elevation, u8 direction)
     *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
     x += 7;
     y += 7;
-    sub_8060470(&x, &y, 8, 16);
+    SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -4626,7 +4626,7 @@ void sub_80603CC(s16 x1, s16 y1, s16 *x2, s16 *y2)
     *y2 = ((y1 - gSaveBlock1.pos.y) << 4) + y3;
 }
 
-void sub_8060470(s16 *x, s16 *y, s16 dx, s16 dy)
+void SetSpritePosToOffsetMapCoords(s16 *x, s16 *y, s16 dx, s16 dy)
 {
     sub_80603CC(*x, *y, x, y);
     *x += dx;

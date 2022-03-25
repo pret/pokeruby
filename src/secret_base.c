@@ -417,7 +417,7 @@ void sub_80BBB90(void)
     sub_80BB764(&x, &y, 0x220);
     MapGridSetMetatileIdAt(x + 7, y + 7, 0xe20);
     CurrentMapDrawMetatileAt(x + 7, y + 7);
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(sub_80BBB50, 0);
 }
 

@@ -2246,7 +2246,7 @@ void sub_80FF6AC(u8 taskId)
             AddDecorationIconObjectFromObjectEvent(&gUnknown_02038900, gUnknown_020388D0[gUnknown_020388F5]);
             sub_80FF960(taskId);
             SetUpPlacingDecorationPlayerAvatar(taskId, &gUnknown_02038900);
-            pal_fill_black();
+            FadeInFromBlack();
             gPaletteFade.bufferTransferDisabled = 0;
             gTasks[taskId].data[2] = 2;
             break;
@@ -2658,7 +2658,7 @@ void sub_8100364(void)
 {
     ScriptContext2_Enable();
     LoadScrollIndicatorPalette();
-    pal_fill_black();
+    FadeInFromBlack();
     sub_80FE7EC(CreateTask(sub_8100334, 8));
 }
 
@@ -3155,7 +3155,7 @@ void sub_8100C88(u8 taskId)
         case 2:
             ScriptContext2_Enable();
             sub_80FED90(taskId);
-            pal_fill_black();
+            FadeInFromBlack();
             gTasks[taskId].data[2] = 3;
             break;
         case 3:
@@ -3220,7 +3220,7 @@ void sub_8100E70(u8 taskId)
             break;
         case 1:
             SetUpPuttingAwayDecorationPlayerAvatar();
-            pal_fill_black();
+            FadeInFromBlack();
             data[2] = 2;
             break;
         case 2:
@@ -3528,7 +3528,7 @@ void sub_8101648(u8 taskId)
 
 void sub_8101678(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     Menu_DisplayDialogueFrame();
     sub_80FE220();
     CreateTask(sub_8101648, 8);

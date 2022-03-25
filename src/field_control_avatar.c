@@ -210,7 +210,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     GetPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 #if DEBUG
-    if (input->input_field_1_3 && dive_warp(&position, metatileBehavior) == TRUE)
+    if (input->input_field_1_3 && TryDoDiveWarp(&position, metatileBehavior) == TRUE)
         return TRUE;
 #endif
 
@@ -884,7 +884,7 @@ static struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapHeader,
     return NULL;
 }
 
-bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
+bool8 TryDoDiveWarp(struct MapPosition *position, u16 metatileBehavior)
 {
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && !MetatileBehavior_IsNotSurfacable(metatileBehavior))
     {

@@ -270,11 +270,11 @@ gFieldEffectScript_Nop48: @ 81D9DBA
 	end
 
 gFieldEffectScript_PopOutOfAsh: @ 81D9DC0
-	loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_PopOutOfAsh
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_AshPuff
 	end
 
 gFieldEffectScript_LavaridgeGymWarp: @ 81D9DCA
-	loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_LavaridgeGymWarp
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_AshLaunch
 	end
 
 gFieldEffectScript_SweetScent: @ 81D9DD4

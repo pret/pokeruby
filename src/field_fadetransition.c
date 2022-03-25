@@ -39,7 +39,7 @@ void palette_bg_fill_black(void)
     CpuFastFill16(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 }
 
-void pal_fill_for_map_transition(void)
+void WarpFadeInScreen(void)
 {
     u8 previousMapType = GetLastUsedWarpMapType();
     switch (GetMapPairFadeFromType(previousMapType, Overworld_GetMapTypeOfSaveblockLocation()))
@@ -54,7 +54,7 @@ void pal_fill_for_map_transition(void)
     }
 }
 
-void pal_fill_black(void)
+void FadeInFromBlack(void)
 {
     FadeScreen(FADE_FROM_BLACK, 0);
     palette_bg_fill_black();
@@ -91,14 +91,14 @@ void sub_8080990(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
 void sub_80809B0(void)
 {
     ScriptContext2_Enable();
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
@@ -115,7 +115,7 @@ void task_mpl_807DD60(u8 taskId)
     case 1:
         if (gTasks[task->data[1]].isActive != TRUE)
         {
-            pal_fill_for_map_transition();
+            WarpFadeInScreen();
             task->data[0]++;
         }
         break;
@@ -149,7 +149,7 @@ void sub_8080A5C(u8 taskId)
     case 1:
         if (IsLinkTaskFinished())
         {
-            pal_fill_for_map_transition();
+            WarpFadeInScreen();
             task->data[0]++;
         }
         break;
@@ -190,7 +190,7 @@ void sub_8080AE4(void)
 void mapldr_default(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_map_transition();
+    WarpFadeInScreen();
     sub_8080AE4();
     ScriptContext2_Enable();
 }
@@ -198,7 +198,7 @@ void mapldr_default(void)
 void sub_8080B60(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_black();
+    FadeInFromBlack();
     sub_8080AE4();
     ScriptContext2_Enable();
 }
@@ -206,7 +206,7 @@ void sub_8080B60(void)
 void sub_8080B78(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_map_transition();
+    WarpFadeInScreen();
     PlaySE(SE_WARP_OUT);
     CreateTask(task_map_chg_seq_0807E2CC, 10);
     ScriptContext2_Enable();
@@ -330,7 +330,7 @@ void sub_8080DC4(u8 taskId)
 
 void sub_8080DEC(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateStartMenuTask(sub_8080DC4);
     ScriptContext2_Enable();
 }
@@ -348,7 +348,7 @@ void task_mpl_807E3C8(u8 taskId)
 void sub_8080E28(void)
 {
     ScriptContext2_Enable();
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(task_mpl_807E3C8, 10);
 }
 
@@ -356,7 +356,7 @@ void sub_8080E44(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(task_mpl_807E3C8, 10);
 }
 
@@ -404,25 +404,25 @@ void DoDoorWarp(void)
 void DoFallWarp(void)
 {
     DoDiveWarp();
-    gFieldCallback = sub_8086748;
+    gFieldCallback = FieldCB_FallWarpExit;
 }
 
 void DoEscalatorWarp(u8 metatileBehavior)
 {
     ScriptContext2_Enable();
-    sub_8086A2C(metatileBehavior, 10);
+    StartEscalatorWarp(metatileBehavior, 10);
 }
 
 void DoLavaridgeGymB1FWarp(void)
 {
     ScriptContext2_Enable();
-    sub_80871B8(10);
+    StartLavaridgeGymB1FWarp(10);
 }
 
 void DoLavaridgeGym1FWarp(void)
 {
     ScriptContext2_Enable();
-    sub_8087654(10);
+    StartLavaridgeGym1FWarp(10);
 }
 
 void DoSpinExitWarp(void)

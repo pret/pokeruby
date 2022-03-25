@@ -497,7 +497,7 @@ void UpdateEscapeWarp(s16 a1, s16 a2)
 {
     u8 currMapType = Overworld_GetMapTypeOfSaveblockLocation();
     u8 destMapType = GetMapTypeByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
-    if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
+    if (IsMapTypeOutdoors(currMapType) && IsMapTypeOutdoors(destMapType) != TRUE)
         sub_805363C(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, a1 - 7, a2 - 6);
 }
 
@@ -506,7 +506,7 @@ void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
     SetWarpData(&gSaveBlock1.warp4, mapGroup, mapNum, warpId, x, y);
 }
 
-void sub_8053678(void)
+void SetWarpDestinationToEscapeWarp(void)
 {
     gWarpDestination = gSaveBlock1.warp4;
 }
@@ -644,7 +644,7 @@ void sub_8053994(u32 a1)
 
     LoadCurrentMapData();
     LoadObjEventTemplatesFromHeader();
-    v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
+    v2 = IsMapTypeOutdoors(gMapHeader.mapType);
     v3 = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
@@ -1073,7 +1073,7 @@ u8 GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-bool8 is_map_type_1_2_3_5_or_6(u8 mapType)
+bool8 IsMapTypeOutdoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN

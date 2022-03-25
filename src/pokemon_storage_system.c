@@ -362,7 +362,7 @@ void FieldCB_ReturnToOverworld(void)
     u8 taskId = CreateTask(Task_PokemonStorageSystem, 80);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gUnknown_02038474;
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu)

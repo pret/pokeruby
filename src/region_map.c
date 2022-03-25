@@ -1637,7 +1637,7 @@ void sub_80FC69C(void)
                     SetWarpDestinationToMapWarp(sMapHealLocations[gRegionMapState->regionMap.mapSectionId][0], sMapHealLocations[gRegionMapState->regionMap.mapSectionId][1], -1);
                 break;
             }
-            sub_80865BC();
+            ReturnToFieldFromFlyMapSelect();
         }
         else
         {

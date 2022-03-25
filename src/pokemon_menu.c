@@ -783,7 +783,7 @@ static void sub_808AB34(u8 taskID)
 
 void FieldCallback_PrepareFadeInFromMenu(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(FieldCallback_AfterFadeInFromMenu, 8);
 }
 

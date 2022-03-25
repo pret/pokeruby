@@ -220,7 +220,7 @@ static void Task_ReturnToMartMenu(u8 taskId)
 
 void Shop_FadeReturnToMartMenu(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(Task_ReturnToMartMenu, 0x8);
 }
 

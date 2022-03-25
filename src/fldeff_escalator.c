@@ -148,17 +148,17 @@ u8 sub_80B47D8(u16 var)
     return taskId;
 }
 
-void sub_80B4824(u8 var)
+void StartEscalator(u8 var)
 {
     gUnknown_02038731 = sub_80B47D8(var);
 }
 
-void sub_80B483C(void)
+void StopEscalator(void)
 {
     DestroyTask(gUnknown_02038731);
 }
 
-bool8 sub_80B4850(void)
+bool8 IsEscalatorMoving(void)
 {
     if (gTasks[gUnknown_02038731].data[3] == 0 && gTasks[gUnknown_02038731].data[1] == 2)
         return FALSE;

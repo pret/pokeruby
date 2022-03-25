@@ -46,5 +46,5 @@ bool8 FldEff_UseTeleport(void)
 static void StartTeleportFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_TELEPORT);
-    CreateTeleportFieldEffectTask();
+    FldEff_TeleportWarpOut();
 }

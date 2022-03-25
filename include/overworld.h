@@ -57,7 +57,7 @@ void Overworld_SetWarpDestToLastHealLoc(void);
 void Overworld_SetHealLocationWarp(u8);
 void UpdateEscapeWarp(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-void sub_8053678(void);
+void SetWarpDestinationToEscapeWarp(void);
 void SetFixedDiveWarp(s8, s8, s8, s8, s8);
 // warp1_set_to_warp2
 void SetFixedHoleWarp(s8, s8, s8, s8, s8);
@@ -101,7 +101,7 @@ u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 // GetMapTypeByWarpData
 u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 u8 GetLastUsedWarpMapType(void);
-bool8 is_map_type_1_2_3_5_or_6(u8 a1);
+bool8 IsMapTypeOutdoors(u8 a1);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 a1);
 u8 Overworld_MapTypeIsIndoors(u8);
 // unref_sub_8054260
