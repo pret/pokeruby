@@ -2347,7 +2347,7 @@ void LoadFieldMoveOutdoorStreaksTilemap(u16 offs)
 void VBlankCB_FieldMoveShowMonIndoors(void);
 bool8 SlideIndoorBannerOnscreen(struct Task *);
 void AnimateIndoorShowMonBg(struct Task *);
-bool8 sub_80887C0(struct Task *);
+bool8 SlideIndoorBannerOffscreen(struct Task *);
 
 void (*const sFieldMoveShowMonIndoorsEffectFuncs[])(struct Task *) = {
     FieldMoveShowMonIndoorsEffect_Init,
@@ -2418,10 +2418,8 @@ void FieldMoveShowMonIndoorsEffect_RestoreBg(struct Task *task)
 void FieldMoveShowMonIndoorsEffect_SlideBannerOff(struct Task *task)
 {
     AnimateIndoorShowMonBg(task);
-    if (sub_80887C0(task))
-    {
+    if (SlideIndoorBannerOffscreen(task))
         task->data[0]++;
-    }
 }
 
 void FieldMoveShowMonIndoorsEffect_End(struct Task *task)
@@ -2485,7 +2483,7 @@ bool8 SlideIndoorBannerOnscreen(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_80887C0(struct Task *task)
+bool8 SlideIndoorBannerOffscreen(struct Task *task)
 {
     u16 i;
     u16 dstOffs;
@@ -2509,52 +2507,52 @@ bool8 sub_80887C0(struct Task *task)
     return FALSE;
 }
 
-u8 InitFieldMoveMonSprite(u32 a0, u32 a1, u32 a2)
+u8 InitFieldMoveMonSprite(u32 species, u32 otId, u32 personality)
 {
-    u16 v0;
+    bool16 noDucking;
     u8 monSprite;
     struct Sprite *sprite;
-    v0 = (a0 & 0x80000000) >> 16;
-    a0 &= 0x7fffffff;
-    monSprite = CreateMonSprite_FieldMove(a0, a1, a2, 0x140, 0x50, 0);
+    noDucking = (species & 0x80000000) >> 16;
+    species &= 0x7fffffff;
+    monSprite = CreateMonSprite_FieldMove(species, otId, personality, 0x140, 0x50, 0);
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;
-    sprite->data[0] = a0;
-    sprite->data[6] = v0;
+    sprite->data[0] = species;
+    sprite->data[6] = noDucking;
     return monSprite;
 }
 
-void sub_80888D4(struct Sprite *);
+void SpriteCB_FieldMoveMonWaitAfterCry(struct Sprite *);
 
 void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite *sprite)
 {
-    if ((sprite->x -= 20) <= 0x78)
+    if ((sprite->x -= 20) <= DISPLAY_WIDTH / 2)
     {
-        sprite->x = 0x78;
+        sprite->x = DISPLAY_WIDTH / 2;;
         sprite->data[1] = 30;
-        sprite->callback = sub_80888D4;
+        sprite->callback = SpriteCB_FieldMoveMonWaitAfterCry;
         if (sprite->data[6])
         {
-            PlayCry2(sprite->data[0], 0, 0x7d, 0xa);
+            PlayCry_NormalNoDucking((u16)sprite->data[0], 0, 0x7d, 0xa);
         } else
         {
-            PlayCry1(sprite->data[0], 0);
+            PlayCry_Normal((u16)sprite->data[0], 0);
         }
     }
 }
 
-void sub_80888F0(struct Sprite *);
+void SpriteCB_FieldMoveMonSlideOffscreen(struct Sprite *);
 
-void sub_80888D4(struct Sprite *sprite)
+void SpriteCB_FieldMoveMonWaitAfterCry(struct Sprite *sprite)
 {
     if ((--sprite->data[1]) == 0)
     {
-        sprite->callback = sub_80888F0;
+        sprite->callback = SpriteCB_FieldMoveMonSlideOffscreen;
     }
 }
 
-void sub_80888F0(struct Sprite *sprite)
+void SpriteCB_FieldMoveMonSlideOffscreen(struct Sprite *sprite)
 {
     if (sprite->x < -0x40)
     {
@@ -2565,32 +2563,32 @@ void sub_80888F0(struct Sprite *sprite)
     }
 }
 
-void sub_8088954(u8);
+void Task_SurfFieldEffect(u8);
 
 u8 FldEff_UseSurf(void)
 {
     u8 taskId;
-    taskId = CreateTask(sub_8088954, 0xff);
+    taskId = CreateTask(Task_SurfFieldEffect, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
     Overworld_ChangeMusicTo(MUS_SURF);
     return FALSE;
 }
 
-void (*const gUnknown_0839F3E4[])(struct Task *) = {
-    sub_8088984,
-    sub_80889E4,
-    sub_8088A30,
-    sub_8088A78,
-    sub_8088AF4
+void (*const sSurfFieldEffectFuncs[])(struct Task *) = {
+    SurfFieldEffect_Init,
+    SurfFieldEffect_FieldMovePose,
+    SurfFieldEffect_ShowMon,
+    SurfFieldEffect_JumpOnSurfBlob,
+    SurfFieldEffect_End
 };
 
-void sub_8088954(u8 taskId)
+void Task_SurfFieldEffect(u8 taskId)
 {
-    gUnknown_0839F3E4[gTasks[taskId].data[0]](&gTasks[taskId]);
+    sSurfFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void sub_8088984(struct Task *task)
+void SurfFieldEffect_Init(struct Task *task)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
@@ -2601,23 +2599,21 @@ void sub_8088984(struct Task *task)
     task->data[0]++;
 }
 
-void sub_80889E4(struct Task *task)
+void SurfFieldEffect_FieldMovePose(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        sub_8059BF4();
+        SetPlayerAvatarFieldMove();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
 
-void sub_8088A30(struct Task *task)
+void SurfFieldEffect_ShowMon(struct Task *task)
 {
-    struct ObjectEvent *objectEvent;
-    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    if (ObjectEventCheckHeldMovementStatus(objectEvent))
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]))
     {
         gFieldEffectArguments[0] = task->data[15] | 0x80000000;
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -2625,7 +2621,7 @@ void sub_8088A30(struct Task *task)
     }
 }
 
-void sub_8088A78(struct Task *task)
+void SurfFieldEffect_JumpOnSurfBlob(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
@@ -2642,7 +2638,7 @@ void sub_8088A78(struct Task *task)
     }
 }
 
-void sub_8088AF4(struct Task *task)
+void SurfFieldEffect_End(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -2651,31 +2647,30 @@ void sub_8088AF4(struct Task *task)
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
         ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
-        sub_8127ED0(objectEvent->fieldEffectSpriteId, 1);
+        SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, 1);
         UnfreezeObjectEvents();
         ScriptContext2_Disable();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
-        DestroyTask(FindTaskIdByFunc(sub_8088954));
+        DestroyTask(FindTaskIdByFunc(Task_SurfFieldEffect));
     }
 }
 
-void sub_8088BC4(struct Sprite *);
+void SpriteCB_NPCFlyOut(struct Sprite *);
 
 u8 FldEff_NPCFlyOut(void)
 {
-    u8 spriteId;
-    struct Sprite *sprite;
-    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0x78, 0, 1);
-    sprite = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0x78, 0, 1);
+    struct Sprite *sprite = &gSprites[spriteId];
+
     sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;
-    sprite->callback = sub_8088BC4;
+    sprite->callback = SpriteCB_NPCFlyOut;
     sprite->data[1] = gFieldEffectArguments[0];
     PlaySE(SE_M_FLY);
     return spriteId;
 }
 
-void sub_8088BC4(struct Sprite *sprite)
+void SpriteCB_NPCFlyOut(struct Sprite *sprite)
 {
     struct Sprite *npcSprite;
     sprite->x2 = Cos(sprite->data[2], 0x8c);
@@ -2684,53 +2679,51 @@ void sub_8088BC4(struct Sprite *sprite)
     if (sprite->data[0])
     {
         npcSprite = &gSprites[sprite->data[1]];
-        npcSprite->coordOffsetEnabled = 0;
+        npcSprite->coordOffsetEnabled = FALSE;
         npcSprite->x = sprite->x + sprite->x2;
         npcSprite->y = sprite->y + sprite->y2 - 8;
         npcSprite->x2 = 0;
         npcSprite->y2 = 0;
     }
     if (sprite->data[2] >= 0x80)
-    {
         FieldEffectStop(sprite, FLDEFF_NPCFLY_OUT);
-    }
 }
 
-void sub_8088C70(u8);
-extern void sub_8127EFC(u8, u8);
-u8 sub_8088F60(void);
-bool8 sub_8088FA4(u8);
-void sub_8088FC0(u8);
-void sub_8088FFC(u8, u8);
-void sub_8089018(struct Sprite *);
-void sub_80890D8(struct Sprite *);
+void Task_FlyOut(u8);
+extern void SetSurfBlob_DontSyncAnim(u8, u8);
+u8 CreateFlyBirdSprite(void);
+bool8 GetFlyBirdAnimCompleted(u8);
+void StartFlyBirdSwoopDown(u8);
+void SetFlyBirdPlayerSpriteId(u8, u8);
+void SpriteCB_FlyBirdLeaveBall(struct Sprite *);
+void SpriteCB_FlyBirdSwoopDown(struct Sprite *);
 
 u8 FldEff_UseFly(void)
 {
     u8 taskId;
-    taskId = CreateTask(sub_8088C70, 0xfe);
+    taskId = CreateTask(Task_FlyOut, 0xfe);
     gTasks[taskId].data[1] = gFieldEffectArguments[0];
     return 0;
 }
 
-void (*const gUnknown_0839F3F8[])(struct Task *) = {
-    sub_8088CA0,
-    sub_8088CF8,
-    sub_8088D3C,
-    sub_8088D94,
-    sub_8088DD8,
-    sub_8088E2C,
-    sub_8088EB4,
-    sub_8088F10,
-    sub_8088F30
+void (*const sFlyOutFieldEffectFuncs[])(struct Task *) = {
+    FlyOutFieldEffect_FieldMovePose,
+    FlyOutFieldEffect_ShowMon,
+    FlyOutFieldEffect_BirdLeaveBall,
+    FlyOutFieldEffect_WaitBirdLeave,
+    FlyOutFieldEffect_BirdSwoopDown,
+    FlyOutFieldEffect_JumpOnBird,
+    FlyOutFieldEffect_FlyOffWithBird,
+    FlyOutFieldEffect_WaitFlyOff,
+    FlyOutFieldEffect_End
 };
 
-void sub_8088C70(u8 taskId)
+void Task_FlyOut(u8 taskId)
 {
-    gUnknown_0839F3F8[gTasks[taskId].data[0]](&gTasks[taskId]);
+    sFlyOutFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void sub_8088CA0(struct Task *task)
+void FlyOutFieldEffect_FieldMovePose(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -2739,13 +2732,13 @@ void sub_8088CA0(struct Task *task)
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
-        sub_8059BF4();
+        SetPlayerAvatarFieldMove();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
 
-void sub_8088CF8(struct Task *task)
+void FlyOutFieldEffect_ShowMon(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -2757,7 +2750,7 @@ void sub_8088CF8(struct Task *task)
     }
 }
 
-void sub_8088D3C(struct Task *task)
+void FlyOutFieldEffect_BirdLeaveBall(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
@@ -2765,17 +2758,17 @@ void sub_8088D3C(struct Task *task)
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         if (task->data[15] & 0x08)
         {
-            sub_8127ED0(objectEvent->fieldEffectSpriteId, 2);
-            sub_8127EFC(objectEvent->fieldEffectSpriteId, 0);
+            SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, 2);
+            SetSurfBlob_DontSyncAnim(objectEvent->fieldEffectSpriteId, 0);
         }
-        task->data[1] = sub_8088F60();
+        task->data[1] = CreateFlyBirdSprite();
         task->data[0]++;
     }
 }
 
-void sub_8088D94(struct Task *task)
+void FlyOutFieldEffect_WaitBirdLeave(struct Task *task)
 {
-    if (sub_8088FA4(task->data[1]))
+    if (GetFlyBirdAnimCompleted(task->data[1]))
     {
         task->data[0]++;
         task->data[2] = 16;
@@ -2784,19 +2777,18 @@ void sub_8088D94(struct Task *task)
     }
 }
 
-void sub_8088DD8(struct Task *task)
+void FlyOutFieldEffect_BirdSwoopDown(struct Task *task)
 {
-    struct ObjectEvent *objectEvent;
-    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if ((task->data[2] == 0 || (--task->data[2]) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[0]++;
         PlaySE(SE_M_FLY);
-        sub_8088FC0(task->data[1]);
+        StartFlyBirdSwoopDown(task->data[1]);
     }
 }
 
-void sub_8088E2C(struct Task *task)
+void FlyOutFieldEffect_JumpOnBird(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     if ((++task->data[2]) >= 8)
@@ -2815,7 +2807,7 @@ void sub_8088E2C(struct Task *task)
     }
 }
 
-void sub_8088EB4(struct Task *task)
+void FlyOutFieldEffect_FlyOffWithBird(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     if ((++task->data[2]) >= 10)
@@ -2824,31 +2816,31 @@ void sub_8088EB4(struct Task *task)
         ObjectEventClearHeldMovementIfActive(objectEvent);
         objectEvent->inanimate = 0;
         objectEvent->hasShadow = 0;
-        sub_8088FFC(task->data[1], objectEvent->spriteId);
+        SetFlyBirdPlayerSpriteId(task->data[1], objectEvent->spriteId);
         CameraObjectReset2();
         task->data[0]++;
     }
 }
 
-void sub_8088F10(struct Task *task)
+void FlyOutFieldEffect_WaitFlyOff(struct Task *task)
 {
-    if (sub_8088FA4(task->data[1]))
+    if (GetFlyBirdAnimCompleted(task->data[1]))
     {
         WarpFadeScreen();
         task->data[0]++;
     }
 }
 
-void sub_8088F30(struct Task *task)
+void FlyOutFieldEffect_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
         FieldEffectActiveListRemove(FLDEFF_USE_FLY);
-        DestroyTask(FindTaskIdByFunc(sub_8088C70));
+        DestroyTask(FindTaskIdByFunc(Task_FlyOut));
     }
 }
 
-u8 sub_8088F60(void)
+u8 CreateFlyBirdSprite(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -2856,31 +2848,31 @@ u8 sub_8088F60(void)
     sprite = &gSprites[spriteId];
     sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;
-    sprite->callback = sub_8089018;
+    sprite->callback = SpriteCB_FlyBirdLeaveBall;
     return spriteId;
 }
 
-u8 sub_8088FA4(u8 spriteId)
+u8 GetFlyBirdAnimCompleted(u8 spriteId)
 {
     return gSprites[spriteId].data[7];
 }
 
-void sub_8088FC0(u8 spriteId)
+void StartFlyBirdSwoopDown(u8 spriteId)
 {
     struct Sprite *sprite;
     sprite = &gSprites[spriteId];
-    sprite->callback = sub_80890D8;
-    sprite->x = 0x78;
+    sprite->callback = SpriteCB_FlyBirdSwoopDown;
+    sprite->x = DISPLAY_WIDTH / 2;;
     sprite->y = 0x00;
     sprite->x2 = 0;
     sprite->y2 = 0;
     memset(&sprite->data[0], 0, 8 * sizeof(u16) /* zero all data cells */);
-    sprite->data[6] = 0x40;
+    sprite->data[6] = MAX_SPRITES;
 }
 
-void sub_8088FFC(u8 a0, u8 a1)
+void SetFlyBirdPlayerSpriteId(u8 birdSpriteId, u8 playerSpriteId)
 {
-    gSprites[a0].data[6] = a1;
+    gSprites[birdSpriteId].data[6] = playerSpriteId;
 }
 
 const union AffineAnimCmd SpriteAffineAnim_839F41C[] = {
@@ -2900,7 +2892,7 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_0839F44C[] = {
     SpriteAffineAnim_839F434
 };
 
-void sub_8089018(struct Sprite *sprite)
+void SpriteCB_FlyBirdLeaveBall(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
     {
@@ -2933,7 +2925,7 @@ void sub_8089018(struct Sprite *sprite)
     }
 }
 
-void sub_80890D8(struct Sprite *sprite)
+void SpriteCB_FlyBirdSwoopDown(struct Sprite *sprite)
 {
     struct Sprite *sprite1;
     sprite->x2 = Cos(sprite->data[2], 0x8c);
@@ -2954,7 +2946,7 @@ void sub_80890D8(struct Sprite *sprite)
     }
 }
 
-void sub_808914C(struct Sprite *sprite)
+void SpriteCB_FlyBirdReturnToBall(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
     {
@@ -2998,36 +2990,36 @@ void sub_808914C(struct Sprite *sprite)
     }
 }
 
-void sub_8089230(u8 spriteId)
+void StartFlyBirdReturnToBall(u8 spriteId)
 {
-    sub_8088FC0(spriteId);
-    gSprites[spriteId].callback = sub_808914C;
+    StartFlyBirdSwoopDown(spriteId); // Set up is the same, but overrwrites the callback below
+    gSprites[spriteId].callback = SpriteCB_FlyBirdReturnToBall;
 }
 
-void sub_8089270(u8);
+void Task_FlyIn(u8);
 
 u8 FldEff_FlyIn(void)
 {
-    CreateTask(sub_8089270, 0xfe);
+    CreateTask(Task_FlyIn, 0xfe);
     return 0;
 }
 
-void (*const gUnknown_0839F454[])(struct Task *) = {
-    sub_80892A0,
-    sub_8089354,
-    sub_80893C0,
-    sub_8089414,
-    sub_808948C,
-    sub_80894C4,
-    fishE
+void (*const sFlyInFieldEffectFuncs[])(struct Task *) = {
+    FlyInFieldEffect_BirdSwoopDown,
+    FlyInFieldEffect_FlyInWithBird,
+    FlyInFieldEffect_JumpOffBird,
+    FlyInFieldEffect_FieldMovePose,
+    FlyInFieldEffect_BirdReturnToBall,
+    FlyInFieldEffect_WaitBirdReturn,
+    FlyInFieldEffect_End
 };
 
-void sub_8089270(u8 taskId)
+void Task_FlyIn(u8 taskId)
 {
-    gUnknown_0839F454[gTasks[taskId].data[0]](&gTasks[taskId]);
+    sFlyInFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void sub_80892A0(struct Task *task)
+void FlyInFieldEffect_BirdSwoopDown(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -3040,20 +3032,20 @@ void sub_80892A0(struct Task *task)
         SetPlayerAvatarStateMask(0x01);
         if (task->data[15] & 0x08)
         {
-            sub_8127ED0(objectEvent->fieldEffectSpriteId, 0);
+            SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, 0);
         }
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         CameraObjectReset2();
         ObjectEventTurn(objectEvent, DIR_WEST);
         StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
         objectEvent->invisible = FALSE;
-        task->data[1] = sub_8088F60();
-        sub_8088FC0(task->data[1]);
-        sub_8088FFC(task->data[1], objectEvent->spriteId);
+        task->data[1] = CreateFlyBirdSprite();
+        StartFlyBirdSwoopDown(task->data[1]);
+        SetFlyBirdPlayerSpriteId(task->data[1], objectEvent->spriteId);
     }
 }
 
-void sub_8089354(struct Task *task)
+void FlyInFieldEffect_FlyInWithBird(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
@@ -3061,7 +3053,7 @@ void sub_8089354(struct Task *task)
     {
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         sprite = &gSprites[objectEvent->spriteId];
-        sub_8088FFC(task->data[1], 0x40);
+        SetFlyBirdPlayerSpriteId(task->data[1], 0x40);
         sprite->x += sprite->x2;
         sprite->y += sprite->y2;
         sprite->x2 = 0;
@@ -3071,9 +3063,9 @@ void sub_8089354(struct Task *task)
     }
 }
 
-void sub_80893C0(struct Task *task)
+void FlyInFieldEffect_JumpOffBird(struct Task *task)
 {
-    s16 unknown_0839F470[18] = {
+    s16 sYPositions[18] = {
         -2,
         -4,
         -5,
@@ -3094,44 +3086,44 @@ void sub_80893C0(struct Task *task)
         8
     };
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->y2 = unknown_0839F470[task->data[2]];
-    if ((++task->data[2]) >= 18)
+    sprite->y2 = sYPositions[task->data[2]];
+    if ((++task->data[2]) >= (int)ARRAY_COUNT(sYPositions))
     {
         task->data[0]++;
     }
 }
 
-void sub_8089414(struct Task *task)
+void FlyInFieldEffect_FieldMovePose(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
-    if (sub_8088FA4(task->data[1]))
+    if (GetFlyBirdAnimCompleted(task->data[1]))
     {
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         sprite = &gSprites[objectEvent->spriteId];
-        objectEvent->inanimate = 0;
-        sub_805C058(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
+        objectEvent->inanimate = FALSE;
+        MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
         sprite->x2 = 0;
         sprite->y2 = 0;
-        sprite->coordOffsetEnabled = 1;
-        sub_8059BF4();
+        sprite->coordOffsetEnabled = TRUE;
+        SetPlayerAvatarFieldMove();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
 
-void sub_808948C(struct Task *task)
+void FlyInFieldEffect_BirdReturnToBall(struct Task *task)
 {
     if (ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gPlayerAvatar.objectEventId]))
     {
         task->data[0]++;
-        sub_8089230(task->data[1]);
+        StartFlyBirdReturnToBall(task->data[1]);
     }
 }
 
-void sub_80894C4(struct Task *task)
+void FlyInFieldEffect_WaitBirdReturn(struct Task *task)
 {
-    if (sub_8088FA4(task->data[1]))
+    if (GetFlyBirdAnimCompleted(task->data[1]))
     {
         DestroySprite(&gSprites[task->data[1]]);
         task->data[0]++;
@@ -3139,7 +3131,7 @@ void sub_80894C4(struct Task *task)
     }
 }
 
-void fishE(struct Task *task)
+void FlyInFieldEffect_End(struct Task *task)
 {
     u8 state;
     struct ObjectEvent *objectEvent;
@@ -3150,13 +3142,13 @@ void fishE(struct Task *task)
         if (task->data[15] & 0x08)
         {
             state = PLAYER_AVATAR_STATE_SURFING;
-            sub_8127ED0(objectEvent->fieldEffectSpriteId, 1);
+            SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, 1);
         }
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(state));
         ObjectEventTurn(objectEvent, DIR_SOUTH);
         gPlayerAvatar.flags = task->data[15];
         gPlayerAvatar.preventStep = FALSE;
         FieldEffectActiveListRemove(FLDEFF_FLY_IN);
-        DestroyTask(FindTaskIdByFunc(sub_8089270));
+        DestroyTask(FindTaskIdByFunc(Task_FlyIn));
     }
 }

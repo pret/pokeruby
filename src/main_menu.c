@@ -857,7 +857,7 @@ static void Task_NewGameSpeech7(u8 taskId)
         gTasks[taskId].tFrameCounter++;
         //Play Azurill cry at frame 32
         if (gTasks[taskId].tFrameCounter == 32)
-            PlayCry1(SPECIES_AZURILL, 0);
+            PlayCry_Normal(SPECIES_AZURILL, 0);
     }
 }
 

@@ -561,7 +561,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 2: // wait for string, play cry
         if (gWindowTemplate_Contest_MoveDescription.state == 0)
         {
-            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -632,7 +632,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsSEPlaying())
         {
             m4aMPlayAllStop();
-            PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPostEvoSpecies, 0);
             memcpy(&gPlttBufferUnfaded[0x20], (void *)(EWRAM + 0x9000), 0x60);
             BeginNormalPaletteFade(0x1C, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;
@@ -703,7 +703,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 17: // play cry of the pokemon trying to evolve again, evolution has been stopped
         if (!gPaletteFade.active)
         {
-            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -914,7 +914,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 1:
         if (gUnknown_03004828->window.state == 0)
         {
-            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -986,7 +986,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 11:
         if (IsSEPlaying())
         {
-            PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPostEvoSpecies, 0);
             memcpy(&gPlttBufferUnfaded[0x20], (void *)(EWRAM + 0x9000), 0x60);
             BeginNormalPaletteFade(0x1, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;

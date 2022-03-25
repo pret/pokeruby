@@ -2380,7 +2380,7 @@ void debug_80C6CB8(u8 taskId)
 
     gUnknown_Debug_2038A20->unk9 = 0;
     StopCryAndClearCrySongs();
-    PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
+    PlayCry_Normal(gUnknown_Debug_2038A20->totalPoints, 0);
 }
 
 void debug_80C6EE8(u8 taskId)
@@ -2452,7 +2452,7 @@ void debug_80C6FA8(u8 taskId)
         if (gMain.newKeys & SELECT_BUTTON)
         {
             StopCryAndClearCrySongs();
-            PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
+            PlayCry_Normal(gUnknown_Debug_2038A20->totalPoints, 0);
         }
         gUnknown_Debug_2038A20->random += 4;
         gUnknown_Debug_2038A20->random &= 0x1f;

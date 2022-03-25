@@ -294,7 +294,7 @@ bool8 IsBGMStopped(void)
     return FALSE;
 }
 
-void PlayCry1(u16 species, s8 pan)
+void PlayCry_Normal(u16 species, s8 pan)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 85);
     PlayCryInternal(species, pan, 125, 10, 0);
@@ -302,7 +302,7 @@ void PlayCry1(u16 species, s8 pan)
     RestoreBGMVolumeAfterPokemonCry();
 }
 
-void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority)
+void PlayCry_NormalNoDucking(u16 species, s8 pan, s8 volume, u8 priority)
 {
     PlayCryInternal(species, pan, volume, priority, 0);
 }

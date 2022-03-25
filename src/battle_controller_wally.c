@@ -1452,7 +1452,7 @@ void WallyHandlecmd44(void)
 
 void WallyHandleFaintingCry(void)
 {
-    PlayCry1(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES), 25);
+    PlayCry_Normal(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES), 25);
     WallyBufferExecCompleted();
 }
 

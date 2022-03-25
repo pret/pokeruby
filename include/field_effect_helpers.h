@@ -25,7 +25,7 @@ void UpdateLongGrassFieldEffect(struct Sprite *);
 u8 CreateWarpArrowSprite(void);
 void SetSpriteInvisible(u8);
 void ShowWarpArrowSprite(u8 unk_1B, u8 r6, s16 x, s16 y);
-void sub_8127ED0(u8, u8);
+void SetSurfBlob_BobState(u8, u8);
 void sub_8127F28(u8, u8, s16);
 u8 sub_8128124(u8 id);
 void StartAshFieldEffect(s16, s16, u16, s16);

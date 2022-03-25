@@ -1972,7 +1972,7 @@ static void SetObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
     objectEvent->currentCoords.y = y;
 }
 
-void sub_805C058(struct ObjectEvent *objectEvent, s16 x, s16 y)
+void MoveObjectEventToMapCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
 {
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
@@ -1996,7 +1996,7 @@ void sub_805C0F8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
     {
         x += 7;
         y += 7;
-        sub_805C058(&gObjectEvents[objectEventId], x, y);
+        MoveObjectEventToMapCoords(&gObjectEvents[objectEventId], x, y);
     }
 }
 

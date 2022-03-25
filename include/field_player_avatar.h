@@ -61,7 +61,7 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarExtraStateTransition(u8 a, u8 b);
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
 void sub_8059B88(u8);
-void sub_8059BF4(void);
+void SetPlayerAvatarFieldMove(void);
 void sub_8059C94(u8);
 void sub_8059D08(u8);
 void StartFishing(u8 a);

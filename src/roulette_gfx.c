@@ -1665,13 +1665,13 @@ void sub_811952C(struct Sprite *sprite)
     if (eRoulette->var03_0)
     {
         if (sprite->data[0])
-            PlayCry1(SPECIES_TAILLOW, -63);
+            PlayCry_Normal(SPECIES_TAILLOW, -63);
         else
-            PlayCry1(SPECIES_TAILLOW, 63);
+            PlayCry_Normal(SPECIES_TAILLOW, 63);
     }
     else
     {
-        PlayCry1(SPECIES_SHROOMISH, -63);
+        PlayCry_Normal(SPECIES_SHROOMISH, -63);
     }
 
     val = 2;
@@ -1919,9 +1919,9 @@ void sub_8119BCC(struct Sprite *sprite)
         {
             m4aSongNumStartOrChange(SE_TAILLOW_WING_FLAP);
             if (eRoulette->var38->data[0] == 0)
-                PlayCry1(SPECIES_TAILLOW, 63);
+                PlayCry_Normal(SPECIES_TAILLOW, 63);
             else
-                PlayCry1(SPECIES_TAILLOW, -63);
+                PlayCry_Normal(SPECIES_TAILLOW, -63);
             StartSpriteAnim(sprite, eRoulette->var38->data[0] + 2);
             sprite->data[1] = 45;
             sprite->callback = sub_8119B24;

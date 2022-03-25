@@ -1564,7 +1564,7 @@ void sub_80C3C44(struct Sprite *sprite)
         sprite->data[0]++;
         if (sprite->data[0] == 10)
         {
-            PlayCry1(sprite->data[1], 0);
+            PlayCry_Normal(sprite->data[1], 0);
             sprite->data[1] = 0;
         }
         return;

@@ -647,7 +647,7 @@ static void sub_8046AD0(u8 taskId)
             gTasks[taskId].data[15] = r6 + 1;
         break;
     case 1:
-        PlayCry1(species, r3);
+        PlayCry_Normal(species, r3);
         DestroyTask(taskId);
         break;
     case 2:

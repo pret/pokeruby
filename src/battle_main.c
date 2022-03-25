@@ -3100,7 +3100,7 @@ void sub_8010278(struct Sprite *sprite)
         if (sprite->x2 == 0)
         {
             sprite->callback = sub_80102AC;
-            PlayCry1(sprite->data[2], 25);
+            PlayCry_Normal(sprite->data[2], 25);
         }
     }
 }

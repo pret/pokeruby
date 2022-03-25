@@ -423,7 +423,7 @@ static void Task_StarterChoose3(u8 taskId)
 
 static void Task_StarterChoose4(u8 taskId)
 {
-    PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
+    PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     Menu_DrawStdWindowFrame(2, 14, 27, 19);
     //"Do you choose this POKEMON?"
     Menu_PrintText(gOtherText_DoYouChoosePoke, 3, 15);

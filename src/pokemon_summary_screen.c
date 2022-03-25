@@ -3262,7 +3262,7 @@ static void SummaryScreen_SpritePlayCry(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
 
         if (!GetMonData(&pssData.loadedMon, MON_DATA_IS_EGG))
-            PlayCry1(sprite->data[0], 0);
+            PlayCry_Normal(sprite->data[0], 0);
     }
 }
 

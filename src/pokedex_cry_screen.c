@@ -319,7 +319,7 @@ void CryScreenPlayButton(u16 species)
 
 void PlayCryScreenCry(u16 species)
 {
-    PlayCry2(species, 0, 125, 10);
+    PlayCry_NormalNoDucking(species, 0, 125, 10);
     gPokedexCryScreenPtr->cryState = 1;
 }
 

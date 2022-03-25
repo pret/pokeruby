@@ -2991,7 +2991,7 @@ static void Task_InitPageScreenMultistep(u8 taskId)
             if (gTasks[taskId].data[3] == 0)
             {
                 StopCryAndClearCrySongs();
-                PlayCry2(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, 0x7D, 0xA);
+                PlayCry_NormalNoDucking(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, 0x7D, 0xA);
             }
             else
             {
@@ -3654,7 +3654,7 @@ static void sub_8090750(u8 taskId)
     case 6:
         if (!gPaletteFade.active)
         {
-            PlayCry1(NationalPokedexNumToSpecies(dexNum), 0);
+            PlayCry_Normal(NationalPokedexNumToSpecies(dexNum), 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].data[4] = 0;
             gTasks[taskId].func = sub_8090A3C;

@@ -951,12 +951,12 @@ u32 FldEff_SurfBlob(void)
     return spriteId;
 }
 
-void sub_8127ED0(u8 spriteId, u8 value)
+void SetSurfBlob_BobState(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF) | (value & 0xF);
 }
 
-void sub_8127EFC(u8 spriteId, u8 value)
+void SetSurfBlob_DontSyncAnim(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF0) | ((value & 0xF) << 4);
 }
