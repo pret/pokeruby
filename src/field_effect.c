@@ -269,7 +269,7 @@ bool8 (*const gUnknown_0839F300[])(struct Task *) = {
     EscalatorWarpIn_End
 };
 
-bool8 (*const gUnknown_0839F31C[])(struct Task *, struct ObjectEvent *) = {
+bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *) = {
     WaterfallFieldEffect_Init,
     WaterfallFieldEffect_ShowMon,
     WaterfallFieldEffect_WaitForShowMon,
@@ -1433,7 +1433,7 @@ bool8 FldEff_UseWaterfall(void)
 
 void Task_UseWaterfall(u8 taskId)
 {
-    while (gUnknown_0839F31C[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]));
+    while (sWaterfallFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]));
 }
 
 bool8 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *objectEvent)
