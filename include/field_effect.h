@@ -135,13 +135,13 @@ void FieldMoveShowMonOutdoorsEffect_ShrinkBanner(struct Task *);
 void FieldMoveShowMonOutdoorsEffect_RestoreBg(struct Task *);
 void FieldMoveShowMonOutdoorsEffect_End(struct Task *);
 
-void sub_80884AC(struct Task *);
-void sub_80884E8(struct Task *);
-void sub_8088554(struct Task *);
-void sub_80885A8(struct Task *);
-void sub_80885D8(struct Task *);
-void sub_808860C(struct Task *);
-void sub_808862C(struct Task *);
+void FieldMoveShowMonIndoorsEffect_Init(struct Task *);
+void FieldMoveShowMonIndoorsEffect_LoadGfx(struct Task *);
+void FieldMoveShowMonIndoorsEffect_SlideBannerOn(struct Task *);
+void FieldMoveShowMonIndoorsEffect_WaitForMon(struct Task *);
+void FieldMoveShowMonIndoorsEffect_RestoreBg(struct Task *);
+void FieldMoveShowMonIndoorsEffect_SlideBannerOff(struct Task *);
+void FieldMoveShowMonIndoorsEffect_End(struct Task *);
 
 void sub_8088984(struct Task *);
 void sub_80889E4(struct Task *);
