@@ -53,7 +53,7 @@ static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map
 static const u8 sRegionMapBkgnd_ImageLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
 static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
 
-static const u8 sRegionMapLayout[] = INCBIN_U8("graphics/pokenav/region_map_section_layout.bin");
+#include "data/region_map/region_map_layout.h"
 
 #if ENGLISH
 #include "data/region_map/region_map_entries.h"
