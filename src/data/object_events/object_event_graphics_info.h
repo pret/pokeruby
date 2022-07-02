@@ -1,10 +1,3 @@
-//
-
-//
-
-#ifndef POKERUBY_OBJECT_EVENT_GRAPHICS_INFO_H
-#define POKERUBY_OBJECT_EVENT_GRAPHICS_INFO_H
-
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {
     .tileTag = 0xffff,
     .paletteTag = 0x1100,
@@ -4139,6 +4132,3 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkMay = {
     .images = gObjectEventPicTable_MayNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
-
-
-#endif //POKERUBY_OBJECT_EVENT_GRAPHICS_INFO_H
