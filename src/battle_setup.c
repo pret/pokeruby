@@ -555,10 +555,10 @@ static void StartTheBattle(void)
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
 }
 
-//Initiates battle where Wally catches Ralts
+//Initiates battle where Wally catches Ralts (Spheal in this hack)
 void ScrSpecial_StartWallyTutorialBattle(void)
 {
-    CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
+    CreateMaleMon(&gEnemyParty[0], SPECIES_SPHEAL, 5);
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;

@@ -7027,8 +7027,8 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wally1[] = {
     {
 	.iv = 250,
 	.level = 45,
-	.species = SPECIES_GARDEVOIR,
-        .moves = MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT
+	.species = SPECIES_WALREIN,
+        .moves = MOVE_SURF, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_YAWN
     }
 };
 
@@ -7036,7 +7036,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan1[] = {
     {
 	.iv = 0,
 	.level = 5,
-	.species = SPECIES_TREECKO
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7049,12 +7049,12 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan2[] = {
     {
 	.iv = 50,
 	.level = 18,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_BULBASAUR
     },
     {
 	.iv = 100,
 	.level = 20,
-	.species = SPECIES_GROVYLE
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7062,17 +7062,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan3[] = {
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_IVYSAUR
     },
     {
 	.iv = 150,
-	.level = 31,
-	.species = SPECIES_GROVYLE
+	.level = 32,
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -7080,7 +7080,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan4[] = {
     {
 	.iv = 0,
 	.level = 5,
-	.species = SPECIES_TORCHIC
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7088,7 +7088,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan5[] = {
     {
 	.iv = 50,
 	.level = 18,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_CHARMANDER
     },
     {
 	.iv = 50,
@@ -7098,7 +7098,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan5[] = {
     {
 	.iv = 100,
 	.level = 20,
-	.species = SPECIES_COMBUSKEN
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7106,17 +7106,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan6[] = {
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_CHARMELEON
     },
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 150,
-	.level = 31,
-	.species = SPECIES_COMBUSKEN
+	.level = 32,
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -7124,7 +7124,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan7[] = {
     {
 	.iv = 0,
 	.level = 5,
-	.species = SPECIES_MUDKIP
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7142,7 +7142,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan8[] = {
     {
 	.iv = 100,
 	.level = 20,
-	.species = SPECIES_MARSHTOMP
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7150,17 +7150,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan9[] = {
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 150,
-	.level = 31,
-	.species = SPECIES_MARSHTOMP
+	.level = 32,
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -7168,7 +7168,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May1[] = {
     {
 	.iv = 0,
 	.level = 5,
-	.species = SPECIES_TREECKO
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7176,7 +7176,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May2[] = {
     {
 	.iv = 50,
 	.level = 18,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_CHIKORITA
     },
     {
 	.iv = 50,
@@ -7186,7 +7186,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May2[] = {
     {
 	.iv = 100,
 	.level = 20,
-	.species = SPECIES_GROVYLE
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7194,17 +7194,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May3[] = {
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_BAYLEEF
     },
     {
 	.iv = 150,
-	.level = 31,
-	.species = SPECIES_GROVYLE
+	.level = 32,
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -7212,7 +7212,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May4[] = {
     {
 	.iv = 0,
 	.level = 5,
-	.species = SPECIES_TORCHIC
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7220,7 +7220,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May5[] = {
     {
 	.iv = 50,
 	.level = 18,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_CYNDAQUIL
     },
     {
 	.iv = 50,
@@ -7230,7 +7230,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May5[] = {
     {
 	.iv = 100,
 	.level = 20,
-	.species = SPECIES_COMBUSKEN
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7238,17 +7238,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May6[] = {
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_QUILAVA
     },
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 150,
-	.level = 31,
-	.species = SPECIES_COMBUSKEN
+	.level = 32,
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -7256,7 +7256,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May7[] = {
     {
 	.iv = 0,
 	.level = 5,
-	.species = SPECIES_MUDKIP
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7274,7 +7274,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May8[] = {
     {
 	.iv = 100,
 	.level = 20,
-	.species = SPECIES_MARSHTOMP
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -7282,17 +7282,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May9[] = {
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 100,
 	.level = 29,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 150,
-	.level = 31,
-	.species = SPECIES_MARSHTOMP
+	.level = 32,
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -9107,7 +9107,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Wally2[] = {
     {
 	.iv = 30,
 	.level = 16,
-	.species = SPECIES_RALTS
+	.species = SPECIES_SPHEAL
     }
 };
 
@@ -9139,8 +9139,8 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wally3[] = {
     {
 	.iv = 250,
 	.level = 48,
-	.species = SPECIES_GARDEVOIR,
-        .moves = MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT
+	.species = SPECIES_WALREIN,
+	        .moves = MOVE_SURF, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_YAWN
     }
 };
 
@@ -9172,8 +9172,8 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wally4[] = {
     {
 	.iv = 250,
 	.level = 51,
-	.species = SPECIES_GARDEVOIR,
-        .moves = MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT
+	.species = SPECIES_WALREIN,
+	        .moves = MOVE_SURF, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_YAWN
     }
 };
 
@@ -9205,8 +9205,8 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wally5[] = {
     {
 	.iv = 250,
 	.level = 54,
-	.species = SPECIES_GARDEVOIR,
-        .moves = MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT
+	.species = SPECIES_WALREIN,
+	        .moves = MOVE_SURF, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_YAWN
     }
 };
 
@@ -9238,8 +9238,8 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wally6[] = {
     {
 	.iv = 250,
 	.level = 57,
-	.species = SPECIES_GARDEVOIR,
-        .moves = MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT
+	.species = SPECIES_WALREIN,
+	        .moves = MOVE_SURF, MOVE_ICE_BEAM, MOVE_ROCK_SLIDE, MOVE_YAWN
     }
 };
 
@@ -9252,17 +9252,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan10[] = {
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_VENUSAUR
     },
     {
 	.iv = 200,
 	.level = 34,
-	.species = SPECIES_GROVYLE
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -9275,17 +9275,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan11[] = {
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_CHARMELEON
     },
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 200,
 	.level = 34,
-	.species = SPECIES_COMBUSKEN
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -9298,17 +9298,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan12[] = {
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 200,
 	.level = 34,
-	.species = SPECIES_MARSHTOMP
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -9321,17 +9321,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May10[] = {
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_MEGANIUM
     },
     {
 	.iv = 200,
 	.level = 34,
-	.species = SPECIES_GROVYLE
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -9344,17 +9344,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May11[] = {
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_WAILMER
+	.species = SPECIES_QUILAVA
     },
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 200,
 	.level = 34,
-	.species = SPECIES_COMBUSKEN
+	.species = SPECIES_SEALEO
     }
 };
 
@@ -9367,17 +9367,17 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May12[] = {
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_SHROOMISH
+	.species = SPECIES_GROVYLE
     },
     {
 	.iv = 150,
 	.level = 32,
-	.species = SPECIES_NUMEL
+	.species = SPECIES_COMBUSKEN
     },
     {
 	.iv = 200,
 	.level = 34,
-	.species = SPECIES_MARSHTOMP
+	.species = SPECIES_SEALEO
     }
 };
 
