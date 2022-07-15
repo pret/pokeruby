@@ -7035,7 +7035,7 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wally1[] = {
 const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan1[] = {
     {
 	.iv = 0,
-	.level = 5,
+	.level = 3,
 	.species = SPECIES_SPHEAL
     }
 };
@@ -7079,7 +7079,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan3[] = {
 const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan4[] = {
     {
 	.iv = 0,
-	.level = 5,
+	.level = 3,
 	.species = SPECIES_SPHEAL
     }
 };
@@ -7123,7 +7123,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan6[] = {
 const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan7[] = {
     {
 	.iv = 0,
-	.level = 5,
+	.level = 3,
 	.species = SPECIES_SPHEAL
     }
 };
@@ -7167,7 +7167,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_Brendan9[] = {
 const struct TrainerMonNoItemDefaultMoves gTrainerParty_May1[] = {
     {
 	.iv = 0,
-	.level = 5,
+	.level = 3,
 	.species = SPECIES_SPHEAL
     }
 };
@@ -7211,7 +7211,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May3[] = {
 const struct TrainerMonNoItemDefaultMoves gTrainerParty_May4[] = {
     {
 	.iv = 0,
-	.level = 5,
+	.level = 3,
 	.species = SPECIES_SPHEAL
     }
 };
@@ -7255,7 +7255,7 @@ const struct TrainerMonNoItemDefaultMoves gTrainerParty_May6[] = {
 const struct TrainerMonNoItemDefaultMoves gTrainerParty_May7[] = {
     {
 	.iv = 0,
-	.level = 5,
+	.level = 3,
 	.species = SPECIES_SPHEAL
     }
 };
