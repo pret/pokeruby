@@ -18,7 +18,7 @@ MauvilleCity_Text_165C57:: @ 8165C57
 
 MauvilleCity_Text_165D01:: @ 8165D01
 	.string "WALLY: I'm not pushing it.\p"
-	.string "If I combine forces with RALTS,\n"
+	.string "If I combine forces with SPHEAL,\n"
 	.string "we can beat anyone!$"
 
 MauvilleCity_Text_165D50:: @ 8165D50
