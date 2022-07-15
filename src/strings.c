@@ -145,8 +145,8 @@ const u8 gOtherText_Level3[] = _("Lv. ");
 const u8 gOtherText_IDNumber[] = _("IDNo. /");
 const u8 gOtherText_Name[] = _("NAME /");
 const u8 gOtherText_IDNumber2[] = _("IDNo. /");
-const u8 gOtherText_BirchInTrouble[] = _("{HIGHLIGHT WHITE2}{COLOR DARK_GREY}PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!");
-const u8 gOtherText_DoYouChoosePoke[] = _("{HIGHLIGHT WHITE2}{COLOR DARK_GREY}Do you choose this POKéMON?");
+const u8 gOtherText_BirchInTrouble[] = _("{HIGHLIGHT WHITE2}{COLOR DARK_GREY}PROF. BIRCH is in trouble!\nRelease a SPHEAL and rescue him!");
+const u8 gOtherText_DoYouChoosePoke[] = _("{HIGHLIGHT WHITE2}{COLOR DARK_GREY}Do you choose this SPHEAL?");
 const u8 gOtherText_Poke[] = _("POKéMON");
 
 const u8 gSystemText_SaveErrorExchangeBackup[] = _("Save error.\pPlease exchange the\nbackup memory.");
