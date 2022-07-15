@@ -136,7 +136,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1743D4, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
+	giveitem ITEM_POKE_BALL, 20
 	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E85
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17443D, MSGBOX_DEFAULT
@@ -145,7 +145,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17453C, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
+	giveitem ITEM_POKE_BALL, 20
 	compare VAR_RESULT, 0
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17458C, MSGBOX_DEFAULT
