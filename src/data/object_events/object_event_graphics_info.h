@@ -1165,8 +1165,15 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree = {
     .width = 16,
     .height = 16,
     .paletteSlot = 2,
-    .shadowSize = SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, NULL, gObjectEventImageAnimTable_BerryTree, gObjectEventPicTable_PechaBerryTree,
-      gDummySpriteAffineAnimTable
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = NULL,
+    .anims = gObjectEventImageAnimTable_BerryTree,
+    .images = gObjectEventPicTable_PechaBerryTree,
+    .affineAnims = gDummySpriteAffineAnimTable,
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages = {
