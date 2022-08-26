@@ -459,17 +459,17 @@ void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
+    SetWarpData(&gSaveBlock1.dynamicWarp, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
 }
 
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.dynamicWarp, mapGroup, mapNum, warpId, x, y);
 }
 
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 {
-    gWarpDestination = gSaveBlock1.warp2;
+    gWarpDestination = gSaveBlock1.dynamicWarp;
 }
 
 void sub_8053538(u8 a1)
@@ -553,7 +553,7 @@ void sub_80537CC(u8 a1)
 
 void gpu_sync_bg_hide()
 {
-    gSaveBlock1.warp1 = gSaveBlock1.warp2;
+    gSaveBlock1.warp1 = gSaveBlock1.dynamicWarp;
 }
 
 const struct MapConnection *GetMapConnection(u8 dir)
@@ -1107,7 +1107,7 @@ bool8 Overworld_MapTypeIsIndoors(u8 mapType)
 
 u8 unref_sub_8054260(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum)->regionMapSectionId;
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.dynamicWarp.mapGroup, gSaveBlock1.dynamicWarp.mapNum)->regionMapSectionId;
 }
 
 u8 sav1_map_get_name(void)

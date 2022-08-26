@@ -556,13 +556,13 @@ static void InitializeCursorPosition(void)
         y = gSaveBlock1.warp4.y;
         break;
     case 8:
-        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.dynamicWarp.mapGroup, gSaveBlock1.dynamicWarp.mapNum);
         gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
         gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapLayout->width;
         mapHeight = mapHeader->mapLayout->height;
-        x = gSaveBlock1.warp2.x;
-        y = gSaveBlock1.warp2.y;
+        x = gSaveBlock1.dynamicWarp.x;
+        y = gSaveBlock1.dynamicWarp.y;
         break;
     case 7:
         {
@@ -576,7 +576,7 @@ static void InitializeCursorPosition(void)
             }
             else
             {
-                r4 = &gSaveBlock1.warp2;
+                r4 = &gSaveBlock1.dynamicWarp;
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
                 gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
             }
