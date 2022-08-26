@@ -83,7 +83,7 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_TOWER_LOBBY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
