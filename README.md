@@ -1,6 +1,6 @@
 # Pokémon Ruby and Sapphire [![Build Status][travis-badge]][travis]
 
-This is a disassembly of Pokémon Ruby and Sapphire.
+This is a di kjssassembly of Pokémon Ruby and Sapphire.
 
 It builds the following roms:
 
