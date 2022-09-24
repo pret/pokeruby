@@ -45,3 +45,4 @@ build/
 .projects/ARM/
 *.diff
 porymap.project.cfg
+prefabs.json
