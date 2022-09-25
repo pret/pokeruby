@@ -44,5 +44,5 @@ build/
 .vs/
 .projects/ARM/
 *.diff
-porymap.project.cfg
+porymap.*.cfg
 prefabs.json
