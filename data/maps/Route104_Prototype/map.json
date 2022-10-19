@@ -174,7 +174,7 @@
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104_PROTOTYPE_PRETTY_PETAL_FLOWER_SHOP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

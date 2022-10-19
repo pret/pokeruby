@@ -31,14 +31,14 @@
       "y": 25,
       "elevation": 3,
       "dest_map": "MAP_ROUTE114_FOSSIL_MANIACS_HOUSE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 7,
       "y": 25,
       "elevation": 3,
       "dest_map": "MAP_ROUTE114_FOSSIL_MANIACS_HOUSE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

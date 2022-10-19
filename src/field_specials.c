@@ -1011,7 +1011,7 @@ const u8 *const gUnknown_083F8380[] = {
 void SetDepartmentStoreFloorVar(void)
 {
     u8 deptStoreFloor;
-    switch (gSaveBlock1.warp2.mapNum)
+    switch (gSaveBlock1.dynamicWarp.mapNum)
     {
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
             deptStoreFloor = 0;
