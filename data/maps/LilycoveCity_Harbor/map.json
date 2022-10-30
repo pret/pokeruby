@@ -70,28 +70,28 @@
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 12
+      "dest_warp_id": "12"
     },
     {
       "x": 12,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": 12
+      "dest_warp_id": "12"
     },
     {
       "x": 20,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_EMPTY_MAP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 21,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_EMPTY_MAP",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -1,227 +1,4141 @@
-//
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_BrendanNormal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
 
-//
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_BrendanMachBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
 
-#ifndef POKERUBY_OBJECT_EVENT_GRAPHICS_INFO_H
-#define POKERUBY_OBJECT_EVENT_GRAPHICS_INFO_H
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanAcroBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_AcroBike,
+    .images = gObjectEventPicTable_BrendanAcroBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {0xffff, 0x1100, 0x1102, 512, 16, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BrendanMayNormal, gObjectEventPicTable_BrendanNormal, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_BrendanMachBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanAcroBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_AcroBike, gObjectEventPicTable_BrendanAcroBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing = {0xffff, 0x1100, 0x11ff, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Surfing, gObjectEventPicTable_BrendanSurfing, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFieldMove = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_FieldMove, gObjectEventPicTable_BrendanFieldMove, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_QuintyPlump = {0xffff, 0x110b, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_L, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_QuintyPlump, gObjectEventPicTable_QuintyPlump, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy1 = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LittleBoy1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleGirl1 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LittleGirl1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Boy1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl1 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Girl1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy2 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Boy2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl2 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Girl2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy2 = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LittleBoy2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleGirl2 = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LittleGirl2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy3 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Boy3, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl3 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Girl3, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy4 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Boy4, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatMan = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_FatMan, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman2 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman3 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman3, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan1 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_OldMan1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldWoman1 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_OldWoman1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man2 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman4 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman4, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man3 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man3, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman5 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman5, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cook = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Cook, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman6 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman6, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan2 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_OldMan2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldWoman2 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_OldWoman2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Camper = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Camper, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Picnicker = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Picnicker, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man4 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man4, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman7 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman7, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Youngster = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Youngster, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BugCatcher = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_BugCatcher, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_PsychicM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SchoolKidM = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_SchoolKidM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Maniac = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Maniac, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HexManiac = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_HexManiac, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman8 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Woman8, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerM = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_SwimmerM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerF = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_SwimmerF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlackBelt = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_BlackBelt, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Beauty = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Beauty, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Scientist1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lass = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Lass, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Gentleman = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Gentleman, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sailor = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Sailor, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fisherman = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Fisherman, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RunningTriathleteM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_RunningTriathleteM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RunningTriathleteF = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_RunningTriathleteF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberF = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_TuberF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberM = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_TuberM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hiker = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Hiker, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteM = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_AcroBike, gObjectEventPicTable_CyclingTriathleteM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteF = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_AcroBike, gObjectEventPicTable_CyclingTriathleteF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Nurse, gObjectEventPicTable_Nurse, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_ItemBall, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree = {0xffff, 0x1103, 0x11ff, 256, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, NULL, gObjectEventImageAnimTable_BerryTree, gObjectEventPicTable_PechaBerryTree, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages = {0xffff, 0x1103, 0x11ff, 256, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_BerryTree, gObjectEventPicTable_PechaBerryTree, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeLateStages = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BerryTree, gObjectEventPicTable_PechaBerryTree, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfBirch = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_ProfBirch, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man5 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man5, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man6 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man6, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ReporterM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_ReporterM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ReporterF = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_ReporterF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trader = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan1, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Storyteller = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giddy = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan1 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2 = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MauvilleOldMan2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedNatuDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_UnusedNatuDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMagnemiteDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_UnusedMagnemiteDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedSquirtleDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_UnusedSquirtleDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWooperDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_UnusedWooperDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedPikachuDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_UnusedPikachuDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedPorygon2Doll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_UnusedPorygon2Doll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CuttableTree = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_CuttableTree, gObjectEventPicTable_CuttableTree, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MartEmployee = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MartEmployee, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RooftopSaleWoman = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_RooftopSaleWoman, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Teala = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Teala, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreakableRock = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_BreakableRock, gObjectEventPicTable_BreakableRock, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PushableBoulder = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_PushableBoulder, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrBrineysBoat = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MrBrineysBoat, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayNormal = {0xffff, 0x1110, 0x1102, 512, 16, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BrendanMayNormal, gObjectEventPicTable_MayNormal, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayMachBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MayMachBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayAcroBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_AcroBike, gObjectEventPicTable_MayAcroBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MaySurfing = {0xffff, 0x1110, 0x11ff, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Surfing, gObjectEventPicTable_MaySurfing, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFieldMove = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_FieldMove, gObjectEventPicTable_MayFieldMove, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Truck = {0xffff, 0x110d, 0x11ff, 1152, 48, 48, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_48x48, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_Truck, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MachokeCarryingBox = {0xffff, 0x110e, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MachokeCarryingBox, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MachokeFacingAway = {0xffff, 0x110e, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MachokeFacingAway, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BirchsBag = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BirchsBag, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Poochyena = {0xffff, 0x110f, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Poochyena, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Artist = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Artist, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanNormal = {0xffff, 0x1100, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BrendanMayNormal, gObjectEventPicTable_BrendanNormal, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanMachBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_BrendanMachBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanAcroBike = {0xffff, 0x1100, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_AcroBike, gObjectEventPicTable_BrendanAcroBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanSurfing = {0xffff, 0x1100, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Surfing, gObjectEventPicTable_BrendanSurfing, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanFieldMove = {0xffff, 0x1100, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_FieldMove, gObjectEventPicTable_BrendanFieldMove, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayNormal = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BrendanMayNormal, gObjectEventPicTable_MayNormal, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayMachBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MayMachBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayAcroBike = {0xffff, 0x1110, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_BIKE_TIRE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_AcroBike, gObjectEventPicTable_MayAcroBike, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMaySurfing = {0xffff, 0x1110, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Surfing, gObjectEventPicTable_MaySurfing, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayFieldMove = {0xffff, 0x1110, 0x1102, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_FieldMove, gObjectEventPicTable_MayFieldMove, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cameraman = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Cameraman, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanUnderwater = {0xffff, 0x1115, 0x11ff, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_BrendanUnderwater, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayUnderwater = {0xffff, 0x1115, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, TRUE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MayUnderwater, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MovingBox = {0xffff, 0x1112, 0x11ff, 128, 16, 16, 10, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_MovingBox, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableCar = {0xffff, 0x1113, 0x11ff, 2048, 64, 64, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_64x64, gObjectEventSubspriteTables_64x64, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_CableCar, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist2 = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Scientist2, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man7 = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Man7, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberM = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_AquaMemberM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberF = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_AquaMemberF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagmaMemberM = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MagmaMemberM, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagmaMemberF = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MagmaMemberF, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sidney = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Sidney, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Phoebe = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Phoebe, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Glacia = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Glacia, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Drake = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Drake, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Roxanne = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Roxanne, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Brawly = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Brawly, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wattson = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Wattson, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Flannery = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Flannery, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Norman = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Norman, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Winona = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Winona, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Liza = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Liza, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tate = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Tate, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wallace = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Wallace, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Steven = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Steven, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wally = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Wally, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy3 = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LittleBoy3, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFishing = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Fishing, gObjectEventPicTable_BrendanFishing, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFishing = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Fishing, gObjectEventPicTable_MayFishing, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HotSpringsOldWoman = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_HotSpringsOldWoman, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSTidal = {0xffff, 0x1114, 0x11ff, 1920, 96, 40, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_8x8, gObjectEventSubspriteTables_96x40, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_SSTidal, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SubmarineShadow = {0xffff, 0x111a, 0x11ff, 1408, 88, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_8x8, gObjectEventSubspriteTables_88x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_SubmarineShadow, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PichuDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_PichuDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PikachuDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_PikachuDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MarillDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_MarillDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TogepiDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_TogepiDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyndaquilDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_CyndaquilDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ChikoritaDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_ChikoritaDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TotodileDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_TotodileDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_JigglypuffDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_JigglypuffDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MeowthDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_MeowthDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ClefairyDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_ClefairyDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DittoDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_DittoDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SmoochumDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_SmoochumDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TreeckoDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_TreeckoDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TorchicDoll = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_TorchicDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MudkipDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_MudkipDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DuskullDoll = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_DuskullDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WynautDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_WynautDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaltoyDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BaltoyDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KecleonDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_KecleonDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AzurillDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_AzurillDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SkittyDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_SkittyDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwabluDoll = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_SwabluDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GulpinDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_GulpinDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LotadDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_LotadDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SeedotDoll = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_SeedotDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PikaCushion = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_PikaCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RoundCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_RoundCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KissCushion = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_KissCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ZigzagCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_ZigzagCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SpinCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_SpinCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DiamondCushion = {0xffff, 0x1106, 0x11ff, 128, 16, 16, 5, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_DiamondCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BallCushion = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BallCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GrassCushion = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_GrassCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FireCushion = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_FireCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WaterCushion = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_WaterCushion, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigSnorlaxDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigSnorlaxDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRhydonDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigRhydonDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigLaprasDoll = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigLaprasDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigVenusaurDoll = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigVenusaurDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigCharizardDoll = {0xffff, 0x1104, 0x11ff, 512, 32, 32, 3, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigCharizardDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigBlastoiseDoll = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigBlastoiseDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigWailmerDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigWailmerDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRegirockDoll = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigRegirockDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRegiceDoll = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigRegiceDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRegisteelDoll = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BigRegisteelDoll, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Latias = {0xffff, 0x1104, 0x11ff, 512, 32, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LatiasLatios, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Latios = {0xffff, 0x1103, 0x11ff, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_LatiasLatios, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy5 = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Boy5, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ContestJudge = {0xffff, 0x1105, 0x11ff, 256, 16, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_ContestJudge, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanWatering = {0xffff, 0x1100, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_BrendanWatering, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayWatering = {0xffff, 0x1110, 0x1102, 512, 32, 32, 0, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_MayWatering, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanDecorating = {0xffff, 0x1100, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_BrendanDecorating, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayDecorating = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, TRUE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_MayDecorating, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Archie = {0xffff, 0x1103, 0x11ff, 256, 16, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Archie, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Maxie = {0xffff, 0x1104, 0x11ff, 256, 16, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Maxie, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kyogre1 = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Kyogre, gObjectEventRotScalAnimTable_KyogreGroudon};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Groudon1 = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Groudon, gObjectEventRotScalAnimTable_KyogreGroudon};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_S, TRUE, FALSE, TRACKS_NONE, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Inanimate, gObjectEventPicTable_Fossil, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regirock = {0xffff, 0x1104, 0x11ff, 512, 32, 32, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Regi, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regice = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Regi, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Registeel = {0xffff, 0x1106, 0x11ff, 512, 32, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Regi, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Skitty = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Skitty, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kecleon1 = {0xffff, 0x1105, 0x11ff, 128, 16, 16, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Kecleon, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kyogre2 = {0xffff, 0x1116, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Kyogre, gObjectEventRotScalAnimTable_KyogreGroudon};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Groudon2 = {0xffff, 0x1118, 0x11ff, 512, 32, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Groudon, gObjectEventRotScalAnimTable_KyogreGroudon};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rayquaza = {0xffff, 0x1105, 0x11ff, 512, 32, 32, 4, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_32x32, gObjectEventSubspriteTables_32x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Rayquaza, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Zigzagoon = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Zigzagoon, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Pikachu, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azumarill = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Azumarill, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wingull = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Wingull, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kecleon2 = {0xffff, 0x1105, 0x1102, 128, 16, 16, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Kecleon, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMSwimming = {0xffff, 0x1104, 0x11ff, 128, 16, 16, 3, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_TuberMSwimming, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azurill = {0xffff, 0x1103, 0x11ff, 128, 16, 16, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x16, gObjectEventSubspriteTables_16x16, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Azurill, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mom = {0xffff, 0x1106, 0x11ff, 256, 16, 32, 5, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_Standard, gObjectEventPicTable_Mom, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkBrendan = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BrendanMayNormal, gObjectEventPicTable_BrendanNormal, gDummySpriteAffineAnimTable};
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkMay = {0xffff, 0x1110, 0x1102, 256, 16, 32, 10, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gFieldOamData_16x32, gObjectEventSubspriteTables_16x32, gObjectEventImageAnimTable_BrendanMayNormal, gObjectEventPicTable_MayNormal, gDummySpriteAffineAnimTable};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = TRUE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Surfing,
+    .images = gObjectEventPicTable_BrendanSurfing,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
 
-#endif //POKERUBY_OBJECT_EVENT_GRAPHICS_INFO_H
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFieldMove = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_FieldMove,
+    .images = gObjectEventPicTable_BrendanFieldMove,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_QuintyPlump = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x110b,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_L,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_QuintyPlump,
+    .images = gObjectEventPicTable_QuintyPlump,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LittleBoy1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleGirl1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LittleGirl1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Boy1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Girl1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Boy2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Girl2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LittleBoy2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleGirl2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LittleGirl2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy3 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Boy3,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl3 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Girl3,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy4 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Boy4,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatMan = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_FatMan,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman3 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman3,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_OldMan1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldWoman1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_OldWoman1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman4 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman4,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man3 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man3,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman5 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman5,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cook = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Cook,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman6 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman6,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_OldMan2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldWoman2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_OldWoman2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Camper = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Camper,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Picnicker = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Picnicker,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man4 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man4,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman7 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman7,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Youngster = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Youngster,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BugCatcher = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_BugCatcher,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_PsychicM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SchoolKidM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_SchoolKidM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Maniac = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Maniac,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HexManiac = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_HexManiac,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman8 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Woman8,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_SwimmerM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_SwimmerF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlackBelt = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_BlackBelt,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Beauty = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Beauty,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Scientist1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lass = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Lass,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Gentleman = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Gentleman,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sailor = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Sailor,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fisherman = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Fisherman,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RunningTriathleteM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_RunningTriathleteM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RunningTriathleteF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_RunningTriathleteF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_TuberF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_TuberM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hiker = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Hiker,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_AcroBike,
+    .images = gObjectEventPicTable_CyclingTriathleteM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_AcroBike,
+    .images = gObjectEventPicTable_CyclingTriathleteF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Nurse,
+    .images = gObjectEventPicTable_Nurse,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_ItemBall,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = NULL,
+    .anims = gObjectEventImageAnimTable_BerryTree,
+    .images = gObjectEventPicTable_PechaBerryTree,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_BerryTree,
+    .images = gObjectEventPicTable_PechaBerryTree,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeLateStages = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BerryTree,
+    .images = gObjectEventPicTable_PechaBerryTree,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfBirch = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_ProfBirch,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man5 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man5,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man6 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man6,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ReporterM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_ReporterM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ReporterF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_ReporterF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trader = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan1,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Storyteller = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giddy = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MauvilleOldMan2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedNatuDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_UnusedNatuDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMagnemiteDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_UnusedMagnemiteDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedSquirtleDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_UnusedSquirtleDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWooperDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_UnusedWooperDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedPikachuDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_UnusedPikachuDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedPorygon2Doll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_UnusedPorygon2Doll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CuttableTree = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_CuttableTree,
+    .images = gObjectEventPicTable_CuttableTree,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MartEmployee = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MartEmployee,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RooftopSaleWoman = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_RooftopSaleWoman,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Teala = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Teala,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreakableRock = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_BreakableRock,
+    .images = gObjectEventPicTable_BreakableRock,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PushableBoulder = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_PushableBoulder,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrBrineysBoat = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MrBrineysBoat,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayNormal = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_MayNormal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayMachBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MayMachBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayAcroBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_AcroBike,
+    .images = gObjectEventPicTable_MayAcroBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MaySurfing = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = TRUE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Surfing,
+    .images = gObjectEventPicTable_MaySurfing,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFieldMove = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_FieldMove,
+    .images = gObjectEventPicTable_MayFieldMove,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Truck = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x110d,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 1152,
+    .width = 48,
+    .height = 48,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_48x48,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_Truck,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MachokeCarryingBox = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x110e,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MachokeCarryingBox,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MachokeFacingAway = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x110e,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MachokeFacingAway,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BirchsBag = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BirchsBag,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Poochyena = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x110f,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Poochyena,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Artist = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Artist,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanNormal = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_BrendanNormal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanMachBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_BrendanMachBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanAcroBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_AcroBike,
+    .images = gObjectEventPicTable_BrendanAcroBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanSurfing = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = TRUE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Surfing,
+    .images = gObjectEventPicTable_BrendanSurfing,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanFieldMove = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_FieldMove,
+    .images = gObjectEventPicTable_BrendanFieldMove,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayNormal = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_MayNormal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayMachBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MayMachBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayAcroBike = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_AcroBike,
+    .images = gObjectEventPicTable_MayAcroBike,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMaySurfing = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = TRUE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Surfing,
+    .images = gObjectEventPicTable_MaySurfing,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayFieldMove = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_FieldMove,
+    .images = gObjectEventPicTable_MayFieldMove,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cameraman = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Cameraman,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanUnderwater = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1115,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = TRUE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_BrendanUnderwater,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayUnderwater = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1115,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = TRUE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MayUnderwater,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MovingBox = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1112,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_MovingBox,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableCar = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1113,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 2048,
+    .width = 64,
+    .height = 64,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_64x64,
+    .subspriteTables = gObjectEventSubspriteTables_64x64,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_CableCar,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Scientist2,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man7 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Man7,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_AquaMemberM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_AquaMemberF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagmaMemberM = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MagmaMemberM,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagmaMemberF = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MagmaMemberF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sidney = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Sidney,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Phoebe = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Phoebe,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Glacia = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Glacia,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Drake = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Drake,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Roxanne = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Roxanne,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Brawly = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Brawly,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wattson = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Wattson,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Flannery = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Flannery,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Norman = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Norman,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Winona = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Winona,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Liza = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Liza,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tate = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Tate,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wallace = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Wallace,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Steven = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Steven,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wally = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Wally,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy3 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LittleBoy3,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFishing = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Fishing,
+    .images = gObjectEventPicTable_BrendanFishing,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFishing = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Fishing,
+    .images = gObjectEventPicTable_MayFishing,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HotSpringsOldWoman = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_HotSpringsOldWoman,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSTidal = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1114,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 1920,
+    .width = 96,
+    .height = 40,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_8x8,
+    .subspriteTables = gObjectEventSubspriteTables_96x40,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_SSTidal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SubmarineShadow = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x111a,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 1408,
+    .width = 88,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_8x8,
+    .subspriteTables = gObjectEventSubspriteTables_88x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_SubmarineShadow,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PichuDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_PichuDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PikachuDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_PikachuDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MarillDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_MarillDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TogepiDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_TogepiDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyndaquilDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_CyndaquilDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ChikoritaDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_ChikoritaDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TotodileDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_TotodileDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_JigglypuffDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_JigglypuffDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MeowthDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_MeowthDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ClefairyDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_ClefairyDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DittoDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_DittoDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SmoochumDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_SmoochumDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TreeckoDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_TreeckoDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TorchicDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_TorchicDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MudkipDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_MudkipDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DuskullDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_DuskullDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WynautDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_WynautDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaltoyDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BaltoyDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KecleonDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_KecleonDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AzurillDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_AzurillDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SkittyDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_SkittyDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwabluDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_SwabluDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GulpinDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_GulpinDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LotadDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_LotadDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SeedotDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_SeedotDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PikaCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_PikaCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RoundCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_RoundCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KissCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_KissCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ZigzagCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_ZigzagCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SpinCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_SpinCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DiamondCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_DiamondCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BallCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BallCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GrassCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_GrassCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FireCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_FireCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WaterCushion = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_WaterCushion,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigSnorlaxDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigSnorlaxDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRhydonDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigRhydonDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigLaprasDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigLaprasDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigVenusaurDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigVenusaurDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigCharizardDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigCharizardDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigBlastoiseDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigBlastoiseDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigWailmerDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigWailmerDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRegirockDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigRegirockDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRegiceDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigRegiceDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BigRegisteelDoll = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BigRegisteelDoll,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Latias = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LatiasLatios,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Latios = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_LatiasLatios,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy5 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Boy5,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ContestJudge = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_ContestJudge,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanWatering = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_BrendanWatering,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayWatering = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_MayWatering,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanDecorating = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1100,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_BrendanDecorating,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayDecorating = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_MayDecorating,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Archie = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Archie,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Maxie = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Maxie,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kyogre1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Kyogre,
+    .affineAnims = gObjectEventRotScalAnimTable_KyogreGroudon,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Groudon1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Groudon,
+    .affineAnims = gObjectEventRotScalAnimTable_KyogreGroudon,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Inanimate,
+    .images = gObjectEventPicTable_Fossil,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regirock = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Regi,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regice = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Regi,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Registeel = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Regi,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Skitty = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Skitty,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kecleon1 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Kecleon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kyogre2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1116,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Kyogre,
+    .affineAnims = gObjectEventRotScalAnimTable_KyogreGroudon,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Groudon2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1118,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Groudon,
+    .affineAnims = gObjectEventRotScalAnimTable_KyogreGroudon,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rayquaza = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_32x32,
+    .subspriteTables = gObjectEventSubspriteTables_32x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Rayquaza,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Zigzagoon = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Zigzagoon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Pikachu,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azumarill = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Azumarill,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wingull = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Wingull,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kecleon2 = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1105,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Kecleon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMSwimming = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1104,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_TuberMSwimming,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azurill = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1103,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x16,
+    .subspriteTables = gObjectEventSubspriteTables_16x16,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Azurill,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mom = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1106,
+    .bridgeReflectionPaletteTag = 0x11ff,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 5,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_Standard,
+    .images = gObjectEventPicTable_Mom,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkBrendan = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_BrendanNormal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkMay = {
+    .tileTag = 0xffff,
+    .paletteTag = 0x1110,
+    .bridgeReflectionPaletteTag = 0x1102,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 10,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gFieldOamData_16x32,
+    .subspriteTables = gObjectEventSubspriteTables_16x32,
+    .anims = gObjectEventImageAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_MayNormal,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
