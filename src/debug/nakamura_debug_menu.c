@@ -1201,7 +1201,7 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
     u8 numNeutralFlavors = 0;
     u8 numLowFlavors = 0;
     u8 i;
-    u8 firstNonzeroFlavor, lastNonzeroFlavor, c;
+    u8 firstNonzeroFlavor, lastNonzeroFlavor, tmp;
 
     for (i = 0; i < 6; i++)
     {
@@ -1266,38 +1266,38 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
         }
         if (pkblk[firstNonzeroFlavor] >= pkblk[lastNonzeroFlavor])
         {
-            c = firstNonzeroFlavor;
+            tmp = firstNonzeroFlavor;
         }
         else
         {
-            c = lastNonzeroFlavor;
+            tmp = lastNonzeroFlavor;
         }
 
-        if (c == 0)
+        if (tmp == 0)
         {
             StringCopy(dest, ContestStatsText_PurplePokeBlock);
             return PBLOCK_CLR_PURPLE;
         }
 
-        if (c == 1)
+        if (tmp == 1)
         {
             StringCopy(dest, ContestStatsText_IndigoPokeBlock);
             return PBLOCK_CLR_INDIGO;
         }
 
-        if (c == 2)
+        if (tmp == 2)
         {
             StringCopy(dest, ContestStatsText_BrownPokeBlock);
             return PBLOCK_CLR_BROWN;
         }
 
-        if (c == 3)
+        if (tmp == 3)
         {
             StringCopy(dest, ContestStatsText_LiteBluePokeBlock);
             return PBLOCK_CLR_LITEBLUE;
         }
 
-        if (c == 4)
+        if (tmp == 4)
         {
             StringCopy(dest, ContestStatsText_OlivePokeBlock);
             return PBLOCK_CLR_OLIVE;
