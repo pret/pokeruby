@@ -3792,8 +3792,8 @@ static void sub_8090750(u8 taskId)
 
     switch (gTasks[taskId].data[0])
     {
-    case 0:
     default:
+    case 0:
         if (!gPaletteFade.active)
         {
             gPokedexVBlankCB = gMain.vblankCallback;
@@ -3807,10 +3807,9 @@ static void sub_8090750(u8 taskId)
         LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
         for (i = 0; i < 0x280; i++)
         {
-#ifndef NONMATCHING
-            asm("");
-#endif
-            *(u16 *)(BG_VRAM + 0x7800 + 2 * i) += 0x2000;
+            u16 temp = *(u16 *)(BG_VRAM + 0x7800 + 2 * i);
+            temp += 0x2000;
+            *(u16 *)(BG_VRAM + 0x7800 + 2 * i) = temp;
         }
         PrintFootprint(gTasks[taskId].data[1], 2, 0x3FC);
         ResetPaletteFade();
@@ -5323,11 +5322,10 @@ static void PrintSearchParameterText(u8 taskId)
     u16 j;
 
     Menu_EraseWindowRect(18, 1, 28, 12);
-    for (i = 0, j = *r7; i < 6 && r6[j].title != NULL; i++, j++)
+    for (i = 0, j = *r7; i < 6; i++, j++)
     {
-#ifndef NONMATCHING
-        j += 0;  // Useless statement needed to match
-#endif
+        if (r6[j].title == NULL)
+            break;
         Menu_PrintText(r6[j].title, 18, i * 2 + 1);
     }
     EraseAndPrintSearchTextBox(r6[*r8 + *r7].description);
