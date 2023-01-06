@@ -1193,15 +1193,15 @@ static u8 NakaGenderTest_ForceRerollPokemon(u8 i)
 
 static struct Pokeblock sPokeblock;
 
-#ifdef NONMATCHING
 static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
 {
+    s16 pkblk[6];
     u8 numGoodFlavors = 0;
     u8 numBadFlavors = 0;
     u8 numNeutralFlavors = 0;
+    u8 numLowFlavors = 0;
     u8 i;
-    u8 numLowFlavors;
-    s16 pkblk[6];
+    u8 firstNonzeroFlavor, lastNonzeroFlavor, c;
 
     for (i = 0; i < 6; i++)
     {
@@ -1209,7 +1209,10 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
         if (i != PBLOCK_FEEL - 1)
         {
             if (pkblk[i] > 0)
+            {
+                numLowFlavors |= (1 << i);
                 numGoodFlavors++;
+            }
             if (pkblk[i] < 0)
                 numBadFlavors++;
             if (pkblk[i] == 0)
@@ -1217,31 +1220,7 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
         }
     }
 
-    if (pkblk[0] >= 50)
-    {
-        StringCopy(dest, ContestStatsText_GoldPokeBlock);
-        return PBLOCK_CLR_GOLD;
-    }
-
-    if (pkblk[1] >= 50)
-    {
-        StringCopy(dest, ContestStatsText_GoldPokeBlock);
-        return PBLOCK_CLR_GOLD;
-    }
-
-    if (pkblk[2] >= 50)
-    {
-        StringCopy(dest, ContestStatsText_GoldPokeBlock);
-        return PBLOCK_CLR_GOLD;
-    }
-
-    if (pkblk[3] >= 50)
-    {
-        StringCopy(dest, ContestStatsText_GoldPokeBlock);
-        return PBLOCK_CLR_GOLD;
-    }
-
-    if (pkblk[4] >= 50)
+    if (pkblk[0] >= 50 || pkblk[1] >= 50 || pkblk[2] >= 50 || pkblk[3] >= 50 || pkblk[4] >= 50)
     {
         StringCopy(dest, ContestStatsText_GoldPokeBlock);
         return PBLOCK_CLR_GOLD;
@@ -1253,13 +1232,13 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
         return PBLOCK_CLR_WHITE;
     }
 
-    numLowFlavors = 0;
+    firstNonzeroFlavor = 0;
     for (i = 0; i < 5; i++)
     {
         if (pkblk[i] == 2)
-            numLowFlavors++;
+            firstNonzeroFlavor++;
     }
-    if (numLowFlavors == 3 || numNeutralFlavors == 5 || numBadFlavors == 4)
+    if (firstNonzeroFlavor == 3 || numNeutralFlavors == 5 || numBadFlavors == 4)
     {
         StringCopy(dest, ContestStatsText_BlackPokeBlock);
         return PBLOCK_CLR_BLACK;
@@ -1273,8 +1252,8 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
 
     if (numGoodFlavors == 2 || numBadFlavors == 2)
     {
-        u8 firstNonzeroFlavor = 6;
-        u8 lastNonzeroFlavor = 0;
+        firstNonzeroFlavor = 6;
+        lastNonzeroFlavor = 0;
         for (i = 0; i < 5; i++)
         {
             if (pkblk[i] != 0)
@@ -1286,34 +1265,39 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
             }
         }
         if (pkblk[firstNonzeroFlavor] >= pkblk[lastNonzeroFlavor])
-            // Suspiciously looks like a temp could've been here.
-            lastNonzeroFlavor = firstNonzeroFlavor;
+        {
+            c = firstNonzeroFlavor;
+        }
+        else
+        {
+            c = lastNonzeroFlavor;
+        }
 
-        if (lastNonzeroFlavor == 0)
+        if (c == 0)
         {
             StringCopy(dest, ContestStatsText_PurplePokeBlock);
             return PBLOCK_CLR_PURPLE;
         }
 
-        if (lastNonzeroFlavor == 1)
+        if (c == 1)
         {
             StringCopy(dest, ContestStatsText_IndigoPokeBlock);
             return PBLOCK_CLR_INDIGO;
         }
 
-        if (lastNonzeroFlavor == 2)
+        if (c == 2)
         {
             StringCopy(dest, ContestStatsText_BrownPokeBlock);
             return PBLOCK_CLR_BROWN;
         }
 
-        if (lastNonzeroFlavor == 3)
+        if (c == 3)
         {
             StringCopy(dest, ContestStatsText_LiteBluePokeBlock);
             return PBLOCK_CLR_LITEBLUE;
         }
 
-        if (lastNonzeroFlavor == 4)
+        if (c == 4)
         {
             StringCopy(dest, ContestStatsText_OlivePokeBlock);
             return PBLOCK_CLR_OLIVE;
@@ -1356,358 +1340,6 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
     StringCopy(dest, gOtherText_FiveQuestions);
     return 0; // PBLOCK_CLR_UNKNOWN
 }
-#else
-NAKED
-static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
-{
-    asm("\tpush\t{r4, r5, r6, r7, lr}\n"
-        "\tmov\tr7, r9\n"
-        "\tmov\tr6, r8\n"
-        "\tpush\t{r6, r7}\n"
-        "\tadd\tsp, sp, #0xfffffff0\n"
-        "\tadd\tr6, r0, #0\n"
-        "\tmov\tr9, r1\n"
-        "\tmov\tr7, #0x0\n"
-        "\tmov\tr0, #0x0\n"
-        "\tmov\tr8, r0\n"
-        "\tmov\tr2, #0x0\n"
-        "\tmov\tr5, #0x0\n"
-        "._329:\n"
-        "\tadd\tr4, r5, #1\n"
-        "\tlsl\tr1, r4, #0x18\n"
-        "\tlsr\tr1, r1, #0x18\n"
-        "\tmov\tr0, r9\n"
-        "\tstr\tr2, [sp, #0xc]\n"
-        "\tbl\tGetPokeblockData\n"
-        "\tadd\tr1, r0, #0\n"
-        "\tlsl\tr0, r5, #0x1\n"
-        "\tadd r0, r0, sp\n"
-        "\tstrh\tr1, [r0]\n"
-        "\tldr\tr2, [sp, #0xc]\n"
-        "\tcmp\tr5, #0x5\n"
-        "\tbeq\t._328\t@cond_branch\n"
-        "\tlsl\tr0, r1, #0x10\n"
-        "\tasr\tr1, r0, #0x10\n"
-        "\tcmp\tr1, #0\n"
-        "\tble\t._326\t@cond_branch\n"
-        "\tadd\tr0, r7, #1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr7, r0, #0x18\n"
-        "._326:\n"
-        "\tcmp\tr1, #0\n"
-        "\tbge\t._327\t@cond_branch\n"
-        "\tmov\tr0, r8\n"
-        "\tadd\tr0, r0, #0x1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr0, r0, #0x18\n"
-        "\tmov\tr8, r0\n"
-        "._327:\n"
-        "\tcmp\tr1, #0\n"
-        "\tbne\t._328\t@cond_branch\n"
-        "\tadd\tr0, r2, #1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr2, r0, #0x18\n"
-        "._328:\n"
-        "\tlsl\tr0, r4, #0x18\n"
-        "\tlsr\tr5, r0, #0x18\n"
-        "\tcmp\tr5, #0x5\n"
-        "\tbls\t._329\t@cond_branch\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr1, #0x0\n"
-        "\tldsh\tr0, [r0, r1]\n"
-        "\tcmp\tr0, #0x31\n"
-        "\tbgt\t._333\t@cond_branch\n"
-        "\tmov\tr0, sp\n"
-        "\tldrh\tr0, [r0, #0x2]\n"
-        "\tlsl\tr0, r0, #0x10\n"
-        "\tasr\tr0, r0, #0x10\n"
-        "\tcmp\tr0, #0x31\n"
-        "\tbgt\t._333\t@cond_branch\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr4, #0x4\n"
-        "\tldsh\tr0, [r0, r4]\n"
-        "\tcmp\tr0, #0x31\n"
-        "\tbgt\t._333\t@cond_branch\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr1, #0x6\n"
-        "\tldsh\tr0, [r0, r1]\n"
-        "\tcmp\tr0, #0x31\n"
-        "\tbgt\t._333\t@cond_branch\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr4, #0x8\n"
-        "\tldsh\tr0, [r0, r4]\n"
-        "\tcmp\tr0, #0x31\n"
-        "\tble\t._334\t@cond_branch\n"
-        "._333:\n"
-        "\tldr\tr1, ._336       @ ContestStatsText_GoldPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0xe\n"
-        "\tb\t._400\n"
-        "._337:\n"
-        "\t.align\t2, 0\n"
-        "._336:\n"
-        "\t.word\tContestStatsText_GoldPokeBlock\n"
-        "._334:\n"
-        "\tcmp\tr7, #0x4\n"
-        "\tbne\t._338\t@cond_branch\n"
-        "\tldr\tr1, ._340       @ ContestStatsText_WhitePokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0xd\n"
-        "\tb\t._400\n"
-        "._341:\n"
-        "\t.align\t2, 0\n"
-        "._340:\n"
-        "\t.word\tContestStatsText_WhitePokeBlock\n"
-        "._338:\n"
-        "\tmov\tr3, #0x0\n"
-        "\tmov\tr5, #0x0\n"
-        "._343:\n"
-        "\tlsl\tr0, r5, #0x1\n"
-        "\tadd r0, r0, sp\n"
-        "\tmov\tr1, #0x0\n"
-        "\tldsh\tr0, [r0, r1]\n"
-        "\tcmp\tr0, #0x2\n"
-        "\tbne\t._342\t@cond_branch\n"
-        "\tadd\tr0, r3, #1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr3, r0, #0x18\n"
-        "._342:\n"
-        "\tadd\tr0, r5, #1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr5, r0, #0x18\n"
-        "\tcmp\tr5, #0x4\n"
-        "\tbls\t._343\t@cond_branch\n"
-        "\tcmp\tr3, #0x3\n"
-        "\tbeq\t._345\t@cond_branch\n"
-        "\tcmp\tr2, #0x5\n"
-        "\tbeq\t._345\t@cond_branch\n"
-        "\tmov\tr4, r8\n"
-        "\tcmp\tr4, #0x4\n"
-        "\tbne\t._346\t@cond_branch\n"
-        "._345:\n"
-        "\tldr\tr1, ._348       @ ContestStatsText_BlackPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0xc\n"
-        "\tb\t._400\n"
-        "._349:\n"
-        "\t.align\t2, 0\n"
-        "._348:\n"
-        "\t.word\tContestStatsText_BlackPokeBlock\n"
-        "._346:\n"
-        "\tcmp\tr7, #0x3\n"
-        "\tbne\t._350\t@cond_branch\n"
-        "\tldr\tr1, ._352       @ ContestStatsText_GrayPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0xb\n"
-        "\tb\t._400\n"
-        "._353:\n"
-        "\t.align\t2, 0\n"
-        "._352:\n"
-        "\t.word\tContestStatsText_GrayPokeBlock\n"
-        "._350:\n"
-        "\tcmp\tr7, #0x2\n"
-        "\tbeq\t._354\t@cond_branch\n"
-        "\tmov\tr0, r8\n"
-        "\tcmp\tr0, #0x2\n"
-        "\tbne\t._377\t@cond_branch\n"
-        "._354:\n"
-        "\tmov\tr3, #0x6\n"
-        "\tmov\tr2, #0x0\n"
-        "\tmov\tr5, #0x0\n"
-        "._359:\n"
-        "\tlsl\tr0, r5, #0x1\n"
-        "\tadd r0, r0, sp\n"
-        "\tmov\tr1, #0x0\n"
-        "\tldsh\tr0, [r0, r1]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._358\t@cond_branch\n"
-        "\tcmp\tr3, #0x6\n"
-        "\tbne\t._357\t@cond_branch\n"
-        "\tadd\tr3, r5, #0\n"
-        "\tb\t._358\n"
-        "._357:\n"
-        "\tadd\tr2, r5, #0\n"
-        "._358:\n"
-        "\tadd\tr0, r5, #1\n"
-        "\tlsl\tr0, r0, #0x18\n"
-        "\tlsr\tr5, r0, #0x18\n"
-        "\tcmp\tr5, #0x4\n"
-        "\tbls\t._359\t@cond_branch\n"
-        "\tlsl\tr0, r3, #0x1\n"
-        "\tmov\tr4, sp\n"
-        "\tadd\tr1, r4, r0\n"
-        "\tlsl\tr0, r2, #0x1\n"
-        "\tadd r0, r0, sp\n"
-        "\tmov\tr4, #0x0\n"
-        "\tldsh\tr1, [r1, r4]\n"
-        "\tmov\tr4, #0x0\n"
-        "\tldsh\tr0, [r0, r4]\n"
-        "\tcmp\tr1, r0\n"
-        "\tblt\t._360\t@cond_branch\n"
-        "\tadd\tr2, r3, #0\n"
-        "._360:\n"
-        "\tcmp\tr2, #0\n"
-        "\tbne\t._361\t@cond_branch\n"
-        "\tldr\tr1, ._363       @ ContestStatsText_PurplePokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x6\n"
-        "\tb\t._400\n"
-        "._364:\n"
-        "\t.align\t2, 0\n"
-        "._363:\n"
-        "\t.word\tContestStatsText_PurplePokeBlock\n"
-        "._361:\n"
-        "\tcmp\tr2, #0x1\n"
-        "\tbne\t._365\t@cond_branch\n"
-        "\tldr\tr1, ._367       @ ContestStatsText_IndigoPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x7\n"
-        "\tb\t._400\n"
-        "._368:\n"
-        "\t.align\t2, 0\n"
-        "._367:\n"
-        "\t.word\tContestStatsText_IndigoPokeBlock\n"
-        "._365:\n"
-        "\tcmp\tr2, #0x2\n"
-        "\tbne\t._369\t@cond_branch\n"
-        "\tldr\tr1, ._371       @ ContestStatsText_BrownPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x8\n"
-        "\tb\t._400\n"
-        "._372:\n"
-        "\t.align\t2, 0\n"
-        "._371:\n"
-        "\t.word\tContestStatsText_BrownPokeBlock\n"
-        "._369:\n"
-        "\tcmp\tr2, #0x3\n"
-        "\tbne\t._373\t@cond_branch\n"
-        "\tldr\tr1, ._375       @ ContestStatsText_LiteBluePokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x9\n"
-        "\tb\t._400\n"
-        "._376:\n"
-        "\t.align\t2, 0\n"
-        "._375:\n"
-        "\t.word\tContestStatsText_LiteBluePokeBlock\n"
-        "._373:\n"
-        "\tcmp\tr2, #0x4\n"
-        "\tbne\t._377\t@cond_branch\n"
-        "\tldr\tr1, ._379       @ ContestStatsText_OlivePokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0xa\n"
-        "\tb\t._400\n"
-        "._380:\n"
-        "\t.align\t2, 0\n"
-        "._379:\n"
-        "\t.word\tContestStatsText_OlivePokeBlock\n"
-        "._377:\n"
-        "\tcmp\tr7, #0x1\n"
-        "\tbeq\t._381\t@cond_branch\n"
-        "\tmov\tr0, r8\n"
-        "\tcmp\tr0, #0x1\n"
-        "\tbne\t._399\t@cond_branch\n"
-        "._381:\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr1, #0x0\n"
-        "\tldsh\tr0, [r0, r1]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._383\t@cond_branch\n"
-        "\tldr\tr1, ._385       @ ContestStatsText_RedPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x1\n"
-        "\tb\t._400\n"
-        "._386:\n"
-        "\t.align\t2, 0\n"
-        "._385:\n"
-        "\t.word\tContestStatsText_RedPokeBlock\n"
-        "._383:\n"
-        "\tmov\tr0, sp\n"
-        "\tldrh\tr0, [r0, #0x2]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._387\t@cond_branch\n"
-        "\tldr\tr1, ._389       @ ContestStatsText_BluePokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x2\n"
-        "\tb\t._400\n"
-        "._390:\n"
-        "\t.align\t2, 0\n"
-        "._389:\n"
-        "\t.word\tContestStatsText_BluePokeBlock\n"
-        "._387:\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr4, #0x4\n"
-        "\tldsh\tr0, [r0, r4]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._391\t@cond_branch\n"
-        "\tldr\tr1, ._393       @ ContestStatsText_PinkPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x3\n"
-        "\tb\t._400\n"
-        "._394:\n"
-        "\t.align\t2, 0\n"
-        "._393:\n"
-        "\t.word\tContestStatsText_PinkPokeBlock\n"
-        "._391:\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr1, #0x6\n"
-        "\tldsh\tr0, [r0, r1]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._395\t@cond_branch\n"
-        "\tldr\tr1, ._397       @ ContestStatsText_GreenPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x4\n"
-        "\tb\t._400\n"
-        "._398:\n"
-        "\t.align\t2, 0\n"
-        "._397:\n"
-        "\t.word\tContestStatsText_GreenPokeBlock\n"
-        "._395:\n"
-        "\tmov\tr0, sp\n"
-        "\tmov\tr4, #0x8\n"
-        "\tldsh\tr0, [r0, r4]\n"
-        "\tcmp\tr0, #0\n"
-        "\tbeq\t._399\t@cond_branch\n"
-        "\tldr\tr1, ._401       @ ContestStatsText_YellowPokeBlock\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x5\n"
-        "\tb\t._400\n"
-        "._402:\n"
-        "\t.align\t2, 0\n"
-        "._401:\n"
-        "\t.word\tContestStatsText_YellowPokeBlock\n"
-        "._399:\n"
-        "\tldr\tr1, ._403       @ gOtherText_FiveQuestions\n"
-        "\tadd\tr0, r6, #0\n"
-        "\tbl\tStringCopy\n"
-        "\tmov\tr0, #0x0\n"
-        "._400:\n"
-        "\tadd\tsp, sp, #0x10\n"
-        "\tpop\t{r3, r4}\n"
-        "\tmov\tr8, r3\n"
-        "\tmov\tr9, r4\n"
-        "\tpop\t{r4, r5, r6, r7}\n"
-        "\tpop\t{r1}\n"
-        "\tbx\tr1\n"
-        "._404:\n"
-        "\t.align\t2, 0\n"
-        "._403:\n"
-        "\t.word\tgOtherText_FiveQuestions");
-}
-#endif // NONMATCHING
 
 static void NakaDebug_PrintNum3Chars(u8 * buff, s16 a1)
 {
