@@ -1201,7 +1201,7 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
     u8 numNeutralFlavors = 0;
     u8 numLowFlavors = 0;
     u8 i;
-    u8 firstNonzeroFlavor, lastNonzeroFlavor, biggerFlavor;
+    u8 firstNonzeroFlavor, lastNonzeroFlavor, strongestFlavor;
 
     for (i = 0; i < 6; i++)
     {
@@ -1266,38 +1266,38 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
         }
         if (pkblk[firstNonzeroFlavor] >= pkblk[lastNonzeroFlavor])
         {
-            biggerFlavor = firstNonzeroFlavor;
+            strongestFlavor = firstNonzeroFlavor;
         }
         else
         {
-            biggerFlavor = lastNonzeroFlavor;
+            strongestFlavor = lastNonzeroFlavor;
         }
 
-        if (biggerFlavor == 0)
+        if (strongestFlavor == 0)
         {
             StringCopy(dest, ContestStatsText_PurplePokeBlock);
             return PBLOCK_CLR_PURPLE;
         }
 
-        if (biggerFlavor == 1)
+        if (strongestFlavor == 1)
         {
             StringCopy(dest, ContestStatsText_IndigoPokeBlock);
             return PBLOCK_CLR_INDIGO;
         }
 
-        if (biggerFlavor == 2)
+        if (strongestFlavor == 2)
         {
             StringCopy(dest, ContestStatsText_BrownPokeBlock);
             return PBLOCK_CLR_BROWN;
         }
 
-        if (biggerFlavor == 3)
+        if (strongestFlavor == 3)
         {
             StringCopy(dest, ContestStatsText_LiteBluePokeBlock);
             return PBLOCK_CLR_LITEBLUE;
         }
 
-        if (biggerFlavor == 4)
+        if (strongestFlavor == 4)
         {
             StringCopy(dest, ContestStatsText_OlivePokeBlock);
             return PBLOCK_CLR_OLIVE;
