@@ -756,28 +756,33 @@ void Contest_CreatePlayerMon(u8 partyIndex)
 
 void Contest_InitAllPokemon(u8 contestType, u8 rank)
 {
-    s32 i;
-    u8 opponentsCount = 0;
+    int i, j;
     u8 opponents[ARRAY_COUNT(gContestOpponents) + 1];
+    u8 opponentsCount = 0;
+    u8 uselessVar;
 
     TryPutPlayerLast();
 
     // Find all suitable opponents
-    for (i = 0; i < (s32)ARRAY_COUNT(gContestOpponents); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gContestOpponents); i++)
     {
-        if (rank == gContestOpponents[i].whichRank)
-        {
-            if      (contestType == 0 && gContestOpponents[i].aiPool_Cool)
-                opponents[opponentsCount++] = i;
-            else if (contestType == 1 && gContestOpponents[i].aiPool_Beauty)
-                opponents[opponentsCount++] = i;
-            else if (contestType == 2 && gContestOpponents[i].aiPool_Cute)
-                opponents[opponentsCount++] = i;
-            else if (contestType == 3 && gContestOpponents[i].aiPool_Smart)
-                opponents[opponentsCount++] = i;
-            else if (contestType == 4 && gContestOpponents[i].aiPool_Tough)
-                opponents[opponentsCount++] = i;
-        }
+        uselessVar = 0;
+        if (rank != gContestOpponents[i].whichRank)
+            continue;
+        if (contestType == 0 && gContestOpponents[i].aiPool_Cool)
+            uselessVar++;
+        else if (contestType == 1 && gContestOpponents[i].aiPool_Beauty)
+            uselessVar++;
+        else if (contestType == 2 && gContestOpponents[i].aiPool_Cute)
+            uselessVar++;
+        else if (contestType == 3 && gContestOpponents[i].aiPool_Smart)
+            uselessVar++;
+        else if (contestType == 4 && gContestOpponents[i].aiPool_Tough)
+            uselessVar++;
+        else
+            continue;
+            
+        opponents[opponentsCount++] = i;
     }
     opponents[opponentsCount] = 0xFF;
 
@@ -785,22 +790,11 @@ void Contest_InitAllPokemon(u8 contestType, u8 rank)
     for (i = 0; i < 3; i++)
     {
         u16 rnd = Random() % opponentsCount;
-        s32 j;
-
         gContestMons[i] = gContestOpponents[opponents[rnd]];
         for (j = rnd; opponents[j] != 0xFF; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
     }
-
-#ifndef NONMATCHING
-    // Compiler, please put i in r5. Thanks.
-    asm(""::"r"(i));
-    asm(""::"r"(i));
-    asm(""::"r"(i));
-    asm(""::"r"(i));
-    asm(""::"r"(i));
-#endif
 
     Contest_CreatePlayerMon(gContestMonPartyIndex);
 }
