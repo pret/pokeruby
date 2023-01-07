@@ -232,7 +232,6 @@ void GetDewfordHallPaintingNameIndex(void)
     gSpecialVar_Result = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
 }
 
-
 static bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
 {
     switch (c)
