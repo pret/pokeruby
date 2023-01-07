@@ -1188,10 +1188,6 @@ void sub_81390D0(void)
 {
     u16 r4 = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
 
-#ifndef NONMATCHING
-    asm("":::"r6");
-#endif
-
     switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
@@ -1200,12 +1196,11 @@ void sub_81390D0(void)
         ewram17810[gActiveBattler].unk4 = 1;
         break;
     case 1:
-        if (ewram17810[gActiveBattler].unk0_6 == 0)
-        {
-            sub_80326EC(0);
-            DoMoveAnim(r4);
-            ewram17810[gActiveBattler].unk4 = 2;
-        }
+        if (ewram17810[gActiveBattler].unk0_6)
+            break;
+        sub_80326EC(0);
+        DoMoveAnim(r4);
+        ewram17810[gActiveBattler].unk4 = 2;
         break;
     case 2:
         gAnimScriptCallback();
@@ -1218,13 +1213,13 @@ void sub_81390D0(void)
         }
         break;
     case 3:
-        if (ewram17810[gActiveBattler].unk0_6 == 0)
-        {
-            sub_8031F24();
-            sub_80324BC(gActiveBattler, gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
-            ewram17810[gActiveBattler].unk4 = 0;
-            WallyBufferExecCompleted();
-        }
+        if (ewram17810[gActiveBattler].unk0_6)
+            break;
+        sub_8031F24();
+        r4 = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
+        sub_80324BC(gActiveBattler, r4);
+        ewram17810[gActiveBattler].unk4 = 0;
+        WallyBufferExecCompleted();
         break;
     }
 }
