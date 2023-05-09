@@ -16,16 +16,6 @@
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
-enum
-{
-    CONNECTION_SOUTH = 1,
-    CONNECTION_NORTH,
-    CONNECTION_WEST,
-    CONNECTION_EAST,
-    CONNECTION_DIVE,
-    CONNECTION_EMERGE
-};
-
 typedef void (*TilesetCB)(void);
 
 struct Tileset
