@@ -239,7 +239,7 @@ bool32 CanFish(void)
     }
     else
     {
-        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) && !MapGridIsImpassableAt(x, y))
+        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) && MapGridGetCollisionAt(x, y) == 0)
             return TRUE;
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
             return TRUE;
@@ -326,7 +326,7 @@ void ExitItemfinder(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 taskId)
 {
     int distanceX, distanceY;
     u16 x, y;
@@ -359,10 +359,10 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
         return FALSE;
 }
 
-bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
+bool8 HiddenItemAtPos(const struct MapEvents *events, s16 x, s16 y)
 {
     u8 bgEventCount = events->bgEventCount;
-    struct BgEvent *bgEvent = events->bgEvents;
+    const struct BgEvent *bgEvent = events->bgEvents;
     int i;
 
     for (i = 0; i < bgEventCount; i++)
@@ -378,14 +378,14 @@ bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
     return FALSE;
 }
 
-bool8 sub_80C9688(struct MapConnection *connection, int x, int y)
+bool8 sub_80C9688(const struct MapConnection *connection, int x, int y)
 {
-    struct MapHeader *mapHeader;
+    const struct MapHeader *mapHeader;
     u16 localX, localY;
     u32 localOffset;
     s32 localLength;
 
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
 
     switch (connection->direction)
     {
@@ -441,7 +441,7 @@ void sub_80C9720(u8 taskId)
              || var2 > curY
              || curY >= height)
             {
-                struct MapConnection *conn = sub_8056BA0(curX, curY);
+                const struct MapConnection *conn = GetMapConnectionAtPos(curX, curY);
                 if (conn && sub_80C9688(conn, curX, curY) == TRUE)
                     sub_80C9838(taskId, curX - x, curY - y);
             }

@@ -597,7 +597,7 @@ static u8 SaveCallback2(void)
 
 static void sub_807160C(void)
 {
-    save_serialize_map();
+    SaveMapView();
     saveDialogCallback = SaveDialogCB_DisplayConfirmMessage;
     savingComplete = FALSE;
 }

@@ -110,13 +110,13 @@ void sub_80B4710(u8 taskId)
             sub_80B45B4(taskId, sEscalatorMetatiles_1F_1, 0);
             break;
         case 2:
-            sub_80B45B4(taskId, sEscalatorMetatiles_1F_2, (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            sub_80B45B4(taskId, sEscalatorMetatiles_1F_2, MAPGRID_COLLISION_MASK);
             break;
         case 3:
             sub_80B45B4(taskId, sEscalatorMetatiles_1F_3, 0);
             break;
         case 4:
-            sub_80B45B4(taskId, sEscalatorMetatiles_2F_0, (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+            sub_80B45B4(taskId, sEscalatorMetatiles_2F_0, MAPGRID_COLLISION_MASK);
             break;
         case 5:
             sub_80B45B4(taskId, sEscalatorMetatiles_2F_1, 0);
