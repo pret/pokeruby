@@ -8,6 +8,17 @@
 
 #define FADE_COLOR_WHITE (RGB(31, 31, 31) | 0x8000)
 
+#define PALETTES_BG      0x0000FFFF
+#define PALETTES_OBJECTS 0xFFFF0000
+#define PALETTES_ALL     (PALETTES_BG | PALETTES_OBJECTS)
+
+#define PLTT_ID(n) ((n) * 16)
+#define BG_PLTT_OFFSET 0x000
+#define OBJ_PLTT_OFFSET 0x100
+#define BG_PLTT_ID(n) (BG_PLTT_OFFSET + PLTT_ID(n))
+#define OBJ_PLTT_ID(n) (OBJ_PLTT_OFFSET + PLTT_ID(n))
+#define OBJ_PLTT_ID2(n) (PLTT_ID((n) + 16))
+
 enum
 {
     FAST_FADE_IN_FROM_WHITE,

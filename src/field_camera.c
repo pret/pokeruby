@@ -28,15 +28,15 @@ struct FieldCamera gFieldCamera;
 u16 gTotalCameraPixelOffsetY;
 u16 gTotalCameraPixelOffsetX;
 
-static void RedrawMapSliceNorth(struct FieldCameraOffset*, struct MapLayout*);
-static void RedrawMapSliceSouth(struct FieldCameraOffset*, struct MapLayout*);
-static void RedrawMapSliceEast(struct FieldCameraOffset*, struct MapLayout*);
-static void RedrawMapSliceWest(struct FieldCameraOffset*, struct MapLayout*);
+static void RedrawMapSliceNorth(struct FieldCameraOffset*, const struct MapLayout*);
+static void RedrawMapSliceSouth(struct FieldCameraOffset*, const struct MapLayout*);
+static void RedrawMapSliceEast(struct FieldCameraOffset*, const struct MapLayout*);
+static void RedrawMapSliceWest(struct FieldCameraOffset*, const struct MapLayout*);
 static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset*, s32, s32);
 
-static void DrawWholeMapViewInternal(int x, int y, struct MapLayout*);
-static void DrawMetatileAt(struct MapLayout*, u16, int, int);
-static void DrawMetatile(s32, u16*, u16);
+static void DrawWholeMapViewInternal(int x, int y, const struct MapLayout*);
+static void DrawMetatileAt(const struct MapLayout*, u16, int, int);
+static void DrawMetatile(s32, const u16*, u16);
 static void CameraPanningCB_PanAhead(void);
 
 static void move_tilemap_camera_to_upper_left_corner_(struct FieldCameraOffset *cameraOffset)
@@ -100,7 +100,7 @@ void DrawWholeMapView(void)
     sFieldCameraOffset.copyBGToVRAM = TRUE;
 }
 
-static void DrawWholeMapViewInternal(int x, int y, struct MapLayout *mapLayout)
+static void DrawWholeMapViewInternal(int x, int y, const struct MapLayout *mapLayout)
 {
     u8 i;
     u8 j;
@@ -125,7 +125,7 @@ static void DrawWholeMapViewInternal(int x, int y, struct MapLayout *mapLayout)
 
 static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffset, int x, int y)
 {
-    struct MapLayout *mapLayout = gMapHeader.mapLayout;
+    const struct MapLayout *mapLayout = gMapHeader.mapLayout;
 
     if (x > 0)
         RedrawMapSliceWest(cameraOffset, mapLayout);
@@ -138,7 +138,7 @@ static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffse
     cameraOffset->copyBGToVRAM = TRUE;
 }
 
-static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
+static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -157,7 +157,7 @@ static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, struct M
     }
 }
 
-static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
+static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -172,7 +172,7 @@ static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, struct M
     }
 }
 
-static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
+static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -187,7 +187,7 @@ static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, struct Ma
     }
 }
 
-static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
+static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -226,9 +226,9 @@ void DrawDoorMetatileAt(int x, int y, u16 *arr)
     }
 }
 
-static void DrawMetatileAt(struct MapLayout *mapLayout, u16 offset, int x, int y)
+static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x, int y)
 {
-    u16 *metatiles;
+    const u16 *metatiles;
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
 
     if (metatileId > NUM_METATILES_TOTAL)
@@ -247,7 +247,7 @@ static void DrawMetatileAt(struct MapLayout *mapLayout, u16 offset, int x, int y
     DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * 8, offset);
 }
 
-static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
+static void DrawMetatile(s32 metatileLayerType, const u16 *metatiles, u16 offset)
 {
     switch (metatileLayerType)
     {

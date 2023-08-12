@@ -53,7 +53,7 @@ static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map
 static const u8 sRegionMapBkgnd_ImageLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
 static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
 
-static const u8 sRegionMapLayout[] = INCBIN_U8("graphics/pokenav/region_map_section_layout.bin");
+#include "data/region_map/region_map_layout.h"
 
 #if ENGLISH
 #include "data/region_map/region_map_entries.h"
@@ -556,13 +556,13 @@ static void InitializeCursorPosition(void)
         y = gSaveBlock1.warp4.y;
         break;
     case 8:
-        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.dynamicWarp.mapGroup, gSaveBlock1.dynamicWarp.mapNum);
         gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
         gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapLayout->width;
         mapHeight = mapHeader->mapLayout->height;
-        x = gSaveBlock1.warp2.x;
-        y = gSaveBlock1.warp2.y;
+        x = gSaveBlock1.dynamicWarp.x;
+        y = gSaveBlock1.dynamicWarp.y;
         break;
     case 7:
         {
@@ -576,7 +576,7 @@ static void InitializeCursorPosition(void)
             }
             else
             {
-                r4 = &gSaveBlock1.warp2;
+                r4 = &gSaveBlock1.dynamicWarp;
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
                 gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
             }

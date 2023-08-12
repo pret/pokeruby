@@ -352,8 +352,8 @@ void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 static void mapdata_load_assets_to_gpu_and_full_redraw(void)
 {
     move_tilemap_camera_to_upper_left_corner();
-    copy_map_tileset1_tileset2_to_vram(gMapHeader.mapLayout);
-    apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+    CopyMapTilesetsToVram(gMapHeader.mapLayout);
+    LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
     cur_mapheader_run_tileset_funcs_after_some_cpuset();
 }
@@ -459,17 +459,17 @@ void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
+    SetWarpData(&gSaveBlock1.dynamicWarp, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
 }
 
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.dynamicWarp, mapGroup, mapNum, warpId, x, y);
 }
 
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 {
-    gWarpDestination = gSaveBlock1.warp2;
+    gWarpDestination = gSaveBlock1.dynamicWarp;
 }
 
 void sub_8053538(u8 a1)
@@ -553,7 +553,7 @@ void sub_80537CC(u8 a1)
 
 void gpu_sync_bg_hide()
 {
-    gSaveBlock1.warp1 = gSaveBlock1.warp2;
+    gSaveBlock1.warp1 = gSaveBlock1.dynamicWarp;
 }
 
 const struct MapConnection *GetMapConnection(u8 dir)
@@ -602,7 +602,7 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
     return SetDiveWarp(CONNECTION_DIVE, x, y);
 }
 
-void sub_80538F0(u8 mapGroup, u8 mapNum)
+void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     s32 paletteIndex;
 
@@ -621,9 +621,9 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
-    not_trainer_hill_battle_pyramid();
-    sub_8056D38(gMapHeader.mapLayout);
-    apply_map_tileset2_palette(gMapHeader.mapLayout);
+    InitMap();
+    CopySecondaryTilesetToVram(gMapHeader.mapLayout);
+    LoadSecondaryTilesetPalette(gMapHeader.mapLayout);
 
     for (paletteIndex = 6; paletteIndex < 12; paletteIndex++)
         ApplyWeatherGammaShiftToPal(paletteIndex);
@@ -661,11 +661,11 @@ void sub_8053994(u32 a1)
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
-    not_trainer_hill_battle_pyramid();
+    InitMap();
     if (a1 != 1 && v3)
     {
         UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
-        sub_80BBCCC(1);
+        InitSecretBaseAppearance(TRUE);
     }
 }
 
@@ -1107,7 +1107,7 @@ bool8 Overworld_MapTypeIsIndoors(u8 mapType)
 
 u8 unref_sub_8054260(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum)->regionMapSectionId;
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.dynamicWarp.mapGroup, gSaveBlock1.dynamicWarp.mapNum)->regionMapSectionId;
 }
 
 u8 sav1_map_get_name(void)
@@ -1476,7 +1476,7 @@ void CB2_ContinueSavedGame(void)
     UnfreezeObjectEvents();
     DoTimeBasedEvents();
     sub_805308C();
-    sub_8055FC0();
+    InitMapFromSavedGame();
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
@@ -1570,15 +1570,15 @@ static bool32 sub_805483C(u8 *state)
         (*state)++;
         break;
     case 6:
-        sub_8056D28(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        sub_8056D38(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
-        apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+        LoadMapTilesetPalettes(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 9:
@@ -1636,15 +1636,15 @@ bool32 sub_805493C(u8 *state, u32 a2)
         (*state)++;
         break;
     case 6:
-        sub_8056D28(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        sub_8056D38(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
-        apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+        LoadMapTilesetPalettes(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 9:
@@ -1726,15 +1726,15 @@ bool32 sub_8054A9C(u8 *state)
         (*state)++;
         break;
     case 5:
-        sub_8056D28(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 6:
-        sub_8056D38(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+        LoadMapTilesetPalettes(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
@@ -1848,7 +1848,7 @@ void mli4_mapscripts_and_other(void)
     gTotalCameraPixelOffsetX = 0;
     gTotalCameraPixelOffsetY = 0;
     ResetObjectEvents();
-    sav1_camera_get_focus_coords(&x, &y);
+    GetCameraFocusCoords(&x, &y);
     initialPlayerAvatarState = GetInitialPlayerAvatarState();
     InitPlayerAvatar(x, y, initialPlayerAvatarState->direction, gSaveBlock2.playerGender);
     SetPlayerAvatarTransitionFlags(initialPlayerAvatarState->transitionFlags);
@@ -1883,8 +1883,8 @@ void sub_8054E7C(void)
 void sub_8054E98(void)
 {
     u16 x, y;
-    sav1_camera_get_focus_coords(&x, &y);
-    sub_8056C50(x + gUnknown_03004860, y);
+    GetCameraFocusCoords(&x, &y);
+    SetCameraFocusCoords(x + gUnknown_03004860, y);
 }
 
 void sub_8054EC8(void)
@@ -1892,7 +1892,7 @@ void sub_8054EC8(void)
     u16 i;
     u16 x, y;
 
-    sav1_camera_get_focus_coords(&x, &y);
+    GetCameraFocusCoords(&x, &y);
     x -= gUnknown_03004860;
 
     for (i = 0; i < gFieldLinkPlayerCount; i++)
@@ -2312,7 +2312,7 @@ bool32 sub_8055630(struct UnkStruct_8054FF8 *a1)
         return FALSE;
 }
 
-u8 *sub_8055648(struct UnkStruct_8054FF8 *a1)
+const u8 *sub_8055648(struct UnkStruct_8054FF8 *a1)
 {
     if (a1->c != 2)
         return 0;
@@ -2720,7 +2720,7 @@ static u8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 a2, s16 x, s16 y)
             }
         }
     }
-    return MapGridIsImpassableAt(x, y);
+    return MapGridGetCollisionAt(x, y);
 }
 
 static void CreateLinkPlayerSprite(u8 linkPlayerId)

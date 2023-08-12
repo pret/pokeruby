@@ -17,14 +17,14 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_CAVE_OF_ORIGIN_B1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_CAVE_OF_ORIGIN_B3F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

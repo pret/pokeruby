@@ -252,6 +252,9 @@
 #define TRACKS_FOOT 1
 #define TRACKS_BIKE_TIRE 2
 
+#define OBJ_KIND_NORMAL 0
+#define OBJ_KIND_CLONE  255 // Exclusive to FRLG
+
 #define OBJ_EVENT_ID_PLAYER 0xFF
 #define OBJ_EVENT_ID_CAMERA 0x7F
 

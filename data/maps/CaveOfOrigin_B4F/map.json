@@ -31,7 +31,7 @@
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_CAVE_OF_ORIGIN_B3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

@@ -1909,7 +1909,7 @@ bool8 ScrCmd_setmetatile(struct ScriptContext *ctx)
     if (!impassable)
         MapGridSetMetatileIdAt(x, y, metatileId);
     else
-        MapGridSetMetatileIdAt(x, y, metatileId | (COLLISION_DIR_ALL << METATILE_COLLISION_SHIFT));
+        MapGridSetMetatileIdAt(x, y, metatileId | MAPGRID_COLLISION_MASK);
     return FALSE;
 }
 

@@ -2089,7 +2089,7 @@ void sub_80FF1EC(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
         for (j=0; j<decWidth; j++)
         {
             x = mapX + j;
-            behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decIdx].tiles[i * decWidth + j]);
+            behavior = GetMetatileAttributesById(0x200 + gDecorations[decIdx].tiles[i * decWidth + j]);
             if (MetatileBehavior_IsSecretBaseImpassable(behavior) == TRUE || (gDecorations[decIdx].permission != DECORPERM_PASS_FLOOR && (behavior >> 12) != 0))
                 collision = 0xc00; // impassable collision
             else
@@ -2426,7 +2426,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    layerType = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    layerType = GetMetatileAttributesById(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
                     if (!sub_80FFBDC(behaviorAt, decoration))
                     {
                         return FALSE;
@@ -2451,7 +2451,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    layerType = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    layerType = GetMetatileAttributesById(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
                     if (!MetatileBehavior_IsNormal(behaviorAt) && !sub_80FFB6C(behaviorAt, layerType))
                     {
                         return FALSE;
@@ -2471,7 +2471,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                layerType = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
+                layerType = GetMetatileAttributesById(0x200 + decoration->tiles[j]) & 0xf000;
                 if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 {
                     return FALSE;
