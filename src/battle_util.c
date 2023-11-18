@@ -2100,7 +2100,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] += 0x40;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2122,7 +2122,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] += 0x40;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2139,7 +2139,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x42;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2155,7 +2155,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x42;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2172,7 +2172,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x45;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2188,7 +2188,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x45;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2205,7 +2205,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x43;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2221,7 +2221,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x43;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
-			gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+			gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
 			effect++;
 		    }
 		}
@@ -2383,7 +2383,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 gBattleStruct->scriptingActive = gBattlerTarget;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
-                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+                gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
                 effect++;
             }
             break;
@@ -2398,7 +2398,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 gBattleStruct->scriptingActive = gBattlerAttacker;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
-                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+                gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
                 effect++;
             }
             break;
