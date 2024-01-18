@@ -722,14 +722,6 @@ const u8 gBattleAnimSpriteSheet_257[] = INCBIN_U8("graphics/battle_anims/sprites
 const u8 gBattleAnimSpritePalette_257[] = INCBIN_U8("graphics/battle_anims/sprites/257.gbapal.lz");
 
 #include "graphics/pokemon.h"
-
-const u8 gMonFrontPic_UnownExclamationMark[] = INCBIN_U8("graphics/pokemon/unown/front_exclamation_mark.4bpp.lz");
-const u8 gMonBackPic_UnownExclamationMark[] = INCBIN_U8("graphics/pokemon/unown/back_exclamation_mark.4bpp.lz");
-const u8 gMonIcon_UnownExclamationMark[] = INCBIN_U8("graphics/pokemon/unown/icon_exclamation_mark.4bpp");
-const u8 gMonFrontPic_UnownQuestionMark[] = INCBIN_U8("graphics/pokemon/unown/front_question_mark.4bpp.lz");
-const u8 gMonBackPic_UnownQuestionMark[] = INCBIN_U8("graphics/pokemon/unown/back_question_mark.4bpp.lz");
-const u8 gMonIcon_UnownQuestionMark[] = INCBIN_U8("graphics/pokemon/unown/icon_question_mark.4bpp");
-
 #include "graphics/trainers.h"
 
 const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/icon.4bpp");
