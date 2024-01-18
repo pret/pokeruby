@@ -86,6 +86,10 @@
 
 // gTileset_Facility
 #define METATILE_Facility_DataPad                       0x3E4
+#define METATILE_Facility_DoorIndent_Locked             0x234
+#define METATILE_Facility_DoorIndent_Unlocked           0x21A
+#define METATILE_Facility_IntactDoor_Bottom_Locked      0x233
+#define METATILE_Facility_IntactDoor_Bottom_Unlocked    0x22B
 #define METATILE_Facility_NewMauvilleDoor_Closed_Tile0  0x314
 #define METATILE_Facility_NewMauvilleDoor_Closed_Tile1  0x315
 #define METATILE_Facility_NewMauvilleDoor_Closed_Tile2  0x316
@@ -336,11 +340,5 @@
 // gTileset_Underwater
 #define METATILE_Underwater_FloorShadow  0x228
 #define METATILE_Underwater_RockWall     0x21E
-
-// Other
-#define METATILE_InsideShip_DoorIndent0         0x234
-#define METATILE_InsideShip_DoorIndent1         0x21A
-#define METATILE_InsideShip_InTactDoor0_Bottom  0x233
-#define METATILE_InsideShip_InTactDoor1_Bottom  0x22B
 
 #endif // GUARD_METATILE_LABELS_H

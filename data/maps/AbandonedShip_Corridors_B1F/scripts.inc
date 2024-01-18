@@ -1,55 +1,55 @@
-AbandonedShip_Corridors_B1F_MapScripts:: @ 815E98F
-	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_Corridors_B1F_MapScript1_15E99A
-	map_script MAP_SCRIPT_ON_LOAD, AbandonedShip_Corridors_B1F_MapScript1_15E9A3
+AbandonedShip_Corridors_B1F_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_Corridors_B1F_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, AbandonedShip_Corridors_B1F_OnLoad
 	.byte 0
 
-AbandonedShip_Corridors_B1F_MapScript1_15E99A:: @ 815E99A
+AbandonedShip_Corridors_B1F_OnResume::
 	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 255, 5, 4
 	end
 
-AbandonedShip_Corridors_B1F_MapScript1_15E9A3:: @ 815E9A3
-	call_if_unset FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15E9B6
-	call_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15E9C0
+AbandonedShip_Corridors_B1F_OnLoad::
+	call_if_unset FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom
+	call_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_15E9B6:: @ 815E9B6
-	setmetatile 11, 4, METATILE_InsideShip_InTactDoor0_Bottom, 1
+AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom::
+	setmetatile 11, 4, METATILE_Facility_IntactDoor_Bottom_Locked, TRUE
 	return
 
-AbandonedShip_Corridors_B1F_EventScript_15E9C0:: @ 815E9C0
-	setmetatile 11, 4, METATILE_InsideShip_InTactDoor1_Bottom, 1
+AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom::
+	setmetatile 11, 4, METATILE_Facility_IntactDoor_Bottom_Unlocked, TRUE
 	return
 
-AbandonedShip_Corridors_B1F_EventScript_15E9CA:: @ 815E9CA
-	msgbox AbandonedShip_Corridors_B1F_Text_19864A, MSGBOX_NPC
+AbandonedShip_Corridors_B1F_EventScript_TuberM::
+	msgbox AbandonedShip_Corridors_B1F_Text_YayItsAShip, MSGBOX_NPC
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
+AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor::
 	lockall
-	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15EA14
+	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked
 	checkitem ITEM_STORAGE_KEY, 1
 	compare VAR_RESULT, 0
-	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
-	msgbox AbandonedShip_Corridors_B1F_Text_198692, MSGBOX_DEFAULT
+	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked
+	msgbox AbandonedShip_Corridors_B1F_Text_InsertedStorageKey, MSGBOX_DEFAULT
 	playse SE_PIN
 	removeitem ITEM_STORAGE_KEY, 1
 	setflag FLAG_USED_STORAGE_KEY
-	call AbandonedShip_Corridors_B1F_EventScript_15E9C0
+	call AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom
 	special DrawWholeMapView
 	releaseall
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_15EA0A:: @ 815EA0A
-	msgbox AbandonedShip_Corridors_B1F_Text_19865C, MSGBOX_DEFAULT
+AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked::
+	msgbox AbandonedShip_Corridors_B1F_Text_DoorIsLocked, MSGBOX_DEFAULT
 	releaseall
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_15EA14:: @ 815EA14
-	msgbox AbandonedShip_Corridors_B1F_Text_1986EC, MSGBOX_DEFAULT
+AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked::
+	msgbox AbandonedShip_Text_TheDoorIsOpen, MSGBOX_DEFAULT
 	releaseall
 	end
 
-AbandonedShip_Corridors_B1F_EventScript_15EA1E:: @ 815EA1E
-	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_19856F, AbandonedShip_Corridors_B1F_Text_1985C5
-	msgbox AbandonedShip_Corridors_B1F_Text_1985D7, MSGBOX_AUTOCLOSE
+AbandonedShip_Corridors_B1F_EventScript_Duncan::
+	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_DuncanIntro, AbandonedShip_Corridors_B1F_Text_DuncanDefeat
+	msgbox AbandonedShip_Corridors_B1F_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE
 	end
