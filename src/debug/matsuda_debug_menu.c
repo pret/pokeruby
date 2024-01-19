@@ -294,7 +294,7 @@ static void sub_80A9FE4(void)
 {
     u8 ptr[] = _("{HIGHLIGHT WHITE2} ");
     DmaFill32Large(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
-    sub_80034D4((void *)VRAM, ptr);
+    RenderTextHandleBold((void *)VRAM, ptr);
     LoadFontDefaultPalette(&gWindowTemplate_81E6C3C);
 }
 
@@ -906,7 +906,7 @@ void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
     {
         str2[0] = string[i];
         str2[1] = EOS;
-        sub_80034D4(sp0, str2);
+        RenderTextHandleBold(sp0, str2);
         DmaCopy32Defvars(3, sp20, (void *)(VRAM + 0x18000 - (d + 1) * 256 + i * 32), sizeof(sp0));
     }
 

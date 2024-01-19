@@ -352,7 +352,7 @@ u8 *const gUnknown_0820A85C[2] =
     OBJ_VRAM0 + 32 * 50,
 };
 
-const u8 gUnknown_0820A864[] = _("{COLOR DARK_GREY}{HIGHLIGHT RED}              /");
+const u8 sEmptyWhiteText_GrayHighlight[] = _("{COLOR DARK_GREY}{HIGHLIGHT RED}              /");
 
 u8 *const gUnknown_0820A87C[6] =
 {
@@ -435,7 +435,7 @@ extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 #define MACRO1(n) ((n) - (n) / 8 * 8) + 64 * ((n) / 8)
 
 static void sub_8043D5C(struct Sprite *);
-static const void *sub_8043CDC(u8);
+static const void *GetHealthboxElementGfxPtr(u8);
 /*static*/ void sub_8044210(u8, s16, u8);
 /*static*/ void draw_status_ailment_maybe(u8);
 extern void sub_8045180(struct Sprite *);
@@ -603,7 +603,7 @@ u8 battle_make_oam_normal_battle(u8 a)
     SetSubspriteTables(sprite, &gSubspriteTables_820A684[GetBattlerSide(a)]);
     sprite->subspriteMode = 2;
     sprite->oam.priority = 1;
-    CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + sprite->oam.tileNum * 32, 64);
+    CpuCopy32(GetHealthboxElementGfxPtr(1), OBJ_VRAM0 + sprite->oam.tileNum * 32, 64);
 
     gSprites[spriteId1].data[5] = spriteId3;
     gSprites[spriteId1].data[6] = a;
@@ -630,7 +630,7 @@ u8 battle_make_oam_safari_battle(void)
     return spriteId1;
 }
 
-static const void *sub_8043CDC(u8 a)
+static const void *GetHealthboxElementGfxPtr(u8 a)
 {
     return gHealthboxElementsGfxTable[a];
 }
@@ -826,7 +826,7 @@ void sub_8043F44(u8 a)
     *(ptr++) = EXT_CTRL_CODE_CLEAR_TO;
     *(ptr++) = 15;
     *(ptr++) = EOS;
-    sub_80034D4(eBattleInterfaceGfxBuffer, str);
+    RenderTextHandleBold(eBattleInterfaceGfxBuffer, str);
 
     two = 2;
     for (i = 0; i < two; i++)
@@ -843,7 +843,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     u8 r8;
 
     // TODO: make this a local variable
-    memcpy(str, gUnknown_0820A864, sizeof(str));
+    memcpy(str, sEmptyWhiteText_GrayHighlight, sizeof(str));
     foo = gSprites[a].data[6];
 
     if (IsDoubleBattle() == TRUE || GetBattlerSide(foo) == 1)
@@ -875,7 +875,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
             r8 = 2;
             ptr = sub_8003504(ptr, b, 15, 1);
         }
-        sub_80034D4(eBattleInterfaceGfxBuffer, str);
+        RenderTextHandleBold(eBattleInterfaceGfxBuffer, str);
         //asm(""::"r"(a));
         //_080441B6
         for (i = 0; i < r8; i++)  // _080440BC
@@ -919,74 +919,72 @@ void sub_80440EC(u8 a, s16 b, u8 c)
         sub_8003504(ptr, b, 0xF, 1);
         if (GetBattlerSide(r4) == 0)
         {
-            CpuCopy32(sub_8043CDC(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
+            CpuCopy32(GetHealthboxElementGfxPtr(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
         }
     }
     r4 = gSprites[a].data[5];
-    sub_80034D4(eBattleInterfaceGfxBuffer, str);
+    RenderTextHandleBold(eBattleInterfaceGfxBuffer, str);
     for (i = 0; i < r10; i++)
     {
         CpuCopy32((void *)(&eBattleInterfaceGfxBuffer[i * 64 + 32]), r7[i] + gSprites[r4].oam.tileNum * 32, 32);
     }
 }
 
-void sub_8044338(u8 a, struct Pokemon *pkmn)
+void PrintSafariMonInfo(u8 a, struct Pokemon *pkmn)
 {
     u8 text[20];
-    s32 j, spriteTileNum;
+    s32 j;
+    u8* spriteTileNum;
     u8 *barFontGfx;
     u8 i, var, nature, healthBarSpriteId;
 
     // TODO: make this a local variable
-    memcpy(text, gUnknown_0820A864, sizeof(text));
+    memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(text));
     barFontGfx = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
     var = 5;
     nature = GetNature(pkmn);
     StringCopy(text + 6, gNatureNames[nature]);
-    sub_80034D4(barFontGfx, text);
+    RenderTextHandleBold(barFontGfx, text);
 
-    for (j = 6, i = 0; i < var; i++, j++)  //_080443AA
+    for (j = 6, i = 0; i < var; i++, j++)
     {
         u8 elementId;
 
-        if ((text[j] >= 0x37 && text[j] <= 0x4A) || (text[j] >= 0x87 && text[j] <= 0x9A))
-            elementId = 0x2C;
-        //_080443DC
-        else if ((text[j] >= 0x4B && text[j] <= 0x4F) || (text[j] >= 0x9B && text[j] <= 0x9F))
-            elementId = 0x2D;
+        if ((text[j] >= 55 && text[j] <= 74) || (text[j] >= 135 && text[j] <= 154))
+            elementId = 44;
+        else if ((text[j] >= 75 && text[j] <= 79) || (text[j] >= 155 && text[j] <= 159))
+            elementId = 45;
         else
-            elementId = 0x2B;
+            elementId = 43;
 
-        CpuCopy32(sub_8043CDC(elementId), barFontGfx + i * 64, 32);
+        CpuCopy32(GetHealthboxElementGfxPtr(elementId), &barFontGfx[i * 64], 0x20);
     }
-    //j = 1;
-    //sp18 = a * 16;
+
     for (j = 1; j < var + 1; j++)
     {
-        spriteTileNum = (gSprites[a].oam.tileNum + MACRO1(j)) * 32;
-        CpuCopy32(barFontGfx, (u8 *)(OBJ_VRAM0) + spriteTileNum, 32);
+        spriteTileNum = (gSprites[a].oam.tileNum + MACRO1(j)) * TILE_SIZE_4BPP + (void *)OBJ_VRAM0;
+        CpuCopy32(barFontGfx, spriteTileNum, 32);
         barFontGfx += 32;
 
-        spriteTileNum = (8 + gSprites[a].oam.tileNum + MACRO1(j)) * 32;
-        CpuCopy32(barFontGfx, (u8 *)(OBJ_VRAM0) + spriteTileNum, 32);
+        spriteTileNum = (8 + gSprites[a].oam.tileNum + MACRO1(j)) * TILE_SIZE_4BPP + (void *)OBJ_VRAM0;
+        CpuCopy32(barFontGfx, spriteTileNum, 32);
         barFontGfx += 32;
     }
-    //_08044486
+
     healthBarSpriteId = gSprites[a].data[5];
     ConvertIntToDecimalStringN(text + 6, gBattleStruct->safariCatchFactor, 1, 2);
     ConvertIntToDecimalStringN(text + 9, gBattleStruct->safariFleeRate, 1, 2);
     text[5] = CHAR_SPACE;
     text[8] = CHAR_SLASH;
-    sub_80034D4(eBattleInterfaceGfxBuffer, text);
+    RenderTextHandleBold(eBattleInterfaceGfxBuffer, text);
 
-    j = healthBarSpriteId; // Needed to match for some reason
     for (j = 0; j < 5; j++)
     {
-        if (j <= 1)
+        if (j < 2)
         {
             CpuCopy32(
                 &eBattleInterfaceGfxBuffer[j * 64 + 32],
-                (u8 *)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * 32,
+                 ((gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * TILE_SIZE_4BPP) + (void*)(OBJ_VRAM0),
                 32
             );
         }
@@ -994,7 +992,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
         {
             CpuCopy32(
                 &eBattleInterfaceGfxBuffer[j * 64 + 32],
-                (u8 *)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthBarSpriteId].oam.tileNum) * 32,
+                (void*)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 8 + j - 2) * TILE_SIZE_4BPP, // Must be written as "8 + j - 2" to match
                 32
             );
         }
@@ -1042,7 +1040,7 @@ void sub_804454C(void)
                 {
                     draw_status_ailment_maybe(gHealthboxSpriteIds[i]);
                     sub_8045A5C(gHealthboxSpriteIds[i], &gPlayerParty[gBattlerPartyIndexes[i]], 5);
-                    CpuCopy32(sub_8043CDC(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * 32, 32);
+                    CpuCopy32(GetHealthboxElementGfxPtr(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * 32, 32);
                 }
             }
             else
@@ -1051,7 +1049,7 @@ void sub_804454C(void)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     {
-                        sub_8044338(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
+                        PrintSafariMonInfo(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
                     }
                     else
                     {
@@ -2139,7 +2137,7 @@ void sub_8045180(struct Sprite *sprite)
     ptr[2] = 0x37;
     ptr[3] = EOS;
     ptr = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
-    sub_80034D4(ptr, gDisplayedStringBattle);
+    RenderTextHandleBold(ptr, gDisplayedStringBattle);
 
     i = 0;
     _7 = 7;
@@ -2165,7 +2163,7 @@ void sub_8045180(struct Sprite *sprite)
                 else
                     r0 = 0x2B;
 
-                CpuCopy32(sub_8043CDC(r0), ptr + 0x40 * i, 32);
+                CpuCopy32(GetHealthboxElementGfxPtr(r0), ptr + 0x40 * i, 32);
                 i++;
                 p++;
             }
@@ -2173,7 +2171,7 @@ void sub_8045180(struct Sprite *sprite)
     }
 
     for (; i < _7; i++)
-        CpuCopy32(sub_8043CDC(0x2B), ptr + 64 * i, 32);
+        CpuCopy32(GetHealthboxElementGfxPtr(0x2B), ptr + 64 * i, 32);
 
     if (GetBattlerSide(gSprites[a].data[6]) == 0 && !IsDoubleBattle())
     {
@@ -2229,7 +2227,7 @@ static void sub_8045458(u8 a, u8 b)
         {
             r4 = gSprites[a].data[5];
             if (b != 0)
-                CpuCopy32(sub_8043CDC(0x46), OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
+                CpuCopy32(GetHealthboxElementGfxPtr(0x46), OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
             else
                 CpuFill32(0, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
         }
@@ -2264,38 +2262,38 @@ static void sub_8045458(u8 a, u8 b)
     }
     if (r4 & 7)
     {
-        r6 = sub_8043CDC(sub_80457E8(0x1B, r7));
+        r6 = GetHealthboxElementGfxPtr(sub_80457E8(0x1B, r7));
         r0 = 2;
     }
     else if (r4 & 0x88)
     {
-        r6 = sub_8043CDC(sub_80457E8(0x15, r7));
+        r6 = GetHealthboxElementGfxPtr(sub_80457E8(0x15, r7));
         r0 = 0;
     }
     else if (r4 & 0x10)
     {
-        r6 = sub_8043CDC(sub_80457E8(0x21, r7));
+        r6 = GetHealthboxElementGfxPtr(sub_80457E8(0x21, r7));
         r0 = 4;
     }
     else if (r4 & 0x20)
     {
-        r6 = sub_8043CDC(sub_80457E8(0x1E, r7));
+        r6 = GetHealthboxElementGfxPtr(sub_80457E8(0x1E, r7));
         r0 = 3;
     }
     else if (r4 & 0x40)
     {
-        r6 = sub_8043CDC(sub_80457E8(0x18, r7));
+        r6 = GetHealthboxElementGfxPtr(sub_80457E8(0x18, r7));
         r0 = 1;
     }
     else
     {
-        r6 = sub_8043CDC(0x27);
+        r6 = GetHealthboxElementGfxPtr(0x27);
 
         for (i = 0; i < 3; i++)
             CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32, 32);
 
         if (!gBattleSpriteInfo[r7].hpNumbersNoBars)
-            CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 64);
+            CpuCopy32(GetHealthboxElementGfxPtr(1), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 64);
 
         sub_8045458(a, 1);
         return;
@@ -2311,8 +2309,8 @@ static void sub_8045458(u8 a, u8 b)
     {
         if (!gBattleSpriteInfo[r7].hpNumbersNoBars)
         {
-            CpuCopy32(sub_8043CDC(0), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 32);
-            CpuCopy32(sub_8043CDC(0x41), OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
+            CpuCopy32(GetHealthboxElementGfxPtr(0), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 32);
+            CpuCopy32(GetHealthboxElementGfxPtr(0x41), OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
         }
     }
     sub_8045458(a, 0);
@@ -2388,9 +2386,9 @@ static u8 sub_80457E8(u8 a, u8 b)
 
     r6 = &eBattleInterfaceGfxBuffer[0x520 + GetBattlerPosition(gSprites[a].data[6]) * 0x180];
     r8 = 7;
-    sub_80034D4(r6, BattleText_SafariBalls);
+    RenderTextHandleBold(r6, BattleText_SafariBalls);
     for (i = 0; i < r8; i++)
-        CpuCopy32(sub_8043CDC(0x2B), r6 + i * 64, 32);
+        CpuCopy32(GetHealthboxElementGfxPtr(0x2B), r6 + i * 64, 32);
     for (r7 = 3; r7 < 3 + r8; r7++)
     {
         addr = OBJ_VRAM0 + (gSprites[a].oam.tileNum + MACRO1(r7)) * 32;
@@ -2417,7 +2415,7 @@ static u8 sub_80457E8(u8 a, u8 b)
     status = GetBattlerPosition(gSprites[a].data[6]);
     r7 = &eBattleInterfaceGfxBuffer[0x520 + status * 0x180];
     r6 = 5;
-    sub_80034D4(r7, gDisplayedStringBattle);
+    RenderTextHandleBold(r7, gDisplayedStringBattle);
     r7 = &eBattleInterfaceGfxBuffer[0x520 + status * 0x180 + 32];
     for (i = 6; i < 6 + r6; i++)
     {
@@ -2559,9 +2557,9 @@ static void sub_8045D58(u8 a, u8 b)
         {
             u8 r4 = gSprites[eBattleBars[a].healthboxSpriteId].data[5];
             if (i < 2)
-                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
+                CpuCopy32(GetHealthboxElementGfxPtr(r8) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
             else
-                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + 64 + (i + gSprites[r4].oam.tileNum) * 32, 32);
+                CpuCopy32(GetHealthboxElementGfxPtr(r8) + sp8[i] * 32, OBJ_VRAM0 + 64 + (i + gSprites[r4].oam.tileNum) * 32, 32);
         }
         break;
     case 1:
@@ -2580,9 +2578,9 @@ static void sub_8045D58(u8 a, u8 b)
         for (i = 0; i < 8; i++)
         {
             if (i < 4)
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[eBattleBars[a].healthboxSpriteId].oam.tileNum + 0x24 + i) * 32, 32);
+                CpuCopy32(GetHealthboxElementGfxPtr(0xC) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[eBattleBars[a].healthboxSpriteId].oam.tileNum + 0x24 + i) * 32, 32);
             else
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + 0xB80 + (i + gSprites[eBattleBars[a].healthboxSpriteId].oam.tileNum) * 32, 32);
+                CpuCopy32(GetHealthboxElementGfxPtr(0xC) + sp8[i] * 32, OBJ_VRAM0 + 0xB80 + (i + gSprites[eBattleBars[a].healthboxSpriteId].oam.tileNum) * 32, 32);
         }
         break;
     }
