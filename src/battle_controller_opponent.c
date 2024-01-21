@@ -1838,7 +1838,7 @@ void OpponentHandlecmd48(void)
             ewram17810[gActiveBattler].unk1_1 = 0;
         }
     }
-    gUnknown_02024E68[gActiveBattler] = sub_8044804(
+    gUnknown_02024E68[gActiveBattler] = CreatePartyStatusSummarySprites(
       gActiveBattler,
       (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
       gBattleBufferA[gActiveBattler][1],
