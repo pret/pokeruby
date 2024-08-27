@@ -766,7 +766,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 warpEventId, struct MapPosi
 {
     const struct WarpEvent *warpEvent = &gMapHeader.events->warps[warpEventId];
 
-    if (warpEvent->mapNum == MAP_NUM(DYNAMIC))
+    if (warpEvent->mapNum == MAP_NUM(MAP_DYNAMIC))
     {
         copy_saved_warp2_bank_and_enter_x_to_warp1(warpEvent->warpId);
     }
@@ -777,7 +777,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 warpEventId, struct MapPosi
         warp1_set_2(warpEvent->mapGroup, warpEvent->mapNum, warpEvent->warpId);
         sub_80535C4(position->x, position->y);
         mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->mapGroup, warpEvent->mapNum);
-        if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(DYNAMIC))
+        if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(MAP_DYNAMIC))
             saved_warp2_set(mapHeader->events->warps[warpEventId].warpId, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, warpEventId);
     }
 }

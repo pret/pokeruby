@@ -766,7 +766,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
+    if (mapGroup == MAP_GROUP(MAP_UNDEFINED) && mapNum == MAP_NUM(MAP_UNDEFINED))
         SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);

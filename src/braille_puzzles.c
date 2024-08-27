@@ -27,8 +27,8 @@ extern u8 S_OpenRegiceChamber[]; // regiice event script
 bool8 ShouldDoBrailleDigEffect(void)
 {
     if (!FlagGet(FLAG_SYS_BRAILLE_DIG)
-     && (gSaveBlock1.location.mapGroup == MAP_GROUP(SEALED_CHAMBER_OUTER_ROOM)
-     && gSaveBlock1.location.mapNum == MAP_NUM(SEALED_CHAMBER_OUTER_ROOM)))
+     && (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_SEALED_CHAMBER_OUTER_ROOM)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_SEALED_CHAMBER_OUTER_ROOM)))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 3)
             return TRUE;
@@ -70,7 +70,7 @@ bool8 CheckRelicanthWailord(void)
 
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP(DESERT_RUINS) && gSaveBlock1.location.mapNum == MAP_NUM(DESERT_RUINS)))
+    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_DESERT_RUINS) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_DESERT_RUINS)))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -100,7 +100,7 @@ void DoBrailleStrengthEffect(void)
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP(ANCIENT_TOMB) && gSaveBlock1.location.mapNum == MAP_NUM(ANCIENT_TOMB)))
+    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ANCIENT_TOMB) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_ANCIENT_TOMB)))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;

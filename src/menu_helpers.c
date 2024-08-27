@@ -261,7 +261,7 @@ bool8 sub_80F92F4(u16 itemId)
         return TRUE;
     }
 
-    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP(TRADE_CENTER) && gSaveBlock1.location.mapNum == MAP_NUM(TRADE_CENTER)))
+    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_TRADE_CENTER) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_TRADE_CENTER)))
     {
         return TRUE;
     }
