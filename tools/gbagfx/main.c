@@ -25,6 +25,9 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
 {
     struct Image image;
 
+    image.bitDepth = options->bitDepth;
+    image.tilemap.data.affine = NULL;
+
     if (options->paletteFilePath != NULL)
     {
         char *paletteFileExtension = GetFileExtensionAfterDot(options->paletteFilePath);
@@ -45,7 +48,24 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
         image.hasPalette = false;
     }
 
-    ReadImage(inputPath, options->width, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    if (options->isTiled)
+    {
+        if (options->tilemapFilePath != NULL)
+        {
+            int fileSize;
+            image.tilemap.data.affine = ReadWholeFile(options->tilemapFilePath, &fileSize);
+            if (options->isAffineMap && options->bitDepth != 8)
+                FATAL_ERROR("affine maps are necessarily 8bpp\n");
+            image.isAffine = options->isAffineMap;
+            image.tilemap.size = fileSize;
+        }
+        ReadTileImage(inputPath, options->width, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    }
+    else
+    {
+        image.width = options->width;
+        ReadPlainImage(inputPath, options->dataWidth, &image, !image.hasPalette);
+    }
 
     image.hasTransparency = options->hasTransparency;
 
@@ -59,10 +79,14 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
     struct Image image;
 
     image.bitDepth = options->bitDepth;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadPng(inputPath, &image);
 
-    WriteImage(outputPath, options->numTiles, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    if (options->isTiled)
+        WriteTileImage(outputPath, options->numTilesMode, options->numTiles, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
+    else
+        WritePlainImage(outputPath, options->dataWidth, &image, !image.hasPalette);
 
     FreeImage(&image);
 }
@@ -77,6 +101,10 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     options.width = 1;
     options.metatileWidth = 1;
     options.metatileHeight = 1;
+    options.tilemapFilePath = NULL;
+    options.isAffineMap = false;
+    options.isTiled = true;
+    options.dataWidth = 1;
 
     for (int i = 3; i < argc; i++)
     {
@@ -134,6 +162,33 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
             if (options.metatileHeight < 1)
                 FATAL_ERROR("metatile height must be positive.\n");
         }
+        else if (strcmp(option, "-tilemap") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No tilemap value following \"-tilemap\".\n");
+            i++;
+            options.tilemapFilePath = argv[i];
+        }
+        else if (strcmp(option, "-affine") == 0)
+        {
+            options.isAffineMap = true;
+        }
+        else if (strcmp(option, "-plain") == 0)
+        {
+            options.isTiled = false;
+        }
+        else if (strcmp(option, "-data_width") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No data width value following \"-data_width\".\n");
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &options.dataWidth))
+                FATAL_ERROR("Failed to parse data width.\n");
+
+            if (options.dataWidth < 1)
+                FATAL_ERROR("Data width must be positive.\n");
+        }
         else
         {
             FATAL_ERROR("Unrecognized option \"%s\".\n", option);
@@ -149,12 +204,16 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
 void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **argv)
 {
     char *outputFileExtension = GetFileExtensionAfterDot(outputPath);
-    int bitDepth = outputFileExtension[0] - '0';
     struct PngToGbaOptions options;
+    options.numTilesMode = NUM_TILES_IGNORE;
     options.numTiles = 0;
-    options.bitDepth = bitDepth;
+    options.bitDepth = outputFileExtension[0] - '0';
     options.metatileWidth = 1;
     options.metatileHeight = 1;
+    options.tilemapFilePath = NULL;
+    options.isAffineMap = false;
+    options.isTiled = true;
+    options.dataWidth = 1;
 
     for (int i = 3; i < argc; i++)
     {
@@ -172,6 +231,12 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
 
             if (options.numTiles < 1)
                 FATAL_ERROR("Number of tiles must be positive.\n");
+        }
+        else if (strcmp(option, "-Wnum_tiles") == 0) {
+            options.numTilesMode = NUM_TILES_WARN;
+        }
+        else if (strcmp(option, "-Werror=num_tiles") == 0) {
+            options.numTilesMode = NUM_TILES_ERROR;
         }
         else if (strcmp(option, "-mwidth") == 0)
         {
@@ -198,6 +263,22 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
 
             if (options.metatileHeight < 1)
                 FATAL_ERROR("metatile height must be positive.\n");
+        }
+        else if (strcmp(option, "-plain") == 0)
+        {
+            options.isTiled = false;
+        }
+        else if (strcmp(option, "-data_width") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No data width value following \"-data_width\".\n");
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &options.dataWidth))
+                FATAL_ERROR("Failed to parse data width.\n");
+
+            if (options.dataWidth < 1)
+                FATAL_ERROR("Data width must be positive.\n");
         }
         else
         {
@@ -272,6 +353,7 @@ void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, 
 void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadLatinFont(inputPath, &image);
     WritePng(outputPath, &image);
@@ -282,6 +364,7 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
 void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     image.bitDepth = 2;
 
@@ -294,6 +377,7 @@ void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNU
 void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadHalfwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
@@ -304,6 +388,7 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     image.bitDepth = 2;
 
@@ -316,6 +401,7 @@ void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, 
 void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadFullwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
@@ -326,6 +412,7 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     image.bitDepth = 2;
 
@@ -360,7 +447,7 @@ void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char *
         else if (strcmp(option, "-search") == 0)
         {
             if (i + 1 >= argc)
-                FATAL_ERROR("No size following \"-overflow\".\n");
+                FATAL_ERROR("No size following \"-search\".\n");
 
             i++;
 
