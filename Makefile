@@ -5,6 +5,9 @@ ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
 endif
 
+# Default make rule
+all: rom
+
 # don't use dkP's base_tools anymore
 # because the redefinition of $(CC) conflicts
 # with when we want to use $(CC) to preprocess files
@@ -70,6 +73,10 @@ CPP       := $(PREFIX)cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
 
+# Variable filled out in other make files
+AUTO_GEN_TARGETS :=
+include make_tools.mk
+
 SHA1SUM   := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
@@ -106,6 +113,7 @@ ELF := $(ROM:%.gba=%.elf)
 SYM := $(ROM:%.gba=%.sym)
 
 BUILD_DIR := build/$(BUILD_NAME)
+DATA_ASM_SUBDIR = data
 
 C_SOURCES    := $(wildcard src/*.c src/*/*.c src/*/*/*.c)
 ASM_SOURCES  := $(wildcard src/*.s src/*/*.s asm/*.s data/*.s sound/*.s sound/*/*.s)
@@ -151,14 +159,15 @@ ALL_BUILDS := ruby ruby_debug ruby_rev1 ruby_rev2 sapphire sapphire_debug sapphi
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 # Available targets
-.PHONY: all clean mostlyclean tidy tools syms $(ALL_BUILDS)
+.PHONY: all clean tidy syms $(ALL_BUILDS)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
 ifeq (,$(filter-out all modern compare syms,$(MAKECMDGOALS)))
-$(call infoshell, $(MAKE) tools)
+$(call infoshell, $(MAKE) -f make_tools.mk)
+$(call infoshell, $(MAKE) generated)
 else
 NODEP := 1
 endif
@@ -184,18 +193,19 @@ MAKEFLAGS += --no-print-directory
 # Create build subdirectories
 $(shell mkdir -p $(SUBDIRS))
 
-AUTO_GEN_TARGETS :=
+# Pretend rules that are actually flags defer to `make all`
+modern: all
+compare: all
 
-all: $(ROM)
+# Other rules
+rom: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
 
-compare: ; @$(MAKE) COMPARE=1
-
 syms: $(SYM)
 
-mostlyclean: tidy
+clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
@@ -203,31 +213,6 @@ mostlyclean: tidy
 	rm -f data/maps/connections.inc data/maps/events.inc data/maps/groups.inc data/maps/headers.inc
 	find data/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
-
-clean: mostlyclean
-	$(MAKE) clean -C tools/gbagfx
-	$(MAKE) clean -C tools/scaninc
-	$(MAKE) clean -C tools/preproc
-	$(MAKE) clean -C tools/bin2c
-	$(MAKE) clean -C tools/rsfont
-	$(MAKE) clean -C tools/aif2pcm
-	$(MAKE) clean -C tools/ramscrgen
-	$(MAKE) clean -C tools/gbafix
-	$(MAKE) clean -C tools/mapjson
-	$(MAKE) clean -C tools/jsonproc
-
-tools:
-	@$(MAKE) -C tools/gbagfx
-	@$(MAKE) -C tools/scaninc
-	@$(MAKE) -C tools/preproc
-	@$(MAKE) -C tools/bin2c
-	@$(MAKE) -C tools/rsfont
-	@$(MAKE) -C tools/aif2pcm
-	@$(MAKE) -C tools/ramscrgen
-	@$(MAKE) -C tools/mid2agb
-	@$(MAKE) -C tools/gbafix
-	@$(MAKE) -C tools/mapjson
-	@$(MAKE) -C tools/jsonproc
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
@@ -322,6 +307,8 @@ include spritesheet_rules.mk
 include override.mk
 include map_data_rules.mk
 include json_data_rules.mk
+
+generated: $(AUTO_GEN_TARGETS)
 
 %.1bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
 %.4bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)

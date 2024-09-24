@@ -1,4 +1,4 @@
-// Copyright(c) 2016 YamaArashi
+// Copyright(c) 2019 Phlosioneer
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,42 +18,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef C_FILE_H
-#define C_FILE_H
+#ifndef SOURCE_FILE_H
+#define SOURCE_FILE_H
 
-#include <cstdarg>
-#include <cstdint>
 #include <string>
-#include <memory>
-#include "preproc.h"
+#include "scaninc.h"
+#include "asm_file.h"
+#include "c_file.h"
 
-class CFile
+enum class SourceFileType
 {
-public:
-    CFile(const char * filenameCStr, bool isStdin);
-    CFile(CFile&& other);
-    CFile(const CFile&) = delete;
-    ~CFile();
-    void Preproc();
-
-private:
-    char* m_buffer;
-    long m_pos;
-    long m_size;
-    long m_lineNum;
-    std::string m_filename;
-    bool m_isStdin;
-
-    bool ConsumeHorizontalWhitespace();
-    bool ConsumeNewline();
-    void SkipWhitespace();
-    void TryConvertString();
-    std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);
-    bool CheckIdentifier(const std::string& ident);
-    void TryConvertIncbin();
-    void ReportDiagnostic(const char* type, const char* format, std::va_list args);
-    void RaiseError(const char* format, ...);
-    void RaiseWarning(const char* format, ...);
+    Cpp,
+    Header,
+    Asm,
+    Inc
 };
 
-#endif // C_FILE_H
+SourceFileType GetFileType(std::string& path);
+
+class SourceFile
+{
+public:
+
+    SourceFile(std::string path);
+    ~SourceFile();
+    SourceFile(SourceFile const&) = delete;
+    SourceFile(SourceFile&&) = delete;
+    SourceFile& operator =(SourceFile const&) = delete;
+    SourceFile& operator =(SourceFile&&) = delete;
+    bool HasIncbins();
+    const std::set<std::string>& GetIncbins();
+    const std::set<std::string>& GetIncludes();
+    std::string& GetSrcDir();
+    SourceFileType FileType();
+
+private:
+    union InnerUnion {
+        CFile c_file;
+        struct AsmWrapper {
+            std::set<std::string> asm_incbins;
+            std::set<std::string> asm_includes;
+        } asm_wrapper;
+
+        // Construction and destruction handled by SourceFile.
+        InnerUnion() {};
+        ~InnerUnion() {};
+    } m_source_file;
+    SourceFileType m_file_type;
+    std::string m_src_dir;
+};
+
+#endif // SOURCE_FILE_H
+
