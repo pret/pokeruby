@@ -242,7 +242,7 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
 	@echo "$(AS) <flags> -o $@ $<"
-	@$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	@$(PREPROC) $< charmap.txt | $(CPP) -I include | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	@echo "$(AS) <flags> -o $@ $<"

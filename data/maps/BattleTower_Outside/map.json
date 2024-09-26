@@ -96,5 +96,12 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "BattleTower_Outside_EventScript_16025A"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "HEAL_LOCATION_BATTLE_TOWER_OUTSIDE",
+      "x": 14,
+      "y": 9
+    }
   ]
 }
