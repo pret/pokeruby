@@ -889,7 +889,7 @@ void sub_80C3158(const u8 *string, u8 spriteId)
     displayedStringBattle[2] = width;
     displayedStringBattle[3] = EOS;
 
-    sub_80034D4(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
+    RenderTextHandleBold(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
 
     CpuCopy32(&gUnknown_083D1624[0x0], (void *)(VRAM + 0x10000) + 32 * sp00[0], 32);
     CpuCopy32(&gUnknown_083D1624[0x40], (void *)(VRAM + 0x10000) + 32 * sp00[0] + 0x100, 32);
@@ -1061,7 +1061,7 @@ void sub_80C3158(const u8 * string, u8 spriteId)
                 "\tldr r0, _080C32DC @ =gSharedMem + 0x18068\n"
                 "\tmov r10, r0\n"
                 "\tldr r1, _080C32D4 @ =gDisplayedStringBattle\n"
-                "\tbl sub_80034D4\n"
+                "\tbl RenderTextHandleBold\n"
                 "\tmov r0, sp\n"
                 "\tldrh r4, [r0]\n"
                 "\tlsls r4, 5\n"
