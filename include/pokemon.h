@@ -139,6 +139,7 @@ struct BoxPokemon
     /*0x13*/ u8 isBadEgg:1;
              u8 hasSpecies:1;
              u8 isEgg:1;
+             u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set
     /*0x14*/ u8 otName[OT_NAME_LENGTH];
     /*0x1B*/ u8 markings;
     /*0x1C*/ u16 checksum;

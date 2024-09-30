@@ -58,6 +58,12 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
+#define PLTT_SIZEOF(n) ((n) * sizeof(u16))
+#define PLTT_SIZE_4BPP PLTT_SIZEOF(16)
+#define PLTT_SIZE_8BPP PLTT_SIZEOF(256)
+
+#define PLTT_OFFSET_4BPP(n) ((n) * PLTT_SIZE_4BPP)
+
 #define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 
 #define RGB_BLACK RGB(0, 0, 0)

@@ -324,7 +324,7 @@ void sub_80BB8CC(void)
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
 
-void sub_80BB970(struct MapEvents *events)
+void SetOccupiedSecretBaseEntranceMetatiles(const struct MapEvents *events)
 {
     u16 bgevidx, idx, jdx;
     s16 tile_id;
@@ -450,7 +450,7 @@ bool8 CurrentMapIsSecretBase(void)
     return FALSE;
 }
 
-void sub_80BBCCC(u8 flagIn)
+void InitSecretBaseAppearance(u8 flagIn)
 {
     u16 curBaseId;
     u16 x, y;
@@ -546,7 +546,7 @@ void SetSecretBaseOwnerGfxId(void)
     VarSet(VAR_OBJ_GFX_ID_F, sSecretBaseOwnerGfxIds[GetSecretBaseOwnerType(curBase)]);
 }
 
-void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEvents *events)
+void SetCurrentSecretBaseFromPosition(struct MapPosition *position, const struct MapEvents *events)
 {
     s16 i;
 
@@ -561,7 +561,7 @@ void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEv
     }
 }
 
-void sub_80BC038(struct MapPosition *position, struct MapEvents *events)
+void sub_80BC038(struct MapPosition *position, const struct MapEvents *events)
 {
     SetCurrentSecretBaseFromPosition(position, events);
     SetCurrentSecretBaseVar();
@@ -726,7 +726,7 @@ void MoveOutOfSecretBase(void)
 void sub_80BC474(void)
 {
     u16 eventId;
-    struct MapEvents *mapEvents = gMapHeader.events;
+    const struct MapEvents *mapEvents = gMapHeader.events;
 
     for (eventId = 0; eventId < mapEvents->bgEventCount; eventId++)
     {

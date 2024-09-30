@@ -842,7 +842,7 @@ void DebugMenu_8077238(void)
     u16 sp14 = 0;
 
     PlayerGetDestCoords(&x, &y);
-    z = MapGridGetZCoordAt(x, y);
+    z = MapGridGetElevationAt(x, y);
     x -= 7;
     y -= 7;
 
@@ -2222,7 +2222,7 @@ void DebugMenu_80787EC(void)
     ConvertIntToHexStringN(gStringVar1, gSpecialVar_Result, STR_CONV_MODE_LEADING_ZEROS, 4);
     gSpecialVar_Result = MapGridGetMetatileIdAt(x, y);
     ConvertIntToHexStringN(gStringVar2, gSpecialVar_Result, STR_CONV_MODE_LEADING_ZEROS, 4);
-    gSpecialVar_Result = MapGridGetZCoordAt(x, y);
+    gSpecialVar_Result = MapGridGetElevationAt(x, y);
     ConvertIntToHexStringN(gStringVar3, gSpecialVar_Result, STR_CONV_MODE_LEADING_ZEROS, 4);
     StringExpandPlaceholders(gStringVar4, Str_839C414);
 }

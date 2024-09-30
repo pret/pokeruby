@@ -25,7 +25,7 @@ EventScript_1A2CB0:
 	compare VAR_RESULT, 6
 	goto_if_eq EventScript_1A2CF1
 	bufferpartymonnick 0, VAR_RESULT
-	msgbox UnknownString_8198F34, MSGBOX_YESNO
+	msgbox SecretBase_Text_IndentUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, MSGBOX_DEFAULT
@@ -43,11 +43,11 @@ DoSecretBaseCaveFieldEffectScript:: @ 81A2CE6
 	end
 
 EventScript_1A2CF1:
-	msgbox UnknownString_8198F10, MSGBOX_SIGN
+	msgbox SecretBase_Text_SmallIndentInWall, MSGBOX_SIGN
 	end
 
 EventScript_1A2CFA:
-	msgbox UnknownString_8198F6E, MSGBOX_DEFAULT
+	msgbox SecretBase_Text_DiscoveredSmallCavern, MSGBOX_DEFAULT
 	goto EventScript_1A2DB8
 	end
 
@@ -131,7 +131,7 @@ SecretBase_EventScript_FirstEntrance:: @ 81A2DDE
 	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_RedCave1_Movement_1A2E11
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
-	msgbox SecretBase_RedCave1_Text_198F89, MSGBOX_YESNO
+	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
 	closemessage

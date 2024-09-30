@@ -69,7 +69,7 @@ void gpu_sync_bg_hide();
 // GetMapConnection
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
-void sub_80538F0(u8 mapGroup, u8 mapNum);
+void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
 // sub_8053994
 void ResetInitialPlayerAvatarState(void);
 void StoreInitialPlayerAvatarState(void);
@@ -177,7 +177,7 @@ u16 sub_805559C(void);
 void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3);
 bool32 sub_8055618(struct UnkStruct_8054FF8 *);
 bool32 sub_8055630(struct UnkStruct_8054FF8 *);
-u8 *sub_8055648(struct UnkStruct_8054FF8 *);
+const u8 *sub_8055648(struct UnkStruct_8054FF8 *);
 bool32 sub_8055660(struct UnkStruct_8054FF8 *);
 const u8 *sub_805568C(struct UnkStruct_8054FF8 *);
 void sub_80557E8(void);

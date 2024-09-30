@@ -33,6 +33,7 @@
 
     History
     -------
+    v1.07 - added support for ELF input, (PikalaxALT)
     v1.06 - added output silencing, (Sierraffinity)
     v1.05 - added debug offset argument, (Sierraffinity)
     v1.04 - converted to plain C, (WinterMute)
@@ -50,7 +51,7 @@
 #include <stdint.h>
 #include "elf.h"
 
-#define VER        "1.06"
+#define VER        "1.07"
 #define ARGV    argv[arg]
 #define VALUE    (ARGV+2)
 #define NUMBER    strtoul(VALUE, NULL, 0)
@@ -138,6 +139,7 @@ int main(int argc, char *argv[])
     char *argfile = 0;
     FILE *infile;
     int silent = 0;
+    int schedule_pad = 0;
 
     int size,bit;
 
@@ -172,28 +174,27 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    uint32_t sh_offset = 0;
+
     // read file
     infile = fopen(argfile, "r+b");
     if (!infile) { fprintf(stderr, "Error opening input file!\n"); return -1; }
-    fseek(infile, 0, SEEK_SET);
+    fseek(infile, sh_offset, SEEK_SET);
     fread(&header, sizeof(header), 1, infile);
 
     // elf check
-    uint32_t sh_offset = 0;
+    Elf32_Shdr secHeader;
     if (memcmp(&header, ELFMAG, 4) == 0) {
         Elf32_Ehdr *elfHeader = (Elf32_Ehdr *)&header;
         fseek(infile, elfHeader->e_shoff, SEEK_SET);
         int i;
         for (i = 0; i < elfHeader->e_shnum; i++) {
-            Elf32_Shdr secHeader;
             fread(&secHeader, sizeof(Elf32_Shdr), 1, infile);
-            if (secHeader.sh_type == SHT_PROGBITS && secHeader.sh_addr == elfHeader->e_entry) {
-                fseek(infile, secHeader.sh_offset, SEEK_SET);
-                sh_offset = secHeader.sh_offset;
-                break;
-            }
+            if (secHeader.sh_type == SHT_PROGBITS && secHeader.sh_addr == elfHeader->e_entry) break;
         }
         if (i == elfHeader->e_shnum) { fprintf(stderr, "Error finding entry point!\n"); return 1; }
+        fseek(infile, secHeader.sh_offset, SEEK_SET);
+        sh_offset = secHeader.sh_offset;
         fread(&header, sizeof(header), 1, infile);
     }
 
@@ -205,21 +206,13 @@ int main(int argc, char *argv[])
     // parse command line
     for (arg=1; arg<argc; arg++)
     {
-        if ((ARGV[0] == '-'))
+        if (ARGV[0] == '-')
         {
             switch (ARGV[1])
             {
                 case 'p':    // pad
                 {
-                    fseek(infile, 0, SEEK_END);
-                    size = ftell(infile);
-                    for (bit=31; bit>=0; bit--) if (size & (1<<bit)) break;
-                    if (size != (1<<bit))
-                    {
-                        int todo = (1<<(bit+1)) - size;
-                        while (todo--) fputc(0xFF, infile);
-                    }
-                    fseek(infile, 0, SEEK_SET);
+                    schedule_pad = 1;
                     break;
                 }
 
@@ -298,6 +291,21 @@ int main(int argc, char *argv[])
     header.checksum = 0;    // must be 0
     header.complement = HeaderComplement();
     //header.checksum = checksum_without_header + HeaderChecksum();
+
+    if (schedule_pad) {
+        if (sh_offset != 0) {
+            fprintf(stderr, "Warning: Cannot safely pad an ELF\n");
+        } else {
+            fseek(infile, 0, SEEK_END);
+            size = ftell(infile);
+            for (bit=31; bit>=0; bit--) if (size & (1<<bit)) break;
+            if (size != (1<<bit))
+            {
+                int todo = (1<<(bit+1)) - size;
+                while (todo--) fputc(0xFF, infile);
+            }
+        }
+    }
 
     fseek(infile, sh_offset, SEEK_SET);
     fwrite(&header, sizeof(header), 1, infile);

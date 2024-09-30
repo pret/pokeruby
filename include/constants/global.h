@@ -89,4 +89,13 @@
 #define BAG_BERRIES   4
 #define BAG_KEYITEMS  5
 
+#define CONNECTION_INVALID -1
+#define CONNECTION_NONE     0
+#define CONNECTION_SOUTH    1
+#define CONNECTION_NORTH    2
+#define CONNECTION_WEST     3
+#define CONNECTION_EAST     4
+#define CONNECTION_DIVE     5
+#define CONNECTION_EMERGE   6
+
 #endif // GUARD_CONSTANTS_GLOBAL_H

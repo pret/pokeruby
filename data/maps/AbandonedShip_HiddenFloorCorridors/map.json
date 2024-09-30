@@ -63,7 +63,7 @@
       "y": 8,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3"
+      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_Room1Door"
     },
     {
       "type": "sign",
@@ -71,7 +71,7 @@
       "y": 8,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A"
+      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_Room2Door"
     },
     {
       "type": "sign",
@@ -79,7 +79,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_15EC61"
+      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_Room4Door"
     },
     {
       "type": "sign",
@@ -87,7 +87,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_15EC98"
+      "script": "AbandonedShip_HiddenFloorCorridors_EventScript_Room6Door"
     }
   ]
 }

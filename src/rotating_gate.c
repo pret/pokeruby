@@ -906,7 +906,7 @@ int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
 
             if (sRotatingGate_ArmLayout[shape][i * 2 + j])
             {
-                if (MapGridIsImpassableAt(x + armPos[armIndex].deltaX, y + armPos[armIndex].deltaY) == 1)
+                if (MapGridGetCollisionAt(x + armPos[armIndex].deltaX, y + armPos[armIndex].deltaY) == 1)
                     return 0;
             }
         }

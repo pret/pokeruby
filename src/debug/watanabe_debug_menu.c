@@ -358,7 +358,7 @@ void InitWatanabeDebugMenu(void)
     {
         default:
         case 0:
-            save_serialize_map();
+            SaveMapView();
             sub_8125E2C();
             gMain.state = 1;
             break;

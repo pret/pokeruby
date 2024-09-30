@@ -24,9 +24,11 @@
 #include <queue>
 #include <set>
 #include <string>
+#include <iostream>
+#include <tuple>
+#include <fstream>
 #include "scaninc.h"
-#include "asm_file.h"
-#include "c_file.h"
+#include "source_file.h"
 
 bool CanOpenFile(std::string path)
 {
@@ -39,14 +41,18 @@ bool CanOpenFile(std::string path)
     return true;
 }
 
-const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
+const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] [-M DEPENDENCY_OUT_PATH] FILE_PATH\n";
 
 int main(int argc, char **argv)
 {
     std::queue<std::string> filesToProcess;
     std::set<std::string> dependencies;
+    std::set<std::string> dependencies_includes;
 
-    std::list<std::string> includeDirs;
+    std::vector<std::string> includeDirs;
+
+    bool makeformat = false;
+    std::string make_outfile;
 
     argc--;
     argv++;
@@ -63,11 +69,18 @@ int main(int argc, char **argv)
                 argv++;
                 includeDir = std::string(argv[0]);
             }
-            if (includeDir.back() != '/')
+            if (!includeDir.empty() && includeDir.back() != '/')
             {
                 includeDir += '/';
             }
             includeDirs.push_back(includeDir);
+        }
+        else if(arg.substr(0, 2) == "-M")
+        {
+            makeformat = true;
+            argc--;
+            argv++;
+            make_outfile = std::string(argv[0]);
         }
         else
         {
@@ -83,83 +96,81 @@ int main(int argc, char **argv)
 
     std::string initialPath(argv[0]);
 
-    std::size_t pos = initialPath.find_last_of('.');
+    filesToProcess.push(initialPath);
 
-    if (pos == std::string::npos)
-        FATAL_ERROR("no file extension in path \"%s\"\n", initialPath.c_str());
-
-    std::string extension = initialPath.substr(pos + 1);
-
-    std::string srcDir("");
-    std::size_t slash = initialPath.rfind('/');
-    if (slash != std::string::npos)
+    while (!filesToProcess.empty())
     {
-        srcDir = initialPath.substr(0, slash + 1);
-    }
-    includeDirs.push_back(srcDir);
+        std::string filePath = filesToProcess.front();
+        SourceFile file(filePath);
+        filesToProcess.pop();
 
-    if (extension == "c" || extension == "h")
-    {
-        filesToProcess.push(initialPath);
-
-        while (!filesToProcess.empty())
+        includeDirs.push_back(file.GetSrcDir());
+        for (auto incbin : file.GetIncbins())
         {
-            CFile file(filesToProcess.front());
-            filesToProcess.pop();
-
-            file.FindIncbins();
-            for (auto incbin : file.GetIncbins())
+            dependencies.insert(incbin);
+        }
+        for (auto include : file.GetIncludes())
+        {
+            bool exists = false;
+            std::string path("");
+            for (auto includeDir : includeDirs)
             {
-                dependencies.insert(incbin);
-            }
-            for (auto include : file.GetIncludes())
-            {
-                for (auto includeDir : includeDirs)
+                path = includeDir + include;
+                if (CanOpenFile(path))
                 {
-                    std::string path(includeDir + include);
-                    if (CanOpenFile(path))
-                    {
-                        bool inserted = dependencies.insert(path).second;
-                        if (inserted)
-                        {
-                            filesToProcess.push(path);
-                        }
-                        break;
-                    }
+                    exists = true;
+                    break;
                 }
             }
-        }
-    }
-    else if (extension == "s" || extension == "inc")
-    {
-        filesToProcess.push(initialPath);
-
-        while (!filesToProcess.empty())
-        {
-            AsmFile file(filesToProcess.front());
-
-            filesToProcess.pop();
-
-            IncDirectiveType incDirectiveType;
-            std::string path;
-
-            while ((incDirectiveType = file.ReadUntilIncDirective(path)) != IncDirectiveType::None)
+            if (!exists && (file.FileType() == SourceFileType::Asm || file.FileType() == SourceFileType::Inc))
             {
-                bool inserted = dependencies.insert(path).second;
-                if (inserted
-                    && incDirectiveType == IncDirectiveType::Include
-                    && CanOpenFile(path))
-                    filesToProcess.push(path);
+                path = include;
+                if (CanOpenFile(path))
+                    exists = true;
+            }
+            if (!exists)
+                continue;
+
+            dependencies_includes.insert(path);
+            bool inserted = dependencies.insert(path).second;
+            if (inserted && exists)
+            {
+                filesToProcess.push(path);
             }
         }
+        includeDirs.pop_back();
+    }
+
+    if(!makeformat)
+    {
+        for (const std::string &path : dependencies)
+        {
+            std::printf("%s\n", path.c_str());
+        }
+        std::cout << std::endl;
     }
     else
     {
-        FATAL_ERROR("unknown extension \"%s\"\n", extension.c_str());
-    }
+        // Write out make rules to a file
+        std::ofstream output(make_outfile);
 
-    for (const std::string &path : dependencies)
-    {
-        std::printf("%s\n", path.c_str());
+        // Print a make rule for the object file
+        size_t ext_pos = make_outfile.find_last_of(".");
+        auto object_file = make_outfile.substr(0, ext_pos + 1) + "o";
+        output << object_file.c_str() << ": ";
+        for (const std::string &path : dependencies)
+        {
+            output << path << " ";
+        }
+
+        // Dependency list rule.
+        // Although these rules are identical, they need to be separate, else make will trigger the rule again after the file is created for the first time.
+        output << "\n" << make_outfile.c_str() << ": ";
+        for (const std::string &path : dependencies_includes)
+        {
+            output << path << " ";
+        }
+        output.flush();
+        output.close();
     }
 }
