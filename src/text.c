@@ -2369,7 +2369,7 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
     return retVal;
 }
 
-void sub_80034D4(u8 *tileData, const u8 *text)
+void RenderTextHandleBold(u8 *tileData, const u8 *text)
 {
     Text_InitWindow8004E3C(&gWindowTemplate_81E6C74, tileData, text);
 }
