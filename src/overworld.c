@@ -477,7 +477,7 @@ void sub_8053538(u8 a1)
     const struct HealLocation *warp = GetHealLocation(a1);
 
     if (warp)
-        Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+        Overworld_SetWarpDestination(warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
 
 void Overworld_SetWarpDestToLastHealLoc(void)
@@ -490,7 +490,7 @@ void Overworld_SetHealLocationWarp(u8 healLocationId)
     const struct HealLocation *healLocation = GetHealLocation(healLocationId);
 
     if (healLocation != NULL)
-        SetWarpData(&gSaveBlock1.lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
+        SetWarpData(&gSaveBlock1.lastHealLocation, healLocation->mapGroup, healLocation->mapNum, -1, healLocation->x, healLocation->y);
 }
 
 void sub_80535C4(s16 a1, s16 a2)
@@ -548,7 +548,7 @@ void sub_80537CC(u8 a1)
 {
     const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        SetWarpData(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1.warp1, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
 
 void gpu_sync_bg_hide()
