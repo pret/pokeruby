@@ -1539,7 +1539,7 @@ void WallyHandlecmd48(void)
     else
     {
         ewram17810[gActiveBattler].unk0_0 = 1;
-        gUnknown_02024E68[gActiveBattler] = sub_8044804(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gUnknown_02024E68[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         WallyBufferExecCompleted();
     }
 }
