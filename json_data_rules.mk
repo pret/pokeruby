@@ -12,3 +12,7 @@ $(DATA_SRC_SUBDIR)/region_map/region_map_entries.h: $(DATA_SRC_SUBDIR)/region_ma
 	$(JSONPROC) $^ $@
 
 $(BUILD_DIR)/src/region_map.o: C_DEP += $(DATA_SRC_SUBDIR)/region_map/region_map_entries.h
+
+AUTO_GEN_TARGETS += include/constants/region_map_sections.h
+include/constants/region_map_sections.h: $(DATA_SRC_SUBDIR)/region_map/region_map_sections.json $(DATA_SRC_SUBDIR)/region_map/region_map_sections.constants.json.txt
+	$(JSONPROC) $^ $@
