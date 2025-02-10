@@ -4,6 +4,7 @@
 #include "field_player_avatar.h"
 #include "script_movement.h"
 #include "task.h"
+#include "constants/event_objects.h"
 
 extern u16 gSpecialVar_Facing;
 u8 gSelectedObjectEvent;
@@ -89,7 +90,7 @@ void LockSelectedObjectEvent(void)
 
 void ScriptUnfreezeObjectEvents(void)
 {
-    u8 playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    u8 playerObjectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     sub_80A2178();
     UnfreezeObjectEvents();
@@ -101,7 +102,7 @@ void unref_sub_8064E5C(void)
 
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     sub_80A2178();
     UnfreezeObjectEvents();

@@ -69,7 +69,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	call_if_eq MtChimney_EventScript_1B2D7D
 	compare VAR_FACING, 2
 	call_if_eq MtChimney_EventScript_1B2D88
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox MtChimney_Text_1B3608, MSGBOX_DEFAULT

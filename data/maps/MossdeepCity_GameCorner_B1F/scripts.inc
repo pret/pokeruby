@@ -13,7 +13,7 @@ MossdeepCity_GameCorner_B1F_MapScript2_15AE64:: @ 815AE64
 
 MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_GameCorner_B1F_Movement_15AEF9
+	applymovement LOCALID_PLAYER, MossdeepCity_GameCorner_B1F_Movement_15AEF9
 	waitmovement 0
 	special PrintEReaderTrainerGreeting
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -30,7 +30,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	call_if_eq MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closemessage
 	special ScrSpecial_HealPlayerParty
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_GameCorner_B1F_Movement_15AEFF
+	applymovement LOCALID_PLAYER, MossdeepCity_GameCorner_B1F_Movement_15AEFF
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1

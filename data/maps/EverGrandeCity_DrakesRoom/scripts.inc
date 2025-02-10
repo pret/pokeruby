@@ -9,7 +9,7 @@ EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
