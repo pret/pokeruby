@@ -34,6 +34,7 @@
 #include "random.h"
 #include "constants/abilities.h"
 #include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/species.h"
@@ -1595,7 +1596,7 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
 
 void SpawnCameraDummy(void)
 {
-    u8 objectEventId = SpawnSpecialObjectEventParametrized(7, MOVEMENT_TYPE_FACE_DOWN, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
+    u8 objectEventId = SpawnSpecialObjectEventParametrized(7, MOVEMENT_TYPE_FACE_DOWN, LOCALID_CAMERA, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
     gObjectEvents[objectEventId].invisible = TRUE;
     CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
@@ -1603,7 +1604,7 @@ void SpawnCameraDummy(void)
 void RemoveCameraDummy(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveObjectEventByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)

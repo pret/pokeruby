@@ -23,7 +23,7 @@ NewMauville_Entrance_MapScript1_15E4D8:: @ 815E4D8
 
 NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_1982C0, MSGBOX_DEFAULT
 	checkitem ITEM_BASEMENT_KEY, 1

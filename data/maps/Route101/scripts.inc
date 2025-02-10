@@ -23,7 +23,7 @@ Route101_EventScript_14E948:: @ 814E948
 	closemessage
 	setobjectxy 2, 0, 15
 	setobjectxy 4, 0, 16
-	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_14EA2C
+	applymovement LOCALID_PLAYER, Route101_Movement_14EA2C
 	applymovement 2, Route101_Movement_14EA50
 	applymovement 4, Route101_Movement_14EA1F
 	waitmovement 0
@@ -45,7 +45,7 @@ Route101_EventScript_14E9B8:: @ 814E9B8
 	lockall
 	msgbox Route101_Text_16D15E, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_14E9FA
+	applymovement LOCALID_PLAYER, Route101_Movement_14E9FA
 	waitmovement 0
 	releaseall
 	end
@@ -54,7 +54,7 @@ Route101_EventScript_14E9CE:: @ 814E9CE
 	lockall
 	msgbox Route101_Text_16D15E, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_14E9FC
+	applymovement LOCALID_PLAYER, Route101_Movement_14E9FC
 	waitmovement 0
 	releaseall
 	end
@@ -63,7 +63,7 @@ Route101_EventScript_14E9E4:: @ 814E9E4
 	lockall
 	msgbox Route101_Text_16D15E, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_14E9FE
+	applymovement LOCALID_PLAYER, Route101_Movement_14E9FE
 	waitmovement 0
 	releaseall
 	end
@@ -221,8 +221,8 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	setflag FLAG_RESCUED_BIRCH
 	fadescreen FADE_TO_BLACK
 	removeobject 4
-	setobjectxy OBJ_EVENT_ID_PLAYER, 6, 13
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	setobjectxy LOCALID_PLAYER, 6, 13
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	special ScrSpecial_ChooseStarter
 	waitstate

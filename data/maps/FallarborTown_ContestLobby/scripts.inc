@@ -35,12 +35,12 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	delay 20
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A8C
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_ContestLobby_Movement_153A7A
+	applymovement LOCALID_PLAYER, FallarborTown_ContestLobby_Movement_153A7A
 	waitmovement 0
 	msgbox FallarborTown_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A83
-	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_ContestLobby_Movement_153A70
+	applymovement LOCALID_PLAYER, FallarborTown_ContestLobby_Movement_153A70
 	waitmovement 0
 	releaseall
 	return

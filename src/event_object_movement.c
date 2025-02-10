@@ -1039,9 +1039,9 @@ u8 gUnknown_Debug_03004BC0;
 static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
     memset(objectEvent, 0, sizeof(struct ObjectEvent));
-    objectEvent->localId = 0xFF;
-    objectEvent->mapNum = 0xFF;
-    objectEvent->mapGroup = 0xFF;
+    objectEvent->localId = LOCALID_PLAYER;
+    objectEvent->mapNum = MAP_NUM(MAP_UNDEFINED);
+    objectEvent->mapGroup = MAP_GROUP(MAP_UNDEFINED);
     objectEvent->movementActionId = 0xFF;
 }
 
@@ -1098,7 +1098,7 @@ u8 GetFirstInactiveObjectEventId(void)
 
 u8 GetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    if (localId < 0xFF)
+    if (localId < LOCALID_PLAYER)
         return GetObjectEventIdByLocalIdAndMapInternal(localId, mapNum, mapGroup);
     else
         return GetObjectEventIdByLocalId(localId);
@@ -6029,7 +6029,7 @@ bool8 MovementAction_FacePlayer_Step0(struct ObjectEvent *objectEvent, struct Sp
 {
     u8 playerObjectId;
 
-    if (!TryGetObjectEventIdByLocalIdAndMap(0xFF, 0, 0, &playerObjectId))
+    if (!TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectId))
     {
         FaceDirection(objectEvent, sprite, GetDirectionToFace(objectEvent->currentCoords.x, objectEvent->currentCoords.y, gObjectEvents[playerObjectId].currentCoords.x, gObjectEvents[playerObjectId].currentCoords.y));
     }
@@ -6041,7 +6041,7 @@ bool8 MovementAction_FaceAwayPlayer_Step0(struct ObjectEvent *objectEvent, struc
 {
     u8 playerObjectId;
 
-    if (!TryGetObjectEventIdByLocalIdAndMap(0xFF, 0, 0, &playerObjectId))
+    if (!TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectId))
     {
         FaceDirection(objectEvent, sprite, GetOppositeDirection(GetDirectionToFace(objectEvent->currentCoords.x, objectEvent->currentCoords.y, gObjectEvents[playerObjectId].currentCoords.x, gObjectEvents[playerObjectId].currentCoords.y)));
     }

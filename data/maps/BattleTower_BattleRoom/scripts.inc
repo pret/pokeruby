@@ -8,7 +8,7 @@ BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1
 
 BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
 	setvar VAR_TEMP_0, 1
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_BattleRoom_Movement_160AB7
+	applymovement LOCALID_PLAYER, BattleTower_BattleRoom_Movement_160AB7
 	waitmovement 0
 
 BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
@@ -48,7 +48,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	removeobject 1
 	applymovement 2, BattleTower_BattleRoom_Movement_160ACB
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_BattleRoom_Movement_160ABC
+	applymovement LOCALID_PLAYER, BattleTower_BattleRoom_Movement_160ABC
 	waitmovement 0
 	msgbox BattleTower_BattleRoom_Text_19ACDC, MSGBOX_DEFAULT
 	special LoadPlayerParty
@@ -81,7 +81,7 @@ BattleTower_BattleRoom_EventScript_160A0E:: @ 8160A0E
 
 BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_BattleRoom_Movement_160ABE
+	applymovement LOCALID_PLAYER, BattleTower_BattleRoom_Movement_160ABE
 	waitmovement 0
 	applymovement 2, BattleTower_BattleRoom_Movement_160AD0
 	waitmovement 0

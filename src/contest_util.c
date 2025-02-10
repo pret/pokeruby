@@ -23,6 +23,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "task.h"
+#include "constants/event_objects.h"
 
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
@@ -52,15 +53,15 @@ void GetNpcContestantLocalId(void)
     switch(specialVar)
     {
     case 0:
-        localId = 3;
+        localId = LOCALID_CONTESTANT_1;
         break;
     case 1:
-        localId = 4;
+        localId = LOCALID_CONTESTANT_2;
         break;
     case 2:
-        localId = 5;
+        localId = LOCALID_CONTESTANT_3;
         break;
-    default:
+    default: // Invalid
         localId = 100;
         break;
     }

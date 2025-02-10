@@ -49,20 +49,20 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 
 OldaleTown_EventScript_14DE07:: @ 814DE07
 	applymovement 2, OldaleTown_Movement_14DE97
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_14DEC1
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_14DEC1
 	waitmovement 0
 	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE1E:: @ 814DE1E
 	applymovement 2, OldaleTown_Movement_14DEA2
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_14DECB
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_14DECB
 	waitmovement 0
 	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE35:: @ 814DE35
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_14DEB9
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_14DEB9
 	applymovement 2, OldaleTown_Movement_14DE8E
 	waitmovement 0
 	goto OldaleTown_EventScript_14DE4C
@@ -200,7 +200,7 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 
 OldaleTown_EventScript_14DEFF:: @ 814DEFF
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_14DFEC
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_14DFEC
 	applymovement 3, OldaleTown_Movement_14DFEF
 	waitmovement 0
 	msgbox OldaleTown_Text_16B045, MSGBOX_DEFAULT
@@ -226,7 +226,7 @@ OldaleTown_EventScript_14DF41:: @ 814DF41
 	lockall
 	applymovement 4, OldaleTown_Movement_14DFDE
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
@@ -235,7 +235,7 @@ OldaleTown_EventScript_14DF5C:: @ 814DF5C
 	lockall
 	applymovement 4, OldaleTown_Movement_14DFE1
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
@@ -244,7 +244,7 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 	lockall
 	applymovement 4, OldaleTown_Movement_14DFE3
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end

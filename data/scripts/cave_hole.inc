@@ -9,7 +9,7 @@ CaveHole_FixCrackedGround:: @ 81C6BBF
 EventScript_FallDownHole:: @ 81C6BC5
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
+	applymovement LOCALID_PLAYER, Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60
@@ -20,7 +20,7 @@ EventScript_FallDownHole:: @ 81C6BC5
 EventScript_FallDownHoleMtPyre:: @ 81C6BDE
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
+	applymovement LOCALID_PLAYER, Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60

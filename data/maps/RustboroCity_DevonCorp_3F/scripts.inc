@@ -19,7 +19,7 @@ RustboroCity_DevonCorp_3F_MapScript2_157739:: @ 8157739
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_157743:: @ 8157743
-	turnobject OBJ_EVENT_ID_PLAYER, 4
+	turnobject LOCALID_PLAYER, 4
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_157748:: @ 8157748
@@ -39,13 +39,13 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	closemessage
 	playbgm MUS_FOLLOW_ME, FALSE
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157803
-	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_157827
+	applymovement LOCALID_PLAYER, RustboroCity_DevonCorp_3F_Movement_157827
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18394A, MSGBOX_DEFAULT
 	closemessage
 	fadedefaultbgm
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157812
-	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_157835
+	applymovement LOCALID_PLAYER, RustboroCity_DevonCorp_3F_Movement_157835
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, MSGBOX_DEFAULT
 	giveitem ITEM_LETTER

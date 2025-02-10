@@ -608,12 +608,5 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SlateportCity_EventScript_14BC3C"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_SLATEPORT_CITY",
-      "x": 19,
-      "y": 20
-    }
   ]
 }

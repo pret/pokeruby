@@ -231,6 +231,7 @@
       "flag": "FLAG_ITEM_ROUTE120_1"
     },
     {
+      "local_id": "LOCALID_ROUTE120_TY_1",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 37,
       "y": 5,
@@ -244,6 +245,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE120_1"
     },
     {
+      "local_id": "LOCALID_ROUTE120_GABBY_1",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 36,
       "y": 5,
@@ -257,6 +259,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE120_1"
     },
     {
+      "local_id": "LOCALID_ROUTE120_GABBY_2",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 36,
       "y": 5,
@@ -270,6 +273,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE120_2"
     },
     {
+      "local_id": "LOCALID_ROUTE120_TY_2",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 37,
       "y": 5,

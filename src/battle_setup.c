@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_transition.h"
 #include "constants/battle_setup.h"
+#include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
@@ -946,7 +947,7 @@ static void ResetTrainerOpponentIds(void)
 {
     sTrainerBattleMode = 0;
     gTrainerBattleOpponent = 0;
-    sTrainerObjectEventLocalId = 0;
+    sTrainerObjectEventLocalId = LOCALID_NONE;
     sTrainerIntroSpeech = 0;
     sTrainerDefeatSpeech = 0;
     sTrainerVictorySpeech = 0;
@@ -992,7 +993,7 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
 
 static void SetMapVarsToTrainer(void)
 {
-    if (sTrainerObjectEventLocalId)
+    if (sTrainerObjectEventLocalId != LOCALID_NONE)
     {
         gSpecialVar_LastTalked = sTrainerObjectEventLocalId;
         gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(sTrainerObjectEventLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);

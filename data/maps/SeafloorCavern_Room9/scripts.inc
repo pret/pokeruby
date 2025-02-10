@@ -18,9 +18,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 5
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, SeafloorCavern_Room9_Movement_15DD68
+	applymovement LOCALID_PLAYER, SeafloorCavern_Room9_Movement_15DD68
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B41B8, MSGBOX_DEFAULT
@@ -29,7 +29,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.endif
 	closemessage
 	addobject VAR_0x8004
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_15DD36
 	waitmovement 0
@@ -93,7 +93,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	playse SE_ORB
 	special sub_80818A4
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 150
 	removeobject 7
@@ -127,7 +127,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4A89, MSGBOX_DEFAULT
 	.endif
 	playse SE_PC_LOGIN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4443, MSGBOX_DEFAULT

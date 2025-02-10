@@ -61,7 +61,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	lockall
 	msgbox LittlerootTown_MaysHouse_1F_Text_172574, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_15295E
+	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_15295E
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
@@ -94,7 +94,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	waitmovement 0
 	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
 	waitmovement 0
 	special GetRivalSonDaughterString

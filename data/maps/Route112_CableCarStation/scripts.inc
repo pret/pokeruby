@@ -20,7 +20,7 @@ Route112_CableCarStation_MapScript2_15C05E:: @ 815C05E
 
 Route112_CableCarStation_EventScript_15C068:: @ 815C068
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_15C0F5
+	applymovement LOCALID_PLAYER, Route112_CableCarStation_Movement_15C0F5
 	applymovement 1, Route112_CableCarStation_Movement_15C0EB
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
@@ -43,7 +43,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	msgbox Route112_CableCarStation_Text_1925A9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route112_CableCarStation_Movement_15C0E6
-	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_15C0F0
+	applymovement LOCALID_PLAYER, Route112_CableCarStation_Movement_15C0F0
 	waitmovement 0
 	setvar VAR_0x8004, 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 1

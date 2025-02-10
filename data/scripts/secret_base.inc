@@ -128,7 +128,7 @@ EventScript_1A2DB8:
 	end
 
 SecretBase_EventScript_FirstEntrance:: @ 81A2DDE
-	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_RedCave1_Movement_1A2E11
+	applymovement LOCALID_PLAYER, SecretBase_RedCave1_Movement_1A2E11
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO

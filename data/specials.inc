@@ -187,7 +187,7 @@ gSpecials::
 	def_special IsTVShowInSearchOfTrainersAiring
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToObjectEventLocalIds
+	def_special GetGabbyAndTyLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState

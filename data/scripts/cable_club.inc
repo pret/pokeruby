@@ -88,7 +88,7 @@ VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 OldaleTown_PokemonCenter_2F_EventScript_1A3DB2:: @ 81A3DB2
 	special CloseLink
 	setvar VAR_CABLE_CLUB_STATE, 0
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	compare VAR_0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3DD9
@@ -105,14 +105,14 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DDA:: @ 81A3DDA
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
 	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E0C:: @ 81A3E0C
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	return
 
@@ -130,7 +130,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	setvar VAR_CABLE_CLUB_STATE, 0
 	compare VAR_0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4361
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4361
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
@@ -139,7 +139,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	playse SE_PIN
 	message OldaleTown_PokemonCenter_2F_Text_1A4E79
 	waitmessage
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
 	waitmovement 0
@@ -226,13 +226,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat LOCALID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 5, 1
 	waitdooranim
 	release
@@ -390,13 +390,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
 	opendoor 8, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat LOCALID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 8, 1
 	waitdooranim
 	release
@@ -487,13 +487,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
 	opendoor 11, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	applymovement LOCALID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat LOCALID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 11, 1
 	waitdooranim
 	release

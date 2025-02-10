@@ -184,6 +184,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE111_TY_1",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
@@ -197,6 +198,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE111_1"
     },
     {
+      "local_id": "LOCALID_ROUTE111_GABBY_1",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
@@ -288,6 +290,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE111_GABBY_2",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
@@ -301,6 +304,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE111_2"
     },
     {
+      "local_id": "LOCALID_ROUTE111_TY_2",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
@@ -314,6 +318,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE111_2"
     },
     {
+      "local_id": "LOCALID_ROUTE111_GABBY_3",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
@@ -327,6 +332,7 @@
       "flag": "FLAG_HIDE_GABBY_AND_TY_ROUTE111_3"
     },
     {
+      "local_id": "LOCALID_ROUTE111_TY_3",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,

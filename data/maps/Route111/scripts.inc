@@ -182,22 +182,22 @@ Route111_EventScript_150151:: @ 8150151
 	end
 
 Route111_EventScript_150188:: @ 8150188
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501B4
+	applymovement LOCALID_PLAYER, Route111_Movement_1501B4
 	waitmovement 0
 	return
 
 Route111_EventScript_150193:: @ 8150193
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501B6
+	applymovement LOCALID_PLAYER, Route111_Movement_1501B6
 	waitmovement 0
 	return
 
 Route111_EventScript_15019E:: @ 815019E
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501B8
+	applymovement LOCALID_PLAYER, Route111_Movement_1501B8
 	waitmovement 0
 	return
 
 Route111_EventScript_1501A9:: @ 81501A9
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_1501BA
+	applymovement LOCALID_PLAYER, Route111_Movement_1501BA
 	waitmovement 0
 	return
 
@@ -253,7 +253,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	waitmovement 0
 	removeobject 1
 	call Route111_EventScript_15034F
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_15035B
+	applymovement LOCALID_PLAYER, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
 	addobject 2
@@ -271,7 +271,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	waitmovement 0
 	removeobject 2
 	call Route111_EventScript_15034F
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_15035B
+	applymovement LOCALID_PLAYER, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
 	addobject 3
@@ -289,7 +289,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	waitmovement 0
 	removeobject 3
 	call Route111_EventScript_15034F
-	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_15035B
+	applymovement LOCALID_PLAYER, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
 	addobject 4
