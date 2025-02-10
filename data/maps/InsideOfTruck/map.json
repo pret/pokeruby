@@ -12,6 +12,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_TRUCK_BOX_TOP",
       "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
       "x": 0,
       "y": 0,
@@ -25,6 +26,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TRUCK_BOX_BOTTOM_L",
       "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
       "x": 0,
       "y": 3,
@@ -38,6 +40,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TRUCK_BOX_BOTTOM_R",
       "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
       "x": 2,
       "y": 3,

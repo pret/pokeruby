@@ -21,6 +21,7 @@
 #include "task.h"
 #include "new_game.h"
 #include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 
 void sub_8080B9C(u8);
@@ -232,7 +233,7 @@ void sub_8080B9C(u8 taskId)
         {
             u8 objEventId;
             sub_8080958(1);
-            objEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+            objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 2;
         }
@@ -242,7 +243,7 @@ void sub_8080B9C(u8 taskId)
         {
             u8 objEventId;
             task->data[1] = FieldAnimateDoorClose(*x, *y);
-            objEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+            objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
             task->data[0] = 3;
         }
@@ -280,7 +281,7 @@ void task_map_chg_seq_0807E20C(u8 taskId)
         {
             u8 objEventId;
             sub_8080958(1);
-            objEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+            objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
@@ -572,9 +573,9 @@ void sub_808115C(u8 taskId)
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
             u8 objEventId;
-            objEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+            objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfActive(&gObjectEvents[objEventId]);
-            objEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+            objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_UP);
             task->data[0] = 2;
         }
@@ -584,7 +585,7 @@ void sub_808115C(u8 taskId)
         {
             u8 objEventId;
             task->data[1] = FieldAnimateDoorClose(*x, *y - 1);
-            objEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+            objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
             sub_8080958(0);
             task->data[0] = 3;

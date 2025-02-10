@@ -25,6 +25,7 @@
 #include "constants/vars.h"
 #include "wild_encounter.h"
 #include "constants/event_bg.h"
+#include "constants/event_objects.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 
@@ -358,7 +359,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
     else
         objectEventId = GetObjectEventIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
 
-    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
+    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
         return NULL;
 
     for (i = 0; i < 4; i++)
@@ -379,14 +380,14 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
     const u8 *script;
 
     objectEventId = GetObjectEventIdByXYZ(position->x, position->y, position->height);
-    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
+    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
             return NULL;
 
         // Look for an object event on the other side of the counter.
         objectEventId = GetObjectEventIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
-        if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
+        if (objectEventId == 16 || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
             return NULL;
     }
 
