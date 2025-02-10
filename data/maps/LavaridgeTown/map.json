@@ -255,12 +255,5 @@
       "item": "ITEM_ICE_HEAL",
       "flag": "FLAG_HIDDEN_ITEM_0"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_LAVARIDGE_TOWN",
-      "x": 9,
-      "y": 7
-    }
   ]
 }

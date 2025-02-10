@@ -267,12 +267,5 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "MauvilleCity_EventScript_14C099"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_MAUVILLE_CITY",
-      "x": 22,
-      "y": 6
-    }
   ]
 }
